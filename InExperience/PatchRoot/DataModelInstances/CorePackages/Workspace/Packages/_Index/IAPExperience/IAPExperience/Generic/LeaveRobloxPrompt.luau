@@ -11,7 +11,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.render(p0)
+function name.render(p1)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -22,14 +22,14 @@ function name.render(p0)
 			ButtonCancel = { key = "IAPExperience.LeaveRoblox.Action.Cancel" },
 			ButtonContinue = { key = "IAPExperience.LeaveRoblox.Action.Continue" }
 		},
-		render = function(p1)
-			-- upvalues: p0 (ref)
-			return p0:renderAlert(p1)
+		render = function(p2)
+			-- upvalues: p1 (ref)
+			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function name.renderAlert(p2, p3)
+function name.renderAlert(p1, p2)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), buttonType (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -39,27 +39,27 @@ function name.renderAlert(p2, p3)
 		BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	}, {
 		AlertWindow = roactModule.createElement(interactiveAlert, {
-			title = p3.TitleText,
-			bodyText = p3.BodyText,
+			title = p2.TitleText,
+			bodyText = p2.BodyText,
 			buttonStackInfo = {
 				buttons = {
 					{
 						buttonType = buttonType.Secondary,
 						props = {
-							onActivated = p2.props.cancelActivated,
-							text = p3.ButtonCancel
+							onActivated = p1.props.cancelActivated,
+							text = p2.ButtonCancel
 						}
 					},
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							onActivated = p2.props.continueActivated,
-							text = p3.ButtonContinue
+							onActivated = p1.props.continueActivated,
+							text = p2.ButtonContinue
 						}
 					}
 				}
 			},
-			screenSize = p2.props.screenSize
+			screenSize = p1.props.screenSize
 		})
 	})
 end

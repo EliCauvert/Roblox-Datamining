@@ -8,7 +8,7 @@ local moreOn = images["icons/menu/more_on"]
 local moreOff = images["icons/menu/more_off"]
 local adLabel = roactModule.Component:extend("AdLabel")
 
-function adLabel.render(p0)
+function adLabel.render(p1)
 	-- upvalues: roactModule (ref), var1 (ref), imageSetButton (ref), moreOn (ref), moreOff (ref)
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -16,7 +16,7 @@ function adLabel.render(p0)
 		BackgroundColor3 = Color3.new(0, 0, 0),
 		AnchorPoint = Vector2.new(1, 1),
 		Size = UDim2.fromScale(0.11447368421, 0.10108771929),
-		Visible = p0.props.Visible
+		Visible = p1.props.Visible
 	}, {
 		Label = roactModule.createElement("TextLabel", {
 			LayoutOrder = 1,
@@ -33,12 +33,12 @@ function adLabel.render(p0)
 		}),
 		MenuButton = roactModule.createElement(imageSetButton, {
 			LayoutOrder = 2,
-			Image = if p0.props.isMenuOpen then moreOn else moreOff,
+			Image = if p1.props.isMenuOpen then moreOn else moreOff,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(0.4, 0),
 			Position = UDim2.fromScale(0.76, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			[roactModule.Event.Activated] = p0.props.onActivated
+			[roactModule.Event.Activated] = p1.props.onActivated
 		}, {
 			UIAspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {
 				AspectRatio = 1,

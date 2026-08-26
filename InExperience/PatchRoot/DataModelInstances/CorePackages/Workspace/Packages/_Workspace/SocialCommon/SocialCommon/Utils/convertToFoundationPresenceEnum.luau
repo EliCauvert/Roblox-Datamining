@@ -12,7 +12,7 @@ local t = {
 	InStudio = foundationModule.Enums.UserPresence.Active
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), foundationModule (ref)
-	return t[p0] or foundationModule.Enums.UserPresence.None
+	return t[p1] or foundationModule.Enums.UserPresence.None
 end

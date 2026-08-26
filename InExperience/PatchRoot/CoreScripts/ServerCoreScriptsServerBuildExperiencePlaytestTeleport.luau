@@ -2,20 +2,20 @@
 local playersService = game:GetService("Players")
 local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
 local teleportService = game:GetService("TeleportService")
-local var4 = nil
+local var1 = nil
 local t = {}
 local buildExperiencePlaytestTeleport = Instance.new("RemoteEvent")
 buildExperiencePlaytestTeleport.Name = "BuildExperiencePlaytestTeleport"
 buildExperiencePlaytestTeleport.Parent = robloxReplicatedStorageService
-playersService.PlayerRemoving:Connect(function(p0)
+playersService.PlayerRemoving:Connect(function(p1)
 	-- upvalues: t (ref)
-	t[p0.UserId] = nil
+	t[p1.UserId] = nil
 end)
 
 local function getCurrentExperiencePlaceIds()
-	-- upvalues: var4 (write), assetService (ref)
-	if var4 ~= nil then
-		return var4
+	-- upvalues: var1 (write), assetService (ref)
+	if var1 ~= nil then
+		return var1
 	end
 	local t = {}
 	local gamePlacesAsync = assetService:GetGamePlacesAsync()
@@ -26,7 +26,7 @@ local function getCurrentExperiencePlaceIds()
 		if gamePlacesAsync.IsFinished then break end
 		gamePlacesAsync:AdvanceToNextPageAsync()
 	end
-	var4 = t
+	var1 = t
 	
 	return t
 end

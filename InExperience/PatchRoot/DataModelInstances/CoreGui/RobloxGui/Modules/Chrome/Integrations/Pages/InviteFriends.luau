@@ -12,14 +12,14 @@ local sideSheetPlacement = chromeModule.Enums.SideSheetPlacement
 local signal = appCommonLibModule.Signal
 local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
 local fFlagConnectionsToFriendsRename = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionsToFriendsRename
-local var9 = signal.new()
-local var10 = mappedSignal.new(var9, function()
+local var1 = signal.new()
+local var2 = mappedSignal.new(var1, function()
 	-- upvalues: gameInviteModalManager (ref)
 	return gameInviteModalManager:isGameModalOpen()
 end)
 gameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function()
-	-- upvalues: var9 (ref)
-	var9:fire()
+	-- upvalues: var1 (ref)
+	var1:fire()
 end)
 
 local function _()
@@ -33,11 +33,11 @@ return serviceModule:register({
 	label = if fFlagConnectionsToFriendsRename then "CoreScripts.InGameMenu.PageTitle.InviteFriends" else "CommonUI.Features.Label.InviteConnections",
 	sideSheetPlacement = sideSheetPlacement.Vertical,
 	activated = inGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
-	isActivated = var10,
+	isActivated = var2,
 	components = {
 		Icon = function()
-			-- upvalues: commonIconModule (ref), var10 (ref)
-			return commonIconModule("PersonArrowFromBottomRight", nil, var10)
+			-- upvalues: commonIconModule (ref), var2 (ref)
+			return commonIconModule("PersonArrowFromBottomRight", nil, var2)
 		end
 	}
 })

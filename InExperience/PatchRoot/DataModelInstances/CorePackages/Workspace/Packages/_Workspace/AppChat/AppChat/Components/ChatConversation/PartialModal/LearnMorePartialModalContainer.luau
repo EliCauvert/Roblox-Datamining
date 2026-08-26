@@ -22,41 +22,41 @@ local t = {
 	onDismissed = function() end
 }
 
-return memo(function(p0)
+return memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useScreenSize (ref), useLayerCollector (ref), useAnalyticsModule (ref), useEffectOnMount (ref), eventNamesModule (ref), useCallback (ref), useLocalization (ref), reactModule (ref), partialModalModule (ref)
-	local var8 = cryoModule.Dictionary.union(t, p0)
-	local var9 = useStyle()
-	local var10 = useScreenSize()
-	local var11 = useLayerCollector()
+	local var1 = cryoModule.Dictionary.union(t, p1)
+	local var2 = useStyle()
+	local var3 = useScreenSize()
+	local var4 = useLayerCollector()
 	
-	if var11 and var11.absoluteSize then
-		var10 = var11.absoluteSize
+	if var4 and var4.absoluteSize then
+		var3 = var4.absoluteSize
 	end
-	local var12 = useAnalyticsModule()
+	local var5 = useAnalyticsModule()
 	useEffectOnMount(function()
-		-- upvalues: var12 (ref), eventNamesModule (copy), var8 (ref)
-		if var12 then
-			var12.fireAnalyticsEvent(eventNamesModule.ConversationLearnMoreDialogRendered, { conversationId = var8.conversationId })
+		-- upvalues: var5 (ref), eventNamesModule (copy), var1 (ref)
+		if var5 then
+			var5.fireAnalyticsEvent(eventNamesModule.ConversationLearnMoreDialogRendered, { conversationId = var1.conversationId })
 		end
 	end)
-	local var13 = useLocalization({
-		titleText = var8.titleKey,
-		bodyText = var8.bodyKey,
-		cancelAlertText = var8.cancelAlertKey
+	local var6 = useLocalization({
+		titleText = var1.titleKey,
+		bodyText = var1.bodyKey,
+		cancelAlertText = var1.cancelAlertKey
 	})
 	
 	return reactModule.createElement(partialModalModule, {
-		titleText = var13.titleText,
-		bodyText = var13.bodyText,
-		cancelAlertText = var13.cancelAlertText,
-		screenSize = var10,
+		titleText = var6.titleText,
+		bodyText = var6.bodyText,
+		cancelAlertText = var6.cancelAlertText,
+		screenSize = var3,
 		onDismissed = useCallback(function()
-			-- upvalues: var12 (ref), eventNamesModule (copy), var8 (ref)
-			if var12 then
-				var12.fireAnalyticsEvent(eventNamesModule.ConversationLearnMoreDialogDismissed, { conversationId = var8.conversationId })
+			-- upvalues: var5 (ref), eventNamesModule (copy), var1 (ref)
+			if var5 then
+				var5.fireAnalyticsEvent(eventNamesModule.ConversationLearnMoreDialogDismissed, { conversationId = var1.conversationId })
 			end
-			var8.onDismissed()
-		end, { var12, var8.conversationId, var8.onDismissed }),
-		style = var9
+			var1.onDismissed()
+		end, { var5, var1.conversationId, var1.onDismissed }),
+		style = var2
 	})
 end)

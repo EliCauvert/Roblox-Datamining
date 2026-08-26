@@ -5,88 +5,88 @@ local uiComponentSchemaModule = require(script.Parent.ui_component_schema)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
-		template = if p0 == nil or p0.template == nil then nil else p0.template,
-		roblox_component = if p0 == nil or p0.roblox_component == nil then "" else p0.roblox_component
+		template = if p1 == nil or p1.template == nil then nil else p1.template,
+		roblox_component = if p1 == nil or p1.roblox_component == nil then "" else p1.roblox_component
 	}, t_1)
 end
 
 function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6 = 0
+	local var1 = 0
 	
 	if self.template ~= nil then
-		local var7 = self.template:encode()
-		local var8, var9 = protoModule.writeTag(buff, var6, 1, protoModule.wireTypes.lengthDelimited)
-		var8, var9 = protoModule.writeBuffer(var8, var9, var7, buffer.len(var7))
-		buff = var8
-		var6 = var9
+		local var2 = self.template:encode()
+		local var3, var4 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
+		var3, var9 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
+		buff = var3
+		var1 = var4
 	end
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
-		local var10, var11 = protoModule.writeTag(buff, var6, 2, protoModule.wireTypes.lengthDelimited)
-		var10, var11 = protoModule.writeString(var10, var11, self.roblox_component)
-		buff = var10
-		var6 = var11
+		local var5, var6 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
+		var5, var11 = protoModule.writeString(var5, var6, self.roblox_component)
+		buff = var5
+		var1 = var6
 	end
-	local buff_1 = buffer.create(var6)
-	buffer.copy(buff_1, 0, buff, 0, var6)
+	local buff_1 = buffer.create(var1)
+	buffer.copy(buff_1, 0, buff, 0, var1)
 	
 	return buff_1
 end
 
 function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), uiComponentSchemaModule (ref)
-	local var13 = t_1.new()
-	local var14 = 0
-	while var14 < buffer.len(p1) do
+	local var1 = t_1.new()
+	local var2 = 0
+	while var2 < buffer.len(p1) do
 		local _ = nil
-		local var15 = nil
-		local var16, var17, var18 = protoModule.readTag(p1, var14)
-		local var19 = var16
-		var15 = var17
-		var14 = var18
+		local var3 = nil
+		local var4, var5, var6 = protoModule.readTag(p1, var2)
+		local var7 = var4
+		var3 = var5
+		var2 = var6
 		
-		if var15 == protoModule.wireTypes.varint then
+		if var3 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var20, var21 = protoModule.readVarInt(p1, var14)
-			local _ = var20
-			var14 = var21
+			local var8, var9 = protoModule.readVarInt(p1, var2)
+			local _ = var8
+			var2 = var9
 			continue
 		end
-		if var15 == protoModule.wireTypes.lengthDelimited then
-			if var19 == 1 then
+		if var3 == protoModule.wireTypes.lengthDelimited then
+			if var7 == 1 then
 				local _ = nil
-				local var22, var23 = protoModule.readBuffer(p1, var14)
-				var14 = var23
-				var13.template = uiComponentSchemaModule.UiComponentSchema.decode(var22)
-			elseif var19 == 2 then
+				local var10, var11 = protoModule.readBuffer(p1, var2)
+				var2 = var11
+				var1.template = uiComponentSchemaModule.UiComponentSchema.decode(var10)
+			elseif var7 == 2 then
 				local _ = nil
-				local var24, var25 = protoModule.readBuffer(p1, var14)
-				var14 = var25
-				var13.roblox_component = buffer.tostring(var24)
+				local var12, var13 = protoModule.readBuffer(p1, var2)
+				var2 = var13
+				var1.roblox_component = buffer.tostring(var12)
 			else
 				local _ = nil
-				local var26, var27 = protoModule.readVarInt(p1, var14)
-				var14 = var27 + var26
+				local var14, var15 = protoModule.readVarInt(p1, var2)
+				var2 = var15 + var14
 			end
-		elseif var15 == protoModule.wireTypes.i32 then
+		elseif var3 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var28, var29 = protoModule.readFixed32(p1, var14)
-			local _ = var28
-			var14 = var29
-		elseif var15 == protoModule.wireTypes.i64 then
+			local var16, var17 = protoModule.readFixed32(p1, var2)
+			local _ = var16
+			var2 = var17
+		elseif var3 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var30, var31 = protoModule.readFixed64(p1, var14)
-			local _ = var30
-			var14 = var31
+			local var18, var19 = protoModule.readFixed64(p1, var2)
+			local _ = var18
+			var2 = var19
 		else
 			error("Unsupported wire type: " .. var15)
 		end
 	end
-	return var13
+	return var1
 end
 
 function t_1:jsonEncode()
@@ -103,18 +103,18 @@ end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), uiComponentSchemaModule (ref)
-	local var33 = t_1.new()
+	local var20 = t_1.new()
 	
 	if self.template ~= nil then
-		var33.template = uiComponentSchemaModule.UiComponentSchema.jsonDecode(self.template)
+		var20.template = uiComponentSchemaModule.UiComponentSchema.jsonDecode(self.template)
 	end
 	if self.roblox_component ~= nil then
-		var33.roblox_component = self.roblox_component
+		var20.roblox_component = self.roblox_component
 	end
 	if self.robloxComponent ~= nil then
-		var33.roblox_component = self.robloxComponent
+		var20.roblox_component = self.robloxComponent
 	end
-	return var33
+	return var20
 end
 
 t_1.descriptor = {

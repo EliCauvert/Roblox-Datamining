@@ -1,8 +1,8 @@
 ﻿local httpModule = require(script:FindFirstAncestor("ProfileQRCode").Parent.Http)
 
-local var1 = function(p0, _)
+local var1 = function(p1, _)
 	-- upvalues: httpModule (ref)
-	return p0(httpModule.Url.FRIEND_URL):path("my"):path("friends"):path("refresh-qr-session"):body({})
+	return p1(httpModule.Url.FRIEND_URL):path("my"):path("friends"):path("refresh-qr-session"):body({})
 end
 
 return (function(p1)

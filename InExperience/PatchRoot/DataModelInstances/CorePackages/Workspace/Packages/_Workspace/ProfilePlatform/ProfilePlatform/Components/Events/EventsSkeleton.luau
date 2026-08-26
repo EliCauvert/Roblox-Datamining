@@ -12,9 +12,9 @@ local collectionCarousel = require(parent.CollectionViews).CollectionCarousel
 local useGetGameTileHeight = require(parent.GameCollections).useGetGameTileHeight
 local useDesignTokens = require(parent.Style).useDesignTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), useTextSizeOffset (ref), useDesignTokens (ref), useGetGameTileHeight (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), collectionCarousel (ref)
-	local var4 = useDesignTokens()
+	local var1 = useDesignTokens()
 	
 	return reactModule.createElement(collectionCarousel, {
 		scrollingFrameRef = nil,
@@ -24,20 +24,20 @@ return function(p0)
 		sideMargin = 0,
 		title = useLocalization({ events = textKeysModule.EventsListTitle }).events,
 		items = reactModule.useMemo(function()
-			-- upvalues: p0 (ref)
+			-- upvalues: p1 (ref)
 			local t = {}
 			
-			for i = 1, p0.numSkeletons do
+			for i = 1, p1.numSkeletons do
 				table.insert(t, i)
 			end
 			return t
-		end, { p0.numSkeletons }),
-		renderItem = reactModule.useCallback(function(_, p1, p2)
+		end, { p1.numSkeletons }),
+		renderItem = reactModule.useCallback(function(_, p2, p3)
 			-- upvalues: reactModule (copy), view (copy), skeleton (copy), radius (copy)
 			return reactModule.createElement(view, {
 				tag = "col gap-medium radius-medium",
-				LayoutOrder = p1,
-				Size = p2
+				LayoutOrder = p2,
+				Size = p3
 			}, {
 				ThumbnailSkeleton = reactModule.createElement(skeleton, {
 					LayoutOrder = 1,
@@ -56,7 +56,7 @@ return function(p0)
 				})
 			}), "Skeleton_" .. p1
 		end, {}),
-		getItemHeight = useGetGameTileHeight(false, "Event", true, false, false, useTextSizeOffset(), var4.Size.Size_700 + var4.Size.Size_200),
-		columnGap = var4.Size.Size_300
+		getItemHeight = useGetGameTileHeight(false, "Event", true, false, false, useTextSizeOffset(), var1.Size.Size_700 + var1.Size.Size_200),
+		columnGap = var1.Size.Size_300
 	})
 end

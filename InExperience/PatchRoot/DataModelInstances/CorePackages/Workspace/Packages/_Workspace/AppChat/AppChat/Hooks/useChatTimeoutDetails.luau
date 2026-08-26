@@ -12,37 +12,37 @@ local _ = require(appChat.Models.ConversationChannels)
 local currentConversationTimeoutEndedModule = require(appChat.Conversations.Actions.CurrentConversationTimeoutEnded)
 local getEffectiveChatTimeoutDetailsModule = require(appChat.Utils.getEffectiveChatTimeoutDetails)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), useSelector (ref), getDeepValue2Module (ref), getEffectiveChatTimeoutDetailsModule (ref), reactModule (ref), setTimeout (ref), currentConversationTimeoutEndedModule (ref), clearTimeout (ref)
-	local conversationId = p0.conversationId
-	local var6 = useDispatch()
-	local var7 = useSelector(function(p1)
+	local conversationId = p1.conversationId
+	local var1 = useDispatch()
+	local var2 = useSelector(function(p2)
 		-- upvalues: getDeepValue2Module (copy), conversationId (ref)
 		return {
-			userTimeout = getDeepValue2Module(p1, "ChatAppReducer.ChatTimeouts.userTimeout"),
-			conversationTimeout = getDeepValue2Module(p1, `ChatAppReducer.ChatTimeouts.byConversationId.{conversationId}`)
+			userTimeout = getDeepValue2Module(p2, "ChatAppReducer.ChatTimeouts.userTimeout"),
+			conversationTimeout = getDeepValue2Module(p2, `ChatAppReducer.ChatTimeouts.byConversationId.{conversationId}`)
 		}
 	end)
-	local var8 = getEffectiveChatTimeoutDetailsModule(var7.userTimeout, var7.conversationTimeout, p0.conversationModerationType, DateTime.now().UnixTimestamp)
+	local var3 = getEffectiveChatTimeoutDetailsModule(var2.userTimeout, var2.conversationTimeout, p1.conversationModerationType, DateTime.now().UnixTimestamp)
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), setTimeout (copy), var6 (ref), currentConversationTimeoutEndedModule (copy), conversationId (ref), clearTimeout (copy)
-		local var9 = if var8.isTimedOut then setTimeout(function()
-			-- upvalues: var6 (copy), currentConversationTimeoutEndedModule (copy), conversationId (copy)
-			var6(currentConversationTimeoutEndedModule(conversationId))
-		end, (var8.timeoutEndTimestamp - DateTime.now().UnixTimestamp + 1) * 1000) else nil
+		-- upvalues: var3 (ref), setTimeout (copy), var1 (ref), currentConversationTimeoutEndedModule (copy), conversationId (ref), clearTimeout (copy)
+		local var4 = if var3.isTimedOut then setTimeout(function()
+			-- upvalues: var1 (copy), currentConversationTimeoutEndedModule (copy), conversationId (copy)
+			var1(currentConversationTimeoutEndedModule(conversationId))
+		end, (var3.timeoutEndTimestamp - DateTime.now().UnixTimestamp + 1) * 1000) else nil
 		
 		return function()
-			-- upvalues: var9 (write), clearTimeout (copy)
-			if var9 then
-				clearTimeout(var9)
+			-- upvalues: var4 (write), clearTimeout (copy)
+			if var4 then
+				clearTimeout(var4)
 			end
 		end
 	end, {
-		var8.isTimedOut,
-		var8.timeoutEndTimestamp,
+		var3.isTimedOut,
+		var3.timeoutEndTimestamp,
 		conversationId,
-		var6
+		var1
 	})
 	
-	return var8
+	return var3
 end

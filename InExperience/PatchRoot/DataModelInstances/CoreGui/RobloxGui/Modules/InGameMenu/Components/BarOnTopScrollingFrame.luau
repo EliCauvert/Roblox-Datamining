@@ -13,8 +13,8 @@ barOnTopScrollingFrame.validateProps = t.strictInterface({
 })
 barOnTopScrollingFrame.defaultProps = { ScrollingEnabled = true }
 
-function barOnTopScrollingFrame.init(p0)
-	p0.state = { CanvasPosition = Vector2.new(0, 0) }
+function barOnTopScrollingFrame.init(p1)
+	p1.state = { CanvasPosition = Vector2.new(0, 0) }
 end
 
 function barOnTopScrollingFrame.render(p1)
@@ -58,9 +58,9 @@ function barOnTopScrollingFrame.render(p1)
 			ScrollingEnabled = p1.props.ScrollingEnabled,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
 			Selectable = false,
-			[roact.Change.CanvasPosition] = function(p3)
+			[roact.Change.CanvasPosition] = function(p2)
 				-- upvalues: p1 (ref)
-				p1:setState({ CanvasPosition = p3.CanvasPosition })
+				p1:setState({ CanvasPosition = p2.CanvasPosition })
 			end
 		}, {
 			roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 8, 1, 0) }, p1.props[roact.Children])

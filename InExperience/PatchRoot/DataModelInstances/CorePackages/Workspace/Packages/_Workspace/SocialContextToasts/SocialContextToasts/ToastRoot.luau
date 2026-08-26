@@ -9,18 +9,18 @@ local cryoModule = require(parent.Cryo)
 local getFFlagSocialContextToastEventStream = require(parent.SharedFlags).GetFFlagSocialContextToastEventStream
 local getFFlagEnableReferredPlayerJoinRemoteEvent = require(parent.SharedFlags).GetFFlagEnableReferredPlayerJoinRemoteEvent
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSelector (ref), getFFlagSocialContextToastEventStream (ref), cryoModule (ref), toastTypesModule (ref), reactModule (ref), toastWrapperModule (ref), buttonType (ref), getFFlagEnableReferredPlayerJoinRemoteEvent (ref)
-	local var5 = useSelector(function(p1)
-		return p1.ToastContent
+	local var1 = useSelector(function(p2)
+		return p2.ToastContent
 	end)
-	local var6 = if getFFlagSocialContextToastEventStream() then cryoModule.Dictionary.join(p0.analyticsProps, { toastType = var5.toastType }) else nil
+	local var2 = if getFFlagSocialContextToastEventStream() then cryoModule.Dictionary.join(p1.analyticsProps, { toastType = var1.toastType }) else nil
 	
-	if var5.toastType == toastTypesModule.None then
+	if var1.toastType == toastTypesModule.None then
 		return nil
-	elseif var5.toastType == toastTypesModule.YouJoinedFriends then
+	elseif var1.toastType == toastTypesModule.YouJoinedFriends then
 		local t = nil
-		local userList = var5.userList
+		local userList = var1.userList
 		
 		if #userList == 1 then
 			t = {
@@ -54,71 +54,71 @@ return function(p0)
 		return reactModule.createElement(toastWrapperModule, {
 			toastStrings = t,
 			userIdList = t_1,
-			analyticsProps = var6
+			analyticsProps = var2
 		})
 	else
-		return if var5.toastType == toastTypesModule.FriendJoinedYou then reactModule.createElement(toastWrapperModule, {
+		return if var1.toastType == toastTypesModule.FriendJoinedYou then reactModule.createElement(toastWrapperModule, {
 			toastStrings = {
 				label = {
 					"Feature.SocialContextToast.Message.FriendJoinedYou",
-					FRIEND_NAME = var5.joinerName
+					FRIEND_NAME = var1.joinerName
 				}
 			},
-			userIdList = { var5.joinerUserId },
-			analyticsProps = var6
-		}) elseif var5.toastType == toastTypesModule.FriendInNonRootPlace then reactModule.createElement(toastWrapperModule, {
+			userIdList = { var1.joinerUserId },
+			analyticsProps = var2
+		}) elseif var1.toastType == toastTypesModule.FriendInNonRootPlace then reactModule.createElement(toastWrapperModule, {
 			toastStrings = {
 				label = {
 					"Feature.SocialContextToast.Message.FriendInNonRootPlace",
-					FRIEND_NAME = var5.joinerName
+					FRIEND_NAME = var1.joinerName
 				}
 			},
-			userIdList = { var5.joinerUserId },
-			analyticsProps = var6
-		}) elseif var5.toastType == toastTypesModule.FollowYourFriend then reactModule.createElement(toastWrapperModule, {
+			userIdList = { var1.joinerUserId },
+			analyticsProps = var2
+		}) elseif var1.toastType == toastTypesModule.FollowYourFriend then reactModule.createElement(toastWrapperModule, {
 			toastStrings = {
 				button = "Feature.SocialContextToast.Action.JoinFriend",
 				label = {
 					"Feature.SocialContextToast.Message.FollowedFriendInOtherUniverse",
-					FRIEND_NAME = var5.joinerName,
-					EXPERIENCE_NAME = var5.experienceName
+					FRIEND_NAME = var1.joinerName,
+					EXPERIENCE_NAME = var1.experienceName
 				}
 			},
-			userIdList = { var5.joinerUserId },
-			onActivated = var5.onActivated,
+			userIdList = { var1.joinerUserId },
+			onActivated = var1.onActivated,
 			buttonType = buttonType.PrimaryContextual,
-			analyticsProps = var6
-		}) elseif var5.toastType == toastTypesModule.InviteBack then reactModule.createElement(toastWrapperModule, {
+			analyticsProps = var2
+		}) elseif var1.toastType == toastTypesModule.InviteBack then reactModule.createElement(toastWrapperModule, {
 			areUsersActive = false,
 			toastStrings = {
 				button = "Feature.SocialContextToast.Action.InviteBack",
 				label = {
 					"Feature.SocialContextToast.Message.FollowedFriendNotInGame",
-					FRIEND_NAME = var5.joinerName
+					FRIEND_NAME = var1.joinerName
 				}
 			},
-			userIdList = { var5.joinerUserId },
-			onActivated = var5.onActivated,
-			analyticsProps = var6
-		}) elseif var5.toastType == toastTypesModule.InviteSuccess then reactModule.createElement(toastWrapperModule, {
+			userIdList = { var1.joinerUserId },
+			onActivated = var1.onActivated,
+			analyticsProps = var2
+		}) elseif var1.toastType == toastTypesModule.InviteSuccess then reactModule.createElement(toastWrapperModule, {
 			toastStrings = {
 				label = "Feature.SocialContextToast.Message.InvitationConfirmation"
 			},
-			analyticsProps = var6
-		}) elseif var5.toastType == toastTypesModule.InviteFailure then reactModule.createElement(toastWrapperModule, {
+			analyticsProps = var2
+		}) elseif var1.toastType == toastTypesModule.InviteFailure then reactModule.createElement(toastWrapperModule, {
 			toastStrings = {
 				label = "Feature.SocialContextToast.Message.InvitationFailure"
 			},
-			analyticsProps = var6
-		}) elseif getFFlagEnableReferredPlayerJoinRemoteEvent() and var5.toastType == toastTypesModule.InviteeJoinedYou then reactModule.createElement(toastWrapperModule, {
+			analyticsProps = var2
+		}) elseif getFFlagEnableReferredPlayerJoinRemoteEvent() and var1.toastType == toastTypesModule.InviteeJoinedYou then reactModule.createElement(toastWrapperModule, {
 			toastStrings = {
 				label = {
 					"Feature.SocialContextToast.Message.InviteeJoinedYou",
-					INVITEE_NAME = var5.joinerName
+					INVITEE_NAME = var1.joinerName
 				}
 			},
-			userIdList = { var5.joinerUserId },
-			analyticsProps = var6
+			userIdList = { var1.joinerUserId },
+			analyticsProps = var2
 		}) else nil
 	end
 end

@@ -2,10 +2,10 @@
 
 return {
 	GameSortLoadSourceType = { API = "API", ClientFallbackCache = "ClientFallbackCache" },
-	setSortLoadSource = function(value, p0)
+	setSortLoadSource = function(value, p1)
 		-- upvalues: t (ref)
-		if p0 then
-			t[value] = p0
+		if p1 then
+			t[value] = p1
 			
 			return
 		end

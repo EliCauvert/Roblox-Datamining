@@ -37,21 +37,21 @@ local t = {
 	[Enum.KeyCode.Right] = imagesModule["icons/controls/keys/arrowRight"]
 }
 
-local function getKeyCodeContent(p0)
+local function getKeyCodeContent(p1)
 	-- upvalues: DIRECTIONAL_GAMEPAD_ICONS (ref), GAMEPAD_ICONS (ref), userInputService (ref), t (ref)
-	if type(p0) == "table" then
+	if type(p1) == "table" then
 		return {
 			inputType = "gamepad",
-			content = DIRECTIONAL_GAMEPAD_ICONS[p0.key][p0.axis]
+			content = DIRECTIONAL_GAMEPAD_ICONS[p1.key][p1.axis]
 		}
-	elseif GAMEPAD_ICONS[p0] then
-		return { inputType = "gamepad", content = GAMEPAD_ICONS[p0] }
+	elseif GAMEPAD_ICONS[p1] then
+		return { inputType = "gamepad", content = GAMEPAD_ICONS[p1] }
 	end
-	local var8 = userInputService:GetStringForKeyCode(p0)
+	local var1 = userInputService:GetStringForKeyCode(p1)
 	
 	return {
 		inputType = "keyboard",
-		content = t[p0] or (if var8 ~= "" then p0.Name else var8)
+		content = t[p1] or (if var1 ~= "" then p1.Name else var1)
 	}
 end
 
@@ -64,17 +64,17 @@ local function getWidthFromContent(p1, p2)
 			
 			return if constantsModule.PREFERRED_WIDTH < x + 2 * constantsModule.MIN_SIDE_PADDING then x + 2 * constantsModule.SIDE_PADDING else constantsModule.PREFERRED_WIDTH
 		elseif p1.inputType == "gamepad" then
-			local var9 = if typeof(p1.content) == "string" then constantsModule.DEFAULT_GAMEPAD_ICON_SIZE else p1.content.ImageRectSize
+			local var1 = if typeof(p1.content) == "string" then constantsModule.DEFAULT_GAMEPAD_ICON_SIZE else p1.content.ImageRectSize
 			
-			return var9.X * constantsModule.HEIGHT / var9.Y
+			return var1.X * constantsModule.HEIGHT / var1.Y
 		end
 		assert(false, string.format("Unreachable: Invalid inputType value: %q", p1.inputType))
 	end
 end
 
-function getKeyLabelWidth(p3, p4)
+function getKeyLabelWidth(p1, p2)
 	-- upvalues: getKeyCodeContent (ref), getWidthFromContent (ref)
-	return getWidthFromContent(getKeyCodeContent(p3), p4)
+	return getWidthFromContent(getKeyCodeContent(p1), p2)
 end
 
 return {

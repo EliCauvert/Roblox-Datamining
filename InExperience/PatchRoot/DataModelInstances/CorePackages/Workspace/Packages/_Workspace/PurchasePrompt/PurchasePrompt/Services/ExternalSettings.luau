@@ -25,13 +25,13 @@ return {
 		end
 		
 		function t.isThirdPartyPurchaseAllowed()
-			local var5 = true
+			local var1 = true
 			pcall(function()
-				-- upvalues: var5 (write)
-				var5 = game:GetService("PermissionsService"):GetIsThirdPartyPurchaseAllowed()
+				-- upvalues: var1 (write)
+				var1 = game:GetService("PermissionsService"):GetIsThirdPartyPurchaseAllowed()
 			end)
 			
-			return var5
+			return var1
 		end
 		
 		function t.getLuaUseThirdPartyPermissions()

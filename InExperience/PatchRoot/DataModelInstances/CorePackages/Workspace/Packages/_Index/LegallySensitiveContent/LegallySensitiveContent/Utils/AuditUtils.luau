@@ -5,59 +5,59 @@ local base64 = require(parent.dependencies).Base64
 local consentNameModule = require(parent.Enums.ConsentName)
 local _ = require(parent.Types.LegallySensitiveContentTypes)
 
-local function getAuditDataForConsent(p0, p1)
+local function getAuditDataForConsent(p1, p2)
 	-- upvalues: consentNameModule (ref), legallySensitiveContentConstantsModule (ref)
-	local var5 = ({
+	local var1 = ({
 		[consentNameModule.phoneNumberDiscoverabilityUpsell] = {
 			{
-				consentStringTemplate = p1.phoneNumberDiscoverabilityUpsellNotNow,
+				consentStringTemplate = p2.phoneNumberDiscoverabilityUpsellNotNow,
 				sourceContentId = legallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.notNowSourceContentId
 			},
 			{
-				consentStringTemplate = p1.phoneNumberDiscoverabilityUpsellTurnOn,
+				consentStringTemplate = p2.phoneNumberDiscoverabilityUpsellTurnOn,
 				sourceContentId = legallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.turnOnSourceContentId
 			},
 			{
-				consentStringTemplate = p1.phoneNumberDiscoverabilityUpsellTitle,
+				consentStringTemplate = p2.phoneNumberDiscoverabilityUpsellTitle,
 				sourceContentId = legallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.titleSourceContentId
 			},
 			{
-				consentStringTemplate = p1.phoneNumberDiscoverabilityUpsellContent,
+				consentStringTemplate = p2.phoneNumberDiscoverabilityUpsellContent,
 				sourceContentId = legallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.contentSourceContentId
 			}
 		},
 		[consentNameModule.PhotoToAvatar] = {
 			{
-				consentStringTemplate = p1.photoToAvatarTitle,
+				consentStringTemplate = p2.photoToAvatarTitle,
 				sourceContentId = legallySensitiveContentConstantsModule.photoToAvatar.titleSourceContentId
 			},
 			{
-				consentStringTemplate = p1.photoToAvatarBodyText,
+				consentStringTemplate = p2.photoToAvatarBodyText,
 				sourceContentId = legallySensitiveContentConstantsModule.photoToAvatar.bodyTextSourceContentId
 			},
 			{
-				consentStringTemplate = p1.photoToAvatarPrivacyLinkText,
+				consentStringTemplate = p2.photoToAvatarPrivacyLinkText,
 				sourceContentId = legallySensitiveContentConstantsModule.photoToAvatar.privacyLinkTextSourceContentId
 			},
 			{
-				consentStringTemplate = p1.photoToAvatarAgreeButton,
+				consentStringTemplate = p2.photoToAvatarAgreeButton,
 				sourceContentId = legallySensitiveContentConstantsModule.photoToAvatar.agreeButtonSourceContentId
 			},
 			{
-				consentStringTemplate = p1.photoToAvatarCancelButton,
+				consentStringTemplate = p2.photoToAvatarCancelButton,
 				sourceContentId = legallySensitiveContentConstantsModule.photoToAvatar.cancelButtonSourceContentId
 			}
 		}
-	})[p0]
+	})[p1]
 	
-	return var5 or {}
+	return var1 or {}
 end
 
-local function getAuditHeaderValue(p2, p3, p4)
+local function getAuditHeaderValue(p1, p2, p3)
 	-- upvalues: cryptoUtilsModule (ref)
 	local t = {}
 	
-	for i, v in ipairs(p2) do
+	for i, v in ipairs(p1) do
 		local t_1 = {
 			hash = cryptoUtilsModule.hashStringWithFnv1a32(v.consentStringTemplate)
 		}
@@ -69,10 +69,10 @@ local function getAuditHeaderValue(p2, p3, p4)
 		end
 		t[v.sourceContentId] = t_1
 	end
-	local t_1 = { surface = p3, content = t }
+	local t_1 = { surface = p2, content = t }
 	
-	if p4 then
-		for i_1, v_1 in pairs(p4) do
+	if p3 then
+		for i_1, v_1 in pairs(p3) do
 			t_1[i_1] = v_1
 		end
 	end
@@ -82,8 +82,8 @@ end
 return {
 	getAuditDataForConsent = getAuditDataForConsent,
 	getAuditHeaderValue = getAuditHeaderValue,
-	getEncodedAuditHeader = function(p5, p6, p7, p8)
+	getEncodedAuditHeader = function(p4, p5, p6, p7)
 		-- upvalues: getAuditDataForConsent (ref), getAuditHeaderValue (ref), base64 (ref)
-		return base64.EncodeUrl(getAuditHeaderValue(getAuditDataForConsent(p5, p6), p7, p8))
+		return base64.EncodeUrl(getAuditHeaderValue(getAuditDataForConsent(p4, p5), p6, p7))
 	end
 }

@@ -50,12 +50,12 @@ return function()
 		
 		return false
 	end
-	local var21 = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.PlaceVideo)
-	local var22 = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.UserVideo)
-	local var23 = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.UserVideoEligible)
+	local var1 = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.PlaceVideo)
+	local var2 = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.UserVideo)
+	local var3 = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.UserVideoEligible)
 	
-	if not disableCameraOnLowSpecDevices2 or not var21 or (not var22 or not var23) or (avatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.DeviceCapture) or not ShouldCheckDeviceSpecs()) then
-		return var21 and (var23 and (var22 and not cryoModule.isEmpty(if getFFlagUseCameraDevicesListenerModule() then cameraDevicesHelperModule.GetDevices() else videoCaptureService:GetCameraDevices())))
+	if not disableCameraOnLowSpecDevices2 or not var1 or (not var2 or not var3) or (avatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.DeviceCapture) or not ShouldCheckDeviceSpecs()) then
+		return var1 and (var3 and (var2 and not cryoModule.isEmpty(if getFFlagUseCameraDevicesListenerModule() then cameraDevicesHelperModule.GetDevices() else videoCaptureService:GetCameraDevices())))
 	elseif onlyShowToastOnceInLifetime2 and disableCameraToastShownStorageKeyEngineFeature then
 		local ok_1, status_1 = pcall(function()
 			-- upvalues: appStorageService (copy)

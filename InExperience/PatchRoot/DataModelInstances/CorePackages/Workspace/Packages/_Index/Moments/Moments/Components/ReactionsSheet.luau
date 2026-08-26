@@ -16,12 +16,12 @@ local reactionSize = momentsCommonModule.Enums.ReactionSize
 local useConfigurationModule = require(moments.Hooks.useConfiguration)
 local t = { title = "Feature.Moments.Label.Reactions" }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), useConfigurationModule (ref), reactModule (ref), view (ref), reaction (ref), reactionSize (ref), text (ref), abbreviateCount (ref), localizationService (ref), sheet (ref), foundationModule (ref)
 	return reactModule.createElement(sheet.Root, {
 		isOpen = true,
 		preferCenterSheet = true,
-		onClose = p0.onClose,
+		onClose = p1.onClose,
 		size = foundationModule.Enums.DialogSize.Large
 	}, {
 		Header = reactModule.createElement(sheet.Header, nil, {
@@ -34,10 +34,10 @@ return function(p0)
 			ReactionsContainer = reactModule.createElement(view, {
 				tag = "row wrap align-y-center gap-small size-full-0 auto-y padding-bottom-large"
 			}, reactModule.useMemo(function()
-				-- upvalues: p0 (ref), reactModule (copy), view (copy), reaction (copy), reactionSize (copy), text (copy), abbreviateCount (copy), localizationService (copy)
+				-- upvalues: p1 (ref), reactModule (copy), view (copy), reaction (copy), reactionSize (copy), text (copy), abbreviateCount (copy), localizationService (copy)
 				local t = {}
 				
-				for i, v in ipairs(p0.reactionCounts) do
+				for i, v in ipairs(p1.reactionCounts) do
 					if v.count > 0 then
 						t[v.reaction] = reactModule.createElement(view, {
 							tag = "row align-y-center gap-xsmall auto-xy padding-xsmall",
@@ -57,7 +57,7 @@ return function(p0)
 					end
 				end
 				return t
-			end, { p0.reactionCounts }))
+			end, { p1.reactionCounts }))
 		})
 	})
 end

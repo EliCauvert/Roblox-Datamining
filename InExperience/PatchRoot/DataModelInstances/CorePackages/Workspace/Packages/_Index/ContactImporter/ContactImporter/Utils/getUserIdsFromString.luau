@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return string.gmatch(p0 or "", "([^,]+)")
+﻿return function(p1)
+	return string.gmatch(p1 or "", "([^,]+)")
 end

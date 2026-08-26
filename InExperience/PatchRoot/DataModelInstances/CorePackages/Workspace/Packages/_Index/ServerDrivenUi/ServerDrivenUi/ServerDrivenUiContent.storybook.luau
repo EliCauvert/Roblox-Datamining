@@ -8,8 +8,8 @@ local device = foundationModule.Enums.Device
 local reactRobloxModule = require(parent.Dev.ReactRoblox)
 local roactRoduxModule = require(parent.Dev.RoactRodux)
 local t = { Light = colorMode.Light, Dark = colorMode.Dark }
-local var6 = roduxModule.Store.new(function(p0)
-	return p0
+local var1 = roduxModule.Store.new(function(p1)
+	return p1
 end, {
 	ScreenSize = Vector2.new(1920, 1080),
 	TopBar = { topBarHeight = 10 },
@@ -30,9 +30,9 @@ return {
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
 	mapStory = function(p1)
-		-- upvalues: reactModule (ref), roactRoduxModule (ref), var6 (ref), foundationProvider (ref), t (ref), device (ref)
+		-- upvalues: reactModule (ref), roactRoduxModule (ref), var1 (ref), foundationProvider (ref), t (ref), device (ref)
 		return function(p2)
-			-- upvalues: reactModule (copy), roactRoduxModule (copy), var6 (copy), foundationProvider (copy), t (copy), device (copy), p1 (ref)
+			-- upvalues: reactModule (copy), roactRoduxModule (copy), var1 (copy), foundationProvider (copy), t (copy), device (copy), p1 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -44,7 +44,7 @@ return {
 					PaddingLeft = UDim.new(0, 10),
 					PaddingRight = UDim.new(0, 10)
 				}),
-				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var6 }, {
+				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var1 }, {
 					FoundationContext = reactModule.createElement(foundationProvider, {
 						colorMode = t[p2.theme],
 						device = device[p2.platform],

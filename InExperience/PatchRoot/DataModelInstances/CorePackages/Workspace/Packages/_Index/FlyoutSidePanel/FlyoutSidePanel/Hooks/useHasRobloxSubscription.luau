@@ -4,7 +4,7 @@ local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbi
 
 return function()
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), useSelector (ref)
-	return if fFlagEnableBlackbirdCheck then useSelector(function(p0)
-		return if p0.Users[p0.LocalUserId] then true else false
+	return if fFlagEnableBlackbirdCheck then useSelector(function(p1)
+		return if p1.Users[p1.LocalUserId] then true else false
 	end) else false
 end

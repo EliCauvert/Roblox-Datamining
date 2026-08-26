@@ -5,11 +5,11 @@ local localization = require(parent.AppLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
 
 return {
-	makeTestRoot = function(p0)
+	makeTestRoot = function(p1)
 		-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref)
 		return reactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
-		}, { Child = p0 })
+		}, { Child = p1 })
 	end,
 	NativePurchaseFinishedWithLocalPlayer = {
 		new = function()
@@ -36,9 +36,9 @@ return {
 					-- upvalues: bindableEvent (ref)
 					return bindableEvent.Event
 				end,
-				fire = function(p3, p4, p5)
+				fire = function(p1, p2, p3)
 					-- upvalues: bindableEvent (ref)
-					bindableEvent:Fire(p3, p4, p5)
+					bindableEvent:Fire(p1, p2, p3)
 				end
 			}
 		end
@@ -52,9 +52,9 @@ return {
 					-- upvalues: bindableEvent (ref)
 					return bindableEvent.Event
 				end,
-				fire = function(p6, p7, p8)
+				fire = function(p1, p2, p3)
 					-- upvalues: bindableEvent (ref)
-					bindableEvent:Fire(p6, p7, p8)
+					bindableEvent:Fire(p1, p2, p3)
 				end
 			}
 		end
@@ -68,9 +68,9 @@ return {
 					-- upvalues: bindableEvent (ref)
 					return bindableEvent.Event
 				end,
-				fire = function(p9, p10, p11, p12)
+				fire = function(p1, p2, p3, p4)
 					-- upvalues: bindableEvent (ref)
-					bindableEvent:Fire(p9, p10, p11, p12)
+					bindableEvent:Fire(p1, p2, p3, p4)
 				end
 			}
 		end
@@ -81,15 +81,15 @@ return {
 			
 			return {
 				HasRobloxSubscription = false,
-				GetPropertyChangedSignal = function(_, p13)
+				GetPropertyChangedSignal = function(_, p1)
 					-- upvalues: bindableEvent (ref)
-					assert(p13 == "HasRobloxSubscription", "Invalid property name")
+					assert(p1 == "HasRobloxSubscription", "Invalid property name")
 					
 					return bindableEvent.Event
 				end,
-				setHasRobloxSubscription = function(value, p14)
+				setHasRobloxSubscription = function(value, p1)
 					-- upvalues: bindableEvent (ref)
-					value.HasRobloxSubscription = p14
+					value.HasRobloxSubscription = p1
 					bindableEvent:Fire()
 				end
 			}

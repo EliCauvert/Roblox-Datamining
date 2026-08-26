@@ -5,24 +5,24 @@ local checkbox = require(parent.Foundation).Checkbox
 local linkButton = UIBloxModule.App.Button.LinkButton
 local useStyle = UIBloxModule.Core.Style.useStyle
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), checkbox (ref), linkButton (ref)
-	local var2 = useStyle()
-	local baseSize = var2.Font.BaseSize
-	local relativeSize = var2.Font.CaptionHeader.RelativeSize
-	local size150 = var2.Tokens.Size.Size_150
+	local var1 = useStyle()
+	local baseSize = var1.Font.BaseSize
+	local relativeSize = var1.Font.CaptionHeader.RelativeSize
+	local size150 = var1.Tokens.Size.Size_150
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		ListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var2.Tokens.Size.Size_150)
+			Padding = UDim.new(0, var1.Tokens.Size.Size_150)
 		}),
-		LegalTextContainer = if p0.showLegalText and p0.showLegalTextCheckbox then reactModule.createElement("Frame", {
+		LegalTextContainer = if p1.showLegalText and p1.showLegalTextCheckbox then reactModule.createElement("Frame", {
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
@@ -36,35 +36,35 @@ return function(p0)
 			}),
 			LegalCheckbox = reactModule.createElement(checkbox, {
 				label = "",
-				onActivated = p0.setLegalTextChecked,
-				isChecked = p0.legalTextChecked
+				onActivated = p1.setLegalTextChecked,
+				isChecked = p1.legalTextChecked
 			}),
 			LegalText = reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = true,
-				Text = p0.legalText,
+				Text = p1.legalText,
 				TextSize = baseSize * relativeSize,
-				TextColor3 = var2.Theme.TextDefault.Color,
-				TextTransparency = var2.Theme.TextDefault.Transparency,
-				Font = var2.Font.Body.Font,
+				TextColor3 = var1.Theme.TextDefault.Color,
+				TextTransparency = var1.Theme.TextDefault.Transparency,
+				Font = var1.Font.Body.Font,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Size = UDim2.new(1, -(26 + size150), 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			})
-		}) else p0.showLegalText and reactModule.createElement("TextLabel", {
+		}) else p1.showLegalText and reactModule.createElement("TextLabel", {
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Text = p0.legalText,
+			Text = p1.legalText,
 			TextSize = baseSize * relativeSize,
-			TextColor3 = var2.Theme.TextDefault.Color,
-			TextTransparency = var2.Theme.TextDefault.Transparency,
-			Font = var2.Font.Body.Font,
+			TextColor3 = var1.Theme.TextDefault.Color,
+			TextTransparency = var1.Theme.TextDefault.Transparency,
+			Font = var1.Font.Body.Font,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}),
-		LegalButtonsContainer = p0.showLegalButtons and reactModule.createElement("Frame", {
+		LegalButtonsContainer = p1.showLegalButtons and reactModule.createElement("Frame", {
 			LayoutOrder = 4,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
@@ -80,8 +80,8 @@ return function(p0)
 			TermsOfUseButton = reactModule.createElement(linkButton, {
 				layoutOrder = 5,
 				fontStyle = "CaptionBody",
-				text = p0.termsOfUse,
-				onActivated = p0.onTermsOfUseClick
+				text = p1.termsOfUse,
+				onActivated = p1.onTermsOfUseClick
 			}),
 			TextButtonDivider = reactModule.createElement("TextLabel", {
 				LayoutOrder = 6,
@@ -89,17 +89,17 @@ return function(p0)
 				Text = "-",
 				TextWrapped = true,
 				TextSize = baseSize * relativeSize,
-				TextColor3 = var2.Theme.TextDefault.Color,
-				TextTransparency = var2.Theme.TextDefault.Transparency,
-				Font = var2.Font.Body.Font,
+				TextColor3 = var1.Theme.TextDefault.Color,
+				TextTransparency = var1.Theme.TextDefault.Transparency,
+				Font = var1.Font.Body.Font,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
 			PrivacyPolicyButton = reactModule.createElement(linkButton, {
 				layoutOrder = 7,
 				fontStyle = "CaptionBody",
-				text = p0.privacyPolicy,
-				onActivated = p0.onPrivacyPolicyClick
+				text = p1.privacyPolicy,
+				onActivated = p1.onPrivacyPolicyClick
 			})
 		})
 	})

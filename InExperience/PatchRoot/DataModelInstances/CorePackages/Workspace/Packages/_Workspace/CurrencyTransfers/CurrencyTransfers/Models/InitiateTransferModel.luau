@@ -3,13 +3,13 @@ local _ = require(currencyTransfers.types)
 local tModule = require(currencyTransfers.Parent.t)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -43,13 +43,13 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: t (ref)
-	local robuxTransfer = p2.robuxTransfer
+	local robuxTransfer = p1.robuxTransfer
 	local sender = robuxTransfer.sender
 	
 	return t.new({
-		transferRequestId = p2.transferRequestId,
+		transferRequestId = p1.transferRequestId,
 		robuxTransfer = {
 			transferId = robuxTransfer.transferId,
 			sender = if sender then {
@@ -70,15 +70,15 @@ function t.format(p2)
 				type = robuxTransfer.recipient.type
 			}
 		},
-		senderRobuxBalance = p2.senderRobuxBalance,
-		minimumTransferAmount = p2.minimumTransferAmount,
-		maximumTransferAmount = p2.maximumTransferAmount,
+		senderRobuxBalance = p1.senderRobuxBalance,
+		minimumTransferAmount = p1.minimumTransferAmount,
+		maximumTransferAmount = p1.maximumTransferAmount,
 		userRelationshipDetail = {
-			friendSinceYear = p2.userRelationshipDetail.friendSinceYear,
-			friendSinceDate = p2.userRelationshipDetail.friendSinceDate,
-			mutualFriendsCount = p2.userRelationshipDetail.mutualFriendsCount,
-			userAccountSinceYear = p2.userRelationshipDetail.userAccountSinceYear,
-			areFriends = p2.userRelationshipDetail.areFriends
+			friendSinceYear = p1.userRelationshipDetail.friendSinceYear,
+			friendSinceDate = p1.userRelationshipDetail.friendSinceDate,
+			mutualFriendsCount = p1.userRelationshipDetail.mutualFriendsCount,
+			userAccountSinceYear = p1.userRelationshipDetail.userAccountSinceYear,
+			areFriends = p1.userRelationshipDetail.areFriends
 		}
 	})
 end

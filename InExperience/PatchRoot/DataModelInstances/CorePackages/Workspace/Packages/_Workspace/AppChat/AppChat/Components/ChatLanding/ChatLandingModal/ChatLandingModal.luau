@@ -15,29 +15,29 @@ local foundationModule = require(parent.Foundation)
 local favoriteOn = UIBloxModule.App.ImageSet.Images["icons/actions/favoriteOn"]
 local x = foundationModule.Enums.IconName.X
 local t = {
-	[appChatNetworkingModule.Constants.ModalContentType.Link] = function(p0)
+	[appChatNetworkingModule.Constants.ModalContentType.Link] = function(p1)
 		-- upvalues: useStyle (ref), reactModule (ref)
-		local var11 = useStyle()
+		local var1 = useStyle()
 		
 		return reactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 0, 0),
-			LayoutOrder = p0.layoutOrder,
-			Font = var11.Font.Body.Font,
+			LayoutOrder = p1.layoutOrder,
+			Font = var1.Font.Body.Font,
 			BorderSizePixel = 0,
-			Text = `<u>{p0.content.text}</u>`,
+			Text = `<u>{p1.content.text}</u>`,
 			RichText = true,
-			TextColor3 = var11.Theme.TextDefault.Color,
-			TextSize = var11.Font.CaptionBody.RelativeSize * var11.Font.BaseSize,
+			TextColor3 = var1.Theme.TextDefault.Color,
+			TextSize = var1.Font.CaptionBody.RelativeSize * var1.Font.BaseSize,
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			[reactModule.Event.Activated] = p0.content.onActivated
+			[reactModule.Event.Activated] = p1.content.onActivated
 		})
 	end,
 	[appChatNetworkingModule.Constants.ModalContentType.Text] = function(p1)
 		-- upvalues: useStyle (ref), reactModule (ref)
-		local var12 = useStyle()
+		local var1 = useStyle()
 		
 		return reactModule.createElement("TextLabel", {
 			BorderSizePixel = 0,
@@ -45,10 +45,10 @@ local t = {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			LayoutOrder = p1.layoutOrder,
-			Font = var12.Font.Body.Font,
+			Font = var1.Font.Body.Font,
 			Text = p1.content.text,
-			TextColor3 = var12.Theme.TextDefault.Color,
-			TextSize = var12.Font.CaptionBody.RelativeSize * var12.Font.BaseSize,
+			TextColor3 = var1.Theme.TextDefault.Color,
+			TextSize = var1.Font.CaptionBody.RelativeSize * var1.Font.BaseSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			AutomaticSize = Enum.AutomaticSize.Y
 		})
@@ -66,44 +66,44 @@ local t_1 = {
 	onDismissed = function() end
 }
 
-return reactModule.forwardRef(function(p2, p3)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: cryoModule (ref), t_1 (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), reactModule (ref), t (ref), name (ref), labelModule (ref), favoriteOn (ref), x (ref), buttonStack (ref)
-	local var13 = cryoModule.Dictionary.join(t_1, p2)
-	local style = var13.style or useStyle()
-	local var15 = useChatPagePaddingModule()
+	local var1 = cryoModule.Dictionary.join(t_1, p1)
+	local style = var1.style or useStyle()
+	local var2 = useChatPagePaddingModule()
 	local size200 = style.Tokens.Size.Size_200
 	local size1000 = style.Tokens.Size.Size_1000
 	local size600 = foundationModule.Hooks.useTokens().Size.Size_600
-	local var16, var17 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var13 (ref), t (copy), reactModule (copy), name (copy)
-		local var18 = cryoModule.Dictionary.map(var13.additionalContent, function(p4, p5)
+	local var3, var4 = reactModule.useMemo(function()
+		-- upvalues: cryoModule (copy), var1 (ref), t (copy), reactModule (copy), name (copy)
+		local var5 = cryoModule.Dictionary.map(var1.additionalContent, function(p3, p4)
 			-- upvalues: t (copy), reactModule (copy), name (copy)
-			local type = t[p4.type]
-			local var19 = if type then reactModule.createElement(type, { layoutOrder = p5 + 2, content = p4 }) else nil
+			local type = t[p3.type]
+			local var6 = if type then reactModule.createElement(type, { layoutOrder = p4 + 2, content = p3 }) else nil
 			
-			if var19 then
-				return var19, `additionalContent_{p5}`
+			if var6 then
+				return var6, `additionalContent_{p4}`
 			end
-			name:warning(`Unsupported additional content type: {p4.type}`)
+			name:warning(`Unsupported additional content type: {p3.type}`)
 			
 			return nil, nil
 		end)
 		
-		return var18, not cryoModule.isEmpty(var18)
-	end, { var13.additionalContent })
+		return var5, not cryoModule.isEmpty(var5)
+	end, { var1.additionalContent })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = var13.LayoutOrder,
+		LayoutOrder = var1.LayoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		ref = p3
+		ref = p2
 	}, {
 		ContentPadding = reactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, size200),
 			PaddingBottom = UDim.new(0, size200),
-			PaddingLeft = UDim.new(0, var15.left),
-			PaddingRight = UDim.new(0, var15.right)
+			PaddingLeft = UDim.new(0, var2.left),
+			PaddingRight = UDim.new(0, var2.right)
 		}),
 		Content = reactModule.createElement("Frame", {
 			BackgroundTransparency = style.Theme.SystemPrimaryContent.Transparency,
@@ -165,9 +165,9 @@ return reactModule.forwardRef(function(p2, p3)
 							VerticalAlignment = Enum.VerticalAlignment.Center,
 							Padding = UDim.new(0, size200)
 						}),
-						TitleLabelWithIcon = if not var13.titleLabelText then nil else reactModule.createElement(labelModule, {
+						TitleLabelWithIcon = if not var1.titleLabelText then nil else reactModule.createElement(labelModule, {
 							layoutOrder = 1,
-							bodyText = var13.titleLabelText,
+							bodyText = var1.titleLabelText,
 							iconImage = favoriteOn
 						}),
 						TitleTextLabel = reactModule.createElement("TextLabel", {
@@ -177,7 +177,7 @@ return reactModule.forwardRef(function(p2, p3)
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, 0, 0, 0),
 							Font = style.Font.Title.Font,
-							Text = var13.titleText,
+							Text = var1.titleText,
 							TextColor3 = style.Theme.TextEmphasis.Color,
 							TextSize = style.Font.Header2.RelativeSize * style.Font.BaseSize,
 							TextXAlignment = Enum.TextXAlignment.Left,
@@ -193,23 +193,23 @@ return reactModule.forwardRef(function(p2, p3)
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 0),
 						Font = style.Font.Body.Font,
-						Text = var13.bodyText,
+						Text = var1.bodyText,
 						TextColor3 = style.Theme.TextDefault.Color,
 						TextSize = style.Font.CaptionBody.RelativeSize * style.Font.BaseSize,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						AutomaticSize = Enum.AutomaticSize.Y
 					}),
-					AdditionalContent = if var17 then reactModule.createElement(reactModule.Fragment, {}, var16) else nil
+					AdditionalContent = if var4 then reactModule.createElement(reactModule.Fragment, {}, var3) else nil
 				}),
 				ImageIcon = reactModule.createElement(foundationModule.View, {
 					LayoutOrder = 2,
 					tag = "auto-xy x-default-transparent radius-xsmall",
-					onActivated = var13.onDismissed
+					onActivated = var1.onDismissed
 				}, {
 					Icon = reactModule.createElement(foundationModule.Icon, { size = size600, name = x })
 				})
 			}),
-			Buttons = if var13.hideActionButton then nil else reactModule.createElement("Frame", {
+			Buttons = if var1.hideActionButton then nil else reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				Size = UDim2.new(1, 0, 0, size1000)
@@ -218,8 +218,8 @@ return reactModule.forwardRef(function(p2, p3)
 					forcedFillDirection = Enum.FillDirection.Horizontal,
 					buttons = {
 						{
-							buttonType = var13.buttonType,
-							props = { onActivated = var13.onActivated, text = var13.actionText }
+							buttonType = var1.buttonType,
+							props = { onActivated = var1.onActivated, text = var1.actionText }
 						}
 					}
 				})

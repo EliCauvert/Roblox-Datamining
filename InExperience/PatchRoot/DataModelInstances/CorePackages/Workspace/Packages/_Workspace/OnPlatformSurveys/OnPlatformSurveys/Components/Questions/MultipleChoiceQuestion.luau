@@ -13,15 +13,15 @@ local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 local t = {}
 local t_1 = {}
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: inlineQuestionTypeModule (ref), t_1 (ref), reactModule (ref), t (ref), list (ref), fFlagInlineSurveyChoiceTextEntry (ref), inlineSurveyHelpersModule (ref), listItemInputType (ref), textInput (ref), view (ref)
-	local question = p0.question
-	local answer = p0.answer
-	local onAnswerChanged = p0.onAnswerChanged
-	local var7 = p0.isDisabled == true
-	local var8 = question.type == inlineQuestionTypeModule.MultipleChoiceMulti
+	local question = p1.question
+	local answer = p1.answer
+	local onAnswerChanged = p1.onAnswerChanged
+	local var1 = p1.isDisabled == true
+	local var2 = question.type == inlineQuestionTypeModule.MultipleChoiceMulti
 	local choices = question.choices or t_1
-	local var10 = reactModule.useMemo(function()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: answer (ref), t (copy)
 		local t_1 = {}
 		
@@ -30,19 +30,19 @@ return reactModule.memo(function(p0)
 		end
 		return t_1
 	end, { answer })
-	local var11 = reactModule.useRef(answer)
-	var11.current = answer
+	local var4 = reactModule.useRef(answer)
+	var4.current = answer
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-small size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Choices = reactModule.createElement(list.Root, {
 			LayoutOrder = 1,
 			hasDivider = { hasDivider = true, isInset = false },
 			isContained = { isContained = false, hasMargin = false }
 		}, reactModule.useMemo(function()
-			-- upvalues: choices (ref), reactModule (copy), list (copy), fFlagInlineSurveyChoiceTextEntry (copy), var7 (ref), onAnswerChanged (ref), inlineSurveyHelpersModule (copy), answer (ref), var8 (ref), listItemInputType (copy), var10 (ref), textInput (copy), var11 (ref)
+			-- upvalues: choices (ref), reactModule (copy), list (copy), fFlagInlineSurveyChoiceTextEntry (copy), var1 (ref), onAnswerChanged (ref), inlineSurveyHelpersModule (copy), answer (ref), var2 (ref), listItemInputType (copy), var3 (ref), textInput (copy), var4 (ref)
 			local t = {}
 			
 			for i, v in choices do
@@ -52,17 +52,17 @@ return reactModule.memo(function(p0)
 					LayoutOrder = if fFlagInlineSurveyChoiceTextEntry then i * 2 else i,
 					onActivated = {
 						onActivated = function()
-							-- upvalues: var7 (copy), onAnswerChanged (copy), inlineSurveyHelpersModule (copy), answer (copy), id (ref), var8 (copy), fFlagInlineSurveyChoiceTextEntry (copy)
-							if var7 then
+							-- upvalues: var1 (copy), onAnswerChanged (copy), inlineSurveyHelpersModule (copy), answer (copy), id (ref), var2 (copy), fFlagInlineSurveyChoiceTextEntry (copy)
+							if var1 then
 								return
 							end
 							onAnswerChanged({
-								choiceIds = inlineSurveyHelpersModule.toggleChoice(answer, id, var8),
+								choiceIds = inlineSurveyHelpersModule.toggleChoice(answer, id, var2),
 								choiceTexts = if fFlagInlineSurveyChoiceTextEntry then answer.choiceTexts else nil
 							})
 						end,
-						inputType = if var8 then listItemInputType.Checkbox else listItemInputType.Radio,
-						isChecked = var10[id] == true
+						inputType = if var2 then listItemInputType.Checkbox else listItemInputType.Radio,
+						isChecked = var3[id] == true
 					}
 				})
 				
@@ -71,24 +71,24 @@ return reactModule.memo(function(p0)
 						label = "",
 						text = if answer.choiceTexts ~= nil then "" else answer.choiceTexts[id] or "",
 						width = UDim.new(1, 0),
-						isDisabled = var7,
+						isDisabled = var1,
 						LayoutOrder = i * 2 + 1,
-						onChanged = function(p1)
-							-- upvalues: var7 (copy), var11 (copy), id (ref), onAnswerChanged (copy)
-							if var7 then
+						onChanged = function(p2)
+							-- upvalues: var1 (copy), var4 (copy), id (ref), onAnswerChanged (copy)
+							if var1 then
 								return
 							end
-							local current = var11.current
-							local var14 = if current.choiceTexts ~= nil then {} else table.clone(current.choiceTexts)
-							var14[id] = p1
-							onAnswerChanged({ choiceIds = current.choiceIds, choiceTexts = var14 })
+							local current = var4.current
+							local var5 = if current.choiceTexts ~= nil then {} else table.clone(current.choiceTexts)
+							var5[id] = p2
+							onAnswerChanged({ choiceIds = current.choiceIds, choiceTexts = var5 })
 						end
 					})
 				end
 			end
 			return t
 		end, {
-			choices, answer, var10, var8, var7, onAnswerChanged
+			choices, answer, var3, var2, var1, onAnswerChanged
 		}))
 	})
 end)

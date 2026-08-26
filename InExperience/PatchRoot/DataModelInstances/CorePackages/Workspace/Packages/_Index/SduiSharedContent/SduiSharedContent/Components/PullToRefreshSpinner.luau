@@ -8,70 +8,70 @@ local robloxAppEventsModule = require(parent.RobloxAppEvents)
 local view = foundationModule.View
 local icon = foundationModule.Icon
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), otterModule (ref), robloxAppEventsModule (ref), userInputService (ref), runService (ref), view (ref), icon (ref)
-	local var6, var7 = reactModule.useBinding(0)
-	local var8, var9 = reactModule.useBinding(0)
-	local var10, var11 = reactModule.useBinding(0)
-	local var12, var13 = reactModule.useBinding(0)
+	local var1, var2 = reactModule.useBinding(0)
+	local var3, var4 = reactModule.useBinding(0)
+	local var5, var6 = reactModule.useBinding(0)
+	local var7, var8 = reactModule.useBinding(0)
 	local idle, idle_1 = reactModule.useState("idle")
 	local idle_2 = reactModule.useRef("idle")
-	local var17 = reactModule.useRef(0)
-	local var18 = reactModule.useRef(0)
-	local var19 = reactModule.useRef(nil)
+	local var9 = reactModule.useRef(0)
+	local var10 = reactModule.useRef(0)
+	local var11 = reactModule.useRef(nil)
 	
-	if var19.current == nil then
-		var19.current = otterModule.createSingleMotor(0)
+	if var11.current == nil then
+		var11.current = otterModule.createSingleMotor(0)
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var19 (ref), var9 (ref), idle_2 (ref), idle_1 (ref)
-		local current = var19.current
-		local var21 = current:onStep(function(p1)
-			-- upvalues: var9 (copy)
-			var9(p1)
+		-- upvalues: var11 (ref), var4 (ref), idle_2 (ref), idle_1 (ref)
+		local current = var11.current
+		local var12 = current:onStep(function(p2)
+			-- upvalues: var4 (copy)
+			var4(p2)
 		end)
-		local var22 = current:onComplete(function()
-			-- upvalues: idle_2 (copy), idle_1 (copy), var9 (copy)
+		local var13 = current:onComplete(function()
+			-- upvalues: idle_2 (copy), idle_1 (copy), var4 (copy)
 			if idle_2.current == "tweenBack" then
 				idle_2.current = "idle"
 				idle_1("idle")
-				var9(0)
+				var4(0)
 				
 				return
 			end
 		end)
 		
 		return function()
-			-- upvalues: var21 (ref), var22 (ref), current (ref)
-			var21()
-			var22()
+			-- upvalues: var12 (ref), var13 (ref), current (ref)
+			var12()
+			var13()
 			current:destroy()
 		end
 	end, {})
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), idle_2 (ref), idle_1 (ref), var18 (ref), var19 (ref), otterModule (copy), var9 (ref), var13 (ref)
-		if not p0.onRefresh or idle_2.current ~= "idle" then return end
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), idle_2 (ref), idle_1 (ref), var10 (ref), var11 (ref), otterModule (copy), var4 (ref), var8 (ref)
+		if not p1.onRefresh or idle_2.current ~= "idle" then return end
 		idle_2.current = "refreshing"
 		idle_1("refreshing")
 		
-		if var18.current >= -52 then
-			var19.current:setGoal(otterModule.spring(52, { dampingRatio = 0.735, frequency = 1.95 }))
+		if var10.current >= -52 then
+			var11.current:setGoal(otterModule.spring(52, { dampingRatio = 0.735, frequency = 1.95 }))
 		else
-			var9(52)
+			var4(52)
 		end
 		local function onSettled()
-			-- upvalues: idle_2 (copy), idle_1 (copy), var13 (copy), var19 (copy), otterModule (copy)
+			-- upvalues: idle_2 (copy), idle_1 (copy), var8 (copy), var11 (copy), otterModule (copy)
 			idle_2.current = "tweenBack"
 			idle_1("tweenBack")
-			var13(0)
-			var19.current:setGoal(otterModule.spring(0, {
+			var8(0)
+			var11.current:setGoal(otterModule.spring(0, {
 				dampingRatio = 0.735,
 				frequency = 1.95,
 				startingValue = 52
 			}))
 		end
 		
-		local ok, status = pcall(p0.onRefresh)
+		local ok, status = pcall(p1.onRefresh)
 		
 		if not ok then
 			onSettled()
@@ -83,18 +83,18 @@ return reactModule.memo(function(p0)
 			return
 		end
 		onSettled()
-	end, { p0.onRefresh })
+	end, { p1.onRefresh })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), robloxAppEventsModule (copy), var20 (ref)
-		if p0.appEventName then
+		-- upvalues: p1 (ref), robloxAppEventsModule (copy), var12 (ref)
+		if p1.appEventName then
 			local reloadPageConnection = robloxAppEventsModule.ReloadPage:connect(function(p2)
-				-- upvalues: p0 (copy), var20 (copy)
-				if p2 ~= p0.appEventName then return end
-				local current = p0.scrollingFrameRef.current
+				-- upvalues: p1 (copy), var12 (copy)
+				if p2 ~= p1.appEventName then return end
+				local current = p1.scrollingFrameRef.current
 				
 				if not current then return end
 				if current.CanvasPosition.Y == 0 then
-					var20()
+					var12()
 					
 					return
 				end
@@ -107,26 +107,26 @@ return reactModule.memo(function(p0)
 			end
 		end
 		return nil
-	end, { var20, p0.appEventName, p0.scrollingFrameRef })
+	end, { var12, p1.appEventName, p1.scrollingFrameRef })
 	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var17 (ref), var18 (ref), idle_2 (ref), var20 (ref)
-		local inputBeganConnection = userInputService.InputBegan:Connect(function(p3)
-			-- upvalues: var17 (copy)
-			if p3.UserInputType == Enum.UserInputType.Touch then
-				var17.current += 1
+		-- upvalues: userInputService (copy), var9 (ref), var10 (ref), idle_2 (ref), var12 (ref)
+		local inputBeganConnection = userInputService.InputBegan:Connect(function(p2)
+			-- upvalues: var9 (copy)
+			if p2.UserInputType == Enum.UserInputType.Touch then
+				var9.current += 1
 				
 				return
 			end
 		end)
-		local inputEndedConnection = userInputService.InputEnded:Connect(function(p4)
-			-- upvalues: var17 (copy), var18 (copy), idle_2 (copy), var20 (copy)
-			if p4.UserInputType ~= Enum.UserInputType.Touch then return end
-			if var17.current > 0 then
-				var17.current -= 1
+		local inputEndedConnection = userInputService.InputEnded:Connect(function(p2)
+			-- upvalues: var9 (copy), var10 (copy), idle_2 (copy), var12 (copy)
+			if p2.UserInputType ~= Enum.UserInputType.Touch then return end
+			if var9.current > 0 then
+				var9.current -= 1
 			end
-			if var17.current > 0 then return end
-			if var18.current < -52 and idle_2.current == "idle" then
-				var20()
+			if var9.current > 0 then return end
+			if var10.current < -52 and idle_2.current == "idle" then
+				var12()
 			end
 		end)
 		
@@ -135,46 +135,46 @@ return reactModule.memo(function(p0)
 			inputBeganConnection:Disconnect()
 			inputEndedConnection:Disconnect()
 		end
-	end, { var20 })
+	end, { var12 })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var18 (ref), var7 (ref)
-		local current = p0.scrollingFrameRef and p0.scrollingFrameRef.current
+		-- upvalues: p1 (ref), var10 (ref), var2 (ref)
+		local current = p1.scrollingFrameRef and p1.scrollingFrameRef.current
 		
 		if current then
-			local var28 = current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-				-- upvalues: p0 (copy), current (ref), var18 (copy), var7 (copy)
-				if p0.onRefresh then
+			local var13 = current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
+				-- upvalues: p1 (copy), current (ref), var10 (copy), var2 (copy)
+				if p1.onRefresh then
 					local y = current.CanvasPosition.Y
-					var18.current = y
-					var7(if y < 0 then y else 0)
+					var10.current = y
+					var2(if y < 0 then y else 0)
 					
 					return
 				end
 			end)
 			
 			return function()
-				-- upvalues: var28 (ref)
-				var28:Disconnect()
+				-- upvalues: var13 (ref)
+				var13:Disconnect()
 			end
 		end
 		return nil
-	end, { p0.scrollingFrameRef, p0.onRefresh })
+	end, { p1.scrollingFrameRef, p1.onRefresh })
 	reactModule.useEffect(function()
-		-- upvalues: idle (ref), runService (copy), idle_2 (ref), var11 (ref), var13 (ref)
+		-- upvalues: idle (ref), runService (copy), idle_2 (ref), var6 (ref), var8 (ref)
 		if idle == "idle" then
 			return nil
 		end
-		local var29 = 0
-		local renderSteppedConnection = runService.RenderStepped:Connect(function(p5)
-			-- upvalues: var29 (write), idle_2 (copy), var11 (copy), var13 (copy)
-			var29 += p5
+		local var13 = 0
+		local renderSteppedConnection = runService.RenderStepped:Connect(function(p2)
+			-- upvalues: var13 (write), idle_2 (copy), var6 (copy), var8 (copy)
+			var13 += p2
 			
 			if idle_2.current == "refreshing" then
-				var11(var29 * 540)
+				var6(var13 * 540)
 				
 				return
 			elseif idle_2.current == "tweenBack" then
-				var13(var29)
+				var8(var13)
 			end
 		end)
 		
@@ -188,36 +188,36 @@ return reactModule.memo(function(p0)
 		BackgroundTransparency = 1,
 		ZIndex = 2,
 		Size = reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), var6 (ref), var8 (ref), idle_2 (ref), var17 (ref)
-			return reactModule.joinBindings({ var6, var8 }):map(function(p6)
-				-- upvalues: idle_2 (copy), var17 (copy)
-				local var31 = p6[1]
-				local var32 = p6[2]
+			-- upvalues: reactModule (copy), var1 (ref), var3 (ref), idle_2 (ref), var9 (ref)
+			return reactModule.joinBindings({ var1, var3 }):map(function(p2)
+				-- upvalues: idle_2 (copy), var9 (copy)
+				local var13 = p2[1]
+				local var14 = p2[2]
 				
-				return if idle_2.current == "idle" then if var17.current == 0 or var31 >= 0 then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0, math.min(52, math.abs(var31))) elseif idle_2.current == "refreshing" then UDim2.new(1, 0, 0, math.max(var32, 0)) else UDim2.new(1, 0, 0, var32)
+				return if idle_2.current == "idle" then if var9.current == 0 or var13 >= 0 then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0, math.min(52, math.abs(var13))) elseif idle_2.current == "refreshing" then UDim2.new(1, 0, 0, math.max(var14, 0)) else UDim2.new(1, 0, 0, var14)
 			end)
 		end, {}),
 		GroupTransparency = reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), var6 (ref), var8 (ref), var12 (ref), idle_2 (ref), var17 (ref)
-			return reactModule.joinBindings({ var6, var8, var12 }):map(function(p7)
-				-- upvalues: idle_2 (copy), var17 (copy)
-				local var33 = p7[1]
-				local var34 = p7[2]
+			-- upvalues: reactModule (copy), var1 (ref), var3 (ref), var7 (ref), idle_2 (ref), var9 (ref)
+			return reactModule.joinBindings({ var1, var3, var7 }):map(function(p2)
+				-- upvalues: idle_2 (copy), var9 (copy)
+				local var13 = p2[1]
+				local var14 = p2[2]
 				
-				return if idle_2.current == "idle" then if var17.current == 0 or var33 >= 0 then 1 elseif var33 <= -52 then 0 else 1 - math.abs(var33) * 0.04 elseif idle_2.current == "refreshing" then if var34 < 52 then math.max(0, 1 - var34 / 52) else 0 else math.min(1, 2 * p7[3])
+				return if idle_2.current == "idle" then if var9.current == 0 or var13 >= 0 then 1 elseif var13 <= -52 then 0 else 1 - math.abs(var13) * 0.04 elseif idle_2.current == "refreshing" then if var14 < 52 then math.max(0, 1 - var14 / 52) else 0 else math.min(1, 2 * p2[3])
 			end)
 		end, {}),
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Spinner = reactModule.createElement(icon, {
 			name = "two-arrows-spin-clockwise",
 			Rotation = reactModule.useMemo(function()
-				-- upvalues: reactModule (copy), var6 (ref), var10 (ref), idle_2 (ref)
-				return reactModule.joinBindings({ var6, var10 }):map(function(p8)
+				-- upvalues: reactModule (copy), var1 (ref), var5 (ref), idle_2 (ref)
+				return reactModule.joinBindings({ var1, var5 }):map(function(p2)
 					-- upvalues: idle_2 (copy)
-					local var35 = p8[1]
+					local var13 = p2[1]
 					
-					return if idle_2.current == "idle" then if var35 >= 0 or var35 <= -52 then 0 else math.abs(var35) * 9.6 - 240 elseif idle_2.current == "refreshing" then p8[2] else 0
+					return if idle_2.current == "idle" then if var13 >= 0 or var13 <= -52 then 0 else math.abs(var13) * 9.6 - 240 elseif idle_2.current == "refreshing" then p2[2] else 0
 				end)
 			end, {}),
 			AnchorPoint = Vector2.new(0.5, 0.5),

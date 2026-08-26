@@ -4,10 +4,10 @@ local _ = require(dataHydration.DataHydrationTypes)
 
 return function()
 	-- upvalues: createDataCacheModule (ref)
-	local var2 = createDataCacheModule()
+	local var1 = createDataCacheModule()
 	
 	return {
-		getSongInfo = var2.getItem,
-		updateSongs = var2.updateItems
+		getSongInfo = var1.getItem,
+		updateSongs = var1.updateItems
 	}
 end

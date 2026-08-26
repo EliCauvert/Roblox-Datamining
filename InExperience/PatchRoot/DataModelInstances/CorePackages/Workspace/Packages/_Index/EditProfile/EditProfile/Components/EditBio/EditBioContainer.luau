@@ -8,27 +8,27 @@ local editProfileStoreModule = require(editProfile.Stores.EditProfileStore)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local analyticsServiceV2Module = require(editProfile.Analytics.AnalyticsServiceV2)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalUserId (ref), editProfileStoreModule (ref), useSignalState (ref), reactModule (ref), analyticsServiceV2Module (ref), promiseModule (ref), editBioModule (ref)
-	local var6 = useLocalUserId()
-	local data = useSignalState(editProfileStoreModule.getDescription(var6).data) or ""
-	local var8, var9 = reactModule.useState(data)
-	local var10, var11 = reactModule.useState(nil)
-	local var12 = reactModule.useCallback(function(p1)
-		-- upvalues: var9 (ref), var11 (ref)
-		var9(p1)
-		var11(nil)
+	local var1 = useLocalUserId()
+	local data = useSignalState(editProfileStoreModule.getDescription(var1).data) or ""
+	local var2, var3 = reactModule.useState(data)
+	local var4, var5 = reactModule.useState(nil)
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), var5 (ref)
+		var3(p2)
+		var5(nil)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), data (ref)
-		var9(data)
+		-- upvalues: var3 (ref), data (ref)
+		var3(data)
 	end, { data })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), editProfileStoreModule (copy), var6 (ref), var8 (ref), var11 (ref), analyticsServiceV2Module (copy), promiseModule (copy)
-		p0.registerSaveHandler(function()
-			-- upvalues: editProfileStoreModule (copy), var6 (copy), var8 (copy), var11 (copy), analyticsServiceV2Module (copy), promiseModule (copy)
-			return editProfileStoreModule.updateDescription(var6, var8):catch(function(p2)
-				-- upvalues: var11 (copy), analyticsServiceV2Module (copy), promiseModule (copy)
+		-- upvalues: p1 (ref), editProfileStoreModule (copy), var1 (ref), var2 (ref), var5 (ref), analyticsServiceV2Module (copy), promiseModule (copy)
+		p1.registerSaveHandler(function()
+			-- upvalues: editProfileStoreModule (copy), var1 (copy), var2 (copy), var5 (copy), analyticsServiceV2Module (copy), promiseModule (copy)
+			return editProfileStoreModule.updateDescription(var1, var2):catch(function(p2)
+				-- upvalues: var5 (copy), analyticsServiceV2Module (copy), promiseModule (copy)
 				if not p2 then return end
 				local statusCode = nil
 				
@@ -38,18 +38,18 @@ return function(p0)
 					statusCode = p2.statusCode
 				end
 				if statusCode then
-					var11(statusCode)
+					var5(statusCode)
 					analyticsServiceV2Module.sendError(statusCode)
 				end
 				return promiseModule.reject(p2)
 			end)
 		end)
-	end, { p0.registerSaveHandler, var6, var8 })
+	end, { p1.registerSaveHandler, var1, var2 })
 	
 	return reactModule.createElement(editBioModule, {
-		bioText = var8,
-		onDataChange = var12,
-		errorCode = var10,
-		textBoxRef = p0.textBoxRef
+		bioText = var2,
+		onDataChange = var6,
+		errorCode = var4,
+		textBoxRef = p1.textBoxRef
 	})
 end

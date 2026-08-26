@@ -11,21 +11,21 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.Chat] = function(p0)
+	[enumsModule.ProfileActions.Chat] = function(p1)
 		-- upvalues: enumsModule (ref), buttonVariant (ref), profileTypes (ref), eventNamesModule (ref), enteredChatFromEntryPointModule (ref), chatEntryPointNames (ref), guiService (ref), notificationTypeList (ref)
 		return {
-			text = p0.localized[enumsModule.ProfileActions.Chat],
+			text = p1.localized[enumsModule.ProfileActions.Chat],
 			variant = buttonVariant.Standard,
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p0 (ref), enumsModule (copy), eventNamesModule (copy), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy)
-					if p0.buttonSurface == enumsModule.ButtonSurface.ContextualMenu then
-						p0.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonChat, { buttonSurface = p0.buttonSurface })
+					-- upvalues: p1 (ref), enumsModule (copy), eventNamesModule (copy), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy)
+					if p1.buttonSurface == enumsModule.ButtonSurface.ContextualMenu then
+						p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonChat, { buttonSurface = p1.buttonSurface })
 					else
-						p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonChat, { buttonSurface = p0.buttonSurface })
+						p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonChat, { buttonSurface = p1.buttonSurface })
 					end
-					p0.dispatch(enteredChatFromEntryPointModule(chatEntryPointNames.ProfilePeekView))
-					guiService:BroadcastNotification(p0.profileId, notificationTypeList.LAUNCH_CONVERSATION)
+					p1.dispatch(enteredChatFromEntryPointModule(chatEntryPointNames.ProfilePeekView))
+					guiService:BroadcastNotification(p1.profileId, notificationTypeList.LAUNCH_CONVERSATION)
 				end
 			}
 		}

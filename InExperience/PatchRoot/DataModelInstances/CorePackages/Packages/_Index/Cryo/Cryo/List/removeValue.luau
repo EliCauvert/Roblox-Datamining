@@ -1,10 +1,10 @@
-﻿return function(p0, p1)
+﻿return function(p1, p2)
 	local t = {}
 	local var1 = 1
 	
-	for i = 1, #p0 do
-		if p0[i] ~= p1 then
-			t[var1] = p0[i]
+	for i = 1, #p1 do
+		if p1[i] ~= p2 then
+			t[var1] = p1[i]
 			var1 += 1
 		end
 	end

@@ -6,7 +6,7 @@ local t = {
 	[roundedVariantModule.TopRight] = { topRight = true }
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref), roundedVariantModule (ref), getCornerRadiiModule (ref)
-	return getCornerRadiiModule(t[p0 or roundedVariantModule.Top] or t[roundedVariantModule.Top], p1)
+	return getCornerRadiiModule(t[p1 or roundedVariantModule.Top] or t[roundedVariantModule.Top], p2)
 end

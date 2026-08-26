@@ -12,11 +12,11 @@ local function _()
 	return string.format("%sv1/passkey/finish-ar-preauth-registration", url.AUTH_URL)
 end
 
-local function finishARPreauthPasskeyRegistration(p0, p1)
+local function finishARPreauthPasskeyRegistration(p1, p2)
 	-- upvalues: url (ref), promiseModule (ref), httpService (ref), passkeyConstantsModule (ref)
-	return p0(string.format("%sv1/passkey/finish-ar-preauth-registration", url.AUTH_URL), "POST", { postBody = p1 }):andThen(function(p2)
+	return p1(string.format("%sv1/passkey/finish-ar-preauth-registration", url.AUTH_URL), "POST", { postBody = p2 }):andThen(function(p3)
 		-- upvalues: promiseModule (copy)
-		return promiseModule.resolve(p2)
+		return promiseModule.resolve(p3)
 	end, function(p3)
 		-- upvalues: httpService (copy), promiseModule (copy), passkeyConstantsModule (copy)
 		return promiseModule.reject({
@@ -26,20 +26,20 @@ local function finishARPreauthPasskeyRegistration(p0, p1)
 	end)
 end
 
-return function(p4, p5, p6, p7, p8, p9, p10)
+return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: httpService (ref), base64Module (ref), fFlagEmitPasskeyRegistrationSourceOnFinish (ref), finishARPreauthPasskeyRegistration (ref)
-	local var6 = httpService:JSONDecode(p8)
-	var6.id = base64Module.ToUrlSafeBase64(var6.id)
-	var6.rawId = base64Module.ToUrlSafeBase64(var6.rawId)
-	var6.response.attestationObject = base64Module.ToUrlSafeBase64(var6.response.attestationObject)
-	var6.response.clientDataJSON = base64Module.ToUrlSafeBase64(var6.response.clientDataJSON)
+	local var1 = httpService:JSONDecode(p5)
+	var1.id = base64Module.ToUrlSafeBase64(var1.id)
+	var1.rawId = base64Module.ToUrlSafeBase64(var1.rawId)
+	var1.response.attestationObject = base64Module.ToUrlSafeBase64(var1.response.attestationObject)
+	var1.response.clientDataJSON = base64Module.ToUrlSafeBase64(var1.response.clientDataJSON)
 	
-	return finishARPreauthPasskeyRegistration(p4, httpService:JSONEncode({
-		recoverySession = p5,
-		passkeySessionId = p6,
-		passkeyRegistrationResponse = httpService:JSONEncode(var6),
-		userId = p7,
-		isPostRecovery = p9,
-		source = if fFlagEmitPasskeyRegistrationSourceOnFinish then p10 else nil
+	return finishARPreauthPasskeyRegistration(p1, httpService:JSONEncode({
+		recoverySession = p2,
+		passkeySessionId = p3,
+		passkeyRegistrationResponse = httpService:JSONEncode(var1),
+		userId = p4,
+		isPostRecovery = p6,
+		source = if fFlagEmitPasskeyRegistrationSourceOnFinish then p7 else nil
 	}))
 end

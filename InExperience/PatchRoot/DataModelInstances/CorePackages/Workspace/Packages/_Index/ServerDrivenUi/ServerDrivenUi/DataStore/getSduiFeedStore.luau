@@ -4,13 +4,13 @@ local _ = require(serverDrivenUi.DataStore.SduiFeedStoreTypes)
 local createSduiFeedStoreModule = require(serverDrivenUi.DataStore.createSduiFeedStore)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), createSduiFeedStoreModule (ref)
-	local var3 = t[p0]
+	local var1 = t[p1]
 	
-	if var3 == nil then
-		t[p0] = createSduiFeedStoreModule()
-		var3 = t[p0]
+	if var1 == nil then
+		t[p1] = createSduiFeedStoreModule()
+		var1 = t[p1]
 	end
-	return var3
+	return var1
 end

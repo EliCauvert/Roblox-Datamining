@@ -41,30 +41,30 @@ return function(p1)
 	local var1, var2 = reactModule.useBinding(false)
 	local var3, var4 = reactModule.useBinding(false)
 	local var5 = reactModule.useRef(nil)
-	local var6 = reactOtterModule.useMotor(0, function(p1)
+	local var6 = reactOtterModule.useMotor(0, function(p2)
 		-- upvalues: var5 (ref)
 		local current = var5.current
 		
 		if current then
-			current.CanvasPosition = Vector2.new(p1, 0)
+			current.CanvasPosition = Vector2.new(p2, 0)
 			
 			return
 		end
 	end)
-	local var7 = reactModule.useCallback(dashModule.throttle(function(p1)
+	local var7 = reactModule.useCallback(dashModule.throttle(function(p2)
 		-- upvalues: var2 (ref), var4 (ref)
-		if p1.AbsoluteWindowSize.X == 0 then
+		if p2.AbsoluteWindowSize.X == 0 then
 			return
 		end
-		var2(p1.AbsoluteWindowSize.X + p1.CanvasPosition.X < p1.AbsoluteCanvasSize.X - 1)
-		var4(p1.CanvasPosition.X ~= 0)
+		var2(p2.AbsoluteWindowSize.X + p2.CanvasPosition.X < p2.AbsoluteCanvasSize.X - 1)
+		var4(p2.CanvasPosition.X ~= 0)
 	end, 0.2), {})
-	local var8 = reactModule.useCallback(function(p1)
+	local var8 = reactModule.useCallback(function(p2)
 		-- upvalues: var5 (ref), var6 (ref), otterModule (copy)
 		local current = var5.current
 		
 		if current then
-			var6(otterModule.ease(current.CanvasPosition.X + p1, { duration = 0.2, easingStyle = Enum.EasingStyle.Quad }))
+			var6(otterModule.ease(current.CanvasPosition.X + p2, { duration = 0.2, easingStyle = Enum.EasingStyle.Quad }))
 			
 			return
 		end

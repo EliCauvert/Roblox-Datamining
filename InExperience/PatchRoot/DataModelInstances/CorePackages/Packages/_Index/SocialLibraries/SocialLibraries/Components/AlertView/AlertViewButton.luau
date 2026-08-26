@@ -12,14 +12,14 @@ alertViewButton.defaultProps = {
 	Size = UDim2.new(1, 0, 1, 0)
 }
 
-function alertViewButton.render(p0)
+function alertViewButton.render(p1)
 	-- upvalues: buttonType (ref), roact (ref), button (ref)
 	return roact.createElement(button, {
-		buttonType = if p0.props.secondary then buttonType.Secondary else buttonType.PrimarySystem,
-		size = p0.props.Size,
-		layoutOrder = p0.props.LayoutOrder,
-		text = p0.props.Text,
-		onActivated = p0.props.onActivated
+		buttonType = if p1.props.secondary then buttonType.Secondary else buttonType.PrimarySystem,
+		size = p1.props.Size,
+		layoutOrder = p1.props.LayoutOrder,
+		text = p1.props.Text,
+		onActivated = p1.props.onActivated
 	})
 end
 

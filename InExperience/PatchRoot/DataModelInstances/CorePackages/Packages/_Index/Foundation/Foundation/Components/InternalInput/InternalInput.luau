@@ -27,97 +27,97 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), useTokensModule (ref), useInputVariantsModule (ref), useInputMotionStatesModule (ref), useMotion (ref), controlStateModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), viewModule (ref), withCommonPropsModule (ref), dashModule (ref), inputLabelModule (ref), getInputTextSizeModule (ref), inputHintModule (ref)
-	local var20
-	local var18 = withDefaultsModule(p0, t)
-	local text = var18.label.text
-	local position = var18.label.position or Enum.HorizontalAlignment.Right
+	local var1
+	local var2 = withDefaultsModule(p1, t)
+	local text = var2.label.text
+	local position = var2.label.position or Enum.HorizontalAlignment.Right
 	
 	if typeof(text) == "string" then
-		var20 = #text > 0
-		var20 = nil
+		var1 = #text > 0
+		var1 = nil
 	else
-		var20 = text ~= nil
+		var1 = text ~= nil
 	end
-	local var21 = nil
-	local var22 = nil
+	local var3 = nil
+	local var4 = nil
 	
 	if not flagsModule.FoundationInternalInputBeta then
-		local var23, var24 = reactModule.useState(false)
-		var21 = var23
-		var22 = var24
+		local var5, var6 = reactModule.useState(false)
+		var3 = var5
+		var4 = var6
 	end
-	local var25 = useTokensModule()
-	local isChecked = var18.isChecked or var18.isIndeterminate
-	local var27 = useInputVariantsModule(var25, var18.size, position)
-	local var28 = reactModule.useMemo(function()
-		-- upvalues: var18 (ref), var25 (ref)
+	local var7 = useTokensModule()
+	local isChecked = var2.isChecked or var2.isIndeterminate
+	local var8 = useInputVariantsModule(var7, var2.size, position)
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var7 (ref)
 		return {
-			radius = var18.customVariantProps.cursorRadius or UDim.new(0, 0),
-			offset = var25.Size.Size_200,
-			borderWidth = var25.Stroke.Thicker
+			radius = var2.customVariantProps.cursorRadius or UDim.new(0, 0),
+			offset = var7.Size.Size_200,
+			borderWidth = var7.Stroke.Thicker
 		}
-	end, { var25, var20, var18.customVariantProps.cursorRadius })
-	local var29 = useInputMotionStatesModule(var25, var18.customVariantProps.colors)
-	local var30, var31 = useMotion(var29.Default)
+	end, { var7, var1, var2.customVariantProps.cursorRadius })
+	local var10 = useInputMotionStatesModule(var7, var2.customVariantProps.colors)
+	local var11, var12 = useMotion(var10.Default)
 	reactModule.useEffect(function()
-		-- upvalues: flagsModule (copy), isChecked (ref), var31 (ref), var29 (ref), var21 (write)
+		-- upvalues: flagsModule (copy), isChecked (ref), var12 (ref), var10 (ref), var3 (write)
 		if flagsModule.FoundationInternalInputBeta then
 			if isChecked then
-				var31(var29.Checked)
+				var12(var10.Checked)
 				
 				return
 			end
-			var31(var29.Default)
+			var12(var10.Default)
 			
 			return
 		elseif isChecked then
-			var31(var29.Checked)
+			var12(var10.Checked)
 			
 			return
-		elseif var21 then
-			var31(var29.Hover)
+		elseif var3 then
+			var12(var10.Hover)
 			
 			return
 		end
-		var31(var29.Default)
-	end, if flagsModule.FoundationInternalInputBeta then { isChecked, var29 } else { isChecked, var21, var29 })
-	local var32 = if flagsModule.FoundationInternalInputBeta then nil else reactModule.useCallback(function(p2)
-		-- upvalues: var22 (write), controlStateModule (copy)
-		var22(p2 == controlStateModule.Hover)
+		var12(var10.Default)
+	end, if flagsModule.FoundationInternalInputBeta then { isChecked, var10 } else { isChecked, var3, var10 })
+	local var13 = if flagsModule.FoundationInternalInputBeta then nil else reactModule.useCallback(function(p3)
+		-- upvalues: var4 (write), controlStateModule (copy)
+		var4(p3 == controlStateModule.Hover)
 	end, {})
-	local var33 = reactModule.useCallback(function()
-		-- upvalues: var18 (ref)
-		if var18.isDisabled then
+	local var14 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref)
+		if var2.isDisabled then
 			return
 		end
-		var18.onActivated(not var18.isChecked)
-	end, { var18.isDisabled, var18.isChecked, var18.onActivated })
+		var2.onActivated(not var2.isChecked)
+	end, { var2.isDisabled, var2.isChecked, var2.onActivated })
 	local t_1 = {
-		Selectable = if var18.isDisabled then false else var18.Selectable,
-		NextSelectionUp = var18.NextSelectionUp,
-		NextSelectionDown = var18.NextSelectionDown,
-		NextSelectionLeft = var18.NextSelectionLeft,
-		NextSelectionRight = var18.NextSelectionRight
+		Selectable = if var2.isDisabled then false else var2.Selectable,
+		NextSelectionUp = var2.NextSelectionUp,
+		NextSelectionDown = var2.NextSelectionDown,
+		NextSelectionLeft = var2.NextSelectionLeft,
+		NextSelectionRight = var2.NextSelectionRight
 	}
 	local t_2 = {
-		Active = not var18.isDisabled,
-		GroupTransparency = if var18.isDisabled then constantsModule.DISABLED_TRANSPARENCY else 0,
-		onActivated = var33,
-		onStateChanged = if flagsModule.FoundationInternalInputBeta then nil else var32,
+		Active = not var2.isDisabled,
+		GroupTransparency = if var2.isDisabled then constantsModule.DISABLED_TRANSPARENCY else 0,
+		onActivated = var14,
+		onStateChanged = if flagsModule.FoundationInternalInputBeta then nil else var13,
 		stateLayer = { affordance = stateLayerAffordanceModule.None },
-		selection = if var20 then { Selectable = false } else t_1,
-		cursor = if var20 then nil else var28,
-		isDisabled = var18.isDisabled,
-		ref = p1
+		selection = if var1 then { Selectable = false } else t_1,
+		cursor = if var1 then nil else var9,
+		isDisabled = var2.isDisabled,
+		ref = p2
 	}
-	local var36 = if var18.customVariantProps.stroke and var18.customVariantProps.stroke.thickness ~= nil then var18.customVariantProps.stroke.thickness else var27.input.stroke.thickness
+	local var15 = if var2.customVariantProps.stroke and var2.customVariantProps.stroke.thickness ~= nil then var2.customVariantProps.stroke.thickness else var8.input.stroke.thickness
 	local t_3 = {
-		tag = var18.customVariantProps.tag,
-		Size = var18.customVariantProps.size - UDim2.fromOffset(var36, var36),
-		backgroundStyle = var30.backgroundStyle,
-		onActivated = var33,
+		tag = var2.customVariantProps.tag,
+		Size = var2.customVariantProps.size - UDim2.fromOffset(var15, var15),
+		backgroundStyle = var11.backgroundStyle,
+		onActivated = var14,
 		stateLayer = if flagsModule.FoundationInternalInputBeta then if flagsModule.FoundationInternalInputBeta then reactModule.useMemo(function()
 			-- upvalues: stateLayerAffordanceModule (copy)
 			return {
@@ -127,55 +127,55 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 			}
 		end, {}) else nil else { affordance = stateLayerAffordanceModule.Background },
 		stroke = {
-			Color = var30.strokeStyle:map(function(p3)
+			Color = var11.strokeStyle:map(function(p3)
 				return p3.Color3
 			end),
-			Transparency = var30.strokeStyle:map(function(p4)
-				-- upvalues: var18 (ref), var20 (ref), constantsModule (copy)
-				return if var18.isDisabled and not var20 then constantsModule.DISABLED_TRANSPARENCY else p4.Transparency
+			Transparency = var11.strokeStyle:map(function(p3)
+				-- upvalues: var2 (ref), var1 (ref), constantsModule (copy)
+				return if var2.isDisabled and not var1 then constantsModule.DISABLED_TRANSPARENCY else p3.Transparency
 			end),
-			Thickness = var36,
+			Thickness = var15,
 			BorderStrokePosition = Enum.BorderStrokePosition.Inner
 		},
 		selection = t_1,
-		cursor = if var20 then var28 else nil,
-		LayoutOrder = if var20 then if position == Enum.HorizontalAlignment.Left then 1 else -1 else nil,
-		testId = `{var18.testId}--container`
+		cursor = if var1 then var9 else nil,
+		LayoutOrder = if var1 then if position == Enum.HorizontalAlignment.Left then 1 else -1 else nil,
+		testId = `{var2.testId}--container`
 	}
 	
-	if not var20 then
-		return reactModule.createElement(viewModule, withCommonPropsModule(var18, dashModule.union(t_2, t_3)), var18.children)
+	if not var1 then
+		return reactModule.createElement(viewModule, withCommonPropsModule(var2, dashModule.union(t_2, t_3)), var2.children)
 	end
-	local var38 = if flagsModule.FoundationInternalInputBeta then if typeof(text) == "string" then reactModule.createElement(inputLabelModule, {
+	local var16 = if flagsModule.FoundationInternalInputBeta then if typeof(text) == "string" then reactModule.createElement(inputLabelModule, {
 		Text = text,
-		textStyle = var30.labelStyle,
-		size = getInputTextSizeModule(var18.size),
-		testId = `{var18.testId}--label`
+		textStyle = var11.labelStyle,
+		size = getInputTextSizeModule(var2.size),
+		testId = `{var2.testId}--label`
 	}) else text else nil
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var18, dashModule.union({
-		tag = var27.container.tag,
+	return reactModule.createElement(viewModule, withCommonPropsModule(var2, dashModule.union({
+		tag = var8.container.tag,
 		padding = {
-			top = var27.container.padding,
-			bottom = var27.container.padding,
-			left = if position == Enum.HorizontalAlignment.Right then var27.container.padding else nil,
-			right = if position == Enum.HorizontalAlignment.Left then var27.container.padding else nil
+			top = var8.container.padding,
+			bottom = var8.container.padding,
+			left = if position == Enum.HorizontalAlignment.Right then var8.container.padding else nil,
+			right = if position == Enum.HorizontalAlignment.Left then var8.container.padding else nil
 		}
 	}, t_2)), {
-		Input = reactModule.createElement(viewModule, t_3, var18.children),
-		InputLabel = if not flagsModule.FoundationInternalInputBeta then if var18.label.hint == nil or var18.label.hint == "" then var38 else reactModule.createElement(viewModule, { tag = "col gap-xxsmall auto-xy" }, {
-			InputLabel = var38,
+		Input = reactModule.createElement(viewModule, t_3, var2.children),
+		InputLabel = if not flagsModule.FoundationInternalInputBeta then if var2.label.hint == nil or var2.label.hint == "" then var16 else reactModule.createElement(viewModule, { tag = "col gap-xxsmall auto-xy" }, {
+			InputLabel = var16,
 			Hint = reactModule.createElement(inputHintModule, {
 				LayoutOrder = 2,
-				text = var18.label.hint,
-				size = getInputTextSizeModule(var18.size),
-				testId = `{var18.testId}--hint`
+				text = var2.label.hint,
+				size = getInputTextSizeModule(var2.size),
+				testId = `{var2.testId}--hint`
 			})
 		}) elseif typeof(text) == "string" then reactModule.createElement(inputLabelModule, {
 			Text = text,
-			textStyle = var30.labelStyle,
-			size = getInputTextSizeModule(var18.size),
-			testId = `{var18.testId}--label`
+			textStyle = var11.labelStyle,
+			size = getInputTextSizeModule(var2.size),
+			testId = `{var2.testId}--label`
 		}) else text
 	})
 end))

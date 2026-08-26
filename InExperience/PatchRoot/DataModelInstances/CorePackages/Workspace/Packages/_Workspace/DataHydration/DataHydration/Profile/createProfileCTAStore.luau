@@ -14,24 +14,24 @@ end
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), cryoModule (ref), requestsModule (ref)
-	local var5 = createDataCacheModule()
-	local var6 = createDataResolverModule({
+	local var1 = createDataCacheModule()
+	local var2 = createDataResolverModule({
 		requestBatchSize = 25,
-		cache = var5,
+		cache = var1,
 		queueProcessDelaySec = game:GetFastInt("ProfileCTAStoreProcessDelaySec"),
-		fetchFn = function(p0)
+		fetchFn = function(p1)
 			-- upvalues: cryoModule (copy), requestsModule (copy)
-			local var7 = cryoModule.Dictionary.keys(p0)
+			local var3 = cryoModule.Dictionary.keys(p1)
 			
-			return requestsModule.GetUserProfileCTA(var7):andThen(function(p1)
-				-- upvalues: var7 (ref)
+			return requestsModule.GetUserProfileCTA(var3):andThen(function(p2)
+				-- upvalues: var3 (ref)
 				local t = {}
 				
-				if p1.responseBody and p1.responseBody.profiles then
-					for i, v in var7 do
-						local var9 = tostring(v)
-						local var10 = p1.responseBody.profiles[var9]
-						t[var9] = var10 and (var10.components and (var10.components.Actions or {}))
+				if p2.responseBody and p2.responseBody.profiles then
+					for i, v in var3 do
+						local var4 = tostring(v)
+						local var5 = p2.responseBody.profiles[var4]
+						t[var4] = var5 and (var5.components and (var5.components.Actions or {}))
 					end
 				end
 				return t
@@ -43,44 +43,44 @@ return function()
 	
 	return {
 		getCTA = function(p2, p3)
-			-- upvalues: var6 (ref)
-			local var11 = nil
+			-- upvalues: var2 (ref)
+			local var4 = nil
 			
 			if p3 ~= nil then
-				local var12 = p3 == true
+				local var5 = p3 == true
 				
-				var11 = function(_)
-					-- upvalues: var12 (ref)
-					return var12
+				var4 = function(_)
+					-- upvalues: var5 (ref)
+					return var5
 				end
 			end
-			return var6.getAndFetchItem(p2, var11)
+			return var2.getAndFetchItem(p2, var4)
 		end,
-		getBatchCTAs = function(p4, p5)
-			-- upvalues: var6 (ref)
-			local var13 = nil
+		getBatchCTAs = function(p2, p3)
+			-- upvalues: var2 (ref)
+			local var4 = nil
 			
-			if p5 then
-				local var14 = 0
+			if p3 then
+				local var5 = 0
 				
-				var13 = function(_)
-					-- upvalues: var14 (write), p4 (ref), p5 (ref)
-					var14 += 1
-					local var15 = p4[var14]
+				var4 = function(_)
+					-- upvalues: var5 (write), p2 (ref), p3 (ref)
+					var5 += 1
+					local var6 = p2[var5]
 					
-					return if var15 then p5[var15] == true else false
+					return if var6 then p3[var6] == true else false
 				end
 			end
-			return var6.getAndFetchItems(p4, var13)
+			return var2.getAndFetchItems(p2, var4)
 		end,
 		clear = function()
-			-- upvalues: var5 (ref), var6 (ref)
-			var5.clear()
-			var6.clear()
+			-- upvalues: var1 (ref), var2 (ref)
+			var1.clear()
+			var2.clear()
 		end,
 		dispose = function()
-			-- upvalues: var6 (ref)
-			var6.dispose()
+			-- upvalues: var2 (ref)
+			var2.dispose()
 		end
 	}
 end

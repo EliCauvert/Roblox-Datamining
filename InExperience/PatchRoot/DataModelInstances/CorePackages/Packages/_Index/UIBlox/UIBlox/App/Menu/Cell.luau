@@ -76,128 +76,128 @@ cell.defaultProps = {
 	textPadding = { left = 12, right = 12 }
 }
 
-function cell.init(p0)
+function cell.init(p1)
 	-- upvalues: controlStateModule (ref)
-	p0.state = {
+	p1.state = {
 		keyLabelWidth = 0,
 		controlState = controlStateModule.Default
 	}
 	
-	function p0.keyLabelSizeChanged(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ keyLabelWidth = p1.AbsoluteSize.X })
+	function p0.keyLabelSizeChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ keyLabelWidth = p2.AbsoluteSize.X })
 	end
 	
 	function p0.setControlState(p2)
-		-- upvalues: p0 (ref)
-		p0:setState({ controlState = p2 })
+		-- upvalues: p1 (ref)
+		p1:setState({ controlState = p2 })
 	end
 	
-	function p0.onStateChanged(_, p3)
-		-- upvalues: p0 (ref)
-		p0.setControlState(p3)
+	function p0.onStateChanged(_, p2)
+		-- upvalues: p1 (ref)
+		p1.setControlState(p2)
 	end
 end
 
-function cell.getImageProperties(p4)
+function cell.getImageProperties(p1)
 	-- upvalues: circle17 (ref), imagesModule (ref)
 	local imageRectSize = circle17.ImageRectSize
 	local imageRectOffset = circle17.ImageRectOffset
-	local var16 = 8 * imagesModule.ImagesResolutionScale
-	local var17 = 8 * imagesModule.ImagesResolutionScale
-	local rect = Rect.new(var16, var17, imageRectSize.x - var16, imageRectSize.y - var17)
+	local var1 = 8 * imagesModule.ImagesResolutionScale
+	local var2 = 8 * imagesModule.ImagesResolutionScale
+	local rect = Rect.new(var1, var2, imageRectSize.x - var1, imageRectSize.y - var2)
 	local x = imageRectSize.X
 	local floored = math.floor(x / 2)
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	
-	if p4.props.hasRoundTop and p4.props.hasRoundBottom then
+	if p1.props.hasRoundTop and p1.props.hasRoundBottom then
 		return imageRectSize, imageRectOffset, rect
-	elseif p4.props.hasRoundTop then
+	elseif p1.props.hasRoundTop then
 		return Vector2.new(x, floored), imageRectOffset, Rect.new(floored - 1, floored - 1, floored + 1, floored)
-	elseif p4.props.hasRoundBottom then
+	elseif p1.props.hasRoundBottom then
 		return Vector2.new(x, floored), imageRectOffset + Vector2.new(0, floored), Rect.new(floored - 1, 0, floored + 1, 1)
 	end
 	return Vector2.new(1, 1), imageRectOffset + Vector2.new(floored, floored), Rect.new(0, 0, 0, 0)
 end
 
-function cell.renderRoundedBackground(value, p5, p6)
+function cell.renderRoundedBackground(value, p1, p2)
 	-- upvalues: roactModule (ref), roundedFrameModule (ref)
 	local uDim = UDim.new(0, value.props.borderCornerRadius)
 	
 	return roactModule.createElement(roundedFrameModule, {
-		zIndex = p5,
-		background = p6,
+		zIndex = p1,
+		background = p2,
 		topCornerRadius = if value.props.hasRoundTop then uDim else nil,
 		bottomCornerRadius = if value.props.hasRoundBottom then uDim else nil
 	})
 end
 
-function cell.renderWithSelectionCursor(p7, _)
+function cell.renderWithSelectionCursor(p1, _)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), divideTransparencyModule (ref), object (ref), roactModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), keyLabelModule (ref), imagesModule (ref), interactableModule (ref)
-	return withStyleModule(function(p8)
-		-- upvalues: p7 (ref), controlStateModule (copy), divideTransparencyModule (copy), object (copy), roactModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), keyLabelModule (copy), imagesModule (copy), interactableModule (copy)
-		local theme = p8.Theme
-		local font = p8.Font
-		local settings = p8.Settings
-		local var21 = (if p7.props.icon then p7.props.iconPaddingLeft else p7.props.textOnlyPadding) + p7.props.leftPaddingOffset
-		local var22 = 0
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), controlStateModule (copy), divideTransparencyModule (copy), object (copy), roactModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), keyLabelModule (copy), imagesModule (copy), interactableModule (copy)
+		local theme = p2.Theme
+		local font = p2.Font
+		local settings = p2.Settings
+		local var1 = (if p1.props.icon then p1.props.iconPaddingLeft else p1.props.textOnlyPadding) + p1.props.leftPaddingOffset
+		local var2 = 0
 		
-		if p7.props.keyCodeLabel then
-			var22 = p7.props.keyLabelPaddingRight
-		elseif p7.props.selected then
-			var22 = p7.props.selectedIconPaddingRight
+		if p1.props.keyCodeLabel then
+			var2 = p1.props.keyLabelPaddingRight
+		elseif p1.props.selected then
+			var2 = p1.props.selectedIconPaddingRight
 		end
 		local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
 		
-		if p7.state.controlState == controlStateModule.Pressed then
+		if p1.state.controlState == controlStateModule.Pressed then
 			t = theme.BackgroundOnPress
-		elseif p7.state.controlState == controlStateModule.Hover then
+		elseif p1.state.controlState == controlStateModule.Hover then
 			t = theme.BackgroundOnHover
 		end
-		local imageProperties, imageProperties_1, imageProperties_2 = p7:getImageProperties()
-		local var27 = 0
-		local var28 = true
+		local imageProperties, imageProperties_1, imageProperties_2 = p1:getImageProperties()
+		local var3 = 0
+		local var4 = true
 		
-		if p7.props.rightSideGadgetSize == nil then
-			if p7.props.icon then
-				var28 = false
-				var21 = p7.props.iconPaddingLeft
-				var27 = p7.props.iconPaddingLeft + p7.props.iconSize
+		if p1.props.rightSideGadgetSize == nil then
+			if p1.props.icon then
+				var4 = false
+				var1 = p1.props.iconPaddingLeft
+				var3 = p1.props.iconPaddingLeft + p1.props.iconSize
 			end
-			if p7.props.selected then
-				var28 = false
-				var27 = var27 + p7.props.selectedIconSize + p7.props.selectedIconPaddingRight
+			if p1.props.selected then
+				var4 = false
+				var3 = var3 + p1.props.selectedIconSize + p1.props.selectedIconPaddingRight
 			end
-			if p7.props.keyCodeLabel then
-				var28 = false
-				var27 = var27 + p7.props.keyLabelPaddingRight + p7.state.keyLabelWidth
+			if p1.props.keyCodeLabel then
+				var4 = false
+				var3 = var3 + p1.props.keyLabelPaddingRight + p1.state.keyLabelWidth
 			end
-			var27 = if var28 then var27 + p7.props.textOnlyPadding * 2 else var27 + p7.props.textPadding.left + p7.props.textPadding.right
+			var3 = if var4 then var3 + p1.props.textOnlyPadding * 2 else var3 + p1.props.textPadding.left + p1.props.textPadding.right
 		else
-			var27 = p7.props.rightSideGadgetSize.X + p7.props.iconPaddingLeft + p7.props.iconSize + p7.props.textPadding.left
+			var3 = p1.props.rightSideGadgetSize.X + p1.props.iconPaddingLeft + p1.props.iconSize + p1.props.textPadding.left
 		end
-		local var29 = if p7.props.textColorOverride then {
-			Color = p7.props.textColorOverride,
+		local var5 = if p1.props.textColorOverride then {
+			Color = p1.props.textColorOverride,
 			Transparency = theme.TextEmphasis.Transparency
 		} else theme.TextEmphasis
 		
-		if p7.state.controlState == controlStateModule.Pressed or p7.props.disabled then
-			var29 = {
-				Color = var29.Color,
+		if p1.state.controlState == controlStateModule.Pressed or p1.props.disabled then
+			var5 = {
+				Color = var5.Color,
 				Transparency = divideTransparencyModule(theme.TextEmphasis.Transparency, 2)
 			}
 		end
 		local backgroundUIDefault = theme.BackgroundUIDefault
-		local var30 = object.assign({}, {
+		local var6 = object.assign({}, {
 			Color = backgroundUIDefault.Color,
 			Transparency = backgroundUIDefault.Transparency
-		}, p7.props.background)
-		var30.Transparency *= settings.PreferredTransparency
+		}, p1.props.background)
+		var6.Transparency *= settings.PreferredTransparency
 		
 		return roactModule.createElement(interactableModule, {
-			Size = UDim2.new(1, 0, 0, p7.props.elementHeight),
+			Size = UDim2.new(1, 0, 0, p1.props.elementHeight),
 			BackgroundTransparency = 1,
 			Image = nil,
 			ScaleType = Enum.ScaleType.Slice,
@@ -206,53 +206,53 @@ function cell.renderWithSelectionCursor(p7, _)
 			ImageRectOffset = imageProperties_1,
 			SliceScale = 1 / imagesModule.ImagesResolutionScale,
 			ImageTransparency = 1,
-			ImageColor3 = var30.Color,
+			ImageColor3 = var6.Color,
 			AutoButtonColor = false,
-			LayoutOrder = p7.props.layoutOrder,
+			LayoutOrder = p1.props.layoutOrder,
 			BorderSizePixel = 0,
-			[roactModule.Ref] = p7.props.setButtonRef,
-			SelectionImageObject = p7.props.selectionCursor,
-			SelectionOrder = p7.props.selectionOrder,
-			onStateChanged = p7.onStateChanged,
-			[roactModule.Event.Activated] = p7.props.onActivated,
-			isDisabled = p7.props.disabled
+			[roactModule.Ref] = p1.props.setButtonRef,
+			SelectionImageObject = p1.props.selectionCursor,
+			SelectionOrder = p1.props.selectionOrder,
+			onStateChanged = p1.onStateChanged,
+			[roactModule.Event.Activated] = p1.props.onActivated,
+			isDisabled = p1.props.disabled
 		}, {
-			Background = if p7.props.isElementBackgroundVisible then p7:renderRoundedBackground(-1, var30) else nil,
+			Background = if p1.props.isElementBackgroundVisible then p1:renderRoundedBackground(-1, var6) else nil,
 			Divider = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				BackgroundColor3 = theme.Divider.Color,
 				BackgroundTransparency = theme.Divider.Transparency,
-				Size = UDim2.new(1, -p7.props.dividerOffset, 0, p7.props.dividerSize),
-				Position = UDim2.new(0, p7.props.dividerOffset, 1, 0),
+				Size = UDim2.new(1, -p1.props.dividerOffset, 0, p1.props.dividerSize),
+				Position = UDim2.new(0, p1.props.dividerOffset, 1, 0),
 				AnchorPoint = Vector2.new(0, 1),
-				Visible = p7.props.hasDivider
+				Visible = p1.props.hasDivider
 			}),
-			StateOverlay = p7:renderRoundedBackground(2, t),
+			StateOverlay = p1:renderRoundedBackground(2, t),
 			LeftAlignedContent = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 				Layout = roactModule.createElement("UIListLayout", {
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					FillDirection = Enum.FillDirection.Horizontal,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, p7.props.textPadding.left)
+					Padding = UDim.new(0, p1.props.textPadding.left)
 				}),
-				LeftPadding = roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var21) }),
-				Icon = p7.props.icon and roactModule.createElement(imageSetComponentModule.Label, {
+				LeftPadding = roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var1) }),
+				Icon = p1.props.icon and roactModule.createElement(imageSetComponentModule.Label, {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Image = p7.props.icon,
-					Size = UDim2.fromOffset(p7.props.iconSize, p7.props.iconSize),
-					ImageColor3 = p7.props.iconColorOverride or theme.IconEmphasis.Color,
-					ImageTransparency = divideTransparencyModule(theme.IconEmphasis.Transparency, if p7.props.disabled then 2 else 1)
+					Image = p1.props.icon,
+					Size = UDim2.fromOffset(p1.props.iconSize, p1.props.iconSize),
+					ImageColor3 = p1.props.iconColorOverride or theme.IconEmphasis.Color,
+					ImageTransparency = divideTransparencyModule(theme.IconEmphasis.Transparency, if p1.props.disabled then 2 else 1)
 				}),
 				Text = roactModule.createElement(genericTextLabelModule, {
 					BackgroundTransparency = 1,
 					TextWrapped = false,
 					LayoutOrder = 2,
-					fontStyle = p7.props.fontStyle or font.Header2,
-					colorStyle = var29,
-					Size = UDim2.new(1, -var27, 1, 0),
-					Text = p7.props.text,
+					fontStyle = p1.props.fontStyle or font.Header2,
+					colorStyle = var5,
+					Size = UDim2.new(1, -var3, 1, 0),
+					Text = p1.props.text,
 					TextTruncate = Enum.TextTruncate.AtEnd,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
@@ -263,28 +263,28 @@ function cell.renderWithSelectionCursor(p7, _)
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					FillDirection = Enum.FillDirection.Horizontal,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, p7.props.textPadding.right)
+					Padding = UDim.new(0, p1.props.textPadding.right)
 				}),
-				RightPadding = roactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var22) }),
-				RightSideContent = p7.props.renderRightSideGadget and (p7.props.rightSideGadgetSize and (roactModule.createElement("Frame", {
+				RightPadding = roactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var2) }),
+				RightSideContent = p1.props.renderRightSideGadget and (p1.props.rightSideGadgetSize and (roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					LayoutOrder = 3,
-					Size = UDim2.fromOffset(p7.props.rightSideGadgetSize.X, p7.props.rightSideGadgetSize.Y)
-				}, p7.props.renderRightSideGadget()) or roactModule.createFragment({
-					KeyLabel = p7.props.keyCodeLabel and roactModule.createElement(keyLabelModule, {
-						keyCode = p7.props.keyCodeLabel,
+					Size = UDim2.fromOffset(p1.props.rightSideGadgetSize.X, p1.props.rightSideGadgetSize.Y)
+				}, p1.props.renderRightSideGadget()) or roactModule.createFragment({
+					KeyLabel = p1.props.keyCodeLabel and roactModule.createElement(keyLabelModule, {
+						keyCode = p1.props.keyCodeLabel,
 						LayoutOrder = 2,
-						[roactModule.Change.AbsoluteSize] = p7.keyLabelSizeChanged
+						[roactModule.Change.AbsoluteSize] = p1.keyLabelSizeChanged
 					}),
 					SelectedIcon = roactModule.createElement(imageSetComponentModule.Label, {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
 						Image = imagesModule["icons/status/success_small"],
-						Size = UDim2.fromOffset(p7.props.selectedIconSize, p7.props.selectedIconSize),
+						Size = UDim2.fromOffset(p1.props.selectedIconSize, p1.props.selectedIconSize),
 						ImageColor3 = theme.IconEmphasis.Color,
 						ImageTransparency = theme.IconEmphasis.Transparency,
-						Visible = p7.props.selected
+						Visible = p1.props.selected
 					})
 				})))
 			})
@@ -292,11 +292,11 @@ function cell.renderWithSelectionCursor(p7, _)
 	end)
 end
 
-function cell.render(p9)
+function cell.render(p1)
 	-- upvalues: withSelectionCursorProviderModule (ref)
-	return withSelectionCursorProviderModule(function(p10)
-		-- upvalues: p9 (ref)
-		return p9:renderWithSelectionCursor(p10)
+	return withSelectionCursorProviderModule(function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 

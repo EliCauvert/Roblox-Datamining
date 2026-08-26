@@ -57,159 +57,159 @@ end
 for i_1, v in pairs(t.CharacterPartNames.R15) do
 	t.CharacterPartNames.All[i_1] = true
 end
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: insertService (ref)
-	if p1 == nil then
-		p1 = true
+	if p2 == nil then
+		p2 = true
 	end
-	local var3 = insertService:LoadLocalAsset(p0)
-	local humanoid = var3:FindFirstChild("Humanoid")
+	local var1 = insertService:LoadLocalAsset(p1)
+	local humanoid = var1:FindFirstChild("Humanoid")
 	assert(humanoid, "Assert Humanoid is not nil to silence type checker")
 	humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 	
-	if p1 then
-		var3.Parent = workspace
+	if p2 then
+		var1.Parent = workspace
 	end
-	return var3
+	return var1
 end
 
-function t.LoadR15Mannequin(p2)
+function t.LoadR15Mannequin(p1)
 	-- upvalues: insertService (ref)
-	local var5 = p2
+	local var1 = p1
 	
-	if var5 == nil then
-		var5 = true
+	if var1 == nil then
+		var1 = true
 	end
-	local var6 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/R15.rbxm")
-	local humanoid = var6:FindFirstChild("Humanoid")
+	local var2 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/R15.rbxm")
+	local humanoid = var2:FindFirstChild("Humanoid")
 	assert(humanoid, "Assert Humanoid is not nil to silence type checker")
 	humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 	
-	if var5 then
-		var6.Parent = workspace
+	if var1 then
+		var2.Parent = workspace
 	end
-	return var6
+	return var2
 end
 
-function t.LoadR6Mannequin(p3)
+function t.LoadR6Mannequin(p1)
 	-- upvalues: insertService (ref)
-	local var8 = p3
+	local var1 = p1
 	
-	if var8 == nil then
-		var8 = true
+	if var1 == nil then
+		var1 = true
 	end
-	local var9 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/R6.rbxm")
-	local humanoid = var9:FindFirstChild("Humanoid")
+	local var2 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/R6.rbxm")
+	local humanoid = var2:FindFirstChild("Humanoid")
 	assert(humanoid, "Assert Humanoid is not nil to silence type checker")
 	humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 	
-	if var8 then
-		var9.Parent = workspace
+	if var1 then
+		var2.Parent = workspace
 	end
-	return var9
+	return var2
 end
 
-function t.LoadRthroMannequin(p4)
+function t.LoadRthroMannequin(p1)
 	-- upvalues: insertService (ref)
-	local var11 = p4
+	local var1 = p1
 	
-	if var11 == nil then
-		var11 = true
+	if var1 == nil then
+		var1 = true
 	end
-	local var12 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/Rthro.rbxm")
-	local humanoid = var12:FindFirstChild("Humanoid")
+	local var2 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/Rthro.rbxm")
+	local humanoid = var2:FindFirstChild("Humanoid")
 	assert(humanoid, "Assert Humanoid is not nil to silence type checker")
 	humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 	
-	if var11 then
-		var12.Parent = workspace
+	if var1 then
+		var2.Parent = workspace
 	end
-	return var12
+	return var2
 end
 
-function t.LoadR15PlusMannequin(p5)
+function t.LoadR15PlusMannequin(p1)
 	-- upvalues: insertService (ref)
 	if game:GetEngineFeature("R15PlusMannequinContent") then
-		local var14 = p5
+		local var1 = p1
 		
-		if var14 == nil then
-			var14 = true
+		if var1 == nil then
+			var1 = true
 		end
-		local var15 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/R15-plus.rbxm")
-		local humanoid = var15:FindFirstChild("Humanoid")
+		local var2 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/R15-plus.rbxm")
+		local humanoid = var2:FindFirstChild("Humanoid")
 		assert(humanoid, "Assert Humanoid is not nil to silence type checker")
 		humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 		
-		if var14 then
-			var15.Parent = workspace
+		if var1 then
+			var2.Parent = workspace
 		end
-		return var15
+		return var2
 	else
-		local var17 = p5
+		local var3 = p1
 		
-		if var17 == nil then
-			var17 = true
+		if var3 == nil then
+			var3 = true
 		end
-		local var18 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/R15.rbxm")
-		local humanoid = var18:FindFirstChild("Humanoid")
+		local var4 = insertService:LoadLocalAsset("rbxasset://models/Thumbnails/Mannequins/R15.rbxm")
+		local humanoid = var4:FindFirstChild("Humanoid")
 		assert(humanoid, "Assert Humanoid is not nil to silence type checker")
 		humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 		
-		if var17 then
-			var18.Parent = workspace
+		if var3 then
+			var4.Parent = workspace
 		end
-		return var18
+		return var4
 	end
 end
 
-function t.LoadMannequinForScaleType(p6, p7)
+function t.LoadMannequinForScaleType(p1, p2)
 	-- upvalues: t (ref)
-	return if p6 == "Classic" then t.LoadR15Mannequin(p7) else t.LoadRthroMannequin(p7)
+	return if p1 == "Classic" then t.LoadR15Mannequin(p2) else t.LoadRthroMannequin(p2)
 end
 
-function t.AssertObjectsFormat(p8)
+function t.AssertObjectsFormat(p1)
 	-- upvalues: t_1 (ref), t (ref)
-	local var20 = false
+	local var1 = false
 	
-	for i, v in p8 do
+	for i, v in p1 do
 		assert(v:IsA("Folder"), "object should always be a Folder")
 		
 		if t_1[v.Name] then
-			var20 = true
+			var1 = true
 			
 			for i_1, v_1 in v:GetChildren() do
 				assert(t.CharacterPartNames.All[v_1.Name], string.format("Name of %s of Folder %s does not exist in CharacterParts", v_1.Name, v.Name))
 			end
 		end
 	end
-	assert(var20, "objects does not have at least one of R15ArtistIntent, R15, and R6 folders")
+	assert(var1, "objects does not have at least one of R15ArtistIntent, R15, and R6 folders")
 end
 
-function t.CreateBodyPartMannequin(p9, p10)
+function t.CreateBodyPartMannequin(p2, p3)
 	-- upvalues: t (ref)
-	local var21 = false
-	local var22 = false
-	local var23 = "Classic"
-	t.AssertObjectsFormat(p9)
+	local var2 = false
+	local var3 = false
+	local var4 = "Classic"
+	t.AssertObjectsFormat(p2)
 	
-	for i, v in p9 do
+	for i, v in p2 do
 		if v.Name == "R15" or v.Name == "R15ArtistIntent" then
-			var21 = true
+			var2 = true
 			local avatarPartScaleType = v:FindFirstChild("AvatarPartScaleType", true)
 			
 			if not avatarPartScaleType then break end
-			var23 = avatarPartScaleType.Value
+			var4 = avatarPartScaleType.Value
 			break
 		end
 	end
-	for i_1, v in p9 do
+	for i_1, v in p2 do
 		if v.Name == "R15ArtistIntent" then
-			var22 = true
+			var3 = true
 			break
 		end
 	end
-	local var25 = if var21 then t.LoadMannequinForScaleType(var23, p10) else t.LoadR6Mannequin(p10)
-	local humanoid = var25:FindFirstChildOfClass("Humanoid")
+	local var5 = if var2 then t.LoadMannequinForScaleType(var4, p3) else t.LoadR6Mannequin(p3)
+	local humanoid = var5:FindFirstChildOfClass("Humanoid")
 	humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 	local bodyTypeScale_1 = humanoid:FindFirstChild("BodyTypeScale")
 	
@@ -227,57 +227,57 @@ function t.CreateBodyPartMannequin(p9, p10)
 		bodyProportionScale_1.Value = 0
 		bodyProportionScale_1.Parent = humanoid
 	end
-	if var23 == "ProportionsNormal" then
+	if var4 == "ProportionsNormal" then
 		bodyTypeScale_1.Value = 1
 		bodyProportionScale_1.Value = 0
-	elseif var23 == "ProportionsSlender" then
+	elseif var4 == "ProportionsSlender" then
 		bodyTypeScale_1.Value = 1
 		bodyProportionScale_1.Value = 1
 	end
-	return var21, var22, var25
+	return var2, var3, var5
 end
 
-function t.SetupBodyPartMannequin(value, p11, p12, p13, p14)
+function t.SetupBodyPartMannequin(value, p4, p5, p6, p7)
 	-- upvalues: t (ref)
-	t.AssertObjectsFormat(p13)
-	local var29 = false
+	t.AssertObjectsFormat(p6)
+	local var6 = false
 	
-	if p14 then
-		game:GetObjects(p14)[1].Parent = p12
+	if p7 then
+		game:GetObjects(p7)[1].Parent = p5
 	end
-	local function addFolderChildren(p15, p16, p17)
-		-- upvalues: var29 (write), p12 (ref), t (copy)
-		for i, v in pairs(p15:GetChildren()) do
+	local function addFolderChildren(p8, p9, p10)
+		-- upvalues: var6 (write), p5 (ref), t (copy)
+		for i, v in pairs(p8:GetChildren()) do
 			assert(v:IsA("BasePart"), "Only BaseParts should be in Folders")
 			
 			if string.find(v.Name, "Right") then
-				var29 = true
+				var6 = true
 			end
-			p12:FindFirstChild("Humanoid"):ReplaceBodyPartR15(t.R15PartNameToEnum[v.Name], v)
-			table.insert(p16, v.Name)
-			table.insert(p17, v)
+			p5:FindFirstChild("Humanoid"):ReplaceBodyPartR15(t.R15PartNameToEnum[v.Name], v)
+			table.insert(p9, v.Name)
+			table.insert(p10, v)
 		end
 	end
 	
-	local var31 = if value and p11 then "R15ArtistIntent" else "R15"
+	local var7 = if value and p4 then "R15ArtistIntent" else "R15"
 	local t_1 = {}
 	local t_2 = {}
 	
-	for i, v in pairs(p13) do
-		if value and v.Name == var31 or not value and v.Name == "R6" then
+	for i, v in pairs(p6) do
+		if value and v.Name == var7 or not value and v.Name == "R6" then
 			addFolderChildren(v, t_2, t_1)
 		elseif not string.find(v.Name, "R15") then
-			v.Parent = p12
+			v.Parent = p5
 		end
 	end
 	if value then
-		local humanoidRootPart = p12:FindFirstChild("HumanoidRootPart")
-		p12.PrimaryPart = humanoidRootPart
+		local humanoidRootPart = p5:FindFirstChild("HumanoidRootPart")
+		p5.PrimaryPart = humanoidRootPart
 		humanoidRootPart.CFrame = CFrame.new(Vector3.new(0, 5, 0)) * CFrame.Angles(0, 3.14159265359, 0)
 		humanoidRootPart.Anchored = true
-		p12:FindFirstChildOfClass("Humanoid"):BuildRigFromAttachments()
+		p5:FindFirstChildOfClass("Humanoid"):BuildRigFromAttachments()
 	end
-	return var29, t_2
+	return var6, t_2
 end
 
 function t.CreateHeadModel(head)

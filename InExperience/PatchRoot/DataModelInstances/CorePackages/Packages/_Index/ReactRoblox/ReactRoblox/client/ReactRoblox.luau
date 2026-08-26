@@ -21,11 +21,11 @@ local enableNewReconciler = require(parent.Shared).ReactFeatureFlags.enableNewRe
 local reactRobloxComponentTreeModule = require(script.Parent.ReactRobloxComponentTree)
 local getClosestInstanceFromNode = reactRobloxComponentTreeModule.getClosestInstanceFromNode
 local t = {
-	createPortal = function(p0, p1, p2)
+	createPortal = function(p1, p2, p3)
 		-- upvalues: invariant (ref), isValidContainer (ref), createPortal (ref)
-		invariant(isValidContainer(p1), "Target container is not a Roblox Instance.")
+		invariant(isValidContainer(p2), "Target container is not a Roblox Instance.")
 		
-		return createPortal(p0, p1, nil, p2)
+		return createPortal(p1, p2, nil, p3)
 	end,
 	unstable_batchedUpdates = batchedUpdates,
 	flushSync = flushSync,

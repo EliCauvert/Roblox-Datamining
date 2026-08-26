@@ -6,13 +6,13 @@ local sponsoredAdViewabilityDetectorModule = require(script.Parent.SponsoredAdVi
 local sponsoredAdViewabilityTelemetryModule = require(script.Parent.sponsoredAdViewabilityTelemetry)
 local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: useViewportBounds (ref), reactModule (ref), sponsoredAdViewabilityDetectorModule (ref), sponsoredAdViewabilityTelemetryModule (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
-	local var4 = useViewportBounds()
-	local var5 = reactModule.useRef(nil)
+	local var1 = useViewportBounds()
+	local var2 = reactModule.useRef(nil)
 	
-	if var5.current == nil then
-		var5.current = sponsoredAdViewabilityDetectorModule.new({
+	if var2.current == nil then
+		var2.current = sponsoredAdViewabilityDetectorModule.new({
 			onSessionStart = sponsoredAdViewabilityTelemetryModule.logSponsoredAdLoad,
 			onMilestone = sponsoredAdViewabilityTelemetryModule.logSponsoredAdViewableImpression,
 			onVideoProgress = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then sponsoredAdViewabilityTelemetryModule.logSponsoredAdVideoProgress else nil,
@@ -20,21 +20,21 @@ return function(p0, p1, p2)
 		})
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var4 (ref)
-		local current = var5.current
+		-- upvalues: var2 (ref), var1 (ref)
+		local current = var2.current
 		
 		if current ~= nil then
-			current:setViewportBounds(var4)
+			current:setViewportBounds(var1)
 		end
-	end, { var4 })
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), p0 (ref)
-		local current = var5.current
+		-- upvalues: var2 (ref), p1 (ref)
+		local current = var2.current
 		
 		if current == nil then return end
-		current:setSurfaceScope(p0)
+		current:setSurfaceScope(p1)
 		
-		if p0 == nil then
+		if p1 == nil then
 			return
 		end
 		current:start()
@@ -43,21 +43,21 @@ return function(p0, p1, p2)
 			-- upvalues: current (ref)
 			current:reset()
 		end
-	end, { p0 })
+	end, { p1 })
 	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), var5 (ref)
-		if p2 == nil then return end
-		local current = var5.current
+		-- upvalues: p3 (ref), var2 (ref)
+		if p3 == nil then return end
+		local current = var2.current
 		
 		if current == nil then
 			return
 		end
 		local list = {
-			p2.OnHide:Connect(function()
+			p3.OnHide:Connect(function()
 				-- upvalues: current (ref)
 				current:pause()
 			end),
-			p2.OnUnhide:Connect(function()
+			p3.OnUnhide:Connect(function()
 				-- upvalues: current (ref)
 				current:resume()
 			end)
@@ -69,16 +69,16 @@ return function(p0, p1, p2)
 				v:Disconnect()
 			end
 		end
-	end, { p2 })
-	local var6 = reactModule.useRef(p1)
+	end, { p3 })
+	local var3 = reactModule.useRef(p2)
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var6 (ref), p1 (ref)
-		local current = var5.current
-		local current_1 = var6.current
-		var6.current = p1
+		-- upvalues: var2 (ref), var3 (ref), p2 (ref)
+		local current = var2.current
+		local current_1 = var3.current
+		var3.current = p2
 		
-		if current ~= nil and current_1 ~= nil and current_1 ~= p1 then
+		if current ~= nil and current_1 ~= nil and current_1 ~= p2 then
 			current:onFeedRefresh()
 		end
-	end, { p1 })
+	end, { p2 })
 end

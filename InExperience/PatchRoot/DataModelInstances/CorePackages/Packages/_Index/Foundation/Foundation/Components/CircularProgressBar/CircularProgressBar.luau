@@ -8,24 +8,24 @@ local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = { testId = "--foundation-circular-progress-bar" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref)
-	local var8 = withDefaultsModule(p0, t)
-	local var9 = useTokensModule()
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
 	local numberSequence = NumberSequence.new({
-		NumberSequenceKeypoint.new(0, var9.Color.Content.Emphasis.Transparency),
-		NumberSequenceKeypoint.new(0.4999, var9.Color.Content.Emphasis.Transparency),
-		NumberSequenceKeypoint.new(0.5, var9.Color.Content.Muted.Transparency),
-		NumberSequenceKeypoint.new(1, var9.Color.Content.Muted.Transparency)
+		NumberSequenceKeypoint.new(0, var2.Color.Content.Emphasis.Transparency),
+		NumberSequenceKeypoint.new(0.4999, var2.Color.Content.Emphasis.Transparency),
+		NumberSequenceKeypoint.new(0.5, var2.Color.Content.Muted.Transparency),
+		NumberSequenceKeypoint.new(1, var2.Color.Content.Muted.Transparency)
 	})
 	local colorSequence = ColorSequence.new({
-		ColorSequenceKeypoint.new(0, var9.Color.Content.Emphasis.Color3),
-		ColorSequenceKeypoint.new(0.4999, var9.Color.Content.Emphasis.Color3),
-		ColorSequenceKeypoint.new(0.5, var9.Color.Content.Muted.Color3),
-		ColorSequenceKeypoint.new(1, var9.Color.Content.Muted.Color3)
+		ColorSequenceKeypoint.new(0, var2.Color.Content.Emphasis.Color3),
+		ColorSequenceKeypoint.new(0.4999, var2.Color.Content.Emphasis.Color3),
+		ColorSequenceKeypoint.new(0.5, var2.Color.Content.Muted.Color3),
+		ColorSequenceKeypoint.new(1, var2.Color.Content.Muted.Color3)
 	})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var8, { tag = "size-full-full", ref = p1 }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "size-full-full", ref = p2 }), {
 		LeftGradient = reactModule.createElement(viewModule, {
 			tag = "position-top-left clip",
 			Size = UDim2.fromScale(0.5, 1)
@@ -34,13 +34,13 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 				Image = "rbxasset://textures/ui/Controls/RadialFill.png",
 				tag = "position-top-left content-emphasis",
 				Size = UDim2.fromScale(2, 1),
-				testId = `{var8.testId}--left-gradient`
+				testId = `{var1.testId}--left-gradient`
 			}, {
 				Gradient = reactModule.createElement("UIGradient", {
 					Transparency = numberSequence,
 					Color = colorSequence,
-					Rotation = var8.progress:map(function(p2)
-						return math.clamp(p2 * 360, 180, 360)
+					Rotation = var1.progress:map(function(p3)
+						return math.clamp(p3 * 360, 180, 360)
 					end)
 				})
 			})
@@ -54,12 +54,12 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 				tag = "content-emphasis",
 				Size = UDim2.fromScale(2, 1),
 				Position = UDim2.fromScale(-1, 0),
-				testId = `{var8.testId}--right-gradient`
+				testId = `{var1.testId}--right-gradient`
 			}, {
 				Gradient = reactModule.createElement("UIGradient", {
 					Transparency = numberSequence,
 					Color = colorSequence,
-					Rotation = var8.progress:map(function(p3)
+					Rotation = var1.progress:map(function(p3)
 						return math.clamp(p3 * 360, 0, 180)
 					end)
 				})

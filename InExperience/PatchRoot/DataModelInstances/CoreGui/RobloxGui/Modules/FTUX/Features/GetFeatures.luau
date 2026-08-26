@@ -2,9 +2,9 @@
 local platformEnumModule = require(parent.Enums.PlatformEnum)
 local enableSafetyBubbleDummyModule = require(parent.Features.EnableSafetyBubbleDummy)
 
-function GetFeatures(p0)
+function GetFeatures(p1)
 	-- upvalues: platformEnumModule (ref), enableSafetyBubbleDummyModule (ref)
-	if p0 == platformEnumModule.QuestVR then
+	if p1 == platformEnumModule.QuestVR then
 		enableSafetyBubbleDummyModule()
 	end
 end

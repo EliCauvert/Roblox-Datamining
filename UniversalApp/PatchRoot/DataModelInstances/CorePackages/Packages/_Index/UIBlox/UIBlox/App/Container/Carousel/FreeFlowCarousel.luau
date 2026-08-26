@@ -38,35 +38,35 @@ freeFlowCarousel.defaultProps = {
 	carouselMargin = 24
 }
 
-function freeFlowCarousel.render(p0)
+function freeFlowCarousel.render(p1)
 	-- upvalues: roactModule (ref), fitFrameOnAxis (ref), carouselHeaderModule (ref), horizontalCarouselModule (ref)
-	local innerPadding = p0.props.innerPadding
-	local carouselMargin = p0.props.carouselMargin
+	local innerPadding = p1.props.innerPadding
+	local carouselMargin = p1.props.carouselMargin
 	
 	return roactModule.createElement(fitFrameOnAxis, {
 		BackgroundTransparency = 1,
 		axis = fitFrameOnAxis.Axis.Vertical,
 		minimumSize = UDim2.fromScale(1, 0),
-		LayoutOrder = p0.props.layoutOrder,
+		LayoutOrder = p1.props.layoutOrder,
 		contentPadding = UDim.new(0, innerPadding)
 	}, {
 		CarouselHeader = roactModule.createElement(carouselHeaderModule, {
 			layoutOrder = 1,
-			headerText = p0.props.headerText,
-			onSeeAll = p0.props.onSeeAll,
+			headerText = p1.props.headerText,
+			onSeeAll = p1.props.onSeeAll,
 			carouselMargin = carouselMargin
 		}),
 		Carousel = roactModule.createElement(horizontalCarouselModule, {
 			layoutOrder = 2,
-			identifier = p0.props.identifier,
-			itemList = p0.props.itemList,
-			renderItem = p0.props.renderItem,
-			itemSize = p0.props.itemSize,
+			identifier = p1.props.identifier,
+			itemList = p1.props.itemList,
+			renderItem = p1.props.renderItem,
+			itemSize = p1.props.itemSize,
 			itemPadding = innerPadding,
 			carouselMargin = carouselMargin,
-			loadNext = p0.props.loadNext,
-			maxNumOfItemsVisible = p0.props.maxNumOfItemsVisible,
-			viewabilityConfigCallbackPairs = p0.props.viewabilityConfigCallbackPairs
+			loadNext = p1.props.loadNext,
+			maxNumOfItemsVisible = p1.props.maxNumOfItemsVisible,
+			viewabilityConfigCallbackPairs = p1.props.viewabilityConfigCallbackPairs
 		})
 	})
 end

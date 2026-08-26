@@ -19,10 +19,10 @@ if status_2_1 then
 	
 	if chatTranslationEnabled == nil then
 		childAddedConnection = nil
-		childAddedConnection = parent.ChildAdded:Connect(function(p0)
+		childAddedConnection = parent.ChildAdded:Connect(function(p1)
 			-- upvalues: chatTranslationEnabled (write), childAddedConnection (write)
-			if p0.Name == "ChatTranslationEnabled" then
-				chatTranslationEnabled = p0
+			if p1.Name == "ChatTranslationEnabled" then
+				chatTranslationEnabled = p1
 				childAddedConnection:Disconnect()
 			end
 		end)
@@ -35,9 +35,9 @@ function childAddedConnection.Destroy(p1)
 	p1.Destroyed = true
 end
 
-function childAddedConnection.SetActive(value, p2)
-	if p2 == value.Active then return end
-	if p2 == false then
+function childAddedConnection.SetActive(value, p1)
+	if p1 == value.Active then return end
+	if p1 == false then
 		value.MessageLogDisplay:Clear()
 	else
 		value.MessageLogDisplay:SetCurrentChannelName(value.Name)
@@ -46,143 +46,143 @@ function childAddedConnection.SetActive(value, p2)
 			value.MessageLogDisplay:AddMessage(value.MessageLog[i])
 		end
 	end
-	value.Active = p2
+	value.Active = p1
 end
 
-function childAddedConnection.UpdateMessageFiltered(p3, p4)
+function childAddedConnection.UpdateMessageFiltered(p2, p3)
 	-- upvalues: status_2_1 (write), chatTranslationEnabled (write), status_1 (write)
-	local var8
-	local var6 = 1
-	local messageLog = p3.MessageLog
-	local var7 = nil
-	while var6 <= #messageLog do
-		var8 = messageLog[var6]
+	local var1
+	local var2 = 1
+	local messageLog = p2.MessageLog
+	local var3 = nil
+	while var2 <= #messageLog do
+		var1 = messageLog[var2]
 		
-		if var8.ID ~= p4.ID then
-			var6 += 1
+		if var1.ID ~= p3.ID then
+			var2 += 1
 			continue
 		end
-		var7 = var8
+		var3 = var1
 		break
 	end
-	if var7 then
-		var7.Message = p4.Message
-		var7.IsFiltered = true
+	if var3 then
+		var3.Message = p3.Message
+		var3.IsFiltered = true
 		
 		if status_2_1 and chatTranslationEnabled ~= nil and chatTranslationEnabled.Value then
-			var7.TranslatedMessage = p4.TranslatedMessage
-			var7.ShowTranslated = true
+			var3.TranslatedMessage = p3.TranslatedMessage
+			var3.ShowTranslated = true
 		end
-		if not p3.Active then return end
-		if status_1 and var7.Message == "" then
-			table.remove(p3.MessageLog, var6)
+		if not p2.Active then return end
+		if status_1 and var3.Message == "" then
+			table.remove(p2.MessageLog, var2)
 		end
-		p3.MessageLogDisplay:UpdateMessageFiltered(var7)
+		p2.MessageLogDisplay:UpdateMessageFiltered(var3)
 		
 		return
 	else
-		p3:AddMessageToChannelByTimeStamp(p4)
+		p2:AddMessageToChannelByTimeStamp(p3)
 	end
 end
 
-function childAddedConnection.AddMessageToChannel(p5, p6)
+function childAddedConnection.AddMessageToChannel(p4, p5)
 	-- upvalues: chatSettingsModule (ref)
-	table.insert(p5.MessageLog, p6)
+	table.insert(p4.MessageLog, p5)
 	
-	if p5.Active then
-		p5.MessageLogDisplay:AddMessage(p6)
+	if p4.Active then
+		p4.MessageLogDisplay:AddMessage(p5)
 	end
-	if chatSettingsModule.MessageHistoryLengthPerChannel < #p5.MessageLog then
-		p5:RemoveLastMessageFromChannel()
+	if chatSettingsModule.MessageHistoryLengthPerChannel < #p4.MessageLog then
+		p4:RemoveLastMessageFromChannel()
 	end
 end
 
-function childAddedConnection.InternalAddMessageAtTimeStamp(p7, p8)
-	for i = 1, #p7.MessageLog do
-		if p8.Time >= p7.MessageLog[i].Time then
+function childAddedConnection.InternalAddMessageAtTimeStamp(p4, p5)
+	for i = 1, #p4.MessageLog do
+		if p5.Time >= p4.MessageLog[i].Time then
 			continue
 		end
-		table.insert(p7.MessageLog, i, p8)
+		table.insert(p4.MessageLog, i, p5)
 		
 		return
 	end
-	table.insert(p7.MessageLog, p8)
+	table.insert(p4.MessageLog, p5)
 end
 
-function childAddedConnection.AddMessagesToChannelByTimeStamp(p9, p10, p11)
+function childAddedConnection.AddMessagesToChannelByTimeStamp(p6, p7, p8)
 	-- upvalues: chatSettingsModule (ref)
-	for i = p11, #p10 do
-		p9:InternalAddMessageAtTimeStamp(p10[i])
+	for i = p8, #p7 do
+		p6:InternalAddMessageAtTimeStamp(p7[i])
 	end
-	while chatSettingsModule.MessageHistoryLengthPerChannel < #p9.MessageLog do
-		table.remove(p9.MessageLog, 1)
+	while chatSettingsModule.MessageHistoryLengthPerChannel < #p6.MessageLog do
+		table.remove(p6.MessageLog, 1)
 	end
-	if p9.Active then
-		p9.MessageLogDisplay:Clear()
+	if p6.Active then
+		p6.MessageLogDisplay:Clear()
 		
-		for i_1 = 1, #p9.MessageLog do
-			p9.MessageLogDisplay:AddMessage(p9.MessageLog[i_1])
+		for i_1 = 1, #p6.MessageLog do
+			p6.MessageLogDisplay:AddMessage(p6.MessageLog[i_1])
 		end
 	end
 end
 
-function childAddedConnection.AddMessageToChannelByTimeStamp(p12, p13)
+function childAddedConnection.AddMessageToChannelByTimeStamp(p9, p10)
 	-- upvalues: chatSettingsModule (ref)
-	if #p12.MessageLog < 1 then
-		p12:AddMessageToChannel(p13)
+	if #p9.MessageLog < 1 then
+		p9:AddMessageToChannel(p10)
 		
 		return
-	elseif p13.Time < p12.MessageLog[1].Time then return end
-	if p12.MessageLog[#p12.MessageLog].Time <= p13.Time then
-		p12:AddMessageToChannel(p13)
+	elseif p10.Time < p9.MessageLog[1].Time then return end
+	if p9.MessageLog[#p9.MessageLog].Time <= p10.Time then
+		p9:AddMessageToChannel(p10)
 		
 		return
 	end
-	for i = 1, #p12.MessageLog do
-		if p13.Time >= p12.MessageLog[i].Time then
+	for i = 1, #p9.MessageLog do
+		if p10.Time >= p9.MessageLog[i].Time then
 			continue
 		end
-		table.insert(p12.MessageLog, i, p13)
+		table.insert(p9.MessageLog, i, p10)
 		
-		if chatSettingsModule.MessageHistoryLengthPerChannel < #p12.MessageLog then
-			p12:RemoveLastMessageFromChannel()
+		if chatSettingsModule.MessageHistoryLengthPerChannel < #p9.MessageLog then
+			p9:RemoveLastMessageFromChannel()
 		end
-		if p12.Active then
-			p12.MessageLogDisplay:AddMessageAtIndex(p13, i)
+		if p9.Active then
+			p9.MessageLogDisplay:AddMessageAtIndex(p10, i)
 		end
 		return
 	end
 end
 
-function childAddedConnection.RemoveLastMessageFromChannel(p14)
-	table.remove(p14.MessageLog, 1)
+function childAddedConnection.RemoveLastMessageFromChannel(p11)
+	table.remove(p11.MessageLog, 1)
 	
-	if p14.Active then
-		p14.MessageLogDisplay:RemoveLastMessage()
+	if p11.Active then
+		p11.MessageLogDisplay:RemoveLastMessage()
 	end
 end
 
-function childAddedConnection.ClearMessageLog(p15)
-	p15.MessageLog = {}
+function childAddedConnection.ClearMessageLog(p11)
+	p11.MessageLog = {}
 	
-	if p15.Active then
-		p15.MessageLogDisplay:Clear()
+	if p11.Active then
+		p11.MessageLogDisplay:Clear()
 	end
 end
 
-function childAddedConnection.RegisterChannelTab(p16, p17)
-	p16.ChannelTab = p17
+function childAddedConnection.RegisterChannelTab(p11, p12)
+	p11.ChannelTab = p12
 end
 
-function t.new(p18, p19)
+function t.new(p11, p12)
 	-- upvalues: childAddedConnection (ref)
 	local tbl = setmetatable({}, childAddedConnection)
 	tbl.Destroyed = false
 	tbl.Active = false
 	tbl.MessageLog = {}
-	tbl.MessageLogDisplay = p19
+	tbl.MessageLogDisplay = p12
 	tbl.ChannelTab = nil
-	tbl.Name = p18
+	tbl.Name = p11
 	
 	return tbl
 end

@@ -1,23 +1,23 @@
 ﻿return {
-	new = function(p0)
-		p0 = p0 or {}
-		local sampleInterval = p0.sampleInterval or 8
-		local driftThreshold = p0.driftThreshold or 8
-		local var3 = 0
-		local initialAverage = p0.initialAverage or 0
+	new = function(p1)
+		p1 = p1 or {}
+		local sampleInterval = p1.sampleInterval or 8
+		local driftThreshold = p1.driftThreshold or 8
+		local var1 = 0
+		local initialAverage = p1.initialAverage or 0
 		
 		return {
-			recordMeasurementAndShouldUpdateEstimates = function(p1)
-				-- upvalues: var3 (write), sampleInterval (ref), initialAverage (write), driftThreshold (ref)
-				var3 += 1
+			recordMeasurementAndShouldUpdateEstimates = function(p2)
+				-- upvalues: var1 (write), sampleInterval (ref), initialAverage (write), driftThreshold (ref)
+				var1 += 1
 				
-				if var3 < sampleInterval then
+				if var1 < sampleInterval then
 					return false
-				elseif math.abs(p1 - initialAverage) < driftThreshold then
+				elseif math.abs(p2 - initialAverage) < driftThreshold then
 					return false
 				end
-				initialAverage = p1
-				var3 = 0
+				initialAverage = p2
+				var1 = 0
 				
 				return true
 			end

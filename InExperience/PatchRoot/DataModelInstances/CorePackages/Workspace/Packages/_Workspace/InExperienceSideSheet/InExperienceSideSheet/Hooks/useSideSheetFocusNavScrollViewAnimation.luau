@@ -7,42 +7,42 @@ local animateScrollViewToSelectionHelper = require(parent.AppBlox).AnimateScroll
 
 return function()
 	-- upvalues: reactModule (ref), getDrawerVisibleStore (ref), animateScrollViewToSelectionHelper (ref), tweenDuration (ref)
-	local var2 = reactModule.useRef({})
+	local var1 = reactModule.useRef({})
+	local var2 = reactModule.useRef(nil)
 	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
 	local getDrawerAnimating = getDrawerVisibleStore(false).getDrawerAnimating
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var3 (ref)
-		if var2.current then
-			for i, v in var2.current do
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), var2 (ref)
+		if var1.current then
+			for i, v in var1.current do
 				v:Disconnect()
 			end
-			var2.current = {}
+			var1.current = {}
 		end
-		if var3.current then
-			var3.current:Cancel()
-			var3.current = nil
+		if var2.current then
+			var2.current:Cancel()
+			var2.current = nil
 		end
 	end, {})
-	local var6 = reactModule.useCallback(function(p0)
-		-- upvalues: var4 (ref), var5 (ref), var2 (ref), var3 (ref), animateScrollViewToSelectionHelper (copy), tweenDuration (copy), getDrawerAnimating (ref)
-		if var4.current == p0 then return end
-		if p0 then
-			var5()
-			var4.current = p0
-			local var7, var8 = animateScrollViewToSelectionHelper(p0, tweenDuration, getDrawerAnimating)
+	local var5 = reactModule.useCallback(function(p1)
+		-- upvalues: var3 (ref), var4 (ref), var1 (ref), var2 (ref), animateScrollViewToSelectionHelper (copy), tweenDuration (copy), getDrawerAnimating (ref)
+		if var3.current == p1 then return end
+		if p1 then
+			var4()
+			var3.current = p1
+			local var6, var7 = animateScrollViewToSelectionHelper(p1, tweenDuration, getDrawerAnimating)
+			var1.current = var6
 			var2.current = var7
-			var3.current = var8
 			
 			return
 		end
-		var4.current = nil
-		var5()
-	end, { var2, var5, getDrawerAnimating })
+		var3.current = nil
+		var4()
+	end, { var1, var4, getDrawerAnimating })
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref)
-		return var5
-	end, { var5 })
+		-- upvalues: var4 (ref)
+		return var4
+	end, { var4 })
 	
-	return var6
+	return var5
 end

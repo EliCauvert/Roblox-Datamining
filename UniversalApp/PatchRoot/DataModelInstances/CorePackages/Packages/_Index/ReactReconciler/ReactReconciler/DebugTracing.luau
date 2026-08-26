@@ -5,18 +5,18 @@ local t = {}
 local log = nil
 local _ = require(script.Parent.ReactFiberLane)
 local enableDebugTracing = require(parent.Shared).ReactFeatureFlags.enableDebugTracing
-local var3 = nil
+local var1 = nil
 local t_1 = {}
-local var5 = 0
+local var2 = 0
 
-function decimalToBinaryString(p0)
-	local var8 = ""
+function decimalToBinaryString(p1)
+	local var3 = ""
 	repeat
-		local var9, var10 = math.modf(p0 / 2)
-		p0 = var9
-		var8 = math.ceil(var10) .. var8
-	until p0 == 0
-	return string.rep("0", 31 - string.len(var8)) .. var8
+		local var4, var5 = math.modf(p1 / 2)
+		p1 = var4
+		var3 = math.ceil(var5) .. var8
+	until p1 == 0
+	return string.rep("0", 31 - string.len(var3)) .. var8
 end
 
 local function _(p1)
@@ -24,49 +24,49 @@ local function _(p1)
 end
 
 local function group(...)
-	-- upvalues: t_1 (ref), var3 (write), console (ref), log (write)
+	-- upvalues: t_1 (ref), var1 (write), console (ref), log (write)
 	for i, v in { ... } do
 		table.insert(t_1, v)
 	end
-	if var3 == nil then
-		var3 = console.log
+	if var1 == nil then
+		var1 = console.log
 		console.log = log
 	end
 end
 
 local function groupEnd()
-	-- upvalues: t_1 (ref), var5 (write), console (ref), var3 (write)
+	-- upvalues: t_1 (ref), var2 (write), console (ref), var1 (write)
 	table.remove(t_1, 1)
-	while #t_1 < var5 do
+	while #t_1 < var2 do
 		console.groupEnd()
-		var5 -= 1
+		var2 -= 1
 	end
 	if #t_1 == 0 then
-		console.log = var3
-		var3 = nil
+		console.log = var1
+		var1 = nil
 	end
 end
 
 log = function(...)
-	-- upvalues: var5 (write), t_1 (ref), console (ref), var3 (write)
-	if var5 < #t_1 then
-		for i = var5 + 1, #t_1 do
+	-- upvalues: var2 (write), t_1 (ref), console (ref), var1 (write)
+	if var2 < #t_1 then
+		for i = var2 + 1, #t_1 do
 			console.group(t_1[i])
 		end
-		var5 = #t_1
+		var2 = #t_1
 	end
-	if typeof(var3) == "function" then
-		var3(...)
+	if typeof(var1) == "function" then
+		var1(...)
 		
 		return
 	end
 	console.log(...)
 end
 
-function t.logCommitStarted(p2)
+function t.logCommitStarted(p1)
 	-- upvalues: reactGlobalsModule (ref), enableDebugTracing (ref), group (ref)
 	if reactGlobalsModule.__DEV__ and enableDebugTracing then
-		group(string.format("* commit (%s)", "0b" .. decimalToBinaryString(p2)), "", "", "")
+		group(string.format("* commit (%s)", "0b" .. decimalToBinaryString(p1)), "", "", "")
 	end
 end
 
@@ -77,24 +77,24 @@ function t.logCommitStopped()
 	end
 end
 
-function t.logComponentSuspended(p3, p4)
+function t.logComponentSuspended(p1, p2)
 	-- upvalues: reactGlobalsModule (ref), enableDebugTracing (ref), log (write)
 	if reactGlobalsModule.__DEV__ and enableDebugTracing then
-		log(string.format("* %s suspended", p3))
-		p4:andThen(function()
-			-- upvalues: log (copy), p3 (ref)
-			log(string.format("* %s resolved", p3))
+		log(string.format("* %s suspended", p1))
+		p2:andThen(function()
+			-- upvalues: log (copy), p1 (ref)
+			log(string.format("* %s resolved", p1))
 		end, function()
-			-- upvalues: log (copy), p3 (ref)
-			log(string.format("* %s rejected", p3))
+			-- upvalues: log (copy), p1 (ref)
+			log(string.format("* %s rejected", p1))
 		end)
 	end
 end
 
-function t.logLayoutEffectsStarted(p5)
+function t.logLayoutEffectsStarted(p1)
 	-- upvalues: reactGlobalsModule (ref), enableDebugTracing (ref), group (ref)
 	if reactGlobalsModule.__DEV__ and enableDebugTracing then
-		group(string.format("* layout effects (%s)", "0b" .. decimalToBinaryString(p5)))
+		group(string.format("* layout effects (%s)", "0b" .. decimalToBinaryString(p1)))
 	end
 end
 
@@ -105,10 +105,10 @@ function t.logLayoutEffectsStopped()
 	end
 end
 
-function t.logPassiveEffectsStarted(p6)
+function t.logPassiveEffectsStarted(p1)
 	-- upvalues: reactGlobalsModule (ref), enableDebugTracing (ref), group (ref)
 	if reactGlobalsModule.__DEV__ and enableDebugTracing then
-		group(string.format("* passive effects (%s)", "0b" .. decimalToBinaryString(p6)))
+		group(string.format("* passive effects (%s)", "0b" .. decimalToBinaryString(p1)))
 	end
 end
 
@@ -119,10 +119,10 @@ function t.logPassiveEffectsStopped()
 	end
 end
 
-function t.logRenderStarted(p7)
+function t.logRenderStarted(p1)
 	-- upvalues: reactGlobalsModule (ref), enableDebugTracing (ref), group (ref)
 	if reactGlobalsModule.__DEV__ and enableDebugTracing then
-		group(string.format("* render (%s)", "0b" .. decimalToBinaryString(p7)))
+		group(string.format("* render (%s)", "0b" .. decimalToBinaryString(p1)))
 	end
 end
 
@@ -133,17 +133,17 @@ function t.logRenderStopped()
 	end
 end
 
-function t.logForceUpdateScheduled(p8, p9)
+function t.logForceUpdateScheduled(p1, p2)
 	-- upvalues: reactGlobalsModule (ref), enableDebugTracing (ref), log (write)
 	if reactGlobalsModule.__DEV__ and enableDebugTracing then
-		log(string.format("* %s forced update (%s)", p8, "0b" .. decimalToBinaryString(p9)))
+		log(string.format("* %s forced update (%s)", p1, "0b" .. decimalToBinaryString(p2)))
 	end
 end
 
-function t.logStateUpdateScheduled(p10, p11, _)
+function t.logStateUpdateScheduled(p1, p2, _)
 	-- upvalues: reactGlobalsModule (ref), enableDebugTracing (ref), log (write)
 	if reactGlobalsModule.__DEV__ and enableDebugTracing then
-		log(string.format("* %s updated state (%s)", p10, "0b" .. decimalToBinaryString(p11)))
+		log(string.format("* %s updated state (%s)", p1, "0b" .. decimalToBinaryString(p2)))
 	end
 end
 

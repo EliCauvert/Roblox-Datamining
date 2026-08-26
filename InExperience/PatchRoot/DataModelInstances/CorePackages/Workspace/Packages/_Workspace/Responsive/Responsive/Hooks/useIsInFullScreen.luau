@@ -5,14 +5,14 @@ local useRoactService = require(parent.RobloxAppHooks).useRoactService
 
 return function()
 	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), reactModule (ref)
-	local var2 = useRoactService(roactServiceTagsModule.AppUserGameSettings)
-	local var3, var4 = reactModule.useState(var2:InFullScreen())
+	local var1 = useRoactService(roactServiceTagsModule.AppUserGameSettings)
+	local var2, var3 = reactModule.useState(var1:InFullScreen())
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var2 (ref)
-		var4(var2:InFullScreen())
-		local fullscreenChangedConnection = var2.FullscreenChanged:Connect(function(p0)
-			-- upvalues: var4 (copy)
-			var4(p0)
+		-- upvalues: var3 (ref), var1 (ref)
+		var3(var1:InFullScreen())
+		local fullscreenChangedConnection = var1.FullscreenChanged:Connect(function(p1)
+			-- upvalues: var3 (copy)
+			var3(p1)
 		end)
 		
 		return function()
@@ -21,5 +21,5 @@ return function()
 		end
 	end, {})
 	
-	return var3
+	return var2
 end

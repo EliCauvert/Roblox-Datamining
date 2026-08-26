@@ -1,6 +1,6 @@
-﻿return function(p0, p1)
-	local canvasPosition = p1.CanvasPosition
-	local var0 = math.floor((canvasPosition.X + p1.AbsoluteSize.X / 2) / p0.X) + 1
+﻿return function(p1, p2)
+	local canvasPosition = p2.CanvasPosition
+	local var1 = math.floor((canvasPosition.X + p2.AbsoluteSize.X / 2) / p1.X) + 1
 	
-	return var0, math.abs(canvasPosition.X - (var0 - 1) * p0.X)
+	return var1, math.abs(canvasPosition.X - (var1 - 1) * p1.X)
 end

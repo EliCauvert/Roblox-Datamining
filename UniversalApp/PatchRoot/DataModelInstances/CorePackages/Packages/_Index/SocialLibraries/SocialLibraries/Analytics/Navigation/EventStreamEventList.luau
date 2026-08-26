@@ -6,8 +6,8 @@ local subPages = enumsModule.SubPages
 local pages = enumsModule.Pages
 local btnValuesModule = require(script.Parent.BtnValues)
 
-local var3 = function(p0)
-	return tostring(p0)
+local var1 = function(p1)
+	return tostring(p1)
 end
 
 return {
@@ -19,18 +19,18 @@ return {
 			subpage = subPages.PeekView,
 			page = pages.PlayerProfile
 		},
-		formatRulesForAdditionalInfo = { uid = var3 }
+		formatRulesForAdditionalInfo = { uid = var1 }
 	},
 	[eventNamesModule.HomePage_Carousel_FriendsLanding] = {
 		context = contexts.HomePage,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = btnValuesModule.FriendsLanding },
-		formatRulesForAdditionalInfo = { uid = var3 }
+		formatRulesForAdditionalInfo = { uid = var1 }
 	},
 	[eventNamesModule.MorePage_FriendsLanding] = {
 		context = contexts.HomePage,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = btnValuesModule.FriendsLanding },
-		formatRulesForAdditionalInfo = { uid = var3 }
+		formatRulesForAdditionalInfo = { uid = var1 }
 	}
 }

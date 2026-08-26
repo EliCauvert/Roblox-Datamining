@@ -6,46 +6,46 @@ local _ = { easeIn = 1, easeOut = 10 }
 local _ = { easeOut = 1, easeIn = 0 }
 local t = { frequency = 10, dampingRatio = 1 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), otterModule (ref), t (ref), useAnimatedBinding (ref)
-	local var3 = reactModule.useRef(nil)
-	local var4, var5 = useAnimatedBinding({ thickness = 0, transparency = 0 }, reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref), p0 (ref), otterModule (copy), t (copy)
-		if var3.current and p0 then
-			if p1.thickness == 10 then
-				var3.current({
+	local var1 = reactModule.useRef(nil)
+	local var2, var3 = useAnimatedBinding({ thickness = 0, transparency = 0 }, reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref), p1 (ref), otterModule (copy), t (copy)
+		if var1.current and p1 then
+			if p2.thickness == 10 then
+				var1.current({
 					thickness = otterModule.instant(1),
 					transparency = otterModule.instant(0)
 				})
 				
 				return
-			elseif p1.thickness == 1 then
-				var3.current({
+			elseif p2.thickness == 1 then
+				var1.current({
 					thickness = otterModule.ease(10, t),
 					transparency = otterModule.ease(1, t)
 				})
 			end
 		end
-	end, { p0 }))
+	end, { p1 }))
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var3 (ref), var5 (ref), otterModule (copy), t (copy)
-		if p0 then
-			if not var3.current then
-				var3.current = var5
+		-- upvalues: p1 (ref), var1 (ref), var3 (ref), otterModule (copy), t (copy)
+		if p1 then
+			if not var1.current then
+				var1.current = var3
 			end
-			var5({
+			var3({
 				thickness = otterModule.ease(10, t),
 				transparency = otterModule.ease(1, t)
 			})
 		end
 		return function()
-			-- upvalues: var5 (copy), otterModule (copy)
-			var5({
+			-- upvalues: var3 (copy), otterModule (copy)
+			var3({
 				thickness = otterModule.instant(0),
 				transparency = otterModule.instant(0)
 			})
 		end
-	end, { p0 })
+	end, { p1 })
 	
-	return var4
+	return var2
 end

@@ -25,18 +25,18 @@ local function clear()
 end
 
 return rodux.createReducer(t, {
-	[setCartPricingFetchingModule.name] = function(p0, p1)
+	[setCartPricingFetchingModule.name] = function(p1, p2)
 		return {
 			isFetching = true,
-			response = p0.response,
-			requestId = p1.requestId
+			response = p1.response,
+			requestId = p2.requestId
 		}
 	end,
-	[setCartPricingResponseModule.name] = function(p2, p3)
+	[setCartPricingResponseModule.name] = function(p1, p2)
 		return {
 			isFetching = false,
-			response = p3.response,
-			requestId = p2.requestId
+			response = p2.response,
+			requestId = p1.requestId
 		}
 	end,
 	[setCartPricingFetchFailedModule.name] = clear,

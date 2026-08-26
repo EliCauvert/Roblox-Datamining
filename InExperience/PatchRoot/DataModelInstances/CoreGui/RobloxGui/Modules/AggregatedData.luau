@@ -13,17 +13,17 @@ local function _(value)
 	return value:find("rbxassetid://")
 end
 
-function t:addPlay(p0, p1, p2)
-	if not p0:find("rbxassetid://") then return end
-	local var2 = p0:sub(14)
+function t:addPlay(p1, p2, p3)
+	if not p1:find("rbxassetid://") then return end
+	local var1 = p1:sub(14)
 	
-	if self[var2] == nil then
-		self[var2] = { playtime = p1, loopcount = p2 }
+	if self[var1] == nil then
+		self[var1] = { playtime = p2, loopcount = p3 }
 		
 		return
 	end
-	self[var2].playtime += p1
-	self[var2].loopcount += p2
+	self[var1].playtime += p2
+	self[var1].loopcount += p3
 end
 
 return t

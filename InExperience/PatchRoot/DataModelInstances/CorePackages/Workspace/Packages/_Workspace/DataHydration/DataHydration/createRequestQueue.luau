@@ -3,10 +3,10 @@
 	local var1 = 1
 	
 	return {
-		push = function(p0)
+		push = function(p1)
 			-- upvalues: t (ref), var1 (write)
-			if t[p0] == nil then
-				t[p0] = var1
+			if t[p1] == nil then
+				t[p1] = var1
 				var1 += 1
 			end
 		end,
@@ -30,9 +30,9 @@
 			local t_2 = {}
 			
 			for i_1 = 1, p1 do
-				local var4 = t_1[i_1]
-				table.insert(t_2, var4)
-				t[var4] = nil
+				local var2 = t_1[i_1]
+				table.insert(t_2, var2)
+				t[var2] = nil
 			end
 			return t_2
 		end,
@@ -43,9 +43,9 @@
 			end
 			return true
 		end,
-		hasItem = function(p4)
+		hasItem = function(p2)
 			-- upvalues: t (ref)
-			return t[p4] ~= nil
+			return t[p2] ~= nil
 		end,
 		clear = function()
 			-- upvalues: t (ref), var1 (write)

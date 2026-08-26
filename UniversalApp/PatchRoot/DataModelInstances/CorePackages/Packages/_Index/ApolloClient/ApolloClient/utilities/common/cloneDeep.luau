@@ -8,9 +8,9 @@ local instanceof = luauPolyfillModule.instanceof
 local NULL = require(script.Parent.Parent.globals.null).NULL
 local cloneDeepHelper = nil
 
-function t.cloneDeep(p0)
+function t.cloneDeep(p1)
 	-- upvalues: cloneDeepHelper (write)
-	return cloneDeepHelper(p0)
+	return cloneDeepHelper(p1)
 end
 
 local list = {
@@ -28,17 +28,17 @@ cloneDeepHelper = function(p1, p2)
 		if p2:has(p1) then
 			return p2:get(p1)
 		end
-		local var5 = array.slice(p1, 1)
-		p2:set(p1, var5)
-		array.forEach(var5, function(p3, p4)
-			-- upvalues: var5 (ref), cloneDeepHelper (copy), p2 (write)
-			var5[p4] = cloneDeepHelper(p3, p2)
+		local var1 = array.slice(p1, 1)
+		p2:set(p1, var1)
+		array.forEach(var1, function(p3, p4)
+			-- upvalues: var1 (ref), cloneDeepHelper (copy), p2 (write)
+			var1[p4] = cloneDeepHelper(p3, p2)
 		end)
 		
-		return var5
-	elseif typeof(p1) ~= "table" or p1 == NULL or not array.every(list, function(p5)
+		return var1
+	elseif typeof(p1) ~= "table" or p1 == NULL or not array.every(list, function(p3)
 		-- upvalues: instanceof (copy), p1 (ref)
-		return not instanceof(p1, p5)
+		return not instanceof(p1, p3)
 	end) then
 		return p1
 	end
@@ -47,14 +47,14 @@ cloneDeepHelper = function(p1, p2)
 	if p2:has(p1) then
 		return p2:get(p1)
 	end
-	local var6 = objectModule.create(objectModule.getPrototypeOf(p1))
-	p2:set(p1, var6)
-	array.forEach(objectModule.keys(p1), function(p6)
-		-- upvalues: var6 (ref), cloneDeepHelper (copy), p1 (ref), p2 (write)
-		var6[p6] = cloneDeepHelper(p1[p6], p2)
+	local var2 = objectModule.create(objectModule.getPrototypeOf(p1))
+	p2:set(p1, var2)
+	array.forEach(objectModule.keys(p1), function(p3)
+		-- upvalues: var2 (ref), cloneDeepHelper (copy), p1 (ref), p2 (write)
+		var2[p3] = cloneDeepHelper(p1[p3], p2)
 	end)
 	
-	return var6
+	return var2
 end
 
 return t

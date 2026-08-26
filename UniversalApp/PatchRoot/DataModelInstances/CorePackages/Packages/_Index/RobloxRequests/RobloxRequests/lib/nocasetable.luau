@@ -1,14 +1,14 @@
-﻿return function(p0)
+﻿return function(p1)
 	local tbl = setmetatable({}, {
-		__index = function(p1, p2)
-			return rawget(p1, p2:lower())
+		__index = function(p2, p3)
+			return rawget(p2, p3:lower())
 		end,
-		__newindex = function(p3, p4, p5)
-			rawset(p3, p4:lower(), p5)
+		__newindex = function(p2, p3, p4)
+			rawset(p2, p3:lower(), p4)
 		end
 	})
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		tbl[i] = v
 	end
 	return tbl

@@ -16,17 +16,17 @@ local uiblox = builderIconsModule.Migration.uiblox
 local _ = nil
 local contexts = enums.Contexts
 local eventTypes = enums.EventTypes
-local var10 = (function()
+local var1 = (function()
 	-- upvalues: robloxGui (ref), uiblox (ref), builderIconsModule (ref), VRService (ref), themeModule (ref), create (ref), textService (ref), utilityModule (ref), rbxAnalyticsService (ref), contexts (ref), eventTypes (ref), eventNames (ref), coreGuiService (ref)
 	local record = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
-	local var12 = false
+	local var2 = false
 	local recordingEvent = Instance.new("BindableEvent")
 	recordingEvent.Name = "RecordingEvent"
 	record.RecordingChanged = recordingEvent.Event
 	
 	function record.IsRecording(_)
-		-- upvalues: var12 (write)
-		return var12
+		-- upvalues: var2 (write)
+		return var2
 	end
 	
 	local screenrecord = uiblox["icons/controls/screenrecord"]
@@ -44,99 +44,99 @@ local var10 = (function()
 	VRService:GetPropertyChangedSignal("VREnabled"):connect(onVREnabled)
 	record.Page.Name = "Record"
 	
-	local function makeTextLabel(p0, p1, p2, p3, p4)
+	local function makeTextLabel(p1, p2, p3, p4, p5)
 		-- upvalues: themeModule (copy), create (copy), textService (copy)
-		local var16 = 10
-		local var17 = 0
-		local var18 = 10
-		local var19 = themeModule.textSize(24)
-		local var20 = themeModule.font(Enum.Font.SourceSans)
+		local var3 = 10
+		local var4 = 0
+		local var5 = 10
+		local var6 = themeModule.textSize(24)
+		local var7 = themeModule.font(Enum.Font.SourceSans)
 		
-		if p2 then
-			var16 = 10
-			var17 = 0
-			var18 = 0
-			var19 = themeModule.textSize(36)
-			var20 = themeModule.font(Enum.Font.SourceSansBold, "Bold")
+		if p3 then
+			var3 = 10
+			var4 = 0
+			var5 = 0
+			var6 = themeModule.textSize(36)
+			var7 = themeModule.font(Enum.Font.SourceSansBold, "Bold")
 		end
-		local var21 = create("Frame")({
+		local var8 = create("Frame")({
 			BackgroundTransparency = 1,
 			ZIndex = 2,
-			Name = p0 .. "Container",
-			LayoutOrder = p4,
-			Parent = p3
+			Name = p1 .. "Container",
+			LayoutOrder = p5,
+			Parent = p4
 		})
-		local var22 = create("TextLabel")({
+		local var9 = create("TextLabel")({
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			ZIndex = 2,
-			Name = p0,
-			Text = p1,
-			Font = var20,
-			TextSize = var19,
+			Name = p1,
+			Text = p2,
+			Font = var7,
+			TextSize = var6,
 			TextColor3 = Color3.new(1, 1, 1),
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
-			Position = UDim2.new(0, var16, 0, 0),
-			Size = UDim2.new(1, -(var16 + var17), 1, 0),
-			Parent = var21
+			Position = UDim2.new(0, var3, 0, 0),
+			Size = UDim2.new(1, -(var3 + var4), 1, 0),
+			Parent = var8
 		})
 		
-		local function onResized(p5)
-			-- upvalues: textService (copy), p1 (ref), var22 (ref), p3 (ref), var16 (write), var17 (write), var21 (ref), var18 (write)
-			if p5 == "AbsoluteSize" then
-				var21.Size = UDim2.new(1, 0, 0, textService:GetTextSize(p1, var22.TextSize, var22.Font, Vector2.new(p3.AbsoluteSize.X - var16 - var17, 10000)).Y + var18)
+		local function onResized(p6)
+			-- upvalues: textService (copy), p2 (ref), var9 (ref), p4 (ref), var3 (write), var4 (write), var8 (ref), var5 (write)
+			if p6 == "AbsoluteSize" then
+				var8.Size = UDim2.new(1, 0, 0, textService:GetTextSize(p2, var9.TextSize, var9.Font, Vector2.new(p4.AbsoluteSize.X - var3 - var4, 10000)).Y + var5)
 			end
 		end
 		
-		var21.Size = UDim2.new(1, 0, 0, textService:GetTextSize(p1, var22.TextSize, var22.Font, Vector2.new(p3.AbsoluteSize.X - var16 - var17, 10000)).Y + var18)
-		p3.Changed:connect(onResized)
+		var8.Size = UDim2.new(1, 0, 0, textService:GetTextSize(p2, var9.TextSize, var9.Font, Vector2.new(p4.AbsoluteSize.X - var3 - var4, 10000)).Y + var5)
+		p4.Changed:connect(onResized)
 		
-		return var22, var21
+		return var9, var8
 	end
 	
-	function record.SetHub(_, p6)
-		-- upvalues: record (ref), makeTextLabel (ref), utilityModule (copy), rbxAnalyticsService (copy), contexts (copy), eventTypes (copy), var12 (write), eventNames (copy), recordingEvent (ref), coreGuiService (copy)
-		record.HubRef = p6
+	function record.SetHub(_, p1)
+		-- upvalues: record (ref), makeTextLabel (ref), utilityModule (copy), rbxAnalyticsService (copy), contexts (copy), eventTypes (copy), var2 (write), eventNames (copy), recordingEvent (ref), coreGuiService (copy)
+		record.HubRef = p1
 		
-		local var24 = function()
+		local var3 = function()
 			-- upvalues: record (copy)
 			record.HubRef:SetVisibility(false, true)
 		end
 		
 		local _ = makeTextLabel("ScreenshotTitle", "Screenshot", true, record.Page, 1)
 		local _ = makeTextLabel("ScreenshotBody", "By clicking the 'Take Screenshot' button, the menu will close and take a screenshot and save it to your computer.", false, record.Page, 2)
-		local var25, var26 = utilityModule:AddButtonRow(record, "ScreenshotButton", "Take Screenshot", UDim2.new(0, 300, 0, 44), var24)
-		record.ScreenshotButtonRow = var25
-		record.ScreenshotButton = var26
+		local var4, var5 = utilityModule:AddButtonRow(record, "ScreenshotButton", "Take Screenshot", UDim2.new(0, 300, 0, 44), var3)
+		record.ScreenshotButtonRow = var4
+		record.ScreenshotButton = var5
 		record.ScreenshotButtonRow.LayoutOrder = 3
 		local _ = makeTextLabel("VideoTitle", "Video", true, record.Page, 4)
 		local _ = makeTextLabel("VideoBody", "By clicking the 'Record Video' button, the menu will close and start recording your screen.", false, record.Page, 5)
-		local var27, var28 = utilityModule:AddButtonRow(record, "RecordButton", "Record Video", UDim2.new(0, 300, 0, 44), var24)
-		var27.LayoutOrder = 6
-		var28.MouseButton1Click:connect(function()
-			-- upvalues: rbxAnalyticsService (copy), contexts (copy), eventTypes (copy), var12 (copy), eventNames (copy), recordingEvent (copy)
+		local var6, var7 = utilityModule:AddButtonRow(record, "RecordButton", "Record Video", UDim2.new(0, 300, 0, 44), var3)
+		var6.LayoutOrder = 6
+		var7.MouseButton1Click:connect(function()
+			-- upvalues: rbxAnalyticsService (copy), contexts (copy), eventTypes (copy), var2 (copy), eventNames (copy), recordingEvent (copy)
 			rbxAnalyticsService:SendEventDeferred("mobile", contexts.Captures, eventTypes.ButtonClick, {
-				btn = if not var12 then eventNames.CapturesLegacyVideoRecordActivated else eventNames.CapturesLegacyVideoRecordDeactivated
+				btn = if not var2 then eventNames.CapturesLegacyVideoRecordActivated else eventNames.CapturesLegacyVideoRecordDeactivated
 			})
-			recordingEvent:Fire(not var12)
+			recordingEvent:Fire(not var2)
 		end)
-		local var29 = settings():FindFirstChild("Game Options")
+		local var8 = settings():FindFirstChild("Game Options")
 		
-		if var29 then
-			var29.VideoRecordingChangeRequest:connect(function(p7)
-				-- upvalues: var12 (copy), var28 (ref)
-				var12 = p7
+		if var8 then
+			var8.VideoRecordingChangeRequest:connect(function(p2)
+				-- upvalues: var2 (copy), var7 (ref)
+				var2 = p2
 				
-				if p7 then
-					var28.RecordButtonTextLabel.Text = "Stop Recording"
+				if p2 then
+					var7.RecordButtonTextLabel.Text = "Stop Recording"
 					
 					return
 				end
-				var28.RecordButtonTextLabel.Text = "Record Video"
+				var7.RecordButtonTextLabel.Text = "Record Video"
 			end)
 		end
-		var28.Activated:Connect(function()
+		var7.Activated:Connect(function()
 			-- upvalues: coreGuiService (copy)
 			coreGuiService:ToggleRecording()
 		end)
@@ -149,11 +149,11 @@ local var10 = (function()
 	
 	return record
 end)()
-var10.Displayed.Event:connect(function(p8)
-	-- upvalues: guiService (ref), var10 (write)
-	if p8 then
-		guiService.SelectedCoreObject = var10.ScreenshotButton
+var1.Displayed.Event:connect(function(p1)
+	-- upvalues: guiService (ref), var1 (write)
+	if p1 then
+		guiService.SelectedCoreObject = var1.ScreenshotButton
 	end
 end)
 
-return var10
+return var1

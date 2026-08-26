@@ -5,16 +5,16 @@ local discountType = require(parent.IAPExperience).DiscountType
 local _ = require(bulkPurchaseApp.Store.Types)
 local fFlagPurchasePromptFetchCartPricing = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), discountType (ref), fFlagPurchasePromptFetchCartPricing (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: p0 (ref), discountType (copy), fFlagPurchasePromptFetchCartPricing (copy), p1 (ref)
-		if not p0 then
+		-- upvalues: p1 (ref), discountType (copy), fFlagPurchasePromptFetchCartPricing (copy), p2 (ref)
+		if not p1 then
 			return nil
 		end
 		local t = {}
 		
-		for i, v in p0.discounts do
+		for i, v in p1.discounts do
 			table.insert(t, {
 				type = discountType[v.discountCampaign] or discountType.Uncategorized,
 				amountInRobux = v.robuxDiscountAmount or 0,
@@ -24,10 +24,10 @@ return function(p0, p1)
 		end
 		return {
 			itemPrice = {
-				basePriceInRobux = p0.originalPrice,
-				priceInRobux = p1,
+				basePriceInRobux = p1.originalPrice,
+				priceInRobux = p2,
 				discounts = t
 			}
 		}
-	end, { p0, p1 })
+	end, { p1, p2 })
 end

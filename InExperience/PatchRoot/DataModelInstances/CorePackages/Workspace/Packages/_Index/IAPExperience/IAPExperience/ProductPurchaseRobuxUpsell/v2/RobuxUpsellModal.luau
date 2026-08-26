@@ -28,25 +28,25 @@ local _ = require(parent.Enums.VirtualItemBadgeType)
 local useDefaultFocusBehavior = require(parent_1.ReactFocusNavigation).useDefaultFocusBehavior
 local fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule = require(parent.Flags.FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePrompt)
 
-local function MiddleContent(p0)
+local function MiddleContent(p1)
 	-- upvalues: reactModule (ref), view (ref), productDetailsModule (ref), robuxUpsellModalUpsellDetailsWithBonusModule (ref), text (ref), formatNumberModule (ref), localizationService (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-xxlarge auto-y size-full-0 align-x-center align-y-center"
 	}, {
 		ProductDetails = reactModule.createElement(productDetailsModule, {
 			layoutOrder = 1,
-			isPortrait = p0.isPortrait,
-			model = p0.product.model,
-			itemIcon = p0.product.itemIcon,
-			itemName = p0.product.itemName,
-			itemRobuxCost = p0.product.itemRobuxCost,
-			badgeType = p0.product.badgeType
+			isPortrait = p1.isPortrait,
+			model = p1.product.model,
+			itemIcon = p1.product.itemIcon,
+			itemName = p1.product.itemName,
+			itemRobuxCost = p1.product.itemRobuxCost,
+			badgeType = p1.product.badgeType
 		}),
-		UpsellPackageDetails = if p0.upsell.robuxPurchaseAmountBeforeBonus then reactModule.createElement(robuxUpsellModalUpsellDetailsWithBonusModule, {
+		UpsellPackageDetails = if p1.upsell.robuxPurchaseAmountBeforeBonus then reactModule.createElement(robuxUpsellModalUpsellDetailsWithBonusModule, {
 			layoutOrder = 2,
-			priceString = p0.upsell.robuxPurchaseCost or "",
-			robuxAmount = p0.upsell.robuxPurchaseAmountBeforeBonus,
-			bonusAmount = p0.upsell.robuxPurchaseAmount - p0.upsell.robuxPurchaseAmountBeforeBonus
+			priceString = p1.upsell.robuxPurchaseCost or "",
+			robuxAmount = p1.upsell.robuxPurchaseAmountBeforeBonus,
+			bonusAmount = p1.upsell.robuxPurchaseAmount - p1.upsell.robuxPurchaseAmountBeforeBonus
 		}) else reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "row flex-between size-full-1400 align-y-center bg-surface-300 radius-medium padding-large stroke-system-contrast stroke-thick"
@@ -55,13 +55,13 @@ local function MiddleContent(p0)
 				RobuxAmount = reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "auto-xy text-title-large content-emphasis text-align-x-left",
-					Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.upsell.robuxPurchaseAmount)
+					Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.upsell.robuxPurchaseAmount)
 				})
 			}),
 			RobuxPrice = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-title-large content-emphasis text-align-x-right",
-				Text = p0.upsell.robuxPurchaseCost or ""
+				Text = p1.upsell.robuxPurchaseCost or ""
 			})
 		})
 	})
@@ -69,7 +69,7 @@ end
 
 local function ButtonStackInfo(p1)
 	-- upvalues: useLocalization (ref), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), buttonType (ref)
-	local var17 = useLocalization({
+	local var1 = useLocalization({
 		ButtonCancel = "IAPExperience.RobuxUpsell.Action.Cancel",
 		LoadingText = "IAPExperience.RobuxUpsell.Text.Loading",
 		BuyRobuxButton = if p1.buttons.opensBuyRobuxPage then "IAPExperience.RobuxUpsell.Action.BuyRobux" else "IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem"
@@ -82,7 +82,7 @@ local function ButtonStackInfo(p1)
 			{
 				props = {
 					onActivated = p1.buttons.cancelPurchaseActivated,
-					text = var17.ButtonCancel,
+					text = var1.ButtonCancel,
 					inputIcon = p1.buttons.cancelControllerIcon
 				}
 			}
@@ -94,7 +94,7 @@ local function ButtonStackInfo(p1)
 					isDelayedInput = p1.buttons.buyItemisDelayedInput,
 					enableInputDelayed = p1.buttons.buyItemEnableInputDelayed,
 					onActivated = p1.buttons.buyItemActivated,
-					text = var17.BuyRobuxButton,
+					text = var1.BuyRobuxButton,
 					inputIcon = p1.buttons.buyItemControllerIcon,
 					buttonRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then p1.buttons.buttonRef else nil
 				}
@@ -103,43 +103,43 @@ local function ButtonStackInfo(p1)
 	}
 end
 
-local function RobuxUpsellModal(p2)
+local function RobuxUpsellModal(p1)
 	-- upvalues: fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), useDefaultFocusBehavior (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), singlePackageUpsellShownCounter (ref), singlePackageUpsellModalClosedCounter (ref), singlePackageUpsellModalBuyClickedCounter (ref), interactiveAlert (ref), robuxUpsellModalTitleModule (ref), MiddleContent (ref), ButtonStackInfo (ref), robuxUpsellModalFooterModule (ref)
-	local var18 = nil
-	local var19 = nil
+	local var1 = nil
+	local var2 = nil
 	
 	if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
-		local var20, var21 = useDefaultFocusBehavior()
-		var18 = var20
-		var19 = var21
+		local var3, var4 = useDefaultFocusBehavior()
+		var1 = var3
+		var2 = var4
 	end
 	reactModule.useEffect(function()
-		-- upvalues: loggerModule (copy), p2 (ref), getAppContextModule (copy), default (copy), singlePackageUpsellShownCounter (copy)
+		-- upvalues: loggerModule (copy), p1 (ref), getAppContextModule (copy), default (copy), singlePackageUpsellShownCounter (copy)
 		loggerModule.debug({
 			message = "Single Package Upsell Modal Shown",
-			screenHeight = p2.screenSize.Y,
-			screenWidth = p2.screenSize.X,
-			portrait = p2.screenSize.X < p2.screenSize.Y,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y,
 			appContext = getAppContextModule(),
-			buyRobuxVariant = if p2.buttons.opensBuyRobuxPage == nil then 0 elseif p2.buttons.opensBuyRobuxPage then 1 else 2
+			buyRobuxVariant = if p1.buttons.opensBuyRobuxPage == nil then 0 elseif p1.buttons.opensBuyRobuxPage then 1 else 2
 		})
 		default:logRobloxTelemetryCounter(singlePackageUpsellShownCounter, 1, {
-			screenHeight = p2.screenSize.Y,
-			screenWidth = p2.screenSize.X,
-			portrait = p2.screenSize.X < p2.screenSize.Y,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y,
 			appContext = getAppContextModule(),
-			buyRobuxVariant = if p2.buttons.opensBuyRobuxPage == nil then 0 elseif p2.buttons.opensBuyRobuxPage then 1 else 2
+			buyRobuxVariant = if p1.buttons.opensBuyRobuxPage == nil then 0 elseif p1.buttons.opensBuyRobuxPage then 1 else 2
 		})
 	end, {})
 	
-	local var22 = function()
-		-- upvalues: loggerModule (copy), default (copy), singlePackageUpsellModalClosedCounter (copy), getAppContextModule (copy), p2 (ref)
+	local var5 = function()
+		-- upvalues: loggerModule (copy), default (copy), singlePackageUpsellModalClosedCounter (copy), getAppContextModule (copy), p1 (ref)
 		loggerModule.debug({ message = "Single Package Upsell Modal Closed" })
 		default:logRobloxTelemetryCounter(singlePackageUpsellModalClosedCounter, 1, { appContext = getAppContextModule() })
-		p2.buttons.cancelPurchaseActivated()
+		p1.buttons.cancelPurchaseActivated()
 	end
 	
-	local buyItemActivated = p2.buttons.buyItemActivated
+	local buyItemActivated = p1.buttons.buyItemActivated
 	
 	function p2.buttons.buyItemActivated()
 		-- upvalues: loggerModule (copy), default (copy), singlePackageUpsellModalBuyClickedCounter (copy), getAppContextModule (copy), buyItemActivated (ref)
@@ -149,30 +149,30 @@ local function RobuxUpsellModal(p2)
 	end
 	
 	if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
-		p2.buttons.buttonRef = var18
+		p1.buttons.buttonRef = var1
 	end
 	return reactModule.createElement(interactiveAlert, {
 		title = "",
-		defaultChildRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then var19 else nil,
-		screenSize = p2.screenSize,
+		defaultChildRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then var2 else nil,
+		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
 		titleContent = function()
-			-- upvalues: reactModule (copy), robuxUpsellModalTitleModule (copy), p2 (ref), var22 (ref)
+			-- upvalues: reactModule (copy), robuxUpsellModalTitleModule (copy), p1 (ref), var5 (ref)
 			return reactModule.createElement(robuxUpsellModalTitleModule, {
-				balanceAmount = p2.upsell.balanceAmount,
-				cancelPurchaseActivated = var22
+				balanceAmount = p1.upsell.balanceAmount,
+				cancelPurchaseActivated = var5
 			})
 		end,
 		middleContent = function()
-			-- upvalues: reactModule (copy), MiddleContent (copy), p2 (ref)
+			-- upvalues: reactModule (copy), MiddleContent (copy), p1 (ref)
 			return reactModule.createElement(MiddleContent, {
-				product = p2.product,
-				upsell = p2.upsell,
-				isPortrait = p2.screenSize.X < p2.screenSize.Y
+				product = p1.product,
+				upsell = p1.upsell,
+				isPortrait = p1.screenSize.X < p1.screenSize.Y
 			})
 		end,
-		buttonStackInfo = ButtonStackInfo({ buttons = p2.buttons, isQuest = p2.isQuest }),
+		buttonStackInfo = ButtonStackInfo({ buttons = p1.buttons, isQuest = p1.isQuest }),
 		footerContent = function()
 			-- upvalues: reactModule (copy), robuxUpsellModalFooterModule (copy)
 			return reactModule.createElement(robuxUpsellModalFooterModule)
@@ -180,11 +180,11 @@ local function RobuxUpsellModal(p2)
 	})
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), RobuxUpsellModal (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		RobuxUpsellModal = reactModule.createElement(RobuxUpsellModal, p3)
+		RobuxUpsellModal = reactModule.createElement(RobuxUpsellModal, p1)
 	})
 end

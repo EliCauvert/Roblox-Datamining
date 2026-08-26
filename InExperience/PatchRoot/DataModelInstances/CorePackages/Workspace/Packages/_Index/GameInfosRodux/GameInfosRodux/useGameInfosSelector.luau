@@ -2,10 +2,10 @@
 local gameInfosReducerModule = require(gameInfosRodux.GameInfosReducer)
 local useSelector = require(gameInfosRodux.Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSelector (ref), gameInfosReducerModule (ref)
-	return useSelector(function(p1)
-		-- upvalues: gameInfosReducerModule (copy), p0 (ref)
-		return p1.Personalization[gameInfosReducerModule.key][p0]
+	return useSelector(function(p2)
+		-- upvalues: gameInfosReducerModule (copy), p1 (ref)
+		return p2.Personalization[gameInfosReducerModule.key][p1]
 	end)
 end

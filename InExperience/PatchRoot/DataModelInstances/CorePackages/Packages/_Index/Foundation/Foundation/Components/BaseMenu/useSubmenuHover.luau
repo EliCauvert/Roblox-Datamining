@@ -3,139 +3,139 @@ local reactModule = require(foundation.Parent.React)
 local _ = require(foundation.Components.Types)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	local t = {}
 	
-	for i = 1, p1 do
-		if p0[i] then
-			t[i] = p0[i]
+	for i = 1, p2 do
+		if p1[i] then
+			t[i] = p1[i]
 		end
 	end
 	return t
 end
 
-local _ = function(p2, p3, p4)
+local _ = function(p3, p4, p5)
 	local t = {}
 	
-	for i = 1, p3 - 1 do
-		if p2[i] then
-			t[i] = p2[i]
+	for i = 1, p4 - 1 do
+		if p3[i] then
+			t[i] = p3[i]
 		end
 	end
-	t[p3] = p4
+	t[p4] = p5
 	
 	return t
 end
 
 return function()
 	-- upvalues: useTokensModule (ref), reactModule (ref)
-	local var5 = useTokensModule()
-	local time100 = var5.Time.Time_100
-	local time300 = var5.Time.Time_300
-	local var6, var7 = reactModule.useState({})
-	local var8 = reactModule.useRef({})
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useRef(nil)
-	var8.current = var6
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref), var10 (ref)
-		if var9.current then
-			task.cancel(var9.current)
-			var9.current = nil
+	local var1 = useTokensModule()
+	local time100 = var1.Time.Time_100
+	local time300 = var1.Time.Time_300
+	local var2, var3 = reactModule.useState({})
+	local var4 = reactModule.useRef({})
+	local var5 = reactModule.useRef(nil)
+	local var6 = reactModule.useRef(nil)
+	var4.current = var2
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), var6 (ref)
+		if var5.current then
+			task.cancel(var5.current)
+			var5.current = nil
 		end
-		if var10.current then
-			task.cancel(var10.current)
-			var10.current = nil
+		if var6.current then
+			task.cancel(var6.current)
+			var6.current = nil
 		end
 	end, {})
-	local var12 = reactModule.useCallback(function(p5, p6, p7)
-		-- upvalues: var11 (ref), var8 (ref), var7 (ref), var9 (ref), time100 (ref)
-		var11()
+	local var8 = reactModule.useCallback(function(p6, p7, p8)
+		-- upvalues: var7 (ref), var4 (ref), var3 (ref), var5 (ref), time100 (ref)
+		var7()
 		
-		if var8.current[p5] == p6 then return end
-		if p7 then
-			var7(function(p8)
-				-- upvalues: p5 (ref), p6 (ref)
+		if var4.current[p6] == p7 then return end
+		if p8 then
+			var3(function(p9)
+				-- upvalues: p6 (ref), p7 (ref)
 				local t = {}
 				
-				for i = 1, p5 - 1 do
-					if p8[i] then
-						t[i] = p8[i]
+				for i = 1, p6 - 1 do
+					if p9[i] then
+						t[i] = p9[i]
 					end
 				end
-				t[p5] = p6
+				t[p6] = p7
 				
 				return t
 			end)
 			
 			return
 		end
-		var9.current = task.delay(time100, function()
-			-- upvalues: var7 (copy), p5 (ref), p6 (ref), var9 (copy)
-			var7(function(p9)
-				-- upvalues: p5 (copy), p6 (copy)
+		var5.current = task.delay(time100, function()
+			-- upvalues: var3 (copy), p6 (ref), p7 (ref), var5 (copy)
+			var3(function(p9)
+				-- upvalues: p6 (copy), p7 (copy)
 				local t = {}
 				
-				for i = 1, p5 - 1 do
+				for i = 1, p6 - 1 do
 					if p9[i] then
 						t[i] = p9[i]
 					end
 				end
-				t[p5] = p6
+				t[p6] = p7
 				
 				return t
 			end)
-			var9.current = nil
+			var5.current = nil
 		end)
-	end, { var11, time100 })
-	local var13 = reactModule.useCallback(function(p10)
-		-- upvalues: var11 (ref), var8 (ref), var10 (ref), time300 (ref), var7 (ref)
-		var11()
+	end, { var7, time100 })
+	local var9 = reactModule.useCallback(function(p9)
+		-- upvalues: var7 (ref), var4 (ref), var6 (ref), time300 (ref), var3 (ref)
+		var7()
 		
-		if #var8.current < p10 then
+		if #var4.current < p9 then
 			return
 		end
-		var10.current = task.delay(time300, function()
-			-- upvalues: var7 (copy), p10 (ref), var10 (copy)
-			var7(function(p11)
-				-- upvalues: p10 (copy)
-				if #p11 < p10 then
-					return p11
+		var6.current = task.delay(time300, function()
+			-- upvalues: var3 (copy), p9 (ref), var6 (copy)
+			var3(function(p10)
+				-- upvalues: p9 (copy)
+				if #p10 < p9 then
+					return p10
 				end
 				local t = {}
 				
-				for i = 1, p10 - 1 do
-					if p11[i] then
-						t[i] = p11[i]
+				for i = 1, p9 - 1 do
+					if p10[i] then
+						t[i] = p10[i]
 					end
 				end
 				return t
 			end)
-			var10.current = nil
+			var6.current = nil
 		end)
-	end, { var11, time300 })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), var7 (ref)
-		var11()
-		var7({})
-	end, { var11 })
+	end, { var7, time300 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), var3 (ref)
+		var7()
+		var3({})
+	end, { var7 })
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var10 (ref)
+		-- upvalues: var5 (ref), var6 (ref)
 		return function()
-			-- upvalues: var9 (copy), var10 (copy)
-			if var9.current then
-				task.cancel(var9.current)
+			-- upvalues: var5 (copy), var6 (copy)
+			if var5.current then
+				task.cancel(var5.current)
 			end
-			if var10.current then
-				task.cancel(var10.current)
+			if var6.current then
+				task.cancel(var6.current)
 			end
 		end
 	end, {})
 	
 	return {
-		openPath = var6,
-		openAtDepth = var12,
-		closeAtDepth = var13,
-		reset = var14
+		openPath = var2,
+		openAtDepth = var8,
+		closeAtDepth = var9,
+		reset = var10
 	}
 end

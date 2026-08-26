@@ -1,6 +1,6 @@
 ﻿return function(value)
-	local var0 = type(value)
-	assert(var0 == "table", "expected a table for first argument, got " .. var0)
+	local var1 = type(value)
+	assert(var1 == "table", "expected a table for first argument, got " .. var0)
 	local t = {}
 	
 	for i = 1, #value do

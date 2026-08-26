@@ -2,32 +2,32 @@
 local signalsModule = require(parent.Signals)
 local _ = require(parent.InternalHttpStore)
 local createHttpStoreModule = require(script.Parent.createHttpStore)
-local var2 = nil
+local var1 = nil
 local _ = nil
 local _ = nil
-local var3, var4 = signalsModule.createSignal(nil)
+local var2, var3 = signalsModule.createSignal(nil)
+local var4 = var2
 local var5 = var3
-local var6 = var4
 
 return {
-	_create = function(p0)
-		-- upvalues: var2 (write), createHttpStoreModule (ref), var6 (write)
-		var2 = createHttpStoreModule(p0)
-		var6(var2)
+	_create = function(p1)
+		-- upvalues: var1 (write), createHttpStoreModule (ref), var5 (write)
+		var1 = createHttpStoreModule(p1)
+		var5(var1)
 		
-		return var2
+		return var1
 	end,
 	_dispose = function()
-		-- upvalues: var5 (write), var6 (write)
-		local var7 = var5()
+		-- upvalues: var4 (write), var5 (write)
+		local var6 = var4()
 		
-		if var7 ~= nil then
-			var7.cancelAll()
+		if var6 ~= nil then
+			var6.cancelAll()
 		end
-		var6(nil)
+		var5(nil)
 	end,
 	get = function(p1)
-		-- upvalues: var5 (write)
-		return var5(p1)
+		-- upvalues: var4 (write)
+		return var4(p1)
 	end
 }

@@ -31,55 +31,55 @@ itemSplitTile.defaultProps = {
 	isHovered = false
 }
 
-function itemSplitTile.init(p0)
+function itemSplitTile.init(p1)
 	-- upvalues: controlStateModule (ref)
-	p0:setState({ controlState = controlStateModule.Initialize })
+	p1:setState({ controlState = controlStateModule.Initialize })
 	
-	function p0.onStateChanged(_, p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ controlState = p1 })
+	function p0.onStateChanged(_, p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ controlState = p2 })
 	end
 end
 
-function itemSplitTile.renderImageFrame(_, p2, p3, p4, p5)
+function itemSplitTile.renderImageFrame(_, p1, p2, p3, p4)
 	-- upvalues: roactModule (ref), imageSetComponentModule (ref), uDim (ref), loadableImageModule (ref)
-	local theme = p5.Theme
-	p4 = p4 or not p3
+	local theme = p4.Theme
+	p3 = p3 or not p2
 	
 	return roactModule.createElement("Frame", {
 		ClipsDescendants = true,
 		BackgroundTransparency = 1,
-		Position = UDim2.fromScale(0, if p3 then 0.5 else 0),
-		Size = UDim2.fromScale(1, if p4 then 1 else 0.5)
+		Position = UDim2.fromScale(0, if p2 then 0.5 else 0),
+		Size = UDim2.fromScale(1, if p3 then 1 else 0.5)
 	}, {
-		Image = if typeof(p2) == "table" then roactModule.createElement(imageSetComponentModule.Label, {
+		Image = if typeof(p1) == "table" then roactModule.createElement(imageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
 			BackgroundColor3 = theme.PlaceHolder.Color,
-			Image = p2,
-			Position = UDim2.fromScale(0, if p3 then -1 else 0),
-			Size = UDim2.fromScale(1, if p4 then 1 else 2)
+			Image = p1,
+			Position = UDim2.fromScale(0, if p2 then -1 else 0),
+			Size = UDim2.fromScale(1, if p3 then 1 else 2)
 		}, {
-			UICorner = if p4 then roactModule.createElement("UICorner", { CornerRadius = uDim }) else nil
+			UICorner = if p3 then roactModule.createElement("UICorner", { CornerRadius = uDim }) else nil
 		}) else roactModule.createElement(loadableImageModule, {
 			BackgroundTransparency = 1,
 			showFailedStateWhenLoadingFailed = true,
 			useShimmerAnimationWhileLoading = true,
 			BackgroundColor3 = theme.PlaceHolder.Color,
-			Image = p2,
-			Position = UDim2.fromScale(0.5, if p3 then 0 else 1),
-			Size = UDim2.fromScale(1, if p4 then 1 else 2),
-			AnchorPoint = Vector2.new(0.5, if p4 then 1 else 0.5),
-			cornerRadius = if p4 then uDim else nil
+			Image = p1,
+			Position = UDim2.fromScale(0.5, if p2 then 0 else 1),
+			Size = UDim2.fromScale(1, if p3 then 1 else 2),
+			AnchorPoint = Vector2.new(0.5, if p3 then 1 else 0.5),
+			cornerRadius = if p3 then uDim else nil
 		})
 	})
 end
 
-function itemSplitTile.renderTopContent(p6, p7)
+function itemSplitTile.renderTopContent(p1, p2)
 	-- upvalues: imagesModule (ref), roactModule (ref), imageSetComponentModule (ref)
-	local hasBackground = p6.props.hasBackground
-	local isHovered = p6.props.isHovered
-	local var14 = not hasBackground
-	local theme = p7.Theme
+	local hasBackground = p1.props.hasBackground
+	local isHovered = p1.props.isHovered
+	local var1 = not hasBackground
+	local theme = p2.Theme
 	local image = imagesModule[theme.ItemBackgroundDefault.Image]
 	
 	return roactModule.createElement("Frame", {
@@ -88,13 +88,13 @@ function itemSplitTile.renderTopContent(p6, p7)
 		Size = UDim2.new(1, 0, 1, 0),
 		SizeConstraint = Enum.SizeConstraint.RelativeXX
 	}, {
-		BackgroundImage = if p6.props.thumbnail then roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-			TopImageFrame = p6:renderImageFrame(image, false, var14, p7),
-			BottomImageFrame = if not var14 then p6:renderImageFrame(image, true, false, p7) else nil
+		BackgroundImage = if p1.props.thumbnail then roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+			TopImageFrame = p1:renderImageFrame(image, false, var1, p2),
+			BottomImageFrame = if not var1 then p1:renderImageFrame(image, true, false, p2) else nil
 		}) else nil,
 		ItemImage = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-			TopImageFrame = p6:renderImageFrame(p6.props.thumbnail, false, var14, p7),
-			BottomImageFrame = if not var14 then p6:renderImageFrame(p6.props.thumbnail, true, false, p7) else nil
+			TopImageFrame = p1:renderImageFrame(p1.props.thumbnail, false, var1, p2),
+			BottomImageFrame = if not var1 then p1:renderImageFrame(p1.props.thumbnail, true, false, p2) else nil
 		}),
 		HoverShadow = if isHovered and not hasBackground then roactModule.createElement(imageSetComponentModule.Label, {
 			ZIndex = 0,
@@ -111,19 +111,19 @@ function itemSplitTile.renderTopContent(p6, p7)
 	})
 end
 
-function itemSplitTile.renderBottomContent(p8, p9)
+function itemSplitTile.renderBottomContent(p1, p2)
 	-- upvalues: controlStateModule (ref), uDim_2 (ref), uDim_1 (ref), roactModule (ref), itemSplitTileFooterModule (ref)
-	local itemName = p8.props.itemName
-	local hasBackground = p8.props.hasBackground
-	local font = p9.Font
-	local ceiled = math.ceil(p9.Font.BaseSize * p9.Font.Header2.RelativeSize)
-	local var16 = if (p8.props.isHovered or p8.state.controlState == controlStateModule.Pressed) and hasBackground then uDim_2 else uDim_1
-	local textEmphasis = p9.Theme.TextEmphasis
+	local itemName = p1.props.itemName
+	local hasBackground = p1.props.hasBackground
+	local font = p2.Font
+	local ceiled = math.ceil(p2.Font.BaseSize * p2.Font.Header2.RelativeSize)
+	local var1 = if (p1.props.isHovered or p1.state.controlState == controlStateModule.Pressed) and hasBackground then uDim_2 else uDim_1
+	local textEmphasis = p2.Theme.TextEmphasis
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
-		Size = UDim2.new(1, 0, 0, ceiled * 3 + uDim_1.Offset + var16.Offset * 2)
+		Size = UDim2.new(1, 0, 0, ceiled * 3 + uDim_1.Offset + var1.Offset * 2)
 	}, {
 		UIListLayout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -131,10 +131,10 @@ function itemSplitTile.renderBottomContent(p8, p9)
 			Padding = uDim_1
 		}),
 		Padding = roactModule.createElement("UIPadding", {
-			PaddingLeft = if hasBackground then var16 else nil,
-			PaddingRight = if hasBackground then var16 else nil,
-			PaddingTop = if hasBackground then var16 else uDim_1,
-			PaddingBottom = if hasBackground then var16 else uDim_1
+			PaddingLeft = if hasBackground then var1 else nil,
+			PaddingRight = if hasBackground then var1 else nil,
+			PaddingTop = if hasBackground then var1 else uDim_1,
+			PaddingBottom = if hasBackground then var1 else uDim_1
 		}),
 		TitleArea = if itemName and string.len(itemName) > 0 then roactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
@@ -155,16 +155,16 @@ function itemSplitTile.renderBottomContent(p8, p9)
 		}) else nil,
 		Footer = roactModule.createElement(itemSplitTileFooterModule, {
 			layoutOrder = 2,
-			priceText = p8.props.priceText,
-			isOwned = p8.props.isOwned
+			priceText = p1.props.priceText,
+			isOwned = p1.props.isOwned
 		})
 	})
 end
 
-function itemSplitTile.renderTileContent(p10, p11)
+function itemSplitTile.renderTileContent(p1, p2)
 	-- upvalues: roactModule (ref), uDim (ref), interactableModule (ref)
-	local hasBackground = p10.props.hasBackground
-	local theme = p11.Theme
+	local hasBackground = p1.props.hasBackground
+	local theme = p2.Theme
 	
 	return roactModule.createElement("Frame", {
 		ClipsDescendants = true,
@@ -185,14 +185,14 @@ function itemSplitTile.renderTileContent(p10, p11)
 				Size = UDim2.new(1, 0, 1, 0),
 				SizeConstraint = Enum.SizeConstraint.RelativeXX
 			}),
-			BottomContent = p10:renderBottomContent(p11)
+			BottomContent = p1:renderBottomContent(p2)
 		}),
-		TopContent = p10:renderTopContent(p11),
+		TopContent = p1:renderTopContent(p2),
 		TileOverlay = roactModule.createElement(interactableModule, {
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = 1,
-			onStateChanged = p10.onStateChanged,
-			[roactModule.Event.Activated] = p10.props.onActivated,
+			onStateChanged = p1.onStateChanged,
+			[roactModule.Event.Activated] = p1.props.onActivated,
 			ZIndex = 3
 		}, {
 			UICorner = roactModule.createElement("UICorner", { CornerRadius = uDim }),
@@ -213,18 +213,18 @@ function itemSplitTile.renderTileContent(p10, p11)
 	})
 end
 
-function itemSplitTile.render(p12)
+function itemSplitTile.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref)
-	local hasBackground = p12.props.hasBackground
-	local isHovered = p12.props.isHovered
+	local hasBackground = p1.props.hasBackground
+	local isHovered = p1.props.isHovered
 	
-	return withStyleModule(function(p13)
-		-- upvalues: roactModule (copy), p12 (ref), isHovered (ref), hasBackground (ref), imageSetComponentModule (copy), imagesModule (copy)
-		local theme = p13.Theme
+	return withStyleModule(function(p2)
+		-- upvalues: roactModule (copy), p1 (ref), isHovered (ref), hasBackground (ref), imageSetComponentModule (copy), imagesModule (copy)
+		local theme = p2.Theme
 		
 		return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 			UISizeConstraint = roactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(146, 233) }),
-			TileContent = p12:renderTileContent(p13),
+			TileContent = p1:renderTileContent(p2),
 			HoverShadow = if isHovered and hasBackground then roactModule.createElement(imageSetComponentModule.Label, {
 				ZIndex = 0,
 				BackgroundTransparency = 1,

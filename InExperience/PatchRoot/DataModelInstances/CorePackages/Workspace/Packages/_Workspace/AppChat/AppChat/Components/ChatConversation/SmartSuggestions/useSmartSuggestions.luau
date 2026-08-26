@@ -19,30 +19,30 @@ local useStartPartySuggestionModule = require(script.Parent.useStartPartySuggest
 local createSmartSuggestionActionHandler = smartSuggestionActionHandlerModule.createSmartSuggestionActionHandler
 local suggestionType = typesModule.SuggestionType
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: getDeepValueModule (ref)
-	if p1 == nil then
+	if p2 == nil then
 		return nil
 	end
-	local var13 = getDeepValueModule(p0, `ChatAppReducer.Conversations.{p1}`)
+	local var1 = getDeepValueModule(p1, `ChatAppReducer.Conversations.{p2}`)
 	
-	return if var13 == nil or var13.messages == nil then nil else var13.messages
+	return if var1 == nil or var1.messages == nil then nil else var1.messages
 end
 
-local function getLatestUserMessageId(p2, p3)
+local function getLatestUserMessageId(p1, p2)
 	-- upvalues: getDeepValueModule (ref), orderedMap (ref), messageModelModule (ref)
-	local var14
-	if p3 == nil then
-		var14 = nil
+	local var1
+	if p2 == nil then
+		var1 = nil
 	else
-		local var15 = getDeepValueModule(p2, `ChatAppReducer.Conversations.{p3}`)
-		var14 = if var15 == nil or var15.messages == nil then nil else var15.messages
+		local var2 = getDeepValueModule(p1, `ChatAppReducer.Conversations.{p2}`)
+		var1 = if var2 == nil or var2.messages == nil then nil else var2.messages
 	end
-	if var14 == nil or var14.keys == nil or var14.values == nil then
+	if var1 == nil or var1.keys == nil or var1.values == nil then
 		return nil
 	end
-	for i = orderedMap.Length(var14), 1, -1 do
-		local byIndex = orderedMap.GetByIndex(var14, i)
+	for i = orderedMap.Length(var1), 1, -1 do
+		local byIndex = orderedMap.GetByIndex(var1, i)
 		
 		if not byIndex or byIndex.senderType ~= messageModelModule.SenderTypes.User then
 			continue
@@ -52,164 +52,164 @@ local function getLatestUserMessageId(p2, p3)
 	return nil
 end
 
-local _ = function(p4, p5, p6)
+local _ = function(p3, p4, p5)
 	-- upvalues: getDeepValueModule (ref), orderedMap (ref)
-	local var17, var18
-	if p5 == nil then
-		var17 = nil
+	local var3, var4
+	if p4 == nil then
+		var3 = nil
 	else
-		var18 = getDeepValueModule(p4, `ChatAppReducer.Conversations.{p5}`)
-		var17 = if var18 == nil or var18.messages == nil then nil else var18.messages
+		var4 = getDeepValueModule(p3, `ChatAppReducer.Conversations.{p4}`)
+		var3 = if var4 == nil or var4.messages == nil then nil else var4.messages
 	end
-	var18 = var17 ~= nil and (var17.values ~= nil and orderedMap.Get(var17, p6) ~= nil)
+	var4 = var3 ~= nil and (var3.values ~= nil and orderedMap.Get(var3, p5) ~= nil)
 	
-	return var18
+	return var4
 end
 
-return function(p7, p8, p9)
+return function(p3, p4, p5)
 	-- upvalues: useCanAccessPartyModule (ref), useStartPartySuggestionModule (ref), useStore (ref), reactModule (ref), getLatestUserMessageId (ref), useSelector (ref), createSmartSuggestionActionHandler (ref), cryoModule (ref), suggestionType (ref), fetchSmartSuggestionsModule (ref), constantsModule (ref), getDeepValueModule (ref), orderedMap (ref), useRealtimePlatformChatConversationModule (ref)
-	local var19 = useStartPartySuggestionModule(p7, useCanAccessPartyModule())
-	local canStartParty = var19.canStartParty
-	local startParty = var19.startParty
-	local var20 = useStore()
-	local var21 = useSelector(reactModule.useCallback(function(p10)
-		-- upvalues: getLatestUserMessageId (copy), p7 (ref)
-		return getLatestUserMessageId(p10, p7)
-	end, { p7 }))
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: createSmartSuggestionActionHandler (copy), p8 (ref), p9 (ref), startParty (ref)
+	local var3 = useStartPartySuggestionModule(p3, useCanAccessPartyModule())
+	local canStartParty = var3.canStartParty
+	local startParty = var3.startParty
+	local var4 = useStore()
+	local var5 = useSelector(reactModule.useCallback(function(p6)
+		-- upvalues: getLatestUserMessageId (copy), p3 (ref)
+		return getLatestUserMessageId(p6, p3)
+	end, { p3 }))
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: createSmartSuggestionActionHandler (copy), p4 (ref), p5 (ref), startParty (ref)
 		return createSmartSuggestionActionHandler({
-			sendMessage = p8,
-			sendGameLinkChatMessage = p9,
+			sendMessage = p4,
+			sendGameLinkChatMessage = p5,
 			startParty = startParty
 		})
-	end, { p8, p9, startParty })
-	local var23, var24 = reactModule.useState({})
-	local var25, var26 = reactModule.useState(false)
-	local var27 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var23 (ref), suggestionType (copy), canStartParty (ref)
-		return cryoModule.List.filter(var23, function(p11)
+	end, { p4, p5, startParty })
+	local var7, var8 = reactModule.useState({})
+	local var9, var10 = reactModule.useState(false)
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: cryoModule (copy), var7 (ref), suggestionType (copy), canStartParty (ref)
+		return cryoModule.List.filter(var7, function(p6)
 			-- upvalues: suggestionType (copy), canStartParty (copy)
-			return if p11.type == suggestionType.StartParty then canStartParty else true
+			return if p6.type == suggestionType.StartParty then canStartParty else true
 		end)
-	end, { var23, canStartParty })
-	local var28 = reactModule.useRef({
+	end, { var7, canStartParty })
+	local var12 = reactModule.useRef({
 		requestId = 0,
 		pendingRealtimeNotification = nil,
-		previousNewestUserMessageId = var21,
-		newestMessageConversationId = p7
+		previousNewestUserMessageId = var5,
+		newestMessageConversationId = p3
 	})
-	local var29 = reactModule.useCallback(function()
-		-- upvalues: p7 (ref), var28 (ref), fetchSmartSuggestionsModule (copy), var24 (ref), var26 (ref)
-		if p7 == nil then
+	local var13 = reactModule.useCallback(function()
+		-- upvalues: p3 (ref), var12 (ref), fetchSmartSuggestionsModule (copy), var8 (ref), var10 (ref)
+		if p3 == nil then
 			return
 		end
-		var28.current.requestId += 1
-		local requestId = var28.current.requestId
-		fetchSmartSuggestionsModule(p7):andThen(function(p12)
-			-- upvalues: var28 (copy), requestId (ref), var24 (copy), var26 (copy)
-			if var28.current.requestId == requestId then
-				var24(p12)
-				var26(false)
+		var12.current.requestId += 1
+		local requestId = var12.current.requestId
+		fetchSmartSuggestionsModule(p3):andThen(function(p6)
+			-- upvalues: var12 (copy), requestId (ref), var8 (copy), var10 (copy)
+			if var12.current.requestId == requestId then
+				var8(p6)
+				var10(false)
 				
 				return
 			end
 		end):catch(function() end)
-	end, { p7 })
+	end, { p3 })
 	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), var26 (ref), var29 (ref), var28 (ref)
-		var24({})
-		var26(false)
-		var29()
+		-- upvalues: var8 (ref), var10 (ref), var13 (ref), var12 (ref)
+		var8({})
+		var10(false)
+		var13()
 		
 		return function()
-			-- upvalues: var28 (copy)
-			var28.current.requestId += 1
-			var28.current.pendingRealtimeNotification = nil
+			-- upvalues: var12 (copy)
+			var12.current.requestId += 1
+			var12.current.pendingRealtimeNotification = nil
 		end
-	end, { p7, var29 })
-	local var30 = reactModule.useCallback(function(p13)
-		-- upvalues: constantsModule (copy), p7 (ref), var20 (ref), getLatestUserMessageId (copy), getDeepValueModule (copy), orderedMap (copy), var28 (ref), var29 (ref)
-		if p13.Type ~= constantsModule.PlatformChatConversation.Types.ConversationSuggestionsGenerated then return end
-		if p7 == nil or p13.ConversationId ~= p7 then return end
-		local state = var20:getState()
+	end, { p3, var13 })
+	local var14 = reactModule.useCallback(function(p6)
+		-- upvalues: constantsModule (copy), p3 (ref), var4 (ref), getLatestUserMessageId (copy), getDeepValueModule (copy), orderedMap (copy), var12 (ref), var13 (ref)
+		if p6.Type ~= constantsModule.PlatformChatConversation.Types.ConversationSuggestionsGenerated then return end
+		if p3 == nil or p6.ConversationId ~= p3 then return end
+		local state = var4:getState()
 		
-		if p13.MessageId == getLatestUserMessageId(state, p7) then
-			if var28.current.newestMessageConversationId == p7 and var28.current.previousNewestUserMessageId == p13.MessageId then
-				var29()
+		if p6.MessageId == getLatestUserMessageId(state, p3) then
+			if var12.current.newestMessageConversationId == p3 and var12.current.previousNewestUserMessageId == p6.MessageId then
+				var13()
 				
 				return
 			end
-			var28.current.pendingRealtimeNotification = { conversationId = p7, messageId = p13.MessageId }
+			var12.current.pendingRealtimeNotification = { conversationId = p3, messageId = p6.MessageId }
 			
 			return
 		else
-			local var32
-			local messageId = p13.MessageId
+			local var15
+			local messageId = p6.MessageId
 			
-			if p7 == nil then
-				var32 = nil
+			if p3 == nil then
+				var15 = nil
 			else
-				local var33 = getDeepValueModule(state, `ChatAppReducer.Conversations.{p7}`)
-				var32 = if var33 == nil or var33.messages == nil then nil else var33.messages
+				local var16 = getDeepValueModule(state, `ChatAppReducer.Conversations.{p3}`)
+				var15 = if var16 == nil or var16.messages == nil then nil else var16.messages
 			end
-			if var32 ~= nil and (var32.values ~= nil and orderedMap.Get(var32, messageId) ~= nil) then
+			if var15 ~= nil and (var15.values ~= nil and orderedMap.Get(var15, messageId) ~= nil) then
 				return
 			end
-			var28.current.pendingRealtimeNotification = { conversationId = p7, messageId = p13.MessageId }
+			var12.current.pendingRealtimeNotification = { conversationId = p3, messageId = p6.MessageId }
 		end
-	end, { p7, var20, var29 })
-	useRealtimePlatformChatConversationModule(var30, { var30 })
+	end, { p3, var4, var13 })
+	useRealtimePlatformChatConversationModule(var14, { var14 })
 	reactModule.useEffect(function()
-		-- upvalues: var28 (ref), var21 (ref), p7 (ref), var24 (ref), var26 (ref), var29 (ref), var20 (ref), getDeepValueModule (copy), orderedMap (copy)
-		local previousNewestUserMessageId = var28.current.previousNewestUserMessageId
-		local newestMessageConversationId = var28.current.newestMessageConversationId
-		var28.current.previousNewestUserMessageId = var21
-		var28.current.newestMessageConversationId = p7
+		-- upvalues: var12 (ref), var5 (ref), p3 (ref), var8 (ref), var10 (ref), var13 (ref), var4 (ref), getDeepValueModule (copy), orderedMap (copy)
+		local previousNewestUserMessageId = var12.current.previousNewestUserMessageId
+		local newestMessageConversationId = var12.current.newestMessageConversationId
+		var12.current.previousNewestUserMessageId = var5
+		var12.current.newestMessageConversationId = p3
 		
-		if previousNewestUserMessageId == var21 then return end
-		if newestMessageConversationId ~= p7 then return end
-		var28.current.requestId += 1
-		var24({})
-		var26(false)
-		local pendingRealtimeNotification = var28.current.pendingRealtimeNotification
+		if previousNewestUserMessageId == var5 then return end
+		if newestMessageConversationId ~= p3 then return end
+		var12.current.requestId += 1
+		var8({})
+		var10(false)
+		local pendingRealtimeNotification = var12.current.pendingRealtimeNotification
 		
-		if pendingRealtimeNotification == nil or pendingRealtimeNotification.conversationId ~= p7 then return end
-		if pendingRealtimeNotification.messageId == var21 then
-			var28.current.pendingRealtimeNotification = nil
-			var29()
+		if pendingRealtimeNotification == nil or pendingRealtimeNotification.conversationId ~= p3 then return end
+		if pendingRealtimeNotification.messageId == var5 then
+			var12.current.pendingRealtimeNotification = nil
+			var13()
 			
 			return
 		end
-		local var35
-		local state = var20:getState()
+		local var15
+		local state = var4:getState()
 		local messageId = pendingRealtimeNotification.messageId
 		
-		if p7 == nil then
-			var35 = nil
+		if p3 == nil then
+			var15 = nil
 		else
-			local var36 = getDeepValueModule(state, `ChatAppReducer.Conversations.{p7}`)
-			var35 = if var36 == nil or var36.messages == nil then nil else var36.messages
+			local var16 = getDeepValueModule(state, `ChatAppReducer.Conversations.{p3}`)
+			var15 = if var16 == nil or var16.messages == nil then nil else var16.messages
 		end
-		if var35 ~= nil and (var35.values ~= nil and orderedMap.Get(var35, messageId) ~= nil) then
-			var28.current.pendingRealtimeNotification = nil
+		if var15 ~= nil and (var15.values ~= nil and orderedMap.Get(var15, messageId) ~= nil) then
+			var12.current.pendingRealtimeNotification = nil
 		end
-	end, { var21, p7, var20, var29 })
+	end, { var5, p3, var4, var13 })
 	
 	return {
-		suggestions = var27,
-		areSuggestionsDismissed = var25,
-		onActivated = reactModule.useCallback(function(p14)
-			-- upvalues: var26 (ref), var22 (ref), p7 (ref)
-			var26(true)
-			local var37 = var22(p14, p7)
+		suggestions = var11,
+		areSuggestionsDismissed = var9,
+		onActivated = reactModule.useCallback(function(p6)
+			-- upvalues: var10 (ref), var6 (ref), p3 (ref)
+			var10(true)
+			local var15 = var6(p6, p3)
 			
-			if typeof(var37) == "table" and typeof(var37.catch) == "function" then
-				var37:catch(function()
-					-- upvalues: var26 (copy)
-					var26(false)
+			if typeof(var15) == "table" and typeof(var15.catch) == "function" then
+				var15:catch(function()
+					-- upvalues: var10 (copy)
+					var10(false)
 				end)
 			end
-		end, { var22, p7 })
+		end, { var6, p3 })
 	}
 end

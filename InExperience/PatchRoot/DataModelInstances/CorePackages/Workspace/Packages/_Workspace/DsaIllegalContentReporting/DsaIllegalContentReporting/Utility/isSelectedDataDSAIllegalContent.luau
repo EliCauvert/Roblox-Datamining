@@ -1,11 +1,11 @@
 ﻿local constantsModule = require(script:FindFirstAncestor("DsaIllegalContentReporting").Utility.Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: constantsModule (ref)
-	if p0 == nil then
+	if p1 == nil then
 		return false
 	end
-	local var1 = p0[#p0]
+	local var1 = p1[#p1]
 	
 	return var1 ~= nil and var1.tagValues[1] == constantsModule.DSA_TAG_VALUE
 end

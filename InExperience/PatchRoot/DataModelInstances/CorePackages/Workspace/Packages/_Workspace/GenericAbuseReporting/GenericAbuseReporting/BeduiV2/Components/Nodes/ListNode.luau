@@ -23,84 +23,84 @@ local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReport
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagSupportSubmissionOnAllReportNodes = sharedFlagsModule.FFlagSupportSubmissionOnAllReportNodes
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), scrollToItemModule (ref), dashModule (ref), telemetryEventType (ref), eyebrowModule (ref), view (ref), listModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref), fFlagSupportSubmissionOnAllReportNodes (ref)
-	local var11 = useTokens()
-	local var12, var13 = reactModule.useState(p0.initialValue or nil)
+	local var1 = useTokens()
+	local var2, var3 = reactModule.useState(p1.initialValue or nil)
 	local translateIntoString = useArTranslation().translateIntoString
 	local sendEvent = useAbuseReportAnalytics().sendEvent
-	local var14 = reactModule.useRef(nil)
-	local var15, var16 = reactModule.useState(false)
-	local var17, var18 = reactModule.useState(false)
-	local var19 = useLayoutSlots()
-	local body = var19.Body
-	local actions = var19.Actions
-	local title = var19.Title
+	local var4 = reactModule.useRef(nil)
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
+	local var9 = useLayoutSlots()
+	local body = var9.Body
+	local actions = var9.Actions
+	local title = var9.Title
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), var16 (ref), var18 (ref)
-		local current = var14.current
+		-- upvalues: var4 (ref), var6 (ref), var8 (ref)
+		local current = var4.current
 		
 		if not current then return end
 		local scrollingFrame = current:FindFirstChildWhichIsA("ScrollingFrame", true)
 		
 		if scrollingFrame then
 			local function checkScrollbar()
-				-- upvalues: scrollingFrame (ref), var16 (copy)
-				var16(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
+				-- upvalues: scrollingFrame (ref), var6 (copy)
+				var6(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
 			end
 			
 			local function onScroll()
-				-- upvalues: scrollingFrame (ref), var18 (copy)
+				-- upvalues: scrollingFrame (ref), var8 (copy)
 				if scrollingFrame.CanvasPosition.Y > 0 then
-					var18(true)
+					var8(true)
 				end
 			end
 			
-			var16(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
-			local var25 = scrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(checkScrollbar)
-			local var26 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkScrollbar)
-			local var27 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(onScroll)
+			var6(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
+			local var10 = scrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(checkScrollbar)
+			local var11 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkScrollbar)
+			local var12 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(onScroll)
 			
 			return function()
-				-- upvalues: var25 (ref), var26 (ref), var27 (ref)
-				var25:Disconnect()
-				var26:Disconnect()
-				var27:Disconnect()
+				-- upvalues: var10 (ref), var11 (ref), var12 (ref)
+				var10:Disconnect()
+				var11:Disconnect()
+				var12:Disconnect()
 			end
 		end
 	end, {})
-	local var20 = reactModule.useRef({})
-	local var21 = reactModule.useRef(nil)
+	local var10 = reactModule.useRef({})
+	local var11 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), var21 (ref), var20 (ref), scrollToItemModule (copy), var14 (ref)
-		if var12 then
-			var21.current = var20.current[var12]
-			scrollToItemModule(var14, var21)
+		-- upvalues: var2 (ref), var11 (ref), var10 (ref), scrollToItemModule (copy), var4 (ref)
+		if var2 then
+			var11.current = var10.current[var2]
+			scrollToItemModule(var4, var11)
 			
 			return
 		end
-		var21.current = nil
-	end, { var12 })
+		var11.current = nil
+	end, { var2 })
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		Content = if p0.items ~= nil then nil else reactModule.createElement(body, { ref = var14 }, {
-			Eyebrow = reactModule.createElement(eyebrowModule, { layoutOrder = 0, eyebrow = p0.eyebrow }),
-			Title = reactModule.createElement(title, { layoutOrder = 1, input = p0.title }),
+		Content = if p1.items ~= nil then nil else reactModule.createElement(body, { ref = var4 }, {
+			Eyebrow = reactModule.createElement(eyebrowModule, { layoutOrder = 0, eyebrow = p1.eyebrow }),
+			Title = reactModule.createElement(title, { layoutOrder = 1, input = p1.title }),
 			ItemListContainer = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
 				UIPadding = reactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, -var11.Padding.XLarge),
-					PaddingRight = UDim.new(0, -var11.Padding.XLarge)
+					PaddingLeft = UDim.new(0, -var1.Padding.XLarge),
+					PaddingRight = UDim.new(0, -var1.Padding.XLarge)
 				}),
 				ItemList = reactModule.createElement(listModule.Root, {
-					value = var12,
-					onValueChanged = reactModule.useCallback(function(p1)
-						-- upvalues: var13 (ref), dashModule (copy), p0 (ref), sendEvent (ref), telemetryEventType (copy), var15 (ref), var17 (ref)
-						var13(p1)
-						local var28 = 0
-						dashModule.forEach(p0.items, function(p2, p3)
-							-- upvalues: p1 (ref), var28 (write)
-							if p2.id == p1 then
-								var28 = p3
+					value = var2,
+					onValueChanged = reactModule.useCallback(function(p2)
+						-- upvalues: var3 (ref), dashModule (copy), p1 (ref), sendEvent (ref), telemetryEventType (copy), var5 (ref), var7 (ref)
+						var3(p2)
+						local var12 = 0
+						dashModule.forEach(p1.items, function(p3, p4)
+							-- upvalues: p2 (ref), var12 (write)
+							if p3.id == p2 then
+								var12 = p4
 								
 								return
 							end
@@ -108,50 +108,50 @@ return reactModule.memo(function(p0)
 						sendEvent({
 							sub_event_type = telemetryEventType.SelectItem,
 							select_item_detail = {
-								selected_index = var28,
-								list_length = #p0.items,
-								has_scroll = var15,
-								did_scroll = var17
+								selected_index = var12,
+								list_length = #p1.items,
+								has_scroll = var5,
+								did_scroll = var7
 							}
 						})
-					end, { sendEvent, var15, var17, p0.items })
+					end, { sendEvent, var5, var7, p1.items })
 				}, {
-					dashModule.map(p0.items, function(p4, p5)
-						-- upvalues: reactModule (copy), listModule (copy), translateIntoString (ref), p0 (ref), var20 (ref)
+					dashModule.map(p1.items, function(p2, p3)
+						-- upvalues: reactModule (copy), listModule (copy), translateIntoString (ref), p1 (ref), var10 (ref)
 						return reactModule.createElement(listModule.Item, {
 							trailingAccessory = "Radio",
 							hasMargin = true,
-							value = p4.id,
-							title = translateIntoString(p4.label),
-							description = if p4.description then translateIntoString(p4.description) else nil,
-							hasDivider = p5 ~= #p0.items,
-							ref = function(p6)
-								-- upvalues: var20 (copy), p4 (ref)
-								var20.current[p4.id] = p6
+							value = p2.id,
+							title = translateIntoString(p2.label),
+							description = if p2.description then translateIntoString(p2.description) else nil,
+							hasDivider = p3 ~= #p1.items,
+							ref = function(p4)
+								-- upvalues: var10 (copy), p2 (ref)
+								var10.current[p2.id] = p4
 							end
 						})
 					end)
 				})
 			})
 		}),
-		Actions = if p0.onNext and var12 ~= nil then reactModule.createElement(actions, nil, {
+		Actions = if p1.onNext and var2 ~= nil then reactModule.createElement(actions, nil, {
 			Button = reactModule.createElement(button, {
-				text = translateIntoString(p0.nextButtonText),
+				text = translateIntoString(p1.nextButtonText),
 				variant = buttonVariant.Emphasis,
 				fillBehavior = fillBehavior.Fill,
-				isLoading = if fFlagSupportSubmissionOnAllReportNodes then p0.isSubmitting else false,
-				isDisabled = if fFlagSupportSubmissionOnAllReportNodes then p0.isSubmitting else false,
+				isLoading = if fFlagSupportSubmissionOnAllReportNodes then p1.isSubmitting else false,
+				isDisabled = if fFlagSupportSubmissionOnAllReportNodes then p1.isSubmitting else false,
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: dashModule (copy), p0 (ref), var12 (ref)
-					local var29 = dashModule.find(p0.items, function(p7)
-						-- upvalues: var12 (copy)
-						return p7.id == var12
+					-- upvalues: dashModule (copy), p1 (ref), var2 (ref)
+					local var12 = dashModule.find(p1.items, function(p2)
+						-- upvalues: var2 (copy)
+						return p2.id == var2
 					end)
 					
-					if p0.onNext then
-						p0.onNext(var12, var29)
+					if p1.onNext then
+						p1.onNext(var2, var12)
 					end
-				end, { p0.items, p0.onNext, var12 })
+				end, { p1.items, p1.onNext, var2 })
 			})
 		}) else nil
 	})

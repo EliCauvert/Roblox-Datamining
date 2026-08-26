@@ -10,9 +10,9 @@ local t = {
 	totalNumberOfItems = true
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref)
-	return t[p0]
+	return t[p1]
 end
 
 return function(p1, p2, p3)

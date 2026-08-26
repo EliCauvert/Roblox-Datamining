@@ -11,18 +11,18 @@ local function getAllAudioSources()
 		return soundService:GetAudioInstances()
 	end)
 	
-	return if ok then cryoModule.List.filter(status, function(p0)
-		return p0:IsA("Sound") or p0:IsA("AudioPlayer")
+	return if ok then cryoModule.List.filter(status, function(p1)
+		return p1:IsA("Sound") or p1:IsA("AudioPlayer")
 	end) else {}
 end
 
 return function()
 	-- upvalues: useState (ref), getAllAudioSources (ref), useTimedLoopModule (ref)
-	local var5, var6 = useState(getAllAudioSources)
+	local var1, var2 = useState(getAllAudioSources)
 	useTimedLoopModule(1, function()
-		-- upvalues: var6 (ref), getAllAudioSources (copy)
-		var6(getAllAudioSources())
+		-- upvalues: var2 (ref), getAllAudioSources (copy)
+		var2(getAllAudioSources())
 	end)
 	
-	return var5
+	return var1
 end

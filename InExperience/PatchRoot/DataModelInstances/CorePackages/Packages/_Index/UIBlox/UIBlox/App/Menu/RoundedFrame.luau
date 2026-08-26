@@ -5,13 +5,13 @@ local object = require(parent_1.LuauPolyfill).Object
 local _ = require(parent.Style.StyleTypes)
 local t = { zIndex = 1 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: object (ref), t (ref), reactModule (ref)
-	local var2 = object.assign({}, t, p0)
+	local var1 = object.assign({}, t, p1)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		ZIndex = var2.zIndex,
+		ZIndex = var1.zIndex,
 		Size = UDim2.fromScale(1, 1)
 	}, {
 		TopContainer = reactModule.createElement("Frame", {
@@ -23,10 +23,10 @@ return function(p0)
 			Content = reactModule.createElement("Frame", {
 				Position = UDim2.fromScale(0, 0),
 				Size = UDim2.fromScale(1, 2),
-				BackgroundColor3 = var2.background.Color,
-				BackgroundTransparency = var2.background.Transparency
+				BackgroundColor3 = var1.background.Color,
+				BackgroundTransparency = var1.background.Transparency
 			}, {
-				UICorner = if var2.topCornerRadius then reactModule.createElement("UICorner", { CornerRadius = var2.topCornerRadius }) else nil
+				UICorner = if var1.topCornerRadius then reactModule.createElement("UICorner", { CornerRadius = var1.topCornerRadius }) else nil
 			})
 		}),
 		BottomContainer = reactModule.createElement("Frame", {
@@ -38,10 +38,10 @@ return function(p0)
 			Content = reactModule.createElement("Frame", {
 				Position = UDim2.fromScale(0, -1),
 				Size = UDim2.fromScale(1, 2),
-				BackgroundColor3 = var2.background.Color,
-				BackgroundTransparency = var2.background.Transparency
+				BackgroundColor3 = var1.background.Color,
+				BackgroundTransparency = var1.background.Transparency
 			}, {
-				UICorner = if var2.bottomCornerRadius then reactModule.createElement("UICorner", { CornerRadius = var2.bottomCornerRadius }) else nil
+				UICorner = if var1.bottomCornerRadius then reactModule.createElement("UICorner", { CornerRadius = var1.bottomCornerRadius }) else nil
 			})
 		})
 	})

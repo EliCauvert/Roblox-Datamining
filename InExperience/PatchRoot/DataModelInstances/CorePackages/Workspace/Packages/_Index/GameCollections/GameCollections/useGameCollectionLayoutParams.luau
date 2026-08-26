@@ -12,7 +12,7 @@ local t = {
 	[gameTileLayoutType.Narrow] = collectionItemSize.Small
 }
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: t (ref), collectionItemSize (ref), useCollectionLayoutParams (ref), gameCollectionLayoutCalculatorsModule (ref)
-	return useCollectionLayoutParams(t[p0] or collectionItemSize.Small, p1, p2, p3, gameCollectionLayoutCalculatorsModule, p4)
+	return useCollectionLayoutParams(t[p1] or collectionItemSize.Small, p2, p3, p4, gameCollectionLayoutCalculatorsModule, p5)
 end

@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AuthCommon").Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { countryCodeList = p0 }
+﻿return require(script:FindFirstAncestor("AuthCommon").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { countryCodeList = p1 }
 end)

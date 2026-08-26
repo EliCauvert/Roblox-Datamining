@@ -23,12 +23,12 @@ function t:sendCoreGuiFinalAnalytic()
 	for i, v in Enum.CoreGuiType:GetEnumItems() do
 		t[v.Name] = tostring(starterGuiService:GetCoreGuiEnabled(v))
 	end
-	local var5 = ""
+	local var1 = ""
 	pcall(function()
-		-- upvalues: var5 (write), starterGuiService (copy)
-		var5 = tostring(starterGuiService:GetCore("ResetButtonCallback"))
+		-- upvalues: var1 (write), starterGuiService (copy)
+		var1 = tostring(starterGuiService:GetCore("ResetButtonCallback"))
 	end)
-	t.ResetButtonCallback = var5
+	t.ResetButtonCallback = var1
 	self.evenStream:sendEventDeferred("core_gui_final_state", "core_gui_final_state", t)
 end
 

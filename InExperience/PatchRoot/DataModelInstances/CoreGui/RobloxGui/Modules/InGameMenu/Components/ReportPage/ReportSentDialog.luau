@@ -19,9 +19,9 @@ reportSentDialog.validateProps = t.strictInterface({
 	inputType = t.optional(t.string)
 })
 
-function reportSentDialog.init(p0)
+function reportSentDialog.init(p1)
 	-- upvalues: roact (ref)
-	p0.buttonRef = roact.createRef()
+	p1.buttonRef = roact.createRef()
 end
 
 function reportSentDialog.renderFocusHandler(p1)
@@ -45,40 +45,40 @@ function reportSentDialog.renderFocusHandler(p1)
 	})
 end
 
-function reportSentDialog.render(p2)
+function reportSentDialog.render(p1)
 	-- upvalues: withLocalizationModule (ref), roact (ref), infoDialogModule (ref), assetsModule (ref)
 	return withLocalizationModule({
 		titleText = "CoreScripts.InGameMenu.Report.ThanksForReport",
 		bodyText = "CoreScripts.InGameMenu.Report.WillReviewBody",
 		dismissText = "CoreScripts.InGameMenu.Ok"
-	})(function(p3)
-		-- upvalues: roact (copy), infoDialogModule (copy), assetsModule (copy), p2 (ref)
+	})(function(p2)
+		-- upvalues: roact (copy), infoDialogModule (copy), assetsModule (copy), p1 (ref)
 		return roact.createFragment({
 			Dialog = roact.createElement(infoDialogModule, {
-				titleText = p3.titleText,
-				bodyText = p3.bodyText,
-				dismissText = p3.dismissText,
+				titleText = p2.titleText,
+				bodyText = p2.bodyText,
+				dismissText = p2.dismissText,
 				iconImage = assetsModule.Images.SuccessTick,
-				buttonRef = p2.buttonRef,
-				onDismiss = p2.props.onDismiss,
-				visible = p2.props.isReportSentOpen
+				buttonRef = p1.buttonRef,
+				onDismiss = p1.props.onDismiss,
+				visible = p1.props.isReportSentOpen
 			}),
-			FocusHandler = p2:renderFocusHandler()
+			FocusHandler = p1:renderFocusHandler()
 		})
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(function(p4, _)
+return roactRodux.UNSTABLE_connect2(function(p1, _)
 	return {
-		isReportSentOpen = p4.report.reportSentOpen,
-		inputType = p4.displayOptions.inputType
+		isReportSentOpen = p1.report.reportSentOpen,
+		inputType = p1.displayOptions.inputType
 	}
-end, function(p5)
+end, function(p1)
 	-- upvalues: closeReportSentDialogModule (ref)
 	return {
 		onDismiss = function()
-			-- upvalues: p5 (ref), closeReportSentDialogModule (copy)
-			p5(closeReportSentDialogModule())
+			-- upvalues: p1 (ref), closeReportSentDialogModule (copy)
+			p1(closeReportSentDialogModule())
 		end
 	}
 end)(reportSentDialog)

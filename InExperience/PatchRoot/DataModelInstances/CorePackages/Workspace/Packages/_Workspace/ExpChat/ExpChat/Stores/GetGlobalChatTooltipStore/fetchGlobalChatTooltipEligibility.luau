@@ -3,8 +3,8 @@ local parent = script:FindFirstAncestor("ExpChat").Parent
 local urlBuilderModule = require(parent.UrlBuilder)
 local urlBuilder = urlBuilderModule.UrlBuilder
 local urlBase = urlBuilderModule.UrlBase
-local var2 = require(parent.ExpChatShared).Logger:new("ExpChat/" .. script.Name)
-local var3 = urlBuilder.new({
+local var1 = require(parent.ExpChatShared).Logger:new("ExpChat/" .. script.Name)
+local var2 = urlBuilder.new({
 	path = "modals-api/v1/prompts",
 	base = urlBase.APIS,
 	query = {
@@ -12,81 +12,81 @@ local var3 = urlBuilder.new({
 		promptStyle = "Modal"
 	}
 })()
-local var4 = urlBuilder.new({
+local var3 = urlBuilder.new({
 	path = "modals-api/v1/prompts/impression",
 	base = urlBase.APIS
 })()
-local var5 = nil
+local var4 = nil
 
 return {
-	fetchEligibility = function(p0, p1)
-		-- upvalues: var5 (write), httpService (ref), var3 (ref), var2 (ref)
-		if var5 == nil then
+	fetchEligibility = function(p1, p2)
+		-- upvalues: var4 (write), httpService (ref), var2 (ref), var1 (ref)
+		if var4 == nil then
 			httpService:RequestInternal({
 				Method = "GET",
-				Url = var3,
+				Url = var2,
 				Headers = { Accept = "application/json" }
-			}):Start(function(_, p2)
-				-- upvalues: httpService (copy), var5 (copy), p0 (ref), var2 (copy), p1 (ref)
-				if p2.StatusCode == 200 then
+			}):Start(function(_, p3)
+				-- upvalues: httpService (copy), var4 (copy), p1 (ref), var1 (copy), p2 (ref)
+				if p3.StatusCode == 200 then
 					local ok, status = pcall(function()
-						-- upvalues: httpService (copy), p2 (ref)
-						return httpService:JSONDecode(p2.Body)
+						-- upvalues: httpService (copy), p3 (ref)
+						return httpService:JSONDecode(p3.Body)
 					end)
 					
 					if ok and status then
 						local customPrompts = status.customPrompts
-						local var6 = customPrompts ~= nil and (type(customPrompts) == "table" and customPrompts.GlobalChatTooltip ~= nil)
-						var5 = var6
+						local var5 = customPrompts ~= nil and (type(customPrompts) == "table" and customPrompts.GlobalChatTooltip ~= nil)
+						var4 = var5
 						
-						if p0 then
-							p0({ shouldShowTooltip = var6 })
+						if p1 then
+							p1({ shouldShowTooltip = var5 })
 							
 							return
 						end
 					else
-						var5 = false
-						var2:error("Failed to decode GlobalChatTooltip eligibility response")
+						var4 = false
+						var1:error("Failed to decode GlobalChatTooltip eligibility response")
 						
-						if p1 then
-							p1()
+						if p2 then
+							p2()
 							
 							return
 						end
 					end
 				else
-					var5 = false
-					var2:error("GlobalChatTooltip eligibility request failed: {} {}", tostring(p2.StatusCode), p2.StatusMessage or "")
+					var4 = false
+					var1:error("GlobalChatTooltip eligibility request failed: {} {}", tostring(p3.StatusCode), p3.StatusMessage or "")
 					
-					if p1 then
-						p1()
+					if p2 then
+						p2()
 					end
 				end
 			end)
 			
 			return
-		elseif p0 then
-			p0({ shouldShowTooltip = var5 })
+		elseif p1 then
+			p1({ shouldShowTooltip = var4 })
 		end
 	end,
 	reportImpression = function()
-		-- upvalues: httpService (ref), var4 (ref), var2 (ref)
+		-- upvalues: httpService (ref), var3 (ref), var1 (ref)
 		httpService:RequestInternal({
 			Method = "POST",
-			Url = var4,
+			Url = var3,
 			Headers = { ["Content-Type"] = "application/json" },
 			Body = httpService:JSONEncode({
 				promptType = "GlobalChatTooltip",
 				promptId = "GlobalChatTooltip"
 			})
-		}):Start(function(_, p3)
-			-- upvalues: var2 (copy)
-			if p3.StatusCode == 200 then
-				var2:debug("GlobalChatTooltip impression reported")
+		}):Start(function(_, p1)
+			-- upvalues: var1 (copy)
+			if p1.StatusCode == 200 then
+				var1:debug("GlobalChatTooltip impression reported")
 				
 				return
 			end
-			var2:error("GlobalChatTooltip impression failed: {} {}", tostring(p3.StatusCode), p3.StatusMessage or "")
+			var1:error("GlobalChatTooltip impression failed: {} {}", tostring(p1.StatusCode), p1.StatusMessage or "")
 		end)
 	end
 }

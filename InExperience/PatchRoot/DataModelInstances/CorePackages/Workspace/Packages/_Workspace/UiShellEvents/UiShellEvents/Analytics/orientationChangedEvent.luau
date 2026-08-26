@@ -4,8 +4,8 @@ local loggerModule = require(uiShellEvents.Logger)
 local tModule = require(parent.t)
 local _ = require(parent.RobloxAppEnums)
 local orientationUseTelemetryService = game:DefineFastFlag("OrientationUseTelemetryService", false)
-local var4 = if orientationUseTelemetryService then game:GetService("TelemetryService") else nil
-local var5 = tModule.strictInterface({
+local var1 = if orientationUseTelemetryService then game:GetService("TelemetryService") else nil
+local var2 = tModule.strictInterface({
 	deviceOrientation = tModule.string,
 	experienceOrientation = tModule.optional(tModule.string),
 	page = tModule.optional(tModule.string),
@@ -27,21 +27,21 @@ local t = {
 	lastUpdated = { 2026, 5, 6 }
 }
 
-return function(p0, p1, p2)
-	-- upvalues: var5 (ref), loggerModule (ref), orientationUseTelemetryService (ref), var4 (ref), t (ref)
-	local var7, var8 = var5(p2)
+return function(p1, p2, p3)
+	-- upvalues: var2 (ref), loggerModule (ref), orientationUseTelemetryService (ref), var1 (ref), t (ref)
+	local var3, var4 = var2(p3)
 	
-	if not var7 then
-		loggerModule:error(var8)
+	if not var3 then
+		loggerModule:error(var4)
 	end
-	if orientationUseTelemetryService and var4 then
-		var4:LogEvent(t, {
-			eventContext = p1,
-			customFields = p2,
+	if orientationUseTelemetryService and var1 then
+		var1:LogEvent(t, {
+			eventContext = p2,
+			customFields = p3,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" }
 		})
 		
 		return
 	end
-	p0:sendEventDeferred(p1, "uiShellOrientationChanged", p2)
+	p1:sendEventDeferred(p2, "uiShellOrientationChanged", p3)
 end

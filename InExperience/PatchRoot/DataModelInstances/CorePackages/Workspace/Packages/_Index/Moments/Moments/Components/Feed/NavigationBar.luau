@@ -14,16 +14,16 @@ local usePreferredInputModule = require(moments.Hooks.usePreferredInput)
 local useTokens = foundationModule.Hooks.useTokens
 local formFactor = momentsCommonModule.Enums.FormFactor
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useFormFactor (ref), usePreferredInputModule (ref), useTokens (ref), formFactor (ref), reactModule (ref), view (ref), iconButton (ref), chevronLargeUp (ref), foundationModule (ref), chevronLargeDown (ref)
-	local var6 = usePreferredInputModule()
+	local var1 = usePreferredInputModule()
 	
-	return if useFormFactor() == formFactor.MobileLandscape then nil elseif not (var6 ~= Enum.PreferredInput.KeyboardAndMouse and var6 ~= Enum.PreferredInput.Gamepad) then if p0.active then reactModule.createElement(view, {
+	return if useFormFactor() == formFactor.MobileLandscape then nil elseif not (var1 ~= Enum.PreferredInput.KeyboardAndMouse and var1 ~= Enum.PreferredInput.Gamepad) then if p1.active then reactModule.createElement(view, {
 		tag = "size-full",
 		padding = {
 			right = UDim.new(0, math.max(useDeviceInsets().right, useTokens().Padding.XLarge))
 		},
-		ZIndex = p0.zIndex
+		ZIndex = p1.zIndex
 	}, {
 		NavControls = reactModule.createElement(view, {
 			tag = "col align-x-center align-y-center position-center-right anchor-center-right auto-xy radius-circle clip bg-over-media-0"
@@ -32,16 +32,16 @@ return function(p0)
 				isCircular = true,
 				LayoutOrder = 1,
 				icon = chevronLargeUp,
-				isDisabled = p0.currentIndex == 1,
-				onActivated = p0.onScrollToPrevious,
+				isDisabled = p1.currentIndex == 1,
+				onActivated = p1.onScrollToPrevious,
 				size = foundationModule.Enums.IconSize.Medium
 			}),
 			NextButton = reactModule.createElement(iconButton, {
 				isCircular = true,
 				LayoutOrder = 2,
 				icon = chevronLargeDown,
-				isDisabled = p0.currentIndex == p0.numItems,
-				onActivated = p0.onScrollToNext,
+				isDisabled = p1.currentIndex == p1.numItems,
+				onActivated = p1.onScrollToNext,
 				size = foundationModule.Enums.IconSize.Medium
 			})
 		})

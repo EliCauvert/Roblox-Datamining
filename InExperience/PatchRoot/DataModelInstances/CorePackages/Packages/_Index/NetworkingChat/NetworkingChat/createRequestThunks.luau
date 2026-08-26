@@ -22,29 +22,29 @@ local createGetChatSettingsModule = require(networkRequests.createGetChatSetting
 local createGetRolloutSettingsModule = require(networkRequests.createGetRolloutSettings)
 local createGetMetadataModule = require(networkRequests.createGetMetadata)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createAddToConversationModule (ref), createRemoveFromConversationModule (ref), createRenameGroupConversationModule (ref), createStartGroupConversationModule (ref), createStartOneToOneConversationModule (ref), createSetConversationUniverseModule (ref), createResetConversationUniverseModule (ref), createSendMessageModule (ref), createSendGameLinkMessageModule (ref), createUpdateUserTypingStatusModule (ref), createMarkAsReadModule (ref), createMarkAsSeenModule (ref), createGetMessagesModule (ref), createGetUserConversationsModule (ref), createGetConversationsModule (ref), createGetLatestMessagesModule (ref), createGetUnreadConversationCountModule (ref), createGetUnreadMessagesModule (ref), createGetChatSettingsModule (ref), createGetRolloutSettingsModule (ref), createGetMetadataModule (ref)
 	return {
-		AddToConversation = createAddToConversationModule(p0),
-		RemoveFromConversation = createRemoveFromConversationModule(p0),
-		RenameGroupConversation = createRenameGroupConversationModule(p0),
-		StartGroupConversation = createStartGroupConversationModule(p0),
-		StartOneToOneConversation = createStartOneToOneConversationModule(p0),
-		SetConversationUniverse = createSetConversationUniverseModule(p0),
-		ResetConversationUniverse = createResetConversationUniverseModule(p0),
-		SendMessage = createSendMessageModule(p0),
-		SendGameLinkMessage = createSendGameLinkMessageModule(p0),
-		UpdateUserTypingStatus = createUpdateUserTypingStatusModule(p0),
-		MarkAsRead = createMarkAsReadModule(p0),
-		MarkAsSeen = createMarkAsSeenModule(p0),
-		GetMessages = createGetMessagesModule(p0),
-		GetUserConversations = createGetUserConversationsModule(p0),
-		GetConversations = createGetConversationsModule(p0),
-		GetLatestMessages = createGetLatestMessagesModule(p0),
-		GetUnreadConversationCount = createGetUnreadConversationCountModule(p0),
-		GetUnreadMessages = createGetUnreadMessagesModule(p0),
-		GetChatSettings = createGetChatSettingsModule(p0),
-		GetRolloutSettings = createGetRolloutSettingsModule(p0),
-		GetMetadata = createGetMetadataModule(p0)
+		AddToConversation = createAddToConversationModule(p1),
+		RemoveFromConversation = createRemoveFromConversationModule(p1),
+		RenameGroupConversation = createRenameGroupConversationModule(p1),
+		StartGroupConversation = createStartGroupConversationModule(p1),
+		StartOneToOneConversation = createStartOneToOneConversationModule(p1),
+		SetConversationUniverse = createSetConversationUniverseModule(p1),
+		ResetConversationUniverse = createResetConversationUniverseModule(p1),
+		SendMessage = createSendMessageModule(p1),
+		SendGameLinkMessage = createSendGameLinkMessageModule(p1),
+		UpdateUserTypingStatus = createUpdateUserTypingStatusModule(p1),
+		MarkAsRead = createMarkAsReadModule(p1),
+		MarkAsSeen = createMarkAsSeenModule(p1),
+		GetMessages = createGetMessagesModule(p1),
+		GetUserConversations = createGetUserConversationsModule(p1),
+		GetConversations = createGetConversationsModule(p1),
+		GetLatestMessages = createGetLatestMessagesModule(p1),
+		GetUnreadConversationCount = createGetUnreadConversationCountModule(p1),
+		GetUnreadMessages = createGetUnreadMessagesModule(p1),
+		GetChatSettings = createGetChatSettingsModule(p1),
+		GetRolloutSettings = createGetRolloutSettingsModule(p1),
+		GetMetadata = createGetMetadataModule(p1)
 	}
 end

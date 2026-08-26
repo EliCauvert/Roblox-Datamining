@@ -4,19 +4,19 @@ local reactModule = require(parent.React)
 local topicInfosReducer = require(parent.TopicInfosRodux).TopicInfosReducer
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useSelector (ref), topicInfosReducer (ref), reactModule (ref)
-	local var1 = useSelector(function(p2)
-		-- upvalues: topicInfosReducer (copy), p0 (ref)
-		return p2.Personalization[topicInfosReducer.key][p0]
+	local var1 = useSelector(function(p3)
+		-- upvalues: topicInfosReducer (copy), p1 (ref)
+		return p3.Personalization[topicInfosReducer.key][p1]
 	end)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), p1 (ref)
+		-- upvalues: var1 (ref), p2 (ref)
 		return if var1 then {
 			gameSetTypeId = var1.gameSetTypeId,
 			gameSetTargetId = var1.gameSetTargetId,
-			sortPos = p1
+			sortPos = p2
 		} else {}
-	end, { var1, p1 })
+	end, { var1, p2 })
 end

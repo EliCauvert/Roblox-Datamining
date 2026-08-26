@@ -15,16 +15,16 @@ inGameWhatsNew.IgnoreGuiInset = true
 inGameWhatsNew.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 inGameWhatsNew.ResetOnSpawn = false
 inGameWhatsNew.Parent = game:GetService("CoreGui")
-local var7 = nil
+local var1 = nil
 
 return {
-	createInGameWhatsNewHost = function(p0)
-		-- upvalues: var7 (write), ensureWhatsNewStoreInitializedModule (ref), reactModule (ref), foundationModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), inGameWhatsNew (ref), whatsNewScreenHostModule (ref), reactRobloxModule (ref)
-		if var7 ~= nil then
-			return var7
+	createInGameWhatsNewHost = function(p1)
+		-- upvalues: var1 (write), ensureWhatsNewStoreInitializedModule (ref), reactModule (ref), foundationModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), inGameWhatsNew (ref), whatsNewScreenHostModule (ref), reactRobloxModule (ref)
+		if var1 ~= nil then
+			return var1
 		end
-		ensureWhatsNewStoreInitializedModule.ensureWhatsNewStoreInitialized({ scopeActions = p0.scopeActions })
-		local var8 = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
+		ensureWhatsNewStoreInitializedModule.ensureWhatsNewStoreInitialized({ scopeActions = p1.scopeActions })
+		local var2 = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			LocalizationProvider = reactModule.createElement(localizationProvider, {
 				localization = localization.new(localizationService.RobloxLocaleId)
 			}, {
@@ -32,26 +32,26 @@ return {
 					Host = reactModule.createElement(whatsNewScreenHostModule, {
 						screenScopeId = "InGame",
 						isEnabled = true,
-						scopeActions = p0.scopeActions
+						scopeActions = p1.scopeActions
 					})
 				})
 			})
 		})
-		local var9 = reactRobloxModule.createRoot(inGameWhatsNew)
+		local var3 = reactRobloxModule.createRoot(inGameWhatsNew)
 		local ok, status = pcall(function()
-			-- upvalues: var9 (ref), var8 (ref)
-			var9:render(var8)
+			-- upvalues: var3 (ref), var2 (ref)
+			var3:render(var2)
 		end)
 		
 		if not ok then
 			warn(`WhatsNew createInGameWhatsNewHost render failed: {status}`)
 		end
-		var7 = var9
+		var1 = var3
 		
-		return var9
+		return var3
 	end,
 	resetForTests = function()
-		-- upvalues: var7 (write)
-		var7 = nil
+		-- upvalues: var1 (write)
+		var1 = nil
 	end
 }

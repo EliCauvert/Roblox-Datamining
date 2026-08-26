@@ -7,7 +7,7 @@ local roactUtilsModule = require(parent.RoactUtils)
 local signalsModule = require(parent.Signals)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local fFlagUseSignalsForGameInvitesStatus = require(parent.SharedFlags).FFlagUseSignalsForGameInvitesStatus
-local var5 = if fFlagUseSignalsForGameInvitesStatus then require(parent.NotificationsCommon).GetGameInvitesStatusStore else nil
+local var1 = if fFlagUseSignalsForGameInvitesStatus then require(parent.NotificationsCommon).GetGameInvitesStatusStore else nil
 local localizationHelper = require(parent.NotificationsCommon).LocalizationHelper
 local constantsModule = require(friendsMenu.Constants)
 local friendsListContextModule = require(context.FriendsListContext)
@@ -26,62 +26,62 @@ local t = {
 	[inviteStatus.Pending] = "Feature.SettingsHub.Label.Sending"
 }
 
-return function(p0)
-	-- upvalues: fFlagUseSignalsForGameInvitesStatus (ref), reactModule (ref), signalsModule (ref), var5 (ref), useSignalState (ref), useSelector (ref), getLocalizedStrings (ref), t (ref), friendsListContextModule (ref), useStyle (ref), inviteStatus (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var10
+return function(p1)
+	-- upvalues: fFlagUseSignalsForGameInvitesStatus (ref), reactModule (ref), signalsModule (ref), var1 (ref), useSignalState (ref), useSelector (ref), getLocalizedStrings (ref), t (ref), friendsListContextModule (ref), useStyle (ref), inviteStatus (ref), button (ref), buttonType (ref), standardButtonSize (ref)
+	local var2
 	local _ = nil
 	
 	if fFlagUseSignalsForGameInvitesStatus then
-		local id = p0.friend and p0.friend.id
-		var10 = useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var5 (copy), id (ref)
-			return signalsModule.createComputed(function(p1)
-				-- upvalues: var5 (copy), id (copy)
-				return var5(false).getGameInvitesStatus(p1)[id]
+		local id = p1.friend and p1.friend.id
+		var2 = useSignalState(reactModule.useMemo(function()
+			-- upvalues: signalsModule (copy), var1 (copy), id (ref)
+			return signalsModule.createComputed(function(p2)
+				-- upvalues: var1 (copy), id (copy)
+				return var1(false).getGameInvitesStatus(p2)[id]
 			end)
 		end, { id }))
 	else
-		var10 = useSelector(function(p2)
-			-- upvalues: p0 (ref)
-			local friend = p0.friend
+		var2 = useSelector(function(p2)
+			-- upvalues: p1 (ref)
+			local friend = p1.friend
 			assert(friend, "friend should be non-nil. Silence type checker.")
 			
 			return p2.GameInvitesStatus[friend.id]
 		end)
 	end
-	local var17
-	local var11 = getLocalizedStrings(t)
-	local var12 = reactModule.useContext(friendsListContextModule)
-	local var13 = useStyle()
-	local theme = var13 and var13.Theme
-	local font = var13 and var13.Font
-	local isFetchingFriends = var12.isFetchingFriends
-	local var16 = font.BaseSize * font.CaptionHeader.RelativeSize
+	local var3
+	local var4 = getLocalizedStrings(t)
+	local var5 = reactModule.useContext(friendsListContextModule)
+	local var6 = useStyle()
+	local theme = var6 and var6.Theme
+	local font = var6 and var6.Font
+	local isFetchingFriends = var5.isFetchingFriends
+	local var7 = font.BaseSize * font.CaptionHeader.RelativeSize
 	
-	if var10 then
-		var17 = var10 == inviteStatus.Failed and not p0.isFullRowActivatable
+	if var2 then
+		var3 = var2 == inviteStatus.Failed and not p1.isFullRowActivatable
 	end
-	return if var17 then reactModule.createElement(button, {
+	return if var3 then reactModule.createElement(button, {
 		isLoading = false,
 		fitContent = true,
 		buttonType = buttonType.Secondary,
 		isDisabled = isFetchingFriends,
-		onActivated = p0.onInvite,
+		onActivated = p1.onInvite,
 		standardSize = standardButtonSize.XSmall,
-		anchorPoint = p0.anchorPoint,
-		position = p0.position,
-		text = var11.inviteFriend,
-		layoutOrder = p0.layoutOrder
+		anchorPoint = p1.anchorPoint,
+		position = p1.position,
+		text = var4.inviteFriend,
+		layoutOrder = p1.layoutOrder
 	}) else reactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		TextWrapped = true,
-		Text = var11[var10] or var11.inviteFriend,
-		TextSize = var16,
-		Size = p0.size,
-		AnchorPoint = p0.anchorPoint,
-		Position = p0.position,
+		Text = var4[var2] or var4.inviteFriend,
+		TextSize = var7,
+		Size = p1.size,
+		AnchorPoint = p1.anchorPoint,
+		Position = p1.position,
 		TextColor3 = theme.TextDefault.Color,
 		Font = font.CaptionHeader.Font,
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	})
 end

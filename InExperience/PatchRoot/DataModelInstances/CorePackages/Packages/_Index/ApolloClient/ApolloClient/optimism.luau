@@ -17,117 +17,117 @@ t.dep = require(script.dep).dep
 
 local function _()
 	-- upvalues: trie (ref)
-	local var5 = trie.new(true)
+	local var1 = trie.new(true)
 	
 	return function(_, ...)
-		-- upvalues: var5 (ref)
-		return var5:lookupArray({ ... })
+		-- upvalues: var1 (ref)
+		return var1:lookupArray({ ... })
 	end
 end
 
-local var3 = trie.new(true)
+local var1 = trie.new(true)
 
 function t.defaultMakeCacheKey(_, ...)
-	-- upvalues: var3 (ref)
-	return var3:lookupArray({ ... })
+	-- upvalues: var1 (ref)
+	return var1:lookupArray({ ... })
 end
 
 t.KeyTrie = trie
 local _ = require(script.initTypes)
-local var4 = set.new()
+local var2 = set.new()
 
-function t.wrap(p0, p1, p2)
-	-- upvalues: cache (ref), boolean (ref), trie (ref), entry (ref), array (ref), var4 (ref), parentEntrySlot (ref), object (ref)
-	local var6 = p1
+function t.wrap(p1, p2, p3)
+	-- upvalues: cache (ref), boolean (ref), trie (ref), entry (ref), array (ref), var2 (ref), parentEntrySlot (ref), object (ref)
+	local var3 = p2
 	
-	if var6 == nil then
-		var6 = {}
+	if var3 == nil then
+		var3 = {}
 	end
-	local var7 = cache.new(if boolean.toJSBoolean(var6.max) then var6.max else 65536, function(p3)
-		return p3:dispose()
+	local var4 = cache.new(if boolean.toJSBoolean(var3.max) then var3.max else 65536, function(p4)
+		return p4:dispose()
 	end)
-	local keyArgs = var6.keyArgs
+	local keyArgs = var3.keyArgs
 	
-	if boolean.toJSBoolean(var6.makeCacheKey) then
-		local makeCacheKey = var6.makeCacheKey
+	if boolean.toJSBoolean(var3.makeCacheKey) then
+		local makeCacheKey = var3.makeCacheKey
 		
 		if not makeCacheKey then
-			local var8 = trie.new(true)
+			local var5 = trie.new(true)
 			
 			local makeCacheKey = function(_, ...)
-				-- upvalues: var8 (ref)
-				return var8:lookupArray({ ... })
+				-- upvalues: var5 (ref)
+				return var5:lookupArray({ ... })
 			end
 		end
-		if p2 ~= nil then
-			local var9 = p0
+		if p3 ~= nil then
+			local var6 = p1
 			
-			p0 = function(...)
-				-- upvalues: var9 (ref), p2 (ref)
-				return var9(p2, ...)
+			p1 = function(...)
+				-- upvalues: var6 (ref), p3 (ref)
+				return var6(p3, ...)
 			end
 		end
 		local tbl = setmetatable({}, {
 			__call = function(_, p4, ...)
-				-- upvalues: p2 (ref), makeCacheKey (ref), keyArgs (ref), p0 (write), var7 (ref), entry (copy), var6 (write), array (copy), var4 (copy), parentEntrySlot (copy)
-				local var18 = if p2 ~= nil then { p4, ... } else { ... }
-				local var19 = makeCacheKey(nil, table.unpack((function()
-					-- upvalues: keyArgs (copy), var18 (write)
-					return if keyArgs then keyArgs(nil, table.unpack(var18)) else var18
+				-- upvalues: p3 (ref), makeCacheKey (ref), keyArgs (ref), p1 (write), var4 (ref), entry (copy), var3 (write), array (copy), var2 (copy), parentEntrySlot (copy)
+				local var7 = if p3 ~= nil then { p4, ... } else { ... }
+				local var8 = makeCacheKey(nil, table.unpack((function()
+					-- upvalues: keyArgs (copy), var7 (write)
+					return if keyArgs then keyArgs(nil, table.unpack(var7)) else var7
 				end)()))
 				
-				if var19 == nil then
-					return p0(table.unpack(var18))
+				if var8 == nil then
+					return p1(table.unpack(var7))
 				end
-				local var20 = var7:get(var19)
+				local var9 = var4:get(var8)
 				
-				if var20 == nil then
-					var20 = entry.new(p0)
-					var7:set(var19, var20)
-					var20.subscribe = var6.subscribe
+				if var9 == nil then
+					var9 = entry.new(p1)
+					var4:set(var8, var9)
+					var9.subscribe = var3.subscribe
 					
 					function var20.forget()
-						-- upvalues: var7 (copy), var19 (ref)
-						return var7:delete(var19)
+						-- upvalues: var4 (copy), var8 (ref)
+						return var4:delete(var8)
 					end
 				end
-				local var21 = var20:recompute(array.slice(var18))
-				var7:set(var19, var20)
-				var4:add(var7)
+				local var10 = var9:recompute(array.slice(var7))
+				var4:set(var8, var9)
+				var2:add(var4)
 				
 				if not parentEntrySlot:hasValue() then
-					var4:forEach(function(p5)
+					var2:forEach(function(p5)
 						return p5:clean()
 					end)
-					var4:clear()
+					var2:clear()
 				end
-				return var21
+				return var10
 			end,
-			__index = function(p6, p7)
-				-- upvalues: var7 (ref)
-				return if p7 == "size" then var7.map.size else rawget(p6, p7)
+			__index = function(p4, p5)
+				-- upvalues: var4 (ref)
+				return if p5 == "size" then var4.map.size else rawget(p4, p5)
 			end,
-			__newindex = function(p8, p9, p10)
-				if p9 == "size" then
+			__newindex = function(p4, p5, p6)
+				if p5 == "size" then
 					error("attempt to update a read-only table", 2)
 				end
-				rawset(p8, p9, p10)
+				rawset(p4, p5, p6)
 			end
 		})
 		
-		local function _(p11)
+		local function _(p4)
 			return function(_, ...)
-				-- upvalues: p11 (ref)
-				return p11(...)
+				-- upvalues: p4 (ref)
+				return p4(...)
 			end
 		end
 		
-		local function dirtyKey(p12)
-			-- upvalues: var7 (ref), boolean (copy)
-			local var22 = var7:get(p12)
+		local function dirtyKey(p4)
+			-- upvalues: var4 (ref), boolean (copy)
+			local var7 = var4:get(p4)
 			
-			if boolean.toJSBoolean(var22) then
-				var22:setDirty()
+			if boolean.toJSBoolean(var7) then
+				var7:setDirty()
 			end
 		end
 		
@@ -136,26 +136,26 @@ function t.wrap(p0, p1, p2)
 			return dirtyKey(...)
 		end
 		
-		local var12 = function(...)
-			-- upvalues: makeCacheKey (ref), var7 (ref), boolean (copy)
-			local var23 = var7:get(makeCacheKey(nil, ...))
+		local var7 = function(...)
+			-- upvalues: makeCacheKey (ref), var4 (ref), boolean (copy)
+			local var8 = var4:get(makeCacheKey(nil, ...))
 			
-			if boolean.toJSBoolean(var23) then
-				var23:setDirty()
+			if boolean.toJSBoolean(var8) then
+				var8:setDirty()
 			end
 		end
 		
 		function tbl.dirty(_, ...)
-			-- upvalues: var12 (ref)
-			return var12(...)
+			-- upvalues: var7 (ref)
+			return var7(...)
 		end
 		
-		local function peekKey(p13)
-			-- upvalues: var7 (ref), boolean (copy)
-			local var24 = var7:get(p13)
+		local function peekKey(p4)
+			-- upvalues: var4 (ref), boolean (copy)
+			local var8 = var4:get(p4)
 			
-			if boolean.toJSBoolean(var24) then
-				return var24:peek()
+			if boolean.toJSBoolean(var8) then
+				return var8:peek()
 			end
 		end
 		
@@ -164,19 +164,19 @@ function t.wrap(p0, p1, p2)
 			return peekKey(...)
 		end
 		
-		local var14 = function(...)
+		local var8 = function(...)
 			-- upvalues: peekKey (ref), makeCacheKey (ref)
 			return peekKey(makeCacheKey(nil, ...))
 		end
 		
 		function tbl.peek(_, ...)
-			-- upvalues: var14 (ref)
-			return var14(...)
+			-- upvalues: var8 (ref)
+			return var8(...)
 		end
 		
-		local function forgetKey(p14)
-			-- upvalues: var7 (ref)
-			return var7:delete(p14)
+		local function forgetKey(p4)
+			-- upvalues: var4 (ref)
+			return var4:delete(p4)
 		end
 		
 		function tbl.forgetKey(_, ...)
@@ -184,27 +184,27 @@ function t.wrap(p0, p1, p2)
 			return forgetKey(...)
 		end
 		
-		local var16 = function(...)
+		local var9 = function(...)
 			-- upvalues: forgetKey (ref), makeCacheKey (ref)
 			return forgetKey(makeCacheKey(nil, ...))
 		end
 		
 		function tbl.forget(_, ...)
-			-- upvalues: var16 (ref)
-			return var16(...)
+			-- upvalues: var9 (ref)
+			return var9(...)
 		end
 		
 		tbl.makeCacheKey = makeCacheKey
 		
 		if boolean.toJSBoolean(keyArgs) then
-			local var17 = function(...)
+			local var10 = function(...)
 				-- upvalues: makeCacheKey (ref), keyArgs (ref)
 				return makeCacheKey(nil, table.unpack(keyArgs(...)))
 			end
 			
 			function tbl.getKey(_, ...)
-				-- upvalues: var17 (ref)
-				return var17(...)
+				-- upvalues: var10 (ref)
+				return var10(...)
 			end
 		else
 			tbl.getKey = makeCacheKey

@@ -15,7 +15,7 @@ local useOverlay = foundationModule.Hooks.useOverlay
 local iconName = foundationModule.Enums.IconName
 local buildOverflowMenuScreensModule = require(script.Parent.BuildOverflowMenuScreens)
 local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
-local var10 = if fFlagBuildExperienceAssetLibraryModule then require(buildExperience.Components.AssetLibrary.AssetLibraryScreens) else nil
+local var1 = if fFlagBuildExperienceAssetLibraryModule then require(buildExperience.Components.AssetLibrary.AssetLibraryScreens) else nil
 local privateInvitesPickerContainerModule = require(buildExperience.Components.PrivateInvitesPicker.PrivateInvitesPickerContainer)
 local privateInvitesManagementContainerModule = require(buildExperience.Components.GameConfigurations.PrivateInvitesManagement.PrivateInvitesManagementContainer)
 local overflowMenuPageShellModule = require(script.Parent.OverflowMenuPageShell)
@@ -35,12 +35,12 @@ local t = {
 	BuildCreatorCredit = "BuildPillMenuCreatorCredit"
 }
 
-local function _(p0, p1)
-	if p0 == nil or p1 == nil then
+local function _(p1, p2)
+	if p1 == nil or p2 == nil then
 		return nil
 	end
-	for i, v in p0.groups do
-		if v.name == p1 then
+	for i, v in p1.groups do
+		if v.name == p2 then
 			return v
 		end
 	end
@@ -50,10 +50,10 @@ end
 local list = {
 	{
 		BuildPillMenuLauncher = {
-			screen = function(p2)
+			screen = function(p3)
 				-- upvalues: reactModule (ref), buildOverflowMenuScreensModule (ref)
-				local navigation = p2.navigation
-				local screenProps = p2.screenProps
+				local navigation = p3.navigation
+				local screenProps = p3.screenProps
 				reactModule.useEffect(function()
 					-- upvalues: screenProps (ref), navigation (ref), buildOverflowMenuScreensModule (copy)
 					if screenProps.initialPage ~= nil then
@@ -141,22 +141,22 @@ local list = {
 	},
 	{
 		BuildPillMenuAgentDetails = {
-			screen = function(p5)
+			screen = function(p3)
 				-- upvalues: buildNavigationParamsModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), subagentStatusModule (ref), view (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref)
-				local var27
-				local navigation = p5.navigation
-				local var25 = buildNavigationParamsModule.getSubagentTaskState(navigation) or p5.screenProps.subagentTaskState
+				local var2
+				local navigation = p3.navigation
+				local var3 = buildNavigationParamsModule.getSubagentTaskState(navigation) or p3.screenProps.subagentTaskState
 				local subagentTaskGroupName = buildNavigationParamsModule.getSubagentTaskGroupName(navigation)
 				
-				if var25 == nil or subagentTaskGroupName == nil then
-					var27 = nil
+				if var3 == nil or subagentTaskGroupName == nil then
+					var2 = nil
 				else
-					for i, v in var25.groups do
+					for i, v in var3.groups do
 						if v.name == subagentTaskGroupName then
-							var27 = v
+							var2 = v
 						end
 					end
-					var27 = nil
+					var2 = nil
 				end
 				return reactModule.createElement(overflowMenuPageShellModule, {
 					testId = "BuildPillMenu.AgentDetailsPage",
@@ -167,7 +167,7 @@ local list = {
 						-- upvalues: navigation (ref)
 						navigation.goBack()
 					end, { navigation }),
-					content = if var27 ~= nil then reactModule.createElement(view, { tag = "size-full" }) else reactModule.createElement(subagentStatusModule.AgentDetailsList, { testId = "BuildPillMenu.AgentDetailsList", group = var27 }),
+					content = if var2 ~= nil then reactModule.createElement(view, { tag = "size-full" }) else reactModule.createElement(subagentStatusModule.AgentDetailsList, { testId = "BuildPillMenu.AgentDetailsList", group = var2 }),
 					closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
 					scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then "LuaApp_Build_AgentDetails_Scroll" else nil
 				})
@@ -176,9 +176,9 @@ local list = {
 	},
 	{
 		BuildPillMenuCreatorCredit = {
-			screen = function(p6)
+			screen = function(p4)
 				-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), creatorCreditPageContainerModule (ref), overflowMenuPageShellModule (ref), creatorCreditBalanceChipContainerModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref)
-				local screenProps = p6.screenProps
+				local screenProps = p4.screenProps
 				
 				return reactModule.createElement(overflowMenuPageShellModule, {
 					testId = "BuildPillMenu.CreatorCreditPage",
@@ -200,65 +200,65 @@ local list = {
 
 if fFlagBuildExperienceAssetLibraryModule then
 	table.insert(list, {
-		[var10.Screens.Browser] = { screen = var10.BrowserScreen }
+		[var1.Screens.Browser] = { screen = var1.BrowserScreen }
 	})
 	table.insert(list, {
-		[var10.Screens.Category] = { screen = var10.CategoryScreen }
+		[var1.Screens.Category] = { screen = var1.CategoryScreen }
 	})
-	table.insert(list, { [var10.Screens.Detail] = { screen = var10.DetailScreen } })
+	table.insert(list, { [var1.Screens.Detail] = { screen = var1.DetailScreen } })
 end
-local var24 = roactNavigationModule.createAppContainer(roactNavigationModule.createRobloxStackNavigator(list, { initialRouteName = "BuildPillMenuLauncher" }))
+local var4 = roactNavigationModule.createAppContainer(roactNavigationModule.createRobloxStackNavigator(list, { initialRouteName = "BuildPillMenuLauncher" }))
 
-local _ = function(p7)
-	return if p7:IsA("ScreenGui") then p7 else p7:FindFirstAncestorOfClass("ScreenGui")
-end
-
-local _ = function(p8)
-	return if p8 == nil or p8.type ~= "overflow" then nil else p8.page
+local _ = function(p4)
+	return if p4:IsA("ScreenGui") then p4 else p4:FindFirstAncestorOfClass("ScreenGui")
 end
 
-local _ = function(p9)
-	-- upvalues: fFlagBuildExperienceAssetLibraryModule (ref), var10 (ref), buildOverflowMenuScreensModule (ref)
-	return if p9 == nil then nil elseif p9.type == "agents" then "BuildPillMenuAgents" elseif fFlagBuildExperienceAssetLibraryModule and p9.type == "asset-library" then var10.Screens.Browser elseif p9.type == "invitePicker" then buildOverflowMenuScreensModule.Screens.BuildPrivateInvitesPicker elseif p9.type == "creator-credit" then "BuildPillMenuCreatorCredit" else nil
+local _ = function(p4)
+	return if p4 == nil or p4.type ~= "overflow" then nil else p4.page
 end
 
-return reactModule.memo(function(p10)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOverlay (ref), reactModule (ref), t (ref), fFlagBuildExperienceAssetLibraryModule (ref), var10 (ref), buildOverflowMenuScreensModule (ref), creatorAgentChatModule (ref), useSessionSummaryModule (ref), privateInvitesPickerContainerModule (ref), view (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), privateInvitesManagementContainerModule (ref), var24 (ref), reactRobloxModule (ref), buildExperienceCompositionStyleSheetModule (ref), overlayProvider (ref)
-	local var28 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+local _ = function(p4)
+	-- upvalues: fFlagBuildExperienceAssetLibraryModule (ref), var1 (ref), buildOverflowMenuScreensModule (ref)
+	return if p4 == nil then nil elseif p4.type == "agents" then "BuildPillMenuAgents" elseif fFlagBuildExperienceAssetLibraryModule and p4.type == "asset-library" then var1.Screens.Browser elseif p4.type == "invitePicker" then buildOverflowMenuScreensModule.Screens.BuildPrivateInvitesPicker elseif p4.type == "creator-credit" then "BuildPillMenuCreatorCredit" else nil
+end
+
+return reactModule.memo(function(p4)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOverlay (ref), reactModule (ref), t (ref), fFlagBuildExperienceAssetLibraryModule (ref), var1 (ref), buildOverflowMenuScreensModule (ref), creatorAgentChatModule (ref), useSessionSummaryModule (ref), privateInvitesPickerContainerModule (ref), view (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), privateInvitesManagementContainerModule (ref), var4 (ref), reactRobloxModule (ref), buildExperienceCompositionStyleSheetModule (ref), overlayProvider (ref)
+	local var5 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 		privateInvitesPageTitle = localizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
 	}) else nil).privateInvitesPageTitle else localizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
-	local var29 = useOverlay()
-	local var30, var31 = reactModule.useState(nil)
-	local activePage = p10.activePage
-	local var32 = if activePage == nil or activePage.type ~= "overflow" then nil else activePage.page
-	local activePage_1 = p10.activePage
-	activePage = if activePage_1 == nil then nil elseif activePage_1.type == "agents" then t.BuildAgents elseif fFlagBuildExperienceAssetLibraryModule and activePage_1.type == "asset-library" then var10.Screens.Browser elseif activePage_1.type == "invitePicker" then buildOverflowMenuScreensModule.Screens.BuildPrivateInvitesPicker elseif activePage_1.type == "creator-credit" then t.BuildCreatorCredit else nil
+	local var6 = useOverlay()
+	local var7, var8 = reactModule.useState(nil)
+	local activePage = p4.activePage
+	local var9 = if activePage == nil or activePage.type ~= "overflow" then nil else activePage.page
+	local activePage_1 = p4.activePage
+	activePage = if activePage_1 == nil then nil elseif activePage_1.type == "agents" then t.BuildAgents elseif fFlagBuildExperienceAssetLibraryModule and activePage_1.type == "asset-library" then var1.Screens.Browser elseif activePage_1.type == "invitePicker" then buildOverflowMenuScreensModule.Screens.BuildPrivateInvitesPicker elseif activePage_1.type == "creator-credit" then t.BuildCreatorCredit else nil
 	local subagentTaskState = useSessionSummaryModule(reactModule.useMemo(function()
-		-- upvalues: creatorAgentChatModule (copy), p10 (ref)
-		return creatorAgentChatModule.getCreatorAgentChatStore().getSessionForProject(p10.target.universeId, p10.target.placeId, p10.target.sessionId)
+		-- upvalues: creatorAgentChatModule (copy), p4 (ref)
+		return creatorAgentChatModule.getCreatorAgentChatStore().getSessionForProject(p4.target.universeId, p4.target.placeId, p4.target.sessionId)
 	end, {
-		p10.target.universeId,
-		p10.target.placeId,
-		p10.target.sessionId
+		p4.target.universeId,
+		p4.target.placeId,
+		p4.target.sessionId
 	})).subagentTaskState
-	local var33 = if var29 ~= nil then nil elseif var29:IsA("ScreenGui") then var29 else var29:FindFirstAncestorOfClass("ScreenGui")
-	local var34 = if var33 == nil or var33.Parent == nil then var29 else var33.Parent
-	local var35 = if var33 ~= nil then 0 else var33.DisplayOrder
+	local var10 = if var6 ~= nil then nil elseif var6:IsA("ScreenGui") then var6 else var6:FindFirstAncestorOfClass("ScreenGui")
+	local var11 = if var10 == nil or var10.Parent == nil then var6 else var10.Parent
+	local var12 = if var10 ~= nil then 0 else var10.DisplayOrder
 	reactModule.useEffect(function()
-		-- upvalues: p10 (ref), var31 (ref)
-		if p10.activePage == nil then
-			var31(nil)
+		-- upvalues: p4 (ref), var8 (ref)
+		if p4.activePage == nil then
+			var8(nil)
 		end
-	end, { p10.activePage })
+	end, { p4.activePage })
 	
-	if p10.activePage == nil or var29 == nil then
+	if p4.activePage == nil or var6 == nil then
 		return nil
 	end
-	local var36 = if p10.activePage.type == "invitePicker" then reactModule.createElement(privateInvitesPickerContainerModule, {
-		universeId = p10.target.universeId,
-		onClose = p10.onClose,
-		onInvitesSent = p10.onInvitesSent or p10.onClose
-	}) elseif p10.activePage.type == "playtestManagement" then reactModule.createElement(view, {
+	local var13 = if p4.activePage.type == "invitePicker" then reactModule.createElement(privateInvitesPickerContainerModule, {
+		universeId = p4.target.universeId,
+		onClose = p4.onClose,
+		onInvitesSent = p4.onInvitesSent or p4.onClose
+	}) elseif p4.activePage.type == "playtestManagement" then reactModule.createElement(view, {
 		ZIndex = 10,
 		tag = "size-full bg-surface-0",
 		testId = "build-pill-menu-playtest-management"
@@ -266,12 +266,12 @@ return reactModule.memo(function(p10)
 		Content = reactModule.createElement(view, { tag = "size-full margin-top-large" }, {
 			Management = reactModule.createElement(overflowMenuPageShellModule, {
 				testId = "BuildPillMenu.playtestInviteManagement.Page",
-				title = var28,
+				title = var5,
 				closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
-				onClose = p10.onClose,
+				onClose = p4.onClose,
 				content = reactModule.createElement(privateInvitesManagementContainerModule, {
-					universeId = p10.target.universeId,
-					onOpenInvitePicker = p10.onOpenInvitePicker or p10.onClose
+					universeId = p4.target.universeId,
+					onOpenInvitePicker = p4.onOpenInvitePicker or p4.onClose
 				})
 			})
 		})
@@ -281,15 +281,15 @@ return reactModule.memo(function(p10)
 		testId = "build-pill-menu-page-view"
 	}, {
 		Content = reactModule.createElement(view, { tag = "size-full margin-top-large" }, {
-			Navigator = reactModule.createElement(var24, {
+			Navigator = reactModule.createElement(var4, {
 				screenProps = {
 					showPreviewButton = false,
 					isPillMenu = true,
-					initialPage = var32,
+					initialPage = var9,
 					initialScreen = activePage,
-					target = p10.target,
+					target = p4.target,
 					subagentTaskState = subagentTaskState,
-					onClose = p10.onClose
+					onClose = p4.onClose
 				}
 			})
 		})
@@ -299,12 +299,12 @@ return reactModule.memo(function(p10)
 		ClipToDeviceSafeArea = false,
 		IgnoreGuiInset = true,
 		Name = "BuildExperiencePillMenuPage",
-		DisplayOrder = var35,
-		ref = var31,
+		DisplayOrder = var12,
+		ref = var8,
 		ScreenInsets = Enum.ScreenInsets.None,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
 		CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),
-		Page = if var30 ~= nil then if p10.activePage.type == "invitePicker" then nil else var36 else reactModule.createElement(overlayProvider, { gui = var30 }, { Page = var36 })
-	}), var34)
+		Page = if var7 ~= nil then if p4.activePage.type == "invitePicker" then nil else var13 else reactModule.createElement(overlayProvider, { gui = var7 }, { Page = var13 })
+	}), var11)
 end)

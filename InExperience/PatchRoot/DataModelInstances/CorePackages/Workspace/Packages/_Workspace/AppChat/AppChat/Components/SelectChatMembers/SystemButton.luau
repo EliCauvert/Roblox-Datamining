@@ -5,19 +5,19 @@ local text = require(parent.AppCommonLib).Text
 local systemButton = roactModule.PureComponent:extend("SystemButton")
 systemButton.defaultProps = { text = "Text", enabled = false, onActivated = nil }
 
-function systemButton.render(p0)
+function systemButton.render(p1)
 	-- upvalues: UIBloxModule (ref), text (ref), roactModule (ref)
-	return UIBloxModule.Style.withStyle(function(p1)
-		-- upvalues: p0 (ref), text (copy), roactModule (copy)
-		local text_1 = p0.props.text
-		local font = p1.Font.Header1.Font
+	return UIBloxModule.Style.withStyle(function(p2)
+		-- upvalues: p1 (ref), text (copy), roactModule (copy)
+		local text_1 = p1.props.text
+		local font = p2.Font.Header1.Font
 		local textWidth = text.GetTextWidth(text_1, font, 24)
 		
 		return roactModule.createElement("TextButton", {
 			BackgroundTransparency = 1,
 			Text = "",
 			Size = UDim2.new(0, textWidth + 8, 1, 0),
-			[roactModule.Event.Activated] = p0.props.onActivated
+			[roactModule.Event.Activated] = p1.props.onActivated
 		}, {
 			layout = roactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
@@ -29,8 +29,8 @@ function systemButton.render(p0)
 				Size = UDim2.new(0, textWidth, 0, 24),
 				Text = text_1,
 				Font = font,
-				TextColor3 = p1.Theme.SystemPrimaryDefault.Color,
-				TextTransparency = if p0.props.enabled then 0 else 0.7
+				TextColor3 = p2.Theme.SystemPrimaryDefault.Color,
+				TextTransparency = if p1.props.enabled then 0 else 0.7
 			})
 		})
 	end)

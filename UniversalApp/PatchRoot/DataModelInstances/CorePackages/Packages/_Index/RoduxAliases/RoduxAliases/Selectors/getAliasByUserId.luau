@@ -2,12 +2,12 @@
 local getDeepValueModule = require(parent.getDeepValue)
 local _ = require(parent.RoduxAliasesTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getDeepValueModule (ref)
-	local keyPath = p0.keyPath
+	local keyPath = p1.keyPath
 	
-	return function(p1, p2)
+	return function(p2, p3)
 		-- upvalues: getDeepValueModule (copy), keyPath (ref)
-		return getDeepValueModule(p1, keyPath .. ".byUserId")[p2]
+		return getDeepValueModule(p2, keyPath .. ".byUserId")[p3]
 	end
 end

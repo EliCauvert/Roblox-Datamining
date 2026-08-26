@@ -1,13 +1,13 @@
 ﻿local parent = script:FindFirstAncestor("ExpChat").Parent
 local fFlagExpChatDictation = require(parent.SharedFlags).FFlagExpChatDictation
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3, p4)
+return require(parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3, p4, p5)
 	-- upvalues: fFlagExpChatDictation (ref)
 	return {
-		text = p0,
-		channelNameOverride = p1,
-		metadata = p2,
-		isError = if fFlagExpChatDictation then p3 else nil,
-		postProcessMessage = p4
+		text = p1,
+		channelNameOverride = p2,
+		metadata = p3,
+		isError = if fFlagExpChatDictation then p4 else nil,
+		postProcessMessage = p5
 	}
 end)

@@ -23,28 +23,28 @@ local t = {
 }
 local studiologoSmall = images["icons/logo/studiologo_small"]
 
-local _ = function(p0, p1)
+local _ = function(p1, p2)
 	-- upvalues: userModel (ref)
-	return if p0.presence == userModel.PresenceType.IN_GAME then p0.lastLocation elseif p0.presence == userModel.PresenceType.ONLINE then p1.online elseif p0.presence == userModel.PresenceType.IN_STUDIO then p1.inStudio else "@" .. p0.name
+	return if p1.presence == userModel.PresenceType.IN_GAME then p1.lastLocation elseif p1.presence == userModel.PresenceType.ONLINE then p2.online elseif p1.presence == userModel.PresenceType.IN_STUDIO then p2.inStudio else "@" .. p0.name
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useStyle (ref), getLocalizedStrings (ref), t (ref), userModel (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), reactModule (ref), skeleton (ref), radius (ref), foundationModule (ref), imageSetLabel (ref), studiologoSmall (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
-	local var5 = useStyle()
-	local theme = var5.Theme
-	local font = var5.Font
-	local var6 = font.BaseSize * font.Header2.RelativeSize
-	local var7 = font.BaseSize * font.CaptionBody.RelativeSize
-	local var8 = getLocalizedStrings(t)
-	local friend = p2.friend
+	local var1 = useStyle()
+	local theme = var1.Theme
+	local font = var1.Font
+	local var2 = font.BaseSize * font.Header2.RelativeSize
+	local var3 = font.BaseSize * font.CaptionBody.RelativeSize
+	local var4 = getLocalizedStrings(t)
+	local friend = p1.friend
 	assert(friend, "friend should be non-nil. Silence type checker.")
 	local _ = nil
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
-		Position = p2.position,
-		Size = p2.size,
+		Position = p1.position,
+		Size = p1.size,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
 		UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }),
@@ -54,14 +54,14 @@ return function(p2)
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, 4)
 		}),
-		DisplayName = if p2.isFetchingFriendsNames then reactModule.createElement(skeleton, {
+		DisplayName = if p1.isFetchingFriendsNames then reactModule.createElement(skeleton, {
 			LayoutOrder = 1,
 			Size = UDim2.new(0, 120, 0, 10),
 			radius = radius.Small
 		}) elseif fFlagEnableBlackbirdCheck and useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck and friend.id then friend.id else nil) then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UDim2.new(1, 0, 0, var6),
+			Size = UDim2.new(1, 0, 0, var2),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
 			Layout = reactModule.createElement("UIListLayout", {
@@ -74,10 +74,10 @@ return function(p2)
 				BackgroundTransparency = 1,
 				TextWrapped = false,
 				LayoutOrder = 1,
-				Size = UDim2.new(0, 0, 0, var6),
+				Size = UDim2.new(0, 0, 0, var2),
 				AutomaticSize = Enum.AutomaticSize.XY,
 				Text = friend.displayName,
-				TextSize = var6,
+				TextSize = var2,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				Font = font.Header2.Font,
@@ -99,17 +99,17 @@ return function(p2)
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 1,
-			Size = UDim2.new(1, 0, 0, var6),
+			Size = UDim2.new(1, 0, 0, var2),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Text = friend.displayName,
-			TextSize = var6,
+			TextSize = var2,
 			TextColor3 = theme.TextEmphasis.Color,
 			TextTransparency = theme.TextEmphasis.Transparency,
 			Font = font.Header2.Font,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}),
-		UserContextContainer = p2.isFetchingFriendsNames and reactModule.createElement(skeleton, {
+		UserContextContainer = p1.isFetchingFriendsNames and reactModule.createElement(skeleton, {
 			LayoutOrder = 2,
 			Size = UDim2.new(0, 80, 0, 10),
 			radius = radius.Small
@@ -117,7 +117,7 @@ return function(p2)
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(1, 0, 0, var7)
+			Size = UDim2.new(1, 0, 0, var3)
 		}, {
 			ListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -130,16 +130,16 @@ return function(p2)
 				Image = studiologoSmall,
 				ImageColor3 = theme.TextDefault.Color,
 				ImageTransparency = theme.TextDefault.Transparency,
-				Size = UDim2.new(0, var7, 0, var7)
+				Size = UDim2.new(0, var3, 0, var3)
 			}),
 			UserContext = reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = true,
 				LayoutOrder = 2,
-				Size = UDim2.new(1, -var7, 0, var7),
+				Size = UDim2.new(1, -var3, 0, var3),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Text = if friend.presence == userModel.PresenceType.IN_GAME then friend.lastLocation elseif friend.presence == userModel.PresenceType.ONLINE then var8.online elseif friend.presence == userModel.PresenceType.IN_STUDIO then var8.inStudio else "@" .. friend.name,
-				TextSize = var7,
+				Text = if friend.presence == userModel.PresenceType.IN_GAME then friend.lastLocation elseif friend.presence == userModel.PresenceType.ONLINE then var4.online elseif friend.presence == userModel.PresenceType.IN_STUDIO then var4.inStudio else "@" .. friend.name,
+				TextSize = var3,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				Font = font.CaptionBody.Font,

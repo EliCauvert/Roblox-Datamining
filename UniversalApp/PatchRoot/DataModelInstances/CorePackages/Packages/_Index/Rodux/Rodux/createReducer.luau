@@ -1,11 +1,11 @@
-﻿return function(p0, p1)
-	return function(p2, p3)
-		-- upvalues: p0 (ref), p1 (ref)
-		if p2 == nil then
-			p2 = p0
+﻿return function(p1, p2)
+	return function(p3, p4)
+		-- upvalues: p1 (ref), p2 (ref)
+		if p3 == nil then
+			p3 = p1
 		end
-		local type = p1[p3.type]
+		local type = p2[p4.type]
 		
-		return if type then type(p2, p3) else p2
+		return if type then type(p3, p4) else p3
 	end
 end

@@ -10,21 +10,21 @@ local _ = require(parent:WaitForChild("MessageSender"))
 local t_1 = {}
 t_1.__index = t_1
 
-function mergeProps(p0, p1)
-	if not p0 then return end
-	for i, v in pairs(p0) do
-		p1[i] = v
+function mergeProps(p1, p2)
+	if not p1 then return end
+	for i, v in pairs(p1) do
+		p2[i] = v
 	end
 end
 
-function ReturnToObjectPoolRecursive(p2, p3)
-	local children = p2:GetChildren()
+function ReturnToObjectPoolRecursive(p3, p4)
+	local children = p3:GetChildren()
 	
 	for i = 1, #children do
-		ReturnToObjectPoolRecursive(children[i], p3)
+		ReturnToObjectPoolRecursive(children[i], p4)
 	end
-	p2.Parent = nil
-	p3:ReturnInstance(p2)
+	p3.Parent = nil
+	p4:ReturnInstance(p3)
 end
 
 function GetMessageCreators()
@@ -41,80 +41,80 @@ function GetMessageCreators()
 	return t
 end
 
-function t_1.WrapIntoMessageObject(p4, p5, p6)
+function t_1.WrapIntoMessageObject(p5, p6, p7)
 	-- upvalues: utilModule (ref)
 	return {
-		ID = p5.ID,
-		BaseFrame = p6[utilModule.KEY_BASE_FRAME],
-		BaseMessage = if utilModule.KEY_BASE_MESSAGE then p6[utilModule.KEY_BASE_MESSAGE] else nil,
-		UpdateTextFunction = p6[utilModule.KEY_UPDATE_TEXT_FUNC] or function()
+		ID = p6.ID,
+		BaseFrame = p7[utilModule.KEY_BASE_FRAME],
+		BaseMessage = if utilModule.KEY_BASE_MESSAGE then p7[utilModule.KEY_BASE_MESSAGE] else nil,
+		UpdateTextFunction = p7[utilModule.KEY_UPDATE_TEXT_FUNC] or function()
 			warn("NO MESSAGE RESIZE FUNCTION")
 		end,
-		GetHeightFunction = p6[utilModule.KEY_GET_HEIGHT],
-		FadeInFunction = p6[utilModule.KEY_FADE_IN],
-		FadeOutFunction = p6[utilModule.KEY_FADE_OUT],
-		UpdateAnimFunction = p6[utilModule.KEY_UPDATE_ANIMATION],
-		ObjectPool = p4.ObjectPool,
+		GetHeightFunction = p7[utilModule.KEY_GET_HEIGHT],
+		FadeInFunction = p7[utilModule.KEY_FADE_IN],
+		FadeOutFunction = p7[utilModule.KEY_FADE_OUT],
+		UpdateAnimFunction = p7[utilModule.KEY_UPDATE_ANIMATION],
+		ObjectPool = p5.ObjectPool,
 		Destroyed = false,
-		Destroy = function(p7)
-			ReturnToObjectPoolRecursive(p7.BaseFrame, p7.ObjectPool)
-			p7.Destroyed = true
+		Destroy = function(p8)
+			ReturnToObjectPoolRecursive(p8.BaseFrame, p8.ObjectPool)
+			p8.Destroyed = true
 		end
 	}
 end
 
-function t_1.CreateMessageLabel_Chat(p8, p9, p10, p11)
+function t_1.CreateMessageLabel_Chat(p5, p6, p7, p8)
 	-- upvalues: chatService (ref)
-	p9.Channel = p10
-	local var11 = nil
+	p6.Channel = p7
+	local var1 = nil
 	pcall(function()
-		-- upvalues: var11 (write), chatService (copy), p9 (ref)
-		var11 = chatService:InvokeChatCallback(Enum.ChatCallbackType.OnClientFormattingMessage, p9)
+		-- upvalues: var1 (write), chatService (copy), p6 (ref)
+		var1 = chatService:InvokeChatCallback(Enum.ChatCallbackType.OnClientFormattingMessage, p6)
 	end)
-	p9.ExtraData = p9.ExtraData or {}
-	mergeProps(var11, p9.ExtraData)
-	local messageType = p9.MessageType
+	p6.ExtraData = p6.ExtraData or {}
+	mergeProps(var1, p6.ExtraData)
+	local messageType = p6.MessageType
 	
-	if p8.MessageCreators[messageType] then
-		local var13 = p8.MessageCreators[messageType](p9, p10, p11)
+	if p5.MessageCreators[messageType] then
+		local var2 = p5.MessageCreators[messageType](p6, p7, p8)
 		
-		if var13 then
-			return p8:WrapIntoMessageObject(p9, var13)
+		if var2 then
+			return p5:WrapIntoMessageObject(p6, var2)
 		end
-	elseif p8.DefaultCreatorType then
-		local var12 = p8.MessageCreators[p8.DefaultCreatorType](p9, p10, p11)
+	elseif p5.DefaultCreatorType then
+		local var3 = p5.MessageCreators[p5.DefaultCreatorType](p6, p7, p8)
 		
-		if var12 then
-			return p8:WrapIntoMessageObject(p9, var12)
+		if var3 then
+			return p5:WrapIntoMessageObject(p6, var3)
 		end
 	else
 		error("No message creator available for message type: " .. messageType)
 	end
 end
 
-function t_1.CreateMessageLabel(p12, p13, p14)
+function t_1.CreateMessageLabel(p5, p6, p7)
 	-- upvalues: chatService (ref)
-	p13.Channel = p14
-	local var14 = nil
+	p6.Channel = p7
+	local var1 = nil
 	pcall(function()
-		-- upvalues: var14 (write), chatService (copy), p13 (ref)
-		var14 = chatService:InvokeChatCallback(Enum.ChatCallbackType.OnClientFormattingMessage, p13)
+		-- upvalues: var1 (write), chatService (copy), p6 (ref)
+		var1 = chatService:InvokeChatCallback(Enum.ChatCallbackType.OnClientFormattingMessage, p6)
 	end)
-	p13.ExtraData = p13.ExtraData or {}
-	mergeProps(var14, p13.ExtraData)
-	local messageType = p13.MessageType
+	p6.ExtraData = p6.ExtraData or {}
+	mergeProps(var1, p6.ExtraData)
+	local messageType = p6.MessageType
 	
-	if p12.MessageCreators[messageType] then
-		local var16 = p12.MessageCreators[messageType](p13, p14)
+	if p5.MessageCreators[messageType] then
+		local var2 = p5.MessageCreators[messageType](p6, p7)
 		
-		if var16 then
-			return p12:WrapIntoMessageObject(p13, var16)
+		if var2 then
+			return p5:WrapIntoMessageObject(p6, var2)
 		end
-	elseif p12.DefaultCreatorType then
-		local var15 = p12.MessageCreators[p12.DefaultCreatorType](p13, p14)
+	elseif p5.DefaultCreatorType then
+		local var3 = p5.MessageCreators[p5.DefaultCreatorType](p6, p7)
 		
-		if var15 then
-			return p12:WrapIntoMessageObject(p13, var15)
+		if var3 then
+			return p5:WrapIntoMessageObject(p6, var3)
 		end
 	else
 		error("No message creator available for message type: " .. messageType)
@@ -132,9 +132,9 @@ function t.new()
 	return tbl
 end
 
-function t.GetStringTextBounds(_, p15, p16, p17, p18)
+function t.GetStringTextBounds(_, p5, p6, p7, p8)
 	-- upvalues: utilModule (ref)
-	return utilModule:GetStringTextBounds(p15, p16, p17, p18)
+	return utilModule:GetStringTextBounds(p5, p6, p7, p8)
 end
 
 return t

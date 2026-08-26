@@ -18,23 +18,23 @@ local fFlagAddThumbnailSelectorReport = sharedFlagsModule.FFlagAddThumbnailSelec
 local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
 local fixKidsBlueOnReportDropdown = game:DefineFastFlag("FixKidsBlueOnReportDropdown", false)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), appearanceContext (ref), abuseVectorModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), dynamicReportV2ContainerModule (ref), fixKidsBlueOnReportDropdown (ref), layerCollectorProvider (ref), abuseReportBeduiProviderModule (ref), abuseReportFormDataProviderModule (ref), fFlagAddThumbnailSelectorReport (ref), abuseReportAnalyticsProviderModule (ref), dynamicReportModule (ref), foundationProvider (ref), foundationModule (ref)
-	return if p0.abuseVector == abuseVectorModule.UserProfile or fFlagEnableReportingFlowForMomentsFeed and p0.abuseVector == abuseVectorModule.MomentsFeed then reactModule.createElement(dynamicReportV2ContainerModule, {
-		abuseVector = p0.abuseVector,
-		targetId = p0.targetId,
-		onClose = p0.onClose,
-		onSubmit = p0.onSubmit,
-		onCustomSubmit = p0.onCustomSubmit,
-		clientActionHandlers = p0.clientActionHandlers,
-		custom = p0.custom
+	return if p1.abuseVector == abuseVectorModule.UserProfile or fFlagEnableReportingFlowForMomentsFeed and p1.abuseVector == abuseVectorModule.MomentsFeed then reactModule.createElement(dynamicReportV2ContainerModule, {
+		abuseVector = p1.abuseVector,
+		targetId = p1.targetId,
+		onClose = p1.onClose,
+		onSubmit = p1.onSubmit,
+		onCustomSubmit = p1.onCustomSubmit,
+		clientActionHandlers = p1.clientActionHandlers,
+		custom = p1.custom
 	}) elseif fixKidsBlueOnReportDropdown then reactModule.createElement(layerCollectorProvider, {}, {
-		AbuseReportBeduiProvider = reactModule.createElement(abuseReportBeduiProviderModule, { abuseVector = p0.abuseVector }, {
+		AbuseReportBeduiProvider = reactModule.createElement(abuseReportBeduiProviderModule, { abuseVector = p1.abuseVector }, {
 			AbuseReportFormDataProvider = reactModule.createElement(abuseReportFormDataProviderModule, {
-				custom = if fFlagAddThumbnailSelectorReport then p0.custom else nil
+				custom = if fFlagAddThumbnailSelectorReport then p1.custom else nil
 			}, {
-				AbuseReportAnalyticsProvider = reactModule.createElement(abuseReportAnalyticsProviderModule, { abuseVector = p0.abuseVector }, {
-					DynamicReport = reactModule.createElement(dynamicReportModule, p0)
+				AbuseReportAnalyticsProvider = reactModule.createElement(abuseReportAnalyticsProviderModule, { abuseVector = p1.abuseVector }, {
+					DynamicReport = reactModule.createElement(dynamicReportModule, p1)
 				})
 			})
 		})
@@ -42,12 +42,12 @@ return reactModule.memo(function(p0)
 		FoundationProvider = reactModule.createElement(foundationProvider, {
 			colorMode = if reactModule.useContext(appearanceContext).theme == "light" then foundationModule.Enums.ColorMode.Light else foundationModule.Enums.ColorMode.Dark
 		}, {
-			AbuseReportBeduiProvider = reactModule.createElement(abuseReportBeduiProviderModule, { abuseVector = p0.abuseVector }, {
+			AbuseReportBeduiProvider = reactModule.createElement(abuseReportBeduiProviderModule, { abuseVector = p1.abuseVector }, {
 				AbuseReportFormDataProvider = reactModule.createElement(abuseReportFormDataProviderModule, {
-					custom = if fFlagAddThumbnailSelectorReport then p0.custom else nil
+					custom = if fFlagAddThumbnailSelectorReport then p1.custom else nil
 				}, {
-					AbuseReportAnalyticsProvider = reactModule.createElement(abuseReportAnalyticsProviderModule, { abuseVector = p0.abuseVector }, {
-						DynamicReport = reactModule.createElement(dynamicReportModule, p0)
+					AbuseReportAnalyticsProvider = reactModule.createElement(abuseReportAnalyticsProviderModule, { abuseVector = p1.abuseVector }, {
+						DynamicReport = reactModule.createElement(dynamicReportModule, p1)
 					})
 				})
 			})

@@ -6,49 +6,49 @@ local fFlagDropUnroutableMultiReportOptions = require(parent.SharedFlags).FFlagD
 local httpService = game:GetService("HttpService")
 local t = { Variant = { IGARv1 = "IGARv1", IGARv3 = "IGARv3" } }
 
-function transformTargetPlayers(p0, p1)
+function transformTargetPlayers(p1, p2)
 	-- upvalues: getHumanoidDescription (ref)
 	local t = {}
 	
-	if p1 == 0 then
-		p1 = 1
+	if p2 == 0 then
+		p2 = 1
 	end
-	for i, v in ipairs(p0) do
+	for i, v in ipairs(p1) do
 		local player = v.player
 		local count = v.count
-		local var5, var6 = getHumanoidDescription(player.UserId)
+		local var1, var2 = getHumanoidDescription(player.UserId)
 		table.insert(t, {
 			userId = player.UserId,
 			hitCount = count,
-			hitPercentage = count / p1,
-			humanoidDescription = var5,
-			humanoidDescriptionStatus = var6
+			hitPercentage = count / p2,
+			humanoidDescription = var1,
+			humanoidDescriptionStatus = var2
 		})
 	end
 	return t
 end
 
-function serializeTargetPlayersIntoTagValues(p2)
+function serializeTargetPlayersIntoTagValues(p3)
 	-- upvalues: httpService (ref)
 	local t = {}
 	
-	for i, v in ipairs(p2) do
+	for i, v in ipairs(p3) do
 		table.insert(t, { data = httpService:JSONEncode(v) })
 	end
 	return t
 end
 
-local var3 = function(p3)
+local var3 = function(p4)
 	local t = {}
 	
-	for i, v in ipairs(p3) do
+	for i, v in ipairs(p4) do
 		t[#t + 1] = { v.X, v.Y }
 	end
 	return t
 end
 
-local _ = function(p4)
-	local extractedAssets = p4.extractedAssets
+local _ = function(p5)
+	local extractedAssets = p5.extractedAssets
 	
 	return if #extractedAssets.Image <= 0 then if #extractedAssets.Mesh <= 0 then if #extractedAssets.Model <= 0 then if #extractedAssets.Package <= 0 then #extractedAssets.Text > 0 else true else true else true else true
 end
@@ -116,11 +116,11 @@ function buildReport(p5, p6, p7, p8, p9, p10, p11, p12, p13)
 		end
 	end
 	if #p7.extractedPlayers > 0 then
-		local var10 = transformTargetPlayers(p7.extractedPlayers, p7.stats.raycastCompletedCount)
-		t_1.tags.IGAR_REPORT_TARGET_PLAYERS = { valueList = serializeTargetPlayersIntoTagValues(var10) }
+		local var4 = transformTargetPlayers(p7.extractedPlayers, p7.stats.raycastCompletedCount)
+		t_1.tags.IGAR_REPORT_TARGET_PLAYERS = { valueList = serializeTargetPlayersIntoTagValues(var4) }
 		
 		if not fFlagDropUnroutableMultiReportOptions and p9 == "username" then
-			t_1.tags.REPORT_TARGET_USER_ID = { valueList = { { data = tostring(var10[1].userId) } } }
+			t_1.tags.REPORT_TARGET_USER_ID = { valueList = { { data = tostring(var4[1].userId) } } }
 		end
 	end
 	if p6 then

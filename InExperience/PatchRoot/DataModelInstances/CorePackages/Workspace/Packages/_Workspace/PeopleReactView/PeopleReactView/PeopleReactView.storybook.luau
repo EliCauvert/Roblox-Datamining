@@ -27,9 +27,9 @@ local t_1 = {
 	["Feature.SettingsHub.Action.Ok"] = "Ok"
 }
 local t_2 = {
-	Format = function(_, p0)
+	Format = function(_, p1)
 		-- upvalues: t_1 (ref)
-		return t_1[p0] or p0
+		return t_1[p1] or p1
 	end,
 	changed = signal.new(),
 	GetLocale = function()
@@ -47,29 +47,29 @@ return {
 	storyRoot = peopleReactView,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p2)
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), localizationProvider (ref), t_2 (ref), foundationProvider (ref), foundationModule (ref), t (ref), StyleLinkPortal (ref)
-		return function(p3)
-			-- upvalues: reactModule (copy), localizationProvider (copy), t_2 (copy), foundationProvider (copy), foundationModule (copy), t (copy), p2 (ref), StyleLinkPortal (copy)
-			local var8 = reactModule.useRef(Instance.new("Frame"))
+		return function(p2)
+			-- upvalues: reactModule (copy), localizationProvider (copy), t_2 (copy), foundationProvider (copy), foundationModule (copy), t (copy), p1 (ref), StyleLinkPortal (copy)
+			local var1 = reactModule.useRef(Instance.new("Frame"))
 			
-			if var8.current.Parent ~= p3.focus then
-				var8.current.Parent = p3.focus
+			if var1.current.Parent ~= p2.focus then
+				var1.current.Parent = p2.focus
 			end
 			reactModule.useLayoutEffect(function()
-				-- upvalues: var8 (ref)
-				var8.current.Size = UDim2.fromScale(1, 1)
-				var8.current.BackgroundTransparency = 1
+				-- upvalues: var1 (ref)
+				var1.current.Size = UDim2.fromScale(1, 1)
+				var1.current.BackgroundTransparency = 1
 			end, {})
 			
 			return reactModule.createElement(localizationProvider, { localization = t_2 }, {
 				FoundationProvider = reactModule.createElement(foundationProvider, {
 					colorMode = foundationModule.Enums.ColorMode.Dark,
-					device = if p3 then t[p3.platform] else "Desktop",
-					overlayGui = var8.current
+					device = if p2 then t[p2.platform] else "Desktop",
+					overlayGui = var1.current
 				}, {
-					Child = reactModule.createElement(p2, p3),
-					StyleLink = reactModule.createElement(StyleLinkPortal, { overlay = var8.current })
+					Child = reactModule.createElement(p1, p2),
+					StyleLink = reactModule.createElement(StyleLinkPortal, { overlay = var1.current })
 				})
 			})
 		end

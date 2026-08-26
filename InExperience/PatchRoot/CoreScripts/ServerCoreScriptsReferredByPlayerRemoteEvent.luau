@@ -5,16 +5,16 @@ if require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).GetFF
 	local referredPlayerJoin = Instance.new("RemoteEvent")
 	referredPlayerJoin.Name = "ReferredPlayerJoin"
 	referredPlayerJoin.Parent = robloxReplicatedStorageService
-	playersService.PlayerAdded:Connect(function(p0)
+	playersService.PlayerAdded:Connect(function(p1)
 		-- upvalues: playersService (ref), referredPlayerJoin (ref)
-		local joinData = p0:GetJoinData()
+		local joinData = p1:GetJoinData()
 		local referredByPlayerId = joinData and tonumber(joinData.ReferredByPlayerId)
 		
 		if referredByPlayerId and referredByPlayerId ~= 0 then
-			local var5 = playersService:GetPlayerByUserId(referredByPlayerId)
+			local var1 = playersService:GetPlayerByUserId(referredByPlayerId)
 			
-			if var5 then
-				referredPlayerJoin:FireClient(var5, p0)
+			if var1 then
+				referredPlayerJoin:FireClient(var1, p1)
 			end
 		end
 	end)

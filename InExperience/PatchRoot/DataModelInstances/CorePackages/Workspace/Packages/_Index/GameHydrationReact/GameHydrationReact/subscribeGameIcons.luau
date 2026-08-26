@@ -2,35 +2,35 @@
 local signalsModule = require(parent.Signals)
 local dataHydrationModule = require(parent.DataHydration)
 
-local function toIds(p0)
+local function toIds(p1)
 	local t = {}
 	
-	if p0 == nil then
+	if p1 == nil then
 		return t
 	end
 	local t_1 = {}
 	
-	for i, v in p0 do
-		local var6 = tostring(v)
+	for i, v in p1 do
+		local var1 = tostring(v)
 		
-		if not t_1[var6] then
-			t_1[var6] = true
-			table.insert(t, var6)
+		if not t_1[var1] then
+			t_1[var1] = true
+			table.insert(t, var1)
 		end
 	end
 	return t
 end
 
-local function sameIds(p1, p2)
-	if #p1 ~= #p2 then
+local function sameIds(p2, p3)
+	if #p2 ~= #p3 then
 		return false
 	end
 	local t = {}
 	
-	for i, v in p1 do
+	for i, v in p2 do
 		t[v] = true
 	end
-	for i, v_1 in p2 do
+	for i, v_1 in p3 do
 		if not t[v_1] then
 			return false
 		end
@@ -38,44 +38,44 @@ local function sameIds(p1, p2)
 	return true
 end
 
-return function(p3)
+return function(p4)
 	-- upvalues: dataHydrationModule (ref), signalsModule (ref), toIds (ref), sameIds (ref)
 	local gameIconStore = dataHydrationModule.Game.getGameIconStore(false)
-	local var9, var10 = signalsModule.createSignal(toIds(p3.universeIds), sameIds)
+	local var2, var3 = signalsModule.createSignal(toIds(p4.universeIds), sameIds)
 	local t = {}
-	local var12 = true
+	local var4 = true
 	
 	return {
 		getCurrent = function()
 			-- upvalues: t (write)
 			return t
 		end,
-		update = function(p4)
-			-- upvalues: var10 (ref), toIds (copy)
-			var10(toIds(p4))
+		update = function(p5)
+			-- upvalues: var3 (ref), toIds (copy)
+			var3(toIds(p5))
 		end,
 		dispose = signalsModule.createEffect(function(p5)
-			-- upvalues: var9 (ref), gameIconStore (ref), p3 (ref), t (write), var12 (write)
-			local var13 = var9(p5)
+			-- upvalues: var2 (ref), gameIconStore (ref), p4 (ref), t (write), var4 (write)
+			local var5 = var2(p5)
 			local t_1 = {}
 			
-			if #var13 > 0 then
-				for i, v in gameIconStore.getGameIcons(var13, p3.size) do
-					local var15 = v.data(p5)
+			if #var5 > 0 then
+				for i, v in gameIconStore.getGameIcons(var5, p4.size) do
+					local var6 = v.data(p5)
 					
-					if var15 ~= nil then
-						t_1[i] = var15
+					if var6 ~= nil then
+						t_1[i] = var6
 					end
 				end
 			end
 			t = t_1
 			
-			if var12 then
-				var12 = false
+			if var4 then
+				var4 = false
 				
 				return
 			end
-			p3.onChange(t_1)
+			p4.onChange(t_1)
 		end)
 	}
 end

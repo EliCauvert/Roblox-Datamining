@@ -1,9 +1,9 @@
-﻿local function resultHandler(p0, p1, ...)
-	if not p1 then
+﻿local function resultHandler(p1, p2, ...)
+	if not p2 then
 		local var1 = ...
 		
 		if typeof(var1) == "string" then
-			error(debug.traceback(p0, var1), 3)
+			error(debug.traceback(p1, var1), 3)
 		else
 			error(var1, 3)
 		end
@@ -14,9 +14,9 @@
 	return ...
 end
 
-return function(p2, ...)
+return function(p1, ...)
 	-- upvalues: resultHandler (ref)
-	local thread = coroutine.create(p2)
+	local thread = coroutine.create(p1)
 	
 	return resultHandler(thread, coroutine.resume(thread, ...))
 end

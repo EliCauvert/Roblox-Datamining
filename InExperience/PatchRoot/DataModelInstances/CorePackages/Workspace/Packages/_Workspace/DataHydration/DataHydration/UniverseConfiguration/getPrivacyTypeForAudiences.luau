@@ -11,10 +11,10 @@ local list = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: list (ref), privacyType (ref)
 	for i, v in list do
-		if table.find(p0, v.audience) then
+		if table.find(p1, v.audience) then
 			return v.privacyType
 		end
 	end

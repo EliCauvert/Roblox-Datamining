@@ -38,71 +38,71 @@ local partyVoiceBannerErrorUserNotEligibleURL = game:DefineFastString("PartyVoic
 local disallowSquadLobbyBannersInlineButtons = game:DefineFastFlag("DisallowSquadLobbyBannersInlineButtons", false)
 local disablePartyVoiceEligibilityBanner = game:DefineFastFlag("DisablePartyVoiceEligibilityBanner", false)
 
-function openWebview(p0, p1)
+function openWebview(p1, p2)
 	-- upvalues: httpService (ref), guiService (ref)
 	guiService:BroadcastNotification(httpService:JSONEncode({
 		presentationStyle = 0,
 		visible = true,
-		title = if game:GetEngineFeature("SetWebViewTitle") then p0 else nil,
-		url = p1
+		title = if game:GetEngineFeature("SetWebViewTitle") then p1 else nil,
+		url = p2
 	}), 20)
 end
 
-local var12 = function(p2)
+local var1 = function(p1)
 	-- upvalues: useTokens (ref), disallowSquadLobbyBannersInlineButtons (ref), react (ref), foundation (ref)
-	local var18 = useTokens()
-	local var19 = p2.isButtonInline and not disallowSquadLobbyBannersInlineButtons
+	local var2 = useTokens()
+	local var3 = p1.isButtonInline and not disallowSquadLobbyBannersInlineButtons
 	
 	return react.createElement("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
-		BackgroundColor3 = var18.Color.Surface.Surface_200.Color3,
-		BackgroundTransparency = var18.Color.Surface.Surface_200.Transparency,
-		LayoutOrder = p2.LayoutOrder
+		BackgroundColor3 = var2.Color.Surface.Surface_200.Color3,
+		BackgroundTransparency = var2.Color.Surface.Surface_200.Transparency,
+		LayoutOrder = p1.LayoutOrder
 	}, {
-		UICorner = react.createElement("UICorner", { CornerRadius = UDim.new(0, var18.Radius.Small) }),
+		UICorner = react.createElement("UICorner", { CornerRadius = UDim.new(0, var2.Radius.Small) }),
 		UIPadding = react.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var18.Gap.XLarge),
-			PaddingRight = UDim.new(0, var18.Gap.XLarge),
-			PaddingTop = UDim.new(0, var18.Gap.Medium),
-			PaddingBottom = UDim.new(0, var18.Gap.Medium)
+			PaddingLeft = UDim.new(0, var2.Gap.XLarge),
+			PaddingRight = UDim.new(0, var2.Gap.XLarge),
+			PaddingTop = UDim.new(0, var2.Gap.Medium),
+			PaddingBottom = UDim.new(0, var2.Gap.Medium)
 		}),
 		UIListLayout = react.createElement("UIListLayout", {
-			FillDirection = if var19 then Enum.FillDirection.Horizontal else Enum.FillDirection.Vertical,
-			Padding = if var19 then UDim.new(0, var18.Gap.XSmall) else UDim.new(0, var18.Gap.Medium),
+			FillDirection = if var3 then Enum.FillDirection.Horizontal else Enum.FillDirection.Vertical,
+			Padding = if var3 then UDim.new(0, var2.Gap.XSmall) else UDim.new(0, var2.Gap.Medium),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
-			Wraps = not var19,
-			HorizontalFlex = if var19 then Enum.UIFlexAlignment.SpaceBetween else Enum.UIFlexAlignment.Fill,
-			VerticalFlex = if var19 then Enum.UIFlexAlignment.Fill else Enum.UIFlexAlignment.None
+			Wraps = not var3,
+			HorizontalFlex = if var3 then Enum.UIFlexAlignment.SpaceBetween else Enum.UIFlexAlignment.Fill,
+			VerticalFlex = if var3 then Enum.UIFlexAlignment.Fill else Enum.UIFlexAlignment.None
 		}),
 		TextFrame = react.createElement(foundation.View, { tag = "col auto-xy gap-small wrap", LayoutOrder = 1 }, react.useMemo(function()
-			-- upvalues: react (copy), foundation (copy), var18 (ref), p2 (ref)
+			-- upvalues: react (copy), foundation (copy), var2 (ref), p1 (ref)
 			local list = {
 				react.createElement(foundation.Text, {
 					LayoutOrder = 1,
 					TextWrapped = true,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					backgroundStyle = var18.Color.None,
-					colorstyle = var18.Color.Content.Emphasis,
-					fontStyle = var18.Typography.BodySmall,
-					Text = p2.label,
+					backgroundStyle = var2.Color.None,
+					colorstyle = var2.Color.Content.Emphasis,
+					fontStyle = var2.Typography.BodySmall,
+					Text = p1.label,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,
 					TextTruncate = Enum.TextTruncate.None
 				})
 			}
 			
-			if p2.sublabels then
-				for i, v in ipairs(p2.sublabels) do
+			if p1.sublabels then
+				for i, v in ipairs(p1.sublabels) do
 					if v and v ~= "" then
 						table.insert(list, react.createElement(foundation.Text, {
 							TextWrapped = true,
 							RichText = true,
 							AutomaticSize = Enum.AutomaticSize.XY,
-							backgroundStyle = var18.Color.None,
-							colorstyle = var18.Color.Content.Emphasis,
-							fontStyle = var18.Typography.BodySmall,
+							backgroundStyle = var2.Color.None,
+							colorstyle = var2.Color.Content.Emphasis,
+							fontStyle = var2.Typography.BodySmall,
 							LayoutOrder = i + 1,
 							Text = v,
 							TextXAlignment = Enum.TextXAlignment.Left,
@@ -113,51 +113,51 @@ local var12 = function(p2)
 				end
 			end
 			return list
-		end, { p2.label, p2.sublabels })),
-		InlineButton = if p2.onActivated and var19 then react.createElement(foundation.Button, {
+		end, { p1.label, p1.sublabels })),
+		InlineButton = if p1.onActivated and var3 then react.createElement(foundation.Button, {
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			text = p2.buttonLabel,
+			text = p1.buttonLabel,
 			variant = foundation.Enums.ButtonVariant.Link,
-			onActivated = p2.onActivated
+			onActivated = p1.onActivated
 		}) else nil,
-		BottomButton = if p2.onActivated and not var19 then react.createElement(foundation.Button, {
+		BottomButton = if p1.onActivated and not var3 then react.createElement(foundation.Button, {
 			LayoutOrder = 2,
-			text = p2.buttonLabel,
+			text = p1.buttonLabel,
 			variant = foundation.Enums.ButtonVariant.Standard,
 			size = foundation.Enums.ButtonSize.Small,
-			onActivated = p2.onActivated,
+			onActivated = p1.onActivated,
 			fillBehavior = foundation.Enums.FillBehavior.Fill
 		}) else nil
 	})
 end
 
-local var13 = function(p3)
-	-- upvalues: useLocalUserId (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), getTableAppStorageKey (ref), SQUAD_VOICE_EU_MODAL_SEEN_KEY (ref), SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY (ref), httpService (ref), default (ref), var12 (ref), displayEuConsentPromptModule (ref)
-	local var21 = useLocalUserId()
-	local var22 = useDispatch()
-	local var23 = react.useContext(squadExternalContractContext)
-	local var24, var25 = react.useState(false)
-	local var26 = getTableAppStorageKey(SQUAD_VOICE_EU_MODAL_SEEN_KEY)
-	local var27 = getTableAppStorageKey(SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY)
+local var4 = function(p2)
+	-- upvalues: useLocalUserId (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), getTableAppStorageKey (ref), SQUAD_VOICE_EU_MODAL_SEEN_KEY (ref), SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY (ref), httpService (ref), default (ref), var1 (ref), displayEuConsentPromptModule (ref)
+	local var5 = useLocalUserId()
+	local var6 = useDispatch()
+	local var7 = react.useContext(squadExternalContractContext)
+	local var8, var9 = react.useState(false)
+	local var10 = getTableAppStorageKey(SQUAD_VOICE_EU_MODAL_SEEN_KEY)
+	local var11 = getTableAppStorageKey(SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY)
 	react.useEffect(function()
-		-- upvalues: var26 (ref), var21 (ref), var27 (ref), var25 (ref)
-		if var26[tostring(var21)] and not var27[tostring(var21)] then
-			var25(true)
+		-- upvalues: var10 (ref), var5 (ref), var11 (ref), var9 (ref)
+		if var10[tostring(var5)] and not var11[tostring(var5)] then
+			var9(true)
 		end
 	end, {
-		httpService:JSONEncode(var26),
-		httpService:JSONEncode(var27)
+		httpService:JSONEncode(var10),
+		httpService:JSONEncode(var11)
 	})
 	react.useEffect(function()
-		-- upvalues: default (copy), var25 (ref)
+		-- upvalues: default (copy), var9 (ref)
 		local eventConnection = default.VoiceEuModalConsented.Event:Connect(function()
-			-- upvalues: var25 (copy)
-			var25(false)
+			-- upvalues: var9 (copy)
+			var9(false)
 		end)
 		local eventConnection_1 = default.VoiceEuModalRefused.Event:Connect(function()
-			-- upvalues: var25 (copy)
-			var25(true)
+			-- upvalues: var9 (copy)
+			var9(true)
 		end)
 		
 		return function()
@@ -167,140 +167,140 @@ local var13 = function(p3)
 		end
 	end, {})
 	
-	return if var24 then react.createElement(var12, {
+	return if var8 then react.createElement(var1, {
 		label = "Give consent to the voice recording policy in order to access voice chat.",
 		buttonLabel = "Connect",
 		isButtonInline = true,
-		LayoutOrder = p3.LayoutOrder,
+		LayoutOrder = p2.LayoutOrder,
 		onActivated = function()
-			-- upvalues: var22 (ref), displayEuConsentPromptModule (copy), var23 (ref), var21 (ref), var26 (ref), var27 (ref)
-			var22(displayEuConsentPromptModule(var23.setSquadPrompt, tostring(var21), var26, var27))
+			-- upvalues: var6 (ref), displayEuConsentPromptModule (copy), var7 (ref), var5 (ref), var10 (ref), var11 (ref)
+			var6(displayEuConsentPromptModule(var7.setSquadPrompt, tostring(var5), var10, var11))
 		end
 	}) else nil
 end
 
-local var14 = function(p4)
-	-- upvalues: useDispatch (ref), useStore (ref), react (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useVoiceStatus (ref), crossExperienceModule (ref), voiceStatus (ref), useLocalization (ref), voiceStatusChanged (ref), default (ref), getFFlagEnableCrossExpVoiceMemoryCheck (ref), squadPromptType (ref), var12 (ref)
-	local var30 = useDispatch()
-	local var31 = useStore()
-	local var32 = react.useContext(squadExternalContractContext)
-	local var33 = useCurrentSquadId() or ""
-	local var34 = useVoiceStatus()
-	local var35 = var34 == crossExperienceModule.Constants.VOICE_STATUS.ERROR_JOIN_FEASIBILITY_CHECK_FAILED
-	local var36 = useLocalization({
+local var5 = function(p2)
+	-- upvalues: useDispatch (ref), useStore (ref), react (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useVoiceStatus (ref), crossExperienceModule (ref), voiceStatus (ref), useLocalization (ref), voiceStatusChanged (ref), default (ref), getFFlagEnableCrossExpVoiceMemoryCheck (ref), squadPromptType (ref), var1 (ref)
+	local var6 = useDispatch()
+	local var7 = useStore()
+	local var8 = react.useContext(squadExternalContractContext)
+	local var9 = useCurrentSquadId() or ""
+	local var10 = useVoiceStatus()
+	local var11 = var10 == crossExperienceModule.Constants.VOICE_STATUS.ERROR_JOIN_FEASIBILITY_CHECK_FAILED
+	local var12 = useLocalization({
 		errorText = "Feature.Squads.Label.VoiceErrorGeneral",
 		errorButton = "Feature.Squads.Action.VoiceErrorGeneral"
 	})
 	
-	return if if getFFlagEnableCrossExpVoiceMemoryCheck() then var35 else voiceStatus.isVoiceRetriableErrorByGameJoin(var34) or voiceStatus.isVoiceRetriableErrorByVoiceJoin(var34) then react.createElement(var12, {
+	return if if getFFlagEnableCrossExpVoiceMemoryCheck() then var11 else voiceStatus.isVoiceRetriableErrorByGameJoin(var10) or voiceStatus.isVoiceRetriableErrorByVoiceJoin(var10) then react.createElement(var1, {
 		isButtonInline = true,
-		LayoutOrder = p4.LayoutOrder,
-		label = var36.errorText,
-		buttonLabel = var36.errorButton,
-		onActivated = if var33 ~= "" then nil else react.useCallback(function()
-			-- upvalues: var30 (ref), voiceStatusChanged (copy), crossExperienceModule (copy), default (copy), var33 (ref), getFFlagEnableCrossExpVoiceMemoryCheck (copy), var35 (ref), var32 (ref), var31 (ref), squadPromptType (copy), voiceStatus (copy), var34 (ref)
-			local var37 = function(p5)
-				-- upvalues: var30 (copy), voiceStatusChanged (copy), crossExperienceModule (copy), default (copy), var33 (copy)
-				var30(voiceStatusChanged({
+		LayoutOrder = p2.LayoutOrder,
+		label = var12.errorText,
+		buttonLabel = var12.errorButton,
+		onActivated = if var9 ~= "" then nil else react.useCallback(function()
+			-- upvalues: var6 (ref), voiceStatusChanged (copy), crossExperienceModule (copy), default (copy), var9 (ref), getFFlagEnableCrossExpVoiceMemoryCheck (copy), var11 (ref), var8 (ref), var7 (ref), squadPromptType (copy), voiceStatus (copy), var10 (ref)
+			local var13 = function(p3)
+				-- upvalues: var6 (copy), voiceStatusChanged (copy), crossExperienceModule (copy), default (copy), var9 (copy)
+				var6(voiceStatusChanged({
 					status = crossExperienceModule.Constants.VOICE_STATUS.RCC_CONNECTING
 				}))
 				default:join({
 					force = true,
-					partyId = var33,
-					shouldIgnoreMemoryWarning = p5
+					partyId = var9,
+					shouldIgnoreMemoryWarning = p3
 				})
 			end
 			
-			if getFFlagEnableCrossExpVoiceMemoryCheck() and var35 then
+			if getFFlagEnableCrossExpVoiceMemoryCheck() and var11 then
 				if default:performJoinFeasibilityCheck() then
-					var37()
+					var13()
 					
 					return
 				end
-				var32.setSquadPrompt(var31, {
+				var8.setSquadPrompt(var7, {
 					hideCancelButton = false,
 					promptType = squadPromptType.ConnectVoiceWithLowMemory,
 					onConfirm = function() end,
 					onCancel = function()
-						-- upvalues: var37 (ref)
-						var37(true)
+						-- upvalues: var13 (ref)
+						var13(true)
 					end
 				})
 				
 				return
-			elseif voiceStatus.isVoiceRetriableErrorByGameJoin(var34) then
+			elseif voiceStatus.isVoiceRetriableErrorByGameJoin(var10) then
 				if getFFlagEnableCrossExpVoiceMemoryCheck() then
-					var37()
+					var13()
 					
 					return
 				end
-				var30(voiceStatusChanged({
+				var6(voiceStatusChanged({
 					status = crossExperienceModule.Constants.VOICE_STATUS.RCC_CONNECTING
 				}))
-				default:join({ force = true, partyId = var33 })
+				default:join({ force = true, partyId = var9 })
 				
 				return
-			elseif voiceStatus.isVoiceRetriableErrorByVoiceJoin(var34) then
+			elseif voiceStatus.isVoiceRetriableErrorByVoiceJoin(var10) then
 				default:rejoinVoice()
 			end
-		end, { var34, var33, var35 })
+		end, { var10, var9, var11 })
 	}) else nil
 end
 
-local var15 = function(p6)
-	-- upvalues: useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsAnyOtherUserPartyVoiceEligibleModule (ref), useLocalization (ref), useAppPolicy (ref), react (ref), partyVoiceBannerErrorUserNotEligibleURL (ref), var12 (ref)
-	local var38 = useLocalization({
+local var6 = function(p2)
+	-- upvalues: useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsAnyOtherUserPartyVoiceEligibleModule (ref), useLocalization (ref), useAppPolicy (ref), react (ref), partyVoiceBannerErrorUserNotEligibleURL (ref), var1 (ref)
+	local var7 = useLocalization({
 		errorText = "Feature.Squads.Label.VoiceErrorUserIneligible",
 		errorButton = "Feature.Squads.Action.VoiceErrorUserIneligible"
 	})
 	
-	return if not (not useIsCurrentSquadPartyVoiceEligible() or (useIsLocalPlayerPartyVoiceEligible() or not useIsAnyOtherUserPartyVoiceEligibleModule())) then react.createElement(var12, {
+	return if not (not useIsCurrentSquadPartyVoiceEligible() or (useIsLocalPlayerPartyVoiceEligible() or not useIsAnyOtherUserPartyVoiceEligibleModule())) then react.createElement(var1, {
 		isButtonInline = false,
-		LayoutOrder = p6.LayoutOrder,
-		label = var38.errorText,
-		buttonLabel = var38.errorButton,
-		onActivated = if useAppPolicy(function(p7)
-			return p7.getWebViewSupport()
+		LayoutOrder = p2.LayoutOrder,
+		label = var7.errorText,
+		buttonLabel = var7.errorButton,
+		onActivated = if useAppPolicy(function(p3)
+			return p3.getWebViewSupport()
 		end) and partyVoiceBannerErrorUserNotEligibleURL ~= "" then react.useCallback(function()
-			-- upvalues: partyVoiceBannerErrorUserNotEligibleURL (copy), var38 (ref)
+			-- upvalues: partyVoiceBannerErrorUserNotEligibleURL (copy), var7 (ref)
 			if partyVoiceBannerErrorUserNotEligibleURL ~= "" then
-				openWebview(var38.errorButton, partyVoiceBannerErrorUserNotEligibleURL)
+				openWebview(var7.errorButton, partyVoiceBannerErrorUserNotEligibleURL)
 			end
-		end, { var38.errorButton }) else nil
+		end, { var7.errorButton }) else nil
 	}) else nil
 end
 
-local var16 = function(p8)
-	-- upvalues: useVoiceStatus (ref), useCurrentSquadId (ref), react (ref), voiceChatModule (ref), useAppPolicy (ref), useLocalization (ref), voiceStatus (ref), var12 (ref)
-	local var39 = useVoiceStatus()
-	local var40 = useCurrentSquadId() or ""
-	local var41 = react.useMemo(function()
+local var7 = function(p2)
+	-- upvalues: useVoiceStatus (ref), useCurrentSquadId (ref), react (ref), voiceChatModule (ref), useAppPolicy (ref), useLocalization (ref), voiceStatus (ref), var1 (ref)
+	local var8 = useVoiceStatus()
+	local var9 = useCurrentSquadId() or ""
+	local var10 = react.useMemo(function()
 		-- upvalues: voiceChatModule (copy)
 		return voiceChatModule.Utils.GetSettingsAppAvailable()
 	end, {})
-	local var42 = useAppPolicy(function(p9)
-		return p9
+	local var11 = useAppPolicy(function(p3)
+		return p3
 	end)
-	local var43 = useLocalization({
+	local var12 = useLocalization({
 		errorText = "Feature.SettingsHub.Prompt.Subtitle.AllowMicrophoneAccess",
 		errorButton = "Feature.SettingsHub.Action.OpenSettings",
 		errorSubtext1 = react.useMemo(function()
-			-- upvalues: var41 (ref), var42 (ref)
-			return (if var41 then var42.getMicSettingsDeeplinkDirectionsLocaleKey() else var42.getMicSettingsDirectionsLocaleKey()) or nil
-		end, { var42, var41 }),
+			-- upvalues: var10 (ref), var11 (ref)
+			return (if var10 then var11.getMicSettingsDeeplinkDirectionsLocaleKey() else var11.getMicSettingsDirectionsLocaleKey()) or nil
+		end, { var11, var10 }),
 		errorSubtext2 = react.useMemo(function()
-			-- upvalues: var42 (ref)
-			return if var42.getRequiresAppRestartOnMicAccessChange() then "Feature.SettingsHub.Prompt.RestartOnMicAccessChange" else nil
-		end, { var42, var41 })
+			-- upvalues: var11 (ref)
+			return if var11.getRequiresAppRestartOnMicAccessChange() then "Feature.SettingsHub.Prompt.RestartOnMicAccessChange" else nil
+		end, { var11, var10 })
 	})
 	
-	return if voiceStatus.isMicPermissionsError(var39) then react.createElement(var12, {
+	return if voiceStatus.isMicPermissionsError(var8) then react.createElement(var1, {
 		isButtonInline = true,
-		LayoutOrder = p8.LayoutOrder,
-		label = var43.errorText,
-		sublabels = { var43.errorSubtext1, var43.errorSubtext2 },
-		buttonLabel = var43.errorButton,
-		onActivated = if var40 == "" or not var41 then nil else react.useCallback(function()
+		LayoutOrder = p2.LayoutOrder,
+		label = var12.errorText,
+		sublabels = { var12.errorSubtext1, var12.errorSubtext2 },
+		buttonLabel = var12.errorButton,
+		onActivated = if var9 == "" or not var10 then nil else react.useCallback(function()
 			-- upvalues: voiceChatModule (copy)
 			pcall(function()
 				-- upvalues: voiceChatModule (copy)
@@ -310,61 +310,61 @@ local var16 = function(p8)
 	}) else nil
 end
 
-local var17 = function(p10)
-	-- upvalues: useNavigation (ref), useCurrentSquadParentChannelId (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useLocalization (ref), react (ref), var12 (ref)
-	local var44 = useNavigation()
-	local var45 = useCurrentSquadParentChannelId() or ""
-	local var46 = useLocalization({
+local var8 = function(p2)
+	-- upvalues: useNavigation (ref), useCurrentSquadParentChannelId (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useLocalization (ref), react (ref), var1 (ref)
+	local var9 = useNavigation()
+	local var10 = useCurrentSquadParentChannelId() or ""
+	local var11 = useLocalization({
 		errorText = "Feature.Squads.Label.VoiceErrorPartyNotVoiceEligible",
 		errorButton = "Feature.Squads.Action.VoiceErrorPartyNotVoiceEligible"
 	})
 	
-	return if useIsCurrentSquadPartyVoiceEligible() == false and useIsLocalPlayerPartyVoiceEligible() then react.createElement(var12, {
+	return if useIsCurrentSquadPartyVoiceEligible() == false and useIsLocalPlayerPartyVoiceEligible() then react.createElement(var1, {
 		isButtonInline = false,
-		LayoutOrder = p10.LayoutOrder,
-		label = var46.errorText,
-		buttonLabel = var46.errorButton,
+		LayoutOrder = p2.LayoutOrder,
+		label = var11.errorText,
+		buttonLabel = var11.errorButton,
 		onActivated = react.useCallback(function()
-			-- upvalues: var45 (ref), var44 (ref)
-			if var45 ~= "" then
+			-- upvalues: var10 (ref), var9 (ref)
+			if var10 ~= "" then
 				pcall(function()
-					-- upvalues: var44 (copy), var45 (copy)
-					var44.navigate("CreateUnfilteredChatPartialModal", { conversationId = var45 })
+					-- upvalues: var9 (copy), var10 (copy)
+					var9.navigate("CreateUnfilteredChatPartialModal", { conversationId = var10 })
 				end)
 			end
-		end, { var45, var44 })
+		end, { var10, var9 })
 	}) else nil
 end
 
-return function(p11)
-	-- upvalues: useTokens (ref), react (ref), getFFlagEnableCrossExpVoice (ref), var14 (ref), disablePartyVoiceEligibilityBanner (ref), var17 (ref), var15 (ref), var16 (ref), fFlagEnableVoiceEuConsentPrompt (ref), var13 (ref)
-	local var47 = useTokens()
+return function(p2)
+	-- upvalues: useTokens (ref), react (ref), getFFlagEnableCrossExpVoice (ref), var5 (ref), disablePartyVoiceEligibilityBanner (ref), var8 (ref), var6 (ref), var7 (ref), fFlagEnableVoiceEuConsentPrompt (ref), var4 (ref)
+	local var9 = useTokens()
 	
 	return react.createElement("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
 		BackgroundTransparency = 1,
-		[react.Change.AbsoluteSize] = react.useCallback(function(p12)
-			-- upvalues: p11 (ref)
-			if p12 then
-				p11.onAbsoluteSizeChanged(p12.AbsoluteSize)
+		[react.Change.AbsoluteSize] = react.useCallback(function(p3)
+			-- upvalues: p2 (ref)
+			if p3 then
+				p2.onAbsoluteSizeChanged(p3.AbsoluteSize)
 			end
-		end, { p11.onAbsoluteSizeChanged })
+		end, { p2.onAbsoluteSizeChanged })
 	}, {
 		UIPadding = react.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var47.Padding.XLarge),
-			PaddingRight = UDim.new(0, var47.Padding.XLarge)
+			PaddingLeft = UDim.new(0, var9.Padding.XLarge),
+			PaddingRight = UDim.new(0, var9.Padding.XLarge)
 		}),
 		UIListLayout = react.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, var47.Gap.Medium)
+			Padding = UDim.new(0, var9.Gap.Medium)
 		}),
-		VoiceErrorBanner = if getFFlagEnableCrossExpVoice() then react.createElement(var14, { LayoutOrder = 1 }) else nil,
-		PartyVoiceEligibilityBanner = if getFFlagEnableCrossExpVoice() and not disablePartyVoiceEligibilityBanner then react.createElement(var17, { LayoutOrder = 2 }) else nil,
-		PartyVoiceUserEligibilityBanner = if getFFlagEnableCrossExpVoice() then react.createElement(var15, { LayoutOrder = 3 }) else nil,
-		VoiceMicPermissionsBanner = if getFFlagEnableCrossExpVoice() then react.createElement(var16, { LayoutOrder = 4 }) else nil,
-		VoiceEuModalConnectBanner = if getFFlagEnableCrossExpVoice() and fFlagEnableVoiceEuConsentPrompt then react.createElement(var13, { LayoutOrder = 5 }) else nil
+		VoiceErrorBanner = if getFFlagEnableCrossExpVoice() then react.createElement(var5, { LayoutOrder = 1 }) else nil,
+		PartyVoiceEligibilityBanner = if getFFlagEnableCrossExpVoice() and not disablePartyVoiceEligibilityBanner then react.createElement(var8, { LayoutOrder = 2 }) else nil,
+		PartyVoiceUserEligibilityBanner = if getFFlagEnableCrossExpVoice() then react.createElement(var6, { LayoutOrder = 3 }) else nil,
+		VoiceMicPermissionsBanner = if getFFlagEnableCrossExpVoice() then react.createElement(var7, { LayoutOrder = 4 }) else nil,
+		VoiceEuModalConnectBanner = if getFFlagEnableCrossExpVoice() and fFlagEnableVoiceEuConsentPrompt then react.createElement(var4, { LayoutOrder = 5 }) else nil
 	})
 end

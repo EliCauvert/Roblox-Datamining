@@ -17,12 +17,12 @@ local t = {
 		LeftLowerLeg = "LeftKneeRigAttachment",
 		LeftUpperLeg = "LeftHipRigAttachment"
 	},
-	getRules = function(p0)
+	getRules = function(p1)
 		-- upvalues: avatarCreationService (ref)
-		if not p0.rules then
-			p0.rules = avatarCreationService:GetValidationRules()
+		if not p1.rules then
+			p1.rules = avatarCreationService:GetValidationRules()
 		end
-		return p0.rules
+		return p1.rules
 	end,
 	getBodyPartMaxTrianglesRule = function(a, b)
 		return a:getRules().MeshRules.BodyPartMaxTriangles[b]
@@ -91,10 +91,10 @@ function t.getBodyPartRules(p4, p5)
 		end
 		for i_1, v_1 in v.SubParts do
 			local t_2 = { rigAttachmentToParent = {}, otherAttachments = {} }
-			local var7 = t.rigAttachmentToParentMap[i_1]
+			local var1 = t.rigAttachmentToParentMap[i_1]
 			
 			for i_3, v_3 in v_1 do
-				if var7 == i_3 then
+				if var1 == i_3 then
 					t_2.rigAttachmentToParent = {
 						name = i_3,
 						bounds = { min = v_3.LowerBound, max = v_3.UpperBound }

@@ -12,43 +12,43 @@ local function _()
 	return starterCharacterScripts and starterCharacterScripts:FindFirstChild("Sound")
 end
 
-local function LoadScript(p0, p1)
+local function LoadScript(p1, p2)
 	-- upvalues: serverUtilModule (ref)
-	local var5 = script.Parent:WaitForChild(p0)
+	local var1 = script.Parent:WaitForChild(p1)
 	local script = Instance.new("Script")
-	script.Name = p0
+	script.Name = p1
 	
 	if serverUtilModule.getFFlagServerCoreScriptSourceCode() then
-		script.Source = serverUtilModule.getSourceForServerScript(var5)
+		script.Source = serverUtilModule.getSourceForServerScript(var1)
 	else
-		script.Source = var5.Source
+		script.Source = var1.Source
 	end
-	script.Parent = p1
+	script.Parent = p2
 	
 	return script
 end
 
 return function()
 	-- upvalues: serverScriptService (ref), starterPlayerService (ref), LoadScript (ref)
-	local var7, starterCharacterScripts
+	local var1, starterCharacterScripts
 	if serverScriptService:FindFirstChild("SoundDispatcher") then
-		var7 = true
+		var1 = true
 	else
 		starterCharacterScripts = starterPlayerService:FindFirstChildOfClass("StarterCharacterScripts")
-		var7 = if starterCharacterScripts and starterCharacterScripts:FindFirstChild("Sound") then true else false
+		var1 = if starterCharacterScripts and starterCharacterScripts:FindFirstChild("Sound") then true else false
 	end
-	if not var7 then return end
-	local var9 = true
+	if not var1 then return end
+	local var2 = true
 	starterCharacterScripts = serverScriptService:FindFirstChild("SoundDispatcher")
 	
 	if not starterCharacterScripts then
-		var9 = false
+		var2 = false
 		starterCharacterScripts = LoadScript("SoundDispatcher", serverScriptService)
 	end
 	if not serverScriptService:FindFirstChild("SoundDispatcher") then
-		local var10 = starterCharacterScripts:Clone()
-		var10.Archivable = false
-		var10.Parent = serverScriptService
+		local var3 = starterCharacterScripts:Clone()
+		var3.Archivable = false
+		var3.Parent = serverScriptService
 	end
-	starterCharacterScripts.Archivable = var9
+	starterCharacterScripts.Archivable = var2
 end

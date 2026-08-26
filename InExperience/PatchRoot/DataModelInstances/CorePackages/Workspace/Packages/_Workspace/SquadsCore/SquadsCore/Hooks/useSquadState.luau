@@ -9,22 +9,22 @@ local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
 return function()
 	-- upvalues: useCurrentSquadIdModule (ref), reactModule (ref), networkingSquadsModule (ref), useSelector (ref), squadStateModule (ref), networkStatus (ref)
-	local var5 = useCurrentSquadIdModule() or ""
-	local var6 = useSelector(reactModule.useCallback(function(p0)
+	local var1 = useCurrentSquadIdModule() or ""
+	local var2 = useSelector(reactModule.useCallback(function(p1)
 		-- upvalues: networkingSquadsModule (copy)
-		return networkingSquadsModule.JoinSquad.getStatus(p0, {})
+		return networkingSquadsModule.JoinSquad.getStatus(p1, {})
 	end, {}))
-	local var7 = useSelector(reactModule.useCallback(function(p1)
+	local var3 = useSelector(reactModule.useCallback(function(p1)
 		-- upvalues: networkingSquadsModule (copy)
 		return networkingSquadsModule.CreateOrJoinSquad.getStatus(p1, {})
 	end, {}))
 	local idle = squadStateModule.Idle
 	
-	if var5 ~= "" then
+	if var1 ~= "" then
 		idle = squadStateModule.Active
 		
 		return idle
-	elseif var6 == networkStatus.Fetching or var7 == networkStatus.Fetching then
+	elseif var2 == networkStatus.Fetching or var3 == networkStatus.Fetching then
 		idle = squadStateModule.Initializing
 	end
 	return idle

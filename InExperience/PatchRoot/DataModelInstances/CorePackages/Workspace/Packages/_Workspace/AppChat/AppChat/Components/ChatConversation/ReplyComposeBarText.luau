@@ -6,23 +6,23 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local t = { layoutOrder = 2, userText = "", contentText = "" }
 
-function ReplyComposeBarText(p0)
+function ReplyComposeBarText(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), view (ref), text (ref)
-	local var4 = cryoModule.Dictionary.union(t, p0)
+	local var1 = cryoModule.Dictionary.union(t, p1)
 	
 	return reactModule.createElement(view, {
 		tag = "col fill auto-y align-x-left clip",
-		LayoutOrder = var4.layoutOrder
+		LayoutOrder = var1.layoutOrder
 	}, {
 		UserReplyingTo = reactModule.createElement(text, {
 			tag = "text-caption-medium content-muted text-truncate-end text-align-x-left auto-xy",
 			LayoutOrder = 1,
-			Text = var4.userText
+			Text = var1.userText
 		}),
 		ContentReplyingTo = reactModule.createElement(text, {
 			tag = "text-body-medium content-emphasis text-truncate-end text-align-x-left auto-xy",
 			LayoutOrder = 2,
-			Text = var4.contentText
+			Text = var1.contentText
 		})
 	})
 end

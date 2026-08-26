@@ -3,38 +3,38 @@ local networkStatusModule = require(script.NetworkStatus)
 local _ = require(script.Types)
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: roduxNetworkingModule (ref), networkStatusModule (ref)
-		local var2 = roduxNetworkingModule(p0)
-		local var3 = networkStatusModule(p0)
+		local var1 = roduxNetworkingModule(p1)
+		local var2 = networkStatusModule(p1)
 		
 		return {
-			GET = function(p1, p2)
-				-- upvalues: var2 (ref)
-				return var2.GET(p1, p2)
+			GET = function(p2, p3)
+				-- upvalues: var1 (ref)
+				return var1.GET(p2, p3)
 			end,
-			POST = function(p3, p4)
-				-- upvalues: var2 (ref)
-				return var2.POST(p3, p4)
+			POST = function(p2, p3)
+				-- upvalues: var1 (ref)
+				return var1.POST(p2, p3)
 			end,
-			PATCH = function(p5, p6)
-				-- upvalues: var2 (ref)
-				return var2.PATCH(p5, p6)
+			PATCH = function(p2, p3)
+				-- upvalues: var1 (ref)
+				return var1.PATCH(p2, p3)
 			end,
-			DELETE = function(p7, p8)
-				-- upvalues: var2 (ref)
-				return var2.DELETE(p7, p8)
+			DELETE = function(p2, p3)
+				-- upvalues: var1 (ref)
+				return var1.DELETE(p2, p3)
 			end,
 			getNetworkImpl = function()
-				-- upvalues: var2 (ref)
-				return var2.getNetworkImpl()
+				-- upvalues: var1 (ref)
+				return var1.getNetworkImpl()
 			end,
 			setNetworkImpl = function(...)
-				-- upvalues: var2 (ref)
-				var2.setNetworkImpl(...)
+				-- upvalues: var1 (ref)
+				var1.setNetworkImpl(...)
 			end,
-			installReducer = var3.installReducer,
-			Enum = { NetworkStatus = var3.Enum.Status }
+			installReducer = var2.installReducer,
+			Enum = { NetworkStatus = var2.Enum.Status }
 		}
 	end,
 	mock = require(script.mockRoduxNetworking)

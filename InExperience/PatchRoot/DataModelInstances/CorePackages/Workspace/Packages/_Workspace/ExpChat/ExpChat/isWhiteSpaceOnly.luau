@@ -1,9 +1,9 @@
 ﻿local textLabel = Instance.new("TextLabel")
 textLabel.RichText = true
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: textLabel (ref)
-	textLabel.Text = p0
+	textLabel.Text = p1
 	
 	return textLabel.ContentText
 end

@@ -1,43 +1,43 @@
 ﻿local httpService = game:GetService("HttpService")
 local _ = require(script.Parent.Parent.types)
 
-local function _(p0)
-	return p0:gsub("^%s+", ""):gsub("%s+$", "")
+local function _(p1)
+	return p1:gsub("^%s+", ""):gsub("%s+$", "")
 end
 
 local function stripFrame(p1)
-	local var2 = p1:gsub("^%s+", ""):gsub("%s+$", "")
+	local var1 = p1:gsub("^%s+", ""):gsub("%s+$", "")
 	
-	if var2 == "" then
+	if var1 == "" then
 		return nil
-	elseif var2:sub(1, 1) == ":" then
+	elseif var1:sub(1, 1) == ":" then
 		return nil
-	elseif var2:sub(1, 5) == "data:" then
-		var2 = var2:sub(6):gsub("^%s+", ""):gsub("%s+$", "")
+	elseif var1:sub(1, 5) == "data:" then
+		var1 = var1:sub(6):gsub("^%s+", ""):gsub("%s+$", "")
 		
-		return if var2 == "" or var2 == "[DONE]" then nil else var2
+		return if var1 == "" or var1 == "[DONE]" then nil else var1
 	end
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: stripFrame (ref), httpService (ref)
-	local var3 = stripFrame(p2)
+	local var1 = stripFrame(p1)
 	
-	if var3 == nil then
+	if var1 == nil then
 		return nil
 	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, var3)
+	local ok, status = pcall(httpService.JSONDecode, httpService, var1)
 	
 	if not ok or typeof(status) ~= "table" then
 		return nil
 	elseif status.jsonrpc == nil then
 		return nil
 	end
-	local var4 = typeof(status.method) == "string" and status.method ~= ""
-	local var5 = status.id ~= nil
+	local var2 = typeof(status.method) == "string" and status.method ~= ""
+	local var3 = status.id ~= nil
 	local isTable = typeof(status.error) == "table"
 	
-	if var4 and not var5 then
+	if var2 and not var3 then
 		local params = status.params
 		
 		return if params == nil or typeof(params) == "table" then {
@@ -45,7 +45,7 @@ return function(p2)
 			notification = { method = status.method, params = params or {} }
 		} else nil
 	end
-	return if var5 and isTable and not var4 then {
+	return if var3 and isTable and not var2 then {
 		kind = "response",
 		response = {
 			result = nil,

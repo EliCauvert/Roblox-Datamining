@@ -7,10 +7,10 @@ local t = {
 	lastUpdated = { 26, 7, 22 }
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t, {
-		eventContext = p0,
+		eventContext = p1,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" }
 	})
 end

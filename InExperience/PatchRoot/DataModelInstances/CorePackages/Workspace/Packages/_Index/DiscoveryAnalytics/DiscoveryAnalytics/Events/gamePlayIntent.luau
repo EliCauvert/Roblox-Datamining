@@ -18,21 +18,21 @@ local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlag
 local luaAppGamePlayIntentEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGamePlayIntentEventThrottlingHundredthsPercent", 10000)
 local luaAppGamePlayIntentShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGamePlayIntentShadowThrottlingHundredthsPercent", 10000)
 local constantsModule = require(discoveryAnalytics.Constants)
-local var10 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
+local var1 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
 	eventName = "gamePlayIntent",
 	description = "Fires when the user clicks on a Play Button",
 	backends = { "EventIngest" },
 	throttlingPercentage = luaAppGamePlayIntentEventThrottlingHundredthsPercent,
 	lastUpdated = { 26, 2, 4 }
 } else nil
-local var11 = if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
+local var2 = if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
 	eventName = "gamePlayIntentShadow",
 	description = "Shadow traffic for gamePlayIntent event recovery percentage",
 	backends = { "EventIngest" },
 	throttlingPercentage = luaAppGamePlayIntentShadowThrottlingHundredthsPercent,
 	lastUpdated = { 26, 3, 4 }
 } else nil
-local var12 = tModule.strictInterface({
+local var3 = tModule.strictInterface({
 	placeId = tModule.string,
 	rootPlaceId = tModule.number,
 	universeId = tModule.string,
@@ -68,7 +68,7 @@ local t = {
 		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil,
 		actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then tModule.optional(tModule.string) else nil
 	}),
-	[constantsModule.Context.ExperienceTile] = var12,
+	[constantsModule.Context.ExperienceTile] = var3,
 	[constantsModule.Context.SearchExperienceTile] = tModule.strictInterface({
 		placeId = tModule.string,
 		rootPlaceId = tModule.number,
@@ -162,27 +162,27 @@ local t = {
 		sortEntryIndex = tModule.string,
 		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
 	}) else nil else nil,
-	[constantsModule.Context.InstantPlay] = if fFlagLuaAppContinueSortInstantPlay then var12 else nil
+	[constantsModule.Context.InstantPlay] = if fFlagLuaAppContinueSortInstantPlay then var3 else nil
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: appStorageService (ref)
 	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 	
 	if mobileAdvertisingIdItem and mobileAdvertisingIdItem ~= "" then
-		p0.mobileAdvertisingId = mobileAdvertisingIdItem
+		p1.mobileAdvertisingId = mobileAdvertisingIdItem
 	end
 end
 
 return function(p1, p2, p3)
-	-- upvalues: t (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGamePlayIntentEventMobileAdsId (ref), appStorageService (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), cryoModule (ref), telemetryService (ref), var10 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var11 (write)
+	-- upvalues: t (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGamePlayIntentEventMobileAdsId (ref), appStorageService (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), cryoModule (ref), telemetryService (ref), var1 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var2 (write)
 	if t[p2] == nil then
 		discoveryEventErrorLogger.reportError("GamePlayIntentMissingInterface", `Missing interface for eventContext {p2} to type check gamePlayIntent event parameters`, { eventContext = p2 })
 	else
-		local var15, var16 = t[p2](p3)
+		local var4, var5 = t[p2](p3)
 		
-		if not var15 then
-			discoveryEventErrorLogger.reportError("GamePlayIntentInvalidInterface", var16)
+		if not var4 then
+			discoveryEventErrorLogger.reportError("GamePlayIntentInvalidInterface", var5)
 		end
 	end
 	local analyticsData = p3.analyticsData
@@ -241,7 +241,7 @@ return function(p1, p2, p3)
 		if analyticsData then
 			t_1 = cryoModule.Dictionary.join(analyticsData, t_1)
 		end
-		telemetryService:LogEvent(var10, {
+		telemetryService:LogEvent(var1, {
 			eventContext = p2,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 			customFields = t_1,
@@ -288,7 +288,7 @@ return function(p1, p2, p3)
 		p1:sendEventDeferred(p2, "gamePlayIntent", t_1)
 	end
 	if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then
-		telemetryService:LogEvent(var11, {
+		telemetryService:LogEvent(var2, {
 			eventContext = p2,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 			customFields = {

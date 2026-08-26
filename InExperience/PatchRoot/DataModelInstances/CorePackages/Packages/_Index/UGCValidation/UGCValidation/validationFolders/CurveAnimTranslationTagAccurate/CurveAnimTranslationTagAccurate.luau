@@ -6,8 +6,8 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local getFFlagUGCValidateMigrateCurveAnimModule = require(parent.flags.getFFlagUGCValidateMigrateCurveAnim)
 local UGCValidateEmoteTranslationTag = game:DefineFastFlag("UGCValidateEmoteTranslationTag", false)
 
-local function _(p0)
-	return if typeof(p0) == "number" and p0 > -1e999 and p0 < 1e999 then p0 else nil
+local function _(p1)
+	return if typeof(p1) == "number" and p1 > -1e999 and p1 < 1e999 then p1 else nil
 end
 
 return {
@@ -24,20 +24,20 @@ return {
 		-- upvalues: publishService (ref), errorSourceStringsModule (ref)
 		for i, v in p2.curveAnimations do
 			local RBXmaxPartTranslationAttribute = v:GetAttribute("RBXmaxPartTranslation")
-			local var6 = if typeof(RBXmaxPartTranslationAttribute) == "number" and RBXmaxPartTranslationAttribute > -1e999 and RBXmaxPartTranslationAttribute < 1e999 then RBXmaxPartTranslationAttribute else nil
+			local var1 = if typeof(RBXmaxPartTranslationAttribute) == "number" and RBXmaxPartTranslationAttribute > -1e999 and RBXmaxPartTranslationAttribute < 1e999 then RBXmaxPartTranslationAttribute else nil
 			
-			if var6 ~= nil then
+			if var1 ~= nil then
 				RBXmaxPartTranslationAttribute = v:Clone()
 				publishService:TagEmoteAnimation(RBXmaxPartTranslationAttribute)
 				local RBXmaxPartTranslationAttribute_1 = RBXmaxPartTranslationAttribute:GetAttribute("RBXmaxPartTranslation")
-				local var8 = if typeof(RBXmaxPartTranslationAttribute_1) == "number" and RBXmaxPartTranslationAttribute_1 > -1e999 and RBXmaxPartTranslationAttribute_1 < 1e999 then RBXmaxPartTranslationAttribute_1 else nil
+				local var2 = if typeof(RBXmaxPartTranslationAttribute_1) == "number" and RBXmaxPartTranslationAttribute_1 > -1e999 and RBXmaxPartTranslationAttribute_1 < 1e999 then RBXmaxPartTranslationAttribute_1 else nil
 				RBXmaxPartTranslationAttribute:Destroy()
 				
-				if var8 ~= nil then
-					if math.abs(var6 - var8) > 0.00001 then
+				if var2 ~= nil then
+					if math.abs(var1 - var2) > 0.00001 then
 						p1:fail(errorSourceStringsModule.Keys.CurveAnim_TranslationTagMismatch, {
-							taggedTranslation = tostring(var6),
-							calculatedTranslation = tostring(var8)
+							taggedTranslation = tostring(var1),
+							calculatedTranslation = tostring(var2)
 						})
 						
 						return

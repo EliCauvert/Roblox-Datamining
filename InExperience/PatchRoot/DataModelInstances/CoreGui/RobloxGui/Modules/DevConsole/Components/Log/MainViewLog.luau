@@ -12,102 +12,102 @@ local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
 local msgTypeNamesOrdered = constantsModule.MsgTypeNamesOrdered
 local mainViewLog = roactModule.PureComponent:extend("MainViewLog")
 
-function mainViewLog.init(p0)
+function mainViewLog.init(p1)
 	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ utilTabHeight = p1 })
+	function p0.onUtilTabHeightChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ utilTabHeight = p2 })
 	end
 	
 	function p0.onClientButton()
-		-- upvalues: p0 (ref)
-		p0.props.dispatchSetActiveTab("Log", true)
+		-- upvalues: p1 (ref)
+		p1.props.dispatchSetActiveTab("Log", true)
 	end
 	
 	function p0.onServerButton()
-		-- upvalues: p0 (ref)
-		p0.props.dispatchSetActiveTab("Log", false)
+		-- upvalues: p1 (ref)
+		p1.props.dispatchSetActiveTab("Log", false)
 	end
 	
 	function p0.onCheckboxChanged(p2, p3)
-		-- upvalues: p0 (ref)
-		if p0.props.isClientView then
-			p0.props.ClientLogData:setFilter(p2, p3)
+		-- upvalues: p1 (ref)
+		if p1.props.isClientView then
+			p1.props.ClientLogData:setFilter(p2, p3)
 			
 			return
 		end
-		p0.props.ServerLogData:setFilter(p2, p3)
+		p1.props.ServerLogData:setFilter(p2, p3)
 	end
 	
 	function p0.filterUpdated()
-		-- upvalues: p0 (ref)
-		if p0.forceUpdate then
-			p0:forceUpdate()
+		-- upvalues: p1 (ref)
+		if p1.forceUpdate then
+			p1:forceUpdate()
 			
 			return
 		end
-		p0:setState({})
+		p1:setState({})
 	end
 	
-	function p0.onSearchTermChanged(p4)
-		-- upvalues: p0 (ref)
-		if p0.props.isClientView then
-			p0.props.ClientLogData:setSearchTerm(p4)
+	function p0.onSearchTermChanged(p2)
+		-- upvalues: p1 (ref)
+		if p1.props.isClientView then
+			p1.props.ClientLogData:setSearchTerm(p2)
 			
 			return
 		end
-		p0.props.ServerLogData:setSearchTerm(p4)
+		p1.props.ServerLogData:setSearchTerm(p2)
 	end
 	
-	p0.clientFilterConnection = p0.props.ClientLogData:filterUpdatedSignal():Connect(p0.filterUpdated)
-	p0.serverFilterConnection = p0.props.ServerLogData:filterUpdatedSignal():Connect(p0.filterUpdated)
-	p0.utilRef = roactModule.createRef()
-	p0.state = { utilTabHeight = 0 }
+	p1.clientFilterConnection = p1.props.ClientLogData:filterUpdatedSignal():Connect(p1.filterUpdated)
+	p1.serverFilterConnection = p1.props.ServerLogData:filterUpdatedSignal():Connect(p1.filterUpdated)
+	p1.utilRef = roactModule.createRef()
+	p1.state = { utilTabHeight = 0 }
 end
 
-function mainViewLog.didMount(p5)
-	p5:setState({ utilTabHeight = p5.utilRef.current.Size.Y.Offset })
+function mainViewLog.didMount(p1)
+	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewLog.didUpdate(p6)
-	local size = p6.utilRef.current.Size
+function mainViewLog.didUpdate(p1)
+	local size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p6.state.utilTabHeight then
-		p6:setState({ utilTabHeight = size.Y.Offset })
+	if size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = size.Y.Offset })
 	end
 end
 
-function mainViewLog.willUnmount(p7)
-	if p7.clientFilterConnection then
-		p7.clientFilterConnection:Disconnect()
-		p7.clientFilterConnection = nil
+function mainViewLog.willUnmount(p1)
+	if p1.clientFilterConnection then
+		p1.clientFilterConnection:Disconnect()
+		p1.clientFilterConnection = nil
 	end
-	if p7.serverFilterConnection then
-		p7.serverFilterConnection:Disconnect()
-		p7.serverFilterConnection = nil
+	if p1.serverFilterConnection then
+		p1.serverFilterConnection:Disconnect()
+		p1.serverFilterConnection = nil
 	end
 end
 
-function mainViewLog.render(p8)
+function mainViewLog.render(p1)
 	-- upvalues: roactModule (ref), mainRowPadding (ref), msgTypeNamesOrdered (ref), utilAndTabModule (ref), clientLogModule (ref), serverLogModule (ref), constantsModule (ref)
-	local size = p8.props.size
-	local formFactor = p8.props.formFactor
-	local isDeveloperView = p8.props.isDeveloperView
-	local tabList = p8.props.tabList
-	local isClientView = p8.props.isClientView
-	local utilTabHeight = p8.state.utilTabHeight
-	local var10 = if isClientView then p8.props.ClientLogData:getSearchTerm() else p8.props.ServerLogData:getSearchTerm()
+	local size = p1.props.size
+	local formFactor = p1.props.formFactor
+	local isDeveloperView = p1.props.isDeveloperView
+	local tabList = p1.props.tabList
+	local isClientView = p1.props.isClientView
+	local utilTabHeight = p1.state.utilTabHeight
+	local var1 = if isClientView then p1.props.ClientLogData:getSearchTerm() else p1.props.ServerLogData:getSearchTerm()
 	local t = {
 		UIListLayout = roactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, mainRowPadding)
 		})
 	}
-	local var12 = if isClientView then p8.props.ClientLogData:getFilters() else p8.props.ServerLogData:getFilters()
+	local var2 = if isClientView then p1.props.ClientLogData:getFilters() else p1.props.ServerLogData:getFilters()
 	local t_1 = {}
 	
 	for i, v in ipairs(msgTypeNamesOrdered) do
-		t_1[i] = { name = v, state = var12[v] }
+		t_1[i] = { name = v, state = var2[v] }
 	end
 	t.UtilAndTab = roactModule.createElement(utilAndTabModule, {
 		layoutOrder = 1,
@@ -116,12 +116,12 @@ function mainViewLog.render(p8)
 		tabList = tabList,
 		orderedCheckboxState = t_1,
 		isClientView = isClientView,
-		searchTerm = var10,
-		refForParent = p8.utilRef,
-		onClientButton = isDeveloperView and p8.onClientButton,
-		onServerButton = isDeveloperView and p8.onServerButton,
-		onCheckboxChanged = p8.onCheckboxChanged,
-		onSearchTermChanged = p8.onSearchTermChanged
+		searchTerm = var1,
+		refForParent = p1.utilRef,
+		onClientButton = isDeveloperView and p1.onClientButton,
+		onServerButton = isDeveloperView and p1.onServerButton,
+		onCheckboxChanged = p1.onCheckboxChanged,
+		onSearchTermChanged = p1.onSearchTermChanged
 	})
 	
 	if utilTabHeight > 0 then
@@ -145,14 +145,14 @@ function mainViewLog.render(p8)
 	}, t)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p9, _)
-	return { isClientView = p9.MainView.isClientView }
-end, function(p10)
+return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
+	return { isClientView = p2.MainView.isClientView }
+end, function(p2)
 	-- upvalues: setActiveTabModule (ref)
 	return {
-		dispatchSetActiveTab = function(value, p11)
-			-- upvalues: p10 (ref), setActiveTabModule (copy)
-			p10(setActiveTabModule(value, p11))
+		dispatchSetActiveTab = function(value, p3)
+			-- upvalues: p2 (ref), setActiveTabModule (copy)
+			p2(setActiveTabModule(value, p3))
 		end
 	}
 end)(dataConsumerModule(mainViewLog, "ClientLogData", "ServerLogData"))

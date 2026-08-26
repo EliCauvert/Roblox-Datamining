@@ -1,19 +1,19 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.ES7Types)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	local _ = {}
 	
-	if not p1 then
-		return table.clone(p0)
+	if not p2 then
+		return table.clone(p1)
 	end
-	local p0Count = #p0
+	local p0Count = #p1
 	local list = table.create(p0Count)
 	
 	for i = 1, p0Count do
-		if p2 == nil then
-			list[i] = p1(p0[i], i)
+		if p3 == nil then
+			list[i] = p2(p1[i], i)
 		else
-			list[i] = p1(p2, p0[i], i)
+			list[i] = p2(p3, p1[i], i)
 		end
 	end
 	return list

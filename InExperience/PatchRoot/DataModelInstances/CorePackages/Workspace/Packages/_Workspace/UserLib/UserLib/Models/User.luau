@@ -12,88 +12,88 @@ local t = {
 	end
 }
 
-function t.fromData(p0, p1, p2, p3)
+function t.fromData(p1, p2, p3, p4)
 	-- upvalues: t (ref), playersService (ref)
-	local var2 = t.new()
-	var2.id = tostring(p0)
-	var2.isFetching = false
-	var2.isFriend = p2
-	var2.friendRank = p3 or 0
-	var2.lastLocation = nil
-	var2.name = p1
-	var2.displayName = p1
-	var2.externalAppDisplayName = p1
-	var2.universeId = nil
-	var2.placeId = nil
-	var2.rootPlaceId = nil
-	var2.gameInstanceId = nil
-	var2.presence = playersService.LocalPlayer and (var2.id ~= tostring(playersService.LocalPlayer.UserId) and (t.PresenceType.ONLINE or nil))
-	var2.DEPRECATED_thumbnails = nil
-	var2.lastOnline = nil
+	local var1 = t.new()
+	var1.id = tostring(p1)
+	var1.isFetching = false
+	var1.isFriend = p3
+	var1.friendRank = p4 or 0
+	var1.lastLocation = nil
+	var1.name = p2
+	var1.displayName = p2
+	var1.externalAppDisplayName = p2
+	var1.universeId = nil
+	var1.placeId = nil
+	var1.rootPlaceId = nil
+	var1.gameInstanceId = nil
+	var1.presence = playersService.LocalPlayer and (var1.id ~= tostring(playersService.LocalPlayer.UserId) and (t.PresenceType.ONLINE or nil))
+	var1.DEPRECATED_thumbnails = nil
+	var1.lastOnline = nil
 	
-	return var2
+	return var1
 end
 
-function t.fromDataTable(p4)
+function t.fromDataTable(p1)
 	-- upvalues: t (ref), playersService (ref), getFFlagInviteListRerank (ref)
-	local var3 = t.new()
-	var3.id = tostring(p4.id)
-	var3.isFriend = p4.isFriend
-	var3.friendRank = p4.friendRank
-	var3.presence = playersService.LocalPlayer and (var3.id ~= tostring(playersService.LocalPlayer.UserId) and (t.PresenceType.ONLINE or nil))
-	var3.isFetching = false
-	var3.lastLocation = nil
-	var3.name = p4.name
-	var3.displayName = p4.displayName or p4.name
-	var3.externalAppDisplayName = p4.externalAppDisplayName
-	var3.universeId = nil
-	var3.placeId = nil
-	var3.rootPlaceId = nil
-	var3.gameInstanceId = nil
-	var3.DEPRECATED_thumbnails = nil
-	var3.lastOnline = nil
-	var3.hasVerifiedBadge = p4.hasVerifiedBadge
+	local var1 = t.new()
+	var1.id = tostring(p1.id)
+	var1.isFriend = p1.isFriend
+	var1.friendRank = p1.friendRank
+	var1.presence = playersService.LocalPlayer and (var1.id ~= tostring(playersService.LocalPlayer.UserId) and (t.PresenceType.ONLINE or nil))
+	var1.isFetching = false
+	var1.lastLocation = nil
+	var1.name = p1.name
+	var1.displayName = p1.displayName or p1.name
+	var1.externalAppDisplayName = p1.externalAppDisplayName
+	var1.universeId = nil
+	var1.placeId = nil
+	var1.rootPlaceId = nil
+	var1.gameInstanceId = nil
+	var1.DEPRECATED_thumbnails = nil
+	var1.lastOnline = nil
+	var1.hasVerifiedBadge = p1.hasVerifiedBadge
 	
 	if getFFlagInviteListRerank() then
-		var3.friendFrequentRank = p4.friendFrequentRank
+		var1.friendFrequentRank = p1.friendFrequentRank
 	end
-	return var3
+	return var1
 end
 
-function t.compare(p5, p6)
-	assert(not (p5 == nil and p6 == nil), "user1 and user2 cannot both be nil")
-	assert(if p5 ~= nil then typeof(p5) == "table" else true, "user1 must be a table or nil")
-	assert(if p6 ~= nil then typeof(p6) == "table" else true, "user2 must be a table or nil")
+function t.compare(p1, p2)
+	assert(not (p1 == nil and p2 == nil), "user1 and user2 cannot both be nil")
+	assert(if p1 ~= nil then typeof(p1) == "table" else true, "user1 must be a table or nil")
+	assert(if p2 ~= nil then typeof(p2) == "table" else true, "user2 must be a table or nil")
 	
-	if not p5 or not p6 then
+	if not p1 or not p2 then
 		return false
 	end
-	for i, v in pairs(p6) do
-		if p5[i] ~= v then
+	for i, v in pairs(p2) do
+		if p1[i] ~= v then
 			return false
 		end
 	end
-	for i, v in pairs(p5) do
-		if p6[i] ~= v then
+	for i, v in pairs(p1) do
+		if p2[i] ~= v then
 			return false
 		end
 	end
 	return true
 end
 
-function t.userPresenceToText(p7, p8)
+function t.userPresenceToText(p3, p4)
 	-- upvalues: t (ref)
-	local presence = p8.presence
-	local lastLocation = p8.lastLocation
+	local presence = p4.presence
+	local lastLocation = p4.lastLocation
 	
 	if not presence then
 		return ""
 	elseif presence == t.PresenceType.OFFLINE then
-		return p7:Format("Common.Presence.Label.Offline")
+		return p3:Format("Common.Presence.Label.Offline")
 	elseif presence == t.PresenceType.ONLINE then
-		return p7:Format("Common.Presence.Label.Online")
+		return p3:Format("Common.Presence.Label.Online")
 	elseif presence ~= t.PresenceType.IN_GAME and presence ~= t.PresenceType.IN_STUDIO then return end
-	return if lastLocation == nil then p7:Format("Common.Presence.Label.Online") else lastLocation
+	return if lastLocation == nil then p3:Format("Common.Presence.Label.Online") else lastLocation
 end
 
 return t

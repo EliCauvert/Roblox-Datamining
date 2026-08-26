@@ -18,35 +18,35 @@ local mapServerActionsToRowCtaModule = require(userList.Cta.mapServerActionsToRo
 local _ = require(userList.Common.Types)
 local t = { primaryCta = nil, secondaryCta = nil, isLoading = true }
 
-local function _(p0, p1, p2)
-	local cloned = table.clone(p0)
-	cloned.onActivated = p2
-	cloned.isDisabled = not p1.isInExperience
-	cloned.isLoading = p1.isLoading
+local function _(p1, p2, p3)
+	local cloned = table.clone(p1)
+	cloned.onActivated = p3
+	cloned.isDisabled = not p2.isInExperience
+	cloned.isLoading = p2.isLoading
 	
 	return cloned
 end
 
-return function(p3, p4, p5, p6, p7, p8)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), navigationCommands (ref), navigateDown (ref), enumsModule (ref), buttonTypes (ref), buttonVariant (ref), dataStatus (ref), t (ref), mapServerActionsToRowCtaModule (ref), fFlagUserListCtaAnalyticsEnabled (ref)
-	local var8 = useDispatch()
-	local var9 = useLocalUserId()
-	local var10 = reactModule.useCallback(function(p9)
-		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var8 (ref), navigateDown (copy)
-		local t = { name = appPage.GameJoinCard, userId = p9 }
+	local var1 = useDispatch()
+	local var2 = useLocalUserId()
+	local var3 = reactModule.useCallback(function(p7)
+		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var1 (ref), navigateDown (copy)
+		local t = { name = appPage.GameJoinCard, userId = p7 }
 		
 		if fFlagSignalsNavP3Dispatch then
 			navigationCommands.down(navigationCommands.fromLegacyPage(t))
 			
 			return
 		end
-		var8(navigateDown(t))
-	end, { var8 })
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: appPage (copy), p6 (ref), enumsModule (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var8 (ref), navigateDown (copy)
+		var1(navigateDown(t))
+	end, { var1 })
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: appPage (copy), p4 (ref), enumsModule (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var1 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.ProfilePlatform,
-			detail = p6,
+			detail = p4,
 			extraProps = { profileType = enumsModule.EntityType.User }
 		}
 		
@@ -55,54 +55,54 @@ return function(p3, p4, p5, p6, p7, p8)
 			
 			return
 		end
-		var8(navigateDown(t))
-	end, { var8, p6 })
+		var1(navigateDown(t))
+	end, { var1, p4 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: p7 (ref), p6 (ref), var9 (ref), buttonTypes (copy), var11 (ref), buttonVariant (copy), p4 (ref), dataStatus (copy), t (copy), mapServerActionsToRowCtaModule (copy), p3 (ref), p5 (ref), p8 (ref), fFlagUserListCtaAnalyticsEnabled (copy), var10 (ref)
-		if p7 and p7.showSelfProfileCta and p6 == var9 then
+		-- upvalues: p5 (ref), p4 (ref), var2 (ref), buttonTypes (copy), var4 (ref), buttonVariant (copy), p2 (ref), dataStatus (copy), t (copy), mapServerActionsToRowCtaModule (copy), p1 (ref), p3 (ref), p6 (ref), fFlagUserListCtaAnalyticsEnabled (copy), var3 (ref)
+		if p5 and p5.showSelfProfileCta and p4 == var2 then
 			return {
 				secondaryCta = nil,
 				primaryCta = {
 					type = buttonTypes.View,
-					onActivated = var11,
+					onActivated = var4,
 					variant = buttonVariant.Standard,
-					minWidth = p7.primaryCtaMinWidth,
-					maxWidth = p7.primaryCtaMaxWidth
+					minWidth = p5.primaryCtaMinWidth,
+					maxWidth = p5.primaryCtaMaxWidth
 				}
 			}
-		elseif p4 == nil or p4 == dataStatus.NotReady then
+		elseif p2 == nil or p2 == dataStatus.NotReady then
 			return t
 		end
-		local var14 = mapServerActionsToRowCtaModule(p3, p5, p6, p7)
-		local primaryCta = var14.primaryCta
+		local var5 = mapServerActionsToRowCtaModule(p1, p3, p4, p5)
+		local primaryCta = var5.primaryCta
 		
-		if primaryCta and primaryCta.type == buttonTypes.Join and p8 then
+		if primaryCta and primaryCta.type == buttonTypes.Join and p6 then
 			local t_1 = {}
-			local var16 = p8
+			local var6 = p6
 			local cloned = table.clone(primaryCta)
 			
 			function cloned.onActivated()
-				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), p7 (copy), buttonTypes (copy), p6 (copy), var10 (copy)
+				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), p5 (copy), buttonTypes (copy), p4 (copy), var3 (copy)
 				if fFlagUserListCtaAnalyticsEnabled then
-					local var18 = if p7 then p7.onCtaActivated else nil
+					local var7 = if p5 then p5.onCtaActivated else nil
 					
-					if var18 ~= nil then
-						var18({ buttonType = buttonTypes.Join, userId = p6 })
+					if var7 ~= nil then
+						var7({ buttonType = buttonTypes.Join, userId = p4 })
 					end
 				end
-				var10(p6)
+				var3(p4)
 			end
 			
-			cloned.isDisabled = not var16.isInExperience
-			cloned.isLoading = var16.isLoading
+			cloned.isDisabled = not var6.isInExperience
+			cloned.isLoading = var6.isLoading
 			t_1.primaryCta = cloned
-			t_1.secondaryCta = var14.secondaryCta
+			t_1.secondaryCta = var5.secondaryCta
 			
 			return t_1
 		end
-		return var14
+		return var5
 	end, {
-		p3, p4, p5, p6, p7, p8, var10, var9, var11
+		p1, p2, p3, p4, p5, p6, var3, var2, var4
 	})
 end

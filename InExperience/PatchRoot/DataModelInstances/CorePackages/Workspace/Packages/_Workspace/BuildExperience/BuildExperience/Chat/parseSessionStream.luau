@@ -27,147 +27,147 @@ local function contentBlocksToText(p1)
 	return table.concat(t)
 end
 
-local _ = function(p1)
-	local sequenceId = p1.sequenceId
+local _ = function(p2)
+	local sequenceId = p2.sequenceId
 	
 	return if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil
 end
 
-local _ = function(p1)
+local _ = function(p2)
 	-- upvalues: turnStateReducer (ref)
-	return turnStateReducer.applySessionUpdate(p1, {
+	return turnStateReducer.applySessionUpdate(p2, {
 		sessionUpdate = "state_change",
 		state = "idle",
 		stop_reason = "cancelled"
 	}, nil)
 end
 
-local _ = function(p1)
-	local messageId = p1.messageId
+local _ = function(p2)
+	local messageId = p2.messageId
 	
 	return if typeof(messageId) == "string" and messageId ~= "" then messageId else nil
 end
 
-local _ = function(p1)
-	return if p1 ~= "agent_message" then if p1 ~= "agent_message_chunk" then if p1 ~= "tool_call_update" then if p1 ~= "tool_call_content_chunk" then p1 == "state_change" else true else true else true else true
+local _ = function(p2)
+	return if p2 ~= "agent_message" then if p2 ~= "agent_message_chunk" then if p2 ~= "tool_call_update" then if p2 ~= "tool_call_content_chunk" then p2 == "state_change" else true else true else true else true
 end
 
-local _ = function(p1)
-	return if p1.assistantText == "" then if #p1.activityItems <= 0 then p1.toolCallCount > 0 else true else true
+local _ = function(p2)
+	return if p2.assistantText == "" then if #p2.activityItems <= 0 then p2.toolCallCount > 0 else true else true
 end
 
-local _ = function(p1)
-	local var1 = if p1.assistantText == "" then if #p1.activityItems <= 0 then p1.toolCallCount > 0 else true else true
+local _ = function(p2)
+	local var2 = if p2.assistantText == "" then if #p2.activityItems <= 0 then p2.toolCallCount > 0 else true else true
 	
-	if not var1 then
-		var1 = if #p1.pendingAgentMessageContent <= 0 then if p1.status ~= "cancelled" then if p1.stopReason ~= "cancelled" then p1.stopReason == "error" else true else true else true
+	if not var2 then
+		var2 = if #p2.pendingAgentMessageContent <= 0 then if p2.status ~= "cancelled" then if p2.stopReason ~= "cancelled" then p2.stopReason == "error" else true else true else true
 	end
-	return var1
+	return var2
 end
 
-local _ = function(p1)
-	local cloned = table.clone(p1)
-	table.sort(cloned, function(p1, p2)
-		local sequenceId = p1.sequenceId
-		local var1 = (if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil) or -1
-		local sequenceId_1 = p2.sequenceId
+local _ = function(p2)
+	local cloned = table.clone(p2)
+	table.sort(cloned, function(p3, p4)
+		local sequenceId = p3.sequenceId
+		local var2 = (if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil) or -1
+		local sequenceId_1 = p4.sequenceId
 		sequenceId = if typeof(sequenceId_1) == "number" and sequenceId_1 >= 0 then sequenceId_1 else nil
 		
-		return var1 < (sequenceId or -1)
+		return var2 < (sequenceId or -1)
 	end)
 	
 	return cloned
 end
 
-local function parseChatItems(p1, p2)
+local function parseChatItems(p2, p3)
 	-- upvalues: contentBlocksToText (ref), turnStateReducer (ref)
 	local t = {}
-	local var1 = nil
 	local var2 = nil
 	local var3 = nil
+	local var4 = nil
 	local t_1 = {}
-	local var4 = false
+	local var5 = false
 	
 	local function flushActiveTurn()
-		-- upvalues: var1 (write), var4 (write), t (ref), var2 (write), var3 (write), t_1 (write)
-		if var1 ~= nil and var4 then
-			local var1 = var1
-			local var2 = if var1.assistantText == "" then if #var1.activityItems <= 0 then var1.toolCallCount > 0 else true else true
+		-- upvalues: var2 (write), var5 (write), t (ref), var3 (write), var4 (write), t_1 (write)
+		if var2 ~= nil and var5 then
+			local var6 = var6
+			local var7 = if var6.assistantText == "" then if #var6.activityItems <= 0 then var6.toolCallCount > 0 else true else true
 			
-			if not var2 then
-				var2 = if #var1.pendingAgentMessageContent <= 0 then if var1.status ~= "cancelled" then if var1.stopReason ~= "cancelled" then var1.stopReason == "error" else true else true else true
+			if not var7 then
+				var7 = if #var6.pendingAgentMessageContent <= 0 then if var6.status ~= "cancelled" then if var6.stopReason ~= "cancelled" then var6.stopReason == "error" else true else true else true
 			end
-			if var2 then
+			if var7 then
 				table.insert(t, {
 					kind = "assistant_turn",
-					startSequenceId = var2,
-					endSequenceId = var3,
+					startSequenceId = var7,
+					endSequenceId = var4,
 					sequenceIds = t_1,
-					turnState = var1
+					turnState = var6
 				})
 			end
 		end
-		var1 = nil
-		var2 = nil
-		var3 = nil
+		var6 = nil
+		var7 = nil
+		var4 = nil
 		t_1 = {}
-		var4 = false
+		var5 = false
 	end
 	
-	local function appendUserMessage(p1, p2, p3)
+	local function appendUserMessage(p4, p5, p6)
 		-- upvalues: t (ref)
-		if p3 == "" then return end
-		local var1 = t[#t]
+		if p6 == "" then return end
+		local var6 = t[#t]
 		
-		if var1 == nil or var1.kind ~= "user_message" or var1.messageId ~= p1 then
+		if var6 == nil or var6.kind ~= "user_message" or var6.messageId ~= p4 then
 			table.insert(t, {
 				kind = "user_message",
-				messageId = p1,
-				sequenceId = p2,
-				text = p3
+				messageId = p4,
+				sequenceId = p5,
+				text = p6
 			})
 			
 			return
 		end
-		var1.text ..= p3
+		var6.text ..= p6
 	end
 	
-	for i, v in p1 do
-		local var3
+	for i, v in p2 do
+		local var4
 		local sessionUpdate = v.sessionUpdate
 		local sequenceId = v.sequenceId
-		local var4 = if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil
+		local var5 = if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil
 		
 		if sessionUpdate ~= "user_message" and sessionUpdate ~= "user_message_chunk" then
 			sequenceId = if sessionUpdate ~= "agent_message" then if sessionUpdate ~= "agent_message_chunk" then if sessionUpdate ~= "tool_call_update" then if sessionUpdate ~= "tool_call_content_chunk" then sessionUpdate == "state_change" else true else true else true else true
 			
 			if sequenceId then
-				if var1 == nil then
-					var1 = turnStateReducer.createEmptyTurnState(p2)
+				if var2 == nil then
+					var2 = turnStateReducer.createEmptyTurnState(p3)
 				end
 				if sessionUpdate == "state_change" and v.state == "running" then
-					var4 = true
+					var5 = true
 				end
-				if var4 ~= nil then
-					table.insert(t_1, var4)
+				if var5 ~= nil then
+					table.insert(t_1, var5)
 					
-					if var2 == nil or var4 < var2 then
-						var2 = var4
+					if var3 == nil or var5 < var3 then
+						var3 = var5
 					end
-					if var3 == nil or var3 < var4 then
-						var3 = var4
+					if var4 == nil or var4 < var5 then
+						var4 = var5
 					end
 				end
-				var1 = turnStateReducer.applySessionUpdate(var1, v, { sequenceNumber = var4 })
+				var2 = turnStateReducer.applySessionUpdate(var2, v, { sequenceNumber = var5 })
 				
-				if var1.isDone then
+				if var2.isDone then
 					flushActiveTurn()
 				end
 			end
 		end
-		if var1 ~= nil then
-			var3 = var1
-			sequenceId = if var3.assistantText == "" then if #var3.activityItems <= 0 then var3.toolCallCount > 0 else true else true
+		if var2 ~= nil then
+			var4 = var2
+			sequenceId = if var4.assistantText == "" then if #var4.activityItems <= 0 then var4.toolCallCount > 0 else true else true
 			
 			if sequenceId then
 				flushActiveTurn()
@@ -176,95 +176,95 @@ local function parseChatItems(p1, p2)
 		if sessionUpdate == "user_message" then
 			sequenceId = contentBlocksToText(v.content)
 		else
-			var3 = v.content
-			sequenceId = if var3 == nil or var3.type ~= "text" or typeof(var3.text) ~= "string" then "" else var3.text
+			var4 = v.content
+			sequenceId = if var4 == nil or var4.type ~= "text" or typeof(var4.text) ~= "string" then "" else var4.text
 		end
-		var3 = appendUserMessage
+		var4 = appendUserMessage
 		local messageId = v.messageId
-		var3(if typeof(messageId) == "string" and messageId ~= "" then messageId else nil, var4, sequenceId)
+		var4(if typeof(messageId) == "string" and messageId ~= "" then messageId else nil, var5, sequenceId)
 	end
 	flushActiveTurn()
 	
 	return t
 end
 
-local _ = function(p1, p2)
+local _ = function(p4, p5)
 	return {
 		kind = "user_message",
-		id = if p2 == nil or p1.sequenceId == nil then p1.messageId else `{p2}:{p1.sequenceId}:user`,
-		text = p1.text
+		id = if p5 == nil or p4.sequenceId == nil then p4.messageId else `{p5}:{p4.sequenceId}:user`,
+		text = p4.text
 	}
 end
 
-local _ = function(p1, p2)
-	return if p2 == nil or p1.eventMetaBySequenceId == nil then nil else p1.eventMetaBySequenceId[p2]
+local _ = function(p4, p5)
+	return if p5 == nil or p4.eventMetaBySequenceId == nil then nil else p4.eventMetaBySequenceId[p5]
 end
 
-local function resolveTurnId(p1, p2)
-	local endSequenceId = p2.endSequenceId
-	local var1 = if endSequenceId == nil or p1.eventMetaBySequenceId == nil then nil else p1.eventMetaBySequenceId[endSequenceId]
+local function resolveTurnId(p4, p5)
+	local endSequenceId = p5.endSequenceId
+	local var6 = if endSequenceId == nil or p4.eventMetaBySequenceId == nil then nil else p4.eventMetaBySequenceId[endSequenceId]
 	
-	if var1 ~= nil and var1.turnId ~= nil then
-		return var1.turnId
+	if var6 ~= nil and var6.turnId ~= nil then
+		return var6.turnId
 	end
-	for i, v in p2.sequenceIds do
-		local var2 = if v == nil or p1.eventMetaBySequenceId == nil then nil else p1.eventMetaBySequenceId[v]
+	for i, v in p5.sequenceIds do
+		local var7 = if v == nil or p4.eventMetaBySequenceId == nil then nil else p4.eventMetaBySequenceId[v]
 		
-		if var2 ~= nil and var2.turnId ~= nil then
-			return var2.turnId
+		if var7 ~= nil and var7.turnId ~= nil then
+			return var7.turnId
 		end
 	end
 	return nil
 end
 
-local function buildTurnFeedbackIds(p1, p2)
+local function buildTurnFeedbackIds(p6, p7)
 	-- upvalues: publishToolUtils (ref), resolveTurnId (ref)
-	local latestSuccessfulResult = publishToolUtils.getLatestSuccessfulResult(p1.turnState)
+	local latestSuccessfulResult = publishToolUtils.getLatestSuccessfulResult(p6.turnState)
 	
 	return {
-		universeId = p2.universeId,
-		placeId = p2.placeId,
-		sessionId = p2.sessionId,
-		sequenceId = p1.endSequenceId,
-		turnId = resolveTurnId(p1.turnState, p1),
+		universeId = p7.universeId,
+		placeId = p7.placeId,
+		sessionId = p7.sessionId,
+		sequenceId = p6.endSequenceId,
+		turnId = resolveTurnId(p6.turnState, p6),
 		publishedVersionNumber = if latestSuccessfulResult ~= nil then nil else latestSuccessfulResult.publishedVersionNumber,
 		rollbackTargetVersionNumber = if latestSuccessfulResult ~= nil then nil else latestSuccessfulResult.rollbackTargetVersionNumber
 	}
 end
 
-return function(p1, p2)
+return function(p6, p7)
 	-- upvalues: parseChatItems (ref), turnStateReducer (ref), publishToolUtils (ref), subagentTasks (ref), buildTurnFeedbackIds (ref), fFlagBuildExperienceSinglePlaytestCardModule (ref), fFlagBuildAgentRollbackModule (ref)
 	local sequenceIds
-	local sessionId = p2.sessionId
-	local cloned = table.clone(p1)
-	table.sort(cloned, function(p1, p2)
-		local sequenceId = p1.sequenceId
-		local sequenceId_1 = p2.sequenceId
+	local sessionId = p7.sessionId
+	local cloned = table.clone(p6)
+	table.sort(cloned, function(p8, p9)
+		local sequenceId = p8.sequenceId
+		local sequenceId_1 = p9.sequenceId
 		
 		return ((if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil) or -1) < ((if typeof(sequenceId_1) == "number" and sequenceId_1 >= 0 then sequenceId_1 else nil) or -1)
 	end)
-	local var1 = parseChatItems(cloned, sessionId or "")
-	local var2 = nil
+	local var8 = parseChatItems(cloned, sessionId or "")
+	local var9 = nil
 	
-	for i, v in p1 do
+	for i, v in p6 do
 		sequenceIds = v.sequenceId
-		local var3 = if typeof(sequenceIds) == "number" and sequenceIds >= 0 then sequenceIds else nil
+		local var10 = if typeof(sequenceIds) == "number" and sequenceIds >= 0 then sequenceIds else nil
 		
-		if var3 ~= nil and (var2 == nil or var2 < var3) then
-			var2 = var3
+		if var10 ~= nil and (var9 == nil or var9 < var10) then
+			var9 = var10
 		end
 	end
 	local v_1
 	local t = {}
-	local var4 = false
-	local var5 = nil
+	local var11 = false
+	local var12 = nil
 	local tCount = nil
-	local var6 = nil
+	local var13 = nil
 	local startSequenceId = nil
 	sequenceIds = nil
 	local tCount_1 = nil
 	
-	for i_1, v_1 in var1 do
+	for i_1, v_1 in var8 do
 		if v_1.kind == "user_message" then
 			table.insert(t, {
 				kind = "user_message",
@@ -274,45 +274,45 @@ return function(p1, p2)
 		end
 		local turnState = v_1.turnState
 		
-		if p2.optimisticCancelledStartSequenceId ~= nil and v_1.startSequenceId == p2.optimisticCancelledStartSequenceId and not turnState.isDone then
+		if p7.optimisticCancelledStartSequenceId ~= nil and v_1.startSequenceId == p7.optimisticCancelledStartSequenceId and not turnState.isDone then
 			turnState = turnStateReducer.applySessionUpdate(turnState, {
 				sessionUpdate = "state_change",
 				state = "idle",
 				stop_reason = "cancelled"
 			}, nil)
 		end
-		local var7 = publishToolUtils.includesPublishPlaceTool(turnState)
+		local var14 = publishToolUtils.includesPublishPlaceTool(turnState)
 		
-		if var7 then
-			var4 = true
+		if var14 then
+			var11 = true
 		end
-		local var8 = subagentTasks.fromTurnState(turnState)
+		local var15 = subagentTasks.fromTurnState(turnState)
 		
-		if var8 ~= nil then
-			var5 = var8
+		if var15 ~= nil then
+			var12 = var15
 		end
-		local var9 = if sessionId == nil or v_1.startSequenceId == nil then nil else `{sessionId}:{v_1.startSequenceId}`
-		local var10 = not turnState.isDone
+		local var16 = if sessionId == nil or v_1.startSequenceId == nil then nil else `{sessionId}:{v_1.startSequenceId}`
+		local var17 = not turnState.isDone
 		table.insert(t, {
 			kind = "assistant_turn",
-			id = var9,
+			id = var16,
 			isDone = turnState.isDone,
 			turnState = turnState,
-			turnKey = var9,
+			turnKey = var16,
 			startSequenceId = v_1.startSequenceId,
 			endSequenceId = v_1.endSequenceId,
-			optimisticLocalTools = if var10 then p2.optimisticLocalTools else nil,
-			universeId = p2.universeId,
+			optimisticLocalTools = if var17 then p7.optimisticLocalTools else nil,
+			universeId = p7.universeId,
 			sessionId = sessionId,
-			turnFeedbackIds = buildTurnFeedbackIds(v_1, p2)
+			turnFeedbackIds = buildTurnFeedbackIds(v_1, p7)
 		})
 		
-		if var7 and turnState.isDone then
+		if var14 and turnState.isDone then
 			tCount_1 = #t
 		end
-		if var10 then
+		if var17 then
 			tCount = #t
-			var6 = turnState
+			var13 = turnState
 			startSequenceId = v_1.startSequenceId
 			sequenceIds = v_1.sequenceIds
 		end
@@ -320,23 +320,23 @@ return function(p1, p2)
 	if fFlagBuildExperienceSinglePlaytestCardModule and tCount_1 ~= nil then
 		t[tCount_1].isLatestPublishTurn = true
 	end
-	local pendingUserMessage = p2.pendingUserMessage
+	local pendingUserMessage = p7.pendingUserMessage
 	
 	if pendingUserMessage ~= nil and pendingUserMessage ~= "" then
-		local pendingUserMessageAfterSequenceId = p2.pendingUserMessageAfterSequenceId or -1
-		local var11 = false
+		local pendingUserMessageAfterSequenceId = p7.pendingUserMessageAfterSequenceId or -1
+		local var18 = false
 		
-		for i_2, v_2 in var1 do
+		for i_2, v_2 in var8 do
 			if v_2.kind == "user_message" then
 				local sequenceId = v_2.sequenceId
 				
 				if sequenceId ~= nil and pendingUserMessageAfterSequenceId < sequenceId then
-					var11 = true
+					var18 = true
 					break
 				end
 			end
 		end
-		if not var11 then
+		if not var18 then
 			table.insert(t, {
 				kind = "user_message",
 				id = if sessionId ~= nil then nil else `{sessionId}:pending`,
@@ -344,15 +344,15 @@ return function(p1, p2)
 			})
 		end
 	end
-	local liveAssistantMessage = p2.liveAssistantMessage
-	local var12 = t[#t]
-	local var13 = var12 ~= nil and var12.kind == "assistant_turn"
+	local liveAssistantMessage = p7.liveAssistantMessage
+	local var19 = t[#t]
+	local var20 = var19 ~= nil and var19.kind == "assistant_turn"
 	
-	if fFlagBuildAgentRollbackModule and var13 then
-		v_1 = var12.startSequenceId
-		var13 = if v_1 ~= nil then (p2.pendingUserMessageAfterSequenceId or -1) < v_1 else true
+	if fFlagBuildAgentRollbackModule and var20 then
+		v_1 = var19.startSequenceId
+		var20 = if v_1 ~= nil then (p7.pendingUserMessageAfterSequenceId or -1) < v_1 else true
 	end
-	if liveAssistantMessage ~= nil and not var13 then
+	if liveAssistantMessage ~= nil and not var20 then
 		v_1 = if sessionId ~= nil then nil else `{sessionId}:live`
 		table.insert(t, {
 			kind = "assistant_turn",
@@ -361,18 +361,18 @@ return function(p1, p2)
 			turnKey = v_1,
 			loading = liveAssistantMessage.setupErrorText == nil or nil,
 			setupErrorText = liveAssistantMessage.setupErrorText,
-			universeId = p2.universeId,
+			universeId = p7.universeId,
 			turnFeedbackIds = {}
 		})
 	end
 	return {
 		messages = t,
-		includesPublishTool = var4,
+		includesPublishTool = var11,
 		activeTurnItemIndex = tCount,
-		activeTurnState = var6,
+		activeTurnState = var13,
 		activeTurnStartSequenceId = startSequenceId,
 		activeTurnSequenceIds = sequenceIds,
-		subagentTaskState = var5,
-		latestSequenceId = var2
+		subagentTaskState = var12,
+		latestSequenceId = var9
 	}
 end

@@ -7,24 +7,24 @@ local text = foundationModule.Text
 local avatarGroup = foundationModule.AvatarGroup
 local icon = foundationModule.Icon
 local useTokens = foundationModule.Hooks.useTokens
-local var2 = reactModule.memo(function(p0)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), avatarGroup (ref), icon (ref)
-	local layoutOrder = p0.LayoutOrder
+	local layoutOrder = p1.LayoutOrder
 	
-	if p0.accessory.type == "AvatarGroup" then
-		local accessory = p0.accessory
+	if p1.accessory.type == "AvatarGroup" then
+		local accessory = p1.accessory
 		
 		return reactModule.createElement(avatarGroup, {
 			LayoutOrder = layoutOrder,
 			avatars = accessory.avatars,
 			type = accessory.groupType,
 			max = accessory.max,
-			backplateStyle = p0.accessory.backplateStyle,
+			backplateStyle = p1.accessory.backplateStyle,
 			size = accessory.size,
-			testId = `{p0.testIdPrefix}--{p0.position}-avatar-group`
+			testId = `{p1.testIdPrefix}--{p0.position}-avatar-group`
 		})
-	elseif p0.accessory.type == "Icon" then
-		local accessory = p0.accessory
+	elseif p1.accessory.type == "Icon" then
+		local accessory = p1.accessory
 		
 		return reactModule.createElement(icon, {
 			LayoutOrder = layoutOrder,
@@ -32,14 +32,14 @@ local var2 = reactModule.memo(function(p0)
 			variant = accessory.variant,
 			size = accessory.size,
 			style = accessory.style,
-			testId = `{p0.testIdPrefix}--{p0.position}-icon`
+			testId = `{p1.testIdPrefix}--{p0.position}-icon`
 		})
 	end
 	return nil
 end)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), foundationModule (ref), var2 (ref), text (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), view (ref), foundationModule (ref), var1 (ref), text (ref)
 	local testId = p1.testId or "--sdui-text-accessory-row"
 	
 	return reactModule.createElement(view, {
@@ -67,7 +67,7 @@ return reactModule.memo(function(p1)
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, p1.gap)
 		}) else nil,
-		LeadingAccessory = if p1.leading then reactModule.createElement(var2, {
+		LeadingAccessory = if p1.leading then reactModule.createElement(var1, {
 			LayoutOrder = 1,
 			position = "leading",
 			accessory = p1.leading,
@@ -82,7 +82,7 @@ return reactModule.memo(function(p1)
 			LayoutOrder = if p1.leading then 2 else 1,
 			testId = `{testId}--text`
 		}) else nil,
-		TrailingAccessory = if p1.trailing then reactModule.createElement(var2, {
+		TrailingAccessory = if p1.trailing then reactModule.createElement(var1, {
 			position = "trailing",
 			accessory = p1.trailing,
 			LayoutOrder = if p1.leading then 3 else 2,

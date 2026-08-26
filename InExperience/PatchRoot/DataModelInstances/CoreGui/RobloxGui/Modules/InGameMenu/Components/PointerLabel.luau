@@ -14,19 +14,19 @@ local t_1 = {
 	[Enum.UserInputType.MouseButton2] = assetsModule.Images.Mouse2Press,
 	[Enum.UserInputType.MouseWheel] = assetsModule.Images.MouseWheelScroll
 }
-local var5 = t.strictInterface({
+local var1 = t.strictInterface({
 	input = t.enum(Enum.UserInputType),
 	AnchorPoint = t.optional(t.Vector2),
 	Position = t.optional(t.UDim2),
 	LayoutOrder = t.optional(t.integer)
 })
 
-return function(p0)
-	-- upvalues: globalConfigModule (ref), var5 (ref), t_1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roact (ref), image (ref), imageSetLabel (ref)
+return function(p1)
+	-- upvalues: globalConfigModule (ref), var1 (ref), t_1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roact (ref), image (ref), imageSetLabel (ref)
 	if globalConfigModule.propValidation then
-		assert(var5(p0))
+		assert(var1(p1))
 	end
-	local input = t_1[p0.input]
+	local input = t_1[p1.input]
 	
 	return if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
 		Image = input.Image,
@@ -35,15 +35,15 @@ return function(p0)
 			size = input.ImageRectSize
 		},
 		Size = UDim2.new(0, 36, 0, 36),
-		Position = p0.Position,
-		AnchorPoint = p0.AnchorPoint,
-		LayoutOrder = p0.LayoutOrder
+		Position = p1.Position,
+		AnchorPoint = p1.AnchorPoint,
+		LayoutOrder = p1.LayoutOrder
 	}) else roact.createElement(imageSetLabel, {
 		BackgroundTransparency = 1,
 		Image = input,
 		Size = UDim2.new(0, 36, 0, 36),
-		Position = p0.Position,
-		AnchorPoint = p0.AnchorPoint,
-		LayoutOrder = p0.LayoutOrder
+		Position = p1.Position,
+		AnchorPoint = p1.AnchorPoint,
+		LayoutOrder = p1.LayoutOrder
 	})
 end

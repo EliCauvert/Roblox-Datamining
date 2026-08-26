@@ -4,12 +4,12 @@ local _ = require(parent.React)
 local reactIsModule = require(parent.ReactIs)
 local _ = require(foundation.Components.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactIsModule (ref)
-	if reactIsModule.isBinding(p0) then
-		return p0:map(function(p1)
-			return math.clamp(p1 / 100, 0, 1)
-		end), p0 == nil
+	if reactIsModule.isBinding(p1) then
+		return p1:map(function(p2)
+			return math.clamp(p2 / 100, 0, 1)
+		end), p1 == nil
 	end
-	return if p0 ~= nil then nil else math.clamp(p0 / 100, 0, 1), p0 == nil
+	return if p1 ~= nil then nil else math.clamp(p1 / 100, 0, 1), p1 == nil
 end

@@ -15,28 +15,28 @@ local function _()
 end
 
 return {
-	recyclingScopeHighWater = function(p0, p1)
+	recyclingScopeHighWater = function(p1, p2)
 		-- upvalues: recyclingRuntimeModule (ref), createRecyclableViewModule (ref)
-		local var8 = 0
-		local var9 = recyclingRuntimeModule.new(function()
-			-- upvalues: var8 (write)
-			var8 += 1
+		local var1 = 0
+		local var2 = recyclingRuntimeModule.new(function()
+			-- upvalues: var1 (write)
+			var1 += 1
 		end)
-		local recyclingScope = var9.getRecyclingScope({})
-		local var11 = recyclingScope == var9.getRecyclingScope({})
-		local var12 = createRecyclableViewModule(function()
+		local recyclingScope = var2.getRecyclingScope({})
+		local var3 = recyclingScope == var2.getRecyclingScope({})
+		local var4 = createRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
-		local var13 = createRecyclableViewModule(function()
+		local var5 = createRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
-		local var14 = p1()
+		local var6 = p2()
 		local t = {}
-		local list = table.create(p0)
-		local list_1 = table.create(p0)
+		local list = table.create(p1)
+		local list_1 = table.create(p1)
 		
-		for i = 1, p0 do
-			list[i] = { viewType = var12 }
+		for i = 1, p1 do
+			list[i] = { viewType = var4 }
 			list_1[i] = {
 				key = `item{i}`,
 				index = i,
@@ -53,16 +53,16 @@ return {
 		for i_1, v in acquired do
 			v.record.set(list_1[i_1])
 		end
-		local list_2 = table.create(p0)
-		local list_3 = table.create(p0)
+		local list_2 = table.create(p1)
+		local list_3 = table.create(p1)
 		
-		for i_2 = 1, p0 do
-			list_2[i_2] = { viewType = var13 }
+		for i_2 = 1, p1 do
+			list_2[i_2] = { viewType = var5 }
 			list_3[i_2] = {
 				key = `listItem{i_2}`,
 				index = i_2,
 				value = i_2,
-				generation = p0 + i_2
+				generation = p1 + i_2
 			}
 		end
 		local acquired_1 = recyclingScope.exchange(t, acquired, list_2).acquired
@@ -73,96 +73,96 @@ return {
 		for i_4, v_2 in list_1 do
 			v_2.value.placeholder:Destroy()
 		end
-		local var20 = (p1() - var14) * 1000
+		local var7 = (p2() - var6) * 1000
 		local count = #recyclingScope.getScopeInventory()
 		local count_1 = #recyclingScope.getScopeInventory()
-		local var23 = 0
+		local var8 = 0
 		
-		for i_5 in var9.getHostChildren(function()
+		for i_5 in var2.getHostChildren(function()
 			return nil
 		end) do
-			var23 += 1
+			var8 += 1
 		end
 		recyclingScope.exchange(t, acquired_1, {})
-		var9.destroy()
+		var2.destroy()
 		
-		return var20, {
+		return var7, {
 			scopeWideHostScans = 0,
 			createdHosts = count,
 			listItemHosts = count_1,
-			publishedHosts = var23,
-			sameListRecyclingScope = var11,
-			hostChanges = var8,
+			publishedHosts = var8,
+			sameListRecyclingScope = var3,
+			hostChanges = var1,
 			completionPhaseCounts = { scopePublication = { synchronousBatch = 1 } }
 		}
 	end,
-	compositionChurn = function(p2)
+	compositionChurn = function(p3)
 		-- upvalues: viewRecyclerModule (ref), recyclableViewRecordModule (ref), signalsExperimentalModule (ref), compositionPlacementManagerModule (ref), createRecyclableViewModule (ref), signalsModule (ref)
-		local var24 = 1
-		local var25 = 0
-		local var26 = viewRecyclerModule.Adapter.createRecyclingScope({
+		local var9 = 1
+		local var10 = 0
+		local var11 = viewRecyclerModule.Adapter.createRecyclingScope({
 			adapter = {
-				create = function(p3)
-					-- upvalues: recyclableViewRecordModule (copy), var24 (write), var25 (write)
-					local var36 = recyclableViewRecordModule(var24, p3, nil)
-					var24 += 1
-					local set = var36.set
+				create = function(p4)
+					-- upvalues: recyclableViewRecordModule (copy), var9 (write), var10 (write)
+					local var12 = recyclableViewRecordModule(var9, p4, nil)
+					var9 += 1
+					local set = var12.set
 					
-					function var36.set(p4)
-						-- upvalues: var25 (copy), set (ref)
-						var25 += 1
-						set(p4)
+					function var36.set(p5)
+						-- upvalues: var10 (copy), set (ref)
+						var10 += 1
+						set(p5)
 					end
 					
-					return var36
+					return var12
 				end,
 				destroy = function() end,
 				batch = signalsExperimentalModule.batch
 			}
 		})
-		local var27 = compositionPlacementManagerModule.new(var26, function() end)
-		local var28 = createRecyclableViewModule(function()
+		local var12 = compositionPlacementManagerModule.new(var11, function() end)
+		local var13 = createRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
-		local list = table.create(p2)
-		local list_1 = table.create(p2)
+		local list = table.create(p3)
+		local list_1 = table.create(p3)
 		
-		for i = 1, p2 do
-			local var31 = signalsModule.createSignal({ generation = 1, key = `parent{i}`, index = i, value = i })
+		for i = 1, p3 do
+			local var14 = signalsModule.createSignal({ generation = 1, key = `parent{i}`, index = i, value = i })
 			local frame = Instance.new("Frame")
 			list_1[i] = frame
-			list[i] = var27.register(var28, {}, var31, {}, frame)
+			list[i] = var12.register(var13, {}, var14, {}, frame)
 		end
-		var27.flush()
-		var25 = 0
-		local var33 = 0
-		local var34 = 0
-		local var35 = 1
+		var12.flush()
+		var10 = 0
+		local var15 = 0
+		local var16 = 0
+		local var17 = 1
 		
 		return {
 			run = function()
-				-- upvalues: var34 (write), p2 (ref), list (ref), var35 (write), var27 (ref), var33 (write)
-				var34 += 1
+				-- upvalues: var16 (write), p3 (ref), list (ref), var17 (write), var12 (ref), var15 (write)
+				var16 += 1
 				
-				for i = 1, p2 do
-					list[var35].setProps({ revision = var34, update = i })
+				for i = 1, p3 do
+					list[var17].setProps({ revision = var16, update = i })
 				end
-				var27.flush()
-				var33 += 1
-				var35 = var35 % p2 + 1
+				var12.flush()
+				var15 += 1
+				var17 = var17 % p3 + 1
 			end,
 			getAssignmentUpdates = function()
-				-- upvalues: var25 (write)
-				return var25
+				-- upvalues: var10 (write)
+				return var10
 			end,
 			getFlushes = function()
-				-- upvalues: var33 (write)
-				return var33
+				-- upvalues: var15 (write)
+				return var15
 			end,
 			destroy = function()
-				-- upvalues: var27 (ref), var26 (ref), list_1 (ref)
-				var27.destroy()
-				var26.destroy()
+				-- upvalues: var12 (ref), var11 (ref), list_1 (ref)
+				var12.destroy()
+				var11.destroy()
 				
 				for i, v in list_1 do
 					v:Destroy()

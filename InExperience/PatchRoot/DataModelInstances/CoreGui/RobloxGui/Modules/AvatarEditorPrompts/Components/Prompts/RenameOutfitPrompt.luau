@@ -24,36 +24,36 @@ renameOutfitNamePrompt.validateProps = tModule.strictInterface({
 	showCustomOutfitNames = tModule.boolean
 })
 
-function renameOutfitNamePrompt.init(p0)
-	p0:setState({
+function renameOutfitNamePrompt.init(p1)
+	p1:setState({
 		outfitName = "",
 		alertPosition = UDim2.fromScale(0.5, 0.5)
 	})
 	
-	function p0.textUpdated(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ outfitName = p1 })
+	function p0.textUpdated(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ outfitName = p2 })
 	end
 	
 	function p0.confirmRenameOutfit()
-		-- upvalues: p0 (ref)
-		p0.props.performRenameOutfit(p0.state.outfitName)
+		-- upvalues: p1 (ref)
+		p1.props.performRenameOutfit(p1.state.outfitName)
 	end
 end
 
-function renameOutfitNamePrompt.render(p2)
+function renameOutfitNamePrompt.render(p1)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref), promptWithTextFieldModule (ref)
-	return if p2.props.showCustomOutfitNames then roactModule.createElement(promptWithTextFieldModule, {
-		fieldText = p2.state.outfitName,
-		onFieldTextUpdated = p2.textUpdated,
+	return if p1.props.showCustomOutfitNames then roactModule.createElement(promptWithTextFieldModule, {
+		fieldText = p1.state.outfitName,
+		onFieldTextUpdated = p1.textUpdated,
 		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.RenameOutfitNamePromptTitle"),
-		bodyText = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.RenameOutfitPromptText", { RBX_NAME = p2.props.outfitName }),
+		bodyText = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.RenameOutfitPromptText", { RBX_NAME = p1.props.outfitName }),
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
-						onActivated = p2.props.signalRenameOutfitPermissionDenied,
+						onActivated = p1.props.signalRenameOutfitPermissionDenied,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptNo")
 					}
 				},
@@ -61,8 +61,8 @@ function renameOutfitNamePrompt.render(p2)
 					isDefaultChild = false,
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						isDisabled = p2.state.outfitName == "",
-						onActivated = p2.confirmRenameOutfit,
+						isDisabled = p1.state.outfitName == "",
+						onActivated = p1.confirmRenameOutfit,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptYes")
 					}
 				}
@@ -78,35 +78,35 @@ function renameOutfitNamePrompt.render(p2)
 					isDefaultChild = true,
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = p2.props.signalRenameOutfitPermissionDenied,
+						onActivated = p1.props.signalRenameOutfitPermissionDenied,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.DisabledRenameOutfitPromptOkay")
 					}
 				}
 			}
 		},
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = p2.props.screenSize
+		screenSize = p1.props.screenSize
 	})
 end
 
-return avatarEditorPromptsPolicyModule.connect(function(p6, _)
-	return { showCustomOutfitNames = p6.getCustomOutfitNames() }
-end)(roactRoduxModule.connect(function(p3)
+return avatarEditorPromptsPolicyModule.connect(function(p1, _)
+	return { showCustomOutfitNames = p1.getCustomOutfitNames() }
+end)(roactRoduxModule.connect(function(p1)
 	return {
-		outfitId = p3.promptInfo.outfitId,
-		outfitName = p3.promptInfo.outfitName,
-		screenSize = p3.screenSize
+		outfitId = p1.promptInfo.outfitId,
+		outfitName = p1.promptInfo.outfitName,
+		screenSize = p1.screenSize
 	}
-end, function(p4)
+end, function(p1)
 	-- upvalues: signalRenameOutfitPermissionDeniedModule (ref), performRenameOutfitModule (ref)
 	return {
 		signalRenameOutfitPermissionDenied = function()
-			-- upvalues: p4 (ref), signalRenameOutfitPermissionDeniedModule (copy)
-			return p4(signalRenameOutfitPermissionDeniedModule)
+			-- upvalues: p1 (ref), signalRenameOutfitPermissionDeniedModule (copy)
+			return p1(signalRenameOutfitPermissionDeniedModule)
 		end,
-		performRenameOutfit = function(p5)
-			-- upvalues: p4 (ref), performRenameOutfitModule (copy)
-			return p4(performRenameOutfitModule(p5))
+		performRenameOutfit = function(p2)
+			-- upvalues: p1 (ref), performRenameOutfitModule (copy)
+			return p1(performRenameOutfitModule(p2))
 		end
 	}
 end)(renameOutfitNamePrompt))

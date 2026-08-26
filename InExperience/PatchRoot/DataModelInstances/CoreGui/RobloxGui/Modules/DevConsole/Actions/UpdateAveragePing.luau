@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)("UpdateAveragePing", function(p0)
-	return { AveragePing = p0 }
+﻿return require(script.Parent.Parent.Action)("UpdateAveragePing", function(p1)
+	return { AveragePing = p1 }
 end)

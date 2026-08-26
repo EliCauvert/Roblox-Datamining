@@ -1,43 +1,43 @@
 ﻿return function(value)
 	local t = {}
 	local t_1 = {}
-	local var2 = value
-	local var3 = false
+	local var1 = value
+	local var2 = false
 	
 	return {
-		subscribe = function(_, p0)
-			-- upvalues: var3 (write), t (ref), t_1 (ref)
-			local t_2 = { unsubscribed = false, callback = p0 }
+		subscribe = function(_, p1)
+			-- upvalues: var2 (write), t (ref), t_1 (ref)
+			local t_2 = { unsubscribed = false, callback = p1 }
 			
-			if var3 and not t[p0] then
-				t_1[p0] = t_2
+			if var2 and not t[p1] then
+				t_1[p1] = t_2
 			else
-				t[p0] = t_2
+				t[p1] = t_2
 			end
 			return {
 				unsubscribe = function(_)
-					-- upvalues: t_2 (ref), t (copy), p0 (ref), t_1 (copy)
+					-- upvalues: t_2 (ref), t (copy), p1 (ref), t_1 (copy)
 					t_2.unsubscribed = true
-					t[p0] = nil
-					t_1[p0] = nil
+					t[p1] = nil
+					t_1[p1] = nil
 				end
 			}
 		end,
 		getValue = function(_)
-			-- upvalues: var2 (write)
-			return var2
+			-- upvalues: var1 (write)
+			return var1
 		end
 	}, function(p1)
-		-- upvalues: var2 (write), var3 (write), t (ref), t_1 (ref)
-		var2 = p1
-		var3 = true
+		-- upvalues: var1 (write), var2 (write), t (ref), t_1 (ref)
+		var1 = p1
+		var2 = true
 		
 		for i, v in t do
 			if not v.unsubscribed and not t_1[i] then
 				i(p1)
 			end
 		end
-		var3 = false
+		var2 = false
 		
 		for i_1, v_1 in t_1 do
 			t[i_1] = v_1

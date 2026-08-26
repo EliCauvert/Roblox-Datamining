@@ -4,7 +4,7 @@ local userInputService = game:GetService("UserInputService")
 local parent = script:FindFirstAncestor("TimeToInteractiveTracker").Parent
 local dashModule = require(parent.Dash)
 local default = require(parent.LoggingProtocol).default
-local var4 = require(parent.TelemetryService).EventStreamReporter.new(default)
+local var1 = require(parent.TelemetryService).EventStreamReporter.new(default)
 local isSpatial = require(parent.AppCommonLib).isSpatial
 local ttiDebugLogModule = require(script.Parent.ttiDebugLog)
 local utilModule = require(script.Parent.Util)
@@ -14,18 +14,18 @@ local TTIMetricsTableName = game:DefineFastString("TTIMetricsTableName", "market
 local AXTTIAddNumElementsRendered = game:DefineFastFlag("AXTTIAddNumElementsRendered", false)
 game:DefineFastInt("TimeToInteractiveTrackerSampleRate", 0)
 
-local function getDefaultMetadata(p0)
+local function getDefaultMetadata(p1)
 	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
 	return dashModule.assign({
 		AppVersion = runService:GetRobloxVersion(),
 		UserAgent = httpService:GetUserAgent(),
 		CoreScriptVersion = runService:GetCoreScriptVersion(),
 		Platform = if isSpatial() then "VR" else tostring(userInputService:GetPlatform())
-	}, p0)
+	}, p1)
 end
 
 return function(p1)
-	-- upvalues: runService (ref), getDefaultMetadata (ref), default (ref), utilModule (ref), fFlagTTITrackerMemoryTrackingModule (ref), AXTTIAddNumElementsRendered (ref), httpService (ref), var4 (ref), TTIMetricsTableName (ref), ttiDebugLogModule (ref)
+	-- upvalues: runService (ref), getDefaultMetadata (ref), default (ref), utilModule (ref), fFlagTTITrackerMemoryTrackingModule (ref), AXTTIAddNumElementsRendered (ref), httpService (ref), var1 (ref), TTIMetricsTableName (ref), ttiDebugLogModule (ref)
 	if math.clamp(if p1.samplingRateOverride ~= nil then game:GetFastInt("TimeToInteractiveTrackerSampleRate") else p1.samplingRateOverride, 0, 1000) < math.random(1, 1000) and not runService:IsStudio() then return end
 	local t = {
 		description = "Stat to track Time-To-Interactive (TTI) latency metrics.",
@@ -34,29 +34,29 @@ return function(p1)
 		backends = { "RobloxTelemetryStat" },
 		lastUpdated = { 2026, 1, 14 }
 	}
-	local var12 = getDefaultMetadata(p1.metaData)
+	local var2 = getDefaultMetadata(p1.metaData)
 	
 	local function logMemoryStats(p2, p3, p4)
-		-- upvalues: t (ref), default (copy), var12 (ref)
+		-- upvalues: t (ref), default (copy), var2 (ref)
 		if p3 then
 			local cloned = table.clone(t)
 			cloned.eventName = p2 .. "_TotalMemoryMB"
-			default:logRobloxTelemetryStat(cloned, p3, var12)
+			default:logRobloxTelemetryStat(cloned, p3, var2)
 		end
 		if p4 then
 			local cloned = table.clone(t)
 			cloned.eventName = p2 .. "_LuaHeapMB"
-			default:logRobloxTelemetryStat(cloned, p4, var12)
+			default:logRobloxTelemetryStat(cloned, p4, var2)
 		end
 	end
 	
-	default:logRobloxTelemetryStat(t, p1.deltaMs, var12)
+	default:logRobloxTelemetryStat(t, p1.deltaMs, var2)
 	
 	if p1.milestones then
 		for i, v in utilModule.generateMilestoneStats(p1.statName, p1.milestones) do
 			local cloned = table.clone(t)
 			cloned.eventName = v.eventName
-			default:logRobloxTelemetryStat(cloned, v.deltaMs, var12)
+			default:logRobloxTelemetryStat(cloned, v.deltaMs, var2)
 			
 			if fFlagTTITrackerMemoryTrackingModule then
 				logMemoryStats(v.eventName, v.totalMemoryMB, v.luaHeapMB)
@@ -79,25 +79,25 @@ return function(p1)
 			t_1.num_elements_rendered = p1.metaData.numElementsRendered
 		end
 	end
-	local var16 = getDefaultMetadata({})
-	t_1.appVersion = var16.AppVersion
-	t_1.userAgent = var16.UserAgent
-	t_1.coreScriptVersion = var16.CoreScriptVersion
-	t_1.platform = var16.Platform
+	local var3 = getDefaultMetadata({})
+	t_1.appVersion = var3.AppVersion
+	t_1.userAgent = var3.UserAgent
+	t_1.coreScriptVersion = var3.CoreScriptVersion
+	t_1.platform = var3.Platform
 	t_1.total_memory_mb = p1.totalMemoryMB
 	t_1.lua_heap_mb = p1.luaHeapMB
 	
 	if p1.milestones then
-		local var17 = utilModule.milestonesToProto(p1.milestones)
+		local var4 = utilModule.milestonesToProto(p1.milestones)
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), var17 (ref)
-			return httpService:JSONEncode(var17)
+			-- upvalues: httpService (copy), var4 (ref)
+			return httpService:JSONEncode(var4)
 		end)
 		
 		if ok then
 			t_1.milestones_json = status
 		end
 	end
-	var4:sendTelemetryEvent(TTIMetricsTableName, TTIMetricsTableName, t_1)
+	var1:sendTelemetryEvent(TTIMetricsTableName, TTIMetricsTableName, t_1)
 	ttiDebugLogModule("sendTTIStat", p1.statName, p1.deltaMs, t_1, p1.milestones)
 end

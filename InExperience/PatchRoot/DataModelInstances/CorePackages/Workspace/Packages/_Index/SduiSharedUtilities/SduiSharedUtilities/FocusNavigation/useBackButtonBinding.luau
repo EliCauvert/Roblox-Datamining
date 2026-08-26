@@ -9,16 +9,16 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), t (ref), useOnNavigateBack (ref)
-	local var4, var5 = reactModule.useState(nil)
-	local var6 = useOnNavigateBack(p0, reactFocusNavigationModule.useEventMap(t))
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = useOnNavigateBack(p1, reactFocusNavigationModule.useEventMap(t))
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var4 (ref)
-		if var6 then
-			var6(var4)
+		-- upvalues: var3 (ref), var1 (ref)
+		if var3 then
+			var3(var1)
 		end
-	end, { var6, var4 })
+	end, { var3, var1 })
 	
-	return var5
+	return var2
 end

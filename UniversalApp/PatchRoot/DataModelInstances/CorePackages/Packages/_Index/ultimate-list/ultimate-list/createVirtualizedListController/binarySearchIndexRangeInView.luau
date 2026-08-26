@@ -1,55 +1,55 @@
-﻿local var0 = script:FindFirstAncestor("ultimate-list")
-local dataSourceMethodsModule = require(var0.DataSources.DataSourceMethods)
-local _ = require(var0.DataSources)
-local _ = require(var0.Dimensions)
-local exhaustiveMatchModule = require(var0.Util.exhaustiveMatch)
+﻿local var1 = script:FindFirstAncestor("ultimate-list")
+local dataSourceMethodsModule = require(var1.DataSources.DataSourceMethods)
+local _ = require(var1.DataSources)
+local _ = require(var1.Dimensions)
+local exhaustiveMatchModule = require(var1.Util.exhaustiveMatch)
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: exhaustiveMatchModule (ref), dataSourceMethodsModule (ref)
-	local var7, var8, var9
-	local function compareInView(p5)
-		-- upvalues: p4 (ref), exhaustiveMatchModule (copy), p2 (ref), p3 (ref)
-		local var16 = if p4 == "x" then p5.position.X.Offset elseif p4 == "y" then p5.position.Y.Offset else exhaustiveMatchModule(p4)
+	local var2, var3, var4
+	local function compareInView(p6)
+		-- upvalues: p5 (ref), exhaustiveMatchModule (copy), p3 (ref), p4 (ref)
+		local var5 = if p5 == "x" then p6.position.X.Offset elseif p5 == "y" then p6.position.Y.Offset else exhaustiveMatchModule(p5)
 		
-		return if var16 + (if p4 == "x" then p5.size.X.Offset elseif p4 == "y" then p5.size.Y.Offset else exhaustiveMatchModule(p4)) < p2 then "before" elseif p2 + p3 < var16 then "after" else "inside"
+		return if var5 + (if p5 == "x" then p6.size.X.Offset elseif p5 == "y" then p6.size.Y.Offset else exhaustiveMatchModule(p5)) < p3 then "before" elseif p3 + p4 < var5 then "after" else "inside"
 	end
 	
-	local var4 = 1
-	local var5 = dataSourceMethodsModule.length(p0)
-	local var6 = var5
-	while var4 <= var6 do
-		var7 = (var4 + var6) // 2
-		var8 = dataSourceMethodsModule.get(p0, var7)
-		assert(var8 ~= nil, "get() returned nil, meaning the length is inaccurate")
-		var9 = compareInView(p1(var8.value, var7))
+	local var5 = 1
+	local var6 = dataSourceMethodsModule.length(p1)
+	local var7 = var6
+	while var5 <= var7 do
+		var2 = (var5 + var7) // 2
+		var3 = dataSourceMethodsModule.get(p1, var2)
+		assert(var3 ~= nil, "get() returned nil, meaning the length is inaccurate")
+		var4 = compareInView(p2(var3.value, var2))
 		
-		if var9 == "after" then
-			var6 = var7 - 1
-		elseif var9 == "before" then
-			var4 = var7 + 1
-		elseif var9 ~= "inside" then
-			exhaustiveMatchModule(var9)
+		if var4 == "after" then
+			var7 = var2 - 1
+		elseif var4 == "before" then
+			var5 = var2 + 1
+		elseif var4 ~= "inside" then
+			exhaustiveMatchModule(var4)
 			continue
 		end
-		local var10 = var7
-		local var11 = var8
-		while var10 > 1 do
-			local var12 = var11.before()
+		local var8 = var2
+		local var9 = var3
+		while var8 > 1 do
+			local var10 = var9.before()
 			
-			if var12 == nil or compareInView(p1(var12.value, var10 - 1)) ~= "inside" then break end
-			var10 -= 1
-			var11 = var12
+			if var10 == nil or compareInView(p2(var10.value, var8 - 1)) ~= "inside" then break end
+			var8 -= 1
+			var9 = var10
 		end
-		local var13 = var7
-		local var14 = var8
-		while var13 < var5 do
-			local var15 = var14.after()
+		local var11 = var2
+		local var12 = var3
+		while var11 < var6 do
+			local var13 = var12.after()
 			
-			if var15 == nil or compareInView(p1(var15.value, var13 + 1)) ~= "inside" then break end
-			var13 += 1
-			var14 = var15
+			if var13 == nil or compareInView(p2(var13.value, var11 + 1)) ~= "inside" then break end
+			var11 += 1
+			var12 = var13
 		end
-		return Vector3.new(var10, var13)
+		return Vector3.new(var8, var11)
 	end
 	return Vector3.new(0, 0, 0)
 end

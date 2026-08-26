@@ -3,67 +3,67 @@ local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
 local extreme = Enum.ThrottlingPriority.Extreme
 local applicationJson = Enum.HttpContentType.ApplicationJson
 
-return function(p0)
+return function(p1)
 	-- upvalues: httpService (ref), applicationJson (ref), extreme (ref), promiseModule (ref)
-	local function doHttpPost(p1, p2)
-		-- upvalues: httpService (copy), applicationJson (copy), extreme (copy), p0 (ref)
+	local function doHttpPost(p2, p3)
+		-- upvalues: httpService (copy), applicationJson (copy), extreme (copy), p1 (ref)
 		local postBody = nil
-		assert(p2.postBody, "Expected a postBody to be specified with this request")
+		assert(p3.postBody, "Expected a postBody to be specified with this request")
 		
-		if type(p2.postBody) == "table" then
-			postBody = httpService:JSONEncode(p2.postBody)
-		elseif type(p2.postBody) == "string" then
-			postBody = p2.postBody
+		if type(p3.postBody) == "table" then
+			postBody = httpService:JSONEncode(p3.postBody)
+		elseif type(p3.postBody) == "string" then
+			postBody = p3.postBody
 		else
 			error("Expected postBody to be a string or table")
 		end
-		if not p2.contentType then
-			p2.contentType = applicationJson
+		if not p3.contentType then
+			p3.contentType = applicationJson
 		end
-		if not p2.throttlingPriority then
-			p2.throttlingPriority = extreme
+		if not p3.throttlingPriority then
+			p3.throttlingPriority = extreme
 		end
 		return function()
-			-- upvalues: p0 (copy), p1 (ref), postBody (write), p2 (ref)
-			return p0:PostAsyncFullUrl(p1, postBody, p2.throttlingPriority, p2.contentType)
+			-- upvalues: p1 (copy), p2 (ref), postBody (write), p3 (ref)
+			return p1:PostAsyncFullUrl(p2, postBody, p3.throttlingPriority, p3.contentType)
 		end
 	end
 	
-	local function _(p3)
-		-- upvalues: p0 (ref), extreme (copy)
+	local function _(p2)
+		-- upvalues: p1 (ref), extreme (copy)
 		return function()
-			-- upvalues: p0 (copy), p3 (ref), extreme (copy)
-			return p0:GetAsyncFullUrl(p3, extreme)
+			-- upvalues: p1 (copy), p2 (ref), extreme (copy)
+			return p1:GetAsyncFullUrl(p2, extreme)
 		end
 	end
 	
-	return function(p4, p5, p6)
-		-- upvalues: doHttpPost (ref), p0 (ref), extreme (copy), promiseModule (copy), httpService (copy)
-		assert(type(p4) == "string", "Expected url to be a string")
-		assert(type(p5) == "string", "Expected requestMethod to be a string")
-		assert(not p6 or type(p6) == "table", "Expected options to be a table")
-		p5 = string.upper(p5)
-		local var3 = nil
+	return function(p2, p3, p4)
+		-- upvalues: doHttpPost (ref), p1 (ref), extreme (copy), promiseModule (copy), httpService (copy)
+		assert(type(p2) == "string", "Expected url to be a string")
+		assert(type(p3) == "string", "Expected requestMethod to be a string")
+		assert(not p4 or type(p4) == "table", "Expected options to be a table")
+		p3 = string.upper(p3)
+		local var1 = nil
 		
-		if p5 == "POST" then
-			var3 = doHttpPost(p4, p6)
-		elseif p5 == "GET" then
-			var3 = function()
-				-- upvalues: p0 (copy), p4 (ref), extreme (copy)
-				return p0:GetAsyncFullUrl(p4, extreme)
+		if p3 == "POST" then
+			var1 = doHttpPost(p2, p4)
+		elseif p3 == "GET" then
+			var1 = function()
+				-- upvalues: p1 (copy), p2 (ref), extreme (copy)
+				return p1:GetAsyncFullUrl(p2, extreme)
 			end
 		else
-			error(string.format("Unsupported requestMethod : %s", p5 or "nil"))
+			error(string.format("Unsupported requestMethod : %s", p3 or "nil"))
 		end
-		return promiseModule.new(function(p7, p8)
-			-- upvalues: var3 (write), httpService (copy)
-			if var3 then
+		return promiseModule.new(function(p5, p6)
+			-- upvalues: var1 (write), httpService (copy)
+			if var1 then
 				spawn(function()
-					-- upvalues: var3 (copy), httpService (copy), p7 (ref), p8 (ref)
-					local ok, status = pcall(var3)
+					-- upvalues: var1 (copy), httpService (copy), p5 (ref), p6 (ref)
+					local ok, status = pcall(var1)
 					
 					if not ok then
-						p8(status)
+						p6(status)
 						
 						return
 					end
@@ -73,16 +73,16 @@ return function(p0)
 					end)
 					
 					if ok_1 then
-						p7({ responseBody = status_1 })
+						p5({ responseBody = status_1 })
 						
 						return
 					end
-					p8(status_1)
+					p6(status_1)
 				end)
 				
 				return
 			end
-			p8()
+			p6()
 		end)
 	end
 end

@@ -12,34 +12,34 @@ return {
 	componentType = "modalSelector",
 	fieldLabel = "MethodOfAbuse",
 	componentName = "MethodOfAbuse",
-	getIsVisible = function(p0)
+	getIsVisible = function(p1)
 		-- upvalues: tnSIXPWrapperModule (ref)
-		return p0.isVoiceEnabled or tnSIXPWrapperModule.getReportAnythingAvatarEnabled()
+		return p1.isVoiceEnabled or tnSIXPWrapperModule.getReportAnythingAvatarEnabled()
 	end,
 	getMenuItems = function(p1)
 		-- upvalues: cryoModule (ref), default (ref), getAvailableMethodsOfAbuseModule (ref), tnSIXPWrapperModule (ref)
 		return getAvailableMethodsOfAbuseModule(p1.isVoiceEnabled and not cryoModule.isEmpty(default:getRecentUsersInteractionData()), tnSIXPWrapperModule.getReportAnythingAvatarEnabled())
 	end,
-	getSelectedValue = function(p2)
-		return p2.methodOfAbuse
+	getSelectedValue = function(p1)
+		return p1.methodOfAbuse
 	end,
-	onUpdateSelectedOption = function(p3, p4, p5, p6)
+	onUpdateSelectedOption = function(p1, p2, p3, p4)
 		-- upvalues: constantsModule (ref)
-		p5({
+		p3({
 			type = constantsModule.PlayerMenuActions.UpdateMethodOfAbuse,
-			methodOfAbuse = p3.identifier
+			methodOfAbuse = p1.identifier
 		})
 		
-		if p3.identifier ~= p4.methodOfAbuse then
-			p6.reportAnythingDispatch({
+		if p1.identifier ~= p2.methodOfAbuse then
+			p4.reportAnythingDispatch({
 				type = constantsModule.ReportAnythingActions.ClearAnnotationFlowProperties
 			})
-			p6.analyticsDispatch({
+			p4.analyticsDispatch({
 				type = constantsModule.AnalyticsActions.IncrementTypeofabuseChanged
 			})
-			p6.analyticsDispatch({
+			p4.analyticsDispatch({
 				type = constantsModule.AnalyticsActions.SetTypeOfAbuseSelection,
-				selection = p3.identifier
+				selection = p1.identifier
 			})
 		end
 	end

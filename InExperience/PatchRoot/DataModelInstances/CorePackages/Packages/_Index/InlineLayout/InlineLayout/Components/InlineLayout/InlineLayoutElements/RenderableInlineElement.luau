@@ -8,12 +8,12 @@ local t = {}
 t.__index = t
 t.__type = inlineElementTypeModule
 
-function t.new(p0, p1, p2)
+function t.new(p1, p2, p3)
 	-- upvalues: t (ref), dashModule (ref)
 	local tbl = setmetatable({}, t)
-	tbl.props = p1
-	tbl.mapProps = p2 or dashModule.identity
-	tbl.Element = p0
+	tbl.props = p2
+	tbl.mapProps = p3 or dashModule.identity
+	tbl.Element = p1
 	
 	return tbl
 end
@@ -27,9 +27,9 @@ function t:split()
 	return t.new(self.Element, join(self.props))
 end
 
-function t:render(p3, p4)
+function t:render(p1, p2)
 	-- upvalues: reactModule (ref), dashModule (ref)
-	return reactModule.createElement(self.Element, self.mapProps(dashModule.assign(self.props, { id = p3, key = tostring(p4), LayoutOrder = p4 })))
+	return reactModule.createElement(self.Element, self.mapProps(dashModule.assign(self.props, { id = p1, key = tostring(p2), LayoutOrder = p2 })))
 end
 
 return t

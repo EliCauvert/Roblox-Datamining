@@ -33,10 +33,10 @@ local t_1 = {
 	throttlingPercentage = game:DefineFastInt("EditProfileThrottleHundredthsPercent", 10000)
 }
 
-local function sendAnalyticsEvent(p0, p1)
+local function sendAnalyticsEvent(p1, p2)
 	-- upvalues: cryoModule (ref), telemetryService (ref), t_1 (ref)
 	telemetryService:LogEvent(t_1, {
-		customFields = cryoModule.Dictionary.join(p0 or {}, p1),
+		customFields = cryoModule.Dictionary.join(p1 or {}, p2),
 		standardizedFields = { "addSessionInfo" }
 	})
 end
@@ -51,48 +51,48 @@ return {
 		-- upvalues: sendAnalyticsEvent (ref), t (ref)
 		sendAnalyticsEvent({ btn = "openEditDisplayName" }, { sub_event_type = t.DisplayNameModalOpened })
 	end,
-	sendDisplayNameModalLoaded = function(p2)
+	sendDisplayNameModalLoaded = function(p1)
 		-- upvalues: sendAnalyticsEvent (ref), t (ref)
-		sendAnalyticsEvent({ page = "EditDisplayNameModal", statValue = p2 }, {
+		sendAnalyticsEvent({ page = "EditDisplayNameModal", statValue = p1 }, {
 			sub_event_type = t.DisplayNameModalLoaded,
-			statValue = p2
+			statValue = p1
 		})
 	end,
-	sendDisplayNameSaved = function(p3, p4)
+	sendDisplayNameSaved = function(p1, p2)
 		-- upvalues: sendAnalyticsEvent (ref), t (ref)
 		sendAnalyticsEvent({
 			btn = "saveDisplayName",
-			displayName = p3,
-			statValue = p4
+			displayName = p1,
+			statValue = p2
 		}, {
 			sub_event_type = t.DisplayNameSaved,
-			displayName = p3,
-			statValue = p4
+			displayName = p1,
+			statValue = p2
 		})
 	end,
-	sendDisplayNameTooShort = function(p5)
+	sendDisplayNameTooShort = function(p1)
 		-- upvalues: sendAnalyticsEvent (ref), t (ref)
-		sendAnalyticsEvent({ displayName = p5 }, { sub_event_type = t.DisplayNameTooShort, displayName = p5 })
+		sendAnalyticsEvent({ displayName = p1 }, { sub_event_type = t.DisplayNameTooShort, displayName = p1 })
 	end,
-	sendFilteredDisplayName = function(p6)
+	sendFilteredDisplayName = function(p1)
 		-- upvalues: sendAnalyticsEvent (ref), t (ref)
-		sendAnalyticsEvent({ displayName = p6 }, { sub_event_type = t.FilteredDisplayName, displayName = p6 })
+		sendAnalyticsEvent({ displayName = p1 }, { sub_event_type = t.FilteredDisplayName, displayName = p1 })
 	end,
 	sendEditUsernameOpened = function()
 		-- upvalues: sendAnalyticsEvent (ref), t (ref)
 		sendAnalyticsEvent({ btn = "openEditUsername" }, { sub_event_type = t.EditUsernameOpened })
 	end,
-	sendUsernameSaved = function(p7)
+	sendUsernameSaved = function(p1)
 		-- upvalues: sendAnalyticsEvent (ref), t (ref)
-		sendAnalyticsEvent({ statValue = p7 }, { sub_event_type = t.UsernameSaved, statValue = p7 })
+		sendAnalyticsEvent({ statValue = p1 }, { sub_event_type = t.UsernameSaved, statValue = p1 })
 	end,
 	sendOpenAvatarMarketplace = function()
 		-- upvalues: sendAnalyticsEvent (ref), t (ref)
 		sendAnalyticsEvent({ btn = "openAvatarMarketplace" }, { sub_event_type = t.OpenAvatarMarketplace })
 	end,
-	sendError = function(p8)
+	sendError = function(p1)
 		-- upvalues: constantsModule (ref), sendAnalyticsEvent (ref), t (ref)
-		if p8 == constantsModule.DescriptionErrorCodes.PinLocked then
+		if p1 == constantsModule.DescriptionErrorCodes.PinLocked then
 			sendAnalyticsEvent(nil, { sub_event_type = t.DescriptionPINBlocked })
 		end
 	end

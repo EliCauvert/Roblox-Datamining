@@ -3,58 +3,58 @@ local httpService = game:GetService("HttpService")
 local t = {}
 t.__index = t
 
-function t:observeEvent(p0, p1)
+function t:observeEvent(p1, p2)
 	-- upvalues: signal (ref)
-	assert(type(p0) == "string", "Expected namespace to be a string")
-	assert(type(p1) == "function", "Expected callback to be a function")
-	local var2 = self.namespaceTable[p0]
+	assert(type(p1) == "string", "Expected namespace to be a string")
+	assert(type(p2) == "function", "Expected callback to be a function")
+	local var1 = self.namespaceTable[p1]
 	
-	if var2 == nil then
-		var2 = signal.new()
-		self.namespaceTable[p0] = var2
+	if var1 == nil then
+		var1 = signal.new()
+		self.namespaceTable[p1] = var1
 	end
-	return var2:connect(p1)
+	return var1:connect(p2)
 end
 
-function t.new(p2)
+function t.new(p1)
 	-- upvalues: t (ref), httpService (ref)
 	local t_1 = { namespaceTable = {} }
 	setmetatable(t_1, t)
 	t_1.connections = {
-		p2.RobloxEventReceived:Connect(function(p3)
+		p1.RobloxEventReceived:Connect(function(p2)
 			-- upvalues: t_1 (ref), httpService (copy)
-			local namespace = t_1.namespaceTable[p3.namespace]
+			local namespace = t_1.namespaceTable[p2.namespace]
 			
 			if namespace == nil then return end
 			local t
 			local _ = nil
 			
-			if p3.detail and p3.detail ~= "" then
+			if p2.detail and p2.detail ~= "" then
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p3 (ref)
-					return httpService:JSONDecode(p3.detail)
+					-- upvalues: httpService (copy), p2 (ref)
+					return httpService:JSONDecode(p2.detail)
 				end)
-				t = if ok then status else p3.detail
+				t = if ok then status else p2.detail
 			else
 				t = {}
 			end
-			namespace:fire(t, p3.detailType)
+			namespace:fire(t, p2.detailType)
 		end),
-		p2.RobloxConnectionChanged:Connect(function(p4, p5, p6, p7)
+		p1.RobloxConnectionChanged:Connect(function(p2, p3, p4, p5)
 			-- upvalues: t_1 (ref), httpService (copy)
-			local var5 = t_1.namespaceTable[p4]
+			local var1 = t_1.namespaceTable[p2]
 			
-			if var5 == nil then return end
-			local var6 = nil
+			if var1 == nil then return end
+			local var2 = nil
 			
-			if p7 then
+			if p5 then
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p7 (ref)
-					return httpService:JSONDecode(p7)
+					-- upvalues: httpService (copy), p5 (ref)
+					return httpService:JSONDecode(p5)
 				end)
-				var6 = if ok then status else {}
+				var2 = if ok then status else {}
 			end
-			var5:fire(p5, p6, var6)
+			var1:fire(p3, p4, var2)
 		end)
 	}
 	

@@ -4,10 +4,10 @@ local useStoreModule = require(momentsCommon.Hooks.useStore)
 
 return function()
 	-- upvalues: useStoreModule (ref), reactModule (ref)
-	local var3 = useStoreModule()
+	local var1 = useStoreModule()
 	
 	return reactModule.useCallback(function(...)
-		-- upvalues: var3 (ref)
-		return var3:dispatch(...)
-	end, { var3 })
+		-- upvalues: var1 (ref)
+		return var1:dispatch(...)
+	end, { var1 })
 end

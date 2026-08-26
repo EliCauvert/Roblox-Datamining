@@ -16,48 +16,48 @@ local momentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local reactionsSheetModule = require(moments.Components.ReactionsSheet)
 local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
 
-local function _(p0)
-	return if p0 == nil then "" elseif p0 >= 1000000 then string.format("%.1fM", p0 / 1000000) elseif p0 >= 1000 then string.format("%.1fK", p0 / 1000) else tostring(p0)
+local function _(p1)
+	return if p1 == nil then "" elseif p1 >= 1000000 then string.format("%.1fM", p1 / 1000000) elseif p1 >= 1000 then string.format("%.1fK", p1 / 1000) else tostring(p1)
 end
 
 return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), momentContextModule (ref), reactModule (ref), useSignalBinding (ref), useSignalState (ref), getColorStyleWithTransparencyModule (ref), reaction (ref), reactionSize (ref), view (ref), stateLayerAffordance (ref), text (ref), reactionsSheetModule (ref)
-	local var8 = useTokens()
-	local var9 = momentContextModule.useMoment()
-	local var10, var11 = reactModule.useState(false)
-	local var12 = useSignalBinding(var9.store.getReactionCount)
-	local var13 = useSignalState(var9.store.getIndividualReactionCounts)
-	local animationRatio = var9.animationRatio
-	local var14 = animationRatio:map(function(p2)
-		-- upvalues: getColorStyleWithTransparencyModule (copy), var8 (ref)
-		return getColorStyleWithTransparencyModule(var8.Color.Content.Emphasis, p2)
+	local var1 = useTokens()
+	local var2 = momentContextModule.useMoment()
+	local var3, var4 = reactModule.useState(false)
+	local var5 = useSignalBinding(var2.store.getReactionCount)
+	local var6 = useSignalState(var2.store.getIndividualReactionCounts)
+	local animationRatio = var2.animationRatio
+	local var7 = animationRatio:map(function(p2)
+		-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
+		return getColorStyleWithTransparencyModule(var1.Color.Content.Emphasis, p2)
 	end)
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref)
-		var11(true)
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref)
+		var4(true)
 	end, {})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref)
-		var11(false)
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref)
+		var4(false)
 	end, {})
 	local t = {}
 	
-	for i = 1, math.min(3, #var13) do
+	for i = 1, math.min(3, #var6) do
 		t["Reaction" .. i] = reactModule.createElement(reaction, {
 			LayoutOrder = i,
-			reactionType = var13[i].reaction,
+			reactionType = var6[i].reaction,
 			size = reactionSize.Small,
-			imageStyle = var14
+			imageStyle = var7
 		})
 	end
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		ReactionsLine = reactModule.createElement(view, {
 			tag = "row align-x-left align-y-center gap-small auto-xy",
 			LayoutOrder = p1.LayoutOrder,
-			onActivated = var15,
+			onActivated = var8,
 			stateLayer = { affordance = stateLayerAffordance.None },
-			Visible = var12:map(function(p3)
-				return p3 ~= nil
+			Visible = var5:map(function(p2)
+				return p2 ~= nil
 			end)
 		}, {
 			Facepile = reactModule.createElement(view, {
@@ -67,15 +67,15 @@ return reactModule.memo(function(p1)
 			Count = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium text-align-x-left text-align-y-center content-default",
-				Text = var12:map(function(p4)
-					return `{if p4 == nil then "" elseif p4 >= 1000000 then string.format("%.1fM", p4 / 1000000) elseif p4 >= 1000 then string.format("%.1fK", p4 / 1000) else tostring(p4)} reactions`
+				Text = var5:map(function(p2)
+					return `{if p2 == nil then "" elseif p2 >= 1000000 then string.format("%.1fM", p2 / 1000000) elseif p2 >= 1000 then string.format("%.1fK", p2 / 1000) else tostring(p2)} reactions`
 				end),
-				textStyle = animationRatio:map(function(p5)
-					-- upvalues: getColorStyleWithTransparencyModule (copy), var8 (ref)
-					return getColorStyleWithTransparencyModule(var8.Color.Content.Default, p5)
+				textStyle = animationRatio:map(function(p3)
+					-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
+					return getColorStyleWithTransparencyModule(var1.Color.Content.Default, p3)
 				end)
 			})
 		}),
-		Modal = if var10 then reactModule.createElement(reactionsSheetModule, { reactionCounts = var13, onClose = var16 }) else nil
+		Modal = if var3 then reactModule.createElement(reactionsSheetModule, { reactionCounts = var6, onClose = var9 }) else nil
 	})
 end)

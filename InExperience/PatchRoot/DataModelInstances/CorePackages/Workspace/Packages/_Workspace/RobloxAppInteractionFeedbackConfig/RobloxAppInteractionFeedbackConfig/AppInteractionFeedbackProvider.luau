@@ -12,19 +12,19 @@ local useUserExperiment = roactAppExperimentModule.useUserExperiment
 local mobileSoundAndHapticsEnabledIXP = game:DefineFastFlag("MobileSoundAndHapticsEnabledIXP", false)
 local mobileSoundAndHapticsIXPBypass = game:DefineFastFlag("MobileSoundAndHapticsIXPBypass", false)
 
-return function(p0)
+return function(p1)
 	-- upvalues: responsiveModule (ref), mobileSoundAndHapticsEnabledIXP (ref), useUserExperiment (ref), appUserLayers (ref), reactModule (ref), spatialConfigModule (ref), mobileSoundAndHapticsIXPBypass (ref), touchConfigModule (ref), directionalConfigModule (ref), pointerConfigModule (ref), interactionFeedbackContext (ref)
-	local var9 = responsiveModule.useLastInput()
-	local var10 = responsiveModule.useIsSpatial()
-	local var11 = if mobileSoundAndHapticsEnabledIXP then useUserExperiment({ appUserLayers.MobileSoundAndHapticsLayer }, function(p1)
+	local var1 = responsiveModule.useLastInput()
+	local var2 = responsiveModule.useIsSpatial()
+	local var3 = if mobileSoundAndHapticsEnabledIXP then useUserExperiment({ appUserLayers.MobileSoundAndHapticsLayer }, function(p2)
 		-- upvalues: appUserLayers (copy)
-		return (p1[appUserLayers.MobileSoundAndHapticsLayer] or {}).mobileSoundAndHapticsEnabled
+		return (p2[appUserLayers.MobileSoundAndHapticsLayer] or {}).mobileSoundAndHapticsEnabled
 	end) else nil
 	
 	return reactModule.createElement(interactionFeedbackContext.Provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: var10 (ref), spatialConfigModule (copy), var9 (ref), responsiveModule (copy), mobileSoundAndHapticsIXPBypass (copy), mobileSoundAndHapticsEnabledIXP (copy), var11 (write), touchConfigModule (copy), directionalConfigModule (copy), pointerConfigModule (copy)
-			return if var10 then spatialConfigModule elseif var9 == responsiveModule.Input.Touch then if mobileSoundAndHapticsIXPBypass or mobileSoundAndHapticsEnabledIXP and var11 then touchConfigModule else {} elseif var9 == responsiveModule.Input.Directional then directionalConfigModule elseif var9 == responsiveModule.Input.Pointer then pointerConfigModule else {}
-		end, { var10, var9 })
-	}, p0.children)
+			-- upvalues: var2 (ref), spatialConfigModule (copy), var1 (ref), responsiveModule (copy), mobileSoundAndHapticsIXPBypass (copy), mobileSoundAndHapticsEnabledIXP (copy), var3 (write), touchConfigModule (copy), directionalConfigModule (copy), pointerConfigModule (copy)
+			return if var2 then spatialConfigModule elseif var1 == responsiveModule.Input.Touch then if mobileSoundAndHapticsIXPBypass or mobileSoundAndHapticsEnabledIXP and var3 then touchConfigModule else {} elseif var1 == responsiveModule.Input.Directional then directionalConfigModule elseif var1 == responsiveModule.Input.Pointer then pointerConfigModule else {}
+		end, { var2, var1 })
+	}, p1.children)
 end

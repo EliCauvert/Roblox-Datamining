@@ -15,18 +15,18 @@ local challengeEventConstantsModule = require(genericChallenges.Utils.ChallengeE
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 game:DefineFastInt("DeviceIntegrityNativeTimeoutMilliseconds", 450)
 
-function constructAccountServiceParams(p0)
+function constructAccountServiceParams(p1)
 	-- upvalues: httpService (ref)
-	return httpService:JSONEncode({ requestHash = p0 })
+	return httpService:JSONEncode({ requestHash = p1 })
 end
 
 return function(p1)
 	-- upvalues: useRoactService (ref), appLogging (ref), useEffect (ref), httpService (ref), deviceIntegrityChallengeEventModule (ref), challengeEventConstantsModule (ref), getFFlagEnableNewDeviceIntegrityFailureHandlingModule (ref), useSelector (ref), getFFlagEnableTransparentDeviceIntegrityChallengeSpinnerModule (ref), reactModule (ref), loading (ref), iconSize (ref)
-	local var8 = useRoactService(appLogging)
+	local var1 = useRoactService(appLogging)
 	useEffect(function()
-		-- upvalues: httpService (copy), p1 (ref), var8 (ref), deviceIntegrityChallengeEventModule (copy), challengeEventConstantsModule (copy), getFFlagEnableNewDeviceIntegrityFailureHandlingModule (copy)
+		-- upvalues: httpService (copy), p1 (ref), var1 (ref), deviceIntegrityChallengeEventModule (copy), challengeEventConstantsModule (copy), getFFlagEnableNewDeviceIntegrityFailureHandlingModule (copy)
 		local challengeMetadata = httpService:JSONDecode(p1.challengeMetadata)
-		var8:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
+		var1:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInitialized,
 			challengeId = p1.challengeId,
 			integrityType = challengeMetadata.integrityType
@@ -34,17 +34,17 @@ return function(p1)
 		local accountService = p1.accountService
 		
 		if accountService and accountService:DeviceIntegrityAvailable() then
-			local var13
+			local var2
 			local _ = nil
 			
 			if getFFlagEnableNewDeviceIntegrityFailureHandlingModule() then
-				local var12 = accountService:GetDeviceIntegrityTokenYield(httpService:JSONEncode({
+				local var3 = accountService:GetDeviceIntegrityTokenYield(httpService:JSONEncode({
 					requestHash = challengeMetadata.requestHash,
 					timeoutMillis = game:GetFastInt("DeviceIntegrityNativeTimeoutMilliseconds")
 				}))
 				
-				if var12 == nil or var12 == "" then
-					var8:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
+				if var3 == nil or var3 == "" then
+					var1:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
 						context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInvalidated,
 						challengeId = p1.challengeId,
 						integrityType = challengeMetadata.integrityType
@@ -56,24 +56,24 @@ return function(p1)
 					
 					return
 				end
-				var13 = httpService:JSONDecode(var12)
+				var2 = httpService:JSONDecode(var3)
 			else
-				var13 = httpService:JSONDecode(accountService:GetDeviceIntegrityTokenYield(constructAccountServiceParams(challengeMetadata.requestHash)))
+				var2 = httpService:JSONDecode(accountService:GetDeviceIntegrityTokenYield(constructAccountServiceParams(challengeMetadata.requestHash)))
 			end
 			p1.onChallengeCompleted(httpService:JSONEncode({
-				redemptionToken = var13.token,
+				redemptionToken = var2.token,
 				integrityType = challengeMetadata.integrityType
 			}))
-			var8:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
+			var1:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
 				context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeCompleted,
 				challengeId = p1.challengeId,
 				integrityType = challengeMetadata.integrityType,
-				result = var13.result
+				result = var2.result
 			})
 			
 			return
 		elseif getFFlagEnableNewDeviceIntegrityFailureHandlingModule() then
-			var8:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
+			var1:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
 				context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInvalidated,
 				challengeId = p1.challengeId,
 				integrityType = challengeMetadata.integrityType
@@ -86,16 +86,16 @@ return function(p1)
 			return
 		end
 		p1.onChallengeFailed()
-		var8:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
+		var1:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInvalidated,
 			challengeId = p1.challengeId,
 			integrityType = challengeMetadata.integrityType
 		})
 	end, {})
-	local var9 = useSelector(function(p2)
+	local var2 = useSelector(function(p2)
 		return { screenSize = p2.ScreenSize }
 	end)
-	local uDim2 = UDim2.fromOffset(var9.screenSize.X, var9.screenSize.Y)
+	local uDim2 = UDim2.fromOffset(var2.screenSize.X, var2.screenSize.Y)
 	
 	return if getFFlagEnableTransparentDeviceIntegrityChallengeSpinnerModule() then reactModule.createElement("Frame", { BackgroundTransparency = 1, Active = true, Size = uDim2 }, {
 		Spinner = reactModule.createElement(loading, {

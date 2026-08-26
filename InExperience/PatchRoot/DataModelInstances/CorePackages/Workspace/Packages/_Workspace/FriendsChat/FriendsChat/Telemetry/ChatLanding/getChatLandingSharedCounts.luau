@@ -3,23 +3,23 @@ local conversationChannelsModule = require(parent.AppChat.ConversationChannels)
 local _ = require(parent.AppChat.GetConversationListStore)
 local isUserPendingModule = require(parent.AppChat.isUserPending)
 
-return function(p0)
+return function(p1)
 	-- upvalues: isUserPendingModule (ref), conversationChannelsModule (ref)
-	p0 = p0 or {}
-	local var3 = 0
-	local var4 = 0
+	p1 = p1 or {}
+	local var1 = 0
+	local var2 = 0
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		if isUserPendingModule(v) then
-			var3 += 1
+			var1 += 1
 		end
 		if v.moderationType == conversationChannelsModule.ModerationType.TrustedComms then
-			var4 += 1
+			var2 += 1
 		end
 	end
 	return {
-		chatLandingListCount = #p0,
-		pendingConversationCount = var3,
-		unfilteredConversationCount = var4
+		chatLandingListCount = #p1,
+		pendingConversationCount = var1,
+		unfilteredConversationCount = var2
 	}
 end

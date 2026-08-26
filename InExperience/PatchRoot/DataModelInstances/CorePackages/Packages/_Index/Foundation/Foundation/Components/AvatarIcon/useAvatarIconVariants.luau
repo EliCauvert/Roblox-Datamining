@@ -6,29 +6,29 @@ local avatarIconSizeModule = require(foundation.Enums.AvatarIconSize)
 local _ = require(foundation.Components.Types)
 local indexBindableModule = require(foundation.Utility.indexBindable)
 
-local function composeStroke(p0, p1)
+local function composeStroke(p1, p2)
 	-- upvalues: indexBindableModule (ref)
-	return if p0 and p1 then {
+	return if p1 and p2 then {
 		container = {
 			stroke = {
-				Color = indexBindableModule(p0, "Color3"),
-				Transparency = indexBindableModule(p0, "Transparency"),
-				Thickness = p1
+				Color = indexBindableModule(p1, "Color3"),
+				Transparency = indexBindableModule(p1, "Transparency"),
+				Thickness = p2
 			}
 		}
 	} else {}
 end
 
-local function variantsFactory(p2)
+local function variantsFactory(p1)
 	-- upvalues: avatarIconSizeModule (ref)
 	return {
 		strokes = {
 			[true] = {
-				[avatarIconSizeModule.XSmall] = p2.Stroke.Standard,
-				[avatarIconSizeModule.Small] = p2.Stroke.Standard,
-				[avatarIconSizeModule.Medium] = p2.Stroke.Thick,
-				[avatarIconSizeModule.Large] = p2.Stroke.Thicker,
-				[avatarIconSizeModule.XLarge] = p2.Stroke.Thicker
+				[avatarIconSizeModule.XSmall] = p1.Stroke.Standard,
+				[avatarIconSizeModule.Small] = p1.Stroke.Standard,
+				[avatarIconSizeModule.Medium] = p1.Stroke.Thick,
+				[avatarIconSizeModule.Large] = p1.Stroke.Thicker,
+				[avatarIconSizeModule.XLarge] = p1.Stroke.Thicker
 			},
 			[false] = {}
 		},
@@ -37,18 +37,18 @@ local function variantsFactory(p2)
 			avatar = { tag = "size-full radius-circle" }
 		},
 		sizes = {
-			[avatarIconSizeModule.XSmall] = { container = { size = p2.Size.Size_300 } },
-			[avatarIconSizeModule.Small] = { container = { size = p2.Size.Size_400 } },
-			[avatarIconSizeModule.Medium] = { container = { size = p2.Size.Size_500 } },
-			[avatarIconSizeModule.Large] = { container = { size = p2.Size.Size_600 } },
-			[avatarIconSizeModule.XLarge] = { container = { size = p2.Size.Size_700 } }
+			[avatarIconSizeModule.XSmall] = { container = { size = p1.Size.Size_300 } },
+			[avatarIconSizeModule.Small] = { container = { size = p1.Size.Size_400 } },
+			[avatarIconSizeModule.Medium] = { container = { size = p1.Size.Size_500 } },
+			[avatarIconSizeModule.Large] = { container = { size = p1.Size.Size_600 } },
+			[avatarIconSizeModule.XLarge] = { container = { size = p1.Size.Size_700 } }
 		}
 	}
 end
 
-return function(p3, p4, p5)
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), composeStroke (ref)
-	local avatarIcon = variantsContextModule.useVariants("AvatarIcon", variantsFactory, p3)
+	local avatarIcon = variantsContextModule.useVariants("AvatarIcon", variantsFactory, p1)
 	
-	return composeStyleVariantModule(avatarIcon.common, avatarIcon.sizes[p4], composeStroke(p5, avatarIcon.strokes[p5 ~= nil][p4]))
+	return composeStyleVariantModule(avatarIcon.common, avatarIcon.sizes[p2], composeStroke(p3, avatarIcon.strokes[p3 ~= nil][p2]))
 end

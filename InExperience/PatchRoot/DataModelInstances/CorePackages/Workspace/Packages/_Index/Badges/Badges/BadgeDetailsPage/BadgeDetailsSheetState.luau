@@ -1,12 +1,12 @@
-﻿local var0 = false
+﻿local var1 = false
 
 return {
 	getIsBadgeDetailsSheetOpen = function()
-		-- upvalues: var0 (write)
-		return var0
+		-- upvalues: var1 (write)
+		return var1
 	end,
 	setIsBadgeDetailsSheetOpen = function(value)
-		-- upvalues: var0 (write)
-		var0 = value
+		-- upvalues: var1 (write)
+		var1 = value
 	end
 }

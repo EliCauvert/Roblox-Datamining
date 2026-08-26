@@ -2,37 +2,37 @@
 local _ = require(viewRecycler.Core.DataSource)
 local _ = require(viewRecycler.Core.Types)
 
-return function(p0, p1)
-	local var1 = p0
-	local var2 = p1
+return function(p1, p2)
+	local var1 = p1
+	local var2 = p2
 	local t = {}
-	local var4 = true
+	local var3 = true
 	
 	return {
 		setPredicate = function(value)
-			-- upvalues: var2 (write), var4 (write)
+			-- upvalues: var2 (write), var3 (write)
 			if var2 == value then
 				return false
 			end
 			var2 = value
-			var4 = true
+			var3 = true
 			
 			return true
 		end,
 		setDataSource = function(value)
-			-- upvalues: var1 (write), var4 (write)
+			-- upvalues: var1 (write), var3 (write)
 			if var1 ~= value then
 				var1 = value
-				var4 = true
+				var3 = true
 			end
 		end,
 		applyDataSourceChange = function(_)
-			-- upvalues: var4 (write)
-			var4 = true
+			-- upvalues: var3 (write)
+			var3 = true
 		end,
 		resolve = function()
-			-- upvalues: var4 (write), t (ref), var2 (write), var1 (write)
-			if var4 then
+			-- upvalues: var3 (write), t (ref), var2 (write), var1 (write)
+			if var3 then
 				table.clear(t)
 				
 				if var2 ~= nil then
@@ -42,7 +42,7 @@ return function(p0, p1)
 						end
 					end
 				end
-				var4 = false
+				var3 = false
 			end
 			return t
 		end

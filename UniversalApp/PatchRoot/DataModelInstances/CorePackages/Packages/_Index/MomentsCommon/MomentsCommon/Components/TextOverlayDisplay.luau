@@ -12,53 +12,53 @@ local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
 local getScaleModule = require(momentsCommon.Utils.getScale)
 local _ = require(momentsCommon.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useMemo (ref), getFitSizeModule (ref), getCropSizeModule (ref), getScaleModule (ref), useCallback (ref), dashModule (ref), textOverlayModule (ref), view (ref)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(nil)
-	local var10 = if p0.textOverlayEdits then p0.textOverlayEdits[1] else nil
-	local var11, var12 = useMemo(function()
-		-- upvalues: p0 (ref), getFitSizeModule (copy), getCropSizeModule (copy), getScaleModule (copy)
-		if not p0.itemResolution then
+	local var1 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(nil)
+	local var3 = if p1.textOverlayEdits then p1.textOverlayEdits[1] else nil
+	local var4, var5 = useMemo(function()
+		-- upvalues: p1 (ref), getFitSizeModule (copy), getCropSizeModule (copy), getScaleModule (copy)
+		if not p1.itemResolution then
 			return UDim2.fromScale(1, 1), 1
 		end
-		local var14 = getFitSizeModule(p0.itemSize, p0.itemResolution)
-		local var15 = getCropSizeModule(p0.itemSize, p0.itemResolution)
-		local var16 = getScaleModule(p0.itemSize, p0.itemResolution, p0.scaleType)
+		local var6 = getFitSizeModule(p1.itemSize, p1.itemResolution)
+		local var7 = getCropSizeModule(p1.itemSize, p1.itemResolution)
+		local var8 = getScaleModule(p1.itemSize, p1.itemResolution, p1.scaleType)
 		
-		if p0.scaleType == Enum.ScaleType.Fit then
-			return var14, var16
+		if p1.scaleType == Enum.ScaleType.Fit then
+			return var6, var8
 		end
-		return var15, var16
-	end, { p0.scaleType, p0.itemResolution, p0.itemSize })
-	local var13 = useCallback(function()
-		-- upvalues: var9 (ref), p0 (ref), dashModule (copy), var10 (ref)
-		if var9.current and p0.onTextOverlayDragEnd then
-			p0.onTextOverlayDragEnd({
-				dashModule.joinDeep(var10, { position = var9.current.Position })
+		return var7, var8
+	end, { p1.scaleType, p1.itemResolution, p1.itemSize })
+	local var6 = useCallback(function()
+		-- upvalues: var2 (ref), p1 (ref), dashModule (copy), var3 (ref)
+		if var2.current and p1.onTextOverlayDragEnd then
+			p1.onTextOverlayDragEnd({
+				dashModule.joinDeep(var3, { position = var2.current.Position })
 			})
 			
 			return
 		end
-	end, { p0.onTextOverlayDragEnd, var10 })
+	end, { p1.onTextOverlayDragEnd, var3 })
 	
-	return if p0.textOverlayEdits and #p0.textOverlayEdits ~= 0 then reactModule.createElement(view, {
+	return if p1.textOverlayEdits and #p1.textOverlayEdits ~= 0 then reactModule.createElement(view, {
 		tag = "anchor-center-center position-center-center",
-		ref = var8,
-		Size = var11,
-		ZIndex = p0.zIndex or 1
+		ref = var1,
+		Size = var4,
+		ZIndex = p1.zIndex or 1
 	}, {
-		TextOverlay = useCallback(function(p1)
-			-- upvalues: reactModule (copy), textOverlayModule (copy), var12 (ref), var8 (ref), var9 (ref), p0 (ref), var13 (ref)
+		TextOverlay = useCallback(function(p2)
+			-- upvalues: reactModule (copy), textOverlayModule (copy), var5 (ref), var1 (ref), var2 (ref), p1 (ref), var6 (ref)
 			return reactModule.createElement(textOverlayModule, {
-				additionalScale = var12,
-				boundingUI = var8.current,
-				containerRef = var9,
-				draggable = p0.draggable,
-				onActivated = p0.onTextOverlayActivated,
-				onDragEnd = var13,
-				textOverlayEdit = p1
+				additionalScale = var5,
+				boundingUI = var1.current,
+				containerRef = var2,
+				draggable = p1.draggable,
+				onActivated = p1.onTextOverlayActivated,
+				onDragEnd = var6,
+				textOverlayEdit = p2
 			})
-		end, { p0.draggable, p0.onTextOverlayActivated, var12 })(var10)
+		end, { p1.draggable, p1.onTextOverlayActivated, var5 })(var3)
 	}) else nil
 end

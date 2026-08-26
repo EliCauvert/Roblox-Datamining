@@ -9,7 +9,7 @@ local useNavigation = require(parent.Navigation).useNavigation
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var3 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local appPage = require(parent.RobloxAppEnums).AppPage
 local url = require(parent.Http).Url
 local UIBloxModule = require(parent.UIBlox)
@@ -34,67 +34,67 @@ local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnect
 local socialBlockingModalFocusNavSupport = game:DefineFastFlag("SocialBlockingModalFocusNavSupport", false)
 
 return function()
-	-- upvalues: useNavigation (ref), fFlagDisableBlockAndReport (ref), useLocalUserId (ref), useDispatch (ref), useScreenSize (ref), useLayerCollector (ref), reactModule (ref), useSocialBlockingModalAnalytics (ref), eventNames (ref), useShowToastOnErrorModule (ref), myUserBlockingNetworkingModule (ref), fFlagEnableAbuseReportRevampFlow (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateDown (ref), userProfilesModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), buttonType (ref), socialBlockingModalFocusNavSupport (ref), interactiveAlert (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var13 = useNavigation()
-	local navProps = var13.getParam("navProps")
+	-- upvalues: useNavigation (ref), fFlagDisableBlockAndReport (ref), useLocalUserId (ref), useDispatch (ref), useScreenSize (ref), useLayerCollector (ref), reactModule (ref), useSocialBlockingModalAnalytics (ref), eventNames (ref), useShowToastOnErrorModule (ref), myUserBlockingNetworkingModule (ref), fFlagEnableAbuseReportRevampFlow (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userProfilesModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), buttonType (ref), socialBlockingModalFocusNavSupport (ref), interactiveAlert (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+	local var2 = useNavigation()
+	local navProps = var2.getParam("navProps")
 	local userId = navProps.userId
 	local onBlockSuccess = navProps.onBlockSuccess
 	local openReportUser = navProps.openReportUser
-	local var15 = if fFlagDisableBlockAndReport then navProps.disableReportOption else nil
-	local var16 = useLocalUserId()
-	local var17 = useDispatch()
-	local var18 = useScreenSize()
-	local var19 = useLayerCollector()
+	local var3 = if fFlagDisableBlockAndReport then navProps.disableReportOption else nil
+	local var4 = useLocalUserId()
+	local var5 = useDispatch()
+	local var6 = useScreenSize()
+	local var7 = useLayerCollector()
 	
-	if not var18 and var19 and var19.absoluteSize then
-		var18 = var19.absoluteSize
+	if not var6 and var7 and var7.absoluteSize then
+		var6 = var7.absoluteSize
 	end
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref)
-		var13.pop()
-	end, { var13 })
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref)
+		var2.pop()
+	end, { var2 })
 	local fireAnalyticsEvent = useSocialBlockingModalAnalytics({ userId = userId }).fireAnalyticsEvent
 	reactModule.useEffect(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy)
 		fireAnalyticsEvent(eventNames.SocialBlockingModalSeen)
 	end, { userId })
-	local var21 = useShowToastOnErrorModule()
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), myUserBlockingNetworkingModule (copy), userId (ref), var16 (ref), onBlockSuccess (ref), var21 (ref), var20 (ref)
-		var17(myUserBlockingNetworkingModule.BlockUserById.API({ userId = userId, currentUserId = var16 })):andThen(function()
+	local var9 = useShowToastOnErrorModule()
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), myUserBlockingNetworkingModule (copy), userId (ref), var4 (ref), onBlockSuccess (ref), var9 (ref), var8 (ref)
+		var5(myUserBlockingNetworkingModule.BlockUserById.API({ userId = userId, currentUserId = var4 })):andThen(function()
 			-- upvalues: onBlockSuccess (copy)
 			if onBlockSuccess then
 				onBlockSuccess()
 			end
-		end):catch(function(p0)
-			-- upvalues: var21 (copy)
-			var21(p0)
+		end):catch(function(p1)
+			-- upvalues: var9 (copy)
+			var9(p1)
 		end)
-		var20()
+		var8()
 	end, {
-		onBlockSuccess, var20, userId, var16, var17, var21
+		onBlockSuccess, var8, userId, var4, var5, var9
 	})
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var22 (ref)
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var10 (ref)
 		fireAnalyticsEvent(eventNames.SocialBlockingModalBlockPressed)
-		var22()
-	end, { var22, userId, fireAnalyticsEvent })
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var22 (ref), openReportUser (ref), fFlagEnableAbuseReportRevampFlow (copy), var17 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), userId (ref), closeCentralOverlay (copy), appPage (copy), url (copy), fFlagSignalsNavP3Dispatch (copy), var3 (copy), navigateDown (copy)
+		var10()
+	end, { var10, userId, fireAnalyticsEvent })
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var10 (ref), openReportUser (ref), fFlagEnableAbuseReportRevampFlow (copy), var5 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), userId (ref), closeCentralOverlay (copy), appPage (copy), url (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
 		fireAnalyticsEvent(eventNames.SocialBlockingModalBlockAndReportPressed)
-		var22()
+		var10()
 		
 		if openReportUser then
 			openReportUser()
 			
 			return
 		elseif fFlagEnableAbuseReportRevampFlow then
-			var17(openDynamicAbuseReportModule({
+			var5(openDynamicAbuseReportModule({
 				abuseVector = abuseVectorModule.UserProfile,
 				targetId = userId,
 				onClose = function()
-					-- upvalues: var17 (copy), closeCentralOverlay (copy)
-					var17(closeCentralOverlay())
+					-- upvalues: var5 (copy), closeCentralOverlay (copy)
+					var5(closeCentralOverlay())
 				end
 			}))
 			
@@ -107,63 +107,63 @@ return function()
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var3.down(var3.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		var17(navigateDown(t))
+		var5(navigateDown(t))
 	end, {
-		var22,
-		var17,
+		var10,
+		var5,
 		userId,
 		fireAnalyticsEvent,
 		openReportUser
 	})
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var20 (ref)
+	local var13 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var8 (ref)
 		fireAnalyticsEvent(eventNames.SocialBlockingModalCancelPressed)
-		var20()
-	end, { var20, fireAnalyticsEvent })
-	local var26 = userProfilesModule.Hooks.useUserProfilesFetch({
+		var8()
+	end, { var8, fireAnalyticsEvent })
+	local var14 = userProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { userId },
 		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds
 	})
-	local var27 = useLocalization({
+	local var15 = useLocalization({
 		cancelBtnText = "Feature.BlockingModal.Action.Cancel",
 		blockBtnText = "Feature.BlockingModal.Action.Block",
 		blockAndReportBtnText = "Feature.BlockingModal.Action.BlockAndReport",
 		title = {
 			"Feature.BlockingModal.Heading.BlockUser",
-			DisplayName = if var26.data then userProfilesModule.Selectors.getCombinedNameFromId(var26.data, userId) else nil
+			DisplayName = if var14.data then userProfilesModule.Selectors.getCombinedNameFromId(var14.data, userId) else nil
 		},
 		bodyText = if fFlagConnectionsToFriendsRename then "Feature.BlockingModal.Message.BlockConfirmation.FriendsRename" else "Feature.BlockingModal.Message.BlockConfirmation"
 	})
-	local var28 = reactModule.useMemo(function()
-		-- upvalues: buttonType (copy), var27 (ref), var25 (ref), fFlagDisableBlockAndReport (copy), var15 (ref), var24 (ref), var23 (ref)
+	local var16 = reactModule.useMemo(function()
+		-- upvalues: buttonType (copy), var15 (ref), var13 (ref), fFlagDisableBlockAndReport (copy), var3 (ref), var12 (ref), var11 (ref)
 		local t = {}
 		table.insert(t, {
 			buttonType = buttonType.Secondary,
-			props = { text = var27.cancelBtnText, onActivated = var25 }
+			props = { text = var15.cancelBtnText, onActivated = var13 }
 		})
 		
-		if not fFlagDisableBlockAndReport or not var15 then
+		if not fFlagDisableBlockAndReport or not var3 then
 			table.insert(t, {
 				buttonType = buttonType.Alert,
-				props = { text = var27.blockAndReportBtnText, onActivated = var24 }
+				props = { text = var15.blockAndReportBtnText, onActivated = var12 }
 			})
 		end
 		table.insert(t, {
 			buttonType = buttonType.Alert,
-			props = { text = var27.blockBtnText, onActivated = var23 }
+			props = { text = var15.blockBtnText, onActivated = var11 }
 		})
 		
 		return t
 	end, {
-		var27,
-		var25,
-		var24,
 		var15,
-		var23
+		var13,
+		var12,
+		var3,
+		var11
 	})
 	
 	return if socialBlockingModalFocusNavSupport then reactModule.createElement(focusRoot, {
@@ -174,16 +174,16 @@ return function()
 		BlockingModalScreen = reactModule.createElement(interactiveAlert, {
 			richText = true,
 			isRoactGamepadEnabled = false,
-			screenSize = var18,
-			title = var27.title,
-			bodyText = var27.bodyText,
-			buttonStackInfo = { buttons = var28 or {} }
+			screenSize = var6,
+			title = var15.title,
+			bodyText = var15.bodyText,
+			buttonStackInfo = { buttons = var16 or {} }
 		})
 	}) else reactModule.createElement(interactiveAlert, {
 		richText = true,
-		screenSize = var18,
-		title = var27.title,
-		bodyText = var27.bodyText,
-		buttonStackInfo = { buttons = var28 or {} }
+		screenSize = var6,
+		title = var15.title,
+		bodyText = var15.bodyText,
+		buttonStackInfo = { buttons = var16 or {} }
 	})
 end

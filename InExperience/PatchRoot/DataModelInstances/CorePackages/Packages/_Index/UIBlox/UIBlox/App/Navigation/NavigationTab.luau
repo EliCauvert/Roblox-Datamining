@@ -30,9 +30,9 @@ return reactModule.forwardRef(function(p1, p2)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local tokens = useStyleModule().Tokens
 	local var2, var3 = reactModule.useBinding(UDim2.new())
-	local var4 = reactModule.useCallback(function(p1)
+	local var4 = reactModule.useCallback(function(p3)
 		-- upvalues: var3 (ref)
-		var3(UDim2.fromOffset(p1.AbsoluteSize.X, p1.AbsoluteSize.Y))
+		var3(UDim2.fromOffset(p3.AbsoluteSize.X, p3.AbsoluteSize.Y))
 	end, {})
 	local _ = nil
 	local value = nil

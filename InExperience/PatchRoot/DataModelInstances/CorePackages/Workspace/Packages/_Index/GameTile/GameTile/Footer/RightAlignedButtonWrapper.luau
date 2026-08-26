@@ -1,12 +1,12 @@
 ﻿local reactModule = require(script:FindFirstAncestor("GameTile").Parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
-	return if p0.Button then reactModule.createElement(reactModule.Fragment, nil, {
+	return if p1.Button then reactModule.createElement(reactModule.Fragment, nil, {
 		ListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = p0.Padding
+			Padding = p1.Padding
 		}),
 		FooterContentWrapper = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -14,8 +14,8 @@ return function(p0)
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
 			reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }),
-			Content = p0.Content
+			Content = p1.Content
 		}),
-		Button = p0.Button
-	}) else p0.Content
+		Button = p1.Button
+	}) else p1.Content
 end

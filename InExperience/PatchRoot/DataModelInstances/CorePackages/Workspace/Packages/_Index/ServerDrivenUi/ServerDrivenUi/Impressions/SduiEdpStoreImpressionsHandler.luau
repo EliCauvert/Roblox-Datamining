@@ -9,31 +9,31 @@ local sduiLogger = sduiCoreSystemModule.SduiLogger
 local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
 local sduiMarketplaceItemImpressionsHandlerModule = require(serverDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: sduiMarketplaceItemImpressionsHandlerModule (ref), findAnalyticsFieldInAncestors (ref), sduiLogger (ref), sduiErrors (ref), edpStoreAnalyticsLogger (ref), storeEnums (ref)
-	if sduiMarketplaceItemImpressionsHandlerModule(p0, p1, p2, p3, p4, p5) == 0 then return end
-	local t = { analyticsData = p3 }
-	local var5 = findAnalyticsFieldInAncestors("itemType", t)
-	local var6 = findAnalyticsFieldInAncestors("edpLocationType", t)
-	local var7 = findAnalyticsFieldInAncestors("universeId", t)
-	local var8 = if var7 ~= nil then nil else tonumber(var7)
+	if sduiMarketplaceItemImpressionsHandlerModule(p1, p2, p3, p4, p5, p6) == 0 then return end
+	local t = { analyticsData = p4 }
+	local var1 = findAnalyticsFieldInAncestors("itemType", t)
+	local var2 = findAnalyticsFieldInAncestors("edpLocationType", t)
+	local var3 = findAnalyticsFieldInAncestors("universeId", t)
+	local var4 = if var3 ~= nil then nil else tonumber(var3)
 	
-	if not var5 then
+	if not var1 then
 		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogExperienceStoreImpressions, {
 			name = "SduiEdpStoreImpressionsHandler",
 			message = "Missing itemType on collectionAnalyticsData"
-		}, p0.appPage)
+		}, p1.appPage)
 		
 		return
 	end
-	for i, v in p1 do
-		if p2[v] ~= nil then
+	for i, v in p2 do
+		if p3[v] ~= nil then
 			edpStoreAnalyticsLogger.logImpression({
 				actionType = storeEnums.ActionType.Impression,
-				productType = var5,
-				locationType = var6,
-				universeId = var8,
-				layoutOrder = (p4 or 0) + v
+				productType = var1,
+				locationType = var2,
+				universeId = var4,
+				layoutOrder = (p5 or 0) + v
 			})
 		end
 	end

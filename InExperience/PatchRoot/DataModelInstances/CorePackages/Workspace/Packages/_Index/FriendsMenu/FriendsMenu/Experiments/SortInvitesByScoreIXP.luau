@@ -6,9 +6,9 @@ return {
 	FFlagSortInvitesByScoreEnabledForAll = game:DefineFastFlag("SortInvitesByScoreEnabledForAll", false),
 	useSortInvitesByScoreExperiment = function()
 		-- upvalues: useUserExperiment (ref), sortInvitesByScoreExperimentLayer (ref)
-		return useUserExperiment({ sortInvitesByScoreExperimentLayer }, function(p0)
+		return useUserExperiment({ sortInvitesByScoreExperimentLayer }, function(p1)
 			-- upvalues: sortInvitesByScoreExperimentLayer (copy)
-			return (p0[sortInvitesByScoreExperimentLayer] or {}).sortInvitesByScore
+			return (p1[sortInvitesByScoreExperimentLayer] or {}).sortInvitesByScore
 		end)
 	end
 }

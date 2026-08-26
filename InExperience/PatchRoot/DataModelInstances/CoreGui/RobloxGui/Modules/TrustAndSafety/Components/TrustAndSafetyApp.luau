@@ -20,7 +20,7 @@ trustAndSafetyApp.validateProps = tModule.strictInterface({
 
 function trustAndSafetyApp.init(_) end
 
-function trustAndSafetyApp.render(p0)
+function trustAndSafetyApp.render(p1)
 	-- upvalues: roactModule (ref), voiceStateContextModule (ref), reportCategoryDialogModule (ref), reportMenuModule (ref), reportDialogModule (ref), reportSentDialogModule (ref), toastModule (ref), renderWithCoreScriptsStyleProviderModule (ref)
 	return renderWithCoreScriptsStyleProviderModule({
 		VoiceStateContextProvider = roactModule.createElement(voiceStateContextModule.Provider, {}, {
@@ -30,12 +30,12 @@ function trustAndSafetyApp.render(p0)
 				IgnoreGuiInset = true,
 				OnTopOfCoreBlur = true,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-				[roactModule.Change.AbsoluteSize] = p0.props.setScreenSize
+				[roactModule.Change.AbsoluteSize] = p1.props.setScreenSize
 			}, {
 				Content = roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 1, 0),
-					Visible = p0.props.visible
+					Visible = p1.props.visible
 				}, {
 					ReportCategoryDialog = roactModule.createElement(reportCategoryDialogModule),
 					ReportMenu = roactModule.createElement(reportMenuModule),
@@ -50,12 +50,12 @@ end
 
 return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return { visible = p1.displayOptions.visible }
-end, function(p2)
+end, function(p1)
 	-- upvalues: setScreenSizeModule (ref)
 	return {
 		setScreenSize = function(value)
-			-- upvalues: p2 (ref), setScreenSizeModule (copy)
-			p2(setScreenSizeModule(value.AbsoluteSize))
+			-- upvalues: p1 (ref), setScreenSizeModule (copy)
+			p1(setScreenSizeModule(value.AbsoluteSize))
 		end
 	}
 end)(trustAndSafetyApp)

@@ -19,51 +19,51 @@ local _ = function(a)
 	return if #parts == 0 then nil elseif #parts == 1 then parts[1] else parts[1] .. "." .. parts[2]
 end
 
-local function buildCustomFields(p0, p1, p2, p3)
+local function buildCustomFields(p1, p2, p3, p4)
 	-- upvalues: runService (ref)
 	local t = {
 		source = "lua",
-		surface = p0,
-		iosAuthServiceEnabled = if p3 then "true" else "false"
+		surface = p1,
+		iosAuthServiceEnabled = if p4 then "true" else "false"
 	}
 	
-	if p1 ~= nil and p1 ~= "" then
-		t.credentialType = p1
-	end
 	if p2 ~= nil and p2 ~= "" then
-		t.errorCode = p2
+		t.credentialType = p2
 	end
-	local var8
+	if p3 ~= nil and p3 ~= "" then
+		t.errorCode = p3
+	end
+	local var1
 	local robloxVersion = runService:GetRobloxVersion()
 	
 	if robloxVersion == nil or robloxVersion == "" then
-		var8 = nil
+		var1 = nil
 	else
 		local parts = string.split(robloxVersion, ".")
-		var8 = if #parts == 0 then nil elseif #parts == 1 then parts[1] else parts[1] .. "." .. parts[2]
+		var1 = if #parts == 0 then nil elseif #parts == 1 then parts[1] else parts[1] .. "." .. parts[2]
 	end
-	if var8 ~= nil and var8 ~= "" then
-		t.robloxVersion = var8
+	if var1 ~= nil and var1 ~= "" then
+		t.robloxVersion = var1
 	end
 	return t
 end
 
-local _ = function(p4, p5, p6, p7, p8)
+local _ = function(p1, p2, p3, p4, p5)
 	-- upvalues: getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 	if not getFFlagEnableIosAuthServiceLuaIXP() then return end
 	if userInputService:GetPlatform() == Enum.Platform.IOS then
-		default:logRobloxTelemetryCounter(p4, 1, buildCustomFields(p5, p6, p7, p8))
+		default:logRobloxTelemetryCounter(p1, 1, buildCustomFields(p2, p3, p4, p5))
 		
 		return
 	end
 end
 
 return {
-	reportLoginSuccess = function(p9)
+	reportLoginSuccess = function(p1)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServiceLoginSuccessConfig = telemetryConfigsModule.IosAuthServiceLoginSuccessConfig
-		local credentialType = p9.credentialType
-		local iosAuthServiceEnabled = p9.iosAuthServiceEnabled
+		local credentialType = p1.credentialType
+		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
 		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
 		if userInputService:GetPlatform() == Enum.Platform.IOS then
@@ -72,12 +72,12 @@ return {
 			return
 		end
 	end,
-	reportLoginFailure = function(p10)
+	reportLoginFailure = function(p1)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServiceLoginFailureConfig = telemetryConfigsModule.IosAuthServiceLoginFailureConfig
-		local credentialType = p10.credentialType
-		local errorCode = p10.errorCode
-		local iosAuthServiceEnabled = p10.iosAuthServiceEnabled
+		local credentialType = p1.credentialType
+		local errorCode = p1.errorCode
+		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
 		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
 		if userInputService:GetPlatform() == Enum.Platform.IOS then
@@ -86,11 +86,11 @@ return {
 			return
 		end
 	end,
-	reportLoginTwoStepRequired = function(p11)
+	reportLoginTwoStepRequired = function(p1)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServiceLoginTwoStepRequiredConfig = telemetryConfigsModule.IosAuthServiceLoginTwoStepRequiredConfig
-		local credentialType = p11.credentialType
-		local iosAuthServiceEnabled = p11.iosAuthServiceEnabled
+		local credentialType = p1.credentialType
+		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
 		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
 		if userInputService:GetPlatform() == Enum.Platform.IOS then
@@ -126,11 +126,11 @@ return {
 			return
 		end
 	end,
-	reportPasswordSaveSuccess = function(p12)
+	reportPasswordSaveSuccess = function(p1)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServicePasswordSaveSuccessConfig = telemetryConfigsModule.IosAuthServicePasswordSaveSuccessConfig
-		local credentialType = p12.credentialType
-		local iosAuthServiceEnabled = p12.iosAuthServiceEnabled
+		local credentialType = p1.credentialType
+		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
 		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
 		if userInputService:GetPlatform() == Enum.Platform.IOS then
@@ -139,12 +139,12 @@ return {
 			return
 		end
 	end,
-	reportPasswordSaveFailure = function(p13)
+	reportPasswordSaveFailure = function(p1)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServicePasswordSaveFailureConfig = telemetryConfigsModule.IosAuthServicePasswordSaveFailureConfig
-		local credentialType = p13.credentialType
-		local errorCode = p13.errorCode
-		local iosAuthServiceEnabled = p13.iosAuthServiceEnabled
+		local credentialType = p1.credentialType
+		local errorCode = p1.errorCode
+		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
 		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
 		if userInputService:GetPlatform() == Enum.Platform.IOS then

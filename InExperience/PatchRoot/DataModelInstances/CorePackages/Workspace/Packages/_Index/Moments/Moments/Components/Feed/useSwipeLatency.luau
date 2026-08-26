@@ -12,52 +12,52 @@ local t = {
 }
 local momentsSwipeLatencyCapMs = game:DefineFastInt("MomentsSwipeLatencyCapMs", 15000)
 
-local function fireSwipeLatency(p0, p1, p2)
+local function fireSwipeLatency(p1, p2, p3)
 	-- upvalues: analytics (ref), t (ref)
 	analytics.fireAnalyticsEvent(analytics.EventNames.MomentsSwipeLatency, {
-		mediaWaitMs = tostring(p0),
-		totalLatencyMs = tostring(p1),
-		captureType = t[p2.captureType] or "unknown"
+		mediaWaitMs = tostring(p1),
+		totalLatencyMs = tostring(p2),
+		captureType = t[p3.captureType] or "unknown"
 	})
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: reactModule (ref), fireSwipeLatency (ref), swipeLatencyMachineModule (ref), momentsSwipeLatencyCapMs (ref), signalsModule (ref)
-	local getIsSettled = p3.getIsSettled
-	local getHasPresentedFrame = p3.getHasPresentedFrame
-	local getTargetHasPresentedFrame = p3.getTargetHasPresentedFrame
-	local getCaptureType = p3.getCaptureType
-	local var7 = reactModule.useRef(p3.onMeasurement or fireSwipeLatency)
-	var7.current = p3.onMeasurement or fireSwipeLatency
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: p3 (ref), swipeLatencyMachineModule (copy), momentsSwipeLatencyCapMs (copy), var7 (ref)
+	local getIsSettled = p1.getIsSettled
+	local getHasPresentedFrame = p1.getHasPresentedFrame
+	local getTargetHasPresentedFrame = p1.getTargetHasPresentedFrame
+	local getCaptureType = p1.getCaptureType
+	local var1 = reactModule.useRef(p1.onMeasurement or fireSwipeLatency)
+	var1.current = p1.onMeasurement or fireSwipeLatency
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), swipeLatencyMachineModule (copy), momentsSwipeLatencyCapMs (copy), var1 (ref)
 		return swipeLatencyMachineModule({
-			now = p3.now or function()
+			now = p1.now or function()
 				return os.clock() * 1000
 			end,
-			capMs = p3.capMs or momentsSwipeLatencyCapMs,
-			onMeasurement = function(p4, p5, p6)
-				-- upvalues: var7 (copy)
-				var7.current(p4, p5, p6)
+			capMs = p1.capMs or momentsSwipeLatencyCapMs,
+			onMeasurement = function(p2, p3, p4)
+				-- upvalues: var1 (copy)
+				var1.current(p2, p3, p4)
 			end
 		})
 	end, {})
-	local var9 = reactModule.useCallback(function(_, _, p7)
-		-- upvalues: var8 (ref), getIsSettled (ref), getTargetHasPresentedFrame (ref), getCaptureType (ref)
-		var8.start(getIsSettled(false), getTargetHasPresentedFrame(p7), { captureType = getCaptureType(p7) })
+	local var3 = reactModule.useCallback(function(_, _, p2)
+		-- upvalues: var2 (ref), getIsSettled (ref), getTargetHasPresentedFrame (ref), getCaptureType (ref)
+		var2.start(getIsSettled(false), getTargetHasPresentedFrame(p2), { captureType = getCaptureType(p2) })
 	end, {
-		var8,
+		var2,
 		getIsSettled,
 		getTargetHasPresentedFrame,
 		getCaptureType
 	})
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var8 (ref), getIsSettled (ref), getHasPresentedFrame (ref)
-		return signalsModule.createEffect(function(p8)
-			-- upvalues: var8 (copy), getIsSettled (copy), getHasPresentedFrame (copy)
-			var8.update(getIsSettled(p8), getHasPresentedFrame(p8))
+		-- upvalues: signalsModule (copy), var2 (ref), getIsSettled (ref), getHasPresentedFrame (ref)
+		return signalsModule.createEffect(function(p2)
+			-- upvalues: var2 (copy), getIsSettled (copy), getHasPresentedFrame (copy)
+			var2.update(getIsSettled(p2), getHasPresentedFrame(p2))
 		end)
-	end, { getIsSettled, getHasPresentedFrame, var8 })
+	end, { getIsSettled, getHasPresentedFrame, var2 })
 	
-	return var9
+	return var3
 end

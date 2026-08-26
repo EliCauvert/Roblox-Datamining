@@ -3,13 +3,13 @@ local createSignalModule = require(script.Parent.createSignal)
 local t = { prototype = {} }
 t.__index = t.prototype
 
-local function createSingleMotor(p0)
+local function createSingleMotor(p1)
 	-- upvalues: createSignalModule (ref), t (ref)
-	assert(typeof(p0) == "number")
+	assert(typeof(p1) == "number")
 	local t_1 = {
 		__goal = nil,
 		__running = false,
-		__state = { complete = true, value = p0 },
+		__state = { complete = true, value = p1 },
 		__onComplete = createSignalModule(),
 		__onStep = createSignalModule()
 	}
@@ -30,51 +30,51 @@ function t.prototype.start(p1)
 	p1.__running = true
 end
 
-function t.prototype.stop(p3)
-	if p3.__connection ~= nil then
-		p3.__connection:Disconnect()
+function t.prototype.stop(p1)
+	if p1.__connection ~= nil then
+		p1.__connection:Disconnect()
 	end
-	p3.__running = false
+	p1.__running = false
 end
 
-function t.prototype.step(p4, p5)
-	assert(typeof(p5) == "number")
+function t.prototype.step(p1, p2)
+	assert(typeof(p2) == "number")
 	
-	if p4.__state.complete then return end
-	if p4.__goal == nil then return end
-	local state = p4.__goal:step(p4.__state, p5)
+	if p1.__state.complete then return end
+	if p1.__goal == nil then return end
+	local state = p1.__goal:step(p1.__state, p2)
 	
 	if state ~= nil then
-		p4.__state = state
+		p1.__state = state
 	end
-	p4.__onStep:fire(p4.__state.value)
+	p1.__onStep:fire(p1.__state.value)
 	
-	if p4.__state.complete and p4.__running then
-		p4:stop()
-		p4.__onComplete:fire(p4.__state.value)
+	if p1.__state.complete and p1.__running then
+		p1:stop()
+		p1.__onComplete:fire(p1.__state.value)
 	end
 end
 
-function t.prototype.setGoal(value, p6)
-	value.__goal = p6
+function t.prototype.setGoal(value, p1)
+	value.__goal = p1
 	value.__state.complete = false
 	value:start()
 end
 
-function t.prototype.onStep(p7, p8)
-	assert(typeof(p8) == "function")
+function t.prototype.onStep(p1, p2)
+	assert(typeof(p2) == "function")
 	
-	return p7.__onStep:subscribe(p8)
+	return p1.__onStep:subscribe(p2)
 end
 
-function t.prototype.onComplete(p9, p10)
-	assert(typeof(p10) == "function")
+function t.prototype.onComplete(p1, p2)
+	assert(typeof(p2) == "function")
 	
-	return p9.__onComplete:subscribe(p10)
+	return p1.__onComplete:subscribe(p2)
 end
 
-function t.prototype.destroy(p11)
-	p11:stop()
+function t.prototype.destroy(p1)
+	p1:stop()
 end
 
 return createSingleMotor

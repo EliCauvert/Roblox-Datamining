@@ -1,11 +1,11 @@
 ﻿return {
-	fromProduct = function(p0)
+	fromProduct = function(p1)
 		return {
-			universeId = p0.universeId,
-			isForSale = p0.isForSale,
-			productId = p0.productId,
-			price = p0.price,
-			sellerId = p0.sellerId
+			universeId = p1.universeId,
+			isForSale = p1.isForSale,
+			productId = p1.productId,
+			price = p1.price,
+			sellerId = p1.sellerId
 		}
 	end
 }

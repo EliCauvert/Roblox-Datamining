@@ -15,11 +15,11 @@ local topicContentsReducer = require(parent.TopicContentsRodux).TopicContentsRed
 local loggingProtocolModule = require(parent.LoggingProtocol)
 local reportWarning = require(parent.DiscoveryAnalytics).Points.reportWarning
 local getTopSearchResultsFetchName = require(parent.DiscoveryUtils).getTopSearchResultsFetchName
-local var4 = memoize(function(p0)
+local var1 = memoize(function(p1)
 	local t = {}
 	
-	if p0 and p0.sorts then
-		for i, v in ipairs(p0.sorts) do
+	if p1 and p1.sorts then
+		for i, v in ipairs(p1.sorts) do
 			if v.topicId then
 				t[tostring(v.topicId)] = i
 			end
@@ -28,78 +28,78 @@ local var4 = memoize(function(p0)
 	return t
 end)
 
-return function(p1, p2, p3)
-	-- upvalues: useSelector (ref), topicInfosReducer (ref), appPage (ref), var4 (ref), gameSortGroups (ref), topicContentsReducer (ref), topicInfoModel (ref), retrievalStatus (ref), getTopSearchResultsFetchName (ref), reportWarning (ref), loggingProtocolModule (ref), fetchStatusNamespace (ref), fetchStatusReducer (ref), tutilsModule (ref)
-	return useSelector(function(p4)
-		-- upvalues: topicInfosReducer (copy), p1 (ref), p2 (ref), appPage (copy), var4 (copy), gameSortGroups (copy), p3 (ref), topicContentsReducer (copy), topicInfoModel (copy), retrievalStatus (copy), getTopSearchResultsFetchName (copy), reportWarning (copy), loggingProtocolModule (copy), fetchStatusNamespace (copy), fetchStatusReducer (copy)
-		local var6 = false
-		local var7 = false
-		local var8 = nil
-		local var9 = nil
-		local var10 = p4.Personalization[topicInfosReducer.key][p1]
+return function(p2, p3, p4)
+	-- upvalues: useSelector (ref), topicInfosReducer (ref), appPage (ref), var1 (ref), gameSortGroups (ref), topicContentsReducer (ref), topicInfoModel (ref), retrievalStatus (ref), getTopSearchResultsFetchName (ref), reportWarning (ref), loggingProtocolModule (ref), fetchStatusNamespace (ref), fetchStatusReducer (ref), tutilsModule (ref)
+	return useSelector(function(p5)
+		-- upvalues: topicInfosReducer (copy), p2 (ref), p3 (ref), appPage (copy), var1 (copy), gameSortGroups (copy), p4 (ref), topicContentsReducer (copy), topicInfoModel (copy), retrievalStatus (copy), getTopSearchResultsFetchName (copy), reportWarning (copy), loggingProtocolModule (copy), fetchStatusNamespace (copy), fetchStatusReducer (copy)
+		local var2 = false
+		local var3 = false
+		local var4 = nil
+		local var5 = nil
+		local var6 = p5.Personalization[topicInfosReducer.key][p2]
 		
-		if var10 ~= nil then
-			if not var10:isOmni() then
-				var6 = true
+		if var6 ~= nil then
+			if not var6:isOmni() then
+				var2 = true
 				local homeGames = nil
 				
-				if p2 == appPage.Games then
+				if p3 == appPage.Games then
 					homeGames = gameSortGroups.Games
-				elseif p2 == appPage.Home then
+				elseif p3 == appPage.Home then
 					homeGames = gameSortGroups.HomeGames
 				end
-				var9 = if homeGames then p4.GameSortGroups[homeGames].pageId else nil
-			elseif p2 == appPage.Home then
-				local var11 = var4(p4.OmniRecommendations[p2])[p1]
+				var5 = if homeGames then p5.GameSortGroups[homeGames].pageId else nil
+			elseif p3 == appPage.Home then
+				local var7 = var1(p5.OmniRecommendations[p3])[p2]
 				
-				if var11 then
-					var6 = true
-					var7 = true
-					var8 = var11
+				if var7 then
+					var2 = true
+					var3 = true
+					var4 = var7
 				end
 			end
 		end
-		local var12 = nil
-		local var13 = nil
-		local var14 = nil
+		local var8 = nil
+		local var9 = nil
+		local var10 = nil
 		
-		if p2 ~= appPage.SearchPage then
-			local omniRecommendations, var16
-			var12 = p4.Personalization[topicContentsReducer.key][p1]
-			var13 = p4.Personalization[topicInfosReducer.key][p1]
+		if p3 ~= appPage.SearchPage then
+			local omniRecommendations, var11
+			var8 = p5.Personalization[topicContentsReducer.key][p2]
+			var9 = p5.Personalization[topicInfosReducer.key][p2]
 			local _ = nil
 			local _ = nil
 			
-			if var7 then
+			if var3 then
 				omniRecommendations = fetchStatusNamespace.OmniRecommendations
-				var16 = p2
+				var11 = p3
 			else
 				omniRecommendations = fetchStatusNamespace.GameSorts
-				var16 = p1
+				var11 = p2
 			end
-			var14 = p4.Personalization[fetchStatusReducer.key][omniRecommendations][var16]
-		elseif p3 then
-			var12 = p4.Personalization[topicContentsReducer.key][p3]
-			var13 = p4.Personalization[topicInfosReducer.key][topicInfoModel.makeSearchTopicKey(p3, p1)]
-			var6 = true
-			local var15 = p4.RequestsStatus.SearchesInGamesStatus[p3]
+			var10 = p5.Personalization[fetchStatusReducer.key][omniRecommendations][var11]
+		elseif p4 then
+			var8 = p5.Personalization[topicContentsReducer.key][p4]
+			var9 = p5.Personalization[topicInfosReducer.key][topicInfoModel.makeSearchTopicKey(p4, p2)]
+			var2 = true
+			local var12 = p5.RequestsStatus.SearchesInGamesStatus[p4]
 			
-			if var15 == "Removed" then
-				var15 = retrievalStatus.NotStarted
+			if var12 == "Removed" then
+				var12 = retrievalStatus.NotStarted
 			end
-			var14 = var15 or p4.FetchingStatus[getTopSearchResultsFetchName("blended", p3)]
+			var10 = var12 or p5.FetchingStatus[getTopSearchResultsFetchName("blended", p4)]
 		else
 			reportWarning(loggingProtocolModule.default, "useGameSortData_MissingSearchUuid", "searchUuid is nil when pageContext is SearchPage")
-			var6 = false
+			var2 = false
 		end
 		return {
-			sortIndex = var8,
-			isOmni = var7,
-			gameSortDataFound = var6,
-			gamesApiSortPageId = var9,
-			sort = var13,
-			gameSortContents = var12,
-			gameSortFetchingStatus = var14 or retrievalStatus.NotStarted
+			sortIndex = var4,
+			isOmni = var3,
+			gameSortDataFound = var2,
+			gamesApiSortPageId = var5,
+			sort = var9,
+			gameSortContents = var8,
+			gameSortFetchingStatus = var10 or retrievalStatus.NotStarted
 		}
 	end, tutilsModule.shallowEqual)
 end

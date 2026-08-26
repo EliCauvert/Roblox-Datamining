@@ -18,7 +18,7 @@ local uiModeStyleProvider = styleModule.UiModeStyleProvider
 local unibarStyle = chromeModule.UnibarStyle
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
-local var10 = if fFlagSideSheetFocusNav then reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui) else nil
+local var1 = if fFlagSideSheetFocusNav then reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui) else nil
 local t = {
 	isFocused = function()
 		return true
@@ -28,20 +28,20 @@ local t = {
 	end
 }
 
-return function(p0, p1, p2)
-	-- upvalues: roduxModule (ref), reactModule (ref), fFlagEnableDrawerFocusNav (ref), roactNavigationModule (ref), t (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), fFlagSideSheetFocusNav (ref), unibarStyle (ref), reactFocusNavigationModule (ref), var10 (write), provider (ref)
-	p2 = p2 or roduxModule.Store.new(function(p3)
-		return p3 or {}
+return function(p1, p2, p3)
+	-- upvalues: roduxModule (ref), reactModule (ref), fFlagEnableDrawerFocusNav (ref), roactNavigationModule (ref), t (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), fFlagSideSheetFocusNav (ref), unibarStyle (ref), reactFocusNavigationModule (ref), var1 (write), provider (ref)
+	p3 = p3 or roduxModule.Store.new(function(p4)
+		return p4 or {}
 	end)
-	local var13 = p0
+	local var2 = p1
 	
-	for i, v in p1 do
-		var13 = reactModule.createElement(v, nil, var13)
+	for i, v in p2 do
+		var2 = reactModule.createElement(v, nil, var2)
 	end
 	if fFlagEnableDrawerFocusNav then
-		var13 = reactModule.createElement(roactNavigationModule.Provider, { value = t }, var13)
+		var2 = reactModule.createElement(roactNavigationModule.Provider, { value = t }, var2)
 	end
-	return reactModule.createElement(roactRoduxModule.StoreProvider, { store = p2 }, {
+	return reactModule.createElement(roactRoduxModule.StoreProvider, { store = p3 }, {
 		LocalizationProvider = reactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {
@@ -52,10 +52,10 @@ return function(p0, p1, p2)
 				}
 			}, {
 				UnibarStyleProvider = if fFlagSideSheetFocusNav then reactModule.createElement(unibarStyle.Provider, {}, {
-					FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var10 }, {
-						Registry = reactModule.createElement(provider, nil, var13)
+					FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
+						Registry = reactModule.createElement(provider, nil, var2)
 					})
-				}) else reactModule.createElement(unibarStyle.Provider, {}, var13)
+				}) else reactModule.createElement(unibarStyle.Provider, {}, var2)
 			})
 		})
 	})

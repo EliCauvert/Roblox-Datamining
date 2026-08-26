@@ -30,10 +30,10 @@ return function(p1)
 	local VERSION_HISTORY_HIDE_AUTOSAVED, VERSION_HISTORY_TITLE
 	local testId = p1.testId or "version-history-bottom-sheet"
 	local scrollingFrameRef = p1.scrollingFrameRef or reactModule.useRef(nil)
-	local var1, var2 = reactModule.useState(nil)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useState(true)
-	local var7 = if fFlagBuildLocalization then useLocalization({
+	local var2, var3 = reactModule.useState(nil)
+	local var4, var5 = reactModule.useState(false)
+	local var6, var7 = reactModule.useState(true)
+	local var8 = if fFlagBuildLocalization then useLocalization({
 		hideAutosaved = localizationStringsModule.VERSION_HISTORY_HIDE_AUTOSAVED,
 		title = localizationStringsModule.VERSION_HISTORY_TITLE
 	}) else nil
@@ -41,15 +41,15 @@ return function(p1)
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		VERSION_HISTORY_HIDE_AUTOSAVED = var7.hideAutosaved
-		VERSION_HISTORY_TITLE = var7.title
+		VERSION_HISTORY_HIDE_AUTOSAVED = var8.hideAutosaved
+		VERSION_HISTORY_TITLE = var8.title
 	else
 		VERSION_HISTORY_HIDE_AUTOSAVED = localizationStringsModule.VERSION_HISTORY_HIDE_AUTOSAVED
 		VERSION_HISTORY_TITLE = localizationStringsModule.VERSION_HISTORY_TITLE
 	end
-	local var8 = reactModule.useCallback(function(p1)
-		-- upvalues: var2 (ref)
-		var2(p1)
+	local var9 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref)
+		var3(p2)
 	end, {})
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
@@ -58,8 +58,8 @@ return function(p1)
 			isOpen = p1.isOpen == nil or p1.isOpen,
 			snapPoints = { 0.5, 1 },
 			onClose = reactModule.useCallback(function()
-				-- upvalues: var2 (ref), p1 (ref)
-				var2(nil)
+				-- upvalues: var3 (ref), p1 (ref)
+				var3(nil)
 				p1.onClose()
 			end, { p1.onClose }),
 			testId = testId
@@ -75,8 +75,8 @@ return function(p1)
 				AutosaveFilter = reactModule.createElement(view, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
 					Checkbox = reactModule.createElement(checkbox, {
 						label = VERSION_HISTORY_HIDE_AUTOSAVED,
-						isChecked = var5,
-						onActivated = var6,
+						isChecked = var6,
+						onActivated = var7,
 						testId = `{testId}-autosave-filter`
 					})
 				}),
@@ -89,13 +89,13 @@ return function(p1)
 					LayoutOrder = 3,
 					tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
 				}, reactModule.useMemo(function()
-					-- upvalues: p1 (ref), fFlagBuildLocalization (copy), var5 (ref), versionHistoryUtilsModule (copy), testId (ref), reactModule (copy), versionHistoryCardModule (copy), var8 (ref)
+					-- upvalues: p1 (ref), fFlagBuildLocalization (copy), var6 (ref), versionHistoryUtilsModule (copy), testId (ref), reactModule (copy), versionHistoryCardModule (copy), var9 (ref)
 					local t = {}
 					
 					for i, v in p1.entries do
 						local _ = nil
 						
-						if if fFlagBuildLocalization then if var5 then not v.isAutosaved else not var5 else versionHistoryUtilsModule.shouldShowEntry(v.badgeText, var5) then
+						if if fFlagBuildLocalization then if var6 then not v.isAutosaved else not var6 else versionHistoryUtilsModule.shouldShowEntry(v.badgeText, var6) then
 							t[v.id] = reactModule.createElement(versionHistoryCardModule, {
 								layoutOrder = i,
 								versionLabel = v.versionLabel,
@@ -104,8 +104,8 @@ return function(p1)
 								badgeText = v.badgeText,
 								isRestoreDisabled = p1.isRestoreDisabled,
 								onRestore = function()
-									-- upvalues: var8 (copy), v (ref)
-									var8(v)
+									-- upvalues: var9 (copy), v (ref)
+									var9(v)
 								end,
 								testId = `{testId}-card-{v.id}`
 							})
@@ -115,66 +115,66 @@ return function(p1)
 				end, {
 					p1.entries,
 					p1.isRestoreDisabled,
-					var5,
-					var8,
+					var6,
+					var9,
 					testId
 				}))
 			})
 		}),
-		RestoreDialog = if var1 then reactModule.createElement(restoreVersionDialogModule, {
+		RestoreDialog = if var2 then reactModule.createElement(restoreVersionDialogModule, {
 			isOpen = true,
-			title = var1.versionLabel,
-			description = var1.description,
-			isLoading = if fFlagBuildAgentRollbackModule then var3 else nil,
+			title = var2.versionLabel,
+			description = var2.description,
+			isLoading = if fFlagBuildAgentRollbackModule then var4 else nil,
 			onRestore = reactModule.useCallback(function()
-				-- upvalues: var1 (ref), fFlagBuildAgentRollbackModule (copy), var2 (ref), p1 (ref), var3 (ref), var4 (ref)
-				if var1 == nil then return end
+				-- upvalues: var2 (ref), fFlagBuildAgentRollbackModule (copy), var3 (ref), p1 (ref), var4 (ref), var5 (ref)
+				if var2 == nil then return end
 				if fFlagBuildAgentRollbackModule then
-					if p1.isRestoreDisabled or var3 then return end
-					var4(true)
-					local var1 = p1.onRestore(var1)
+					if p1.isRestoreDisabled or var4 then return end
+					var5(true)
+					local var10 = p1.onRestore(var10)
 					
-					if var1 == nil then
-						var4(false)
+					if var10 == nil then
+						var5(false)
 						
 						return
 					end
-					var1:andThen(function()
-						-- upvalues: var4 (copy), var2 (copy), p1 (copy)
-						var4(false)
-						var2(nil)
+					var10:andThen(function()
+						-- upvalues: var5 (copy), var3 (copy), p1 (copy)
+						var5(false)
+						var3(nil)
 						
 						if p1.onRestoreStarted ~= nil then
 							p1.onRestoreStarted()
 						end
 					end):catch(function()
-						-- upvalues: var4 (copy)
-						var4(false)
+						-- upvalues: var5 (copy)
+						var5(false)
 					end)
 					
 					return
 				else
-					var2(nil)
+					var3(nil)
 					
 					if p1.isRestoreDisabled then
 						return
 					end
-					p1.onRestore(var1)
+					p1.onRestore(var10)
 				end
 			end, {
-				var1,
+				var2,
 				p1.isRestoreDisabled,
 				p1.onRestore,
 				p1.onRestoreStarted,
-				var3
+				var4
 			}),
 			onCancel = reactModule.useCallback(function()
-				-- upvalues: var3 (ref), var2 (ref)
-				if var3 then
+				-- upvalues: var4 (ref), var3 (ref)
+				if var4 then
 					return
 				end
-				var2(nil)
-			end, { var3 })
+				var3(nil)
+			end, { var4 })
 		}) else nil
 	})
 end

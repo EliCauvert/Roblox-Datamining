@@ -20,9 +20,9 @@ local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspa
 local loadingFriendsError = roact.PureComponent:extend("LoadingFriendsError")
 loadingFriendsError.validateProps = t.strictInterface({ onRetry = t.callback, canCaptureFocus = t.boolean })
 
-function loadingFriendsError.init(p0)
+function loadingFriendsError.init(p1)
 	-- upvalues: roact (ref)
-	p0.buttonRef = roact.createRef()
+	p1.buttonRef = roact.createRef()
 end
 
 function loadingFriendsError.render(p1)
@@ -39,12 +39,12 @@ function loadingFriendsError.render(p1)
 				}
 			}
 		}
-	end, function(p3)
+	end, function(p2)
 		-- upvalues: withLocalizationModule (copy), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (ref), guiService (copy), p1 (ref), button (copy), buttonType (copy)
 		return withLocalizationModule({
 			errorOccured = "CoreScripts.InGameMenu.InviteFriends.ErrorOccured"
-		})(function(p4)
-			-- upvalues: p3 (ref), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy)
+		})(function(p3)
+			-- upvalues: p2 (ref), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy)
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 304, 1, 0),
@@ -76,29 +76,29 @@ function loadingFriendsError.render(p1)
 				TextContainer = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, textService:GetTextSize(p4.errorOccured, p3.Font.Body.RelativeSize * p3.Font.BaseSize, p3.Font.Body.Font, Vector2.new(304, 1e999)).Y + 36)
+					Size = UDim2.new(1, 0, 0, textService:GetTextSize(p3.errorOccured, p2.Font.Body.RelativeSize * p2.Font.BaseSize, p2.Font.Body.Font, Vector2.new(304, 1e999)).Y + 36)
 				}, {
 					Text = roact.createElement(themedTextLabelModule, {
 						fontKey = "Body",
 						themeKey = "TextEmphasis",
 						TextWrapped = true,
-						Text = p4.errorOccured,
+						Text = p3.errorOccured,
 						Position = UDim2.new(0, 0, 0, 10),
 						Size = UDim2.new(1, 0, 1, -36),
 						TextXAlignment = Enum.TextXAlignment.Center
 					})
 				}),
 				RootedConnection = roact.createElement(rootedConnectionModule, {
-					render = function(p5)
+					render = function(p4)
 						-- upvalues: roact (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy), assetsModule (copy)
 						return roact.createElement(focusHandlerModule, {
-							isFocused = props.canCaptureFocus and p5,
+							isFocused = props.canCaptureFocus and p4,
 							didFocus = function()
 								-- upvalues: guiService (copy), p1 (copy)
 								guiService.SelectedCoreObject = p1.buttonRef:getValue()
 							end
 						}, {
-							RetryButton = p5 and roact.createElement(button, {
+							RetryButton = p4 and roact.createElement(button, {
 								layoutOrder = 3,
 								buttonType = buttonType.Secondary,
 								size = UDim2.new(1, 0, 0, 48),

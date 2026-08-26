@@ -10,7 +10,7 @@ local fFlagUFRImprovementsModule = require(interventionShared.Flags.FFlagUFRImpr
 
 return reactModule.memo(function()
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), fFlagUFRImprovementsModule (ref)
-	local var4 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-medium size-full-0 auto-y margin-top-small",
@@ -18,17 +18,17 @@ return reactModule.memo(function()
 	}, {
 		Heading = reactModule.createElement(skeleton, {
 			LayoutOrder = 1,
-			Size = UDim2.new(0.6, 0, 0, var4.Size.Size_1100),
+			Size = UDim2.new(0.6, 0, 0, var1.Size.Size_1100),
 			radius = radius.Medium
 		}),
 		Body = reactModule.createElement(skeleton, {
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 0, if fFlagUFRImprovementsModule then var4.Size.Size_3000 else var4.Size.Size_2000),
+			Size = UDim2.new(1, 0, 0, if fFlagUFRImprovementsModule then var1.Size.Size_3000 else var1.Size.Size_2000),
 			radius = radius.Medium
 		}),
 		Actions = reactModule.createElement(skeleton, {
 			LayoutOrder = 3,
-			Size = UDim2.new(1, 0, 0, var4.Size.Size_800),
+			Size = UDim2.new(1, 0, 0, var1.Size.Size_800),
 			radius = radius.Medium
 		})
 	})

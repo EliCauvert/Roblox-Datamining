@@ -3,7 +3,7 @@ local _ = require(script:FindFirstAncestor("Foundation").Providers.Style.Tokens)
 local _ = require(script.Parent.Rules.Types)
 
 local function pascalToKebab(p1)
-	local replaced = string.gsub(p1:gsub("_", "-"), "(%u)", function(p1)
+	local replaced = string.gsub(p1:gsub("_", "-"), "(%u)", function(p2)
 		return "-" .. p1:lower()
 	end)
 	
@@ -63,22 +63,22 @@ return function(p1)
 		table.insert(t_2, { name = pascalToKebab(i_2), size = v_2 })
 	end
 	table.insert(t_2, { name = "none", size = 0 })
-	table.sort(t_2, function(p1, p2)
-		return p1.size < p2.size
+	table.sort(t_2, function(p2, p3)
+		return p2.size < p3.size
 	end)
 	
 	for i_3, v_3 in pairs(p1.Gap) do
 		table.insert(t_3, { name = string.lower(i_3), size = UDim.new(0, v_3) })
 	end
-	table.sort(t_3, function(p1, p2)
-		return p1.size.Offset < p2.size.Offset
+	table.sort(t_3, function(p2, p3)
+		return p2.size.Offset < p3.size.Offset
 	end)
 	
 	for i_4, v_4 in pairs(p1.Radius) do
 		table.insert(t_4, { name = string.lower(i_4), size = UDim.new(0, v_4) })
 	end
-	table.sort(t_4, function(p1, p2)
-		return p1.size.Offset < p2.size.Offset
+	table.sort(t_4, function(p2, p3)
+		return p2.size.Offset < p3.size.Offset
 	end)
 	
 	for i_5, v_5 in pairs(p1.Size) do
@@ -88,8 +88,8 @@ return function(p1)
 		})
 	end
 	table.insert(t_5, { name = "full", size = UDim.new(1, 0) })
-	table.sort(t_5, function(p1, p2)
-		return p1.size.Offset < p2.size.Offset
+	table.sort(t_5, function(p2, p3)
+		return p2.size.Offset < p3.size.Offset
 	end)
 	
 	for i_6, v_6 in pairs(p1.Typography) do
@@ -102,22 +102,22 @@ return function(p1)
 	for i_7, v_7 in pairs(p1.Padding) do
 		table.insert(t_7, { name = string.lower(i_7), size = UDim.new(0, v_7) })
 	end
-	table.sort(t_7, function(p1, p2)
-		return p1.size.Offset < p2.size.Offset
+	table.sort(t_7, function(p2, p3)
+		return p2.size.Offset < p3.size.Offset
 	end)
 	
 	for i_8, v_8 in pairs(p1.Margin) do
 		table.insert(t_8, { name = string.lower(i_8), size = UDim.new(0, v_8) })
 	end
-	table.sort(t_8, function(p1, p2)
-		return p1.size.Offset < p2.size.Offset
+	table.sort(t_8, function(p2, p3)
+		return p2.size.Offset < p3.size.Offset
 	end)
 	
 	for i_9, v_9 in pairs(p1.Gutter) do
 		table.insert(t_9, { name = string.lower(i_9), size = UDim.new(0, v_9) })
 	end
-	table.sort(t_9, function(p1, p2)
-		return p1.size.Offset < p2.size.Offset
+	table.sort(t_9, function(p2, p3)
+		return p2.size.Offset < p3.size.Offset
 	end)
 	
 	return t_10

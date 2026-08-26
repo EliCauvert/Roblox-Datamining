@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return string.format("(%s)", p0)
+﻿return function(p1)
+	return string.format("(%s)", p1)
 end

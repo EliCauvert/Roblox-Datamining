@@ -1,16 +1,16 @@
 ﻿local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	local t_1 = { defaultConfig = p0, defaultConfigKeys = {} }
+	local t_1 = { defaultConfig = p1, defaultConfigKeys = {} }
 	
-	for i in pairs(p0) do
+	for i in pairs(p1) do
 		table.insert(t_1.defaultConfigKeys, i)
 	end
 	t_1._currentConfig = setmetatable({}, {
-		__index = function(_, p1)
+		__index = function(_, p2)
 			-- upvalues: t_1 (ref)
-			error(("Invalid global configuration key %q. Valid configuration keys are: %s"):format(tostring(p1), table.concat(t_1.defaultConfigKeys, ", ")), 3)
+			error(("Invalid global configuration key %q. Valid configuration keys are: %s"):format(tostring(p2), table.concat(t_1.defaultConfigKeys, ", ")), 3)
 		end
 	})
 	
@@ -29,7 +29,7 @@ function t.new(p0)
 		return t.scoped(t_1, ...)
 	end
 	
-	t_1.set(p0)
+	t_1.set(p1)
 	
 	return t_1
 end

@@ -6,10 +6,10 @@ local ingestConversationListPageModule = require(appChat.Stores.Ingestion.ingest
 
 return function(value)
 	-- upvalues: appChatNetworkingModule (ref), getConversationStoreModule (ref), getResponseBodyModule (ref), ingestConversationListPageModule (ref)
-	return appChatNetworkingModule.http.GetConversations(nil, value):andThen(function(p0)
+	return appChatNetworkingModule.http.GetConversations(nil, value):andThen(function(p1)
 		-- upvalues: getConversationStoreModule (copy), getResponseBodyModule (copy), ingestConversationListPageModule (copy)
-		ingestConversationListPageModule.ingestConversationResponses(getConversationStoreModule(false), getResponseBodyModule(p0))
+		ingestConversationListPageModule.ingestConversationResponses(getConversationStoreModule(false), getResponseBodyModule(p1))
 		
-		return p0
+		return p1
 	end)
 end

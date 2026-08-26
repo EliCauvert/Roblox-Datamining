@@ -8,9 +8,9 @@ local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention
 local toast = UIBloxModule.App.Dialog.Toast
 local inExperienceInterventionToastDuration = game:DefineFastInt("InExperienceInterventionToastDuration", 5)
 
-function ChatNudgeToast(p0)
+function ChatNudgeToast(p1)
 	-- upvalues: reactModule (ref), useTokens (ref), inExperienceInterventionAnalyticsModule (ref), toast (ref), images (ref), inExperienceInterventionToastDuration (ref)
-	local var5 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
+	local var1 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
 	
 	return reactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
@@ -20,7 +20,7 @@ function ChatNudgeToast(p0)
 	}, {
 		Toast = reactModule.createElement(toast, {
 			toastContent = {
-				toastTitle = p0.toastTitle,
+				toastTitle = p1.toastTitle,
 				iconColorStyle = {
 					Transparency = 0,
 					Color = useTokens().Color.System.Warning.Color3
@@ -28,15 +28,15 @@ function ChatNudgeToast(p0)
 				iconImage = images["icons/status/error_large"],
 				iconSize = Vector2.new(36, 36),
 				onAppeared = function()
-					-- upvalues: var5 (ref), inExperienceInterventionAnalyticsModule (copy), p0 (ref)
-					var5.current = DateTime.now().UnixTimestampMillis
-					inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(p0.toastAppearEventName, p0.interventionType, var5.current, p0.eventId, p0.violatingChatLine, p0.remainingDurationSec)
+					-- upvalues: var1 (ref), inExperienceInterventionAnalyticsModule (copy), p1 (ref)
+					var1.current = DateTime.now().UnixTimestampMillis
+					inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(p1.toastAppearEventName, p1.interventionType, var1.current, p1.eventId, p1.violatingChatLine, p1.remainingDurationSec)
 				end,
-				toastSubtitle = p0.toastBody,
+				toastSubtitle = p1.toastBody,
 				sequenceNumber = DateTime.now().UnixTimestamp,
 				onTouchSwipeUp = function()
-					-- upvalues: inExperienceInterventionAnalyticsModule (copy), p0 (ref), var5 (ref)
-					inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(p0.toastDismissEventName, p0.interventionType, var5.current, p0.eventId, p0.violatingChatLine, p0.remainingDurationSec)
+					-- upvalues: inExperienceInterventionAnalyticsModule (copy), p1 (ref), var1 (ref)
+					inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(p1.toastDismissEventName, p1.interventionType, var1.current, p1.eventId, p1.violatingChatLine, p1.remainingDurationSec)
 				end
 			},
 			duration = inExperienceInterventionToastDuration

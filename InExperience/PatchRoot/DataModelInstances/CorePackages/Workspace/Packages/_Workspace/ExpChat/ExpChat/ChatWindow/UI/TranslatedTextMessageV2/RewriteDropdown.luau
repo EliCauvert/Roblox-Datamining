@@ -10,118 +10,118 @@ local localizationModule = require(expChat.Localization)
 local fStringInExpChatRewriteReasonKeyModule = require(expChat.Flags.FStringInExpChatRewriteReasonKey)
 local mergeBindableScalarModule = require(expChat.ChatWindow.Helpers.mergeBindableScalar)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: foundationModule (ref), localizationModule (ref), fStringInExpChatRewriteReasonKeyModule (ref), getMessagesStoreModule (ref), getRewriteDropdownStoreModule (ref), reactModule (ref), signalsModule (ref), useSignalBinding (ref), mergeBindableScalarModule (ref)
-	local var9 = foundationModule.Hooks.useTokens()
-	local var10 = localizationModule.useLocalization({
+	local var1 = foundationModule.Hooks.useTokens()
+	local var2 = localizationModule.useLocalization({
 		defaultRewrittenReasonLabelText = "CoreScripts.TextChat.ChatWindows.RewrittenReasonLabel",
 		rewrittenReasonLabelText = fStringInExpChatRewriteReasonKeyModule
 	})
-	local var11 = if var10.rewrittenReasonLabelText and var10.rewrittenReasonLabelText ~= "" then var10.rewrittenReasonLabelText else var10.defaultRewrittenReasonLabelText
-	local var12 = getMessagesStoreModule(false)
-	local var13 = getRewriteDropdownStoreModule(false)
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var13 (ref), var12 (ref)
-		local var19 = signalsModule.createComputed(function(p1)
-			-- upvalues: var13 (copy), var12 (copy)
-			local componentId = var13.getComponentId(p1)
+	local var3 = if var2.rewrittenReasonLabelText and var2.rewrittenReasonLabelText ~= "" then var2.rewrittenReasonLabelText else var2.defaultRewrittenReasonLabelText
+	local var4 = getMessagesStoreModule(false)
+	local var5 = getRewriteDropdownStoreModule(false)
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var5 (ref), var4 (ref)
+		local var7 = signalsModule.createComputed(function(p2)
+			-- upvalues: var5 (copy), var4 (copy)
+			local componentId = var5.getComponentId(p2)
 			
 			if not componentId then
 				return nil
 			end
-			local openMessageId = var13.getOpenMessageId(p1)
+			local openMessageId = var5.getOpenMessageId(p2)
 			
 			if not openMessageId then
 				return nil
 			end
-			local messageComponentSignal = var12.getMessageComponentSignal(componentId)
+			local messageComponentSignal = var4.getMessageComponentSignal(componentId)
 			
 			if not messageComponentSignal then
 				return nil
 			end
-			local var23 = messageComponentSignal(p1)
+			local var8 = messageComponentSignal(p2)
 			
-			if not var23 then
+			if not var8 then
 				return nil
 			end
-			local var24 = var12.getMessage(var23)(p1)
+			local var9 = var4.getMessage(var8)(p2)
 			
-			return if var24 then if var23 == openMessageId then var24 else nil else nil
+			return if var9 then if var8 == openMessageId then var9 else nil else nil
 		end)
 		
 		return {
 			getVisible = signalsModule.createComputed(function(p2)
-				-- upvalues: var19 (ref)
-				local var25 = var19(p2)
+				-- upvalues: var7 (ref)
+				local var8 = var7(p2)
 				
-				return if var25 then var25.wasRewritten else false
+				return if var8 then var8.wasRewritten else false
 			end),
-			getLayoutOrder = signalsModule.createComputed(function(p3)
-				-- upvalues: var13 (copy), var12 (copy)
-				local componentId = var13.getComponentId(p3)
+			getLayoutOrder = signalsModule.createComputed(function(p2)
+				-- upvalues: var5 (copy), var4 (copy)
+				local componentId = var5.getComponentId(p2)
 				
 				if not componentId then
 					return 0
 				end
-				local layoutOrderSignal = var12.getLayoutOrderSignal(componentId)
+				local layoutOrderSignal = var4.getLayoutOrderSignal(componentId)
 				
-				return if layoutOrderSignal then layoutOrderSignal(p3) + 1 else 0
+				return if layoutOrderSignal then layoutOrderSignal(p2) + 1 else 0
 			end),
-			getOriginalText = signalsModule.createComputed(function(p4)
-				-- upvalues: var19 (ref)
-				local var28 = var19(p4)
+			getOriginalText = signalsModule.createComputed(function(p2)
+				-- upvalues: var7 (ref)
+				local var8 = var7(p2)
 				
-				return if var28 then var28.originalText or "" else ""
+				return if var8 then var8.originalText or "" else ""
 			end)
 		}
 	end, {})
-	local var15 = useSignalBinding(var14.getVisible)
-	local var16 = useSignalBinding(var14.getLayoutOrder)
-	local var17 = useSignalBinding(var14.getOriginalText)
-	local var18 = var17:map(function(p5)
-		return p5 ~= nil and p5 ~= ""
+	local var7 = useSignalBinding(var6.getVisible)
+	local var8 = useSignalBinding(var6.getLayoutOrder)
+	local var9 = useSignalBinding(var6.getOriginalText)
+	local var10 = var9:map(function(p2)
+		return p2 ~= nil and p2 ~= ""
 	end)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		Size = UDim2.new(1, 0, 0, 0),
-		LayoutOrder = var16,
-		Visible = var15
+		LayoutOrder = var8,
+		Visible = var7
 	}, {
 		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var9.Padding.XXSmall),
-			PaddingBottom = UDim.new(0, var9.Padding.XXSmall),
-			PaddingRight = p0.arButtonPadding
+			PaddingTop = UDim.new(0, var1.Padding.XXSmall),
+			PaddingBottom = UDim.new(0, var1.Padding.XXSmall),
+			PaddingRight = p1.arButtonPadding
 		}),
 		reactModule.createElement(foundationModule.View, {
 			tag = "col align-x-left gap-xxsmall padding-small radius-medium size-full-0 auto-y",
 			backgroundStyle = {
-				Color3 = var9.Color.Common.Scrim.Color3,
-				Transparency = mergeBindableScalarModule(0.7, p0.textTransparency)
+				Color3 = var1.Color.Common.Scrim.Color3,
+				Transparency = mergeBindableScalarModule(0.7, p1.textTransparency)
 			}
 		}, {
 			OriginalText = reactModule.createElement(foundationModule.Text, {
 				tag = "text-body-small text-align-x-left text-wrap size-full-0 auto-y",
 				LayoutOrder = 1,
 				RichText = true,
-				Text = var17,
-				Visible = var18,
+				Text = var9,
+				Visible = var10,
 				textStyle = {
-					Color3 = var9.Color.Content.Muted.Color3,
-					Transparency = mergeBindableScalarModule(var9.Color.Content.Muted.Transparency, p0.textTransparency)
+					Color3 = var1.Color.Content.Muted.Color3,
+					Transparency = mergeBindableScalarModule(var1.Color.Content.Muted.Transparency, p1.textTransparency)
 				},
 				stroke = {
 					Color = Color3.fromRGB(0, 0, 0),
-					Transparency = mergeBindableScalarModule(0.5, p0.textTransparency),
-					Thickness = var9.Stroke.Thin
+					Transparency = mergeBindableScalarModule(0.5, p1.textTransparency),
+					Thickness = var1.Stroke.Thin
 				}
 			}),
 			Divider = reactModule.createElement(foundationModule.Divider, {
 				LayoutOrder = 2,
 				orientation = foundationModule.Enums.Orientation.Horizontal,
-				Visible = reactModule.joinBindings({ p0.textTransparency, var18 }):map(function(p6)
-					return p6[1] < 1 and p6[2]
+				Visible = reactModule.joinBindings({ p1.textTransparency, var10 }):map(function(p2)
+					return p2[1] < 1 and p2[2]
 				end),
 				DividerVariant = foundationModule.Enums.DividerVariant.Default
 			}),
@@ -129,15 +129,15 @@ return reactModule.memo(function(p0)
 				tag = "text-body-small text-align-x-left text-wrap size-full-0 auto-y",
 				LayoutOrder = 3,
 				RichText = true,
-				Text = var11,
+				Text = var3,
 				textStyle = {
-					Color3 = var9.Color.Content.Default.Color3,
-					Transparency = mergeBindableScalarModule(var9.Color.Content.Default.Transparency, p0.textTransparency)
+					Color3 = var1.Color.Content.Default.Color3,
+					Transparency = mergeBindableScalarModule(var1.Color.Content.Default.Transparency, p1.textTransparency)
 				},
 				stroke = {
 					Color = Color3.fromRGB(0, 0, 0),
-					Transparency = mergeBindableScalarModule(0.5, p0.textTransparency),
-					Thickness = var9.Stroke.Thin
+					Transparency = mergeBindableScalarModule(0.5, p1.textTransparency),
+					Thickness = var1.Stroke.Thin
 				}
 			})
 		})

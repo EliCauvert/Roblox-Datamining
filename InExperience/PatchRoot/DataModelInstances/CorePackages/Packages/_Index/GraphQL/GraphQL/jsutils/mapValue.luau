@@ -1,11 +1,11 @@
 ﻿local _ = require(script.Parent.ObjMap)
 
 return {
-	mapValue = function(p0, p1)
+	mapValue = function(p1, p2)
 		local t = {}
 		
-		for i, v in pairs(p0) do
-			t[i] = p1(v, i)
+		for i, v in pairs(p1) do
+			t[i] = p2(v, i)
 		end
 		return t
 	end

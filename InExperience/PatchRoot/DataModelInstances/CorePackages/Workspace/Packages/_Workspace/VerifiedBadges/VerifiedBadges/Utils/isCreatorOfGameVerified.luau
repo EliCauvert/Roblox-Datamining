@@ -2,16 +2,16 @@
 local fFlagLuaAppEdpBackendV2HydrateLegacyDefault = require(verifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyDefault
 local fFlagLuaAppEdpBackendV2HydrateLegacyIxp = require(verifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyIxp
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: fFlagLuaAppEdpBackendV2HydrateLegacyDefault (ref), fFlagLuaAppEdpBackendV2HydrateLegacyIxp (ref)
 	local creator = nil
 	
-	if (fFlagLuaAppEdpBackendV2HydrateLegacyDefault or fFlagLuaAppEdpBackendV2HydrateLegacyIxp) and p1.shouldUseV2GameDetails then
-		if p0.GameDetailsV2 and p0.GameDetailsV2[p1.universeId] then
-			creator = p0.GameDetailsV2[p1.universeId].creator
+	if (fFlagLuaAppEdpBackendV2HydrateLegacyDefault or fFlagLuaAppEdpBackendV2HydrateLegacyIxp) and p2.shouldUseV2GameDetails then
+		if p1.GameDetailsV2 and p1.GameDetailsV2[p2.universeId] then
+			creator = p1.GameDetailsV2[p2.universeId].creator
 		end
-	elseif p0.GameDetails and p0.GameDetails[p1.universeId] then
-		creator = p0.GameDetails[p1.universeId].creator
+	elseif p1.GameDetails and p1.GameDetails[p2.universeId] then
+		creator = p1.GameDetails[p2.universeId].creator
 	end
 	local _ = ""
 	
@@ -20,7 +20,7 @@ return function(p0, p1)
 	end
 	local var1 = tostring(creator.id)
 	
-	if creator and p0.VerifiedBadges then
-		return if p0.VerifiedBadges.VerifiedUsers and creator.type == Enum.CreatorType.User.Name then p0.VerifiedBadges.VerifiedUsers[tostring(var1)] == true elseif p0.VerifiedBadges.VerifiedGroups and creator.type == Enum.CreatorType.Group.Name then p0.VerifiedBadges.VerifiedGroups[tostring(var1)] == true else false
+	if creator and p1.VerifiedBadges then
+		return if p1.VerifiedBadges.VerifiedUsers and creator.type == Enum.CreatorType.User.Name then p1.VerifiedBadges.VerifiedUsers[tostring(var1)] == true elseif p1.VerifiedBadges.VerifiedGroups and creator.type == Enum.CreatorType.Group.Name then p1.VerifiedBadges.VerifiedGroups[tostring(var1)] == true else false
 	end
 end

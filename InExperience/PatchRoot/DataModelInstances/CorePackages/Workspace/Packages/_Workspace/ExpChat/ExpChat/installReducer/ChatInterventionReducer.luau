@@ -3,12 +3,12 @@ local parent = expChat.Parent
 local dictionary = require(parent.llama).Dictionary
 
 return require(parent.Rodux).createReducer({ timeoutData = { endTimestamp = 0, isEnforced = false } }, {
-	[require(expChat.Actions.ChatTimeoutUpdated).name] = function(p0, p1)
+	[require(expChat.Actions.ChatTimeoutUpdated).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, {
+		return dictionary.join(p1, {
 			timeoutData = {
-				endTimestamp = p1.endTimestamp,
-				isEnforced = p1.isEnforced
+				endTimestamp = p2.endTimestamp,
+				isEnforced = p2.isEnforced
 			}
 		})
 	end

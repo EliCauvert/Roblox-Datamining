@@ -72,14 +72,14 @@ return {
 		Visibility = "visibility",
 		UserInteraction = "user_interaction"
 	},
-	fire = function(p0, p1)
+	fire = function(p1, p2)
 		-- upvalues: t_1 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), analytics (ref)
-		local var4 = if p1 then table.clone(p1) else {}
-		var4[t_1.PlaySessionId] = if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""
+		local var1 = if p2 then table.clone(p2) else {}
+		var1[t_1.PlaySessionId] = if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""
 		
-		if var4[t_1.Timestamp] == nil then
-			var4[t_1.Timestamp] = os.clock()
+		if var1[t_1.Timestamp] == nil then
+			var1[t_1.Timestamp] = os.clock()
 		end
-		analytics.FireClientAnalyticsWithEventName(p0, var4)
+		analytics.FireClientAnalyticsWithEventName(p1, var1)
 	end
 }

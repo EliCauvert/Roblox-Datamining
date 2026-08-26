@@ -22,47 +22,47 @@ local _ = require(foundation.Enums.InputVariant)
 local numberInputControlsVariantModule = require(foundation.Enums.NumberInputControlsVariant)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 
-local var17 = function(p0)
+local var1 = function(p1)
 	-- upvalues: useTokensModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), reactIsModule (ref), mapBindableModule (ref)
-	local var22 = useTokensModule()
-	local uDim = UDim.new(0, var22.Radius.Medium)
+	local var2 = useTokensModule()
+	local uDim = UDim.new(0, var2.Radius.Medium)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p0, {
-		onActivated = p0.onActivated,
-		isDisabled = if reactIsModule.isBinding(p0.isDisabled) then false else p0.isDisabled,
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
+		onActivated = p1.onActivated,
+		isDisabled = if reactIsModule.isBinding(p1.isDisabled) then false else p1.isDisabled,
 		selection = {
-			Selectable = mapBindableModule(p0.isDisabled, function(p1)
-				return not p1
+			Selectable = mapBindableModule(p1.isDisabled, function(p2)
+				return not p2
 			end)
 		},
 		cursor = reactModule.useMemo(function()
-			-- upvalues: uDim (ref), var22 (ref)
+			-- upvalues: uDim (ref), var2 (ref)
 			return {
 				radius = uDim,
-				offset = var22.Size.Size_150,
-				borderWidth = var22.Stroke.Thicker
+				offset = var2.Size.Size_150,
+				borderWidth = var2.Stroke.Thicker
 			}
-		end, { var22 }),
-		padding = p0.padding,
+		end, { var2 }),
+		padding = p1.padding,
 		cornerRadius = uDim,
-		tag = p0.tag
-	}), p0.children)
+		tag = p1.tag
+	}), p1.children)
 end
 
-local function SplitControls(p2)
+local function SplitControls(p1)
 	-- upvalues: useTokensModule (ref), useNumberInputVariantsModule (ref), useTextInputVariantsModule (ref), reactModule (ref), mapBindableModule (ref), blendTransparenciesModule (ref), constantsModule (ref), viewModule (ref), reactIsModule (ref), stateLayerAffordanceModule (ref), iconModule (ref), builderIconsModule (ref)
-	local var24 = useTokensModule()
-	local var25 = useNumberInputVariantsModule(var24, p2.size, p2.controlsVariant)
-	local container = useTextInputVariantsModule(var24, p2.size, p2.variant).container
-	local var26 = math.ceil(var24.Stroke.Standard) * 2
-	local uDim2 = UDim2.fromOffset(var25.splitButton.size - var26, var25.splitButton.size - var26)
-	local var28 = reactModule.useCallback(function(p3)
+	local var2 = useTokensModule()
+	local var3 = useNumberInputVariantsModule(var2, p1.size, p1.controlsVariant)
+	local container = useTextInputVariantsModule(var2, p1.size, p1.variant).container
+	local var4 = math.ceil(var2.Stroke.Standard) * 2
+	local uDim2 = UDim2.fromOffset(var3.splitButton.size - var4, var3.splitButton.size - var4)
+	local var5 = reactModule.useCallback(function(p2)
 		-- upvalues: container (ref), mapBindableModule (copy), blendTransparenciesModule (copy), constantsModule (copy)
 		return if container.strokeStyle and container.strokeThickness then {
 			Color = container.strokeStyle.Color3,
-			Transparency = mapBindableModule(p3, function(p4)
+			Transparency = mapBindableModule(p2, function(p3)
 				-- upvalues: blendTransparenciesModule (copy), container (copy), constantsModule (copy)
-				return if p4 then blendTransparenciesModule(container.strokeStyle.Transparency, constantsModule.DISABLED_TRANSPARENCY) else container.strokeStyle.Transparency
+				return if p3 then blendTransparenciesModule(container.strokeStyle.Transparency, constantsModule.DISABLED_TRANSPARENCY) else container.strokeStyle.Transparency
 			end),
 			Thickness = container.strokeThickness,
 			BorderStrokePosition = Enum.BorderStrokePosition.Inner
@@ -72,218 +72,218 @@ local function SplitControls(p2)
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		ControlIncrement = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
-			onActivated = p2.increment.onClick,
-			isDisabled = if reactIsModule.isBinding(p2.increment.isDisabled) then false else p2.increment.isDisabled,
+			onActivated = p1.increment.onClick,
+			isDisabled = if reactIsModule.isBinding(p1.increment.isDisabled) then false else p1.increment.isDisabled,
 			stateLayer = {
-				affordance = mapBindableModule(p2.increment.isDisabled, function(p5)
+				affordance = mapBindableModule(p1.increment.isDisabled, function(p2)
 					-- upvalues: stateLayerAffordanceModule (copy)
-					return if p5 then stateLayerAffordanceModule.None else stateLayerAffordanceModule.Background
+					return if p2 then stateLayerAffordanceModule.None else stateLayerAffordanceModule.Background
 				end)
 			},
-			padding = var25.button.padding,
+			padding = var3.button.padding,
 			Size = uDim2,
-			stroke = var28(p2.increment.isDisabled),
-			tag = var25.splitButton.tag,
-			testId = `{p2.testId}--increment`
+			stroke = var5(p1.increment.isDisabled),
+			tag = var3.splitButton.tag,
+			testId = `{p1.testId}--increment`
 		}, {
 			Icon = reactModule.createElement(iconModule, {
 				name = builderIconsModule.Icon.PlusSmall,
-				size = p2.size,
-				style = mapBindableModule(p2.increment.isDisabled, function(p6)
+				size = p1.size,
+				style = mapBindableModule(p1.increment.isDisabled, function(p2)
 					-- upvalues: constantsModule (copy)
 					return {
 						Color3 = nil,
-						Transparency = if p6 then constantsModule.DISABLED_TRANSPARENCY else nil
+						Transparency = if p2 then constantsModule.DISABLED_TRANSPARENCY else nil
 					}
 				end),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				testId = `{p2.testId}--increment-icon`
+				testId = `{p1.testId}--increment-icon`
 			})
 		}),
 		ControlDecrement = reactModule.createElement(viewModule, {
 			LayoutOrder = -1,
-			onActivated = p2.decrement.onClick,
-			isDisabled = if reactIsModule.isBinding(p2.decrement.isDisabled) then false else p2.decrement.isDisabled,
+			onActivated = p1.decrement.onClick,
+			isDisabled = if reactIsModule.isBinding(p1.decrement.isDisabled) then false else p1.decrement.isDisabled,
 			stateLayer = {
-				affordance = mapBindableModule(p2.decrement.isDisabled, function(p7)
+				affordance = mapBindableModule(p1.decrement.isDisabled, function(p2)
 					-- upvalues: stateLayerAffordanceModule (copy)
-					return if p7 then stateLayerAffordanceModule.None else stateLayerAffordanceModule.Background
+					return if p2 then stateLayerAffordanceModule.None else stateLayerAffordanceModule.Background
 				end)
 			},
-			padding = var25.button.padding,
+			padding = var3.button.padding,
 			Size = uDim2,
-			stroke = var28(p2.decrement.isDisabled),
-			tag = var25.splitButton.tag,
-			testId = `{p2.testId}--decrement`
+			stroke = var5(p1.decrement.isDisabled),
+			tag = var3.splitButton.tag,
+			testId = `{p1.testId}--decrement`
 		}, {
 			Icon = reactModule.createElement(iconModule, {
 				name = builderIconsModule.Icon.MinusSmall,
-				size = p2.size,
-				style = mapBindableModule(p2.decrement.isDisabled, function(p8)
+				size = p1.size,
+				style = mapBindableModule(p1.decrement.isDisabled, function(p2)
 					-- upvalues: constantsModule (copy)
 					return {
 						Color3 = nil,
-						Transparency = if p8 then constantsModule.DISABLED_TRANSPARENCY else nil
+						Transparency = if p2 then constantsModule.DISABLED_TRANSPARENCY else nil
 					}
 				end),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				testId = `{p2.testId}--decrement-icon`
+				testId = `{p1.testId}--decrement-icon`
 			})
 		})
 	})
 end
 
-local function StackedControls(p9)
-	-- upvalues: useTokensModule (ref), useNumberInputVariantsModule (ref), reactModule (ref), mapBindableModule (ref), constantsModule (ref), viewModule (ref), var17 (ref), reactIsModule (ref), imageModule (ref)
-	local var29 = useTokensModule()
-	local var30 = useNumberInputVariantsModule(var29, p9.size, p9.controlsVariant)
+local function StackedControls(p1)
+	-- upvalues: useTokensModule (ref), useNumberInputVariantsModule (ref), reactModule (ref), mapBindableModule (ref), constantsModule (ref), viewModule (ref), var1 (ref), reactIsModule (ref), imageModule (ref)
+	local var2 = useTokensModule()
+	local var3 = useNumberInputVariantsModule(var2, p1.size, p1.controlsVariant)
 	
 	return reactModule.createElement(viewModule, {
 		tag = "col",
-		Size = UDim2.new(0, var30.button.width, 1, 0),
-		LayoutOrder = p9.LayoutOrder
+		Size = UDim2.new(0, var3.button.width, 1, 0),
+		LayoutOrder = p1.LayoutOrder
 	}, {
-		ControlIncrement = reactModule.createElement(var17, {
-			onActivated = p9.increment.onClick,
-			isDisabled = if reactIsModule.isBinding(p9.increment.isDisabled) then false else p9.increment.isDisabled,
-			padding = var30.button.padding,
-			tag = var30.upButton.tag,
-			testId = `{p9.testId}--increment`
+		ControlIncrement = reactModule.createElement(var1, {
+			onActivated = p1.increment.onClick,
+			isDisabled = if reactIsModule.isBinding(p1.increment.isDisabled) then false else p1.increment.isDisabled,
+			padding = var3.button.padding,
+			tag = var3.upButton.tag,
+			testId = `{p1.testId}--increment`
 		}, {
 			Icon = reactModule.createElement(imageModule, {
 				Image = "component_assets/triangleUp_16",
 				imageStyle = reactModule.useMemo(function()
-					-- upvalues: mapBindableModule (copy), p9 (ref), var29 (ref), constantsModule (copy)
-					return mapBindableModule(p9.increment.isDisabled, function(p10)
-						-- upvalues: var29 (copy), constantsModule (copy)
+					-- upvalues: mapBindableModule (copy), p1 (ref), var2 (ref), constantsModule (copy)
+					return mapBindableModule(p1.increment.isDisabled, function(p2)
+						-- upvalues: var2 (copy), constantsModule (copy)
 						return {
-							Color3 = var29.Color.Stroke.Emphasis.Color3,
-							Transparency = if p10 then constantsModule.DISABLED_TRANSPARENCY else 0
+							Color3 = var2.Color.Stroke.Emphasis.Color3,
+							Transparency = if p2 then constantsModule.DISABLED_TRANSPARENCY else 0
 						}
 					end)
-				end, { var29, p9.increment.isDisabled }),
-				tag = var30.icon.tag,
-				testId = `{p9.testId}--increment-icon`
+				end, { var2, p1.increment.isDisabled }),
+				tag = var3.icon.tag,
+				testId = `{p1.testId}--increment-icon`
 			})
 		}),
-		ControlDecrement = reactModule.createElement(var17, {
-			tag = var30.downButton.tag,
-			onActivated = p9.decrement.onClick,
-			isDisabled = if reactIsModule.isBinding(p9.decrement.isDisabled) then false else p9.decrement.isDisabled,
-			padding = var30.button.padding,
-			testId = `{p9.testId}--decrement`
+		ControlDecrement = reactModule.createElement(var1, {
+			tag = var3.downButton.tag,
+			onActivated = p1.decrement.onClick,
+			isDisabled = if reactIsModule.isBinding(p1.decrement.isDisabled) then false else p1.decrement.isDisabled,
+			padding = var3.button.padding,
+			testId = `{p1.testId}--decrement`
 		}, {
 			Icon = reactModule.createElement(imageModule, {
 				Image = "component_assets/triangleDown_16",
 				imageStyle = reactModule.useMemo(function()
-					-- upvalues: mapBindableModule (copy), p9 (ref), var29 (ref), constantsModule (copy)
-					return mapBindableModule(p9.decrement.isDisabled, function(p11)
-						-- upvalues: var29 (copy), constantsModule (copy)
+					-- upvalues: mapBindableModule (copy), p1 (ref), var2 (ref), constantsModule (copy)
+					return mapBindableModule(p1.decrement.isDisabled, function(p2)
+						-- upvalues: var2 (copy), constantsModule (copy)
 						return {
-							Color3 = var29.Color.Stroke.Emphasis.Color3,
-							Transparency = if p11 then constantsModule.DISABLED_TRANSPARENCY else 0
+							Color3 = var2.Color.Stroke.Emphasis.Color3,
+							Transparency = if p2 then constantsModule.DISABLED_TRANSPARENCY else 0
 						}
 					end)
-				end, { var29, p9.decrement.isDisabled }),
-				tag = var30.icon.tag,
-				testId = `{p9.testId}--decrement-icon`
+				end, { var2, p1.decrement.isDisabled }),
+				tag = var3.icon.tag,
+				testId = `{p1.testId}--decrement-icon`
 			})
 		})
 	})
 end
 
-local function IncrementButton(p12)
+local function IncrementButton(p1)
 	-- upvalues: useTokensModule (ref), reactModule (ref), viewModule (ref), reactIsModule (ref), mapBindableModule (ref), stateLayerAffordanceModule (ref), iconModule (ref), blendTransparenciesModule (ref), constantsModule (ref)
-	local var31 = useTokensModule()
+	local var2 = useTokensModule()
 	
 	return reactModule.createElement(viewModule, {
-		onActivated = p12.onActivated,
-		isDisabled = if reactIsModule.isBinding(p12.isDisabled) then false else p12.isDisabled,
+		onActivated = p1.onActivated,
+		isDisabled = if reactIsModule.isBinding(p1.isDisabled) then false else p1.isDisabled,
 		selection = {
-			Selectable = mapBindableModule(p12.isDisabled, function(p13)
-				return not p13
+			Selectable = mapBindableModule(p1.isDisabled, function(p2)
+				return not p2
 			end)
 		},
 		stateLayer = {
-			affordance = mapBindableModule(p12.isDisabled, function(p14)
+			affordance = mapBindableModule(p1.isDisabled, function(p2)
 				-- upvalues: stateLayerAffordanceModule (copy)
-				return if p14 then stateLayerAffordanceModule.None else stateLayerAffordanceModule.Background
+				return if p2 then stateLayerAffordanceModule.None else stateLayerAffordanceModule.Background
 			end)
 		},
 		cursor = reactModule.useMemo(function()
-			-- upvalues: p12 (ref), var31 (ref)
+			-- upvalues: p1 (ref), var2 (ref)
 			return {
-				radius = UDim.new(0, p12.radius),
-				offset = var31.Size.Size_150,
-				borderWidth = var31.Stroke.Thicker
+				radius = UDim.new(0, p1.radius),
+				offset = var2.Size.Size_150,
+				borderWidth = var2.Stroke.Thicker
 			}
-		end, { p12.radius, var31.Size.Size_150, var31.Stroke.Thicker }),
-		cornerRadius = UDim.new(0, p12.radius),
-		Size = UDim2.fromOffset(p12.size, p12.size),
-		LayoutOrder = p12.LayoutOrder,
-		testId = p12.testId
+		end, { p1.radius, var2.Size.Size_150, var2.Stroke.Thicker }),
+		cornerRadius = UDim.new(0, p1.radius),
+		Size = UDim2.fromOffset(p1.size, p1.size),
+		LayoutOrder = p1.LayoutOrder,
+		testId = p1.testId
 	}, {
-		Divider = if p12.hasDivider then reactModule.createElement(viewModule, {
+		Divider = if p1.hasDivider then reactModule.createElement(viewModule, {
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0, 0.5),
-			Size = UDim2.new(0, var31.Stroke.Standard, 1, 0),
-			backgroundStyle = var31.Color.Stroke.Default,
-			testId = `{p12.testId}--divider`
+			Size = UDim2.new(0, var2.Stroke.Standard, 1, 0),
+			backgroundStyle = var2.Color.Stroke.Default,
+			testId = `{p1.testId}--divider`
 		}) else nil,
 		Icon = reactModule.createElement(iconModule, {
-			name = p12.icon,
-			size = p12.iconSize,
-			style = mapBindableModule(p12.isDisabled, function(p15)
-				-- upvalues: var31 (ref), blendTransparenciesModule (copy), constantsModule (copy)
+			name = p1.icon,
+			size = p1.iconSize,
+			style = mapBindableModule(p1.isDisabled, function(p2)
+				-- upvalues: var2 (ref), blendTransparenciesModule (copy), constantsModule (copy)
 				return {
-					Color3 = var31.Color.ActionUtility.Foreground.Color3,
-					Transparency = if p15 then blendTransparenciesModule(var31.Color.ActionUtility.Foreground.Transparency, constantsModule.DISABLED_TRANSPARENCY) else var31.Color.ActionUtility.Foreground.Transparency
+					Color3 = var2.Color.ActionUtility.Foreground.Color3,
+					Transparency = if p2 then blendTransparenciesModule(var2.Color.ActionUtility.Foreground.Transparency, constantsModule.DISABLED_TRANSPARENCY) else var2.Color.ActionUtility.Foreground.Transparency
 				}
 			end),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			testId = `{p12.testId}--icon`
+			testId = `{p1.testId}--icon`
 		})
 	})
 end
 
-local function IncrementControls(p16)
+local function IncrementControls(p1)
 	-- upvalues: useTokensModule (ref), useNumberInputVariantsModule (ref), reactModule (ref), viewModule (ref), IncrementButton (ref), builderIconsModule (ref)
-	local controls = useNumberInputVariantsModule(useTokensModule(), p16.size, nil).controls
+	local controls = useNumberInputVariantsModule(useTokensModule(), p1.size, nil).controls
 	
 	return reactModule.createElement(viewModule, {
 		LayoutOrder = 1,
 		tag = controls.tag,
 		Size = UDim2.fromOffset(controls.width, controls.buttonSize),
-		testId = `{p16.testId}--increment-buttons`
+		testId = `{p1.testId}--increment-buttons`
 	}, {
 		ControlDecrement = reactModule.createElement(IncrementButton, {
 			LayoutOrder = 1,
 			icon = builderIconsModule.Icon.MinusSmall,
 			iconSize = controls.iconSize,
-			isDisabled = p16.decrement.isDisabled,
-			onActivated = p16.decrement.onClick,
+			isDisabled = p1.decrement.isDisabled,
+			onActivated = p1.decrement.onClick,
 			radius = controls.radius,
 			size = controls.buttonSize,
-			testId = `{p16.testId}--decrement`
+			testId = `{p1.testId}--decrement`
 		}),
 		ControlIncrement = reactModule.createElement(IncrementButton, {
 			LayoutOrder = 2,
 			icon = builderIconsModule.Icon.PlusSmall,
 			iconSize = controls.iconSize,
-			hasDivider = p16.hasDivider,
-			isDisabled = p16.increment.isDisabled,
-			onActivated = p16.increment.onClick,
+			hasDivider = p1.hasDivider,
+			isDisabled = p1.increment.isDisabled,
+			onActivated = p1.increment.onClick,
 			radius = controls.radius,
 			size = controls.buttonSize,
-			testId = `{p16.testId}--increment`
+			testId = `{p1.testId}--increment`
 		})
 	})
 end
 
-return function(p17)
+return function(p1)
 	-- upvalues: flagsModule (ref), reactModule (ref), IncrementControls (ref), numberInputControlsVariantModule (ref), StackedControls (ref), SplitControls (ref)
-	return if flagsModule.FoundationNumberInputBeta then reactModule.createElement(IncrementControls, p17) elseif p17.controlsVariant == numberInputControlsVariantModule.Stacked then reactModule.createElement(StackedControls, p17) else reactModule.createElement(SplitControls, p17)
+	return if flagsModule.FoundationNumberInputBeta then reactModule.createElement(IncrementControls, p1) elseif p1.controlsVariant == numberInputControlsVariantModule.Stacked then reactModule.createElement(StackedControls, p1) else reactModule.createElement(SplitControls, p1)
 end

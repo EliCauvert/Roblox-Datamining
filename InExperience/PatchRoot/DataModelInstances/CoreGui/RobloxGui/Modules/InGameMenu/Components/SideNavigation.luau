@@ -32,78 +32,78 @@ sideNavigation.validateProps = t.strictInterface({
 	enableInGameHomeIcon = t.optional(t.boolean)
 })
 
-function sideNavigation.init(p0)
+function sideNavigation.init(p1)
 	-- upvalues: controlState (ref), constantsModule (ref), roact (ref), guiService (ref)
-	function p0.controlStateUpdated(p1, p2)
-		-- upvalues: controlState (copy), p0 (ref), constantsModule (copy)
-		if p1 == controlState.Hover and p2 ~= controlState.Hover and p0.props.currentPage == constantsModule.InitalPageKey then
-			p0.props.closeMenu()
+	function p0.controlStateUpdated(p2, p3)
+		-- upvalues: controlState (copy), p1 (ref), constantsModule (copy)
+		if p2 == controlState.Hover and p3 ~= controlState.Hover and p1.props.currentPage == constantsModule.InitalPageKey then
+			p1.props.closeMenu()
 		end
 	end
 	
-	p0.firstItemRef = roact.createRef()
+	p1.firstItemRef = roact.createRef()
 	
-	function p0.onContainerRendered(p3)
+	function p0.onContainerRendered(p2)
 		-- upvalues: guiService (copy)
-		if p3 then
+		if p2 then
 			guiService:RemoveSelectionGroup("SideNavigation_IGMSelectionGroup")
-			guiService:AddSelectionParent("SideNavigation_IGMSelectionGroup", p3)
+			guiService:AddSelectionParent("SideNavigation_IGMSelectionGroup", p2)
 		end
 	end
 end
 
-function sideNavigation.oldRender(p4)
+function sideNavigation.oldRender(p1)
 	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref), closeMenuButtonModule (ref), focusHandlerModule (ref), guiService (ref), constantsModule (ref), zonePortalModule (ref), directionModule (ref)
-	local var15 = if getFFlagIGMGamepadSelectionHistoryModule() then if p4.props.currentZone == 0 then not p4.props.open else true else nil
+	local var1 = if getFFlagIGMGamepadSelectionHistoryModule() then if p1.props.currentZone == 0 then not p1.props.open else true else nil
 	
-	return withFoundationOrUIBloxStyle(function(p5)
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				BackgroundUIContrast = {
-					Color = p5.Color.OverMedia.OverMedia_0.Color3,
-					Transparency = p5.Color.OverMedia.OverMedia_0.Transparency
+					Color = p2.Color.OverMedia.OverMedia_0.Color3,
+					Transparency = p2.Color.OverMedia.OverMedia_0.Transparency
 				}
 			}
 		}
-	end, function(p6)
-		-- upvalues: roact (copy), p4 (ref), closeMenuButtonModule (copy), focusHandlerModule (copy), var15 (write), getFFlagIGMGamepadSelectionHistoryModule (copy), guiService (copy), constantsModule (copy), zonePortalModule (copy), directionModule (copy)
+	end, function(p2)
+		-- upvalues: roact (copy), p1 (ref), closeMenuButtonModule (copy), focusHandlerModule (copy), var1 (write), getFFlagIGMGamepadSelectionHistoryModule (copy), guiService (copy), constantsModule (copy), zonePortalModule (copy), directionModule (copy)
 		return roact.createElement("TextButton", {
 			AutoButtonColor = false,
 			Text = "",
-			BackgroundColor3 = p6.Theme.BackgroundUIContrast.Color,
-			BackgroundTransparency = p6.Theme.BackgroundUIContrast.Transparency,
+			BackgroundColor3 = p2.Theme.BackgroundUIContrast.Color,
+			BackgroundTransparency = p2.Theme.BackgroundUIContrast.Transparency,
 			BorderSizePixel = 0,
 			Size = UDim2.new(0, 64, 1, 0),
-			Visible = p4.props.open,
+			Visible = p1.props.open,
 			Selectable = false,
-			[roact.Ref] = p4.onContainerRendered
+			[roact.Ref] = p1.onContainerRendered
 		}, {
 			Padding = roact.createElement("UIPadding", { PaddingTop = UDim.new(0, 1) }),
 			CloseMenuButton = roact.createElement(closeMenuButtonModule, {
-				onActivated = p4.props.closeMenu,
+				onActivated = p1.props.closeMenu,
 				AnchorPoint = Vector2.new(0.5, 0),
 				Position = UDim2.new(0.5, 0, 0, 4),
-				[roact.Ref] = p4.firstItemRef
+				[roact.Ref] = p1.firstItemRef
 			}),
 			FocusHandler = roact.createElement(focusHandlerModule, {
-				isFocused = p4.props.canCaptureFocus,
-				shouldForgetPreviousSelection = var15,
-				didFocus = if getFFlagIGMGamepadSelectionHistoryModule() then function(p7)
-					-- upvalues: guiService (copy), p4 (copy)
-					guiService.SelectedCoreObject = p7 or p4.firstItemRef:getValue()
+				isFocused = p1.props.canCaptureFocus,
+				shouldForgetPreviousSelection = var1,
+				didFocus = if getFFlagIGMGamepadSelectionHistoryModule() then function(p3)
+					-- upvalues: guiService (copy), p1 (copy)
+					guiService.SelectedCoreObject = p3 or p1.firstItemRef:getValue()
 				end else function()
-					-- upvalues: guiService (copy), p4 (copy)
-					guiService.SelectedCoreObject = p4.firstItemRef:getValue()
+					-- upvalues: guiService (copy), p1 (copy)
+					guiService.SelectedCoreObject = p1.firstItemRef:getValue()
 				end
 			}),
-			ZonePortal = p4.props.currentPage ~= constantsModule.InitalPageKey and roact.createElement(zonePortalModule, { targetZone = 1, direction = directionModule.Right }) or nil
+			ZonePortal = p1.props.currentPage ~= constantsModule.InitalPageKey and roact.createElement(zonePortalModule, { targetZone = 1, direction = directionModule.Right }) or nil
 		})
 	end)
 end
 
-function sideNavigation.newRender(p8)
+function sideNavigation.newRender(p1)
 	-- upvalues: roact (ref), systemMenuButtonModule (ref), constantsModule (ref), homeButtonModule (ref), zonePortalModule (ref), directionModule (ref), withFoundationOrUIBloxStyle (ref), interactable (ref)
-	local currentPage = p8.props.currentPage
+	local currentPage = p1.props.currentPage
 	local t = {
 		Padding = roact.createElement("UIPadding", { PaddingTop = UDim.new(0, 1) }),
 		Content = roact.createElement("Frame", {
@@ -121,76 +121,76 @@ function sideNavigation.newRender(p8)
 			SystemMenuButton = roact.createElement(systemMenuButtonModule, {
 				layoutOrder = 1,
 				on = currentPage == constantsModule.MainPagePageKey,
-				onClose = p8.props.closeMenu,
-				onActivated = p8.props.goToSystemMenu,
+				onClose = p1.props.closeMenu,
+				onActivated = p1.props.goToSystemMenu,
 				anchorPoint = Vector2.new(0.5, 0),
 				position = UDim2.new(0.5, 0, 0, 4),
-				canCaptureFocus = p8.props.canCaptureFocus
+				canCaptureFocus = p1.props.canCaptureFocus
 			}),
 			HomeButton = roact.createElement(homeButtonModule, {
 				layoutOrder = 2,
 				on = currentPage == constantsModule.LeaveToAppPromptPageKey,
-				onActivated = p8.props.goToHomePage,
+				onActivated = p1.props.goToHomePage,
 				anchorPoint = Vector2.new(0.5, 0),
 				position = UDim2.new(0.5, 0, 0, 8)
 			})
 		}),
-		ZonePortal = p8.props.currentPage ~= constantsModule.InitalPageKey and roact.createElement(zonePortalModule, { targetZone = 1, direction = directionModule.Right }) or nil
+		ZonePortal = p1.props.currentPage ~= constantsModule.InitalPageKey and roact.createElement(zonePortalModule, { targetZone = 1, direction = directionModule.Right }) or nil
 	}
 	
-	return withFoundationOrUIBloxStyle(function(p9)
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				BackgroundUIContrast = {
-					Color = p9.Color.OverMedia.OverMedia_0.Color3,
-					Transparency = p9.Color.OverMedia.OverMedia_0.Transparency
+					Color = p2.Color.OverMedia.OverMedia_0.Color3,
+					Transparency = p2.Color.OverMedia.OverMedia_0.Transparency
 				}
 			}
 		}
-	end, function(p10)
-		-- upvalues: roact (copy), interactable (copy), p8 (ref), t (ref)
+	end, function(p2)
+		-- upvalues: roact (copy), interactable (copy), p1 (ref), t (ref)
 		return roact.createElement(interactable, {
-			onStateChanged = p8.controlStateUpdated,
+			onStateChanged = p1.controlStateUpdated,
 			AutoButtonColor = false,
-			BackgroundColor3 = p10.Theme.BackgroundUIContrast.Color,
-			BackgroundTransparency = p10.Theme.BackgroundUIContrast.Transparency,
+			BackgroundColor3 = p2.Theme.BackgroundUIContrast.Color,
+			BackgroundTransparency = p2.Theme.BackgroundUIContrast.Transparency,
 			BorderSizePixel = 0,
 			Size = UDim2.new(0, 64, 1, 0),
-			Visible = p8.props.open,
+			Visible = p1.props.open,
 			Selectable = false,
-			[roact.Ref] = p8.onContainerRendered
+			[roact.Ref] = p1.onContainerRendered
 		}, t)
 	end)
 end
 
-function sideNavigation.render(p11)
-	return if p11.props.enableInGameHomeIcon then p11:newRender() else p11:oldRender()
+function sideNavigation.render(p1)
+	return if p1.props.enableInGameHomeIcon then p1:newRender() else p1:oldRender()
 end
 
-return roactRodux.UNSTABLE_connect2(function(p13, _)
+return roactRodux.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: constantsModule (ref), getFFlagIGMGamepadSelectionHistoryModule (ref)
 	return {
-		canCaptureFocus = p13.isMenuOpen and (not p13.respawn.dialogOpen and (p13.displayOptions.inputType == constantsModule.InputType.Gamepad and p13.currentZone == 0)),
-		currentPage = p13.menuPage,
-		open = p13.isMenuOpen,
-		currentZone = if getFFlagIGMGamepadSelectionHistoryModule() then p13.currentZone else nil
+		canCaptureFocus = p1.isMenuOpen and (not p1.respawn.dialogOpen and (p1.displayOptions.inputType == constantsModule.InputType.Gamepad and p1.currentZone == 0)),
+		currentPage = p1.menuPage,
+		open = p1.isMenuOpen,
+		currentZone = if getFFlagIGMGamepadSelectionHistoryModule() then p1.currentZone else nil
 	}
-end, function(p14)
+end, function(p1)
 	-- upvalues: closeMenuModule (ref), setCurrentPageModule (ref), constantsModule (ref)
 	return {
 		closeMenu = function()
-			-- upvalues: p14 (ref), closeMenuModule (copy)
-			p14(closeMenuModule)
+			-- upvalues: p1 (ref), closeMenuModule (copy)
+			p1(closeMenuModule)
 		end,
 		goToSystemMenu = function()
-			-- upvalues: p14 (ref), setCurrentPageModule (copy), constantsModule (copy)
-			p14(setCurrentPageModule(constantsModule.MainPagePageKey))
+			-- upvalues: p1 (ref), setCurrentPageModule (copy), constantsModule (copy)
+			p1(setCurrentPageModule(constantsModule.MainPagePageKey))
 		end,
 		goToHomePage = function()
-			-- upvalues: p14 (ref), setCurrentPageModule (copy), constantsModule (copy)
-			p14(setCurrentPageModule(constantsModule.LeaveToAppPromptPageKey))
+			-- upvalues: p1 (ref), setCurrentPageModule (copy), constantsModule (copy)
+			p1(setCurrentPageModule(constantsModule.LeaveToAppPromptPageKey))
 		end
 	}
-end)(inGameMenuPolicyModule.connect(function(p12, _)
-	return { enableInGameHomeIcon = p12.enableInGameHomeIcon() }
+end)(inGameMenuPolicyModule.connect(function(p1, _)
+	return { enableInGameHomeIcon = p1.enableInGameHomeIcon() }
 end)(sideNavigation))

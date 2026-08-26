@@ -14,58 +14,58 @@ local view = foundationModule.View
 local enums = foundationModule.Enums
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), usePageSideMargin (ref), responsiveModule (ref), notificationModalsManagerModule (ref), UIBloxModule (ref), view (ref), banner (ref), enums (ref)
-	local var7 = useTokens()
-	local var8 = useLocalization({
+	local var1 = useTokens()
+	local var2 = useLocalization({
 		errorTitle = "Feature.Home.ClientCacheFallbackBanner.Label.Error",
 		errorMessage = "Feature.Home.ClientCacheFallbackBanner.Label.RefreshPageToLoadContents",
 		refreshButton = "Feature.Home.ClientCacheFallbackBanner.Action.Refresh",
 		errorRefreshingToastTitle = "Feature.Home.ClientCacheFallbackBanner.Label.ErrorRefreshingToastTitle"
 	})
-	local var9 = reactModule.useRef(nil)
-	local var10 = usePageSideMargin(var9.current)
-	local var11 = responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small)
-	local var12, var13 = reactModule.useState(false)
+	local var3 = reactModule.useRef(nil)
+	local var4 = usePageSideMargin(var3.current)
+	local var5 = responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small)
+	local var6, var7 = reactModule.useState(false)
 	
 	return reactModule.createElement(view, {
-		position = p0.Position,
-		[reactModule.Change.AbsoluteSize] = p0[reactModule.Change.AbsoluteSize],
-		ref = var9,
+		position = p1.Position,
+		[reactModule.Change.AbsoluteSize] = p1[reactModule.Change.AbsoluteSize],
+		ref = var3,
 		tag = "size-full-0 auto-y"
 	}, {
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var10),
-			PaddingRight = UDim.new(0, var10),
-			PaddingTop = UDim.new(0, var7.Padding.Large),
-			PaddingBottom = UDim.new(0, if var11 then 0 else var7.Padding.Large)
+			PaddingLeft = UDim.new(0, var4),
+			PaddingRight = UDim.new(0, var4),
+			PaddingTop = UDim.new(0, var1.Padding.Large),
+			PaddingBottom = UDim.new(0, if var5 then 0 else var1.Padding.Large)
 		}),
 		BannerContent = reactModule.createElement(banner, {
 			icon = enums.IconName.CircleX,
 			iconVariant = enums.IconVariant.Filled,
-			iconStyle = var7.Color.System.Alert,
-			title = var8.errorTitle,
-			body = var8.errorMessage,
+			iconStyle = var1.Color.System.Alert,
+			title = var2.errorTitle,
+			body = var2.errorMessage,
 			buttons = {
 				{
-					text = var8.refreshButton,
-					isLoading = var12,
+					text = var2.refreshButton,
+					isLoading = var6,
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: var13 (ref), p0 (ref), notificationModalsManagerModule (copy), UIBloxModule (copy), var8 (ref)
-						var13(true)
-						p0.onRefreshButtonClick():andThen(function(_)
-							-- upvalues: var13 (copy)
-							var13(false)
+						-- upvalues: var7 (ref), p1 (ref), notificationModalsManagerModule (copy), UIBloxModule (copy), var2 (ref)
+						var7(true)
+						p1.onRefreshButtonClick():andThen(function(_)
+							-- upvalues: var7 (copy)
+							var7(false)
 						end):catch(function(_)
-							-- upvalues: var13 (copy), notificationModalsManagerModule (copy), UIBloxModule (copy), var8 (copy)
-							var13(false)
+							-- upvalues: var7 (copy), notificationModalsManagerModule (copy), UIBloxModule (copy), var2 (copy)
+							var7(false)
 							notificationModalsManagerModule.SetUIBloxToast({
 								iconImage = UIBloxModule.App.ImageSet.Images["icons/status/alert"],
-								toastTitle = var8.errorRefreshingToastTitle,
+								toastTitle = var2.errorRefreshingToastTitle,
 								sequenceNumber = DateTime.now().UnixTimestamp
 							})
 						end)
-					end, { p0.onRefreshButtonClick, var8.errorRefreshingToastTitle })
+					end, { p1.onRefreshButtonClick, var2.errorRefreshingToastTitle })
 				}
 			}
 		})

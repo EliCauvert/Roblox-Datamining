@@ -5,26 +5,26 @@ local constantsModule = require(shareGame.Constants)
 local themeModule = require(robloxGui.Modules.Settings.Theme)
 local conversationDetails = themeModule.font(Enum.Font.SourceSans, "ConversationDetails")
 local WHITE = constantsModule.Color.WHITE
-local var5 = themeModule.textSize(19)
+local var1 = themeModule.textSize(19)
 local conversationDetails_1 = themeModule.font(Enum.Font.SourceSans, "ConversationDetails")
 local GRAY3 = constantsModule.Color.GRAY3
 local conversationDetails_2 = themeModule.textSize(16, "ConversationDetails")
 local conversationDetails_3 = themeModule.font(Enum.Font.SourceSans, "ConversationDetails")
 local conversationDetails_4 = themeModule.textSize(16, "ConversationDetails")
-local var10 = require(shareGame.getTranslator)()
+local var2 = require(shareGame.getTranslator)()
 local conversationDetails_5 = roactModule.PureComponent:extend("ConversationDetails")
 
-function conversationDetails_5.render(p0)
-	-- upvalues: roactModule (ref), conversationDetails_2 (ref), conversationDetails_1 (ref), GRAY3 (ref), conversationDetails_4 (ref), var10 (ref), constantsModule (ref), conversationDetails_3 (ref), var5 (ref), conversationDetails (ref), WHITE (ref)
-	local title = p0.props.title
-	local subtitle = p0.props.subtitle
-	local presence = p0.props.presence
-	local zIndex = p0.props.zIndex
+function conversationDetails_5.render(p1)
+	-- upvalues: roactModule (ref), conversationDetails_2 (ref), conversationDetails_1 (ref), GRAY3 (ref), conversationDetails_4 (ref), var2 (ref), constantsModule (ref), conversationDetails_3 (ref), var1 (ref), conversationDetails (ref), WHITE (ref)
+	local title = p1.props.title
+	local subtitle = p1.props.subtitle
+	local presence = p1.props.presence
+	local zIndex = p1.props.zIndex
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = p0.props.size,
-		LayoutOrder = p0.props.layoutOrder,
+		Size = p1.props.size,
+		LayoutOrder = p1.props.layoutOrder,
 		ZIndex = zIndex
 	}, {
 		UIListLayout = roactModule.createElement("UIListLayout", {
@@ -38,11 +38,11 @@ function conversationDetails_5.render(p0)
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 0,
-			Size = UDim2.new(1, 0, 0, var5),
+			Size = UDim2.new(1, 0, 0, var1),
 			Text = title or "",
 			Font = conversationDetails,
 			TextColor3 = WHITE,
-			TextSize = var5,
+			TextSize = var1,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			ZIndex = zIndex
 		}),
@@ -62,7 +62,7 @@ function conversationDetails_5.render(p0)
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			Size = UDim2.new(1, 0, 0, conversationDetails_4),
-			Text = var10:FormatByKey(constantsModule.PresenceTextKey[presence]),
+			Text = var2:FormatByKey(constantsModule.PresenceTextKey[presence]),
 			Font = conversationDetails_3,
 			TextColor3 = constantsModule.PresenceColors[presence],
 			TextSize = conversationDetails_4,

@@ -8,12 +8,12 @@ local t = {
 	adData = nil
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref), setPlayWithRewardStateModule (ref)
-	return if p1.type == setPlayWithRewardStateModule.name then {
-		flowId = p1.flowId,
-		universeId = p1.universeId,
-		isAdDataExpected = p1.isAdDataExpected,
-		adData = p1.adData
-	} else p0 or table.clone(t)
+	return if p2.type == setPlayWithRewardStateModule.name then {
+		flowId = p2.flowId,
+		universeId = p2.universeId,
+		isAdDataExpected = p2.isAdDataExpected,
+		adData = p2.adData
+	} else p1 or table.clone(t)
 end

@@ -30,26 +30,26 @@ playerTileButton.defaultProps = {
 	tileSize = UDim2.new(0, 150, 0, 150)
 }
 
-function playerTileButton.render(p0)
+function playerTileButton.render(p1)
 	-- upvalues: buttonTypeModule (ref), roactModule (ref), buttonModule (ref), controlStateModule (ref)
 	return roactModule.createElement(buttonModule, {
-		buttonType = if p0.props.isSecondary then buttonTypeModule.Secondary else buttonTypeModule.PrimarySystem,
+		buttonType = if p1.props.isSecondary then buttonTypeModule.Secondary else buttonTypeModule.PrimarySystem,
 		automaticSize = Enum.AutomaticSize.XY,
 		position = UDim2.new(1, 0, 1, 0),
-		size = UDim2.new(0, p0.props.tileSize.X.Offset / 2 - p0.props.outerButtonPadding * 1.5, 0, p0.props.buttonHeight),
+		size = UDim2.new(0, p1.props.tileSize.X.Offset / 2 - p1.props.outerButtonPadding * 1.5, 0, p1.props.buttonHeight),
 		anchorPoint = Vector2.new(1, 1),
-		onActivated = p0.props.onActivated or function() end,
-		isDisabled = p0.props.isDisabled,
-		icon = p0.props.icon,
-		isRoactGamepadEnabled = p0.props.isRoactGamepadEnabled,
-		onStateChanged = function(p1, p2)
-			-- upvalues: controlStateModule (copy), p0 (ref)
-			if p1 == controlStateModule.Hover then
-				p0.props.mouseEnter()
+		onActivated = p1.props.onActivated or function() end,
+		isDisabled = p1.props.isDisabled,
+		icon = p1.props.icon,
+		isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled,
+		onStateChanged = function(p2, p3)
+			-- upvalues: controlStateModule (copy), p1 (ref)
+			if p2 == controlStateModule.Hover then
+				p1.props.mouseEnter()
 				
 				return
-			elseif p2 == controlStateModule.Hover then
-				p0.props.mouseLeave()
+			elseif p3 == controlStateModule.Hover then
+				p1.props.mouseLeave()
 			end
 		end
 	})

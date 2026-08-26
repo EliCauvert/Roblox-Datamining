@@ -11,126 +11,126 @@ local t = {
 	SIZE_CONSTRAINT_RELATIVE_YY = "RelativeYY"
 }
 
-local function convertToLuaEnum(p0, p1, p2)
-	local match = string.match(p0, "^" .. p1 .. "(.*)")
+local function convertToLuaEnum(p1, p2, p3)
+	local match = string.match(p1, "^" .. p1 .. "(.*)")
 	
 	if not match then
-		return p0
+		return p1
 	end
-	local var7 = match:lower():gsub("_(%l)", function(p3)
-		return p3:upper()
+	local var1 = match:lower():gsub("_(%l)", function(p4)
+		return p4:upper()
 	end)
 	
-	return if p2 then var7:gsub("^%l", string.upper) else var7
+	return if p3 then var1:gsub("^%l", string.upper) else var1
 end
 
 return {
-	mapProtoEnumFormatToLua = function(p4, p5, p6)
+	mapProtoEnumFormatToLua = function(p1, p2, p3)
 		-- upvalues: t (ref), convertToLuaEnum (ref)
-		local var8 = t[p4]
+		local var1 = t[p1]
 		
-		if not var8 then
-			var8 = convertToLuaEnum(p4, p5, p6)
-			t[p4] = var8
+		if not var1 then
+			var1 = convertToLuaEnum(p1, p2, p3)
+			t[p1] = var1
 		end
-		return var8
+		return var1
 	end,
-	mapUiComponentTypeToLua = function(p7)
+	mapUiComponentTypeToLua = function(p1)
 		-- upvalues: t (ref), convertToLuaEnum (ref), sduiComponentTypeModule (ref)
-		if p7 == nil then
+		if p1 == nil then
 			return nil
 		end
-		local var9 = t[p7]
+		local var1 = t[p1]
 		
-		if not var9 then
-			var9 = convertToLuaEnum(p7, "UI_COMPONENT_TYPE_", true)
-			t[p7] = var9
+		if not var1 then
+			var1 = convertToLuaEnum(p1, "UI_COMPONENT_TYPE_", true)
+			t[p1] = var1
 		end
-		return if sduiComponentTypeModule[var9] then sduiComponentTypeModule[var9] else nil
+		return if sduiComponentTypeModule[var1] then sduiComponentTypeModule[var1] else nil
 	end,
-	mapHydrationContentTypeToLua = function(p8)
+	mapHydrationContentTypeToLua = function(p1)
 		-- upvalues: t (ref), sduiDataBindingContentTypeModule (ref)
-		if p8 == nil then
+		if p1 == nil then
 			return nil
 		end
-		local var10 = t[p8]
+		local var1 = t[p1]
 		
-		if not var10 then
-			local match = string.match(p8, "^HYDRATION_CONTENT_TYPE_(.*)")
-			var10 = if not match then p8 else match:lower():gsub("_(%l)", function(p9)
-				return p9:upper()
+		if not var1 then
+			local match = string.match(p1, "^HYDRATION_CONTENT_TYPE_(.*)")
+			var1 = if not match then p1 else match:lower():gsub("_(%l)", function(p2)
+				return p2:upper()
 			end)
-			t[p8] = var10
+			t[p1] = var1
 		end
-		return if sduiDataBindingContentTypeModule[var10] then sduiDataBindingContentTypeModule[var10] else nil
+		return if sduiDataBindingContentTypeModule[var1] then sduiDataBindingContentTypeModule[var1] else nil
 	end,
-	mapActionTypeToLua = function(p10)
+	mapActionTypeToLua = function(p1)
 		-- upvalues: t (ref), convertToLuaEnum (ref), sduiActionTypeModule (ref)
-		if p10 == nil then
+		if p1 == nil then
 			return nil
 		end
-		local var12 = t[p10]
+		local var1 = t[p1]
 		
-		if not var12 then
-			var12 = convertToLuaEnum(p10, "ACTION_TYPE_", true)
-			t[p10] = var12
+		if not var1 then
+			var1 = convertToLuaEnum(p1, "ACTION_TYPE_", true)
+			t[p1] = var1
 		end
-		return if sduiActionTypeModule[var12] then sduiActionTypeModule[var12] else nil
+		return if sduiActionTypeModule[var1] then sduiActionTypeModule[var1] else nil
 	end,
-	mapPropName = function(p11)
+	mapPropName = function(p1)
 		-- upvalues: t (ref), snakeToCamel (ref)
-		if p11 == nil then
+		if p1 == nil then
 			return nil
-		elseif typeof(p11) == "number" then
-			return p11
+		elseif typeof(p1) == "number" then
+			return p1
 		end
-		local var13 = t[p11]
+		local var1 = t[p1]
 		
-		if not var13 then
-			var13 = snakeToCamel(p11)
-			t[p11] = var13
+		if not var1 then
+			var1 = snakeToCamel(p1)
+			t[p1] = var1
 		end
-		return var13
+		return var1
 	end,
-	camelCaseKeys = function(p12)
+	camelCaseKeys = function(p1)
 		-- upvalues: t (ref), snakeToCamel (ref)
-		if type(p12) ~= "table" then
-			return p12
+		if type(p1) ~= "table" then
+			return p1
 		end
 		local t_1 = {}
 		
-		for i, v in p12 do
-			local var15
+		for i, v in p1 do
+			local var1
 			if type(i) ~= "string" then
-				var15 = i
+				var1 = i
 			elseif i == nil then
-				var15 = nil
+				var1 = nil
 			elseif typeof(i) == "number" then
-				var15 = i
+				var1 = i
 			else
-				local var16 = t[i]
+				local var2 = t[i]
 				
-				if not var16 then
-					var16 = snakeToCamel(i)
-					t[i] = var16
+				if not var2 then
+					var2 = snakeToCamel(i)
+					t[i] = var2
 				end
-				var15 = var16
+				var1 = var2
 			end
-			t_1[var15] = v
+			t_1[var1] = v
 		end
 		return t_1
 	end,
-	mapProtoEngineEnumToLua = function(p13, p14, p15)
+	mapProtoEngineEnumToLua = function(p2, p3, p4)
 		-- upvalues: t (ref), convertToLuaEnum (ref)
-		if p13 == nil then
+		if p2 == nil then
 			return nil
 		end
-		local var17 = t[p13]
+		local var3 = t[p2]
 		
-		if not var17 then
-			var17 = convertToLuaEnum(p13, p14, true)
-			t[p13] = var17
+		if not var3 then
+			var3 = convertToLuaEnum(p2, p3, true)
+			t[p2] = var3
 		end
-		return if var17 then p15(var17) else nil
+		return if var3 then p4(var3) else nil
 	end
 }

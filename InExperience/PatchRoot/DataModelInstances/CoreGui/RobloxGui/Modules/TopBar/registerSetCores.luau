@@ -3,10 +3,10 @@ local setTopBarEnabledModule = require(script.Parent.Actions.SetTopBarEnabled)
 
 return if require(game:GetService("CorePackages").Workspace.Packages.InExperienceTopBar).Flags.FFlagTopBarSignalizeSetCores then nil else function(value)
 	-- upvalues: starterGuiService (ref), setTopBarEnabledModule (ref)
-	starterGuiService:RegisterSetCore("TopbarEnabled", function(p0)
+	starterGuiService:RegisterSetCore("TopbarEnabled", function(p1)
 		-- upvalues: value (ref), setTopBarEnabledModule (copy)
-		if type(p0) == "boolean" then
-			value:dispatch(setTopBarEnabledModule(p0))
+		if type(p1) == "boolean" then
+			value:dispatch(setTopBarEnabledModule(p1))
 			
 			return
 		end

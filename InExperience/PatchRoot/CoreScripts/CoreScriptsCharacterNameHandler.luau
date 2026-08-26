@@ -12,14 +12,14 @@ local _ = {
 	CharacterHumanoidAdded = "CharacterHumanoidAdded"
 }
 
-local function setName(value, p0, p1)
+local function setName(value, p1, p2)
 	-- upvalues: t (ref)
-	local inExperienceCombinedName = p1.names.inExperienceCombinedName
-	local displayName = p1.names.displayName
+	local inExperienceCombinedName = p2.names.inExperienceCombinedName
+	local displayName = p2.names.displayName
 	
-	if p1.names.displayName == value.DisplayName then
+	if p2.names.displayName == value.DisplayName then
 		value.InternalDisplayName = inExperienceCombinedName
-		t[p0].HumanoidDisplayNameChanged = value:GetPropertyChangedSignal("DisplayName"):Connect(function()
+		t[p1].HumanoidDisplayNameChanged = value:GetPropertyChangedSignal("DisplayName"):Connect(function()
 			-- upvalues: displayName (ref), value (ref)
 			if displayName ~= value.DisplayName then
 				value.InternalDisplayName = ""
@@ -28,31 +28,31 @@ local function setName(value, p0, p1)
 	end
 end
 
-local function checkHumanoid(p2, p3, p4)
+local function checkHumanoid(p1, p2, p3)
 	-- upvalues: setName (ref), t (ref)
-	local humanoid = p3:FindFirstChildWhichIsA("Humanoid")
+	local humanoid = p2:FindFirstChildWhichIsA("Humanoid")
 	
 	if humanoid then
-		setName(humanoid, p2, p4)
+		setName(humanoid, p1, p3)
 	end
-	t[p2].CharacterHumanoidAdded = p3.ChildAdded:Connect(function(p5)
-		-- upvalues: setName (copy), p2 (ref), p4 (ref)
-		if p5:IsA("Humanoid") then
-			setName(p5, p2, p4)
+	t[p1].CharacterHumanoidAdded = p2.ChildAdded:Connect(function(p4)
+		-- upvalues: setName (copy), p1 (ref), p3 (ref)
+		if p4:IsA("Humanoid") then
+			setName(p4, p1, p3)
 		end
 	end)
 end
 
-local function setNameOnCharacterAdded(value, p6)
+local function setNameOnCharacterAdded(value, p1)
 	-- upvalues: t (ref), checkHumanoid (ref)
 	t[value] = {}
 	
 	if value.Character then
-		checkHumanoid(value, value.Character, p6)
+		checkHumanoid(value, value.Character, p1)
 	end
-	t[value].CharacterAdded = value.CharacterAdded:Connect(function(p7)
-		-- upvalues: checkHumanoid (copy), value (ref), p6 (ref)
-		checkHumanoid(value, p7, p6)
+	t[value].CharacterAdded = value.CharacterAdded:Connect(function(p2)
+		-- upvalues: checkHumanoid (copy), value (ref), p1 (ref)
+		checkHumanoid(value, p2, p1)
 	end)
 	t[value].CharacterRemoving = value.CharacterRemoving:Connect(function()
 		-- upvalues: t (copy), value (ref)
@@ -77,11 +77,11 @@ local function setCurrentPlayersNames()
 		table.insert(t, tostring(v.UserId))
 		t_1[tostring(v.UserId)] = v
 	end
-	userProfileStore.get().fetchNamesByUserIds(t, function(p8)
+	userProfileStore.get().fetchNamesByUserIds(t, function(p1)
 		-- upvalues: t_1 (ref), fixCharacterNameHandlerNilProfileCrash (copy), setNameOnCharacterAdded (copy)
-		local data = p8.data
+		local data = p1.data
 		
-		if p8.status == "success" then
+		if p1.status == "success" then
 			for i, v in data do
 				local userId = t_1[v.userId]
 				
@@ -98,47 +98,47 @@ local function setCurrentPlayersNames()
 	end)
 end
 
-local function onPlayerAdded(p9)
+local function onPlayerAdded(p1)
 	-- upvalues: userProfileStore (ref), fixCharacterNameHandlerNilProfileCrash (ref), setNameOnCharacterAdded (ref)
-	userProfileStore.get().fetchNamesByUserIds({ tostring(p9.UserId) }, function(p10)
-		-- upvalues: fixCharacterNameHandlerNilProfileCrash (copy), setNameOnCharacterAdded (copy), p9 (ref)
-		local var14
-		local status = p10.status
-		local data = p10.data
+	userProfileStore.get().fetchNamesByUserIds({ tostring(p1.UserId) }, function(p2)
+		-- upvalues: fixCharacterNameHandlerNilProfileCrash (copy), setNameOnCharacterAdded (copy), p1 (ref)
+		local var1
+		local status = p2.status
+		local data = p2.data
 		
 		if fixCharacterNameHandlerNilProfileCrash then
-			var14 = false
+			var1 = false
 			
 			if #data > 0 then
 				local _ = data[1].names ~= nil
 			end
 		else
-			var14 = true
+			var1 = true
 		end
-		if status == "success" and var14 then
-			local var15 = data[1]
-			setNameOnCharacterAdded(p9, {
+		if status == "success" and var1 then
+			local var2 = data[1]
+			setNameOnCharacterAdded(p1, {
 				names = {
-					inExperienceCombinedName = var15.names.getInExperienceCombinedName(false),
-					displayName = var15.names.getDisplayName(false)
+					inExperienceCombinedName = var2.names.getInExperienceCombinedName(false),
+					displayName = var2.names.getDisplayName(false)
 				}
 			})
 		end
 	end)
 end
 
-local function onPlayerRemoving(p11)
+local function onPlayerRemoving(p1)
 	-- upvalues: t (ref), fFlagUserProfileStoreQueryRefetch (ref), userProfileStore (ref)
-	local var16 = t[p11]
+	local var1 = t[p1]
 	
-	if t[p11] then
-		for i, v in pairs(var16) do
+	if t[p1] then
+		for i, v in pairs(var1) do
 			v:Disconnect()
 		end
-		t[p11] = nil
+		t[p1] = nil
 	end
 	if fFlagUserProfileStoreQueryRefetch then
-		userProfileStore.get().invalidateCachedNamesForUserIds({ tostring(p11.UserId) })
+		userProfileStore.get().invalidateCachedNamesForUserIds({ tostring(p1.UserId) })
 	end
 end
 

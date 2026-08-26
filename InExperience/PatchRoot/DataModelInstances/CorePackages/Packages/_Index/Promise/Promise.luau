@@ -4,13 +4,13 @@ local ok, status = pcall(game.DefineFastFlag, game, "ReducePromiseTaskDefer", fa
 if not ok then
 	status = false
 end
-local function _(p0)
-	if type(p0) == "function" then
+local function _(p1)
+	if type(p1) == "function" then
 		return true
-	elseif type(p0) == "table" then
-		local var12 = getmetatable(p0)
+	elseif type(p1) == "table" then
+		local var1 = getmetatable(p1)
 		
-		return var12 and type(rawget(var12, "__call")) == "function"
+		return var1 and type(rawget(var1, "__call")) == "function"
 	end
 end
 
@@ -43,46 +43,46 @@ local t_1 = {
 }
 t_1.__index = t_1
 
-function t_1.new(p4, p5)
+function t_1.new(p3, p4)
 	-- upvalues: t_1 (write)
-	p4 = p4 or {}
+	p3 = p3 or {}
 	
 	return setmetatable({
-		error = tostring(p4.error) or "[This error has no error text.]",
-		trace = p4.trace,
-		context = p4.context,
-		kind = p4.kind,
-		parent = p5,
+		error = tostring(p3.error) or "[This error has no error text.]",
+		trace = p3.trace,
+		context = p3.context,
+		kind = p3.kind,
+		parent = p4,
 		createdTick = os.clock(),
 		createdTrace = debug.traceback()
 	}, t_1)
 end
 
-function t_1.is(p6)
-	if type(p6) == "table" then
-		local var15 = getmetatable(p6)
+function t_1.is(p3)
+	if type(p3) == "table" then
+		local var1 = getmetatable(p3)
 		
-		return type(var15) == "table" and (rawget(p6, "error") ~= nil and type(rawget(var15, "extend")) == "function")
+		return type(var1) == "table" and (rawget(p3, "error") ~= nil and type(rawget(var1, "extend")) == "function")
 	end
 end
 
-function t_1:isKind(p7)
+function t_1:isKind(p3)
 	-- upvalues: t_1 (write)
-	assert(p7 ~= nil, "Argument #2 to Promise.Error.isKind must not be nil")
+	assert(p3 ~= nil, "Argument #2 to Promise.Error.isKind must not be nil")
 	
-	return t_1.is(self) and self.kind == p7
+	return t_1.is(self) and self.kind == p3
 end
 
-function t_1:extend(p8)
+function t_1:extend(p3)
 	-- upvalues: t_1 (write)
-	p8 = p8 or {}
-	p8.kind = p8.kind or self.kind
+	p3 = p3 or {}
+	p3.kind = p3.kind or self.kind
 	
-	return t_1.new(p8, self)
+	return t_1.new(p3, self)
 end
 
-function t_1.getErrorChain(p9)
-	local list = { p9 }
+function t_1.getErrorChain(p3)
+	local list = { p3 }
 	while list[#list].parent do
 		table.insert(list, list[#list].parent)
 	end
@@ -104,58 +104,58 @@ local function pack(...)
 	return select("#", ...), { ... }
 end
 
-local function packResult(p10, ...)
-	return p10, select("#", ...), { ... }
+local function packResult(p4, ...)
+	return p4, select("#", ...), { ... }
 end
 
-local _ = function(p11)
+local _ = function(p4)
 	-- upvalues: t_1 (write)
-	assert(p11 ~= nil, "traceback is nil")
+	assert(p4 ~= nil, "traceback is nil")
 	
-	return function(p12)
-		-- upvalues: t_1 (copy), p11 (ref)
-		return if type(p12) == "table" then p12 else t_1.new({
-			error = p12,
+	return function(p5)
+		-- upvalues: t_1 (copy), p4 (ref)
+		return if type(p5) == "table" then p5 else t_1.new({
+			error = p5,
 			kind = t_1.Kind.ExecutionError,
-			trace = debug.traceback(tostring(p12), 2),
+			trace = debug.traceback(tostring(p5), 2),
 			context = "Promise created at:\n\n" .. p11
 		})
 	end
 end
 
-local function runExecutor(p13, p14, ...)
+local function runExecutor(p4, p5, ...)
 	-- upvalues: packResult (ref), t_1 (write)
 	local _xpcall = xpcall
-	assert(p13 ~= nil, "traceback is nil")
+	assert(p4 ~= nil, "traceback is nil")
 	
-	return packResult(_xpcall(p14, function(p15)
-		-- upvalues: t_1 (copy), p13 (ref)
-		return if type(p15) == "table" then p15 else t_1.new({
-			error = p15,
+	return packResult(_xpcall(p5, function(p6)
+		-- upvalues: t_1 (copy), p4 (ref)
+		return if type(p6) == "table" then p6 else t_1.new({
+			error = p6,
 			kind = t_1.Kind.ExecutionError,
-			trace = debug.traceback(tostring(p15), 2),
+			trace = debug.traceback(tostring(p6), 2),
 			context = "Promise created at:\n\n" .. p13
 		})
 	end, ...))
 end
 
-local _ = function(p16, p17, p18, p19)
+local _ = function(p4, p5, p6, p7)
 	-- upvalues: runExecutor (ref)
 	return function(...)
-		-- upvalues: runExecutor (copy), p16 (ref), p17 (ref), p18 (ref), p19 (ref)
-		local var20, var21, var22 = runExecutor(p16, p17, ...)
+		-- upvalues: runExecutor (copy), p4 (ref), p5 (ref), p6 (ref), p7 (ref)
+		local var1, var2, var3 = runExecutor(p4, p5, ...)
 		
-		if var20 then
-			p18(unpack(var22, 1, var21))
+		if var1 then
+			p6(unpack(var3, 1, var2))
 			
 			return
 		end
-		p19(var22[1])
+		p7(var3[1])
 	end
 end
 
-local _ = function(p20)
-	return next(p20) == nil
+local _ = function(p4)
+	return next(p4) == nil
 end
 
 local t_2 = {
@@ -168,9 +168,9 @@ local t_2 = {
 }
 t_2.__index = t_2.prototype
 
-function t_2._new(p21, p22, p23)
+function t_2._new(p4, p5, p6)
 	-- upvalues: t_2 (ref), t (ref), runExecutor (ref)
-	if p23 ~= nil and not t_2.is(p23) then
+	if p6 ~= nil and not t_2.is(p6) then
 		error("Argument #2 to Promise.new must be a promise or nil", 2)
 	end
 	local t_1 = {
@@ -179,17 +179,17 @@ function t_2._new(p21, p22, p23)
 		_valuesLength = -1,
 		_unhandledRejection = true,
 		_cancellationHook = nil,
-		_source = p21,
+		_source = p4,
 		_status = t_2.Status.Started,
 		_queuedResolve = {},
 		_queuedReject = {},
 		_queuedFinally = {},
-		_parent = p23,
+		_parent = p6,
 		_consumers = setmetatable({}, t)
 	}
 	
-	if p23 and p23._status == t_2.Status.Started then
-		p23._consumers[t_1] = true
+	if p6 and p6._status == t_2.Status.Started then
+		p6._consumers[t_1] = true
 	end
 	setmetatable(t_1, t_2)
 	
@@ -203,24 +203,24 @@ function t_2._new(p21, p22, p23)
 		t_1:_reject(...)
 	end
 	
-	local function onCancel(p24)
+	local function onCancel(p7)
 		-- upvalues: t_1 (ref), t_2 (copy)
-		if p24 then
+		if p7 then
 			if t_1._status == t_2.Status.Cancelled then
-				p24()
+				p7()
 			else
-				t_1._cancellationHook = p24
+				t_1._cancellationHook = p7
 			end
 		end
 		return t_1._status == t_2.Status.Cancelled
 	end
 	
 	t_1._thread = coroutine.create(function()
-		-- upvalues: runExecutor (copy), t_1 (ref), p22 (ref), resolve (ref), reject (ref), onCancel (ref)
-		local var27, _, var28 = runExecutor(t_1._source, p22, resolve, reject, onCancel)
+		-- upvalues: runExecutor (copy), t_1 (ref), p5 (ref), resolve (ref), reject (ref), onCancel (ref)
+		local var1, _, var2 = runExecutor(t_1._source, p5, resolve, reject, onCancel)
 		
-		if not var27 then
-			reject(var28[1])
+		if not var1 then
+			reject(var2[1])
 		end
 	end)
 	task.spawn(t_1._thread)
@@ -228,30 +228,30 @@ function t_2._new(p21, p22, p23)
 	return t_1
 end
 
-function t_2.new(p25)
+function t_2.new(p4)
 	-- upvalues: t_2 (ref)
-	return t_2._new(debug.traceback(nil, 2), p25)
+	return t_2._new(debug.traceback(nil, 2), p4)
 end
 
 function t_2:__tostring()
 	return string.format("Promise(%s)", self._status)
 end
 
-function t_2.defer(p26)
+function t_2.defer(p4)
 	-- upvalues: t_2 (ref), runExecutor (ref)
 	local trac = debug.traceback(nil, 2)
 	local _ = nil
 	
-	return t_2._new(trac, function(p27, p28, p29)
-		-- upvalues: t_2 (copy), runExecutor (copy), trac (ref), p26 (ref)
+	return t_2._new(trac, function(p5, p6, p7)
+		-- upvalues: t_2 (copy), runExecutor (copy), trac (ref), p4 (ref)
 		local timeEventConnection = nil
 		timeEventConnection = t_2._timeEvent:Connect(function()
-			-- upvalues: timeEventConnection (write), runExecutor (copy), trac (copy), p26 (copy), p27 (ref), p28 (ref), p29 (ref)
+			-- upvalues: timeEventConnection (write), runExecutor (copy), trac (copy), p4 (copy), p5 (ref), p6 (ref), p7 (ref)
 			timeEventConnection:Disconnect()
-			local var31, _, var32 = runExecutor(trac, p26, p27, p28, p29)
+			local var1, _, var2 = runExecutor(trac, p4, p5, p6, p7)
 			
-			if not var31 then
-				p28(var32[1])
+			if not var1 then
+				p6(var2[1])
 			end
 		end)
 	end)
@@ -261,70 +261,70 @@ t_2.async = t_2.defer
 
 function t_2.resolve(...)
 	-- upvalues: pack (ref), t_2 (ref)
-	local var33, var34 = pack(...)
+	local var1, var2 = pack(...)
 	
-	return t_2._new(debug.traceback(nil, 2), function(p30)
-		-- upvalues: var34 (ref), var33 (ref)
-		p30(unpack(var34, 1, var33))
+	return t_2._new(debug.traceback(nil, 2), function(p4)
+		-- upvalues: var2 (ref), var1 (ref)
+		p4(unpack(var2, 1, var1))
 	end)
 end
 
 function t_2.reject(...)
 	-- upvalues: pack (ref), t_2 (ref)
-	local var35, var36 = pack(...)
+	local var1, var2 = pack(...)
 	
-	return t_2._new(debug.traceback(nil, 2), function(_, p31)
-		-- upvalues: var36 (ref), var35 (ref)
-		p31(unpack(var36, 1, var35))
+	return t_2._new(debug.traceback(nil, 2), function(_, p4)
+		-- upvalues: var2 (ref), var1 (ref)
+		p4(unpack(var2, 1, var1))
 	end)
 end
 
-function t_2._try(p32, p33, ...)
+function t_2._try(p4, p5, ...)
 	-- upvalues: pack (ref), t_2 (ref)
-	local var37, var38 = pack(...)
+	local var1, var2 = pack(...)
 	
-	return t_2._new(p32, function(p34)
-		-- upvalues: p33 (ref), var38 (ref), var37 (ref)
-		p34(p33(unpack(var38, 1, var37)))
+	return t_2._new(p4, function(p6)
+		-- upvalues: p5 (ref), var2 (ref), var1 (ref)
+		p6(p5(unpack(var2, 1, var1)))
 	end)
 end
 
-function t_2.try(p35, ...)
+function t_2.try(p4, ...)
 	-- upvalues: t_2 (ref)
-	return t_2._try(debug.traceback(nil, 2), p35, ...)
+	return t_2._try(debug.traceback(nil, 2), p4, ...)
 end
 
-function t_2._all(p36, p37, p38)
+function t_2._all(p4, p5, p6)
 	-- upvalues: t_2 (ref)
-	if type(p37) ~= "table" then
+	if type(p5) ~= "table" then
 		error(string.format("Please pass a list of promises to %s", "Promise.all"), 3)
 	end
-	for i, v in pairs(p37) do
+	for i, v in pairs(p5) do
 		if not t_2.is(v) then
 			error(string.format("Non-promise value passed into %s at index %s", "Promise.all", tostring(i)), 3)
 		end
 	end
-	return if #p37 == 0 or p38 == 0 then t_2.resolve({}) else t_2._new(p36, function(p39, p40, p41)
-		-- upvalues: p38 (ref), p37 (ref)
+	return if #p5 == 0 or p6 == 0 then t_2.resolve({}) else t_2._new(p4, function(p7, p8, p9)
+		-- upvalues: p6 (ref), p5 (ref)
 		local t = {}
 		local t_1 = {}
-		local var41 = 0
-		local var42 = 0
-		local var43 = false
+		local var1 = 0
+		local var2 = 0
+		local var3 = false
 		
-		local function resolveOne(p42, ...)
-			-- upvalues: var43 (write), var41 (write), p38 (copy), t (ref), p37 (copy), p39 (ref), t_1 (ref)
-			if var43 then return end
-			var41 += 1
+		local function resolveOne(p10, ...)
+			-- upvalues: var3 (write), var1 (write), p6 (copy), t (ref), p5 (copy), p7 (ref), t_1 (ref)
+			if var3 then return end
+			var1 += 1
 			
-			if p38 == nil then
-				t[p42] = ...
+			if p6 == nil then
+				t[p10] = ...
 			else
-				t[var41] = ...
+				t[var1] = ...
 			end
-			if (p38 or #p37) <= var41 then
-				var43 = true
-				p39(t)
+			if (p6 or #p5) <= var1 then
+				var3 = true
+				p7(t)
 				
 				for i, v in ipairs(t_1) do
 					v:cancel()
@@ -332,27 +332,27 @@ function t_2._all(p36, p37, p38)
 			end
 		end
 		
-		p41(function()
+		p9(function()
 			-- upvalues: t_1 (ref)
 			for i, v in ipairs(t_1) do
 				v:cancel()
 			end
 		end)
 		
-		for i, v in ipairs(p37) do
+		for i, v in ipairs(p5) do
 			t_1[i] = v:andThen(function(...)
 				-- upvalues: resolveOne (ref), i (ref)
 				resolveOne(i, ...)
 			end, function(...)
-				-- upvalues: var42 (write), p38 (copy), p37 (copy), t_1 (ref), var43 (write), p40 (ref)
-				var42 += 1
+				-- upvalues: var2 (write), p6 (copy), p5 (copy), t_1 (ref), var3 (write), p8 (ref)
+				var2 += 1
 				
-				if p38 == nil or #p37 - var42 < p38 then
+				if p6 == nil or #p5 - var2 < p6 then
 					for i, v in ipairs(t_1) do
 						v:cancel()
 					end
-					var43 = true
-					p40(...)
+					var3 = true
+					p8(...)
 				end
 			end)
 		end
@@ -369,46 +369,46 @@ function t_2.all(...)
 	return t_2._all(debug.traceback(nil, 2), list)
 end
 
-function t_2.fold(p43, p44, p45)
+function t_2.fold(p11, p12, p13)
 	-- upvalues: t_2 (ref)
 	local isNotFunction
-	assert(type(p43) == "table", "Bad argument #1 to Promise.fold: must be a table")
+	assert(type(p11) == "table", "Bad argument #1 to Promise.fold: must be a table")
 	
-	if type(p44) == "function" then
+	if type(p12) == "function" then
 		isNotFunction = true
-	elseif type(p44) == "table" then
-		local var47 = getmetatable(p44)
+	elseif type(p12) == "table" then
+		local var4 = getmetatable(p12)
 		
-		if var47 then
-			isNotFunction = type(rawget(var47, "__call")) ~= "function"
+		if var4 then
+			isNotFunction = type(rawget(var4, "__call")) ~= "function"
 		end
 	end
 	assert(isNotFunction, "Bad argument #2 to Promise.fold: must be a function")
-	local var48 = t_2.resolve(p45)
+	local var5 = t_2.resolve(p13)
 	
-	return t_2.each(p43, function(p46, p47)
-		-- upvalues: var48 (write), p44 (ref)
-		var48 = var48:andThen(function(p48)
-			-- upvalues: p44 (copy), p46 (ref), p47 (ref)
-			return p44(p48, p46, p47)
+	return t_2.each(p11, function(p14, p15)
+		-- upvalues: var5 (write), p12 (ref)
+		var5 = var5:andThen(function(p16)
+			-- upvalues: p12 (copy), p14 (ref), p15 (ref)
+			return p12(p16, p14, p15)
 		end)
 	end):andThen(function()
-		-- upvalues: var48 (write)
-		return var48
+		-- upvalues: var5 (write)
+		return var5
 	end)
 end
 
-function t_2.some(p49, p50)
+function t_2.some(p11, p12)
 	-- upvalues: t_2 (ref)
-	assert(type(p50) == "number", "Bad argument #2 to Promise.some: must be a number")
+	assert(type(p12) == "number", "Bad argument #2 to Promise.some: must be a number")
 	
-	return t_2._all(debug.traceback(nil, 2), p49, p50)
+	return t_2._all(debug.traceback(nil, 2), p11, p12)
 end
 
-function t_2.any(p51)
+function t_2.any(p11)
 	-- upvalues: t_2 (ref)
-	return t_2._all(debug.traceback(nil, 2), p51, 1):andThen(function(p52)
-		return p52[1]
+	return t_2._all(debug.traceback(nil, 2), p11, 1):andThen(function(p12)
+		return p12[1]
 	end)
 end
 
@@ -422,19 +422,19 @@ function t_2.allSettled(value)
 			error(string.format("Non-promise value passed into %s at index %s", "Promise.allSettled", tostring(i)), 2)
 		end
 	end
-	return if #value == 0 then t_2.resolve({}) else t_2._new(debug.traceback(nil, 2), function(p53, _, p54)
+	return if #value == 0 then t_2.resolve({}) else t_2._new(debug.traceback(nil, 2), function(p11, _, p12)
 		-- upvalues: value (ref)
 		local t = {}
 		local t_1 = {}
-		local var51 = 0
+		local var4 = 0
 		
-		local function resolveOne(p55, ...)
-			-- upvalues: var51 (write), t (ref), value (copy), p53 (ref)
-			var51 += 1
-			t[p55] = ...
+		local function resolveOne(p13, ...)
+			-- upvalues: var4 (write), t (ref), value (copy), p11 (ref)
+			var4 += 1
+			t[p13] = ...
 			
-			if #value <= var51 then
-				p53(t)
+			if #value <= var4 then
+				p11(t)
 			end
 		end
 		
@@ -454,17 +454,17 @@ function t_2.allSettled(value)
 	end)
 end
 
-function t_2.race(p56)
+function t_2.race(p11)
 	-- upvalues: t_2 (ref)
-	assert(type(p56) == "table", string.format("Please pass a list of promises to %s", "Promise.race"))
+	assert(type(p11) == "table", string.format("Please pass a list of promises to %s", "Promise.race"))
 	
-	for i, v in pairs(p56) do
+	for i, v in pairs(p11) do
 		assert(t_2.is(v), string.format("Non-promise value passed into %s at index %s", "Promise.race", tostring(i)))
 	end
-	return t_2._new(debug.traceback(nil, 2), function(p57, p58, p59)
-		-- upvalues: p56 (ref)
+	return t_2._new(debug.traceback(nil, 2), function(p12, p13, p14)
+		-- upvalues: p11 (ref)
 		local t = {}
-		local var54 = false
+		local var4 = false
 		
 		local function _()
 			-- upvalues: t (ref)
@@ -473,71 +473,71 @@ function t_2.race(p56)
 			end
 		end
 		
-		local _ = function(p60)
-			-- upvalues: t (ref), var54 (write)
+		local _ = function(p15)
+			-- upvalues: t (ref), var4 (write)
 			return function(...)
-				-- upvalues: t (copy), var54 (copy), p60 (ref)
+				-- upvalues: t (copy), var4 (copy), p15 (ref)
 				for i, v in ipairs(t) do
 					v:cancel()
 				end
-				var54 = true
+				var4 = true
 				
-				return p60(...)
+				return p15(...)
 			end
 		end
 		
-		if p59(function(...)
-			-- upvalues: t (ref), var54 (write), p58 (ref)
+		if p14(function(...)
+			-- upvalues: t (ref), var4 (write), p13 (ref)
 			for i, v in ipairs(t) do
 				v:cancel()
 			end
-			var54 = true
+			var4 = true
 			
-			return p58(...)
+			return p13(...)
 		end) then return end
-		for i, v in ipairs(p56) do
+		for i, v in ipairs(p11) do
 			t[i] = v:andThen(function(...)
-				-- upvalues: t (ref), var54 (write), p57 (ref)
+				-- upvalues: t (ref), var4 (write), p12 (ref)
 				for i, v in ipairs(t) do
 					v:cancel()
 				end
-				var54 = true
+				var4 = true
 				
-				return p57(...)
+				return p12(...)
 			end, function(...)
-				-- upvalues: t (ref), var54 (write), p58 (ref)
+				-- upvalues: t (ref), var4 (write), p13 (ref)
 				for i, v in ipairs(t) do
 					v:cancel()
 				end
-				var54 = true
+				var4 = true
 				
-				return p58(...)
+				return p13(...)
 			end)
 		end
 	end)
 end
 
-function t_2.each(p61, p62)
+function t_2.each(p16, p17)
 	-- upvalues: t_2 (ref), t_1 (write)
 	local isNotFunction
-	assert(type(p61) == "table", string.format("Please pass a list of promises to %s", "Promise.each"))
+	assert(type(p16) == "table", string.format("Please pass a list of promises to %s", "Promise.each"))
 	
-	if type(p62) == "function" then
+	if type(p17) == "function" then
 		isNotFunction = true
-	elseif type(p62) == "table" then
-		local var56 = getmetatable(p62)
+	elseif type(p17) == "table" then
+		local var5 = getmetatable(p17)
 		
-		if var56 then
-			isNotFunction = type(rawget(var56, "__call")) ~= "function"
+		if var5 then
+			isNotFunction = type(rawget(var5, "__call")) ~= "function"
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise.each"))
 	
-	return t_2._new(debug.traceback(nil, 2), function(p63, p64, p65)
-		-- upvalues: p61 (ref), t_2 (copy), t_1 (copy), p62 (ref)
+	return t_2._new(debug.traceback(nil, 2), function(p18, p19, p20)
+		-- upvalues: p16 (ref), t_2 (copy), t_1 (copy), p17 (ref)
 		local t = {}
 		local t_3 = {}
-		local var59 = false
+		local var6 = false
 		
 		local function _()
 			-- upvalues: t_3 (ref)
@@ -546,9 +546,9 @@ function t_2.each(p61, p62)
 			end
 		end
 		
-		p65(function()
-			-- upvalues: var59 (write), t_3 (ref)
-			var59 = true
+		p20(function()
+			-- upvalues: var6 (write), t_3 (ref)
+			var6 = true
 			
 			for i, v in ipairs(t_3) do
 				v:cancel()
@@ -556,62 +556,62 @@ function t_2.each(p61, p62)
 		end)
 		local t_4 = {}
 		
-		for i, v in ipairs(p61) do
+		for i, v in ipairs(p16) do
 			if not t_2.is(v) then
 				t_4[i] = v
 				continue
 			end
 			if v:getStatus() ~= t_2.Status.Cancelled then
 				if v:getStatus() ~= t_2.Status.Rejected then
-					local var65 = v:andThen(function(...)
+					local var7 = v:andThen(function(...)
 						return ...
 					end)
-					table.insert(t_3, var65)
-					t_4[i] = var65
+					table.insert(t_3, var7)
+					t_4[i] = var7
 					continue
 				end
 				for i_1, v_2 in ipairs(t_3) do
 					v_2:cancel()
 				end
-				return p64(select(2, v:await()))
+				return p19(select(2, v:await()))
 			end
 			for i_1, v_2 in ipairs(t_3) do
 				v_2:cancel()
 			end
-			return p64(t_1.new({
+			return p19(t_1.new({
 				error = "Promise is cancelled",
 				kind = t_1.Kind.AlreadyCancelled,
 				context = string.format("The Promise that was part of the array at index %d passed into Promise.each was already cancelled when Promise.each began.\n\nThat Promise was created at:\n\n%s", i, v._source)
 			}))
 		end
 		for i_1, v in ipairs(t_4) do
-			local var61
+			local var8
 			if t_2.is(v) then
 				local _ = nil
-				var61, var62 = v:await()
+				var8, var62 = v:await()
 				v = var62
 				
-				if var61 then
-					local var63 = t_2.resolve(p62(v, i_1))
-					table.insert(t_3, var63)
-					var61, var64 = var63:await()
+				if var8 then
+					local var9 = t_2.resolve(p17(v, i_1))
+					table.insert(t_3, var9)
+					var8, var64 = var9:await()
 					
-					if var61 then
+					if var8 then
 						t[i_1] = var64
 						continue
 					end
 					for i_2, v_2 in ipairs(t_3) do
 						v_2:cancel()
 					end
-					return p64(var64)
+					return p19(var64)
 				end
 				for i_2, v_2 in ipairs(t_3) do
 					v_2:cancel()
 				end
-				return p64(v)
+				return p19(v)
 			end
 		end
-		p63(t)
+		p18(t)
 		local v
 	end)
 end
@@ -621,30 +621,30 @@ function t_2:is()
 	if type(self) ~= "table" then
 		return false
 	end
-	local var66 = getmetatable(self)
+	local var10 = getmetatable(self)
 	
-	if var66 == t_2 then
+	if var10 == t_2 then
 		return true
-	elseif var66 == nil then
+	elseif var10 == nil then
 		local andThen = self.andThen
 		
 		if type(andThen) == "function" then
 			return true
 		elseif type(andThen) == "table" then
-			local var67 = getmetatable(andThen)
+			local var11 = getmetatable(andThen)
 			
-			return var67 and type(rawget(var67, "__call")) == "function"
-		elseif type(var66) == "table" and type(rawget(var66, "__index")) == "table" then
+			return var11 and type(rawget(var11, "__call")) == "function"
+		elseif type(var10) == "table" and type(rawget(var10, "__index")) == "table" then
 			local isNotFunction
-			local var68 = rawget(rawget(var66, "__index"), "andThen")
+			local var12 = rawget(rawget(var10, "__index"), "andThen")
 			
-			if type(var68) == "function" then
+			if type(var12) == "function" then
 				isNotFunction = true
-			elseif type(var68) == "table" then
-				local var70 = getmetatable(var68)
+			elseif type(var12) == "table" then
+				local var13 = getmetatable(var12)
 				
-				if var70 then
-					isNotFunction = type(rawget(var70, "__call")) ~= "function"
+				if var13 then
+					isNotFunction = type(rawget(var13, "__call")) ~= "function"
 				end
 			end
 			return isNotFunction
@@ -652,29 +652,29 @@ function t_2:is()
 	end
 end
 
-function t_2.promisify(p66)
+function t_2.promisify(p21)
 	-- upvalues: t_2 (ref)
 	return function(...)
-		-- upvalues: t_2 (copy), p66 (ref)
-		return t_2._try(debug.traceback(nil, 2), p66, ...)
+		-- upvalues: t_2 (copy), p21 (ref)
+		return t_2._try(debug.traceback(nil, 2), p21, ...)
 	end
 end
 
 local awaitHelper = nil
 local expectHelper = nil
 
-function t_2.delay(p67)
+function t_2.delay(p21)
 	-- upvalues: t_2 (ref), expectHelper (write), awaitHelper (write)
-	assert(type(p67) == "number", "Bad argument #1 to Promise.delay, must be a number.")
+	assert(type(p21) == "number", "Bad argument #1 to Promise.delay, must be a number.")
 	
-	if p67 < 0.016666666667 or p67 == 1e999 then
-		p67 = 0.016666666667
+	if p21 < 0.016666666667 or p21 == 1e999 then
+		p21 = 0.016666666667
 	end
-	return t_2._new(debug.traceback(nil, 2), function(p68, _, p69)
-		-- upvalues: t_2 (copy), p67 (write), expectHelper (copy), awaitHelper (copy)
+	return t_2._new(debug.traceback(nil, 2), function(p22, _, p23)
+		-- upvalues: t_2 (copy), p21 (write), expectHelper (copy), awaitHelper (copy)
 		local time = t_2._getTime()
-		local var72 = time + p67
-		local t = { resolve = p68, startTime = time, endTime = var72 }
+		local var10 = time + p21
+		local t = { resolve = p22, startTime = time, endTime = var10 }
 		
 		if expectHelper == nil then
 			awaitHelper = t
@@ -682,8 +682,8 @@ function t_2.delay(p67)
 				-- upvalues: t_2 (copy), awaitHelper (copy), expectHelper (copy)
 				local time = t_2._getTime()
 				while awaitHelper ~= nil and awaitHelper.endTime < time do
-					local var76 = awaitHelper
-					awaitHelper = var76.next
+					local var11 = awaitHelper
+					awaitHelper = var11.next
 					
 					if awaitHelper == nil then
 						expectHelper:Disconnect()
@@ -691,18 +691,18 @@ function t_2.delay(p67)
 					else
 						awaitHelper.previous = nil
 					end
-					var76.resolve(t_2._getTime() - var76.startTime)
+					var11.resolve(t_2._getTime() - var11.startTime)
 				end
 			end)
-		elseif awaitHelper.endTime < var72 then
-			local var74 = awaitHelper
-			local next = var74.next
-			while next ~= nil and next.endTime < var72 do
-				var74 = next
-				next = var74.next
+		elseif awaitHelper.endTime < var10 then
+			local var12 = awaitHelper
+			local next = var12.next
+			while next ~= nil and next.endTime < var10 do
+				var12 = next
+				next = var12.next
 			end
-			var74.next = t
-			t.previous = var74
+			var12.next = t
+			t.previous = var12
 			
 			if next ~= nil then
 				t.next = next
@@ -713,7 +713,7 @@ function t_2.delay(p67)
 			awaitHelper.previous = t
 			awaitHelper = t
 		end
-		p69(function()
+		p23(function()
 			-- upvalues: t (ref), awaitHelper (copy), expectHelper (copy)
 			local next = t.next
 			
@@ -739,554 +739,554 @@ function t_2.delay(p67)
 	end)
 end
 
-function t_2.prototype.timeout(p70, p71, p72)
+function t_2.prototype.timeout(p24, p25, p26)
 	-- upvalues: t_2 (ref), t_1 (write)
 	local trac = debug.traceback(nil, 2)
 	
 	return t_2.race({
-		t_2.delay(p71):andThen(function()
-			-- upvalues: t_2 (copy), p72 (ref), t_1 (copy), p71 (ref), trac (ref)
-			return t_2.reject(p72 == nil and t_1.new({
+		t_2.delay(p25):andThen(function()
+			-- upvalues: t_2 (copy), p26 (ref), t_1 (copy), p25 (ref), trac (ref)
+			return t_2.reject(p26 == nil and t_1.new({
 				error = "Timed out",
 				kind = t_1.Kind.TimedOut,
-				context = string.format("Timeout of %d seconds exceeded.\n:timeout() called at:\n\n%s", p71, trac)
-			}) or p72)
+				context = string.format("Timeout of %d seconds exceeded.\n:timeout() called at:\n\n%s", p25, trac)
+			}) or p26)
 		end),
-		p70
+		p24
 	})
 end
 
-function t_2.prototype.getStatus(p73)
-	return p73._status
+function t_2.prototype.getStatus(p24)
+	return p24._status
 end
 
-function t_2.prototype._andThen(p74, p75, p76, p77)
+function t_2.prototype._andThen(p24, p25, p26, p27)
 	-- upvalues: t_2 (ref), runExecutor (ref), t_1 (write)
-	p74._unhandledRejection = false
+	p24._unhandledRejection = false
 	
-	return t_2._new(p75, function(p78, p79)
-		-- upvalues: p76 (ref), p75 (ref), runExecutor (copy), p77 (ref), p74 (ref), t_2 (copy), t_1 (copy)
-		local var78 = p78
+	return t_2._new(p25, function(p28, p29)
+		-- upvalues: p26 (ref), p25 (ref), runExecutor (copy), p27 (ref), p24 (ref), t_2 (copy), t_1 (copy)
+		local var11 = p28
 		
-		if p76 then
-			local var79 = p75
-			local var80 = p76
+		if p26 then
+			local var12 = p25
+			local var13 = p26
 			
-			var78 = function(...)
-				-- upvalues: runExecutor (copy), var79 (ref), var80 (ref), p78 (ref), p79 (ref)
-				local var20, var21, var22 = runExecutor(var79, var80, ...)
+			var11 = function(...)
+				-- upvalues: runExecutor (copy), var12 (ref), var13 (ref), p28 (ref), p29 (ref)
+				local var14, var15, var16 = runExecutor(var12, var13, ...)
 				
-				if var20 then
-					p78(unpack(var22, 1, var21))
+				if var14 then
+					p28(unpack(var16, 1, var15))
 					
 					return
 				end
-				p79(var22[1])
+				p29(var16[1])
 			end
 		end
-		local var81 = p79
+		local var14 = p29
 		
-		if p77 then
-			local var82 = p75
-			local var83 = p77
+		if p27 then
+			local var15 = p25
+			local var16 = p27
 			
-			var81 = function(...)
-				-- upvalues: runExecutor (copy), var82 (ref), var83 (ref), p78 (ref), p79 (ref)
-				local var20, var21, var22 = runExecutor(var82, var83, ...)
+			var14 = function(...)
+				-- upvalues: runExecutor (copy), var15 (ref), var16 (ref), p28 (ref), p29 (ref)
+				local var17, var18, var19 = runExecutor(var15, var16, ...)
 				
-				if var20 then
-					p78(unpack(var22, 1, var21))
+				if var17 then
+					p28(unpack(var19, 1, var18))
 					
 					return
 				end
-				p79(var22[1])
+				p29(var19[1])
 			end
 		end
-		if p74._status == t_2.Status.Started then
-			table.insert(p74._queuedResolve, var78)
-			table.insert(p74._queuedReject, var81)
+		if p24._status == t_2.Status.Started then
+			table.insert(p24._queuedResolve, var11)
+			table.insert(p24._queuedReject, var14)
 			
 			return
-		elseif p74._status == t_2.Status.Resolved then
-			var78(unpack(p74._values, 1, p74._valuesLength))
+		elseif p24._status == t_2.Status.Resolved then
+			var11(unpack(p24._values, 1, p24._valuesLength))
 			
 			return
-		elseif p74._status == t_2.Status.Rejected then
-			var81(unpack(p74._values, 1, p74._valuesLength))
+		elseif p24._status == t_2.Status.Rejected then
+			var14(unpack(p24._values, 1, p24._valuesLength))
 			
 			return
-		elseif p74._status == t_2.Status.Cancelled then
-			p79(t_1.new({
+		elseif p24._status == t_2.Status.Cancelled then
+			p29(t_1.new({
 				error = "Promise is cancelled",
 				kind = t_1.Kind.AlreadyCancelled,
 				context = "Promise created at\n\n" .. p75
 			}))
 		end
-	end, p74)
+	end, p24)
 end
 
-function t_2.prototype.andThen(p80, p81, p82)
+function t_2.prototype.andThen(p24, p25, p26)
 	local isNotFunction = true
 	
-	if p81 ~= nil then
-		if type(p81) == "function" then
+	if p25 ~= nil then
+		if type(p25) == "function" then
 			isNotFunction = true
-		elseif type(p81) == "table" then
-			local var85 = getmetatable(p81)
+		elseif type(p25) == "table" then
+			local var11 = getmetatable(p25)
 			
-			if var85 then
-				isNotFunction = type(rawget(var85, "__call")) ~= "function"
+			if var11 then
+				isNotFunction = type(rawget(var11, "__call")) ~= "function"
 			end
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:andThen"))
 	local isNotFunction_1 = true
 	
-	if p82 ~= nil then
-		if type(p82) == "function" then
+	if p26 ~= nil then
+		if type(p26) == "function" then
 			isNotFunction_1 = true
-		elseif type(p82) == "table" then
-			local var87 = getmetatable(p82)
+		elseif type(p26) == "table" then
+			local var12 = getmetatable(p26)
 			
-			if var87 then
-				isNotFunction_1 = type(rawget(var87, "__call")) ~= "function"
+			if var12 then
+				isNotFunction_1 = type(rawget(var12, "__call")) ~= "function"
 			end
 		end
 	end
 	assert(isNotFunction_1, string.format("Please pass a handler function to %s!", "Promise:andThen"))
 	
-	return p80:_andThen(debug.traceback(nil, 2), p81, p82)
+	return p24:_andThen(debug.traceback(nil, 2), p25, p26)
 end
 
-function t_2.prototype.andThenAsync(p83, p84, p85)
+function t_2.prototype.andThenAsync(p24, p25, p26)
 	-- upvalues: pack (ref), t_2 (ref)
 	local isNotFunction = true
 	
-	if p84 ~= nil then
-		if type(p84) == "function" then
+	if p25 ~= nil then
+		if type(p25) == "function" then
 			isNotFunction = true
-		elseif type(p84) == "table" then
-			local var89 = getmetatable(p84)
+		elseif type(p25) == "table" then
+			local var11 = getmetatable(p25)
 			
-			if var89 then
-				isNotFunction = type(rawget(var89, "__call")) ~= "function"
+			if var11 then
+				isNotFunction = type(rawget(var11, "__call")) ~= "function"
 			end
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:andThenAsync"))
 	local isNotFunction_1 = true
 	
-	if p85 ~= nil then
-		if type(p85) == "function" then
+	if p26 ~= nil then
+		if type(p26) == "function" then
 			isNotFunction_1 = true
-		elseif type(p85) == "table" then
-			local var91 = getmetatable(p85)
+		elseif type(p26) == "table" then
+			local var12 = getmetatable(p26)
 			
-			if var91 then
-				isNotFunction_1 = type(rawget(var91, "__call")) ~= "function"
+			if var12 then
+				isNotFunction_1 = type(rawget(var12, "__call")) ~= "function"
 			end
 		end
 	end
 	assert(isNotFunction_1, string.format("Please pass a handler function to %s!", "Promise:andThenAsync"))
 	
-	return p83:_andThen(debug.traceback(nil, 2), function(...)
+	return p24:_andThen(debug.traceback(nil, 2), function(...)
 		-- upvalues: pack (copy), t_2 (copy)
-		local var92, var93 = pack(...)
+		local var13, var14 = pack(...)
 		
-		return t_2.defer(function(p86)
-			-- upvalues: var93 (ref), var92 (ref)
-			p86(unpack(var93, 1, var92))
+		return t_2.defer(function(p27)
+			-- upvalues: var14 (ref), var13 (ref)
+			p27(unpack(var14, 1, var13))
 		end)
 	end, function(...)
 		-- upvalues: pack (copy), t_2 (copy)
-		local var94, var95 = pack(...)
+		local var13, var14 = pack(...)
 		
-		return t_2.defer(function(_, p87)
-			-- upvalues: var95 (ref), var94 (ref)
-			p87(unpack(var95, 1, var94))
+		return t_2.defer(function(_, p27)
+			-- upvalues: var14 (ref), var13 (ref)
+			p27(unpack(var14, 1, var13))
 		end)
-	end):andThen(p84, p85)
+	end):andThen(p25, p26)
 end
 
-function t_2.prototype.catch(p88, p89)
+function t_2.prototype.catch(p24, p25)
 	local isNotFunction = true
 	
-	if p89 ~= nil then
-		if type(p89) == "function" then
+	if p25 ~= nil then
+		if type(p25) == "function" then
 			isNotFunction = true
-		elseif type(p89) == "table" then
-			local var97 = getmetatable(p89)
+		elseif type(p25) == "table" then
+			local var11 = getmetatable(p25)
 			
-			if var97 then
-				isNotFunction = type(rawget(var97, "__call")) ~= "function"
+			if var11 then
+				isNotFunction = type(rawget(var11, "__call")) ~= "function"
 			end
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:catch"))
 	
-	return p88:_andThen(debug.traceback(nil, 2), nil, p89)
+	return p24:_andThen(debug.traceback(nil, 2), nil, p25)
 end
 
-function t_2.prototype.tap(p90, p91)
+function t_2.prototype.tap(p24, p25)
 	-- upvalues: t_2 (ref), pack (ref)
 	local isNotFunction
-	if type(p91) == "function" then
+	if type(p25) == "function" then
 		isNotFunction = true
-	elseif type(p91) == "table" then
-		local var99 = getmetatable(p91)
+	elseif type(p25) == "table" then
+		local var11 = getmetatable(p25)
 		
-		if var99 then
-			isNotFunction = type(rawget(var99, "__call")) ~= "function"
+		if var11 then
+			isNotFunction = type(rawget(var11, "__call")) ~= "function"
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:tap"))
 	
-	return p90:_andThen(debug.traceback(nil, 2), function(...)
-		-- upvalues: p91 (ref), t_2 (copy), pack (copy)
-		local var100 = p91(...)
+	return p24:_andThen(debug.traceback(nil, 2), function(...)
+		-- upvalues: p25 (ref), t_2 (copy), pack (copy)
+		local var12 = p25(...)
 		
-		if t_2.is(var100) then
-			local var101, var102 = pack(...)
+		if t_2.is(var12) then
+			local var13, var14 = pack(...)
 			
-			return var100:andThen(function()
-				-- upvalues: var102 (ref), var101 (ref)
-				return unpack(var102, 1, var101)
+			return var12:andThen(function()
+				-- upvalues: var14 (ref), var13 (ref)
+				return unpack(var14, 1, var13)
 			end)
 		end
 		return ...
 	end)
 end
 
-function t_2.prototype.andThenCall(p92, p93, ...)
+function t_2.prototype.andThenCall(p26, p27, ...)
 	-- upvalues: pack (ref)
 	local isNotFunction
-	if type(p93) == "function" then
+	if type(p27) == "function" then
 		isNotFunction = true
-	elseif type(p93) == "table" then
-		local var104 = getmetatable(p93)
+	elseif type(p27) == "table" then
+		local var12 = getmetatable(p27)
 		
-		if var104 then
-			isNotFunction = type(rawget(var104, "__call")) ~= "function"
+		if var12 then
+			isNotFunction = type(rawget(var12, "__call")) ~= "function"
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:andThenCall"))
-	local var105, var106 = pack(...)
+	local var13, var14 = pack(...)
 	
-	return p92:_andThen(debug.traceback(nil, 2), function()
-		-- upvalues: p93 (ref), var106 (ref), var105 (ref)
-		return p93(unpack(var106, 1, var105))
+	return p26:_andThen(debug.traceback(nil, 2), function()
+		-- upvalues: p27 (ref), var14 (ref), var13 (ref)
+		return p27(unpack(var14, 1, var13))
 	end)
 end
 
-function t_2.prototype.andThenReturn(p94, ...)
+function t_2.prototype.andThenReturn(p26, ...)
 	-- upvalues: pack (ref)
-	local var107, var108 = pack(...)
+	local var12, var13 = pack(...)
 	
-	return p94:_andThen(debug.traceback(nil, 2), function()
-		-- upvalues: var108 (ref), var107 (ref)
-		return unpack(var108, 1, var107)
+	return p26:_andThen(debug.traceback(nil, 2), function()
+		-- upvalues: var13 (ref), var12 (ref)
+		return unpack(var13, 1, var12)
 	end)
 end
 
-function t_2.prototype.cancel(p95)
+function t_2.prototype.cancel(p26)
 	-- upvalues: t_2 (ref)
-	if p95._status ~= t_2.Status.Started then return end
-	p95._status = t_2.Status.Cancelled
+	if p26._status ~= t_2.Status.Started then return end
+	p26._status = t_2.Status.Cancelled
 	
-	if p95._cancellationHook then
-		p95._cancellationHook()
+	if p26._cancellationHook then
+		p26._cancellationHook()
 	end
-	coroutine.close(p95._thread)
+	coroutine.close(p26._thread)
 	
-	if p95._parent then
-		p95._parent:_consumerCancelled(p95)
+	if p26._parent then
+		p26._parent:_consumerCancelled(p26)
 	end
-	for i in pairs(p95._consumers) do
+	for i in pairs(p26._consumers) do
 		i:cancel()
 	end
-	p95:_finalize()
+	p26:_finalize()
 end
 
-function t_2.prototype._consumerCancelled(p96, p97)
+function t_2.prototype._consumerCancelled(p27, p28)
 	-- upvalues: t_2 (ref)
-	if p96._status ~= t_2.Status.Started then return end
-	p96._consumers[p97] = nil
+	if p27._status ~= t_2.Status.Started then return end
+	p27._consumers[p28] = nil
 	
-	if next(p96._consumers) == nil then
-		p96:cancel()
+	if next(p27._consumers) == nil then
+		p27:cancel()
 	end
 end
 
-function t_2.prototype._finally(p98, p99, p100, p101)
+function t_2.prototype._finally(p27, p28, p29, p30)
 	-- upvalues: t_2 (ref), runExecutor (ref)
-	if not p101 then
-		p98._unhandledRejection = false
+	if not p30 then
+		p27._unhandledRejection = false
 	end
-	return t_2._new(p99, function(p102, p103)
-		-- upvalues: p100 (ref), p99 (ref), runExecutor (copy), p101 (ref), p98 (ref), t_2 (copy)
-		local var109 = p102
+	return t_2._new(p28, function(p31, p32)
+		-- upvalues: p29 (ref), p28 (ref), runExecutor (copy), p30 (ref), p27 (ref), t_2 (copy)
+		local var12 = p31
 		
-		if p100 then
-			local var110 = p99
-			local var111 = p100
+		if p29 then
+			local var13 = p28
+			local var14 = p29
 			
-			var109 = function(...)
-				-- upvalues: runExecutor (copy), var110 (ref), var111 (ref), p102 (ref), p103 (ref)
-				local var20, var21, var22 = runExecutor(var110, var111, ...)
+			var12 = function(...)
+				-- upvalues: runExecutor (copy), var13 (ref), var14 (ref), p31 (ref), p32 (ref)
+				local var15, var16, var17 = runExecutor(var13, var14, ...)
 				
-				if var20 then
-					p102(unpack(var22, 1, var21))
+				if var15 then
+					p31(unpack(var17, 1, var16))
 					
 					return
 				end
-				p103(var22[1])
+				p32(var17[1])
 			end
 		end
-		if p101 then
-			local var112 = var109
+		if p30 then
+			local var15 = var12
 			
-			var109 = function(...)
-				-- upvalues: p98 (copy), t_2 (copy), p102 (ref), var112 (ref)
-				return if p98._status == t_2.Status.Rejected then p102(p98) else var112(...)
+			var12 = function(...)
+				-- upvalues: p27 (copy), t_2 (copy), p31 (ref), var15 (ref)
+				return if p27._status == t_2.Status.Rejected then p31(p27) else var15(...)
 			end
 		end
-		if p98._status == t_2.Status.Started then
-			table.insert(p98._queuedFinally, var109)
+		if p27._status == t_2.Status.Started then
+			table.insert(p27._queuedFinally, var12)
 			
 			return
 		end
-		var109(p98._status)
-	end, p98)
+		var12(p27._status)
+	end, p27)
 end
 
-function t_2.prototype.finally(p104, p105)
+function t_2.prototype.finally(p27, p28)
 	local isNotFunction = true
 	
-	if p105 ~= nil then
-		if type(p105) == "function" then
+	if p28 ~= nil then
+		if type(p28) == "function" then
 			isNotFunction = true
-		elseif type(p105) == "table" then
-			local var114 = getmetatable(p105)
+		elseif type(p28) == "table" then
+			local var12 = getmetatable(p28)
 			
-			if var114 then
-				isNotFunction = type(rawget(var114, "__call")) ~= "function"
+			if var12 then
+				isNotFunction = type(rawget(var12, "__call")) ~= "function"
 			end
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:finally"))
 	
-	return p104:_finally(debug.traceback(nil, 2), p105)
+	return p27:_finally(debug.traceback(nil, 2), p28)
 end
 
-function t_2.prototype.finallyCall(p106, p107, ...)
+function t_2.prototype.finallyCall(p27, p28, ...)
 	-- upvalues: pack (ref)
 	local isNotFunction
-	if type(p107) == "function" then
+	if type(p28) == "function" then
 		isNotFunction = true
-	elseif type(p107) == "table" then
-		local var116 = getmetatable(p107)
+	elseif type(p28) == "table" then
+		local var12 = getmetatable(p28)
 		
-		if var116 then
-			isNotFunction = type(rawget(var116, "__call")) ~= "function"
+		if var12 then
+			isNotFunction = type(rawget(var12, "__call")) ~= "function"
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:finallyCall"))
-	local var117, var118 = pack(...)
+	local var13, var14 = pack(...)
 	
-	return p106:_finally(debug.traceback(nil, 2), function()
-		-- upvalues: p107 (ref), var118 (ref), var117 (ref)
-		return p107(unpack(var118, 1, var117))
+	return p27:_finally(debug.traceback(nil, 2), function()
+		-- upvalues: p28 (ref), var14 (ref), var13 (ref)
+		return p28(unpack(var14, 1, var13))
 	end)
 end
 
-function t_2.prototype.finallyReturn(p108, ...)
+function t_2.prototype.finallyReturn(p27, ...)
 	-- upvalues: pack (ref)
-	local var119, var120 = pack(...)
+	local var12, var13 = pack(...)
 	
-	return p108:_finally(debug.traceback(nil, 2), function()
-		-- upvalues: var120 (ref), var119 (ref)
-		return unpack(var120, 1, var119)
+	return p27:_finally(debug.traceback(nil, 2), function()
+		-- upvalues: var13 (ref), var12 (ref)
+		return unpack(var13, 1, var12)
 	end)
 end
 
-function t_2.prototype.done(p109, p110)
+function t_2.prototype.done(p27, p28)
 	local isNotFunction = true
 	
-	if p110 ~= nil then
-		if type(p110) == "function" then
+	if p28 ~= nil then
+		if type(p28) == "function" then
 			isNotFunction = true
-		elseif type(p110) == "table" then
-			local var122 = getmetatable(p110)
+		elseif type(p28) == "table" then
+			local var12 = getmetatable(p28)
 			
-			if var122 then
-				isNotFunction = type(rawget(var122, "__call")) ~= "function"
+			if var12 then
+				isNotFunction = type(rawget(var12, "__call")) ~= "function"
 			end
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:done"))
 	
-	return p109:_finally(debug.traceback(nil, 2), p110, true)
+	return p27:_finally(debug.traceback(nil, 2), p28, true)
 end
 
-function t_2.prototype.doneCall(p111, p112, ...)
+function t_2.prototype.doneCall(p27, p28, ...)
 	-- upvalues: pack (ref)
 	local isNotFunction
-	if type(p112) == "function" then
+	if type(p28) == "function" then
 		isNotFunction = true
-	elseif type(p112) == "table" then
-		local var124 = getmetatable(p112)
+	elseif type(p28) == "table" then
+		local var12 = getmetatable(p28)
 		
-		if var124 then
-			isNotFunction = type(rawget(var124, "__call")) ~= "function"
+		if var12 then
+			isNotFunction = type(rawget(var12, "__call")) ~= "function"
 		end
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:doneCall"))
-	local var125, var126 = pack(...)
+	local var13, var14 = pack(...)
 	
-	return p111:_finally(debug.traceback(nil, 2), function()
-		-- upvalues: p112 (ref), var126 (ref), var125 (ref)
-		return p112(unpack(var126, 1, var125))
+	return p27:_finally(debug.traceback(nil, 2), function()
+		-- upvalues: p28 (ref), var14 (ref), var13 (ref)
+		return p28(unpack(var14, 1, var13))
 	end, true)
 end
 
-function t_2.prototype.doneReturn(p113, ...)
+function t_2.prototype.doneReturn(p27, ...)
 	-- upvalues: pack (ref)
-	local var127, var128 = pack(...)
+	local var12, var13 = pack(...)
 	
-	return p113:_finally(debug.traceback(nil, 2), function()
-		-- upvalues: var128 (ref), var127 (ref)
-		return unpack(var128, 1, var127)
+	return p27:_finally(debug.traceback(nil, 2), function()
+		-- upvalues: var13 (ref), var12 (ref)
+		return unpack(var13, 1, var12)
 	end, true)
 end
 
-function t_2.prototype.awaitStatus(p114)
+function t_2.prototype.awaitStatus(p27)
 	-- upvalues: t_2 (ref)
-	p114._unhandledRejection = false
+	p27._unhandledRejection = false
 	
-	if p114._status == t_2.Status.Started then
+	if p27._status == t_2.Status.Started then
 		local currentThread = coroutine.running()
-		p114:finally(function()
+		p27:finally(function()
 			-- upvalues: currentThread (ref)
 			task.spawn(currentThread)
 		end)
 		coroutine.yield()
 	end
-	if p114._status == t_2.Status.Resolved then
-		return p114._status, unpack(p114._values, 1, p114._valuesLength)
-	elseif p114._status == t_2.Status.Rejected then
-		return p114._status, unpack(p114._values, 1, p114._valuesLength)
+	if p27._status == t_2.Status.Resolved then
+		return p27._status, unpack(p27._values, 1, p27._valuesLength)
+	elseif p27._status == t_2.Status.Rejected then
+		return p27._status, unpack(p27._values, 1, p27._valuesLength)
 	end
-	return p114._status
+	return p27._status
 end
 
-awaitHelper = function(p115, ...)
+awaitHelper = function(p27, ...)
 	-- upvalues: t_2 (ref)
-	return p115 == t_2.Status.Resolved, ...
+	return p27 == t_2.Status.Resolved, ...
 end
 
-function t_2.prototype.await(p116)
+function t_2.prototype.await(p28)
 	-- upvalues: awaitHelper (ref)
-	return awaitHelper(p116:awaitStatus())
+	return awaitHelper(p28:awaitStatus())
 end
 
-expectHelper = function(p117, ...)
+expectHelper = function(p28, ...)
 	-- upvalues: t_2 (ref)
-	if p117 ~= t_2.Status.Resolved then
+	if p28 ~= t_2.Status.Resolved then
 		error(if ... == nil then "Expected Promise rejected with no value." else ..., 3)
 	end
 	return ...
 end
 
-function t_2.prototype.expect(p118)
+function t_2.prototype.expect(p29)
 	-- upvalues: expectHelper (ref)
-	return expectHelper(p118:awaitStatus())
+	return expectHelper(p29:awaitStatus())
 end
 
 t_2.prototype.awaitValue = t_2.prototype.expect
 
-function t_2.prototype._unwrap(p119)
+function t_2.prototype._unwrap(p29)
 	-- upvalues: t_2 (ref)
-	if p119._status == t_2.Status.Started then
+	if p29._status == t_2.Status.Started then
 		error("Promise has not resolved or rejected.", 2)
 	end
-	return p119._status == t_2.Status.Resolved, unpack(p119._values, 1, p119._valuesLength)
+	return p29._status == t_2.Status.Resolved, unpack(p29._values, 1, p29._valuesLength)
 end
 
-function t_2.prototype._resolve(p120, ...)
+function t_2.prototype._resolve(p29, ...)
 	-- upvalues: t_2 (ref), t_1 (write), pack (ref)
-	if p120._status == t_2.Status.Started then
+	if p29._status == t_2.Status.Started then
 		if t_2.is(...) then
 			if select("#", ...) > 1 then
-				warn(string.format("When returning a Promise from andThen, extra arguments are discarded! See:\n\n%s", p120._source))
+				warn(string.format("When returning a Promise from andThen, extra arguments are discarded! See:\n\n%s", p29._source))
 			end
-			local var130 = ...
-			local var131 = var130:andThen(function(...)
-				-- upvalues: p120 (ref)
-				p120:_resolve(...)
+			local var12 = ...
+			local var131 = var12:andThen(function(...)
+				-- upvalues: p29 (ref)
+				p29:_resolve(...)
 			end, function(...)
-				-- upvalues: var130 (ref), t_1 (copy), p120 (ref)
-				local var134 = if var130._error then t_1.new({
+				-- upvalues: var12 (ref), t_1 (copy), p29 (ref)
+				local var13 = if var12._error then t_1.new({
 					context = "[No stack trace available as this Promise originated from an older version of the Promise library (< v2)]",
-					error = var130._error,
+					error = var12._error,
 					kind = t_1.Kind.ExecutionError
-				}) else var130._values[1]
+				}) else var12._values[1]
 				
-				if t_1.isKind(var134, t_1.Kind.ExecutionError) then
-					return p120:_reject(var134:extend({
+				if t_1.isKind(var13, t_1.Kind.ExecutionError) then
+					return p29:_reject(var13:extend({
 						error = "This Promise was chained to a Promise that errored.",
 						trace = "",
-						context = string.format("The Promise at:\n\n%s\n...Rejected because it was chained to the following Promise, which encountered an error:\n", p120._source)
+						context = string.format("The Promise at:\n\n%s\n...Rejected because it was chained to the following Promise, which encountered an error:\n", p29._source)
 					}))
 				end
-				p120:_reject(...)
+				p29:_reject(...)
 			end)
 			
 			if var131._status == t_2.Status.Cancelled then
-				p120:cancel()
+				p29:cancel()
 				
 				return
 			elseif var131._status == t_2.Status.Started then
-				p120._parent = var131
-				var131._consumers[p120] = true
+				p29._parent = var131
+				var131._consumers[p29] = true
 			end
 			return
 		else
-			p120._status = t_2.Status.Resolved
-			local var132, var133 = pack(...)
-			p120._valuesLength = var132
-			p120._values = var133
+			p29._status = t_2.Status.Resolved
+			local var13, var14 = pack(...)
+			p29._valuesLength = var13
+			p29._values = var14
 			
-			for i, v in ipairs(p120._queuedResolve) do
+			for i, v in ipairs(p29._queuedResolve) do
 				coroutine.wrap(v)(...)
 			end
-			p120:_finalize()
+			p29:_finalize()
 			
 			return
 		end
 	elseif t_2.is(...) then
-		(...):_consumerCancelled(p120)
+		(...):_consumerCancelled(p29)
 	end
 end
 
-function t_2.prototype._reject(p121, ...)
+function t_2.prototype._reject(p30, ...)
 	-- upvalues: t_2 (ref), pack (ref)
-	if p121._status ~= t_2.Status.Started then return end
-	p121._status = t_2.Status.Rejected
-	local var135, var136 = pack(...)
-	p121._valuesLength = var135
-	p121._values = var136
+	if p30._status ~= t_2.Status.Started then return end
+	p30._status = t_2.Status.Rejected
+	local var15, var16 = pack(...)
+	p30._valuesLength = var15
+	p30._values = var16
 	
-	if next(p121._queuedReject) == nil then
-		local var137 = tostring(...)
+	if next(p30._queuedReject) == nil then
+		local var17 = tostring(...)
 		coroutine.wrap(function()
-			-- upvalues: t_2 (copy), p121 (ref), var137 (ref)
+			-- upvalues: t_2 (copy), p30 (ref), var17 (ref)
 			t_2._timeEvent:Wait()
 			
-			if not p121._unhandledRejection then return end
-			local formattedText = string.format("Unhandled Promise rejection:\n\n%s\n\n%s", var137, p121._source)
+			if not p30._unhandledRejection then return end
+			local formattedText = string.format("Unhandled Promise rejection:\n\n%s\n\n%s", var17, p30._source)
 			
 			for i, v in ipairs(t_2._unhandledRejectionCallbacks) do
-				task.spawn(v, p121, unpack(p121._values, 1, p121._valuesLength))
+				task.spawn(v, p30, unpack(p30._values, 1, p30._valuesLength))
 			end
 			if t_2.TEST then
 				return
@@ -1294,19 +1294,19 @@ function t_2.prototype._reject(p121, ...)
 			warn(formattedText)
 		end)()
 	else
-		for i, v in ipairs(p121._queuedReject) do
+		for i, v in ipairs(p30._queuedReject) do
 			coroutine.wrap(v)(...)
 		end
 	end
-	p121:_finalize()
+	p30:_finalize()
 end
 
 local t_3 = {}
-local var10 = nil
+local var18 = nil
 
 local function closeThreads()
-	-- upvalues: var10 (write), t_3 (write)
-	var10 = nil
+	-- upvalues: var18 (write), t_3 (write)
+	var18 = nil
 	t_3 = {}
 	
 	for i, v in t_3 do
@@ -1314,147 +1314,147 @@ local function closeThreads()
 	end
 end
 
-function t_2.prototype._finalize(p122)
-	-- upvalues: t_2 (ref), status (write), t_3 (write), var10 (write), closeThreads (ref)
-	for i, v in ipairs(p122._queuedFinally) do
-		coroutine.wrap(v)(p122._status)
+function t_2.prototype._finalize(p31)
+	-- upvalues: t_2 (ref), status (write), t_3 (write), var18 (write), closeThreads (ref)
+	for i, v in ipairs(p31._queuedFinally) do
+		coroutine.wrap(v)(p31._status)
 	end
-	p122._queuedFinally = nil
-	p122._queuedReject = nil
-	p122._queuedResolve = nil
+	p31._queuedFinally = nil
+	p31._queuedReject = nil
+	p31._queuedResolve = nil
 	
 	if not t_2.TEST then
-		p122._parent = nil
-		p122._consumers = nil
+		p31._parent = nil
+		p31._consumers = nil
 	end
 	if status then
-		table.insert(t_3, p122._thread)
+		table.insert(t_3, p31._thread)
 		
-		if var10 then
+		if var18 then
 			return
 		else
-			var10 = task.defer(closeThreads)
+			var18 = task.defer(closeThreads)
 			
 			return
 		end
 	else
-		task.defer(coroutine.close, p122._thread)
+		task.defer(coroutine.close, p31._thread)
 	end
 end
 
-function t_2.prototype.now(p123, p124)
+function t_2.prototype.now(p32, p33)
 	-- upvalues: t_2 (ref), t_1 (write)
 	local trac = debug.traceback(nil, 2)
 	
-	return if p123._status == t_2.Status.Resolved then p123:_andThen(trac, function(...)
+	return if p32._status == t_2.Status.Resolved then p32:_andThen(trac, function(...)
 		return ...
-	end) else t_2.reject(p124 == nil and t_1.new({
+	end) else t_2.reject(p33 == nil and t_1.new({
 		error = "This Promise was not resolved in time for :now()",
 		kind = t_1.Kind.NotResolvedInTime,
 		context = ":now() was called at:\n\n" .. trac
-	}) or p124)
+	}) or p33)
 end
 
-function t_2.retry(p125, p126, ...)
+function t_2.retry(p34, p35, ...)
 	-- upvalues: t_2 (ref)
 	local isNotFunction
-	if type(p125) == "function" then
+	if type(p34) == "function" then
 		isNotFunction = true
-	elseif type(p125) == "table" then
-		local var141 = getmetatable(p125)
+	elseif type(p34) == "table" then
+		local var19 = getmetatable(p34)
 		
-		if var141 then
-			isNotFunction = type(rawget(var141, "__call")) ~= "function"
+		if var19 then
+			isNotFunction = type(rawget(var19, "__call")) ~= "function"
 		end
 	end
 	assert(isNotFunction, "Parameter #1 to Promise.retry must be a function")
-	assert(type(p126) == "number", "Parameter #2 to Promise.retry must be a number")
+	assert(type(p35) == "number", "Parameter #2 to Promise.retry must be a number")
 	local list = { ... }
-	local var143 = select("#", ...)
+	local var20 = select("#", ...)
 	
-	return t_2.resolve(p125(...)):catch(function(...)
-		-- upvalues: p126 (ref), t_2 (copy), p125 (ref), list (ref), var143 (ref)
-		return if p126 > 0 then t_2.retry(p125, p126 - 1, unpack(list, 1, var143)) else t_2.reject(...)
+	return t_2.resolve(p34(...)):catch(function(...)
+		-- upvalues: p35 (ref), t_2 (copy), p34 (ref), list (ref), var20 (ref)
+		return if p35 > 0 then t_2.retry(p34, p35 - 1, unpack(list, 1, var20)) else t_2.reject(...)
 	end)
 end
 
-function t_2.retryWithDelay(p127, p128, p129, ...)
+function t_2.retryWithDelay(p34, p35, p36, ...)
 	-- upvalues: t_2 (ref)
 	local isNotFunction
-	if type(p127) == "function" then
+	if type(p34) == "function" then
 		isNotFunction = true
-	elseif type(p127) == "table" then
-		local var145 = getmetatable(p127)
+	elseif type(p34) == "table" then
+		local var19 = getmetatable(p34)
 		
-		if var145 then
-			isNotFunction = type(rawget(var145, "__call")) ~= "function"
+		if var19 then
+			isNotFunction = type(rawget(var19, "__call")) ~= "function"
 		end
 	end
 	assert(isNotFunction, "Parameter #1 to Promise.retry must be a function")
-	assert(type(p128) == "number", "Parameter #2 (times) to Promise.retry must be a number")
-	assert(type(p129) == "number", "Parameter #3 (seconds) to Promise.retry must be a number")
+	assert(type(p35) == "number", "Parameter #2 (times) to Promise.retry must be a number")
+	assert(type(p36) == "number", "Parameter #3 (seconds) to Promise.retry must be a number")
 	local list = { ... }
-	local var147 = select("#", ...)
+	local var20 = select("#", ...)
 	
-	return t_2.resolve(p127(...)):catch(function(...)
-		-- upvalues: p128 (ref), t_2 (copy), p129 (ref), p127 (ref), list (ref), var147 (ref)
-		if p128 > 0 then
-			t_2.delay(p129):await()
+	return t_2.resolve(p34(...)):catch(function(...)
+		-- upvalues: p35 (ref), t_2 (copy), p36 (ref), p34 (ref), list (ref), var20 (ref)
+		if p35 > 0 then
+			t_2.delay(p36):await()
 			
-			return t_2.retryWithDelay(p127, p128 - 1, p129, unpack(list, 1, var147))
+			return t_2.retryWithDelay(p34, p35 - 1, p36, unpack(list, 1, var20))
 		end
 		return t_2.reject(...)
 	end)
 end
 
-function t_2.fromEvent(p130, p131)
+function t_2.fromEvent(p34, p35)
 	-- upvalues: t_2 (ref)
-	p131 = p131 or function()
+	p35 = p35 or function()
 		return true
 	end
 	
-	return t_2._new(debug.traceback(nil, 2), function(p132, _, p133)
-		-- upvalues: p130 (ref), p131 (write)
-		local var148 = nil
-		local var149 = false
+	return t_2._new(debug.traceback(nil, 2), function(p36, _, p37)
+		-- upvalues: p34 (ref), p35 (write)
+		local var19 = nil
+		local var20 = false
 		
 		local function disconnect()
-			-- upvalues: var148 (write)
-			var148:Disconnect()
-			var148 = nil
+			-- upvalues: var19 (write)
+			var19:Disconnect()
+			var19 = nil
 		end
 		
-		var148 = p130:Connect(function(...)
-			-- upvalues: p131 (copy), p132 (ref), var148 (write), var149 (write)
-			local var151 = p131(...)
+		var19 = p34:Connect(function(...)
+			-- upvalues: p35 (copy), p36 (ref), var19 (write), var20 (write)
+			local var21 = p35(...)
 			
-			if var151 == true then
-				p132(...)
+			if var21 == true then
+				p36(...)
 				
-				if var148 then
-					var148:Disconnect()
-					var148 = nil
+				if var19 then
+					var19:Disconnect()
+					var19 = nil
 					
 					return
 				end
-				var149 = true
+				var20 = true
 				
 				return
-			elseif type(var151) ~= "boolean" then
+			elseif type(var21) ~= "boolean" then
 				error("Promise.fromEvent predicate should always return a boolean")
 			end
 		end)
-		p133(disconnect)
+		p37(disconnect)
 	end)
 end
 
-function t_2.onUnhandledRejection(p134)
+function t_2.onUnhandledRejection(p34)
 	-- upvalues: t_2 (ref)
-	table.insert(t_2._unhandledRejectionCallbacks, p134)
+	table.insert(t_2._unhandledRejectionCallbacks, p34)
 	
 	return function()
-		-- upvalues: t_2 (copy), p134 (ref)
-		local index = table.find(t_2._unhandledRejectionCallbacks, p134)
+		-- upvalues: t_2 (copy), p34 (ref)
+		local index = table.find(t_2._unhandledRejectionCallbacks, p34)
 		
 		if index then
 			table.remove(t_2._unhandledRejectionCallbacks, index)

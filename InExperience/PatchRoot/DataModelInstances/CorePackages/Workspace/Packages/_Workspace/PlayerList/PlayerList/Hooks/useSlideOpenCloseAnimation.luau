@@ -2,11 +2,11 @@
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	return {
-		dampingRatio = p0.dampingRatio,
-		frequency = p0.frequency,
-		startingValue = p1
+		dampingRatio = p1.dampingRatio,
+		frequency = p1.frequency,
+		startingValue = p2
 	}
 end
 
@@ -14,58 +14,58 @@ return {
 	MENU_ZOOM_CLOSED_SCALE = 1.25,
 	PANEL_RECESS_SCALE = 0.95,
 	PANEL_RECESS_TRANSPARENCY = 0.6,
-	useSlideOpenCloseAnimation = function(p2, p3, p4)
+	useSlideOpenCloseAnimation = function(p1, p2, p3)
 		-- upvalues: reactModule (ref), reactOtterModule (ref)
-		local var2, var3 = reactModule.useState(p2)
-		local var4 = reactModule.useRef(p2)
-		var4.current = p2
-		local var5 = reactModule.useRef(true)
+		local var1, var2 = reactModule.useState(p1)
+		local var3 = reactModule.useRef(p1)
+		var3.current = p1
+		local var4 = reactModule.useRef(true)
 		
-		if p2 and not var2 then
-			var3(true)
+		if p1 and not var1 then
+			var2(true)
 		end
-		local var6, var7 = reactOtterModule.useAnimatedBinding(if p2 then 0 else p3.hiddenOffset, reactModule.useCallback(function()
-			-- upvalues: var4 (ref), var3 (ref)
-			if not var4.current then
-				var3(false)
+		local var5, var6 = reactOtterModule.useAnimatedBinding(if p1 then 0 else p2.hiddenOffset, reactModule.useCallback(function()
+			-- upvalues: var3 (ref), var2 (ref)
+			if not var3.current then
+				var2(false)
 			end
 		end, {}))
-		local var8 = reactModule.useMemo(function()
-			-- upvalues: var6 (ref)
-			return var6:map(function(p5)
-				return UDim2.new(p5, 0, 0, 0)
+		local var7 = reactModule.useMemo(function()
+			-- upvalues: var5 (ref)
+			return var5:map(function(p4)
+				return UDim2.new(p4, 0, 0, 0)
 			end)
-		end, { var6 })
+		end, { var5 })
 		reactModule.useEffect(function()
-			-- upvalues: var5 (ref), p2 (ref), var3 (ref), p3 (ref), var7 (ref), reactOtterModule (copy)
-			local current = var5.current
-			var5.current = false
+			-- upvalues: var4 (ref), p1 (ref), var2 (ref), p2 (ref), var6 (ref), reactOtterModule (copy)
+			local current = var4.current
+			var4.current = false
 			
-			if p2 then
-				var3(true)
+			if p1 then
+				var2(true)
 				
-				if current and not p3.animateInitialOpen then
+				if current and not p2.animateInitialOpen then
 					return
 				end
-				local var9 = p3
-				var7(reactOtterModule.spring(0, {
-					dampingRatio = var9.dampingRatio,
-					frequency = var9.frequency,
-					startingValue = p3.openStartOffset
+				local var8 = p2
+				var6(reactOtterModule.spring(0, {
+					dampingRatio = var8.dampingRatio,
+					frequency = var8.frequency,
+					startingValue = p2.openStartOffset
 				}))
 				
 				return
 			elseif current then
 				return
 			end
-			var7(reactOtterModule.spring(p3.hiddenOffset, {
+			var6(reactOtterModule.spring(p2.hiddenOffset, {
 				startingValue = nil,
-				dampingRatio = p3.dampingRatio,
-				frequency = p3.frequency
+				dampingRatio = p2.dampingRatio,
+				frequency = p2.frequency
 			}))
-		end, { p2, p4, p3 })
+		end, { p1, p3, p2 })
 		
-		return { offset = var6, position = var8, shouldMount = var2 }
+		return { offset = var5, position = var7, shouldMount = var1 }
 	end,
 	PANEL_SLIDE_CONFIG = {
 		hiddenOffset = 1.1,

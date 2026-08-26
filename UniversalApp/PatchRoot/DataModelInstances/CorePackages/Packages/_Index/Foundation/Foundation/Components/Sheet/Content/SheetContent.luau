@@ -34,17 +34,17 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local testId = var2.testId
 	assert(innerScrollingEnabled and (setInnerScrollY and (actionsHeight and (setHasActionsDivider and (bottomPadding and (hasHeader and testId))))), "SheetContent must be used within a Sheet")
 	local var3, var4 = reactModule.useBinding(false)
-	local var5 = reactModule.useCallback(function(p1)
+	local var5 = reactModule.useCallback(function(p3)
 		-- upvalues: setInnerScrollY (ref), isScrollingFrameOverflowingYModule (copy), setHasActionsDivider (ref), var4 (ref)
-		setInnerScrollY(p1.CanvasPosition.Y)
-		local var1 = isScrollingFrameOverflowingYModule(p1, 1)
-		setHasActionsDivider(var1)
-		var4(var1)
+		setInnerScrollY(p3.CanvasPosition.Y)
+		local var6 = isScrollingFrameOverflowingYModule(p3, 1)
+		setHasActionsDivider(var6)
+		var4(var6)
 	end, { setHasActionsDivider, setInnerScrollY })
 	local var6, var7 = reactModule.useBinding(0)
-	local var8 = reactModule.useCallback(function(p1)
+	local var8 = reactModule.useCallback(function(p3)
 		-- upvalues: var7 (ref)
-		var7(p1.AbsoluteSize.Y)
+		var7(p3.AbsoluteSize.Y)
 	end, {})
 	local var9 = sheetType == sheetTypeModule.Bottom
 	local var10 = if p1.isContentFullBleed then nil else UDim.new(0, var1.Padding.Small)
@@ -55,9 +55,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		tag = "fill size-full-0 auto-y",
 		scrollingFrameRef = useComposedRef(innerScrollingRef, p1.scrollingFrameRef),
 		selection = {
-			Selectable = if var3 then var3:map(function(p1)
+			Selectable = if var3 then var3:map(function(p3)
 				-- upvalues: var11 (ref)
-				return var11 and p1
+				return var11 and p3
 			end) else nil,
 			NextSelectionUp = p1.NextSelectionUp,
 			NextSelectionDown = p1.NextSelectionDown,
@@ -67,28 +67,28 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		scroll = {
 			ScrollingEnabled = innerScrollingEnabled,
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			CanvasSize = if sheetContentHeight then var6:map(function(p1)
-				return UDim2.new(1, 0, 0, p1)
+			CanvasSize = if sheetContentHeight then var6:map(function(p3)
+				return UDim2.new(1, 0, 0, p3)
 			end) else UDim2.fromScale(1, 0),
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		},
 		Size = if sheetContentHeight then UDim2.fromScale(1, 1) else nil,
 		padding = {
-			top = hasHeader:map(function(p1)
+			top = hasHeader:map(function(p3)
 				-- upvalues: hasFullBleed (ref), var9 (ref), var1 (ref)
-				return if p1 or hasFullBleed then UDim.new(0, 0) else UDim.new(0, if var9 then var1.Padding.Small else var1.Margin.Small)
+				return if p3 or hasFullBleed then UDim.new(0, 0) else UDim.new(0, if var9 then var1.Padding.Small else var1.Margin.Small)
 			end),
-			bottom = if var9 then actionsHeight:map(function(p1)
+			bottom = if var9 then actionsHeight:map(function(p3)
 				-- upvalues: bottomPadding (ref), var1 (ref)
-				return UDim.new(0, p1 + bottomPadding + var1.Margin.Small)
+				return UDim.new(0, p3 + bottomPadding + var1.Margin.Small)
 			end) else UDim.new(0, var1.Padding.Small),
 			left = var10,
 			right = var10
 		},
 		ClipsDescendants = if var9 then hasHeader else true,
-		onCanvasPositionChanged = function(p1)
+		onCanvasPositionChanged = function(p3)
 			-- upvalues: setInnerScrollY (ref)
-			setInnerScrollY(p1.CanvasPosition.Y)
+			setInnerScrollY(p3.CanvasPosition.Y)
 		end,
 		onAbsoluteCanvasSizeChanged = var5,
 		onAbsoluteWindowSizeChanged = var5,
@@ -102,8 +102,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}
 	}, {
 		FullBleedSpacer = if hasFullBleed and fullBleedHeight then reactModule.createElement(viewModule, {
-			Size = fullBleedHeight:map(function(p1)
-				return UDim2.new(1, 0, 0, math.max(0, p1))
+			Size = fullBleedHeight:map(function(p3)
+				return UDim2.new(1, 0, 0, math.max(0, p3))
 			end),
 			LayoutOrder = constantsModule.MIN_LAYOUT_ORDER,
 			testId = `{testId}--content--full-bleed-spacer`

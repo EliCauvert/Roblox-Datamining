@@ -26,24 +26,24 @@ local t = {
 	end
 }
 
-function t.fromJsonData(p0)
+function t.fromJsonData(p1)
 	-- upvalues: t (ref), argCheckModule (ref)
-	local var8 = t.new()
-	argCheckModule.isType(p0, "table", "PurchaseDeveloperProductModel.fromJsonData's jsonData")
-	argCheckModule.isType(p0.price, "number", "PurchaseDeveloperProductModel.fromJsonData's jsonData.price")
-	argCheckModule.isType(p0.productId, "number", "PurchaseDeveloperProductModel.fromJsonData's jsonData.productId")
-	argCheckModule.isType(p0.purchased, "boolean", "PurchaseDeveloperProductModel.fromJsonData's jsonData.purchased")
-	argCheckModule.isTypeOrNil(p0.receipt, "string", "PurchaseDeveloperProductModel.fromJsonData's jsonData.receipt")
-	argCheckModule.isTypeOrNil(p0.success, "boolean", "PurchaseDeveloperProductModel.fromJsonData's jsonData.success")
-	argCheckModule.isTypeOrNil(p0.transactionStatus, "string", "PurchaseDeveloperProductModel.fromJsonData's jsonData.transactionStatus")
-	var8.price = p0.price
-	var8.productId = p0.productId
-	var8.purchased = p0.purchased == true
-	var8.receipt = p0.receipt
-	var8.success = p0.success == true
-	var8.transactionStatus = p0.transactionStatus
+	local var1 = t.new()
+	argCheckModule.isType(p1, "table", "PurchaseDeveloperProductModel.fromJsonData's jsonData")
+	argCheckModule.isType(p1.price, "number", "PurchaseDeveloperProductModel.fromJsonData's jsonData.price")
+	argCheckModule.isType(p1.productId, "number", "PurchaseDeveloperProductModel.fromJsonData's jsonData.productId")
+	argCheckModule.isType(p1.purchased, "boolean", "PurchaseDeveloperProductModel.fromJsonData's jsonData.purchased")
+	argCheckModule.isTypeOrNil(p1.receipt, "string", "PurchaseDeveloperProductModel.fromJsonData's jsonData.receipt")
+	argCheckModule.isTypeOrNil(p1.success, "boolean", "PurchaseDeveloperProductModel.fromJsonData's jsonData.success")
+	argCheckModule.isTypeOrNil(p1.transactionStatus, "string", "PurchaseDeveloperProductModel.fromJsonData's jsonData.transactionStatus")
+	var1.price = p1.price
+	var1.productId = p1.productId
+	var1.purchased = p1.purchased == true
+	var1.receipt = p1.receipt
+	var1.success = p1.success == true
+	var1.transactionStatus = p1.transactionStatus
 	
-	return var8
+	return var1
 end
 
 return function(p1, p2, p3)
@@ -57,17 +57,17 @@ return function(p1, p2, p3)
 		elseif isEconomicRestrictionResponse(p4) then
 			return promiseModule.reject(p4)
 		elseif fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase then
-			local var9 = parseDevProductPurchaseErrorModule(p4)
+			local var1 = parseDevProductPurchaseErrorModule(p4)
 			
-			if var9 == purchaseErrorModule.PendingProductsLimitExceeded then
-				return promiseModule.reject(var9)
+			if var1 == purchaseErrorModule.PendingProductsLimitExceeded then
+				return promiseModule.reject(var1)
 			end
 		end
-		local var10 = t.fromJsonData(p4)
+		local var2 = t.fromJsonData(p4)
 		
-		return if var10.purchased then promiseModule.resolve(var10) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
-	end, function(p5)
+		return if var2.purchased then promiseModule.resolve(var2) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
+	end, function(p4)
 		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p5)
+		return promiseModule.reject(p4)
 	end)
 end

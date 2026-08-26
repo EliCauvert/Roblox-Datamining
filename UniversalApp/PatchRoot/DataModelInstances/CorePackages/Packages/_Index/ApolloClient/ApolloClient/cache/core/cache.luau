@@ -56,8 +56,8 @@ function t_1.removeOptimistic(_, _)
 	error("not implemented abstract method")
 end
 
-function t_1:batch(p0)
-	self:performTransaction(p0.update, if typeof(p0.optimistic) == "string" then p0.optimistic elseif p0.optimistic == false then nil else nil)
+function t_1:batch(p1)
+	self:performTransaction(p1.update, if typeof(p1.optimistic) == "string" then p1.optimistic elseif p1.optimistic == false then nil else nil)
 end
 
 function t_1.performTransaction(_, _, _)
@@ -68,8 +68,8 @@ function t_1:recordOptimisticTransaction(p1, p2)
 	self:performTransaction(p1, p2)
 end
 
-function t_1.transformDocument(_, p3)
-	return p3
+function t_1.transformDocument(_, p1)
+	return p1
 end
 
 function t_1.identify(_, _) end
@@ -82,49 +82,49 @@ function t_1.modify(_, _)
 	return false
 end
 
-function t_1.transformForLink(_, p4)
-	return p4
+function t_1.transformForLink(_, p1)
+	return p1
 end
 
-function t_1:readQuery(p5, p6)
+function t_1:readQuery(p1, p2)
 	-- upvalues: object (ref), boolean (ref)
-	if p6 == nil then
-		p6 = not not p5.optimistic
+	if p2 == nil then
+		p2 = not not p1.optimistic
 	end
-	return self:read(object.assign(table.clone(p5), {
-		rootId = if boolean.toJSBoolean(p5.id) then p5.id else "ROOT_QUERY",
-		optimistic = p6
+	return self:read(object.assign(table.clone(p1), {
+		rootId = if boolean.toJSBoolean(p1.id) then p1.id else "ROOT_QUERY",
+		optimistic = p2
 	}))
 end
 
-function t_1:readFragment(p7, p8)
+function t_1:readFragment(p1, p2)
 	-- upvalues: object (ref)
-	if p8 == nil then
-		p8 = not not p7.optimistic
+	if p2 == nil then
+		p2 = not not p1.optimistic
 	end
-	return self:read(object.assign({}, p7, {
-		query = self.getFragmentDoc(p7.fragment, p7.fragmentName),
-		rootId = p7.id,
-		optimistic = p8
+	return self:read(object.assign({}, p1, {
+		query = self.getFragmentDoc(p1.fragment, p1.fragmentName),
+		rootId = p1.id,
+		optimistic = p2
 	}))
 end
 
-function t_1:writeQuery(p9)
+function t_1:writeQuery(p1)
 	-- upvalues: object (ref)
-	return self:write(object.assign(object.assign(table.clone(p9), { id = object.None, data = object.None }), { dataId = p9.id or "ROOT_QUERY", result = p9.data }))
+	return self:write(object.assign(object.assign(table.clone(p1), { id = object.None, data = object.None }), { dataId = p1.id or "ROOT_QUERY", result = p1.data }))
 end
 
-function t_1:writeFragment(p10)
+function t_1:writeFragment(p1)
 	-- upvalues: object (ref)
-	return self:write(object.assign(object.assign(table.clone(p10), {
+	return self:write(object.assign(object.assign(table.clone(p1), {
 		id = object.None,
 		data = object.None,
 		fragment = object.None,
 		fragmentName = object.None
 	}), {
-		query = self.getFragmentDoc(p10.fragment, p10.fragmentName),
-		dataId = p10.id,
-		result = p10.data
+		query = self.getFragmentDoc(p1.fragment, p1.fragmentName),
+		dataId = p1.id,
+		result = p1.data
 	}))
 end
 

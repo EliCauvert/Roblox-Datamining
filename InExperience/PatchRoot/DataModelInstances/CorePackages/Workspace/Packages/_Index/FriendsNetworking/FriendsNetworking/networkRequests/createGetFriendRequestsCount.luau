@@ -1,10 +1,10 @@
 ﻿local FRIENDS_URLModule = require(script.Parent.Parent.FRIENDS_URL)
 local _ = require(script.Parent.Parent.networkingFriendsTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: FRIENDS_URLModule (ref)
-	return p0.roduxNetworking.GET("GetFriendRequestsCount", function(p1, _)
+	return p1.roduxNetworking.GET("GetFriendRequestsCount", function(p2, _)
 		-- upvalues: FRIENDS_URLModule (copy)
-		return p1(FRIENDS_URLModule):path("v1"):path("user"):path("friend-requests"):path("count")
+		return p2(FRIENDS_URLModule):path("v1"):path("user"):path("friend-requests"):path("count")
 	end)
 end

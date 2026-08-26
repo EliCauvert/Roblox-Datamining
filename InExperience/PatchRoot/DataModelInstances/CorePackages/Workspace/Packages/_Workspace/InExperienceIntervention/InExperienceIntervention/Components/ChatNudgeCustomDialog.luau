@@ -25,33 +25,33 @@ local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local var9 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+local var1 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 
-function ChatNudgeCustomDialog(p0)
-	-- upvalues: reactModule (ref), inExperienceInterventionAnalyticsModule (ref), useLocalization (ref), constants (ref), useStyle (ref), useLayerCollector (ref), useTokens (ref), useProperty (ref), localPlayer (ref), view (ref), text (ref), partialPageModal (ref), scrollView (ref), scrollBarVisibility (ref), reactFocusNavigationModule (ref), var9 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), button (ref), buttonVariant (ref), fillBehavior (ref), interventionContestFeedbackFooterModule (ref)
-	local var10 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
-	local var11 = reactModule.useRef(nil)
-	local var12, var13 = reactModule.useState(0)
+function ChatNudgeCustomDialog(p1)
+	-- upvalues: reactModule (ref), inExperienceInterventionAnalyticsModule (ref), useLocalization (ref), constants (ref), useStyle (ref), useLayerCollector (ref), useTokens (ref), useProperty (ref), localPlayer (ref), view (ref), text (ref), partialPageModal (ref), scrollView (ref), scrollBarVisibility (ref), reactFocusNavigationModule (ref), var1 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), button (ref), buttonVariant (ref), fillBehavior (ref), interventionContestFeedbackFooterModule (ref)
+	local var2 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
+	local var3 = reactModule.useRef(nil)
+	local var4, var5 = reactModule.useState(0)
 	reactModule.useEffect(function()
-		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var10 (ref), p0 (ref)
-		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, var10.current, p0.eventId, p0.violatingChatLine, nil)
-	end, { var10 })
-	local var14 = useLocalization(constants.localizationKeys)
-	local var15 = useStyle()
-	local var16 = useLayerCollector()
-	local var17 = useTokens()
-	local var18 = useProperty(var11, "AbsoluteSize")
+		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var2 (ref), p1 (ref)
+		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, var2.current, p1.eventId, p1.violatingChatLine, nil)
+	end, { var2 })
+	local var6 = useLocalization(constants.localizationKeys)
+	local var7 = useStyle()
+	local var8 = useLayerCollector()
+	local var9 = useTokens()
+	local var10 = useProperty(var3, "AbsoluteSize")
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), var16 (ref), constants (copy), var13 (ref)
-		var13(math.min(var16.absoluteSize.Y - constants.UNIBAR_HEIGHT - constants.DIALOG_HEADER_HEIGHT, if var18 then var18.Y else 0))
-	end, { var16.absoluteSize.Y, var18 })
+		-- upvalues: var10 (ref), var8 (ref), constants (copy), var5 (ref)
+		var5(math.min(var8.absoluteSize.Y - constants.UNIBAR_HEIGHT - constants.DIALOG_HEADER_HEIGHT, if var10 then var10.Y else 0))
+	end, { var8.absoluteSize.Y, var10 })
 	
 	return reactModule.createElement(partialPageModal, {
-		title = var14.ChatBreaksRulesText,
-		screenSize = var16.absoluteSize
+		title = var6.ChatBreaksRulesText,
+		screenSize = var8.absoluteSize
 	}, {
 		ScrollView = reactModule.createElement(scrollView, {
-			Size = UDim2.new(1, 0, 0, var12),
+			Size = UDim2.new(1, 0, 0, var4),
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 1, 0),
@@ -59,7 +59,7 @@ function ChatNudgeCustomDialog(p0)
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
 		}, {
-			FocusNavigationCoreScriptsProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var9 }, {
+			FocusNavigationCoreScriptsProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
 				FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
 					isIsolated = true,
 					isAutoFocusRoot = true,
@@ -71,11 +71,11 @@ function ChatNudgeCustomDialog(p0)
 				}, {
 					InnerContent = reactModule.createElement(view, {
 						tag = "col gap-large align-x-center align-y-center padding-x-small padding-top-large",
-						ref = var11,
+						ref = var3,
 						Size = UDim2.new(1, -constants.SCROLL_BAR_WIDTH, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
-						MiddleContent = if p0.violatingChatLine then reactModule.createElement(view, {
+						MiddleContent = if p1.violatingChatLine then reactModule.createElement(view, {
 							LayoutOrder = 1,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -92,8 +92,8 @@ function ChatNudgeCustomDialog(p0)
 								AutomaticSize = Enum.AutomaticSize.Y
 							}, {
 								ChatIncludesText = reactModule.createElement(text, {
-									Text = var14.ChatIncludesText,
-									fontStyle = var17.Typography.BodySmall,
+									Text = var6.ChatIncludesText,
+									fontStyle = var9.Typography.BodySmall,
 									TextXAlignment = Enum.TextXAlignment.Left,
 									AnchorPoint = Vector2.new(0, 0),
 									AutomaticSize = Enum.AutomaticSize.XY
@@ -104,14 +104,14 @@ function ChatNudgeCustomDialog(p0)
 								BackgroundTransparency = 0,
 								tag = "col gap-small align-x-center align-y-center padding-x-large radius-medium stroke-default",
 								Size = UDim2.new(1, 0, 0, constants.VIOLATION_HEIGHT),
-								BackgroundColor3 = var15.Theme.BackgroundUIDefault.Color
+								BackgroundColor3 = var7.Theme.BackgroundUIDefault.Color
 							}, {
 								ViolationText = reactModule.createElement(text, {
 									LayoutOrder = 2,
 									TextWrapped = true,
-									Text = if localPlayer then `{localPlayer.DisplayName}: {p0.violatingChatLine}` else p0.violatingChatLine,
-									textStyle = var15.Theme.TextMuted,
-									fontStyle = var15.Font.Body,
+									Text = if localPlayer then `{localPlayer.DisplayName}: {p1.violatingChatLine}` else p1.violatingChatLine,
+									textStyle = var7.Theme.TextMuted,
+									fontStyle = var7.Font.Body,
 									Size = UDim2.new(1, 0, 0, 0),
 									TextXAlignment = Enum.TextXAlignment.Left,
 									TextYAlignment = Enum.TextYAlignment.Center,
@@ -123,9 +123,9 @@ function ChatNudgeCustomDialog(p0)
 						WarningText = reactModule.createElement(text, {
 							LayoutOrder = 3,
 							TextWrapped = true,
-							Text = var14.TextChatMayBeSuspendedText,
-							textStyle = var15.Theme.TextEmphasis,
-							fontStyle = var15.Font.Body,
+							Text = var6.TextChatMayBeSuspendedText,
+							textStyle = var7.Theme.TextEmphasis,
+							fontStyle = var7.Font.Body,
 							Size = UDim2.new(1, 0, 0, 0),
 							TextXAlignment = Enum.TextXAlignment.Center,
 							TextYAlignment = Enum.TextYAlignment.Center,
@@ -137,13 +137,13 @@ function ChatNudgeCustomDialog(p0)
 							AutomaticSize = Enum.AutomaticSize.Y
 						}, {
 							UnderstandButton = reactModule.createElement(button, {
-								text = var14.IUnderstandText,
+								text = var6.IUnderstandText,
 								variant = buttonVariant.Standard,
 								onActivated = reactModule.useCallback(function()
-									-- upvalues: inExperienceInterventionAnalyticsModule (copy), var10 (ref), p0 (ref)
-									inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, var10.current, p0.eventId, p0.violatingChatLine, nil)
-									p0.onDismiss()
-								end, { var10 }),
+									-- upvalues: inExperienceInterventionAnalyticsModule (copy), var2 (ref), p1 (ref)
+									inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, var2.current, p1.eventId, p1.violatingChatLine, nil)
+									p1.onDismiss()
+								end, { var2 }),
 								fillBehavior = fillBehavior.Fill,
 								FillDirection = Enum.FillDirection.Horizontal
 							})
@@ -155,11 +155,11 @@ function ChatNudgeCustomDialog(p0)
 						}, {
 							FeedbackFooter = reactModule.createElement(interventionContestFeedbackFooterModule, {
 								duration = nil,
-								onDismiss = p0.onDismiss,
-								renderTimestamp = var10.current,
+								onDismiss = p1.onDismiss,
+								renderTimestamp = var2.current,
 								interventionType = inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge,
-								eventId = p0.eventId,
-								violatingChatLine = p0.violatingChatLine
+								eventId = p1.eventId,
+								violatingChatLine = p1.violatingChatLine
 							})
 						})
 					})

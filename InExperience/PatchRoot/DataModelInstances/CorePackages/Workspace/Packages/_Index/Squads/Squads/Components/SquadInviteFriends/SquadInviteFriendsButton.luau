@@ -32,75 +32,75 @@ local function _()
 	return universalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections()
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: react (ref), selectedUsersContext (ref), inviteCallbackContext (ref), friendsListContext (ref), squadExternalContractContext (ref), useIsInviteButtonDisabledModule (ref), useLocalization (ref), fFlagEnablePartyQuickStartButton (ref), userModel (ref), t (ref), cryoModule (ref), encodeUserIdsModule (ref), eventNamesModule (ref), squadRootViewType (ref), button (ref), buttonType (ref), universalAppPolicyModule (ref)
-	local var17
-	local var11 = react.useContext(selectedUsersContext)
-	local var12 = react.useContext(inviteCallbackContext)
-	local var13 = react.useContext(friendsListContext)
-	local var14 = react.useContext(squadExternalContractContext)
-	local var15 = useIsInviteButtonDisabledModule(var11.selectedFriendsSize, var11.selectedFriends or {}, var11.preselectedUsers or {})
-	local var16 = useLocalization({
+	local var1
+	local var2 = react.useContext(selectedUsersContext)
+	local var3 = react.useContext(inviteCallbackContext)
+	local var4 = react.useContext(friendsListContext)
+	local var5 = react.useContext(squadExternalContractContext)
+	local var6 = useIsInviteButtonDisabledModule(var2.selectedFriendsSize, var2.selectedFriends or {}, var2.preselectedUsers or {})
+	local var7 = useLocalization({
 		addFriendsText = "Feature.Chat.Label.AddFriends",
 		addConnectionsText = "CommonUI.Features.Label.AddConnections"
 	})
 	local _ = nil
 	
 	if fFlagEnablePartyQuickStartButton then
-		local var18 = var14.useSquadRootView()
-		local var19 = react.useRef({})
-		local var20 = react.useCallback(function()
-			-- upvalues: var13 (ref), userModel (copy), t (copy)
-			if var13.isFetchingFriends then
+		local var8 = var5.useSquadRootView()
+		local var9 = react.useRef({})
+		local var10 = react.useCallback(function()
+			-- upvalues: var4 (ref), userModel (copy), t (copy)
+			if var4.isFetchingFriends then
 				return {}, {}
 			end
 			local t_1 = {}
 			local t_2 = {}
 			
-			for i, v in pairs(var13.friends) do
+			for i, v in pairs(var4.friends) do
 				if v.presence ~= userModel.PresenceType.OFFLINE then
 					table.insert(t_1, tonumber(v.id))
 					table.insert(t_2, t[v.presence])
 				end
 			end
 			return t_1, t_2
-		end, { var13.isFetchingFriends, var13.friends })
-		local var21 = react.useCallback(function()
-			-- upvalues: var11 (ref), var13 (ref), t (copy)
+		end, { var4.isFetchingFriends, var4.friends })
+		local var11 = react.useCallback(function()
+			-- upvalues: var2 (ref), var4 (ref), t (copy)
 			local t_1 = {}
 			local t_2 = {}
 			local t_3 = {}
 			
-			for i, v in pairs(var11.selectedFriends) do
+			for i, v in pairs(var2.selectedFriends) do
 				t_3[i] = true
 			end
-			for i_1, v_1 in ipairs(var13.friends) do
+			for i_1, v_1 in ipairs(var4.friends) do
 				if t_3[v_1.id] then
 					table.insert(t_1, tonumber(v_1.id))
 					table.insert(t_2, t[v_1.presence])
 				end
 			end
 			return t_1, t_2
-		end, { var11.selectedFriends, var13.friends })
+		end, { var2.selectedFriends, var4.friends })
 		react.useEffect(function()
-			-- upvalues: var20 (ref), var21 (ref), var19 (ref)
-			local var28, var29 = var20()
-			local var30, var31 = var21()
-			var19.current = {
-				onlineFriendsIds = var28,
-				onlineFriendsPresence = var29,
-				selectedFriendsIds = var30,
-				selectedFriendsPresence = var31,
-				numActiveFriends = #var28,
-				numSelectedFriends = #var30
+			-- upvalues: var10 (ref), var11 (ref), var9 (ref)
+			local var12, var13 = var10()
+			local var14, var15 = var11()
+			var9.current = {
+				onlineFriendsIds = var12,
+				onlineFriendsPresence = var13,
+				selectedFriendsIds = var14,
+				selectedFriendsPresence = var15,
+				numActiveFriends = #var12,
+				numSelectedFriends = #var14
 			}
-		end, { var20, var21 })
-		local var22 = react.useCallback(function(p1)
-			-- upvalues: var19 (ref), cryoModule (copy), p0 (ref), var14 (ref), encodeUserIdsModule (copy), eventNamesModule (copy)
-			local current = var19.current
-			var14.fireSquadAnalytics(eventNamesModule.MultiInviteMenuActionStatus, cryoModule.Dictionary.join(p0.analyticsInfo, {
-				actionLocation = var14.squadLocation,
-				actionType = p1,
+		end, { var10, var11 })
+		local var12 = react.useCallback(function(p2)
+			-- upvalues: var9 (ref), cryoModule (copy), p1 (ref), var5 (ref), encodeUserIdsModule (copy), eventNamesModule (copy)
+			local current = var9.current
+			var5.fireSquadAnalytics(eventNamesModule.MultiInviteMenuActionStatus, cryoModule.Dictionary.join(p1.analyticsInfo, {
+				actionLocation = var5.squadLocation,
+				actionType = p2,
 				activeFriendsUserIds = encodeUserIdsModule(current.onlineFriendsIds),
 				activeFriendsPresences = encodeUserIdsModule(current.onlineFriendsPresence),
 				selectedFriendsUserIds = encodeUserIdsModule(current.selectedFriendsIds),
@@ -110,45 +110,45 @@ return function(p0)
 				clientTimeStamp = os.time()
 			}))
 		end, {
-			var14.squadLocation,
-			var14.fireSquadAnalytics,
-			p0.analyticsInfo
+			var5.squadLocation,
+			var5.fireSquadAnalytics,
+			p1.analyticsInfo
 		})
 		react.useEffect(function()
-			-- upvalues: p0 (ref), var22 (ref)
+			-- upvalues: p1 (ref), var12 (ref)
 			return function()
-				-- upvalues: p0 (copy), var22 (copy)
-				if p0.partyStartedRef.current then
-					var22("multi_invite_attempted")
+				-- upvalues: p1 (copy), var12 (copy)
+				if p1.partyStartedRef.current then
+					var12("multi_invite_attempted")
 					
 					return
 				end
-				var22("leave_page")
+				var12("leave_page")
 			end
 		end, {})
 		react.useEffect(function()
-			-- upvalues: var18 (ref), squadRootViewType (copy), var22 (ref)
-			if var18 == squadRootViewType.None then
-				var22("leave_page")
+			-- upvalues: var8 (ref), squadRootViewType (copy), var12 (ref)
+			if var8 == squadRootViewType.None then
+				var12("leave_page")
 			end
-		end, { var18, var22 })
-		var17 = react.useCallback(function()
-			-- upvalues: var22 (ref), var12 (ref), var11 (ref)
-			var22("multi_invite_button_clicked")
-			var12.inviteMultiFriends(var11.selectedFriends)
-		end, { var22, var12.inviteMultiFriends, var11.selectedFriends })
+		end, { var8, var12 })
+		var1 = react.useCallback(function()
+			-- upvalues: var12 (ref), var3 (ref), var2 (ref)
+			var12("multi_invite_button_clicked")
+			var3.inviteMultiFriends(var2.selectedFriends)
+		end, { var12, var3.inviteMultiFriends, var2.selectedFriends })
 	else
-		var17 = react.useCallback(function()
-			-- upvalues: var12 (ref), var11 (ref)
-			var12.inviteMultiFriends(var11.selectedFriends)
-		end, { var12.inviteMultiFriends, var11.selectedFriends })
+		var1 = react.useCallback(function()
+			-- upvalues: var3 (ref), var2 (ref)
+			var3.inviteMultiFriends(var2.selectedFriends)
+		end, { var3.inviteMultiFriends, var2.selectedFriends })
 	end
 	return react.createElement(button, {
-		onActivated = var17,
+		onActivated = var1,
 		buttonTextOverride = { TextWrapped = false },
 		buttonType = buttonType.PrimarySystem,
 		size = UDim2.new(1, 0, 0, 36),
-		text = if fFlagEnablePartyQuickStartButton then p0.buttonText elseif universalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections() then var16.addConnectionsText else var16.addFriendsText,
-		isDisabled = var15
+		text = if fFlagEnablePartyQuickStartButton then p1.buttonText elseif universalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections() then var7.addConnectionsText else var7.addFriendsText,
+		isDisabled = var6
 	})
 end

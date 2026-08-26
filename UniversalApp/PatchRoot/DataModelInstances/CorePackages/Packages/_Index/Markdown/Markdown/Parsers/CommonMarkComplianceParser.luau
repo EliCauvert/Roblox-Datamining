@@ -14,8 +14,8 @@ function t.safeParse(p1, p2)
 	local ok, status = xpcall(function()
 		-- upvalues: t (copy), p1 (ref), p2 (ref)
 		return t.parse(p1, p2)
-	end, function(p1)
-		return `{p1}\n{debug.traceback()}`
+	end, function(p3)
+		return `{p3}\n{debug.traceback()}`
 	end)
 	
 	return ok, status

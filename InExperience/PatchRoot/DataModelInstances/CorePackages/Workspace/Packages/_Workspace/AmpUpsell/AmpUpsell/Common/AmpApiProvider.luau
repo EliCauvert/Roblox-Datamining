@@ -14,7 +14,7 @@ local gql = require(parent.ApolloClient).gql
 local base64 = require(parent.AuthCommon).Utils.Base64
 local getFFlagAmpGqlPassSuccessfulActionsModule = require(ampUpsell.Flags.GetFFlagAmpGqlPassSuccessfulActions)
 local fFlagAllowAmpV2FeatureAccessCall = sharedFlagsModule.FFlagAllowAmpV2FeatureAccessCall
-local var6 = urlBuilder.new({
+local var1 = urlBuilder.new({
 	path = "access-management/v1/upsell-feature-access",
 	base = urlBase.APIS,
 	query = {
@@ -40,7 +40,7 @@ local var6 = urlBuilder.new({
 		}
 	}
 })
-local var7 = urlBuilder.new({
+local var2 = urlBuilder.new({
 	path = "access-management/v1/feature-access",
 	base = urlBase.APIS,
 	query = if fFlagAllowAmpV2FeatureAccessCall then {
@@ -49,145 +49,145 @@ local var7 = urlBuilder.new({
 	} else { featureNames = "{featureNames}" }
 })
 
-local function _(p0, p1, p2, p3)
-	-- upvalues: fetch (ref), promiseModule (ref), var6 (ref), response (ref)
-	return promiseModule.new(function(p4, p5)
-		-- upvalues: p1 (ref), var6 (copy), p0 (ref), p2 (ref), p3 (ref), fetch (ref), response (copy)
-		local var8 = fetch(var6({
-			featureName = p0,
-			successfulActions = table.concat(p1, ","),
-			nameSpace = p2,
-			extraParameters = p3
+local function _(p1, p2, p3, p4)
+	-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), response (ref)
+	return promiseModule.new(function(p5, p6)
+		-- upvalues: p2 (ref), var1 (copy), p1 (ref), p3 (ref), p4 (ref), fetch (ref), response (copy)
+		local var3 = fetch(var1({
+			featureName = p1,
+			successfulActions = table.concat(p2, ","),
+			nameSpace = p3,
+			extraParameters = p4
 		}), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
-		if var8.status == 304 then
-			p5("Got Response: 304")
+		if var3.status == 304 then
+			p6("Got Response: 304")
 			
 			return
-		elseif not var8.ok then
-			p5("Failed to find upsell feature access values")
+		elseif not var3.ok then
+			p6("Failed to find upsell feature access values")
 			
 			return
 		end
-		local var9 = var8:json():catch(function()
+		local var4 = var3:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var9 then
-			p4({
-				access = var9.access,
-				recourse = var9.recourse,
-				recourses = var9.recourses,
-				shouldPrompt = var9.shouldPrompt
+		if var4 then
+			p5({
+				access = var4.access,
+				recourse = var4.recourse,
+				recourses = var4.recourses,
+				shouldPrompt = var4.shouldPrompt
 			})
 			
 			return
 		end
-		p5("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API")
+		p6("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API")
 	end)
 end
 
 return {
-	upsellFeatureAccess = function(p6, p7, p8, p9)
-		-- upvalues: base64 (ref), httpService (ref), fetch (ref), promiseModule (ref), var6 (ref), response (ref), accessResponseEnum (ref)
-		local var10 = if p9 then base64.Encode(httpService:JSONEncode(p9)) else nil
+	upsellFeatureAccess = function(p1, p2, p3, p4)
+		-- upvalues: base64 (ref), httpService (ref), fetch (ref), promiseModule (ref), var1 (ref), response (ref), accessResponseEnum (ref)
+		local var3 = if p4 then base64.Encode(httpService:JSONEncode(p4)) else nil
 		
-		return promiseModule.new(function(p10, p11)
-			-- upvalues: p7 (ref), var6 (copy), p6 (ref), p8 (ref), var10 (ref), fetch (ref), response (copy)
-			local var8 = fetch(var6({
-				featureName = p6,
-				successfulActions = table.concat(p7, ","),
-				nameSpace = p8,
-				extraParameters = var10
+		return promiseModule.new(function(p5, p6)
+			-- upvalues: p2 (ref), var1 (copy), p1 (ref), p3 (ref), var3 (ref), fetch (ref), response (copy)
+			local var4 = fetch(var1({
+				featureName = p1,
+				successfulActions = table.concat(p2, ","),
+				nameSpace = p3,
+				extraParameters = var3
 			}), { method = "GET" }):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()
 			
-			if var8.status == 304 then
-				p11("Got Response: 304")
+			if var4.status == 304 then
+				p6("Got Response: 304")
 				
 				return
-			elseif not var8.ok then
-				p11("Failed to find upsell feature access values")
+			elseif not var4.ok then
+				p6("Failed to find upsell feature access values")
 				
 				return
 			end
-			local var9 = var8:json():catch(function()
+			local var5 = var4:json():catch(function()
 				return nil
 			end):expect()
 			
-			if var9 then
-				p10({
-					access = var9.access,
-					recourse = var9.recourse,
-					recourses = var9.recourses,
-					shouldPrompt = var9.shouldPrompt
+			if var5 then
+				p5({
+					access = var5.access,
+					recourse = var5.recourse,
+					recourses = var5.recourses,
+					shouldPrompt = var5.shouldPrompt
 				})
 				
 				return
 			end
-			p11("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API")
+			p6("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API")
 		end):catch(function(_)
 			-- upvalues: accessResponseEnum (copy)
 			return { access = accessResponseEnum.Error }
 		end):expect()
 	end,
-	upsellFeatureAccessGql = function(p12, p13, p14, p15, p16)
+	upsellFeatureAccessGql = function(p1, p2, p3, p4, p5)
 		-- upvalues: gql (ref), base64 (ref), httpService (ref), getFFlagAmpGqlPassSuccessfulActionsModule (ref), accessResponseEnum (ref)
-		local var11 = p12:query({
+		local var3 = p1:query({
 			fetchPolicy = "network-only",
 			query = gql(require(script.Parent.GetUpsellFeatureAccess)),
 			variables = {
-				featureName = p13,
-				successfulActions = if getFFlagAmpGqlPassSuccessfulActionsModule() then p14 else {},
-				nameSpace = p15,
-				extraParameters = if p16 then base64.Encode(httpService:JSONEncode(p16)) else nil
+				featureName = p2,
+				successfulActions = if getFFlagAmpGqlPassSuccessfulActionsModule() then p3 else {},
+				nameSpace = p4,
+				extraParameters = if p5 then base64.Encode(httpService:JSONEncode(p5)) else nil
 			}
 		}):catch(function(_)
 			-- upvalues: accessResponseEnum (copy)
 			return { access = accessResponseEnum.Error }
 		end):expect()
 		
-		return if var11.data and var11.data.getUpsellFeatureAccess.featureAccess then var11.data.getUpsellFeatureAccess.featureAccess else { access = accessResponseEnum.Error }
+		return if var3.data and var3.data.getUpsellFeatureAccess.featureAccess then var3.data.getUpsellFeatureAccess.featureAccess else { access = accessResponseEnum.Error }
 	end,
-	getFeatureAccess = function(p17, p18)
-		-- upvalues: fetch (ref), promiseModule (ref), fFlagAllowAmpV2FeatureAccessCall (ref), var7 (ref), response (ref), accessResponseEnum (ref)
-		return promiseModule.new(function(p19, p20)
-			-- upvalues: p17 (ref), fFlagAllowAmpV2FeatureAccessCall (copy), var7 (copy), p18 (ref), fetch (ref), response (copy)
-			local joined = table.concat(p17, ",")
-			local var13 = fetch(if fFlagAllowAmpV2FeatureAccessCall then var7({ featureNames = joined, nameSpace = p18 or "" }) else var7({ featureNames = joined }), { method = "GET" }):catch(function()
+	getFeatureAccess = function(p1, p2)
+		-- upvalues: fetch (ref), promiseModule (ref), fFlagAllowAmpV2FeatureAccessCall (ref), var2 (ref), response (ref), accessResponseEnum (ref)
+		return promiseModule.new(function(p3, p4)
+			-- upvalues: p1 (ref), fFlagAllowAmpV2FeatureAccessCall (copy), var2 (copy), p2 (ref), fetch (ref), response (copy)
+			local joined = table.concat(p1, ",")
+			local var3 = fetch(if fFlagAllowAmpV2FeatureAccessCall then var2({ featureNames = joined, nameSpace = p2 or "" }) else var2({ featureNames = joined }), { method = "GET" }):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()
 			
-			if var13.status == 304 then
-				p20("Got Response: 304")
+			if var3.status == 304 then
+				p4("Got Response: 304")
 				
 				return
-			elseif not var13.ok then
-				p20("Failed to find get feature access values")
+			elseif not var3.ok then
+				p4("Failed to find get feature access values")
 				
 				return
 			end
-			local var14 = var13:json():catch(function()
+			local var4 = var3:json():catch(function()
 				return nil
 			end):expect()
 			
-			if not var14 then
-				p20("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API")
+			if not var4 then
+				p4("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API")
 				
 				return
 			end
 			local t = {}
 			
-			for i, v in var14.features do
+			for i, v in var4.features do
 				table.insert(t, { feature = v.featureName, access = v.access })
 			end
-			p19({ featureAccessList = t })
+			p3({ featureAccessList = t })
 		end):catch(function(_)
 			-- upvalues: accessResponseEnum (copy)
 			return { access = accessResponseEnum.Error }

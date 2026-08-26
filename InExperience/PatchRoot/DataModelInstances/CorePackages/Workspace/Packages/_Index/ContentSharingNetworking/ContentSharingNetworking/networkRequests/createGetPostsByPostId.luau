@@ -1,9 +1,9 @@
 ﻿local API_URLModule = require(script.Parent.Parent.API_URL)
 
-return function(p0)
+return function(p1)
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.GET("GetPostsByPostId", function(p1, p2)
+	return p1.roduxNetworking.GET("GetPostsByPostId", function(p2, p3)
 		-- upvalues: API_URLModule (copy)
-		return p1(API_URLModule):path("posts-api"):path("v1"):path("content-posts"):path("findByUser"):queryArgs({ limit = p2.limit, postId = p2.postId, userId = p2.userId })
+		return p2(API_URLModule):path("posts-api"):path("v1"):path("content-posts"):path("findByUser"):queryArgs({ limit = p3.limit, postId = p3.postId, userId = p3.userId })
 	end)
 end

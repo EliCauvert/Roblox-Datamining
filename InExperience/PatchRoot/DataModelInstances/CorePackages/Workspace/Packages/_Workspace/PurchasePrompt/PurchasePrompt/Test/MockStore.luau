@@ -10,9 +10,9 @@ local thunkModule = require(purchasePrompt.Thunk)
 local purchaseFlowModule = require(purchasePrompt.Enums.PurchaseFlow)
 
 return {
-	getMockPurchaseFlow = function(p0)
+	getMockPurchaseFlow = function(p1)
 		-- upvalues: purchaseFlowModule (ref)
-		return p0 or purchaseFlowModule.Product
+		return p1 or purchaseFlowModule.Product
 	end,
 	getMockNativeUpsell = function(_, _, _)
 		return {

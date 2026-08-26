@@ -12,14 +12,14 @@ return (function()
 	local t = {}
 	local friendStatusChangedConnection = nil
 	
-	local function _(p0)
+	local function _(p1)
 		-- upvalues: localPlayer (ref), playersService (copy)
-		if p0 and localPlayer then
+		if p1 and localPlayer then
 			local ok, status = pcall(function()
-				-- upvalues: playersService (copy), p0 (ref), localPlayer (copy)
-				local var16 = playersService:GetPlayerByUserId(p0)
+				-- upvalues: playersService (copy), p1 (ref), localPlayer (copy)
+				local var1 = playersService:GetPlayerByUserId(p1)
 				
-				return if var16 then localPlayer:GetFriendStatus(var16) else Enum.FriendStatus.Unknown
+				return if var1 then localPlayer:GetFriendStatus(var1) else Enum.FriendStatus.Unknown
 			end)
 			
 			return if ok then status else Enum.FriendStatus.Unknown
@@ -37,18 +37,18 @@ return (function()
 		elseif value and localPlayer then
 			local ok, status = pcall(function()
 				-- upvalues: playersService (copy), value (ref), localPlayer (copy)
-				local var16 = playersService:GetPlayerByUserId(value)
+				local var1 = playersService:GetPlayerByUserId(value)
 				
-				return if var16 then localPlayer:GetFriendStatus(var16) else Enum.FriendStatus.Unknown
+				return if var1 then localPlayer:GetFriendStatus(var1) else Enum.FriendStatus.Unknown
 			end)
 			unknown = if ok then status else Enum.FriendStatus.Unknown
 		else
 			unknown = Enum.FriendStatus.Unknown
 		end
-		local var17, var18 = signalsModule.createSignal(unknown)
-		t[value] = { getter = var17, setter = var18 }
+		local var1, var2 = signalsModule.createSignal(unknown)
+		t[value] = { getter = var1, setter = var2 }
 		
-		return var17
+		return var1
 	end
 	
 	local function onFriendStatusChanged(p1, p2)
@@ -58,64 +58,64 @@ return (function()
 		end
 	end
 	
-	local function getShouldShowFriendButton(p3, p4)
+	local function getShouldShowFriendButton(p1, p2)
 		-- upvalues: signalsModule (copy), peopleUtilityModule (copy), peopleBlockStatusStoreModule (copy)
-		return signalsModule.createComputed(function(p5)
-			-- upvalues: peopleUtilityModule (copy), p4 (ref), p3 (ref), peopleBlockStatusStoreModule (copy)
-			return if peopleUtilityModule.showPersonButtons(p4, p3) and p3 then not peopleBlockStatusStoreModule.getPlayerBlockStatus(p3)(p5) else false
+		return signalsModule.createComputed(function(p3)
+			-- upvalues: peopleUtilityModule (copy), p2 (ref), p1 (ref), peopleBlockStatusStoreModule (copy)
+			return if peopleUtilityModule.showPersonButtons(p2, p1) and p1 then not peopleBlockStatusStoreModule.getPlayerBlockStatus(p1)(p3) else false
 		end)
 	end
 	
-	local function getFriendButtonText(p6, p7)
+	local function getFriendButtonText(p1, p2)
 		-- upvalues: signalsModule (copy), getFriendStatusSignal (ref)
-		return if p6 then signalsModule.createComputed(function(p8)
-			-- upvalues: getFriendStatusSignal (copy), p6 (ref), p7 (ref)
-			local var19 = getFriendStatusSignal(p6)(p8)
+		return if p1 then signalsModule.createComputed(function(p3)
+			-- upvalues: getFriendStatusSignal (copy), p1 (ref), p2 (ref)
+			local var1 = getFriendStatusSignal(p1)(p3)
 			
-			return if var19 == Enum.FriendStatus.Friend then p7.isFriend elseif var19 == Enum.FriendStatus.FriendRequestSent then p7.requestSent else p7.addPerson
-		end) else signalsModule.createSignal(p7.addPerson)
+			return if var1 == Enum.FriendStatus.Friend then p2.isFriend elseif var1 == Enum.FriendStatus.FriendRequestSent then p2.requestSent else p2.addPerson
+		end) else signalsModule.createSignal(p2.addPerson)
 	end
 	
-	local function getFriendButtonVariant(p9)
+	local function getFriendButtonVariant(p1)
 		-- upvalues: signalsModule (copy), buttonVariant (copy), getFriendStatusSignal (ref)
-		return if p9 then signalsModule.createComputed(function(p10)
-			-- upvalues: getFriendStatusSignal (copy), p9 (ref), buttonVariant (copy)
-			local var20 = getFriendStatusSignal(p9)(p10)
+		return if p1 then signalsModule.createComputed(function(p2)
+			-- upvalues: getFriendStatusSignal (copy), p1 (ref), buttonVariant (copy)
+			local var1 = getFriendStatusSignal(p1)(p2)
 			
-			return if var20 == Enum.FriendStatus.Friend or var20 == Enum.FriendStatus.FriendRequestSent then buttonVariant.Text else buttonVariant.Subtle
+			return if var1 == Enum.FriendStatus.Friend or var1 == Enum.FriendStatus.FriendRequestSent then buttonVariant.Text else buttonVariant.Subtle
 		end) else signalsModule.createSignal(buttonVariant.Subtle)
 	end
 	
-	local function getFriendStatus(p11)
+	local function getFriendStatus(p1)
 		-- upvalues: signalsModule (copy), getFriendStatusSignal (ref)
-		return if p11 then signalsModule.createComputed(function(p12)
-			-- upvalues: getFriendStatusSignal (copy), p11 (ref)
-			return getFriendStatusSignal(p11)(p12) == Enum.FriendStatus.Friend
+		return if p1 then signalsModule.createComputed(function(p2)
+			-- upvalues: getFriendStatusSignal (copy), p1 (ref)
+			return getFriendStatusSignal(p1)(p2) == Enum.FriendStatus.Friend
 		end) else signalsModule.createSignal(false)
 	end
 	
-	local function getIsFriendButtonDisabled(p13)
+	local function getIsFriendButtonDisabled(p1)
 		-- upvalues: signalsModule (copy), getFriendStatusSignal (ref)
-		return if p13 then signalsModule.createComputed(function(p14)
-			-- upvalues: getFriendStatusSignal (copy), p13 (ref)
-			local var21 = getFriendStatusSignal(p13)(p14)
+		return if p1 then signalsModule.createComputed(function(p2)
+			-- upvalues: getFriendStatusSignal (copy), p1 (ref)
+			local var1 = getFriendStatusSignal(p1)(p2)
 			
-			return if var21 ~= Enum.FriendStatus.Friend then var21 == Enum.FriendStatus.FriendRequestSent else true
+			return if var1 ~= Enum.FriendStatus.Friend then var1 == Enum.FriendStatus.FriendRequestSent else true
 		end) else signalsModule.createSignal(false)
 	end
 	
-	local function getIsFriendButtonGrayedOut(p15)
+	local function getIsFriendButtonGrayedOut(p1)
 		-- upvalues: signalsModule (copy), getFriendStatusSignal (ref)
-		return if p15 then signalsModule.createComputed(function(p16)
-			-- upvalues: getFriendStatusSignal (copy), p15 (ref)
-			return getFriendStatusSignal(p15)(p16) == Enum.FriendStatus.FriendRequestSent
+		return if p1 then signalsModule.createComputed(function(p2)
+			-- upvalues: getFriendStatusSignal (copy), p1 (ref)
+			return getFriendStatusSignal(p1)(p2) == Enum.FriendStatus.FriendRequestSent
 		end) else signalsModule.createSignal(false)
 	end
 	
-	local function sendFriendRequest(p17)
+	local function sendFriendRequest(p1)
 		-- upvalues: localPlayer (ref)
-		if p17 and localPlayer then
-			localPlayer:RequestFriendship(p17)
+		if p1 and localPlayer then
+			localPlayer:RequestFriendship(p1)
 			
 			return
 		end

@@ -6,26 +6,26 @@ local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebu
 local fFlagAppChatRemoveConversationListDividerModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local useCustomConversationListRowPresentationModule = require(script.useCustomConversationListRowPresentation)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useCustomConversationListRowPresentationModule (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
-	local var6 = useCustomConversationListRowPresentationModule({
-		entryHeight = p0.entryHeight,
-		onActivated = p0.onActivated
+	local var1 = useCustomConversationListRowPresentationModule({
+		entryHeight = p1.entryHeight,
+		onActivated = p1.onActivated
 	})
-	local var7 = foundationModule.Hooks.useTokens()
+	local var2 = foundationModule.Hooks.useTokens()
 	
 	return reactModule.createElement(foundationModule.View, {
 		BorderSizePixel = 0,
-		backgroundStyle = var7.Color.None,
-		Size = UDim2.new(1, 0, 0, var6.entryHeight),
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then p0.testId else nil
+		backgroundStyle = var2.Color.None,
+		Size = UDim2.new(1, 0, 0, var1.entryHeight),
+		testId = if fFlagDebugAppChatEnableDomLocatorsModule then p1.testId else nil
 	}, {
 		customCell = reactModule.createElement(foundationModule.View, {
 			Name = "customCell",
 			tag = "size-full bg-surface-0",
 			Size = UDim2.fromScale(1, 1),
 			selection = { Selectable = true },
-			onActivated = var6.onActivated,
+			onActivated = var1.onActivated,
 			stateLayer = {
 				affordance = foundationModule.Enums.StateLayerAffordance.Background
 			}
@@ -34,8 +34,8 @@ return reactModule.memo(function(p0)
 				tag = "row align-y-center gap-small size-full",
 				Size = UDim2.fromScale(1, 1),
 				padding = {
-					left = UDim.new(0, var6.pagePaddingLeft),
-					right = UDim.new(0, var6.pagePaddingRight)
+					left = UDim.new(0, var1.pagePaddingLeft),
+					right = UDim.new(0, var1.pagePaddingRight)
 				}
 			}, {
 				icon = reactModule.createElement(foundationModule.View, {
@@ -46,9 +46,9 @@ return reactModule.memo(function(p0)
 						tag = "row align-x-center align-y-center size-900-900 radius-medium bg-surface-100"
 					}, {
 						icon = reactModule.createElement(foundationModule.Icon, {
-							name = p0.entryIcon,
+							name = p1.entryIcon,
 							size = foundationModule.Enums.IconSize.Medium,
-							style = var7.Color.Content.Emphasis
+							style = var2.Color.Content.Emphasis
 						})
 					})
 				}),
@@ -70,13 +70,13 @@ return reactModule.memo(function(p0)
 								tag = "size-full-0 auto-y text-title-large text-align-x-left text-truncate-end content-default",
 								Name = "title",
 								LayoutOrder = 1,
-								Text = p0.titleText or ""
+								Text = p1.titleText or ""
 							}),
 							subtitle = reactModule.createElement(foundationModule.Text, {
 								tag = "size-full-0 auto-y text-body-small text-align-x-left text-truncate-end content-default",
 								Name = "subTitle",
 								LayoutOrder = 2,
-								Text = p0.subTitleText or ""
+								Text = p1.subTitleText or ""
 							})
 						}),
 						chevron = reactModule.createElement(foundationModule.View, {
@@ -86,7 +86,7 @@ return reactModule.memo(function(p0)
 							icon = reactModule.createElement(foundationModule.Icon, {
 								name = foundationModule.Enums.IconName.ChevronLargeRight,
 								size = foundationModule.Enums.IconSize.Medium,
-								style = var7.Color.Content.Emphasis
+								style = var2.Color.Content.Emphasis
 							})
 						})
 					}),

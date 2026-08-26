@@ -22,13 +22,13 @@ local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 
-return function(p0)
+return function(p1)
 	-- upvalues: useScreenSize (ref), useStyle (ref), useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), useState (ref), useEffect (ref), useCallback (ref), deleteWarningModalClosedModule (ref), eventNamesModule (ref), recordDeleteWarningModalOptOutModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref), checkbox (ref)
-	local var10 = useScreenSize()
-	local var11 = useStyle()
-	local var12 = useAnalyticsModule()
-	local var13 = useDispatch()
-	local var14 = useLocalization({
+	local var1 = useScreenSize()
+	local var2 = useStyle()
+	local var3 = useAnalyticsModule()
+	local var4 = useDispatch()
+	local var5 = useLocalization({
 		alertBody = "Feature.Captures.Label.DeleteCaptureInfo",
 		alertBodyPlural = "Feature.Captures.Label.DeleteCapturesWarning",
 		alertTitle = "Feature.Captures.Title.DeleteCaptureWarning",
@@ -37,22 +37,22 @@ return function(p0)
 		deleteCTA = "Feature.Captures.Action.DeleteCaptureWarningConfirm",
 		optOutText = "Feature.Captures.Label.DeleteCaptureWarningOptOut"
 	})
-	local theme = var11.Theme
-	local var15 = useSelector(function(p1)
+	local theme = var2.Theme
+	local var6 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
+		return p2[constantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
 	end)
-	local var16 = useSelector(function(p2)
+	local var7 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
-	local var17, var18 = useState(false)
+	local var8, var9 = useState(false)
 	useEffect(function()
-		-- upvalues: var15 (ref), var18 (ref)
-		if var15 then
-			var18(false)
+		-- upvalues: var6 (ref), var9 (ref)
+		if var6 then
+			var9(false)
 		end
-	end, { var15, var18 })
+	end, { var6, var9 })
 	
 	return reactModule.createElement("TextButton", {
 		Active = true,
@@ -60,58 +60,58 @@ return function(p0)
 		BackgroundColor3 = theme.Overlay.Color,
 		BackgroundTransparency = theme.Overlay.Transparency,
 		Size = UDim2.fromScale(1, 1),
-		Visible = var15,
-		ZIndex = p0.zIndex
+		Visible = var6,
+		ZIndex = p1.zIndex
 	}, {
 		Alert = reactModule.createElement(interactiveAlert, {
 			isMiddleContentFocusable = false,
-			bodyText = if #var16 > 1 then var14.alertBodyPlural else var14.alertBody,
+			bodyText = if #var7 > 1 then var5.alertBodyPlural else var5.alertBody,
 			buttonStackInfo = {
 				buttons = {
 					{
 						buttonType = buttonType.Secondary,
 						props = {
 							onActivated = useCallback(function()
-								-- upvalues: var13 (ref), deleteWarningModalClosedModule (copy), var12 (ref), eventNamesModule (copy)
-								var13(deleteWarningModalClosedModule())
-								var12.fireEvent(eventNamesModule.CapturesDeleteWarningModalCancelPressed)
+								-- upvalues: var4 (ref), deleteWarningModalClosedModule (copy), var3 (ref), eventNamesModule (copy)
+								var4(deleteWarningModalClosedModule())
+								var3.fireEvent(eventNamesModule.CapturesDeleteWarningModalCancelPressed)
 							end, {}),
-							text = var14.cancelCTA
+							text = var5.cancelCTA
 						}
 					},
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
 							onActivated = useCallback(function()
-								-- upvalues: p0 (ref), var17 (ref), recordDeleteWarningModalOptOutModule (copy), var12 (ref), eventNamesModule (copy), var13 (ref), deleteWarningModalClosedModule (copy)
-								p0.deleteItem()
+								-- upvalues: p1 (ref), var8 (ref), recordDeleteWarningModalOptOutModule (copy), var3 (ref), eventNamesModule (copy), var4 (ref), deleteWarningModalClosedModule (copy)
+								p1.deleteItem()
 								
-								if var17 then
-									recordDeleteWarningModalOptOutModule(var12)
+								if var8 then
+									recordDeleteWarningModalOptOutModule(var3)
 								end
-								var12.fireEvent(eventNamesModule.CapturesDeleteWarningModalDeletePressed)
-								var13(deleteWarningModalClosedModule())
-							end, { var12, var17, p0.deleteItem }),
-							text = var14.deleteCTA
+								var3.fireEvent(eventNamesModule.CapturesDeleteWarningModalDeletePressed)
+								var4(deleteWarningModalClosedModule())
+							end, { var3, var8, p1.deleteItem }),
+							text = var5.deleteCTA
 						}
 					}
 				}
 			},
 			middleContent = function()
-				-- upvalues: reactModule (copy), checkbox (copy), var14 (ref), var17 (ref), var18 (ref)
+				-- upvalues: reactModule (copy), checkbox (copy), var5 (ref), var8 (ref), var9 (ref)
 				return reactModule.createElement(checkbox, {
 					isDisabled = false,
-					label = var14.optOutText,
-					isChecked = var17,
+					label = var5.optOutText,
+					isChecked = var8,
 					onActivated = function()
-						-- upvalues: var18 (copy), var17 (copy)
-						var18(not var17)
+						-- upvalues: var9 (copy), var8 (copy)
+						var9(not var8)
 					end
 				})
 			end,
 			position = UDim2.fromScale(0.5, 0.5),
-			screenSize = var10,
-			title = if #var16 > 1 then var14.alertTitlePlural else var14.alertTitle
+			screenSize = var1,
+			title = if #var7 > 1 then var5.alertTitlePlural else var5.alertTitle
 		})
 	})
 end

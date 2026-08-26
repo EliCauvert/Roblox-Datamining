@@ -2,21 +2,21 @@
 local UIManagerModule = require(parent.UIManager)
 local constantsModule = require(parent.Constants)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: constantsModule (ref), UIManagerModule (ref)
 	local t = nil
-	local var3 = constantsModule.ROACT_PANEL_UIGROUP_MAP[p1]
+	local var1 = constantsModule.ROACT_PANEL_UIGROUP_MAP[p2]
 	
-	if var3 then
+	if var1 then
 		t = {
-			uiGroupElementOffset = constantsModule.ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP[p1]
+			uiGroupElementOffset = constantsModule.ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP[p2]
 		}
 	end
-	UIManagerModule.getInstance():registerRoactPanel(p1, {
+	UIManagerModule.getInstance():registerRoactPanel(p2, {
 		headScale = 1,
-		panelObject = p0.current,
+		panelObject = p1.current,
 		uiType = constantsModule.SpatialUIType.SpatialUIRoact,
-		panelType = p1,
-		panelPositionProps = { uiGroup = var3, cameraFixedPanelProp = t }
+		panelType = p2,
+		panelPositionProps = { uiGroup = var1, cameraFixedPanelProp = t }
 	})
 end

@@ -1,10 +1,10 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0)
+return function(p1)
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p0 (ref)
-		return httpService:JSONDecode(p0)
+		-- upvalues: httpService (copy), p1 (ref)
+		return httpService:JSONDecode(p1)
 	end)
 	
 	if ok then

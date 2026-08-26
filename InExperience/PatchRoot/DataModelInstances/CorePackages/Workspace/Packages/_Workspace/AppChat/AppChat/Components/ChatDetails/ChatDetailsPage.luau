@@ -76,12 +76,12 @@ local t = {
 	})
 }
 
-function ChatDetailsPage(p0)
+function ChatDetailsPage(p1)
 	-- upvalues: cryoModule (ref), t (ref), useTextSizeOffset (ref), useTokens (ref), useIsAppChatVerticallyConstrainedModule (ref), loggerModule (ref), useCallback (ref), useIsChatUserMessagesEnabledModule (ref), reactModule (ref), appChatDetailsPageAutomaticCanvasSize (ref), sectionHeaderModule (ref), groupNameEntryCellModule (ref), images (ref), addFriendsEntryModule (ref), participantListModule (ref), leaveGroupCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationTypeCellModule (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), createUnfilteredChatCellModule (ref)
-	local var18 = cryoModule.Dictionary.join(t, p0)
-	local style = var18.style
-	local var19 = useTokens().Size.Size_1200 + 2 * useTextSizeOffset()
-	local var20 = useIsAppChatVerticallyConstrainedModule()
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local style = var1.style
+	local var2 = useTokens().Size.Size_1200 + 2 * useTextSizeOffset()
+	local var3 = useIsAppChatVerticallyConstrainedModule()
 	local t_1 = {
 		ChatGroupHeader = {
 			marginTop = style.Tokens.Size.Size_0,
@@ -94,59 +94,59 @@ function ChatDetailsPage(p0)
 		GroupNameEntryCell = { paddingBottom = style.Tokens.Size.Size_0 }
 	}
 	
-	local var22 = function()
-		-- upvalues: var18 (ref)
-		var18.onGroupNameEntryCellActivated(var18.conversation)
+	local var4 = function()
+		-- upvalues: var1 (ref)
+		var1.onGroupNameEntryCellActivated(var1.conversation)
 	end
 	
-	local var23 = function()
-		-- upvalues: var18 (ref)
-		var18.onAddFriendsCellActivated(var18.conversation)
+	local var5 = function()
+		-- upvalues: var1 (ref)
+		var1.onAddFriendsCellActivated(var1.conversation)
 	end
 	
-	local var24 = function()
-		-- upvalues: var18 (ref)
-		var18.onLeaveGroupCellActivated(var18.conversation)
+	local var6 = function()
+		-- upvalues: var1 (ref)
+		var1.onLeaveGroupCellActivated(var1.conversation)
 	end
 	
-	local var25 = function(p1, p2)
-		-- upvalues: loggerModule (copy), var18 (ref)
-		loggerModule:info("onParticipantCellActivated: {}", p1.id)
+	local var7 = function(p2, p3)
+		-- upvalues: loggerModule (copy), var1 (ref)
+		loggerModule:info("onParticipantCellActivated: {}", p2.id)
 		
-		if p1.isLocalUser then
+		if p2.isLocalUser then
 			return
 		end
-		var18.onParticipantCellActivated(p1.id, p2)
+		var1.onParticipantCellActivated(p2.id, p3)
 	end
 	
-	local var26 = useCallback(function()
-		-- upvalues: var18 (ref)
-		var18.onCreateUnfilteredChatCellActivated(var18.conversation)
-	end, { var18.conversation })
-	local var27 = useCallback(function(_, p3, p4)
-		-- upvalues: var18 (ref)
-		if not var18.wideMode and p3 == Enum.SwipeDirection.Right and p4 == 1 then
-			var18.navigateBack()
+	local var8 = useCallback(function()
+		-- upvalues: var1 (ref)
+		var1.onCreateUnfilteredChatCellActivated(var1.conversation)
+	end, { var1.conversation })
+	local var9 = useCallback(function(_, p2, p3)
+		-- upvalues: var1 (ref)
+		if not var1.wideMode and p2 == Enum.SwipeDirection.Right and p3 == 1 then
+			var1.navigateBack()
 		end
 	end)
-	local var28 = 0
+	local var10 = 0
 	
-	for i, v in pairs(var18.participants) do
-		var28 += 1
+	for i, v in pairs(var1.participants) do
+		var10 += 1
 	end
-	local var29 = useIsChatUserMessagesEnabledModule()
-	local shouldShowAddFriends = var18.shouldShowAddFriends
-	local var30 = (if shouldShowAddFriends then var28 + 1 else var28) * var19
+	local var11 = useIsChatUserMessagesEnabledModule()
+	local shouldShowAddFriends = var1.shouldShowAddFriends
+	local var12 = (if shouldShowAddFriends then var10 + 1 else var10) * var2
 	
 	return reactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		BackgroundColor3 = style.Theme.BackgroundDefault.Color,
 		BorderSizePixel = 0,
-		LayoutOrder = var18.LayoutOrder,
+		LayoutOrder = var1.LayoutOrder,
 		Size = UDim2.new(1, 0, 1, 0),
 		Text = "",
 		Transparency = style.Tokens.Color.None.Transparency,
-		[reactModule.Event.TouchSwipe] = var27,
+		[reactModule.Event.TouchSwipe] = var9,
 		Selectable = false
 	}, {
 		ScrollingContent = reactModule.createElement("ScrollingFrame", {
@@ -155,43 +155,43 @@ function ChatDetailsPage(p0)
 			ScrollBarThickness = 0,
 			Selectable = false,
 			Size = UDim2.new(1, 0, 1, 0),
-			CanvasSize = UDim2.new(1, 0, 0, if appChatDetailsPageAutomaticCanvasSize then 0 else var30 + 8 * var19),
+			CanvasSize = UDim2.new(1, 0, 0, if appChatDetailsPageAutomaticCanvasSize then 0 else var12 + 8 * var2),
 			AutomaticCanvasSize = if appChatDetailsPageAutomaticCanvasSize then Enum.AutomaticSize.Y else nil,
-			LayoutOrder = var18.LayoutOrder,
+			LayoutOrder = var1.LayoutOrder,
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		}, {
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Top,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			ChatGroupHeader = var18.isGroupConversation and reactModule.createElement(sectionHeaderModule, {
+			ChatGroupHeader = var1.isGroupConversation and reactModule.createElement(sectionHeaderModule, {
 				LayoutOrder = 1,
-				marginTop = if var20 then t_1.ChatGroupHeader.marginTop else 20,
-				marginBottom = if var20 then t_1.ChatGroupHeader.marginBottom else nil,
-				Text = var18.chatGroupText,
-				style = var18.style
+				marginTop = if var3 then t_1.ChatGroupHeader.marginTop else 20,
+				marginBottom = if var3 then t_1.ChatGroupHeader.marginBottom else nil,
+				Text = var1.chatGroupText,
+				style = var1.style
 			}),
-			GroupNameEntryCell = var18.isGroupConversation and reactModule.createElement(groupNameEntryCellModule, {
+			GroupNameEntryCell = var1.isGroupConversation and reactModule.createElement(groupNameEntryCellModule, {
 				LayoutOrder = 2,
-				groupNameText = var18.conversationTitle,
+				groupNameText = var1.conversationTitle,
 				iconImage = images["icons/actions/edit/edit"],
-				isDisabled = var18.shouldHideGroupChatFunctionality or not var29,
-				cellHeight = var19,
-				paddingBottom = if var20 then t_1.GroupNameEntryCell.paddingBottom else nil,
-				onActivated = var22,
-				style = var18.style
+				isDisabled = var1.shouldHideGroupChatFunctionality or not var11,
+				cellHeight = var2,
+				paddingBottom = if var3 then t_1.GroupNameEntryCell.paddingBottom else nil,
+				onActivated = var4,
+				style = var1.style
 			}),
 			MembersHeader = reactModule.createElement(sectionHeaderModule, {
 				LayoutOrder = 3,
-				marginTop = if var20 then t_1.MembersHeader.marginTop else 14,
-				marginBottom = if var20 then t_1.MembersHeader.marginBottom else 8,
-				Text = var18.membersText,
-				style = var18.style
+				marginTop = if var3 then t_1.MembersHeader.marginTop else 14,
+				marginBottom = if var3 then t_1.MembersHeader.marginBottom else 8,
+				Text = var1.membersText,
+				style = var1.style
 			}),
 			MembersFrame = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				LayoutOrder = 4,
-				Size = UDim2.new(1, 0, 0, var30),
+				Size = UDim2.new(1, 0, 0, var12),
 				BackgroundColor3 = style.Theme.BackgroundDefault.Color,
 				BackgroundTransparency = style.Tokens.Color.None.Transparency
 			}, {
@@ -201,56 +201,56 @@ function ChatDetailsPage(p0)
 				}),
 				AddFriendsCell = if shouldShowAddFriends then reactModule.createElement(addFriendsEntryModule, {
 					LayoutOrder = 1,
-					Text = var18.addFriendsText,
+					Text = var1.addFriendsText,
 					iconImage = images["icons/actions/edit/add"],
-					cellHeight = var19,
-					onActivated = var23,
-					style = var18.style
+					cellHeight = var2,
+					onActivated = var5,
+					style = var1.style
 				}) else nil,
 				ParticipantList = reactModule.createElement(participantListModule, {
 					LayoutOrder = 2,
 					childWidth = 120,
-					activeParticipantId = var18.activeParticipantId,
-					entries = var18.participants,
-					entryHeight = var19,
-					onlinePresenceText = var18.onlinePresenceText,
-					offlinePresenceText = var18.offlinePresenceText,
-					onEntryActivated = var25
+					activeParticipantId = var1.activeParticipantId,
+					entries = var1.participants,
+					entryHeight = var2,
+					onlinePresenceText = var1.onlinePresenceText,
+					offlinePresenceText = var1.offlinePresenceText,
+					onEntryActivated = var7
 				})
 			}),
-			LeaveGroupCell = var18.isGroupConversation and reactModule.createElement(leaveGroupCellModule, {
+			LeaveGroupCell = var1.isGroupConversation and reactModule.createElement(leaveGroupCellModule, {
 				LayoutOrder = 5,
-				leaveGroupText = var18.leaveGroupText,
+				leaveGroupText = var1.leaveGroupText,
 				iconImage = images["icons/controls/vehicle/exit"],
-				cellHeight = var19,
-				onActivated = var24,
-				style = var18.style,
+				cellHeight = var2,
+				onActivated = var6,
+				style = var1.style,
 				testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsListActionButton("leaveGroup") else nil
 			}),
-			ConversationTypeHeader = if var29 then reactModule.createElement(sectionHeaderModule, {
+			ConversationTypeHeader = if var11 then reactModule.createElement(sectionHeaderModule, {
 				LayoutOrder = 6,
 				marginTop = 26,
-				Text = var18.conversationTypeHeaderText,
-				style = var18.style
+				Text = var1.conversationTypeHeaderText,
+				style = var1.style
 			}) else nil,
-			ConversationTypeCell = if var29 then reactModule.createElement(conversationTypeCellModule, {
+			ConversationTypeCell = if var11 then reactModule.createElement(conversationTypeCellModule, {
 				layoutOrder = 7,
-				bodyText = var18.conversationTypeText,
+				bodyText = var1.conversationTypeText,
 				iconImage = images["icons/actions/info"],
-				onIconActivated = var18.onConversationTypeIconActivated,
-				shouldShowIcon = if fFlagHideConversationTypeInfoIfNoWebViewModule then var18.shouldShowConversationTypeInfo else nil,
-				style = var18.style
+				onIconActivated = var1.onConversationTypeIconActivated,
+				shouldShowIcon = if fFlagHideConversationTypeInfoIfNoWebViewModule then var1.shouldShowConversationTypeInfo else nil,
+				style = var1.style
 			}) else nil,
-			CreateUnfilteredChatCell = if var29 and var18.shouldShowCreateUnfilteredChat then reactModule.createElement(createUnfilteredChatCellModule, {
+			CreateUnfilteredChatCell = if var11 and var1.shouldShowCreateUnfilteredChat then reactModule.createElement(createUnfilteredChatCellModule, {
 				layoutOrder = 8,
-				bodyText = var18.createUnfilteredChatText,
-				subTitleText = var18.createUnfilteredChatSubTitleText,
+				bodyText = var1.createUnfilteredChatText,
+				subTitleText = var1.createUnfilteredChatSubTitleText,
 				iconImage = images["icons/actions/edit/copy"],
-				cellHeight = var19,
-				isLoading = var18.isCreateUnfilteredChatLoading,
-				conversationId = var18.conversationId,
-				onActivated = var26,
-				style = var18.style
+				cellHeight = var2,
+				isLoading = var1.isCreateUnfilteredChatLoading,
+				conversationId = var1.conversationId,
+				onActivated = var8,
+				style = var1.style
 			}) else nil
 		})
 	})

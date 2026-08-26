@@ -10,50 +10,50 @@ local useDescendantHasFocusModule = require(focusNavigationUtils.useDescendantHa
 local useLastInputModeModule = require(focusNavigationUtils.useLastInputMode)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), t (ref), reactFocusNavigationModule (ref), useFocusNavigableSurfaceRegistryConnectionModule (ref), useDescendantHasFocusModule (ref), useAutoFocusModule (ref), useLastInputModeModule (ref), guiService (ref)
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var9, var10 = reactModule.useState(nil)
-	local var11 = var9
-	local var12 = reactFocusNavigationModule.useEventHandlerMap(p0.eventHandlers or t, reactFocusNavigationModule.useEventMap(p0.eventMap or t, var10))
-	local var13 = p0.isFocusable == nil or p0.isFocusable
-	local var14 = if p0.shouldRestoreFocus == nil or p0.shouldRestoreFocus then reactFocusNavigationModule.useMostRecentFocusBehavior(var12) else var12
-	useFocusNavigableSurfaceRegistryConnectionModule(var11, p0.surfaceIdentifier, var13)
-	local var15 = useAutoFocusModule({ var11 }, 0.1)
-	local var16 = p0.isAutoFocusRoot and (var13 and (useLastInputModeModule() == "Focus" and (var11 and not useDescendantHasFocusModule(var11))))
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = var1
+	local var4 = reactFocusNavigationModule.useEventHandlerMap(p1.eventHandlers or t, reactFocusNavigationModule.useEventMap(p1.eventMap or t, var2))
+	local var5 = p1.isFocusable == nil or p1.isFocusable
+	local var6 = if p1.shouldRestoreFocus == nil or p1.shouldRestoreFocus then reactFocusNavigationModule.useMostRecentFocusBehavior(var4) else var4
+	useFocusNavigableSurfaceRegistryConnectionModule(var3, p1.surfaceIdentifier, var5)
+	local var7 = useAutoFocusModule({ var3 }, 0.1)
+	local var8 = p1.isAutoFocusRoot and (var5 and (useLastInputModeModule() == "Focus" and (var3 and not useDescendantHasFocusModule(var3))))
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), var15 (ref)
-		local var18 = if var16 then var15() else nil
+		-- upvalues: var8 (ref), var7 (ref)
+		local var9 = if var8 then var7() else nil
 		
 		return function()
-			-- upvalues: var18 (write)
-			if var18 then
-				var18.cancel()
+			-- upvalues: var9 (write)
+			if var9 then
+				var9.cancel()
 			end
 		end
-	end, { var16, var15 })
-	local var17 = reactModule.useRef(var11)
+	end, { var8, var7 })
+	local var9 = reactModule.useRef(var3)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (write), var17 (ref)
-		if var11 then
-			var17.current = var11
+		-- upvalues: var3 (write), var9 (ref)
+		if var3 then
+			var9.current = var3
 		end
-	end, { var11 })
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), guiService (copy)
+		-- upvalues: var9 (ref), guiService (copy)
 		return function()
-			-- upvalues: var17 (copy), guiService (copy)
-			if not var17.current then return end
+			-- upvalues: var9 (copy), guiService (copy)
+			if not var9.current then return end
 			local selectedCoreObject = guiService.SelectedCoreObject
 			
 			if not selectedCoreObject then return end
-			if selectedCoreObject:IsDescendantOf(var17.current) or not selectedCoreObject:IsDescendantOf(game) then
+			if selectedCoreObject:IsDescendantOf(var9.current) or not selectedCoreObject:IsDescendantOf(game) then
 				guiService.SelectedCoreObject = nil
 			end
 		end
 	end, {})
 	
-	return var14
+	return var6
 end

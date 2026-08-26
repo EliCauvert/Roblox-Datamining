@@ -1,8 +1,8 @@
 ﻿local error = require(script.Parent.Parent.LuauPolyfill).Error
 
-return function(p0, p1, ...)
+return function(p1, p2, ...)
 	-- upvalues: error (ref)
-	if not p0 then
-		error(error(string.format(p1, ...)))
+	if not p1 then
+		error(error(string.format(p2, ...)))
 	end
 end

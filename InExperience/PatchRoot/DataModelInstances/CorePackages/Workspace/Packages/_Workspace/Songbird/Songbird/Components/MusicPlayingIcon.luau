@@ -5,32 +5,32 @@ local animatedBarModule = require(songbird.Components.AnimatedBar)
 local t = { numAnimatedBars = 5, isMoving = true }
 local list = { 0.4, 0.3, 0.75, 0.55 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), animatedBarModule (ref), list (ref)
-	local var6 = cryoModule.Dictionary.join(t, p0)
-	local var7 = 8 / var6.numAnimatedBars
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = 8 / var1.numAnimatedBars
 	local t_1 = {}
 	
-	for i = 1, var6.numAnimatedBars do
+	for i = 1, var1.numAnimatedBars do
 		t_1[`Bar{i}`] = reactModule.createElement(animatedBarModule, {
 			layoutOrder = i,
-			width = UDim.new(1 / (var6.numAnimatedBars * 1.3), -var7),
-			heightRange = var6.heightRange,
-			isMoving = var6.isMoving,
+			width = UDim.new(1 / (var1.numAnimatedBars * 1.3), -var2),
+			heightRange = var1.heightRange,
+			isMoving = var1.isMoving,
 			staticHeight = list[i]
 		})
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = var6.zIndex
+		ZIndex = var1.zIndex
 	}, {
 		Layout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, var7)
+			Padding = UDim.new(0, var2)
 		})
 	}, t_1)
 end

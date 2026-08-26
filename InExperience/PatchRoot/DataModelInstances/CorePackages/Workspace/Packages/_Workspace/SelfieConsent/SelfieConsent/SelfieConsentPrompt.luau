@@ -15,24 +15,24 @@ local avatarCreationService = game:GetService("AvatarCreationService")
 local browserService = game:GetService("BrowserService")
 local userInputService = game:GetService("UserInputService")
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), useLegallySensitiveContentAndActions (ref), consentName (ref), reactModule (ref), dialog (ref), dialogSize (ref), view (ref), button (ref), buttonVariant (ref), userInputService (ref), browserService (ref), linkingProtocol (ref), avatarCreationService (ref)
-	local var7 = useLocalization({
+	local var1 = useLocalization({
 		title = "AvatarGeneration.SelfieConsent.Title",
 		bodyText = "AvatarGeneration.SelfieConsent.BodyTextLink",
 		privacyLinkText = "AvatarGeneration.SelfieConsent.PrivacyLinkText",
 		agreeButton = "AvatarGeneration.SelfieConsent.AgreeButton",
 		cancelButton = "AvatarGeneration.SelfieConsent.CancelButton"
 	})
-	local _, var8 = useLegallySensitiveContentAndActions(consentName.PhotoToAvatar, "in-experience-photo-to-avatar-selfie-consent")
+	local _, var2 = useLegallySensitiveContentAndActions(consentName.PhotoToAvatar, "in-experience-photo-to-avatar-selfie-consent")
 	
 	return reactModule.createElement(dialog.Root, { size = dialogSize.Large }, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var7.title }),
+		DialogTitle = reactModule.createElement(dialog.Title, { text = var1.title }),
 		DialogContent = reactModule.createElement(dialog.Content, nil, {
 			DialogView = reactModule.createElement(view, { tag = "col fill auto-xy items-start gap-medium" }, {
-				DialogContentText = reactModule.createElement(dialog.Text, { Text = var7.bodyText }),
+				DialogContentText = reactModule.createElement(dialog.Text, { Text = var1.bodyText }),
 				DialogFooter = reactModule.createElement(button, {
-					text = var7.privacyLinkText,
+					text = var1.privacyLinkText,
 					variant = buttonVariant.Link,
 					onActivated = function()
 						-- upvalues: userInputService (copy), browserService (copy), linkingProtocol (copy)
@@ -50,24 +50,24 @@ return function(p0)
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var7.agreeButton,
+					text = var1.agreeButton,
 					variant = buttonVariant.Emphasis,
 					onActivated = function()
-						-- upvalues: avatarCreationService (copy), p0 (ref), var8 (ref)
+						-- upvalues: avatarCreationService (copy), p1 (ref), var2 (ref)
 						avatarCreationService:HandleSelfieConsentResult(true)
-						p0.displaySelfieConsent(false)
-						var8.grantOneTimeUserConsentWithAuditing(nil, {
+						p1.displaySelfieConsent(false)
+						var2.grantOneTimeUserConsentWithAuditing(nil, {
 							privacyPolicyLink = "https://en.help.roblox.com/hc/en-us/articles/115004630823-Roblox-Privacy-and-Cookie-Policy"
 						})
 					end
 				},
 				{
-					text = var7.cancelButton,
+					text = var1.cancelButton,
 					variant = buttonVariant.Standard,
 					onActivated = function()
-						-- upvalues: avatarCreationService (copy), p0 (ref)
+						-- upvalues: avatarCreationService (copy), p1 (ref)
 						avatarCreationService:HandleSelfieConsentResult(false)
-						p0.displaySelfieConsent(false)
+						p1.displaySelfieConsent(false)
 					end
 				}
 			}

@@ -31,34 +31,34 @@ local vector2 = Vector2.new(120, 16)
 local t = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 local char = utf8.char(57344)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), momentContextModule (ref), reactModule (ref), reactOtterModule (ref), useUsernameModule (ref), getFFlagMomentsCreatorVerifiedBadgeModule (ref), useCreatorVerifiedModule (ref), useMomentsHost (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), makeFeedActionFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), char (ref), view (ref), stateLayerAffordance (ref), controlState (ref), imageWithSkeletonModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), radius (ref), getColorStyleWithTransparencyModule (ref), t (ref), text (ref), skeleton (ref), vector2 (ref)
-	local var15 = useTokens()
-	local var16 = momentContextModule.useMoment()
-	local data = var16.store.getData(false)
-	local var18, var19 = reactModule.useState(false)
-	local var20, var21 = reactOtterModule.useAnimatedBinding(0)
+	local var1 = useTokens()
+	local var2 = momentContextModule.useMoment()
+	local data = var2.store.getData(false)
+	local var3, var4 = reactModule.useState(false)
+	local var5, var6 = reactOtterModule.useAnimatedBinding(0)
 	reactModule.useEffect(function()
-		-- upvalues: var21 (ref), reactOtterModule (copy), var18 (ref)
-		var21(reactOtterModule.ease(if var18 then 0.6 else 0, {
-			duration = if var18 then 0.05 else 0.03,
+		-- upvalues: var6 (ref), reactOtterModule (copy), var3 (ref)
+		var6(reactOtterModule.ease(if var3 then 0.6 else 0, {
+			duration = if var3 then 0.05 else 0.03,
 			easingStyle = Enum.EasingStyle.Quad
 		}))
-	end, { var18 })
-	local var22 = reactModule.joinBindings({ var16.animationRatio, var20 }):map(function(p1)
-		return 1 - (1 - p1[1]) * (1 - p1[2])
+	end, { var3 })
+	local var7 = reactModule.joinBindings({ var2.animationRatio, var5 }):map(function(p2)
+		return 1 - (1 - p2[1]) * (1 - p2[2])
 	end)
-	local var23 = useUsernameModule(data.creatorId)
-	local var24 = if getFFlagMomentsCreatorVerifiedBadgeModule() then useCreatorVerifiedModule(data.creatorId) else data.creatorIsVerified
+	local var8 = useUsernameModule(data.creatorId)
+	local var9 = if getFFlagMomentsCreatorVerifiedBadgeModule() then useCreatorVerifiedModule(data.creatorId) else data.creatorIsVerified
 	local openProfile = useMomentsHost().openProfile
-	local var25 = reactModule.useCallback(function()
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: openProfile (ref), getFFlagMomentsAnalyticsSchemaIdentity (copy), makeFeedActionFieldsModule (copy), data (ref), fireAnalyticsEvent (copy), eventNames (copy)
 		if openProfile ~= nil then
 			if getFFlagMomentsAnalyticsSchemaIdentity() then
-				local var27 = makeFeedActionFieldsModule(data.momentId, data.feedItemId, data.feedSessionId)
+				local var11 = makeFeedActionFieldsModule(data.momentId, data.feedItemId, data.feedSessionId)
 				
-				if var27 ~= nil then
-					fireAnalyticsEvent(eventNames.ProfileCreatorInfoTapped, var27)
+				if var11 ~= nil then
+					fireAnalyticsEvent(eventNames.ProfileCreatorInfoTapped, var11)
 				end
 			else
 				fireAnalyticsEvent(eventNames.ProfileCreatorInfoTapped, { userId = tostring(data.creatorId) })
@@ -72,17 +72,17 @@ return reactModule.memo(function(p0)
 		data.feedItemId,
 		data.feedSessionId
 	} else { openProfile, data.creatorId })
-	local size800 = var15.Size.Size_800
-	local var26 = if var23 and var24 then `{var23} {char}` else var23
+	local size800 = var1.Size.Size_800
+	local var11 = if var8 and var9 then `{var8} {char}` else var8
 	
 	return reactModule.createElement(view, {
 		tag = "row align-x-left align-y-center gap-small auto-xy",
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		stateLayer = { affordance = stateLayerAffordance.None },
-		onActivated = if openProfile ~= nil then nil else var25,
+		onActivated = if openProfile ~= nil then nil else var10,
 		onStateChanged = function(p2)
-			-- upvalues: var19 (ref), controlState (copy)
-			var19(if p2 ~= controlState.Pressed then p2 == controlState.SelectedPressed else true)
+			-- upvalues: var4 (ref), controlState (copy)
+			var4(if p2 ~= controlState.Pressed then p2 == controlState.SelectedPressed else true)
 		end
 	}, {
 		Avatar = reactModule.createElement(imageWithSkeletonModule, {
@@ -90,22 +90,22 @@ return reactModule.memo(function(p0)
 			Image = getRbxThumb(thumbnailType.AvatarHeadShot, data.creatorId, thumbnailSize.Medium),
 			Size = UDim2.fromOffset(size800, size800),
 			radius = radius.Circle,
-			backgroundStyle = var22:map(function(p3)
-				-- upvalues: getColorStyleWithTransparencyModule (copy), var15 (ref)
-				return getColorStyleWithTransparencyModule(var15.Color.Shift.Shift_300, p3)
+			backgroundStyle = var7:map(function(p2)
+				-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
+				return getColorStyleWithTransparencyModule(var1.Color.Shift.Shift_300, p2)
 			end),
-			imageStyle = var22:map(function(p4)
+			imageStyle = var7:map(function(p2)
 				-- upvalues: getColorStyleWithTransparencyModule (copy), t (copy)
-				return getColorStyleWithTransparencyModule(t, p4)
+				return getColorStyleWithTransparencyModule(t, p2)
 			end)
 		}),
-		Username = if var26 then reactModule.createElement(text, {
+		Username = if var11 then reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "auto-xy text-title-large text-align-x-left text-align-y-center text-truncate-end content-emphasis",
-			Text = var26,
-			textStyle = var22:map(function(p5)
-				-- upvalues: getColorStyleWithTransparencyModule (copy), var15 (ref)
-				return getColorStyleWithTransparencyModule(var15.Color.Content.Emphasis, p5)
+			Text = var11,
+			textStyle = var7:map(function(p2)
+				-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
+				return getColorStyleWithTransparencyModule(var1.Color.Content.Emphasis, p2)
 			end)
 		}) else reactModule.createElement(skeleton, {
 			LayoutOrder = 2,

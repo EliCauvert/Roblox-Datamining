@@ -1,10 +1,10 @@
 ﻿local tracingModule = require(script.Parent.Tracing)
 local tracingSubscriptionsModule = require(script.Parent.TracingSubscriptions)
 local unknownModule = require(script.Parent.forks["SchedulerHostConfig.mock"])
-local var3 = require(script.Parent.Scheduler)(unknownModule)
+local var1 = require(script.Parent.Scheduler)(unknownModule)
 local t = { tracing = {} }
 
-for i, v in var3 do
+for i, v in var1 do
 	t[i] = v
 end
 for i_1, v_1 in tracingModule do
@@ -21,6 +21,6 @@ t.unstable_flushUntilNextPaint = unknownModule.unstable_flushUntilNextPaint
 t.unstable_flushAll = unknownModule.unstable_flushAll
 t.unstable_yieldValue = unknownModule.unstable_yieldValue
 t.unstable_advanceTime = unknownModule.unstable_advanceTime
-t.unstable_Profiling = var3.unstable_Profiling
+t.unstable_Profiling = var1.unstable_Profiling
 
 return t

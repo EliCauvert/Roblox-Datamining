@@ -12,34 +12,34 @@ local networkSummaryModule = require(components.Network.NetworkSummary)
 local networkChartModule = require(components.Network.NetworkChart)
 local networkView = roactModule.Component:extend("NetworkView")
 
-function networkView.init(p0, p1)
+function networkView.init(p1, p2)
 	-- upvalues: roactModule (ref)
-	assert(p1.targetNetworkData, "Make sure the NetworkData is assigned for this NetworkView")
-	local currentData = p1.targetNetworkData:getCurrentData()
+	assert(p2.targetNetworkData, "Make sure the NetworkData is assigned for this NetworkView")
+	local currentData = p2.targetNetworkData:getCurrentData()
 	
-	function p0.onSortChanged(p2)
-		-- upvalues: p1 (ref), p0 (ref)
-		if p2 == p1.targetNetworkData:getSortType() then
-			p0:setState({ reverseSort = not p0.state.reverseSort })
+	function p0.onSortChanged(p3)
+		-- upvalues: p2 (ref), p1 (ref)
+		if p3 == p2.targetNetworkData:getSortType() then
+			p1:setState({ reverseSort = not p1.state.reverseSort })
 			
 			return
 		end
-		p1.targetNetworkData:setSortType(p2)
-		p0:setState({ reverseSort = false })
+		p2.targetNetworkData:setSortType(p3)
+		p1:setState({ reverseSort = false })
 	end
 	
 	function p0.onSummaryButton(_, _)
-		-- upvalues: p0 (ref)
-		p0:setState({ summaryExpanded = not p0.state.summaryExpanded })
+		-- upvalues: p1 (ref)
+		p1:setState({ summaryExpanded = not p1.state.summaryExpanded })
 	end
 	
 	function p0.onDetailButton(_, _)
-		-- upvalues: p0 (ref)
-		p0:setState({ entriesExpanded = not p0.state.entriesExpanded })
+		-- upvalues: p1 (ref)
+		p1:setState({ entriesExpanded = not p1.state.entriesExpanded })
 	end
 	
-	p0.ref = roactModule.createRef()
-	p0.state = {
+	p1.ref = roactModule.createRef()
+	p1.state = {
 		summaryExpanded = true,
 		entriesExpanded = true,
 		indexOfEntryExpanded = 0,
@@ -51,55 +51,55 @@ function networkView.init(p0, p1)
 	}
 end
 
-function networkView.didUpdate(p3)
-	if p3.ref.current and p3.state.absWidth ~= p3.ref.current.AbsoluteSize.X then
-		p3:setState({ absWidth = p3.ref.current.AbsoluteSize.X })
+function networkView.didUpdate(p1)
+	if p1.ref.current and p1.state.absWidth ~= p1.ref.current.AbsoluteSize.X then
+		p1:setState({ absWidth = p1.ref.current.AbsoluteSize.X })
 	end
 end
 
-function networkView.didMount(p4)
-	p4.httpEntryAddedConnector = p4.props.targetNetworkData:Signal():Connect(function(p5, p6, p7)
-		-- upvalues: p4 (ref)
-		p4:setState({
-			httpSummaryTable = p5,
-			httpSummaryCount = p6,
-			httpEntryList = p7
+function networkView.didMount(p1)
+	p1.httpEntryAddedConnector = p1.props.targetNetworkData:Signal():Connect(function(p2, p3, p4)
+		-- upvalues: p1 (ref)
+		p1:setState({
+			httpSummaryTable = p2,
+			httpSummaryCount = p3,
+			httpEntryList = p4
 		})
 	end)
 	
-	if p4.ref.current then
-		p4:setState({ absWidth = p4.ref.current.AbsoluteSize.X })
+	if p1.ref.current then
+		p1:setState({ absWidth = p1.ref.current.AbsoluteSize.X })
 	end
 end
 
-function networkView.willUnmount(p8)
-	p8.httpEntryAddedConnector:Disconnect()
-	p8.httpEntryAddedConnector = nil
+function networkView.willUnmount(p1)
+	p1.httpEntryAddedConnector:Disconnect()
+	p1.httpEntryAddedConnector = nil
 end
 
-function networkView.render(p9)
+function networkView.render(p1)
 	-- upvalues: minFrameWidth (ref), summaryButtonHeight (ref), entryFrameHeight (ref), headerFrameHeight (ref), roactModule (ref), bannerButtonModule (ref), constantsModule (ref), mainWindow (ref), mainWindowHeader (ref), networkSummaryModule (ref), networkChartModule (ref)
-	local layoutOrder = p9.props.layoutOrder
-	local searchTerm = p9.props.searchTerm
-	local size = p9.props.size
-	local summaryExpanded = p9.state.summaryExpanded
-	local entriesExpanded = p9.state.entriesExpanded
-	local reverseSort = p9.state.reverseSort
-	local httpSummaryTable = p9.state.httpSummaryTable
-	local httpEntryList = p9.state.httpEntryList
-	local httpSummaryCount = p9.state.httpSummaryCount
-	local maxValue = math.max(minFrameWidth, p9.state.absWidth)
-	local var8 = summaryButtonHeight * 2
+	local layoutOrder = p1.props.layoutOrder
+	local searchTerm = p1.props.searchTerm
+	local size = p1.props.size
+	local summaryExpanded = p1.state.summaryExpanded
+	local entriesExpanded = p1.state.entriesExpanded
+	local reverseSort = p1.state.reverseSort
+	local httpSummaryTable = p1.state.httpSummaryTable
+	local httpEntryList = p1.state.httpEntryList
+	local httpSummaryCount = p1.state.httpSummaryCount
+	local maxValue = math.max(minFrameWidth, p1.state.absWidth)
+	local var1 = summaryButtonHeight * 2
 	
 	if summaryExpanded then
-		var8 = var8 + httpSummaryCount * entryFrameHeight + headerFrameHeight
+		var1 = var1 + httpSummaryCount * entryFrameHeight + headerFrameHeight
 	end
 	return roactModule.createElement("Frame", {
 		Size = size,
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
 		LayoutOrder = layoutOrder,
-		[roactModule.Ref] = p9.ref
+		[roactModule.Ref] = p1.ref
 	}, {
 		UIListLayout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -112,7 +112,7 @@ function networkView.render(p9)
 			size = UDim2.new(1, 0, 0, summaryButtonHeight),
 			pos = UDim2.new(),
 			isExpanded = summaryExpanded,
-			onButtonPress = p9.onSummaryButton
+			onButtonPress = p1.onSummaryButton
 		}, {
 			Text = roactModule.createElement("TextLabel", {
 				Text = "Summary",
@@ -135,7 +135,7 @@ function networkView.render(p9)
 			size = UDim2.new(1, 0, 0, summaryButtonHeight),
 			pos = UDim2.new(),
 			isExpanded = entriesExpanded,
-			onButtonPress = p9.onDetailButton
+			onButtonPress = p1.onDetailButton
 		}, {
 			Text = roactModule.createElement("TextLabel", {
 				Text = "Details",
@@ -151,11 +151,11 @@ function networkView.render(p9)
 		Entries = entriesExpanded and roactModule.createElement(networkChartModule, {
 			layoutOrder = 4,
 			httpEntryList = httpEntryList,
-			chartHeight = math.max(0, if p9.ref.current then p9.ref.current.AbsoluteSize.Y - var8 else size.Y.Offset - var8),
+			chartHeight = math.max(0, if p1.ref.current then p1.ref.current.AbsoluteSize.Y - var1 else size.Y.Offset - var1),
 			width = maxValue,
 			searchTerm = searchTerm,
 			reverseSort = reverseSort,
-			onSortChanged = p9.onSortChanged
+			onSortChanged = p1.onSortChanged
 		})
 	})
 end

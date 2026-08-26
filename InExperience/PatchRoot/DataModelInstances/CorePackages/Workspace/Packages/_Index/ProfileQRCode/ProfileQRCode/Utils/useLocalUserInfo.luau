@@ -6,21 +6,21 @@ local constantsModule = require(profileQRCode.Common.Constants)
 local userProfilesModule = require(parent.UserProfiles)
 local fFlagProfileQrCodeDeprecateUserReduxModule = require(profileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagProfileQrCodeDeprecateUserReduxModule (ref), userProfilesModule (ref), useSelector (ref), getDeepValue (ref), constantsModule (ref)
 	if not fFlagProfileQrCodeDeprecateUserReduxModule then
-		return useSelector(function(p1)
-			-- upvalues: getDeepValue (copy), constantsModule (copy), p0 (ref)
-			return getDeepValue(p1, constantsModule.RODUX_KEY .. ".Users.byUserId." .. p0)
+		return useSelector(function(p2)
+			-- upvalues: getDeepValue (copy), constantsModule (copy), p1 (ref)
+			return getDeepValue(p2, constantsModule.RODUX_KEY .. ".Users.byUserId." .. p0)
 		end)
 	end
-	local var4 = userProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = { p0 },
+	local var1 = userProfilesModule.Hooks.useUserProfilesFetch({
+		userIds = { p1 },
 		query = userProfilesModule.Queries.userProfilesDisplayNameAndUsernameByUserIds
 	})
 	
-	return if var4.data then {
-		displayName = userProfilesModule.Selectors.getDisplayNameFromId(var4.data, p0) or "",
-		username = userProfilesModule.Selectors.getUsernameFromId(var4.data, p0) or ""
+	return if var1.data then {
+		displayName = userProfilesModule.Selectors.getDisplayNameFromId(var1.data, p1) or "",
+		username = userProfilesModule.Selectors.getUsernameFromId(var1.data, p1) or ""
 	} else { displayName = "", username = "" }
 end

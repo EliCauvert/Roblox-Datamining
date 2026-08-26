@@ -11,15 +11,15 @@ local rect = Rect.new(3, 3, 4, 4)
 local searchSmallFrame = shareGameIconsModule:GetFrame("search_small")
 local clearFrame = shareGameIconsModule:GetFrame("clear")
 local themeModule = require(robloxGui.Modules.Settings.Theme)
-local var12 = require(robloxGui.Modules.Settings.Pages.ShareGame.getTranslator)()
+local var1 = require(robloxGui.Modules.Settings.Pages.ShareGame.getTranslator)()
 
-function searchBox.init(p0)
-	p0.state = { isTextWritten = false }
-	p0.searchField = nil
+function searchBox.init(p1)
+	p1.state = { isTextWritten = false }
+	p1.searchField = nil
 end
 
 function searchBox.render(p1)
-	-- upvalues: roactModule (ref), imagePath (ref), searchBorderFrame (ref), rect (ref), imagePath (ref), searchSmallFrame (ref), constantsModule (ref), fFlagConnectionsToFriendsRename (ref), var12 (ref), themeModule (ref), imagePath (ref), clearFrame (ref)
+	-- upvalues: roactModule (ref), imagePath (ref), searchBorderFrame (ref), rect (ref), imagePath (ref), searchSmallFrame (ref), constantsModule (ref), fFlagConnectionsToFriendsRename (ref), var1 (ref), themeModule (ref), imagePath (ref), clearFrame (ref)
 	local anchorPoint = p1.props.anchorPoint
 	local onTextBoxFocusLost = p1.props.onTextBoxFocusLost
 	local onTextBoxFocused = p1.props.onTextBoxFocused
@@ -61,7 +61,7 @@ function searchBox.render(p1)
 			Size = UDim2.new(1, -56, 1, 0),
 			ClearTextOnFocus = false,
 			PlaceholderColor3 = constantsModule.Color.GRAY3,
-			PlaceholderText = if fFlagConnectionsToFriendsRename then var12:FormatByKey("Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename") else var12:FormatByKey("Feature.SettingsHub.Label.SearchForFriendsPlaceholder"),
+			PlaceholderText = if fFlagConnectionsToFriendsRename then var1:FormatByKey("Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename") else var1:FormatByKey("Feature.SettingsHub.Label.SearchForFriendsPlaceholder"),
 			Text = "",
 			TextColor3 = constantsModule.Color.WHITE,
 			TextWrapped = true,
@@ -83,10 +83,10 @@ function searchBox.render(p1)
 					onTextBoxFocused()
 				end
 			end,
-			[roactModule.Event.FocusLost] = function(p3)
+			[roactModule.Event.FocusLost] = function(p2)
 				-- upvalues: onTextBoxFocusLost (ref)
 				if onTextBoxFocusLost then
-					onTextBoxFocusLost(p3.Text)
+					onTextBoxFocusLost(p2.Text)
 				end
 			end
 		}),
@@ -111,23 +111,23 @@ function searchBox.render(p1)
 	})
 end
 
-function searchBox.didMount(p4)
-	local searchField = p4.searchField
-	local onTextChanged = p4.props.onTextChanged
+function searchBox.didMount(p1)
+	local searchField = p1.searchField
+	local onTextChanged = p1.props.onTextChanged
 	
 	if searchField then
-		p4.textBoxChangedConnection = searchField:GetPropertyChangedSignal("Text"):Connect(function()
-			-- upvalues: searchField (ref), p4 (ref), onTextChanged (ref)
+		p1.textBoxChangedConnection = searchField:GetPropertyChangedSignal("Text"):Connect(function()
+			-- upvalues: searchField (ref), p1 (ref), onTextChanged (ref)
 			local text = searchField.Text
-			p4:setState({ isTextWritten = text:len() > 0 })
+			p1:setState({ isTextWritten = text:len() > 0 })
 			onTextChanged(text)
 		end)
 	end
 end
 
-function searchBox.willUnmount(p5)
-	if p5.textBoxChangedConnection then
-		p5.textBoxChangedConnection:Disconnect()
+function searchBox.willUnmount(p1)
+	if p1.textBoxChangedConnection then
+		p1.textBoxChangedConnection:Disconnect()
 	end
 end
 

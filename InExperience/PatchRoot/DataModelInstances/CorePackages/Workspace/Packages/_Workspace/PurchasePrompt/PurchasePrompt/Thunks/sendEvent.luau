@@ -3,10 +3,10 @@ local analyticsModule = require(parent.Services.Analytics)
 local thunkModule = require(parent.Thunk)
 local list = { analyticsModule }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref)
-	return thunkModule.new(script.Name, list, function(_, p2)
-		-- upvalues: analyticsModule (copy), p0 (ref), p1 (ref)
-		p2[analyticsModule].signalEvent(p0, p1)
+	return thunkModule.new(script.Name, list, function(_, p3)
+		-- upvalues: analyticsModule (copy), p1 (ref), p2 (ref)
+		p3[analyticsModule].signalEvent(p1, p2)
 	end)
 end

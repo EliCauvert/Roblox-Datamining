@@ -4,19 +4,19 @@ local signalsModule = require(parent_1.Signals)
 local _ = require(parent_1.InternalHttpStore)
 local _ = require(parent.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: signalsModule (ref)
-	return function(p1)
-		-- upvalues: signalsModule (copy), p0 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: p1 (ref), p0 (copy)
-			local var1 = p1(p2)
+	return function(p2)
+		-- upvalues: signalsModule (copy), p1 (ref)
+		return signalsModule.createComputed(function(p3)
+			-- upvalues: p2 (ref), p1 (copy)
+			local var1 = p2(p3)
 			
 			if var1.status == "Success" then
 				local statusCode = var1.response.StatusCode
 				
-				if p0[statusCode] ~= nil then
-					p0[statusCode](var1)
+				if p1[statusCode] ~= nil then
+					p1[statusCode](var1)
 				end
 			end
 			return var1

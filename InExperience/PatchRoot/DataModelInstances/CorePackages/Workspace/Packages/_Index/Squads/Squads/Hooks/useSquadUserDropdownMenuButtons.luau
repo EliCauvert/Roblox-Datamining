@@ -7,8 +7,8 @@ local react = dependenciesModule.React
 local presenceType = dependenciesModule.RoduxPresence.Enums.PresenceType
 local sharedFlags = dependenciesModule.SharedFlags
 local fFlagSquadsPresenceStoreMigration = require(parent.SquadsCore.Flags).FFlagSquadsPresenceStoreMigration
-local var3 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
-local var4 = if fFlagSquadsPresenceStoreMigration then require(parent.DataHydration).Presence.PresenceEnums.PresenceType else nil
+local var1 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local var2 = if fFlagSquadsPresenceStoreMigration then require(parent.DataHydration).Presence.PresenceEnums.PresenceType else nil
 local squadExternalContractContext = require(parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
 local constantsModule = require(parent.SquadsCore.Constants)
 local hooksModule = require(parent.SquadsCore.Hooks)
@@ -21,60 +21,60 @@ local useSelector = dependenciesModule.Hooks.useSelector
 local getFFlagEnableCrossExpVoice = sharedFlags.GetFFlagEnableCrossExpVoice
 local getFFlagEnableCrossExpVoiceAbuseReport = sharedFlags.getFFlagEnableCrossExpVoiceAbuseReport
 
-return function(p0, p1)
-	-- upvalues: useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useBackgroundExperience (ref), react (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), fFlagSquadsPresenceStoreMigration (ref), var3 (ref), useSelector (ref), var4 (ref), presenceType (ref), constantsModule (ref), getFFlagEnableCrossExpVoiceAbuseReport (ref)
-	local var7 = useLocalUserId()
-	local var8 = tostring(var7) == tostring(p0)
+return function(p1, p2)
+	-- upvalues: useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useBackgroundExperience (ref), react (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), constantsModule (ref), getFFlagEnableCrossExpVoiceAbuseReport (ref)
+	local var3 = useLocalUserId()
+	local var4 = tostring(var3) == tostring(p1)
 	local _ = nil
-	local var9 = nil
-	local var10 = false
-	local var11 = false
+	local var5 = nil
+	local var6 = false
+	local var7 = false
 	
 	if getFFlagEnableCrossExpVoice() then
-		local var12 = if p0 then tonumber(p0) else nil
-		local var13 = useBackgroundExperience()
-		var9 = react.useMemo(function()
-			-- upvalues: var13 (write)
-			return if var13 then var13.voiceChannelId else nil
-		end, { var13 })
+		local var8 = if p1 then tonumber(p1) else nil
+		local var9 = useBackgroundExperience()
+		var5 = react.useMemo(function()
+			-- upvalues: var9 (write)
+			return if var9 then var9.voiceChannelId else nil
+		end, { var9 })
 		
-		if var12 then
-			local var14 = useIsLocalPlayerPartyVoiceEligible()
-			local var15 = useIsUserPartyVoiceEligible(var12)
-			local var16 = useIsCurrentSquadPartyVoiceEligible() == true
-			var10 = var16 and (var14 and not var15)
-			var11 = var14 and (var16 and (var15 and not var8))
+		if var8 then
+			local var10 = useIsLocalPlayerPartyVoiceEligible()
+			local var11 = useIsUserPartyVoiceEligible(var8)
+			local var12 = useIsCurrentSquadPartyVoiceEligible() == true
+			var6 = var12 and (var10 and not var11)
+			var7 = var10 and (var12 and (var11 and not var4))
 		end
 	end
-	local var17 = react.useContext(squadExternalContractContext).useGetConversationFromId(useCurrentSquadParentChannelId() or "")
-	local var18 = if fFlagSquadsPresenceStoreMigration then var3(tostring(p0)) else useSelector(react.useCallback(function(p2)
-		-- upvalues: p0 (ref)
-		return p2.Squad.Presence.byUserId[tostring(p0)]
-	end, { p0 }))
+	local var13 = react.useContext(squadExternalContractContext).useGetConversationFromId(useCurrentSquadParentChannelId() or "")
+	local var14 = if fFlagSquadsPresenceStoreMigration then var1(tostring(p1)) else useSelector(react.useCallback(function(p3)
+		-- upvalues: p1 (ref)
+		return p3.Squad.Presence.byUserId[tostring(p1)]
+	end, { p1 }))
 	
 	return react.useMemo(function()
-		-- upvalues: var10 (write), var18 (ref), fFlagSquadsPresenceStoreMigration (copy), var4 (copy), presenceType (copy), var17 (ref), constantsModule (copy), var7 (ref), p1 (ref), getFFlagEnableCrossExpVoiceAbuseReport (copy), var9 (write), var8 (ref), var11 (write)
-		local t = { VoiceIneligibleButton = var10 }
-		local var20 = var18
+		-- upvalues: var6 (write), var14 (ref), fFlagSquadsPresenceStoreMigration (copy), var2 (copy), presenceType (copy), var13 (ref), constantsModule (copy), var3 (ref), p2 (ref), getFFlagEnableCrossExpVoiceAbuseReport (copy), var5 (write), var4 (ref), var7 (write)
+		local t = { VoiceIneligibleButton = var6 }
+		local var15 = var14
 		
-		if var20 then
-			var20 = false
+		if var15 then
+			var15 = false
 			
-			if var18.userPresenceType == (if fFlagSquadsPresenceStoreMigration then var4.InGame else presenceType.InGame) then
+			if var14.userPresenceType == (if fFlagSquadsPresenceStoreMigration then var2.InGame else presenceType.InGame) then
 				if fFlagSquadsPresenceStoreMigration then
-					var20 = var18.placeId ~= ""
-					var20 = nil
+					var15 = var14.placeId ~= ""
+					var15 = nil
 				else
-					var20 = var18.placeId
+					var15 = var14.placeId
 				end
-				var20 = var20 and var18.gameId ~= game.JobId
+				var15 = var15 and var14.gameId ~= game.JobId
 			end
 		end
-		t.JoinButton = var20
-		t.RemoveUserButton = var17 and (var17.type == constantsModule.CONVERSATION_CHANNEL_GROUP_TYPE and var17.initiator == var7)
-		t.ViewProfileButton = not p1
-		t.ReportButton = getFFlagEnableCrossExpVoiceAbuseReport() and (var9 and not var8)
-		t.MuteVoiceButton = var11
+		t.JoinButton = var15
+		t.RemoveUserButton = var13 and (var13.type == constantsModule.CONVERSATION_CHANNEL_GROUP_TYPE and var13.initiator == var3)
+		t.ViewProfileButton = not p2
+		t.ReportButton = getFFlagEnableCrossExpVoiceAbuseReport() and (var5 and not var4)
+		t.MuteVoiceButton = var7
 		local t_1 = {}
 		
 		for i, v in t do
@@ -84,6 +84,6 @@ return function(p0, p1)
 		end
 		return t_1
 	end, {
-		var10, p1, var9, var8, var18, var17, var7, var11
+		var6, p2, var5, var4, var14, var13, var3, var7
 	})
 end

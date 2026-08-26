@@ -8,9 +8,9 @@ local image = foundationModule.Image
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local flagsModule = require(adPlayer.Flags)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), flagsModule (ref), text (ref), image (ref), stateLayerAffordance (ref)
-	local visible = p0.Visible
+	local visible = p1.Visible
 	
 	return reactModule.createElement(view, {
 		tag = if flagsModule.GetEnableLuaRewardTimerUI() then "size-900-500 row align-x-center align-y-center gap-xsmall" else "position-center-left anchor-center-left size-900-500 row align-x-center align-y-center gap-xsmall"
@@ -24,8 +24,8 @@ return function(p0)
 		icon = reactModule.createElement(image, {
 			tag = "size-300",
 			LayoutOrder = 2,
-			Image = p0.Image,
-			onActivated = p0.handleToggleAdsModal,
+			Image = p1.Image,
+			onActivated = p1.handleToggleAdsModal,
 			Visible = visible,
 			stateLayer = { affordance = stateLayerAffordance.None }
 		})

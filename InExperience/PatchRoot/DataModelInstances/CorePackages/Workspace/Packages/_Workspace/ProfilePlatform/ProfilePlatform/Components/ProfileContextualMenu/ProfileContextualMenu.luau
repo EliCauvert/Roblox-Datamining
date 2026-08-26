@@ -20,49 +20,49 @@ local function _()
 	return if luaAppScreenGui then luaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagProfileFixMenuNavigation (ref), useIsSpatial (ref), coreGuiService (ref), popoverSide (ref), reactModule (ref), overlayProvider (ref), menu (ref), popoverAlign (ref), inputSize (ref)
-	local var4
+	local var1
 	if not fFlagProfileFixMenuNavigation or not useIsSpatial() then
-		var4 = nil
+		var1 = nil
 	elseif fFlagProfileFixMenuNavigation then
 		local luaAppScreenGui = coreGuiService:FindFirstChild("LuaAppScreenGui")
-		var4 = if luaAppScreenGui then luaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
+		var1 = if luaAppScreenGui then luaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
 	else
-		var4 = nil
+		var1 = nil
 	end
-	local var6 = if p0.screenSize.Y / 2 < p0.rootElementPosition.Y then popoverSide.Top else popoverSide.Bottom
+	local var2 = if p1.screenSize.Y / 2 < p1.rootElementPosition.Y then popoverSide.Top else popoverSide.Bottom
 	local _ = nil
 	
-	if var6 == popoverSide.Top then
-		local var7 = p0.screenSize.X / p0.screenSize.Y
-		local var8 = -(p0.screenSize.Y - p0.rootElementPosition.Y) + -20
+	if var2 == popoverSide.Top then
+		local var3 = p1.screenSize.X / p1.screenSize.Y
+		local var4 = -(p1.screenSize.Y - p1.rootElementPosition.Y) + -20
 		
-		if p0.screenSize.Y > 700 and not (var7 >= 1.3 and var7 < 1.7) then
-			var8 += p0.screenSize.Y * 0.05
+		if p1.screenSize.Y > 700 and not (var3 >= 1.3 and var3 < 1.7) then
+			var4 += p1.screenSize.Y * 0.05
 		end
 	else
-		local _ = p0.rootElementPosition.Y + 60
+		local _ = p1.rootElementPosition.Y + 60
 	end
-	return if fFlagProfileFixMenuNavigation then reactModule.createElement(overlayProvider, { gui = var4 }, {
+	return if fFlagProfileFixMenuNavigation then reactModule.createElement(overlayProvider, { gui = var1 }, {
 		Menu = reactModule.createElement(menu, {
 			align = popoverAlign.End,
-			anchorRef = p0.rootElementRef,
-			isOpen = p0.isOpen ~= nil or p0.isOpen,
-			items = p0.buttonProps,
-			onPressedOutside = p0.onDismiss,
-			side = var6,
+			anchorRef = p1.rootElementRef,
+			isOpen = p1.isOpen ~= nil or p1.isOpen,
+			items = p1.buttonProps,
+			onPressedOutside = p1.onDismiss,
+			side = var2,
 			size = inputSize.Medium,
-			ref = if fFlagProfileFixMenuNavigation then p0.menuRef else nil
+			ref = if fFlagProfileFixMenuNavigation then p1.menuRef else nil
 		})
 	}) else reactModule.createElement(menu, {
 		align = popoverAlign.End,
-		anchorRef = p0.rootElementRef,
-		isOpen = p0.isOpen ~= nil or p0.isOpen,
-		items = p0.buttonProps,
-		onPressedOutside = p0.onDismiss,
-		side = var6,
+		anchorRef = p1.rootElementRef,
+		isOpen = p1.isOpen ~= nil or p1.isOpen,
+		items = p1.buttonProps,
+		onPressedOutside = p1.onDismiss,
+		side = var2,
 		size = inputSize.Medium,
-		ref = if fFlagProfileFixMenuNavigation then p0.menuRef else nil
+		ref = if fFlagProfileFixMenuNavigation then p1.menuRef else nil
 	})
 end

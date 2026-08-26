@@ -9,94 +9,94 @@ local _ = require(squadsCore.Types)
 
 return function()
 	-- upvalues: signalsModule (ref), squadLuckyRecommendationPhaseModule (ref), squadLuckyRecommendationRevealTypeModule (ref), getLuckyRecommendation (ref), httpService (ref), squadLuckyRecommendationErrorModule (ref)
-	local var6, var7 = signalsModule.createSignal({ phase = squadLuckyRecommendationPhaseModule.Idle })
-	local var8 = nil
-	local var9 = nil
+	local var1, var2 = signalsModule.createSignal({ phase = squadLuckyRecommendationPhaseModule.Idle })
+	local var3 = nil
+	local var4 = nil
 	
-	local var10 = function(p0, p1)
-		-- upvalues: var8 (write), squadLuckyRecommendationRevealTypeModule (copy), var9 (write), var7 (ref), squadLuckyRecommendationPhaseModule (copy), getLuckyRecommendation (copy)
-		if var8 then
-			var8()
-			var8 = nil
+	local var5 = function(p1, p2)
+		-- upvalues: var3 (write), squadLuckyRecommendationRevealTypeModule (copy), var4 (write), var2 (ref), squadLuckyRecommendationPhaseModule (copy), getLuckyRecommendation (copy)
+		if var3 then
+			var3()
+			var3 = nil
 		end
 		local t = {
 			result = nil,
-			pickRequestId = p0,
-			squadId = p1,
+			pickRequestId = p1,
+			squadId = p2,
 			revealType = squadLuckyRecommendationRevealTypeModule.Default
 		}
-		var9 = t
-		var7({ phase = squadLuckyRecommendationPhaseModule.Rolling })
-		var8 = getLuckyRecommendation(p0, function(p2)
-			-- upvalues: var8 (copy), t (ref)
-			var8 = nil
-			t.result = { isSuccess = true, recommendation = p2 }
+		var4 = t
+		var2({ phase = squadLuckyRecommendationPhaseModule.Rolling })
+		var3 = getLuckyRecommendation(p1, function(p3)
+			-- upvalues: var3 (copy), t (ref)
+			var3 = nil
+			t.result = { isSuccess = true, recommendation = p3 }
 		end, function(p3)
-			-- upvalues: var8 (copy), t (ref)
-			var8 = nil
+			-- upvalues: var3 (copy), t (ref)
+			var3 = nil
 			t.result = { isSuccess = false, error = p3 }
 		end)
 	end
 	
 	return {
-		getState = var6,
+		getState = var1,
 		getAnalyticsContext = function()
-			-- upvalues: var9 (write)
+			-- upvalues: var4 (write)
 			return {
-				pickRequestId = if var9 then var9.pickRequestId else nil,
-				revealType = if var9 then var9.revealType else nil
+				pickRequestId = if var4 then var4.pickRequestId else nil,
+				revealType = if var4 then var4.revealType else nil
 			}
 		end,
-		startRoll = function(p4, p5)
-			-- upvalues: var9 (write), var6 (ref), squadLuckyRecommendationPhaseModule (copy), squadLuckyRecommendationRevealTypeModule (copy), httpService (copy), var10 (ref)
-			if p5 and var9 ~= nil and var9.squadId == p4 then
-				if var6(false).phase == squadLuckyRecommendationPhaseModule.Revealed then
-					var9.revealType = squadLuckyRecommendationRevealTypeModule.Restored
+		startRoll = function(p1, p2)
+			-- upvalues: var4 (write), var1 (ref), squadLuckyRecommendationPhaseModule (copy), squadLuckyRecommendationRevealTypeModule (copy), httpService (copy), var5 (ref)
+			if p2 and var4 ~= nil and var4.squadId == p1 then
+				if var1(false).phase == squadLuckyRecommendationPhaseModule.Revealed then
+					var4.revealType = squadLuckyRecommendationRevealTypeModule.Restored
 					
 					return
-				elseif var9.result == nil or not var9.result.isSuccess then
-					var10(httpService:GenerateGUID(false), p4)
+				elseif var4.result == nil or not var4.result.isSuccess then
+					var5(httpService:GenerateGUID(false), p1)
 					
 					return
 				else
-					var9.revealType = squadLuckyRecommendationRevealTypeModule.Preloaded
+					var4.revealType = squadLuckyRecommendationRevealTypeModule.Preloaded
 				end
 			end
 		end,
 		endRoll = function()
-			-- upvalues: var6 (ref), squadLuckyRecommendationPhaseModule (copy), var8 (write), var9 (write), var7 (ref), squadLuckyRecommendationErrorModule (copy)
-			if var6(false).phase ~= squadLuckyRecommendationPhaseModule.Rolling then return end
-			if var8 then
-				var8()
-				var8 = nil
+			-- upvalues: var1 (ref), squadLuckyRecommendationPhaseModule (copy), var3 (write), var4 (write), var2 (ref), squadLuckyRecommendationErrorModule (copy)
+			if var1(false).phase ~= squadLuckyRecommendationPhaseModule.Rolling then return end
+			if var3 then
+				var3()
+				var3 = nil
 			end
-			local var12 = if var9 ~= nil then nil else var9.result
+			local var6 = if var4 ~= nil then nil else var4.result
 			
-			if var12 == nil then
-				var7({
+			if var6 == nil then
+				var2({
 					phase = squadLuckyRecommendationPhaseModule.Errored,
 					error = squadLuckyRecommendationErrorModule.Timeout
 				})
 				
 				return
-			elseif var12.isSuccess then
-				var7({
+			elseif var6.isSuccess then
+				var2({
 					phase = squadLuckyRecommendationPhaseModule.Revealed,
-					recommendation = var12.recommendation
+					recommendation = var6.recommendation
 				})
 				
 				return
 			end
-			var7({
+			var2({
 				phase = squadLuckyRecommendationPhaseModule.Errored,
-				error = var12.error
+				error = var6.error
 			})
 		end,
 		cancelFetch = function()
-			-- upvalues: var8 (write)
-			if var8 then
-				var8()
-				var8 = nil
+			-- upvalues: var3 (write)
+			if var3 then
+				var3()
+				var3 = nil
 			end
 		end
 	}

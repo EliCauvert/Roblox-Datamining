@@ -33,37 +33,37 @@ end
 
 return function(p1)
 	-- upvalues: useTokensModule (ref), useBackgroundStyle (ref), useScrimVariantsModule (ref), reactOtterModule (ref), reactModule (ref), t (ref), lerpNumberSequence (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), iconModule (ref)
-	local var1 = useBackgroundStyle()
-	local var2 = useScrimVariantsModule(useTokensModule(), p1.alignment, p1.preferredInput)
-	local var3 = p1.alignment == Enum.HorizontalAlignment.Right
-	local var4 = if p1.preferredInput ~= Enum.PreferredInput.Touch then p1.preferredInput == Enum.PreferredInput.Gamepad else true
-	local var5, var6 = reactOtterModule.useAnimatedBinding(if p1.isHovered then 1 else 0)
+	local var2 = useBackgroundStyle()
+	local var3 = useScrimVariantsModule(useTokensModule(), p1.alignment, p1.preferredInput)
+	local var4 = p1.alignment == Enum.HorizontalAlignment.Right
+	local var5 = if p1.preferredInput ~= Enum.PreferredInput.Touch then p1.preferredInput == Enum.PreferredInput.Gamepad else true
+	local var6, var7 = reactOtterModule.useAnimatedBinding(if p1.isHovered then 1 else 0)
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), reactOtterModule (copy), p1 (ref), t (copy)
-		var6(reactOtterModule.ease(if p1.isHovered then 1 else 0, t))
+		-- upvalues: var7 (ref), reactOtterModule (copy), p1 (ref), t (copy)
+		var7(reactOtterModule.ease(if p1.isHovered then 1 else 0, t))
 	end, { p1.isHovered })
-	local var1 = var5:map(function(p1)
-		-- upvalues: var4 (ref), var3 (ref)
-		return if var4 then UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0.5 + (if var3 then 1 else -1) * (1 - p1), 0.5)
+	local var2 = var6:map(function(p2)
+		-- upvalues: var5 (ref), var4 (ref)
+		return if var5 then UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0.5 + (if var4 then 1 else -1) * (1 - p2), 0.5)
 	end)
-	local var1 = p1.rowHeight:map(function(p1)
-		-- upvalues: var2 (ref)
-		return UDim2.new(0, p1 + var2.fade, 1, 0)
+	local var2 = p1.rowHeight:map(function(p2)
+		-- upvalues: var3 (ref)
+		return UDim2.new(0, p2 + var3.fade, 1, 0)
 	end)
-	local var2 = var5:map(function(p1)
-		-- upvalues: var4 (ref), var2 (ref), lerpNumberSequence (copy)
-		return if var4 then var2.hoverGradient else lerpNumberSequence(var2.gradient, var2.hoverGradient, p1)
+	local var3 = var6:map(function(p2)
+		-- upvalues: var5 (ref), var3 (ref), lerpNumberSequence (copy)
+		return if var5 then var3.hoverGradient else lerpNumberSequence(var3.gradient, var3.hoverGradient, p2)
 	end)
-	local var1, var2 = reactOtterModule.useAnimatedBinding(if p1.isVisible then 0 else 1)
+	local var2, var3 = reactOtterModule.useAnimatedBinding(if p1.isVisible then 0 else 1)
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), reactOtterModule (copy), p1 (ref), t (copy)
-		var2(reactOtterModule.ease(if p1.isVisible then 0 else 1, t))
+		-- upvalues: var3 (ref), reactOtterModule (copy), p1 (ref), t (copy)
+		var3(reactOtterModule.ease(if p1.isVisible then 0 else 1, t))
 	end, { p1.isVisible })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { Size = var1, GroupTransparency = var1 }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { Size = var2, GroupTransparency = var2 }), {
 		Scrim = reactModule.createElement(viewModule, {
 			tag = "size-full",
-			backgroundStyle = var1,
+			backgroundStyle = var2,
 			onActivated = p1.onActivated,
 			stateLayer = { affordance = stateLayerAffordanceModule.None },
 			onStateChanged = p1.onStateChanged,
@@ -71,10 +71,10 @@ return function(p1)
 			selection = { Selectable = false },
 			testId = `{p1.testId}--button`
 		}, {
-			Gradient = reactModule.createElement("UIGradient", { Transparency = var2 }),
+			Gradient = reactModule.createElement("UIGradient", { Transparency = var3 }),
 			DirectionIcon = reactModule.createElement(viewModule, {
 				ZIndex = 2,
-				tag = var2.iconAlignmentTag,
+				tag = var3.iconAlignmentTag,
 				Size = UDim2.fromScale(0, 1),
 				aspectRatio = {
 					AspectRatio = 1,
@@ -84,9 +84,9 @@ return function(p1)
 			}, {
 				Icon = reactModule.createElement(iconModule, {
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = var1,
+					Position = var2,
 					size = p1.size,
-					name = var2.directionIcon,
+					name = var3.directionIcon,
 					testId = `{p1.testId}--direction-indicator`
 				})
 			})

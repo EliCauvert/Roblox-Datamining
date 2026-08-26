@@ -2,13 +2,13 @@
 local _ = require(IAPExperience.ProductPurchase.PricingTypes)
 local multiItemPriceQualifiesForDetailsDiscountSummaryModule = require(IAPExperience.Generic.multiItemPriceQualifiesForDetailsDiscountSummary)
 
-return function(p0)
+return function(p1)
 	-- upvalues: multiItemPriceQualifiesForDetailsDiscountSummaryModule (ref)
-	if not p0 then
+	if not p1 then
 		return false
 	end
-	local basePriceInRobux = p0.basePriceInRobux
-	local priceInRobux = p0.priceInRobux
+	local basePriceInRobux = p1.basePriceInRobux
+	local priceInRobux = p1.priceInRobux
 	
-	return typeof(basePriceInRobux) == "number" and typeof(priceInRobux) == "number" and basePriceInRobux > priceInRobux and multiItemPriceQualifiesForDetailsDiscountSummaryModule(p0)
+	return typeof(basePriceInRobux) == "number" and typeof(priceInRobux) == "number" and basePriceInRobux > priceInRobux and multiItemPriceQualifiesForDetailsDiscountSummaryModule(p1)
 end

@@ -12,63 +12,63 @@ local getFFlagEnableUnifiedWebViews = require(parent_1.SharedFlags).GetFFlagEnab
 return function()
 	-- upvalues: luaAppIsClickoutEnabledUniverse (ref), replicatedStorageService (ref), flaggedMutedError (ref), httpService (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), clickoutTelemetryModule (ref), browserService (ref)
 	if luaAppIsClickoutEnabledUniverse then
-		replicatedStorageService:WaitForChild("AdClickoutEvent").Event:Connect(function(p0)
+		replicatedStorageService:WaitForChild("AdClickoutEvent").Event:Connect(function(p1)
 			-- upvalues: flaggedMutedError (copy), httpService (copy), getFFlagEnableUnifiedWebViews (copy), webViewService (copy), clickoutTelemetryModule (copy), browserService (copy)
-			if string.find(p0, "[<>]") then
-				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received invalid URL: {p0}`)
+			if string.find(p1, "[<>]") then
+				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received invalid URL: {p1}`)
 				
 				return
-			elseif not string.match(p0, "^https://") then
-				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received URL with invalid scheme: {p0}`)
+			elseif not string.match(p1, "^https://") then
+				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received URL with invalid scheme: {p1}`)
 				
 				return
-			elseif #p0 == 0 then
+			elseif #p1 == 0 then
 				flaggedMutedError("InExperienceClickout_InvalidURL", "AdClickoutEvent received empty URL.")
 				
 				return
-			elseif #p0 > 512 then
-				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received URL exceeding max length: {p0}`)
+			elseif #p1 > 512 then
+				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received URL exceeding max length: {p1}`)
 				
 				return
 			end
-			local var6 = httpService:GenerateGUID(false)
-			local var7 = nil
-			var7 = if getFFlagEnableUnifiedWebViews() then webViewService.OnWindowClosed:Connect(function()
-				-- upvalues: clickoutTelemetryModule (copy), var6 (ref), p0 (ref), webViewService (copy), var7 (write)
-				clickoutTelemetryModule.logWebviewToggled(false, var6, p0)
+			local var1 = httpService:GenerateGUID(false)
+			local var2 = nil
+			var2 = if getFFlagEnableUnifiedWebViews() then webViewService.OnWindowClosed:Connect(function()
+				-- upvalues: clickoutTelemetryModule (copy), var1 (ref), p1 (ref), webViewService (copy), var2 (write)
+				clickoutTelemetryModule.logWebviewToggled(false, var1, p1)
 				webViewService:CloseWindow()
 				
-				if var7 then
-					var7:Disconnect()
-					var7 = nil
+				if var2 then
+					var2:Disconnect()
+					var2 = nil
 				end
 			end) else browserService.BrowserWindowClosed:Connect(function()
-				-- upvalues: clickoutTelemetryModule (copy), var6 (ref), p0 (ref), var7 (write)
-				clickoutTelemetryModule.logWebviewToggled(false, var6, p0)
+				-- upvalues: clickoutTelemetryModule (copy), var1 (ref), p1 (ref), var2 (write)
+				clickoutTelemetryModule.logWebviewToggled(false, var1, p1)
 				
-				if var7 then
-					var7:Disconnect()
-					var7 = nil
+				if var2 then
+					var2:Disconnect()
+					var2 = nil
 				end
 			end)
-			clickoutTelemetryModule.logWebviewToggled(true, var6, p0)
+			clickoutTelemetryModule.logWebviewToggled(true, var1, p1)
 			
 			if getFFlagEnableUnifiedWebViews() then
-				webViewService:OpenWindow(p0, nil, true, nil, nil, true)
+				webViewService:OpenWindow(p1, nil, true, nil, nil, true)
 			else
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p0 (ref)
+					-- upvalues: httpService (copy), p1 (ref)
 					return httpService:JSONEncode({
 						command = "open",
 						visible = true,
 						isGenericWebview = true,
 						showDomainAsTitle = true,
-						url = p0
+						url = p1
 					})
 				end)
 				
 				if not ok then
-					flaggedMutedError("InExperienceClickout_JSONEncodeFailed", `AdClickoutEvent failed to JSON encode command for URL: {p0}`)
+					flaggedMutedError("InExperienceClickout_JSONEncodeFailed", `AdClickoutEvent failed to JSON encode command for URL: {p1}`)
 					
 					return
 				end

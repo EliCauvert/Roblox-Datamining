@@ -22,52 +22,52 @@ local fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler = sharedFlagsModule.FFl
 local fFlagSduiUseSharedUiStatusHook = sharedFlagsModule.FFlagSduiUseSharedUiStatusHook
 local fFlagSduiClientPageScope = sharedFlagsModule.FFlagSduiClientPageScope
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref)
-	local var14 = signalsReactModule.useSignalState(getSduiApiStoreModule().getData(p0).status)
+	local var1 = signalsReactModule.useSignalState(getSduiApiStoreModule().getData(p1).status)
 	
-	return if var14 == dataHydrationTypes.DataStatus.NotReady then "Loading" elseif var14 == dataHydrationTypes.DataStatus.Failed then "Error" else "Resolved"
+	return if var1 == dataHydrationTypes.DataStatus.NotReady then "Loading" elseif var1 == dataHydrationTypes.DataStatus.Failed then "Error" else "Resolved"
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useComponentConfigModule (ref), useComponentLifecycleTimingModule (ref), useDataUpdatedTimestampModule (ref), fFlagSduiUseSharedUiStatusHook (ref), useUiStatusModule (ref), signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref), useStatefulRefModule (ref), useCreateClientBindingSduiContextModule (ref), fFlagSduiClientPageScope (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), sduiFeatureEntryPointUiModule (ref), getSduiComponentWrapper (ref), fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (ref)
-	local var20
+	local var1
 	local configKey = p1.configKey
 	local appPage = p1.appPage
-	local var15 = p1.shouldDisplayLoading == nil or p1.shouldDisplayLoading
-	local var16 = p1.shouldDisplayError == nil or p1.shouldDisplayError
-	local var17 = useComponentConfigModule(configKey, p1.identifier)
-	useComponentLifecycleTimingModule(p1.loadTimer, typeof(var17) == "table")
-	local var18 = useDataUpdatedTimestampModule(configKey, p1.identifier)
+	local var2 = p1.shouldDisplayLoading == nil or p1.shouldDisplayLoading
+	local var3 = p1.shouldDisplayError == nil or p1.shouldDisplayError
+	local var4 = useComponentConfigModule(configKey, p1.identifier)
+	useComponentLifecycleTimingModule(p1.loadTimer, typeof(var4) == "table")
+	local var5 = useDataUpdatedTimestampModule(configKey, p1.identifier)
 	local _ = nil
 	
 	if fFlagSduiUseSharedUiStatusHook then
-		var20 = useUiStatusModule(configKey)
+		var1 = useUiStatusModule(configKey)
 	else
-		local var19 = signalsReactModule.useSignalState(getSduiApiStoreModule().getData(configKey).status)
-		var20 = if var19 == dataHydrationTypes.DataStatus.NotReady then "Loading" elseif var19 == dataHydrationTypes.DataStatus.Failed then "Error" else "Resolved"
+		local var6 = signalsReactModule.useSignalState(getSduiApiStoreModule().getData(configKey).status)
+		var1 = if var6 == dataHydrationTypes.DataStatus.NotReady then "Loading" elseif var6 == dataHydrationTypes.DataStatus.Failed then "Error" else "Resolved"
 	end
-	local var21, var22 = useStatefulRefModule(p2)
+	local var7, var8 = useStatefulRefModule(p2)
 	
 	return reactModule.createElement(sduiFeatureEntryPointUiModule, {
 		onRetry = p1.onRetry,
-		contentSlot = if var17 then reactModule.createElement(getSduiComponentWrapper(var17), {
+		contentSlot = if var4 then reactModule.createElement(getSduiComponentWrapper(var4), {
 			debugName = `SduiFeatureEntryPoint-{configKey}`,
-			componentConfig = var17,
-			sduiContext = useCreateClientBindingSduiContextModule(appPage, var21, nil, var18, if fFlagSduiClientPageScope then configKey else nil, p1.appCompositionEnabledOverride, p1.routeName),
+			componentConfig = var4,
+			sduiContext = useCreateClientBindingSduiContextModule(appPage, var7, nil, var5, if fFlagSduiClientPageScope then configKey else nil, p1.appCompositionEnabledOverride, p1.routeName),
 			localAnalyticsData = useLocalAnalyticsDataModule(configKey, appPage, p1.additionalAnalyticsData),
 			extraLocalProps = p1.extraLocalProps
 		}) else nil,
-		uiStatus = var20,
+		uiStatus = var1,
 		errorSlot = p1.errorSlot,
 		loadingSlot = p1.loadingSlot,
-		shouldDisplayLoading = var15,
-		shouldDisplayError = var16,
+		shouldDisplayLoading = var2,
+		shouldDisplayError = var3,
 		onAbsoluteSizeChange = if fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler then p1.onAbsoluteSizeChange else nil,
 		Size = if p1.Size then p1.Size else UDim2.new(1, 0, 0, 0),
 		AutomaticSize = if p1.AutomaticSize then p1.AutomaticSize else Enum.AutomaticSize.Y,
 		Position = p1.Position,
 		LayoutOrder = p1.LayoutOrder,
-		ref = var22
+		ref = var8
 	})
 end))

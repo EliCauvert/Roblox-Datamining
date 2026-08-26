@@ -50,19 +50,19 @@ local t = {
 	end
 }
 
-function t.validateBodyParts(p1, p2)
+function t.validateBodyParts(p3, p4)
 	-- upvalues: getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (ref), getFFlagUGCValidationEnableR15plusSkinningModule (ref), constantsModule (ref), t (ref)
 	if getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() and getFFlagUGCValidationEnableR15plusSkinningModule() then
 		error("ValidateMeshPartOnlySkinnedToR15 is deprecated. Use RigidSkinnedToSchema / LCSkinnedToSchema / BodySkinnedToSchema instead.")
 	end
 	for i, v in constantsModule.R15_BODY_PARTS do
-		local var1 = p1:FindFirstChild(v)
+		local var5 = p3:FindFirstChild(v)
 		
-		if var1 then
-			local var2, var3 = t.validateMeshPart(var1, p2)
+		if var5 then
+			local var6, var7 = t.validateMeshPart(var5, p4)
 			
-			if not var2 then
-				return var2, var3
+			if not var6 then
+				return var6, var7
 			end
 		end
 	end

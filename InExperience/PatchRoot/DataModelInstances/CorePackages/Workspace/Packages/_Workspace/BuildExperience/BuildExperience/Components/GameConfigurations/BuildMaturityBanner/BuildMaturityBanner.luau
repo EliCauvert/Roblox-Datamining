@@ -7,7 +7,7 @@ local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	return reactModule.createElement(view, {
 		LayoutOrder = 2,
@@ -28,7 +28,7 @@ return function(p0)
 			Description = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "fill auto-y text-body-small text-wrap text-align-x-left content-emphasis",
-				Text = p0.text
+				Text = p1.text
 			})
 		})
 	})

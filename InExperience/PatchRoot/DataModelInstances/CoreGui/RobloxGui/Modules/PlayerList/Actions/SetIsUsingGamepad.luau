@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetIsUsingGamepad", function(p0)
-	return { isUsingGamepad = p0 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetIsUsingGamepad", function(p1)
+	return { isUsingGamepad = p1 }
 end)

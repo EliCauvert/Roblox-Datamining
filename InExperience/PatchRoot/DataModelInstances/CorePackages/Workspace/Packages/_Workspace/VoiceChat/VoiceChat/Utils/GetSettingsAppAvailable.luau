@@ -15,9 +15,9 @@ return function()
 		for _ = 0, fIntLinkingProtocolFetchRetries do
 			local thread = task.spawn(function()
 				-- upvalues: var1 (write), var2 (write), default (copy), settingsRoute (copy)
-				local var6, var7 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
-				var1 = var6
-				var2 = var7
+				local var3, var4 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
+				var1 = var3
+				var2 = var4
 			end)
 			task.wait(fIntLinkingProtocolFetchTimeoutMS / 1000)
 			task.cancel(thread)
@@ -27,9 +27,9 @@ return function()
 			end
 		end
 	else
-		local var4, var5 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
-		var1 = var4
-		var2 = var5
+		local var3, var4 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
+		var1 = var3
+		var2 = var4
 	end
 	return var1 and var2 == true
 end

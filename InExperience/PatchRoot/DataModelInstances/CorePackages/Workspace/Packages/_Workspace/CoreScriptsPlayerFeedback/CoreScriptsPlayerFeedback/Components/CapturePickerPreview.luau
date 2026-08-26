@@ -2,7 +2,7 @@
 local reactModule = require(coreScriptsPlayerFeedback.Parent.React)
 local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -19,7 +19,7 @@ return reactModule.memo(function(p0)
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
 			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
-			ImageContent = Content.fromObject(p0.capture),
+			ImageContent = Content.fromObject(p1.capture),
 			ScaleType = Enum.ScaleType.Fit,
 			Size = UDim2.new(1, 0, 0, 260)
 		}, {

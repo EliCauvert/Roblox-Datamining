@@ -7,7 +7,7 @@ local var1 = policyProvider.withGetPolicyImplementation(policyProvider.GetPolicy
 local getFIntEducationalPopupDisplayMaxCountModule = require(script.Parent.Parent.Flags.GetFIntEducationalPopupDisplayMaxCount)
 local isSubjectToDesktopPolicies = require(corePackagesService.Workspace.Packages.SharedFlags).isSubjectToDesktopPolicies
 
-function var1.Mapper(p0)
+function var1.Mapper(p1)
 	-- upvalues: isSubjectToDesktopPolicies (ref), getFFlagGateEducationalPopupVisibilityViaGUAC (ref), getFIntEducationalPopupDisplayMaxCountModule (ref), getFFlagUseVoiceExitBetaLanguage (ref)
 	return {
 		enableInGameHomeIcon = function()
@@ -15,24 +15,24 @@ function var1.Mapper(p0)
 			return isSubjectToDesktopPolicies()
 		end,
 		enableEducationalPopup = function()
-			-- upvalues: isSubjectToDesktopPolicies (copy), getFFlagGateEducationalPopupVisibilityViaGUAC (copy), p0 (ref)
-			return not (not isSubjectToDesktopPolicies() or not game:GetEngineFeature("NativeCloseIntercept")) and (if getFFlagGateEducationalPopupVisibilityViaGUAC() then p0.InExperienceCanViewEducationalPopup == nil or p0.InExperienceCanViewEducationalPopup else true)
+			-- upvalues: isSubjectToDesktopPolicies (copy), getFFlagGateEducationalPopupVisibilityViaGUAC (copy), p1 (ref)
+			return not (not isSubjectToDesktopPolicies() or not game:GetEngineFeature("NativeCloseIntercept")) and (if getFFlagGateEducationalPopupVisibilityViaGUAC() then p1.InExperienceCanViewEducationalPopup == nil or p1.InExperienceCanViewEducationalPopup else true)
 		end,
 		educationalPopupMaxDisplayCount = function()
 			-- upvalues: isSubjectToDesktopPolicies (copy), getFIntEducationalPopupDisplayMaxCountModule (copy)
 			return isSubjectToDesktopPolicies() and getFIntEducationalPopupDisplayMaxCountModule() or 0
 		end,
 		getGameInfoShowChatFeatures = function()
-			-- upvalues: getFFlagUseVoiceExitBetaLanguage (copy), p0 (ref)
-			return if getFFlagUseVoiceExitBetaLanguage() then p0.GameInfoShowChatFeatures or false else false
+			-- upvalues: getFFlagUseVoiceExitBetaLanguage (copy), p1 (ref)
+			return if getFFlagUseVoiceExitBetaLanguage() then p1.GameInfoShowChatFeatures or false else false
 		end,
 		enableFullscreenTitleBar = function()
-			-- upvalues: p0 (ref)
-			return p0.FullscreenTitleBarEnabled or false
+			-- upvalues: p1 (ref)
+			return p1.FullscreenTitleBarEnabled or false
 		end,
 		getDisplayCheckboxInVoiceConsent = function()
-			-- upvalues: p0 (ref)
-			return p0.DisplayCheckboxInVoiceConsent == nil or p0.DisplayCheckboxInVoiceConsent
+			-- upvalues: p1 (ref)
+			return p1.DisplayCheckboxInVoiceConsent == nil or p1.DisplayCheckboxInVoiceConsent
 		end
 	}
 end

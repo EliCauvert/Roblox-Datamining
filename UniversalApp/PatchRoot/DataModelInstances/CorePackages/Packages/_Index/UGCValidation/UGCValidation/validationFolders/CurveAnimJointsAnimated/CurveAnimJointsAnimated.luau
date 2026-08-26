@@ -20,12 +20,12 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: errorSourceStringsModule (ref)
-	for i, v in p1.curveAnimComputedFrames.tracks do
+	for i, v in p2.curveAnimComputedFrames.tracks do
 		if v.pos or v.rot then return end
 	end
-	p0:fail(errorSourceStringsModule.Keys.CurveAnim_NoJointManipulation)
+	p1:fail(errorSourceStringsModule.Keys.CurveAnim_NoJointManipulation)
 end
 
 return t

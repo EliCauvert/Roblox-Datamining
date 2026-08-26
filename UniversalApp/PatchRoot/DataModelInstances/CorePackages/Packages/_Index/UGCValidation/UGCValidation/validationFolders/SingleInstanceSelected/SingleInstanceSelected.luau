@@ -26,13 +26,13 @@ local function getFoldersMapping(p1)
 	return t_1
 end
 
-function t.run(p1, p2)
+function t.run(p2, p3)
 	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref), getFoldersMapping (ref)
-	local entrypointInput = p2.entrypointInput
+	local entrypointInput = p3.entrypointInput
 	
-	if constantsModule.AssetUploadsWithFolderStructure[p2.uploadEnum.assetType] and p2.consumerConfig.enforceR15FolderStructure then
+	if constantsModule.AssetUploadsWithFolderStructure[p3.uploadEnum.assetType] and p3.consumerConfig.enforceR15FolderStructure then
 		if #entrypointInput ~= 3 then
-			p1:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
+			p2:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
 			
 			return
 		end
@@ -43,12 +43,12 @@ function t.run(p1, p2)
 			local _ = var1.R15Fixed
 			local _ = true
 		else
-			p1:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
+			p2:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
 			
 			return
 		end
 	elseif #entrypointInput ~= 1 then
-		p1:fail(errorSourceStringsModule.Keys.SelectionCountNotOne)
+		p2:fail(errorSourceStringsModule.Keys.SelectionCountNotOne)
 	end
 end
 

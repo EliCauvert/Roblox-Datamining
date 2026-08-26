@@ -18,53 +18,53 @@ local createComputed = signalsModule.createComputed
 local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagMomentsStickerButton)
 local loopEpsilonSeconds = preloadConstantsModule.loopEpsilonSeconds
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: defaultMediaNodeRegistryModule (ref), mediaRootModule (ref), createAudioGraphModule (ref), getFFlagMomentsStickerButtonModule (ref), createSignal (ref), createComputed (ref), cryoModule (ref), loopEpsilonSeconds (ref), fFlagMomentsLoopOnEndSeekModule (ref)
-	local services = p1.services
-	local registry = p1.registry or defaultMediaNodeRegistryModule()
-	local var10 = p0.captureType == Enum.CaptureType.Video
-	local var11 = mediaRootModule(p0.momentId, p1.parent)
-	local folder = var11.folder
-	local var12 = createAudioGraphModule(folder, p1.audioDeviceOutput, p1.masterVolume)
-	local edits = p0.edits
+	local services = p2.services
+	local registry = p2.registry or defaultMediaNodeRegistryModule()
+	local var1 = p1.captureType == Enum.CaptureType.Video
+	local var2 = mediaRootModule(p1.momentId, p2.parent)
+	local folder = var2.folder
+	local var3 = createAudioGraphModule(folder, p2.audioDeviceOutput, p2.masterVolume)
+	local edits = p1.edits
 	local t = {}
 	local t_1 = {}
 	
-	local function _(p2)
+	local function _(p3)
 		-- upvalues: t (ref), t_1 (ref)
-		table.insert(t, p2)
-		t_1[p2.id] = p2
+		table.insert(t, p3)
+		t_1[p3.id] = p3
 	end
 	
-	local var15 = nil
-	local var16 = nil
+	local var4 = nil
+	local var5 = nil
 	
-	if var10 then
+	if var1 then
 		local video = registry.create("video", {
 			id = "video",
 			kind = "video",
 			zIndex = 0,
-			content = p0.content,
+			content = p1.content,
 			region = if edits ~= nil then nil else edits.trim,
 			parent = folder,
-			cornerRadius = p0.cornerRadius
+			cornerRadius = p1.cornerRadius
 		}, services)
-		var15 = video
+		var4 = video
 		table.insert(t, video)
 		t_1[video.id] = video
 	else
 		local screenshot = registry.create("screenshot", {
 			id = "screenshot",
 			kind = "screenshot",
-			image = p0.content.Uri,
-			poster = if p0.posterContent ~= nil then nil else p0.posterContent.Uri,
+			image = p1.content.Uri,
+			poster = if p1.posterContent ~= nil then nil else p1.posterContent.Uri,
 			parent = folder
 		}, services)
-		var16 = screenshot
+		var5 = screenshot
 		table.insert(t, screenshot)
 		t_1[screenshot.id] = screenshot
 	end
-	local var19 = nil
+	local var6 = nil
 	
 	if edits ~= nil and edits.music ~= nil then
 		local music = registry.create("music", {
@@ -74,11 +74,11 @@ return function(p0, p1)
 			startTime = edits.music.startTime,
 			parent = folder
 		}, services)
-		var19 = music
+		var6 = music
 		table.insert(t, music)
 		t_1[music.id] = music
 	end
-	local var21 = var19 ~= nil
+	local var7 = var6 ~= nil
 	
 	if edits ~= nil and edits.textOverlays ~= nil then
 		for i, v in edits.textOverlays do
@@ -113,23 +113,23 @@ return function(p0, p1)
 	table.sort(t_3, function(p3, p4)
 		return p3.zIndex < p4.zIndex
 	end)
-	local var26 = createSignal(t_3)
+	local var8 = createSignal(t_3)
 	local t_4 = {}
 	
-	local _ = function(p5)
-		-- upvalues: t_4 (ref), var12 (ref)
-		local audioStem = p5.audioStem
-		local getAudioSource = p5.getAudioSource
+	local _ = function(p3)
+		-- upvalues: t_4 (ref), var3 (ref)
+		local audioStem = p3.audioStem
+		local getAudioSource = p3.getAudioSource
 		
 		if audioStem == nil or getAudioSource == nil or t_4[audioStem.stemId] ~= nil then
 			return
 		end
-		t_4[audioStem.stemId] = var12.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume)
+		t_4[audioStem.stemId] = var3.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume)
 	end
 	
-	local _ = function(p6)
+	local _ = function(p3)
 		-- upvalues: t_4 (ref)
-		local audioStem = p6.audioStem
+		local audioStem = p3.audioStem
 		
 		if audioStem == nil then return end
 		local stemId = t_4[audioStem.stemId]
@@ -146,72 +146,72 @@ return function(p0, p1)
 			local getAudioSource = v_2.getAudioSource
 			
 			if audioStem ~= nil and getAudioSource ~= nil and t_4[audioStem.stemId] == nil then
-				t_4[audioStem.stemId] = var12.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume)
+				t_4[audioStem.stemId] = var3.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume)
 			end
 		end
 	end
-	local var28, var29 = createSignal(false)
-	local var30, var31 = createSignal(false)
-	local var32, var33 = createSignal(false)
-	local var34, var35 = createSignal(0)
-	local var36, var37 = createSignal(false)
-	local var38 = false
-	local var39 = nil
-	local var40 = if var15 ~= nil then var16.getPosition else var15.getPosition
-	local var41 = createComputed(function(p7)
-		-- upvalues: var32 (ref), var30 (ref), var28 (ref)
-		return if var32(p7) then "Playing" elseif var30(p7) then "Decoded" elseif var28(p7) then "Downloaded" else "Idle"
+	local var9, var10 = createSignal(false)
+	local var11, var12 = createSignal(false)
+	local var13, var14 = createSignal(false)
+	local var15, var16 = createSignal(0)
+	local var17, var18 = createSignal(false)
+	local var19 = false
+	local var20 = nil
+	local var21 = if var4 ~= nil then var5.getPosition else var4.getPosition
+	local var22 = createComputed(function(p3)
+		-- upvalues: var13 (ref), var11 (ref), var9 (ref)
+		return if var13(p3) then "Playing" elseif var11(p3) then "Decoded" elseif var9(p3) then "Downloaded" else "Idle"
 	end)
-	local var42 = createComputed(function(p8)
-		-- upvalues: var15 (write), var30 (ref), var28 (ref), var16 (write), var32 (ref), var36 (ref)
-		local var52, var53, duration, timeLength
+	local var23 = createComputed(function(p3)
+		-- upvalues: var4 (write), var11 (ref), var9 (ref), var5 (write), var13 (ref), var17 (ref)
+		local var24, var25, duration, timeLength
 		local _ = nil
 		local resolution = nil
 		local _ = nil
 		local _ = nil
 		local _ = nil
 		
-		if var15 == nil then
-			local var56 = var16
-			local failureReason = var56.getFailureReason(p8)
-			var52 = if failureReason ~= nil then if var56.getIsImageLoaded(p8) then "Ready" else "Loading" else "Failed"
-			var53 = failureReason
-			duration = var56.getDuration()
-			timeLength = var56.getDuration()
+		if var4 == nil then
+			local var26 = var5
+			local failureReason = var26.getFailureReason(p3)
+			var24 = if failureReason ~= nil then if var26.getIsImageLoaded(p3) then "Ready" else "Loading" else "Failed"
+			var25 = failureReason
+			duration = var26.getDuration()
+			timeLength = var26.getDuration()
 		else
-			local failureReason = var15.getFailureReason(p8)
-			var52 = if failureReason ~= nil then if var15.getIsLoaded(p8) then "Ready" elseif var30(p8) or var28(p8) then "Loading" else "Idle" else "Failed"
-			var53 = failureReason
-			resolution = var15.getResolution(p8)
-			duration = var15.getDuration(p8)
-			timeLength = var15.getTimeLength(p8)
+			local failureReason = var4.getFailureReason(p3)
+			var24 = if failureReason ~= nil then if var4.getIsLoaded(p3) then "Ready" elseif var11(p3) or var9(p3) then "Loading" else "Idle" else "Failed"
+			var25 = failureReason
+			resolution = var4.getResolution(p3)
+			duration = var4.getDuration(p3)
+			timeLength = var4.getTimeLength(p3)
 		end
 		return {
-			readiness = var52,
+			readiness = var24,
 			resolution = resolution,
 			duration = duration,
 			timeLength = timeLength,
-			isPlaying = var32(p8),
-			isMuted = var36(p8),
-			failureReason = var53
+			isPlaying = var13(p3),
+			isMuted = var17(p3),
+			failureReason = var25
 		}
 	end, cryoModule.Dictionary.equals)
-	local var43 = nil
-	local var44 = 0
+	local var24 = nil
+	local var25 = 0
 	
 	local _ = function()
-		-- upvalues: var43 (write), var19 (write), var44 (write), var40 (ref), services (ref), var38 (write), loopEpsilonSeconds (copy)
-		if var43 == nil and var19 ~= nil then
-			var44 = var40(false)
-			var43 = services.runService.RenderStepped:Connect(function()
-				-- upvalues: var38 (copy), var40 (copy), var44 (copy), loopEpsilonSeconds (copy), var19 (copy)
-				if var38 then return end
-				local var58 = var40(false)
+		-- upvalues: var24 (write), var6 (write), var25 (write), var21 (ref), services (ref), var19 (write), loopEpsilonSeconds (copy)
+		if var24 == nil and var6 ~= nil then
+			var25 = var21(false)
+			var24 = services.runService.RenderStepped:Connect(function()
+				-- upvalues: var19 (copy), var21 (copy), var25 (copy), loopEpsilonSeconds (copy), var6 (copy)
+				if var19 then return end
+				local var26 = var21(false)
 				
-				if var58 < var44 - loopEpsilonSeconds then
-					var19.realignToRegionStart()
+				if var26 < var25 - loopEpsilonSeconds then
+					var6.realignToRegionStart()
 				end
-				var44 = var58
+				var25 = var26
 			end)
 			
 			return
@@ -219,28 +219,28 @@ return function(p0, p1)
 	end
 	
 	local _ = function()
-		-- upvalues: var43 (write)
-		if var43 ~= nil then
-			var43:Disconnect()
-			var43 = nil
+		-- upvalues: var24 (write)
+		if var24 ~= nil then
+			var24:Disconnect()
+			var24 = nil
 		end
 	end
 	
 	local function download()
-		-- upvalues: var38 (write), t (ref), var29 (ref)
-		if var38 then return end
+		-- upvalues: var19 (write), t (ref), var10 (ref)
+		if var19 then return end
 		for i, v in t do
 			v.download()
 		end
-		if var38 then
+		if var19 then
 			return
 		end
-		var29(true)
+		var10(true)
 	end
 	
 	local function decode()
-		-- upvalues: var38 (write), t_2 (ref), t_4 (ref), var12 (ref), var21 (ref), var31 (ref)
-		if var38 then return end
+		-- upvalues: var19 (write), t_2 (ref), t_4 (ref), var3 (ref), var7 (ref), var12 (ref)
+		if var19 then return end
 		for i, v in t_2 do
 			local decode = v.decode
 			
@@ -251,18 +251,18 @@ return function(p0, p1)
 			local getAudioSource = v.getAudioSource
 			
 			if audioStem ~= nil and getAudioSource ~= nil and t_4[audioStem.stemId] == nil then
-				t_4[audioStem.stemId] = var12.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume)
+				t_4[audioStem.stemId] = var3.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume)
 			end
 		end
-		if var21 and t_4.video ~= nil then
-			var12.setMuted("video", true)
+		if var7 and t_4.video ~= nil then
+			var3.setMuted("video", true)
 		end
-		var31(true)
+		var12(true)
 	end
 	
 	local function releaseDecoder()
-		-- upvalues: var38 (write), t_2 (ref), t_4 (ref), var31 (ref), var33 (ref)
-		if var38 then return end
+		-- upvalues: var19 (write), t_2 (ref), t_4 (ref), var12 (ref), var14 (ref)
+		if var19 then return end
 		for i, v in t_2 do
 			local audioStem = v.audioStem
 			
@@ -280,20 +280,20 @@ return function(p0, p1)
 				releaseDecoder()
 			end
 		end
-		var31(false)
-		var33(false)
+		var12(false)
+		var14(false)
 	end
 	
 	local function play()
-		-- upvalues: var38 (write), var39 (write), var19 (write), var16 (write), t (ref), var33 (ref), var43 (write), var44 (write), var40 (ref), services (ref), loopEpsilonSeconds (copy)
-		if var38 then return end
-		var39 = nil
+		-- upvalues: var19 (write), var20 (write), var6 (write), var5 (write), t (ref), var14 (ref), var24 (write), var25 (write), var21 (ref), services (ref), loopEpsilonSeconds (copy)
+		if var19 then return end
+		var20 = nil
 		
-		if var19 ~= nil then
-			var19.realignToRegionStart()
+		if var6 ~= nil then
+			var6.realignToRegionStart()
 		end
-		if var16 ~= nil then
-			var16.seek(0)
+		if var5 ~= nil then
+			var5.seek(0)
 		end
 		for i, v in t do
 			local play = v.play
@@ -302,35 +302,35 @@ return function(p0, p1)
 				play()
 			end
 		end
-		if var39 ~= nil and var39 > 0 then
+		if var20 ~= nil and var20 > 0 then
 			for i, v_1 in t do
 				local seek = v_1.seek
 				
 				if seek ~= nil then
-					seek(var39)
+					seek(var20)
 				end
 			end
 		end
-		var33(true)
+		var14(true)
 		
-		if var43 == nil then
-			if var19 == nil then return end
-			var44 = var40(false)
-			var43 = services.runService.RenderStepped:Connect(function()
-				-- upvalues: var38 (copy), var40 (copy), var44 (copy), loopEpsilonSeconds (copy), var19 (copy)
-				if var38 then return end
-				if var40(false) < var44 - loopEpsilonSeconds then
-					var19.realignToRegionStart()
+		if var24 == nil then
+			if var6 == nil then return end
+			var25 = var21(false)
+			var24 = services.runService.RenderStepped:Connect(function()
+				-- upvalues: var19 (copy), var21 (copy), var25 (copy), loopEpsilonSeconds (copy), var6 (copy)
+				if var19 then return end
+				if var21(false) < var25 - loopEpsilonSeconds then
+					var6.realignToRegionStart()
 				end
 			end)
 		end
 	end
 	
-	local function pauseAndRemember(p9)
-		-- upvalues: var38 (write), var15 (write), var39 (write), var40 (ref), t (ref), var33 (ref), var43 (write)
-		if var38 then return end
-		if var15 ~= nil then
-			var39 = math.max(0, var40(false) - p9)
+	local function pauseAndRemember(p3)
+		-- upvalues: var19 (write), var4 (write), var20 (write), var21 (ref), t (ref), var14 (ref), var24 (write)
+		if var19 then return end
+		if var4 ~= nil then
+			var20 = math.max(0, var21(false) - p3)
 		end
 		for i, v in t do
 			local pause = v.pause
@@ -339,132 +339,132 @@ return function(p0, p1)
 				pause()
 			end
 		end
-		var33(false)
+		var14(false)
 		
-		if var43 ~= nil then
-			var43:Disconnect()
-			var43 = nil
+		if var24 ~= nil then
+			var24:Disconnect()
+			var24 = nil
 		end
 	end
 	
 	return {
-		getState = var42,
-		getPosition = var40,
-		getUserToggleNonce = var34,
-		getVisualLayers = var26,
-		getResourceLevel = var41,
+		getState = var23,
+		getPosition = var21,
+		getUserToggleNonce = var15,
+		getVisualLayers = var8,
+		getResourceLevel = var22,
 		audio = {
-			setVolume = function(value, p10)
-				-- upvalues: var38 (write), var12 (ref)
-				if not var38 then
-					var12.setVolume(value, p10)
+			setVolume = function(value, p4)
+				-- upvalues: var19 (write), var3 (ref)
+				if not var19 then
+					var3.setVolume(value, p4)
 				end
 			end,
-			setMuted = function(value, p11)
-				-- upvalues: var38 (write), var12 (ref)
-				if not var38 then
-					var12.setMuted(value, p11)
+			setMuted = function(value, p4)
+				-- upvalues: var19 (write), var3 (ref)
+				if not var19 then
+					var3.setMuted(value, p4)
 				end
 			end,
 			setMasterMuted = function(value)
-				-- upvalues: var38 (write), var12 (ref), var37 (ref)
-				if var38 then
+				-- upvalues: var19 (write), var3 (ref), var18 (ref)
+				if var19 then
 					return
 				end
-				var12.setMasterMuted(value)
-				var37(value)
+				var3.setMasterMuted(value)
+				var18(value)
 			end
 		},
 		download = download,
 		decode = decode,
 		releaseDecoder = releaseDecoder,
 		play = play,
-		pause = function(p12)
+		pause = function(p4)
 			-- upvalues: pauseAndRemember (ref)
-			pauseAndRemember(p12 or 2)
+			pauseAndRemember(p4 or 2)
 		end,
 		toggle = function()
-			-- upvalues: var38 (write), var32 (ref), pauseAndRemember (ref), play (ref), var35 (ref), var34 (ref)
-			if var38 then return end
-			if var32(false) then
+			-- upvalues: var19 (write), var13 (ref), pauseAndRemember (ref), play (ref), var16 (ref), var15 (ref)
+			if var19 then return end
+			if var13(false) then
 				pauseAndRemember(0)
 			else
 				play()
 			end
-			var35(var34(false) + 1)
+			var16(var15(false) + 1)
 		end,
-		seek = function(p13)
-			-- upvalues: var38 (write), fFlagMomentsLoopOnEndSeekModule (copy), var32 (ref), var42 (ref), t (ref)
-			if var38 then return end
-			if fFlagMomentsLoopOnEndSeekModule and var32(false) then
-				local duration = var42(false).duration
+		seek = function(p4)
+			-- upvalues: var19 (write), fFlagMomentsLoopOnEndSeekModule (copy), var13 (ref), var23 (ref), t (ref)
+			if var19 then return end
+			if fFlagMomentsLoopOnEndSeekModule and var13(false) then
+				local duration = var23(false).duration
 				
-				if duration > 0 and duration <= p13 then
-					p13 = 0
+				if duration > 0 and duration <= p4 then
+					p4 = 0
 				end
 			end
 			for i, v in t do
 				local seek = v.seek
 				
 				if seek ~= nil then
-					seek(p13)
+					seek(p4)
 				end
 			end
 		end,
 		setRegion = function(value)
-			-- upvalues: var38 (write), var15 (write)
-			if var38 then return end
-			if var15 ~= nil then
-				var15.setRegion(value)
+			-- upvalues: var19 (write), var4 (write)
+			if var19 then return end
+			if var4 ~= nil then
+				var4.setRegion(value)
 			end
 		end,
 		setActive = function(value)
-			-- upvalues: var39 (write), var38 (write), var12 (ref), var37 (ref)
+			-- upvalues: var20 (write), var19 (write), var3 (ref), var18 (ref)
 			if value then
-				var39 = nil
+				var20 = nil
 			end
-			local var59 = not value
+			local var26 = not value
 			
-			if var38 then
+			if var19 then
 				return
 			end
-			var12.setMasterMuted(var59)
-			var37(var59)
+			var3.setMasterMuted(var26)
+			var18(var26)
 		end,
-		setSurface = function(value, p14)
-			-- upvalues: var38 (write), t_1 (ref)
-			if var38 then return end
-			local var60 = t_1[value]
+		setSurface = function(value, p5)
+			-- upvalues: var19 (write), t_1 (ref)
+			if var19 then return end
+			local var26 = t_1[value]
 			
-			if var60 ~= nil and var60.setSurface ~= nil then
-				var60.setSurface(p14)
+			if var26 ~= nil and var26.setSurface ~= nil then
+				var26.setSurface(p5)
 			end
 		end,
 		getVideoPreviewSource = function()
-			-- upvalues: var10 (ref), p0 (ref), edits (ref)
-			return if var10 then {
-				content = p0.content,
+			-- upvalues: var1 (ref), p1 (ref), edits (ref)
+			return if var1 then {
+				content = p1.content,
 				region = if edits ~= nil then nil else edits.trim
 			} else nil
 		end,
 		getHasVideoPreview = function()
-			-- upvalues: var10 (ref)
-			return var10
+			-- upvalues: var1 (ref)
+			return var1
 		end,
 		dispose = function()
-			-- upvalues: var38 (write), var43 (write), t (ref), var12 (ref), var11 (ref)
-			if var38 then return end
-			var38 = true
+			-- upvalues: var19 (write), var24 (write), t (ref), var3 (ref), var2 (ref)
+			if var19 then return end
+			var19 = true
 			
-			if var43 ~= nil then
-				var43:Disconnect()
-				var43 = nil
+			if var24 ~= nil then
+				var24:Disconnect()
+				var24 = nil
 			end
 			for i, v in t do
 				v.dispose()
 			end
-			var12.dispose()
-			var11.dispose()
+			var3.dispose()
+			var2.dispose()
 		end
 	}
 end

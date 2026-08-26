@@ -12,85 +12,85 @@ local fFlagReplacePlayerIconRoduxWithSignal = require(corePackagesService.Worksp
 local fFlagPlayerListUseFocusNavHook = playerListModule.Flags.FFlagPlayerListUseFocusNavHook
 local playerIconInfoStore = require(corePackagesService.Workspace.Packages.PlayerIconInfoStore).PlayerIconInfoStore
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLayoutValues (ref), useStyle (ref), reactModule (ref), teamEntryContainerModule (ref), fFlagReplacePlayerIconRoduxWithSignal (ref), playerIconInfoStore (ref), playerEntryContainerModule (ref), fFlagPlayerListUseFocusNavHook (ref)
-	local var6 = useLayoutValues()
-	local var7 = useStyle()
+	local var1 = useLayoutValues()
+	local var2 = useStyle()
 	local t = {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			Padding = if p0.isDirectionalPreferred then UDim.new(0, var6.EntryPadding) else nil
+			Padding = if p1.isDirectionalPreferred then UDim.new(0, var1.EntryPadding) else nil
 		})
 	}
 	
-	if p0.showTeamEntry then
+	if p1.showTeamEntry then
 		t.TeamEntry = reactModule.createElement(teamEntryContainerModule, {
 			layoutOrder = -1,
-			size = UDim2.new(1, 0, 0, var6.TeamEntrySizeY),
-			teamData = p0.teamData,
-			entrySizeX = p0.entrySizeX,
-			isSmallTouchDevice = p0.isSmallTouchDevice,
-			isDirectionalPreferred = p0.isDirectionalPreferred
+			size = UDim2.new(1, 0, 0, var1.TeamEntrySizeY),
+			teamData = p1.teamData,
+			entrySizeX = p1.entrySizeX,
+			isSmallTouchDevice = p1.isSmallTouchDevice,
+			isDirectionalPreferred = p1.isDirectionalPreferred
 		})
 	end
-	if p0.teamPlayersCount > 0 then
-		local var9 = 0
+	if p1.teamPlayersCount > 0 then
+		local var3 = 0
 		
-		if p0.isSmallTouchDevice then
+		if p1.isSmallTouchDevice then
 			t.BottomDiv = reactModule.createElement("Frame", {
 				BackgroundTransparency = 0.8,
 				Size = UDim2.new(1, 0, 0, 1),
 				Position = UDim2.new(0, 0, 0, 0),
 				AnchorPoint = Vector2.new(0, 0),
 				BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-				LayoutOrder = p0.teamPlayersCount * 2
+				LayoutOrder = p1.teamPlayersCount * 2
 			})
 		end
-		p0.teamData.players.iterateData(function(p1, p2)
-			-- upvalues: var9 (write), fFlagReplacePlayerIconRoduxWithSignal (copy), playerIconInfoStore (copy), p0 (ref), t (ref), reactModule (copy), playerEntryContainerModule (copy), var6 (ref), fFlagPlayerListUseFocusNavHook (copy), var7 (ref)
-			var9 += 1
-			local var10 = if fFlagReplacePlayerIconRoduxWithSignal then playerIconInfoStore.getPlayerIconInfoReactive(p1.UserId)(false) else p0.playerIconInfos[p2]
-			local var11 = p0.playerRelationships[p2]
+		p1.teamData.players.iterateData(function(p2, p3)
+			-- upvalues: var3 (write), fFlagReplacePlayerIconRoduxWithSignal (copy), playerIconInfoStore (copy), p1 (ref), t (ref), reactModule (copy), playerEntryContainerModule (copy), var1 (ref), fFlagPlayerListUseFocusNavHook (copy), var2 (ref)
+			var3 += 1
+			local var4 = if fFlagReplacePlayerIconRoduxWithSignal then playerIconInfoStore.getPlayerIconInfoReactive(p2.UserId)(false) else p1.playerIconInfos[p3]
+			local var5 = p1.playerRelationships[p3]
 			
-			if not var10 or not var11 then return end
-			t["PlayerEntry_" .. tostring(p2)] = reactModule.createElement(playerEntryContainerModule, {
+			if not var4 or not var5 then return end
+			t["PlayerEntry_" .. tostring(p3)] = reactModule.createElement(playerEntryContainerModule, {
 				titlePlayerEntry = false,
-				size = UDim2.new(1, var6.EntryXOffset, 0, var6.PlayerEntrySizeY),
-				player = p1,
-				entrySizeX = p0.entrySizeX,
-				playerIconInfo = var10,
-				playerRelationship = var11,
-				setDropDownPlayerDimensionY = p0.setDropDownPlayerDimensionY,
-				firstPlayerRef = p0.firstPlayerRef,
-				prevFocusedEntry = p0.prevFocusedEntry,
-				destroyedFocusedPlayerId = p0.destroyedFocusedPlayerId,
-				registerPlayerInstance = if fFlagPlayerListUseFocusNavHook then p0.registerPlayerInstance else nil,
-				unregisterPlayerInstance = if fFlagPlayerListUseFocusNavHook then p0.unregisterPlayerInstance else nil,
-				setSelectedPlayerId = if fFlagPlayerListUseFocusNavHook then p0.setSelectedPlayerId else nil
+				size = UDim2.new(1, var1.EntryXOffset, 0, var1.PlayerEntrySizeY),
+				player = p2,
+				entrySizeX = p1.entrySizeX,
+				playerIconInfo = var4,
+				playerRelationship = var5,
+				setDropDownPlayerDimensionY = p1.setDropDownPlayerDimensionY,
+				firstPlayerRef = p1.firstPlayerRef,
+				prevFocusedEntry = p1.prevFocusedEntry,
+				destroyedFocusedPlayerId = p1.destroyedFocusedPlayerId,
+				registerPlayerInstance = if fFlagPlayerListUseFocusNavHook then p1.registerPlayerInstance else nil,
+				unregisterPlayerInstance = if fFlagPlayerListUseFocusNavHook then p1.unregisterPlayerInstance else nil,
+				setSelectedPlayerId = if fFlagPlayerListUseFocusNavHook then p1.setSelectedPlayerId else nil
 			})
 			
-			if p0.isSmallTouchDevice then
+			if p1.isSmallTouchDevice then
 				t["TopDiv_" .. var9] = reactModule.createElement("Frame", {
 					BackgroundTransparency = 0.8,
 					Size = UDim2.new(1, 0, 0, 1),
 					Position = UDim2.new(0, 0, 0, 0),
 					AnchorPoint = Vector2.new(0, 0),
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-					LayoutOrder = (var9 - 1) * 2
+					LayoutOrder = (var3 - 1) * 2
 				})
 			end
-			if var9 < p0.teamPlayersCount and not p0.isSmallTouchDevice and not p0.isDirectionalPreferred then
+			if var3 < p1.teamPlayersCount and not p1.isSmallTouchDevice and not p1.isDirectionalPreferred then
 				t["Divider_" .. var9] = reactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 0, 0, 1),
 					Position = UDim2.new(0, 0, 1, 0),
 					AnchorPoint = Vector2.new(0, 1),
-					BackgroundTransparency = var7.Theme.Divider.Transparency,
-					BackgroundColor3 = var7.Theme.Divider.Color,
-					LayoutOrder = var9 * 2
+					BackgroundTransparency = var2.Theme.Divider.Transparency,
+					BackgroundColor3 = var2.Theme.Divider.Color,
+					LayoutOrder = var3 * 2
 				})
 			end
 		end, false)
@@ -99,6 +99,6 @@ return reactModule.memo(function(p0)
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, t)
 end)

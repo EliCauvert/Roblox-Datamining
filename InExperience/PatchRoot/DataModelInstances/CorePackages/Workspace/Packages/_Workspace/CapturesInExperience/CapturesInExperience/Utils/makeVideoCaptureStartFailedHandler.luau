@@ -2,24 +2,24 @@
 local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
 local toastTriggeredModule = require(parent.Actions.ToastTriggered)
 
-return function(p0)
+return function(p1)
 	-- upvalues: toastTriggeredModule (ref), capturesToastTypeModule (ref)
-	return function(p1)
-		-- upvalues: p0 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
-		if p1 == Enum.VideoCaptureStartedResult.CapturingAlready then
-			p0(toastTriggeredModule(capturesToastTypeModule.VideoCaptureInitializationCapturingAlreadyError))
+	return function(p2)
+		-- upvalues: p1 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
+		if p2 == Enum.VideoCaptureStartedResult.CapturingAlready then
+			p1(toastTriggeredModule(capturesToastTypeModule.VideoCaptureInitializationCapturingAlreadyError))
 			
 			return
-		elseif p1 == Enum.VideoCaptureStartedResult.NoDeviceSupport then
-			p0(toastTriggeredModule(capturesToastTypeModule.VideoCaptureInitializationNoDeviceSupportError))
+		elseif p2 == Enum.VideoCaptureStartedResult.NoDeviceSupport then
+			p1(toastTriggeredModule(capturesToastTypeModule.VideoCaptureInitializationNoDeviceSupportError))
 			
 			return
-		elseif p1 == Enum.VideoCaptureStartedResult.NoSpaceOnDevice then
-			p0(toastTriggeredModule(capturesToastTypeModule.VideoCaptureInitializationNoSpaceOnDeviceError))
+		elseif p2 == Enum.VideoCaptureStartedResult.NoSpaceOnDevice then
+			p1(toastTriggeredModule(capturesToastTypeModule.VideoCaptureInitializationNoSpaceOnDeviceError))
 			
 			return
-		elseif p1 == Enum.VideoCaptureStartedResult.OtherError then
-			p0(toastTriggeredModule(capturesToastTypeModule.VideoCaptureInitializationOtherError))
+		elseif p2 == Enum.VideoCaptureStartedResult.OtherError then
+			p1(toastTriggeredModule(capturesToastTypeModule.VideoCaptureInitializationOtherError))
 		end
 	end
 end

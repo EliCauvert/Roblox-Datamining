@@ -19,10 +19,10 @@ local t = {
 	[socialMediaTypes.X] = images["icons/brands/x"]
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useLocalization (ref), textKeysModule (ref), t (ref), reactModule (ref), socialLinksCarouselModule (ref)
-	local var8 = useProfileJsonComponentModule(enumsModule.Components.SocialLinks)
-	local var9 = useLocalization({
+	local var1 = useProfileJsonComponentModule(enumsModule.Components.SocialLinks)
+	local var2 = useLocalization({
 		facebook = textKeysModule.Facebook,
 		twitter = textKeysModule.X,
 		youtube = textKeysModule.YouTube,
@@ -32,28 +32,28 @@ return function(p0)
 		x = textKeysModule.X
 	})
 	
-	local var10 = function(p1)
-		-- upvalues: var9 (ref), t (copy)
+	local var3 = function(p2)
+		-- upvalues: var2 (ref), t (copy)
 		local t_1 = {}
 		
-		for i, v in pairs(p1) do
-			local var13 = var9[i]
+		for i, v in pairs(p2) do
+			local var4 = var2[i]
 			
 			if v and t[i] then
-				table.insert(t_1, { key = i, logo = t[i], url = v.url, name = var13 })
+				table.insert(t_1, { key = i, logo = t[i], url = v.url, name = var4 })
 			end
 		end
 		return t_1
 	end
 	
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var10 (ref), var8 (ref)
-		return var10(var8)
-	end, { var8, var9 })
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), var1 (ref)
+		return var3(var1)
+	end, { var1, var2 })
 	
-	return if #var11 > 0 then reactModule.createElement(socialLinksCarouselModule, {
-		layoutOrder = p0.layoutOrder,
-		items = var11,
-		title = p0.title
+	return if #var5 > 0 then reactModule.createElement(socialLinksCarouselModule, {
+		layoutOrder = p1.layoutOrder,
+		items = var5,
+		title = p1.title
 	}) else reactModule.None
 end

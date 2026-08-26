@@ -18,9 +18,9 @@ local displayOrderEnum = displayOrderModule.DisplayOrderEnum
 local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
 local getFFlagSocialContextToastEventStream = require(parent.SharedFlags).GetFFlagSocialContextToastEventStream
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: reactModule (ref), styleProviderWithDefaultTheme (ref)
-	return reactModule.createElement(styleProviderWithDefaultTheme, {}, p0)
+	return reactModule.createElement(styleProviderWithDefaultTheme, {}, p1)
 end
 
 return function(p1, p2, p3)
@@ -28,18 +28,18 @@ return function(p1, p2, p3)
 	local socialContextToast = Instance.new("Folder")
 	socialContextToast.Name = "SocialContextToast"
 	socialContextToast.Parent = coreGuiService
-	local var14 = reactModule.createElement(roactRoduxModule.StoreProvider, {
+	local var1 = reactModule.createElement(roactRoduxModule.StoreProvider, {
 		store = roduxModule.Store.new(roduxModule.createReducer({}, {
 			SetToastContent = function(value, p4)
 				-- upvalues: cryoModule (copy)
 				return cryoModule.Dictionary.join(value, { ToastContent = p4.toastContent })
 			end,
-			SetConfirmationModal = function(value, p5)
+			SetConfirmationModal = function(value, p4)
 				-- upvalues: cryoModule (copy)
 				return cryoModule.Dictionary.join(value, {
 					ConfirmationModal = {
-						isOpen = p5.isConfirmationModalOpen,
-						closeCallback = p5.closeCallback
+						isOpen = p4.isConfirmationModalOpen,
+						closeCallback = p4.closeCallback
 					}
 				})
 			end
@@ -62,7 +62,7 @@ return function(p1, p2, p3)
 			})
 		})
 	})
-	reactRobloxModule.createRoot(socialContextToast):render(var14)
+	reactRobloxModule.createRoot(socialContextToast):render(var1)
 	
-	return var14
+	return var1
 end

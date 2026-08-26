@@ -15,75 +15,75 @@ local t = {
 	playbackRegion = NumberRange.new(0, 1e999)
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: cryoModule (ref), t (ref), useRef (ref), useToggleStateModule (ref), useState (ref), signalModule (ref), useCallback (ref), useEffect (ref)
-	local var6 = cryoModule.Dictionary.union(t, p2 or {})
-	local var7 = useRef(nil)
-	local var8 = useToggleStateModule(false)
-	local var9 = useToggleStateModule(var6.autoplay)
-	local var10 = useToggleStateModule(false)
-	local var11, var12 = useState(0)
-	local var13, var14 = useState(0)
-	local var15, var16 = useState(0)
-	local var17, var18 = useState(0)
-	local var19 = useRef(signalModule.new())
-	local var20 = useRef(signalModule.new())
-	local var21 = useCallback(function(p3)
-		-- upvalues: var7 (ref), var6 (ref), var11 (ref)
-		local current = var7.current
+	local var1 = cryoModule.Dictionary.union(t, p3 or {})
+	local var2 = useRef(nil)
+	local var3 = useToggleStateModule(false)
+	local var4 = useToggleStateModule(var1.autoplay)
+	local var5 = useToggleStateModule(false)
+	local var6, var7 = useState(0)
+	local var8, var9 = useState(0)
+	local var10, var11 = useState(0)
+	local var12, var13 = useState(0)
+	local var14 = useRef(signalModule.new())
+	local var15 = useRef(signalModule.new())
+	local var16 = useCallback(function(p4)
+		-- upvalues: var2 (ref), var1 (ref), var6 (ref)
+		local current = var2.current
 		
 		if current then
-			current.TimePosition = math.clamp(p3 + var6.playbackRegion.Min, 0, var11)
+			current.TimePosition = math.clamp(p4 + var1.playbackRegion.Min, 0, var6)
 		end
-	end, { var11, var6.playbackRegion })
-	local var22 = useCallback(function()
-		-- upvalues: var7 (ref), var20 (ref), var6 (ref), var10 (ref), var16 (ref), var12 (ref)
-		local current = var7.current
+	end, { var6, var1.playbackRegion })
+	local var17 = useCallback(function()
+		-- upvalues: var2 (ref), var15 (ref), var1 (ref), var5 (ref), var11 (ref), var7 (ref)
+		local current = var2.current
 		
 		if current then
-			var20.current:fire()
-			local var25 = var6.playbackRegion.Max - var6.playbackRegion.Min
-			current.Volume = if var10.enabled then 0 else 0.2
-			var16(math.min(var25, current.TimeLength))
-			var12(current.TimeLength)
+			var15.current:fire()
+			local var18 = var1.playbackRegion.Max - var1.playbackRegion.Min
+			current.Volume = if var5.enabled then 0 else 0.2
+			var11(math.min(var18, current.TimeLength))
+			var7(current.TimeLength)
 		end
-	end, { var6.playbackRegion, var10.enabled })
-	local var23 = useCallback(function()
-		-- upvalues: p0 (ref), var7 (ref), var18 (ref), var6 (ref), var14 (ref)
-		if not p0 then return end
-		local current = var7.current
+	end, { var1.playbackRegion, var5.enabled })
+	local var18 = useCallback(function()
+		-- upvalues: p1 (ref), var2 (ref), var13 (ref), var1 (ref), var9 (ref)
+		if not p1 then return end
+		local current = var2.current
 		
 		if current then
-			var18(current.TimePosition - var6.playbackRegion.Min)
-			var14(current.TimePosition)
+			var13(current.TimePosition - var1.playbackRegion.Min)
+			var9(current.TimePosition)
 		end
-	end, { p0, var6.playbackRegion })
-	local var24 = useCallback(function()
-		-- upvalues: var7 (ref), var6 (ref), var19 (ref)
-		if var7.current then
-			var7.current.TimePosition = var6.playbackRegion.Min
-			var19.current:fire()
+	end, { p1, var1.playbackRegion })
+	local var19 = useCallback(function()
+		-- upvalues: var2 (ref), var1 (ref), var14 (ref)
+		if var2.current then
+			var2.current.TimePosition = var1.playbackRegion.Min
+			var14.current:fire()
 			
 			return
 		end
-	end, { var6.playbackRegion })
+	end, { var1.playbackRegion })
 	useEffect(function()
-		-- upvalues: var7 (ref), p1 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), p2 (ref)
+		local current = var2.current
 		
 		if not current then return end
-		if p1 then
-			current.VideoContent = p1
+		if p2 then
+			current.VideoContent = p2
 		end
-	end, { var8.enabled, p1 })
+	end, { var3.enabled, p2 })
 	useEffect(function()
-		-- upvalues: var7 (ref), var22 (ref), var23 (ref), var24 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), var17 (ref), var18 (ref), var19 (ref)
+		local current = var2.current
 		
 		if current then
-			local loadedConnection = current.Loaded:Connect(var22)
-			local renderSteppedConnection = game:GetService("RunService").RenderStepped:Connect(var23)
-			local didLoopConnection = current.DidLoop:Connect(var24)
+			local loadedConnection = current.Loaded:Connect(var17)
+			local renderSteppedConnection = game:GetService("RunService").RenderStepped:Connect(var18)
+			local didLoopConnection = current.DidLoop:Connect(var19)
 			
 			return function()
 				-- upvalues: loadedConnection (ref), renderSteppedConnection (ref), didLoopConnection (ref)
@@ -92,86 +92,86 @@ return function(p0, p1, p2)
 				didLoopConnection:Disconnect()
 			end
 		end
-	end, { var8.enabled, var23, var22, var24 })
+	end, { var3.enabled, var18, var17, var19 })
 	useEffect(function()
-		-- upvalues: var7 (ref), var6 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), var1 (ref)
+		local current = var2.current
 		
 		if current then
-			current.Looped = var6.looping
+			current.Looped = var1.looping
 		end
-	end, { var8.enabled, var6.looping })
+	end, { var3.enabled, var1.looping })
 	useEffect(function()
-		-- upvalues: var7 (ref), var9 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), var4 (ref)
+		local current = var2.current
 		
 		if current then
-			current.Playing = var9.enabled
+			current.Playing = var4.enabled
 		end
-	end, { var8.enabled, var9.enabled })
+	end, { var3.enabled, var4.enabled })
 	useEffect(function()
-		-- upvalues: var7 (ref), var10 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), var5 (ref)
+		local current = var2.current
 		
 		if current then
-			current.Volume = if var10.enabled then 0 else 0.2
+			current.Volume = if var5.enabled then 0 else 0.2
 		end
-	end, { var8.enabled, var10.enabled })
+	end, { var3.enabled, var5.enabled })
 	useEffect(function()
-		-- upvalues: var7 (ref), var13 (write), var6 (ref), var9 (ref), var19 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), var8 (write), var1 (ref), var4 (ref), var14 (ref)
+		local current = var2.current
 		
 		if not current then return end
-		if var6.playbackRegion.Max + 0.001 <= var13 then
-			if not var9.enabled then
-				var13 = var6.playbackRegion.Max
-			elseif var6.looping then
-				current.TimePosition = var6.playbackRegion.Min
-				var19.current:fire()
+		if var1.playbackRegion.Max + 0.001 <= var8 then
+			if not var4.enabled then
+				var8 = var1.playbackRegion.Max
+			elseif var1.looping then
+				current.TimePosition = var1.playbackRegion.Min
+				var14.current:fire()
 			else
-				var9.disable()
+				var4.disable()
 			end
 		end
-		if var13 < var6.playbackRegion.Min - 0.001 then
-			current.TimePosition = var6.playbackRegion.Min
+		if var8 < var1.playbackRegion.Min - 0.001 then
+			current.TimePosition = var1.playbackRegion.Min
 		end
-	end, { var13, var6.playbackRegion, var6.looping, var9.disable })
+	end, { var8, var1.playbackRegion, var1.looping, var4.disable })
 	useEffect(function()
-		-- upvalues: var7 (ref), var6 (ref), var16 (ref)
-		local current = var7.current
+		-- upvalues: var2 (ref), var1 (ref), var11 (ref)
+		local current = var2.current
 		
 		if current then
-			var16(math.min(var6.playbackRegion.Max - var6.playbackRegion.Min, current.TimeLength))
+			var11(math.min(var1.playbackRegion.Max - var1.playbackRegion.Min, current.TimeLength))
 		end
-	end, { var6.playbackRegion })
+	end, { var1.playbackRegion })
 	
 	return {
 		timeline = {
-			duration = var15,
-			elapsed = var17,
-			seek = var21,
-			timeLength = var11,
-			timePosition = var13
+			duration = var10,
+			elapsed = var12,
+			seek = var16,
+			timeLength = var6,
+			timePosition = var8
 		},
 		playback = {
-			isPlaying = var9.enabled,
-			pause = var9.disable,
-			play = var9.enable,
-			toggle = var9.toggle
+			isPlaying = var4.enabled,
+			pause = var4.disable,
+			play = var4.enable,
+			toggle = var4.toggle
 		},
 		volume = {
-			isMuted = var10.enabled,
-			mute = var10.enable,
-			unmute = var10.disable,
-			toggle = var10.toggle
+			isMuted = var5.enabled,
+			mute = var5.enable,
+			unmute = var5.disable,
+			toggle = var5.toggle
 		},
-		onVideoDidLoopSignalRef = var19,
-		onVideoLoadedSignalRef = var20,
-		ref = var7,
+		onVideoDidLoopSignalRef = var14,
+		onVideoLoadedSignalRef = var15,
+		ref = var2,
 		updateRef = useCallback(function(p4)
-			-- upvalues: var8 (ref), var7 (ref)
-			var8.toggle()
-			var7.current = p4
-		end, { var8.toggle })
+			-- upvalues: var3 (ref), var2 (ref)
+			var3.toggle()
+			var2.current = p4
+		end, { var3.toggle })
 	}
 end

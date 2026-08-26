@@ -9,51 +9,51 @@ local graphQLSchema = require(script.Parent.Parent.type.schema).GraphQLSchema
 local specifiedDirectives = require(script.Parent.Parent.type.directives).specifiedDirectives
 local extendSchemaImpl = require(script.Parent.extendSchema).extendSchemaImpl
 
-local var0 = function(p0, p1)
+local var1 = function(p1, p2)
 	-- upvalues: devAssert (ref), kind (ref), assertValidSDL (ref), extendSchemaImpl (ref), specifiedDirectives (ref), array (ref), graphQLSchema (ref)
-	devAssert(p0 ~= nil and p0.kind == kind.DOCUMENT, "Must provide valid Document AST.")
+	devAssert(p1 ~= nil and p1.kind == kind.DOCUMENT, "Must provide valid Document AST.")
 	
-	if p1 ~= nil and not p1.assumeValid and not p1.assumeValidSDL then
-		assertValidSDL(p0)
+	if p2 ~= nil and not p2.assumeValid and not p2.assumeValidSDL then
+		assertValidSDL(p1)
 	end
-	local var1 = extendSchemaImpl({
+	local var2 = extendSchemaImpl({
 		description = nil,
 		extensions = nil,
 		assumeValid = false,
 		types = {},
 		directives = {},
 		extensionASTNodes = {}
-	}, p0, p1)
+	}, p1, p2)
 	
-	if var1.astNode == nil then
-		for i, v in ipairs(var1.types) do
+	if var2.astNode == nil then
+		for i, v in ipairs(var2.types) do
 			if v.name == "Query" then
-				var1.query = v
+				var2.query = v
 			elseif v.name == "Mutation" then
-				var1.mutation = v
+				var2.mutation = v
 			elseif v.name == "Subscription" then
-				var1.subscription = v
+				var2.subscription = v
 			end
 		end
 	end
-	local directives = var1.directives
+	local directives = var2.directives
 	
 	for i, v in ipairs(specifiedDirectives) do
-		if array.every(directives, function(p2)
+		if array.every(directives, function(p3)
 			-- upvalues: v (ref)
-			return p2.name ~= v.name
+			return p3.name ~= v.name
 		end) then
 			table.insert(directives, v)
 		end
 	end
-	return graphQLSchema.new(var1)
+	return graphQLSchema.new(var2)
 end
 
 return {
-	buildASTSchema = var0,
+	buildASTSchema = var1,
 	buildSchema = function(p3, p4)
-		-- upvalues: parse (ref), var0 (ref)
-		return var0(parse(p3, {
+		-- upvalues: parse (ref), var1 (ref)
+		return var1(parse(p3, {
 			noLocation = if p4 then p4.noLocation else nil,
 			experimentalFragmentVariables = if p4 then p4.experimentalFragmentVariables else nil
 		}), {

@@ -13,11 +13,11 @@ local canUseWeakMap = utilitiesModule.canUseWeakMap
 local isNonNullObject = utilitiesModule.isNonNullObject
 local sortedEncode = require(parent.luaUtils.sortedEncode).sortedEncode
 local resetCanonicalStringify = nil
-local var6 = nil
-local var7 = nil
+local var1 = nil
+local var2 = nil
 
-local function _(p0)
-	return table.clone(p0)
+local function _(p1)
+	return table.clone(p1)
 end
 
 local _ = function(p1)
@@ -39,114 +39,114 @@ function t_1.new()
 	return tbl
 end
 
-function t_1:isKnown(p2)
+function t_1:isKnown(p1)
 	-- upvalues: isNonNullObject (ref)
-	return isNonNullObject(p2) and self.known:has(p2)
+	return isNonNullObject(p1) and self.known:has(p1)
 end
 
-function t_1:pass(p3)
+function t_1:pass(p1)
 	-- upvalues: isNonNullObject (ref)
-	if isNonNullObject(p3) then
-		local cloned = table.clone(p3)
-		self.passes:set(cloned, p3)
+	if isNonNullObject(p1) then
+		local cloned = table.clone(p1)
+		self.passes:set(cloned, p1)
 		
 		return cloned
 	end
-	return p3
+	return p1
 end
 
-function t_1:admit(p4)
+function t_1:admit(p1)
 	-- upvalues: isNonNullObject (ref), objectModule (ref), array (ref)
-	if isNonNullObject(p4) then
-		local var11 = self.passes:get(p4)
+	if isNonNullObject(p1) then
+		local var3 = self.passes:get(p1)
 		
-		if var11 then
-			return var11
-		elseif objectModule.getPrototypeOf(p4) ~= nil then
-			return p4
+		if var3 then
+			return var3
+		elseif objectModule.getPrototypeOf(p1) ~= nil then
+			return p1
 		end
-		if #p4 == 0 and not next(p4) or #p4 <= 1 then
-			if self.known:has(p4) then
-				return p4
+		if #p1 == 0 and not next(p1) or #p1 <= 1 then
+			if self.known:has(p1) then
+				return p1
 			end
-			local var12 = array.map(p4, self.admit, self)
-			local var13 = self.pool:lookupArray(var12)
+			local var4 = array.map(p1, self.admit, self)
+			local var5 = self.pool:lookupArray(var4)
 			
-			if not var13.array then
-				var13.array = var12
-				self.known:add(var13.array)
+			if not var5.array then
+				var5.array = var4
+				self.known:add(var5.array)
 				
 				if _G.__DEV__ then
-					objectModule.freeze(var12)
+					objectModule.freeze(var4)
 				end
 			end
-			return var13.array
-		elseif self.known:has(p4) then
-			return p4
+			return var5.array
+		elseif self.known:has(p1) then
+			return p1
 		end
-		local prototypeOf = objectModule.getPrototypeOf(p4)
+		local prototypeOf = objectModule.getPrototypeOf(p1)
 		local list = { prototypeOf }
-		local var16 = self:sortedKeys(p4)
-		table.insert(list, var16.json)
+		local var6 = self:sortedKeys(p1)
+		table.insert(list, var6.json)
 		local listCount = #list
-		array.forEach(var16.sorted, function(p5)
-			-- upvalues: list (ref), self (ref), p4 (ref)
-			table.insert(list, self:admit(p4[p5]))
+		array.forEach(var6.sorted, function(p2)
+			-- upvalues: list (ref), self (ref), p1 (ref)
+			table.insert(list, self:admit(p1[p2]))
 		end)
-		local var18 = self.pool:lookupArray(list)
+		local var7 = self.pool:lookupArray(list)
 		
-		if not var18.object then
-			var18.object = objectModule.create(prototypeOf)
-			local object = var18.object
+		if not var7.object then
+			var7.object = objectModule.create(prototypeOf)
+			local object = var7.object
 			self.known:add(object)
-			array.forEach(var16.sorted, function(p6, p7)
+			array.forEach(var6.sorted, function(p2, p3)
 				-- upvalues: object (ref), list (ref), listCount (ref)
-				object[p6] = list[listCount + p7]
+				object[p2] = list[listCount + p3]
 			end)
 			
 			if _G.__DEV__ then
 				objectModule.freeze(object)
 			end
 		end
-		return var18.object
+		return var7.object
 	end
 end
 
-function t_1:sortedKeys(p8)
+function t_1:sortedKeys(p1)
 	-- upvalues: objectModule (ref), array (ref), httpService (ref)
-	local var19 = objectModule.keys(p8)
-	local var20 = self.pool:lookupArray(var19)
+	local var3 = objectModule.keys(p1)
+	local var4 = self.pool:lookupArray(var3)
 	
-	if not var20.keys then
-		array.sort(var19)
-		local var21 = httpService:JSONEncode(var19)
-		var20.keys = self.keysByJSON:get(var21)
+	if not var4.keys then
+		array.sort(var3)
+		local var5 = httpService:JSONEncode(var3)
+		var4.keys = self.keysByJSON:get(var5)
 		
-		if not var20.keys then
-			var20.keys = { sorted = var19, json = var21 }
-			self.keysByJSON:set(var21, var20.keys)
+		if not var4.keys then
+			var4.keys = { sorted = var3, json = var5 }
+			self.keysByJSON:set(var5, var4.keys)
 		end
 	end
-	return var20.keys
+	return var4.keys
 end
 
 t.ObjectCanon = t_1
 t.canonicalStringify = objectModule.assign(setmetatable({}, {
-	__call = function(_, p9)
-		-- upvalues: isNonNullObject (ref), var6 (write), resetCanonicalStringify (write), var7 (write), sortedEncode (ref), httpService (ref)
-		if not isNonNullObject(p9) then
-			return httpService:JSONEncode(p9)
-		elseif var6 == nil then
+	__call = function(_, p1)
+		-- upvalues: isNonNullObject (ref), var1 (write), resetCanonicalStringify (write), var2 (write), sortedEncode (ref), httpService (ref)
+		if not isNonNullObject(p1) then
+			return httpService:JSONEncode(p1)
+		elseif var1 == nil then
 			resetCanonicalStringify()
 		end
-		local var22 = var6:admit(p9)
-		local var23 = var7:get(var22)
+		local var3 = var1:admit(p1)
+		local var4 = var2:get(var3)
 		
-		if var23 == nil then
-			var23 = sortedEncode(var22)
-			var7:set(var22, var23)
+		if var4 == nil then
+			var4 = sortedEncode(var3)
+			var2:set(var3, var4)
 		end
-		return var23
+		return var4
 	end
 }), {
 	reset = function(_)
@@ -156,9 +156,9 @@ t.canonicalStringify = objectModule.assign(setmetatable({}, {
 })
 
 resetCanonicalStringify = function()
-	-- upvalues: var6 (write), t_1 (ref), var7 (write), weakMap (ref)
-	var6 = t_1.new()
-	var7 = weakMap.new()
+	-- upvalues: var1 (write), t_1 (ref), var2 (write), weakMap (ref)
+	var1 = t_1.new()
+	var2 = weakMap.new()
 end
 
 return t

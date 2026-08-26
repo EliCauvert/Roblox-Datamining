@@ -7,7 +7,7 @@ local edpStoreClicksDetectorThrottlingHundredthsPercent = game:DefineFastInt("Ed
 local edpStoreImpressionsDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreImpressionsDetectorThrottlingHundredthsPercent", 0)
 local t = {}
 
-local function sendLogEvent(p0)
+local function sendLogEvent(p1)
 	-- upvalues: edpStoreClicksDetectorThrottlingHundredthsPercent (ref), telemetryService (ref)
 	telemetryService:LogEvent({
 		eventName = "experienceStoreProducts",
@@ -15,7 +15,7 @@ local function sendLogEvent(p0)
 		backends = { "EventIngest" },
 		throttlingPercentage = edpStoreClicksDetectorThrottlingHundredthsPercent,
 		lastUpdated = { 25, 10, 23 }
-	}, { customFields = p0 })
+	}, { customFields = p1 })
 end
 
 local function sendImpressionLogEvent(p1)
@@ -29,21 +29,21 @@ local function sendImpressionLogEvent(p1)
 	}, { customFields = p1 })
 end
 
-function t.logEvent(p2, p3, p4, p5, p6, p7, _)
+function t.logEvent(p1, p2, p3, p4, p5, p6, _)
 	-- upvalues: sendLogEvent (ref)
 	sendLogEvent({
-		actionType = p2,
-		productType = p3,
-		locationType = p4,
-		universeId = p5,
-		productId = p6,
-		itemId = p7
+		actionType = p1,
+		productType = p2,
+		locationType = p3,
+		universeId = p4,
+		productId = p5,
+		itemId = p6
 	})
 end
 
-function t.logImpression(p8)
+function t.logImpression(p1)
 	-- upvalues: sendImpressionLogEvent (ref)
-	sendImpressionLogEvent(p8)
+	sendImpressionLogEvent(p1)
 end
 
 function t.logExperienceStoreExposure()

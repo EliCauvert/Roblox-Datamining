@@ -10,17 +10,17 @@ local sentryReporterUtilityModule = require(script.Parent.SentryReporterUtility)
 local constantsModule = require(script.Parent.Constants)
 local iAttributes = errorReportModule.IAttributes
 local iAnnotations = errorReportModule.IAnnotations
-local var8 = runService:IsStudio()
+local var1 = runService:IsStudio()
 
-local function _(p0)
-	local var11 = string.len(p0)
+local function _(p1)
+	local var2 = string.len(p1)
 	
-	if var11 <= 20971520 then
-		return p0, false
+	if var2 <= 20971520 then
+		return p1, false
 	end
-	local formattedText = string.format("[LOG TRUNCATED - Original size: %.2f MB, kept latest %.2f MB]\n\n", var11 / 1048576, 20)
+	local formattedText = string.format("[LOG TRUNCATED - Original size: %.2f MB, kept latest %.2f MB]\n\n", var2 / 1048576, 20)
 	
-	return formattedText .. string.sub(p0, var11 - (20971520 - string.len(formattedText)) + 1), true
+	return formattedText .. string.sub(p1, var2 - (20971520 - string.len(formattedText)) + 1), true
 end
 
 local t = {}
@@ -31,11 +31,11 @@ local _ = function(p1, p2, p3, p4)
 	return client:new({ dsn = p1, environment = p2, release = p3 }, p4)
 end
 
-local _ = function(p5, p6)
-	return string.format("%s | %s", p5 or "", p6 or "")
+local _ = function(p1, p2)
+	return string.format("%s | %s", p1 or "", p2 or "")
 end
 
-local var10 = tModule.strictInterface({
+local var2 = tModule.strictInterface({
 	httpService = tModule.some(tModule.instanceOf("HttpService"), tModule.interface({
 		JSONEncode = tModule.callback,
 		JSONDecode = tModule.callback,
@@ -54,12 +54,12 @@ local var10 = tModule.strictInterface({
 	logAttachmentFailureCallback = tModule.optional(tModule.callback)
 })
 
-function t.new(p7)
-	-- upvalues: var10 (ref), var8 (ref), client (ref), t (ref), errorQueueModule (ref)
-	local var13, var14 = var10(p7)
+function t.new(p1)
+	-- upvalues: var2 (ref), var1 (ref), client (ref), t (ref), errorQueueModule (ref)
+	local var3, var4 = var2(p1)
 	
-	if not var13 then
-		if var8 then
+	if not var3 then
+		if var1 then
 			error("invalid arguments for SentryReporter: " .. var14)
 		else
 			return nil
@@ -69,76 +69,76 @@ function t.new(p7)
 		_isEnabled = true,
 		_errorQueue = nil,
 		_lastLogTime = 0,
-		_httpService = p7.httpService,
-		_processErrorReportMethod = p7.processErrorReportMethod,
+		_httpService = p1.httpService,
+		_processErrorReportMethod = p1.processErrorReportMethod,
 		_sharedAttributes = {},
 		_sharedAnnotations = {},
-		_generateLogMethod = p7.generateLogMethod,
-		_logIntervalInSeconds = p7.logIntervalInSeconds or 5,
-		_dsn = p7.dsn,
-		_environment = p7.environment,
-		_release = p7.release,
+		_generateLogMethod = p1.generateLogMethod,
+		_logIntervalInSeconds = p1.logIntervalInSeconds or 5,
+		_dsn = p1.dsn,
+		_environment = p1.environment,
+		_release = p1.release,
 		_sentryClient = client:new({
-			dsn = p7.dsn,
-			environment = p7.environment,
-			release = p7.release
-		}, p7.httpService),
-		_sentryClientSuccessCallback = p7.sentryClientSuccessCallback or nil,
-		_sentryClientFailureCallback = p7.sentryClientFailureCallback or nil,
-		_logAttachmentSuccessCallback = p7.logAttachmentSuccessCallback or nil,
-		_logAttachmentFailureCallback = p7.logAttachmentFailureCallback or nil
+			dsn = p1.dsn,
+			environment = p1.environment,
+			release = p1.release
+		}, p1.httpService),
+		_sentryClientSuccessCallback = p1.sentryClientSuccessCallback or nil,
+		_sentryClientFailureCallback = p1.sentryClientFailureCallback or nil,
+		_logAttachmentSuccessCallback = p1.logAttachmentSuccessCallback or nil,
+		_logAttachmentFailureCallback = p1.logAttachmentFailureCallback or nil
 	}
 	setmetatable(t_1, t)
-	local var16 = errorQueueModule.new(function(_, p8, _)
+	local var5 = errorQueueModule.new(function(_, p2, _)
 		-- upvalues: t_1 (ref)
-		t_1:sendErrorReport(p8.errorReport, p8.log)
-	end, p7.queueOptions)
-	t_1._errorQueue = var16
-	var16:startTimer()
+		t_1:sendErrorReport(p2.errorReport, p2.log)
+	end, p1.queueOptions)
+	t_1._errorQueue = var5
+	var5:startTimer()
 	
 	return t_1
 end
 
 function t.isTooOldToReportErrors(_)
 	-- upvalues: runService (ref), fIntOldestUAVersionToReportErrorsModule (ref)
-	local var17 = tonumber(string.match(runService:GetRobloxVersion(), ".(%d+)."))
+	local var3 = tonumber(string.match(runService:GetRobloxVersion(), ".(%d+)."))
 	
-	return if var17 then var17 < fIntOldestUAVersionToReportErrorsModule else false
+	return if var3 then var3 < fIntOldestUAVersionToReportErrorsModule else false
 end
 
-function t:_sendLogAttachment(p9, p10)
-	-- upvalues: var8 (ref)
-	local var20, var21
-	local var18 = string.len(p10)
-	local var19 = string.len(p10)
+function t:_sendLogAttachment(p1, p2)
+	-- upvalues: var1 (ref)
+	local var3, var4
+	local var5 = string.len(p2)
+	local var6 = string.len(p2)
 	
-	if var19 <= 20971520 then
-		var20 = p10
-		var21 = false
+	if var6 <= 20971520 then
+		var3 = p2
+		var4 = false
 	else
-		local formattedText = string.format("[LOG TRUNCATED - Original size: %.2f MB, kept latest %.2f MB]\n\n", var19 / 1048576, 20)
-		var20 = formattedText .. string.sub(p10, var19 - (20971520 - string.len(formattedText)) + 1)
-		var21 = true
+		local formattedText = string.format("[LOG TRUNCATED - Original size: %.2f MB, kept latest %.2f MB]\n\n", var6 / 1048576, 20)
+		var3 = formattedText .. string.sub(p2, var6 - (20971520 - string.len(formattedText)) + 1)
+		var4 = true
 	end
-	if var21 and var8 then
-		print("[Sentry] " .. string.format("Log attachment truncated: original %.2f MB, sending latest %.2f MB", var18 / 1048576, 20))
+	if var4 and var1 then
+		print("[Sentry] " .. string.format("Log attachment truncated: original %.2f MB, sending latest %.2f MB", var5 / 1048576, 20))
 	end
 	local list = {
 		{
 			filename = "app.log",
 			content_type = "text/plain",
-			data = var20
+			data = var3
 		}
 	}
 	
-	if var8 and not var21 then
-		print("[Sentry] " .. string.format("Sending log attachment for event: %s (%.2f KB)", p9, var18 / 1024))
+	if var1 and not var4 then
+		print("[Sentry] " .. string.format("Sending log attachment for event: %s (%.2f KB)", p1, var5 / 1024))
 	end
-	self._sentryClient:send_event_with_attachments(p9, list, function(p11, p12, _)
-		-- upvalues: var8 (copy), p9 (ref), self (ref)
-		if p11 then
-			if var8 then
-				print("[Sentry] Successfully attached log to event:", p9)
+	self._sentryClient:send_event_with_attachments(p1, list, function(p3, p4, _)
+		-- upvalues: var1 (copy), p1 (ref), self (ref)
+		if p3 then
+			if var1 then
+				print("[Sentry] Successfully attached log to event:", p1)
 			end
 			if self._logAttachmentSuccessCallback == nil then
 				return
@@ -147,63 +147,63 @@ function t:_sendLogAttachment(p9, p10)
 				
 				return
 			end
-		elseif var8 then
-			local var24 = type(p12) ~= "table" and ((if type(p12) ~= "table" then p12.error else nil) or "unknown error")
-			warn("[Sentry] Failed to attach log:", var24)
+		elseif var1 then
+			local var7 = type(p4) ~= "table" and ((if type(p4) ~= "table" then p4.error else nil) or "unknown error")
+			warn("[Sentry] Failed to attach log:", var7)
 		end
 		if self._logAttachmentFailureCallback ~= nil then
-			self._logAttachmentFailureCallback(p12)
+			self._logAttachmentFailureCallback(p4)
 		end
 	end)
 end
 
-function t:_handleSentryExceptionCallback(p13, p14, p15, p16)
-	-- upvalues: var8 (ref)
-	if p13 then
-		if var8 then
-			print("[Sentry] Successfully reported error to Sentry:", p15)
+function t:_handleSentryExceptionCallback(p1, p2, p3, p4)
+	-- upvalues: var1 (ref)
+	if p1 then
+		if var1 then
+			print("[Sentry] Successfully reported error to Sentry:", p3)
 		end
 		if self._sentryClientSuccessCallback ~= nil then
 			self._sentryClientSuccessCallback()
 		end
-		if p16 and p15 then
-			self:_sendLogAttachment(p15, p16)
+		if p4 and p3 then
+			self:_sendLogAttachment(p3, p4)
 			
 			return
 		end
-	elseif var8 then
-		local var25 = type(p14) ~= "table" and ((if type(p14) ~= "table" then p14.error else nil) or "unknown error")
-		warn("[Sentry] Failed to report error to Sentry:", var25)
+	elseif var1 then
+		local var3 = type(p2) ~= "table" and ((if type(p2) ~= "table" then p2.error else nil) or "unknown error")
+		warn("[Sentry] Failed to report error to Sentry:", var3)
 	end
 	if self._sentryClientFailureCallback ~= nil then
-		self._sentryClientFailureCallback(p14)
+		self._sentryClientFailureCallback(p2)
 	end
 end
 
-function t:sendErrorReport(p17, p18)
-	-- upvalues: var8 (ref), constantsModule (ref), sentryReporterUtilityModule (ref)
+function t:sendErrorReport(p1, p2)
+	-- upvalues: var1 (ref), constantsModule (ref), sentryReporterUtilityModule (ref)
 	if not self._isEnabled then return end
 	if self:isTooOldToReportErrors() then return end
-	if var8 then
-		assert(p17:validate())
+	if var1 then
+		assert(p1:validate())
 	end
-	local message = p17.message or "Unknown error message"
-	local level = p17.level or constantsModule.DEFAULT_ERROR_LEVEL
-	local var28 = sentryReporterUtilityModule.parseErrorToContext(p17)
-	local var29 = sentryReporterUtilityModule.parseThreadsToSentry(p17.threads)
+	local message = p1.message or "Unknown error message"
+	local level = p1.level or constantsModule.DEFAULT_ERROR_LEVEL
+	local var3 = sentryReporterUtilityModule.parseErrorToContext(p1)
+	local var4 = sentryReporterUtilityModule.parseThreadsToSentry(p1.threads)
 	local stacktrace = nil
 	
-	if var29 and var29.values then
-		for i, v in ipairs(var29.values) do
+	if var4 and var4.values then
+		for i, v in ipairs(var4.values) do
 			if v.main == true or v.crashed == true then
 				stacktrace = v.stacktrace
 				break
 			end
 		end
 	end
-	if var8 then
-		print("[Sentry] Report Context:", var28)
-		print("[Sentry] Threads:", var29)
+	if var1 then
+		print("[Sentry] Report Context:", var3)
+		print("[Sentry] Threads:", var4)
 		print("[Sentry] Main Stacktrace:", stacktrace)
 		print("[Sentry] Level:", level)
 	end
@@ -211,14 +211,14 @@ function t:sendErrorReport(p17, p18)
 		type = "LuaError",
 		message = message,
 		stacktrace = stacktrace
-	}, level, var28, var29, function(p19, p20, p21)
-		-- upvalues: self (ref), p18 (ref)
-		self:_handleSentryExceptionCallback(p19, p20, p21, p18)
+	}, level, var3, var4, function(p3, p4, p5)
+		-- upvalues: self (ref), p2 (ref)
+		self:_handleSentryExceptionCallback(p3, p4, p5, p2)
 	end)
 end
 
-function t._sendLogToReport(_, _, p22)
-	if type(p22) == "string" and #p22 ~= 0 then
+function t._sendLogToReport(_, _, p3)
+	if type(p3) == "string" and #p3 ~= 0 then
 		pcall(function() end)
 		
 		return
@@ -237,50 +237,50 @@ function t:_generateLog()
 	end
 end
 
-function t:_generateErrorReport(p23, p24, p25, p26, p27)
+function t:_generateErrorReport(p3, p4, p5, p6, p7)
 	-- upvalues: cryoModule (ref), errorReportModule (ref)
-	local var30
+	local var5
 	local _ = nil
 	
-	if type(p25) == "table" then
-		var30 = errorReportModule.fromDetails(if p27 ~= nil then p25 else cryoModule.Dictionary.join(p25, { level = p27 }))
+	if type(p5) == "table" then
+		var5 = errorReportModule.fromDetails(if p7 ~= nil then p5 else cryoModule.Dictionary.join(p5, { level = p7 }))
 	else
-		var30 = errorReportModule.fromMessageAndStack(p23, p24, p27)
+		var5 = errorReportModule.fromMessageAndStack(p3, p4, p7)
 		
-		if type(p25) == "string" then
-			var30:addAnnotations({ stackDetails = p25 })
+		if type(p5) == "string" then
+			var5:addAnnotations({ stackDetails = p5 })
 		end
 	end
-	if p26 ~= nil then
-		var30:addCustomMetadata(p26)
+	if p6 ~= nil then
+		var5:addCustomMetadata(p6)
 	end
-	var30:addAttributes(self._sharedAttributes)
+	var5:addAttributes(self._sharedAttributes)
 	
 	if self._sharedAnnotations and next(self._sharedAnnotations) ~= nil then
-		var30:addAnnotations(self._sharedAnnotations)
+		var5:addAnnotations(self._sharedAnnotations)
 	end
 	if self._processErrorReportMethod ~= nil then
-		var30 = self._processErrorReportMethod(var30)
+		var5 = self._processErrorReportMethod(var5)
 	end
-	return var30, self:_generateLog()
+	return var5, self:_generateLog()
 end
 
-function t:reportErrorImmediately(p28, p29, p30, p31, p32)
+function t:reportErrorImmediately(p3, p4, p5, p6, p7)
 	if self._isEnabled then
-		local var31, var32 = self:_generateErrorReport(p28, p29, p30, p31, p32)
-		self:sendErrorReport(var31, var32)
+		local var5, var6 = self:_generateErrorReport(p3, p4, p5, p6, p7)
+		self:sendErrorReport(var5, var6)
 		
 		return
 	end
 end
 
-function t:reportErrorDeferred(p33, p34, p35, p36, p37)
+function t:reportErrorDeferred(p3, p4, p5, p6, p7)
 	if not self._isEnabled then return end
-	local formattedText = string.format("%s | %s", p33 or "", p34 or "")
+	local formattedText = string.format("%s | %s", p3 or "", p4 or "")
 	local t = { errorReport = nil, log = nil }
 	
 	if not self._errorQueue:hasError(formattedText) then
-		var35, formattedText = self:_generateErrorReport(p33, p34, p35, p36, p37)
+		var35, formattedText = self:_generateErrorReport(p3, p4, p5, p6, p7)
 		t = { errorReport = var35, log = formattedText }
 	end
 	self._errorQueue:addError(formattedText, t)
@@ -301,42 +301,42 @@ function t:stop()
 	end
 end
 
-function t:updateSharedAttributes(p38)
-	-- upvalues: cryoModule (ref), iAttributes (ref), var8 (ref)
-	local var36 = cryoModule.Dictionary.join(self._sharedAttributes, p38)
-	local var37, var38 = iAttributes(var36)
+function t:updateSharedAttributes(p3)
+	-- upvalues: cryoModule (ref), iAttributes (ref), var1 (ref)
+	local var5 = cryoModule.Dictionary.join(self._sharedAttributes, p3)
+	local var6, var7 = iAttributes(var5)
 	
-	if not var37 then
-		if var8 then
-			assert(var37, var38)
+	if not var6 then
+		if var1 then
+			assert(var6, var7)
 		else
 			return
 		end
 	end
-	self._sharedAttributes = var36
+	self._sharedAttributes = var5
 end
 
-function t:setTag(p39, p40)
-	self._sentryClient:set_tag(p39, p40)
+function t:setTag(p3, p4)
+	self._sentryClient:set_tag(p3, p4)
 end
 
-function t:setUser(p41)
-	self._sentryClient:set_user(p41)
+function t:setUser(p3)
+	self._sentryClient:set_user(p3)
 end
 
-function t:updateSharedAnnotations(p42)
-	-- upvalues: cryoModule (ref), iAnnotations (ref), var8 (ref)
-	local var39 = cryoModule.Dictionary.join(self._sharedAnnotations, p42)
-	local var40, var41 = iAnnotations(var39)
+function t:updateSharedAnnotations(p3)
+	-- upvalues: cryoModule (ref), iAnnotations (ref), var1 (ref)
+	local var5 = cryoModule.Dictionary.join(self._sharedAnnotations, p3)
+	local var6, var7 = iAnnotations(var5)
 	
-	if not var40 then
-		if var8 then
-			assert(var40, var41)
+	if not var6 then
+		if var1 then
+			assert(var6, var7)
 		else
 			return
 		end
 	end
-	self._sharedAnnotations = var39
+	self._sharedAnnotations = var5
 end
 
 return t

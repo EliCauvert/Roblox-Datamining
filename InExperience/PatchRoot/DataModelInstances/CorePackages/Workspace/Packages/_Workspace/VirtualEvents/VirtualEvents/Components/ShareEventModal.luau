@@ -15,20 +15,20 @@ local button = UIBloxModule.App.Button.Button
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local useStyle = UIBloxModule.Core.Style.useStyle
 
-local function selectScreenSize(p0)
-	return p0.ScreenSize
+local function selectScreenSize(p1)
+	return p1.ScreenSize
 end
 
 return function(p1)
 	-- upvalues: useStyle (ref), useSelector (ref), selectScreenSize (ref), useNavigation (ref), reactModule (ref), urlBuilder (ref), useLocalization (ref), partialPageModal (ref), uDim (ref), styledTextLabel (ref), uDim_2 (ref), uDim_1 (ref), selectableTextLabelModule (ref), button (ref), buttonType (ref)
-	local var8 = useStyle()
-	local var9 = useSelector(selectScreenSize)
-	local var10 = useNavigation()
-	local var11 = reactModule.useMemo(function()
+	local var1 = useStyle()
+	local var2 = useSelector(selectScreenSize)
+	local var3 = useNavigation()
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: urlBuilder (copy), p1 (ref)
 		return urlBuilder.virtualevents.appsflyer({ eventId = p1.virtualEventId })
 	end, { p1.virtualEventId })
-	local var12 = useLocalization({
+	local var5 = useLocalization({
 		title = "Feature.VirtualEvents.ShareModalTitle",
 		body = "Feature.VirtualEvents.ShareModalBody",
 		copyLink = "Feature.VirtualEvents.ShareModalLinkCopy",
@@ -36,17 +36,17 @@ return function(p1)
 	})
 	
 	return reactModule.createElement(partialPageModal, {
-		title = var12.title,
-		screenSize = var9,
+		title = var5.title,
+		screenSize = var2,
 		contentPadding = uDim,
 		onCloseClicked = reactModule.useCallback(function()
-			-- upvalues: var10 (ref), p1 (ref)
-			var10.goBack()
+			-- upvalues: var3 (ref), p1 (ref)
+			var3.goBack()
 			
 			if p1.onClose then
 				p1.onClose()
 			end
-		end, { p1, var10 })
+		end, { p1, var3 })
 	}, {
 		Wrapper = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -58,9 +58,9 @@ return function(p1)
 			Body = reactModule.createElement(styledTextLabel, {
 				layoutOrder = 1,
 				fluidSizing = false,
-				text = var12.body,
-				fontStyle = var8.Font.Body,
-				colorStyle = var8.Theme.TextMuted,
+				text = var5.body,
+				fontStyle = var1.Font.Body,
+				colorStyle = var1.Theme.TextMuted,
 				size = UDim2.new(1, 0, 0, 40)
 			}),
 			Deeplink = reactModule.createElement("Frame", {
@@ -79,10 +79,10 @@ return function(p1)
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(0.8, 0) - UDim2.fromOffset(uDim.Offset, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
-					BackgroundColor3 = var8.Theme.UIMuted.Color
+					BackgroundColor3 = var1.Theme.UIMuted.Color
 				}, {
 					Corner = reactModule.createElement("UICorner", { CornerRadius = uDim_2 }),
-					Border = reactModule.createElement("UIStroke", { Color = var8.Theme.UIDefault.Color }),
+					Border = reactModule.createElement("UIStroke", { Color = var1.Theme.UIDefault.Color }),
 					Padding = reactModule.createElement("UIPadding", {
 						PaddingTop = uDim_1,
 						PaddingRight = uDim_1,
@@ -90,24 +90,24 @@ return function(p1)
 						PaddingLeft = uDim_1
 					}),
 					Label = reactModule.createElement(selectableTextLabelModule, {
-						fontStyle = var8.Font.Body,
-						colorStyle = var8.Theme.TextMuted,
+						fontStyle = var1.Font.Body,
+						colorStyle = var1.Theme.TextMuted,
 						Size = UDim2.fromScale(1, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						Text = var11
+						Text = var4
 					})
 				}),
 				Action = reactModule.createElement(button, {
 					layoutOrder = 2,
 					buttonType = buttonType.PrimarySystem,
-					text = var12.copyLink,
+					text = var5.copyLink,
 					size = UDim2.new(0.2, 0, 0, 32),
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: p1 (ref), var11 (ref)
+						-- upvalues: p1 (ref), var4 (ref)
 						if p1.onCopy then
-							p1.onCopy(var11)
+							p1.onCopy(var4)
 						end
-					end, { var11, p1.onCopy })
+					end, { var4, p1.onCopy })
 				})
 			})
 		})

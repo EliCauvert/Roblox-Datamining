@@ -8,13 +8,13 @@ local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
 local gamepadConnectorModule = require(script.Parent.GamepadConnector)
 local scrim = coreScriptsRoactCommonModule.Scrim
 local fFlagEnableUISelector = coreGuiCommonModule.Flags.FFlagEnableUISelector
-local var8 = if fFlagEnableUISelector then coreGuiCommonModule.Stores.GetUiSelectorSignalStore else nil
+local var1 = if fFlagEnableUISelector then coreGuiCommonModule.Stores.GetUiSelectorSignalStore else nil
 
 local function createComputedScrimVisible()
-	-- upvalues: signalsModule (ref), gamepadConnectorModule (ref), expChatModule (ref), fFlagEnableUISelector (ref), var8 (ref)
-	return signalsModule.createComputed(function(p0)
-		-- upvalues: gamepadConnectorModule (copy), expChatModule (copy), fFlagEnableUISelector (copy), var8 (copy)
-		return gamepadConnectorModule:topBarFocused(p0) or (expChatModule.Stores.GetFocusNavigationStore(p0).getChatInputBarFocused(p0) or fFlagEnableUISelector and var8(p0).getVisibility(p0))
+	-- upvalues: signalsModule (ref), gamepadConnectorModule (ref), expChatModule (ref), fFlagEnableUISelector (ref), var1 (ref)
+	return signalsModule.createComputed(function(p1)
+		-- upvalues: gamepadConnectorModule (copy), expChatModule (copy), fFlagEnableUISelector (copy), var1 (copy)
+		return gamepadConnectorModule:topBarFocused(p1) or (expChatModule.Stores.GetFocusNavigationStore(p1).getChatInputBarFocused(p1) or fFlagEnableUISelector and var1(p1).getVisibility(p1))
 	end)
 end
 

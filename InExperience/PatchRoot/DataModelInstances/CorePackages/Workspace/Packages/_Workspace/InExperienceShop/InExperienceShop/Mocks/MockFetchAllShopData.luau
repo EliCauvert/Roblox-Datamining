@@ -8,23 +8,23 @@ local mockMultiGetProductInfoModule = require(inExperienceShop.Mocks.MockMultiGe
 local fFlagShopUseMockMultiGetProductInfoModule = require(inExperienceShop.Flags.FFlagShopUseMockMultiGetProductInfo)
 
 return {
-	fetchAllShopData = function(p0)
+	fetchAllShopData = function(p1)
 		-- upvalues: mockShopItemIdsModule (ref), buildShopDataFromWidgetsModule (ref), fFlagShopUseMockMultiGetProductInfoModule (ref), mockMultiGetProductInfoModule (ref), multiGetProductInfoModule (ref)
-		local var6 = if p0 ~= nil then 0.5 else p0
+		local var1 = if p1 ~= nil then 0.5 else p1
 		
-		return mockShopItemIdsModule.getShopItemIds(var6):andThen(function(p1)
-			-- upvalues: buildShopDataFromWidgetsModule (copy), fFlagShopUseMockMultiGetProductInfoModule (copy), mockMultiGetProductInfoModule (copy), var6 (ref), multiGetProductInfoModule (copy)
-			return buildShopDataFromWidgetsModule(p1, function(p2)
-				-- upvalues: fFlagShopUseMockMultiGetProductInfoModule (copy), mockMultiGetProductInfoModule (copy), var6 (copy), multiGetProductInfoModule (copy)
-				return if fFlagShopUseMockMultiGetProductInfoModule then mockMultiGetProductInfoModule.multiGetProductInfo(p2, var6) else multiGetProductInfoModule(p2)
+		return mockShopItemIdsModule.getShopItemIds(var1):andThen(function(p2)
+			-- upvalues: buildShopDataFromWidgetsModule (copy), fFlagShopUseMockMultiGetProductInfoModule (copy), mockMultiGetProductInfoModule (copy), var1 (ref), multiGetProductInfoModule (copy)
+			return buildShopDataFromWidgetsModule(p2, function(p3)
+				-- upvalues: fFlagShopUseMockMultiGetProductInfoModule (copy), mockMultiGetProductInfoModule (copy), var1 (copy), multiGetProductInfoModule (copy)
+				return if fFlagShopUseMockMultiGetProductInfoModule then mockMultiGetProductInfoModule.multiGetProductInfo(p3, var1) else multiGetProductInfoModule(p3)
 			end)
 		end)
 	end,
-	fetchShopWidgetsOnly = function(p3)
+	fetchShopWidgetsOnly = function(p1)
 		-- upvalues: mockShopItemIdsModule (ref), buildShopDataFromWidgetsModule (ref)
-		return mockShopItemIdsModule.getShopItemIds(if p3 ~= nil then 0.5 else p3):andThen(function(p4)
+		return mockShopItemIdsModule.getShopItemIds(if p1 ~= nil then 0.5 else p1):andThen(function(p2)
 			-- upvalues: buildShopDataFromWidgetsModule (copy)
-			return buildShopDataFromWidgetsModule(p4, nil)
+			return buildShopDataFromWidgetsModule(p2, nil)
 		end)
 	end
 }

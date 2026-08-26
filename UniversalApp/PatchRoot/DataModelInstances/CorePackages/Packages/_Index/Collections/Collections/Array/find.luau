@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p0, p1)
-	for i = 1, #p0 do
-		local var0 = p0[i]
+return function(p1, p2)
+	for i = 1, #p1 do
+		local var1 = p1[i]
 		
-		if not p1(var0, i, p0) then
+		if not p2(var1, i, p1) then
 			continue
 		end
-		return var0
+		return var1
 	end
 	return nil
 end

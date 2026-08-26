@@ -52,26 +52,26 @@ local function _()
 	return if localPlayer then localPlayer.UserId else 0
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), reactModule (ref), appChatNetworkingModule (ref), playersService (ref), name (ref), defaultTwoStepReportFlow (ref), list (ref)
-	local var6 = useDispatch()
+	local var1 = useDispatch()
 	
 	return reactModule.createElement(defaultTwoStepReportFlow, {
 		analyticsContext = "AppChat",
 		onSubmitProps = {
 			hasNextSteps = false,
-			onSubmit = reactModule.useCallback(function(p1, p2)
-				-- upvalues: var6 (ref), appChatNetworkingModule (copy), p0 (ref), playersService (copy), name (copy)
+			onSubmit = reactModule.useCallback(function(p2, p3)
+				-- upvalues: var1 (ref), appChatNetworkingModule (copy), p1 (ref), playersService (copy), name (copy)
 				local API = appChatNetworkingModule.rodux.SubmitAppChatAbuseReport.API
 				local t = {
-					comment = p2,
-					reportedUserId = p0.participantId,
-					reportCategory = p1,
-					conversationId = p0.conversationId
+					comment = p3,
+					reportedUserId = p1.participantId,
+					reportCategory = p2,
+					conversationId = p1.conversationId
 				}
 				local localPlayer = playersService.LocalPlayer
 				t.submitterUserId = if localPlayer then localPlayer.UserId else 0
-				var8, API = var6(API(t)):await()
+				var8, API = var1(API(t)):await()
 				
 				if var8 then
 					name:info("Abuse report submitted successfully. Response: {}", tostring(API))
@@ -81,10 +81,10 @@ return function(p0)
 				name:error("Failed to submit abuse report. Response: {}", tostring(API))
 				
 				return var8
-			end, { var6, p0.conversationId, p0.participantId })
+			end, { var1, p1.conversationId, p1.participantId })
 		},
-		onCloseProps = { hasPreviousSteps = false, onAbandon = p0.onAbandon },
-		onComplete = p0.onComplete,
+		onCloseProps = { hasPreviousSteps = false, onAbandon = p1.onAbandon },
+		onComplete = p1.onComplete,
 		reportCategories = list
 	})
 end

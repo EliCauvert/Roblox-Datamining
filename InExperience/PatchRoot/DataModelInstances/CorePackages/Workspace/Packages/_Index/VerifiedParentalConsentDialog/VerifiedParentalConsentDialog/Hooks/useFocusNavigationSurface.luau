@@ -9,48 +9,48 @@ local useLastInputMethod = focusNavigationUtilsModule.useLastInputMethod
 local useAutoFocus = focusNavigationUtilsModule.useAutoFocus
 local useDescendantHasFocus = focusNavigationUtilsModule.useDescendantHasFocus
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useRegisterFocusNavigableSurface (ref), useDeRegisterFocusNavigableSurface (ref), useAutoFocus (ref), useDescendantHasFocus (ref), useLastInputMethod (ref), guiService (ref)
-	local var3, var4 = reactModule.useState(nil)
-	local var5 = useRegisterFocusNavigableSurface()
-	local var6 = useDeRegisterFocusNavigableSurface()
-	local var7 = useAutoFocus({ var3 }, 0.1)
-	local var8 = useDescendantHasFocus(var3)
-	local var9 = useLastInputMethod()
-	local var10 = if var9 ~= "Gamepad" then var9 == "Keyboard" else true
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = useRegisterFocusNavigableSurface()
+	local var4 = useDeRegisterFocusNavigableSurface()
+	local var5 = useAutoFocus({ var1 }, 0.1)
+	local var6 = useDescendantHasFocus(var1)
+	local var7 = useLastInputMethod()
+	local var8 = if var7 ~= "Gamepad" then var7 == "Keyboard" else true
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var5 (ref), p0 (ref), guiService (copy), var6 (ref)
-		if var3 then
-			var5(p0.focusNavigableSurfaceIdentifier, var3)
-			guiService:AddSelectionParent(p0.selectionGroupName, var3)
+		-- upvalues: var1 (ref), var3 (ref), p1 (ref), guiService (copy), var4 (ref)
+		if var1 then
+			var3(p1.focusNavigableSurfaceIdentifier, var1)
+			guiService:AddSelectionParent(p1.selectionGroupName, var1)
 		else
-			var6(p0.focusNavigableSurfaceIdentifier, var3)
-			guiService:RemoveSelectionGroup(p0.selectionGroupName)
+			var4(p1.focusNavigableSurfaceIdentifier, var1)
+			guiService:RemoveSelectionGroup(p1.selectionGroupName)
 			guiService.SelectedCoreObject = nil
 		end
 		return function()
-			-- upvalues: var6 (copy), p0 (copy), var3 (copy), guiService (copy)
-			var6(p0.focusNavigableSurfaceIdentifier, var3)
-			guiService:RemoveSelectionGroup(p0.selectionGroupName)
+			-- upvalues: var4 (copy), p1 (copy), var1 (copy), guiService (copy)
+			var4(p1.focusNavigableSurfaceIdentifier, var1)
+			guiService:RemoveSelectionGroup(p1.selectionGroupName)
 			guiService.SelectedCoreObject = nil
 		end
 	end, {
-		var3,
-		p0.focusNavigableSurfaceIdentifier,
-		p0.selectionGroupName
+		var1,
+		p1.focusNavigableSurfaceIdentifier,
+		p1.selectionGroupName
 	})
-	local var11 = var10 and (var3 and not var8)
+	local var9 = var8 and (var1 and not var6)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var7 (ref)
-		local var12 = if var11 then var7() else nil
+		-- upvalues: var9 (ref), var5 (ref)
+		local var10 = if var9 then var5() else nil
 		
 		return function()
-			-- upvalues: var12 (write)
-			if var12 then
-				var12.cancel()
+			-- upvalues: var10 (write)
+			if var10 then
+				var10.cancel()
 			end
 		end
-	end, { var11, var7 })
+	end, { var9, var5 })
 	
-	return var4
+	return var2
 end

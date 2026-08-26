@@ -5,40 +5,40 @@ local fetchExperienceGuidelinesModule = require(script.Parent.fetchExperienceGui
 local syncGuidelinesAgeToGameStores = require(script.Parent.syncGuidelinesAgeToGameStores).syncGuidelinesAgeToGameStores
 local _ = require(script.Parent.ExperienceGuidelinesStoreTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createSingleEntityResolverModule (ref), fetchExperienceGuidelinesModule (ref), syncGuidelinesAgeToGameStores (ref)
-	p0 = p0 or {}
-	local t = { network = p0.network, baseUrl = p0.baseUrl }
-	local var5 = createSingleEntityResolverModule(function(p1)
+	p1 = p1 or {}
+	local t = { network = p1.network, baseUrl = p1.baseUrl }
+	local var1 = createSingleEntityResolverModule(function(p2)
 		-- upvalues: fetchExperienceGuidelinesModule (copy), t (ref), syncGuidelinesAgeToGameStores (copy)
-		return fetchExperienceGuidelinesModule.fetchDetailedGuidelines(p1, t):andThen(function(p2)
-			-- upvalues: syncGuidelinesAgeToGameStores (copy), p1 (ref)
-			syncGuidelinesAgeToGameStores(p1, p2)
+		return fetchExperienceGuidelinesModule.fetchDetailedGuidelines(p2, t):andThen(function(p3)
+			-- upvalues: syncGuidelinesAgeToGameStores (copy), p2 (ref)
+			syncGuidelinesAgeToGameStores(p2, p3)
 			
-			return p2
+			return p3
 		end)
 	end)
 	
 	return {
-		getDetailedGuidelines = var5.get,
-		fetchDetailedGuidelines = var5.fetch,
-		refreshDetailedGuidelines = function(p3)
-			-- upvalues: fetchExperienceGuidelinesModule (copy), t (ref), var5 (ref), syncGuidelinesAgeToGameStores (copy)
-			return fetchExperienceGuidelinesModule.fetchDetailedGuidelines(p3, t):andThen(function(p4)
-				-- upvalues: var5 (copy), p3 (ref), syncGuidelinesAgeToGameStores (copy)
-				var5.cache.replaceItem(tostring(p3), p4)
-				syncGuidelinesAgeToGameStores(p3, p4)
+		getDetailedGuidelines = var1.get,
+		fetchDetailedGuidelines = var1.fetch,
+		refreshDetailedGuidelines = function(p2)
+			-- upvalues: fetchExperienceGuidelinesModule (copy), t (ref), var1 (ref), syncGuidelinesAgeToGameStores (copy)
+			return fetchExperienceGuidelinesModule.fetchDetailedGuidelines(p2, t):andThen(function(p3)
+				-- upvalues: var1 (copy), p2 (ref), syncGuidelinesAgeToGameStores (copy)
+				var1.cache.replaceItem(tostring(p2), p3)
+				syncGuidelinesAgeToGameStores(p2, p3)
 				
-				return p4
+				return p3
 			end)
 		end,
-		getAndFetchDetailedGuidelines = var5.getAndFetch,
-		updateDetailedGuidelines = function(p5, p6)
-			-- upvalues: var5 (ref), syncGuidelinesAgeToGameStores (copy)
-			var5.update(p5, p6)
-			syncGuidelinesAgeToGameStores(p5, p6)
+		getAndFetchDetailedGuidelines = var1.getAndFetch,
+		updateDetailedGuidelines = function(p2, p3)
+			-- upvalues: var1 (ref), syncGuidelinesAgeToGameStores (copy)
+			var1.update(p2, p3)
+			syncGuidelinesAgeToGameStores(p2, p3)
 		end,
-		clear = var5.clear,
-		dispose = var5.dispose
+		clear = var1.clear,
+		dispose = var1.dispose
 	}
 end

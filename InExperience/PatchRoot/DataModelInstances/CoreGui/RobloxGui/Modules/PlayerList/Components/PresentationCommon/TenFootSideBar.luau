@@ -12,8 +12,8 @@ local isNewInGameMenuEnabledModule = require(coreGuiService.RobloxGui.Modules.is
 local robloxGui = coreGuiService:WaitForChild("RobloxGui")
 local tenFootSideBar = roactModule.PureComponent:extend("TenFootSideBar")
 
-function tenFootSideBar.init(p0)
-	p0.sideBar = nil
+function tenFootSideBar.init(p1)
+	p1.sideBar = nil
 end
 
 function tenFootSideBar.render(_)
@@ -22,9 +22,9 @@ end
 
 function tenFootSideBar.openSidebar(p1, p2)
 	-- upvalues: runService (ref), playersService (ref), guiService (ref), robloxGui (ref), isNewInGameMenuEnabledModule (ref)
-	local var12 = not runService:IsStudio() and p2 ~= playersService.LocalPlayer
+	local var1 = not runService:IsStudio() and p2 ~= playersService.LocalPlayer
 	
-	if not var12 then
+	if not var1 then
 		p1.props.closeSideBar()
 		
 		return
@@ -38,7 +38,7 @@ function tenFootSideBar.openSidebar(p1, p2)
 	end
 	p1.sideBar:RemoveAllItems()
 	
-	if var12 then
+	if var1 then
 		p1.sideBar:AddItem(unknownModule_1:LocStringUA("Xbox.Old.ReportPlayer"), function()
 			-- upvalues: p1 (ref), guiService (copy), isNewInGameMenuEnabledModule (copy), robloxGui (copy), p2 (ref)
 			p1.props.closePlayerList()
@@ -71,38 +71,38 @@ function tenFootSideBar.openSidebar(p1, p2)
 	unknownModule:OpenScreen(p1.sideBar, false)
 end
 
-function tenFootSideBar.didMount(p3)
-	if p3.props.sideBarVisible then
-		p3:openSidebar(p3.props.selectedPlayer)
+function tenFootSideBar.didMount(p1)
+	if p1.props.sideBarVisible then
+		p1:openSidebar(p1.props.selectedPlayer)
 	end
 end
 
-function tenFootSideBar.didUpdate(p4, p5)
-	if p4.props.sideBarVisible and p4.props.sideBarVisible ~= p5.sideBarVisible then
-		p4:openSidebar(p4.props.selectedPlayer)
+function tenFootSideBar.didUpdate(p1, p2)
+	if p1.props.sideBarVisible and p1.props.sideBarVisible ~= p2.sideBarVisible then
+		p1:openSidebar(p1.props.selectedPlayer)
 	end
 end
 
-return roactRoduxModule.connect(function(p6)
+return roactRoduxModule.connect(function(p1)
 	return {
-		selectedPlayer = p6.playerDropDown.selectedPlayer,
-		sideBarVisible = p6.displayOptions.isTenFootInterface and p6.playerDropDown.isVisible,
-		playerListVisible = p6.displayOptions.isVisible
+		selectedPlayer = p1.playerDropDown.selectedPlayer,
+		sideBarVisible = p1.displayOptions.isTenFootInterface and p1.playerDropDown.isVisible,
+		playerListVisible = p1.displayOptions.isVisible
 	}
-end, function(p7)
+end, function(p1)
 	-- upvalues: closePlayerDropDownModule (ref), setPlayerListVisibilityModule (ref)
 	return {
 		closeSideBar = function()
-			-- upvalues: p7 (ref), closePlayerDropDownModule (copy)
-			return p7(closePlayerDropDownModule())
+			-- upvalues: p1 (ref), closePlayerDropDownModule (copy)
+			return p1(closePlayerDropDownModule())
 		end,
 		closePlayerList = function()
-			-- upvalues: p7 (ref), setPlayerListVisibilityModule (copy)
-			return p7(setPlayerListVisibilityModule(false))
+			-- upvalues: p1 (ref), setPlayerListVisibilityModule (copy)
+			return p1(setPlayerListVisibilityModule(false))
 		end,
 		openPlayerList = function()
-			-- upvalues: p7 (ref), setPlayerListVisibilityModule (copy)
-			return p7(setPlayerListVisibilityModule(true))
+			-- upvalues: p1 (ref), setPlayerListVisibilityModule (copy)
+			return p1(setPlayerListVisibilityModule(true))
 		end
 	}
 end)(tenFootSideBar)

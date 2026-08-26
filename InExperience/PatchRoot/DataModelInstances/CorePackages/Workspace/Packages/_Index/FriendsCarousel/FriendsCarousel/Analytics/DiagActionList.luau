@@ -40,9 +40,9 @@ return {
 	},
 	[eventNamesModule.PaginatedFriendsCarouselLoadingTime] = {
 		type = diagEventTypes.Stats,
-		name = function(p0)
+		name = function(p1)
 			-- upvalues: fetchNamesModule (ref), t_1 (ref), t (ref), t_2 (ref)
-			return if p0.fetch == fetchNamesModule.AllFriends then if p0.nextPage then t_1[p0.status] else t[p0.status] else t_2[p0.status]
+			return if p1.fetch == fetchNamesModule.AllFriends then if p1.nextPage then t_1[p1.status] else t[p1.status] else t_2[p1.status]
 		end,
 		stats = function(p1)
 			return p1.loadingTime or 0
@@ -50,22 +50,22 @@ return {
 	},
 	[eventNamesModule.FriendsEndpointLoadingTime] = {
 		type = diagEventTypes.Stats,
-		name = function(p2)
+		name = function(p1)
 			-- upvalues: t_3 (ref)
-			return t_3[p2.status]
+			return t_3[p1.status]
 		end,
-		stats = function(p3)
-			return p3.loadingTime or 0
+		stats = function(p1)
+			return p1.loadingTime or 0
 		end
 	},
 	[eventNamesModule.FriendsCarouselUILoadingTime] = {
 		type = diagEventTypes.Stats,
-		name = function(p4)
+		name = function(p1)
 			-- upvalues: friendsCarouselUILoadingTimeStats (ref)
-			return `{friendsCarouselUILoadingTimeStats}_{p4.fetch}`
+			return `{friendsCarouselUILoadingTimeStats}_{p1.fetch}`
 		end,
-		stats = function(p5)
-			return p5.loadingTime or 0
+		stats = function(p1)
+			return p1.loadingTime or 0
 		end
 	},
 	[eventNamesModule.OnlineFriendsRefetchOnPresenceUpdate] = {

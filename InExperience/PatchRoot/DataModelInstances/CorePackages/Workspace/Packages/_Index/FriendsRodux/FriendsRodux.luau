@@ -11,9 +11,9 @@ local enumsModule = require(script.Enums)
 
 return {
 	["jest.config"] = script["jest.config"],
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: llamaModule (ref), parent (ref), roduxNetworkingModule (ref), networkingBlocking (ref), userBlockingNetworkingModule (ref), friendsReducerModule (ref), actionsModule (ref), selectorsModule (ref), modelsModule (ref), enumsModule (ref)
-		p0 = llamaModule.Dictionary.join(p0, {
+		p1 = llamaModule.Dictionary.join(p1, {
 			friendsNetworking = require(parent.FriendsNetworking).config({ roduxNetworking = roduxNetworkingModule.mock() }),
 			networkingBlocking = networkingBlocking.config({ roduxNetworking = roduxNetworkingModule.mock() }),
 			userBlockingNetworking = userBlockingNetworkingModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
@@ -21,11 +21,11 @@ return {
 		
 		return {
 			installReducer = function()
-				-- upvalues: friendsReducerModule (copy), p0 (write)
-				return friendsReducerModule(p0)
+				-- upvalues: friendsReducerModule (copy), p1 (write)
+				return friendsReducerModule(p1)
 			end,
-			Actions = actionsModule(p0),
-			Selectors = selectorsModule(p0),
+			Actions = actionsModule(p1),
+			Selectors = selectorsModule(p1),
 			Models = modelsModule,
 			Enums = enumsModule
 		}

@@ -14,8 +14,8 @@ local presenceType = dependenciesModule.RoduxPresence.Enums.PresenceType
 local react = dependenciesModule.React
 local sharedFlags = dependenciesModule.SharedFlags
 local fFlagSquadsPresenceStoreMigration = require(parent.SquadsCore.Flags).FFlagSquadsPresenceStoreMigration
-local var8 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
-local var9 = if fFlagSquadsPresenceStoreMigration then require(parent.DataHydration).Presence.PresenceEnums.PresenceType else nil
+local var1 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local var2 = if fFlagSquadsPresenceStoreMigration then require(parent.DataHydration).Presence.PresenceEnums.PresenceType else nil
 local images = UIBloxModule.App.ImageSet.Images
 local modalBottomSheet = UIBloxModule.ModalBottomSheet
 local useDispatch = dependenciesModule.Hooks.useDispatch
@@ -61,17 +61,17 @@ local t = {
 	openVoiceAbuseReport = function() end
 }
 
-return function(p0)
-	-- upvalues: cryo (ref), t (ref), react (ref), squadExternalContractContext (ref), useDispatch (ref), useLocalUserId (ref), useStore (ref), useVoiceStatus (ref), fFlagEnableSquadUserCardHoverFix (ref), useSquadUserDropdownMenuButtonsModule (ref), useIsParticipantMutedLocally (ref), useLocalization (ref), constantsModule (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), squadPromptType (ref), getFFlagEnableCrossExpVoice (ref), useBackgroundExperience (ref), useParticipants (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), fFlagSquadsPresenceStoreMigration (ref), var8 (ref), useSelector (ref), var9 (ref), presenceType (ref), gameParams (ref), fFlagSquadLaunchExperienceMobileFix (ref), squadLocationEnum (ref), experienceService (ref), headphoneDeafenSmall (ref), play (ref), leave (ref), profile (ref), feedback (ref), microphoneMute (ref), microphone (ref), default (ref), getFFlagEnableCrossExpVoiceAbuseReport (ref), focusNavigableSurfaceWrapper (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), focusNavigableSurfaceIdentifierEnum (ref), modalBottomSheet (ref)
-	local var14 = cryo.Dictionary.union(t, p0)
-	local var15 = react.useContext(squadExternalContractContext)
-	local var16 = useDispatch()
-	local var17 = useLocalUserId()
-	local var18 = useStore()
-	local var19 = useVoiceStatus()
-	local var20 = if fFlagEnableSquadUserCardHoverFix then useSquadUserDropdownMenuButtonsModule(var14.userId, var14.isInExperience) else nil
-	local var21 = useIsParticipantMutedLocally(tonumber(var14.userId) or -1)
-	local var22 = useLocalization({
+return function(p1)
+	-- upvalues: cryo (ref), t (ref), react (ref), squadExternalContractContext (ref), useDispatch (ref), useLocalUserId (ref), useStore (ref), useVoiceStatus (ref), fFlagEnableSquadUserCardHoverFix (ref), useSquadUserDropdownMenuButtonsModule (ref), useIsParticipantMutedLocally (ref), useLocalization (ref), constantsModule (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), squadPromptType (ref), getFFlagEnableCrossExpVoice (ref), useBackgroundExperience (ref), useParticipants (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), useSelector (ref), var2 (ref), presenceType (ref), gameParams (ref), fFlagSquadLaunchExperienceMobileFix (ref), squadLocationEnum (ref), experienceService (ref), headphoneDeafenSmall (ref), play (ref), leave (ref), profile (ref), feedback (ref), microphoneMute (ref), microphone (ref), default (ref), getFFlagEnableCrossExpVoiceAbuseReport (ref), focusNavigableSurfaceWrapper (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), focusNavigableSurfaceIdentifierEnum (ref), modalBottomSheet (ref)
+	local var3 = cryo.Dictionary.union(t, p1)
+	local var4 = react.useContext(squadExternalContractContext)
+	local var5 = useDispatch()
+	local var6 = useLocalUserId()
+	local var7 = useStore()
+	local var8 = useVoiceStatus()
+	local var9 = if fFlagEnableSquadUserCardHoverFix then useSquadUserDropdownMenuButtonsModule(var3.userId, var3.isInExperience) else nil
+	local var10 = useIsParticipantMutedLocally(tonumber(var3.userId) or -1)
+	local var11 = useLocalization({
 		joinButtonText = "Common.VisitGame.Label.Play",
 		viewProfileText = "Feature.Chat.Label.ViewProfile",
 		reportUserText = "Feature.Chat.Action.ReportUser",
@@ -80,289 +80,289 @@ return function(p0)
 		muteVoiceButtonText = "Feature.Chat.Action.MuteVoice",
 		unmuteVoiceButtonText = "Feature.Chat.Action.UnmuteVoice"
 	})
-	local var23 = var15.useGetConversationFromId(var14.parentChannelId)
-	local var24 = react.useMemo(function()
-		-- upvalues: var23 (ref), constantsModule (copy), var17 (ref)
-		return var23 and (var23.type == constantsModule.CONVERSATION_CHANNEL_GROUP_TYPE and var23.initiator == var17)
-	end, { var23, var17 })
-	local var25 = react.useCallback(function()
-		-- upvalues: var15 (ref), eventNamesModule (copy), var14 (ref), squadPartySheetActionEnumModule (copy), var19 (ref)
-		var15.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
-			parentChannelId = var14.parentChannelId,
+	local var12 = var4.useGetConversationFromId(var3.parentChannelId)
+	local var13 = react.useMemo(function()
+		-- upvalues: var12 (ref), constantsModule (copy), var6 (ref)
+		return var12 and (var12.type == constantsModule.CONVERSATION_CHANNEL_GROUP_TYPE and var12.initiator == var6)
+	end, { var12, var6 })
+	local var14 = react.useCallback(function()
+		-- upvalues: var4 (ref), eventNamesModule (copy), var3 (ref), squadPartySheetActionEnumModule (copy), var8 (ref)
+		var4.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
+			parentChannelId = var3.parentChannelId,
 			actionType = squadPartySheetActionEnumModule.ViewProfileButtonClicked,
-			voiceStatus = var19
+			voiceStatus = var8
 		})
-		var14.openViewProfile()
+		var3.openViewProfile()
 	end, {
-		var14.parentChannelId,
-		var14.openViewProfile,
-		var15.fireSquadAnalytics,
-		var19
+		var3.parentChannelId,
+		var3.openViewProfile,
+		var4.fireSquadAnalytics,
+		var8
 	})
-	local var26 = react.useCallback(function()
-		-- upvalues: var15 (ref), eventNamesModule (copy), var14 (ref), squadPartySheetActionEnumModule (copy), var19 (ref), var18 (ref), squadPromptType (copy), var16 (ref)
-		var15.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
-			parentChannelId = var14.parentChannelId,
+	local var15 = react.useCallback(function()
+		-- upvalues: var4 (ref), eventNamesModule (copy), var3 (ref), squadPartySheetActionEnumModule (copy), var8 (ref), var7 (ref), squadPromptType (copy), var5 (ref)
+		var4.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
+			parentChannelId = var3.parentChannelId,
 			actionType = squadPartySheetActionEnumModule.RemoveUserDropDownButtonClicked,
-			voiceStatus = var19
+			voiceStatus = var8
 		})
-		var15.setSquadPrompt(var18, {
+		var4.setSquadPrompt(var7, {
 			promptType = squadPromptType.RemoveFromChat,
 			onConfirm = function()
-				-- upvalues: var14 (copy), var15 (copy), eventNamesModule (copy), squadPartySheetActionEnumModule (copy), var19 (copy), var16 (copy)
-				if var14.userId == "" or var14.parentChannelId == "" then
+				-- upvalues: var3 (copy), var4 (copy), eventNamesModule (copy), squadPartySheetActionEnumModule (copy), var8 (copy), var5 (copy)
+				if var3.userId == "" or var3.parentChannelId == "" then
 					return nil
 				end
-				var15.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
-					parentChannelId = var14.parentChannelId,
+				var4.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
+					parentChannelId = var3.parentChannelId,
 					actionType = squadPartySheetActionEnumModule.RemoveUserDialogButtonClicked,
-					voiceStatus = var19
+					voiceStatus = var8
 				})
 				
-				return var15.removeUserFromParentChannel(var16, var14.parentChannelId, var14.userId)
+				return var4.removeUserFromParentChannel(var5, var3.parentChannelId, var3.userId)
 			end
 		})
 	end, {
-		var16, var14.userId, var14.parentChannelId, var15.fireSquadAnalytics,
-		var15.setSquadPrompt, var15.removeUserFromParentChannel, var19
+		var5, var3.userId, var3.parentChannelId, var4.fireSquadAnalytics,
+		var4.setSquadPrompt, var4.removeUserFromParentChannel, var8
 	})
 	local _ = nil
-	local var27 = nil
+	local var16 = nil
 	local _ = nil
 	local t_1 = {}
-	local var29 = nil
-	local var30 = nil
+	local var17 = nil
+	local var18 = nil
 	
 	if getFFlagEnableCrossExpVoice() then
-		local var31 = useBackgroundExperience()
-		local var32 = useParticipants() or {}
+		local var19 = useBackgroundExperience()
+		local var20 = useParticipants() or {}
 		t_1 = react.useMemo(function()
-			-- upvalues: var32 (write)
+			-- upvalues: var20 (write)
 			local t = {}
 			
-			for i, v in pairs(var32) do
+			for i, v in pairs(var20) do
 				table.insert(t, v.userId)
 			end
 			return t
-		end, { var32 })
-		var29 = react.useMemo(function()
-			-- upvalues: var31 (write)
-			return if var31 then var31.voiceChannelId else nil
-		end, { var31 })
-		var30 = react.useMemo(function()
-			-- upvalues: var31 (write)
-			return if var31 then var31.voiceSessionId else nil
-		end, { var31 })
+		end, { var20 })
+		var17 = react.useMemo(function()
+			-- upvalues: var19 (write)
+			return if var19 then var19.voiceChannelId else nil
+		end, { var19 })
+		var18 = react.useMemo(function()
+			-- upvalues: var19 (write)
+			return if var19 then var19.voiceSessionId else nil
+		end, { var19 })
 		
 		if not fFlagEnableSquadUserCardHoverFix then
-			local var33 = if var14.userId then tonumber(var14.userId) else nil
+			local var21 = if var3.userId then tonumber(var3.userId) else nil
 			
-			if var33 then
-				local var34 = useIsLocalPlayerPartyVoiceEligible()
-				var27 = if useIsCurrentSquadPartyVoiceEligible() == true then var34 and not useIsUserPartyVoiceEligible(var33) else useIsCurrentSquadPartyVoiceEligible() == true
+			if var21 then
+				local var22 = useIsLocalPlayerPartyVoiceEligible()
+				var16 = if useIsCurrentSquadPartyVoiceEligible() == true then var22 and not useIsUserPartyVoiceEligible(var21) else useIsCurrentSquadPartyVoiceEligible() == true
 			end
 		end
 	end
-	local var35 = if fFlagSquadsPresenceStoreMigration then var8(tostring(var14.userId)) else useSelector(react.useCallback(function(p1)
-		-- upvalues: var14 (ref)
-		return p1.Squad.Presence.byUserId[var14.userId]
-	end, { var14.userId }))
-	local var36 = react.useMemo(function()
-		-- upvalues: fFlagEnableSquadUserCardHoverFix (copy), var20 (ref), var35 (ref), fFlagSquadsPresenceStoreMigration (copy), var9 (copy), presenceType (copy)
+	local var21 = if fFlagSquadsPresenceStoreMigration then var1(tostring(var3.userId)) else useSelector(react.useCallback(function(p2)
+		-- upvalues: var3 (ref)
+		return p2.Squad.Presence.byUserId[var3.userId]
+	end, { var3.userId }))
+	local var22 = react.useMemo(function()
+		-- upvalues: fFlagEnableSquadUserCardHoverFix (copy), var9 (ref), var21 (ref), fFlagSquadsPresenceStoreMigration (copy), var2 (copy), presenceType (copy)
 		if fFlagEnableSquadUserCardHoverFix then
 			local placeId = false
 			
-			if table.find(var20, "JoinButton") ~= nil then
-				placeId = var35
+			if table.find(var9, "JoinButton") ~= nil then
+				placeId = var21
 				
 				if placeId then
 					placeId = false
 					
-					if var35.userPresenceType == (if fFlagSquadsPresenceStoreMigration then var9.InGame else presenceType.InGame) then
+					if var21.userPresenceType == (if fFlagSquadsPresenceStoreMigration then var2.InGame else presenceType.InGame) then
 						if fFlagSquadsPresenceStoreMigration then
-							return var35.placeId ~= ""
+							return var21.placeId ~= ""
 						end
-						placeId = var35.placeId
+						placeId = var21.placeId
 					end
 				end
 			end
 			return placeId
 		else
-			local var40 = var35
+			local var23 = var21
 			
-			if var40 then
-				var40 = false
+			if var23 then
+				var23 = false
 				
-				if var35.userPresenceType == (if fFlagSquadsPresenceStoreMigration then var9.InGame else presenceType.InGame) then
+				if var21.userPresenceType == (if fFlagSquadsPresenceStoreMigration then var2.InGame else presenceType.InGame) then
 					if fFlagSquadsPresenceStoreMigration then
-						return var35.placeId ~= ""
+						return var21.placeId ~= ""
 					end
-					var40 = var35.placeId
+					var23 = var21.placeId
 				end
 			end
-			return var40
+			return var23
 		end
-	end, { var35, var20 })
-	local var37 = react.useCallback(function()
-		-- upvalues: var36 (ref), gameParams (copy), var14 (ref), fFlagSquadsPresenceStoreMigration (copy), var35 (ref), fFlagSquadLaunchExperienceMobileFix (copy), var15 (ref), squadLocationEnum (copy), experienceService (copy)
-		if var36 then
-			local var41 = gameParams.fromUserId(var14.userId, if fFlagSquadsPresenceStoreMigration then var35 and var35.placeId else var35.placeId)
+	end, { var21, var9 })
+	local var23 = react.useCallback(function()
+		-- upvalues: var22 (ref), gameParams (copy), var3 (ref), fFlagSquadsPresenceStoreMigration (copy), var21 (ref), fFlagSquadLaunchExperienceMobileFix (copy), var4 (ref), squadLocationEnum (copy), experienceService (copy)
+		if var22 then
+			local var24 = gameParams.fromUserId(var3.userId, if fFlagSquadsPresenceStoreMigration then var21 and var21.placeId else var21.placeId)
 			
-			if var14.isInExperience and fFlagSquadLaunchExperienceMobileFix then
+			if var3.isInExperience and fFlagSquadLaunchExperienceMobileFix then
 				game:Shutdown()
 			end
-			local var42 = "SquadLobby"
+			local var25 = "SquadLobby"
 			
-			if var15.squadLocation == squadLocationEnum.UniversalApp then
-				var42 = "SquadLobbyFromUA"
-			elseif var15.squadLocation == squadLocationEnum.InExperience then
-				var42 = "SquadLobbyFromInExp"
+			if var4.squadLocation == squadLocationEnum.UniversalApp then
+				var25 = "SquadLobbyFromUA"
+			elseif var4.squadLocation == squadLocationEnum.InExperience then
+				var25 = "SquadLobbyFromInExp"
 			end
-			experienceService:LaunchExperience(var41, var42, nil)
+			experienceService:LaunchExperience(var24, var25, nil)
 		end
 	end, {
-		var36,
-		var15.squadLocation,
-		var14.isInExperience,
-		var14.userId,
-		var35
+		var22,
+		var4.squadLocation,
+		var3.isInExperience,
+		var3.userId,
+		var21
 	})
-	local var38 = if fFlagEnableSquadUserCardHoverFix then react.useMemo(function()
-		-- upvalues: headphoneDeafenSmall (copy), var22 (ref), play (copy), var37 (ref), leave (copy), var26 (ref), profile (copy), var25 (ref), feedback (copy), var17 (ref), var14 (ref), var29 (write), var30 (write), t_1 (write), var21 (ref), microphoneMute (copy), microphone (copy), default (copy), var20 (ref)
+	local var24 = if fFlagEnableSquadUserCardHoverFix then react.useMemo(function()
+		-- upvalues: headphoneDeafenSmall (copy), var11 (ref), play (copy), var23 (ref), leave (copy), var15 (ref), profile (copy), var14 (ref), feedback (copy), var6 (ref), var3 (ref), var17 (write), var18 (write), t_1 (write), var10 (ref), microphoneMute (copy), microphone (copy), default (copy), var9 (ref)
 		local t = {
 			VoiceIneligibleButton = {
 				stayOnActivated = true,
 				icon = headphoneDeafenSmall,
-				text = var22.voiceIneligibleText
+				text = var11.voiceIneligibleText
 			},
 			JoinButton = {
 				icon = play,
-				text = var22.joinButtonText,
-				onActivated = var37
+				text = var11.joinButtonText,
+				onActivated = var23
 			},
 			RemoveUserButton = {
 				icon = leave,
-				text = var22.removeFromGroupText,
-				onActivated = var26
+				text = var11.removeFromGroupText,
+				onActivated = var15
 			},
 			ViewProfileButton = {
 				icon = profile,
-				text = var22.viewProfileText,
-				onActivated = var25
+				text = var11.viewProfileText,
+				onActivated = var14
 			},
 			ReportButton = {
 				icon = feedback,
-				text = var22.reportUserText,
+				text = var11.reportUserText,
 				onActivated = function()
-					-- upvalues: var17 (copy), var14 (copy), var29 (copy), var30 (copy), t_1 (copy)
-					var14.openSquadVoiceAbuseReport({
-						submitterUserId = tostring(var17),
-						abuserUserId = var14.userId,
+					-- upvalues: var6 (copy), var3 (copy), var17 (copy), var18 (copy), t_1 (copy)
+					var3.openSquadVoiceAbuseReport({
+						submitterUserId = tostring(var6),
+						abuserUserId = var3.userId,
 						reportBeginTimestampMs = workspace:GetServerTimeNow() * 1000,
-						voiceChannelId = var29,
-						voiceSessionId = var30,
+						voiceChannelId = var17,
+						voiceSessionId = var18,
 						voiceUserIds = t_1,
 						voiceUserCount = #t_1
 					})
 				end
 			},
 			MuteVoiceButton = {
-				icon = if var21 then microphoneMute else microphone,
-				text = if var21 then var22.unmuteVoiceButtonText else var22.muteVoiceButtonText,
+				icon = if var10 then microphoneMute else microphone,
+				text = if var10 then var11.unmuteVoiceButtonText else var11.muteVoiceButtonText,
 				onActivated = function()
-					-- upvalues: var14 (copy), var21 (copy), default (copy)
-					local var49 = tonumber(var14.userId)
+					-- upvalues: var3 (copy), var10 (copy), default (copy)
+					local var25 = tonumber(var3.userId)
 					
-					if not var49 then
-						warn("Invalid userId: " .. tostring(var14.userId))
+					if not var25 then
+						warn("Invalid userId: " .. tostring(var3.userId))
 						
 						return
-					elseif var21 then
-						default:unmuteVoiceParticipant(var49)
+					elseif var10 then
+						default:unmuteVoiceParticipant(var25)
 						
 						return
 					end
-					default:muteVoiceParticipant(var49)
+					default:muteVoiceParticipant(var25)
 				end
 			}
 		}
 		local t_2 = {}
 		
-		for i, v in var20 do
-			local var48 = t[v]
+		for i, v in var9 do
+			local var25 = t[v]
 			
-			if var48 then
-				table.insert(t_2, var48)
+			if var25 then
+				table.insert(t_2, var25)
 			end
 		end
 		return t_2
 	end, {
-		var14.userId, var14.openSquadVoiceAbuseReport, var22.joinButtonText,
-		var22.removeFromGroupText, var22.reportUserText, var22.viewProfileText,
-		var22.voiceIneligibleText, var22.muteVoiceButtonText,
-		var22.unmuteVoiceButtonText, var17, var29, var30, t_1, var26, var20, var37,
-		var25, var21
+		var3.userId, var3.openSquadVoiceAbuseReport, var11.joinButtonText,
+		var11.removeFromGroupText, var11.reportUserText, var11.viewProfileText,
+		var11.voiceIneligibleText, var11.muteVoiceButtonText,
+		var11.unmuteVoiceButtonText, var6, var17, var18, t_1, var15, var9, var23,
+		var14, var10
 	}) else react.useMemo(function()
-		-- upvalues: var17 (ref), var14 (ref), getFFlagEnableCrossExpVoiceAbuseReport (copy), var29 (write), var27 (write), headphoneDeafenSmall (copy), var22 (ref), var36 (ref), play (copy), var37 (ref), profile (copy), var25 (ref), feedback (copy), var30 (write), t_1 (write), var24 (ref), leave (copy), var26 (ref)
-		local var43 = not var14.isInExperience
-		local var44 = getFFlagEnableCrossExpVoiceAbuseReport() and (not not var29 and not (tostring(var17) == var14.userId))
+		-- upvalues: var6 (ref), var3 (ref), getFFlagEnableCrossExpVoiceAbuseReport (copy), var17 (write), var16 (write), headphoneDeafenSmall (copy), var11 (ref), var22 (ref), play (copy), var23 (ref), profile (copy), var14 (ref), feedback (copy), var18 (write), t_1 (write), var13 (ref), leave (copy), var15 (ref)
+		local var26 = not var3.isInExperience
+		local var27 = getFFlagEnableCrossExpVoiceAbuseReport() and (not not var17 and not (tostring(var6) == var3.userId))
 		local t = {}
 		
-		if var27 then
+		if var16 then
 			table.insert(t, {
 				stayOnActivated = true,
 				icon = headphoneDeafenSmall,
-				text = var22.voiceIneligibleText
+				text = var11.voiceIneligibleText
 			})
 		end
-		if var36 then
+		if var22 then
 			table.insert(t, {
 				icon = play,
-				text = var22.joinButtonText,
-				onActivated = var37
+				text = var11.joinButtonText,
+				onActivated = var23
 			})
 		end
-		if var43 then
+		if var26 then
 			table.insert(t, {
 				icon = profile,
-				text = var22.viewProfileText,
-				onActivated = var25
+				text = var11.viewProfileText,
+				onActivated = var14
 			})
 		end
-		if var44 then
+		if var27 then
 			table.insert(t, {
 				icon = feedback,
-				text = var22.reportUserText,
+				text = var11.reportUserText,
 				onActivated = function()
-					-- upvalues: var17 (copy), var14 (copy), var29 (copy), var30 (copy), t_1 (copy)
-					var14.openSquadVoiceAbuseReport({
-						submitterUserId = tostring(var17),
-						abuserUserId = var14.userId,
+					-- upvalues: var6 (copy), var3 (copy), var17 (copy), var18 (copy), t_1 (copy)
+					var3.openSquadVoiceAbuseReport({
+						submitterUserId = tostring(var6),
+						abuserUserId = var3.userId,
 						reportBeginTimestampMs = workspace:GetServerTimeNow() * 1000,
-						voiceChannelId = var29,
-						voiceSessionId = var30,
+						voiceChannelId = var17,
+						voiceSessionId = var18,
 						voiceUserIds = t_1,
 						voiceUserCount = #t_1
 					})
 				end
 			})
 		end
-		if var24 then
+		if var13 then
 			table.insert(t, {
 				icon = leave,
-				text = var22.removeFromGroupText,
-				onActivated = var26
+				text = var11.removeFromGroupText,
+				onActivated = var15
 			})
 		end
 		return t
 	end, {
-		var14.isInExperience, var14.userId, var14.openSquadVoiceAbuseReport,
-		var22.joinButtonText, var22.removeFromGroupText, var22.reportUserText,
-		var22.viewProfileText, var22.voiceIneligibleText, var27, var17, var29, var30,
-		t_1, var26, var36, var24, var37, var25
+		var3.isInExperience, var3.userId, var3.openSquadVoiceAbuseReport,
+		var11.joinButtonText, var11.removeFromGroupText, var11.reportUserText,
+		var11.viewProfileText, var11.voiceIneligibleText, var16, var6, var17, var18,
+		t_1, var15, var22, var13, var23, var14
 	})
 	
-	if #var38 > 0 then
+	if #var24 > 0 then
 		return react.createElement(focusNavigableSurfaceWrapper, {
 			isAutoFocusRoot = true,
 			isFocusable = true,
@@ -370,8 +370,8 @@ return function(p0)
 			customEventHandlers = {
 				[focusNavigationEventNameEnum.NavigateBack] = {
 					handler = inputHandlersModule.onRelease(function(p2)
-						-- upvalues: var14 (ref)
-						var14.onDismiss()
+						-- upvalues: var3 (ref)
+						var3.onDismiss()
 						p2:cancel()
 					end)
 				}
@@ -382,15 +382,15 @@ return function(p0)
 				bottomGap = 20,
 				screenWidth = 400,
 				showImages = true,
-				buttonModels = var38,
+				buttonModels = var24,
 				onDismiss = function()
-					-- upvalues: var14 (ref)
-					var14.onDismiss()
+					-- upvalues: var3 (ref)
+					var3.onDismiss()
 				end
 			})
 		})
 	end
-	var14.onDismiss()
+	var3.onDismiss()
 	
 	return nil
 end

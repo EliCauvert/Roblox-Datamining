@@ -8,18 +8,18 @@ local reactToFeedItemV2Module = require(script.Parent.Requests.reactToFeedItemV2
 local createMomentsEmojiSetsStoreModule = require(script.Parent.createMomentsEmojiSetsStore)
 local fFlagMomentsEmojiSetsApiModule = require(script.Parent.FFlagMomentsEmojiSetsApi)
 
-return function(p0)
+return function(p1)
 	-- upvalues: httpClientModule (ref), reactToFeedItemModule (ref), reactToFeedItemV2Module (ref), promiseModule (ref), fFlagMomentsEmojiSetsApiModule (ref), createMomentsEmojiSetsStoreModule (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	local function reactToFeedItem(p1)
-		-- upvalues: httpClientModule (copy), reactToFeedItemModule (copy), p0 (ref)
-		return httpClientModule.asPromise(reactToFeedItemModule(p1, p0.network))
+	local function reactToFeedItem(p2)
+		-- upvalues: httpClientModule (copy), reactToFeedItemModule (copy), p1 (ref)
+		return httpClientModule.asPromise(reactToFeedItemModule(p2, p1.network))
 	end
 	
 	local function reactToFeedItemV2(p2)
-		-- upvalues: httpClientModule (copy), reactToFeedItemV2Module (copy), p0 (ref), promiseModule (copy)
-		return httpClientModule.asPromise(reactToFeedItemV2Module(p2, p0.network)):catch(function(p3)
+		-- upvalues: httpClientModule (copy), reactToFeedItemV2Module (copy), p1 (ref), promiseModule (copy)
+		return httpClientModule.asPromise(reactToFeedItemV2Module(p2, p1.network)):catch(function(p3)
 			-- upvalues: promiseModule (copy)
 			warn(`[Moments] Failed to react to feed item (v2): {tostring(p3)}`)
 			
@@ -28,13 +28,13 @@ return function(p0)
 	end
 	
 	if fFlagMomentsEmojiSetsApiModule then
-		local var9 = createMomentsEmojiSetsStoreModule(p0)
+		local var1 = createMomentsEmojiSetsStoreModule(p1)
 		
 		return {
 			reactToFeedItem = reactToFeedItem,
 			reactToFeedItemV2 = reactToFeedItemV2,
-			getAndFetchEmojiSets = var9.getAndFetchEmojiSets,
-			getEmojis = var9.getEmojis
+			getAndFetchEmojiSets = var1.getAndFetchEmojiSets,
+			getEmojis = var1.getEmojis
 		}
 	end
 	return { reactToFeedItem = reactToFeedItem }

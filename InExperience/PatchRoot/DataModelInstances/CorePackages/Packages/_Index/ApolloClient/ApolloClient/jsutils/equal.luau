@@ -2,41 +2,41 @@
 local array = luauPolyfillModule.Array
 local object = luauPolyfillModule.Object
 
-local function equal(p0, p1)
+local function equal(p1, p2)
 	-- upvalues: array (ref), object (ref), equal (ref)
-	if typeof(p0) ~= typeof(p1) then
+	if typeof(p1) ~= typeof(p2) then
 		return false
-	elseif p0 == p1 then
+	elseif p1 == p2 then
 		return true
-	elseif typeof(p0) == "table" then
-		if array.isArray(p0) and not array.isArray(p1) then
+	elseif typeof(p1) == "table" then
+		if array.isArray(p1) and not array.isArray(p2) then
 			return false
-		elseif #p0 ~= #p1 or #object.keys(p0) ~= #object.keys(p1) then
+		elseif #p1 ~= #p2 or #object.keys(p1) ~= #object.keys(p2) then
 			return false
-		elseif array.isArray(p0) then
-			for i, v in ipairs(p0) do
-				if not equal(p0[i], p1[i]) then
+		elseif array.isArray(p1) then
+			for i, v in ipairs(p1) do
+				if not equal(p1[i], p2[i]) then
 					return false
 				end
 			end
 		else
-			for i in pairs(p0) do
-				if not equal(p0[tostring(i)], p1[tostring(i)]) then
+			for i in pairs(p1) do
+				if not equal(p1[tostring(i)], p2[tostring(i)]) then
 					return false
 				end
 			end
 		end
 		return true
-	elseif typeof(p0) == "string" or typeof(p0) == "number" or typeof(p0) == "boolean" then
-		return p0 == p1
-	elseif typeof(p0) == "function" then
-		return debug.info(p0, "n") == debug.info(p1, "n") and (debug.info(p0, "s") == debug.info(p1, "s") and (debug.info(p0, "l") == debug.info(p1, "l") and debug.info(p0, "a") == debug.info(p1, "a")))
-	elseif typeof(p0) == "thread" then
+	elseif typeof(p1) == "string" or typeof(p1) == "number" or typeof(p1) == "boolean" then
+		return p1 == p2
+	elseif typeof(p1) == "function" then
+		return debug.info(p1, "n") == debug.info(p2, "n") and (debug.info(p1, "s") == debug.info(p2, "s") and (debug.info(p1, "l") == debug.info(p2, "l") and debug.info(p1, "a") == debug.info(p2, "a")))
+	elseif typeof(p1) == "thread" then
 		error("unhandled equality check for type 'thread'")
-	elseif typeof(p0) == "userdata" then
+	elseif typeof(p1) == "userdata" then
 		error("unhandled equality check for type 'userdata'")
 	end
-	error("unhandled equality check for type " .. typeof(p0))
+	error("unhandled equality check for type " .. typeof(p1))
 end
 
 return equal

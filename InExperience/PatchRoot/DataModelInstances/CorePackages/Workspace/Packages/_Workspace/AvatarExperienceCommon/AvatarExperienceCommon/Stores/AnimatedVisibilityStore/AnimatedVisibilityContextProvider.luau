@@ -2,19 +2,19 @@
 local createAnimatedVisibilityStoreModule = require(script.Parent.createAnimatedVisibilityStore)
 local animatedVisibilityContextModule = require(script.Parent.AnimatedVisibilityContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), createAnimatedVisibilityStoreModule (ref), animatedVisibilityContextModule (ref)
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: createAnimatedVisibilityStoreModule (copy), p0 (ref)
-		return createAnimatedVisibilityStoreModule(p0.initialRatio)
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: createAnimatedVisibilityStoreModule (copy), p1 (ref)
+		return createAnimatedVisibilityStoreModule(p1.initialRatio)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
+		-- upvalues: var1 (ref)
 		return function()
-			-- upvalues: var3 (copy)
-			var3.destroy()
+			-- upvalues: var1 (copy)
+			var1.destroy()
 		end
-	end, { var3 })
+	end, { var1 })
 	
-	return reactModule.createElement(animatedVisibilityContextModule.Provider, { value = { animatedMenusStore = var3 } }, p0.children)
+	return reactModule.createElement(animatedVisibilityContextModule.Provider, { value = { animatedMenusStore = var1 } }, p1.children)
 end

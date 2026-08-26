@@ -5,22 +5,22 @@ local getMeshInfoModule = require(parent.util.getMeshInfo)
 local getMeshMinMaxModule = require(parent.util.getMeshMinMax)
 local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), getMeshMinMaxModule (ref), getExpectedPartSizeModule (ref)
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var4, var5, var6 = getMeshInfoModule(p0, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p1)
+	local var1, var2, var3 = getMeshInfoModule(p1, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p2)
 	
-	if not var4 then
-		return var4, var5
+	if not var1 then
+		return var1, var2
 	end
 	local _ = nil
 	local _ = nil
-	local var7, var8, var9, var10 = getMeshMinMaxModule(var6, p1)
+	local var4, var5, var6, var7 = getMeshMinMaxModule(var3, p2)
 	
-	if var7 then
-		return true, nil, getExpectedPartSizeModule(p0, p1) / (var10 - var9)
+	if var4 then
+		return true, nil, getExpectedPartSizeModule(p1, p2) / (var7 - var6)
 	end
-	return var7, var8
+	return var4, var5
 end

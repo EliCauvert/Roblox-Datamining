@@ -2,23 +2,23 @@
 local _ = require(script.Parent.Parent.types)
 local mergeTTIEventMetadataModule = require(script.Parent.Parent.Parent.Utils.mergeTTIEventMetadata)
 
-return function(p0)
+return function(p1)
 	-- upvalues: name (ref), mergeTTIEventMetadataModule (ref)
-	return function(p1, p2)
-		-- upvalues: p0 (ref), name (copy), mergeTTIEventMetadataModule (copy)
-		p0(function(p3)
-			-- upvalues: p1 (ref), name (copy), mergeTTIEventMetadataModule (copy), p2 (ref)
-			local var2 = p3[p1]
+	return function(p2, p3)
+		-- upvalues: p1 (ref), name (copy), mergeTTIEventMetadataModule (copy)
+		p1(function(p4)
+			-- upvalues: p2 (ref), name (copy), mergeTTIEventMetadataModule (copy), p3 (ref)
+			local var1 = p4[p2]
 			
-			if var2 == nil then
-				name:warning(`called before trackStart for eventName={p1}`)
+			if var1 == nil then
+				name:warning(`called before trackStart for eventName={p2}`)
 				
-				return p3
+				return p4
 			end
-			local cloned = table.clone(p3)
-			local cloned_1 = table.clone(var2)
-			cloned_1.metadata = mergeTTIEventMetadataModule(var2.metadata, p2)
-			cloned[p1] = cloned_1
+			local cloned = table.clone(p4)
+			local cloned_1 = table.clone(var1)
+			cloned_1.metadata = mergeTTIEventMetadataModule(var1.metadata, p3)
+			cloned[p2] = cloned_1
 			
 			return cloned
 		end)

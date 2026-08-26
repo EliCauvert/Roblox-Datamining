@@ -3,25 +3,25 @@ local cryoModule = require(virtualEvents.Parent.Cryo)
 local reactModule = require(virtualEvents.Parent.React)
 local uDim = UDim.new(0, 12)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), cryoModule (ref), uDim (ref)
 	local t = {}
 	
 	for i, v in reactModule.useMemo(function()
-		-- upvalues: p0 (ref), cryoModule (copy)
-		if p0.desiredFirstUserId then
-			local var5 = cryoModule.List.find(p0.userIds, p0.desiredFirstUserId)
+		-- upvalues: p1 (ref), cryoModule (copy)
+		if p1.desiredFirstUserId then
+			local var1 = cryoModule.List.find(p1.userIds, p1.desiredFirstUserId)
 			
-			if var5 then
-				local cloned = table.clone(p0.userIds)
-				table.remove(cloned, var5)
-				table.insert(cloned, 1, p0.desiredFirstUserId)
+			if var1 then
+				local cloned = table.clone(p1.userIds)
+				table.remove(cloned, var1)
+				table.insert(cloned, 1, p1.desiredFirstUserId)
 				
 				return cloned
 			end
 		end
-		return p0.userIds
-	end, { p0.userIds, p0.desiredFirstUserId }) do
+		return p1.userIds
+	end, { p1.userIds, p1.desiredFirstUserId }) do
 		t[v] = reactModule.createElement("ImageLabel", {
 			LayoutOrder = i,
 			BackgroundColor3 = Color3.fromRGB(209, 209, 209),
@@ -33,7 +33,7 @@ return function(p0)
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		AutomaticSize = Enum.AutomaticSize.XY
 	}, {
 		Layout = reactModule.createElement("UIListLayout", {

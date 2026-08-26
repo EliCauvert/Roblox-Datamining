@@ -2,10 +2,10 @@
 local t = {}
 t.__index = t
 
-function t.new(p0, p1)
-	assert(p1, "metricName is required")
+function t.new(p1, p2)
+	assert(p2, "metricName is required")
 	
-	return setmetatable({ metricName = p1, startTime = tick() }, p0)
+	return setmetatable({ metricName = p2, startTime = tick() }, p1)
 end
 
 function t:report()

@@ -12,19 +12,19 @@ local eventNamesModule = require(parent.Analytics.EventNames)
 local onToggleActivationModule = require(parent.Utils.onToggleActivation)
 local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useSelector (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), onToggleActivationModule (ref), eventNamesModule (ref), segmentedControl (ref)
-	local var7 = useAnalyticsModule()
-	local var8 = useDispatch()
-	local var9 = useSelector(function(p1)
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].IsCapturesCoreGuiEnabled
+		return p2[constantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)
-	local var10 = useSelector(function(p2)
+	local var4 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].IsActive
 	end)
-	local var11 = useLocalization({
+	local var5 = useLocalization({
 		offText = "Feature.Captures.Control.Off",
 		onText = "Feature.Captures.Control.On"
 	})
@@ -33,20 +33,20 @@ return function(p0)
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5),
-		Size = UDim2.fromOffset(p0.width, p0.height)
+		Size = UDim2.fromOffset(p1.width, p1.height)
 	}, {
 		Control = reactModule.createElement(segmentedControl, {
-			height = p0.height,
-			onTabActivated = reactModule.useCallback(function(p3)
-				-- upvalues: onToggleActivationModule (copy), var10 (ref), var7 (ref), var8 (ref), eventNamesModule (copy)
-				onToggleActivationModule(var10, p3, var7.fireEvent, var8, eventNamesModule.CapturesActivatedInGameMenu, eventNamesModule.CapturesDeactivatedInGameMenu)
-			end, { var10 }),
-			selectedTabIndex = if var10 then 1 else 2,
+			height = p1.height,
+			onTabActivated = reactModule.useCallback(function(p2)
+				-- upvalues: onToggleActivationModule (copy), var4 (ref), var1 (ref), var2 (ref), eventNamesModule (copy)
+				onToggleActivationModule(var4, p2, var1.fireEvent, var2, eventNamesModule.CapturesActivatedInGameMenu, eventNamesModule.CapturesDeactivatedInGameMenu)
+			end, { var4 }),
+			selectedTabIndex = if var4 then 1 else 2,
 			tabs = {
-				{ tabName = var11.onText, isDisabled = not var9 },
-				{ tabName = var11.offText, isDisabled = not var9 }
+				{ tabName = var5.onText, isDisabled = not var3 },
+				{ tabName = var5.offText, isDisabled = not var3 }
 			},
-			width = UDim.new(0, p0.width)
+			width = UDim.new(0, p1.width)
 		})
 	})
 end

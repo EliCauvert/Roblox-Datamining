@@ -3,167 +3,167 @@ local buildExperience = script:FindFirstAncestor("BuildExperience")
 local reactModule = require(buildExperience.Parent.React)
 local _ = require(buildExperience.Chat.useChatSessionCore)
 
-local function _(p0)
-	return Vector2.new(p0.Position.X, p0.Position.Y)
+local function _(p1)
+	return Vector2.new(p1.Position.X, p1.Position.Y)
 end
 
 local _ = function(p1, p2)
-	local var4 = p1.X - p2.AbsolutePosition.X
+	local var1 = p1.X - p2.AbsolutePosition.X
 	
-	return var4 >= 0 and var4 <= p2.AbsoluteSize.X
+	return var1 >= 0 and var1 <= p2.AbsoluteSize.X
 end
 
-local _ = function(p3)
-	return p3.Y >= 24 and math.abs(p3.X) < p3.Y
+local _ = function(p1)
+	return p1.Y >= 24 and math.abs(p1.X) < p1.Y
 end
 
-local function didDownSwipeCrossGuiObject(vectorA, vectorB, p4)
-	local var5 = vectorB - vectorA
+local function didDownSwipeCrossGuiObject(vectorA, vectorB, p1)
+	local var1 = vectorB - vectorA
 	
-	if var5.Y >= 24 and math.abs(var5.X) < var5.Y then
-		local x = p4.AbsolutePosition.X
-		local y = p4.AbsolutePosition.Y
+	if var1.Y >= 24 and math.abs(var1.X) < var1.Y then
+		local x = p1.AbsolutePosition.X
+		local y = p1.AbsolutePosition.Y
 		
-		return x <= math.max(vectorA.X, vectorB.X) and (math.min(vectorA.X, vectorB.X) <= x + p4.AbsoluteSize.X and (vectorA.Y <= y + p4.AbsoluteSize.Y and y <= vectorB.Y))
+		return x <= math.max(vectorA.X, vectorB.X) and (math.min(vectorA.X, vectorB.X) <= x + p1.AbsoluteSize.X and (vectorA.Y <= y + p1.AbsoluteSize.Y and y <= vectorB.Y))
 	end
 	return false
 end
 
-return function(p5, p6)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), didDownSwipeCrossGuiObject (ref), userInputService (ref)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), var6 (ref), var7 (ref)
-		if var8.current then
-			var8.current:Disconnect()
-			var8.current = nil
+	local var1 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(nil)
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var1 (ref), var2 (ref)
+		if var3.current then
+			var3.current:Disconnect()
+			var3.current = nil
 		end
-		var6.current = nil
-		var7.current = nil
+		var1.current = nil
+		var2.current = nil
 	end, {})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: p6 (ref)
-		local var11 = if p6 then p6.current else nil
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: p2 (ref)
+		local var6 = if p2 then p2.current else nil
 		
-		if var11 then
-			var11.releaseFocus()
+		if var6 then
+			var6.releaseFocus()
 		end
-	end, { p6 })
+	end, { p2 })
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var6 (ref), p5 (ref), didDownSwipeCrossGuiObject (copy), var9 (ref), var10 (ref), userInputService (copy), p6 (ref), var8 (ref)
-		local function _(p7)
-			-- upvalues: var7 (copy), var6 (copy), p5 (copy), didDownSwipeCrossGuiObject (copy), var9 (copy), var10 (copy)
-			local current = var7.current
+		-- upvalues: var2 (ref), var1 (ref), p1 (ref), didDownSwipeCrossGuiObject (copy), var4 (ref), var5 (ref), userInputService (copy), p2 (ref), var3 (ref)
+		local function _(p3)
+			-- upvalues: var2 (copy), var1 (copy), p1 (copy), didDownSwipeCrossGuiObject (copy), var4 (copy), var5 (copy)
+			local current = var2.current
 			
-			if var6.current ~= p7 or current == nil then
+			if var1.current ~= p3 or current == nil then
 				return false
 			end
-			local current_1 = p5.current
+			local current_1 = p1.current
 			
-			if current_1 == nil or not didDownSwipeCrossGuiObject(current, Vector2.new(p7.Position.X, p7.Position.Y), current_1) then
+			if current_1 == nil or not didDownSwipeCrossGuiObject(current, Vector2.new(p3.Position.X, p3.Position.Y), current_1) then
 				return false
 			end
-			var9()
-			var10()
+			var4()
+			var5()
 			
 			return true
 		end
 		
-		local _ = function(p8)
-			-- upvalues: var7 (copy), var6 (copy), p5 (copy), didDownSwipeCrossGuiObject (copy), var9 (copy), var10 (copy)
-			local var14
-			local current = var7.current
+		local _ = function(p3)
+			-- upvalues: var2 (copy), var1 (copy), p1 (copy), didDownSwipeCrossGuiObject (copy), var4 (copy), var5 (copy)
+			local var6
+			local current = var2.current
 			
-			if var6.current == p8 and current ~= nil then
-				local current_1 = p5.current
+			if var1.current == p3 and current ~= nil then
+				local current_1 = p1.current
 				
-				if current_1 == nil or not didDownSwipeCrossGuiObject(current, Vector2.new(p8.Position.X, p8.Position.Y), current_1) then
-					var14 = false
+				if current_1 == nil or not didDownSwipeCrossGuiObject(current, Vector2.new(p3.Position.X, p3.Position.Y), current_1) then
+					var6 = false
 				else
-					var9()
-					var10()
-					var14 = true
+					var4()
+					var5()
+					var6 = true
 				end
 			else
-				var14 = false
+				var6 = false
 			end
-			if var14 then return end
-			if p8.UserInputState == Enum.UserInputState.End or p8.UserInputState == Enum.UserInputState.Cancel then
-				var9()
+			if var6 then return end
+			if p3.UserInputState == Enum.UserInputState.End or p3.UserInputState == Enum.UserInputState.Cancel then
+				var4()
 			end
 		end
 		
-		local touchStartedConnection = userInputService.TouchStarted:Connect(function(p9)
-			-- upvalues: var9 (copy), p5 (copy), p6 (copy), var6 (copy), var7 (copy), var8 (copy), didDownSwipeCrossGuiObject (copy), var10 (copy)
-			var9()
-			local current = p5.current
+		local touchStartedConnection = userInputService.TouchStarted:Connect(function(p3)
+			-- upvalues: var4 (copy), p1 (copy), p2 (copy), var1 (copy), var2 (copy), var3 (copy), didDownSwipeCrossGuiObject (copy), var5 (copy)
+			var4()
+			local current = p1.current
 			
-			if current == nil or (if p6 then p6.current else nil) == nil then return end
-			local vector2 = Vector2.new(p9.Position.X, p9.Position.Y)
-			local var16 = vector2.X - current.AbsolutePosition.X
+			if current == nil or (if p2 then p2.current else nil) == nil then return end
+			local vector2 = Vector2.new(p3.Position.X, p3.Position.Y)
+			local var6 = vector2.X - current.AbsolutePosition.X
 			
-			if (var16 >= 0 and var16 <= current.AbsoluteSize.X) and current.AbsolutePosition.Y + current.AbsoluteSize.Y >= vector2.Y then
-				var6.current = p9
-				var7.current = vector2
-				var8.current = p9.Changed:Connect(function()
-					-- upvalues: p9 (ref), var7 (copy), var6 (copy), p5 (copy), didDownSwipeCrossGuiObject (copy), var9 (copy), var10 (copy)
-					local var17
-					local current = var7.current
+			if (var6 >= 0 and var6 <= current.AbsoluteSize.X) and current.AbsolutePosition.Y + current.AbsoluteSize.Y >= vector2.Y then
+				var1.current = p3
+				var2.current = vector2
+				var3.current = p3.Changed:Connect(function()
+					-- upvalues: p3 (ref), var2 (copy), var1 (copy), p1 (copy), didDownSwipeCrossGuiObject (copy), var4 (copy), var5 (copy)
+					local var7
+					local current = var2.current
 					
-					if var6.current == p9 and current ~= nil then
-						local current_1 = p5.current
+					if var1.current == p3 and current ~= nil then
+						local current_1 = p1.current
 						
-						if current_1 == nil or not didDownSwipeCrossGuiObject(current, Vector2.new(p9.Position.X, p9.Position.Y), current_1) then
-							var17 = false
+						if current_1 == nil or not didDownSwipeCrossGuiObject(current, Vector2.new(p3.Position.X, p3.Position.Y), current_1) then
+							var7 = false
 						else
-							var9()
-							var10()
-							var17 = true
+							var4()
+							var5()
+							var7 = true
 						end
 					else
-						var17 = false
+						var7 = false
 					end
-					if var17 then return end
-					if p9.UserInputState == Enum.UserInputState.End or p9.UserInputState == Enum.UserInputState.Cancel then
-						var9()
+					if var7 then return end
+					if p3.UserInputState == Enum.UserInputState.End or p3.UserInputState == Enum.UserInputState.Cancel then
+						var4()
 					end
 				end)
 				
 				return
 			end
 		end)
-		local touchEndedConnection = userInputService.TouchEnded:Connect(function(p10)
-			-- upvalues: var6 (copy), var7 (copy), p5 (copy), didDownSwipeCrossGuiObject (copy), var9 (copy), var10 (copy)
-			if var6.current == p10 then
-				local var18
-				local current = var7.current
+		local touchEndedConnection = userInputService.TouchEnded:Connect(function(p3)
+			-- upvalues: var1 (copy), var2 (copy), p1 (copy), didDownSwipeCrossGuiObject (copy), var4 (copy), var5 (copy)
+			if var1.current == p3 then
+				local var6
+				local current = var2.current
 				
-				if var6.current == p10 and current ~= nil then
-					local current_1 = p5.current
+				if var1.current == p3 and current ~= nil then
+					local current_1 = p1.current
 					
-					if current_1 == nil or not didDownSwipeCrossGuiObject(current, Vector2.new(p10.Position.X, p10.Position.Y), current_1) then
-						var18 = false
+					if current_1 == nil or not didDownSwipeCrossGuiObject(current, Vector2.new(p3.Position.X, p3.Position.Y), current_1) then
+						var6 = false
 					else
-						var9()
-						var10()
-						var18 = true
+						var4()
+						var5()
+						var6 = true
 					end
 				else
-					var18 = false
+					var6 = false
 				end
-				if not var18 then
-					var9()
+				if not var6 then
+					var4()
 				end
 			end
 		end)
 		
 		return function()
-			-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), var9 (copy)
+			-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), var4 (copy)
 			touchStartedConnection:Disconnect()
 			touchEndedConnection:Disconnect()
-			var9()
+			var4()
 		end
-	end, { p5, p6, var9, var10 })
+	end, { p1, p2, var4, var5 })
 end

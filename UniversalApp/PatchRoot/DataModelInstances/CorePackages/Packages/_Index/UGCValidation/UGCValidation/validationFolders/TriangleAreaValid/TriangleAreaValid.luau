@@ -4,10 +4,10 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 
-local function _(vectorA, vectorB, p0)
+local function _(vectorA, vectorB, p1)
 	-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref)
 	if not UGCValidationService:ValidateEditableMeshTriangleArea(vectorB) then
-		vectorA:fail(errorSourceStringsModule.Keys.MeshGeometry_ZeroAreaTriangle, { meshName = p0 })
+		vectorA:fail(errorSourceStringsModule.Keys.MeshGeometry_ZeroAreaTriangle, { meshName = p1 })
 	end
 end
 

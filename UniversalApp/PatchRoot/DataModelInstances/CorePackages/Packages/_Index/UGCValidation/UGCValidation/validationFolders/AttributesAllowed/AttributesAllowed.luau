@@ -32,25 +32,25 @@ local function hasOnlyAllowedAttribute(p1, p2)
 	return true
 end
 
-local function _(p1, p2)
+local function _(p3, p4)
 	-- upvalues: errorSourceStringsModule (ref)
-	p1:fail(errorSourceStringsModule.Keys.NoAttributes, {
-		RootInstanceName = p2.Name,
-		InstanceNameList = p2:GetFullName()
+	p3:fail(errorSourceStringsModule.Keys.NoAttributes, {
+		RootInstanceName = p4.Name,
+		InstanceNameList = p4:GetFullName()
 	})
 end
 
-local function walkInstanceTree(p1, p2, p3)
+local function walkInstanceTree(p3, p4, p5)
 	-- upvalues: hasOnlyAllowedAttribute (ref), errorSourceStringsModule (ref), constantsModule (ref)
-	if not hasOnlyAllowedAttribute(p2:GetAttributes(), p3) then
-		p1:fail(errorSourceStringsModule.Keys.NoAttributes, {
-			RootInstanceName = p2.Name,
-			InstanceNameList = p2:GetFullName()
+	if not hasOnlyAllowedAttribute(p4:GetAttributes(), p5) then
+		p3:fail(errorSourceStringsModule.Keys.NoAttributes, {
+			RootInstanceName = p4.Name,
+			InstanceNameList = p4:GetFullName()
 		})
 	end
-	for i, v in p2:GetDescendants() do
-		if (not p3 or not v:GetAttribute(constantsModule.AlternateMeshIdAttributeName)) and next(v:GetAttributes()) ~= nil then
-			p1:fail(errorSourceStringsModule.Keys.NoAttributes, {
+	for i, v in p4:GetDescendants() do
+		if (not p5 or not v:GetAttribute(constantsModule.AlternateMeshIdAttributeName)) and next(v:GetAttributes()) ~= nil then
+			p3:fail(errorSourceStringsModule.Keys.NoAttributes, {
 				RootInstanceName = v.Name,
 				InstanceNameList = v:GetFullName()
 			})
@@ -58,14 +58,14 @@ local function walkInstanceTree(p1, p2, p3)
 	end
 end
 
-function t.run(p1, p2)
+function t.run(p6, p7)
 	-- upvalues: validationEnumsModule (ref), walkInstanceTree (ref)
-	local var1 = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
-	walkInstanceTree(p1, p2.rootInstance, var1)
+	local var1 = p7.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
+	walkInstanceTree(p6, p7.rootInstance, var1)
 	
-	for i, v in p2.hsrAssets do
+	for i, v in p7.hsrAssets do
 		for i_1, v_1 in v do
-			walkInstanceTree(p1, v_1, var1)
+			walkInstanceTree(p6, v_1, var1)
 		end
 	end
 end

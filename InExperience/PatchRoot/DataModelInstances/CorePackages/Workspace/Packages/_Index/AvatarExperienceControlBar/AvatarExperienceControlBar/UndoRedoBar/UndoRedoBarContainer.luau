@@ -7,17 +7,17 @@ local iconOnlyMenuModule = require(avatarExperienceControlBar.Components.IconOnl
 local baseControlBarContainerModule = require(avatarExperienceControlBar.BaseControlBarContainer)
 local fFlagAXResetAvatarButton = require(parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useUndoRedoBarViewModelModule (ref), fFlagAXResetAvatarButton (ref), reactModule (ref), baseControlBarContainerModule (ref), iconOnlyMenuModule (ref)
-	local var5 = useUndoRedoBarViewModelModule()
+	local var1 = useUndoRedoBarViewModelModule()
 	
 	return if fFlagAXResetAvatarButton then reactModule.createElement(baseControlBarContainerModule, {
-		config = var5.items,
+		config = var1.items,
 		onActiveMenuItemChanged = function() end,
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}) else reactModule.createElement(iconOnlyMenuModule, {
-		items = var5.items,
-		direction = if p0.direction then p0.direction else "horizontal",
-		LayoutOrder = p0.LayoutOrder
+		items = var1.items,
+		direction = if p1.direction then p1.direction else "horizontal",
+		LayoutOrder = p1.LayoutOrder
 	})
 end)

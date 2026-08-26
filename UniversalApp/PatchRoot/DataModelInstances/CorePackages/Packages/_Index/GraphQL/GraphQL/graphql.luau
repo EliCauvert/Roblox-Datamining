@@ -14,53 +14,53 @@ local execute = require(parent.execution.execute).execute
 local t = {}
 local graphqlImpl = nil
 
-function t.graphql(p0)
+function t.graphql(p1)
 	-- upvalues: promiseModule (ref), graphqlImpl (write)
-	return promiseModule.new(function(p1)
-		-- upvalues: graphqlImpl (copy), p0 (ref)
-		return p1(graphqlImpl(p0))
+	return promiseModule.new(function(p2)
+		-- upvalues: graphqlImpl (copy), p1 (ref)
+		return p2(graphqlImpl(p1))
 	end)
 end
 
-function t.graphqlSync(p2)
+function t.graphqlSync(p1)
 	-- upvalues: graphqlImpl (write), isPromise (ref), error (ref)
-	local var3 = graphqlImpl(p2)
+	local var1 = graphqlImpl(p1)
 	
-	if isPromise(var3) then
+	if isPromise(var1) then
 		error(error.new("GraphQL execution failed to complete synchronously."))
 	end
-	return var3
+	return var1
 end
 
-graphqlImpl = function(p3)
+graphqlImpl = function(p1)
 	-- upvalues: validateSchema (ref), parse (ref), validate (ref), execute (ref)
-	local schema = p3.schema
-	local source = p3.source
-	local rootValue = p3.rootValue
-	local contextValue = p3.contextValue
-	local variableValues = p3.variableValues
-	local operationName = p3.operationName
-	local fieldResolver = p3.fieldResolver
-	local typeResolver = p3.typeResolver
-	local var4 = validateSchema(schema)
+	local schema = p1.schema
+	local source = p1.source
+	local rootValue = p1.rootValue
+	local contextValue = p1.contextValue
+	local variableValues = p1.variableValues
+	local operationName = p1.operationName
+	local fieldResolver = p1.fieldResolver
+	local typeResolver = p1.typeResolver
+	local var1 = validateSchema(schema)
 	
-	if #var4 > 0 then
-		return { errors = var4 }
+	if #var1 > 0 then
+		return { errors = var1 }
 	end
-	local var5 = nil
+	local var2 = nil
 	local ok, status = pcall(function()
-		-- upvalues: var5 (write), parse (copy), source (ref)
-		var5 = parse(source)
+		-- upvalues: var2 (write), parse (copy), source (ref)
+		var2 = parse(source)
 	end)
 	
 	if not ok then
 		return { errors = { status } }
 	end
-	local var6 = validate(schema, var5)
+	local var3 = validate(schema, var2)
 	
-	return if #var6 > 0 then { errors = var6 } else execute({
+	return if #var3 > 0 then { errors = var3 } else execute({
 		schema = schema,
-		document = var5,
+		document = var2,
 		rootValue = rootValue,
 		contextValue = contextValue,
 		variableValues = variableValues,

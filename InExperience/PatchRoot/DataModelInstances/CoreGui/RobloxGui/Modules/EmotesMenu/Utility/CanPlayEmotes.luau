@@ -10,55 +10,59 @@ local t = {
 	ChangedEvent = Instance.new("BindableEvent")
 }
 
-local function _(p0)
-	if not p0 then
+local function _(p1)
+	if not p1 then
 		return nil
 	end
-	local animate = p0:FindFirstChild("Animate")
+	local animate = p1:FindFirstChild("Animate")
 	
 	return if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 end
 
 local _ = function(p1)
-	local var11, animate
+	local var1, animate
 	if p1 then
 		animate = p1:FindFirstChild("Animate")
-		var11 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+		var1 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 	else
-		var11 = nil
+		var1 = nil
 	end
-	if not var11 then
+	if not var1 then
 		return nil
 	end
-	animate = var11:FindFirstChild("PlayEmote")
+	animate = var1:FindFirstChild("PlayEmote")
 	
 	return if animate and animate:IsA("BindableFunction") then animate else nil
 end
 
-local _ = function(p2)
-	local var13, animate
-	if p2 then
-		animate = p2:FindFirstChild("Animate")
-		var13 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+local _ = function(p1)
+	local var1, animate
+	if p1 then
+		animate = p1:FindFirstChild("Animate")
+		var1 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 	else
-		var13 = nil
+		var1 = nil
 	end
-	local var15
-	if var13 then
-		animate = var13:FindFirstChild("PlayEmote")
-		var15 = if animate and animate:IsA("BindableFunction") then animate else nil
+	local var2
+	if var1 then
+		animate = var1:FindFirstChild("PlayEmote")
+		var2 = if animate and animate:IsA("BindableFunction") then animate else nil
 	else
-		var15 = nil
+		var2 = nil
 	end
-	return var15 ~= nil
+	return var2 ~= nil
 end
 
+local var1 = nil
 local var2 = nil
 local var3 = nil
-local var4 = nil
 
 local _ = function()
-	-- upvalues: var2 (write), var3 (write), var4 (write)
+	-- upvalues: var1 (write), var2 (write), var3 (write)
+	if var1 then
+		var1:Disconnect()
+		var1 = nil
+	end
 	if var2 then
 		var2:Disconnect()
 		var2 = nil
@@ -67,243 +71,243 @@ local _ = function()
 		var3:Disconnect()
 		var3 = nil
 	end
-	if var4 then
-		var4:Disconnect()
-		var4 = nil
-	end
 end
 
-local var5 = nil
+local var4 = nil
 
-local _ = function(p3)
-	-- upvalues: t (ref), var5 (write)
-	local var16, animate
-	if p3 then
-		animate = p3:FindFirstChild("Animate")
-		var16 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+local _ = function(p1)
+	-- upvalues: t (ref), var4 (write)
+	local var5, animate
+	if p1 then
+		animate = p1:FindFirstChild("Animate")
+		var5 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 	else
-		var16 = nil
+		var5 = nil
 	end
-	local var18
-	if var16 then
-		animate = var16:FindFirstChild("PlayEmote")
-		var18 = if animate and animate:IsA("BindableFunction") then animate else nil
+	local var6
+	if var5 then
+		animate = var5:FindFirstChild("PlayEmote")
+		var6 = if animate and animate:IsA("BindableFunction") then animate else nil
 	else
-		var18 = nil
+		var6 = nil
 	end
-	local var19 = var18 ~= nil
+	local var7 = var6 ~= nil
 	
-	if t.Value ~= var19 then
-		t.Value = var19
-		t.ChangedEvent:Fire(var19)
+	if t.Value ~= var7 then
+		t.Value = var7
+		t.ChangedEvent:Fire(var7)
 	end
-	var5(var19, p3)
+	var4(var7, p1)
 end
 
-local _ = function(p4)
-	-- upvalues: t (ref), var5 (write), var2 (write)
-	local var20, animate
-	if p4 then
-		animate = p4:FindFirstChild("Animate")
-		var20 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+local _ = function(p1)
+	-- upvalues: t (ref), var4 (write), var1 (write)
+	local var5, animate
+	if p1 then
+		animate = p1:FindFirstChild("Animate")
+		var5 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 	else
-		var20 = nil
+		var5 = nil
 	end
-	local var22, animate_1
-	if not var20 then
-		var2 = p4.ChildAdded:Connect(function(p5)
-			-- upvalues: p4 (ref), t (copy), var5 (copy)
-			if (p5:IsA("LocalScript") or p5:IsA("Script") and p5.RunContext == Enum.RunContext.Client) and p5.Name == "Animate" then
-				local var26, animate
-				local var25 = p4
+	local var6, animate_1
+	if not var5 then
+		var1 = p1.ChildAdded:Connect(function(p2)
+			-- upvalues: p1 (ref), t (copy), var4 (copy)
+			if (p2:IsA("LocalScript") or p2:IsA("Script") and p2.RunContext == Enum.RunContext.Client) and p2.Name == "Animate" then
+				local var7, animate
+				local var8 = p1
 				
-				if var25 then
-					animate = var25:FindFirstChild("Animate")
-					var26 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+				if var8 then
+					animate = var8:FindFirstChild("Animate")
+					var7 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 				else
-					var26 = nil
+					var7 = nil
 				end
-				local var28
-				if var26 then
-					animate = var26:FindFirstChild("PlayEmote")
-					var28 = if animate and animate:IsA("BindableFunction") then animate else nil
+				local var9
+				if var7 then
+					animate = var7:FindFirstChild("PlayEmote")
+					var9 = if animate and animate:IsA("BindableFunction") then animate else nil
 				else
-					var28 = nil
+					var9 = nil
 				end
-				local var29 = var28 ~= nil
+				local var10 = var9 ~= nil
 				
-				if t.Value ~= var29 then
-					t.Value = var29
-					t.ChangedEvent:Fire(var29)
+				if t.Value ~= var10 then
+					t.Value = var10
+					t.ChangedEvent:Fire(var10)
 				end
-				var5(var29, var25)
+				var4(var10, var8)
 			end
 		end)
 		
 		return
-	elseif p4 then
-		animate_1 = p4:FindFirstChild("Animate")
-		var22 = if animate_1 and animate_1:IsA("LocalScript") then animate_1 elseif animate_1 and animate_1:IsA("Script") and animate_1.RunContext == Enum.RunContext.Client then animate_1 else nil
+	elseif p1 then
+		animate_1 = p1:FindFirstChild("Animate")
+		var6 = if animate_1 and animate_1:IsA("LocalScript") then animate_1 elseif animate_1 and animate_1:IsA("Script") and animate_1.RunContext == Enum.RunContext.Client then animate_1 else nil
 	else
-		var22 = nil
+		var6 = nil
 	end
-	local var24
-	if var22 then
-		animate_1 = var22:FindFirstChild("PlayEmote")
-		var24 = if animate_1 and animate_1:IsA("BindableFunction") then animate_1 else nil
+	local var7
+	if var6 then
+		animate_1 = var6:FindFirstChild("PlayEmote")
+		var7 = if animate_1 and animate_1:IsA("BindableFunction") then animate_1 else nil
 	else
-		var24 = nil
+		var7 = nil
 	end
-	animate = var24 ~= nil
+	animate = var7 ~= nil
 	
 	if t.Value ~= animate then
 		t.Value = animate
 		t.ChangedEvent:Fire(animate)
 	end
-	var5(animate, p4)
+	var4(animate, p1)
 end
 
-local _ = function(p6, p7)
-	-- upvalues: t (ref), var5 (write), var3 (write)
-	local var30, animate
-	if p6 then
-		animate = p6:FindFirstChild("Animate")
-		var30 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+local _ = function(p1, p2)
+	-- upvalues: t (ref), var4 (write), var2 (write)
+	local var5, animate
+	if p1 then
+		animate = p1:FindFirstChild("Animate")
+		var5 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 	else
-		var30 = nil
+		var5 = nil
 	end
-	local var32
-	if var30 then
-		animate = var30:FindFirstChild("PlayEmote")
-		var32 = if animate and animate:IsA("BindableFunction") then animate else nil
+	local var6
+	if var5 then
+		animate = var5:FindFirstChild("PlayEmote")
+		var6 = if animate and animate:IsA("BindableFunction") then animate else nil
 	else
-		var32 = nil
+		var6 = nil
 	end
-	local var33, animate_1
-	if not var32 then
-		var3 = p7.ChildAdded:Connect(function(p8)
-			-- upvalues: p6 (ref), t (copy), var5 (copy)
-			if p8:IsA("BindableFunction") and p8.Name == "PlayEmote" then
-				local var37, animate
-				local var36 = p6
+	local var7, animate_1
+	if not var6 then
+		var2 = p2.ChildAdded:Connect(function(p3)
+			-- upvalues: p1 (ref), t (copy), var4 (copy)
+			if p3:IsA("BindableFunction") and p3.Name == "PlayEmote" then
+				local var8, animate
+				local var9 = p1
 				
-				if var36 then
-					animate = var36:FindFirstChild("Animate")
-					var37 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+				if var9 then
+					animate = var9:FindFirstChild("Animate")
+					var8 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 				else
-					var37 = nil
+					var8 = nil
 				end
-				local var39
-				if var37 then
-					animate = var37:FindFirstChild("PlayEmote")
-					var39 = if animate and animate:IsA("BindableFunction") then animate else nil
+				local var10
+				if var8 then
+					animate = var8:FindFirstChild("PlayEmote")
+					var10 = if animate and animate:IsA("BindableFunction") then animate else nil
 				else
-					var39 = nil
+					var10 = nil
 				end
-				local var40 = var39 ~= nil
+				local var11 = var10 ~= nil
 				
-				if t.Value ~= var40 then
-					t.Value = var40
-					t.ChangedEvent:Fire(var40)
+				if t.Value ~= var11 then
+					t.Value = var11
+					t.ChangedEvent:Fire(var11)
 				end
-				var5(var40, var36)
+				var4(var11, var9)
 			end
 		end)
 		
 		return
-	elseif p6 then
-		animate_1 = p6:FindFirstChild("Animate")
-		var33 = if animate_1 and animate_1:IsA("LocalScript") then animate_1 elseif animate_1 and animate_1:IsA("Script") and animate_1.RunContext == Enum.RunContext.Client then animate_1 else nil
+	elseif p1 then
+		animate_1 = p1:FindFirstChild("Animate")
+		var7 = if animate_1 and animate_1:IsA("LocalScript") then animate_1 elseif animate_1 and animate_1:IsA("Script") and animate_1.RunContext == Enum.RunContext.Client then animate_1 else nil
 	else
-		var33 = nil
+		var7 = nil
 	end
-	if var33 then
-		animate_1 = var33:FindFirstChild("PlayEmote")
+	if var7 then
+		animate_1 = var7:FindFirstChild("PlayEmote")
 		animate = if animate_1 and animate_1:IsA("BindableFunction") then animate_1 else nil
 	else
 		animate = nil
 	end
-	local var35 = animate ~= nil
+	local var8 = animate ~= nil
 	
-	if t.Value ~= var35 then
-		t.Value = var35
-		t.ChangedEvent:Fire(var35)
+	if t.Value ~= var8 then
+		t.Value = var8
+		t.ChangedEvent:Fire(var8)
 	end
-	var5(var35, p6)
+	var4(var8, p1)
 end
 
-local _ = function(p9)
-	-- upvalues: t (ref), var5 (write), var4 (write)
-	local var41, animate
-	if p9 then
-		animate = p9:FindFirstChild("Animate")
-		var41 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+local _ = function(p1)
+	-- upvalues: t (ref), var4 (write), var3 (write)
+	local var5, animate
+	if p1 then
+		animate = p1:FindFirstChild("Animate")
+		var5 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 	else
-		var41 = nil
+		var5 = nil
 	end
-	local var43
-	if var41 then
-		animate = var41:FindFirstChild("PlayEmote")
-		var43 = if animate and animate:IsA("BindableFunction") then animate else nil
+	local var6
+	if var5 then
+		animate = var5:FindFirstChild("PlayEmote")
+		var6 = if animate and animate:IsA("BindableFunction") then animate else nil
 	else
-		var43 = nil
+		var6 = nil
 	end
-	local var44, animate_1
-	if var43 then
-		var4 = var43.AncestryChanged:Connect(function(_, p10)
-			-- upvalues: var43 (ref), p9 (ref), t (copy), var5 (copy)
-			if not p10 or not var43:IsDescendantOf(p9) then
-				local var48, animate
-				local var47 = p9
+	local var7, animate_1
+	if var6 then
+		var3 = var6.AncestryChanged:Connect(function(_, p2)
+			-- upvalues: var6 (ref), p1 (ref), t (copy), var4 (copy)
+			if not p2 or not var6:IsDescendantOf(p1) then
+				local var8, animate
+				local var9 = p1
 				
-				if var47 then
-					animate = var47:FindFirstChild("Animate")
-					var48 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+				if var9 then
+					animate = var9:FindFirstChild("Animate")
+					var8 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 				else
-					var48 = nil
+					var8 = nil
 				end
-				local var50
-				if var48 then
-					animate = var48:FindFirstChild("PlayEmote")
-					var50 = if animate and animate:IsA("BindableFunction") then animate else nil
+				local var10
+				if var8 then
+					animate = var8:FindFirstChild("PlayEmote")
+					var10 = if animate and animate:IsA("BindableFunction") then animate else nil
 				else
-					var50 = nil
+					var10 = nil
 				end
-				local var51 = var50 ~= nil
+				local var11 = var10 ~= nil
 				
-				if t.Value ~= var51 then
-					t.Value = var51
-					t.ChangedEvent:Fire(var51)
+				if t.Value ~= var11 then
+					t.Value = var11
+					t.ChangedEvent:Fire(var11)
 				end
-				var5(var51, var47)
+				var4(var11, var9)
 			end
 		end)
 		
 		return
-	elseif p9 then
-		animate_1 = p9:FindFirstChild("Animate")
-		var44 = if animate_1 and animate_1:IsA("LocalScript") then animate_1 elseif animate_1 and animate_1:IsA("Script") and animate_1.RunContext == Enum.RunContext.Client then animate_1 else nil
+	elseif p1 then
+		animate_1 = p1:FindFirstChild("Animate")
+		var7 = if animate_1 and animate_1:IsA("LocalScript") then animate_1 elseif animate_1 and animate_1:IsA("Script") and animate_1.RunContext == Enum.RunContext.Client then animate_1 else nil
 	else
-		var44 = nil
+		var7 = nil
 	end
-	if var44 then
-		animate_1 = var44:FindFirstChild("PlayEmote")
+	if var7 then
+		animate_1 = var7:FindFirstChild("PlayEmote")
 		animate = if animate_1 and animate_1:IsA("BindableFunction") then animate_1 else nil
 	else
 		animate = nil
 	end
-	local var46 = animate ~= nil
+	local var8 = animate ~= nil
 	
-	if t.Value ~= var46 then
-		t.Value = var46
-		t.ChangedEvent:Fire(var46)
+	if t.Value ~= var8 then
+		t.Value = var8
+		t.ChangedEvent:Fire(var8)
 	end
-	var5(var46, p9)
+	var4(var8, p1)
 end
 
-var5 = function(p11, p12)
-	-- upvalues: var2 (write), var3 (write), var4 (write), t (ref), var5 (write)
-	local animate, animate_1, var58, animate_2
+var4 = function(p1, p2)
+	-- upvalues: var1 (write), var2 (write), var3 (write), t (ref), var4 (write)
+	local animate, animate_1, var5, animate_2
+	if var1 then
+		var1:Disconnect()
+		var1 = nil
+	end
 	if var2 then
 		var2:Disconnect()
 		var2 = nil
@@ -312,89 +316,85 @@ var5 = function(p11, p12)
 		var3:Disconnect()
 		var3 = nil
 	end
-	if var4 then
-		var4:Disconnect()
-		var4 = nil
-	end
-	if not p12 then return end
-	if p11 then
-		local var52
-		if p12 then
-			animate = p12:FindFirstChild("Animate")
-			var52 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+	if not p2 then return end
+	if p1 then
+		local var6
+		if p2 then
+			animate = p2:FindFirstChild("Animate")
+			var6 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 		else
-			var52 = nil
+			var6 = nil
 		end
-		local var54
-		if var52 then
-			animate = var52:FindFirstChild("PlayEmote")
-			var54 = if animate and animate:IsA("BindableFunction") then animate else nil
+		local var7
+		if var6 then
+			animate = var6:FindFirstChild("PlayEmote")
+			var7 = if animate and animate:IsA("BindableFunction") then animate else nil
 		else
-			var54 = nil
+			var7 = nil
 		end
-		local var55
-		if var54 then
-			var4 = var54.AncestryChanged:Connect(function(_, p13)
-				-- upvalues: var54 (ref), p12 (ref), t (copy), var5 (copy)
-				if not p13 or not var54:IsDescendantOf(p12) then
-					local var48
-					local var47 = p12
+		local var8
+		if var7 then
+			var3 = var7.AncestryChanged:Connect(function(_, p3)
+				-- upvalues: var7 (ref), p2 (ref), t (copy), var4 (copy)
+				if not p3 or not var7:IsDescendantOf(p2) then
+					local var9
+					local var10 = p2
 					
-					if var47 then
-						local animate = var47:FindFirstChild("Animate")
-						var48 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+					if var10 then
+						local animate = var10:FindFirstChild("Animate")
+						var9 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 					else
-						var48 = nil
+						var9 = nil
 					end
-					local var50
-					if var48 then
-						local animate = var48:FindFirstChild("PlayEmote")
-						var50 = if animate and animate:IsA("BindableFunction") then animate else nil
+					local var11
+					if var9 then
+						local animate = var9:FindFirstChild("PlayEmote")
+						var11 = if animate and animate:IsA("BindableFunction") then animate else nil
 					else
-						var50 = nil
+						var11 = nil
 					end
-					local var51 = var50 ~= nil
+					local var12 = var11 ~= nil
 					
-					if t.Value ~= var51 then
-						t.Value = var51
-						t.ChangedEvent:Fire(var51)
+					if t.Value ~= var12 then
+						t.Value = var12
+						t.ChangedEvent:Fire(var12)
 					end
-					var5(var51, var47)
+					var4(var12, var10)
 				end
 			end)
 			
 			return
-		elseif p12 then
-			animate_1 = p12:FindFirstChild("Animate")
-			var55 = if animate_1 and animate_1:IsA("LocalScript") then animate_1 elseif animate_1 and animate_1:IsA("Script") and animate_1.RunContext == Enum.RunContext.Client then animate_1 else nil
+		elseif p2 then
+			animate_1 = p2:FindFirstChild("Animate")
+			var8 = if animate_1 and animate_1:IsA("LocalScript") then animate_1 elseif animate_1 and animate_1:IsA("Script") and animate_1.RunContext == Enum.RunContext.Client then animate_1 else nil
 		else
-			var55 = nil
+			var8 = nil
 		end
-		if var55 then
-			animate_1 = var55:FindFirstChild("PlayEmote")
+		if var8 then
+			animate_1 = var8:FindFirstChild("PlayEmote")
 			animate = if animate_1 and animate_1:IsA("BindableFunction") then animate_1 else nil
 		else
 			animate = nil
 		end
-		local var57 = animate ~= nil
+		local var9 = animate ~= nil
 		
-		if t.Value ~= var57 then
-			t.Value = var57
-			t.ChangedEvent:Fire(var57)
+		if t.Value ~= var9 then
+			t.Value = var9
+			t.ChangedEvent:Fire(var9)
 		end
-		var5(var57, p12)
+		var4(var9, p2)
 		
 		return
-	elseif p12 then
-		animate_2 = p12:FindFirstChild("Animate")
-		var58 = if animate_2 and animate_2:IsA("LocalScript") then animate_2 elseif animate_2 and animate_2:IsA("Script") and animate_2.RunContext == Enum.RunContext.Client then animate_2 else nil
+	elseif p2 then
+		animate_2 = p2:FindFirstChild("Animate")
+		var5 = if animate_2 and animate_2:IsA("LocalScript") then animate_2 elseif animate_2 and animate_2:IsA("Script") and animate_2.RunContext == Enum.RunContext.Client then animate_2 else nil
 	else
-		var58 = nil
+		var5 = nil
 	end
 	local animate_3, animate_4
-	if var58 then
-		if p12 then
-			animate_3 = p12:FindFirstChild("Animate")
+	if var5 then
+		if p2 then
+			animate_3 = p2:FindFirstChild("Animate")
 			animate = if animate_3 and animate_3:IsA("LocalScript") then animate_3 elseif animate_3 and animate_3:IsA("Script") and animate_3.RunContext == Enum.RunContext.Client then animate_3 else nil
 		else
 			animate = nil
@@ -406,8 +406,8 @@ var5 = function(p11, p12)
 			animate_2 = nil
 		end
 		if animate_2 then
-			if p12 then
-				animate_4 = p12:FindFirstChild("Animate")
+			if p2 then
+				animate_4 = p2:FindFirstChild("Animate")
 				animate_1 = if animate_4 and animate_4:IsA("LocalScript") then animate_4 elseif animate_4 and animate_4:IsA("Script") and animate_4.RunContext == Enum.RunContext.Client then animate_4 else nil
 			else
 				animate_1 = nil
@@ -424,80 +424,80 @@ var5 = function(p11, p12)
 				t.Value = animate
 				t.ChangedEvent:Fire(animate)
 			end
-			var5(animate, p12)
+			var4(animate, p2)
 			
 			return
 		else
-			var3 = var58.ChildAdded:Connect(function(p14)
-				-- upvalues: p12 (ref), t (copy), var5 (copy)
-				if p14:IsA("BindableFunction") and p14.Name == "PlayEmote" then
-					local var37
-					local var36 = p12
+			var2 = var5.ChildAdded:Connect(function(p3)
+				-- upvalues: p2 (ref), t (copy), var4 (copy)
+				if p3:IsA("BindableFunction") and p3.Name == "PlayEmote" then
+					local var10
+					local var11 = p2
 					
-					if var36 then
-						local animate = var36:FindFirstChild("Animate")
-						var37 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+					if var11 then
+						local animate = var11:FindFirstChild("Animate")
+						var10 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 					else
-						var37 = nil
+						var10 = nil
 					end
-					local var39
-					if var37 then
-						local animate = var37:FindFirstChild("PlayEmote")
-						var39 = if animate and animate:IsA("BindableFunction") then animate else nil
+					local var12
+					if var10 then
+						local animate = var10:FindFirstChild("PlayEmote")
+						var12 = if animate and animate:IsA("BindableFunction") then animate else nil
 					else
-						var39 = nil
+						var12 = nil
 					end
-					local var40 = var39 ~= nil
+					local var13 = var12 ~= nil
 					
-					if t.Value ~= var40 then
-						t.Value = var40
-						t.ChangedEvent:Fire(var40)
+					if t.Value ~= var13 then
+						t.Value = var13
+						t.ChangedEvent:Fire(var13)
 					end
-					var5(var40, var36)
+					var4(var13, var11)
 				end
 			end)
 			
 			return
 		end
-	elseif p12 then
-		animate = p12:FindFirstChild("Animate")
+	elseif p2 then
+		animate = p2:FindFirstChild("Animate")
 		animate_2 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 	else
 		animate_2 = nil
 	end
 	if not animate_2 then
-		var2 = p12.ChildAdded:Connect(function(p15)
-			-- upvalues: p12 (ref), t (copy), var5 (copy)
-			if (p15:IsA("LocalScript") or p15:IsA("Script") and p15.RunContext == Enum.RunContext.Client) and p15.Name == "Animate" then
-				local var26
-				local var25 = p12
+		var1 = p2.ChildAdded:Connect(function(p3)
+			-- upvalues: p2 (ref), t (copy), var4 (copy)
+			if (p3:IsA("LocalScript") or p3:IsA("Script") and p3.RunContext == Enum.RunContext.Client) and p3.Name == "Animate" then
+				local var10
+				local var11 = p2
 				
-				if var25 then
-					local animate = var25:FindFirstChild("Animate")
-					var26 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+				if var11 then
+					local animate = var11:FindFirstChild("Animate")
+					var10 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 				else
-					var26 = nil
+					var10 = nil
 				end
-				local var28
-				if var26 then
-					local animate = var26:FindFirstChild("PlayEmote")
-					var28 = if animate and animate:IsA("BindableFunction") then animate else nil
+				local var12
+				if var10 then
+					local animate = var10:FindFirstChild("PlayEmote")
+					var12 = if animate and animate:IsA("BindableFunction") then animate else nil
 				else
-					var28 = nil
+					var12 = nil
 				end
-				local var29 = var28 ~= nil
+				local var13 = var12 ~= nil
 				
-				if t.Value ~= var29 then
-					t.Value = var29
-					t.ChangedEvent:Fire(var29)
+				if t.Value ~= var13 then
+					t.Value = var13
+					t.ChangedEvent:Fire(var13)
 				end
-				var5(var29, var25)
+				var4(var13, var11)
 			end
 		end)
 		
 		return
-	elseif p12 then
-		animate_4 = p12:FindFirstChild("Animate")
+	elseif p2 then
+		animate_4 = p2:FindFirstChild("Animate")
 		animate_1 = if animate_4 and animate_4:IsA("LocalScript") then animate_4 elseif animate_4 and animate_4:IsA("Script") and animate_4.RunContext == Enum.RunContext.Client then animate_4 else nil
 	else
 		animate_1 = nil
@@ -514,12 +514,16 @@ var5 = function(p11, p12)
 		t.Value = animate
 		t.ChangedEvent:Fire(animate)
 	end
-	var5(animate, p12)
+	var4(animate, p2)
 end
 
-local _ = function(p16)
-	-- upvalues: var2 (write), var3 (write), var4 (write), t (ref), var5 (write)
-	local var62, animate
+local _ = function(p1)
+	-- upvalues: var1 (write), var2 (write), var3 (write), t (ref), var4 (write)
+	local var5, animate
+	if var1 then
+		var1:Disconnect()
+		var1 = nil
+	end
 	if var2 then
 		var2:Disconnect()
 		var2 = nil
@@ -528,37 +532,37 @@ local _ = function(p16)
 		var3:Disconnect()
 		var3 = nil
 	end
-	if var4 then
-		var4:Disconnect()
-		var4 = nil
-	end
-	if p16 then
-		animate = p16:FindFirstChild("Animate")
-		var62 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+	if p1 then
+		animate = p1:FindFirstChild("Animate")
+		var5 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 	else
-		var62 = nil
+		var5 = nil
 	end
-	local var64
-	if var62 then
-		animate = var62:FindFirstChild("PlayEmote")
-		var64 = if animate and animate:IsA("BindableFunction") then animate else nil
+	local var6
+	if var5 then
+		animate = var5:FindFirstChild("PlayEmote")
+		var6 = if animate and animate:IsA("BindableFunction") then animate else nil
 	else
-		var64 = nil
+		var6 = nil
 	end
-	local var65 = var64 ~= nil
+	local var7 = var6 ~= nil
 	
-	if t.Value ~= var65 then
-		t.Value = var65
-		t.ChangedEvent:Fire(var65)
+	if t.Value ~= var7 then
+		t.Value = var7
+		t.ChangedEvent:Fire(var7)
 	end
-	var5(var65, p16)
+	var4(var7, p1)
 end
 
 localPlayer:GetPropertyChangedSignal("Character"):Connect(function()
-	-- upvalues: localPlayer (write), var2 (write), var3 (write), var4 (write), t (ref), var5 (write)
-	local var66, animate
+	-- upvalues: localPlayer (write), var1 (write), var2 (write), var3 (write), t (ref), var4 (write)
+	local var5, animate
 	local character = localPlayer.Character
 	
+	if var1 then
+		var1:Disconnect()
+		var1 = nil
+	end
 	if var2 then
 		var2:Disconnect()
 		var2 = nil
@@ -567,52 +571,48 @@ localPlayer:GetPropertyChangedSignal("Character"):Connect(function()
 		var3:Disconnect()
 		var3 = nil
 	end
-	if var4 then
-		var4:Disconnect()
-		var4 = nil
-	end
 	if character then
 		animate = character:FindFirstChild("Animate")
-		var66 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+		var5 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 	else
-		var66 = nil
+		var5 = nil
 	end
-	local var68
-	if var66 then
-		animate = var66:FindFirstChild("PlayEmote")
-		var68 = if animate and animate:IsA("BindableFunction") then animate else nil
+	local var6
+	if var5 then
+		animate = var5:FindFirstChild("PlayEmote")
+		var6 = if animate and animate:IsA("BindableFunction") then animate else nil
 	else
-		var68 = nil
+		var6 = nil
 	end
-	local var69 = var68 ~= nil
+	local var7 = var6 ~= nil
 	
-	if t.Value ~= var69 then
-		t.Value = var69
-		t.ChangedEvent:Fire(var69)
+	if t.Value ~= var7 then
+		t.Value = var7
+		t.ChangedEvent:Fire(var7)
 	end
-	var5(var69, character)
+	var4(var7, character)
 end)
 local character = localPlayer.Character
-local var6, animate
+local var5, animate
 if character then
 	animate = character:FindFirstChild("Animate")
-	var6 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+	var5 = if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
+else
+	var5 = nil
+end
+local var6
+if var5 then
+	animate = var5:FindFirstChild("PlayEmote")
+	var6 = if animate and animate:IsA("BindableFunction") then animate else nil
 else
 	var6 = nil
 end
-local var8
-if var6 then
-	animate = var6:FindFirstChild("PlayEmote")
-	var8 = if animate and animate:IsA("BindableFunction") then animate else nil
-else
-	var8 = nil
-end
-local var9 = var8 ~= nil
+local var7 = var6 ~= nil
 
-if t.Value ~= var9 then
-	t.Value = var9
-	t.ChangedEvent:Fire(var9)
+if t.Value ~= var7 then
+	t.Value = var7
+	t.ChangedEvent:Fire(var7)
 end
-var5(var9, character)
+var4(var7, character)
 
 return t

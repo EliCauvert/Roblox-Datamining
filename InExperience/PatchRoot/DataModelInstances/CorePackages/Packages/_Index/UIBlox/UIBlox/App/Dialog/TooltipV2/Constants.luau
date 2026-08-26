@@ -5,7 +5,7 @@ local _ = require(parent.Types)
 local tooltipOrientationModule = require(parent_1.Tooltip.Enum.TooltipOrientation)
 local imagesModule = require(parent_2.ImageSet.Images)
 local uDim2 = UDim2.fromOffset(16, 8)
-local var3 = uDim2.Y.Offset - 1
+local var1 = uDim2.Y.Offset - 1
 
 return table.freeze({
 	DEFAULT_PADDING = 12,
@@ -18,8 +18,8 @@ return table.freeze({
 	SCREEN_MARGIN = 12,
 	DEFAULT_DELAY_TIME = 0.4,
 	CORNER_RADIUS = UDim.new(0, 8),
-	CONTENT_TO_CARET_TIP = var3,
-	CONTENT_TO_CARET_CENTER = var3 - uDim2.Y.Offset / 2,
+	CONTENT_TO_CARET_TIP = var1,
+	CONTENT_TO_CARET_CENTER = var1 - uDim2.Y.Offset / 2,
 	CARET_IMAGE = imagesModule["component_assets/triangleDown_16"],
 	CARET_ROTATION = {
 		[tooltipOrientationModule.Top] = 0,
@@ -62,7 +62,7 @@ return table.freeze({
 		[tooltipOrientationModule.Right] = tooltipOrientationModule.Left,
 		[tooltipOrientationModule.Left] = tooltipOrientationModule.Right
 	},
-	DISTANCE_TO_CONTENT = 4 + var3,
+	DISTANCE_TO_CONTENT = 4 + var1,
 	MIN_DISTANCE_TO_CARET_MIDDLE = 12 + uDim2.X.Offset / 2,
 	INACTIVE_ANIMATION_TARGETS = { distanceOffset = -4, transparency = 1 },
 	ACTIVE_ANIMATION_TARGETS = { distanceOffset = 0, transparency = 0 },

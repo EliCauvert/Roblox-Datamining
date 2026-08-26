@@ -37,7 +37,7 @@ local chatLandingStackNavigatorModule = require(script.Parent.chatLandingStackNa
 local chatLandingStackNavigatorConnector = roactModule.Component:extend("ChatLandingStackNavigatorConnector")
 chatLandingStackNavigatorConnector.router = chatLandingStackNavigatorModule.router
 
-function chatLandingStackNavigatorConnector.render(p0)
+function chatLandingStackNavigatorConnector.render(p1)
 	-- upvalues: roactModule (ref), chatLandingStackNavigatorModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -45,7 +45,7 @@ function chatLandingStackNavigatorConnector.render(p0)
 		ClipsDescendants = true,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
-		ChatLandingStackNavigator = roactModule.createElement(chatLandingStackNavigatorModule, p0.props)
+		ChatLandingStackNavigator = roactModule.createElement(chatLandingStackNavigatorModule, p1.props)
 	})
 end
 

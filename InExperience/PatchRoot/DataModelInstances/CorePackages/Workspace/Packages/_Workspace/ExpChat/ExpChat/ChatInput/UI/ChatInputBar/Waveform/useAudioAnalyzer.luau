@@ -1,20 +1,20 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var1 (ref)
-		if p0 then
+		-- upvalues: p1 (ref), var1 (ref)
+		if p1 then
 			local waveformAnalyzer = Instance.new("AudioAnalyzer")
 			waveformAnalyzer.SpectrumEnabled = false
 			waveformAnalyzer.Name = "WaveformAnalyzer"
-			waveformAnalyzer.Parent = p0.Parent
+			waveformAnalyzer.Parent = p1.Parent
 			var1.current = waveformAnalyzer
 			local wire = Instance.new("Wire")
-			wire.SourceInstance = p0
+			wire.SourceInstance = p1
 			wire.TargetInstance = waveformAnalyzer
-			wire.Parent = p0.Parent
+			wire.Parent = p1.Parent
 			
 			return function()
 				-- upvalues: wire (ref), waveformAnalyzer (ref), var1 (copy)
@@ -23,7 +23,7 @@ return function(p0)
 				var1.current = nil
 			end
 		end
-	end, { p0 })
+	end, { p1 })
 	
 	return var1
 end

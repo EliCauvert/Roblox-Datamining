@@ -8,17 +8,17 @@ local profileActionBarModule = require(profilePlatform.Components.ProfileActionB
 local getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule = require(profilePlatform.Flags.GetFIntProfilePlatformCurrencyTransferTooltipMaxImpressions)
 local _ = require(profilePlatform.Types.UpsellTooltipProps)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule (ref), appStorageService (ref), profileActionBarModule (ref)
-	local var6 = useLocalization({
+	local var1 = useLocalization({
 		plusMoreMenuTooltipBody = textKeysModule.CurrencyTransferTooltipBody
 	})
-	local var7, var8 = reactModule.useState(false)
-	local var9 = reactModule.useRef(false)
+	local var2, var3 = reactModule.useState(false)
+	local var4 = reactModule.useRef(false)
 	local currencyTransferProfileActionTooltipStorageKeyEngineFeature = game:GetEngineFeature("CurrencyTransferProfileActionTooltipStorageKey")
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), currencyTransferProfileActionTooltipStorageKeyEngineFeature (ref), getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule (copy), appStorageService (copy), var8 (ref)
-		if var9.current then return end
+		-- upvalues: var4 (ref), currencyTransferProfileActionTooltipStorageKeyEngineFeature (ref), getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule (copy), appStorageService (copy), var3 (ref)
+		if var4.current then return end
 		if currencyTransferProfileActionTooltipStorageKeyEngineFeature then
 			local currencyTransferProfileActionTooltipImpressionsCount = tonumber(appStorageService:GetItem("CurrencyTransferProfileActionTooltipImpressionsCount")) or 0
 			
@@ -26,42 +26,42 @@ return function(p0)
 			appStorageService:SetItem("CurrencyTransferProfileActionTooltipImpressionsCount", tostring(currencyTransferProfileActionTooltipImpressionsCount + 1))
 			appStorageService:Flush()
 		end
-		var9.current = true
-		var8(true)
+		var4.current = true
+		var3(true)
 	end, {
 		currencyTransferProfileActionTooltipStorageKeyEngineFeature
 	})
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: currencyTransferProfileActionTooltipStorageKeyEngineFeature (ref), getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule (copy), appStorageService (copy), var8 (ref)
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: currencyTransferProfileActionTooltipStorageKeyEngineFeature (ref), getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule (copy), appStorageService (copy), var3 (ref)
 		if currencyTransferProfileActionTooltipStorageKeyEngineFeature then
 			appStorageService:SetItem("CurrencyTransferProfileActionTooltipImpressionsCount", tostring(getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule()))
 			appStorageService:Flush()
 		end
-		var8(false)
+		var3(false)
 	end, {
 		currencyTransferProfileActionTooltipStorageKeyEngineFeature
 	})
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref)
-		var8(false)
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref)
+		var3(false)
 	end, {})
 	
 	return reactModule.createElement(profileActionBarModule, {
-		isContextualMenuOpen = p0.isContextualMenuOpen,
-		layoutOrder = p0.layoutOrder,
-		openContextualMenu = p0.openContextualMenu,
-		profileActions = p0.profileActions,
-		primaryButtonRef = p0.primaryButtonRef,
-		moreButtonRef = p0.moreButtonRef,
-		showPlusMoreMenuTooltip = var7,
-		upsellTooltipProps = if var7 then reactModule.useMemo(function()
-			-- upvalues: var6 (ref), var11 (ref), var12 (ref)
+		isContextualMenuOpen = p1.isContextualMenuOpen,
+		layoutOrder = p1.layoutOrder,
+		openContextualMenu = p1.openContextualMenu,
+		profileActions = p1.profileActions,
+		primaryButtonRef = p1.primaryButtonRef,
+		moreButtonRef = p1.moreButtonRef,
+		showPlusMoreMenuTooltip = var2,
+		upsellTooltipProps = if var2 then reactModule.useMemo(function()
+			-- upvalues: var1 (ref), var5 (ref), var6 (ref)
 			return {
 				plusMoreMenuTooltipTitle = nil,
-				plusMoreMenuTooltipBody = var6.plusMoreMenuTooltipBody,
-				onPlusMoreMenuTooltipClose = var11,
-				onPlusMoreMenuTooltipDismiss = var12
+				plusMoreMenuTooltipBody = var1.plusMoreMenuTooltipBody,
+				onPlusMoreMenuTooltipClose = var5,
+				onPlusMoreMenuTooltipDismiss = var6
 			}
-		end, { var6.plusMoreMenuTooltipBody, var11, var12 }) else nil
+		end, { var1.plusMoreMenuTooltipBody, var5, var6 }) else nil
 	})
 end

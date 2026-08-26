@@ -19,34 +19,34 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: UGCValidationService (ref), list (ref), errorSourceStringsModule (ref)
-		local head = p1.renderMeshesData.Head
-		local ok, status, var4 = pcall(function()
+		local head = p2.renderMeshesData.Head
+		local ok, status, var1 = pcall(function()
 			-- upvalues: UGCValidationService (copy), head (ref), list (copy)
 			return UGCValidationService:GetDynamicHeadEditableMeshInactiveControls(head.editable, list)
 		end)
 		
 		if not ok then
 			if string.find(status, "Download Error") == 1 then
-				p0:fetchError(string.format("Failed to load model for dynamic head '%s'. Make sure model exists and try again.", p1.rootInstance.Name))
+				p1:fetchError(string.format("Failed to load model for dynamic head '%s'. Make sure model exists and try again.", p2.rootInstance.Name))
 			end
 			assert(false, status)
 		end
-		local meshId = p1.rootInstance.MeshId
+		local meshId = p2.rootInstance.MeshId
 		
 		if #status > 0 then
-			p0:fail(errorSourceStringsModule.Keys.DynHead_ControlsMissing, {
-				headName = p1.rootInstance.Name,
+			p1:fail(errorSourceStringsModule.Keys.DynHead_ControlsMissing, {
+				headName = p2.rootInstance.Name,
 				meshId = meshId,
 				controlList = table.concat(status, ", ")
 			})
 		end
-		if #var4 > 0 then
-			p0:fail(errorSourceStringsModule.Keys.DynHead_ControlsInactive, {
-				headName = p1.rootInstance.Name,
+		if #var1 > 0 then
+			p1:fail(errorSourceStringsModule.Keys.DynHead_ControlsInactive, {
+				headName = p2.rootInstance.Name,
 				meshId = meshId,
-				controlList = table.concat(var4, ", ")
+				controlList = table.concat(var1, ", ")
 			})
 		end
 	end

@@ -18,12 +18,12 @@ local sduiDeferredItemStubModule = require(sduiCoreSystem.ClientBinding.PropBuil
 local fFlagSduiDeferredListItems = require(parent.SharedFlags).FFlagSduiDeferredListItems
 local t = {}
 
-local function captureErrorContext(p0)
+local function captureErrorContext(p1)
 	return {
-		name = p0.debugName,
-		componentType = p0.currentComponentType,
-		parserName = p0.currentParserName,
-		appPage = p0.appPage
+		name = p1.debugName,
+		componentType = p1.currentComponentType,
+		parserName = p1.currentParserName,
+		appPage = p1.appPage
 	}
 end
 
@@ -81,92 +81,92 @@ return {
 			end
 			local item = p14.item
 			
-			return if p15 then function(p18)
+			return if p15 then function(p16)
 				-- upvalues: cryoModule (copy), p9 (copy), item (ref), t (copy)
-				return cryoModule.Dictionary.join(p9(p18), if typeof(item) == "table" then item else t)
-			end else function(p17)
+				return cryoModule.Dictionary.join(p9(p16), if typeof(item) == "table" then item else t)
+			end else function(p16)
 				-- upvalues: unwrapEntryData (copy), item (ref), fillInputs (copy), p14 (ref), p9 (copy), p10 (copy), p11 (copy), p12 (copy)
-				local var16 = unwrapEntryData(item)
-				fillInputs(var16, p14.inputs, p9, p10, p17, p11, p12)
+				local var1 = unwrapEntryData(item)
+				fillInputs(var1, p14.inputs, p9, p10, p16, p11, p12)
 				
-				return var16
+				return var1
 			end
 		end
 		
-		return if fFlagSduiPoolBackedFeed and p13 ~= nil then function(p19, p20)
+		return if fFlagSduiPoolBackedFeed and p13 ~= nil then function(p14, p15)
 			-- upvalues: rawSlice (ref), p13 (ref), cryoModule (copy)
-			local var17 = rawSlice(p19, p20)
+			local var1 = rawSlice(p14, p15)
 			
-			return function(p21)
-				-- upvalues: p13 (copy), p19 (ref), var17 (ref), cryoModule (copy)
-				local var18 = p13(p19)
+			return function(p16)
+				-- upvalues: p13 (copy), p14 (ref), var1 (ref), cryoModule (copy)
+				local var2 = p13(p14)
 				
-				return if var18 == nil then var17(p21) else cryoModule.Dictionary.join(var17(p21), var18)
+				return if var2 == nil then var1(p16) else cryoModule.Dictionary.join(var1(p16), var2)
 			end
 		end else rawSlice
 	end,
-	buildEntryConfigs = function(p22, p23, p24, p25, p26, p27, p28, p29, p30, p31)
+	buildEntryConfigs = function(p9, p10, p11, p12, p13, p14, p15, p16, p17, p18)
 		-- upvalues: fFlagSduiPoolBackedFeed (ref), sduiPropUtilsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiDeferredListItems (ref), sduiDeferredItemStubModule (ref), buildConfigForComponent (ref)
 		local t = {}
 		local t_1 = {}
-		local var21 = fFlagSduiPoolBackedFeed and p31 ~= nil
+		local var1 = fFlagSduiPoolBackedFeed and p18 ~= nil
 		
-		for i, v in p22 do
-			if p24 and p24[i] then
-				local var28 = p24[i]
+		for i, v in p9 do
+			if p11 and p11[i] then
+				local var2 = p11[i]
 				
-				if sduiPropUtilsModule.isComponentVisible(var28, p29) then
-					if var21 then
-						local var29 = p31(v, p29)
+				if sduiPropUtilsModule.isComponentVisible(var2, p16) then
+					if var1 then
+						local var3 = p18(v, p16)
 						
-						if var29 ~= nil then
-							for i_2, v_2 in var29 do
-								var28[i_2] = v_2
+						if var3 ~= nil then
+							for i_2, v_2 in var3 do
+								var2[i_2] = v_2
 							end
 						end
 					end
-					table.insert(t, var28)
+					table.insert(t, var2)
 					table.insert(t_1, i)
 				end
 			elseif v.template == nil then
 				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
 					message = `No template found for ComponentList item (identifier: {v.identifier or tostring(i)})`,
-					name = p26.name,
-					componentType = p26.componentType,
-					parserName = p26.parserName
-				}, p26.appPage)
+					name = p13.name,
+					componentType = p13.componentType,
+					parserName = p13.parserName
+				}, p13.appPage)
 			else
-				local var22 = p23(v, v.isInline)
-				local var23 = if v.isInline then p28 else nil
+				local var4 = p10(v, v.isInline)
+				local var5 = if v.isInline then p15 else nil
 				
-				if fFlagSduiDeferredListItems and p30 and (not v.template or (not v.template.kind or (not v.template.kind.value or (not v.template.kind.value.shared or v.template.kind.value.shared.is_component_filtered == nil)))) then
-					local var26 = sduiDeferredItemStubModule.makeStub(v.template, var22, p25, p27, var23, p26)
+				if fFlagSduiDeferredListItems and p17 and (not v.template or (not v.template.kind or (not v.template.kind.value or (not v.template.kind.value.shared or v.template.kind.value.shared.is_component_filtered == nil)))) then
+					local var6 = sduiDeferredItemStubModule.makeStub(v.template, var4, p12, p14, var5, p13)
 					
-					if var21 then
-						local var27 = p31(v, p29)
+					if var1 then
+						local var7 = p18(v, p16)
 						
-						if var27 ~= nil then
-							for v_1, v_2 in var27 do
-								var26[v_1] = v_2
+						if var7 ~= nil then
+							for v_1, v_2 in var7 do
+								var6[v_1] = v_2
 							end
 						end
 					end
-					table.insert(t, var26)
+					table.insert(t, var6)
 					table.insert(t_1, i)
 				else
-					local var24 = buildConfigForComponent(v.template, var22, p25, p27, nil, var23)
+					local var8 = buildConfigForComponent(v.template, var4, p12, p14, nil, var5)
 					
-					if var24 and sduiPropUtilsModule.isComponentVisible(var24, p29) then
-						if var21 then
-							local var25 = p31(v, p29)
+					if var8 and sduiPropUtilsModule.isComponentVisible(var8, p16) then
+						if var1 then
+							local var9 = p18(v, p16)
 							
-							if var25 ~= nil then
-								for i_1, v_1 in var25 do
-									var24[i_1] = v_1
+							if var9 ~= nil then
+								for i_1, v_1 in var9 do
+									var8[i_1] = v_1
 								end
 							end
 						end
-						table.insert(t, var24)
+						table.insert(t, var8)
 						table.insert(t_1, i)
 					end
 				end

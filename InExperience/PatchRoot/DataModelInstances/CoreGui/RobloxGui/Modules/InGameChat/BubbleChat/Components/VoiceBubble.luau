@@ -18,50 +18,50 @@ voiceBubble.validateProps = tModule.strictInterface({
 	isDistant = tModule.optional(tModule.boolean)
 })
 
-function voiceBubble.init(p0, p1)
+function voiceBubble.init(p1, p2)
 	-- upvalues: roactModule (ref), otterModule (ref)
-	local var9, var10 = roactModule.createBinding(0)
-	p0.width = var9
-	p0.updateWidth = var10
-	p0.widthMotor = otterModule.createSingleMotor(0)
-	p0.widthMotor:onStep(function(p2)
-		-- upvalues: p0 (ref)
-		p0.updateWidth(math.round(p2))
+	local var1, var2 = roactModule.createBinding(0)
+	p1.width = var1
+	p1.updateWidth = var2
+	p1.widthMotor = otterModule.createSingleMotor(0)
+	p1.widthMotor:onStep(function(p3)
+		-- upvalues: p1 (ref)
+		p1.updateWidth(math.round(p3))
 	end)
-	p0.frameSize = p0.width:map(function(p3)
-		-- upvalues: p0 (ref)
-		return if p0.props.insertSize then UDim2.fromOffset(p3, p0.props.insertSize.Y + p0.props.chatSettings.Padding * 2) else UDim2.fromOffset(p3, 0)
+	p1.frameSize = p1.width:map(function(p3)
+		-- upvalues: p1 (ref)
+		return if p1.props.insertSize then UDim2.fromOffset(p3, p1.props.insertSize.Y + p1.props.chatSettings.Padding * 2) else UDim2.fromOffset(p3, 0)
 	end)
-	local var11, var12 = roactModule.createBinding(1)
-	p0.transparency = var11
-	p0.updateTransparency = var12
-	p0.transparencyMotor = otterModule.createSingleMotor(1)
-	p0.transparencyMotor:onStep(p0.updateTransparency)
+	local var3, var4 = roactModule.createBinding(1)
+	p1.transparency = var3
+	p1.updateTransparency = var4
+	p1.transparencyMotor = otterModule.createSingleMotor(1)
+	p1.transparencyMotor:onStep(p1.updateTransparency)
 	
-	if p1.fadingOut then
-		p0:fadeOut()
+	if p2.fadingOut then
+		p1:fadeOut()
 	end
 end
 
-function voiceBubble.getDerivedStateFromProps(p4, p5)
-	local var13 = if p4.insertSize then p4.insertSize.X + p4.chatSettings.Padding * 2 else 0
+function voiceBubble.getDerivedStateFromProps(p1, p2)
+	local var1 = if p1.insertSize then p1.insertSize.X + p1.chatSettings.Padding * 2 else 0
 	
-	return if var13 == p5.fullWidth then nil else { fullWidth = var13 }
+	return if var1 == p2.fullWidth then nil else { fullWidth = var1 }
 end
 
-function voiceBubble.render(p6)
+function voiceBubble.render(p1)
 	-- upvalues: roactModule (ref), cryoModule (ref)
-	local chatSettings = p6.props.chatSettings
+	local chatSettings = p1.props.chatSettings
 	local backgroundImage = chatSettings.BackgroundImage
 	local backgroundGradient = chatSettings.BackgroundGradient
 	
 	return roactModule.createElement("Frame", {
 		Transparency = 1,
 		AnchorPoint = Vector2.new(0.5, 1),
-		Size = UDim2.fromOffset(p6.state.fullWidth, if p6.props.insertSize then p6.props.insertSize.Y + chatSettings.Padding * 2 else 0),
+		Size = UDim2.fromOffset(p1.state.fullWidth, if p1.props.insertSize then p1.props.insertSize.Y + chatSettings.Padding * 2 else 0),
 		Position = UDim2.new(0.5, 0, 1, -8)
 	}, {
-		Scale = roactModule.createElement("UIScale", { Scale = if p6.props.isDistant then 0.75 else 1 }),
+		Scale = roactModule.createElement("UIScale", { Scale = if p1.props.isDistant then 0.75 else 1 }),
 		Carat = chatSettings.TailVisible and roactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/InGameChat/Caret.png",
@@ -69,17 +69,17 @@ function voiceBubble.render(p6)
 			Position = UDim2.new(0.5, 0, 1, -1),
 			Size = UDim2.fromOffset(12, 8),
 			ImageColor3 = chatSettings.BackgroundColor3,
-			ImageTransparency = p6.transparency
+			ImageTransparency = p1.transparency
 		}),
 		RoundedFrame = roactModule.createElement("ImageLabel", cryoModule.Dictionary.join(backgroundImage, {
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
-			Size = p6.frameSize,
+			Size = p1.frameSize,
 			BackgroundColor3 = chatSettings.BackgroundColor3,
-			BackgroundTransparency = if backgroundImage.Image == "" then p6.transparency else 1,
+			BackgroundTransparency = if backgroundImage.Image == "" then p1.transparency else 1,
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.new(0.5, 0, 0, 0),
-			ImageTransparency = p6.transparency
+			ImageTransparency = p1.transparency
 		}), {
 			UICorner = chatSettings.CornerEnabled and roactModule.createElement("UICorner", { CornerRadius = chatSettings.CornerRadius }),
 			Contents = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
@@ -89,51 +89,51 @@ function voiceBubble.render(p6)
 					PaddingBottom = UDim.new(0, chatSettings.Padding),
 					PaddingLeft = UDim.new(0, chatSettings.Padding)
 				}),
-				Insert = p6.props.renderInsert and p6.props.renderInsert()
+				Insert = p1.props.renderInsert and p1.props.renderInsert()
 			}),
 			Gradient = backgroundGradient.Enabled and roactModule.createElement("UIGradient", backgroundGradient)
 		})
 	})
 end
 
-function voiceBubble.fadeOut(p7)
+function voiceBubble.fadeOut(p1)
 	-- upvalues: getTransparencySpringFromSettingsModule (ref)
-	if not p7.isFadingOut then
-		p7.isFadingOut = true
-		p7.transparencyMotor:onComplete(function()
-			-- upvalues: p7 (ref)
-			if p7.props.onFadeOut then
-				p7.props.onFadeOut()
+	if not p1.isFadingOut then
+		p1.isFadingOut = true
+		p1.transparencyMotor:onComplete(function()
+			-- upvalues: p1 (ref)
+			if p1.props.onFadeOut then
+				p1.props.onFadeOut()
 			end
 		end)
-		p7.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(p7.props.chatSettings)(1))
+		p1.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(p1.props.chatSettings)(1))
 	end
 end
 
-function voiceBubble.didUpdate(p8, _, p9)
+function voiceBubble.didUpdate(p1, _, p2)
 	-- upvalues: getSizeSpringFromSettingsModule (ref)
-	if p8.props.fadingOut then
-		p8:fadeOut()
+	if p1.props.fadingOut then
+		p1:fadeOut()
 		
 		return
-	elseif p8.state.fullWidth ~= p9.fullWidth then
-		p8.widthMotor:setGoal(getSizeSpringFromSettingsModule(p8.props.chatSettings)(p8.state.fullWidth))
+	elseif p1.state.fullWidth ~= p2.fullWidth then
+		p1.widthMotor:setGoal(getSizeSpringFromSettingsModule(p1.props.chatSettings)(p1.state.fullWidth))
 	end
 end
 
-function voiceBubble.didMount(p10)
+function voiceBubble.didMount(p1)
 	-- upvalues: getSizeSpringFromSettingsModule (ref), getTransparencySpringFromSettingsModule (ref)
-	if not p10.props.fadingOut then
-		local chatSettings = p10.props.chatSettings
-		local var14 = getSizeSpringFromSettingsModule(chatSettings)
-		p10.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(chatSettings)(p10.props.chatSettings.Transparency))
-		p10.widthMotor:setGoal(var14(p10.state.fullWidth))
+	if not p1.props.fadingOut then
+		local chatSettings = p1.props.chatSettings
+		local var1 = getSizeSpringFromSettingsModule(chatSettings)
+		p1.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(chatSettings)(p1.props.chatSettings.Transparency))
+		p1.widthMotor:setGoal(var1(p1.state.fullWidth))
 	end
 end
 
-function voiceBubble.willUnmount(p11)
-	p11.transparencyMotor:destroy()
-	p11.widthMotor:destroy()
+function voiceBubble.willUnmount(p1)
+	p1.transparencyMotor:destroy()
+	p1.widthMotor:destroy()
 end
 
 return voiceBubble

@@ -1,10 +1,10 @@
 ﻿local t = {}
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref)
-	if t[p0] then
+	if t[p1] then
 		return
 	end
-	t[p0] = true
-	p1()
+	t[p1] = true
+	p2()
 end

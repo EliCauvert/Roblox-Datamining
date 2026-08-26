@@ -4,10 +4,10 @@ local useDispatch = require(profileQRCode.Parent.RoactUtils).Hooks.RoactRodux.us
 
 return function()
 	-- upvalues: useDispatch (ref), configureRoduxUsersModule (ref)
-	local var2 = useDispatch()
+	local var1 = useDispatch()
 	
-	return function(p0)
-		-- upvalues: var2 (ref), configureRoduxUsersModule (copy)
-		return var2(configureRoduxUsersModule.GetUserV2FromUserId.API(p0))
+	return function(p1)
+		-- upvalues: var1 (ref), configureRoduxUsersModule (copy)
+		return var1(configureRoduxUsersModule.GetUserV2FromUserId.API(p1))
 	end
 end

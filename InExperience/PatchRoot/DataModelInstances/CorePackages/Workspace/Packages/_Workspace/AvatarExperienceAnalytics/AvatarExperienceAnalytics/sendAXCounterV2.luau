@@ -6,7 +6,7 @@ local default = require(parent.LoggingProtocol).default
 local dashModule = require(parent.Dash)
 local isSpatial = require(parent.AppCommonLib).isSpatial
 
-local function getAXCounterV2Metadata(p0)
+local function getAXCounterV2Metadata(p1)
 	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
 	local t = {
 		AppVersion = runService:GetRobloxVersion(),
@@ -15,8 +15,8 @@ local function getAXCounterV2Metadata(p0)
 		Platform = if isSpatial() then "VR" else userInputService:GetPlatform()
 	}
 	
-	if p0 and next(p0) ~= nil then
-		t = dashModule.assign({}, t, p0)
+	if p1 and next(p1) ~= nil then
+		t = dashModule.assign({}, t, p1)
 	end
 	return t
 end

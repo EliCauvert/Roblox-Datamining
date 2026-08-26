@@ -13,138 +13,138 @@ local getFFlagEnableAnalyticsForCameraDevicePermissionsModule = require(coreGuiS
 local getFFlagJoinWithoutMicPermissions = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagJoinWithoutMicPermissions
 local checkCameraAvailabilityBeforePermissions = game:DefineFastFlag("CheckCameraAvailabilityBeforePermissions", false)
 local debugSkipVoicePermissionCheck = game:DefineFastFlag("DebugSkipVoicePermissionCheck", false)
-local var12 = if getFFlagAvatarChatServiceEnabled() then game:GetService("AvatarChatService") else nil
-local var13 = nil
-local var14 = nil
+local var1 = if getFFlagAvatarChatServiceEnabled() then game:GetService("AvatarChatService") else nil
+local var2 = nil
+local var3 = nil
 local t = {}
-local var16 = false
+local var4 = false
 
-local function removePermissionsBasedOnUserSetting(value, p0, p1)
+local function removePermissionsBasedOnUserSetting(value, p1, p2)
 	-- upvalues: cryoModule (ref), default (ref), getFFlagJoinWithoutMicPermissions (ref), debugSkipVoicePermissionCheck (ref), checkCameraAvailabilityBeforePermissions (ref), videoCaptureService (ref)
-	if not value.isCameraEnabled and cryoModule.List.find(p0, default.Permissions.CAMERA_ACCESS) then
-		p0 = cryoModule.List.removeValue(p0, default.Permissions.CAMERA_ACCESS)
+	if not value.isCameraEnabled and cryoModule.List.find(p1, default.Permissions.CAMERA_ACCESS) then
+		p1 = cryoModule.List.removeValue(p1, default.Permissions.CAMERA_ACCESS)
 	end
 	if getFFlagJoinWithoutMicPermissions() then
-		if not value.isVoiceEnabled and cryoModule.List.find(p0, default.Permissions.MICROPHONE_ACCESS) or p1 == nil then
-			p0 = cryoModule.List.removeValue(p0, default.Permissions.MICROPHONE_ACCESS)
+		if not value.isVoiceEnabled and cryoModule.List.find(p1, default.Permissions.MICROPHONE_ACCESS) or p2 == nil then
+			p1 = cryoModule.List.removeValue(p1, default.Permissions.MICROPHONE_ACCESS)
 		end
-	elseif not value.isVoiceEnabled and cryoModule.List.find(p0, default.Permissions.MICROPHONE_ACCESS) then
-		p0 = cryoModule.List.removeValue(p0, default.Permissions.MICROPHONE_ACCESS)
+	elseif not value.isVoiceEnabled and cryoModule.List.find(p1, default.Permissions.MICROPHONE_ACCESS) then
+		p1 = cryoModule.List.removeValue(p1, default.Permissions.MICROPHONE_ACCESS)
 	end
-	if debugSkipVoicePermissionCheck and cryoModule.List.find(p0, default.Permissions.MICROPHONE_ACCESS) then
-		p0 = cryoModule.List.removeValue(p0, default.Permissions.MICROPHONE_ACCESS)
+	if debugSkipVoicePermissionCheck and cryoModule.List.find(p1, default.Permissions.MICROPHONE_ACCESS) then
+		p1 = cryoModule.List.removeValue(p1, default.Permissions.MICROPHONE_ACCESS)
 	end
-	if checkCameraAvailabilityBeforePermissions and cryoModule.List.find(p0, default.Permissions.CAMERA_ACCESS) and cryoModule.isEmpty(videoCaptureService:GetCameraDevices()) then
-		p0 = cryoModule.List.removeValue(p0, default.Permissions.CAMERA_ACCESS)
+	if checkCameraAvailabilityBeforePermissions and cryoModule.List.find(p1, default.Permissions.CAMERA_ACCESS) and cryoModule.isEmpty(videoCaptureService:GetCameraDevices()) then
+		p1 = cryoModule.List.removeValue(p1, default.Permissions.CAMERA_ACCESS)
 	end
-	return p0
+	return p1
 end
 
-local function requestPermissions(p2, p3, p4, p5, p6, p7)
-	-- upvalues: cryoModule (ref), default (ref), removePermissionsBasedOnUserSetting (ref), var16 (write), promiseModule (ref), microphoneDevicePermissionsLoggingModule (ref), var13 (write), var14 (write), cameraDevicePermissionGrantedSignalModule (ref), getFFlagEnableAnalyticsForCameraDevicePermissionsModule (ref), runService (ref), rbxAnalyticsService (ref)
-	local var21 = cryoModule.List.find(p5, default.Permissions.CAMERA_ACCESS) ~= nil
-	local var22 = cryoModule.List.find(p5, default.Permissions.MICROPHONE_ACCESS) ~= nil
-	local var23 = removePermissionsBasedOnUserSetting(p2, p5, p6)
-	local var24 = cryoModule.List.find(var23, default.Permissions.CAMERA_ACCESS) ~= nil
-	local var25 = cryoModule.List.find(var23, default.Permissions.MICROPHONE_ACCESS) ~= nil
+local function requestPermissions(p1, p2, p3, p4, p5, p6)
+	-- upvalues: cryoModule (ref), default (ref), removePermissionsBasedOnUserSetting (ref), var4 (write), promiseModule (ref), microphoneDevicePermissionsLoggingModule (ref), var2 (write), var3 (write), cameraDevicePermissionGrantedSignalModule (ref), getFFlagEnableAnalyticsForCameraDevicePermissionsModule (ref), runService (ref), rbxAnalyticsService (ref)
+	local var5 = cryoModule.List.find(p4, default.Permissions.CAMERA_ACCESS) ~= nil
+	local var6 = cryoModule.List.find(p4, default.Permissions.MICROPHONE_ACCESS) ~= nil
+	local var7 = removePermissionsBasedOnUserSetting(p1, p4, p5)
+	local var8 = cryoModule.List.find(var7, default.Permissions.CAMERA_ACCESS) ~= nil
+	local var9 = cryoModule.List.find(var7, default.Permissions.MICROPHONE_ACCESS) ~= nil
 	
-	if var23 and #var23 > 0 then
-		return if p6 == true then promiseModule.new(function(p10, _)
-			-- upvalues: var23 (ref), default (copy), p3 (ref), var16 (copy), p4 (ref)
+	if var7 and #var7 > 0 then
+		return if p5 == true then promiseModule.new(function(p7, _)
+			-- upvalues: var7 (ref), default (copy), p2 (ref), var4 (copy), p3 (ref)
 			local t = {}
 			
-			for i, v in ipairs(var23) do
-				local var28, var29 = default:hasPermissions({ v }):await()
+			for i, v in ipairs(var7) do
+				local var10, var11 = default:hasPermissions({ v }):await()
 				
-				if var28 then
-					t[v] = var29.status == default.Status.AUTHORIZED
+				if var10 then
+					t[v] = var11.status == default.Status.AUTHORIZED
 				else
 					t[v] = false
 				end
 			end
-			p3({
+			p2({
 				hasCameraPermissions = t[default.Permissions.CAMERA_ACCESS] or false,
 				hasMicPermissions = t[default.Permissions.MICROPHONE_ACCESS] or false
 			})
-			var16 = false
-			p4()
-			p10(t)
-		end) else default:hasPermissions(var23):andThen(function(p8)
-			-- upvalues: default (copy), var24 (ref), var25 (ref), p3 (ref), var16 (copy), p4 (ref), p7 (ref), microphoneDevicePermissionsLoggingModule (copy), var23 (ref), cryoModule (copy), var13 (copy), var21 (ref), var14 (copy), var22 (ref), cameraDevicePermissionGrantedSignalModule (copy), getFFlagEnableAnalyticsForCameraDevicePermissionsModule (copy), runService (copy), rbxAnalyticsService (copy)
+			var4 = false
+			p3()
+			p7(t)
+		end) else default:hasPermissions(var7):andThen(function(p8)
+			-- upvalues: default (copy), var8 (ref), var9 (ref), p2 (ref), var4 (copy), p3 (ref), p6 (ref), microphoneDevicePermissionsLoggingModule (copy), var7 (ref), cryoModule (copy), var2 (copy), var5 (ref), var3 (copy), var6 (ref), cameraDevicePermissionGrantedSignalModule (copy), getFFlagEnableAnalyticsForCameraDevicePermissionsModule (copy), runService (copy), rbxAnalyticsService (copy)
 			if p8.status == default.Status.AUTHORIZED then
-				p3({ hasCameraPermissions = var24, hasMicPermissions = var25 })
-				var16 = false
-				p4()
+				p2({ hasCameraPermissions = var8, hasMicPermissions = var9 })
+				var4 = false
+				p3()
 				
 				return p8
-			elseif var25 and p7 then
-				microphoneDevicePermissionsLoggingModule:logPromptImpression({ didAuthorize = false, uiContext = p7 })
+			elseif var9 and p6 then
+				microphoneDevicePermissionsLoggingModule:logPromptImpression({ didAuthorize = false, uiContext = p6 })
 			end
-			return default:requestPermissions(var23):andThen(function(p9)
-				-- upvalues: var24 (copy), default (copy), cryoModule (copy), var25 (copy), var13 (copy), var21 (copy), var14 (copy), var22 (copy), cameraDevicePermissionGrantedSignalModule (copy), getFFlagEnableAnalyticsForCameraDevicePermissionsModule (copy), runService (copy), rbxAnalyticsService (copy), p7 (copy), microphoneDevicePermissionsLoggingModule (copy), p3 (copy), var16 (copy), p4 (copy)
+			return default:requestPermissions(var7):andThen(function(p9)
+				-- upvalues: var8 (copy), default (copy), cryoModule (copy), var9 (copy), var2 (copy), var5 (copy), var3 (copy), var6 (copy), cameraDevicePermissionGrantedSignalModule (copy), getFFlagEnableAnalyticsForCameraDevicePermissionsModule (copy), runService (copy), rbxAnalyticsService (copy), p6 (copy), microphoneDevicePermissionsLoggingModule (copy), p2 (copy), var4 (copy), p3 (copy)
 				if typeof(p9) == "table" then
-					var13 = if var21 then var24 and (if p9.status ~= default.Status.AUTHORIZED then not cryoModule.List.find(p9.missingPermissions, default.Permissions.CAMERA_ACCESS) else true) else nil
-					var14 = if var22 then var25 and (if p9.status ~= default.Status.AUTHORIZED then not cryoModule.List.find(p9.missingPermissions, default.Permissions.MICROPHONE_ACCESS) else true) else nil
+					var2 = if var5 then var8 and (if p9.status ~= default.Status.AUTHORIZED then not cryoModule.List.find(p9.missingPermissions, default.Permissions.CAMERA_ACCESS) else true) else nil
+					var3 = if var6 then var9 and (if p9.status ~= default.Status.AUTHORIZED then not cryoModule.List.find(p9.missingPermissions, default.Permissions.MICROPHONE_ACCESS) else true) else nil
 					
-					if var13 then
+					if var2 then
 						cameraDevicePermissionGrantedSignalModule:fire()
 					end
 				elseif p9 == default.Status.AUTHORIZED then
 					cameraDevicePermissionGrantedSignalModule:fire()
-					var13 = var24
-					var14 = var25
+					var2 = var8
+					var3 = var9
 				else
-					var13 = false
-					var14 = false
+					var2 = false
+					var3 = false
 				end
 				local t = {
-					hasCameraPermissions = var13 or false,
-					hasMicPermissions = var14 or false
+					hasCameraPermissions = var2 or false,
+					hasMicPermissions = var3 or false
 				}
 				
-				if getFFlagEnableAnalyticsForCameraDevicePermissionsModule() and var24 then
-					rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "client", "avatarChat", "CameraDevicePermissionPrompted", { didAuthorize = var13 or false })
+				if getFFlagEnableAnalyticsForCameraDevicePermissionsModule() and var8 then
+					rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "client", "avatarChat", "CameraDevicePermissionPrompted", { didAuthorize = var2 or false })
 				end
-				if var25 and p7 then
-					microphoneDevicePermissionsLoggingModule:logPromptInteraction({ didAuthorize = var14, uiContext = p7 })
+				if var9 and p6 then
+					microphoneDevicePermissionsLoggingModule:logPromptInteraction({ didAuthorize = var3, uiContext = p6 })
 				end
-				p3(t)
-				var16 = false
-				p4()
+				p2(t)
+				var4 = false
+				p3()
 				
 				return p9
 			end)
 		end)
 	end
-	p3({ hasCameraPermissions = false, hasMicPermissions = false })
-	var16 = false
-	p4()
+	p2({ hasCameraPermissions = false, hasMicPermissions = false })
+	var4 = false
+	p3()
 end
 
-local function tryGetCachedResults(p11)
-	-- upvalues: debugSkipVoicePermissionCheck (ref), var14 (write), var13 (write), default (ref)
+local function tryGetCachedResults(p7)
+	-- upvalues: debugSkipVoicePermissionCheck (ref), var3 (write), var2 (write), default (ref)
 	if debugSkipVoicePermissionCheck then
-		var14 = true
+		var3 = true
 	end
-	if var13 == nil or var14 == nil then
+	if var2 == nil or var3 == nil then
 		return nil
 	end
-	local var30 = false
+	local var10 = false
 	
-	for i, v in p11 do
+	for i, v in p7 do
 		if v ~= default.Permissions.MICROPHONE_ACCESS and v ~= default.Permissions.CAMERA_ACCESS then
-			var30 = true
+			var10 = true
 		end
 	end
-	return if var30 then nil else {
-		hasCameraPermissions = var13 or false,
-		hasMicPermissions = var14 or false
+	return if var10 then nil else {
+		hasCameraPermissions = var2 or false,
+		hasMicPermissions = var3 or false
 	}
 end
 
-local function getCamMicPermissions(p12, p13, p14, p15, p16)
-	-- upvalues: default (ref), t (ref), getCamMicPermissions (ref), tryGetCachedResults (ref), var16 (write), getFFlagAvatarChatServiceEnabled (ref), promiseModule (ref), var12 (ref), requestPermissions (ref)
-	local var31 = p13 or {
+local function getCamMicPermissions(p8, p9, p10, p11, p12)
+	-- upvalues: default (ref), t (ref), getCamMicPermissions (ref), tryGetCachedResults (ref), var4 (write), getFFlagAvatarChatServiceEnabled (ref), promiseModule (ref), var1 (ref), requestPermissions (ref)
+	local var11 = p9 or {
 		default.Permissions.MICROPHONE_ACCESS,
 		default.Permissions.CAMERA_ACCESS
 	}
@@ -152,71 +152,71 @@ local function getCamMicPermissions(p12, p13, p14, p15, p16)
 	local function invokeNextRequest()
 		-- upvalues: t (copy), getCamMicPermissions (copy)
 		if t[1] then
-			local var35 = t[1]
+			local var12 = t[1]
 			table.remove(t, 1)
-			getCamMicPermissions(var35.callback, var35.permissionsToRequest, var35.shouldNotRequestPerms, var35.context, var35.getRawPermission)
+			getCamMicPermissions(var12.callback, var12.permissionsToRequest, var12.shouldNotRequestPerms, var12.context, var12.getRawPermission)
 		end
 	end
 	
-	if not p16 then
-		local var33 = tryGetCachedResults(var31)
+	if not p12 then
+		local var12 = tryGetCachedResults(var11)
 		
-		if var33 then
-			p12(var33)
+		if var12 then
+			p8(var12)
 			
 			if t[1] then
-				local var34 = t[1]
+				local var13 = t[1]
 				table.remove(t, 1)
-				getCamMicPermissions(var34.callback, var34.permissionsToRequest, var34.shouldNotRequestPerms, var34.context, var34.getRawPermission)
+				getCamMicPermissions(var13.callback, var13.permissionsToRequest, var13.shouldNotRequestPerms, var13.context, var13.getRawPermission)
 			end
 			return
-		elseif var16 then
+		elseif var4 then
 			table.insert(t, {
-				callback = p12,
-				permissionsToRequest = p13,
-				shouldNotRequestPerms = p14,
-				context = p15,
-				getRawPermission = p16
+				callback = p8,
+				permissionsToRequest = p9,
+				shouldNotRequestPerms = p10,
+				context = p11,
+				getRawPermission = p12
 			})
 			
 			return
 		end
-		var16 = true
+		var4 = true
 		
-		return if p16 then default:hasPermissions(var31):andThen(function(p20)
-			-- upvalues: p12 (ref), var16 (copy), t (copy), getCamMicPermissions (copy)
-			p12(p20)
-			var16 = false
+		return if p12 then default:hasPermissions(var11):andThen(function(p13)
+			-- upvalues: p8 (ref), var4 (copy), t (copy), getCamMicPermissions (copy)
+			p8(p13)
+			var4 = false
 			
 			if t[1] then
-				local var37 = t[1]
+				local var14 = t[1]
 				table.remove(t, 1)
-				getCamMicPermissions(var37.callback, var37.permissionsToRequest, var37.shouldNotRequestPerms, var37.context, var37.getRawPermission)
+				getCamMicPermissions(var14.callback, var14.permissionsToRequest, var14.shouldNotRequestPerms, var14.context, var14.getRawPermission)
 			end
-		end) elseif getFFlagAvatarChatServiceEnabled() then promiseModule.new(function(p19, _)
-			-- upvalues: var12 (copy)
-			if var12.ClientFeaturesInitialized then
-				p19({
-					isVoiceEnabled = var12:IsEnabled(var12.ClientFeatures, Enum.AvatarChatServiceFeature.UserAudio),
-					isCameraEnabled = var12:IsEnabled(var12.ClientFeatures, Enum.AvatarChatServiceFeature.UserVideo)
+		end) elseif getFFlagAvatarChatServiceEnabled() then promiseModule.new(function(p13, _)
+			-- upvalues: var1 (copy)
+			if var1.ClientFeaturesInitialized then
+				p13({
+					isVoiceEnabled = var1:IsEnabled(var1.ClientFeatures, Enum.AvatarChatServiceFeature.UserAudio),
+					isCameraEnabled = var1:IsEnabled(var1.ClientFeatures, Enum.AvatarChatServiceFeature.UserVideo)
 				})
 				
 				return
 			end
-			local var36 = nil
-			var36 = var12:GetPropertyChangedSignal("ClientFeatures"):Connect(function()
-				-- upvalues: var36 (write), var12 (copy), p19 (ref)
-				var36:Disconnect()
-				p19({
-					isVoiceEnabled = var12:IsEnabled(var12.ClientFeatures, Enum.AvatarChatServiceFeature.UserAudio),
-					isCameraEnabled = var12:IsEnabled(var12.ClientFeatures, Enum.AvatarChatServiceFeature.UserVideo)
+			local var14 = nil
+			var14 = var1:GetPropertyChangedSignal("ClientFeatures"):Connect(function()
+				-- upvalues: var14 (write), var1 (copy), p13 (ref)
+				var14:Disconnect()
+				p13({
+					isVoiceEnabled = var1:IsEnabled(var1.ClientFeatures, Enum.AvatarChatServiceFeature.UserAudio),
+					isCameraEnabled = var1:IsEnabled(var1.ClientFeatures, Enum.AvatarChatServiceFeature.UserVideo)
 				})
 			end)
-		end):andThen(function(p18)
-			-- upvalues: requestPermissions (copy), p12 (ref), invokeNextRequest (ref), var31 (write), p14 (ref), p15 (ref)
-			requestPermissions(p18, p12, invokeNextRequest, var31, p14, p15)
-		end) else promiseModule.new(function(p17, _)
-			p17({ isVoiceEnabled = false, isCameraEnabled = false })
+		end):andThen(function(p13)
+			-- upvalues: requestPermissions (copy), p8 (ref), invokeNextRequest (ref), var11 (write), p10 (ref), p11 (ref)
+			requestPermissions(p13, p8, invokeNextRequest, var11, p10, p11)
+		end) else promiseModule.new(function(p13, _)
+			p13({ isVoiceEnabled = false, isCameraEnabled = false })
 		end)
 	end
 end

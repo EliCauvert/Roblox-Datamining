@@ -19,104 +19,104 @@ local getNamedType = definitionModule.getNamedType
 local t = {}
 local isValidValueNode = nil
 
-function t.ValuesOfCorrectTypeRule(p0)
+function t.ValuesOfCorrectTypeRule(p1)
 	-- upvalues: getNullableType (ref), isListType (ref), isValidValueNode (write), getNamedType (ref), isInputObjectType (ref), keyMap (ref), isRequiredInputField (ref), inspect (ref), graphQLError (ref), suggestionList (ref), didYouMean (ref), isNonNullType (ref), print (ref)
 	return {
-		ListValue = function(_, p1)
-			-- upvalues: getNullableType (copy), p0 (ref), isListType (copy), isValidValueNode (copy)
-			if isListType(getNullableType(p0:getParentInputType())) then
+		ListValue = function(_, p2)
+			-- upvalues: getNullableType (copy), p1 (ref), isListType (copy), isValidValueNode (copy)
+			if isListType(getNullableType(p1:getParentInputType())) then
 				return
 			end
-			isValidValueNode(p0, p1)
+			isValidValueNode(p1, p2)
 			
 			return false
 		end,
 		ObjectValue = function(_, p2)
-			-- upvalues: getNamedType (copy), p0 (ref), isInputObjectType (copy), isValidValueNode (copy), keyMap (copy), isRequiredInputField (copy), inspect (copy), graphQLError (copy)
-			local var4 = getNamedType(p0:getInputType())
+			-- upvalues: getNamedType (copy), p1 (ref), isInputObjectType (copy), isValidValueNode (copy), keyMap (copy), isRequiredInputField (copy), inspect (copy), graphQLError (copy)
+			local var1 = getNamedType(p1:getInputType())
 			
-			if not isInputObjectType(var4) then
-				isValidValueNode(p0, p2)
+			if not isInputObjectType(var1) then
+				isValidValueNode(p1, p2)
 				
 				return false
 			end
-			local var5 = keyMap(p2.fields, function(p3)
+			local var2 = keyMap(p2.fields, function(p3)
 				return p3.name.value
 			end)
 			
-			for i, v in ipairs(var4:getFields():values()) do
-				if not var5[v.name] and isRequiredInputField(v) then
-					p0:reportError(graphQLError.new(("Field \"%s.%s\" of required type \"%s\" was not provided."):format(var4.name, v.name, inspect(v.type)), p2))
+			for i, v in ipairs(var1:getFields():values()) do
+				if not var2[v.name] and isRequiredInputField(v) then
+					p1:reportError(graphQLError.new(("Field \"%s.%s\" of required type \"%s\" was not provided."):format(var1.name, v.name, inspect(v.type)), p2))
 				end
 			end
 		end,
-		ObjectField = function(_, p4)
-			-- upvalues: getNamedType (copy), p0 (ref), isInputObjectType (copy), suggestionList (copy), graphQLError (copy), didYouMean (copy)
-			local var6 = getNamedType(p0:getParentInputType())
+		ObjectField = function(_, p3)
+			-- upvalues: getNamedType (copy), p1 (ref), isInputObjectType (copy), suggestionList (copy), graphQLError (copy), didYouMean (copy)
+			local var3 = getNamedType(p1:getParentInputType())
 			
-			if not p0:getInputType() and isInputObjectType(var6) then
-				p0:reportError(graphQLError.new(("Field \"%s\" is not defined by type \"%s\"."):format(p4.name.value, var6.name) .. didYouMean(suggestionList(p4.name.value, var6:getFields():keys())), p4))
+			if not p1:getInputType() and isInputObjectType(var3) then
+				p1:reportError(graphQLError.new(("Field \"%s\" is not defined by type \"%s\"."):format(p3.name.value, var3.name) .. didYouMean(suggestionList(p3.name.value, var3:getFields():keys())), p3))
 			end
 		end,
-		NullValue = function(_, p5)
-			-- upvalues: p0 (ref), isNonNullType (copy), graphQLError (copy), inspect (copy), print (copy)
-			local inputType = p0:getInputType()
+		NullValue = function(_, p3)
+			-- upvalues: p1 (ref), isNonNullType (copy), graphQLError (copy), inspect (copy), print (copy)
+			local inputType = p1:getInputType()
 			
 			if isNonNullType(inputType) then
-				p0:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p5)), p5))
+				p1:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p3)), p3))
 			end
 		end,
-		EnumValue = function(_, p6)
-			-- upvalues: isValidValueNode (copy), p0 (ref)
-			return isValidValueNode(p0, p6)
+		EnumValue = function(_, p3)
+			-- upvalues: isValidValueNode (copy), p1 (ref)
+			return isValidValueNode(p1, p3)
 		end,
-		IntValue = function(_, p7)
-			-- upvalues: isValidValueNode (copy), p0 (ref)
-			return isValidValueNode(p0, p7)
+		IntValue = function(_, p3)
+			-- upvalues: isValidValueNode (copy), p1 (ref)
+			return isValidValueNode(p1, p3)
 		end,
-		FloatValue = function(_, p8)
-			-- upvalues: isValidValueNode (copy), p0 (ref)
-			return isValidValueNode(p0, p8)
+		FloatValue = function(_, p3)
+			-- upvalues: isValidValueNode (copy), p1 (ref)
+			return isValidValueNode(p1, p3)
 		end,
-		StringValue = function(_, p9)
-			-- upvalues: isValidValueNode (copy), p0 (ref)
-			return isValidValueNode(p0, p9)
+		StringValue = function(_, p3)
+			-- upvalues: isValidValueNode (copy), p1 (ref)
+			return isValidValueNode(p1, p3)
 		end,
-		BooleanValue = function(_, p10)
-			-- upvalues: isValidValueNode (copy), p0 (ref)
-			return isValidValueNode(p0, p10)
+		BooleanValue = function(_, p3)
+			-- upvalues: isValidValueNode (copy), p1 (ref)
+			return isValidValueNode(p1, p3)
 		end
 	}
 end
 
-isValidValueNode = function(p11, p12)
+isValidValueNode = function(p2, p3)
 	-- upvalues: getNamedType (ref), isLeafType (ref), inspect (ref), graphQLError (ref), print (ref), instanceOfModule (ref)
-	local inputType = p11:getInputType()
+	local inputType = p2:getInputType()
 	
 	if not inputType then return end
-	local var9 = getNamedType(inputType)
+	local var1 = getNamedType(inputType)
 	
-	if isLeafType(var9) then
+	if isLeafType(var1) then
 		xpcall(function()
-			-- upvalues: var9 (ref), p12 (ref), inspect (copy), inputType (ref), p11 (ref), graphQLError (copy), print (copy)
-			if var9:parseLiteral(p12, nil) == nil then
-				p11:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p12)), p12))
+			-- upvalues: var1 (ref), p3 (ref), inspect (copy), inputType (ref), p2 (ref), graphQLError (copy), print (copy)
+			if var1:parseLiteral(p3, nil) == nil then
+				p2:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p3)), p3))
 			end
-		end, function(p13)
-			-- upvalues: inspect (copy), inputType (ref), instanceOfModule (copy), graphQLError (copy), p11 (ref), print (copy), p12 (ref)
-			local var10 = inspect(inputType)
+		end, function(p4)
+			-- upvalues: inspect (copy), inputType (ref), instanceOfModule (copy), graphQLError (copy), p2 (ref), print (copy), p3 (ref)
+			local var2 = inspect(inputType)
 			
-			if instanceOfModule(p13, graphQLError) then
-				p11:reportError(p13)
+			if instanceOfModule(p4, graphQLError) then
+				p2:reportError(p4)
 				
 				return
 			end
-			p11:reportError(graphQLError.new(("Expected value of type \"%s\", found %s; "):format(var10, print(p12)) .. p13.message, p12, nil, nil, nil, p13))
+			p2:reportError(graphQLError.new(("Expected value of type \"%s\", found %s; "):format(var2, print(p3)) .. p13.message, p3, nil, nil, nil, p4))
 		end)
 		
 		return
 	end
-	p11:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p12)), p12))
+	p2:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p3)), p3))
 end
 
 return t

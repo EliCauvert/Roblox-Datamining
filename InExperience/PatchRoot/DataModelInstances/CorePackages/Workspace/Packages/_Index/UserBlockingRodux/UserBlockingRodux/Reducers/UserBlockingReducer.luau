@@ -1,12 +1,12 @@
 ﻿local isBlockedByMeModule = require(script:FindFirstAncestor("UserBlockingRodux").Reducers.UserBlocking.isBlockedByMe)
 local t = { isBlockedByMe = {} }
 
-return function(p0)
+return function(p1)
 	-- upvalues: isBlockedByMeModule (ref), t (ref)
-	local var2 = isBlockedByMeModule(p0)
+	local var1 = isBlockedByMeModule(p1)
 	
-	return function(p1, p2)
-		-- upvalues: t (copy), var2 (ref)
-		return { isBlockedByMe = var2((p1 or t).isBlockedByMe, p2) }
+	return function(p2, p3)
+		-- upvalues: t (copy), var1 (ref)
+		return { isBlockedByMe = var1((p2 or t).isBlockedByMe, p3) }
 	end
 end

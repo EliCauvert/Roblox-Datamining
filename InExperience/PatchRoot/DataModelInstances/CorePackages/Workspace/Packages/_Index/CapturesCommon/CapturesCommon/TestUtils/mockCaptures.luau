@@ -32,20 +32,20 @@ local list_1 = {
 	}
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: dashModule (ref), list_1 (ref), list (ref)
 	local t = {}
 	
-	if p1 then
-		for i = 1, p0 do
+	if p2 then
+		for i = 1, p1 do
 			table.insert(t, dashModule.joinDeep(list_1[i % #list_1 + 1], {}))
 		end
 		return t
 	else
-		for i_1 = 1, p0 do
-			local var5 = dashModule.joinDeep(list[i_1 % #list + 1], {})
-			var5.contentId = "rbxasset://textures/" .. ("/./"):rep(math.floor(i_1 / #list)) .. string.sub(var5.contentId, 21)
-			table.insert(t, var5)
+		for i_1 = 1, p1 do
+			local var1 = dashModule.joinDeep(list[i_1 % #list + 1], {})
+			var1.contentId = "rbxasset://textures/" .. ("/./"):rep(math.floor(i_1 / #list)) .. string.sub(var1.contentId, 21)
+			table.insert(t, var1)
 		end
 		return t
 	end

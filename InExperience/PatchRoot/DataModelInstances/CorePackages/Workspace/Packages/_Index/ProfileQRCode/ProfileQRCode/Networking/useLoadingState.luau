@@ -4,8 +4,8 @@ local createOrGetProfileShareUrlModule = require(profileQRCode.Networking.create
 
 return function()
 	-- upvalues: useSelector (ref), createOrGetProfileShareUrlModule (ref)
-	return useSelector(function(p0)
+	return useSelector(function(p1)
 		-- upvalues: createOrGetProfileShareUrlModule (copy)
-		return createOrGetProfileShareUrlModule.getStatus(p0)
+		return createOrGetProfileShareUrlModule.getStatus(p1)
 	end)
 end

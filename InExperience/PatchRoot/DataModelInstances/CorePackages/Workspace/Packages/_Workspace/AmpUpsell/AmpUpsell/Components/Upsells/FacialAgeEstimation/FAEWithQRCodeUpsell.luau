@@ -4,12 +4,12 @@ local QRDeepLinkDialog = require(parent.IdentityVerification).QRDeepLinkDialog
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local authButtonClick = require(parent.AuthAnalytics).Events.authButtonClick
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), authButtonClick (ref), QRDeepLinkDialog (ref)
-	local appsFlyerLink = p0.appsFlyerLink
-	local onCancel = p0.onCancel
-	local sessionId = p0.sessionId
-	local entryPointEventCtx = p0.entryPointEventCtx
+	local appsFlyerLink = p1.appsFlyerLink
+	local onCancel = p1.onCancel
+	local sessionId = p1.sessionId
+	local entryPointEventCtx = p1.entryPointEventCtx
 	local var1 = useLocalization({
 		title = "Amp.FAEUpsell.Modal.QRCode.Title",
 		description = "Amp.FAEUpsell.Modal.QRCode.Description",

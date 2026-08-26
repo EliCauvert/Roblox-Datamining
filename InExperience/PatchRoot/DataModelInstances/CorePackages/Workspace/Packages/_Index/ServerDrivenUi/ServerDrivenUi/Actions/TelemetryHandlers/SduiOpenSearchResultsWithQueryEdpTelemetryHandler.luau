@@ -9,59 +9,59 @@ local fFlagLuaAppAddUniverseIdToGameDetailsEvents = require(parent.SharedFlags).
 local openSearchResultsWithQueryParamsModule = require(serverDrivenUi.Actions.openSearchResultsWithQueryParams)
 local sduiOpenSearchResultsWithQueryTelemetryHandlerModule = require(serverDrivenUi.Actions.TelemetryHandlers.SduiOpenSearchResultsWithQueryTelemetryHandler)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: openSearchResultsWithQueryParamsModule (ref), getActionTelemetryFieldValue (ref), sduiErrorType (ref), fFlagLuaAppAddUniverseIdToGameDetailsEvents (ref), sduiOpenSearchResultsWithQueryTelemetryHandlerModule (ref), gameDetailsSubpage (ref), playersService (ref)
-	local var5 = openSearchResultsWithQueryParamsModule.resolveSearchQuery(p0)
+	local var1 = openSearchResultsWithQueryParamsModule.resolveSearchQuery(p1)
 	
-	if var5 == nil or openSearchResultsWithQueryParamsModule.resolveSearchType(p0) == nil then return end
-	local var10
-	local var6 = getActionTelemetryFieldValue(p0, p1, "subpage")
-	local var7 = getActionTelemetryFieldValue(p0, p1, "universeId")
-	local var8 = getActionTelemetryFieldValue(p0, p1, "placeId")
-	local var9 = getActionTelemetryFieldValue(p0, p1, "eventContext")
+	if var1 == nil or openSearchResultsWithQueryParamsModule.resolveSearchType(p1) == nil then return end
+	local var2
+	local var3 = getActionTelemetryFieldValue(p1, p2, "subpage")
+	local var4 = getActionTelemetryFieldValue(p1, p2, "universeId")
+	local var5 = getActionTelemetryFieldValue(p1, p2, "placeId")
+	local var6 = getActionTelemetryFieldValue(p1, p2, "eventContext")
 	local _ = nil
 	
-	if typeof(var9) == "string" and var9 ~= "" then
-		var10 = var9
+	if typeof(var6) == "string" and var6 ~= "" then
+		var2 = var6
 	else
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "SduiOpenSearchResultsWithQueryEdpTelemetryHandler",
 			message = "Missing or non-string `eventContext` (set on analyticsData for EDP subpage taps)",
 			propName = "eventContext"
-		}, p2.appPage)
-		var10 = ""
+		}, p3.appPage)
+		var2 = ""
 	end
-	if typeof(var6) ~= "string" or var6 == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(var3) ~= "string" or var3 == "" then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "SduiOpenSearchResultsWithQueryEdpTelemetryHandler",
 			message = "Missing or non-string `subpage` (set on analyticsData for EDP subpage taps)",
 			propName = "subpage"
-		}, p2.appPage)
+		}, p3.appPage)
 		
 		return
-	elseif typeof(var8) ~= "string" and typeof(var8) ~= "number" or var8 == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	elseif typeof(var5) ~= "string" and typeof(var5) ~= "number" or var5 == "" then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "SduiOpenSearchResultsWithQueryEdpTelemetryHandler",
 			propName = "placeId",
-			message = `Invalid placeId (expected string or number, got {typeof(var8)})`
-		}, p2.appPage)
-		var8 = ""
+			message = `Invalid placeId (expected string or number, got {typeof(var5)})`
+		}, p3.appPage)
+		var5 = ""
 	end
-	if fFlagLuaAppAddUniverseIdToGameDetailsEvents and (typeof(var7) ~= "string" and typeof(var7) ~= "number" or var7 == "") then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if fFlagLuaAppAddUniverseIdToGameDetailsEvents and (typeof(var4) ~= "string" and typeof(var4) ~= "number" or var4 == "") then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "SduiOpenSearchResultsWithQueryEdpTelemetryHandler",
 			propName = "universeId",
-			message = `Invalid universeId (expected string or number, got {typeof(var7)})`
-		}, p2.appPage)
-		var7 = ""
+			message = `Invalid universeId (expected string or number, got {typeof(var4)})`
+		}, p3.appPage)
+		var4 = ""
 	end
-	sduiOpenSearchResultsWithQueryTelemetryHandlerModule(p0, p1, p2)
+	sduiOpenSearchResultsWithQueryTelemetryHandlerModule(p1, p2, p3)
 	gameDetailsSubpage({
 		ctx = "OpenSearchResultsWithQuery",
 		uid = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else ""),
-		placeId = tostring(var8),
-		subpage = var6,
-		universeId = if fFlagLuaAppAddUniverseIdToGameDetailsEvents then tostring(var7) else "",
-		action = var5
-	}, var10)
+		placeId = tostring(var5),
+		subpage = var3,
+		universeId = if fFlagLuaAppAddUniverseIdToGameDetailsEvents then tostring(var4) else "",
+		action = var1
+	}, var2)
 end

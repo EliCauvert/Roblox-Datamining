@@ -35,60 +35,60 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		hasError = var1.hasError,
 		hint = var1.hint,
 		textBoxRef = var1.textBoxRef,
-		input = function(p1)
+		input = function(p3)
 			-- upvalues: reactModule (copy), internalTextInputModule (copy), var1 (ref), var2 (ref), viewModule (copy), iconModule (copy), iconButtonModule (copy)
-			local var1
+			local var3
 			local createElement = reactModule.createElement
 			local t = {
-				ref = p1,
-				inputRef = var1.inputRef,
-				hasError = var1.hasError,
-				isDisabled = var1.isDisabled,
-				hasClearButton = var1.hasClearButton,
-				text = var1.text,
-				textInputType = var1.textInputType,
-				focusBehavior = var1.focusBehavior,
-				size = var1.size,
-				variant = var1.variant,
-				Selectable = var1.Selectable,
-				NextSelectionUp = var1.NextSelectionUp,
-				NextSelectionDown = var1.NextSelectionDown,
-				NextSelectionLeft = var1.NextSelectionLeft,
-				NextSelectionRight = var1.NextSelectionRight,
+				ref = p3,
+				inputRef = var3.inputRef,
+				hasError = var3.hasError,
+				isDisabled = var3.isDisabled,
+				hasClearButton = var3.hasClearButton,
+				text = var3.text,
+				textInputType = var3.textInputType,
+				focusBehavior = var3.focusBehavior,
+				size = var3.size,
+				variant = var3.variant,
+				Selectable = var3.Selectable,
+				NextSelectionUp = var3.NextSelectionUp,
+				NextSelectionDown = var3.NextSelectionDown,
+				NextSelectionLeft = var3.NextSelectionLeft,
+				NextSelectionRight = var3.NextSelectionRight,
 				horizontalPadding = {
 					left = var2.container.horizontalPadding,
 					right = var2.container.horizontalPadding
 				},
-				onChanged = var1.onChanged,
-				onFocus = var1.onFocusGained,
-				onFocusLost = var1.onFocusLost,
-				onReturnPressed = var1.onReturnPressed,
-				placeholder = var1.placeholder,
-				leadingElement = if var1.leadingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
-					name = var1.leadingIcon,
+				onChanged = var3.onChanged,
+				onFocus = var3.onFocusGained,
+				onFocusLost = var3.onFocusLost,
+				onReturnPressed = var3.onReturnPressed,
+				placeholder = var3.placeholder,
+				leadingElement = if var3.leadingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
+					name = var3.leadingIcon,
 					style = var2.icon.style,
 					size = var2.icon.size
 				})) else nil
 			}
 			
-			if var1.iconTrailing then
-				var1 = reactModule.createElement
-				var1 = var1(viewModule, { tag = "row align-y-center size-0-full auto-x" }, if type(var1.iconTrailing) == "table" and var1.iconTrailing.onActivated then reactModule.createElement(iconButtonModule, {
-					onActivated = var1.iconTrailing.onActivated,
-					isDisabled = var1.isDisabled,
+			if var3.iconTrailing then
+				var3 = reactModule.createElement
+				var3 = var3(viewModule, { tag = "row align-y-center size-0-full auto-x" }, if type(var3.iconTrailing) == "table" and var3.iconTrailing.onActivated then reactModule.createElement(iconButtonModule, {
+					onActivated = var3.iconTrailing.onActivated,
+					isDisabled = var3.isDisabled,
 					size = var2.icon.size,
-					icon = var1.iconTrailing.name,
-					testId = `{var1.testId}--trailing-icon-button`
+					icon = var3.iconTrailing.name,
+					testId = `{var3.testId}--trailing-icon-button`
 				}) else reactModule.createElement(iconModule, {
-					name = if type(var1.iconTrailing) == "table" then var1.iconTrailing.name else var1.iconTrailing,
+					name = if type(var3.iconTrailing) == "table" then var3.iconTrailing.name else var3.iconTrailing,
 					style = var2.icon.style,
 					size = var2.icon.size
 				}))
 			else
-				var1 = nil
+				var3 = nil
 			end
-			t.trailingElement = var1
-			t.testId = `{var1.testId}--internal-text-input`
+			t.trailingElement = var3
+			t.testId = `{var3.testId}--internal-text-input`
 			
 			return createElement(internalTextInputModule, t)
 		end

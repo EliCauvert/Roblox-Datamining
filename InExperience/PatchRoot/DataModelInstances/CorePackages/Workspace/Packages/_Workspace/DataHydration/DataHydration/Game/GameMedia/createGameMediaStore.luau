@@ -10,18 +10,18 @@ local fFlagMyStatsMediaSelector = require(parent.SharedFlags).FFlagMyStatsMediaS
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), fFlagMyStatsMediaSelector (ref), discoveryEventErrorLogger (ref), fetchGameMediaModule (ref), gameMediaStoreTypesModule (ref)
-	local var5 = createDataResolverModule({
+	local var1 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = createDataCacheModule(),
 		replaceItems = fFlagMyStatsMediaSelector,
-		logError = function(p0)
+		logError = function(p1)
 			-- upvalues: discoveryEventErrorLogger (copy)
-			if type(p0) == "table" and p0.errorType then
-				discoveryEventErrorLogger.reportError(p0.errorType, p0.errorMessage)
+			if type(p1) == "table" and p1.errorType then
+				discoveryEventErrorLogger.reportError(p1.errorType, p1.errorMessage)
 				
 				return
 			end
-			discoveryEventErrorLogger.reportError("FetchGameMediaError", tostring(p0))
+			discoveryEventErrorLogger.reportError("FetchGameMediaError", tostring(p1))
 		end,
 		fetchFn = function(p1, _)
 			-- upvalues: fetchGameMediaModule (copy), gameMediaStoreTypesModule (copy)
@@ -33,12 +33,12 @@ return function()
 						errorMessage = if p2 then "Missing response body" else "No response"
 					})
 				end
-				local var6, var7 = gameMediaStoreTypesModule.gameMediaResponseValidator(p2.responseBody)
+				local var2, var3 = gameMediaStoreTypesModule.gameMediaResponseValidator(p2.responseBody)
 				
-				if not var6 then
+				if not var2 then
 					error({
 						errorType = "FetchGameMediaResponseInvalidInterface",
-						errorMessage = var7
+						errorMessage = var3
 					})
 				end
 				local t = {}
@@ -63,10 +63,10 @@ return function()
 	})
 	
 	return {
-		getAndFetchGameMedia = var5.getAndFetchItem,
-		getGameMedia = var5.getCachedItem,
-		fetchGameMedia = var5.fetchItem,
-		clear = var5.clear,
-		dispose = var5.dispose
+		getAndFetchGameMedia = var1.getAndFetchItem,
+		getGameMedia = var1.getCachedItem,
+		fetchGameMedia = var1.fetchItem,
+		clear = var1.clear,
+		dispose = var1.dispose
 	}
 end

@@ -1,5 +1,5 @@
 ﻿local t = {
-	MakeEncoder = function(p0, p1, p2)
+	MakeEncoder = function(p1, p2, p3)
 		local t = {}
 		
 		for i, v in pairs({
@@ -65,9 +65,9 @@
 			"7",
 			"8",
 			"9",
-			p0 or "+",
-			p1 or "/",
-			p2 or "="
+			p1 or "+",
+			p2 or "/",
+			p3 or "="
 		}) do
 			t[i] = v:byte()
 		end
@@ -75,11 +75,11 @@
 	end
 }
 
-function t.MakeDecoder(p3, p4, p5)
+function t.MakeDecoder(p4, p5, p6)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
-	for i, v in pairs(t.MakeEncoder(p3, p4, p5)) do
+	for i, v in pairs(t.MakeEncoder(p4, p5, p6)) do
 		t_1[v] = i
 	end
 	return t_1
@@ -91,115 +91,115 @@ local char = string.char
 local concat = table.concat
 local extract = bit32.extract
 
-function t.Encode(p6, p7, p8)
+function t.Encode(p7, p8, p9)
 	-- upvalues: var1 (ref), extract (ref), char (ref), concat (ref)
-	p7 = p7 or var1
+	p8 = p8 or var1
 	local t = {}
-	local var7 = 1
-	local p6Count = #p6
-	local var9 = p6Count % 3
+	local var3 = 1
+	local p6Count = #p7
+	local var4 = p6Count % 3
 	local t_1 = {}
 	
-	for i = 1, p6Count - var9, 3 do
-		local var15
-		local var11, var12, var13 = p6:byte(i, i + 2)
-		local var14 = var11 * 65536 + var12 * 256 + var13
+	for i = 1, p6Count - var4, 3 do
+		local var5
+		local var6, var7, var8 = p7:byte(i, i + 2)
+		local var9 = var6 * 65536 + var7 * 256 + var8
 		local _ = nil
 		
-		if p8 then
-			var15 = t_1[var14]
+		if p9 then
+			var5 = t_1[var9]
 			
-			if not var15 then
-				var15 = char(p7[extract(var14, 18, 6)], p7[extract(var14, 12, 6)], p7[extract(var14, 6, 6)], p7[extract(var14, 0, 6)])
-				t_1[var14] = var15
+			if not var5 then
+				var5 = char(p8[extract(var9, 18, 6)], p8[extract(var9, 12, 6)], p8[extract(var9, 6, 6)], p8[extract(var9, 0, 6)])
+				t_1[var9] = var5
 			end
 		else
-			var15 = char(p7[extract(var14, 18, 6)], p7[extract(var14, 12, 6)], p7[extract(var14, 6, 6)], p7[extract(var14, 0, 6)])
+			var5 = char(p8[extract(var9, 18, 6)], p8[extract(var9, 12, 6)], p8[extract(var9, 6, 6)], p8[extract(var9, 0, 6)])
 		end
-		t[var7] = var15
-		var7 += 1
+		t[var3] = var5
+		var3 += 1
 	end
-	if var9 == 2 then
-		local var16, var17 = p6:byte(p6Count - 1, p6Count)
-		local var18 = var16 * 65536 + var17 * 256
-		t[var7] = char(p7[extract(var18, 18, 6)], p7[extract(var18, 12, 6)], p7[extract(var18, 6, 6)], p7[64])
-	elseif var9 == 1 then
-		local var19 = p6:byte(p6Count) * 65536
-		t[var7] = char(p7[extract(var19, 18, 6)], p7[extract(var19, 12, 6)], p7[64], p7[64])
+	if var4 == 2 then
+		local var10, var11 = p7:byte(p6Count - 1, p6Count)
+		local var12 = var10 * 65536 + var11 * 256
+		t[var3] = char(p8[extract(var12, 18, 6)], p8[extract(var12, 12, 6)], p8[extract(var12, 6, 6)], p8[64])
+	elseif var4 == 1 then
+		local var13 = p7:byte(p6Count) * 65536
+		t[var3] = char(p8[extract(var13, 18, 6)], p8[extract(var13, 12, 6)], p8[64], p8[64])
 	end
 	return concat(t)
 end
 
-function t.EncodeUrl(p9, p10)
+function t.EncodeUrl(p10, p11)
 	-- upvalues: t (ref)
-	return t.ToUrlSafeBase64(t.Encode(p9, nil, p10))
+	return t.ToUrlSafeBase64(t.Encode(p10, nil, p11))
 end
 
-function t.Decode(p11, p12, p13)
+function t.Decode(p10, p11, p12)
 	-- upvalues: var2 (ref), char (ref), extract (ref), concat (ref)
-	p12 = p12 or var2
-	local var21 = nil
-	local var22 = nil
+	p11 = p11 or var2
+	local var14 = nil
+	local var15 = nil
 	
-	for i, v in pairs(p12) do
+	for i, v in pairs(p11) do
 		if v == 62 then
-			var21 = i
+			var14 = i
 		elseif v == 63 then
-			var22 = i
+			var15 = i
 		end
 	end
-	local var23 = p11:gsub(("[^%%w%%%s%%%s%%=]"):format(char(var21), char(var22)), "")
+	local var16 = p10:gsub(("[^%%w%%%s%%%s%%=]"):format(char(var14), char(var15)), "")
 	local t = {}
 	local t_1 = {}
-	local var26 = 1
-	local var23Count = #var23
-	local var28 = if var23:sub(-2) == "==" then 2 elseif var23:sub(-1) == "=" then 1 else 0
+	local var17 = 1
+	local var23Count = #var16
+	local var18 = if var16:sub(-2) == "==" then 2 elseif var16:sub(-1) == "=" then 1 else 0
 	
-	for i_1 = 1, if var28 > 0 then var23Count - 4 else var23Count, 4 do
-		local var34
-		local var29, var30, var31, var32 = var23:byte(i_1, i_1 + 3)
+	for i_1 = 1, if var18 > 0 then var23Count - 4 else var23Count, 4 do
+		local var19
+		local var20, var21, var22, var23 = var16:byte(i_1, i_1 + 3)
 		local _ = nil
 		
-		if p13 then
-			local var33 = var29 * 16777216 + var30 * 65536 + var31 * 256 + var32
-			var34 = t[var33]
+		if p12 then
+			local var24 = var20 * 16777216 + var21 * 65536 + var22 * 256 + var23
+			var19 = t[var24]
 			
-			if not var34 then
-				local var35 = p12[var29] * 262144 + p12[var30] * 4096 + p12[var31] * 64 + p12[var32]
-				var34 = char(extract(var35, 16, 8), extract(var35, 8, 8), extract(var35, 0, 8))
-				t[var33] = var34
+			if not var19 then
+				local var25 = p11[var20] * 262144 + p11[var21] * 4096 + p11[var22] * 64 + p11[var23]
+				var19 = char(extract(var25, 16, 8), extract(var25, 8, 8), extract(var25, 0, 8))
+				t[var24] = var19
 			end
 		else
-			local var36 = p12[var29] * 262144 + p12[var30] * 4096 + p12[var31] * 64 + p12[var32]
-			var34 = char(extract(var36, 16, 8), extract(var36, 8, 8), extract(var36, 0, 8))
+			local var26 = p11[var20] * 262144 + p11[var21] * 4096 + p11[var22] * 64 + p11[var23]
+			var19 = char(extract(var26, 16, 8), extract(var26, 8, 8), extract(var26, 0, 8))
 		end
-		t_1[var26] = var34
-		var26 += 1
+		t_1[var17] = var19
+		var17 += 1
 	end
-	if var28 == 1 then
-		local var37, var38, var39 = var23:byte(var23Count - 3, var23Count - 1)
-		local var40 = p12[var37] * 262144 + p12[var38] * 4096 + p12[var39] * 64
-		t_1[var26] = char(extract(var40, 16, 8), extract(var40, 8, 8))
-	elseif var28 == 2 then
-		local var41, var42 = var23:byte(var23Count - 3, var23Count - 2)
-		t_1[var26] = char(extract(p12[var41] * 262144 + p12[var42] * 4096, 16, 8))
+	if var18 == 1 then
+		local var27, var28, var29 = var16:byte(var23Count - 3, var23Count - 1)
+		local var30 = p11[var27] * 262144 + p11[var28] * 4096 + p11[var29] * 64
+		t_1[var17] = char(extract(var30, 16, 8), extract(var30, 8, 8))
+	elseif var18 == 2 then
+		local var31, var32 = var16:byte(var23Count - 3, var23Count - 2)
+		t_1[var17] = char(extract(p11[var31] * 262144 + p11[var32] * 4096, 16, 8))
 	end
 	return concat(t_1)
 end
 
-function t.DecodeUrl(p14, p15)
+function t.DecodeUrl(p13, p14)
 	-- upvalues: t (ref)
-	return t.Decode(t.FromUrlSafeBase64(p14), nil, p15)
+	return t.Decode(t.FromUrlSafeBase64(p13), nil, p14)
 end
 
-function t.ToUrlSafeBase64(p16)
-	return string.gsub(string.gsub(string.gsub(p16, "+", "-"), "/", "_"), "=", "")
+function t.ToUrlSafeBase64(p13)
+	return string.gsub(string.gsub(string.gsub(p13, "+", "-"), "/", "_"), "=", "")
 end
 
-function t.FromUrlSafeBase64(p17)
-	local var43 = p17:gsub("[^%w%-_]", "")
+function t.FromUrlSafeBase64(p13)
+	local var33 = p13:gsub("[^%w%-_]", "")
 	
-	return string.gsub(string.gsub(var43 .. string.rep("=", (4 - #var43 % 4) % 4), "_", "/"), "-", "+")
+	return string.gsub(string.gsub(var33 .. string.rep("=", (4 - #var33 % 4) % 4), "_", "/"), "-", "+")
 end
 
 return t

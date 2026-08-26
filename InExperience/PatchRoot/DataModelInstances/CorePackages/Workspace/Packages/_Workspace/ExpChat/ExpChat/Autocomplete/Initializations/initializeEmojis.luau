@@ -1,13 +1,13 @@
 ﻿local parent = script:FindFirstAncestor("ExpChat").Parent
 local list = require(parent.llama).List
-local var0 = require(parent.llama).Dictionary.keys(require(parent.EmojiList))
+local var1 = require(parent.llama).Dictionary.keys(require(parent.EmojiList))
 
-return function(p0)
-	-- upvalues: list (ref), var0 (ref)
-	list.map(var0, function(p1)
-		-- upvalues: p0 (ref)
-		p0.trie:insert(p1)
+return function(p1)
+	-- upvalues: list (ref), var1 (ref)
+	list.map(var1, function(p2)
+		-- upvalues: p1 (ref)
+		p1.trie:insert(p2)
 	end)
 	
-	return p0.trie
+	return p1.trie
 end

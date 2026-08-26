@@ -18,26 +18,26 @@ local lifecycleEvents = toastNotificationModule.LifecycleEvents
 local default_1 = toastNotificationsProtocolModule.ToastNotificationProtocol.default
 local toastNotificationProtocolConstants = toastNotificationsProtocolModule.ToastNotificationProtocolConstants
 
-local function _(p0)
-	if p0 == nil then return end
-	if typeof(p0.Disconnect) == "function" then
-		p0:Disconnect()
+local function _(p1)
+	if p1 == nil then return end
+	if typeof(p1.Disconnect) == "function" then
+		p1:Disconnect()
 		
 		return
-	elseif typeof(p0.disconnect) == "function" then
-		p0:disconnect()
+	elseif typeof(p1.disconnect) == "function" then
+		p1:disconnect()
 	end
 end
 
 local function decodeActionParams(p1)
 	-- upvalues: httpService (ref)
-	local var15 = if typeof(p1) == "table" then p1.visualItem else nil
-	local var16 = if typeof(var15) == "table" then var15.actionEventParams else nil
+	local var1 = if typeof(p1) == "table" then p1.visualItem else nil
+	local var2 = if typeof(var1) == "table" then var1.actionEventParams else nil
 	
-	if typeof(var16) ~= "string" or var16 == "" then
+	if typeof(var2) ~= "string" or var2 == "" then
 		return nil
 	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, var16)
+	local ok, status = pcall(httpService.JSONDecode, httpService, var2)
 	
 	if not ok or typeof(status) ~= "table" then
 		return nil
@@ -61,31 +61,31 @@ local function decodeActionParams(p1)
 	return nil
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: messageBusService (ref), toastNotificationProtocolConstants (ref), resumeNotification (ref)
-	messageBusService:Publish(toastNotificationProtocolConstants.MESSAGE_DISPLAY_TOAST_NOTIF, resumeNotification.buildToastNotification(p2))
+	messageBusService:Publish(toastNotificationProtocolConstants.MESSAGE_DISPLAY_TOAST_NOTIF, resumeNotification.buildToastNotification(p1))
 end
 
-local function routeToBuildChat(p3, p4, p5)
+local function routeToBuildChat(p1, p2, p3)
 	-- upvalues: getCurrentExperienceProjectModule (ref), getPlayButtonStoreModule (ref), resumeNotification (ref), leaveExperienceModule (ref), default (ref)
-	if p4 and p5 then
-		local var17 = getCurrentExperienceProjectModule()
+	if p2 and p3 then
+		local var1 = getCurrentExperienceProjectModule()
 		
-		if p3.universeId ~= nil and var17.universeId == p3.universeId then
-			local var18 = getPlayButtonStoreModule()
-			var18.setResumeTarget({
-				universeId = p3.universeId,
-				placeId = var17.placeId,
-				sessionId = p3.sessionId
+		if p1.universeId ~= nil and var1.universeId == p1.universeId then
+			local var2 = getPlayButtonStoreModule()
+			var2.setResumeTarget({
+				universeId = p1.universeId,
+				placeId = var1.placeId,
+				sessionId = p1.sessionId
 			})
-			var18.setIsActive(true)
+			var2.setIsActive(true)
 			
 			return
 		end
 	end
-	local resumeDeepLink = resumeNotification.getResumeDeepLink(p3)
+	local resumeDeepLink = resumeNotification.getResumeDeepLink(p1)
 	
-	if p4 then
+	if p2 then
 		leaveExperienceModule(function()
 			-- upvalues: default (copy), resumeDeepLink (ref)
 			default:detectURL(resumeDeepLink)
@@ -96,26 +96,26 @@ local function routeToBuildChat(p3, p4, p5)
 	default:detectURL(resumeDeepLink)
 end
 
-return function(p6)
+return function(p1)
 	-- upvalues: getCreatorAgentResumeStoreModule (ref), reactModule (ref), realtimeDeliveryModule (ref), notificationService (ref), resumeNotification (ref), messageBusService (ref), toastNotificationProtocolConstants (ref), lifecycleEvents (ref), decodeActionParams (ref), default_1 (ref), routeToBuildChat (ref)
-	local var20 = getCreatorAgentResumeStoreModule()
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: p6 (ref), realtimeDeliveryModule (copy), notificationService (copy)
-		return p6.RobloxEventReceiver or realtimeDeliveryModule.RobloxEventReceiver.new(notificationService)
-	end, { p6.RobloxEventReceiver })
-	local var22 = p6.isInExperience == true
-	local var23 = p6.isBuildModeActive == true
+	local var1 = getCreatorAgentResumeStoreModule()
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), realtimeDeliveryModule (copy), notificationService (copy)
+		return p1.RobloxEventReceiver or realtimeDeliveryModule.RobloxEventReceiver.new(notificationService)
+	end, { p1.RobloxEventReceiver })
+	local var3 = p1.isInExperience == true
+	local var4 = p1.isBuildModeActive == true
 	reactModule.useEffect(function()
-		-- upvalues: var21 (ref), resumeNotification (copy), var20 (ref), messageBusService (copy), toastNotificationProtocolConstants (copy)
-		local capRtnNamespace = var21:observeEvent(resumeNotification.CapRtnNamespace, function(p7)
-			-- upvalues: resumeNotification (copy), var20 (copy), messageBusService (copy), toastNotificationProtocolConstants (copy)
-			local var25 = resumeNotification.classifyRtnDetail(p7)
+		-- upvalues: var2 (ref), resumeNotification (copy), var1 (ref), messageBusService (copy), toastNotificationProtocolConstants (copy)
+		local capRtnNamespace = var2:observeEvent(resumeNotification.CapRtnNamespace, function(p2)
+			-- upvalues: resumeNotification (copy), var1 (copy), messageBusService (copy), toastNotificationProtocolConstants (copy)
+			local var5 = resumeNotification.classifyRtnDetail(p2)
 			
-			if var25 == nil then return end
-			if resumeNotification.targetMatchesNotification(var20.getActiveTarget(false), var25) then
+			if var5 == nil then return end
+			if resumeNotification.targetMatchesNotification(var1.getActiveTarget(false), var5) then
 				return
 			end
-			messageBusService:Publish(toastNotificationProtocolConstants.MESSAGE_DISPLAY_TOAST_NOTIF, resumeNotification.buildToastNotification(var25))
+			messageBusService:Publish(toastNotificationProtocolConstants.MESSAGE_DISPLAY_TOAST_NOTIF, resumeNotification.buildToastNotification(var5))
 		end)
 		
 		return function()
@@ -129,26 +129,26 @@ return function(p6)
 				capRtnNamespace:disconnect()
 			end
 		end
-	end, { var21, var20 })
+	end, { var2, var1 })
 	reactModule.useEffect(function()
-		-- upvalues: lifecycleEvents (copy), resumeNotification (copy), decodeActionParams (copy), default_1 (copy), routeToBuildChat (copy), var22 (ref), var23 (ref)
-		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, resumeNotification.NotificationType, function(p8)
-			-- upvalues: resumeNotification (copy), decodeActionParams (copy), default_1 (copy), routeToBuildChat (copy), var22 (copy), var23 (copy)
-			if typeof(p8) ~= "table" or p8.userActionType ~= "click" or (typeof(p8.visualItem) ~= "table" or p8.visualItem.eventName ~= resumeNotification.ResumeEventName) or typeof(p8.notificationData) ~= "table" then return end
-			local var27 = decodeActionParams(p8)
+		-- upvalues: lifecycleEvents (copy), resumeNotification (copy), decodeActionParams (copy), default_1 (copy), routeToBuildChat (copy), var3 (ref), var4 (ref)
+		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, resumeNotification.NotificationType, function(p2)
+			-- upvalues: resumeNotification (copy), decodeActionParams (copy), default_1 (copy), routeToBuildChat (copy), var3 (copy), var4 (copy)
+			if typeof(p2) ~= "table" or p2.userActionType ~= "click" or (typeof(p2.visualItem) ~= "table" or p2.visualItem.eventName ~= resumeNotification.ResumeEventName) or typeof(p2.notificationData) ~= "table" then return end
+			local var5 = decodeActionParams(p2)
 			
-			if var27 == nil then
+			if var5 == nil then
 				return
 			end
-			default_1:dismissNotification(p8.notificationData.id)
-			routeToBuildChat(var27, var22, var23)
+			default_1:dismissNotification(p2.notificationData.id)
+			routeToBuildChat(var5, var3, var4)
 		end)
 		
 		return function()
 			-- upvalues: userAction (ref)
 			userAction()
 		end
-	end, { var22, var23 })
+	end, { var3, var4 })
 	
 	return nil
 end

@@ -19,30 +19,30 @@ local t = {
 
 local function FullscreenAssetLibraryPage(value)
 	-- upvalues: useBuildPageLayoutModule (ref), reactModule (ref), fullscreenPageWithSafeArea (ref)
-	local var12 = useBuildPageLayoutModule()
+	local var1 = useBuildPageLayoutModule()
 	
 	return reactModule.createElement(fullscreenPageWithSafeArea, {
 		includeStatusBar = true,
-		BackgroundColor3 = var12.tokens.Color.Surface.Surface_0.Color3,
-		BackgroundTransparency = var12.tokens.Color.Surface.Surface_0.Transparency,
-		includeBottomBar = var12.shouldIncludeBottomBar
+		BackgroundColor3 = var1.tokens.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = var1.tokens.Color.Surface.Surface_0.Transparency,
+		includeBottomBar = var1.shouldIncludeBottomBar
 	}, { Page = value.page })
 end
 
-local function wrapPage(p0, p1)
+local function wrapPage(p1, p2)
 	-- upvalues: reactModule (ref), view (ref), FullscreenAssetLibraryPage (ref)
-	return if p1 then reactModule.createElement(view, { tag = "size-full bg-surface-0" }, { Page = p0 }) else reactModule.createElement(FullscreenAssetLibraryPage, { page = p0 })
+	return if p2 then reactModule.createElement(view, { tag = "size-full bg-surface-0" }, { Page = p1 }) else reactModule.createElement(FullscreenAssetLibraryPage, { page = p1 })
 end
 
 return {
 	Screens = t,
-	BrowserScreen = function(p2)
+	BrowserScreen = function(p1)
 		-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), sendBuildExperienceEventModule (ref), t (ref), wrapPage (ref), assetLibraryBrowserContainerModule (ref)
-		local navigation = p2.navigation
-		local screenProps = p2.screenProps or {}
+		local navigation = p1.navigation
+		local screenProps = p1.screenProps or {}
 		local target = buildNavigationParamsModule.getTarget(navigation)
-		local var15 = if target ~= nil then nil else target.universeId
-		local var16 = reactModule.useCallback(function()
+		local var1 = if target ~= nil then nil else target.universeId
+		local var2 = reactModule.useCallback(function()
 			-- upvalues: screenProps (ref), navigation (ref)
 			if screenProps.onClose == nil then
 				navigation.goBack()
@@ -51,41 +51,41 @@ return {
 			end
 			screenProps.onClose()
 		end, { navigation, screenProps.onClose })
-		local var17 = reactModule.useCallback(function(p3)
+		local var3 = reactModule.useCallback(function(p2)
 			-- upvalues: target (ref), sendBuildExperienceEventModule (copy), navigation (ref), t (copy)
 			if target == nil or target.universeId == nil then
 				return
 			end
-			sendBuildExperienceEventModule("ASSET_LIBRARY_ASSET_CLICK", { universeId = target.universeId }, { assetId = tostring(p3) })
-			navigation.navigate(t.Detail, { target = target, assetId = p3 })
+			sendBuildExperienceEventModule("ASSET_LIBRARY_ASSET_CLICK", { universeId = target.universeId }, { assetId = tostring(p2) })
+			navigation.navigate(t.Detail, { target = target, assetId = p2 })
 		end, { navigation, target })
-		local var18 = reactModule.useCallback(function(p4, p5)
+		local var4 = reactModule.useCallback(function(p2, p3)
 			-- upvalues: target (ref), sendBuildExperienceEventModule (copy), navigation (ref), t (copy)
 			if target == nil or target.universeId == nil then
 				return
 			end
-			sendBuildExperienceEventModule("ASSET_LIBRARY_CATEGORY_CLICK", { universeId = target.universeId }, { assetType = tostring(p4) })
-			navigation.navigate(t.Category, { target = target, assetType = p4, query = p5 })
+			sendBuildExperienceEventModule("ASSET_LIBRARY_CATEGORY_CLICK", { universeId = target.universeId }, { assetType = tostring(p2) })
+			navigation.navigate(t.Category, { target = target, assetType = p2, query = p3 })
 		end, { navigation, target })
 		reactModule.useEffect(function()
-			-- upvalues: var15 (ref), sendBuildExperienceEventModule (copy)
-			if var15 == nil then
+			-- upvalues: var1 (ref), sendBuildExperienceEventModule (copy)
+			if var1 == nil then
 				return
 			end
-			sendBuildExperienceEventModule("ASSET_LIBRARY_IMPRESSION", { universeId = var15 })
-		end, { var15 })
+			sendBuildExperienceEventModule("ASSET_LIBRARY_IMPRESSION", { universeId = var1 })
+		end, { var1 })
 		
 		return if target == nil or target.universeId == nil then nil else wrapPage(reactModule.createElement(assetLibraryBrowserContainerModule, {
 			universeId = target.universeId,
-			onBack = var16,
-			onOpenAsset = var17,
-			onOpenCategory = var18
+			onBack = var2,
+			onOpenAsset = var3,
+			onOpenCategory = var4
 		}), screenProps.isPillMenu)
 	end,
-	CategoryScreen = function(p6)
+	CategoryScreen = function(p1)
 		-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), sendBuildExperienceEventModule (ref), t (ref), wrapPage (ref), assetLibraryCategoryContainerModule (ref)
-		local navigation = p6.navigation
-		local screenProps = p6.screenProps or {}
+		local navigation = p1.navigation
+		local screenProps = p1.screenProps or {}
 		local target = buildNavigationParamsModule.getTarget(navigation)
 		local assetType = navigation.getParam("assetType")
 		
@@ -97,20 +97,20 @@ return {
 				-- upvalues: navigation (ref)
 				navigation.goBack()
 			end, { navigation }),
-			onOpenAsset = reactModule.useCallback(function(p7)
+			onOpenAsset = reactModule.useCallback(function(p2)
 				-- upvalues: target (ref), sendBuildExperienceEventModule (copy), navigation (ref), t (copy)
 				if target == nil then
 					return
 				end
-				sendBuildExperienceEventModule("ASSET_LIBRARY_ASSET_CLICK", { universeId = target.universeId }, { assetId = tostring(p7) })
-				navigation.navigate(t.Detail, { target = target, assetId = p7 })
+				sendBuildExperienceEventModule("ASSET_LIBRARY_ASSET_CLICK", { universeId = target.universeId }, { assetId = tostring(p2) })
+				navigation.navigate(t.Detail, { target = target, assetId = p2 })
 			end, { navigation, target })
 		}), screenProps.isPillMenu)
 	end,
-	DetailScreen = function(p8)
+	DetailScreen = function(p1)
 		-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), wrapPage (ref), assetLibraryDetailContainerModule (ref)
-		local navigation = p8.navigation
-		local screenProps = p8.screenProps or {}
+		local navigation = p1.navigation
+		local screenProps = p1.screenProps or {}
 		local target = buildNavigationParamsModule.getTarget(navigation)
 		local assetId = navigation.getParam("assetId")
 		

@@ -3,24 +3,24 @@ local _ = require(script.Parent.Parent.networkingShareLinkTypes)
 local tutilsModule = require(script:FindFirstAncestor("Packages").tutils)
 local httpService = game:GetService("HttpService")
 
-return function(p0)
+return function(p1)
 	-- upvalues: tutilsModule (ref), SHARELINKS_URLModule (ref), httpService (ref)
-	local var3 = p0.roduxNetworking.POST({ Name = "create-link" }, function(p1, p2)
+	local var1 = p1.roduxNetworking.POST({ Name = "create-link" }, function(p2, p3)
 		-- upvalues: tutilsModule (copy), SHARELINKS_URLModule (copy), httpService (copy)
-		local var4 = tutilsModule.deepCopy(p2)
-		var4.linkType = nil
+		local var2 = tutilsModule.deepCopy(p3)
+		var2.linkType = nil
 		
-		return p1(SHARELINKS_URLModule):path("v1"):path("create-link"):body({
-			linkType = p2.linkType,
-			data = if next(var4) ~= nil then nil else httpService:JSONEncode(var4)
+		return p2(SHARELINKS_URLModule):path("v1"):path("create-link"):body({
+			linkType = p3.linkType,
+			data = if next(var2) ~= nil then nil else httpService:JSONEncode(var2)
 		})
 	end)
 	
-	if p0.useMockedResponse then
-		var3.Mock.clear()
-		var3.Mock.reply(function()
+	if p1.useMockedResponse then
+		var1.Mock.clear()
+		var1.Mock.reply(function()
 			return { responseBody = { linkId = "42685" } }
 		end)
 	end
-	return var3
+	return var1
 end

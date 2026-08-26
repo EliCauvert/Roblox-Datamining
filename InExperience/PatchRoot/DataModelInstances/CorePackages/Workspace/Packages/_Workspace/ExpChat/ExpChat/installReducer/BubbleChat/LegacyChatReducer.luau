@@ -6,30 +6,30 @@ local actions = expChat.Actions
 local legacyDefaultSettingsModule = require(script.Parent.LegacyDefaultSettings)
 
 return roduxModule.createReducer(legacyDefaultSettingsModule, {
-	[require(actions.LegacyBubbleChatEnabledChanged).name] = function(p0, p1)
+	[require(actions.LegacyBubbleChatEnabledChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, { Enabled = p1.value })
+		return dictionary.join(p1, { Enabled = p2.value })
 	end,
-	[require(actions.LegacyBubbleChatSettingsChanged).name] = function(_, p2)
+	[require(actions.LegacyBubbleChatSettingsChanged).name] = function(_, p1)
 		-- upvalues: dictionary (ref), legacyDefaultSettingsModule (ref)
-		local chatSettings = p2.chatSettings
+		local chatSettings = p1.chatSettings
 		
 		if chatSettings.Transparency then
 			chatSettings.BackgroundTransparency = chatSettings.Transparency
 		end
-		local var3 = dictionary.join(legacyDefaultSettingsModule, chatSettings)
+		local var1 = dictionary.join(legacyDefaultSettingsModule, chatSettings)
 		
 		if chatSettings and chatSettings.UserSpecificSettings then
 			for i, v in pairs(chatSettings.UserSpecificSettings) do
-				local var4 = dictionary.copyDeep(legacyDefaultSettingsModule)
+				local var2 = dictionary.copyDeep(legacyDefaultSettingsModule)
 				
 				if v.Transparency then
 					v.BackgroundTransparency = v.Transparency
 				end
-				var4.UserSpecificSettings = nil
-				var3.UserSpecificSettings[i] = dictionary.join(var4, v)
+				var2.UserSpecificSettings = nil
+				var1.UserSpecificSettings[i] = dictionary.join(var2, v)
 			end
 		end
-		return var3
+		return var1
 	end
 })

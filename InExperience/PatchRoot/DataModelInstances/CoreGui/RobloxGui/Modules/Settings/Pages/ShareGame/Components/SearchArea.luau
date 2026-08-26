@@ -12,24 +12,24 @@ local themeModule = require(robloxGui.Modules.Settings.Theme)
 local setSearchAreaActiveModule = require(shareGame.Actions.SetSearchAreaActive)
 local setSearchTextModule = require(shareGame.Actions.SetSearchText)
 local shareGameIconsModule = require(robloxGui.Modules.Settings.Pages.ShareGame.Spritesheets.ShareGameIcons)
-local var12 = require(shareGame.getTranslator)()
+local var1 = require(shareGame.getTranslator)()
 local imagePath = shareGameIconsModule:GetImagePath()
 local searchLargeFrame = shareGameIconsModule:GetFrame("search_large")
-local var15 = themeModule.font(Enum.Font.SourceSans)
+local var2 = themeModule.font(Enum.Font.SourceSans)
 local GRAY3 = constantsModule.Color.GRAY3
-local var16 = themeModule.textSize(20)
+local var3 = themeModule.textSize(20)
 local searchArea = roactModule.PureComponent:extend("SearchArea")
 
-function searchArea.init(p0)
-	-- upvalues: var12 (ref)
-	p0.state = {
-		cancelText = var12:FormatByKey("Feature.SettingsHub.Action.CancelSearch")
+function searchArea.init(p1)
+	-- upvalues: var1 (ref)
+	p1.state = {
+		cancelText = var1:FormatByKey("Feature.SettingsHub.Action.CancelSearch")
 	}
-	p0.searchField = nil
+	p1.searchField = nil
 end
 
 function searchArea.render(p1)
-	-- upvalues: text (ref), var15 (ref), var16 (ref), roactModule (ref), iconButtonModule (ref), imagePath (ref), searchLargeFrame (ref), searchBoxModule (ref), getFFlagShareGameSearchBoxFocusAnalyticsModule (ref), GRAY3 (ref)
+	-- upvalues: text (ref), var2 (ref), var3 (ref), roactModule (ref), iconButtonModule (ref), imagePath (ref), searchLargeFrame (ref), searchBoxModule (ref), getFFlagShareGameSearchBoxFocusAnalyticsModule (ref), GRAY3 (ref)
 	local fullWidthSearchBar = p1.props.fullWidthSearchBar
 	local searchBoxMargin = p1.props.searchBoxMargin
 	local anchorPoint = p1.props.anchorPoint
@@ -38,7 +38,7 @@ function searchArea.render(p1)
 	local searchAreaActive = p1.props.searchAreaActive
 	local size = p1.props.size
 	local cancelText = p1.state.cancelText
-	local textWidth = text.GetTextWidth(cancelText, var15, var16)
+	local textWidth = text.GetTextWidth(cancelText, var2, var3)
 	local setSearchText = p1.props.setSearchText
 	
 	return if fullWidthSearchBar then roactModule.createElement("Frame", {
@@ -76,15 +76,15 @@ function searchArea.render(p1)
 					p1.props.analytics:onSearchFocused()
 				end
 			end,
-			onTextBoxFocusLost = function(p3)
+			onTextBoxFocusLost = function(p2)
 				-- upvalues: p1 (ref)
-				if p3 == "" then
+				if p2 == "" then
 					p1.props.setSearchAreaActive(false)
 				end
 			end,
-			searchFieldRef = function(p4)
+			searchFieldRef = function(p2)
 				-- upvalues: p1 (ref)
-				p1.searchField = p4
+				p1.searchField = p2
 			end
 		}),
 		Cancel = roactModule.createElement("TextButton", {
@@ -92,20 +92,20 @@ function searchArea.render(p1)
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.new(1, 0, 0.5, 0),
 			Size = UDim2.new(0, textWidth, 1, 0),
-			TextSize = var16,
+			TextSize = var3,
 			TextColor3 = GRAY3,
-			Font = var15,
+			Font = var2,
 			ZIndex = zIndex,
 			Visible = searchAreaActive,
-			[roactModule.Ref] = function(p5)
+			[roactModule.Ref] = function(p2)
 				-- upvalues: cancelText (ref), p1 (ref)
-				if p5 then
-					p5.Text = cancelText
+				if p2 then
+					p2.Text = cancelText
 					
 					if not p1.textConnection then
-						p1.textConnection = p5:GetPropertyChangedSignal("Text"):connect(function()
-							-- upvalues: p1 (copy), p5 (ref)
-							p1:setState({ cancelText = p5.Text })
+						p1.textConnection = p2:GetPropertyChangedSignal("Text"):connect(function()
+							-- upvalues: p1 (copy), p2 (ref)
+							p1:setState({ cancelText = p2.Text })
 						end)
 					end
 				end
@@ -128,51 +128,51 @@ function searchArea.render(p1)
 	})
 end
 
-function searchArea.didUpdate(p6, p7)
-	local fullWidthSearchBar = p6.props.fullWidthSearchBar
+function searchArea.didUpdate(p1, p2)
+	local fullWidthSearchBar = p1.props.fullWidthSearchBar
 	
-	if p6.searchField then
-		if not p6.props.isPageOpen and p7.isPageOpen then
+	if p1.searchField then
+		if not p1.props.isPageOpen and p2.isPageOpen then
 			spawn(function()
-				-- upvalues: fullWidthSearchBar (ref), p6 (ref)
+				-- upvalues: fullWidthSearchBar (ref), p1 (ref)
 				if fullWidthSearchBar then
-					p6.props.setSearchAreaActive(false)
+					p1.props.setSearchAreaActive(false)
 					
 					return
 				end
-				p6.searchField.Text = ""
+				p1.searchField.Text = ""
 			end)
 		end
 		if fullWidthSearchBar then
-			local searchAreaActive = p6.props.searchAreaActive
-			local searchAreaActive_1 = p7.searchAreaActive
+			local searchAreaActive = p1.props.searchAreaActive
+			local searchAreaActive_1 = p2.searchAreaActive
 			
 			if searchAreaActive and not searchAreaActive_1 then
-				p6.searchField:CaptureFocus()
+				p1.searchField:CaptureFocus()
 				
 				return
 			elseif not searchAreaActive and searchAreaActive_1 then
-				p6.searchField.Text = ""
+				p1.searchField.Text = ""
 			end
 		end
 	end
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p8, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
-		isPageOpen = p8.Page.IsOpen,
-		searchAreaActive = p8.ConversationsSearch.SearchAreaActive
+		isPageOpen = p1.Page.IsOpen,
+		searchAreaActive = p1.ConversationsSearch.SearchAreaActive
 	}
-end, function(p9)
+end, function(p1)
 	-- upvalues: setSearchAreaActiveModule (ref), setSearchTextModule (ref)
 	return {
 		setSearchAreaActive = function(value)
-			-- upvalues: p9 (ref), setSearchAreaActiveModule (copy)
-			p9(setSearchAreaActiveModule(value))
+			-- upvalues: p1 (ref), setSearchAreaActiveModule (copy)
+			p1(setSearchAreaActiveModule(value))
 		end,
 		setSearchText = function(value)
-			-- upvalues: p9 (ref), setSearchTextModule (copy)
-			p9(setSearchTextModule(value))
+			-- upvalues: p1 (ref), setSearchTextModule (copy)
+			p1(setSearchTextModule(value))
 		end
 	}
 end)(searchArea)

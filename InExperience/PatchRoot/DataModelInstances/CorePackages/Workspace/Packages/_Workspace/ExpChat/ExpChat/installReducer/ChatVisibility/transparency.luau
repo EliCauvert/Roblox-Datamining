@@ -38,45 +38,45 @@ local function resetTextOnly(value)
 end
 
 return roduxModule.createReducer(t, {
-	[chatInputBarConfigurationEnabledModule.name] = function(p0, p1)
+	[chatInputBarConfigurationEnabledModule.name] = function(p1, p2)
 		-- upvalues: reset (ref)
-		return if p1.enabled then reset(p0) else p0
+		return if p2.enabled then reset(p1) else p1
 	end,
-	[chatTopBarButtonActivatedModule.name] = function(p2, p3)
+	[chatTopBarButtonActivatedModule.name] = function(p1, p2)
 		-- upvalues: reset (ref)
-		return if p3.isVisible then reset(p2) else p2
+		return if p2.isVisible then reset(p1) else p1
 	end,
-	[setCoreGuiEnabledChangedModule.name] = function(p4, p5)
+	[setCoreGuiEnabledChangedModule.name] = function(p1, p2)
 		-- upvalues: reset (ref)
-		return if p5.enabled then reset(p4) else p4
+		return if p2.enabled then reset(p1) else p1
 	end,
-	[clientAppLoaded.name] = function(p6, _)
+	[clientAppLoaded.name] = function(p1, _)
 		-- upvalues: reset (ref)
-		return reset(p6)
+		return reset(p1)
 	end,
-	[userInteractionModule.name] = function(p7, p8)
+	[userInteractionModule.name] = function(p1, p2)
 		-- upvalues: dictionary (ref), t (ref), reset (ref)
-		if p8.interaction == "focus" then
+		if p2.interaction == "focus" then
 			local processTime = os.clock()
 			
 			return dictionary.join(dictionary.join(t, {
-				isTextBoxFocused = p7.isTextBoxFocused,
+				isTextBoxFocused = p1.isTextBoxFocused,
 				lastGeneralActivityTimestamp = processTime,
 				lastMessageActivityTimestamp = processTime
 			}), { isTextBoxFocused = true })
-		elseif p8.interaction == "unfocus" then
+		elseif p2.interaction == "unfocus" then
 			local processTime = os.clock()
 			
 			return dictionary.join(dictionary.join(t, {
-				isTextBoxFocused = p7.isTextBoxFocused,
+				isTextBoxFocused = p1.isTextBoxFocused,
 				lastGeneralActivityTimestamp = processTime,
 				lastMessageActivityTimestamp = processTime
 			}), { isTextBoxFocused = false })
 		end
-		return reset(p7)
+		return reset(p1)
 	end,
-	[incomingMessageReceivedModule.name] = function(p9, _)
+	[incomingMessageReceivedModule.name] = function(p1, _)
 		-- upvalues: resetTextOnly (ref)
-		return resetTextOnly(p9)
+		return resetTextOnly(p1)
 	end
 })

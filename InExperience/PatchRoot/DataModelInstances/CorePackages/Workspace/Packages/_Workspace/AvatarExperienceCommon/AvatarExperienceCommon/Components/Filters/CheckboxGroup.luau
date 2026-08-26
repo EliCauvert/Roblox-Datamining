@@ -7,24 +7,24 @@ local focusable = roactGamepadModule.Focusable
 local _ = require(parent.Dash)
 local checkboxButtonItemModule = require(script.Parent.CheckboxButtonItem)
 
-local function CheckboxGroup(p0)
+local function CheckboxGroup(p1)
 	-- upvalues: roactGamepadModule (ref), reactModule (ref), focusable (ref), checkboxButtonItemModule (ref), view (ref)
-	local var5 = roactGamepadModule.useRefCache()
-	local var6, var7 = reactModule.useBinding(0)
-	local var8 = roactGamepadModule.useRefCache()
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), var8 (ref), var7 (ref)
-		local var14 = 0
+	local var1 = roactGamepadModule.useRefCache()
+	local var2, var3 = reactModule.useBinding(0)
+	local var4 = roactGamepadModule.useRefCache()
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), var4 (ref), var3 (ref)
+		local var6 = 0
 		
-		for i, v in p0.items do
-			var14 += var8[v.id].current or 0
+		for i, v in p1.items do
+			var6 += var4[v.id].current or 0
 		end
-		var7(var14)
+		var3(var6)
 		
-		if p0.onHeightChanged then
-			p0.onHeightChanged(var14)
+		if p1.onHeightChanged then
+			p1.onHeightChanged(var6)
 		end
-	end, { p0.items, var8, var7, p0.onHeightChanged })
+	end, { p1.items, var4, var3, p1.onHeightChanged })
 	local t = {
 		layout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -32,54 +32,54 @@ local function CheckboxGroup(p0)
 		})
 	}
 	
-	for i, v in p0.items do
-		local var12 = if p0.selectedValue then table.find(p0.selectedValue, v.id) ~= nil else false
-		local var13 = var5["defaultChild-" .. i]
+	for i, v in p1.items do
+		local var7 = if p1.selectedValue then table.find(p1.selectedValue, v.id) ~= nil else false
+		local var8 = var1["defaultChild-" .. i]
 		t["checkboxItem" .. v.id] = reactModule.createElement(focusable[checkboxButtonItemModule], {
 			id = v.id,
 			text = v.text,
-			onActivated = p0.onActivated,
-			isSelected = var12,
+			onActivated = p1.onActivated,
+			isSelected = var7,
 			isDisabled = v.isDisabled,
 			layoutOrder = i,
-			itemHeight = p0.itemHeight,
+			itemHeight = p1.itemHeight,
 			customView = v.customView,
 			expandedView = v.expandedView,
 			expandedViewHeight = v.expandedViewHeight,
-			useDefaultControlState = p0.useDefaultControlState,
-			hideDivider = p0.hideDividers or i == #p0.items,
-			ref = var5[i],
-			defaultChildRef = var13,
-			defaultChild = var13,
-			restorePreviousChildFocus = var12,
-			NextSelectionUp = if i > 1 then var5[i - 1] else nil,
-			NextSelectionDown = if i < #p0.items then var5[i + 1] else nil,
-			onHeightChanged = reactModule.useCallback(function(p1)
-				-- upvalues: var8 (ref), v (ref), var9 (ref)
-				var8[v.id].current = p1
-				var9()
-			end, { v.id, var8, var9 })
+			useDefaultControlState = p1.useDefaultControlState,
+			hideDivider = p1.hideDividers or i == #p1.items,
+			ref = var1[i],
+			defaultChildRef = var8,
+			defaultChild = var8,
+			restorePreviousChildFocus = var7,
+			NextSelectionUp = if i > 1 then var1[i - 1] else nil,
+			NextSelectionDown = if i < #p1.items then var1[i + 1] else nil,
+			onHeightChanged = reactModule.useCallback(function(p2)
+				-- upvalues: var4 (ref), v (ref), var5 (ref)
+				var4[v.id].current = p2
+				var5()
+			end, { v.id, var4, var5 })
 		})
 	end
-	local var11 = p0.items and #p0.items > 0
+	local var9 = p1.items and #p1.items > 0
 	
-	return reactModule.createElement(if var11 then focusable[view] else view, {
+	return reactModule.createElement(if var9 then focusable[view] else view, {
 		BackgroundTransparency = 1,
-		defaultChild = if var11 then var5[1] else nil,
-		Size = var6:map(function(p2)
+		defaultChild = if var9 then var1[1] else nil,
+		Size = var2:map(function(p2)
 			return UDim2.new(1, 0, 0, p2)
 		end),
-		LayoutOrder = p0.layoutOrder,
-		NextSelectionLeft = p0.NextSelectionLeft,
-		NextSelectionRight = p0.NextSelectionRight,
-		NextSelectionDown = p0.NextSelectionDown,
-		NextSelectionUp = p0.NextSelectionUp,
-		restorePreviousChildFocus = var11 or nil,
-		ref = p0.frameRef
+		LayoutOrder = p1.layoutOrder,
+		NextSelectionLeft = p1.NextSelectionLeft,
+		NextSelectionRight = p1.NextSelectionRight,
+		NextSelectionDown = p1.NextSelectionDown,
+		NextSelectionUp = p1.NextSelectionUp,
+		restorePreviousChildFocus = var9 or nil,
+		ref = p1.frameRef
 	}, t)
 end
 
-return reactModule.forwardRef(function(p3, p4)
+return reactModule.forwardRef(function(p2, p3)
 	-- upvalues: reactModule (ref), CheckboxGroup (ref), cryoModule (ref)
-	return reactModule.createElement(CheckboxGroup, cryoModule.Dictionary.join(p3, { frameRef = p4 }))
+	return reactModule.createElement(CheckboxGroup, cryoModule.Dictionary.join(p2, { frameRef = p3 }))
 end)

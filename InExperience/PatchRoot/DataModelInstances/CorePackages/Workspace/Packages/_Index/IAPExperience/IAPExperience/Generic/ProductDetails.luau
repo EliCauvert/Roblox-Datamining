@@ -23,49 +23,49 @@ local function _(a)
 	return if #a > 50 then a:sub(1, 50) .. "..." else a
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), modelViewportModule (ref), imageSetLabel (ref), imageunavailable (ref), virtualItemBadgeTypeModule (ref), yellowBadgeModule (ref), loggerModule (ref), default (ref), virtualItemBadgeShownCounter (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref)
-	local var9 = useLocalization({ Popular = "IAPExperience.RobuxUpsell.Text.PopularItem" })
-	local var10 = useTokens()
-	local var11 = if p0.isPortrait then 128 else 80
-	local var12, var13 = reactModule.useState(0)
+	local var1 = useLocalization({ Popular = "IAPExperience.RobuxUpsell.Text.PopularItem" })
+	local var2 = useTokens()
+	local var3 = if p1.isPortrait then 128 else 80
+	local var4, var5 = reactModule.useState(0)
 	
-	local function updateComponentWidth(p1)
-		-- upvalues: var11 (ref), var12 (ref), var13 (ref)
-		if not p1 then return end
-		local var22 = p1.AbsoluteSize.X - var11 - 6
+	local function updateComponentWidth(p2)
+		-- upvalues: var3 (ref), var4 (ref), var5 (ref)
+		if not p2 then return end
+		local var6 = p2.AbsoluteSize.X - var3 - 6
 		
-		if var22 ~= var12 then
-			var13(var22)
+		if var6 ~= var4 then
+			var5(var6)
 		end
 	end
 	
-	local var15 = if p0.model ~= nil then reactModule.createElement(imageSetLabel, {
+	local var6 = if p1.model ~= nil then reactModule.createElement(imageSetLabel, {
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 5, 0, 5),
-		Size = UDim2.new(0, var11, 0, var11),
+		Size = UDim2.new(0, var3, 0, var3),
 		ScaleType = Enum.ScaleType.Stretch,
-		Image = if p0.itemIcon then p0.itemIcon else imageunavailable,
-		ImageColor3 = if p0.itemIcon then nil else var10.Color.Content.Default.Color3,
-		ImageTransparency = if p0.itemIcon then nil else var10.Color.Content.Default.Transparency
+		Image = if p1.itemIcon then p1.itemIcon else imageunavailable,
+		ImageColor3 = if p1.itemIcon then nil else var2.Color.Content.Default.Color3,
+		ImageTransparency = if p1.itemIcon then nil else var2.Color.Content.Default.Transparency
 	}) else reactModule.createElement(modelViewportModule, {
-		model = p0.model,
+		model = p1.model,
 		Position = UDim2.fromOffset(5, 5),
-		Size = UDim2.fromOffset(var11, var11)
+		Size = UDim2.fromOffset(var3, var3)
 	})
-	local var16 = if p0.badgeType and p0.badgeType == virtualItemBadgeTypeModule.Popular then reactModule.createElement(yellowBadgeModule, {
+	local var7 = if p1.badgeType and p1.badgeType == virtualItemBadgeTypeModule.Popular then reactModule.createElement(yellowBadgeModule, {
 		LayoutOrder = 2,
 		Icon = "icons/menu/fire_fill",
-		Text = var9.Popular
+		Text = var1.Popular
 	}) else nil
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), loggerModule (copy), p0 (ref), default (copy), virtualItemBadgeShownCounter (copy)
-		if var16 then
+		-- upvalues: var7 (ref), loggerModule (copy), p1 (ref), default (copy), virtualItemBadgeShownCounter (copy)
+		if var7 then
 			loggerModule.debug({
 				message = "Virtual Item Badge Shown",
-				badgeType = p0.badgeType
+				badgeType = p1.badgeType
 			})
-			default:logRobloxTelemetryCounter(virtualItemBadgeShownCounter, 1, { badgeType = p0.badgeType })
+			default:logRobloxTelemetryCounter(virtualItemBadgeShownCounter, 1, { badgeType = p1.badgeType })
 			
 			return
 		end
@@ -73,10 +73,10 @@ return function(p0)
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "auto-y row gap-small align-y-center align-x-left",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0)
 	}
-	local t_1 = { ItemIcon = var15 }
+	local t_1 = { ItemIcon = var6 }
 	local createElement_1 = reactModule.createElement
 	local t_2 = {
 		LayoutOrder = 2,
@@ -89,21 +89,21 @@ return function(p0)
 	local t_4 = {
 		LayoutOrder = 1,
 		tag = "auto-y text-align-x-left text-wrap text-title-medium content-emphasis",
-		Size = UDim2.new(0, var12, 0, 0)
+		Size = UDim2.new(0, var4, 0, 0)
 	}
-	local itemName = p0.itemName
+	local itemName = p1.itemName
 	t_4.Text = if #itemName > 50 then itemName:sub(1, 50) .. "..." else itemName
 	t_3.ItemName = createElement_2(text, t_4)
 	t_3.ItemDetails = reactModule.createElement(view, {
 		LayoutOrder = 2,
-		tag = if p0.isPortrait then "auto-xy col gap-small align-y-center" else "auto-xy row gap-small align-y-center"
+		tag = if p1.isPortrait then "auto-xy col gap-small align-y-center" else "auto-xy row gap-small align-y-center"
 	}, {
-		ItemCost = if p0.itemRobuxCost then reactModule.createElement(text, {
+		ItemCost = if p1.itemRobuxCost then reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis",
-			Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.itemRobuxCost)
+			Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.itemRobuxCost)
 		}) else nil,
-		ItemBadge = var16
+		ItemBadge = var7
 	})
 	t_1.ItemDetailsFrame = createElement_1(view, t_2, t_3)
 	

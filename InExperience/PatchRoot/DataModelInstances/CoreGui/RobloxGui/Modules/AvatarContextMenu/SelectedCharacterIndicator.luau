@@ -6,90 +6,90 @@ local tweenService = game:GetService("TweenService")
 local _ = game:GetService("InsertService")
 local currentCamera = workspaceService.CurrentCamera
 
-local function removeScripts(p0)
-	for i, v in ipairs(p0:GetDescendants()) do
+local function removeScripts(p1)
+	for i, v in ipairs(p1:GetDescendants()) do
 		if v:IsA("LuaSourceContainer") then
 			v:Destroy()
 		end
 	end
 end
 
-local function ApplyArrow(p1, p2)
+local function ApplyArrow(p2, p3)
 	-- upvalues: currentCamera (ref), removeScripts (ref), tweenService (ref), runService (ref)
 	local contextMenuArrow = Instance.new("Model")
 	contextMenuArrow.Name = "ContextMenuArrow"
 	contextMenuArrow.Parent = currentCamera
-	local humanoid = p1:FindFirstChildOfClass("Humanoid")
+	local humanoid = p2:FindFirstChildOfClass("Humanoid")
 	
 	if humanoid == nil then
-		humanoid = p1:WaitForChild("Humanoid", 15)
+		humanoid = p2:WaitForChild("Humanoid", 15)
 		
 		if humanoid == nil then
 			return
 		end
 	end
-	local humanoidRootPart = p1:WaitForChild("HumanoidRootPart")
-	local var9 = p2.SelectedCharacterIndicator:Clone()
-	removeScripts(var9)
-	var9.Anchored = true
-	var9.Transparency = 0
-	var9.CanCollide = false
-	var9.Parent = contextMenuArrow
-	local var10 = tweenService:Create(var9, TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, -1, false), { Orientation = Vector3.new(0, 360, 180) })
-	var10:Play()
+	local humanoidRootPart = p2:WaitForChild("HumanoidRootPart")
+	local var1 = p3.SelectedCharacterIndicator:Clone()
+	removeScripts(var1)
+	var1.Anchored = true
+	var1.Transparency = 0
+	var1.CanCollide = false
+	var1.Parent = contextMenuArrow
+	local var2 = tweenService:Create(var1, TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, -1, false), { Orientation = Vector3.new(0, 360, 180) })
+	var2:Play()
 	
 	local function update()
-		-- upvalues: var9 (ref), humanoidRootPart (ref)
-		var9.Position = humanoidRootPart.Position + Vector3.new(0, 5, 0)
+		-- upvalues: var1 (ref), humanoidRootPart (ref)
+		var1.Position = humanoidRootPart.Position + Vector3.new(0, 5, 0)
 	end
 	
-	local var12 = false
+	local var3 = false
 	
 	local function kill()
-		-- upvalues: var12 (write), contextMenuArrow (ref), var10 (ref), runService (copy)
-		if var12 then
+		-- upvalues: var3 (write), contextMenuArrow (ref), var2 (ref), runService (copy)
+		if var3 then
 			return
 		end
-		var12 = true
+		var3 = true
 		contextMenuArrow:Destroy()
-		var10:Destroy()
+		var2:Destroy()
 		runService:UnbindFromRenderStep("ContextActionMenuRenderArrow")
 	end
 	
 	humanoid.Died:Connect(kill)
-	p1.AncestryChanged:Connect(kill)
+	p2.AncestryChanged:Connect(kill)
 	runService:BindToRenderStep("ContextActionMenuRenderArrow", Enum.RenderPriority.Camera.Value + 1, update)
 	contextMenuArrow.Parent = currentCamera
 	
 	return kill
 end
 
-function t.ChangeSelectedPlayer(p3, p4, p5)
+function t.ChangeSelectedPlayer(p2, p3, p4)
 	-- upvalues: ApplyArrow (ref)
 	coroutine.wrap(function()
-		-- upvalues: p3 (ref), p4 (ref), ApplyArrow (copy), p5 (ref)
-		if p3.SelectedPlayer then
-			p3.SelectedPlayer = nil
-			p3.CharacterAddedConn:Disconnect()
-			p3.CharacterAddedConn = nil
+		-- upvalues: p2 (ref), p3 (ref), ApplyArrow (copy), p4 (ref)
+		if p2.SelectedPlayer then
+			p2.SelectedPlayer = nil
+			p2.CharacterAddedConn:Disconnect()
+			p2.CharacterAddedConn = nil
 			
-			if p3.KillOldRenderFunction then
-				p3.KillOldRenderFunction()
-				p3.KillOldRenderFunction = nil
+			if p2.KillOldRenderFunction then
+				p2.KillOldRenderFunction()
+				p2.KillOldRenderFunction = nil
 			end
 		end
-		if p4 then
-			p3.SelectedPlayer = p4
-			p3.CharacterAddedConn = p4.CharacterAdded:Connect(function(p6)
-				-- upvalues: p3 (copy), ApplyArrow (copy), p5 (copy)
-				if p3.KillOldRenderFunction then
-					p3.KillOldRenderFunction()
+		if p3 then
+			p2.SelectedPlayer = p3
+			p2.CharacterAddedConn = p3.CharacterAdded:Connect(function(p5)
+				-- upvalues: p2 (copy), ApplyArrow (copy), p4 (copy)
+				if p2.KillOldRenderFunction then
+					p2.KillOldRenderFunction()
 				end
-				p3.KillOldRenderFunction = ApplyArrow(p6, p5)
+				p2.KillOldRenderFunction = ApplyArrow(p5, p4)
 			end)
 			
-			if p4.Character then
-				p3.KillOldRenderFunction = ApplyArrow(p4.Character, p5)
+			if p3.Character then
+				p2.KillOldRenderFunction = ApplyArrow(p3.Character, p4)
 			end
 		end
 	end)()

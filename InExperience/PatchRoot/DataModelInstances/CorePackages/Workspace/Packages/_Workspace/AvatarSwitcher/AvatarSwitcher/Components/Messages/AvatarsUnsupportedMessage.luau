@@ -9,20 +9,20 @@ local experienceAvatarSupportTypeModule = require(avatarSwitcher.Enums.Experienc
 local getAvatarSwitcherStoreModule = require(avatarSwitcher.Stores.getAvatarSwitcherStore)
 local fFlagAvatarSwitcherUiFixes = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSignalState (ref), getAvatarSwitcherStoreModule (ref), useLocalization (ref), fFlagAvatarSwitcherUiFixes (ref), experienceAvatarSupportTypeModule (ref), reactModule (ref), foundationModule (ref), messageCardModule (ref)
-	local var6 = useLocalization(if fFlagAvatarSwitcherUiFixes then {
+	local var1 = useLocalization(if fFlagAvatarSwitcherUiFixes then {
 		messageHeader = "Feature.AvatarSwitcher.Heading.PresetAvatars"
 	} else {
 		messageHeader = "Feature.AvatarSwitcher.Heading.Unsupported",
 		messageContent = "Feature.AvatarSwitcher.Message.Unsupported"
 	})
 	
-	return if useSignalState(useSignalState(getAvatarSwitcherStoreModule).getExperienceAvatarSupportType) == experienceAvatarSupportTypeModule.NoSupport then reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = p0.LayoutOrder }, {
+	return if useSignalState(useSignalState(getAvatarSwitcherStoreModule).getExperienceAvatarSupportType) == experienceAvatarSupportTypeModule.NoSupport then reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = p1.LayoutOrder }, {
 		WarningMessage = reactModule.createElement(messageCardModule, {
 			icon = "Info",
-			headerText = var6.messageHeader,
-			contentText = if fFlagAvatarSwitcherUiFixes then nil else var6.messageContent,
+			headerText = var1.messageHeader,
+			contentText = if fFlagAvatarSwitcherUiFixes then nil else var1.messageContent,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		})

@@ -28,50 +28,50 @@ local t_1 = {
 
 return function()
 	-- upvalues: useLastInputMethodModule (ref), t (ref), useFocusedTextBoxModule (ref), reactModule (ref), gamepadService (ref), userInputService (ref), fFlagFixSelectionWithWebViews (ref), guiService (ref), t_1 (ref), VRService (ref)
-	local var8 = useLastInputMethodModule()
-	local var9 = t[var8]
-	local var10 = useFocusedTextBoxModule()
-	local var11, var12 = reactModule.useState(gamepadService.GamepadCursorEnabled)
-	local var13, var14 = reactModule.useState(false)
-	local var15 = reactModule.useRef(if var8 == "Keyboard" then "Cursor" else var9)
+	local var1 = useLastInputMethodModule()
+	local var2 = t[var1]
+	local var3 = useFocusedTextBoxModule()
+	local var4, var5 = reactModule.useState(gamepadService.GamepadCursorEnabled)
+	local var6, var7 = reactModule.useState(false)
+	local var8 = reactModule.useRef(if var1 == "Keyboard" then "Cursor" else var2)
 	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), fFlagFixSelectionWithWebViews (copy), guiService (copy), t_1 (copy), var10 (ref), var14 (ref)
-		local inputBeganConnection = userInputService.InputBegan:Connect(function(p0)
-			-- upvalues: fFlagFixSelectionWithWebViews (copy), guiService (copy), t_1 (copy), var10 (copy), var14 (copy)
-			if t_1[p0.KeyCode] and var10 == nil and (if fFlagFixSelectionWithWebViews then guiService.CoreGuiNavigationEnabled else true) then
-				var14(true)
+		-- upvalues: userInputService (copy), fFlagFixSelectionWithWebViews (copy), guiService (copy), t_1 (copy), var3 (ref), var7 (ref)
+		local inputBeganConnection = userInputService.InputBegan:Connect(function(p1)
+			-- upvalues: fFlagFixSelectionWithWebViews (copy), guiService (copy), t_1 (copy), var3 (copy), var7 (copy)
+			if t_1[p1.KeyCode] and var3 == nil and (if fFlagFixSelectionWithWebViews then guiService.CoreGuiNavigationEnabled else true) then
+				var7(true)
 				
 				return
 			end
-			var14(false)
+			var7(false)
 		end)
 		
 		return function()
 			-- upvalues: inputBeganConnection (ref)
 			inputBeganConnection:Disconnect()
 		end
-	end, { var10 })
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: gamepadService (copy), var12 (ref)
-		local var17 = gamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function()
-			-- upvalues: var12 (copy), gamepadService (copy)
-			var12(gamepadService.GamepadCursorEnabled)
+		-- upvalues: gamepadService (copy), var5 (ref)
+		local var9 = gamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function()
+			-- upvalues: var5 (copy), gamepadService (copy)
+			var5(gamepadService.GamepadCursorEnabled)
 		end)
 		
 		return function()
-			-- upvalues: var17 (ref)
-			var17:Disconnect()
+			-- upvalues: var9 (ref)
+			var9:Disconnect()
 		end
 	end, {})
 	
 	if VRService.VREnabled then
-		var9 = "Cursor"
-	elseif var8 == "Keyboard" then
-		var9 = if var13 or var15.current == "Focus" then "Focus" else "Cursor"
-	elseif var8 == "Gamepad" then
-		var9 = if var11 then "Cursor" else "Focus"
+		var2 = "Cursor"
+	elseif var1 == "Keyboard" then
+		var2 = if var6 or var8.current == "Focus" then "Focus" else "Cursor"
+	elseif var1 == "Gamepad" then
+		var2 = if var4 then "Cursor" else "Focus"
 	end
-	var15.current = var9
+	var8.current = var2
 	
-	return var9
+	return var2
 end

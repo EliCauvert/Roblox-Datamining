@@ -10,137 +10,137 @@ local reactElementModule = require(script.Parent.ReactElement)
 local isValidElement = reactElementModule.isValidElement
 local cloneAndReplaceKey = reactElementModule.cloneAndReplaceKey
 
-local function _(p0)
-	return "$" .. string.gsub(string.gsub(p0, "=", "=0"), ":", "=2")
+local function _(p1)
+	return "$" .. string.gsub(string.gsub(p1, "=", "=0"), ":", "=2")
 end
 
 local _ = function(p1)
 	return p1
 end
 
-local _ = function(p2, p3)
-	return if typeof(p2) == "table" and p2 ~= nil and p2.key ~= nil then "$" .. string.gsub(string.gsub(tostring(p2.key), "=", "=0"), ":", "=2") else tostring(p3)
+local _ = function(p1, p2)
+	return if typeof(p1) == "table" and p1 ~= nil and p1.key ~= nil then "$" .. string.gsub(string.gsub(tostring(p1.key), "=", "=0"), ":", "=2") else tostring(p2)
 end
 
-local function mapIntoArray(p4, p5, p6, p7, p8)
+local function mapIntoArray(p1, p2, p3, p4, p5)
 	-- upvalues: REACT_ELEMENT_TYPE (ref), REACT_PORTAL_TYPE (ref), array (ref), mapIntoArray (ref), isValidElement (ref), cloneAndReplaceKey (ref), getIteratorFn (ref)
-	local var3 = typeof(p4)
+	local var1 = typeof(p1)
 	
-	if var3 == "nil" or var3 == "boolean" or var3 == "userdata" then
-		p4 = nil
+	if var1 == "nil" or var1 == "boolean" or var1 == "userdata" then
+		p1 = nil
 	end
-	local var5
-	local var4 = false
+	local var2
+	local var3 = false
 	
-	if p4 == nil then
-		var4 = true
-	elseif var3 == "string" or var3 == "number" then
-		var4 = true
-	elseif var3 == "table" then
+	if p1 == nil then
+		var3 = true
+	elseif var1 == "string" or var1 == "number" then
+		var3 = true
+	elseif var1 == "table" then
 		local key
-		var5 = p4["$$typeof"]
+		var2 = p1["$$typeof"]
 		
-		if var5 == REACT_ELEMENT_TYPE or var5 == REACT_PORTAL_TYPE then
-			var4 = true
+		if var2 == REACT_ELEMENT_TYPE or var2 == REACT_PORTAL_TYPE then
+			var3 = true
 		end
 	end
-	if var4 then
-		var5 = p4
-		local var6 = p8(var5)
-		local var7 = if p7 == "" then "." .. (if typeof(var5) == "table" and var5 ~= nil and var5.key ~= nil then "$" .. string.gsub(string.gsub(tostring(var5.key), "=", "=0"), ":", "=2") else tostring(1)) else p7
+	if var3 then
+		var2 = p1
+		local var4 = p5(var2)
+		local var5 = if p4 == "" then "." .. (if typeof(var2) == "table" and var2 ~= nil and var2.key ~= nil then "$" .. string.gsub(string.gsub(tostring(var2.key), "=", "=0"), ":", "=2") else tostring(1)) else p4
 		
-		if array.isArray(var6) then
-			mapIntoArray(var6, p5, if var7 ~= nil then var7 .. "/" else "", "", function(p9)
-				return p9
+		if array.isArray(var4) then
+			mapIntoArray(var4, p2, if var5 ~= nil then var5 .. "/" else "", "", function(p6)
+				return p6
 			end)
-		elseif var6 ~= nil then
-			if isValidElement(var6) then
-				key = var6.key
-				var6 = cloneAndReplaceKey(var6, p6 .. (if key and (not var5 or var5.key ~= key) then tostring(key) .. "/" else "") .. var7)
+		elseif var4 ~= nil then
+			if isValidElement(var4) then
+				key = var4.key
+				var4 = cloneAndReplaceKey(var4, p3 .. (if key and (not var2 or var2.key ~= key) then tostring(key) .. "/" else "") .. var7)
 			end
-			table.insert(p5, var6)
+			table.insert(p2, var4)
 		end
 		return 1
 	else
-		var5 = nil
+		var2 = nil
 		local _ = nil
-		local var8 = 0
-		key = if p7 == "" then "." else p7 .. ":"
+		local var6 = 0
+		key = if p4 == "" then "." else p4 .. ":"
 		
-		if array.isArray(p4) then
-			for i = 1, #p4 do
-				var5 = p4[i]
-				var8 += mapIntoArray(var5, p5, p6, key .. (if typeof(var5) == "table" and var5 ~= nil and var5.key ~= nil then "$" .. string.gsub(string.gsub(tostring(var5.key), "=", "=0"), ":", "=2") else tostring(i)), p8)
+		if array.isArray(p1) then
+			for i = 1, #p1 do
+				var2 = p1[i]
+				var6 += mapIntoArray(var2, p2, p3, key .. (if typeof(var2) == "table" and var2 ~= nil and var2.key ~= nil then "$" .. string.gsub(string.gsub(tostring(var2.key), "=", "=0"), ":", "=2") else tostring(i)), p5)
 			end
-			return var8
+			return var6
 		else
-			local var9 = getIteratorFn(p4)
+			local var7 = getIteratorFn(p1)
 			
-			if typeof(var9) == "function" then
-				local var10 = var9(p4)
+			if typeof(var7) == "function" then
+				local var8 = var7(p1)
 				local _ = nil
-				local var11 = 1
-				local var12 = var10.next()
-				while not var12.done do
-					var5 = var12.value
-					local var13 = if typeof(var5) == "table" and var5 ~= nil and var5.key ~= nil then "$" .. string.gsub(string.gsub(tostring(var5.key), "=", "=0"), ":", "=2") else tostring(var11)
-					var11 += 1
-					var8 += mapIntoArray(var5, p5, p6, key .. var13, p8)
-					var12 = var10.next()
+				local var9 = 1
+				local var10 = var8.next()
+				while not var10.done do
+					var2 = var10.value
+					local var11 = if typeof(var2) == "table" and var2 ~= nil and var2.key ~= nil then "$" .. string.gsub(string.gsub(tostring(var2.key), "=", "=0"), ":", "=2") else tostring(var9)
+					var9 += 1
+					var6 += mapIntoArray(var2, p2, p3, key .. var13, p5)
+					var10 = var8.next()
 				end
 			end
-			return var8
+			return var6
 		end
 	end
 end
 
-local function mapChildren(p10, p11, _)
+local function mapChildren(p6, p7, _)
 	-- upvalues: mapIntoArray (ref)
-	if p10 == nil then
+	if p6 == nil then
 		return nil
 	end
 	local t = {}
-	local var15 = 1
-	mapIntoArray(p10, t, "", "", function(p12)
-		-- upvalues: p11 (ref), var15 (write)
-		local var16 = p11(p12, var15)
-		var15 += 1
+	local var12 = 1
+	mapIntoArray(p6, t, "", "", function(p8)
+		-- upvalues: p7 (ref), var12 (write)
+		local var13 = p7(p8, var12)
+		var12 += 1
 		
-		return var16
+		return var13
 	end)
 	
 	return t
 end
 
 return {
-	forEach = function(p13, p14, p15)
+	forEach = function(p6, p7, p8)
 		-- upvalues: mapChildren (ref)
-		mapChildren(p13, function(...)
-			-- upvalues: p14 (ref)
-			p14(...)
-		end, p15)
+		mapChildren(p6, function(...)
+			-- upvalues: p7 (ref)
+			p7(...)
+		end, p8)
 	end,
 	map = mapChildren,
-	count = function(p16)
+	count = function(p6)
 		-- upvalues: mapChildren (ref)
-		local var17 = 0
-		mapChildren(p16, function()
-			-- upvalues: var17 (write)
-			var17 += 1
+		local var12 = 0
+		mapChildren(p6, function()
+			-- upvalues: var12 (write)
+			var12 += 1
 		end)
 		
-		return var17
+		return var12
 	end,
-	only = function(p17)
+	only = function(p6)
 		-- upvalues: invariant (ref), isValidElement (ref)
-		invariant(isValidElement(p17), "React.Children.only expected to receive a single React element child.")
+		invariant(isValidElement(p6), "React.Children.only expected to receive a single React element child.")
 		
-		return p17
+		return p6
 	end,
-	toArray = function(p18)
+	toArray = function(p6)
 		-- upvalues: mapChildren (ref)
-		return mapChildren(p18, function(p19)
-			return p19
+		return mapChildren(p6, function(p7)
+			return p7
 		end) or {}
 	end
 }

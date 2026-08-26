@@ -17,38 +17,38 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useInputChipVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), constantsModule (ref), textModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
-	local var13 = withDefaultsModule(p0, t)
-	local var14 = useInputChipVariantsModule(useTokensModule(), var13.size)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useInputChipVariantsModule(useTokensModule(), var1.size)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var13, {
-		tag = var14.container.tag,
-		GroupTransparency = if var13.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
-		ref = p1
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		tag = var2.container.tag,
+		GroupTransparency = if var1.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
+		ref = p2
 	}), {
 		Text = reactModule.createElement(textModule, {
 			LayoutOrder = 1,
-			Text = var13.text,
-			textStyle = var14.text.contentStyle,
-			tag = var14.text.tag,
-			padding = var14.text.padding,
-			testId = `{var13.testId}--text`
+			Text = var1.text,
+			textStyle = var2.text.contentStyle,
+			tag = var2.text.tag,
+			padding = var2.text.padding,
+			testId = `{var1.testId}--text`
 		}),
 		Close = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
-			tag = var14.close.tag,
-			padding = var14.close.padding,
-			testId = `{var13.testId}--close-container`
+			tag = var2.close.tag,
+			padding = var2.close.padding,
+			testId = `{var1.testId}--close-container`
 		}, {
 			CloseAffordance = reactModule.createElement(closeAffordanceModule, {
 				hasPadding = false,
 				LayoutOrder = 1,
-				onActivated = if var13.isDisabled then nil else var13.onClose,
+				onActivated = if var1.isDisabled then nil else var1.onClose,
 				size = inputSizeModule.XSmall,
 				variant = closeAffordanceVariantModule.Utility,
-				Selectable = if var13.isDisabled then false else nil,
-				testId = `{var13.testId}--close`
+				Selectable = if var1.isDisabled then false else nil,
+				testId = `{var1.testId}--close`
 			})
 		})
 	})

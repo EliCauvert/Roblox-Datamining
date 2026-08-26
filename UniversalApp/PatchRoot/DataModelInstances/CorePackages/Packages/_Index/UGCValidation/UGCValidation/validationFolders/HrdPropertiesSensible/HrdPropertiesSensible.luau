@@ -82,25 +82,25 @@ function t.run(p1, p2)
 			local nameContainedJointLabels = humanoidRigDescription:GetContainedJointLabels(v.Name)
 			
 			for i_1, v_1 in r15plusUtilsModule.getHrdJointLabels() do
-				local var1 = `{v_1.Name}RigAttachment` == name
-				local var2 = humanoidRigDescription:GetJoint(v_1)
+				local var3 = `{v_1.Name}RigAttachment` == name
+				local var4 = humanoidRigDescription:GetJoint(v_1)
 				
-				if var1 and (not var2 or var2.Name ~= name or var2.ClassName ~= "Attachment") then
+				if var3 and (not var4 or var4.Name ~= name or var4.ClassName ~= "Attachment") then
 					p1:fail(errorSourceStringsModule.Keys.HrdMissingStandardJoint, { jointName = v_1.Name })
 				end
-				if var2 then
+				if var4 then
 					if table.find(nameContainedJointLabels, v_1) then
-						if not var1 and (var2.Name ~= v_1.Name or var2.ClassName ~= "Bone") then
+						if not var3 and (var4.Name ~= v_1.Name or var4.ClassName ~= "Bone") then
 							p1:fail(errorSourceStringsModule.Keys.HrdImproperJointMapping, { jointName = v_1.Name, boneName = v_1.Name })
 						end
-						local var3 = humanoidRigDescription:GetJointSize(v_1)
-						local var4 = humanoidRigDescription:GetJointRangeMin(v_1)
-						local var5 = humanoidRigDescription:GetJointRangeMax(v_1)
-						checkSize(p1, v_1.Name, "size", var3, var1)
-						checkVectorRange(p1, v_1.Name, "rangeMin", var4, vector3, vector3_1)
-						checkVectorRange(p1, v_1.Name, "rangeMax", var5, vector3, vector3_1)
+						local var5 = humanoidRigDescription:GetJointSize(v_1)
+						local var6 = humanoidRigDescription:GetJointRangeMin(v_1)
+						local var7 = humanoidRigDescription:GetJointRangeMax(v_1)
+						checkSize(p1, v_1.Name, "size", var5, var3)
+						checkVectorRange(p1, v_1.Name, "rangeMin", var6, vector3, vector3_1)
+						checkVectorRange(p1, v_1.Name, "rangeMax", var7, vector3, vector3_1)
 						
-						if not vector3UtilsModule.isFirstLessOrEqual(var4, var5) then
+						if not vector3UtilsModule.isFirstLessOrEqual(var6, var7) then
 							p1:fail(errorSourceStringsModule.Keys.HrdProperties_MinAboveMax, { jointName = v_1.Name })
 						end
 					else
@@ -114,24 +114,24 @@ function t.run(p1, p2)
 				p1:setReportingInstance(digitsRigDescription)
 				
 				if (v.Name ~= "LeftHand" or digitsRigDescription.Side ~= Enum.DigitsRigDescriptionSide.Left) and (v.Name ~= "RightHand" or digitsRigDescription.Side ~= Enum.DigitsRigDescriptionSide.Right) then
-					local var6 = "None"
+					local var8 = "None"
 					
 					if v.Name == "LeftHand" then
-						var6 = "Left"
+						var8 = "Left"
 					elseif v.Name == "RightHand" then
-						var6 = "Right"
+						var8 = "Right"
 					end
 					p1:fail(errorSourceStringsModule.Keys.HrdCheck_DrdInvalidSide, {
 						partName = v.Name,
-						expectedSide = var6,
+						expectedSide = var8,
 						foundSide = digitsRigDescription.Side.Name
 					})
 				end
-				checkSize(p1, "Index", "size", digitsRigDescription.IndexSize, var2)
-				checkSize(p1, "Thumb", "size", digitsRigDescription.ThumbSize, var2)
-				checkSize(p1, "Middle", "size", digitsRigDescription.MiddleSize, var2)
-				checkSize(p1, "Pinky", "size", digitsRigDescription.PinkySize, var2)
-				checkSize(p1, "Ring", "size", digitsRigDescription.RingSize, var2)
+				checkSize(p1, "Index", "size", digitsRigDescription.IndexSize, var4)
+				checkSize(p1, "Thumb", "size", digitsRigDescription.ThumbSize, var4)
+				checkSize(p1, "Middle", "size", digitsRigDescription.MiddleSize, var4)
+				checkSize(p1, "Pinky", "size", digitsRigDescription.PinkySize, var4)
+				checkSize(p1, "Ring", "size", digitsRigDescription.RingSize, var4)
 				checkVectorRange(p1, "Index", "range", digitsRigDescription.IndexRange, vector3_4, vector3_5)
 				checkVectorRange(p1, "Thumb", "range", digitsRigDescription.ThumbRange, vector3_4, vector3_5)
 				checkVectorRange(p1, "Pinky", "range", digitsRigDescription.PinkyRange, vector3_4, vector3_5)

@@ -16,25 +16,25 @@ local fFlagUserPresenceTokenRccCheckPermissionsLuaModule = require(robloxGui.Mod
 
 return function()
 	-- upvalues: playerScriptStatusProperty (ref), starterPlayerService (ref), serverUtilModule (ref), runService (ref), luaGetCanManageAsync (ref), url (ref), httpService (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (ref), httpRbxApiService (ref), list (ref), allowLuobuFreecamGroup (ref), policyService (ref), list_1 (ref), playersService (ref)
-	local function WaitForChildOfClass(p0, p1)
-		local var18 = p0:FindFirstChildOfClass(p1)
-		while not var18 or var18.ClassName ~= p1 do
-			var18 = p0.ChildAdded:Wait()
+	local function WaitForChildOfClass(p1, p2)
+		local var1 = p1:FindFirstChildOfClass(p2)
+		while not var1 or var1.ClassName ~= p2 do
+			var1 = p1.ChildAdded:Wait()
 		end
-		return var18
+		return var1
 	end
 	
-	local function AddFreeCamera(p2)
+	local function AddFreeCamera(p3)
 		-- upvalues: WaitForChildOfClass (ref), playerScriptStatusProperty (copy), starterPlayerService (copy), serverUtilModule (copy)
-		local var20
-		local var19 = WaitForChildOfClass(p2, "PlayerGui")
+		local var2
+		local var3 = WaitForChildOfClass(p3, "PlayerGui")
 		local _ = nil
 		
 		if playerScriptStatusProperty then
 			local playerModuleStatus = starterPlayerService.PlayerModuleStatus
-			var20 = script.Parent:WaitForChild(if if playerModuleStatus ~= 1 then playerModuleStatus == 2 else true then "FreeCameraIAS" else "FreeCamera")
+			var2 = script.Parent:WaitForChild(if if playerModuleStatus ~= 1 then playerModuleStatus == 2 else true then "FreeCameraIAS" else "FreeCamera")
 		else
-			var20 = script.Parent:WaitForChild("FreeCamera")
+			var2 = script.Parent:WaitForChild("FreeCamera")
 		end
 		local freecam = Instance.new("ScreenGui")
 		freecam.Name = "Freecam"
@@ -43,12 +43,12 @@ return function()
 		freecamScript.Name = "FreecamScript"
 		
 		if serverUtilModule.getFFlagServerCoreScriptSourceCode() then
-			freecamScript.Source = serverUtilModule.getSourceForServerScript(var20)
+			freecamScript.Source = serverUtilModule.getSourceForServerScript(var2)
 		else
-			freecamScript.Source = var20.Source
+			freecamScript.Source = var2.Source
 		end
 		freecamScript.Parent = freecam
-		freecam.Parent = var19
+		freecam.Parent = var3
 	end
 	
 	local function ShouldAddFreeCam(p3)
@@ -67,7 +67,7 @@ return function()
 			local ok, status = pcall(function()
 				-- upvalues: url (copy), httpService (copy), p3 (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (copy), httpRbxApiService (copy)
 				local formattedText = string.format(url.APIS_URL .. "asset-permissions-api/v1/rcc/assets/check-permissions")
-				local var24 = httpService:JSONEncode({
+				local var2 = httpService:JSONEncode({
 					requests = {
 						{
 							action = "Edit",
@@ -77,7 +77,7 @@ return function()
 					}
 				})
 				
-				return httpService:JSONDecode(if fFlagUserPresenceTokenRccCheckPermissionsLuaModule then httpRbxApiService:PostAsyncFullUrlForPlayer(formattedText, var24, p3) else httpRbxApiService:PostAsyncFullUrl(formattedText, var24))
+				return httpService:JSONDecode(if fFlagUserPresenceTokenRccCheckPermissionsLuaModule then httpRbxApiService:PostAsyncFullUrlForPlayer(formattedText, var2, p3) else httpRbxApiService:PostAsyncFullUrl(formattedText, var2))
 			end)
 			
 			if ok then

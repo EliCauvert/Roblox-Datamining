@@ -2,13 +2,13 @@
 local _ = require(parent.util.Types)
 local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: getExpectedPartSizeModule (ref)
 	local t = {}
 	
-	for i, v in p0 do
-		local var2 = p1(v)
-		t[v] = getExpectedPartSizeModule(var2, p2) / getExpectedPartSizeModule(var2, p2, true)
+	for i, v in p1 do
+		local var1 = p2(v)
+		t[v] = getExpectedPartSizeModule(var1, p3) / getExpectedPartSizeModule(var1, p3, true)
 	end
 	return t
 end

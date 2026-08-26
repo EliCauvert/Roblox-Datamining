@@ -1,6 +1,6 @@
 ﻿local resolvePlayerTargetModule = require(script.Parent.resolvePlayerTarget)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: resolvePlayerTargetModule (ref)
-	return resolvePlayerTargetModule(p0, p1, "CoreScripts.TextChat.Unmute.Success")
+	return resolvePlayerTargetModule(p1, p2, "CoreScripts.TextChat.Unmute.Success")
 end

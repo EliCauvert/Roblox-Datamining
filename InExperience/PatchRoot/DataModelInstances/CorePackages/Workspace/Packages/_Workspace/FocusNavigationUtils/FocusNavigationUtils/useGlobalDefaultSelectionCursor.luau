@@ -6,19 +6,19 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 
 return function()
 	-- upvalues: useDesignTokens (ref), useCursor (ref), reactModule (ref), coreGuiService (ref)
-	local var2 = useDesignTokens(function(p0)
+	local var1 = useDesignTokens(function(p1)
 		return {
-			width = p0.Size.Size_50,
-			radius = UDim.new(0, p0.Radius.Medium),
-			offset = p0.Size.Size_50
+			width = p1.Size.Size_50,
+			radius = UDim.new(0, p1.Radius.Medium),
+			offset = p1.Size.Size_50
 		}
 	end)
-	local var3 = useCursor(var2.radius, var2.offset, var2.width)
-	local var4 = if var3 then var3.current else nil
+	local var2 = useCursor(var1.radius, var1.offset, var1.width)
+	local var3 = if var2 then var2.current else nil
 	reactModule.useEffect(function()
-		-- upvalues: coreGuiService (copy), var4 (ref)
-		if coreGuiService.SelectionImageObject == nil and var4 ~= nil then
-			coreGuiService.SelectionImageObject = var4
+		-- upvalues: coreGuiService (copy), var3 (ref)
+		if coreGuiService.SelectionImageObject == nil and var3 ~= nil then
+			coreGuiService.SelectionImageObject = var3
 			
 			return function()
 				-- upvalues: coreGuiService (copy)
@@ -26,5 +26,5 @@ return function()
 			end
 		end
 		return nil
-	end, { var4 })
+	end, { var3 })
 end

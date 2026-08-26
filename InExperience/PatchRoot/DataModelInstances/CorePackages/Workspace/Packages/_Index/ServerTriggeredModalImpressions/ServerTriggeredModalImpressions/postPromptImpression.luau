@@ -1,17 +1,17 @@
 ﻿local httpService = game:GetService("HttpService")
 local parent = script:FindFirstAncestor("ServerTriggeredModalImpressions").Parent
 local promiseModule = require(parent.Promise)
-local var2 = require(parent.UrlBuilder).UrlBuilder.new({
+local var1 = require(parent.UrlBuilder).UrlBuilder.new({
 	path = "modals-api/v1/prompts/impression",
 	base = require(parent.UrlBuilder).UrlBase.APIS
 })
 
-return function(p0, p1, p2)
-	-- upvalues: var2 (ref), httpService (ref), promiseModule (ref)
+return function(p1, p2, p3)
+	-- upvalues: var1 (ref), httpService (ref), promiseModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p0 (ref), var2 (copy), httpService (copy), p1 (ref), p2 (ref)
-		return p0(var2(), "POST", {
-			postBody = httpService:JSONEncode({ promptType = p1, promptId = p2 })
+		-- upvalues: p1 (ref), var1 (copy), httpService (copy), p2 (ref), p3 (ref)
+		return p1(var1(), "POST", {
+			postBody = httpService:JSONEncode({ promptType = p2, promptId = p3 })
 		})
 	end)
 	

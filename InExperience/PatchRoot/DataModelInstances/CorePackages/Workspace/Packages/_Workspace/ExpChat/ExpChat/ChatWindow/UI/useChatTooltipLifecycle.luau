@@ -7,79 +7,79 @@ local getTransparencyStoreModule = require(expChat.Stores.GetTransparencyStore)
 local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
 local _ = require(expChat.Stores.GetChatTooltipStore.createChatTooltipStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getChatTooltipStoreModule (ref), getTransparencyStoreModule (ref), signalsReactModule (ref), reactModule (ref), configModule (ref)
-	local tooltipKey = p0.tooltipKey
-	local targetTextChannel = p0.targetTextChannel
-	local var6 = getChatTooltipStoreModule(false)
-	local var7 = getTransparencyStoreModule(false)
-	local var8 = signalsReactModule.useSignalState(var6.getShouldShow(tooltipKey))
-	local var9 = signalsReactModule.useSignalState(var6.getIsScreenWideEnough)
-	local var10 = signalsReactModule.useSignalState(var7.getLastActivity)
-	local var11 = signalsReactModule.useSignalState(var7.getIsFocused or var7.getIsTextBoxFocused)
-	local var12, var13 = reactModule.useState(true)
-	local var14, var15 = reactModule.useState(false)
-	local var16 = reactModule.useRef(false)
-	local var17 = reactModule.useRef(0)
-	local var18 = reactModule.useRef(targetTextChannel)
-	local setIsDismissed = var6.setIsDismissed
-	local reportImpression = var6.reportImpression
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref), reportImpression (ref), tooltipKey (ref), setIsDismissed (ref)
-		if not var16.current then
-			var16.current = true
+	local tooltipKey = p1.tooltipKey
+	local targetTextChannel = p1.targetTextChannel
+	local var1 = getChatTooltipStoreModule(false)
+	local var2 = getTransparencyStoreModule(false)
+	local var3 = signalsReactModule.useSignalState(var1.getShouldShow(tooltipKey))
+	local var4 = signalsReactModule.useSignalState(var1.getIsScreenWideEnough)
+	local var5 = signalsReactModule.useSignalState(var2.getLastActivity)
+	local var6 = signalsReactModule.useSignalState(var2.getIsFocused or var2.getIsTextBoxFocused)
+	local var7, var8 = reactModule.useState(true)
+	local var9, var10 = reactModule.useState(false)
+	local var11 = reactModule.useRef(false)
+	local var12 = reactModule.useRef(0)
+	local var13 = reactModule.useRef(targetTextChannel)
+	local setIsDismissed = var1.setIsDismissed
+	local reportImpression = var1.reportImpression
+	local var14 = reactModule.useCallback(function()
+		-- upvalues: var11 (ref), reportImpression (ref), tooltipKey (ref), setIsDismissed (ref)
+		if not var11.current then
+			var11.current = true
 			reportImpression(tooltipKey)
 		end
 		setIsDismissed(tooltipKey, true)
 	end, { tooltipKey, setIsDismissed, reportImpression })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var13 (ref), configModule (copy), var10 (ref)
-		if var11 then
-			var13(true)
+		-- upvalues: var6 (ref), var8 (ref), configModule (copy), var5 (ref)
+		if var6 then
+			var8(true)
 			
 			return nil
 		end
-		local var20 = configModule.ChatWindowBackgroundFadeOutTime - (os.clock() - var10)
+		local var15 = configModule.ChatWindowBackgroundFadeOutTime - (os.clock() - var5)
 		
-		if var20 <= 0 then
-			var13(false)
+		if var15 <= 0 then
+			var8(false)
 			
 			return nil
 		end
-		var13(true)
-		local delayedThread = task.delay(var20, function()
-			-- upvalues: var13 (copy)
-			var13(false)
+		var8(true)
+		local delayedThread = task.delay(var15, function()
+			-- upvalues: var8 (copy)
+			var8(false)
 		end)
 		
 		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
-	end, { var10, var11 })
+	end, { var5, var6 })
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), var9 (ref), var14 (ref), var8 (ref), var17 (ref), var15 (ref)
-		if var12 and var9 and not var14 and var8 then
+		-- upvalues: var7 (ref), var4 (ref), var9 (ref), var3 (ref), var12 (ref), var10 (ref)
+		if var7 and var4 and not var9 and var3 then
 			local processTime = os.clock()
-			local delayedThread = task.delay(math.max(0, 10 - var17.current), function()
-				-- upvalues: var15 (copy)
-				var15(true)
+			local delayedThread = task.delay(math.max(0, 10 - var12.current), function()
+				-- upvalues: var10 (copy)
+				var10(true)
 			end)
 			
 			return function()
-				-- upvalues: var17 (copy), processTime (ref), delayedThread (ref)
-				var17.current += os.clock() - processTime
+				-- upvalues: var12 (copy), processTime (ref), delayedThread (ref)
+				var12.current += os.clock() - processTime
 				task.cancel(delayedThread)
 			end
 		end
 		return nil
-	end, { var12, var9, var14, var8 })
+	end, { var7, var4, var9, var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), var19 (ref)
-		if var14 then
+		-- upvalues: var9 (ref), var14 (ref)
+		if var9 then
 			local delayedThread = task.delay(1, function()
-				-- upvalues: var19 (copy)
-				var19()
+				-- upvalues: var14 (copy)
+				var14()
 			end)
 			
 			return function()
@@ -88,19 +88,19 @@ return function(p0)
 			end
 		end
 		return nil
-	end, { var14, var19 })
+	end, { var9, var14 })
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), targetTextChannel (ref), var8 (ref), var14 (ref), var15 (ref)
-		local current = var18.current
-		var18.current = targetTextChannel
+		-- upvalues: var13 (ref), targetTextChannel (ref), var3 (ref), var9 (ref), var10 (ref)
+		local current = var13.current
+		var13.current = targetTextChannel
 		
-		if current and current ~= targetTextChannel and (var8 and not var14) then
-			var15(true)
+		if current and current ~= targetTextChannel and (var3 and not var9) then
+			var10(true)
 		end
-	end, { targetTextChannel, var8, var14 })
+	end, { targetTextChannel, var3, var9 })
 	
 	return {
-		isActive = var8 and (var12 and (var9 and not var14)),
-		onDismiss = var19
+		isActive = var3 and (var7 and (var4 and not var9)),
+		onDismiss = var14
 	}
 end

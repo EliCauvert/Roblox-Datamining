@@ -43,72 +43,72 @@ local t = {
 	end
 }
 
-function ParticipantDialogDeprecated(p0)
+function ParticipantDialogDeprecated(p1)
 	-- upvalues: cryoModule (ref), t (ref), useTelemetryModule (ref), chatDialogTelemetryLayerModule (ref), loggerModule (ref), chatDetailsTelemetryEventsModule (ref), reactModule (ref), modalBottomSheet (ref)
-	local var9 = cryoModule.Dictionary.join(t, p0)
-	local var10 = useTelemetryModule(chatDialogTelemetryLayerModule.Context)
-	local conversationId = var9.conversationId
-	local participantId = var9.participantId
-	local showRemoveUserButton = var9.showRemoveUserButton
-	local onDismiss = var9.onDismiss or function() end
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = useTelemetryModule(chatDialogTelemetryLayerModule.Context)
+	local conversationId = var1.conversationId
+	local participantId = var1.participantId
+	local showRemoveUserButton = var1.showRemoveUserButton
+	local onDismiss = var1.onDismiss or function() end
 	local t_1 = {}
 	
-	local function _(p1, p2, p3)
+	local function _(p2, p3, p4)
 		-- upvalues: t_1 (ref)
 		table.insert(t_1, {
-			text = p1,
-			stayOnActivated = if p3 then true else nil,
-			onActivated = if p3 then nil else p2
+			text = p2,
+			stayOnActivated = if p4 then true else nil,
+			onActivated = if p4 then nil else p3
 		})
 	end
 	
-	if var9.showViewProfileButton then
+	if var1.showViewProfileButton then
 		table.insert(t_1, {
 			stayOnActivated = nil,
-			text = var9.viewProfileText,
+			text = var1.viewProfileText,
 			onActivated = function()
-				-- upvalues: loggerModule (copy), participantId (ref), var9 (ref)
+				-- upvalues: loggerModule (copy), participantId (ref), var1 (ref)
 				loggerModule:info("User activated viewProfile | userId: {}", participantId)
-				var9.openViewProfile(participantId)
+				var1.openViewProfile(participantId)
 			end
 		})
 	end
-	if var9.showChatButton then
+	if var1.showChatButton then
 		table.insert(t_1, {
 			stayOnActivated = nil,
-			text = var9.chatText,
+			text = var1.chatText,
 			onActivated = function()
-				-- upvalues: loggerModule (copy), participantId (ref), var10 (ref), chatDetailsTelemetryEventsModule (copy), var9 (ref)
+				-- upvalues: loggerModule (copy), participantId (ref), var2 (ref), chatDetailsTelemetryEventsModule (copy), var1 (ref)
 				loggerModule:info("User activated openChat | userId: {}", participantId)
-				var10.emit(chatDetailsTelemetryEventsModule.ParticipantDialogChatClicked, {})
-				var9.openChat(participantId)
+				var2.emit(chatDetailsTelemetryEventsModule.ParticipantDialogChatClicked, {})
+				var1.openChat(participantId)
 			end
 		})
 	end
 	table.insert(t_1, {
 		stayOnActivated = nil,
-		text = var9.reportUserText,
+		text = var1.reportUserText,
 		onActivated = function()
-			-- upvalues: loggerModule (copy), participantId (ref), conversationId (ref), var10 (ref), chatDetailsTelemetryEventsModule (copy), var9 (ref)
+			-- upvalues: loggerModule (copy), participantId (ref), conversationId (ref), var2 (ref), chatDetailsTelemetryEventsModule (copy), var1 (ref)
 			loggerModule:info("User activated reportUser | userId: {}, conversationId: {}", participantId, conversationId)
-			var10.emit(chatDetailsTelemetryEventsModule.ParticipantDialogReportUserClicked, {})
-			var9.openReportUser(participantId, conversationId)
+			var2.emit(chatDetailsTelemetryEventsModule.ParticipantDialogReportUserClicked, {})
+			var1.openReportUser(participantId, conversationId)
 		end
 	})
 	
 	if showRemoveUserButton then
 		table.insert(t_1, {
 			stayOnActivated = nil,
-			text = var9.removeFromGroupText,
+			text = var1.removeFromGroupText,
 			onActivated = function()
-				-- upvalues: var9 (ref), participantId (ref), conversationId (ref)
-				var9.openRemoveUserDialog(participantId, conversationId)
+				-- upvalues: var1 (ref), participantId (ref), conversationId (ref)
+				var1.openRemoveUserDialog(participantId, conversationId)
 			end
 		})
 	end
 	table.insert(t_1, {
 		stayOnActivated = nil,
-		text = var9.cancelText,
+		text = var1.cancelText,
 		onActivated = onDismiss
 	})
 	

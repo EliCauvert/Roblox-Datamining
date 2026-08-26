@@ -3,53 +3,53 @@ local reactModule = require(parent.React)
 local array = require(parent.LuauPolyfill).Array
 local useForwardRefModule = require(script.Parent.useForwardRef)
 
-return function(p0, p1, p2, ...)
+return function(p1, p2, p3, ...)
 	-- upvalues: array (ref), reactModule (ref), useForwardRefModule (ref)
-	local var2 = array.concat({}, ...)
+	local var1 = array.concat({}, ...)
 	
-	return useForwardRefModule(p0, reactModule.useCallback(function(p3)
-		-- upvalues: p1 (ref), array (copy), var2 (ref), p2 (ref)
+	return useForwardRefModule(p1, reactModule.useCallback(function(p4)
+		-- upvalues: p2 (ref), array (copy), var1 (ref), p3 (ref)
 		local function onPropChange()
-			-- upvalues: p1 (copy), array (copy), var2 (copy), p3 (ref)
-			p1(table.unpack(array.map(var2, function(p4)
-				-- upvalues: p3 (copy)
-				return p3[p4]
+			-- upvalues: p2 (copy), array (copy), var1 (copy), p4 (ref)
+			p2(table.unpack(array.map(var1, function(p5)
+				-- upvalues: p4 (copy)
+				return p4[p5]
 			end)))
 		end
 		
-		local var4 = nil
+		local var2 = nil
 		
-		local var5 = function()
-			-- upvalues: var4 (write), p1 (copy), array (copy), var2 (copy), p3 (ref)
-			if not var4 then
-				var4 = task.defer(function()
-					-- upvalues: var4 (copy), p1 (copy), array (copy), var2 (copy), p3 (copy)
-					var4 = nil
-					p1(table.unpack(array.map(var2, function(p5)
-						-- upvalues: p3 (copy)
-						return p3[p5]
+		local var3 = function()
+			-- upvalues: var2 (write), p2 (copy), array (copy), var1 (copy), p4 (ref)
+			if not var2 then
+				var2 = task.defer(function()
+					-- upvalues: var2 (copy), p2 (copy), array (copy), var1 (copy), p4 (copy)
+					var2 = nil
+					p2(table.unpack(array.map(var1, function(p5)
+						-- upvalues: p4 (copy)
+						return p4[p5]
 					end)))
 				end)
 			end
 		end
 		
-		local var6 = array.map(var2, function(p6)
-			-- upvalues: p3 (ref), p2 (copy), var5 (ref), onPropChange (ref)
-			return p3:GetPropertyChangedSignal(p6):Connect(if p2 then var5 else onPropChange)
+		local var4 = array.map(var1, function(p5)
+			-- upvalues: p4 (ref), p3 (copy), var3 (ref), onPropChange (ref)
+			return p4:GetPropertyChangedSignal(p5):Connect(if p3 then var3 else onPropChange)
 		end)
-		p1(table.unpack(array.map(var2, function(p7)
-			-- upvalues: p3 (ref)
-			return p3[p7]
+		p2(table.unpack(array.map(var1, function(p5)
+			-- upvalues: p4 (ref)
+			return p4[p5]
 		end)))
 		
 		return function()
-			-- upvalues: var6 (ref), var4 (write)
-			for i, v in var6 do
+			-- upvalues: var4 (ref), var2 (write)
+			for i, v in var4 do
 				v:Disconnect()
 			end
-			if var4 then
-				task.cancel(var4)
+			if var2 then
+				task.cancel(var2)
 			end
 		end
-	end, { p1, table.concat(var2, ",") }))
+	end, { p2, table.concat(var1, ",") }))
 end

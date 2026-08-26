@@ -3,14 +3,14 @@ local reactModule = require(game:GetService("CorePackages").Packages.React)
 local modalBasedSelectorModule = require(abuseReportMenu.Components.ModalBasedSelector)
 local reportMenuItemModule = require(abuseReportMenu.Components.MenuItems.ReportMenuItem)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), reportMenuItemModule (ref), modalBasedSelectorModule (ref)
 	return reactModule.createElement(reportMenuItemModule, {
-		label = p0.label,
-		layoutOrder = p0.layoutOrder,
-		rightComponent = reactModule.createElement(modalBasedSelectorModule, p0),
-		menuContainerWidth = p0.menuContainerWidth,
-		isSmallPortraitViewport = p0.isSmallPortraitViewport,
-		placeholderText = p0.placeholderText
+		label = p1.label,
+		layoutOrder = p1.layoutOrder,
+		rightComponent = reactModule.createElement(modalBasedSelectorModule, p1),
+		menuContainerWidth = p1.menuContainerWidth,
+		isSmallPortraitViewport = p1.isSmallPortraitViewport,
+		placeholderText = p1.placeholderText
 	})
 end

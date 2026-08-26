@@ -3,9 +3,9 @@
 local function createEnumMetatable(p1)
 	return {
 		__metatable = "This metatable is protected",
-		__index = function(_, p1)
-			-- upvalues: p1 (ref)
-			error("Invalid ValidationEnums." .. p0 .. " enum value: " .. tostring(p1))
+		__index = function(_, p2)
+			-- upvalues: p2 (ref)
+			error("Invalid ValidationEnums." .. p0 .. " enum value: " .. tostring(p2))
 		end,
 		__newindex = function(_, _, _)
 			error("Cannot add new keys to ValidationEnums")

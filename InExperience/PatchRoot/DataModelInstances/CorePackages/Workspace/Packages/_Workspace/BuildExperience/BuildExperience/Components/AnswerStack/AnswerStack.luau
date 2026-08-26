@@ -12,27 +12,27 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 
-local function _(p0, p1)
-	if typeof(p0) == "string" then
-		return p0 == p1
-	elseif typeof(p0) ~= "table" then
+local function _(p1, p2)
+	if typeof(p1) == "string" then
+		return p1 == p2
+	elseif typeof(p1) ~= "table" then
 		return false
 	end
-	for i, v in p0 do
-		if v == p1 then
+	for i, v in p1 do
+		if v == p2 then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(p2)
-	return if typeof(p2) == "string" then p2 elseif typeof(p2) == "table" then p2[1] else nil
+local _ = function(p3)
+	return if typeof(p3) == "string" then p3 elseif typeof(p3) == "table" then p3[1] else nil
 end
 
 return function(p3)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), optionSelectorModule (ref), view (ref), button (ref), inputSize (ref), buttonVariant (ref)
-	local var6 = if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		selectAnOption = localizationStringsModule.ANSWER_STACK_SELECT_AN_OPTION,
 		submit = localizationStringsModule.ANSWER_STACK_SUBMIT
 	}) else nil
@@ -41,16 +41,16 @@ return function(p3)
 	local isMulti = (p3.selectionMode or "single") == "multi"
 	local selectedOptionId = p3.selectedOptionId
 	local onConfirm = p3.onConfirm
-	local var8 = isMulti and onConfirm ~= nil
-	local var9 = if var8 or selectedOptionId == nil then nil elseif typeof(selectedOptionId) == "string" then selectedOptionId elseif typeof(selectedOptionId) == "table" then selectedOptionId[1] else nil
+	local var2 = isMulti and onConfirm ~= nil
+	local var3 = if var2 or selectedOptionId == nil then nil elseif typeof(selectedOptionId) == "string" then selectedOptionId elseif typeof(selectedOptionId) == "table" then selectedOptionId[1] else nil
 	local t = {}
 	
 	for i, v in options do
-		if var9 == nil or v.id == var9 then
-			local var15
+		if var3 == nil or v.id == var3 then
+			local var4
 			local id = v.id
 			local createElement = reactModule.createElement
-			local var13 = optionSelectorModule
+			local var5 = optionSelectorModule
 			local t_1 = {
 				LayoutOrder = i,
 				title = v.title,
@@ -63,15 +63,15 @@ return function(p3)
 			elseif typeof(selectedOptionId) == "table" then
 				for i_1, v_1 in selectedOptionId do
 					if v_1 == id_1 then
-						var15 = true
+						var4 = true
 					end
 				end
-				var15 = false
+				var4 = false
 			else
-				var15 = false
+				var4 = false
 			end
-			t_1.isSelected = var15
-			t_1.selectionStyle = if not var8 then "committed" else "intermediate"
+			t_1.isSelected = var4
+			t_1.selectionStyle = if not var2 then "committed" else "intermediate"
 			t_1.testId = `AnswerStack.Option.{v.id}`
 			
 			function t_1.onActivated()
@@ -79,7 +79,7 @@ return function(p3)
 				onOptionSelected(v)
 			end
 			
-			t[id] = createElement(var13, t_1)
+			t[id] = createElement(var5, t_1)
 		end
 	end
 	local t_1 = {
@@ -89,17 +89,17 @@ return function(p3)
 		}, t)
 	}
 	
-	if var8 and onConfirm ~= nil then
-		local var12 = p3.isConfirmDisabled == true
+	if var2 and onConfirm ~= nil then
+		local var6 = p3.isConfirmDisabled == true
 		t_1.Confirm = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "row align-x-right size-full-0 auto-y"
 		}, {
 			Button = reactModule.createElement(button, {
-				text = if var12 then if fFlagBuildLocalization then var6.selectAnOption else localizationStringsModule.ANSWER_STACK_SELECT_AN_OPTION else p3.confirmLabel or (if fFlagBuildLocalization then var6.submit else localizationStringsModule.ANSWER_STACK_SUBMIT),
+				text = if var6 then if fFlagBuildLocalization then var1.selectAnOption else localizationStringsModule.ANSWER_STACK_SELECT_AN_OPTION else p3.confirmLabel or (if fFlagBuildLocalization then var1.submit else localizationStringsModule.ANSWER_STACK_SUBMIT),
 				size = inputSize.Medium,
 				variant = buttonVariant.Standard,
-				isDisabled = var12,
+				isDisabled = var6,
 				onActivated = onConfirm,
 				testId = `{p3.testId or "AnswerStack"}.Confirm`
 			})

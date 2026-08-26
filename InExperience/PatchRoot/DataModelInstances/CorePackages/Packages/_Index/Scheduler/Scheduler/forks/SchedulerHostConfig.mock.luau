@@ -13,9 +13,9 @@ local parent = script.Parent.Parent.Parent
 local console = require(parent.Shared).console
 local disabledLog = require(parent.Shared).ConsolePatchingDev.disabledLog
 
-function t.requestHostCallback(p0)
+function t.requestHostCallback(p1)
 	-- upvalues: var2 (write)
-	var2 = p0
+	var2 = p1
 end
 
 function t.cancelHostCallback()
@@ -68,14 +68,14 @@ function t.reset()
 	var9 = false
 end
 
-function t.unstable_flushNumberOfYields(p3)
+function t.unstable_flushNumberOfYields(p1)
 	-- upvalues: var8 (write), var2 (write), var6 (write), var1 (write), var7 (write)
 	if var8 then
 		error("Already flushing work.")
 	end
 	if var2 ~= nil then
 		local var11 = var2
-		var6 = p3
+		var6 = p1
 		var8 = true
 		local ok, status = pcall(function()
 			-- upvalues: var11 (ref), var1 (copy), var7 (copy), var2 (copy)
@@ -104,18 +104,18 @@ function t.unstable_flushUntilNextPaint()
 		error("Already flushing work.")
 	end
 	if var2 ~= nil then
-		local var13 = var2
+		local var11 = var2
 		var10 = true
 		var9 = false
 		var8 = true
 		local ok, status = pcall(function()
-			-- upvalues: var13 (ref), var1 (copy), var7 (copy), var2 (copy)
-			local var14
+			-- upvalues: var11 (ref), var1 (copy), var7 (copy), var2 (copy)
+			local var12
 			local _ = true
 			repeat
-				var14 = var13(true, var1)
-			until not (var14 and not var7)
-			if not var14 then
+				var12 = var11(true, var1)
+			until not (var12 and not var7)
+			if not var12 then
 				var2 = nil
 			end
 		end)
@@ -158,16 +158,16 @@ function t.unstable_flushAllWithoutAsserting()
 	if var2 == nil then
 		return false
 	end
-	local var15 = var2
+	local var11 = var2
 	var8 = true
 	local ok, status = pcall(function()
-		-- upvalues: var15 (ref), var1 (copy), var2 (copy)
-		local var16
+		-- upvalues: var11 (ref), var1 (copy), var2 (copy)
+		local var12
 		local _ = true
 		repeat
-			var16 = var15(true, var1)
-		until not var16
-		if not var16 then
+			var12 = var11(true, var1)
+		until not var12
+		if not var12 then
 			var2 = nil
 		end
 	end)
@@ -201,21 +201,21 @@ function t.unstable_flushAll()
 	end
 end
 
-function t.unstable_yieldValue(p4)
+function t.unstable_yieldValue(p1)
 	-- upvalues: console (ref), disabledLog (ref), var5 (write)
 	if console.log == disabledLog then return end
 	if var5 == nil then
-		var5 = { p4 }
+		var5 = { p1 }
 		
 		return
 	end
-	table.insert(var5, p4)
+	table.insert(var5, p1)
 end
 
-function t.unstable_advanceTime(p5)
+function t.unstable_advanceTime(p1)
 	-- upvalues: console (ref), disabledLog (ref), var1 (write), var3 (write), var4 (write)
 	if console.log == disabledLog then return end
-	var1 += p5
+	var1 += p1
 	
 	if var3 ~= nil and var4 <= var1 then
 		var3(var1)

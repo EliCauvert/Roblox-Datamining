@@ -1,7 +1,7 @@
-﻿local function _(p0)
+﻿local function _(p1)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	print("UNIMPLEMENTED ERROR: " .. tostring(p0))
+	print("UNIMPLEMENTED ERROR: " .. tostring(p1))
 	error("FIXME (roblox): " .. p0 .. " is unimplemented", 2)
 end
 
@@ -43,12 +43,12 @@ function t.getRootHostContext(p2)
 	return p2.ClassName
 end
 
-function t.getChildHostContext(p3, _, _)
-	return p3
+function t.getChildHostContext(p2, _, _)
+	return p2
 end
 
-function t.getPublicInstance(p4)
-	return p4
+function t.getPublicInstance(p2)
+	return p2
 end
 
 function t.prepareForCommit(_)
@@ -84,43 +84,43 @@ end
 
 function t.resetAfterCommit(_) end
 
-function t.createInstance(p5, p6, _, _, p7)
+function t.createInstance(p2, p3, _, _, p4)
 	-- upvalues: precacheFiberNode (ref), updateFiberProps (ref)
-	local var7 = Instance.new(p5)
+	local var1 = Instance.new(p2)
 	
-	if p7.key then
-		var7.Name = p7.key
+	if p4.key then
+		var1.Name = p4.key
 	else
-		local _return = p7.return_
+		local _return = p4.return_
 		while _return do
 			if not _return.key then
 				_return = _return.return_
 				continue
 			end
-			var7.Name = _return.key
+			var1.Name = _return.key
 			break
 		end
 	end
-	precacheFiberNode(p7, var7)
-	updateFiberProps(var7, p6)
+	precacheFiberNode(p4, var1)
+	updateFiberProps(var1, p3)
 	
-	return var7
+	return var1
 end
 
-function t.appendInitialChild(p8, p9)
-	p9.Parent = p8
+function t.appendInitialChild(p5, p6)
+	p6.Parent = p5
 end
 
-function t.finalizeInitialChildren(p10, p11, p12, p13, _)
+function t.finalizeInitialChildren(p5, p6, p7, p8, _)
 	-- upvalues: setInitialProperties (ref)
-	setInitialProperties(p10, p11, p12, p13)
+	setInitialProperties(p5, p6, p7, p8)
 	
 	return false
 end
 
-function t.prepareUpdate(p14, p15, p16, p17, p18, _)
+function t.prepareUpdate(p5, p6, p7, p8, p9, _)
 	-- upvalues: diffProperties (ref)
-	return diffProperties(p14, p15, p16, p17, p18)
+	return diffProperties(p5, p6, p7, p8, p9)
 end
 
 function t.shouldSetTextContent(_, _)
@@ -150,68 +150,68 @@ function t.commitMount(_, _, _, _)
 	error("FIXME (roblox): commitMount is unimplemented", 2)
 end
 
-function t.commitUpdate(p19, p20, _, p21, p22, _)
+function t.commitUpdate(p5, p6, _, p7, p8, _)
 	-- upvalues: updateFiberProps (ref), updateProperties (ref)
-	updateFiberProps(p19, p22)
-	updateProperties(p19, p20, p21)
+	updateFiberProps(p5, p8)
+	updateProperties(p5, p6, p7)
 end
 
-local function checkTags(p23)
+local function checkTags(p5)
 	-- upvalues: console (ref), inspect (ref), collectionService (ref)
-	if typeof(p23) ~= "Instance" then
-		console.warn("Could not check tags on non-instance %s.", inspect(p23))
+	if typeof(p5) ~= "Instance" then
+		console.warn("Could not check tags on non-instance %s.", inspect(p5))
 		
 		return
-	elseif not p23:IsDescendantOf(game) and #collectionService:GetTags(p23) > 0 then
-		console.warn("Tags applied to orphaned %s \"%s\" cannot be accessed via CollectionService:GetTagged. If you're relying on tag behavior in a unit test, consider mounting your test root into the DataModel.", p23.ClassName, p23.Name)
+	elseif not p5:IsDescendantOf(game) and #collectionService:GetTags(p5) > 0 then
+		console.warn("Tags applied to orphaned %s \"%s\" cannot be accessed via CollectionService:GetTagged. If you're relying on tag behavior in a unit test, consider mounting your test root into the DataModel.", p5.ClassName, p5.Name)
 	end
 end
 
-function t.appendChild(p24, p25)
+function t.appendChild(p5, p6)
 	-- upvalues: reactGlobalsModule (ref), checkTags (ref)
-	p25.Parent = p24
+	p6.Parent = p5
 	
 	if reactGlobalsModule.__DEV__ then
-		checkTags(p25)
+		checkTags(p6)
 	end
 end
 
-function t.appendChildToContainer(p26, p27)
+function t.appendChildToContainer(p5, p6)
 	-- upvalues: t (ref)
-	t.appendChild(p26, p27)
+	t.appendChild(p5, p6)
 end
 
-function t.insertBefore(p28, p29, _)
+function t.insertBefore(p5, p6, _)
 	-- upvalues: reactGlobalsModule (ref), checkTags (ref)
-	p29.Parent = p28
+	p6.Parent = p5
 	
 	if reactGlobalsModule.__DEV__ then
-		checkTags(p29)
+		checkTags(p6)
 	end
 end
 
-function t.insertInContainerBefore(p30, p31, p32)
+function t.insertInContainerBefore(p5, p6, p7)
 	-- upvalues: t (ref)
-	t.insertBefore(p30, p31, p32)
+	t.insertBefore(p5, p6, p7)
 end
 
-function t.removeChild(_, p33)
+function t.removeChild(_, p5)
 	-- upvalues: uncacheFiberNode (ref), cleanupHostComponent (ref)
-	if typeof(p33) == "Instance" then
-		uncacheFiberNode(p33)
+	if typeof(p5) == "Instance" then
+		uncacheFiberNode(p5)
 		
-		for i, v in p33:GetDescendants() do
+		for i, v in p5:GetDescendants() do
 			uncacheFiberNode(v)
 		end
 	end
-	cleanupHostComponent(p33)
-	p33.Parent = nil
-	p33:Destroy()
+	cleanupHostComponent(p5)
+	p5.Parent = nil
+	p5:Destroy()
 end
 
-function t.removeChildFromContainer(p34, p35)
+function t.removeChildFromContainer(p6, p7)
 	-- upvalues: t (ref)
-	t.removeChild(p34, p35)
+	t.removeChild(p6, p7)
 end
 
 function t.clearSuspenseBoundary(_, _)
@@ -256,10 +256,10 @@ function t.unhideTextInstance(_, _)
 	error("FIXME (roblox): unhideTextInstance is unimplemented", 2)
 end
 
-function t.clearContainer(p36)
+function t.clearContainer(p6)
 	-- upvalues: t (ref)
-	for i, v in p36:GetChildren() do
-		t.removeChild(p36, v)
+	for i, v in p6:GetChildren() do
+		t.removeChild(p6, v)
 	end
 end
 

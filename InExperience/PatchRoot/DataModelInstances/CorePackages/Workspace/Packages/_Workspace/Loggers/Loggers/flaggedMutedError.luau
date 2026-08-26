@@ -8,7 +8,7 @@ end
 local var1 = ""
 local t = {}
 
-local function shouldSuppressMutedError(p0)
+local function shouldSuppressMutedError(p1)
 	-- upvalues: var1 (write), t (write)
 	local suppressMutedErrorKeysFastString = game:GetFastString("SuppressMutedErrorKeys")
 	
@@ -20,12 +20,12 @@ local function shouldSuppressMutedError(p0)
 			t[v] = true
 		end
 	end
-	return t[p0] or false
+	return t[p1] or false
 end
 
-return function(p1, p2, p3)
+return function(p2, p3, p4)
 	-- upvalues: shouldSuppressMutedError (ref), mutedErrorModule (ref)
-	if not shouldSuppressMutedError(p1) then
-		mutedErrorModule(p2, p3)
+	if not shouldSuppressMutedError(p2) then
+		mutedErrorModule(p3, p4)
 	end
 end

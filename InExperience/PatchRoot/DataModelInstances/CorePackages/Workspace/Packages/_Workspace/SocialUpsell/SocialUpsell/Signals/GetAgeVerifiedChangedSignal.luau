@@ -2,23 +2,23 @@
 local parent = script:FindFirstAncestor("SocialUpsell").Parent
 local appCommonLibModule = require(parent.AppCommonLib)
 local fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace = require(parent.SharedFlags).FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace
-local var2 = require(parent.RealtimeDelivery).RobloxEventReceiver.new(notificationService)
+local var1 = require(parent.RealtimeDelivery).RobloxEventReceiver.new(notificationService)
 local signal = appCommonLibModule.Signal
-local var3 = nil
+local var2 = nil
 
 return function()
-	-- upvalues: var3 (write), signal (ref), fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (ref), var2 (ref)
-	if not var3 then
-		var3 = signal.new()
+	-- upvalues: var2 (write), signal (ref), fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (ref), var1 (ref)
+	if not var2 then
+		var2 = signal.new()
 		
 		if fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace and #fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace > 0 then
-			var2:observeEvent(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(p0)
-				-- upvalues: var3 (copy)
-				if var3 then
-					var3:fire(p0)
+			var1:observeEvent(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(p1)
+				-- upvalues: var2 (copy)
+				if var2 then
+					var2:fire(p1)
 				end
 			end)
 		end
 	end
-	return var3
+	return var2
 end

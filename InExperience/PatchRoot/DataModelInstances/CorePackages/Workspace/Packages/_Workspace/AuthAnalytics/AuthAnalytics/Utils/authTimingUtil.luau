@@ -20,13 +20,13 @@ return {
 	end,
 	landingPageLoadFinish = function()
 		-- upvalues: var2 (write), processTime (write), var1 (ref)
-		local var4 = if not var2 then nil else {
+		local var3 = if not var2 then nil else {
 			app_session = var1,
 			landing_page_session = var2,
 			duration = os.clock() - processTime
 		}
 		var2 = nil
 		
-		return var4
+		return var3
 	end
 }

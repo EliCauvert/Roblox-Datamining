@@ -4,15 +4,15 @@ local getDeepValueModule = require(parent.getDeepValue)
 local _ = require(parent.roduxFriendsTypes)
 local object = require(parent_1.LuauPolyfill).Object
 
-return function(p0)
+return function(p1)
 	-- upvalues: getDeepValueModule (ref), object (ref)
-	local keyPath = p0.keyPath
+	local keyPath = p1.keyPath
 	
-	return function(p1)
+	return function(p2)
 		-- upvalues: getDeepValueModule (copy), keyPath (ref), object (copy)
-		return function(p2)
-			-- upvalues: getDeepValueModule (copy), p1 (ref), keyPath (copy), object (copy)
-			return object.keys(getDeepValueModule(p1, string.format("%s.recommendations.bySource.%s", keyPath, p2 or "")) or {})
+		return function(p3)
+			-- upvalues: getDeepValueModule (copy), p2 (ref), keyPath (copy), object (copy)
+			return object.keys(getDeepValueModule(p2, string.format("%s.recommendations.bySource.%s", keyPath, p3 or "")) or {})
 		end
 	end
 end

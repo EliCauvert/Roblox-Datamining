@@ -2,13 +2,13 @@
 local _ = require(foundation.Components.Types)
 local foundationImagesModule = require(foundation.Parent.FoundationImages)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: foundationImagesModule (ref)
 	local resolutionScale = foundationImagesModule.getResolutionScale()
 	
-	if p0 then
-		p0 = Rect.new(p0.Min * resolutionScale, p0.Max * resolutionScale)
-		p1 = (p1 or 1) / resolutionScale
+	if p1 then
+		p1 = Rect.new(p1.Min * resolutionScale, p1.Max * resolutionScale)
+		p2 = (p2 or 1) / resolutionScale
 	end
-	return { center = p0, scale = p1 }
+	return { center = p1, scale = p2 }
 end

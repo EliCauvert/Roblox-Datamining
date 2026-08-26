@@ -2,8 +2,8 @@
 local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local numberInput = roactModule.Component:extend("NumberInput")
 
-function numberInput.init(p0)
-	p0.state = { Value = p0.props.DefaultValue }
+function numberInput.init(p1)
+	p1.state = { Value = p1.props.DefaultValue }
 end
 
 function numberInput.render(p1)
@@ -23,16 +23,16 @@ function numberInput.render(p1)
 		ClearTextOnFocus = true,
 		[roactModule.Event.FocusLost] = function(p2)
 			-- upvalues: p1 (ref), props (ref)
-			local var3 = tonumber(p2.Text)
+			local var1 = tonumber(p2.Text)
 			
-			if var3 == nil or var3 ~= var3 then
+			if var1 == nil or var1 ~= var1 then
 				p2.Text = `{p1.state.Value}`
 				
 				return
 			elseif props.IntegerOnly then
-				var3 = math.floor(var3)
+				var1 = math.floor(var1)
 			end
-			local clampedValue = math.clamp(var3, props.Range.Min, props.Range.Max)
+			local clampedValue = math.clamp(var1, props.Range.Min, props.Range.Max)
 			p1:setState({ Value = clampedValue })
 			p2.Text = `{clampedValue}`
 			

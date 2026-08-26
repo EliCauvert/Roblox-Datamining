@@ -10,10 +10,10 @@ return function(a)
 	end
 	for i, v in collectionService:GetTagged(a) do
 		if v:IsA("GuiObject") then
-			local var2 = v:GetAttribute(itemIndex)
+			local var1 = v:GetAttribute(itemIndex)
 			
-			if typeof(var2) == "number" then
-				t[var2] = v
+			if typeof(var1) == "number" then
+				t[var1] = v
 			end
 		end
 	end

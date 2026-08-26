@@ -16,19 +16,19 @@ menuCell.validateProps = tModule.strictInterface({
 	isSelected = tModule.boolean
 })
 
-function menuCell.render(p0)
+function menuCell.render(p1)
 	-- upvalues: withStyle (ref), robloxTranslatorModule (ref), roactModule (ref), imageSetLabel (ref)
-	return withStyle(function(p1)
-		-- upvalues: robloxTranslatorModule (copy), p0 (ref), roactModule (copy), imageSetLabel (copy)
-		local theme = p1.Theme
-		local font = p1.Font
+	return withStyle(function(p2)
+		-- upvalues: robloxTranslatorModule (copy), p1 (ref), roactModule (copy), imageSetLabel (copy)
+		local theme = p2.Theme
+		local font = p2.Font
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = p0.props.layoutOrder,
-			Size = UDim2.new(1, 0, 0, p0.props.height)
+			LayoutOrder = p1.props.layoutOrder,
+			Size = UDim2.new(1, 0, 0, p1.props.height)
 		}, {
-			SelectedFrame = p0.props.isSelected and roactModule.createElement("Frame", {
+			SelectedFrame = p1.props.isSelected and roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 4, 1, 4),
 				Position = UDim2.fromScale(0.5, 0.5),
@@ -80,20 +80,20 @@ function menuCell.render(p0)
 					LayoutOrder = 1,
 					Size = UDim2.fromOffset(36, 36)
 				}, {
-					IconLabel = p0.props.icon ~= nil and roactModule.createElement(imageSetLabel, {
+					IconLabel = p1.props.icon ~= nil and roactModule.createElement(imageSetLabel, {
 						BackgroundTransparency = 1,
-						Image = p0.props.icon,
+						Image = p1.props.icon,
 						Size = UDim2.fromScale(1, 1),
 						ImageTransparency = theme.IconEmphasis.Transparency,
 						ImageColor3 = theme.IconEmphasis.Color
 					}),
-					IconComponent = p0.props.iconComponent ~= nil and roactModule.createElement(p0.props.iconComponent)
+					IconComponent = p1.props.iconComponent ~= nil and roactModule.createElement(p1.props.iconComponent)
 				}),
 				Text = roactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					Size = UDim2.new(1, -48, 1, 0),
-					Text = robloxTranslatorModule:FormatByKey(p0.props.localizationKey),
+					Text = robloxTranslatorModule:FormatByKey(p1.props.localizationKey),
 					Font = font.Header2.Font,
 					TextSize = font.BaseSize * font.Header2.RelativeSize,
 					TextColor3 = theme.TextEmphasis.Color,
@@ -103,7 +103,7 @@ function menuCell.render(p0)
 					TextTruncate = Enum.TextTruncate.AtEnd
 				})
 			}),
-			Divider = p0.props.hasDivider and roactModule.createElement("Frame", {
+			Divider = p1.props.hasDivider and roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 0, 1),
 				Position = UDim2.fromScale(0, 1),

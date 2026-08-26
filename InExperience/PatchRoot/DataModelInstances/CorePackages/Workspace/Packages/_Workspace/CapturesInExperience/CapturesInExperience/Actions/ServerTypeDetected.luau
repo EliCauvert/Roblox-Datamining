@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { serverType = p0 }
+﻿return require(script.Parent.Parent.Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { serverType = p1 }
 end)

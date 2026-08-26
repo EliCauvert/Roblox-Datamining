@@ -13,70 +13,70 @@ local fIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = require(parent.Share
 
 return function()
 	-- upvalues: createDataCacheModule (ref), fIntLuaAppThrottleRefreshPlayabilityIntervalSeconds (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), dashModule (ref), fetchPlayabilityModule (ref), playabilityStoreTypesModule (ref)
-	local var8 = createDataCacheModule(fIntLuaAppThrottleRefreshPlayabilityIntervalSeconds)
-	local var9 = createDataResolverModule({
-		cache = var8,
-		logError = function(p0)
+	local var1 = createDataCacheModule(fIntLuaAppThrottleRefreshPlayabilityIntervalSeconds)
+	local var2 = createDataResolverModule({
+		cache = var1,
+		logError = function(p1)
 			-- upvalues: logResponseError (copy), discoveryEventErrorLogger (copy)
-			if type(p0) == "table" then
-				if p0.responseCode then
-					logResponseError("v1/games/multiget-playability-status", { StatusCode = tonumber(p0.responseCode) })
+			if type(p1) == "table" then
+				if p1.responseCode then
+					logResponseError("v1/games/multiget-playability-status", { StatusCode = tonumber(p1.responseCode) })
 				end
-				if p0.errorType and p0.errorMessage then
-					discoveryEventErrorLogger.reportError(p0.errorType, p0.errorMessage, p0.customFields)
+				if p1.errorType and p1.errorMessage then
+					discoveryEventErrorLogger.reportError(p1.errorType, p1.errorMessage, p1.customFields)
 					
 					return
 				end
 			else
-				discoveryEventErrorLogger.reportError("FetchPlayabilityError", tostring(p0))
+				discoveryEventErrorLogger.reportError("FetchPlayabilityError", tostring(p1))
 			end
 		end,
 		fetchFn = function(p1)
 			-- upvalues: dashModule (copy), fetchPlayabilityModule (copy), playabilityStoreTypesModule (copy)
-			local var10 = dashModule.keys(p1)
+			local var3 = dashModule.keys(p1)
 			
-			return fetchPlayabilityModule(var10):andThen(function(p3)
-				-- upvalues: var10 (ref), playabilityStoreTypesModule (copy)
-				if not p3 or not p3.responseBody then
+			return fetchPlayabilityModule(var3):andThen(function(p2)
+				-- upvalues: var3 (ref), playabilityStoreTypesModule (copy)
+				if not p2 or not p2.responseBody then
 					error({
 						errorType = "FetchPlayabilityResponseError",
-						responseCode = p3 and p3.responseCode,
-						errorMessage = if p3 then "Missing response body" else "No response",
-						customFields = { universeIds = var10 }
+						responseCode = p2 and p2.responseCode,
+						errorMessage = if p2 then "Missing response body" else "No response",
+						customFields = { universeIds = var3 }
 					})
 				end
-				local var11, var12 = playabilityStoreTypesModule.playabilityResponseValidator(p3.responseBody)
+				local var4, var5 = playabilityStoreTypesModule.playabilityResponseValidator(p2.responseBody)
 				
-				if not var11 then
+				if not var4 then
 					error({
 						errorType = "FetchPlayabilityResponseInvalidInterface",
-						responseCode = p3.responseCode,
-						errorMessage = var12,
-						customFields = { universeIds = var10 }
+						responseCode = p2.responseCode,
+						errorMessage = var5,
+						customFields = { universeIds = var3 }
 					})
 				end
 				local t = {}
 				
-				for i, v in p3.responseBody do
+				for i, v in p2.responseBody do
 					t[tostring(v.universeId)] = {
 						isPlayable = v.isPlayable,
 						playabilityStatus = v.playabilityStatus
 					}
 				end
 				return t
-			end):catch(function(p2)
-				error(p2)
+			end):catch(function(p3)
+				error(p3)
 			end)
 		end
 	})
 	
 	return {
-		fetchPlayability = var9.fetchItem,
-		getPlayability = var9.getCachedItem,
-		getAndFetchPlayability = var9.getAndFetchItem,
-		updatePlayability = var8.updateItem,
-		updatePlayabilities = var8.updateItems,
-		clear = var9.clear,
-		dispose = var9.dispose
+		fetchPlayability = var2.fetchItem,
+		getPlayability = var2.getCachedItem,
+		getAndFetchPlayability = var2.getAndFetchItem,
+		updatePlayability = var1.updateItem,
+		updatePlayabilities = var1.updateItems,
+		clear = var2.clear,
+		dispose = var2.dispose
 	}
 end

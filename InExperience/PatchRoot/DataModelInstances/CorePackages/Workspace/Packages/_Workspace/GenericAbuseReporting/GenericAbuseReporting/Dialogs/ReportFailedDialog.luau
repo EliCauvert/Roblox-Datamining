@@ -9,29 +9,29 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local useLayerCollector = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), useLocalizedStringsModule (ref), useLayerCollector (ref), reactModule (ref), interactiveAlert (ref), MODAL_POSITION_OFFSETModule (ref), buttonType (ref)
-	local localizationKeys = p0.localizationKeys and useLocalization(p0.localizationKeys) or useLocalizedStringsModule()
-	local var6 = useLayerCollector()
-	local absoluteSize = var6.absoluteSize
+	local localizationKeys = p1.localizationKeys and useLocalization(p1.localizationKeys) or useLocalizedStringsModule()
+	local var1 = useLayerCollector()
+	local absoluteSize = var1.absoluteSize
 	
 	return reactModule.createElement(interactiveAlert, {
-		screenSize = Vector2.new(absoluteSize.X, absoluteSize.Y - var6.insets.top),
+		screenSize = Vector2.new(absoluteSize.X, absoluteSize.Y - var1.insets.top),
 		title = localizationKeys.failedTitle,
 		bodyText = localizationKeys.failedDescription,
 		anchorPoint = Vector2.new(0.5, 0),
-		position = UDim2.new(0.5, 0, 0, var6.insets.top + MODAL_POSITION_OFFSETModule),
-		buttonStackInfo = p0.buttonStackInfo or {
+		position = UDim2.new(0.5, 0, 0, var1.insets.top + MODAL_POSITION_OFFSETModule),
+		buttonStackInfo = p1.buttonStackInfo or {
 			buttons = {
 				{
 					buttonType = buttonType.Secondary,
 					props = {
-						onActivated = p0.onDismiss,
+						onActivated = p1.onDismiss,
 						text = localizationKeys.failedClose
 					}
 				}
 			}
 		},
-		middleContent = p0.middleContent
+		middleContent = p1.middleContent
 	})
 end

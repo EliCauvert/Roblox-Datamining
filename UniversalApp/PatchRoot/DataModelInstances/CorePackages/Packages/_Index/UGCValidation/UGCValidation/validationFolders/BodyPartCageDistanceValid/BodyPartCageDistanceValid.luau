@@ -14,39 +14,39 @@ return {
 		validationEnumsModule.SharedDataMember.outerCagesData
 	},
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: assetCalculatorModule (ref), UGCValidationService (ref), getFStringUGCValidationMaxCageDistanceModule (ref), errorSourceStringsModule (ref)
 		local t = {}
 		
-		for i, v in p1.rootInstance:GetChildren() do
+		for i, v in p2.rootInstance:GetChildren() do
 			t[v.Name] = v
 		end
 		if next(t) == nil then return end
-		local var6 = assetCalculatorModule.calculateAllTransformsForFullBody(t)
+		local var1 = assetCalculatorModule.calculateAllTransformsForFullBody(t)
 		local t_1 = {}
 		
 		for i_1, v_1 in t do
-			local var10 = p1.renderMeshesData[i_1]
-			local var11 = p1.outerCagesData[i_1]
+			local var2 = p2.renderMeshesData[i_1]
+			local var3 = p2.outerCagesData[i_1]
 			
-			if var10 ~= nil and var11 ~= nil then
+			if var2 ~= nil and var3 ~= nil then
 				table.insert(t_1, {
-					renderMesh = var10.editable,
-					outerCage = var11.editable,
-					renderMeshTransform = var6[i_1],
-					outerCageLocalTransform = var11.origin,
-					scale = v_1.Size / var10.originalSize,
+					renderMesh = var2.editable,
+					outerCage = var3.editable,
+					renderMeshTransform = var1[i_1],
+					outerCageLocalTransform = var3.origin,
+					scale = v_1.Size / var2.originalSize,
 					name = i_1
 				})
 			end
 		end
 		if #t_1 == 0 then return end
-		local var8, var9 = UGCValidationService:CalculateBodyMaxCageDistance(t_1)
+		local var4, var5 = UGCValidationService:CalculateBodyMaxCageDistance(t_1)
 		
-		if getFStringUGCValidationMaxCageDistanceModule.asNumber() < var8 then
-			p0:fail(errorSourceStringsModule.Keys.BodyPartCageDistanceValid_TooFar, {
-				partName = var9,
-				distance = string.format("%.2f", var8),
+		if getFStringUGCValidationMaxCageDistanceModule.asNumber() < var4 then
+			p1:fail(errorSourceStringsModule.Keys.BodyPartCageDistanceValid_TooFar, {
+				partName = var5,
+				distance = string.format("%.2f", var4),
 				maxDistance = getFStringUGCValidationMaxCageDistanceModule.asString()
 			})
 		end

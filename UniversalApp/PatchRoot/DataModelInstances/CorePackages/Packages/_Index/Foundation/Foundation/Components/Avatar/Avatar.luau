@@ -40,9 +40,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		Size = UDim2.fromOffset(var5, var5)
 	}), {
 		Image = reactModule.createElement(imageModule, {
-			Image = if flagsModule.FoundationAvatarBindableUserId then mapBindableModule(var1.userId, function(p1)
+			Image = if flagsModule.FoundationAvatarBindableUserId then mapBindableModule(var1.userId, function(p3)
 				-- upvalues: getRbxThumbModule (copy), thumbnailTypeModule (copy), thumbnailSizeModule (copy), flagsModule (copy), var1 (ref)
-				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p1, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var1.includeProfileFrame } else nil)
+				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p3, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var1.includeProfileFrame } else nil)
 			end) else getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, var1.userId, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var1.includeProfileFrame } else nil),
 			tag = var4.avatar.tag,
 			backgroundStyle = var1.backgroundStyle,

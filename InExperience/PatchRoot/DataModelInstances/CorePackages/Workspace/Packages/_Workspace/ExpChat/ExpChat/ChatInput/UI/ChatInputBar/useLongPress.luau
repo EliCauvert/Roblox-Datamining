@@ -1,71 +1,71 @@
 ﻿local userInputService = game:GetService("UserInputService")
 local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
-local function _(p0)
-	return if p0.UserInputType ~= Enum.UserInputType.MouseButton1 then p0.UserInputType == Enum.UserInputType.Touch else true
+local function _(p1)
+	return if p1.UserInputType ~= Enum.UserInputType.MouseButton1 then p1.UserInputType == Enum.UserInputType.Touch else true
 end
 
 local _ = function(p1)
 	return p1.KeyCode == Enum.KeyCode.ButtonA
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: userInputService (ref)
-	return if if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true then true else userInputService.GamepadEnabled and p2.KeyCode == Enum.KeyCode.ButtonA
+	return if if p1.UserInputType ~= Enum.UserInputType.MouseButton1 then p1.UserInputType == Enum.UserInputType.Touch else true then true else userInputService.GamepadEnabled and p1.KeyCode == Enum.KeyCode.ButtonA
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: reactModule (ref), userInputService (ref)
-	local onLongPress = p3.onLongPress
-	local onTap = p3.onTap
-	local thresholdSeconds = p3.thresholdSeconds or 0.5
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(false)
+	local onLongPress = p1.onLongPress
+	local onTap = p1.onTap
+	local thresholdSeconds = p1.thresholdSeconds or 0.5
+	local var1 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
+		-- upvalues: var1 (ref)
 		return function()
-			-- upvalues: var3 (copy)
-			local current = var3.current
+			-- upvalues: var1 (copy)
+			local current = var1.current
 			
 			if current ~= nil then
 				pcall(task.cancel, current)
-				var3.current = nil
+				var1.current = nil
 			end
 		end
 	end, {})
 	
 	return if onLongPress == nil then nil else {
 		[reactModule.Event.Activated] = reactModule.useCallback(function()
-			-- upvalues: var4 (ref), onTap (ref)
-			if var4.current then
-				var4.current = false
+			-- upvalues: var2 (ref), onTap (ref)
+			if var2.current then
+				var2.current = false
 				
 				return
 			elseif onTap ~= nil then
 				onTap()
 			end
 		end, { onTap }),
-		[reactModule.Event.InputBegan] = reactModule.useCallback(function(_, p4)
-			-- upvalues: onLongPress (ref), userInputService (copy), var3 (ref), var4 (ref), thresholdSeconds (ref)
+		[reactModule.Event.InputBegan] = reactModule.useCallback(function(_, p2)
+			-- upvalues: onLongPress (ref), userInputService (copy), var1 (ref), var2 (ref), thresholdSeconds (ref)
 			if onLongPress ~= nil then
-				local var5
-				if if p4.UserInputType ~= Enum.UserInputType.MouseButton1 then p4.UserInputType == Enum.UserInputType.Touch else true then
-					var5 = true
+				local var3
+				if if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true then
+					var3 = true
 				elseif userInputService.GamepadEnabled then
-					var5 = p4.KeyCode == Enum.KeyCode.ButtonA
+					var3 = p2.KeyCode == Enum.KeyCode.ButtonA
 				end
-				if not var5 then return end
-				local current = var3.current
+				if not var3 then return end
+				local current = var1.current
 				
 				if current ~= nil then
 					pcall(task.cancel, current)
-					var3.current = nil
+					var1.current = nil
 				end
-				var4.current = false
-				var3.current = task.delay(thresholdSeconds, function()
-					-- upvalues: var3 (copy), var4 (copy), onLongPress (copy)
-					var3.current = nil
-					var4.current = true
+				var2.current = false
+				var1.current = task.delay(thresholdSeconds, function()
+					-- upvalues: var1 (copy), var2 (copy), onLongPress (copy)
+					var1.current = nil
+					var2.current = true
 					
 					if onLongPress ~= nil then
 						onLongPress()
@@ -75,21 +75,21 @@ return function(p3)
 				return
 			end
 		end, { onLongPress, thresholdSeconds }),
-		[reactModule.Event.InputEnded] = reactModule.useCallback(function(_, p5)
-			-- upvalues: onLongPress (ref), userInputService (copy), var3 (ref)
+		[reactModule.Event.InputEnded] = reactModule.useCallback(function(_, p2)
+			-- upvalues: onLongPress (ref), userInputService (copy), var1 (ref)
 			if onLongPress ~= nil then
-				local var6
-				if if p5.UserInputType ~= Enum.UserInputType.MouseButton1 then p5.UserInputType == Enum.UserInputType.Touch else true then
-					var6 = true
+				local var3
+				if if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true then
+					var3 = true
 				elseif userInputService.GamepadEnabled then
-					var6 = p5.KeyCode == Enum.KeyCode.ButtonA
+					var3 = p2.KeyCode == Enum.KeyCode.ButtonA
 				end
-				if not var6 then return end
-				local current = var3.current
+				if not var3 then return end
+				local current = var1.current
 				
 				if current ~= nil then
 					pcall(task.cancel, current)
-					var3.current = nil
+					var1.current = nil
 				end
 				return
 			end

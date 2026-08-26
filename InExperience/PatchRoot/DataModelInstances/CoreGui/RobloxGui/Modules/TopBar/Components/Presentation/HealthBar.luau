@@ -19,8 +19,8 @@ local fFlagTopBarSignalizeKeepOutAreas = coreGuiCommonModule.Flags.FFlagTopBarSi
 local fFlagTopBarSignalizeScreenSize = coreGuiCommonModule.Flags.FFlagTopBarSignalizeScreenSize
 local enabled = require(corePackagesService.Workspace.Packages.Chrome).Enabled
 local _ = if enabled() then require(parent.Parent.Chrome.Service) else nil
-local var13 = enabled()
-local var14 = if var13 then UDim2.new(0, 125, 0, 20) else UDim2.new(0, 80, 0, 6)
+local var1 = enabled()
+local var2 = if var1 then UDim2.new(0, 125, 0, 20) else UDim2.new(0, 80, 0, 6)
 local uDim2 = UDim2.new(0, 50, 0, 16)
 local uDim2_1 = UDim2.new(0, 80, 0, 20)
 local uDim2_2 = UDim2.new(0, 220, 0, 16)
@@ -35,8 +35,8 @@ healthBar.validateProps = tModule.strictInterface({
 	removeKeepOutArea = if fFlagTopBarSignalizeKeepOutAreas then nil else tModule.callback
 })
 
-local function _(p0)
-	return Vector3.new(p0.r, p0.g, p0.b)
+local function _(p1)
+	return Vector3.new(p1.r, p1.g, p1.b)
 end
 
 local t = {}
@@ -56,62 +56,62 @@ local function getHealthBarColor(p1)
 	elseif p1 >= 0.8 then
 		return healthGreenColor_1
 	end
-	local var21 = Vector3.new(0, 0, 0)
-	local var22 = 0
+	local var3 = Vector3.new(0, 0, 0)
+	local var4 = 0
 	
 	for i, v in pairs(t) do
-		local var24 = p1 - v
+		local var5 = p1 - v
 		
-		if var24 ~= 0 then
-			local var25 = 1 / (var24 * var24)
-			var21 += var25 * i
-			var22 += var25
+		if var5 ~= 0 then
+			local var6 = 1 / (var5 * var5)
+			var3 += var6 * i
+			var4 += var6
 			continue
 		end
 		return Color3.new(i.x, i.y, i.z)
 	end
-	local var23 = var21 / var22
+	local var7 = var3 / var4
 	
-	return Color3.new(var23.x, var23.y, var23.z)
+	return Color3.new(var7.x, var7.y, var7.z)
 end
 
 function healthBar.init(p2)
-	-- upvalues: roactModule (ref), fFlagTopBarSignalizeHealthBar (ref), constantsModule (ref), coreGuiCommonModule (ref), signalsModule (ref), starterGuiService (ref), fFlagTopBarSignalizeKeepOutAreas (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), tenFootInterfaceModule (ref), uDim2_2 (ref), var13 (ref), uDim2 (ref), uDim2_1 (ref), var14 (write)
+	-- upvalues: roactModule (ref), fFlagTopBarSignalizeHealthBar (ref), constantsModule (ref), coreGuiCommonModule (ref), signalsModule (ref), starterGuiService (ref), fFlagTopBarSignalizeKeepOutAreas (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), tenFootInterfaceModule (ref), uDim2_2 (ref), var1 (ref), uDim2 (ref), uDim2_1 (ref), var2 (write)
 	p2.rootRef = roactModule.createRef()
 	
 	if fFlagTopBarSignalizeHealthBar then
-		local var26, var27 = roactModule.createBinding(constantsModule.InitialHealth)
-		p2.health = var26
-		p2.setHealth = var27
-		local var28, var29 = roactModule.createBinding(constantsModule.InitialHealth)
-		p2.maxHealth = var28
-		p2.setMaxHealth = var29
-		local var30, var31 = roactModule.createBinding(false)
-		p2.isDead = var30
-		p2.setIsDead = var31
+		local var8, var9 = roactModule.createBinding(constantsModule.InitialHealth)
+		p2.health = var8
+		p2.setHealth = var9
+		local var10, var11 = roactModule.createBinding(constantsModule.InitialHealth)
+		p2.maxHealth = var10
+		p2.setMaxHealth = var11
+		local var12, var13 = roactModule.createBinding(false)
+		p2.isDead = var12
+		p2.setIsDead = var13
 		p2.healthPercent = roactModule.joinBindings({ p2.health, p2.maxHealth, p2.isDead }):map(function(p3)
-			local var34 = p3[1]
-			local var35 = p3[2]
-			local var36 = 1
+			local var14 = p3[1]
+			local var15 = p3[2]
+			local var16 = 1
 			
 			if p3[3] then
-				var36 = 0
+				var16 = 0
 				
-				return var36
-			elseif var35 > 0 then
-				var36 = math.clamp(var34 / var35, 0, 1)
+				return var16
+			elseif var15 > 0 then
+				var16 = math.clamp(var14 / var15, 0, 1)
 			end
-			return var36
+			return var16
 		end)
-		p2.healthVisible = roactModule.joinBindings({ p2.health, p2.maxHealth }):map(function(p4)
-			return p4[1] < p4[2]
+		p2.healthVisible = roactModule.joinBindings({ p2.health, p2.maxHealth }):map(function(p3)
+			return p3[1] < p3[2]
 		end)
 		
 		if coreGuiCommonModule.Stores.GetLocalHumanoidStore then
 			p2.localHumanoidStore = coreGuiCommonModule.Stores.GetLocalHumanoidStore(false)
-			p2.disposeHealthConnection = signalsModule.createEffect(function(p5)
+			p2.disposeHealthConnection = signalsModule.createEffect(function(p3)
 				-- upvalues: p2 (ref), constantsModule (copy)
-				local healthValue = p2.localHumanoidStore.getHealthValue(p5)
+				local healthValue = p2.localHumanoidStore.getHealthValue(p3)
 				p2.setHealth(healthValue.health or constantsModule.InitialHealth)
 				p2.setMaxHealth(healthValue.maxHealth or constantsModule.InitialHealth)
 				p2.setIsDead(healthValue.isDead)
@@ -122,10 +122,10 @@ function healthBar.init(p2)
 			return starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health)
 		end
 		
-		p2.coreGuiChangedSignalConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p6, p7)
+		p2.coreGuiChangedSignalConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p3, p4)
 			-- upvalues: p2 (ref)
-			if p6 == Enum.CoreGuiType.Health or p6 == Enum.CoreGuiType.All then
-				p2:setState({ mountHealthBar = p7 })
+			if p3 == Enum.CoreGuiType.Health or p3 == Enum.CoreGuiType.All then
+				p2:setState({ mountHealthBar = p4 })
 			end
 		end)
 		p2:setState({
@@ -137,153 +137,153 @@ function healthBar.init(p2)
 	end
 	if fFlagTopBarSignalizeScreenSize then
 		local getViewportSize = displayModule.GetDisplayStore(false).getViewportSize
-		local var32, var33 = roactModule.createBinding(getViewportSize(false))
-		p2.screenSizeBinding = var32
-		p2.setScreenSizeBinding = var33
-		p2.disposeScreenSize = signalsModule.createEffect(function(p8)
+		local var14, var15 = roactModule.createBinding(getViewportSize(false))
+		p2.screenSizeBinding = var14
+		p2.setScreenSizeBinding = var15
+		p2.disposeScreenSize = signalsModule.createEffect(function(p3)
 			-- upvalues: p2 (ref), getViewportSize (ref)
-			p2.setScreenSizeBinding(getViewportSize(p8))
+			p2.setScreenSizeBinding(getViewportSize(p3))
 		end)
-		p2.healthbarSizeBinding = p2.screenSizeBinding:map(function(p9)
-			-- upvalues: tenFootInterfaceModule (copy), uDim2_2 (copy), var13 (copy), uDim2 (copy), uDim2_1 (copy), var14 (copy)
-			return if tenFootInterfaceModule:IsEnabled() then uDim2_2 elseif var13 and p9.X <= 320 then uDim2 elseif var13 and p9.X <= 393 then uDim2_1 else var14
+		p2.healthbarSizeBinding = p2.screenSizeBinding:map(function(p3)
+			-- upvalues: tenFootInterfaceModule (copy), uDim2_2 (copy), var1 (copy), uDim2 (copy), uDim2_1 (copy), var2 (copy)
+			return if tenFootInterfaceModule:IsEnabled() then uDim2_2 elseif var1 and p3.X <= 320 then uDim2 elseif var1 and p3.X <= 393 then uDim2_1 else var2
 		end)
 	end
 end
 
-function healthBar.onUnmount(p10)
+function healthBar.onUnmount(p2)
 	-- upvalues: fFlagTopBarSignalizeHealthBar (ref), fFlagTopBarSignalizeScreenSize (ref)
 	if fFlagTopBarSignalizeHealthBar then
-		p10.coreGuiChangedSignalConn:Disconnect()
-		p10.disposeHealthConnection()
+		p2.coreGuiChangedSignalConn:Disconnect()
+		p2.disposeHealthConnection()
 	end
 	if fFlagTopBarSignalizeScreenSize then
-		p10.disposeScreenSize()
+		p2.disposeScreenSize()
 	end
 end
 
-function healthBar.renderHealth(p11)
-	-- upvalues: fFlagTopBarSignalizeHealthBar (ref), fFlagTopBarSignalizeScreenSize (ref), var13 (ref), uDim2 (ref), uDim2_1 (ref), var14 (write), tenFootInterfaceModule (ref), uDim2_2 (ref), fFlagTopBarSignalizeKeepOutAreas (ref), constantsModule (ref), getHealthBarColor (ref), roactModule (ref), enabled (ref)
-	local var38 = nil
+function healthBar.renderHealth(p2)
+	-- upvalues: fFlagTopBarSignalizeHealthBar (ref), fFlagTopBarSignalizeScreenSize (ref), var1 (ref), uDim2 (ref), uDim2_1 (ref), var2 (write), tenFootInterfaceModule (ref), uDim2_2 (ref), fFlagTopBarSignalizeKeepOutAreas (ref), constantsModule (ref), getHealthBarColor (ref), roactModule (ref), enabled (ref)
+	local var8 = nil
 	
 	if not fFlagTopBarSignalizeHealthBar then
-		var38 = p11.props.healthEnabled and p11.props.health < p11.props.maxHealth
+		var8 = p2.props.healthEnabled and p2.props.health < p2.props.maxHealth
 	end
-	local var39 = 1
+	local var9 = 1
 	
 	if not fFlagTopBarSignalizeHealthBar then
-		if p11.props.isDead then
-			var39 = 0
-		elseif p11.props.maxHealth > 0 then
-			var39 = math.clamp(p11.props.health / p11.props.maxHealth, 0, 1)
+		if p2.props.isDead then
+			var9 = 0
+		elseif p2.props.maxHealth > 0 then
+			var9 = math.clamp(p2.props.health / p2.props.maxHealth, 0, 1)
 		end
 	end
-	local var42, var43, rect
-	local var40 = if not fFlagTopBarSignalizeScreenSize then if var13 then if tenFootInterfaceModule:IsEnabled() then uDim2_2 elseif p11.props.screenSize.X <= 320 then uDim2 elseif p11.props.screenSize.X <= 393 then uDim2_1 else var14 elseif tenFootInterfaceModule:IsEnabled() then uDim2_2 else var14 else nil
-	local var41 = if tenFootInterfaceModule:IsEnabled() then 0 else 4
+	local var10, var11, rect
+	local var12 = if not fFlagTopBarSignalizeScreenSize then if var1 then if tenFootInterfaceModule:IsEnabled() then uDim2_2 elseif p2.props.screenSize.X <= 320 then uDim2 elseif p2.props.screenSize.X <= 393 then uDim2_1 else var2 elseif tenFootInterfaceModule:IsEnabled() then uDim2_2 else var2 else nil
+	local var13 = if tenFootInterfaceModule:IsEnabled() then 0 else 4
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	
-	if var13 then
-		var42 = "rbxasset://textures/ui/TopBar/HealthBarBaseTV.png"
-		var43 = "rbxasset://textures/ui/TopBar/HealthBarTV.png"
+	if var1 then
+		var10 = "rbxasset://textures/ui/TopBar/HealthBarBaseTV.png"
+		var11 = "rbxasset://textures/ui/TopBar/HealthBarTV.png"
 		rect = Rect.new(8, 8, 9, 9)
 	else
-		var42 = "rbxasset://textures/ui/TopBar/HealthBarBase.png"
-		var43 = "rbxasset://textures/ui/TopBar/HealthBar.png"
+		var10 = "rbxasset://textures/ui/TopBar/HealthBarBase.png"
+		var11 = "rbxasset://textures/ui/TopBar/HealthBar.png"
 		rect = Rect.new(3, 3, 4, 4)
 		
 		if tenFootInterfaceModule:IsEnabled() then
-			var42 = "rbxasset://textures/ui/TopBar/HealthBarBaseTV.png"
-			var43 = "rbxasset://textures/ui/TopBar/HealthBarTV.png"
+			var10 = "rbxasset://textures/ui/TopBar/HealthBarBaseTV.png"
+			var11 = "rbxasset://textures/ui/TopBar/HealthBarTV.png"
 			rect = Rect.new(8, 8, 9, 9)
 		end
 	end
-	local var45 = function(p12)
-		-- upvalues: var13 (copy), fFlagTopBarSignalizeHealthBar (copy), p11 (ref), var38 (write), fFlagTopBarSignalizeKeepOutAreas (copy), constantsModule (copy)
-		if not var13 then
-			if (fFlagTopBarSignalizeHealthBar and p11.healthVisible or not fFlagTopBarSignalizeHealthBar and var38) and p12 then
+	local var14 = function(p3)
+		-- upvalues: var1 (copy), fFlagTopBarSignalizeHealthBar (copy), p2 (ref), var8 (write), fFlagTopBarSignalizeKeepOutAreas (copy), constantsModule (copy)
+		if not var1 then
+			if (fFlagTopBarSignalizeHealthBar and p2.healthVisible or not fFlagTopBarSignalizeHealthBar and var8) and p3 then
 				if fFlagTopBarSignalizeKeepOutAreas then
-					p11.keepOutAreasStore.setKeepOutArea(constantsModule.HealthBarKeepOutAreaId, p12.AbsolutePosition, p12.AbsoluteSize)
+					p2.keepOutAreasStore.setKeepOutArea(constantsModule.HealthBarKeepOutAreaId, p3.AbsolutePosition, p3.AbsoluteSize)
 					
 					return
 				end
-				p11.props.setKeepOutArea(constantsModule.HealthBarKeepOutAreaId, p12.AbsolutePosition, p12.AbsoluteSize)
+				p2.props.setKeepOutArea(constantsModule.HealthBarKeepOutAreaId, p3.AbsolutePosition, p3.AbsoluteSize)
 				
 				return
 			elseif fFlagTopBarSignalizeKeepOutAreas then
-				p11.keepOutAreasStore.removeKeepOutArea(constantsModule.HealthBarKeepOutAreaId)
+				p2.keepOutAreasStore.removeKeepOutArea(constantsModule.HealthBarKeepOutAreaId)
 				
 				return
 			end
-			p11.props.removeKeepOutArea(constantsModule.HealthBarKeepOutAreaId)
+			p2.props.removeKeepOutArea(constantsModule.HealthBarKeepOutAreaId)
 		end
 	end
 	
-	if p11.rootRef.current then
-		var45(p11.rootRef.current)
+	if p2.rootRef.current then
+		var14(p2.rootRef.current)
 	end
 	return roactModule.createElement("Frame", {
-		AnchorPoint = if var13 then Vector2.new(1, 0) else nil,
-		Position = if var13 then UDim2.new(1, 0, 0, 0) else nil,
-		Visible = if fFlagTopBarSignalizeHealthBar then p11.healthVisible else var38,
+		AnchorPoint = if var1 then Vector2.new(1, 0) else nil,
+		Position = if var1 then UDim2.new(1, 0, 0, 0) else nil,
+		Visible = if fFlagTopBarSignalizeHealthBar then p2.healthVisible else var8,
 		BackgroundTransparency = 1,
-		Size = if fFlagTopBarSignalizeScreenSize then p11.healthbarSizeBinding:map(function(p13)
-			return UDim2.new(p13.X, UDim.new(1, 0))
-		end) else UDim2.new(var40.X, UDim.new(1, 0)),
-		LayoutOrder = p11.props.layoutOrder,
-		[roactModule.Change.AbsoluteSize] = var45,
-		[roactModule.Change.AbsolutePosition] = var45,
-		[roactModule.Ref] = p11.rootRef
+		Size = if fFlagTopBarSignalizeScreenSize then p2.healthbarSizeBinding:map(function(p3)
+			return UDim2.new(p3.X, UDim.new(1, 0))
+		end) else UDim2.new(var12.X, UDim.new(1, 0)),
+		LayoutOrder = p2.props.layoutOrder,
+		[roactModule.Change.AbsoluteSize] = var14,
+		[roactModule.Change.AbsolutePosition] = var14,
+		[roactModule.Ref] = p2.rootRef
 	}, {
-		Padding = not enabled and roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var41) }) or nil,
+		Padding = not enabled and roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var13) }) or nil,
 		HealthBar = roactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
-			Image = var42,
+			Image = var10,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = rect,
-			Size = if fFlagTopBarSignalizeScreenSize then p11.healthbarSizeBinding else var40,
+			Size = if fFlagTopBarSignalizeScreenSize then p2.healthbarSizeBinding else var12,
 			Position = UDim2.fromScale(0, 0.5),
 			AnchorPoint = Vector2.new(0, 0.5)
 		}, {
 			Fill = roactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
-				Image = var43,
-				ImageColor3 = if fFlagTopBarSignalizeHealthBar then p11.healthPercent:map(getHealthBarColor) else getHealthBarColor(var39),
+				Image = var11,
+				ImageColor3 = if fFlagTopBarSignalizeHealthBar then p2.healthPercent:map(getHealthBarColor) else getHealthBarColor(var9),
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = rect,
-				Size = if fFlagTopBarSignalizeHealthBar then p11.healthPercent:map(function(p14)
-					return UDim2.fromScale(p14, 1)
-				end) else UDim2.fromScale(var39, 1)
+				Size = if fFlagTopBarSignalizeHealthBar then p2.healthPercent:map(function(p3)
+					return UDim2.fromScale(p3, 1)
+				end) else UDim2.fromScale(var9, 1)
 			})
 		})
 	})
 end
 
-function healthBar.render(p15)
+function healthBar.render(p2)
 	-- upvalues: fFlagTopBarSignalizeHealthBar (ref)
-	return if fFlagTopBarSignalizeHealthBar then if p15.state.mountHealthBar then p15:renderHealth() else nil else p15:renderHealth()
+	return if fFlagTopBarSignalizeHealthBar then if p2.state.mountHealthBar then p2:renderHealth() else nil else p2:renderHealth()
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p16)
+return roactRoduxModule.UNSTABLE_connect2(function(p2)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref), fFlagTopBarSignalizeHealthBar (ref)
 	return {
-		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p16.displayOptions.screenSize,
-		health = if fFlagTopBarSignalizeHealthBar then nil else p16.health.currentHealth,
-		maxHealth = if fFlagTopBarSignalizeHealthBar then nil else p16.health.maxHealth,
-		healthEnabled = if fFlagTopBarSignalizeHealthBar then nil else p16.coreGuiEnabled[Enum.CoreGuiType.Health]
+		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p2.displayOptions.screenSize,
+		health = if fFlagTopBarSignalizeHealthBar then nil else p2.health.currentHealth,
+		maxHealth = if fFlagTopBarSignalizeHealthBar then nil else p2.health.maxHealth,
+		healthEnabled = if fFlagTopBarSignalizeHealthBar then nil else p2.coreGuiEnabled[Enum.CoreGuiType.Health]
 	}
-end, if fFlagTopBarSignalizeKeepOutAreas then nil else function(p17)
+end, if fFlagTopBarSignalizeKeepOutAreas then nil else function(p2)
 	-- upvalues: fFlagTopBarSignalizeKeepOutAreas (ref), setKeepOutAreaModule (ref), removeKeepOutAreaModule (ref)
 	return if fFlagTopBarSignalizeKeepOutAreas then {} else {
-		setKeepOutArea = function(value, p18, p19)
-			-- upvalues: p17 (ref), setKeepOutAreaModule (copy)
-			return p17(setKeepOutAreaModule(value, p18, p19))
+		setKeepOutArea = function(value, p3, p4)
+			-- upvalues: p2 (ref), setKeepOutAreaModule (copy)
+			return p2(setKeepOutAreaModule(value, p3, p4))
 		end,
-		removeKeepOutArea = function(p20)
-			-- upvalues: p17 (ref), removeKeepOutAreaModule (copy)
-			return p17(removeKeepOutAreaModule(p20))
+		removeKeepOutArea = function(p3)
+			-- upvalues: p2 (ref), removeKeepOutAreaModule (copy)
+			return p2(removeKeepOutAreaModule(p3))
 		end
 	}
 end)(healthBar)

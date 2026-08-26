@@ -5,48 +5,48 @@ local usePositionOffsetForVirtualKeyboardModule = require(appChat.Hooks.usePosit
 local reactModule = require(parent.React)
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSelector (ref), usePositionOffsetForVirtualKeyboardModule (ref), reactModule (ref), userInputService (ref)
-	local var4 = useSelector(function(p1)
-		return if p1.GlobalGuiInset then p1.GlobalGuiInset.top else 0
+	local var1 = useSelector(function(p2)
+		return if p2.GlobalGuiInset then p2.GlobalGuiInset.top else 0
 	end)
-	local var5 = if p0.parentViewRef then p0.parentViewRef.current else nil
-	local var6 = usePositionOffsetForVirtualKeyboardModule({ isNearBottomOfScreen = true })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: userInputService (copy), var6 (ref), var5 (ref), var4 (ref), p0 (ref)
-		local var8 = 0
+	local var2 = if p1.parentViewRef then p1.parentViewRef.current else nil
+	local var3 = usePositionOffsetForVirtualKeyboardModule({ isNearBottomOfScreen = true })
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: userInputService (copy), var3 (ref), var2 (ref), var1 (ref), p1 (ref)
+		local var5 = 0
 		
 		if userInputService.OnScreenKeyboardVisible then
-			if var6 ~= nil then
-				var8 = var6
-			elseif var5 then
-				var8 = var5.AbsolutePosition.Y + var5.AbsoluteSize.Y - (userInputService.OnScreenKeyboardPosition.Y - var4)
+			if var3 ~= nil then
+				var5 = var3
+			elseif var2 then
+				var5 = var2.AbsolutePosition.Y + var2.AbsoluteSize.Y - (userInputService.OnScreenKeyboardPosition.Y - var1)
 			end
 		end
-		if p0.onKeyboardOffsetChanged then
-			p0.onKeyboardOffsetChanged(var8)
+		if p1.onKeyboardOffsetChanged then
+			p1.onKeyboardOffsetChanged(var5)
 		end
-	end, { var6, var4, p0.onKeyboardOffsetChanged, var5 })
+	end, { var3, var1, p1.onKeyboardOffsetChanged, var2 })
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), userInputService (copy), var5 (ref)
-		var7()
-		local var9 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(var7)
-		local var10 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(var7)
-		local var11 = if var5 then var5:GetPropertyChangedSignal("AbsoluteSize"):Connect(var7) else nil
+		-- upvalues: var4 (ref), userInputService (copy), var2 (ref)
+		var4()
+		local var5 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(var4)
+		local var6 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(var4)
+		local var7 = if var2 then var2:GetPropertyChangedSignal("AbsoluteSize"):Connect(var4) else nil
 		
 		return function()
-			-- upvalues: var9 (ref), var10 (ref), var11 (write)
-			if var9 then
-				var9:Disconnect()
+			-- upvalues: var5 (ref), var6 (ref), var7 (write)
+			if var5 then
+				var5:Disconnect()
 			end
-			if var10 then
-				var10:Disconnect()
+			if var6 then
+				var6:Disconnect()
 			end
-			if var11 then
-				var11:Disconnect()
+			if var7 then
+				var7:Disconnect()
 			end
 		end
-	end, { var7, var5 })
+	end, { var4, var2 })
 	
 	return nil
 end

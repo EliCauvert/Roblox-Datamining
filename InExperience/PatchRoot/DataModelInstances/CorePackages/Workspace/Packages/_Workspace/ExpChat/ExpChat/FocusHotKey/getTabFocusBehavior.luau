@@ -8,10 +8,10 @@ local t = {
 	end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: friendsChatFocusModule (ref), t (ref), tabTypes (ref)
-	return if p0 == "FriendsChat" then {
+	return if p1 == "FriendsChat" then {
 		shouldProceed = friendsChatFocusModule.canFocus(),
 		onFocusKeyPressed = friendsChatFocusModule.focus
-	} elseif p0 == "TextChat" then t elseif p0 == "UniverseChat" then t else tabTypes.unreachable(p0)
+	} elseif p1 == "TextChat" then t elseif p1 == "UniverseChat" then t else tabTypes.unreachable(p1)
 end

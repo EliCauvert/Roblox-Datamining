@@ -6,9 +6,9 @@ local changeDevConsoleSizeModule = require(script.Parent.Parent.Actions.ChangeDe
 local setDevConsolePositionModule = require(script.Parent.Parent.Actions.SetDevConsolePosition)
 local setActiveTabModule = require(script.Parent.Parent.Actions.SetActiveTab)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: constantsModule (ref), setDevConsoleVisibilityModule (ref), immutableModule (ref), setDevConsolePositionModule (ref), setDevConsoleMinimizedModule (ref), changeDevConsoleSizeModule (ref), setActiveTabModule (ref)
-	p0 = p0 or {
+	p1 = p1 or {
 		isVisible = false,
 		isMinimized = false,
 		visibleStartTime = 0,
@@ -17,23 +17,23 @@ return function(p0, p1)
 		size = constantsModule.MainWindowInit.Size
 	}
 	
-	if p1.type == setDevConsoleVisibilityModule.name then
-		local t = { isVisible = p1.isVisible }
+	if p2.type == setDevConsoleVisibilityModule.name then
+		local t = { isVisible = p2.isVisible }
 		
 		if t.isVisible then
 			t.isMinimized = false
 			t.visibleStartTime = tick()
 		end
-		return immutableModule.JoinDictionaries(p0, t)
-	elseif p1.type == setDevConsolePositionModule.name then
-		return immutableModule.Set(p0, "position", p1.position)
-	elseif p1.type == setDevConsoleMinimizedModule.name then
-		return immutableModule.Set(p0, "isMinimized", p1.isMinimized)
-	elseif p1.type == changeDevConsoleSizeModule.name then
-		if p0.formFactor == constantsModule.FormFactor.Large then
-			return immutableModule.Set(p0, "size", p1.newSize)
+		return immutableModule.JoinDictionaries(p1, t)
+	elseif p2.type == setDevConsolePositionModule.name then
+		return immutableModule.Set(p1, "position", p2.position)
+	elseif p2.type == setDevConsoleMinimizedModule.name then
+		return immutableModule.Set(p1, "isMinimized", p2.isMinimized)
+	elseif p2.type == changeDevConsoleSizeModule.name then
+		if p1.formFactor == constantsModule.FormFactor.Large then
+			return immutableModule.Set(p1, "size", p2.newSize)
 		end
 	else
-		return if p1.type == setActiveTabModule.name then immutableModule.Set(p0, "isMinimized", false) else p0
+		return if p2.type == setActiveTabModule.name then immutableModule.Set(p1, "isMinimized", false) else p1
 	end
 end

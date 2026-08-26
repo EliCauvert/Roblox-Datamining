@@ -18,54 +18,54 @@ local getRobuxPackageBonusPresentationModule = require(inExperienceShop.Utils.ge
 local promoteBonusRobuxPackageToTopPicksModule = require(inExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
 local _ = require(inExperienceShop.Types)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), getRobuxPackageBonusPresentationModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), sessionService (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassHttpModule (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref), purchasePromptModule (ref), getBlockRobuxTileClickInShopModule (ref), view (ref), robuxPackageTileModule (ref)
-	local pkg = p0.pkg
-	local var16 = reactModule.useRef(nil)
-	local var17 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
+	local pkg = p1.pkg
+	local var1 = reactModule.useRef(nil)
+	local var2 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
 	local bonusGamePassId = promoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(pkg)
-	local var19 = getRobuxPackageBonusPresentationModule(pkg, signalsReactModule.useSignalState(function(p1)
-		-- upvalues: var17 (ref), bonusGamePassId (ref)
-		return if bonusGamePassId == nil then nil else var17.getOwnership(p1)[bonusGamePassId]
+	local var3 = getRobuxPackageBonusPresentationModule(pkg, signalsReactModule.useSignalState(function(p2)
+		-- upvalues: var2 (ref), bonusGamePassId (ref)
+		return if bonusGamePassId == nil then nil else var2.getOwnership(p2)[bonusGamePassId]
 	end), signalsReactModule.useSignalState(function(p2)
-		-- upvalues: var17 (ref), bonusGamePassId (ref)
-		return if bonusGamePassId == nil then nil else var17.getBonusPromotionEligibility(p2)[bonusGamePassId]
+		-- upvalues: var2 (ref), bonusGamePassId (ref)
+		return if bonusGamePassId == nil then nil else var2.getBonusPromotionEligibility(p2)[bonusGamePassId]
 	end))
 	local mobileProductId = pkg.mobileProductId
 	local productId = pkg.productId
-	local paymentSessionId = p0.paymentSessionId
+	local paymentSessionId = p1.paymentSessionId
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), pkg (ref), productId (ref), p0 (ref), var16 (ref), sessionService (copy)
+		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), pkg (ref), productId (ref), p1 (ref), var1 (ref), sessionService (copy)
 		if fFlagEnableInExperienceShopUnifiedLoggingModule then
 			task.defer(function()
-				-- upvalues: parent (copy), pkg (copy), productId (copy), p0 (copy), var16 (copy), sessionService (copy)
+				-- upvalues: parent (copy), pkg (copy), productId (copy), p1 (copy), var1 (copy), sessionService (copy)
 				local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
 				local marketplaceUnifiedItemType = avatarExperienceAnalyticsModule.UnifiedEventLogEnums.MarketplaceUnifiedItemType
-				avatarExperienceAnalyticsModule.addUnifiedEventLogging(var16, {
+				avatarExperienceAnalyticsModule.addUnifiedEventLogging(var1, {
 					universeId = game.GameId,
 					itemId = if productId ~= nil then pkg.id else productId,
 					itemType = if pkg.bonusItem ~= nil then marketplaceUnifiedItemType.ROBUX_WITH_BONUS else marketplaceUnifiedItemType.ROBUX,
-					categoryId = p0.categoryId,
-					gridPositionRow = p0.gridPositionRow,
-					gridPositionColumn = p0.gridPositionColumn
+					categoryId = p1.categoryId,
+					gridPositionRow = p1.gridPositionRow,
+					gridPositionColumn = p1.gridPositionColumn
 				}, { sessionTagName = sessionService:GetSessionTag("level2a") })
 			end)
 			
 			return
 		end
 	end, {
-		pkg.id, productId, pkg.bonusItem, p0.categoryId, p0.gridPositionRow,
-		p0.gridPositionColumn
+		pkg.id, productId, pkg.bonusItem, p1.categoryId, p1.gridPositionRow,
+		p1.gridPositionColumn
 	})
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: bonusGamePassId (ref), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassHttpModule (copy), var17 (ref), fIntShopOwnershipFetchMaxAttemptsModule (copy)
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: bonusGamePassId (ref), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassHttpModule (copy), var2 (ref), fIntShopOwnershipFetchMaxAttemptsModule (copy)
 		if bonusGamePassId == nil then
 			return
 		end
-		var17.pollGamePassOwnership(bonusGamePassId, fIntShopOwnershipFetchMaxAttemptsModule, if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassHttpModule, true)
-	end, { bonusGamePassId, var17 })
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: purchasePromptModule (copy), mobileProductId (ref), productId (ref), paymentSessionId (ref), var20 (ref)
+		var2.pollGamePassOwnership(bonusGamePassId, fIntShopOwnershipFetchMaxAttemptsModule, if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassHttpModule, true)
+	end, { bonusGamePassId, var2 })
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: purchasePromptModule (copy), mobileProductId (ref), productId (ref), paymentSessionId (ref), var4 (ref)
 		local launchRobuxPackagePurchase = purchasePromptModule.launchRobuxPackagePurchase
 		
 		if launchRobuxPackagePurchase == nil then
@@ -75,24 +75,24 @@ return reactModule.memo(function(p0)
 			mobileProductId = mobileProductId or "",
 			productId = productId,
 			paymentSessionId = paymentSessionId,
-			onWebViewClosed = var20
+			onWebViewClosed = var4
 		})
-	end, { mobileProductId, productId, paymentSessionId, var20 })
-	local hasBonusItem = var19.hasBonusItem
+	end, { mobileProductId, productId, paymentSessionId, var4 })
+	local hasBonusItem = var3.hasBonusItem
 	local bonusItemDetails = pkg.bonusItemDetails
-	local onBonusItemActivated = p0.onBonusItemActivated
+	local onBonusItemActivated = p1.onBonusItemActivated
 	
 	return reactModule.createElement(view, {
 		tag = "fill size-full-0",
-		LayoutOrder = p0.LayoutOrder,
-		ref = if fFlagEnableInExperienceShopUnifiedLoggingModule then var16 else nil
+		LayoutOrder = p1.LayoutOrder,
+		ref = if fFlagEnableInExperienceShopUnifiedLoggingModule then var1 else nil
 	}, {
 		Tile = reactModule.createElement(robuxPackageTileModule, {
 			robuxAmount = pkg.robuxAmount,
 			currencyAmountStr = pkg.currencyAmountStr,
 			robuxImage = pkg.robuxImage,
-			hasBonusItem = var19.hasBonusItem,
-			bonusItemThumbnail = var19.bonusItemThumbnail,
+			hasBonusItem = var3.hasBonusItem,
+			bonusItemThumbnail = var3.bonusItemThumbnail,
 			onTileActivated = reactModule.useCallback(function()
 				-- upvalues: getBlockRobuxTileClickInShopModule (copy), hasBonusItem (ref), bonusItemDetails (ref), onBonusItemActivated (ref)
 				if getBlockRobuxTileClickInShopModule() then return end
@@ -104,9 +104,9 @@ return reactModule.memo(function(p0)
 				end
 				onBonusItemActivated(bonusItemDetails.id, itemType)
 			end, { hasBonusItem, bonusItemDetails, onBonusItemActivated }),
-			onBuyActivated = var21,
+			onBuyActivated = var5,
 			isPrimaryRobuxPackage = pkg.isPrimaryRobuxPackage == true,
-			mediaHeightScale = p0.mediaHeightScale
+			mediaHeightScale = p1.mediaHeightScale
 		})
 	})
 end)

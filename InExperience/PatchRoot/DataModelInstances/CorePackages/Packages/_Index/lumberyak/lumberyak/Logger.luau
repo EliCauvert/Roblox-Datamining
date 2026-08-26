@@ -20,56 +20,56 @@ local t_1 = {}
 for i, v in pairs(list) do
 	t_1[v] = i
 end
-function t.Levels.fromString(p0)
+function t.Levels.fromString(p1)
 	-- upvalues: list (ref)
-	if type(p0) ~= "string" then
+	if type(p1) ~= "string" then
 		return nil
 	end
 	for i, v in pairs(list) do
-		if string.lower(v) == string.lower(p0) then
+		if string.lower(v) == string.lower(p1) then
 			return v
 		end
 	end
 	return nil
 end
 
-function t.new(p1, p2)
+function t.new(p2, p3)
 	-- upvalues: t (ref)
 	local t_1 = {
 		dirty = true,
-		name = p2,
+		name = p3,
 		sinks = {},
 		children = {},
-		parent = p1,
+		parent = p2,
 		context = {},
 		active = {},
 		cache = { sinks = {}, context = {} }
 	}
 	
 	for i, v in pairs(t.Levels) do
-		if p1 then
-			t_1.active[i] = p1.active[i]
+		if p2 then
+			t_1.active[i] = p2.active[i]
 		else
 			t_1.active[i] = false
 		end
 	end
-	if p1 then
-		p1.children[t_1] = true
+	if p2 then
+		p2.children[t_1] = true
 	end
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-local function setActive(value, p3)
+local function setActive(value, p4)
 	-- upvalues: t_1 (ref), list (ref), setActive (ref)
-	local var9 = t_1[value]
+	local var1 = t_1[value]
 	
-	if var9 then
-		for i = 1, var9 do
-			p3.active[list[i]] = true
+	if var1 then
+		for i = 1, var1 do
+			p4.active[list[i]] = true
 		end
-		for i_1, v in pairs(p3.children) do
+		for i_1, v in pairs(p4.children) do
 			setActive(value, i_1)
 		end
 	end
@@ -84,24 +84,24 @@ local function setDirty(value)
 	end
 end
 
-local function updateCache(p4)
+local function updateCache(p5)
 	-- upvalues: updateCache (ref), cryoModule (ref)
-	if not p4.dirty then return end
-	if not p4.parent then
-		p4.cache.context = p4.context
-		p4.cache.sinks = p4.sinks
-		p4.dirty = false
+	if not p5.dirty then return end
+	if not p5.parent then
+		p5.cache.context = p5.context
+		p5.cache.sinks = p5.sinks
+		p5.dirty = false
 		
 		return
 	end
-	updateCache(p4.parent)
-	p4.cache.context = cryoModule.Dictionary.join(p4.parent.cache.context, p4.context)
+	updateCache(p5.parent)
+	p5.cache.context = cryoModule.Dictionary.join(p5.parent.cache.context, p5.context)
 	
-	if p4.parent.cache.context.prefix and p4.context.prefix then
-		p4.cache.context.prefix = p4.parent.cache.context.prefix .. p4.context.prefix
+	if p5.parent.cache.context.prefix and p5.context.prefix then
+		p5.cache.context.prefix = p5.parent.cache.context.prefix .. p4.context.prefix
 	end
-	p4.cache.sinks = cryoModule.List.join(p4.parent.cache.sinks, p4.sinks)
-	p4.dirty = false
+	p5.cache.sinks = cryoModule.List.join(p5.parent.cache.sinks, p5.sinks)
+	p5.dirty = false
 end
 
 function t:setParent(p5)
@@ -112,15 +112,15 @@ function t:setParent(p5)
 	updateCache(p5)
 	self.parent = p5
 	self.parent.children[self] = true
-	local var10 = -1
+	local var2 = -1
 	
 	for i, v in pairs(p5.cache.sinks) do
 		if t_1[v.maxLevel] then
-			var10 = math.max(var10, t_1[v.maxLevel])
+			var2 = math.max(var2, t_1[v.maxLevel])
 		end
 	end
-	if var10 > -1 then
-		setActive(list[var10], self)
+	if var2 > -1 then
+		setActive(list[var2], self)
 	end
 	self.dirty = true
 	
@@ -164,39 +164,39 @@ local function log(p8, p9, p10)
 			t[i] = v
 		end
 	end
-	local var13
-	local var12 = if p10.n == 0 then "LUMBERYAK INTERNAL: No log message given" else p10[1]
+	local var3
+	local var4 = if p10.n == 0 then "LUMBERYAK INTERNAL: No log message given" else p10[1]
 	
 	if t.prefix then
-		var12 = t.prefix .. var12
+		var4 = t.prefix .. var12
 	end
-	if var12:find("{") then
-		var13 = 1
-		var12 = var12:gsub("{(.-)}", function(p11)
-			-- upvalues: var13 (write), p10 (ref), t (ref)
+	if var4:find("{") then
+		var3 = 1
+		var4 = var4:gsub("{(.-)}", function(p11)
+			-- upvalues: var3 (write), p10 (ref), t (ref)
 			if p11 == "" then
-				var13 += 1
+				var3 += 1
 				
-				return tostring(p10[var13])
+				return tostring(p10[var3])
 			end
-			local var14 = t[p11]
+			local var5 = t[p11]
 			
-			return var14 and tostring(var14)
+			return var5 and tostring(var5)
 		end)
 		
-		if var13 < p10.n then
-			var12 ..= "\nLUMBERYAK INTERNAL: Too many arguments given for format string"
-		elseif p10.n < var13 then
-			var12 ..= "\nLUMBERYAK INTERNAL: Too few arguments given for format string"
+		if var3 < p10.n then
+			var4 ..= "\nLUMBERYAK INTERNAL: Too many arguments given for format string"
+		elseif p10.n < var3 then
+			var4 ..= "\nLUMBERYAK INTERNAL: Too few arguments given for format string"
 		end
 	elseif p10.n > 1 then
-		var12 ..= "\nLUMBERYAK INTERNAL: Too many arguments given for format string"
+		var4 ..= "\nLUMBERYAK INTERNAL: Too many arguments given for format string"
 	end
-	var13 = t_1[p8]
+	var3 = t_1[p8]
 	
 	for i_1, v_1 in pairs(p9.cache.sinks) do
-		if t_1[v_1.maxLevel] and var13 <= t_1[v_1.maxLevel] then
-			v_1:log(var12, t)
+		if t_1[v_1.maxLevel] and var3 <= t_1[v_1.maxLevel] then
+			v_1:log(var4, t)
 		end
 	end
 end

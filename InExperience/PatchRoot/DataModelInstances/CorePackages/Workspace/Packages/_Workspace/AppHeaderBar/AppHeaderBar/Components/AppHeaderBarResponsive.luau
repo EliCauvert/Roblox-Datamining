@@ -10,43 +10,43 @@ local useBreakpointXOrLarger = responsiveModule.useBreakpointXOrLarger
 local usePreferredInput = responsiveModule.usePreferredInput
 local _ = require(parent.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useBreakpointXOrLarger (ref), responsiveModule (ref), usePreferredInput (ref), useStyle (ref), reactModule (ref), cryoModule (ref), appHeaderBarComponentModule (ref)
-	local var5 = useBreakpointXOrLarger(responsiveModule.Keys.Medium)
-	local var6 = useBreakpointXOrLarger(responsiveModule.Keys.Large)
-	local var7 = usePreferredInput() == responsiveModule.Input.Directional
+	local var1 = useBreakpointXOrLarger(responsiveModule.Keys.Medium)
+	local var2 = useBreakpointXOrLarger(responsiveModule.Keys.Large)
+	local var3 = usePreferredInput() == responsiveModule.Input.Directional
 	local tokens = useStyle().Tokens
-	local titleFontStyle = p0.titleFontStyle
-	local shouldRenderTitle = p0.shouldRenderTitle
-	local shouldRenderCenter = p0.shouldRenderCenter
-	local isTitleCentered = p0.isTitleCentered
-	local utilitiesGap = p0.utilitiesGap
-	local paddingTop = p0.paddingTop
-	local paddingBottom = p0.paddingBottom
-	local onMedia = p0.onMedia
+	local titleFontStyle = p1.titleFontStyle
+	local shouldRenderTitle = p1.shouldRenderTitle
+	local shouldRenderCenter = p1.shouldRenderCenter
+	local isTitleCentered = p1.isTitleCentered
+	local utilitiesGap = p1.utilitiesGap
+	local paddingTop = p1.paddingTop
+	local paddingBottom = p1.paddingBottom
+	local onMedia = p1.onMedia
 	
-	return reactModule.createElement(appHeaderBarComponentModule, cryoModule.Dictionary.join(p0, reactModule.useMemo(function()
-		-- upvalues: var6 (ref), var7 (ref), cryoModule (copy), shouldRenderCenter (ref), paddingTop (ref), tokens (ref), paddingBottom (ref), onMedia (ref), shouldRenderTitle (ref), var5 (ref), isTitleCentered (ref), titleFontStyle (ref), utilitiesGap (ref)
+	return reactModule.createElement(appHeaderBarComponentModule, cryoModule.Dictionary.join(p1, reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var3 (ref), cryoModule (copy), shouldRenderCenter (ref), paddingTop (ref), tokens (ref), paddingBottom (ref), onMedia (ref), shouldRenderTitle (ref), var1 (ref), isTitleCentered (ref), titleFontStyle (ref), utilitiesGap (ref)
 		local t = {
-			title = if var6 and var7 then cryoModule.None else nil,
-			renderCenter = if var6 and not var7 or shouldRenderCenter then nil else cryoModule.None,
-			renderUserInfo = if var6 then nil else cryoModule.None,
-			avatarActionIcon = if var6 then cryoModule.None else nil,
-			searchActionIcon = if var6 and not var7 then cryoModule.None else nil,
-			paddingTop = if var6 and not paddingTop then UDim.new(0, tokens.Size.Size_400) else nil,
-			paddingBottom = if var6 and not paddingBottom then UDim.new(0, tokens.Size.Size_400) else nil,
-			onMedia = if var6 and var7 and onMedia == nil then true else nil
+			title = if var2 and var3 then cryoModule.None else nil,
+			renderCenter = if var2 and not var3 or shouldRenderCenter then nil else cryoModule.None,
+			renderUserInfo = if var2 then nil else cryoModule.None,
+			avatarActionIcon = if var2 then cryoModule.None else nil,
+			searchActionIcon = if var2 and not var3 then cryoModule.None else nil,
+			paddingTop = if var2 and not paddingTop then UDim.new(0, tokens.Size.Size_400) else nil,
+			paddingBottom = if var2 and not paddingBottom then UDim.new(0, tokens.Size.Size_400) else nil,
+			onMedia = if var2 and var3 and onMedia == nil then true else nil
 		}
 		
 		if shouldRenderTitle then
 			t.title = nil
 		end
-		t.titleFontStyle = if titleFontStyle then nil elseif var5 and not isTitleCentered then tokens.Typography.HeadingLarge else tokens.Typography.HeadingSmall
-		t.utilitiesGap = if utilitiesGap then nil elseif var5 then UDim.new(0, tokens.Size.Size_600) else UDim.new(0, tokens.Size.Size_400)
+		t.titleFontStyle = if titleFontStyle then nil elseif var1 and not isTitleCentered then tokens.Typography.HeadingLarge else tokens.Typography.HeadingSmall
+		t.utilitiesGap = if utilitiesGap then nil elseif var1 then UDim.new(0, tokens.Size.Size_600) else UDim.new(0, tokens.Size.Size_400)
 		
 		return t
 	end, {
-		var5, var6, var7, tokens, titleFontStyle, shouldRenderCenter, isTitleCentered,
+		var1, var2, var3, tokens, titleFontStyle, shouldRenderCenter, isTitleCentered,
 		utilitiesGap, paddingTop, paddingBottom, onMedia
 	})))
 end

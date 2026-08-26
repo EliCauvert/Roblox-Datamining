@@ -30,128 +30,128 @@ local characterHistoryStateChangeButtonActivated = avatarExperienceCommonModule.
 local clearScreens = avatarExperienceNavigationModule.Actions.ClearScreens
 local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local menuItemEnumModule = require(avatarExperienceControlBar.Enums.MenuItemEnum)
-local var13 = if fFlagAXResetAvatarButton then avatarExperienceSaveModule.Selectors.selectCharacterData else nil
+local var1 = if fFlagAXResetAvatarButton then avatarExperienceSaveModule.Selectors.selectCharacterData else nil
 local clearTryOns = require(parent.AvatarExperienceRodux).Actions.ClearTryOns
 local _ = require(avatarExperienceControlBar.ControlBarTypes)
 local constantsModule = require(avatarExperienceControlBar.Constants)
-local var15 = if fFlagAXResetAvatarButton then {
+local var2 = if fFlagAXResetAvatarButton then {
 	toastMessage = "Feature.Avatar.Message.OutfitCleared",
 	isLocalized = false,
 	toastType = toastType.SuccessConfirmation
 } else nil
 
 return function()
-	-- upvalues: useNavigation (ref), useDispatch (ref), fFlagAXMigrateBuilderIcons (ref), useTokens (ref), useAvatarSaveContext (ref), fFlagAXResetAvatarButton (ref), useSelectorSignal (ref), var13 (ref), tutilsModule (ref), fFlagAXExtendUndoRedoTracking (ref), useAvatarRoute (ref), signalsReactModule (ref), reactModule (ref), fFlagDynamicHeadsMigration (ref), constantsModule (ref), slotBasedEditorAnalytics (ref), characterHistoryStateChangeButtonActivated (ref), fFlagAXMISEnableMultiShopping (ref), avatarScreen (ref), clearScreens (ref), clearTryOns (ref), setCurrentToastMessage (ref), var15 (ref), menuItemEnumModule (ref), iconName (ref)
-	local var16 = useNavigation()
-	local var17 = useDispatch()
-	local var18 = if fFlagAXMigrateBuilderIcons then useTokens() else nil
-	local var19 = useAvatarSaveContext()
-	local getHistorySignal = var19.getHistorySignal
-	local getCurrentHistoryIndexSignal = var19.getCurrentHistoryIndexSignal
-	local var20 = if fFlagAXResetAvatarButton then useSelectorSignal(var13, tutilsModule.deepEqual) else nil
-	local var21 = if fFlagAXExtendUndoRedoTracking then useAvatarRoute() else nil
-	local var22 = signalsReactModule.useSignalState(getHistorySignal)
-	local var23 = signalsReactModule.useSignalState(getCurrentHistoryIndexSignal)
-	local var24 = if fFlagAXResetAvatarButton then signalsReactModule.useSignalState(var20) else nil
-	local var25 = reactModule.useMemo(function()
-		-- upvalues: var23 (ref), var22 (ref)
-		return if var23 and var22 then var23 == 1 else true
-	end, { var23, var22 })
-	local var26 = reactModule.useMemo(function()
-		-- upvalues: var23 (ref), var22 (ref)
-		return if var23 and var22 then var23 == #var22 else true
-	end, { var23, var22 })
-	local var27 = if fFlagAXResetAvatarButton then reactModule.useMemo(function()
-		-- upvalues: fFlagDynamicHeadsMigration (copy), var24 (ref), constantsModule (copy)
+	-- upvalues: useNavigation (ref), useDispatch (ref), fFlagAXMigrateBuilderIcons (ref), useTokens (ref), useAvatarSaveContext (ref), fFlagAXResetAvatarButton (ref), useSelectorSignal (ref), var1 (ref), tutilsModule (ref), fFlagAXExtendUndoRedoTracking (ref), useAvatarRoute (ref), signalsReactModule (ref), reactModule (ref), fFlagDynamicHeadsMigration (ref), constantsModule (ref), slotBasedEditorAnalytics (ref), characterHistoryStateChangeButtonActivated (ref), fFlagAXMISEnableMultiShopping (ref), avatarScreen (ref), clearScreens (ref), clearTryOns (ref), setCurrentToastMessage (ref), var2 (ref), menuItemEnumModule (ref), iconName (ref)
+	local var3 = useNavigation()
+	local var4 = useDispatch()
+	local var5 = if fFlagAXMigrateBuilderIcons then useTokens() else nil
+	local var6 = useAvatarSaveContext()
+	local getHistorySignal = var6.getHistorySignal
+	local getCurrentHistoryIndexSignal = var6.getCurrentHistoryIndexSignal
+	local var7 = if fFlagAXResetAvatarButton then useSelectorSignal(var1, tutilsModule.deepEqual) else nil
+	local var8 = if fFlagAXExtendUndoRedoTracking then useAvatarRoute() else nil
+	local var9 = signalsReactModule.useSignalState(getHistorySignal)
+	local var10 = signalsReactModule.useSignalState(getCurrentHistoryIndexSignal)
+	local var11 = if fFlagAXResetAvatarButton then signalsReactModule.useSignalState(var7) else nil
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: var10 (ref), var9 (ref)
+		return if var10 and var9 then var10 == 1 else true
+	end, { var10, var9 })
+	local var13 = reactModule.useMemo(function()
+		-- upvalues: var10 (ref), var9 (ref)
+		return if var10 and var9 then var10 == #var9 else true
+	end, { var10, var9 })
+	local var14 = if fFlagAXResetAvatarButton then reactModule.useMemo(function()
+		-- upvalues: fFlagDynamicHeadsMigration (copy), var11 (ref), constantsModule (copy)
 		if fFlagDynamicHeadsMigration then
-			if var24 and var24.tryOn and (var24.tryOn.OutfitTryOn and next(var24.tryOn.OutfitTryOn.TryOnItems) ~= nil) then
+			if var11 and var11.tryOn and (var11.tryOn.OutfitTryOn and next(var11.tryOn.OutfitTryOn.TryOnItems) ~= nil) then
 				return false
-			elseif not var24 or not var24.equipped or not var24.equipped.EquippedAssets then
+			elseif not var11 or not var11.equipped or not var11.equipped.EquippedAssets then
 				return true
 			end
-			for i in var24.equipped.EquippedAssets do
+			for i in var11.equipped.EquippedAssets do
 				if table.find(constantsModule.AssetTypeStringsToKeep, i) == nil then
 					return false
 				end
 			end
 			return true
-		elseif next(var24.tryOn.OutfitTryOn.TryOnItems) ~= nil then
+		elseif next(var11.tryOn.OutfitTryOn.TryOnItems) ~= nil then
 			return false
 		end
-		for i in var24.equipped.EquippedAssets do
+		for i in var11.equipped.EquippedAssets do
 			if table.find(constantsModule.AssetTypeStringsToKeep, i) == nil then
 				return false
 			end
 		end
 		return true
-	end, { var24, var22 }) else nil
-	local var28 = reactModule.useCallback(function(p0)
-		-- upvalues: var19 (ref), var23 (ref), slotBasedEditorAnalytics (copy), fFlagAXExtendUndoRedoTracking (copy), var21 (ref), var17 (ref), characterHistoryStateChangeButtonActivated (copy), fFlagAXMISEnableMultiShopping (copy), var16 (ref), avatarScreen (copy), clearScreens (copy)
-		if var19 then
-			local var30 = var19.updateHistoryIndexAndGetCharacterData(var23 + (if p0 then -1 else 1))
+	end, { var11, var9 }) else nil
+	local var15 = reactModule.useCallback(function(p1)
+		-- upvalues: var6 (ref), var10 (ref), slotBasedEditorAnalytics (copy), fFlagAXExtendUndoRedoTracking (copy), var8 (ref), var4 (ref), characterHistoryStateChangeButtonActivated (copy), fFlagAXMISEnableMultiShopping (copy), var3 (ref), avatarScreen (copy), clearScreens (copy)
+		if var6 then
+			local var16 = var6.updateHistoryIndexAndGetCharacterData(var10 + (if p1 then -1 else 1))
 			
-			if var30 then
-				slotBasedEditorAnalytics.trackUndoRedoClick(p0, if fFlagAXExtendUndoRedoTracking and var21 and var21.opaque then var21.opaque.name else nil)
-				var17(characterHistoryStateChangeButtonActivated({
-					isUndo = p0,
-					equipped = var30.equipped,
-					tryOn = var30.tryOn
+			if var16 then
+				slotBasedEditorAnalytics.trackUndoRedoClick(p1, if fFlagAXExtendUndoRedoTracking and var8 and var8.opaque then var8.opaque.name else nil)
+				var4(characterHistoryStateChangeButtonActivated({
+					isUndo = p1,
+					equipped = var16.equipped,
+					tryOn = var16.tryOn
 				}))
 				
-				if var30.tryOn.OutfitTryOn and var30.tryOn.OutfitTryOn.LookId ~= nil and (var30.tryOn.OutfitTryOn.LookId ~= "" and not fFlagAXMISEnableMultiShopping) then
-					var16.navigate(avatarScreen.LookDetails)
+				if var16.tryOn.OutfitTryOn and var16.tryOn.OutfitTryOn.LookId ~= nil and (var16.tryOn.OutfitTryOn.LookId ~= "" and not fFlagAXMISEnableMultiShopping) then
+					var3.navigate(avatarScreen.LookDetails)
 					
 					return
 				end
-				var16.dispatch(clearScreens({ avatarScreen.LookDetails }))
+				var3.dispatch(clearScreens({ avatarScreen.LookDetails }))
 			end
 		end
 	end, {
-		var17, var19, var23, var16, var21, var22
+		var4, var6, var10, var3, var8, var9
 	})
-	local var29 = if fFlagAXResetAvatarButton then reactModule.useCallback(function()
-		-- upvalues: var20 (ref), slotBasedEditorAnalytics (copy), var21 (ref), constantsModule (copy), var17 (ref), characterHistoryStateChangeButtonActivated (copy), clearTryOns (copy), setCurrentToastMessage (copy), var15 (copy)
-		local var31 = var20(false)
+	local var16 = if fFlagAXResetAvatarButton then reactModule.useCallback(function()
+		-- upvalues: var7 (ref), slotBasedEditorAnalytics (copy), var8 (ref), constantsModule (copy), var4 (ref), characterHistoryStateChangeButtonActivated (copy), clearTryOns (copy), setCurrentToastMessage (copy), var2 (copy)
+		local var17 = var7(false)
 		
-		if var31 then
-			if slotBasedEditorAnalytics.trackAvatarRemoveAllClick and var21 and var21.opaque then
-				slotBasedEditorAnalytics.trackAvatarRemoveAllClick(var21.opaque.name)
+		if var17 then
+			if slotBasedEditorAnalytics.trackAvatarRemoveAllClick and var8 and var8.opaque then
+				slotBasedEditorAnalytics.trackAvatarRemoveAllClick(var8.opaque.name)
 			end
 			local t = {}
 			
 			for i, v in constantsModule.AssetTypeStringsToKeep do
-				t[v] = var31.equipped.EquippedAssets[v]
+				t[v] = var17.equipped.EquippedAssets[v]
 			end
-			var31.equipped.EquippedAssets = t
-			var17(characterHistoryStateChangeButtonActivated(var31))
-			var17(clearTryOns())
-			var17(setCurrentToastMessage(var15))
+			var17.equipped.EquippedAssets = t
+			var4(characterHistoryStateChangeButtonActivated(var17))
+			var4(clearTryOns())
+			var4(setCurrentToastMessage(var2))
 		end
-	end, { var17 }) else nil
+	end, { var4 }) else nil
 	
 	if fFlagAXExtendUndoRedoTracking then
 		reactModule.useEffect(function()
-			-- upvalues: slotBasedEditorAnalytics (copy), var21 (ref), var22 (ref)
-			if slotBasedEditorAnalytics.trackUndoHistoryCount and var21 and (var21.opaque and var22) and #var22 then
-				slotBasedEditorAnalytics.trackUndoHistoryCount(var21.opaque.name, #var22)
+			-- upvalues: slotBasedEditorAnalytics (copy), var8 (ref), var9 (ref)
+			if slotBasedEditorAnalytics.trackUndoHistoryCount and var8 and (var8.opaque and var9) and #var9 then
+				slotBasedEditorAnalytics.trackUndoHistoryCount(var8.opaque.name, #var9)
 			end
-		end, { var22, var21 })
+		end, { var9, var8 })
 	end
 	return {
 		items = reactModule.useMemo(function()
-			-- upvalues: fFlagAXResetAvatarButton (copy), menuItemEnumModule (copy), iconName (copy), var18 (ref), var29 (ref), var27 (ref), fFlagAXMigrateBuilderIcons (copy), var28 (ref), var25 (ref), var26 (ref)
+			-- upvalues: fFlagAXResetAvatarButton (copy), menuItemEnumModule (copy), iconName (copy), var5 (ref), var16 (ref), var14 (ref), fFlagAXMigrateBuilderIcons (copy), var15 (ref), var12 (ref), var13 (ref)
 			return if fFlagAXResetAvatarButton then {
 				{
 					type = "icon",
 					isActive = false,
 					id = menuItemEnumModule.Reset.Reset,
 					icon = iconName.ArrowSpinClockwise,
-					iconSize = var18.Size.Size_500,
+					iconSize = var5.Size.Size_500,
 					onActivated = function()
-						-- upvalues: var29 (copy)
-						var29()
+						-- upvalues: var16 (copy)
+						var16()
 					end,
-					disabled = var27
+					disabled = var14
 				},
 				{
 					type = "icon",
@@ -159,10 +159,10 @@ return function()
 					id = menuItemEnumModule.Undo,
 					icon = if fFlagAXMigrateBuilderIcons then iconName.ArrowCurlToLeft else "icons/actions/edit/undo",
 					onActivated = function()
-						-- upvalues: var28 (copy)
-						var28(true)
+						-- upvalues: var15 (copy)
+						var15(true)
 					end,
-					disabled = var25
+					disabled = var12
 				},
 				{
 					type = "icon",
@@ -170,10 +170,10 @@ return function()
 					id = menuItemEnumModule.Redo,
 					icon = if fFlagAXMigrateBuilderIcons then iconName.ArrowCurlToRight else "icons/actions/edit/redo",
 					onActivated = function()
-						-- upvalues: var28 (copy)
-						var28(false)
+						-- upvalues: var15 (copy)
+						var15(false)
 					end,
-					disabled = var26
+					disabled = var13
 				}
 			} else {
 				{
@@ -182,10 +182,10 @@ return function()
 					id = menuItemEnumModule.Undo,
 					icon = if fFlagAXMigrateBuilderIcons then iconName.ArrowCurlToLeft else "icons/actions/edit/undo",
 					onActivated = function()
-						-- upvalues: var28 (copy)
-						var28(true)
+						-- upvalues: var15 (copy)
+						var15(true)
 					end,
-					disabled = var25
+					disabled = var12
 				},
 				{
 					type = "icon",
@@ -193,18 +193,18 @@ return function()
 					id = menuItemEnumModule.Redo,
 					icon = if fFlagAXMigrateBuilderIcons then iconName.ArrowCurlToRight else "icons/actions/edit/redo",
 					onActivated = function()
-						-- upvalues: var28 (copy)
-						var28(false)
+						-- upvalues: var15 (copy)
+						var15(false)
 					end,
-					disabled = var26
+					disabled = var13
 				}
 			}
 		end, if fFlagAXResetAvatarButton then {
-			var25,
-			var26,
-			var27,
-			var28,
-			var29
-		} else { var25, var26, var28 })
+			var12,
+			var13,
+			var14,
+			var15,
+			var16
+		} else { var12, var13, var15 })
 	}
 end

@@ -3,10 +3,10 @@ local animatedVisibilityContextModule = require(script.Parent.AnimatedVisibility
 
 return function()
 	-- upvalues: reactModule (ref), animatedVisibilityContextModule (ref)
-	local var2 = reactModule.useContext(animatedVisibilityContextModule)
+	local var1 = reactModule.useContext(animatedVisibilityContextModule)
 	
-	if var2 then
-		return var2
+	if var1 then
+		return var1
 	end
 	warn("useAnimatedVisibility must be used within a AnimatedVisibilityProvider")
 	

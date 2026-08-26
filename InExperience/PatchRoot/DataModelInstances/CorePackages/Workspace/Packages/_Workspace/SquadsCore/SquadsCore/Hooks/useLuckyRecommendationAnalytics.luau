@@ -6,40 +6,40 @@ local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
 local getLuckyRecommendationStoreModule = require(squadsCore.Stores.GetLuckyRecommendationStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getLuckyRecommendationStoreModule (ref), reactModule (ref), squadExternalContractContextModule (ref), useLocalUserId (ref), cryoModule (ref)
-	local var5 = getLuckyRecommendationStoreModule(false)
-	local var6 = reactModule.useContext(squadExternalContractContextModule)
-	local var7 = tonumber(useLocalUserId()) or 0
+	local var1 = getLuckyRecommendationStoreModule(false)
+	local var2 = reactModule.useContext(squadExternalContractContextModule)
+	local var3 = tonumber(useLocalUserId()) or 0
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var5 (ref), p0 (ref), var7 (ref), cryoModule (copy), var6 (ref)
+		-- upvalues: var1 (ref), p1 (ref), var3 (ref), cryoModule (copy), var2 (ref)
 		return {
-			fire = function(p1, p2)
-				-- upvalues: var5 (copy), p0 (copy), var7 (copy), cryoModule (copy), var6 (copy)
-				local analyticsContext = var5.getAnalyticsContext()
+			fire = function(p2, p3)
+				-- upvalues: var1 (copy), p1 (copy), var3 (copy), cryoModule (copy), var2 (copy)
+				local analyticsContext = var1.getAnalyticsContext()
 				local t = {
-					luckyRecommendationSessionId = p0,
-					localUserId = var7,
+					luckyRecommendationSessionId = p1,
+					localUserId = var3,
 					pickRequestId = analyticsContext.pickRequestId,
 					revealType = analyticsContext.revealType,
 					clientTimestamp = os.time()
 				}
 				
-				if p2 then
-					t = cryoModule.Dictionary.join(t, p2)
+				if p3 then
+					t = cryoModule.Dictionary.join(t, p3)
 				end
-				var6.fireSquadAnalytics(p1, t)
+				var2.fireSquadAnalytics(p2, t)
 			end,
 			getContext = function()
-				-- upvalues: var5 (copy)
-				return var5.getAnalyticsContext()
+				-- upvalues: var1 (copy)
+				return var1.getAnalyticsContext()
 			end
 		}
 	end, {
-		p0,
-		var7,
-		var5.getAnalyticsContext,
-		var6.fireSquadAnalytics
+		p1,
+		var3,
+		var1.getAnalyticsContext,
+		var2.fireSquadAnalytics
 	})
 end

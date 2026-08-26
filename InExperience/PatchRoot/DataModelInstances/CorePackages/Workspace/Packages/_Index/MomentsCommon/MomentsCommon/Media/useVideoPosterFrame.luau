@@ -2,46 +2,46 @@
 local videoService = game:GetService("VideoService")
 local full = Enum.VideoSampleSize.Full
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), videoService (ref), full (ref)
-	local var2, var3 = reactModule.useState(nil)
+	local var1, var2 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p0 (ref), videoService (copy), full (copy)
-		var3(nil)
+		-- upvalues: var2 (ref), p1 (ref), videoService (copy), full (copy)
+		var2(nil)
 		
-		if p0 == nil then
+		if p1 == nil then
 			return
 		end
-		local var4 = false
+		local var3 = false
 		task.spawn(function()
-			-- upvalues: videoService (copy), p0 (copy), full (copy), var4 (write), var3 (copy)
-			local var5 = nil
+			-- upvalues: videoService (copy), p1 (copy), full (copy), var3 (write), var2 (copy)
+			local var4 = nil
 			local ok, status = pcall(function()
-				-- upvalues: var5 (write), videoService (copy), p0 (copy), full (copy)
-				var5 = videoService:CreateVideoSamplerAsync(p0, { Size = full })
+				-- upvalues: var4 (write), videoService (copy), p1 (copy), full (copy)
+				var4 = videoService:CreateVideoSamplerAsync(p1, { Size = full })
 				
-				return var5:GetSamplesAtTimesAsync({ 0 })
+				return var4:GetSamplesAtTimesAsync({ 0 })
 			end)
 			
-			if var5 ~= nil then
+			if var4 ~= nil then
 				pcall(function()
-					-- upvalues: var5 (write)
-					var5:Destroy()
+					-- upvalues: var4 (write)
+					var4:Destroy()
 				end)
 			end
-			if var4 then return end
-			local var6 = if ok then status[1] else nil
+			if var3 then return end
+			local var5 = if ok then status[1] else nil
 			
-			if var6 ~= nil and var6.Image ~= nil then
-				var3(var6.Image)
+			if var5 ~= nil and var5.Image ~= nil then
+				var2(var5.Image)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var4 (write)
-			var4 = true
+			-- upvalues: var3 (write)
+			var3 = true
 		end
-	end, { p0 })
+	end, { p1 })
 	
-	return var2
+	return var1
 end

@@ -5,7 +5,7 @@ local robloxAppEnumsModule = require(script:FindFirstAncestor("AppCommonLib").Pa
 local deviceOrientationMode = robloxAppEnumsModule.DeviceOrientationMode
 local deviceType = robloxAppEnumsModule.DeviceType
 
-return function(p0)
+return function(p1)
 	-- upvalues: isVRAppBuildModule (ref), deviceType (ref), guiService (ref), userInputService (ref), deviceOrientationMode (ref)
 	if isVRAppBuildModule() then
 		return deviceType.VR
@@ -21,6 +21,6 @@ return function(p0)
 	if none == Enum.Platform.Windows or none == Enum.Platform.OSX or none == Enum.Platform.UWP then
 		return deviceType.Desktop
 	elseif none == Enum.Platform.IOS or none == Enum.Platform.Android then
-		return if p0 == deviceOrientationMode.Landscape then deviceType.Tablet elseif p0 == deviceOrientationMode.Portrait then deviceType.Phone else deviceType.Unknown
+		return if p1 == deviceOrientationMode.Landscape then deviceType.Tablet elseif p1 == deviceOrientationMode.Portrait then deviceType.Phone else deviceType.Unknown
 	end
 end

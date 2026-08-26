@@ -20,18 +20,18 @@ local shareInviteLinkModule = require(shareGame.Components.ShareInviteLink)
 local getGameNameAndDescription = require(corePackagesService.Workspace.Packages.GameDetailRodux).GetGameNameAndDescription
 local backButtonModule = require(shareGame.Components.BackButton)
 local setGameInfoCreatedModule = require(shareGame.Actions.SetGameInfoCreated)
-local var17 = 10
-local var18 = 44
+local var1 = 10
+local var2 = 44
 
 if getFFlagEnableNewInviteMenuModule() then
-	var17 = 16
-	var18 = 52
+	var1 = 16
+	var2 = 52
 end
 local shareGamePageFrame = roactModule.PureComponent:extend("ShareGamePageFrame")
 local errorToasterModule = require(shareGame.Components.ErrorToaster)
 
-function shareGamePageFrame.init(p0)
-	p0.state = { serverType = nil }
+function shareGamePageFrame.init(p1)
+	p1.state = { serverType = nil }
 end
 
 function shareGamePageFrame.shouldShowInviteLink(p1, p2)
@@ -39,42 +39,42 @@ function shareGamePageFrame.shouldShowInviteLink(p1, p2)
 	return p1.props.experienceInviteShareLinkEnabled and p1.state.serverType == constants.STANDARD_SERVER and utilityModule:IsExperienceOlderThanOneWeek(p2)
 end
 
-function shareGamePageFrame.didMount(p3)
+function shareGamePageFrame.didMount(p1)
 	-- upvalues: promiseModule (ref), robloxReplicatedStorageService (ref)
-	p3.props.fetchGameInfo()
+	p1.props.fetchGameInfo()
 	
-	if p3.state.serverType == nil then
+	if p1.state.serverType == nil then
 		promiseModule.try(function()
 			-- upvalues: robloxReplicatedStorageService (copy)
 			return robloxReplicatedStorageService:WaitForChild("GetServerType", 1e999):InvokeServer()
-		end):andThen(function(p4)
-			-- upvalues: p3 (ref)
-			p3:setState({ serverType = p4 })
+		end):andThen(function(p2)
+			-- upvalues: p1 (ref)
+			p1:setState({ serverType = p2 })
 		end)
 	end
 end
 
-function shareGamePageFrame.render(p5)
-	-- upvalues: constantsModule (ref), backButtonModule (ref), var18 (write), roactModule (ref), coreGuiService (ref), errorToasterModule (ref), headerModule (ref), shareInviteLinkModule (ref), conversationListModule (ref), var17 (write)
-	local analytics = p5.props.analytics
-	local deviceLayout = p5.props.deviceLayout
-	local zIndex = p5.props.zIndex
-	local closePage = p5.props.closePage
-	local searchAreaActive = p5.props.searchAreaActive
-	local searchText = p5.props.searchText
-	local var21 = constantsModule.LayoutSpecific[deviceLayout]
-	local HEADER_HEIGHT = var21.HEADER_HEIGHT
-	local var22 = deviceLayout == constantsModule.DeviceLayout.DESKTOP
-	local var23 = if not var22 then backButtonModule.IconType.Arrow else backButtonModule.IconType.None
-	local var24 = not var22
-	local isVisible = p5.props.isVisible
-	local gameInfo = p5:shouldShowInviteLink(p5.props.gameInfo)
-	local var26 = 0
-	local var27 = 0
+function shareGamePageFrame.render(p1)
+	-- upvalues: constantsModule (ref), backButtonModule (ref), var2 (write), roactModule (ref), coreGuiService (ref), errorToasterModule (ref), headerModule (ref), shareInviteLinkModule (ref), conversationListModule (ref), var1 (write)
+	local analytics = p1.props.analytics
+	local deviceLayout = p1.props.deviceLayout
+	local zIndex = p1.props.zIndex
+	local closePage = p1.props.closePage
+	local searchAreaActive = p1.props.searchAreaActive
+	local searchText = p1.props.searchText
+	local var3 = constantsModule.LayoutSpecific[deviceLayout]
+	local HEADER_HEIGHT = var3.HEADER_HEIGHT
+	local var4 = deviceLayout == constantsModule.DeviceLayout.DESKTOP
+	local var5 = if not var4 then backButtonModule.IconType.Arrow else backButtonModule.IconType.None
+	local var6 = not var4
+	local isVisible = p1.props.isVisible
+	local gameInfo = p1:shouldShowInviteLink(p1.props.gameInfo)
+	local var7 = 0
+	local var8 = 0
 	
 	if gameInfo then
-		var26 -= var18
-		var27 = 10
+		var7 -= var2
+		var8 = 10
 	end
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -92,23 +92,23 @@ function shareGamePageFrame.render(p5)
 			zIndex = zIndex,
 			closePage = closePage,
 			searchAreaActive = searchAreaActive,
-			toggleSearchIcon = var24,
-			iconType = var23,
+			toggleSearchIcon = var6,
+			iconType = var5,
 			analytics = analytics
 		}),
 		ShareInviteLink = gameInfo and roactModule.createElement(shareInviteLinkModule, {
 			layoutOrder = 1,
-			position = UDim2.new(0, 0, 0, var27),
+			position = UDim2.new(0, 0, 0, var8),
 			analytics = analytics,
 			deviceLayout = deviceLayout,
-			size = UDim2.new(1, 0, 0, var18),
+			size = UDim2.new(1, 0, 0, var2),
 			zIndex = zIndex
 		}) or nil,
 		ConversationList = roactModule.createElement(conversationListModule, {
 			trigger = "GameMenu",
 			analytics = analytics,
-			size = UDim2.new(1, 0, 1, var21.EXTEND_BOTTOM_SIZE - var17 + var26),
-			topPadding = if gameInfo then var17 + var18 + var27 else var17,
+			size = UDim2.new(1, 0, 1, var3.EXTEND_BOTTOM_SIZE - var1 + var7),
+			topPadding = if gameInfo then var1 + var2 + var8 else var1,
 			layoutOrder = if gameInfo then 2 else 1,
 			zIndex = zIndex,
 			searchText = searchText,
@@ -117,20 +117,20 @@ function shareGamePageFrame.render(p5)
 	})
 end
 
-return roactAppPolicy.connect(function(p9)
+return roactAppPolicy.connect(function(p1)
 	return {
-		experienceInviteShareLinkEnabled = p9.getExperienceInviteShareLinkEnabled()
+		experienceInviteShareLinkEnabled = p1.getExperienceInviteShareLinkEnabled()
 	}
-end)(roactRoduxModule.connect(function(p6)
-	return { gameInfo = p6.GameInfo }
-end, function(p7)
+end)(roactRoduxModule.connect(function(p1)
+	return { gameInfo = p1.GameInfo }
+end, function(p1)
 	-- upvalues: httpRequestModule (ref), httpRbxApiService (ref), getGameNameAndDescription (ref), setGameInfoCreatedModule (ref)
 	return {
 		fetchGameInfo = function()
-			-- upvalues: httpRequestModule (copy), httpRbxApiService (copy), getGameNameAndDescription (copy), p7 (ref), setGameInfoCreatedModule (copy)
-			getGameNameAndDescription(httpRequestModule(httpRbxApiService), game.GameId):andThen(function(p8)
-				-- upvalues: p7 (copy), setGameInfoCreatedModule (copy)
-				p7(setGameInfoCreatedModule(p8.Created))
+			-- upvalues: httpRequestModule (copy), httpRbxApiService (copy), getGameNameAndDescription (copy), p1 (ref), setGameInfoCreatedModule (copy)
+			getGameNameAndDescription(httpRequestModule(httpRbxApiService), game.GameId):andThen(function(p2)
+				-- upvalues: p1 (copy), setGameInfoCreatedModule (copy)
+				p1(setGameInfoCreatedModule(p2.Created))
 			end)
 		end
 	}

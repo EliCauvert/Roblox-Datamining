@@ -5,43 +5,43 @@ local _ = require(dataHydration.DataHydrationTypes)
 local t = {}
 local t_1 = {}
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref), t_1 (ref), createDataCacheModule (ref), createDataResolverModule (ref)
-	local var5 = if p1 then p1.cache else t
-	local var6 = if p1 then p1.resolver else t_1
-	local var7 = createDataCacheModule(var5.ttlSeconds, var5.failedTtlSeconds)
-	local var8 = createDataResolverModule({
+	local var1 = if p2 then p2.cache else t
+	local var2 = if p2 then p2.resolver else t_1
+	local var3 = createDataCacheModule(var1.ttlSeconds, var1.failedTtlSeconds)
+	local var4 = createDataResolverModule({
 		supportsMultiGet = false,
-		cache = var7,
-		fetchFn = function(p2, _)
-			-- upvalues: p0 (ref)
-			return p0(tonumber(p2))
+		cache = var3,
+		fetchFn = function(p3, _)
+			-- upvalues: p1 (ref)
+			return p1(tonumber(p3))
 		end,
-		queueProcessDelaySec = var6.queueProcessDelaySec,
-		requestTimeoutSec = var6.requestTimeoutSec,
-		logError = var6.logError,
-		onClear = var6.onClear
+		queueProcessDelaySec = var2.queueProcessDelaySec,
+		requestTimeoutSec = var2.requestTimeoutSec,
+		logError = var2.logError,
+		onClear = var2.onClear
 	})
 	
 	return {
-		cache = var7,
+		cache = var3,
 		get = function(p3)
-			-- upvalues: var8 (ref)
-			return var8.getCachedItem(tostring(p3))
+			-- upvalues: var4 (ref)
+			return var4.getCachedItem(tostring(p3))
 		end,
-		fetch = function(p4)
-			-- upvalues: var8 (ref)
-			return var8.fetchItem(tostring(p4))
+		fetch = function(p3)
+			-- upvalues: var4 (ref)
+			return var4.fetchItem(tostring(p3))
 		end,
-		getAndFetch = function(p5)
-			-- upvalues: var8 (ref)
-			return var8.getAndFetchItem(tostring(p5))
+		getAndFetch = function(p3)
+			-- upvalues: var4 (ref)
+			return var4.getAndFetchItem(tostring(p3))
 		end,
-		update = function(p6, p7)
-			-- upvalues: var7 (ref)
-			var7.updateItem(tostring(p6), p7)
+		update = function(p3, p4)
+			-- upvalues: var3 (ref)
+			var3.updateItem(tostring(p3), p4)
 		end,
-		clear = var8.clear,
-		dispose = var8.dispose
+		clear = var4.clear,
+		dispose = var4.dispose
 	}
 end

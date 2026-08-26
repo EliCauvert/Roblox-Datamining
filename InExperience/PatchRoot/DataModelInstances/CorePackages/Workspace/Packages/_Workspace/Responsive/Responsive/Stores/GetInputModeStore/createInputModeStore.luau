@@ -4,13 +4,13 @@ local inputModeModule = require(parent.InputMode)
 
 return function()
 	-- upvalues: signalsModule (ref), inputModeModule (ref)
-	local var2, var3 = signalsModule.createSignal(inputModeModule.last())
-	local var4, var5 = signalsModule.createSignal(inputModeModule.preferred())
+	local var1, var2 = signalsModule.createSignal(inputModeModule.last())
+	local var3, var4 = signalsModule.createSignal(inputModeModule.preferred())
 	inputModeModule.connect(function()
-		-- upvalues: var3 (ref), inputModeModule (copy), var5 (ref)
-		var3(inputModeModule.last())
-		var5(inputModeModule.preferred())
+		-- upvalues: var2 (ref), inputModeModule (copy), var4 (ref)
+		var2(inputModeModule.last())
+		var4(inputModeModule.preferred())
 	end)
 	
-	return { getLastInputType = var2, getPreferredInputType = var4 }
+	return { getLastInputType = var1, getPreferredInputType = var3 }
 end

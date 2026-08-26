@@ -9,30 +9,30 @@ local isInputObjectType = definitionModule.isInputObjectType
 local t = {}
 local hasField = nil
 
-function t.UniqueFieldDefinitionNamesRule(p0)
+function t.UniqueFieldDefinitionNamesRule(p1)
 	-- upvalues: map (ref), hasField (write), graphQLError (ref)
-	local schema = p0:getSchema()
-	local var4 = schema and schema:getTypeMap() or map.new()
+	local schema = p1:getSchema()
+	local var1 = schema and schema:getTypeMap() or map.new()
 	local t = {}
 	
-	local function checkFieldUniqueness(_, p1)
-		-- upvalues: t (ref), hasField (copy), var4 (ref), p0 (ref), graphQLError (copy)
-		local value = p1.name.value
+	local function checkFieldUniqueness(_, p2)
+		-- upvalues: t (ref), hasField (copy), var1 (ref), p1 (ref), graphQLError (copy)
+		local value = p2.name.value
 		
 		if not t[value] then
 			t[value] = {}
 		end
-		local var7 = t[value]
+		local var2 = t[value]
 		
-		for i, v in ipairs(p1.fields or {}) do
+		for i, v in ipairs(p2.fields or {}) do
 			local value_1 = v.name.value
 			
-			if hasField(var4:get(value), value_1) then
-				p0:reportError(graphQLError.new(("Field \"%s.%s\" already exists in the schema. It cannot also be defined in this type extension."):format(value, value_1), v.name))
-			elseif var7[value_1] then
-				p0:reportError(graphQLError.new(("Field \"%s.%s\" can only be defined once."):format(value, value_1), { var7[value_1], v.name }))
+			if hasField(var1:get(value), value_1) then
+				p1:reportError(graphQLError.new(("Field \"%s.%s\" already exists in the schema. It cannot also be defined in this type extension."):format(value, value_1), v.name))
+			elseif var2[value_1] then
+				p1:reportError(graphQLError.new(("Field \"%s.%s\" can only be defined once."):format(value, value_1), { var2[value_1], v.name }))
 			else
-				var7[value_1] = v.name
+				var2[value_1] = v.name
 			end
 		end
 		return false

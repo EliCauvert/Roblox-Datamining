@@ -13,8 +13,8 @@ local fFlagLuaAppAddSortDataToSocialCarouselClicks = sharedFlagsModule.FFlagLuaA
 local fFlagSocialCarouselShareQREnabled = sharedFlagsModule.FFlagSocialCarouselShareQREnabled
 local fFlagLuaAppUserSeenCollectionUnifiedFields = sharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 
-local var5 = function(p0)
-	return p0
+local var1 = function(p1)
+	return p1
 end
 
 return {
@@ -27,32 +27,32 @@ return {
 			actionType = if fFlagLuaAppAddSortDataToSocialCarouselClicks then constantsModule.ANALYTICS.ACTION_TYPES.OPEN_PROFILE else nil
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var5,
-			positionInRow = if fFlagLuaAppAddSortDataToSocialCarouselClicks then var5 else nil,
+			absolutePosition = var1,
+			positionInRow = if fFlagLuaAppAddSortDataToSocialCarouselClicks then var1 else nil,
 			recommendationContextType = formatRecommendationContextType,
-			friendId = var5,
-			friendStatus = var5,
-			isRecommendation = var5,
-			recommendationRank = var5,
-			universeId = var5,
-			presence = var5,
-			source = var5,
-			interactionUuid = var5
+			friendId = var1,
+			friendStatus = var1,
+			isRecommendation = var1,
+			recommendationRank = var1,
+			universeId = var1,
+			presence = var1,
+			source = var1,
+			interactionUuid = var1
 		}
 	},
 	[eventNamesModule.UserSeen] = {
 		context = contexts.HomePage,
 		eventType = eventTypes.UserSeen,
 		formatRulesForAdditionalInfo = {
-			userId = var5,
-			presence = var5,
-			absolutePosition = var5,
-			recommendationRank = var5,
-			friendStatus = var5,
+			userId = var1,
+			presence = var1,
+			absolutePosition = var1,
+			recommendationRank = var1,
+			friendStatus = var1,
 			recommendationContextType = formatRecommendationContextType,
-			isRecommendation = var5,
-			source = var5,
-			universeId = var5
+			isRecommendation = var1,
+			source = var1,
+			universeId = var1
 		}
 	},
 	[eventNamesModule.ViewAddFriends] = {
@@ -60,18 +60,18 @@ return {
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = {
 			btn = constantsModule.ANALYTICS.BTN_VALUES.ADD_FRIENDS,
-			absolutePosition = var5,
-			positionInRow = var5,
+			absolutePosition = var1,
+			positionInRow = var1,
 			contentType = constantsModule.ANALYTICS.CONTENT_TYPE,
 			actionType = constantsModule.ANALYTICS.ACTION_TYPES.OPEN_ADD_FRIENDS
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var5,
+			friendCount = var1,
 			recommendationLimit = fIntSocialCarouselShowRecsLimit,
-			recommendationCount = var5,
-			requestCount = var5,
-			source = var5,
-			interactionUuid = var5
+			recommendationCount = var1,
+			requestCount = var1,
+			source = var1,
+			interactionUuid = var1
 		}
 	},
 	[eventNamesModule.ViewAllFriends] = {
@@ -81,22 +81,22 @@ return {
 			btn = constantsModule.ANALYTICS.BTN_VALUES.VIEW_ALL_FRIENDS
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var5,
+			friendCount = var1,
 			recommendationLimit = fIntSocialCarouselShowRecsLimit,
-			recommendationCount = var5,
-			source = var5
+			recommendationCount = var1,
+			source = var1
 		}
 	},
 	[eventNamesModule.FriendsCarouselUILoadingTime] = {
 		context = contexts.HomePage,
 		eventType = eventTypes.LoadingTime,
 		formatRulesForAdditionalInfo = {
-			status = var5,
-			fetch = var5,
-			loadingTime = var5,
-			loadingThreshold = var5,
-			nextPage = var5,
-			source = var5
+			status = var1,
+			fetch = var1,
+			loadingTime = var1,
+			loadingThreshold = var1,
+			nextPage = var1,
+			source = var1
 		},
 		additionalInfo = {}
 	},
@@ -104,37 +104,37 @@ return {
 		context = contexts.HomePage,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = constantsModule.ANALYTICS.BTN_VALUES.START_SQUAD },
-		formatRulesForAdditionalInfo = { absolutePosition = var5, source = var5 }
+		formatRulesForAdditionalInfo = { absolutePosition = var1, source = var1 }
 	},
 	[eventNamesModule.ShareQRPressed] = if fFlagSocialCarouselShareQREnabled then {
 		context = contexts.HomePage,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = constantsModule.ANALYTICS.BTN_VALUES.SHARE_QR },
-		formatRulesForAdditionalInfo = { absolutePosition = var5, source = var5 }
+		formatRulesForAdditionalInfo = { absolutePosition = var1, source = var1 }
 	} else nil,
 	[eventNamesModule.TilesSeenCollection] = {
 		context = contexts.HomePage,
 		eventType = eventTypes.UserSeenCollection,
 		formatRulesForAdditionalInfo = {
-			userId = var5,
-			absolutePosition = var5,
-			presence = var5,
-			recommendationRank = var5,
-			friendStatus = var5,
-			recommendationContextType = var5,
-			isRecommendation = var5,
-			universeId = var5,
-			tileCount = var5,
-			source = var5,
-			sessionEventCount = var5,
-			contentType = if fFlagLuaAppUserSeenCollectionUnifiedFields then var5 else nil,
-			interactionUuid = if fFlagLuaAppUserSeenCollectionUnifiedFields then var5 else nil,
-			collectionId = if fFlagLuaAppUserSeenCollectionUnifiedFields then var5 else nil,
-			collectionPosition = if fFlagLuaAppUserSeenCollectionUnifiedFields then var5 else nil,
-			positionsInRow = if fFlagLuaAppUserSeenCollectionUnifiedFields then var5 else nil,
-			rowNumbers = if fFlagLuaAppUserSeenCollectionUnifiedFields then var5 else nil,
-			feedRowNumbers = if fFlagLuaAppUserSeenCollectionUnifiedFields then var5 else nil,
-			totalNumberOfItems = if fFlagLuaAppUserSeenCollectionUnifiedFields then var5 else nil
+			userId = var1,
+			absolutePosition = var1,
+			presence = var1,
+			recommendationRank = var1,
+			friendStatus = var1,
+			recommendationContextType = var1,
+			isRecommendation = var1,
+			universeId = var1,
+			tileCount = var1,
+			source = var1,
+			sessionEventCount = var1,
+			contentType = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
+			interactionUuid = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
+			collectionId = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
+			collectionPosition = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
+			positionsInRow = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
+			rowNumbers = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
+			feedRowNumbers = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil,
+			totalNumberOfItems = if fFlagLuaAppUserSeenCollectionUnifiedFields then var1 else nil
 		}
 	}
 }

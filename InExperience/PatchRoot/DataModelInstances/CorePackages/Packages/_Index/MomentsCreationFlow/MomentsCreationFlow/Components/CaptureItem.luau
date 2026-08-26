@@ -12,20 +12,20 @@ local getFormatTime = momentsCommonModule.Utils.getFormatTime
 local useCallback = reactModule.useCallback
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useCallback (ref), reactModule (ref), view (ref), foundationModule (ref), gradientBackdrop (ref), checkbox (ref), text (ref), getFormatTime (ref), getContentFromCaptureModule (ref)
-	local var5 = useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.onActivated(p0.capture)
-	end, { p0.capture, p0.onActivated })
+	local var1 = useCallback(function()
+		-- upvalues: p1 (ref)
+		p1.onActivated(p1.capture)
+	end, { p1.capture, p1.onActivated })
 	
 	return reactModule.createElement(view, {
 		tag = "size-full",
-		onActivated = var5,
+		onActivated = var1,
 		stateLayer = {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		},
-		ZIndex = p0.zIndex
+		ZIndex = p1.zIndex
 	}, {
 		GradientBackdrop = reactModule.createElement(gradientBackdrop, {
 			rotation = 270,
@@ -37,22 +37,22 @@ return function(p0)
 			size = UDim2.fromScale(1, 1)
 		}),
 		Overlay = reactModule.createElement(view, { tag = "padding-medium size-full", ZIndex = 3 }, {
-			SelectedIndicator = if p0.selected then reactModule.createElement(checkbox, {
+			SelectedIndicator = if p1.selected then reactModule.createElement(checkbox, {
 				isChecked = true,
 				AnchorPoint = Vector2.new(1, 0),
-				onActivated = var5,
+				onActivated = var1,
 				Position = UDim2.fromScale(1, 0),
 				size = foundationModule.Enums.InputSize.Small
 			}) else nil,
-			TimeLength = if p0.capture.CaptureType == Enum.CaptureType.Video then reactModule.createElement(text, {
+			TimeLength = if p1.capture.CaptureType == Enum.CaptureType.Video then reactModule.createElement(text, {
 				tag = "anchor-bottom-right auto-xy content-emphasis position-bottom-right text-label-medium",
-				Text = getFormatTime(p0.capture.TimeLength)
+				Text = getFormatTime(p1.capture.TimeLength)
 			}) else nil
 		}),
 		CaptureThumbnail = reactModule.createElement("ImageLabel", {
 			BorderSizePixel = 0,
 			ZIndex = 1,
-			ImageContent = getContentFromCaptureModule(p0.capture),
+			ImageContent = getContentFromCaptureModule(p1.capture),
 			ScaleType = Enum.ScaleType.Crop,
 			Size = UDim2.fromScale(1, 1)
 		})

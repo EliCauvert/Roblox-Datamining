@@ -3,14 +3,14 @@ local createScheduledSquadModule = require(squadsCore.NetworkRequests.createSche
 local squadPromptTypeModule = require(squadsCore.Enums.SquadPromptType)
 local _ = require(squadsCore.Types)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: squadPromptTypeModule (ref), createScheduledSquadModule (ref)
-	return function(p3)
-		-- upvalues: p1 (ref), squadPromptTypeModule (copy), createScheduledSquadModule (copy), p0 (ref), p2 (ref)
-		createScheduledSquadModule(p0, p2, function(p4)
-			-- upvalues: p1 (copy), p3 (ref), squadPromptTypeModule (copy)
-			p1(p3, {
-				promptType = if p4 == 409 then squadPromptTypeModule.ScheduledSquadConflict else squadPromptTypeModule.Error
+	return function(p4)
+		-- upvalues: p2 (ref), squadPromptTypeModule (copy), createScheduledSquadModule (copy), p1 (ref), p3 (ref)
+		createScheduledSquadModule(p1, p3, function(p5)
+			-- upvalues: p2 (copy), p4 (ref), squadPromptTypeModule (copy)
+			p2(p4, {
+				promptType = if p5 == 409 then squadPromptTypeModule.ScheduledSquadConflict else squadPromptTypeModule.Error
 			})
 		end)
 	end

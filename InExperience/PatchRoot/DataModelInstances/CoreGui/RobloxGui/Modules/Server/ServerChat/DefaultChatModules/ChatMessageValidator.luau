@@ -13,11 +13,11 @@ if t == nil then
 	t = {}
 end
 if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p0)
-		return p0
+	function t.FormatMessageToSend(_, _, p1)
+		return p1
 	end
 end
-local var6 = if chatSettingsModule.DisallowedWhiteSpace then chatSettingsModule.DisallowedWhiteSpace else {
+local var1 = if chatSettingsModule.DisallowedWhiteSpace then chatSettingsModule.DisallowedWhiteSpace else {
 	"\n",
 	"\r",
 	"\t",
@@ -30,54 +30,54 @@ local function isMessageValidServer(p1)
 	return if chatSettingsModule.MaximumMessageLength * 6 < p1:len() then false elseif utf8.len(p1) == nil then false else chatSettingsModule.MaximumMessageLength >= utf8.len(utf8.nfcnormalize(p1))
 end
 
-local function _(p2)
+local function _(p1)
 	-- upvalues: runService (ref), chatService (ref)
 	if runService:IsStudio() then
 		return true
 	end
 	local ok, status = pcall(function()
-		-- upvalues: chatService (copy), p2 (ref)
-		return chatService:CanUserChatAsync(p2.UserId)
+		-- upvalues: chatService (copy), p1 (ref)
+		return chatService:CanUserChatAsync(p1.UserId)
 	end)
 	
 	return ok and status
 end
 
-return function(p3)
-	-- upvalues: runService (ref), chatService (ref), t (write), isMessageValidServer (ref), var6 (write), chatConstantsModule (ref)
-	p3:RegisterProcessCommandsFunction("message_validation", function(p4, p5, p6)
-		-- upvalues: p3 (ref), runService (copy), chatService (copy), t (copy), isMessageValidServer (copy), var6 (copy)
-		local var10
-		local var8 = p3:GetSpeaker(p4)
-		local player = var8:GetPlayer()
+return function(p1)
+	-- upvalues: runService (ref), chatService (ref), t (write), isMessageValidServer (ref), var1 (write), chatConstantsModule (ref)
+	p1:RegisterProcessCommandsFunction("message_validation", function(p2, p3, p4)
+		-- upvalues: p1 (ref), runService (copy), chatService (copy), t (copy), isMessageValidServer (copy), var1 (copy)
+		local var2
+		local var3 = p1:GetSpeaker(p2)
+		local player = var3:GetPlayer()
 		
-		if not var8 then
+		if not var3 then
 			return false
 		elseif not player then
 			return false
 		elseif not runService:IsStudio() and player.UserId < 1 then
 			return true
 		elseif runService:IsStudio() then
-			var10 = true
+			var2 = true
 		else
 			local ok, status = pcall(function()
 				-- upvalues: chatService (copy), player (ref)
 				return chatService:CanUserChatAsync(player.UserId)
 			end)
-			var10 = ok and status
+			var2 = ok and status
 		end
-		if not var10 then
-			var8:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMessageValidator_SettingsError", "Your chat settings prevent you from sending messages."), p6)
+		if not var2 then
+			var3:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMessageValidator_SettingsError", "Your chat settings prevent you from sending messages."), p4)
 			
 			return true
-		elseif not isMessageValidServer(p5) then
-			var8:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMessageValidator_MaxLengthError", "Your message exceeds the maximum message length."), p6)
+		elseif not isMessageValidServer(p3) then
+			var3:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMessageValidator_MaxLengthError", "Your message exceeds the maximum message length."), p4)
 			
 			return true
 		end
-		for i, v in pairs(var6) do
-			if p5:find(v) then
-				var8:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMessageValidator_WhitespaceError", "Your message contains whitespace that is not allowed."), p6)
+		for i, v in pairs(var1) do
+			if p3:find(v) then
+				var3:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMessageValidator_WhitespaceError", "Your message contains whitespace that is not allowed."), p4)
 				
 				return true
 			end

@@ -22,9 +22,9 @@ end
 local reportPage = roact.PureComponent:extend("ReportPage")
 reportPage.validateProps = t.strictInterface({ pageTitle = t.string })
 
-function reportPage.init(p0)
+function reportPage.init(p1)
 	-- upvalues: getReportablePlayers (ref)
-	p0:setState({ players = getReportablePlayers() })
+	p1:setState({ players = getReportablePlayers() })
 end
 
 function reportPage.render(p1)

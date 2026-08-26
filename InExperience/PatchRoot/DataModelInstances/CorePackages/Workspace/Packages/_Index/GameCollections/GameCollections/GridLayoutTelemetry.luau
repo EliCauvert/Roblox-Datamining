@@ -20,39 +20,39 @@ local t_1 = {
 }
 
 return {
-	logTileSkipped = function(p0, p1, p2, p3, p4, p5, p6, p7, p8)
+	logTileSkipped = function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 		-- upvalues: luaAppNullableGridLayoutTelemetryFields (ref), telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogEvent(t, {
 			standardizedFields = list,
 			customFields = {
-				adId = if luaAppNullableGridLayoutTelemetryFields then p0 else p0 or "",
-				universeId = if luaAppNullableGridLayoutTelemetryFields then p1 else p1 or "",
-				tileType = p2,
-				pageContext = p3,
-				numColumns = p4,
-				numRows = p5,
-				originalFeedIndex = p6,
-				sortIndex = if luaAppNullableGridLayoutTelemetryFields then p7 else p7 or -1,
-				topicId = if luaAppNullableGridLayoutTelemetryFields then p8 else p8 or ""
+				adId = if luaAppNullableGridLayoutTelemetryFields then p1 else p1 or "",
+				universeId = if luaAppNullableGridLayoutTelemetryFields then p2 else p2 or "",
+				tileType = p3,
+				pageContext = p4,
+				numColumns = p5,
+				numRows = p6,
+				originalFeedIndex = p7,
+				sortIndex = if luaAppNullableGridLayoutTelemetryFields then p8 else p8 or -1,
+				topicId = if luaAppNullableGridLayoutTelemetryFields then p9 else p9 or ""
 			}
 		})
 	end,
-	logTilePlaced = function(p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19)
+	logTilePlaced = function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
 		-- upvalues: luaAppNullableGridLayoutTelemetryFields (ref), fFlagLuaAppFixTotalColsBound (ref), telemetryService (ref), t_1 (ref), list (ref)
 		telemetryService:LogEvent(t_1, {
 			standardizedFields = list,
 			customFields = {
-				adId = if luaAppNullableGridLayoutTelemetryFields then p9 else p9 or "",
-				universeId = if luaAppNullableGridLayoutTelemetryFields then p10 else p10 or "",
-				tileType = p11,
-				pageContext = p12,
-				numColumns = p13,
-				numRows = p14,
-				originalFeedIndex = p15,
-				finalFeedIndex = p16,
-				sortIndex = p17,
-				topicId = p18,
-				totalFilledColumns = if fFlagLuaAppFixTotalColsBound then p19 else nil
+				adId = if luaAppNullableGridLayoutTelemetryFields then p1 else p1 or "",
+				universeId = if luaAppNullableGridLayoutTelemetryFields then p2 else p2 or "",
+				tileType = p3,
+				pageContext = p4,
+				numColumns = p5,
+				numRows = p6,
+				originalFeedIndex = p7,
+				finalFeedIndex = p8,
+				sortIndex = p9,
+				topicId = p10,
+				totalFilledColumns = if fFlagLuaAppFixTotalColsBound then p11 else nil
 			}
 		})
 	end

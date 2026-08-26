@@ -1,23 +1,23 @@
 ﻿local marketplaceService = game:GetService("MarketplaceService")
 local setGameProductInfoModule = require(script:FindFirstAncestor("ExperienceLoadingScript").Actions.SetGameProductInfo)
 
-return function(p0)
+return function(p1)
 	-- upvalues: marketplaceService (ref), setGameProductInfoModule (ref)
-	return function(p1)
-		-- upvalues: p0 (ref), marketplaceService (copy), setGameProductInfoModule (copy)
+	return function(p2)
+		-- upvalues: p1 (ref), marketplaceService (copy), setGameProductInfoModule (copy)
 		coroutine.wrap(function()
-			-- upvalues: p0 (copy), marketplaceService (copy), p1 (ref), setGameProductInfoModule (copy)
-			local var2 = p0
+			-- upvalues: p1 (copy), marketplaceService (copy), p2 (ref), setGameProductInfoModule (copy)
+			local var1 = p1
 			
-			if not var2 or var2 <= 0 then
+			if not var1 or var1 <= 0 then
 				while game.PlaceId <= 0 do
 					wait()
 				end
-				var2 = game.PlaceId
+				var1 = game.PlaceId
 			end
 			local ok, status = pcall(function()
-				-- upvalues: marketplaceService (copy), var2 (write), p1 (copy), setGameProductInfoModule (copy)
-				p1:dispatch(setGameProductInfoModule(marketplaceService:GetProductInfoAsync(var2)))
+				-- upvalues: marketplaceService (copy), var1 (write), p2 (copy), setGameProductInfoModule (copy)
+				p2:dispatch(setGameProductInfoModule(marketplaceService:GetProductInfoAsync(var1)))
 			end)
 			
 			if not ok then

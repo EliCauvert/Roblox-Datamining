@@ -4,14 +4,14 @@ local queriesModule = require(userProfiles.Common.Queries)
 local cryoModule = require(parent.Cryo)
 local _ = require(parent.ApolloClient)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: queriesModule (ref), cryoModule (ref)
-	local var3 = if p2 and p2.query then p2.query else queriesModule.userProfilesAllNamesByUserIds
+	local var1 = if p3 and p3.query then p3.query else queriesModule.userProfilesAllNamesByUserIds
 	
-	for i, v in p1 do
-		p0:writeQuery({
+	for i, v in p2 do
+		p1:writeQuery({
 			variables = { userIds = i },
-			query = var3,
+			query = var1,
 			data = {
 				userProfiles = {
 					{

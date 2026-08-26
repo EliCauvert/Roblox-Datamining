@@ -7,25 +7,25 @@ local chatInterventionGenericToastModule = require(inExperienceIntervention.Comp
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local determineToastDuration = require(parent.InterventionShared).Utils.determineToastDuration
 
-function ChatTimeoutToast(p0)
+function ChatTimeoutToast(p1)
 	-- upvalues: reactModule (ref), useLocalization (ref), constants (ref), determineToastDuration (ref), chatInterventionGenericToastModule (ref), inExperienceInterventionAnalyticsModule (ref)
-	local var4, var5 = reactModule.useState(0)
-	local var6 = useLocalization({
+	local var1, var2 = reactModule.useState(0)
+	local var3 = useLocalization({
 		cannotSend1MinText = constants.localizationKeys.CannotSend1MinText,
 		beRespectfulText = constants.localizationKeys.BeRespectfulText
 	})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var5 (ref)
-		if p0.endTime then
-			var5(math.ceil((p0.endTime - DateTime.now().UnixTimestamp) / 60))
+		-- upvalues: p1 (ref), var2 (ref)
+		if p1.endTime then
+			var2(math.ceil((p1.endTime - DateTime.now().UnixTimestamp) / 60))
 		end
-	end, { p0.endTime, p0.dispatchTimestamp })
+	end, { p1.endTime, p1.dispatchTimestamp })
 	
 	return reactModule.createElement(chatInterventionGenericToastModule, {
-		toastTitle = determineToastDuration(var4),
-		toastBody = var6.beRespectfulText,
+		toastTitle = determineToastDuration(var1),
+		toastBody = var3.beRespectfulText,
 		interventionType = inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout,
-		remainingDurationSec = var4,
+		remainingDurationSec = var1,
 		toastAppearEventName = inExperienceInterventionAnalyticsModule.Constants.EventTypes.ChatAttemptToastAppeared,
 		toastDismissEventName = inExperienceInterventionAnalyticsModule.Constants.EventTypes.ChatAttemptToastDismissed
 	})

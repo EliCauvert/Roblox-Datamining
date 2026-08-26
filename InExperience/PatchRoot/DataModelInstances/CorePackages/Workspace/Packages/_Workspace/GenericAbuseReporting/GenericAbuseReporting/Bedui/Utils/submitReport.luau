@@ -3,14 +3,14 @@ local httpService = game:GetService("HttpService")
 local url = require(parent.Http).Url
 local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: fFlagAddThumbnailSelectorReport (ref), httpService (ref), url (ref)
-	if fFlagAddThumbnailSelectorReport and p1 == nil then
-		p1 = {}
+	if fFlagAddThumbnailSelectorReport and p2 == nil then
+		p2 = {}
 	end
 	local t = { tags = {} }
 	
-	for i, v in p1 do
+	for i, v in p2 do
 		local v
 		if typeof(v) ~= "table" then
 			v = if fFlagAddThumbnailSelectorReport then tostring(v):split(",") else { tostring(v) }
@@ -30,5 +30,5 @@ return function(p0, p1)
 	if not ok then
 		warn("Failed to encode report data")
 	end
-	return p0(url.APIS_URL .. "abuse-reporting/v2/abuse-report", "POST", { postBody = status })
+	return p1(url.APIS_URL .. "abuse-reporting/v2/abuse-report", "POST", { postBody = status })
 end

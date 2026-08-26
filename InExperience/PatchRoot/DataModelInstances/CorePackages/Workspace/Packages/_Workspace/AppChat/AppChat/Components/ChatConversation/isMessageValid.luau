@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	return if p1 < #p0 then false else p0:match("^%s*$")
+﻿return function(p1, p2)
+	return if p2 < #p1 then false else p1:match("^%s*$")
 end

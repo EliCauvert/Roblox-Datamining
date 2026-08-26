@@ -20,9 +20,9 @@ local contactsImporterOverlayContainer = roact.PureComponent:extend("ContactsImp
 contactsImporterOverlayContainer.defaultProps = {
 	localUserId = "",
 	handleShowToastForTests = nil,
-	checkOrRequestPermissions = function(p0)
+	checkOrRequestPermissions = function(p1)
 		-- upvalues: permissionsProtocol (ref)
-		return permissionsProtocol.default:checkOrRequestPermissions(p0)
+		return permissionsProtocol.default:checkOrRequestPermissions(p1)
 	end
 }
 
@@ -87,9 +87,9 @@ function contactsImporterOverlayContainer.init(p1)
 		end):catch(p1.failedToUpload)
 	end
 	
-	function p1.checkDiscoverability(p3)
+	function p1.checkDiscoverability(p2)
 		-- upvalues: p1 (ref), constantsModule (copy)
-		return p3 and p1.props.navigation.getParam(constantsModule.IS_PHONE_VERIFIED)
+		return p2 and p1.props.navigation.getParam(constantsModule.IS_PHONE_VERIFIED)
 	end
 	
 	function p1.onConnectContacts()
@@ -135,34 +135,34 @@ function contactsImporterOverlayContainer.init(p1)
 	end
 end
 
-function contactsImporterOverlayContainer.didMount(p4)
+function contactsImporterOverlayContainer.didMount(p1)
 	-- upvalues: analyticsModule (ref), contactImporterModalInfoUpdaterModule (ref), appStorageService (ref)
-	p4.fireAnalyticsEvent(analyticsModule.EventNames.ContactImportModalPageLoad)
-	contactImporterModalInfoUpdaterModule:addSeenCount(appStorageService, p4.props.localUserId)
-	contactImporterModalInfoUpdaterModule:updateTimestamp(appStorageService, p4.props.localUserId, DateTime.now().UnixTimestampMillis)
+	p1.fireAnalyticsEvent(analyticsModule.EventNames.ContactImportModalPageLoad)
+	contactImporterModalInfoUpdaterModule:addSeenCount(appStorageService, p1.props.localUserId)
+	contactImporterModalInfoUpdaterModule:updateTimestamp(appStorageService, p1.props.localUserId, DateTime.now().UnixTimestampMillis)
 end
 
-function contactsImporterOverlayContainer.render(p5)
+function contactsImporterOverlayContainer.render(p1)
 	-- upvalues: constantsModule (ref), roact (ref), contactsImporterOverlayModule (ref)
-	local props = p5.props
+	local props = p1.props
 	local navigation = props.navigation
 	
 	return roact.createElement(contactsImporterOverlayModule, {
 		screenSize = props.screenSize,
-		onCloseClicked = p5.onCloseClicked,
-		onAddFriendsActivated = p5.onAddFriendsActivated,
-		onConnectContacts = p5.onConnectContacts,
-		onLearnMoreClick = p5.onLearnMoreClick,
+		onCloseClicked = p1.onCloseClicked,
+		onAddFriendsActivated = p1.onAddFriendsActivated,
+		onConnectContacts = p1.onConnectContacts,
+		onLearnMoreClick = p1.onLearnMoreClick,
 		isFromAddFriendsPage = navigation.getParam(constantsModule.IS_FROM_ADD_FRIENDS_PAGE, false),
-		isFromSignup = if navigation.getParam(constantsModule.IS_FROM_SOCIAL_ONBOARDING_BUTTONS) then true else p5.props.navigation.getParam(constantsModule.IS_FROM_SIGNUP)
+		isFromSignup = if navigation.getParam(constantsModule.IS_FROM_SOCIAL_ONBOARDING_BUTTONS) then true else p1.props.navigation.getParam(constantsModule.IS_FROM_SIGNUP)
 	})
 end
 
-return roactRodux.connect(function(p6)
+return roactRodux.connect(function(p1)
 	-- upvalues: selectors (ref)
 	return {
-		contacts = selectors.sortContacts(p6),
-		localUserId = p6.LocalUserId,
-		screenSize = p6.ScreenSize
+		contacts = selectors.sortContacts(p1),
+		localUserId = p1.LocalUserId,
+		screenSize = p1.ScreenSize
 	}
 end, mapDispatchToPropsModule)(contactsImporterOverlayContainer)

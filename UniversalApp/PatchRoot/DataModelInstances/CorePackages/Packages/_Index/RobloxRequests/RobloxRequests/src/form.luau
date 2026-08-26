@@ -5,13 +5,13 @@ local httpService = game:GetService("HttpService")
 local mimetypesModule = require(lib.mimetypes)
 local b64Module = require(lib.b64)
 
-local function randomString(p0)
-	local var6 = ""
+local function randomString(p1)
+	local var1 = ""
 	
-	for _ = 1, p0 do
-		var6 ..= string.char(math.random(97, 122))
+	for _ = 1, p1 do
+		var1 ..= string.char(math.random(97, 122))
 	end
-	return var6
+	return var1
 end
 
 local t = {}
@@ -34,8 +34,8 @@ function t.new(...)
 		unknown.content_type = list[3]
 	end
 	if not unknown.content_type then
-		local var9 = unknown.name:split(".")
-		unknown.content_type = mimetypesModule[var9[#var9]:lower()] or "text/plain"
+		local var2 = unknown.name:split(".")
+		unknown.content_type = mimetypesModule[var2[#var2]:lower()] or "text/plain"
 	end
 	if type(unknown.content) ~= "string" then
 		error(("[http] Invalid file content for file %s"):format(unknown.name))
@@ -50,31 +50,31 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p1)
+function t_1.new(p2)
 	-- upvalues: t_1 (ref), randomString (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.__FormData = true
-	p1 = p1 or {}
+	p2 = p2 or {}
 	tbl.boundary = "--FormBoundary-" .. randomString(28)
 	tbl.content_type = "application/x-www-form-urlencoded"
 	tbl.fields = {}
 	
-	for i, v in pairs(p1) do
+	for i, v in pairs(p2) do
 		tbl:AddField(i, v)
 	end
 	return tbl
 end
 
-function t_1:AddField(p2, p3)
-	if p3.__IsFile then
+function t_1:AddField(p3, p4)
+	if p4.__IsFile then
 		self.content_type = "multipart/form-data; boundary=\"" .. self.boundary .. "\""
 	end
-	table.insert(self.fields, { Name = p2, Value = p3 })
+	table.insert(self.fields, { Name = p3, Value = p4 })
 end
 
 function t_1:build()
 	-- upvalues: httpService (ref), b64Module (ref)
-	local var12 = ""
+	local var2 = ""
 	
 	if self.content_type == "application/x-www-form-urlencoded" then
 		for i, v in ipairs(self.fields) do
@@ -86,34 +86,34 @@ function t_1:build()
 			end
 			if type(v.Value) == "table" then
 				for i_1, v_1 in ipairs(v.Value) do
-					if #var12 > 0 then
-						var12 ..= "&"
+					if #var2 > 0 then
+						var2 ..= "&"
 					end
-					var12 ..= v.Name .. "=" .. httpService:UrlEncode(v_1)
+					var2 ..= v.Name .. "=" .. httpService:UrlEncode(v_1)
 				end
-			elseif #var12 > 0 then
-				var12 ..= "&"
+			elseif #var2 > 0 then
+				var2 ..= "&"
 			end
-			var12 ..= v.Name .. "=" .. httpService:UrlEncode(v.Value)
+			var2 ..= v.Name .. "=" .. httpService:UrlEncode(v.Value)
 		end
-		return var12
+		return var2
 	else
 		for i, v in pairs(self.fields) do
 			local value = v.Value
-			var12 = (var12 .. "--" .. self.boundary .. "\r\n") .. ("Content-Disposition: form-data; name=\"%s\""):format(v.Name)
+			var2 = (var2 .. "--" .. self.boundary .. "\r\n") .. ("Content-Disposition: form-data; name=\"%s\""):format(v.Name)
 			
 			if v.Value.__IsFile then
 				value = v.Value.content
-				var12 = (var12 .. ("; filename=\"%s\""):format(v.Value.name)) .. "\r\nContent-Type: " .. v.Value.content_type
+				var2 = (var2 .. ("; filename=\"%s\""):format(v.Value.name)) .. "\r\nContent-Type: " .. v.Value.content_type
 				
 				if v.Value.content_type:sub(1, 5) ~= "text/" then
 					value = b64Module.encode(value)
-					var12 ..= "\r\nContent-Transfer-Encoding: base64"
+					var2 ..= "\r\nContent-Transfer-Encoding: base64"
 				end
 			end
-			var12 ..= "\r\n\r\n" .. value .. "\r\n"
+			var2 ..= "\r\n\r\n" .. value .. "\r\n"
 		end
-		return var12 .. "--" .. self.boundary .. "--"
+		return var2 .. "--" .. self.boundary .. "--"
 	end
 end
 

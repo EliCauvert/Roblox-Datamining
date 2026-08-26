@@ -21,9 +21,9 @@ return {
 	name = "CapturesInExperience",
 	storyRoot = parent,
 	roact = roactModule,
-	mapDefinition = function(p0)
+	mapDefinition = function(p1)
 		-- upvalues: dashModule (ref), t_1 (ref)
-		return dashModule.join(p0, { controls = dashModule.join(t_1, p0.controls) })
+		return dashModule.join(p1, { controls = dashModule.join(t_1, p1.controls) })
 	end,
 	mapStory = function(p1)
 		-- upvalues: roactModule (ref), capturesContextModule (ref), dashModule (ref), appStyleProvider (ref), t (ref), mockLocale (ref)

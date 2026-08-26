@@ -21,13 +21,13 @@ avatarCircle.defaultProps = {
 	overlaySize = avatarCircle.PresetSize.Size48x48
 }
 
-local function createAlignedContainerElement(p0)
+local function createAlignedContainerElement(p1)
 	-- upvalues: roact (ref)
 	return {
 		layout = roact.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			HorizontalAlignment = p0,
+			HorizontalAlignment = p1,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
@@ -36,10 +36,10 @@ end
 function avatarCircle.generateThumbnails(p1, p2)
 	-- upvalues: roact (ref), imageSetLabel (ref), createAlignedContainerElement (ref)
 	local p2Count = #p2
-	local var5 = p2Count / 2
-	local var6 = if p2Count % 2 == 0 then var5 else math.floor(var5)
-	local var7 = p2Count - var6
-	local var8 = if p2Count == 1 then if p1.props.showNewPresenceImage then roact.createElement(imageSetLabel, {
+	local var1 = p2Count / 2
+	local var2 = if p2Count % 2 == 0 then var1 else math.floor(var1)
+	local var3 = p2Count - var2
+	local var4 = if p2Count == 1 then if p1.props.showNewPresenceImage then roact.createElement(imageSetLabel, {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, p1.props.presenceIndicatorSize, 0, p1.props.presenceIndicatorSize),
 		Image = p1.props.presenceImage,
@@ -50,30 +50,30 @@ function avatarCircle.generateThumbnails(p1, p2)
 		Size = UDim2.new(0, p1.props.presenceIndicatorSize, 0, p1.props.presenceIndicatorSize),
 		Image = p1.props.presenceImage
 	}) else nil
-	local var9 = createAlignedContainerElement(Enum.HorizontalAlignment.Right)
-	local var10 = createAlignedContainerElement(Enum.HorizontalAlignment.Left)
-	local var11 = createAlignedContainerElement(Enum.HorizontalAlignment.Center)
+	local var5 = createAlignedContainerElement(Enum.HorizontalAlignment.Right)
+	local var6 = createAlignedContainerElement(Enum.HorizontalAlignment.Left)
+	local var7 = createAlignedContainerElement(Enum.HorizontalAlignment.Center)
 	
 	for i, v in ipairs(p2) do
-		local uDim2, var15
+		local uDim2, var8
 		local _ = nil
-		local var12 = 0
+		local var9 = 0
 		local _ = nil
 		local frame = nil
 		
 		if p2Count == 1 then
 			uDim2 = UDim2.new(1, 0, 1, 0)
-			var15 = var11
-			var15["thumbnail-" .. tostring(i + 1)] = roact.createElement("Frame", {
+			var8 = var7
+			var8["thumbnail-" .. tostring(i + 1)] = roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				ClipsDescendants = true,
 				Size = uDim2,
-				LayoutOrder = #var15 + 1
+				LayoutOrder = #var8 + 1
 			}, {
 				headshotContainer = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 1, 0),
-					Position = UDim2.new(var12, 0, 0, 0)
+					Position = UDim2.new(var9, 0, 0, 0)
 				}, {
 					headshot = roact.createElement("ImageLabel", {
 						BackgroundTransparency = 1,
@@ -84,14 +84,14 @@ function avatarCircle.generateThumbnails(p1, p2)
 				borderObject = frame
 			})
 		end
-		if i <= var6 then
-			uDim2 = UDim2.new(1 / var6, 0, 1 / var6, 0)
-			var15 = var9
+		if i <= var2 then
+			uDim2 = UDim2.new(1 / var2, 0, 1 / var2, 0)
+			var8 = var5
 			
 			if p2Count == 3 then
-				var12 = 0.125
+				var9 = 0.125
 			elseif p2Count == 2 then
-				var12 = 0.125
+				var9 = 0.125
 			end
 			frame = roact.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -114,11 +114,11 @@ function avatarCircle.generateThumbnails(p1, p2)
 				})
 			})
 		else
-			uDim2 = UDim2.new(1 / var7, 0, 1 / var7, 0)
-			var15 = var10
+			uDim2 = UDim2.new(1 / var3, 0, 1 / var3, 0)
+			var8 = var6
 			
 			if p2Count == 2 then
-				var12 = -0.125
+				var9 = -0.125
 			end
 			frame = roact.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -143,10 +143,10 @@ function avatarCircle.generateThumbnails(p1, p2)
 		end
 	end
 	return {
-		rightElements = var10,
-		leftElements = var9,
-		centerElements = var11,
-		presenceIndicator = var8
+		rightElements = var6,
+		leftElements = var5,
+		centerElements = var7,
+		presenceIndicator = var4
 	}
 end
 

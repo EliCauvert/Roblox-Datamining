@@ -18,9 +18,9 @@ return {
 	name = "DiscoverabilityModal",
 	storyRoot = discoverabilityModal,
 	roact = roact,
-	mapDefinition = function(p0)
+	mapDefinition = function(p1)
 		-- upvalues: dash (ref), t_1 (ref)
-		return dash.join(p0, { controls = dash.join(t_1, p0.controls or {}) })
+		return dash.join(p1, { controls = dash.join(t_1, p1.controls or {}) })
 	end,
 	mapStory = function(p1)
 		-- upvalues: roact (ref), appStyleProvider (ref), t (ref), mockLocale (ref)

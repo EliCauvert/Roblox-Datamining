@@ -12,20 +12,20 @@ return {
 	field_type = settingsServiceModule.SettingEnum.Toggle,
 	onChanged = (function()
 		-- upvalues: valueChangedSignal (ref), gameSettings (ref)
-		local var4 = valueChangedSignal.new(gameSettings.PerformanceStatsVisible)
-		var4:connect(function(p0)
+		local var1 = valueChangedSignal.new(gameSettings.PerformanceStatsVisible)
+		var1:connect(function(p1)
 			-- upvalues: gameSettings (copy)
-			if gameSettings.PerformanceStatsVisible == p0 then
+			if gameSettings.PerformanceStatsVisible == p1 then
 				return
 			end
-			gameSettings.PerformanceStatsVisible = p0
+			gameSettings.PerformanceStatsVisible = p1
 		end)
 		gameSettings.PerformanceStatsVisibleChanged:Connect(function()
-			-- upvalues: var4 (ref), gameSettings (copy)
-			var4:set(gameSettings.PerformanceStatsVisible)
+			-- upvalues: var1 (ref), gameSettings (copy)
+			var1:set(gameSettings.PerformanceStatsVisible)
 		end)
 		
-		return var4
+		return var1
 	end)(),
 	availability = settingsServiceModule.AvailabilitySignal.new(not cachedPolicyServiceModule:IsSubjectToChinaPolicies()),
 	layoutOrder = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.PerformanceStatsFrame

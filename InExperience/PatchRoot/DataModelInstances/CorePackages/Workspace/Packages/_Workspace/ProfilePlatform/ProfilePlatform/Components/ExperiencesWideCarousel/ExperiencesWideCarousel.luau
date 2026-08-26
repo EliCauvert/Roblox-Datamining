@@ -39,55 +39,55 @@ local experiencesOnProfileIxpEnabled = game:DefineFastFlag("ExperiencesOnProfile
 local experiencesOnProfileIxpLayer = game:DefineFastString("ExperiencesOnProfileIxpLayer", "")
 local t = {}
 
-local function chunkList(p0, p1)
+local function chunkList(p1, p2)
 	local t = {}
-	local var21 = 1
-	while var21 <= #p0 do
+	local var1 = 1
+	while var1 <= #p1 do
 		local t_1 = {}
 		
-		for i = var21, math.min(var21 + p1 - 1, #p0) do
-			table.insert(t_1, p0[i])
+		for i = var1, math.min(var1 + p2 - 1, #p1) do
+			table.insert(t_1, p1[i])
 		end
 		table.insert(t, t_1)
-		var21 += p1
+		var1 += p2
 	end
 	return t
 end
 
-local function _(p2, p3)
-	local maxValue = math.max(0, p2 or 0)
-	local var24 = maxValue + math.max(0, p3 or 0)
+local function _(p3, p4)
+	local maxValue = math.max(0, p3 or 0)
+	local var2 = maxValue + math.max(0, p4 or 0)
 	
-	return if var24 == 0 then nil else tostring(math.floor(maxValue / var24 * 100 + 0.5)) .. "%"
+	return if var2 == 0 then nil else tostring(math.floor(maxValue / var2 * 100 + 0.5)) .. "%"
 end
 
-local _ = function(p4, p5)
+local _ = function(p3, p4)
 	-- upvalues: url (ref)
-	return p4(string.format("%sv1/games/%s/votes", url.GAME_URL, p5), "GET")
+	return p3(string.format("%sv1/games/%s/votes", url.GAME_URL, p4), "GET")
 end
 
-return reactModule.memo(function(p6)
+return reactModule.memo(function(p3)
 	-- upvalues: useDynamicSizeMarginModule (ref), useDesignTokens (ref), useTextSizeOffset (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), useDispatch (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), profilePlatform (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), useNavigation (ref), useSelector (ref), getDeepValueModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), t (ref), chunkList (ref), networkingGamesModule (ref), myRoduxNetworkingImplModule (ref), url (ref), setGameVotes (ref), formatExperienceDetailsForImpressionsModule (ref), useSendItemImpressionsModule (ref), contentType (ref), formatExperienceThumbnail (ref), gameStats (ref), gameTileView (ref), gameTileViewConfig (ref), appPage (ref), openGameDetails (ref), experiencesOnProfileIxpEnabled (ref), IXPService (ref), experiencesOnProfileIxpLayer (ref), collectionHeader (ref), collectionCarousel (ref)
-	local var25, var26 = useDynamicSizeMarginModule()
-	local var27 = useDesignTokens()
-	local var28 = useTextSizeOffset()
-	local var29 = useLocalization({ title = textKeysModule.Experiences })
-	local var30, var31 = reactModule.useState(0)
-	local var32, var33 = reactModule.useState(0)
-	local var34, var35 = reactModule.useState(0)
-	local var36 = useDispatch()
-	local var37 = useProfileWrapperContextModule()
-	local profileId = var37 and var37.profileId
-	local var39 = useProfileAnalyticsContextModule()
+	local var2, var3 = useDynamicSizeMarginModule()
+	local var4 = useDesignTokens()
+	local var5 = useTextSizeOffset()
+	local var6 = useLocalization({ title = textKeysModule.Experiences })
+	local var7, var8 = reactModule.useState(0)
+	local var9, var10 = reactModule.useState(0)
+	local var11, var12 = reactModule.useState(0)
+	local var13 = useDispatch()
+	local var14 = useProfileWrapperContextModule()
+	local profileId = var14 and var14.profileId
+	local var15 = useProfileAnalyticsContextModule()
 	local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-	local var41 = useRoactService(roactAnalyticsCommonGameEvents)
-	local var42 = useNavigation()
-	local var43 = useSelector(function(p7)
+	local var16 = useRoactService(roactAnalyticsCommonGameEvents)
+	local var17 = useNavigation()
+	local var18 = useSelector(function(p4)
 		-- upvalues: getDeepValueModule (copy)
-		return getDeepValueModule(p7, "GameVotes") or {}
+		return getDeepValueModule(p4, "GameVotes") or {}
 	end)
 	local experiences = (useProfileJsonComponentModule(enumsModule.Components.Experiences) or {}).experiences or {}
-	local var45 = reactModule.useMemo(function()
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: experiences (ref)
 		local t = {}
 		
@@ -99,175 +99,175 @@ return reactModule.memo(function(p6)
 		return t
 	end, { experiences })
 	reactModule.useEffect(function()
-		-- upvalues: var45 (ref)
-		if #var45 == 0 then
+		-- upvalues: var19 (ref)
+		if #var19 == 0 then
 			return
 		end
-	end, { var45 })
-	local var46 = useSelector(function(p8)
+	end, { var19 })
+	local var20 = useSelector(function(p4)
 		-- upvalues: getDeepValueModule (copy)
-		return getDeepValueModule(p8, "ProfilePlatform.Games.byGameId") or {}
+		return getDeepValueModule(p4, "ProfilePlatform.Games.byGameId") or {}
 	end)
-	local var47 = reactModule.useRef({ key = "", at = 0 })
+	local var21 = reactModule.useRef({ key = "", at = 0 })
 	reactModule.useEffect(function()
-		-- upvalues: var45 (ref), var47 (ref), t (copy), var46 (ref), chunkList (copy), var36 (ref), networkingGamesModule (copy), var43 (ref), myRoduxNetworkingImplModule (copy), url (copy), setGameVotes (copy)
-		if #var45 == 0 then return end
+		-- upvalues: var19 (ref), var21 (ref), t (copy), var20 (ref), chunkList (copy), var13 (ref), networkingGamesModule (copy), var18 (ref), myRoduxNetworkingImplModule (copy), url (copy), setGameVotes (copy)
+		if #var19 == 0 then return end
 		local processTime = os.clock()
-		local joined = table.concat(var45, ",")
-		local current = var47.current
+		local joined = table.concat(var19, ",")
+		local current = var21.current
 		
 		if joined == current.key and processTime - current.at < 2 then return end
-		var47.current = { key = joined, at = processTime }
+		var21.current = { key = joined, at = processTime }
 		local t_1 = {}
 		
-		for i, v in var45 do
-			if not t[v] and var46[v] == nil then
+		for i, v in var19 do
+			if not t[v] and var20[v] == nil then
 				table.insert(t_1, v)
 			end
 		end
 		for i_1, v_1 in chunkList(t_1, 10) do
-			var36(networkingGamesModule.GetExperiencesDetails.API(v_1)):catch(function()
+			var13(networkingGamesModule.GetExperiencesDetails.API(v_1)):catch(function()
 				-- upvalues: v_1 (ref), t (copy)
 				for i, v in v_1 do
 					t[v] = true
 				end
 			end)
 		end
-		for i_2 = 1, math.min(6, #var45) do
-			local var58 = var45[i_2]
+		for i_2 = 1, math.min(6, #var19) do
+			local var22 = var19[i_2]
 			
-			if var43[var58] == nil then
-				myRoduxNetworkingImplModule(string.format("%sv1/games/%s/votes", url.GAME_URL, var58), "GET"):andThen(function(p9)
-					-- upvalues: var36 (copy), setGameVotes (copy), var58 (ref)
-					local responseBody = p9.responseBody
+			if var18[var22] == nil then
+				myRoduxNetworkingImplModule(string.format("%sv1/games/%s/votes", url.GAME_URL, var22), "GET"):andThen(function(p4)
+					-- upvalues: var13 (copy), setGameVotes (copy), var22 (ref)
+					local responseBody = p4.responseBody
 					
 					if responseBody ~= nil and responseBody.upVotes ~= nil and responseBody.downVotes ~= nil then
-						var36(setGameVotes(var58, if responseBody.upVotes < 0 then 0 else responseBody.upVotes, if responseBody.downVotes < 0 then 0 else responseBody.downVotes))
+						var13(setGameVotes(var22, if responseBody.upVotes < 0 then 0 else responseBody.upVotes, if responseBody.downVotes < 0 then 0 else responseBody.downVotes))
 					end
 				end):catch(function() end)
 			end
 		end
-	end, { var45, var46, var43 })
-	local var48 = reactModule.useMemo(function()
-		-- upvalues: var45 (ref), var46 (ref)
+	end, { var19, var20, var18 })
+	local var23 = reactModule.useMemo(function()
+		-- upvalues: var19 (ref), var20 (ref)
 		local t = {}
 		
-		for i, v in var45 do
-			local var60 = var46[v]
+		for i, v in var19 do
+			local var24 = var20[v]
 			
-			if var60 then
-				table.insert(t, var60)
+			if var24 then
+				table.insert(t, var24)
 			end
 		end
 		return t
-	end, { var45, var46 })
-	local var49 = useSendItemImpressionsModule(reactModule.useMemo(function()
-		-- upvalues: formatExperienceDetailsForImpressionsModule (copy), var48 (ref)
-		return formatExperienceDetailsForImpressionsModule(var48)
-	end, { var48 }), 2, contentType.Game, 1, "ExperiencesWideCarousel")
-	local var50 = reactModule.useCallback(function(p10, p11, p12, p13, p14, p15, p16)
-		-- upvalues: var39 (ref), eventNamesModule (ref), profileId (ref)
-		var39.fireAnalyticsEvent(eventNamesModule.ExperienceOpened, {
+	end, { var19, var20 })
+	local var25 = useSendItemImpressionsModule(reactModule.useMemo(function()
+		-- upvalues: formatExperienceDetailsForImpressionsModule (copy), var23 (ref)
+		return formatExperienceDetailsForImpressionsModule(var23)
+	end, { var23 }), 2, contentType.Game, 1, "ExperiencesWideCarousel")
+	local var26 = reactModule.useCallback(function(p4, p5, p6, p7, p8, p9, p10)
+		-- upvalues: var15 (ref), eventNamesModule (ref), profileId (ref)
+		var15.fireAnalyticsEvent(eventNamesModule.ExperienceOpened, {
 			row = 1,
 			section = "Experiences",
 			layoutType = "Wide",
 			profileUserId = profileId,
-			experienceId = p10,
-			position = p11,
-			ccu = p12 or 0,
-			votePercentage = p13,
-			upVotes = p14 or 0,
-			downVotes = p15 or 0,
-			visits = p16 or 0
+			experienceId = p4,
+			position = p5,
+			ccu = p6 or 0,
+			votePercentage = p7,
+			upVotes = p8 or 0,
+			downVotes = p9 or 0,
+			visits = p10 or 0
 		})
-	end, { var39, profileId })
-	local var51 = reactModule.useCallback(function(p17, p18, p19)
-		-- upvalues: formatExperienceThumbnail (copy), reactModule (copy), gameStats (copy), var43 (ref), gameTileView (copy), gameTileViewConfig (copy), var50 (ref), var48 (ref), var41 (ref), appPage (copy), p6 (ref), var36 (ref), openGameDetails (copy), var42 (ref)
+	end, { var15, profileId })
+	local var27 = reactModule.useCallback(function(p4, p5, p6)
+		-- upvalues: formatExperienceThumbnail (copy), reactModule (copy), gameStats (copy), var18 (ref), gameTileView (copy), gameTileViewConfig (copy), var26 (ref), var23 (ref), var16 (ref), appPage (copy), p3 (ref), var13 (ref), openGameDetails (copy), var17 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = p19,
-			LayoutOrder = p18
+			Size = p6,
+			LayoutOrder = p5
 		}, {
 			Tile = reactModule.createElement(gameTileView, {
 				isHovered = false,
 				hidePlayButton = true,
 				isContained = false,
 				Size = UDim2.fromScale(1, 1),
-				image = formatExperienceThumbnail(nil, p17.rootPlaceId),
-				title = p17.name,
+				image = formatExperienceThumbnail(nil, p4.rootPlaceId),
+				title = p4.name,
 				imageAspectRatio = gameTileViewConfig.getImageAspectRatio("Wide"),
 				footerMetadata = reactModule.createElement(gameStats, {
 					isGridTile = true,
 					gameTileLayoutType = "Wide",
 					stats = {
-						playerCount = p17.playing or 0,
-						totalUpVotes = if var43[p17.experienceId] then var43[p17.experienceId].upVotes else 0,
-						totalDownVotes = if var43[p17.experienceId] then var43[p17.experienceId].downVotes else 0
+						playerCount = p4.playing or 0,
+						totalUpVotes = if var18[p4.experienceId] then var18[p4.experienceId].upVotes else 0,
+						totalDownVotes = if var18[p4.experienceId] then var18[p4.experienceId].downVotes else 0
 					}
 				}),
 				onActivated = function()
-					-- upvalues: var43 (copy), p17 (ref), var50 (copy), p18 (ref), var48 (copy), var41 (copy), appPage (copy), p6 (copy), var36 (copy), openGameDetails (copy), var42 (copy)
-					local var63
-					local experienceId = var43[p17.experienceId]
+					-- upvalues: var18 (copy), p4 (ref), var26 (copy), p5 (ref), var23 (copy), var16 (copy), appPage (copy), p3 (copy), var13 (copy), openGameDetails (copy), var17 (copy)
+					local var28
+					local experienceId = var18[p4.experienceId]
 					
 					if experienceId then
 						local maxValue = math.max(0, experienceId.upVotes or 0)
-						local var62 = maxValue + math.max(0, experienceId.downVotes or 0)
-						var63 = (if var62 == 0 then nil else tostring(math.floor(maxValue / var62 * 100 + 0.5)) .. "%") or nil
+						local var29 = maxValue + math.max(0, experienceId.downVotes or 0)
+						var28 = (if var29 == 0 then nil else tostring(math.floor(maxValue / var29 * 100 + 0.5)) .. "%") or nil
 					end
-					var50(p17.experienceId, p18, p17.playing, var63, if experienceId then experienceId.upVotes else 0, if experienceId then experienceId.downVotes else 0, 0)
-					var41.reportOpenGameDetailFromProfile(p17.rootPlaceId, p18, #var48, p17.experienceId, appPage.ProfilePlatform, p6.layoutOrder, 1, nil)
-					var36(openGameDetails(p17.experienceId, var42, { mountAsFullView = false, showBackButton = true }))
+					var26(p4.experienceId, p5, p4.playing, var28, if experienceId then experienceId.upVotes else 0, if experienceId then experienceId.downVotes else 0, 0)
+					var16.reportOpenGameDetailFromProfile(p4.rootPlaceId, p5, #var23, p4.experienceId, appPage.ProfilePlatform, p3.layoutOrder, 1, nil)
+					var13(openGameDetails(p4.experienceId, var17, { mountAsFullView = false, showBackButton = true }))
 				end
 			})
 		}), "EXP_Tile"
 	end, {
-		var50, var30, var25, var36, var42, var41, p6.layoutOrder, var48, var43
+		var26, var7, var2, var13, var17, var16, p3.layoutOrder, var23, var18
 	})
-	local var52 = reactModule.useCallback(function(p20)
-		-- upvalues: var34 (ref), var35 (ref), gameTileViewConfig (copy), var27 (ref), var28 (ref)
-		if var34 ~= p20 then
-			var35(p20)
+	local var28 = reactModule.useCallback(function(p4)
+		-- upvalues: var11 (ref), var12 (ref), gameTileViewConfig (copy), var4 (ref), var5 (ref)
+		if var11 ~= p4 then
+			var12(p4)
 		end
-		return gameTileViewConfig.getTileHeight(var27, p20, "Wide", false, false, false, var28, nil, nil, nil, nil, nil)
-	end, { var27, var28, var34 })
-	local var53 = reactModule.useCallback(function(p21, p22)
-		return math.max(1, (math.max(0, p21 - p22 * 2) - 12) / 2)
+		return gameTileViewConfig.getTileHeight(var4, p4, "Wide", false, false, false, var5, nil, nil, nil, nil, nil)
+	end, { var4, var5, var11 })
+	local var29 = reactModule.useCallback(function(p4, p5)
+		return math.max(1, (math.max(0, p4 - p5 * 2) - 12) / 2)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var30 (ref), var53 (ref), var25 (ref), var48 (ref), var33 (ref)
-		if var30 <= 0 then
+		-- upvalues: var7 (ref), var29 (ref), var2 (ref), var23 (ref), var10 (ref)
+		if var7 <= 0 then
 			return
 		end
-		var33(if #var48 > 2 then math.clamp(60 / (var53(var30, var25) + 12), 0, 0.5) else 0)
-	end, { var30, var25, var48, var53 })
+		var10(if #var23 > 2 then math.clamp(60 / (var29(var7, var2) + 12), 0, 0.5) else 0)
+	end, { var7, var2, var23, var29 })
 	reactModule.useEffect(function()
-		-- upvalues: var48 (ref), var49 (ref)
-		if #var48 > 0 then
+		-- upvalues: var23 (ref), var25 (ref)
+		if #var23 > 0 then
 			local t = {}
 			
-			for i = 1, math.min(2, #var48) do
+			for i = 1, math.min(2, #var23) do
 				table.insert(t, i)
 			end
-			var49(t)
+			var25(t)
 		end
-	end, { var48, var49 })
+	end, { var23, var25 })
 	reactModule.useEffect(function()
-		-- upvalues: var48 (ref), experiencesOnProfileIxpEnabled (copy), IXPService (copy), experiencesOnProfileIxpLayer (copy)
-		if #var48 > 0 and experiencesOnProfileIxpEnabled then
+		-- upvalues: var23 (ref), experiencesOnProfileIxpEnabled (copy), IXPService (copy), experiencesOnProfileIxpLayer (copy)
+		if #var23 > 0 and experiencesOnProfileIxpEnabled then
 			IXPService:LogFlagLinkedUserLayerExposure(experiencesOnProfileIxpLayer)
 		end
-	end, { var48 })
+	end, { var23 })
 	
-	return if #var48 == 0 then nil else reactModule.createElement("Frame", {
+	return if #var23 == 0 then nil else reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
-		LayoutOrder = p6.layoutOrder,
-		[reactModule.Change.AbsoluteSize] = function(p23)
-			-- upvalues: var26 (ref), var31 (ref)
-			var26(p23)
-			var31(p23.AbsoluteSize.X)
+		LayoutOrder = p3.layoutOrder,
+		[reactModule.Change.AbsoluteSize] = function(p4)
+			-- upvalues: var3 (ref), var8 (ref)
+			var3(p4)
+			var8(p4.AbsoluteSize.X)
 		end
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
@@ -283,21 +283,21 @@ return reactModule.memo(function(p6)
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var25),
-				PaddingRight = UDim.new(0, var25)
+				PaddingLeft = UDim.new(0, var2),
+				PaddingRight = UDim.new(0, var2)
 			}),
-			Content = reactModule.createElement(collectionHeader, { LayoutOrder = 1, hideButton = true, title = var29.title })
+			Content = reactModule.createElement(collectionHeader, { LayoutOrder = 1, hideButton = true, title = var6.title })
 		}),
 		CollectionCarousel = reactModule.createElement(collectionCarousel, {
 			LayoutOrder = 2,
 			title = nil,
 			numColumns = 2,
 			columnGap = 12,
-			items = var48,
-			renderItem = var51,
-			getItemHeight = var52,
-			fractionalItemAmount = if #var48 > 2 then var32 else 0,
-			sideMargin = var25
+			items = var23,
+			renderItem = var27,
+			getItemHeight = var28,
+			fractionalItemAmount = if #var23 > 2 then var9 else 0,
+			sideMargin = var2
 		})
 	})
 end)

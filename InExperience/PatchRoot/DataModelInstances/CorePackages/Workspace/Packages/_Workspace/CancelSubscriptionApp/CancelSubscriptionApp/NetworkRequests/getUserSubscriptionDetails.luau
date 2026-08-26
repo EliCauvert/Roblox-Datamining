@@ -1,20 +1,20 @@
 ﻿local promiseModule = require(script:FindFirstAncestor("CancelSubscriptionApp").Parent.Promise)
 local marketplaceService = game:GetService("MarketplaceService")
 
-return function(_, p0)
+return function(_, p1)
 	-- upvalues: promiseModule (ref), marketplaceService (ref)
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: marketplaceService (copy), p0 (ref)
+	return promiseModule.new(function(p2, p3)
+		-- upvalues: marketplaceService (copy), p1 (ref)
 		local ok, status = pcall(function()
-			-- upvalues: marketplaceService (copy), p0 (copy)
-			return marketplaceService:GetUserSubscriptionDetailsInternalAsync(p0)
+			-- upvalues: marketplaceService (copy), p1 (copy)
+			return marketplaceService:GetUserSubscriptionDetailsInternalAsync(p1)
 		end)
 		
 		if ok then
-			p1(status)
+			p2(status)
 			
 			return
 		end
-		p2(status)
+		p3(status)
 	end)
 end

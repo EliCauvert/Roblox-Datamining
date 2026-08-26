@@ -4,10 +4,10 @@ local _ = require(script.Types)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: createGetItemAndBundleDetailsModule (ref)
 		return {
-			GetItemAndBundleDetails = createGetItemAndBundleDetailsModule(p0)
+			GetItemAndBundleDetails = createGetItemAndBundleDetailsModule(p1)
 		}
 	end,
 	PurchaseDetailsStore = if fFlagSocialEnableProfileInspectAndBuy then require(script.stores.PurchaseDetailsStore) else nil,

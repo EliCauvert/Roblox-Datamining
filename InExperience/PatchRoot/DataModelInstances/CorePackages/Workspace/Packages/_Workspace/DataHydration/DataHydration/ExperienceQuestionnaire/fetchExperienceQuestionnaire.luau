@@ -7,11 +7,11 @@ local _ = require(script.Parent.ExperienceQuestionnaireStoreTypes)
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: urlBase (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	return p0.network, p0.baseUrl or urlBase.APIS
+	return p1.network, p1.baseUrl or urlBase.APIS
 end
 
 local _ = function(p1)
@@ -19,14 +19,31 @@ local _ = function(p1)
 	return (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 end
 
-local function get(p2, p3, p4)
+local function get(p1, p2, p3)
 	-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
-	p2 = p2 or {}
+	p1 = p1 or {}
 	
 	return asPromise(fetch({
 		method = "GET",
-		network = p2.network,
-		url = (p2.baseUrl or urlBase.APIS) .. "/experience-questionnaire/v1" .. p3,
+		network = p1.network,
+		url = (p1.baseUrl or urlBase.APIS) .. "/experience-questionnaire/v1" .. p3,
+		analyticsKey = p3,
+		decode = function(p4)
+			return p4
+		end
+	}))
+end
+
+local function post(p1, p2, p3, p4)
+	-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
+	p1 = p1 or {}
+	local _ = p1.network
+	
+	return asPromise(fetch({
+		method = "POST",
+		network = (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
+		url = (p1.baseUrl or urlBase.APIS) .. "/experience-questionnaire/v1" .. p7,
+		body = p3,
 		analyticsKey = p4,
 		decode = function(p5)
 			return p5
@@ -34,58 +51,41 @@ local function get(p2, p3, p4)
 	}))
 end
 
-local function post(p6, p7, p8, p9)
-	-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
-	p6 = p6 or {}
-	local _ = p6.network
-	
-	return asPromise(fetch({
-		method = "POST",
-		network = (p6 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-		url = (p6.baseUrl or urlBase.APIS) .. "/experience-questionnaire/v1" .. p7,
-		body = p8,
-		analyticsKey = p9,
-		decode = function(p10)
-			return p10
-		end
-	}))
-end
-
 return {
-	fetchEligibility = function(p11, p12)
+	fetchEligibility = function(p1, p2)
 		-- upvalues: get (ref)
-		return get(p12, ("/eligibility/%d"):format(p11), "experience-questionnaire.get-eligibility")
+		return get(p2, ("/eligibility/%d"):format(p1), "experience-questionnaire.get-eligibility")
 	end,
-	fetchMetadataStatus = function(p13, p14)
+	fetchMetadataStatus = function(p1, p2)
 		-- upvalues: get (ref)
-		return get(p14, ("/metadata/%d/status"):format(p13), "experience-questionnaire.get-metadata-status")
+		return get(p2, ("/metadata/%d/status"):format(p1), "experience-questionnaire.get-metadata-status")
 	end,
-	fetchActiveResponse = function(p15, p16)
+	fetchActiveResponse = function(p1, p2)
 		-- upvalues: get (ref)
-		return get(p16, ("/responses/%d"):format(p15), "experience-questionnaire.get-active-response")
+		return get(p2, ("/responses/%d"):format(p1), "experience-questionnaire.get-active-response")
 	end,
-	fetchLatestQuestionnaire = function(p17, p18)
+	fetchLatestQuestionnaire = function(p1, p2)
 		-- upvalues: get (ref)
-		return get(p18, ("/questionnaires/%d/latest"):format(p17), "experience-questionnaire.get-latest-questionnaire")
+		return get(p2, ("/questionnaires/%d/latest"):format(p1), "experience-questionnaire.get-latest-questionnaire")
 	end,
-	fetchQuestionnaireById = function(p19, p20)
+	fetchQuestionnaireById = function(p1, p2)
 		-- upvalues: get (ref)
-		return get(p20, "/questionnaires/" .. p19, "experience-questionnaire.get-questionnaire-by-id")
+		return get(p2, "/questionnaires/" .. p19, "experience-questionnaire.get-questionnaire-by-id")
 	end,
-	fetchLatestSubmission = function(p21, p22)
+	fetchLatestSubmission = function(p1, p2)
 		-- upvalues: get (ref)
-		return get(p22, ("/responses/%d/submissions/latest"):format(p21), "experience-questionnaire.get-latest-submission")
+		return get(p2, ("/responses/%d/submissions/latest"):format(p1), "experience-questionnaire.get-latest-submission")
 	end,
-	saveSubmission = function(p23, p24, p25)
+	saveSubmission = function(p1, p2, p3)
 		-- upvalues: post (ref)
-		return post(p25, ("/responses/%d/submissions"):format(p23), p24, "experience-questionnaire.save-submission")
+		return post(p3, ("/responses/%d/submissions"):format(p1), p2, "experience-questionnaire.save-submission")
 	end,
-	validateResponses = function(p26, p27)
+	validateResponses = function(p1, p2)
 		-- upvalues: post (ref)
-		return post(p27, "/responses/validate", p26, "experience-questionnaire.validate-responses")
+		return post(p2, "/responses/validate", p1, "experience-questionnaire.validate-responses")
 	end,
-	previewSubmission = function(p28, p29)
+	previewSubmission = function(p1, p2)
 		-- upvalues: post (ref)
-		return post(p29, "/responses/preview", p28, "experience-questionnaire.preview-submission")
+		return post(p2, "/responses/preview", p1, "experience-questionnaire.preview-submission")
 	end
 }

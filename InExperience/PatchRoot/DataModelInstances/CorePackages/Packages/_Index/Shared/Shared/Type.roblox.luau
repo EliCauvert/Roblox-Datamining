@@ -2,9 +2,9 @@
 local var1 = newproxy(true)
 local t = {}
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref), unknownModule (ref)
-	t[p0] = unknownModule.named("Roact" .. p0)
+	t[p1] = unknownModule.named("Roact" .. p0)
 end
 
 t.HostChangeEvent = unknownModule.named("RoactHostChangeEvent")

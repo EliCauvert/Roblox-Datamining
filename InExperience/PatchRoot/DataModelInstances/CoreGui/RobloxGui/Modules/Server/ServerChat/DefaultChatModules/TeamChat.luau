@@ -11,8 +11,8 @@ if t == nil then
 	t = {}
 end
 if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p0)
-		return p0
+	function t.FormatMessageToSend(_, _, p1)
+		return p1
 	end
 end
 local t_1 = {
@@ -30,21 +30,21 @@ return function(p1)
 	team.Private = true
 	team:RegisterProcessCommandsFunction("replication_function", function(p2, p3, p4)
 		-- upvalues: p1 (ref)
-		local var11 = p1:GetSpeaker(p2)
-		local var12 = p1:GetChannel(p4)
+		local var1 = p1:GetSpeaker(p2)
+		local var2 = p1:GetChannel(p4)
 		
-		if var11 and var12 then
-			local player = var11:GetPlayer()
+		if var1 and var2 then
+			local player = var1:GetPlayer()
 			
 			if player then
-				for i, v in pairs(var12:GetSpeakerList()) do
-					local var14 = p1:GetSpeaker(v)
+				for i, v in pairs(var2:GetSpeakerList()) do
+					local var3 = p1:GetSpeaker(v)
 					
-					if var14 then
-						local player_1 = var14:GetPlayer()
+					if var3 then
+						local player_1 = var3:GetPlayer()
 						
 						if player_1 and player.Team == player_1.Team then
-							var14:SendMessage(p3, p4, p2, {
+							var3:SendMessage(p3, p4, p2, {
 								NameColor = player.TeamColor.Color,
 								ChatColor = player.TeamColor.Color,
 								ChannelColor = player.TeamColor.Color
@@ -62,56 +62,56 @@ return function(p1)
 		if vectorB == nil then
 			vectorB = ""
 		end
-		local var16 = p1:GetSpeaker(vectorA)
+		local var4 = p1:GetSpeaker(vectorA)
 		
-		if var16 then
-			local player = var16:GetPlayer()
+		if var4 then
+			local player = var4:GetPlayer()
 			
 			if player then
 				if player.Team == nil then
-					var16:SendSystemMessage(t:FormatMessageToSend("GameChat_TeamChat_CannotTeamChatIfNotInTeam", "You cannot team chat if you are not on a team!"), p5, t_1)
+					var4:SendSystemMessage(t:FormatMessageToSend("GameChat_TeamChat_CannotTeamChatIfNotInTeam", "You cannot team chat if you are not on a team!"), p5, t_1)
 					
 					return
 				end
 				local teamChannel = p1:GetChannel("Team")
 				
 				if teamChannel then
-					if not var16:IsInChannel(teamChannel.Name) then
-						var16:JoinChannel(teamChannel.Name)
+					if not var4:IsInChannel(teamChannel.Name) then
+						var4:JoinChannel(teamChannel.Name)
 					end
 					if vectorB and string.len(vectorB) > 0 then
-						var16:SayMessage(vectorB, teamChannel.Name)
+						var4:SayMessage(vectorB, teamChannel.Name)
 					end
-					var16:SetMainChannel(teamChannel.Name)
+					var4:SetMainChannel(teamChannel.Name)
 				end
 			end
 		end
 	end
 	
-	p1:RegisterProcessCommandsFunction("team_commands", function(p6, p7, p8)
+	p1:RegisterProcessCommandsFunction("team_commands", function(p5, p6, p7)
 		-- upvalues: DoTeamCommand (ref)
-		local var19 = false
+		local var4 = false
 		
-		if p7 == nil then
+		if p6 == nil then
 			error("Message is nil")
 		end
-		if p8 == "Team" then
+		if p7 == "Team" then
 			return false
-		elseif string.sub(p7, 1, 6):lower() == "/team " or p7:lower() == "/team" then
-			DoTeamCommand(p6, string.sub(p7, 7), p8)
-			var19 = true
+		elseif string.sub(p6, 1, 6):lower() == "/team " or p6:lower() == "/team" then
+			DoTeamCommand(p5, string.sub(p6, 7), p7)
+			var4 = true
 			
-			return var19
-		elseif string.sub(p7, 1, 3):lower() == "/t " or p7:lower() == "/t" then
-			DoTeamCommand(p6, string.sub(p7, 4), p8)
-			var19 = true
+			return var4
+		elseif string.sub(p6, 1, 3):lower() == "/t " or p6:lower() == "/t" then
+			DoTeamCommand(p5, string.sub(p6, 4), p7)
+			var4 = true
 			
-			return var19
-		elseif string.sub(p7, 1, 2):lower() == "% " or p7:lower() == "%" then
-			DoTeamCommand(p6, string.sub(p7, 3), p8)
-			var19 = true
+			return var4
+		elseif string.sub(p6, 1, 2):lower() == "% " or p6:lower() == "%" then
+			DoTeamCommand(p5, string.sub(p6, 3), p7)
+			var4 = true
 		end
-		return var19
+		return var4
 	end, chatConstantsModule.StandardPriority)
 	
 	local function GetDefaultChannelNameColor()
@@ -119,66 +119,66 @@ return function(p1)
 		return if chatSettingsModule.DefaultChannelNameColor then chatSettingsModule.DefaultChannelNameColor else Color3.fromRGB(35, 76, 142)
 	end
 	
-	local function PutSpeakerInCorrectTeamChatState(p9, p10)
+	local function PutSpeakerInCorrectTeamChatState(p5, p6)
 		-- upvalues: team (ref), GetDefaultChannelNameColor (ref)
-		if p10.Neutral or p10.Team == nil then
-			p9:UpdateChannelNameColor(team.Name, GetDefaultChannelNameColor())
+		if p6.Neutral or p6.Team == nil then
+			p5:UpdateChannelNameColor(team.Name, GetDefaultChannelNameColor())
 			
-			if p9:IsInChannel(team.Name) then
-				p9:LeaveChannel(team.Name)
+			if p5:IsInChannel(team.Name) then
+				p5:LeaveChannel(team.Name)
 				
 				return
 			end
-		elseif not p10.Neutral and p10.Team then
-			p9:UpdateChannelNameColor(team.Name, p10.Team.TeamColor.Color)
+		elseif not p6.Neutral and p6.Team then
+			p5:UpdateChannelNameColor(team.Name, p6.Team.TeamColor.Color)
 			
-			if not p9:IsInChannel(team.Name) then
-				p9:JoinChannel(team.Name)
+			if not p5:IsInChannel(team.Name) then
+				p5:JoinChannel(team.Name)
 			end
 		end
 	end
 	
-	p1.SpeakerAdded:connect(function(p11)
+	p1.SpeakerAdded:connect(function(p5)
 		-- upvalues: p1 (ref), PutSpeakerInCorrectTeamChatState (ref)
-		local var20 = p1:GetSpeaker(p11)
+		local var4 = p1:GetSpeaker(p5)
 		
-		if var20 then
-			local player = var20:GetPlayer()
+		if var4 then
+			local player = var4:GetPlayer()
 			
 			if player then
-				PutSpeakerInCorrectTeamChatState(var20, player)
+				PutSpeakerInCorrectTeamChatState(var4, player)
 			end
 		end
 	end)
 	local t_2 = {}
-	playersService.PlayerAdded:connect(function(p12)
+	playersService.PlayerAdded:connect(function(p5)
 		-- upvalues: p1 (ref), PutSpeakerInCorrectTeamChatState (ref), team (ref), t (copy), t_2 (ref)
-		t_2[p12] = p12.Changed:connect(function(p13)
-			-- upvalues: p1 (copy), p12 (ref), PutSpeakerInCorrectTeamChatState (copy), team (copy), t (copy)
-			local nameSpeaker = p1:GetSpeaker(p12.Name)
+		t_2[p5] = p5.Changed:connect(function(p6)
+			-- upvalues: p1 (copy), p5 (ref), PutSpeakerInCorrectTeamChatState (copy), team (copy), t (copy)
+			local nameSpeaker = p1:GetSpeaker(p5.Name)
 			
 			if nameSpeaker then
-				if p13 == "Neutral" then
-					PutSpeakerInCorrectTeamChatState(nameSpeaker, p12)
+				if p6 == "Neutral" then
+					PutSpeakerInCorrectTeamChatState(nameSpeaker, p5)
 					
 					return
-				elseif p13 == "Team" then
-					PutSpeakerInCorrectTeamChatState(nameSpeaker, p12)
+				elseif p6 == "Team" then
+					PutSpeakerInCorrectTeamChatState(nameSpeaker, p5)
 					
 					if nameSpeaker:IsInChannel(team.Name) then
-						nameSpeaker:SendSystemMessage(t:FormatMessageToSend("GameChat_TeamChat_NowInTeam", string.format("You are now on the '%s' team.", p12.Team.Name), "RBX_NAME", p12.Team.Name), team.Name)
+						nameSpeaker:SendSystemMessage(t:FormatMessageToSend("GameChat_TeamChat_NowInTeam", string.format("You are now on the '%s' team.", p5.Team.Name), "RBX_NAME", p5.Team.Name), team.Name)
 					end
 				end
 			end
 		end)
 	end)
-	playersService.PlayerRemoving:connect(function(p14)
+	playersService.PlayerRemoving:connect(function(p5)
 		-- upvalues: t_2 (ref)
-		local var23 = t_2[p14]
+		local var4 = t_2[p5]
 		
-		if var23 then
-			var23:Disconnect()
+		if var4 then
+			var4:Disconnect()
 		end
-		t_2[p14] = nil
+		t_2[p5] = nil
 	end)
 end

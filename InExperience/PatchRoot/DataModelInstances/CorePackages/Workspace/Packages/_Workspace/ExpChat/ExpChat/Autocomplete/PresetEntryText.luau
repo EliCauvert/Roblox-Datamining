@@ -1,8 +1,8 @@
 ﻿local getPresetIconRichText = require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared).getPresetIconRichText
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: getPresetIconRichText (ref)
-	return ` {getPresetIconRichText(p0)}`
+	return ` {getPresetIconRichText(p1)}`
 end
 
 return {
@@ -10,10 +10,10 @@ return {
 		-- upvalues: getPresetIconRichText (ref)
 		return p1 .. ` {getPresetIconRichText(p2)}`
 	end,
-	undecorate = function(p3, p4)
+	undecorate = function(p1, p2)
 		-- upvalues: getPresetIconRichText (ref)
-		local var0 = ` {getPresetIconRichText(p4)}`
+		local var1 = ` {getPresetIconRichText(p2)}`
 		
-		return if string.sub(p3, -#var0) == var0 then string.sub(p3, 1, #p3 - #var0) else p3
+		return if string.sub(p1, -#var1) == var1 then string.sub(p1, 1, #p1 - #var1) else p1
 	end
 }

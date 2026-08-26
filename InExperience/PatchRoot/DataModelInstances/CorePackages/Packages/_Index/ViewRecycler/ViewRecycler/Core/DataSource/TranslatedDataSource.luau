@@ -2,48 +2,48 @@
 local _ = require(viewRecycler.Core.Types)
 local createEventModule = require(viewRecycler.Internal.createEvent)
 
-local function getItems(p0, p1, p2, p3)
-	local list = table.create(math.max(0, p3 - p2 + 1))
+local function getItems(p1, p2, p3, p4)
+	local list = table.create(math.max(0, p4 - p3 + 1))
 	
-	for i = p2, math.min(p3, p0) do
-		table.insert(list, p1(i))
+	for i = p3, math.min(p4, p1) do
+		table.insert(list, p2(i))
 	end
 	return list
 end
 
-return function(p4, p5, p6, p7)
+return function(p5, p6, p7, p8)
 	-- upvalues: createEventModule (ref), getItems (ref)
-	local var4 = createEventModule()
-	local var5 = 0
-	local var6 = nil
+	local var1 = createEventModule()
+	local var2 = 0
+	local var3 = nil
 	
 	return {
-		getItemCount = p4,
-		getItem = p5,
-		getItemKey = p6,
-		getItems = function(p8, p9)
-			-- upvalues: getItems (copy), p4 (ref), p5 (ref)
-			return getItems(p4(), p5, p8, p9)
+		getItemCount = p5,
+		getItem = p6,
+		getItemKey = p7,
+		getItems = function(p9, p10)
+			-- upvalues: getItems (copy), p5 (ref), p6 (ref)
+			return getItems(p5(), p6, p9, p10)
 		end,
-		subscribe = function(p10)
-			-- upvalues: var5 (write), var6 (write), p7 (ref), var4 (ref)
-			if var5 == 0 then
-				var6 = p7(var4.fire)
+		subscribe = function(p9)
+			-- upvalues: var2 (write), var3 (write), p8 (ref), var1 (ref)
+			if var2 == 0 then
+				var3 = p8(var1.fire)
 			end
-			var5 += 1
-			local var7 = var4.connect(p10)
-			local var8 = true
+			var2 += 1
+			local var4 = var1.connect(p9)
+			local var5 = true
 			
 			return function()
-				-- upvalues: var8 (write), var7 (ref), var5 (copy), var6 (copy)
-				if not var8 then return end
-				var8 = false
-				var7()
-				var5 -= 1
+				-- upvalues: var5 (write), var4 (ref), var2 (copy), var3 (copy)
+				if not var5 then return end
+				var5 = false
+				var4()
+				var2 -= 1
 				
-				if var5 == 0 and var6 ~= nil then
-					var6()
-					var6 = nil
+				if var2 == 0 and var3 ~= nil then
+					var3()
+					var3 = nil
 				end
 			end
 		end

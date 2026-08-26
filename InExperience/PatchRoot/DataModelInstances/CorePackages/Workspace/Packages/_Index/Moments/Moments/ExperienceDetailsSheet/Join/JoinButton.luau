@@ -10,26 +10,26 @@ local useJoinExperienceModule = require(script.Parent.useJoinExperience)
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useJoinExperienceModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), reactModule (ref), button (ref), foundationModule (ref)
-	local var7 = useJoinExperienceModule()
-	local var8 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
-	local var9 = if fFlagMomentsFixRecommendationImpressionLifecycleModule then feedContextModule.useFeedOptional() else nil
-	local context = p0.context
+	local var1 = useJoinExperienceModule()
+	local var2 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
+	local var3 = if fFlagMomentsFixRecommendationImpressionLifecycleModule then feedContextModule.useFeedOptional() else nil
+	local context = p1.context
 	
 	return reactModule.createElement(button, {
-		LayoutOrder = p0.LayoutOrder,
-		text = p0.text,
+		LayoutOrder = p1.LayoutOrder,
+		text = p1.text,
 		size = foundationModule.Enums.InputSize.Medium,
 		variant = foundationModule.Enums.ButtonVariant.Emphasis,
-		isDisabled = if p0.isDisabled ~= true then var8 else true,
-		testId = p0.testId,
+		isDisabled = if p1.isDisabled ~= true then var2 else true,
+		testId = p1.testId,
 		onActivated = function()
-			-- upvalues: fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var9 (write), var7 (ref), context (ref)
-			if fFlagMomentsFixRecommendationImpressionLifecycleModule and var9 ~= nil then
-				var9.flushView()
+			-- upvalues: fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var3 (write), var1 (ref), context (ref)
+			if fFlagMomentsFixRecommendationImpressionLifecycleModule and var3 ~= nil then
+				var3.flushView()
 			end
-			var7(context)
+			var1(context)
 		end
 	})
 end)

@@ -7,49 +7,49 @@ local _ = require(appChat.Stores.GetChatModerationStatusDataHydration)
 local _ = require(appChat.Stores.GetConversationStore)
 local useIsUserPendingModule = require(appChat.Hooks.useIsUserPending)
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: conversationChannelsModule (ref)
-	return p0 ~= nil and (p0.status == "active" and (p2 < p0.endTimestamp and p1 ~= conversationChannelsModule.ModerationType.TrustedComms))
+	return p1 ~= nil and (p1.status == "active" and (p3 < p1.endTimestamp and p2 ~= conversationChannelsModule.ModerationType.TrustedComms))
 end
 
-local _ = function(p3)
+local _ = function(p1)
 	-- upvalues: conversationChannelsModule (ref), useIsUserPendingModule (ref)
-	return p3.participantPendingStatus == conversationChannelsModule.UserPendingStatus.Pending or useIsUserPendingModule(p3)
+	return p1.participantPendingStatus == conversationChannelsModule.UserPendingStatus.Pending or useIsUserPendingModule(p1)
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: conversationChannelsModule (ref), useIsUserPendingModule (ref), dataHydrationModule (ref)
-	local conversation = p4.conversation
+	local conversation = p1.conversation
 	
-	if not p4.isAvailable then
+	if not p1.isAvailable then
 		return "ineligible"
-	elseif not p4.isGroupChatEnabled and conversation.conversationType == "MultiUserConversation" then
+	elseif not p1.isGroupChatEnabled and conversation.conversationType == "MultiUserConversation" then
 		return "ineligible"
 	elseif conversation.participantPendingStatus == conversationChannelsModule.UserPendingStatus.Pending or useIsUserPendingModule(conversation) then
 		return "ineligible"
 	end
-	local userStatus = p4.timeoutStore.getUserStatus()
-	local var5 = userStatus.status(p4.scope)
+	local userStatus = p1.timeoutStore.getUserStatus()
+	local var1 = userStatus.status(p1.scope)
 	
-	if var5 == dataHydrationModule.DataStatus.NotReady then
+	if var1 == dataHydrationModule.DataStatus.NotReady then
 		return "loading"
-	elseif var5 ~= dataHydrationModule.DataStatus.Failed then
-		local var6 = userStatus.data(p4.scope)
+	elseif var1 ~= dataHydrationModule.DataStatus.Failed then
+		local var2 = userStatus.data(p1.scope)
 		
-		if var6 ~= nil and (var6.status == "active" and (p4.currentTimestamp < var6.endTimestamp and conversation.moderationType ~= conversationChannelsModule.ModerationType.TrustedComms)) then
+		if var2 ~= nil and (var2.status == "active" and (p1.currentTimestamp < var2.endTimestamp and conversation.moderationType ~= conversationChannelsModule.ModerationType.TrustedComms)) then
 			return "ineligible"
 		elseif conversation.source == "friends" then
 			return "eligible"
 		end
-		local conversationStatus = p4.timeoutStore.getConversationStatus(conversation.id)
-		local var8 = conversationStatus.status(p4.scope)
+		local conversationStatus = p1.timeoutStore.getConversationStatus(conversation.id)
+		local var3 = conversationStatus.status(p1.scope)
 		
-		if not p4.allowConversationStatusLoading and var8 == dataHydrationModule.DataStatus.NotReady then
+		if not p1.allowConversationStatusLoading and var3 == dataHydrationModule.DataStatus.NotReady then
 			return "loading"
-		elseif var8 ~= dataHydrationModule.DataStatus.Failed then
-			local var9 = conversationStatus.data(p4.scope)
+		elseif var3 ~= dataHydrationModule.DataStatus.Failed then
+			local var4 = conversationStatus.data(p1.scope)
 			
-			return if var9 ~= nil and (var9.status == "active" and (p4.currentTimestamp < var9.endTimestamp and conversation.moderationType ~= conversationChannelsModule.ModerationType.TrustedComms)) then "ineligible" else "eligible"
+			return if var4 ~= nil and (var4.status == "active" and (p1.currentTimestamp < var4.endTimestamp and conversation.moderationType ~= conversationChannelsModule.ModerationType.TrustedComms)) then "ineligible" else "eligible"
 		end
 	end
 end

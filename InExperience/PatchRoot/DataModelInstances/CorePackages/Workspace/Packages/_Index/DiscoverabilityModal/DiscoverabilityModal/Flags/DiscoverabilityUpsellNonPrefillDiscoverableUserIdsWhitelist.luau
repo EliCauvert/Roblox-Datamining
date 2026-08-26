@@ -1,9 +1,9 @@
 ﻿game:DefineFastString("DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelist", "")
 
 return {
-	isWhitelistedUserId = function(p0)
+	isWhitelistedUserId = function(p1)
 		for i in string.gmatch(game:GetFastString("DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelist"), "[^,]+") do
-			if tostring(p0) == i then
+			if tostring(p1) == i then
 				return true
 			end
 		end

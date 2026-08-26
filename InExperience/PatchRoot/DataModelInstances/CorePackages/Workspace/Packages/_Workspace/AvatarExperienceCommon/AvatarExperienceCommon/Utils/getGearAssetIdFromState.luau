@@ -1,9 +1,9 @@
 ﻿local ASSET_TYPE_NAME_TO_ID_STRING = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants).ASSET_TYPE_NAME_TO_ID_STRING
 local getEquippedAssetIdsForTypeModule = require(script.Parent.getEquippedAssetIdsForType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getEquippedAssetIdsForTypeModule (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref)
-	local equippedAssets = p0.AvatarEditor.Character.EquippedAssets
+	local equippedAssets = p1.AvatarEditor.Character.EquippedAssets
 	
 	if equippedAssets == nil then
 		return 0

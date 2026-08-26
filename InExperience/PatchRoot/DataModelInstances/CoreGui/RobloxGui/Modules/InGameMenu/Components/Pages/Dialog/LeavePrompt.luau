@@ -35,9 +35,9 @@ leavePrompt.defaultProps = {
 	canKeyboardCaptureFocus = false
 }
 
-function leavePrompt.init(p0)
+function leavePrompt.init(p1)
 	-- upvalues: roact (ref)
-	p0.leaveButtonRef = roact.createRef()
+	p1.leaveButtonRef = roact.createRef()
 end
 
 function leavePrompt.render(p1)
@@ -62,16 +62,16 @@ function leavePrompt.render(p1)
 				}
 			}
 		}
-	end, function(p3)
+	end, function(p2)
 		-- upvalues: roact (copy), gameIconModule (copy), themedTextLabelModule (copy), p1 (ref), getFFlagEnableVRFTUXExperienceModule (copy), isFTUXExperienceModule (copy), platformEnumModule (copy), button (copy), buttonType (copy), focusHandlerModule (copy), guiService (copy), zonePortalModule (copy), directionModule (copy), contextActionService (copy)
-		local font = p3.Font
+		local font = p2.Font
 		
 		return roact.createElement("ImageButton", {
 			AutoButtonColor = false,
 			Selectable = false,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = p3.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = p3.Theme.BackgroundDefault.Transparency
+			BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
+			BackgroundTransparency = p2.Theme.BackgroundDefault.Transparency
 		}, {
 			Content = roact.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -137,9 +137,9 @@ function leavePrompt.render(p1)
 				isFocused = p1.props.canKeyboardCaptureFocus,
 				didFocus = function()
 					-- upvalues: contextActionService (copy), p1 (copy)
-					contextActionService:BindCoreAction("LeavePromptConfirm", function(_, p4)
+					contextActionService:BindCoreAction("LeavePromptConfirm", function(_, p3)
 						-- upvalues: p1 (copy)
-						if p4 == Enum.UserInputState.End then
+						if p3 == Enum.UserInputState.End then
 							p1.props.onConfirm()
 							
 							return Enum.ContextActionResult.Sink

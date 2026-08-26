@@ -8,15 +8,15 @@ local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local images = UIBloxModule.App.ImageSet.Images
 
-local function PriceIcon(p0)
+local function PriceIcon(p1)
 	-- upvalues: reactModule (ref), imageSetLabel (ref), images (ref)
 	return reactModule.createElement(imageSetLabel, {
 		ImageTransparency = 0,
 		BackgroundTransparency = 1,
-		Size = p0.Size,
+		Size = p1.Size,
 		Image = images["icons/common/robux_small"],
-		ImageColor3 = p0.color,
-		LayoutOrder = p0.LayoutOrder
+		ImageColor3 = p1.color,
+		LayoutOrder = p1.LayoutOrder
 	})
 end
 

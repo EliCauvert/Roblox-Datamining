@@ -14,60 +14,60 @@ local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCVal
 local getFFlagUGCValidateMigrateTextureTransparencyModule = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency)
 local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: validateSingleInstanceModule (ref), createLegacyAccessoryMeshPartAssetFormatSchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), validateSurfaceAppearancesModule (ref), getFFlagUGCValidateMigrateTextureTransparencyModule (ref), validateSurfaceAppearanceTextureSizeModule (ref), validateSurfaceAppearanceTransparencyModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), validateLegacyAccessoryMeshPartAssetFormatMatchModule (ref)
-	assert(p0.instances ~= nil, "instances required in validationContext for validateLegacyAccessoryMeshPartAssetFormat")
-	local instances = p0.instances
+	assert(p1.instances ~= nil, "instances required in validationContext for validateLegacyAccessoryMeshPartAssetFormat")
+	local instances = p1.instances
 	local _ = nil
 	local _ = nil
-	local var13, var14 = validateSingleInstanceModule(instances, p0)
+	local var1, var2 = validateSingleInstanceModule(instances, p1)
 	
-	if not var13 then
-		return false, var14
+	if not var1 then
+		return false, var2
 	end
-	local var15 = instances[1]
-	local var16, var17 = validateInstanceTreeModule(createLegacyAccessoryMeshPartAssetFormatSchemaModule(value:FindFirstChild("Handle"):FindFirstChildOfClass("Attachment").Name), var15, p0)
-	local var18 = var17
+	local var3 = instances[1]
+	local var4, var5 = validateInstanceTreeModule(createLegacyAccessoryMeshPartAssetFormatSchemaModule(value:FindFirstChild("Handle"):FindFirstChildOfClass("Attachment").Name), var3, p1)
+	local var6 = var5
 	
-	if not var16 then
-		return false, var18
+	if not var4 then
+		return false, var6
 	elseif getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-		local var19, var20 = validatePropertiesSensibleModule.validate(var15, p0)
-		local var21 = var20
+		local var7, var8 = validatePropertiesSensibleModule.validate(var3, p1)
+		local var9 = var8
 		
-		if not var19 then
-			return false, var21
+		if not var7 then
+			return false, var9
 		elseif not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() then
-			local var22, var23 = validateSurfaceAppearancesModule(var15, p0)
-			local var24 = var23
+			local var10, var11 = validateSurfaceAppearancesModule(var3, p1)
+			local var12 = var11
 			
-			if not var22 then
-				return false, var24
+			if not var10 then
+				return false, var12
 			elseif not getFFlagUGCValidateMigrateTextureTransparencyModule() then
-				local var25, var26 = validateSurfaceAppearanceTextureSizeModule(var15, p0)
+				local var13, var14 = validateSurfaceAppearanceTextureSizeModule(var3, p1)
 				
-				if not var25 then
-					return false, var26
+				if not var13 then
+					return false, var14
 				end
-				local var27, var28 = validateSurfaceAppearanceTransparencyModule(var15, p0)
-				local var29 = var28
+				local var15, var16 = validateSurfaceAppearanceTransparencyModule(var3, p1)
+				local var17 = var16
 				
-				if not var27 then
-					return false, var29
+				if not var15 then
+					return false, var17
 				elseif not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() and getFFlagUGCValidateTexturePackModule() then
-					local var30, var31 = validateTexturePackModule.validate(var15, false, p0)
-					local var32 = var31
+					local var18, var19 = validateTexturePackModule.validate(var3, false, p1)
+					local var20 = var19
 					
-					if not var30 then
-						return false, var32
+					if not var18 then
+						return false, var20
 					end
 				end
-				local var33, var34 = validateLegacyAccessoryMeshPartAssetFormatMatchModule(var15, value, p0)
+				local var21, var22 = validateLegacyAccessoryMeshPartAssetFormatMatchModule(var3, value, p1)
 				
-				if var33 then
+				if var21 then
 					return true
 				end
-				return false, var34
+				return false, var22
 			end
 		end
 	end

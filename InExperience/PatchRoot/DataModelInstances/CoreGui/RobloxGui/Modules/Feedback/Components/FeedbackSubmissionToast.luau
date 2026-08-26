@@ -11,9 +11,9 @@ feedbackSubmissionToast.validateProps = tModule.strictInterface({
 	numFeedbackSubmissionAttempts = tModule.optional(tModule.number)
 })
 
-function feedbackSubmissionToast.render(p0)
+function feedbackSubmissionToast.render(p1)
 	-- upvalues: roactModule (ref), withLocalization (ref), toast (ref), images (ref)
-	return if p0.props.numFeedbackSubmissionAttempts == nil then nil else roactModule.createElement("Frame", {
+	return if p1.props.numFeedbackSubmissionAttempts == nil then nil else roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 100,
 		Size = UDim2.fromScale(1, 1)
@@ -21,14 +21,14 @@ function feedbackSubmissionToast.render(p0)
 		Toast = withLocalization({
 			toastTitle = "CoreScripts.Feedback.SubmissionToastHeader",
 			toastSubtitle = "CoreScripts.Feedback.SubmissionToastBody"
-		})(function(p1)
-			-- upvalues: p0 (ref), roactModule (copy), toast (copy), images (copy)
-			local toastTitle = p1.toastTitle
-			local toastSubtitle = p1.toastSubtitle
+		})(function(p2)
+			-- upvalues: p1 (ref), roactModule (copy), toast (copy), images (copy)
+			local toastTitle = p2.toastTitle
+			local toastSubtitle = p2.toastSubtitle
 			
-			if p0.props.numFeedbackSubmissionAttempts % 2 == 0 then
-				toastTitle = p1.toastTitle .. " "
-				toastSubtitle = p1.toastSubtitle .. " "
+			if p1.props.numFeedbackSubmissionAttempts % 2 == 0 then
+				toastTitle = p2.toastTitle .. " "
+				toastSubtitle = p2.toastSubtitle .. " "
 			end
 			return roactModule.createElement(toast, {
 				duration = 3,
@@ -42,8 +42,8 @@ function feedbackSubmissionToast.render(p0)
 	})
 end
 
-return roactRoduxModule.connect(function(p2)
+return roactRoduxModule.connect(function(p1)
 	return {
-		numFeedbackSubmissionAttempts = p2.common.numFeedbackSubmissionAttempts
+		numFeedbackSubmissionAttempts = p1.common.numFeedbackSubmissionAttempts
 	}
 end, nil)(feedbackSubmissionToast)

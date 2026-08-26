@@ -2,19 +2,19 @@
 local runService = game:GetService("RunService")
 local workspaceService = game:GetService("Workspace")
 local createTemporaryOverlayModule = require(script.Parent.CreateTemporaryOverlay)
-local var4 = nil
-local var5 = nil
-local var6 = 0
+local var1 = nil
+local var2 = nil
+local var3 = 0
 local t = {}
-local var8 = 1
-local var9 = nil
-local var10 = 50
-local var11 = Vector3.new(0, 0, 0)
-local var12 = nil
+local var4 = 1
+local var5 = nil
+local var6 = 50
+local var7 = Vector3.new(0, 0, 0)
+local var8 = nil
 
 return {
-	createSpectatorCamera = function(p0)
-		-- upvalues: var10 (write), t (write), var8 (write), userInputService (ref), var5 (write), var11 (write), var12 (write), workspaceService (ref), runService (ref), var4 (write), createTemporaryOverlayModule (ref), var9 (write), var6 (write)
+	createSpectatorCamera = function(p1)
+		-- upvalues: var6 (write), t (write), var4 (write), userInputService (ref), var2 (write), var7 (write), var8 (write), workspaceService (ref), runService (ref), var1 (write), createTemporaryOverlayModule (ref), var5 (write), var3 (write)
 		local inputFrame = Instance.new("Frame")
 		inputFrame.Name = "InputFrame"
 		inputFrame.Size = UDim2.new(0.4, 0, 0.15, 0)
@@ -24,7 +24,7 @@ return {
 		inputFrame.BackgroundTransparency = 0.4
 		inputFrame.BorderSizePixel = 0
 		inputFrame.Visible = false
-		inputFrame.Parent = p0.screenGui
+		inputFrame.Parent = p1.screenGui
 		local UIListLayout = Instance.new("UIListLayout")
 		UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 		UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
@@ -38,14 +38,14 @@ return {
 		speedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 		speedLabel.Font = Enum.Font.SourceSans
 		speedLabel.TextScaled = true
-		speedLabel.Text = "Free Cam Speed (Current: " .. math.floor(var10) .. ") Between 10 And 20000"
+		speedLabel.Text = "Free Cam Speed (Current: " .. math.floor(var6) .. ") Between 10 And 20000"
 		speedLabel.Parent = inputFrame
 		local speedTextBox = Instance.new("TextBox")
 		speedTextBox.Name = "SpeedTextBox"
 		speedTextBox.Size = UDim2.new(0.9, 0, 0.25, 0)
 		speedTextBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 		speedTextBox.BackgroundTransparency = 0
-		speedTextBox.Text = tostring(math.floor(var10))
+		speedTextBox.Text = tostring(math.floor(var6))
 		speedTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 		speedTextBox.TextScaled = true
 		speedTextBox.Font = Enum.Font.SourceSans
@@ -62,19 +62,19 @@ return {
 		applyButton.TextScaled = true
 		applyButton.Parent = inputFrame
 		applyButton.MouseButton1Click:Connect(function()
-			-- upvalues: speedTextBox (ref), var10 (copy), speedLabel (ref)
+			-- upvalues: speedTextBox (ref), var6 (copy), speedLabel (ref)
 			local ok, status = pcall(tonumber, speedTextBox.Text)
 			
 			if ok and type(status) == "number" and (status >= 10 and status <= 20000) then
-				var10 = status
-				speedLabel.Text = "Free Cam Speed (Current: " .. math.floor(var10) .. ") Between 10 And 20000"
+				var6 = status
+				speedLabel.Text = "Free Cam Speed (Current: " .. math.floor(var6) .. ") Between 10 And 20000"
 				
 				return
 			end
 			warn("Invalid speed input: " .. speedTextBox.Text .. ". Please enter a number between 10 and 20000.")
-			speedTextBox.Text = tostring(math.floor(var10))
+			speedTextBox.Text = tostring(math.floor(var6))
 		end)
-		local var18 = false
+		local var9 = false
 		
 		local function updateHumanoidList()
 			-- upvalues: t (copy)
@@ -88,25 +88,25 @@ return {
 		end
 		
 		local function _()
-			-- upvalues: updateHumanoidList (ref), t (copy), var8 (copy)
+			-- upvalues: updateHumanoidList (ref), t (copy), var4 (copy)
 			updateHumanoidList()
 			
-			return if #t == 0 then nil else t[var8]
+			return if #t == 0 then nil else t[var4]
 		end
 		
 		local _ = function()
-			-- upvalues: updateHumanoidList (ref), t (copy), var8 (copy)
+			-- upvalues: updateHumanoidList (ref), t (copy), var4 (copy)
 			updateHumanoidList()
 			
 			if #t == 0 then
 				return nil
 			end
-			var8 = var8 % #t + 1
+			var4 = var4 % #t + 1
 			
-			return t[var8]
+			return t[var4]
 		end
 		
-		local _ = function(p1)
+		local _ = function(p2)
 			-- upvalues: updateHumanoidList (ref), t (copy)
 			updateHumanoidList()
 			
@@ -114,156 +114,156 @@ return {
 				return nil
 			end
 			for i, v in ipairs(t) do
-				if v.DisplayName == p1 then
+				if v.DisplayName == p2 then
 					return v
 				end
 			end
 			return nil
 		end
 		
-		local function StepFreecam(p2)
-			-- upvalues: var10 (copy), userInputService (copy), var5 (copy), var11 (copy), var12 (copy), workspaceService (copy)
-			local var23 = if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) then var10 * 3 else var10
-			local var24 = Vector3.new(0, 0, 0)
+		local function StepFreecam(p3)
+			-- upvalues: var6 (copy), userInputService (copy), var2 (copy), var7 (copy), var8 (copy), workspaceService (copy)
+			local var10 = if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) then var6 * 3 else var6
+			local var11 = Vector3.new(0, 0, 0)
 			
 			if userInputService:IsKeyDown(Enum.KeyCode.W) then
-				var24 += var5.LookVector
+				var11 += var2.LookVector
 			end
 			if userInputService:IsKeyDown(Enum.KeyCode.S) then
-				var24 -= var5.LookVector
+				var11 -= var2.LookVector
 			end
 			if userInputService:IsKeyDown(Enum.KeyCode.D) then
-				var24 += var5.RightVector
+				var11 += var2.RightVector
 			end
 			if userInputService:IsKeyDown(Enum.KeyCode.A) then
-				var24 -= var5.RightVector
+				var11 -= var2.RightVector
 			end
 			if userInputService:IsKeyDown(Enum.KeyCode.E) then
-				var24 += Vector3.new(0, 1, 0)
+				var11 += Vector3.new(0, 1, 0)
 			end
 			if userInputService:IsKeyDown(Enum.KeyCode.Q) then
-				var24 -= Vector3.new(0, 1, 0)
+				var11 -= Vector3.new(0, 1, 0)
 			end
-			if var24.Magnitude > 0 then
-				var24 = var24.Unit
+			if var11.Magnitude > 0 then
+				var11 = var11.Unit
 			end
-			local var25 = var24 * var23
-			var11 = var11:Lerp(var25, 1 - math.exp(-10 * p2))
+			local var12 = var11 * var10
+			var7 = var7:Lerp(var12, 1 - math.exp(-10 * p3))
 			
-			if var25.Magnitude == 0 and var11.Magnitude < 0.1 then
-				var11 = Vector3.new(0, 0, 0)
+			if var12.Magnitude == 0 and var7.Magnitude < 0.1 then
+				var7 = Vector3.new(0, 0, 0)
 			end
-			var5 += var11 * p2
+			var2 += var7 * p3
 			
 			if userInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then
 				userInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 				local mouseDelta = userInputService:GetMouseDelta()
-				local var27 = var12 == nil and (if mouseDelta.X <= 700 then mouseDelta.Y > 300 else true)
-				local var28 = var12 ~= nil and (if math.abs(mouseDelta.X - var12.X) <= 300 then math.abs(mouseDelta.Y - var12.Y) > 150 else true)
-				var12 = mouseDelta
+				local var13 = var8 == nil and (if mouseDelta.X <= 700 then mouseDelta.Y > 300 else true)
+				local var14 = var8 ~= nil and (if math.abs(mouseDelta.X - var8.X) <= 300 then math.abs(mouseDelta.Y - var8.Y) > 150 else true)
+				var8 = mouseDelta
 				
-				if not var27 and not var28 then
-					var5 = CFrame.new(var5.Position) * (CFrame.Angles(0, math.rad(-mouseDelta.X * 0.4), 0) * var5.Rotation * CFrame.Angles(math.rad(-mouseDelta.Y * 0.4), 0, 0))
+				if not var13 and not var14 then
+					var2 = CFrame.new(var2.Position) * (CFrame.Angles(0, math.rad(-mouseDelta.X * 0.4), 0) * var2.Rotation * CFrame.Angles(math.rad(-mouseDelta.Y * 0.4), 0, 0))
 				end
 			else
 				userInputService.MouseBehavior = Enum.MouseBehavior.Default
 			end
-			workspaceService.CurrentCamera.CFrame = var5
+			workspaceService.CurrentCamera.CFrame = var2
 		end
 		
 		local function setCameraMode(value)
-			-- upvalues: runService (copy), userInputService (copy), inputFrame (ref), var4 (copy), workspaceService (copy), updateHumanoidList (ref), t (copy), setCameraMode (ref), createTemporaryOverlayModule (copy), p0 (ref), var5 (copy), StepFreecam (ref), var18 (write), speedTextBox (ref), var10 (copy), speedLabel (ref), var9 (copy), var8 (copy), var6 (copy)
+			-- upvalues: runService (copy), userInputService (copy), inputFrame (ref), var1 (copy), workspaceService (copy), updateHumanoidList (ref), t (copy), setCameraMode (ref), createTemporaryOverlayModule (copy), p1 (ref), var2 (copy), StepFreecam (ref), var9 (write), speedTextBox (ref), var6 (copy), speedLabel (ref), var5 (copy), var4 (copy), var3 (copy)
 			runService:UnbindFromRenderStep("Freecam")
 			userInputService.MouseBehavior = Enum.MouseBehavior.Default
 			inputFrame.Visible = false
 			
-			if var4 == nil then
+			if var1 == nil then
 				if workspaceService.CurrentCamera.CameraSubject == nil then
 					value = math.max(1, value)
 				else
-					var4 = workspaceService.CurrentCamera.CameraSubject.DisplayName
+					var1 = workspaceService.CurrentCamera.CameraSubject.DisplayName
 				end
 			end
 			if value == 0 then
-				local var30
+				local var10
 				workspaceService.CurrentCamera.CameraType = Enum.CameraType.Custom
-				local var29 = var4
+				local var11 = var1
 				updateHumanoidList()
 				
 				if #t == 0 then
-					var30 = nil
+					var10 = nil
 				else
 					for i, v in ipairs(t) do
-						if v.DisplayName == var29 then
-							var30 = v
+						if v.DisplayName == var11 then
+							var10 = v
 						end
 					end
-					var30 = nil
+					var10 = nil
 				end
-				if var30 == nil then
-					warn("Default humanoid not found: " .. tostring(var4))
+				if var10 == nil then
+					warn("Default humanoid not found: " .. tostring(var1))
 					setCameraMode(1)
 					
 					return
 				end
-				workspaceService.CurrentCamera.CameraSubject = var30
-				createTemporaryOverlayModule.showOverlay("Default Camera", 2, p0.screenGui)
+				workspaceService.CurrentCamera.CameraSubject = var10
+				createTemporaryOverlayModule.showOverlay("Default Camera", 2, p1.screenGui)
 				
 				return
 			elseif value == 1 then
 				workspaceService.CurrentCamera.CameraType = Enum.CameraType.Scriptable
 				workspaceService.CurrentCamera.CameraSubject = nil
-				var5 = workspaceService.CurrentCamera.CFrame
+				var2 = workspaceService.CurrentCamera.CFrame
 				runService:BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, StepFreecam)
-				inputFrame.Visible = var18
-				speedTextBox.Text = tostring(math.floor(var10))
-				speedLabel.Text = "Free Cam Speed (Current: " .. math.floor(var10) .. ") Between 10 And 20000"
-				createTemporaryOverlayModule.showOverlay("Free Camera", 2, p0.screenGui)
+				inputFrame.Visible = var9
+				speedTextBox.Text = tostring(math.floor(var6))
+				speedLabel.Text = "Free Cam Speed (Current: " .. math.floor(var6) .. ") Between 10 And 20000"
+				createTemporaryOverlayModule.showOverlay("Free Camera", 2, p1.screenGui)
 				
 				return
 			elseif value == 2 then
 				updateHumanoidList()
-				var9 = if #t == 0 then nil else t[var8]
+				var5 = if #t == 0 then nil else t[var4]
 				
-				if var9 then
+				if var5 then
 					workspaceService.CurrentCamera.CameraType = Enum.CameraType.Follow
-					workspaceService.CurrentCamera.CameraSubject = var9
-					createTemporaryOverlayModule.showOverlay("Follow " .. var9.DisplayName, 2, p0.screenGui)
+					workspaceService.CurrentCamera.CameraSubject = var5
+					createTemporaryOverlayModule.showOverlay("Follow " .. var9.DisplayName, 2, p1.screenGui)
 					
 					return
 				end
-				var6 = 0
+				var3 = 0
 				setCameraMode(0)
 			end
 		end
 		
 		local _ = function()
-			-- upvalues: var6 (copy), setCameraMode (ref)
-			var6 = (var6 + 1) % 3
-			setCameraMode(var6)
+			-- upvalues: var3 (copy), setCameraMode (ref)
+			var3 = (var3 + 1) % 3
+			setCameraMode(var3)
 		end
 		
 		local function onInputBegan(p3, p4)
-			-- upvalues: var6 (copy), setCameraMode (ref), updateHumanoidList (ref), t (copy), var8 (copy), var18 (write), inputFrame (ref), speedTextBox (ref)
+			-- upvalues: var3 (copy), setCameraMode (ref), updateHumanoidList (ref), t (copy), var4 (copy), var9 (write), inputFrame (ref), speedTextBox (ref)
 			if p4 then return end
 			if p3.KeyCode == Enum.KeyCode.C then
-				var6 = (var6 + 1) % 3
-				setCameraMode(var6)
+				var3 = (var3 + 1) % 3
+				setCameraMode(var3)
 			end
-			if p3.KeyCode == Enum.KeyCode.N and var6 == 2 then
+			if p3.KeyCode == Enum.KeyCode.N and var3 == 2 then
 				updateHumanoidList()
 				
 				if #t ~= 0 then
-					var8 = var8 % #t + 1
-					local _ = t[var8]
+					var4 = var4 % #t + 1
+					local _ = t[var4]
 				end
 				setCameraMode(2)
 			end
-			if p3.KeyCode == Enum.KeyCode.V and var6 == 1 then
-				var18 = not var18
-				inputFrame.Visible = var18
+			if p3.KeyCode == Enum.KeyCode.V and var3 == 1 then
+				var9 = not var9
+				inputFrame.Visible = var9
 				
-				if var18 then
+				if var9 then
 					speedTextBox:CaptureFocus()
 					
 					return

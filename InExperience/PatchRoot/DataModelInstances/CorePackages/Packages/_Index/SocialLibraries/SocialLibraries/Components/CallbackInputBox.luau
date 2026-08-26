@@ -36,19 +36,19 @@ callbackInputBox.defaultProps = {
 	[roact.Change.AbsoluteSize] = function() end
 }
 
-function callbackInputBox.init(p0)
+function callbackInputBox.init(p1)
 	-- upvalues: roact (ref)
-	p0.clearRef = roact.createRef()
-	p0.inputBoxRef = p0.props.inputBoxRef or roact.createRef()
-	p0.inputText = p0.props.initialInputText
-	p0.textChangedEventUnlocked = false
+	p1.clearRef = roact.createRef()
+	p1.inputBoxRef = p1.props.inputBoxRef or roact.createRef()
+	p1.inputText = p1.props.initialInputText
+	p1.textChangedEventUnlocked = false
 	
 	function p0.focusTextbox()
-		-- upvalues: p0 (ref)
-		p0.props.onSelectCallback()
+		-- upvalues: p1 (ref)
+		p1.props.onSelectCallback()
 		
-		if not p0.inputBoxRef.current:IsFocused() then
-			p0.inputBoxRef.current:captureFocus()
+		if not p1.inputBoxRef.current:IsFocused() then
+			p1.inputBoxRef.current:captureFocus()
 		end
 	end
 end
@@ -115,32 +115,32 @@ function callbackInputBox.render(p1)
 					end
 					p1.props.focusChangedCallback(true)
 				end,
-				[roact.Event.FocusLost] = function(p3, p4)
+				[roact.Event.FocusLost] = function(p2, p3)
 					-- upvalues: p1 (ref), placeholderTextTransparency (ref)
 					if p1.inputBoxRef.current and p1.inputBoxRef.current.Text == "" then
-						p3.TextColor3 = p1.props.placeholderTextColor3
-						p3.TextTransparency = placeholderTextTransparency
+						p2.TextColor3 = p1.props.placeholderTextColor3
+						p2.TextTransparency = placeholderTextTransparency
 					end
-					p1.props.focusChangedCallback(false, p4)
+					p1.props.focusChangedCallback(false, p3)
 				end,
-				[roact.Change.Text] = function(p5)
+				[roact.Change.Text] = function(p2)
 					-- upvalues: p1 (ref), inputTextTransparency (ref), placeholderTextTransparency (ref)
-					if p5.Text ~= "" or p1.textChangedEventUnlocked then
-						if p5.Text == "" then
+					if p2.Text ~= "" or p1.textChangedEventUnlocked then
+						if p2.Text == "" then
 							if p1.clearRef.current then
 								p1.clearRef.current.Visible = false
 							end
-							p5.TextColor3 = p1.props.placeholderTextColor3
-							p5.TextTransparency = placeholderTextTransparency
+							p2.TextColor3 = p1.props.placeholderTextColor3
+							p2.TextTransparency = placeholderTextTransparency
 						elseif p1.clearRef.current and not p1.props.clearButtonDisabled then
 							p1.clearRef.current.Visible = true
 						end
-						p5.TextColor3 = p1.props.inputTextColor3
-						p5.TextTransparency = inputTextTransparency
-						p1.inputText = p5.Text
+						p2.TextColor3 = p1.props.inputTextColor3
+						p2.TextTransparency = inputTextTransparency
+						p1.inputText = p2.Text
 						
 						if p1.props.textChangedCallback then
-							p1.props.textChangedCallback(p5.Text)
+							p1.props.textChangedCallback(p2.Text)
 						end
 					end
 					p1.textChangedEventUnlocked = true
@@ -186,15 +186,15 @@ function callbackInputBox.render(p1)
 	})
 end
 
-function callbackInputBox.didMount(p6)
-	if p6.inputBoxRef.current then
-		p6.inputBoxRef.current.Text = p6.inputText
+function callbackInputBox.didMount(p1)
+	if p1.inputBoxRef.current then
+		p1.inputBoxRef.current.Text = p1.inputText
 		
-		if p6.props.captureFocusOnMount then
+		if p1.props.captureFocusOnMount then
 			spawn(function()
-				-- upvalues: p6 (ref)
-				if p6.inputBoxRef and p6.inputBoxRef.current then
-					p6.inputBoxRef.current:captureFocus()
+				-- upvalues: p1 (ref)
+				if p1.inputBoxRef and p1.inputBoxRef.current then
+					p1.inputBoxRef.current:captureFocus()
 				end
 			end)
 		end

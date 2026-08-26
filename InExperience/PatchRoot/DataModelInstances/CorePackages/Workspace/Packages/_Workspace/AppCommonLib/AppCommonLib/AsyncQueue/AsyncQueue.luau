@@ -11,35 +11,35 @@ function t.new()
 	return t_1
 end
 
-function t:request(p0)
+function t:request(p1)
 	-- upvalues: promiseModule (ref)
 	local bindableEvent = Instance.new("BindableEvent")
-	local var4 = false
-	local var5 = false
+	local var1 = false
+	local var2 = false
 	self.head = self.head:andThen(function()
-		-- upvalues: promiseModule (copy), var4 (write), p0 (ref), var5 (write), bindableEvent (ref)
-		return promiseModule.new(function(p1)
-			-- upvalues: var4 (copy), p0 (copy), var5 (copy), bindableEvent (copy)
-			if not var4 then
-				pcall(p0)
+		-- upvalues: promiseModule (copy), var1 (write), p1 (ref), var2 (write), bindableEvent (ref)
+		return promiseModule.new(function(p2)
+			-- upvalues: var1 (copy), p1 (copy), var2 (copy), bindableEvent (copy)
+			if not var1 then
+				pcall(p1)
 			end
-			if not var4 then
-				var5 = true
+			if not var1 then
+				var2 = true
 				bindableEvent.Event:Wait()
 			end
 			bindableEvent:Destroy()
-			p1()
+			p2()
 		end)
 	end)
 	
 	return function()
-		-- upvalues: var5 (write), bindableEvent (ref), var4 (write)
-		if var5 then
+		-- upvalues: var2 (write), bindableEvent (ref), var1 (write)
+		if var2 then
 			bindableEvent:Fire()
 			
 			return
 		end
-		var4 = true
+		var1 = true
 	end
 end
 

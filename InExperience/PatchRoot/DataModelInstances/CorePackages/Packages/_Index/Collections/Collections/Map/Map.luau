@@ -8,55 +8,55 @@ local instanceOfModule = require(parent_1.InstanceOf)
 local _ = require(parent_1.ES7Types)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: isArrayModule (ref), dEV (ref), instanceOfModule (ref), t (ref)
 	local cloned = nil
 	local cloned_1 = nil
 	
-	if p0 == nil then
+	if p1 == nil then
 		cloned = {}
 		cloned_1 = {}
-	elseif isArrayModule(p0) then
-		if dEV and #p0 > 0 and typeof(p0[1]) ~= "table" then
-			error("Value `" .. typeof(p0[1]) .. "` is not an entry object.\n " .. "Cannot create Map from {K, V} form, it must be { {K, V}... }")
+	elseif isArrayModule(p1) then
+		if dEV and #p1 > 0 and typeof(p1[1]) ~= "table" then
+			error("Value `" .. typeof(p1[1]) .. "` is not an entry object.\n " .. "Cannot create Map from {K, V} form, it must be { {K, V}... }")
 		end
-		cloned = table.create(#p0)
+		cloned = table.create(#p1)
 		cloned_1 = {}
 		
-		for i, v in p0 do
-			local var7 = v[1]
+		for i, v in p1 do
+			local var1 = v[1]
 			
-			if dEV and var7 == nil then
+			if dEV and var1 == nil then
 				error("cannot create Map from a table that isn't an array.")
 			end
-			local var8 = v[2]
+			local var2 = v[2]
 			
-			if cloned_1[var7] == nil then
-				table.insert(cloned, var7)
+			if cloned_1[var1] == nil then
+				table.insert(cloned, var1)
 			end
-			cloned_1[var7] = var8
+			cloned_1[var1] = var2
 		end
-	elseif instanceOfModule(p0, t) then
-		cloned = table.clone(p0._array)
-		cloned_1 = table.clone(p0._map)
+	elseif instanceOfModule(p1, t) then
+		cloned = table.clone(p1._array)
+		cloned_1 = table.clone(p1._map)
 	else
-		error(("`%s` `%s` is not iterable, cannot make Map using it"):format(typeof(p0), tostring(p0)))
+		error(("`%s` `%s` is not iterable, cannot make Map using it"):format(typeof(p1), tostring(p1)))
 	end
 	return setmetatable({ size = #cloned, _map = cloned_1, _array = cloned }, t)
 end
 
-function t:set(p1, p2)
-	if self._map[p1] == nil then
+function t:set(p2, p3)
+	if self._map[p2] == nil then
 		self.size += 1
-		table.insert(self._array, p1)
+		table.insert(self._array, p2)
 	end
-	self._map[p1] = p2
+	self._map[p2] = p3
 	
 	return self
 end
 
-function t:get(p3)
-	return self._map[p3]
+function t:get(p2)
+	return self._map[p2]
 end
 
 function t:clear()
@@ -66,13 +66,13 @@ function t:clear()
 	_table.clear(self._array)
 end
 
-function t:delete(p4)
-	if self._map[p4] == nil then
+function t:delete(p2)
+	if self._map[p2] == nil then
 		return false
 	end
 	self.size -= 1
-	self._map[p4] = nil
-	local index = table.find(self._array, p4)
+	self._map[p2] = nil
+	local index = table.find(self._array, p2)
 	
 	if index then
 		table.remove(self._array, index)
@@ -80,26 +80,26 @@ function t:delete(p4)
 	return true
 end
 
-function t:forEach(p5, p6)
+function t:forEach(p2, p3)
 	-- upvalues: dEV (ref), forEachModule (ref)
-	if dEV and typeof(p5) ~= "function" then
+	if dEV and typeof(p2) ~= "function" then
 		error("callback is not a function")
 	end
-	forEachModule(self._array, function(p7)
-		-- upvalues: self (ref), p6 (ref), p5 (ref)
-		local var11 = self._map[p7]
+	forEachModule(self._array, function(p4)
+		-- upvalues: self (ref), p3 (ref), p2 (ref)
+		local var3 = self._map[p4]
 		
-		if p6 == nil then
-			p5(var11, p7, self)
+		if p3 == nil then
+			p2(var3, p4, self)
 			
 			return
 		end
-		p5(p6, var11, p7, self)
+		p2(p3, var3, p4, self)
 	end)
 end
 
-function t:has(p8)
-	return self._map[p8] ~= nil
+function t:has(p2)
+	return self._map[p2] ~= nil
 end
 
 function t:keys()
@@ -108,17 +108,17 @@ end
 
 function t:values()
 	-- upvalues: mapModule (ref)
-	return mapModule(self._array, function(p9)
+	return mapModule(self._array, function(p2)
 		-- upvalues: self (ref)
-		return self._map[p9]
+		return self._map[p2]
 	end)
 end
 
 function t:entries()
 	-- upvalues: mapModule (ref)
-	return mapModule(self._array, function(p10)
+	return mapModule(self._array, function(p2)
 		-- upvalues: self (ref)
-		return { p10, self._map[p10] }
+		return { p2, self._map[p2] }
 	end)
 end
 
@@ -134,20 +134,20 @@ function t:__iter()
 	return next, self:entries()
 end
 
-function t:__index(p11)
+function t:__index(p2)
 	-- upvalues: t (ref), dEV (ref)
-	local var12 = rawget(t, p11)
+	local var3 = rawget(t, p2)
 	
-	if var12 ~= nil then
-		return var12
+	if var3 ~= nil then
+		return var3
 	elseif dEV then
 		assert(rawget(self, "_map"), "Map has been corrupted, and is missing private state! Did you accidentally call table.clear() instead of map:clear()?")
 	end
-	return t.get(self, p11)
+	return t.get(self, p2)
 end
 
-function t:__newindex(p12, p13)
-	self:set(p12, p13)
+function t:__newindex(p2, p3)
+	self:set(p2, p3)
 end
 
 return t

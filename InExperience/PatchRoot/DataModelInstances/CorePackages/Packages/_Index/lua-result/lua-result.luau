@@ -2,28 +2,28 @@
 t.__index = t
 local var1 = newproxy(true)
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: var1 (ref), t (ref)
-	assert(typeof(p0) == "boolean")
+	assert(typeof(p1) == "boolean")
 	local t_1 = {
 		_source = debug.traceback(),
 		[var1] = true,
-		_status = p0,
-		_value = p1
+		_status = p1,
+		_value = p2
 	}
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-function t.success(p2)
+function t.success(p1)
 	-- upvalues: t (ref)
-	return t.new(true, p2)
+	return t.new(true, p1)
 end
 
-function t.error(p3)
+function t.error(p1)
 	-- upvalues: t (ref)
-	return t.new(false, p3)
+	return t.new(false, p1)
 end
 
 function t:is()
@@ -31,30 +31,30 @@ function t:is()
 	return typeof(self) == "table" and self[var1]
 end
 
-function t:match(p4, p5)
+function t:match(p1, p2)
 	-- upvalues: t (ref)
-	assert(if typeof(p4) ~= "function" then typeof(p4) == "nil" else true, string.format("Result:match expects successHandler to be a function or nil, got %s", typeof(p4)))
-	assert(if typeof(p5) ~= "function" then typeof(p5) == "nil" else true, string.format("Result:match expects errorHandler to be a function or nil, got %s", typeof(p5)))
-	local var3 = nil
+	assert(if typeof(p1) ~= "function" then typeof(p1) == "nil" else true, string.format("Result:match expects successHandler to be a function or nil, got %s", typeof(p1)))
+	assert(if typeof(p2) ~= "function" then typeof(p2) == "nil" else true, string.format("Result:match expects errorHandler to be a function or nil, got %s", typeof(p2)))
+	local var2 = nil
 	
 	if self._status then
-		if p4 == nil then
+		if p1 == nil then
 			return self
 		end
-		var3 = p4(self._value)
-	elseif p5 == nil then
+		var2 = p1(self._value)
+	elseif p2 == nil then
 		return self
 	end
-	var3 = p5(self._value)
-	return if t.is(var3) then var3 else t.success(var3)
+	var2 = p2(self._value)
+	return if t.is(var2) then var2 else t.success(var2)
 end
 
-function t:matchSuccess(p6)
-	return self:match(p6, nil)
+function t:matchSuccess(p1)
+	return self:match(p1, nil)
 end
 
-function t:matchError(p7)
-	return self:match(nil, p7)
+function t:matchError(p1)
+	return self:match(nil, p1)
 end
 
 function t:unwrap()

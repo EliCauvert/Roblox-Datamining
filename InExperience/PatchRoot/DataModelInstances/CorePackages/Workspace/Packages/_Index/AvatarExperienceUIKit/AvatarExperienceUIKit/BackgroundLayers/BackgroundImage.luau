@@ -11,21 +11,21 @@ local t = {
 
 return function(value)
 	-- upvalues: dashModule (ref), t (ref), reactModule (ref)
-	local var3 = dashModule.join(t, value)
+	local var1 = dashModule.join(t, value)
 	
 	return reactModule.createElement("ImageLabel", {
-		AnchorPoint = var3.anchorPoint,
-		Position = var3.position,
+		AnchorPoint = var1.anchorPoint,
+		Position = var1.position,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Image = var3.resourceIdentifier,
-		ImageColor3 = var3.color,
-		ImageTransparency = var3.transparency,
-		ScaleType = var3.scaleType,
+		Image = var1.resourceIdentifier,
+		ImageColor3 = var1.color,
+		ImageTransparency = var1.transparency,
+		ScaleType = var1.scaleType,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = var3.ZIndex,
-		[reactModule.Tag] = var3.tag
+		ZIndex = var1.ZIndex,
+		[reactModule.Tag] = var1.tag
 	}, {
-		CornerRadius = reactModule.createElement("UICorner", { CornerRadius = var3.cornerRadius })
+		CornerRadius = reactModule.createElement("UICorner", { CornerRadius = var1.cornerRadius })
 	})
 end

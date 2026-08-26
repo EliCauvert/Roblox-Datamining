@@ -23,100 +23,100 @@ end
 
 return reactModule.memo(function(value)
 	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), compactWidthThreshold (ref), foundationModule (ref), useAutoTrayHeightModule (ref), reactModule (ref), guiService (ref), setIsPresetTrayOpenModule (ref), otterModule (ref), slideSpring (ref), userInputService (ref), configModule (ref), presetChatContainerModule (ref)
-	local var14
-	local var12 = getPresetChatStoreModule(false)
-	local var13 = signalsReactModule.useSignalState(var12.getIsTrayOpen)
+	local var1
+	local var2 = getPresetChatStoreModule(false)
+	local var3 = signalsReactModule.useSignalState(var2.getIsTrayOpen)
 	local currentCamera = workspace.CurrentCamera
 	
 	if currentCamera then
-		var14 = currentCamera.ViewportSize.X < compactWidthThreshold
-		var14 = nil
+		var1 = currentCamera.ViewportSize.X < compactWidthThreshold
+		var1 = nil
 	else
-		var14 = false
+		var1 = false
 	end
-	local var15 = foundationModule.Hooks.useTokens()
-	local var16, var17 = useAutoTrayHeightModule()
-	local var18, var19 = reactModule.useState(false)
-	local var20, var21 = reactModule.useBinding(1)
-	local var22 = reactModule.useRef(nil)
-	local var23, var24 = reactModule.useState(0)
-	local var25, var26 = reactModule.useState(0)
-	local var27, var28 = reactModule.useState(guiService.TopbarInset.Height)
-	local var29 = var16 + math.max(0, var23 - var25 - var27)
+	local var4 = foundationModule.Hooks.useTokens()
+	local var5, var6 = useAutoTrayHeightModule()
+	local var7, var8 = reactModule.useState(false)
+	local var9, var10 = reactModule.useBinding(1)
+	local var11 = reactModule.useRef(nil)
+	local var12, var13 = reactModule.useState(0)
+	local var14, var15 = reactModule.useState(0)
+	local var16, var17 = reactModule.useState(guiService.TopbarInset.Height)
+	local var18 = var5 + math.max(0, var12 - var14 - var16)
 	reactModule.useEffect(function()
-		-- upvalues: guiService (copy), var28 (ref)
-		local var35 = guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function()
-			-- upvalues: var28 (copy), guiService (copy)
-			var28(guiService.TopbarInset.Height)
+		-- upvalues: guiService (copy), var17 (ref)
+		local var19 = guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function()
+			-- upvalues: var17 (copy), guiService (copy)
+			var17(guiService.TopbarInset.Height)
 		end)
 		
 		return function()
-			-- upvalues: var35 (ref)
-			var35:Disconnect()
+			-- upvalues: var19 (ref)
+			var19:Disconnect()
 		end
 	end, {})
-	local var30, var31 = reactModule.useState(false)
-	local var32 = reactModule.useCallback(function(p0)
-		-- upvalues: var24 (ref), var31 (ref)
-		var24(p0.AbsoluteSize.Y)
-		var31(p0.AbsoluteSize.X < p0.AbsoluteSize.Y)
+	local var19, var20 = reactModule.useState(false)
+	local var21 = reactModule.useCallback(function(p1)
+		-- upvalues: var13 (ref), var20 (ref)
+		var13(p1.AbsoluteSize.Y)
+		var20(p1.AbsoluteSize.X < p1.AbsoluteSize.Y)
 	end, {})
-	local var33 = reactModule.useCallback(function(p1)
-		-- upvalues: var26 (ref), var17 (ref)
-		var26(p1.AbsoluteSize.Y)
-		var17(p1)
-	end, { var17 })
-	local var34 = reactModule.useCallback(function()
-		-- upvalues: setIsPresetTrayOpenModule (copy), var12 (ref)
-		setIsPresetTrayOpenModule(var12, false)
-	end, { var12 })
+	local var22 = reactModule.useCallback(function(p1)
+		-- upvalues: var15 (ref), var6 (ref)
+		var15(p1.AbsoluteSize.Y)
+		var6(p1)
+	end, { var6 })
+	local var23 = reactModule.useCallback(function()
+		-- upvalues: setIsPresetTrayOpenModule (copy), var2 (ref)
+		setIsPresetTrayOpenModule(var2, false)
+	end, { var2 })
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var19 (ref), var22 (ref), otterModule (copy), var21 (ref), slideSpring (copy)
-		if var13 then
-			var19(true)
+		-- upvalues: var3 (ref), var8 (ref), var11 (ref), otterModule (copy), var10 (ref), slideSpring (copy)
+		if var3 then
+			var8(true)
 			
-			if var22.current then
-				var22.current:destroy()
+			if var11.current then
+				var11.current:destroy()
 			end
-			local var36 = otterModule.createSingleMotor(1)
-			var22.current = var36
-			var36:onStep(function(p2)
-				-- upvalues: var21 (copy)
-				var21(p2)
+			local var24 = otterModule.createSingleMotor(1)
+			var11.current = var24
+			var24:onStep(function(p1)
+				-- upvalues: var10 (copy)
+				var10(p1)
 			end)
-			var36:setGoal(otterModule.spring(0, slideSpring))
+			var24:setGoal(otterModule.spring(0, slideSpring))
 			
 			return
-		elseif var22.current then
-			var22.current:setGoal(otterModule.spring(1, slideSpring))
-			var22.current:onComplete(function()
-				-- upvalues: var19 (copy)
-				var19(false)
+		elseif var11.current then
+			var11.current:setGoal(otterModule.spring(1, slideSpring))
+			var11.current:onComplete(function()
+				-- upvalues: var8 (copy)
+				var8(false)
 			end)
 		end
-	end, { var13 })
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var22 (ref)
+		-- upvalues: var11 (ref)
 		return function()
-			-- upvalues: var22 (copy)
-			if var22.current then
-				var22.current:destroy()
-				var22.current = nil
+			-- upvalues: var11 (copy)
+			if var11.current then
+				var11.current:destroy()
+				var11.current = nil
 			end
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), userInputService (copy), setIsPresetTrayOpenModule (copy), var12 (ref), guiService (copy)
-		if var13 then
-			local inputBeganConnection = userInputService.InputBegan:Connect(function(p3, _)
-				-- upvalues: setIsPresetTrayOpenModule (copy), var12 (copy)
-				if p3.KeyCode == Enum.KeyCode.Escape or p3.KeyCode == Enum.KeyCode.ButtonB then
-					setIsPresetTrayOpenModule(var12, false)
+		-- upvalues: var3 (ref), userInputService (copy), setIsPresetTrayOpenModule (copy), var2 (ref), guiService (copy)
+		if var3 then
+			local inputBeganConnection = userInputService.InputBegan:Connect(function(p1, _)
+				-- upvalues: setIsPresetTrayOpenModule (copy), var2 (copy)
+				if p1.KeyCode == Enum.KeyCode.Escape or p1.KeyCode == Enum.KeyCode.ButtonB then
+					setIsPresetTrayOpenModule(var2, false)
 				end
 			end)
 			local menuOpenedConnection = guiService.MenuOpened:Connect(function()
-				-- upvalues: var12 (copy)
-				var12.setIsTrayOpen(false)
+				-- upvalues: var2 (copy)
+				var2.setIsTrayOpen(false)
 			end)
 			
 			return function()
@@ -125,9 +125,9 @@ return reactModule.memo(function(value)
 				menuOpenedConnection:Disconnect()
 			end
 		end
-	end, { var13, var12, setIsPresetTrayOpenModule })
+	end, { var3, var2, setIsPresetTrayOpenModule })
 	
-	return if var18 then reactModule.createElement(reactModule.Fragment, nil, {
+	return if var7 then reactModule.createElement(reactModule.Fragment, nil, {
 		OuterScreenGui = reactModule.createElement("ScreenGui", {
 			DisplayOrder = 9,
 			ScreenInsets = Enum.ScreenInsets.None,
@@ -136,16 +136,16 @@ return reactModule.memo(function(value)
 			SizeTracker = reactModule.createElement("Frame", {
 				Size = UDim2.fromScale(1, 1),
 				BackgroundTransparency = 1,
-				[reactModule.Change.AbsoluteSize] = var32
+				[reactModule.Change.AbsoluteSize] = var21
 			}),
-			FullFrame = if not var30 then reactModule.createElement(foundationModule.View, {
+			FullFrame = if not var19 then reactModule.createElement(foundationModule.View, {
 				tag = "bg-surface-200",
 				AnchorPoint = Vector2.new(0, 1),
-				Position = var20:map(function(p4)
-					-- upvalues: var29 (ref)
-					return UDim2.new(0, 0, 1, math.round(p4 * var29))
+				Position = var9:map(function(p1)
+					-- upvalues: var18 (ref)
+					return UDim2.new(0, 0, 1, math.round(p1 * var18))
 				end),
-				Size = UDim2.new(1, 0, 0, var29)
+				Size = UDim2.new(1, 0, 0, var18)
 			}) else nil
 		}),
 		InnerScreenGui = reactModule.createElement("ScreenGui", {
@@ -160,26 +160,26 @@ return reactModule.memo(function(value)
 				Size = UDim2.fromScale(1, 1),
 				Text = "",
 				ZIndex = 1,
-				[reactModule.Event.Activated] = var34,
-				[reactModule.Change.AbsoluteSize] = var33
+				[reactModule.Event.Activated] = var23,
+				[reactModule.Change.AbsoluteSize] = var22
 			}),
 			Tray = reactModule.createElement(foundationModule.View, {
 				tag = "stroke-standard stroke-default bg-surface-200",
 				ClipsDescendants = true,
 				ZIndex = 1,
 				AnchorPoint = Vector2.new(0, 1),
-				Position = var20:map(function(p5)
-					-- upvalues: var16 (ref)
-					return UDim2.new(0, 0, 1, math.round(p5 * var16))
+				Position = var9:map(function(p1)
+					-- upvalues: var5 (ref)
+					return UDim2.new(0, 0, 1, math.round(p1 * var5))
 				end),
-				Size = UDim2.new(1, 0, 0, var16)
+				Size = UDim2.new(1, 0, 0, var5)
 			}, {
 				Handle = reactModule.createElement(foundationModule.View, {
 					ZIndex = 2,
 					tag = "bg-divider radius-full",
-					Size = UDim2.new(0, configModule.PresetTray.HandleWidth, 0, var15.Padding.XSmall),
+					Size = UDim2.new(0, configModule.PresetTray.HandleWidth, 0, var4.Padding.XSmall),
 					AnchorPoint = Vector2.new(0.5, 0),
-					Position = UDim2.new(0.5, 0, 0, var15.Padding.XSmall)
+					Position = UDim2.new(0.5, 0, 0, var4.Padding.XSmall)
 				}),
 				Content = reactModule.createElement(foundationModule.View, {
 					tag = "auto-xy",
@@ -189,7 +189,7 @@ return reactModule.memo(function(value)
 					Container = reactModule.createElement(presetChatContainerModule, {
 						shouldShowKeyboardButton = true,
 						textChannel = value.textChannel,
-						compact = var14
+						compact = var1
 					})
 				})
 			})

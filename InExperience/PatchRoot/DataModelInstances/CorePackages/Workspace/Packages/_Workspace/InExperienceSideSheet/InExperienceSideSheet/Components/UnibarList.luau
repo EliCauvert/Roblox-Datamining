@@ -8,21 +8,21 @@ local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetInteg
 local unibarItemModule = require(inExperienceSideSheet.Components.UnibarItem)
 local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
-local function getIntegrations(p0)
+local function getIntegrations(p1)
 	-- upvalues: getIntegrationsStoreModule (ref)
-	return getIntegrationsStoreModule(p0).getUnibarIntegrations(p0)
+	return getIntegrationsStoreModule(p1).getUnibarIntegrations(p1)
 end
 
 return reactModule.memo(function(p1)
 	-- upvalues: signalsReactModule (ref), getIntegrations (ref), reactModule (ref), unibarItemModule (ref), fFlagSideSheetFocusNav (ref), view (ref)
-	local var7 = signalsReactModule.useSignalState(getIntegrations)
+	local var1 = signalsReactModule.useSignalState(getIntegrations)
 	
-	if #var7 == 0 then
+	if #var1 == 0 then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in var7 do
+	for i, v in var1 do
 		t[v.id] = reactModule.createElement(unibarItemModule, {
 			label = v.integration.label,
 			layoutOrder = i,

@@ -16,21 +16,21 @@ local t = {
 	[reactModule.Tag] = "fill"
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), cryoModule (ref), t (ref)
 	return {
-		children = p0.children,
-		createFooter = p0.createFooter,
-		onBack = p0.onBack,
-		onCanvasPositionChangedCallback = p0.onCanvasPositionChangedCallback,
-		onCanvasSizeChangedCallback = p0.onCanvasSizeChangedCallback,
-		refresh = p0.refresh,
+		children = p1.children,
+		createFooter = p1.createFooter,
+		onBack = p1.onBack,
+		onCanvasPositionChangedCallback = p1.onCanvasPositionChangedCallback,
+		onCanvasSizeChangedCallback = p1.onCanvasSizeChangedCallback,
+		refresh = p1.refresh,
 		scrollingElementProps = reactModule.useMemo(function()
-			-- upvalues: cryoModule (copy), t (copy), p0 (ref)
-			return cryoModule.Dictionary.join(t, p0.scrollingElementProps or {})
-		end, { p0.scrollingElementProps }),
-		scrollingFrameRef = p1,
-		searchBarProps = p0.searchBarProps,
-		showEmptyState = p0.showEmptyState
+			-- upvalues: cryoModule (copy), t (copy), p1 (ref)
+			return cryoModule.Dictionary.join(t, p1.scrollingElementProps or {})
+		end, { p1.scrollingElementProps }),
+		scrollingFrameRef = p2,
+		searchBarProps = p1.searchBarProps,
+		showEmptyState = p1.showEmptyState
 	}
 end

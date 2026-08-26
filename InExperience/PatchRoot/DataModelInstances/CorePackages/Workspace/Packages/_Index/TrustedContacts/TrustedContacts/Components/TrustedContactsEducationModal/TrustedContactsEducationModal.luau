@@ -24,46 +24,46 @@ local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnect
 local consoleFriendsPageNavigation = game:DefineFastFlag("ConsoleFriendsPageNavigation", false)
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 
-local function TextWithIcon(p0)
+local function TextWithIcon(p1)
 	-- upvalues: reactModule (ref), icon (ref), iconSize (ref), text (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, p0.iconPadding),
+			Padding = UDim.new(0, p1.iconPadding),
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		Icon = reactModule.createElement(icon, { LayoutOrder = 1, name = p0.icon, size = iconSize.Small }),
+		Icon = reactModule.createElement(icon, { LayoutOrder = 1, name = p1.icon, size = iconSize.Small }),
 		Text = reactModule.createElement(text, {
 			tag = "auto-y grow size-full-0 text-align-x-left text-wrap",
 			LayoutOrder = 2,
-			Text = p0.text
+			Text = p1.text
 		})
 	})
 end
 
 return function(_)
 	-- upvalues: useScreenSize (ref), useNavigation (ref), useTokens (ref), reactModule (ref), accessResponseEnum (ref), ampApiProvider (ref), fStringIsVerified18PlusAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), useTCAnalytics (ref), eventNames (ref), fFlagCreateConnectionsHub (ref), appPage (ref), consoleFriendsPageNavigation (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), partialPageModal (ref), buttonType (ref), skeleton (ref), text (ref), TextWithIcon (ref)
-	local var6 = useScreenSize()
-	local var7 = useNavigation()
-	local var8 = useTokens()
-	local var9, var10 = reactModule.useState(accessResponseEnum.Pending)
+	local var1 = useScreenSize()
+	local var2 = useNavigation()
+	local var3 = useTokens()
+	local var4, var5 = reactModule.useState(accessResponseEnum.Pending)
 	reactModule.useEffect(function()
-		-- upvalues: ampApiProvider (copy), fStringIsVerified18PlusAmpFeature (copy), fStringCanAccessTrustedContactsAmpNameSpace (copy), var10 (ref)
-		var10(ampApiProvider.upsellFeatureAccess(fStringIsVerified18PlusAmpFeature, {}, fStringCanAccessTrustedContactsAmpNameSpace).access)
+		-- upvalues: ampApiProvider (copy), fStringIsVerified18PlusAmpFeature (copy), fStringCanAccessTrustedContactsAmpNameSpace (copy), var5 (ref)
+		var5(ampApiProvider.upsellFeatureAccess(fStringIsVerified18PlusAmpFeature, {}, fStringCanAccessTrustedContactsAmpNameSpace).access)
 	end, {})
 	local fireAnalyticsEvent = useTCAnalytics().fireAnalyticsEvent
 	reactModule.useEffect(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy)
 		fireAnalyticsEvent(eventNames.TCEducationModalSeen)
 	end, {})
-	local var11 = useLocalization({
+	local var6 = useLocalization({
 		title = "Feature.Friends.TCEducation.Title",
 		textChatWithoutFilters = "Feature.Friends.TCFeature.ChatWithoutFilters",
 		textPartyVoice = "Feature.Friends.TCFeature.PartyVoice",
@@ -77,45 +77,45 @@ return function(_)
 	})
 	
 	return reactModule.createElement(partialPageModal, {
-		title = var11.title,
-		screenSize = var6,
+		title = var6.title,
+		screenSize = var1,
 		onCloseClicked = reactModule.useCallback(function()
-			-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var7 (ref)
+			-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var2 (ref)
 			fireAnalyticsEvent(eventNames.TCEducationCloseClicked)
-			var7.pop()
-		end, { var7 }),
+			var2.pop()
+		end, { var2 }),
 		buttonStackProps = {
 			buttons = {
 				{
 					buttonType = buttonType.PrimaryContextual,
 					props = {
 						onActivated = reactModule.useCallback(function()
-							-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var7 (ref)
+							-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var2 (ref)
 							fireAnalyticsEvent(eventNames.TCEducationGotItClicked)
-							var7.pop()
-						end, { var7 }),
-						text = var11.buttonGotIt
+							var2.pop()
+						end, { var2 }),
+						text = var6.buttonGotIt
 					}
 				},
 				{
 					buttonType = buttonType.Secondary,
 					props = {
 						onActivated = reactModule.useCallback(function()
-							-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), fFlagCreateConnectionsHub (copy), var7 (ref), appPage (copy), consoleFriendsPageNavigation (copy)
+							-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), fFlagCreateConnectionsHub (copy), var2 (ref), appPage (copy), consoleFriendsPageNavigation (copy)
 							fireAnalyticsEvent(eventNames.TCEducationManageConnectionsClicked)
 							
 							if fFlagCreateConnectionsHub then
-								var7.navigate(appPage.CoHubMyConnections)
+								var2.navigate(appPage.CoHubMyConnections)
 								
 								return
 							elseif consoleFriendsPageNavigation then
-								var7.navigate(appPage.ViewFriends)
+								var2.navigate(appPage.ViewFriends)
 								
 								return
 							end
-							var7.replace(appPage.ViewFriends)
-						end, { var7 }),
-						text = var11.buttonManage
+							var2.replace(appPage.ViewFriends)
+						end, { var2 }),
+						text = var6.buttonManage
 					}
 				}
 			},
@@ -141,40 +141,40 @@ return function(_)
 				UIListLayout = reactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, var8.Padding.Large),
+					Padding = UDim.new(0, var3.Padding.Large),
 					HorizontalAlignment = Enum.HorizontalAlignment.Center
 				}),
 				OuterPadding = reactModule.createElement("UIPadding", {
-					PaddingTop = UDim.new(0, var8.Padding.Medium),
-					PaddingBottom = UDim.new(0, var8.Padding.Large)
+					PaddingTop = UDim.new(0, var3.Padding.Medium),
+					PaddingBottom = UDim.new(0, var3.Padding.Large)
 				}),
-				ConnectTextIntro = if var9 == accessResponseEnum.Pending then reactModule.createElement(skeleton, { LayoutOrder = 1, Size = UDim2.new(1, 0, 0, 30) }) else reactModule.createElement(text, {
+				ConnectTextIntro = if var4 == accessResponseEnum.Pending then reactModule.createElement(skeleton, { LayoutOrder = 1, Size = UDim2.new(1, 0, 0, 30) }) else reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "auto-y grow size-full-0 text-align-x-left text-wrap",
-					Text = if var9 == accessResponseEnum.Granted then var11.textIntro18Plus else var11.textIntro
+					Text = if var4 == accessResponseEnum.Granted then var6.textIntro18Plus else var6.textIntro
 				}),
 				ConnectOptionText1 = reactModule.createElement(TextWithIcon, {
 					layoutOrder = 2,
 					icon = "icons/menu/platformChatOff_small",
-					text = var11.textChatWithoutFilters,
-					iconPadding = var8.Padding.Medium
+					text = var6.textChatWithoutFilters,
+					iconPadding = var3.Padding.Medium
 				}),
 				ConnectOptionText2 = reactModule.createElement(TextWithIcon, {
 					layoutOrder = 3,
 					icon = "icons/controls/microphone_small",
-					text = var11.textPartyVoice,
-					iconPadding = var8.Padding.Medium
+					text = var6.textPartyVoice,
+					iconPadding = var3.Padding.Medium
 				}),
 				ConnectOptionText3 = reactModule.createElement(TextWithIcon, {
 					layoutOrder = 4,
 					icon = "icons/actions/edit/add_small",
-					text = var11.textAndMore,
-					iconPadding = var8.Padding.Medium
+					text = var6.textAndMore,
+					iconPadding = var3.Padding.Medium
 				}),
-				ConnectTextOutro = if var9 == accessResponseEnum.Pending then reactModule.createElement(skeleton, { LayoutOrder = 5, Size = UDim2.new(1, 0, 0, 60) }) else reactModule.createElement(text, {
+				ConnectTextOutro = if var4 == accessResponseEnum.Pending then reactModule.createElement(skeleton, { LayoutOrder = 5, Size = UDim2.new(1, 0, 0, 60) }) else reactModule.createElement(text, {
 					LayoutOrder = 5,
 					tag = "auto-y grow size-full-0 text-align-x-left text-wrap",
-					Text = if var9 == accessResponseEnum.Granted then var11.textOutro18Plus else var11.textOutro
+					Text = if var4 == accessResponseEnum.Granted then var6.textOutro18Plus else var6.textOutro
 				})
 			})
 		})

@@ -39,63 +39,63 @@ for i, v in list do
 	t_1[i] = v[1]
 	t_2[i] = v[2]
 end
-function t.scan(p0)
+function t.scan(p1)
 	-- upvalues: t_1 (ref), t_2 (ref), keyword (ref), builtin (ref), libraries (ref), t (ref)
-	local var5 = 1
-	local p0Count = #p0
-	local var7 = ""
-	local var8 = ""
-	local var9 = ""
-	local var10 = ""
+	local var1 = 1
+	local p0Count = #p1
+	local var2 = ""
+	local var3 = ""
+	local var4 = ""
+	local var5 = ""
 	local thread = coroutine.create(function()
-		-- upvalues: var5 (write), p0Count (ref), t_1 (copy), p0 (ref), t_2 (copy), keyword (copy), builtin (copy), var7 (write), var10 (write), var8 (write), libraries (copy), var9 (write), t (copy)
-		local substring, var17, var20
-		while var5 <= p0Count do
+		-- upvalues: var1 (write), p0Count (ref), t_1 (copy), p1 (ref), t_2 (copy), keyword (copy), builtin (copy), var2 (write), var5 (write), var3 (write), libraries (copy), var4 (write), t (copy)
+		local substring, var6, var7
+		while var1 <= p0Count do
 			local matchIndex, matchIndex_1
-			local var12 = false
+			local var8 = false
 			
 			for i, v in ipairs(t_1) do
-				matchIndex, matchIndex_1 = string.find(p0, v, var5)
+				matchIndex, matchIndex_1 = string.find(p1, v, var1)
 				
 				if matchIndex ~= nil then
-					local replaced, var19
-					var5 = matchIndex_1 + 1
-					var12 = true
-					substring = string.sub(p0, matchIndex, matchIndex_1)
-					local var16 = t_2[i]
-					var17 = var16
+					local replaced, var9
+					var1 = matchIndex_1 + 1
+					var8 = true
+					substring = string.sub(p1, matchIndex, matchIndex_1)
+					local var10 = t_2[i]
+					var6 = var10
 					
-					if var16 == "var" then
+					if var10 == "var" then
 						replaced = string.gsub(substring, "[%c%s]+", "")
 						
 						if keyword[replaced] then
-							var17 = "keyword"
+							var6 = "keyword"
 						elseif builtin[replaced] then
-							var17 = "builtin"
-						elseif string.find(var7, "%.[%s%c]*$") and var10 ~= "comment" then
-							var19 = libraries[string.gsub(var8, "[%c%s]+", "")]
-							var17 = if var19 and var19[replaced] and not string.find(var9, "%.[%s%c]*$") then "builtin" else "iden"
+							var6 = "builtin"
+						elseif string.find(var2, "%.[%s%c]*$") and var5 ~= "comment" then
+							var9 = libraries[string.gsub(var3, "[%c%s]+", "")]
+							var6 = if var9 and var9[replaced] and not string.find(var4, "%.[%s%c]*$") then "builtin" else "iden"
 						else
-							var17 = "iden"
+							var6 = "iden"
 						end
-					elseif var16 == "string_inter" then
+					elseif var10 == "string_inter" then
 						if string.find(substring, "[^\\]{") then
-							var17 = nil
+							var6 = nil
 							replaced = true
-							var20 = 1
-							var19 = #substring
-							while var20 <= var19 do
-								local matchIndex_2, matchIndex_3 = string.find(substring, "^.-[^\\][{}]", var20)
+							var7 = 1
+							var9 = #substring
+							while var7 <= var9 do
+								local matchIndex_2, matchIndex_3 = string.find(substring, "^.-[^\\][{}]", var7)
 								
 								if matchIndex_2 == nil then
-									coroutine.yield("string", string.sub(substring, var20))
+									coroutine.yield("string", string.sub(substring, var7))
 									break
 								elseif replaced then
-									var20 = matchIndex_3 + 1
+									var7 = matchIndex_3 + 1
 									coroutine.yield("string", string.sub(substring, matchIndex_2, matchIndex_3))
 									replaced = false
 								else
-									var20 = matchIndex_3
+									var7 = matchIndex_3
 									
 									for i_1, v_1 in t.scan(string.sub(substring, matchIndex_2, matchIndex_3 - 1)) do
 										coroutine.yield(i_1, v_1)
@@ -104,30 +104,30 @@ function t.scan(p0)
 								end
 							end
 						else
-							var17 = "string"
+							var6 = "string"
 						end
 					end
-					var9 = var8
-					var8 = var7
-					var7 = substring
-					var10 = var17 or var16
+					var4 = var3
+					var3 = var2
+					var2 = substring
+					var5 = var6 or var10
 					
-					if not var17 then break end
-					coroutine.yield(var17, substring)
+					if not var6 then break end
+					coroutine.yield(var6, substring)
 					break
 				end
 			end
-			if not var12 then return end
+			if not var8 then return end
 		end
 	end)
 	
 	return function()
 		-- upvalues: thread (ref)
 		if coroutine.status(thread) == "dead" then return end
-		local var23, var24, var25 = coroutine.resume(thread)
+		local var11, var12, var13 = coroutine.resume(thread)
 		
-		if var23 and var24 then
-			return var24, var25
+		if var11 and var12 then
+			return var12, var13
 		end
 	end
 end
@@ -140,12 +140,12 @@ function t.navigator()
 		_UserIndex = 0,
 		_ScanThread = nil,
 		TokenCache = table.create(50),
-		Destroy = function(p1)
-			p1.Source = nil
-			p1._RealIndex = nil
-			p1._UserIndex = nil
-			p1.TokenCache = nil
-			p1._ScanThread = nil
+		Destroy = function(p2)
+			p2.Source = nil
+			p2._RealIndex = nil
+			p2._UserIndex = nil
+			p2.TokenCache = nil
+			p2._ScanThread = nil
 		end,
 		SetSource = function(value, p2)
 			-- upvalues: t (copy)
@@ -171,38 +171,38 @@ function t.navigator()
 		if t_1._UserIndex <= t_1._RealIndex then
 			return table.unpack(t_1.TokenCache[t_1._UserIndex])
 		elseif coroutine.status(t_1._ScanThread) == "dead" then return end
-		local var27, var28, var29 = coroutine.resume(t_1._ScanThread)
+		local var11, var12, var13 = coroutine.resume(t_1._ScanThread)
 		
-		if var27 and var28 then
-			return var28, var29
+		if var11 and var12 then
+			return var12, var13
 		end
 	end
 	
 	function t_1.Peek(p3)
 		-- upvalues: t_1 (ref)
-		local var30 = t_1._UserIndex + p3
+		local var11 = t_1._UserIndex + p3
 		
-		if var30 <= t_1._RealIndex then
-			if var30 > 0 then
-				return table.unpack(t_1.TokenCache[var30])
+		if var11 <= t_1._RealIndex then
+			if var11 > 0 then
+				return table.unpack(t_1.TokenCache[var11])
 			end
 			return
 		elseif coroutine.status(t_1._ScanThread) == "dead" then return end
-		local var36, var37
-		local var31 = var30 - t_1._RealIndex
+		local var12, var13
+		local var14 = var11 - t_1._RealIndex
 		local _ = nil
 		local _ = nil
 		local _ = nil
 		
-		for _ = 1, var31 do
-			local var32, var33, var34 = coroutine.resume(t_1._ScanThread)
-			local var35 = var32
-			var36 = var33
-			var37 = var34
+		for _ = 1, var14 do
+			local var15, var16, var17 = coroutine.resume(t_1._ScanThread)
+			local var18 = var15
+			var12 = var16
+			var13 = var17
 			
-			if not var35 and not var36 then break end
+			if not var18 and not var12 then break end
 		end
-		return var36, var37
+		return var12, var13
 	end
 	
 	return t_1

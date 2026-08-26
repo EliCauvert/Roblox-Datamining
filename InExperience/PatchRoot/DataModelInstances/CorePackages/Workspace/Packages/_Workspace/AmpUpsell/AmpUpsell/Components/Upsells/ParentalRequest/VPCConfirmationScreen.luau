@@ -14,17 +14,17 @@ local dialog = foundationModule.Dialog
 local dialogSize = foundationModule.Enums.DialogSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-local function selectScreenSize(p0)
-	return p0.ScreenSize
+local function selectScreenSize(p1)
+	return p1.ScreenSize
 end
 
 return function(p1)
 	-- upvalues: useSelector (ref), selectScreenSize (ref), getShouldUseFoundationUIVPCUpsellModule (ref), useLocalization (ref), cryoModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), getFFlagEnableVPCUpsellFoundationDialogHardeningModule (ref), buttonVariant (ref), interactiveAlert (ref), buttonType (ref)
 	local onAck = p1.onAck
-	local var8 = useSelector(selectScreenSize)
+	local var1 = useSelector(selectScreenSize)
 	local messageStrings = p1.messageStrings
 	local parentEmails = p1.parentEmails
-	local var9 = if #parentEmails == 1 then useLocalization(cryoModule.Dictionary.join(messageStrings, {
+	local var2 = if #parentEmails == 1 then useLocalization(cryoModule.Dictionary.join(messageStrings, {
 		bodyText = {
 			messageStrings.oneParentBody,
 			parentEmail = parentEmails[1]
@@ -37,15 +37,15 @@ return function(p1)
 		disablePortal = if p1.disablePortal then p1.disablePortal else false,
 		hasBackdrop = if getFFlagEnableVPCUpsellFoundationDialogHardeningModule() then true else false
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var9.title }),
+		DialogTitle = reactModule.createElement(dialog.Title, { text = var2.title }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var9.bodyText })
+			DialogText = reactModule.createElement(dialog.Text, { Text = var2.bodyText })
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var9.buttonText,
+					text = var2.buttonText,
 					variant = buttonVariant.Standard,
 					onActivated = onAck
 				}
@@ -54,14 +54,14 @@ return function(p1)
 	}) else reactModule.createElement(interactiveAlert, {
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		screenSize = var8,
-		title = var9.title,
-		bodyText = var9.bodyText,
+		screenSize = var1,
+		title = var2.title,
+		bodyText = var2.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
 					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = onAck, text = var9.buttonText }
+					props = { onActivated = onAck, text = var2.buttonText }
 				}
 			}
 		}

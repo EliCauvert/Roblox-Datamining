@@ -22,73 +22,73 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXMigrateBuilderIcons = avatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
 local fFlagAXHideHeadAdjustmentForDefaultHead = avatarExperienceFlagsModule.FFlagAXHideHeadAdjustmentForDefaultHead
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useNavigation (ref), useAvatarRoute (ref), useSelector (ref), selectColorAdjustmentButtonColor (ref), reactModule (ref), avatarScreen (ref), slotBasedEditorAnalytics (ref), menuItemEnumModule (ref), fFlagAXHideHeadAdjustmentForDefaultHead (ref), selectHasDynamicHead (ref), fFlagAXMigrateBuilderIcons (ref), iconName (ref), iconVariant (ref)
-	local var9 = useTokens()
-	local var10 = useNavigation()
-	local var11 = useAvatarRoute()
-	local var12 = useSelector(selectColorAdjustmentButtonColor)
-	local size600 = var9.Size.Size_600
-	local name = p0.avatarRoute and (p0.avatarRoute.opaque and p0.avatarRoute.opaque.name)
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), avatarScreen (copy), var11 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var10.navigate(avatarScreen.AccessoryAdjustment)
+	local var1 = useTokens()
+	local var2 = useNavigation()
+	local var3 = useAvatarRoute()
+	local var4 = useSelector(selectColorAdjustmentButtonColor)
+	local size600 = var1.Size.Size_600
+	local name = p1.avatarRoute and (p1.avatarRoute.opaque and p1.avatarRoute.opaque.name)
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), avatarScreen (copy), var3 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
+		var2.navigate(avatarScreen.AccessoryAdjustment)
 		
-		if var11 and var11.opaque then
-			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.AdjustAccessory, var11.opaque.name)
+		if var3 and var3.opaque then
+			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.AdjustAccessory, var3.opaque.name)
 		end
-	end, { var10, var11 })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), avatarScreen (copy), var11 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var10.navigate(avatarScreen.BodyShape)
+	end, { var2, var3 })
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), avatarScreen (copy), var3 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
+		var2.navigate(avatarScreen.BodyShape)
 		
-		if var11 and var11.opaque then
-			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.BodyScale, var11.opaque.name)
+		if var3 and var3.opaque then
+			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.BodyScale, var3.opaque.name)
 		end
-	end, { var10, var11 })
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), avatarScreen (copy), var11 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var10.navigate(avatarScreen.HeadRefinement)
+	end, { var2, var3 })
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), avatarScreen (copy), var3 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
+		var2.navigate(avatarScreen.HeadRefinement)
 		
-		if var11 and var11.opaque then
-			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.CustomizeHead, var11.opaque.name)
+		if var3 and var3.opaque then
+			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.CustomizeHead, var3.opaque.name)
 		end
-	end, { var10, var11 })
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), avatarScreen (copy), var10 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		if var11 and var11.current and var11.current.name == avatarScreen.LayeredMakeupSort then
-			var10.pop()
+	end, { var2, var3 })
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), avatarScreen (copy), var2 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
+		if var3 and var3.current and var3.current.name == avatarScreen.LayeredMakeupSort then
+			var2.pop()
 		end
-		var10.navigate(avatarScreen.LayeredClothingSort)
+		var2.navigate(avatarScreen.LayeredClothingSort)
 		
-		if var11 and var11.opaque then
-			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.ClothingLayers, var11.opaque.name)
+		if var3 and var3.opaque then
+			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.ClothingLayers, var3.opaque.name)
 		end
-	end, { var10, var11 })
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), avatarScreen (copy), var10 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		if var11 and var11.current and var11.current.name == avatarScreen.LayeredClothingSort then
-			var10.pop()
+	end, { var2, var3 })
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), avatarScreen (copy), var2 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
+		if var3 and var3.current and var3.current.name == avatarScreen.LayeredClothingSort then
+			var2.pop()
 		end
-		var10.navigate(avatarScreen.LayeredMakeupSort)
+		var2.navigate(avatarScreen.LayeredMakeupSort)
 		
-		if var11 and var11.opaque then
-			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.MakeupLayers, var11.opaque.name)
+		if var3 and var3.opaque then
+			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.MakeupLayers, var3.opaque.name)
 		end
-	end, { var10, var11 })
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), avatarScreen (copy), var11 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
-		var10.navigate(avatarScreen.ColorAdjustment)
+	end, { var2, var3 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), avatarScreen (copy), var3 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
+		var2.navigate(avatarScreen.ColorAdjustment)
 		
-		if var11 and var11.opaque then
-			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.ColorAdjustment, var11.opaque.name)
+		if var3 and var3.opaque then
+			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.ColorAdjustment, var3.opaque.name)
 		end
-	end, { var10, var11 })
-	local var20 = if fFlagAXHideHeadAdjustmentForDefaultHead then useSelector(selectHasDynamicHead) else nil
+	end, { var2, var3 })
+	local var11 = if fFlagAXHideHeadAdjustmentForDefaultHead then useSelector(selectHasDynamicHead) else nil
 	
 	return {
 		config = reactModule.useMemo(function()
-			-- upvalues: menuItemEnumModule (copy), fFlagAXMigrateBuilderIcons (copy), iconName (copy), iconVariant (copy), var14 (ref), name (ref), avatarScreen (copy), size600 (ref), var15 (ref), var16 (ref), fFlagAXHideHeadAdjustmentForDefaultHead (copy), var20 (ref), var17 (ref), var18 (ref), var12 (ref), var19 (ref)
+			-- upvalues: menuItemEnumModule (copy), fFlagAXMigrateBuilderIcons (copy), iconName (copy), iconVariant (copy), var5 (ref), name (ref), avatarScreen (copy), size600 (ref), var6 (ref), var7 (ref), fFlagAXHideHeadAdjustmentForDefaultHead (copy), var11 (ref), var8 (ref), var9 (ref), var4 (ref), var10 (ref)
 			return {
 				{
 					type = "icon",
@@ -96,7 +96,7 @@ return function(p0)
 					icon = if fFlagAXMigrateBuilderIcons then iconName.HatFedora else "icons/menu/clothing/hats_off",
 					activeIcon = if fFlagAXMigrateBuilderIcons then iconName.HatFedora else "icons/menu/clothing/hats_on",
 					activeIconVariant = if fFlagAXMigrateBuilderIcons then iconVariant.Filled else nil,
-					onActivated = var14,
+					onActivated = var5,
 					isActive = name == avatarScreen.AccessoryAdjustment,
 					iconSize = size600
 				},
@@ -106,7 +106,7 @@ return function(p0)
 					icon = if fFlagAXMigrateBuilderIcons then iconName.PersonStandingDualArrowsVertical else "icons/menu/clothing/build_off",
 					activeIcon = if fFlagAXMigrateBuilderIcons then iconName.PersonStandingDualArrowsVertical else "icons/menu/clothing/build_on",
 					activeIconVariant = if fFlagAXMigrateBuilderIcons then iconVariant.Filled else nil,
-					onActivated = var15,
+					onActivated = var6,
 					isActive = name == avatarScreen.BodyShape,
 					iconSize = size600
 				},
@@ -116,10 +116,10 @@ return function(p0)
 					icon = if fFlagAXMigrateBuilderIcons then iconName.HeadBlank else "icons/menu/clothing/classicHead_off",
 					activeIcon = if fFlagAXMigrateBuilderIcons then iconName.HeadBlank else "icons/menu/clothing/classicHead_on",
 					activeIconVariant = if fFlagAXMigrateBuilderIcons then iconVariant.Filled else nil,
-					onActivated = var16,
+					onActivated = var7,
 					isActive = name == avatarScreen.HeadRefinement,
 					iconSize = size600,
-					visible = if fFlagAXHideHeadAdjustmentForDefaultHead then var20 else nil
+					visible = if fFlagAXHideHeadAdjustmentForDefaultHead then var11 else nil
 				},
 				{
 					type = "icon",
@@ -127,7 +127,7 @@ return function(p0)
 					icon = if fFlagAXMigrateBuilderIcons then iconName.ClothesHanger else "icons/menu/clothing/clothing_off",
 					activeIcon = if fFlagAXMigrateBuilderIcons then iconName.ClothesHanger else "icons/menu/clothing/clothing_on",
 					activeIconVariant = if fFlagAXMigrateBuilderIcons then iconVariant.Filled else nil,
-					onActivated = var17,
+					onActivated = var8,
 					isActive = name == avatarScreen.LayeredClothingSort,
 					iconSize = size600
 				},
@@ -137,23 +137,23 @@ return function(p0)
 					icon = if fFlagAXMigrateBuilderIcons then iconName.LipsLipstickMakeupBrush else "icons/menu/clothing/eyelash_on",
 					activeIcon = if fFlagAXMigrateBuilderIcons then iconName.LipsLipstickMakeupBrush else "icons/menu/clothing/eyelash_off",
 					activeIconVariant = if fFlagAXMigrateBuilderIcons then iconVariant.Filled else nil,
-					onActivated = var18,
+					onActivated = var9,
 					isActive = name == avatarScreen.LayeredMakeupSort,
 					iconSize = size600
 				},
-				if var12 then {
+				if var4 then {
 					type = "color",
 					Selectable = true,
 					id = menuItemEnumModule.AvatarRefinement.ColorAdjustment,
 					colorSize = size600,
-					colors = { var12 },
-					onActivated = var19,
+					colors = { var4 },
+					onActivated = var10,
 					isActive = name == avatarScreen.ColorAdjustment
 				} else nil
 			}
 		end, {
-			name, var14, var15, var16, var17, var18, var19, var12,
-			if fFlagAXHideHeadAdjustmentForDefaultHead then var20 else nil
+			name, var5, var6, var7, var8, var9, var10, var4,
+			if fFlagAXHideHeadAdjustmentForDefaultHead then var11 else nil
 		})
 	}
 end

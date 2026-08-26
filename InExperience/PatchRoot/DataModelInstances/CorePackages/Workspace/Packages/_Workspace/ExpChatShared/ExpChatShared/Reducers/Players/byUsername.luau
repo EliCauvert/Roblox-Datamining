@@ -5,15 +5,15 @@ local dictionary = require(parent.llama).Dictionary
 local actions = expChatShared.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.PlayerAdded).name] = function(p0, p1)
+	[require(actions.PlayerAdded).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, { [string.lower(p1.username)] = p1.userId })
+		return dictionary.join(p1, { [string.lower(p2.username)] = p2.userId })
 	end,
-	[require(actions.PlayerRemoved).name] = function(p2, p3)
+	[require(actions.PlayerRemoved).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.filter(p2, function(p4)
-			-- upvalues: p3 (ref)
-			return p4 ~= p3.userId
+		return dictionary.filter(p1, function(p3)
+			-- upvalues: p2 (ref)
+			return p3 ~= p2.userId
 		end)
 	end
 })

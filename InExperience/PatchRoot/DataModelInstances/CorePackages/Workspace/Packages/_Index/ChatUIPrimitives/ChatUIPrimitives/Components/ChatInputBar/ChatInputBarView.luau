@@ -9,67 +9,67 @@ local useChatAutocompleteEngineModule = require(script.Parent.Autocomplete.useCh
 local expChatFixInputBarSendEligibility = game:DefineFastFlag("ExpChatFixInputBarSendEligibility", false)
 local expChatComposerFigmaParity = game:DefineFastFlag("ExpChatComposerFigmaParity", false)
 
-local function _(p0, p1)
-	return p0 + p1 * (1 - p0)
+local function _(p1, p2)
+	return p1 + p2 * (1 - p1)
 end
 
-local _ = function(p2, p3)
+local _ = function(p1, p2)
 	-- upvalues: reactIsModule (ref)
-	return if reactIsModule.isBinding(p3) then p3:map(function(p4)
-		-- upvalues: p2 (ref)
-		return p2 + p4 * (1 - p2)
-	end) else p2 + p3 * (1 - p2)
+	return if reactIsModule.isBinding(p2) then p2:map(function(p3)
+		-- upvalues: p1 (ref)
+		return p1 + p3 * (1 - p1)
+	end) else p1 + p2 * (1 - p1)
 end
 
-local function deriveBackgroundStyle(value, p5, p6)
+local function deriveBackgroundStyle(value, p1, p2)
 	-- upvalues: reactIsModule (ref)
-	return if reactIsModule.isBinding(p6) then p6:map(function(p7)
-		-- upvalues: value (ref), p5 (ref)
-		return { Color3 = value, Transparency = p5 + p7 * (1 - p5) }
-	end) else { Color3 = value, Transparency = p5 + p6 * (1 - p5) }
+	return if reactIsModule.isBinding(p2) then p2:map(function(p3)
+		-- upvalues: value (ref), p1 (ref)
+		return { Color3 = value, Transparency = p1 + p3 * (1 - p1) }
+	end) else { Color3 = value, Transparency = p1 + p2 * (1 - p1) }
 end
 
-return reactModule.memo(function(p8)
+return reactModule.memo(function(p1)
 	-- upvalues: foundationModule (ref), fFlagExpChatEnableFriendsTab (ref), reactModule (ref), useChatAutocompleteEngineModule (ref), expChatFixInputBarSendEligibility (ref), chatAutocompleteDropdownModule (ref), expChatComposerFigmaParity (ref), deriveBackgroundStyle (ref), reactIsModule (ref), channelChipModule (ref)
-	local var9 = foundationModule.Hooks.useTokens()
-	local themedColors = p8.themedColors
-	local var10 = if themedColors then var9.Color.Surface.Surface_100.Color3 else var9.DarkMode.Surface.Surface_100.Color3
-	local var11 = if themedColors then var9.Color.Content.Muted.Color3 else var9.DarkMode.Content.Muted.Color3
-	local var12 = if themedColors then var9.Color.Content.Emphasis.Color3 else var9.DarkMode.Content.Emphasis.Color3
-	local onChange = p8.onChange
-	local onSend = p8.onSend
-	local canLocalUserChat = p8.canLocalUserChat
-	local transparencyValue = p8.transparencyValue or 0
-	local textSize = p8.textSize or var9.Typography.CaptionMedium.FontSize
-	local maximumCharacterLimit = p8.maximumCharacterLimit
-	local var15 = fFlagExpChatEnableFriendsTab and (not canLocalUserChat and p8.disabledOverlay ~= nil)
-	local textBoxRef = p8.textBoxRef or reactModule.useRef(nil)
-	local var17 = reactModule.useRef(nil)
-	local var18 = useChatAutocompleteEngineModule(textBoxRef, p8.autocomplete)
-	local var19 = reactModule.useRef(p8.defaultValue or "")
-	local var20, var21 = reactModule.useState(function()
-		-- upvalues: p8 (ref)
-		return (p8.defaultValue or "") == ""
+	local var1 = foundationModule.Hooks.useTokens()
+	local themedColors = p1.themedColors
+	local var2 = if themedColors then var1.Color.Surface.Surface_100.Color3 else var1.DarkMode.Surface.Surface_100.Color3
+	local var3 = if themedColors then var1.Color.Content.Muted.Color3 else var1.DarkMode.Content.Muted.Color3
+	local var4 = if themedColors then var1.Color.Content.Emphasis.Color3 else var1.DarkMode.Content.Emphasis.Color3
+	local onChange = p1.onChange
+	local onSend = p1.onSend
+	local canLocalUserChat = p1.canLocalUserChat
+	local transparencyValue = p1.transparencyValue or 0
+	local textSize = p1.textSize or var1.Typography.CaptionMedium.FontSize
+	local maximumCharacterLimit = p1.maximumCharacterLimit
+	local var5 = fFlagExpChatEnableFriendsTab and (not canLocalUserChat and p1.disabledOverlay ~= nil)
+	local textBoxRef = p1.textBoxRef or reactModule.useRef(nil)
+	local var6 = reactModule.useRef(nil)
+	local var7 = useChatAutocompleteEngineModule(textBoxRef, p1.autocomplete)
+	local var8 = reactModule.useRef(p1.defaultValue or "")
+	local var9, var10 = reactModule.useState(function()
+		-- upvalues: p1 (ref)
+		return (p1.defaultValue or "") == ""
 	end)
-	local var22, var23 = reactModule.useBinding(0)
-	local var24 = reactModule.useCallback(function(p9)
-		-- upvalues: var23 (ref)
-		var23(p9.AbsoluteSize.X)
+	local var11, var12 = reactModule.useBinding(0)
+	local var13 = reactModule.useCallback(function(p2)
+		-- upvalues: var12 (ref)
+		var12(p2.AbsoluteSize.X)
 	end, {})
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: textBoxRef (ref), onSend (ref), var21 (ref)
+	local var14 = reactModule.useCallback(function()
+		-- upvalues: textBoxRef (ref), onSend (ref), var10 (ref)
 		local current = textBoxRef.current
-		local var49 = if current then current.Text else ""
+		local var15 = if current then current.Text else ""
 		
-		if var49 == "" then return end
-		onSend(var49)
+		if var15 == "" then return end
+		onSend(var15)
 		
 		if current then
 			current.Text = ""
 		end
-		var21(true)
+		var10(true)
 	end, { onSend, textBoxRef })
-	local var26 = reactModule.useCallback(function()
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: textBoxRef (ref)
 		local current = textBoxRef.current
 		
@@ -77,73 +77,73 @@ return reactModule.memo(function(p8)
 			current:ReleaseFocus(true)
 		end
 	end, { textBoxRef })
-	local var27 = reactModule.useCallback(function(p10)
-		-- upvalues: maximumCharacterLimit (ref), var19 (ref), var21 (ref), onChange (ref), var18 (ref)
-		local text = p10.Text
+	local var16 = reactModule.useCallback(function(p2)
+		-- upvalues: maximumCharacterLimit (ref), var8 (ref), var10 (ref), onChange (ref), var7 (ref)
+		local text = p2.Text
 		
 		if maximumCharacterLimit ~= nil then
 			local normalized = utf8.nfcnormalize(text)
 			
 			if maximumCharacterLimit < (utf8.len(normalized) or #normalized) then
-				p10.Text = var19.current
+				p2.Text = var8.current
 				
 				return
 			end
-			var19.current = text
+			var8.current = text
 		end
-		var21(text == "")
+		var10(text == "")
 		
 		if onChange then
 			onChange(text)
 		end
-		var18.onTextChanged(text)
-	end, { onChange, maximumCharacterLimit, var18.onTextChanged })
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: p8 (ref)
-		if p8.onFocusGained then
-			p8.onFocusGained()
+		var7.onTextChanged(text)
+	end, { onChange, maximumCharacterLimit, var7.onTextChanged })
+	local var17 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		if p1.onFocusGained then
+			p1.onFocusGained()
 		end
-	end, { p8.onFocusGained })
-	local var29 = reactModule.useCallback(function(_, p11)
-		-- upvalues: textBoxRef (ref), var18 (ref), var25 (ref), p8 (ref)
+	end, { p1.onFocusGained })
+	local var18 = reactModule.useCallback(function(_, p2)
+		-- upvalues: textBoxRef (ref), var7 (ref), var14 (ref), p1 (ref)
 		local current = textBoxRef.current
 		
-		if (not current or not var18.interceptSend(current, p11)) and p11 then
-			var25()
+		if (not current or not var7.interceptSend(current, p2)) and p2 then
+			var14()
 		end
-		if p8.onFocusLost then
-			p8.onFocusLost()
+		if p1.onFocusLost then
+			p1.onFocusLost()
 		end
-	end, { var25, p8.onFocusLost, textBoxRef, var18.interceptSend })
+	end, { var14, p1.onFocusLost, textBoxRef, var7.interceptSend })
 	
 	if expChatFixInputBarSendEligibility then
 		reactModule.useEffect(function()
-			-- upvalues: canLocalUserChat (ref), var21 (ref)
+			-- upvalues: canLocalUserChat (ref), var10 (ref)
 			if not canLocalUserChat then
-				var21(true)
+				var10(true)
 			end
 		end, { canLocalUserChat })
 	end
 	local createElement_3
-	local var30 = if expChatFixInputBarSendEligibility then var20 or not canLocalUserChat else var20
+	local var19 = if expChatFixInputBarSendEligibility then var9 or not canLocalUserChat else var9
 	local createElement = reactModule.createElement
 	local view = foundationModule.View
 	local t = {
 		tag = "auto-y",
 		Size = UDim2.new(1, 0, 0, 0),
-		ref = var17
+		ref = var6
 	}
 	local t_1 = {
-		Dropdown = if p8.autocomplete then reactModule.createElement(chatAutocompleteDropdownModule, {
-			isOpen = var18.isOpen,
-			results = var18.results,
-			selectedIndex = var18.selectedIndex,
-			keyboardIndex = var18.keyboardIndex,
-			renderEntry = var18.renderEntry,
-			anchorRef = var17,
-			onHover = var18.setSelectedIndex,
-			onSelect = var18.commitSelection,
-			onDismiss = var18.dismiss
+		Dropdown = if p1.autocomplete then reactModule.createElement(chatAutocompleteDropdownModule, {
+			isOpen = var7.isOpen,
+			results = var7.results,
+			selectedIndex = var7.selectedIndex,
+			keyboardIndex = var7.keyboardIndex,
+			renderEntry = var7.renderEntry,
+			anchorRef = var6,
+			onHover = var7.setSelectedIndex,
+			onSelect = var7.commitSelection,
+			onDismiss = var7.dismiss
 		}) else nil
 	}
 	local createElement_1 = reactModule.createElement
@@ -153,24 +153,24 @@ return reactModule.memo(function(p8)
 	local createElement_2 = reactModule.createElement
 	local view_2 = foundationModule.View
 	local t_4 = {
-		cornerRadius = if expChatComposerFigmaParity then UDim.new(0, var9.Radius.Circle) else UDim.new(0, 20),
+		cornerRadius = if expChatComposerFigmaParity then UDim.new(0, var1.Radius.Circle) else UDim.new(0, 20),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
-		backgroundStyle = deriveBackgroundStyle(var10, 0.2, transparencyValue)
+		backgroundStyle = deriveBackgroundStyle(var2, 0.2, transparencyValue)
 	}
-	local t_5 = { Color = var9.Color.Stroke.Default.Color3 }
-	local transparency = var9.Color.Stroke.Default.Transparency
-	t_5.Transparency = if reactIsModule.isBinding(transparencyValue) then transparencyValue:map(function(p12)
+	local t_5 = { Color = var1.Color.Stroke.Default.Color3 }
+	local transparency = var1.Color.Stroke.Default.Transparency
+	t_5.Transparency = if reactIsModule.isBinding(transparencyValue) then transparencyValue:map(function(p2)
 		-- upvalues: transparency (ref)
-		return transparency + p12 * (1 - transparency)
+		return transparency + p2 * (1 - transparency)
 	end) else transparency + transparencyValue * (1 - transparency)
 	t_4.stroke = t_5
 	t_4.padding = { right = UDim.new(0, 2) }
 	local t_6 = {
-		CustomDisabledContent = if var15 then p8.disabledOverlay else nil
+		CustomDisabledContent = if var5 then p1.disabledOverlay else nil
 	}
 	
-	if var15 then
+	if var5 then
 		createElement_3 = nil
 	else
 		local createElement_4
@@ -190,94 +190,94 @@ return reactModule.memo(function(p8)
 		local t_8 = {
 			SideChip = reactModule.createElement(channelChipModule, {
 				transparency = transparencyValue,
-				sideChipText = p8.sideChipText,
-				showSideChip = p8.showSideChip,
-				onSideChipActivated = p8.onSideChipActivated,
-				onAbsoluteSizeChanged = var24
+				sideChipText = p1.sideChipText,
+				showSideChip = p1.showSideChip,
+				onSideChipActivated = p1.onSideChipActivated,
+				onAbsoluteSizeChanged = var13
 			})
 		}
 		
 		if canLocalUserChat then
 			createElement_4 = nil
 		else
-			local var42
+			local var20
 			createElement_4 = reactModule.createElement
 			local text = foundationModule.Text
 			local t_9 = {
 				tag = "position-top-right anchor-top-right auto-y text-caption-medium text-wrap text-align-x-left text-align-y-top content-muted",
-				Text = p8.disabledChatPlaceholderText or "",
-				Size = var22:map(function(p13)
-					-- upvalues: var9 (ref)
-					return UDim2.new(1, -(p13 + var9.Size.Size_200), 0, 0)
+				Text = p1.disabledChatPlaceholderText or "",
+				Size = var11:map(function(p2)
+					-- upvalues: var1 (ref)
+					return UDim2.new(1, -(p2 + var1.Size.Size_200), 0, 0)
 				end)
 			}
 			
 			if reactIsModule.isBinding(transparencyValue) then
-				local var41 = 0.5
-				var42 = transparencyValue:map(function(p14)
-					-- upvalues: var41 (ref)
-					return var41 + p14 * (1 - var41)
+				local var21 = 0.5
+				var20 = transparencyValue:map(function(p2)
+					-- upvalues: var21 (ref)
+					return var21 + p2 * (1 - var21)
 				end)
 			else
-				var42 = transparencyValue * 0.5 + 0.5
+				var20 = transparencyValue * 0.5 + 0.5
 			end
-			t_9.TextTransparency = var42
+			t_9.TextTransparency = var20
 			createElement_4 = createElement_4(text, t_9)
 		end
 		local createElement_5
 		t_8.DisabledLabel = createElement_4
 		
 		if canLocalUserChat then
-			local var47
+			local var22
 			createElement_5 = reactModule.createElement
 			local view_4 = foundationModule.View
 			local t_9 = {
 				tag = "position-top-right anchor-top-right auto-y",
-				Size = var22:map(function(p15)
-					-- upvalues: var9 (ref)
-					return UDim2.new(1, -(p15 + var9.Size.Size_200), 0, 0)
+				Size = var11:map(function(p2)
+					-- upvalues: var1 (ref)
+					return UDim2.new(1, -(p2 + var1.Size.Size_200), 0, 0)
 				end)
 			}
 			local t_10 = {}
 			local createElement_6 = reactModule.createElement
-			local var45 = "TextBox"
+			local var23 = "TextBox"
 			local t_11 = {
 				AnchorPoint = Vector2.new(0, 0),
 				AutomaticSize = Enum.AutomaticSize.XY,
 				BackgroundTransparency = 1,
 				ClearTextOnFocus = false,
 				MaxVisibleGraphemes = maximumCharacterLimit or -1,
-				Font = if p8.fontFace then nil else var9.Typography.CaptionMedium.Font,
-				FontFace = p8.fontFace,
-				PlaceholderText = p8.placeholderText or "",
-				PlaceholderColor3 = var11,
+				Font = if p1.fontFace then nil else var1.Typography.CaptionMedium.Font,
+				FontFace = p1.fontFace,
+				PlaceholderText = p1.placeholderText or "",
+				PlaceholderColor3 = var3,
 				Size = UDim2.fromScale(1, 0),
-				Text = p8.defaultValue or "",
-				TextColor3 = var12,
+				Text = p1.defaultValue or "",
+				TextColor3 = var4,
 				TextSize = textSize
 			}
 			
 			if reactIsModule.isBinding(transparencyValue) then
-				local var48 = 0
-				var47 = transparencyValue:map(function(p16)
-					-- upvalues: var48 (ref)
-					return var48 + p16 * (1 - var48)
+				local var24 = 0
+				var22 = transparencyValue:map(function(p2)
+					-- upvalues: var24 (ref)
+					return var24 + p2 * (1 - var24)
 				end)
 			else
-				var47 = transparencyValue * 1 + 0
+				var22 = transparencyValue * 1 + 0
 			end
-			t_11.TextTransparency = var47
+			t_11.TextTransparency = var22
 			t_11.TextWrapped = true
 			t_11.TextXAlignment = Enum.TextXAlignment.Left
 			t_11.TextYAlignment = Enum.TextYAlignment.Top
-			t_11.TextEditable = p8.enableFocusedWrite ~= false
+			t_11.TextEditable = p1.enableFocusedWrite ~= false
 			t_11.ZIndex = 2
-			t_11[reactModule.Change.Text] = var27
-			t_11[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = var26
-			t_11[reactModule.Event.Focused] = var28
-			t_11[reactModule.Event.FocusLost] = var29
+			t_11[reactModule.Change.Text] = var16
+			t_11[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = var15
+			t_11[reactModule.Event.Focused] = var17
+			t_11[reactModule.Event.FocusLost] = var18
 			t_11.ref = textBoxRef
-			t_10.TextBox = createElement_6(var45, t_11)
+			t_10.TextBox = createElement_6(var23, t_11)
 			createElement_5 = createElement_5(view_4, t_9, t_10)
 		else
 			createElement_5 = nil
@@ -286,7 +286,7 @@ return reactModule.memo(function(p8)
 		createElement_3 = createElement_3(view_3, t_7, t_8)
 	end
 	t_6.TextContainer = createElement_3
-	t_6.SendButtonContainer = if not var15 then reactModule.createElement("CanvasGroup", {
+	t_6.SendButtonContainer = if not var5 then reactModule.createElement("CanvasGroup", {
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(1, 0),
 		GroupTransparency = transparencyValue,
@@ -300,13 +300,13 @@ return reactModule.memo(function(p8)
 		SendButton = reactModule.createElement(foundationModule.IconButton, {
 			isCircular = true,
 			icon = foundationModule.Enums.IconName.ArrowMediumUp,
-			variant = if var30 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
+			variant = if var19 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
 			size = foundationModule.Enums.InputSize.Small,
-			isDisabled = var30,
-			onActivated = var25
+			isDisabled = var19,
+			onActivated = var14
 		})
 	}) else nil
-	t_6.DisabledOverlay = if fFlagExpChatEnableFriendsTab or canLocalUserChat or not p8.disabledOverlay then nil else reactModule.createElement(foundationModule.View, { ZIndex = 5, Size = UDim2.fromScale(1, 1) }, { Overlay = p8.disabledOverlay })
+	t_6.DisabledOverlay = if fFlagExpChatEnableFriendsTab or canLocalUserChat or not p1.disabledOverlay then nil else reactModule.createElement(foundationModule.View, { ZIndex = 5, Size = UDim2.fromScale(1, 1) }, { Overlay = p1.disabledOverlay })
 	t_3.InputGroup = createElement_2(view_2, t_4, t_6)
 	t_1.Container = createElement_1(view_1, t_2, t_3)
 	

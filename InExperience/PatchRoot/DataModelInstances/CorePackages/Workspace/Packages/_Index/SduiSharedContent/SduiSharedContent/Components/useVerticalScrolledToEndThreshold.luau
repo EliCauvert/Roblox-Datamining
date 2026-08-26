@@ -1,47 +1,47 @@
 ﻿local reactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
 local luaAppSduiVerticalFeedThresholdRefresh = game:DefineFastFlag("LuaAppSduiVerticalFeedThresholdRefresh", false)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), luaAppSduiVerticalFeedThresholdRefresh (ref)
-	local var2 = reactModule.useRef(false)
-	local var3 = nil
+	local var1 = reactModule.useRef(false)
+	local var2 = nil
 	
 	if luaAppSduiVerticalFeedThresholdRefresh then
-		var3 = reactModule.useRef(p2)
-		var3.current = p2
+		var2 = reactModule.useRef(p3)
+		var2.current = p3
 		
-		if p2 == nil then
-			p1 = nil
+		if p3 == nil then
+			p2 = nil
 		end
 	end
 	reactModule.useEffect(function()
-		-- upvalues: luaAppSduiVerticalFeedThresholdRefresh (copy), p2 (ref), p1 (write), p0 (ref), var2 (ref), var3 (write)
-		if not luaAppSduiVerticalFeedThresholdRefresh and p2 == nil or (p1 == nil or p0.current == nil) then
+		-- upvalues: luaAppSduiVerticalFeedThresholdRefresh (copy), p3 (ref), p2 (write), p1 (ref), var1 (ref), var2 (write)
+		if not luaAppSduiVerticalFeedThresholdRefresh and p3 == nil or (p2 == nil or p1.current == nil) then
 			return nil
 		end
 		local t = {}
-		local current = p0.current
+		local current = p1.current
 		
 		local function checkThreshold()
-			-- upvalues: current (ref), p1 (copy), var2 (copy), luaAppSduiVerticalFeedThresholdRefresh (copy), var3 (copy), p2 (copy)
-			local var7 = current.AbsoluteCanvasSize.Y - current.AbsoluteWindowSize.Y - p1
+			-- upvalues: current (ref), p2 (copy), var1 (copy), luaAppSduiVerticalFeedThresholdRefresh (copy), var2 (copy), p3 (copy)
+			local var3 = current.AbsoluteCanvasSize.Y - current.AbsoluteWindowSize.Y - p2
 			local y = current.CanvasPosition.Y
 			
-			if y < var7 and var2.current then
-				var2.current = false
+			if y < var3 and var1.current then
+				var1.current = false
 				
 				return
-			elseif var7 < y and not var2.current then
-				var2.current = true
+			elseif var3 < y and not var1.current then
+				var1.current = true
 				
 				if luaAppSduiVerticalFeedThresholdRefresh then
-					if var3.current then
-						var3.current()
+					if var2.current then
+						var2.current()
 						
 						return
 					end
 				else
-					p2()
+					p3()
 				end
 			end
 		end
@@ -49,29 +49,29 @@ return function(p0, p1, p2)
 		table.insert(t, current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkThreshold))
 		table.insert(t, current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(checkThreshold))
 		table.insert(t, current:GetPropertyChangedSignal("CanvasPosition"):Connect(checkThreshold))
-		local var6 = nil
+		local var3 = nil
 		
 		if luaAppSduiVerticalFeedThresholdRefresh then
-			var6 = false
+			var3 = false
 			task.defer(function()
-				-- upvalues: var6 (write), checkThreshold (ref)
-				if not var6 then
+				-- upvalues: var3 (write), checkThreshold (ref)
+				if not var3 then
 					checkThreshold()
 				end
 			end)
 		end
 		return function()
-			-- upvalues: luaAppSduiVerticalFeedThresholdRefresh (copy), var6 (write), t (ref)
+			-- upvalues: luaAppSduiVerticalFeedThresholdRefresh (copy), var3 (write), t (ref)
 			if luaAppSduiVerticalFeedThresholdRefresh then
-				var6 = true
+				var3 = true
 			end
 			for i, v in t do
 				v:Disconnect()
 			end
 		end
 	end, {
-		p0,
 		p1,
-		if luaAppSduiVerticalFeedThresholdRefresh then nil else p2
+		p2,
+		if luaAppSduiVerticalFeedThresholdRefresh then nil else p3
 	})
 end

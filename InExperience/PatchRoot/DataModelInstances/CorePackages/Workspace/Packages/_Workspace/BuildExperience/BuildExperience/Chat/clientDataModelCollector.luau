@@ -6,10 +6,10 @@
 		root = game,
 		players = playersService,
 		localPlayer = playersService.LocalPlayer,
-		getService = function(p0)
-			local ok, status = pcall(game.GetService, game, p0)
+		getService = function(p1)
+			local ok, status = pcall(game.GetService, game, p1)
 			
-			return if ok then status else game:FindFirstChild(p0)
+			return if ok then status else game:FindFirstChild(p1)
 		end,
 		getReflectionProperties = function(p1)
 			return game:GetService("ReflectionService"):GetPropertiesOfClass(p1, {})
@@ -17,63 +17,63 @@
 	}
 end
 
-local function _(p2)
-	local ok, status = pcall(p2.GetChildren, p2)
+local function _(p1)
+	local ok, status = pcall(p1.GetChildren, p1)
 	
 	return if ok and typeof(status) == "table" then status else {}
 end
 
-local function escapePathSegment(p3)
-	return if p3 == "" then "%00" else p3:gsub("%%", "%%25"):gsub("%.", "%%2E"):gsub("%[", "%%5B"):gsub("%]", "%%5D")
+local function escapePathSegment(p1)
+	return if p1 == "" then "%00" else p1:gsub("%%", "%%25"):gsub("%.", "%%2E"):gsub("%[", "%%5B"):gsub("%]", "%%5D")
 end
 
-local _ = function(p4)
-	return if p4 == "%00" then "" else p4:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
+local _ = function(p1)
+	return if p1 == "%00" then "" else p1:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
 end
 
-local function getChildPathEntries(p5)
-	local ok, status = pcall(p5.GetChildren, p5)
-	local var19 = if ok and typeof(status) == "table" then status else {}
+local function getChildPathEntries(p1)
+	local ok, status = pcall(p1.GetChildren, p1)
+	local var1 = if ok and typeof(status) == "table" then status else {}
 	ok = {}
 	
-	for i, v in var19 do
+	for i, v in var1 do
 		ok[v.Name] = (ok[v.Name] or 0) + 1
 	end
 	local t = {}
 	local t_1 = {}
 	
-	for i_1, v_1 in var19 do
+	for i_1, v_1 in var1 do
 		local name = v_1.Name
-		local var22 = (t[name] or 0) + 1
-		t[name] = var22
+		local var2 = (t[name] or 0) + 1
+		t[name] = var2
 		table.insert(t_1, {
 			instance = v_1,
-			segment = (if name == "" then "%00" else name:gsub("%%", "%%25"):gsub("%.", "%%2E"):gsub("%[", "%%5B"):gsub("%]", "%%5D")) .. (if ok[name] > 1 then `[{var22}]` else "")
+			segment = (if name == "" then "%00" else name:gsub("%%", "%%25"):gsub("%.", "%%2E"):gsub("%[", "%%5B"):gsub("%]", "%%5D")) .. (if ok[name] > 1 then `[{var2}]` else "")
 		})
 	end
 	return t_1
 end
 
-local function formatChildSegment(p6)
+local function formatChildSegment(p2)
 	-- upvalues: getChildPathEntries (ref), escapePathSegment (ref)
-	if p6.Parent ~= nil then
-		for i, v in getChildPathEntries(p6.Parent) do
-			if v.instance == p6 then
+	if p2.Parent ~= nil then
+		for i, v in getChildPathEntries(p2.Parent) do
+			if v.instance == p2 then
 				return v.segment
 			end
 		end
 	end
-	return escapePathSegment(p6.Name)
+	return escapePathSegment(p2.Name)
 end
 
-local _ = function(p7, p8)
-	return if p7 == "" then p8 else `{p7}.{p8}`
+local _ = function(p3, p4)
+	return if p3 == "" then p4 else `{p3}.{p4}`
 end
 
-local function splitPath(p9)
+local function splitPath(p3)
 	local t = {}
 	
-	for i in string.gmatch(p9:gsub("^game%.", ""):gsub("^game$", ""), "[^%.]+") do
+	for i in string.gmatch(p3:gsub("^game%.", ""):gsub("^game$", ""), "[^%.]+") do
 		if i ~= "" then
 			table.insert(t, i)
 		end
@@ -81,22 +81,22 @@ local function splitPath(p9)
 	return t
 end
 
-local _ = function(p10)
-	local match, match_1 = string.match(p10, "^(.*)%[(%d+)%]$")
-	local match_2 = match or p10
+local _ = function(p4)
+	local match, match_1 = string.match(p4, "^(.*)%[(%d+)%]$")
+	local match_2 = match or p4
 	
 	return if match_2 == "%00" then "" else match_2:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%"), tonumber(match_1) or 1
 end
 
-local _ = function(p11, p12, p13)
-	local var27 = 0
-	local ok, status = pcall(p11.GetChildren, p11)
+local _ = function(p4, p5, p6)
+	local var3 = 0
+	local ok, status = pcall(p4.GetChildren, p4)
 	
 	for ok, v in if ok and typeof(status) == "table" then status else {} do
-		if v.Name == p12 then
-			var27 += 1
+		if v.Name == p5 then
+			var3 += 1
 			
-			if var27 == p13 then
+			if var3 == p6 then
 				return v
 			end
 		end
@@ -104,23 +104,23 @@ local _ = function(p11, p12, p13)
 	return nil
 end
 
-local function resolvePath(p14, p15)
+local function resolvePath(p7, p8)
 	-- upvalues: splitPath (ref), getChildPathEntries (ref)
-	if p14 == nil or p14 == "" or string.lower(p14) == "game" then
-		return p15.root, ""
+	if p7 == nil or p7 == "" or string.lower(p7) == "game" then
+		return p8.root, ""
 	end
-	local var28 = splitPath(p14)
+	local var4 = splitPath(p7)
 	
-	if #var28 == 0 then
-		return p15.root, ""
+	if #var4 == 0 then
+		return p8.root, ""
 	end
 	local segment, v
-	local var29 = var28[1]
-	local match, match_1 = string.match(var29, "^(.*)%[(%d+)%]$")
-	local match_2 = match or var29
-	local var33 = if match_2 == "%00" then "" else match_2:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
+	local var5 = var4[1]
+	local match, match_1 = string.match(var5, "^(.*)%[(%d+)%]$")
+	local match_2 = match or var5
+	local var6 = if match_2 == "%00" then "" else match_2:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
 	local _ = tonumber(match_1) or 1
-	local service = p15.getService(var33)
+	local service = p8.getService(var6)
 	
 	if service == nil then
 		return nil, nil
@@ -128,31 +128,31 @@ local function resolvePath(p14, p15)
 		for i, v in getChildPathEntries(service.Parent) do
 			if v.instance == service then
 				segment = v.segment
-				for i_2 = 2, #var28 do
-					v = var28[i_2]
+				for i_2 = 2, #var4 do
+					v = var4[i_2]
 					local match_3, match_4 = string.match(v, "^(.*)%[(%d+)%]$")
 					local match_3_1 = match_3 or v
-					local var38 = if match_3_1 == "%00" then "" else match_3_1:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
-					local var39 = tonumber(match_4) or 1
+					local var7 = if match_3_1 == "%00" then "" else match_3_1:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
+					local var8 = tonumber(match_4) or 1
 					v = nil
 					
-					if service == p15.players and var38 == "LocalPlayer" then
-						v = p15.localPlayer
+					if service == p8.players and var7 == "LocalPlayer" then
+						v = p8.localPlayer
 						if v ~= nil then
 							service = v
 							
-							if service == p15.localPlayer then
+							if service == p8.localPlayer then
 								segment = `{segment}.LocalPlayer`
 							else
 								local segment_1
-								local var42 = segment
+								local var9 = segment
 								match_3_1 = service
 								
 								if match_3_1.Parent == nil then break end
 								for status, v_2 in getChildPathEntries(match_3_1.Parent) do
 									if v_2.instance == match_3_1 then
 										segment_1 = v_2.segment
-										segment = if var42 == "" then segment_1 else `{var42}.{segment_1}`
+										segment = if var9 == "" then segment_1 else `{var9}.{segment_1}`
 									end
 								end
 								local name = match_3_1.Name
@@ -161,16 +161,16 @@ local function resolvePath(p14, p15)
 						end
 						return nil, nil
 					end
-					local var40 = service
-					local var41 = 0
-					local ok, status = pcall(var40.GetChildren, var40)
+					local var10 = service
+					local var11 = 0
+					local ok, status = pcall(var10.GetChildren, var10)
 					match_3_1 = if ok and typeof(status) == "table" then status else {}
 					
 					for ok, status in match_3_1 do
-						if status.Name == var38 then
-							var41 += 1
+						if status.Name == var7 then
+							var11 += 1
 							
-							if var41 == var39 then
+							if var11 == var8 then
 								v = status
 							end
 						end
@@ -185,14 +185,14 @@ local function resolvePath(p14, p15)
 	segment = if name == "" then "%00" else name:gsub("%%", "%%25"):gsub("%.", "%%2E"):gsub("%[", "%%5B"):gsub("%]", "%%5D")
 end
 
-local function getDisplayPath(p16, p17)
+local function getDisplayPath(p9, p10)
 	-- upvalues: formatChildSegment (ref)
 	local t = {}
-	local var44 = p16
-	while var44 ~= nil and var44 ~= p17.root do
-		if var44 ~= p17.localPlayer then
-			table.insert(t, 1, formatChildSegment(var44))
-			var44 = var44.Parent
+	local var12 = p9
+	while var12 ~= nil and var12 ~= p10.root do
+		if var12 ~= p10.localPlayer then
+			table.insert(t, 1, formatChildSegment(var12))
+			var12 = var12.Parent
 			continue
 		end
 		table.insert(t, 1, "LocalPlayer")
@@ -200,55 +200,55 @@ local function getDisplayPath(p16, p17)
 		
 		return table.concat(t, ".")
 	end
-	return if var44 == p17.root then table.concat(t, ".") else tostring(p16)
+	return if var12 == p10.root then table.concat(t, ".") else tostring(p9)
 end
 
-local function truncateString(p18)
-	if #p18 <= 4096 then
-		return p18
+local function truncateString(p11)
+	if #p11 <= 4096 then
+		return p11
 	end
-	local var45 = 4082
-	while var45 > 0 do
-		local byteValue = string.byte(p18, var45)
+	local var13 = 4082
+	while var13 > 0 do
+		local byteValue = string.byte(p11, var13)
 		
 		if byteValue == nil or byteValue < 128 or byteValue >= 192 then break end
-		var45 -= 1
+		var13 -= 1
 	end
-	local var47 = 4082
-	local var48 = if var45 > 0 then string.byte(p18, var45) else nil
+	local var14 = 4082
+	local var15 = if var13 > 0 then string.byte(p11, var13) else nil
 	
-	if var48 ~= nil and var45 + (if var48 < 128 then 1 elseif var48 < 224 then 2 elseif var48 < 240 then 3 elseif var48 < 248 then 4 else 1) - 1 > 4082 then
-		var47 = var45 - 1
+	if var15 ~= nil and var13 + (if var15 < 128 then 1 elseif var15 < 224 then 2 elseif var15 < 240 then 3 elseif var15 < 248 then 4 else 1) - 1 > 4082 then
+		var14 = var13 - 1
 	end
-	return string.sub(p18, 1, math.max(var47, 0)) .. "...<truncated>"
+	return string.sub(p11, 1, math.max(var14, 0)) .. "...<truncated>"
 end
 
-local function serializeValue(p19, p20, p21)
+local function serializeValue(p12, p13, p14)
 	-- upvalues: truncateString (ref), getDisplayPath (ref), serializeValue (ref)
-	local var49 = typeof(p19)
+	local var16 = typeof(p12)
 	
-	if var49 == "nil" or var49 == "boolean" then
-		return p19
-	elseif var49 == "string" then
-		return truncateString(p19)
-	elseif var49 == "number" then
-		return if p19 == p19 and p19 ~= 1e999 and p19 ~= -1e999 then p19 else tostring(p19)
-	elseif var49 == "Instance" then
-		return getDisplayPath(p19, p20)
-	elseif var49 == "table" then
-		p21 = p21 or 0
+	if var16 == "nil" or var16 == "boolean" then
+		return p12
+	elseif var16 == "string" then
+		return truncateString(p12)
+	elseif var16 == "number" then
+		return if p12 == p12 and p12 ~= 1e999 and p12 ~= -1e999 then p12 else tostring(p12)
+	elseif var16 == "Instance" then
+		return getDisplayPath(p12, p13)
+	elseif var16 == "table" then
+		p14 = p14 or 0
 		
-		if p21 >= 2 then
+		if p14 >= 2 then
 			return "<table>"
 		end
 		local t = {}
-		local var52 = 0
+		local var17 = 0
 		
-		for i, v in p19 do
-			var52 += 1
+		for i, v in p12 do
+			var17 += 1
 			
-			if var52 <= 50 then
-				t[truncateString(tostring(i))] = serializeValue(v, p20, p21 + 1)
+			if var17 <= 50 then
+				t[truncateString(tostring(i))] = serializeValue(v, p13, p14 + 1)
 				continue
 			end
 			t.__truncated = true
@@ -257,118 +257,118 @@ local function serializeValue(p19, p20, p21)
 		end
 		return t
 	else
-		local ok, status = pcall(tostring, p19)
+		local ok, status = pcall(tostring, p12)
 		
-		return if ok then truncateString(status) else `<unserializable {var49}>`
+		return if ok then truncateString(status) else `<unserializable {var16}>`
 	end
 end
 
-local function countDescendants(p22)
-	local var53 = 10000
-	local ok, status = pcall(p22.GetChildren, p22)
-	local var54 = if ok and typeof(status) == "table" then status else {}
+local function countDescendants(p15)
+	local var18 = 10000
+	local ok, status = pcall(p15.GetChildren, p15)
+	local var19 = if ok and typeof(status) == "table" then status else {}
 	ok = {}
-	local var55 = false
+	local var20 = false
 	
-	for i, v in var54 do
-		if var53 > #ok then
-			var55 = true
+	for i, v in var19 do
+		if var18 > #ok then
+			var20 = true
 			break
 		end
 		table.insert(ok, v)
 	end
 	local status_1
-	local var56 = 0
-	while #ok > 0 and var53 > 0 do
+	local var21 = 0
+	while #ok > 0 and var18 > 0 do
 		local removed = table.remove(ok)
-		var56 += 1
-		var53 -= 1
+		var21 += 1
+		var18 -= 1
 		ok_1, status_1 = pcall(removed.GetChildren, removed)
 		
 		for ok_1, status_1 in if ok_1 and typeof(status_1) == "table" then status_1 else {} do
-			if var53 > #ok then
-				var55 = true
+			if var18 > #ok then
+				var20 = true
 				break
 			end
 			table.insert(ok, status_1)
 		end
 	end
-	return var56, var55 or #ok > 0
+	return var21, var20 or #ok > 0
 end
 
-local function countDescendantsByInstance(p23)
+local function countDescendantsByInstance(p16)
 	local removed
 	local t = {}
 	local t_1 = {}
-	local list = { { expanded = false, instance = p23 } }
-	local var61 = 1
-	local var62 = false
+	local list = { { expanded = false, instance = p16 } }
+	local var22 = 1
+	local var23 = false
 	while #list > 0 do
 		removed = table.remove(list)
 		
 		if removed == nil then break end
 		if removed.expanded then
-			local var64 = 0
+			local var24 = 0
 			
 			for i, v in t_1[removed.instance] or {} do
-				var64 += 1 + (t[v] or 0)
+				var24 += 1 + (t[v] or 0)
 			end
-			t[removed.instance] = var64
+			t[removed.instance] = var24
 		end
 		local instance = removed.instance
 		local ok, status = pcall(instance.GetChildren, instance)
-		local var65 = if ok and typeof(status) == "table" then status else {}
-		t_1[removed.instance] = var65
+		local var25 = if ok and typeof(status) == "table" then status else {}
+		t_1[removed.instance] = var25
 		table.insert(list, { expanded = true, instance = removed.instance })
 		
-		for status = #var65, 1, -1 do
-			if var61 >= 10000 then
-				var62 = true
+		for status = #var25, 1, -1 do
+			if var22 >= 10000 then
+				var23 = true
 				break
 			end
-			var61 += 1
-			table.insert(list, { expanded = false, instance = var65[status] })
+			var22 += 1
+			table.insert(list, { expanded = false, instance = var25[status] })
 		end
 	end
-	return t, var62
+	return t, var23
 end
 
-local function summarizeChildren(p24, p25)
+local function summarizeChildren(p17, p18)
 	-- upvalues: getChildPathEntries (ref), countDescendants (ref)
-	local var66 = getChildPathEntries(p24)
+	local var26 = getChildPathEntries(p17)
 	local t = {}
 	
-	for i, v in var66 do
+	for i, v in var26 do
 		if i > 100 then break end
 		local t_1 = { className = v.instance.ClassName }
 		local segment = v.segment
-		t_1.path = if p25 == "" then segment else `{p25}.{segment}`
+		t_1.path = if p18 == "" then segment else `{p18}.{segment}`
 		table.insert(t, t_1)
 	end
-	local var69, var70 = countDescendants(p24)
-	local var71 = if #t >= #var66 then var70 else true
+	local var27, var28 = countDescendants(p17)
+	local var29 = if #t >= #var26 then var28 else true
 	
 	return {
 		immediateChildren = t,
-		childrenCount = #var66,
-		totalDescendants = var69,
-		truncated = var71
-	}, var71
+		childrenCount = #var26,
+		totalDescendants = var27,
+		truncated = var29
+	}, var29
 end
 
-local function getPropertyNames(p26, p27)
+local function getPropertyNames(p19, p20)
 	local t = {}
 	local t_1 = {}
 	
-	local function _(p28)
+	local function _(p21)
 		-- upvalues: t_1 (ref), t (ref)
-		if typeof(p28) == "string" and p28 ~= "" and (not t_1[p28] and #t < 256) then
-			t_1[p28] = true
-			table.insert(t, p28)
+		if typeof(p21) == "string" and p21 ~= "" and (not t_1[p21] and #t < 256) then
+			t_1[p21] = true
+			table.insert(t, p21)
 		end
 	end
 	
-	for i, v in p27.getReflectionProperties(p26.ClassName) do
+	for i, v in p20.getReflectionProperties(p19.ClassName) do
 		if typeof(v) == "table" then
 			local name = v.Name
 			
@@ -383,26 +383,26 @@ local function getPropertyNames(p26, p27)
 	return t
 end
 
-local function collectProperties(p29, p30)
+local function collectProperties(p21, p22)
 	-- upvalues: getPropertyNames (ref), serializeValue (ref)
 	local t = {}
 	
-	for i, v in getPropertyNames(p29, p30) do
+	for i, v in getPropertyNames(p21, p22) do
 		local ok, status = pcall(function()
-			-- upvalues: p29 (ref), v (ref)
-			return p29[v]
+			-- upvalues: p21 (ref), v (ref)
+			return p21[v]
 		end)
 		
 		if ok and status ~= nil then
-			t[v] = serializeValue(status, p30)
+			t[v] = serializeValue(status, p22)
 		end
 	end
 	return t
 end
 
-local function collectAttributes(p31, p32)
+local function collectAttributes(p23, p24)
 	-- upvalues: serializeValue (ref)
-	local ok, status = pcall(p31.GetAttributes, p31)
+	local ok, status = pcall(p23.GetAttributes, p23)
 	
 	if not ok or typeof(status) ~= "table" then
 		return {}
@@ -417,13 +417,13 @@ local function collectAttributes(p31, p32)
 	
 	for i_1, v in t_1 do
 		if i_1 > 100 then break end
-		t[v] = serializeValue(status[v], p32)
+		t[v] = serializeValue(status[v], p24)
 	end
 	return t
 end
 
-local _ = function(p33)
-	return { status = "invalid_input", message = p33 }
+local _ = function(p25)
+	return { status = "invalid_input", message = p25 }
 end
 
 local _ = function()
@@ -433,58 +433,58 @@ local _ = function()
 	}
 end
 
-local _ = function(p34)
+local _ = function(p25)
 	return {
 		status = "not_found",
 		message = "No instance exists at the requested path.",
-		path = p34
+		path = p25
 	}
 end
 
-local _ = function(p35, p36)
-	if typeof(p35) ~= "table" then
+local _ = function(p25, p26)
+	if typeof(p25) ~= "table" then
 		return nil
 	end
-	local var77 = p35[p36]
+	local var30 = p25[p26]
 	
-	return if typeof(var77) == "string" and var77 ~= "" then var77 else nil
+	return if typeof(var30) == "string" and var30 ~= "" then var30 else nil
 end
 
-local _ = function(p37, p38, p39, p40, p41)
-	return if typeof(p37) == "table" and typeof(p37[p38]) == "number" then math.clamp(math.floor(p37[p38]), p40, p41) else p39
+local _ = function(p25, p26, p27, p28, p29)
+	return if typeof(p25) == "table" and typeof(p25[p26]) == "number" then math.clamp(math.floor(p25[p26]), p28, p29) else p27
 end
 
-local function getKeywords(p42)
-	local var78, keywords
-	if typeof(p42) == "table" then
-		keywords = p42.keywords
-		var78 = if typeof(keywords) == "string" and keywords ~= "" then keywords else nil
+local function getKeywords(p25)
+	local var30, keywords
+	if typeof(p25) == "table" then
+		keywords = p25.keywords
+		var30 = if typeof(keywords) == "string" and keywords ~= "" then keywords else nil
 	else
-		var78 = nil
+		var30 = nil
 	end
-	if var78 == nil then
+	if var30 == nil then
 		return {}
 	end
 	keywords = {}
 	
-	for i in string.gmatch(string.lower(var78), "[^,%s]+") do
+	for i in string.gmatch(string.lower(var30), "[^,%s]+") do
 		table.insert(keywords, i)
 	end
 	return keywords
 end
 
-local function matchesFilters(p43, p44, p45)
+local function matchesFilters(p26, p27, p28)
 	local ok
-	if p44 ~= nil then
-		ok, status = pcall(p43.IsA, p43, p44)
+	if p27 ~= nil then
+		ok, status = pcall(p26.IsA, p26, p27)
 		
 		if not ok or not status then
 			return false
 		end
 	end
-	ok = string.lower(p43.Name)
+	ok = string.lower(p26.Name)
 	
-	for i, v in p45 do
+	for i, v in p28 do
 		if not string.find(ok, v, 1, true) then
 			return false
 		end
@@ -492,16 +492,16 @@ local function matchesFilters(p43, p44, p45)
 	return true
 end
 
-local function makeSearchMatch(p46, p47)
-	local parent = p46.Parent
+local function makeSearchMatch(p29, p30)
+	local parent = p29.Parent
 	local t = {
-		_instance = p46,
-		name = p46.Name,
-		className = p46.ClassName,
-		path = p47,
+		_instance = p29,
+		name = p29.Name,
+		className = p29.ClassName,
+		path = p30,
 		parentName = if parent ~= nil then nil else parent.Name
 	}
-	local ok, status = pcall(p46.GetChildren, p46)
+	local ok, status = pcall(p29.GetChildren, p29)
 	t.childrenCount = #(if ok and typeof(status) == "table" then status else {})
 	
 	return t
@@ -510,42 +510,42 @@ end
 return {
 	NOT_IN_GAME_MESSAGE = "The user is not in the game.",
 	NOT_FOUND_MESSAGE = "No instance exists at the requested path.",
-	searchClientDataModel = function(p48, p49)
+	searchClientDataModel = function(p29, p30)
 		-- upvalues: defaultDependencies (ref), resolvePath (ref), getKeywords (ref), getChildPathEntries (ref), matchesFilters (ref), makeSearchMatch (ref), countDescendantsByInstance (ref)
-		local var81, path
-		p49 = p49 or defaultDependencies()
+		local var31, path
+		p30 = p30 or defaultDependencies()
 		
-		if p49.gameId == 0 then
+		if p30.gameId == 0 then
 			return {
 				status = "not_in_game",
 				message = "The user is not in the game."
 			}
-		elseif typeof(p48) == "table" then
-			path = p48.path
-			var81 = if typeof(path) == "string" and path ~= "" then path else nil
+		elseif typeof(p29) == "table" then
+			path = p29.path
+			var31 = if typeof(path) == "string" and path ~= "" then path else nil
 		else
-			var81 = nil
+			var31 = nil
 		end
-		path, var82 = resolvePath(var81, p49)
+		path, var82 = resolvePath(var31, p30)
 		
 		if path == nil or var82 == nil then
 			return {
 				status = "not_found",
 				message = "No instance exists at the requested path.",
-				path = var81 or ""
+				path = var31 or ""
 			}
 		end
-		local var85, instanceType
-		local var83 = if typeof(p48) == "table" and typeof(p48.max_depth) == "number" then math.clamp(math.floor(p48.max_depth), 0, 10) else 3
-		local var84 = if typeof(p48) == "table" and typeof(p48.head_limit) == "number" then math.clamp(math.floor(p48.head_limit), 1, 200) else 200
+		local var32, instanceType
+		local var33 = if typeof(p29) == "table" and typeof(p29.max_depth) == "number" then math.clamp(math.floor(p29.max_depth), 0, 10) else 3
+		local var34 = if typeof(p29) == "table" and typeof(p29.head_limit) == "number" then math.clamp(math.floor(p29.head_limit), 1, 200) else 200
 		
-		if typeof(p48) == "table" then
-			instanceType = p48.instance_type
-			var85 = if typeof(instanceType) == "string" and instanceType ~= "" then instanceType else nil
+		if typeof(p29) == "table" then
+			instanceType = p29.instance_type
+			var32 = if typeof(instanceType) == "string" and instanceType ~= "" then instanceType else nil
 		else
-			var85 = nil
+			var32 = nil
 		end
-		instanceType = getKeywords(p48)
+		instanceType = getKeywords(p29)
 		local t = {}
 		
 		if var82 == "" then
@@ -555,94 +555,94 @@ return {
 		else
 			table.insert(t, { depth = 0, instance = path, path = var82 })
 		end
-		local var92
+		local var35
 		local t_1 = {}
-		local var88 = 0
-		local var89 = 0
-		local var90 = 1
-		local var91 = false
-		while var90 <= #t do
-			if var89 >= 10000 then
-				var91 = true
+		local var36 = 0
+		local var37 = 0
+		local var38 = 1
+		local var39 = false
+		while var38 <= #t do
+			if var37 >= 10000 then
+				var39 = true
 				break
 			end
-			var92 = t[var90]
-			var90 += 1
-			var89 += 1
+			var35 = t[var38]
+			var38 += 1
+			var37 += 1
 			
-			if matchesFilters(var92.instance, var85, instanceType) then
-				var88 += 1
+			if matchesFilters(var35.instance, var32, instanceType) then
+				var36 += 1
 				
-				if #t_1 < var84 then
-					table.insert(t_1, makeSearchMatch(var92.instance, var92.path))
+				if #t_1 < var34 then
+					table.insert(t_1, makeSearchMatch(var35.instance, var35.path))
 				else
-					var91 = true
+					var39 = true
 				end
 			end
-			if var92.depth >= var83 then continue end
-			for i, v in getChildPathEntries(var92.instance) do
-				if var89 + (#t - var90 + 1) >= 10000 then
-					var91 = true
+			if var35.depth >= var33 then continue end
+			for i, v in getChildPathEntries(var35.instance) do
+				if var37 + (#t - var38 + 1) >= 10000 then
+					var39 = true
 					break
 				end
 				local t_2 = { instance = v.instance }
-				local path_1 = var92.path
+				local path_1 = var35.path
 				local segment = v.segment
 				t_2.path = if path_1 == "" then segment else `{path_1}.{segment}`
-				t_2.depth = var92.depth + 1
+				t_2.depth = var35.depth + 1
 				table.insert(t, t_2)
 			end
 		end
 		if #t_1 > 0 then
-			local var94, var95 = countDescendantsByInstance(path)
+			local var40, var41 = countDescendantsByInstance(path)
 			
 			for i, v in t_1 do
-				v.totalDescendants = var94[v._instance] or 0
+				v.totalDescendants = var40[v._instance] or 0
 				v._instance = nil
 			end
-			var91 = var91 or var95
+			var39 = var39 or var41
 		end
 		return {
 			status = "ok",
 			matches = t_1,
 			count = #t_1,
-			totalFound = var88,
-			truncated = var91
+			totalFound = var36,
+			truncated = var39
 		}
 	end,
-	inspectClientInstance = function(p50, p51)
+	inspectClientInstance = function(p31, p32)
 		-- upvalues: defaultDependencies (ref), resolvePath (ref), summarizeChildren (ref), collectProperties (ref), collectAttributes (ref)
-		local var97, path
-		p51 = p51 or defaultDependencies()
+		local var42, path
+		p32 = p32 or defaultDependencies()
 		
-		if p51.gameId == 0 then
+		if p32.gameId == 0 then
 			return {
 				status = "not_in_game",
 				message = "The user is not in the game."
 			}
-		elseif typeof(p50) == "table" then
-			path = p50.path
-			var97 = if typeof(path) == "string" and path ~= "" then path else nil
+		elseif typeof(p31) == "table" then
+			path = p31.path
+			var42 = if typeof(path) == "string" and path ~= "" then path else nil
 		else
-			var97 = nil
+			var42 = nil
 		end
-		if var97 == nil then
+		if var42 == nil then
 			return { status = "invalid_input", message = "path is required" }
 		end
-		path, var98 = resolvePath(var97, p51)
+		path, var98 = resolvePath(var42, p32)
 		
 		return if path == nil or var98 == nil then {
 			status = "not_found",
 			message = "No instance exists at the requested path.",
-			path = var97
+			path = var42
 		} else {
 			status = "ok",
 			instance = {
 				name = path.Name,
 				className = path.ClassName,
 				path = var98,
-				properties = collectProperties(path, p51),
-				attributes = collectAttributes(path, p51),
+				properties = collectProperties(path, p32),
+				attributes = collectAttributes(path, p32),
 				children = summarizeChildren(path, var98)
 			}
 		}

@@ -2,62 +2,62 @@
 local fIntShopFetchOnGameJoinFallbackDelayMsModule = require(script:FindFirstAncestor("InExperienceShop").Flags.FIntShopFetchOnGameJoinFallbackDelayMs)
 local scheduleFallbackModule = require(script.Parent.scheduleFallback)
 local shopDebugLoggerModule = require(script.Parent.ShopDebugLogger)
-local var4 = fIntShopFetchOnGameJoinFallbackDelayMsModule / 1000
+local var1 = fIntShopFetchOnGameJoinFallbackDelayMsModule / 1000
 
 return function(value)
-	-- upvalues: shopDebugLoggerModule (ref), playersService (ref), var4 (ref), scheduleFallbackModule (ref)
-	local var5 = false
+	-- upvalues: shopDebugLoggerModule (ref), playersService (ref), var1 (ref), scheduleFallbackModule (ref)
+	local var2 = false
 	
-	local function _(p0)
-		-- upvalues: var5 (write), shopDebugLoggerModule (copy), value (ref)
-		if var5 then
+	local function _(p1)
+		-- upvalues: var2 (write), shopDebugLoggerModule (copy), value (ref)
+		if var2 then
 			return
 		end
-		var5 = true
+		var2 = true
 		shopDebugLoggerModule.logLazy(function()
-			-- upvalues: p0 (ref)
+			-- upvalues: p1 (ref)
 			return "whenJoinSettles: settled path=" .. p0
 		end)
-		value(p0)
+		value(p1)
 	end
 	
 	task.spawn(function()
-		-- upvalues: playersService (copy), var5 (write), shopDebugLoggerModule (copy), value (ref)
+		-- upvalues: playersService (copy), var2 (write), shopDebugLoggerModule (copy), value (ref)
 		xpcall(function()
-			-- upvalues: playersService (copy), var5 (copy), shopDebugLoggerModule (copy), value (copy)
+			-- upvalues: playersService (copy), var2 (copy), shopDebugLoggerModule (copy), value (copy)
 			while not playersService.LocalPlayer do
 				playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
 				
-				if var5 then return end
+				if var2 then return end
 			end
 			local localPlayer = playersService.LocalPlayer
 			assert(localPlayer ~= nil, "LocalPlayer must be non-nil after the wait loop")
 			
 			if localPlayer.Character and localPlayer:HasAppearanceLoaded() then
-				if var5 then
+				if var2 then
 					return
 				end
-				var5 = true
-				local var6 = "primary"
+				var2 = true
+				local var3 = "primary"
 				shopDebugLoggerModule.logLazy(function()
-					-- upvalues: var6 (ref)
+					-- upvalues: var3 (ref)
 					return "whenJoinSettles: settled path=" .. var6
 				end)
 				value("primary")
 				
 				return
-			elseif var5 then
+			elseif var2 then
 				return
 			end
 			localPlayer.CharacterAppearanceLoaded:Once(function()
-				-- upvalues: var5 (copy), shopDebugLoggerModule (copy), value (copy)
-				if var5 then
+				-- upvalues: var2 (copy), shopDebugLoggerModule (copy), value (copy)
+				if var2 then
 					return
 				end
-				var5 = true
-				local var7 = "primary"
+				var2 = true
+				local var4 = "primary"
 				shopDebugLoggerModule.logLazy(function()
-					-- upvalues: var7 (ref)
+					-- upvalues: var4 (ref)
 					return "whenJoinSettles: settled path=" .. var7
 				end)
 				value("primary")
@@ -67,18 +67,18 @@ return function(value)
 		end)
 	end)
 	shopDebugLoggerModule.logLazy(function()
-		-- upvalues: var4 (copy)
+		-- upvalues: var1 (copy)
 		return "whenJoinSettles: scheduled fallback delaySeconds=" .. var4
 	end)
-	scheduleFallbackModule(var4, function()
-		-- upvalues: var5 (write), shopDebugLoggerModule (copy), value (ref)
-		if var5 then
+	scheduleFallbackModule(var1, function()
+		-- upvalues: var2 (write), shopDebugLoggerModule (copy), value (ref)
+		if var2 then
 			return
 		end
-		var5 = true
-		local var8 = "fallback"
+		var2 = true
+		local var3 = "fallback"
 		shopDebugLoggerModule.logLazy(function()
-			-- upvalues: var8 (ref)
+			-- upvalues: var3 (ref)
 			return "whenJoinSettles: settled path=" .. var8
 		end)
 		value("fallback")

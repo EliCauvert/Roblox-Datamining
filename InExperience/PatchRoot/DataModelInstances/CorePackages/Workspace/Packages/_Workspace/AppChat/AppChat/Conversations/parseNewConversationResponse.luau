@@ -4,22 +4,22 @@ local conversationChannelsModule = require(appChat.Models.ConversationChannels)
 local eventNamesModule = require(appChat.Analytics.EventNames)
 local createConversationErrorModule = require(appChat.Analytics.Enums.CreateConversationError)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: promiseModule (ref), conversationChannelsModule (ref), createConversationErrorModule (ref), eventNamesModule (ref)
-	if not p0 then
+	if not p1 then
 		return promiseModule.reject("No conversation returned.")
-	elseif p0.status == "failed" then
+	elseif p1.status == "failed" then
 		return promiseModule.reject("Failed to create conversation.")
 	end
-	local var5 = conversationChannelsModule.fromChannelsApi(p0)
+	local var1 = conversationChannelsModule.fromChannelsApi(p1)
 	
-	if p1 then
-		p1.fireAnalyticsEvent(eventNamesModule.NewConversationCreated, {
-			conversationId = var5.id,
-			createConversationResult = if not var5 then createConversationErrorModule.InvalidResponse else p0.status,
-			participantsCount = #var5.participants,
-			createdReason = p2 or "unknown"
+	if p2 then
+		p2.fireAnalyticsEvent(eventNamesModule.NewConversationCreated, {
+			conversationId = var1.id,
+			createConversationResult = if not var1 then createConversationErrorModule.InvalidResponse else p1.status,
+			participantsCount = #var1.participants,
+			createdReason = p3 or "unknown"
 		})
 	end
-	return var5
+	return var1
 end

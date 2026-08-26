@@ -4,14 +4,14 @@ local getDeepValueModule = require(script.Parent.Parent.Parent.Parent.getDeepVal
 local llamaModule = require(parent.llama)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), t (ref), llamaModule (ref), getDeepValueModule (ref)
 	return roduxModule.createReducer(t, {
-		[p0.friendsNetworking.GetFriendRequests.Succeeded.name] = function(_, p1)
+		[p1.friendsNetworking.GetFriendRequests.Succeeded.name] = function(_, p2)
 			-- upvalues: llamaModule (copy), getDeepValueModule (copy)
-			return llamaModule.Dictionary.map(p1.responseBody.data, function(p2)
+			return llamaModule.Dictionary.map(p2.responseBody.data, function(p3)
 				-- upvalues: getDeepValueModule (copy)
-				return getDeepValueModule(p2, "friendRequest.originSourceType"), tostring(p2.id)
+				return getDeepValueModule(p3, "friendRequest.originSourceType"), tostring(p3.id)
 			end)
 		end
 	})

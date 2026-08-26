@@ -16,143 +16,143 @@ local collectibleProductIdStore = catalogNetworkingModule.CollectibleProductIdSt
 local bundleOwnershipStore = catalogNetworkingModule.BundleOwnershipStore
 local itemDetailsStore = catalogNetworkingModule.ItemDetailsStore
 
-local function useLookApiData(p0)
+local function useLookApiData(p1)
 	-- upvalues: useSignalState (ref), purchaseDetailsStore (ref), reactModule (ref), dashModule (ref), enumsModule (ref), myRoduxNetworkingImplModule (ref)
-	local var11 = useSignalState(purchaseDetailsStore.getCache)
-	local var12, var13 = reactModule.useState({})
-	local var14, var15 = reactModule.useState(true)
+	local var1 = useSignalState(purchaseDetailsStore.getCache)
+	local var2, var3 = reactModule.useState({})
+	local var4, var5 = reactModule.useState(true)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var15 (ref), dashModule (copy), enumsModule (copy), var13 (ref), purchaseDetailsStore (copy), myRoduxNetworkingImplModule (copy)
-		if #p0 == 0 then
-			var15(false)
+		-- upvalues: p1 (ref), var5 (ref), dashModule (copy), enumsModule (copy), var3 (ref), purchaseDetailsStore (copy), myRoduxNetworkingImplModule (copy)
+		if #p1 == 0 then
+			var5(false)
 			
 			return
 		end
-		local var16 = dashModule.collectArray(p0, function(_, p1)
+		local var6 = dashModule.collectArray(p1, function(_, p2)
 			-- upvalues: enumsModule (copy)
-			return if p1.itemType == enumsModule.ItemTypes.Bundle then nil else { id = tonumber(p1.assetId) or p1.assetId }
+			return if p2.itemType == enumsModule.ItemTypes.Bundle then nil else { id = tonumber(p2.assetId) or p2.assetId }
 		end)
 		
-		if #var16 == 0 then
-			var15(false)
+		if #var6 == 0 then
+			var5(false)
 			
 			return
 		end
-		var15(true)
-		var13({})
-		purchaseDetailsStore.fetchAll(myRoduxNetworkingImplModule, var16):andThen(function(p2)
-			-- upvalues: dashModule (copy), var13 (copy)
+		var5(true)
+		var3({})
+		purchaseDetailsStore.fetchAll(myRoduxNetworkingImplModule, var6):andThen(function(p2)
+			-- upvalues: dashModule (copy), var3 (copy)
 			if p2 and p2.look and p2.look.items then
-				var13(dashModule.map(p2.look.items, function(p3)
+				var3(dashModule.map(p2.look.items, function(p3)
 					return tostring(p3.id)
 				end))
 			end
-		end, function(p4)
-			warn("[useInspectAvatarData] Failed to fetch purchase details:", tostring(p4))
+		end, function(p2)
+			warn("[useInspectAvatarData] Failed to fetch purchase details:", tostring(p2))
 		end):finally(function()
-			-- upvalues: var15 (copy)
-			var15(false)
+			-- upvalues: var5 (copy)
+			var5(false)
 		end)
-	end, { p0 })
+	end, { p1 })
 	
-	return { responseIds = var12, cache = var11, isLoading = var14 }
+	return { responseIds = var2, cache = var1, isLoading = var4 }
 end
 
-local function useCatalogEnrichment(p5, p6)
+local function useCatalogEnrichment(p1, p2)
 	-- upvalues: useSignalState (ref), itemDetailsStore (ref), reactModule (ref), collectibleProductIdStore (ref), bundleOwnershipStore (ref), enumsModule (ref), myRoduxNetworkingImplModule (ref), promiseModule (ref)
-	local var17 = useSignalState(itemDetailsStore.getCache)
-	local var18, var19 = reactModule.useState(true)
-	local var20 = useSignalState(collectibleProductIdStore.getCache)
-	local var21 = useSignalState(bundleOwnershipStore.getCache)
+	local var1 = useSignalState(itemDetailsStore.getCache)
+	local var2, var3 = reactModule.useState(true)
+	local var4 = useSignalState(collectibleProductIdStore.getCache)
+	local var5 = useSignalState(bundleOwnershipStore.getCache)
 	reactModule.useEffect(function()
-		-- upvalues: p5 (ref), p6 (ref), var19 (ref), enumsModule (copy), itemDetailsStore (copy), myRoduxNetworkingImplModule (copy), promiseModule (copy), bundleOwnershipStore (copy)
-		if p5.isLoading then return end
-		if #p6 == 0 then
-			var19(false)
+		-- upvalues: p1 (ref), p2 (ref), var3 (ref), enumsModule (copy), itemDetailsStore (copy), myRoduxNetworkingImplModule (copy), promiseModule (copy), bundleOwnershipStore (copy)
+		if p1.isLoading then return end
+		if #p2 == 0 then
+			var3(false)
 			
 			return
 		end
 		local t = {}
 		local t_1 = {}
 		
-		for i, v in p6 do
+		for i, v in p2 do
 			t[tostring(v.assetId)] = v.itemType or "Asset"
 			
 			if v.itemType == enumsModule.ItemTypes.Bundle then
-				local var29 = tonumber(v.assetId)
+				local var6 = tonumber(v.assetId)
 				
-				if var29 then
-					table.insert(t_1, var29)
+				if var6 then
+					table.insert(t_1, var6)
 				end
 			end
 		end
 		local t_2 = {}
 		local t_3 = {}
 		
-		for i_1, v_1 in p5.responseIds do
-			local var28 = tonumber(v_1)
+		for i_1, v_1 in p1.responseIds do
+			local var7 = tonumber(v_1)
 			
-			if var28 and not t_3[v_1] then
+			if var7 and not t_3[v_1] then
 				t_3[v_1] = true
-				table.insert(t_2, { id = var28, itemType = t[v_1] or "Bundle" })
+				table.insert(t_2, { id = var7, itemType = t[v_1] or "Bundle" })
 			end
 		end
-		for i_2, v_2 in p6 do
-			local var26 = tostring(v_2.assetId)
-			local var27 = tonumber(v_2.assetId)
+		for i_2, v_2 in p2 do
+			local var8 = tostring(v_2.assetId)
+			local var9 = tonumber(v_2.assetId)
 			
-			if var27 and not t_3[var26] then
-				t_3[var26] = true
-				table.insert(t_2, { id = var27, itemType = v_2.itemType or "Asset" })
+			if var9 and not t_3[var8] then
+				t_3[var8] = true
+				table.insert(t_2, { id = var9, itemType = v_2.itemType or "Asset" })
 			end
 		end
 		if #t_2 == 0 and #t_1 == 0 then
-			var19(false)
+			var3(false)
 			
 			return
 		end
-		var19(true)
+		var3(true)
 		promiseModule.all({
 			if #t_2 > 0 then itemDetailsStore.fetchAndCache(myRoduxNetworkingImplModule, t_2) else promiseModule.resolve(),
-			if #t_1 > 0 then bundleOwnershipStore.fetchAndCache(myRoduxNetworkingImplModule, t_1):catch(function(p8)
-				warn("[useInspectAvatarData] Failed to fetch bundle ownership:", tostring(p8))
+			if #t_1 > 0 then bundleOwnershipStore.fetchAndCache(myRoduxNetworkingImplModule, t_1):catch(function(p3)
+				warn("[useInspectAvatarData] Failed to fetch bundle ownership:", tostring(p3))
 			end) else promiseModule.resolve()
 		}):andThen(function()
-			-- upvalues: var19 (copy)
-			var19(false)
-		end):catch(function(p7)
-			-- upvalues: var19 (copy)
-			warn("[useInspectAvatarData] Failed to fetch catalog details:", tostring(p7))
-			var19(false)
+			-- upvalues: var3 (copy)
+			var3(false)
+		end):catch(function(p3)
+			-- upvalues: var3 (copy)
+			warn("[useInspectAvatarData] Failed to fetch catalog details:", tostring(p3))
+			var3(false)
 		end)
-	end, { p5.responseIds, p5.isLoading, p6 })
+	end, { p1.responseIds, p1.isLoading, p2 })
 	reactModule.useEffect(function()
-		-- upvalues: p6 (ref), var17 (ref), enumsModule (copy), p5 (ref), collectibleProductIdStore (copy), myRoduxNetworkingImplModule (copy)
-		local var32
+		-- upvalues: p2 (ref), var1 (ref), enumsModule (copy), p1 (ref), collectibleProductIdStore (copy), myRoduxNetworkingImplModule (copy)
+		local var10
 		local t = {}
 		local t_1 = {}
 		
-		for i, v in p6 do
-			var32 = var17[tostring(v.assetId)]
+		for i, v in p2 do
+			var10 = var1[tostring(v.assetId)]
 			
-			if var32 and var32.collectibleItemId then
-				local collectibleItemId = var32.collectibleItemId
+			if var10 and var10.collectibleItemId then
+				local collectibleItemId = var10.collectibleItemId
 				
 				if not t_1[collectibleItemId] then
-					if (v.itemType == enumsModule.ItemTypes.Bundle and not var32.isOffSale) or var32.hasResellers == true then
+					if (v.itemType == enumsModule.ItemTypes.Bundle and not var10.isOffSale) or var10.hasResellers == true then
 						t_1[collectibleItemId] = true
 						table.insert(t, collectibleItemId)
 					end
 				end
 			end
 		end
-		for i, v in p5.responseIds do
-			var32 = var17[v]
+		for i, v in p1.responseIds do
+			var10 = var1[v]
 			
-			if var32 and var32.collectibleItemId then
-				local collectibleItemId = var32.collectibleItemId
+			if var10 and var10.collectibleItemId then
+				local collectibleItemId = var10.collectibleItemId
 				
-				if not t_1[collectibleItemId] and var32.hasResellers == true then
+				if not t_1[collectibleItemId] and var10.hasResellers == true then
 					t_1[collectibleItemId] = true
 					table.insert(t, collectibleItemId)
 				end
@@ -161,96 +161,96 @@ local function useCatalogEnrichment(p5, p6)
 		if #t == 0 then
 			return
 		end
-		collectibleProductIdStore.fetchAndCache(myRoduxNetworkingImplModule, t):catch(function(p9)
-			warn("[useInspectAvatarData] Failed to fetch collectible product IDs:", tostring(p9))
+		collectibleProductIdStore.fetchAndCache(myRoduxNetworkingImplModule, t):catch(function(p3)
+			warn("[useInspectAvatarData] Failed to fetch collectible product IDs:", tostring(p3))
 		end)
-	end, { var17, p6, p5.responseIds })
+	end, { var1, p2, p1.responseIds })
 	
 	return {
-		catalogDetails = var17,
-		isCatalogLoading = var18,
-		ownershipCache = var21,
-		collectibleCache = var20
+		catalogDetails = var1,
+		isCatalogLoading = var2,
+		ownershipCache = var5,
+		collectibleCache = var4
 	}
 end
 
-return function(p10)
+return function(p3)
 	-- upvalues: useLocalUserId (ref), useLookApiData (ref), useCatalogEnrichment (ref), reactModule (ref), inspectAvatarUtilsModule (ref)
-	local var33 = useLocalUserId()
-	local var34 = useLookApiData(p10)
-	local var35 = useCatalogEnrichment(var34, p10)
-	local var36 = reactModule.useMemo(function()
-		-- upvalues: p10 (ref), inspectAvatarUtilsModule (copy), var34 (ref), var35 (ref)
-		if #p10 == 0 then
+	local var11 = useLocalUserId()
+	local var12 = useLookApiData(p3)
+	local var13 = useCatalogEnrichment(var12, p3)
+	local var14 = reactModule.useMemo(function()
+		-- upvalues: p3 (ref), inspectAvatarUtilsModule (copy), var12 (ref), var13 (ref)
+		if #p3 == 0 then
 			return {}
 		end
 		local t = {}
 		
-		for i, v in p10 do
+		for i, v in p3 do
 			t[tostring(v.assetId)] = true
 		end
-		local var41
-		local var38 = inspectAvatarUtilsModule.collectBundleComponentIds(var34.responseIds, var34.cache)
+		local var15
+		local var16 = inspectAvatarUtilsModule.collectBundleComponentIds(var12.responseIds, var12.cache)
 		local t_1 = {}
 		local t_2 = {}
 		
-		for i_1, v_1 in var34.responseIds do
-			var41 = var34.cache[v_1]
+		for i_1, v_1 in var12.responseIds do
+			var15 = var12.cache[v_1]
 			
-			if var41 then
+			if var15 then
 				t_2[v_1] = true
 				
-				if var41.assetsInBundle or not var38[v_1] then
-					local var43 = var35.catalogDetails[v_1]
+				if var15.assetsInBundle or not var16[v_1] then
+					local var17 = var13.catalogDetails[v_1]
 					
-					if var43 then
-						local var44 = nil
+					if var17 then
+						local var18 = nil
 						
-						if var43.collectibleItemId then
-							local collectibleItemId = var35.collectibleCache[var43.collectibleItemId]
-							var44 = if collectibleItemId then collectibleItemId.resaleProductId else nil
+						if var17.collectibleItemId then
+							local collectibleItemId = var13.collectibleCache[var17.collectibleItemId]
+							var18 = if collectibleItemId then collectibleItemId.resaleProductId else nil
 						end
-						table.insert(t_1, inspectAvatarUtilsModule.buildItemData(var43, var41, t, nil, nil, var44))
+						table.insert(t_1, inspectAvatarUtilsModule.buildItemData(var17, var15, t, nil, nil, var18))
 					end
 				end
 			end
 		end
-		for i_1, v_2 in p10 do
-			var41 = tostring(v_2.assetId)
+		for i_1, v_2 in p3 do
+			var15 = tostring(v_2.assetId)
 			
-			if not t_2[var41] and not var38[var41] then
-				local var42 = var35.catalogDetails[var41]
+			if not t_2[var15] and not var16[var15] then
+				local var19 = var13.catalogDetails[var15]
 				
-				if var42 then
+				if var19 then
 					local productId = nil
 					local resaleProductId = nil
 					
-					if var42.collectibleItemId then
-						local collectibleItemId = var35.collectibleCache[var42.collectibleItemId]
+					if var19.collectibleItemId then
+						local collectibleItemId = var13.collectibleCache[var19.collectibleItemId]
 						
 						if collectibleItemId then
 							productId = collectibleItemId.productId
 							resaleProductId = collectibleItemId.resaleProductId
 						end
 					end
-					table.insert(t_1, inspectAvatarUtilsModule.buildItemData(var42, nil, t, productId, var35.ownershipCache[var41], resaleProductId))
+					table.insert(t_1, inspectAvatarUtilsModule.buildItemData(var19, nil, t, productId, var13.ownershipCache[var15], resaleProductId))
 				end
 			end
 		end
 		return inspectAvatarUtilsModule.sortDisplayItems(t_1)
 	end, {
-		var34.responseIds, var34.cache, p10, var35.catalogDetails,
-		var35.collectibleCache, var35.ownershipCache
+		var12.responseIds, var12.cache, p3, var13.catalogDetails,
+		var13.collectibleCache, var13.ownershipCache
 	})
 	
 	return {
-		displayItems = var36,
+		displayItems = var14,
 		ownedAssetIds = reactModule.useMemo(function()
-			-- upvalues: var36 (ref), inspectAvatarUtilsModule (copy)
+			-- upvalues: var14 (ref), inspectAvatarUtilsModule (copy)
 			local t = {}
 			local t_1 = {}
 			
-			for i, v in var36 do
+			for i, v in var14 do
 				if v.isOwned then
 					if #v.bundleAssetIds > 0 then
 						for i_1, v_1 in v.bundleAssetIds do
@@ -260,19 +260,19 @@ return function(p10)
 							end
 						end
 					else
-						local var47 = tonumber(v.id)
-						local var48 = if v.itemSubType then tonumber(v.itemSubType) else nil
+						local var20 = tonumber(v.id)
+						local var21 = if v.itemSubType then tonumber(v.itemSubType) else nil
 						
-						if var47 and (not var48 or inspectAvatarUtilsModule.isWearableAssetType(var48)) and not t_1[var47] then
-							t_1[var47] = true
-							table.insert(t, var47)
+						if var20 and (not var21 or inspectAvatarUtilsModule.isWearableAssetType(var21)) and not t_1[var20] then
+							t_1[var20] = true
+							table.insert(t, var20)
 						end
 					end
 				end
 			end
 			return t
-		end, { var36 }),
-		localUserId = var33,
-		isLoading = var34.isLoading or var35.isCatalogLoading
+		end, { var14 }),
+		localUserId = var11,
+		isLoading = var12.isLoading or var13.isCatalogLoading
 	}
 end

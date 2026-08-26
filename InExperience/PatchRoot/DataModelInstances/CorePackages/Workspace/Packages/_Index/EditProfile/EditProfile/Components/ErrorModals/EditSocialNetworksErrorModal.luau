@@ -15,12 +15,12 @@ local fFlagEditProfileFixFocusNavigationModule = require(editProfile.Flags.FFlag
 
 return function()
 	-- upvalues: useNavigationProps (ref), useNavigation (ref), useScreenSize (ref), useLocalization (ref), textKeysModule (ref), constantsModule (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var7 = useNavigationProps(function(_, p0)
-		return { errorCode = p0.errorCode }
+	local var1 = useNavigationProps(function(_, p1)
+		return { errorCode = p1.errorCode }
 	end)
-	local var8 = useNavigation()
-	local var9 = useScreenSize()
-	local var10 = useLocalization({
+	local var2 = useNavigation()
+	local var3 = useScreenSize()
+	local var4 = useLocalization({
 		title = textKeysModule.SocialNetworksError,
 		InvalidFacebook = textKeysModule.InvalidFacebook,
 		InvalidX = textKeysModule.InvalidX,
@@ -30,41 +30,41 @@ return function()
 		OK = textKeysModule.OK
 	})
 	local errorCode = ({
-		[constantsModule.SocialNetworksErrorCodes.Facebook] = var10.InvalidFacebook,
-		[constantsModule.SocialNetworksErrorCodes.Twitter] = var10.InvalidX,
-		[constantsModule.SocialNetworksErrorCodes.YouTube] = var10.InvalidYouTube,
-		[constantsModule.SocialNetworksErrorCodes.Twitch] = var10.InvalidTwitch,
-		[constantsModule.SocialNetworksErrorCodes.Guilded] = var10.InvalidGuilded
-	})[var7.errorCode]
+		[constantsModule.SocialNetworksErrorCodes.Facebook] = var4.InvalidFacebook,
+		[constantsModule.SocialNetworksErrorCodes.Twitter] = var4.InvalidX,
+		[constantsModule.SocialNetworksErrorCodes.YouTube] = var4.InvalidYouTube,
+		[constantsModule.SocialNetworksErrorCodes.Twitch] = var4.InvalidTwitch,
+		[constantsModule.SocialNetworksErrorCodes.Guilded] = var4.InvalidGuilded
+	})[var1.errorCode]
 	
 	local function onClose()
-		-- upvalues: var8 (ref)
-		var8.goBack()
+		-- upvalues: var2 (ref)
+		var2.goBack()
 	end
 	
 	return if fFlagEditProfileFixFocusNavigationModule then focusNavigatorWrapperModule({ onClose = onClose }, {
 		reactModule.createElement(interactiveAlert, {
-			screenSize = var9,
-			title = var10.title,
+			screenSize = var3,
+			title = var4.title,
 			bodyText = errorCode,
 			buttonStackInfo = {
 				buttons = {
 					{
 						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = onClose, text = var10.OK }
+						props = { onActivated = onClose, text = var4.OK }
 					}
 				}
 			}
 		})
 	}) else reactModule.createElement(interactiveAlert, {
-		screenSize = var9,
-		title = var10.title,
+		screenSize = var3,
+		title = var4.title,
 		bodyText = errorCode,
 		buttonStackInfo = {
 			buttons = {
 				{
 					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = onClose, text = var10.OK }
+					props = { onActivated = onClose, text = var4.OK }
 				}
 			}
 		}

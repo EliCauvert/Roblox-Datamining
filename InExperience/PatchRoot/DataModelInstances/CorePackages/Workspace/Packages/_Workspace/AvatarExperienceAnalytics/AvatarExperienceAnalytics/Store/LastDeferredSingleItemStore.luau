@@ -1,16 +1,16 @@
-﻿local var0 = nil
+﻿local var1 = nil
 
 return {
 	setSnapshot = function(value)
-		-- upvalues: var0 (write)
-		var0 = value
+		-- upvalues: var1 (write)
+		var1 = value
 	end,
 	getSnapshot = function()
-		-- upvalues: var0 (write)
-		return var0
+		-- upvalues: var1 (write)
+		return var1
 	end,
 	clearSnapshot = function()
-		-- upvalues: var0 (write)
-		var0 = nil
+		-- upvalues: var1 (write)
+		var1 = nil
 	end
 }

@@ -23,24 +23,24 @@ deviceSelectionEntry.validateProps = t.strictInterface({
 })
 deviceSelectionEntry.defaultProps = { canOpen = true }
 
-function deviceSelectionEntry.init(p0)
+function deviceSelectionEntry.init(p1)
 	-- upvalues: default (ref), soundService (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref)
-	p0:setState({
+	p1:setState({
 		selectedIndex = 0,
 		ready = false,
 		deviceNames = {},
 		deviceGuids = {}
 	})
 	default:asyncInit():andThen(function()
-		-- upvalues: p0 (ref), default (copy), soundService (copy)
-		p0:setState({ ready = true })
+		-- upvalues: p1 (ref), default (copy), soundService (copy)
+		p1:setState({ ready = true })
 		default:SetupParticipantListeners()
 		
 		if soundService.DeviceListChanged then
 			soundService.DeviceListChanged:Connect(function()
-				-- upvalues: p0 (copy)
-				if p0.props.isMenuOpen then
-					p0:pollDevices(p0.props.deviceType)
+				-- upvalues: p1 (copy)
+				if p1.props.isMenuOpen then
+					p1:pollDevices(p1.props.deviceType)
 				end
 			end)
 		end
@@ -95,30 +95,30 @@ function deviceSelectionEntry.render(p1)
 	}) else nil
 end
 
-function deviceSelectionEntry.pollDevices(p3, p4)
+function deviceSelectionEntry.pollDevices(p1, p2)
 	-- upvalues: default (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref)
 	spawn(function()
-		-- upvalues: default (copy), p4 (ref), p3 (ref), getFFlagVoiceChatUILoggingModule (copy), name (copy)
-		local var11, var12, var13, var14 = default:GetDevices(p4)
+		-- upvalues: default (copy), p2 (ref), p1 (ref), getFFlagVoiceChatUILoggingModule (copy), name (copy)
+		local var1, var2, var3, var4 = default:GetDevices(p2)
 		
-		if var11 then
-			p3:setState({
-				deviceNames = var12,
-				deviceGuids = var13,
-				selectedIndex = var14
+		if var1 then
+			p1:setState({
+				deviceNames = var2,
+				deviceGuids = var3,
+				selectedIndex = var4
 			})
 			
 			return
 		elseif getFFlagVoiceChatUILoggingModule() then
-			name:warning("Errors in get {} Device info", p4)
+			name:warning("Errors in get {} Device info", p2)
 		end
-		p3:setState({ selectedIndex = 0, deviceNames = {}, deviceGuids = {} })
+		p1:setState({ selectedIndex = 0, deviceNames = {}, deviceGuids = {} })
 	end)
 end
 
-function deviceSelectionEntry.willUpdate(p5, p6)
-	if not p5.props.isMenuOpen and p6.isMenuOpen then
-		p5:pollDevices(p6.deviceType)
+function deviceSelectionEntry.willUpdate(p1, p2)
+	if not p1.props.isMenuOpen and p2.isMenuOpen then
+		p1:pollDevices(p2.deviceType)
 	end
 end
 

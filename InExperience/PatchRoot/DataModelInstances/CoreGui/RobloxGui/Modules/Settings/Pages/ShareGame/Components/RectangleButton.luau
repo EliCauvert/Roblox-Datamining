@@ -3,8 +3,8 @@ local themeModule = require(game:GetService("CoreGui").RobloxGui.Modules.Setting
 local rectangleButton = roactModule.PureComponent:extend("RectangleButton")
 rectangleButton.defaultProps = { visible = true }
 
-function rectangleButton.init(p0)
-	p0.state = { isHovering = false }
+function rectangleButton.init(p1)
+	p1.state = { isHovering = false }
 end
 
 function rectangleButton.render(p1)

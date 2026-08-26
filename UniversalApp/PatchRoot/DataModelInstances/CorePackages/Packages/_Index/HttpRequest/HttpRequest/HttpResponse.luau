@@ -12,14 +12,14 @@ function t:__tostring()
 	return "<HttpResponse: " .. table.concat(t, ", ") .. ">"
 end
 
-function t.success(p0, p1)
+function t.success(p1, p2)
 	-- upvalues: t (ref)
-	return setmetatable({ responseCode = p0, responseBody = p1 }, t)
+	return setmetatable({ responseCode = p1, responseBody = p2 }, t)
 end
 
-function t.error(p2)
+function t.error(p1)
 	-- upvalues: t (ref)
-	return setmetatable({ HttpError = p2 }, t)
+	return setmetatable({ HttpError = p1 }, t)
 end
 
 return t

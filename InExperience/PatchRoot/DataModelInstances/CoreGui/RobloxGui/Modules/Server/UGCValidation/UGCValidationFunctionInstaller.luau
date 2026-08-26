@@ -4,18 +4,18 @@ local UGCValidationWithContextEntrypointFeatureEngineFeature = game:GetEngineFea
 local UGCValidateMigrateSchemaProperties2 = game:DefineFastFlag("UGCValidateMigrateSchemaProperties2", false)
 local UGCValidateForwardIECRestrictedUserIds = game:DefineFastFlag("UGCValidateForwardIECRestrictedUserIds", false)
 
-local function UGCValidationFunction(p0)
+local function UGCValidationFunction(p1)
 	-- upvalues: UGCValidationWithContextEntrypointFeatureEngineFeature (ref), UGCValidationModule (ref), UGCValidateMigrateSchemaProperties2 (ref), UGCValidateForwardIECRestrictedUserIds (ref)
-	local var11, var12
-	local instances = p0.instances
-	local assetType = p0.assetType
-	local isServer = p0.isServer
-	local fullBodyData = p0.fullBodyData
-	local allowUnreviewedAssets = p0.allowUnreviewedAssets
-	local restrictedUserIds = p0.restrictedUserIds
-	local token = p0.token
-	local universeId = p0.universeId
-	local requireAllFolders = p0.requireAllFolders
+	local var1, var2
+	local instances = p1.instances
+	local assetType = p1.assetType
+	local isServer = p1.isServer
+	local fullBodyData = p1.fullBodyData
+	local allowUnreviewedAssets = p1.allowUnreviewedAssets
+	local restrictedUserIds = p1.restrictedUserIds
+	local token = p1.token
+	local universeId = p1.universeId
+	local requireAllFolders = p1.requireAllFolders
 	local t = {
 		skipSnapshot = true,
 		skipPhysicsDataReset = true,
@@ -52,22 +52,22 @@ local function UGCValidationFunction(p0)
 		}
 		
 		if fullBodyData then
-			local var9, var10 = UGCValidationModule.validateFullBodyWithContext(t_2)
-			var11 = var9
-			var12 = var10
+			local var3, var4 = UGCValidationModule.validateFullBodyWithContext(t_2)
+			var1 = var3
+			var2 = var4
 		else
-			local var13, var14 = UGCValidationModule.validateWithContext(t_1)
-			var11 = var13
-			var12 = var14
+			local var5, var6 = UGCValidationModule.validateWithContext(t_1)
+			var1 = var5
+			var2 = var6
 		end
 	elseif fullBodyData then
-		local var15, var16 = UGCValidationModule.validateFullBody(fullBodyData, isServer, true, t, true, requireAllFolders)
-		var11 = var15
-		var12 = var16
+		local var7, var8 = UGCValidationModule.validateFullBody(fullBodyData, isServer, true, t, true, requireAllFolders)
+		var1 = var7
+		var2 = var8
 	else
-		local var17, var18 = UGCValidationModule.validate(instances, assetType, isServer, allowUnreviewedAssets, restrictedUserIds, token, universeId, true, t, true, true, requireAllFolders)
-		var11 = var17
-		var12 = var18
+		local var9, var10 = UGCValidationModule.validate(instances, assetType, isServer, allowUnreviewedAssets, restrictedUserIds, token, universeId, true, t, true, true, requireAllFolders)
+		var1 = var9
+		var2 = var10
 	end
 	local t_1 = {
 		source = if isServer then "InExpServer" else "InExpClient",
@@ -79,12 +79,12 @@ local function UGCValidationFunction(p0)
 			restrictedUserIds = if UGCValidateForwardIECRestrictedUserIds then restrictedUserIds else nil
 		} else nil
 	}
-	local var20, var21 = UGCValidationModule.combineResultsIntoLegacy(var11, var12, if fullBodyData then UGCValidationModule.ValidateFinalizedBundle(fullBodyData, Enum.BundleType.BodyParts, t_1) else UGCValidationModule.ValidateAsset(instances, assetType, t_1))
+	local var11, var12 = UGCValidationModule.combineResultsIntoLegacy(var1, var2, if fullBodyData then UGCValidationModule.ValidateFinalizedBundle(fullBodyData, Enum.BundleType.BodyParts, t_1) else UGCValidationModule.ValidateAsset(instances, assetType, t_1))
 	
-	if var20 then
+	if var11 then
 		return true, { "Success" }
 	end
-	return false, var21
+	return false, var12
 end
 
 return function()

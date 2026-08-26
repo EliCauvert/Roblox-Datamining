@@ -14,8 +14,8 @@ local itemIconModule = require(parent.ItemIcon)
 local tileModule = require(parent_1.BaseTile.Tile)
 local itemTile = reactModule.PureComponent:extend("ItemTile")
 
-local function tileBannerUseValidator(p0)
-	if p0.bannerText and p0.footer then
+local function tileBannerUseValidator(p1)
+	if p1.bannerText and p1.footer then
 		return false, "A custom footer and bannerText can't be used together"
 	end
 	return true
@@ -80,59 +80,59 @@ local function _(p1)
 	return if p1 ~= itemTileEnumsModule.StatusStyle.PendingIcon then p1 == itemTileEnumsModule.StatusStyle.AlertIcon else true
 end
 
-function itemTile.render(p2)
+function itemTile.render(p1)
 	-- upvalues: tileBannerUseValidator (ref), reactModule (ref), itemIconModule (ref), itemRestrictionStatusModule (ref), itemTileStatusModule (ref), itemTileEnumsModule (ref), itemTileStatusIconModule (ref), tileModule (ref), imagesModule (ref)
-	assert(tileBannerUseValidator(p2.props))
-	local footer = p2.props.footer
-	local bannerText = p2.props.bannerText
-	local hasRoundedCorners = p2.props.hasRoundedCorners
-	local innerPadding = p2.props.innerPadding
-	local isPremium = p2.props.isPremium
-	local isSelected = p2.props.isSelected
-	local multiSelect = p2.props.multiSelect
-	local itemIconType = p2.props.itemIconType
-	local name = p2.props.name
-	local nameTextColor = p2.props.nameTextColor
-	local nameTextTransparency = p2.props.nameTextTransparency
-	local subtitle = p2.props.subtitle
-	local titleTopPadding = p2.props.titleTopPadding
-	local subtitleTopPadding = p2.props.subtitleTopPadding
-	local footerTopPadding = p2.props.footerTopPadding
-	local onActivated = p2.props.onActivated
-	local restrictionInfo = p2.props.restrictionInfo
-	local restrictionTypes = p2.props.restrictionTypes
-	local statusStyle = p2.props.statusStyle
-	local statusText = p2.props.statusText
-	local titleTextLineCount = p2.props.titleTextLineCount
-	local thumbnail = p2.props.thumbnail
-	local backgroundImage = p2.props.backgroundImage
-	local useMaxTitleHeight = p2.props.useMaxTitleHeight
-	local addSubtitleSpace = p2.props.addSubtitleSpace
-	local selectable = p2.props.Selectable
-	local titleFontStyle = p2.props.titleFontStyle
-	local renderTileInset = p2.props.renderTileInset
-	local aspectRatio = p2.props.aspectRatio
-	local scaleType = p2.props.scaleType
-	local var12 = false
+	assert(tileBannerUseValidator(p1.props))
+	local footer = p1.props.footer
+	local bannerText = p1.props.bannerText
+	local hasRoundedCorners = p1.props.hasRoundedCorners
+	local innerPadding = p1.props.innerPadding
+	local isPremium = p1.props.isPremium
+	local isSelected = p1.props.isSelected
+	local multiSelect = p1.props.multiSelect
+	local itemIconType = p1.props.itemIconType
+	local name = p1.props.name
+	local nameTextColor = p1.props.nameTextColor
+	local nameTextTransparency = p1.props.nameTextTransparency
+	local subtitle = p1.props.subtitle
+	local titleTopPadding = p1.props.titleTopPadding
+	local subtitleTopPadding = p1.props.subtitleTopPadding
+	local footerTopPadding = p1.props.footerTopPadding
+	local onActivated = p1.props.onActivated
+	local restrictionInfo = p1.props.restrictionInfo
+	local restrictionTypes = p1.props.restrictionTypes
+	local statusStyle = p1.props.statusStyle
+	local statusText = p1.props.statusText
+	local titleTextLineCount = p1.props.titleTextLineCount
+	local thumbnail = p1.props.thumbnail
+	local backgroundImage = p1.props.backgroundImage
+	local useMaxTitleHeight = p1.props.useMaxTitleHeight
+	local addSubtitleSpace = p1.props.addSubtitleSpace
+	local selectable = p1.props.Selectable
+	local titleFontStyle = p1.props.titleFontStyle
+	local renderTileInset = p1.props.renderTileInset
+	local aspectRatio = p1.props.aspectRatio
+	local scaleType = p1.props.scaleType
+	local var1 = false
 	local t = {}
 	
 	if itemIconType then
-		var12 = true
+		var1 = true
 		t.ItemIconType = reactModule.createElement(itemIconModule, { itemIconType = itemIconType })
 	end
 	if restrictionTypes then
-		var12 = true
+		var1 = true
 		t.RestrictionStatus = reactModule.createElement(itemRestrictionStatusModule, {
 			restrictionInfo = restrictionInfo,
 			restrictionTypes = restrictionTypes
 		})
 	end
 	if statusText then
-		var12 = true
+		var1 = true
 		t.Status = reactModule.createElement(itemTileStatusModule, { statusStyle = statusStyle, statusText = statusText })
 	end
 	if if statusStyle ~= itemTileEnumsModule.StatusStyle.PendingIcon then statusStyle == itemTileEnumsModule.StatusStyle.AlertIcon else true then
-		var12 = true
+		var1 = true
 		t.Status = reactModule.createElement(itemTileStatusIconModule, { statusStyle = statusStyle })
 	end
 	return reactModule.createElement(tileModule, {
@@ -153,7 +153,7 @@ function itemTile.render(p2)
 		onActivated = onActivated,
 		thumbnail = thumbnail,
 		backgroundImage = backgroundImage,
-		thumbnailOverlayComponents = if var12 then t else nil,
+		thumbnailOverlayComponents = if var1 then t else nil,
 		titleIcon = if isPremium then imagesModule["icons/status/premium_small"] else nil,
 		titleTextLineCount = titleTextLineCount,
 		useMaxTitleHeight = useMaxTitleHeight,
@@ -162,21 +162,21 @@ function itemTile.render(p2)
 		renderTileInset = renderTileInset,
 		thumbnailAspectRatio = aspectRatio,
 		thumbnailScaleType = scaleType,
-		hasVerifiedBadge = p2.props.hasVerifiedBadge,
-		NextSelectionLeft = p2.props.NextSelectionLeft,
-		NextSelectionRight = p2.props.NextSelectionRight,
-		NextSelectionUp = p2.props.NextSelectionUp,
-		NextSelectionDown = p2.props.NextSelectionDown,
-		textButtonRef = p2.props.textButtonRef,
-		inputBindings = p2.props.inputBindings,
-		ref = p2.props.thumbnailRef,
-		[reactModule.Tag] = p2.props[reactModule.Tag],
-		onThumbnailLoaded = p2.props.onThumbnailLoaded,
-		isRoactGamepadEnabled = p2.props.isRoactGamepadEnabled
+		hasVerifiedBadge = p1.props.hasVerifiedBadge,
+		NextSelectionLeft = p1.props.NextSelectionLeft,
+		NextSelectionRight = p1.props.NextSelectionRight,
+		NextSelectionUp = p1.props.NextSelectionUp,
+		NextSelectionDown = p1.props.NextSelectionDown,
+		textButtonRef = p1.props.textButtonRef,
+		inputBindings = p1.props.inputBindings,
+		ref = p1.props.thumbnailRef,
+		[reactModule.Tag] = p1.props[reactModule.Tag],
+		onThumbnailLoaded = p1.props.onThumbnailLoaded,
+		isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled
 	})
 end
 
-return reactModule.forwardRef(function(p3, p4)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: reactModule (ref), itemTile (ref), cryoModule (ref)
-	return reactModule.createElement(itemTile, cryoModule.Dictionary.join(p3, { thumbnailRef = p4 }))
+	return reactModule.createElement(itemTile, cryoModule.Dictionary.join(p1, { thumbnailRef = p2 }))
 end)

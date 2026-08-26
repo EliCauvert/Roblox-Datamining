@@ -15,10 +15,10 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref), VRService (ref)
 	local tbl = setmetatable({}, t)
-	tbl.userCFrame = p0
+	tbl.userCFrame = p1
 	tbl.enabled = false
 	tbl.currentModel = nil
 	tbl.currentVRDeviceName = VRService.VRDeviceName
@@ -93,10 +93,10 @@ function t:setModelInWorkspace(p1)
 	end
 end
 
-function t:setEnabled(p2)
+function t:setEnabled(p1)
 	-- upvalues: VRService (ref), userInputService (ref)
-	if p2 ~= self.enabled then
-		self.enabled = p2
+	if p1 ~= self.enabled then
+		self.enabled = p1
 		
 		if self.enabled then
 			self:setCurrentModel()
@@ -104,10 +104,10 @@ function t:setEnabled(p2)
 				-- upvalues: self (ref), VRService (copy)
 				self:setModelInWorkspace(VRService:GetUserCFrameEnabled(self.userCFrame))
 			end)
-			self.onUserCFrameEnabledChangedConn = VRService.UserCFrameEnabled:connect(function(p3, p4)
+			self.onUserCFrameEnabledChangedConn = VRService.UserCFrameEnabled:connect(function(p2, p3)
 				-- upvalues: self (ref)
-				if p3 == self.userCFrame then
-					self:setModelInWorkspace(p4)
+				if p2 == self.userCFrame then
+					self:setModelInWorkspace(p3)
 				end
 			end)
 			self.onInputBeganConn = userInputService.InputBegan:connect(function(...)
@@ -163,32 +163,32 @@ function t:update(_)
 	end
 end
 
-function t:onInputBegan(p5, _)
+function t:onInputBegan(p1, _)
 	if not self.enabled or not self.modelIsInWorkspace then return end
 	if self.currentModel then
-		self.currentModel:onInputBegan(p5)
+		self.currentModel:onInputBegan(p1)
 	end
 end
 
-function t:onInputChanged(p6, _)
+function t:onInputChanged(p1, _)
 	if not self.enabled or not self.modelIsInWorkspace then return end
 	if self.currentModel then
-		self.currentModel:onInputChanged(p6)
+		self.currentModel:onInputChanged(p1)
 	end
 end
 
-function t:onInputEnded(p7, _)
+function t:onInputEnded(p1, _)
 	if self.currentModel then
-		self.currentModel:onInputEnded(p7)
+		self.currentModel:onInputEnded(p1)
 	end
 end
 
-function t:getButtonPosition(p8)
+function t:getButtonPosition(p1)
 	if self.currentModel and self.currentModel.getButtonPart then
-		local var12 = self.currentModel:getButtonPart(p8)
+		local var1 = self.currentModel:getButtonPart(p1)
 		
-		if var12 then
-			return var12.Position
+		if var1 then
+			return var1.Position
 		end
 	end
 end

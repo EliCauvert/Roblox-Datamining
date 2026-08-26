@@ -4,9 +4,9 @@ local isBuilderIcon = require(inlineRichText.Parent.Foundation).Utility.isBuilde
 local iconElementModule = require(inlineRichText.Renderer.InlineElements.IconElement)
 local _ = require(inlineRichText.Types)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: name (ref), isBuilderIcon (ref), iconElementModule (ref)
-	local name_1 = p0.attributes.name
+	local name_1 = p1.attributes.name
 	
 	if not name_1 then
 		name:warning("IconRenderer: No name provided for icon")
@@ -16,7 +16,7 @@ return function(p0, p1)
 		return {
 			iconElementModule.new({
 				name = name_1,
-				size = tonumber(p0.attributes.size) or (p1.styles.fontStyle.FontSize or 18)
+				size = tonumber(p1.attributes.size) or (p2.styles.fontStyle.FontSize or 18)
 			})
 		}
 	end

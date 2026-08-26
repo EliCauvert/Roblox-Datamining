@@ -13,27 +13,27 @@ local fFlagLuaAppUseFrameBoundsImpressions = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppHideEmptyCarouselHeader = require(parent.SharedFlags).FFlagLuaAppHideEmptyCarouselHeader
 local _ = require(gameFilters.FilterCallbackTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), useCollectionImpressionsSignal (ref), fFlagLuaAppHideEmptyCarouselHeader (ref), filterPillModule (ref), cryoModule (ref), variableItemWidthCarousel (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
-	local var4 = useTokens()
-	local var5, var6 = reactModule.useState({})
-	local var7 = reactModule.useRef(nil)
+	local var1 = useTokens()
+	local var2, var3 = reactModule.useState({})
+	local var4 = reactModule.useRef(nil)
 	local text = "FilterPillCarousel_" .. p0.sortIndex
-	local var9, var10 = useCollectionImpressionsSignal(p0.scrollViewPositionChangedSignal)
+	local var5, var6 = useCollectionImpressionsSignal(p1.scrollViewPositionChangedSignal)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		FilterCarousel = reactModule.createElement(variableItemWidthCarousel, {
 			scrollButtonEnabled = true,
-			title = if fFlagLuaAppHideEmptyCarouselHeader and (not p0.title or p0.title == "") then "" elseif fFlagLuaAppHideEmptyCarouselHeader or p0.title then reactModule.useCallback(function()
-				-- upvalues: var4 (ref), reactModule (copy), p0 (ref)
-				local bodyMedium = var4.Typography.BodyMedium
-				local muted = var4.Color.Content.Muted
+			title = if fFlagLuaAppHideEmptyCarouselHeader and (not p1.title or p1.title == "") then "" elseif fFlagLuaAppHideEmptyCarouselHeader or p1.title then reactModule.useCallback(function()
+				-- upvalues: var1 (ref), reactModule (copy), p1 (ref)
+				local bodyMedium = var1.Typography.BodyMedium
+				local muted = var1.Color.Content.Muted
 				
 				return reactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextWrapped = false,
 					LayoutOrder = 1,
-					Text = p0.title,
+					Text = p1.title,
 					Size = UDim2.new(0, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Font = bodyMedium.Font,
@@ -43,49 +43,49 @@ return function(p0)
 					TextTruncate = Enum.TextTruncate.SplitWord,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
-			end, { p0.title, var4 }) else "",
-			items = p0.filters,
-			renderItem = reactModule.useCallback(function(p1, p2)
-				-- upvalues: reactModule (copy), filterPillModule (copy), p0 (ref), text (ref), var6 (ref), cryoModule (copy), var5 (ref)
+			end, { p1.title, var1 }) else "",
+			items = p1.filters,
+			renderItem = reactModule.useCallback(function(p2, p3)
+				-- upvalues: reactModule (copy), filterPillModule (copy), p1 (ref), text (ref), var3 (ref), cryoModule (copy), var2 (ref)
 				return reactModule.createElement(filterPillModule, {
-					analyticsInfo = p0.analyticsInfo,
-					filter = p1,
+					analyticsInfo = p1.analyticsInfo,
+					filter = p2,
 					impressionsTag = text,
-					index = p2,
-					onFilterApplied = p0.onFilterApplied,
+					index = p3,
+					onFilterApplied = p1.onFilterApplied,
 					onAbsoluteSizeChanged = function(value)
-						-- upvalues: var6 (copy), cryoModule (copy), var5 (copy), p2 (ref)
+						-- upvalues: var3 (copy), cryoModule (copy), var2 (copy), p3 (ref)
 						if value then
-							var6(cryoModule.Dictionary.join(var5, { [p2] = value.AbsoluteSize.X }))
+							var3(cryoModule.Dictionary.join(var2, { [p3] = value.AbsoluteSize.X }))
 						end
 					end,
-					pageContext = p0.pageContext,
-					sendFilterClick = p0.sendFilterClick
+					pageContext = p1.pageContext,
+					sendFilterClick = p1.sendFilterClick
 				})
 			end, {
-				p0.analyticsInfo, text, p0.onFilterApplied, var5, p0.pageContext,
-				p0.sendFilterClick
+				p1.analyticsInfo, text, p1.onFilterApplied, var2, p1.pageContext,
+				p1.sendFilterClick
 			}),
-			onCanvasPositionChanged = var10,
-			calculateItemWidth = reactModule.useCallback(function(p3)
-				-- upvalues: var5 (ref)
-				return var5[p3] or 0
-			end, { var5 }),
-			itemHeight = var4.Size.Size_800,
-			headerContentPadding = var4.Padding.XSmall,
-			itemPadding = var4.Padding.XSmall,
-			sideMargin = p0.sideMargin,
-			LayoutOrder = p0.sortIndex,
-			scrollingFrameRef = var7,
-			ref = p0.containerRef
+			onCanvasPositionChanged = var6,
+			calculateItemWidth = reactModule.useCallback(function(p2)
+				-- upvalues: var2 (ref)
+				return var2[p2] or 0
+			end, { var2 }),
+			itemHeight = var1.Size.Size_800,
+			headerContentPadding = var1.Padding.XSmall,
+			itemPadding = var1.Padding.XSmall,
+			sideMargin = p1.sideMargin,
+			LayoutOrder = p1.sortIndex,
+			scrollingFrameRef = var4,
+			ref = p1.containerRef
 		}),
 		ImpressionsTracker = reactModule.createElement(if fFlagLuaAppUseFrameBoundsImpressions then frameBoundsImpressionsTracker else screenSizeImpressionsTracker, {
 			impressionsTag = text,
-			pageContext = p0.pageContext,
-			parentRef = var7,
-			scrollViewPositionChangedSignal = var9,
-			sendImpressions = p0.sendImpressions,
-			dataUpdatedTimestamp = p0.dataUpdatedTimestamp
+			pageContext = p1.pageContext,
+			parentRef = var4,
+			scrollViewPositionChangedSignal = var5,
+			sendImpressions = p1.sendImpressions,
+			dataUpdatedTimestamp = p1.dataUpdatedTimestamp
 		})
 	})
 end

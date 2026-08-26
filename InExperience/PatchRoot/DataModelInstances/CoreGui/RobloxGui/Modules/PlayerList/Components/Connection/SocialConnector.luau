@@ -6,8 +6,8 @@ local setPlayerFriendStatusModule = require(script.Parent.Parent.Parent.Actions.
 local eventConnectionModule = require(script.Parent.EventConnection)
 local socialConnector = roactModule.PureComponent:extend("SocialConnector")
 
-function socialConnector.didMount(p0)
-	p0.mounted = true
+function socialConnector.didMount(p1)
+	p1.mounted = true
 end
 
 function socialConnector.render(p1)
@@ -23,16 +23,16 @@ function socialConnector.render(p1)
 	})
 end
 
-function socialConnector.willUnmount(p4)
-	p4.mounted = false
+function socialConnector.willUnmount(p1)
+	p1.mounted = false
 end
 
-return roactRoduxModule.connect(nil, function(p5)
+return roactRoduxModule.connect(nil, function(p1)
 	-- upvalues: setPlayerFriendStatusModule (ref)
 	return {
-		setPlayerFriendStatus = function(value, p6)
-			-- upvalues: p5 (ref), setPlayerFriendStatusModule (copy)
-			return p5(setPlayerFriendStatusModule(value, p6))
+		setPlayerFriendStatus = function(value, p2)
+			-- upvalues: p1 (ref), setPlayerFriendStatusModule (copy)
+			return p1(setPlayerFriendStatusModule(value, p2))
 		end
 	}
 end)(socialConnector)

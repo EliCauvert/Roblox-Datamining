@@ -1,20 +1,20 @@
-﻿return function(p0, p1)
+﻿return function(p1, p2)
 	local function guardedCallback()
-		-- upvalues: p1 (ref)
+		-- upvalues: p2 (ref)
 		if game:IsLoaded() then
-			p1()
+			p2()
 			
 			return
 		end
 	end
 	
 	if game:IsLoaded() then
-		task.delay(p0, guardedCallback)
+		task.delay(p1, guardedCallback)
 		
 		return
 	end
 	game.Loaded:Once(function()
-		-- upvalues: p0 (ref), guardedCallback (ref)
-		task.delay(p0, guardedCallback)
+		-- upvalues: p1 (ref), guardedCallback (ref)
+		task.delay(p1, guardedCallback)
 	end)
 end

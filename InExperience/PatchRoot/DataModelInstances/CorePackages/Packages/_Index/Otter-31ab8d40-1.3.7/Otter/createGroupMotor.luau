@@ -6,136 +6,136 @@ local _ = require(script.Parent.types)
 local t = {}
 t.__index = t
 
-local function createGroupMotor(p0)
+local function createGroupMotor(p1)
 	-- upvalues: createSignal (ref), t (ref)
 	local t_1 = {}
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		t_1[i] = { complete = true, value = v }
 	end
-	local var4, var5 = createSignal()
-	local var6, var7 = createSignal()
+	local var1, var2 = createSignal()
+	local var3, var4 = createSignal()
 	local t_2 = {
 		__allComplete = true,
 		__running = false,
 		__goals = {},
 		__states = t_1,
-		__onComplete = var4,
-		__fireOnComplete = var5,
-		__onStep = var6,
-		__fireOnStep = var7
+		__onComplete = var1,
+		__fireOnComplete = var2,
+		__onStep = var3,
+		__fireOnStep = var4
 	}
 	setmetatable(t_2, t)
 	
 	return t_2
 end
 
-function t.start(p1, p2)
+function t.start(p2, p3)
 	-- upvalues: animationStepSignalModule (ref)
-	if p1.__running then return end
-	p1.__connection = animationStepSignalModule:Connect(function(p3)
-		-- upvalues: p1 (ref)
-		p1:step(p3)
+	if p2.__running then return end
+	p2.__connection = animationStepSignalModule:Connect(function(p4)
+		-- upvalues: p2 (ref)
+		p2:step(p4)
 	end)
-	p1.__running = true
+	p2.__running = true
 	
-	if p2 then
-		p1:step(0)
+	if p3 then
+		p2:step(0)
 	end
 end
 
-function t.stop(p4)
-	if p4.__connection ~= nil then
-		p4.__connection:Disconnect()
-		p4.__running = false
+function t.stop(p2)
+	if p2.__connection ~= nil then
+		p2.__connection:Disconnect()
+		p2.__running = false
 	end
 end
 
-function t.step(p5, p6)
-	if p5.__allComplete then return end
-	local var9 = true
+function t.step(p2, p3)
+	if p2.__allComplete then return end
+	local var5 = true
 	local t = {}
 	
-	for i, v in pairs(p5.__states) do
+	for i, v in pairs(p2.__states) do
 		local v
 		if v.complete then
 			t[i] = v.value
 			continue
 		end
-		local var11 = p5.__goals[i]
+		local var6 = p2.__goals[i]
 		
-		if var11 == nil then
+		if var6 == nil then
 			v.complete = true
 		else
-			local var12 = var11.step(v, p6)
+			local var7 = var6.step(v, p3)
 			
-			if var12 ~= nil then
-				v = var12
-				p5.__states[i] = var12
+			if var7 ~= nil then
+				v = var7
+				p2.__states[i] = var7
 			end
 		end
 		if not v.complete then
-			var9 = false
+			var5 = false
 		end
 	end
-	local allComplete = p5.__allComplete
-	p5.__allComplete = var9
-	p5.__fireOnStep(t)
+	local allComplete = p2.__allComplete
+	p2.__allComplete = var5
+	p2.__fireOnStep(t)
 	
-	if p5.__allComplete and not allComplete and p5.__running then
-		p5:stop()
-		p5.__fireOnComplete(t)
+	if p2.__allComplete and not allComplete and p2.__running then
+		p2:stop()
+		p2.__fireOnComplete(t)
 	end
 end
 
-function t.setGoal(value, p7)
+function t.setGoal(value, p4)
 	-- upvalues: object (ref)
-	value.__goals = object.assign({}, value.__goals, p7)
-	local var13 = false
+	value.__goals = object.assign({}, value.__goals, p4)
+	local var8 = false
 	local t = {}
 	
-	for i, v in pairs(p7) do
-		local var15 = value.__states[i]
+	for i, v in pairs(p4) do
+		local var9 = value.__states[i]
 		
 		if v.startingValue then
-			var13 = true
-			var15.value = v.startingValue
+			var8 = true
+			var9.value = v.startingValue
 			
-			if var15.initialValue then
-				var15.initialValue = v.startingValue
+			if var9.initialValue then
+				var9.initialValue = v.startingValue
 			end
 		end
-		t[i] = var15.value
+		t[i] = var9.value
 		
-		if var15 == nil then
+		if var9 == nil then
 			error(("Cannot set goal for the value %s because it doesn't exist"):format(tostring(i)), 2)
 		end
-		var15.complete = false
+		var9.complete = false
 	end
 	value.__allComplete = false
-	value:start(var13)
+	value:start(var8)
 end
 
-function t.onStep(p8, p9)
-	local var16 = p8.__onStep:subscribe(p9)
+function t.onStep(p5, p6)
+	local var10 = p5.__onStep:subscribe(p6)
 	
 	return function()
-		-- upvalues: var16 (ref)
-		var16:unsubscribe()
+		-- upvalues: var10 (ref)
+		var10:unsubscribe()
 	end
 end
 
-function t.onComplete(p10, p11)
-	local var17 = p10.__onComplete:subscribe(p11)
+function t.onComplete(p5, p6)
+	local var10 = p5.__onComplete:subscribe(p6)
 	
 	return function()
-		-- upvalues: var17 (ref)
-		var17:unsubscribe()
+		-- upvalues: var10 (ref)
+		var10:unsubscribe()
 	end
 end
 
-function t.destroy(p12)
-	p12:stop()
+function t.destroy(p5)
+	p5:stop()
 end
 
 return createGroupMotor

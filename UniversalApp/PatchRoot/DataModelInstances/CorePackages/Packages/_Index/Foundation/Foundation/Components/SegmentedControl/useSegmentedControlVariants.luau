@@ -9,23 +9,23 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	return {
-		Color = p0.Color3,
-		Transparency = p0.Transparency,
-		Thickness = p1,
+		Color = p1.Color3,
+		Transparency = p1.Transparency,
+		Thickness = p2,
 		BorderStrokePosition = Enum.BorderStrokePosition.Outer
 	}
 end
 
-local function variantsFactory_DEPRECATED(p2)
+local function variantsFactory_DEPRECATED(p1)
 	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
 			container = { tag = "row align-y-center auto-x bg-surface-300" },
 			segment = { tag = "row align-y-center size-0-full auto-x" },
 			text = { tag = "auto-x text-truncate-end content-emphasis" },
-			icon = { style = p2.Color.Content.Emphasis },
+			icon = { style = p1.Color.Content.Emphasis },
 			divider = { tag = "row" }
 		},
 		sizes = {
@@ -34,28 +34,28 @@ local function variantsFactory_DEPRECATED(p2)
 				segment = { tag = "padding-small" },
 				text = { tag = "text-caption-small" },
 				icon = { size = iconSizeModule.Small },
-				divider = { Size = UDim2.new(0, p2.Stroke.Standard, 1, 0) }
+				divider = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			},
 			[inputSizeModule.Small] = {
 				container = { tag = "size-800" },
 				segment = { tag = "padding-small" },
 				text = { tag = "text-caption-small" },
 				icon = { size = iconSizeModule.Medium },
-				divider = { Size = UDim2.new(0, p2.Stroke.Standard, 1, 0) }
+				divider = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			},
 			[inputSizeModule.Medium] = {
 				container = { tag = "size-1000 padding-xsmall" },
 				segment = { tag = "padding-small" },
 				text = { tag = "text-caption-medium" },
 				icon = { size = iconSizeModule.Medium },
-				divider = { Size = UDim2.new(0, p2.Stroke.Standard, 1, 0) }
+				divider = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			},
 			[inputSizeModule.Large] = {
 				container = { tag = "size-1200 padding-xsmall" },
 				segment = { tag = "padding-medium" },
 				text = { tag = "text-caption-medium" },
 				icon = { size = iconSizeModule.Large },
-				divider = { Size = UDim2.new(0, p2.Stroke.Standard, 1, 0) }
+				divider = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			}
 		},
 		defaultRadius = {
@@ -83,7 +83,7 @@ local function variantsFactory_DEPRECATED(p2)
 	}
 end
 
-local function variantsFactory(p3)
+local function variantsFactory(p1)
 	-- upvalues: segmentedControlVariantModule (ref), inputSizeModule (ref), iconSizeModule (ref), fillBehaviorModule (ref)
 	local t = {
 		[segmentedControlVariantModule.Filled] = { container = { tag = "bg-shift-200" } }
@@ -91,11 +91,11 @@ local function variantsFactory(p3)
 	local stroke = segmentedControlVariantModule.Stroke
 	local t_1 = {}
 	local t_2 = {}
-	local emphasis = p3.Color.Stroke.Emphasis
+	local emphasis = p1.Color.Stroke.Emphasis
 	t_2.stroke = {
 		Color = emphasis.Color3,
 		Transparency = emphasis.Transparency,
-		Thickness = p3.Stroke.Standard,
+		Thickness = p1.Stroke.Standard,
 		BorderStrokePosition = Enum.BorderStrokePosition.Outer
 	}
 	t_1.container = t_2
@@ -111,12 +111,12 @@ local function variantsFactory(p3)
 		},
 		activeStyles = {
 			[true] = {
-				text = { style = p3.Color.Content.Emphasis },
-				icon = { style = p3.Color.Content.Emphasis }
+				text = { style = p1.Color.Content.Emphasis },
+				icon = { style = p1.Color.Content.Emphasis }
 			},
 			[false] = {
-				text = { style = p3.Color.Content.Default },
-				icon = { style = p3.Color.Content.Default }
+				text = { style = p1.Color.Content.Default },
+				icon = { style = p1.Color.Content.Default }
 			}
 		},
 		variantStyles = t,
@@ -191,14 +191,14 @@ local function variantsFactory(p3)
 	}
 end
 
-return function(p4, p5, p6, p7, p8, p9)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: flagsModule (ref), variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), segmentedControlVariantModule (ref), fillBehaviorModule (ref), variantsFactory_DEPRECATED (ref)
 	if flagsModule.FoundationSegmentedControlBeta then
-		local segmentedControl = variantsContextModule.useVariants("SegmentedControl", variantsFactory, p4)
+		local segmentedControl = variantsContextModule.useVariants("SegmentedControl", variantsFactory, p1)
 		
-		return composeStyleVariantModule(segmentedControl.common, segmentedControl.sizes[p5], if p6 == segmentedControlVariantModule.Utility then segmentedControl.utilityPadding[p5] else {}, if p7 == fillBehaviorModule.Fill then segmentedControl.fillSizes[p5] else segmentedControl.fitSizes[p5], segmentedControl.fillBehaviorStyles[p7], segmentedControl.activeStyles[p9 == true], segmentedControl.variantStyles[p6], if p8 then segmentedControl.circularRadius else segmentedControl.defaultRadius[p5])
+		return composeStyleVariantModule(segmentedControl.common, segmentedControl.sizes[p2], if p3 == segmentedControlVariantModule.Utility then segmentedControl.utilityPadding[p2] else {}, if p4 == fillBehaviorModule.Fill then segmentedControl.fillSizes[p2] else segmentedControl.fitSizes[p2], segmentedControl.fillBehaviorStyles[p4], segmentedControl.activeStyles[p6 == true], segmentedControl.variantStyles[p3], if p5 then segmentedControl.circularRadius else segmentedControl.defaultRadius[p2])
 	end
-	local segmentedControl = variantsContextModule.useVariants("SegmentedControl", variantsFactory_DEPRECATED, p4)
+	local segmentedControl = variantsContextModule.useVariants("SegmentedControl", variantsFactory_DEPRECATED, p1)
 	
-	return composeStyleVariantModule(segmentedControl.common, segmentedControl.sizes[p5], if p8 then segmentedControl.circularRadius else segmentedControl.defaultRadius[p5])
+	return composeStyleVariantModule(segmentedControl.common, segmentedControl.sizes[p2], if p5 then segmentedControl.circularRadius else segmentedControl.defaultRadius[p2])
 end

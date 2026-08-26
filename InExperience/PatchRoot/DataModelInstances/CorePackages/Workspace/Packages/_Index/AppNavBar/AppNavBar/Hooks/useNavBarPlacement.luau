@@ -9,21 +9,21 @@ local mocksModule = require(parent.Mocks)
 
 return function()
 	-- upvalues: useDeviceOrientation (ref), deviceOrientationMode (ref), reactModule (ref), userInputService (ref), mocksModule (ref), placementModule (ref)
-	local var3 = useDeviceOrientation() == deviceOrientationMode.Portrait
-	local var4, var5 = reactModule.useState(userInputService.TouchEnabled)
+	local var1 = useDeviceOrientation() == deviceOrientationMode.Portrait
+	local var2, var3 = reactModule.useState(userInputService.TouchEnabled)
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), userInputService (copy)
-		var5(userInputService.TouchEnabled)
-		local var6 = userInputService:GetPropertyChangedSignal("TouchEnabled"):Connect(function()
-			-- upvalues: var5 (copy), userInputService (copy)
-			var5(userInputService.TouchEnabled)
+		-- upvalues: var3 (ref), userInputService (copy)
+		var3(userInputService.TouchEnabled)
+		local var4 = userInputService:GetPropertyChangedSignal("TouchEnabled"):Connect(function()
+			-- upvalues: var3 (copy), userInputService (copy)
+			var3(userInputService.TouchEnabled)
 		end)
 		
 		return function()
-			-- upvalues: var6 (ref)
-			var6:Disconnect()
+			-- upvalues: var4 (ref)
+			var4:Disconnect()
 		end
 	end, {})
 	
-	return if mocksModule.navBarPlacement == nil then if var4 and var3 then placementModule.Bottom else placementModule.Left else mocksModule.navBarPlacement
+	return if mocksModule.navBarPlacement == nil then if var2 and var1 then placementModule.Bottom else placementModule.Left else mocksModule.navBarPlacement
 end

@@ -21,13 +21,13 @@ leaveToAppPrompt.validateProps = t.strictInterface({
 })
 leaveToAppPrompt.defaultProps = { linkingProtocol = linkingProtocol.default }
 
-function leaveToAppPrompt.init(p0)
+function leaveToAppPrompt.init(p1)
 	-- upvalues: sendAnalyticsModule (ref), constantsModule (ref), runService (ref)
 	function p0.goToHomePage()
-		-- upvalues: sendAnalyticsModule (copy), constantsModule (copy), runService (copy), p0 (ref)
+		-- upvalues: sendAnalyticsModule (copy), constantsModule (copy), runService (copy), p1 (ref)
 		sendAnalyticsModule(constantsModule.AnalyticsLeaveToHomeName, constantsModule.AnalyticsLeaveToHomeName, { confirmed = constantsModule.AnalyticsLeaveToHomeName })
 		runService.Heartbeat:Wait()
-		p0.props.linkingProtocol:detectURL("roblox://navigation/home")
+		p1.props.linkingProtocol:detectURL("roblox://navigation/home")
 		game:Shutdown()
 	end
 end
@@ -54,18 +54,18 @@ function leaveToAppPrompt.render(p1)
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(function(p3, _)
+return roactRodux.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: constantsModule (ref)
 	return {
-		canGamepadCaptureFocus = p3.menuPage == constantsModule.LeaveToAppPromptPageKey and (p3.displayOptions.inputType == constantsModule.InputType.Gamepad and (not p3.respawn.dialogOpen and p3.currentZone == 1)),
-		canKeyboardCaptureFocus = p3.menuPage == constantsModule.LeaveToAppPromptPageKey and (p3.displayOptions.inputType == constantsModule.InputType.MouseAndKeyboard and not p3.respawn.dialogOpen)
+		canGamepadCaptureFocus = p1.menuPage == constantsModule.LeaveToAppPromptPageKey and (p1.displayOptions.inputType == constantsModule.InputType.Gamepad and (not p1.respawn.dialogOpen and p1.currentZone == 1)),
+		canKeyboardCaptureFocus = p1.menuPage == constantsModule.LeaveToAppPromptPageKey and (p1.displayOptions.inputType == constantsModule.InputType.MouseAndKeyboard and not p1.respawn.dialogOpen)
 	}
-end, function(p4)
+end, function(p1)
 	-- upvalues: closeMenuModule (ref)
 	return {
 		closeMenu = function()
-			-- upvalues: p4 (ref), closeMenuModule (copy)
-			p4(closeMenuModule)
+			-- upvalues: p1 (ref), closeMenuModule (copy)
+			p1(closeMenuModule)
 		end
 	}
 end)(leaveToAppPrompt)

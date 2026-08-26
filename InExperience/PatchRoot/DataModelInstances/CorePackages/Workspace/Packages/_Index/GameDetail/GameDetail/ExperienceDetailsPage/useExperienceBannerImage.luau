@@ -16,52 +16,52 @@ local _ = {
 	Failed = "Failed"
 }
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: getGameMediaStore (ref), signalsReactModule (ref), experienceBannerImageAllowCustomDimensions (ref), reactModule (ref), dataStatus (ref), experienceBannerImageDefaultFallback (ref), gameMediaImageType (ref), url (ref)
-	local andFetchGameMedia = getGameMediaStore(false).getAndFetchGameMedia(p0)
-	local var6 = signalsReactModule.useSignalState(andFetchGameMedia.data)
-	local var7 = signalsReactModule.useSignalState(andFetchGameMedia.status)
-	local var8 = if experienceBannerImageAllowCustomDimensions then p2 or 768 else 768
-	local var9 = if experienceBannerImageAllowCustomDimensions then p3 or 432 else 432
+	local andFetchGameMedia = getGameMediaStore(false).getAndFetchGameMedia(p1)
+	local var1 = signalsReactModule.useSignalState(andFetchGameMedia.data)
+	local var2 = signalsReactModule.useSignalState(andFetchGameMedia.status)
+	local var3 = if experienceBannerImageAllowCustomDimensions then p3 or 768 else 768
+	local var4 = if experienceBannerImageAllowCustomDimensions then p4 or 432 else 432
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var7 (ref), dataStatus (copy), experienceBannerImageDefaultFallback (copy), var6 (ref), gameMediaImageType (copy), var8 (ref), var9 (ref), p1 (ref), url (copy)
-		if var7 == dataStatus.NotReady then
+		-- upvalues: var2 (ref), dataStatus (copy), experienceBannerImageDefaultFallback (copy), var1 (ref), gameMediaImageType (copy), var3 (ref), var4 (ref), p2 (ref), url (copy)
+		if var2 == dataStatus.NotReady then
 			return { status = "Loading", url = nil }
 		elseif experienceBannerImageDefaultFallback then
-			if var7 == dataStatus.Failed then
+			if var2 == dataStatus.Failed then
 				return { status = "Failed", url = nil }
-			elseif var6 then
-				for i, v in var6 do
+			elseif var1 then
+				for i, v in var1 do
 					if v.assetTypeId == gameMediaImageType.Image and v.imageId then
 						return {
 							status = "Success",
-							url = string.format("rbxthumb://type=Asset&id=%s&w=%d&h=%d", tostring(v.imageId), var8, var9)
+							url = string.format("rbxthumb://type=Asset&id=%s&w=%d&h=%d", tostring(v.imageId), var3, var4)
 						}
 					end
 				end
 			end
-			return if p1 == nil or p1 == "" then { status = "NotFound", url = nil } else {
+			return if p2 == nil or p2 == "" then { status = "NotFound", url = nil } else {
 				status = "Fallback",
-				url = url:getPlaceDefaultThumbnailUrl(p1, var8, var9)
+				url = url:getPlaceDefaultThumbnailUrl(p2, var3, var4)
 			}
-		elseif var7 == dataStatus.Failed or not var6 then
+		elseif var2 == dataStatus.Failed or not var1 then
 			return { status = "NotFound", url = nil }
 		end
-		for i, v in var6 do
+		for i, v in var1 do
 			if v.assetTypeId == gameMediaImageType.Image and v.imageId then
 				return {
 					status = "Success",
-					url = string.format("rbxthumb://type=Asset&id=%s&w=%d&h=%d", tostring(v.imageId), var8, var9)
+					url = string.format("rbxthumb://type=Asset&id=%s&w=%d&h=%d", tostring(v.imageId), var3, var4)
 				}
 			end
 		end
 		return { status = "NotFound", url = nil }
 	end, {
-		var7,
-		var6,
-		var8,
-		var9,
-		p1
+		var2,
+		var1,
+		var3,
+		var4,
+		p2
 	})
 end

@@ -38,60 +38,60 @@ local fFlagDisableCopyUsernameOnConsole = require(parent.SharedFlags).FFlagDisab
 local responsiveModule = require(parent.Responsive)
 local getBuilderIconForCurrentPlatform = foundationModule.Utility.getBuilderIconForCurrentPlatform
 local fFlagProfilePlatformTruncateLongCustomFriendNamesModule = require(profilePlatform.Flags.FFlagProfilePlatformTruncateLongCustomFriendNames)
-local var12 = if fFlagProfilePlatformEnableClickToCopyUsernameModule then images["icons/actions/edit/copy"] else nil
+local var1 = if fFlagProfilePlatformEnableClickToCopyUsernameModule then images["icons/actions/edit/copy"] else nil
 
-return function(p0)
-	-- upvalues: useTokens (ref), reactModule (ref), fFlagAddPlatformNameToProfileHeader (ref), getBuilderIconForCurrentPlatform (ref), images (ref), fFlagProfilePlatformEnableClickToCopyUsernameModule (ref), useDispatch (ref), useProfileAnalyticsContextModule (ref), fFlagDisableCopyUsernameOnConsole (ref), responsiveModule (ref), fFlagHidePremiumIconography (ref), fFlagEnableBlackbirdCheck (ref), verifiedBadgesModule (ref), useLocalization (ref), textKeysModule (ref), default (ref), contexts (ref), eventNamesModule (ref), setCurrentToastMessage (ref), var12 (ref), horizontalPageMargin (ref), fFlagProfilePlatformTruncateLongCustomFriendNamesModule (ref), view (ref), iconButton (ref), iconSize (ref), tooltip (ref), tooltipOrientation (ref), text (ref), fFlagFriendRequestNicknames (ref), fFlagProfilePlatformEnableRobloxAdminBadgeModule (ref), foundationModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), stateLayerAffordance (ref), icon (ref), iconSize_1 (ref)
-	local var18
-	local var13 = useTokens()
-	local var14 = reactModule.useMemo(function()
+return function(p1)
+	-- upvalues: useTokens (ref), reactModule (ref), fFlagAddPlatformNameToProfileHeader (ref), getBuilderIconForCurrentPlatform (ref), images (ref), fFlagProfilePlatformEnableClickToCopyUsernameModule (ref), useDispatch (ref), useProfileAnalyticsContextModule (ref), fFlagDisableCopyUsernameOnConsole (ref), responsiveModule (ref), fFlagHidePremiumIconography (ref), fFlagEnableBlackbirdCheck (ref), verifiedBadgesModule (ref), useLocalization (ref), textKeysModule (ref), default (ref), contexts (ref), eventNamesModule (ref), setCurrentToastMessage (ref), var1 (ref), horizontalPageMargin (ref), fFlagProfilePlatformTruncateLongCustomFriendNamesModule (ref), view (ref), iconButton (ref), iconSize (ref), tooltip (ref), tooltipOrientation (ref), text (ref), fFlagFriendRequestNicknames (ref), fFlagProfilePlatformEnableRobloxAdminBadgeModule (ref), foundationModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), stateLayerAffordance (ref), icon (ref), iconSize_1 (ref)
+	local var2
+	local var3 = useTokens()
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: fFlagAddPlatformNameToProfileHeader (copy), getBuilderIconForCurrentPlatform (copy)
 		return if fFlagAddPlatformNameToProfileHeader then getBuilderIconForCurrentPlatform() else nil
 	end, {})
-	local var15 = if p0.isEdited then images["icons/actions/edit/editOn_small"] else images["icons/actions/edit/edit_small"]
-	local var16 = if fFlagProfilePlatformEnableClickToCopyUsernameModule then useDispatch() else nil
-	local var17 = if fFlagProfilePlatformEnableClickToCopyUsernameModule then useProfileAnalyticsContextModule() else nil
+	local var5 = if p1.isEdited then images["icons/actions/edit/editOn_small"] else images["icons/actions/edit/edit_small"]
+	local var6 = if fFlagProfilePlatformEnableClickToCopyUsernameModule then useDispatch() else nil
+	local var7 = if fFlagProfilePlatformEnableClickToCopyUsernameModule then useProfileAnalyticsContextModule() else nil
 	
 	if fFlagDisableCopyUsernameOnConsole then
-		var18 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
-		var18 = nil
+		var2 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
+		var2 = nil
 	else
-		var18 = false
+		var2 = false
 	end
 	local createElement_1
-	local primaryName = p0.primaryName
-	primaryName = (primaryName .. (if fFlagHidePremiumIconography then "" elseif p0.isPremium and (not fFlagEnableBlackbirdCheck or p0.isRobloxSubscriber ~= true) then verifiedBadgesModule.emoji.premium else "")) .. (if p0.isVerified then verifiedBadgesModule.emoji.verified else "")
-	local username = `@{p0.username}`
-	local var20 = useLocalization({
-		tooltipTitle = if p0.isLocalUser then nil else textKeysModule.AliasTooltipHeader,
-		tooltipBody = if p0.isLocalUser then textKeysModule.DisplayNameTooltipBody else textKeysModule.AliasTooltipBody,
+	local primaryName = p1.primaryName
+	primaryName = (primaryName .. (if fFlagHidePremiumIconography then "" elseif p1.isPremium and (not fFlagEnableBlackbirdCheck or p1.isRobloxSubscriber ~= true) then verifiedBadgesModule.emoji.premium else "")) .. (if p1.isVerified then verifiedBadgesModule.emoji.verified else "")
+	local username = `@{p1.username}`
+	local var8 = useLocalization({
+		tooltipTitle = if p1.isLocalUser then nil else textKeysModule.AliasTooltipHeader,
+		tooltipBody = if p1.isLocalUser then textKeysModule.DisplayNameTooltipBody else textKeysModule.AliasTooltipBody,
 		usernameCopied = if fFlagProfilePlatformEnableClickToCopyUsernameModule then textKeysModule.UsernameCopied else nil,
 		trustedLabel = textKeysModule.TrustedLabel
 	})
-	local var21 = if fFlagProfilePlatformEnableClickToCopyUsernameModule then reactModule.useCallback(function()
-		-- upvalues: default (copy), contexts (copy), p0 (ref), var17 (ref), eventNamesModule (copy), var16 (ref), setCurrentToastMessage (copy), var20 (ref), var12 (copy)
-		default:setClipboardText({ context = contexts.ProfileCard, text = p0.username })
-		var17.fireAnalyticsEvent(eventNamesModule.UsernameCopied)
-		var16(setCurrentToastMessage({
+	local var9 = if fFlagProfilePlatformEnableClickToCopyUsernameModule then reactModule.useCallback(function()
+		-- upvalues: default (copy), contexts (copy), p1 (ref), var7 (ref), eventNamesModule (copy), var6 (ref), setCurrentToastMessage (copy), var8 (ref), var1 (copy)
+		default:setClipboardText({ context = contexts.ProfileCard, text = p1.username })
+		var7.fireAnalyticsEvent(eventNamesModule.UsernameCopied)
+		var6(setCurrentToastMessage({
 			isLocalized = true,
-			toastMessage = var20.usernameCopied,
-			toastIcon = var12
+			toastMessage = var8.usernameCopied,
+			toastIcon = var1
 		}))
-	end, { p0.username, var17, var20.usernameCopied }) else nil
-	local var22 = if p0.isTrustedConnection then ` \226\128\162 {var20.trustedLabel}` else ""
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		if p0.openEditName then
-			p0.openEditName()
+	end, { p1.username, var7, var8.usernameCopied }) else nil
+	local var10 = if p1.isTrustedConnection then ` \226\128\162 {var8.trustedLabel}` else ""
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		if p1.openEditName then
+			p1.openEditName()
 		end
-		p0.dismissTooltip()
+		p1.dismissTooltip()
 	end)
 	local createElement = reactModule.createElement
 	local t = {
 		useAutomaticSizing = true,
 		backgroundTransparency = 1,
-		size = p0.size,
-		layoutOrder = p0.layoutOrder
+		size = p1.size,
+		layoutOrder = p1.layoutOrder
 	}
 	local t_1 = {
 		UIListLayout = reactModule.createElement("UIListLayout", {
@@ -111,22 +111,22 @@ return function(p0)
 			PrimaryNameFrameTouchable = reactModule.createElement(view, {
 				tag = "row align-x-left align-y-center auto-xy gap-xxsmall",
 				LayoutOrder = 1,
-				onActivated = var23
+				onActivated = var11
 			}, {
-				EditNameButton = if p0.openEditName then reactModule.createElement(iconButton, {
+				EditNameButton = if p1.openEditName then reactModule.createElement(iconButton, {
 					layoutOrder = 1,
-					icon = var15,
+					icon = var5,
 					iconSize = iconSize.Small,
 					size = UDim2.fromOffset(26, 26),
-					onActivated = var23
+					onActivated = var11
 				}, {
-					tooltip = if p0.isTooltipActive then reactModule.createElement(tooltip, {
+					tooltip = if p1.isTooltipActive then reactModule.createElement(tooltip, {
 						forceClickTriggerPoint = true,
 						isDirectChild = true,
 						triggerPosition = Vector2.new(16, 0),
 						triggerSize = Vector2.new(0, 0),
-						headerText = var20.tooltipTitle,
-						bodyText = var20.tooltipBody,
+						headerText = var8.tooltipTitle,
+						bodyText = var8.tooltipBody,
 						orientation = tooltipOrientation.Top
 					}) else nil
 				}) else nil,
@@ -134,18 +134,18 @@ return function(p0)
 					tag = "auto-xy text-align-x-left text-align-y-bottom content-emphasis text-truncate-end shrink",
 					LayoutOrder = 2,
 					Text = primaryName,
-					fontStyle = var13.Typography.HeadingSmall,
+					fontStyle = var3.Typography.HeadingSmall,
 					Size = if fFlagFriendRequestNicknames then UDim2.new(1, 0, 1, 0) else nil,
 					TextWrapped = if fFlagFriendRequestNicknames then true else nil,
 					FluidSizing = if fFlagFriendRequestNicknames then false else nil,
 					LineHeight = if fFlagFriendRequestNicknames then 1 else nil
 				}),
-				AdminTiltIcon = if fFlagProfilePlatformEnableRobloxAdminBadgeModule and p0.isRobloxAdmin then reactModule.createElement(foundationModule.Icon, {
+				AdminTiltIcon = if fFlagProfilePlatformEnableRobloxAdminBadgeModule and p1.isRobloxAdmin then reactModule.createElement(foundationModule.Icon, {
 					LayoutOrder = 3,
 					name = foundationModule.Enums.IconName.Tilt,
 					size = foundationModule.Enums.IconSize.Large
 				}) else nil,
-				SubscriptionBadge = if fFlagEnableBlackbirdCheck and p0.isRobloxSubscriber == true then reactModule.createElement(view, { tag = "auto-xy padding-top-xxsmall", LayoutOrder = 4 }, {
+				SubscriptionBadge = if fFlagEnableBlackbirdCheck and p1.isRobloxSubscriber == true then reactModule.createElement(view, { tag = "auto-xy padding-top-xxsmall", LayoutOrder = 4 }, {
 					Icon = reactModule.createElement(foundationModule.Icon, {
 						name = foundationModule.Enums.IconName.RobloxPlus,
 						size = foundationModule.Enums.IconSize.Small
@@ -166,29 +166,29 @@ return function(p0)
 				Text = "",
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				[reactModule.Event.Activated] = var23,
+				[reactModule.Event.Activated] = var11,
 				Selectable = false
 			}, {
 				UIListLayout = reactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
-					VerticalAlignment = if fFlagProfilePlatformEnableRobloxAdminBadgeModule and p0.isRobloxAdmin then Enum.VerticalAlignment.Center else Enum.VerticalAlignment.Bottom,
+					VerticalAlignment = if fFlagProfilePlatformEnableRobloxAdminBadgeModule and p1.isRobloxAdmin then Enum.VerticalAlignment.Center else Enum.VerticalAlignment.Bottom,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				EditNameButton = if p0.openEditName then reactModule.createElement(iconButton, {
+				EditNameButton = if p1.openEditName then reactModule.createElement(iconButton, {
 					layoutOrder = 1,
-					icon = var15,
+					icon = var5,
 					iconSize = iconSize.Small,
 					size = UDim2.fromOffset(26, 26),
-					onActivated = var23
+					onActivated = var11
 				}, {
-					tooltip = if p0.isTooltipActive then reactModule.createElement(tooltip, {
+					tooltip = if p1.isTooltipActive then reactModule.createElement(tooltip, {
 						forceClickTriggerPoint = true,
 						isDirectChild = true,
 						triggerPosition = Vector2.new(16, 0),
 						triggerSize = Vector2.new(0, 0),
-						headerText = var20.tooltipTitle,
-						bodyText = var20.tooltipBody,
+						headerText = var8.tooltipTitle,
+						bodyText = var8.tooltipBody,
 						orientation = tooltipOrientation.Top
 					}) else nil
 				}) else nil,
@@ -196,34 +196,34 @@ return function(p0)
 					tag = "auto-xy text-align-x-left text-align-y-bottom content-emphasis",
 					LayoutOrder = 2,
 					Text = primaryName,
-					fontStyle = var13.Typography.HeadingSmall,
+					fontStyle = var3.Typography.HeadingSmall,
 					Size = if fFlagFriendRequestNicknames then UDim2.new(1, 0, 1, 0) else nil,
 					TextWrapped = if fFlagFriendRequestNicknames then true else nil,
 					FluidSizing = if fFlagFriendRequestNicknames then false else nil,
 					LineHeight = if fFlagFriendRequestNicknames then 1 else nil
 				}),
-				AdminTiltIcon = if fFlagProfilePlatformEnableRobloxAdminBadgeModule and p0.isRobloxAdmin then reactModule.createElement("Frame", {
+				AdminTiltIcon = if fFlagProfilePlatformEnableRobloxAdminBadgeModule and p1.isRobloxAdmin then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
 					AutomaticSize = Enum.AutomaticSize.XY
 				}, {
 					UIPadding = reactModule.createElement("UIPadding", {
-						PaddingLeft = UDim.new(0, var13.Gap.XXSmall),
-						PaddingBottom = UDim.new(0, var13.Gap.XXSmall)
+						PaddingLeft = UDim.new(0, var3.Gap.XXSmall),
+						PaddingBottom = UDim.new(0, var3.Gap.XXSmall)
 					}),
 					Icon = reactModule.createElement(foundationModule.Icon, {
 						name = foundationModule.Enums.IconName.Tilt,
 						size = foundationModule.Enums.IconSize.Large
 					})
 				}) else nil,
-				SubscriptionBadge = if fFlagEnableBlackbirdCheck and p0.isRobloxSubscriber == true then reactModule.createElement("Frame", {
+				SubscriptionBadge = if fFlagEnableBlackbirdCheck and p1.isRobloxSubscriber == true then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
 					AutomaticSize = Enum.AutomaticSize.XY
 				}, {
 					UIPadding = reactModule.createElement("UIPadding", {
-						PaddingLeft = UDim.new(0, var13.Gap.XXSmall),
-						PaddingBottom = UDim.new(0, var13.Gap.XXSmall)
+						PaddingLeft = UDim.new(0, var3.Gap.XXSmall),
+						PaddingBottom = UDim.new(0, var3.Gap.XXSmall)
 					}),
 					Icon = reactModule.createElement(foundationModule.Icon, {
 						name = foundationModule.Enums.IconName.RobloxPlus,
@@ -239,22 +239,22 @@ return function(p0)
 		LayoutOrder = 2,
 		RichText = if fFlagEnableFontStylisticAlternativesOnSocialScreens then true else nil,
 		Text = if fFlagEnableFontStylisticAlternativesOnSocialScreens then `<font features="zero, ss03">{username}</font>` .. var22 else username .. var22,
-		fontStyle = var13.Typography.CaptionMedium,
+		fontStyle = var3.Typography.CaptionMedium,
 		Size = if fFlagFriendRequestNicknames then UDim2.new(1, 0, 1, 0) else nil,
 		OpenTypeFeatures = if fFlagEnableFontStylisticAlternativesOnSocialScreens then nil elseif getFFlagLuaAppEnableOpenTypeSupport() then openTypeSupport:getUserNameStylisticAlternative() else nil,
-		onActivated = if var18 then nil else var21,
-		stateLayer = if var18 then nil elseif fFlagProfilePlatformEnableClickToCopyUsernameModule then { affordance = stateLayerAffordance.None } else nil
+		onActivated = if var2 then nil else var9,
+		stateLayer = if var2 then nil elseif fFlagProfilePlatformEnableClickToCopyUsernameModule then { affordance = stateLayerAffordance.None } else nil
 	})
-	t_1.PlatformName = if fFlagAddPlatformNameToProfileHeader and p0.platformName then reactModule.createElement(view, {
+	t_1.PlatformName = if fFlagAddPlatformNameToProfileHeader and p1.platformName then reactModule.createElement(view, {
 		tag = "row align-y-center gap-xsmall auto-xy",
 		LayoutOrder = 3
 	}, {
-		PlatformIcon = if var14 then reactModule.createElement(icon, { LayoutOrder = 1, name = var14, size = iconSize_1.XSmall }) else nil,
+		PlatformIcon = if var4 then reactModule.createElement(icon, { LayoutOrder = 1, name = var4, size = iconSize_1.XSmall }) else nil,
 		PlatformNameLabel = reactModule.createElement(text, {
 			tag = "shrink auto-xy text-align-x-left text-align-y-top",
 			LayoutOrder = 2,
-			Text = p0.platformName,
-			fontStyle = var13.Typography.CaptionMedium
+			Text = p1.platformName,
+			fontStyle = var3.Typography.CaptionMedium
 		})
 	}) else nil
 	

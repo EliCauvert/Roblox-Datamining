@@ -5,52 +5,52 @@ local getTrustedFriendActionModule = require(script.Parent.getTrustedFriendActio
 
 return function(value)
 	-- upvalues: reactModule (ref), useLocalization (ref), getTrustedFriendActionModule (ref)
-	local var2, var3 = reactModule.useState(nil)
-	local var4, var5 = reactModule.useState(0)
-	local var6 = useLocalization({
+	local var1, var2 = reactModule.useState(nil)
+	local var3, var4 = reactModule.useState(0)
+	local var5 = useLocalization({
 		addTrustedFriendText = "Feature.Friends.TrustedFriend.Label.AddTrustedFriend",
 		acceptTrustedFriendText = "Feature.Friends.TrustedFriend.AcceptTrustedRequest",
 		removeTrustedFriendText = "Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend",
 		removeTrustedFriendToastText = "Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved"
 	})
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref)
-		var5(function(p0)
-			return p0 + 1
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref)
+		var4(function(p1)
+			return p1 + 1
 		end)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: value (ref), var3 (ref), getTrustedFriendActionModule (copy)
+		-- upvalues: value (ref), var2 (ref), getTrustedFriendActionModule (copy)
 		if value == "" then
-			var3(nil)
+			var2(nil)
 			
 			return
 		end
-		local var9 = true
-		var3(nil)
+		local var7 = true
+		var2(nil)
 		getTrustedFriendActionModule(value):andThen(function(p1)
-			-- upvalues: var9 (write), var3 (copy)
-			if var9 then
-				var3(p1)
+			-- upvalues: var7 (write), var2 (copy)
+			if var7 then
+				var2(p1)
 			end
 		end):catch(function()
-			-- upvalues: var9 (write), var3 (copy)
-			if var9 then
-				var3(nil)
+			-- upvalues: var7 (write), var2 (copy)
+			if var7 then
+				var2(nil)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var9 (write)
-			var9 = false
+			-- upvalues: var7 (write)
+			var7 = false
 		end
-	end, { value, var4 })
-	local var8 = if var2 ~= nil then nil else var2.actionType
+	end, { value, var3 })
+	local var7 = if var1 ~= nil then nil else var1.actionType
 	
 	return {
-		action = var2,
-		actionText = if var8 == "RemoveTrustedConnection" then var6.removeTrustedFriendText elseif var8 == "AddIncomingTrustedConnection" then var6.acceptTrustedFriendText elseif var8 == "AddTrustedConnection" then var6.addTrustedFriendText else nil,
-		toastText = var6.removeTrustedFriendToastText,
-		refetch = var7
+		action = var1,
+		actionText = if var7 == "RemoveTrustedConnection" then var5.removeTrustedFriendText elseif var7 == "AddIncomingTrustedConnection" then var5.acceptTrustedFriendText elseif var7 == "AddTrustedConnection" then var5.addTrustedFriendText else nil,
+		toastText = var5.removeTrustedFriendToastText,
+		refetch = var6
 	}
 end

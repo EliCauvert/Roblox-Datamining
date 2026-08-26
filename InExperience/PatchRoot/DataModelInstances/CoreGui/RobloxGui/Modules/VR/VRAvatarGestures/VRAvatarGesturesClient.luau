@@ -30,9 +30,9 @@ function t.new()
 	return tbl
 end
 
-function t:onCharacterChanged(p0)
+function t:onCharacterChanged(p1)
 	-- upvalues: VRService (ref)
-	local humanoid = p0:FindFirstChild("Humanoid")
+	local humanoid = p1:FindFirstChild("Humanoid")
 	
 	if not humanoid then return end
 	for i, v in pairs({
@@ -40,23 +40,23 @@ function t:onCharacterChanged(p0)
 		"TrackedIKRightHand",
 		"TrackedIKHead"
 	}) do
-		local var13 = humanoid:FindFirstChild(v)
+		local var1 = humanoid:FindFirstChild(v)
 		
-		if var13 then
-			var13.SmoothTime = 0
+		if var1 then
+			var1.SmoothTime = 0
 		end
 	end
 	local currentCamera = workspace.CurrentCamera
 	
 	if currentCamera then
-		local function updateSeated(p1)
+		local function updateSeated(p2)
 			-- upvalues: currentCamera (ref), humanoid (ref)
 			local vehicleSeat = currentCamera.CameraSubject and currentCamera.CameraSubject:IsA("VehicleSeat")
-			local var15 = (currentCamera.CFrame.Position - currentCamera.Focus.Position).Magnitude <= 5
+			local var2 = (currentCamera.CFrame.Position - currentCamera.Focus.Position).Magnitude <= 5
 			local trackedIKHead = humanoid:FindFirstChild("TrackedIKHead")
 			
 			if trackedIKHead then
-				if p1 and not vehicleSeat and var15 then
+				if p2 and not vehicleSeat and var2 then
 					trackedIKHead.Type = Enum.IKControlType.Transform
 					
 					return
@@ -107,9 +107,9 @@ function t:onAvatarGesturesChanged()
 		
 		if not self.avatarUtil then
 			self.avatarUtil = avatarUtil.new()
-			self.avatarUtil:connectLocalCharacterChanges(function(p3)
+			self.avatarUtil:connectLocalCharacterChanges(function(p2)
 				-- upvalues: self (ref)
-				self:onCharacterChanged(p3)
+				self:onCharacterChanged(p2)
 			end)
 		elseif playersService.LocalPlayer and playersService.LocalPlayer.Character then
 			self:onCharacterChanged(playersService.LocalPlayer.Character)
@@ -123,7 +123,7 @@ function t:onAvatarGesturesChanged()
 	end
 end
 
-function t.updateCFrames(_, p4, p5)
+function t.updateCFrames(_, p2, p3)
 	-- upvalues: playersService (ref), VRService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
@@ -131,56 +131,56 @@ function t.updateCFrames(_, p4, p5)
 	local character = localPlayer.Character
 	
 	if not localPlayer.Character then return end
-	local var19 = character:FindFirstChild(p4)
+	local var2 = character:FindFirstChild(p2)
 	
-	if not var19 then return end
+	if not var2 then return end
 	local currentCamera = workspace.CurrentCamera
 	
 	if not currentCamera then return end
-	if not var19:FindFirstChild(p4 .. "Attachment") then return end
-	local var20 = var19:FindFirstChild(p4 .. "AlignPosition")
+	if not var2:FindFirstChild(p2 .. "Attachment") then return end
+	local var3 = var2:FindFirstChild(p2 .. "AlignPosition")
 	
-	if not var20 then return end
-	local var21 = var19:FindFirstChild(p4 .. "AlignOrientation")
+	if not var3 then return end
+	local var4 = var2:FindFirstChild(p2 .. "AlignOrientation")
 	
-	if not var21 then return end
+	if not var4 then return end
 	if VRService.VREnabled then
-		p5 = p5.Rotation + p5.Position * currentCamera.HeadScale
-		local var22 = currentCamera.CFrame * p5
+		p3 = p3.Rotation + p3.Position * currentCamera.HeadScale
+		local var5 = currentCamera.CFrame * p3
 		local head = character:FindFirstChild("Head")
 		
 		if (currentCamera.CFrame.Position - currentCamera.Focus.Position).Magnitude > 5 and head then
 			local headUserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head)
-			local var25 = currentCamera.CFrame * (headUserCFrame.Rotation + headUserCFrame.Position * currentCamera.HeadScale) * CFrame.new(0, 0, 0.5)
+			local var6 = currentCamera.CFrame * (headUserCFrame.Rotation + headUserCFrame.Position * currentCamera.HeadScale) * CFrame.new(0, 0, 0.5)
 			
-			if p4 == "TrackedHead" then
+			if p2 == "TrackedHead" then
 				local cFrame = character.PrimaryPart.CFrame
-				var20.Position = (cFrame * CFrame.new(0, cFrame.Position.Y * 0.25, -cFrame.Position.Y * 0.125)).Position
-				var21.CFrame = cFrame * p5
+				var3.Position = (cFrame * CFrame.new(0, cFrame.Position.Y * 0.25, -cFrame.Position.Y * 0.125)).Position
+				var4.CFrame = cFrame * p3
 			else
-				local var26 = head.CFrame:ToWorldSpace(var25:ToObjectSpace(var22))
-				var20.Position = var26.Position
-				var21.CFrame = var26 * CFrame.Angles(1.570796326795, 0, 0)
+				local var7 = head.CFrame:ToWorldSpace(var6:ToObjectSpace(var5))
+				var3.Position = var7.Position
+				var4.CFrame = var7 * CFrame.Angles(1.570796326795, 0, 0)
 			end
 		else
-			var20.Position = var22.Position
+			var3.Position = var5.Position
 			
-			if p4 == "TrackedHead" then
-				var21.CFrame = var22
+			if p2 == "TrackedHead" then
+				var4.CFrame = var5
 			else
-				var21.CFrame = var22 * CFrame.Angles(1.570796326795, 0, 0)
+				var4.CFrame = var5 * CFrame.Angles(1.570796326795, 0, 0)
 			end
 		end
 	else
 		local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-		local var28 = if p4 ~= "TrackedHead" then humanoidRootPart.CFrame * p5 else humanoidRootPart.CFrame * p5 * CFrame.Angles(0, 0, math.rad(time() * 30)) * CFrame.new(1, 0, -0.5)
+		local var8 = if p2 ~= "TrackedHead" then humanoidRootPart.CFrame * p3 else humanoidRootPart.CFrame * p3 * CFrame.Angles(0, 0, math.rad(time() * 30)) * CFrame.new(1, 0, -0.5)
 		
 		if humanoidRootPart then
-			var20.Position = var28.Position
-			var21.CFrame = var28
+			var3.Position = var8.Position
+			var4.CFrame = var8
 		end
 	end
-	var19.CFrame = CFrame.new(var20.Position) * var21.CFrame.Rotation
+	var2.CFrame = CFrame.new(var3.Position) * var4.CFrame.Rotation
 end
 
 function t:steppedCframes()
@@ -192,18 +192,18 @@ end
 function t:connectInputCFrames()
 	-- upvalues: VRService (ref), debugImmersionModeNonVR (ref), runService (ref)
 	if VRService.VREnabled then
-		self.connections:connect("UserCFrameChanged", VRService.UserCFrameChanged, function(p6, p7)
+		self.connections:connect("UserCFrameChanged", VRService.UserCFrameChanged, function(p2, p3)
 			-- upvalues: self (ref)
-			if p6 == Enum.UserCFrame.LeftHand then
-				self.partCFrameMap.TrackedLeftHand = p7
+			if p2 == Enum.UserCFrame.LeftHand then
+				self.partCFrameMap.TrackedLeftHand = p3
 				
 				return
-			elseif p6 == Enum.UserCFrame.RightHand then
-				self.partCFrameMap.TrackedRightHand = p7
+			elseif p2 == Enum.UserCFrame.RightHand then
+				self.partCFrameMap.TrackedRightHand = p3
 				
 				return
-			elseif p6 == Enum.UserCFrame.Head then
-				self.partCFrameMap.TrackedHead = p7
+			elseif p2 == Enum.UserCFrame.Head then
+				self.partCFrameMap.TrackedHead = p3
 			end
 		end)
 	elseif debugImmersionModeNonVR then

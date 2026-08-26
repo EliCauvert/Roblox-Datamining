@@ -8,29 +8,29 @@ local icon = foundationModule.Icon
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-local function ScrollButton(p0)
+local function ScrollButton(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), controlState (ref), view (ref), icon (ref), iconSize (ref)
 	return reactModule.createElement(view, {
 		tag = "size-1000 radius-circle bg-over-media-100",
-		AnchorPoint = p0.AnchorPoint,
-		Position = p0.Position,
-		Visible = p0.Visible,
-		onStateChanged = reactModule.useCallback(function(p1)
-			-- upvalues: controlState (copy), p0 (ref)
-			if p1 == controlState.Hover or p1 == controlState.Pressed then
-				if p0.onScrollButtonEnter then
-					p0.onScrollButtonEnter()
+		AnchorPoint = p1.AnchorPoint,
+		Position = p1.Position,
+		Visible = p1.Visible,
+		onStateChanged = reactModule.useCallback(function(p2)
+			-- upvalues: controlState (copy), p1 (ref)
+			if p2 == controlState.Hover or p2 == controlState.Pressed then
+				if p1.onScrollButtonEnter then
+					p1.onScrollButtonEnter()
 					
 					return
 				end
-			elseif p0.onScrollButtonLeave then
-				p0.onScrollButtonLeave()
+			elseif p1.onScrollButtonLeave then
+				p1.onScrollButtonLeave()
 			end
-		end, { p0.onScrollButtonEnter, p0.onScrollButtonLeave }),
-		onActivated = p0.onActivated
+		end, { p1.onScrollButtonEnter, p1.onScrollButtonLeave }),
+		onActivated = p1.onActivated
 	}, {
 		Icon = reactModule.createElement(icon, {
-			name = p0.icon,
+			name = p1.icon,
 			size = iconSize.Large,
 			style = useTokens().Color.Content.Emphasis,
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -39,52 +39,52 @@ local function ScrollButton(p0)
 	})
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: reactModule (ref), reactIsModule (ref), ScrollButton (ref)
-	local buttonOffsetFromEdge = p2.buttonOffsetFromEdge or 0
-	local var5, var6 = reactModule.useState(false)
+	local buttonOffsetFromEdge = p1.buttonOffsetFromEdge or 0
+	local var1, var2 = reactModule.useState(false)
 	local _ = nil
 	local _ = nil
 	
 	return reactModule.createElement("Frame", {
-		AnchorPoint = p2.AnchorPoint,
-		Position = p2.Position,
-		Size = p2.Size,
-		ZIndex = p2.ZIndex or 10,
+		AnchorPoint = p1.AnchorPoint,
+		Position = p1.Position,
+		Size = p1.Size,
+		ZIndex = p1.ZIndex or 10,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		[reactModule.Event.MouseEnter] = reactModule.useCallback(function()
-			-- upvalues: var6 (ref)
-			var6(true)
+			-- upvalues: var2 (ref)
+			var2(true)
 		end, {}),
 		[reactModule.Event.MouseLeave] = reactModule.useCallback(function()
-			-- upvalues: var6 (ref)
-			var6(false)
+			-- upvalues: var2 (ref)
+			var2(false)
 		end, {})
 	}, {
 		LeftScrollButton = reactModule.createElement(ScrollButton, {
 			icon = "chevron-large-left",
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.new(0, buttonOffsetFromEdge, 0.5, 0),
-			Visible = if reactIsModule.isBinding(p2.leftScrollingEnabled) then p2.leftScrollingEnabled:map(function(p3)
-				-- upvalues: var5 (ref)
-				return var5 and p3
-			end) else var5 and p2.leftScrollingEnabled,
-			onScrollButtonEnter = p2.onScrollButtonEnter,
-			onScrollButtonLeave = p2.onScrollButtonLeave,
-			onActivated = p2.handleScrollLeft
+			Visible = if reactIsModule.isBinding(p1.leftScrollingEnabled) then p1.leftScrollingEnabled:map(function(p2)
+				-- upvalues: var1 (ref)
+				return var1 and p2
+			end) else var1 and p1.leftScrollingEnabled,
+			onScrollButtonEnter = p1.onScrollButtonEnter,
+			onScrollButtonLeave = p1.onScrollButtonLeave,
+			onActivated = p1.handleScrollLeft
 		}),
 		RightScrollButton = reactModule.createElement(ScrollButton, {
 			icon = "chevron-large-right",
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.new(1, -buttonOffsetFromEdge, 0.5, 0),
-			Visible = if reactIsModule.isBinding(p2.rightScrollingEnabled) then p2.rightScrollingEnabled:map(function(p4)
-				-- upvalues: var5 (ref)
-				return var5 and p4
-			end) else var5 and p2.rightScrollingEnabled,
-			onScrollButtonEnter = p2.onScrollButtonEnter,
-			onScrollButtonLeave = p2.onScrollButtonLeave,
-			onActivated = p2.handleScrollRight
+			Visible = if reactIsModule.isBinding(p1.rightScrollingEnabled) then p1.rightScrollingEnabled:map(function(p2)
+				-- upvalues: var1 (ref)
+				return var1 and p2
+			end) else var1 and p1.rightScrollingEnabled,
+			onScrollButtonEnter = p1.onScrollButtonEnter,
+			onScrollButtonLeave = p1.onScrollButtonLeave,
+			onActivated = p1.handleScrollRight
 		})
 	})
 end

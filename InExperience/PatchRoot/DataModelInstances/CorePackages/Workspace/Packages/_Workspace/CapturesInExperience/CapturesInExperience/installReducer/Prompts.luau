@@ -4,20 +4,20 @@ local cryoModule = require(parent_1.Cryo)
 local _ = require(parent.Types)
 
 return require(parent_1.Rodux).createReducer({}, {
-	[require(parent.Actions.PromptDismissed).name] = function(p0, p1)
+	[require(parent.Actions.PromptDismissed).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.List.filter(p0, function(p2)
-			-- upvalues: p1 (ref)
-			return p2.PromptId ~= p1.promptId
+		return cryoModule.List.filter(p1, function(p3)
+			-- upvalues: p2 (ref)
+			return p3.PromptId ~= p2.promptId
 		end)
 	end,
-	[require(parent.Actions.PromptTriggered).name] = function(p3, p4)
+	[require(parent.Actions.PromptTriggered).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.List.join(p3, {
+		return cryoModule.List.join(p1, {
 			{
-				PromptData = p4.promptData,
-				PromptType = p4.promptType,
-				PromptId = p4.promptId
+				PromptData = p2.promptData,
+				PromptType = p2.promptType,
+				PromptId = p2.promptId
 			}
 		})
 	end

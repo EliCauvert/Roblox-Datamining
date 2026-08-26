@@ -6,29 +6,29 @@ local signalsExperimentalModule = require(parent.SignalsExperimental)
 local getOtherParticipantsModule = require(script.Parent.getOtherParticipants)
 local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getOtherParticipantsModule (ref), getConversationStoreModule (ref), appChatNetworkingModule (ref), conversationChannelsModule (ref), signalsExperimentalModule (ref)
-	local var6 = getOtherParticipantsModule(p0, p1)
+	local var1 = getOtherParticipantsModule(p1, p2)
 	
-	if #var6 == 1 then
-		local var7 = getConversationStoreModule(false)
+	if #var1 == 1 then
+		local var2 = getConversationStoreModule(false)
 		
-		return appChatNetworkingModule.http.CreateConversation(nil, "one_to_one", { var6[1] }):andThen(function(p2)
-			-- upvalues: conversationChannelsModule (copy), signalsExperimentalModule (copy), var7 (ref), p0 (ref)
-			local responseBody = p2 and p2.responseBody
-			local var9 = responseBody and (responseBody.conversations and responseBody.conversations[1])
+		return appChatNetworkingModule.http.CreateConversation(nil, "one_to_one", { var1[1] }):andThen(function(p3)
+			-- upvalues: conversationChannelsModule (copy), signalsExperimentalModule (copy), var2 (ref), p1 (ref)
+			local responseBody = p3 and p3.responseBody
+			local var3 = responseBody and (responseBody.conversations and responseBody.conversations[1])
 			
-			if var9 == nil or var9.status == "failed" then
+			if var3 == nil or var3.status == "failed" then
 				return nil
 			end
-			local var10 = conversationChannelsModule.fromChannelsApi(var9)
+			local var4 = conversationChannelsModule.fromChannelsApi(var3)
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var7 (copy), var10 (ref), p0 (copy)
-				var7.upsertConversation(var10, false)
-				var7.removeConversation(p0.id)
+				-- upvalues: var2 (copy), var4 (ref), p1 (copy)
+				var2.upsertConversation(var4, false)
+				var2.removeConversation(p1.id)
 			end)
 			
-			return var10
+			return var4
 		end)
 	end
 	return nil

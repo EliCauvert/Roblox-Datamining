@@ -29,9 +29,9 @@ return connectToStoreModule(nil, function(p1)
 			p1(errorOccurredModule(purchaseErrorModule.InvalidFundsUnknown))
 			p1(sendCounterModule(counterModule.UpsellFailedNativePurchase))
 		end,
-		nativePurchaseFinishedWithLocalPlayer = function(_, p3, _)
+		nativePurchaseFinishedWithLocalPlayer = function(_, p2, _)
 			-- upvalues: p1 (ref), retryAfterUpsellModule (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), handleNativePurchaseFailureOrCancelModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), sendCounterModule (copy), counterModule (copy)
-			if p3 then
+			if p2 then
 				p1(retryAfterUpsellModule())
 				
 				return
@@ -44,10 +44,10 @@ return connectToStoreModule(nil, function(p1)
 			p1(sendCounterModule(counterModule.UpsellFailedNativePurchase))
 		end
 	}
-end)(function(p0)
+end)(function(p1)
 	-- upvalues: roact (ref), externalEventConnectionModule (ref), marketplaceService (ref), fFlagLuaAppEnableNativePurchaseFinishedV2Signals (ref)
-	local nativePurchaseFinished = p0.nativePurchaseFinished
-	local nativePurchaseFinishedWithLocalPlayer = p0.nativePurchaseFinishedWithLocalPlayer
+	local nativePurchaseFinished = p1.nativePurchaseFinished
+	local nativePurchaseFinishedWithLocalPlayer = p1.nativePurchaseFinishedWithLocalPlayer
 	
 	return if game:GetEngineFeature("NativePurchaseWithLocalPlayer") then roact.createFragment({
 		NativePurchase = roact.createElement(externalEventConnectionModule, {

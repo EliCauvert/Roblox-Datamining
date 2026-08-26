@@ -4,23 +4,23 @@ local reactModule = require(parent_1.React)
 local toastNotificationWrapperModule = require(parent.ToastNotificationWrapper)
 local experienceService = require(parent_1.ExperienceService).ExperienceService
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), experienceService (ref), toastNotificationWrapperModule (ref)
-	local var2, var3 = reactModule.useState(false)
+	local var1, var2 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: experienceService (copy), var3 (ref)
+		-- upvalues: experienceService (copy), var2 (ref)
 		experienceService:RegisterForExperienceJoin(function()
-			-- upvalues: var3 (copy)
-			var3(true)
+			-- upvalues: var2 (copy)
+			var2(true)
 		end)
 		experienceService:RegisterForExperienceLeave(function()
-			-- upvalues: var3 (copy)
-			var3(false)
+			-- upvalues: var2 (copy)
+			var2(false)
 		end)
 	end, {})
 	
-	return not var2 and reactModule.createElement(toastNotificationWrapperModule, {
+	return not var1 and reactModule.createElement(toastNotificationWrapperModule, {
 		renderLocation = "universalApp",
-		displayOrder = p0.displayOrder
+		displayOrder = p1.displayOrder
 	})
 end

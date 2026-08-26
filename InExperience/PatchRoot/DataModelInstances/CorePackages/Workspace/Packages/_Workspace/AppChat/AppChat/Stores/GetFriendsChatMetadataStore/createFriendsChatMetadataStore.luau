@@ -6,47 +6,47 @@ local _ = require(parent.Signals)
 local localUserIdStore = require(parent.LocalUserIdStore).LocalUserIdStore
 local name = require(appChat.Logger):new(script.Name)
 
-local function resolveLocalUserId(p0)
+local function resolveLocalUserId(p1)
 	-- upvalues: localUserIdStore (ref)
-	return localUserIdStore.getCurrentUserId(p0)
+	return localUserIdStore.getCurrentUserId(p1)
 end
 
 return function()
 	-- upvalues: dataHydrationModule (ref), appChatNetworkingModule (ref), name (ref), resolveLocalUserId (ref), localUserIdStore (ref)
-	local var5 = dataHydrationModule.createDataCache()
-	local var6 = dataHydrationModule.createDataResolver({
+	local var1 = dataHydrationModule.createDataCache()
+	local var2 = dataHydrationModule.createDataResolver({
 		supportsMultiGet = false,
-		cache = var5,
+		cache = var1,
 		fetchFn = function(_)
 			-- upvalues: appChatNetworkingModule (copy)
 			return appChatNetworkingModule.http.GetMetadata():andThen(function(p1)
 				return p1.responseBody
 			end)
 		end,
-		logError = function(p2)
+		logError = function(p1)
 			-- upvalues: name (copy)
-			name:warning(`Failed to fetch Friends Chat metadata: {tostring(p2)}`)
+			name:warning(`Failed to fetch Friends Chat metadata: {tostring(p1)}`)
 		end
 	})
 	
 	return {
-		getFriendsChatMetadata = function(p3)
-			-- upvalues: var6 (ref), resolveLocalUserId (copy)
-			return var6.getAndFetchItem(resolveLocalUserId(p3))
+		getFriendsChatMetadata = function(p1)
+			-- upvalues: var2 (ref), resolveLocalUserId (copy)
+			return var2.getAndFetchItem(resolveLocalUserId(p1))
 		end,
-		getCachedFriendsChatMetadata = function(p4)
-			-- upvalues: var6 (ref), resolveLocalUserId (copy)
-			return var6.getCachedItem(resolveLocalUserId(p4))
+		getCachedFriendsChatMetadata = function(p1)
+			-- upvalues: var2 (ref), resolveLocalUserId (copy)
+			return var2.getCachedItem(resolveLocalUserId(p1))
 		end,
 		fetchFriendsChatMetadata = function()
-			-- upvalues: var6 (ref), resolveLocalUserId (copy)
-			return var6.fetchItem(resolveLocalUserId(false))
+			-- upvalues: var2 (ref), resolveLocalUserId (copy)
+			return var2.fetchItem(resolveLocalUserId(false))
 		end,
-		updateFriendsChatMetadata = function(p5)
-			-- upvalues: var5 (ref), localUserIdStore (copy)
-			var5.replaceItem(localUserIdStore.getCurrentUserId(false), p5)
+		updateFriendsChatMetadata = function(p1)
+			-- upvalues: var1 (ref), localUserIdStore (copy)
+			var1.replaceItem(localUserIdStore.getCurrentUserId(false), p1)
 		end,
-		clear = var6.clear,
-		dispose = var6.dispose
+		clear = var2.clear,
+		dispose = var2.dispose
 	}
 end

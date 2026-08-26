@@ -7,13 +7,13 @@ local fixUseDeviceOrientationNilViewportSize = game:DefineFastFlag("FixUseDevice
 
 return function()
 	-- upvalues: useCurrentCameraModule (ref), useProperty (ref), fixUseDeviceOrientationNilViewportSize (ref), deviceOrientationMode (ref)
-	local var3 = useProperty(useCurrentCameraModule(), "ViewportSize")
+	local var1 = useProperty(useCurrentCameraModule(), "ViewportSize")
 	
 	if fixUseDeviceOrientationNilViewportSize then
-		if var3 and var3.X > 1 and var3.Y > 1 then
-			return if var3.Y < var3.X then deviceOrientationMode.Landscape else deviceOrientationMode.Portrait
+		if var1 and var1.X > 1 and var1.Y > 1 then
+			return if var1.Y < var1.X then deviceOrientationMode.Landscape else deviceOrientationMode.Portrait
 		end
 	else
-		return if var3.X > 1 and var3.Y > 1 then if var3.Y < var3.X then deviceOrientationMode.Landscape else deviceOrientationMode.Portrait else nil
+		return if var1.X > 1 and var1.Y > 1 then if var1.Y < var1.X then deviceOrientationMode.Landscape else deviceOrientationMode.Portrait else nil
 	end
 end

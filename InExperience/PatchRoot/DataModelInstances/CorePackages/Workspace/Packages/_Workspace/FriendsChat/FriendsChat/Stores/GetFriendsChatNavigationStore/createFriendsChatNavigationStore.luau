@@ -6,54 +6,54 @@ local getFFlagAppChatEnableRootedNavigationModule = require(parent.AppChat.getFF
 
 return function()
 	-- upvalues: createSignal (ref), getFFlagAppChatEnableRootedNavigationModule (ref), signalsModule (ref), getConversationStoreModule (ref)
+	local var1, var2 = createSignal(nil)
 	local var3, var4 = createSignal(nil)
-	local var5, var6 = createSignal(nil)
-	local var7, var8 = createSignal(false)
-	local var9 = var3
+	local var5, var6 = createSignal(false)
+	local var7 = var1
 	
-	local var10 = function() end
+	local var8 = function() end
 	
 	if getFFlagAppChatEnableRootedNavigationModule() then
-		var9 = signalsModule.createComputed(function(p0)
-			-- upvalues: var3 (ref), getConversationStoreModule (copy)
-			local var12 = var3(p0)
+		var7 = signalsModule.createComputed(function(p1)
+			-- upvalues: var1 (ref), getConversationStoreModule (copy)
+			local var9 = var1(p1)
 			
-			return if var12 == nil then nil elseif getConversationStoreModule(p0).getConversation(var12, p0) == nil then nil else var12
+			return if var9 == nil then nil elseif getConversationStoreModule(p1).getConversation(var9, p1) == nil then nil else var9
 		end)
-		local var11 = nil
-		var10 = signalsModule.createEffect(function(p1)
-			-- upvalues: var3 (ref), var9 (write), var11 (write), var4 (ref)
-			local var13 = var3(p1)
-			local var14 = var9(p1)
+		local var9 = nil
+		var8 = signalsModule.createEffect(function(p1)
+			-- upvalues: var1 (ref), var7 (write), var9 (write), var2 (ref)
+			local var10 = var1(p1)
+			local var11 = var7(p1)
 			
-			if var14 ~= nil then
-				var11 = var14
+			if var11 ~= nil then
+				var9 = var11
 				
 				return
-			elseif var13 == nil or var13 ~= var11 then
-				var11 = nil
+			elseif var10 == nil or var10 ~= var9 then
+				var9 = nil
 				
 				return
 			end
-			var11 = nil
-			var4(nil)
+			var9 = nil
+			var2(nil)
 		end)
 	end
 	return {
-		getSelectedConversationId = var3,
-		getEffectiveConversationId = var9,
-		setSelectedConversationId = var4,
-		getFocusInputBarRequestTime = var5,
-		requestFocusInputBar = function(p2)
-			-- upvalues: var6 (ref)
-			var6(p2 or os.clock())
+		getSelectedConversationId = var1,
+		getEffectiveConversationId = var7,
+		setSelectedConversationId = var2,
+		getFocusInputBarRequestTime = var3,
+		requestFocusInputBar = function(p1)
+			-- upvalues: var4 (ref)
+			var4(p1 or os.clock())
 		end,
 		clearFocusInputBarRequest = function()
-			-- upvalues: var6 (ref)
-			var6(nil)
+			-- upvalues: var4 (ref)
+			var4(nil)
 		end,
-		getIsInputBarFocused = var7,
-		setInputBarFocused = var8,
-		cleanup = var10
+		getIsInputBarFocused = var5,
+		setInputBarFocused = var6,
+		cleanup = var8
 	}
 end

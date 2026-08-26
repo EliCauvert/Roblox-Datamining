@@ -7,18 +7,18 @@ local shouldShowPriceLabel = require(avatarExperienceInspectAndBuy.Utils.itemDet
 local _ = foundationModule.Enums.ButtonVariant
 local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), shouldShowPriceLabel (ref), foundationModule (ref)
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: shouldShowPriceLabel (copy), p0 (ref)
-		return shouldShowPriceLabel(p0.priceStatus)
-	end, { p0.priceStatus })
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: shouldShowPriceLabel (copy), p1 (ref)
+		return shouldShowPriceLabel(p1.priceStatus)
+	end, { p1.priceStatus })
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "size-full col gap-xsmall align-x-center padding-x-large padding-bottom-medium",
 		LayoutOrder = 1
 	}, {
-		InfoFrame = if p0.priceLabel then reactModule.createElement(foundationModule.View, {
+		InfoFrame = if p1.priceLabel then reactModule.createElement(foundationModule.View, {
 			tag = "size-full-800 row flex-x-between align-y-center gap-small",
 			BackgroundTransparency = 1,
 			LayoutOrder = 1
@@ -26,16 +26,16 @@ return function(p0)
 			PriceDescriptionLabel = reactModule.createElement(foundationModule.Text, {
 				tag = "auto-xy text-title-medium content-emphasis text-truncate-end",
 				LayoutOrder = 1,
-				Text = if var3 then p0.priceLabel.leftLabel else ""
+				Text = if var1 then p1.priceLabel.leftLabel else ""
 			}),
-			RobuxLabel = if var3 then reactModule.createElement(foundationModule.View, {
+			RobuxLabel = if var1 then reactModule.createElement(foundationModule.View, {
 				tag = "auto-xy row align-x-left align-y-center gap-xsmall",
 				LayoutOrder = 2
 			}, {
 				PriceText = reactModule.createElement(foundationModule.Text, {
 					tag = "auto-xy text-body-large content-emphasis text-truncate-end",
 					LayoutOrder = 2,
-					Text = p0.priceLabel.priceInRobux
+					Text = p1.priceLabel.priceInRobux
 				}),
 				Robux = reactModule.createElement(foundationModule.Icon, {
 					name = "robux",
@@ -50,10 +50,10 @@ return function(p0)
 			size = foundationModule.Enums.InputSize.Medium,
 			fillBehavior = foundationModule.Enums.FillBehavior.Fill,
 			width = UDim.new(1, 0),
-			text = p0.purchaseButtonProps.purchaseButtonText,
-			variant = p0.purchaseButtonProps.variant,
-			isDisabled = p0.purchaseButtonProps.isDisabled,
-			onActivated = p0.purchaseButtonProps.onPurchase
+			text = p1.purchaseButtonProps.purchaseButtonText,
+			variant = p1.purchaseButtonProps.variant,
+			isDisabled = p1.purchaseButtonProps.isDisabled,
+			onActivated = p1.purchaseButtonProps.onPurchase
 		})
 	})
 end

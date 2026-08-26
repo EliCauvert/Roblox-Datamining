@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return p0.AvatarExperience.AvatarEditor.Character.EquippedAssets
+﻿return function(p1)
+	return p1.AvatarExperience.AvatarEditor.Character.EquippedAssets
 end

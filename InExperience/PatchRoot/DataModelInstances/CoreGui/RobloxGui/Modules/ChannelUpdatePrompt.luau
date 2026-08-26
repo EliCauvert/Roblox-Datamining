@@ -6,14 +6,14 @@ local appUpdateService = game:GetService("AppUpdateService")
 local errorPromptModule = require(robloxGui.Modules.ErrorPrompt)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: robloxTranslatorModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: robloxTranslatorModule (copy), p0 (ref), p2 (ref)
-		return robloxTranslatorModule:FormatByKey(p0, p2)
+		-- upvalues: robloxTranslatorModule (copy), p1 (ref), p3 (ref)
+		return robloxTranslatorModule:FormatByKey(p1, p3)
 	end)
 	
-	return if ok then status else p1
+	return if ok then status else p2
 end
 
 local function performUpdate()
@@ -21,8 +21,8 @@ local function performUpdate()
 	appUpdateService:PerformManagedUpdate()
 end
 
-local _ = function(p3, p4)
-	return if p3 == "BetaProgram" then p4.betaProgramName elseif p3 == "BoundChannel" then p4.channelName else nil
+local _ = function(p1, p2)
+	return if p1 == "BetaProgram" then p2.betaProgramName elseif p1 == "BoundChannel" then p2.channelName else nil
 end
 
 return {
@@ -35,35 +35,35 @@ return {
 		})
 		default:setParent(robloxGui)
 		
-		local function showUpdatePrompt(p5, p6)
+		local function showUpdatePrompt(p1, p2)
 			-- upvalues: robloxTranslatorModule (copy), default (ref)
-			p6 = p6 or ""
-			local var10 = nil
+			p2 = p2 or ""
+			local var1 = nil
 			
-			if p5 == "BetaProgram" then
+			if p1 == "BetaProgram" then
 				local text = "An update is required for the Beta Program you are in: \"" .. p6 .. "\"."
-				local t = { RBX_NAME = p6 }
-				local var13 = "InGame.ChannelUpdatePrompt.Message.BetaProgram"
+				local t = { RBX_NAME = p2 }
+				local var2 = "InGame.ChannelUpdatePrompt.Message.BetaProgram"
 				local ok, status = pcall(function()
-					-- upvalues: robloxTranslatorModule (copy), var13 (ref), t (ref)
-					return robloxTranslatorModule:FormatByKey(var13, t)
+					-- upvalues: robloxTranslatorModule (copy), var2 (ref), t (ref)
+					return robloxTranslatorModule:FormatByKey(var2, t)
 				end)
-				var10 = if ok then status else text
-			elseif p5 == "BoundChannel" then
+				var1 = if ok then status else text
+			elseif p1 == "BoundChannel" then
 				local text = "An update is required for the channel you are bound to: \"" .. p6 .. "\"."
-				local t = { RBX_NAME = p6 }
-				local var16 = "InGame.ChannelUpdatePrompt.Message.BoundChannel"
+				local t = { RBX_NAME = p2 }
+				local var3 = "InGame.ChannelUpdatePrompt.Message.BoundChannel"
 				local ok, status = pcall(function()
-					-- upvalues: robloxTranslatorModule (copy), var16 (ref), t (ref)
-					return robloxTranslatorModule:FormatByKey(var16, t)
+					-- upvalues: robloxTranslatorModule (copy), var3 (ref), t (ref)
+					return robloxTranslatorModule:FormatByKey(var3, t)
 				end)
-				var10 = if ok then status else text
+				var1 = if ok then status else text
 			else
-				warn("ChannelUpdatePrompt: unknown updateType '" .. tostring(p5) .. "', skipping prompt")
+				warn("ChannelUpdatePrompt: unknown updateType '" .. tostring(p1) .. "', skipping prompt")
 				
 				return
 			end
-			default:_open(var10)
+			default:_open(var1)
 		end
 		
 		default:updateButtons({
@@ -95,10 +95,10 @@ return {
 		if x ~= ok or y ~= y_1 then
 			default:resizeWidthAndHeight(ok, y_1)
 		end
-		notificationService.RobloxEventReceived:Connect(function(p7)
+		notificationService.RobloxEventReceived:Connect(function(p1)
 			-- upvalues: httpService (copy), showUpdatePrompt (ref)
-			if p7.namespace == "ChannelUpdateRequired" then
-				local detail = httpService:JSONDecode(p7.detail)
+			if p1.namespace == "ChannelUpdateRequired" then
+				local detail = httpService:JSONDecode(p1.detail)
 				local updateType = detail.updateType
 				showUpdatePrompt(detail.updateType, if updateType == "BetaProgram" then detail.betaProgramName elseif updateType == "BoundChannel" then detail.channelName else nil)
 			end

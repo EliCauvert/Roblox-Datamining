@@ -9,70 +9,70 @@ local _ = require(parent.ProductPurchase.PricingTypes)
 local fFlagPurchasePromptFetchCartPricing = require(parent.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 local fFlagPurchasePromptFixOfferMarginUpsell = require(parent.Parent.SharedFlags).FFlagPurchasePromptFixOfferMarginUpsell
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), fFlagPurchasePromptFetchCartPricing (ref), deriveCartPricingViewModule (ref), fFlagPurchasePromptFixOfferMarginUpsell (ref), unifiedPurchaseModalTypeEnumModule (ref)
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: fFlagPurchasePromptFetchCartPricing (copy), deriveCartPricingViewModule (copy), p0 (ref)
-		return if fFlagPurchasePromptFetchCartPricing then deriveCartPricingViewModule(p0.cartPricingResponse) else nil
-	end, { p0.cartPricingResponse })
-	local var4 = if var3 ~= nil then {} else var3.offers
-	local var5 = if var3 == nil or not var3.hasSavings then nil else {
-		subtotalRobux = var3.originalPrice,
-		totalRobux = var3.priceAfterDiscount,
-		savingsRobux = var3.originalPrice - var3.priceAfterDiscount,
-		itemCount = var3.itemCount
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: fFlagPurchasePromptFetchCartPricing (copy), deriveCartPricingViewModule (copy), p1 (ref)
+		return if fFlagPurchasePromptFetchCartPricing then deriveCartPricingViewModule(p1.cartPricingResponse) else nil
+	end, { p1.cartPricingResponse })
+	local var2 = if var1 ~= nil then {} else var1.offers
+	local var3 = if var1 == nil or not var1.hasSavings then nil else {
+		subtotalRobux = var1.originalPrice,
+		totalRobux = var1.priceAfterDiscount,
+		savingsRobux = var1.originalPrice - var1.priceAfterDiscount,
+		itemCount = var1.itemCount
 	}
-	local var6 = if fFlagPurchasePromptFixOfferMarginUpsell and var3 ~= nil then var3.priceWithoutOffersDiscounts else nil
-	local var7 = fFlagPurchasePromptFetchCartPricing and p0.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem
-	local var8 = if var5 == nil then #var4 > 0 else true
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var5 (ref), var3 (ref)
-		return if var8 and var5 ~= nil and var3 ~= nil then {
-			basePriceInRobux = var5.subtotalRobux,
-			priceInRobux = var5.totalRobux,
-			discounts = var3.discounts
+	local var4 = if fFlagPurchasePromptFixOfferMarginUpsell and var1 ~= nil then var1.priceWithoutOffersDiscounts else nil
+	local var5 = fFlagPurchasePromptFetchCartPricing and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem
+	local var6 = if var3 == nil then #var2 > 0 else true
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var6 (ref), var3 (ref), var1 (ref)
+		return if var6 and var3 ~= nil and var1 ~= nil then {
+			basePriceInRobux = var3.subtotalRobux,
+			priceInRobux = var3.totalRobux,
+			discounts = var1.discounts
 		} else nil
-	end, { var8, var5, var3 })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var5 (ref), p0 (ref), var9 (ref)
-		return if var8 and var5 ~= nil then {
-			model = p0.product.model,
-			itemIcon = p0.product.itemIcon,
-			itemName = p0.product.itemName,
-			itemRobuxCost = var5.totalRobux,
-			itemPrice = var9 or p0.product.itemPrice,
-			itemDisplayPrice = p0.product.itemDisplayPrice,
-			badgeType = p0.product.badgeType
-		} else p0.product
-	end, { p0.product, var8, var5, var9 })
-	local itemPrice = var10.itemPrice
+	end, { var6, var3, var1 })
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: var6 (ref), var3 (ref), p1 (ref), var7 (ref)
+		return if var6 and var3 ~= nil then {
+			model = p1.product.model,
+			itemIcon = p1.product.itemIcon,
+			itemName = p1.product.itemName,
+			itemRobuxCost = var3.totalRobux,
+			itemPrice = var7 or p1.product.itemPrice,
+			itemDisplayPrice = p1.product.itemDisplayPrice,
+			badgeType = p1.product.badgeType
+		} else p1.product
+	end, { p1.product, var6, var3, var7 })
+	local itemPrice = var8.itemPrice
 	
 	return {
-		cartAggregate = var5,
-		priceWithoutOffersDiscounts = var6,
-		shouldHideLookProductDetails = var7,
-		cartPricingOffers = var4,
-		showCartOfferUi = var8,
-		mergedProductForDetails = var10,
+		cartAggregate = var3,
+		priceWithoutOffersDiscounts = var4,
+		shouldHideLookProductDetails = var5,
+		cartPricingOffers = var2,
+		showCartOfferUi = var6,
+		mergedProductForDetails = var8,
 		mergedProductItemPrice = itemPrice,
-		mergedProductPriceInRobux = if itemPrice then itemPrice.priceInRobux else var10.itemRobuxCost,
-		displayItemPriceForMultiItem = if var8 then var9 or p0.product.itemPrice else p0.product.itemPrice,
-		cartPricingSavingsSummary = if var8 and var3 ~= nil then var3.savingsSummary else nil,
-		toggleCartPricingOffer = reactModule.useCallback(function(p1)
-			-- upvalues: p0 (ref), var4 (ref)
-			local onCartOfferAppliedChanged = p0.onCartOfferAppliedChanged
+		mergedProductPriceInRobux = if itemPrice then itemPrice.priceInRobux else var8.itemRobuxCost,
+		displayItemPriceForMultiItem = if var6 then var7 or p1.product.itemPrice else p1.product.itemPrice,
+		cartPricingSavingsSummary = if var6 and var1 ~= nil then var1.savingsSummary else nil,
+		toggleCartPricingOffer = reactModule.useCallback(function(p2)
+			-- upvalues: p1 (ref), var2 (ref)
+			local onCartOfferAppliedChanged = p1.onCartOfferAppliedChanged
 			
 			if onCartOfferAppliedChanged == nil then return end
 			local t = {}
-			local var12 = true
+			local var9 = true
 			
-			for i, v in var4 do
-				if not (if v.offerId == p1 then not v.selected else v.selected) then
+			for i, v in var2 do
+				if not (if v.offerId == p2 then not v.selected else v.selected) then
 					table.insert(t, v.offerId)
-					var12 = false
+					var9 = false
 				end
 			end
-			onCartOfferAppliedChanged(var12, t)
-		end, { var4, p0.onCartOfferAppliedChanged })
+			onCartOfferAppliedChanged(var9, t)
+		end, { var2, p1.onCartOfferAppliedChanged })
 	}
 end

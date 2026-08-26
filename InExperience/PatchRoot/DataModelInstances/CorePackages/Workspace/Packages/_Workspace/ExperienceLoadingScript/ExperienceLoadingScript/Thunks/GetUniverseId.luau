@@ -2,9 +2,9 @@
 local setUniverseIdModule = require(experienceLoadingScript.Actions.SetUniverseId)
 local url = require(experienceLoadingScript.Parent.Http).Url
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: setUniverseIdModule (ref), url (ref)
-	local var2 = function(p2)
+	local var1 = function(p3)
 		-- upvalues: setUniverseIdModule (copy)
 		local placeId = game.PlaceId
 		local gameId = game.GameId
@@ -13,34 +13,34 @@ return function(p0, p1)
 			placeId = game.PlaceId
 			gameId = game.GameId
 		end
-		p2:dispatch(setUniverseIdModule({ universeId = gameId, placeId = placeId }))
+		p3:dispatch(setUniverseIdModule({ universeId = gameId, placeId = placeId }))
 	end
 	
-	return function(p3)
-		-- upvalues: p1 (ref), url (copy), p0 (ref), setUniverseIdModule (copy), var2 (ref)
+	return function(p4)
+		-- upvalues: p2 (ref), url (copy), p1 (ref), setUniverseIdModule (copy), var1 (ref)
 		coroutine.wrap(function()
-			-- upvalues: p1 (copy), url (copy), p0 (copy), p3 (ref), setUniverseIdModule (copy), var2 (copy)
+			-- upvalues: p2 (copy), url (copy), p1 (copy), p4 (ref), setUniverseIdModule (copy), var1 (copy)
 			local gameId = game.GameId
 			
-			if p1 > 0 and gameId <= 0 then
-				p0(string.format("%suniverses/v1/places/%d/universe", url.APIS_URL, p1), "GET"):andThen(function(p4)
-					-- upvalues: gameId (write), p3 (copy), setUniverseIdModule (copy), p1 (ref), var2 (copy)
-					if p4 and p4.responseBody then
-						gameId = p4.responseBody.universeId
+			if p2 > 0 and gameId <= 0 then
+				p1(string.format("%suniverses/v1/places/%d/universe", url.APIS_URL, p2), "GET"):andThen(function(p5)
+					-- upvalues: gameId (write), p4 (copy), setUniverseIdModule (copy), p2 (ref), var1 (copy)
+					if p5 and p5.responseBody then
+						gameId = p5.responseBody.universeId
 						
 						if gameId and gameId >= 0 then
-							p3:dispatch(setUniverseIdModule({ universeId = gameId, placeId = p1 }))
+							p4:dispatch(setUniverseIdModule({ universeId = gameId, placeId = p2 }))
 							
 							return
 						end
 					end
-					var2(p3)
+					var1(p4)
 				end, function(_)
-					-- upvalues: var2 (copy), p3 (copy)
-					var2(p3)
+					-- upvalues: var1 (copy), p4 (copy)
+					var1(p4)
 				end)
 			else
-				var2(p3)
+				var1(p4)
 			end
 		end)()
 	end

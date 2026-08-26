@@ -17,49 +17,49 @@ local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.f
 local getFFlagUGCValidationAnimationPackDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackDisableModelStructure)
 local t = {}
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: constantsModule (ref)
-	for i, v in p0 do
+	for i, v in p1 do
 		if v.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
 			return v
 		end
 	end
-	return p0[1]
+	return p1[1]
 end
 
-function t.generateBundleSchema(p1)
+function t.generateBundleSchema(p2)
 	-- upvalues: constantsModule (ref), getUploadCategoryModule (ref), t (ref)
 	local t_1 = { ClassName = "Folder", _children = {} }
 	
-	for i, v in p1 do
-		local var19
+	for i, v in p2 do
+		local var1
 		local allSelectedInstances = v.allSelectedInstances
 		
 		for i_1, v_1 in allSelectedInstances do
 			if v_1.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
-				var19 = v_1
-				local var20 = t.generateAssetSchema(getUploadCategoryModule(var19, v.assetTypeEnum, nil), v.assetTypeEnum, var19)
+				var1 = v_1
+				local var2 = t.generateAssetSchema(getUploadCategoryModule(var1, v.assetTypeEnum, nil), v.assetTypeEnum, var1)
 				
-				if var20.ClassName == "Folder" then
-					for v_1, v_2 in var20._children do
+				if var2.ClassName == "Folder" then
+					for v_1, v_2 in var2._children do
 						table.insert(t_1._children, v_2)
 					end
 				else
-					table.insert(t_1._children, var20)
+					table.insert(t_1._children, var2)
 				end
 			end
 		end
-		var19 = allSelectedInstances[1]
+		var1 = allSelectedInstances[1]
 	end
 	return t_1
 end
 
-local function createBodyPartSchema(p2)
+local function createBodyPartSchema(p3)
 	-- upvalues: constantsModule (ref), createIndividualBodyPartSchemaModule (ref)
 	local t = { ClassName = "Folder", _children = {} }
 	
-	for i in pairs(constantsModule.ASSET_TYPE_INFO[p2].subParts) do
-		table.insert(t._children, createIndividualBodyPartSchemaModule(p2, i))
+	for i in pairs(constantsModule.ASSET_TYPE_INFO[p3].subParts) do
+		table.insert(t._children, createIndividualBodyPartSchemaModule(p3, i))
 	end
 	return t
 end
@@ -73,19 +73,19 @@ local t_1 = {
 		-- upvalues: createDynamicHeadMeshPartSchemaModule (ref)
 		return createDynamicHeadMeshPartSchemaModule()
 	end,
-	TORSO_AND_LIMBS = function(p3, _)
+	TORSO_AND_LIMBS = function(p4, _)
 		-- upvalues: createBodyPartSchema (ref)
-		return createBodyPartSchema(p3)
+		return createBodyPartSchema(p4)
 	end,
 	LAYERED_CLOTHING = function(p4, _)
 		-- upvalues: getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (ref), createEyebrowEyelashSchemaModule (ref), constantsModule (ref), createLayeredClothingSchemaModule (ref)
 		return if getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule() then if p4 == Enum.AssetType.EyebrowAccessory or p4 == Enum.AssetType.EyelashAccessory then createEyebrowEyelashSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames)
 	end,
-	RIGID_ACCESSORY = function(p5, p6)
+	RIGID_ACCESSORY = function(p4, p5)
 		-- upvalues: constantsModule (ref), createMeshPartAccessorySchemaModule (ref), createAccessorySchemaModule (ref)
-		local var22 = constantsModule.ASSET_TYPE_INFO[p5]
+		local var3 = constantsModule.ASSET_TYPE_INFO[p4]
 		
-		return if p6:FindFirstChildOfClass("MeshPart") then createMeshPartAccessorySchemaModule(var22.attachmentNames) else createAccessorySchemaModule(var22.attachmentNames)
+		return if p5:FindFirstChildOfClass("MeshPart") then createMeshPartAccessorySchemaModule(var3.attachmentNames) else createAccessorySchemaModule(var3.attachmentNames)
 	end,
 	MAKEUP = function(_, _)
 		-- upvalues: createMakeupSchemaModule (ref)
@@ -94,21 +94,21 @@ local t_1 = {
 }
 
 if getFFlagUGCValidationAnimationPackSupportModule() then
-	function t_1.ANIMATION(p7, p8)
+	function t_1.ANIMATION(p4, p5)
 		-- upvalues: createAnimationSchemaModule (ref)
-		return createAnimationSchemaModule(p7, p8)
+		return createAnimationSchemaModule(p4, p5)
 	end
 end
-function t.generateAssetSchema(value, p9, p10)
+function t.generateAssetSchema(value, p4, p5)
 	-- upvalues: t_1 (ref)
-	return t_1[value](p9, p10)
+	return t_1[value](p4, p5)
 end
 
-local _ = function(p11)
-	if not p11 then
+local _ = function(p4)
+	if not p4 then
 		return false
 	end
-	for i, v in p11:GetChildren() do
+	for i, v in p4:GetChildren() do
 		if v.Name == "R15Anim" then
 			return true
 		end
@@ -116,29 +116,29 @@ local _ = function(p11)
 	return false
 end
 
-function t.generateAnimationPackBundleSchema(p12)
+function t.generateAnimationPackBundleSchema(p5)
 	-- upvalues: getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), constantsModule (ref)
 	local t = { ClassName = "Model", _children = {} }
-	local var24 = getFFlagUGCValidationAnimationPackDisableModelStructureModule()
+	local var3 = getFFlagUGCValidationAnimationPackDisableModelStructureModule()
 	
-	if not var24 then
-		var24 = getFFlagUGCValidationAnimationPackFolderStructureModule()
+	if not var3 then
+		var3 = getFFlagUGCValidationAnimationPackFolderStructureModule()
 		
-		if var24 then
-			if p12 then
-				for i, v in p12:GetChildren() do
+		if var3 then
+			if p5 then
+				for i, v in p5:GetChildren() do
 					if v.Name == "R15Anim" then
-						var24 = true
+						var3 = true
 					end
 				end
-				var24 = false
+				var3 = false
 			else
-				var24 = false
+				var3 = false
 			end
 		end
 	end
 	for i, v in constantsModule.ANIMATION_ASSET_INFO do
-		if var24 then
+		if var3 then
 			table.insert(t._children, {
 				ClassName = "Folder",
 				Name = "R15Anim",

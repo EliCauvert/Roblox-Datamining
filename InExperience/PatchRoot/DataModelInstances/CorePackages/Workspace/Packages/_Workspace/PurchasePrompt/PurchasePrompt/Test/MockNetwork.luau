@@ -244,37 +244,37 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: promiseModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), getCatalogItemDetails (ref), getResellers (ref), getRobuxUpsellProductWithUniverseItemInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getUnifiedPurchaseFlowUserEligibility (ref), getSubscriptionProductInfo (ref), GetLookDetailsV2ProductInfo (ref)
 	local t
 	local _ = nil
 	
-	if p1 or p0 then
-		local var25 = function()
-			-- upvalues: p0 (ref), promiseModule (copy), p1 (ref)
-			return if p0 then promiseModule.resolve(p0) else promiseModule.reject(p1)
+	if p2 or p1 then
+		local var1 = function()
+			-- upvalues: p1 (ref), promiseModule (copy), p2 (ref)
+			return if p1 then promiseModule.resolve(p1) else promiseModule.reject(p2)
 		end
 		
 		t = {
-			getABTestGroup = var25,
-			getProductInfo = var25,
-			getPlayerOwns = var25,
-			performPurchase = var25,
-			loadAssetForEquip = var25,
-			getAccountInfo = var25,
-			getBalanceInfo = var25,
-			getBundleDetails = var25,
-			getProductPurchasableDetails = var25,
-			getCatalogItemDetails = if fFlagRefreshPriceOnRetryAfterUpsellModule then var25 else nil,
-			getResellers = if fFlagRefreshPriceOnRetryAfterUpsellModule then var25 else nil,
-			getRobuxUpsellProductWithUniverseItemInfo = var25,
-			postPremiumImpression = var25,
-			getPremiumUpsellPrecheck = var25,
-			getPurchaseWarning = var25,
-			postPurchaseWarningAcknowledge = var25,
-			checkUserPurchaseSettings = var25,
-			getUnifiedPurchaseFlowUserEligibility = var25,
-			getSubscriptionProductInfo = var25
+			getABTestGroup = var1,
+			getProductInfo = var1,
+			getPlayerOwns = var1,
+			performPurchase = var1,
+			loadAssetForEquip = var1,
+			getAccountInfo = var1,
+			getBalanceInfo = var1,
+			getBundleDetails = var1,
+			getProductPurchasableDetails = var1,
+			getCatalogItemDetails = if fFlagRefreshPriceOnRetryAfterUpsellModule then var1 else nil,
+			getResellers = if fFlagRefreshPriceOnRetryAfterUpsellModule then var1 else nil,
+			getRobuxUpsellProductWithUniverseItemInfo = var1,
+			postPremiumImpression = var1,
+			getPremiumUpsellPrecheck = var1,
+			getPurchaseWarning = var1,
+			postPurchaseWarningAcknowledge = var1,
+			checkUserPurchaseSettings = var1,
+			getUnifiedPurchaseFlowUserEligibility = var1,
+			getSubscriptionProductInfo = var1
 		}
 	else
 		t = {

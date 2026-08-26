@@ -4,9 +4,9 @@ local localizationService = require(foundation.Utility.Wrappers).Services.Locali
 local constantsModule = require(parent.Constants)
 local generatedTranslationsModule = require(foundation.Generated.Translations.GeneratedTranslations)
 
-local function createFoundationLocalizationTable(p0)
+local function createFoundationLocalizationTable(p1)
 	-- upvalues: constantsModule (ref), generatedTranslationsModule (ref)
-	local localization_table_name = p0:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME)
+	local localization_table_name = p1:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME)
 	
 	if localization_table_name == nil or not localization_table_name:IsA("LocalizationTable") then
 		local localizationTable = Instance.new("LocalizationTable")
@@ -14,7 +14,7 @@ local function createFoundationLocalizationTable(p0)
 		localizationTable.Archivable = false
 		localizationTable.SourceLocaleId = "en-us"
 		localizationTable:SetEntries(generatedTranslationsModule)
-		localizationTable.Parent = p0
+		localizationTable.Parent = p1
 		
 		return localizationTable
 	end
@@ -23,24 +23,24 @@ local function createFoundationLocalizationTable(p0)
 	return localization_table_name
 end
 
-local var4 = createFoundationLocalizationTable(foundation)
+local var1 = createFoundationLocalizationTable(foundation)
 local t = {}
 
 local function getTranslatorForLocale(p1)
-	-- upvalues: var4 (write), createFoundationLocalizationTable (ref), foundation (ref), t (write), constantsModule (ref)
-	if var4 == nil or var4.Parent == nil then
-		var4 = createFoundationLocalizationTable(foundation)
+	-- upvalues: var1 (write), createFoundationLocalizationTable (ref), foundation (ref), t (write), constantsModule (ref)
+	if var1 == nil or var1.Parent == nil then
+		var1 = createFoundationLocalizationTable(foundation)
 		t = {}
 	end
-	local var10 = t[p1]
+	local var2 = t[p1]
 	
-	if var10 then
-		return var10
+	if var2 then
+		return var2
 	end
-	local var11 = foundation:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME):GetTranslator(p1)
-	t[p1] = var11
+	local var3 = foundation:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME):GetTranslator(p1)
+	t[p1] = var3
 	
-	return var11
+	return var3
 end
 
 local function _()
@@ -48,23 +48,23 @@ local function _()
 	return getTranslatorForLocale(localizationService.RobloxLocaleId)
 end
 
-local function formatByKeyWithFallback(p2, p3, p4)
+local function formatByKeyWithFallback(p1, p2, p3)
 	-- upvalues: getTranslatorForLocale (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p4 (ref), p2 (ref), p3 (ref)
-		return p4:FormatByKey(p2, p3)
+		-- upvalues: p3 (ref), p1 (ref), p2 (ref)
+		return p3:FormatByKey(p1, p2)
 	end)
 	
-	return if ok then status elseif p4.LocaleId == "zh-cjv" then "" else getTranslatorForLocale("en-us"):FormatByKey(p2, p3)
+	return if ok then status elseif p3.LocaleId == "zh-cjv" then "" else getTranslatorForLocale("en-us"):FormatByKey(p1, p2)
 end
 
 return {
-	FormatByKey = function(_, p5, p6)
+	FormatByKey = function(_, p1, p2)
 		-- upvalues: formatByKeyWithFallback (ref), getTranslatorForLocale (ref), localizationService (ref)
-		return formatByKeyWithFallback(p5, p6, getTranslatorForLocale(localizationService.RobloxLocaleId))
+		return formatByKeyWithFallback(p1, p2, getTranslatorForLocale(localizationService.RobloxLocaleId))
 	end,
-	FormatByKeyForLocale = function(_, p7, p8, p9)
+	FormatByKeyForLocale = function(_, p1, p2, p3)
 		-- upvalues: formatByKeyWithFallback (ref), getTranslatorForLocale (ref)
-		return formatByKeyWithFallback(p7, p9, getTranslatorForLocale(p8))
+		return formatByKeyWithFallback(p1, p3, getTranslatorForLocale(p2))
 	end
 }

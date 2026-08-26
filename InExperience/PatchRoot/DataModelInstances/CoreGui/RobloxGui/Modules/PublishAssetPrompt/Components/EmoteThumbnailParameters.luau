@@ -17,15 +17,15 @@ return {
 		thumbnailHorizontalOffset = 0,
 		thumbnailCharacterRotation = 0
 	},
-	encodeAsATable = function(p0)
+	encodeAsATable = function(p1)
 		return {
 			ThumbnailBundleId = 515,
-			ThumbnailCharacterRotation = p0.thumbnailCharacterRotation,
-			ThumbnailHorizontalOffset = p0.thumbnailHorizontalOffset,
-			ThumbnailVerticalOffset = p0.thumbnailVerticalOffset,
-			ThumbnailZoom = p0.thumbnailZoom,
-			ThumbnailKeyframe = p0.thumbnailKeyframe,
-			ThumbnailTime = p0.thumbnailTime
+			ThumbnailCharacterRotation = p1.thumbnailCharacterRotation,
+			ThumbnailHorizontalOffset = p1.thumbnailHorizontalOffset,
+			ThumbnailVerticalOffset = p1.thumbnailVerticalOffset,
+			ThumbnailZoom = p1.thumbnailZoom,
+			ThumbnailKeyframe = p1.thumbnailKeyframe,
+			ThumbnailTime = p1.thumbnailTime
 		}
 	end
 }

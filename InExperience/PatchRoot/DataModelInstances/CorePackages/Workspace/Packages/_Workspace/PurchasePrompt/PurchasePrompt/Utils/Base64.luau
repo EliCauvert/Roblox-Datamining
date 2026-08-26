@@ -1,5 +1,5 @@
 ﻿local t = {
-	MakeEncoder = function(p0, p1, p2)
+	MakeEncoder = function(p1, p2, p3)
 		local t = {}
 		
 		for i, v in pairs({
@@ -65,9 +65,9 @@
 			"7",
 			"8",
 			"9",
-			p0 or "+",
-			p1 or "/",
-			p2 or "="
+			p1 or "+",
+			p2 or "/",
+			p3 or "="
 		}) do
 			t[i] = v:byte()
 		end
@@ -79,41 +79,41 @@ local char = string.char
 local concat = table.concat
 local extract = bit32.extract
 
-function t.Encode(p3, p4, p5)
+function t.Encode(p4, p5, p6)
 	-- upvalues: var1 (ref), extract (ref), char (ref), concat (ref)
-	p4 = p4 or var1
+	p5 = p5 or var1
 	local t = {}
-	local var5 = 1
-	local p3Count = #p3
-	local var7 = p3Count % 3
+	local var2 = 1
+	local p3Count = #p4
+	local var3 = p3Count % 3
 	local t_1 = {}
 	
-	for i = 1, p3Count - var7, 3 do
-		local var13
-		local var9, var10, var11 = p3:byte(i, i + 2)
-		local var12 = var9 * 65536 + var10 * 256 + var11
+	for i = 1, p3Count - var3, 3 do
+		local var4
+		local var5, var6, var7 = p4:byte(i, i + 2)
+		local var8 = var5 * 65536 + var6 * 256 + var7
 		local _ = nil
 		
-		if p5 then
-			var13 = t_1[var12]
+		if p6 then
+			var4 = t_1[var8]
 			
-			if not var13 then
-				var13 = char(p4[extract(var12, 18, 6)], p4[extract(var12, 12, 6)], p4[extract(var12, 6, 6)], p4[extract(var12, 0, 6)])
-				t_1[var12] = var13
+			if not var4 then
+				var4 = char(p5[extract(var8, 18, 6)], p5[extract(var8, 12, 6)], p5[extract(var8, 6, 6)], p5[extract(var8, 0, 6)])
+				t_1[var8] = var4
 			end
 		else
-			var13 = char(p4[extract(var12, 18, 6)], p4[extract(var12, 12, 6)], p4[extract(var12, 6, 6)], p4[extract(var12, 0, 6)])
+			var4 = char(p5[extract(var8, 18, 6)], p5[extract(var8, 12, 6)], p5[extract(var8, 6, 6)], p5[extract(var8, 0, 6)])
 		end
-		t[var5] = var13
-		var5 += 1
+		t[var2] = var4
+		var2 += 1
 	end
-	if var7 == 2 then
-		local var14, var15 = p3:byte(p3Count - 1, p3Count)
-		local var16 = var14 * 65536 + var15 * 256
-		t[var5] = char(p4[extract(var16, 18, 6)], p4[extract(var16, 12, 6)], p4[extract(var16, 6, 6)], p4[64])
-	elseif var7 == 1 then
-		local var17 = p3:byte(p3Count) * 65536
-		t[var5] = char(p4[extract(var17, 18, 6)], p4[extract(var17, 12, 6)], p4[64], p4[64])
+	if var3 == 2 then
+		local var9, var10 = p4:byte(p3Count - 1, p3Count)
+		local var11 = var9 * 65536 + var10 * 256
+		t[var2] = char(p5[extract(var11, 18, 6)], p5[extract(var11, 12, 6)], p5[extract(var11, 6, 6)], p5[64])
+	elseif var3 == 1 then
+		local var12 = p4:byte(p3Count) * 65536
+		t[var2] = char(p5[extract(var12, 18, 6)], p5[extract(var12, 12, 6)], p5[64], p5[64])
 	end
 	return concat(t)
 end

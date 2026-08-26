@@ -40,9 +40,9 @@ local var3 = (function()
 	function reportAbuseMenuNewContainerPage.SetHub(_, p1)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage.HubRef = p1
-		reportAbuseMenuNewContainerPage.HubRef.SettingsShowSignal:connect(function(p1)
+		reportAbuseMenuNewContainerPage.HubRef.SettingsShowSignal:connect(function(p2)
 			-- upvalues: reportAbuseMenuNewContainerPage (copy)
-			if not p1 then
+			if not p2 then
 				reportAbuseMenuNewContainerPage:onSettingsHidden()
 			end
 		end)
@@ -96,9 +96,9 @@ local var3 = (function()
 	end
 	
 	reportAbuseMenuNewContainerPage.TabHeader.Name = "ReportAbuseTab"
-	local var1 = if fFlagStandardizeSafetyIcon then { name = iconName.Flag, variant = iconVariant.Regular } else uiblox["icons/actions/feedback"]
-	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Icon.Text = var1.name
-	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[var1.variant]
+	local var4 = if fFlagStandardizeSafetyIcon then { name = iconName.Flag, variant = iconVariant.Regular } else uiblox["icons/actions/feedback"]
+	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Icon.Text = var4.name
+	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[var4.variant]
 	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Title.Text = "Report"
 	reportAbuseMenuNewContainerPage.Page.Name = "ReportAbuseMenuNewContainerPage"
 	reportAbuseMenuNewContainerPage.ShouldShowBottomBar = not fFlagEnableSideSheet
@@ -142,8 +142,8 @@ local var3 = (function()
 			reportAbuseMenuNewContainerPage:showReportSentPage(p1)
 		end,
 		onReportComplete = function(p1)
-			-- upvalues: fFlagInExperienceReportClosingBugfix (copy), var1 (copy), var2 (copy), reportAbuseMenuNewContainerPage (ref)
-			if fFlagInExperienceReportClosingBugfix and var1 then
+			-- upvalues: fFlagInExperienceReportClosingBugfix (copy), var4 (copy), var2 (copy), reportAbuseMenuNewContainerPage (ref)
+			if fFlagInExperienceReportClosingBugfix and var4 then
 				var2:setShortcutBar(nil)
 			end
 			reportAbuseMenuNewContainerPage:showAlert(p1, "Ok", function()
@@ -151,7 +151,7 @@ local var3 = (function()
 				reportAbuseMenuNewContainerPage:HideMenu()
 			end)
 		end,
-		onDropdownMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule and var1 then function(p1)
+		onDropdownMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule and var4 then function(p1)
 			-- upvalues: var2 (copy)
 			var2:setHideShortcutBar("InExperienceReportDropdown", p1)
 		end else nil,

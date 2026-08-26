@@ -6,51 +6,51 @@ local forceEnableQueueAutoJoinNewServer2 = game:DefineFastFlag("ForceEnableQueue
 local forceEnableQueueJoinNewServerButton2 = game:DefineFastFlag("ForceEnableQueueJoinNewServerButton2", false)
 local placeJoinStateEnabled = game:DefineFastFlag("EnableQueueExperimentation2", false) and game:GetEngineFeature("PlaceJoinStateEnabled")
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: experimentCacheManager (ref), fStringQueueExpLayer (ref)
-	local var6 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
+	local var1 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
 	
-	return if var6 and var6[p0] ~= nil then var6[p0] else false
+	return if var1 and var1[p1] ~= nil then var1[p1] else false
 end
 
 return {
 	getIsJoinNewServerButtonEnabled = function()
 		-- upvalues: forceEnableQueueJoinNewServerButton2 (ref), placeJoinStateEnabled (ref), queueEnableJoinNewServerVariant (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
-		local var7 = forceEnableQueueJoinNewServerButton2
+		local var1 = forceEnableQueueJoinNewServerButton2
 		
-		if not var7 then
-			var7 = placeJoinStateEnabled
+		if not var1 then
+			var1 = placeJoinStateEnabled
 			
-			if var7 then
-				local var8 = queueEnableJoinNewServerVariant
-				local var9 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
+			if var1 then
+				local var2 = queueEnableJoinNewServerVariant
+				local var3 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
 				
-				if var9 and var9[var8] ~= nil then
-					return var9[var8]
+				if var3 and var3[var2] ~= nil then
+					return var3[var2]
 				end
-				var7 = false
+				var1 = false
 			end
 		end
-		return var7
+		return var1
 	end,
 	getIsAutoJoinNewServerEnabled = function()
 		-- upvalues: forceEnableQueueAutoJoinNewServer2 (ref), placeJoinStateEnabled (ref), queueEnableAutoJoinNewServerVariant (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
-		local var10 = forceEnableQueueAutoJoinNewServer2
+		local var1 = forceEnableQueueAutoJoinNewServer2
 		
-		if not var10 then
-			var10 = placeJoinStateEnabled
+		if not var1 then
+			var1 = placeJoinStateEnabled
 			
-			if var10 then
-				local var11 = queueEnableAutoJoinNewServerVariant
-				local var12 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
+			if var1 then
+				local var2 = queueEnableAutoJoinNewServerVariant
+				local var3 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
 				
-				if var12 and var12[var11] ~= nil then
-					return var12[var11]
+				if var3 and var3[var2] ~= nil then
+					return var3[var2]
 				end
-				var10 = false
+				var1 = false
 			end
 		end
-		return var10
+		return var1
 	end,
 	isInExperiment = function()
 		-- upvalues: placeJoinStateEnabled (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)

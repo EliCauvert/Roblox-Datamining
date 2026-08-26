@@ -8,26 +8,26 @@ local browserService = game:GetService("BrowserService")
 local httpService = game:GetService("HttpService")
 local webViewService = game:GetService("WebViewService")
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useRef (ref), useCallback (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), browserService (ref), httpService (ref), useEffect (ref)
-	local var4 = useRef(nil)
-	local var5 = useCallback(function()
-		-- upvalues: var4 (ref)
-		if var4.current then
-			var4.current:Disconnect()
-			var4.current = nil
+	local var1 = useRef(nil)
+	local var2 = useCallback(function()
+		-- upvalues: var1 (ref)
+		if var1.current then
+			var1.current:Disconnect()
+			var1.current = nil
 		end
-	end, { var4 })
-	local var6 = useCallback(function()
-		-- upvalues: getFFlagEnableUnifiedWebViews (copy), var5 (ref), var4 (ref), webViewService (copy), p0 (ref), p1 (ref), browserService (copy), httpService (copy)
+	end, { var1 })
+	local var3 = useCallback(function()
+		-- upvalues: getFFlagEnableUnifiedWebViews (copy), var2 (ref), var1 (ref), webViewService (copy), p1 (ref), p2 (ref), browserService (copy), httpService (copy)
 		if getFFlagEnableUnifiedWebViews() then
-			var5()
-			var4.current = webViewService.OnWindowClosed:Connect(function()
-				-- upvalues: webViewService (copy), var5 (copy)
+			var2()
+			var1.current = webViewService.OnWindowClosed:Connect(function()
+				-- upvalues: webViewService (copy), var2 (copy)
 				webViewService:CloseWindow()
-				var5()
+				var2()
 			end)
-			webViewService:OpenWindow(p0, p1, true)
+			webViewService:OpenWindow(p1, p2, true)
 			
 			return
 		end
@@ -36,17 +36,17 @@ return function(p0, p1)
 			visible = true,
 			isGenericWebview = true,
 			enableOverlayReplacement = true,
-			url = p0,
-			title = p1
+			url = p1,
+			title = p2
 		}))
-	end, { p0, p1, var5 })
+	end, { p1, p2, var2 })
 	useEffect(function()
-		-- upvalues: var5 (ref)
+		-- upvalues: var2 (ref)
 		return function()
-			-- upvalues: var5 (copy)
-			var5()
+			-- upvalues: var2 (copy)
+			var2()
 		end
-	end, { var5 })
+	end, { var2 })
 	
-	return var6
+	return var3
 end

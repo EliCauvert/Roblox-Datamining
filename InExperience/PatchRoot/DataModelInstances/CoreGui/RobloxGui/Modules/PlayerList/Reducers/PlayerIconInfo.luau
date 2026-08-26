@@ -4,47 +4,47 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local actions = script.Parent.Parent.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.AddPlayer).name] = function(p0, p1)
+	[require(actions.AddPlayer).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, {
-			[p1.userId] = {
+		return cryoModule.Dictionary.join(p1, {
+			[p2.userId] = {
 				avatarIcon = nil,
 				specialGroupIcon = nil,
-				isPlaceOwner = game.CreatorType == Enum.CreatorType.User and p1.userId == game.CreatorId
+				isPlaceOwner = game.CreatorType == Enum.CreatorType.User and p2.userId == game.CreatorId
 			}
 		})
 	end,
-	[require(actions.RemovePlayer).name] = function(p2, p3)
+	[require(actions.RemovePlayer).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p2, { [p3.userId] = cryoModule.None })
+		return cryoModule.Dictionary.join(p1, { [p2.userId] = cryoModule.None })
 	end,
-	[require(actions.SetPlayerAvatarIcon).name] = function(p4, p5)
+	[require(actions.SetPlayerAvatarIcon).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p4, {
-			[p5.userId] = {
-				isPlaceOwner = p4[p5.userId].isPlaceOwner,
-				avatarIcon = p5.avatarIcon,
-				specialGroupIcon = p4[p5.userId].specialGroupIcon
+		return cryoModule.Dictionary.join(p1, {
+			[p2.userId] = {
+				isPlaceOwner = p1[p2.userId].isPlaceOwner,
+				avatarIcon = p2.avatarIcon,
+				specialGroupIcon = p1[p2.userId].specialGroupIcon
 			}
 		})
 	end,
-	[require(actions.SetPlayerIsCreator).name] = function(p6, p7)
+	[require(actions.SetPlayerIsCreator).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p6, {
-			[p7.userId] = {
-				isPlaceOwner = p7.isCreator,
-				avatarIcon = p6[p7.userId].avatarIcon,
-				specialGroupIcon = p6[p7.userId].specialGroupIcon
+		return cryoModule.Dictionary.join(p1, {
+			[p2.userId] = {
+				isPlaceOwner = p2.isCreator,
+				avatarIcon = p1[p2.userId].avatarIcon,
+				specialGroupIcon = p1[p2.userId].specialGroupIcon
 			}
 		})
 	end,
-	[require(actions.SetPlayerSpecialGroupIcon).name] = function(p8, p9)
+	[require(actions.SetPlayerSpecialGroupIcon).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p8, {
-			[p9.userId] = {
-				isPlaceOwner = p8[p9.userId].isPlaceOwner,
-				avatarIcon = p8[p9.userId].avatarIcon,
-				specialGroupIcon = p9.specialGroupIcon
+		return cryoModule.Dictionary.join(p1, {
+			[p2.userId] = {
+				isPlaceOwner = p1[p2.userId].isPlaceOwner,
+				avatarIcon = p1[p2.userId].avatarIcon,
+				specialGroupIcon = p2.specialGroupIcon
 			}
 		})
 	end

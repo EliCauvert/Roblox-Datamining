@@ -13,7 +13,7 @@ local settingsShowSignal = coreScriptsCommonModule.SettingsShowSignal
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-local function HeaderTextContainer(p0)
+local function HeaderTextContainer(p1)
 	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), view (ref), headerText (ref)
 	return reactModule.createElement(view, {
 		tag = "auto-xy",
@@ -23,14 +23,14 @@ local function HeaderTextContainer(p0)
 		}
 	}, {
 		Text = reactModule.createElement(headerText, {
-			text = useLocalization({ headerText = p0.text }).headerText
+			text = useLocalization({ headerText = p1.text }).headerText
 		})
 	})
 end
 
 return function(value)
 	-- upvalues: create (ref), settingsShowSignal (ref), reactRobloxModule (ref), reactModule (ref), inExperienceMenuReactModule (ref), HeaderTextContainer (ref)
-	local var9 = create("Frame")({
+	local var1 = create("Frame")({
 		Name = "HeaderWrapper",
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 0),
@@ -38,23 +38,23 @@ return function(value)
 		LayoutOrder = value.layoutOrder,
 		Parent = value.parent
 	})
-	local var10 = nil
+	local var2 = nil
 	settingsShowSignal:connect(function(p1)
-		-- upvalues: var10 (write), var9 (ref), value (ref), reactRobloxModule (copy), reactModule (copy), inExperienceMenuReactModule (copy), HeaderTextContainer (copy)
+		-- upvalues: var2 (write), var1 (ref), value (ref), reactRobloxModule (copy), reactModule (copy), inExperienceMenuReactModule (copy), HeaderTextContainer (copy)
 		if p1 then
-			var9.Parent = value.parent
-			var10 = reactRobloxModule.createRoot(var9)
-			var10:render(reactModule.createElement(inExperienceMenuReactModule, nil, {
+			var1.Parent = value.parent
+			var2 = reactRobloxModule.createRoot(var1)
+			var2:render(reactModule.createElement(inExperienceMenuReactModule, nil, {
 				HeaderTextContainer = reactModule.createElement(HeaderTextContainer, { text = value.headerText })
 			}))
 			
 			return
-		elseif var10 then
-			var10:unmount()
-			var10 = nil
-			var9.Parent = nil
+		elseif var2 then
+			var2:unmount()
+			var2 = nil
+			var1.Parent = nil
 		end
 	end)
 	
-	return var9
+	return var1
 end

@@ -9,51 +9,51 @@ local fetchModule = require(graphQLServer.Parent.Fetch)
 local fetch = fetchModule.fetch
 local response = fetchModule.Response
 local t = {}
-local var4 = urlBuilder.new({
+local var1 = urlBuilder.new({
 	path = "access-management/v1/feature-access",
 	base = urlBase.APIS,
 	query = { featureNames = "{featureNames}" }
 })
 
-function t.getFeatureAccessFromFeatureNamesList(p0, p1)
-	-- upvalues: fetch (ref), promiseModule (ref), var4 (ref), response (ref), graphQLError (ref)
-	local var6 = p1 or fetch
+function t.getFeatureAccessFromFeatureNamesList(p1, p2)
+	-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), response (ref), graphQLError (ref)
+	local var2 = p2 or fetch
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: p0 (ref), var4 (copy), var6 (ref), response (copy), graphQLError (copy)
-		local var7 = var6(var4({ featureNames = table.concat(p0, ",") }), { method = "GET" }):catch(function()
+	return promiseModule.new(function(p3, p4)
+		-- upvalues: p1 (ref), var1 (copy), var2 (ref), response (copy), graphQLError (copy)
+		local var3 = var2(var1({ featureNames = table.concat(p1, ",") }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
-		if var7.status == 304 then
-			p3(graphQLError.new("Got Response: 304, using cached data instead"))
+		if var3.status == 304 then
+			p4(graphQLError.new("Got Response: 304, using cached data instead"))
 			
 			return
-		elseif not var7.ok then
-			p3(graphQLError.new("Failed to find feature access values"))
+		elseif not var3.ok then
+			p4(graphQLError.new("Failed to find feature access values"))
 			
 			return
 		end
-		local var8 = var7:json():catch(function()
+		local var4 = var3:json():catch(function()
 			return nil
 		end):expect()
 		
-		if not var8 then
-			p3(graphQLError.new("Failed to decode HTTP response as JSON for AMP Feature Access API"))
+		if not var4 then
+			p4(graphQLError.new("Failed to decode HTTP response as JSON for AMP Feature Access API"))
 			
 			return
 		end
 		local t = {}
 		
-		for i, v in var8.features do
+		for i, v in var4.features do
 			table.insert(t, { featureName = v.featureName, access = v.access })
 		end
-		p2({ features = t })
+		p3({ features = t })
 	end)
 end
 
-local var5 = urlBuilder.new({
+local var3 = urlBuilder.new({
 	path = "access-management/v1/upsell-feature-access",
 	base = urlBase.APIS,
 	query = {
@@ -80,47 +80,47 @@ local var5 = urlBuilder.new({
 	}
 })
 
-function t.getUpsellFeatureAccessFromFeatureName(p4, p5, p6, p7, p8)
-	-- upvalues: fetch (ref), promiseModule (ref), var5 (ref), response (ref), graphQLError (ref)
-	local var10 = p6 or fetch
+function t.getUpsellFeatureAccessFromFeatureName(p3, p4, p5, p6, p7)
+	-- upvalues: fetch (ref), promiseModule (ref), var3 (ref), response (ref), graphQLError (ref)
+	local var4 = p5 or fetch
 	
-	return promiseModule.new(function(p9, p10)
-		-- upvalues: p5 (ref), var5 (copy), p4 (ref), p7 (ref), p8 (ref), var10 (ref), response (copy), graphQLError (copy)
-		local var11 = var10(var5({
-			featureName = p4,
-			successfulActions = table.concat(p5, ","),
-			nameSpace = p7,
-			extraParameters = p8
+	return promiseModule.new(function(p8, p9)
+		-- upvalues: p4 (ref), var3 (copy), p3 (ref), p6 (ref), p7 (ref), var4 (ref), response (copy), graphQLError (copy)
+		local var5 = var4(var3({
+			featureName = p3,
+			successfulActions = table.concat(p4, ","),
+			nameSpace = p6,
+			extraParameters = p7
 		}), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
-		if var11.status == 304 then
-			p10(graphQLError.new("Got Response: 304, using cached data instead"))
+		if var5.status == 304 then
+			p9(graphQLError.new("Got Response: 304, using cached data instead"))
 			
 			return
-		elseif not var11.ok then
-			p10(graphQLError.new("Failed to find upsell feature access values"))
+		elseif not var5.ok then
+			p9(graphQLError.new("Failed to find upsell feature access values"))
 			
 			return
 		end
-		local var12 = var11:json():catch(function()
+		local var6 = var5:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var12 then
-			p9({
-				featureName = var12.featureName,
-				access = var12.access,
-				recourse = var12.recourse,
-				recourses = var12.recourses,
-				shouldPrompt = var12.shouldPrompt
+		if var6 then
+			p8({
+				featureName = var6.featureName,
+				access = var6.access,
+				recourse = var6.recourse,
+				recourses = var6.recourses,
+				shouldPrompt = var6.shouldPrompt
 			})
 			
 			return
 		end
-		p10(graphQLError.new("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API"))
+		p9(graphQLError.new("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API"))
 	end)
 end
 

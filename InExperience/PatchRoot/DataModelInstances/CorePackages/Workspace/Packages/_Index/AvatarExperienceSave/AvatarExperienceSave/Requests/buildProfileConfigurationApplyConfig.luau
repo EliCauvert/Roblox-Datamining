@@ -1,14 +1,14 @@
-﻿return function(p0)
-	if p0.BackgroundAssetId == nil and p0.FrameAssetId == nil then
+﻿return function(p1)
+	if p1.BackgroundAssetId == nil and p1.FrameAssetId == nil then
 		error("ProfileConfiguration apply config must include BackgroundAssetId or FrameAssetId")
 	end
 	local t = {}
 	
-	if p0.BackgroundAssetId ~= nil then
-		t.BackgroundAssetId = p0.BackgroundAssetId
+	if p1.BackgroundAssetId ~= nil then
+		t.BackgroundAssetId = p1.BackgroundAssetId
 	end
-	if p0.FrameAssetId ~= nil then
-		t.FrameAssetId = p0.FrameAssetId
+	if p1.FrameAssetId ~= nil then
+		t.FrameAssetId = p1.FrameAssetId
 	end
 	return t
 end

@@ -15,9 +15,9 @@ local t = {
 	[itemTileEnumsModule.ItemIconType.DynamicHead] = imagesModule["icons/status/dynamicHead_small"]
 }
 itemIcon.validateProps = tModule.strictInterface({
-	itemIconType = tModule.intersection(itemTileEnumsModule.ItemIconType.isEnumValue, function(p0)
+	itemIconType = tModule.intersection(itemTileEnumsModule.ItemIconType.isEnumValue, function(p1)
 		-- upvalues: t (ref)
-		if t[p0] then
+		if t[p1] then
 			return true
 		end
 		return false, "Unknown ItemType " .. p0
@@ -27,10 +27,10 @@ itemIcon.validateProps = tModule.strictInterface({
 function itemIcon.render(p1)
 	-- upvalues: t (ref), imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref)
 	local itemIconType = t[p1.props.itemIconType]
-	local var9 = itemIconType.ImageRectSize / imagesModule.ImagesResolutionScale
+	local var1 = itemIconType.ImageRectSize / imagesModule.ImagesResolutionScale
 	
 	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), imageSetComponentModule (copy), itemIconType (ref), UIBloxConfigModule (copy), var9 (ref)
+		-- upvalues: roactModule (copy), imageSetComponentModule (copy), itemIconType (ref), UIBloxConfigModule (copy), var1 (ref)
 		local theme = p2.Theme
 		local tokens = p2.Tokens
 		
@@ -41,7 +41,7 @@ function itemIcon.render(p1)
 			ImageColor3 = theme.IconEmphasis.Color,
 			ImageTransparency = theme.IconEmphasis.Transparency,
 			Position = UDim2.new(1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_200 else -tokens.Global.Size_100, 1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_200 else -tokens.Global.Size_100),
-			Size = UDim2.new(0, var9.X, 0, var9.Y)
+			Size = UDim2.new(0, var1.X, 0, var1.Y)
 		})
 	end)
 end

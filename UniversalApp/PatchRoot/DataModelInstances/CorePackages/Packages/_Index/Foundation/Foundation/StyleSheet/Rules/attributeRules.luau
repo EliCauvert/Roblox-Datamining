@@ -6,10 +6,10 @@ local cornerRulesModule = require(script.Parent.cornerRules)
 local tokenAttributePascalNameModule = require(script.Parent.Parent.tokenAttributePascalName)
 
 local function kebabToPascal(p1)
-	return p1:gsub("^%-?(.)", function(p1)
-		return p1:upper()
-	end):gsub("%-(.)", function(p1)
-		return p1:upper()
+	return p1:gsub("^%-?(.)", function(p2)
+		return p2:upper()
+	end):gsub("%-(.)", function(p2)
+		return p2:upper()
 	end)
 end
 
@@ -75,41 +75,41 @@ local function ListLayoutSpacingRules(p1, p2)
 	return dashModule.joinArrays(t, t_1)
 end
 
-local _ = function(p1)
+local _ = function(p3)
 	-- upvalues: cornerRulesModule (ref), kebabToPascal (ref)
-	return cornerRulesModule(p1, function(p1)
+	return cornerRulesModule(p3, function(p4)
 		-- upvalues: kebabToPascal (copy)
-		local var1 = kebabToPascal(p1.name)
+		local var3 = kebabToPascal(p4.name)
 		
 		return {
-			cornerValue = `$Radius{var1}`,
-			attributes = { { name = `Radius{var1}`, value = p1.size } }
+			cornerValue = `$Radius{var3}`,
+			attributes = { { name = `Radius{var3}`, value = p4.size } }
 		}
 	end)
 end
 
-local function SizeRules(p1)
+local function SizeRules(p3)
 	-- upvalues: kebabToPascal (ref)
 	local t = {}
 	
-	for i, v in p1 do
-		local var1 = kebabToPascal(v.name)
+	for i, v in p3 do
+		local var3 = kebabToPascal(v.name)
 		table.insert(t, {
 			tag = `size-{v.name}`,
-			properties = { Size = `$Size{var1}` },
+			properties = { Size = `$Size{var3}` },
 			attributes = {
-				{ name = `Size{var1}`, value = UDim2.new(v.size, v.size) }
+				{ name = `Size{var3}`, value = UDim2.new(v.size, v.size) }
 			}
 		})
 		
-		for i_1, v_1 in p1 do
-			local var2 = kebabToPascal(v_1.name)
+		for i_1, v_1 in p3 do
+			local var4 = kebabToPascal(v_1.name)
 			table.insert(t, {
 				tag = `size-{v.name}-{v_1.name}`,
-				properties = { Size = `$Size{var1}_{var2}` },
+				properties = { Size = `$Size{var3}_{var4}` },
 				attributes = {
 					{
-						name = `Size{var1}_{var2}`,
+						name = `Size{var3}_{var4}`,
 						value = UDim2.new(v.size, v_1.size)
 					}
 				}
@@ -119,22 +119,22 @@ local function SizeRules(p1)
 	return t
 end
 
-local function TypographyRules(p1, p2)
+local function TypographyRules(p4, p5)
 	-- upvalues: kebabToPascal (ref)
 	local t = {}
 	
-	for i, v in p1 do
-		local var1 = kebabToPascal(i)
+	for i, v in p4 do
+		local var5 = kebabToPascal(i)
 		table.insert(t, {
 			tag = `text-{i}`,
 			properties = {
-				Font = `$Font{var1}`,
-				TextSize = `$TextSize{var1}`,
+				Font = `$Font{var5}`,
+				TextSize = `$TextSize{var5}`,
 				LineHeight = v.LineHeight
 			},
 			attributes = {
-				{ name = `Font{var1}`, value = v.Font },
-				{ name = `TextSize{var1}`, value = v.TextSize }
+				{ name = `Font{var5}`, value = v.Font },
+				{ name = `TextSize{var5}`, value = v.TextSize }
 			},
 			children = {
 				{
@@ -142,13 +142,13 @@ local function TypographyRules(p1, p2)
 					priority = 0,
 					tag = `text-{i}`,
 					properties = {
-						PaddingTop = `$TextPadding{var1}`,
-						PaddingBottom = `$TextPadding{var1}`
+						PaddingTop = `$TextPadding{var5}`,
+						PaddingBottom = `$TextPadding{var5}`
 					},
 					attributes = {
 						{
-							name = `TextPadding{var1}`,
-							value = UDim.new(0, (v.TextSize / p2 * (v.LineHeight * p2) - v.TextSize) / 2)
+							name = `TextPadding{var5}`,
+							value = UDim.new(0, (v.TextSize / p5 * (v.LineHeight * p5) - v.TextSize) / 2)
 						}
 					}
 				}
@@ -158,7 +158,7 @@ local function TypographyRules(p1, p2)
 	return t
 end
 
-local function PaddingRules(p1, p2)
+local function PaddingRules(p6, p7)
 	-- upvalues: kebabToPascal (ref)
 	local t = {}
 	local t_1 = {
@@ -170,61 +170,61 @@ local function PaddingRules(p1, p2)
 		right = { "PaddingRight" }
 	}
 	
-	for i, v in p1 do
-		local var1 = kebabToPascal(v.name)
+	for i, v in p6 do
+		local var6 = kebabToPascal(v.name)
 		table.insert(t, {
 			pseudo = "UIPadding",
 			tag = `padding-{v.name}`,
 			properties = {
-				PaddingTop = `$Padding{var1}`,
-				PaddingBottom = `$Padding{var1}`,
-				PaddingLeft = `$Padding{var1}`,
-				PaddingRight = `$Padding{var1}`
+				PaddingTop = `$Padding{var6}`,
+				PaddingBottom = `$Padding{var6}`,
+				PaddingLeft = `$Padding{var6}`,
+				PaddingRight = `$Padding{var6}`
 			},
-			attributes = { { name = `Padding{var1}`, value = v.size } }
+			attributes = { { name = `Padding{var6}`, value = v.size } }
 		})
 	end
-	for i_1, v_1 in p2 do
-		local var2 = kebabToPascal(v_1.name)
+	for i_1, v_1 in p7 do
+		local var7 = kebabToPascal(v_1.name)
 		table.insert(t, {
 			pseudo = "UIPadding",
 			tag = `margin-{v_1.name}`,
 			properties = {
-				PaddingTop = `$Margin{var2}`,
-				PaddingBottom = `$Margin{var2}`,
-				PaddingLeft = `$Margin{var2}`,
-				PaddingRight = `$Margin{var2}`
+				PaddingTop = `$Margin{var7}`,
+				PaddingBottom = `$Margin{var7}`,
+				PaddingLeft = `$Margin{var7}`,
+				PaddingRight = `$Margin{var7}`
 			},
-			attributes = { { name = `Margin{var2}`, value = v_1.size } }
+			attributes = { { name = `Margin{var7}`, value = v_1.size } }
 		})
 	end
 	for i_2, v_2 in t_1 do
-		for i_3, v_3 in p1 do
-			local var3 = kebabToPascal(v_3.name)
+		for i_3, v_3 in p6 do
+			local var8 = kebabToPascal(v_3.name)
 			local t_2 = {}
 			
 			for i_5, v_5 in v_2 do
-				t_2[v_5] = `$Padding{var3}`
+				t_2[v_5] = `$Padding{var8}`
 			end
 			table.insert(t, {
 				pseudo = "UIPadding",
 				tag = `padding-{i_2}-{v_3.name}`,
 				properties = t_2,
-				attributes = { { name = `Padding{var3}`, value = v_3.size } }
+				attributes = { { name = `Padding{var8}`, value = v_3.size } }
 			})
 		end
-		for i_3, v_3 in p2 do
-			local var4 = kebabToPascal(v_3.name)
+		for i_3, v_3 in p7 do
+			local var9 = kebabToPascal(v_3.name)
 			local t_2 = {}
 			
 			for i_5, v_5 in v_2 do
-				t_2[v_5] = `$Margin{var4}`
+				t_2[v_5] = `$Margin{var9}`
 			end
 			table.insert(t, {
 				pseudo = "UIPadding",
 				tag = `margin-{i_2}-{v_3.name}`,
 				properties = t_2,
-				attributes = { { name = `Margin{var4}`, value = v_3.size } }
+				attributes = { { name = `Margin{var9}`, value = v_3.size } }
 			})
 		end
 	end
@@ -245,7 +245,7 @@ local t = {
 	None = {}
 }
 
-local function DefaultRules(p1)
+local function DefaultRules(p8)
 	return {
 		{
 			tag = "gui-object-defaults",
@@ -259,14 +259,14 @@ local function DefaultRules(p1)
 			attributes = {
 				{
 					name = "FontBodyLarge",
-					value = p1.Typography.BodyLarge.Font
+					value = p8.Typography.BodyLarge.Font
 				}
 			}
 		}
 	}
 end
 
-local function DefaultColorRules(p1)
+local function DefaultColorRules(p8)
 	return {
 		{
 			tag = "text-color-defaults",
@@ -278,35 +278,35 @@ local function DefaultColorRules(p1)
 			attributes = {
 				{
 					name = "ColorContentDefaultColor3",
-					value = p1.Color.Content.Default.Color3
+					value = p8.Color.Content.Default.Color3
 				},
 				{
 					name = "ColorContentDefaultTransparency",
-					value = p1.Color.Content.Default.Transparency
+					value = p8.Color.Content.Default.Transparency
 				}
 			}
 		}
 	}
 end
 
-local function BackgroundRules(value, p1)
+local function BackgroundRules(value, p8)
 	-- upvalues: t (ref), tokenAttributePascalNameModule (ref), kebabToPascal (ref)
 	local t_1 = {}
 	
 	for i, v in value do
 		if table.find(t[i], "bg") then
 			for i_1, v_1 in v do
-				local var1 = tokenAttributePascalNameModule(i, i_1)
+				local var10 = tokenAttributePascalNameModule(i, i_1)
 				table.insert(t_1, {
 					tag = `bg-{i_1}`,
 					properties = {
-						BackgroundColor3 = `$Color{i}{var1}Color3`,
-						BackgroundTransparency = `$Color{i}{var1}Transparency`
+						BackgroundColor3 = `$Color{i}{var10}Color3`,
+						BackgroundTransparency = `$Color{i}{var10}Transparency`
 					},
 					attributes = {
-						{ name = `Color{i}{var1}Color3`, value = v_1.Color3 },
+						{ name = `Color{i}{var10}Color3`, value = v_1.Color3 },
 						{
-							name = `Color{i}{var1}Transparency`,
+							name = `Color{i}{var10}Transparency`,
 							value = v_1.Transparency
 						}
 					}
@@ -314,21 +314,21 @@ local function BackgroundRules(value, p1)
 			end
 		end
 	end
-	for i_1, v_1 in p1 do
-		local var2 = kebabToPascal(i_1)
+	for i_1, v_1 in p8 do
+		local var11 = kebabToPascal(i_1)
 		table.insert(t_1, {
 			tag = `bg-{i_1}`,
 			properties = {
-				BackgroundColor3 = `$Color{var2}BackgroundColor3`,
-				BackgroundTransparency = `$Color{var2}BackgroundTransparency`
+				BackgroundColor3 = `$Color{var11}BackgroundColor3`,
+				BackgroundTransparency = `$Color{var11}BackgroundTransparency`
 			},
 			attributes = {
 				{
-					name = `Color{var2}BackgroundColor3`,
+					name = `Color{var11}BackgroundColor3`,
 					value = v_1.Background.Color3
 				},
 				{
-					name = `Color{var2}BackgroundTransparency`,
+					name = `Color{var11}BackgroundTransparency`,
 					value = v_1.Background.Transparency
 				}
 			}
@@ -337,43 +337,43 @@ local function BackgroundRules(value, p1)
 	return t_1
 end
 
-local function StrokeSizeRules(p1)
+local function StrokeSizeRules(p9)
 	-- upvalues: kebabToPascal (ref)
 	local t = {}
 	
-	for i, v in p1 do
+	for i, v in p9 do
 		if v.name ~= "none" then
-			local var1 = kebabToPascal(v.name)
+			local var12 = kebabToPascal(v.name)
 			table.insert(t, {
 				pseudo = "UIStroke",
 				tag = `stroke-{v.name}`,
-				properties = { Thickness = `$StrokeThickness{var1}` },
-				attributes = { { name = `StrokeThickness{var1}`, value = v.size } }
+				properties = { Thickness = `$StrokeThickness{var12}` },
+				attributes = { { name = `StrokeThickness{var12}`, value = v.size } }
 			})
 		end
 	end
 	return t
 end
 
-local function StrokeRules(p1, p2)
+local function StrokeRules(p10, p11)
 	-- upvalues: t (ref), tokenAttributePascalNameModule (ref), kebabToPascal (ref)
 	local t_1 = {}
 	
-	for i, v in p1 do
+	for i, v in p10 do
 		if table.find(t[i], "stroke") then
 			for i_1, v_1 in v do
-				local var1 = tokenAttributePascalNameModule(i, i_1)
+				local var13 = tokenAttributePascalNameModule(i, i_1)
 				table.insert(t_1, {
 					pseudo = "UIStroke",
 					tag = `stroke-{i_1}`,
 					properties = {
-						Color = `$Color{i}{var1}Color3`,
-						Transparency = `$Color{i}{var1}Transparency`
+						Color = `$Color{i}{var13}Color3`,
+						Transparency = `$Color{i}{var13}Transparency`
 					},
 					attributes = {
-						{ name = `Color{i}{var1}Color3`, value = v_1.Color3 },
+						{ name = `Color{i}{var13}Color3`, value = v_1.Color3 },
 						{
-							name = `Color{i}{var1}Transparency`,
+							name = `Color{i}{var13}Transparency`,
 							value = v_1.Transparency
 						}
 					}
@@ -381,22 +381,22 @@ local function StrokeRules(p1, p2)
 			end
 		end
 	end
-	for i_1, v_1 in p2 do
-		local var2 = kebabToPascal(i_1)
+	for i_1, v_1 in p11 do
+		local var14 = kebabToPascal(i_1)
 		table.insert(t_1, {
 			pseudo = "UIStroke",
 			tag = `stroke-{i_1}`,
 			properties = {
-				Color = `$Color{var2}BorderColor3`,
-				Transparency = `$Color{var2}BorderTransparency`
+				Color = `$Color{var14}BorderColor3`,
+				Transparency = `$Color{var14}BorderTransparency`
 			},
 			attributes = {
 				{
-					name = `Color{var2}BorderColor3`,
+					name = `Color{var14}BorderColor3`,
 					value = v_1.Border.Color3
 				},
 				{
-					name = `Color{var2}BorderTransparency`,
+					name = `Color{var14}BorderTransparency`,
 					value = v_1.Border.Transparency
 				}
 			}
@@ -416,26 +416,26 @@ local function StrokeRules(p1, p2)
 	return t_1
 end
 
-local function ContentRules(p1, p2)
+local function ContentRules(p12, p13)
 	-- upvalues: t (ref), tokenAttributePascalNameModule (ref), kebabToPascal (ref)
 	local t_1 = {}
 	
-	for i, v in p1 do
+	for i, v in p12 do
 		if table.find(t[i], "content") then
 			for i_1, v_1 in v do
-				local var1 = tokenAttributePascalNameModule(i, i_1)
+				local var15 = tokenAttributePascalNameModule(i, i_1)
 				table.insert(t_1, {
 					tag = `content-{i_1}`,
 					properties = {
-						ImageColor3 = `$Color{i}{var1}Color3`,
-						ImageTransparency = `$Color{i}{var1}Transparency`,
-						TextColor3 = `$Color{i}{var1}Color3`,
-						TextTransparency = `$Color{i}{var1}Transparency`
+						ImageColor3 = `$Color{i}{var15}Color3`,
+						ImageTransparency = `$Color{i}{var15}Transparency`,
+						TextColor3 = `$Color{i}{var15}Color3`,
+						TextTransparency = `$Color{i}{var15}Transparency`
 					},
 					attributes = {
-						{ name = `Color{i}{var1}Color3`, value = v_1.Color3 },
+						{ name = `Color{i}{var15}Color3`, value = v_1.Color3 },
 						{
-							name = `Color{i}{var1}Transparency`,
+							name = `Color{i}{var15}Transparency`,
 							value = v_1.Transparency
 						}
 					}
@@ -443,23 +443,23 @@ local function ContentRules(p1, p2)
 			end
 		end
 	end
-	for i_1, v_1 in p2 do
-		local var2 = kebabToPascal(i_1)
+	for i_1, v_1 in p13 do
+		local var16 = kebabToPascal(i_1)
 		table.insert(t_1, {
 			tag = `content-{i_1}`,
 			properties = {
-				ImageColor3 = `$Color{var2}ForegroundColor3`,
-				ImageTransparency = `$Color{var2}ForegroundTransparency`,
-				TextColor3 = `$Color{var2}ForegroundColor3`,
-				TextTransparency = `$Color{var2}ForegroundTransparency`
+				ImageColor3 = `$Color{var16}ForegroundColor3`,
+				ImageTransparency = `$Color{var16}ForegroundTransparency`,
+				TextColor3 = `$Color{var16}ForegroundColor3`,
+				TextTransparency = `$Color{var16}ForegroundTransparency`
 			},
 			attributes = {
 				{
-					name = `Color{var2}ForegroundColor3`,
+					name = `Color{var16}ForegroundColor3`,
 					value = v_1.Foreground.Color3
 				},
 				{
-					name = `Color{var2}ForegroundTransparency`,
+					name = `Color{var16}ForegroundTransparency`,
 					value = v_1.Foreground.Transparency
 				}
 			}
@@ -468,42 +468,42 @@ local function ContentRules(p1, p2)
 	return t_1
 end
 
-local function DeprecatedColorRules(p1)
+local function DeprecatedColorRules(p14)
 	-- upvalues: tokenAttributePascalNameModule (ref)
 	local t = {}
 	
-	for i, v in p1.System do
-		local var1 = i:sub(8)
-		local var2 = tokenAttributePascalNameModule("System", i)
+	for i, v in p14.System do
+		local var17 = i:sub(8)
+		local var18 = tokenAttributePascalNameModule("System", i)
 		table.insert(t, {
-			tag = `bg-{var1}`,
+			tag = `bg-{var17}`,
 			properties = {
-				BackgroundColor3 = `$ColorSystem{var2}Color3`,
-				BackgroundTransparency = `$ColorSystem{var2}Transparency`
+				BackgroundColor3 = `$ColorSystem{var18}Color3`,
+				BackgroundTransparency = `$ColorSystem{var18}Transparency`
 			},
 			attributes = {
-				{ name = `ColorSystem{var2}Color3`, value = v.Color3 },
+				{ name = `ColorSystem{var18}Color3`, value = v.Color3 },
 				{
-					name = `ColorSystem{var2}Transparency`,
+					name = `ColorSystem{var18}Transparency`,
 					value = v.Transparency
 				}
 			},
 			deprecatedFor = `bg-{i}`
 		})
 		
-		if var1 ~= "emphasis" then
+		if var17 ~= "emphasis" then
 			table.insert(t, {
-				tag = `content-{var1}`,
+				tag = `content-{var17}`,
 				properties = {
-					ImageColor3 = `$ColorSystem{var2}Color3`,
-					ImageTransparency = `$ColorSystem{var2}Transparency`,
-					TextColor3 = `$ColorSystem{var2}Color3`,
-					TextTransparency = `$ColorSystem{var2}Transparency`
+					ImageColor3 = `$ColorSystem{var18}Color3`,
+					ImageTransparency = `$ColorSystem{var18}Transparency`,
+					TextColor3 = `$ColorSystem{var18}Color3`,
+					TextTransparency = `$ColorSystem{var18}Transparency`
 				},
 				attributes = {
-					{ name = `ColorSystem{var2}Color3`, value = v.Color3 },
+					{ name = `ColorSystem{var18}Color3`, value = v.Color3 },
 					{
-						name = `ColorSystem{var2}Transparency`,
+						name = `ColorSystem{var18}Transparency`,
 						value = v.Transparency
 					}
 				},
@@ -511,15 +511,15 @@ local function DeprecatedColorRules(p1)
 			})
 			table.insert(t, {
 				pseudo = "UIStroke",
-				tag = `stroke-{var1}`,
+				tag = `stroke-{var17}`,
 				properties = {
-					Color = `$ColorSystem{var2}Color3`,
-					Transparency = `$ColorSystem{var2}Transparency`
+					Color = `$ColorSystem{var18}Color3`,
+					Transparency = `$ColorSystem{var18}Transparency`
 				},
 				attributes = {
-					{ name = `ColorSystem{var2}Color3`, value = v.Color3 },
+					{ name = `ColorSystem{var18}Color3`, value = v.Color3 },
 					{
-						name = `ColorSystem{var2}Transparency`,
+						name = `ColorSystem{var18}Transparency`,
 						value = v.Transparency
 					}
 				},
@@ -810,10 +810,10 @@ local function ClipsDescendantRules()
 	}
 end
 
-local _ = function(value, p1)
-	local var1 = 10 ^ p1
+local _ = function(value, p15)
+	local var19 = 10 ^ p15
 	
-	return math.round(value * var1) / var1
+	return math.round(value * var19) / var19
 end
 
 local function AspectRatioRules()
@@ -840,20 +840,20 @@ local function AspectRatioRules()
 end
 
 return {
-	rulesGenerator = function(p1, p2)
+	rulesGenerator = function(p15, p16)
 		-- upvalues: dashModule (ref), DefaultRules (ref), EngineDefaultBypassRules (ref), FlexItemRules (ref), TextRules (ref), AutomaticSizeRules (ref), PositionRules (ref), AnchorPointRules (ref), ClipsDescendantRules (ref), AspectRatioRules (ref), DefaultSizeRules (ref), ListLayoutRules (ref), ListLayoutSpacingRules (ref), cornerRulesModule (ref), kebabToPascal (ref), SizeRules (ref), StrokeSizeRules (ref), TypographyRules (ref), PaddingRules (ref), DefaultColorRules (ref), DeprecatedColorRules (ref), BackgroundRules (ref), StrokeRules (ref), ContentRules (ref)
-		local colors = p2.colors
-		local variants = p2.variants
-		local typography = p2.typography
+		local colors = p16.colors
+		local variants = p16.variants
+		local typography = p16.typography
 		
-		return dashModule.joinArrays(DefaultRules(p1), EngineDefaultBypassRules(), FlexItemRules(), TextRules(), AutomaticSizeRules(), PositionRules(), AnchorPointRules(), ClipsDescendantRules(), AspectRatioRules()), dashModule.joinArrays(DefaultSizeRules(typography["body-large"], p1.Config.Text.NominalScale), ListLayoutRules(), ListLayoutSpacingRules(p2.gaps, p2.gutters), cornerRulesModule(p2.radii, function(p1)
+		return dashModule.joinArrays(DefaultRules(p15), EngineDefaultBypassRules(), FlexItemRules(), TextRules(), AutomaticSizeRules(), PositionRules(), AnchorPointRules(), ClipsDescendantRules(), AspectRatioRules()), dashModule.joinArrays(DefaultSizeRules(typography["body-large"], p15.Config.Text.NominalScale), ListLayoutRules(), ListLayoutSpacingRules(p16.gaps, p16.gutters), cornerRulesModule(p16.radii, function(p17)
 			-- upvalues: kebabToPascal (copy)
-			local var1 = kebabToPascal(p1.name)
+			local var19 = kebabToPascal(p17.name)
 			
 			return {
-				cornerValue = `$Radius{var1}`,
-				attributes = { { name = `Radius{var1}`, value = p1.size } }
+				cornerValue = `$Radius{var19}`,
+				attributes = { { name = `Radius{var19}`, value = p17.size } }
 			}
-		end), SizeRules(p2.sizes), StrokeSizeRules(p2.strokes), TypographyRules(typography, p1.Config.Text.NominalScale), PaddingRules(p2.paddings, p2.margins)), dashModule.joinArrays(DefaultColorRules(p1), DeprecatedColorRules(colors), BackgroundRules(colors, variants), StrokeRules(colors, variants), ContentRules(colors, variants))
+		end), SizeRules(p16.sizes), StrokeSizeRules(p16.strokes), TypographyRules(typography, p15.Config.Text.NominalScale), PaddingRules(p16.paddings, p16.margins)), dashModule.joinArrays(DefaultColorRules(p15), DeprecatedColorRules(colors), BackgroundRules(colors, variants), StrokeRules(colors, variants), ContentRules(colors, variants))
 	end
 }

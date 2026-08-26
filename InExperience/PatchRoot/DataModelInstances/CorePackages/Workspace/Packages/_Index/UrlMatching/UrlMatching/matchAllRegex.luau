@@ -1,8 +1,8 @@
 ﻿local _ = require(script.Parent.Parent.RegExp)
 
-local function matchAllRegex(p0, p1)
+local function matchAllRegex(p1, p2)
 	-- upvalues: matchAllRegex (ref)
-	local var1 = p1:exec(p0)
+	local var1 = p2:exec(p1)
 	
 	if not var1 then
 		return {}
@@ -16,16 +16,16 @@ local function matchAllRegex(p0, p1)
 			table.insert(t, var1[i])
 		end
 	end
-	local byteOffset = utf8.offset(p0, index)
+	local byteOffset = utf8.offset(p1, index)
 	
 	return {
 		{
 			index = byteOffset,
-			input = p0,
+			input = p1,
 			matchedText = var2,
 			capturedGroups = t
 		},
-		unpack(matchAllRegex(p0:sub(byteOffset + #var2), p1))
+		unpack(matchAllRegex(p1:sub(byteOffset + #var2), p2))
 	}
 end
 

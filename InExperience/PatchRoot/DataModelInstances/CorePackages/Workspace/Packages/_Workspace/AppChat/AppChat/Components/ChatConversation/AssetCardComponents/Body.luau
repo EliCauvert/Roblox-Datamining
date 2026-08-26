@@ -4,17 +4,17 @@ local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
 local radius = foundationModule.Enums.Radius
 local skeleton = foundationModule.Skeleton
-local var3 = roactModule.PureComponent:extend("AssetCard_Co\207\128tent")
-var3.defaultProps = {
+local var1 = roactModule.PureComponent:extend("AssetCard_Co\207\128tent")
+var1.defaultProps = {
 	cardIcon = nil,
 	cardBodyText = nil,
 	bodyActivated = nil,
 	contentLoadedCallback = nil
 }
 
-function var3.init(p0)
+function var3.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.iconRef = roactModule.createRef()
+	p1.iconRef = roactModule.createRef()
 end
 
 function var3.render(p1)
@@ -59,4 +59,4 @@ function var3.render(p1)
 	end)
 end
 
-return var3
+return var1

@@ -23,40 +23,40 @@ local t = {
 	placement = inputPlacementModule.Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: flagsModule (ref), useInputGroupDefaultsModule (ref), t (ref), withDefaultsModule (ref), useTokensModule (ref), useCheckboxVariantsModule (ref), useUncontrolledStateModule (ref), reactModule (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), textModule (ref), builderIconsModule (ref)
-	local var16 = if flagsModule.FoundationInputGroup then useInputGroupDefaultsModule(p0, t) else withDefaultsModule(p0, t)
-	local var17 = useCheckboxVariantsModule(useTokensModule(), var16.size)
-	local var18, var19 = useUncontrolledStateModule(var16.isChecked, var16.onActivated)
-	local isIndeterminate = var16.isIndeterminate or false
+	local var1 = if flagsModule.FoundationInputGroup then useInputGroupDefaultsModule(p1, t) else withDefaultsModule(p1, t)
+	local var2 = useCheckboxVariantsModule(useTokensModule(), var1.size)
+	local var3, var4 = useUncontrolledStateModule(var1.isChecked, var1.onActivated)
+	local isIndeterminate = var1.isIndeterminate or false
 	
-	return reactModule.createElement(internalInputModule, withCommonPropsModule(var16, {
-		isChecked = var18,
+	return reactModule.createElement(internalInputModule, withCommonPropsModule(var1, {
+		isChecked = var3,
 		isIndeterminate = isIndeterminate,
-		isDisabled = var16.isDisabled,
-		onActivated = var19,
+		isDisabled = var1.isDisabled,
+		onActivated = var4,
 		label = {
-			text = var16.label,
-			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var16.placement],
-			hint = if flagsModule.FoundationCheckboxBeta then var16.hint else nil
+			text = var1.label,
+			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var1.placement],
+			hint = if flagsModule.FoundationCheckboxBeta then var1.hint else nil
 		},
-		customVariantProps = var17.input,
-		size = var16.size,
-		Selectable = var16.Selectable,
-		NextSelectionUp = var16.NextSelectionUp,
-		NextSelectionDown = var16.NextSelectionDown,
-		NextSelectionLeft = var16.NextSelectionLeft,
-		NextSelectionRight = var16.NextSelectionRight,
-		ref = p1
+		customVariantProps = var2.input,
+		size = var1.size,
+		Selectable = var1.Selectable,
+		NextSelectionUp = var1.NextSelectionUp,
+		NextSelectionDown = var1.NextSelectionDown,
+		NextSelectionLeft = var1.NextSelectionLeft,
+		NextSelectionRight = var1.NextSelectionRight,
+		ref = p2
 	}), {
-		Checkmark = if var18 or isIndeterminate then reactModule.createElement(textModule, {
+		Checkmark = if var3 or isIndeterminate then reactModule.createElement(textModule, {
 			TextScaled = true,
 			Text = if isIndeterminate then builderIconsModule.Icon.Minus else builderIconsModule.Icon.Check,
 			fontStyle = {
 				Font = builderIconsModule.Font[builderIconsModule.IconVariant.Filled]
 			},
-			tag = var17.checkmark.tag,
-			testId = `{var16.testId}--checkmark`
+			tag = var2.checkmark.tag,
+			testId = `{var1.testId}--checkmark`
 		}) else nil
 	})
 end))

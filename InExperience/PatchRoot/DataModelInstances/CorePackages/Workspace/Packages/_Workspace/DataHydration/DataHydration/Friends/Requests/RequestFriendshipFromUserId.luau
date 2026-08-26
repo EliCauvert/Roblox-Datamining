@@ -3,20 +3,20 @@ local dataHydration = script:FindFirstAncestor("DataHydration")
 local url = require(dataHydration.Parent.Http).Url
 local myHttpRequestModule = require(dataHydration.Friends.Networking.myHttpRequest)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: url (ref), httpService (ref), myHttpRequestModule (ref)
-	return myHttpRequestModule(string.format("%s/users/%s/request-friendship", url.FRIEND_URL, tostring(p0)), "POST", {
-		postBody = httpService:JSONEncode({ friendshipOriginSourceType = p1 })
+	return myHttpRequestModule(string.format("%s/users/%s/request-friendship", url.FRIEND_URL, tostring(p1)), "POST", {
+		postBody = httpService:JSONEncode({ friendshipOriginSourceType = p2 })
 	}):andThen(function()
 		return nil
-	end):catch(function(p2)
+	end):catch(function(p3)
 		-- upvalues: httpService (copy)
-		local var3 = if type(p2) == "table" then p2.StatusCode else nil
+		local var1 = if type(p3) == "table" then p3.StatusCode else nil
 		local code = nil
-		local var4 = if type(p2) == "table" then p2.Body else nil
+		local var2 = if type(p3) == "table" then p3.Body else nil
 		
-		if type(var4) == "string" then
-			local ok, status = pcall(httpService.JSONDecode, httpService, var4)
+		if type(var2) == "string" then
+			local ok, status = pcall(httpService.JSONDecode, httpService, var2)
 			
 			if ok and type(status) == "table" then
 				local errors = status.errors
@@ -26,6 +26,6 @@ return function(p0, p1)
 				end
 			end
 		end
-		error({ statusCode = var3, firstErrorCode = code })
+		error({ statusCode = var1, firstErrorCode = code })
 	end)
 end

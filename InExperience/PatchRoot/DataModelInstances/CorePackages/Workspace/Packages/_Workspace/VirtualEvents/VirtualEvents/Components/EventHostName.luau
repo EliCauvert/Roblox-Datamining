@@ -6,11 +6,11 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local emojiTextLabel = UIBloxModule.Core.Text.EmojiTextLabel
 local emoji = UIBloxModule.App.Emoji.Enum.Emoji
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), emoji (ref), reactModule (ref), emojiTextLabel (ref)
-	local var3 = useStyle()
-	local var4 = if p0.host.hasVerifiedBadge then emoji.Verified else nil
-	local var5, var6 = reactModule.useState(0)
+	local var1 = useStyle()
+	local var2 = if p1.host.hasVerifiedBadge then emoji.Verified else nil
+	local var3, var4 = reactModule.useState(0)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -24,28 +24,28 @@ return function(p0)
 		}),
 		UserImage = reactModule.createElement("ImageLabel", {
 			LayoutOrder = 1,
-			BackgroundColor3 = var3.Theme.Badge.Color,
-			BackgroundTransparency = var3.Theme.Badge.Transparency,
-			Image = string.format("rbxthumb://type=%s&id=%i&w=150&h=150", if p0.host.hostType == "group" then "GroupIcon" else "AvatarHeadShot", p0.host.hostId),
-			Size = if p0.changeHostImageSize then UDim2.fromOffset(32, 32) else UDim2.fromOffset(var5, var5)
+			BackgroundColor3 = var1.Theme.Badge.Color,
+			BackgroundTransparency = var1.Theme.Badge.Transparency,
+			Image = string.format("rbxthumb://type=%s&id=%i&w=150&h=150", if p1.host.hostType == "group" then "GroupIcon" else "AvatarHeadShot", p1.host.hostId),
+			Size = if p1.changeHostImageSize then UDim2.fromOffset(32, 32) else UDim2.fromOffset(var3, var3)
 		}, {
 			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 		}),
 		EmojiName = reactModule.createElement(emojiTextLabel, {
-			Text = p0.host.hostName,
+			Text = p1.host.hostName,
 			LayoutOrder = 2,
-			emoji = var4,
-			fontStyle = var3.Font.Header2,
-			colorStyle = var3.Theme.TextEmphasis,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1)
-				-- upvalues: var6 (ref)
-				var6(p1.TextSize)
-			end, { var6 })
+			emoji = var2,
+			fontStyle = var1.Font.Header2,
+			colorStyle = var1.Theme.TextEmphasis,
+			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
+				-- upvalues: var4 (ref)
+				var4(p2.TextSize)
+			end, { var4 })
 		}),
-		EmojiToArrowMargin = if var4 then reactModule.createElement("Frame", {
+		EmojiToArrowMargin = if var2 then reactModule.createElement("Frame", {
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
-			Size = UDim2.fromOffset(var5 - 4, 0)
+			Size = UDim2.fromOffset(var3 - 4, 0)
 		}) else nil
 	})
 end

@@ -17,15 +17,15 @@ local t = {
 }
 
 return {
-	reportError = function(p0)
+	reportError = function(p1)
 		-- upvalues: enableAppAgeSignalsErrorTelemetry (ref), telemetryService (ref), t (ref)
 		if enableAppAgeSignalsErrorTelemetry then
 			telemetryService:LogCounter(t.ErrorCounter, {
-				customFields = { error = p0.error, signalSource = p0.signalSource }
+				customFields = { error = p1.error, signalSource = p1.signalSource }
 			}, 1)
 			telemetryService:LogEvent(t.ErrorEvent, {
 				standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-				customFields = { error = p0.error, signalSource = p0.signalSource }
+				customFields = { error = p1.error, signalSource = p1.signalSource }
 			})
 			
 			return

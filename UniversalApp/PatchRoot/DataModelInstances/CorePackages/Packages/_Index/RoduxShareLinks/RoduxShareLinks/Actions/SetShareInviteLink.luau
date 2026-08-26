@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("RoduxShareLinks").Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { shareInviteLink = p0 }
+﻿return require(script:FindFirstAncestor("RoduxShareLinks").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { shareInviteLink = p1 }
 end)

@@ -4,14 +4,14 @@
 	end
 }
 
-function t.fromJSON(p0)
+function t.fromJSON(p1)
 	-- upvalues: t (ref)
 	local var1 = t.new()
-	var1.name = p0.name
-	var1.code = p0.code
-	var1.prefix = p0.prefix
-	var1.localizedName = p0.localizedName
-	var1.isDefault = p0.isDefault
+	var1.name = p1.name
+	var1.code = p1.code
+	var1.prefix = p1.prefix
+	var1.localizedName = p1.localizedName
+	var1.isDefault = p1.isDefault
 	
 	return var1
 end

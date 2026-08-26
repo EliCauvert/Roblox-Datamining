@@ -3,25 +3,25 @@ local otterModule = require(parent.Otter)
 local roactModule = require(parent.Roact)
 local cryoModule = require(parent.Cryo)
 local tModule = require(parent.t)
-local var4 = tModule.intersection(tModule.strictInterface({
+local var1 = tModule.intersection(tModule.strictInterface({
 	animatedValues = tModule.table,
 	mapValuesToProps = tModule.callback,
 	springOptions = tModule.optional(tModule.table),
 	onComplete = tModule.optional(tModule.callback),
 	regularProps = tModule.table,
 	[roactModule.Children] = tModule.optional(tModule.table)
-}), function(p0)
+}), function(p1)
 	-- upvalues: roactModule (ref)
-	if p0[roactModule.Children] == nil or p0.regularProps[roactModule.Children] == nil then
+	if p1[roactModule.Children] == nil or p1.regularProps[roactModule.Children] == nil then
 		return true
 	end
 	return false, "Children must be specified in one place, but the [Roact.Children] key was found in both props and props.regularProps on SpringAnimatedItem."
 end)
 local t = {
 	wrap = function(p1)
-		-- upvalues: roactModule (ref), otterModule (ref), var4 (ref), cryoModule (ref)
-		local var6 = roactModule.PureComponent:extend(string.format("SpringAnimatedItem(%s)", tostring(p1)))
-		var6.defaultProps = { regularProps = {} }
+		-- upvalues: roactModule (ref), otterModule (ref), var1 (ref), cryoModule (ref)
+		local var2 = roactModule.PureComponent:extend(string.format("SpringAnimatedItem(%s)", tostring(p1)))
+		var2.defaultProps = { regularProps = {} }
 		
 		function var6.init(p2)
 			-- upvalues: roactModule (copy)
@@ -47,63 +47,63 @@ local t = {
 			p2.motor = nil
 		end
 		
-		function var6.didMount(p4)
+		function var6.didMount(p3)
 			-- upvalues: otterModule (copy)
-			local animatedValues = p4.props.animatedValues
-			p4.applyAnimatedValues(animatedValues)
-			p4.motor = otterModule.createGroupMotor(animatedValues)
-			p4.motor:onStep(function(p5)
-				-- upvalues: p4 (ref)
-				p4.applyAnimatedValues(p5)
+			local animatedValues = p3.props.animatedValues
+			p3.applyAnimatedValues(animatedValues)
+			p3.motor = otterModule.createGroupMotor(animatedValues)
+			p3.motor:onStep(function(p4)
+				-- upvalues: p3 (ref)
+				p3.applyAnimatedValues(p4)
 			end)
-			p4.motor:onComplete(p4.onComplete)
-			p4.motor:start()
+			p3.motor:onComplete(p3.onComplete)
+			p3.motor:start()
 		end
 		
-		function var6.willUpdate(p6, p7)
+		function var6.willUpdate(p3, p4)
 			-- upvalues: roactModule (copy)
-			if p6.props.regularProps[roactModule.Ref] ~= p7.regularProps[roactModule.Ref] and p7.regularProps[roactModule.Ref] ~= nil then
-				p6.ref = p7.regularProps[roactModule.Ref]
+			if p3.props.regularProps[roactModule.Ref] ~= p4.regularProps[roactModule.Ref] and p4.regularProps[roactModule.Ref] ~= nil then
+				p3.ref = p4.regularProps[roactModule.Ref]
 			end
 		end
 		
-		function var6.render(p8)
-			-- upvalues: var4 (copy), cryoModule (copy), roactModule (copy), p1 (ref)
-			assert(var4(p8.props))
+		function var6.render(p3)
+			-- upvalues: var1 (copy), cryoModule (copy), roactModule (copy), p1 (ref)
+			assert(var1(p3.props))
 			
-			return roactModule.createElement(p1, cryoModule.Dictionary.join(p8.props.regularProps, {
-				[roactModule.Ref] = p8.ref,
-				[roactModule.Children] = p8.props[roactModule.Children]
+			return roactModule.createElement(p1, cryoModule.Dictionary.join(p3.props.regularProps, {
+				[roactModule.Ref] = p3.ref,
+				[roactModule.Children] = p3.props[roactModule.Children]
 			}))
 		end
 		
-		function var6.didUpdate(p9, p10)
+		function var6.didUpdate(p3, p4)
 			-- upvalues: otterModule (copy)
-			if p9.props.animatedValues ~= p10.animatedValues then
+			if p3.props.animatedValues ~= p4.animatedValues then
 				local t = {}
-				local var8 = false
+				local var3 = false
 				
-				for i, v in pairs(p9.props.animatedValues) do
-					t[i] = otterModule.spring(v, p9.props.springOptions)
+				for i, v in pairs(p3.props.animatedValues) do
+					t[i] = otterModule.spring(v, p3.props.springOptions)
 					
-					if v ~= p10.animatedValues[i] then
-						var8 = true
+					if v ~= p4.animatedValues[i] then
+						var3 = true
 					end
 				end
-				if var8 then
-					p9.motor:setGoal(t)
+				if var3 then
+					p3.motor:setGoal(t)
 				end
 			end
 		end
 		
-		function var6.willUnmount(p11)
-			if p11.motor then
-				p11.motor:destroy()
-				p11.motor = nil
+		function var6.willUnmount(p5)
+			if p5.motor then
+				p5.motor:destroy()
+				p5.motor = nil
 			end
 		end
 		
-		return var6
+		return var2
 	end
 }
 t.AnimatedFrame = t.wrap("Frame")

@@ -26,9 +26,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var4, var5 = reactModule.useState(nil)
 	local _ = nil
 	local var6 = nil
-	local var7, var8 = reactOtterModule.useAnimatedBinding(0, function(p1)
+	local var7, var8 = reactOtterModule.useAnimatedBinding(0, function(p3)
 		-- upvalues: var2 (ref), var4 (ref), var6 (write), reactOtterModule (copy), var5 (ref)
-		if var2 and p1 == 1 and var4 then
+		if var2 and p3 == 1 and var4 then
 			var6(reactOtterModule.ease(0, {
 				duration = var2.resetTime,
 				easingStyle = Enum.EasingStyle.Linear
@@ -65,10 +65,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}, {}) else nil,
 		InputBeganConnection = if var2 then reactModule.createElement(eventConnection, {
 			event = userInputService.InputBegan,
-			callback = function(p1)
+			callback = function(p3)
 				-- upvalues: var4 (ref), var1 (ref), var2 (ref), var5 (ref), var6 (write), reactOtterModule (copy), var9 (write)
 				if var4 then return end
-				if p1.KeyCode == var1.keyCode then
+				if p3.KeyCode == var1.keyCode then
 					if var2.onBeginHold then
 						var2.onBeginHold()
 					end
@@ -77,7 +77,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 						
 						return
 					end
-					var5(p1)
+					var5(p3)
 					var6(reactOtterModule.ease(1, {
 						duration = (1 - var9:getValue()) * var2.holdTime,
 						easingStyle = Enum.EasingStyle.Linear
@@ -87,9 +87,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}) else nil,
 		InputEndedConnection = if var2 then reactModule.createElement(eventConnection, {
 			event = userInputService.InputEnded,
-			callback = function(p1)
+			callback = function(p3)
 				-- upvalues: var4 (ref), var2 (ref), var5 (ref), var6 (write), reactOtterModule (copy), var9 (write)
-				if p1 == var4 then
+				if p3 == var4 then
 					if var2.onEndHold then
 						var2.onEndHold(false)
 					end

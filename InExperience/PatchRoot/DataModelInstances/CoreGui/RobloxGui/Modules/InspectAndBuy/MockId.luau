@@ -1,8 +1,8 @@
-﻿local var0 = 0
+﻿local var1 = 0
 
 return function()
-	-- upvalues: var0 (write)
-	var0 += 1
+	-- upvalues: var1 (write)
+	var1 += 1
 	
-	return ("MOCK-%d"):format(var0)
+	return ("MOCK-%d"):format(var1)
 end

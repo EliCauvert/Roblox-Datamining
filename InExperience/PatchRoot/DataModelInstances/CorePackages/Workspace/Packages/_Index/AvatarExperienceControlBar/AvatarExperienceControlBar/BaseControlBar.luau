@@ -8,35 +8,35 @@ local iconTextMenuModule = require(avatarExperienceControlBar.Components.IconTex
 local externalEventConnection = require(parent.RoactUtils).ExternalEventConnection
 local _ = require(avatarExperienceControlBar.ControlBarTypes)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref), iconOnlyMenuModule (ref), iconTextMenuModule (ref), externalEventConnection (ref), userInputService (ref)
-	local var6, var7 = reactModule.useBinding(UDim2.new(0, 0, 0, 0))
+	local var1, var2 = reactModule.useBinding(UDim2.new(0, 0, 0, 0))
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "no-clip",
-		Size = var6,
-		ref = p0.containerRef,
-		LayoutOrder = p0.LayoutOrder
+		Size = var1,
+		ref = p1.containerRef,
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		MainMenu = reactModule.createElement(iconOnlyMenuModule, {
-			items = p0.menus,
-			activeItemId = p0.activeMenuItemId,
-			onItemActivated = p0.onMenuItemActivated,
-			ref = p0.iconMenuRef,
+			items = p1.menus,
+			activeItemId = p1.activeMenuItemId,
+			onItemActivated = p1.onMenuItemActivated,
+			ref = p1.iconMenuRef,
 			onAbsoluteSizeChanged = function(value)
-				-- upvalues: var7 (ref)
-				var7(UDim2.fromOffset(value.AbsoluteSize.X, value.AbsoluteSize.Y))
+				-- upvalues: var2 (ref)
+				var2(UDim2.fromOffset(value.AbsoluteSize.X, value.AbsoluteSize.Y))
 			end
 		}),
-		Submenu = if p0.submenuItems then reactModule.createElement(iconTextMenuModule, {
-			key = p0.activeMenuItemId,
-			items = p0.submenuItems,
-			onItemActivated = p0.onSubmenuItemActivated,
-			Position = p0.submenuPosition
+		Submenu = if p1.submenuItems then reactModule.createElement(iconTextMenuModule, {
+			key = p1.activeMenuItemId,
+			items = p1.submenuItems,
+			onItemActivated = p1.onSubmenuItemActivated,
+			Position = p1.submenuPosition
 		}) else nil,
 		OnInputEnded = reactModule.createElement(externalEventConnection, {
 			event = userInputService.InputEnded,
-			callback = p0.onInputEnded
+			callback = p1.onInputEnded
 		})
 	})
 end)

@@ -58,9 +58,9 @@ local function variantsFactory(_)
 	}
 end
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), flagsModule (ref)
-	local tab = variantsContextModule.useVariants("Tab", variantsFactory, p0)
+	local tab = variantsContextModule.useVariants("Tab", variantsFactory, p1)
 	
-	return composeStyleVariantModule(tab.common, tab.sizes[p1], tab.isFill[p2], if flagsModule.FoundationFixTabsFitBorderWidth then tab.paddings[p1] elseif p2 then tab.paddings[p1] else {})
+	return composeStyleVariantModule(tab.common, tab.sizes[p2], tab.isFill[p3], if flagsModule.FoundationFixTabsFitBorderWidth then tab.paddings[p2] elseif p3 then tab.paddings[p2] else {})
 end

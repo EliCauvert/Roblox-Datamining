@@ -18,28 +18,28 @@ end
 
 return function()
 	-- upvalues: createDataCacheModule (ref), presenceStorePollingTtlSec (ref), RTEPresenceStorePollingTtlSec (ref), createDataResolverModule (ref), cryoModule (ref), requestsModule (ref), normalizePresenceRawDataModule (ref), signalsModule (ref)
-	local var9 = createDataCacheModule(presenceStorePollingTtlSec)
-	local var10 = createDataCacheModule(if RTEPresenceStorePollingTtlSec > 0 then RTEPresenceStorePollingTtlSec else 1e999)
+	local var1 = createDataCacheModule(presenceStorePollingTtlSec)
+	local var2 = createDataCacheModule(if RTEPresenceStorePollingTtlSec > 0 then RTEPresenceStorePollingTtlSec else 1e999)
 	local t = {}
 	local t_1 = {}
-	local var13 = createDataResolverModule({
-		cache = var9,
+	local var3 = createDataResolverModule({
+		cache = var1,
 		queueProcessDelaySec = game:GetFastInt("PresenceStoreProcessDelaySec"),
-		fetchFn = function(p0)
+		fetchFn = function(p1)
 			-- upvalues: cryoModule (copy), requestsModule (copy), normalizePresenceRawDataModule (copy)
-			return requestsModule.MultiGetPresenceByUserIds(cryoModule.Dictionary.keys(p0)):andThen(function(p1)
+			return requestsModule.MultiGetPresenceByUserIds(cryoModule.Dictionary.keys(p1)):andThen(function(p2)
 				-- upvalues: normalizePresenceRawDataModule (copy)
 				local userPresences
 				local t = {}
 				
-				if p1 then
-					userPresences = p1.responseBody and (p1.responseBody.userPresences or {})
+				if p2 then
+					userPresences = p2.responseBody and (p2.responseBody.userPresences or {})
 				end
 				for i, v in userPresences do
-					local var16 = normalizePresenceRawDataModule(v)
+					local var4 = normalizePresenceRawDataModule(v)
 					
-					if var16 then
-						t[var16.id] = var16
+					if var4 then
+						t[var4.id] = var4
 					end
 				end
 				return t
@@ -57,50 +57,50 @@ return function()
 	
 	return {
 		GetPresenceByUserId = function(p2, p3)
-			-- upvalues: var13 (ref), t_1 (ref), signalsModule (copy), var10 (ref)
+			-- upvalues: var3 (ref), t_1 (ref), signalsModule (copy), var2 (ref)
 			if p3 and p3.skipFetch == true then
-				return var13.getCachedItem(p2)
+				return var3.getCachedItem(p2)
 			elseif t_1[p2] == nil then
 				t_1[p2] = signalsModule.createEffect(function(p4)
-					-- upvalues: var10 (copy), p2 (ref), var13 (copy)
-					local item, _ = var10.getItem(p2)
+					-- upvalues: var2 (copy), p2 (ref), var3 (copy)
+					local item, _ = var2.getItem(p2)
 					
-					if item.data(p4) == true and var13.getCachedItem(p2) ~= nil then
+					if item.data(p4) == true and var3.getCachedItem(p2) ~= nil then
 						return
 					end
-					var13.getAndFetchItem(p2)
+					var3.getAndFetchItem(p2)
 				end)
 			end
-			return var13.getCachedItem(p2)
+			return var3.getCachedItem(p2)
 		end,
-		UpdateUserPresence = function(p5, p6, p7)
-			-- upvalues: var9 (ref), var10 (ref), t (ref)
-			var9.replaceItem(p5, p6)
-			local var18 = if p7 then true else false
-			var10.replaceItem(p5, var18)
-			t[p5] = var18
+		UpdateUserPresence = function(p2, p3, p4)
+			-- upvalues: var1 (ref), var2 (ref), t (ref)
+			var1.replaceItem(p2, p3)
+			local var4 = if p4 then true else false
+			var2.replaceItem(p2, var4)
+			t[p2] = var4
 		end,
-		RefreshPresenceByUserId = function(p8)
-			-- upvalues: var13 (ref)
-			var13.fetchItem(p8)
+		RefreshPresenceByUserId = function(p2)
+			-- upvalues: var3 (ref)
+			var3.fetchItem(p2)
 		end,
 		clear = function()
-			-- upvalues: t_1 (ref), var10 (ref), var13 (ref)
+			-- upvalues: t_1 (ref), var2 (ref), var3 (ref)
 			for i, v in t_1 do
 				v()
 			end
 			table.clear(t_1)
-			var10.clear()
-			var13.clear()
+			var2.clear()
+			var3.clear()
 		end,
 		dispose = function()
-			-- upvalues: t_1 (ref), var10 (ref), var13 (ref)
+			-- upvalues: t_1 (ref), var2 (ref), var3 (ref)
 			for i, v in t_1 do
 				v()
 			end
 			table.clear(t_1)
-			var10.dispose()
-			var13.dispose()
+			var2.dispose()
+			var3.dispose()
 		end
 	}
 end

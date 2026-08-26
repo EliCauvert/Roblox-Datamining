@@ -7,62 +7,62 @@ local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local searchPageTabSwitchBridgeModule = require(serverDrivenUi.System.SearchPageTabSwitchBridge)
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
-	p0.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		name = sduiActionType.OpenSearchResultsTab,
-		message = p1,
-		propName = p2
-	}, p0.appPage)
+		message = p2,
+		propName = p3
+	}, p1.appPage)
 end
 
-return function(p3, _, p4, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), searchTypes (ref), searchSourceEvent (ref), searchPageTabSwitchBridgeModule (ref)
-	local var3 = if p3 then p3.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var3 == nil then
-		p4.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			propName = nil,
 			name = sduiActionType.OpenSearchResultsTab
-		}, p4.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local searchType = var3.searchType
+	local searchType = var1.searchType
 	
 	if typeof(searchType) ~= "string" or searchType == "" then
-		p4.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "searchType",
 			name = sduiActionType.OpenSearchResultsTab,
 			message = `Invalid or missing searchType: {tostring(searchType)}`
-		}, p4.appPage)
+		}, p2.appPage)
 		
 		return
 	elseif searchTypes[searchType] == nil then
-		p4.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "searchType",
 			name = sduiActionType.OpenSearchResultsTab,
 			message = `Unknown searchType: {searchType}`
-		}, p4.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local sourceEvent = var3.sourceEvent
-	local var4 = nil
+	local sourceEvent = var1.sourceEvent
+	local var2 = nil
 	
 	if sourceEvent == nil then
-		var4 = searchSourceEvent.SeeAll
+		var2 = searchSourceEvent.SeeAll
 	elseif typeof(sourceEvent) == "string" and searchSourceEvent[sourceEvent] ~= nil then
-		var4 = searchSourceEvent[sourceEvent]
+		var2 = searchSourceEvent[sourceEvent]
 	else
-		p4.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "sourceEvent",
 			name = sduiActionType.OpenSearchResultsTab,
 			message = `Unknown sourceEvent: {tostring(sourceEvent)}`
-		}, p4.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	searchPageTabSwitchBridgeModule.switchTab(searchType, var4)
+	searchPageTabSwitchBridgeModule.switchTab(searchType, var2)
 end

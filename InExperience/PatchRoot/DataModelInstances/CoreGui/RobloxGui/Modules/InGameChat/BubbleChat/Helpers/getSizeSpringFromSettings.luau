@@ -10,9 +10,9 @@ return function(value)
 			frequency = sizeAnimation.SpringFrequency
 		}
 		
-		return function(p0)
+		return function(p1)
 			-- upvalues: otterModule (copy), t (ref)
-			return otterModule.spring(p0, t)
+			return otterModule.spring(p1, t)
 		end
 	end
 	return otterModule.instant

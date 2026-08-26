@@ -8,25 +8,25 @@ local _ = require(script.Parent.useCartPricing)
 local _ = require(parent.Enums.UnifiedPurchaseModalTypeEnum)
 local fFlagUnifiedPurchaseAddSkeleton = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), cartPricingLoadingModule (ref), view (ref), productDetailsContainerModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref)
-	local cartPricing = p0.cartPricing
+	local cartPricing = p1.cartPricing
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-center gap-medium size-full-0 auto-y",
 		LayoutOrder = 1
 	}, {
 		Details = reactModule.createElement(productDetailsContainerModule, {
-			purchaseModalType = p0.purchaseModalType,
+			purchaseModalType = p1.purchaseModalType,
 			product = cartPricing.mergedProductForDetails,
-			subtitleView = p0.subtitleView,
-			priceSuffix = p0.priceSuffix,
-			isLoading = if fFlagUnifiedPurchaseAddSkeleton then p0.isLoading else nil,
+			subtitleView = p1.subtitleView,
+			priceSuffix = p1.priceSuffix,
+			isLoading = if fFlagUnifiedPurchaseAddSkeleton then p1.isLoading else nil,
 			subtotalItemCount = if cartPricing.showCartOfferUi and cartPricing.cartAggregate then cartPricing.cartAggregate.itemCount else nil,
 			hideProductDetails = cartPricing.shouldHideLookProductDetails,
-			hideDiscountSummary = p0.isCartPricingLoading,
+			hideDiscountSummary = p1.isCartPricingLoading,
 			savingsSummary = cartPricing.cartPricingSavingsSummary
 		}),
-		CartPricingLoading = if p0.isCartPricingLoading then reactModule.createElement(cartPricingLoadingModule, { LayoutOrder = 2, isLoading = p0.isCartPricingLoading }) else nil
+		CartPricingLoading = if p1.isCartPricingLoading then reactModule.createElement(cartPricingLoadingModule, { LayoutOrder = 2, isLoading = p1.isCartPricingLoading }) else nil
 	})
 end

@@ -6,12 +6,12 @@ local momentContextModule = require(script.Parent.Parent.MomentContext)
 local useMomentGesturesModule = require(script.Parent.useMomentGestures)
 local useReactionCommitModule = require(script.Parent.useReactionCommit)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: momentContextModule (ref), useReactionCommitModule (ref), useSignalState (ref), reactModule (ref), useMomentGesturesModule (ref), view (ref)
-	local var4 = momentContextModule.useMoment()
-	local controller = var4.controller
-	local store = var4.store
-	local var5 = useReactionCommitModule()
+	local var1 = momentContextModule.useMoment()
+	local controller = var1.controller
+	local store = var1.store
+	local var2 = useReactionCommitModule()
 	
 	return reactModule.createElement(view, {
 		tag = "size-full",
@@ -24,11 +24,11 @@ return reactModule.memo(function(p0)
 					controller.toggle()
 				end
 			end, { controller }),
-			onDoubleTap = reactModule.useCallback(function(p1)
-				-- upvalues: var5 (ref)
-				var5("doubleTap", p1, nil)
-			end, { var5 })
+			onDoubleTap = reactModule.useCallback(function(p2)
+				-- upvalues: var2 (ref)
+				var2("doubleTap", p2, nil)
+			end, { var2 })
 		}).ref,
-		ZIndex = p0.ZIndex
+		ZIndex = p1.ZIndex
 	})
 end)

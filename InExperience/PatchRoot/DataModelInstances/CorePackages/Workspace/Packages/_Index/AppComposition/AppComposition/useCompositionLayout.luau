@@ -10,11 +10,11 @@ local useTokens = foundationModule.Hooks.useTokens
 
 return function()
 	-- upvalues: useTokens (ref), signalsReactModule (ref), getGlobalViewportBreakpointModule (ref), reactModule (ref), compositionConfigModule (ref)
-	local var6 = useTokens()
-	local var7 = signalsReactModule.useSignalState(getGlobalViewportBreakpointModule)
+	local var1 = useTokens()
+	local var2 = signalsReactModule.useSignalState(getGlobalViewportBreakpointModule)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: compositionConfigModule (copy), var7 (ref), var6 (ref)
-		return compositionConfigModule.getBaseConfig(var7, var6)
-	end, { var7, var6 })
+		-- upvalues: compositionConfigModule (copy), var2 (ref), var1 (ref)
+		return compositionConfigModule.getBaseConfig(var2, var1)
+	end, { var2, var1 })
 end

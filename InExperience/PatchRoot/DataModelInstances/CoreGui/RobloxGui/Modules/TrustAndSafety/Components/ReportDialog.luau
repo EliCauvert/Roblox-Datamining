@@ -40,9 +40,9 @@ local voiceStateContextModule = require(robloxGui.Modules.VoiceChat.VoiceStateCo
 local constantsModule_1 = require(robloxGui.Modules.VoiceChat.Constants)
 local reactModule = require(corePackagesService.Packages.React)
 
-local var32 = function(p0)
+local var1 = function(p1)
 	-- upvalues: reactModule (ref), voiceStateContextModule (ref), voiceIndicatorFuncModule (ref), cryoModule (ref)
-	return if reactModule.useContext(voiceStateContextModule.Context).voiceEnabled then reactModule.createElement(voiceIndicatorFuncModule, cryoModule.Dictionary.join(p0, {})) else nil
+	return if reactModule.useContext(voiceStateContextModule.Context).voiceEnabled then reactModule.createElement(voiceIndicatorFuncModule, cryoModule.Dictionary.join(p1, {})) else nil
 end
 
 local dsaIllegalContentReportingModule = require(corePackagesService.Workspace.Packages.DsaIllegalContentReporting)
@@ -82,14 +82,14 @@ function reportDialog.init(p1)
 		p1:setState({ reasonText = p2 })
 	end
 	
-	function p1.onTextChanged(p3)
+	function p1.onTextChanged(p2)
 		-- upvalues: p1 (ref)
-		p1:setState({ descriptionText = p3 })
+		p1:setState({ descriptionText = p2 })
 	end
 	
-	function p1.onReport(p4, p5)
+	function p1.onReport(p2, p3)
 		-- upvalues: p1 (ref)
-		p1.props.sendReport(p1.props.reportType, p1.props.targetPlayer, p1:getReason(), p1.state.descriptionText, p1.props.reportCategory, p4, p5)
+		p1.props.sendReport(p1.props.reportType, p1.props.targetPlayer, p1:getReason(), p1.state.descriptionText, p1.props.reportCategory, p2, p3)
 	end
 	
 	function p1.navigateBack()
@@ -102,21 +102,21 @@ function reportDialog.init(p1)
 		p1.props.closeDialog(p1.state.reasonText, p1.state.descriptionText ~= "")
 	end
 	
-	function p1.onScreenshotAnnotated(p6)
+	function p1.onScreenshotAnnotated(p2)
 		-- upvalues: p1 (ref)
-		p1.props.screenshotAnnotated(p1.props.reportCategory, p1.props.reportType, p6)
+		p1.props.screenshotAnnotated(p1.props.reportCategory, p1.props.reportType, p2)
 	end
 end
 
-function reportDialog.getReason(p7)
+function reportDialog.getReason(p1)
 	-- upvalues: constantsModule (ref)
-	return if p7.props.reportType == constantsModule.ReportType.Player then p7.state.reasonText elseif p7.props.reportType == constantsModule.ReportType.Place then "Inappropriate Content" else nil
+	return if p1.props.reportType == constantsModule.ReportType.Player then p1.state.reasonText elseif p1.props.reportType == constantsModule.ReportType.Place then "Inappropriate Content" else nil
 end
 
-function reportDialog.canReport(p8)
-	local charCount = utf8.len(utf8.nfcnormalize(p8.state.descriptionText))
+function reportDialog.canReport(p1)
+	local charCount = utf8.len(utf8.nfcnormalize(p1.state.descriptionText))
 	
-	return p8:getReason() ~= nil and (charCount >= 0 and charCount <= 160)
+	return p1:getReason() ~= nil and (charCount >= 0 and charCount <= 160)
 end
 
 function reportDialog.renderUKOSALink(_)
@@ -129,38 +129,38 @@ function reportDialog.renderUKOSALink(_)
 	}, { OSALink = roactModule.createElement(OSAReportLink) }) else nil
 end
 
-function reportDialog.renderPlayerInfo(p9)
-	-- upvalues: constantsModule (ref), withStyle (ref), cryoModule (ref), t (ref), roactModule (ref), provider (ref), playerCellModule (ref), isPlayerVerified (ref), var32 (ref), default (ref), constantsModule_1 (ref)
-	local var39 = p9.props.reportCategory == constantsModule.Category.Voice
+function reportDialog.renderPlayerInfo(p1)
+	-- upvalues: constantsModule (ref), withStyle (ref), cryoModule (ref), t (ref), roactModule (ref), provider (ref), playerCellModule (ref), isPlayerVerified (ref), var1 (ref), default (ref), constantsModule_1 (ref)
+	local var2 = p1.props.reportCategory == constantsModule.Category.Voice
 	
-	return withStyle(function(p10)
-		-- upvalues: cryoModule (copy), t (copy), var39 (ref), p9 (ref), roactModule (copy), provider (copy), playerCellModule (copy), isPlayerVerified (copy), var32 (copy), default (copy), constantsModule_1 (copy)
-		local var40 = cryoModule.Dictionary.join(p10, { Theme = cryoModule.Dictionary.join(p10.Theme, t) })
-		local var41 = 0
+	return withStyle(function(p2)
+		-- upvalues: cryoModule (copy), t (copy), var2 (ref), p1 (ref), roactModule (copy), provider (copy), playerCellModule (copy), isPlayerVerified (copy), var1 (copy), default (copy), constantsModule_1 (copy)
+		local var3 = cryoModule.Dictionary.join(p2, { Theme = cryoModule.Dictionary.join(p2.Theme, t) })
+		local var4 = 0
 		
-		if var39 and p9.props.isReportDialogOpen then
-			var41 += 1
+		if var2 and p1.props.isReportDialogOpen then
+			var4 += 1
 		end
-		return roactModule.createElement(provider, { style = var40 }, {
+		return roactModule.createElement(provider, { style = var3 }, {
 			roactModule.createElement(playerCellModule, {
 				isOnline = true,
 				isSelected = false,
 				LayoutOrder = 1,
-				userId = p9.props.targetPlayer.UserId,
-				username = p9.props.targetPlayer.Name,
-				displayName = p9.props.targetPlayer.DisplayName,
-				hasVerifiedBadge = isPlayerVerified(p9.props.targetPlayer),
-				key = tostring(p9.props.targetPlayer.UserId),
-				memoKey = var41
+				userId = p1.props.targetPlayer.UserId,
+				username = p1.props.targetPlayer.Name,
+				displayName = p1.props.targetPlayer.DisplayName,
+				hasVerifiedBadge = isPlayerVerified(p1.props.targetPlayer),
+				key = tostring(p1.props.targetPlayer.UserId),
+				memoKey = var4
 			}, {
-				VoiceIndicator = var39 and (p9.props.isReportDialogOpen and (roactModule.createElement(var32, {
+				VoiceIndicator = var2 and (p1.props.isReportDialogOpen and (roactModule.createElement(var1, {
 					hideOnError = true,
 					iconStyle = "SpeakerLight",
-					userId = tostring(p9.props.targetPlayer.UserId),
+					userId = tostring(p1.props.targetPlayer.UserId),
 					size = UDim2.fromOffset(36, 36),
 					onClicked = function()
-						-- upvalues: default (copy), p9 (copy), constantsModule_1 (copy)
-						default:ToggleMutePlayer(p9.props.targetPlayer.UserId, constantsModule_1.VOICE_CONTEXT_TYPE.REPORT_MENU)
+						-- upvalues: default (copy), p1 (copy), constantsModule_1 (copy)
+						default:ToggleMutePlayer(p1.props.targetPlayer.UserId, constantsModule_1.VOICE_CONTEXT_TYPE.REPORT_MENU)
 					end
 				}) or nil))
 			})
@@ -168,9 +168,9 @@ function reportDialog.renderPlayerInfo(p9)
 	end)
 end
 
-function reportDialog.renderDropDownMenu(p11)
+function reportDialog.renderDropDownMenu(p1)
 	-- upvalues: isShowUKOSAIllegalContentReportingLink (ref), roactModule (ref), withLocalizationModule (ref), list (ref), dropdownMenu (ref)
-	return if p11.props.isReportDialogOpen then roactModule.createElement("Frame", {
+	return if p1.props.isReportDialogOpen then roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 10,
 		Position = UDim2.fromOffset(0, if isShowUKOSAIllegalContentReportingLink() then 64 else 72),
@@ -186,66 +186,66 @@ function reportDialog.renderDropDownMenu(p11)
 			menu7 = "CoreScripts.InGameMenu.Report.AbusePersonalQuestion",
 			menu8 = "CoreScripts.InGameMenu.Report.AbuseOffsiteLink",
 			placeHolderText = "CoreScripts.InGameMenu.Report.AbuseTypePlaceHolder"
-		})(function(p12)
-			-- upvalues: list (copy), p11 (ref), roactModule (copy), dropdownMenu (copy)
+		})(function(p2)
+			-- upvalues: list (copy), p1 (ref), roactModule (copy), dropdownMenu (copy)
 			local t = {}
 			local t_1 = {}
 			
 			for i, v in ipairs(list) do
-				local var44 = p12["menu" .. tostring(i)]
-				table.insert(t, { text = var44 })
-				t_1[var44] = v
+				local var2 = p2["menu" .. tostring(i)]
+				table.insert(t, { text = var2 })
+				t_1[var2] = v
 			end
 			return roactModule.createElement(dropdownMenu, {
 				showDropShadow = true,
 				fixedListHeight = 171,
-				placeholder = p12.placeHolderText,
-				onChange = function(p13)
-					-- upvalues: t_1 (ref), p11 (copy)
-					p11.onReasonChanged(t_1[p13])
+				placeholder = p2.placeHolderText,
+				onChange = function(p3)
+					-- upvalues: t_1 (ref), p1 (copy)
+					p1.onReasonChanged(t_1[p3])
 				end,
 				height = UDim.new(0, 48),
-				screenSize = p11.props.screenSize,
+				screenSize = p1.props.screenSize,
 				cellDatas = t
 			})
 		end)
 	}) else nil
 end
 
-function reportDialog.renderPlayerContents(p14)
+function reportDialog.renderPlayerContents(p2)
 	-- upvalues: withLocalizationModule (ref), isShowUKOSAIllegalContentReportingLink (ref), roactModule (ref), textEntryFieldModule (ref)
 	return withLocalizationModule({
 		placeHolderText = "CoreScripts.InGameMenu.Report.AbuseDetailsPlaceHolder"
-	})(function(p15)
-		-- upvalues: isShowUKOSAIllegalContentReportingLink (copy), roactModule (copy), p14 (ref), textEntryFieldModule (copy)
+	})(function(p3)
+		-- upvalues: isShowUKOSAIllegalContentReportingLink (copy), roactModule (copy), p2 (ref), textEntryFieldModule (copy)
 		return roactModule.createFragment({
-			PlayerInfo = p14:renderPlayerInfo(),
-			DropDownMenu = p14:renderDropDownMenu(),
+			PlayerInfo = p2:renderPlayerInfo(),
+			DropDownMenu = p2:renderDropDownMenu(),
 			TextField = roactModule.createElement(textEntryFieldModule, {
 				maxTextLength = 160,
 				autoFocusOnEnabled = false,
-				enabled = p14.props.isReportDialogOpen,
-				text = p14.state.descriptionText,
-				textChanged = p14.onTextChanged,
-				PlaceholderText = p15.placeHolderText,
+				enabled = p2.props.isReportDialogOpen,
+				text = p2.state.descriptionText,
+				textChanged = p2.onTextChanged,
+				PlaceholderText = p3.placeHolderText,
 				Position = UDim2.fromOffset(0, if isShowUKOSAIllegalContentReportingLink() then 118 else 132),
 				Size = UDim2.new(1, 0, 1, if isShowUKOSAIllegalContentReportingLink() then -150 else -132)
 			}),
-			OSALinkFrame = p14:renderUKOSALink()
+			OSALinkFrame = p2:renderUKOSALink()
 		})
 	end)
 end
 
-function reportDialog.renderPlaceContents(p16)
+function reportDialog.renderPlaceContents(p2)
 	-- upvalues: withLocalizationModule (ref), isShowUKOSAIllegalContentReportingLink (ref), roactModule (ref), gameIconModule (ref), themedTextLabelModule (ref), textEntryFieldModule (ref)
 	return withLocalizationModule({
 		placeHolderText = "CoreScripts.InGameMenu.Report.AbuseDetailsPlaceHolder",
 		labelText = {
 			"CoreScripts.InGameMenu.Report.ReportingGame",
-			RBX_NAME = p16.props.placeName
+			RBX_NAME = p2.props.placeName
 		}
-	})(function(p17)
-		-- upvalues: isShowUKOSAIllegalContentReportingLink (copy), roactModule (copy), gameIconModule (copy), themedTextLabelModule (copy), textEntryFieldModule (copy), p16 (ref)
+	})(function(p3)
+		-- upvalues: isShowUKOSAIllegalContentReportingLink (copy), roactModule (copy), gameIconModule (copy), themedTextLabelModule (copy), textEntryFieldModule (copy), p2 (ref)
 		return roactModule.createFragment({
 			PlaceInfo = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -265,28 +265,28 @@ function reportDialog.renderPlaceContents(p16)
 					AnchorPoint = Vector2.new(0, 0.5),
 					Position = UDim2.new(0, 76, 0.5, 0),
 					Size = UDim2.new(1, -76, 0, 40),
-					Text = p17.labelText,
+					Text = p3.labelText,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			}),
 			TextField = roactModule.createElement(textEntryFieldModule, {
 				maxTextLength = 160,
 				autoFocusOnEnabled = false,
-				enabled = p16.props.isReportDialogOpen,
-				text = p16.state.descriptionText,
-				textChanged = p16.onTextChanged,
-				PlaceholderText = p17.placeHolderText,
+				enabled = p2.props.isReportDialogOpen,
+				text = p2.state.descriptionText,
+				textChanged = p2.onTextChanged,
+				PlaceholderText = p3.placeHolderText,
 				Position = UDim2.fromOffset(0, if isShowUKOSAIllegalContentReportingLink() then 90 else 112),
 				Size = UDim2.new(1, 0, 1, if isShowUKOSAIllegalContentReportingLink() then -135 else -112)
 			}),
-			OSALinkFrame = p16:renderUKOSALink()
+			OSALinkFrame = p2:renderUKOSALink()
 		})
 	end)
 end
 
-function reportDialog.renderContents(p18)
+function reportDialog.renderContents(p2)
 	-- upvalues: constantsModule (ref)
-	return if p18.props.reportType == constantsModule.ReportType.Player then p18:renderPlayerContents() elseif p18.props.reportType == constantsModule.ReportType.Place then p18:renderPlaceContents() else nil
+	return if p2.props.reportType == constantsModule.ReportType.Player then p2:renderPlayerContents() elseif p2.props.reportType == constantsModule.ReportType.Place then p2:renderPlaceContents() else nil
 end
 
 local t_1 = {
@@ -296,25 +296,25 @@ local t_1 = {
 	[constantsModule.Category.Experience] = "CoreScripts.InGameMenu.Report.Title.Experience"
 }
 
-function reportDialog.categoryTitle(p19)
+function reportDialog.categoryTitle(p2)
 	-- upvalues: constantsModule (ref), t_1 (ref)
-	return if p19.props.reportType == constantsModule.ReportType.Place then t_1[constantsModule.Category.Experience] else t_1[p19.props.reportCategory] or "CoreScripts.InGameMenu.Report.ReportTitle"
+	return if p2.props.reportType == constantsModule.ReportType.Place then t_1[constantsModule.Category.Experience] else t_1[p2.props.reportCategory] or "CoreScripts.InGameMenu.Report.ReportTitle"
 end
 
-function reportDialog.render(p20)
+function reportDialog.render(p2)
 	-- upvalues: withLocalizationModule (ref), getFFlagReportAnythingScreenshotModule (ref), constantsModule (ref), getFFlagReportAnythingMultistepScreenshotModule (ref), reactModule (ref), screenshotFlowStepHandlerModule (ref), screenshotHelperModule (ref), screenshotDialogModule (ref), roactModule (ref), modalDialogModule (ref), buttonStack (ref), buttonType (ref)
 	return withLocalizationModule({
 		cancelText = "CoreScripts.InGameMenu.Cancel",
 		reportText = "CoreScripts.InGameMenu.Report.SendReport",
 		toastDefaultTitle = "CoreScripts.InGameMenu.Report.Confirmation.ThanksForReport",
 		toastDefaultDescription = "CoreScripts.InGameMenu.Report.Confirmation.ThanksForReportDescription",
-		titleText = p20:categoryTitle()
-	})(function(p21)
-		-- upvalues: getFFlagReportAnythingScreenshotModule (copy), p20 (ref), constantsModule (copy), getFFlagReportAnythingMultistepScreenshotModule (copy), reactModule (copy), screenshotFlowStepHandlerModule (copy), screenshotHelperModule (copy), screenshotDialogModule (copy), roactModule (copy), modalDialogModule (copy), buttonStack (copy), buttonType (copy)
-		return if not (not getFFlagReportAnythingScreenshotModule() or p20.props.currentPage ~= constantsModule.Page.ScreenshotDialog) then if getFFlagReportAnythingMultistepScreenshotModule() then reactModule.createElement(screenshotFlowStepHandlerModule, {
+		titleText = p2:categoryTitle()
+	})(function(p3)
+		-- upvalues: getFFlagReportAnythingScreenshotModule (copy), p2 (ref), constantsModule (copy), getFFlagReportAnythingMultistepScreenshotModule (copy), reactModule (copy), screenshotFlowStepHandlerModule (copy), screenshotHelperModule (copy), screenshotDialogModule (copy), roactModule (copy), modalDialogModule (copy), buttonStack (copy), buttonType (copy)
+		return if not (not getFFlagReportAnythingScreenshotModule() or p2.props.currentPage ~= constantsModule.Page.ScreenshotDialog) then if getFFlagReportAnythingMultistepScreenshotModule() then reactModule.createElement(screenshotFlowStepHandlerModule, {
 			titleText = "Highlight What's Wrong",
 			entryPoint = "experience",
-			dismissAction = p20.onCancel,
+			dismissAction = p2.onCancel,
 			screenshot = screenshotHelperModule:GetScreenshotContentId(),
 			skipAnnotationAction = function() end,
 			restartAction = function() end,
@@ -322,97 +322,97 @@ function reportDialog.render(p20)
 		}) else reactModule.createElement(screenshotDialogModule, {
 			titleText = "Highlight What's Wrong",
 			screenshot = screenshotHelperModule:GetScreenshotContentId(),
-			backAction = if p20.props.canNavigateBack then p20.navigateBack else nil,
-			dismissAction = p20.onCancel,
-			reportAction = p20.onScreenshotAnnotated,
-			initialAnnotationPoints = p20.props.screenshotAnnotationPoints
+			backAction = if p2.props.canNavigateBack then p2.navigateBack else nil,
+			dismissAction = p2.onCancel,
+			reportAction = p2.onScreenshotAnnotated,
+			initialAnnotationPoints = p2.props.screenshotAnnotationPoints
 		}) else roactModule.createElement(modalDialogModule, {
-			visible = p20.props.isReportDialogOpen,
-			screenSize = p20.props.screenSize,
-			titleText = p21.titleText,
+			visible = p2.props.isReportDialogOpen,
+			screenSize = p2.props.screenSize,
+			titleText = p3.titleText,
 			contents = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 				Padding = roactModule.createElement("UIPadding", {
 					PaddingLeft = UDim.new(0, 24),
 					PaddingRight = UDim.new(0, 24)
 				}),
-				Contents = p20:renderContents()
+				Contents = p2:renderContents()
 			}),
 			actionButtons = roactModule.createElement(buttonStack, {
 				buttonHeight = 48,
 				buttons = {
 					{
 						buttonType = buttonType.Secondary,
-						props = { onActivated = p20.onCancel, text = p21.cancelText }
+						props = { onActivated = p2.onCancel, text = p3.cancelText }
 					},
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							isDisabled = not p20:canReport(),
+							isDisabled = not p2:canReport(),
 							onActivated = function()
-								-- upvalues: p20 (copy), p21 (ref)
-								return p20.onReport(p21.toastDefaultTitle, p21.toastDefaultDescription)
+								-- upvalues: p2 (copy), p3 (ref)
+								return p2.onReport(p3.toastDefaultTitle, p3.toastDefaultDescription)
 							end,
-							text = p21.reportText
+							text = p3.reportText
 						}
 					}
 				}
 			}),
-			onDismiss = p20.onCancel,
-			onBackButtonActivated = if p20.props.canNavigateBack then p20.navigateBack else nil
+			onDismiss = p2.onCancel,
+			onBackButtonActivated = if p2.props.canNavigateBack then p2.navigateBack else nil
 		})
 	end)
 end
 
-function reportDialog.didUpdate(p22, p23)
+function reportDialog.didUpdate(p2, p3)
 	-- upvalues: roactModule (ref)
-	if p23.isReportDialogOpen and not p22.props.isReportDialogOpen then
-		p22:setState({ descriptionText = "", reasonText = roactModule.None })
+	if p3.isReportDialogOpen and not p2.props.isReportDialogOpen then
+		p2:setState({ descriptionText = "", reasonText = roactModule.None })
 	end
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p24, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
 	-- upvalues: constantsModule (ref)
 	return {
-		reportCategory = p24.report.reportCategory,
-		isReportDialogOpen = p24.report.currentPage == constantsModule.Page.ReportForm,
-		currentPage = p24.report.currentPage,
-		reportType = p24.report.reportType,
-		targetPlayer = p24.report.targetPlayer,
-		canNavigateBack = #p24.report.history > 1,
-		placeName = p24.placeInfo.name,
-		screenSize = p24.displayOptions.screenSize,
-		screenshotAnnotationPoints = p24.report.screenshotAnnotationPoints
+		reportCategory = p2.report.reportCategory,
+		isReportDialogOpen = p2.report.currentPage == constantsModule.Page.ReportForm,
+		currentPage = p2.report.currentPage,
+		reportType = p2.report.reportType,
+		targetPlayer = p2.report.targetPlayer,
+		canNavigateBack = #p2.report.history > 1,
+		placeName = p2.placeInfo.name,
+		screenSize = p2.displayOptions.screenSize,
+		screenshotAnnotationPoints = p2.report.screenshotAnnotationPoints
 	}
-end, function(p25)
+end, function(p2)
 	-- upvalues: navigateBackModule (ref), sendAnalyticsModule (ref), constantsModule (ref), endReportFlowModule (ref), sessionUtilityModule (ref), filterIdentifiedAvatarsModule (ref), screenshotAnnotatedModule (ref), sendReportModule (ref)
 	return {
-		navigateBack = function(p26, p27)
-			-- upvalues: p25 (ref), navigateBackModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
-			p25(navigateBackModule())
+		navigateBack = function(p3, p4)
+			-- upvalues: p2 (ref), navigateBackModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
+			p2(navigateBackModule())
 			sendAnalyticsModule(constantsModule.Page.ReportForm, constantsModule.Analytics.ReportFlowBack, {
 				source = constantsModule.Page.ReportForm,
-				reason = p26,
-				descriptionTextChanged = p27
+				reason = p3,
+				descriptionTextChanged = p4
 			})
 		end,
-		closeDialog = function(p28, p29)
-			-- upvalues: p25 (ref), endReportFlowModule (copy), sendAnalyticsModule (copy), constantsModule (copy), sessionUtilityModule (copy)
-			p25(endReportFlowModule())
+		closeDialog = function(p3, p4)
+			-- upvalues: p2 (ref), endReportFlowModule (copy), sendAnalyticsModule (copy), constantsModule (copy), sessionUtilityModule (copy)
+			p2(endReportFlowModule())
 			sendAnalyticsModule(constantsModule.Page.ReportForm, constantsModule.Analytics.ReportFlowAbandoned, {
 				source = constantsModule.Page.ReportForm,
-				reason = p28,
-				descriptionTextChanged = p29
+				reason = p3,
+				descriptionTextChanged = p4
 			})
 			sessionUtilityModule.endAbuseReportSession()
 		end,
-		screenshotAnnotated = function(p30, p31, p32)
-			-- upvalues: p25 (ref), filterIdentifiedAvatarsModule (copy), screenshotAnnotatedModule (copy)
-			p25(filterIdentifiedAvatarsModule(p32))
-			p25(screenshotAnnotatedModule(p30, p31, p32))
+		screenshotAnnotated = function(p3, p4, p5)
+			-- upvalues: p2 (ref), filterIdentifiedAvatarsModule (copy), screenshotAnnotatedModule (copy)
+			p2(filterIdentifiedAvatarsModule(p5))
+			p2(screenshotAnnotatedModule(p3, p4, p5))
 		end,
-		sendReport = function(p33, p34, p35, p36, p37, p38, p39)
-			-- upvalues: p25 (ref), sendReportModule (copy)
-			p25(sendReportModule(p33, p34, p35, p36, p37, p38, p39))
+		sendReport = function(p3, p4, p5, p6, p7, p8, p9)
+			-- upvalues: p2 (ref), sendReportModule (copy)
+			p2(sendReportModule(p3, p4, p5, p6, p7, p8, p9))
 		end
 	}
 end)(reportDialog)

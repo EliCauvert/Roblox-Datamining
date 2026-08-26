@@ -25,28 +25,28 @@ local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 
 return function(_)
 	-- upvalues: useTransferStoreModule (ref), useTokens (ref), useUpdatedRobuxBalanceModule (ref), signalsReactModule (ref), useScaledValue (ref), useLocalization (ref), transferLocalizationKeysModule (ref), formatNumberModule (ref), localizationService (ref), reactModule (ref), transferLocaleFormatModule (ref), handleTransferCompleteModule (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
-	local var12 = useTransferStoreModule()
-	local var13 = useTokens()
-	local var14 = useUpdatedRobuxBalanceModule(var12)
-	local var15 = signalsReactModule.useSignalState(var12.getSelectedAmount)
-	local var16 = useScaledValue(300)
-	local var17 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxSuccessModal)
-	local var18 = if var15 then formatNumberModule(localizationService.RobloxLocaleId, var15) else "0"
+	local var1 = useTransferStoreModule()
+	local var2 = useTokens()
+	local var3 = useUpdatedRobuxBalanceModule(var1)
+	local var4 = signalsReactModule.useSignalState(var1.getSelectedAmount)
+	local var5 = useScaledValue(300)
+	local var6 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxSuccessModal)
+	local var7 = if var4 then formatNumberModule(localizationService.RobloxLocaleId, var4) else "0"
 	
 	local function onComplete()
-		-- upvalues: handleTransferCompleteModule (copy), var12 (ref)
-		handleTransferCompleteModule(var12)
+		-- upvalues: handleTransferCompleteModule (copy), var1 (ref)
+		handleTransferCompleteModule(var1)
 	end
 	
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
-		snapPoints = { var16, 0.5 },
+		snapPoints = { var5, 0.5 },
 		onClose = onComplete
 	}, {
 		Header = reactModule.createElement(sheet.Header, {}, {
 			TransferRobuxHeader = reactModule.createElement(transferRobuxHeaderModule, {
-				titleText = var17.SendRobux or "",
-				robuxBalanceAmount = var14
+				titleText = var6.SendRobux or "",
+				robuxBalanceAmount = var3
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
@@ -57,15 +57,15 @@ return function(_)
 					tag = "auto-xy",
 					LayoutOrder = 1,
 					name = enums.IconName.CircleCheck,
-					size = var13.Size.Size_1200
+					size = var2.Size.Size_1200
 				}),
 				SuccessMessage = reactModule.createElement(text, {
 					tag = "auto-y text-body-large text-wrap text-align-x-center content-emphasis",
 					LayoutOrder = 2,
 					Text = reactModule.useMemo(function()
-						-- upvalues: transferLocaleFormatModule (copy), var17 (ref), var18 (ref)
-						return transferLocaleFormatModule.substituteAmount(var17.SuccessNotification, tostring(var18))
-					end, { var18, var17.SuccessNotification }),
+						-- upvalues: transferLocaleFormatModule (copy), var6 (ref), var7 (ref)
+						return transferLocaleFormatModule.substituteAmount(var6.SuccessNotification, tostring(var7))
+					end, { var7, var6.SuccessNotification }),
 					Size = UDim2.new(1, 0, 0, 0)
 				})
 			})
@@ -76,7 +76,7 @@ return function(_)
 			}, {
 				reactModule.createElement(view, { tag = "row gap-small size-full-0 auto-y" }, {
 					reactModule.createElement(button, {
-						text = var17.OK,
+						text = var6.OK,
 						onActivated = onComplete,
 						variant = buttonVariant.Emphasis,
 						fillBehavior = fillBehavior.Fill

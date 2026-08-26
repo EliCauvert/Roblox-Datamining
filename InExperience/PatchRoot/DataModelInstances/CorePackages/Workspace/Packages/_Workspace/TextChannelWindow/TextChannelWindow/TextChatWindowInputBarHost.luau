@@ -14,56 +14,56 @@ local getFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpC
 local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowThemeByBackground)
 local chatInputBarView = chatUIPrimitivesModule.ChatInputBarView
 
-return function(p0)
+return function(p1)
 	-- upvalues: foundationModule (ref), useCanSendToChannel (ref), useInExperienceLocalization (ref), reactModule (ref), messageWriterContextModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), runVirtualChatCommandsModule (ref), messageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), textChannelWindowAnalyticsModule (ref), loggerModule (ref), chatInputBarView (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref)
-	local targetChannel = p0.targetChannel
-	local var10 = foundationModule.Hooks.useTokens()
-	local var11 = useCanSendToChannel(targetChannel, p0.localUserId)
-	local var12 = useInExperienceLocalization()
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: var12 (ref)
+	local targetChannel = p1.targetChannel
+	local var1 = foundationModule.Hooks.useTokens()
+	local var2 = useCanSendToChannel(targetChannel, p1.localUserId)
+	local var3 = useInExperienceLocalization()
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref)
 		return {
-			placeholder = var12("CoreScripts.TextChat.InputBar.Hint.Touch"),
-			disabled = var12("CoreScripts.TextChat.InputBar.Hint.PrivacySettingsDisabled"),
-			chatUnavailable = var12("CoreScripts.TextChat.InputBar.Hint.ChatUnavailable"),
-			readOnly = var12("CoreScripts.TextChat.Error.ReadOnlyChannel")
+			placeholder = var3("CoreScripts.TextChat.InputBar.Hint.Touch"),
+			disabled = var3("CoreScripts.TextChat.InputBar.Hint.PrivacySettingsDisabled"),
+			chatUnavailable = var3("CoreScripts.TextChat.InputBar.Hint.ChatUnavailable"),
+			readOnly = var3("CoreScripts.TextChat.Error.ReadOnlyChannel")
 		}
-	end, { var12 })
-	local var14 = messageWriterContextModule.useMessageWriter()
-	local var15 = if targetChannel then targetChannel.Name else nil
+	end, { var3 })
+	local var5 = messageWriterContextModule.useMessageWriter()
+	local var6 = if targetChannel then targetChannel.Name else nil
 	
 	return reactModule.createElement(chatInputBarView, {
 		maximumCharacterLimit = 200,
-		onSend = reactModule.useCallback(function(p1)
-			-- upvalues: var11 (ref), targetChannel (ref), getFFlagExpChatUseChatMuteStoreModule (copy), p0 (ref), runVirtualChatCommandsModule (copy), var14 (ref), messageModule (copy), var12 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), textChannelWindowAnalyticsModule (copy), var15 (ref), loggerModule (copy)
-			if not var11 then return end
-			if targetChannel and p1 ~= "" then
-				if getFFlagExpChatUseChatMuteStoreModule() and p0.localUserId then
-					local var16 = runVirtualChatCommandsModule(p1, p0.localUserId)
+		onSend = reactModule.useCallback(function(p2)
+			-- upvalues: var2 (ref), targetChannel (ref), getFFlagExpChatUseChatMuteStoreModule (copy), p1 (ref), runVirtualChatCommandsModule (copy), var5 (ref), messageModule (copy), var3 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), textChannelWindowAnalyticsModule (copy), var6 (ref), loggerModule (copy)
+			if not var2 then return end
+			if targetChannel and p2 ~= "" then
+				if getFFlagExpChatUseChatMuteStoreModule() and p1.localUserId then
+					local var7 = runVirtualChatCommandsModule(p2, p1.localUserId)
 					
-					if var16 then
-						if var14 then
-							var14.write(messageModule.createSystemMessage(var12(var16.key, if next(var16.args) then var16.args else nil)))
+					if var7 then
+						if var5 then
+							var5.write(messageModule.createSystemMessage(var3(var7.key, if next(var7.args) then var7.args else nil)))
 						end
 						return
 					else
 						task.spawn(function()
-							-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), targetChannel (copy), p1 (ref), textChannelWindowAnalyticsModule (copy), var15 (copy), loggerModule (copy)
+							-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), targetChannel (copy), p2 (ref), textChannelWindowAnalyticsModule (copy), var6 (copy), loggerModule (copy)
 							local ok, status = pcall(function()
-								-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), targetChannel (copy), p1 (copy)
+								-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), targetChannel (copy), p2 (copy)
 								if getFFlagExpChatProtectedChatInternalAPIs() then
-									targetChannel:SendInternalAsync(p1)
+									targetChannel:SendInternalAsync(p2)
 									
 									return
 								end
-								targetChannel:SendAsync(p1)
+								targetChannel:SendAsync(p2)
 							end)
 							
 							if ok then
 								textChannelWindowAnalyticsModule.emit(textChannelWindowAnalyticsModule.Counters.Send, {
 									result = "success",
-									has_target = var15 ~= nil,
-									target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(var15)
+									has_target = var6 ~= nil,
+									target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(var6)
 								})
 								
 								return
@@ -71,21 +71,21 @@ return function(p0)
 							loggerModule:warning("SendAsync failed: {}", status)
 							textChannelWindowAnalyticsModule.emit(textChannelWindowAnalyticsModule.Counters.Send, {
 								result = "failure",
-								has_target = var15 ~= nil,
-								target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(var15)
+								has_target = var6 ~= nil,
+								target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(var6)
 							})
 						end)
 					end
 				end
 			end
 		end, {
-			targetChannel, var11, var12, p0.localUserId, var14, var15
+			targetChannel, var2, var3, p1.localUserId, var5, var6
 		}),
-		canLocalUserChat = (p0.canLocalUserChat ~= nil or p0.canLocalUserChat) and (targetChannel ~= nil and var11),
-		textSize = var10.Typography.CaptionMedium.FontSize,
-		fontFace = p0.fontFace,
-		placeholderText = var13.placeholder,
-		disabledChatPlaceholderText = if targetChannel == nil then var13.chatUnavailable elseif not var11 then var13.readOnly else var13.disabled,
+		canLocalUserChat = (p1.canLocalUserChat ~= nil or p1.canLocalUserChat) and (targetChannel ~= nil and var2),
+		textSize = var1.Typography.CaptionMedium.FontSize,
+		fontFace = p1.fontFace,
+		placeholderText = var4.placeholder,
+		disabledChatPlaceholderText = if targetChannel == nil then var4.chatUnavailable elseif not var2 then var4.readOnly else var4.disabled,
 		autocomplete = reactModule.useMemo(function()
 			return { commands = nil, emojis = true }
 		end, {}),

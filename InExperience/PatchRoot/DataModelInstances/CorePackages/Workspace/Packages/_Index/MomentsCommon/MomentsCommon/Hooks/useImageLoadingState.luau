@@ -1,6 +1,6 @@
 ﻿local useAssetFetchStatus = require(script:FindFirstAncestor("MomentsCommon").Parent.RoactUtils).Hooks.useAssetFetchStatus
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAssetFetchStatus (ref)
-	return useAssetFetchStatus(p0) == Enum.AssetFetchStatus.Success
+	return useAssetFetchStatus(p1) == Enum.AssetFetchStatus.Success
 end

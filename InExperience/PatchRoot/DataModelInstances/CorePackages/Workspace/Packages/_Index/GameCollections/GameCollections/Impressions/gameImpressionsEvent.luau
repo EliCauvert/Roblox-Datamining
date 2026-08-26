@@ -21,21 +21,21 @@ local fFlagLuaAppSduiLandingPageEnabled = require(parent.SharedFlags).FFlagLuaAp
 local fFlagLuaAppAddAnalyticsDataToSeeAllImpressions = require(parent.SharedFlags).FFlagLuaAppAddAnalyticsDataToSeeAllImpressions
 local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
 local fFlagLuaAppSearchResultsPageGameTileVideo = require(parent.SharedFlags).FFlagLuaAppSearchResultsPageGameTileVideo
-local var7 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
+local var1 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
 	eventName = "gameImpressions",
 	description = "Fires when game tiles become visible to the user",
 	backends = { "EventIngest" },
 	throttlingPercentage = luaAppGameImpressionsEventThrottlingHundredthsPercent,
 	lastUpdated = { 26, 2, 4 }
 } else nil
-local var8 = if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
+local var2 = if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
 	eventName = "gameImpressionsShadow",
 	description = "Shadow traffic for gameImpressions event recovery percentage",
 	backends = { "EventIngest" },
 	throttlingPercentage = luaAppGameImpressionsShadowThrottlingHundredthsPercent,
 	lastUpdated = { 26, 3, 4 }
 } else nil
-local var9 = tModule.strictInterface({
+local var3 = tModule.strictInterface({
 	absPositions = tModule.string,
 	topicDataPositions = tModule.string,
 	rootPlaceIds = tModule.string,
@@ -67,7 +67,7 @@ local var9 = tModule.strictInterface({
 	interactionUuid = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
 	hasSponsoredContent = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.boolean) else nil
 })
-local var10 = tModule.strictInterface({
+local var4 = tModule.strictInterface({
 	absPositions = tModule.string,
 	topicDataPositions = tModule.string,
 	rootPlaceIds = tModule.string,
@@ -94,9 +94,9 @@ local var10 = tModule.strictInterface({
 	hasSponsoredContent = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.boolean) else nil
 })
 local t = {
-	[appPage.Home] = var9,
-	[appPage.Games] = var9,
-	[appPage.SduiLandingPage] = if fFlagLuaAppSduiLandingPageEnabled then var9 else nil,
+	[appPage.Home] = var3,
+	[appPage.Games] = var3,
+	[appPage.SduiLandingPage] = if fFlagLuaAppSduiLandingPageEnabled then var3 else nil,
 	[appPage.SearchPage] = tModule.strictInterface({
 		absPositions = tModule.string,
 		topicDataPositions = tModule.string,
@@ -167,7 +167,7 @@ local t = {
 		interactionUuid = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
 		hasSponsoredContent = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.boolean) else nil
 	}),
-	Deeplink = var10,
+	Deeplink = var4,
 	InExpHistoryPage = if fFlagTraversalHistoryDiscoveryTelemetry then tModule.strictInterface({
 		absPositions = tModule.string,
 		positionsInRows = tModule.optional(tModule.string),
@@ -184,44 +184,44 @@ local t = {
 	}) else nil
 }
 
-return function(p0, p1, p2)
-	-- upvalues: appPage (ref), var10 (ref), t (ref), discoveryEventErrorLogger (ref), fFlagLuaAppGameImpressionsAddUnifiedFields (ref), cryoModule (ref), httpService (ref), contentType (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var7 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var8 (write)
+return function(p1, p2, p3)
+	-- upvalues: appPage (ref), var4 (ref), t (ref), discoveryEventErrorLogger (ref), fFlagLuaAppGameImpressionsAddUnifiedFields (ref), cryoModule (ref), httpService (ref), contentType (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var1 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var2 (write)
 	local _ = nil
-	local var12 = if p2.seeAllFlag and (p1 == appPage.Home or p1 == appPage.Games) then var10 else t[p1]
+	local var5 = if p3.seeAllFlag and (p2 == appPage.Home or p2 == appPage.Games) then var4 else t[p2]
 	
-	if var12 then
-		local var13, var14 = var12(p2)
+	if var5 then
+		local var6, var7 = var5(p3)
 		
-		if not var13 then
-			discoveryEventErrorLogger.reportError("GameImpressionsEventInvalidInterface", var14)
+		if not var6 then
+			discoveryEventErrorLogger.reportError("GameImpressionsEventInvalidInterface", var7)
 		end
 	else
-		discoveryEventErrorLogger.reportError("GameImpressionsEventMissingInterface", `Missing interface for eventContext {p1} to type check gameImpressions event parameters`, { eventContext = p1 })
+		discoveryEventErrorLogger.reportError("GameImpressionsEventMissingInterface", `Missing interface for eventContext {p2} to type check gameImpressions event parameters`, { eventContext = p2 })
 	end
 	if fFlagLuaAppGameImpressionsAddUnifiedFields then
-		p2 = cryoModule.Dictionary.join({
+		p3 = cryoModule.Dictionary.join({
 			interactionUuid = httpService:GenerateGUID(false),
 			contentType = contentType.Game
-		}, p2)
+		}, p3)
 	end
-	if p2.analyticsData then
-		p2 = cryoModule.Dictionary.join(p2.analyticsData, p2, { analyticsData = cryoModule.None })
+	if p3.analyticsData then
+		p3 = cryoModule.Dictionary.join(p3.analyticsData, p3, { analyticsData = cryoModule.None })
 	end
 	if fFlagLuaAppMigrateGameEventsTelemetryService then
-		telemetryService:LogEvent(var7, {
-			eventContext = p1,
+		telemetryService:LogEvent(var1, {
+			eventContext = p2,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = p2,
+			customFields = p3,
 			legacyOverrideTargetForEventIngest = getPlatformTarget()
 		})
 	else
-		p0:sendEventDeferred(p1, "gameImpressions", p2)
+		p1:sendEventDeferred(p2, "gameImpressions", p3)
 	end
 	if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then
-		telemetryService:LogEvent(var8, {
-			eventContext = p1,
+		telemetryService:LogEvent(var2, {
+			eventContext = p2,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = p2,
+			customFields = p3,
 			legacyOverrideTargetForEventIngest = getPlatformTarget()
 		})
 	end

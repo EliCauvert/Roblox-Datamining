@@ -1,22 +1,22 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.ES7Types)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	local _ = {}
-	local p0Count = #p0
+	local p0Count = #p1
 	local list = table.create(p0Count)
 	
-	if p1 then
+	if p2 then
 		for i = 1, p0Count do
-			if p2 == nil then
-				list[i] = p1(string.sub(p0, i, i), i)
+			if p3 == nil then
+				list[i] = p2(string.sub(p1, i, i), i)
 			else
-				list[i] = p1(p2, string.sub(p0, i, i), i)
+				list[i] = p2(p3, string.sub(p1, i, i), i)
 			end
 		end
 		return list
 	else
 		for i_1 = 1, p0Count do
-			list[i_1] = string.sub(p0, i_1, i_1)
+			list[i_1] = string.sub(p1, i_1, i_1)
 		end
 		return list
 	end

@@ -4,13 +4,13 @@ local barGraphModule = require(coreGuiService.RobloxGui.Modules.Stats.BarGraph)
 local t = {}
 t.__index = t
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: t (ref), statsUtilsModule (ref), barGraphModule (ref)
 	local pSBottomAxisLabel = {}
 	setmetatable(pSBottomAxisLabel, t)
-	pSBottomAxisLabel._statType = p0
-	pSBottomAxisLabel._statMaxName = statsUtilsModule.StatMaxNames[p0]
-	pSBottomAxisLabel._isMaximized = p1
+	pSBottomAxisLabel._statType = p1
+	pSBottomAxisLabel._statMaxName = statsUtilsModule.StatMaxNames[p1]
+	pSBottomAxisLabel._isMaximized = p2
 	pSBottomAxisLabel._values = {}
 	pSBottomAxisLabel._average = 0
 	pSBottomAxisLabel._target = 0
@@ -31,7 +31,7 @@ function t.new(p0, p1)
 	pSBottomAxisLabel._bottomLabel.TextXAlignment = Enum.TextXAlignment.Left
 	pSBottomAxisLabel._bottomLabel.TextYAlignment = Enum.TextYAlignment.Bottom
 	pSBottomAxisLabel._bottomLabel.FontSize = statsUtilsModule.PanelGraphFontSize
-	pSBottomAxisLabel._graph = barGraphModule.new(p1)
+	pSBottomAxisLabel._graph = barGraphModule.new(p2)
 	statsUtilsModule.StyleTextWidget(pSBottomAxisLabel._topLabel)
 	statsUtilsModule.StyleTextWidget(pSBottomAxisLabel._bottomLabel)
 	pSBottomAxisLabel:_layoutElements()
@@ -39,32 +39,32 @@ function t.new(p0, p1)
 	return pSBottomAxisLabel
 end
 
-function t:SetZIndex(p2)
-	self._frame.ZIndex = p2
-	self._topLabel.ZIndex = p2
-	self._bottomLabel.ZIndex = p2
-	self._graph:SetZIndex(p2)
+function t:SetZIndex(p1)
+	self._frame.ZIndex = p1
+	self._topLabel.ZIndex = p1
+	self._bottomLabel.ZIndex = p1
+	self._graph:SetZIndex(p1)
 end
 
 function t:_layoutElements()
-	local var5
+	local var1
 	local _ = nil
 	
 	if self._isMaximized then
-		var5 = 30
+		var1 = 30
 		self._topLabel.Visible = true
 		self._bottomLabel.Visible = true
 	else
-		var5 = 0
+		var1 = 0
 		self._topLabel.Visible = false
 		self._bottomLabel.Visible = false
 	end
 	local uDim2 = UDim2.new(0, 10, 0, 10)
-	local uDim2_1 = UDim2.new(1, -(20 + var5), 1, -20)
-	local uDim2_2 = UDim2.new(1, -(10 + var5), 0, 10)
-	local uDim2_3 = UDim2.new(0, var5, 0.333, -20)
-	local uDim2_4 = UDim2.new(1, -(10 + var5), 0.666, 10)
-	local uDim2_5 = UDim2.new(0, var5, 0.333, -20)
+	local uDim2_1 = UDim2.new(1, -(20 + var1), 1, -20)
+	local uDim2_2 = UDim2.new(1, -(10 + var1), 0, 10)
+	local uDim2_3 = UDim2.new(0, var1, 0.333, -20)
+	local uDim2_4 = UDim2.new(1, -(10 + var1), 0.666, 10)
+	local uDim2_5 = UDim2.new(0, var1, 0.333, -20)
 	self._topLabel.Size = uDim2_3
 	self._topLabel.Position = uDim2_2
 	self._bottomLabel.Size = uDim2_5
@@ -72,10 +72,10 @@ function t:_layoutElements()
 	self._graph:PlaceInParent(self._frame, uDim2_1, uDim2)
 end
 
-function t:PlaceInParent(p3, p4, p5)
-	self._frame.Position = p5
-	self._frame.Size = p4
-	self._frame.Parent = p3
+function t:PlaceInParent(p1, p2, p3)
+	self._frame.Position = p3
+	self._frame.Size = p2
+	self._frame.Parent = p1
 end
 
 function t:_getTarget()
@@ -98,18 +98,18 @@ function t:_render()
 end
 
 function t:_calculateAxisMax()
-	local var13 = self._target * 2
-	local var14 = self:_recursiveGetOrderOfMagnitude(1, var13)
-	self._axisMax = math.floor(0.5 + var13 / var14) * var14
+	local var1 = self._target * 2
+	local var2 = self:_recursiveGetOrderOfMagnitude(1, var1)
+	self._axisMax = math.floor(0.5 + var1 / var2) * var2
 end
 
-function t:SetStatsAggregator(p6)
+function t:SetStatsAggregator(p1)
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
 		self._aggregator = nil
 	end
-	self._aggregator = p6
+	self._aggregator = p1
 	self:_refreshVisibility()
 end
 
@@ -139,8 +139,8 @@ function t:_shouldBeVisible()
 	return if statsUtilsModule.PerformanceStatsShouldBeVisible() then self._frame.Visible else false
 end
 
-function t:SetVisible(p7)
-	self._frame.Visible = p7
+function t:SetVisible(p1)
+	self._frame.Visible = p1
 	self:_refreshVisibility()
 end
 
@@ -158,8 +158,8 @@ function t:OnPerformanceStatsShouldBeVisibleChanged()
 	self:_refreshVisibility()
 end
 
-function t:_recursiveGetOrderOfMagnitude(p8, p9)
-	return if p9 < p8 then self:_recursiveGetOrderOfMagnitude(p8 / 10, p9) elseif p9 <= p8 * 10 then p8 else self:_recursiveGetOrderOfMagnitude(p8 * 10, p9)
+function t:_recursiveGetOrderOfMagnitude(p1, p2)
+	return if p2 < p1 then self:_recursiveGetOrderOfMagnitude(p1 / 10, p2) elseif p2 <= p1 * 10 then p1 else self:_recursiveGetOrderOfMagnitude(p1 * 10, p2)
 end
 
 function t:_updateValuesAndRender()

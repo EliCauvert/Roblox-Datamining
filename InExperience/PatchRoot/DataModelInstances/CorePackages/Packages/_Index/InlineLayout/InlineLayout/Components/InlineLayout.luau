@@ -13,105 +13,105 @@ local hoverContextModule = require(parent.Components.InlineLayout.InlineLayoutEl
 local view = foundationModule.View
 local fFlagDebugInlineLayout = game:DefineFastFlag("FFlagDebugInlineLayout", false)
 
-local function layoutElements(p0, p1)
+local function layoutElements(p1, p2)
 	-- upvalues: hardBreakElementModule (ref), fFlagDebugInlineLayout (ref), map (ref), reactModule (ref), view (ref)
-	if #p0 == 0 then
+	if #p1 == 0 then
 		return {}
 	end
 	local t = {}
 	local t_1 = {}
-	local var8 = p1
-	local var9 = nil
-	local var10 = 1
-	local var11 = 0
+	local var1 = p2
+	local var2 = nil
+	local var3 = 1
+	local var4 = 0
 	local _ = nil
 	
 	local function _()
-		-- upvalues: t (ref), t_1 (write), var8 (write), p1 (ref)
+		-- upvalues: t (ref), t_1 (write), var1 (write), p2 (ref)
 		table.insert(t, t_1)
 		t_1 = {}
-		var8 = p1
+		var1 = p2
 	end
-	while (var10 <= #p0 or var9) and var11 < 100 do
-		local var9_1 = var9 or p0[var10]
+	while (var3 <= #p1 or var2) and var4 < 100 do
+		local var5 = var2 or p1[var3]
 		
-		if var9_1 == hardBreakElementModule then
-			var10 += 1
+		if var5 == hardBreakElementModule then
+			var3 += 1
 			table.insert(t, t_1)
 			t_1 = {}
-			var8 = p1
+			var1 = p2
 			continue
 		end
-		local width = var9_1:getWidth()
+		local width = var5:getWidth()
 		local t_1Count = #t_1
 		
-		if width <= var8 then
-			table.insert(t_1, var9_1:render(var10, t_1Count))
-			var8 -= width
-			var9 = nil
-			var10 += 1
+		if width <= var1 then
+			table.insert(t_1, var5:render(var3, t_1Count))
+			var1 -= width
+			var2 = nil
+			var3 += 1
 		else
-			local var15, var16 = var9_1:split(var8)
+			local var6, var7 = var5:split(var1)
 			
-			if var15:getWidth() <= var8 then
-				table.insert(t_1, var15:render(var10, t_1Count))
-				var9 = var16
+			if var6:getWidth() <= var1 then
+				table.insert(t_1, var6:render(var3, t_1Count))
+				var2 = var7
 			elseif #t_1 == 0 then
-				if var9_1.canForceSplit then
-					local var17, var18 = var9_1:split(var8, true)
-					var15 = var17
-					var16 = var18
+				if var5.canForceSplit then
+					local var8, var9 = var5:split(var1, true)
+					var6 = var8
+					var7 = var9
 				end
-				table.insert(t_1, var15:render(var10, t_1Count))
-				var9 = var16
+				table.insert(t_1, var6:render(var3, t_1Count))
+				var2 = var7
 			else
-				var9 = var9_1
+				var2 = var5
 			end
 			table.insert(t, t_1)
 			t_1 = {}
-			var8 = p1
+			var1 = p2
 		end
-		var11 += 1
+		var4 += 1
 	end
-	if var11 == 100 and fFlagDebugInlineLayout then
-		warn("InlineLayout: trying to wrap text across multiple lines and iterations cap is reached. Layout may be imperfect", `Desired width: {p1}`, debug.traceback())
+	if var4 == 100 and fFlagDebugInlineLayout then
+		warn("InlineLayout: trying to wrap text across multiple lines and iterations cap is reached. Layout may be imperfect", `Desired width: {p2}`, debug.traceback())
 	end
 	if #t_1 > 0 then
 		table.insert(t, t_1)
 	end
-	return map(t, function(p2, p3)
+	return map(t, function(p3, p4)
 		-- upvalues: reactModule (copy), view (copy)
 		return reactModule.createElement(view, {
 			tag = "auto-xy row align-x-left",
-			key = tostring(p3),
-			LayoutOrder = p3
-		}, p2)
+			key = tostring(p4),
+			LayoutOrder = p4
+		}, p3)
 	end)
 end
 
-return function(p4)
+return function(p3)
 	-- upvalues: useRef (ref), foundationModule (ref), useState (ref), useCallback (ref), layoutElements (ref), useEffect (ref), reactModule (ref), hoverContextModule (ref), view (ref)
-	local var19 = useRef(nil)
-	local var20 = foundationModule.Hooks.useTokens()
-	local var21, var22 = useState({})
-	local var23 = useCallback(function()
-		-- upvalues: var19 (ref), var22 (ref), layoutElements (copy), p4 (ref)
-		if var19.current == nil then return end
-		if var19.current.AbsoluteSize.X == 0 then
+	local var10 = useRef(nil)
+	local var11 = foundationModule.Hooks.useTokens()
+	local var12, var13 = useState({})
+	local var14 = useCallback(function()
+		-- upvalues: var10 (ref), var13 (ref), layoutElements (copy), p3 (ref)
+		if var10.current == nil then return end
+		if var10.current.AbsoluteSize.X == 0 then
 			return
 		end
-		var22(layoutElements(p4.Elements, var19.current.AbsoluteSize.X))
-	end, { p4.Elements })
-	useEffect(var23, { var23 })
+		var13(layoutElements(p3.Elements, var10.current.AbsoluteSize.X))
+	end, { p3.Elements })
+	useEffect(var14, { var14 })
 	
 	return reactModule.createElement(hoverContextModule.Provider, nil, reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
-		onAbsoluteSizeChanged = var23,
-		ref = var19,
+		onAbsoluteSizeChanged = var14,
+		ref = var10,
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
-			HorizontalAlignment = p4.HorizontalAlignment or Enum.HorizontalAlignment.Left,
-			Padding = p4.VerticalPadding or UDim.new(0, var20.Gap.Small)
+			HorizontalAlignment = p3.HorizontalAlignment or Enum.HorizontalAlignment.Left,
+			Padding = p3.VerticalPadding or UDim.new(0, var11.Gap.Small)
 		}
-	}, var21))
+	}, var12))
 end

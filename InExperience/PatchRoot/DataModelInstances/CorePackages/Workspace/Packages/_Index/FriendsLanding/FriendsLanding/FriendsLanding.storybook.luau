@@ -10,14 +10,14 @@ local mockLocale = require(parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
 local colorMode = foundationModule.Enums.ColorMode
-local var4 = dependenciesModule.Lumberyak.Logger.new()
-var4:addSink({
-	maxLevel = var4.Levels.fromString("info"),
-	log = function(_, p0, _)
-		print(p0)
+local var1 = dependenciesModule.Lumberyak.Logger.new()
+var1:addSink({
+	maxLevel = var1.Levels.fromString("info"),
+	log = function(_, p1, _)
+		print(p1)
 	end
 })
-loggerModule:setParent(var4)
+loggerModule:setParent(var1)
 local t = {
 	Default = { themeName = "Light", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
@@ -32,27 +32,27 @@ return {
 		return llama.Dictionary.join(p1, { controls = llama.Dictionary.join(t_2, p1.controls or {}) })
 	end,
 	roact = roact,
-	mapStory = function(p2)
+	mapStory = function(p1)
 		-- upvalues: t (ref), roact (ref), foundationProvider (ref), t_1 (ref), appStyleProvider (ref), universalAppPolicy (ref), mockLocale (ref)
-		return function(p3)
-			-- upvalues: t (copy), roact (copy), foundationProvider (copy), t_1 (copy), appStyleProvider (copy), universalAppPolicy (copy), mockLocale (copy), p2 (ref)
-			local var8 = if p3 then t[p3.theme] else t.Default
+		return function(p2)
+			-- upvalues: t (copy), roact (copy), foundationProvider (copy), t_1 (copy), appStyleProvider (copy), universalAppPolicy (copy), mockLocale (copy), p1 (ref)
+			local var2 = if p2 then t[p2.theme] else t.Default
 			
-			return roact.createElement(foundationProvider, { colorMode = t_1[var8.themeName] }, {
-				AppStyle = roact.createElement(appStyleProvider, { style = var8 }, {
+			return roact.createElement(foundationProvider, { colorMode = t_1[var2.themeName] }, {
+				AppStyle = roact.createElement(appStyleProvider, { style = var2 }, {
 					roact.createElement(universalAppPolicy.Provider, {
 						policy = {
 							function()
-								-- upvalues: p3 (ref)
+								-- upvalues: p2 (ref)
 								return {
 									getShowDisplayName = function()
-										-- upvalues: p3 (copy)
-										return p3.controls.getShowDisplayName
+										-- upvalues: p2 (copy)
+										return p2.controls.getShowDisplayName
 									end
 								}
 							end
 						}
-					}, { Child = mockLocale(p2, p3) })
+					}, { Child = mockLocale(p1, p2) })
 				})
 			})
 		end

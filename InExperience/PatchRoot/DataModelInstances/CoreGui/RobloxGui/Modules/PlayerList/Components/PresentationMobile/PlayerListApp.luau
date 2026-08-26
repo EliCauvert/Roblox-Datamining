@@ -14,7 +14,7 @@ local useLayoutValues = playerListModule.Common.useLayoutValues
 local constants = playerListModule.Common.Constants
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local constantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.TopBar.Constants)
-local var13 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
 local useTokens = require(corePackagesService.Packages.Foundation).Hooks.useTokens
 local parent = script.Parent
 local parent_1 = parent.Parent.Parent
@@ -34,35 +34,35 @@ local fFlagPlayerListIgnoreDevGamepadBindings = playerListModule.Flags.FFlagPlay
 local fFlagPlayerListRemoveTopStatModule = require(parent_1.Flags.FFlagPlayerListRemoveTopStat)
 local t = { dampingRatio = 1, frequency = 4 }
 
-local function _(p0, p1, p2, p3, p4)
-	return (p0 - p1) * (p4 - p3) / (p2 - p1) + p3
+local function _(p1, p2, p3, p4, p5)
+	return (p1 - p2) * (p5 - p4) / (p3 - p2) + p4
 end
 
 local playerListApp = roactModule.PureComponent:extend("PlayerListApp")
 
-local function playerListSizeFromViewportSize(p5, p6, p7, p8, p9)
-	-- upvalues: fFlagEnableMobilePlayerListOnConsole (ref), var13 (ref), constantsModule (ref)
-	local minValue = math.min(p6.x, p6.y)
-	local maxValue = math.max(p6.x, p6.y)
-	local var29 = (minValue - 320) * 60 / 55 + 270
-	local var30 = (maxValue - 480) * 46 / 190 + 434
-	var29 = if fFlagEnableMobilePlayerListOnConsole and var29 > 500 then p8 else math.clamp(var29, math.min(270, minValue - 24), 500)
-	var30 = if fFlagEnableMobilePlayerListOnConsole and var30 > 600 then p9 else math.clamp(var30, math.min(434, maxValue - 24), 600)
-	local var31 = if p6.y < p6.x then var30 else var29
-	local var32 = if p6.x < p6.y then var30 else var29
+local function playerListSizeFromViewportSize(p1, p2, p3, p4, p5)
+	-- upvalues: fFlagEnableMobilePlayerListOnConsole (ref), var1 (ref), constantsModule (ref)
+	local minValue = math.min(p2.x, p2.y)
+	local maxValue = math.max(p2.x, p2.y)
+	local var2 = (minValue - 320) * 60 / 55 + 270
+	local var3 = (maxValue - 480) * 46 / 190 + 434
+	var2 = if fFlagEnableMobilePlayerListOnConsole and var2 > 500 then p4 else math.clamp(var2, math.min(270, minValue - 24), 500)
+	var3 = if fFlagEnableMobilePlayerListOnConsole and var3 > 600 then p5 else math.clamp(var3, math.min(434, maxValue - 24), 600)
+	local var4 = if p2.y < p2.x then var3 else var2
+	local var5 = if p2.x < p2.y then var3 else var2
 	
 	if not fFlagEnableMobilePlayerListOnConsole then
-		var31 *= p7
-		var32 *= p7
+		var4 *= p3
+		var5 *= p3
 	end
-	if var13 and p6.y < p6.x then
-		var32 -= constantsModule.TopBarHeight * p5.state.UiScale - 24
+	if var1 and p2.y < p2.x then
+		var5 -= constantsModule.TopBarHeight * p1.state.UiScale - 24
 	end
-	return UDim2.fromOffset(var31, var32)
+	return UDim2.fromOffset(var4, var5)
 end
 
-local _ = function(p10)
-	for i, v in ipairs(p10) do
+local _ = function(p1)
+	for i, v in ipairs(p1) do
 		if v.Team == nil then
 			return true
 		end
@@ -70,81 +70,81 @@ local _ = function(p10)
 	return false
 end
 
-local function getTeamCount(p11, p12)
+local function getTeamCount(p2, p3)
 	local t = {}
-	local var34 = 0
+	local var2 = 0
 	
-	for i, v in pairs(p11) do
+	for i, v in pairs(p2) do
 		if not t[v.TeamColor.Number] then
 			t[v.TeamColor.Number] = true
-			var34 += 1
+			var2 += 1
 		end
 	end
-	if var34 > 0 then
-		local var35
-		for i_1, v_1 in ipairs(p12) do
+	if var2 > 0 then
+		local var3
+		for i_1, v_1 in ipairs(p3) do
 			if v_1.Team == nil then
-				var35 = true
-				if var35 then
-					var34 += 1
+				var3 = true
+				if var3 then
+					var2 += 1
 				end
 			end
 		end
-		var35 = false
+		var3 = false
 	end
-	return var34
+	return var2
 end
 
-function playerListApp.init(p13)
+function playerListApp.init(p4)
 	-- upvalues: signalsModule (ref), displayModule (ref), roactModule (ref), otterModule (ref)
-	p13.state = { visible = false }
-	p13.disposeUiScaleEffect = signalsModule.createEffect(function(p14)
-		-- upvalues: displayModule (copy), p13 (ref)
-		p13:setState({
-			UiScale = displayModule.GetDisplayStore(p14).getUIScale(p14)
+	p4.state = { visible = false }
+	p4.disposeUiScaleEffect = signalsModule.createEffect(function(p5)
+		-- upvalues: displayModule (copy), p4 (ref)
+		p4:setState({
+			UiScale = displayModule.GetDisplayStore(p5).getUIScale(p5)
 		})
 	end)
-	local var36, var37 = roactModule.createBinding(0.5)
-	p13.bodyTransparency = var36
-	p13.updateBodyTransparency = var37
-	p13.bodyTransparencyMotor = otterModule.createSingleMotor(1)
-	p13.bodyTransparencyMotor:onStep(function(p15)
-		-- upvalues: p13 (ref)
-		p13.updateBodyTransparency(p15)
-		p13.props.setLayerCollectorEnabled(if p15 >= 0.99 then p13.props.displayOptions.isVisible else true)
+	local var4, var5 = roactModule.createBinding(0.5)
+	p4.bodyTransparency = var4
+	p4.updateBodyTransparency = var5
+	p4.bodyTransparencyMotor = otterModule.createSingleMotor(1)
+	p4.bodyTransparencyMotor:onStep(function(p5)
+		-- upvalues: p4 (ref)
+		p4.updateBodyTransparency(p5)
+		p4.props.setLayerCollectorEnabled(if p5 >= 0.99 then p4.props.displayOptions.isVisible else true)
 	end)
-	p13.bodyTransparencyMotor:onComplete(function()
-		-- upvalues: p13 (ref)
-		if not p13.props.displayOptions.isVisible then
-			p13:setState({ visible = false })
+	p4.bodyTransparencyMotor:onComplete(function()
+		-- upvalues: p4 (ref)
+		if not p4.props.displayOptions.isVisible then
+			p4:setState({ visible = false })
 		end
 	end)
-	local var38, var39 = roactModule.createBinding(0)
-	p13.bgTransparency = var38
-	p13.updateBgTransparency = var39
-	p13.bgTransparencyMotor = otterModule.createSingleMotor(1)
-	p13.bgTransparencyMotor:onStep(p13.updateBgTransparency)
-	local var40, var41 = roactModule.createBinding(1)
-	p13.frameScale = var40
-	p13.updateFrameScale = var41
-	p13.frameScaleMotor = otterModule.createSingleMotor(0)
-	p13.frameScaleMotor:onStep(function(p16)
-		-- upvalues: p13 (ref)
-		p13.updateFrameScale(p16)
+	local var6, var7 = roactModule.createBinding(0)
+	p4.bgTransparency = var6
+	p4.updateBgTransparency = var7
+	p4.bgTransparencyMotor = otterModule.createSingleMotor(1)
+	p4.bgTransparencyMotor:onStep(p4.updateBgTransparency)
+	local var8, var9 = roactModule.createBinding(1)
+	p4.frameScale = var8
+	p4.updateFrameScale = var9
+	p4.frameScaleMotor = otterModule.createSingleMotor(0)
+	p4.frameScaleMotor:onStep(function(p5)
+		-- upvalues: p4 (ref)
+		p4.updateFrameScale(p5)
 	end)
-	p13.titleRef = roactModule.createRef()
-	p13.closeRef = roactModule.createRef()
+	p4.titleRef = roactModule.createRef()
+	p4.closeRef = roactModule.createRef()
 end
 
-function playerListApp.renderBodyChildren(p17, _, p18)
+function playerListApp.renderBodyChildren(p4, _, p5)
 	-- upvalues: roactModule (ref), appFonts (ref), robloxTranslatorModule (ref)
-	local visible = p17.state.visible
-	local isDropDownVisible = p17.props.isDropDownVisible
-	local size1100 = p17.props.tokens.Size.Size_1100
-	local size500 = p17.props.tokens.Size.Size_500
+	local visible = p4.state.visible
+	local isDropDownVisible = p4.props.isDropDownVisible
+	local size1100 = p4.props.tokens.Size.Size_1100
+	local size500 = p4.props.tokens.Size.Size_500
 	
 	return {
-		UIScale = roactModule.createElement("UIScale", { Scale = p17.frameScale }),
+		UIScale = roactModule.createElement("UIScale", { Scale = p4.frameScale }),
 		UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 6) }),
 		TitleText = roactModule.createElement("TextLabel", {
 			Size = UDim2.new(1, 0, 0, size1100),
@@ -152,12 +152,12 @@ function playerListApp.renderBodyChildren(p17, _, p18)
 			BackgroundTransparency = 1,
 			Font = appFonts.default:getBold(),
 			Visible = visible and not isDropDownVisible,
-			TextSize = p17.props.tokens.FontSize.FontSize_500,
+			TextSize = p4.props.tokens.FontSize.FontSize_500,
 			TextColor3 = Color3.fromRGB(240, 240, 240),
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			Text = robloxTranslatorModule:FormatByKey("InGame.PlayerList.Leaderboard"),
-			[roactModule.Ref] = p17.titleRef
+			[roactModule.Ref] = p4.titleRef
 		}),
 		CloseButton = roactModule.createElement("ImageButton", {
 			Image = "rbxasset://textures/ui/InspectMenu/x.png",
@@ -168,10 +168,10 @@ function playerListApp.renderBodyChildren(p17, _, p18)
 			BackgroundTransparency = 1,
 			Visible = visible and not isDropDownVisible,
 			ZIndex = 0,
-			[roactModule.Ref] = p17.closeRef,
+			[roactModule.Ref] = p4.closeRef,
 			[roactModule.Event.Activated] = function()
-				-- upvalues: p17 (ref)
-				p17.props.setPlayerListVisible(false)
+				-- upvalues: p4 (ref)
+				p4.props.setPlayerListVisible(false)
 			end
 		}),
 		ContentFrame = roactModule.createElement("Frame", {
@@ -181,39 +181,39 @@ function playerListApp.renderBodyChildren(p17, _, p18)
 			AnchorPoint = Vector2.new(0.5, 1),
 			Size = UDim2.new(1, 0, 1, -size1100),
 			Visible = visible and not isDropDownVisible
-		}, p18)
+		}, p5)
 	}
 end
 
-function playerListApp.render(p19)
-	-- upvalues: roactModule (ref), contextActionsBinderModule (ref), withLayoutValues (ref), fFlagEnableMobilePlayerListOnConsole (ref), playersService (ref), getTeamCount (ref), constantsModule (ref), playerListDisplayContainerModule (ref), fFlagAddNewPlayerListFocusNav (ref), eventConnectionsModule (ref), fFlagPlayerListRemoveTopStatModule (ref), topStatConnectorModule (ref), fFlagPlayerListFixMobileScrollingModule (ref), playerDropDownModule (ref), var13 (ref), playerListSizeFromViewportSize (ref)
-	return if p19.state.visible then withLayoutValues(function(p20)
-		-- upvalues: fFlagEnableMobilePlayerListOnConsole (copy), p19 (ref), playersService (copy), getTeamCount (copy), constantsModule (copy), roactModule (copy), playerListDisplayContainerModule (copy), fFlagAddNewPlayerListFocusNav (copy), eventConnectionsModule (copy), contextActionsBinderModule (copy), fFlagPlayerListRemoveTopStatModule (copy), topStatConnectorModule (copy), fFlagPlayerListFixMobileScrollingModule (copy), playerDropDownModule (copy), var13 (copy), playerListSizeFromViewportSize (copy)
+function playerListApp.render(p4)
+	-- upvalues: roactModule (ref), contextActionsBinderModule (ref), withLayoutValues (ref), fFlagEnableMobilePlayerListOnConsole (ref), playersService (ref), getTeamCount (ref), constantsModule (ref), playerListDisplayContainerModule (ref), fFlagAddNewPlayerListFocusNav (ref), eventConnectionsModule (ref), fFlagPlayerListRemoveTopStatModule (ref), topStatConnectorModule (ref), fFlagPlayerListFixMobileScrollingModule (ref), playerDropDownModule (ref), var1 (ref), playerListSizeFromViewportSize (ref)
+	return if p4.state.visible then withLayoutValues(function(p5)
+		-- upvalues: fFlagEnableMobilePlayerListOnConsole (copy), p4 (ref), playersService (copy), getTeamCount (copy), constantsModule (copy), roactModule (copy), playerListDisplayContainerModule (copy), fFlagAddNewPlayerListFocusNav (copy), eventConnectionsModule (copy), contextActionsBinderModule (copy), fFlagPlayerListRemoveTopStatModule (copy), topStatConnectorModule (copy), fFlagPlayerListFixMobileScrollingModule (copy), playerDropDownModule (copy), var1 (copy), playerListSizeFromViewportSize (copy)
 		if fFlagEnableMobilePlayerListOnConsole then
-			p20 = p19.props.layoutValues
+			p5 = p4.props.layoutValues
 		end
 		local entrySizeX
 		local _ = nil
 		
-		if p20.IsTenFoot then
-			entrySizeX = p20.EntrySizeX
+		if p5.IsTenFoot then
+			entrySizeX = p5.EntrySizeX
 		else
-			entrySizeX = p20.EntryBaseSizeX + 4 * p20.EntrySizeIncreasePerStat
-			local var42 = p20.ContainerPadding * 2 + (p20.PlayerDropDownSizeXMobile + p20.PlayerDropDownOffset)
+			entrySizeX = p5.EntryBaseSizeX + 4 * p5.EntrySizeIncreasePerStat
+			local var4 = p5.ContainerPadding * 2 + (p5.PlayerDropDownSizeXMobile + p5.PlayerDropDownOffset)
 			
-			if p19.props.screenSizeX - var42 < entrySizeX then
-				entrySizeX = p19.props.screenSizeX - var42
+			if p4.props.screenSizeX - var4 < entrySizeX then
+				entrySizeX = p4.props.screenSizeX - var4
 			end
 		end
-		local var43 = if playersService.MaxPlayers >= 6 and playersService.MaxPlayers <= 12 then playersService.MaxPlayers * 26 + getTeamCount(p19.props.teams, p19.props.players) * 20 else 1e999
-		local var44 = constantsModule.TopBarHeight * p19.state.UiScale
+		local var5 = if playersService.MaxPlayers >= 6 and playersService.MaxPlayers <= 12 then playersService.MaxPlayers * 26 + getTeamCount(p4.props.teams, p4.props.players) * 20 else 1e999
+		local var6 = constantsModule.TopBarHeight * p4.state.UiScale
 		local t = {}
 		
-		if p19.state.visible then
+		if p4.state.visible then
 			t.PlayerScrollList = roactModule.createElement(playerListDisplayContainerModule, {
-				screenSizeY = p19.props.screenSizeY,
+				screenSizeY = p4.props.screenSizeY,
 				entrySize = entrySizeX,
-				isVisible = if fFlagAddNewPlayerListFocusNav then p19.props.displayOptions.isVisible else nil
+				isVisible = if fFlagAddNewPlayerListFocusNav then p4.props.displayOptions.isVisible else nil
 			})
 		end
 		t.EventConnections = roactModule.createElement(eventConnectionsModule)
@@ -223,11 +223,11 @@ function playerListApp.render(p19)
 			t.TopStatConnector = roactModule.createElement(topStatConnectorModule)
 		end
 		return roactModule.createElement("ImageButton", {
-			Active = p19.props.displayOptions.isVisible,
+			Active = p4.props.displayOptions.isVisible,
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.new(0, 0, 0, 0),
 			BackgroundColor3 = Color3.fromRGB(17, 18, 20),
-			BackgroundTransparency = p19.bgTransparency,
+			BackgroundTransparency = p4.bgTransparency,
 			BorderColor3 = Color3.fromRGB(0, 0, 0),
 			BorderSizePixel = 0,
 			AutoLocalize = false,
@@ -235,104 +235,104 @@ function playerListApp.render(p19)
 			Selectable = not fFlagPlayerListFixMobileScrollingModule,
 			Image = "",
 			[roactModule.Event.Activated] = function()
-				-- upvalues: p19 (copy)
-				p19.props.setPlayerListVisible(false)
+				-- upvalues: p4 (copy)
+				p4.props.setPlayerListVisible(false)
 			end
 		}, {
 			PlayerDropDown = roactModule.createElement(playerDropDownModule, {
 				contentsVisible = true,
-				selectedPlayer = p19.props.dropDownPlayer
+				selectedPlayer = p4.props.dropDownPlayer
 			}),
-			BodyPadding = if var13 and p19.props.screenSizeY < p19.props.screenSizeX then roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var44) }) else nil,
+			BodyPadding = if var1 and p4.props.screenSizeY < p4.props.screenSizeX then roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var6) }) else nil,
 			BodyBackground = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = playerListSizeFromViewportSize(p19, Vector2.new(p19.props.screenSizeX, p19.props.screenSizeY), p19.state.UiScale, p20.PlayerListSizeMin, p20.PlayerListSizeMax),
+				Size = playerListSizeFromViewportSize(p4, Vector2.new(p4.props.screenSizeX, p4.props.screenSizeY), p4.state.UiScale, p5.PlayerListSizeMin, p5.PlayerListSizeMax),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				BackgroundColor3 = Color3.fromRGB(17, 18, 20),
-				BackgroundTransparency = p19.bodyTransparency,
+				BackgroundTransparency = p4.bodyTransparency,
 				BorderColor3 = Color3.fromRGB(0, 0, 0)
-			}, p19:renderBodyChildren(var43, t))
+			}, p4:renderBodyChildren(var5, t))
 		})
 	end) else roactModule.createElement(contextActionsBinderModule)
 end
 
-function playerListApp.didMount(p21)
-	p21.props.setLayerCollectorEnabled(false)
-	p21:setState({ visible = p21.props.displayOptions.isVisible })
+function playerListApp.didMount(p4)
+	p4.props.setLayerCollectorEnabled(false)
+	p4:setState({ visible = p4.props.displayOptions.isVisible })
 end
 
-function playerListApp.willUnmount(p22)
-	p22.props.setLayerCollectorEnabled(true)
+function playerListApp.willUnmount(p4)
+	p4.props.setLayerCollectorEnabled(true)
 	
-	if p22.disposeUiScaleEffect then
-		p22.disposeUiScaleEffect()
+	if p4.disposeUiScaleEffect then
+		p4.disposeUiScaleEffect()
 	end
 end
 
-function playerListApp.didUpdate(p23, p24, _)
+function playerListApp.didUpdate(p4, p5, _)
 	-- upvalues: fFlagPlayerListIgnoreDevGamepadBindings (ref), guiService (ref), constants (ref), userInputService (ref), otterModule (ref), t (ref)
-	local isVisible = p23.props.displayOptions.isVisible
-	local isDropDownVisible = p23.props.isDropDownVisible
+	local isVisible = p4.props.displayOptions.isVisible
+	local isDropDownVisible = p4.props.isDropDownVisible
 	
-	if fFlagPlayerListIgnoreDevGamepadBindings and isVisible ~= p24.displayOptions.isVisible then
+	if fFlagPlayerListIgnoreDevGamepadBindings and isVisible ~= p5.displayOptions.isVisible then
 		guiService:SetMenuIsOpen(isVisible, constants.PLAYER_LIST_MENU)
 	end
 	if isVisible then
-		p23:setState({ visible = true })
+		p4:setState({ visible = true })
 	end
-	if isVisible ~= p24.displayOptions.isVisible and isVisible then
-		p23.props.setIsUsingGamepad(userInputService:GetLastInputType().Name:find("Gamepad") ~= nil)
+	if isVisible ~= p5.displayOptions.isVisible and isVisible then
+		p4.props.setIsUsingGamepad(userInputService:GetLastInputType().Name:find("Gamepad") ~= nil)
 	end
-	p23.bgTransparencyMotor:setGoal(otterModule.spring(if isDropDownVisible or isVisible then 0.7 else 1, t))
+	p4.bgTransparencyMotor:setGoal(otterModule.spring(if isDropDownVisible or isVisible then 0.7 else 1, t))
 	local isVisible_1 = isDropDownVisible and isVisible
-	local var47 = 1.25
+	local var4 = 1.25
 	
 	if isVisible_1 then
-		var47 = 0.95
+		var4 = 0.95
 	elseif isVisible then
-		var47 = 1
+		var4 = 1
 	end
-	p23.frameScaleMotor:setGoal(otterModule.spring(var47, t))
-	local var48 = 1
+	p4.frameScaleMotor:setGoal(otterModule.spring(var4, t))
+	local var5 = 1
 	
 	if isVisible_1 then
-		var48 = 0.8 * p23.props.preferredTransparency
+		var5 = 0.8 * p4.props.preferredTransparency
 	elseif isVisible then
-		var48 = 0.2 * p23.props.preferredTransparency
+		var5 = 0.2 * p4.props.preferredTransparency
 	end
-	p23.bodyTransparencyMotor:setGoal(otterModule.spring(var48, t))
+	p4.bodyTransparencyMotor:setGoal(otterModule.spring(var5, t))
 end
 
-return roactRoduxModule.connect(function(p26)
+return roactRoduxModule.connect(function(p4)
 	return {
-		isDropDownVisible = p26.playerDropDown.isVisible,
-		screenSizeX = p26.screenSize.X,
-		screenSizeY = p26.screenSize.Y,
-		preferredTransparency = p26.settings.preferredTransparency,
-		displayOptions = p26.displayOptions,
-		players = p26.players,
-		playerStats = p26.playerStats,
-		playerIconInfo = p26.playerIconInfo,
-		playerRelationship = p26.playerRelationship,
-		gameStats = p26.gameStats,
-		teams = p26.teams
+		isDropDownVisible = p4.playerDropDown.isVisible,
+		screenSizeX = p4.screenSize.X,
+		screenSizeY = p4.screenSize.Y,
+		preferredTransparency = p4.settings.preferredTransparency,
+		displayOptions = p4.displayOptions,
+		players = p4.players,
+		playerStats = p4.playerStats,
+		playerIconInfo = p4.playerIconInfo,
+		playerRelationship = p4.playerRelationship,
+		gameStats = p4.gameStats,
+		teams = p4.teams
 	}
-end, function(p27)
+end, function(p4)
 	-- upvalues: setPlayerListVisibilityModule (ref), setIsUsingGamepadModule (ref)
 	return {
 		setPlayerListVisible = function(value)
-			-- upvalues: p27 (ref), setPlayerListVisibilityModule (copy)
-			return p27(setPlayerListVisibilityModule(value))
+			-- upvalues: p4 (ref), setPlayerListVisibilityModule (copy)
+			return p4(setPlayerListVisibilityModule(value))
 		end,
 		setIsUsingGamepad = function(value)
-			-- upvalues: p27 (ref), setIsUsingGamepadModule (copy)
-			return p27(setIsUsingGamepadModule(value))
+			-- upvalues: p4 (ref), setIsUsingGamepadModule (copy)
+			return p4(setIsUsingGamepadModule(value))
 		end
 	}
-end)(function(p25)
+end)(function(p4)
 	-- upvalues: fFlagEnableMobilePlayerListOnConsole (ref), useLayoutValues (ref), useTokens (ref), roactModule (ref), playerListApp (ref), cryoModule (ref)
-	return roactModule.createElement(playerListApp, cryoModule.Dictionary.join(p25, {
+	return roactModule.createElement(playerListApp, cryoModule.Dictionary.join(p4, {
 		layoutValues = if fFlagEnableMobilePlayerListOnConsole then if fFlagEnableMobilePlayerListOnConsole then useLayoutValues() else nil else nil,
 		tokens = useTokens()
 	}))

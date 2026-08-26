@@ -22,7 +22,7 @@ local getMessageSettingsModule = require(helpers.getMessageSettings)
 local getMessageTextModule = require(helpers.getMessageText)
 local flags = expChat.Flags
 local getFFlagExpChatUseUpdatedMessageRenderedModule = require(flags.getFFlagExpChatUseUpdatedMessageRendered)
-local var15 = require(flags.getFIntExpChatMessageRenderUserThrottlePermyriad)()
+local var1 = require(flags.getFIntExpChatMessageRenderUserThrottlePermyriad)()
 local getFFlagExpChatExcludeFOMORendersModule = require(flags.getFFlagExpChatExcludeFOMORenders)
 local fFlagExpChatEnableFOMOUpsellModule = require(flags.FFlagExpChatEnableFOMOUpsell)
 local fFlagExpChatEnableCrossAgeChatActivityModule = require(flags.FFlagExpChatEnableCrossAgeChatActivity)
@@ -47,62 +47,62 @@ local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
 local isChatRegionLockedModule = require(expChat.isChatRegionLocked)
 local showChatEnabledUIModule = require(expChat.showChatEnabledUI)
 local getIsARButtonVisibleModule = require(expChat.getIsARButtonVisible)
-local var39 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
+local var2 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 local expChatSlotBatchSize = game:DefineFastInt("ExpChatSlotBatchSize", 10)
 
-local function createSlot(p0)
+local function createSlot(p1)
 	-- upvalues: reactModule (ref), textChatMessageChatActionTypeModule (ref), fFlagExpChatPresetChatEnabled (ref)
-	local var43, var44 = reactModule.createBinding("")
-	local var45, var46 = reactModule.createBinding("")
-	local var47, var48 = reactModule.createBinding(false)
-	local var49, var50 = reactModule.createBinding(0)
-	local var51, var52 = reactModule.createBinding(false)
-	local var53, var54 = reactModule.createBinding(p0)
-	local var55, var56 = reactModule.createBinding(p0)
-	local var57, var58 = reactModule.createBinding(false)
-	local var59, var60 = reactModule.createBinding(false)
-	local var61, var62 = reactModule.createBinding(false)
-	local var63, var64 = reactModule.createBinding(false)
-	local var65 = reactModule.createRef()
-	local var66, var67 = reactModule.createBinding(textChatMessageChatActionTypeModule.Unknown)
-	local var68 = nil
-	local var69 = nil
+	local var3, var4 = reactModule.createBinding("")
+	local var5, var6 = reactModule.createBinding("")
+	local var7, var8 = reactModule.createBinding(false)
+	local var9, var10 = reactModule.createBinding(0)
+	local var11, var12 = reactModule.createBinding(false)
+	local var13, var14 = reactModule.createBinding(p1)
+	local var15, var16 = reactModule.createBinding(p1)
+	local var17, var18 = reactModule.createBinding(false)
+	local var19, var20 = reactModule.createBinding(false)
+	local var21, var22 = reactModule.createBinding(false)
+	local var23, var24 = reactModule.createBinding(false)
+	local var25 = reactModule.createRef()
+	local var26, var27 = reactModule.createBinding(textChatMessageChatActionTypeModule.Unknown)
+	local var28 = nil
+	local var29 = nil
 	
 	if fFlagExpChatPresetChatEnabled then
-		local var70, var71 = reactModule.createBinding(false)
-		var68 = var70
-		var69 = var71
+		local var30, var31 = reactModule.createBinding(false)
+		var28 = var30
+		var29 = var31
 	end
-	var65.current = {}
+	var25.current = {}
 	
 	return {
-		bodyText = var43,
-		setBodyText = var44,
-		prefixText = var45,
-		setPrefixText = var46,
-		shouldShowTranslation = var47,
-		setShowTranslation = var48,
-		layoutOrder = var49,
-		setLayoutOrder = var50,
-		visible = var51,
-		setVisible = var52,
-		bodyTextProperties = var53,
-		setBodyTextProperties = var54,
-		prefixTextProperties = var55,
-		setPrefixTextProperties = var56,
-		message = var65,
-		isUserVerified = var57,
-		setIsUserVerified = var58,
-		isTrustedConnection = var59,
-		setIsTrustedConnection = var60,
-		wasRewritten = var61,
-		setWasRewritten = var62,
-		isRewriteWindowOpen = var63,
-		setIsRewriteWindowOpen = var64,
-		chatActionType = var66,
-		setChatActionType = var67,
-		isPresetMessage = if fFlagExpChatPresetChatEnabled then var68 else nil,
-		setIsPresetMessage = if fFlagExpChatPresetChatEnabled then var69 else nil
+		bodyText = var3,
+		setBodyText = var4,
+		prefixText = var5,
+		setPrefixText = var6,
+		shouldShowTranslation = var7,
+		setShowTranslation = var8,
+		layoutOrder = var9,
+		setLayoutOrder = var10,
+		visible = var11,
+		setVisible = var12,
+		bodyTextProperties = var13,
+		setBodyTextProperties = var14,
+		prefixTextProperties = var15,
+		setPrefixTextProperties = var16,
+		message = var25,
+		isUserVerified = var17,
+		setIsUserVerified = var18,
+		isTrustedConnection = var19,
+		setIsTrustedConnection = var20,
+		wasRewritten = var21,
+		setWasRewritten = var22,
+		isRewriteWindowOpen = var23,
+		setIsRewriteWindowOpen = var24,
+		chatActionType = var26,
+		setChatActionType = var27,
+		isPresetMessage = if fFlagExpChatPresetChatEnabled then var28 else nil,
+		setIsPresetMessage = if fFlagExpChatPresetChatEnabled then var29 else nil
 	}
 end
 
@@ -116,14 +116,14 @@ local function resolvePrefixText(p1, p2, p3)
 	if not userId or tostring(userId) == "0" then
 		return p1
 	end
-	local var72 = userProfileStore.get().fetchNamesByUserIds({ tostring(userId) })(p3)
-	local var73 = var72.data and var72.data[1]
+	local var3 = userProfileStore.get().fetchNamesByUserIds({ tostring(userId) })(p3)
+	local var4 = var3.data and var3.data[1]
 	
-	if not var73 or not var73.names then
+	if not var4 or not var4.names then
 		return p1
 	end
-	local displayName = var73.names.getDisplayName(p3)
-	local inExperienceCombinedName = var73.names.getInExperienceCombinedName(p3)
+	local displayName = var4.names.getDisplayName(p3)
+	local inExperienceCombinedName = var4.names.getInExperienceCombinedName(p3)
 	
 	if string.len(displayName) > 0 and string.len(inExperienceCombinedName) > 0 and displayName ~= inExperienceCombinedName then
 		p1 = string.gsub(p1, displayName, inExperienceCombinedName)
@@ -131,206 +131,206 @@ local function resolvePrefixText(p1, p2, p3)
 	return p1
 end
 
-return function(p4)
-	-- upvalues: fFlagExpChatKeepV2PoolMountedModule (ref), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (ref), fFlagExpChatUseChannelTabsStore (ref), useStore (ref), getChatStatusStoreModule (ref), signalsReactModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatTopBannerForPresetChatAccessModule (ref), getPresetChatStoreModule (ref), reactModule (ref), getIsARButtonVisibleModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), isChatRegionLockedModule (ref), showChatEnabledUIModule (ref), fFlagExpChatDynamicV2PoolModule (ref), expChatSlotBatchSize (ref), createSlot (ref), signalsModule (ref), fFlagEnableInExpChatRewriteModule (ref), getRewriteDropdownStoreModule (ref), getMessageSettingsModule (ref), getMessageTextModule (ref), resolvePrefixText (ref), fFlagExpChatFixRateLimitedMessageRemovalModule (ref), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (ref), textChatMessageChatActionTypeModule (ref), fFlagEnableVerifiedBadgeStore (ref), verifiedBadgeDisplayStore (ref), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref), shouldSendHighFrequencyTelemetryModule (ref), var15 (ref), getFFlagExpChatExcludeFOMORendersModule (ref), getChannelTabsStoreModule (ref), textChatService (ref), fFlagExpChatEnableFOMOUpsellModule (ref), fFlagExpChatEnableCrossAgeChatActivityModule (ref), playersService (ref), var39 (ref), fFlagExpChatAddWindowSettingDependencyModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), translatedTextMessageV2Module (ref), rewriteDropdownModule (ref)
-	local var76
-	local messagesStore = p4.messagesStore
-	local enabled = p4.enabled
-	local chatWindowSettings = p4.chatWindowSettings
+return function(p1)
+	-- upvalues: fFlagExpChatKeepV2PoolMountedModule (ref), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (ref), fFlagExpChatUseChannelTabsStore (ref), useStore (ref), getChatStatusStoreModule (ref), signalsReactModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatTopBannerForPresetChatAccessModule (ref), getPresetChatStoreModule (ref), reactModule (ref), getIsARButtonVisibleModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), isChatRegionLockedModule (ref), showChatEnabledUIModule (ref), fFlagExpChatDynamicV2PoolModule (ref), expChatSlotBatchSize (ref), createSlot (ref), signalsModule (ref), fFlagEnableInExpChatRewriteModule (ref), getRewriteDropdownStoreModule (ref), getMessageSettingsModule (ref), getMessageTextModule (ref), resolvePrefixText (ref), fFlagExpChatFixRateLimitedMessageRemovalModule (ref), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (ref), textChatMessageChatActionTypeModule (ref), fFlagEnableVerifiedBadgeStore (ref), verifiedBadgeDisplayStore (ref), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref), shouldSendHighFrequencyTelemetryModule (ref), var1 (ref), getFFlagExpChatExcludeFOMORendersModule (ref), getChannelTabsStoreModule (ref), textChatService (ref), fFlagExpChatEnableFOMOUpsellModule (ref), fFlagExpChatEnableCrossAgeChatActivityModule (ref), playersService (ref), var2 (ref), fFlagExpChatAddWindowSettingDependencyModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), translatedTextMessageV2Module (ref), rewriteDropdownModule (ref)
+	local var3
+	local messagesStore = p1.messagesStore
+	local enabled = p1.enabled
+	local chatWindowSettings = p1.chatWindowSettings
 	
 	if fFlagExpChatKeepV2PoolMountedModule then
-		var76 = enabled
+		var3 = enabled
 		
-		if var76 then
-			var76 = p4.visible ~= false
-			var76 = nil
+		if var3 then
+			var3 = p1.visible ~= false
+			var3 = nil
 		end
 	else
-		var76 = enabled
+		var3 = enabled
 	end
-	local var79
-	local var77 = if engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule and not fFlagExpChatUseChannelTabsStore then useStore() else nil
-	local var78 = signalsReactModule.useSignalBinding(getChatStatusStoreModule(false).getChatStatus)
+	local var4
+	local var5 = if engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule and not fFlagExpChatUseChannelTabsStore then useStore() else nil
+	local var6 = signalsReactModule.useSignalBinding(getChatStatusStoreModule(false).getChatStatus)
 	local _ = nil
 	
 	if fFlagExpChatPresetChatEnabled and fFlagExpChatTopBannerForPresetChatAccessModule then
-		local var80 = getPresetChatStoreModule(false)
-		var79 = reactModule.joinBindings({
-			var78,
-			signalsReactModule.useSignalBinding(var80.getIsEnabled),
-			signalsReactModule.useSignalBinding(var80.getAccessLevel)
-		}):map(function(p5)
+		local var7 = getPresetChatStoreModule(false)
+		var4 = reactModule.joinBindings({
+			var6,
+			signalsReactModule.useSignalBinding(var7.getIsEnabled),
+			signalsReactModule.useSignalBinding(var7.getAccessLevel)
+		}):map(function(p2)
 			-- upvalues: getIsARButtonVisibleModule (copy), fIntExpChatVisibleARButtonPaddingModule (copy), fIntExpChatDefaultARButtonPaddingModule (copy)
-			return UDim.new(0, if getIsARButtonVisibleModule(p5[1], p5[2], p5[3]) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule)
+			return UDim.new(0, if getIsARButtonVisibleModule(p2[1], p2[2], p2[3]) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule)
 		end)
 	else
-		var79 = var78:map(function(p6)
+		var4 = var6:map(function(p2)
 			-- upvalues: isChatRegionLockedModule (copy), showChatEnabledUIModule (copy), fIntExpChatVisibleARButtonPaddingModule (copy), fIntExpChatDefaultARButtonPaddingModule (copy)
-			return UDim.new(0, if not isChatRegionLockedModule() and showChatEnabledUIModule(p6) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule)
+			return UDim.new(0, if not isChatRegionLockedModule() and showChatEnabledUIModule(p2) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule)
 		end)
 	end
-	local var81 = 50
+	local var8 = 50
 	
 	if fFlagExpChatDynamicV2PoolModule and enabled then
 		local _ = nil
-		var81 = math.min(math.ceil(#(if p4.isChannelBarVisible and p4.targetTextChannel then messagesStore.getWindowMessagesInOrderByTabId(false)[p4.targetTextChannel.Name] or {} else messagesStore.getWindowMessagesInOrder(false) or {}) / expChatSlotBatchSize) * expChatSlotBatchSize, 50)
+		var8 = math.min(math.ceil(#(if p1.isChannelBarVisible and p1.targetTextChannel then messagesStore.getWindowMessagesInOrderByTabId(false)[p1.targetTextChannel.Name] or {} else messagesStore.getWindowMessagesInOrder(false) or {}) / expChatSlotBatchSize) * expChatSlotBatchSize, 50)
 	end
-	local var82, var83 = reactModule.useState(var81)
-	local var84 = if fFlagExpChatDynamicV2PoolModule then var82 else 50
-	local var85 = reactModule.useRef(nil)
+	local var9, var10 = reactModule.useState(var8)
+	local var11 = if fFlagExpChatDynamicV2PoolModule then var9 else 50
+	local var12 = reactModule.useRef(nil)
 	
-	if enabled and not var85.current then
+	if enabled and not var12.current then
 		local t = {}
 		
-		for i = 1, var84 do
+		for i = 1, var11 do
 			t[i] = createSlot(chatWindowSettings)
 		end
-		var85.current = t
+		var12.current = t
 	end
-	if fFlagExpChatDynamicV2PoolModule and enabled and var85.current then
-		for i_1 = #var85.current + 1, var84 do
-			var85.current[i_1] = createSlot(chatWindowSettings)
+	if fFlagExpChatDynamicV2PoolModule and enabled and var12.current then
+		for i_1 = #var12.current + 1, var11 do
+			var12.current[i_1] = createSlot(chatWindowSettings)
 		end
 	end
-	local var87 = reactModule.useRef({})
-	local var88 = reactModule.useRef(0)
-	local var89 = reactModule.useRef(var84)
-	var89.current = var84
+	local var13 = reactModule.useRef({})
+	local var14 = reactModule.useRef(0)
+	local var15 = reactModule.useRef(var11)
+	var15.current = var11
 	
-	local function createSlotEffects(p7, p8, p9, p10, p11)
-		-- upvalues: signalsModule (copy), fFlagEnableInExpChatRewriteModule (copy), getRewriteDropdownStoreModule (copy), getMessageSettingsModule (copy), getMessageTextModule (copy), resolvePrefixText (copy), fFlagExpChatFixRateLimitedMessageRemovalModule (copy), fFlagExpChatPresetChatEnabled (copy), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), textChatMessageChatActionTypeModule (copy), fFlagEnableVerifiedBadgeStore (copy), verifiedBadgeDisplayStore (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), getFFlagExpChatUseUpdatedMessageRenderedModule (copy), shouldSendHighFrequencyTelemetryModule (copy), var15 (copy), getFFlagExpChatExcludeFOMORendersModule (copy), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), var77 (ref), textChatService (copy), fFlagExpChatEnableFOMOUpsellModule (copy), fFlagExpChatEnableCrossAgeChatActivityModule (copy), playersService (copy), var39 (copy)
-		local var93 = p9.registerMessageComponent(p8)
-		local layoutOrderSignal = p9.getLayoutOrderSignal(p8)
+	local function createSlotEffects(p2, p3, p4, p5, p6)
+		-- upvalues: signalsModule (copy), fFlagEnableInExpChatRewriteModule (copy), getRewriteDropdownStoreModule (copy), getMessageSettingsModule (copy), getMessageTextModule (copy), resolvePrefixText (copy), fFlagExpChatFixRateLimitedMessageRemovalModule (copy), fFlagExpChatPresetChatEnabled (copy), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), textChatMessageChatActionTypeModule (copy), fFlagEnableVerifiedBadgeStore (copy), verifiedBadgeDisplayStore (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), getFFlagExpChatUseUpdatedMessageRenderedModule (copy), shouldSendHighFrequencyTelemetryModule (copy), var1 (copy), getFFlagExpChatExcludeFOMORendersModule (copy), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), var5 (ref), textChatService (copy), fFlagExpChatEnableFOMOUpsellModule (copy), fFlagExpChatEnableCrossAgeChatActivityModule (copy), playersService (copy), var2 (copy)
+		local var16 = p4.registerMessageComponent(p3)
+		local layoutOrderSignal = p4.getLayoutOrderSignal(p3)
 		
 		return {
-			cleanupMsg = signalsModule.createEffect(function(p12)
-				-- upvalues: var93 (ref), fFlagEnableInExpChatRewriteModule (copy), getRewriteDropdownStoreModule (copy), p9 (ref), getMessageSettingsModule (copy), p10 (ref), p11 (ref), getMessageTextModule (copy), p7 (ref), resolvePrefixText (copy), fFlagExpChatFixRateLimitedMessageRemovalModule (copy), fFlagExpChatPresetChatEnabled (copy), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), textChatMessageChatActionTypeModule (copy), p8 (ref), fFlagEnableVerifiedBadgeStore (copy), verifiedBadgeDisplayStore (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy)
-				local var95 = var93(p12)
+			cleanupMsg = signalsModule.createEffect(function(p7)
+				-- upvalues: var16 (ref), fFlagEnableInExpChatRewriteModule (copy), getRewriteDropdownStoreModule (copy), p4 (ref), getMessageSettingsModule (copy), p5 (ref), p6 (ref), getMessageTextModule (copy), p2 (ref), resolvePrefixText (copy), fFlagExpChatFixRateLimitedMessageRemovalModule (copy), fFlagExpChatPresetChatEnabled (copy), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), textChatMessageChatActionTypeModule (copy), p3 (ref), fFlagEnableVerifiedBadgeStore (copy), verifiedBadgeDisplayStore (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy)
+				local var17 = var16(p7)
 				local openMessageId = nil
-				local var97 = nil
+				local var18 = nil
 				
 				if fFlagEnableInExpChatRewriteModule then
-					var97 = getRewriteDropdownStoreModule(false)
-					openMessageId = var97.getOpenMessageId(p12)
+					var18 = getRewriteDropdownStoreModule(false)
+					openMessageId = var18.getOpenMessageId(p7)
 				end
-				if var95 then
-					local var98 = p9.getMessage(var95)(p12)
+				if var17 then
+					local var19 = p4.getMessage(var17)(p7)
 					
-					if var98 then
-						local var99 = getMessageSettingsModule(var98, p10)
-						local var100 = p11 and (var99.translation ~= nil and var99.translation ~= "")
-						local var101 = getMessageTextModule(var99.useTranslation, var99.translation, var99.text)
-						local bodyTextProperties = var99.bodyTextProperties
-						local prefixTextProperties = var99.prefixTextProperties
-						p7.setBodyText(var101)
-						p7.setPrefixText(resolvePrefixText(var99.prefixText or "", var98, p12))
-						p7.setShowTranslation(var100)
-						p7.setVisible(if fFlagExpChatFixRateLimitedMessageRemovalModule then var98.isVisibleInChatWindow else true)
-						p7.setBodyTextProperties(bodyTextProperties)
-						p7.setPrefixTextProperties(prefixTextProperties)
-						p7.message.current = var98
+					if var19 then
+						local var20 = getMessageSettingsModule(var19, p5)
+						local var21 = p6 and (var20.translation ~= nil and var20.translation ~= "")
+						local var22 = getMessageTextModule(var20.useTranslation, var20.translation, var20.text)
+						local bodyTextProperties = var20.bodyTextProperties
+						local prefixTextProperties = var20.prefixTextProperties
+						p2.setBodyText(var22)
+						p2.setPrefixText(resolvePrefixText(var20.prefixText or "", var19, p7))
+						p2.setShowTranslation(var21)
+						p2.setVisible(if fFlagExpChatFixRateLimitedMessageRemovalModule then var19.isVisibleInChatWindow else true)
+						p2.setBodyTextProperties(bodyTextProperties)
+						p2.setPrefixTextProperties(prefixTextProperties)
+						p2.message.current = var19
 						
 						if fFlagExpChatPresetChatEnabled then
-							p7.setIsPresetMessage((var98.presetId or "") ~= "")
+							p2.setIsPresetMessage((var19.presetId or "") ~= "")
 						end
 						if fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module then
-							p7.setChatActionType(var98.chatActionType or textChatMessageChatActionTypeModule.Unknown)
+							p2.setChatActionType(var19.chatActionType or textChatMessageChatActionTypeModule.Unknown)
 						end
 						if fFlagEnableInExpChatRewriteModule then
-							p7.setWasRewritten(var99.wasRewritten or false)
+							p2.setWasRewritten(var20.wasRewritten or false)
 							
-							if openMessageId == var95 then
-								var97.setComponentId(p8)
-								p7.setIsRewriteWindowOpen(true)
+							if openMessageId == var17 then
+								var18.setComponentId(p3)
+								p2.setIsRewriteWindowOpen(true)
 							else
-								p7.setIsRewriteWindowOpen(false)
+								p2.setIsRewriteWindowOpen(false)
 							end
 						end
 						if fFlagEnableVerifiedBadgeStore then
-							local var102 = tonumber(var98.userId)
+							local var23 = tonumber(var19.userId)
 							
-							if var102 then
-								p7.setIsUserVerified(verifiedBadgeDisplayStore.get().isBadgeVisible(var102))
+							if var23 then
+								p2.setIsUserVerified(verifiedBadgeDisplayStore.get().isBadgeVisible(var23))
 								
 								return
 							end
-							p7.setIsUserVerified(false)
+							p2.setIsUserVerified(false)
 							
 							return
 						else
-							p7.setIsUserVerified(false)
+							p2.setIsUserVerified(false)
 							
 							return
 						end
 					elseif fFlagExpChatEvictFloodcheckedFromWindowOrderModule then
-						p7.setVisible(false)
+						p2.setVisible(false)
 						
 						return
 					end
 				else
-					p7.setVisible(false)
-					p7.setIsUserVerified(false)
+					p2.setVisible(false)
+					p2.setIsUserVerified(false)
 					
 					if fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module then
-						p7.setChatActionType(textChatMessageChatActionTypeModule.Unknown)
+						p2.setChatActionType(textChatMessageChatActionTypeModule.Unknown)
 					end
 				end
 			end),
-			cleanupLayout = if layoutOrderSignal then signalsModule.createEffect(function(p13)
-				-- upvalues: layoutOrderSignal (ref), p7 (ref)
-				p7.setLayoutOrder(layoutOrderSignal(p13))
+			cleanupLayout = if layoutOrderSignal then signalsModule.createEffect(function(p7)
+				-- upvalues: layoutOrderSignal (ref), p2 (ref)
+				p2.setLayoutOrder(layoutOrderSignal(p7))
 			end) else nil,
-			cleanupTelemetry = if getFFlagExpChatUseUpdatedMessageRenderedModule() then signalsModule.createEffect(function(p14)
-				-- upvalues: var93 (ref), p9 (ref), shouldSendHighFrequencyTelemetryModule (copy), var15 (copy), getFFlagExpChatExcludeFOMORendersModule (copy), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), var77 (copy), textChatService (copy)
-				local var103 = var93(p14)
+			cleanupTelemetry = if getFFlagExpChatUseUpdatedMessageRenderedModule() then signalsModule.createEffect(function(p7)
+				-- upvalues: var16 (ref), p4 (ref), shouldSendHighFrequencyTelemetryModule (copy), var1 (copy), getFFlagExpChatExcludeFOMORendersModule (copy), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), var5 (copy), textChatService (copy)
+				local var17 = var16(p7)
 				
-				if var103 then
-					local var104 = p9.getMessage(var103)(false)
+				if var17 then
+					local var18 = p4.getMessage(var17)(false)
 					
-					if var104 and var104.textChatMessageInstance and shouldSendHighFrequencyTelemetryModule(var15) and (not getFFlagExpChatExcludeFOMORendersModule() or not var104.isHiddenMessage) then
+					if var18 and var18.textChatMessageInstance and shouldSendHighFrequencyTelemetryModule(var1) and (not getFFlagExpChatExcludeFOMORendersModule() or not var18.isHiddenMessage) then
 						if engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule then
-							local var105 = -1
+							local var19 = -1
 							
 							if fFlagExpChatUseChannelTabsStore then
-								local var106 = getChannelTabsStoreModule(false)
-								local channelTabsState = var106.getChannelTabsState(false)
-								local selectedTabName = var106.getSelectedTabName(false)
+								local var20 = getChannelTabsStoreModule(false)
+								local channelTabsState = var20.getChannelTabsState(false)
+								local selectedTabName = var20.getSelectedTabName(false)
 								
 								if selectedTabName and channelTabsState.allChannelTabs[selectedTabName] then
-									var105 = channelTabsState.allChannelTabs[selectedTabName].tabIndex
+									var19 = channelTabsState.allChannelTabs[selectedTabName].tabIndex
 								end
 							else
-								local channelTabs = var77:getState().ChannelTabs
+								local channelTabs = var5:getState().ChannelTabs
 								local selectedTabName = channelTabs and channelTabs.selectedTabName
 								
 								if selectedTabName and channelTabs.allChannelTabs[selectedTabName] then
-									var105 = channelTabs.allChannelTabs[selectedTabName].TabIndex
+									var19 = channelTabs.allChannelTabs[selectedTabName].TabIndex
 								end
 							end
-							textChatService:SendExpChatMessageClientRendered(var104.textChatMessageInstance, "chat_window", var105)
+							textChatService:SendExpChatMessageClientRendered(var18.textChatMessageInstance, "chat_window", var19)
 							
 							return
 						else
-							textChatService:SendExpChatMessageClientRendered(var104.textChatMessageInstance, "chat_window")
+							textChatService:SendExpChatMessageClientRendered(var18.textChatMessageInstance, "chat_window")
 						end
 					end
 				end
 			end) else nil,
-			cleanupTc = signalsModule.createEffect(function(p15)
-				-- upvalues: var93 (ref), p9 (ref), fFlagExpChatEnableFOMOUpsellModule (copy), fFlagExpChatEnableCrossAgeChatActivityModule (copy), playersService (copy), var39 (copy), p7 (ref)
-				local var110 = var93(p15)
+			cleanupTc = signalsModule.createEffect(function(p7)
+				-- upvalues: var16 (ref), p4 (ref), fFlagExpChatEnableFOMOUpsellModule (copy), fFlagExpChatEnableCrossAgeChatActivityModule (copy), playersService (copy), var2 (copy), p2 (ref)
+				local var17 = var16(p7)
 				
-				if var110 then
-					local var111 = p9.getMessage(var110)(false)
+				if var17 then
+					local var18 = p4.getMessage(var17)(false)
 					
-					if var111 then
-						local userId = var111.userId
+					if var18 then
+						local userId = var18.userId
 						local userId_1 = playersService.LocalPlayer and (playersService.LocalPlayer.UserId and tostring(playersService.LocalPlayer.UserId))
-						p7.setIsTrustedConnection(if userId and userId ~= "" and (not (userId_1 and userId_1 == userId) and not (if fFlagExpChatEnableFOMOUpsellModule or fFlagExpChatEnableCrossAgeChatActivityModule then var111.isHiddenMessage else nil)) then var39.getIsTrustedConnection(userId).data(p15) else false)
+						p2.setIsTrustedConnection(if userId and userId ~= "" and (not (userId_1 and userId_1 == userId) and not (if fFlagExpChatEnableFOMOUpsellModule or fFlagExpChatEnableCrossAgeChatActivityModule then var18.isHiddenMessage else nil)) then var2.getIsTrustedConnection(userId).data(p7) else false)
 					end
 				end
 			end),
-			componentId = p8
+			componentId = p3
 		}
 	end
 	
@@ -340,22 +340,22 @@ return function(p4)
 		table.insert(t, chatWindowSettings)
 	end
 	if fFlagExpChatKeepV2PoolMountedModule then
-		table.insert(t, var76)
+		table.insert(t, var3)
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var76 (ref), var84 (ref), createSlotEffects (ref), var85 (ref), messagesStore (ref), chatWindowSettings (ref), p4 (ref), var87 (ref), var88 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagEnableInExpChatRewriteModule (copy), getRewriteDropdownStoreModule (copy)
-		if not var76 then return end
-		for i = 1, var84 do
-			table.insert(var87.current, createSlotEffects(var85.current[i], "msg-component-" .. i, messagesStore, chatWindowSettings, p4.showTranslationButton))
+		-- upvalues: var3 (ref), var11 (ref), createSlotEffects (ref), var12 (ref), messagesStore (ref), chatWindowSettings (ref), p1 (ref), var13 (ref), var14 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagEnableInExpChatRewriteModule (copy), getRewriteDropdownStoreModule (copy)
+		if not var3 then return end
+		for i = 1, var11 do
+			table.insert(var13.current, createSlotEffects(var12.current[i], "msg-component-" .. i, messagesStore, chatWindowSettings, p1.showTranslationButton))
 		end
-		var88.current = var84
+		var14.current = var11
 		local _ = nil
-		messagesStore.setActiveChannelFilter(if getFFlagTextChatEnableUniverseChatTabs() then if messagesStore.getChannelTabsConfigurationEnabled(false) and p4.targetTextChannel then p4.targetTextChannel.Name else p4.selectedChannelName elseif p4.isChannelBarVisible and p4.targetTextChannel then p4.targetTextChannel.Name else nil)
+		messagesStore.setActiveChannelFilter(if getFFlagTextChatEnableUniverseChatTabs() then if messagesStore.getChannelTabsConfigurationEnabled(false) and p1.targetTextChannel then p1.targetTextChannel.Name else p1.selectedChannelName elseif p1.isChannelBarVisible and p1.targetTextChannel then p1.targetTextChannel.Name else nil)
 		messagesStore.repopulateMessageComponents()
 		
 		return function()
-			-- upvalues: var87 (copy), messagesStore (copy), var88 (copy), fFlagEnableInExpChatRewriteModule (copy), getRewriteDropdownStoreModule (copy)
-			for i, v in ipairs(var87.current) do
+			-- upvalues: var13 (copy), messagesStore (copy), var14 (copy), fFlagEnableInExpChatRewriteModule (copy), getRewriteDropdownStoreModule (copy)
+			for i, v in ipairs(var13.current) do
 				if v.cleanupMsg then
 					pcall(v.cleanupMsg)
 				end
@@ -370,8 +370,8 @@ return function(p4)
 				end
 				messagesStore.unregisterMessageComponent(v.componentId)
 			end
-			var87.current = {}
-			var88.current = 0
+			var13.current = {}
+			var14.current = 0
 			
 			if fFlagEnableInExpChatRewriteModule then
 				getRewriteDropdownStoreModule(false).setComponentId(nil)
@@ -381,110 +381,110 @@ return function(p4)
 	
 	if fFlagExpChatDynamicV2PoolModule and enabled then
 		reactModule.useEffect(function()
-			-- upvalues: fFlagExpChatKeepV2PoolMountedModule (copy), var76 (ref), var88 (ref), var84 (ref), createSlotEffects (ref), var85 (ref), messagesStore (ref), chatWindowSettings (ref), p4 (ref), var87 (ref)
-			if fFlagExpChatKeepV2PoolMountedModule and not var76 then return end
-			local current = var88.current
+			-- upvalues: fFlagExpChatKeepV2PoolMountedModule (copy), var3 (ref), var14 (ref), var11 (ref), createSlotEffects (ref), var12 (ref), messagesStore (ref), chatWindowSettings (ref), p1 (ref), var13 (ref)
+			if fFlagExpChatKeepV2PoolMountedModule and not var3 then return end
+			local current = var14.current
 			
-			if var84 <= current then return end
-			for i = current + 1, var84 do
-				table.insert(var87.current, createSlotEffects(var85.current[i], "msg-component-" .. i, messagesStore, chatWindowSettings, p4.showTranslationButton))
+			if var11 <= current then return end
+			for i = current + 1, var11 do
+				table.insert(var13.current, createSlotEffects(var12.current[i], "msg-component-" .. i, messagesStore, chatWindowSettings, p1.showTranslationButton))
 			end
-			var88.current = var84
+			var14.current = var11
 			messagesStore.repopulateMessageComponents()
-		end, if fFlagExpChatKeepV2PoolMountedModule then { var84, var76 } else { var84 })
+		end, if fFlagExpChatKeepV2PoolMountedModule then { var11, var3 } else { var11 })
 		reactModule.useEffect(function()
-			-- upvalues: fFlagExpChatKeepV2PoolMountedModule (copy), var76 (ref), signalsModule (copy), messagesStore (ref), expChatSlotBatchSize (copy), var89 (ref), var83 (ref)
-			if fFlagExpChatKeepV2PoolMountedModule and not var76 then
+			-- upvalues: fFlagExpChatKeepV2PoolMountedModule (copy), var3 (ref), signalsModule (copy), messagesStore (ref), expChatSlotBatchSize (copy), var15 (ref), var10 (ref)
+			if fFlagExpChatKeepV2PoolMountedModule and not var3 then
 				return
 			end
-			local var113 = signalsModule.createEffect(function(p16)
-				-- upvalues: messagesStore (copy), expChatSlotBatchSize (copy), var89 (copy), var83 (copy)
-				local activeChannelFilter = messagesStore.getActiveChannelFilter(p16)
-				local minValue = math.min(math.ceil((#(if activeChannelFilter then messagesStore.getWindowMessagesInOrderByTabId(p16)[activeChannelFilter] or {} else messagesStore.getWindowMessagesInOrder(p16) or {}) + 2) / expChatSlotBatchSize) * expChatSlotBatchSize, 50)
+			local var16 = signalsModule.createEffect(function(p2)
+				-- upvalues: messagesStore (copy), expChatSlotBatchSize (copy), var15 (copy), var10 (copy)
+				local activeChannelFilter = messagesStore.getActiveChannelFilter(p2)
+				local minValue = math.min(math.ceil((#(if activeChannelFilter then messagesStore.getWindowMessagesInOrderByTabId(p2)[activeChannelFilter] or {} else messagesStore.getWindowMessagesInOrder(p2) or {}) + 2) / expChatSlotBatchSize) * expChatSlotBatchSize, 50)
 				
-				if var89.current < minValue then
-					var83(minValue)
+				if var15.current < minValue then
+					var10(minValue)
 				end
 			end)
 			
 			return function()
-				-- upvalues: var113 (ref)
-				if var113 then
-					pcall(var113)
+				-- upvalues: var16 (ref)
+				if var16 then
+					pcall(var16)
 				end
 			end
-		end, if fFlagExpChatKeepV2PoolMountedModule then { var76 } else {})
+		end, if fFlagExpChatKeepV2PoolMountedModule then { var3 } else {})
 	end
-	local var92 = reactModule.useRef(false)
+	local var16 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var76 (ref), var92 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), p4 (ref), messagesStore (ref)
-		if not var76 then
-			var92.current = false
+		-- upvalues: var3 (ref), var16 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), p1 (ref), messagesStore (ref)
+		if not var3 then
+			var16.current = false
 			
 			return
-		elseif not var92.current then
-			var92.current = true
+		elseif not var16.current then
+			var16.current = true
 			
 			return
 		end
 		local _ = nil
-		messagesStore.setActiveChannelFilter(if getFFlagTextChatEnableUniverseChatTabs() then if messagesStore.getChannelTabsConfigurationEnabled(false) and p4.targetTextChannel then p4.targetTextChannel.Name else p4.selectedChannelName elseif p4.isChannelBarVisible and p4.targetTextChannel then p4.targetTextChannel.Name else nil)
+		messagesStore.setActiveChannelFilter(if getFFlagTextChatEnableUniverseChatTabs() then if messagesStore.getChannelTabsConfigurationEnabled(false) and p1.targetTextChannel then p1.targetTextChannel.Name else p1.selectedChannelName elseif p1.isChannelBarVisible and p1.targetTextChannel then p1.targetTextChannel.Name else nil)
 		messagesStore.repopulateMessageComponents()
 	end, {
-		var76,
-		p4.targetTextChannel,
-		p4.isChannelBarVisible,
-		if getFFlagTextChatEnableUniverseChatTabs() then p4.selectedChannelName else nil
+		var3,
+		p1.targetTextChannel,
+		p1.isChannelBarVisible,
+		if getFFlagTextChatEnableUniverseChatTabs() then p1.selectedChannelName else nil
 	})
 	
 	return {
 		children = reactModule.useMemo(function()
-			-- upvalues: enabled (ref), var84 (ref), var85 (ref), reactModule (copy), translatedTextMessageV2Module (copy), p4 (ref), chatWindowSettings (ref), fFlagEnableInExpChatRewriteModule (copy), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), var79 (write), fFlagExpChatPresetChatEnabled (copy), rewriteDropdownModule (copy)
+			-- upvalues: enabled (ref), var11 (ref), var12 (ref), reactModule (copy), translatedTextMessageV2Module (copy), p1 (ref), chatWindowSettings (ref), fFlagEnableInExpChatRewriteModule (copy), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), var4 (write), fFlagExpChatPresetChatEnabled (copy), rewriteDropdownModule (copy)
 			if not enabled then
 				return nil
 			end
 			local t = {}
 			
-			for i = 1, var84 do
-				local var117 = var85.current[i]
+			for i = 1, var11 do
+				local var17 = var12.current[i]
 				t["msg-component-" .. i] = reactModule.createElement(translatedTextMessageV2Module, {
-					originalBodyText = var117.bodyText,
-					originalPrefixText = var117.prefixText,
-					shouldShowTranslationToggle = var117.shouldShowTranslation,
-					bodyTextProperties = var117.bodyTextProperties,
-					prefixTextProperties = var117.prefixTextProperties,
-					layoutOrder = var117.layoutOrder,
-					visible = var117.visible,
-					textTransparency = p4.textTransparency,
-					isUserVerified = var117.isUserVerified,
-					userId = var117.userId,
-					useTranslation = var117.useTranslation,
-					messageId = var117.messageId,
-					isSpatialUIEnabled = p4.isSpatialUIEnabled,
+					originalBodyText = var17.bodyText,
+					originalPrefixText = var17.prefixText,
+					shouldShowTranslationToggle = var17.shouldShowTranslation,
+					bodyTextProperties = var17.bodyTextProperties,
+					prefixTextProperties = var17.prefixTextProperties,
+					layoutOrder = var17.layoutOrder,
+					visible = var17.visible,
+					textTransparency = p1.textTransparency,
+					isUserVerified = var17.isUserVerified,
+					userId = var17.userId,
+					useTranslation = var17.useTranslation,
+					messageId = var17.messageId,
+					isSpatialUIEnabled = p1.isSpatialUIEnabled,
 					chatWindowSettings = chatWindowSettings,
-					onTextMessageLabelButtonActivated = p4.onTextMessageLabelButtonActivated,
-					message = var117.message,
-					isTrustedConnection = var117.isTrustedConnection,
-					wasRewritten = if fFlagEnableInExpChatRewriteModule then var117.wasRewritten else nil,
-					isRewriteWindowOpen = if fFlagEnableInExpChatRewriteModule then var117.isRewriteWindowOpen else nil,
-					chatActionType = if fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module then var117.chatActionType else nil,
-					chatWindowTransparencyBindable = p4.chatWindowTransparencyBindable,
-					arButtonPadding = var79,
-					isPresetMessage = if fFlagExpChatPresetChatEnabled then var117.isPresetMessage else nil
+					onTextMessageLabelButtonActivated = p1.onTextMessageLabelButtonActivated,
+					message = var17.message,
+					isTrustedConnection = var17.isTrustedConnection,
+					wasRewritten = if fFlagEnableInExpChatRewriteModule then var17.wasRewritten else nil,
+					isRewriteWindowOpen = if fFlagEnableInExpChatRewriteModule then var17.isRewriteWindowOpen else nil,
+					chatActionType = if fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module then var17.chatActionType else nil,
+					chatWindowTransparencyBindable = p1.chatWindowTransparencyBindable,
+					arButtonPadding = var4,
+					isPresetMessage = if fFlagExpChatPresetChatEnabled then var17.isPresetMessage else nil
 				})
 			end
 			if fFlagEnableInExpChatRewriteModule then
 				t["$rewrite-dropdown"] = reactModule.createElement(rewriteDropdownModule, {
-					textTransparency = p4.textTransparency,
-					arButtonPadding = var79
+					textTransparency = p1.textTransparency,
+					arButtonPadding = var4
 				})
 			end
 			t["$layout"] = reactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder })
 			
 			return t
-		end, if fFlagExpChatKeepV2PoolMountedModule then { enabled, var84 } else {
-			enabled, p4.textTransparency, p4.isSpatialUIEnabled, chatWindowSettings,
-			p4.onTextMessageLabelButtonActivated, var84
+		end, if fFlagExpChatKeepV2PoolMountedModule then { enabled, var11 } else {
+			enabled, p1.textTransparency, p1.isSpatialUIEnabled, chatWindowSettings,
+			p1.onTextMessageLabelButtonActivated, var11
 		})
 	}
 end

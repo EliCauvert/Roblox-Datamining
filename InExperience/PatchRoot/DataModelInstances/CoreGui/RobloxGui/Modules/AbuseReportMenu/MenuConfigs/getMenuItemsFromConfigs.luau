@@ -13,39 +13,39 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fFlagHideShortcutsOnReportDropdownModule = require(abuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
 local fFlagReportFocusNavIEMButtonsModule = require(abuseReportMenu.Flags.FFlagReportFocusNavIEMButtons)
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: useLocalization (ref), constantsModule (ref), fFlagHideShortcutsOnReportDropdownModule (ref), reactModule (ref), fFlagReportFocusNavIEMButtonsModule (ref), freeCommentsMenuItemModule (ref), buttonReportMenuItemModule (ref), foundationModule (ref), buttonVariant (ref), dropdownReportMenuItemModule (ref), modalBasedSelectorMenuItemModule (ref)
 	local t = {}
-	local var12 = useLocalization(constantsModule.localizationKeys)
-	local var13 = if fFlagHideShortcutsOnReportDropdownModule then reactModule.useCallback(function(p5)
-		-- upvalues: p2 (ref)
-		if p2.onDropdownMenuOpenChange then
-			p2.onDropdownMenuOpenChange(p5)
+	local var1 = useLocalization(constantsModule.localizationKeys)
+	local var2 = if fFlagHideShortcutsOnReportDropdownModule then reactModule.useCallback(function(p6)
+		-- upvalues: p3 (ref)
+		if p3.onDropdownMenuOpenChange then
+			p3.onDropdownMenuOpenChange(p6)
 		end
-	end, { p2.onDropdownMenuOpenChange }) else nil
-	local var14 = if fFlagReportFocusNavIEMButtonsModule then reactModule.useRef(nil) else nil
+	end, { p3.onDropdownMenuOpenChange }) else nil
+	local var3 = if fFlagReportFocusNavIEMButtonsModule then reactModule.useRef(nil) else nil
 	
 	if fFlagReportFocusNavIEMButtonsModule then
 		reactModule.useEffect(function()
-			-- upvalues: p2 (ref), var14 (ref)
-			if p2.setLastSelectableObjects and var14.current then
-				p2.setLastSelectableObjects({ var14.current })
+			-- upvalues: p3 (ref), var3 (ref)
+			if p3.setLastSelectableObjects and var3.current then
+				p3.setLastSelectableObjects({ var3.current })
 			end
-		end, { var14, p2.setLastSelectableObjects })
+		end, { var3, p3.setLastSelectableObjects })
 	end
-	local var15 = p3
+	local var4 = p4
 	
 	if fFlagReportFocusNavIEMButtonsModule then
-		var15 = {}
+		var4 = {}
 		
-		for i, v in p3 do
-			if v.getIsVisible(p0) then
-				table.insert(var15, v)
+		for i, v in p4 do
+			if v.getIsVisible(p1) then
+				table.insert(var4, v)
 			end
 		end
 	end
-	for i, v in var15 do
-		if fFlagReportFocusNavIEMButtonsModule or v.getIsVisible(p0) then
+	for i, v in var4 do
+		if fFlagReportFocusNavIEMButtonsModule or v.getIsVisible(p1) then
 			local componentType = v.componentType
 			local componentName = v.componentName
 			
@@ -53,71 +53,71 @@ return function(p0, p1, p2, p3, p4)
 				if componentType == "freeComments" then
 					t[componentName] = reactModule.createElement(freeCommentsMenuItemModule, {
 						layoutOrder = i,
-						comment = p0.comment,
-						placeholderText = var12.ReportCommentPlaceholder,
-						menuContainerWidth = p2.menuWidth,
-						isSmallPortraitViewport = p4,
+						comment = p1.comment,
+						placeholderText = var1.ReportCommentPlaceholder,
+						menuContainerWidth = p3.menuWidth,
+						isSmallPortraitViewport = p5,
 						onUpdate = function(p6)
-							-- upvalues: v (ref), p0 (ref), p1 (ref), p2 (ref)
-							v.onUpdate(p6, p0, p1, p2)
+							-- upvalues: v (ref), p1 (ref), p2 (ref), p3 (ref)
+							v.onUpdate(p6, p1, p2, p3)
 						end,
-						ref = if fFlagReportFocusNavIEMButtonsModule and i == #var15 then var14 else nil
+						ref = if fFlagReportFocusNavIEMButtonsModule and i == #var4 then var3 else nil
 					})
 				elseif componentType == "button" then
-					local iconSrc = v.getIconSrc(p2)
+					local iconSrc = v.getIconSrc(p3)
 					t[componentName] = reactModule.createElement(buttonReportMenuItemModule, {
-						label = if v.fieldLabel == "" then v.fieldLabel else var12[v.fieldLabel],
+						label = if v.fieldLabel == "" then v.fieldLabel else var1[v.fieldLabel],
 						button = reactModule.createElement(foundationModule.Button, {
 							variant = if v.variant == "primary" then buttonVariant.SubEmphasis else buttonVariant.Subtle,
-							text = var12[v.getButtonLabel(p2)],
+							text = var1[v.getButtonLabel(p3)],
 							icon = if iconSrc ~= "" then nil else iconSrc,
 							width = UDim.new(1, 0),
-							isDisabled = if v.getIsDisabled ~= nil then false else v.getIsDisabled(p0, p2),
+							isDisabled = if v.getIsDisabled ~= nil then false else v.getIsDisabled(p1, p3),
 							onActivated = function()
-								-- upvalues: v (ref), p0 (ref), p1 (ref), p2 (ref)
-								v.onClick(p0, p1, p2)
+								-- upvalues: v (ref), p1 (ref), p2 (ref), p3 (ref)
+								v.onClick(p1, p2, p3)
 							end,
-							ref = if fFlagReportFocusNavIEMButtonsModule and i == #var15 then var14 else nil
+							ref = if fFlagReportFocusNavIEMButtonsModule and i == #var4 then var3 else nil
 						}),
-						menuContainerWidth = p2.menuWidth,
+						menuContainerWidth = p3.menuWidth,
 						layoutOrder = i,
-						isSmallPortraitViewport = p4
+						isSmallPortraitViewport = p5
 					})
 				elseif componentType == "dropdown" then
 					t[componentName] = reactModule.createElement(dropdownReportMenuItemModule, {
-						label = var12[v.fieldLabel],
-						placeholderText = var12.ChooseOne,
+						label = var1[v.fieldLabel],
+						placeholderText = var1.ChooseOne,
 						layoutOrder = i,
-						onSelect = function(p7)
-							-- upvalues: v (ref), p0 (ref), p1 (ref), p2 (ref)
-							v.onUpdateSelectedOption(p7, p0, p1, p2)
+						onSelect = function(p6)
+							-- upvalues: v (ref), p1 (ref), p2 (ref), p3 (ref)
+							v.onUpdateSelectedOption(p6, p1, p2, p3)
 						end,
-						onMenuOpenChange = var13,
-						menuContainerWidth = p2.menuWidth,
-						readonlyValue = var12[v.readonlyValue],
-						selections = v.getMenuItems(p0),
-						isSmallPortraitViewport = p4,
-						minHeight = if p4 then 0 else constantsModule.MenuItemHeight,
-						ref = if fFlagReportFocusNavIEMButtonsModule and i == #var15 then var14 else nil
+						onMenuOpenChange = var2,
+						menuContainerWidth = p3.menuWidth,
+						readonlyValue = var1[v.readonlyValue],
+						selections = v.getMenuItems(p1),
+						isSmallPortraitViewport = p5,
+						minHeight = if p5 then 0 else constantsModule.MenuItemHeight,
+						ref = if fFlagReportFocusNavIEMButtonsModule and i == #var4 then var3 else nil
 					})
 				elseif componentType == "modalSelector" then
 					t[componentName] = reactModule.createElement(modalBasedSelectorMenuItemModule, {
-						label = var12[v.fieldLabel],
+						label = var1[v.fieldLabel],
 						layoutOrder = i,
-						onSelect = function(p8, p9, p10)
-							-- upvalues: v (ref), p0 (ref), p1 (ref), p2 (ref)
-							v.onUpdateSelectedOption({ label = p8, subLabel = p9, identifier = p10 }, p0, p1, p2)
+						onSelect = function(p6, p7, p8)
+							-- upvalues: v (ref), p1 (ref), p2 (ref), p3 (ref)
+							v.onUpdateSelectedOption({ label = p6, subLabel = p7, identifier = p8 }, p1, p2, p3)
 						end,
-						onMenuOpenChange = var13,
-						menuContainerWidth = p2.menuWidth,
+						onMenuOpenChange = var2,
+						menuContainerWidth = p3.menuWidth,
 						selectorHeight = constantsModule.MenuItemHeight,
-						selectedValue = if v.getSelectedValue then var12[v.getSelectedValue(p0)] or (v.getSelectedValue(p0) or nil) else nil,
-						selections = v.getMenuItems(p0, var12),
-						viewportHeight = p2.viewportDimension.height,
-						viewportWidth = p2.viewportDimension.width,
-						isSmallPortraitViewport = p4,
-						placeholderText = var12.ChooseOne,
-						ref = if fFlagReportFocusNavIEMButtonsModule and i == #var15 then var14 else nil
+						selectedValue = if v.getSelectedValue then var1[v.getSelectedValue(p1)] or (v.getSelectedValue(p1) or nil) else nil,
+						selections = v.getMenuItems(p1, var1),
+						viewportHeight = p3.viewportDimension.height,
+						viewportWidth = p3.viewportDimension.width,
+						isSmallPortraitViewport = p5,
+						placeholderText = var1.ChooseOne,
+						ref = if fFlagReportFocusNavIEMButtonsModule and i == #var4 then var3 else nil
 					})
 				end
 			end

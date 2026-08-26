@@ -1,23 +1,23 @@
 ﻿local constantsModule = require(script.Parent.Parent.Common.Constants)
 
-local function _(startValue, endValue, alpha, p0, p1)
-	return (startValue - endValue) * (p1 - p0) / (alpha - endValue) + p0
+local function _(startValue, endValue, alpha, p1, p2)
+	return (startValue - endValue) * (p2 - p1) / (alpha - endValue) + p1
 end
 
-return function(p2, p3, p4, p5)
+return function(p1, p2, p3, p4)
 	-- upvalues: constantsModule (ref)
-	local minValue = math.min(p2.X, p2.Y)
-	local maxValue = math.max(p2.X, p2.Y)
+	local minValue = math.min(p1.X, p1.Y)
+	local maxValue = math.max(p1.X, p1.Y)
 	local PANEL_BORDER = constantsModule.PANEL_BORDER
-	local var3 = (minValue - 320) * 60 / 55 + 270
-	local var4 = (maxValue - 480) * 46 / 190 + 434
-	var3 = if constantsModule.PANEL_SIZE_MIN_CAP < var3 then p3 else math.clamp(var3, math.min(270, minValue - PANEL_BORDER), constantsModule.PANEL_SIZE_MIN_CAP)
-	var4 = if constantsModule.PANEL_SIZE_MAX_CAP < var4 then p4 else math.clamp(var4, math.min(434, maxValue - PANEL_BORDER), constantsModule.PANEL_SIZE_MAX_CAP)
-	local var5 = if p2.Y < p2.X then var4 else var3
-	local var6 = if p2.X < p2.Y then var4 else var3
+	local var1 = (minValue - 320) * 60 / 55 + 270
+	local var2 = (maxValue - 480) * 46 / 190 + 434
+	var1 = if constantsModule.PANEL_SIZE_MIN_CAP < var1 then p2 else math.clamp(var1, math.min(270, minValue - PANEL_BORDER), constantsModule.PANEL_SIZE_MIN_CAP)
+	var2 = if constantsModule.PANEL_SIZE_MAX_CAP < var2 then p3 else math.clamp(var2, math.min(434, maxValue - PANEL_BORDER), constantsModule.PANEL_SIZE_MAX_CAP)
+	local var3 = if p1.Y < p1.X then var2 else var1
+	local var4 = if p1.X < p1.Y then var2 else var1
 	
-	if p5 ~= nil then
-		var6 = math.min(var6, math.max(0, p2.Y - p5))
+	if p4 ~= nil then
+		var4 = math.min(var4, math.max(0, p1.Y - p4))
 	end
-	return Vector2.new(var5, var6)
+	return Vector2.new(var3, var4)
 end

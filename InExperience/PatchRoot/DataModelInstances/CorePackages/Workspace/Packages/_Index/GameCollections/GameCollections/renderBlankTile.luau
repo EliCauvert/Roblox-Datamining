@@ -1,9 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("GameCollections").Parent
 local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionItemTypes
 local reactModule = require(parent.React)
-local var1 = reactModule.memo(function(p0)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref)
-	return reactModule.createElement("Frame", { BackgroundTransparency = 1, LayoutOrder = p0.index })
+	return reactModule.createElement("Frame", { BackgroundTransparency = 1, LayoutOrder = p1.index })
 end)
 
 return function(p1)

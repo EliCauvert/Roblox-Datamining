@@ -17,21 +17,21 @@ local fFlagEnableUpdatedCaptureControlsModule = require(parent.Flags.FFlagEnable
 
 return function(_)
 	-- upvalues: useDispatch (ref), useSelector (ref), constantsModule (ref), useCallback (ref), makeVideoCaptureStartFailedHandlerModule (ref), useEventConnection (ref), captureService (ref), makeVideoCaptureFailedHandlerModule (ref), reactModule (ref), fFlagEnableUpdatedCaptureControlsModule (ref), captureControlsViewModule (ref), toastContainerModule (ref)
-	local var10 = useDispatch()
-	local var11 = useSelector(function(p0)
+	local var1 = useDispatch()
+	local var2 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
-		return p0[constantsModule.RoduxKey].Carousel.IsOpen
+		return p1[constantsModule.RoduxKey].Carousel.IsOpen
 	end)
-	local var12 = useSelector(function(p1)
+	local var3 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)
-	useEventConnection(captureService.UserVideoCaptureStartFailed, useCallback(makeVideoCaptureStartFailedHandlerModule(var10), {}))
-	useEventConnection(captureService.UserVideoCaptureFailed, useCallback(makeVideoCaptureFailedHandlerModule(var10), {}))
+	useEventConnection(captureService.UserVideoCaptureStartFailed, useCallback(makeVideoCaptureStartFailedHandlerModule(var1), {}))
+	useEventConnection(captureService.UserVideoCaptureFailed, useCallback(makeVideoCaptureFailedHandlerModule(var1), {}))
 	
 	return reactModule.createElement(reactModule.Fragment, {}, {
-		CaptureControlsView = if fFlagEnableUpdatedCaptureControlsModule and var12 then reactModule.createElement(captureControlsViewModule) else nil,
-		ToastsFrame = if not var11 then reactModule.createElement("Frame", {
+		CaptureControlsView = if fFlagEnableUpdatedCaptureControlsModule and var3 then reactModule.createElement(captureControlsViewModule) else nil,
+		ToastsFrame = if not var2 then reactModule.createElement("Frame", {
 			Active = false,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),

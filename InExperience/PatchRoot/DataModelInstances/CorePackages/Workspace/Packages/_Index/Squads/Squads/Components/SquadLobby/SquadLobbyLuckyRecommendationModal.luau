@@ -38,17 +38,17 @@ local useIsExperienceInviteRetryBlocked = hooksModule.useIsExperienceInviteRetry
 local fFlagSquadExperienceInviteRetryAfter = require(parent.SquadsCore.Flags).FFlagSquadExperienceInviteRetryAfter
 local eventNamesModule = require(parent.SquadsCore.EventNames)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), fFlagSquadExperienceInviteRetryAfter (ref), useIsExperienceInviteRetryBlocked (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
-	local var7 = useTokens()
-	local var8 = useDispatch()
-	local size300 = var7.Size.Size_300
-	local var9 = react.useContext(squadExternalContractContext)
-	local var10 = useLuckyRecommendation()
-	local state = var10.state
-	local actions = var10.actions
-	local var11 = useLuckyRecommendationAnalytics(p0.sessionId)
-	local var12 = useLocalization({
+	local var1 = useTokens()
+	local var2 = useDispatch()
+	local size300 = var1.Size.Size_300
+	local var3 = react.useContext(squadExternalContractContext)
+	local var4 = useLuckyRecommendation()
+	local state = var4.state
+	local actions = var4.actions
+	local var5 = useLuckyRecommendationAnalytics(p1.sessionId)
+	local var6 = useLocalization({
 		rollingTitle = "Feature.Squads.Label.LuckyRecommendationRolling",
 		rollingSubtitle = "Feature.Squads.Description.LuckyRecommendationRolling",
 		revealedTitle = "Feature.Squads.Label.LuckyRecommendationRevealed",
@@ -59,62 +59,62 @@ return function(p0)
 		retryText = "Feature.Squads.Action.Retry"
 	})
 	local phase = state.phase
-	local var13 = phase == squadLuckyRecommendationPhase.Rolling
-	local var14 = phase == squadLuckyRecommendationPhase.Revealed
-	local var14_1 = var14 or phase == squadLuckyRecommendationPhase.Errored
-	local var16 = if state.phase == squadLuckyRecommendationPhase.Revealed then state.recommendation else nil
-	local universeId = var16 and var16.universeId
-	local rootPlaceId = var16 and var16.rootPlaceId
-	local var19 = if universeId ~= nil then nil else getRbxthumbWithTypeSizeAndOptions(tostring(universeId), constants.RbxthumbTypes.GameIcon, 150, false)
-	local var20 = useSelector(react.useCallback(function(p1)
-		return p1.Squad and (p1.Squad.Squad and (p1.Squad.Squad.currentSquad and p1.Squad.Squad.currentSquad.squadId))
+	local var7 = phase == squadLuckyRecommendationPhase.Rolling
+	local var8 = phase == squadLuckyRecommendationPhase.Revealed
+	local var9 = var8 or phase == squadLuckyRecommendationPhase.Errored
+	local var10 = if state.phase == squadLuckyRecommendationPhase.Revealed then state.recommendation else nil
+	local universeId = var10 and var10.universeId
+	local rootPlaceId = var10 and var10.rootPlaceId
+	local var11 = if universeId ~= nil then nil else getRbxthumbWithTypeSizeAndOptions(tostring(universeId), constants.RbxthumbTypes.GameIcon, 150, false)
+	local var12 = useSelector(react.useCallback(function(p2)
+		return p2.Squad and (p2.Squad.Squad and (p2.Squad.Squad.currentSquad and p2.Squad.Squad.currentSquad.squadId))
 	end, {}))
-	local var21 = useSelector(react.useCallback(function(p2)
+	local var13 = useSelector(react.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
 	end, {}))
-	local var22 = if fFlagSquadExperienceInviteRetryAfter then useIsExperienceInviteRetryBlocked(var20) else false
-	local var23 = react.useCallback(function()
-		-- upvalues: var11 (ref), eventNamesModule (copy), phase (ref), p0 (ref)
-		var11.fire(eventNamesModule.LuckyRecommendationDismissed, { phaseAtDismiss = phase })
-		p0.onClose()
-	end, { var11, phase, p0.onClose })
-	local var24 = react.useCallback(function()
-		-- upvalues: var11 (ref), eventNamesModule (copy), phase (ref), actions (ref), var20 (ref)
-		var11.fire(eventNamesModule.LuckyRecommendationRerolled, { phaseAtReroll = phase })
-		actions.startRoll(var20, false)
-	end, { actions.startRoll, var20, var11, phase })
-	local var25 = react.useCallback(function()
-		-- upvalues: var11 (ref), eventNamesModule (copy), rootPlaceId (ref), var8 (ref), createExperienceInviteModule (copy), var9 (ref), squadExperienceInviteSource (copy)
-		local context = var11.getContext()
-		var11.fire(eventNamesModule.LuckyRecommendationJoinTapped, { rootPlaceId = rootPlaceId })
+	local var14 = if fFlagSquadExperienceInviteRetryAfter then useIsExperienceInviteRetryBlocked(var12) else false
+	local var15 = react.useCallback(function()
+		-- upvalues: var5 (ref), eventNamesModule (copy), phase (ref), p1 (ref)
+		var5.fire(eventNamesModule.LuckyRecommendationDismissed, { phaseAtDismiss = phase })
+		p1.onClose()
+	end, { var5, phase, p1.onClose })
+	local var16 = react.useCallback(function()
+		-- upvalues: var5 (ref), eventNamesModule (copy), phase (ref), actions (ref), var12 (ref)
+		var5.fire(eventNamesModule.LuckyRecommendationRerolled, { phaseAtReroll = phase })
+		actions.startRoll(var12, false)
+	end, { actions.startRoll, var12, var5, phase })
+	local var17 = react.useCallback(function()
+		-- upvalues: var5 (ref), eventNamesModule (copy), rootPlaceId (ref), var2 (ref), createExperienceInviteModule (copy), var3 (ref), squadExperienceInviteSource (copy)
+		local context = var5.getContext()
+		var5.fire(eventNamesModule.LuckyRecommendationJoinTapped, { rootPlaceId = rootPlaceId })
 		
 		if rootPlaceId == nil then
 			return
 		end
-		var8(createExperienceInviteModule(tostring(rootPlaceId), var9, squadExperienceInviteSource.LuckyRecommendation)):andThen(function(p3)
-			-- upvalues: var11 (copy), eventNamesModule (copy), context (ref), rootPlaceId (copy)
-			if p3 then
-				var11.fire(eventNamesModule.LuckyRecommendationExperienceInviteCreated, {
+		var2(createExperienceInviteModule(tostring(rootPlaceId), var3, squadExperienceInviteSource.LuckyRecommendation)):andThen(function(p2)
+			-- upvalues: var5 (copy), eventNamesModule (copy), context (ref), rootPlaceId (copy)
+			if p2 then
+				var5.fire(eventNamesModule.LuckyRecommendationExperienceInviteCreated, {
 					pickRequestId = context.pickRequestId,
 					revealType = context.revealType,
 					rootPlaceId = rootPlaceId,
-					experienceInviteId = p3
+					experienceInviteId = p2
 				})
 			end
 		end)
-	end, { var8, rootPlaceId, var9, var11 })
+	end, { var2, rootPlaceId, var3, var5 })
 	react.useLayoutEffect(function()
-		-- upvalues: actions (ref), var20 (ref)
-		actions.startRoll(var20, true)
-	end, { actions.startRoll, var20 })
+		-- upvalues: actions (ref), var12 (ref)
+		actions.startRoll(var12, true)
+	end, { actions.startRoll, var12 })
 	react.useEffect(function()
 		-- upvalues: phase (ref), squadLuckyRecommendationPhase (copy), setTimeout (copy), actions (ref), clearTimeout (copy)
 		if phase == squadLuckyRecommendationPhase.Rolling then
-			local var32 = setTimeout(actions.endRoll, 1000)
+			local var18 = setTimeout(actions.endRoll, 1000)
 			
 			return function()
-				-- upvalues: clearTimeout (copy), var32 (ref)
-				clearTimeout(var32)
+				-- upvalues: clearTimeout (copy), var18 (ref)
+				clearTimeout(var18)
 			end
 		end
 	end, { phase, actions.endRoll })
@@ -126,59 +126,59 @@ return function(p0)
 		end
 	end, { actions.cancelFetch })
 	react.useEffect(function()
-		-- upvalues: phase (ref), squadLuckyRecommendationPhase (copy), var11 (ref), eventNamesModule (copy), universeId (ref), state (ref)
+		-- upvalues: phase (ref), squadLuckyRecommendationPhase (copy), var5 (ref), eventNamesModule (copy), universeId (ref), state (ref)
 		if phase == squadLuckyRecommendationPhase.Revealed then
-			var11.fire(eventNamesModule.LuckyRecommendationRevealShown, { universeId = universeId })
+			var5.fire(eventNamesModule.LuckyRecommendationRevealShown, { universeId = universeId })
 			
 			return
 		elseif phase == squadLuckyRecommendationPhase.Errored then
-			var11.fire(eventNamesModule.LuckyRecommendationErrorShown, { errorType = state.error })
+			var5.fire(eventNamesModule.LuckyRecommendationErrorShown, { errorType = state.error })
 		end
-	end, { phase, var11, state, universeId })
-	local var26, var27 = reactOtterModule.useAnimatedBinding(0)
+	end, { phase, var5, state, universeId })
+	local var18, var19 = reactOtterModule.useAnimatedBinding(0)
 	react.useEffect(function()
-		-- upvalues: var13 (ref), var27 (ref), reactOtterModule (copy), var14_1 (ref)
-		if var13 then
-			var27(reactOtterModule.ease(100, {
+		-- upvalues: var7 (ref), var19 (ref), reactOtterModule (copy), var9 (ref)
+		if var7 then
+			var19(reactOtterModule.ease(100, {
 				duration = 1,
 				startingValue = 0,
 				easingStyle = Enum.EasingStyle.Quad
 			}))
 			
 			return
-		elseif var14_1 then
-			var27(reactOtterModule.ease(100, { duration = 0 }))
+		elseif var9 then
+			var19(reactOtterModule.ease(100, { duration = 0 }))
 		end
-	end, { var13, var14_1, var27 })
-	local var28 = if var14 then {
-		title = var12.revealedTitle,
-		subtitle = var12.revealedSubtitle,
-		actionText = var12.joinText,
-		onAction = var25,
-		isActionDisabled = if var21 == nil then var22 else true
-	} elseif not var14_1 then {
-		title = var12.rollingTitle,
-		subtitle = var12.rollingSubtitle,
-		actionText = var12.cancelText,
-		onAction = var23
+	end, { var7, var9, var19 })
+	local var20 = if var8 then {
+		title = var6.revealedTitle,
+		subtitle = var6.revealedSubtitle,
+		actionText = var6.joinText,
+		onAction = var17,
+		isActionDisabled = if var13 == nil then var14 else true
+	} elseif not var9 then {
+		title = var6.rollingTitle,
+		subtitle = var6.rollingSubtitle,
+		actionText = var6.cancelText,
+		onAction = var15
 	} else {
-		title = var12.errorTitle,
-		actionText = var12.retryText,
-		onAction = var24
+		title = var6.errorTitle,
+		actionText = var6.retryText,
+		onAction = var16
 	}
 	local t = {
 		Title = react.createElement(text, {
 			tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
 			LayoutOrder = 1,
-			Text = var28.title
+			Text = var20.title
 		})
 	}
 	
-	if var28.subtitle ~= nil then
+	if var20.subtitle ~= nil then
 		t.Subtitle = react.createElement(text, {
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 			LayoutOrder = 2,
-			Text = var28.subtitle
+			Text = var20.subtitle
 		})
 	end
 	local t_1 = {
@@ -188,55 +188,55 @@ return function(p0)
 		}, t)
 	}
 	
-	if var16 then
+	if var10 then
 		t_1.GameResult = react.createElement(view, {
 			tag = "row align-y-center gap-medium size-full-0 auto-y padding-large stroke-standard stroke-position-inner stroke-default radius-medium bg-surface-200",
 			LayoutOrder = 2
 		}, {
-			Thumbnail = if var19 then react.createElement(image, {
+			Thumbnail = if var11 then react.createElement(image, {
 				tag = "radius-small",
 				LayoutOrder = 1,
-				Image = var19,
-				Size = UDim2.fromOffset(var7.Size.Size_1000, var7.Size.Size_1000)
+				Image = var11,
+				Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000)
 			}) else nil,
 			GameInfo = react.createElement(view, {
 				tag = "col align-y-center fill",
 				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 0, var7.Size.Size_1000)
+				Size = UDim2.new(1, 0, 0, var1.Size.Size_1000)
 			}, {
 				GameName = react.createElement(text, {
 					tag = "size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left text-truncate-end content-emphasis",
 					LayoutOrder = 1,
-					Text = var16.universeName
+					Text = var10.universeName
 				})
 			})
 		})
 	end
-	if not var14_1 then
+	if not var9 then
 		t_1.ProgressBar = react.createElement(view, {
 			tag = "row align-y-center size-full-0",
 			LayoutOrder = 3,
-			Size = UDim2.new(1, 0, 0, var7.Size.Size_500)
+			Size = UDim2.new(1, 0, 0, var1.Size.Size_500)
 		}, {
 			Bar = react.createElement(progress, {
 				shape = progressShape.Bar,
 				size = progressSize.Medium,
-				value = var26,
+				value = var18,
 				width = UDim.new(1, 0)
 			})
 		})
 	end
 	return react.createElement(overlayProvider, { DisplayOrder = 11 }, {
 		Dialog = react.createElement(dialog.Root, {
-			onClose = var23,
+			onClose = var15,
 			size = dialogSize.Small,
-			hasBackdrop = p0.hasBackdrop ~= nil or p0.hasBackdrop,
-			disablePortal = if p0.disablePortal ~= nil then false else p0.disablePortal
+			hasBackdrop = p1.hasBackdrop ~= nil or p1.hasBackdrop,
+			disablePortal = if p1.disablePortal ~= nil then false else p1.disablePortal
 		}, {
 			Content = react.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 1 }, {
 				Main = react.createElement(view, {
 					tag = "col size-full-0 auto-y",
-					padding = { top = UDim.new(0, size300 + var7.Size.Size_200) }
+					padding = { top = UDim.new(0, size300 + var1.Size.Size_200) }
 				}, {
 					Body = react.createElement(view, {
 						tag = "col gap-large size-full-0 auto-y padding-bottom-large",
@@ -244,25 +244,25 @@ return function(p0)
 					}, t_1),
 					ActionButton = react.createElement(button, {
 						LayoutOrder = 2,
-						onActivated = var28.onAction,
-						text = var28.actionText,
+						onActivated = var20.onAction,
+						text = var20.actionText,
 						variant = buttonVariant.Standard,
 						width = UDim.new(1, 0),
-						isDisabled = var28.isActionDisabled
+						isDisabled = var20.isActionDisabled
 					})
 				}),
-				ResetButton = if var14 then react.createElement(view, {
+				ResetButton = if var8 then react.createElement(view, {
 					tag = "row align-x-center align-y-center auto-xy padding-small radius-circle clip bg-over-media-100",
 					ZIndex = 2,
-					onActivated = var24,
-					Size = UDim2.fromOffset(var7.Size.Size_1000, var7.Size.Size_1000),
+					onActivated = var16,
+					Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000),
 					AnchorPoint = Vector2.new(1, 0),
-					Position = UDim2.new(1, -var7.Size.Size_1000, 0, size300)
+					Position = UDim2.new(1, -var1.Size.Size_1000, 0, size300)
 				}, {
 					Icon = react.createElement(icon, {
 						name = "arrow-spin-clockwise",
 						size = iconSize.Small,
-						style = var7.Color.Content.Emphasis
+						style = var1.Color.Content.Emphasis
 					})
 				}) else nil
 			})

@@ -8,20 +8,20 @@ local toast = require(corePackagesService.Packages.UIBlox).App.Dialog.Toast
 local actionModalModule = require(script.Parent.ActionModal)
 local fFlagConnectionsToFriendsRename = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionsToFriendsRename
 
-return function(p0)
+return function(p1)
 	-- upvalues: blockingUtilityModule (ref), reactModule (ref), isNewInGameMenuEnabledModule (ref), modules (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), toast (ref), actionModalModule (ref)
-	local player = p0.player
-	local closeModal = p0.closeModal
-	local blockingUtility = p0.blockingUtility or blockingUtilityModule
-	local analytics = p0.analytics
-	local source = p0.source
-	local onBlockingSuccess = p0.onBlockingSuccess
-	local var6, var7 = reactModule.useState(Vector2.new(1000, 1000))
-	local var8, var9 = reactModule.useState(false)
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: blockingUtility (ref), player (ref), analytics (ref), source (ref), onBlockingSuccess (ref), closeModal (ref), var9 (ref)
+	local player = p1.player
+	local closeModal = p1.closeModal
+	local blockingUtility = p1.blockingUtility or blockingUtilityModule
+	local analytics = p1.analytics
+	local source = p1.source
+	local onBlockingSuccess = p1.onBlockingSuccess
+	local var1, var2 = reactModule.useState(Vector2.new(1000, 1000))
+	local var3, var4 = reactModule.useState(false)
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: blockingUtility (ref), player (ref), analytics (ref), source (ref), onBlockingSuccess (ref), closeModal (ref), var4 (ref)
 		if not blockingUtility:BlockPlayerAsync(player) then
-			var9(true)
+			var4(true)
 			
 			return
 		end
@@ -38,7 +38,7 @@ return function(p0)
 		source,
 		onBlockingSuccess
 	})
-	local var11 = useLocalization({
+	local var6 = useLocalization({
 		cancelTextKey = "Feature.BlockingModal.Action.Cancel",
 		blockTextKey = "Feature.BlockingModal.Action.Block",
 		blockAndReportTextKey = "Feature.BlockingModal.Action.BlockAndReport",
@@ -50,34 +50,34 @@ return function(p0)
 		bodyKey = if fFlagConnectionsToFriendsRename then "Feature.BlockingModal.Message.BlockConfirmation.FriendsRename" else "Feature.BlockingModal.Message.BlockConfirmation"
 	})
 	
-	return if var8 then reactModule.createElement(toast, {
+	return if var3 then reactModule.createElement(toast, {
 		duration = 3,
-		show = var8,
+		show = var3,
 		toastContent = {
-			toastTitle = var11.blockingFailed,
+			toastTitle = var6.blockingFailed,
 			onDismissed = closeModal
 		}
 	}) else reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
 		ZIndex = 2,
-		[reactModule.Change.AbsoluteSize] = function(p1)
-			-- upvalues: var7 (ref)
-			var7(p1.AbsoluteSize)
+		[reactModule.Change.AbsoluteSize] = function(p2)
+			-- upvalues: var2 (ref)
+			var2(p2.AbsoluteSize)
 		end
 	}, {
 		BlockingModal = reactModule.createElement(actionModalModule, {
-			screenSize = var6,
-			title = var11.titleKey,
-			body = var11.bodyKey,
-			blockText = var11.blockTextKey,
-			blockAndReportText = var11.blockAndReportTextKey,
-			cancelText = var11.cancelTextKey,
+			screenSize = var1,
+			title = var6.titleKey,
+			body = var6.bodyKey,
+			blockText = var6.blockTextKey,
+			blockAndReportText = var6.blockAndReportTextKey,
+			cancelText = var6.cancelTextKey,
 			cancel = closeModal,
-			block = var10,
+			block = var5,
 			blockAndReport = reactModule.useCallback(function()
-				-- upvalues: var10 (ref), source (ref), isNewInGameMenuEnabledModule (copy), modules (copy), player (ref)
-				var10()
+				-- upvalues: var5 (ref), source (ref), isNewInGameMenuEnabledModule (copy), modules (copy), player (ref)
+				var5()
 				local source_1 = source or "BlockingModal"
 				
 				if isNewInGameMenuEnabledModule() then
@@ -86,7 +86,7 @@ return function(p0)
 					return
 				end
 				require(modules.Settings.Pages.ReportAbuseMenuNewContainerPage):ReportPlayer(player, source_1)
-			end, { var10, player, source })
+			end, { var5, player, source })
 		})
 	})
 end

@@ -1,8 +1,8 @@
 ﻿return {
-	IsPointInRect = function(p0, p1)
-		local min = p0.Min
-		local max = p0.Max
+	IsPointInRect = function(p1, p2)
+		local min = p1.Min
+		local max = p1.Max
 		
-		return min.X <= p1.X and (min.Y <= p1.Y and (p1.X <= max.X and p1.Y <= max.Y))
+		return min.X <= p2.X and (min.Y <= p2.Y and (p2.X <= max.X and p2.Y <= max.Y))
 	end
 }

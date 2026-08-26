@@ -9,7 +9,7 @@ local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnablePioneerLandingPageLayout = sharedFlagsModule.FFlagEnablePioneerLandingPageLayout
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var3 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local appPage = require(parent.RobloxAppEnums).AppPage
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local authAnalyticsModule = require(parent.AuthAnalytics)
@@ -18,27 +18,27 @@ local eventStreamConstants = authAnalyticsModule.EventStreamConstants
 local openExternalBrowserModule = require(authCommon.Thunks.OpenExternalBrowser)
 local transitionAnimationModule = require(authCommon.Enums.TransitionAnimation)
 
-return function(p0)
-	-- upvalues: useDispatch (ref), useRoactService (ref), appLinking (ref), useAppPolicy (ref), fFlagEnablePioneerLandingPageLayout (ref), openExternalBrowserModule (ref), appPage (ref), transitionAnimationModule (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateDown (ref), reactModule (ref), authFormInteraction (ref), eventStreamConstants (ref), urlBuilder (ref)
-	local var7 = useDispatch()
-	local var8 = useRoactService(appLinking)
-	local var9 = useAppPolicy(function(p1)
-		return p1.shouldUseExternalBrowserForDisclaimerLinks()
+return function(p1)
+	-- upvalues: useDispatch (ref), useRoactService (ref), appLinking (ref), useAppPolicy (ref), fFlagEnablePioneerLandingPageLayout (ref), openExternalBrowserModule (ref), appPage (ref), transitionAnimationModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), reactModule (ref), authFormInteraction (ref), eventStreamConstants (ref), urlBuilder (ref)
+	local var2 = useDispatch()
+	local var3 = useRoactService(appLinking)
+	local var4 = useAppPolicy(function(p2)
+		return p2.shouldUseExternalBrowserForDisclaimerLinks()
 	end)
-	local var10 = nil
+	local var5 = nil
 	
 	if fFlagEnablePioneerLandingPageLayout then
-		if p0 then
-			var10 = p0.disableExternalLinks == true
-			var10 = nil
+		if p1 then
+			var5 = p1.disableExternalLinks == true
+			var5 = nil
 		else
-			var10 = false
+			var5 = false
 		end
 	end
-	local var11 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var9 (ref), var10 (write), openExternalBrowserModule (copy), var8 (ref), appPage (copy), transitionAnimationModule (copy), fFlagSignalsNavP3Dispatch (copy), var3 (copy), var7 (ref), navigateDown (copy)
-		if var9 and not var10 then
-			openExternalBrowserModule(var8, p2)
+	local var6 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var4 (ref), var5 (write), openExternalBrowserModule (copy), var3 (ref), appPage (copy), transitionAnimationModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
+		if var4 and not var5 then
+			openExternalBrowserModule(var3, p2)
 			
 			return
 		end
@@ -52,36 +52,36 @@ return function(p0)
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var3.down(var3.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		var7(navigateDown(t))
+		var2(navigateDown(t))
 	end, {
-		var9,
-		var8,
-		var7,
-		if fFlagEnablePioneerLandingPageLayout then var10 else nil
+		var4,
+		var3,
+		var2,
+		if fFlagEnablePioneerLandingPageLayout then var5 else nil
 	})
-	local var12 = if p0 then p0.ctx else nil
-	local var13 = if p0 then p0.state else nil
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), authFormInteraction (copy), eventStreamConstants (copy), var13 (ref), var11 (ref), urlBuilder (copy)
-		if var12 then
-			authFormInteraction(var12, eventStreamConstants.Field.TermsOfService, var13)
+	local var7 = if p1 then p1.ctx else nil
+	local var8 = if p1 then p1.state else nil
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), authFormInteraction (copy), eventStreamConstants (copy), var8 (ref), var6 (ref), urlBuilder (copy)
+		if var7 then
+			authFormInteraction(var7, eventStreamConstants.Field.TermsOfService, var8)
 		end
-		var11(urlBuilder.static.about.terms())
-	end, { var11, var12, var13 })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), authFormInteraction (copy), eventStreamConstants (copy), var13 (ref), var11 (ref), urlBuilder (copy)
-		if var12 then
-			authFormInteraction(var12, eventStreamConstants.Field.PrivacyPolicy, var13)
+		var6(urlBuilder.static.about.terms())
+	end, { var6, var7, var8 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), authFormInteraction (copy), eventStreamConstants (copy), var8 (ref), var6 (ref), urlBuilder (copy)
+		if var7 then
+			authFormInteraction(var7, eventStreamConstants.Field.PrivacyPolicy, var8)
 		end
-		var11(urlBuilder.static.about.privacy())
-	end, { var11, var12, var13 })
+		var6(urlBuilder.static.about.privacy())
+	end, { var6, var7, var8 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var14 (ref), var15 (ref), var11 (ref)
-		return { openTerms = var14, openPrivacy = var15, openLink = var11 }
-	end, { var14, var15, var11 })
+		-- upvalues: var9 (ref), var10 (ref), var6 (ref)
+		return { openTerms = var9, openPrivacy = var10, openLink = var6 }
+	end, { var9, var10, var6 })
 end

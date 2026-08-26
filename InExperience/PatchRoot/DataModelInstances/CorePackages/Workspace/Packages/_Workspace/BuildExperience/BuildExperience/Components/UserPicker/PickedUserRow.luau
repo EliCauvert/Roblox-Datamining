@@ -16,48 +16,48 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local accessoryType = foundationModule.Enums.AccessoryType
 
-return function(p0)
+return function(p1)
 	-- upvalues: useUserProfileInfoModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), view (ref), loading (ref), iconSize (ref), iconButton (ref), iconName (ref), list (ref), accessoryType (ref)
-	local PRIVATE_INVITES_UNKNOWN_USER, var8
-	local var6 = useUserProfileInfoModule(p0.userId)
-	local var7 = if fFlagBuildLocalization then useLocalization({
+	local PRIVATE_INVITES_UNKNOWN_USER, var1
+	local var2 = useUserProfileInfoModule(p1.userId)
+	local var3 = if fFlagBuildLocalization then useLocalization({
 		unknownUser = localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER,
 		username = {
 			localizationStringsModule.USER_PICKER_USERNAME,
-			USERNAME = var6.username
+			USERNAME = var2.username
 		}
 	}) else nil
 	local _ = nil
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		PRIVATE_INVITES_UNKNOWN_USER = var7.unknownUser
-		var8 = var7.username
+		PRIVATE_INVITES_UNKNOWN_USER = var3.unknownUser
+		var1 = var3.username
 	else
 		PRIVATE_INVITES_UNKNOWN_USER = localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER
-		var8 = localizationStringsModule.formatUserPickerUsername(var6.username)
+		var1 = localizationStringsModule.formatUserPickerUsername(var2.username)
 	end
 	local size1000 = useTokens().Size.Size_1000
 	
 	return reactModule.createElement(list.Item, {
-		LayoutOrder = p0.LayoutOrder,
-		leading = { type = accessoryType.Avatar, userId = p0.userId },
-		title = if var6.displayName ~= "" then PRIVATE_INVITES_UNKNOWN_USER else var6.displayName,
-		description = var8,
-		trailing = if p0.isRemoving then reactModule.createElement(view, {
+		LayoutOrder = p1.LayoutOrder,
+		leading = { type = accessoryType.Avatar, userId = p1.userId },
+		title = if var2.displayName ~= "" then PRIVATE_INVITES_UNKNOWN_USER else var2.displayName,
+		description = var1,
+		trailing = if p1.isRemoving then reactModule.createElement(view, {
 			tag = "align-x-center align-y-center",
 			Size = UDim2.fromOffset(size1000, size1000),
-			testId = `{p0.testId}-removing`
+			testId = `{p1.testId}-removing`
 		}, {
 			Spinner = reactModule.createElement(loading, { size = iconSize.Small })
 		}) else reactModule.createElement(iconButton, {
 			icon = iconName.TrashCan,
 			onActivated = function()
-				-- upvalues: p0 (ref)
-				p0.onRemove(p0.userId)
+				-- upvalues: p1 (ref)
+				p1.onRemove(p1.userId)
 			end,
-			testId = `{p0.testId}-remove`
+			testId = `{p1.testId}-remove`
 		}),
-		testId = p0.testId
+		testId = p1.testId
 	})
 end

@@ -5,15 +5,15 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, _, p1, p2)
+return function(p1, _, p2, p3)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), setCentralOverlay (ref), centralOverlayType (ref)
-	local var1 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.OpenJoinFriends
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
@@ -21,38 +21,38 @@ return function(p0, _, p1, p2)
 	local placeId = var1.placeId
 	
 	if placeId == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "placeId",
 			name = sduiActionType.OpenJoinFriends,
 			message = `Missing placeId: {placeId}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
 	local universeId = var1.universeId
 	
 	if universeId == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "universeId",
 			name = sduiActionType.OpenJoinFriends,
 			message = `Missing universeId: {universeId}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
-	elseif p2 then
-		p1.dependencies.dispatch(setCentralOverlay(centralOverlayType.PlacesList, {
+	elseif p3 then
+		p2.dependencies.dispatch(setCentralOverlay(centralOverlayType.PlacesList, {
 			game = {
 				placeId = tostring(placeId),
 				universeId = tostring(universeId)
 			},
-			anchorSpaceSize = p2.AbsoluteSize,
-			anchorSpacePosition = p2.AbsolutePosition
+			anchorSpaceSize = p3.AbsoluteSize,
+			anchorSpacePosition = p3.AbsolutePosition
 		}))
 		
 		return
 	end
-	p1.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
+	p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
 		message = "Failed to execute -- missing guiObject anchor",
 		name = sduiActionType.OpenJoinFriends
-	}, p1.appPage)
+	}, p2.appPage)
 end

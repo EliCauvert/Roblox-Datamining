@@ -10,22 +10,22 @@ local upsellEntrySurfaceType = socialUpsellModule.Analytics.Enum.UpsellEntrySurf
 local upsellComponent = socialUpsellModule.Analytics.Enum.UpsellComponent
 local useSocialUpsellOverlayController = socialUpsellModule.Hooks.useSocialUpsellOverlayController
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useSocialUpsellOverlayController (ref), reactModule (ref), customModalTypeModule (ref), socialUpsellType (ref), upsellEntrySurfaceType (ref), upsellComponent (ref), reportModalImpressionModule (ref), sendModalImpressionEvent (ref)
-	local var5 = useSocialUpsellOverlayController(false)
+	local var1 = useSocialUpsellOverlayController(false)
 	
-	return reactModule.useCallback(function(p2)
-		-- upvalues: customModalTypeModule (copy), var5 (ref), socialUpsellType (copy), upsellEntrySurfaceType (copy), upsellComponent (copy), reportModalImpressionModule (copy), p1 (ref), sendModalImpressionEvent (copy)
-		if p2.modalType == customModalTypeModule.SocialFaceAgeEstimationUpsell then
-			var5.openSocialOverlay(socialUpsellType.FacialAgeEstimation, {
+	return reactModule.useCallback(function(p3)
+		-- upvalues: customModalTypeModule (copy), var1 (ref), socialUpsellType (copy), upsellEntrySurfaceType (copy), upsellComponent (copy), reportModalImpressionModule (copy), p2 (ref), sendModalImpressionEvent (copy)
+		if p3.modalType == customModalTypeModule.SocialFaceAgeEstimationUpsell then
+			var1.openSocialOverlay(socialUpsellType.FacialAgeEstimation, {
 				upsellEntrySurface = upsellEntrySurfaceType.Homepage,
 				upsellEntryComponent = upsellComponent.Modal,
 				onMounted = function()
-					-- upvalues: reportModalImpressionModule (copy), p1 (copy), p2 (ref), sendModalImpressionEvent (copy)
-					reportModalImpressionModule(p1, p2.modalId, p2.modalType)
-					sendModalImpressionEvent(p2.modalId, p2.modalType)
+					-- upvalues: reportModalImpressionModule (copy), p2 (copy), p3 (ref), sendModalImpressionEvent (copy)
+					reportModalImpressionModule(p2, p3.modalId, p3.modalType)
+					sendModalImpressionEvent(p3.modalId, p3.modalType)
 				end
 			})
 		end
-	end, { p1, p0, var5.openSocialOverlay })
+	end, { p2, p1, var1.openSocialOverlay })
 end

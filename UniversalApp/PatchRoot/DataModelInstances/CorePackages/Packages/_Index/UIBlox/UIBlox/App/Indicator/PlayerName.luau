@@ -12,14 +12,14 @@ local useStyleModule = require(parent_1.Core.Style.useStyle)
 local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local openTypeSupportModule = require(parent_1.Utility.OpenTypeSupport)
 
-local function getStyleDefaults(p0)
+local function getStyleDefaults(p1)
 	-- upvalues: UIBloxConfigModule (ref)
 	return {
-		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p0.Size.Size_50 else p0.Global.Space_25,
-		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p0.Size.Size_400 else p0.Semantic.Icon.Size.Small,
-		iconColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p0.Color.Content.Default else p0.Semantic.Color.Icon.Default,
-		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p0.Typography.CaptionMedium else p0.Semantic.Typography.CaptionHeader,
-		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p0.Color.Content.Default else p0.Semantic.Color.Text.Default
+		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_50 else p1.Global.Space_25,
+		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_400 else p1.Semantic.Icon.Size.Small,
+		iconColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Icon.Default,
+		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Typography.CaptionMedium else p1.Semantic.Typography.CaptionHeader,
+		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Text.Default
 	}
 end
 
@@ -33,39 +33,39 @@ local function getDisplayNameStyleDefaults(p1)
 	}
 end
 
-local function getUserNameStyleDefaults(p2)
+local function getUserNameStyleDefaults(p1)
 	-- upvalues: UIBloxConfigModule (ref)
 	return {
-		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Size.Size_50 else p2.Global.Space_25,
-		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Size.Size_300 else p2.Global.Size_150,
-		iconColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Color.Content.Default else p2.Semantic.Color.Icon.Default,
-		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Typography.CaptionMedium else p2.Semantic.Typography.CaptionHeader,
-		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Color.Content.Default else p2.Semantic.Color.Text.Default
+		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_50 else p1.Global.Space_25,
+		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_300 else p1.Global.Size_150,
+		iconColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Icon.Default,
+		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Typography.CaptionMedium else p1.Semantic.Typography.CaptionHeader,
+		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Text.Default
 	}
 end
 
-local function NameItem(p3)
+local function NameItem(p1)
 	-- upvalues: cryoModule (ref), reactModule (ref), label (ref), skeleton (ref), UIBloxConfigModule (ref)
 	local createElement_1
-	local layoutOrder = p3.layoutOrder
-	local isReversed = p3.isReversed
-	local itemProps = p3.itemProps
-	local itemStyleDefaults = p3.itemStyleDefaults
+	local layoutOrder = p1.layoutOrder
+	local isReversed = p1.isReversed
+	local itemProps = p1.itemProps
+	local itemStyleDefaults = p1.itemStyleDefaults
 	local icon = itemProps.icon
 	local labelText = itemProps.labelText
 	local useTextAsIcon = itemProps.useTextAsIcon
 	local onActivated = itemProps.onActivated
-	local var10 = if itemProps.isLoading ~= nil then false else itemProps.isLoading
-	local var11 = cryoModule.Dictionary.join(itemStyleDefaults, itemProps.styleProps or {})
-	local iconLabelSpacing = var11.iconLabelSpacing
-	local iconSize = var11.iconSize
-	local iconColorStyle = var11.iconColorStyle or {}
-	local labelTypography = var11.labelTypography
-	local labelColorStyle = var11.labelColorStyle
-	local var13 = if var10 or not icon then false else true
-	local var14 = if var10 or not onActivated then false else true
-	local var15 = if var10 then if icon then math.max(iconSize, labelTypography.FontSize) else labelTypography.FontSize else nil
-	local var16 = if var13 then if useTextAsIcon then reactModule.createElement("TextLabel", {
+	local var1 = if itemProps.isLoading ~= nil then false else itemProps.isLoading
+	local var2 = cryoModule.Dictionary.join(itemStyleDefaults, itemProps.styleProps or {})
+	local iconLabelSpacing = var2.iconLabelSpacing
+	local iconSize = var2.iconSize
+	local iconColorStyle = var2.iconColorStyle or {}
+	local labelTypography = var2.labelTypography
+	local labelColorStyle = var2.labelColorStyle
+	local var3 = if var1 or not icon then false else true
+	local var4 = if var1 or not onActivated then false else true
+	local var5 = if var1 then if icon then math.max(iconSize, labelTypography.FontSize) else labelTypography.FontSize else nil
+	local var6 = if var3 then if useTextAsIcon then reactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		Selectable = false,
 		LayoutOrder = if isReversed then 2 else 1,
@@ -87,16 +87,16 @@ local function NameItem(p3)
 		ImageTransparency = if iconColorStyle.Transparency then iconColorStyle.Transparency else 0
 	}) else nil
 	local createElement = reactModule.createElement
-	local var17 = if var14 then "TextButton" else "Frame"
+	local var7 = if var4 then "TextButton" else "Frame"
 	local t = {
-		Text = if var14 then "" else nil,
-		AutoButtonColor = if var14 then false else nil,
+		Text = if var4 then "" else nil,
+		AutoButtonColor = if var4 then false else nil,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		LayoutOrder = layoutOrder,
-		Selectable = if var14 then true else false,
-		[reactModule.Event.Activated] = if var14 then onActivated else nil
+		Selectable = if var4 then true else false,
+		[reactModule.Event.Activated] = if var4 then onActivated else nil
 	}
 	local t_1 = {
 		ListLayout = reactModule.createElement("UIListLayout", {
@@ -106,11 +106,11 @@ local function NameItem(p3)
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, iconLabelSpacing)
 		}),
-		Shimmer = if var10 then reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, var15) }) else nil,
-		Icon = var16
+		Shimmer = if var1 then reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, var5) }) else nil,
+		Icon = var6
 	}
 	
-	if var10 then
+	if var1 then
 		createElement_1 = nil
 	else
 		createElement_1 = reactModule.createElement
@@ -127,27 +127,27 @@ local function NameItem(p3)
 			TextSize = labelTypography.FontSize,
 			TextColor3 = labelColorStyle.Color3,
 			TextTransparency = labelColorStyle.Transparency,
-			OpenTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport and p3.openTypeFeatures then p3.openTypeFeatures else nil
+			OpenTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport and p1.openTypeFeatures then p1.openTypeFeatures else nil
 		})
 	end
 	t_1.Label = createElement_1
 	
-	return createElement(var17, t, t_1)
+	return createElement(var7, t, t_1)
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), NameItem (ref), getDisplayNameStyleDefaults (ref), openTypeSupportModule (ref), getUserNameStyleDefaults (ref), getStyleDefaults (ref)
-	local var20 = useStyleModule()
-	local position = p4.position
-	local anchorPoint = p4.anchorPoint
-	local size = p4.size
-	local automaticSize = p4.automaticSize or Enum.AutomaticSize.Y
-	local layoutOrder = p4.layoutOrder
-	local namesSpacing = p4.namesSpacing or (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var20.Tokens.Size.Size_100 else var20.Tokens.Global.Space_50)
-	local displayNameItem = p4.displayNameItem
-	local userNameItem = p4.userNameItem
-	local vendorNameItem = p4.vendorNameItem
-	local aliasItem = p4.aliasItem
+	local var1 = useStyleModule()
+	local position = p1.position
+	local anchorPoint = p1.anchorPoint
+	local size = p1.size
+	local automaticSize = p1.automaticSize or Enum.AutomaticSize.Y
+	local layoutOrder = p1.layoutOrder
+	local namesSpacing = p1.namesSpacing or (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var1.Tokens.Size.Size_100 else var1.Tokens.Global.Space_50)
+	local displayNameItem = p1.displayNameItem
+	local userNameItem = p1.userNameItem
+	local vendorNameItem = p1.vendorNameItem
+	local aliasItem = p1.aliasItem
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -169,23 +169,23 @@ return function(p4)
 			layoutOrder = 1,
 			isReversed = true,
 			itemProps = displayNameItem,
-			itemStyleDefaults = getDisplayNameStyleDefaults(var20.Tokens)
+			itemStyleDefaults = getDisplayNameStyleDefaults(var1.Tokens)
 		}) else nil,
 		UserName = if userNameItem then reactModule.createElement(NameItem, {
 			layoutOrder = 2,
 			itemProps = userNameItem,
 			openTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport then openTypeSupportModule:getUserNameStylisticAlternative() else nil,
-			itemStyleDefaults = getUserNameStyleDefaults(var20.Tokens)
+			itemStyleDefaults = getUserNameStyleDefaults(var1.Tokens)
 		}) else nil,
 		VendorName = if vendorNameItem then reactModule.createElement(NameItem, {
 			layoutOrder = 3,
 			itemProps = vendorNameItem,
-			itemStyleDefaults = getStyleDefaults(var20.Tokens)
+			itemStyleDefaults = getStyleDefaults(var1.Tokens)
 		}) else nil,
 		Alias = if aliasItem then reactModule.createElement(NameItem, {
 			layoutOrder = 4,
 			itemProps = aliasItem,
-			itemStyleDefaults = getStyleDefaults(var20.Tokens)
+			itemStyleDefaults = getStyleDefaults(var1.Tokens)
 		}) else nil
 	})
 end

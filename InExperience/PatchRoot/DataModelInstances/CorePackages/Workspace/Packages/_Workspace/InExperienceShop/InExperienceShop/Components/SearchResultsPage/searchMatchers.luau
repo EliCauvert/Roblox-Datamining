@@ -1,43 +1,43 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-local function _(p0)
+local function _(p1)
 	local t = {}
 	
-	for i in string.gmatch(p0, "%S+") do
+	for i in string.gmatch(p1, "%S+") do
 		table.insert(t, i)
 	end
 	return t
 end
 
-local _ = function(p1)
-	return string.match(p1, "^%s*(.-)%s*$") or ""
+local _ = function(p2)
+	return string.match(p2, "^%s*(.-)%s*$") or ""
 end
 
 local _ = function(p2, p3)
 	return if #p2 < #p3 then false else string.sub(p2, 1, #p3) == p3
 end
 
+local _ = function(p2, p3)
+	for i, v in p2 do
+		if v == p3 then
+			return true
+		end
+	end
+	return false
+end
+
 local _ = function(p4, p5)
 	for i, v in p4 do
-		if v == p5 then
+		if if #v < #p5 then false else string.sub(v, 1, #p5) == p5 then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(p6, p7)
+local function anyWordIncludes(p6, p7)
 	for i, v in p6 do
-		if if #v < #p7 then false else string.sub(v, 1, #p7) == p7 then
-			return true
-		end
-	end
-	return false
-end
-
-local function anyWordIncludes(p8, p9)
-	for i, v in p8 do
-		if string.find(v, p9, 1, true) ~= nil then
+		if string.find(v, p7, 1, true) ~= nil then
 			return true
 		end
 	end
@@ -48,24 +48,24 @@ local _ = function(a)
 	return if a >= 8 then 2 else 1
 end
 
-local function editDistanceWithin(p10, p11, p12)
-	if p10 == p11 then
+local function editDistanceWithin(p8, p9, p10)
+	if p8 == p9 then
 		return true
 	end
-	local p10Count = #p10
-	local p11Count = #p11
+	local p10Count = #p8
+	local p11Count = #p9
 	
-	if p12 < math.abs(p10Count - p11Count) then
+	if p10 < math.abs(p10Count - p11Count) then
 		return false
 	elseif p10Count < p11Count then
-		p11 = p10
-		p10 = p11
-		local var7 = p11Count
+		p9 = p8
+		p8 = p9
+		local var1 = p11Count
 		p11Count = p10Count
-		p10Count = var7
+		p10Count = var1
 	end
 	if p11Count == 0 then
-		return p10Count <= p12
+		return p10Count <= p10
 	end
 	local list = table.create(p11Count + 1)
 	local list_1 = table.create(p11Count + 1)
@@ -76,181 +76,181 @@ local function editDistanceWithin(p10, p11, p12)
 	end
 	for i_2 = 1, p10Count do
 		list_2[1] = i_2
-		local var11 = i_2
-		local byteValue = string.byte(p10, i_2)
-		local var13 = if i_2 >= 2 then string.byte(p10, i_2 - 1) else 0
+		local var2 = i_2
+		local byteValue = string.byte(p8, i_2)
+		local var3 = if i_2 >= 2 then string.byte(p8, i_2 - 1) else 0
 		
 		for i_1 = 1, p11Count do
-			local byteValue_1 = string.byte(p11, i_1)
-			local var15 = if byteValue == byteValue_1 then 0 else 1
-			local var16 = list_1[i_1 + 1] + 1
-			local var17 = list_2[i_1] + 1
-			local var18 = list_1[i_1] + var15
-			local var19 = var16
+			local byteValue_1 = string.byte(p9, i_1)
+			local var4 = if byteValue == byteValue_1 then 0 else 1
+			local var5 = list_1[i_1 + 1] + 1
+			local var6 = list_2[i_1] + 1
+			local var7 = list_1[i_1] + var4
+			local var8 = var5
 			
-			if var17 < var19 then
-				var19 = var17
+			if var6 < var8 then
+				var8 = var6
 			end
-			if var18 < var19 then
-				var19 = var18
+			if var7 < var8 then
+				var8 = var7
 			end
-			if i_2 >= 2 and i_1 >= 2 and (byteValue == string.byte(p11, i_1 - 1) and var13 == byteValue_1) then
-				local var20 = list[i_1 - 1] + 1
+			if i_2 >= 2 and i_1 >= 2 and (byteValue == string.byte(p9, i_1 - 1) and var3 == byteValue_1) then
+				local var9 = list[i_1 - 1] + 1
 				
-				if var20 < var19 then
-					var19 = var20
+				if var9 < var8 then
+					var8 = var9
 				end
 			end
-			list_2[i_1 + 1] = var19
+			list_2[i_1 + 1] = var8
 			
-			if var19 < var11 then
-				var11 = var19
+			if var8 < var2 then
+				var2 = var8
 			end
 		end
-		if p12 >= var11 then
-			local var21 = list_1
+		if p10 >= var2 then
+			local var10 = list_1
 			list_1 = list_2
 			list_2 = list
-			list = var21
+			list = var10
 			continue
 		end
 		return false
 	end
-	return list_1[p11Count + 1] <= p12
+	return list_1[p11Count + 1] <= p10
 end
 
-local _ = function(p13, p14, p15)
+local _ = function(p11, p12, p13)
 	-- upvalues: editDistanceWithin (ref)
-	for i, v in p13 do
-		if editDistanceWithin(p14, v, p15) then
+	for i, v in p11 do
+		if editDistanceWithin(p12, v, p13) then
 			return true
 		end
 	end
 	return false
 end
 
-local function anyWordHasFuzzyPrefix(p16, p17, p18)
+local function anyWordHasFuzzyPrefix(p14, p15, p16)
 	-- upvalues: editDistanceWithin (ref)
-	local p17Count = #p17
+	local p17Count = #p15
 	
-	for i, v in p16 do
-		if p17Count <= #v and editDistanceWithin(p17, string.sub(v, 1, p17Count), p18) then
+	for i, v in p14 do
+		if p17Count <= #v and editDistanceWithin(p15, string.sub(v, 1, p17Count), p16) then
 			return true
 		end
 	end
 	return false
 end
 
-local function scoreToken(p19, p20, p21, p22)
+local function scoreToken(p17, p18, p19, p20)
 	-- upvalues: anyWordHasFuzzyPrefix (ref), anyWordIncludes (ref), editDistanceWithin (ref)
-	if p19 == p21 then
+	if p17 == p19 then
 		return 100
 	end
-	local var23
-	for i, v in p20 do
-		if v == p21 then
-			var23 = true
-			if var23 then
+	local var11
+	for i, v in p18 do
+		if v == p19 then
+			var11 = true
+			if var11 then
 				return 50
 			end
-			local var24
-			for i, v in p20 do
-				if if #v < #p21 then false else string.sub(v, 1, #p21) == p21 then
-					var24 = true
-					if var24 then
+			local var12
+			for i, v in p18 do
+				if if #v < #p19 then false else string.sub(v, 1, #p19) == p19 then
+					var12 = true
+					if var12 then
 						return 20
-					elseif #p21 >= 5 and anyWordHasFuzzyPrefix(p20, p21, if #p21 >= 8 then 2 else 1) then
+					elseif #p19 >= 5 and anyWordHasFuzzyPrefix(p18, p19, if #p19 >= 8 then 2 else 1) then
 						return 8
-					elseif #p21 > 1 and string.find(p19, p21, 1, true) ~= nil then
+					elseif #p19 > 1 and string.find(p17, p19, 1, true) ~= nil then
 						return 5
-					elseif #p21 == 1 and p22 > 1 and anyWordIncludes(p20, p21) then
+					elseif #p19 == 1 and p20 > 1 and anyWordIncludes(p18, p19) then
 						return 5
-					elseif #p21 >= 4 then
-						local var26
-						local var25 = if #p21 >= 8 then 2 else 1
+					elseif #p19 >= 4 then
+						local var13
+						local var14 = if #p19 >= 8 then 2 else 1
 						
-						for v, v_2 in p20 do
-							if editDistanceWithin(p21, v_2, var25) then
-								var26 = true
-								return if var26 then 12 else 0
+						for v, v_2 in p18 do
+							if editDistanceWithin(p19, v_2, var14) then
+								var13 = true
+								return if var13 then 12 else 0
 							end
 						end
-						var26 = false
+						var13 = false
 					end
 				end
 			end
-			var24 = false
+			var12 = false
 		end
 	end
-	var23 = false
+	var11 = false
 end
 
 return {
-	substringMatch = function(p23, p24, p25)
-		if p25 <= 0 then
+	substringMatch = function(p21, p22, p23)
+		if p23 <= 0 then
 			return {}
-		elseif p24 == "" then
+		elseif p22 == "" then
 			return {}
 		end
-		local lowerText = string.lower(p24)
+		local lowerText = string.lower(p22)
 		local t = {}
 		
-		for i, v in p23 do
+		for i, v in p21 do
 			if string.find(string.lower(v.name), lowerText, 1, true) ~= nil then
 				table.insert(t, v)
 				
-				if p25 <= #t then break end
+				if p23 <= #t then break end
 			end
 		end
 		return t
 	end,
-	fuzzyMatch = function(p26, p27, p28)
+	fuzzyMatch = function(p24, p25, p26)
 		-- upvalues: scoreToken (ref)
-		if p28 <= 0 then
+		if p26 <= 0 then
 			return {}
 		end
-		local lowerText = string.lower(string.match(p27, "^%s*(.-)%s*$") or "")
+		local lowerText = string.lower(string.match(p25, "^%s*(.-)%s*$") or "")
 		
 		if lowerText == "" then
-			return p26
+			return p24
 		end
 		local t = {}
 		
 		for i in string.gmatch(lowerText, "%S+") do
 			table.insert(t, i)
 		end
-		local lowerText_1, var36, var37, var38
+		local lowerText_1, var15, var16, var17
 		t = #t
 		local t_1 = {}
 		
-		for i_1, v in p26 do
+		for i_1, v in p24 do
 			lowerText_1 = string.lower(v.name)
 			local t_2 = {}
 			
 			for i_3 in string.gmatch(lowerText_1, "%S+") do
 				table.insert(t_2, i_3)
 			end
-			var36 = t_2
-			var37 = 0
-			var38 = false
+			var15 = t_2
+			var16 = 0
+			var17 = false
 			
 			for i_4, v_1 in t do
-				local var39 = scoreToken(lowerText_1, var36, v_1, t)
+				local var18 = scoreToken(lowerText_1, var15, v_1, t)
 				
-				if var39 ~= 0 then
-					var38 = true
+				if var18 ~= 0 then
+					var17 = true
 					break
 				end
-				var37 += var39
+				var16 += var18
 			end
-			if not var38 then
-				table.insert(t_1, { item = v, score = var37, index = i_1 })
+			if not var17 then
+				table.insert(t_1, { item = v, score = var16, index = i_1 })
 			end
 		end
-		table.sort(t_1, function(p29, p30)
-			return if p29.score == p30.score then p29.index < p30.index else p30.score < p29.score
+		table.sort(t_1, function(p27, p28)
+			return if p27.score == p28.score then p27.index < p28.index else p28.score < p27.score
 		end)
-		local minValue = math.min(p28, #t_1)
+		local minValue = math.min(p26, #t_1)
 		local list = table.create(minValue)
 		
 		for i_2 = 1, minValue do

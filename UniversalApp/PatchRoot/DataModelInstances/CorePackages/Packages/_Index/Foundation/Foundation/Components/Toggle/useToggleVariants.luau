@@ -7,19 +7,19 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local getKnobSizeModule = require(foundation.Components.Knob.getKnobSize)
 
-local function computeProps(p0)
-	local offset = p0.knobSize.X.Offset
-	local var7 = (p0.size.height - offset) / 2
+local function computeProps(p1)
+	local offset = p1.knobSize.X.Offset
+	local var1 = (p1.size.height - offset) / 2
 	
 	return {
 		input = {
-			tag = p0.tag,
-			size = UDim2.fromOffset(p0.size.width, p0.size.height),
-			stroke = { thickness = p0.strokeThickness }
+			tag = p1.tag,
+			size = UDim2.fromOffset(p1.size.width, p1.size.height),
+			stroke = { thickness = p1.strokeThickness }
 		},
 		knob = {
-			offPosition = UDim2.new(0, var7, 0.5, 0),
-			onPosition = UDim2.new(0, p0.size.width - offset - var7, 0.5, 0)
+			offPosition = UDim2.new(0, var1, 0.5, 0),
+			onPosition = UDim2.new(0, p1.size.width - offset - var1, 0.5, 0)
 		}
 	}
 end
@@ -68,9 +68,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local toggle = variantsContextModule.useVariants("Toggle", variantsFactory, p2)
+	local toggle = variantsContextModule.useVariants("Toggle", variantsFactory, p1)
 	
-	return composeStyleVariantModule(toggle.common, toggle.sizes[p3])
+	return composeStyleVariantModule(toggle.common, toggle.sizes[p2])
 end

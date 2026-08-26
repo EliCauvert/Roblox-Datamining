@@ -5,10 +5,10 @@ local httpService = game:GetService("HttpService")
 local runService = game:GetService("RunService")
 local contentProviderService = game:GetService("ContentProvider")
 local userInputService = game:GetService("UserInputService")
-local var6 = nil
+local var1 = nil
 pcall(function()
-	-- upvalues: var6 (write)
-	var6 = game:GetService("AppLifecycleObserverService")
+	-- upvalues: var1 (write)
+	var1 = game:GetService("AppLifecycleObserverService")
 end)
 local reactModule = require(parent.React)
 local sharedFlagsModule = require(parent.SharedFlags)
@@ -25,7 +25,7 @@ local function _()
 	return userInputService:GetDeviceType() ~= Enum.DeviceType.Desktop
 end
 
-local function defaultCreateCoordinator(p0)
+local function defaultCreateCoordinator(p1)
 	-- upvalues: enableAudioPlaybackInApp (ref), coreGuiService (ref), httpService (ref), runService (ref), contentProviderService (ref), media (ref)
 	enableAudioPlaybackInApp()
 	local momentMediaAudioOutput = Instance.new("AudioDeviceOutput")
@@ -34,16 +34,16 @@ local function defaultCreateCoordinator(p0)
 	local folder = Instance.new("Folder")
 	folder.Name = "MomentMediaRoot_" .. httpService:GenerateGUID(false)
 	folder.Parent = coreGuiService
-	local var14 = media.createMediaPreloadCoordinator(p0, media.selectPreloadPolicy(), media.mediaTelemetry.noopSink, momentMediaAudioOutput, {
+	local var2 = media.createMediaPreloadCoordinator(p1, media.selectPreloadPolicy(), media.mediaTelemetry.noopSink, momentMediaAudioOutput, {
 		runService = runService,
 		contentProvider = contentProviderService
 	}, { parent = folder })
 	
 	return {
-		provider = var14,
+		provider = var2,
 		dispose = function()
-			-- upvalues: var14 (ref), momentMediaAudioOutput (ref), folder (ref)
-			var14.dispose()
+			-- upvalues: var2 (ref), momentMediaAudioOutput (ref), folder (ref)
+			var2.dispose()
 			momentMediaAudioOutput:Destroy()
 			folder:Destroy()
 		end
@@ -51,60 +51,60 @@ local function defaultCreateCoordinator(p0)
 end
 
 return function(p1)
-	-- upvalues: fFlagMomentsAutoplayAmpPolicy (ref), useAppPolicy (ref), defaultCreateCoordinator (ref), reactModule (ref), signalsModule (ref), userInputService (ref), var6 (write), createFeedMediaSourceModule (ref), media (ref)
+	-- upvalues: fFlagMomentsAutoplayAmpPolicy (ref), useAppPolicy (ref), defaultCreateCoordinator (ref), reactModule (ref), signalsModule (ref), userInputService (ref), var1 (write), createFeedMediaSourceModule (ref), media (ref)
 	local pager = p1.pager
-	local var15 = if fFlagMomentsAutoplayAmpPolicy then useAppPolicy(function(p2)
+	local var2 = if fFlagMomentsAutoplayAmpPolicy then useAppPolicy(function(p2)
 		return p2.getMomentsCanAutoPlay()
 	end) else nil
 	local playbackActive = p1.playbackActive
 	local createCoordinator = p1.createCoordinator or defaultCreateCoordinator
-	local var17 = reactModule.useMemo(function()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), playbackActive (ref)
-		local var22, var23 = signalsModule.createSignal(playbackActive)
+		local var4, var5 = signalsModule.createSignal(playbackActive)
 		
-		return { get = var22, set = var23 }
+		return { get = var4, set = var5 }
 	end, {})
-	local var18 = if fFlagMomentsAutoplayAmpPolicy then reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var15 (ref)
-		local var24, var25 = signalsModule.createSignal(var15)
+	local var4 = if fFlagMomentsAutoplayAmpPolicy then reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var2 (ref)
+		local var5, var6 = signalsModule.createSignal(var2)
 		
-		return { get = var24, set = var25 }
+		return { get = var5, set = var6 }
 	end, {}) else nil
-	local var19 = reactModule.useMemo(function()
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
-		local var26, var27 = signalsModule.createSignal(true)
+		local var6, var7 = signalsModule.createSignal(true)
 		
-		return { get = var26, set = var27 }
+		return { get = var6, set = var7 }
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), playbackActive (ref)
-		var17.set(playbackActive)
-	end, { playbackActive, var17 })
+		-- upvalues: var3 (ref), playbackActive (ref)
+		var3.set(playbackActive)
+	end, { playbackActive, var3 })
 	
 	if fFlagMomentsAutoplayAmpPolicy then
 		reactModule.useEffect(function()
-			-- upvalues: var18 (ref), var15 (ref)
-			var18.set(var15)
-		end, { var15, var18 })
+			-- upvalues: var4 (ref), var2 (ref)
+			var4.set(var2)
+		end, { var2, var4 })
 	end
 	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var19 (ref), var6 (copy)
+		-- upvalues: userInputService (copy), var5 (ref), var1 (copy)
 		if userInputService:GetDeviceType() == Enum.DeviceType.Desktop then return end
 		local function onHidden()
-			-- upvalues: var19 (copy)
-			var19.set(false)
+			-- upvalues: var5 (copy)
+			var5.set(false)
 		end
 		
 		local function onShown()
-			-- upvalues: var19 (copy)
-			var19.set(true)
+			-- upvalues: var5 (copy)
+			var5.set(true)
 		end
 		
 		local t = {}
 		
-		if var6 ~= nil then
-			table.insert(t, var6.OnHide:Connect(onHidden))
-			table.insert(t, var6.OnUnhide:Connect(onShown))
+		if var1 ~= nil then
+			table.insert(t, var1.OnHide:Connect(onHidden))
+			table.insert(t, var1.OnUnhide:Connect(onShown))
 		end
 		return function()
 			-- upvalues: t (ref)
@@ -112,32 +112,32 @@ return function(p1)
 				v:Disconnect()
 			end
 		end
-	end, { var19 })
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: var17 (ref), var19 (ref)
-		return function(p3)
-			-- upvalues: var17 (copy), var19 (copy)
-			return var17.get(p3) and var19.get(p3)
+	end, { var5 })
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), var5 (ref)
+		return function(p2)
+			-- upvalues: var3 (copy), var5 (copy)
+			return var3.get(p2) and var5.get(p2)
 		end
-	end, { var17, var19 })
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: createFeedMediaSourceModule (copy), pager (ref), var20 (ref), fFlagMomentsAutoplayAmpPolicy (copy), var18 (ref), createCoordinator (ref)
-		return createCoordinator(createFeedMediaSourceModule(pager, var20, if fFlagMomentsAutoplayAmpPolicy then var18.get else nil))
+	end, { var3, var5 })
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: createFeedMediaSourceModule (copy), pager (ref), var6 (ref), fFlagMomentsAutoplayAmpPolicy (copy), var4 (ref), createCoordinator (ref)
+		return createCoordinator(createFeedMediaSourceModule(pager, var6, if fFlagMomentsAutoplayAmpPolicy then var4.get else nil))
 	end, {
 		pager,
 		createCoordinator,
-		var20,
-		if fFlagMomentsAutoplayAmpPolicy then var18 else nil
+		var6,
+		if fFlagMomentsAutoplayAmpPolicy then var4 else nil
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var21 (ref)
+		-- upvalues: var7 (ref)
 		return function()
-			-- upvalues: var21 (copy)
-			var21.dispose()
+			-- upvalues: var7 (copy)
+			var7.dispose()
 		end
-	end, { var21 })
+	end, { var7 })
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), signalsModule (copy), var21 (ref)
+		-- upvalues: p1 (ref), signalsModule (copy), var7 (ref)
 		local onMediaItemLoadAttempted = p1.onMediaItemLoadAttempted
 		local onMediaItemFailed = p1.onMediaItemFailed
 		
@@ -146,27 +146,27 @@ return function(p1)
 		end
 		local t = {}
 		local t_1 = {}
-		local var33 = false
-		local var34 = signalsModule.createEffect(function(p4)
-			-- upvalues: var21 (copy), onMediaItemLoadAttempted (ref), t (ref), var33 (write), onMediaItemFailed (ref), t_1 (ref)
-			for i, v in var21.provider.getControllerMap(p4) do
+		local var8 = false
+		local var9 = signalsModule.createEffect(function(p2)
+			-- upvalues: var7 (copy), onMediaItemLoadAttempted (ref), t (ref), var8 (write), onMediaItemFailed (ref), t_1 (ref)
+			for i, v in var7.provider.getControllerMap(p2) do
 				if onMediaItemLoadAttempted ~= nil and not t[i] then
 					t[i] = true
 					task.defer(function()
-						-- upvalues: var33 (copy), onMediaItemLoadAttempted (copy), i (ref)
-						if not var33 then
+						-- upvalues: var8 (copy), onMediaItemLoadAttempted (copy), i (ref)
+						if not var8 then
 							onMediaItemLoadAttempted(i)
 						end
 					end)
 				end
-				local var35 = if onMediaItemFailed ~= nil then nil else v.getState(p4)
+				local var10 = if onMediaItemFailed ~= nil then nil else v.getState(p2)
 				
-				if var35 ~= nil and var35.readiness == "Failed" and not t_1[i] then
+				if var10 ~= nil and var10.readiness == "Failed" and not t_1[i] then
 					t_1[i] = true
-					local failureReason = var35.failureReason
+					local failureReason = var10.failureReason
 					task.defer(function()
-						-- upvalues: var33 (copy), onMediaItemFailed (copy), i (ref), failureReason (ref)
-						if not var33 then
+						-- upvalues: var8 (copy), onMediaItemFailed (copy), i (ref), failureReason (ref)
+						if not var8 then
 							onMediaItemFailed(i, failureReason)
 						end
 					end)
@@ -175,11 +175,11 @@ return function(p1)
 		end)
 		
 		return function()
-			-- upvalues: var33 (write), var34 (ref)
-			var33 = true
-			var34()
+			-- upvalues: var8 (write), var9 (ref)
+			var8 = true
+			var9()
 		end
-	end, { var21, p1.onMediaItemLoadAttempted, p1.onMediaItemFailed })
+	end, { var7, p1.onMediaItemLoadAttempted, p1.onMediaItemFailed })
 	
-	return reactModule.createElement(media.MediaPreloadProvider.Provider, { controllerProvider = var21.provider }, p1.children)
+	return reactModule.createElement(media.MediaPreloadProvider.Provider, { controllerProvider = var7.provider }, p1.children)
 end

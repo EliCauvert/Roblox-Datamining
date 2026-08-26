@@ -14,25 +14,25 @@ local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
 local tbl = setmetatable({}, { __index = error })
 tbl.__index = tbl
 
-function t.isApolloError(p0)
+function t.isApolloError(p1)
 	-- upvalues: hasOwnPropertyModule (ref)
-	return hasOwnPropertyModule(p0, "graphQLErrors")
+	return hasOwnPropertyModule(p1, "graphQLErrors")
 end
 
 local function generateErrorMessage(p1)
 	-- upvalues: isNonEmptyArray (ref), array (ref), boolean (ref), toJSBoolean (ref)
-	local var5 = ""
+	local var1 = ""
 	
 	if isNonEmptyArray(p1.graphQLErrors) and isNonEmptyArray(p1.graphQLErrors) or isNonEmptyArray(p1.clientErrors) then
 		for i, v in pairs(array.concat(if boolean.toJSBoolean(p1.graphQLErrors) then p1.graphQLErrors else {}, if boolean.toJSBoolean(p1.clientErrors) then p1.clientErrors else {})) do
-			var5 ..= ("%s\n"):format(if toJSBoolean(v) then v.message else "Error message not found.")
+			var1 ..= ("%s\n"):format(if toJSBoolean(v) then v.message else "Error message not found.")
 		end
 	end
 	if p1.networkError ~= nil then
 		local networkError = p1.networkError
-		var5 ..= ("%s\n"):format(if typeof(networkError) == "string" then networkError elseif networkError.message then networkError.message else networkError.error)
+		var1 ..= ("%s\n"):format(if typeof(networkError) == "string" then networkError elseif networkError.message then networkError.message else networkError.error)
 	end
-	return string.gsub(var5, "\n$", "")
+	return string.gsub(var1, "\n$", "")
 end
 
 function tbl.new(p2)
@@ -42,14 +42,14 @@ function tbl.new(p2)
 	local networkError = p2.networkError
 	local errorMessage = p2.errorMessage
 	local extraInfo = p2.extraInfo
-	local var6 = error.new(errorMessage)
-	var6.graphQLErrors = if boolean.toJSBoolean(graphQLErrors) then graphQLErrors else {}
-	var6.clientErrors = if boolean.toJSBoolean(clientErrors) then clientErrors else {}
-	var6.networkError = if boolean.toJSBoolean(networkError) then networkError else nil
-	var6.message = if boolean.toJSBoolean(errorMessage) then errorMessage else generateErrorMessage(var6)
-	var6.extraInfo = extraInfo
+	local var2 = error.new(errorMessage)
+	var2.graphQLErrors = if boolean.toJSBoolean(graphQLErrors) then graphQLErrors else {}
+	var2.clientErrors = if boolean.toJSBoolean(clientErrors) then clientErrors else {}
+	var2.networkError = if boolean.toJSBoolean(networkError) then networkError else nil
+	var2.message = if boolean.toJSBoolean(errorMessage) then errorMessage else generateErrorMessage(var2)
+	var2.extraInfo = extraInfo
 	
-	return setmetatable(var6, tbl)
+	return setmetatable(var2, tbl)
 end
 
 t.ApolloError = tbl

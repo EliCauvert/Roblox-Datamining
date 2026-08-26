@@ -16,14 +16,14 @@ local transformOperation = utilsModule.transformOperation
 local t_1 = {}
 t_1.__index = t_1
 
-local function passthrough(_, p0, p1)
+local function passthrough(_, p1, p2)
 	-- upvalues: boolean (ref), observable (ref)
-	return if boolean.toJSBoolean(p1) then p1(p0) else observable.of()
+	return if boolean.toJSBoolean(p2) then p2(p1) else observable.of()
 end
 
-local function toLink(p2)
+local function toLink(p1)
 	-- upvalues: t_1 (ref)
-	return if typeof(p2) == "function" then t_1.new(p2) else p2
+	return if typeof(p1) == "function" then t_1.new(p1) else p1
 end
 
 local function _(a)
@@ -35,12 +35,12 @@ end
 local tbl = setmetatable({}, { __index = error })
 tbl.__index = tbl
 
-function tbl.new(p3, p4)
+function tbl.new(p1, p2)
 	-- upvalues: error (ref), tbl (ref)
-	local var9 = error.new(p3)
-	var9.link = p4
+	local var1 = error.new(p1)
+	var1.link = p2
 	
-	return setmetatable(var9, tbl)
+	return setmetatable(var1, tbl)
 end
 
 function t_1.empty()
@@ -51,115 +51,115 @@ function t_1.empty()
 	end)
 end
 
-function t_1.from(p5)
+function t_1.from(p1)
 	-- upvalues: t_1 (ref), array (ref), toLink (ref)
-	return if #p5 == 0 then t_1.empty() else array.reduce(array.map(p5, toLink, nil), function(p6, p7)
-		return p6:concat(p7)
+	return if #p1 == 0 then t_1.empty() else array.reduce(array.map(p1, toLink, nil), function(p2, p3)
+		return p2:concat(p3)
 	end)
 end
 
-function t_1.split_(p8, p9, p10)
+function t_1.split_(p1, p2, p3)
 	-- upvalues: t_1 (ref), boolean (ref), passthrough (ref), observable (ref)
-	local var12
-	local var10 = if typeof(p9) == "function" then t_1.new(p9) else p9
+	local var1
+	local var2 = if typeof(p2) == "function" then t_1.new(p2) else p2
 	local _ = nil
 	
-	if boolean.toJSBoolean(p10) and p10 ~= nil then
-		var12 = if typeof(p10) == "function" then t_1.new(p10) else p10
+	if boolean.toJSBoolean(p3) and p3 ~= nil then
+		var1 = if typeof(p3) == "function" then t_1.new(p3) else p3
 	else
-		local var11 = t_1.new(passthrough)
-		var12 = if typeof(var11) == "function" then t_1.new(var11) else var11
+		local var3 = t_1.new(passthrough)
+		var1 = if typeof(var3) == "function" then t_1.new(var3) else var3
 	end
-	local debugInfo, _ = debug.info(var10.request, "a")
+	local debugInfo, _ = debug.info(var2.request, "a")
 	
 	if debugInfo <= 2 then
-		local debugInfo_1, _ = debug.info(var12.request, "a")
+		local debugInfo_1, _ = debug.info(var1.request, "a")
 		
-		return if debugInfo_1 <= 2 then t_1.new(function(_, p13)
-			-- upvalues: p8 (ref), var10 (ref), boolean (copy), observable (copy), var12 (write)
-			if p8(p13) then
-				local var17 = var10:request(p13)
+		return if debugInfo_1 <= 2 then t_1.new(function(_, p4)
+			-- upvalues: p1 (ref), var2 (ref), boolean (copy), observable (copy), var1 (write)
+			if p1(p4) then
+				local var4 = var2:request(p4)
 				
-				return if boolean.toJSBoolean(var17) then var17 else observable.of()
+				return if boolean.toJSBoolean(var4) then var4 else observable.of()
 			end
-			local var18 = var12:request(p13)
+			local var5 = var1:request(p4)
 			
-			return if boolean.toJSBoolean(var18) then var18 else observable.of()
-		end) else t_1.new(function(_, p11, p12)
-			-- upvalues: p8 (ref), var10 (ref), boolean (copy), observable (copy), var12 (write)
-			if p8(p11) then
-				local var15 = var10:request(p11, p12)
+			return if boolean.toJSBoolean(var5) then var5 else observable.of()
+		end) else t_1.new(function(_, p4, p5)
+			-- upvalues: p1 (ref), var2 (ref), boolean (copy), observable (copy), var1 (write)
+			if p1(p4) then
+				local var4 = var2:request(p4, p5)
 				
-				return if boolean.toJSBoolean(var15) then var15 else observable.of()
+				return if boolean.toJSBoolean(var4) then var4 else observable.of()
 			end
-			local var16 = var12:request(p11, p12)
+			local var5 = var1:request(p4, p5)
 			
-			return if boolean.toJSBoolean(var16) then var16 else observable.of()
+			return if boolean.toJSBoolean(var5) then var5 else observable.of()
 		end)
 	end
 end
 
-function t_1:execute(p14)
+function t_1:execute(p1)
 	-- upvalues: createOperation (ref), transformOperation (ref), validateOperation (ref), boolean (ref), observable (ref)
-	local context = self:request(createOperation(p14.context, transformOperation(validateOperation(p14))))
+	local context = self:request(createOperation(p1.context, transformOperation(validateOperation(p1))))
 	
 	return if boolean.toJSBoolean(context) then context else observable.of()
 end
 
-function t_1.concat_(p15, p16)
+function t_1.concat_(p1, p2)
 	-- upvalues: t_1 (ref), invariant (ref), tbl (ref), boolean (ref), observable (ref)
-	local var20 = if typeof(p15) == "function" then t_1.new(p15) else p15
-	local debugInfo, _ = debug.info(var20.request, "a")
+	local var1 = if typeof(p1) == "function" then t_1.new(p1) else p1
+	local debugInfo, _ = debug.info(var1.request, "a")
 	
 	if debugInfo <= 2 then
-		invariant.warn(tbl.new("You are calling concat on a terminating link, which will have no effect", var20))
+		invariant.warn(tbl.new("You are calling concat on a terminating link, which will have no effect", var1))
 		
-		return var20
+		return var1
 	end
-	local var22 = if typeof(p16) == "function" then t_1.new(p16) else p16
-	local debugInfo_1, _ = debug.info(var22.request, "a")
+	local var2 = if typeof(p2) == "function" then t_1.new(p2) else p2
+	local debugInfo_1, _ = debug.info(var2.request, "a")
 	
-	return if debugInfo_1 <= 2 then t_1.new(function(_, p20)
-		-- upvalues: var20 (ref), var22 (ref), boolean (copy), observable (copy)
-		local var26 = var20:request(p20, function(p21)
-			-- upvalues: var22 (copy), boolean (copy), observable (copy)
-			local var27 = var22:request(p21)
+	return if debugInfo_1 <= 2 then t_1.new(function(_, p3)
+		-- upvalues: var1 (ref), var2 (ref), boolean (copy), observable (copy)
+		local var3 = var1:request(p3, function(p4)
+			-- upvalues: var2 (copy), boolean (copy), observable (copy)
+			local var4 = var2:request(p4)
 			
-			return if boolean.toJSBoolean(var27) then var27 else observable.of()
+			return if boolean.toJSBoolean(var4) then var4 else observable.of()
 		end)
 		
-		return if boolean.toJSBoolean(var26) then var26 else observable.of()
-	end) else t_1.new(function(_, p17, p18)
-		-- upvalues: var20 (ref), var22 (ref), boolean (copy), observable (copy)
-		local var24 = var20:request(p17, function(p19)
-			-- upvalues: var22 (copy), p18 (ref), boolean (copy), observable (copy)
-			local var25 = var22:request(p19, p18)
+		return if boolean.toJSBoolean(var3) then var3 else observable.of()
+	end) else t_1.new(function(_, p3, p4)
+		-- upvalues: var1 (ref), var2 (ref), boolean (copy), observable (copy)
+		local var3 = var1:request(p3, function(p5)
+			-- upvalues: var2 (copy), p4 (ref), boolean (copy), observable (copy)
+			local var4 = var2:request(p5, p4)
 			
-			return if boolean.toJSBoolean(var25) then var25 else observable.of()
+			return if boolean.toJSBoolean(var4) then var4 else observable.of()
 		end)
 		
-		return if boolean.toJSBoolean(var24) then var24 else observable.of()
+		return if boolean.toJSBoolean(var3) then var3 else observable.of()
 	end)
 end
 
-function t_1.new(p22)
+function t_1.new(p1)
 	-- upvalues: boolean (ref), t_1 (ref)
 	local t = {}
 	
-	if boolean.toJSBoolean(p22) then
-		t.request = p22
+	if boolean.toJSBoolean(p1) then
+		t.request = p1
 	end
 	return setmetatable(t, t_1)
 end
 
-function t_1:split(p23, p24, p25)
+function t_1:split(p1, p2, p3)
 	-- upvalues: t_1 (ref), boolean (ref), passthrough (ref)
-	return self:concat(t_1.split_(p23, p24, if boolean.toJSBoolean(p25) then p25 else t_1.new(passthrough)))
+	return self:concat(t_1.split_(p1, p2, if boolean.toJSBoolean(p3) then p3 else t_1.new(passthrough)))
 end
 
-function t_1.concat(p26, p27)
+function t_1.concat(p1, p2)
 	-- upvalues: t_1 (ref)
-	return t_1.concat_(p26, p27)
+	return t_1.concat_(p1, p2)
 end
 
 function t_1.request(_, _, _)
@@ -167,18 +167,18 @@ function t_1.request(_, _, _)
 	error(invariantError.new("request is not implemented"))
 end
 
-function t_1.onError(_, p28, p29)
+function t_1.onError(_, p1, p2)
 	-- upvalues: boolean (ref)
-	if boolean.toJSBoolean(p29) and p29 ~= nil and boolean.toJSBoolean(p29.error) then
-		p29:error(p28)
+	if boolean.toJSBoolean(p2) and p2 ~= nil and boolean.toJSBoolean(p2.error) then
+		p2:error(p1)
 		
 		return false
 	end
-	error(p28)
+	error(p1)
 end
 
-function t_1:setOnError(p30)
-	self.onError = p30
+function t_1:setOnError(p1)
+	self.onError = p1
 	
 	return self
 end

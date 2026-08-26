@@ -21,66 +21,66 @@ local t = {
 	expectedFailures = {}
 }
 
-local function validateHSRStructure(p0, p1, p2)
+local function validateHSRStructure(p1, p2, p3)
 	-- upvalues: errorSourceStringsModule (ref)
-	if #p0 ~= 1 then
-		p2:fail(errorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = p1:GetFullName() })
+	if #p1 ~= 1 then
+		p3:fail(errorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = p2:GetFullName() })
 		
 		return nil
 	end
-	local var8 = p0[1]
+	local var1 = p1[1]
 	
-	if not var8:IsA("HiddenSurfaceRemovalAsset") then
-		p2:fail(errorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = p1:GetFullName() })
+	if not var1:IsA("HiddenSurfaceRemovalAsset") then
+		p3:fail(errorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = p2:GetFullName() })
 		
 		return nil
-	elseif #var8:GetDescendants() > 0 then
-		p2:fail(errorSourceStringsModule.Keys.HSRAssetHasChildren, { InstancePath = p1:GetFullName() })
+	elseif #var1:GetDescendants() > 0 then
+		p3:fail(errorSourceStringsModule.Keys.HSRAssetHasChildren, { InstancePath = p2:GetFullName() })
 		
 		return nil
 	end
-	return var8
+	return var1
 end
 
-function t.run(p3, p4)
+function t.run(p1, p2)
 	-- upvalues: validationEnumsModule (ref), getFFlagUGCValidateHSRMeshIdsModule (ref), errorSourceStringsModule (ref), parseContentIdsModule (ref), validateHSRStructure (ref), pcallDeferredModule (ref), UGCValidationService (ref)
-	if p4.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then return end
-	local var9 = p4.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
-	local var10 = getFFlagUGCValidateHSRMeshIdsModule()
-	local descendants = p4.rootInstance:GetDescendants()
-	table.insert(descendants, p4.rootInstance)
+	if p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then return end
+	local var1 = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+	local var2 = getFFlagUGCValidateHSRMeshIdsModule()
+	local descendants = p2.rootInstance:GetDescendants()
+	table.insert(descendants, p2.rootInstance)
 	
 	for i, v in descendants do
 		if v:IsA("WrapLayer") then
 			local HSRAssetId = v.HSRAssetId
 			
 			if HSRAssetId and HSRAssetId ~= "" then
-				local var12 = parseContentIdsModule.tryGetAssetIdFromContentId(HSRAssetId)
+				local var3 = parseContentIdsModule.tryGetAssetIdFromContentId(HSRAssetId)
 				
-				if var12 then
-					local var13 = p4.hsrAssets[var12]
+				if var3 then
+					local var4 = p2.hsrAssets[var3]
 					
-					if var13 then
-						local var14 = validateHSRStructure(var13, v, p3)
+					if var4 then
+						local var5 = validateHSRStructure(var4, v, p1)
 						
-						if var14 and var10 then
-							local var15, var16 = pcallDeferredModule(function()
-								-- upvalues: UGCValidationService (copy), v (ref), var14 (ref)
-								return UGCValidationService:ValidateHSRMeshIds(v, var14)
+						if var5 and var2 then
+							local var6, var7 = pcallDeferredModule(function()
+								-- upvalues: UGCValidationService (copy), v (ref), var5 (ref)
+								return UGCValidationService:ValidateHSRMeshIds(v, var5)
 							end, {})
 							
-							if not var15 then
-								p3:fail(errorSourceStringsModule.Keys.HSRMeshIdValidationError, { InstancePath = v:GetFullName() })
-							elseif not var16 then
-								p3:fail(errorSourceStringsModule.Keys.HSRMeshIdsMismatch, { InstancePath = v:GetFullName() })
+							if not var6 then
+								p1:fail(errorSourceStringsModule.Keys.HSRMeshIdValidationError, { InstancePath = v:GetFullName() })
+							elseif not var7 then
+								p1:fail(errorSourceStringsModule.Keys.HSRMeshIdsMismatch, { InstancePath = v:GetFullName() })
 							end
 						end
 					end
 				else
-					p3:fail(errorSourceStringsModule.Keys.HSRAssetIdInvalidUrl, { InstancePath = v:GetFullName() })
+					p1:fail(errorSourceStringsModule.Keys.HSRAssetIdInvalidUrl, { InstancePath = v:GetFullName() })
 				end
-			elseif var9 then
-				p3:fail(errorSourceStringsModule.Keys.HSRAssetIdRequired, { InstancePath = v:GetFullName() })
+			elseif var1 then
+				p1:fail(errorSourceStringsModule.Keys.HSRAssetIdRequired, { InstancePath = v:GetFullName() })
 			end
 		end
 	end

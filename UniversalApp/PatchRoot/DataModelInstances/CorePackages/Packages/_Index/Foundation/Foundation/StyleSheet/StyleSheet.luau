@@ -11,38 +11,38 @@ local _ = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Enums.Device)
 local _ = require(foundation.Enums.ThemeName)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useGeneratedRulesModule (ref), flagsModule (ref), getOverrideAttributesModule (ref), createStyleSheetRulesModule (ref)
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = reactModule.useRef({})
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = reactModule.useRef({})
 	reactModule.useLayoutEffect(function()
-		-- upvalues: p0 (ref), var6 (ref)
-		if p0.setStyleSheetRef and p0.setStyleSheetRef.current then
-			p0.setStyleSheetRef.current(var6)
+		-- upvalues: p1 (ref), var1 (ref)
+		if p1.setStyleSheetRef and p1.setStyleSheetRef.current then
+			p1.setStyleSheetRef.current(var1)
 		end
-	end, { var6 })
-	local var9 = useGeneratedRulesModule(if flagsModule.FoundationThemeName then p0.themeName else nil, p0.colorMode, p0.device)
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: getOverrideAttributesModule (copy), flagsModule (copy), p0 (ref)
-		return getOverrideAttributesModule(if flagsModule.FoundationThemeName then p0.themeName else nil, p0.colorMode, p0.device, p0.tokenOverrides)
+	end, { var1 })
+	local var4 = useGeneratedRulesModule(if flagsModule.FoundationThemeName then p1.themeName else nil, p1.colorMode, p1.device)
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: getOverrideAttributesModule (copy), flagsModule (copy), p1 (ref)
+		return getOverrideAttributesModule(if flagsModule.FoundationThemeName then p1.themeName else nil, p1.colorMode, p1.device, p1.tokenOverrides)
 	end, {
-		if flagsModule.FoundationThemeName then p0.themeName else nil,
-		p0.colorMode,
-		p0.device,
-		p0.tokenOverrides
+		if flagsModule.FoundationThemeName then p1.themeName else nil,
+		p1.colorMode,
+		p1.device,
+		p1.tokenOverrides
 	})
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		FoundationStyleSheet = reactModule.createElement("StyleSheet", { ref = var7 }, reactModule.useMemo(function()
-			-- upvalues: var6 (ref), createStyleSheetRulesModule (copy), var9 (ref), p0 (ref), var8 (ref), var10 (ref)
-			return if var6 then createStyleSheetRulesModule(var9, p0.tags, var6, var8.current, p0.scale, var10) else nil
+		FoundationStyleSheet = reactModule.createElement("StyleSheet", { ref = var2 }, reactModule.useMemo(function()
+			-- upvalues: var1 (ref), createStyleSheetRulesModule (copy), var4 (ref), p1 (ref), var3 (ref), var5 (ref)
+			return if var1 then createStyleSheetRulesModule(var4, p1.tags, var1, var3.current, p1.scale, var5) else nil
 		end, {
-			var6,
-			var9,
-			p0.tags,
-			p0.scale,
-			var10
+			var1,
+			var4,
+			p1.tags,
+			p1.scale,
+			var5
 		})),
-		FoundationStyleLink = reactModule.createElement("StyleLink", { StyleSheet = var6 })
+		FoundationStyleLink = reactModule.createElement("StyleLink", { StyleSheet = var1 })
 	})
 end)

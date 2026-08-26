@@ -6,33 +6,33 @@ local sponsoredAdViewabilityRegistryModule = require(script.Parent.sponsoredAdVi
 local _ = require(script.Parent.sponsoredAdViewabilityTypes)
 local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), reactModule (ref), sponsoredAdViewabilityRegistryModule (ref)
-	local var3 = if p0 then p0.encryptedAdTrackingData else nil
-	local var4 = if p0 then p0.tileType else nil
-	local var5 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.mediaType else nil
-	local var6 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.videoPlaybackStateRef else nil
-	local var7 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.videoSource else nil
-	local var8 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.isFullscreen else nil
+	local var1 = if p1 then p1.encryptedAdTrackingData else nil
+	local var2 = if p1 then p1.tileType else nil
+	local var3 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p1 then p1.mediaType else nil
+	local var4 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p1 then p1.videoPlaybackStateRef else nil
+	local var5 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p1 then p1.videoSource else nil
+	local var6 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p1 then p1.isFullscreen else nil
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var4 (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), var5 (ref), value (ref), sponsoredAdViewabilityRegistryModule (copy), var6 (ref), var7 (ref), var8 (ref)
-		if var3 == nil or var4 == nil or fFlagLuaAppSponsoredAdVideoViewabilityEnabled and var5 == nil then return end
+		-- upvalues: var1 (ref), var2 (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), var3 (ref), value (ref), sponsoredAdViewabilityRegistryModule (copy), var4 (ref), var5 (ref), var6 (ref)
+		if var1 == nil or var2 == nil or fFlagLuaAppSponsoredAdVideoViewabilityEnabled and var3 == nil then return end
 		local current = value.current
 		
 		if current == nil then return end
 		return if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then sponsoredAdViewabilityRegistryModule.bind(current, {
-			encryptedAdTrackingData = var3,
-			tileType = var4,
-			mediaType = var5,
-			videoPlaybackStateRef = var6,
-			videoSource = var7,
-			isFullscreen = var8
-		}) else sponsoredAdViewabilityRegistryModule.bind(current, { encryptedAdTrackingData = var3, tileType = var4 })
+			encryptedAdTrackingData = var1,
+			tileType = var2,
+			mediaType = var3,
+			videoPlaybackStateRef = var4,
+			videoSource = var5,
+			isFullscreen = var6
+		}) else sponsoredAdViewabilityRegistryModule.bind(current, { encryptedAdTrackingData = var1, tileType = var2 })
 	end, {
-		var3, var4, value,
+		var1, var2, value,
+		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var3 else nil,
+		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var4 else nil,
 		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var5 else nil,
-		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var6 else nil,
-		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var7 else nil,
-		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var8 else nil
+		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var6 else nil
 	})
 end

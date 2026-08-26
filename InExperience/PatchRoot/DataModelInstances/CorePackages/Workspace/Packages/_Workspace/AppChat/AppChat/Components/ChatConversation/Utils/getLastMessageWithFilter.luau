@@ -1,11 +1,11 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: cryoModule (ref)
-	if p0 and #p0 ~= 0 then
-		local var1 = cryoModule.List.findWhere(p0, p1)
+	if p1 and #p1 ~= 0 then
+		local var1 = cryoModule.List.findWhere(p1, p2)
 		
-		return if var1 then p0[var1].messageId else nil
+		return if var1 then p1[var1].messageId else nil
 	end
 	return nil
 end

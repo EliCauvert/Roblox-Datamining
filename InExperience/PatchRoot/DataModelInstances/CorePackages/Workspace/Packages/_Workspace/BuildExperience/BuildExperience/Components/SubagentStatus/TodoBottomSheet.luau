@@ -6,14 +6,14 @@ local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), sheet (ref), view (ref), text (ref), todoListModule (ref)
-	local testId = p0.testId or "subagent-status-bottom-sheet"
+	local testId = p1.testId or "subagent-status-bottom-sheet"
 	
 	return reactModule.createElement(sheet.Root, {
 		defaultSnapPointIndex = 1,
-		isOpen = p0.isOpen,
-		onClose = p0.onClose,
+		isOpen = p1.isOpen,
+		onClose = p1.onClose,
 		snapPoints = { 0.5, 1 },
 		testId = testId
 	}, {
@@ -25,7 +25,7 @@ return reactModule.memo(function(p0)
 				Title = reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-left content-emphasis",
-					Text = p0.title,
+					Text = p1.title,
 					testId = `{testId}-title`
 				})
 			})
@@ -33,7 +33,7 @@ return reactModule.memo(function(p0)
 		Content = reactModule.createElement(sheet.Content, nil, {
 			List = reactModule.createElement(todoListModule, {
 				LayoutOrder = 1,
-				items = p0.items,
+				items = p1.items,
 				testId = `{testId}-list`
 			})
 		})

@@ -7,14 +7,14 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 
 return function()
 	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), text (ref)
-	local var2 = useLocalization({
+	local var1 = useLocalization({
 		DisclosurePayment = "IAPExperience.RobuxUpsell.Text.DisclosurePayment",
 		DisclosureTerms = "IAPExperience.RobuxUpsell.Text.DisclosureTerms"
 	})
 	
 	return reactModule.createElement(text, {
 		tag = "content-muted text-caption-small size-full align-x-center padding-top-small",
-		Text = var2.DisclosurePayment .. " " .. var2.DisclosureTerms
+		Text = var1.DisclosurePayment .. " " .. var2.DisclosureTerms
 	}, {
 		UITextSizeConstraint = reactModule.createElement("UITextSizeConstraint", {
 			MaxTextSize = useTokens().Typography.CaptionSmall.FontSize

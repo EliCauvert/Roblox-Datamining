@@ -4,9 +4,9 @@ local valueChangedSignalModule = require(parent.ValueChangedSignal)
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: valueChangedSignalModule (ref)
-	return valueChangedSignalModule.new(p0)
+	return valueChangedSignalModule.new(p1)
 end
 
 return t

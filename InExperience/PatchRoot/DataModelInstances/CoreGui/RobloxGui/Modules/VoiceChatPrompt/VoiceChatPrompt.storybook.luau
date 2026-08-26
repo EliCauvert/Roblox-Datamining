@@ -5,11 +5,11 @@ roactModule.setGlobalConfig({ elementTracing = true, propValidation = true })
 
 return {
 	roact = roactModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: roactModule (ref)
-		return function(p1)
-			-- upvalues: roactModule (copy), p0 (ref)
-			return roactModule.createElement(p0, p1)
+		return function(p2)
+			-- upvalues: roactModule (copy), p1 (ref)
+			return roactModule.createElement(p1, p2)
 		end
 	end
 }

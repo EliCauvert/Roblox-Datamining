@@ -6,12 +6,12 @@ local promptStateModule = require(parent.Enums.PromptState)
 local purchaseErrorModule = require(parent.Enums.PurchaseError)
 local thunkModule = require(parent.Thunk)
 
-return function(p0)
+return function(p1)
 	-- upvalues: thunkModule (ref), subscriptionPurchaseInfoReceivedModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), setPromptStateModule (ref), promptStateModule (ref)
-	return thunkModule.new(script.Name, nil, function(p1, _)
-		-- upvalues: subscriptionPurchaseInfoReceivedModule (copy), p0 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), setPromptStateModule (copy), promptStateModule (copy)
-		p1:dispatch(subscriptionPurchaseInfoReceivedModule(p0))
+	return thunkModule.new(script.Name, nil, function(p2, _)
+		-- upvalues: subscriptionPurchaseInfoReceivedModule (copy), p1 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), setPromptStateModule (copy), promptStateModule (copy)
+		p2:dispatch(subscriptionPurchaseInfoReceivedModule(p1))
 		
-		return if p0.CanPurchase == false then p1:dispatch(errorOccurredModule(purchaseErrorModule.AlreadySubscribed)) else p1:dispatch(setPromptStateModule(promptStateModule.PromptSubscriptionPurchase))
+		return if p1.CanPurchase == false then p2:dispatch(errorOccurredModule(purchaseErrorModule.AlreadySubscribed)) else p2:dispatch(setPromptStateModule(promptStateModule.PromptSubscriptionPurchase))
 	end)
 end

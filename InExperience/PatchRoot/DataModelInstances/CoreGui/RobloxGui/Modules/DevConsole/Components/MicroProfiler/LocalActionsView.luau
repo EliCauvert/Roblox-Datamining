@@ -16,14 +16,14 @@ local t = {
 	lastUpdated = { 2025, 11, 17 }
 }
 
-function localActionsView.init(p0)
+function localActionsView.init(p1)
 	-- upvalues: gameSettings (ref)
-	p0:setState({
+	p1:setState({
 		OnScreenMicroProfilerVisible = gameSettings.OnScreenProfilerEnabled
 	})
-	p0.onScreenMpToggledConn = gameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function()
-		-- upvalues: p0 (ref), gameSettings (copy)
-		p0:setState({
+	p1.onScreenMpToggledConn = gameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function()
+		-- upvalues: p1 (ref), gameSettings (copy)
+		p1:setState({
 			OnScreenMicroProfilerVisible = gameSettings.OnScreenProfilerEnabled
 		})
 	end)
@@ -38,17 +38,17 @@ function localActionsView.willUnmount(p1)
 	end
 end
 
-function localActionsView.toggleOnScreenMicroProfiler(_, p2)
+function localActionsView.toggleOnScreenMicroProfiler(_, p1)
 	-- upvalues: gameSettings (ref), telemetryService (ref), t (ref)
-	gameSettings.OnScreenProfilerEnabled = p2
-	telemetryService:LogCounter(t, { customFields = { visible = `{p2}` } }, 1)
+	gameSettings.OnScreenProfilerEnabled = p1
+	telemetryService:LogCounter(t, { customFields = { visible = `{p1}` } }, 1)
 end
 
-function localActionsView.render(p3)
+function localActionsView.render(p1)
 	-- upvalues: roactModule (ref), microProfilerPanelModule (ref), constantsModule (ref), checkboxModule (ref), devConsoleMpEnableOpenDumpsFolderButton (ref), runService (ref), boxButtonModule (ref)
 	return roactModule.createElement(microProfilerPanelModule, {
 		Title = "Local actions",
-		LayoutOrder = p3.props.LayoutOrder,
+		LayoutOrder = p1.props.LayoutOrder,
 		Sections = {
 			{
 				Name = "LocalActions",
@@ -81,12 +81,12 @@ function localActionsView.render(p3)
 						}, {
 							OnScreenMicroProfilerVisibleCheckbox = roactModule.createElement(checkboxModule, {
 								Name = "OnScreenMicroProfilerVisibleCheckbox",
-								IsSelected = p3.state.OnScreenMicroProfilerVisible,
+								IsSelected = p1.state.OnScreenMicroProfilerVisible,
 								Size = UDim2.fromOffset(constantsModule.MicroProfilerFormatting.OptionCheckboxSize, constantsModule.MicroProfilerFormatting.OptionCheckboxSize),
 								Position = UDim2.fromOffset((constantsModule.MicroProfilerFormatting.OptionRowHeight - constantsModule.MicroProfilerFormatting.OptionCheckboxSize) / 2, (constantsModule.MicroProfilerFormatting.OptionRowHeight - constantsModule.MicroProfilerFormatting.OptionCheckboxSize) / 2),
-								OnSelectedStateChanged = function(_, p4)
-									-- upvalues: p3 (ref)
-									p3:toggleOnScreenMicroProfiler(p4)
+								OnSelectedStateChanged = function(_, p2)
+									-- upvalues: p1 (ref)
+									p1:toggleOnScreenMicroProfiler(p2)
 								end
 							})
 						})

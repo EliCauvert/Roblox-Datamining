@@ -24,8 +24,8 @@ t.prereqTests = {
 }
 
 local function areNumbersGood(...)
-	local function _(p0)
-		return p0 ~= p0
+	local function _(p1)
+		return p1 ~= p1
 	end
 	
 	local _ = function(p1)
@@ -43,13 +43,13 @@ local function areNumbersGood(...)
 	return true
 end
 
-function t.run(p2, p3)
+function t.run(p1, p2)
 	-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), getFStringUGCValidateFrameDeltaKeyTimeTolModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), getFFlagUGCValidateRestrictNumMarkersInsideMarkerCurvesModule (ref), getFIntUGCValidateMaxTotalInternalMarkersModule (ref), errorSourceStringsModule (ref), areNumbersGood (ref), getFIntUGCValidateMaxMarkerCurveValueLengthModule (ref)
 	local markers, minValue
-	local var11 = 1 / getFIntUGCValidateMaxAnimationFPSModule() * getFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber()
-	local ceiled = math.ceil(1 / var11 * getFStringUGCValidationMaxAnimationLengthModule.asNumber())
+	local var1 = 1 / getFIntUGCValidateMaxAnimationFPSModule() * getFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber()
+	local ceiled = math.ceil(1 / var1 * getFStringUGCValidationMaxAnimationLengthModule.asNumber())
 	
-	for i, v in p3.curveAnimations do
+	for i, v in p2.curveAnimations do
 		for i_1, v_1 in v:GetDescendants() do
 			if not v_1:IsA("MarkerCurve") then
 				if v_1:IsA("FloatCurve") then
@@ -61,11 +61,11 @@ function t.run(p2, p3)
 						for v_2, v_2 in markers do
 							if v_2.Time and areNumbersGood(v_2.Time) and (v_2.Value and areNumbersGood(v_2.Value)) then
 								if minValue then
-									if v_2.Time >= minValue + var11 then
+									if v_2.Time >= minValue + var1 then
 										minValue = v_2.Time
 										continue
 									end
-									p2:fail(errorSourceStringsModule.Keys.CurveAnim_KeysTooClose, {
+									p1:fail(errorSourceStringsModule.Keys.CurveAnim_KeysTooClose, {
 										curvePath = `{if v_1.Parent.Parent then v_1.Parent.Parent.Name else "-"}.{v_1.Parent.Name}.{v_1.Name}`,
 										maxFPS = tostring(getFIntUGCValidateMaxAnimationFPSModule())
 									})
@@ -73,18 +73,18 @@ function t.run(p2, p3)
 									return
 								elseif v_2.Time >= 0 then
 								end
-								p2:fail(errorSourceStringsModule.Keys.CurveAnim_NegativeKeyTime, {
+								p1:fail(errorSourceStringsModule.Keys.CurveAnim_NegativeKeyTime, {
 									curvePath = `{if v_1.Parent.Parent then v_1.Parent.Parent.Name else "-"}.{v_1.Parent.Name}.{v_1.Name}`
 								})
 								
 								return
 							end
-							p2:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidCurveData)
+							p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidCurveData)
 							
 							return
 						end
 					end
-					p2:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyKeys, { maxAllowed = tostring(ceiled) })
+					p1:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyKeys, { maxAllowed = tostring(ceiled) })
 					
 					return
 				end
@@ -97,13 +97,13 @@ function t.run(p2, p3)
 				if minValue >= #markers then
 					for i_2, v_2 in markers do
 						if not v_2.Time or not areNumbersGood(v_2.Time) or (not v_2.Value or getFIntUGCValidateMaxMarkerCurveValueLengthModule() < #v_2.Value) then
-							p2:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidMarkerData)
+							p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidMarkerData)
 							
 							return
 						end
 					end
 				end
-				p2:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyMarkers, {
+				p1:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyMarkers, {
 					count = tostring(#markers),
 					maxAllowed = tostring(minValue)
 				})
@@ -111,7 +111,7 @@ function t.run(p2, p3)
 				return
 			elseif ceiled >= #markers then
 			end
-			p2:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyMarkers, {
+			p1:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyMarkers, {
 				count = tostring(#markers),
 				maxAllowed = tostring(ceiled)
 			})

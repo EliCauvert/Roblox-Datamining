@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	return p0.AvatarExperience.Common.FullView[p1]
+﻿return function(p1, p2)
+	return p1.AvatarExperience.Common.FullView[p2]
 end

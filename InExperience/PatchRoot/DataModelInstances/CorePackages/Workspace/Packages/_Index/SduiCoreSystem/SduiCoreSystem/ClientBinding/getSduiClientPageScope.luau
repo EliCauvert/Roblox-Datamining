@@ -1,73 +1,73 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.Signals)
 local tbl = setmetatable({}, { __mode = "v" })
 
-local function _(value, p0)
+local function _(value, p1)
 	-- upvalues: signalsModule (ref)
-	local var2 = value[p0]
+	local var1 = value[p1]
 	
-	if var2 then
-		return var2
+	if var1 then
+		return var1
 	end
-	local var3, var4 = signalsModule.createSignal(nil)
-	local t = { get = var3, set = var4 }
-	value[p0] = t
+	local var2, var3 = signalsModule.createSignal(nil)
+	local t = { get = var2, set = var3 }
+	value[p1] = t
 	
 	return t
 end
 
 return function(p1)
 	-- upvalues: tbl (ref), signalsModule (ref)
-	local var6 = tbl[p1]
+	local var1 = tbl[p1]
 	
-	if var6 then
-		return var6
+	if var1 then
+		return var1
 	end
 	local t = {}
 	local t_1 = {
 		get = function(p2)
 			-- upvalues: t (ref), signalsModule (copy)
-			local var10
-			local var9 = t[p2]
+			local var2
+			local var3 = t[p2]
 			
-			if var9 then
-				var10 = var9
+			if var3 then
+				var2 = var3
 			else
-				local var11, var12 = signalsModule.createSignal(nil)
-				local t_1 = { get = var11, set = var12 }
+				local var4, var5 = signalsModule.createSignal(nil)
+				local t_1 = { get = var4, set = var5 }
 				t[p2] = t_1
-				var10 = t_1
+				var2 = t_1
 			end
-			return var10.get(false)
+			return var2.get(false)
 		end,
-		set = function(value, p3)
+		set = function(value, p2)
 			-- upvalues: t (ref), signalsModule (copy)
-			local var15
-			local var14 = t[value]
+			local var2
+			local var3 = t[value]
 			
-			if var14 then
-				var15 = var14
+			if var3 then
+				var2 = var3
 			else
-				local var16, var17 = signalsModule.createSignal(nil)
-				local t_1 = { get = var16, set = var17 }
+				local var4, var5 = signalsModule.createSignal(nil)
+				local t_1 = { get = var4, set = var5 }
 				t[value] = t_1
-				var15 = t_1
+				var2 = t_1
 			end
-			var15.set(p3)
+			var2.set(p2)
 		end,
 		getSignal = function(value)
 			-- upvalues: t (ref), signalsModule (copy)
-			local var20
-			local var19 = t[value]
+			local var2
+			local var3 = t[value]
 			
-			if var19 then
-				var20 = var19
+			if var3 then
+				var2 = var3
 			else
-				local var21, var22 = signalsModule.createSignal(nil)
-				local t_1 = { get = var21, set = var22 }
+				local var4, var5 = signalsModule.createSignal(nil)
+				local t_1 = { get = var4, set = var5 }
 				t[value] = t_1
-				var20 = t_1
+				var2 = t_1
 			end
-			return var20.get
+			return var2.get
 		end
 	}
 	tbl[p1] = t_1

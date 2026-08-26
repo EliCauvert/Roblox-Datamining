@@ -38,32 +38,32 @@ function t:getFields()
 	return t
 end
 
-function t:makeDataLoader(p0, p1, p2)
+function t:makeDataLoader(p1, p2, p3)
 	-- upvalues: cryoModule (ref), dataLoader (ref), fetchProfilesByIds (ref)
-	self.fieldsSet = cryoModule.Dictionary.join(self.fieldsSet, convertToSet(p1))
-	p2 = p2 or self.dataLoaderOptions
+	self.fieldsSet = cryoModule.Dictionary.join(self.fieldsSet, convertToSet(p2))
+	p3 = p3 or self.dataLoaderOptions
 	
-	return dataLoader.new(function(p3)
-		-- upvalues: fetchProfilesByIds (copy), self (ref), p0 (ref)
-		return fetchProfilesByIds(p3, self:getFields(), p0)
+	return dataLoader.new(function(p4)
+		-- upvalues: fetchProfilesByIds (copy), self (ref), p1 (ref)
+		return fetchProfilesByIds(p4, self:getFields(), p1)
 	end, {
 		cache = true,
-		maxBatchSize = p2.batchSize,
+		maxBatchSize = p3.batchSize,
 		batchScheduleFn = function(p4)
-			-- upvalues: p2 (ref)
-			task.delay(p2.batchDelay, p4)
+			-- upvalues: p3 (ref)
+			task.delay(p3.batchDelay, p4)
 		end
 	})
 end
 
-function t:getLoader(p5, p6, p7)
+function t:getLoader(p1, p2, p3)
 	-- upvalues: cryoModule (ref), getFFlagRemoveDataLoaderTimer (ref), userProfilesDataLoaderClearTimeV1 (ref)
-	self.fieldsSet = cryoModule.Dictionary.join(self.fieldsSet, convertToSet(p6))
+	self.fieldsSet = cryoModule.Dictionary.join(self.fieldsSet, convertToSet(p2))
 	local processTime = os.clock()
 	
 	if not self.loader or (if getFFlagRemoveDataLoaderTimer() then false else userProfilesDataLoaderClearTimeV1 < processTime - self.lastTime) then
 		self.lastTime = processTime
-		self.loader = self:makeDataLoader(p5, p6, p7)
+		self.loader = self:makeDataLoader(p1, p2, p3)
 	end
 	return self.loader
 end

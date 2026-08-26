@@ -8,45 +8,45 @@ local enableSquadsUnifyCoplayMultiInvitePartyCreationDev = game:DefineFastFlag("
 local enableSquadsUnifyCoplayExperimentationDev = game:DefineFastFlag("EnableSquadsUnifyCoplayExperimentation_dev", false)
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: experimentCacheManager (ref), squadsUnifyCoplayExpLayer (ref)
-	local var6 = experimentCacheManager.default:getLayerVariables(squadsUnifyCoplayExpLayer)
+	local var1 = experimentCacheManager.default:getLayerVariables(squadsUnifyCoplayExpLayer)
 	
-	return if var6 and var6[p0] ~= nil then var6[p0] else false
+	return if var1 and var1[p1] ~= nil then var1[p1] else false
 end
 
 return {
 	getOneOnOnePartyCreationEnabled = function()
 		-- upvalues: enableSquadsUnifyCoplayOneOnOnePartyCreationDev (ref), enableSquadsUnifyCoplayExperimentationDev (ref), squadsUnifyCoplayOneOnOnePartyCreationVariant (ref), experimentCacheManager (ref), squadsUnifyCoplayExpLayer (ref), getFFlagIsSquadEnabled (ref)
-		local var7 = enableSquadsUnifyCoplayOneOnOnePartyCreationDev
+		local var1 = enableSquadsUnifyCoplayOneOnOnePartyCreationDev
 		
-		if not var7 then
-			var7 = enableSquadsUnifyCoplayExperimentationDev
+		if not var1 then
+			var1 = enableSquadsUnifyCoplayExperimentationDev
 			
-			if var7 then
-				local var8 = squadsUnifyCoplayOneOnOnePartyCreationVariant
-				local var9 = experimentCacheManager.default:getLayerVariables(squadsUnifyCoplayExpLayer)
-				var7 = if var9 and var9[var8] ~= nil then var9[var8] else false
-				var7 = var7 and getFFlagIsSquadEnabled()
+			if var1 then
+				local var2 = squadsUnifyCoplayOneOnOnePartyCreationVariant
+				local var3 = experimentCacheManager.default:getLayerVariables(squadsUnifyCoplayExpLayer)
+				var1 = if var3 and var3[var2] ~= nil then var3[var2] else false
+				var1 = var1 and getFFlagIsSquadEnabled()
 			end
 		end
-		return var7
+		return var1
 	end,
 	getMultiInvitePartyCreationEnabled = function()
 		-- upvalues: enableSquadsUnifyCoplayMultiInvitePartyCreationDev (ref), enableSquadsUnifyCoplayExperimentationDev (ref), squadsUnifyCoplayMultiInvitePartyCreationVariant (ref), experimentCacheManager (ref), squadsUnifyCoplayExpLayer (ref), getFFlagIsSquadEnabled (ref)
-		local var10 = enableSquadsUnifyCoplayMultiInvitePartyCreationDev
+		local var1 = enableSquadsUnifyCoplayMultiInvitePartyCreationDev
 		
-		if not var10 then
-			var10 = enableSquadsUnifyCoplayExperimentationDev
+		if not var1 then
+			var1 = enableSquadsUnifyCoplayExperimentationDev
 			
-			if var10 then
-				local var11 = squadsUnifyCoplayMultiInvitePartyCreationVariant
-				local var12 = experimentCacheManager.default:getLayerVariables(squadsUnifyCoplayExpLayer)
-				var10 = if var12 and var12[var11] ~= nil then var12[var11] else false
-				var10 = var10 and getFFlagIsSquadEnabled()
+			if var1 then
+				local var2 = squadsUnifyCoplayMultiInvitePartyCreationVariant
+				local var3 = experimentCacheManager.default:getLayerVariables(squadsUnifyCoplayExpLayer)
+				var1 = if var3 and var3[var2] ~= nil then var3[var2] else false
+				var1 = var1 and getFFlagIsSquadEnabled()
 			end
 		end
-		return var10
+		return var1
 	end,
 	logExposure = function()
 		-- upvalues: enableSquadsUnifyCoplayExperimentationDev (ref), experimentCacheManager (ref), squadsUnifyCoplayExpLayer (ref)

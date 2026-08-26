@@ -1,20 +1,20 @@
-﻿local function convertSecondsToTimeFrames(p0)
-	return if p0 >= 86400 then {
+﻿local function convertSecondsToTimeFrames(p1)
+	return if p1 >= 86400 then {
 		unit = "days",
-		value = math.floor(p0 / 86400),
-		secondsRemaining = p0
-	} elseif p0 >= 3600 then {
+		value = math.floor(p1 / 86400),
+		secondsRemaining = p1
+	} elseif p1 >= 3600 then {
 		unit = "hours",
-		value = math.floor(p0 / 3600),
-		secondsRemaining = p0
-	} elseif p0 >= 60 then {
+		value = math.floor(p1 / 3600),
+		secondsRemaining = p1
+	} elseif p1 >= 60 then {
 		unit = "minutes",
-		value = math.floor(p0 / 60),
-		secondsRemaining = p0
+		value = math.floor(p1 / 60),
+		secondsRemaining = p1
 	} else {
 		unit = "seconds",
-		value = math.floor(p0),
-		secondsRemaining = p0
+		value = math.floor(p1),
+		secondsRemaining = p1
 	}
 end
 
@@ -28,7 +28,7 @@ return function(p1, p2)
 	if not dateTime then
 		return nil
 	end
-	local var2 = dateTime.UnixTimestamp - (p2 or DateTime.now()).UnixTimestamp
+	local var1 = dateTime.UnixTimestamp - (p2 or DateTime.now()).UnixTimestamp
 	
-	return if var2 <= 0 then { value = -1, unit = "seconds", secondsRemaining = var2 } else convertSecondsToTimeFrames(var2)
+	return if var1 <= 0 then { value = -1, unit = "seconds", secondsRemaining = var1 } else convertSecondsToTimeFrames(var1)
 end

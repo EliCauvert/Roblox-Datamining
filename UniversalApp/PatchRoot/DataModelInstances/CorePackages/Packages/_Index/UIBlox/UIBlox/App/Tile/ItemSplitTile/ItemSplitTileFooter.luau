@@ -17,44 +17,44 @@ itemSplitTileFooter.validateProps = tModule.strictInterface({
 	layoutOrder = tModule.optional(tModule.number)
 })
 
-function itemSplitTileFooter.render(p0)
+function itemSplitTileFooter.render(p1)
 	-- upvalues: imagesModule (ref), withStyleModule (ref), getIconSizeUDim2Module (ref), iconSizeModule (ref), roactModule (ref), skeleton (ref), imageSetComponentModule (ref)
-	local priceText = p0.props.priceText
-	local isOwned = p0.props.isOwned
-	local var9 = if isOwned then imagesModule["icons/status/item/owned"] else imagesModule["icons/common/robux_small"]
+	local priceText = p1.props.priceText
+	local isOwned = p1.props.isOwned
+	local var1 = if isOwned then imagesModule["icons/status/item/owned"] else imagesModule["icons/common/robux_small"]
 	
-	return withStyleModule(function(p1)
-		-- upvalues: priceText (ref), isOwned (ref), getIconSizeUDim2Module (copy), iconSizeModule (copy), roactModule (copy), p0 (ref), skeleton (copy), imageSetComponentModule (copy), var9 (ref)
-		local font = p1.Font.Body.Font
-		local var10 = p1.Font.BaseSize * p1.Font.Body.RelativeSize
-		local theme = p1.Theme
-		local var11 = priceText and (priceText and tonumber(priceText:sub(1, 1)) or priceText == "--" or isOwned)
-		local var12 = getIconSizeUDim2Module(iconSizeModule.Small)
-		local var13 = if var11 then var12.Width.Offset + 4 else 0
+	return withStyleModule(function(p2)
+		-- upvalues: priceText (ref), isOwned (ref), getIconSizeUDim2Module (copy), iconSizeModule (copy), roactModule (copy), p1 (ref), skeleton (copy), imageSetComponentModule (copy), var1 (ref)
+		local font = p2.Font.Body.Font
+		local var2 = p2.Font.BaseSize * p2.Font.Body.RelativeSize
+		local theme = p2.Theme
+		local var3 = priceText and (priceText and tonumber(priceText:sub(1, 1)) or priceText == "--" or isOwned)
+		local var4 = getIconSizeUDim2Module(iconSizeModule.Small)
+		local var5 = if var3 then var4.Width.Offset + 4 else 0
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, var10),
-			LayoutOrder = p0.props.layoutOrder
+			Size = UDim2.new(1, 0, 0, var2),
+			LayoutOrder = p1.props.layoutOrder
 		}, {
-			Shimmer = if not priceText then roactModule.createElement(skeleton, { Size = UDim2.new(0.8, 0, 0, var10) }) else nil,
-			Icon = var11 and roactModule.createElement(imageSetComponentModule.Label, {
+			Shimmer = if not priceText then roactModule.createElement(skeleton, { Size = UDim2.new(0.8, 0, 0, var2) }) else nil,
+			Icon = var3 and roactModule.createElement(imageSetComponentModule.Label, {
 				BackgroundTransparency = 1,
-				Image = var9,
+				Image = var1,
 				ImageColor3 = theme.TextMuted.Color,
 				ImageTransparency = theme.TextMuted.Transparency,
-				Size = var12,
+				Size = var4,
 				Position = UDim2.new(0, 0, 0.5, 0),
 				AnchorPoint = Vector2.new(0, 0.5)
 			}),
 			TextLabel = priceText and roactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Position = UDim2.new(0, var13, 0, 0),
-				Size = UDim2.new(1, -var13, 1, 0),
+				Position = UDim2.new(0, var5, 0, 0),
+				Size = UDim2.new(1, -var5, 1, 0),
 				Font = font,
 				TextColor3 = theme.TextMuted.Color,
 				TextTransparency = theme.TextMuted.Transparency,
-				TextSize = var10,
+				TextSize = var2,
 				Text = priceText,
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextXAlignment = Enum.TextXAlignment.Left,

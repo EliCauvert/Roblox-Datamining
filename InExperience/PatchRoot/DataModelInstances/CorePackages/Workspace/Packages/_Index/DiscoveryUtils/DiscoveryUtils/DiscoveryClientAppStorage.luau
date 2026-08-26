@@ -9,7 +9,7 @@ local luaAppDiscoveryClientAppStorageEmptyCacheTelemetry = game:DefineFastFlag("
 local t = {
 	HomeOmniFeedCache = localStorageKey.DiscoveryClientFallbackCache
 }
-local var8 = luaAppDiscoveryClientAppStorageEmptyCacheTelemetry and ({
+local var1 = luaAppDiscoveryClientAppStorageEmptyCacheTelemetry and ({
 	eventName = "discoveryClientAppStorageEmptyCache",
 	description = "Cached data not found after omni recommendations fetch fails",
 	backends = { "EventIngest" },
@@ -17,47 +17,47 @@ local var8 = luaAppDiscoveryClientAppStorageEmptyCacheTelemetry and ({
 	lastUpdated = { 25, 11, 19 }
 } or nil)
 
-function getJsonStorageData(p0, p1)
-	-- upvalues: appStorageService (ref), luaAppDiscoveryClientAppStorageEmptyCacheTelemetry (ref), telemetryService (ref), var8 (ref), httpService (ref), discoveryEventErrorLoggerModule (ref), luaAppDiscoveryClientAppStorageCacheTtlDays (ref)
+function getJsonStorageData(p1, p2)
+	-- upvalues: appStorageService (ref), luaAppDiscoveryClientAppStorageEmptyCacheTelemetry (ref), telemetryService (ref), var1 (ref), httpService (ref), discoveryEventErrorLoggerModule (ref), luaAppDiscoveryClientAppStorageCacheTtlDays (ref)
 	if not game:GetEngineFeature("UniversalAppDiscoveryClientFallbackCacheStorageKey") then
 		return nil
 	end
-	local var9 = appStorageService:GetItem(p0)
+	local var2 = appStorageService:GetItem(p1)
 	
-	if var9 == nil or var9 == "" then
+	if var2 == nil or var2 == "" then
 		if luaAppDiscoveryClientAppStorageEmptyCacheTelemetry then
-			telemetryService:LogEvent(var8, {
+			telemetryService:LogEvent(var1, {
 				standardizedFields = { "addSessionInfo" },
-				customFields = { cacheKey = p0 }
+				customFields = { cacheKey = p1 }
 			})
 		end
 		return nil
 	else
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), var9 (ref)
-			return httpService:JSONDecode(var9)
+			-- upvalues: httpService (copy), var2 (ref)
+			return httpService:JSONDecode(var2)
 		end)
 		
 		if not ok then
 			discoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", status)
-			error(`Failed to decode cache data for key: {p0}`)
+			error(`Failed to decode cache data for key: {p1}`)
 		end
 		if not status.version then
-			discoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", `Cached data version not found for key: {p0}`)
-			error(`Cached data version not found for key: {p0}`)
+			discoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", `Cached data version not found for key: {p1}`)
+			error(`Cached data version not found for key: {p1}`)
 		end
 		if not status.lastUpdatedTime then
-			discoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", `Cached data time not found for key: {p0}`)
-			error(`Cached data time not found for key: {p0}`)
+			discoveryEventErrorLoggerModule.reportError("DiscoveryClientAppStorageDataError", `Cached data time not found for key: {p1}`)
+			error(`Cached data time not found for key: {p1}`)
 		end
-		return if status.version == p1 and (not status.lastUpdatedTime or status.lastUpdatedTime >= os.time() - 86400 * luaAppDiscoveryClientAppStorageCacheTtlDays) then status.data else nil
+		return if status.version == p2 and (not status.lastUpdatedTime or status.lastUpdatedTime >= os.time() - 86400 * luaAppDiscoveryClientAppStorageCacheTtlDays) then status.data else nil
 	end
 end
 
-function setJsonStorageData(value, p2, p3)
+function setJsonStorageData(value, p3, p4)
 	-- upvalues: httpService (ref), appStorageService (ref)
 	if game:GetEngineFeature("UniversalAppDiscoveryClientFallbackCacheStorageKey") then
-		appStorageService:SetItem(value, httpService:JSONEncode({ data = p2, lastUpdatedTime = os.time(), version = p3 }))
+		appStorageService:SetItem(value, httpService:JSONEncode({ data = p3, lastUpdatedTime = os.time(), version = p4 }))
 		
 		return
 	end

@@ -12,32 +12,32 @@ local useReactionEffects = reactionEffectsContextModule.useReactionEffects
 return function()
 	-- upvalues: momentContextModule (ref), useReactionEffects (ref), useFeedOptional (ref), reactModule (ref), reactionTruthTableModule (ref), signalActionTypeModule (ref)
 	local store = momentContextModule.useMoment().store
-	local var6 = useReactionEffects()
-	local var7 = useFeedOptional()
+	local var1 = useReactionEffects()
+	local var2 = useFeedOptional()
 	
-	return reactModule.useCallback(function(p0, p1, p2)
-		-- upvalues: store (ref), reactionTruthTableModule (copy), var7 (ref), signalActionTypeModule (copy), var6 (ref)
-		local var8 = reactionTruthTableModule.decide(store.getSelectedReaction(false), p0, p2)
+	return reactModule.useCallback(function(p1, p2, p3)
+		-- upvalues: store (ref), reactionTruthTableModule (copy), var2 (ref), signalActionTypeModule (copy), var1 (ref)
+		local var3 = reactionTruthTableModule.decide(store.getSelectedReaction(false), p1, p3)
 		
-		if var8.action == "commit" and var8.reaction ~= nil then
-			store.commitReaction(var8.reaction)
-		elseif var8.action == "clear" then
+		if var3.action == "commit" and var3.reaction ~= nil then
+			store.commitReaction(var3.reaction)
+		elseif var3.action == "clear" then
 			store.clearReaction()
 		end
-		if var7 ~= nil and var8.action ~= "none" then
+		if var2 ~= nil and var3.action ~= "none" then
 			local data = store.getData(false)
 			local feedItemId = data.feedItemId
 			
 			if feedItemId ~= nil and feedItemId ~= "" then
 				local t = { itemId = feedItemId, tracingId = data.feedSessionId }
 				local ok, status = pcall(function()
-					-- upvalues: var8 (ref), var7 (copy), signalActionTypeModule (copy), t (ref)
-					if var8.action == "commit" and var8.reaction ~= nil then
-						var7.logAction(signalActionTypeModule.AddReaction, t, { reactionType = var8.reaction })
+					-- upvalues: var3 (ref), var2 (copy), signalActionTypeModule (copy), t (ref)
+					if var3.action == "commit" and var3.reaction ~= nil then
+						var2.logAction(signalActionTypeModule.AddReaction, t, { reactionType = var3.reaction })
 						
 						return
-					elseif var8.action == "clear" then
-						var7.logAction(signalActionTypeModule.RemoveReaction, t, {})
+					elseif var3.action == "clear" then
+						var2.logAction(signalActionTypeModule.RemoveReaction, t, {})
 					end
 				end)
 				
@@ -46,8 +46,8 @@ return function()
 				end
 			end
 		end
-		if var6 ~= nil and var8.effectReaction ~= nil then
-			var6.spawnExplosion(var8.effectReaction, p1)
+		if var1 ~= nil and var3.effectReaction ~= nil then
+			var1.spawnExplosion(var3.effectReaction, p2)
 		end
-	end, { store, var6, var7 })
+	end, { store, var1, var2 })
 end

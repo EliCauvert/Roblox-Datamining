@@ -8,28 +8,28 @@ local roactModule = require(parent.Roact)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useSignalState = require(parent.SignalsReact).useSignalState
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), useSignalState (ref), useLocalization (ref), createSystemMenuButtonModule (ref), roactModule (ref), chatTopBarBaseModule (ref)
 	if fFlagAppChatTopBarConfigDrivenModule() then
-		local screenName = p0.screenName
-		local navigation = p0.navigation
-		local var6 = useSignalState(getTopBarStoreModule(false).getScreenTopBar(screenName))
-		local systemButtonEnabled = var6.systemButtonEnabled
-		local systemButtonActivated = var6.systemButtonActivated
-		local var7 = useLocalization({
+		local screenName = p1.screenName
+		local navigation = p1.navigation
+		local var1 = useSignalState(getTopBarStoreModule(false).getScreenTopBar(screenName))
+		local systemButtonEnabled = var1.systemButtonEnabled
+		local systemButtonActivated = var1.systemButtonActivated
+		local var2 = useLocalization({
 			networkErrorText = "Feature.Chat.Response.NetworkError",
 			invalidParticipantText = "Feature.Chat.Toast.Error.InvalidUserSelected",
 			cannotExpandToGroupChatActivePartyText = "Feature.Squads.Description.OneOnOneExpandedChatFeaturesActivePartyError",
-			systemButtonText = var6.systemButtonText or "Feature.Chat.Action.Add"
+			systemButtonText = var1.systemButtonText or "Feature.Chat.Action.Add"
 		})
 		
 		return roactModule.createElement(chatTopBarBaseModule, {
 			screenName = screenName,
 			navigation = navigation,
 			renderRight = function()
-				-- upvalues: createSystemMenuButtonModule (copy), var7 (ref), systemButtonEnabled (ref), systemButtonActivated (ref)
+				-- upvalues: createSystemMenuButtonModule (copy), var2 (ref), systemButtonEnabled (ref), systemButtonActivated (ref)
 				return createSystemMenuButtonModule({
-					localizedStrings = var7,
+					localizedStrings = var2,
 					isDisabled = not systemButtonEnabled,
 					onActivated = systemButtonActivated
 				})

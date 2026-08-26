@@ -16,7 +16,7 @@ local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenL
 local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = sharedFlagsModule.FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 
 return {
-	Skeleton = reactModule.memo(function(p0)
+	Skeleton = reactModule.memo(function(p1)
 		-- upvalues: useTokens (ref), reactModule (ref), view (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), skeleton (ref), radius (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
 		local size1200 = useTokens().Size.Size_1200
 		
@@ -37,11 +37,11 @@ return {
 			PlayBtnContainer = if fFlagSduiEdpPersistentActionBarPlayButton then nil else reactModule.createElement(view, { tag = "grow auto-y", LayoutOrder = 3 }, {
 				PlayBtn = reactModule.createElement(playButton, {
 					testId = "--edp-fallback-play-button",
-					universeId = p0.universeId,
-					referralSource = p0.referralSource,
-					launchSource = p0.launchSource,
-					experienceJoinData = p0.experienceJoinData,
-					placeId = p0.placeIdOverride,
+					universeId = p1.universeId,
+					referralSource = p1.referralSource,
+					launchSource = p1.launchSource,
+					experienceJoinData = p1.experienceJoinData,
+					placeId = p1.placeIdOverride,
 					useUIBloxButton = if fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox then fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox else nil,
 					buttonSize = buttonSize.Large,
 					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
@@ -53,9 +53,9 @@ return {
 	end),
 	Error = reactModule.memo(function(p1)
 		-- upvalues: useGameInfoModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), reactModule (ref), view (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
-		local var4 = useGameInfoModule(p1.universeId)
+		local var1 = useGameInfoModule(p1.universeId)
 		
-		return if var4 ~= nil and var4.isUnavailable == true then nil elseif fFlagSduiEdpPersistentActionBarPlayButton then nil else reactModule.createElement(view, {
+		return if var1 ~= nil and var1.isUnavailable == true then nil elseif fFlagSduiEdpPersistentActionBarPlayButton then nil else reactModule.createElement(view, {
 			tag = "row align-y-center gap-small size-full-0 auto-y padding-x-medium padding-top-medium bg-surface-0 stroke-default",
 			testId = "--edp-fallback-action-bar-error"
 		}, {

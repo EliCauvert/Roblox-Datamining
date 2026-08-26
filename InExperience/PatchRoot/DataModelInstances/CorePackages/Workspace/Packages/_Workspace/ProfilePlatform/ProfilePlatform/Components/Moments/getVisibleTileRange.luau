@@ -1,9 +1,9 @@
-﻿return function(p0, p1, p2, p3, p4, p5)
-	if p5 <= 0 or p1 <= 0 then
+﻿return function(p1, p2, p3, p4, p5, p6)
+	if p6 <= 0 or p2 <= 0 then
 		return 1, 0
 	end
-	local var0 = p1 + p2
-	local floored = math.floor(p0 / var0)
+	local var1 = p2 + p3
+	local floored = math.floor(p1 / var1)
 	
-	return math.clamp((if p0 - floored * var0 < p1 then floored else floored + 1) + 1, 1, p5), math.clamp(math.ceil(p0 / var0 + (p3 + (p4 or 0))), 1, p5)
+	return math.clamp((if p1 - floored * var1 < p2 then floored else floored + 1) + 1, 1, p6), math.clamp(math.ceil(p1 / var1 + (p4 + (p5 or 0))), 1, p6)
 end

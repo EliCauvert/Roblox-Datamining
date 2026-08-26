@@ -6,29 +6,29 @@ local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverl
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local appPage = require(parent.RobloxAppEnums).AppPage
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var2 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local getFFlagEnableAccountSwitcherFoundationDesign = dependenciesModule.SharedFlags.GetFFlagEnableAccountSwitcherFoundationDesign
 
-return function(p0, p1, p2)
-	-- upvalues: getFFlagEnableAccountSwitcherFoundationDesign (ref), setCentralOverlay (ref), centralOverlayType (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var2 (ref), navigateDown (ref)
-	return function(p3)
-		-- upvalues: p1 (ref), getFFlagEnableAccountSwitcherFoundationDesign (copy), p2 (ref), setCentralOverlay (copy), centralOverlayType (copy), p0 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var2 (copy), navigateDown (copy)
-		if not p1 then
-			p3:dispatch(setCentralOverlay(centralOverlayType.AccountSelector, p0))
+return function(p1, p2, p3)
+	-- upvalues: getFFlagEnableAccountSwitcherFoundationDesign (ref), setCentralOverlay (ref), centralOverlayType (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	return function(p4)
+		-- upvalues: p2 (ref), getFFlagEnableAccountSwitcherFoundationDesign (copy), p3 (ref), setCentralOverlay (copy), centralOverlayType (copy), p1 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
+		if not p2 then
+			p4:dispatch(setCentralOverlay(centralOverlayType.AccountSelector, p1))
 			
 			return
-		elseif getFFlagEnableAccountSwitcherFoundationDesign() and p2 then
-			p3:dispatch(setCentralOverlay(centralOverlayType.AccountSwitcher, p0))
+		elseif getFFlagEnableAccountSwitcherFoundationDesign() and p3 then
+			p4:dispatch(setCentralOverlay(centralOverlayType.AccountSwitcher, p1))
 			
 			return
 		end
-		local t = { name = appPage.AccountSelectorPeekView, extraProps = p0 }
+		local t = { name = appPage.AccountSelectorPeekView, extraProps = p1 }
 		
 		if fFlagSignalsNavP3Dispatch then
-			var2.down(var2.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		p3:dispatch(navigateDown(t))
+		p4:dispatch(navigateDown(t))
 	end
 end

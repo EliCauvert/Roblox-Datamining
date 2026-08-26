@@ -6,25 +6,25 @@ local iconButton = foundationModule.IconButton
 local text = foundationModule.Text
 local view = foundationModule.View
 
-local function _(p0)
-	return string.format("%02d:%02d", math.floor(p0 / 60), math.floor(p0 % 60))
+local function _(p1)
+	return string.format("%02d:%02d", math.floor(p1 / 60), math.floor(p1 % 60))
 end
 
 return function(p1)
 	-- upvalues: reactModule (ref), view (ref), iconButton (ref), buttonSize (ref), text (ref)
-	local var2 = p1.timePosition / p1.timeLength
+	local var1 = p1.timePosition / p1.timeLength
 	local timePosition = p1.timePosition
 	local formattedText = string.format("%02d:%02d", math.floor(timePosition / 60), math.floor(timePosition % 60))
 	local timeLength = p1.timeLength
 	local formattedText_1 = string.format("%02d:%02d", math.floor(timeLength / 60), math.floor(timeLength % 60))
-	local var5 = reactModule.useRef(nil)
-	local var6, var7 = reactModule.useState(0)
+	local var2 = reactModule.useRef(nil)
+	local var3, var4 = reactModule.useState(0)
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var7 (ref)
-		if var5 and var5.current then
-			local inputBeganConnection = var5.current.InputBegan:Connect(function(p2)
-				-- upvalues: var7 (copy)
-				var7(p2.Position.X)
+		-- upvalues: var2 (ref), var4 (ref)
+		if var2 and var2.current then
+			local inputBeganConnection = var2.current.InputBegan:Connect(function(p2)
+				-- upvalues: var4 (copy)
+				var4(p2.Position.X)
 			end)
 			
 			return function()
@@ -45,18 +45,18 @@ return function(p1)
 			LayoutOrder = 1,
 			tag = "radius-small bg-over-media-0 size-full-200",
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: var5 (ref), p1 (ref), var6 (ref)
-				if var5 and var5.current then
-					p1.onProgressBarActivated((var6 - var5.current.AbsolutePosition.X) / var5.current.AbsoluteSize.X)
+				-- upvalues: var2 (ref), p1 (ref), var3 (ref)
+				if var2 and var2.current then
+					p1.onProgressBarActivated((var3 - var2.current.AbsolutePosition.X) / var2.current.AbsoluteSize.X)
 					
 					return
 				end
-			end, { var6, p1.onProgressBarActivated }),
-			ref = var5
+			end, { var3, p1.onProgressBarActivated }),
+			ref = var2
 		}, {
 			Progress = reactModule.createElement(view, {
 				tag = "radius-small bg-system-neutral",
-				Size = UDim2.fromScale(var2, 1)
+				Size = UDim2.fromScale(var1, 1)
 			})
 		}),
 		CTAContainer = reactModule.createElement(view, {

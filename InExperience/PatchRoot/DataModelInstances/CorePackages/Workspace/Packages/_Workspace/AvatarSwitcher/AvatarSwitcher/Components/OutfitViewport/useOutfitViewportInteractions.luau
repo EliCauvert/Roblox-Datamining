@@ -8,76 +8,76 @@ local function _(vectorA)
 	return -vectorA.X * 1
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), httpService (ref), runService (ref)
-	local var4 = reactModule.useRef(false)
-	local var5 = reactModule.useRef(Vector3.new())
-	local var6, var7 = reactOtterModule.useAnimatedBinding(0)
-	local var8 = reactModule.useRef(0)
-	local var9 = reactModule.useRef(0)
-	local var10 = reactModule.useRef(nil)
-	local var11, var12 = reactModule.useBinding(CFrame.new())
+	local var1 = reactModule.useRef(false)
+	local var2 = reactModule.useRef(Vector3.new())
+	local var3, var4 = reactOtterModule.useAnimatedBinding(0)
+	local var5 = reactModule.useRef(0)
+	local var6 = reactModule.useRef(0)
+	local var7 = reactModule.useRef(nil)
+	local var8, var9 = reactModule.useBinding(CFrame.new())
 	reactModule.useEffect(function()
-		-- upvalues: httpService (copy), var10 (ref), runService (copy), var4 (ref), var7 (ref), reactOtterModule (copy), var6 (ref), var8 (ref), var9 (ref), p0 (ref), var12 (ref)
-		local var14 = 0
+		-- upvalues: httpService (copy), var7 (ref), runService (copy), var1 (ref), var4 (ref), reactOtterModule (copy), var3 (ref), var5 (ref), var6 (ref), p1 (ref), var9 (ref)
+		local var10 = 0
 		local text = "OutfitVewportSpin_" .. httpService:GenerateGUID(false)
-		local current = var10.current
-		runService:BindToRenderStep(text, Enum.RenderPriority.Camera.Value + 1, function(p1)
-			-- upvalues: var4 (copy), var10 (copy), current (write), var7 (copy), reactOtterModule (copy), var14 (write), var6 (copy), var8 (copy), var9 (copy), p0 (copy), var12 (copy)
-			if var4.current then
-				var7(reactOtterModule.instant(-(if var10.current and current then (var10.current - current) / p1 else Vector2.new(0, 0)).X * 1))
+		local current = var7.current
+		runService:BindToRenderStep(text, Enum.RenderPriority.Camera.Value + 1, function(p2)
+			-- upvalues: var1 (copy), var7 (copy), current (write), var4 (copy), reactOtterModule (copy), var10 (write), var3 (copy), var5 (copy), var6 (copy), p1 (copy), var9 (copy)
+			if var1.current then
+				var4(reactOtterModule.instant(-(if var7.current and current then (var7.current - current) / p2 else Vector2.new(0, 0)).X * 1))
 			else
-				var14 += p1 * var6:getValue()
+				var10 += p2 * var3:getValue()
 			end
-			current = var10.current
-			local cframe = CFrame.Angles(0, math.rad(var14) + math.rad(var8.current) + math.rad(var9.current), 0)
-			var12(CFrame.lookAt(cframe.LookVector * p0.defaultCameraDistanceRef.current, Vector3.new(0, 0, 0), cframe.UpVector))
+			current = var7.current
+			local cframe = CFrame.Angles(0, math.rad(var10) + math.rad(var5.current) + math.rad(var6.current), 0)
+			var9(CFrame.lookAt(cframe.LookVector * p1.defaultCameraDistanceRef.current, Vector3.new(0, 0, 0), cframe.UpVector))
 		end)
 		
 		return function()
 			-- upvalues: runService (copy), text (ref)
 			runService:UnbindFromRenderStep(text)
 		end
-	end, { var7, p0.defaultCameraDistanceRef, var12 })
-	local var13 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref), var5 (ref), var4 (ref), var10 (ref), var9 (ref), p0 (ref), var7 (ref), reactOtterModule (copy)
-		var8.current += -(p2 - var5.current).X * 1
-		var4.current = false
-		var10.current = nil
-		var9.current = 0
+	end, { var4, p1.defaultCameraDistanceRef, var9 })
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: var5 (ref), var2 (ref), var1 (ref), var7 (ref), var6 (ref), p1 (ref), var4 (ref), reactOtterModule (copy)
+		var5.current += -(p2 - var2.current).X * 1
+		var1.current = false
+		var7.current = nil
+		var6.current = 0
 		
-		if p0.onInteractionChanged then
-			p0.onInteractionChanged(false)
+		if p1.onInteractionChanged then
+			p1.onInteractionChanged(false)
 		end
-		var7(reactOtterModule.spring(0, { frequency = 1 }))
-	end, { p0.onInteractionChanged, var7 })
+		var4(reactOtterModule.spring(0, { frequency = 1 }))
+	end, { p1.onInteractionChanged, var4 })
 	
 	return {
-		onInputBegan = reactModule.useCallback(function(_, p3)
-			-- upvalues: var4 (ref), var5 (ref), var10 (ref), p0 (ref)
-			if (if p3.UserInputType ~= Enum.UserInputType.MouseButton1 then p3.UserInputType == Enum.UserInputType.Touch else true) and not var4.current then
-				var4.current = true
-				var5.current = p3.Position
-				var10.current = p3.Position
+		onInputBegan = reactModule.useCallback(function(_, p2)
+			-- upvalues: var1 (ref), var2 (ref), var7 (ref), p1 (ref)
+			if (if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true) and not var1.current then
+				var1.current = true
+				var2.current = p2.Position
+				var7.current = p2.Position
 				
-				if p0.onInteractionChanged then
-					p0.onInteractionChanged(true)
+				if p1.onInteractionChanged then
+					p1.onInteractionChanged(true)
 				end
 			end
-		end, { p0.onInteractionChanged }),
-		onInputChanged = reactModule.useCallback(function(p4)
-			-- upvalues: var4 (ref), var9 (ref), var5 (ref), var10 (ref)
-			if var4.current and (if p4.UserInputType ~= Enum.UserInputType.MouseMovement then p4.UserInputType == Enum.UserInputType.Touch else true) then
-				var9.current = -(p4.Position - var5.current).X * 1
-				var10.current = p4.Position
+		end, { p1.onInteractionChanged }),
+		onInputChanged = reactModule.useCallback(function(p2)
+			-- upvalues: var1 (ref), var6 (ref), var2 (ref), var7 (ref)
+			if var1.current and (if p2.UserInputType ~= Enum.UserInputType.MouseMovement then p2.UserInputType == Enum.UserInputType.Touch else true) then
+				var6.current = -(p2.Position - var2.current).X * 1
+				var7.current = p2.Position
 			end
 		end, {}),
-		onInputEnded = reactModule.useCallback(function(p5)
-			-- upvalues: var4 (ref), var13 (ref)
-			if (if p5.UserInputType ~= Enum.UserInputType.MouseButton1 then p5.UserInputType == Enum.UserInputType.Touch else true) and var4.current then
-				var13(p5.Position)
+		onInputEnded = reactModule.useCallback(function(p2)
+			-- upvalues: var1 (ref), var10 (ref)
+			if (if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true) and var1.current then
+				var10(p2.Position)
 			end
-		end, { var13 }),
-		cameraCFrame = var11
+		end, { var10 }),
+		cameraCFrame = var8
 	}
 end

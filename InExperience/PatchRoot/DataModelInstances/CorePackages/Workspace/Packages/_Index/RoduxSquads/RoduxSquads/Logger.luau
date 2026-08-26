@@ -4,8 +4,8 @@ local roduxSquads = require(parent.Lumberyak).Logger.new(nil, "RoduxSquads")
 roduxSquads:setContext({ prefix = "[RoduxSquads] - " })
 roduxSquads:addSink({
 	maxLevel = if fFlagDebugSquadLogsEnabled then roduxSquads.Levels.Debug else roduxSquads.Levels.Warning,
-	log = function(_, p0, _)
-		print(p0)
+	log = function(_, p1, _)
+		print(p1)
 	end
 })
 

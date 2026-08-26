@@ -8,36 +8,36 @@ local setGameStatAddIdModule = require(actions.SetGameStatAddId)
 local fFlagLeaderstatsWithASideOfClientModule = require(parent.Flags.FFlagLeaderstatsWithASideOfClient)
 local formatStatStringModule = require(parent.FormatStatString)
 
-local function gameStatsComp(p0, p1)
+local function gameStatsComp(p1, p2)
 	-- upvalues: fFlagLeaderstatsWithASideOfClientModule (ref)
-	if p0.isPrimary ~= p1.isPrimary then
-		return p0.isPrimary
-	elseif p0.priority ~= p1.priority then
-		return p1.priority < p0.priority
+	if p1.isPrimary ~= p2.isPrimary then
+		return p1.isPrimary
+	elseif p1.priority ~= p2.priority then
+		return p2.priority < p1.priority
 	elseif fFlagLeaderstatsWithASideOfClientModule then
-		local serverAddId = p0.serverAddId
-		local serverAddId_1 = p1.serverAddId
+		local serverAddId = p1.serverAddId
+		local serverAddId_1 = p2.serverAddId
 		
-		return if serverAddId and serverAddId_1 then serverAddId < serverAddId_1 else p0.addId < p1.addId
+		return if serverAddId and serverAddId_1 then serverAddId < serverAddId_1 else p1.addId < p2.addId
 	end
 end
 
-local var8 = 0
+local var1 = 0
 
-return function(p2, p3)
-	-- upvalues: addGameStatModule (ref), formatStatStringModule (ref), fFlagLeaderstatsWithASideOfClientModule (ref), var8 (write), cryoModule (ref), gameStatsComp (ref), removeGameStatModule (ref), setGameStatTextModule (ref), setGameStatAddIdModule (ref)
-	p2 = p2 or {}
+return function(p1, p2)
+	-- upvalues: addGameStatModule (ref), formatStatStringModule (ref), fFlagLeaderstatsWithASideOfClientModule (ref), var1 (write), cryoModule (ref), gameStatsComp (ref), removeGameStatModule (ref), setGameStatTextModule (ref), setGameStatAddIdModule (ref)
+	p1 = p1 or {}
 	
-	if p3.type == addGameStatModule.name then
+	if p2.type == addGameStatModule.name then
 		local addId = nil
 		local serverAddId = nil
-		local var10 = formatStatStringModule(nil)
+		local var2 = formatStatStringModule(nil)
 		local t = {}
 		
-		for i, v in ipairs(p2) do
-			if v.name == p3.statName then
+		for i, v in ipairs(p1) do
+			if v.name == p2.statName then
 				addId = v.addId
-				var10 = v.text
+				var2 = v.text
 				
 				if fFlagLeaderstatsWithASideOfClientModule then
 					serverAddId = v.serverAddId
@@ -46,38 +46,38 @@ return function(p2, p3)
 				table.insert(t, v)
 			end
 		end
-		var8 += 1
+		var1 += 1
 		t = cryoModule.List.join(t, {
 			{
-				name = p3.statName,
-				text = var10,
-				addId = addId or var8,
-				isPrimary = p3.isPrimary,
-				priority = p3.priority,
+				name = p2.statName,
+				text = var2,
+				addId = addId or var1,
+				isPrimary = p2.isPrimary,
+				priority = p2.priority,
 				serverAddId = serverAddId
 			}
 		})
 		table.sort(t, gameStatsComp)
 		
 		return t
-	elseif p3.type == removeGameStatModule.name then
-		return cryoModule.List.filter(p2, function(p4)
-			-- upvalues: p3 (ref)
-			return p4.name ~= p3.statName
+	elseif p2.type == removeGameStatModule.name then
+		return cryoModule.List.filter(p1, function(p3)
+			-- upvalues: p2 (ref)
+			return p3.name ~= p2.statName
 		end)
-	elseif p3.type == setGameStatTextModule.name then
-		return cryoModule.List.map(p2, function(p5)
-			-- upvalues: p3 (ref), cryoModule (copy)
-			return p5.name == p3.statName and cryoModule.Dictionary.join(p5, { text = p3.text }) or p5
+	elseif p2.type == setGameStatTextModule.name then
+		return cryoModule.List.map(p1, function(p3)
+			-- upvalues: p2 (ref), cryoModule (copy)
+			return p3.name == p2.statName and cryoModule.Dictionary.join(p3, { text = p2.text }) or p3
 		end)
-	elseif fFlagLeaderstatsWithASideOfClientModule and p3.type == setGameStatAddIdModule.name then
-		p2 = cryoModule.List.map(p2, function(p6)
-			-- upvalues: p3 (ref), cryoModule (copy)
-			return p6.name == p3.statName and cryoModule.Dictionary.join(p6, { serverAddId = p3.serverAddId }) or p6
+	elseif fFlagLeaderstatsWithASideOfClientModule and p2.type == setGameStatAddIdModule.name then
+		p1 = cryoModule.List.map(p1, function(p3)
+			-- upvalues: p2 (ref), cryoModule (copy)
+			return p3.name == p2.statName and cryoModule.Dictionary.join(p3, { serverAddId = p2.serverAddId }) or p3
 		end)
-		table.sort(p2, gameStatsComp)
+		table.sort(p1, gameStatsComp)
 		
-		return p2
+		return p1
 	end
-	return p2
+	return p1
 end

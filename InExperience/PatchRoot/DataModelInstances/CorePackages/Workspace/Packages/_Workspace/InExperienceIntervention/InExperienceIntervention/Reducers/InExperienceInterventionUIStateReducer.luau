@@ -8,34 +8,34 @@ local rateLimitTimeoutToast = game:DefineFastFlag("RateLimitTimeoutToast", false
 local rateLimitNudgeDialog = game:DefineFastFlag("RateLimitNudgeDialog", false)
 local rateLimitTimeoutDialog = game:DefineFastFlag("RateLimitTimeoutDialog", false)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: chatInterventionUIRateLimitWindowSec (ref), rateLimitTimeoutToast (ref), constants (ref), rateLimitNudgeToast (ref), rateLimitNudgeDialog (ref), rateLimitTimeoutDialog (ref), UIStateActions (ref)
-	local cloned = table.clone(p0)
-	local type = p1.type
+	local cloned = table.clone(p1)
+	local type = p2.type
 	local _ = false
-	local var7 = DateTime.now().UnixTimestamp - p0.dispatchTimestamp < chatInterventionUIRateLimitWindowSec
-	local var8 = p1.treatmentType == p0.treatmentType
-	local var9 = false
+	local var1 = DateTime.now().UnixTimestamp - p1.dispatchTimestamp < chatInterventionUIRateLimitWindowSec
+	local var2 = p2.treatmentType == p1.treatmentType
+	local var3 = false
 	
 	if rateLimitTimeoutToast then
-		var9 = if var8 then if p1.treatmentType ~= constants.TreatmentType.ChatTimeoutChatAttempt then p1.treatmentType == constants.TreatmentType.ChatTimeoutGameJoin else true else p1.treatmentType == constants.TreatmentType.ChatTimeoutChatAttempt or (p1.treatmentType == constants.TreatmentType.ChatTimeoutGameJoin and p0.treatmentType == constants.TreatmentType.ChatTimeoutChatAttempt)
+		var3 = if var2 then if p2.treatmentType ~= constants.TreatmentType.ChatTimeoutChatAttempt then p2.treatmentType == constants.TreatmentType.ChatTimeoutGameJoin else true else p2.treatmentType == constants.TreatmentType.ChatTimeoutChatAttempt or (p2.treatmentType == constants.TreatmentType.ChatTimeoutGameJoin and p1.treatmentType == constants.TreatmentType.ChatTimeoutChatAttempt)
 	end
-	local var7_1
-	local var10 = if rateLimitTimeoutDialog then p1.treatmentType == constants.TreatmentType.ChatTimeoutDialog and var8 else false
+	local var4
+	local var5 = if rateLimitTimeoutDialog then p2.treatmentType == constants.TreatmentType.ChatTimeoutDialog and var2 else false
 	
-	if not var9 and not (if rateLimitNudgeToast then p1.treatmentType == constants.TreatmentType.ChatNudgeToast and var8 else false) and not (if rateLimitNudgeDialog then p1.treatmentType == constants.TreatmentType.ChatNudgeDialog and var8 else false) then
-		var7_1 = var10 and var7
+	if not var3 and not (if rateLimitNudgeToast then p2.treatmentType == constants.TreatmentType.ChatNudgeToast and var2 else false) and not (if rateLimitNudgeDialog then p2.treatmentType == constants.TreatmentType.ChatNudgeDialog and var2 else false) then
+		var4 = var5 and var1
 	end
-	if type == UIStateActions.ToggleNotificationDialog and not var7_1 then
-		cloned.isShown = p1.isShown
-		cloned.treatmentType = p1.treatmentType
-		cloned.detail = p1.detail or {}
-		cloned.endTime = p1.endTime or 0
-		cloned.dispatchTimestamp = p1.dispatchTimestamp
+	if type == UIStateActions.ToggleNotificationDialog and not var4 then
+		cloned.isShown = p2.isShown
+		cloned.treatmentType = p2.treatmentType
+		cloned.detail = p2.detail or {}
+		cloned.endTime = p2.endTime or 0
+		cloned.dispatchTimestamp = p2.dispatchTimestamp
 		
 		return cloned
-	elseif var7_1 then
-		print("Chat intervention UI treatment rate limited: ", p1.treatmentType)
+	elseif var4 then
+		print("Chat intervention UI treatment rate limited: ", p2.treatmentType)
 	end
-	return p0
+	return p1
 end

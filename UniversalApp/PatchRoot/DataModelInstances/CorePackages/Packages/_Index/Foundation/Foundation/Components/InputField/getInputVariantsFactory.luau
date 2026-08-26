@@ -8,13 +8,13 @@ local radiusModule = require(foundation.Enums.Radius)
 local _ = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 
-return function(p0)
+return function(p1)
 	-- upvalues: inputSizeModule (ref), inputVariantModule (ref), dashModule (ref), radiusModule (ref)
 	return {
 		common = {
 			container = {
-				strokeStyle = p0.Color.Stroke.Emphasis,
-				strokeThickness = p0.Stroke.Standard
+				strokeStyle = p1.Color.Stroke.Emphasis,
+				strokeThickness = p1.Stroke.Standard
 			}
 		},
 		sizes = {
@@ -27,7 +27,7 @@ return function(p0)
 			[inputVariantModule.Standard] = {},
 			[inputVariantModule.Contrast] = {
 				container = {
-					bgStyle = p0.Color.Shift.Shift_200,
+					bgStyle = p1.Color.Shift.Shift_200,
 					strokeStyle = dashModule.None
 				}
 			},
@@ -49,20 +49,20 @@ return function(p0)
 			[radiusModule.Large] = { container = { tag = { ["radius-large"] = true } } }
 		},
 		errorState = {
-			[true] = { container = { strokeStyle = p0.Color.System.Alert } },
+			[true] = { container = { strokeStyle = p1.Color.System.Alert } },
 			[false] = {}
 		},
 		focusedState = {
 			[true] = {
 				container = {
-					strokeStyle = p0.Color.System.Emphasis,
-					strokeThickness = p0.Stroke.Standard * 2
+					strokeStyle = p1.Color.System.Emphasis,
+					strokeThickness = p1.Stroke.Standard * 2
 				}
 			},
 			[false] = {}
 		},
 		hoverState = {
-			[true] = { container = { strokeThickness = p0.Stroke.Standard * 2 } },
+			[true] = { container = { strokeThickness = p1.Stroke.Standard * 2 } },
 			[false] = {}
 		}
 	}

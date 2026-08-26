@@ -11,11 +11,11 @@ local iconSize = enums.IconSize
 local iconVariant = enums.IconVariant
 local fFlagAddFriendsIgnoreAllFoundationMenu = require(parent.SharedFlags).FFlagAddFriendsIgnoreAllFoundationMenu
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), text (ref), enums (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), iconButton (ref), fFlagAddFriendsIgnoreAllFoundationMenu (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col gap-xxsmall align-x-left",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		HeaderRow = reactModule.createElement(view, {
 			tag = "size-full-0 auto-y row align-y-center flex-x-between padding-right-xsmall",
@@ -24,33 +24,33 @@ return function(p0)
 			TitleRow = reactModule.createElement(view, {
 				tag = "auto-xy row align-y-center gap-xxsmall",
 				LayoutOrder = 1,
-				onActivated = if p0.onTitleActivated then p0.onTitleActivated else nil
+				onActivated = if p1.onTitleActivated then p1.onTitleActivated else nil
 			}, {
-				Title = p0.title and reactModule.createElement(text, {
+				Title = p1.title and reactModule.createElement(text, {
 					tag = "text-title-large auto-xy text-align-x-left content-emphasis",
 					LayoutOrder = 1,
-					Text = p0.title,
+					Text = p1.title,
 					stateLayer = { affordance = enums.StateLayerAffordance.None }
 				}),
-				Chevron = p0.hasChevron and reactModule.createElement(icon, {
+				Chevron = p1.hasChevron and reactModule.createElement(icon, {
 					LayoutOrder = 2,
 					name = iconName.ChevronLargeRight,
 					size = iconSize.Small,
 					variant = iconVariant.Filled
 				})
 			}),
-			TrailingIcon = p0.trailingIcon and (p0.onTrailingIconActivated and reactModule.createElement(iconButton, {
+			TrailingIcon = p1.trailingIcon and (p1.onTrailingIconActivated and reactModule.createElement(iconButton, {
 				LayoutOrder = 2,
-				icon = p0.trailingIcon,
+				icon = p1.trailingIcon,
 				size = iconSize.Small,
-				onActivated = p0.onTrailingIconActivated,
-				ref = if fFlagAddFriendsIgnoreAllFoundationMenu then p0.trailingIconRef else nil
+				onActivated = p1.onTrailingIconActivated,
+				ref = if fFlagAddFriendsIgnoreAllFoundationMenu then p1.trailingIconRef else nil
 			}))
 		}),
-		Subtitle = p0.subtitle and reactModule.createElement(text, {
+		Subtitle = p1.subtitle and reactModule.createElement(text, {
 			tag = "text-body-medium auto-xy text-align-x-left content-default text-wrap",
 			LayoutOrder = 2,
-			Text = p0.subtitle
+			Text = p1.subtitle
 		})
 	})
 end

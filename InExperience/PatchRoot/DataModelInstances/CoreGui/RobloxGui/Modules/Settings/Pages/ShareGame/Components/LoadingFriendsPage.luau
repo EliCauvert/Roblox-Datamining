@@ -4,17 +4,17 @@ local loadingBar = require(corePackagesService.Workspace.Packages.AppBlox).Loadi
 local roactModule = require(corePackagesService.Packages.Roact)
 local loadingFriendsPage = roactModule.PureComponent:extend("LoadingFriendsPage")
 
-function loadingFriendsPage.render(p0)
+function loadingFriendsPage.render(p1)
 	-- upvalues: roactModule (ref), loadingBar (ref)
-	local layoutOrder = p0.props.LayoutOrder
-	local zIndex = p0.props.ZIndex
-	local var3 = 0
+	local layoutOrder = p1.props.LayoutOrder
+	local zIndex = p1.props.ZIndex
+	local var1 = 0
 	
 	local function _()
-		-- upvalues: var3 (write)
-		var3 += 1
+		-- upvalues: var1 (write)
+		var1 += 1
 		
-		return var3
+		return var1
 	end
 	
 	return roactModule.createElement("Frame", {
@@ -32,7 +32,7 @@ function loadingFriendsPage.render(p0)
 		loadingIndicator = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 70, 0, 16),
-			LayoutOrder = var3 + 1,
+			LayoutOrder = var1 + 1,
 			ZIndex = zIndex
 		}, {
 			loadingBar = roactModule.createElement(loadingBar, { ZIndex = zIndex })

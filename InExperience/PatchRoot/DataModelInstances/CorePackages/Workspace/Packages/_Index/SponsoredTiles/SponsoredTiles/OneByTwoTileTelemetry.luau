@@ -25,9 +25,9 @@ return {
 		-- upvalues: telemetryService (ref), t_1 (ref)
 		telemetryService:LogCounter(t_1, {}, 1)
 	end,
-	logOneByTwoTileCtaActivated = function(p0)
+	logOneByTwoTileCtaActivated = function(p1)
 		-- upvalues: telemetryService (ref), t_2 (ref)
-		telemetryService:LogCounter(t_2, { customFields = { CtaType = p0 } }, 1)
+		telemetryService:LogCounter(t_2, { customFields = { CtaType = p1 } }, 1)
 	end,
 	logOneByTwoTileGameJoinInitiated = function()
 		-- upvalues: telemetryService (ref), t_3 (ref)

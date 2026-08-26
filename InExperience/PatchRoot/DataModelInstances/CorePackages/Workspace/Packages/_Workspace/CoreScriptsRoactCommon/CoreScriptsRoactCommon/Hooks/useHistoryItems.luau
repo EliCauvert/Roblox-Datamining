@@ -8,11 +8,11 @@ local default = require(coreScriptsRoactCommon.Traversal.LocalTraversalHistory).
 local getGameInfoStore = dataHydrationModule.Game.getGameInfoStore
 local getVotesStore = dataHydrationModule.Game.getVotesStore
 
-local function getNMostRecentUniqueUniverseIds(p0, _)
+local function getNMostRecentUniqueUniverseIds(p1, _)
 	local t = {}
 	local t_1 = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		if not t_1[v] then
 			t_1[v] = true
 			table.insert(t, v)
@@ -21,42 +21,42 @@ local function getNMostRecentUniqueUniverseIds(p0, _)
 	return t
 end
 
-local function _(p1, p2)
+local function _(p2, p3)
 	return {
-		name = p1.name,
-		placeId = tonumber(p1.rootPlaceId),
-		universeId = tonumber(p1.universeId),
-		rating = p2.rating
+		name = p2.name,
+		placeId = tonumber(p2.rootPlaceId),
+		universeId = tonumber(p2.universeId),
+		rating = p3.rating
 	}
 end
 
-return function(p3)
+return function(p2)
 	-- upvalues: reactModule (ref), signalsModule (ref), default (ref), getNMostRecentUniqueUniverseIds (ref), getGameInfoStore (ref), getVotesStore (ref), signalsReactModule (ref)
-	p3 = p3 or 2
+	p2 = p2 or 2
 	
 	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), default (copy), p3 (ref), getNMostRecentUniqueUniverseIds (copy), getGameInfoStore (copy), getVotesStore (copy)
-		return signalsModule.createComputed(function(p4)
-			-- upvalues: default (copy), p3 (copy), getNMostRecentUniqueUniverseIds (copy), getGameInfoStore (copy), getVotesStore (copy)
+		-- upvalues: signalsModule (copy), default (copy), p2 (ref), getNMostRecentUniqueUniverseIds (copy), getGameInfoStore (copy), getVotesStore (copy)
+		return signalsModule.createComputed(function(p3)
+			-- upvalues: default (copy), p2 (copy), getNMostRecentUniqueUniverseIds (copy), getGameInfoStore (copy), getVotesStore (copy)
 			local t = {}
-			local var10 = getNMostRecentUniqueUniverseIds(default:getUniverseHistorySignal(p3)(p4), p3)
-			local andFetchGameInfos = getGameInfoStore(p4).getAndFetchGameInfos(var10)
-			local andFetchVotes = getVotesStore(p4).getAndFetchVotes(var10)
+			local var1 = getNMostRecentUniqueUniverseIds(default:getUniverseHistorySignal(p2)(p3), p2)
+			local andFetchGameInfos = getGameInfoStore(p3).getAndFetchGameInfos(var1)
+			local andFetchVotes = getVotesStore(p3).getAndFetchVotes(var1)
 			
-			for i, v in var10 do
-				local var13 = if andFetchGameInfos[v] and andFetchGameInfos[v].data then andFetchGameInfos[v].data(p4) else nil
-				local var14 = if andFetchVotes[v] and andFetchVotes[v].data then andFetchVotes[v].data(p4) else nil
+			for i, v in var1 do
+				local var2 = if andFetchGameInfos[v] and andFetchGameInfos[v].data then andFetchGameInfos[v].data(p3) else nil
+				local var3 = if andFetchVotes[v] and andFetchVotes[v].data then andFetchVotes[v].data(p3) else nil
 				
-				if var13 and var14 then
+				if var2 and var3 then
 					table.insert(t, {
-						name = var13.name,
-						placeId = tonumber(var13.rootPlaceId),
-						universeId = tonumber(var13.universeId),
-						rating = var14.rating
+						name = var2.name,
+						placeId = tonumber(var2.rootPlaceId),
+						universeId = tonumber(var2.universeId),
+						rating = var3.rating
 					})
 				end
 			end
 			return t
 		end)
-	end, { p3, getGameInfoStore, getVotesStore }))
+	end, { p2, getGameInfoStore, getVotesStore }))
 end

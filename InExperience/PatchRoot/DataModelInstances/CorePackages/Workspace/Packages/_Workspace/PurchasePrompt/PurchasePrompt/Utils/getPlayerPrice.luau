@@ -1,5 +1,5 @@
 ﻿local _ = script.Parent.Parent
 
-return function(p0, p1, p2)
-	return if p2 and p2 > 0 then p2 elseif p1 then if p0.premiumPrice == nil then p0.price else p0.premiumPrice else p0.price
+return function(p1, p2, p3)
+	return if p3 and p3 > 0 then p3 elseif p2 then if p1.premiumPrice == nil then p1.price else p1.premiumPrice else p1.price
 end

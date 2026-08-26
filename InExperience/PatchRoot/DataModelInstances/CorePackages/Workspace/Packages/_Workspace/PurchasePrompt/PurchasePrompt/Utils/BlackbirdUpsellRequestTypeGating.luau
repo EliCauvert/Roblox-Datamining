@@ -1,8 +1,8 @@
 ﻿local requestTypeModule = require(script:FindFirstAncestor("PurchasePrompt").Enums.RequestType)
 local blackbirdUpsellHiddenRequestTypes2 = game:DefineFastString("BlackbirdUpsellHiddenRequestTypes2", "")
 
-local function _(p0)
-	return p0:gsub("^%s+", ""):gsub("%s+$", "")
+local function _(p1)
+	return p1:gsub("^%s+", ""):gsub("%s+$", "")
 end
 
 local function matchesHiddenRequestTypeList(p1, p2)

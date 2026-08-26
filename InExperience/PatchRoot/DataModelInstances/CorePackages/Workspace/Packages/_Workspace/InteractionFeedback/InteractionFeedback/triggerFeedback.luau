@@ -8,30 +8,30 @@ local triggerHapticModule = require(script.Parent.triggerHaptic)
 soundManager.init()
 local fFlagLuaAppHapticTriggeredTelemetry = require(parent.SharedFlags).FFlagLuaAppHapticTriggeredTelemetry
 
-return function(p0, p1, p2, p3, p4, p5, p6)
+return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: sounds (ref), soundManager (ref), soundGroups (ref), triggerHapticModule (ref), fFlagLuaAppHapticTriggeredTelemetry (ref)
-	if not p2 then
+	if not p3 then
 		error("No config table was provided to InteractionFeedbackManager. Something is wrong.")
 	end
-	local var2 = p2[p0]
+	local var1 = p3[p1]
+	
+	if not var1 then return end
+	local var2 = var1[p2]
 	
 	if not var2 then return end
-	local var3 = var2[p1]
-	
-	if not var3 then return end
-	local sound = var3.Sound
+	local sound = var2.Sound
 	
 	if sound then
-		local var4 = sounds[sound]
+		local var3 = sounds[sound]
 		
-		if not var4 then
-			error("Sound " .. sound .. " not found in SoundManager given contextKey: " .. p0 .. " and interactionType: " .. tostring(p1) .. ". Please check the Sounds.lua file.")
+		if not var3 then
+			error("Sound " .. sound .. " not found in SoundManager given contextKey: " .. p0 .. " and interactionType: " .. tostring(p2) .. ". Please check the Sounds.lua file.")
 		end
-		soundManager:PlaySound(var4.Name, {}, soundGroups.AppBackground)
+		soundManager:PlaySound(var3.Name, {}, soundGroups.AppBackground)
 	end
-	local haptic = var3.Haptic
+	local haptic = var2.Haptic
 	
 	if haptic then
-		triggerHapticModule(haptic, p3, p4, if fFlagLuaAppHapticTriggeredTelemetry then p0 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p1 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p5 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p6 else nil)
+		triggerHapticModule(haptic, p4, p5, if fFlagLuaAppHapticTriggeredTelemetry then p1 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p2 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p6 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p7 else nil)
 	end
 end

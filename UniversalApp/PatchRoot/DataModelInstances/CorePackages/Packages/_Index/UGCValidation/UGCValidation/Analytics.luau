@@ -294,14 +294,14 @@ function t.reportScriptTimes(p1)
 	if p1.isServer and not runService:IsStudio() and p1.scriptTimes then
 		assert(t.metadata, "Metadata is never nil")
 		local entrypoint = t.metadata.entrypoint
-		local var1 = "FullBody"
+		local var2 = "FullBody"
 		
 		if p1.assetTypeEnum then
-			var1 = p1.assetTypeEnum.Name
+			var2 = p1.assetTypeEnum.Name
 		elseif entrypoint and type(entrypoint) == "string" and #entrypoint > 0 then
-			var1 = entrypoint
+			var2 = entrypoint
 		end
-		UGCValidationService:ReportUGCValidationTelemetry(var1, p1.scriptTimes)
+		UGCValidationService:ReportUGCValidationTelemetry(var2, p1.scriptTimes)
 	end
 end
 

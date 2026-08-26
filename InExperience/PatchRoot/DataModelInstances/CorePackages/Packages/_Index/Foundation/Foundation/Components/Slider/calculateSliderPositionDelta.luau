@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	return (p0 - p1).X / p2
+﻿return function(p1, p2, p3)
+	return (p1 - p2).X / p3
 end

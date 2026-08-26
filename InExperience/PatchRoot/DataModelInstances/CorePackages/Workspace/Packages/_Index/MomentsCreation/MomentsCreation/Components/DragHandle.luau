@@ -4,18 +4,18 @@ local reactModule = require(parent.React)
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref)
-	local var2 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(view, {
 		tag = "size-300-1000 radius-medium bg-system-contrast",
-		AnchorPoint = p0.anchorPoint,
-		Position = p0.position,
+		AnchorPoint = p1.anchorPoint,
+		Position = p1.position,
 		stroke = {
-			Color = var2.Color.System.Contrast.Color3,
-			Transparency = var2.Color.System.Contrast.Transparency,
-			Thickness = var2.Stroke.Thicker
+			Color = var1.Color.System.Contrast.Color3,
+			Transparency = var1.Color.System.Contrast.Transparency,
+			Thickness = var1.Stroke.Thicker
 		}
 	}, {
 		Line = reactModule.createElement(view, {
@@ -24,16 +24,16 @@ return function(p0)
 		}),
 		Box = reactModule.createElement(view, {
 			tag = "anchor-center-center size-100-1000 bg-system-contrast",
-			Position = if p0.isFlipped then UDim2.new(0, var2.Size.Size_50, 0.5, 0) else UDim2.new(1, -var2.Size.Size_50, 0.5, 0),
+			Position = if p1.isFlipped then UDim2.new(0, var1.Size.Size_50, 0.5, 0) else UDim2.new(1, -var1.Size.Size_50, 0.5, 0),
 			stroke = {
-				Color = var2.Color.System.Contrast.Color3,
-				Transparency = var2.Color.System.Contrast.Transparency,
-				Thickness = var2.Stroke.Thicker
+				Color = var1.Color.System.Contrast.Color3,
+				Transparency = var1.Color.System.Contrast.Transparency,
+				Thickness = var1.Stroke.Thicker
 			}
 		}),
 		DragDetector = reactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
-			ref = p0.dragDetectorRef,
+			ref = p1.dragDetectorRef,
 			ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale
 		})
 	})

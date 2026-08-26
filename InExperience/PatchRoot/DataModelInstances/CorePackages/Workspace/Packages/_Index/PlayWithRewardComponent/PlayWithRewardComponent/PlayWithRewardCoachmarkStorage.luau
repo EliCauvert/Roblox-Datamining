@@ -7,8 +7,8 @@ local playWithRewardCoachmarkWindowResets = game:DefineFastFlag("PlayWithRewardC
 local playWithRewardCoachmarkMaxImpressions = game:DefineFastInt("PlayWithRewardCoachmarkMaxImpressions", 3)
 local playWithRewardCoachmarkMaxImpressions2 = game:DefineFastInt("PlayWithRewardCoachmarkMaxImpressions2", 3)
 local playWithRewardCoachmarkStorageKeyEngineFeature = game:GetEngineFeature("PlayWithRewardCoachmarkStorageKey")
-local var7 = game:DefineFastInt("PlayWithRewardCoachmarkWindowDays", 30) * 86400
-local var8 = tModule.interface({
+local var1 = game:DefineFastInt("PlayWithRewardCoachmarkWindowDays", 30) * 86400
+local var2 = tModule.interface({
 	windowStartTime = tModule.number,
 	impressionCount = tModule.number,
 	isDismissed = tModule.boolean
@@ -22,9 +22,9 @@ local function _()
 	}
 end
 
-local _ = function(p0)
-	-- upvalues: var8 (ref)
-	return if var8(p0) then p0 else {
+local _ = function(p1)
+	-- upvalues: var2 (ref)
+	return if var2(p1) then p1 else {
 		windowStartTime = 0,
 		impressionCount = 0,
 		isDismissed = false
@@ -68,40 +68,40 @@ local function writeStateLookup(p1)
 	end) else false
 end
 
-local _ = function(p2, p3)
-	-- upvalues: readStateLookup (ref), var8 (ref), writeStateLookup (ref)
-	local var11 = readStateLookup()
+local _ = function(p1, p2)
+	-- upvalues: readStateLookup (ref), var2 (ref), writeStateLookup (ref)
+	local var3 = readStateLookup()
 	
-	if var11 == nil then
+	if var3 == nil then
 		return false
 	end
-	local var12 = tostring(p2)
-	local var13 = var11[var12]
-	local var14 = p3(if not var8(var13) then {
+	local var4 = tostring(p1)
+	local var5 = var3[var4]
+	local var6 = p2(if not var2(var5) then {
 		windowStartTime = 0,
 		impressionCount = 0,
 		isDismissed = false
-	} else var13)
+	} else var5)
 	
-	if var14 == nil then
+	if var6 == nil then
 		return false
 	end
-	var11[var12] = var14
+	var3[var4] = var6
 	
-	return writeStateLookup(var11)
+	return writeStateLookup(var3)
 end
 
-local _ = function(p4, p5)
-	-- upvalues: var7 (ref)
-	return p4.windowStartTime > 0 and var7 <= p5 - p4.windowStartTime
+local _ = function(p1, p2)
+	-- upvalues: var1 (ref)
+	return p1.windowStartTime > 0 and var1 <= p2 - p1.windowStartTime
 end
 
 return {
-	consumeImpressionIfEligible = function(p6)
-		-- upvalues: fFlagPlayWithRewardCoachmarkOverlayFix (ref), playWithRewardCoachmarkMaxImpressions2 (ref), playWithRewardCoachmarkMaxImpressions (ref), playWithRewardCoachmarkStorageKeyEngineFeature (ref), var7 (ref), playWithRewardCoachmarkWindowResets (ref), readStateLookup (ref), var8 (ref), writeStateLookup (ref)
-		local var15 = if fFlagPlayWithRewardCoachmarkOverlayFix then playWithRewardCoachmarkMaxImpressions2 else playWithRewardCoachmarkMaxImpressions
+	consumeImpressionIfEligible = function(p1)
+		-- upvalues: fFlagPlayWithRewardCoachmarkOverlayFix (ref), playWithRewardCoachmarkMaxImpressions2 (ref), playWithRewardCoachmarkMaxImpressions (ref), playWithRewardCoachmarkStorageKeyEngineFeature (ref), var1 (ref), playWithRewardCoachmarkWindowResets (ref), readStateLookup (ref), var2 (ref), writeStateLookup (ref)
+		local var3 = if fFlagPlayWithRewardCoachmarkOverlayFix then playWithRewardCoachmarkMaxImpressions2 else playWithRewardCoachmarkMaxImpressions
 		
-		if not playWithRewardCoachmarkStorageKeyEngineFeature or var15 <= 0 or var7 <= 0 then
+		if not playWithRewardCoachmarkStorageKeyEngineFeature or var3 <= 0 or var1 <= 0 then
 			return false
 		end
 		local timestamp = os.time()
@@ -111,84 +111,84 @@ return {
 			windowStartTime = timestamp
 		}
 		
-		local _ = function(p7)
-			-- upvalues: t (ref), timestamp (ref), var7 (copy), playWithRewardCoachmarkWindowResets (copy), var15 (ref)
-			if p7.windowStartTime == 0 then
+		local _ = function(p2)
+			-- upvalues: t (ref), timestamp (ref), var1 (copy), playWithRewardCoachmarkWindowResets (copy), var3 (ref)
+			if p2.windowStartTime == 0 then
 				return t
-			elseif p7.windowStartTime > 0 and var7 <= timestamp - p7.windowStartTime then
+			elseif p2.windowStartTime > 0 and var1 <= timestamp - p2.windowStartTime then
 				return if playWithRewardCoachmarkWindowResets then t else nil
-			elseif p7.isDismissed or var15 <= p7.impressionCount then
+			elseif p2.isDismissed or var3 <= p2.impressionCount then
 				return nil
 			end
-			p7.impressionCount += 1
+			p2.impressionCount += 1
 			
-			return p7
+			return p2
 		end
 		
-		local var18 = readStateLookup()
+		local var4 = readStateLookup()
 		
-		if var18 == nil then
+		if var4 == nil then
 			return false
 		end
-		local var22
-		local var19 = tostring(p6)
-		local var20 = var18[var19]
-		local var21 = if not var8(var20) then {
+		local var5
+		local var6 = tostring(p1)
+		local var7 = var4[var6]
+		local var8 = if not var2(var7) then {
 			windowStartTime = 0,
 			impressionCount = 0,
 			isDismissed = false
-		} else var20
+		} else var7
 		
-		if var21.windowStartTime == 0 then
-			var22 = t
-		elseif var21.windowStartTime > 0 and var7 <= timestamp - var21.windowStartTime then
-			var22 = if playWithRewardCoachmarkWindowResets then t else nil
-		elseif var21.isDismissed or var15 <= var21.impressionCount then
-			var22 = nil
+		if var8.windowStartTime == 0 then
+			var5 = t
+		elseif var8.windowStartTime > 0 and var1 <= timestamp - var8.windowStartTime then
+			var5 = if playWithRewardCoachmarkWindowResets then t else nil
+		elseif var8.isDismissed or var3 <= var8.impressionCount then
+			var5 = nil
 		else
-			var21.impressionCount += 1
-			var22 = var21
+			var8.impressionCount += 1
+			var5 = var8
 		end
-		if var22 == nil then
+		if var5 == nil then
 			return false
 		end
-		var18[var19] = var22
+		var4[var6] = var5
 		
-		return writeStateLookup(var18)
+		return writeStateLookup(var4)
 	end,
-	dismissCurrentWindow = function(p8)
-		-- upvalues: readStateLookup (ref), var8 (ref), writeStateLookup (ref)
-		local _ = function(p9)
-			if p9.windowStartTime == 0 or p9.isDismissed then
+	dismissCurrentWindow = function(p1)
+		-- upvalues: readStateLookup (ref), var2 (ref), writeStateLookup (ref)
+		local _ = function(p2)
+			if p2.windowStartTime == 0 or p2.isDismissed then
 				return nil
 			end
-			p9.isDismissed = true
+			p2.isDismissed = true
 			
-			return p9
+			return p2
 		end
 		
-		local var23 = readStateLookup()
+		local var3 = readStateLookup()
 		
-		if var23 == nil then return end
-		local var27
-		local var24 = tostring(p8)
-		local var25 = var23[var24]
-		local var26 = if not var8(var25) then {
+		if var3 == nil then return end
+		local var4
+		local var5 = tostring(p1)
+		local var6 = var3[var5]
+		local var7 = if not var2(var6) then {
 			windowStartTime = 0,
 			impressionCount = 0,
 			isDismissed = false
-		} else var25
+		} else var6
 		
-		if var26.windowStartTime == 0 or var26.isDismissed then
-			var27 = nil
+		if var7.windowStartTime == 0 or var7.isDismissed then
+			var4 = nil
 		else
-			var26.isDismissed = true
-			var27 = var26
+			var7.isDismissed = true
+			var4 = var7
 		end
-		if var27 == nil then
+		if var4 == nil then
 			return
 		end
-		var23[var24] = var27
-		var26 = writeStateLookup(var23)
+		var3[var5] = var4
+		var7 = writeStateLookup(var3)
 	end
 }

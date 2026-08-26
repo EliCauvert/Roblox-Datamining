@@ -6,80 +6,80 @@ local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatu
 local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatus)
 local _ = require(avatarExperienceInspectAndBuy.Types)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
-local var3 = if fFlagSocialEnableProfileInspectAndBuy then require(avatarExperienceInspectAndBuy.Utils.getPriceStatusInShop) else nil
+local var1 = if fFlagSocialEnableProfileInspectAndBuy then require(avatarExperienceInspectAndBuy.Utils.getPriceStatusInShop) else nil
 
-return function(p0, p1, p2, p3)
-	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), var3 (ref), getPriceStatusModule (ref), priceStatusModule (ref)
-	local var5
+return function(p1, p2, p3, p4)
+	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), var1 (ref), getPriceStatusModule (ref), priceStatusModule (ref)
+	local var2
 	local t = {}
 	local _ = nil
 	
-	if fFlagSocialEnableProfileInspectAndBuy and p3 and p3.isShopContext then
-		assert(not p3.disableResaleWhenStockIsAvailable, "disableResaleWhenStockIsAvailable is not applicable when isShopContext is true")
-		var5 = var3(p0)
+	if fFlagSocialEnableProfileInspectAndBuy and p4 and p4.isShopContext then
+		assert(not p4.disableResaleWhenStockIsAvailable, "disableResaleWhenStockIsAvailable is not applicable when isShopContext is true")
+		var2 = var1(p1)
 	else
-		var5 = getPriceStatusModule(p0, true)
+		var2 = getPriceStatusModule(p1, true)
 	end
 	local t_1 = {
-		[priceStatusModule.Owned] = { { type = "text", text = p2[priceStatusModule.Owned] } },
-		[priceStatusModule.Free] = { { type = "text", text = p2[priceStatusModule.Free] } },
+		[priceStatusModule.Owned] = { { type = "text", text = p3[priceStatusModule.Owned] } },
+		[priceStatusModule.Free] = { { type = "text", text = p3[priceStatusModule.Free] } },
 		[priceStatusModule.QuantityLimitReached] = {
 			{
 				type = "text",
-				colorStyle = p1.Color.System.Warning,
-				text = p2[priceStatusModule.QuantityLimitReached]
+				colorStyle = p2.Color.System.Warning,
+				text = p3[priceStatusModule.QuantityLimitReached]
 			}
 		},
 		[priceStatusModule.InExperienceOnly] = {
 			{
 				type = "text",
-				text = p2[priceStatusModule.InExperienceOnly],
-				colorStyle = p1.Color.System.Warning
+				text = p3[priceStatusModule.InExperienceOnly],
+				colorStyle = p2.Color.System.Warning
 			}
 		},
-		[priceStatusModule.PurchaseFromRoblox] = { { type = "price", price = p0.priceInRobux } },
-		[priceStatusModule.PurchaseFromResale] = if p0.isOffSale then {
+		[priceStatusModule.PurchaseFromRoblox] = { { type = "price", price = p1.priceInRobux } },
+		[priceStatusModule.PurchaseFromResale] = if p1.isOffSale then {
 			{
 				type = "price",
-				price = if p0.collectibleItemDetails then p0.collectibleItemDetails.lowestResalePrice else 0
+				price = if p1.collectibleItemDetails then p1.collectibleItemDetails.lowestResalePrice else 0
 			}
 		} else {
 			{
 				type = "price",
 				strikethrough = true,
-				price = p0.priceInRobux
+				price = p1.priceInRobux
 			},
 			{
 				type = "price",
-				price = if p0.collectibleItemDetails then p0.collectibleItemDetails.lowestResalePrice else 0,
-				colorStyle = p1.Color.System.Warning
+				price = if p1.collectibleItemDetails then p1.collectibleItemDetails.lowestResalePrice else 0,
+				colorStyle = p2.Color.System.Warning
 			}
 		},
 		[priceStatusModule.SoldOut] = {
 			{
 				type = "text",
-				text = p2[priceStatusModule.SoldOut],
-				colorStyle = p1.Color.System.Warning
+				text = p3[priceStatusModule.SoldOut],
+				colorStyle = p2.Color.System.Warning
 			}
 		},
 		[priceStatusModule.OffSale] = {
 			{
 				type = "text",
-				text = p2[priceStatusModule.OffSale],
-				colorStyle = p1.Color.System.Warning
+				text = p3[priceStatusModule.OffSale],
+				colorStyle = p2.Color.System.Warning
 			}
 		},
 		[priceStatusModule.Unavailable] = {
 			{
 				type = "text",
-				text = p2[priceStatusModule.Unavailable],
-				colorStyle = p1.Color.System.Warning
+				text = p3[priceStatusModule.Unavailable],
+				colorStyle = p2.Color.System.Warning
 			}
 		}
 	}
 	
-	if t_1[var5] then
-		t = t_1[var5]
+	if t_1[var2] then
+		t = t_1[var2]
 	end
 	return t
 end

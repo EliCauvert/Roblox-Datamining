@@ -1,9 +1,9 @@
 ﻿local reactModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.React)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref)
-	local guiObject = p0.guiObject
-	local setSelected = p0.setSelected
+	local guiObject = p1.guiObject
+	local setSelected = p1.setSelected
 	reactModule.useEffect(function()
 		-- upvalues: guiObject (ref), setSelected (ref)
 		local t = {}

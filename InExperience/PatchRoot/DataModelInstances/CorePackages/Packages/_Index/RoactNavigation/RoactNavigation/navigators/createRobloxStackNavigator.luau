@@ -3,7 +3,7 @@ local createNavigatorModule = require(script.Parent.createNavigator)
 local stackRouterModule = require(parent.routers.StackRouter)
 local stackViewModule = require(parent.views.RobloxStackView.StackView)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: stackRouterModule (ref), createNavigatorModule (ref), stackViewModule (ref)
-	return createNavigatorModule(stackViewModule, stackRouterModule(p0, p1), p1 or {})
+	return createNavigatorModule(stackViewModule, stackRouterModule(p1, p2), p2 or {})
 end

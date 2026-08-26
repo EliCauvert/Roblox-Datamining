@@ -19,16 +19,16 @@ return roduxModule.createReducer({
 	KeyboardKeyCode = configModule.ChatInputBarDefaultFocusKeyCode,
 	AutocompleteEnabled = configModule.ChatInputBarDefaultAutocompleteEnabled
 }, {
-	[require(actions.ConfigurationObjectsLoaded).name] = function(p0, p1)
+	[require(actions.ConfigurationObjectsLoaded).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, p1.chatInputBarSettings)
+		return dictionary.join(p1, p2.chatInputBarSettings)
 	end,
-	[require(actions.ChatInputBarSettingsChanged).name] = function(p2, p3)
+	[require(actions.ChatInputBarSettingsChanged).name] = function(p1, p2)
 		-- upvalues: none (ref), dictionary (ref)
-		local _ = p3.value
+		local _ = p2.value
 		
-		return if p2[p3.property] == nil and p3.property ~= "TextBox" then p2 else dictionary.join(p2, {
-			[p3.property] = if p3.property == "TextBox" and p3.value == nil then none else p3.value
+		return if p1[p2.property] == nil and p2.property ~= "TextBox" then p1 else dictionary.join(p1, {
+			[p2.property] = if p2.property == "TextBox" and p2.value == nil then none else p2.value
 		})
 	end
 })

@@ -9,7 +9,7 @@ local setAgeRecommendationModule = require(gameDetailRodux.AgeRecommendations.Se
 local setAgeRecommendationHeadersModule = require(gameDetailRodux.AgeRecommendations.SetAgeRecommendationHeaders)
 local getAgeRecommendationModule = require(gameDetailRodux.AgeRecommendations.GetAgeRecommendation)
 
-local function _(p0)
+local function _(p1)
 	return "luaapp.experience_guidelines.get-age-guidelines" .. p0
 end
 
@@ -27,27 +27,27 @@ return {
 					
 					return promiseModule.reject({ HttpError = Enum.HttpError.OK })
 				end
-				local var6, var7 = ageRecommendationDetailsModule.fromJsonData(responseBody.ageRecommendationDetails):unwrap()
+				local var1, var2 = ageRecommendationDetailsModule.fromJsonData(responseBody.ageRecommendationDetails):unwrap()
 				
-				if var6 == false then
+				if var1 == false then
 					logging.warn("Failed to parse AgeRecommendationDetails for `" .. p2 .. "`")
 					
 					return promiseModule.reject(p4)
 				end
-				p3:dispatch(setAgeRecommendationModule(p2, var7))
+				p3:dispatch(setAgeRecommendationModule(p2, var2))
 				p3:dispatch(setAgeRecommendationHeadersModule(responseBody.headerDisplayName, responseBody.headerDisplayNameShort))
 				
 				return promiseModule.resolve(p4)
-			end, function(p5)
+			end, function(p4)
 				-- upvalues: p3 (ref), setNetworkingErrorToast (copy), promiseModule (copy)
-				p3:dispatch(setNetworkingErrorToast(p5))
+				p3:dispatch(setNetworkingErrorToast(p4))
 				
-				return promiseModule.reject(p5)
+				return promiseModule.reject(p4)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p6, p7)
+	GetFetchingStatus = function(p1, p2)
 		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p6, "luaapp.experience_guidelines.get-age-guidelines" .. p7)
+		return performFetch.GetStatus(p1, "luaapp.experience_guidelines.get-age-guidelines" .. p7)
 	end
 }

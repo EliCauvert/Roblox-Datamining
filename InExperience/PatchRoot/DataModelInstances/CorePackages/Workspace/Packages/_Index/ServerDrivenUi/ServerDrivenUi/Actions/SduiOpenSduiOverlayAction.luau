@@ -5,15 +5,15 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
 local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(p0, _, p1)
+return function(p1, _, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), setCentralOverlay (ref), centralOverlayType (ref)
-	local var1 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.OpenSduiOverlay
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
@@ -22,23 +22,23 @@ return function(p0, _, p1)
 	local identifier = var1.identifier
 	
 	if not configKey then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing configKey in action params",
 			name = sduiActionType.OpenSduiOverlay
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	elseif identifier then
-		p1.dependencies.dispatch(setCentralOverlay(centralOverlayType.SduiOverlay, {
+		p2.dependencies.dispatch(setCentralOverlay(centralOverlayType.SduiOverlay, {
 			configKey = configKey,
 			identifier = identifier,
-			appPage = p1.appPage
+			appPage = p2.appPage
 		}))
 		
 		return
 	end
-	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		message = "Missing identifier in action params",
 		name = sduiActionType.OpenSduiOverlay
-	}, p1.appPage)
+	}, p2.appPage)
 end

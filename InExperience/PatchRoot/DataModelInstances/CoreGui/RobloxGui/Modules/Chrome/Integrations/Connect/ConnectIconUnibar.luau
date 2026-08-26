@@ -9,7 +9,7 @@ local fIntSideSheetVariant = require(corePackagesService.Workspace.Packages.Shar
 local fFlagEnableSideSheet = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableSideSheet
 local connectIconDropdownModule = require(script.Parent.ConnectIconDropdown)
 local universalAppPolicyModule = require(corePackagesService.Workspace.Packages.UniversalAppPolicy)
-local var8 = require(corePackagesService.Packages.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
+local var1 = require(corePackagesService.Packages.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
 
 local function _()
 	-- upvalues: universalAppPolicyModule (ref)
@@ -21,54 +21,54 @@ local _ = function()
 	return getFFlagIsSquadEnabled() and (universalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty() and isConnectDropdownEnabledModule())
 end
 
-local var9 = nil
-local var10 = nil
-local var11 = fFlagEnableSideSheet and (fIntSideSheetVariant == 0 and connectIconDropdownModule ~= nil)
+local var2 = nil
+local var3 = nil
+local var4 = fFlagEnableSideSheet and (fIntSideSheetVariant == 0 and connectIconDropdownModule ~= nil)
 
-local function updateConnectIntegration(p0)
-	-- upvalues: var9 (write), registerConnectIntegrationModule (ref), serviceModule (ref), var10 (write), inExperienceAppChatModalModule (ref), var11 (ref), connectIconDropdownModule (ref)
-	if not var9 then
-		var9 = registerConnectIntegrationModule("connect_unibar", if p0 then serviceModule.AvailabilitySignal.Pinned else serviceModule.AvailabilitySignal.Unavailable)
+local function updateConnectIntegration(p1)
+	-- upvalues: var2 (write), registerConnectIntegrationModule (ref), serviceModule (ref), var3 (write), inExperienceAppChatModalModule (ref), var4 (ref), connectIconDropdownModule (ref)
+	if not var2 then
+		var2 = registerConnectIntegrationModule("connect_unibar", if p1 then serviceModule.AvailabilitySignal.Pinned else serviceModule.AvailabilitySignal.Unavailable)
 	end
-	if p0 then
+	if p1 then
 		if inExperienceAppChatModalModule.default.currentSquadId ~= "" then
-			var9.availability:pinned()
+			var2.availability:pinned()
 			
-			if var11 then
+			if var4 then
 				connectIconDropdownModule.availability:unavailable()
 			end
 		end
-		if not var10 then
-			local eventConnection = inExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p1)
-				-- upvalues: var9 (copy), var11 (copy), connectIconDropdownModule (copy)
-				if p1 == "" then
-					var9.availability:unavailable()
+		if not var3 then
+			local eventConnection = inExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p2)
+				-- upvalues: var2 (copy), var4 (copy), connectIconDropdownModule (copy)
+				if p2 == "" then
+					var2.availability:unavailable()
 					
-					if var11 then
+					if var4 then
 						connectIconDropdownModule.availability:available()
 						
 						return
 					end
 				else
-					var9.availability:pinned()
+					var2.availability:pinned()
 					
-					if var11 then
+					if var4 then
 						connectIconDropdownModule.availability:unavailable()
 					end
 				end
 			end)
 			
-			var10 = function()
+			var3 = function()
 				-- upvalues: eventConnection (ref)
 				eventConnection:Disconnect()
 			end
 		end
 	else
-		var9.availability:unavailable()
+		var2.availability:unavailable()
 		
-		if var10 then
-			var10()
-			var10 = nil
+		if var3 then
+			var3()
+			var3 = nil
 			
 			return
 		end
@@ -82,6 +82,6 @@ end
 
 if isConnectUnibarEnabledModule() then
 	updateConnectIntegration(getFFlagIsSquadEnabled() and (universalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty() and isConnectDropdownEnabledModule()))
-	var8.onPolicyChanged(handlePolicyUpdate)
+	var1.onPolicyChanged(handlePolicyUpdate)
 end
-return var9
+return var2

@@ -18,10 +18,10 @@ local t_2 = {
 	[t.ExposureKind.UserLayer] = "LogUserLayerExposure",
 	[t.ExposureKind.Creator] = "LogCreatorLayerExposure"
 }
-local var6 = IXPService
+local var1 = IXPService
 
-local function _(p0)
-	return if type(p0) == "string" then { p0 } else p0
+local function _(p1)
+	return if type(p1) == "string" then { p1 } else p1
 end
 
 local _ = function(p1)
@@ -39,86 +39,86 @@ local _ = function(p1)
 end
 
 local function logExposure(p2, p3)
-	-- upvalues: t (ref), t_2 (ref), var6 (write)
+	-- upvalues: t (ref), t_2 (ref), var1 (write)
 	p3 = p3 or t.ExposureKind.FlagLinked
 	
 	for i, v in p2 do
-		local var9 = t_2[p3]
-		local var10 = if var9 then var6[var9] else nil
+		local var2 = t_2[p3]
+		local var3 = if var2 then var1[var2] else nil
 		
-		if var10 then
-			var10(var6, v)
+		if var3 then
+			var3(var1, v)
 		end
 	end
 end
 
 function t.createExposureHandler(p4, p5)
 	-- upvalues: logExposure (ref)
-	local var11 = if type(p4) == "string" then { p4 } else p4
-	local var12 = if p5 then p5.flags else nil
-	local var13 = if p5 then p5.kind else nil
+	local var4 = if type(p4) == "string" then { p4 } else p4
+	local var5 = if p5 then p5.flags else nil
+	local var6 = if p5 then p5.kind else nil
 	
 	return function()
-		-- upvalues: var12 (ref), logExposure (copy), var11 (ref), var13 (ref)
-		local var15
-		local var14 = var12
+		-- upvalues: var5 (ref), logExposure (copy), var4 (ref), var6 (ref)
+		local var7
+		local var8 = var5
 		
-		if var14 == nil then
-			var15 = true
-		elseif type(var14) == "boolean" then
-			var15 = var14
+		if var8 == nil then
+			var7 = true
+		elseif type(var8) == "boolean" then
+			var7 = var8
 		else
-			for i, v in var14 do
+			for i, v in var8 do
 				if v then
-					var15 = true
+					var7 = true
 				end
 			end
-			var15 = false
+			var7 = false
 		end
-		if var15 then
-			logExposure(var11, var13)
+		if var7 then
+			logExposure(var4, var6)
 		end
 	end
 end
 
 function t.useExposureOnFocus(p6, p7)
 	-- upvalues: useNavigation (ref), reactModule (ref), t (ref), roactNavigationModule (ref)
-	local var16 = useNavigation()
-	local var17 = if p7 then p7.flags else nil
-	local var18 = if p7 then p7.kind else nil
+	local var7 = useNavigation()
+	local var8 = if p7 then p7.flags else nil
+	local var9 = if p7 then p7.kind else nil
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), var17 (ref), t (copy), p6 (ref), var18 (ref), roactNavigationModule (copy)
-		if var16 then
-			local var20
-			local var19 = var17
+		-- upvalues: var7 (ref), var8 (ref), t (copy), p6 (ref), var9 (ref), roactNavigationModule (copy)
+		if var7 then
+			local var10
+			local var11 = var8
 			
-			if var19 == nil then
-				var20 = true
-			elseif type(var19) == "boolean" then
-				var20 = var19
+			if var11 == nil then
+				var10 = true
+			elseif type(var11) == "boolean" then
+				var10 = var11
 			else
-				for i, v in var19 do
+				for i, v in var11 do
 					if v then
-						var20 = true
+						var10 = true
 					end
 				end
-				var20 = false
+				var10 = false
 			end
-			if not var20 then
+			if not var10 then
 				return nil
 			end
-			local var21 = t.createExposureHandler(p6, { flags = var17, kind = var18 })
-			local var22 = var16.addListener(roactNavigationModule.Events.WillFocus, var21)
+			local var12 = t.createExposureHandler(p6, { flags = var8, kind = var9 })
+			local var13 = var7.addListener(roactNavigationModule.Events.WillFocus, var12)
 			
-			if var16.isFocused and var16.isFocused() then
-				var21()
+			if var7.isFocused and var7.isFocused() then
+				var12()
 			end
 			return function()
-				-- upvalues: var22 (ref)
-				var22.remove()
+				-- upvalues: var13 (ref)
+				var13.remove()
 			end
 		end
-	end, { var16, p6, var17, var18 })
+	end, { var7, p6, var8, var9 })
 end
 
 function t.registerExposureOnFocus(p8, p9, p10)
@@ -126,32 +126,32 @@ function t.registerExposureOnFocus(p8, p9, p10)
 	if not p8 then
 		return t_1
 	end
-	local var24
-	local var23 = if p10 then p10.flags else nil
+	local var10
+	local var11 = if p10 then p10.flags else nil
 	
-	if var23 == nil then
-		var24 = true
-	elseif type(var23) == "boolean" then
-		var24 = var23
+	if var11 == nil then
+		var10 = true
+	elseif type(var11) == "boolean" then
+		var10 = var11
 	else
-		for i, v in var23 do
+		for i, v in var11 do
 			if v then
-				var24 = true
+				var10 = true
 			end
 		end
-		var24 = false
+		var10 = false
 	end
-	return if var24 then p8.addListener(roactNavigationModule.Events.WillFocus, t.createExposureHandler(p9, p10)) else t_1
+	return if var10 then p8.addListener(roactNavigationModule.Events.WillFocus, t.createExposureHandler(p9, p10)) else t_1
 end
 
 function t.setMocksForTesting(value)
-	-- upvalues: var6 (write)
-	var6 = value or var6
+	-- upvalues: var1 (write)
+	var1 = value or var1
 end
 
 function t.restoreDefaultsAfterTesting()
-	-- upvalues: var6 (write), IXPService (ref)
-	var6 = IXPService
+	-- upvalues: var1 (write), IXPService (ref)
+	var1 = IXPService
 end
 
 return t

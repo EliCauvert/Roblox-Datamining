@@ -324,7 +324,7 @@ local list_1 = {
 		creator = { name = "MockCreator", hasVerifiedBadge = false }
 	}
 }
-local var4 = (function()
+local var1 = (function()
 	-- upvalues: list (ref), list_1 (ref)
 	local t = {}
 	
@@ -341,21 +341,21 @@ local function _(value)
 	return if value then tonumber(string.match(value, "rbxassetid://(%d+)")) or 0 else 0
 end
 
-local function shopItemToProductInfo(p0)
-	local id = tonumber(p0.id) or 0
-	local creator = p0.creator or { name = "", hasVerifiedBadge = false }
+local function shopItemToProductInfo(p1)
+	local id = tonumber(p1.id) or 0
+	local creator = p1.creator or { name = "", hasVerifiedBadge = false }
 	local t = {
 		IsForSale = true,
-		Name = p0.name,
-		DisplayName = p0.displayName,
-		Description = p0.description or "",
-		PriceInRobux = p0.price or 0,
-		UserBasePriceInRobux = p0.userBasePriceInRobux,
+		Name = p1.name,
+		DisplayName = p1.displayName,
+		Description = p1.description or "",
+		PriceInRobux = p1.price or 0,
+		UserBasePriceInRobux = p1.userBasePriceInRobux,
 		ProductId = id,
 		AssetId = id,
-		Updated = p0.updated
+		Updated = p1.updated
 	}
-	local thumbnail = p0.thumbnail
+	local thumbnail = p1.thumbnail
 	t.IconImageAssetId = if not thumbnail then 0 else tonumber(string.match(thumbnail, "rbxassetid://(%d+)")) or 0
 	t.Creator = {
 		Name = creator.name,
@@ -366,61 +366,61 @@ local function shopItemToProductInfo(p0)
 end
 
 local function resolveRequest(p1)
-	-- upvalues: var4 (ref), shopItemToProductInfo (ref)
-	local var11 = var4[p1.infoType.Name .. ":" .. tostring(p1.id)]
+	-- upvalues: var1 (ref), shopItemToProductInfo (ref)
+	local var2 = var1[p1.infoType.Name .. ":" .. tostring(p1.id)]
 	
-	return if var11 == nil then {
+	return if var2 == nil then {
 		ok = false,
 		request = p1,
 		err = string.format("Mock product info not found for %s id %s", p1.infoType.Name, tostring(p1.id))
 	} else {
 		ok = true,
 		request = p1,
-		value = shopItemToProductInfo(var11)
+		value = shopItemToProductInfo(var2)
 	}
 end
 
-local _ = function(p2)
-	return if p2 == nil then math.random() * 0.5 elseif p2 == 0 then 0 else math.random() * p2
+local _ = function(p1)
+	return if p1 == nil then math.random() * 0.5 elseif p1 == 0 then 0 else math.random() * p1
 end
 
 return {
 	MOCK_PRODUCT_ITEMS_FOR_TESTING = list,
 	MOCK_GAMEPASS_ITEMS_FOR_TESTING = list_1,
-	multiGetProductInfo = function(p3, p4)
+	multiGetProductInfo = function(p1, p2)
 		-- upvalues: promiseModule (ref), resolveRequest (ref)
-		return promiseModule.delay(if p4 ~= nil then 0.5 else p4):andThen(function()
-			-- upvalues: p3 (ref), resolveRequest (copy)
-			local list = table.create(#p3)
+		return promiseModule.delay(if p2 ~= nil then 0.5 else p2):andThen(function()
+			-- upvalues: p1 (ref), resolveRequest (copy)
+			local list = table.create(#p1)
 			
-			for i, v in ipairs(p3) do
+			for i, v in ipairs(p1) do
 				list[i] = resolveRequest(v)
 			end
 			return list
 		end)
 	end,
-	streamMultiGetProductInfo = function(p5, p6, p7)
+	streamMultiGetProductInfo = function(p3, p4, p5)
 		-- upvalues: promiseModule (ref), resolveRequest (ref)
-		local p5Count = #p5
+		local p5Count = #p3
 		
 		if p5Count == 0 then
 			return promiseModule.resolve({})
 		end
 		local list = table.create(p5Count)
-		local var15 = 0
+		local var2 = 0
 		
-		return promiseModule.new(function(p8)
-			-- upvalues: p5 (ref), promiseModule (copy), p7 (ref), resolveRequest (copy), list (ref), p6 (ref), var15 (write), p5Count (ref)
-			for i, v in ipairs(p5) do
-				promiseModule.delay(if p7 ~= nil then math.random() * 0.5 elseif p7 == 0 then 0 else math.random() * p7):andThen(function()
-					-- upvalues: resolveRequest (copy), v (ref), list (copy), i (ref), p6 (copy), var15 (copy), p5Count (copy), p8 (ref)
-					local var16 = resolveRequest(v)
-					list[i] = var16
-					p6.onResult(var16)
-					var15 += 1
+		return promiseModule.new(function(p6)
+			-- upvalues: p3 (ref), promiseModule (copy), p5 (ref), resolveRequest (copy), list (ref), p4 (ref), var2 (write), p5Count (ref)
+			for i, v in ipairs(p3) do
+				promiseModule.delay(if p5 ~= nil then math.random() * 0.5 elseif p5 == 0 then 0 else math.random() * p5):andThen(function()
+					-- upvalues: resolveRequest (copy), v (ref), list (copy), i (ref), p4 (copy), var2 (copy), p5Count (copy), p6 (ref)
+					local var3 = resolveRequest(v)
+					list[i] = var3
+					p4.onResult(var3)
+					var2 += 1
 					
-					if var15 == p5Count then
-						p8(list)
+					if var2 == p5Count then
+						p6(list)
 					end
 				end)
 			end

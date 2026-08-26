@@ -4,14 +4,14 @@ local reactModule = require(parent.React)
 local reactIsModule = require(parent.ReactIs)
 local _ = require(foundation.Components.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), reactIsModule (ref)
-	local var3, var4 = reactModule.useBinding(nil)
+	local var1, var2 = reactModule.useBinding(nil)
 	
-	if reactIsModule.isBinding(p0) then
-		return p0
+	if reactIsModule.isBinding(p1) then
+		return p1
 	end
-	var4(p0)
+	var2(p1)
 	
-	return var3
+	return var1
 end

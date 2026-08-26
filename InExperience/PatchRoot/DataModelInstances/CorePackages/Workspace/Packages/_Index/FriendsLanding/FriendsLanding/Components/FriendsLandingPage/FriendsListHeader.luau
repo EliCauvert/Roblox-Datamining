@@ -6,11 +6,11 @@ local useLocalization = dependenciesModule.Hooks.useLocalization
 local tenFootUiGridCarouselHeader = require(parent.TenFootUiSharedComponents).TenFootUiGridCarouselHeader
 local reactModule = require(parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), tenFootUiGridCarouselHeader (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, {
@@ -23,7 +23,7 @@ return function(p0)
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
 		GridHeader = reactModule.createElement(tenFootUiGridCarouselHeader, {
-			text = `{useLocalization({ friends = "CommonUI.Features.Label.Friends" }).friends} ({tostring(p0.friendCount or 0)})`
+			text = `{useLocalization({ friends = "CommonUI.Features.Label.Friends" }).friends} ({tostring(p1.friendCount or 0)})`
 		})
 	})
 end

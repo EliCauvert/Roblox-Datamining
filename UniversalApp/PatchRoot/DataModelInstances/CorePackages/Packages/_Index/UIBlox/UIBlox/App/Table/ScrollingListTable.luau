@@ -7,13 +7,13 @@ local cryoModule = require(parent_1.Cryo)
 local withStyleModule = require(core.Style.withStyle)
 local t = { selectable = true, size = UDim2.fromScale(1, 1) }
 
-return function(p0)
+return function(p1)
 	-- upvalues: withStyleModule (ref), cryoModule (ref), t (ref), reactModule (ref), virtualizedList (ref)
-	return withStyleModule(function(p1)
-		-- upvalues: cryoModule (copy), t (copy), p0 (ref), reactModule (copy), virtualizedList (copy)
-		local var4 = cryoModule.Dictionary.join(t, p0)
+	return withStyleModule(function(p2)
+		-- upvalues: cryoModule (copy), t (copy), p1 (ref), reactModule (copy), virtualizedList (copy)
+		local var1 = cryoModule.Dictionary.join(t, p1)
 		local t_1 = {}
-		local cells = var4.cells
+		local cells = var1.cells
 		
 		for i, v in ipairs(cells) do
 			local text = "Cell " .. i
@@ -31,16 +31,16 @@ return function(p0)
 					ZIndex = 100,
 					Size = UDim2.new(1, -24, 0, 1),
 					Position = UDim2.new(0, 24, 1, -1),
-					BackgroundColor3 = p1.Theme.Divider.Color,
-					BackgroundTransparency = p1.Theme.Divider.Transparency
+					BackgroundColor3 = p2.Theme.Divider.Color,
+					BackgroundTransparency = p2.Theme.Divider.Transparency
 				}) or nil
 			})
 		end
 		return reactModule.createElement(virtualizedList, {
-			Size = var4.size,
+			Size = var1.size,
 			data = t_1,
-			renderItem = function(p2)
-				return p2.item
+			renderItem = function(p3)
+				return p3.item
 			end,
 			getItemCount = function(_)
 				-- upvalues: cells (ref)
@@ -49,17 +49,17 @@ return function(p0)
 			getItem = function(p3, p4)
 				return p3["Cell " .. tostring(p4)]
 			end,
-			keyExtractor = function(_, p5)
-				return "Cell " .. tostring(p5)
+			keyExtractor = function(_, p3)
+				return "Cell " .. tostring(p3)
 			end,
 			style = {
 				BackgroundTransparency = 1,
 				ScrollBarThickness = 0,
-				AnchorPoint = var4.anchorPoint,
-				Position = var4.position,
-				LayoutOrder = var4.layoutOrder,
-				Name = var4.Name or "ListTable",
-				Selectable = var4.selectable
+				AnchorPoint = var1.anchorPoint,
+				Position = var1.position,
+				LayoutOrder = var1.layoutOrder,
+				Name = var1.Name or "ListTable",
+				Selectable = var1.selectable
 			},
 			contentContainerStyle = { BackgroundTransparency = 1 }
 		})

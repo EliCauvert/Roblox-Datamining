@@ -5,9 +5,9 @@ local signalsReactModule = require(parent.SignalsReact)
 local conversationChannelsModule = require(parent.AppChat.ConversationChannels)
 local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: conversationChannelsModule (ref)
-	return if p0 == conversationChannelsModule.ModerationType.TrustedComms or p0 == conversationChannelsModule.ModerationType.Moderated or (p0 == conversationChannelsModule.ModerationType.Invalid or p0 == conversationChannelsModule.ModerationType.UnknownType) then p0 else nil
+	return if p1 == conversationChannelsModule.ModerationType.TrustedComms or p1 == conversationChannelsModule.ModerationType.Moderated or (p1 == conversationChannelsModule.ModerationType.Invalid or p1 == conversationChannelsModule.ModerationType.UnknownType) then p1 else nil
 end
 
 return function(p1)

@@ -14,24 +14,24 @@ if game:GetEngineFeature("ReportAnythingScreenshot") then
 end
 return function()
 	-- upvalues: safetyService (write), screenshotHookManagerModule (ref), hideModule (ref), getVisibleAvatars (ref), runService (ref), showModule (ref), setIdentifiedAvatarsModule (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: safetyService (copy), screenshotHookManagerModule (copy), hideModule (copy), getVisibleAvatars (copy), runService (copy), showModule (copy), setIdentifiedAvatarsModule (copy)
 		if safetyService == nil then
 			return
 		end
 		coroutine.wrap(function()
-			-- upvalues: screenshotHookManagerModule (copy), p0 (ref), hideModule (copy), safetyService (copy), getVisibleAvatars (copy), runService (copy), showModule (copy), setIdentifiedAvatarsModule (copy)
+			-- upvalues: screenshotHookManagerModule (copy), p1 (ref), hideModule (copy), safetyService (copy), getVisibleAvatars (copy), runService (copy), showModule (copy), setIdentifiedAvatarsModule (copy)
 			screenshotHookManagerModule.doPreScreenshot()
-			p0:dispatch(hideModule())
+			p1:dispatch(hideModule())
 			local _ = safetyService:TakeScreenshot({ registerContent = 1 })
-			local var6, _ = getVisibleAvatars()
+			local var1, _ = getVisibleAvatars()
 			
 			for _ = 1, 61 do
 				runService.RenderStepped:Wait()
 			end
-			p0:dispatch(showModule())
+			p1:dispatch(showModule())
 			screenshotHookManagerModule.doPostScreenshot()
-			p0:dispatch(setIdentifiedAvatarsModule(var6))
+			p1:dispatch(setIdentifiedAvatarsModule(var1))
 		end)()
 	end
 end

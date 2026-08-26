@@ -1,6 +1,6 @@
-﻿return function(p0, p1)
-	for i, v in ipairs(p0) do
-		if p1(v, i) then
+﻿return function(p1, p2)
+	for i, v in ipairs(p1) do
+		if p2(v, i) then
 			return i
 		end
 	end

@@ -7,7 +7,7 @@ local constantsModule = require(parent_1.constants)
 local analyticsServiceModule = require(parent_1.analytics.analyticsService)
 local toastNotificationHelperModule = require(parent_1.utils.toastNotificationHelper)
 
-return function(p0)
+return function(p1)
 	-- upvalues: analyticsServiceModule (ref), constantsModule (ref), toastNotificationHelperModule (ref), reactModule (ref), notificationCardContextModule (ref)
 	local eventStream = analyticsServiceModule.EventStream
 	local t = {
@@ -15,23 +15,23 @@ return function(p0)
 		cardPadding = constantsModule.Padding.DefaultCardPadding
 	}
 	
-	if p0.isCompact then
+	if p1.isCompact then
 		t.thumbnail = constantsModule.CardSizeCompact.thumbnail
 		t.cardPadding = constantsModule.Padding.CompactCardPadding
 	end
 	return reactModule.createElement(notificationCardContextModule.Provider, {
 		value = {
-			state = p0.state,
+			state = p1.state,
 			cardSize = t,
-			handleActions = p0.handleActions,
-			sendEvent = function(p1)
+			handleActions = p1.handleActions,
+			sendEvent = function(p2)
 				-- upvalues: toastNotificationHelperModule (copy), eventStream (ref)
-				toastNotificationHelperModule.fireEvent(eventStream, p1)
+				toastNotificationHelperModule.fireEvent(eventStream, p2)
 			end,
-			cardTransparency = if p0.isCompact then constantsModule.CardTransparency.Compact else constantsModule.CardTransparency.Default,
-			notificationReceivedTimestampMs = p0.notificationReceivedTimestampMs,
-			timers = p0.timers,
-			displayTimestampMs = p0.displayTimestampMs
+			cardTransparency = if p1.isCompact then constantsModule.CardTransparency.Compact else constantsModule.CardTransparency.Default,
+			notificationReceivedTimestampMs = p1.notificationReceivedTimestampMs,
+			timers = p1.timers,
+			displayTimestampMs = p1.displayTimestampMs
 		}
-	}, p0.children)
+	}, p1.children)
 end

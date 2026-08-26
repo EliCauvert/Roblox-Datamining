@@ -32,18 +32,18 @@ local t = {
 	CacheHit = { requestOrchestratorDataModule.recordCacheHit }
 }
 
-local function makeLabel(p0, p1)
+local function makeLabel(p1, p2)
 	-- upvalues: roactModule (ref), color (ref), mono (ref)
 	return roactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		TextSize = 11,
 		AutomaticSize = Enum.AutomaticSize.X,
 		Size = UDim2.new(0, 0, 0, 22),
-		Text = p0,
+		Text = p1,
 		TextColor3 = color,
 		Font = mono,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		LayoutOrder = p1
+		LayoutOrder = p2
 	})
 end
 
@@ -58,50 +58,50 @@ end
 
 local mainViewRequestOrchestrator = roactModule.Component:extend("MainViewRequestOrchestrator")
 
-function mainViewRequestOrchestrator.init(p2)
+function mainViewRequestOrchestrator.init(p1)
 	-- upvalues: requestOrchestratorDataModule (ref), roactModule (ref)
-	p2.model = requestOrchestratorDataModule.new()
-	p2.connections = {}
-	p2.utilRef = roactModule.createRef()
+	p1.model = requestOrchestratorDataModule.new()
+	p1.connections = {}
+	p1.utilRef = roactModule.createRef()
 	
-	function p2.onUtilTabHeightChanged(p3)
-		-- upvalues: p2 (ref)
-		p2:setState({ utilTabHeight = p3 })
+	function p2.onUtilTabHeightChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ utilTabHeight = p2 })
 	end
 	
-	function p2.onTypeToggle(p4)
-		-- upvalues: p2 (ref)
+	function p2.onTypeToggle(p2)
+		-- upvalues: p1 (ref)
+		local t = {}
+		
+		for i, v in pairs(p1.state.selectedTypes) do
+			t[i] = v
+		end
+		t[p2] = not t[p2] or nil
+		p1:setState({ selectedTypes = t })
+	end
+	
+	p1.state = { utilTabHeight = 0, selectedTypes = {} }
+end
+
+function mainViewRequestOrchestrator.observeType(p2, p3)
+	-- upvalues: requestOrchestratorDataModule (ref)
+	local var1 = requestOrchestratorDataModule.observeType(p2.model, p3)
+	
+	if var1 then
 		local t = {}
 		
 		for i, v in pairs(p2.state.selectedTypes) do
 			t[i] = v
 		end
-		t[p4] = not t[p4] or nil
-		p2:setState({ selectedTypes = t })
-	end
-	
-	p2.state = { utilTabHeight = 0, selectedTypes = {} }
-end
-
-function mainViewRequestOrchestrator.observeType(p5, p6)
-	-- upvalues: requestOrchestratorDataModule (ref)
-	local var13 = requestOrchestratorDataModule.observeType(p5.model, p6)
-	
-	if var13 then
-		local t = {}
-		
-		for i, v in pairs(p5.state.selectedTypes) do
-			t[i] = v
-		end
-		local var15 = t
-		var15[var13] = true
-		p5:setState({ selectedTypes = var15 })
+		local var2 = t
+		var2[var1] = true
+		p2:setState({ selectedTypes = var2 })
 	end
 end
 
-function mainViewRequestOrchestrator.didMount(p7)
+function mainViewRequestOrchestrator.didMount(p4)
 	-- upvalues: requestOrchestratorDataModule (ref), t (ref), runService (ref)
-	p7:setState({ utilTabHeight = p7.utilRef.current.Size.Y.Offset })
+	p4:setState({ utilTabHeight = p4.utilRef.current.Size.Y.Offset })
 	local requestOrchestratorService = game:GetService("RequestOrchestratorService")
 	local ok, status = pcall(function()
 		-- upvalues: requestOrchestratorService (ref)
@@ -109,64 +109,64 @@ function mainViewRequestOrchestrator.didMount(p7)
 	end)
 	
 	if ok and status then
-		local var17 = requestOrchestratorDataModule.observeTypes(p7.model, status)
+		local var3 = requestOrchestratorDataModule.observeTypes(p4.model, status)
 		
-		if #var17 > 0 then
+		if #var3 > 0 then
 			local t_1 = {}
 			
-			for i, v in pairs(p7.state.selectedTypes) do
+			for i, v in pairs(p4.state.selectedTypes) do
 				t_1[i] = v
 			end
-			local var19 = t_1
+			local var4 = t_1
 			
-			for i_1, v_1 in ipairs(var17) do
-				var19[v_1] = true
+			for i_1, v_1 in ipairs(var3) do
+				var4[v_1] = true
 			end
-			p7:setState({ selectedTypes = var19 })
+			p4:setState({ selectedTypes = var4 })
 		end
 	end
 	for i, v in pairs(t) do
-		p7.connections[i] = requestOrchestratorService[i]:Connect(function(p8)
-			-- upvalues: p7 (ref), v (ref)
-			local orchestratorType = p8.orchestratorType or "Unknown"
-			p7:observeType(orchestratorType)
+		p4.connections[i] = requestOrchestratorService[i]:Connect(function(p5)
+			-- upvalues: p4 (ref), v (ref)
+			local orchestratorType = p5.orchestratorType or "Unknown"
+			p4:observeType(orchestratorType)
 			
 			for i, v_1 in ipairs(v) do
-				v_1(p7.model, orchestratorType, p8)
+				v_1(p4.model, orchestratorType, p5)
 			end
-			p7:setState({})
+			p4:setState({})
 		end)
 	end
-	p7.connections.heartbeat = runService.Heartbeat:Connect(function()
-		-- upvalues: requestOrchestratorDataModule (copy), p7 (ref)
-		requestOrchestratorDataModule.advanceTime(p7.model)
-		p7:setState({})
+	p4.connections.heartbeat = runService.Heartbeat:Connect(function()
+		-- upvalues: requestOrchestratorDataModule (copy), p4 (ref)
+		requestOrchestratorDataModule.advanceTime(p4.model)
+		p4:setState({})
 	end)
 end
 
-function mainViewRequestOrchestrator.willUnmount(p9)
-	for i, v in pairs(p9.connections) do
+function mainViewRequestOrchestrator.willUnmount(p5)
+	for i, v in pairs(p5.connections) do
 		v:Disconnect()
 	end
-	p9.connections = {}
+	p5.connections = {}
 end
 
-function mainViewRequestOrchestrator.didUpdate(p10)
-	local offset = p10.utilRef.current.Size.Y.Offset
+function mainViewRequestOrchestrator.didUpdate(p6)
+	local offset = p6.utilRef.current.Size.Y.Offset
 	
-	if offset ~= p10.state.utilTabHeight then
-		p10:setState({ utilTabHeight = offset })
+	if offset ~= p6.state.utilTabHeight then
+		p6:setState({ utilTabHeight = offset })
 	end
 end
 
-function mainViewRequestOrchestrator.render(p11)
+function mainViewRequestOrchestrator.render(p6)
 	-- upvalues: roactModule (ref), mainRowPadding (ref), utilAndTabModule (ref), makeLabel (ref), dropDownModule (ref), orchestratorRowModule (ref), constantsModule (ref)
-	local size = p11.props.size
-	local formFactor = p11.props.formFactor
-	local tabList = p11.props.tabList
-	local utilTabHeight = p11.state.utilTabHeight
-	local selectedTypes = p11.state.selectedTypes
-	local allTypes = p11.model.allTypes
+	local size = p6.props.size
+	local formFactor = p6.props.formFactor
+	local tabList = p6.props.tabList
+	local utilTabHeight = p6.state.utilTabHeight
+	local selectedTypes = p6.state.selectedTypes
+	local allTypes = p6.model.allTypes
 	local t = {
 		UIListLayout = roactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -177,19 +177,19 @@ function mainViewRequestOrchestrator.render(p11)
 			windowWidth = size.X.Offset,
 			formFactor = formFactor,
 			tabList = tabList,
-			refForParent = p11.utilRef,
-			onHeightChanged = p11.onUtilTabHeightChanged
+			refForParent = p6.utilRef,
+			onHeightChanged = p6.onUtilTabHeightChanged
 		})
 	}
 	
 	if utilTabHeight > 0 then
-		local var22 = 0
-		local var23 = nil
+		local var5 = 0
+		local var6 = nil
 		
 		for i, v in ipairs(allTypes) do
 			if selectedTypes[i] then
-				var22 += 1
-				var23 = v
+				var5 += 1
+				var6 = v
 			end
 		end
 		t.Controls = roactModule.createElement("Frame", {
@@ -209,8 +209,8 @@ function mainViewRequestOrchestrator.render(p11)
 				buttonSize = UDim2.new(0, 220, 0, 22),
 				dropDownList = allTypes,
 				selectedSet = selectedTypes,
-				onToggle = p11.onTypeToggle,
-				summaryText = if #allTypes == 0 then "(waiting for traffic)" elseif var22 == 0 then "(none)" elseif var22 == 1 then var23 elseif var22 == #allTypes then string.format("All (%d)", var22) else string.format("%d selected", var22)
+				onToggle = p6.onTypeToggle,
+				summaryText = if #allTypes == 0 then "(waiting for traffic)" elseif var5 == 0 then "(none)" elseif var5 == 1 then var6 elseif var5 == #allTypes then string.format("All (%d)", var5) else string.format("%d selected", var5)
 			})
 		})
 		
@@ -218,12 +218,12 @@ function mainViewRequestOrchestrator.render(p11)
 			if selectedTypes[i_1] then
 				t["Row_" .. v_1] = roactModule.createElement(orchestratorRowModule, {
 					orchestratorType = v_1,
-					batches = p11.model.batchesByType[v_1] or {},
-					queue = p11.model.queues[v_1],
-					cache = p11.model.cacheByType[v_1],
-					observedMaxBatchSize = p11.model.observedMaxByType[v_1],
+					batches = p6.model.batchesByType[v_1] or {},
+					queue = p6.model.queues[v_1],
+					cache = p6.model.cacheByType[v_1],
+					observedMaxBatchSize = p6.model.observedMaxByType[v_1],
 					panelWidth = size.X.Offset,
-					now = p11.model.now,
+					now = p6.model.now,
 					size = UDim2.new(1, 0, 0, 52),
 					layoutOrder = 2 + i_1
 				})

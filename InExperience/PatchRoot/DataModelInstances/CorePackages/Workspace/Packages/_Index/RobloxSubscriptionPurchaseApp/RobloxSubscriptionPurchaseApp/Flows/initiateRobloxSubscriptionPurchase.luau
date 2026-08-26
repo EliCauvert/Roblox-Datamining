@@ -7,39 +7,39 @@ local surfaceNameModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceNam
 local _ = require(robloxSubscriptionPurchaseApp.types)
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 
-return function(p0, p1, p2, p3, p4, p5, p6)
+return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), surfaceContextModule (ref), surfaceNameModule (ref), initiateRobloxSubscriptionPurchaseInternalModule (ref), robloxSubscriptionOverlayControllerModule (ref)
-	local var7 = robloxSubscriptionStoreModule.get()
+	local var1 = robloxSubscriptionStoreModule.get()
 	
+	if p2 then
+		if p2.onFlowComplete then
+			var1.setOnFlowComplete(p2.onFlowComplete)
+		end
+		if p2.onBackButtonActivated then
+			var1.setOnBackButtonActivated(p2.onBackButtonActivated)
+		end
+		if fFlagRobloxPlusFAEFreeTrialModule and p2.onCtaOverride then
+			var1.setOnCtaOverride(p2.onCtaOverride)
+		end
+	end
 	if p1 then
-		if p1.onFlowComplete then
-			var7.setOnFlowComplete(p1.onFlowComplete)
-		end
-		if p1.onBackButtonActivated then
-			var7.setOnBackButtonActivated(p1.onBackButtonActivated)
-		end
-		if fFlagRobloxPlusFAEFreeTrialModule and p1.onCtaOverride then
-			var7.setOnCtaOverride(p1.onCtaOverride)
-		end
+		var1.setPurchaseUIOptions(p1)
 	end
-	if p0 then
-		var7.setPurchaseUIOptions(p0)
-	end
-	if p5 then
-		var7.setPurchaseFlowOptions(p5)
+	if p6 then
+		var1.setPurchaseFlowOptions(p6)
 	end
 	local t = {}
 	
-	if p2 ~= nil then
-		t.universeId = p2
+	if p3 ~= nil then
+		t.universeId = p3
 	end
 	local t_1 = {
-		context = p4 or surfaceContextModule.Unspecified,
-		surfaceName = p3 or surfaceNameModule.Unspecified,
+		context = p5 or surfaceContextModule.Unspecified,
+		surfaceName = p4 or surfaceNameModule.Unspecified,
 		metadata = t,
-		clientSessionId = if p6 then p6.clientSessionId else nil
+		clientSessionId = if p7 then p7.clientSessionId else nil
 	}
-	var7.setEntryContext(t_1)
+	var1.setEntryContext(t_1)
 	initiateRobloxSubscriptionPurchaseInternalModule(t_1)
 	
 	return robloxSubscriptionOverlayControllerModule.render()

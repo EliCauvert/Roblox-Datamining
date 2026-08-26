@@ -10,17 +10,17 @@ local getExperienceDetailsUrlModule = require(script.Parent.getExperienceDetails
 local getExperienceDetailsPageKeyModule = require(script.Parent.getExperienceDetailsPageKey)
 local fFlagSduiEdpClientTemplateCache = require(parent.SharedFlags).FFlagSduiEdpClientTemplateCache
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: getExperienceDetailsUrlModule (ref), parent (ref), fFlagSduiEdpClientTemplateCache (ref), sduiCapabilities (ref), getSduiTemplateStore (ref), appPage (ref), sduiApiStorePostConfigContentType (ref), getSduiApiStore (ref), sduiResponseType (ref), getExperienceDetailsPageKeyModule (ref)
-	local var3 = getExperienceDetailsUrlModule(p0)
+	local var1 = getExperienceDetailsUrlModule(p1)
 	local serviceContractsProtoModule = require(parent.ServiceContractsProto)
 	local experienceDetailsPage = serviceContractsProtoModule.apppageplatform.experiencedetails.experience_details_page
 	getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.Protobuf,
-		url = var3,
+		url = var1,
 		surfaceKey = appPage.ExperienceDetail,
-		configKey = getExperienceDetailsPageKeyModule(p0),
-		loadTimer = p1,
+		configKey = getExperienceDetailsPageKeyModule(p1),
+		loadTimer = p2,
 		apiProto = experienceDetailsPage.ExperienceDetailsPageResponse,
 		postConfig = if fFlagSduiEdpClientTemplateCache then if fFlagSduiEdpClientTemplateCache then {
 			contentType = sduiApiStorePostConfigContentType.Proto,
@@ -40,5 +40,5 @@ return function(p0, p1, p2)
 			}
 		} else nil else nil,
 		enableTemplateCache = if fFlagSduiEdpClientTemplateCache then true else nil
-	}, p2)
+	}, p3)
 end

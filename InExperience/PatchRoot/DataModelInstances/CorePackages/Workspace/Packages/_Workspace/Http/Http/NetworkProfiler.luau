@@ -1,4 +1,4 @@
-﻿local var0 = tonumber(settings():GetFVariable("PercentReportingNetworkProfileAfterStartup"))
+﻿local var1 = tonumber(settings():GetFVariable("PercentReportingNetworkProfileAfterStartup"))
 local t = {}
 t.__index = t
 t.aggregate = {
@@ -10,34 +10,34 @@ t.aggregate = {
 	receiveResponse = 0
 }
 
-function t.track(p0, p1)
-	p0.aggregate.queued += p1.queued
+function t.track(p1, p2)
+	p1.aggregate.queued += p2.queued
 	
-	if p1.nameLookup >= 0 then
-		p0.aggregate.nameLookup += p1.nameLookup
+	if p2.nameLookup >= 0 then
+		p1.aggregate.nameLookup += p2.nameLookup
 	end
-	if p1.connect >= 0 then
-		p0.aggregate.connect += p1.connect
+	if p2.connect >= 0 then
+		p1.aggregate.connect += p2.connect
 	end
-	if p1.sslHandshake >= 0 then
-		p0.aggregate.sslHandshake += p1.sslHandshake
+	if p2.sslHandshake >= 0 then
+		p1.aggregate.sslHandshake += p2.sslHandshake
 	end
-	if p1.makeRequest >= 0 then
-		p0.aggregate.makeRequest += p1.makeRequest
+	if p2.makeRequest >= 0 then
+		p1.aggregate.makeRequest += p2.makeRequest
 	end
-	if p1.receiveResponse >= 0 then
-		p0.aggregate.receiveResponse += p1.receiveResponse
+	if p2.receiveResponse >= 0 then
+		p1.aggregate.receiveResponse += p2.receiveResponse
 	end
 end
 
-function t.report(p2, p3)
-	-- upvalues: var0 (ref)
-	p3("NetworkProfileDuringStartup", "Queued", p2.aggregate.queued, var0)
-	p3("NetworkProfileDuringStartup", "NameLookup", p2.aggregate.nameLookup, var0)
-	p3("NetworkProfileDuringStartup", "Connect", p2.aggregate.connect, var0)
-	p3("NetworkProfileDuringStartup", "SSLHandshake", p2.aggregate.sslHandshake, var0)
-	p3("NetworkProfileDuringStartup", "MakeRequest", p2.aggregate.makeRequest, var0)
-	p3("NetworkProfileDuringStartup", "ReceiveResponse", p2.aggregate.receiveResponse, var0)
+function t.report(p1, p2)
+	-- upvalues: var1 (ref)
+	p2("NetworkProfileDuringStartup", "Queued", p1.aggregate.queued, var1)
+	p2("NetworkProfileDuringStartup", "NameLookup", p1.aggregate.nameLookup, var1)
+	p2("NetworkProfileDuringStartup", "Connect", p1.aggregate.connect, var1)
+	p2("NetworkProfileDuringStartup", "SSLHandshake", p1.aggregate.sslHandshake, var1)
+	p2("NetworkProfileDuringStartup", "MakeRequest", p1.aggregate.makeRequest, var1)
+	p2("NetworkProfileDuringStartup", "ReceiveResponse", p1.aggregate.receiveResponse, var1)
 end
 
 return t

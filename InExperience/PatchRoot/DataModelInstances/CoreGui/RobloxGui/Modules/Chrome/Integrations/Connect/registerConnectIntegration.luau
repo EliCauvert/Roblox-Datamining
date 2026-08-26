@@ -18,17 +18,17 @@ local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome
 local appChatInExpUseUnibarNotification = game:DefineFastFlag("AppChatInExpUseUnibarNotification", false)
 local getFFlagIsSquadEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagIsSquadEnabled
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
-local var13 = mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function()
+local var1 = mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function()
 	-- upvalues: inExperienceAppChatModalModule (ref)
 	return inExperienceAppChatModalModule:getVisible()
 end)
 
-return function(p0, p1)
-	-- upvalues: getFFlagIsSquadEnabled (ref), serviceModule (ref), sideSheetPlacement (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), inExperienceAppChatModalModule (ref), chromeIntegrationUtilsModule (ref), responsiveModule (ref), focusUtils (ref), localStoreModule (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), var13 (ref), reactModule (ref), connectIconModule (ref), appChatInExpUseUnibarNotification (ref), symbol (ref), mouseIconOverrideService (ref)
-	local var14 = p0 == "connect_unibar" and getFFlagIsSquadEnabled()
-	local var15 = serviceModule:register({
-		id = p0,
-		sideSheetPlacement = if p0 == "connect_unibar" then sideSheetPlacement.Unibar else sideSheetPlacement.Vertical,
+return function(p1, p2)
+	-- upvalues: getFFlagIsSquadEnabled (ref), serviceModule (ref), sideSheetPlacement (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), inExperienceAppChatModalModule (ref), chromeIntegrationUtilsModule (ref), responsiveModule (ref), focusUtils (ref), localStoreModule (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), var1 (ref), reactModule (ref), connectIconModule (ref), appChatInExpUseUnibarNotification (ref), symbol (ref), mouseIconOverrideService (ref)
+	local var2 = p1 == "connect_unibar" and getFFlagIsSquadEnabled()
+	local var3 = serviceModule:register({
+		id = p1,
+		sideSheetPlacement = if p1 == "connect_unibar" then sideSheetPlacement.Unibar else sideSheetPlacement.Vertical,
 		label = if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.FriendsChat" else "Feature.Squads.Label.Party" elseif getFFlagIsSquadEnabled() then "Feature.Squads.Label.Party" else "Feature.Chat.Label.RobloxChat",
 		activated = function()
 			-- upvalues: inExperienceAppChatModalModule (copy), chromeIntegrationUtilsModule (copy), responsiveModule (copy), focusUtils (copy), localStoreModule (copy), getFStringConnectTooltipLocalStorageKeyModule (copy)
@@ -45,93 +45,93 @@ return function(p0, p1)
 			end
 			localStoreModule.storeForLocalPlayer(getFStringConnectTooltipLocalStorageKeyModule(), true)
 		end,
-		isActivated = var13,
+		isActivated = var1,
 		components = {
-			Icon = function(p2)
-				-- upvalues: reactModule (copy), connectIconModule (copy), p0 (ref), appChatInExpUseUnibarNotification (copy), var14 (ref)
+			Icon = function(p3)
+				-- upvalues: reactModule (copy), connectIconModule (copy), p1 (ref), appChatInExpUseUnibarNotification (copy), var2 (ref)
 				return reactModule.createElement(connectIconModule, {
-					integrationId = p0,
-					isIconVisible = p2.visible,
+					integrationId = p1,
+					isIconVisible = p3.visible,
 					shouldShowCustomBadge = not appChatInExpUseUnibarNotification,
-					isSquadIndicatorEnabled = var14
+					isSquadIndicatorEnabled = var2
 				})
 			end
 		},
-		initialAvailability = p1
+		initialAvailability = p2
 	})
 	
 	if appChatInExpUseUnibarNotification then
-		if var14 then
+		if var2 then
 			local function _(p3, p4)
-				-- upvalues: var15 (ref)
+				-- upvalues: var3 (ref)
 				if p3 == 0 or p4 then
-					var15.notification:clear()
+					var3.notification:clear()
 					
 					return
 				end
-				var15.notification:fireCount(p3)
+				var3.notification:fireCount(p3)
 			end
 			
-			inExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p5)
-				-- upvalues: inExperienceAppChatModalModule (copy), var15 (ref)
+			inExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p3)
+				-- upvalues: inExperienceAppChatModalModule (copy), var3 (ref)
 				local unreadCount = inExperienceAppChatModalModule.default.unreadCount
 				
-				if unreadCount == 0 or p5 ~= "" then
-					var15.notification:clear()
+				if unreadCount == 0 or p3 ~= "" then
+					var3.notification:clear()
 					
 					return
 				end
-				var15.notification:fireCount(unreadCount)
+				var3.notification:fireCount(unreadCount)
 			end)
-			inExperienceAppChatModalModule.default.unreadCountSignal.Event:Connect(function(p6)
-				-- upvalues: inExperienceAppChatModalModule (copy), var15 (ref)
-				if p6 == 0 or inExperienceAppChatModalModule.default.currentSquadId ~= "" then
-					var15.notification:clear()
+			inExperienceAppChatModalModule.default.unreadCountSignal.Event:Connect(function(p3)
+				-- upvalues: inExperienceAppChatModalModule (copy), var3 (ref)
+				if p3 == 0 or inExperienceAppChatModalModule.default.currentSquadId ~= "" then
+					var3.notification:clear()
 					
 					return
 				end
-				var15.notification:fireCount(p6)
+				var3.notification:fireCount(p3)
 			end)
 			local unreadCount = inExperienceAppChatModalModule.default.unreadCount
 			
 			if unreadCount == 0 or inExperienceAppChatModalModule.default.currentSquadId ~= "" then
-				var15.notification:clear()
+				var3.notification:clear()
 			else
-				var15.notification:fireCount(unreadCount)
+				var3.notification:fireCount(unreadCount)
 			end
 		else
-			local _ = function(p7)
-				-- upvalues: var15 (ref)
-				if p7 == 0 then
-					var15.notification:clear()
+			local _ = function(p3)
+				-- upvalues: var3 (ref)
+				if p3 == 0 then
+					var3.notification:clear()
 					
 					return
 				end
-				var15.notification:fireCount(p7)
+				var3.notification:fireCount(p3)
 			end
 			
-			inExperienceAppChatModalModule.default.unreadCountSignal.Event:Connect(function(p8)
-				-- upvalues: var15 (ref)
-				if p8 == 0 then
-					var15.notification:clear()
+			inExperienceAppChatModalModule.default.unreadCountSignal.Event:Connect(function(p3)
+				-- upvalues: var3 (ref)
+				if p3 == 0 then
+					var3.notification:clear()
 					
 					return
 				end
-				var15.notification:fireCount(p8)
+				var3.notification:fireCount(p3)
 			end)
 			local unreadCount = inExperienceAppChatModalModule.default.unreadCount
 			
 			if unreadCount == 0 then
-				var15.notification:clear()
+				var3.notification:clear()
 			else
-				var15.notification:fireCount(unreadCount)
+				var3.notification:fireCount(unreadCount)
 			end
 		end
 	end
 	local inExperienceRobloxConnect = symbol.named("InExperienceRobloxConnect")
-	inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p9)
+	inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p3)
 		-- upvalues: mouseIconOverrideService (copy), inExperienceRobloxConnect (ref)
-		if p9 then
+		if p3 then
 			mouseIconOverrideService.push(inExperienceRobloxConnect, Enum.OverrideMouseIconBehavior.ForceShow)
 			
 			return
@@ -139,5 +139,5 @@ return function(p0, p1)
 		mouseIconOverrideService.pop(inExperienceRobloxConnect)
 	end)
 	
-	return var15
+	return var3
 end

@@ -17,10 +17,10 @@ return {
 	name = "FriendsMenu",
 	storyRoot = friendsMenu,
 	roact = roactModule,
-	mapDefinition = function(p0)
+	mapDefinition = function(p1)
 		-- upvalues: cryoModule (ref), t_1 (ref)
-		return cryoModule.Dictionary.join(p0, {
-			controls = cryoModule.Dictionary.join(t_1, p0.controls or {})
+		return cryoModule.Dictionary.join(p1, {
+			controls = cryoModule.Dictionary.join(t_1, p1.controls or {})
 		})
 	end,
 	mapStory = function(p1)

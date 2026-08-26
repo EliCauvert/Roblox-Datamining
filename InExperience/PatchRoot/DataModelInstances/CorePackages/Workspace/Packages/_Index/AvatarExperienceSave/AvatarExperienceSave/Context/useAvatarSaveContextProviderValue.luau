@@ -42,7 +42,7 @@ local selectCharacterDataModule = require(avatarExperienceSave.Selectors.selectC
 local selectHasAvatarDataModule = require(avatarExperienceSave.Selectors.selectHasAvatarData)
 local navigateToRoute = navigationRoduxModule.Thunks.NavigateToRoute
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var27 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local buildHumanoidDescription = avatarExperienceCommonModule.Utils.buildHumanoidDescription
 local getGearAssetIdFromEquippedAssets = avatarExperienceCommonModule.Utils.getGearAssetIdFromEquippedAssets
 local getAssetIdToAssetTypeIdFromHumanoidDescription = avatarExperienceCommonModule.Utils.getAssetIdToAssetTypeIdFromHumanoidDescription
@@ -78,368 +78,368 @@ local t_4 = {
 	Games = appPage.Games
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: buildHumanoidDescription (ref)
 	return buildHumanoidDescription({
-		currentAssets = p0.equipped.EquippedAssets,
-		avatarScales = p0.equipped.AvatarScales,
-		bodyColor3s = p0.equipped.BodyColor3s,
-		emotesSlotInfo = p0.equipped.EquippedEmotes.slotInfo
+		currentAssets = p1.equipped.EquippedAssets,
+		avatarScales = p1.equipped.AvatarScales,
+		bodyColor3s = p1.equipped.BodyColor3s,
+		emotesSlotInfo = p1.equipped.EquippedEmotes.slotInfo
 	})
 end
 
 return function()
-	-- upvalues: useDispatch (ref), useNavigation (ref), useSelectorSignal (ref), selectCharacterDataModule (ref), tutilsModule (ref), selectHasAvatarDataModule (ref), useSignal (ref), reactModule (ref), signalsModule (ref), shouldInsertNewHistoryEntryModule (ref), dashModule (ref), AXEnableMaxUndoRedoHistory (ref), AXMaxUndoRedoHistory (ref), shouldReplaceLastHistoryEntryModule (ref), removeInvalidAssetsFromCharacterDataModule (ref), avatarExperienceCommonModule (ref), useComputedSignal (ref), saveStatusEnumModule (ref), checkHasChangesToSaveModule (ref), checkCharacterDataHasTryOnItemsModule (ref), getInvalidAssetIdsToAssetTypeIdMapModule (ref), getAssetIdToAssetTypeIdFromHumanoidDescription (ref), setCurrentToastMessage (ref), t_2 (ref), t_1 (ref), characterHistoryStateChangeButtonActivated (ref), t (ref), t_3 (ref), promiseModule (ref), fIntAXMinSaveIntervalSeconds (ref), buildHumanoidDescription (ref), getSaveDictModule (ref), fFlagAXBackgroundsPersistence (ref), avatarExperienceFlagsModule (ref), cryoModule (ref), saveProfileConfigurationModule (ref), getGearAssetIdFromEquippedAssets (ref), saveAvatarModule (ref), fFlagAXEnableManualSavingBlockingPrompt (ref), fFlagSignalsNavP3Dispatch (ref), var27 (ref), navigateToRoute (ref), actions (ref), avatarScreen (ref), t_4 (ref), registerCustomGetStateForAction (ref), customGetStateForAction (ref)
-	local var36 = useDispatch()
-	local var37 = useNavigation()
-	local var38 = useSelectorSignal(selectCharacterDataModule, tutilsModule.deepEqual)
-	local var39 = useSelectorSignal(selectHasAvatarDataModule)
-	local var40, var41 = useSignal({})
-	local var42, var43 = useSignal(0)
-	local var44, var45 = useSignal(nil)
-	local var46, var47 = useSignal(nil)
-	local var48, var49 = useSignal(0)
-	local var50, var51 = useSignal(false)
+	-- upvalues: useDispatch (ref), useNavigation (ref), useSelectorSignal (ref), selectCharacterDataModule (ref), tutilsModule (ref), selectHasAvatarDataModule (ref), useSignal (ref), reactModule (ref), signalsModule (ref), shouldInsertNewHistoryEntryModule (ref), dashModule (ref), AXEnableMaxUndoRedoHistory (ref), AXMaxUndoRedoHistory (ref), shouldReplaceLastHistoryEntryModule (ref), removeInvalidAssetsFromCharacterDataModule (ref), avatarExperienceCommonModule (ref), useComputedSignal (ref), saveStatusEnumModule (ref), checkHasChangesToSaveModule (ref), checkCharacterDataHasTryOnItemsModule (ref), getInvalidAssetIdsToAssetTypeIdMapModule (ref), getAssetIdToAssetTypeIdFromHumanoidDescription (ref), setCurrentToastMessage (ref), t_2 (ref), t_1 (ref), characterHistoryStateChangeButtonActivated (ref), t (ref), t_3 (ref), promiseModule (ref), fIntAXMinSaveIntervalSeconds (ref), buildHumanoidDescription (ref), getSaveDictModule (ref), fFlagAXBackgroundsPersistence (ref), avatarExperienceFlagsModule (ref), cryoModule (ref), saveProfileConfigurationModule (ref), getGearAssetIdFromEquippedAssets (ref), saveAvatarModule (ref), fFlagAXEnableManualSavingBlockingPrompt (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateToRoute (ref), actions (ref), avatarScreen (ref), t_4 (ref), registerCustomGetStateForAction (ref), customGetStateForAction (ref)
+	local var2 = useDispatch()
+	local var3 = useNavigation()
+	local var4 = useSelectorSignal(selectCharacterDataModule, tutilsModule.deepEqual)
+	local var5 = useSelectorSignal(selectHasAvatarDataModule)
+	local var6, var7 = useSignal({})
+	local var8, var9 = useSignal(0)
+	local var10, var11 = useSignal(nil)
+	local var12, var13 = useSignal(nil)
+	local var14, var15 = useSignal(0)
+	local var16, var17 = useSignal(false)
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var39 (ref), var38 (ref), var40 (ref), tutilsModule (copy), var41 (ref), var43 (ref), var45 (ref), var47 (ref), var49 (ref)
+		-- upvalues: signalsModule (copy), var5 (ref), var4 (ref), var6 (ref), tutilsModule (copy), var7 (ref), var9 (ref), var11 (ref), var13 (ref), var15 (ref)
 		return signalsModule.createEffect(function(p1)
-			-- upvalues: var39 (copy), var38 (copy), var40 (copy), tutilsModule (copy), var41 (copy), var43 (copy), var45 (copy), var47 (copy), var49 (copy)
-			local var63 = var38(p1)
+			-- upvalues: var5 (copy), var4 (copy), var6 (copy), tutilsModule (copy), var7 (copy), var9 (copy), var11 (copy), var13 (copy), var15 (copy)
+			local var18 = var4(p1)
 			
-			if var39(p1) and (var63.equipped.BodyPartRangeIds and tutilsModule.fieldCount(var63.equipped.BodyPartRangeIds) > 0) and #var40(false) == 0 then
-				var41({ var63 })
-				var43(1)
-				var45(var63)
-				var47(nil)
-				var49(0)
+			if var5(p1) and (var18.equipped.BodyPartRangeIds and tutilsModule.fieldCount(var18.equipped.BodyPartRangeIds) > 0) and #var6(false) == 0 then
+				var7({ var18 })
+				var9(1)
+				var11(var18)
+				var13(nil)
+				var15(0)
 			end
 		end)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var38 (ref), var40 (ref), var42 (ref), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXEnableMaxUndoRedoHistory (copy), AXMaxUndoRedoHistory (copy), var41 (ref), var43 (ref), shouldReplaceLastHistoryEntryModule (copy)
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: var38 (copy), var40 (copy), var42 (copy), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXEnableMaxUndoRedoHistory (copy), AXMaxUndoRedoHistory (copy), var41 (copy), var43 (copy), shouldReplaceLastHistoryEntryModule (copy)
-			local var64 = var38(p2)
-			local var65 = var40(false)
-			local var66 = var42(false)
-			local var67 = var65[var66] or var64
+		-- upvalues: signalsModule (copy), var4 (ref), var6 (ref), var8 (ref), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXEnableMaxUndoRedoHistory (copy), AXMaxUndoRedoHistory (copy), var7 (ref), var9 (ref), shouldReplaceLastHistoryEntryModule (copy)
+		return signalsModule.createEffect(function(p1)
+			-- upvalues: var4 (copy), var6 (copy), var8 (copy), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXEnableMaxUndoRedoHistory (copy), AXMaxUndoRedoHistory (copy), var7 (copy), var9 (copy), shouldReplaceLastHistoryEntryModule (copy)
+			local var18 = var4(p1)
+			local var19 = var6(false)
+			local var20 = var8(false)
+			local var21 = var19[var20] or var18
 			
-			if shouldInsertNewHistoryEntryModule(var67, var64) and #var65 > 0 then
-				local var68 = dashModule.slice(var65, 1, var66)
-				table.insert(var68, var64)
+			if shouldInsertNewHistoryEntryModule(var21, var18) and #var19 > 0 then
+				local var22 = dashModule.slice(var19, 1, var20)
+				table.insert(var22, var18)
 				
 				if AXEnableMaxUndoRedoHistory then
-					local var69 = var66 + 1
+					local var23 = var20 + 1
 					
-					if AXMaxUndoRedoHistory < #var68 then
-						table.remove(var68, 1)
-						var69 -= 1
+					if AXMaxUndoRedoHistory < #var22 then
+						table.remove(var22, 1)
+						var23 -= 1
 					end
-					var41(var68)
-					var43(var69)
+					var7(var22)
+					var9(var23)
 					
 					return
 				else
-					var41(var68)
-					var43(var66 + 1)
+					var7(var22)
+					var9(var20 + 1)
 					
 					return
 				end
-			elseif shouldReplaceLastHistoryEntryModule(var67, var64) and #var65 > 0 then
-				local var70 = dashModule.slice(var65)
-				var70[var66] = var64
-				var41(var70)
-				var43(var66)
+			elseif shouldReplaceLastHistoryEntryModule(var21, var18) and #var19 > 0 then
+				local var24 = dashModule.slice(var19)
+				var24[var20] = var18
+				var7(var24)
+				var9(var20)
 			end
 		end)
 	end, {})
-	local var52 = reactModule.useCallback(function(p3)
-		-- upvalues: var40 (ref), var43 (ref)
-		local var71 = var40(false)
+	local var18 = reactModule.useCallback(function(p1)
+		-- upvalues: var6 (ref), var9 (ref)
+		local var19 = var6(false)
 		
-		if p3 < 1 or #var71 < p3 then
+		if p1 < 1 or #var19 < p1 then
 			return nil
 		end
-		var43(p3)
+		var9(p1)
 		
-		return var71[p3]
-	end, { var40, var43 })
-	local var53 = reactModule.useCallback(function(p4)
-		-- upvalues: var40 (ref), var42 (ref), removeInvalidAssetsFromCharacterDataModule (copy), var41 (ref)
-		local var72 = var40(false)
-		local var73 = var42(false)
-		local var74 = var72[var73]
+		return var19[p1]
+	end, { var6, var9 })
+	local var19 = reactModule.useCallback(function(p1)
+		-- upvalues: var6 (ref), var8 (ref), removeInvalidAssetsFromCharacterDataModule (copy), var7 (ref)
+		local var20 = var6(false)
+		local var21 = var8(false)
+		local var22 = var20[var21]
 		
-		if not var74 then
+		if not var22 then
 			return nil
 		end
-		local var75, var76 = removeInvalidAssetsFromCharacterDataModule(var74, p4)
+		local var23, var24 = removeInvalidAssetsFromCharacterDataModule(var22, p1)
 		
-		if var76 then
-			var72[var73] = var75
-			var41(var72)
+		if var24 then
+			var20[var21] = var23
+			var7(var20)
 			
-			return var75
+			return var23
 		end
 		return nil
-	end, { var40, var41, var43 })
+	end, { var6, var7, var9 })
 	local timeoutStatusStore = avatarExperienceCommonModule.Stores.getTimeoutStatusStore()
-	local var55 = useComputedSignal(function(p5)
-		-- upvalues: timeoutStatusStore (ref), saveStatusEnumModule (copy), var40 (ref), var42 (ref), var44 (ref), var46 (ref), checkHasChangesToSaveModule (copy), checkCharacterDataHasTryOnItemsModule (copy)
-		if timeoutStatusStore and timeoutStatusStore.getIsTimedOut(p5) then
+	local var20 = useComputedSignal(function(p1)
+		-- upvalues: timeoutStatusStore (ref), saveStatusEnumModule (copy), var6 (ref), var8 (ref), var10 (ref), var12 (ref), checkHasChangesToSaveModule (copy), checkCharacterDataHasTryOnItemsModule (copy)
+		if timeoutStatusStore and timeoutStatusStore.getIsTimedOut(p1) then
 			return saveStatusEnumModule.TimedOut
 		end
-		local var77 = var44(p5)
-		local var78 = var40(p5)[var42(p5)]
+		local var21 = var10(p1)
+		local var22 = var6(p1)[var8(p1)]
 		
-		return if not (not var78 or not var77) then if var46(p5) then saveStatusEnumModule.Saving elseif var77 and not checkHasChangesToSaveModule(var78, var77) then saveStatusEnumModule.AlreadySaved elseif checkCharacterDataHasTryOnItemsModule(var78) then saveStatusEnumModule.HasTryOns else saveStatusEnumModule.Eligible else saveStatusEnumModule.NoData
+		return if not (not var22 or not var21) then if var12(p1) then saveStatusEnumModule.Saving elseif var21 and not checkHasChangesToSaveModule(var22, var21) then saveStatusEnumModule.AlreadySaved elseif checkCharacterDataHasTryOnItemsModule(var22) then saveStatusEnumModule.HasTryOns else saveStatusEnumModule.Eligible else saveStatusEnumModule.NoData
 	end)
-	local var56 = reactModule.useCallback(function(p6, p7, p8, _, p9)
-		-- upvalues: saveStatusEnumModule (copy), getInvalidAssetIdsToAssetTypeIdMapModule (copy), getAssetIdToAssetTypeIdFromHumanoidDescription (copy), var53 (ref), removeInvalidAssetsFromCharacterDataModule (copy), var45 (ref), var47 (ref), var36 (ref), setCurrentToastMessage (copy), t_2 (copy), t_1 (copy), characterHistoryStateChangeButtonActivated (copy)
-		local var79 = p8
+	local var21 = reactModule.useCallback(function(p1, p2, p3, _, p4)
+		-- upvalues: saveStatusEnumModule (copy), getInvalidAssetIdsToAssetTypeIdMapModule (copy), getAssetIdToAssetTypeIdFromHumanoidDescription (copy), var19 (ref), removeInvalidAssetsFromCharacterDataModule (copy), var11 (ref), var13 (ref), var2 (ref), setCurrentToastMessage (copy), t_2 (copy), t_1 (copy), characterHistoryStateChangeButtonActivated (copy)
+		local var22 = p3
 		local success = saveStatusEnumModule.Success
-		local var80 = nil
+		local var23 = nil
 		
-		if p9.Assets then
-			local var81 = getInvalidAssetIdsToAssetTypeIdMapModule(getAssetIdToAssetTypeIdFromHumanoidDescription(p6), getAssetIdToAssetTypeIdFromHumanoidDescription(p7))
-			var80 = var53(var81)
-			var79 = removeInvalidAssetsFromCharacterDataModule(var79, var81)
+		if p4.Assets then
+			local var24 = getInvalidAssetIdsToAssetTypeIdMapModule(getAssetIdToAssetTypeIdFromHumanoidDescription(p1), getAssetIdToAssetTypeIdFromHumanoidDescription(p2))
+			var23 = var19(var24)
+			var22 = removeInvalidAssetsFromCharacterDataModule(var22, var24)
 		end
-		var45(var79)
-		var47(nil)
+		var11(var22)
+		var13(nil)
 		
-		if var80 ~= nil then
+		if var23 ~= nil then
 			success = saveStatusEnumModule.SuccessWithInvalidAssets
 		end
 		if success == saveStatusEnumModule.Success then
-			var36(setCurrentToastMessage(t_2))
+			var2(setCurrentToastMessage(t_2))
 		elseif success == saveStatusEnumModule.SuccessWithInvalidAssets then
-			var36(setCurrentToastMessage(t_1))
+			var2(setCurrentToastMessage(t_1))
 		end
-		if var80 then
-			var36(characterHistoryStateChangeButtonActivated(var80))
+		if var23 then
+			var2(characterHistoryStateChangeButtonActivated(var23))
 		end
 		return success
 	end, {
-		var40,
-		var42,
-		var45,
-		var47,
-		var53
+		var6,
+		var8,
+		var11,
+		var13,
+		var19
 	})
-	local var57 = reactModule.useCallback(function(p10)
-		-- upvalues: var47 (ref), saveStatusEnumModule (copy), var36 (ref), setCurrentToastMessage (copy), t (copy), t_3 (copy)
-		var47(nil)
+	local var22 = reactModule.useCallback(function(p1)
+		-- upvalues: var13 (ref), saveStatusEnumModule (copy), var2 (ref), setCurrentToastMessage (copy), t (copy), t_3 (copy)
+		var13(nil)
 		
-		if p10 == saveStatusEnumModule.Throttled then
-			var36(setCurrentToastMessage(t))
+		if p1 == saveStatusEnumModule.Throttled then
+			var2(setCurrentToastMessage(t))
 			
 			return
 		end
-		var36(setCurrentToastMessage(t_3))
-	end, { var47, var36 })
-	local var58 = reactModule.useCallback(function()
-		-- upvalues: promiseModule (copy), timeoutStatusStore (ref), var57 (ref), saveStatusEnumModule (copy), var40 (ref), var42 (ref), var44 (ref), var48 (ref), fIntAXMinSaveIntervalSeconds (copy), var47 (ref), var49 (ref), buildHumanoidDescription (copy), getSaveDictModule (copy), fFlagAXBackgroundsPersistence (copy), avatarExperienceFlagsModule (copy), cryoModule (copy), saveProfileConfigurationModule (copy), var51 (ref), var56 (ref), getGearAssetIdFromEquippedAssets (copy), saveAvatarModule (copy)
-		return promiseModule.new(function(p11, p12)
-			-- upvalues: timeoutStatusStore (copy), var57 (copy), saveStatusEnumModule (copy), var40 (copy), var42 (copy), var44 (copy), var48 (copy), fIntAXMinSaveIntervalSeconds (copy), var47 (copy), var49 (copy), buildHumanoidDescription (copy), getSaveDictModule (copy), fFlagAXBackgroundsPersistence (copy), avatarExperienceFlagsModule (copy), cryoModule (copy), saveProfileConfigurationModule (copy), var51 (copy), var56 (copy), getGearAssetIdFromEquippedAssets (copy), saveAvatarModule (copy)
+		var2(setCurrentToastMessage(t_3))
+	end, { var13, var2 })
+	local var23 = reactModule.useCallback(function()
+		-- upvalues: promiseModule (copy), timeoutStatusStore (ref), var22 (ref), saveStatusEnumModule (copy), var6 (ref), var8 (ref), var10 (ref), var14 (ref), fIntAXMinSaveIntervalSeconds (copy), var13 (ref), var15 (ref), buildHumanoidDescription (copy), getSaveDictModule (copy), fFlagAXBackgroundsPersistence (copy), avatarExperienceFlagsModule (copy), cryoModule (copy), saveProfileConfigurationModule (copy), var17 (ref), var21 (ref), getGearAssetIdFromEquippedAssets (copy), saveAvatarModule (copy)
+		return promiseModule.new(function(p1, p2)
+			-- upvalues: timeoutStatusStore (copy), var22 (copy), saveStatusEnumModule (copy), var6 (copy), var8 (copy), var10 (copy), var14 (copy), fIntAXMinSaveIntervalSeconds (copy), var13 (copy), var15 (copy), buildHumanoidDescription (copy), getSaveDictModule (copy), fFlagAXBackgroundsPersistence (copy), avatarExperienceFlagsModule (copy), cryoModule (copy), saveProfileConfigurationModule (copy), var17 (copy), var21 (copy), getGearAssetIdFromEquippedAssets (copy), saveAvatarModule (copy)
 			if timeoutStatusStore and timeoutStatusStore.getIsTimedOut(false) then
-				var57(saveStatusEnumModule.TimedOut)
+				var22(saveStatusEnumModule.TimedOut)
 				
 				return
 			end
-			local var82 = var44(false)
-			local var83 = var40(false)[var42(false)]
+			local var24 = var10(false)
+			local var25 = var6(false)[var8(false)]
 			
-			if var83 and var82 then
-				local var84 = var48(false)
+			if var25 and var24 then
+				local var26 = var14(false)
 				
-				if var84 > 0 and os.time() - var84 < fIntAXMinSaveIntervalSeconds then
-					var57(saveStatusEnumModule.Throttled)
+				if var26 > 0 and os.time() - var26 < fIntAXMinSaveIntervalSeconds then
+					var22(saveStatusEnumModule.Throttled)
 					
 					return
 				end
-				var47(var83)
-				var49(os.time())
-				local var85 = buildHumanoidDescription({
-					currentAssets = var83.equipped.EquippedAssets,
-					avatarScales = var83.equipped.AvatarScales,
-					bodyColor3s = var83.equipped.BodyColor3s,
-					emotesSlotInfo = var83.equipped.EquippedEmotes.slotInfo
+				var13(var25)
+				var15(os.time())
+				local var27 = buildHumanoidDescription({
+					currentAssets = var25.equipped.EquippedAssets,
+					avatarScales = var25.equipped.AvatarScales,
+					bodyColor3s = var25.equipped.BodyColor3s,
+					emotesSlotInfo = var25.equipped.EquippedEmotes.slotInfo
 				})
-				local avatarType = Enum.HumanoidRigType[var83.equipped.AvatarType]
-				local var86 = getSaveDictModule(var83, var82)
-				local var87 = if fFlagAXBackgroundsPersistence then var83.equipped.BackgroundAssetId else nil
-				local var88 = var86.Background == true and var87 ~= nil
-				local var89 = if avatarExperienceFlagsModule.FFlagAXProfileConfigurationMultiFieldApply then { BackgroundAssetId = var87 } else var87
-				local var90 = false
+				local avatarType = Enum.HumanoidRigType[var25.equipped.AvatarType]
+				local var28 = getSaveDictModule(var25, var24)
+				local var29 = if fFlagAXBackgroundsPersistence then var25.equipped.BackgroundAssetId else nil
+				local var30 = var28.Background == true and var29 ~= nil
+				local var31 = if avatarExperienceFlagsModule.FFlagAXProfileConfigurationMultiFieldApply then { BackgroundAssetId = var29 } else var29
+				local var32 = false
 				
 				if fFlagAXBackgroundsPersistence then
-					var86 = cryoModule.Dictionary.join(var86, { Background = cryoModule.None })
+					var28 = cryoModule.Dictionary.join(var28, { Background = cryoModule.None })
 					
-					for i, v in var86 do
+					for i, v in var28 do
 						if v then
-							var90 = true
+							var32 = true
 							break
 						end
 					end
 				end
-				if var88 and not var90 then
-					saveProfileConfigurationModule(var89):andThen(function()
-						-- upvalues: var51 (copy), var56 (copy), var85 (ref), var83 (ref), var82 (ref), var86 (write), p11 (ref)
-						var51(false)
-						var56(var85, var85, var83, var82, var86)
-						p11()
+				if var30 and not var32 then
+					saveProfileConfigurationModule(var31):andThen(function()
+						-- upvalues: var17 (copy), var21 (copy), var27 (ref), var25 (ref), var24 (ref), var28 (write), p1 (ref)
+						var17(false)
+						var21(var27, var27, var25, var24, var28)
+						p1()
 					end):catch(function()
-						-- upvalues: var51 (copy), var57 (copy), saveStatusEnumModule (copy), p12 (ref)
-						var51(false)
-						var57(saveStatusEnumModule.Failure)
-						p12()
+						-- upvalues: var17 (copy), var22 (copy), saveStatusEnumModule (copy), p2 (ref)
+						var17(false)
+						var22(saveStatusEnumModule.Failure)
+						p2()
 					end)
 					
 					return
 				end
-				local var91 = if var88 then saveProfileConfigurationModule(var89) else nil
-				saveAvatarModule(var85, avatarType, var86, getGearAssetIdFromEquippedAssets(var83.equipped.EquippedAssets)):andThen(function(p13)
-					-- upvalues: var51 (copy), var56 (copy), var85 (ref), var82 (ref), var86 (write), p11 (ref), var91 (ref), var83 (ref), cryoModule (copy)
-					var51(false)
+				local var33 = if var30 then saveProfileConfigurationModule(var31) else nil
+				saveAvatarModule(var27, avatarType, var28, getGearAssetIdFromEquippedAssets(var25.equipped.EquippedAssets)):andThen(function(p3)
+					-- upvalues: var17 (copy), var21 (copy), var27 (ref), var24 (ref), var28 (write), p1 (ref), var33 (ref), var25 (ref), cryoModule (copy)
+					var17(false)
 					
-					local function _(p14)
-						-- upvalues: var56 (copy), var85 (copy), p13 (ref), var82 (copy), var86 (copy), p11 (copy)
-						var56(var85, p13.humanoidDescriptionWithValidAssets, p14, var82, var86)
-						p11()
+					local function _(p4)
+						-- upvalues: var21 (copy), var27 (copy), p3 (ref), var24 (copy), var28 (copy), p1 (copy)
+						var21(var27, p3.humanoidDescriptionWithValidAssets, p4, var24, var28)
+						p1()
 					end
 					
-					if var91 then
-						var91:andThen(function()
-							-- upvalues: var83 (copy), var56 (copy), var85 (copy), p13 (ref), var82 (copy), var86 (copy), p11 (copy)
-							var56(var85, p13.humanoidDescriptionWithValidAssets, var83, var82, var86)
-							p11()
+					if var33 then
+						var33:andThen(function()
+							-- upvalues: var25 (copy), var21 (copy), var27 (copy), p3 (ref), var24 (copy), var28 (copy), p1 (copy)
+							var21(var27, p3.humanoidDescriptionWithValidAssets, var25, var24, var28)
+							p1()
 						end, function()
-							-- upvalues: cryoModule (copy), var83 (copy), var82 (copy), var56 (copy), var85 (copy), p13 (ref), var86 (copy), p11 (copy)
-							var56(var85, p13.humanoidDescriptionWithValidAssets, cryoModule.Dictionary.join(var83, {
-								equipped = cryoModule.Dictionary.join(var83.equipped, {
-									BackgroundAssetId = if var82.equipped.BackgroundAssetId ~= nil then cryoModule.None else var82.equipped.BackgroundAssetId
+							-- upvalues: cryoModule (copy), var25 (copy), var24 (copy), var21 (copy), var27 (copy), p3 (ref), var28 (copy), p1 (copy)
+							var21(var27, p3.humanoidDescriptionWithValidAssets, cryoModule.Dictionary.join(var25, {
+								equipped = cryoModule.Dictionary.join(var25.equipped, {
+									BackgroundAssetId = if var24.equipped.BackgroundAssetId ~= nil then cryoModule.None else var24.equipped.BackgroundAssetId
 								})
-							}), var82, var86)
-							p11()
+							}), var24, var28)
+							p1()
 						end)
 						
 						return
 					end
-					var56(var85, p13.humanoidDescriptionWithValidAssets, var83, var82, var86)
-					p11()
+					var21(var27, p3.humanoidDescriptionWithValidAssets, var25, var24, var28)
+					p1()
 				end):catch(function(_)
-					-- upvalues: var51 (copy), timeoutStatusStore (copy), var57 (copy), saveStatusEnumModule (copy), p12 (ref)
-					var51(false)
+					-- upvalues: var17 (copy), timeoutStatusStore (copy), var22 (copy), saveStatusEnumModule (copy), p2 (ref)
+					var17(false)
 					
 					if timeoutStatusStore then
 						timeoutStatusStore.fetchStatus()
 					end
-					var57(saveStatusEnumModule.Failure)
-					p12()
+					var22(saveStatusEnumModule.Failure)
+					p2()
 				end)
 			end
 		end)
 	end, {
-		timeoutStatusStore, var40, var42, var45, var47, var49, var53, var57, var51
+		timeoutStatusStore, var6, var8, var11, var13, var15, var19, var22, var17
 	})
 	
 	if fFlagAXEnableManualSavingBlockingPrompt then
-		local var59 = reactModule.useCallback(function(p15)
-			-- upvalues: var58 (ref), fFlagSignalsNavP3Dispatch (copy), var27 (copy), var36 (ref), navigateToRoute (copy)
+		local var24 = reactModule.useCallback(function(p1)
+			-- upvalues: var23 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateToRoute (copy)
 			return function()
-				-- upvalues: var58 (copy), fFlagSignalsNavP3Dispatch (copy), var27 (copy), p15 (ref), var36 (copy), navigateToRoute (copy)
-				var58():finally(function()
-					-- upvalues: fFlagSignalsNavP3Dispatch (copy), var27 (copy), p15 (copy), var36 (copy), navigateToRoute (copy)
+				-- upvalues: var23 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p1 (ref), var2 (copy), navigateToRoute (copy)
+				var23():finally(function()
+					-- upvalues: fFlagSignalsNavP3Dispatch (copy), var1 (copy), p1 (copy), var2 (copy), navigateToRoute (copy)
 					if fFlagSignalsNavP3Dispatch then
-						var27.to(var27.fromLegacyPage({ skipSaveBlockingPrompt = true, name = p15 }))
+						var1.to(var1.fromLegacyPage({ skipSaveBlockingPrompt = true, name = p1 }))
 						
 						return
 					end
-					var36(navigateToRoute({ { skipSaveBlockingPrompt = true, name = p15 } }))
+					var2(navigateToRoute({ { skipSaveBlockingPrompt = true, name = p1 } }))
 				end)
 			end
-		end, { var58, var36 })
-		local var60 = reactModule.useCallback(function(p16)
-			-- upvalues: var44 (ref), var36 (ref), characterHistoryStateChangeButtonActivated (copy), fFlagSignalsNavP3Dispatch (copy), var27 (copy), navigateToRoute (copy)
+		end, { var23, var2 })
+		local var25 = reactModule.useCallback(function(p1)
+			-- upvalues: var10 (ref), var2 (ref), characterHistoryStateChangeButtonActivated (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateToRoute (copy)
 			return function()
-				-- upvalues: var44 (copy), var36 (copy), characterHistoryStateChangeButtonActivated (copy), fFlagSignalsNavP3Dispatch (copy), var27 (copy), p16 (ref), navigateToRoute (copy)
+				-- upvalues: var10 (copy), var2 (copy), characterHistoryStateChangeButtonActivated (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p1 (ref), navigateToRoute (copy)
 				task.spawn(function()
-					-- upvalues: var44 (copy), var36 (copy), characterHistoryStateChangeButtonActivated (copy), fFlagSignalsNavP3Dispatch (copy), var27 (copy), p16 (copy), navigateToRoute (copy)
-					var36(characterHistoryStateChangeButtonActivated(var44(false)))
+					-- upvalues: var10 (copy), var2 (copy), characterHistoryStateChangeButtonActivated (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p1 (copy), navigateToRoute (copy)
+					var2(characterHistoryStateChangeButtonActivated(var10(false)))
 					task.wait()
 					
 					if fFlagSignalsNavP3Dispatch then
-						var27.to(var27.fromLegacyPage({ skipSaveBlockingPrompt = true, name = p16 }))
+						var1.to(var1.fromLegacyPage({ skipSaveBlockingPrompt = true, name = p1 }))
 						
 						return
 					end
-					var36(navigateToRoute({ { skipSaveBlockingPrompt = true, name = p16 } }))
+					var2(navigateToRoute({ { skipSaveBlockingPrompt = true, name = p1 } }))
 				end)
 			end
-		end, { var36, var44 })
-		local var61 = reactModule.useCallback(function(p17, p18)
-			-- upvalues: actions (copy), avatarScreen (copy), t_4 (copy), tutilsModule (copy), var55 (ref), saveStatusEnumModule (copy), cryoModule (copy), var59 (ref), var60 (ref)
-			local routeName = (p17 or {}).routeName
-			local params = (p17 or {}).params
+		end, { var2, var10 })
+		local var26 = reactModule.useCallback(function(p1, p2)
+			-- upvalues: actions (copy), avatarScreen (copy), t_4 (copy), tutilsModule (copy), var20 (ref), saveStatusEnumModule (copy), cryoModule (copy), var24 (ref), var25 (ref)
+			local routeName = (p1 or {}).routeName
+			local params = (p1 or {}).params
 			
-			if p17.type == actions.Back and not p17.immediate and (p18.routes[#p18.routes] and p18.routes[#p18.routes].routeName == avatarScreen.SaveAvatarOnLeaveAvatarExperiencePrompt) then
+			if p1.type == actions.Back and not p1.immediate and (p2.routes[#p2.routes] and p2.routes[#p2.routes].routeName == avatarScreen.SaveAvatarOnLeaveAvatarExperiencePrompt) then
 				return true, nil
-			elseif p17.type ~= actions.Navigate or t_4[routeName] == nil or params ~= nil and tutilsModule.fieldCount(params) ~= 0 or var55(false) ~= saveStatusEnumModule.Eligible then
+			elseif p1.type ~= actions.Navigate or t_4[routeName] == nil or params ~= nil and tutilsModule.fieldCount(params) ~= 0 or var20(false) ~= saveStatusEnumModule.Eligible then
 				return false, nil
-			elseif p18.routes[#p18.routes] and p18.routes[#p18.routes].routeName == avatarScreen.SaveAvatarOnLeaveAvatarExperiencePrompt then
+			elseif p2.routes[#p2.routes] and p2.routes[#p2.routes].routeName == avatarScreen.SaveAvatarOnLeaveAvatarExperiencePrompt then
 				return true, nil
 			end
-			local var92 = cryoModule.List.join(p18.routes, {
+			local var27 = cryoModule.List.join(p2.routes, {
 				{
 					key = avatarScreen.SaveAvatarOnLeaveAvatarExperiencePrompt,
 					routeName = avatarScreen.SaveAvatarOnLeaveAvatarExperiencePrompt,
 					params = {
-						saveAndContinue = var59(routeName),
-						continueWithoutSave = var60(routeName)
+						saveAndContinue = var24(routeName),
+						continueWithoutSave = var25(routeName)
 					}
 				}
 			})
 			
-			return true, cryoModule.Dictionary.join(p18, { routes = var92, index = #var92 })
-		end, { var55, var59, var60 })
+			return true, cryoModule.Dictionary.join(p2, { routes = var27, index = #var27 })
+		end, { var20, var24, var25 })
 		reactModule.useEffect(function()
-			-- upvalues: var37 (ref), registerCustomGetStateForAction (copy), customGetStateForAction (copy), var61 (ref)
-			var37.dispatch(registerCustomGetStateForAction(customGetStateForAction.HandlerId.BlockAXExitOnUnsavedChanges, var61))
-		end, { var37, var61 })
+			-- upvalues: var3 (ref), registerCustomGetStateForAction (copy), customGetStateForAction (copy), var26 (ref)
+			var3.dispatch(registerCustomGetStateForAction(customGetStateForAction.HandlerId.BlockAXExitOnUnsavedChanges, var26))
+		end, { var3, var26 })
 	end
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var40 (ref), var50 (ref), var55 (ref), saveStatusEnumModule (copy), var58 (ref)
-		return signalsModule.createEffect(function(p19)
-			-- upvalues: var40 (copy), var50 (copy), var55 (copy), saveStatusEnumModule (copy), var58 (copy)
-			local var93 = var40(p19)
+		-- upvalues: signalsModule (copy), var6 (ref), var16 (ref), var20 (ref), saveStatusEnumModule (copy), var23 (ref)
+		return signalsModule.createEffect(function(p1)
+			-- upvalues: var6 (copy), var16 (copy), var20 (copy), saveStatusEnumModule (copy), var23 (copy)
+			local var27 = var6(p1)
 			
-			if var93[#var93] and var50(false) then
-				local var94 = var55(false)
+			if var27[#var27] and var16(false) then
+				local var28 = var20(false)
 				
-				if var94 == saveStatusEnumModule.Eligible or var94 == saveStatusEnumModule.HasTryOns then
-					var58()
+				if var28 == saveStatusEnumModule.Eligible or var28 == saveStatusEnumModule.HasTryOns then
+					var23()
 				end
 			end
 		end)
 	end, {})
-	local var62 = reactModule.useCallback(function()
-		-- upvalues: var51 (ref)
-		var51(true)
-	end, { var51 })
+	local var27 = reactModule.useCallback(function()
+		-- upvalues: var17 (ref)
+		var17(true)
+	end, { var17 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var40 (ref), var42 (ref), var52 (ref), var44 (ref), var55 (ref), var58 (ref), var62 (ref)
+		-- upvalues: var6 (ref), var8 (ref), var18 (ref), var10 (ref), var20 (ref), var23 (ref), var27 (ref)
 		return {
-			getHistorySignal = var40,
-			getCurrentHistoryIndexSignal = var42,
-			updateHistoryIndexAndGetCharacterData = var52,
-			getLastSuccessfullySavedStateSignal = var44,
-			getSaveEligibilityStatusSignal = var55,
-			trySaveAvatar = var58,
-			autoSaveNextNewSaveData = var62
+			getHistorySignal = var6,
+			getCurrentHistoryIndexSignal = var8,
+			updateHistoryIndexAndGetCharacterData = var18,
+			getLastSuccessfullySavedStateSignal = var10,
+			getSaveEligibilityStatusSignal = var20,
+			trySaveAvatar = var23,
+			autoSaveNextNewSaveData = var27
 		}
 	end, {
-		var40, var42, var52, var44, var55, var58, var62
+		var6, var8, var18, var10, var20, var23, var27
 	})
 end

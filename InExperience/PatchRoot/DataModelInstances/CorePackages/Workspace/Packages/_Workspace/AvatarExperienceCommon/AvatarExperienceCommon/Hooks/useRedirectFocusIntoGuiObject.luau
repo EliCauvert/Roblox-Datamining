@@ -1,9 +1,9 @@
 ﻿local guiService = game:GetService("GuiService")
 local reactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: guiService (ref)
-	return guiService.SelectedCoreObject and (not guiService.SelectedCoreObject:IsDescendantOf(p0) and not (guiService.SelectedCoreObject == p0))
+	return guiService.SelectedCoreObject and (not guiService.SelectedCoreObject:IsDescendantOf(p1) and not (guiService.SelectedCoreObject == p1))
 end
 
 return function(p1)

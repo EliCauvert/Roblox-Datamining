@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("RemoveGameStat", function(p0)
-	return { statName = p0 }
+﻿return require(script.Parent.Parent.ActionCreator)("RemoveGameStat", function(p1)
+	return { statName = p1 }
 end)

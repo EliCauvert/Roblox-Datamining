@@ -8,22 +8,22 @@ local graphQLList = definitionModule.GraphQLList
 local graphQLNonNull = definitionModule.GraphQLNonNull
 local _ = require(parent.type.schema)
 
-local function typeFromAST(p0, p1)
+local function typeFromAST(p1, p2)
 	-- upvalues: kind (ref), typeFromAST (ref), graphQLList (ref), graphQLNonNull (ref), invariant (ref), inspect (ref)
 	local _ = nil
 	
-	if p1.kind == kind.LIST_TYPE then
-		local var2 = typeFromAST(p0, p1.type)
+	if p2.kind == kind.LIST_TYPE then
+		local var1 = typeFromAST(p1, p2.type)
 		
-		return var2 and graphQLList.new(var2)
-	elseif p1.kind == kind.NON_NULL_TYPE then
-		local var3 = typeFromAST(p0, p1.type)
+		return var1 and graphQLList.new(var1)
+	elseif p2.kind == kind.NON_NULL_TYPE then
+		local var2 = typeFromAST(p1, p2.type)
 		
-		return var3 and graphQLNonNull.new(var3)
-	elseif p1.kind == kind.NAMED_TYPE then
-		return p0:getType(p1.name.value)
+		return var2 and graphQLNonNull.new(var2)
+	elseif p2.kind == kind.NAMED_TYPE then
+		return p1:getType(p2.name.value)
 	end
-	invariant(false, "Unexpected type node: " .. inspect(p1))
+	invariant(false, "Unexpected type node: " .. inspect(p2))
 	
 	return nil
 end

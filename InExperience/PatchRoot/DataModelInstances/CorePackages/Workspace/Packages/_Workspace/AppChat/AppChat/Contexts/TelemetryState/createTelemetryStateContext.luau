@@ -2,46 +2,46 @@
 local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), cryoModule (ref)
-	local var2 = reactModule.createContext({
+	local var1 = reactModule.createContext({
 		get = function()
-			-- upvalues: cryoModule (copy), p0 (ref)
-			return cryoModule.Dictionary.union({}, p0)
+			-- upvalues: cryoModule (copy), p1 (ref)
+			return cryoModule.Dictionary.union({}, p1)
 		end,
 		set = function() end
 	})
 	
 	return {
-		Provider = var2.Provider,
+		Provider = var1.Provider,
 		useClearState = function()
-			-- upvalues: reactModule (copy), var2 (ref), p0 (ref)
-			local set = reactModule.useContext(var2).set
+			-- upvalues: reactModule (copy), var1 (ref), p1 (ref)
+			local set = reactModule.useContext(var1).set
 			
 			return reactModule.useCallback(function()
-				-- upvalues: set (ref), p0 (copy)
-				set(p0)
+				-- upvalues: set (ref), p1 (copy)
+				set(p1)
 			end, { set })
 		end,
 		useGetState = function()
-			-- upvalues: reactModule (copy), var2 (ref)
-			return reactModule.useContext(var2).get
+			-- upvalues: reactModule (copy), var1 (ref)
+			return reactModule.useContext(var1).get
 		end,
 		useMergeState = function()
-			-- upvalues: reactModule (copy), var2 (ref), cryoModule (copy)
-			local set = reactModule.useContext(var2).set
+			-- upvalues: reactModule (copy), var1 (ref), cryoModule (copy)
+			local set = reactModule.useContext(var1).set
 			
-			return reactModule.useCallback(function(p1)
+			return reactModule.useCallback(function(p2)
 				-- upvalues: set (ref), cryoModule (copy)
-				set(function(p2)
-					-- upvalues: cryoModule (copy), p1 (ref)
-					return cryoModule.Dictionary.join(p2, p1)
+				set(function(p3)
+					-- upvalues: cryoModule (copy), p2 (ref)
+					return cryoModule.Dictionary.join(p3, p2)
 				end)
 			end, { set })
 		end,
 		useSetState = function()
-			-- upvalues: reactModule (copy), var2 (ref)
-			return reactModule.useContext(var2).set
+			-- upvalues: reactModule (copy), var1 (ref)
+			return reactModule.useContext(var1).set
 		end
 	}
 end

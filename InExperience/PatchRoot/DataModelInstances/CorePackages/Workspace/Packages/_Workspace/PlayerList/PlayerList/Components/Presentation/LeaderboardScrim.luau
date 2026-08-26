@@ -28,7 +28,7 @@ local function LeaderboardScrimMobile()
 	})
 end
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), LeaderboardScrimMobile (ref)
-	return if p0.isSmallTouchDevice then reactModule.createElement(LeaderboardScrimMobile) else nil
+	return if p1.isSmallTouchDevice then reactModule.createElement(LeaderboardScrimMobile) else nil
 end)

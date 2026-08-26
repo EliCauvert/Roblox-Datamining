@@ -14,23 +14,23 @@ local uDim2 = UDim2.new(0, activityBoxPadding, 0, 0)
 local lineGraphHeight = constantsModule.GeneralFormatting.LineGraphHeight
 local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roactModule (ref), bannerButtonModule (ref), entryFrameHeight (ref), activityBoxWidth (ref), activityBoxPadding (ref), cellLabelModule (ref), uDim2 (ref), lineWidth (ref), lineColor (ref), lineGraphModule (ref), lineGraphHeight (ref), convertTimeStampModule (ref), chartHeaderNames (ref)
-	local scriptData = p0.scriptData
-	local frameHeight = p0.frameHeight
-	local showGraph = p0.showGraph
-	local layoutOrder = p0.layoutOrder
-	local activityBoxColor = p0.activityBoxColor
-	local entryCellSize = p0.entryCellSize
-	local cellOffset = p0.cellOffset
-	local verticalOffsets = p0.verticalOffsets
-	local onButtonPress = p0.onButtonPress
-	local getX = p0.getX
-	local getActivity = p0.getActivity
-	local getRate = p0.getRate
-	local formatScriptsData = p0.formatScriptsData
+	local scriptData = p1.scriptData
+	local frameHeight = p1.frameHeight
+	local showGraph = p1.showGraph
+	local layoutOrder = p1.layoutOrder
+	local activityBoxColor = p1.activityBoxColor
+	local entryCellSize = p1.entryCellSize
+	local cellOffset = p1.cellOffset
+	local verticalOffsets = p1.verticalOffsets
+	local onButtonPress = p1.onButtonPress
+	local getX = p1.getX
+	local getActivity = p1.getActivity
+	local getRate = p1.getRate
+	local formatScriptsData = p1.formatScriptsData
 	local dataStats = scriptData.dataStats
-	local var7 = dataStats.dataSet:back()
+	local var1 = dataStats.dataSet:back()
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -54,12 +54,12 @@ return function(p0)
 				pos = cellOffset[1] + uDim2
 			}),
 			ScriptAcitivity = roactModule.createElement(cellLabelModule, {
-				text = formatScriptsData(var7.data[1]),
+				text = formatScriptsData(var1.data[1]),
 				size = entryCellSize[2],
 				pos = cellOffset[2]
 			}),
 			scriptFreqStr = roactModule.createElement(cellLabelModule, {
-				text = formatScriptsData(var7.data[2]),
+				text = formatScriptsData(var1.data[2]),
 				size = entryCellSize[3],
 				pos = cellOffset[3]
 			}),

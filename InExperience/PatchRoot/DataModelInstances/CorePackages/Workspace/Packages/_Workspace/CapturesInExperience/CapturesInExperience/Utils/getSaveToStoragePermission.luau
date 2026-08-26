@@ -5,46 +5,46 @@ local saveCaptureToExternalStorageModule = require(parent.Thunks.SaveCaptureToEx
 local saveCapturesToExternalStorageModule = require(parent.Thunks.SaveCapturesToExternalStorage)
 local _ = require(parent.Types)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: default (ref), userInputService (ref), saveCapturesToExternalStorageModule (ref), saveCaptureToExternalStorageModule (ref)
-	default:hasPermissions({ default.Permissions.WRITE_MEDIA_STORAGE }):andThen(function(p3)
-		-- upvalues: default (copy), userInputService (copy), p1 (ref), p0 (ref), p2 (ref), saveCapturesToExternalStorageModule (copy), saveCaptureToExternalStorageModule (copy)
-		local var3 = if p3.status ~= default.Status.AUTHORIZED then userInputService:GetPlatform() == Enum.Platform.OSX else true
+	default:hasPermissions({ default.Permissions.WRITE_MEDIA_STORAGE }):andThen(function(p4)
+		-- upvalues: default (copy), userInputService (copy), p2 (ref), p1 (ref), p3 (ref), saveCapturesToExternalStorageModule (copy), saveCaptureToExternalStorageModule (copy)
+		local var1 = if p4.status ~= default.Status.AUTHORIZED then userInputService:GetPlatform() == Enum.Platform.OSX else true
 		
-		if userInputService:GetPlatform() == Enum.Platform.Android and not var3 then
-			if p1 then
-				assert(p1 ~= nil, "openPermissionModal is not nil")
-				p1()
+		if userInputService:GetPlatform() == Enum.Platform.Android and not var1 then
+			if p2 then
+				assert(p2 ~= nil, "openPermissionModal is not nil")
+				p2()
 				
 				return
 			end
 			return
-		elseif not var3 then
-			default:requestPermissions({ default.Permissions.WRITE_MEDIA_STORAGE }):andThen(function(p4)
-				-- upvalues: default (copy), p0 (copy), p2 (copy), saveCapturesToExternalStorageModule (copy), saveCaptureToExternalStorageModule (copy)
-				if if p4.status ~= default.Status.AUTHORIZED then p4.status == default.Status.UNSUPPORTED else true then
-					if #p0 > 0 then
-						p2(saveCapturesToExternalStorageModule(p0))
+		elseif not var1 then
+			default:requestPermissions({ default.Permissions.WRITE_MEDIA_STORAGE }):andThen(function(p5)
+				-- upvalues: default (copy), p1 (copy), p3 (copy), saveCapturesToExternalStorageModule (copy), saveCaptureToExternalStorageModule (copy)
+				if if p5.status ~= default.Status.AUTHORIZED then p5.status == default.Status.UNSUPPORTED else true then
+					if #p1 > 0 then
+						p3(saveCapturesToExternalStorageModule(p1))
 						
 						return
 					end
-					p2(saveCaptureToExternalStorageModule(p0))
+					p3(saveCaptureToExternalStorageModule(p1))
 				end
 			end):catch(function() end)
 			
 			return
-		elseif #p0 > 0 then
-			p2(saveCapturesToExternalStorageModule(p0))
+		elseif #p1 > 0 then
+			p3(saveCapturesToExternalStorageModule(p1))
 			
 			return
 		end
-		p2(saveCaptureToExternalStorageModule(p0))
+		p3(saveCaptureToExternalStorageModule(p1))
 	end):catch(function()
-		-- upvalues: userInputService (copy), p1 (ref)
+		-- upvalues: userInputService (copy), p2 (ref)
 		if userInputService:GetPlatform() ~= Enum.Platform.Android then return end
-		if p1 then
-			assert(p1 ~= nil, "openPermissionModal is not nil")
-			p1()
+		if p2 then
+			assert(p2 ~= nil, "openPermissionModal is not nil")
+			p2()
 			
 			return
 		end

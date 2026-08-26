@@ -13,14 +13,14 @@ local t = {
 	}
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: socialLuaAnalyticsModule (ref), defaultTelemetryEventsModule (ref)
 	return {
 		overrideName = nil,
 		throttlingThousandths = nil,
 		type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
 		standardizedFields = defaultTelemetryEventsModule.STANDARDIZED_FIELDS,
-		format = p0
+		format = p1
 	}
 end
 
@@ -61,10 +61,10 @@ t.Events = {
 				throttlingThousandths = nil,
 				type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
 				standardizedFields = defaultTelemetryEventsModule.STANDARDIZED_FIELDS,
-				format = function(p2, _)
+				format = function(p1, _)
 					return {
-						state = p2.state,
-						btn = p2.btn,
+						state = p1.state,
+						btn = p1.btn,
 						os_time = os.time(),
 						os_clock = os.clock()
 					}
@@ -75,23 +75,23 @@ t.Events = {
 	}),
 	ModalRendered = modalTelemetryModule.Events.modalRenderedWithSequence({
 		modalSequence = modalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
-		counterFormat = function(p3, _)
-			return { modalVariant = p3.modalVariant }
+		counterFormat = function(p1, _)
+			return { modalVariant = p1.modalVariant }
 		end
 	}),
 	ModalAction = modalTelemetryModule.Events.modalActionWithSequence({
 		modalSequence = modalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
-		counterFormat = function(p4, _)
-			return { modalVariant = p4.modalVariant, action = p4.action }
+		counterFormat = function(p1, _)
+			return { modalVariant = p1.modalVariant, action = p1.action }
 		end
 	}),
 	ModalActionResult = modalTelemetryModule.Events.modalActionResultWithSequence({
 		modalSequence = modalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
-		counterFormat = function(p5, _)
+		counterFormat = function(p1, _)
 			return {
-				modalVariant = p5.modalVariant,
-				action = p5.action,
-				actionResult = p5.actionResult
+				modalVariant = p1.modalVariant,
+				action = p1.action,
+				actionResult = p1.actionResult
 			}
 		end
 	})

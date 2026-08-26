@@ -4,12 +4,12 @@ local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAss
 local selectTryOnItemsModule = require(script.Parent.selectTryOnItems)
 local fFlagAXMakeupEquipping = avatarExperienceFlagsModule.FFlagAXMakeupEquipping
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagAXMakeupEquipping (ref), selectTryOnItemsModule (ref), isMakeupAssetTypeModule (ref)
 	if not fFlagAXMakeupEquipping then
 		return false
 	end
-	for i, v in selectTryOnItemsModule(p0) do
+	for i, v in selectTryOnItemsModule(p1) do
 		if v.selectedInTryOnManager and v.itemType and isMakeupAssetTypeModule(v.itemSubType) then
 			return true
 		end

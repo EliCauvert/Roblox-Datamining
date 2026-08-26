@@ -6,22 +6,22 @@ local function createSduiImpressionHandlerRegistry()
 	local t = {}
 	
 	return {
-		getImpressionHandlerConfig = function(p0)
+		getImpressionHandlerConfig = function(p1)
 			-- upvalues: t (ref)
-			local var4 = t[p0]
+			local var1 = t[p1]
 			
-			if var4 and not var4.handler and var4.lazyHandler then
-				var4.handler = var4.lazyHandler()
+			if var1 and not var1.handler and var1.lazyHandler then
+				var1.handler = var1.lazyHandler()
 			end
-			return var4
+			return var1
 		end,
 		registerImpressionHandlerConfig = function(p1, p2)
 			-- upvalues: t (ref)
 			t[p1] = p2
 		end,
-		registerImpressionHandlerConfigs = function(p3)
+		registerImpressionHandlerConfigs = function(p1)
 			-- upvalues: t (ref)
-			for i, v in p3 do
+			for i, v in p1 do
 				t[i] = v
 			end
 		end,
@@ -36,12 +36,12 @@ local function createSduiImpressionHandlerRegistry()
 	}
 end
 
-local var2 = nil
+local var1 = nil
 
 return function()
-	-- upvalues: var2 (write), createSduiImpressionHandlerRegistry (ref)
-	if var2 == nil then
-		var2 = createSduiImpressionHandlerRegistry()
+	-- upvalues: var1 (write), createSduiImpressionHandlerRegistry (ref)
+	if var1 == nil then
+		var1 = createSduiImpressionHandlerRegistry()
 	end
-	return var2
+	return var1
 end

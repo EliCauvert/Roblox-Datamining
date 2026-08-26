@@ -17,52 +17,52 @@ local impressionsTagUtility = impressionsModule.ImpressionsTagUtility
 local sendItemImpressions = unifiedLoggingModule.SendItemImpressions
 local fFlagLuaAppUseFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseFrameBoundsImpressions
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: useCollectionImpressionsSignal (ref), reactModule (ref), cryoModule (ref), tile (ref), sendItemImpressions (ref), useSelector (ref), topicContentsReducer (ref), impressionsTagUtility (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
-	if p3 and p3.tiles and p2 then
-		local var8, var9 = useCollectionImpressionsSignal(p2.scrollViewPositionChangedSignal)
-		local var10 = reactModule.useCallback(function(p5)
-			-- upvalues: cryoModule (copy), p3 (ref), tile (copy), sendItemImpressions (copy), p1 (ref), p0 (ref), p2 (ref)
-			sendItemImpressions.sendFromFriendsCarousel(p1, p0, p5, cryoModule.Dictionary.map(p3.tiles, function(p6)
+	if p4 and p4.tiles and p3 then
+		local var1, var2 = useCollectionImpressionsSignal(p3.scrollViewPositionChangedSignal)
+		local var3 = reactModule.useCallback(function(p6)
+			-- upvalues: cryoModule (copy), p4 (ref), tile (copy), sendItemImpressions (copy), p2 (ref), p1 (ref), p3 (ref)
+			sendItemImpressions.sendFromFriendsCarousel(p2, p1, p6, cryoModule.Dictionary.map(p4.tiles, function(p7)
 				-- upvalues: cryoModule (copy), tile (copy)
-				return cryoModule.Dictionary.join(p6, { isFriend = p6.tileType == tile.Friend })
-			end), p2.appPage, p2.sortIndex, p2.sortId, p2.impressionTag)
+				return cryoModule.Dictionary.join(p7, { isFriend = p7.tileType == tile.Friend })
+			end), p3.appPage, p3.sortIndex, p3.sortId, p3.impressionTag)
 		end, {
-			p1, p0, p3.tiles, p2.appPage, p2.sortIndex, p2.sortId, p2.impressionTag
+			p2, p1, p4.tiles, p3.appPage, p3.sortIndex, p3.sortId, p3.impressionTag
 		})
-		local var11 = useSelector(function(p7)
-			-- upvalues: p2 (ref), topicContentsReducer (copy)
-			return if p2.sortId then p7.Personalization and (p7.Personalization[topicContentsReducer.key] and (p7.Personalization[topicContentsReducer.key][p2.sortId] and p7.Personalization[topicContentsReducer.key][p2.sortId].updatedTimestamp)) else nil
+		local var4 = useSelector(function(p6)
+			-- upvalues: p3 (ref), topicContentsReducer (copy)
+			return if p3.sortId then p6.Personalization and (p6.Personalization[topicContentsReducer.key] and (p6.Personalization[topicContentsReducer.key][p3.sortId] and p6.Personalization[topicContentsReducer.key][p3.sortId].updatedTimestamp)) else nil
 		end)
 		reactModule.useEffect(function()
-			-- upvalues: var11 (ref), p4 (ref)
-			if var11 then
-				p4.current = var11
+			-- upvalues: var4 (ref), p5 (ref)
+			if var4 then
+				p5.current = var4
 			end
-		end, { var11 })
+		end, { var4 })
 		
 		return {
-			onCollectionViewabilityChanged = var9,
-			tagTileForImpressions = reactModule.useCallback(function(p8, p9)
-				-- upvalues: impressionsTagUtility (copy), p2 (ref)
-				impressionsTagUtility.AddTag(p8, p2.impressionTag, p9)
+			onCollectionViewabilityChanged = var2,
+			tagTileForImpressions = reactModule.useCallback(function(p6, p7)
+				-- upvalues: impressionsTagUtility (copy), p3 (ref)
+				impressionsTagUtility.AddTag(p6, p3.impressionTag, p7)
 				
 				return function()
-					-- upvalues: impressionsTagUtility (copy), p8 (ref), p2 (copy), p9 (ref)
-					impressionsTagUtility.RemoveTag(p8, p2.impressionTag, p9)
+					-- upvalues: impressionsTagUtility (copy), p6 (ref), p3 (copy), p7 (ref)
+					impressionsTagUtility.RemoveTag(p6, p3.impressionTag, p7)
 				end
-			end, { p2.impressionTag }),
-			renderImpressionsTrackerComponent = reactModule.useCallback(function(p10)
-				-- upvalues: reactModule (copy), fFlagLuaAppUseFrameBoundsImpressions (copy), frameBoundsImpressionsTracker (copy), screenSizeImpressionsTracker (copy), p2 (ref), var8 (ref), var10 (ref), p4 (ref)
+			end, { p3.impressionTag }),
+			renderImpressionsTrackerComponent = reactModule.useCallback(function(p6)
+				-- upvalues: reactModule (copy), fFlagLuaAppUseFrameBoundsImpressions (copy), frameBoundsImpressionsTracker (copy), screenSizeImpressionsTracker (copy), p3 (ref), var1 (ref), var3 (ref), p5 (ref)
 				return reactModule.createElement(if fFlagLuaAppUseFrameBoundsImpressions then frameBoundsImpressionsTracker else screenSizeImpressionsTracker, {
-					pageContext = p2.appPage,
-					parentRef = p10,
-					impressionsTag = p2.impressionTag,
-					scrollViewPositionChangedSignal = var8,
-					sendImpressions = var10,
-					dataUpdatedTimestamp = p4.current
+					pageContext = p3.appPage,
+					parentRef = p6,
+					impressionsTag = p3.impressionTag,
+					scrollViewPositionChangedSignal = var1,
+					sendImpressions = var3,
+					dataUpdatedTimestamp = p5.current
 				})
-			end, { p2.impressionTag, var8, p2.appPage, var10 })
+			end, { p3.impressionTag, var1, p3.appPage, var3 })
 		}
 	end
 	return nil

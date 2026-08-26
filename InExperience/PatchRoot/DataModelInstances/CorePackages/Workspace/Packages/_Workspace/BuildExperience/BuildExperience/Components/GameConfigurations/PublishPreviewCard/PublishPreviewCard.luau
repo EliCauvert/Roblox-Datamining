@@ -15,16 +15,16 @@ local numberSequence = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function _(p0)
-	return if p0.placeId == nil then p0.gameIcon or `rbxthumb://type=GameIcon&id={p0.universeId}&w=150&h=150` else `rbxthumb://type=GameThumbnail&id={p0.placeId}&w=768&h=432`
+local function _(p1)
+	return if p1.placeId == nil then p1.gameIcon or `rbxthumb://type=GameIcon&id={p1.universeId}&w=150&h=150` else `rbxthumb://type=GameThumbnail&id={p1.placeId}&w=768&h=432`
 end
 
 return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), buildPublishPreviewCardMaxWidth (ref), image (ref), numberSequence (ref), publishExperienceTitleModule (ref)
-	local var6 = useTokens()
+	local var1 = useTokens()
 	local testId = p1.testId or "publish-preview-card"
 	local target = p1.target
-	local var8 = if target.placeId ~= nil then target.gameIcon or `rbxthumb://type=GameIcon&id={target.universeId}&w=150&h=150` else `rbxthumb://type=GameThumbnail&id={target.placeId}&w=768&h=432`
+	local var2 = if target.placeId ~= nil then target.gameIcon or `rbxthumb://type=GameIcon&id={target.universeId}&w=150&h=150` else `rbxthumb://type=GameThumbnail&id={target.placeId}&w=768&h=432`
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center size-full-0 auto-y padding-y-xsmall",
@@ -46,15 +46,15 @@ return function(p1)
 				RoundedCornerImage = reactModule.createElement(image, {
 					ZIndex = 1,
 					tag = "size-full",
-					Image = var8,
+					Image = var2,
 					ScaleType = Enum.ScaleType.Fit,
-					cornerRadius = UDim.new(0, var6.Radius.Medium),
+					cornerRadius = UDim.new(0, var1.Radius.Medium),
 					testId = `{testId}-media`
 				}),
 				SquareCornerImage = reactModule.createElement(image, {
 					ZIndex = 2,
 					tag = "size-full",
-					Image = var8,
+					Image = var2,
 					ScaleType = Enum.ScaleType.Fit,
 					testId = `{testId}-media-bottom`
 				}, {

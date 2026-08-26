@@ -2,7 +2,7 @@
 local isWirableModule = require(sceneUnderstanding.wiring.isWirable)
 local _ = require(sceneUnderstanding.wiring.types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: isWirableModule (ref)
-	return if p0 and isWirableModule(p0) then p0 else nil
+	return if p1 and isWirableModule(p1) then p1 else nil
 end

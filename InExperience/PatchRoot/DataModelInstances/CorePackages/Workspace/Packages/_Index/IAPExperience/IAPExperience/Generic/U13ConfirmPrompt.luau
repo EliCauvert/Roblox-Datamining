@@ -13,20 +13,20 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.getMessage(_, p0, p1)
+function name.getMessage(_, p1, p2)
 	-- upvalues: u13ConfirmTypeModule (ref)
-	if p1 == u13ConfirmTypeModule.U13PaymentModal then
-		return p0.u13PaymentModal
-	elseif p1 == u13ConfirmTypeModule.U13MonthlyThreshold1Modal then
-		return p0.u13MonthlyThreshold1Modal
-	elseif p1 == u13ConfirmTypeModule.U13MonthlyThreshold2Modal then
-		return p0.u13MonthlyThreshold2Modal
-	elseif p1 == u13ConfirmTypeModule.ParentalConsentWarningPaymentModal13To17 then
-		return p0.parentalConsentWarningPaymentModal13To17
+	if p2 == u13ConfirmTypeModule.U13PaymentModal then
+		return p1.u13PaymentModal
+	elseif p2 == u13ConfirmTypeModule.U13MonthlyThreshold1Modal then
+		return p1.u13MonthlyThreshold1Modal
+	elseif p2 == u13ConfirmTypeModule.U13MonthlyThreshold2Modal then
+		return p1.u13MonthlyThreshold2Modal
+	elseif p2 == u13ConfirmTypeModule.ParentalConsentWarningPaymentModal13To17 then
+		return p1.parentalConsentWarningPaymentModal13To17
 	end
 end
 
-function name.render(p2)
+function name.render(p1)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -44,29 +44,29 @@ function name.render(p2)
 			confirm = { key = "IAPExperience.U13Confirm.Action.Confirm" },
 			cancel = { key = "IAPExperience.U13Confirm.Action.Cancel" }
 		},
-		render = function(p3)
-			-- upvalues: p2 (ref)
-			return p2:renderAlert(p3)
+		render = function(p2)
+			-- upvalues: p1 (ref)
+			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function name.renderAlert(p4, p5)
+function name.renderAlert(p1, p2)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local props = p4.props
+	local props = p1.props
 	
 	return roactModule.createElement(interactiveAlert, {
 		anchorPoint = props.anchorPoint,
 		position = props.position,
 		screenSize = props.screenSize,
-		title = p5.title,
-		bodyText = p4:getMessage(p5, props.modalType),
+		title = p2.title,
+		bodyText = p1:getMessage(p2, props.modalType),
 		buttonStackInfo = {
 			buttons = {
 				{
 					props = {
 						onActivated = props.cancelActivated,
-						text = p5.cancel,
+						text = p2.cancel,
 						inputIcon = props.cancelControllerIcon
 					}
 				},
@@ -74,7 +74,7 @@ function name.renderAlert(p4, p5)
 					buttonType = buttonType.PrimarySystem,
 					props = {
 						onActivated = props.doneActivated,
-						text = p5.confirm,
+						text = p2.confirm,
 						inputIcon = props.doneControllerIcon
 					}
 				}

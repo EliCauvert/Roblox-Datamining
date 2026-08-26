@@ -39,9 +39,9 @@ genericCell.defaultProps = {
 	isDisabled = false
 }
 
-function genericCell.render(p0)
+function genericCell.render(p1)
 	-- upvalues: roactModule (ref), interactableModule (ref), genericTextLabelModule (ref)
-	assert(p0.validateProps(p0.props))
+	assert(p1.validateProps(p1.props))
 	
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -50,19 +50,19 @@ function genericCell.render(p0)
 	}, {
 		Interactable = roactModule.createElement(interactableModule, {
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundColor3 = p0.props.colorStyle.Color,
-			BackgroundTransparency = p0.props.colorStyle.Transparency,
+			BackgroundColor3 = p1.props.colorStyle.Color,
+			BackgroundTransparency = p1.props.colorStyle.Transparency,
 			BorderSizePixel = 0,
 			AutoButtonColor = false,
-			[roactModule.Event.Activated] = not p0.props.isDisabled and p0.props.onActivated,
-			[roactModule.Ref] = p0.props.controlRef,
-			NextSelectionUp = p0.props.NextSelectionUp,
-			NextSelectionDown = p0.props.NextSelectionDown,
-			NextSelectionLeft = p0.props.NextSelectionLeft,
-			NextSelectionRight = p0.props.NextSelectionRight,
-			SelectionImageObject = p0.props.SelectionImageObject,
-			isDisabled = p0.props.isDisabled,
-			onStateChanged = p0.props.onStateChanged
+			[roactModule.Event.Activated] = not p1.props.isDisabled and p1.props.onActivated,
+			[roactModule.Ref] = p1.props.controlRef,
+			NextSelectionUp = p1.props.NextSelectionUp,
+			NextSelectionDown = p1.props.NextSelectionDown,
+			NextSelectionLeft = p1.props.NextSelectionLeft,
+			NextSelectionRight = p1.props.NextSelectionRight,
+			SelectionImageObject = p1.props.SelectionImageObject,
+			isDisabled = p1.props.isDisabled,
+			onStateChanged = p1.props.onStateChanged
 		}, {
 			Contents = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -83,39 +83,39 @@ function genericCell.render(p0)
 				Frame = roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, (-p0.props.rightContentWidth) - p0.props.leftContentWidth, 1, 0)
+					Size = UDim2.new(1, (-p1.props.rightContentWidth) - p1.props.leftContentWidth, 1, 0)
 				}, {
 					UIListLayout = roactModule.createElement("UIListLayout", {
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Vertical,
 						VerticalAlignment = Enum.VerticalAlignment.Center
 					}),
-					TitleText = p0.props.titleText and roactModule.createElement(genericTextLabelModule, {
+					TitleText = p1.props.titleText and roactModule.createElement(genericTextLabelModule, {
 						LayoutOrder = 1,
 						Size = UDim2.new(1, 0, 1, 0),
-						colorStyle = p0.props.textStyle,
-						fontStyle = p0.props.fontStyle,
-						Text = p0.props.titleText,
+						colorStyle = p1.props.textStyle,
+						fontStyle = p1.props.fontStyle,
+						Text = p1.props.titleText,
 						TextXAlignment = Enum.TextXAlignment.Left
 					}),
-					SubTitleText = p0.props.subtitleText and roactModule.createElement(genericTextLabelModule, {
+					SubTitleText = p1.props.subtitleText and roactModule.createElement(genericTextLabelModule, {
 						LayoutOrder = 2,
 						Size = UDim2.new(1, 0, 1, 0),
-						colorStyle = p0.props.subtitleTextStyle,
-						fontStyle = p0.props.subtitleFontStyle,
-						Text = p0.props.subtitleText,
+						colorStyle = p1.props.subtitleTextStyle,
+						fontStyle = p1.props.subtitleFontStyle,
+						Text = p1.props.subtitleText,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				}),
-				RightContent = p0.props.renderRightContent and p0.props.renderRightContent(),
-				LeftContent = p0.props.renderLeftContent and p0.props.renderLeftContent()
+				RightContent = p1.props.renderRightContent and p1.props.renderRightContent(),
+				LeftContent = p1.props.renderLeftContent and p1.props.renderLeftContent()
 			}),
 			Divider = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, -24, 0, 1),
 				Position = UDim2.new(0, 24, 1, -1),
-				BackgroundColor3 = p0.props.dividerStyle.Color,
-				BackgroundTransparency = p0.props.dividerStyle.Transparency
+				BackgroundColor3 = p1.props.dividerStyle.Color,
+				BackgroundTransparency = p1.props.dividerStyle.Transparency
 			})
 		})
 	})

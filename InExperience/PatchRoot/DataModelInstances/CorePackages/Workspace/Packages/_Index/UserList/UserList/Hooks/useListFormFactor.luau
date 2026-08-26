@@ -5,8 +5,8 @@ local _ = require(userList.Common.Enums)
 return function()
 	-- upvalues: useSelector (ref)
 	return {
-		formFactor = useSelector(function(p0)
-			return p0.FormFactor
+		formFactor = useSelector(function(p1)
+			return p1.FormFactor
 		end)
 	}
 end

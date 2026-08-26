@@ -13,8 +13,8 @@ local useChannelTabUnreadWriterModule = require(expChat.useChannelTabUnreadWrite
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
-local function selectIsChatWindowVisible(p0)
-	return p0.ChatVisibility.isChatWindowEnabled.value
+local function selectIsChatWindowVisible(p1)
+	return p1.ChatVisibility.isChatWindowEnabled.value
 end
 
 local function onActiveConversationMessageReceived()

@@ -2,10 +2,10 @@
 local _ = require(script.Parent.Parent.core.types)
 
 return {
-	selectURI = function(p0, p1)
+	selectURI = function(p1, p2)
 		-- upvalues: boolean (ref)
-		local uri = p0:getContext().uri
+		local uri = p1:getContext().uri
 		
-		return if boolean.toJSBoolean(uri) then uri elseif typeof(p1) == "function" then p1(p0) elseif boolean.toJSBoolean(p1) then p1 else "/graphql"
+		return if boolean.toJSBoolean(uri) then uri elseif typeof(p2) == "function" then p2(p1) elseif boolean.toJSBoolean(p2) then p2 else "/graphql"
 	end
 }

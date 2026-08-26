@@ -17,19 +17,19 @@ local t = {
 	colorNamespace = colorNamespaceModule.Color
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: accessoryTypeModule (ref), reactModule (ref), viewModule (ref), presentationContextModule (ref), flagsModule (ref), t (ref), colorNamespaceModule (ref), avatarModule (ref), textModule (ref), badgeModule (ref), iconModule (ref)
-	local accessory = p0.accessory
+	local accessory = p1.accessory
 	
 	if accessory == nil then
 		return nil
 	end
-	local tag = `align-x-center align-y-center {p0.iconVariant.tag}`
+	local tag = `align-x-center align-y-center {p1.iconVariant.tag}`
 	
 	return if accessory.type == accessoryTypeModule.Avatar then reactModule.createElement(viewModule, {
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		tag = tag,
-		testId = p0.testId
+		testId = p1.testId
 	}, {
 		Avatar = reactModule.createElement(presentationContextModule.Provider, {
 			value = if flagsModule.FoundationStableContextValues then t else {
@@ -39,35 +39,35 @@ return function(p0)
 		}, {
 			Avatar = reactModule.createElement(avatarModule, {
 				userId = accessory.userId,
-				backplateStyle = p0.tokens.Color.Shift.Shift_200,
-				size = p0.size
+				backplateStyle = p1.tokens.Color.Shift.Shift_200,
+				size = p1.size
 			})
 		})
 	}) elseif accessory.type == "Hint" then reactModule.createElement(viewModule, {
 		tag = "row align-y-center auto-xy padding-x-xsmall radius-small bg-shift-200",
-		LayoutOrder = p0.LayoutOrder,
-		testId = p0.testId
+		LayoutOrder = p1.LayoutOrder,
+		testId = p1.testId
 	}, {
 		Text = reactModule.createElement(textModule, {
 			tag = "auto-xy text-caption-medium content-muted",
 			Text = accessory.text
 		})
 	}) elseif accessory.type == "Badge" then reactModule.createElement(badgeModule, {
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		text = accessory.text,
 		icon = accessory.icon,
 		variant = accessory.variant,
-		testId = p0.testId
+		testId = p1.testId
 	}) else reactModule.createElement(viewModule, {
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		tag = tag,
-		testId = p0.testId
+		testId = p1.testId
 	}, {
 		Icon = reactModule.createElement(iconModule, {
 			name = accessory.iconName,
 			variant = accessory.iconVariant,
-			style = p0.iconVariant.style,
-			size = p0.iconVariant.size
+			style = p1.iconVariant.style,
+			size = p1.iconVariant.size
 		})
 	})
 end

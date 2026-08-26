@@ -3,17 +3,17 @@ local responsiveModule = require(script.Parent.Parent.Responsive)
 local containerRefModule = require(script.Parent.Parent.Context.ContainerRef)
 local luaAppResponsiveFixHookDeps = game:DefineFastFlag("LuaAppResponsiveFixHookDeps", false)
 
-function id(p0)
-	return p0
+function id(p1)
+	return p1
 end
 
 function useResponsiveImpl(p1, p2, p3)
 	-- upvalues: reactModule (ref), containerRefModule (ref), responsiveModule (ref), luaAppResponsiveFixHookDeps (ref)
-	local var4 = if typeof(p1) == "function" then p1 else id
-	local var5 = reactModule.useContext(containerRefModule)
-	local var6, var7 = reactModule.useState(var4(responsiveModule.DefaultKey))
-	local var8 = reactModule.useRef("")
-	local var9 = reactModule.useRef({ Key = responsiveModule.DefaultKey })
+	local var1 = if typeof(p1) == "function" then p1 else id
+	local var2 = reactModule.useContext(containerRefModule)
+	local var3, var4 = reactModule.useState(var1(responsiveModule.DefaultKey))
+	local var5 = reactModule.useRef("")
+	local var6 = reactModule.useRef({ Key = responsiveModule.DefaultKey })
 	local t = nil
 	
 	if typeof(p1) == "table" then
@@ -24,42 +24,42 @@ function useResponsiveImpl(p1, p2, p3)
 		end
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), responsiveModule (copy), p2 (ref), p3 (ref), t (write), var8 (ref), var9 (ref), var7 (ref), var4 (ref)
-		if var5 and var5.current then
-			local var11 = responsiveModule.bindContainer(var5.current, p2)
-			local var12 = var11:connect(function()
-				-- upvalues: var11 (ref), p3 (copy), t (copy), var8 (copy), var9 (copy), var7 (copy), var4 (copy)
-				local var14 = var11:currentKey(p3)
+		-- upvalues: var2 (ref), responsiveModule (copy), p2 (ref), p3 (ref), t (write), var5 (ref), var6 (ref), var4 (ref), var1 (ref)
+		if var2 and var2.current then
+			local var7 = responsiveModule.bindContainer(var2.current, p2)
+			local var8 = var7:connect(function()
+				-- upvalues: var7 (ref), p3 (copy), t (copy), var5 (copy), var6 (copy), var4 (copy), var1 (copy)
+				local var9 = var7:currentKey(p3)
 				
 				if not t then
-					var9.current = var11:currentRule(p3)
-					var7(var4(var14))
-				elseif t[var14] or var8.current and t[var8.current] then
-					var9.current = var11:currentRule(p3)
-					var7(var14)
+					var6.current = var7:currentRule(p3)
+					var4(var1(var9))
+				elseif t[var9] or var5.current and t[var5.current] then
+					var6.current = var7:currentRule(p3)
+					var4(var9)
 				end
-				var8.current = var14
+				var5.current = var9
 			end)
-			var9.current = var11:currentRule(p3)
-			local var13 = var11:currentKey(p3)
-			var7(var4(var13))
-			var8.current = var13
+			var6.current = var7:currentRule(p3)
+			local var9 = var7:currentKey(p3)
+			var4(var1(var9))
+			var5.current = var9
 			
 			return function()
-				-- upvalues: var12 (ref), var11 (ref)
-				var12:disconnect()
-				var11:destroy()
+				-- upvalues: var8 (ref), var7 (ref)
+				var8:disconnect()
+				var7:destroy()
 			end
 		end
 		return function() end
 	end, {
-		var5,
-		if var5 then var5.current else false,
+		var2,
+		if var2 then var2.current else false,
 		if luaAppResponsiveFixHookDeps then p2 else nil,
 		if luaAppResponsiveFixHookDeps then p3 else nil
 	})
 	
-	return var6, var9.current
+	return var3, var6.current
 end
 
 return useResponsiveImpl

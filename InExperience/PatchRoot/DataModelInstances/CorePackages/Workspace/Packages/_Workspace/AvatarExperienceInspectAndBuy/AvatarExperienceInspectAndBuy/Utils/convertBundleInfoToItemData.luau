@@ -6,13 +6,13 @@ local itemTypeEnum = AXCommonModule.Enums.ItemTypeEnum
 local salesLocationType = AXCommonModule.Enums.SalesLocationType
 local tutilsModule = require(parent.tutils)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: tutilsModule (ref), itemTypeEnum (ref), salesLocationType (ref)
-	local var3 = if p1 then tutilsModule.fieldCount(p1) else 0
+	local var1 = if p2 then tutilsModule.fieldCount(p2) else 0
 	local t = {}
 	
-	if p0.assetsInBundle then
-		for i, v in p0.assetsInBundle do
+	if p1.assetsInBundle then
+		for i, v in p1.assetsInBundle do
 			table.insert(t, {
 				id = tostring(v.id),
 				assetType = tostring(v.assetType),
@@ -23,39 +23,39 @@ return function(p0, p1)
 		end
 	end
 	return {
-		id = p0.bundleId,
-		name = p0.name,
-		description = p0.description,
+		id = p1.bundleId,
+		name = p1.name,
+		description = p1.description,
 		itemType = itemTypeEnum.Bundle,
-		itemSubType = p0.bundleType,
+		itemSubType = p1.bundleType,
 		creator = {
-			creatorId = p0.creatorId or "",
-			creatorName = p0.creatorName or "",
-			creatorHasVerifiedBadge = p0.creatorHasVerifiedBadge or false
+			creatorId = p1.creatorId or "",
+			creatorName = p1.creatorName or "",
+			creatorHasVerifiedBadge = p1.creatorHasVerifiedBadge or false
 		},
-		saleLocationType = p0.saleLocationType or salesLocationType.Invalid,
-		itemRestrictions = p0.itemRestrictions or {},
-		priceInRobux = p0.price,
-		noPriceStatus = p0.noPriceStatus,
-		catalogPriceStatus = p0.catalogPriceStatus,
-		isOwned = p0.owned,
-		hasResellers = p0.hasResellers,
-		isOffSale = p0.isOffSale,
-		collectibleItemId = p0.collectibleItemId,
+		saleLocationType = p1.saleLocationType or salesLocationType.Invalid,
+		itemRestrictions = p1.itemRestrictions or {},
+		priceInRobux = p1.price,
+		noPriceStatus = p1.noPriceStatus,
+		catalogPriceStatus = p1.catalogPriceStatus,
+		isOwned = p1.owned,
+		hasResellers = p1.hasResellers,
+		isOffSale = p1.isOffSale,
+		collectibleItemId = p1.collectibleItemId,
 		collectibleItemDetails = {
-			quantityLimitPerUser = p0.collectibleQuantityLimitPerUser,
-			collectibleLowestAvailableResaleProductId = p0.collectibleLowestAvailableResaleProductId,
-			collectibleLowestAvailableResaleItemInstanceId = p0.collectibleLowestAvailableResaleItemInstanceId,
-			unitsAvailableForConsumption = p0.remaining,
-			hasResellers = p0.hasResellers,
-			lowestResalePrice = p0.collectibleLowestResalePrice,
-			resellableCount = p0.resellableCount or var3,
-			totalQuantity = p0.collectibleTotalQuantity or 0
+			quantityLimitPerUser = p1.collectibleQuantityLimitPerUser,
+			collectibleLowestAvailableResaleProductId = p1.collectibleLowestAvailableResaleProductId,
+			collectibleLowestAvailableResaleItemInstanceId = p1.collectibleLowestAvailableResaleItemInstanceId,
+			unitsAvailableForConsumption = p1.remaining,
+			hasResellers = p1.hasResellers,
+			lowestResalePrice = p1.collectibleLowestResalePrice,
+			resellableCount = p1.resellableCount or var1,
+			totalQuantity = p1.collectibleTotalQuantity or 0
 		},
 		assetsInBundle = t,
 		favoritesDetails = {
-			isFavorited = p0.isFavorited,
-			numFavorites = p0.numFavorites
+			isFavorited = p1.isFavorited,
+			numFavorites = p1.numFavorites
 		}
 	}
 end

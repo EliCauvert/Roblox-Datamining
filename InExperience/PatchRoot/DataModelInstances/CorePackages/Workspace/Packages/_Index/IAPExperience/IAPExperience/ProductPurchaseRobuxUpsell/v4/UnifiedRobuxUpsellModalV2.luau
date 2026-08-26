@@ -46,16 +46,16 @@ local badgeTypeModule = require(parent.Enums.BadgeType)
 local _ = require(parent.Enums.VirtualItemBadgeType)
 local _ = require(parent.ProductPurchase.v3.UnifiedProductPurchaseModalTypes)
 
-local function UpsellProductDetailsLegacyImpl(p0, p1)
+local function UpsellProductDetailsLegacyImpl(p1, p2)
 	-- upvalues: badgeTypeModule (ref), reactModule (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref), yellowBadgeModule (ref)
-	local var27 = if p0.badgeType == badgeTypeModule.Popular then p1.Popular elseif p0.badgeType == badgeTypeModule.LastPurchased then p1.LastPurchased else nil
-	local var28 = "size-full-1400 radius-medium padding-x-large row"
+	local var1 = if p1.badgeType == badgeTypeModule.Popular then p2.Popular elseif p1.badgeType == badgeTypeModule.LastPurchased then p2.LastPurchased else nil
+	local var2 = "size-full-1400 radius-medium padding-x-large row"
 	
 	return reactModule.createElement(view, {
-		LayoutOrder = p0.layoutOrder,
-		onActivated = p0.onSelected,
-		tag = if p0.selected then var28 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var28 .. " bg-surface-300 stroke-emphasis stroke-standard",
-		Size = if p0.isCompact then UDim2.new(1, 0, 0, 40) else nil
+		LayoutOrder = p1.layoutOrder,
+		onActivated = p1.onSelected,
+		tag = if p1.selected then var2 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var2 .. " bg-surface-300 stroke-emphasis stroke-standard",
+		Size = if p1.isCompact then UDim2.new(1, 0, 0, 40) else nil
 	}, {
 		LeftSide = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -64,14 +64,14 @@ local function UpsellProductDetailsLegacyImpl(p0, p1)
 		}, {
 			RobuxAmount = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.product.robuxAmount),
-				tag = if p0.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-title-large content-emphasis text-align-x-left"
+				Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmount),
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-title-large content-emphasis text-align-x-left"
 			}),
-			RobuxAmountBonus = p0.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
+			RobuxAmountBonus = p1.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
 				LayoutOrder = 2,
 				RichText = true,
-				Text = "<s>" .. utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p0.product.robuxAmountBeforeBonus) .. "</s>",
-				tag = if p0.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-large content-muted text-align-x-left"
+				Text = "<s>" .. utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmountBeforeBonus) .. "</s>",
+				tag = if p1.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-large content-muted text-align-x-left"
 			})
 		}),
 		RightSide = reactModule.createElement(view, {
@@ -79,41 +79,41 @@ local function UpsellProductDetailsLegacyImpl(p0, p1)
 			tag = "row align-y-center align-x-right gap-large",
 			Size = UDim2.new(0.5, 0, 1, 0)
 		}, {
-			Badge = if var27 then reactModule.createElement(yellowBadgeModule, {
+			Badge = if var1 then reactModule.createElement(yellowBadgeModule, {
 				LayoutOrder = 1,
-				Text = var27,
-				Icon = if p0.badgeType == badgeTypeModule.Popular then "icons/menu/fire_fill" else nil
+				Text = var1,
+				Icon = if p1.badgeType == badgeTypeModule.Popular then "icons/menu/fire_fill" else nil
 			}) else nil,
 			RobuxPrice = reactModule.createElement(text, {
 				LayoutOrder = 2,
-				Text = p0.product.price or "",
-				tag = if p0.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
+				Text = p1.product.price or "",
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
 			})
 		})
 	})
 end
 
-local function UpsellProductDetailsMultiDisplayImpl(p2, p3)
+local function UpsellProductDetailsMultiDisplayImpl(p1, p2)
 	-- upvalues: getFFlagIAPExperienceUseUpsellBadgeHelperModule (ref), getUpsellBadgeInfoModule (ref), badgeTypeModule (ref), enums (ref), reactModule (ref), view (ref), text (ref), getIconRichText (ref), formatNumberModule (ref), localizationService (ref), grayBadgeModule (ref)
 	local text_1, icon
 	local _ = nil
 	local _ = nil
 	
 	if getFFlagIAPExperienceUseUpsellBadgeHelperModule() then
-		local var29 = getUpsellBadgeInfoModule(p2.badgeType, p3)
-		text_1 = var29.text
-		icon = var29.icon
+		local var1 = getUpsellBadgeInfoModule(p1.badgeType, p2)
+		text_1 = var1.text
+		icon = var1.icon
 	else
-		text_1 = if p2.badgeType == badgeTypeModule.Popular then p3.Popular elseif p2.badgeType == badgeTypeModule.LastPurchased then p3.LastPurchased elseif p2.badgeType == badgeTypeModule.ForYou then p3.ForYouItem elseif p2.badgeType == badgeTypeModule.BetterValue then p3.BetterValue else nil
-		icon = if p2.badgeType == badgeTypeModule.Popular then enums.IconName.Flame elseif p2.badgeType == badgeTypeModule.ForYou then enums.IconName.CircleStar elseif p2.badgeType == badgeTypeModule.BetterValue then enums.IconName.Tag else nil
+		text_1 = if p1.badgeType == badgeTypeModule.Popular then p2.Popular elseif p1.badgeType == badgeTypeModule.LastPurchased then p2.LastPurchased elseif p1.badgeType == badgeTypeModule.ForYou then p2.ForYouItem elseif p1.badgeType == badgeTypeModule.BetterValue then p2.BetterValue else nil
+		icon = if p1.badgeType == badgeTypeModule.Popular then enums.IconName.Flame elseif p1.badgeType == badgeTypeModule.ForYou then enums.IconName.CircleStar elseif p1.badgeType == badgeTypeModule.BetterValue then enums.IconName.Tag else nil
 	end
-	local var30 = "size-full-1400 radius-medium padding-x-large row"
+	local var2 = "size-full-1400 radius-medium padding-x-large row"
 	
 	return reactModule.createElement(view, {
-		LayoutOrder = p2.layoutOrder,
-		onActivated = p2.onSelected,
-		tag = if p2.selected then var30 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var30 .. " bg-surface-300 stroke-emphasis stroke-standard",
-		Size = if p2.isCompact then UDim2.new(1, 0, 0, 40) else nil
+		LayoutOrder = p1.layoutOrder,
+		onActivated = p1.onSelected,
+		tag = if p1.selected then var2 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var2 .. " bg-surface-300 stroke-emphasis stroke-standard",
+		Size = if p1.isCompact then UDim2.new(1, 0, 0, 40) else nil
 	}, {
 		LeftSide = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -123,14 +123,14 @@ local function UpsellProductDetailsMultiDisplayImpl(p2, p3)
 			RobuxAmount = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				RichText = true,
-				Text = getIconRichText(enums.IconName.Robux) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p2.product.robuxAmount),
-				tag = if p2.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-title-large content-emphasis text-align-x-left"
+				Text = getIconRichText(enums.IconName.Robux) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmount),
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-title-large content-emphasis text-align-x-left"
 			}),
-			RobuxAmountBonus = p2.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
+			RobuxAmountBonus = p1.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
 				LayoutOrder = 2,
 				RichText = true,
-				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. formatNumberModule(localizationService.RobloxLocaleId, p2.product.robuxAmountBeforeBonus) .. "</s>",
-				tag = if p2.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-large content-muted text-align-x-left"
+				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmountBeforeBonus) .. "</s>",
+				tag = if p1.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-large content-muted text-align-x-left"
 			}),
 			Badge = if text_1 then reactModule.createElement(grayBadgeModule, { LayoutOrder = 3, Text = text_1, iconName = icon }) else nil
 		}),
@@ -141,16 +141,16 @@ local function UpsellProductDetailsMultiDisplayImpl(p2, p3)
 		}, {
 			RobuxPrice = reactModule.createElement(text, {
 				LayoutOrder = 2,
-				Text = p2.product.price or "",
-				tag = if p2.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
+				Text = p1.product.price or "",
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
 			})
 		})
 	})
 end
 
-local function UpsellProductDetails(p4)
+local function UpsellProductDetails(p1)
 	-- upvalues: useLocalization (ref), getFFlagIAPExperienceEnableMultiDisplayUpsellModule (ref), UpsellProductDetailsMultiDisplayImpl (ref), UpsellProductDetailsLegacyImpl (ref)
-	local var31 = useLocalization({
+	local var1 = useLocalization({
 		Popular = "IAPExperience.RobuxUpsell.Text.PopularItem",
 		LastPurchased = "IAPExperience.RobuxUpsell.Text.LastPurchased",
 		ForYouItem = "IAPExperience.RobuxUpsell.Text.ForYou",
@@ -158,7 +158,7 @@ local function UpsellProductDetails(p4)
 		BestValue = "IAPExperience.RobuxUpsell.Text.BestValue"
 	})
 	
-	return if getFFlagIAPExperienceEnableMultiDisplayUpsellModule() then UpsellProductDetailsMultiDisplayImpl(p4, var31) else UpsellProductDetailsLegacyImpl(p4, var31)
+	return if getFFlagIAPExperienceEnableMultiDisplayUpsellModule() then UpsellProductDetailsMultiDisplayImpl(p1, var1) else UpsellProductDetailsLegacyImpl(p1, var1)
 end
 
 local function UnifiedRobuxUpsellModalV2(_)
@@ -171,11 +171,11 @@ Traceback:
 	runtime : [lunaux]:1320 function match_weird_patterns
 end
 
-return function(p5)
+return function(p1)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), UnifiedRobuxUpsellModalV2 (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		UnifiedRobuxUpsellModalV2 = reactModule.createElement(UnifiedRobuxUpsellModalV2, p5)
+		UnifiedRobuxUpsellModalV2 = reactModule.createElement(UnifiedRobuxUpsellModalV2, p1)
 	})
 end

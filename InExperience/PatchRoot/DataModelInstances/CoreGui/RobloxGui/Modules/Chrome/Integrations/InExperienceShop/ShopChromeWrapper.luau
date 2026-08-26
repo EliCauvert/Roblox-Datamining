@@ -9,39 +9,39 @@ local _ = require(chrome.ChromeShared.Service.WindowSizeSignal)
 local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
 local shopContainer = require(corePackagesService.Workspace.Packages.InExperienceShop).ShopContainer
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), guiService (ref), useEventConnection (ref), viewportUtilModule (ref), serviceModule (ref), constantsModule (ref), shopContainer (ref)
-	local windowSize = p0.windowSize
-	local var7, var8 = reactModule.useState(false)
-	local var9 = reactModule.useCallback(function(p1)
-		-- upvalues: guiService (copy), p0 (ref), windowSize (ref), var8 (ref)
+	local windowSize = p1.windowSize
+	local var1, var2 = reactModule.useState(false)
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: guiService (copy), p1 (ref), windowSize (ref), var2 (ref)
 		local y = guiService.TopbarInset.Max.Y
-		local var10 = if p1.X >= p0.maxWindowWidth then p1.Y - y < p0.maxWindowHeight else true
+		local var4 = if p2.X >= p1.maxWindowWidth then p2.Y - y < p1.maxWindowHeight else true
 		
-		if var10 then
-			windowSize:requestSize(p1.X, p1.Y - y)
+		if var4 then
+			windowSize:requestSize(p2.X, p2.Y - y)
 		else
-			windowSize:requestSize(math.min(p0.maxWindowWidth, p1.X), math.min(p0.maxWindowHeight, p1.Y - y))
+			windowSize:requestSize(math.min(p1.maxWindowWidth, p2.X), math.min(p1.maxWindowHeight, p2.Y - y))
 		end
-		var8(var10)
-	end, { windowSize, p0.maxWindowWidth, p0.maxWindowHeight })
+		var2(var4)
+	end, { windowSize, p1.maxWindowWidth, p1.maxWindowHeight })
 	useEventConnection(guiService:GetPropertyChangedSignal("TopbarInset"), function()
-		-- upvalues: var9 (ref), viewportUtilModule (copy)
-		var9(viewportUtilModule.screenSize:get())
+		-- upvalues: var3 (ref), viewportUtilModule (copy)
+		var3(viewportUtilModule.screenSize:get())
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: viewportUtilModule (copy), var9 (ref)
-		local screenSizeConnection = viewportUtilModule.screenSize:connect(var9)
-		var9(viewportUtilModule.screenSize:get())
+		-- upvalues: viewportUtilModule (copy), var3 (ref)
+		local screenSizeConnection = viewportUtilModule.screenSize:connect(var3)
+		var3(viewportUtilModule.screenSize:get())
 		
 		return function()
 			-- upvalues: screenSizeConnection (ref)
 			screenSizeConnection:disconnect()
 		end
-	end, { var9 })
+	end, { var3 })
 	
 	return reactModule.createElement(shopContainer, {
-		fullScreen = var7,
+		fullScreen = var1,
 		toggleWindow = reactModule.useCallback(function()
 			-- upvalues: serviceModule (copy), constantsModule (copy)
 			serviceModule:toggleWindow(constantsModule.IN_EXPERIENCE_SHOP_ID)

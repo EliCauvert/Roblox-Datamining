@@ -8,21 +8,21 @@ local text = foundationModule.Text
 local enums = foundationModule.Enums
 local localizationService = game:GetService("LocalizationService")
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: localizationService (ref)
-	local dateTime = DateTime.fromIsoDate(p0)
+	local dateTime = DateTime.fromIsoDate(p1)
 	
-	return if dateTime then dateTime:FormatLocalTime("MMM DD, LT", localizationService.RobloxLocaleId) else p0
+	return if dateTime then dateTime:FormatLocalTime("MMM DD, LT", localizationService.RobloxLocaleId) else p1
 end
 
 return function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), foundationModule (ref), enums (ref), text (ref), localizationService (ref)
-	local var4 = useTokens()
-	local var5 = useLocalization({ itemExpires = "Feature.Durables.Label.ItemExpires" })
+	local var1 = useTokens()
+	local var2 = useLocalization({ itemExpires = "Feature.Durables.Label.ItemExpires" })
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "row align-y-center padding-large radius-medium flex-between size-full-0",
-		backgroundStyle = var4.Color.Surface.Surface_100,
+		backgroundStyle = var1.Color.Surface.Surface_100,
 		LayoutOrder = p1.LayoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}
@@ -40,7 +40,7 @@ return function(p1)
 			Label = reactModule.createElement(text, {
 				tag = "auto-xy text-label-medium content-emphasis",
 				LayoutOrder = 2,
-				Text = var5.itemExpires
+				Text = var2.itemExpires
 			})
 		})
 	}

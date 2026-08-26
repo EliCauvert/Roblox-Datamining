@@ -13,14 +13,14 @@ local musicThumbnailIconSize = momentsCommonModule.Enums.MusicThumbnailIconSize
 local _ = require(moments.Hooks.useMusicInfo)
 local t = { title = "Feature.Moments.Label.Music" }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), sheet (ref), text (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref)
-	local musicInfo = p0.musicInfo
+	local musicInfo = p1.musicInfo
 	
 	return reactModule.createElement(sheet.Root, {
 		isOpen = true,
 		preferCenterSheet = true,
-		onClose = p0.onClose
+		onClose = p1.onClose
 	}, {
 		Header = reactModule.createElement(sheet.Header, nil, {
 			Title = reactModule.createElement(text, {

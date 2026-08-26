@@ -10,118 +10,118 @@ local constantsModule = require(parent.Common.Constants)
 
 return function()
 	-- upvalues: useFocusGuiObject (ref), reactModule (ref), focusNavHelperModule (ref), constantsModule (ref), guiService (ref)
-	local var4 = useFocusGuiObject()
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef({})
-	local var8 = reactModule.useCallback(function(p0, p1)
-		-- upvalues: focusNavHelperModule (copy), var7 (ref), var4 (ref), var5 (ref)
-		local nextPlayerInstance = focusNavHelperModule.getNextPlayerInstance(var7.current, p0, p1)
+	local var1 = useFocusGuiObject()
+	local var2 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef({})
+	local var5 = reactModule.useCallback(function(p1, p2)
+		-- upvalues: focusNavHelperModule (copy), var4 (ref), var1 (ref), var2 (ref)
+		local nextPlayerInstance = focusNavHelperModule.getNextPlayerInstance(var4.current, p1, p2)
 		
 		if nextPlayerInstance then
-			var4(nextPlayerInstance.object)
+			var1(nextPlayerInstance.object)
 			
 			return
 		end
-		var4(var5.current)
+		var1(var2.current)
 	end, {})
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), constantsModule (copy), var7 (ref), var4 (ref), var5 (ref), focusNavHelperModule (copy)
-		if var6.current and var6.current ~= constantsModule.SELECTED_TITLE_PLAYER_ID then
-			for i, v in var7.current do
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), constantsModule (copy), var4 (ref), var1 (ref), var2 (ref), focusNavHelperModule (copy)
+		if var3.current and var3.current ~= constantsModule.SELECTED_TITLE_PLAYER_ID then
+			for i, v in var4.current do
 				for i_1, v_1 in v.players do
-					if v_1.userId == var6.current then
-						var4(v_1.object)
+					if v_1.userId == var3.current then
+						var1(v_1.object)
 						
 						return
 					end
 				end
 			end
 		end
-		if var5.current then
-			var4(var5.current)
+		if var2.current then
+			var1(var2.current)
 			
 			return
 		end
-		local firstPlayerInstance = focusNavHelperModule.getFirstPlayerInstance(var7.current)
+		local firstPlayerInstance = focusNavHelperModule.getFirstPlayerInstance(var4.current)
 		
 		if firstPlayerInstance then
-			var4(firstPlayerInstance.object)
+			var1(firstPlayerInstance.object)
 		end
 	end, {})
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref)
-		return function(p3, p4, p5)
-			-- upvalues: var7 (copy), p2 (ref)
-			if p4 and var7.current[p2] then
-				var7.current[p2].players[p3] = { userId = p3, object = p4, order = p5 }
+	local var7 = reactModule.useCallback(function(p1)
+		-- upvalues: var4 (ref)
+		return function(p2, p3, p4)
+			-- upvalues: var4 (copy), p1 (ref)
+			if p3 and var4.current[p1] then
+				var4.current[p1].players[p2] = { userId = p2, object = p3, order = p4 }
 				
 				return
 			end
 		end
 	end, {})
-	local var11 = reactModule.useCallback(function(p6)
-		-- upvalues: var7 (ref), guiService (copy), var8 (ref)
-		return function(p7)
-			-- upvalues: var7 (copy), p6 (ref), guiService (copy), var8 (copy)
-			local var19 = var7.current[p6]
+	local var8 = reactModule.useCallback(function(p1)
+		-- upvalues: var4 (ref), guiService (copy), var5 (ref)
+		return function(p2)
+			-- upvalues: var4 (copy), p1 (ref), guiService (copy), var5 (copy)
+			local var9 = var4.current[p1]
 			
-			if not var19 then return end
-			local var20 = var19.players[p7]
+			if not var9 then return end
+			local var10 = var9.players[p2]
 			
-			if not var20 then return end
-			if guiService.SelectedCoreObject == var20.object then
-				var8(var20, p6)
+			if not var10 then return end
+			if guiService.SelectedCoreObject == var10.object then
+				var5(var10, p1)
 			end
-			var7.current[p6].players[p7] = nil
+			var4.current[p1].players[p2] = nil
 		end
 	end, {})
-	local var12 = reactModule.useCallback(function(p8, p9)
-		-- upvalues: var10 (ref), var11 (ref), var7 (ref)
+	local var9 = reactModule.useCallback(function(p1, p2)
+		-- upvalues: var7 (ref), var8 (ref), var4 (ref)
 		local t = {
-			teamId = p8,
-			order = p9,
+			teamId = p1,
+			order = p2,
 			players = {},
-			registerPlayerInstance = var10(p8),
-			unregisterPlayerInstance = var11(p8)
+			registerPlayerInstance = var7(p1),
+			unregisterPlayerInstance = var8(p1)
 		}
-		var7.current[p8] = t
+		var4.current[p1] = t
 		
 		return t
 	end, {})
-	local var13 = reactModule.useCallback(function(p10)
-		-- upvalues: var7 (ref)
-		var7.current[p10] = nil
+	local var10 = reactModule.useCallback(function(p1)
+		-- upvalues: var4 (ref)
+		var4.current[p1] = nil
 	end, {})
-	local var14 = reactModule.useCallback(function(p11)
-		-- upvalues: var5 (ref)
-		var5.current = p11
+	local var11 = reactModule.useCallback(function(p1)
+		-- upvalues: var2 (ref)
+		var2.current = p1
 	end, {})
-	local var15 = reactModule.useCallback(function(p12)
-		-- upvalues: var6 (ref)
-		var6.current = p12
+	local var12 = reactModule.useCallback(function(p1)
+		-- upvalues: var3 (ref)
+		var3.current = p1
 	end, {})
-	local var16 = reactModule.useCallback(function(p13)
-		-- upvalues: var4 (ref), var5 (ref), var6 (ref), var7 (ref)
-		if p13 then
-			var4(nil)
+	local var13 = reactModule.useCallback(function(p1)
+		-- upvalues: var1 (ref), var2 (ref), var3 (ref), var4 (ref)
+		if p1 then
+			var1(nil)
 		end
-		var5.current = nil
-		var6.current = nil
-		var7.current = {}
+		var2.current = nil
+		var3.current = nil
+		var4.current = {}
 	end, {})
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var12 (ref), var13 (ref), var14 (ref), var15 (ref), var16 (ref)
+		-- upvalues: var6 (ref), var9 (ref), var10 (ref), var11 (ref), var12 (ref), var13 (ref)
 		return {
-			getFocus = var9,
-			registerTeamInstance = var12,
-			unregisterTeamInstance = var13,
-			setTitlePlayerInstance = var14,
-			setSelectedPlayerId = var15,
-			cleanup = var16
+			getFocus = var6,
+			registerTeamInstance = var9,
+			unregisterTeamInstance = var10,
+			setTitlePlayerInstance = var11,
+			setSelectedPlayerId = var12,
+			cleanup = var13
 		}
 	end, {
-		var9, var12, var13, var14, var15, var16
+		var6, var9, var10, var11, var12, var13
 	})
 end

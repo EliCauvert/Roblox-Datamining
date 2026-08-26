@@ -7,22 +7,22 @@ local avatarSwitcherShimmerTiles = game:DefineFastInt("AvatarSwitcherShimmerTile
 
 return function()
 	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), experienceAvatarSupportTypeModule (ref), avatarSwitcherShimmerTiles (ref)
-	local var5 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
-	local var6 = signalsReactModule.useSignalState(var5.getOutfits)
-	local var7 = signalsReactModule.useSignalState(var5.getLastPageReached)
-	local var8 = signalsReactModule.useSignalState(var5.getExperienceAvatarSupportType) == experienceAvatarSupportTypeModule.NoSupport
+	local var1 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
+	local var2 = signalsReactModule.useSignalState(var1.getOutfits)
+	local var3 = signalsReactModule.useSignalState(var1.getLastPageReached)
+	local var4 = signalsReactModule.useSignalState(var1.getExperienceAvatarSupportType) == experienceAvatarSupportTypeModule.NoSupport
 	
-	if #var6 == 0 and not var7 then
-		var6 = {}
+	if #var2 == 0 and not var3 then
+		var2 = {}
 		
 		for _ = 1, avatarSwitcherShimmerTiles do
-			table.insert(var6, {})
+			table.insert(var2, {})
 		end
 	end
 	return {
-		outfits = var6,
-		lastPageReached = var7,
-		fetchNextOutfitsPage = var5.fetchNextOutfitsPage,
-		disabled = var8
+		outfits = var2,
+		lastPageReached = var3,
+		fetchNextOutfitsPage = var1.fetchNextOutfitsPage,
+		disabled = var4
 	}
 end

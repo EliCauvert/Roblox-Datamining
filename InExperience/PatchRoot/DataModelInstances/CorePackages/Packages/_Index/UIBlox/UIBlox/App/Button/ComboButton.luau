@@ -44,40 +44,40 @@ comboButton.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function comboButton.init(p0)
+function comboButton.init(p1)
 	-- upvalues: controlStateModule (ref)
-	p0:setState({
+	p1:setState({
 		buttonControlState = controlStateModule.Initialize,
 		overflowControlState = controlStateModule.Initialize
 	})
 	
-	function p0.onButtonStateChanged(_, p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ buttonControlState = p1 })
+	function p0.onButtonStateChanged(_, p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ buttonControlState = p2 })
 	end
 	
 	function p0.onOverflowStateChanged(_, p2)
-		-- upvalues: p0 (ref)
-		p0:setState({ overflowControlState = p2 })
+		-- upvalues: p1 (ref)
+		p1:setState({ overflowControlState = p2 })
 	end
 end
 
-function comboButton.render(p3)
+function comboButton.render(p1)
 	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p4)
-		-- upvalues: p3 (ref)
-		return p3:renderWithProviders(p4, nil, nil)
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderWithProviders(p2, nil, nil)
 	end)
 end
 
-function comboButton.renderWithProviders(p5, _, _, _)
+function comboButton.renderWithProviders(p1, _, _, _)
 	-- upvalues: roactModule (ref), reactModule (ref), genericButtonModule (ref), imagesModule (ref), t (ref), t_1 (ref)
 	return roactModule.createElement("Frame", {
-		LayoutOrder = p5.props.layoutOrder,
-		Position = p5.props.position,
-		Size = p5.props.size,
+		LayoutOrder = p1.props.layoutOrder,
+		Position = p1.props.position,
+		Size = p1.props.size,
 		BackgroundTransparency = 1,
-		[reactModule.Tag] = if p5.props.testId then `data-testid={p5.props.testId}` else nil
+		[reactModule.Tag] = if p1.props.testId then `data-testid={p1.props.testId}` else nil
 	}, {
 		Button = roactModule.createElement(genericButtonModule, {
 			isHoverBackgroundEnabled = true,
@@ -88,12 +88,12 @@ function comboButton.renderWithProviders(p5, _, _, _)
 			buttonStateColorMap = t,
 			contentStateColorMap = t_1,
 			hoverImage = imagesModule["component_assets/bulletLeft_17"],
-			icon = p5.props.button.icon,
-			isDisabled = p5.props.button.isDisabled,
-			onActivated = p5.props.button.onActivated,
-			onStateChanged = p5.onButtonStateChanged,
-			SelectionImageObject = p5.props.cursor,
-			text = p5.props.button.text
+			icon = p1.props.button.icon,
+			isDisabled = p1.props.button.isDisabled,
+			onActivated = p1.props.button.onActivated,
+			onStateChanged = p1.onButtonStateChanged,
+			SelectionImageObject = p1.props.cursor,
+			text = p1.props.button.text
 		}),
 		Overflow = roactModule.createElement(genericButtonModule, {
 			ZIndex = 0,
@@ -105,26 +105,26 @@ function comboButton.renderWithProviders(p5, _, _, _)
 			buttonStateColorMap = t,
 			contentStateColorMap = t_1,
 			hoverImage = imagesModule["component_assets/bulletRight_17"],
-			icon = p5.props.overflow.icon or imagesModule["icons/actions/truncationExpand"],
-			isDisabled = p5.props.overflow.isDisabled,
-			onActivated = p5.props.overflow.onActivated,
-			onStateChanged = p5.onOverflowStateChanged,
-			SelectionImageObject = p5.props.cursor
+			icon = p1.props.overflow.icon or imagesModule["icons/actions/truncationExpand"],
+			isDisabled = p1.props.overflow.isDisabled,
+			onActivated = p1.props.overflow.onActivated,
+			onStateChanged = p1.onOverflowStateChanged,
+			SelectionImageObject = p1.props.cursor
 		})
 	})
 end
 
-function ComboButtonFunctionalWrapper(p6)
+function ComboButtonFunctionalWrapper(p1)
 	-- upvalues: useCursorModule (ref), uDim (ref), roactModule (ref), comboButton (ref), cryoModule (ref)
-	return roactModule.createElement(comboButton, cryoModule.Dictionary.join(p6, { cursor = useCursorModule(uDim) }))
+	return roactModule.createElement(comboButton, cryoModule.Dictionary.join(p1, { cursor = useCursorModule(uDim) }))
 end
 
 local comboButtonOuterWrapper = roactModule.PureComponent:extend("ComboButtonOuterWrapper")
 comboButtonOuterWrapper.validateProps = comboButton.validateProps
 
-function comboButtonOuterWrapper.render(p7)
+function comboButtonOuterWrapper.render(p1)
 	-- upvalues: roactModule (ref)
-	return roactModule.createElement(ComboButtonFunctionalWrapper, p7.props)
+	return roactModule.createElement(ComboButtonFunctionalWrapper, p1.props)
 end
 
 return comboButtonOuterWrapper

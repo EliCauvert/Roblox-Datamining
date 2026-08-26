@@ -14,15 +14,15 @@ detailsPageTitleContent.validateProps = tModule.strictInterface({
 	verticalAlignment = tModule.optional(tModule.enum(Enum.VerticalAlignment))
 })
 
-function detailsPageTitleContent.init(p0)
+function detailsPageTitleContent.init(p1)
 	-- upvalues: getTextSize (ref)
-	p0.state = { containerWidth = nil }
+	p1.state = { containerWidth = nil }
 	
-	function p0.onContainerSizeChange(p1)
-		-- upvalues: p0 (ref)
-		p0:setState(function(_, _)
-			-- upvalues: p1 (ref)
-			return { containerWidth = p1.AbsoluteSize.X }
+	function p0.onContainerSizeChange(p2)
+		-- upvalues: p1 (ref)
+		p1:setState(function(_, _)
+			-- upvalues: p2 (ref)
+			return { containerWidth = p2.AbsoluteSize.X }
 		end)
 	end
 	
@@ -32,57 +32,57 @@ function detailsPageTitleContent.init(p0)
 	end
 end
 
-function detailsPageTitleContent.render(p5)
+function detailsPageTitleContent.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), styledTextLabel (ref)
-	return withStyle(function(p6)
-		-- upvalues: p5 (ref), roactModule (copy), styledTextLabel (copy)
-		local theme = p6.Theme
-		local font = p6.Font
+	return withStyle(function(p2)
+		-- upvalues: p1 (ref), roactModule (copy), styledTextLabel (copy)
+		local theme = p2.Theme
+		local font = p2.Font
 		local uDim2 = UDim2.new(0, 0, 1, 0)
 		
-		if p5.props.titleText then
-			local textSize = p5.getTextSize(p5.props.titleText, font.Title, p6)
-			local var6 = textSize.Y * 1
-			uDim2 = if p5.state.containerWidth == nil or p5.state.containerWidth > textSize.X then UDim2.new(0, 0, 0, var6) else UDim2.new(0, 0, 0, var6 * 2)
+		if p1.props.titleText then
+			local textSize = p1.getTextSize(p1.props.titleText, font.Title, p2)
+			local var1 = textSize.Y * 1
+			uDim2 = if p1.state.containerWidth == nil or p1.state.containerWidth > textSize.X then UDim2.new(0, 0, 0, var1) else UDim2.new(0, 0, 0, var1 * 2)
 		end
 		return roactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 0),
 			BackgroundTransparency = 1,
-			[roactModule.Change.AbsoluteSize] = p5.onContainerSizeChange,
+			[roactModule.Change.AbsoluteSize] = p1.onContainerSizeChange,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = p5.props.layoutOrder
+			LayoutOrder = p1.props.layoutOrder
 		}, {
 			ListLayout = roactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
-				VerticalAlignment = p5.props.verticalAlignment
+				VerticalAlignment = p1.props.verticalAlignment
 			}),
-			Title = p5.props.titleText and roactModule.createElement(styledTextLabel, {
+			Title = p1.props.titleText and roactModule.createElement(styledTextLabel, {
 				lineHeight = 1,
 				fluidSizing = false,
 				layoutOrder = 1,
 				richText = false,
-				text = p5.props.titleText,
+				text = p1.props.titleText,
 				size = uDim2,
 				automaticSize = Enum.AutomaticSize.X,
 				fontStyle = font.Title,
 				colorStyle = theme.TextEmphasis,
 				textTruncate = Enum.TextTruncate.AtEnd
 			}) or nil,
-			SubTitle = p5.props.subTitleText and roactModule.createElement(styledTextLabel, {
+			SubTitle = p1.props.subTitleText and roactModule.createElement(styledTextLabel, {
 				layoutOrder = 2,
 				richText = false,
-				text = p5.props.subTitleText,
+				text = p1.props.subTitleText,
 				fontStyle = font.Header2,
 				colorStyle = theme.TextMuted,
 				automaticSize = Enum.AutomaticSize.XY
 			}) or nil,
-			CustomContentComponentFrame = p5.props.renderInfoContent and roactModule.createElement("Frame", {
+			CustomContentComponentFrame = p1.props.renderInfoContent and roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				Size = UDim2.fromScale(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
-			}, { CustomContent = p5.props.renderInfoContent() }) or nil
+			}, { CustomContent = p1.props.renderInfoContent() }) or nil
 		})
 	end)
 end

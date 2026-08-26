@@ -14,32 +14,32 @@ local useAnalyticsContextModule = require(genericAbuseReporting.Bedui.Provider.u
 local webViewLinkModule = require(genericAbuseReporting.Bedui.Components.WebViewLink)
 local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useAnalyticsContextModule (ref), reactModule (ref), componentType (ref), dropdownModule (ref), freeCommentModule (ref), paragraphModule (ref), webViewLinkModule (ref), fFlagAddThumbnailSelectorReport (ref), selectorModule (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), view (ref)
-	local var9 = useAnalyticsContextModule()
+	local var1 = useAnalyticsContextModule()
 	
 	return reactModule.createElement(view, { tag = "size-full-0 auto-y col gap-xxlarge" }, reactModule.useMemo(function()
-		-- upvalues: p0 (ref), componentType (copy), reactModule (copy), dropdownModule (copy), freeCommentModule (copy), paragraphModule (copy), webViewLinkModule (copy), fFlagAddThumbnailSelectorReport (copy), selectorModule (copy), var9 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy)
-		if p0.contentConfig == nil then
+		-- upvalues: p1 (ref), componentType (copy), reactModule (copy), dropdownModule (copy), freeCommentModule (copy), paragraphModule (copy), webViewLinkModule (copy), fFlagAddThumbnailSelectorReport (copy), selectorModule (copy), var1 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy)
+		if p1.contentConfig == nil then
 			return {}
 		end
 		local t = {}
 		
-		if p0.contentConfig.type ~= "configurableComponentList" then
+		if p1.contentConfig.type ~= "configurableComponentList" then
 			return {}
 		end
-		for i, v in ipairs(p0.contentConfig.configurableComponentList.components) do
+		for i, v in ipairs(p1.contentConfig.configurableComponentList.components) do
 			if v.componentType == componentType.Dropdown then
 				t[`{v.componentType}{i}`] = reactModule.createElement(dropdownModule, {
 					component = v,
-					isErrorState = v.formDataKey ~= nil and table.find(p0.formDataKeysWithError, v.formDataKey) ~= nil,
+					isErrorState = v.formDataKey ~= nil and table.find(p1.formDataKeysWithError, v.formDataKey) ~= nil,
 					layoutOrder = i
 				})
 			end
 			if v.componentType == componentType.FreeComment then
 				t[`{v.componentType}{i}`] = reactModule.createElement(freeCommentModule, {
 					component = v,
-					isErrorState = v.formDataKey ~= nil and table.find(p0.formDataKeysWithError, v.formDataKey) ~= nil,
+					isErrorState = v.formDataKey ~= nil and table.find(p1.formDataKeysWithError, v.formDataKey) ~= nil,
 					layoutOrder = i
 				})
 			elseif v.componentType == componentType.Paragraph then
@@ -48,15 +48,15 @@ return reactModule.memo(function(p0)
 				t[`{v.componentType}{i}`] = reactModule.createElement(webViewLinkModule, { component = v, layoutOrder = i })
 			elseif fFlagAddThumbnailSelectorReport and v.componentType == componentType.Selector then
 				t[`{v.componentType}{i}`] = reactModule.createElement(selectorModule, {
-					abuseVector = var9.abuseVector,
+					abuseVector = var1.abuseVector,
 					component = v,
-					isErrorState = v.formDataKey ~= nil and table.find(p0.formDataKeysWithError, v.formDataKey) ~= nil,
+					isErrorState = v.formDataKey ~= nil and table.find(p1.formDataKeysWithError, v.formDataKey) ~= nil,
 					layoutOrder = i
 				})
 			else
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Error,
-					context = var9,
+					context = var1,
 					meta = {
 						error = `SingleStepInnerContentRenderer - Unsupported component type: {v.componentType}`
 					}
@@ -65,9 +65,9 @@ return reactModule.memo(function(p0)
 		end
 		return t
 	end, {
-		p0.contentConfig,
-		p0.formDataKeysWithError,
+		p1.contentConfig,
+		p1.formDataKeysWithError,
 		sendAnalyticsEvent,
-		var9
+		var1
 	}))
 end)

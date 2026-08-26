@@ -11,30 +11,30 @@ local iconSize = foundationModule.Enums.IconSize
 local text = foundationModule.Text
 local view = foundationModule.View
 
-local _ = function(p0)
-	return p0 + (1 - p0) * 0.5
+local _ = function(p1)
+	return p1 + (1 - p1) * 0.5
 end
 
 return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), signalsReactModule (ref), reactModule (ref), iconSize (ref), isBuilderIcon (ref), view (ref), icon (ref), text (ref)
-	local var3 = useTokens()
-	local var4 = useLocalization({ label = p1.label })
-	local var5 = signalsReactModule.useSignalState(p1.getIsEnabled)
-	local var6 = signalsReactModule.useSignalState(p1.getShortcutIcon)
-	local var7 = reactModule.useCallback(function()
+	local var1 = useTokens()
+	local var2 = useLocalization({ label = p1.label })
+	local var3 = signalsReactModule.useSignalState(p1.getIsEnabled)
+	local var4 = signalsReactModule.useSignalState(p1.getShortcutIcon)
+	local var5 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.getOnActivated()()
 	end, { p1.getOnActivated })
 	local medium = iconSize.Medium
-	local xSmall = var3.Gap.XSmall
+	local xSmall = var1.Gap.XSmall
 	
-	if isBuilderIcon(var6) then
+	if isBuilderIcon(var4) then
 		medium = iconSize.XLarge
-		xSmall = var3.Gap.Small
+		xSmall = var1.Gap.Small
 	end
-	local var12
-	local var8 = if p1.isEmphasis then var3.Color.ActionSoftEmphasis.Background else var3.Color.ActionStandard.Background
-	local var9 = if p1.isEmphasis then var3.Color.ActionSoftEmphasis.Foreground else var3.Color.ActionStandard.Foreground
+	local var6
+	local var7 = if p1.isEmphasis then var1.Color.ActionSoftEmphasis.Background else var1.Color.ActionStandard.Background
+	local var8 = if p1.isEmphasis then var1.Color.ActionSoftEmphasis.Foreground else var1.Color.ActionStandard.Foreground
 	local createElement = reactModule.createElement
 	local t = {
 		tag = {
@@ -48,23 +48,23 @@ return reactModule.memo(function(p1)
 			FillDirection = Enum.FillDirection.Horizontal,
 			Padding = UDim.new(0, xSmall)
 		},
-		isDisabled = not var5
+		isDisabled = not var3
 	}
-	local t_1 = { Color3 = var8.Color3 }
+	local t_1 = { Color3 = var7.Color3 }
 	
-	if var5 then
-		var12 = var8.Transparency
+	if var3 then
+		var6 = var7.Transparency
 	else
-		local transparency = var8.Transparency
-		var12 = transparency + (1 - transparency) * 0.5
+		local transparency = var7.Transparency
+		var6 = transparency + (1 - transparency) * 0.5
 	end
-	t_1.Transparency = var12
+	t_1.Transparency = var6
 	t.backgroundStyle = t_1
-	t.onActivated = var7
+	t.onActivated = var5
 	t.LayoutOrder = p1.layoutOrder
 	
 	return createElement(view, t, {
-		ShortcutIcon = if var6 then reactModule.createElement(icon, { LayoutOrder = 1, name = var6, size = medium }) else nil,
+		ShortcutIcon = if var4 then reactModule.createElement(icon, { LayoutOrder = 1, name = var4, size = medium }) else nil,
 		Text = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = {
@@ -74,10 +74,10 @@ return reactModule.memo(function(p1)
 				["content-action-standard"] = not p1.isEmphasis,
 				["content-action-soft-emphasis"] = p1.isEmphasis
 			},
-			Text = var4.label,
+			Text = var2.label,
 			textStyle = {
-				Color3 = var9.Color3,
-				Transparency = if var5 then var9.Transparency else 0.5
+				Color3 = var8.Color3,
+				Transparency = if var3 then var8.Transparency else 0.5
 			}
 		})
 	})

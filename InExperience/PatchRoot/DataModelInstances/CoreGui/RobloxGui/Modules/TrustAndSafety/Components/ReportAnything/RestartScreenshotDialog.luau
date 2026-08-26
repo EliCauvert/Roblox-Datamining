@@ -11,23 +11,23 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local getFFlagReportAnythingLocalizationEnabledModule = require(parent.Flags.GetFFlagReportAnythingLocalizationEnabled)
 local dividerModule = require(dependenciesModule.Divider)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), reactModule (ref), headerBar (ref), robloxTranslatorModule (ref), dividerModule (ref), buttonStack (ref), buttonType (ref)
-	local var7 = useStyle()
-	local theme = var7.Theme
-	local font = var7.Font
-	local var8 = 48
-	local var9 = 180
-	local var10 = 50
+	local var1 = useStyle()
+	local theme = var1.Theme
+	local font = var1.Font
+	local var2 = 48
+	local var3 = 180
+	local var4 = 50
 	
-	if getFFlagReportAnythingLocalizationEnabledModule() and p0.isSmallPortraitMode then
-		var8 = 84
-		var9 = 260
-		var10 = 100
+	if getFFlagReportAnythingLocalizationEnabledModule() and p1.isSmallPortraitMode then
+		var2 = 84
+		var3 = 260
+		var4 = 100
 	end
 	return reactModule.createElement("Frame", {
 		ZIndex = 5,
-		Size = UDim2.new(0, if p0.isSmallPortraitMode then 343 else 480, 0, var9),
+		Size = UDim2.new(0, if p1.isSmallPortraitMode then 343 else 480, 0, var3),
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		BackgroundColor3 = Color3.fromHex("#4F545F")
@@ -51,7 +51,7 @@ return function(p0)
 			Description = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
-				Size = UDim2.new(1, 0, 1, (-var8) - 1)
+				Size = UDim2.new(1, 0, 1, (-var2) - 1)
 			}, {
 				Padding = reactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 8),
@@ -70,7 +70,7 @@ return function(p0)
 					TextTransparency = theme.TextEmphasis.Transparency,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = if getFFlagReportAnythingLocalizationEnabledModule() then Enum.TextYAlignment.Top else nil,
-					Size = UDim2.new(1, 0, 0, var10)
+					Size = UDim2.new(1, 0, 0, var4)
 				})
 			})
 		}),
@@ -78,8 +78,8 @@ return function(p0)
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 4,
-			Size = UDim2.new(1, 0, 0, var8),
-			Position = UDim2.new(0, 0, 1, -var8)
+			Size = UDim2.new(1, 0, 0, var2),
+			Position = UDim2.new(0, 0, 1, -var2)
 		}, {
 			Padding = reactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 6),
@@ -88,29 +88,29 @@ return function(p0)
 				PaddingRight = UDim.new(0, 16)
 			}),
 			ActionButtons = reactModule.createElement(buttonStack, {
-				forcedFillDirection = if getFFlagReportAnythingLocalizationEnabledModule() and p0.isSmallPortraitMode then Enum.FillDirection.Vertical else Enum.FillDirection.Horizontal,
+				forcedFillDirection = if getFFlagReportAnythingLocalizationEnabledModule() and p1.isSmallPortraitMode then Enum.FillDirection.Vertical else Enum.FillDirection.Horizontal,
 				buttons = {
 					{
 						buttonType = buttonType.Secondary,
-						props = if p0.isSmallPortraitMode then {
-							onActivated = p0.onCancel,
+						props = if p1.isSmallPortraitMode then {
+							onActivated = p1.onCancel,
 							text = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Cancel") else "Cancel",
 							size = if getFFlagReportAnythingLocalizationEnabledModule() then UDim2.new(1, 0, 0, 28) else UDim2.new(0, 80, 0, 28),
 							fontStyle = font.Body2
 						} else {
-							onActivated = p0.onCancel,
+							onActivated = p1.onCancel,
 							text = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Cancel") else "Cancel"
 						}
 					},
 					{
 						buttonType = buttonType.PrimarySystem,
-						props = if p0.isSmallPortraitMode then {
-							onActivated = p0.onRestart,
+						props = if p1.isSmallPortraitMode then {
+							onActivated = p1.onRestart,
 							text = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.BackToExperience") else "Back To Experience",
 							size = if getFFlagReportAnythingLocalizationEnabledModule() then UDim2.new(1, 0, 0, 28) else UDim2.new(0, 200, 0, 28),
 							fontStyle = font.Body2
 						} else {
-							onActivated = p0.onRestart,
+							onActivated = p1.onRestart,
 							text = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.BackToExperience") else "Back To Experience"
 						}
 					}

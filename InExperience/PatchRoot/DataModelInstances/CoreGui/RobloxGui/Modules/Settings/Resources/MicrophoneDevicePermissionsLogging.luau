@@ -14,71 +14,71 @@ return {
 		PROMPT_IMPRESSION = 1,
 		PROMPT_INTERACTION = 2
 	},
-	_init = function(p0, p1, p2)
+	_init = function(p1, p2, p3)
 		-- upvalues: avatarChatService (ref)
-		p0._initialized = true
-		p0.placeId = game.PlaceId
-		p0.universeId = game.GameId
-		p0.placeVoiceEnabled = avatarChatService:IsEnabled(p1, Enum.AvatarChatServiceFeature.PlaceAudio)
-		p0.universeVoiceEnabled = avatarChatService:IsEnabled(p1, Enum.AvatarChatServiceFeature.UniverseAudio)
-		p0:logExperienceJoin({ didAuthorize = p2 })
+		p1._initialized = true
+		p1.placeId = game.PlaceId
+		p1.universeId = game.GameId
+		p1.placeVoiceEnabled = avatarChatService:IsEnabled(p2, Enum.AvatarChatServiceFeature.PlaceAudio)
+		p1.universeVoiceEnabled = avatarChatService:IsEnabled(p2, Enum.AvatarChatServiceFeature.UniverseAudio)
+		p1:logExperienceJoin({ didAuthorize = p3 })
 	end,
-	_getEventPayload = function(p3, p4, p5)
+	_getEventPayload = function(p1, p2, p3)
 		return {
-			uiType = p4,
-			uiContext = p5.uiContext,
-			didAuthorize = p5.didAuthorize,
-			placeId = p3.placeId,
-			universeId = p3.universeId,
-			placeVoiceEnabled = p3.placeVoiceEnabled,
-			universeVoiceEnabled = p3.universeVoiceEnabled,
-			clientSessionId = p3.clientSessionId
+			uiType = p2,
+			uiContext = p3.uiContext,
+			didAuthorize = p3.didAuthorize,
+			placeId = p1.placeId,
+			universeId = p1.universeId,
+			placeVoiceEnabled = p1.placeVoiceEnabled,
+			universeVoiceEnabled = p1.universeVoiceEnabled,
+			clientSessionId = p1.clientSessionId
 		}
 	end,
-	_isReady = function(p6)
-		return p6._initialized
+	_isReady = function(p1)
+		return p1._initialized
 	end,
-	init = function(p7, p8)
+	init = function(p1, p2)
 		-- upvalues: avatarChatService (ref)
 		if avatarChatService.ClientFeaturesInitialized then
-			p7:_init(avatarChatService.ClientFeatures, p8)
+			p1:_init(avatarChatService.ClientFeatures, p2)
 			
 			return
 		end
-		local var3 = nil
-		var3 = avatarChatService:GetPropertyChangedSignal("ClientFeatures"):Connect(function()
-			-- upvalues: p7 (ref), avatarChatService (copy), p8 (ref), var3 (write)
-			p7:_init(avatarChatService.ClientFeatures, p8)
-			var3:Disconnect()
+		local var1 = nil
+		var1 = avatarChatService:GetPropertyChangedSignal("ClientFeatures"):Connect(function()
+			-- upvalues: p1 (ref), avatarChatService (copy), p2 (ref), var1 (write)
+			p1:_init(avatarChatService.ClientFeatures, p2)
+			var1:Disconnect()
 		end)
 	end,
-	logExperienceJoin = function(p9, p10)
+	logExperienceJoin = function(p1, p2)
 		-- upvalues: rbxAnalyticsService (ref), microphoneDevicePermissionsLoggingEventName (ref)
-		if p9:_isReady() then
-			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p9:_getEventPayload(p9.UIType.EXPERIENCE_JOIN, p10))
+		if p1:_isReady() then
+			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p1:_getEventPayload(p1.UIType.EXPERIENCE_JOIN, p2))
 			
 			return
 		end
 	end,
-	logPromptImpression = function(p11, p12)
+	logPromptImpression = function(p1, p2)
 		-- upvalues: rbxAnalyticsService (ref), microphoneDevicePermissionsLoggingEventName (ref)
-		if p11:_isReady() then
-			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p11:_getEventPayload(p11.UIType.PROMPT_IMPRESSION, p12))
+		if p1:_isReady() then
+			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p1:_getEventPayload(p1.UIType.PROMPT_IMPRESSION, p2))
 			
 			return
 		end
 	end,
-	logPromptInteraction = function(p13, p14)
+	logPromptInteraction = function(p1, p2)
 		-- upvalues: rbxAnalyticsService (ref), microphoneDevicePermissionsLoggingEventName (ref)
-		if p13:_isReady() then
-			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p13:_getEventPayload(p13.UIType.PROMPT_INTERACTION, p14))
+		if p1:_isReady() then
+			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p1:_getEventPayload(p1.UIType.PROMPT_INTERACTION, p2))
 			
 			return
 		end
 	end,
-	setClientSessionId = function(value, p15)
-		if value:_isReady() and value.clientSessionId ~= p15 then
-			value.clientSessionId = p15
+	setClientSessionId = function(value, p1)
+		if value:_isReady() and value.clientSessionId ~= p1 then
+			value.clientSessionId = p1
 			
 			return
 		end

@@ -13,14 +13,14 @@ local t = {
 	[dialogSizeModule.Large] = 640
 }
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: flagsModule (ref), dialogSizeModule (ref), t (ref)
 	return {
 		common = {
-			backdrop = { backgroundStyle = p0.Color.Common.Backdrop },
+			backdrop = { backgroundStyle = p1.Color.Common.Backdrop },
 			shadow = {
 				tag = "auto-xy",
-				imageStyle = p0.Color.Extended.Black.Black_15
+				imageStyle = p1.Color.Extended.Black.Black_15
 			},
 			container = { tag = "col align-x-center align-y-center size-full-full" },
 			inner = {
@@ -50,10 +50,10 @@ local function variantsFactory(p0)
 					tag = if flagsModule.FoundationDialogBetaUpdate then "radius-large" else "radius-medium"
 				},
 				body = { tag = "gap-large padding-x-large" },
-				closeAffordance = { offset = p0.Size.Size_300 },
+				closeAffordance = { offset = p1.Size.Size_300 },
 				heroMedia = {
 					tag = if flagsModule.FoundationDialogBetaUpdate then "radius-top-large" else "radius-top-medium",
-					offsetX = p0.Padding.Large
+					offsetX = p1.Padding.Large
 				},
 				titleText = { tag = "text-heading-small" },
 				contentText = { tag = "text-body-medium" },
@@ -66,8 +66,8 @@ local function variantsFactory(p0)
 					maxWidth = t[dialogSizeModule.Medium]
 				},
 				body = { tag = "gap-xlarge padding-x-xlarge" },
-				closeAffordance = { offset = p0.Size.Size_400 },
-				heroMedia = { tag = "radius-top-large", offsetX = p0.Padding.XLarge },
+				closeAffordance = { offset = p1.Size.Size_400 },
+				heroMedia = { tag = "radius-top-large", offsetX = p1.Padding.XLarge },
 				titleText = { tag = "text-heading-medium" },
 				contentText = { tag = "text-body-medium" },
 				actionsLabel = { tag = "padding-top-xlarge" }
@@ -79,8 +79,8 @@ local function variantsFactory(p0)
 					maxWidth = t[dialogSizeModule.Large]
 				},
 				body = { tag = "gap-xlarge padding-x-xlarge" },
-				closeAffordance = { offset = p0.Size.Size_400 },
-				heroMedia = { tag = "radius-top-large", offsetX = p0.Padding.XLarge },
+				closeAffordance = { offset = p1.Size.Size_400 },
+				heroMedia = { tag = "radius-top-large", offsetX = p1.Padding.XLarge },
 				titleText = { tag = "text-heading-large" },
 				contentText = { tag = "text-body-large" },
 				actionsLabel = { tag = "padding-top-xlarge" }

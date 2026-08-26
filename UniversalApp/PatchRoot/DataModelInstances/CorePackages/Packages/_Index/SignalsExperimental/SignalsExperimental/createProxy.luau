@@ -28,28 +28,28 @@ return function(p1)
 	local var3, var4 = createSignal(nil, function()
 		return false
 	end)
-	local var5 = createComputed(function(p1)
+	local var5 = createComputed(function(p2)
 		-- upvalues: var3 (ref), t (ref)
-		var3(p1)
-		local var1 = 0
+		var3(p2)
+		local var6 = 0
 		
 		for i, v in ipairs(t) do
 			if v.getter(false) ~= nil then
-				var1 += 1
+				var6 += 1
 			end
 		end
-		return var1
+		return var6
 	end)
 	
-	local function nextSignal(value, p1)
+	local function nextSignal(value, p3)
 		while true do
-			local var1, var2 = next(value, p1)
-			if var1 ~= nil then
-				if var2 == nil then continue end
-				local ter = var2.getter(false)
+			local var7, var8 = next(value, p3)
+			if var7 ~= nil then
+				if var8 == nil then continue end
+				local ter = var8.getter(false)
 				
 				if ter ~= nil then
-					return var1, ter
+					return var7, ter
 				end
 			end
 			return nil
@@ -62,18 +62,18 @@ return function(p1)
 			-- upvalues: var5 (ref)
 			return var5(false)
 		end,
-		__call = function(_, p1)
+		__call = function(_, p4)
 			-- upvalues: var5 (ref), var3 (ref), t (ref), createSignal (copy)
-			local function nextSignal(value, p1)
-				-- upvalues: p1 (ref)
+			local function nextSignal(value, p5)
+				-- upvalues: p5 (ref)
 				while true do
-					local var1, var2 = next(value, p1)
-					if var1 ~= nil then
-						if var2 == nil then continue end
-						local ter = var2.getter(p1)
+					local var9, var10 = next(value, p5)
+					if var9 ~= nil then
+						if var10 == nil then continue end
+						local ter = var10.getter(p5)
 						
 						if ter ~= nil then
-							return var1, ter
+							return var9, ter
 						end
 					end
 					return nil
@@ -83,35 +83,35 @@ return function(p1)
 			return setmetatable({}, table.freeze({
 				__metatable = false,
 				__len = function()
-					-- upvalues: var5 (copy), p1 (ref)
-					return var5(p1)
+					-- upvalues: var5 (copy), p5 (ref)
+					return var5(p5)
 				end,
 				__iter = function()
-					-- upvalues: var3 (copy), p1 (ref), nextSignal (ref), t (copy)
-					var3(p1)
+					-- upvalues: var3 (copy), p5 (ref), nextSignal (ref), t (copy)
+					var3(p5)
 					
 					return nextSignal, t
 				end,
-				__index = function(_, p1)
-					-- upvalues: t (copy), p1 (ref), createSignal (copy)
-					local var1 = t[p1]
+				__index = function(_, p6)
+					-- upvalues: t (copy), p6 (ref), createSignal (copy)
+					local var11 = t[p6]
 					
-					if var1 == nil then
-						if p1 == nil then
+					if var11 == nil then
+						if p6 == nil then
 							return nil
 						end
-						local var2 = nil
-						local var3, var4 = createSignal(function()
-							-- upvalues: var2 (ref)
-							return var2
+						local var12 = nil
+						local var13, var14 = createSignal(function()
+							-- upvalues: var12 (ref)
+							return var12
 						end)
-						var1 = { getter = var3, setter = var4 }
-						t[p1] = var1
+						var11 = { getter = var13, setter = var14 }
+						t[p6] = var11
 					end
-					return var1.getter(p1)
+					return var11.getter(p6)
 				end,
-				__newindex = function(_, p1, p2)
-					error(`attempt to update read-only store at {p1} with {p2}`, 2)
+				__newindex = function(_, p6, p7)
+					error(`attempt to update read-only store at {p6} with {p7}`, 2)
 				end
 			}))
 		end,
@@ -119,38 +119,38 @@ return function(p1)
 			-- upvalues: nextSignal (ref), t (ref)
 			return nextSignal, t
 		end,
-		__index = function(_, p1)
+		__index = function(_, p5)
 			-- upvalues: t (ref)
-			local var1 = t[p1]
+			local var9 = t[p5]
 			
-			return if var1 == nil then nil else var1.getter(false)
+			return if var9 == nil then nil else var9.getter(false)
 		end,
-		__newindex = function(_, p1, p2)
+		__newindex = function(_, p5, p6)
 			-- upvalues: t (ref), createSignal (copy), var4 (ref), batch (copy)
-			local var1 = t[p1]
+			local var9 = t[p5]
 			
-			if var1 ~= nil then
-				local ter = var1.getter(false)
+			if var9 ~= nil then
+				local ter = var9.getter(false)
 				
-				if ter ~= p2 then
+				if ter ~= p6 then
 					batch(function()
-						-- upvalues: var1 (write), p2 (ref), ter (ref), var4 (copy)
-						var1.setter(function()
-							-- upvalues: p2 (copy)
-							return p2
+						-- upvalues: var9 (write), p6 (ref), ter (ref), var4 (copy)
+						var9.setter(function()
+							-- upvalues: p6 (copy)
+							return p6
 						end)
 						
-						if ter == nil or p2 == nil then
+						if ter == nil or p6 == nil then
 							var4()
 						end
 					end)
 				end
-			elseif p2 ~= nil then
-				local var2, var3 = createSignal(function()
-					-- upvalues: p2 (ref)
-					return p2
+			elseif p6 ~= nil then
+				local var10, var11 = createSignal(function()
+					-- upvalues: p6 (ref)
+					return p6
 				end)
-				t[p1] = { getter = var2, setter = var3 }
+				t[p5] = { getter = var10, setter = var11 }
 				var4()
 			end
 		end

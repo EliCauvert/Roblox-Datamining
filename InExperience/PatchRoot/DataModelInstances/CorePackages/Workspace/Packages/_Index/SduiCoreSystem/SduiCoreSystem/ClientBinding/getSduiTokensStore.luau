@@ -7,40 +7,40 @@ local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 
 local function _()
 	-- upvalues: signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref)
-	local var5, var6 = signalsModule.createSignal(nil)
+	local var1, var2 = signalsModule.createSignal(nil)
 	
 	return {
-		getTokens = function(p0, p1)
-			-- upvalues: var5 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy)
-			local var7 = var5(p0)
+		getTokens = function(p1, p2)
+			-- upvalues: var1 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy)
+			local var3 = var1(p1)
 			
-			if var7 == nil then
-				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.GetNilTokens, { message = "Getting tokens before they were set" }, p1)
+			if var3 == nil then
+				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.GetNilTokens, { message = "Getting tokens before they were set" }, p2)
 			end
-			return var7
+			return var3
 		end,
-		setTokens = var6
+		setTokens = var2
 	}
 end
 
-local var4 = nil
+local var1 = nil
 
 return function()
-	-- upvalues: var4 (write), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref)
-	if var4 == nil then
-		local var8, var9 = signalsModule.createSignal(nil)
-		var4 = {
-			getTokens = function(p2, p3)
-				-- upvalues: var8 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy)
-				local var7 = var8(p2)
+	-- upvalues: var1 (write), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref)
+	if var1 == nil then
+		local var2, var3 = signalsModule.createSignal(nil)
+		var1 = {
+			getTokens = function(p1, p2)
+				-- upvalues: var2 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy)
+				local var4 = var2(p1)
 				
-				if var7 == nil then
-					sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.GetNilTokens, { message = "Getting tokens before they were set" }, p3)
+				if var4 == nil then
+					sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.GetNilTokens, { message = "Getting tokens before they were set" }, p2)
 				end
-				return var7
+				return var4
 			end,
-			setTokens = var9
+			setTokens = var3
 		}
 	end
-	return var4
+	return var1
 end

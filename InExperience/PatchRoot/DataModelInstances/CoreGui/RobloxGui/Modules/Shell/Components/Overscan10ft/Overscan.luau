@@ -13,26 +13,26 @@ local useNavigation = require(corePackagesService.Workspace.Packages.Navigation)
 local controllerHintModule = require(modules.Shell.Components.Overscan.ControllerHint)
 local edgesModule = require(script.Parent.Edges)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigation (ref), useLocalization (ref), useDesignTokens (ref), useStyle (ref), reactModule (ref), globalSettingsModule (ref), localizedStringsModule (ref), controllerHintModule (ref), buttonStack (ref), buttonType (ref), edgesModule (ref)
-	local onUnmount = p0.onUnmount or useNavigation().goBack
-	local var8 = useLocalization({
+	local onUnmount = p1.onUnmount or useNavigation().goBack
+	local var1 = useLocalization({
 		accept = "CommonUI.Controls.Action.Accept",
 		cancel = "CommonUI.Controls.Action.Cancel"
 	})
-	local var9 = useDesignTokens(function(p1)
+	local var2 = useDesignTokens(function(p2)
 		return {
-			buttonHeight = p1.Size.Size_1200,
-			marginBetween = p1.Size.Size_300
+			buttonHeight = p2.Size.Size_1200,
+			marginBetween = p2.Size.Size_300
 		}
 	end)
-	local var10 = useStyle()
-	local var11 = reactModule.useRef(nil)
+	local var3 = useStyle()
+	local var4 = reactModule.useRef(nil)
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundTransparency = p0.BackgroundTransparency,
+		BackgroundTransparency = p1.BackgroundTransparency,
 		BackgroundColor3 = Color3.new(0.011764705882, 0.011764705882, 0.011764705882)
 	}, {
 		reactModule.createElement("ImageLabel", {
@@ -41,7 +41,7 @@ return function(p0)
 			Image = "rbxasset://textures/ui/Shell/ScreenAdjustment/Background.png",
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundColor3 = Color3.new(0.011764705882, 0.011764705882, 0.011764705882),
-			Visible = p0.ImageVisible
+			Visible = p1.ImageVisible
 		}),
 		Title = reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
@@ -68,27 +68,27 @@ return function(p0)
 			Position = UDim2.new(0.5, 0, 1, -201)
 		}, {
 			reactModule.createElement(buttonStack, {
-				buttonHeight = var9.buttonHeight,
-				marginBetween = var9.marginBetween,
+				buttonHeight = var2.buttonHeight,
+				marginBetween = var2.marginBetween,
 				forcedFillDirection = Enum.FillDirection.Horizontal,
 				buttons = {
 					{
 						buttonType = buttonType.Secondary,
 						props = {
-							text = var8.cancel,
-							fontStyle = var10.Font.Header1,
+							text = var1.cancel,
+							fontStyle = var3.Font.Header1,
 							onActivated = onUnmount
 						}
 					},
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							text = var8.accept,
-							fontStyle = var10.Font.Header1,
+							text = var1.accept,
+							fontStyle = var3.Font.Header1,
 							onActivated = function()
-								-- upvalues: var11 (ref)
-								if var11.current then
-									var11.current.onAccept()
+								-- upvalues: var4 (ref)
+								if var4.current then
+									var4.current.onAccept()
 								end
 							end
 						}
@@ -96,6 +96,6 @@ return function(p0)
 				}
 			})
 		}),
-		EdgeSelector = reactModule.createElement(edgesModule, { onSetEdges = onUnmount, ref = var11 })
+		EdgeSelector = reactModule.createElement(edgesModule, { onSetEdges = onUnmount, ref = var4 })
 	})
 end

@@ -7,16 +7,16 @@ local LAYOUT_ORDER = require(settings.Integrations.Constants).GAMESETTINGS.LAYOU
 
 local function _()
 	-- upvalues: gameSettings (ref), valueChangedSignal (ref)
-	local var4 = valueChangedSignal.new(gameSettings.ReducedMotion)
-	var4:connect(function(p0)
+	local var1 = valueChangedSignal.new(gameSettings.ReducedMotion)
+	var1:connect(function(p1)
 		-- upvalues: gameSettings (copy)
-		if gameSettings.ReducedMotion == p0 then
+		if gameSettings.ReducedMotion == p1 then
 			return
 		end
-		gameSettings.ReducedMotion = p0
+		gameSettings.ReducedMotion = p1
 	end)
 	
-	return var4
+	return var1
 end
 
 local t = {
@@ -26,15 +26,15 @@ local t = {
 	alreadyLocalized = false,
 	field_type = settingEnum.Toggle
 }
-local var3 = valueChangedSignal.new(gameSettings.ReducedMotion)
-var3:connect(function(p1)
+local var1 = valueChangedSignal.new(gameSettings.ReducedMotion)
+var1:connect(function(p1)
 	-- upvalues: gameSettings (ref)
 	if gameSettings.ReducedMotion == p1 then
 		return
 	end
 	gameSettings.ReducedMotion = p1
 end)
-t.onChanged = var3
+t.onChanged = var1
 t.layoutOrder = LAYOUT_ORDER.ReducedMotionFrame
 
 return t

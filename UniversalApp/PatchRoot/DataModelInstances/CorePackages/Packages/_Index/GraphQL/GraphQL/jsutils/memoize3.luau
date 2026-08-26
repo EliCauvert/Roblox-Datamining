@@ -1,9 +1,9 @@
 ﻿local _ = require(script.Parent.Parent.Parent.LuauPolyfill)
 local t = {}
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref)
-	return if p0 == nil then t else p0
+	return if p1 == nil then t else p1
 end
 
 local _ = function()
@@ -31,19 +31,19 @@ return {
 				tbl = var5[var3]
 				
 				if tbl then
-					local var7 = tbl[var4]
+					local var6 = tbl[var4]
 					
-					if var7 == nil then
+					if var6 == nil then
 						if not tbl then
 							tbl = setmetatable({}, { __mode = "kv" })
 							var5[var3] = tbl
 						end
-						local var8 = p1(p2, p3, p4)
-						tbl[var4] = if var8 == nil then t else var8
+						local var7 = p1(p2, p3, p4)
+						tbl[var4] = if var7 == nil then t else var7
 						
-						return var8
+						return var7
 					else
-						return if var7 == t then nil else var7
+						return if var6 == t then nil else var6
 					end
 				end
 			else

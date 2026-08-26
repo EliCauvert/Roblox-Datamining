@@ -5,70 +5,70 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local warnOnceModule = require(script.Parent.warnOnce)
 
 return {
-	mount = function(p0, p1, p2)
+	mount = function(p1, p2, p3)
 		-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), inspect (ref), reactRobloxModule (ref)
 		if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
 			warnOnceModule("mount", "Please use the createRoot API in ReactRoblox")
 		end
-		if p1 ~= nil and typeof(p1) ~= "Instance" then
-			error(string.format("Cannot mount element (`%s`) into a parent that is not a Roblox Instance (got type `%s`) \n%s", if p0 then tostring(p0.type) else "<unknown>", typeof(p1), (function()
-				-- upvalues: p1 (write), inspect (copy)
-				return if p1 == nil then "" else inspect(p1)
+		if p2 ~= nil and typeof(p2) ~= "Instance" then
+			error(string.format("Cannot mount element (`%s`) into a parent that is not a Roblox Instance (got type `%s`) \n%s", if p1 then tostring(p1.type) else "<unknown>", typeof(p2), (function()
+				-- upvalues: p2 (write), inspect (copy)
+				return if p2 == nil then "" else inspect(p2)
 			end)()))
 		end
-		local var3 = if _G.__ROACT_17_COMPAT_LEGACY_ROOT__ then reactRobloxModule.createLegacyRoot(Instance.new("Folder")) else reactRobloxModule.createRoot(Instance.new("Folder"))
+		local var1 = if _G.__ROACT_17_COMPAT_LEGACY_ROOT__ then reactRobloxModule.createLegacyRoot(Instance.new("Folder")) else reactRobloxModule.createRoot(Instance.new("Folder"))
 		
-		if p1 == nil then
+		if p2 == nil then
 			local target = Instance.new("Folder")
 			target.Name = "Target"
-			p1 = target
+			p2 = target
 		end
-		if p2 == nil then
-			p2 = if _G.__ROACT_17_COMPAT_LEGACY_ROOT__ then "ReactLegacyRoot" else "ReactRoot"
+		if p3 == nil then
+			p3 = if _G.__ROACT_17_COMPAT_LEGACY_ROOT__ then "ReactLegacyRoot" else "ReactRoot"
 		end
 		if reactGlobalsModule.__ROACT_17_INLINE_ACT__ then
 			reactRobloxModule.act(function()
-				-- upvalues: var3 (write), reactRobloxModule (copy), p2 (write), p0 (ref), p1 (write)
-				var3:render(reactRobloxModule.createPortal({ [p2] = p0 }, p1))
+				-- upvalues: var1 (write), reactRobloxModule (copy), p3 (write), p1 (ref), p2 (write)
+				var1:render(reactRobloxModule.createPortal({ [p3] = p1 }, p2))
 			end)
 		else
-			var3:render(reactRobloxModule.createPortal({ [p2] = p0 }, p1))
+			var1:render(reactRobloxModule.createPortal({ [p3] = p1 }, p2))
 		end
-		return { root = var3, parent = p1, key = p2 }
+		return { root = var1, parent = p2, key = p3 }
 	end,
-	update = function(p3, p4)
+	update = function(p1, p2)
 		-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), reactRobloxModule (ref)
 		if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
 			warnOnceModule("update", "Please use the createRoot API in ReactRoblox")
 		end
-		local key = p3.key
-		local parent = p3.parent
+		local key = p1.key
+		local parent = p1.parent
 		
 		if reactGlobalsModule.__ROACT_17_INLINE_ACT__ then
 			reactRobloxModule.act(function()
-				-- upvalues: p3 (ref), reactRobloxModule (copy), key (ref), p4 (ref), parent (ref)
-				p3.root:render(reactRobloxModule.createPortal({ [key] = p4 }, parent))
+				-- upvalues: p1 (ref), reactRobloxModule (copy), key (ref), p2 (ref), parent (ref)
+				p1.root:render(reactRobloxModule.createPortal({ [key] = p2 }, parent))
 			end)
 			
-			return p3
+			return p1
 		end
-		p3.root:render(reactRobloxModule.createPortal({ [key] = p4 }, parent))
+		p1.root:render(reactRobloxModule.createPortal({ [key] = p2 }, parent))
 		
-		return p3
+		return p1
 	end,
-	unmount = function(p5)
+	unmount = function(p1)
 		-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), reactRobloxModule (ref)
 		if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
 			warnOnceModule("unmount", "Please use the createRoot API in ReactRoblox")
 		end
 		if reactGlobalsModule.__ROACT_17_INLINE_ACT__ then
 			reactRobloxModule.act(function()
-				-- upvalues: p5 (ref)
-				p5.root:unmount()
+				-- upvalues: p1 (ref)
+				p1.root:unmount()
 			end)
 			
 			return
 		end
-		p5.root:unmount()
+		p1.root:unmount()
 	end
 }

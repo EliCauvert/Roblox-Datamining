@@ -72,77 +72,77 @@ return function()
 		}
 		t_9.stats.setData("stat1", signalsModule.createSignal(t_8.leaderstats.stat1.Value), false)
 		t_9.stats.setData("stat2", signalsModule.createSignal(t_8.leaderstats.stat2.Value), false)
-		local var13 = createSignalMap()
-		var13.setData(t, t_1, false)
-		var13.setData(t_2, t_3, false)
-		var13.setData(t_4, t_5, false)
-		var13.setData(t_6, t_7, false)
-		var13.setData(t_8, t_9, false)
-		local var14 = createSignalMap()
-		local var15 = createSignalMap()
-		var15.setData("Neutral", {
+		local var1 = createSignalMap()
+		var1.setData(t, t_1, false)
+		var1.setData(t_2, t_3, false)
+		var1.setData(t_4, t_5, false)
+		var1.setData(t_6, t_7, false)
+		var1.setData(t_8, t_9, false)
+		local var2 = createSignalMap()
+		local var3 = createSignalMap()
+		var3.setData("Neutral", {
 			name = signalsModule.createSignal("Neutral"),
 			color = signalsModule.createSignal(Color3.fromRGB(0, 0, 0)),
 			order = signalsModule.createSignal(1),
 			stats = createSignalMap(),
 			players = createSignalMap()
 		}, false)
-		local neutral = var15.getData("Neutral", false)
+		local neutral = var3.getData("Neutral", false)
 		neutral.players.setData(t_8, t_8.UserId, false)
 		neutral.stats.setData("stat1", signalsModule.createSignal(t_8.leaderstats.stat1.Value), false)
 		neutral.stats.setData("stat2", signalsModule.createSignal(t_8.leaderstats.stat2.Value), false)
-		var15.setData(team, {
+		var3.setData(team, {
 			name = signalsModule.createSignal("Team 1"),
 			color = signalsModule.createSignal(Color3.fromRGB(255, 0, 0)),
 			order = signalsModule.createSignal(2),
 			stats = createSignalMap(),
 			players = createSignalMap()
 		}, false)
-		local data = var15.getData(team, false)
+		local data = var3.getData(team, false)
 		data.players.setData(t, t.UserId, false)
 		data.players.setData(t_2, t_2.UserId, false)
 		data.stats.setData("stat1", signalsModule.createSignal(t.leaderstats.stat1.Value + t_2.leaderstats.stat1.Value), false)
 		data.stats.setData("stat2", signalsModule.createSignal(t.leaderstats.stat2.Value + t_2.leaderstats.stat2.Value), false)
-		var15.setData(team_1, {
+		var3.setData(team_1, {
 			name = signalsModule.createSignal("Team 2"),
 			color = signalsModule.createSignal(Color3.fromRGB(0, 255, 0)),
 			order = signalsModule.createSignal(3),
 			stats = createSignalMap(),
 			players = createSignalMap()
 		}, false)
-		local data_1 = var15.getData(team_1, false)
+		local data_1 = var3.getData(team_1, false)
 		data_1.players.setData(t_4, t_4.UserId, false)
 		data_1.players.setData(t_6, t_6.UserId, false)
 		data_1.stats.setData("stat1", signalsModule.createSignal(t_4.leaderstats.stat1.Value + t_6.leaderstats.stat1.Value), false)
 		data_1.stats.setData("stat2", signalsModule.createSignal(t_4.leaderstats.stat2.Value + t_6.leaderstats.stat2.Value), false)
-		local var19 = createSignalMap()
-		var19.setData("Neutral", var15.getData("Neutral", false), false)
-		var19.setData(team, var15.getData(team, false), false)
-		var19.setData(team_1, var15.getData(team_1, false), false)
+		local var4 = createSignalMap()
+		var4.setData("Neutral", var3.getData("Neutral", false), false)
+		var4.setData(team, var3.getData(team, false), false)
+		var4.setData(team_1, var3.getData(team_1, false), false)
 		
 		return {
 			getGameStatsList = function()
-				-- upvalues: var14 (write)
-				return var14
+				-- upvalues: var2 (write)
+				return var2
 			end,
 			getTeamList = function()
-				-- upvalues: var19 (write)
-				return var19
+				-- upvalues: var4 (write)
+				return var4
 			end,
-			getTeamPlayerList = function(p0, _)
-				-- upvalues: var15 (write)
-				return var15.getData(p0, false).players
+			getTeamPlayerList = function(p1, _)
+				-- upvalues: var3 (write)
+				return var3.getData(p1, false).players
 			end,
 			getPlayerEntry = function(p1)
-				-- upvalues: var13 (write)
-				return var13.getData(p1, false)
+				-- upvalues: var1 (write)
+				return var1.getData(p1, false)
 			end,
 			cleanUp = function()
-				-- upvalues: var14 (write), var19 (write), var15 (write), var13 (write)
-				var14 = nil
-				var19 = nil
-				var15 = nil
-				var13 = nil
+				-- upvalues: var2 (write), var4 (write), var3 (write), var1 (write)
+				var2 = nil
+				var4 = nil
+				var3 = nil
+				var1 = nil
 			end
 		}
 	end

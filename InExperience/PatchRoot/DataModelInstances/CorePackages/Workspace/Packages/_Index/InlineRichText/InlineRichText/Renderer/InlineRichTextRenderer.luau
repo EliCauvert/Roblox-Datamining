@@ -18,7 +18,7 @@ local linkTypeModule = require(inlineRichText.Enums.LinkType)
 local linkBehaviorModule = require(inlineRichText.Enums.LinkBehavior)
 local getLinkTypeModule = require(inlineRichText.Linker.getLinkType)
 
-local function createDefaultRootNode(p0)
+local function createDefaultRootNode(p1)
 	-- upvalues: nodeTypeModule (ref)
 	return {
 		name = "ROOT",
@@ -35,7 +35,7 @@ local function createDefaultRootNode(p0)
 					{
 						name = "PLAINTEXT",
 						index = 2,
-						text = p0,
+						text = p1,
 						type = nodeTypeModule.Plaintext,
 						children = {},
 						attributes = {}
@@ -67,62 +67,62 @@ local t_2 = {
 	end
 }
 
-return function(p2)
+return function(p1)
 	-- upvalues: reactModule (ref), parseXmlModule (ref), name (ref), createDefaultRootNode (ref), foundationModule (ref), cryoModule (ref), t_2 (ref), useLinkerOnActivatedModule (ref), getLinkTypeModule (ref), t (ref), processChildrenModule (ref), inlineLayout (ref)
-	local ast = p2.ast
-	local text = p2.text
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: ast (ref), parseXmlModule (copy), text (ref), p2 (ref), name (copy), createDefaultRootNode (copy)
+	local ast = p1.ast
+	local text = p1.text
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: ast (ref), parseXmlModule (copy), text (ref), p1 (ref), name (copy), createDefaultRootNode (copy)
 		if ast then
 			return ast
 		end
-		local var27, var28 = parseXmlModule(text, p2.parserOptions)
+		local var2, var3 = parseXmlModule(text, p1.parserOptions)
 		
-		if var27 then
-			return var28
+		if var2 then
+			return var3
 		end
-		name:warning(`Error parsing XML input into AST: {var28}`)
+		name:warning(`Error parsing XML input into AST: {var3}`)
 		
 		return createDefaultRootNode(text)
 	end, { text, ast })
-	local var21 = foundationModule.Hooks.useTokens()
-	local default = var21.Color.Content.Default
+	local var2 = foundationModule.Hooks.useTokens()
+	local default = var2.Color.Content.Default
 	local t_1 = {
 		Font = Enum.Font.BuilderSans,
-		FontSize = var21.FontSize.FontSize_400,
-		LineHeight = var21.LineHeight.LineHeight_140
+		FontSize = var2.FontSize.FontSize_400,
+		LineHeight = var2.LineHeight.LineHeight_140
 	}
-	local var23 = cryoModule.Dictionary.union(t_2, p2.linkerOptions or {})
-	local var24 = useLinkerOnActivatedModule({ errorToastTextOverride = var23.errorToastText })
-	local var25 = reactModule.useCallback(function(p3)
-		-- upvalues: var23 (ref), getLinkTypeModule (copy)
-		return var23.evaluateLinkBehavior(p3, getLinkTypeModule(p3))
-	end, { var23.evaluateLinkBehavior })
-	local var26 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), t (copy), p2 (ref), processChildrenModule (copy), default (ref), t_1 (ref), var21 (ref), var24 (ref), var25 (ref)
+	local var3 = cryoModule.Dictionary.union(t_2, p1.linkerOptions or {})
+	local var4 = useLinkerOnActivatedModule({ errorToastTextOverride = var3.errorToastText })
+	local var5 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), getLinkTypeModule (copy)
+		return var3.evaluateLinkBehavior(p2, getLinkTypeModule(p2))
+	end, { var3.evaluateLinkBehavior })
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: cryoModule (copy), t (copy), p1 (ref), processChildrenModule (copy), default (ref), t_1 (ref), var2 (ref), var4 (ref), var5 (ref)
 		return {
-			inlineCustomRenderers = cryoModule.Dictionary.join(t, p2.renderers or {}),
+			inlineCustomRenderers = cryoModule.Dictionary.join(t, p1.renderers or {}),
 			processChildren = processChildrenModule,
-			nodeProps = p2.nodeProps or {},
+			nodeProps = p1.nodeProps or {},
 			styles = {
-				textStyle = cryoModule.Dictionary.union(default, p2.textStyle or {}),
-				fontStyle = cryoModule.Dictionary.union(t_1, p2.fontStyle or {})
+				textStyle = cryoModule.Dictionary.union(default, p1.textStyle or {}),
+				fontStyle = cryoModule.Dictionary.union(t_1, p1.fontStyle or {})
 			},
-			tokens = var21,
-			linker = { onActivated = var24, evaluateLinkBehavior = var25 }
+			tokens = var2,
+			linker = { onActivated = var4, evaluateLinkBehavior = var5 }
 		}
 	end, {
-		p2.renderers, p2.nodeProps, p2.textStyle, p2.fontStyle, var24, var25
+		p1.renderers, p1.nodeProps, p1.textStyle, p1.fontStyle, var4, var5
 	})
 	
-	return reactModule.createElement(foundationModule.View, p2.wrapperProps, {
+	return reactModule.createElement(foundationModule.View, p1.wrapperProps, {
 		RichTextRoot = reactModule.createElement(inlineLayout, {
 			Elements = reactModule.useMemo(function()
-				-- upvalues: processChildrenModule (copy), var20 (ref), var26 (ref)
-				return processChildrenModule(var20, var26)
-			end, { var20 and var20.children, var26 }),
-			HorizontalAlignment = p2.HorizontalAlignment,
-			VerticalPadding = UDim.new(0, var26.styles.fontStyle.FontSize * (var26.styles.fontStyle.LineHeight - 1) / 2)
+				-- upvalues: processChildrenModule (copy), var1 (ref), var6 (ref)
+				return processChildrenModule(var1, var6)
+			end, { var1 and var1.children, var6 }),
+			HorizontalAlignment = p1.HorizontalAlignment,
+			VerticalPadding = UDim.new(0, var6.styles.fontStyle.FontSize * (var6.styles.fontStyle.LineHeight - 1) / 2)
 		})
 	})
 end

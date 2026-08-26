@@ -2,22 +2,22 @@
 local setShowAgeVerificationOverlayModule = require(voiceChat.AgeVerificationOverlay.SetShowAgeVerificationOverlay)
 local cryoModule = require(voiceChat.Parent.Cryo)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: setShowAgeVerificationOverlayModule (ref), cryoModule (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	if p1.type == setShowAgeVerificationOverlayModule.name then
-		p0 = cryoModule.Dictionary.join(p0, if p1.universeId ~= nil then {
-			[p1.universeId] = {
-				universeId = p1.universeId,
-				isPlaceEnabledForVoice = p1.isPlaceEnabledForVoice,
-				showVoiceOptInOverlay = p1.showVoiceOptInOverlay,
-				isUniverseEnabledForVoice = p1.isUniverseEnabledForVoice,
-				isVoiceEnabled = p1.isVoiceEnabled,
-				isUniverseEnabledForAvatarVideo = p1.isUniverseEnabledForAvatarVideo,
-				elegibleToSeeVoiceUpsell = p1.elegibleToSeeVoiceUpsell
+	if p2.type == setShowAgeVerificationOverlayModule.name then
+		p1 = cryoModule.Dictionary.join(p1, if p2.universeId ~= nil then {
+			[p2.universeId] = {
+				universeId = p2.universeId,
+				isPlaceEnabledForVoice = p2.isPlaceEnabledForVoice,
+				showVoiceOptInOverlay = p2.showVoiceOptInOverlay,
+				isUniverseEnabledForVoice = p2.isUniverseEnabledForVoice,
+				isVoiceEnabled = p2.isVoiceEnabled,
+				isUniverseEnabledForAvatarVideo = p2.isUniverseEnabledForAvatarVideo,
+				elegibleToSeeVoiceUpsell = p2.elegibleToSeeVoiceUpsell
 			}
 		} else {})
 	end
-	return p0
+	return p1
 end

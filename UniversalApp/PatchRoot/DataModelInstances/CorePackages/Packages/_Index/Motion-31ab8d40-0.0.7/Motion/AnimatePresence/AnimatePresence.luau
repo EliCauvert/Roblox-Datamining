@@ -3,19 +3,19 @@ local reactModule = require(parent.Parent.React)
 local presenceChildModule = require(script.Parent.PresenceChild)
 local presenceStateModule = require(parent.Enums.PresenceState)
 
-local function _(p0, p1)
-	return if typeof(p1) == "table" and p1.props and p1.props.presenceId then string.format("%s:%s", p0, tostring(p1.props.presenceId)) else p0
+local function _(p1, p2)
+	return if typeof(p2) == "table" and p2.props and p2.props.presenceId then string.format("%s:%s", p1, tostring(p2.props.presenceId)) else p1
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: reactModule (ref), presenceStateModule (ref), presenceChildModule (ref)
-	local children = p2.children
-	local var3 = if p2.childData ~= nil then nil else p2.childData
-	local var4 = if p2.onExitComplete ~= nil then nil else p2.onExitComplete
-	local var5, var6 = reactModule.useState({})
-	local var7 = reactModule.useRef({})
+	local children = p1.children
+	local var1 = if p1.childData ~= nil then nil else p1.childData
+	local var2 = if p1.onExitComplete ~= nil then nil else p1.onExitComplete
+	local var3, var4 = reactModule.useState({})
+	local var5 = reactModule.useRef({})
 	reactModule.useEffect(function()
-		-- upvalues: children (ref), presenceStateModule (copy), var5 (ref), var6 (ref), var7 (ref)
+		-- upvalues: children (ref), presenceStateModule (copy), var3 (ref), var4 (ref), var5 (ref)
 		local t = {}
 		
 		if children ~= nil and typeof(children) == "table" then
@@ -29,21 +29,21 @@ return function(p2)
 				end
 			end
 		end
-		local var11
-		for i, v in pairs(var5) do
-			var11 = false
+		local var6
+		for i, v in pairs(var3) do
+			var6 = false
 			
 			if children ~= nil and typeof(children) == "table" then
 				for i_1, v_2 in pairs(children) do
 					if typeof(v_2) == "table" and v_2.type ~= nil then
 						if (if typeof(v_2) == "table" and v_2.props and v_2.props.presenceId then string.format("%s:%s", i_1, tostring(v_2.props.presenceId)) else i_1) == i then
-							var11 = true
+							var6 = true
 							break
 						end
 					end
 				end
 			end
-			if not var11 and v.isPresent then
+			if not var6 and v.isPresent then
 				t[i] = {
 					type = presenceStateModule.Exiting,
 					component = v.component,
@@ -52,9 +52,9 @@ return function(p2)
 			end
 		end
 		if next(t) ~= nil then
-			var6(function(p3)
-				-- upvalues: t (ref), presenceStateModule (copy), var7 (copy)
-				local cloned = table.clone(p3)
+			var4(function(p2)
+				-- upvalues: t (ref), presenceStateModule (copy), var5 (copy)
+				local cloned = table.clone(p2)
 				
 				for i, v in pairs(t) do
 					if v.type == presenceStateModule.Entering then
@@ -71,27 +71,27 @@ return function(p2)
 							component = v.component,
 							dictionaryKey = v.dictionaryKey
 						}
-						var7.current[i] = true
+						var5.current[i] = true
 					end
 				end
 				return cloned
 			end)
 		end
 	end, { children })
-	local var8 = reactModule.useCallback(function(p4)
-		-- upvalues: var7 (ref), var6 (ref)
-		if var7.current[p4] then
-			var7.current[p4] = nil
-			var6(function(p5)
-				-- upvalues: p4 (ref)
-				local cloned = table.clone(p5)
+	local var7 = reactModule.useCallback(function(p2)
+		-- upvalues: var5 (ref), var4 (ref)
+		if var5.current[p2] then
+			var5.current[p2] = nil
+			var4(function(p3)
+				-- upvalues: p2 (ref)
+				local cloned = table.clone(p3)
 				
-				if cloned[p4] then
-					cloned[p4] = {
+				if cloned[p2] then
+					cloned[p2] = {
 						isPresent = false,
 						safeToRemove = true,
-						component = cloned[p4].component,
-						dictionaryKey = cloned[p4].dictionaryKey
+						component = cloned[p2].component,
+						dictionaryKey = cloned[p2].dictionaryKey
 					}
 				end
 				return cloned
@@ -99,45 +99,45 @@ return function(p2)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var6 (ref), var4 (ref)
+		-- upvalues: var3 (ref), var4 (ref), var2 (ref)
 		local t = {}
-		local var15 = false
+		local var8 = false
 		
-		for i, v in pairs(var5) do
+		for i, v in pairs(var3) do
 			if v.safeToRemove then
-				var15 = true
+				var8 = true
 				t[i] = true
 			end
 		end
-		if var15 then
-			var6(function(p6)
-				-- upvalues: t (ref), var4 (copy)
+		if var8 then
+			var4(function(p2)
+				-- upvalues: t (ref), var2 (copy)
 				local t_1 = {}
 				
-				for i, v in pairs(p6) do
+				for i, v in pairs(p2) do
 					if not t[i] then
 						t_1[i] = v
-					elseif var4 then
-						var4(i)
+					elseif var2 then
+						var2(i)
 					end
 				end
 				return t_1
 			end)
 		end
-	end, { var5 })
+	end, { var3 })
 	local t = {}
 	
-	for i, v in pairs(var5) do
+	for i, v in pairs(var3) do
 		if not v.safeToRemove then
 			table.insert(t, reactModule.createElement(presenceChildModule, {
 				key = i,
 				presenceId = i,
 				isPresent = v.isPresent,
 				onExitComplete = function()
-					-- upvalues: var8 (ref), i (ref)
-					var8(i)
+					-- upvalues: var7 (ref), i (ref)
+					var7(i)
 				end,
-				childData = var3,
+				childData = var1,
 				children = v.component
 			}, v.component))
 		end

@@ -4,30 +4,30 @@ local getMutualFriendsTextModule = require(socialCommon.Utils.getMutualFriendsTe
 local recommendationContextTypeModule = require(socialCommon.Enums.RecommendationContextType)
 local images = require(parent.UIBlox).App.ImageSet.Images
 
-return function(p0)
+return function(p1)
 	-- upvalues: recommendationContextTypeModule (ref), getMutualFriendsTextModule (ref), images (ref)
 	local frequents = nil
 	local friend = nil
-	local var3 = p0.recommendation.contextType and p0.recommendation.contextType.rawValue()
-	local mutualFriendsCount = p0.recommendation.mutualFriendsCount or 0
+	local var1 = p1.recommendation.contextType and p1.recommendation.contextType.rawValue()
+	local mutualFriendsCount = p1.recommendation.mutualFriendsCount or 0
 	
-	if p0.recommendation.hasIncomingFriendRequest then
-		frequents = p0.localized.connectionRequests
+	if p1.recommendation.hasIncomingFriendRequest then
+		frequents = p1.localized.connectionRequests
 		friend = nil
 	end
-	if var3 == recommendationContextTypeModule.Contacts.rawValue() then
-		frequents = p0.localized.contacts
-	elseif var3 == recommendationContextTypeModule.MutualFriends.rawValue() and mutualFriendsCount > 0 then
+	if var1 == recommendationContextTypeModule.Contacts.rawValue() then
+		frequents = p1.localized.contacts
+	elseif var1 == recommendationContextTypeModule.MutualFriends.rawValue() and mutualFriendsCount > 0 then
 		frequents = getMutualFriendsTextModule({
 			mutualFriendsCount = mutualFriendsCount,
 			localized = {
-				mutualConnections = p0.localized.mutualConnections,
-				singularMutualConnection = p0.localized.singularMutualConnection
+				mutualConnections = p1.localized.mutualConnections,
+				singularMutualConnection = p1.localized.singularMutualConnection
 			}
 		})
 		friend = images["icons/status/player/friend"]
-	elseif var3 == recommendationContextTypeModule.Frequents.rawValue() then
-		frequents = p0.localized.frequents
+	elseif var1 == recommendationContextTypeModule.Frequents.rawValue() then
+		frequents = p1.localized.frequents
 	end
 	return { text = frequents, icon = friend }
 end

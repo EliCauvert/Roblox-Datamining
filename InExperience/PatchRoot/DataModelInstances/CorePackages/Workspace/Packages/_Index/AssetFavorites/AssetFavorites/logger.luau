@@ -12,10 +12,10 @@ end
 assetFavorites:setContext({ prefix = "[{loggerName} - {level}] - " })
 assetFavorites:addSink({
 	maxLevel = assetFavorites.Levels.fromString(status.level),
-	log = function(_, p0, _)
+	log = function(_, p1, _)
 		-- upvalues: status (write)
-		if p0:match(status.pattern) then
-			print(p0)
+		if p1:match(status.pattern) then
+			print(p1)
 		end
 	end
 })

@@ -12,22 +12,22 @@ local t = {
 	deviceContactToRobloxContact = {}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: byContactIdModule (ref), byDeviceContactIdModule (ref), hasSentRequestModule (ref), deviceContactToRobloxContactModule (ref), t (ref)
-	local var5 = byContactIdModule(p0)
-	local var6 = byDeviceContactIdModule(p0)
-	local var7 = hasSentRequestModule(p0)
-	local var8 = deviceContactToRobloxContactModule(p0)
+	local var1 = byContactIdModule(p1)
+	local var2 = byDeviceContactIdModule(p1)
+	local var3 = hasSentRequestModule(p1)
+	local var4 = deviceContactToRobloxContactModule(p1)
 	
-	return function(p1, p2)
-		-- upvalues: t (copy), var5 (ref), var6 (ref), var7 (ref), var8 (ref)
-		p1 = p1 or t
+	return function(p2, p3)
+		-- upvalues: t (copy), var1 (ref), var2 (ref), var3 (ref), var4 (ref)
+		p2 = p2 or t
 		
 		return {
-			byContactId = var5(p1.byContactId, p2),
-			byDeviceContactId = var6(p1.byDeviceContactId, p2),
-			hasSentRequest = var7(p1.hasSentRequest, p2),
-			deviceContactToRobloxContact = var8(p1.deviceContactToRobloxContact, p2)
+			byContactId = var1(p2.byContactId, p3),
+			byDeviceContactId = var2(p2.byDeviceContactId, p3),
+			hasSentRequest = var3(p2.hasSentRequest, p3),
+			deviceContactToRobloxContact = var4(p2.deviceContactToRobloxContact, p3)
 		}
 	end
 end

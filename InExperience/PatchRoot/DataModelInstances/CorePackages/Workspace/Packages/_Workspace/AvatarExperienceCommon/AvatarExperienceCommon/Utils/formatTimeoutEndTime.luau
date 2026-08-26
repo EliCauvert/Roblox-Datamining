@@ -1,14 +1,14 @@
 ﻿local localizationService = game:GetService("LocalizationService")
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: localizationService (ref)
-	if not p0 or p0 == "" then
+	if not p1 or p1 == "" then
 		return nil
 	end
 	local ok, status = pcall(function()
-		-- upvalues: p0 (ref)
-		return DateTime.fromIsoDate(p0)
+		-- upvalues: p1 (ref)
+		return DateTime.fromIsoDate(p1)
 	end)
 	
-	return if ok and status then status:FormatLocalTime(p1 or "M/D, LT", localizationService.RobloxLocaleId) else nil
+	return if ok and status then status:FormatLocalTime(p2 or "M/D, LT", localizationService.RobloxLocaleId) else nil
 end

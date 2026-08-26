@@ -2,11 +2,11 @@
 local _ = require(parent.GraphQL)
 local _ = require(parent.LuauPolyfill)
 
-return function(p0)
-	return function(p1, p2, p3, p4)
-		-- upvalues: p0 (ref)
-		local name = p0[p4.name]
+return function(p1)
+	return function(p2, p3, p4, p5)
+		-- upvalues: p1 (ref)
+		local name = p1[p5.name]
 		
-		return if type(name) == "table" and type(name.__resolveType) == "function" then name.__resolveType(p1, p2, p3, p4) else p4.name
+		return if type(name) == "table" and type(name.__resolveType) == "function" then name.__resolveType(p2, p3, p4, p5) else p5.name
 	end
 end

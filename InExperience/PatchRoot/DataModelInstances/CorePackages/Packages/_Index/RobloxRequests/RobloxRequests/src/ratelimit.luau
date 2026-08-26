@@ -1,8 +1,8 @@
 ﻿local t = {}
 t.__index = t
 
-local function _(p0)
-	return p0
+local function _(p1)
+	return p1
 end
 
 if not t.ratelimit then
@@ -26,44 +26,44 @@ function t.get(p1, p2, p3)
 	return tbl
 end
 
-function t.window(p4)
-	return math.floor(tick() / p4.window_size)
+function t.window(p1)
+	return math.floor(tick() / p1.window_size)
 end
 
-function t.progress(p5)
-	return tick() % p5.window_size / p5.window_size
+function t.progress(p1)
+	return tick() % p1.window_size / p1.window_size
 end
 
-function t.increment(p6)
+function t.increment(p1)
 	-- upvalues: t (ref)
-	local var2 = p6:window()
+	local var1 = p1:window()
 	
-	if not t.ratelimit[p6.id].windows[var2] then
-		t.ratelimit[p6.id].windows[var2] = 0
+	if not t.ratelimit[p1.id].windows[var1] then
+		t.ratelimit[p1.id].windows[var1] = 0
 	end
-	t.ratelimit[p6.id].windows[var2] += 1
+	t.ratelimit[p1.id].windows[var1] += 1
 	
-	return t.ratelimit[p6.id].windows[var2]
+	return t.ratelimit[p1.id].windows[var1]
 end
 
-function t.weighted(p7, p8)
+function t.weighted(p1, p2)
 	-- upvalues: t (ref)
-	p8 = p8 or 0
-	local var3 = p7:progress()
-	local var4 = p7:window()
+	p2 = p2 or 0
+	local var1 = p1:progress()
+	local var2 = p1:window()
 	
-	return ((t.ratelimit[p7.id].windows[var4] or 0) + p8) * var3 + (t.ratelimit[p7.id].windows[var4 - 1] or 0) * (1 - var3)
+	return ((t.ratelimit[p1.id].windows[var2] or 0) + p2) * var1 + (t.ratelimit[p1.id].windows[var2 - 1] or 0) * (1 - var1)
 end
 
-function t.consumption(p9)
-	return p9:weighted() / p9.rate
+function t.consumption(p1)
+	return p1:weighted() / p1.rate
 end
 
-function t.request(p10)
-	if p10.rate < p10:weighted(1) then
+function t.request(p1)
+	if p1.rate < p1:weighted(1) then
 		return false
 	end
-	p10:increment()
+	p1:increment()
 	
 	return true
 end

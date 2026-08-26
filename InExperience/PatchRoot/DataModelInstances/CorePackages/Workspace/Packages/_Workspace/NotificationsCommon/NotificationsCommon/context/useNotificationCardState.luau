@@ -4,9 +4,9 @@ local reactModule = require(parent_1.Parent.React)
 local notificationCardContextModule = require(parent.NotificationCardContext)
 local _ = require(parent_1.type)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), notificationCardContextModule (ref)
-	local var2 = reactModule.useContext(notificationCardContextModule)
+	local var1 = reactModule.useContext(notificationCardContextModule)
 	
-	return if p0 then var2.state and (var2.state.visualItems and (var2.state.visualItems[p0] or {})) else var2.state
+	return if p1 then var1.state and (var1.state.visualItems and (var1.state.visualItems[p1] or {})) else var1.state
 end

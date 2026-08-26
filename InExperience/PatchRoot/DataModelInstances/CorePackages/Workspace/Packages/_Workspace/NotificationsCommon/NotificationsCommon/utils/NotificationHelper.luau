@@ -7,29 +7,29 @@ local constantsModule = require(notificationsCommon.constants)
 local fFlagLuaAppFixToastNotificationClosePosition = game:DefineFastFlag("FFlagLuaAppFixToastNotificationClosePosition", false)
 
 return {
-	calculateToastPosition = function(p0, p1, p2)
+	calculateToastPosition = function(p1, p2, p3)
 		-- upvalues: fFlagLuaAppFixToastNotificationClosePosition (ref), guiService (ref)
-		return if p0 then if p1 then {
+		return if p1 then if p2 then {
 			positionX = 1,
 			positionXOffset = -20,
 			positionY = 0,
 			anchorX = 1,
 			anchorY = 0,
-			positionYOffset = p2
+			positionYOffset = p3
 		} else {
 			positionX = 0.5,
 			positionXOffset = 0,
 			positionY = 0,
 			anchorX = 0.5,
 			anchorY = 0,
-			positionYOffset = p2
-		} elseif p1 then {
+			positionYOffset = p3
+		} elseif p2 then {
 			positionX = 1,
 			positionXOffset = 20,
 			positionY = 0,
 			anchorX = 0,
 			anchorY = 0,
-			positionYOffset = p2
+			positionYOffset = p3
 		} else {
 			positionX = 0.5,
 			positionXOffset = 0,
@@ -39,23 +39,23 @@ return {
 			positionYOffset = if fFlagLuaAppFixToastNotificationClosePosition then (if fFlagLuaAppFixToastNotificationClosePosition and guiService then guiService:GetGuiInset().Y + 20 else 60) * -1 else -50
 		}
 	end,
-	getDeviceOrientation = function(p3)
+	getDeviceOrientation = function(p1)
 		-- upvalues: typeModule (ref)
-		return if p3.Y < p3.X then typeModule.DeviceOrientationEnum.Landscape else typeModule.DeviceOrientationEnum.Portrait
+		return if p1.Y < p1.X then typeModule.DeviceOrientationEnum.Landscape else typeModule.DeviceOrientationEnum.Portrait
 	end,
-	getNotificationSize = function(p4, p5)
+	getNotificationSize = function(p1, p2)
 		-- upvalues: constantsModule (ref)
-		return if p5 < constantsModule.FullWidthDeviceThreshold then UDim2.new(0, p5 - 24, 0, 0) elseif p4 then if p5 < constantsModule.CompactCardThreashold then UDim2.new(0, constantsModule.InExperienceToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0)
+		return if p2 < constantsModule.FullWidthDeviceThreshold then UDim2.new(0, p2 - 24, 0, 0) elseif p1 then if p2 < constantsModule.CompactCardThreashold then UDim2.new(0, constantsModule.InExperienceToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0)
 	end,
-	marshalStreamNotificationData = function(p6, _)
+	marshalStreamNotificationData = function(p1, _)
 		local t = {
-			currentState = p6.content.currentState,
-			notificationType = p6.content.notificationType,
-			id = p6.id
+			currentState = p1.content.currentState,
+			notificationType = p1.content.notificationType,
+			id = p1.id
 		}
 		
-		if p6.content.states then
-			local currentState = p6.content.states[p6.content.currentState]
+		if p1.content.states then
+			local currentState = p1.content.states[p1.content.currentState]
 			t.state = {
 				layoutKey = currentState.layoutKey,
 				name = currentState.name,
@@ -64,9 +64,9 @@ return {
 		end
 		return t
 	end,
-	isToastToRight = function(p7)
+	isToastToRight = function(p1)
 		-- upvalues: typeModule (ref)
-		return p7 == typeModule.DeviceOrientationEnum.Landscape
+		return p1 == typeModule.DeviceOrientationEnum.Landscape
 	end,
 	isDesktopDevice = function()
 		-- upvalues: userInputService (ref)
@@ -78,13 +78,13 @@ return {
 		
 		return if none ~= Enum.Platform.Windows then if none ~= Enum.Platform.OSX then none == Enum.Platform.UWP else true else true
 	end,
-	fireEvent = function(p8, p9, p10, p11)
+	fireEvent = function(p1, p2, p3, p4)
 		-- upvalues: constantsModule (ref), cryoModule (ref)
 		local t = { streamContext = "InApp" }
 		
-		if p10 == nil or p10 == "" then
-			p10 = constantsModule.NotificationsClientEventNameDefault
+		if p3 == nil or p3 == "" then
+			p3 = constantsModule.NotificationsClientEventNameDefault
 		end
-		p8.sendEventDeferred(p9, p10, cryoModule.Dictionary.join(p11, t))
+		p1.sendEventDeferred(p2, p3, cryoModule.Dictionary.join(p4, t))
 	end
 }

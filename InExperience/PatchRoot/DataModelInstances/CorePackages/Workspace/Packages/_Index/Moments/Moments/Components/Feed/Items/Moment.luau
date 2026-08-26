@@ -13,9 +13,9 @@ local makeRecommendationAttributionModule = require(moments.Analytics.makeRecomm
 local toMediaItemModule = require(moments.Components.Feed.Media.toMediaItem)
 local momentMediaView = momentsCommonModule.Media.MomentMediaView
 
-local function momentAttribution(p0)
+local function momentAttribution(p1)
 	-- upvalues: makeRecommendationAttributionModule (ref)
-	return if p0 == nil then nil else makeRecommendationAttributionModule(p0.recommendationMetadata)
+	return if p1 == nil then nil else makeRecommendationAttributionModule(p1.recommendationMetadata)
 end
 
 return {
@@ -27,26 +27,26 @@ return {
 			
 			return if recommendationMetadata and recommendationMetadata.feedItemId and recommendationMetadata.feedItemId ~= "" then recommendationMetadata.feedItemId else moment.momentId
 		end,
-		getAttribution = function(p2)
+		getAttribution = function(p1)
 			-- upvalues: momentAttribution (ref)
-			return momentAttribution(p2.moment)
+			return momentAttribution(p1.moment)
 		end,
-		render = function(p3, _)
+		render = function(p1, _)
 			-- upvalues: toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsPartnerContentLabelModule (ref), momentItemModule (ref)
-			local moment = p3.moment
+			local moment = p1.moment
 			
 			if moment == nil then
 				return nil
 			end
-			local var10 = nil
-			local var11 = toMediaItemModule(p3)
+			local var1 = nil
+			local var2 = toMediaItemModule(p1)
 			
-			if var11 ~= nil then
-				var10 = reactModule.createElement(momentMediaView, {
+			if var2 ~= nil then
+				var1 = reactModule.createElement(momentMediaView, {
 					suppressTapToToggle = true,
-					momentId = var11.momentId,
-					posterContent = var11.posterContent,
-					showLoadingSkeleton = var11.captureType == Enum.CaptureType.Video,
+					momentId = var2.momentId,
+					posterContent = var2.posterContent,
+					showLoadingSkeleton = var2.captureType == Enum.CaptureType.Video,
 					getScaleType = getMomentsPreferencesStoreModule(false).getMediaScaleType
 				})
 			end
@@ -67,7 +67,7 @@ return {
 					feedItemId = if recommendationMetadata ~= nil then nil else recommendationMetadata.feedItemId,
 					feedSessionId = if recommendationMetadata ~= nil then nil else recommendationMetadata.tracingId
 				},
-				mediaSurface = var10,
+				mediaSurface = var1,
 				moment = moment
 			})
 		end

@@ -25,9 +25,9 @@ addFriendsNow.validateProps = t.strictInterface({
 	canCaptureFocus = t.boolean
 })
 
-function addFriendsNow.init(p0)
+function addFriendsNow.init(p1)
 	-- upvalues: roact (ref)
-	p0.buttonRef = roact.createRef()
+	p1.buttonRef = roact.createRef()
 end
 
 function addFriendsNow.render(p1)
@@ -44,13 +44,13 @@ function addFriendsNow.render(p1)
 				}
 			}
 		}
-	end, function(p3)
+	end, function(p2)
 		-- upvalues: withLocalizationModule (copy), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (ref), guiService (copy), p1 (ref), button (copy), buttonType (copy)
 		return withLocalizationModule({
 			noFriendsText = "CoreScripts.InGameMenu.InviteFriends.NoFriends",
 			makeFriendsNow = "CoreScripts.InGameMenu.InviteFriends.MakeFriendsNow"
-		})(function(p4)
-			-- upvalues: p3 (ref), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy)
+		})(function(p3)
+			-- upvalues: p2 (ref), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy)
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 304, 1, 0),
@@ -82,33 +82,33 @@ function addFriendsNow.render(p1)
 				TextContainer = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, textService:GetTextSize(p4.noFriendsText, p3.Font.Body.RelativeSize * p3.Font.BaseSize, p3.Font.Body.Font, Vector2.new(304, 1e999)).Y + 20)
+					Size = UDim2.new(1, 0, 0, textService:GetTextSize(p3.noFriendsText, p2.Font.Body.RelativeSize * p2.Font.BaseSize, p2.Font.Body.Font, Vector2.new(304, 1e999)).Y + 20)
 				}, {
 					Text = roact.createElement(themedTextLabelModule, {
 						fontKey = "Body",
 						themeKey = "TextEmphasis",
 						TextWrapped = true,
-						Text = p4.noFriendsText,
+						Text = p3.noFriendsText,
 						Position = UDim2.new(0, 0, 0, 4),
 						Size = UDim2.new(1, 0, 1, -20),
 						TextXAlignment = Enum.TextXAlignment.Center
 					})
 				}),
 				RootedConnection = roact.createElement(rootedConnectionModule, {
-					render = function(p5)
-						-- upvalues: roact (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy), p4 (ref)
+					render = function(p4)
+						-- upvalues: roact (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy), p3 (ref)
 						return roact.createElement(focusHandlerModule, {
-							isFocused = props.canCaptureFocus and p5,
+							isFocused = props.canCaptureFocus and p4,
 							didFocus = function()
 								-- upvalues: guiService (copy), p1 (copy)
 								guiService.SelectedCoreObject = p1.buttonRef:getValue()
 							end
 						}, {
-							MakeFriendsButton = p5 and roact.createElement(button, {
+							MakeFriendsButton = p4 and roact.createElement(button, {
 								layoutOrder = 3,
 								buttonType = buttonType.Secondary,
 								size = UDim2.new(1, 0, 0, 48),
-								text = p4.makeFriendsNow,
+								text = p3.makeFriendsNow,
 								onActivated = props.switchToPlayers,
 								buttonRef = p1.buttonRef
 							}) or nil
@@ -120,12 +120,12 @@ function addFriendsNow.render(p1)
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p6)
+return roactRodux.UNSTABLE_connect2(nil, function(p1)
 	-- upvalues: setCurrentPageModule (ref)
 	return {
 		switchToPlayers = function()
-			-- upvalues: p6 (ref), setCurrentPageModule (copy)
-			p6(setCurrentPageModule("Players"))
+			-- upvalues: p1 (ref), setCurrentPageModule (copy)
+			p1(setCurrentPageModule("Players"))
 		end
 	}
 end)(addFriendsNow)

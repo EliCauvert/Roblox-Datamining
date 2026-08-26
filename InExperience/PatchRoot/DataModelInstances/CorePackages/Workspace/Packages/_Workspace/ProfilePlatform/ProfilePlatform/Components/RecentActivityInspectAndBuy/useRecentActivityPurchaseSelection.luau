@@ -8,62 +8,62 @@ local isItemPurchasable = inspectAvatarUtilsModule.isItemPurchasable
 local getPriceStatus = inspectAvatarUtilsModule.getPriceStatus
 local priceStatusEnum = inspectAvatarUtilsModule.PriceStatusEnum
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), isItemPurchasable (ref), dashModule (ref), inspectAvatarUtilsModule (ref), getPriceStatus (ref), priceStatusEnum (ref)
-	local var4, var5 = reactModule.useState({})
-	local var6 = reactModule.useRef({})
+	local var1, var2 = reactModule.useState({})
+	local var3 = reactModule.useRef({})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), isItemPurchasable (copy), var6 (ref), var5 (ref), dashModule (copy)
-		if #p0 == 0 then return end
+		-- upvalues: p1 (ref), isItemPurchasable (copy), var3 (ref), var2 (ref), dashModule (copy)
+		if #p1 == 0 then return end
 		local t = {}
-		local var8 = false
+		local var4 = false
 		
-		for i, v in p0 do
+		for i, v in p1 do
 			local id = v.id
 			
-			if isItemPurchasable(v) and not var6.current[id] then
-				var6.current[id] = true
+			if isItemPurchasable(v) and not var3.current[id] then
+				var3.current[id] = true
 				t[id] = true
-				var8 = true
+				var4 = true
 			end
 		end
-		if var8 then
-			var5(function(p1)
+		if var4 then
+			var2(function(p2)
 				-- upvalues: dashModule (copy), t (ref)
-				return dashModule.join(p1, t)
+				return dashModule.join(p2, t)
 			end)
 			
 			return
 		end
-	end, { p0 })
+	end, { p1 })
 	
 	return {
-		selectedItems = var4,
+		selectedItems = var1,
 		onToggleItem = reactModule.useCallback(function(p2)
-			-- upvalues: var5 (ref), dashModule (copy)
-			var5(function(p3)
+			-- upvalues: var2 (ref), dashModule (copy)
+			var2(function(p3)
 				-- upvalues: dashModule (copy), p2 (ref)
 				return dashModule.join(p3, { [p2] = not p3[p2] })
 			end)
 		end, {}),
 		purchaseData = reactModule.useMemo(function()
-			-- upvalues: p0 (ref), var4 (ref), isItemPurchasable (copy), inspectAvatarUtilsModule (copy), getPriceStatus (copy), priceStatusEnum (copy)
+			-- upvalues: p1 (ref), var1 (ref), isItemPurchasable (copy), inspectAvatarUtilsModule (copy), getPriceStatus (copy), priceStatusEnum (copy)
 			local t = {}
-			local var10 = 0
-			local var11 = 0
+			local var5 = 0
+			local var6 = 0
 			
-			for i, v in p0 do
-				if v.id and var4[v.id] and isItemPurchasable(v) then
+			for i, v in p1 do
+				if v.id and var1[v.id] and isItemPurchasable(v) then
 					local effectivePrice = inspectAvatarUtilsModule.getEffectivePrice(v)
 					table.insert(t, {
 						collectibleProductId = if getPriceStatus(v) == priceStatusEnum.PurchaseFromResale and v.collectibleItemDetails then v.collectibleItemDetails.collectibleLowestAvailableResaleProductId or v.collectibleProductId else v.collectibleProductId,
 						agreedPriceRobux = effectivePrice
 					})
-					var10 += effectivePrice
-					var11 += 1
+					var5 += effectivePrice
+					var6 += 1
 				end
 			end
-			return { lineItems = t, totalPrice = var10, count = var11 }
-		end, { p0, var4 })
+			return { lineItems = t, totalPrice = var5, count = var6 }
+		end, { p1, var1 })
 	}
 end

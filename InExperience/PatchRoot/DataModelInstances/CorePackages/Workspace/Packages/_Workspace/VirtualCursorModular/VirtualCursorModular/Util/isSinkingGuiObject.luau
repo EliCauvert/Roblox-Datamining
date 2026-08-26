@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return p0.Visible and (p0.Active and p0.Interactable)
+﻿return function(p1)
+	return p1.Visible and (p1.Active and p1.Interactable)
 end

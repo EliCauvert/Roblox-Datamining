@@ -2,49 +2,49 @@
 local getRemainingTimeModule = require(script.Parent.getRemainingTime)
 local t = { days = 86400, hours = 3600, minutes = 60, seconds = 1 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref)
-	return math.max(p0.secondsRemaining - p0.value * t[p0.unit] + 1, 0.05)
+	return math.max(p1.secondsRemaining - p1.value * t[p1.unit] + 1, 0.05)
 end
 
 return function(p1)
 	-- upvalues: reactModule (ref), getRemainingTimeModule (ref), t (ref)
-	local var3, var4 = reactModule.useState(function()
+	local var1, var2 = reactModule.useState(function()
 		-- upvalues: getRemainingTimeModule (copy), p1 (ref)
 		return getRemainingTimeModule(p1)
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), getRemainingTimeModule (copy), t (copy)
+		-- upvalues: p1 (ref), var2 (ref), getRemainingTimeModule (copy), t (copy)
 		if not p1 then
-			var4(nil)
+			var2(nil)
 			
 			return
 		end
-		local var5 = false
+		local var3 = false
 		local delayedThread = nil
 		
 		local function tick()
-			-- upvalues: var5 (write), getRemainingTimeModule (copy), p1 (copy), var4 (copy), delayedThread (write), t (copy), tick (ref)
-			if var5 then return end
-			local var9 = getRemainingTimeModule(p1)
-			var4(var9)
+			-- upvalues: var3 (write), getRemainingTimeModule (copy), p1 (copy), var2 (copy), delayedThread (write), t (copy), tick (ref)
+			if var3 then return end
+			local var4 = getRemainingTimeModule(p1)
+			var2(var4)
 			
-			if var9 and var9.value >= 0 then
-				delayedThread = task.delay(math.max(var9.secondsRemaining - var9.value * t[var9.unit] + 1, 0.05), tick)
+			if var4 and var4.value >= 0 then
+				delayedThread = task.delay(math.max(var4.secondsRemaining - var4.value * t[var4.unit] + 1, 0.05), tick)
 				
 				return
 			end
 		end
 		
-		local var8 = getRemainingTimeModule(p1)
-		var4(var8)
+		local var4 = getRemainingTimeModule(p1)
+		var2(var4)
 		
-		if var8 and var8.value >= 0 then
-			delayedThread = task.delay(math.max(var8.secondsRemaining - var8.value * t[var8.unit] + 1, 0.05), tick)
+		if var4 and var4.value >= 0 then
+			delayedThread = task.delay(math.max(var4.secondsRemaining - var4.value * t[var4.unit] + 1, 0.05), tick)
 		end
 		return function()
-			-- upvalues: var5 (write), delayedThread (write)
-			var5 = true
+			-- upvalues: var3 (write), delayedThread (write)
+			var3 = true
 			
 			if delayedThread then
 				task.cancel(delayedThread)
@@ -53,5 +53,5 @@ return function(p1)
 		end
 	end, { p1 })
 	
-	return var3
+	return var1
 end

@@ -3,12 +3,12 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local dialog = foundationModule.Dialog
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), dialog (ref), foundationModule (ref)
 	return reactModule.createElement(dialog.Root, {
 		hasBackdrop = true,
 		size = foundationModule.Enums.DialogSize.Small,
-		onClose = p0.onCancel
+		onClose = p1.onCancel
 	}, {
 		DialogTitle = reactModule.createElement(dialog.Title, { text = "Delete voiceover?", LayoutOrder = 1 }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
@@ -23,12 +23,12 @@ return function(p0)
 				{
 					text = "Delete",
 					variant = foundationModule.Enums.ButtonVariant.Alert,
-					onActivated = p0.onConfirm
+					onActivated = p1.onConfirm
 				},
 				{
 					text = "Cancel",
 					variant = foundationModule.Enums.ButtonVariant.Standard,
-					onActivated = p0.onCancel
+					onActivated = p1.onCancel
 				}
 			}
 		})

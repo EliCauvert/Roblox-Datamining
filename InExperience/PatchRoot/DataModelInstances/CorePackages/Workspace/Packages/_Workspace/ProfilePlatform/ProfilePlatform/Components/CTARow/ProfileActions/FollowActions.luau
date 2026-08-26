@@ -10,22 +10,22 @@ local profileTypes = enumsModule.ProfileTypes
 local fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule = require(profilePlatform.Flags.FFlagProfilePlatformUpdateUXForNonSocialCommunities)
 
 return {
-	[enumsModule.ProfileActions.Follow] = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then function(p0)
+	[enumsModule.ProfileActions.Follow] = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then function(p1)
 		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), groupsNetworkingModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref)
 		return {
 			variant = buttonVariant.Standard,
-			text = p0.localized[enumsModule.ProfileActions.Follow],
+			text = p1.localized[enumsModule.ProfileActions.Follow],
 			onActivated = {
 				[profileTypes.Community] = function()
-					-- upvalues: p0 (ref), eventNamesModule (copy), groupsNetworkingModule (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
-					p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonFollow, { buttonSurface = p0.buttonSurface })
+					-- upvalues: p1 (ref), eventNamesModule (copy), groupsNetworkingModule (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonFollow, { buttonSurface = p1.buttonSurface })
 					
-					return p0.dispatch(groupsNetworkingModule.JoinGroup.API({ groupId = p0.profileId })):andThen(function()
-						-- upvalues: p0 (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
-						p0.dispatch(getProfilePlatformModule.API({
+					return p1.dispatch(groupsNetworkingModule.JoinGroup.API({ groupId = p1.profileId })):andThen(function()
+						-- upvalues: p1 (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy)
+						p1.dispatch(getProfilePlatformModule.API({
 							includeComponentOrdering = true,
-							profileType = p0.profileType,
-							profileId = p0.profileId,
+							profileType = p1.profileType,
+							profileId = p1.profileId,
 							components = getAvailableCommunityComponentsModule()
 						}))
 					end)

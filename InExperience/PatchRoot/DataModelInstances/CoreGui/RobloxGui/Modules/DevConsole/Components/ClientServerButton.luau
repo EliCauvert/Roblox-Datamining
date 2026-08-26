@@ -13,27 +13,27 @@ local uDim2 = UDim2.new(0, clientServerButtonWidth, 0, frameHeight)
 local list = { "Client", "Server" }
 local clientServerButton = roactModule.Component:extend("ClientServerButton")
 
-function clientServerButton.init(p0)
-	function p0.dropDownCallback(p1)
-		-- upvalues: p0 (ref)
-		if p1 == 1 then
-			p0.props.onClientButton()
+function clientServerButton.init(p1)
+	function p0.dropDownCallback(p2)
+		-- upvalues: p1 (ref)
+		if p2 == 1 then
+			p1.props.onClientButton()
 			
 			return
-		elseif p1 == 2 then
-			p0.props.onServerButton()
+		elseif p2 == 2 then
+			p1.props.onServerButton()
 		end
 	end
 end
 
-function clientServerButton.render(p2)
+function clientServerButton.render(p1)
 	-- upvalues: constantsModule (ref), roactModule (ref), fullScreenDropDownButtonModule (ref), clientServerDropDownWidth (ref), smallFrameHeight (ref), list (ref), dropDownModule (ref), clientServerButtonWidth (ref), frameHeight (ref), utilBar_1 (ref), text (ref), utilBar (ref), uDim2 (ref)
-	local formFactor = p2.props.formFactor
-	local useDropDown = p2.props.useDropDown
-	local isClientView = p2.props.isClientView
-	local layoutOrder = p2.props.layoutOrder
-	local onServerButton = p2.props.onServerButton
-	local onClientButton = p2.props.onClientButton
+	local formFactor = p1.props.formFactor
+	local useDropDown = p1.props.useDropDown
+	local isClientView = p1.props.isClientView
+	local layoutOrder = p1.props.layoutOrder
+	local onServerButton = p1.props.onServerButton
+	local onClientButton = p1.props.onClientButton
 	local selectedBlue = constantsModule.Color.SelectedBlue
 	local unselectedGray = constantsModule.Color.UnselectedGray
 	
@@ -45,13 +45,13 @@ function clientServerButton.render(p2)
 		buttonSize = UDim2.new(0, clientServerDropDownWidth, 0, smallFrameHeight),
 		dropDownList = list,
 		selectedIndex = if isClientView then 1 else 2,
-		onSelection = p2.dropDownCallback,
+		onSelection = p1.dropDownCallback,
 		layoutOrder = layoutOrder
 	}) elseif useDropDown then roactModule.createElement(dropDownModule, {
 		buttonSize = UDim2.new(0, clientServerDropDownWidth, 0, smallFrameHeight),
 		dropDownList = list,
 		selectedIndex = if isClientView then 1 else 2,
-		onSelection = p2.dropDownCallback,
+		onSelection = p1.dropDownCallback,
 		layoutOrder = layoutOrder
 	}) else roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

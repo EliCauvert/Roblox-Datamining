@@ -12,62 +12,62 @@ local _ = require(script.Parent.ChatSheetView)
 
 local function noop() end
 
-return function(p0)
+return function(p1)
 	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), useChatPlaytestFooterModule (ref), reactModule (ref)
-	local onClose = p0.onClose or noop
-	local var10 = p0.isOpen == nil or p0.isOpen
-	local var11 = signalsReactModule.useSignalState(getAssistantBuildStoreModule().getIsDisabled)
-	local var12 = getCreatorAgentResumeStoreModule()
-	local var13 = getCurrentExperienceProjectModule()
-	local universeId = p0.universeId or var13.universeId
-	local var15 = useChatSessionCoreModule({
+	local onClose = p1.onClose or noop
+	local var1 = p1.isOpen == nil or p1.isOpen
+	local var2 = signalsReactModule.useSignalState(getAssistantBuildStoreModule().getIsDisabled)
+	local var3 = getCreatorAgentResumeStoreModule()
+	local var4 = getCurrentExperienceProjectModule()
+	local universeId = p1.universeId or var4.universeId
+	local var5 = useChatSessionCoreModule({
 		autoFocusComposer = false,
 		universeId = universeId,
-		placeId = p0.placeId or var13.placeId,
-		sessionId = p0.sessionId,
-		hydrateHistoryWhen = var10
+		placeId = p1.placeId or var4.placeId,
+		sessionId = p1.sessionId,
+		hydrateHistoryWhen = var1
 	})
-	local var16 = useChatPlaytestFooterModule(var15, "ChatSheetPlaytestCta")
+	local var6 = useChatPlaytestFooterModule(var5, "ChatSheetPlaytestCta")
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var11 (ref), onClose (ref)
-		if var10 and var11 then
+		-- upvalues: var1 (ref), var2 (ref), onClose (ref)
+		if var1 and var2 then
 			onClose()
 		end
-	end, { var10, var11, onClose })
+	end, { var1, var2, onClose })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var12 (ref), universeId (ref), p0 (ref)
-		if var10 then
-			var12.setActiveTarget({ universeId = universeId, sessionId = p0.sessionId })
+		-- upvalues: var1 (ref), var3 (ref), universeId (ref), p1 (ref)
+		if var1 then
+			var3.setActiveTarget({ universeId = universeId, sessionId = p1.sessionId })
 			
 			return function()
-				-- upvalues: var12 (copy)
-				var12.setActiveTarget(nil)
+				-- upvalues: var3 (copy)
+				var3.setActiveTarget(nil)
 			end
 		end
-		var12.setActiveTarget(nil)
-	end, { var12, var10, universeId, p0.sessionId })
+		var3.setActiveTarget(nil)
+	end, { var3, var1, universeId, p1.sessionId })
 	
 	return {
-		isOpen = var10,
+		isOpen = var1,
 		onClose = onClose,
-		snapPoints = p0.snapPoints,
-		defaultSnapPointIndex = p0.defaultSnapPointIndex,
-		messages = var15.messages,
-		localToolActions = var15.localToolActions,
-		clockBinding = var15.clockBinding,
-		onPlaytest = var16.onPlaytest,
-		isPlaytestLoading = var16.isPlaytestLoading,
-		isHistoryLoading = var15.isHistoryLoading,
-		scrollingFrameRef = var15.setScrollingFrame,
-		composerText = var15.composerText,
-		composerErrorText = var15.composerErrorText,
-		onComposerChanged = var15.setComposerText,
-		textBoxRef = var15.textBoxRef,
-		isAssistantResponding = var15.isAssistantResponding,
-		canStopAssistantResponse = var15.canStopAssistantResponse,
-		canSendWhileResponding = var15.canSendWhileResponding,
-		onSend = var15.sendMessage,
-		onStop = var15.stopAssistantResponse,
-		topBarPillMenuTarget = p0.topBarPillMenuTarget
+		snapPoints = p1.snapPoints,
+		defaultSnapPointIndex = p1.defaultSnapPointIndex,
+		messages = var5.messages,
+		localToolActions = var5.localToolActions,
+		clockBinding = var5.clockBinding,
+		onPlaytest = var6.onPlaytest,
+		isPlaytestLoading = var6.isPlaytestLoading,
+		isHistoryLoading = var5.isHistoryLoading,
+		scrollingFrameRef = var5.setScrollingFrame,
+		composerText = var5.composerText,
+		composerErrorText = var5.composerErrorText,
+		onComposerChanged = var5.setComposerText,
+		textBoxRef = var5.textBoxRef,
+		isAssistantResponding = var5.isAssistantResponding,
+		canStopAssistantResponse = var5.canStopAssistantResponse,
+		canSendWhileResponding = var5.canSendWhileResponding,
+		onSend = var5.sendMessage,
+		onStop = var5.stopAssistantResponse,
+		topBarPillMenuTarget = p1.topBarPillMenuTarget
 	}
 end

@@ -18,9 +18,9 @@ local useFocusNavigationRefsModule = require(parent.Generic.Hooks.useFocusNaviga
 local useInitialButtonDisableDelayModule = require(parent.Generic.Hooks.useInitialButtonDisableDelay)
 local UNIFIED_PURCHASE_COMPLETION_MODAL_MIN_HEIGHT_PIXELS = require(parent.Generic.Constants).UNIFIED_PURCHASE_COMPLETION_MODAL_MIN_HEIGHT_PIXELS
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), useFocusNavigationRefsModule (ref), useInitialButtonDisableDelayModule (ref), useTokens (ref), reactModule (ref), foundationModule (ref), loggingProtocolModule (ref), unifiedProductPurchaseCompletionModalShownCounter (ref), formatTextWithParamsModule (ref), sheet (ref), useScaledValue (ref), UNIFIED_PURCHASE_COMPLETION_MODAL_MIN_HEIGHT_PIXELS (ref), text (ref), view (ref), icon (ref), fillBehavior (ref), buttonVariant (ref)
-	local var6 = useLocalization({
+	local var1 = useLocalization({
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
 		PurchaseCompleteBody = "IAPExperience.PurchasePrompt.Body.PurchaseCompleted",
 		ErrorTitle = "CoreScripts.PremiumModal.Title.Error",
@@ -28,47 +28,47 @@ return function(p0)
 		OkButtonText = "CoreScripts.PurchasePrompt.Button.OK",
 		MultiItemPurchaseCompleteBody = "IAPExperience.PurchasePrompt.Body.PurchaseItemsSuccess"
 	})
-	local var7, var8 = useFocusNavigationRefsModule(p0.buttons.onClose, nil)
-	local var9 = useInitialButtonDisableDelayModule()
-	local var10 = useTokens()
-	local var11, var12 = reactModule.useState(foundationModule.Enums.IconName.CircleCheck)
+	local var2, var3 = useFocusNavigationRefsModule(p1.buttons.onClose, nil)
+	local var4 = useInitialButtonDisableDelayModule()
+	local var5 = useTokens()
+	local var6, var7 = reactModule.useState(foundationModule.Enums.IconName.CircleCheck)
 	reactModule.useEffect(function()
 		-- upvalues: loggingProtocolModule (copy), unifiedProductPurchaseCompletionModalShownCounter (copy)
 		loggingProtocolModule.default:logRobloxTelemetryCounter(unifiedProductPurchaseCompletionModalShownCounter, 1, {})
 	end, {})
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), var6 (ref)
-		return if p0.title then p0.title elseif p0.isError then var6.ErrorTitle else var6.PurchaseCompleteTitle
-	end, { p0.title, p0.isError })
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), var6 (ref), formatTextWithParamsModule (copy)
-		return if p0.bodyText then p0.bodyText elseif p0.isError then var6.GenericErrorBody elseif p0.isMultiItem then var6.MultiItemPurchaseCompleteBody else formatTextWithParamsModule(var6.PurchaseCompleteBody, { ITEM_NAME = p0.itemName })
-	end, { p0.bodyText, p0.isError, p0.isMultiItem, p0.itemName })
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), var1 (ref)
+		return if p1.title then p1.title elseif p1.isError then var1.ErrorTitle else var1.PurchaseCompleteTitle
+	end, { p1.title, p1.isError })
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), var1 (ref), formatTextWithParamsModule (copy)
+		return if p1.bodyText then p1.bodyText elseif p1.isError then var1.GenericErrorBody elseif p1.isMultiItem then var1.MultiItemPurchaseCompleteBody else formatTextWithParamsModule(var1.PurchaseCompleteBody, { ITEM_NAME = p1.itemName })
+	end, { p1.bodyText, p1.isError, p1.isMultiItem, p1.itemName })
 	local _ = nil
-	local var15 = if p0.buttons and p0.buttons.text then p0.buttons.text else var6.OkButtonText
+	local var10 = if p1.buttons and p1.buttons.text then p1.buttons.text else var1.OkButtonText
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var12 (ref), foundationModule (copy)
-		if p0.isError then
-			var12(foundationModule.Enums.IconName.TriangleExclamation)
+		-- upvalues: p1 (ref), var7 (ref), foundationModule (copy)
+		if p1.isError then
+			var7(foundationModule.Enums.IconName.TriangleExclamation)
 			
 			return
 		end
-		var12(foundationModule.Enums.IconName.CircleCheck)
-	end, { p0.isError })
+		var7(foundationModule.Enums.IconName.CircleCheck)
+	end, { p1.isError })
 	
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
-		onClose = if p0.buttons.onClose then p0.buttons.onClose else p0.buttons.onActivated,
+		onClose = if p1.buttons.onClose then p1.buttons.onClose else p1.buttons.onActivated,
 		snapPoints = {
 			useScaledValue(UNIFIED_PURCHASE_COMPLETION_MODAL_MIN_HEIGHT_PIXELS),
 			0.8
 		},
-		ref = if var9 then nil else var7
+		ref = if var4 then nil else var2
 	}, {
 		Header = reactModule.createElement(sheet.Header, {}, {
 			Title = reactModule.createElement(text, {
 				tag = "auto-xy text-heading-small content-default text-align-x-left",
-				Text = var13
+				Text = var8
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
@@ -78,23 +78,23 @@ return function(p0)
 			}, {
 				Icon = reactModule.createElement(icon, {
 					tag = "auto-xy",
-					name = var11,
-					size = var10.Size.Size_1200
+					name = var6,
+					size = var5.Size.Size_1200
 				}),
 				Message = reactModule.createElement(text, {
 					tag = "auto-xy text-body content-default text-align-x-left text-body-medium text-wrap",
-					Text = var14
+					Text = var9
 				})
 			})
 		}),
 		Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 3 }, {
 			reactModule.createElement(foundationModule.Button, {
-				text = var15,
-				onActivated = p0.buttons.onActivated,
+				text = var10,
+				onActivated = p1.buttons.onActivated,
 				fillBehavior = fillBehavior.Fill,
 				variant = buttonVariant.Emphasis,
-				ref = var8,
-				isDisabled = var9
+				ref = var3,
+				isDisabled = var4
 			})
 		})
 	})

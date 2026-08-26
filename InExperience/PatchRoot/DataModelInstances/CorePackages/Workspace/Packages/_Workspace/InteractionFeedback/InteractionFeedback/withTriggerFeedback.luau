@@ -3,10 +3,10 @@ local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local useTriggerFeedbackModule = require(script.Parent.useTriggerFeedback)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTriggerFeedbackModule (ref), cryoModule (ref), reactModule (ref)
-	return function(p1)
-		-- upvalues: useTriggerFeedbackModule (copy), cryoModule (copy), reactModule (copy), p0 (ref)
-		return reactModule.createElement(p0, cryoModule.Dictionary.join(p1, { triggerFeedback = useTriggerFeedbackModule() }))
+	return function(p2)
+		-- upvalues: useTriggerFeedbackModule (copy), cryoModule (copy), reactModule (copy), p1 (ref)
+		return reactModule.createElement(p1, cryoModule.Dictionary.join(p2, { triggerFeedback = useTriggerFeedbackModule() }))
 	end
 end

@@ -19,16 +19,16 @@ mouseOverrideManager.validateProps = t.strictInterface({
 	inputType = t.string
 })
 
-function mouseOverrideManager.render(p0)
+function mouseOverrideManager.render(p1)
 	-- upvalues: roact (ref), externalEventConnectionModule (ref), userInputService (ref)
-	local exitModalOpen = p0.props.exitModalOpen
+	local exitModalOpen = p1.props.exitModalOpen
 	
 	return roact.createElement(externalEventConnectionModule, {
 		event = userInputService:GetPropertyChangedSignal("OverrideMouseIconBehavior"),
 		callback = function()
-			-- upvalues: p0 (ref), exitModalOpen (ref), userInputService (copy)
-			if (p0.props.menuOpen or exitModalOpen) and userInputService.OverrideMouseIconBehavior == Enum.OverrideMouseIconBehavior.None then
-				p0:updateMouseIconOverride()
+			-- upvalues: p1 (ref), exitModalOpen (ref), userInputService (copy)
+			if (p1.props.menuOpen or exitModalOpen) and userInputService.OverrideMouseIconBehavior == Enum.OverrideMouseIconBehavior.None then
+				p1:updateMouseIconOverride()
 			end
 		end
 	})
@@ -38,12 +38,12 @@ function mouseOverrideManager.init(p1)
 	p1.didOverrideMouse = false
 end
 
-function mouseOverrideManager.updateMouseIconOverride(p2)
+function mouseOverrideManager.updateMouseIconOverride(p1)
 	-- upvalues: inputType (ref), VRService (ref), mouseIconOverrideService (ref), inGameMenuCursorOverride (ref)
-	if p2.props.menuOpen or p2.props.exitModalOpen then
-		p2.didOverrideMouse = true
+	if p1.props.menuOpen or p1.props.exitModalOpen then
+		p1.didOverrideMouse = true
 		
-		if p2.props.inputType == inputType.Gamepad or VRService.VREnabled then
+		if p1.props.inputType == inputType.Gamepad or VRService.VREnabled then
 			mouseIconOverrideService.push(inGameMenuCursorOverride, Enum.OverrideMouseIconBehavior.ForceHide)
 			
 			return
@@ -51,24 +51,24 @@ function mouseOverrideManager.updateMouseIconOverride(p2)
 		mouseIconOverrideService.push(inGameMenuCursorOverride, Enum.OverrideMouseIconBehavior.ForceShow)
 		
 		return
-	elseif p2.didOverrideMouse then
-		p2.didOverrideMouse = false
+	elseif p1.didOverrideMouse then
+		p1.didOverrideMouse = false
 		mouseIconOverrideService.pop(inGameMenuCursorOverride)
 	end
 end
 
-function mouseOverrideManager.didMount(p3)
-	p3:updateMouseIconOverride()
+function mouseOverrideManager.didMount(p1)
+	p1:updateMouseIconOverride()
 end
 
-function mouseOverrideManager.didUpdate(p4)
-	p4:updateMouseIconOverride()
+function mouseOverrideManager.didUpdate(p1)
+	p1:updateMouseIconOverride()
 end
 
-return roactRodux.UNSTABLE_connect2(function(p5)
+return roactRodux.UNSTABLE_connect2(function(p1)
 	return {
-		menuOpen = p5.isMenuOpen,
-		exitModalOpen = p5.nativeClosePrompt.closingApp,
-		inputType = p5.displayOptions.inputType
+		menuOpen = p1.isMenuOpen,
+		exitModalOpen = p1.nativeClosePrompt.closingApp,
+		inputType = p1.displayOptions.inputType
 	}
 end, nil)(mouseOverrideManager)

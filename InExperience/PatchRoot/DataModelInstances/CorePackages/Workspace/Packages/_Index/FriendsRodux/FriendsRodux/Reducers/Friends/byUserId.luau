@@ -12,47 +12,47 @@ local setFriendshipsInStoreModule = require(script.Parent.utils.setFriendshipsIn
 local removeTargetUserFriendshipInStoreModule = require(script.Parent.utils.removeTargetUserFriendshipInStore)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), t (ref), friendshipCreatedModule (ref), llamaModule (ref), addUserModule (ref), friendshipDestroyedModule (ref), removeUserModule (ref), setFriendshipsInStoreModule (ref), removeTargetUserFriendshipInStoreModule (ref)
-	local friendsNetworking = p0.friendsNetworking
+	local friendsNetworking = p1.friendsNetworking
 	
 	return roduxModule.createReducer(t, {
-		[friendshipCreatedModule.name] = function(p1, p2)
+		[friendshipCreatedModule.name] = function(p2, p3)
 			-- upvalues: llamaModule (copy), addUserModule (copy)
-			assert(type(p2.payload.userId1) == "string", "Expected userId1 to be a string")
-			assert(type(p2.payload.userId2) == "string", "Expected userId2 to be a string")
+			assert(type(p3.payload.userId1) == "string", "Expected userId1 to be a string")
+			assert(type(p3.payload.userId2) == "string", "Expected userId2 to be a string")
 			
-			return llamaModule.Dictionary.join(p1, {
-				[p2.payload.userId1] = addUserModule(p1[p2.payload.userId1], p2.payload.userId2),
-				[p2.payload.userId2] = addUserModule(p1[p2.payload.userId2], p2.payload.userId1)
+			return llamaModule.Dictionary.join(p2, {
+				[p3.payload.userId1] = addUserModule(p2[p3.payload.userId1], p3.payload.userId2),
+				[p3.payload.userId2] = addUserModule(p2[p3.payload.userId2], p3.payload.userId1)
 			})
 		end,
-		[friendshipDestroyedModule.name] = function(p3, p4)
+		[friendshipDestroyedModule.name] = function(p2, p3)
 			-- upvalues: llamaModule (copy), removeUserModule (copy)
-			assert(type(p4.payload.userId1) == "string", "Expected userId1 to be a string")
-			assert(type(p4.payload.userId2) == "string", "Expected userId2 to be a string")
+			assert(type(p3.payload.userId1) == "string", "Expected userId1 to be a string")
+			assert(type(p3.payload.userId2) == "string", "Expected userId2 to be a string")
 			
-			return llamaModule.Dictionary.join(p3, {
-				[p4.payload.userId1] = removeUserModule(p3[p4.payload.userId1], p4.payload.userId2),
-				[p4.payload.userId2] = removeUserModule(p3[p4.payload.userId2], p4.payload.userId1)
+			return llamaModule.Dictionary.join(p2, {
+				[p3.payload.userId1] = removeUserModule(p2[p3.payload.userId1], p3.payload.userId2),
+				[p3.payload.userId2] = removeUserModule(p2[p3.payload.userId2], p3.payload.userId1)
 			})
 		end,
-		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p5, p6)
+		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: setFriendshipsInStoreModule (copy)
-			return setFriendshipsInStoreModule(p5, p6)
+			return setFriendshipsInStoreModule(p2, p3)
 		end,
-		[friendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p7, p8)
+		[friendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: removeTargetUserFriendshipInStoreModule (copy)
-			return removeTargetUserFriendshipInStoreModule(p7, p8)
+			return removeTargetUserFriendshipInStoreModule(p2, p3)
 		end,
-		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p9, p10)
+		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: llamaModule (copy), addUserModule (copy)
-			local var10 = tostring(p10.ids[1])
-			local var11 = tostring(p10.additionalData.currentUserId)
+			local var1 = tostring(p3.ids[1])
+			local var2 = tostring(p3.additionalData.currentUserId)
 			
-			return llamaModule.Dictionary.join(p9, {
-				[var10] = addUserModule(p9[var10], var11),
-				[var11] = addUserModule(p9[var11], var10)
+			return llamaModule.Dictionary.join(p2, {
+				[var1] = addUserModule(p2[var1], var2),
+				[var2] = addUserModule(p2[var2], var1)
 			})
 		end
 	})

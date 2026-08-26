@@ -5,13 +5,13 @@ local getPlatformTarget = analyticsModule.getPlatformTarget
 return {
 	Diag = analyticsModule.Analytics.new(game:GetService("RbxAnalyticsService")).Diag,
 	EventStream = {
-		setRBXEventStream = function(_, p0, p1, p2)
+		setRBXEventStream = function(_, p1, p2, p3)
 			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
-			eventIngestService:SetRBXEventStream(getPlatformTarget(), p0, p1, p2 or {})
+			eventIngestService:SetRBXEventStream(getPlatformTarget(), p1, p2, p3 or {})
 		end,
-		sendEventDeferred = function(_, p3, p4, p5)
+		sendEventDeferred = function(_, p1, p2, p3)
 			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
-			eventIngestService:SendEventDeferred(getPlatformTarget(), p3, p4, p5 or {})
+			eventIngestService:SendEventDeferred(getPlatformTarget(), p1, p2, p3 or {})
 		end
 	}
 }

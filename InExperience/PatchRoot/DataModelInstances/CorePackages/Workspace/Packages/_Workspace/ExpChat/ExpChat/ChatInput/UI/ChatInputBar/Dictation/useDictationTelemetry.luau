@@ -5,93 +5,93 @@ local _ = require(script.Parent.requestMicPermission)
 
 return function()
 	-- upvalues: reactModule (ref), dictationAnalyticsModule (ref), dictationModeModule (ref)
-	local var3 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	
 	return {
-		logMicClick = reactModule.useCallback(function(p0, p1)
+		logMicClick = reactModule.useCallback(function(p1, p2)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MicClick, {
-				[dictationAnalyticsModule.Properties.SttMode] = p0,
-				[dictationAnalyticsModule.Properties.EntryPoint] = p1
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.EntryPoint] = p2
 			})
 		end, {}),
-		logPermissionResolved = reactModule.useCallback(function(p2, p3)
+		logPermissionResolved = reactModule.useCallback(function(p1, p2)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.PermissionPrompt, {
-				[dictationAnalyticsModule.Properties.SttMode] = p2,
-				[dictationAnalyticsModule.Properties.Status] = p3
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.Status] = p2
 			})
 		end, {}),
-		logRecordingStart = reactModule.useCallback(function(p4, p5)
+		logRecordingStart = reactModule.useCallback(function(p1, p2)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.RecordingStart, {
-				[dictationAnalyticsModule.Properties.SttMode] = p4,
-				[dictationAnalyticsModule.Properties.TriggerType] = p5
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.TriggerType] = p2
 			})
 		end, {}),
-		logRecordingStop = reactModule.useCallback(function(p6, p7, p8, p9)
+		logRecordingStop = reactModule.useCallback(function(p1, p2, p3, p4)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.RecordingStop, {
-				[dictationAnalyticsModule.Properties.SttMode] = p6,
-				[dictationAnalyticsModule.Properties.TriggerType] = p7,
-				[dictationAnalyticsModule.Properties.DurationSeconds] = p8,
-				[dictationAnalyticsModule.Properties.CharCount] = p9
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.TriggerType] = p2,
+				[dictationAnalyticsModule.Properties.DurationSeconds] = p3,
+				[dictationAnalyticsModule.Properties.CharCount] = p4
 			})
 		end, {}),
 		logSpeechStarted = reactModule.useCallback(function()
-			-- upvalues: var3 (ref), dictationAnalyticsModule (copy), dictationModeModule (copy)
-			var3.current = os.clock()
+			-- upvalues: var1 (ref), dictationAnalyticsModule (copy), dictationModeModule (copy)
+			var1.current = os.clock()
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.RecordingStart, {
 				[dictationAnalyticsModule.Properties.SttMode] = dictationModeModule.Continuous,
 				[dictationAnalyticsModule.Properties.TriggerType] = dictationAnalyticsModule.TriggerTypes.AutoChunk
 			})
 		end, {}),
-		logTranscription = reactModule.useCallback(function(p10, p11, p12)
-			-- upvalues: dictationModeModule (copy), var3 (ref), dictationAnalyticsModule (copy)
-			local p10Count = #p10
+		logTranscription = reactModule.useCallback(function(p1, p2, p3)
+			-- upvalues: dictationModeModule (copy), var1 (ref), dictationAnalyticsModule (copy)
+			local p10Count = #p1
 			
-			if p11 == dictationModeModule.Continuous then
-				local current = var3.current
+			if p2 == dictationModeModule.Continuous then
+				local current = var1.current
 				dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.RecordingStop, {
 					[dictationAnalyticsModule.Properties.SttMode] = dictationModeModule.Continuous,
 					[dictationAnalyticsModule.Properties.TriggerType] = dictationAnalyticsModule.TriggerTypes.AutoChunk,
 					[dictationAnalyticsModule.Properties.CharCount] = p10Count,
 					[dictationAnalyticsModule.Properties.DurationSeconds] = if current then os.clock() - current else nil
 				})
-				var3.current = nil
+				var1.current = nil
 			end
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.TranscriptionDone, {
-				[dictationAnalyticsModule.Properties.SttMode] = p11,
-				[dictationAnalyticsModule.Properties.Success] = p12,
+				[dictationAnalyticsModule.Properties.SttMode] = p2,
+				[dictationAnalyticsModule.Properties.Success] = p3,
 				[dictationAnalyticsModule.Properties.CharCount] = p10Count
 			})
 		end, {}),
-		logTranscriptionFailed = reactModule.useCallback(function(p13)
+		logTranscriptionFailed = reactModule.useCallback(function(p1)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.TranscriptionDone, {
-				[dictationAnalyticsModule.Properties.SttMode] = p13,
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
 				[dictationAnalyticsModule.Properties.Success] = false
 			})
 		end, {}),
-		logMicToastShown = reactModule.useCallback(function(p14, p15)
+		logMicToastShown = reactModule.useCallback(function(p1, p2)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MicToastShown, {
-				[dictationAnalyticsModule.Properties.SttMode] = p14,
-				[dictationAnalyticsModule.Properties.CanDeepLink] = p15
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.CanDeepLink] = p2
 			})
 		end, {}),
-		logMicToastActivated = reactModule.useCallback(function(p16, p17)
+		logMicToastActivated = reactModule.useCallback(function(p1, p2)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MicToastActivated, {
-				[dictationAnalyticsModule.Properties.SttMode] = p16,
-				[dictationAnalyticsModule.Properties.CanDeepLink] = p17
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.CanDeepLink] = p2
 			})
 		end, {}),
-		logMicToastDismissed = reactModule.useCallback(function(p18, p19)
+		logMicToastDismissed = reactModule.useCallback(function(p1, p2)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MicToastDismiss, {
-				[dictationAnalyticsModule.Properties.SttMode] = p18,
-				[dictationAnalyticsModule.Properties.DismissReason] = p19
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.DismissReason] = p2
 			})
 		end, {})
 	}

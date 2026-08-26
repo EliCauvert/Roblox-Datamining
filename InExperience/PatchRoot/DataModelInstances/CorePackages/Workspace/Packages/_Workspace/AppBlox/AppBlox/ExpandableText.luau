@@ -15,162 +15,162 @@ local luaAppExpandableTextNewLineStrip = game:DefineFastFlag("LuaAppExpandableTe
 local luaAppExpandableTextAdjustClipToContent = game:DefineFastFlag("LuaAppExpandableTextAdjustClipToContent", false)
 local t = { Selectable = true }
 
-local var8 = function() end
+local var1 = function() end
 
 local t_1 = {
 	affordance = foundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getCompactLineMeasureText(p0)
-	if p0 <= 0 then
+local function getCompactLineMeasureText(p1)
+	if p1 <= 0 then
 		return ""
 	end
 	local t = {}
 	
-	for _ = 1, p0 do
+	for _ = 1, p1 do
 		table.insert(t, "A")
 	end
 	return table.concat(t, "\n")
 end
 
-local function _(p1, p2, p3, p4)
-	local var12 = if p2 > 0 and p1 > 0 then p1 / p2 else 0
+local function _(p2, p3, p4, p5)
+	local var2 = if p3 > 0 and p2 > 0 then p2 / p3 else 0
 	
-	if var12 > 0 and p3 > 0 and math.floor(p3 / var12 + 0.5) + 1 == p2 then
-		local var13 = p1 + var12
+	if var2 > 0 and p4 > 0 and math.floor(p4 / var2 + 0.5) + 1 == p3 then
+		local var3 = p2 + var2
 		
-		return if var13 < p4 then math.ceil(var13) else p1
+		return if var3 < p5 then math.ceil(var3) else p2
 	end
 end
 
-return reactModule.memo(function(p5)
-	-- upvalues: luaAppExpandableTextNewLineStrip (ref), signalsReactModule (ref), textSizeModule (ref), useTokens (ref), cryoModule (ref), reactModule (ref), controlState (ref), useLocalization (ref), useProperty (ref), luaAppExpandableTextAdjustClipToContent (ref), view (ref), fFlagSduiExperienceDetailsSupport (ref), t (ref), var8 (ref), t_1 (ref), text (ref), getCompactLineMeasureText (ref)
-	local var41, var42
-	local var14 = if luaAppExpandableTextNewLineStrip then (p5.text or ""):gsub("[\r\n]+$", "") else p5.text
-	local var15 = signalsReactModule.useSignalState(function(p6)
+return reactModule.memo(function(p2)
+	-- upvalues: luaAppExpandableTextNewLineStrip (ref), signalsReactModule (ref), textSizeModule (ref), useTokens (ref), cryoModule (ref), reactModule (ref), controlState (ref), useLocalization (ref), useProperty (ref), luaAppExpandableTextAdjustClipToContent (ref), view (ref), fFlagSduiExperienceDetailsSupport (ref), t (ref), var1 (ref), t_1 (ref), text (ref), getCompactLineMeasureText (ref)
+	local var2, var3
+	local var4 = if luaAppExpandableTextNewLineStrip then (p2.text or ""):gsub("[\r\n]+$", "") else p2.text
+	local var5 = signalsReactModule.useSignalState(function(p3)
 		-- upvalues: textSizeModule (copy)
-		return textSizeModule.getTextSizeStore(p6).getTextSizeOffset(p6)
+		return textSizeModule.getTextSizeStore(p3).getTextSizeOffset(p3)
 	end)
-	local var16 = useTokens()
-	local fontStyle = p5.fontStyle or var16.Typography.CaptionLarge
-	local var18 = cryoModule.Dictionary.join(fontStyle, { FontSize = fontStyle.FontSize + var15 })
-	local textStyle = p5.textStyle or var16.Color.Content.Default
-	local compactNumberOfLines = p5.compactNumberOfLines or 3
+	local var6 = useTokens()
+	local fontStyle = p2.fontStyle or var6.Typography.CaptionLarge
+	local var7 = cryoModule.Dictionary.join(fontStyle, { FontSize = fontStyle.FontSize + var5 })
+	local textStyle = p2.textStyle or var6.Color.Content.Default
+	local compactNumberOfLines = p2.compactNumberOfLines or 3
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local pressedTextStyle = p5.pressedTextStyle or var16.Color.Content.Muted
-	local var22, var23 = reactModule.useBinding(controlState.Default)
-	var22 = var22:map(function(p7)
+	local pressedTextStyle = p2.pressedTextStyle or var6.Color.Content.Muted
+	local var8, var9 = reactModule.useBinding(controlState.Default)
+	var8 = var8:map(function(p3)
 		-- upvalues: controlState (copy), pressedTextStyle (ref), textStyle (ref)
-		return if p7 == controlState.Pressed or p7 == controlState.SelectedPressed then pressedTextStyle else textStyle
+		return if p3 == controlState.Pressed or p3 == controlState.SelectedPressed then pressedTextStyle else textStyle
 	end)
-	local var24, var25 = reactModule.useState(p5.expandedInitially or false)
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: var25 (ref), p5 (ref)
-		var25(function(p8)
-			-- upvalues: p5 (copy)
-			local var45 = not p8
+	local var10, var11 = reactModule.useState(p2.expandedInitially or false)
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: var11 (ref), p2 (ref)
+		var11(function(p3)
+			-- upvalues: p2 (copy)
+			local var13 = not p3
 			
-			if p5.onExpandChanged then
-				p5.onExpandChanged(var45)
+			if p2.onExpandChanged then
+				p2.onExpandChanged(var13)
 			end
-			return var45
+			return var13
 		end)
-	end, { p5.onExpandChanged })
-	local var27 = useLocalization({
+	end, { p2.onExpandChanged })
+	local var13 = useLocalization({
 		moreText = "CommonUI.Features.Action.MoreLowercase",
 		lessText = "CommonUI.Features.Action.LessLowercase"
 	})
-	local var28 = reactModule.useRef(nil)
-	local var29 = useProperty(var28, "AbsoluteSize")
-	local var30 = reactModule.useRef(nil)
-	local var31 = useProperty(var30, "AbsoluteSize")
-	local var32 = reactModule.useRef(nil)
-	local var33 = useProperty(var32, "AbsoluteSize")
-	local var34 = var29 and var29.X > 0
-	local var35 = if var33 then var33.Y else 0
-	local var36 = if var31 then var31.Y else 0
-	local var37 = var36
-	local var38 = nil
-	local var39 = nil
+	local var14 = reactModule.useRef(nil)
+	local var15 = useProperty(var14, "AbsoluteSize")
+	local var16 = reactModule.useRef(nil)
+	local var17 = useProperty(var16, "AbsoluteSize")
+	local var18 = reactModule.useRef(nil)
+	local var19 = useProperty(var18, "AbsoluteSize")
+	local var20 = var15 and var15.X > 0
+	local var21 = if var19 then var19.Y else 0
+	local var22 = if var17 then var17.Y else 0
+	local var23 = var22
+	local var24 = nil
+	local var25 = nil
 	
 	if luaAppExpandableTextAdjustClipToContent then
-		var38 = reactModule.useRef(nil)
-		local var40 = useProperty(var38, "AbsoluteSize")
-		var39 = reactModule.useMemo(function()
-			-- upvalues: p5 (ref), var14 (ref)
-			if not p5.avoidBlankLineClip then
+		var24 = reactModule.useRef(nil)
+		local var26 = useProperty(var24, "AbsoluteSize")
+		var25 = reactModule.useMemo(function()
+			-- upvalues: p2 (ref), var4 (ref)
+			if not p2.avoidBlankLineClip then
 				return nil
 			end
-			local var46 = var14:find("\n\n")
+			local var27 = var4:find("\n\n")
 			
-			return if var46 then var14:sub(1, var46 - 1) else nil
-		end, { var14, p5.avoidBlankLineClip })
+			return if var27 then var4:sub(1, var27 - 1) else nil
+		end, { var4, p2.avoidBlankLineClip })
 		
-		if var39 then
-			var41 = if var40 then var40.Y else 0
-			var42 = if compactNumberOfLines > 0 and var36 > 0 then var36 / compactNumberOfLines else 0
+		if var25 then
+			var2 = if var26 then var26.Y else 0
+			var3 = if compactNumberOfLines > 0 and var22 > 0 then var22 / compactNumberOfLines else 0
 			
-			if var42 > 0 and var41 > 0 and math.floor(var41 / var42 + 0.5) + 1 == compactNumberOfLines then
-				local var43 = var36 + var42
-				var37 = if var43 < var35 then math.ceil(var43) else var36
+			if var3 > 0 and var2 > 0 and math.floor(var2 / var3 + 0.5) + 1 == compactNumberOfLines then
+				local var27 = var22 + var3
+				var23 = if var27 < var21 then math.ceil(var27) else var22
 			end
 		end
 	end
-	local var44 = not p5.expandedInitially and var37 + 1 < var35
-	var41 = var24 or not var44
-	var42 = var35
-	local lessText = var27.lessText
+	local var28 = not p2.expandedInitially and var23 + 1 < var21
+	var2 = var10 or not var28
+	var3 = var21
+	local lessText = var13.lessText
 	
-	if var44 and not var24 then
-		var42 = var37
-		lessText = var27.moreText
+	if var28 and not var10 then
+		var3 = var23
+		lessText = var13.moreText
 	end
-	return if var14 == "" then nil else reactModule.createElement(view, {
+	return if var4 == "" then nil else reactModule.createElement(view, {
 		tag = "col size-full-0 auto-y",
-		LayoutOrder = p5.LayoutOrder,
-		selection = if fFlagSduiExperienceDetailsSupport and p5.selectable ~= false then t else nil,
-		onActivated = if fFlagSduiExperienceDetailsSupport and p5.selectable ~= false then var8 else nil,
-		stateLayer = if fFlagSduiExperienceDetailsSupport and p5.selectable ~= false then t_1 else nil,
-		ref = var28
+		LayoutOrder = p2.LayoutOrder,
+		selection = if fFlagSduiExperienceDetailsSupport and p2.selectable ~= false then t else nil,
+		onActivated = if fFlagSduiExperienceDetailsSupport and p2.selectable ~= false then var1 else nil,
+		stateLayer = if fFlagSduiExperienceDetailsSupport and p2.selectable ~= false then t_1 else nil,
+		ref = var14
 	}, {
-		TextContent = if var34 and (var41 or var42 > 0) then reactModule.createElement(text, cryoModule.Dictionary.join({
+		TextContent = if var20 and (var2 or var3 > 0) then reactModule.createElement(text, cryoModule.Dictionary.join({
 			LayoutOrder = 1,
 			TextWrapped = true,
-			Text = var14,
-			fontStyle = var18,
-			textStyle = if var44 then var22 else textStyle,
+			Text = var4,
+			fontStyle = var7,
+			textStyle = if var28 then var8 else textStyle,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
-			ClipsDescendants = if var44 then not var24 else nil,
-			onActivated = if var44 then var26 else nil,
-			onStateChanged = if var44 then var23 else nil,
-			selection = if var44 then { Selectable = false } else nil,
-			stateLayer = if var44 then t_1 else nil
-		}, if var41 then {
+			ClipsDescendants = if var28 then not var10 else nil,
+			onActivated = if var28 then var12 else nil,
+			onStateChanged = if var28 then var9 else nil,
+			selection = if var28 then { Selectable = false } else nil,
+			stateLayer = if var28 then t_1 else nil
+		}, if var2 then {
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
-		} else { Size = UDim2.new(1, 0, 0, math.ceil(var42)) })) else nil,
-		ToggleExpandButton = if var44 then reactModule.createElement(text, {
+		} else { Size = UDim2.new(1, 0, 0, math.ceil(var3)) })) else nil,
+		ToggleExpandButton = if var28 then reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "auto-xy radius-small",
 			RichText = true,
 			Text = `<u><b>{lessText}</b></u>`,
-			fontStyle = var18,
-			textStyle = var16.Color.Content.Emphasis,
-			onActivated = var26
+			fontStyle = var7,
+			textStyle = var6.Color.Content.Emphasis,
+			onActivated = var12
 		}) else nil,
 		CompactTextMeasure = reactModule.createElement(text, {
 			Visible = false,
 			IgnoreLayout = true,
 			LayoutOrder = 3,
 			TextWrapped = true,
-			ref = var30,
+			ref = var16,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Text = getCompactLineMeasureText(compactNumberOfLines),
-			fontStyle = var18,
+			fontStyle = var7,
 			textStyle = textStyle,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top
@@ -180,26 +180,26 @@ return reactModule.memo(function(p5)
 			IgnoreLayout = true,
 			LayoutOrder = 4,
 			TextWrapped = true,
-			ref = var32,
+			ref = var18,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Text = var14,
-			fontStyle = var18,
+			Text = var4,
+			fontStyle = var7,
 			textStyle = textStyle,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top
 		}),
-		PrefixMeasure = if luaAppExpandableTextAdjustClipToContent and var39 then reactModule.createElement(text, {
+		PrefixMeasure = if luaAppExpandableTextAdjustClipToContent and var25 then reactModule.createElement(text, {
 			Visible = false,
 			IgnoreLayout = true,
 			LayoutOrder = 5,
 			textColor = nil,
 			TextWrapped = true,
-			ref = var38,
+			ref = var24,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Text = var39,
-			fontStyle = var18,
+			Text = var25,
+			fontStyle = var7,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top
 		}) else nil

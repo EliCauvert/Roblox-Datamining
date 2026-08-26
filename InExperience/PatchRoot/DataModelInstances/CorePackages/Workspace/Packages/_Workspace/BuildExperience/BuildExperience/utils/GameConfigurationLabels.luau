@@ -19,14 +19,14 @@ local t_1 = {
 	[privacyType.Private] = privacyType.Private
 }
 
-local function getAudience(p0)
+local function getAudience(p1)
 	-- upvalues: t_1 (ref), universeConfigurationModule (ref)
-	if p0 == nil then
+	if p1 == nil then
 		return nil
-	elseif p0.audiences ~= nil then
-		return universeConfigurationModule.getPrivacyTypeForAudiences(p0.audiences)
+	elseif p1.audiences ~= nil then
+		return universeConfigurationModule.getPrivacyTypeForAudiences(p1.audiences)
 	end
-	local privacyType = p0.privacyType
+	local privacyType = p1.privacyType
 	
 	return if privacyType == nil then nil else t_1[privacyType]
 end
@@ -47,17 +47,17 @@ local function getAudienceText(p1)
 	return if fFlagBuildLocalization then if privacyTypeForAudiences == nil then nil else t[privacyTypeForAudiences] elseif privacyTypeForAudiences == nil then GAME_CONFIGURATION_AUDIENCE_UNKNOWN else t[privacyTypeForAudiences]
 end
 
-local function _(p2)
-	local experienceDescriptorUsages = p2 and p2.experienceDescriptorUsages
+local function _(p1)
+	local experienceDescriptorUsages = p1 and p1.experienceDescriptorUsages
 	local items = experienceDescriptorUsages and experienceDescriptorUsages.items
-	local var12 = items and items[1]
-	local descriptorDisplayName = var12 and var12.descriptorDisplayName
+	local var1 = items and items[1]
+	local descriptorDisplayName = var1 and var1.descriptorDisplayName
 	
 	return if descriptorDisplayName == nil or descriptorDisplayName == "" then nil else descriptorDisplayName
 end
 
-local function getContentRatingText(p3)
-	local ageRecommendationDetails = p3 and p3.ageRecommendationDetails
+local function getContentRatingText(p1)
+	local ageRecommendationDetails = p1 and p1.ageRecommendationDetails
 	local ageRecommendationSummary = ageRecommendationDetails and ageRecommendationDetails.ageRecommendationSummary
 	local ageRecommendation = ageRecommendationSummary and ageRecommendationSummary.ageRecommendation
 	
@@ -74,11 +74,11 @@ local function getContentRatingText(p3)
 	end
 	local experienceDescriptorUsages = ageRecommendationDetails and ageRecommendationDetails.experienceDescriptorUsages
 	local items = experienceDescriptorUsages and experienceDescriptorUsages.items
-	local var19 = items and items[1]
-	local descriptorDisplayName = var19 and var19.descriptorDisplayName
-	local var21 = if descriptorDisplayName == nil or descriptorDisplayName == "" then nil else descriptorDisplayName
+	local var1 = items and items[1]
+	local descriptorDisplayName = var1 and var1.descriptorDisplayName
+	local var2 = if descriptorDisplayName == nil or descriptorDisplayName == "" then nil else descriptorDisplayName
 	
-	return if var21 == nil then displayName else `{displayName} - {var21}`
+	return if var2 == nil then displayName else `{displayName} - {var2}`
 end
 
 return {
@@ -87,40 +87,40 @@ return {
 	getAudience = getAudience,
 	getAudienceText = getAudienceText,
 	getContentRatingText = getContentRatingText,
-	getContentMaturityText = function(p4, p5, p6)
+	getContentMaturityText = function(p1, p2, p3)
 		-- upvalues: getContentRatingText (ref)
-		if p6 then
-			local ageRecommendationDetails = p5 and p5.ageRecommendationDetails
+		if p3 then
+			local ageRecommendationDetails = p2 and p2.ageRecommendationDetails
 			local ageRecommendationSummary = ageRecommendationDetails and ageRecommendationDetails.ageRecommendationSummary
 			local ageRecommendation = ageRecommendationSummary and ageRecommendationSummary.ageRecommendation
 			local displayName = ageRecommendation and ageRecommendation.displayName
-			local var26 = if displayName == nil or displayName == "" then nil else displayName
+			local var1 = if displayName == nil or displayName == "" then nil else displayName
 			
-			if var26 == nil then
-				return getContentRatingText(p4)
+			if var1 == nil then
+				return getContentRatingText(p1)
 			end
-			local ageRecommendationDetails_1 = p5 and p5.ageRecommendationDetails
+			local ageRecommendationDetails_1 = p2 and p2.ageRecommendationDetails
 			local experienceDescriptorUsages = ageRecommendationDetails_1 and ageRecommendationDetails_1.experienceDescriptorUsages
 			displayName = experienceDescriptorUsages and experienceDescriptorUsages[1]
 			local descriptorDisplayName = displayName and displayName.descriptorDisplayName
-			local var30 = if descriptorDisplayName == nil or descriptorDisplayName == "" then nil else descriptorDisplayName
+			local var2 = if descriptorDisplayName == nil or descriptorDisplayName == "" then nil else descriptorDisplayName
 			
-			return if var30 == nil then var26 else `{var26} - {var30}`
+			return if var2 == nil then var1 else `{var1} - {var2}`
 		end
 	end,
-	getProvisionalRatingText = function(p7)
-		local ageRecommendationDetails = p7 and p7.ageRecommendationDetails
+	getProvisionalRatingText = function(p1)
+		local ageRecommendationDetails = p1 and p1.ageRecommendationDetails
 		local ageRecommendationSummary = ageRecommendationDetails and ageRecommendationDetails.ageRecommendationSummary
 		local ageRecommendation = ageRecommendationSummary and ageRecommendationSummary.ageRecommendation
 		local displayName = ageRecommendation and ageRecommendation.displayName
 		
 		return if displayName == nil or displayName == "" then nil else displayName
 	end,
-	getProvisionalRatingDescriptor = function(p8)
-		local ageRecommendationDetails = p8 and p8.ageRecommendationDetails
+	getProvisionalRatingDescriptor = function(p1)
+		local ageRecommendationDetails = p1 and p1.ageRecommendationDetails
 		local experienceDescriptorUsages = ageRecommendationDetails and ageRecommendationDetails.experienceDescriptorUsages
-		local var37 = experienceDescriptorUsages and experienceDescriptorUsages[1]
-		local descriptorDisplayName = var37 and var37.descriptorDisplayName
+		local var1 = experienceDescriptorUsages and experienceDescriptorUsages[1]
+		local descriptorDisplayName = var1 and var1.descriptorDisplayName
 		
 		return if descriptorDisplayName == nil or descriptorDisplayName == "" then nil else descriptorDisplayName
 	end

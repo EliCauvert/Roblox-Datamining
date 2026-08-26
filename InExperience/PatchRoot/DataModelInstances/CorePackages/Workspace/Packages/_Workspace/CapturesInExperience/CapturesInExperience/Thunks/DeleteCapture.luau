@@ -7,19 +7,19 @@ local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorag
 local fFlagCapturesVideoDeleteAsyncModule = require(parent.Flags.FFlagCapturesVideoDeleteAsync)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureService (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), fFlagCapturesVideoDeleteAsyncModule (ref), retrieveCapturesModule (ref)
-	return function(p1)
-		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), p0 (ref), captureService (copy), fFlagUseRbxstorageInGalleryModule (copy), captureTypeModule (copy), fFlagCapturesVideoDeleteAsyncModule (copy), retrieveCapturesModule (copy)
+	return function(p2)
+		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), p1 (ref), captureService (copy), fFlagUseRbxstorageInGalleryModule (copy), captureTypeModule (copy), fFlagCapturesVideoDeleteAsyncModule (copy), retrieveCapturesModule (copy)
 		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-			captureService:DeleteCapturesAsync({ p0 })
-		elseif not fFlagUseRbxstorageInGalleryModule or p0.type ~= captureTypeModule.Video then
-			captureService:DeleteCapture(p0.filePath)
+			captureService:DeleteCapturesAsync({ p1 })
+		elseif not fFlagUseRbxstorageInGalleryModule or p1.type ~= captureTypeModule.Video then
+			captureService:DeleteCapture(p1.filePath)
 		elseif fFlagCapturesVideoDeleteAsyncModule then
-			captureService:DeleteVideoCaptureAsync(p0.videoCapture)
+			captureService:DeleteVideoCaptureAsync(p1.videoCapture)
 		else
-			captureService:DeleteVideoCapture(p0.videoCapture)
+			captureService:DeleteVideoCapture(p1.videoCapture)
 		end
-		p1:dispatch(retrieveCapturesModule())
+		p2:dispatch(retrieveCapturesModule())
 	end
 end

@@ -7,13 +7,13 @@ return {
 	end,
 	markDismissed = function()
 		-- upvalues: perUserAppStorageModule (ref)
-		perUserAppStorageModule.updateEntry("ExpChatDictationFtux", function(p0)
-			if p0.dismissed == true then
+		perUserAppStorageModule.updateEntry("ExpChatDictationFtux", function(p1)
+			if p1.dismissed == true then
 				return nil
 			end
-			p0.dismissed = true
+			p1.dismissed = true
 			
-			return p0
+			return p1
 		end)
 	end,
 	hasBeenUsed = function()

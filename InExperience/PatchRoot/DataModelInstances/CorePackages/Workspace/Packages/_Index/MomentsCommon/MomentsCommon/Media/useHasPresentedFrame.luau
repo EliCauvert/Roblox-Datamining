@@ -4,39 +4,39 @@ local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local _ = require(momentsCommon.Media.MediaTypes)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), signalsModule (ref)
-	local var3, var4 = reactModule.useState(false)
+	local var1, var2 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p0 (ref), var4 (ref), signalsModule (copy)
-		if p1 and p0 ~= nil then
-			var4(false)
-			local var5 = false
-			local var6 = nil
-			var6 = signalsModule.createEffect(function(p2)
-				-- upvalues: p0 (copy), var5 (write), var4 (copy), var6 (write)
-				if p0.getPosition(p2) > 0 and not var5 then
-					var5 = true
-					var4(true)
+		-- upvalues: p2 (ref), p1 (ref), var2 (ref), signalsModule (copy)
+		if p2 and p1 ~= nil then
+			var2(false)
+			local var3 = false
+			local var4 = nil
+			var4 = signalsModule.createEffect(function(p3)
+				-- upvalues: p1 (copy), var3 (write), var2 (copy), var4 (write)
+				if p1.getPosition(p3) > 0 and not var3 then
+					var3 = true
+					var2(true)
 					task.defer(function()
-						-- upvalues: var6 (copy)
-						if var6 ~= nil then
-							var6()
+						-- upvalues: var4 (copy)
+						if var4 ~= nil then
+							var4()
 						end
 					end)
 				end
 			end)
 			
 			return function()
-				-- upvalues: var5 (write), var6 (write)
-				var5 = true
+				-- upvalues: var3 (write), var4 (write)
+				var3 = true
 				
-				if var6 ~= nil then
-					var6()
+				if var4 ~= nil then
+					var4()
 				end
 			end
 		end
-	end, { p0, p1 })
+	end, { p1, p2 })
 	
-	return var3
+	return var1
 end

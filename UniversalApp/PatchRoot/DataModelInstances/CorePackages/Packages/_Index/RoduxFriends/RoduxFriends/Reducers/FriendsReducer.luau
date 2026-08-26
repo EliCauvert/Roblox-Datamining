@@ -15,20 +15,20 @@ local t = {
 	contactNamesByUserId = {}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), byUserIdModule (ref), countsByUserIdModule (ref), requestsModule (ref), recommendationsModule (ref), friendshipStatusModule (ref), friendsRankByUserIdModule (ref), contactNamesByUserIdModule (ref)
-	return function(p1, p2)
-		-- upvalues: t (copy), byUserIdModule (copy), p0 (ref), countsByUserIdModule (copy), requestsModule (copy), recommendationsModule (copy), friendshipStatusModule (copy), friendsRankByUserIdModule (copy), contactNamesByUserIdModule (copy)
-		p1 = p1 or t
+	return function(p2, p3)
+		-- upvalues: t (copy), byUserIdModule (copy), p1 (ref), countsByUserIdModule (copy), requestsModule (copy), recommendationsModule (copy), friendshipStatusModule (copy), friendsRankByUserIdModule (copy), contactNamesByUserIdModule (copy)
+		p2 = p2 or t
 		
 		return {
-			byUserId = byUserIdModule(p0)(p1.byUserId, p2),
-			countsByUserId = countsByUserIdModule(p0)(p1, p2),
-			requests = requestsModule(p0)(p1.requests, p2),
-			recommendations = recommendationsModule(p0)(p1.recommendations, p2),
-			friendshipStatus = friendshipStatusModule(p0)(p1.friendshipStatus, p2),
-			friendsRankByUserId = friendsRankByUserIdModule(p0)(p1.friendsRankByUserId, p2),
-			contactNamesByUserId = contactNamesByUserIdModule(p0)(p1.contactNamesByUserId, p2)
+			byUserId = byUserIdModule(p1)(p2.byUserId, p3),
+			countsByUserId = countsByUserIdModule(p1)(p2, p3),
+			requests = requestsModule(p1)(p2.requests, p3),
+			recommendations = recommendationsModule(p1)(p2.recommendations, p3),
+			friendshipStatus = friendshipStatusModule(p1)(p2.friendshipStatus, p3),
+			friendsRankByUserId = friendsRankByUserIdModule(p1)(p2.friendsRankByUserId, p3),
+			contactNamesByUserId = contactNamesByUserIdModule(p1)(p2.contactNamesByUserId, p3)
 		}
 	end
 end

@@ -8,19 +8,19 @@ local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Sign
 local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
 local fFlagStandardizeSafetyIcon = sharedFlagsModule.FFlagStandardizeSafetyIcon
-local var6 = false
-local var7 = signal.new()
-local var8 = mappedSignal.new(var7, function()
-	-- upvalues: var6 (write)
-	return var6
+local var1 = false
+local var2 = signal.new()
+local var3 = mappedSignal.new(var2, function()
+	-- upvalues: var1 (write)
+	return var1
 end)
 task.defer(function()
-	-- upvalues: robloxGui (ref), var6 (write), var7 (ref)
+	-- upvalues: robloxGui (ref), var1 (write), var2 (ref)
 	local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-	settingsHubModule.CurrentPageSignal:connect(function(p0)
-		-- upvalues: var6 (copy), settingsHubModule (ref), var7 (copy)
-		var6 = p0 == settingsHubModule.Instance.ReportAbusePage.Page.Name
-		var7:fire()
+	settingsHubModule.CurrentPageSignal:connect(function(p1)
+		-- upvalues: var1 (copy), settingsHubModule (ref), var2 (copy)
+		var1 = p1 == settingsHubModule.Instance.ReportAbusePage.Page.Name
+		var2:fire()
 	end)
 end)
 
@@ -30,25 +30,25 @@ return serviceModule:register({
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = sideSheetPlacement.Page,
 	activated = function(_)
-		-- upvalues: robloxGui (ref), var6 (write)
+		-- upvalues: robloxGui (ref), var1 (write)
 		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
 		
 		if not settingsHubModule:GetVisibility() then
 			settingsHubModule:SetVisibility(true, false, settingsHubModule.Instance.ReportAbusePage)
 			
 			return
-		elseif var6 then
+		elseif var1 then
 			settingsHubModule:SetVisibility(false)
 			
 			return
 		end
 		settingsHubModule:SwitchToPage(settingsHubModule.Instance.ReportAbusePage, true)
 	end,
-	isActivated = var8,
+	isActivated = var3,
 	components = {
 		Icon = function(_)
-			-- upvalues: fFlagStandardizeSafetyIcon (ref), commonIconModule (ref), var8 (ref)
-			return if fFlagStandardizeSafetyIcon then commonIconModule("Flag", nil, var8) else commonIconModule("icons/menu/safety_off", "icons/menu/safety_on", var8)
+			-- upvalues: fFlagStandardizeSafetyIcon (ref), commonIconModule (ref), var3 (ref)
+			return if fFlagStandardizeSafetyIcon then commonIconModule("Flag", nil, var3) else commonIconModule("icons/menu/safety_off", "icons/menu/safety_on", var3)
 		end
 	}
 })

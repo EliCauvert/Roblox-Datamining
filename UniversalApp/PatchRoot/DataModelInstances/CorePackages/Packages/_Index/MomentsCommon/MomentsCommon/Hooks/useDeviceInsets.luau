@@ -4,19 +4,19 @@ local hardwareSafeAreaInsetsModule = require(momentsCommon.Utils.HardwareSafeAre
 
 return function()
 	-- upvalues: reactModule (ref), hardwareSafeAreaInsetsModule (ref)
-	local var3, var4 = reactModule.useState(hardwareSafeAreaInsetsModule.deviceInsets())
+	local var1, var2 = reactModule.useState(hardwareSafeAreaInsetsModule.deviceInsets())
 	reactModule.useLayoutEffect(function()
-		-- upvalues: hardwareSafeAreaInsetsModule (copy), var4 (ref), var3 (ref)
-		local var5 = hardwareSafeAreaInsetsModule:connect(var4)
+		-- upvalues: hardwareSafeAreaInsetsModule (copy), var2 (ref), var1 (ref)
+		local var3 = hardwareSafeAreaInsetsModule:connect(var2)
 		
-		if hardwareSafeAreaInsetsModule.diffInsets(var3, hardwareSafeAreaInsetsModule.deviceInsets()) then
-			var4(hardwareSafeAreaInsetsModule.deviceInsets)
+		if hardwareSafeAreaInsetsModule.diffInsets(var1, hardwareSafeAreaInsetsModule.deviceInsets()) then
+			var2(hardwareSafeAreaInsetsModule.deviceInsets)
 		end
 		return function()
-			-- upvalues: var5 (ref)
-			var5.disconnect()
+			-- upvalues: var3 (ref)
+			var3.disconnect()
 		end
 	end, {})
 	
-	return var3
+	return var1
 end

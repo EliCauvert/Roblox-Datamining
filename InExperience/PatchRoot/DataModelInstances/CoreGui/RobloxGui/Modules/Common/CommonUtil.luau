@@ -1,15 +1,15 @@
 ﻿return {
-	TableConcat = function(p0, p1)
-		for i = 1, #p1 do
-			p0[#p0 + 1] = p1[i]
+	TableConcat = function(p1, p2)
+		for i = 1, #p2 do
+			p1[#p1 + 1] = p2[i]
 		end
-		return p0
+		return p1
 	end,
-	SortByName = function(p2)
-		table.sort(p2, function(p3, p4)
-			return p3.Name < p4.Name
+	SortByName = function(p3)
+		table.sort(p3, function(p4, p5)
+			return p4.Name < p5.Name
 		end)
 		
-		return p2
+		return p3
 	end
 }

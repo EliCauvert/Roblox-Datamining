@@ -6,43 +6,43 @@ local function defaultDispose() end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0, p1)
+function t_1.new(p1, p2)
 	-- upvalues: defaultDispose (ref), t_1 (ref), map (ref)
-	local var3 = p0
-	local var4 = p1
+	local var1 = p1
+	local var2 = p2
 	
-	if var3 == nil then
-		var3 = 1e999
+	if var1 == nil then
+		var1 = 1e999
 	end
-	if var4 == nil then
-		var4 = defaultDispose
+	if var2 == nil then
+		var2 = defaultDispose
 	end
 	local tbl = setmetatable({}, t_1)
 	tbl.map = map.new(nil)
 	tbl.newest = nil
 	tbl.oldest = nil
-	tbl.max = var3
-	tbl.dispose = var4
+	tbl.max = var1
+	tbl.dispose = var2
 	
 	return tbl
 end
 
-function t_1:has(p2)
-	return self.map:has(p2)
+function t_1:has(p1)
+	return self.map:has(p1)
 end
 
-function t_1:get(p3)
-	local var6 = self:getNode(p3)
+function t_1:get(p1)
+	local var1 = self:getNode(p1)
 	
-	return var6 and var6.value
+	return var1 and var1.value
 end
 
-function t_1:getNode(p4)
-	local var7 = self.map:get(p4)
+function t_1:getNode(p1)
+	local var1 = self.map:get(p1)
 	
-	if var7 and var7 ~= self.newest then
-		local older = var7.older
-		local newer = var7.newer
+	if var1 and var1 ~= self.newest then
+		local older = var1.older
+		local newer = var1.newer
 		
 		if newer then
 			newer.older = older
@@ -50,34 +50,34 @@ function t_1:getNode(p4)
 		if older then
 			older.newer = newer
 		end
-		var7.older = self.newest
-		var7.older.newer = var7
-		var7.newer = nil
-		self.newest = var7
+		var1.older = self.newest
+		var1.older.newer = var1
+		var1.newer = nil
+		self.newest = var1
 		
-		if var7 == self.oldest then
+		if var1 == self.oldest then
 			self.oldest = newer
 		end
 	end
-	return var7
+	return var1
 end
 
-function t_1:set(p5, p6)
-	local var8 = self:getNode(p5)
+function t_1:set(p1, p2)
+	local var1 = self:getNode(p1)
 	
-	if var8 then
-		var8.value = p6
+	if var1 then
+		var1.value = p2
 		
-		return var8.value
+		return var1.value
 	end
-	local t = { newer = nil, key = p5, value = p6, older = self.newest }
+	local t = { newer = nil, key = p1, value = p2, older = self.newest }
 	
 	if self.newest then
 		self.newest.newer = t
 	end
 	self.newest = t
 	self.oldest = self.oldest or t
-	self.map:set(p5, t)
+	self.map:set(p1, t)
 	
 	return t.value
 end
@@ -88,25 +88,25 @@ function t_1:clean()
 	end
 end
 
-function t_1:delete(p7)
-	local var10 = self.map:get(p7)
+function t_1:delete(p1)
+	local var1 = self.map:get(p1)
 	
-	if not var10 then
+	if not var1 then
 		return false
-	elseif var10 == self.newest then
-		self.newest = var10.older
+	elseif var1 == self.newest then
+		self.newest = var1.older
 	end
-	if var10 == self.oldest then
-		self.oldest = var10.newer
+	if var1 == self.oldest then
+		self.oldest = var1.newer
 	end
-	if var10.newer then
-		var10.newer.older = var10.older
+	if var1.newer then
+		var1.newer.older = var1.older
 	end
-	if var10.older then
-		var10.older.newer = var10.newer
+	if var1.older then
+		var1.older.newer = var1.newer
 	end
-	self.map:delete(p7)
-	self.dispose(var10.value, p7)
+	self.map:delete(p1)
+	self.dispose(var1.value, p1)
 	
 	return true
 end

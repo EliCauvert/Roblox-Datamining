@@ -23,21 +23,21 @@ return {
 		validationEnumsModule.SharedDataMember.consumerConfig
 	},
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: t (ref), t_1 (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref), wrapTargetCageUVReferenceValuesModule (ref), constantsModule (ref)
-		local rootInstance = p1.rootInstance
+		local rootInstance = p2.rootInstance
 		local wrapTextureTransfer = rootInstance:FindFirstChildOfClass("WrapTextureTransfer")
 		
 		if wrapTextureTransfer == nil then
 			error(string.format("WrapTextureTransfer child not found for %s", rootInstance.Name))
 		end
-		local source = p1.consumerConfig.source
-		local var10 = t[source] == true
-		local var11 = t_1[source] == true
-		p0:setReportingInstance(wrapTextureTransfer)
+		local source = p2.consumerConfig.source
+		local var1 = t[source] == true
+		local var2 = t_1[source] == true
+		p1:setReportingInstance(wrapTextureTransfer)
 		local referenceCageMeshContent = wrapTextureTransfer.ReferenceCageMeshContent
-		local var12 = referenceCageMeshContent.Uri ~= nil and referenceCageMeshContent.Uri ~= ""
-		local editableMesh, editableMesh_1 = createEditableInstancesForContextModule.getEditableInstanceInfo(referenceCageMeshContent, p1.consumerConfig.preloadedEditableMeshes, "EditableMesh", var11)
+		local var3 = referenceCageMeshContent.Uri ~= nil and referenceCageMeshContent.Uri ~= ""
+		local editableMesh, editableMesh_1 = createEditableInstancesForContextModule.getEditableInstanceInfo(referenceCageMeshContent, p2.consumerConfig.preloadedEditableMeshes, "EditableMesh", var2)
 		
 		if editableMesh and editableMesh_1 and editableMesh_1.instance then
 			local instance = editableMesh_1.instance
@@ -48,14 +48,14 @@ return {
 			
 			if ok then
 				if not status then
-					p0:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidUV, { instanceName = wrapTextureTransfer:GetFullName() })
+					p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidUV, { instanceName = wrapTextureTransfer:GetFullName() })
 					
 					return
 				end
 				local MAKEUP_INFO = constantsModule.MAKEUP_INFO
 				
 				if not wrapTextureTransfer.UVMinBound:FuzzyEq(MAKEUP_INFO.WrapTextureTransferUVBounds.MinBound) then
-					p0:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMinBound, {
+					p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMinBound, {
 						instanceName = wrapTextureTransfer:GetFullName(),
 						actual = tostring(wrapTextureTransfer.UVMinBound),
 						expected = tostring(MAKEUP_INFO.WrapTextureTransferUVBounds.MinBound)
@@ -63,26 +63,26 @@ return {
 					
 					return
 				elseif not wrapTextureTransfer.UVMaxBound:FuzzyEq(MAKEUP_INFO.WrapTextureTransferUVBounds.MaxBound) then
-					p0:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMaxBound, {
+					p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMaxBound, {
 						instanceName = wrapTextureTransfer:GetFullName(),
 						actual = tostring(wrapTextureTransfer.UVMaxBound),
 						expected = tostring(MAKEUP_INFO.WrapTextureTransferUVBounds.MaxBound)
 					})
 				end
 				return
-			elseif var10 then
-				p0:forceError(string.format("Failed to load UVs for '%s'. Make sure the UV map exists and try again.", wrapTextureTransfer:GetFullName()))
+			elseif var1 then
+				p1:forceError(string.format("Failed to load UVs for '%s'. Make sure the UV map exists and try again.", wrapTextureTransfer:GetFullName()))
 			end
-			p0:fail(errorSourceStringsModule.Keys.WrapTexture_FailedToLoadUV, { instanceName = wrapTextureTransfer:GetFullName() })
+			p1:fail(errorSourceStringsModule.Keys.WrapTexture_FailedToLoadUV, { instanceName = wrapTextureTransfer:GetFullName() })
 			
 			return
-		elseif not var12 then
-			p0:fail(errorSourceStringsModule.Keys.WrapTexture_NoCage, { instanceName = wrapTextureTransfer:GetFullName() })
+		elseif not var3 then
+			p1:fail(errorSourceStringsModule.Keys.WrapTexture_NoCage, { instanceName = wrapTextureTransfer:GetFullName() })
 			
 			return
-		elseif var10 then
-			p0:forceError(string.format("Failed to load ReferenceCageContent for %s", wrapTextureTransfer:GetFullName()))
+		elseif var1 then
+			p1:forceError(string.format("Failed to load ReferenceCageContent for %s", wrapTextureTransfer:GetFullName()))
 		end
-		p0:fail(errorSourceStringsModule.Keys.WrapTexture_FailedToLoadCage, { instanceName = wrapTextureTransfer:GetFullName() })
+		p1:fail(errorSourceStringsModule.Keys.WrapTexture_FailedToLoadCage, { instanceName = wrapTextureTransfer:GetFullName() })
 	end
 }

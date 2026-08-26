@@ -6,9 +6,9 @@ local alertSeverity = foundationModule.Enums.AlertSeverity
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), systemBanner (ref), alertSeverity (ref), buttonVariant (ref)
-	local var2 = useLocalization({
+	local var1 = useLocalization({
 		title = "CommonUI.Messages.Response.PageError",
 		description = "Feature.Toast.NetworkingError.SomethingIsWrong",
 		retry = "InGame.CommonUI.Button.Retry"
@@ -16,13 +16,13 @@ return reactModule.memo(function(p0)
 	
 	return reactModule.createElement(systemBanner, {
 		severity = alertSeverity.Error,
-		title = var2.title,
-		description = var2.description,
+		title = var1.title,
+		description = var1.description,
 		actions = {
 			{
-				text = var2.retry,
+				text = var1.retry,
 				variant = buttonVariant.Standard,
-				onActivated = p0.refresh
+				onActivated = p1.refresh
 			}
 		}
 	})

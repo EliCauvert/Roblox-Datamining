@@ -36,19 +36,19 @@ function modalTitle.GetHeight(_)
 	return 48
 end
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: closeButtonIconModule (ref)
-	return if p0 == closeButtonIconModule.Close then "icons/navigation/close" elseif p0 == closeButtonIconModule.Back then "icons/actions/cycleLeft" else nil
+	return if p1 == closeButtonIconModule.Close then "icons/navigation/close" elseif p1 == closeButtonIconModule.Back then "icons/actions/cycleLeft" else nil
 end
 
 local function renderBackgroundImage(value, p1, p2)
 	-- upvalues: cryoModule (ref), roactModule (ref), genericTextLabelModule (ref), imageSetComponentModule (ref)
 	local text = value.text
-	local var11 = text and #text > 0
-	local var12 = text and #text > 0
+	local var1 = text and #text > 0
+	local var2 = text and #text > 0
 	local clampedValue = math.clamp(value.imageHeight, 48, 261)
 	
-	if var11 then
+	if var1 then
 		clampedValue += 8
 		p2 = cryoModule.Dictionary.join(p2, {
 			UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
@@ -69,12 +69,12 @@ local function renderBackgroundImage(value, p1, p2)
 			})
 		})
 	end
-	if var12 then
+	if var2 then
 		p2 = cryoModule.Dictionary.join(p2, {
 			BackgroundTextShadow = roactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				ZIndex = 1,
-				Size = UDim2.new(1, 0, 1, if var11 then -8 else 0),
+				Size = UDim2.new(1, 0, 1, if var1 then -8 else 0),
 				Position = UDim2.new(0, 0, 0, 0)
 			}, {
 				UIGradient = roactModule.createElement("UIGradient", {
@@ -89,7 +89,7 @@ local function renderBackgroundImage(value, p1, p2)
 			})
 		})
 	end
-	local var14 = roactModule.createElement(imageSetComponentModule.Label, {
+	local var3 = roactModule.createElement(imageSetComponentModule.Label, {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(0, 0),
@@ -100,41 +100,41 @@ local function renderBackgroundImage(value, p1, p2)
 		ImageColor3 = Color3.fromRGB(255, 255, 255)
 	}, p2)
 	
-	if var11 then
-		var14 = roactModule.createElement("Frame", {
+	if var1 then
+		var3 = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Size = UDim2.new(1, 0, 0, clampedValue - 8),
 			Position = UDim2.new(0.5, 0, 0.5, 0)
-		}, { TitleBackground = var14 })
+		}, { TitleBackground = var3 })
 	end
-	return var14
+	return var3
 end
 
-function modalTitle.render(p3)
+function modalTitle.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), controllableModule (ref), imageSetComponentModule (ref), imagesModule (ref), closeButtonIconModule (ref), genericTextLabelModule (ref), renderBackgroundImage (ref)
-	local titleBackgroundImageProps = p3.props.titleBackgroundImageProps
+	local titleBackgroundImageProps = p1.props.titleBackgroundImageProps
 	
-	return withStyleModule(function(p4)
-		-- upvalues: roactModule (copy), p3 (ref), controllableModule (copy), imageSetComponentModule (copy), imagesModule (copy), closeButtonIconModule (copy), genericTextLabelModule (copy), titleBackgroundImageProps (ref), renderBackgroundImage (copy)
+	return withStyleModule(function(p2)
+		-- upvalues: roactModule (copy), p1 (ref), controllableModule (copy), imageSetComponentModule (copy), imagesModule (copy), closeButtonIconModule (copy), genericTextLabelModule (copy), titleBackgroundImageProps (ref), renderBackgroundImage (copy)
 		local createElement_1
-		local font = p4.Font
-		local theme = p4.Theme
-		local var15 = font.BaseSize * font.Header1.RelativeSize
+		local font = p2.Font
+		local theme = p2.Theme
+		local var1 = font.BaseSize * font.Header1.RelativeSize
 		local createElement = roactModule.createElement
-		local var16 = "Frame"
+		local var2 = "Frame"
 		local t = {
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 48),
 			BackgroundTransparency = 1,
-			[roactModule.Change.AbsoluteSize] = p3.props.onTitleSizeChanged
+			[roactModule.Change.AbsoluteSize] = p1.props.onTitleSizeChanged
 		}
 		local t_1 = {}
 		
-		if p3.props.onCloseClicked then
+		if p1.props.onCloseClicked then
 			createElement_1 = roactModule.createElement
-			local var19 = controllableModule
+			local var3 = controllableModule
 			local t_2 = {}
 			local t_3 = {
 				component = imageSetComponentModule.Button,
@@ -143,7 +143,7 @@ function modalTitle.render(p3)
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0, 32, 0.5, 0),
 					Size = UDim2.new(0, 48, 0, 48),
-					[roactModule.Event.Activated] = p3.props.onCloseClicked
+					[roactModule.Event.Activated] = p1.props.onCloseClicked
 				}
 			}
 			local t_4 = {}
@@ -153,7 +153,7 @@ function modalTitle.render(p3)
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 36, 0, 36)
 			}
-			local closeButtonIcon = p3.props.closeButtonIcon
+			local closeButtonIcon = p1.props.closeButtonIcon
 			t_5.Image = imagesModule[if closeButtonIcon == closeButtonIconModule.Close then "icons/navigation/close" elseif closeButtonIcon == closeButtonIconModule.Back then "icons/actions/cycleLeft" else nil]
 			t_5.ImageColor3 = theme.IconEmphasis.Color
 			t_5.ImageTransparency = theme.IconEmphasis.Transparency
@@ -165,7 +165,7 @@ function modalTitle.render(p3)
 			
 			function t_2.onStateChanged(...) end
 			
-			createElement_1 = createElement_1(var19, t_2) or nil
+			createElement_1 = createElement_1(var3, t_2) or nil
 		end
 		t_1.CloseButton = createElement_1
 		t_1.Title = roactModule.createElement(genericTextLabelModule, {
@@ -177,8 +177,8 @@ function modalTitle.render(p3)
 			Size = UDim2.new(1, -104, 1, 0),
 			colorStyle = theme.TextEmphasis,
 			fontStyle = font.Header1,
-			Text = p3.props.title,
-			TextSize = var15,
+			Text = p1.props.title,
+			TextSize = var1,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}, {
 			Padding = roactModule.createElement("UIPadding", {
@@ -195,9 +195,9 @@ function modalTitle.render(p3)
 			BackgroundTransparency = theme.Divider.Transparency,
 			Size = UDim2.new(1, 0, 0, 1)
 		})
-		createElement = createElement(var16, t, t_1)
+		createElement = createElement(var2, t, t_1)
 		
-		return if titleBackgroundImageProps then renderBackgroundImage(titleBackgroundImageProps, p4, { TitleText = createElement }) else createElement
+		return if titleBackgroundImageProps then renderBackgroundImage(titleBackgroundImageProps, p2, { TitleText = createElement }) else createElement
 	end)
 end
 

@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("GameTile").GameTileTypes)
 local t = {}
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref)
-	return if p0 and p0.layoutDataBySort and (p1 and p1 ~= "") and p0.layoutDataBySort[p1] then p0.layoutDataBySort[p1] elseif p0 and p0.defaultLayoutData then p0.defaultLayoutData else t
+	return if p1 and p1.layoutDataBySort and (p2 and p2 ~= "") and p1.layoutDataBySort[p2] then p1.layoutDataBySort[p2] elseif p1 and p1.defaultLayoutData then p1.defaultLayoutData else t
 end

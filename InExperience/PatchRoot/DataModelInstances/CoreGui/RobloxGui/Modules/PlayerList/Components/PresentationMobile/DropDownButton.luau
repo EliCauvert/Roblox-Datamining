@@ -20,9 +20,9 @@ local images = UIBloxModule.App.ImageSet.Images
 local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local fFlagAllowDisplayingFoundationIconsForDropdownModule = require(parent.Parent.Flags.FFlagAllowDisplayingFoundationIconsForDropdown)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: iconName (ref)
-	return iconName[p0] ~= nil
+	return iconName[p1] ~= nil
 end
 
 local dropDownButton = roactModule.PureComponent:extend("DropDownButton")
@@ -55,121 +55,121 @@ function dropDownButton.init(p1)
 	}
 end
 
-function dropDownButton.getColorBackgroundAnimation(value, p2)
+function dropDownButton.getColorBackgroundAnimation(value, p1)
 	if value.props.animatingPercentage == nil then
 		return 0, 0
 	end
-	local var11 = value.state.sizeX - p2.DropDownRightOptionSize
-	local dropDownRightOptionSize = p2.DropDownRightOptionSize
+	local var1 = value.state.sizeX - p1.DropDownRightOptionSize
+	local dropDownRightOptionSize = p1.DropDownRightOptionSize
 	
 	if value.props.animatingDecline then
-		var11 -= p2.DropDownRightOptionSize
+		var1 -= p1.DropDownRightOptionSize
 	end
-	local var12 = value.state.sizeX - p2.DropDownRightOptionSize
-	dropDownRightOptionSize += var12 * value.props.animatingPercentage
-	var11 -= var12 * value.props.animatingPercentage * 0.5
+	local var2 = value.state.sizeX - p1.DropDownRightOptionSize
+	dropDownRightOptionSize += var2 * value.props.animatingPercentage
+	var1 -= var2 * value.props.animatingPercentage * 0.5
 	
-	if value.state.sizeX < var11 + dropDownRightOptionSize then
-		var11 -= var11 + dropDownRightOptionSize - value.state.sizeX
+	if value.state.sizeX < var1 + dropDownRightOptionSize then
+		var1 -= var1 + dropDownRightOptionSize - value.state.sizeX
 	end
-	return var11, dropDownRightOptionSize
+	return var1, dropDownRightOptionSize
 end
 
-function dropDownButton.render(p3)
+function dropDownButton.render(p1)
 	-- upvalues: withLayoutValues (ref), withStyle (ref), colors (ref), fFlagAllowDisplayingFoundationIconsForDropdownModule (ref), iconName (ref), roactModule (ref), foundationModule (ref), iconVariant (ref), iconSize (ref), imageSetLabel (ref), fFlagEnableMobilePlayerListOnConsole (ref), iconButtonModule (ref), images (ref)
-	return withLayoutValues(function(p4)
-		-- upvalues: withStyle (copy), p3 (ref), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
-		return withStyle(function(p5)
-			-- upvalues: p4 (write), p3 (copy), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
-			p4 = p3.props.layoutValues
+	return withLayoutValues(function(p2)
+		-- upvalues: withStyle (copy), p1 (ref), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
+		return withStyle(function(p3)
+			-- upvalues: p2 (write), p1 (copy), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
+			p2 = p1.props.layoutValues
 			local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
 			
-			if p3.state.isPressed then
-				t = p5.Theme.BackgroundOnPress
-			elseif p3.state.isHovered then
-				t = p5.Theme.BackgroundOnHover
+			if p1.state.isPressed then
+				t = p3.Theme.BackgroundOnPress
+			elseif p1.state.isHovered then
+				t = p3.Theme.BackgroundOnHover
 			end
-			local var14 = if p3.props.lastButton then "rbxasset://textures/ui/BottomRoundedRect8px.png" else ""
-			local var15 = if p3.props.onActivated == nil then p3.props.animatingAccept else true
-			local var16 = if p3.props.onDecline == nil then p3.props.animatingDecline else true
-			local var17 = if p3.props.onDecline == nil then if p3.props.animatingPercentage == nil then p3.props.forceShowOptions else true else true
-			local var18, var19 = p3:getColorBackgroundAnimation(p4)
+			local var1 = if p1.props.lastButton then "rbxasset://textures/ui/BottomRoundedRect8px.png" else ""
+			local var2 = if p1.props.onActivated == nil then p1.props.animatingAccept else true
+			local var3 = if p1.props.onDecline == nil then p1.props.animatingDecline else true
+			local var4 = if p1.props.onDecline == nil then if p1.props.animatingPercentage == nil then p1.props.forceShowOptions else true else true
+			local var5, var6 = p1:getColorBackgroundAnimation(p2)
 			local green = colors.Green
 			
-			if p3.props.animatingDecline then
+			if p1.props.animatingDecline then
 				green = colors.Red
-			elseif p3.props.forceShowOptions then
+			elseif p1.props.forceShowOptions then
 				green = colors.White
 			end
-			local var20 = p4.DropDownPadding * 2 + p4.DropDownIconSize
-			local var21 = p4.DropDownRightOptionSize * 2
+			local var7 = p2.DropDownPadding * 2 + p2.DropDownIconSize
+			local var8 = p2.DropDownRightOptionSize * 2
 			
-			if var17 then
-				var20 += var21
+			if var4 then
+				var7 += var8
 			end
 			local _ = nil
-			local icon = p3.props.icon
+			local icon = p1.props.icon
 			
 			return roactModule.createElement("ImageButton", {
-				LayoutOrder = p3.props.layoutOrder,
-				Image = var14,
+				LayoutOrder = p1.props.layoutOrder,
+				Image = var1,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(8, 8, 24, 16),
 				SliceScale = 0.5,
-				ImageTransparency = if p3.props.lastButton then p3.props.buttonTransparency else 1,
+				ImageTransparency = if p1.props.lastButton then p1.props.buttonTransparency else 1,
 				ImageColor3 = Color3.fromRGB(0, 0, 0),
-				Size = UDim2.new(1, 0, 0, p4.DropDownButtonSizeY),
-				BackgroundTransparency = if p3.props.lastButton then 1 else p3.props.buttonTransparency,
+				Size = UDim2.new(1, 0, 0, p2.DropDownButtonSizeY),
+				BackgroundTransparency = if p1.props.lastButton then 1 else p1.props.buttonTransparency,
 				BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 				AutoButtonColor = false,
 				BorderSizePixel = 0,
-				Selectable = not var17,
-				[roactModule.Event.Activated] = if not var17 then p3.props.onActivated else nil,
+				Selectable = not var4,
+				[roactModule.Event.Activated] = if not var4 then p1.props.onActivated else nil,
 				[roactModule.Event.MouseEnter] = function()
-					-- upvalues: var17 (ref), p3 (copy)
-					if not var17 then
-						p3:setState({ isHovered = true })
+					-- upvalues: var4 (ref), p1 (copy)
+					if not var4 then
+						p1:setState({ isHovered = true })
 					end
 				end,
 				[roactModule.Event.MouseLeave] = function()
-					-- upvalues: p3 (copy)
-					p3:setState({ isHovered = false, isPressed = false })
+					-- upvalues: p1 (copy)
+					p1:setState({ isHovered = false, isPressed = false })
 				end,
-				[roactModule.Change.AbsoluteSize] = function(p6)
-					-- upvalues: p3 (copy)
-					p3:setState({ sizeX = p6.AbsoluteSize.X })
+				[roactModule.Change.AbsoluteSize] = function(p4)
+					-- upvalues: p1 (copy)
+					p1:setState({ sizeX = p4.AbsoluteSize.X })
 				end,
-				[roactModule.Change.AbsolutePosition] = function(p7)
-					-- upvalues: p3 (copy)
-					p3:setState({
-						absolutePosX = p7.AbsolutePosition.X,
-						absolutePosY = p7.AbsolutePosition.Y
+				[roactModule.Change.AbsolutePosition] = function(p4)
+					-- upvalues: p1 (copy)
+					p1:setState({
+						absolutePosX = p4.AbsolutePosition.X,
+						absolutePosY = p4.AbsolutePosition.Y
 					})
 				end,
 				[roactModule.Event.MouseButton1Down] = function()
-					-- upvalues: var17 (ref), p3 (copy)
-					if not var17 then
-						p3:setState({ isPressed = true })
+					-- upvalues: var4 (ref), p1 (copy)
+					if not var4 then
+						p1:setState({ isPressed = true })
 					end
 				end,
 				[roactModule.Event.MouseButton1Up] = function()
-					-- upvalues: p3 (copy)
-					p3:setState({ isPressed = false })
+					-- upvalues: p1 (copy)
+					p1:setState({ isPressed = false })
 				end
 			}, {
 				ColorBackground = roactModule.createElement("ImageLabel", {
 					ZIndex = 1,
 					SliceScale = 0.5,
 					BorderSizePixel = 0,
-					Visible = p3.props.animatingPercentage ~= nil and p3.props.contentVisible,
-					Size = UDim2.new(0, var19, 1, 0),
-					Position = UDim2.fromOffset(var18, 0),
-					Image = var14,
+					Visible = p1.props.animatingPercentage ~= nil and p1.props.contentVisible,
+					Size = UDim2.new(0, var6, 1, 0),
+					Position = UDim2.fromOffset(var5, 0),
+					Image = var1,
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(8, 8, 24, 16),
-					ImageTransparency = if p3.props.lastButton then p4.IconButtonBackgroundTransparency else 1,
+					ImageTransparency = if p1.props.lastButton then p2.IconButtonBackgroundTransparency else 1,
 					ImageColor3 = green,
-					BackgroundTransparency = if p3.props.lastButton then 1 else p4.IconButtonBackgroundTransparency,
+					BackgroundTransparency = if p1.props.lastButton then 1 else p2.IconButtonBackgroundTransparency,
 					BackgroundColor3 = green
 				}),
 				HoverBackground = roactModule.createElement("ImageLabel", {
@@ -177,34 +177,34 @@ function dropDownButton.render(p3)
 					SliceScale = 0.5,
 					BorderSizePixel = 0,
 					Size = UDim2.fromScale(1, 1),
-					Visible = p3.props.contentVisible,
-					Image = var14,
+					Visible = p1.props.contentVisible,
+					Image = var1,
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(8, 8, 24, 16),
-					ImageTransparency = if p3.props.lastButton then t.Transparency else 1,
+					ImageTransparency = if p1.props.lastButton then t.Transparency else 1,
 					ImageColor3 = t.Color,
-					BackgroundTransparency = if p3.props.lastButton then 1 else t.Transparency,
+					BackgroundTransparency = if p1.props.lastButton then 1 else t.Transparency,
 					BackgroundColor3 = t.Color
 				}, {
-					InitalPadding = roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, p4.DropDownPadding) }),
+					InitalPadding = roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, p2.DropDownPadding) }),
 					ListLayout = roactModule.createElement("UIListLayout", {
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Horizontal,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
-						Padding = UDim.new(0, p4.DropDownPadding)
+						Padding = UDim.new(0, p2.DropDownPadding)
 					}),
 					Icon = if fFlagAllowDisplayingFoundationIconsForDropdownModule and iconName[icon] ~= nil then roactModule.createElement("Frame", {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
-						Size = UDim2.new(0, p4.DropDownIconSize, 0, p4.DropDownIconSize)
+						Size = UDim2.new(0, p2.DropDownIconSize, 0, p2.DropDownIconSize)
 					}, {
 						Icon = roactModule.createElement(foundationModule.Icon, {
 							name = iconName[icon],
 							variant = iconVariant.Regular,
 							size = iconSize.Large,
 							style = {
-								Color3 = p5.Theme.IconEmphasis.Color,
-								Transparency = p5.Theme.IconEmphasis.Transparency
+								Color3 = p3.Theme.IconEmphasis.Color,
+								Transparency = p3.Theme.IconEmphasis.Transparency
 							},
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -212,75 +212,75 @@ function dropDownButton.render(p3)
 					}) else roactModule.createElement(imageSetLabel, {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
-						Size = UDim2.new(0, p4.DropDownIconSize, 0, p4.DropDownIconSize),
-						ImageColor3 = p5.Theme.IconEmphasis.Color,
-						Image = p3.props.icon
+						Size = UDim2.new(0, p2.DropDownIconSize, 0, p2.DropDownIconSize),
+						ImageColor3 = p3.Theme.IconEmphasis.Color,
+						Image = p1.props.icon
 					}),
 					Text = roactModule.createElement("TextLabel", {
 						LayoutOrder = 2,
 						BackgroundTransparency = 1,
-						Size = UDim2.new(1, -var20, 1, 0),
-						Text = p3.props.text,
-						Font = p5.Font.Header2.Font,
-						TextSize = if fFlagEnableMobilePlayerListOnConsole then p4.DropDownButtonTextSize else p5.Font.BaseSize * p5.Font.Header2.RelativeSize,
-						TextColor3 = p5.Theme.TextEmphasis.Color,
-						TextTransparency = p5.Theme.TextEmphasis.Transparency,
+						Size = UDim2.new(1, -var7, 1, 0),
+						Text = p1.props.text,
+						Font = p3.Font.Header2.Font,
+						TextSize = if fFlagEnableMobilePlayerListOnConsole then p2.DropDownButtonTextSize else p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
+						TextColor3 = p3.Theme.TextEmphasis.Color,
+						TextTransparency = p3.Theme.TextEmphasis.Transparency,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextTruncate = Enum.TextTruncate.AtEnd
 					}),
 					ButtonContainer = roactModule.createElement("Frame", {
 						LayoutOrder = 3,
 						BackgroundTransparency = 1,
-						Visible = var17,
-						Size = UDim2.new(0, var21, 1, 0)
+						Visible = var4,
+						Size = UDim2.new(0, var8, 1, 0)
 					}, {
-						ConfirmButton = var15 and roactModule.createElement(iconButtonModule, {
+						ConfirmButton = var2 and roactModule.createElement(iconButtonModule, {
 							size = UDim2.fromScale(0.5, 1),
 							position = UDim2.fromScale(0.5, 0),
-							backgroundColor = if p3.props.onDecline then colors.Green else colors.White,
+							backgroundColor = if p1.props.onDecline then colors.Green else colors.White,
 							icon = images["icons/actions/accept"],
-							showBackground = p3.props.animatingPercentage == nil,
-							onActivated = p3.props.onActivated
+							showBackground = p1.props.animatingPercentage == nil,
+							onActivated = p1.props.onActivated
 						}) or nil,
-						DeclineButton = var16 and (roactModule.createElement(iconButtonModule, {
+						DeclineButton = var3 and (roactModule.createElement(iconButtonModule, {
 							size = UDim2.fromScale(0.5, 1),
 							position = UDim2.new(0, 0, 0, 0),
 							backgroundColor = colors.Red,
 							icon = images["icons/actions/reject"],
-							showBackground = p3.props.animatingPercentage == nil,
-							onActivated = p3.props.onDecline
+							showBackground = p1.props.animatingPercentage == nil,
+							onActivated = p1.props.onDecline
 						}) or nil)
 					})
 				}),
 				DismissInputHandler = roactModule.createElement("ImageButton", {
 					Image = "",
 					BackgroundTransparency = 1,
-					Size = UDim2.fromOffset(p3.props.screenSizeX, p3.props.screenSizeY),
-					Position = UDim2.fromOffset(-p3.state.absolutePosX, -p3.state.absolutePosY),
-					Visible = p3.props.onDismiss ~= nil and p3.props.contentVisible,
-					[roactModule.Event.Activated] = p3.props.onDismiss
+					Size = UDim2.fromOffset(p1.props.screenSizeX, p1.props.screenSizeY),
+					Position = UDim2.fromOffset(-p1.state.absolutePosX, -p1.state.absolutePosY),
+					Visible = p1.props.onDismiss ~= nil and p1.props.contentVisible,
+					[roactModule.Event.Activated] = p1.props.onDismiss
 				}),
-				Divider = not p3.props.lastButton and roactModule.createElement("Frame", {
+				Divider = not p1.props.lastButton and roactModule.createElement("Frame", {
 					ZIndex = 3,
 					BorderSizePixel = 0,
-					Visible = p3.props.contentVisible,
+					Visible = p1.props.contentVisible,
 					Size = UDim2.new(1, 0, 0, 1),
 					Position = UDim2.fromScale(0, 1),
 					AnchorPoint = Vector2.new(0, 1),
-					BackgroundTransparency = p5.Theme.Divider.Transparency,
-					BackgroundColor3 = p5.Theme.Divider.Color
+					BackgroundTransparency = p3.Theme.Divider.Transparency,
+					BackgroundColor3 = p3.Theme.Divider.Color
 				})
 			})
 		end)
 	end)
 end
 
-return roactRoduxModule.connect(function(p9)
+return roactRoduxModule.connect(function(p1)
 	return {
-		screenSizeX = p9.screenSize.X,
-		screenSizeY = p9.screenSize.Y
+		screenSizeX = p1.screenSize.X,
+		screenSizeY = p1.screenSize.Y
 	}
-end, nil)(function(p8)
+end, nil)(function(p1)
 	-- upvalues: useLayoutValues (ref), roactModule (ref), dropDownButton (ref), cryoModule (ref)
-	return roactModule.createElement(dropDownButton, cryoModule.Dictionary.join(p8, { layoutValues = useLayoutValues() }))
+	return roactModule.createElement(dropDownButton, cryoModule.Dictionary.join(p1, { layoutValues = useLayoutValues() }))
 end)

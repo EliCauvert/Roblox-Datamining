@@ -18,68 +18,68 @@ local fFlagEnableChatDetailsOpenChatModule = require(appChat.Flags.FFlagEnableCh
 local participantDialogScreenDeprecated = reactModule.PureComponent:extend("ParticipantDialogScreenDeprecated")
 participantDialogScreenDeprecated.defaultProps = { navigation = nil }
 
-function participantDialogScreenDeprecated.init(p0)
+function participantDialogScreenDeprecated.init(p1)
 	-- upvalues: loggerModule (ref), genericDialogTypeModule (ref), enumScreensModule (ref), roactChatAnalyticsModule (ref), enteredChatFromEntryPoint (ref), chatEntryPointNames (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), fFlagDisableBlockAndReport (ref)
 	function p0.onDismiss()
-		-- upvalues: p0 (ref)
-		p0.props.navigation.goBack()
+		-- upvalues: p1 (ref)
+		p1.props.navigation.goBack()
 	end
 	
-	function p0.openRemoveUserDialog(p1, p2)
-		-- upvalues: loggerModule (copy), p0 (ref), genericDialogTypeModule (copy)
-		loggerModule:info("User activated removeFromGroup | userId: {}, conversationId: {}", p1, p2)
-		p0.props.navigation.replace(genericDialogTypeModule.RemoveUserDialog, { conversationId = p2, participantId = p1 })
+	function p0.openRemoveUserDialog(p2, p3)
+		-- upvalues: loggerModule (copy), p1 (ref), genericDialogTypeModule (copy)
+		loggerModule:info("User activated removeFromGroup | userId: {}, conversationId: {}", p2, p3)
+		p1.props.navigation.replace(genericDialogTypeModule.RemoveUserDialog, { conversationId = p3, participantId = p2 })
 	end
 	
-	function p0.openViewProfile(p3)
-		-- upvalues: p0 (ref), enumScreensModule (copy), loggerModule (copy), roactChatAnalyticsModule (copy)
-		local viewUserProfile = p0.props.navigation.getScreenProps("navigateToLuaAppPages", {})[enumScreensModule.ViewUserProfile]
+	function p0.openViewProfile(p2)
+		-- upvalues: p1 (ref), enumScreensModule (copy), loggerModule (copy), roactChatAnalyticsModule (copy)
+		local viewUserProfile = p1.props.navigation.getScreenProps("navigateToLuaAppPages", {})[enumScreensModule.ViewUserProfile]
 		
 		if viewUserProfile then
 			loggerModule:info("Navigate To UserProfile from {screen}")
-			p0.props.analytics:navigate(roactChatAnalyticsModule.NavigationEvents.ChatDetailsProfile)
-			viewUserProfile(p3, {})
+			p1.props.analytics:navigate(roactChatAnalyticsModule.NavigationEvents.ChatDetailsProfile)
+			viewUserProfile(p2, {})
 			
 			return
 		end
 		loggerModule:warning("UserProfile page was not set in navigateToLuaAppPages screenProps")
 	end
 	
-	function p0.openChat(p4)
-		-- upvalues: loggerModule (copy), p0 (ref), enteredChatFromEntryPoint (copy), chatEntryPointNames (copy), createConversationModule (copy), enumScreensModule (copy), parseCreateConversationErrorsModule (copy)
-		loggerModule:info("User activated openChat | userId: {}", p4)
-		p0.props.dispatch(enteredChatFromEntryPoint(chatEntryPointNames.ChatDetailsParticipantDialog))
-		p0.props.navigation.goBack()
-		p0.props.dispatch(createConversationModule("one_to_one", { tostring(p4) })):andThen(function(p6)
-			-- upvalues: p0 (copy), enumScreensModule (copy)
-			p0.props.navigation.navigate(enumScreensModule.ChatConversation, { conversationId = p6.id })
-		end):catch(function(p5)
-			-- upvalues: loggerModule (copy), p4 (ref), parseCreateConversationErrorsModule (copy), p0 (copy), enumScreensModule (copy)
-			loggerModule:warning("Error creating 1:1 conversation for userId {}: {}", p4, tostring(p5))
-			p0.props.navigation.navigate(enumScreensModule.RoactChatToast, {
+	function p0.openChat(p2)
+		-- upvalues: loggerModule (copy), p1 (ref), enteredChatFromEntryPoint (copy), chatEntryPointNames (copy), createConversationModule (copy), enumScreensModule (copy), parseCreateConversationErrorsModule (copy)
+		loggerModule:info("User activated openChat | userId: {}", p2)
+		p1.props.dispatch(enteredChatFromEntryPoint(chatEntryPointNames.ChatDetailsParticipantDialog))
+		p1.props.navigation.goBack()
+		p1.props.dispatch(createConversationModule("one_to_one", { tostring(p2) })):andThen(function(p3)
+			-- upvalues: p1 (copy), enumScreensModule (copy)
+			p1.props.navigation.navigate(enumScreensModule.ChatConversation, { conversationId = p3.id })
+		end):catch(function(p3)
+			-- upvalues: loggerModule (copy), p2 (ref), parseCreateConversationErrorsModule (copy), p1 (copy), enumScreensModule (copy)
+			loggerModule:warning("Error creating 1:1 conversation for userId {}: {}", p2, tostring(p3))
+			p1.props.navigation.navigate(enumScreensModule.RoactChatToast, {
 				toastProps = {
 					toastContent = {
-						toastTitle = if parseCreateConversationErrorsModule(p5) == "participant_chat_disabled" then "Feature.Chat.Message.PartyUnavailableWithUser" else "Feature.Toast.NetworkingError.SomethingIsWrong"
+						toastTitle = if parseCreateConversationErrorsModule(p3) == "participant_chat_disabled" then "Feature.Chat.Message.PartyUnavailableWithUser" else "Feature.Toast.NetworkingError.SomethingIsWrong"
 					}
 				}
 			})
 		end)
 	end
 	
-	function p0.openReportUser(p7, p8)
-		-- upvalues: p0 (ref), enumScreensModule (copy)
-		p0.props.navigation.replace(enumScreensModule.AppChatReportAbuse, { participantId = p7, conversationId = p8 })
+	function p0.openReportUser(p2, p3)
+		-- upvalues: p1 (ref), enumScreensModule (copy)
+		p1.props.navigation.replace(enumScreensModule.AppChatReportAbuse, { participantId = p2, conversationId = p3 })
 	end
 	
-	function p0.openBlockingModal(p9, p10)
-		-- upvalues: p0 (ref), enumScreensModule (copy), fFlagDisableBlockAndReport (copy)
-		p0.props.navigation.replace(enumScreensModule.BlockingModal, {
+	function p0.openBlockingModal(p2, p3)
+		-- upvalues: p1 (ref), enumScreensModule (copy), fFlagDisableBlockAndReport (copy)
+		p1.props.navigation.replace(enumScreensModule.BlockingModal, {
 			navProps = {
-				userId = p9,
+				userId = p2,
 				openReportUser = function()
-					-- upvalues: p0 (copy), enumScreensModule (copy), p9 (ref), p10 (ref)
-					p0.props.navigation.pop()
-					p0.props.navigation.navigate(enumScreensModule.AppChatReportAbuse, { participantId = p9, conversationId = p10 })
+					-- upvalues: p1 (copy), enumScreensModule (copy), p2 (ref), p3 (ref)
+					p1.props.navigation.pop()
+					p1.props.navigation.navigate(enumScreensModule.AppChatReportAbuse, { participantId = p2, conversationId = p3 })
 				end,
 				disableReportOption = fFlagDisableBlockAndReport
 			}
@@ -87,9 +87,9 @@ function participantDialogScreenDeprecated.init(p0)
 	end
 end
 
-function participantDialogScreenDeprecated.render(p11)
+function participantDialogScreenDeprecated.render(p1)
 	-- upvalues: loggerModule (ref), reactModule (ref), participantDialogContainerDeprecatedModule (ref), fFlagEnableChatDetailsOpenChatModule (ref)
-	local navigation = p11.props.navigation
+	local navigation = p1.props.navigation
 	assert(type(navigation) ~= "nil", "ParticipantDialogScreenDeprecated should be wrapped with navigation")
 	local conversationId = navigation.getParam("conversationId", nil)
 	local participantId = navigation.getParam("participantId", nil)
@@ -106,12 +106,12 @@ function participantDialogScreenDeprecated.render(p11)
 		participantId = participantId,
 		showRemoveUserButton = showRemoveUserButton,
 		isWideMode = wideMode,
-		onDismiss = p11.onDismiss,
-		openRemoveUserDialog = p11.openRemoveUserDialog,
-		openReportUser = p11.openReportUser,
-		openViewProfile = p11.openViewProfile,
-		openChat = if fFlagEnableChatDetailsOpenChatModule then p11.openChat else nil,
-		openBlockingModal = p11.openBlockingModal
+		onDismiss = p1.onDismiss,
+		openRemoveUserDialog = p1.openRemoveUserDialog,
+		openReportUser = p1.openReportUser,
+		openViewProfile = p1.openViewProfile,
+		openChat = if fFlagEnableChatDetailsOpenChatModule then p1.openChat else nil,
+		openBlockingModal = p1.openBlockingModal
 	})
 end
 
@@ -120,8 +120,8 @@ function participantDialogScreenDeprecated.didMount(_)
 	loggerModule:info("{screen} mounted")
 end
 
-return roactRoduxModule.connect(nil, function(p13)
-	return { dispatch = p13 }
-end)(connectAnalyticsModule(function(p12)
-	return { analytics = p12 }
+return roactRoduxModule.connect(nil, function(p1)
+	return { dispatch = p1 }
+end)(connectAnalyticsModule(function(p1)
+	return { analytics = p1 }
 end)(participantDialogScreenDeprecated))

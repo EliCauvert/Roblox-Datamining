@@ -23,17 +23,17 @@ warningAlertView.defaultProps = {
 
 local function No_Op() end
 
-function warningAlertView.render(p0)
+function warningAlertView.render(p1)
 	-- upvalues: buttonType (ref), No_Op (ref), roact (ref), alertViewBuilderModule (ref)
 	local failureTitleText, failureBodyText, list
-	local props = p0.props
+	local props = p1.props
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	
 	if props.displayFailed then
-		failureTitleText = p0.props.failureTitleText
-		failureBodyText = p0.props.failureBodyText
+		failureTitleText = p1.props.failureTitleText
+		failureBodyText = p1.props.failureBodyText
 		list = {
 			{
 				buttonType = buttonType.Alert,
@@ -41,8 +41,8 @@ function warningAlertView.render(p0)
 			}
 		}
 	else
-		failureTitleText = p0.props.titleText
-		failureBodyText = p0.props.bodyText
+		failureTitleText = p1.props.titleText
+		failureBodyText = p1.props.bodyText
 		list = {
 			{
 				buttonType = buttonType.Secondary,
@@ -60,9 +60,9 @@ function warningAlertView.render(p0)
 	return roact.createElement(alertViewBuilderModule, {
 		title = failureTitleText,
 		bodyText = failureBodyText,
-		screenSize = p0.props.screenSize,
-		width = p0.props.width,
-		onModalClose = p0.props.onModalClose,
+		screenSize = p1.props.screenSize,
+		width = p1.props.width,
+		onModalClose = p1.props.onModalClose,
 		buttons = list,
 		soakAreaColor3 = props.soakAreaColor3,
 		soakAreaTransparency = props.soakAreaTransparency

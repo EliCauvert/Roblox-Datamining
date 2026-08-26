@@ -11,28 +11,28 @@ return {
 	getIsVisible = function(_)
 		return true
 	end,
-	getMenuItems = function(p0, p1)
+	getMenuItems = function(p1, p2)
 		-- upvalues: constantsModule (ref), cryoModule (ref)
-		return cryoModule.List.map(cryoModule.Dictionary.values(if p0.methodOfAbuse == constantsModule.AbuseMethods.VoiceChat then constantsModule.PlayerVoiceAbuseTypes else constantsModule.PlayerAbuseTypes), function(p2)
-			-- upvalues: p1 (ref)
-			return { label = p1[p2], identifier = p2 }
+		return cryoModule.List.map(cryoModule.Dictionary.values(if p1.methodOfAbuse == constantsModule.AbuseMethods.VoiceChat then constantsModule.PlayerVoiceAbuseTypes else constantsModule.PlayerAbuseTypes), function(p3)
+			-- upvalues: p2 (ref)
+			return { label = p2[p3], identifier = p3 }
 		end)
 	end,
-	getSelectedValue = function(p3)
-		return p3.abuseReason
+	getSelectedValue = function(p1)
+		return p1.abuseReason
 	end,
-	onUpdateSelectedOption = function(p4, _, p5, p6)
+	onUpdateSelectedOption = function(p1, _, p2, p3)
 		-- upvalues: constantsModule (ref)
-		p6.analyticsDispatch({
+		p3.analyticsDispatch({
 			type = constantsModule.AnalyticsActions.IncrementReasonChanged
 		})
-		p6.analyticsDispatch({
+		p3.analyticsDispatch({
 			type = constantsModule.AnalyticsActions.SetReasonSelection,
-			selection = p4.identifier
+			selection = p1.identifier
 		})
-		p5({
+		p2({
 			type = constantsModule.PlayerMenuActions.UpdateAbuseReason,
-			abuseReason = p4.identifier
+			abuseReason = p1.identifier
 		})
 	end
 }

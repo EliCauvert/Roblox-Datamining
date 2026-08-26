@@ -4,16 +4,16 @@ local expChat = script:FindFirstAncestor("ExpChat")
 local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
 local initializePresetChat = require(expChat.Parent.ExpChatShared).Logger:new("ExpChat/PresetChat/initializePresetChat")
 
-local function _(value, p0)
+local function _(value, p1)
 	-- upvalues: textChatService (ref), initializePresetChat (ref)
 	task.spawn(function()
-		-- upvalues: textChatService (copy), p0 (ref), initializePresetChat (copy), value (ref)
+		-- upvalues: textChatService (copy), p1 (ref), initializePresetChat (copy), value (ref)
 		local ok, status = pcall(function()
 			-- upvalues: textChatService (copy)
 			return textChatService:GetPresetsAsync()
 		end)
 		
-		if p0 then
+		if p1 then
 			if not ok then
 				initializePresetChat:warning("GetPresetsAsync failed: {}", tostring(status))
 			end

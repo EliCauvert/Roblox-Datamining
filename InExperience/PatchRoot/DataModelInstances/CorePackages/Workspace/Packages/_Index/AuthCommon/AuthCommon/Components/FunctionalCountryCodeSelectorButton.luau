@@ -11,18 +11,18 @@ local getFFlagCountryCodeBoldPrefixEnabledModule = require(authCommon.Flags.GetF
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local _ = require(authCommon.Common.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFFlagCountryCodeBoldPrefixEnabledModule (ref), text (ref), appFonts (ref), useStyle (ref), roactModule (ref), white (ref), gray2 (ref)
-	local localizedName = p0.CountryCode.localizedName or ""
-	local text_1 = "+" .. (p0.CountryCode.prefix or "")
-	local textSize = p0.ListButtonProps.TextSize
-	local boldPrefixEnabled = getFFlagCountryCodeBoldPrefixEnabledModule() and p0.BoldPrefixEnabled
+	local localizedName = p1.CountryCode.localizedName or ""
+	local text_1 = "+" .. (p1.CountryCode.prefix or "")
+	local textSize = p1.ListButtonProps.TextSize
+	local boldPrefixEnabled = getFFlagCountryCodeBoldPrefixEnabledModule() and p1.BoldPrefixEnabled
 	local textWidth = text.GetTextWidth(text_1, appFonts.default:getDefault(), textSize)
 	local formattedText = string.format("%s (%s)", localizedName, text_1)
-	local size = p0.Size
-	local layoutOrder = p0.LayoutOrder
-	local selectionCallback = p0.ListButtonProps.SelectionCallback or function(_) end
-	local var9 = useStyle()
+	local size = p1.Size
+	local layoutOrder = p1.LayoutOrder
+	local selectionCallback = p1.ListButtonProps.SelectionCallback or function(_) end
+	local var1 = useStyle()
 	
 	return roactModule.createElement("TextButton", {
 		Size = size,
@@ -30,16 +30,16 @@ return function(p0)
 		LayoutOrder = layoutOrder,
 		Text = "",
 		[roactModule.Event.Activated] = function()
-			-- upvalues: selectionCallback (ref), p0 (ref)
-			selectionCallback(p0.CountryCode)
+			-- upvalues: selectionCallback (ref), p1 (ref)
+			selectionCallback(p1.CountryCode)
 		end
 	}, if boldPrefixEnabled then {
 		FullText = roactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			Text = formattedText,
-			Font = var9.Tokens.Typography.BodySmall.Font,
-			TextColor3 = var9.Tokens.Color.Shift.Shift_400.Color3,
+			Font = var1.Tokens.Typography.BodySmall.Font,
+			TextColor3 = var1.Tokens.Color.Shift.Shift_400.Color3,
 			TextSize = textSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTruncate = Enum.TextTruncate.AtEnd

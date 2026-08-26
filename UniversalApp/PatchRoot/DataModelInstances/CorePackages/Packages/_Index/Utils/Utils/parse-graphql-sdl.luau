@@ -15,30 +15,30 @@ local dedentBlockStringValue = commentsModule.dedentBlockStringValue
 local getLeadingCommentBlock = commentsModule.getLeadingCommentBlock
 local _ = require(script.Parent.Interfaces)
 local string = luauPolyfillModule.String
-local var4 = nil
-local var5 = nil
+local var1 = nil
+local var2 = nil
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: string (ref)
-	return string.trim(string.gsub(p0, "(#[^*]*)", ""))
+	return string.trim(string.gsub(p1, "(#[^*]*)", ""))
 end
 
 function t.parseGraphQLSDL(p1, p2, p3)
-	-- upvalues: boolean (ref), string (ref), var4 (write), parse (ref), print (ref), source (ref), kind (ref)
-	local var6 = if p3 ~= nil then {} else p3
+	-- upvalues: boolean (ref), string (ref), var1 (write), parse (ref), print (ref), source (ref), kind (ref)
+	local var3 = if p3 ~= nil then {} else p3
 	local t = nil
 	local ok, status = pcall(function()
-		-- upvalues: boolean (copy), var6 (ref), string (copy), p2 (ref), t (write), var4 (copy), parse (copy), print (copy), source (copy), p1 (ref)
-		if boolean.toJSBoolean(var6.commentDescriptions) and string.includes(p2, "#") then
-			t = var4(p2, var6)
+		-- upvalues: boolean (copy), var3 (ref), string (copy), p2 (ref), t (write), var1 (copy), parse (copy), print (copy), source (copy), p1 (ref)
+		if boolean.toJSBoolean(var3.commentDescriptions) and string.includes(p2, "#") then
+			t = var1(p2, var3)
 			
-			if boolean.toJSBoolean(var6.noLocation) then
-				t = parse(print(t), var6)
+			if boolean.toJSBoolean(var3.noLocation) then
+				t = parse(print(t), var3)
 				
 				return
 			end
 		else
-			t = parse(source.new(p2, p1), var6)
+			t = parse(source.new(p2, p1), var3)
 		end
 	end)
 	
@@ -52,27 +52,27 @@ function t.parseGraphQLSDL(p1, p2, p3)
 	return { location = p1, document = t }
 end
 
-function t.transformCommentsToDescriptions(p4, p5)
-	-- upvalues: parse (ref), object (ref), visit (ref), boolean (ref), var5 (write), getLeadingCommentBlock (ref), dedentBlockStringValue (ref), string (ref), kind (ref)
-	return visit(parse(p4, object.assign({}, if p5 ~= nil then {} else p5, { noLocation = false })), {
-		leave = function(_, p6)
-			-- upvalues: boolean (copy), var5 (copy), getLeadingCommentBlock (copy), dedentBlockStringValue (copy), string (copy), object (copy), kind (copy)
-			if boolean.toJSBoolean(var5(p6)) then
-				local var8 = getLeadingCommentBlock(p6)
+function t.transformCommentsToDescriptions(p1, p2)
+	-- upvalues: parse (ref), object (ref), visit (ref), boolean (ref), var2 (write), getLeadingCommentBlock (ref), dedentBlockStringValue (ref), string (ref), kind (ref)
+	return visit(parse(p1, object.assign({}, if p2 ~= nil then {} else p2, { noLocation = false })), {
+		leave = function(_, p3)
+			-- upvalues: boolean (copy), var2 (copy), getLeadingCommentBlock (copy), dedentBlockStringValue (copy), string (copy), object (copy), kind (copy)
+			if boolean.toJSBoolean(var2(p3)) then
+				local var3 = getLeadingCommentBlock(p3)
 				
-				if var8 == nil then return end
-				local var9 = dedentBlockStringValue("\n" .. tostring(var8))
+				if var3 == nil then return end
+				local var4 = dedentBlockStringValue("\n" .. tostring(var3))
 				
-				return if boolean.toJSBoolean(p6.description) then object.assign({}, p6, {
-					description = object.assign({}, p6.description, {
+				return if boolean.toJSBoolean(p3.description) then object.assign({}, p3, {
+					description = object.assign({}, p3.description, {
 						block = true,
-						value = p6.description.value .. "\n" .. var9
+						value = p3.description.value .. "\n" .. var9
 					})
-				}) else object.assign({}, p6, {
+				}) else object.assign({}, p3, {
 					description = {
 						kind = kind.STRING,
-						value = var9,
-						block = string.includes(var9, "\n")
+						value = var4,
+						block = string.includes(var4, "\n")
 					}
 				})
 			end
@@ -80,9 +80,9 @@ function t.transformCommentsToDescriptions(p4, p5)
 	})
 end
 
-function t.isDescribable(p7)
+function t.isDescribable(p1)
 	-- upvalues: isTypeSystemDefinitionNode (ref), kind (ref)
-	return isTypeSystemDefinitionNode(p7) or (if p7.kind ~= kind.FIELD_DEFINITION then if p7.kind ~= kind.INPUT_VALUE_DEFINITION then p7.kind == kind.ENUM_VALUE_DEFINITION else true else true)
+	return isTypeSystemDefinitionNode(p1) or (if p1.kind ~= kind.FIELD_DEFINITION then if p1.kind ~= kind.INPUT_VALUE_DEFINITION then p1.kind == kind.ENUM_VALUE_DEFINITION else true else true)
 end
 
 return t

@@ -2,7 +2,7 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal(nil)
+	local var1, var2 = createSignal(nil)
 	
-	return { getSelectedCapture = var0, setSelectedCapture = var1 }
+	return { getSelectedCapture = var1, setSelectedCapture = var2 }
 end

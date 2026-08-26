@@ -27,14 +27,14 @@ return {
 	storyRoot = commercePurchaseApp,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), appStyleProvider (ref), t (ref), roactRoduxModule (ref), createStore (ref), designTokenProvider (ref)
-		return function(p1)
-			-- upvalues: reactModule (copy), localizationProvider (copy), localization (copy), appStyleProvider (copy), t (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), p0 (ref)
+		return function(p2)
+			-- upvalues: reactModule (copy), localizationProvider (copy), localization (copy), appStyleProvider (copy), t (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), p1 (ref)
 			return reactModule.createElement(localizationProvider, { localization = localization.new("en-us") }, {
-				AppStyleProvider = reactModule.createElement(appStyleProvider, { style = if p1 then t[p1.theme] else t.Default }, {
+				AppStyleProvider = reactModule.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, {
 					StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
-						DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = reactModule.createElement(p0, p1) })
+						DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = reactModule.createElement(p1, p2) })
 					})
 				})
 			})

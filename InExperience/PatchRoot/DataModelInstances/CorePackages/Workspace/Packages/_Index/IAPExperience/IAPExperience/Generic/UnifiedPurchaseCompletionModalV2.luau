@@ -19,9 +19,9 @@ local formatTextWithParamsModule = require(parent.Utility.formatTextWithParams)
 local useFocusNavigationRefsModule = require(parent.Generic.Hooks.useFocusNavigationRefs)
 local fFlagEnableLaunchAfterPurchase = require(parent_1.SharedFlags).FFlagEnableLaunchAfterPurchase
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), useFocusNavigationRefsModule (ref), useTokens (ref), reactModule (ref), foundationModule (ref), fFlagEnableLaunchAfterPurchase (ref), loggingProtocolModule (ref), unifiedProductPurchaseCompletionModalShownCounter (ref), formatTextWithParamsModule (ref), dialog (ref), dialogSize (ref), view (ref), icon (ref), text (ref), orientation (ref), playSmall (ref), buttonVariant (ref)
-	local var5 = useLocalization({
+	local var1 = useLocalization({
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
 		PurchaseCompleteBody = "IAPExperience.PurchasePrompt.Body.PurchaseCompleted",
 		ErrorTitle = "CoreScripts.PremiumModal.Title.Error",
@@ -31,74 +31,74 @@ return function(p0)
 	})
 	local _ = nil
 	local _ = nil
-	local var6, var7 = useFocusNavigationRefsModule(p0.buttons.onClose or p0.buttons.onActivated, nil)
-	local var8 = useTokens()
-	local var9, var10 = reactModule.useState(foundationModule.Enums.IconName.CircleCheck)
-	local var11 = fFlagEnableLaunchAfterPurchase and (p0.enableLaunchAfterPurchase == true and not p0.isError)
-	local var12 = reactModule.useRef(p0.buttons.onShown)
-	var12.current = p0.buttons.onShown
+	local var2, var3 = useFocusNavigationRefsModule(p1.buttons.onClose or p1.buttons.onActivated, nil)
+	local var4 = useTokens()
+	local var5, var6 = reactModule.useState(foundationModule.Enums.IconName.CircleCheck)
+	local var7 = fFlagEnableLaunchAfterPurchase and (p1.enableLaunchAfterPurchase == true and not p1.isError)
+	local var8 = reactModule.useRef(p1.buttons.onShown)
+	var8.current = p1.buttons.onShown
 	reactModule.useEffect(function()
-		-- upvalues: loggingProtocolModule (copy), unifiedProductPurchaseCompletionModalShownCounter (copy), fFlagEnableLaunchAfterPurchase (copy), var12 (ref)
+		-- upvalues: loggingProtocolModule (copy), unifiedProductPurchaseCompletionModalShownCounter (copy), fFlagEnableLaunchAfterPurchase (copy), var8 (ref)
 		loggingProtocolModule.default:logRobloxTelemetryCounter(unifiedProductPurchaseCompletionModalShownCounter, 1, {})
 		
-		if fFlagEnableLaunchAfterPurchase and var12.current then
-			var12.current()
+		if fFlagEnableLaunchAfterPurchase and var8.current then
+			var8.current()
 		end
 	end, {})
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), var5 (ref)
-		return if p0.title then p0.title elseif p0.isError then var5.ErrorTitle else var5.PurchaseCompleteTitle
-	end, { p0.title, p0.isError })
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), var5 (ref), formatTextWithParamsModule (copy)
-		return if p0.bodyText then p0.bodyText elseif p0.isError then var5.GenericErrorBody elseif p0.isMultiItem then var5.MultiItemPurchaseCompleteBody else formatTextWithParamsModule(var5.PurchaseCompleteBody, { ITEM_NAME = p0.itemName or "" })
-	end, { p0.bodyText, p0.isError, p0.isMultiItem, p0.itemName })
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), var1 (ref)
+		return if p1.title then p1.title elseif p1.isError then var1.ErrorTitle else var1.PurchaseCompleteTitle
+	end, { p1.title, p1.isError })
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), var1 (ref), formatTextWithParamsModule (copy)
+		return if p1.bodyText then p1.bodyText elseif p1.isError then var1.GenericErrorBody elseif p1.isMultiItem then var1.MultiItemPurchaseCompleteBody else formatTextWithParamsModule(var1.PurchaseCompleteBody, { ITEM_NAME = p1.itemName or "" })
+	end, { p1.bodyText, p1.isError, p1.isMultiItem, p1.itemName })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var10 (ref), foundationModule (copy)
-		if p0.isError then
-			var10(foundationModule.Enums.IconName.TriangleExclamation)
+		-- upvalues: p1 (ref), var6 (ref), foundationModule (copy)
+		if p1.isError then
+			var6(foundationModule.Enums.IconName.TriangleExclamation)
 			
 			return
 		end
-		var10(foundationModule.Enums.IconName.CircleCheck)
-	end, { p0.isError })
+		var6(foundationModule.Enums.IconName.CircleCheck)
+	end, { p1.isError })
 	
 	return reactModule.createElement(dialog.Root, {
 		closeOnClickOutside = true,
 		disablePortal = false,
 		size = dialogSize.Medium,
-		onClose = if p0.buttons.onClose then p0.buttons.onClose else p0.buttons.onActivated,
-		ref = var6
+		onClose = if p1.buttons.onClose then p1.buttons.onClose else p1.buttons.onActivated,
+		ref = var2
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var13 }),
+		DialogTitle = reactModule.createElement(dialog.Title, { text = var9 }),
 		DialogContent = reactModule.createElement(dialog.Content, nil, {
 			Body = reactModule.createElement(view, {
 				tag = "col gap-large auto-y size-full-0 align-x-center align-y-center padding-top-small"
 			}, {
-				DialogIcon = reactModule.createElement(icon, { tag = "auto-xy", name = var9, size = var8.Size.Size_1200 }),
+				DialogIcon = reactModule.createElement(icon, { tag = "auto-xy", name = var5, size = var4.Size.Size_1200 }),
 				Message = reactModule.createElement(text, {
 					tag = "auto-xy text-body content-default text-align-x-left text-body-medium text-wrap",
-					Text = var14
+					Text = var10
 				})
 			})
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			orientation = orientation.Horizontal,
-			actions = if var11 then {
+			actions = if var7 then {
 				{
 					isDisabled = false,
 					icon = playSmall,
 					variant = buttonVariant.Emphasis,
-					onActivated = p0.buttons.onActivated,
-					ref = var7
+					onActivated = p1.buttons.onActivated,
+					ref = var3
 				}
 			} else {
 				{
 					isDisabled = false,
-					text = if p0.buttons and p0.buttons.text then p0.buttons.text else var5.OkButtonText,
+					text = if p1.buttons and p1.buttons.text then p1.buttons.text else var1.OkButtonText,
 					variant = buttonVariant.Emphasis,
-					onActivated = p0.buttons.onActivated,
-					ref = var7
+					onActivated = p1.buttons.onActivated,
+					ref = var3
 				}
 			}
 		})

@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("GraphQLServer").graphql.generatedTypes)
 
-return function(p0)
+return function(p1)
 	local currentDateTime = DateTime.now()
 	local dateTime = DateTime.fromUnixTimestamp(currentDateTime.UnixTimestamp + 86400)
 	
@@ -10,7 +10,7 @@ return function(p0)
 		universeId = "3531439676",
 		eventStatus = "active",
 		userRsvpStatus = "none",
-		id = p0,
+		id = p1,
 		host = {
 			hostType = "user",
 			hostId = "1",

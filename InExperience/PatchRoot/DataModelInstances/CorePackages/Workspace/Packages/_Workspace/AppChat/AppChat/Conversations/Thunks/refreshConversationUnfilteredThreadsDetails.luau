@@ -6,46 +6,46 @@ local appChatNetworkingModule = require(parent.AppChatNetworking)
 local _ = require(appChat.Models.ConversationChannels)
 local getOtherParticipantsModule = require(appChat.Conversations.getOtherParticipants)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getDeepValue2Module (ref), name (ref), getOtherParticipantsModule (ref), appChatNetworkingModule (ref)
-	return function(p2)
-		-- upvalues: getDeepValue2Module (copy), p0 (ref), name (copy), getOtherParticipantsModule (copy), appChatNetworkingModule (copy), p1 (ref)
-		local state = p2:getState()
-		local var6 = getDeepValue2Module(state, `ChatAppReducer.Conversations.{p0}`)
+	return function(p3)
+		-- upvalues: getDeepValue2Module (copy), p1 (ref), name (copy), getOtherParticipantsModule (copy), appChatNetworkingModule (copy), p2 (ref)
+		local state = p3:getState()
+		local var1 = getDeepValue2Module(state, `ChatAppReducer.Conversations.{p1}`)
 		
-		if not var6 then
-			name:warning(`refreshConversationUnfilteredThreadsDetails: Conversation {p0} not found`)
+		if not var1 then
+			name:warning(`refreshConversationUnfilteredThreadsDetails: Conversation {p1} not found`)
 			
 			return
 		end
-		local var7 = p0
+		local var2 = p1
 		local localUserId = state.LocalUserId
 		
-		if var6.source == "friends" then
-			local var8 = getOtherParticipantsModule(var6, localUserId)
+		if var1.source == "friends" then
+			local var3 = getOtherParticipantsModule(var1, localUserId)
 			
-			if #var8 ~= 1 then
-				name:warning(`refreshConversationUnfilteredThreadsDetails: Friends Conversation {p0} has invalid number of participants {#var8}`)
+			if #var3 ~= 1 then
+				name:warning(`refreshConversationUnfilteredThreadsDetails: Friends Conversation {p1} has invalid number of participants {#var3}`)
 				
 				return
 			end
-			var7 = var8[1]
+			var2 = var3[1]
 		end
-		if var6.source == "channels" or var6.source == "friends" then
-			p2:dispatch(appChatNetworkingModule.rodux.GetModalSequence.API({
+		if var1.source == "channels" or var1.source == "friends" then
+			p3:dispatch(appChatNetworkingModule.rodux.GetModalSequence.API({
 				modalSequence = appChatNetworkingModule.Constants.ModalSequence.ConversationTopModal,
-				isInExperience = p1,
-				conversationId = if var6.source == "channels" then var7 else nil,
-				friendId = if var6.source == "friends" then var7 else nil
-			})):catch(function(p3)
+				isInExperience = p2,
+				conversationId = if var1.source == "channels" then var2 else nil,
+				friendId = if var1.source == "friends" then var2 else nil
+			})):catch(function(p4)
 				-- upvalues: name (copy)
-				name:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationTopModal request. Error: {tostring(p3)}`)
+				name:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationTopModal request. Error: {tostring(p4)}`)
 			end)
-			p2:dispatch(appChatNetworkingModule.rodux.GetModalSequence.API({
+			p3:dispatch(appChatNetworkingModule.rodux.GetModalSequence.API({
 				modalSequence = appChatNetworkingModule.Constants.ModalSequence.ConversationOverlay,
-				isInExperience = p1,
-				conversationId = if var6.source == "channels" then var7 else nil,
-				friendId = if var6.source == "friends" then var7 else nil
+				isInExperience = p2,
+				conversationId = if var1.source == "channels" then var2 else nil,
+				friendId = if var1.source == "friends" then var2 else nil
 			})):catch(function(p4)
 				-- upvalues: name (copy)
 				name:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationOverlay request. Error: {tostring(p4)}`)
@@ -53,6 +53,6 @@ return function(p0, p1)
 			
 			return
 		end
-		name:warning(`refreshConversationUnfilteredThreadsDetails: Conversation {p0} has invalid source {var6.source}`)
+		name:warning(`refreshConversationUnfilteredThreadsDetails: Conversation {p1} has invalid source {var1.source}`)
 	end
 end

@@ -20,44 +20,44 @@ local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFl
 
 return function()
 	-- upvalues: useProfileWrapperContextModule (ref), getDeepValueModule (ref), useAreWebViewsSupportedModule (ref), useIsProfileQrCodeEnabledModule (ref), useCanRenderTransferOnProfileModule (ref), useCanSeeChatTabModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), useLocalUserId (ref), reactModule (ref), enumsModule (ref), getAvailableUserComponentsModule (ref), fFlagProfilePlatformEnableVRModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), getAvailableCommunityComponentsModule (ref), getAvailableContactComponentsModule (ref)
-	local var21
-	local var14 = useProfileWrapperContextModule()
-	local profileType = var14.profileType
-	local var15 = getDeepValueModule(var14, "sourceInfo.contextualInfoType")
-	local var16 = useAreWebViewsSupportedModule()
-	local var17 = useIsProfileQrCodeEnabledModule()
-	local var18 = useCanRenderTransferOnProfileModule()
-	local var19 = useCanSeeChatTabModule()
-	local var20 = if fFlagProfilePlatformCTAsRefactorModule then useLocalUserId() else nil
+	local var1
+	local var2 = useProfileWrapperContextModule()
+	local profileType = var2.profileType
+	local var3 = getDeepValueModule(var2, "sourceInfo.contextualInfoType")
+	local var4 = useAreWebViewsSupportedModule()
+	local var5 = useIsProfileQrCodeEnabledModule()
+	local var6 = useCanRenderTransferOnProfileModule()
+	local var7 = useCanSeeChatTabModule()
+	local var8 = if fFlagProfilePlatformCTAsRefactorModule then useLocalUserId() else nil
 	
 	if fFlagProfilePlatformCTAsRefactorModule then
-		var21 = tostring(var14.profileId) == tostring(var20)
-		var21 = nil
+		var1 = tostring(var2.profileId) == tostring(var8)
+		var1 = nil
 	else
-		var21 = false
+		var1 = false
 	end
 	return reactModule.useMemo(function()
-		-- upvalues: profileType (ref), enumsModule (copy), getAvailableUserComponentsModule (copy), var15 (ref), fFlagProfilePlatformEnableVRModule (copy), var16 (ref), var17 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var18 (ref), var19 (ref), fFlagProfilePlatformCTAsRefactorModule (copy), var21 (ref), getAvailableCommunityComponentsModule (copy), getAvailableContactComponentsModule (copy)
-		return if profileType == enumsModule.ProfileTypes.User then getAvailableUserComponentsModule(var15, if fFlagProfilePlatformEnableVRModule then {
-			areWebViewsSupported = var16,
-			isProfileQrCodeEnabled = var17,
-			canRenderTransferInProfile = if fFlagProfilePlatformEnableCurrencyTransfer then var18 else false,
-			canSeeChatTab = var19,
-			isSelfView = if fFlagProfilePlatformCTAsRefactorModule then var21 else nil
+		-- upvalues: profileType (ref), enumsModule (copy), getAvailableUserComponentsModule (copy), var3 (ref), fFlagProfilePlatformEnableVRModule (copy), var4 (ref), var5 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var6 (ref), var7 (ref), fFlagProfilePlatformCTAsRefactorModule (copy), var1 (ref), getAvailableCommunityComponentsModule (copy), getAvailableContactComponentsModule (copy)
+		return if profileType == enumsModule.ProfileTypes.User then getAvailableUserComponentsModule(var3, if fFlagProfilePlatformEnableVRModule then {
+			areWebViewsSupported = var4,
+			isProfileQrCodeEnabled = var5,
+			canRenderTransferInProfile = if fFlagProfilePlatformEnableCurrencyTransfer then var6 else false,
+			canSeeChatTab = var7,
+			isSelfView = if fFlagProfilePlatformCTAsRefactorModule then var1 else nil
 		} else {
-			canRenderTransferInProfile = if fFlagProfilePlatformEnableCurrencyTransfer then var18 else false,
-			canSeeChatTab = var19,
-			isSelfView = if fFlagProfilePlatformCTAsRefactorModule then var21 else nil
+			canRenderTransferInProfile = if fFlagProfilePlatformEnableCurrencyTransfer then var6 else false,
+			canSeeChatTab = var7,
+			isSelfView = if fFlagProfilePlatformCTAsRefactorModule then var1 else nil
 		}) elseif profileType == enumsModule.ProfileTypes.Community then getAvailableCommunityComponentsModule() elseif profileType == enumsModule.ProfileTypes.Contact then getAvailableContactComponentsModule() else {}
 	end, if fFlagProfilePlatformEnableVRModule then {
 		profileType,
-		var15,
-		if fFlagProfilePlatformCTAsRefactorModule then var21 else nil,
-		if fFlagProfilePlatformEnableCurrencyTransfer then var18 else nil,
-		var19
+		var3,
+		if fFlagProfilePlatformCTAsRefactorModule then var1 else nil,
+		if fFlagProfilePlatformEnableCurrencyTransfer then var6 else nil,
+		var7
 	} else {
-		profileType, var15, var16, var17,
-		if fFlagProfilePlatformCTAsRefactorModule then var21 else nil,
-		if fFlagProfilePlatformEnableCurrencyTransfer then var18 else nil, var19
+		profileType, var3, var4, var5,
+		if fFlagProfilePlatformCTAsRefactorModule then var1 else nil,
+		if fFlagProfilePlatformEnableCurrencyTransfer then var6 else nil, var7
 	})
 end

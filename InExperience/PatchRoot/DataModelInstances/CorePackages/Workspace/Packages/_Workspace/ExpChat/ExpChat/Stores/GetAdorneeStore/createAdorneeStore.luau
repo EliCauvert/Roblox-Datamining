@@ -1,11 +1,11 @@
 ﻿local createSignal = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-local function findFirstChildByNameAndClass(p0, p1, p2)
-	if not p0 then
+local function findFirstChildByNameAndClass(p1, p2, p3)
+	if not p1 then
 		return nil
 	end
-	for i, v in ipairs(p0:GetChildren()) do
-		if v.Name == p1 and v:IsA(p2) then
+	for i, v in ipairs(p1:GetChildren()) do
+		if v.Name == p2 and v:IsA(p3) then
 			return v
 		end
 	end
@@ -16,55 +16,55 @@ return function()
 	-- upvalues: createSignal (ref), findFirstChildByNameAndClass (ref)
 	local t = {}
 	
-	local function _(p3)
-		return tostring(p3)
+	local function _(p4)
+		return tostring(p4)
 	end
 	
 	return {
 		getAdornee = function(p4)
 			-- upvalues: t (ref), createSignal (copy)
-			local var2 = tostring(p4)
+			local var1 = tostring(p4)
 			
-			if not t[var2] then
-				local var3, var4 = createSignal(nil)
-				t[var2] = { getter = var3, setter = var4 }
+			if not t[var1] then
+				local var2, var3 = createSignal(nil)
+				t[var1] = { getter = var2, setter = var3 }
 			end
-			return t[var2].getter
+			return t[var1].getter
 		end,
-		handleAdorneeAdded = function(p5, p6, p7)
+		handleAdorneeAdded = function(p4, p5, p6)
 			-- upvalues: findFirstChildByNameAndClass (copy), t (ref), createSignal (copy)
-			local var5 = tostring(p5)
-			local var6 = if p7.Health == 0 then findFirstChildByNameAndClass(p6, "Head", "BasePart") else p6
+			local var1 = tostring(p4)
+			local var2 = if p6.Health == 0 then findFirstChildByNameAndClass(p5, "Head", "BasePart") else p5
 			
-			if not t[var5] then
-				local var7 = tostring(p5)
+			if not t[var1] then
+				local var3 = tostring(p4)
 				
-				if not t[var7] then
-					local var8, var9 = createSignal(nil)
-					t[var7] = { getter = var8, setter = var9 }
+				if not t[var3] then
+					local var4, var5 = createSignal(nil)
+					t[var3] = { getter = var4, setter = var5 }
 				end
-				local _ = t[var7].getter
+				local _ = t[var3].getter
 			end
-			t[var5].setter(var6)
+			t[var1].setter(var2)
 		end,
-		handleHumanoidDied = function(p8)
+		handleHumanoidDied = function(p4)
 			-- upvalues: t (ref), findFirstChildByNameAndClass (copy)
-			local var10 = tostring(p8)
+			local var1 = tostring(p4)
 			local _ = nil
 			
-			if t[var10] then
-				local ter = t[var10].getter(false)
-				t[var10].setter(if ter then findFirstChildByNameAndClass(ter, "Head", "BasePart") or ter else nil)
+			if t[var1] then
+				local ter = t[var1].getter(false)
+				t[var1].setter(if ter then findFirstChildByNameAndClass(ter, "Head", "BasePart") or ter else nil)
 			end
 		end,
-		handlePlayerRemoved = function(p9)
+		handlePlayerRemoved = function(p4)
 			-- upvalues: t (ref)
-			local var12 = tostring(p9)
+			local var1 = tostring(p4)
 			
-			if t[var12] then
-				t[var12].setter(nil)
+			if t[var1] then
+				t[var1].setter(nil)
 			end
-			t[var12] = nil
+			t[var1] = nil
 		end
 	}
 end

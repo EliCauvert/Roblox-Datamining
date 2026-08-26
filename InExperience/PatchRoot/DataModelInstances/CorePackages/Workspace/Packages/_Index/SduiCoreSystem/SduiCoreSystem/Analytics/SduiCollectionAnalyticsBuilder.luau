@@ -26,37 +26,37 @@ local t_2 = {
 }
 
 return {
-	buildAndValidateCollectionAnalyticsData = function(p0, p1, p2, p3, p4, p5, _, p6, p7)
+	buildAndValidateCollectionAnalyticsData = function(p1, p2, p3, p4, p5, p6, _, p7, p8)
 		-- upvalues: cryoModule (ref), t (ref), unifiedLoggingModule (ref), validateInterfaceModule (ref), sduiErrorsModule (ref), t_2 (ref)
-		local var8 = cryoModule.Dictionary.join(p1 or t, p2 or t)
-		var8.collectionId = tonumber(var8.collectionId) or var8.collectionId
-		var8.collectionPosition = tonumber(var8.collectionPosition)
-		var8.itemsPerRow = p4
-		var8.startRowNumber = p7
-		var8.totalNumberOfItems = p5
-		var8.collectionComponentType = p3
-		local var9, var10 = validateInterfaceModule(var8, unifiedLoggingModule.SduiAnalyticsTypes.CollectionAnalyticsDataInterface, true)
+		local var1 = cryoModule.Dictionary.join(p2 or t, p3 or t)
+		var1.collectionId = tonumber(var1.collectionId) or var1.collectionId
+		var1.collectionPosition = tonumber(var1.collectionPosition)
+		var1.itemsPerRow = p5
+		var1.startRowNumber = p8
+		var1.totalNumberOfItems = p6
+		var1.collectionComponentType = p4
+		local var2, var3 = validateInterfaceModule(var1, unifiedLoggingModule.SduiAnalyticsTypes.CollectionAnalyticsDataInterface, true)
 		
-		if not var9 then
-			p0.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidCollectionAnalyticsData, { componentType = p3, name = p6, message = var10 }, p0.appPage)
-			var8 = cryoModule.Dictionary.join(t_2, var8)
+		if not var2 then
+			p1.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidCollectionAnalyticsData, { componentType = p4, name = p7, message = var3 }, p1.appPage)
+			var1 = cryoModule.Dictionary.join(t_2, var1)
 		end
-		return var8
+		return var1
 	end,
-	buildAndValidateItemAnalyticsData = function(p8, p9, p10, p11, p12, p13)
+	buildAndValidateItemAnalyticsData = function(p1, p2, p3, p4, p5, p6)
 		-- upvalues: cryoModule (ref), t (ref), unifiedLoggingModule (ref), validateInterfaceModule (ref), sduiErrorsModule (ref), t_1 (ref)
-		local var11 = cryoModule.Dictionary.join(p10 or t, p9 or t, p11 or t)
-		local var12, var13 = validateInterfaceModule(var11, unifiedLoggingModule.SduiAnalyticsTypes.ItemAnalyticsDataInterface, true)
+		local var1 = cryoModule.Dictionary.join(p3 or t, p2 or t, p4 or t)
+		local var2, var3 = validateInterfaceModule(var1, unifiedLoggingModule.SduiAnalyticsTypes.ItemAnalyticsDataInterface, true)
 		
-		if not var12 then
-			if p13 then
-				p13(var13)
+		if not var2 then
+			if p6 then
+				p6(var3)
 			else
-				p8.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidItemAnalyticsData, { name = p12, message = var13 }, p8.appPage)
+				p1.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidItemAnalyticsData, { name = p5, message = var3 }, p1.appPage)
 			end
-			var11 = cryoModule.Dictionary.join(t_1, var11)
+			var1 = cryoModule.Dictionary.join(t_1, var1)
 		end
-		return var11
+		return var1
 	end,
 	DUMMY_COLLECTION_DATA = t_2,
 	DUMMY_ITEM_DATA = t_1

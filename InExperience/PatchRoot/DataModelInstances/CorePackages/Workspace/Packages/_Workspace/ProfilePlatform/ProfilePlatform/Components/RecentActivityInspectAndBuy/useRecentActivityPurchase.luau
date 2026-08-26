@@ -12,18 +12,18 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local handlePurchaseItemsSuccessModule = require(profilePlatform.Components.InspectAvatar.HandlePurchaseItemsSuccess)
 local useRecentActivityPurchaseSelectionModule = require(script.Parent.useRecentActivityPurchaseSelection)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), robloxAppHooksModule (ref), useProfileWrapperContextModule (ref), useRecentActivityPurchaseSelectionModule (ref), reactModule (ref), useLocalization (ref), purchaseBulkItemsModule (ref), handlePurchaseItemsSuccessModule (ref), getIsInsufficientRobuxError (ref), setCurrentToastMessage (ref)
-	local var7 = useDispatch()
-	local var8 = robloxAppHooksModule.useLocalRobuxBalance()
-	local var9 = useProfileWrapperContextModule()
-	local localUserId = p0.localUserId
-	local var10 = useRecentActivityPurchaseSelectionModule(p0.displayItems)
-	local purchaseData = var10.purchaseData
-	local var11, var12 = reactModule.useState(false)
-	local var13, var14 = reactModule.useState(false)
-	local var15, var16 = reactModule.useState(false)
-	local var17 = useLocalization({
+	local var1 = useDispatch()
+	local var2 = robloxAppHooksModule.useLocalRobuxBalance()
+	local var3 = useProfileWrapperContextModule()
+	local localUserId = p1.localUserId
+	local var4 = useRecentActivityPurchaseSelectionModule(p1.displayItems)
+	local purchaseData = var4.purchaseData
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
+	local var9, var10 = reactModule.useState(false)
+	local var11 = useLocalization({
 		purchasePartialFailure = "Feature.Avatar.Heading.LooksPurchasePartialSuccess",
 		purchaseFailed = "CoreScripts.PurchasePrompt.PurchaseFailed.UnknownFailureNoItemName",
 		purchaseSuccessSingular = {
@@ -35,86 +35,86 @@ return function(p0)
 			numItems = purchaseData.count
 		}
 	})
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var17 (ref)
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: var11 (ref)
 		return {
-			purchaseSuccessSingular = var17.purchaseSuccessSingular,
-			purchaseSuccessPlural = var17.purchaseSuccessPlural,
-			purchasePartialFailure = var17.purchasePartialFailure
+			purchaseSuccessSingular = var11.purchaseSuccessSingular,
+			purchaseSuccessPlural = var11.purchaseSuccessPlural,
+			purchasePartialFailure = var11.purchasePartialFailure
 		}
 	end, {
-		var17.purchaseSuccessSingular,
-		var17.purchaseSuccessPlural,
-		var17.purchasePartialFailure
+		var11.purchaseSuccessSingular,
+		var11.purchaseSuccessPlural,
+		var11.purchasePartialFailure
 	})
 	
 	return {
-		selectedItems = var10.selectedItems,
+		selectedItems = var4.selectedItems,
 		purchaseSummary = {
 			totalPrice = purchaseData.totalPrice,
 			count = purchaseData.count
 		},
-		isPurchasing = var11,
-		isConfirmingPurchase = var13,
-		isShowingInsufficientRobux = var15,
-		robuxBalance = if var8 ~= nil then 0 else var8,
-		onToggleItem = var10.onToggleItem,
+		isPurchasing = var5,
+		isConfirmingPurchase = var7,
+		isShowingInsufficientRobux = var9,
+		robuxBalance = if var2 ~= nil then 0 else var2,
+		onToggleItem = var4.onToggleItem,
 		onBuyAll = reactModule.useCallback(function()
-			-- upvalues: purchaseData (ref), localUserId (ref), var8 (ref), var16 (ref), var14 (ref)
+			-- upvalues: purchaseData (ref), localUserId (ref), var2 (ref), var10 (ref), var8 (ref)
 			if #purchaseData.lineItems == 0 or not localUserId then return end
-			if var8 == nil or var8 >= purchaseData.totalPrice then
-				var14(true)
+			if var2 == nil or var2 >= purchaseData.totalPrice then
+				var8(true)
 				
 				return
 			end
-			var16(true)
-		end, { purchaseData, localUserId, var8 }),
+			var10(true)
+		end, { purchaseData, localUserId, var2 }),
 		onConfirmPurchase = reactModule.useCallback(function()
-			-- upvalues: var11 (ref), purchaseData (ref), localUserId (ref), var12 (ref), purchaseBulkItemsModule (copy), handlePurchaseItemsSuccessModule (copy), var9 (ref), var7 (ref), var18 (ref), var14 (ref), p0 (ref), getIsInsufficientRobuxError (copy), var16 (ref), setCurrentToastMessage (copy), var17 (ref)
-			if var11 or #purchaseData.lineItems == 0 or not localUserId then
+			-- upvalues: var5 (ref), purchaseData (ref), localUserId (ref), var6 (ref), purchaseBulkItemsModule (copy), handlePurchaseItemsSuccessModule (copy), var3 (ref), var1 (ref), var12 (ref), var8 (ref), p1 (ref), getIsInsufficientRobuxError (copy), var10 (ref), setCurrentToastMessage (copy), var11 (ref)
+			if var5 or #purchaseData.lineItems == 0 or not localUserId then
 				return
 			end
-			var12(true)
+			var6(true)
 			purchaseBulkItemsModule({ userId = localUserId, lineItems = purchaseData.lineItems }):andThen(function(p2)
-				-- upvalues: handlePurchaseItemsSuccessModule (copy), var9 (copy), var7 (copy), var18 (copy), var14 (copy), p0 (copy)
+				-- upvalues: handlePurchaseItemsSuccessModule (copy), var3 (copy), var1 (copy), var12 (copy), var8 (copy), p1 (copy)
 				handlePurchaseItemsSuccessModule({
 					result = p2,
-					profileWrapperContext = var9,
-					dispatch = var7,
-					localized = var18
+					profileWrapperContext = var3,
+					dispatch = var1,
+					localized = var12
 				})
-				var14(false)
-				p0.onClose()
-			end):catch(function(p1)
-				-- upvalues: var14 (copy), getIsInsufficientRobuxError (copy), var16 (copy), var7 (copy), setCurrentToastMessage (copy), var17 (copy), p0 (copy)
-				var14(false)
+				var8(false)
+				p1.onClose()
+			end):catch(function(p2)
+				-- upvalues: var8 (copy), getIsInsufficientRobuxError (copy), var10 (copy), var1 (copy), setCurrentToastMessage (copy), var11 (copy), p1 (copy)
+				var8(false)
 				
-				if getIsInsufficientRobuxError(p1) then
-					var16(true)
+				if getIsInsufficientRobuxError(p2) then
+					var10(true)
 					
 					return
 				end
-				var7(setCurrentToastMessage({
+				var1(setCurrentToastMessage({
 					isLocalized = true,
 					toastType = "PurchaseMessage",
-					toastMessage = var17.purchaseFailed
+					toastMessage = var11.purchaseFailed
 				}))
-				p0.onClose()
+				p1.onClose()
 			end):finally(function()
-				-- upvalues: var12 (copy)
-				var12(false)
+				-- upvalues: var6 (copy)
+				var6(false)
 			end)
 		end, {
-			var11, purchaseData, localUserId, var9, var7, var18, var17.purchaseFailed,
-			p0.onClose
+			var5, purchaseData, localUserId, var3, var1, var12, var11.purchaseFailed,
+			p1.onClose
 		}),
 		onCancelPurchase = reactModule.useCallback(function()
-			-- upvalues: var14 (ref)
-			var14(false)
+			-- upvalues: var8 (ref)
+			var8(false)
 		end, {}),
 		onDismissInsufficientRobux = reactModule.useCallback(function()
-			-- upvalues: var16 (ref)
-			var16(false)
+			-- upvalues: var10 (ref)
+			var10(false)
 		end, {})
 	}
 end

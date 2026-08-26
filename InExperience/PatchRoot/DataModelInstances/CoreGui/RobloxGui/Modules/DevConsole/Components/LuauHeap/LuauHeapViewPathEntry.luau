@@ -13,43 +13,43 @@ local cellPadding = constantsModule.LuauHeapFormatting.CellPadding
 local _ = constantsModule.LuauHeapFormatting.ValuePadding
 local luauHeapViewPathEntry = roactModule.PureComponent:extend("LuauHeapViewPathEntry")
 
-function luauHeapViewPathEntry.init(p0)
-	p0.state = { expanded = false }
+function luauHeapViewPathEntry.init(p1)
+	p1.state = { expanded = false }
 	
 	function p0.onButtonPress()
-		-- upvalues: p0 (ref)
-		p0:setState(function(p1)
-			return { expanded = not p1.expanded }
+		-- upvalues: p1 (ref)
+		p1:setState(function(p2)
+			return { expanded = not p2.expanded }
 		end)
 	end
 end
 
-function luauHeapViewPathEntry.renderChildren(p2, p3)
+function luauHeapViewPathEntry.renderChildren(p1, p2)
 	-- upvalues: depthIndent (ref), cellPadding (ref), roactModule (ref), cellLabelModule (ref), pathEntryFrameHeight (ref)
 	local t = {}
-	local var6 = 2 * depthIndent + cellPadding
+	local var1 = 2 * depthIndent + cellPadding
 	
-	if p2.state.expanded and p3 and #p3 then
-		for i, v in ipairs(p3) do
+	if p1.state.expanded and p2 and #p2 then
+		for i, v in ipairs(p2) do
 			t[i] = roactModule.createElement(cellLabelModule, {
 				text = v,
 				layoutOrder = i,
-				size = UDim2.new(UDim.new(1, -var6), UDim.new(0, pathEntryFrameHeight)),
-				pos = UDim2.new(0, var6, 0, 0)
+				size = UDim2.new(UDim.new(1, -var1), UDim.new(0, pathEntryFrameHeight)),
+				pos = UDim2.new(0, var1, 0, 0)
 			})
 		end
 	end
 	return t
 end
 
-function luauHeapViewPathEntry.render(p4)
+function luauHeapViewPathEntry.render(p3)
 	-- upvalues: pathEntryFrameHeight (ref), depthIndent (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
-	local props = p4.props
+	local props = p3.props
 	local size = props.size or UDim2.new(1, 0, 0, pathEntryFrameHeight)
 	local layoutOrder = props.layoutOrder or 0
 	local name = props.name
 	local data = props.data
-	local var9 = props.depth * depthIndent
+	local var2 = props.depth * depthIndent
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -65,18 +65,18 @@ function luauHeapViewPathEntry.render(p4)
 		button = roactModule.createElement(bannerButtonModule, {
 			layoutOrder = -1,
 			size = UDim2.new(1, 0, 0, pathEntryFrameHeight),
-			inset = var9,
-			isExpanded = p4.state.expanded,
+			inset = var2,
+			isExpanded = p3.state.expanded,
 			isExpandable = #data ~= 0,
-			onButtonPress = p4.onButtonPress
+			onButtonPress = p3.onButtonPress
 		}, {
 			name = roactModule.createElement(cellLabelModule, {
 				text = name,
-				size = UDim2.new(UDim.new(1, -var9), UDim.new(1, 0)),
-				pos = UDim2.new(0, cellPadding + var9, 0, 0)
+				size = UDim2.new(UDim.new(1, -var2), UDim.new(1, 0)),
+				pos = UDim2.new(0, cellPadding + var2, 0, 0)
 			})
 		}),
-		children = roactModule.createFragment(p4:renderChildren(data))
+		children = roactModule.createFragment(p3:renderChildren(data))
 	})
 end
 

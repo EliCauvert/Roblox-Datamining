@@ -29,9 +29,9 @@ smallRadioButtonGroup.validateProps = tModule.strictInterface({
 })
 smallRadioButtonGroup.defaultProps = { selectedValue = nil, isRoactGamepadEnabled = true }
 
-function smallRadioButtonGroup.init(p0)
+function smallRadioButtonGroup.init(p1)
 	-- upvalues: roactGamepadModule (ref)
-	p0.gamepadRefs = p0.props.isRoactGamepadEnabled and roactGamepadModule.createRefCache() or {}
+	p1.gamepadRefs = p1.props.isRoactGamepadEnabled and roactGamepadModule.createRefCache() or {}
 end
 
 function smallRadioButtonGroup.renderButtonCell(p1, p2, p3, p4)
@@ -51,42 +51,42 @@ function smallRadioButtonGroup.renderButtonCell(p1, p2, p3, p4)
 	})
 end
 
-function smallRadioButtonGroup.render(p5)
+function smallRadioButtonGroup.render(p1)
 	-- upvalues: roactModule (ref), roactGamepadModule (ref)
-	assert(p5.validateProps(p5.props))
+	assert(p1.validateProps(p1.props))
 	local t = {
 		layout = roactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 1)
 		})
 	}
-	local isRoactGamepadEnabled = p5.props.isRoactGamepadEnabled
+	local isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled
 	
-	for i, v in ipairs(p5.props.items) do
+	for i, v in ipairs(p1.props.items) do
 		if not isRoactGamepadEnabled then
-			p5.gamepadRefs[i] = p5.gamepadRefs[i] or roactModule.createRef()
+			p1.gamepadRefs[i] = p1.gamepadRefs[i] or roactModule.createRef()
 		end
-		t["smallRadioButtonCell" .. v.id] = p5:renderButtonCell(v, i, isRoactGamepadEnabled)
+		t["smallRadioButtonCell" .. v.id] = p1:renderButtonCell(v, i, isRoactGamepadEnabled)
 	end
-	local var9 = isRoactGamepadEnabled and (p5.props.items and #p5.props.items > 0)
+	local var1 = isRoactGamepadEnabled and (p1.props.items and #p1.props.items > 0)
 	
-	return roactModule.createElement(if var9 then roactGamepadModule.Focusable.Frame else "Frame", {
-		defaultChild = if var9 then p5.gamepadRefs[1] else nil,
+	return roactModule.createElement(if var1 then roactGamepadModule.Focusable.Frame else "Frame", {
+		defaultChild = if var1 then p1.gamepadRefs[1] else nil,
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
-		LayoutOrder = p5.props.layoutOrder,
-		NextSelectionLeft = p5.props.NextSelectionLeft,
-		NextSelectionRight = p5.props.NextSelectionRight,
-		NextSelectionDown = p5.props.NextSelectionDown,
-		NextSelectionUp = p5.props.NextSelectionUp,
-		[roactModule.Ref] = p5.props.frameRef
+		LayoutOrder = p1.props.layoutOrder,
+		NextSelectionLeft = p1.props.NextSelectionLeft,
+		NextSelectionRight = p1.props.NextSelectionRight,
+		NextSelectionDown = p1.props.NextSelectionDown,
+		NextSelectionUp = p1.props.NextSelectionUp,
+		[roactModule.Ref] = p1.props.frameRef
 	}, t)
 end
 
-return roactModule.forwardRef(function(p6, p7)
+return roactModule.forwardRef(function(p2, p3)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), smallRadioButtonGroup (ref), cryoModule (ref)
-	return roactModule.createElement(smallRadioButtonGroup, cryoModule.Dictionary.join(p6, {
-		frameRef = p7,
+	return roactModule.createElement(smallRadioButtonGroup, cryoModule.Dictionary.join(p2, {
+		frameRef = p3,
 		cursor = useCursorByTypeModule(cursorTypeModule.SelectionCell)
 	}))
 end)

@@ -21,42 +21,42 @@ local t = {
 	variant = chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE
 }
 
-function ChatBubbleGroupable(p0)
+function ChatBubbleGroupable(p1)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), reactModule (ref), view (ref), fFlagAppChatNativeFoundationCornerRadiiModule (ref), getChatBubbleCornerRadiiModule (ref), chatBubbleEnumModule (ref), image (ref)
-	local var8 = cryoModule.Dictionary.union(t, p0)
-	local var9 = var8.alignment == Enum.HorizontalAlignment.Left
+	local var1 = cryoModule.Dictionary.union(t, p1)
+	local var2 = var1.alignment == Enum.HorizontalAlignment.Left
 	local size500 = useTokens().Size.Size_500
-	local var10 = reactModule.createElement(view, {
+	local var3 = reactModule.createElement(view, {
 		tag = "size-0 auto-xy",
 		BackgroundTransparency = 1,
-		padding = var8.padding
-	}, var8.children)
+		padding = var1.padding
+	}, var1.children)
 	
 	if fFlagAppChatNativeFoundationCornerRadiiModule then
 		return reactModule.createElement(view, {
 			AutomaticSize = Enum.AutomaticSize.XY,
-			backgroundStyle = var8.imageStyle,
-			cornerRadius = getChatBubbleCornerRadiiModule(var8.variant, var9, size500),
-			Position = var8.position,
-			LayoutOrder = var8.layoutOrder,
-			onAbsoluteSizeChanged = var8.onAbsoluteSizeChanged
-		}, var10)
+			backgroundStyle = var1.imageStyle,
+			cornerRadius = getChatBubbleCornerRadiiModule(var1.variant, var2, size500),
+			Position = var1.position,
+			LayoutOrder = var1.layoutOrder,
+			onAbsoluteSizeChanged = var1.onAbsoluteSizeChanged
+		}, var3)
 	end
-	local var11 = if var9 then chatBubbleEnumModule.GROUPED_RECEIVED_BUBBLES else chatBubbleEnumModule.GROUPED_OUTGOING_BUBBLES
+	local var4 = if var2 then chatBubbleEnumModule.GROUPED_RECEIVED_BUBBLES else chatBubbleEnumModule.GROUPED_OUTGOING_BUBBLES
 	
 	return reactModule.createElement(image, {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
-		Image = if var8.variant == chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE then chatBubbleEnumModule.GROUPED_BUBBLE_SINGLE elseif var8.variant == chatBubbleEnumModule.BUBBLE_VARIANTS.TOP then var11.BUBBLE_TOP elseif var8.variant == chatBubbleEnumModule.BUBBLE_VARIANTS.BOTTOM then var11.BUBBLE_BOTTOM else var11.BUBBLE_MIDDLE,
+		Image = if var1.variant == chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE then chatBubbleEnumModule.GROUPED_BUBBLE_SINGLE elseif var1.variant == chatBubbleEnumModule.BUBBLE_VARIANTS.TOP then var4.BUBBLE_TOP elseif var1.variant == chatBubbleEnumModule.BUBBLE_VARIANTS.BOTTOM then var4.BUBBLE_BOTTOM else var4.BUBBLE_MIDDLE,
 		ScaleType = Enum.ScaleType.Slice,
 		slice = {
 			center = chatBubbleEnumModule.GROUPED_BUBBLE_SLICE_CENTER
 		},
-		imageStyle = var8.imageStyle,
-		Position = var8.position,
-		LayoutOrder = var8.layoutOrder,
-		onAbsoluteSizeChanged = var8.onAbsoluteSizeChanged
-	}, var10)
+		imageStyle = var1.imageStyle,
+		Position = var1.position,
+		LayoutOrder = var1.layoutOrder,
+		onAbsoluteSizeChanged = var1.onAbsoluteSizeChanged
+	}, var3)
 end
 
 return reactModule.memo(ChatBubbleGroupable)

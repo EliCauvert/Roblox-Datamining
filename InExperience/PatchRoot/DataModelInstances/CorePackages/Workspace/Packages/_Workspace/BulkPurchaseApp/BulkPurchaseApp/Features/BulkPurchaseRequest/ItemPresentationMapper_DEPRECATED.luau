@@ -6,47 +6,47 @@ local priceDEPRECATEDModule = require(bulkPurchaseApp.Components.Price_DEPRECATE
 local itemStatusModule = require(bulkPurchaseApp.Components.ItemStatus)
 
 return {
-	mapItemsToPresentation_DEPRECATED = function(p0, p1, p2)
+	mapItemsToPresentation_DEPRECATED = function(p1, p2, p3)
 		-- upvalues: reactModule (ref), priceDEPRECATEDModule (ref)
 		local t = {}
 		
-		for i, v in p0 do
+		for i, v in p1 do
 			table.insert(t, {
 				id = v.id,
 				name = v.name,
 				image = v.image,
-				endSlot = reactModule.createElement(priceDEPRECATEDModule, { amount = v.cost, fontStyle = p1, colorStyle = p2 })
+				endSlot = reactModule.createElement(priceDEPRECATEDModule, { amount = v.cost, fontStyle = p2, colorStyle = p3 })
 			})
 		end
 		return t
 	end,
-	mapOwnedItemsToPresentation_DEPRECATED = function(p3, p4, p5, p6)
+	mapOwnedItemsToPresentation_DEPRECATED = function(p4, p5, p6, p7)
 		-- upvalues: reactModule (ref), styledTextLabel (ref)
 		local t = {}
 		
-		for i, v in p3 do
+		for i, v in p4 do
 			table.insert(t, {
 				id = v.id,
 				name = v.name,
 				image = v.image,
 				endSlot = reactModule.createElement(styledTextLabel, {
-					fontStyle = p4,
-					colorStyle = p5,
+					fontStyle = p5,
+					colorStyle = p6,
 					textXAlignment = Enum.TextXAlignment.Right,
 					textYAlignment = Enum.TextYAlignment.Top,
-					lineHeight = p4.LineHeight,
+					lineHeight = p5.LineHeight,
 					size = UDim2.fromScale(1, 1),
-					text = p6.itemOwned:gsub("{.*}", tostring(v.ownedCount))
+					text = p7.itemOwned:gsub("{.*}", tostring(v.ownedCount))
 				})
 			})
 		end
 		return t
 	end,
-	mapUnpurchasableItemsToPresentation_DEPRECATED = function(p7)
+	mapUnpurchasableItemsToPresentation_DEPRECATED = function(p8)
 		-- upvalues: reactModule (ref), itemStatusModule (ref)
 		local t = {}
 		
-		for i, v in p7 do
+		for i, v in p8 do
 			table.insert(t, {
 				id = v.id,
 				name = v.name,

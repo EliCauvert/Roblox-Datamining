@@ -2,14 +2,14 @@
 local _ = require(parent.Types)
 local assertEqualModule = require(parent.assertEqual)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: assertEqualModule (ref)
 	local t = {}
 	
-	for i, v in p0 do
-		local var2 = p1(v, i)
-		assertEqualModule(var2 == nil, false, "Returned nil from a Dash.map handler")
-		t[i] = var2
+	for i, v in p1 do
+		local var1 = p2(v, i)
+		assertEqualModule(var1 == nil, false, "Returned nil from a Dash.map handler")
+		t[i] = var1
 	end
 	return t
 end

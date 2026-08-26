@@ -7,12 +7,12 @@ return {
 	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = require(parent.flags.getEngineFeatureUGCValidateCheckFacsDisableOverride),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: errorSourceStringsModule (ref)
-		local faceControls = p1.rootInstance:FindFirstChildOfClass("FaceControls")
+		local faceControls = p2.rootInstance:FindFirstChildOfClass("FaceControls")
 		
 		if faceControls and faceControls:HasOverrideFACSData() then
-			p0:fail(errorSourceStringsModule.Keys.FaceControlsOverrideFACSNotEmpty, nil, faceControls)
+			p1:fail(errorSourceStringsModule.Keys.FaceControlsOverrideFACSNotEmpty, nil, faceControls)
 		end
 	end
 }

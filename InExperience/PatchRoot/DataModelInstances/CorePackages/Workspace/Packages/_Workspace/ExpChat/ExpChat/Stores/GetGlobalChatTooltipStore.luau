@@ -4,12 +4,12 @@ local fetchGlobalChatTooltipEligibilityModule = require(script.fetchGlobalChatTo
 
 return signalsModule.createComputed(function()
 	-- upvalues: createGlobalChatTooltipStoreModule (ref), fetchGlobalChatTooltipEligibilityModule (ref)
-	local var3 = createGlobalChatTooltipStoreModule()
-	var3.reportImpression = fetchGlobalChatTooltipEligibilityModule.reportImpression
-	fetchGlobalChatTooltipEligibilityModule.fetchEligibility(function(p0)
-		-- upvalues: var3 (ref)
-		var3.setIsGlobalChatTooltipEligible(p0.shouldShowTooltip)
+	local var1 = createGlobalChatTooltipStoreModule()
+	var1.reportImpression = fetchGlobalChatTooltipEligibilityModule.reportImpression
+	fetchGlobalChatTooltipEligibilityModule.fetchEligibility(function(p1)
+		-- upvalues: var1 (ref)
+		var1.setIsGlobalChatTooltipEligible(p1.shouldShowTooltip)
 	end)
 	
-	return var3
+	return var1
 end)

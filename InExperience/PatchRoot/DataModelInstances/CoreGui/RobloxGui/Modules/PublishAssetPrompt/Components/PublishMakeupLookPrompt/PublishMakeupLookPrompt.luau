@@ -28,11 +28,11 @@ publishMakeupLookPrompt.validateProps = tModule.strictInterface({
 	SetPromptVisibility = tModule.callback
 })
 
-function publishMakeupLookPrompt.init(p0)
+function publishMakeupLookPrompt.init(p1)
 	-- upvalues: playersService (ref), publishAssetAnalytics (ref), purchasePromptModule (ref), mutedError (ref)
 	local localPlayer = playersService.LocalPlayer
 	assert(localPlayer, "LocalPlayer must not be nil")
-	p0:setState({
+	p1:setState({
 		showingPreviewView = false,
 		isNameValid = true,
 		isDescValid = true,
@@ -44,93 +44,93 @@ function publishMakeupLookPrompt.init(p0)
 	})
 	
 	function p0.openPreviewView()
-		-- upvalues: publishAssetAnalytics (copy), p0 (ref)
+		-- upvalues: publishAssetAnalytics (copy), p1 (ref)
 		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Expand)
-		p0:setState({ showingPreviewView = true })
+		p1:setState({ showingPreviewView = true })
 	end
 	
 	function p0.closePreviewView()
-		-- upvalues: p0 (ref)
-		p0:setState({ showingPreviewView = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ showingPreviewView = false })
 	end
 	
 	function p0.canSubmit()
-		-- upvalues: p0 (ref)
-		return p0.state.isNameValid and (p0.state.isDescValid and (p0.props.accessoryInstance ~= nil and p0.state.purchasePromptReady))
+		-- upvalues: p1 (ref)
+		return p1.state.isNameValid and (p1.state.isDescValid and (p1.props.accessoryInstance ~= nil and p1.state.purchasePromptReady))
 	end
 	
 	function p0.onSubmit()
-		-- upvalues: publishAssetAnalytics (copy), p0 (ref), purchasePromptModule (copy), mutedError (copy)
+		-- upvalues: publishAssetAnalytics (copy), p1 (ref), purchasePromptModule (copy), mutedError (copy)
 		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Buy)
-		local t = { name = p0.state.name, description = p0.state.description }
+		local t = { name = p1.state.name, description = p1.state.description }
 		
 		if purchasePromptModule.initiateAvatarCreationFeePurchase then
-			purchasePromptModule.initiateAvatarCreationFeePurchase(t, p0.props.guid, p0.state.previewModel, p0.props.priceInRobux)
+			purchasePromptModule.initiateAvatarCreationFeePurchase(t, p1.props.guid, p1.state.previewModel, p1.props.priceInRobux)
 			
 			return
 		end
 		mutedError("PurchasePrompt.initiateAvatarCreationFeePurchase is not available")
 	end
 	
-	function p0.onNameUpdated(p1, p2)
-		-- upvalues: p0 (ref), publishAssetAnalytics (copy)
-		p0:setState({ name = p1, isNameValid = p2 })
+	function p0.onNameUpdated(p2, p3)
+		-- upvalues: p1 (ref), publishAssetAnalytics (copy)
+		p1:setState({ name = p2, isNameValid = p3 })
 		
-		if not p0.sentNameFieldTouched then
-			p0.sentNameFieldTouched = true
+		if not p1.sentNameFieldTouched then
+			p1.sentNameFieldTouched = true
 			publishAssetAnalytics.sendFieldTouched(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Name)
 		end
 	end
 	
-	function p0.onDescriptionUpdated(p3, p4)
-		-- upvalues: p0 (ref), publishAssetAnalytics (copy)
-		p0:setState({ description = p3, isDescValid = p4 })
+	function p0.onDescriptionUpdated(p2, p3)
+		-- upvalues: p1 (ref), publishAssetAnalytics (copy)
+		p1:setState({ description = p2, isDescValid = p3 })
 		
-		if not p0.sentDescriptionFieldTouched then
-			p0.sentDescriptionFieldTouched = true
+		if not p1.sentDescriptionFieldTouched then
+			p1.sentDescriptionFieldTouched = true
 			publishAssetAnalytics.sendFieldTouched(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Description)
 		end
 	end
 	
-	function p0.onWindowStateChanged(p5)
-		-- upvalues: p0 (ref)
-		local isShown = p5.isShown
+	function p0.onWindowStateChanged(p2)
+		-- upvalues: p1 (ref)
+		local isShown = p2.isShown
 		
-		if p5.hasCompletedPurchase and not isShown then
-			p0.props.SetPromptVisibility(false)
+		if p2.hasCompletedPurchase and not isShown then
+			p1.props.SetPromptVisibility(false)
 			
 			return
 		end
-		p0:setState({ showTopScrim = isShown })
+		p1:setState({ showTopScrim = isShown })
 		
 		if isShown then
-			p0:setState({ purchasePromptReady = false })
+			p1:setState({ purchasePromptReady = false })
 		end
 	end
 	
 	function p0.onPromptStateSetToNone()
-		-- upvalues: p0 (ref)
-		p0:setState({ purchasePromptReady = true })
+		-- upvalues: p1 (ref)
+		p1:setState({ purchasePromptReady = true })
 	end
 end
 
-function publishMakeupLookPrompt.updatePreviewModel(p6)
+function publishMakeupLookPrompt.updatePreviewModel(p1)
 	-- upvalues: makeupPreviewUtilsModule (ref)
-	local accessoryInstance = p6.props.accessoryInstance
+	local accessoryInstance = p1.props.accessoryInstance
 	
 	if accessoryInstance and accessoryInstance:IsA("Folder") then
-		local makeupEntries = p6.props.makeupEntries
+		local makeupEntries = p1.props.makeupEntries
 		task.spawn(function()
-			-- upvalues: makeupPreviewUtilsModule (copy), accessoryInstance (ref), makeupEntries (ref), p6 (ref)
-			local var18 = makeupPreviewUtilsModule.compositeMakeupFolder(accessoryInstance)
+			-- upvalues: makeupPreviewUtilsModule (copy), accessoryInstance (ref), makeupEntries (ref), p1 (ref)
+			local var1 = makeupPreviewUtilsModule.compositeMakeupFolder(accessoryInstance)
 			local folderAccessories = makeupPreviewUtilsModule.getFolderAccessories(accessoryInstance, makeupEntries)
 			
-			if not var18 and #folderAccessories == 0 or not p6.isMounted then return end
-			local var20 = makeupPreviewUtilsModule.createMakeupHeadPreview(var18, Enum.AvatarAssetType.FaceMakeup, folderAccessories)
+			if not var1 and #folderAccessories == 0 or not p1.isMounted then return end
+			local var2 = makeupPreviewUtilsModule.createMakeupHeadPreview(var1, Enum.AvatarAssetType.FaceMakeup, folderAccessories)
 			
-			if var20 and p6.isMounted then
-				local previewModel = p6.state.previewModel
-				p6:setState({ previewModel = var20 }, function()
+			if var2 and p1.isMounted then
+				local previewModel = p1.state.previewModel
+				p1:setState({ previewModel = var2 }, function()
 					-- upvalues: previewModel (ref)
 					if previewModel then
 						previewModel:Destroy()
@@ -143,53 +143,53 @@ function publishMakeupLookPrompt.updatePreviewModel(p6)
 	end
 end
 
-function publishMakeupLookPrompt.didMount(p7)
+function publishMakeupLookPrompt.didMount(p1)
 	-- upvalues: purchasePromptModule (ref), mutedError (ref), publishAssetAnalytics (ref)
-	p7.isMounted = true
-	p7:updatePreviewModel()
-	p7.sentNameFieldTouched = false
-	p7.sentDescriptionFieldTouched = false
+	p1.isMounted = true
+	p1:updatePreviewModel()
+	p1.sentNameFieldTouched = false
+	p1.sentDescriptionFieldTouched = false
 	local windowStateChangedEvent = purchasePromptModule.windowStateChangedEvent
 	local promptStateSetToNoneEvent = purchasePromptModule.promptStateSetToNoneEvent
 	
 	if windowStateChangedEvent and promptStateSetToNoneEvent then
-		p7.windowStateChangedConnection = windowStateChangedEvent:Connect(p7.onWindowStateChanged)
-		p7.promptStateSetToNoneConnection = promptStateSetToNoneEvent:Connect(p7.onPromptStateSetToNone)
+		p1.windowStateChangedConnection = windowStateChangedEvent:Connect(p1.onWindowStateChanged)
+		p1.promptStateSetToNoneConnection = promptStateSetToNoneEvent:Connect(p1.onPromptStateSetToNone)
 	else
 		mutedError("PurchasePrompt.windowStateChangedEvent or PurchasePrompt.promptStateSetToNoneEvent is not available")
 	end
 	publishAssetAnalytics.sendPageLoad(publishAssetAnalytics.Section.BuyCreationPage)
 end
 
-function publishMakeupLookPrompt.didUpdate(p8, p9)
-	if p9.accessoryInstance ~= p8.props.accessoryInstance then
-		p8:updatePreviewModel()
+function publishMakeupLookPrompt.didUpdate(p1, p2)
+	if p2.accessoryInstance ~= p1.props.accessoryInstance then
+		p1:updatePreviewModel()
 	end
 end
 
-function publishMakeupLookPrompt.willUnmount(p10)
+function publishMakeupLookPrompt.willUnmount(p1)
 	-- upvalues: mutedError (ref)
-	p10.isMounted = false
+	p1.isMounted = false
 	
-	if p10.state.previewModel then
-		p10.state.previewModel:Destroy()
+	if p1.state.previewModel then
+		p1.state.previewModel:Destroy()
 	end
-	if p10.windowStateChangedConnection then
-		p10.windowStateChangedConnection:Disconnect()
+	if p1.windowStateChangedConnection then
+		p1.windowStateChangedConnection:Disconnect()
 	else
 		mutedError("windowStateChangedConnection was not established")
 	end
-	if p10.promptStateSetToNoneConnection then
-		p10.promptStateSetToNoneConnection:Disconnect()
+	if p1.promptStateSetToNoneConnection then
+		p1.promptStateSetToNoneConnection:Disconnect()
 		
 		return
 	end
 	mutedError("promptStateSetToNoneConnection was not established")
 end
 
-function publishMakeupLookPrompt.renderPromptBody(p11)
+function publishMakeupLookPrompt.renderPromptBody(p1)
 	-- upvalues: roactModule (ref), uDim (ref), objectViewportModule (ref), getFFlagUploadMakeupSupportModule (ref), labeledTextBoxModule (ref), robloxTranslatorModule (ref), publishInfoListModule (ref), makeupPartGridModule (ref)
-	local previewModel = p11.state.previewModel
+	local previewModel = p1.state.previewModel
 	
 	return roactModule.createFragment({
 		UIListLayout = roactModule.createElement("UIListLayout", {
@@ -203,7 +203,7 @@ function publishMakeupLookPrompt.renderPromptBody(p11)
 			useFullBodyCameraSettings = false,
 			fieldOfView = 30,
 			LayoutOrder = 1,
-			openPreviewView = p11.openPreviewView,
+			openPreviewView = p1.openPreviewView,
 			model = previewModel,
 			isLoading = previewModel == nil,
 			isMakeupPreview = getFFlagUploadMakeupSupportModule()
@@ -214,8 +214,8 @@ function publishMakeupLookPrompt.renderPromptBody(p11)
 			maxLength = 1000,
 			textBoxHeight = 104,
 			labelText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Description"),
-			defaultText = p11.state.description,
-			onTextUpdated = p11.onDescriptionUpdated,
+			defaultText = p1.state.description,
+			onTextUpdated = p1.onDescriptionUpdated,
 			invalidInputText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.InvalidDescription")
 		}),
 		InfoList = roactModule.createElement(publishInfoListModule, {
@@ -224,49 +224,49 @@ function publishMakeupLookPrompt.renderPromptBody(p11)
 		}),
 		MakeupGrid = roactModule.createElement(makeupPartGridModule, {
 			LayoutOrder = 4,
-			makeupFolder = p11.props.accessoryInstance,
-			makeupEntries = p11.props.makeupEntries,
-			name = p11.state.name,
-			screenSize = p11.props.screenSize
+			makeupFolder = p1.props.accessoryInstance,
+			makeupEntries = p1.props.makeupEntries,
+			name = p1.state.name,
+			screenSize = p1.props.screenSize
 		})
 	})
 end
 
-function publishMakeupLookPrompt.render(p12)
+function publishMakeupLookPrompt.render(p1)
 	-- upvalues: roactModule (ref), basePublishPromptModule (ref), getFFlagUploadMakeupSupportModule (ref), robloxTranslatorModule (ref)
 	return roactModule.createElement(basePublishPromptModule, {
 		delayInputSeconds = 3,
-		promptBody = p12:renderPromptBody(),
-		screenSize = p12.props.screenSize,
-		showingPreviewView = p12.state.showingPreviewView,
-		closePreviewView = p12.closePreviewView,
+		promptBody = p1:renderPromptBody(),
+		screenSize = p1.props.screenSize,
+		showingPreviewView = p1.state.showingPreviewView,
+		closePreviewView = p1.closePreviewView,
 		isMakeupPreview = getFFlagUploadMakeupSupportModule(),
-		asset = p12.state.previewModel,
+		asset = p1.state.previewModel,
 		nameLabel = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Name"),
-		defaultName = p12.state.name,
+		defaultName = p1.state.name,
 		titleText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.BuyCreation"),
-		onNameUpdated = p12.onNameUpdated,
-		canSubmit = p12.canSubmit,
-		onSubmit = p12.onSubmit,
-		priceInRobux = p12.props.priceInRobux,
-		showTopScrim = p12.state.showTopScrim
+		onNameUpdated = p1.onNameUpdated,
+		canSubmit = p1.canSubmit,
+		onSubmit = p1.onSubmit,
+		priceInRobux = p1.props.priceInRobux,
+		showTopScrim = p1.state.showTopScrim
 	})
 end
 
-return roactRoduxModule.connect(function(p13)
+return roactRoduxModule.connect(function(p1)
 	return {
-		accessoryInstance = p13.promptRequest.promptInfo.accessoryInstance,
-		guid = p13.promptRequest.promptInfo.guid,
-		scopes = p13.promptRequest.promptInfo.scopes,
-		priceInRobux = p13.promptRequest.promptInfo.priceInRobux,
-		makeupEntries = p13.promptRequest.promptInfo.makeupEntries
+		accessoryInstance = p1.promptRequest.promptInfo.accessoryInstance,
+		guid = p1.promptRequest.promptInfo.guid,
+		scopes = p1.promptRequest.promptInfo.scopes,
+		priceInRobux = p1.promptRequest.promptInfo.priceInRobux,
+		makeupEntries = p1.promptRequest.promptInfo.makeupEntries
 	}
-end, function(p14)
+end, function(p1)
 	-- upvalues: setPromptVisibilityModule (ref)
 	return {
 		SetPromptVisibility = function(value)
-			-- upvalues: p14 (ref), setPromptVisibilityModule (copy)
-			p14(setPromptVisibilityModule(value))
+			-- upvalues: p1 (ref), setPromptVisibilityModule (copy)
+			p1(setPromptVisibilityModule(value))
 		end
 	}
 end)(publishMakeupLookPrompt)

@@ -25,31 +25,31 @@ local list = {
 	}
 }
 
-function buildReport(p0, p1, p2, p3, p4)
+function buildReport(p1, p2, p3, p4, p5)
 	-- upvalues: httpService (ref)
 	return httpService:JSONEncode({
 		tags = {
 			ENTRY_POINT = { valueList = { { data = "in-experience" } } },
-			SUBMITTER_USER_ID = { valueList = { { data = tostring(p0) } } },
-			REPORTED_ABUSE_CATEGORY = { valueList = { { data = p2 } } },
+			SUBMITTER_USER_ID = { valueList = { { data = tostring(p1) } } },
+			REPORTED_ABUSE_CATEGORY = { valueList = { { data = p3 } } },
 			PLACE_ID = { valueList = { { data = tostring(game.PlaceId) } } },
-			REPORTER_COMMENT = { valueList = { { data = p3 } } },
+			REPORTER_COMMENT = { valueList = { { data = p4 } } },
 			REPORTED_ABUSE_VECTOR = { valueList = { { data = "ad" } } },
-			SCREENSHOT_ID = { valueList = { { data = p1 } } },
-			IDENTIFIED_ADS = { valueList = { { data = p4 } } }
+			SCREENSHOT_ID = { valueList = { { data = p2 } } },
+			IDENTIFIED_ADS = { valueList = { { data = p5 } } }
 		}
 	})
 end
 
-function ReportAdPopup(p5)
+function ReportAdPopup(p1)
 	-- upvalues: httpService (ref), getAppFeaturePolicies (ref), default (ref), loggingProtocolModule (ref), flagsModule (ref), reactModule (ref), enableHideReportAdModalDuringScreenshot (ref), screenshotManager (ref), playersService (ref), adsInteractivityTelemetryModule (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), appStyleProvider (ref), defaultTwoStepReportFlowModule (ref), list (ref), reportAdFooterModule (ref), adsDisplayOrderModule (ref)
-	local var13 = ""
-	local list_1 = { table.clone(p5.adInfo) }
-	local var15 = httpService:JSONEncode(list_1)
-	local var16 = true
-	local var17 = getAppFeaturePolicies()
+	local var1 = ""
+	local list_1 = { table.clone(p1.adInfo) }
+	local var2 = httpService:JSONEncode(list_1)
+	local var3 = true
+	local var4 = getAppFeaturePolicies()
 	
-	if var17 == nil then
+	if var4 == nil then
 		default:logRobloxTelemetryEvent({
 			eventName = "UniversalAppPolicyCallFailed",
 			description = "Call to UniversalAppPolicy (GUAC) failed in Report Ad popup",
@@ -62,8 +62,8 @@ function ReportAdPopup(p5)
 			encryptionMetadata = list_1[1].encryptionMetadata
 		})
 	else
-		local showIllegalContentReportingUI = var17.getShowIllegalContentReportingUI()
-		var16 = showIllegalContentReportingUI ~= nil and showIllegalContentReportingUI
+		local showIllegalContentReportingUI = var4.getShowIllegalContentReportingUI()
+		var3 = showIllegalContentReportingUI ~= nil and showIllegalContentReportingUI
 	end
 	return roactModule.createElement("ScreenGui", {
 		ResetOnSpawn = false,
@@ -71,7 +71,7 @@ function ReportAdPopup(p5)
 		AutoLocalize = false,
 		DisplayOrder = adsDisplayOrderModule.Modal,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-		Enabled = p5.showReportAdPopup
+		Enabled = p1.showReportAdPopup
 	}, roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 0, 0, 0),
@@ -97,36 +97,36 @@ function ReportAdPopup(p5)
 						onCloseProps = {
 							hasPreviousSteps = false,
 							onAbandon = function()
-								-- upvalues: adsInteractivityTelemetryModule (copy), p5 (ref)
+								-- upvalues: adsInteractivityTelemetryModule (copy), p1 (ref)
 								adsInteractivityTelemetryModule.logReportAdEvent("close")
-								p5.onClose()
+								p1.onClose()
 							end
 						},
 						onSubmitProps = {
 							hasNextSteps = false,
-							onSubmit = reactModule.useCallback(function(p6, p7)
-								-- upvalues: enableHideReportAdModalDuringScreenshot (copy), p5 (ref), screenshotManager (copy), playersService (copy), var13 (write), var15 (ref), adsInteractivityTelemetryModule (copy)
+							onSubmit = reactModule.useCallback(function(p2, p3)
+								-- upvalues: enableHideReportAdModalDuringScreenshot (copy), p1 (ref), screenshotManager (copy), playersService (copy), var1 (write), var2 (ref), adsInteractivityTelemetryModule (copy)
 								if enableHideReportAdModalDuringScreenshot then
-									p5.onClose()
+									p1.onClose()
 								end
-								screenshotManager:TakeScreenshotWithCallback(function(p8)
-									-- upvalues: playersService (copy), var13 (copy), p6 (ref), p7 (ref), var15 (copy), adsInteractivityTelemetryModule (copy)
+								screenshotManager:TakeScreenshotWithCallback(function(p4)
+									-- upvalues: playersService (copy), var1 (copy), p2 (ref), p3 (ref), var2 (copy), adsInteractivityTelemetryModule (copy)
 									local localPlayer = playersService.LocalPlayer
 									
 									if localPlayer ~= nil then
-										var13 = buildReport(localPlayer.UserId, p8, p6, p7, var15)
-										playersService:ReportAbuseV3(localPlayer, var13)
+										var1 = buildReport(localPlayer.UserId, p4, p2, p3, var2)
+										playersService:ReportAbuseV3(localPlayer, var1)
 										adsInteractivityTelemetryModule.logReportAdEvent("submit")
 									end
 								end, nil)
 								
-								if enableHideReportAdModalDuringScreenshot and p5.onOpen then
-									p5.onOpen()
+								if enableHideReportAdModalDuringScreenshot and p1.onOpen then
+									p1.onOpen()
 								end
 								return true
 							end, {})
 						},
-						onComplete = p5.onClose,
+						onComplete = p1.onClose,
 						reportCategories = list,
 						reportCategoryDefaultKey = list[1].value,
 						localizationKeys = {
@@ -136,8 +136,8 @@ function ReportAdPopup(p5)
 						},
 						scaleDialog = { X = 0.8, Y = 1 },
 						footerContent = function()
-							-- upvalues: var16 (write), roactModule (copy), reportAdFooterModule (copy), list_1 (ref)
-							return if var16 then roactModule.createElement(reportAdFooterModule, { assetId = list_1[1].assetId }) else nil
+							-- upvalues: var3 (write), roactModule (copy), reportAdFooterModule (copy), list_1 (ref)
+							return if var3 then roactModule.createElement(reportAdFooterModule, { assetId = list_1[1].assetId }) else nil
 						end
 					})
 				})

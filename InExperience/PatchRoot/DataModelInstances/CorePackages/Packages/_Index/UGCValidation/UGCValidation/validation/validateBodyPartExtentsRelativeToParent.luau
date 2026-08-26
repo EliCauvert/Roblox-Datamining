@@ -20,110 +20,110 @@ local t_2 = {
 	[Enum.AssetType.RightLeg] = true
 }
 
-local function reportFailure_lowerAboveUpper(p0, p1, p2, p3)
+local function reportFailure_lowerAboveUpper(p1, p2, p3, p4)
 	-- upvalues: analyticsModule (ref)
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyAttPosRelativeToParent_PartAboveParent, nil, p3)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyAttPosRelativeToParent_PartAboveParent, nil, p4)
 	
 	return false, {
-		string.format("%s cannot extend above %s. You can adjust how the parts are put together by moving %s", p1.Name, p0.Name, p2)
+		string.format("%s cannot extend above %s. You can adjust how the parts are put together by moving %s", p2.Name, p1.Name, p3)
 	}
 end
 
-local function reportFailure_upperBelowLower(p4, p5, p6, p7)
+local function reportFailure_upperBelowLower(p1, p2, p3, p4)
 	-- upvalues: analyticsModule (ref)
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyAttPosRelativeToParent_ParentBelowPart, nil, p7)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyAttPosRelativeToParent_ParentBelowPart, nil, p4)
 	
 	return false, {
-		string.format("%s cannot extend below %s. You can adjust how the parts are put together by moving %s", p4.Name, p5.Name, p6)
+		string.format("%s cannot extend below %s. You can adjust how the parts are put together by moving %s", p1.Name, p2.Name, p3)
 	}
 end
 
 local t_3 = {
-	validateSinglePartBasedOnBBoxes = function(p8, p9, p10, p11, p12)
+	validateSinglePartBasedOnBBoxes = function(p1, p2, p3, p4, p5)
 		-- upvalues: failureReasonsAccumulatorModule (ref), reportFailure_lowerAboveUpper (ref), reportFailure_upperBelowLower (ref)
-		local var13 = failureReasonsAccumulatorModule.new()
-		local boundsData = p10[p8.Name].boundsData
-		local boundsData_1 = p10[p9.Name].boundsData
+		local var1 = failureReasonsAccumulatorModule.new()
+		local boundsData = p3[p1.Name].boundsData
+		local boundsData_1 = p3[p2.Name].boundsData
 		
 		if boundsData_1.maxOverall and boundsData.maxOverall and boundsData.maxOverall.Y < boundsData_1.maxOverall.Y then
-			var13:updateReasons(reportFailure_lowerAboveUpper(p8, p9, p11, p12))
+			var1:updateReasons(reportFailure_lowerAboveUpper(p1, p2, p4, p5))
 		end
 		if boundsData.minOverall and boundsData_1.minOverall and boundsData.minOverall.Y < boundsData_1.minOverall.Y then
-			var13:updateReasons(reportFailure_upperBelowLower(p8, p9, p11, p12))
+			var1:updateReasons(reportFailure_upperBelowLower(p1, p2, p4, p5))
 		end
-		return var13:getFinalResults()
+		return var1:getFinalResults()
 	end,
-	validateSinglePartBasedOnAttachmentYPos = function(p13, p14, p15, p16)
+	validateSinglePartBasedOnAttachmentYPos = function(p1, p2, p3, p4)
 		-- upvalues: failureReasonsAccumulatorModule (ref), r15plusUtilsModule (ref), getExpectedPartSizeModule (ref), getAttachmentCFrameInPartSpaceModule (ref), reportFailure_lowerAboveUpper (ref), reportFailure_upperBelowLower (ref)
-		local var14 = failureReasonsAccumulatorModule.new()
-		local var15 = p14:FindFirstChild(p15, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-		local var16 = p13:FindFirstChild(p15, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-		assert(var15)
-		assert(var16)
-		local var17 = getExpectedPartSizeModule(p14, p16)
-		local var18 = getExpectedPartSizeModule(p13, p16)
-		local position = getAttachmentCFrameInPartSpaceModule(var15).Position
-		local position_1 = getAttachmentCFrameInPartSpaceModule(var16).Position
-		local y = (var17 / 2 - position).Y
-		local y_1 = (var17 / 2 + position).Y
-		local y_2 = (var18 / 2 + position_1).Y
+		local var1 = failureReasonsAccumulatorModule.new()
+		local var2 = p2:FindFirstChild(p3, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+		local var3 = p1:FindFirstChild(p3, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+		assert(var2)
+		assert(var3)
+		local var4 = getExpectedPartSizeModule(p2, p4)
+		local var5 = getExpectedPartSizeModule(p1, p4)
+		local position = getAttachmentCFrameInPartSpaceModule(var2).Position
+		local position_1 = getAttachmentCFrameInPartSpaceModule(var3).Position
+		local y = (var4 / 2 - position).Y
+		local y_1 = (var4 / 2 + position).Y
+		local y_2 = (var5 / 2 + position_1).Y
 		
-		if (var18 / 2 - position_1).Y < y then
-			var14:updateReasons(reportFailure_lowerAboveUpper(p13, p14, p15, p16))
+		if (var5 / 2 - position_1).Y < y then
+			var1:updateReasons(reportFailure_lowerAboveUpper(p1, p2, p3, p4))
 		end
 		if y_1 < y_2 then
-			var14:updateReasons(reportFailure_upperBelowLower(p13, p14, p15, p16))
+			var1:updateReasons(reportFailure_upperBelowLower(p1, p2, p3, p4))
 		end
-		return var14:getFinalResults()
+		return var1:getFinalResults()
 	end
 }
 
-function t_3.runValidation(p17, p18)
+function t_3.runValidation(p1, p2)
 	-- upvalues: constantsModule (ref), t (ref), boundsCalculatorModule (ref), failureReasonsAccumulatorModule (ref), t_1 (ref), t_3 (ref), t_2 (ref), analyticsModule (ref)
 	local currentTime = tick()
-	local assetTypeEnum = p18.assetTypeEnum
+	local assetTypeEnum = p2.assetTypeEnum
 	assert(assetTypeEnum)
-	local var20 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]
-	assert(var20)
+	local var1 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]
+	assert(var1)
 	
 	if not t[assetTypeEnum] then
 		return true
 	end
-	local var21, var22, var23 = boundsCalculatorModule.calculateIndividualAssetPartsData(p17, p18)
+	local var2, var3, var4 = boundsCalculatorModule.calculateIndividualAssetPartsData(p1, p2)
 	
-	if not var21 then
-		return false, var22
+	if not var2 then
+		return false, var3
 	end
-	assert(var23)
-	local var24 = failureReasonsAccumulatorModule.new()
+	assert(var4)
+	local var5 = failureReasonsAccumulatorModule.new()
 	
-	for i, v in pairs(var20.subParts) do
-		local var25 = constantsModule.BODYPART_TO_PARENT[i]
+	for i, v in pairs(var1.subParts) do
+		local var6 = constantsModule.BODYPART_TO_PARENT[i]
 		
-		if var25 ~= nil then
-			local var26 = p17:FindFirstChild(i)
-			local var27 = p17:FindFirstChild(var25)
-			assert(var26)
-			assert(var27)
-			local var28 = var27
-			local var29 = var26
+		if var6 ~= nil then
+			local var7 = p1:FindFirstChild(i)
+			local var8 = p1:FindFirstChild(var6)
+			assert(var7)
+			assert(var8)
+			local var9 = var8
+			local var10 = var7
 			
 			if t_1[i] then
-				var28 = var26
-				var29 = var27
+				var9 = var7
+				var10 = var8
 			end
 			local name = v.rigAttachmentToParent.name
-			local var30, var31 = t_3.validateSinglePartBasedOnBBoxes(var28, var29, var23, name, p18)
-			var24:updateReasons(var30, var31)
+			local var11, var12 = t_3.validateSinglePartBasedOnBBoxes(var9, var10, var4, name, p2)
+			var5:updateReasons(var11, var12)
 			
-			if var30 and t_2[assetTypeEnum] then
-				var24:updateReasons(t_3.validateSinglePartBasedOnAttachmentYPos(var28, var29, name, p18))
+			if var11 and t_2[assetTypeEnum] then
+				var5:updateReasons(t_3.validateSinglePartBasedOnAttachmentYPos(var9, var10, name, p2))
 			end
 		end
 	end
-	analyticsModule.recordScriptTime(script.Name, currentTime, p18)
+	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
 	
-	return var24:getFinalResults()
+	return var5:getFinalResults()
 end
 
 return t_3

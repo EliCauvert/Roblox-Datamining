@@ -25,86 +25,86 @@ local t = {
 	size = require(foundation.Enums.InputSize).Medium
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useKnobVariantsModule (ref), colorNamespaceModule (ref), reactModule (ref), useBindableModule (ref), reactIsModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), blendTransparenciesModule (ref), constantsModule (ref), dashModule (ref), imageModule (ref)
-	local var16 = withDefaultsModule(p0, t)
-	local var17 = useTokensModule()
-	local var18 = usePresentationContext()
-	local var19 = useKnobVariantsModule(var17, var16.size, var18 and var18.colorNamespace == colorNamespaceModule.Inverse)
-	local style = var16.style or var19.knob.style
-	local var21 = reactModule.useCallback(function(p1)
-		-- upvalues: var17 (ref)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = usePresentationContext()
+	local var4 = useKnobVariantsModule(var2, var1.size, var3 and var3.colorNamespace == colorNamespaceModule.Inverse)
+	local style = var1.style or var4.knob.style
+	local var5 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref)
 		return {
-			Color3 = var17.Color.Extended.White.White_100.Color3,
-			Transparency = p1.Transparency
+			Color3 = var2.Color.Extended.White.White_100.Color3,
+			Transparency = p2.Transparency
 		}
-	end, { var17 })
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var19 (ref), var16 (ref), reactIsModule (copy)
-		local size = var19.knob.size
+	end, { var2 })
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), var1 (ref), reactIsModule (copy)
+		local size = var4.knob.size
 		
-		if var16.stroke and var16.stroke.Thickness then
-			if reactIsModule.isBinding(var16.stroke.Thickness) then
-				return var16.stroke.Thickness:map(function(p2)
+		if var1.stroke and var1.stroke.Thickness then
+			if reactIsModule.isBinding(var1.stroke.Thickness) then
+				return var1.stroke.Thickness:map(function(p2)
 					-- upvalues: size (write)
 					return size - UDim2.fromOffset(p2 * 2, p2 * 2)
 				end)
 			end
-			local thickness = var16.stroke.Thickness
+			local thickness = var1.stroke.Thickness
 			size -= UDim2.fromOffset(thickness * 2, thickness * 2)
 		end
 		return size
-	end, { var19, var16.stroke })
+	end, { var4, var1.stroke })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var16, { Size = var19.knob.size, isDisabled = var16.isDisabled }), {
-		Icon = if var16.icon then reactModule.createElement(viewModule, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { Size = var4.knob.size, isDisabled = var1.isDisabled }), {
+		Icon = if var1.icon then reactModule.createElement(viewModule, {
 			ZIndex = 4,
-			tag = var19.knob.tag,
-			Size = var22,
-			backgroundStyle = var19.iconContainer.backgroundStyle
+			tag = var4.knob.tag,
+			Size = var6,
+			backgroundStyle = var4.iconContainer.backgroundStyle
 		}, reactModule.createElement(iconModule, {
-			name = var16.icon.name,
-			variant = var16.icon.variant,
-			style = if var16.isDisabled then useBindableModule(var19.knob.style):map(function(p5)
+			name = var1.icon.name,
+			variant = var1.icon.variant,
+			style = if var1.isDisabled then useBindableModule(var4.knob.style):map(function(p2)
 				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
 				return {
-					Color3 = p5.Color3,
-					Transparency = blendTransparenciesModule(p5.Transparency, constantsModule.DISABLED_TRANSPARENCY)
+					Color3 = p2.Color3,
+					Transparency = blendTransparenciesModule(p2.Transparency, constantsModule.DISABLED_TRANSPARENCY)
 				}
-			end) else var19.knob.style,
-			size = var19.knob.iconSize,
-			testId = `{var16.testId}--icon`
+			end) else var4.knob.style,
+			size = var4.knob.iconSize,
+			testId = `{var1.testId}--icon`
 		})) else reactModule.createElement(viewModule, {
 			ZIndex = 4,
-			tag = var19.knob.tag,
-			backgroundStyle = if var16.isDisabled then useBindableModule(style):map(function(p3)
+			tag = var4.knob.tag,
+			backgroundStyle = if var1.isDisabled then useBindableModule(style):map(function(p2)
 				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
 				return {
-					Color3 = p3.Color3,
-					Transparency = blendTransparenciesModule(p3.Transparency, constantsModule.DISABLED_TRANSPARENCY)
+					Color3 = p2.Color3,
+					Transparency = blendTransparenciesModule(p2.Transparency, constantsModule.DISABLED_TRANSPARENCY)
 				}
 			end) else style,
-			Size = var22,
-			stroke = useBindableModule(if var16.stroke then var16.stroke.Transparency else nil):map(function(p4)
-				-- upvalues: var16 (ref), dashModule (copy), blendTransparenciesModule (copy), constantsModule (copy)
-				local stroke = var16.stroke
+			Size = var6,
+			stroke = useBindableModule(if var1.stroke then var1.stroke.Transparency else nil):map(function(p2)
+				-- upvalues: var1 (ref), dashModule (copy), blendTransparenciesModule (copy), constantsModule (copy)
+				local stroke = var1.stroke
 				
-				if var16.stroke and p4 ~= nil and var16.isDisabled then
+				if var1.stroke and p2 ~= nil and var1.isDisabled then
 					stroke = dashModule.join(stroke, {
-						Transparency = blendTransparenciesModule(p4, constantsModule.DISABLED_TRANSPARENCY)
+						Transparency = blendTransparenciesModule(p2, constantsModule.DISABLED_TRANSPARENCY)
 					})
 				end
 				return stroke
 			end):getValue(),
-			testId = `{var16.testId}--circle`
+			testId = `{var1.testId}--circle`
 		}),
-		Shadow = if var16.hasShadow and not var16.isDisabled then reactModule.createElement(imageModule, {
+		Shadow = if var1.hasShadow and not var1.isDisabled then reactModule.createElement(imageModule, {
 			Image = "component_assets/dropshadow_28",
 			ZIndex = 3,
-			tag = var19.knobShadow.tag,
-			imageStyle = if reactIsModule.isBinding(style) then style:map(var21) else var21(style),
-			Size = var19.knobShadow.size,
-			testId = `{var16.testId}--shadow`
+			tag = var4.knobShadow.tag,
+			imageStyle = if reactIsModule.isBinding(style) then style:map(var5) else var5(style),
+			Size = var4.knobShadow.size,
+			testId = `{var1.testId}--shadow`
 		}) else nil
 	})
 end)

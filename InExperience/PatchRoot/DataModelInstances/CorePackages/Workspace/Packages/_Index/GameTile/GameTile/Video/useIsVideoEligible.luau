@@ -27,16 +27,16 @@ local var1 = if not fFlagLuaAppSduiVideoThumbnail then {
 	if fFlagLuaAppAddVideoIneligiblePlayabilityStatus then playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser else nil
 } else nil
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useSelector (ref), fetchGamePlayabilityAndProductInfo (ref), fFlagLuaAppSduiVideoThumbnail (ref), isVideoEligibleForPlayability (ref), retrievalStatus (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), cryoModule (ref), var1 (write)
-	local var2 = useSelector(function(p2)
-		-- upvalues: fetchGamePlayabilityAndProductInfo (copy), p0 (ref)
-		return fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p2, p0)
+	local var2 = useSelector(function(p3)
+		-- upvalues: fetchGamePlayabilityAndProductInfo (copy), p1 (ref)
+		return fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p3, p1)
 	end)
 	local var3 = useSelector(function(p3)
-		-- upvalues: p0 (ref)
-		return if p3.PlayabilityStatus then p3.PlayabilityStatus[p0] else nil
+		-- upvalues: p1 (ref)
+		return if p3.PlayabilityStatus then p3.PlayabilityStatus[p1] else nil
 	end)
 	
-	return if fFlagLuaAppSduiVideoThumbnail then isVideoEligibleForPlayability(var2 == retrievalStatus.Done, var3, p1) elseif fFlagLuaAppUsePrevalidatedVideoGamePlayability and p1 then true else not (var2 ~= retrievalStatus.Done or var3 == nil) and (var3.isPlayable == true or cryoModule.List.find(var1, var3.playabilityStatus) == nil)
+	return if fFlagLuaAppSduiVideoThumbnail then isVideoEligibleForPlayability(var2 == retrievalStatus.Done, var3, p2) elseif fFlagLuaAppUsePrevalidatedVideoGamePlayability and p2 then true else not (var2 ~= retrievalStatus.Done or var3 == nil) and (var3.isPlayable == true or cryoModule.List.find(var1, var3.playabilityStatus) == nil)
 end

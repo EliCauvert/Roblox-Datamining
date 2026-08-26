@@ -8,94 +8,94 @@ local shopItemTileModule = require(inExperienceShop.Components.ShopItemTile)
 local _ = require(inExperienceShop.Types)
 local computeShopRowTileWidths = require(inExperienceShop.Components.computeShopRowTileWidths).computeShopRowTileWidths
 
-local function defaultRenderTile(p0, p1, _, p2, p3, p4, p5)
+local function defaultRenderTile(p1, p2, _, p3, p4, p5, p6)
 	-- upvalues: reactModule (ref), shopItemTileModule (ref)
 	return reactModule.createElement(shopItemTileModule, {
-		itemId = p0.id,
-		itemType = p0.itemType,
-		name = p0.name,
-		thumbnail = p0.thumbnail,
-		price = p0.price,
-		userBasePriceInRobux = p0.userBasePriceInRobux,
-		universeId = p0.universeId,
-		categoryId = p4,
-		gridPositionRow = if p2 then p2.gridPositionRow else nil,
-		gridPositionColumn = p1,
-		onItemActivated = p3,
-		shopPageType = p5,
-		LayoutOrder = p1
+		itemId = p1.id,
+		itemType = p1.itemType,
+		name = p1.name,
+		thumbnail = p1.thumbnail,
+		price = p1.price,
+		userBasePriceInRobux = p1.userBasePriceInRobux,
+		universeId = p1.universeId,
+		categoryId = p5,
+		gridPositionRow = if p3 then p3.gridPositionRow else nil,
+		gridPositionColumn = p2,
+		onItemActivated = p4,
+		shopPageType = p6,
+		LayoutOrder = p2
 	})
 end
 
-local function buildTileLayoutContext(p6, p7, p8, p9, p10, p11)
+local function buildTileLayoutContext(p1, p2, p3, p4, p5, p6)
 	-- upvalues: computeShopRowTileWidths (ref)
-	local var6 = false
+	local var1 = false
 	
-	for i, v in p6 do
-		if p11(v, i) then
-			var6 = true
+	for i, v in p1 do
+		if p6(v, i) then
+			var1 = true
 			break
 		end
 	end
-	local var7 = computeShopRowTileWidths(p8, p9, p7, var6)
+	local var2 = computeShopRowTileWidths(p3, p4, p2, var1)
 	
 	return {
-		rowWidth = p8,
-		gap = p9,
-		shopWidth = var7.shopWidth,
-		featuredRobuxWidth = var7.featuredRobuxWidth,
-		gridPositionRow = p10,
-		isFeaturedDoubleWidthRobux = p11
+		rowWidth = p3,
+		gap = p4,
+		shopWidth = var2.shopWidth,
+		featuredRobuxWidth = var2.featuredRobuxWidth,
+		gridPositionRow = p5,
+		isFeaturedDoubleWidthRobux = p6
 	}
 end
 
-local function _(p12)
-	return "Item:" .. tostring(p12.itemType) .. ":" .. p12.id
+local function _(p7)
+	return "Item:" .. tostring(p7.itemType) .. ":" .. p12.id
 end
 
-return reactModule.memo(function(p13)
+return reactModule.memo(function(p7)
 	-- upvalues: useTokens (ref), reactModule (ref), buildTileLayoutContext (ref), defaultRenderTile (ref), view (ref)
 	local medium = useTokens().Gap.Medium
-	local var8, var9 = reactModule.useState(0)
-	local var10 = reactModule.useCallback(function(p14)
-		-- upvalues: var9 (ref)
-		local x = p14.AbsoluteSize.X
+	local var3, var4 = reactModule.useState(0)
+	local var5 = reactModule.useCallback(function(p8)
+		-- upvalues: var4 (ref)
+		local x = p8.AbsoluteSize.X
 		
 		if x == 0 then
 			return
 		end
-		var9(x)
+		var4(x)
 	end, {})
-	local isFeaturedDoubleWidthRobux = p13.isFeaturedDoubleWidthRobux or function(_, _)
+	local isFeaturedDoubleWidthRobux = p7.isFeaturedDoubleWidthRobux or function(_, _)
 		return false
 	end
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: buildTileLayoutContext (copy), p13 (ref), var8 (ref), medium (ref), isFeaturedDoubleWidthRobux (ref)
-		return buildTileLayoutContext(p13.items, p13.columnCount, var8, medium, p13.rowIndex, isFeaturedDoubleWidthRobux)
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: buildTileLayoutContext (copy), p7 (ref), var3 (ref), medium (ref), isFeaturedDoubleWidthRobux (ref)
+		return buildTileLayoutContext(p7.items, p7.columnCount, var3, medium, p7.rowIndex, isFeaturedDoubleWidthRobux)
 	end, {
-		p13.items, p13.columnCount, var8, medium, p13.rowIndex,
+		p7.items, p7.columnCount, var3, medium, p7.rowIndex,
 		isFeaturedDoubleWidthRobux
 	})
-	local var13 = p13.renderTile ~= nil and var8 > 0
+	local var7 = p7.renderTile ~= nil and var3 > 0
 	local t = {}
 	
-	for i, v in p13.items do
+	for i, v in p7.items do
 		local text = "Item:" .. tostring(v.itemType) .. ":" .. v.id
 		
-		if p13.renderTile then
-			t[text] = p13.renderTile(v, i, var12)
+		if p7.renderTile then
+			t[text] = p7.renderTile(v, i, var6)
 		else
-			t[text] = defaultRenderTile(v, i, p13.columnCount, var12, p13.onItemActivated, p13.sectionId, p13.shopPageType)
+			t[text] = defaultRenderTile(v, i, p7.columnCount, var6, p7.onItemActivated, p7.sectionId, p7.shopPageType)
 		end
 	end
-	if not var13 then
-		for i_1 = #p13.items + 1, p13.columnCount do
+	if not var7 then
+		for i_1 = #p7.items + 1, p7.columnCount do
 			t["Filler" .. i_1] = reactModule.createElement(view, { tag = "size-full-0", LayoutOrder = i_1 })
 		end
 	end
 	return reactModule.createElement(view, {
 		tag = "row flex-x-fill gap-medium size-full-0 auto-y",
-		LayoutOrder = p13.LayoutOrder,
-		onAbsoluteSizeChanged = var10
+		LayoutOrder = p7.LayoutOrder,
+		onAbsoluteSizeChanged = var5
 	}, t)
 end)

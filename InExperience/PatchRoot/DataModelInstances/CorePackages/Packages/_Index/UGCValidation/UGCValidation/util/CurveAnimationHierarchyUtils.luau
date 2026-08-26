@@ -5,23 +5,23 @@ local getFFlagUGCValidateDuplicatesInAnimationModule = require(flags.getFFlagUGC
 local getFFlagUGCValidateRestrictNumFaceControlsModule = require(flags.getFFlagUGCValidateRestrictNumFaceControls)
 local getFIntUGCValidateMaxTotalFaceControlsModule = require(flags.getFIntUGCValidateMaxTotalFaceControls)
 local t = {}
-local var5 = nil
+local var1 = nil
 
 function t.getBodyPartToParentMap()
-	-- upvalues: var5 (write), assetCalculatorModule (ref)
-	if not var5 then
-		var5 = assetCalculatorModule.getBodyPartsToParents()
+	-- upvalues: var1 (write), assetCalculatorModule (ref)
+	if not var1 then
+		var1 = assetCalculatorModule.getBodyPartsToParents()
 	end
-	return var5
+	return var1
 end
 
 t.humanoidRootPartName = "HumanoidRootPart"
 t.FaceControlsName = "FaceControls"
 
-function t.folderHasAnimationTracks(p0)
+function t.folderHasAnimationTracks(p1)
 	local vector3Curve
-	local position = p0:FindFirstChild("Position")
-	local rotation = p0:FindFirstChild("Rotation")
+	local position = p1:FindFirstChild("Position")
+	local rotation = p1:FindFirstChild("Rotation")
 	
 	if position ~= nil then
 		vector3Curve = position:IsA("Vector3Curve")
@@ -38,9 +38,9 @@ function t.isBodyPartFolderNameValid(p1)
 	return if t.getBodyPartToParentMap()[p1] == nil then p1 == t.humanoidRootPartName else true
 end
 
-function t.getBodyPartFolderRoot(p2)
+function t.getBodyPartFolderRoot(p1)
 	-- upvalues: t (ref)
-	for i, v in p2:GetChildren() do
+	for i, v in p1:GetChildren() do
 		if v:IsA("Folder") and t.isBodyPartFolderNameValid(v.Name) then
 			return v
 		end
@@ -48,15 +48,15 @@ function t.getBodyPartFolderRoot(p2)
 	return nil
 end
 
-function t.areChildrenAcceptable(p3, p4)
-	if not p3 then
+function t.areChildrenAcceptable(p2, p3)
+	if not p2 then
 		return true
 	end
-	local function findAndRemoveMatching(p5)
-		-- upvalues: p4 (ref)
-		for i, v in p4 do
-			if v.ClassName == p5.ClassName and v.Name == p5.Name then
-				table.remove(p4, i)
+	local function findAndRemoveMatching(p4)
+		-- upvalues: p3 (ref)
+		for i, v in p3 do
+			if v.ClassName == p4.ClassName and v.Name == p4.Name then
+				table.remove(p3, i)
 				
 				return true
 			end
@@ -64,7 +64,7 @@ function t.areChildrenAcceptable(p3, p4)
 		return false
 	end
 	
-	for i, v in p3:GetChildren() do
+	for i, v in p2:GetChildren() do
 		if not findAndRemoveMatching(v) then
 			return false
 		end
@@ -72,37 +72,37 @@ function t.areChildrenAcceptable(p3, p4)
 	return true
 end
 
-function t.calculateAcceptableChildBodyPartFolders(p6)
+function t.calculateAcceptableChildBodyPartFolders(p5)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
 	for i, v in t.getBodyPartToParentMap() do
-		if v == p6 then
+		if v == p5 then
 			table.insert(t_1, { ClassName = "Folder", Name = i })
 		end
 	end
 	return t_1
 end
 
-function t.calculateAcceptableBodyPartFolderChildrenArray(p7, p8)
+function t.calculateAcceptableBodyPartFolderChildrenArray(p6, p7)
 	-- upvalues: t (ref)
-	local var11 = t.calculateAcceptableChildBodyPartFolders(p7.Name)
+	local var2 = t.calculateAcceptableChildBodyPartFolders(p6.Name)
 	
-	if p7.Name == t.humanoidRootPartName then
-		return var11
+	if p6.Name == t.humanoidRootPartName then
+		return var2
 	end
-	table.insert(var11, { ClassName = "Vector3Curve", Name = "Position" })
-	table.insert(var11, {
+	table.insert(var2, { ClassName = "Vector3Curve", Name = "Position" })
+	table.insert(var2, {
 		Name = "Rotation",
-		ClassName = if p8 then "EulerRotationCurve" else "RotationCurve"
+		ClassName = if p7 then "EulerRotationCurve" else "RotationCurve"
 	})
 	
-	if p7.Name == "Head" then
-		table.insert(var11, { ClassName = "Folder", Name = t.FaceControlsName })
+	if p6.Name == "Head" then
+		table.insert(var2, { ClassName = "Folder", Name = t.FaceControlsName })
 		
-		return var11
+		return var2
 	end
-	return var11
+	return var2
 end
 
 function t.calculateAcceptableCurveChildrenArray()
@@ -113,20 +113,20 @@ function t.calculateAcceptableCurveChildrenArray()
 	}
 end
 
-function t.containsGrandChildren(p9)
-	return if p9 then #p9:GetChildren() < #p9:GetDescendants() else false
+function t.containsGrandChildren(p6)
+	return if p6 then #p6:GetChildren() < #p6:GetDescendants() else false
 end
 
-function t.validateBodyPartFolderChildren(p10)
+function t.validateBodyPartFolderChildren(p6)
 	-- upvalues: t (ref), getFFlagUGCValidateRestrictNumFaceControlsModule (ref), getFIntUGCValidateMaxTotalFaceControlsModule (ref)
-	if not t.areChildrenAcceptable(p10, t.calculateAcceptableBodyPartFolderChildrenArray(p10, true)) then
+	if not t.areChildrenAcceptable(p6, t.calculateAcceptableBodyPartFolderChildrenArray(p6, true)) then
 		return false
-	elseif not t.areChildrenAcceptable(p10:FindFirstChild("Position"), t.calculateAcceptableCurveChildrenArray()) then
+	elseif not t.areChildrenAcceptable(p6:FindFirstChild("Position"), t.calculateAcceptableCurveChildrenArray()) then
 		return false
-	elseif not t.areChildrenAcceptable(p10:FindFirstChild("Rotation"), t.calculateAcceptableCurveChildrenArray()) then
+	elseif not t.areChildrenAcceptable(p6:FindFirstChild("Rotation"), t.calculateAcceptableCurveChildrenArray()) then
 		return false
 	end
-	local faceControlsName = p10:FindFirstChild(t.FaceControlsName)
+	local faceControlsName = p6:FindFirstChild(t.FaceControlsName)
 	
 	if faceControlsName then
 		local children = faceControlsName:GetChildren()
@@ -140,18 +140,18 @@ function t.validateBodyPartFolderChildren(p10)
 			end
 		end
 	end
-	return if t.containsGrandChildren(p10:FindFirstChild("Position")) then false elseif t.containsGrandChildren(p10:FindFirstChild("Rotation")) then false else t.containsGrandChildren(faceControlsName)
+	return if t.containsGrandChildren(p6:FindFirstChild("Position")) then false elseif t.containsGrandChildren(p6:FindFirstChild("Rotation")) then false else t.containsGrandChildren(faceControlsName)
 end
 
-function t.validateCurveAnimationBodyPartFolder(p11)
+function t.validateCurveAnimationBodyPartFolder(p7)
 	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), t (ref)
-	local function validateBodyPartFolderInternal(p12)
+	local function validateBodyPartFolderInternal(p8)
 		-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), t (copy), validateBodyPartFolderInternal (ref)
 		if getFFlagUGCValidateDuplicatesInAnimationModule() then
-			if not t.validateBodyPartFolderChildren(p12) then
+			if not t.validateBodyPartFolderChildren(p8) then
 				return false
 			end
-			for i, v in p12:GetChildren() do
+			for i, v in p8:GetChildren() do
 				if v:IsA("Folder") and v.Name ~= t.FaceControlsName and not validateBodyPartFolderInternal(v) then
 					return false
 				end
@@ -159,13 +159,13 @@ function t.validateCurveAnimationBodyPartFolder(p11)
 			return true
 		else
 			local name
-			for i, v in p12:GetChildren() do
+			for i, v in p8:GetChildren() do
 				if v:IsA("Folder") then
 					if v.Name ~= t.humanoidRootPartName then
 						name = t.getBodyPartToParentMap()[v.Name]
 						
 						if name then
-							return name == p12.Name and validateBodyPartFolderInternal(v)
+							return name == p8.Name and validateBodyPartFolderInternal(v)
 						end
 					end
 					return false
@@ -175,7 +175,7 @@ function t.validateCurveAnimationBodyPartFolder(p11)
 		end
 	end
 	
-	return if t.isBodyPartFolderNameValid(p11.Name) then validateBodyPartFolderInternal(p11) else true
+	return if t.isBodyPartFolderNameValid(p7.Name) then validateBodyPartFolderInternal(p7) else true
 end
 
 return t

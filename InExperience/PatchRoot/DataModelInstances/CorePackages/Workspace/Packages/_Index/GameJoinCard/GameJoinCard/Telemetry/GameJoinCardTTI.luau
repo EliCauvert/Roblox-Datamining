@@ -13,12 +13,12 @@ local t_1 = {
 	PeopleListContextualMenu = "people_list_contextual_menu"
 }
 local t_2 = { EventName = t, Surface = t_1 }
-local var4 = nil
+local var1 = nil
 
 function t_2.trackMobileCardClickStart()
-	-- upvalues: fFlagJoinCardAgeCheckUpsell (ref), var4 (write), fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref), t_1 (ref)
+	-- upvalues: fFlagJoinCardAgeCheckUpsell (ref), var1 (write), fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref), t_1 (ref)
 	if fFlagJoinCardAgeCheckUpsell then
-		var4 = tick() * 1000
+		var1 = tick() * 1000
 	end
 	if fFlagMobileGameJoinCardTTITracking then
 		timeToInteractiveTracker.trackStart(t.MobileCardMounted, true)
@@ -37,10 +37,10 @@ function t_2.trackMobileCardClickStart()
 end
 
 function t_2.consumeMobileCardClickStartMs()
-	-- upvalues: var4 (write)
-	var4 = nil
+	-- upvalues: var1 (write)
+	var1 = nil
 	
-	return var4
+	return var1
 end
 
 function t_2.trackCardMounted()

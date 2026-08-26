@@ -1,9 +1,9 @@
-﻿return function(p0)
-	local var0 = typeof(p0)
+﻿return function(p1)
+	local var1 = typeof(p1)
 	
-	if var0 == "Rect" then
-		return p0
-	elseif var0 == "Instance" then
-		return Rect.new(p0.AbsolutePosition, p0.AbsolutePosition + p0.AbsoluteSize)
+	if var1 == "Rect" then
+		return p1
+	elseif var1 == "Instance" then
+		return Rect.new(p1.AbsolutePosition, p1.AbsolutePosition + p1.AbsoluteSize)
 	end
 end

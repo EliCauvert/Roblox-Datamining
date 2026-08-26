@@ -4,69 +4,69 @@ local createSingleEntityResolverModule = require(dataHydration.createSingleEntit
 local fetchPlaceVersionHistoryModule = require(script.Parent.fetchPlaceVersionHistory)
 local _ = require(script.Parent.PlaceVersionHistoryStoreTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createSingleEntityResolverModule (ref), fetchPlaceVersionHistoryModule (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	local t = {
-		network = p0.network,
-		baseUrl = p0.baseUrl,
-		developBaseUrl = p0.developBaseUrl
+		network = p1.network,
+		baseUrl = p1.baseUrl,
+		developBaseUrl = p1.developBaseUrl
 	}
-	local var5 = createSingleEntityResolverModule(function(p1)
+	local var1 = createSingleEntityResolverModule(function(p2)
 		-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref)
-		return fetchPlaceVersionHistoryModule.fetchHistory(p1, t)
+		return fetchPlaceVersionHistoryModule.fetchHistory(p2, t)
 	end)
 	
 	return {
-		getHistory = var5.get,
-		fetchHistory = var5.fetch,
-		getAndFetchHistory = var5.getAndFetch,
-		updateHistory = var5.update,
+		getHistory = var1.get,
+		fetchHistory = var1.fetch,
+		getAndFetchHistory = var1.getAndFetch,
+		updateHistory = var1.update,
 		fetchPageHistory = function(p2, p3)
-			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var5 (ref)
+			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
 			return fetchPlaceVersionHistoryModule.fetchHistory(p2, t, p3):andThen(function(p4)
-				-- upvalues: var5 (copy), p2 (ref)
-				var5.update(p2, p4)
+				-- upvalues: var1 (copy), p2 (ref)
+				var1.update(p2, p4)
 				
 				return p4
 			end)
 		end,
-		revertVersion = function(p5, p6, p7)
-			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var5 (ref)
-			return fetchPlaceVersionHistoryModule.revertVersion(p6, p7, t):andThen(function(_)
-				-- upvalues: p6 (ref), p7 (ref), var5 (copy), p5 (ref)
-				local t = { assetId = p6, assetVersionNumber = p7 }
-				var5.fetch(p5)
+		revertVersion = function(p2, p3, p4)
+			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
+			return fetchPlaceVersionHistoryModule.revertVersion(p3, p4, t):andThen(function(_)
+				-- upvalues: p3 (ref), p4 (ref), var1 (copy), p2 (ref)
+				local t = { assetId = p3, assetVersionNumber = p4 }
+				var1.fetch(p2)
 				
 				return t
-			end):catch(function(p8)
-				error(p8)
+			end):catch(function(p5)
+				error(p5)
 			end)
 		end,
-		rollbackPlace = function(p9, p10, p11, p12)
-			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var5 (ref)
-			return fetchPlaceVersionHistoryModule.rollbackPlace(p9, p10, p11, p12, t):andThen(function(p14)
-				-- upvalues: var5 (copy), p9 (ref)
-				var5.fetch(p9)
+		rollbackPlace = function(p2, p3, p4, p5)
+			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
+			return fetchPlaceVersionHistoryModule.rollbackPlace(p2, p3, p4, p5, t):andThen(function(p6)
+				-- upvalues: var1 (copy), p2 (ref)
+				var1.fetch(p2)
 				
-				return p14
-			end):catch(function(p13)
-				error(p13)
+				return p6
+			end):catch(function(p6)
+				error(p6)
 			end)
 		end,
-		addVersionNote = function(p15, p16, p17)
-			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var5 (ref)
-			return fetchPlaceVersionHistoryModule.addVersionNote(p15, p16, p17, t):andThen(function(p18)
-				-- upvalues: var5 (copy), p15 (ref), p16 (ref), p17 (ref)
-				local var7 = var5.get(p15).data(false)
+		addVersionNote = function(p2, p3, p4)
+			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
+			return fetchPlaceVersionHistoryModule.addVersionNote(p2, p3, p4, t):andThen(function(p5)
+				-- upvalues: var1 (copy), p2 (ref), p3 (ref), p4 (ref)
+				local var2 = var1.get(p2).data(false)
 				
-				if var7 == nil or typeof(var7.placeVersions) ~= "table" then
-					return p18
+				if var2 == nil or typeof(var2.placeVersions) ~= "table" then
+					return p5
 				end
 				local t = {}
 				
-				for i, v in var7.placeVersions do
-					if v.version ~= p16 then
+				for i, v in var2.placeVersions do
+					if v.version ~= p3 then
 						t[i] = v
 						continue
 					end
@@ -75,20 +75,20 @@ return function(p0)
 					for i_1, v_1 in v do
 						t_1[i_1] = v_1
 					end
-					t_1.title = p17.title
-					t_1.description = p17.description
+					t_1.title = p4.title
+					t_1.description = p4.description
 					t[i] = t_1
 				end
-				var5.cache.replaceItem(tostring(p15), {
-					hasMore = var7.hasMore,
-					nextCursor = var7.nextCursor,
+				var1.cache.replaceItem(tostring(p2), {
+					hasMore = var2.hasMore,
+					nextCursor = var2.nextCursor,
 					placeVersions = t
 				})
 				
-				return p18
+				return p5
 			end)
 		end,
-		clear = var5.clear,
-		dispose = var5.dispose
+		clear = var1.clear,
+		dispose = var1.dispose
 	}
 end

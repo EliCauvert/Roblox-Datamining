@@ -23,31 +23,31 @@ end
 
 return {
 	key = "FetchStatusKey",
-	reducer = function(p0, p1)
+	reducer = function(p1, p2)
 		-- upvalues: initializeFetchStatus (ref), setFetchStatusModule (ref)
-		p0 = p0 or initializeFetchStatus()
+		p1 = p1 or initializeFetchStatus()
 		
-		if p1.type ~= setFetchStatusModule.name then
-			return p0
+		if p2.type ~= setFetchStatusModule.name then
+			return p1
 		end
-		assert(p0, "state should always exist, assert for linter")
-		local fetchNamespace = p1.fetchNamespace
-		local fetchKey = p1.fetchKey
+		assert(p1, "state should always exist, assert for linter")
+		local fetchNamespace = p2.fetchNamespace
+		local fetchKey = p2.fetchKey
 		assert(fetchNamespace, "SetFetchStatus does not have a valid fetch namespace")
 		assert(fetchKey, `SetFetchStatus does not have a valid fetch key for namespace {fetchNamespace}`)
-		local var5 = p0[fetchNamespace]
+		local var1 = p1[fetchNamespace]
 		
-		if var5 then
-			assert(var5, "namespaceState should always exist, assert for linter")
-			local cloned = table.clone(var5)
-			cloned[fetchKey] = p1.fetchStatus
-			local cloned_1 = table.clone(p0)
+		if var1 then
+			assert(var1, "namespaceState should always exist, assert for linter")
+			local cloned = table.clone(var1)
+			cloned[fetchKey] = p2.fetchStatus
+			local cloned_1 = table.clone(p1)
 			cloned_1[fetchNamespace] = cloned
 			
 			return cloned_1
 		end
 		warn(`No namespace {fetchNamespace} defined in FetchStatusReducer for action`)
 		
-		return p0
+		return p1
 	end
 }

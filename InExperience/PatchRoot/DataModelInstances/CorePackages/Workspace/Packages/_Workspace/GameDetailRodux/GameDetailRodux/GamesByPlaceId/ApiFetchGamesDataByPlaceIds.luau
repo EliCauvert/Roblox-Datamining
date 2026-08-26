@@ -9,32 +9,32 @@ local receivedPlacesInfos = require(parent.PlaceInfoRodux).Actions.ReceivedPlace
 local convertUniverseIdToString = require(parent.SharedFlags).ConvertUniverseIdToString
 local fFlagMigrateGameIconsToStore = require(parent.SharedFlags).FFlagMigrateGameIconsToStore
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: gamesMultigetPlaceDetailsModule (ref), functional (ref), placeInfoModel (ref), convertUniverseIdToString (ref), receivedPlacesInfos (ref), fFlagMigrateGameIconsToStore (ref), dataHydrationModule (ref), apiFetchGameIcons (ref)
-	return function(p2)
-		-- upvalues: p1 (ref), gamesMultigetPlaceDetailsModule (copy), p0 (ref), functional (copy), placeInfoModel (copy), convertUniverseIdToString (copy), receivedPlacesInfos (copy), fFlagMigrateGameIconsToStore (copy), dataHydrationModule (copy), apiFetchGameIcons (copy)
-		if p1 and #p1 ~= 0 then
-			return gamesMultigetPlaceDetailsModule(p0, p1):andThen(function(p3)
-				-- upvalues: functional (copy), placeInfoModel (copy), convertUniverseIdToString (copy), p2 (ref), receivedPlacesInfos (copy), fFlagMigrateGameIconsToStore (copy), dataHydrationModule (copy), apiFetchGameIcons (copy), p0 (copy)
+	return function(p3)
+		-- upvalues: p2 (ref), gamesMultigetPlaceDetailsModule (copy), p1 (ref), functional (copy), placeInfoModel (copy), convertUniverseIdToString (copy), receivedPlacesInfos (copy), fFlagMigrateGameIconsToStore (copy), dataHydrationModule (copy), apiFetchGameIcons (copy)
+		if p2 and #p2 ~= 0 then
+			return gamesMultigetPlaceDetailsModule(p1, p2):andThen(function(p4)
+				-- upvalues: functional (copy), placeInfoModel (copy), convertUniverseIdToString (copy), p3 (ref), receivedPlacesInfos (copy), fFlagMigrateGameIconsToStore (copy), dataHydrationModule (copy), apiFetchGameIcons (copy), p1 (copy)
 				local t = {}
-				local var4 = functional.Map(p3.responseBody, function(p4)
+				local var1 = functional.Map(p4.responseBody, function(p5)
 					-- upvalues: placeInfoModel (copy), convertUniverseIdToString (copy), t (ref)
-					local var5 = placeInfoModel.fromWeb(p4)
-					table.insert(t, convertUniverseIdToString(var5.universeId))
+					local var2 = placeInfoModel.fromWeb(p5)
+					table.insert(t, convertUniverseIdToString(var2.universeId))
 					
-					return var5
+					return var2
 				end)
-				p2:dispatch(receivedPlacesInfos(var4))
+				p3:dispatch(receivedPlacesInfos(var1))
 				
 				if #t > 0 then
 					if fFlagMigrateGameIconsToStore then
 						dataHydrationModule.Game.getGameIconStore(false).getAndFetchGameIcons(t)
 						
-						return var4
+						return var1
 					end
-					p2:dispatch(apiFetchGameIcons(p0, t))
+					p3:dispatch(apiFetchGameIcons(p1, t))
 				end
-				return var4
+				return var1
 			end)
 		end
 	end

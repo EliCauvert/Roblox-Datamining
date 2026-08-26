@@ -10,25 +10,25 @@ local scrollView = foundationModule.ScrollView
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-local function GridItems(p0)
+local function GridItems(p1)
 	-- upvalues: reactModule (ref), view (ref)
 	local t = {}
 	
-	for i, v in p0.items do
+	for i, v in p1.items do
 		t[i] = reactModule.createElement(view, {
 			key = i,
 			LayoutOrder = i,
-			Size = UDim2.fromOffset(p0.itemSize.X, p0.itemSize.Y)
-		}, { Content = p0.renderItem(v, i) })
+			Size = UDim2.fromOffset(p1.itemSize.X, p1.itemSize.Y)
+		}, { Content = p1.renderItem(v, i) })
 	end
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		UIGridLayout = reactModule.createElement("UIGridLayout", {
-			CellPadding = UDim2.fromOffset(p0.itemPadding.X, p0.itemPadding.Y),
-			CellSize = UDim2.fromOffset(p0.itemSize.X, p0.itemSize.Y),
+			CellPadding = UDim2.fromOffset(p1.itemPadding.X, p1.itemPadding.Y),
+			CellSize = UDim2.fromOffset(p1.itemSize.X, p1.itemSize.Y),
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder
@@ -37,71 +37,71 @@ local function GridItems(p0)
 	})
 end
 
-return function(p1)
+return function(p2)
 	-- upvalues: reactModule (ref), useTokens (ref), dashModule (ref), fFlagMomentsProfileGridInfiniteLoadModule (ref), view (ref), scrollView (ref), scrollBarVisibility (ref), GridItems (ref), button (ref), foundationModule (ref)
-	local var7, var8 = reactModule.useState(Vector2.new(0, 0))
-	local var9, var10 = reactModule.useState(0)
-	local var11 = useTokens()
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref)
-		var8(p2.AbsoluteSize)
+	local var1, var2 = reactModule.useState(Vector2.new(0, 0))
+	local var3, var4 = reactModule.useState(0)
+	local var5 = useTokens()
+	local var6 = reactModule.useCallback(function(p3)
+		-- upvalues: var2 (ref)
+		var2(p3.AbsoluteSize)
 	end, {})
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), p1 (ref)
-		return math.clamp(math.floor(var7.X / p1.itemConfig.minItemWidth), 1, p1.itemConfig.maxItemsPerRow)
-	end, { var7, p1.itemConfig })
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), p1 (ref), var13 (ref)
-		local var20 = var7.X - p1.itemConfig.padding * (var13 - 1)
-		local minValue = math.min(var20 / var13, var20)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), p2 (ref)
+		return math.clamp(math.floor(var1.X / p2.itemConfig.minItemWidth), 1, p2.itemConfig.maxItemsPerRow)
+	end, { var1, p2.itemConfig })
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), p2 (ref), var7 (ref)
+		local var9 = var1.X - p2.itemConfig.padding * (var7 - 1)
+		local minValue = math.min(var9 / var7, var9)
 		
-		return Vector2.new(math.floor(minValue), math.floor(minValue * p1.aspectRatio))
-	end, { var7, var13, p1.aspectRatio, p1.itemConfig })
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), var14 (ref), var13 (ref), p1 (ref)
-		return if var7.Y <= 0 then 0 else math.max(math.floor(var7.Y / var14.Y) * var13, p1.itemConfig.minItemsPerPage)
-	end, { var7, var14, var13, p1.itemConfig })
-	local var16 = var7.X > 0 and var7.Y > 0
-	local shouldShowShowMoreButton = p1.shouldShowShowMoreButton or var9 < #p1.items
+		return Vector2.new(math.floor(minValue), math.floor(minValue * p2.aspectRatio))
+	end, { var1, var7, p2.aspectRatio, p2.itemConfig })
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), var8 (ref), var7 (ref), p2 (ref)
+		return if var1.Y <= 0 then 0 else math.max(math.floor(var1.Y / var8.Y) * var7, p2.itemConfig.minItemsPerPage)
+	end, { var1, var8, var7, p2.itemConfig })
+	local var10 = var1.X > 0 and var1.Y > 0
+	local shouldShowShowMoreButton = p2.shouldShowShowMoreButton or var3 < #p2.items
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var15 (ref), var10 (ref)
-		if var9 < var15 then
-			var10(var15)
+		-- upvalues: var3 (ref), var9 (ref), var4 (ref)
+		if var3 < var9 then
+			var4(var9)
 		end
-	end, { var7, var15, var9 })
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref), var15 (ref), p1 (ref), var10 (ref)
-		if #p1.items < var9 + var15 and p1.shouldShowShowMoreButton then
-			p1.onShowMoreCallback()
+	end, { var1, var9, var3 })
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var9 (ref), p2 (ref), var4 (ref)
+		if #p2.items < var3 + var9 and p2.shouldShowShowMoreButton then
+			p2.onShowMoreCallback()
 		end
-		var10(var9 + var15)
+		var4(var3 + var9)
 	end, {
+		var3,
 		var9,
-		var15,
-		p1.items,
-		p1.onShowMoreCallback,
-		p1.shouldShowShowMoreButton
+		p2.items,
+		p2.onShowMoreCallback,
+		p2.shouldShowShowMoreButton
 	})
-	local var19 = reactModule.useMemo(function()
-		-- upvalues: shouldShowShowMoreButton (ref), p1 (ref), var9 (ref), dashModule (copy)
-		return if shouldShowShowMoreButton then dashModule.slice(p1.items, 1, math.min(#p1.items, var9)) else p1.items
-	end, { p1.items, shouldShowShowMoreButton, var9 })
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: shouldShowShowMoreButton (ref), p2 (ref), var3 (ref), dashModule (copy)
+		return if shouldShowShowMoreButton then dashModule.slice(p2.items, 1, math.min(#p2.items, var3)) else p2.items
+	end, { p2.items, shouldShowShowMoreButton, var3 })
 	
 	if fFlagMomentsProfileGridInfiniteLoadModule then
 		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), shouldShowShowMoreButton (ref), var7 (ref), var14 (ref), var13 (ref), var9 (ref), var19 (ref), var18 (ref)
-			if not p1.enableInfiniteScroll or not shouldShowShowMoreButton then return end
-			if var7.Y <= 0 or var14.Y <= 0 or var13 <= 0 then return end
-			if #p1.items < var9 then return end
-			if math.ceil(#var19 / var13) * var14.Y <= var7.Y then
-				var18()
+			-- upvalues: p2 (ref), shouldShowShowMoreButton (ref), var1 (ref), var8 (ref), var7 (ref), var3 (ref), var12 (ref), var11 (ref)
+			if not p2.enableInfiniteScroll or not shouldShowShowMoreButton then return end
+			if var1.Y <= 0 or var8.Y <= 0 or var7 <= 0 then return end
+			if #p2.items < var3 then return end
+			if math.ceil(#var12 / var7) * var8.Y <= var1.Y then
+				var11()
 			end
 		end, {
-			var7, var19, shouldShowShowMoreButton, p1.enableInfiniteScroll, p1.items,
-			var13, var14, var18
+			var1, var12, shouldShowShowMoreButton, p2.enableInfiniteScroll, p2.items,
+			var7, var8, var11
 		})
 	end
-	return if p1.items == nil or #p1.items == 0 then reactModule.createElement(view, { tag = "shrink size-full", onAbsoluteSizeChanged = var12 }, { EmptyState = p1.renderEmptyState() }) else reactModule.createElement(view, { tag = "shrink size-full", onAbsoluteSizeChanged = var12 }, {
+	return if p2.items == nil or #p2.items == 0 then reactModule.createElement(view, { tag = "shrink size-full", onAbsoluteSizeChanged = var6 }, { EmptyState = p2.renderEmptyState() }) else reactModule.createElement(view, { tag = "shrink size-full", onAbsoluteSizeChanged = var6 }, {
 		GridViewContainer = reactModule.createElement(view, { tag = "size-full" }, {
 			ScrollView = reactModule.createElement(scrollView, {
 				BorderSizePixel = 0,
@@ -111,42 +111,42 @@ return function(p1)
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Top,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, var11.Padding.Large)
+					Padding = UDim.new(0, var5.Padding.Large)
 				},
-				LayoutOrder = if p1.layoutOrder then p1.layoutOrder else 1,
-				onCanvasPositionChanged = if p1.enableInfiniteScroll then if fFlagMomentsProfileGridInfiniteLoadModule then reactModule.useCallback(function(p3)
-					-- upvalues: shouldShowShowMoreButton (ref), var14 (ref), var18 (ref)
+				LayoutOrder = if p2.layoutOrder then p2.layoutOrder else 1,
+				onCanvasPositionChanged = if p2.enableInfiniteScroll then if fFlagMomentsProfileGridInfiniteLoadModule then reactModule.useCallback(function(p3)
+					-- upvalues: shouldShowShowMoreButton (ref), var8 (ref), var11 (ref)
 					if not shouldShowShowMoreButton then return end
-					if p3.AbsoluteCanvasSize.Y - var14.Y <= p3.CanvasPosition.Y + p3.AbsoluteSize.Y then
-						var18()
+					if p3.AbsoluteCanvasSize.Y - var8.Y <= p3.CanvasPosition.Y + p3.AbsoluteSize.Y then
+						var11()
 					end
-				end, { shouldShowShowMoreButton, var18, var14 }) else nil else nil,
+				end, { shouldShowShowMoreButton, var11, var8 }) else nil else nil,
 				scroll = {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.fromScale(1, 0),
 					ScrollingDirection = Enum.ScrollingDirection.Y,
 					scrollBarVisibility = scrollBarVisibility.None
 				},
-				padding = p1.padding
+				padding = p2.padding
 			}, {
-				GridView = if #p1.items > 0 and var16 then reactModule.createElement(GridItems, {
+				GridView = if #p2.items > 0 and var10 then reactModule.createElement(GridItems, {
 					LayoutOrder = 1,
-					itemPadding = Vector2.new(p1.itemConfig.padding, p1.itemConfig.padding),
-					items = var19,
-					itemsPerRow = var13,
-					itemSize = var14,
-					renderItem = p1.renderItem
+					itemPadding = Vector2.new(p2.itemConfig.padding, p2.itemConfig.padding),
+					items = var12,
+					itemsPerRow = var7,
+					itemSize = var8,
+					renderItem = p2.renderItem
 				}) else nil,
-				ShowMore = if shouldShowShowMoreButton and not p1.enableInfiniteScroll then reactModule.createElement(button, {
+				ShowMore = if shouldShowShowMoreButton and not p2.enableInfiniteScroll then reactModule.createElement(button, {
 					LayoutOrder = 2,
-					onActivated = var18,
+					onActivated = var11,
 					size = foundationModule.Enums.InputSize.Small,
-					text = p1.showMoreButtonText
+					text = p2.showMoreButtonText
 				}) else nil,
-				Footer = if shouldShowShowMoreButton or p1.footer == nil or var15 >= #p1.items then nil else reactModule.createElement(view, {
+				Footer = if shouldShowShowMoreButton or p2.footer == nil or var9 >= #p2.items then nil else reactModule.createElement(view, {
 					LayoutOrder = 3,
 					tag = "size-full-0 auto-y align-x-center align-y-center"
-				}, { Content = p1.footer })
+				}, { Content = p2.footer })
 			})
 		})
 	})

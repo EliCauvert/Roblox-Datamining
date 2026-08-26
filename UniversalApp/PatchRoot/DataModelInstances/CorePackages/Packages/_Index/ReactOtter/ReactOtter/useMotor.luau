@@ -2,52 +2,52 @@
 local reactModule = require(parent.React)
 local otterModule = require(parent.Otter)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), otterModule (ref)
+	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(nil)
 	
-	if not var2.current then
-		local var4 = if typeof(p0) == "number" then otterModule.createSingleMotor(p0) else otterModule.createGroupMotor(p0)
+	if not var1.current then
+		local var3 = if typeof(p1) == "number" then otterModule.createSingleMotor(p1) else otterModule.createGroupMotor(p1)
 		
-		function var3.current(p3)
-			-- upvalues: var4 (write)
-			var4:setGoal(p3)
+		function var3.current(p4)
+			-- upvalues: var3 (write)
+			var3:setGoal(p4)
 		end
 		
-		var2.current = var4
+		var1.current = var3
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p2 (ref), p1 (ref)
+		-- upvalues: var1 (ref), p3 (ref), p2 (ref)
+		local var4 = nil
 		local var5 = nil
-		local var6 = nil
 		
-		if var2.current then
-			if p2 then
-				var5 = var2.current:onComplete(p2)
+		if var1.current then
+			if p3 then
+				var4 = var1.current:onComplete(p3)
 			end
-			var6 = var2.current:onStep(p1)
+			var5 = var1.current:onStep(p2)
 		end
 		return function()
-			-- upvalues: var5 (write), var6 (write)
+			-- upvalues: var4 (write), var5 (write)
+			if var4 then
+				var4()
+			end
 			if var5 then
 				var5()
 			end
-			if var6 then
-				var6()
-			end
 		end
-	end, { p1, p2 })
+	end, { p2, p3 })
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
+		-- upvalues: var1 (ref)
 		return function()
-			-- upvalues: var2 (copy)
-			if var2.current then
-				var2.current:destroy()
-				var2.current = nil
+			-- upvalues: var1 (copy)
+			if var1.current then
+				var1.current:destroy()
+				var1.current = nil
 			end
 		end
-	end, { var2.current })
+	end, { var1.current })
 	
-	return var3.current
+	return var2.current
 end

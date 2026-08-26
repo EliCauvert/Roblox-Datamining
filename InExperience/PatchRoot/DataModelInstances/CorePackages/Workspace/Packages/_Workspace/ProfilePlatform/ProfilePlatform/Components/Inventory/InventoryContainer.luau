@@ -21,45 +21,45 @@ local assetsCarouselModule = require(profilePlatform.Components.AssetsCarousel)
 local _ = require(profilePlatform.Common.AssetInfo)
 local fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(profilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var14 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), useMarketplaceAnalyticsContextModule (ref), reactModule (ref), eventNamesModule (ref), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), useSelector (ref), constantsModule (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var14 (ref), navigateDown (ref), networkingCatalogModule (ref), assetsCarouselModule (ref)
-	local var15 = useProfileWrapperContextModule()
-	local var16 = useProfileAnalyticsContextModule()
-	local profileId = var15.profileId
-	local var17 = useDispatch()
-	local var18 = useLocalization({ inventory = textKeysModule.Inventory })
-	local var19 = useMarketplaceAnalyticsContextModule()
-	local var20 = reactModule.useCallback(function(p1, p2, _, _, p3)
-		-- upvalues: var15 (ref), var16 (ref), eventNamesModule (copy), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), enumsModule (copy), var19 (ref)
-		var15.navigateTo.itemDetails(p1)
-		var16.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
+return function(p1)
+	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), useMarketplaceAnalyticsContextModule (ref), reactModule (ref), eventNamesModule (ref), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), useSelector (ref), constantsModule (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), networkingCatalogModule (ref), assetsCarouselModule (ref)
+	local var2 = useProfileWrapperContextModule()
+	local var3 = useProfileAnalyticsContextModule()
+	local profileId = var2.profileId
+	local var4 = useDispatch()
+	local var5 = useLocalization({ inventory = textKeysModule.Inventory })
+	local var6 = useMarketplaceAnalyticsContextModule()
+	local var7 = reactModule.useCallback(function(p2, p3, _, _, p4)
+		-- upvalues: var2 (ref), var3 (ref), eventNamesModule (copy), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), enumsModule (copy), var6 (ref)
+		var2.navigateTo.itemDetails(p2)
+		var3.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
 			btnContext = tostring(enumsModule.Components.Inventory),
-			btnUnitId = tostring(p1),
-			btnSortPosition = tostring(p3)
+			btnUnitId = tostring(p2),
+			btnSortPosition = tostring(p4)
 		} else {
-			positionInComponent = tostring(p3),
+			positionInComponent = tostring(p4),
 			component = tostring(enumsModule.Components.Inventory),
-			itemId = tostring(p1)
+			itemId = tostring(p2)
 		})
-		var15.externalAnalytics.catalogAnalytics.clickCatalogItemFromProfile(var19, p1, p2, enumsModule.Components.Inventory, p3)
+		var2.externalAnalytics.catalogAnalytics.clickCatalogItemFromProfile(var6, p2, p3, enumsModule.Components.Inventory, p4)
 	end, {
-		var16,
-		var15.navigateTo.itemDetails,
-		var15.externalAnalytics.catalogAnalytics
+		var3,
+		var2.navigateTo.itemDetails,
+		var2.externalAnalytics.catalogAnalytics
 	})
 	local assets = useProfileJsonComponentModule(enumsModule.Components.Inventory).assets or {}
-	local var22 = useSelector(function(p4)
+	local var8 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p4[constantsModule.RODUX_KEY].AssetDetails or {}
+		return p2[constantsModule.RODUX_KEY].AssetDetails or {}
 	end)
-	local var23 = reactModule.useMemo(function()
-		-- upvalues: assets (ref), var22 (ref)
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: assets (ref), var8 (ref)
 		local t = {}
 		
 		for i, v in assets do
-			local assetId = var22[tostring(v.assetId)]
+			local assetId = var8[tostring(v.assetId)]
 			
 			if assetId then
 				assetId.itemType = v.itemType
@@ -67,9 +67,9 @@ return function(p0)
 			end
 		end
 		return t
-	end, { assets, var22 })
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: appPage (copy), url (copy), profileId (ref), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var14 (copy), var17 (ref), navigateDown (copy)
+	end, { assets, var8 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: appPage (copy), url (copy), profileId (ref), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var4 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.GenericWebPage,
 			detail = string.format("%susers/%s/inventory", url.BASE_URL, profileId),
@@ -77,22 +77,22 @@ return function(p0)
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var14.down(var14.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		var17(navigateDown(t))
+		var4(navigateDown(t))
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), networkingCatalogModule (copy), assets (ref)
-		var17(networkingCatalogModule.GetItemAndBundleDetails.API(assets))
-	end, { assets, var17 })
+		-- upvalues: var4 (ref), networkingCatalogModule (copy), assets (ref)
+		var4(networkingCatalogModule.GetItemAndBundleDetails.API(assets))
+	end, { assets, var4 })
 	
-	return if #var23 > 0 then reactModule.createElement(assetsCarouselModule, {
-		title = var18.inventory,
-		layoutOrder = p0.layoutOrder,
-		assets = var23,
-		openItemDetails = var20,
-		onActivateHeader = var24
+	return if #var9 > 0 then reactModule.createElement(assetsCarouselModule, {
+		title = var5.inventory,
+		layoutOrder = p1.layoutOrder,
+		assets = var9,
+		openItemDetails = var7,
+		onActivateHeader = var10
 	}) else nil
 end

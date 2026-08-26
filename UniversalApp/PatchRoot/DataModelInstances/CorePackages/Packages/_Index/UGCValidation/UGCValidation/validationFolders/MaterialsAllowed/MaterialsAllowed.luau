@@ -25,19 +25,19 @@ local function buildAcceptedMaterialList()
 	return table.concat(t, ", ")
 end
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: constantsModule (ref), buildAcceptedMaterialList (ref), errorSourceStringsModule (ref)
-	local rootInstance = p1.rootInstance
+	local rootInstance = p2.rootInstance
 	local descendants = rootInstance:GetDescendants()
 	table.insert(descendants, rootInstance)
-	local var7 = nil
+	local var1 = nil
 	
 	for i, v in descendants do
 		if v:IsA("BasePart") and not constantsModule.MATERIAL_WHITELIST[v.Material] then
-			var7 = var7 or buildAcceptedMaterialList()
-			p0:fail(errorSourceStringsModule.Keys.MaterialNotAllowed, {
+			var1 = var1 or buildAcceptedMaterialList()
+			p1:fail(errorSourceStringsModule.Keys.MaterialNotAllowed, {
 				InstanceNameList = v:GetFullName(),
-				AllowedMaterials = var7
+				AllowedMaterials = var1
 			})
 		end
 	end

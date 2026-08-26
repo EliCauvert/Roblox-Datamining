@@ -40,265 +40,265 @@ local tbl = setmetatable({
 	end
 })
 
-function scrollingPicker.init(p0)
+function scrollingPicker.init(p1)
 	-- upvalues: t (ref), t_1 (ref), roactModule (ref), otterModule (ref), tbl (ref), scrollingPickerMaximumPickerChangePerInput (ref), scrollingPicker (ref), scrollingPickerSmallInputDecayFactor (ref), scrollingPickerSlowScrollStepWaitMs (ref)
-	local parentSpecifiedTarget = p0.props.parentSpecifiedTarget
-	local scrollDirection = p0.props.scrollDirection
-	local shouldExpandTapTarget = p0.props.shouldExpandTapTarget
-	p0.state = {
+	local parentSpecifiedTarget = p1.props.parentSpecifiedTarget
+	local scrollDirection = p1.props.scrollDirection
+	local shouldExpandTapTarget = p1.props.shouldExpandTapTarget
+	p1.state = {
 		scrollDirection = scrollDirection,
 		scrollingAxis = t[scrollDirection],
 		subAxis = t_1[scrollDirection]
 	}
-	p0.isMounted = false
-	p0.currentIndex = 1
-	p0.targetEntryRef = roactModule.createRef()
-	p0.targetIndex = parentSpecifiedTarget
-	p0.isEntrySelected = false
-	p0.isTargetIndexSetByUserInput = false
-	p0.timeInputBegan = tick()
-	p0.recognizedInputBegan = false
-	p0.inputChanged = false
-	p0.inputPositionAtInputBegan = 0
-	p0.inputPreviousPositionScrollingAxis = 0
-	p0.scrollRef = roactModule.createRef()
-	p0.shouldExpandTapTarget = shouldExpandTapTarget
-	p0.tapTargetExpansionSize = p0.props.tapTargetExpansionSize
-	p0.scrollDeltaAccumulator = 0
+	p1.isMounted = false
+	p1.currentIndex = 1
+	p1.targetEntryRef = roactModule.createRef()
+	p1.targetIndex = parentSpecifiedTarget
+	p1.isEntrySelected = false
+	p1.isTargetIndexSetByUserInput = false
+	p1.timeInputBegan = tick()
+	p1.recognizedInputBegan = false
+	p1.inputChanged = false
+	p1.inputPositionAtInputBegan = 0
+	p1.inputPreviousPositionScrollingAxis = 0
+	p1.scrollRef = roactModule.createRef()
+	p1.shouldExpandTapTarget = shouldExpandTapTarget
+	p1.tapTargetExpansionSize = p1.props.tapTargetExpansionSize
+	p1.scrollDeltaAccumulator = 0
 	
-	function p0.getCenterIndexByPosition(p1)
-		-- upvalues: p0 (ref)
-		return math.floor(-p1 / p0.props.entrySizeOnScrollingAxis) + 1
+	function p0.getCenterIndexByPosition(p2)
+		-- upvalues: p1 (ref)
+		return math.floor(-p2 / p1.props.entrySizeOnScrollingAxis) + 1
 	end
 	
 	function p0.getCenterIndexByScrollPosition(p2)
-		-- upvalues: p0 (ref)
-		return p0.getCenterIndexByPosition(p2 - p0.props.entrySizeOnScrollingAxis / 2)
+		-- upvalues: p1 (ref)
+		return p1.getCenterIndexByPosition(p2 - p1.props.entrySizeOnScrollingAxis / 2)
 	end
 	
 	function p0.updateParent()
-		-- upvalues: p0 (ref)
-		local onCurrentIndexChanged = p0.props.onCurrentIndexChanged
-		local onSelectedIndexChanged = p0.props.onSelectedIndexChanged
+		-- upvalues: p1 (ref)
+		local onCurrentIndexChanged = p1.props.onCurrentIndexChanged
+		local onSelectedIndexChanged = p1.props.onSelectedIndexChanged
 		
 		if onCurrentIndexChanged then
-			onCurrentIndexChanged(p0.currentIndex)
+			onCurrentIndexChanged(p1.currentIndex)
 		end
-		if onSelectedIndexChanged and p0.currentIndex == p0.targetIndex then
-			onSelectedIndexChanged(p0.currentIndex, p0.isTargetIndexSetByUserInput)
+		if onSelectedIndexChanged and p1.currentIndex == p1.targetIndex then
+			onSelectedIndexChanged(p1.currentIndex, p1.isTargetIndexSetByUserInput)
 		end
 	end
 	
 	function p0.onScrollPositionChanged()
-		-- upvalues: p0 (ref)
-		if p0.scrollRef.current then
-			local centerIndexByScrollPosition = p0.getCenterIndexByScrollPosition(p0.scrollRef.current.Position[p0.state.scrollingAxis].Offset)
+		-- upvalues: p1 (ref)
+		if p1.scrollRef.current then
+			local centerIndexByScrollPosition = p1.getCenterIndexByScrollPosition(p1.scrollRef.current.Position[p1.state.scrollingAxis].Offset)
 			
-			if centerIndexByScrollPosition ~= p0.currentIndex then
-				p0.currentIndex = centerIndexByScrollPosition
-				p0.updateParent()
+			if centerIndexByScrollPosition ~= p1.currentIndex then
+				p1.currentIndex = centerIndexByScrollPosition
+				p1.updateParent()
 			end
 		end
 	end
 	
-	function p0.updateTargetIndex(p3)
-		-- upvalues: p0 (ref), otterModule (copy)
-		local newTargetIndex = p3.newTargetIndex
-		local isSetByUserInput = p3.isSetByUserInput
-		local otterAnimationType = p3.otterAnimationType
+	function p0.updateTargetIndex(p2)
+		-- upvalues: p1 (ref), otterModule (copy)
+		local newTargetIndex = p2.newTargetIndex
+		local isSetByUserInput = p2.isSetByUserInput
+		local otterAnimationType = p2.otterAnimationType
 		
 		if otterAnimationType == nil then
 			otterAnimationType = "spring"
 		end
-		local entries = p0.props.entries
-		local entrySizeOnScrollingAxis = p0.props.entrySizeOnScrollingAxis
-		p0.targetIndex = if #entries < 1 then 0 else math.clamp(newTargetIndex, math.max(1, p0.props.minTargetIndex or 1), #entries)
-		p0.isTargetIndexSetByUserInput = isSetByUserInput
-		p0.motor:setGoal(otterModule[otterAnimationType](-(entrySizeOnScrollingAxis * (p0.targetIndex - 1)), { frequency = 2 }))
+		local entries = p1.props.entries
+		local entrySizeOnScrollingAxis = p1.props.entrySizeOnScrollingAxis
+		p1.targetIndex = if #entries < 1 then 0 else math.clamp(newTargetIndex, math.max(1, p1.props.minTargetIndex or 1), #entries)
+		p1.isTargetIndexSetByUserInput = isSetByUserInput
+		p1.motor:setGoal(otterModule[otterAnimationType](-(entrySizeOnScrollingAxis * (p1.targetIndex - 1)), { frequency = 2 }))
 		
-		if p0.currentIndex == p0.targetIndex then
-			p0.updateParent()
+		if p1.currentIndex == p1.targetIndex then
+			p1.updateParent()
 		end
 	end
 	
-	function p0.updateIndexByInputPosition(p4)
-		-- upvalues: p0 (ref)
-		if p0.scrollRef.current then
-			local scrollingAxis = p0.state.scrollingAxis
-			local absolutePosition = p0.scrollRef.current.AbsolutePosition
-			local absoluteSize = p0.scrollRef.current.AbsoluteSize
+	function p0.updateIndexByInputPosition(p2)
+		-- upvalues: p1 (ref)
+		if p1.scrollRef.current then
+			local scrollingAxis = p1.state.scrollingAxis
+			local absolutePosition = p1.scrollRef.current.AbsolutePosition
+			local absoluteSize = p1.scrollRef.current.AbsoluteSize
 			local _ = 0
-			p0.updateTargetIndex({
+			p1.updateTargetIndex({
 				isSetByUserInput = true,
-				newTargetIndex = p0.getCenterIndexByPosition(if absolutePosition.X < p4.X and p4.X < absolutePosition.X + absoluteSize.X and (absolutePosition.Y < p4.Y and p4.Y < absolutePosition.Y + absoluteSize.Y) then absolutePosition[scrollingAxis] - p4[scrollingAxis] else -(p0.targetIndex - 1) * p0.props.entrySizeOnScrollingAxis)
+				newTargetIndex = p1.getCenterIndexByPosition(if absolutePosition.X < p2.X and p2.X < absolutePosition.X + absoluteSize.X and (absolutePosition.Y < p2.Y and p2.Y < absolutePosition.Y + absoluteSize.Y) then absolutePosition[scrollingAxis] - p2[scrollingAxis] else -(p1.targetIndex - 1) * p1.props.entrySizeOnScrollingAxis)
 			})
 		end
 	end
 	
-	function p0.updateIndexByScrollPositionAndOffset(p5)
-		-- upvalues: p0 (ref)
-		p5 = p5 or 0
+	function p0.updateIndexByScrollPositionAndOffset(p2)
+		-- upvalues: p1 (ref)
+		p2 = p2 or 0
 		
-		if p0.scrollRef.current then
-			p0.updateTargetIndex({
+		if p1.scrollRef.current then
+			p1.updateTargetIndex({
 				isSetByUserInput = true,
-				newTargetIndex = p0.getCenterIndexByScrollPosition(p0.scrollRef.current.Position[p0.state.scrollingAxis].Offset + p5)
+				newTargetIndex = p1.getCenterIndexByScrollPosition(p1.scrollRef.current.Position[p1.state.scrollingAxis].Offset + p2)
 			})
 		end
 	end
 	
-	function p0.onInputBegan(_, p6)
-		-- upvalues: p0 (ref), tbl (copy)
-		local scrollingAxis = p0.state.scrollingAxis
+	function p0.onInputBegan(_, p2)
+		-- upvalues: p1 (ref), tbl (copy)
+		local scrollingAxis = p1.state.scrollingAxis
 		
-		if p0.isMounted and tbl[p6.UserInputType] and (#p0.props.entries > 0 and p6.UserInputState == Enum.UserInputState.Begin) then
-			p0.recognizedInputBegan = true
-			p0.timeInputBegan = tick()
-			p0.inputPositionAtInputBegan = p6.Position[scrollingAxis]
-			p0.inputPreviousPositionScrollingAxis = p6.Position[scrollingAxis]
-			p0.motor:stop()
+		if p1.isMounted and tbl[p2.UserInputType] and (#p1.props.entries > 0 and p2.UserInputState == Enum.UserInputState.Begin) then
+			p1.recognizedInputBegan = true
+			p1.timeInputBegan = tick()
+			p1.inputPositionAtInputBegan = p2.Position[scrollingAxis]
+			p1.inputPreviousPositionScrollingAxis = p2.Position[scrollingAxis]
+			p1.motor:stop()
 		end
 	end
 	
-	function scrollingPicker.restrictInputChangeDelta(_, p7)
+	function scrollingPicker.restrictInputChangeDelta(_, p2)
 		-- upvalues: scrollingPickerMaximumPickerChangePerInput (copy), scrollingPicker (copy), scrollingPickerSmallInputDecayFactor (copy)
-		local minValue = math.min(math.abs(p7), scrollingPickerMaximumPickerChangePerInput * scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD)
+		local minValue = math.min(math.abs(p2), scrollingPickerMaximumPickerChangePerInput * scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD)
 		
-		return if minValue < scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD then math.pow(minValue / scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD, scrollingPickerSmallInputDecayFactor) * scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD else minValue * (if p7 > 0 then 1 else -1)
+		return if minValue < scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD then math.pow(minValue / scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD, scrollingPickerSmallInputDecayFactor) * scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD else minValue * (if p2 > 0 then 1 else -1)
 	end
 	
-	function p0.onInputChanged(_, p8)
-		-- upvalues: p0 (ref), scrollingPicker (copy), scrollingPickerSlowScrollStepWaitMs (copy), otterModule (copy)
-		local entries = p0.props.entries
-		local entrySizeOnScrollingAxis = p0.props.entrySizeOnScrollingAxis
-		local scrollingAxis = p0.state.scrollingAxis
+	function p0.onInputChanged(_, p2)
+		-- upvalues: p1 (ref), scrollingPicker (copy), scrollingPickerSlowScrollStepWaitMs (copy), otterModule (copy)
+		local entries = p1.props.entries
+		local entrySizeOnScrollingAxis = p1.props.entrySizeOnScrollingAxis
+		local scrollingAxis = p1.state.scrollingAxis
 		
-		if p8.UserInputType == Enum.UserInputType.MouseWheel then
-			local z = p8.Position.Z
-			local var15 = scrollingPicker:restrictInputChangeDelta(z)
+		if p2.UserInputType == Enum.UserInputType.MouseWheel then
+			local z = p2.Position.Z
+			local var1 = scrollingPicker:restrictInputChangeDelta(z)
 			
-			if z < 0 ~= (p0.scrollDeltaAccumulator < 0) then
-				p0.scrollDeltaAccumulator = 0
+			if z < 0 ~= (p1.scrollDeltaAccumulator < 0) then
+				p1.scrollDeltaAccumulator = 0
 			end
-			p0.scrollDeltaAccumulator += var15
-			local var16 = math.abs(p0.scrollDeltaAccumulator) <= 4 * scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD
-			while scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD <= math.abs(p0.scrollDeltaAccumulator) do
-				local var17 = if p0.scrollDeltaAccumulator > 0 then 1 else -1
-				p0.updateTargetIndex({
+			p1.scrollDeltaAccumulator += var1
+			local var2 = math.abs(p1.scrollDeltaAccumulator) <= 4 * scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD
+			while scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD <= math.abs(p1.scrollDeltaAccumulator) do
+				local var3 = if p1.scrollDeltaAccumulator > 0 then 1 else -1
+				p1.updateTargetIndex({
 					isSetByUserInput = true,
 					OtterAnimationType = "spring",
-					newTargetIndex = p0.targetIndex - var17
+					newTargetIndex = p1.targetIndex - var3
 				})
-				p0.scrollDeltaAccumulator -= scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD * var17
+				p1.scrollDeltaAccumulator -= scrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD * var3
 				
-				if var16 then
+				if var2 then
 					task.wait(scrollingPickerSlowScrollStepWaitMs)
 				end
 			end
 			return
-		elseif p0.recognizedInputBegan then
-			local var18 = p8.Position[scrollingAxis] - p0.inputPreviousPositionScrollingAxis
+		elseif p1.recognizedInputBegan then
+			local var4 = p2.Position[scrollingAxis] - p1.inputPreviousPositionScrollingAxis
 			
-			if p0.scrollRef.current then
-				p0.motor:setGoal(otterModule.instant(math.max(math.min(-(entrySizeOnScrollingAxis * (math.max(1, p0.props.minTargetIndex or 1) - 1)), p0.scrollRef.current.Position[scrollingAxis].Offset + var18), -(entrySizeOnScrollingAxis * (#entries - 1)))))
+			if p1.scrollRef.current then
+				p1.motor:setGoal(otterModule.instant(math.max(math.min(-(entrySizeOnScrollingAxis * (math.max(1, p1.props.minTargetIndex or 1) - 1)), p1.scrollRef.current.Position[scrollingAxis].Offset + var4), -(entrySizeOnScrollingAxis * (#entries - 1)))))
 			end
-			p0.inputChanged = true
-			p0.inputPreviousPositionScrollingAxis = p8.Position[scrollingAxis]
+			p1.inputChanged = true
+			p1.inputPreviousPositionScrollingAxis = p2.Position[scrollingAxis]
 		end
 	end
 	
-	function p0.onInputEnded(_, p9)
-		-- upvalues: p0 (ref)
-		local scrollingAxis = p0.state.scrollingAxis
+	function p0.onInputEnded(_, p3)
+		-- upvalues: p1 (ref)
+		local scrollingAxis = p1.state.scrollingAxis
 		
-		if p0.recognizedInputBegan then
-			if p0.inputChanged and math.abs(p9.Position[scrollingAxis] - p0.inputPositionAtInputBegan) > 1.5 then
-				local var19 = tick() - p0.timeInputBegan
+		if p1.recognizedInputBegan then
+			if p1.inputChanged and math.abs(p3.Position[scrollingAxis] - p1.inputPositionAtInputBegan) > 1.5 then
+				local var5 = tick() - p1.timeInputBegan
 				
-				if var19 < 0.3 then
-					p0.updateIndexByScrollPositionAndOffset(p9.Delta[scrollingAxis] / var19)
+				if var5 < 0.3 then
+					p1.updateIndexByScrollPositionAndOffset(p3.Delta[scrollingAxis] / var5)
 				else
-					p0.updateIndexByScrollPositionAndOffset(0)
+					p1.updateIndexByScrollPositionAndOffset(0)
 				end
 			else
-				p0.updateIndexByInputPosition(p9.Position)
+				p1.updateIndexByInputPosition(p3.Position)
 			end
 		end
-		p0.recognizedInputBegan = false
-		p0.inputChanged = false
+		p1.recognizedInputBegan = false
+		p1.inputChanged = false
 	end
 	
-	function p0.onSelectionGained(p10)
-		-- upvalues: p0 (ref)
-		p0.isEntrySelected = true
-		p0.updateTargetIndex({
+	function p0.onSelectionGained(p3)
+		-- upvalues: p1 (ref)
+		p1.isEntrySelected = true
+		p1.updateTargetIndex({
 			isSetByUserInput = true,
 			otterAnimationType = "instant",
-			newTargetIndex = p10
+			newTargetIndex = p3
 		})
 	end
 	
 	function p0.onSelectionLost()
-		-- upvalues: p0 (ref)
-		p0.isEntrySelected = false
+		-- upvalues: p1 (ref)
+		p1.isEntrySelected = false
 	end
 end
 
-function scrollingPicker.didMount(p11)
+function scrollingPicker.didMount(p2)
 	-- upvalues: otterModule (ref), scrollingPickerDirectionModule (ref)
-	p11.updateParent()
-	p11.motor = otterModule.createSingleMotor(0)
-	p11.motor:onStep(function(p12)
-		-- upvalues: p11 (ref), scrollingPickerDirectionModule (copy)
-		if p11.scrollRef.current then
-			local scrollingAxis = p11.state.scrollingAxis
-			local subAxis = p11.state.subAxis
-			local position = p11.scrollRef.current.Position
-			p11.scrollRef.current.Position = if p11.state.scrollDirection == scrollingPickerDirectionModule.Horizontal then UDim2.new(UDim.new(position[scrollingAxis].Scale, p12), position[subAxis]) else UDim2.new(position[subAxis], UDim.new(position[scrollingAxis].Scale, p12))
+	p2.updateParent()
+	p2.motor = otterModule.createSingleMotor(0)
+	p2.motor:onStep(function(p3)
+		-- upvalues: p2 (ref), scrollingPickerDirectionModule (copy)
+		if p2.scrollRef.current then
+			local scrollingAxis = p2.state.scrollingAxis
+			local subAxis = p2.state.subAxis
+			local position = p2.scrollRef.current.Position
+			p2.scrollRef.current.Position = if p2.state.scrollDirection == scrollingPickerDirectionModule.Horizontal then UDim2.new(UDim.new(position[scrollingAxis].Scale, p3), position[subAxis]) else UDim2.new(position[subAxis], UDim.new(position[scrollingAxis].Scale, p3))
 		end
 	end)
-	p11.motor:onComplete(function()
-		-- upvalues: p11 (ref)
-		if p11.props.onAnimationComplete then
-			p11.props.onAnimationComplete()
+	p2.motor:onComplete(function()
+		-- upvalues: p2 (ref)
+		if p2.props.onAnimationComplete then
+			p2.props.onAnimationComplete()
 		end
 	end)
-	p11.updateTargetIndex({
+	p2.updateTargetIndex({
 		isSetByUserInput = false,
 		otterAnimationType = "instant",
-		newTargetIndex = p11.targetIndex
+		newTargetIndex = p2.targetIndex
 	})
-	p11.isMounted = true
+	p2.isMounted = true
 end
 
-function scrollingPicker.willUnmount(p13)
-	p13.isMounted = false
-	p13.motor:destroy()
+function scrollingPicker.willUnmount(p2)
+	p2.isMounted = false
+	p2.motor:destroy()
 end
 
-function scrollingPicker.didUpdate(p14, p15)
-	local parentSpecifiedTarget = p14.props.parentSpecifiedTarget
+function scrollingPicker.didUpdate(p2, p3)
+	local parentSpecifiedTarget = p2.props.parentSpecifiedTarget
 	
-	if if p14.props.entrySizeOnScrollingAxis == p15.entrySizeOnScrollingAxis then parentSpecifiedTarget ~= p14.targetIndex and parentSpecifiedTarget ~= p15.parentSpecifiedTarget else true then
-		p14.updateTargetIndex({
+	if if p2.props.entrySizeOnScrollingAxis == p3.entrySizeOnScrollingAxis then parentSpecifiedTarget ~= p2.targetIndex and parentSpecifiedTarget ~= p3.parentSpecifiedTarget else true then
+		p2.updateTargetIndex({
 			isSetByUserInput = false,
-			newTargetIndex = parentSpecifiedTarget or p14.targetIndex
+			newTargetIndex = parentSpecifiedTarget or p2.targetIndex
 		})
 	end
 end
 
-function scrollingPicker.render(p16)
+function scrollingPicker.render(p2)
 	-- upvalues: withStyle (ref), scrollingPickerDirectionModule (ref), fitChildrenModule (ref), roactModule (ref), cryoModule (ref)
 	return withStyle(function(_)
-		-- upvalues: p16 (ref), scrollingPickerDirectionModule (copy), fitChildrenModule (copy), roactModule (copy), cryoModule (copy)
+		-- upvalues: p2 (ref), scrollingPickerDirectionModule (copy), fitChildrenModule (copy), roactModule (copy), cryoModule (copy)
 		local width, horizontal, uDim2, uDim2_1, uDim2_2
-		local layoutOrder = p16.props.layoutOrder
-		local size = p16.props.size
-		local entries = p16.props.entries
-		local entrySizeOnScrollingAxis = p16.props.entrySizeOnScrollingAxis
-		local clipsDescendants = p16.props.clipsDescendants
-		local scrollDirection = p16.state.scrollDirection
-		local getEntryWrapperProps = p16.props.getEntryWrapperProps
+		local layoutOrder = p2.props.layoutOrder
+		local size = p2.props.size
+		local entries = p2.props.entries
+		local entrySizeOnScrollingAxis = p2.props.entrySizeOnScrollingAxis
+		local clipsDescendants = p2.props.clipsDescendants
+		local scrollDirection = p2.state.scrollDirection
+		local getEntryWrapperProps = p2.props.getEntryWrapperProps
 		local _ = nil
 		local _ = nil
 		local _ = nil
@@ -323,24 +323,24 @@ function scrollingPicker.render(p16)
 		
 		for i, v in ipairs(entries) do
 			local t_1 = {
-				Interactable = i == p16.targetIndex and p16.isEntrySelected,
+				Interactable = i == p2.targetIndex and p2.isEntrySelected,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Text = "",
-				Selectable = math.abs(p16.targetIndex - i) < 2,
-				[roactModule.Ref] = if i == p16.targetIndex then p16.targetEntryRef else nil,
+				Selectable = math.abs(p2.targetIndex - i) < 2,
+				[roactModule.Ref] = if i == p2.targetIndex then p2.targetEntryRef else nil,
 				[roactModule.Event.SelectionGained] = function()
-					-- upvalues: p16 (copy), i (ref)
-					p16.onSelectionGained(i)
+					-- upvalues: p2 (copy), i (ref)
+					p2.onSelectionGained(i)
 				end,
-				[roactModule.Event.SelectionLost] = p16.onSelectionLost,
-				[roactModule.Event.Activated] = p16.props.onEntryActivated
+				[roactModule.Event.SelectionLost] = p2.onSelectionLost,
+				[roactModule.Event.Activated] = p2.props.onEntryActivated
 			}
 			
 			if getEntryWrapperProps then
 				t_1 = cryoModule.Dictionary.join(t_1, getEntryWrapperProps(v))
 			end
-			table.insert(t, roactModule.createElement("TextButton", cryoModule.Dictionary.join(t_1, { Size = uDim2, LayoutOrder = i }), { p16.props.renderEntry(v) }))
+			table.insert(t, roactModule.createElement("TextButton", cryoModule.Dictionary.join(t_1, { Size = uDim2, LayoutOrder = i }), { p2.props.renderEntry(v) }))
 		end
 		table.insert(t, roactModule.createElement("UIListLayout", {
 			FillDirection = horizontal,
@@ -351,18 +351,18 @@ function scrollingPicker.render(p16)
 		
 		return roactModule.createElement("Frame", {
 			LayoutOrder = layoutOrder,
-			Size = if p16.shouldExpandTapTarget then size + UDim2.new(0, 0, 0, p16.tapTargetExpansionSize) else size,
+			Size = if p2.shouldExpandTapTarget then size + UDim2.new(0, 0, 0, p2.tapTargetExpansionSize) else size,
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			ClipsDescendants = clipsDescendants,
 			SelectionGroup = true,
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
-			[roactModule.Event.InputBegan] = p16.onInputBegan,
-			[roactModule.Event.InputChanged] = p16.onInputChanged,
-			[roactModule.Event.InputEnded] = p16.onInputEnded
+			[roactModule.Event.InputBegan] = p2.onInputBegan,
+			[roactModule.Event.InputChanged] = p2.onInputChanged,
+			[roactModule.Event.InputEnded] = p2.onInputEnded
 		}, {
-			CenterPosition = if p16.shouldExpandTapTarget then roactModule.createElement("Frame", {
+			CenterPosition = if p2.shouldExpandTapTarget then roactModule.createElement("Frame", {
 				ClipsDescendants = true,
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
@@ -380,8 +380,8 @@ function scrollingPicker.render(p16)
 						fitAxis = width,
 						BorderSizePixel = 0,
 						BackgroundTransparency = 1,
-						[roactModule.Ref] = p16.scrollRef,
-						[roactModule.Change.AbsolutePosition] = p16.onScrollPositionChanged
+						[roactModule.Ref] = p2.scrollRef,
+						[roactModule.Change.AbsolutePosition] = p2.onScrollPositionChanged
 					}, t)
 				})
 			}) else roactModule.createElement("Frame", {
@@ -395,8 +395,8 @@ function scrollingPicker.render(p16)
 					fitAxis = width,
 					BorderSizePixel = 0,
 					BackgroundTransparency = 1,
-					[roactModule.Ref] = p16.scrollRef,
-					[roactModule.Change.AbsolutePosition] = p16.onScrollPositionChanged
+					[roactModule.Ref] = p2.scrollRef,
+					[roactModule.Change.AbsolutePosition] = p2.onScrollPositionChanged
 				}, t)
 			})
 		})

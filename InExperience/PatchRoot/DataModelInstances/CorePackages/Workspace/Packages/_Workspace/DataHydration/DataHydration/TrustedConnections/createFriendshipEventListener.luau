@@ -1,7 +1,7 @@
 ﻿local notificationService = game:GetService("NotificationService")
 local playersService = game:GetService("Players")
 local dataHydration = script:FindFirstAncestor("DataHydration")
-local var3 = require(dataHydration.Parent.RealtimeDelivery).RobloxEventReceiver.new(notificationService)
+local var1 = require(dataHydration.Parent.RealtimeDelivery).RobloxEventReceiver.new(notificationService)
 local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
 local trustedConnectionStatusModule = require(dataHydration.TrustedConnections.Enums.TrustedConnectionStatus)
 local t = {
@@ -14,32 +14,32 @@ local t = {
 	}
 }
 
-return function(p0)
-	-- upvalues: getLocalPlayerUserId (ref), playersService (ref), var3 (ref), t (ref), trustedConnectionStatusModule (ref)
-	local var6 = getLocalPlayerUserId()
-	local var7 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-		-- upvalues: getLocalPlayerUserId (copy), var6 (write)
-		local var9 = getLocalPlayerUserId()
+return function(p1)
+	-- upvalues: getLocalPlayerUserId (ref), playersService (ref), var1 (ref), t (ref), trustedConnectionStatusModule (ref)
+	local var2 = getLocalPlayerUserId()
+	local var3 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
+		-- upvalues: getLocalPlayerUserId (copy), var2 (write)
+		local var4 = getLocalPlayerUserId()
 		
-		if var9 ~= var6 then
-			var6 = var9
+		if var4 ~= var2 then
+			var2 = var4
 		end
 	end)
-	local namespace = var3:observeEvent(t.Namespace, function(p1)
-		-- upvalues: var6 (write), t (copy), p0 (ref), trustedConnectionStatusModule (copy)
-		if not p1.EventArgs or not p1.EventArgs.UserId1 or (not p1.EventArgs.UserId2 or not var6) then return end
-		local userId2 = tostring(var6) == tostring(p1.EventArgs.UserId1) and tostring(p1.EventArgs.UserId2) or tostring(p1.EventArgs.UserId1)
+	local namespace = var1:observeEvent(t.Namespace, function(p2)
+		-- upvalues: var2 (write), t (copy), p1 (ref), trustedConnectionStatusModule (copy)
+		if not p2.EventArgs or not p2.EventArgs.UserId1 or (not p2.EventArgs.UserId2 or not var2) then return end
+		local userId2 = tostring(var2) == tostring(p2.EventArgs.UserId1) and tostring(p2.EventArgs.UserId2) or tostring(p2.EventArgs.UserId1)
 		
-		if p1.Type == t.EventTypes.FriendshipDestroyed or p1.Type == t.EventTypes.FriendshipDeclined then
-			p0(userId2, trustedConnectionStatusModule.NotFriends)
+		if p2.Type == t.EventTypes.FriendshipDestroyed or p2.Type == t.EventTypes.FriendshipDeclined then
+			p1(userId2, trustedConnectionStatusModule.NotFriends)
 		end
 	end)
 	
 	return function()
-		-- upvalues: var7 (write), namespace (write)
-		if var7 then
-			var7:Disconnect()
-			var7 = nil
+		-- upvalues: var3 (write), namespace (write)
+		if var3 then
+			var3:Disconnect()
+			var3 = nil
 		end
 		if namespace then
 			namespace:disconnect()

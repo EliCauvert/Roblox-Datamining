@@ -32,12 +32,12 @@ tooltip.defaultProps = {
 	orientation = tooltipOrientationModule.Bottom
 }
 
-function tooltip.init(p0)
+function tooltip.init(p1)
 	function p0.onDismissDefault()
-		-- upvalues: p0 (ref)
-		if p0.props.forceClickTriggerPoint or p0.props.triggerOnHover then return end
-		if p0.props.onDismiss then
-			p0.props.onDismiss()
+		-- upvalues: p1 (ref)
+		if p1.props.forceClickTriggerPoint or p1.props.triggerOnHover then return end
+		if p1.props.onDismiss then
+			p1.props.onDismiss()
 		end
 	end
 end

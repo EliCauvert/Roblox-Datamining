@@ -19,16 +19,16 @@ local localizationProvider = require(parent_1.Localization).LocalizationProvider
 local localizationService = game:GetService("LocalizationService")
 local foundationProvider = require(parent_1.Foundation).FoundationProvider
 game:DefineFastFlag("FixGameInviteModalLoadTimeIncrease", false)
-local var9 = if not game:GetFastFlag("FixGameInviteModalLoadTimeIncrease") then require(parent_1.RobloxApolloClient).initializeApolloClient({}) else nil
+local var1 = if not game:GetFastFlag("FixGameInviteModalLoadTimeIncrease") then require(parent_1.RobloxApolloClient).initializeApolloClient({}) else nil
 
-return function(p0)
-	-- upvalues: parent (ref), coreGuiService (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactRoduxModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), styleProviderWithDefaultTheme (ref), apolloProvider (ref), var9 (write), gameInviteModalModule (ref), gameInviteConstantsModule (ref), reactRobloxModule (ref), foundationProvider (ref)
+return function(p1)
+	-- upvalues: parent (ref), coreGuiService (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactRoduxModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), styleProviderWithDefaultTheme (ref), apolloProvider (ref), var1 (write), gameInviteModalModule (ref), gameInviteConstantsModule (ref), reactRobloxModule (ref), foundationProvider (ref)
 	local gameInviteStoreModule = require(parent.State.GameInviteStore)
 	local gameInvite = Instance.new("Folder")
 	gameInvite.Name = "GameInvite"
 	gameInvite.Parent = coreGuiService
-	local var12 = reactRobloxModule.createRoot(gameInvite)
-	var12:render(reactModule.createElement(foundationProvider, nil, {
+	local var2 = reactRobloxModule.createRoot(gameInvite)
+	var2:render(reactModule.createElement(foundationProvider, nil, {
 		reactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {
@@ -36,7 +36,7 @@ return function(p0)
 				PolicyProvider = reactModule.createElement(roactAppPolicy.Provider, { policy = { appFeaturePolicies } }, {
 					StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, {}, {
 						ApolloClientProvider = reactModule.createElement(apolloProvider, {
-							client = if game:GetFastFlag("FixGameInviteModalLoadTimeIncrease") then p0 else var9
+							client = if game:GetFastFlag("FixGameInviteModalLoadTimeIncrease") then p1 else var1
 						}, {
 							GameInviteModalWrapper = reactModule.createElement(gameInviteModalModule, {
 								displayOrder = -1,
@@ -49,5 +49,5 @@ return function(p0)
 		})
 	}))
 	
-	return var12
+	return var2
 end

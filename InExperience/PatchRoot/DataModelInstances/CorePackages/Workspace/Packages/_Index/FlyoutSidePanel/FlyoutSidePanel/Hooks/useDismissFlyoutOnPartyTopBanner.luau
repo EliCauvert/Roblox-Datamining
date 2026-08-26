@@ -10,8 +10,8 @@ local var2 = if fFlagUseSignalsForAppTopBanner then require(parent.AppTopBanner)
 return function()
 	-- upvalues: useSetDrawerVisible (ref), fFlagUseSignalsForAppTopBanner (ref), var1 (ref), var2 (ref), useSelector (ref), reactModule (ref), getDrawerVisibleStore (ref)
 	local var3 = useSetDrawerVisible()
-	local var4 = if fFlagUseSignalsForAppTopBanner then var1(var2(false).getExpanded) else useSelector(function(p0)
-		return if p0.AppTopBanner then p0.AppTopBanner.expanded else false
+	local var4 = if fFlagUseSignalsForAppTopBanner then var1(var2(false).getExpanded) else useSelector(function(p1)
+		return if p1.AppTopBanner then p1.AppTopBanner.expanded else false
 	end)
 	local var5 = reactModule.useRef(var4)
 	reactModule.useEffect(function()

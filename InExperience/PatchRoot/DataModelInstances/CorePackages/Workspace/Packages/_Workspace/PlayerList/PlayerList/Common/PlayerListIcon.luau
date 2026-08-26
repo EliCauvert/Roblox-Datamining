@@ -4,26 +4,26 @@ local foundationModule = require(parent.Foundation)
 local image = foundationModule.Image
 local icon = foundationModule.Icon
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), icon (ref), image (ref)
-	local icon_1 = p0.icon
+	local icon_1 = p1.icon
 	
 	if icon_1 == nil or icon_1 == "" then
 		return nil
 	end
-	local size = p0.size
+	local size = p1.size
 	
 	return if typeof(icon_1) == "table" and icon_1.isFoundationIcon then reactModule.createElement(icon, {
 		name = icon_1.name,
 		variant = icon_1.variant,
 		size = size,
-		LayoutOrder = p0.layoutOrder,
-		testId = p0.testId
+		LayoutOrder = p1.layoutOrder,
+		testId = p1.testId
 	}) elseif typeof(icon_1) == "string" then reactModule.createElement(image, {
 		Image = icon_1,
 		Size = UDim2.fromOffset(size, size),
-		LayoutOrder = p0.layoutOrder,
-		testId = p0.testId
+		LayoutOrder = p1.layoutOrder,
+		testId = p1.testId
 	}) elseif typeof(icon_1) == "table" and icon_1.Image ~= nil then reactModule.createElement(image, {
 		Image = icon_1.Image,
 		imageRect = {
@@ -31,7 +31,7 @@ return function(p0)
 			size = icon_1.ImageRectSize
 		},
 		Size = UDim2.fromOffset(size, size),
-		LayoutOrder = p0.layoutOrder,
-		testId = p0.testId
+		LayoutOrder = p1.layoutOrder,
+		testId = p1.testId
 	}) else nil
 end

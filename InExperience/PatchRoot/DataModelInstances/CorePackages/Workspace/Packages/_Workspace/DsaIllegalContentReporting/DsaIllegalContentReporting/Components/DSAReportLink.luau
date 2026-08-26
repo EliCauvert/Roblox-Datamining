@@ -17,9 +17,9 @@ local _ = { OPEN_CUSTOM_WEBVIEW = 20 }
 
 function DSAReportLink()
 	-- upvalues: useStyle (ref), usePreferredInput (ref), responsiveModule (ref), isInExperienceUIVREnabled (ref), useLocalization (ref), reactModule (ref), styledTextLabel (ref), linkButton (ref), httpService (ref), constantsModule (ref), guiService (ref)
-	local var7 = useStyle()
-	local var8 = usePreferredInput() == responsiveModule.Input.Directional
-	local var9 = useLocalization({
+	local var1 = useStyle()
+	local var2 = usePreferredInput() == responsiveModule.Input.Directional
+	local var3 = useLocalization({
 		reportLinkText = "Feature.ReportAbuse.DSAIllegal.ReportLink",
 		readonlyLinkText = "Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody"
 	})
@@ -33,28 +33,28 @@ function DSAReportLink()
 		Divider = reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			LayoutOrder = 0,
-			BackgroundColor3 = var7.Theme.Divider.Color,
-			BackgroundTransparency = var7.Theme.Divider.Transparency,
+			BackgroundColor3 = var1.Theme.Divider.Color,
+			BackgroundTransparency = var1.Theme.Divider.Transparency,
 			Size = UDim2.new(1, 0, 0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1)
 		}),
-		Link = if var8 or (if isInExperienceUIVREnabled then if isInExperienceUIVREnabled then responsiveModule.useIsSpatial() else false else false) then reactModule.createElement(styledTextLabel, {
+		Link = if var2 or (if isInExperienceUIVREnabled then if isInExperienceUIVREnabled then responsiveModule.useIsSpatial() else false else false) then reactModule.createElement(styledTextLabel, {
 			layoutOrder = 2,
 			lineHeight = 1,
 			fluidSizing = true,
 			richText = false,
 			size = UDim2.new(0, 500, 0, 60),
-			text = var9.readonlyLinkText,
+			text = var3.readonlyLinkText,
 			textXAlignment = Enum.TextXAlignment.Center,
 			textYAlignment = Enum.TextYAlignment.Center,
-			fontStyle = var7.Font.Body,
-			colorStyle = var7.Theme.TextEmphasis
+			fontStyle = var1.Font.Body,
+			colorStyle = var1.Theme.TextEmphasis
 		}) else reactModule.createElement(linkButton, {
 			layoutOrder = 2,
-			fontStyle = if var8 then "CaptionBody" else "Footer",
+			fontStyle = if var2 then "CaptionBody" else "Footer",
 			size = UDim2.new(0, 100, 0, 20),
-			text = var9.reportLinkText,
+			text = var3.reportLinkText,
 			onActivated = function()
 				-- upvalues: httpService (copy), constantsModule (copy), guiService (copy)
 				guiService:BroadcastNotification(httpService:JSONEncode({

@@ -10,25 +10,25 @@ local _ = require(foundation.Components.Types)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local usePresentationContext = presentationContextModule.usePresentationContext
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokensModule (ref), usePresentationContext (ref), colorNamespaceModule (ref), reactModule (ref), cursorContextModule (ref), keyUtilitiesModule (ref), dashModule (ref)
-	local var8 = useTokensModule()
-	local var9 = usePresentationContext()
-	local var10 = if var9.colorNamespace then var9.colorNamespace else colorNamespaceModule.Color
-	local var11 = reactModule.useContext(cursorContextModule)
-	local refCache = var11.refCache
-	local setMountedCursors = var11.setMountedCursors
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), keyUtilitiesModule (copy), var8 (ref), var10 (ref)
-		return if typeof(p0) == "table" then keyUtilitiesModule.encodeKey(var8, p0.radius, p0.offset, p0.borderWidth, var10) elseif p0 == nil then keyUtilitiesModule.encodeKey(var8, nil, nil, nil, var10) else keyUtilitiesModule.encodeCursorTypeKey(p0, var10)
-	end, { p0, var8, var10 })
+	local var1 = useTokensModule()
+	local var2 = usePresentationContext()
+	local var3 = if var2.colorNamespace then var2.colorNamespace else colorNamespaceModule.Color
+	local var4 = reactModule.useContext(cursorContextModule)
+	local refCache = var4.refCache
+	local setMountedCursors = var4.setMountedCursors
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), keyUtilitiesModule (copy), var1 (ref), var3 (ref)
+		return if typeof(p1) == "table" then keyUtilitiesModule.encodeKey(var1, p1.radius, p1.offset, p1.borderWidth, var3) elseif p1 == nil then keyUtilitiesModule.encodeKey(var1, nil, nil, nil, var3) else keyUtilitiesModule.encodeCursorTypeKey(p1, var3)
+	end, { p1, var1, var3 })
 	reactModule.useEffect(function()
-		-- upvalues: setMountedCursors (ref), var12 (ref), dashModule (copy)
-		setMountedCursors(function(p1)
-			-- upvalues: var12 (copy), dashModule (copy)
-			return if p1[var12] == nil then dashModule.join(p1, { [var12] = true }) else p1
+		-- upvalues: setMountedCursors (ref), var5 (ref), dashModule (copy)
+		setMountedCursors(function(p2)
+			-- upvalues: var5 (copy), dashModule (copy)
+			return if p2[var5] == nil then dashModule.join(p2, { [var5] = true }) else p2
 		end)
-	end, { var12 })
+	end, { var5 })
 	
-	return refCache[var12]
+	return refCache[var5]
 end

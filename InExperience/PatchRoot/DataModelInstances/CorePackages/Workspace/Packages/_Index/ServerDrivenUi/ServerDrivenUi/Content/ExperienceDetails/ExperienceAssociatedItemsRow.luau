@@ -19,20 +19,20 @@ local centralOverlayType = robloxAppEnumsModule.CentralOverlayType
 local sduiAssociatedItemsRowModule = require(serverDrivenUi.Content.SduiAssociatedItemsRow)
 local getFFlagEdpPlayerFeedbackEnabled = sharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useDispatch (ref), game (ref), signalsReactModule (ref), reactModule (ref), getFFlagEdpPlayerFeedbackEnabled (ref), setCentralOverlay (ref), centralOverlayType (ref), sduiAssociatedItemsRowModule (ref), cryoModule (ref), gamePlayerFeedbackPrompt (ref)
-	local layoutOrder = p0.layoutOrder
-	local var11 = useTokens()
-	local var12 = useDispatch()
-	local universeId = p0.universeId
-	local var13 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
-	local rootPlaceId = var13 and var13.rootPlaceId
-	local var15 = signalsReactModule.useSignalState(game.getVotesStore(false).getAndFetchUserVote(universeId).data)
-	local var16 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
+	local layoutOrder = p1.layoutOrder
+	local var1 = useTokens()
+	local var2 = useDispatch()
+	local universeId = p1.universeId
+	local var3 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
+	local rootPlaceId = var3 and var3.rootPlaceId
+	local var4 = signalsReactModule.useSignalState(game.getVotesStore(false).getAndFetchUserVote(universeId).data)
+	local var5 = signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
 		-- upvalues: rootPlaceId (ref), game (copy)
-		return if rootPlaceId then game.getUserVoteFeedbackMetadataStore(p1).getUserVoteFeedbackMetadata(rootPlaceId).data(p1) else nil
+		return if rootPlaceId then game.getUserVoteFeedbackMetadataStore(p2).getUserVoteFeedbackMetadata(rootPlaceId).data(p2) else nil
 	end, { rootPlaceId }))
-	local var17 = reactModule.useCallback(function()
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: rootPlaceId (ref), game (copy)
 		if rootPlaceId then
 			game.getUserVoteFeedbackMetadataStore(false).clearItem(rootPlaceId)
@@ -45,50 +45,50 @@ return reactModule.memo(function(p0)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = layoutOrder
 	}, {
-		MinHeightConstraint = reactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(0, var11.Size.Size_700) }),
+		MinHeightConstraint = reactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(0, var1.Size.Size_700) }),
 		Layout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var11.Padding.Small)
+			Padding = UDim.new(0, var1.Padding.Small)
 		}),
-		ChipsRow = reactModule.createElement(sduiAssociatedItemsRowModule, cryoModule.Dictionary.join(p0, { universeId = nil, layoutOrder = 1 })),
-		FeedbackPrompt = if getFFlagEdpPlayerFeedbackEnabled() and (var16 and var16.canSubmitReview) and rootPlaceId then reactModule.createElement(gamePlayerFeedbackPrompt, {
+		ChipsRow = reactModule.createElement(sduiAssociatedItemsRowModule, cryoModule.Dictionary.join(p1, { universeId = nil, layoutOrder = 1 })),
+		FeedbackPrompt = if getFFlagEdpPlayerFeedbackEnabled() and (var5 and var5.canSubmitReview) and rootPlaceId then reactModule.createElement(gamePlayerFeedbackPrompt, {
 			LayoutOrder = 2,
 			placeId = rootPlaceId,
 			onButtonClick = reactModule.useCallback(function()
-				-- upvalues: var16 (ref), var15 (ref), var12 (ref), setCentralOverlay (copy), centralOverlayType (copy), universeId (ref), var17 (ref)
-				if var16 and var16.canSubmitReview and var15 and (var15.userVote == true or var15.userVote == false) then
+				-- upvalues: var5 (ref), var4 (ref), var2 (ref), setCentralOverlay (copy), centralOverlayType (copy), universeId (ref), var6 (ref)
+				if var5 and var5.canSubmitReview and var4 and (var4.userVote == true or var4.userVote == false) then
 					local t = { [true] = "Upvote", [false] = "Downvote" }
-					local var19 = nil
+					local var7 = nil
 					
-					for i, v in var16.categories do
-						if v.type == t[var15.userVote] then
-							var19 = v
+					for i, v in var5.categories do
+						if v.type == t[var4.userVote] then
+							var7 = v
 							break
 						end
 					end
-					var12(setCentralOverlay(centralOverlayType.GamePlayerFeedbackForm, {
+					var2(setCentralOverlay(centralOverlayType.GamePlayerFeedbackForm, {
 						universeId = universeId,
 						playerFeedbackMetadata = {
-							rootPlaceId = var16.rootPlaceId,
-							canSubmitReview = var16.canSubmitReview,
-							canSubmitComment = var16.canSubmitComment,
-							categoryType = t[var15.userVote],
-							category = var19,
-							comment = var16.comment,
-							metadata = var16.metadata
+							rootPlaceId = var5.rootPlaceId,
+							canSubmitReview = var5.canSubmitReview,
+							canSubmitComment = var5.canSubmitComment,
+							categoryType = t[var4.userVote],
+							category = var7,
+							comment = var5.comment,
+							metadata = var5.metadata
 						},
-						onSubmitted = var17
+						onSubmitted = var6
 					}))
 				end
 			end, {
-				var16,
+				var5,
 				universeId,
-				var12,
-				var15,
-				var17
+				var2,
+				var4,
+				var6
 			}),
-			onDimiss = var17
+			onDimiss = var6
 		}) else nil
 	})
 end)

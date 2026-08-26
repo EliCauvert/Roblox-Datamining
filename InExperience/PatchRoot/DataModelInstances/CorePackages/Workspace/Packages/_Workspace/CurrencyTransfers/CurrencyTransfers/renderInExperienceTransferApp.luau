@@ -28,9 +28,9 @@ end
 local function createNetworkImpl()
 	-- upvalues: httpRequestModule (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p0, p1, p2)
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
+			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
 		maxRetryCount = game:DefineFastInt("InExperienceTransferMaxHttpRequestRetries", 2),
 		maxWaitTime = game:DefineFastInt("InExperienceTransferMaxHttpRequestWaitTime", 1)
@@ -42,15 +42,15 @@ return function()
 	local inExperienceTransferApp = Instance.new("Folder")
 	inExperienceTransferApp.Name = "InExperienceTransferApp"
 	inExperienceTransferApp.Parent = coreGuiService
-	local var14 = reactRobloxModule.createRoot(inExperienceTransferApp)
-	var14:render(reactModule.createElement(localizationProvider, {
+	local var1 = reactRobloxModule.createRoot(inExperienceTransferApp)
+	var1:render(reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		StyleProvider = reactModule.createElement(appStyleProvider, { style = t }, {
 			NetworkProvider = reactModule.createElement(networkContext.Provider, { value = createNetworkImpl() }, {
 				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, {
-					store = roduxModule.Store.new(function(p3)
-						return p3 or {}
+					store = roduxModule.Store.new(function(p1)
+						return p1 or {}
 					end)
 				}, {
 					DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
@@ -71,5 +71,5 @@ return function()
 		})
 	}))
 	
-	return var14
+	return var1
 end

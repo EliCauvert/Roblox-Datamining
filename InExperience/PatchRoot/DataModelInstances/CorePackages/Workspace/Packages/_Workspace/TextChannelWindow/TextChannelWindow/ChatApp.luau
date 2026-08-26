@@ -11,50 +11,50 @@ local themeFromBackgroundColorModule = require(script.Parent.themeFromBackground
 local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowThemeByBackground)
 local createNextOrder = reactUtilsModule.createNextOrder
 
-local function ChatAppInner(p0)
+local function ChatAppInner(p1)
 	-- upvalues: foundationModule (ref), createNextOrder (ref), reactModule (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref), messageListAreaModule (ref), textChatWindowInputBarHostModule (ref), chatWindowTopBannerModule (ref)
-	local var9 = foundationModule.Hooks.useTokens()
-	local var10 = createNextOrder()
+	local var1 = foundationModule.Hooks.useTokens()
+	local var2 = createNextOrder()
 	
-	return reactModule.createElement(foundationModule.View, { Size = p0.Size or UDim2.fromScale(1, 1) }, {
+	return reactModule.createElement(foundationModule.View, { Size = p1.Size or UDim2.fromScale(1, 1) }, {
 		chatView = reactModule.createElement(foundationModule.View, {
 			tag = "col fill clip",
-			cornerRadius = if not fFlagExpChatTextChannelWindowThemeByBackgroundModule then UDim.new(0, var9.Radius.Medium) else nil,
+			cornerRadius = if not fFlagExpChatTextChannelWindowThemeByBackgroundModule then UDim.new(0, var1.Radius.Medium) else nil,
 			Size = UDim2.fromScale(1, 1),
 			backgroundStyle = if not fFlagExpChatTextChannelWindowThemeByBackgroundModule then {
 				Transparency = 0.3,
-				Color3 = var9.DarkMode.Surface.Surface_100.Color3
+				Color3 = var1.DarkMode.Surface.Surface_100.Color3
 			} else nil
 		}, {
 			messageList = reactModule.createElement(foundationModule.View, {
 				tag = "fill",
-				LayoutOrder = var10(),
+				LayoutOrder = var2(),
 				Size = UDim2.fromScale(1, 0)
 			}, {
 				content = reactModule.createElement(messageListAreaModule, {
-					channelState = p0.channelState,
-					messagesSignal = p0.messagesSignal,
-					fontFace = p0.fontFace,
-					windowName = p0.windowName
+					channelState = p1.channelState,
+					messagesSignal = p1.messagesSignal,
+					fontFace = p1.fontFace,
+					windowName = p1.windowName
 				})
 			}),
 			inputBar = reactModule.createElement(foundationModule.View, {
 				tag = "auto-y padding-small",
-				LayoutOrder = var10(),
+				LayoutOrder = var2(),
 				Size = UDim2.new(1, 0, 0, 0)
 			}, {
 				host = reactModule.createElement(textChatWindowInputBarHostModule, {
-					targetChannel = p0.targetChannel,
-					canLocalUserChat = p0.canLocalUserChat,
-					localUserId = p0.localUserId,
-					fontFace = p0.fontFace
+					targetChannel = p1.targetChannel,
+					canLocalUserChat = p1.canLocalUserChat,
+					localUserId = p1.localUserId,
+					fontFace = p1.fontFace
 				})
 			})
 		}),
 		topBanner = reactModule.createElement(chatWindowTopBannerModule, {
 			ZIndex = 2,
-			messagesSignal = p0.messagesSignal,
-			targetChannel = p0.targetChannel
+			messagesSignal = p1.messagesSignal,
+			targetChannel = p1.targetChannel
 		})
 	})
 end

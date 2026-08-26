@@ -8,11 +8,11 @@ local _ = require(coreGuiService.RobloxGui.Modules.Stats.StatsAggregator)
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref), statsUtilsModule (ref), uDim2_1 (ref), uDim2 (ref), uDim2_3 (ref), uDim2_2 (ref)
 	local valueLabel = {}
 	setmetatable(valueLabel, t)
-	valueLabel._statType = p0
+	valueLabel._statType = p1
 	valueLabel._frame = Instance.new("Frame")
 	valueLabel._frame.Name = "StatsMiniTextPanelClass"
 	valueLabel._frame.BackgroundTransparency = 1
@@ -50,24 +50,24 @@ function t:_getTitle()
 	return statsUtilsModule.TypeToShortName[self._statType]
 end
 
-function t:PlaceInParent(p2, p3, p4)
-	self._frame.Position = p4
-	self._frame.Size = p3
-	self._frame.Parent = p2
+function t:PlaceInParent(p1, p2, p3)
+	self._frame.Position = p3
+	self._frame.Size = p2
+	self._frame.Parent = p1
 end
 
-function t:SetStatsAggregator(p5)
+function t:SetStatsAggregator(p1)
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
 		self._aggregator = nil
 	end
-	self._aggregator = p5
+	self._aggregator = p1
 	self:_refreshVisibility()
 end
 
-function t:SetVisible(p6)
-	self.frame.Visible = p6
+function t:SetVisible(p1)
+	self.frame.Visible = p1
 	self:_refreshVisibility()
 end
 

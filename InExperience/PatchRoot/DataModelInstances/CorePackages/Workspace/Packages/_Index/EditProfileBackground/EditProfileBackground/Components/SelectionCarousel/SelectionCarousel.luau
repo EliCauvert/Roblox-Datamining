@@ -5,32 +5,32 @@ local view = require(parent.Foundation).View
 local profileBackgroundButtonModule = require(editProfileBackground.Components.ProfileBackgroundButton)
 local constantsModule = require(editProfileBackground.Common.Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), constantsModule (ref), profileBackgroundButtonModule (ref), view (ref)
-	local var4, var5 = reactModule.useState(p0.currentBackgroundId or constantsModule.BACKGROUND_ASSET_IDS[1])
+	local var1, var2 = reactModule.useState(p1.currentBackgroundId or constantsModule.BACKGROUND_ASSET_IDS[1])
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var5 (ref)
-		if p0.currentBackgroundId then
-			var5(p0.currentBackgroundId)
+		-- upvalues: p1 (ref), var2 (ref)
+		if p1.currentBackgroundId then
+			var2(p1.currentBackgroundId)
 		end
-	end, { p0.currentBackgroundId })
+	end, { p1.currentBackgroundId })
 	local BACKGROUND_ASSET_IDS = constantsModule.BACKGROUND_ASSET_IDS
-	local buttonsPerRow = p0.buttonsPerRow
-	local numRows = p0.numRows
-	local buttonSize = p0.buttonSize
-	local var6 = reactModule.useCallback(function(p1)
-		-- upvalues: var5 (ref), p0 (ref)
-		var5(p1)
+	local buttonsPerRow = p1.buttonsPerRow
+	local numRows = p1.numRows
+	local buttonSize = p1.buttonSize
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref), p1 (ref)
+		var2(p2)
 		task.delay(0.1, function()
-			-- upvalues: p0 (copy), p1 (ref)
-			if p0.onBackgroundSelected then
-				p0.onBackgroundSelected(p1)
+			-- upvalues: p1 (copy), p2 (ref)
+			if p1.onBackgroundSelected then
+				p1.onBackgroundSelected(p2)
 			end
 		end)
-	end, { p0.onBackgroundSelected })
+	end, { p1.onBackgroundSelected })
 	
 	local function renderRow(p2, p3, p4)
-		-- upvalues: reactModule (copy), BACKGROUND_ASSET_IDS (ref), var4 (ref), profileBackgroundButtonModule (copy), var6 (ref), buttonSize (ref), view (copy), buttonSize (ref)
+		-- upvalues: reactModule (copy), BACKGROUND_ASSET_IDS (ref), var1 (ref), profileBackgroundButtonModule (copy), var3 (ref), buttonSize (ref), view (copy), buttonSize (ref)
 		local t = {}
 		table.insert(t, reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
@@ -44,12 +44,12 @@ return function(p0)
 		}))
 		
 		for i = p3, p3 + p4 - 1 do
-			local var9 = BACKGROUND_ASSET_IDS[i]
+			local var4 = BACKGROUND_ASSET_IDS[i]
 			table.insert(t, reactModule.createElement(profileBackgroundButtonModule, {
 				LayoutOrder = i,
-				profileBackgroundId = var9,
-				selected = var4 == var9,
-				onActivated = var6,
+				profileBackgroundId = var4,
+				selected = var1 == var4,
+				onActivated = var3,
 				buttonSize = buttonSize
 			}))
 		end
@@ -61,7 +61,7 @@ return function(p0)
 	
 	return reactModule.createElement(view, {
 		tag = "bg-surface-0",
-		Size = UDim2.new(1, 0, 0, p0.height)
+		Size = UDim2.new(1, 0, 0, p1.height)
 	}, reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), view (copy), numRows (ref), renderRow (ref), buttonsPerRow (ref)
 		local t = {}
@@ -73,12 +73,12 @@ return function(p0)
 			Padding = UDim.new(0, 16)
 		}))
 		table.insert(t, reactModule.createElement(view, { LayoutOrder = 0, Size = UDim2.new(1, 0, 0, 0) }))
-		local var11 = 1
+		local var5 = 1
 		
 		for i = 1, numRows do
-			table.insert(t, renderRow(i, var11, buttonsPerRow))
-			var11 += buttonsPerRow
+			table.insert(t, renderRow(i, var5, buttonsPerRow))
+			var5 += buttonsPerRow
 		end
 		return t
-	end, { var4 }))
+	end, { var1 }))
 end

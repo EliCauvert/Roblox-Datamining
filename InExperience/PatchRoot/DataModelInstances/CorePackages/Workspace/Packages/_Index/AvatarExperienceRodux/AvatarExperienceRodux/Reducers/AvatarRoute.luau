@@ -2,7 +2,7 @@
 local parent = avatarExperienceRodux.Parent
 
 return require(parent.Rodux).createReducer(require(parent.AvatarExperienceNavigation).AvatarRoute.AvatarRoute.new({}), {
-	[require(avatarExperienceRodux.Actions.SetAvatarSceneRoute).name] = function(_, p0)
-		return p0.avatarRoute
+	[require(avatarExperienceRodux.Actions.SetAvatarSceneRoute).name] = function(_, p1)
+		return p1.avatarRoute
 	end
 })

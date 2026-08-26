@@ -52,9 +52,9 @@ return reactModule.forwardRef(function(p1, p2)
 	local var3, var4 = reactModule.useState(controlStateModule.Initialize)
 	local var5, var6 = reactModule.useState(false)
 	local var7, var8 = reactModule.useState(false)
-	local var9 = useBindableModule(var1.value):map(function(p1)
+	local var9 = useBindableModule(var1.value):map(function(p3)
 		-- upvalues: var1 (ref)
-		return math.clamp(p1, var1.range.Min, var1.range.Max)
+		return math.clamp(p3, var1.range.Min, var1.range.Max)
 	end)
 	local var10 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useRef(nil)
 	local var11 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useRef(nil) else nil
@@ -86,19 +86,19 @@ return reactModule.forwardRef(function(p1, p2)
 		end
 		var8(var5 or (if var3 ~= controlStateModule.Hover then if var3 ~= controlStateModule.Selected then var3 == controlStateModule.Pressed else true else true))
 	end, { var1.knobVisibility, var3, var5 })
-	local var1 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useCallback(function(p1)
+	local var1 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useCallback(function(p3)
 		-- upvalues: var15 (ref), calculateSliderValueFromPositionModule (copy), var1 (ref), calculateSliderStepValueModule (copy)
 		if not var15.current then
 			return 0
 		end
-		local var1 = calculateSliderValueFromPositionModule(p1, var15.current, var1.range)
+		local var20 = calculateSliderValueFromPositionModule(p3, var15.current, var20.range)
 		
-		return if var1.step then calculateSliderStepValueModule(var1, var1.step, var1.range) else var1
+		return if var20.step then calculateSliderStepValueModule(var20, var20.step, var20.range) else var20
 	end, { var15, var1.range, var1.step })
-	local var2 = reactModule.useCallback(function(p1)
+	local var2 = reactModule.useCallback(function(p3)
 		-- upvalues: var9 (ref), var1 (ref)
-		if p1 ~= var9:getValue() and var1.onValueChanged then
-			var1.onValueChanged(p1)
+		if p3 ~= var9:getValue() and var1.onValueChanged then
+			var1.onValueChanged(p3)
 		end
 	end, { var9, var1.onValueChanged })
 	local var3 = if flagsModule.FoundationSliderOffloadDraggingMath then nil else reactModule.useCallback(function()
@@ -112,9 +112,9 @@ return reactModule.forwardRef(function(p1, p2)
 				-- upvalues: var9 (ref)
 				return var9:getValue()
 			end,
-			onStep = function(p1)
+			onStep = function(p3)
 				-- upvalues: var2 (ref), var1 (ref), calculateSliderStepValueModule (copy)
-				var2(if var1.step then calculateSliderStepValueModule(p1, var1.step, var1.range) else p1)
+				var2(if var1.step then calculateSliderStepValueModule(p3, var1.step, var1.range) else p3)
 			end
 		})
 	end
@@ -123,66 +123,66 @@ return reactModule.forwardRef(function(p1, p2)
 		local current = var11.current
 		
 		if not current then return end
-		local var1 = var1.range.Max - var1.range.Min
+		local var20 = var20.range.Max - var20.range.Min
 		local scale = current.DragUDim2.X.Scale
 		
 		if var14 == inputModeModule.Directional and math.abs(scale - var13.current) > 0.01 then
-			var12.current = (var9:getValue() - var1.range.Min) / var1 - scale
+			var12.current = (var9:getValue() - var20.range.Min) / var20 - scale
 			var13.current = scale
 			
 			return
 		end
 		var13.current = scale
-		local var2 = var1.range.Min + math.clamp(var12.current + scale, 0, 1) * var1
-		var2(if var1.step then calculateSliderStepValueModule(var2, var1.step, var1.range) else var2)
+		local var21 = var20.range.Min + math.clamp(var12.current + scale, 0, 1) * var20
+		var21(if var20.step then calculateSliderStepValueModule(var21, var20.step, var20.range) else var21)
 	end, {
 		var1.step,
 		var1.range,
 		var14,
 		var9,
 		var2
-	}) else reactModule.useCallback(function(_, p1)
+	}) else reactModule.useCallback(function(_, p3)
 		-- upvalues: var15 (ref), var10 (ref), var1 (ref), var14 (ref), inputModeModule (copy), calculatePixelsPerStepModule (copy), var9 (ref), calculateNextStepValueModule (copy), var2 (ref), var1 (ref), calculateSliderPositionDeltaModule (copy)
 		if var15.current and var10.current then
 			if var1.step and var1.step > 0 then
 				if var14 ~= inputModeModule.Directional then
-					var2(var1(p1))
-					var10.current = p1
+					var2(var1(p3))
+					var10.current = p3
 					
 					return
 				end
-				local var1 = p1 - var10.current
-				local absValue = math.abs(var1.X)
-				local var2 = calculatePixelsPerStepModule(var15.current.AbsoluteSize.X, var1.step, var1.range)
+				local var20 = p3 - var10.current
+				local absValue = math.abs(var20.X)
+				local var21 = calculatePixelsPerStepModule(var15.current.AbsoluteSize.X, var20.step, var20.range)
 				
-				if var2 * 2 < absValue then
-					var10.current = p1
+				if var21 * 2 < absValue then
+					var10.current = p3
 					
 					return
-				elseif absValue < var2 / 2 then return end
+				elseif absValue < var21 / 2 then return end
 				local value = var9:getValue()
-				local var3 = calculateNextStepValueModule(var1.X, value, var1.step, var1.range)
+				local var22 = calculateNextStepValueModule(var20.X, value, var20.step, var20.range)
 				
-				if var3 == value then
+				if var22 == value then
 					return
 				else
-					var2(var3)
-					var10.current = p1
+					var21(var22)
+					var10.current = p3
 					
 					return
 				end
 			else
-				local var4 = calculateSliderPositionDeltaModule(p1, var10.current, var15.current.AbsoluteSize.Magnitude)
-				var10.current = p1
+				local var23 = calculateSliderPositionDeltaModule(p3, var10.current, var15.current.AbsoluteSize.Magnitude)
+				var10.current = p3
 				
-				if var14 == inputModeModule.Directional and math.abs(var4) > 0.01 then return end
-				var2(var1(p1))
+				if var14 == inputModeModule.Directional and math.abs(var23) > 0.01 then return end
+				var21(var20(p3))
 			end
 		end
 	end, {
 		var1.step, var1.range, var14, var9, var2, var1
 	})
-	local var3 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useCallback(function(_, p1)
+	local var3 = if flagsModule.FoundationSliderOffloadDraggingMath then reactModule.useCallback(function(_, p3)
 		-- upvalues: var6 (ref), var1 (ref), var13 (ref), var14 (ref), inputModeModule (copy), var12 (ref), var9 (ref), var15 (ref), calculateSliderValueFromPositionModule (copy), var2 (ref), calculateSliderStepValueModule (copy)
 		var6(true)
 		
@@ -190,21 +190,21 @@ return reactModule.forwardRef(function(p1, p2)
 			var1.onDragStarted()
 		end
 		var13.current = 0
-		local var1 = var1.range.Max - var1.range.Min
+		local var20 = var20.range.Max - var20.range.Min
 		
 		if var14 == inputModeModule.Directional then
-			var12.current = (var9:getValue() - var1.range.Min) / var1
+			var12.current = (var9:getValue() - var20.range.Min) / var20
 			
 			return
 		end
-		local var2 = if var15.current then calculateSliderValueFromPositionModule(p1, var15.current, var1.range) else var1.range.Min
-		var12.current = (var2 - var1.range.Min) / var1
-		var2(if var1.step then calculateSliderStepValueModule(var2, var1.step, var1.range) else var2)
+		local var21 = if var15.current then calculateSliderValueFromPositionModule(p3, var15.current, var20.range) else var20.range.Min
+		var12.current = (var21 - var20.range.Min) / var20
+		var21(if var20.step then calculateSliderStepValueModule(var21, var20.step, var20.range) else var21)
 	end, {
 		var1.onDragStarted, var1.step, var1.range, var14, var9, var2
-	}) else reactModule.useCallback(function(_, p1)
+	}) else reactModule.useCallback(function(_, p3)
 		-- upvalues: var10 (ref), var6 (ref), var1 (ref)
-		var10.current = p1
+		var10.current = p3
 		var6(true)
 		
 		if var1.onDragStarted then
@@ -222,11 +222,11 @@ return reactModule.forwardRef(function(p1, p2)
 			var1.onDragEnded()
 		end
 	end, { var1.onDragEnded })
-	local var4 = reactModule.useCallback(function(p1)
+	local var4 = reactModule.useCallback(function(p3)
 		-- upvalues: var4 (ref), flagsModule (copy), controlStateModule (copy), var3 (ref)
-		var4(p1)
+		var4(p3)
 		
-		if not flagsModule.FoundationSliderOffloadDraggingMath and p1 == controlStateModule.Pressed then
+		if not flagsModule.FoundationSliderOffloadDraggingMath and p3 == controlStateModule.Pressed then
 			var3()
 		end
 	end, { var3 })
@@ -237,24 +237,24 @@ return reactModule.forwardRef(function(p1, p2)
 			local current = var11.current
 			
 			if current then
-				local var1 = current:AddConstraintFunction(1, function(p1, p2)
+				local var20 = current:AddConstraintFunction(1, function(p3, p4)
 					-- upvalues: var12 (copy)
 					local current = var12.current
 					
-					return UDim2.fromScale(math.clamp(p1.X.Scale, -current, 1 - current), 0), p2
+					return UDim2.fromScale(math.clamp(p3.X.Scale, -current, 1 - current), 0), p4
 				end)
 				
 				return function()
-					-- upvalues: var1 (ref)
-					var1:Disconnect()
+					-- upvalues: var20 (ref)
+					var20:Disconnect()
 				end
 			end
 		end, {})
 	end
 	local uDim2 = UDim2.fromScale(1, 0.5)
-	local var5 = if var1.isContained then var9:map(function(p1)
+	local var5 = if var1.isContained then var9:map(function(p3)
 		-- upvalues: var1 (ref)
-		return Vector2.new((p1 - var1.range.Min) / (var1.range.Max - var1.range.Min), 0.5)
+		return Vector2.new((p3 - var1.range.Min) / (var1.range.Max - var1.range.Min), 0.5)
 	end) else Vector2.new(0.5, 0.5)
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
@@ -288,9 +288,9 @@ return reactModule.forwardRef(function(p1, p2)
 		Bar = reactModule.createElement(viewModule, { tag = var17.bar.tag, testId = `{var1.testId}--bar` }, {
 			Fill = reactModule.createElement(viewModule, {
 				tag = var17.fill.tag,
-				Size = var9:map(function(p1)
+				Size = var9:map(function(p3)
 					-- upvalues: var1 (ref)
-					return UDim2.fromScale((p1 - var1.range.Min) / (var1.range.Max - var1.range.Min), 1)
+					return UDim2.fromScale((p3 - var1.range.Min) / (var1.range.Max - var1.range.Min), 1)
 				end),
 				testId = `{var1.testId}--fill`
 			}, {

@@ -31,9 +31,9 @@ end
 local function createNetworkImpl()
 	-- upvalues: httpRequestModule (ref), fFlagLuaAppDefaultHttpRetry (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p0, p1, p2)
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
+			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
 		maxRetryCount = if fFlagLuaAppDefaultHttpRetry then game:DefineFastInt("RenderCancelSubscriptionAppHttpRetryCount", 4) else nil
 	})
@@ -49,8 +49,8 @@ return function()
 	local cancelSubscriptionApp = Instance.new("Folder")
 	cancelSubscriptionApp.Name = "CancelSubscriptionApp"
 	cancelSubscriptionApp.Parent = coreGuiService
-	local var16 = reactRobloxModule.createRoot(cancelSubscriptionApp)
-	var16:render(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
+	local var1 = reactRobloxModule.createRoot(cancelSubscriptionApp)
+	var1:render(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 		LocalizationProvider = reactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {
@@ -78,5 +78,5 @@ return function()
 		})
 	}))
 	
-	return var16
+	return var1
 end

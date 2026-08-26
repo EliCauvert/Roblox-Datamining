@@ -11,12 +11,12 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQTextureQuality),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: errorSourceStringsModule (ref)
-		local measureTextureResolution = p1.aqsSummaryData.Measure_Texture_Resolution
+		local measureTextureResolution = p2.aqsSummaryData.Measure_Texture_Resolution
 		
 		if measureTextureResolution == nil then
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Resolution" })
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Resolution" })
 			
 			return
 		end
@@ -24,7 +24,7 @@ return {
 			if i ~= "measurement_score" then
 				if v ~= nil and v.score ~= nil then
 					if tonumber(v.score) ~= 100 then
-						p0:warn(errorSourceStringsModule.Keys.AQSWarn_TextureResolution, {
+						p1:warn(errorSourceStringsModule.Keys.AQSWarn_TextureResolution, {
 							textureName = i,
 							texture_width = v.texture_width or "unknown",
 							texture_height = v.texture_height or "unknown",
@@ -32,7 +32,7 @@ return {
 						})
 					end
 				end
-				p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Resolution" })
+				p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Resolution" })
 				
 				return
 			end

@@ -4,27 +4,27 @@ local featureNameModule = require(script.Parent.FeatureName)
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref), starterGuiService (ref), lifecycleModule (ref)
 	local tbl = setmetatable({}, t)
 	local t_1 = nil
 	local coreGuiType = nil
 	
-	if p0 then
-		coreGuiType = p0.coreGuiType
+	if p1 then
+		coreGuiType = p1.coreGuiType
 		t_1 = {
-			defaultVisible = p0.defaultVisible or false,
-			defaultEnabled = if coreGuiType then starterGuiService:GetCoreGuiEnabled(coreGuiType) else p0.defaultEnabled or false
+			defaultVisible = p1.defaultVisible or false,
+			defaultEnabled = if coreGuiType then starterGuiService:GetCoreGuiEnabled(coreGuiType) else p1.defaultEnabled or false
 		}
 	end
-	local var7 = lifecycleModule.new(t_1)
-	tbl.lifecycle = var7
+	local var1 = lifecycleModule.new(t_1)
+	tbl.lifecycle = var1
 	
 	if coreGuiType then
-		tbl._coreGuiConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p1, p2)
-			-- upvalues: coreGuiType (write), var7 (ref)
-			if p1 == coreGuiType or p1 == Enum.CoreGuiType.All then
-				var7.setEnabled(p2)
+		tbl._coreGuiConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p2, p3)
+			-- upvalues: coreGuiType (write), var1 (ref)
+			if p2 == coreGuiType or p2 == Enum.CoreGuiType.All then
+				var1.setEnabled(p3)
 			end
 		end)
 	end
@@ -43,58 +43,58 @@ local t_1 = {}
 
 return {
 	FeatureName = featureNameModule,
-	registerLifecycle = function(p3, p4)
+	registerLifecycle = function(p1, p2)
 		-- upvalues: t_1 (ref), t (ref)
-		assert(not t_1[p3], `Feature "{p3}" already has a registered lifecycle`)
-		local var8 = t.new(p4)
-		t_1[p3] = var8
+		assert(not t_1[p1], `Feature "{p3}" already has a registered lifecycle`)
+		local var1 = t.new(p2)
+		t_1[p1] = var1
 		
-		return var8
+		return var1
 	end,
-	getFeature = function(p5)
+	getFeature = function(p1)
 		-- upvalues: t_1 (ref)
-		return t_1[p5]
+		return t_1[p1]
 	end,
-	getVisibility = function(p6)
+	getVisibility = function(p1)
 		-- upvalues: t_1 (ref)
-		local var9 = t_1[p6]
+		local var1 = t_1[p1]
 		
-		return if var9 then var9.lifecycle.getVisible(false) else false
+		return if var1 then var1.lifecycle.getVisible(false) else false
 	end,
-	setVisibility = function(value, p7)
+	setVisibility = function(value, p1)
 		-- upvalues: t_1 (ref)
-		local var10 = t_1[value]
+		local var1 = t_1[value]
 		
-		if var10 then
-			var10.lifecycle.setVisible(p7)
+		if var1 then
+			var1.lifecycle.setVisible(p1)
 		end
 	end,
-	toggleVisibility = function(p8)
+	toggleVisibility = function(p1)
 		-- upvalues: t_1 (ref)
-		local var11 = t_1[p8]
+		local var1 = t_1[p1]
 		
-		if var11 then
-			var11.lifecycle.setVisible(not var11.lifecycle.getVisible(false))
+		if var1 then
+			var1.lifecycle.setVisible(not var1.lifecycle.getVisible(false))
 		end
 	end,
-	setEnabled = function(value, p9)
+	setEnabled = function(value, p1)
 		-- upvalues: t_1 (ref)
-		local var12 = t_1[value]
+		local var1 = t_1[value]
 		
-		if var12 then
-			var12.lifecycle.setEnabled(p9)
+		if var1 then
+			var1.lifecycle.setEnabled(p1)
 		end
 	end,
-	onVisibilityChanged = function(p10, p11)
+	onVisibilityChanged = function(p1, p2)
 		-- upvalues: t_1 (ref)
-		local var13 = t_1[p10]
+		local var1 = t_1[p1]
 		
-		return if var13 then var13.lifecycle:onVisibilityChanged(p11) else function() end
+		return if var1 then var1.lifecycle:onVisibilityChanged(p2) else function() end
 	end,
-	onEnabledChanged = function(p12, p13)
+	onEnabledChanged = function(p1, p2)
 		-- upvalues: t_1 (ref)
-		local var14 = t_1[p12]
+		local var1 = t_1[p1]
 		
-		return if var14 then var14.lifecycle:onEnabledChanged(p13) else function() end
+		return if var1 then var1.lifecycle:onEnabledChanged(p2) else function() end
 	end
 }

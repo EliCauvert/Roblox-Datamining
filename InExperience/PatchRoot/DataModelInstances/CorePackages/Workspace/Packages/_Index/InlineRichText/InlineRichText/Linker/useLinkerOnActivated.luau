@@ -7,23 +7,23 @@ local linkBehaviorModule = require(inlineRichText.Enums.LinkBehavior)
 local name = require(inlineRichText.Logger):new(script.Name)
 local _ = require(inlineRichText.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigateToWebviewModule (ref), useInvokeLinkingProtocolModule (ref), useShowErrorToastModule (ref), linkBehaviorModule (ref), reactModule (ref), name (ref)
 	local t = {
 		[linkBehaviorModule.Webview] = useNavigateToWebviewModule(),
 		[linkBehaviorModule.LinkingProtocol] = useInvokeLinkingProtocolModule(),
-		[linkBehaviorModule.ErrorToast] = useShowErrorToastModule({ errorToastTextOverride = p0.errorToastTextOverride })
+		[linkBehaviorModule.ErrorToast] = useShowErrorToastModule({ errorToastTextOverride = p1.errorToastTextOverride })
 	}
 	
-	return reactModule.useCallback(function(p1)
+	return reactModule.useCallback(function(p2)
 		-- upvalues: t (ref), name (copy)
-		local linkBehavior = t[p1.linkBehavior]
+		local linkBehavior = t[p2.linkBehavior]
 		
 		if linkBehavior then
-			linkBehavior(p1.url)
+			linkBehavior(p2.url)
 			
 			return
 		end
-		name:error(`Link activation failed with invalid link behavior: {p1.linkBehavior}. This behavior is either invalid or doesn't support activation.`)
+		name:error(`Link activation failed with invalid link behavior: {p2.linkBehavior}. This behavior is either invalid or doesn't support activation.`)
 	end, { t })
 end

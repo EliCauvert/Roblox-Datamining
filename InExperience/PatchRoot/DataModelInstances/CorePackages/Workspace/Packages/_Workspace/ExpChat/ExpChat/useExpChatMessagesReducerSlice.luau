@@ -6,7 +6,7 @@ local _ = require(expChat.installReducer.Messages)
 
 return function()
 	-- upvalues: useSelector (ref), tutilsModule (ref)
-	return useSelector(function(p0)
-		return p0.Messages
+	return useSelector(function(p1)
+		return p1.Messages
 	end, tutilsModule.shallowEqual)
 end

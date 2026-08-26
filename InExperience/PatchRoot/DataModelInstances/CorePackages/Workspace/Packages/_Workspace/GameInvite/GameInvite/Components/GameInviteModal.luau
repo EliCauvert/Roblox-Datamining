@@ -34,7 +34,7 @@ local networkImpl = gameInviteDependenciesModule.networkImpl
 game:DefineFastFlag("LuaEnableGameInviteModal2023V5", false)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagUseSignalsForGameInvitesStatus = sharedFlagsModule.FFlagUseSignalsForGameInvitesStatus
-local var20 = if fFlagUseSignalsForGameInvitesStatus then require(parent.NotificationsCommon).GetGameInvitesStatusStore else nil
+local var1 = if fFlagUseSignalsForGameInvitesStatus then require(parent.NotificationsCommon).GetGameInvitesStatusStore else nil
 local getFFlagEnableGameInviteModalVRSupport = sharedFlagsModule.GetFFlagEnableGameInviteModalVRSupport
 local getFFlagVRPanelWidthIXPEnabled = sharedFlagsModule.GetFFlagVRPanelWidthIXPEnabled
 local isInExperienceUIVREnabled = require(parent.SharedExperimentDefinition).isInExperienceUIVREnabled
@@ -43,70 +43,70 @@ local fFlagEnableInExperienceUIPCVRFix = sharedFlagsModule.FFlagEnableInExperien
 local responsiveModule = nil
 local UIManager = nil
 local panelType = nil
-local var22 = nil
+local var2 = nil
 
 if isInExperienceUIVREnabled then
 	responsiveModule = require(parent.Responsive)
-	var22 = if fFlagEnableInExperienceUIPCVRFix then require(parent.Foundation).Hooks.useStyleSheet else nil
+	var2 = if fFlagEnableInExperienceUIPCVRFix then require(parent.Foundation).Hooks.useStyleSheet else nil
 	local vrSpatialUiModule = require(parent.VrSpatialUi)
 	UIManager = vrSpatialUiModule.UIManager
 	panelType = vrSpatialUiModule.Constants.PanelType
 end
 local t = {
 	[focusNavigationEventNameEnum.NavigateBack] = {
-		handler = inputHandlersModule.onRelease(function(p0)
+		handler = inputHandlersModule.onRelease(function(p1)
 			-- upvalues: gameInviteModalManagerModule (ref)
 			gameInviteModalManagerModule:closeModal()
-			p0:cancel()
+			p1:cancel()
 		end)
 	}
 }
 
 return function(p1)
-	-- upvalues: fFlagLuaAppForceVrAppPanelWidthRollout (ref), getFFlagVRPanelWidthIXPEnabled (ref), ixpUtilsModule (ref), VRPanelWidthIXP (ref), reactModule (ref), runService (ref), gameInviteConstantsModule (ref), useDispatch (ref), isInExperienceUIVREnabled (ref), responsiveModule (write), fFlagEnableInExperienceUIPCVRFix (ref), var22 (write), fFlagUseSignalsForGameInvitesStatus (ref), var20 (ref), resetUserInviteStatusModule (ref), gameInviteModalManagerModule (ref), guiService (ref), promiseModule (ref), robloxReplicatedStorageService (ref), getGameNameAndDescription (ref), networkImpl (ref), gameInviteModalWindowModule (ref), gameInviteContentWrapperModule (ref), getFFlagEnableGameInviteModalVRSupport (ref), VRReadyWrapper (ref), VRConstants (ref), gameInviteModalLayoutProviderModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), UIManager (write), panelType (write), reactRobloxModule (ref)
+	-- upvalues: fFlagLuaAppForceVrAppPanelWidthRollout (ref), getFFlagVRPanelWidthIXPEnabled (ref), ixpUtilsModule (ref), VRPanelWidthIXP (ref), reactModule (ref), runService (ref), gameInviteConstantsModule (ref), useDispatch (ref), isInExperienceUIVREnabled (ref), responsiveModule (write), fFlagEnableInExperienceUIPCVRFix (ref), var2 (write), fFlagUseSignalsForGameInvitesStatus (ref), var1 (ref), resetUserInviteStatusModule (ref), gameInviteModalManagerModule (ref), guiService (ref), promiseModule (ref), robloxReplicatedStorageService (ref), getGameNameAndDescription (ref), networkImpl (ref), gameInviteModalWindowModule (ref), gameInviteContentWrapperModule (ref), getFFlagEnableGameInviteModalVRSupport (ref), VRReadyWrapper (ref), VRConstants (ref), gameInviteModalLayoutProviderModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), UIManager (write), panelType (write), reactRobloxModule (ref)
 	if not game:GetFastFlag("LuaEnableGameInviteModal2023V5") then
 		return nil
 	end
-	local var25 = if fFlagLuaAppForceVrAppPanelWidthRollout or not getFFlagVRPanelWidthIXPEnabled() then nil else ixpUtilsModule.useTestVariables(VRPanelWidthIXP.VrAppPanelWidthMultiplier)
-	local var26 = if fFlagLuaAppForceVrAppPanelWidthRollout or not getFFlagVRPanelWidthIXPEnabled() then nil else ixpUtilsModule.useTestVariables(VRPanelWidthIXP.VrAppPanelCurvature)
-	local var27, var28 = reactModule.useState(false)
-	local var29, var30 = reactModule.useState(false)
-	local var31, var32 = reactModule.useState({})
-	local var33, var34 = reactModule.useState({})
-	local var35, var36 = reactModule.useState("")
-	local var37 = not runService:IsStudio()
-	local var38 = p1.renderLocation == gameInviteConstantsModule.RenderLocation.CoreScripts
-	local var39 = p1.renderLocation == gameInviteConstantsModule.RenderLocation.UniversalApp
-	local var40 = useDispatch()
-	local var41 = nil
-	local var42 = nil
+	local var3 = if fFlagLuaAppForceVrAppPanelWidthRollout or not getFFlagVRPanelWidthIXPEnabled() then nil else ixpUtilsModule.useTestVariables(VRPanelWidthIXP.VrAppPanelWidthMultiplier)
+	local var4 = if fFlagLuaAppForceVrAppPanelWidthRollout or not getFFlagVRPanelWidthIXPEnabled() then nil else ixpUtilsModule.useTestVariables(VRPanelWidthIXP.VrAppPanelCurvature)
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
+	local var9, var10 = reactModule.useState({})
+	local var11, var12 = reactModule.useState({})
+	local var13, var14 = reactModule.useState("")
+	local var15 = not runService:IsStudio()
+	local var16 = p1.renderLocation == gameInviteConstantsModule.RenderLocation.CoreScripts
+	local var17 = p1.renderLocation == gameInviteConstantsModule.RenderLocation.UniversalApp
+	local var18 = useDispatch()
+	local var19 = nil
+	local var20 = nil
 	
 	if isInExperienceUIVREnabled then
-		var41 = responsiveModule.useIsSpatial()
-		var42 = if fFlagEnableInExperienceUIPCVRFix then var22() else nil
+		var19 = responsiveModule.useIsSpatial()
+		var20 = if fFlagEnableInExperienceUIPCVRFix then var2() else nil
 	end
-	local var43 = function(p2, p3, p4)
-		-- upvalues: var28 (ref), var30 (ref), var32 (ref), fFlagUseSignalsForGameInvitesStatus (copy), var39 (ref), var20 (copy), var40 (ref), resetUserInviteStatusModule (copy)
-		var28(p2)
-		var30(p3 or false)
+	local var21 = function(p2, p3, p4)
+		-- upvalues: var6 (ref), var8 (ref), var10 (ref), fFlagUseSignalsForGameInvitesStatus (copy), var17 (ref), var1 (copy), var18 (ref), resetUserInviteStatusModule (copy)
+		var6(p2)
+		var8(p3 or false)
 		
 		if p4 then
-			var32(p4)
+			var10(p4)
 		end
 		if fFlagUseSignalsForGameInvitesStatus then
-			if var39 and not p2 then
-				var20(false).reset()
+			if var17 and not p2 then
+				var1(false).reset()
 				
 				return
 			end
-		elseif var39 and not p2 and var40 then
-			var40(resetUserInviteStatusModule())
+		elseif var17 and not p2 and var18 then
+			var18(resetUserInviteStatusModule())
 		end
 	end
 	
 	reactModule.useEffect(function()
-		-- upvalues: gameInviteModalManagerModule (copy), var43 (ref)
-		local eventConnection = gameInviteModalManagerModule.ToggleGameInviteModalEvent.Event:Connect(var43)
+		-- upvalues: gameInviteModalManagerModule (copy), var21 (ref)
+		local eventConnection = gameInviteModalManagerModule.ToggleGameInviteModalEvent.Event:Connect(var21)
 		
 		return function()
 			-- upvalues: eventConnection (ref)
@@ -114,11 +114,11 @@ return function(p1)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var38 (ref), guiService (copy), var27 (ref), gameInviteModalManagerModule (copy)
-		if var38 then
+		-- upvalues: var16 (ref), guiService (copy), var5 (ref), gameInviteModalManagerModule (copy)
+		if var16 then
 			local menuOpenedConnection = guiService.MenuOpened:Connect(function()
-				-- upvalues: var27 (copy), gameInviteModalManagerModule (copy)
-				if var27 then
+				-- upvalues: var5 (copy), gameInviteModalManagerModule (copy)
+				if var5 then
 					gameInviteModalManagerModule:closeModal()
 				end
 			end)
@@ -129,44 +129,44 @@ return function(p1)
 			end
 		end
 		return function() end
-	end, { var27, var38 })
+	end, { var5, var16 })
 	reactModule.useEffect(function()
-		-- upvalues: var37 (ref), var27 (ref), var38 (ref), var35 (ref), promiseModule (copy), robloxReplicatedStorageService (copy), var36 (ref), getGameNameAndDescription (copy), var33 (ref), networkImpl (copy), var34 (ref)
-		if var37 and var27 and var38 then
-			if var35 == "" then
+		-- upvalues: var15 (ref), var5 (ref), var16 (ref), var13 (ref), promiseModule (copy), robloxReplicatedStorageService (copy), var14 (ref), getGameNameAndDescription (copy), var11 (ref), networkImpl (copy), var12 (ref)
+		if var15 and var5 and var16 then
+			if var13 == "" then
 				promiseModule.try(function()
 					-- upvalues: robloxReplicatedStorageService (copy)
 					return robloxReplicatedStorageService:WaitForChild("GetServerType", 2):InvokeServer()
-				end):andThen(function(p5)
-					-- upvalues: var36 (copy)
-					var36(p5)
+				end):andThen(function(p2)
+					-- upvalues: var14 (copy)
+					var14(p2)
 				end)
 			end
-			if getGameNameAndDescription and not var33.Created then
-				getGameNameAndDescription(networkImpl, game.GameId):andThen(function(p6)
-					-- upvalues: var34 (copy)
-					var34(p6)
+			if getGameNameAndDescription and not var11.Created then
+				getGameNameAndDescription(networkImpl, game.GameId):andThen(function(p2)
+					-- upvalues: var12 (copy)
+					var12(p2)
 				end)
 			end
 		end
-	end, { var27 })
+	end, { var5 })
 	
-	if not var27 then
+	if not var5 then
 		return nil
 	end
-	local var44 = reactModule.createElement(gameInviteModalWindowModule, {}, {
+	local var22 = reactModule.createElement(gameInviteModalWindowModule, {}, {
 		GameInviteModalContentWrapper = reactModule.createElement(gameInviteContentWrapperModule, {
-			options = var31,
-			serverType = var35,
-			gameDetails = var33,
-			isLoading = var29,
-			isCoreScript = var38,
-			disableSelectionParentManagement = var39,
-			hideCloseButton = var31.hideCloseButton
+			options = var9,
+			serverType = var13,
+			gameDetails = var11,
+			isLoading = var7,
+			isCoreScript = var16,
+			disableSelectionParentManagement = var17,
+			hideCloseButton = var9.hideCloseButton
 		})
 	})
 	
-	return if getFFlagEnableGameInviteModalVRSupport() and var39 then reactModule.createElement(VRReadyWrapper, {
+	return if getFFlagEnableGameInviteModalVRSupport() and var17 then reactModule.createElement(VRReadyWrapper, {
 		component = "ScreenGui",
 		props = {
 			IgnoreGuiInset = true,
@@ -176,34 +176,34 @@ return function(p1)
 		},
 		vrProps = {
 			panelName = "GameInviteMenu",
-			partSize = if fFlagLuaAppForceVrAppPanelWidthRollout or not var25 then VRConstants.MainScreenSize else Vector2.new(VRConstants.MainScreenSize.X * var25, VRConstants.MainScreenSize.Y),
-			offset = if fFlagLuaAppForceVrAppPanelWidthRollout or getFFlagVRPanelWidthIXPEnabled() and var26 == 0 then CFrame.new(VRConstants.MainScreenPosition) * CFrame.fromEulerAnglesXYZ(0, -3.14159265359, 0) else CFrame.lookAt(VRConstants.MainScreenPosition, VRConstants.DefaultCameraPosition),
-			virtualScreenSize = if fFlagLuaAppForceVrAppPanelWidthRollout or not var25 then VRConstants.MainScreenResolution else Vector2.new(VRConstants.MainScreenResolution.X * var25, VRConstants.MainScreenResolution.Y),
-			curvature = if fFlagLuaAppForceVrAppPanelWidthRollout or not var26 then VRConstants.MainScreenCurvature else var26
+			partSize = if fFlagLuaAppForceVrAppPanelWidthRollout or not var3 then VRConstants.MainScreenSize else Vector2.new(VRConstants.MainScreenSize.X * var3, VRConstants.MainScreenSize.Y),
+			offset = if fFlagLuaAppForceVrAppPanelWidthRollout or getFFlagVRPanelWidthIXPEnabled() and var4 == 0 then CFrame.new(VRConstants.MainScreenPosition) * CFrame.fromEulerAnglesXYZ(0, -3.14159265359, 0) else CFrame.lookAt(VRConstants.MainScreenPosition, VRConstants.DefaultCameraPosition),
+			virtualScreenSize = if fFlagLuaAppForceVrAppPanelWidthRollout or not var3 then VRConstants.MainScreenResolution else Vector2.new(VRConstants.MainScreenResolution.X * var3, VRConstants.MainScreenResolution.Y),
+			curvature = if fFlagLuaAppForceVrAppPanelWidthRollout or not var4 then VRConstants.MainScreenCurvature else var4
 		}
 	}, {
-		GameInviteModalLayoutProvider = reactModule.createElement(gameInviteModalLayoutProviderModule, { isCoreScript = var38 }, {
-			ModalWindowContainer = if var39 then reactModule.createElement(focusNavigableSurfaceWrapper, {
+		GameInviteModalLayoutProvider = reactModule.createElement(gameInviteModalLayoutProviderModule, { isCoreScript = var16 }, {
+			ModalWindowContainer = if var17 then reactModule.createElement(focusNavigableSurfaceWrapper, {
 				isAutoFocusRoot = true,
 				isIsolated = true,
 				isFocusable = true,
 				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
 				customEventHandlers = t
-			}, { ModalWindowContainer = var44 }) else var44
+			}, { ModalWindowContainer = var22 }) else var22
 		})
-	}) elseif isInExperienceUIVREnabled and var41 then reactRobloxModule.createPortal({
-		FoundationStyleLink = if fFlagEnableInExperienceUIPCVRFix then reactModule.createElement("StyleLink", { StyleSheet = var42 }) else nil,
+	}) elseif isInExperienceUIVREnabled and var19 then reactRobloxModule.createPortal({
+		FoundationStyleLink = if fFlagEnableInExperienceUIPCVRFix then reactModule.createElement("StyleLink", { StyleSheet = var20 }) else nil,
 		GameInviteModalLayoutProvider = reactModule.createElement(gameInviteModalLayoutProviderModule, {
-			isCoreScript = var38,
+			isCoreScript = var16,
 			screenSizeOverride = if fFlagEnableInExperienceUIPCVRFix then if fFlagEnableInExperienceUIPCVRFix then UIManager.getInstance():getPanelSizeInPixel(panelType.MoreMenu) else nil else nil
 		}, {
 			ModalWindowContainer = reactModule.createElement(gameInviteModalWindowModule, {}, {
 				GameInviteModalContentWrapper = reactModule.createElement(gameInviteContentWrapperModule, {
-					options = var31,
-					serverType = var35,
-					gameDetails = var33,
-					isLoading = var29,
-					isCoreScript = var38
+					options = var9,
+					serverType = var13,
+					gameDetails = var11,
+					isLoading = var7,
+					isCoreScript = var16
 				})
 			})
 		})
@@ -213,14 +213,14 @@ return function(p1)
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		Name = gameInviteConstantsModule.ParentComponentName
 	}, {
-		GameInviteModalLayoutProvider = reactModule.createElement(gameInviteModalLayoutProviderModule, { isCoreScript = var38 }, {
-			ModalWindowContainer = if var39 then reactModule.createElement(focusNavigableSurfaceWrapper, {
+		GameInviteModalLayoutProvider = reactModule.createElement(gameInviteModalLayoutProviderModule, { isCoreScript = var16 }, {
+			ModalWindowContainer = if var17 then reactModule.createElement(focusNavigableSurfaceWrapper, {
 				isAutoFocusRoot = true,
 				isFocusable = true,
 				isIsolated = true,
 				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
 				customEventHandlers = t
-			}, { ModalWindowContainer = var44 }) else var44
+			}, { ModalWindowContainer = var22 }) else var22
 		})
 	})
 end

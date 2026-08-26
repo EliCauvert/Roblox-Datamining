@@ -3,54 +3,54 @@ local cmpLiteralArgsModule = require(script.Parent.cmpLiteralArgs)
 local cmpPredicateArgsModule = require(script.Parent.cmpPredicateArgs)
 local fmtArgsModule = require(script.Parent.fmtArgs)
 local t = {
-	args = function(p0, p1)
+	args = function(p1, p2)
 		-- upvalues: getCallsModule (ref), fmtArgsModule (ref)
-		local var5 = getCallsModule(p0)
-		local var5Count = #var5
+		local var1 = getCallsModule(p1)
+		local var5Count = #var1
 		
 		if var5Count == 0 then
 			return false, "mock was not called"
 		end
-		local var9
+		local var2
 		local _ = nil
 		
 		for i = 1, var5Count do
 			local _ = nil
-			local var7, var8 = p1(var5[i].args)
-			var9 = var8
+			local var3, var4 = p2(var1[i].args)
+			var2 = var4
 			
-			if not var7 then
+			if not var3 then
 				continue
 			end
 			return true
 		end
-		if not var9 then
-			var9 = fmtArgsModule(var5[var5Count].args) .. " did not match"
+		if not var2 then
+			var2 = fmtArgsModule(var1[var5Count].args) .. " did not match"
 		end
 		if var5Count > 1 then
-			var9 ..= " (+" .. var5Count - 1 .. " other calls)"
+			var2 ..= " (+" .. var5Count - 1 .. " other calls)"
 		end
-		return false, var9
+		return false, var2
 	end
 }
 
-function t.literals(p2, ...)
+function t.literals(p3, ...)
 	-- upvalues: t (ref), cmpLiteralArgsModule (ref)
 	local packed = table.pack(...)
 	
-	return t.args(p2, function(p3)
+	return t.args(p3, function(p4)
 		-- upvalues: cmpLiteralArgsModule (copy), packed (ref)
-		return cmpLiteralArgsModule(packed, p3)
+		return cmpLiteralArgsModule(packed, p4)
 	end)
 end
 
-function t.predicates(p4, ...)
+function t.predicates(p3, ...)
 	-- upvalues: t (ref), cmpPredicateArgsModule (ref)
 	local packed = table.pack(...)
 	
-	return t.args(p4, function(p5)
+	return t.args(p3, function(p4)
 		-- upvalues: cmpPredicateArgsModule (copy), packed (ref)
-		return cmpPredicateArgsModule(packed, p5)
+		return cmpPredicateArgsModule(packed, p4)
 	end)
 end
 

@@ -2,24 +2,24 @@
 local cryoModule = require(songbird.Parent.Cryo)
 local useEffect = require(songbird.Parent.React).useEffect
 
-return function(value, p0, p1)
+return function(value, p1, p2)
 	-- upvalues: useEffect (ref), cryoModule (ref)
 	useEffect(function()
-		-- upvalues: value (ref), p0 (ref)
-		local var2 = true
+		-- upvalues: value (ref), p1 (ref)
+		local var1 = true
 		task.spawn(function()
-			-- upvalues: var2 (write), value (copy), p0 (copy)
-			while var2 do
+			-- upvalues: var1 (write), value (copy), p1 (copy)
+			while var1 do
 				task.wait(value)
 				
-				if not var2 then break end
-				p0()
+				if not var1 then break end
+				p1()
 			end
 		end)
 		
 		return function()
-			-- upvalues: var2 (write)
-			var2 = false
+			-- upvalues: var1 (write)
+			var1 = false
 		end
-	end, cryoModule.Dictionary.join({ value, p0 }, p1 or {}))
+	end, cryoModule.Dictionary.join({ value, p1 }, p2 or {}))
 end

@@ -39,129 +39,129 @@ local valueToAbuseCategoryModule = require(genericAbuseReporting.Enums.ValueToAb
 local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
 local fFlagGenericAbuseReportingUnifyReportTagsModule = require(genericAbuseReporting.Flags.FFlagGenericAbuseReportingUnifyReportTags)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), useBeduiDataModule (ref), useFormDataModule (ref), useRoactService (ref), roactNetworking (ref), useAnalyticsContextModule (ref), useLayerCollector (ref), abuseReportBeduiContextStatus (ref), validateBeduiDataModule (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), innerContentConfigType (ref), cryoModule (ref), playersService (ref), abuseVectorModule (ref), getReportBodyModule (ref), submitReportV1Module (ref), dashModule (ref), fFlagGenericAbuseReportingUnifyReportTagsModule (ref), fFlagAddThumbnailSelectorReport (ref), getReportTagsModule (ref), submitReportModule (ref), createReportModule (ref), valueToAbuseCategoryModule (ref), abuseCategoryModule (ref), singleStepContainerModule (ref), singleStepInnerContentRendererModule (ref), argCheckModule (ref), buttonVariant (ref), fillBehavior (ref), skeleton (ref), radius (ref), empty (ref), stepperModule (ref)
-	local var25 = useTokens()
-	local var26, var27 = reactModule.useState({})
-	local var28 = useBeduiDataModule()
+	local var1 = useTokens()
+	local var2, var3 = reactModule.useState({})
+	local var4 = useBeduiDataModule()
 	local formData = useFormDataModule().formData
 	local additionalReportTags = useFormDataModule().additionalReportTags
-	local var29 = useRoactService(roactNetworking)
-	local var30 = useAnalyticsContextModule()
-	local isReportSubmitted = var30.isReportSubmitted
-	local setIsReportSubmitted = var30.setIsReportSubmitted
-	local var31 = useLayerCollector().absoluteSize.X < 540
-	local var32 = reactModule.useMemo(function()
-		-- upvalues: var28 (ref), abuseReportBeduiContextStatus (copy)
-		return if var28 ~= nil then var28.status == abuseReportBeduiContextStatus.Loading else true
-	end, { var28 })
-	local var33 = reactModule.useMemo(function()
-		-- upvalues: var32 (ref), var28 (ref), validateBeduiDataModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (ref), abuseReportBeduiContextStatus (copy)
-		if var32 or var28 == nil then
+	local var5 = useRoactService(roactNetworking)
+	local var6 = useAnalyticsContextModule()
+	local isReportSubmitted = var6.isReportSubmitted
+	local setIsReportSubmitted = var6.setIsReportSubmitted
+	local var7 = useLayerCollector().absoluteSize.X < 540
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), abuseReportBeduiContextStatus (copy)
+		return if var4 ~= nil then var4.status == abuseReportBeduiContextStatus.Loading else true
+	end, { var4 })
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: var8 (ref), var4 (ref), validateBeduiDataModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (ref), abuseReportBeduiContextStatus (copy)
+		if var8 or var4 == nil then
 			return true
 		end
-		local var37, var38 = validateBeduiDataModule(var28.beduiData)
+		local var10, var11 = validateBeduiDataModule(var4.beduiData)
 		
-		if var37 then
-			return var28.status == abuseReportBeduiContextStatus.Error
+		if var10 then
+			return var4.status == abuseReportBeduiContextStatus.Error
 		end
 		sendAnalyticsEvent({
 			eventType = telemetryEventType.Error,
-			context = var30,
+			context = var6,
 			meta = {
-				error = `ReportFlowHandler - Invalid Bedui data: {tostring(var38)}`
+				error = `ReportFlowHandler - Invalid Bedui data: {tostring(var11)}`
 			}
 		})
 		
 		return true
 	end, {
-		var28,
-		var32,
+		var4,
+		var8,
 		validateBeduiDataModule,
 		sendAnalyticsEvent,
-		var30
+		var6
 	})
-	local var34 = reactModule.useCallback(function(p1)
-		-- upvalues: innerContentConfigType (copy), formData (ref), var27 (ref), cryoModule (copy), var26 (ref)
-		if p1 == nil then
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: innerContentConfigType (copy), formData (ref), var3 (ref), cryoModule (copy), var2 (ref)
+		if p2 == nil then
 			return true
 		end
-		local var39 = false
+		local var11 = false
 		
-		if p1.type == innerContentConfigType.ConfigurableComponentList then
-			for i, v in p1.configurableComponentList.components do
+		if p2.type == innerContentConfigType.ConfigurableComponentList then
+			for i, v in p2.configurableComponentList.components do
 				if not v.isOptional and formData[v.formDataKey] == nil then
-					var39 = true
-					var27(cryoModule.List.join(var26, { v.formDataKey }))
+					var11 = true
+					var3(cryoModule.List.join(var2, { v.formDataKey }))
 				end
 			end
 		end
-		return not var39
-	end, { formData, var26 })
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: playersService (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (ref), p0 (ref), abuseVectorModule (copy), getReportBodyModule (copy), formData (ref), additionalReportTags (ref), submitReportV1Module (copy), var29 (ref), dashModule (copy), fFlagGenericAbuseReportingUnifyReportTagsModule (copy), fFlagAddThumbnailSelectorReport (copy), getReportTagsModule (copy), submitReportModule (copy), createReportModule (copy), valueToAbuseCategoryModule (copy), abuseCategoryModule (copy)
+		return not var11
+	end, { formData, var2 })
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: playersService (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (ref), p1 (ref), abuseVectorModule (copy), getReportBodyModule (copy), formData (ref), additionalReportTags (ref), submitReportV1Module (copy), var5 (ref), dashModule (copy), fFlagGenericAbuseReportingUnifyReportTagsModule (copy), fFlagAddThumbnailSelectorReport (copy), getReportTagsModule (copy), submitReportModule (copy), createReportModule (copy), valueToAbuseCategoryModule (copy), abuseCategoryModule (copy)
 		local localPlayer = playersService.LocalPlayer
 		
 		if localPlayer == nil then
 			sendAnalyticsEvent({
 				eventType = telemetryEventType.Error,
-				context = var30,
+				context = var6,
 				meta = { error = "ReportFlowHandler - LocalPlayer is nil" }
 			})
 			
 			return
-		elseif p0.abuseVector == abuseVectorModule.AdV2 then
-			submitReportV1Module(var29, getReportBodyModule({
-				abuseVector = p0.abuseVector,
+		elseif p1.abuseVector == abuseVectorModule.AdV2 then
+			submitReportV1Module(var5, getReportBodyModule({
+				abuseVector = p1.abuseVector,
 				formData = formData,
 				localPlayerUserId = localPlayer.UserId,
-				targetIdStr = p0.targetId,
+				targetIdStr = p1.targetId,
 				additionalReportTags = additionalReportTags
 			})):andThen(function(_)
-				-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy), p0 (copy)
+				-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (copy), p1 (copy)
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Submitted,
-					context = var30
+					context = var6
 				})
 				
-				if p0.onSubmit then
-					p0.onSubmit()
+				if p1.onSubmit then
+					p1.onSubmit()
 				end
-			end):catch(function(p2)
-				-- upvalues: dashModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy)
+			end):catch(function(p3)
+				-- upvalues: dashModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (copy)
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Error,
-					context = var30,
+					context = var6,
 					meta = {
-						error = `ReportFlowHandler - Submitting v1 report: {dashModule.pretty(p2, { depth = 10 })}`
+						error = `ReportFlowHandler - Submitting v1 report: {dashModule.pretty(p3, { depth = 10 })}`
 					}
 				})
 			end)
 			
 			return
 		elseif fFlagGenericAbuseReportingUnifyReportTagsModule or fFlagAddThumbnailSelectorReport then
-			submitReportModule(var29, getReportTagsModule({
+			submitReportModule(var5, getReportTagsModule({
 				formData = formData,
 				localPlayerUserId = tostring(localPlayer.UserId),
-				abuseVector = p0.abuseVector,
-				targetId = p0.targetId,
-				custom = p0.custom,
+				abuseVector = p1.abuseVector,
+				targetId = p1.targetId,
+				custom = p1.custom,
 				additionalReportTags = additionalReportTags
 			})):andThen(function(_)
-				-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy), p0 (copy)
+				-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (copy), p1 (copy)
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Submitted,
-					context = var30
+					context = var6
 				})
 				
-				if p0.onSubmit then
-					p0.onSubmit()
+				if p1.onSubmit then
+					p1.onSubmit()
 				end
 			end):catch(function(p3)
-				-- upvalues: dashModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy)
+				-- upvalues: dashModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (copy)
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Error,
-					context = var30,
+					context = var6,
 					meta = {
 						error = `ReportFlowHandler - Submitting report: {dashModule.pretty(p3, { depth = 10 })}`
 					}
@@ -170,41 +170,41 @@ return reactModule.memo(function(p0)
 			
 			return
 		end
-		submitReportModule(var29, createReportModule({
+		submitReportModule(var5, createReportModule({
 			abuseCategory = valueToAbuseCategoryModule[formData.legacy_abuse_category] or (formData.abuse_category or abuseCategoryModule.ABUSE_CATEGORY_INVALID),
-			abuseVector = p0.abuseVector,
+			abuseVector = p1.abuseVector,
 			comment = formData.free_comment,
 			submitterId = tostring(localPlayer.UserId),
-			targetId = p0.targetId,
-			custom = p0.custom
+			targetId = p1.targetId,
+			custom = p1.custom
 		})):andThen(function(_)
-			-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy)
+			-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (copy)
 			sendAnalyticsEvent({
 				eventType = telemetryEventType.Submitted,
-				context = var30
+				context = var6
 			})
-		end):catch(function(p4)
-			-- upvalues: dashModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy)
+		end):catch(function(p3)
+			-- upvalues: dashModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (copy)
 			sendAnalyticsEvent({
 				eventType = telemetryEventType.Error,
-				context = var30,
+				context = var6,
 				meta = {
-					error = `ReportFlowHandler - Submitting report: {dashModule.pretty(p4, { depth = 10 })}`
+					error = `ReportFlowHandler - Submitting report: {dashModule.pretty(p3, { depth = 10 })}`
 				}
 			})
 		end)
 	end, {
-		formData, playersService.LocalPlayer, p0.abuseVector, p0.targetId,
-		sendAnalyticsEvent, var30
+		formData, playersService.LocalPlayer, p1.abuseVector, p1.targetId,
+		sendAnalyticsEvent, var6
 	})
-	local var36 = reactModule.useMemo(function()
-		-- upvalues: var32 (ref), var33 (ref), var28 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (ref), dashModule (copy), var31 (ref), cryoModule (copy), reactModule (copy), singleStepContainerModule (copy), var26 (ref), singleStepInnerContentRendererModule (copy), argCheckModule (copy), isReportSubmitted (ref), var35 (ref), setIsReportSubmitted (ref), var34 (ref), buttonVariant (copy), fillBehavior (copy)
-		if var32 then
+	local var13 = reactModule.useMemo(function()
+		-- upvalues: var8 (ref), var9 (ref), var4 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (ref), dashModule (copy), var7 (ref), cryoModule (copy), reactModule (copy), singleStepContainerModule (copy), var2 (ref), singleStepInnerContentRendererModule (copy), argCheckModule (copy), isReportSubmitted (ref), var12 (ref), setIsReportSubmitted (ref), var10 (ref), buttonVariant (copy), fillBehavior (copy)
+		if var8 then
 			return {}
-		elseif var33 or not var28.beduiData or not var28.beduiData.nodes then
+		elseif var9 or not var4.beduiData or not var4.beduiData.nodes then
 			sendAnalyticsEvent({
 				eventType = telemetryEventType.Error,
-				context = var30,
+				context = var6,
 				meta = {
 					error = "ReportFlowHandler - Invalid Bedui data or no nodes found"
 				}
@@ -214,70 +214,70 @@ return reactModule.memo(function(p0)
 		end
 		local t = {}
 		
-		for i, v in var28.beduiData.nodes do
-			local var41 = dashModule.joinDeep({}, v)
-			local innerContentConfig = var41.innerContentConfig
-			local footerContentConfig = var31 and v.footerContentConfig
+		for i, v in var4.beduiData.nodes do
+			local var14 = dashModule.joinDeep({}, v)
+			local innerContentConfig = var14.innerContentConfig
+			local footerContentConfig = var7 and v.footerContentConfig
 			
 			if footerContentConfig then
 				innerContentConfig = {
 					type = innerContentConfig.type,
 					configurableComponentList = {
-						components = cryoModule.List.join(innerContentConfig.configurableComponentList.components, var41.footerContentConfig.configurableComponentList.components)
+						components = cryoModule.List.join(innerContentConfig.configurableComponentList.components, var14.footerContentConfig.configurableComponentList.components)
 					}
 				}
 			end
-			if t[var41.stepId] == nil then
-				t[var41.stepId] = {
+			if t[var14.stepId] == nil then
+				t[var14.stepId] = {
 					onStepCancel = nil,
-					stepId = var41.stepId,
-					predefinedNextStepId = var41.actionInfo.predefinedNextStepId,
+					stepId = var14.stepId,
+					predefinedNextStepId = var14.actionInfo.predefinedNextStepId,
 					content = reactModule.createElement(singleStepContainerModule, {
-						node = var41,
+						node = var14,
 						contentConfig = innerContentConfig,
-						formDataKeysWithError = var26
+						formDataKeysWithError = var2
 					}),
-					footer = if var41.footerContentConfig and not footerContentConfig then reactModule.createElement(singleStepInnerContentRendererModule, {
-						contentConfig = var41.footerContentConfig,
-						formDataKeysWithError = var26
+					footer = if var14.footerContentConfig and not footerContentConfig then reactModule.createElement(singleStepInnerContentRendererModule, {
+						contentConfig = var14.footerContentConfig,
+						formDataKeysWithError = var2
 					}) else nil,
-					labels = { continueButton = var41.actionInfo.actionLabel },
+					labels = { continueButton = var14.actionInfo.actionLabel },
 					onStepContinue = function()
-						-- upvalues: argCheckModule (copy), isReportSubmitted (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy), var41 (ref), var35 (copy), setIsReportSubmitted (copy)
+						-- upvalues: argCheckModule (copy), isReportSubmitted (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var6 (copy), var14 (ref), var12 (copy), setIsReportSubmitted (copy)
 						argCheckModule.assert(isReportSubmitted == false, "Report should only be able to be submitted once")
 						
 						if isReportSubmitted then
 							sendAnalyticsEvent({
 								eventType = telemetryEventType.Error,
-								context = var30,
+								context = var6,
 								meta = {
-									error = `ReportFlowHandler - Report already submitted for stepId: {tostring(var41.stepId)}`
+									error = `ReportFlowHandler - Report already submitted for stepId: {tostring(var14.stepId)}`
 								}
 							})
 						end
-						if var41.actionInfo.shouldSubmit and not isReportSubmitted then
-							var35()
+						if var14.actionInfo.shouldSubmit and not isReportSubmitted then
+							var12()
 							setIsReportSubmitted(true)
 						end
 					end,
 					validateState = function()
-						-- upvalues: var34 (copy), innerContentConfig (write)
-						return var34(innerContentConfig)
+						-- upvalues: var10 (copy), innerContentConfig (write)
+						return var10(innerContentConfig)
 					end,
 					stepStyle = {
 						buttonXAlignment = "align-x-right",
 						continueButton = {
-							variant = if var41.actionInfo.shouldSubmit then buttonVariant.Emphasis else buttonVariant.Standard,
-							fillBehavior = if var31 then fillBehavior.Fill else fillBehavior.Fit
+							variant = if var14.actionInfo.shouldSubmit then buttonVariant.Emphasis else buttonVariant.Standard,
+							fillBehavior = if var7 then fillBehavior.Fill else fillBehavior.Fit
 						}
 					}
 				}
 			end
 			sendAnalyticsEvent({
 				eventType = telemetryEventType.Error,
-				context = var30,
+				context = var6,
 				meta = {
-					error = `ReportFlowHandler - Duplicate stepId found: {tostring(var41.stepId)}`
+					error = `ReportFlowHandler - Duplicate stepId found: {tostring(var14.stepId)}`
 				}
 			})
 			
@@ -285,12 +285,12 @@ return reactModule.memo(function(p0)
 		end
 		return t
 	end, {
-		var32, var33, var28, var26, var31, var35, var34, isReportSubmitted,
-		sendAnalyticsEvent, var30
+		var8, var9, var4, var2, var7, var12, var10, isReportSubmitted,
+		sendAnalyticsEvent, var6
 	})
 	
-	return if var32 then reactModule.createElement(skeleton, {
+	return if var8 then reactModule.createElement(skeleton, {
 		radius = radius.Medium,
-		Size = UDim2.new(1, 0, 0, var25.Size.Size_2500)
-	}) elseif var33 or not next(var36) then reactModule.createElement(empty, {}) elseif next(var36) and var28.beduiData then reactModule.createElement(stepperModule, { currentStep = var28.beduiData.rootStepId, steps = var36 }) else nil
+		Size = UDim2.new(1, 0, 0, var1.Size.Size_2500)
+	}) elseif var9 or not next(var13) then reactModule.createElement(empty, {}) elseif next(var13) and var4.beduiData then reactModule.createElement(stepperModule, { currentStep = var4.beduiData.rootStepId, steps = var13 }) else nil
 end)

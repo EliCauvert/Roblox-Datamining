@@ -19,26 +19,26 @@ local t_1 = {
 	[errorStateEnumModule.ErrorCancelling] = "CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Body"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), t_1 (ref), reactModule (ref), interactiveAlert (ref), errorLarge (ref), buttonType (ref), useScreenSize (ref)
-	local var6 = useLocalization({
+	local var1 = useLocalization({
 		buttonText = "CoreScripts.CancelUserSubscriptionPrompt.Error.ButtonText",
-		heading = t[p0.errorState],
-		bodyText = t_1[p0.errorState]
+		heading = t[p1.errorState],
+		bodyText = t_1[p1.errorState]
 	})
 	
 	return reactModule.createElement(interactiveAlert, {
-		title = var6.heading,
+		title = var1.heading,
 		titleIcon = errorLarge,
-		bodyText = var6.bodyText,
+		bodyText = var1.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = p0.onDismiss or function() end,
-						text = var6.buttonText,
+						onActivated = p1.onDismiss or function() end,
+						text = var1.buttonText,
 						delayInputSeconds = 0.75,
 						[reactModule.Tag] = "data-testid=CancelSubscriptionApp_OkButton"
 					}

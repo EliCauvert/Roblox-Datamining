@@ -34,15 +34,15 @@ local t = {
 local t_1 = {
 	eventName = t.EventName,
 	backends = { loggingProtocolModule.TelemetryBackends.EventIngest },
-	formatCustomFields = function(p0)
+	formatCustomFields = function(p1)
 		-- upvalues: playersService (ref), cryoModule (ref), fFlagUniversalFeatureRestrictionReceivers (ref), t (ref)
-		local eventType = p0.eventType
-		local interventionType = p0.interventionType
-		local renderedTimestamp = p0.renderedTimestamp
-		local eventId = p0.eventId
-		local evidence = p0.evidence
-		local duration = p0.duration
-		local acknowledgeable = p0.acknowledgeable
+		local eventType = p1.eventType
+		local interventionType = p1.interventionType
+		local renderedTimestamp = p1.renderedTimestamp
+		local eventId = p1.eventId
+		local evidence = p1.evidence
+		local duration = p1.duration
+		local acknowledgeable = p1.acknowledgeable
 		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
 		local t_1 = {
 			user_id = tostring(playersService and (playersService.LocalPlayer and (playersService.LocalPlayer.UserId or 0))),
@@ -52,14 +52,14 @@ local t_1 = {
 			event_id = eventId,
 			evidence = evidence,
 			timeout_duration_seconds = if duration ~= nil then nil else tostring(duration),
-			placement = p0.placement
+			placement = p1.placement
 		}
 		
 		if acknowledgeable ~= nil then
 			t_1 = cryoModule.Dictionary.join({ acknowledgeable = tostring(acknowledgeable) }, t_1)
 		end
-		if fFlagUniversalFeatureRestrictionReceivers and p0.abuseVector ~= nil then
-			t_1 = cryoModule.Dictionary.join({ abuse_vector = p0.abuseVector }, t_1)
+		if fFlagUniversalFeatureRestrictionReceivers and p1.abuseVector ~= nil then
+			t_1 = cryoModule.Dictionary.join({ abuse_vector = p1.abuseVector }, t_1)
 		end
 		if eventType == t.EventTypes.CtaClicked or eventType == t.EventTypes.AppealClicked or (eventType == t.EventTypes.NudgeToastDismissed or eventType == t.EventTypes.ChatAttemptToastDismissed) then
 			t_1 = cryoModule.Dictionary.join({
@@ -67,13 +67,13 @@ local t_1 = {
 			}, t_1)
 		end
 		if eventType == t.EventTypes.DialogInterventionDismissFailed or eventType == t.EventTypes.GetModerationDetailFailed then
-			t_1 = cryoModule.Dictionary.join({ error = p0.error }, t_1)
+			t_1 = cryoModule.Dictionary.join({ error = p1.error }, t_1)
 		end
 		return t_1
 	end
 }
 
-local var5 = function(p1)
+local var1 = function(p1)
 	-- upvalues: loggingProtocolModule (ref)
 	return {
 		counterSuffix = p1,
@@ -89,31 +89,31 @@ local var5 = function(p1)
 end
 
 return {
-	sendAnalyticsEvent = function(p3, p4)
+	sendAnalyticsEvent = function(p1, p2)
 		-- upvalues: default (ref)
-		local loggingTypes = p3.loggingTypes
+		local loggingTypes = p1.loggingTypes
 		
 		if loggingTypes.Event then
 			local event = loggingTypes.Event
 			default:logRobloxTelemetryEvent({
 				eventName = event.eventName,
 				backends = event.backends,
-				throttlingPercentage = p3.throttlingPercentage,
-				lastUpdated = p3.lastUpdated,
-				description = p3.description,
-				links = p3.links
-			}, event.standardizedFields or {}, event.formatCustomFields(p4))
+				throttlingPercentage = p1.throttlingPercentage,
+				lastUpdated = p1.lastUpdated,
+				description = p1.description,
+				links = p1.links
+			}, event.standardizedFields or {}, event.formatCustomFields(p2))
 		end
 		if loggingTypes.Counter then
 			local counter = loggingTypes.Counter
 			default:logRobloxTelemetryCounter({
-				eventName = `Intervention.{p4.counterNamespace or "Unknown"}.{counter.counterSuffix}`,
+				eventName = `Intervention.{p2.counterNamespace or "Unknown"}.{counter.counterSuffix}`,
 				backends = counter.backends,
-				throttlingPercentage = p3.throttlingPercentage,
-				lastUpdated = p3.lastUpdated,
-				description = p3.description,
-				links = p3.links
-			}, 1, counter.formatCustomFields(p4))
+				throttlingPercentage = p1.throttlingPercentage,
+				lastUpdated = p1.lastUpdated,
+				description = p1.description,
+				links = p1.links
+			}, 1, counter.formatCustomFields(p2))
 		end
 	end,
 	Constants = t,
@@ -121,25 +121,25 @@ return {
 		MessageReceived = {
 			throttlingPercentage = 10000,
 			description = "Intervention RTN message Received",
-			loggingTypes = { Event = t_1, Counter = var5("Message.Received") },
+			loggingTypes = { Event = t_1, Counter = var1("Message.Received") },
 			lastUpdated = { 2025, 3, 25 }
 		},
 		DialogRendered = {
 			throttlingPercentage = 10000,
 			description = "Intervention Dialog Rendered",
-			loggingTypes = { Event = t_1, Counter = var5("Dialog.Rendered") },
+			loggingTypes = { Event = t_1, Counter = var1("Dialog.Rendered") },
 			lastUpdated = { 2025, 3, 25 }
 		},
 		DialogCtaClicked = {
 			throttlingPercentage = 10000,
 			description = "Intervention Dialog CTA Clicked",
-			loggingTypes = { Event = t_1, Counter = var5("Dialog.Button.Cta") },
+			loggingTypes = { Event = t_1, Counter = var1("Dialog.Button.Cta") },
 			lastUpdated = { 2025, 3, 25 }
 		},
 		DialogAppealClicked = {
 			throttlingPercentage = 10000,
 			description = "Intervention Dialog Appeal Clicked",
-			loggingTypes = { Event = t_1, Counter = var5("Dialog.Button.Appeal") },
+			loggingTypes = { Event = t_1, Counter = var1("Dialog.Button.Appeal") },
 			lastUpdated = { 2025, 3, 25 }
 		},
 		DialogInterventionDismissSuccess = {

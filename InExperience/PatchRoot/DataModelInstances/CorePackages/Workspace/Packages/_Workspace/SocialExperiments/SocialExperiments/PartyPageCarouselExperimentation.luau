@@ -4,51 +4,51 @@ local partyPageCarouselVariant = game:DefineFastString("PartyPageCarouselVariant
 local forceEnableSocialCarouselPartyPage5 = game:DefineFastFlag("ForceEnableSocialCarouselPartyPage5", false)
 local enablePartyPageCarouselExperimentation4 = game:DefineFastFlag("EnablePartyPageCarouselExperimentation4", false)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: experimentCacheManager (ref), fStringPartyPageCarouselExpLayer (ref)
-	local var4 = experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer)
+	local var1 = experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer)
 	
-	return if var4 and var4[p0] ~= nil then var4[p0] else false
+	return if var1 and var1[p1] ~= nil then var1[p1] else false
 end
 
 return {
 	getAppChatFormFactorEnabled = function()
 		-- upvalues: forceEnableSocialCarouselPartyPage5 (ref), enablePartyPageCarouselExperimentation4 (ref), partyPageCarouselVariant (ref), experimentCacheManager (ref), fStringPartyPageCarouselExpLayer (ref)
-		local var5 = forceEnableSocialCarouselPartyPage5
+		local var1 = forceEnableSocialCarouselPartyPage5
 		
-		if not var5 then
-			var5 = enablePartyPageCarouselExperimentation4
+		if not var1 then
+			var1 = enablePartyPageCarouselExperimentation4
 			
-			if var5 then
-				local var6 = partyPageCarouselVariant
-				local var7 = experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer)
+			if var1 then
+				local var2 = partyPageCarouselVariant
+				local var3 = experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer)
 				
-				if var7 and var7[var6] ~= nil then
-					return var7[var6]
+				if var3 and var3[var2] ~= nil then
+					return var3[var2]
 				end
-				var5 = false
+				var1 = false
 			end
 		end
-		return var5
+		return var1
 	end,
 	getPartyPageCarouselEnabled = function()
 		-- upvalues: forceEnableSocialCarouselPartyPage5 (ref), enablePartyPageCarouselExperimentation4 (ref), partyPageCarouselVariant (ref), experimentCacheManager (ref), fStringPartyPageCarouselExpLayer (ref)
-		local var8 = forceEnableSocialCarouselPartyPage5
+		local var1 = forceEnableSocialCarouselPartyPage5
 		
-		if not var8 then
-			var8 = enablePartyPageCarouselExperimentation4
+		if not var1 then
+			var1 = enablePartyPageCarouselExperimentation4
 			
-			if var8 then
-				local var9 = partyPageCarouselVariant
-				local var10 = experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer)
+			if var1 then
+				local var2 = partyPageCarouselVariant
+				local var3 = experimentCacheManager.default:getLayerVariables(fStringPartyPageCarouselExpLayer)
 				
-				if var10 and var10[var9] ~= nil then
-					return var10[var9]
+				if var3 and var3[var2] ~= nil then
+					return var3[var2]
 				end
-				var8 = false
+				var1 = false
 			end
 		end
-		return var8
+		return var1
 	end,
 	logExposure = function()
 		-- upvalues: enablePartyPageCarouselExperimentation4 (ref), experimentCacheManager (ref), fStringPartyPageCarouselExpLayer (ref)

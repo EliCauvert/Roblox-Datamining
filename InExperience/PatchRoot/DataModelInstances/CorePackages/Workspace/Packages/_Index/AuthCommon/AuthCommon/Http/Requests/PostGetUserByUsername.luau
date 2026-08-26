@@ -6,9 +6,9 @@ local var1 = require(parent.UrlBuilder).UrlBuilder.new({
 	base = require(parent.Http).Url.USERS_URL
 })
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: var1 (ref), httpService (ref)
-	return p0(var1(), "POST", {
-		postBody = httpService:JSONEncode({ usernames = { p1 }, excludeBannedUsers = p2 or false })
+	return p1(var1(), "POST", {
+		postBody = httpService:JSONEncode({ usernames = { p2 }, excludeBannedUsers = p3 or false })
 	})
 end

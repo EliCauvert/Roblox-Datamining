@@ -5,35 +5,35 @@ local fFlagPurchasePromptFetchCartPricingForLooks = sharedFlagsModule.FFlagPurch
 local fIntBlackbirdUpsellMinPriceForDiscountInclusive = sharedFlagsModule.FIntBlackbirdUpsellMinPriceForDiscountInclusive
 local fIntBlackbirdUpsellMaxPriceForDiscountInclusive = sharedFlagsModule.FIntBlackbirdUpsellMaxPriceForDiscountInclusive
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: fFlagPurchasePromptFetchCartPricingForLooks (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), fFlagHideLookDiscountPercentWithIneligibleItemsModule (ref)
-	if not p0 or not p0.look or not p0.look.items then
+	if not p1 or not p1.look or not p1.look.items then
 		return nil
 	end
-	local look = p0.look
-	p1 = p1 or {}
+	local look = p1.look
+	p2 = p2 or {}
 	local t = {}
 	
-	for i, v in ipairs(p1.excludedAssetIds or {}) do
+	for i, v in ipairs(p2.excludedAssetIds or {}) do
 		t[tostring(v)] = true
 	end
 	local t_1 = {}
 	
-	for i_1, v_1 in ipairs(p1.excludedBundleIds or {}) do
+	for i_1, v_1 in ipairs(p2.excludedBundleIds or {}) do
 		t_1[tostring(v_1)] = true
 	end
 	local t_2 = {}
 	
-	for i_2, v_2 in ipairs(p1.timedOptions or {}) do
+	for i_2, v_2 in ipairs(p2.timedOptions or {}) do
 		t_2[v_2.itemType .. ":" .. tostring(v_2.itemId)] = v_2.days
 	end
-	local i_4, priceInRobux, t_7, var21
-	local var6 = 0
-	local var7 = 0
+	local i_4, priceInRobux, t_7, var1
+	local var2 = 0
+	local var3 = 0
 	local t_3 = {}
 	local t_4 = {}
-	local var10 = false
-	local var11 = false
+	local var4 = false
+	local var5 = false
 	local t_5 = {}
 	local t_6 = {}
 	
@@ -41,7 +41,7 @@ return function(p0, p1)
 		i_4 = tostring(v_3.id)
 		
 		if (v_3.itemType ~= "Asset" or not t[i_4]) and (v_3.itemType ~= "Bundle" or not t_1[i_4]) then
-			local var17 = t_2[v_3.itemType .. ":" .. i_4]
+			local var6 = t_2[v_3.itemType .. ":" .. i_4]
 			
 			if fFlagPurchasePromptFetchCartPricingForLooks then
 				local collectibleItemId = v_3.collectibleItemId or (v_3.CollectibleItemId or v_3.collectible_item_id)
@@ -50,8 +50,8 @@ return function(p0, p1)
 					table.insert(t_5, collectibleItemId)
 					t_7 = { collectibleItemId = collectibleItemId }
 					
-					if type(var17) == "number" and var17 > 0 then
-						t_7.rentalDays = var17
+					if type(var6) == "number" and var6 > 0 then
+						t_7.rentalDays = var6
 					else
 						t_7.isPermanent = true
 					end
@@ -61,18 +61,18 @@ return function(p0, p1)
 			priceInRobux = nil
 			t_7 = nil
 			
-			if var17 and v_3.timedOptions then
-				var21 = false
+			if var6 and v_3.timedOptions then
+				var1 = false
 				
 				for i_5, v_4 in ipairs(v_3.timedOptions) do
-					if v_4.days == var17 then
+					if v_4.days == var6 then
 						priceInRobux = v_4.price or 0
 						t_7 = v_4.discountInformation
-						var21 = true
+						var1 = true
 						break
 					end
 				end
-				if not var21 then
+				if not var1 then
 					priceInRobux = v_3.priceInRobux or 0
 					t_7 = v_3.discountInformation
 				end
@@ -80,17 +80,17 @@ return function(p0, p1)
 				priceInRobux = v_3.priceInRobux or 0
 				t_7 = v_3.discountInformation
 			end
-			var6 += priceInRobux
-			local var22 = if t_7 then t_7.originalPrice or priceInRobux else priceInRobux
-			local var23 = fIntBlackbirdUpsellMaxPriceForDiscountInclusive
+			var2 += priceInRobux
+			local var7 = if t_7 then t_7.originalPrice or priceInRobux else priceInRobux
+			local var8 = fIntBlackbirdUpsellMaxPriceForDiscountInclusive
 			
-			if t_7 and not (if var22 > fIntBlackbirdUpsellMinPriceForDiscountInclusive then var23 ~= 0 and var23 <= var22 else true) then
-				var10 = true
+			if t_7 and not (if var7 > fIntBlackbirdUpsellMinPriceForDiscountInclusive then var8 ~= 0 and var8 <= var7 else true) then
+				var4 = true
 			else
-				var11 = true
+				var5 = true
 			end
 			if t_7 then
-				var7 += t_7.originalPrice or priceInRobux
+				var3 += t_7.originalPrice or priceInRobux
 				
 				for i_5, v_4 in ipairs(t_7.discounts or {}) do
 					local discountCampaign = v_4.discountCampaign
@@ -108,20 +108,20 @@ return function(p0, p1)
 					end
 				end
 			else
-				var7 += priceInRobux
+				var3 += priceInRobux
 			end
 		end
 	end
-	local var11_1 = fFlagHideLookDiscountPercentWithIneligibleItemsModule and (var10 and var11)
+	local var9 = fFlagHideLookDiscountPercentWithIneligibleItemsModule and (var4 and var5)
 	local t_7 = {}
 	
-	if var7 > 0 then
+	if var3 > 0 then
 		for i_4, v_4 in pairs(t_3) do
 			if v_4 > 0 then
 				table.insert(t_7, {
 					Type = i_4,
 					AmountInRobux = v_4,
-					Percent = if var11_1 then 0 else math.round(v_4 / var7 * 100),
+					Percent = if var9 then 0 else math.round(v_4 / var3 * 100),
 					LocalizedDiscountAttribution = if fFlagPurchasePromptFetchCartPricingForLooks then t_4[i_4] else nil
 				})
 			end
@@ -130,8 +130,8 @@ return function(p0, p1)
 	local t_8 = {
 		IsForSale = true,
 		Name = "Looks",
-		PriceInRobux = var6,
-		UserBasePriceInRobux = var7,
+		PriceInRobux = var2,
+		UserBasePriceInRobux = var3,
 		PriceDiscountDetails = t_7
 	}
 	

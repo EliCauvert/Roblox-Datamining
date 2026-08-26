@@ -16,13 +16,13 @@ return {
 		return {
 			views = t,
 			actions = t_1,
-			logView = function(p0, p1)
+			logView = function(p1, p2)
 				-- upvalues: t (ref)
-				table.insert(t, { attribution = p0, info = p1 })
+				table.insert(t, { attribution = p1, info = p2 })
 			end,
-			logAction = function(p2, p3, p4)
+			logAction = function(p1, p2, p3)
 				-- upvalues: t_1 (ref)
-				table.insert(t_1, { actionType = p2, attribution = p3, payload = p4 })
+				table.insert(t_1, { actionType = p1, attribution = p2, payload = p3 })
 				
 				return nil
 			end

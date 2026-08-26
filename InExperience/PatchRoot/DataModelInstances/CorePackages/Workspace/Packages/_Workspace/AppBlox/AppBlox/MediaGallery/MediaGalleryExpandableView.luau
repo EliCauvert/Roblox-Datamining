@@ -28,27 +28,27 @@ local t = {
 	exitFullscreen = function() end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (ref), useTokens (ref), constantsModule (ref), reactOtterModule (ref), reactModule (ref), useCursor (ref), useSelectionCursor (ref), cursorKind (ref), view (ref), icon (ref), iconSize (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), styledTextLabel (ref)
-	local var8 = cryoModule.Dictionary.join(t, p0)
-	local var9 = useStyle()
-	local var10 = if fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon then useTokens() else nil
-	local var11 = cryoModule.Dictionary.join(constantsModule.getDefaultStyleProps(var9), var8.styleProps or {})
-	local borderRadius = var11.borderRadius
-	local gutter = var11.gutter
-	local contentGap = var11.contentGap
-	local titleFont = var11.titleFont
-	local titleTextColor = var11.titleTextColor
-	local var12, var13 = reactOtterModule.useAnimatedBinding(0)
-	local var14, var15 = reactModule.useState(Vector2.zero)
-	local var16 = if var8.showCursor then useCursor(borderRadius) else useSelectionCursor(cursorKind.Invisible)
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = useStyle()
+	local var3 = if fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon then useTokens() else nil
+	local var4 = cryoModule.Dictionary.join(constantsModule.getDefaultStyleProps(var2), var1.styleProps or {})
+	local borderRadius = var4.borderRadius
+	local gutter = var4.gutter
+	local contentGap = var4.contentGap
+	local titleFont = var4.titleFont
+	local titleTextColor = var4.titleTextColor
+	local var5, var6 = reactOtterModule.useAnimatedBinding(0)
+	local var7, var8 = reactModule.useState(Vector2.zero)
+	local var9 = if var1.showCursor then useCursor(borderRadius) else useSelectionCursor(cursorKind.Invisible)
 	
 	return reactModule.createElement("CanvasGroup", {
 		BackgroundTransparency = 1,
-		GroupTransparency = var8.groupTransparency,
+		GroupTransparency = var1.groupTransparency,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		ref = if fFlagLuaAppEdpConsoleMediaGalleryVideo then var8.rootRef else nil
+		ref = if fFlagLuaAppEdpConsoleMediaGalleryVideo then var1.rootRef else nil
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -58,20 +58,20 @@ return function(p0)
 		ExpandableArea = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = var12:map(function(p1)
-				return UDim2.new(1, 0, 0, p1)
+			Size = var5:map(function(p2)
+				return UDim2.new(1, 0, 0, p2)
 			end)
 		}),
 		Title = reactModule.createElement(styledTextLabel, {
 			layoutOrder = 2,
-			text = var8.titleText,
+			text = var1.titleText,
 			fontStyle = titleFont,
 			colorStyle = titleTextColor,
 			textXAlignment = Enum.TextXAlignment.Left,
-			size = UDim2.new(1, 0, 0, if titleFont.RelativeSize then titleFont.RelativeSize * var9.Font.BaseSize else titleFont.FontSize)
+			size = UDim2.new(1, 0, 0, if titleFont.RelativeSize then titleFont.RelativeSize * var2.Font.BaseSize else titleFont.FontSize)
 		}),
 		MediaGallery = reactModule.createElement("ScrollingFrame", {
-			Size = UDim2.new(1, 0, 0, var14.Y),
+			Size = UDim2.new(1, 0, 0, var7.Y),
 			BackgroundTransparency = 1,
 			AutomaticCanvasSize = Enum.AutomaticSize.XY,
 			ScrollBarImageTransparency = 1,
@@ -80,38 +80,38 @@ return function(p0)
 			Selectable = false,
 			LayoutOrder = 3,
 			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2, _, _, _)
-				-- upvalues: gutter (ref), var8 (ref), var15 (ref)
-				local var17 = (p2.AbsoluteSize.X - gutter * (var8.numItemsShown - 1)) / var8.numItemsShown
-				var15(Vector2.new(var17, var17 / var8.itemAspectRatio))
-			end, { gutter, var8.itemAspectRatio, var8.numItemsShown }),
-			[reactModule.Event.SelectionChanged] = reactModule.useCallback(function(p3, _, p4, p5)
-				-- upvalues: var13 (ref), reactOtterModule (copy), var8 (ref)
-				if not p3 then
+				-- upvalues: gutter (ref), var1 (ref), var8 (ref)
+				local var10 = (p2.AbsoluteSize.X - gutter * (var1.numItemsShown - 1)) / var1.numItemsShown
+				var8(Vector2.new(var10, var10 / var1.itemAspectRatio))
+			end, { gutter, var1.itemAspectRatio, var1.numItemsShown }),
+			[reactModule.Event.SelectionChanged] = reactModule.useCallback(function(p2, _, p3, p4)
+				-- upvalues: var6 (ref), reactOtterModule (copy), var1 (ref)
+				if not p2 then
 					return nil
 				end
-				local var18 = p5 ~= nil and p5:IsDescendantOf(p3)
-				local var19 = p4 ~= nil and p4:IsDescendantOf(p3)
-				local var19_1 = not var18 and var19
+				local var10 = p4 ~= nil and p4:IsDescendantOf(p2)
+				local var11 = p3 ~= nil and p3:IsDescendantOf(p2)
+				local var12 = not var10 and var11
 				
-				if var18 and not var19 then
-					var13(reactOtterModule.spring(var8.expandableAreaHeightOffset, var8.animationConfig))
-					var8.mediaGalleryGainFocused(true)
+				if var10 and not var11 then
+					var6(reactOtterModule.spring(var1.expandableAreaHeightOffset, var1.animationConfig))
+					var1.mediaGalleryGainFocused(true)
 					
 					return nil
-				elseif not var19_1 then
+				elseif not var12 then
 					return nil
-				elseif not (p5 ~= nil and p4.AbsolutePosition.Y < p5.AbsolutePosition.Y) then
-					var13(reactOtterModule.spring(0, var8.animationConfig))
+				elseif not (p4 ~= nil and p3.AbsolutePosition.Y < p4.AbsolutePosition.Y) then
+					var6(reactOtterModule.spring(0, var1.animationConfig))
 				end
-				var8.exitFullscreen()
-				var8.mediaGalleryGainFocused(false)
+				var1.exitFullscreen()
+				var1.mediaGalleryGainFocused(false)
 				
 				return nil
 			end, {
-				var8.expandableAreaHeightOffset,
-				var8.animationConfig,
-				var8.exitFullscreen,
-				var8.mediaGalleryGainFocused
+				var1.expandableAreaHeightOffset,
+				var1.animationConfig,
+				var1.exitFullscreen,
+				var1.mediaGalleryGainFocused
 			})
 		}, {
 			Layout = reactModule.createElement("UIListLayout", {
@@ -120,25 +120,25 @@ return function(p0)
 				Padding = UDim.new(0, gutter)
 			}),
 			Items = reactModule.createElement(reactModule.Fragment, {}, reactModule.useMemo(function()
-				-- upvalues: var8 (ref), reactModule (copy), var14 (ref), var16 (ref), borderRadius (ref), fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (copy), view (copy), icon (copy), iconSize (copy), var10 (ref)
+				-- upvalues: var1 (ref), reactModule (copy), var7 (ref), var9 (ref), borderRadius (ref), fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (copy), view (copy), icon (copy), iconSize (copy), var3 (ref)
 				local t = {}
 				
-				for i, v in var8.items do
+				for i, v in var1.items do
 					t["Item" .. i] = reactModule.createElement("ImageButton", {
 						LayoutOrder = i,
-						Size = UDim2.fromOffset(var14.X, var14.Y),
+						Size = UDim2.fromOffset(var7.X, var7.Y),
 						Image = v.imageId,
 						ScaleType = Enum.ScaleType.Crop,
 						BackgroundTransparency = 1,
 						AutoButtonColor = false,
-						SelectionImageObject = var16,
+						SelectionImageObject = var9,
 						[reactModule.Event.Activated] = function()
-							-- upvalues: var8 (copy), i (ref)
-							var8.onActivated(i)
+							-- upvalues: var1 (copy), i (ref)
+							var1.onActivated(i)
 						end,
 						[reactModule.Event.SelectionGained] = function()
-							-- upvalues: var8 (copy), i (ref)
-							var8.onSelectionGained(i)
+							-- upvalues: var1 (copy), i (ref)
+							var1.onSelectionGained(i)
 						end
 					}, {
 						Corner = reactModule.createElement("UICorner", { CornerRadius = borderRadius }),
@@ -152,16 +152,16 @@ return function(p0)
 							Icon = reactModule.createElement(icon, {
 								name = "play-large",
 								size = iconSize.Medium,
-								style = var10.Color.Content.Emphasis
+								style = var3.Color.Content.Emphasis
 							})
 						}) else nil
 					})
 				end
 				return t
 			end, {
-				var14, var8.items, var8.onActivated, var8.onSelectionGained, var16,
+				var7, var1.items, var1.onActivated, var1.onSelectionGained, var9,
 				borderRadius,
-				if fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon then var10 else nil
+				if fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon then var3 else nil
 			}))
 		})
 	})

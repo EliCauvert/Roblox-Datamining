@@ -10,16 +10,16 @@ local robloxTranslatorModule = require(parent.RobloxTranslator)
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local useStyle = UIBloxModule.Core.Style.useStyle
-local var5 = robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.WhyThisAd")
-local var6 = robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Action.Close")
+local var1 = robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.WhyThisAd")
+local var2 = robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Action.Close")
 local interactiveAlert_1 = roactModule.Component:extend("InteractiveAlert")
 
-function interactiveAlert_1.init(p0)
-	p0.state = { animating = false, screenSize = Vector2.new(0, 0) }
+function interactiveAlert_1.init(p1)
+	p1.state = { animating = false, screenSize = Vector2.new(0, 0) }
 end
 
 function interactiveAlert_1.renderWithStyle(p1, _)
-	-- upvalues: buttonType (ref), var6 (ref), roactModule (ref), interactiveAlert (ref), var5 (ref)
+	-- upvalues: buttonType (ref), var2 (ref), roactModule (ref), interactiveAlert (ref), var1 (ref)
 	return roactModule.createFragment({
 		Frame = roactModule.createElement("Frame", {
 			Selectable = false,
@@ -35,7 +35,7 @@ function interactiveAlert_1.renderWithStyle(p1, _)
 		}, {
 			InteractiveAlert = roactModule.createElement(interactiveAlert, {
 				screenSize = p1.state.screenSize,
-				title = var5,
+				title = var1,
 				bodyText = p1.props.bodyText,
 				buttonStackInfo = {
 					buttons = {
@@ -47,7 +47,7 @@ function interactiveAlert_1.renderWithStyle(p1, _)
 									-- upvalues: p1 (ref)
 									p1.props.handler:hidePrompt()
 								end,
-								text = var6
+								text = var2
 							}
 						}
 					}
@@ -57,11 +57,11 @@ function interactiveAlert_1.renderWithStyle(p1, _)
 	})
 end
 
-function interactiveAlert_1.render(p3)
-	return p3:renderWithStyle(p3.props.style)
+function interactiveAlert_1.render(p1)
+	return p1:renderWithStyle(p1.props.style)
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: useStyle (ref), cryoModule (ref), roactModule (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), interactiveAlert_1 (ref)
 	return roactModule.createElement(coreScriptsRootProvider, {}, {
 		FocusNavigationCoreScriptsWrapper = roactModule.createElement(focusRoot, {
@@ -69,7 +69,7 @@ return function(p4)
 			isAutoFocusRoot = true,
 			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
 		}, {
-			WrappedEuDsaPrompt = roactModule.createElement(interactiveAlert_1, cryoModule.Dictionary.join(p4, { style = useStyle() }))
+			WrappedEuDsaPrompt = roactModule.createElement(interactiveAlert_1, cryoModule.Dictionary.join(p1, { style = useStyle() }))
 		})
 	})
 end

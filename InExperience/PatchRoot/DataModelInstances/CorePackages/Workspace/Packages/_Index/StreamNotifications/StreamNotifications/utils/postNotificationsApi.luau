@@ -5,11 +5,11 @@ local var1 = require(parent.UrlBuilder).UrlBuilder.new({
 	base = require(parent.Http).Url.NOTIFICATION_URL
 })
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: promiseModule (ref), var1 (ref)
-	return if p1 == nil or p1 == "" or (p2 == nil or p2 == "") then promiseModule.reject() else p0(var1({ notificationId = p1, actionPath = p2 }), "POST", { postBody = "{}" }):andThen(function(p3)
+	return if p2 == nil or p2 == "" or (p3 == nil or p3 == "") then promiseModule.reject() else p1(var1({ notificationId = p2, actionPath = p3 }), "POST", { postBody = "{}" }):andThen(function(p4)
 		-- upvalues: promiseModule (copy)
-		return if p3.responseCode == 200 then promiseModule.resolve() else promiseModule.reject()
+		return if p4.responseCode == 200 then promiseModule.resolve() else promiseModule.reject()
 	end, function(_)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.reject()

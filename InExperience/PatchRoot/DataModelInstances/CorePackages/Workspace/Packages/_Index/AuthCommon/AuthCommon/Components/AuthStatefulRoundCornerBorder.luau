@@ -13,32 +13,32 @@ local t = {
 local authStatefulRoundCornerBorder = roactModule.PureComponent:extend("AuthStatefulRoundCornerBorder")
 authStatefulRoundCornerBorder.defaultProps = { borderState = t.Default }
 
-function authStatefulRoundCornerBorder.render(p0)
+function authStatefulRoundCornerBorder.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), t (ref), imageSetLabel (ref), getImageData (ref)
-	return withStyle(function(p1)
-		-- upvalues: p0 (ref), roactModule (copy), t (copy), imageSetLabel (copy), getImageData (copy)
-		local size = p0.props.size
-		local borderState = p0.props.borderState
-		local layoutOrder = p0.props.layoutOrder
-		local children = p0.props[roactModule.Children] or {}
-		local color = p1.Theme.UIDefault.Color
-		local transparency = p1.Theme.UIDefault.Transparency
+	return withStyle(function(p2)
+		-- upvalues: p1 (ref), roactModule (copy), t (copy), imageSetLabel (copy), getImageData (copy)
+		local size = p1.props.size
+		local borderState = p1.props.borderState
+		local layoutOrder = p1.props.layoutOrder
+		local children = p1.props[roactModule.Children] or {}
+		local color = p2.Theme.UIDefault.Color
+		local transparency = p2.Theme.UIDefault.Transparency
 		
 		if borderState == t.Focused then
-			color = p1.Theme.IconEmphasis.Color
-			transparency = p1.Theme.IconEmphasis.Transparency
+			color = p2.Theme.IconEmphasis.Color
+			transparency = p2.Theme.IconEmphasis.Transparency
 		elseif borderState == t.Hover then
-			color = p1.Theme.IconDefault.Color
-			transparency = p1.Theme.IconDefault.Transparency
+			color = p2.Theme.IconDefault.Color
+			transparency = p2.Theme.IconDefault.Transparency
 		elseif borderState == t.Error then
-			color = p1.Theme.Alert.Color
-			transparency = p1.Theme.Alert.Transparency
+			color = p2.Theme.Alert.Color
+			transparency = p2.Theme.Alert.Transparency
 		end
-		if p0.props.borderColorOverride ~= nil then
-			color = p0.props.borderColorOverride
+		if p1.props.borderColorOverride ~= nil then
+			color = p1.props.borderColorOverride
 		end
-		if p0.props.borderTransparencyOverride ~= nil then
-			transparency = p0.props.borderTransparencyOverride
+		if p1.props.borderTransparencyOverride ~= nil then
+			transparency = p1.props.borderTransparencyOverride
 		end
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

@@ -10,16 +10,16 @@ local squadJoinButtonModule = require(parent.Squads.SquadJoinButton)
 local squadComponentAccessWrapperModule = require(parent.Squads.SquadComponentAccessWrapper)
 local squadButtonSourceEnum = require(parent.Squads.Enums).SquadButtonSourceEnum
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigation (ref), useTokens (ref), useLocalization (ref), reactModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), imagePile (ref), foundationModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref)
-	local var4 = useNavigation()
-	local var5 = useTokens()
-	local var6 = useLocalization({
+	local var1 = useNavigation()
+	local var2 = useTokens()
+	local var3 = useLocalization({
 		onePersonActive = "Feature.Squads.Description.OnePersonActive",
 		partyStarted = "Feature.Squads.Label.PartyStartedText",
 		manyPeopleActive = {
 			"Feature.Squads.Description.ManyPeopleActive",
-			userCount = #p0.participantUserIds
+			userCount = #p1.participantUserIds
 		}
 	})
 	
@@ -29,14 +29,14 @@ return function(p0)
 		Size = UDim2.fromScale(1, 0),
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
-			Padding = UDim.new(0, var5.Gap.Small),
+			Padding = UDim.new(0, var2.Gap.Small),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
 		padding = {
-			bottom = UDim.new(0, var5.Padding.Medium),
-			left = UDim.new(0, var5.Padding.Large),
-			right = UDim.new(0, var5.Padding.Large),
-			top = UDim.new(0, var5.Padding.Medium)
+			bottom = UDim.new(0, var2.Padding.Medium),
+			left = UDim.new(0, var2.Padding.Large),
+			right = UDim.new(0, var2.Padding.Large),
+			top = UDim.new(0, var2.Padding.Medium)
 		},
 		selection = { Selectable = true }
 	}, {
@@ -47,73 +47,73 @@ return function(p0)
 			layout = {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var5.Gap.Large),
+				Padding = UDim.new(0, var2.Gap.Large),
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}
 		}, {
-			Thumbnail = if #p0.participantUserIds > 0 then reactModule.createElement(foundationModule.View, {
+			Thumbnail = if #p1.participantUserIds > 0 then reactModule.createElement(foundationModule.View, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var5.Size.Size_1000, var5.Size.Size_1000)
+				Size = UDim2.fromOffset(var2.Size.Size_1000, var2.Size.Size_1000)
 			}, {
-				reactModule.useCallback(function(p1)
-					-- upvalues: getStandardSizeAvatarHeadShotRbxthumb (copy), var5 (ref), reactModule (copy), imagePile (copy)
+				reactModule.useCallback(function(p2)
+					-- upvalues: getStandardSizeAvatarHeadShotRbxthumb (copy), var2 (ref), reactModule (copy), imagePile (copy)
 					local t = {}
 					
-					for i, v in ipairs(p1) do
+					for i, v in ipairs(p2) do
 						table.insert(t, {
 							Image = getStandardSizeAvatarHeadShotRbxthumb(tostring(v)),
-							BackgroundColor3 = var5.Color.Surface.Surface_200.Color3:lerp(var5.Color.ActionStandard.Background.Color3, 1 - var5.Color.ActionStandard.Background.Transparency)
+							BackgroundColor3 = var2.Color.Surface.Surface_200.Color3:lerp(var2.Color.ActionStandard.Background.Color3, 1 - var2.Color.ActionStandard.Background.Transparency)
 						})
 					end
 					return reactModule.createElement(imagePile, {
 						images = t,
-						imageBorderColor = if var5.Config.Theme.IsUIBlox == "true" then var5.Color.Shift.Shift_200.Color3 else var5.Color.Surface.Surface_200.Color3
+						imageBorderColor = if var2.Config.Theme.IsUIBlox == "true" then var2.Color.Shift.Shift_200.Color3 else var2.Color.Surface.Surface_200.Color3
 					})
-				end, {})(p0.participantUserIds)
+				end, {})(p1.participantUserIds)
 			}) else nil,
 			TextContainer = reactModule.createElement(foundationModule.View, {
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = if #p0.participantUserIds > 0 then UDim2.new(1, (-var5.Size.Size_1000) - var5.Padding.Large, 0, 0) else UDim2.fromScale(1, 0),
+				Size = if #p1.participantUserIds > 0 then UDim2.new(1, (-var2.Size.Size_1000) - var2.Padding.Large, 0, 0) else UDim2.fromScale(1, 0),
 				layout = {
 					FillDirection = Enum.FillDirection.Vertical,
-					Padding = UDim.new(0, var5.Gap.XSmall),
+					Padding = UDim.new(0, var2.Gap.XSmall),
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}
 			}, {
 				Title = reactModule.createElement(foundationModule.Text, {
 					LayoutOrder = 1,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					backgroundStyle = var5.Color.None,
-					fontStyle = var5.Typography.TitleMedium,
-					Text = var6.partyStarted,
-					textStyle = var5.Color.Content.Emphasis,
+					backgroundStyle = var2.Color.None,
+					fontStyle = var2.Typography.TitleMedium,
+					Text = var3.partyStarted,
+					textStyle = var2.Color.Content.Emphasis,
 					TextTruncate = Enum.TextTruncate.AtEnd
 				}),
 				Status = reactModule.createElement(foundationModule.Text, {
 					LayoutOrder = 2,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					backgroundStyle = var5.Color.None,
-					fontStyle = var5.Typography.LabelSmall,
-					Text = if #p0.participantUserIds == 1 then var6.onePersonActive else var6.manyPeopleActive,
-					textStyle = var5.Color.Content.Muted,
+					backgroundStyle = var2.Color.None,
+					fontStyle = var2.Typography.LabelSmall,
+					Text = if #p1.participantUserIds == 1 then var3.onePersonActive else var3.manyPeopleActive,
+					textStyle = var2.Color.Content.Muted,
 					TextTruncate = Enum.TextTruncate.AtEnd
 				})
 			})
 		}),
-		ActionButton = reactModule.createElement(squadComponentAccessWrapperModule, { parentChannelId = p0.conversationId }, {
+		ActionButton = reactModule.createElement(squadComponentAccessWrapperModule, { parentChannelId = p1.conversationId }, {
 			reactModule.createElement(squadJoinButtonModule, {
 				isFullWidth = true,
 				isInCard = true,
 				layoutOrder = 3,
 				shouldAnimate = false,
-				conversationId = p0.conversationId,
+				conversationId = p1.conversationId,
 				onActivated = function()
-					-- upvalues: var4 (ref), p0 (ref)
-					var4.navigate("SquadLobby", { conversationId = p0.conversationId })
+					-- upvalues: var1 (ref), p1 (ref)
+					var1.navigate("SquadLobby", { conversationId = p1.conversationId })
 				end,
 				squadButtonSource = squadButtonSourceEnum.PartyStartedCard,
-				squadLocation = p0.squadLocation
+				squadLocation = p1.squadLocation
 			})
 		})
 	})

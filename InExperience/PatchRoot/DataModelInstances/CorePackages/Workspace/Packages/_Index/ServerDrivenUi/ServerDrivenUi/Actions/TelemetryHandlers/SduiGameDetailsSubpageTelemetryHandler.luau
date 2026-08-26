@@ -7,54 +7,54 @@ local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFiel
 local gameDetailsSubpage = discoveryAnalyticsModule.Events.gameDetailsSubpage
 local fFlagLuaAppAddUniverseIdToGameDetailsEvents = require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToGameDetailsEvents
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: getActionTelemetryFieldValue (ref), sduiErrorType (ref), fFlagLuaAppAddUniverseIdToGameDetailsEvents (ref), gameDetailsSubpage (ref), playersService (ref)
-	local var3 = getActionTelemetryFieldValue(p0, p1, "subpage")
-	local var4 = getActionTelemetryFieldValue(p0, p1, "universeId")
-	local var5 = getActionTelemetryFieldValue(p0, p1, "placeId")
-	local var6 = getActionTelemetryFieldValue(p0, p1, "eventContext") or "GameInfoRow"
-	local var7 = getActionTelemetryFieldValue(p0, p1, "ctx") or var6
-	local var8 = getActionTelemetryFieldValue(p0, p1, "action")
+	local var1 = getActionTelemetryFieldValue(p1, p2, "subpage")
+	local var2 = getActionTelemetryFieldValue(p1, p2, "universeId")
+	local var3 = getActionTelemetryFieldValue(p1, p2, "placeId")
+	local var4 = getActionTelemetryFieldValue(p1, p2, "eventContext") or "GameInfoRow"
+	local var5 = getActionTelemetryFieldValue(p1, p2, "ctx") or var4
+	local var6 = getActionTelemetryFieldValue(p1, p2, "action")
 	
-	if typeof(var3) ~= "string" or var3 == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(var1) ~= "string" or var1 == "" then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "SduiGameDetailsSubpageTelemetryHandler",
 			message = "Missing or non-string `subpage` (server must set this on analyticsData or actionParams)",
 			propName = "subpage"
-		}, p2.appPage)
+		}, p3.appPage)
 		
 		return
 	end
-	local var9 = typeof(var5)
+	local var7 = typeof(var3)
 	
-	if var9 ~= "string" and var9 ~= "number" or var5 == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var7 ~= "string" and var7 ~= "number" or var3 == "" then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "SduiGameDetailsSubpageTelemetryHandler",
 			propName = "placeId",
-			message = `Invalid placeId (expected string or number, got {var9})`
-		}, p2.appPage)
+			message = `Invalid placeId (expected string or number, got {var7})`
+		}, p3.appPage)
 		
 		return
 	elseif fFlagLuaAppAddUniverseIdToGameDetailsEvents then
-		local var10 = typeof(var4)
+		local var8 = typeof(var2)
 		
-		if (var10 == "string" or var10 == "number") and var4 ~= "" then
+		if (var8 == "string" or var8 == "number") and var2 ~= "" then
 			gameDetailsSubpage({
 				uid = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else ""),
-				placeId = tostring(var5),
-				subpage = var3,
-				universeId = if fFlagLuaAppAddUniverseIdToGameDetailsEvents then tostring(var4) else "",
-				action = var8,
-				ctx = var7
-			}, var6)
+				placeId = tostring(var3),
+				subpage = var1,
+				universeId = if fFlagLuaAppAddUniverseIdToGameDetailsEvents then tostring(var2) else "",
+				action = var6,
+				ctx = var5
+			}, var4)
 			
 			return
 		else
-			p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+			p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 				name = "SduiGameDetailsSubpageTelemetryHandler",
 				propName = "universeId",
-				message = `Invalid universeId (expected string or number, got {var10})`
-			}, p2.appPage)
+				message = `Invalid universeId (expected string or number, got {var8})`
+			}, p3.appPage)
 		end
 	end
 end

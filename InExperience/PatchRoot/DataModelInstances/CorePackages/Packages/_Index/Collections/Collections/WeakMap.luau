@@ -7,8 +7,8 @@ function t.new()
 	return setmetatable({ _weakMap = setmetatable({}, { __mode = "k" }) }, t)
 end
 
-function t:get(p0)
-	return self._weakMap[p0]
+function t:get(p1)
+	return self._weakMap[p1]
 end
 
 function t:set(p1, p2)
@@ -17,8 +17,8 @@ function t:set(p1, p2)
 	return self
 end
 
-function t:has(p3)
-	return self._weakMap[p3] ~= nil
+function t:has(p1)
+	return self._weakMap[p1] ~= nil
 end
 
 return t

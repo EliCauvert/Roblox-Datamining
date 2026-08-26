@@ -1,5 +1,5 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p0)
-	return if typeof(p0) == "function" then p0 elseif typeof(p0) == "table" then if #p0 > 0 then ipairs(p0) else pairs(p0) else nil
+return function(p1)
+	return if typeof(p1) == "function" then p1 elseif typeof(p1) == "table" then if #p1 > 0 then ipairs(p1) else pairs(p1) else nil
 end

@@ -2,23 +2,23 @@
 local cryoModule = require(script.Parent.Parent.Cryo)
 local buildActionNameModule = require(script.Parent.buildActionName)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), buildActionNameModule (ref), cryoModule (ref)
 	return function()
-		-- upvalues: roduxModule (copy), buildActionNameModule (copy), p0 (ref), cryoModule (copy)
+		-- upvalues: roduxModule (copy), buildActionNameModule (copy), p1 (ref), cryoModule (copy)
 		return roduxModule.createReducer({}, {
-			[buildActionNameModule(p0)] = function(p1, p2)
+			[buildActionNameModule(p1)] = function(p2, p3)
 				-- upvalues: cryoModule (copy)
 				local t = {}
 				
-				if #p2.ids == 0 then
-					t[p2.keymapper()] = p2.status
+				if #p3.ids == 0 then
+					t[p3.keymapper()] = p3.status
 				else
-					for i, v in ipairs(p2.ids) do
-						t[p2.keymapper(v)] = p2.status
+					for i, v in ipairs(p3.ids) do
+						t[p3.keymapper(v)] = p3.status
 					end
 				end
-				return cryoModule.Dictionary.join(p1, t)
+				return cryoModule.Dictionary.join(p2, t)
 			end
 		})
 	end

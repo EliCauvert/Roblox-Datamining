@@ -1,4 +1,4 @@
-﻿local var11
+﻿local var1
 local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 local parent = genericAbuseReporting.Parent
 local localPlayer = game:GetService("Players").LocalPlayer
@@ -35,52 +35,52 @@ local t = {
 local t_1 = { Footer = "footer", NextAction = "next_action" }
 local t_2 = { Flow = "flow", SceneSelection = "sceneSelection" }
 
-local function formatHttpErrorMessageForAnalytics(p0, p1)
+local function formatHttpErrorMessageForAnalytics(p1, p2)
 	-- upvalues: dashModule (ref)
 	local t = {}
 	
-	if type(p1) == "table" then
-		if type(p1.StatusCode) == "number" then
-			table.insert(t, `status={p1.StatusCode}`)
+	if type(p2) == "table" then
+		if type(p2.StatusCode) == "number" then
+			table.insert(t, `status={p2.StatusCode}`)
 		end
-		if typeof(p1.HttpError) == "EnumItem" then
-			table.insert(t, `httpError={p1.HttpError}`)
+		if typeof(p2.HttpError) == "EnumItem" then
+			table.insert(t, `httpError={p2.HttpError}`)
 		end
-		if p1.isJSONValid == false then
+		if p2.isJSONValid == false then
 			table.insert(t, "reason=invalid_json")
 		end
 	end
 	if #t == 0 then
 		table.insert(t, "reason=unknown")
 	end
-	table.insert(t, `error={string.sub(dashModule.pretty(p1, { depth = 10 }), 1, 1000)}`)
+	table.insert(t, `error={string.sub(dashModule.pretty(p2, { depth = 10 }), 1, 1000)}`)
 	
-	return p0 .. " " .. table.concat(t, " ")
+	return p1 .. " " .. table.concat(t, " ")
 end
 
-local function _(p2)
-	local var13 = 0
+local function _(p1)
+	local var2 = 0
 	
-	for i in p2 do
-		var13 += 1
+	for i in p1 do
+		var2 += 1
 	end
-	return var13 == #p2 and var13 > 0
+	return var2 == #p1 and var2 > 0
 end
 
-local function flattenForTelemetry(p3)
+local function flattenForTelemetry(p2)
 	local t = {}
 	
-	for i, v in p3 do
+	for i, v in p2 do
 		if type(v) ~= "table" then
 			t[i] = tostring(v)
 			continue
 		end
-		local var15 = 0
+		local var3 = 0
 		
 		for i_1 in v do
-			var15 += 1
+			var3 += 1
 		end
-		if var15 == #v and var15 > 0 then
+		if var3 == #v and var3 > 0 then
 			local t_1 = {}
 			
 			for v_1, i_1 in v do
@@ -119,35 +119,35 @@ local _ = function()
 end
 
 if not fFlagAbuseReportClientVersionModule then
-	var11 = nil
+	var1 = nil
 elseif game:GetEngineFeature("CoreScriptVersionEnabled") then
 	local ok, status = pcall(function()
 		-- upvalues: runService (ref)
 		return runService:GetCoreScriptVersion()
 	end)
-	var11 = if ok then status else nil
+	var1 = if ok then status else nil
 else
-	var11 = nil
+	var1 = nil
 end
 return {
-	sendAnalyticsEvent = function(p4, p5)
-		-- upvalues: localPlayer (ref), fFlagAbuseReportClientVersionModule (ref), var11 (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), telemetryService (ref), t_3 (ref), flattenForTelemetry (ref)
+	sendAnalyticsEvent = function(p3, p4)
+		-- upvalues: localPlayer (ref), fFlagAbuseReportClientVersionModule (ref), var1 (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), telemetryService (ref), t_3 (ref), flattenForTelemetry (ref)
 		local t = {
 			user_id = if localPlayer then localPlayer.UserId else nil
 		}
 		
 		if fFlagAbuseReportClientVersionModule then
-			t.client_version = var11
+			t.client_version = var1
 		end
 		if fFlagFixAnalyticsForDynamicReportV2 then
 			telemetryService:LogEvent(t_3, {
-				customFields = flattenForTelemetry(dashModule.join(p4, p5, t)),
-				eventContext = p4.abuse_vector
+				customFields = flattenForTelemetry(dashModule.join(p3, p4, t)),
+				eventContext = p3.abuse_vector
 			})
 			
 			return
 		end
-		telemetryService:LogEvent(dashModule.join(t_3, { eventContext = p4.abuse_vector }), { customFields = dashModule.join(p4, p5, t) })
+		telemetryService:LogEvent(dashModule.join(t_3, { eventContext = p3.abuse_vector }), { customFields = dashModule.join(p3, p4, t) })
 	end,
 	TelemetryEventType = t,
 	LinkOpenedSource = t_1,

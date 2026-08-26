@@ -4,51 +4,51 @@ local reactUtilsModule = require(parent.ReactUtils)
 local getFFlagEnablePlayerSupportPromptModule = require(coreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)
 local reactModule = require(parent.React)
 local useEventConnection = reactUtilsModule.useEventConnection
-local var4 = getFFlagEnablePlayerSupportPromptModule()
-local var5 = reactModule.memo(function(p0)
+local var1 = getFFlagEnablePlayerSupportPromptModule()
+local var2 = reactModule.memo(function(p1)
 	-- upvalues: useEventConnection (ref)
-	useEventConnection(p0.event, p0.handler)
+	useEventConnection(p1.event, p1.handler)
 	
 	return nil
 end)
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), var4 (ref), var5 (ref)
+	-- upvalues: reactModule (ref), var1 (ref), var2 (ref)
 	local socialService = game:GetService("SocialService")
-	local var7 = if var4 then reactModule.useCallback(function(p2)
+	local var3 = if var1 then reactModule.useCallback(function(p2)
 		-- upvalues: p1 (ref)
-		local var12 = false
+		local var4 = false
 		pcall(function()
-			-- upvalues: var12 (write), p2 (ref)
-			var12 = p2 == Enum.FeedbackType.PlayerSupport
+			-- upvalues: var4 (write), p2 (ref)
+			var4 = p2 == Enum.FeedbackType.PlayerSupport
 		end)
 		p1.openFeedbackPrompt()
 	end, { p1.openFeedbackPrompt, p1.openPlayerSupportPrompt }) else reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.openFeedbackPrompt()
 	end, { p1.openFeedbackPrompt })
-	local var8 = if var4 then reactModule.useCallback(function(p4, p5)
+	local var4 = if var1 then reactModule.useCallback(function(p2, p3)
 		-- upvalues: p1 (ref)
-		local var13 = false
+		local var5 = false
 		pcall(function()
-			-- upvalues: var13 (write), p5 (ref)
-			var13 = p5 == Enum.FeedbackType.PlayerSupport
+			-- upvalues: var5 (write), p3 (ref)
+			var5 = p3 == Enum.FeedbackType.PlayerSupport
 		end)
 		
 		if p1.openUnavailablePrompt then
-			p1.openUnavailablePrompt(p4)
+			p1.openUnavailablePrompt(p2)
 		end
 	end, {
 		p1.openUnavailablePrompt,
 		p1.openPlayerSupportUnavailablePrompt
-	}) else reactModule.useCallback(function(p3)
+	}) else reactModule.useCallback(function(p2)
 		-- upvalues: p1 (ref)
 		if p1.openUnavailablePrompt then
-			p1.openUnavailablePrompt(p3)
+			p1.openUnavailablePrompt(p2)
 		end
 	end, { p1.openUnavailablePrompt })
-	local var9 = nil
-	local var10 = nil
+	local var5 = nil
+	local var6 = nil
 	
 	if socialService then
 		local ok, status = pcall(function()
@@ -57,20 +57,20 @@ return reactModule.memo(function(p1)
 		end)
 		
 		if ok then
-			var9 = status
+			var5 = status
 		end
 		local ok_1, status_1 = pcall(function()
 			-- upvalues: socialService (ref)
 			return socialService.ShowPromptFeedbackUnavailable
 		end)
-		local var11 = status_1
+		local var7 = status_1
 		
 		if ok_1 then
-			var10 = var11
+			var6 = var7
 		end
 	end
 	return reactModule.createElement(reactModule.Fragment, {}, {
-		Show = var9 and reactModule.createElement(var5, { event = var9, handler = var7 }) or nil,
-		Unavailable = var10 and reactModule.createElement(var5, { event = var10, handler = var8 }) or nil
+		Show = var5 and reactModule.createElement(var2, { event = var5, handler = var3 }) or nil,
+		Unavailable = var6 and reactModule.createElement(var2, { event = var6, handler = var4 }) or nil
 	})
 end)

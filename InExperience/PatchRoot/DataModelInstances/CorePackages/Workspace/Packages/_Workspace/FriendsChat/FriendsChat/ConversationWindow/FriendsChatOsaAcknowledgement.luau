@@ -13,139 +13,139 @@ local t_1 = {}
 local t_2 = {}
 local t_3 = {}
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
-	return `{if localPlayer then localPlayer.UserId else 0}:{p0}`
+	return `{if localPlayer then localPlayer.UserId else 0}:{p1}`
 end
 
-local function hasSubmitted(p1)
+local function hasSubmitted(p2)
 	-- upvalues: t (ref), playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
-	return t[`{if localPlayer then localPlayer.UserId else 0}:{p1}`] == true
+	return t[`{if localPlayer then localPlayer.UserId else 0}:{p2}`] == true
 end
 
-local _ = function(p2)
-	if typeof(p2) ~= "table" then
+local _ = function(p3)
+	if typeof(p3) ~= "table" then
 		return true
 	end
-	local statusCode = p2.StatusCode or (p2.statusCode or p2.responseCode)
+	local statusCode = p3.StatusCode or (p3.statusCode or p3.responseCode)
 	
 	return if statusCode ~= nil then if statusCode > 0 then if statusCode ~= 408 then if statusCode ~= 429 then statusCode >= 500 else true else true else true else true
 end
 
 local function markAcknowledged(p3)
 	-- upvalues: getConversationStoreModule (ref), appChatNetworkingModule (ref)
-	local var16 = getConversationStoreModule(false)
-	local conversation = var16.getConversation(p3, false)
+	local var1 = getConversationStoreModule(false)
+	local conversation = var1.getConversation(p3, false)
 	
 	if conversation and conversation.osaAcknowledgementStatus ~= appChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse.Acknowledged then
 		local cloned = table.clone(conversation)
 		cloned.osaAcknowledgementStatus = appChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse.Acknowledged
-		var16.upsertConversation(cloned)
+		var1.upsertConversation(cloned)
 	end
 end
 
 return {
-	useAcknowledgement = function(p4)
+	useAcknowledgement = function(p3)
 		-- upvalues: reactModule (ref), signalsModule (ref), getConversationStoreModule (ref), signalsReactModule (ref), appChatNetworkingModule (ref), useIsGuiInChatVisibleModule (ref), playersService (ref), t (ref), t_3 (ref), t_2 (ref), t_1 (ref), markAcknowledged (ref), fetchConversationDetailsToSignalsModule (ref), name (ref)
-		local var19 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), getConversationStoreModule (copy), p4 (ref)
-			return signalsModule.createComputed(function(p5)
-				-- upvalues: getConversationStoreModule (copy), p4 (copy)
-				return getConversationStoreModule(p5).getConversation(p4.conversationId, p5)
+		local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+			-- upvalues: signalsModule (copy), getConversationStoreModule (copy), p3 (ref)
+			return signalsModule.createComputed(function(p4)
+				-- upvalues: getConversationStoreModule (copy), p3 (copy)
+				return getConversationStoreModule(p4).getConversation(p3.conversationId, p4)
 			end)
-		end, { p4.conversationId }))
-		local var20 = var19 ~= nil and var19.osaAcknowledgementStatus == appChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse.Unacknowledged
-		local var21 = if var19 then var19.source else nil
-		local var22 = useIsGuiInChatVisibleModule(p4.guiObjectRef, { p4.guiObjectRef.current })
-		local var23, var24 = reactModule.useState(0)
+		end, { p3.conversationId }))
+		local var2 = var1 ~= nil and var1.osaAcknowledgementStatus == appChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse.Unacknowledged
+		local var3 = if var1 then var1.source else nil
+		local var4 = useIsGuiInChatVisibleModule(p3.guiObjectRef, { p3.guiObjectRef.current })
+		local var5, var6 = reactModule.useState(0)
 		reactModule.useEffect(function()
-			-- upvalues: p4 (ref), playersService (copy), var20 (ref), var22 (ref), t (copy), t_3 (copy), t_2 (copy), var24 (ref), t_1 (copy), var21 (ref), appChatNetworkingModule (copy), markAcknowledged (copy), fetchConversationDetailsToSignalsModule (copy), name (copy)
-			local conversationId = p4.conversationId
+			-- upvalues: p3 (ref), playersService (copy), var2 (ref), var4 (ref), t (copy), t_3 (copy), t_2 (copy), var6 (ref), t_1 (copy), var3 (ref), appChatNetworkingModule (copy), markAcknowledged (copy), fetchConversationDetailsToSignalsModule (copy), name (copy)
+			local conversationId = p3.conversationId
 			local localPlayer = playersService.LocalPlayer
-			local var25 = `{if localPlayer then localPlayer.UserId else 0}:{conversationId}`
+			local var7 = `{if localPlayer then localPlayer.UserId else 0}:{conversationId}`
 			
-			if conversationId == "" or not var20 or (not var22 or t[var25]) or t_3[var25] then return end
-			local var26 = false
+			if conversationId == "" or not var2 or (not var4 or t[var7]) or t_3[var7] then return end
+			local var8 = false
 			
-			var25 = function(p6)
-				-- upvalues: t_2 (copy), var25 (ref), t_3 (copy), var26 (write), var24 (copy)
-				local var31
-				local var30 = t_2[var25] or 0
+			var7 = function(p4)
+				-- upvalues: t_2 (copy), var7 (ref), t_3 (copy), var8 (write), var6 (copy)
+				local var9
+				local var10 = t_2[var7] or 0
 				
-				if typeof(p6) == "table" then
-					local statusCode = p6.StatusCode or (p6.statusCode or p6.responseCode)
-					var31 = if statusCode ~= nil then if statusCode > 0 then if statusCode ~= 408 then if statusCode ~= 429 then statusCode >= 500 else true else true else true else true
+				if typeof(p4) == "table" then
+					local statusCode = p4.StatusCode or (p4.statusCode or p4.responseCode)
+					var9 = if statusCode ~= nil then if statusCode > 0 then if statusCode ~= 408 then if statusCode ~= 429 then statusCode >= 500 else true else true else true else true
 				else
-					var31 = true
+					var9 = true
 				end
-				if var31 and var30 < 4 then
-					task.delay(2 ^ math.max(var30 - 1, 0) * 1, function()
-						-- upvalues: var26 (copy), var24 (copy)
-						if not var26 then
-							var24(function(p7)
-								return p7 + 1
+				if var9 and var10 < 4 then
+					task.delay(2 ^ math.max(var10 - 1, 0) * 1, function()
+						-- upvalues: var8 (copy), var6 (copy)
+						if not var8 then
+							var6(function(p5)
+								return p5 + 1
 							end)
 						end
 					end)
 					
 					return
 				end
-				t_3[var25] = true
+				t_3[var7] = true
 			end
 			
-			local var27 = t_1[var25]
+			local var9 = t_1[var7]
 			
-			if var27 then
-				var27:catch(var25)
+			if var9 then
+				var9:catch(var7)
 				
 				return function()
-					-- upvalues: var26 (write)
-					var26 = true
+					-- upvalues: var8 (write)
+					var8 = true
 				end
 			end
-			local isFriends = var21 == "friends"
-			local var29 = appChatNetworkingModule.http.RecordModalSequenceResponse(nil, {
+			local isFriends = var3 == "friends"
+			local var10 = appChatNetworkingModule.http.RecordModalSequenceResponse(nil, {
 				actionType = "record_has_seen",
 				modalSequence = "conversation_inline_top_modal",
 				modalVariant = "OsaContextCard",
 				conversationId = if isFriends then nil else conversationId,
-				friendId = if isFriends then p4.userId else nil
+				friendId = if isFriends then p3.userId else nil
 			})
-			t_2[var25] = (t_2[var25] or 0) + 1
-			t_1[var25] = var29
-			var29:andThen(function()
-				-- upvalues: t_1 (copy), var25 (ref), t_2 (copy), t (copy), markAcknowledged (copy), conversationId (ref), isFriends (ref), fetchConversationDetailsToSignalsModule (copy), name (copy)
-				t_1[var25] = nil
-				t_2[var25] = nil
-				t[var25] = true
+			t_2[var7] = (t_2[var7] or 0) + 1
+			t_1[var7] = var10
+			var10:andThen(function()
+				-- upvalues: t_1 (copy), var7 (ref), t_2 (copy), t (copy), markAcknowledged (copy), conversationId (ref), isFriends (ref), fetchConversationDetailsToSignalsModule (copy), name (copy)
+				t_1[var7] = nil
+				t_2[var7] = nil
+				t[var7] = true
 				markAcknowledged(conversationId)
 				
 				if not isFriends then
 					fetchConversationDetailsToSignalsModule(conversationId):andThen(function()
 						-- upvalues: markAcknowledged (copy), conversationId (copy)
 						markAcknowledged(conversationId)
-					end):catch(function(p9)
+					end):catch(function(p4)
 						-- upvalues: name (copy)
-						name:warning(`Failed to refresh conversation after Friends Chat OSA acknowledgement: {tostring(p9)}`)
+						name:warning(`Failed to refresh conversation after Friends Chat OSA acknowledgement: {tostring(p4)}`)
 					end)
 				end
-			end):catch(function(p8)
-				-- upvalues: t_1 (copy), var25 (ref), name (copy), var25 (ref)
-				t_1[var25] = nil
-				name:error(`Failed to record Friends Chat OSA acknowledgement: {tostring(p8)}`)
-				var25(p8)
+			end):catch(function(p4)
+				-- upvalues: t_1 (copy), var7 (ref), name (copy), var7 (ref)
+				t_1[var7] = nil
+				name:error(`Failed to record Friends Chat OSA acknowledgement: {tostring(p4)}`)
+				var7(p4)
 			end)
 			
 			return function()
-				-- upvalues: var26 (write)
-				var26 = true
+				-- upvalues: var8 (write)
+				var8 = true
 			end
 		end, {
-			p4.conversationId, p4.userId, var20, var22, var21, var23
+			p3.conversationId, p3.userId, var2, var4, var3, var5
 		})
 	end,
 	hasSubmitted = hasSubmitted

@@ -30,60 +30,60 @@ local t = {
 
 function t.validateInternal(p1, p2, p3)
 	-- upvalues: failureReasonsAccumulatorModule (ref), getExpectedPartSizeModule (ref), t (ref), analyticsModule (ref), r15plusUtilsModule (ref)
-	local var1 = failureReasonsAccumulatorModule.new()
-	local var2, var3 = t.validateMeshMin(getExpectedPartSizeModule(p1, p2, true), p1.Name)
-	var1:updateReasons(var2, var3)
+	local var3 = failureReasonsAccumulatorModule.new()
+	local var4, var5 = t.validateMeshMin(getExpectedPartSizeModule(p1, p2, true), p1.Name)
+	var3:updateReasons(var4, var5)
 	
-	if not var2 and p3 then
+	if not var4 and p3 then
 		analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyBlockingTests_ZeroMeshSize, nil, p2)
 	end
 	if r15plusUtilsModule.checkFlagEnabledForAllowHrd() then
 		for i, v in r15plusUtilsModule.getNameWhitelistOfClassInSchema(r15plusUtilsModule.getAvatarBoneSchema(p1.Name), "Attachment") do
 			if v and not p1:FindFirstChild(i, true) then
-				var1:updateReasons(false, { `Missing Required attachment {i}` })
+				var3:updateReasons(false, { `Missing Required attachment {i}` })
 			end
 		end
 	end
-	return var1:getFinalResults()
+	return var3:getFinalResults()
 end
 
-function t.validateAll(p1, p2)
+function t.validateAll(p4, p5)
 	-- upvalues: t (ref), analyticsModule (ref)
 	local currentTime = tick()
-	local var1 = true
+	local var6 = true
 	
-	for i, v in p1 do
+	for i, v in p4 do
 		assert(v:IsA("MeshPart"))
 		
-		if not t.validateInternal(v, p2, false) then
-			var1 = false
+		if not t.validateInternal(v, p5, false) then
+			var6 = false
 			break
 		end
 	end
-	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
+	analyticsModule.recordScriptTime(script.Name, currentTime, p5)
 	
-	return var1
+	return var6
 end
 
-function t.validate(p1, p2)
+function t.validate(p6, p7)
 	-- upvalues: failureReasonsAccumulatorModule (ref), constantsModule (ref), t (ref), analyticsModule (ref)
 	local currentTime = tick()
-	local assetTypeEnum = p2.assetTypeEnum
-	local var1 = failureReasonsAccumulatorModule.new()
-	local var2 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]
+	local assetTypeEnum = p7.assetTypeEnum
+	local var7 = failureReasonsAccumulatorModule.new()
+	local var8 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]
 	
 	if Enum.AssetType.DynamicHead == assetTypeEnum then
-		var1:updateReasons(t.validateInternal(p1, p2, true))
+		var7:updateReasons(t.validateInternal(p6, p7, true))
 	else
-		for i in pairs(var2.subParts) do
-			local var3 = p1:FindFirstChild(i)
-			assert(var3)
-			var1:updateReasons(t.validateInternal(var3, p2, true))
+		for i in pairs(var8.subParts) do
+			local var9 = p6:FindFirstChild(i)
+			assert(var9)
+			var7:updateReasons(t.validateInternal(var9, p7, true))
 		end
 	end
-	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
+	analyticsModule.recordScriptTime(script.Name, currentTime, p7)
 	
-	return var1:getFinalResults()
+	return var7:getFinalResults()
 end
 
 return t

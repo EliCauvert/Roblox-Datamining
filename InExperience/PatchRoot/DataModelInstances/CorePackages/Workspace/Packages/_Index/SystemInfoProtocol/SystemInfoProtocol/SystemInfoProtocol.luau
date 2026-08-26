@@ -42,9 +42,9 @@ if game:GetEngineFeature("NewSystemInfoFeaturesEnabled") then
 end
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: messageBus (ref), t (ref)
-	return setmetatable({ messageBus = p0 or messageBus }, t)
+	return setmetatable({ messageBus = p1 or messageBus }, t)
 end
 
 function t:getSystemInfo(b)

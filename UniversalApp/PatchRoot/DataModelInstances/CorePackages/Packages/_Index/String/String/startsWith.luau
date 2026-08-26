@@ -1,9 +1,9 @@
-﻿return function(p0, p1, p2)
-	if string.len(p1) == 0 then
+﻿return function(p1, p2, p3)
+	if string.len(p2) == 0 then
 		return true
 	end
 	local _ = nil
-	local var0 = if p2 == nil or p2 < 1 then 1 else p2
+	local var1 = if p3 == nil or p3 < 1 then 1 else p3
 	
-	return if string.len(p0) < var0 then false else p0:find(p1, var0, true) == var0
+	return if string.len(p1) < var1 then false else p1:find(p2, var1, true) == var1
 end

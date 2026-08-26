@@ -3,64 +3,64 @@ local beforeAll = jestGlobalsModule.beforeAll
 local expect = jestGlobalsModule.expect
 local jest = jestGlobalsModule.jest
 
-local function toWarnWith(_, p0, p1)
+local function toWarnWith(_, p1, p2)
 	-- upvalues: jest (ref), expect (ref)
-	local var3 = false
-	local var4 = ""
-	local var5 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p2)
-		-- upvalues: expect (copy), p1 (ref), var3 (write), var4 (write)
-		print("WARN", p2)
+	local var1 = false
+	local var2 = ""
+	local var3 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p3)
+		-- upvalues: expect (copy), p2 (ref), var1 (write), var2 (write)
+		print("WARN", p3)
 		local ok, status = pcall(function()
-			-- upvalues: expect (copy), p2 (ref), p1 (copy)
-			expect(p2).toEqual(p1)
+			-- upvalues: expect (copy), p3 (ref), p2 (copy)
+			expect(p3).toEqual(p2)
 		end)
 		
 		if ok then
-			var3 = true
-			var4 = status
+			var1 = true
+			var2 = status
 		end
 	end)
-	local ok, status = pcall(p0)
+	local ok, status = pcall(p1)
 	
 	if not ok then
-		var5:mockRestore()
+		var3:mockRestore()
 		error(status)
 	end
-	local var6 = if var3 then function()
-		-- upvalues: p1 (ref), var4 (write)
+	local var4 = if var1 then function()
+		-- upvalues: p2 (ref), var2 (write)
 		return `Expected never to warn with string containing "{p1}" but got "{var4}"`
 	end else function()
-		-- upvalues: p1 (ref)
+		-- upvalues: p2 (ref)
 		return `Expected to warn with string containing "{p1}" but did not find a match`
 	end
-	var5:mockRestore()
+	var3:mockRestore()
 	
-	return { message = var6, pass = var3 }
+	return { message = var4, pass = var1 }
 end
 
-local function toWarn(_, p3)
+local function toWarn(_, p1)
 	-- upvalues: jest (ref)
-	local var7 = 0
-	local var8 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p4)
-		-- upvalues: var7 (write)
-		print("WARN", p4)
-		var7 += 1
+	local var1 = 0
+	local var2 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p2)
+		-- upvalues: var1 (write)
+		print("WARN", p2)
+		var1 += 1
 	end)
-	local ok, status = pcall(p3)
+	local ok, status = pcall(p1)
 	
 	if not ok then
-		var8:mockRestore()
+		var2:mockRestore()
 		error(status)
 	end
-	local var9 = if var7 > 0 then function()
-		-- upvalues: var7 (write)
-		return `Expected never to warn but got {var7} warnings`
+	local var3 = if var1 > 0 then function()
+		-- upvalues: var1 (write)
+		return `Expected never to warn but got {var1} warnings`
 	end else function()
 		return "Expected to warn but never did"
 	end
-	var8:mockRestore()
+	var2:mockRestore()
 	
-	return { message = var9, pass = var7 > 0 }
+	return { message = var3, pass = var1 > 0 }
 end
 
 beforeAll(function()

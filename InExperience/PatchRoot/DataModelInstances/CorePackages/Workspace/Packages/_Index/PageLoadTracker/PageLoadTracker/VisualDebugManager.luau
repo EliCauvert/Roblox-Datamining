@@ -15,42 +15,42 @@ function t.new()
 	return t_1
 end
 
-function t:highlightComponent(p0)
+function t:highlightComponent(p1)
 	-- upvalues: pageLoadConfigModule (ref), getRandomHighlightColor (ref), tweenService (ref)
-	if self.originalProperties[p0] then return end
-	if p0.BackgroundColor3 == pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_COLOR then return end
-	local backgroundColor3 = p0.BackgroundColor3
-	local backgroundTransparency = p0.BackgroundTransparency
-	local borderSizePixel = p0.BorderSizePixel
-	self.originalProperties[p0] = {
+	if self.originalProperties[p1] then return end
+	if p1.BackgroundColor3 == pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_COLOR then return end
+	local backgroundColor3 = p1.BackgroundColor3
+	local backgroundTransparency = p1.BackgroundTransparency
+	local borderSizePixel = p1.BorderSizePixel
+	self.originalProperties[p1] = {
 		backgroundColor = backgroundColor3,
 		backgroundTransparency = backgroundTransparency,
-		borderColor = p0.BorderColor3,
+		borderColor = p1.BorderColor3,
 		borderSize = borderSizePixel
 	}
-	p0.BackgroundColor3 = pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_COLOR or getRandomHighlightColor()
+	p1.BackgroundColor3 = pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_COLOR or getRandomHighlightColor()
 	
 	if backgroundTransparency >= 0.95 then
-		p0.BackgroundTransparency = 0.5
+		p1.BackgroundTransparency = 0.5
 	else
-		p0.BackgroundTransparency = math.max(0.3, backgroundTransparency - pageLoadConfigModule.VISUAL_DEBUG.TRANSPARENCY_REDUCTION)
+		p1.BackgroundTransparency = math.max(0.3, backgroundTransparency - pageLoadConfigModule.VISUAL_DEBUG.TRANSPARENCY_REDUCTION)
 	end
-	p0.BorderColor3 = pageLoadConfigModule.VISUAL_DEBUG.BORDER_COLOR
-	p0.BorderSizePixel = math.max(pageLoadConfigModule.VISUAL_DEBUG.MIN_BORDER_SIZE, borderSizePixel)
+	p1.BorderColor3 = pageLoadConfigModule.VISUAL_DEBUG.BORDER_COLOR
+	p1.BorderSizePixel = math.max(pageLoadConfigModule.VISUAL_DEBUG.MIN_BORDER_SIZE, borderSizePixel)
 	task.delay(pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_DURATION, function()
-		-- upvalues: p0 (ref), self (ref), pageLoadConfigModule (copy), tweenService (copy)
-		if p0.Parent and self.originalProperties[p0] then
-			local var5 = self.originalProperties[p0]
-			local var6 = tweenService:Create(p0, TweenInfo.new(pageLoadConfigModule.VISUAL_DEBUG.FADE_DURATION, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+		-- upvalues: p1 (ref), self (ref), pageLoadConfigModule (copy), tweenService (copy)
+		if p1.Parent and self.originalProperties[p1] then
+			local var1 = self.originalProperties[p1]
+			local var2 = tweenService:Create(p1, TweenInfo.new(pageLoadConfigModule.VISUAL_DEBUG.FADE_DURATION, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
 				BackgroundColor3 = pageLoadConfigModule.VISUAL_DEBUG.END_COLOR,
-				BackgroundTransparency = var5.backgroundTransparency * 0.9,
-				BorderSizePixel = var5.borderSize
+				BackgroundTransparency = var1.backgroundTransparency * 0.9,
+				BorderSizePixel = var1.borderSize
 			})
-			var6.Completed:Connect(function()
-				-- upvalues: self (copy), p0 (copy)
-				self.originalProperties[p0] = nil
+			var2.Completed:Connect(function()
+				-- upvalues: self (copy), p1 (copy)
+				self.originalProperties[p1] = nil
 			end)
-			var6:Play()
+			var2:Play()
 		end
 	end)
 end

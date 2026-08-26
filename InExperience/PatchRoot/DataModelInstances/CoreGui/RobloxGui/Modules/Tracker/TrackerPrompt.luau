@@ -40,13 +40,13 @@ local t_1 = {
 }
 local _ = { FullScreen = 0, FormSheet = 2 }
 
-local function openWebview(p0)
+local function openWebview(p1)
 	-- upvalues: httpService (ref), robloxTranslatorModule (ref), guiService (ref)
 	guiService:BroadcastNotification(httpService:JSONEncode({
 		presentationStyle = 2,
 		visible = true,
 		title = if game:GetEngineFeature("SetWebViewTitle") then robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.CameraUnavailable") else nil,
-		url = p0
+		url = p1
 	}), 20)
 end
 
@@ -54,9 +54,9 @@ function trackerPrompt.init(p1)
 	p1.promptType = p1.props.promptType
 end
 
-function trackerPrompt.render(p2)
+function trackerPrompt.render(p1)
 	-- upvalues: roactModule (ref), trackerPromptTypeModule (ref), toast (ref), images (ref), t (ref), t_1 (ref), openWebview (ref), cameraUnavailableUrl (ref), renderWithCoreScriptsStyleProviderModule (ref)
-	p2.promptType = p2.props.promptType
+	p1.promptType = p1.props.promptType
 	
 	return roactModule.createElement("ScreenGui", {
 		AutoLocalize = false,
@@ -67,16 +67,16 @@ function trackerPrompt.render(p2)
 	}, {
 		Content = renderWithCoreScriptsStyleProviderModule({
 			TrackerPrompt = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-				Toast = p2.promptType ~= trackerPromptTypeModule.None and roactModule.createElement(toast, {
+				Toast = p1.promptType ~= trackerPromptTypeModule.None and roactModule.createElement(toast, {
 					duration = 8,
 					toastContent = {
 						iconImage = images["icons/status/alert"],
-						toastTitle = t[p2.promptType],
-						toastSubtitle = t_1[p2.promptType],
+						toastTitle = t[p1.promptType],
+						toastSubtitle = t_1[p1.promptType],
 						onDismissed = function() end,
 						onActivated = function()
-							-- upvalues: p2 (ref), trackerPromptTypeModule (copy), openWebview (copy), cameraUnavailableUrl (copy)
-							if p2.promptType == trackerPromptTypeModule.CameraUnavailable then
+							-- upvalues: p1 (ref), trackerPromptTypeModule (copy), openWebview (copy), cameraUnavailableUrl (copy)
+							if p1.promptType == trackerPromptTypeModule.CameraUnavailable then
 								openWebview(cameraUnavailableUrl)
 							end
 						end

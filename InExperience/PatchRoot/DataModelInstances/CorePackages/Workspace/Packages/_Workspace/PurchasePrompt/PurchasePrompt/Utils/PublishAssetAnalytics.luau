@@ -20,31 +20,31 @@ local t = {
 	}
 }
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: rbxAnalyticsService (ref)
-	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", { section = p0, action = p1, element = p2 })
+	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", { section = p1, action = p2, element = p3 })
 end
 
-function t.sendPageLoad(p3)
+function t.sendPageLoad(p1)
 	-- upvalues: t (ref), rbxAnalyticsService (ref)
-	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", { element = nil, section = p3, action = t.Action.PageLoad })
+	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", { element = nil, section = p1, action = t.Action.PageLoad })
 end
 
-function t.sendFieldTouched(p4, p5)
+function t.sendFieldTouched(p1, p2)
 	-- upvalues: t (ref), rbxAnalyticsService (ref)
 	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
-		section = p4,
+		section = p1,
 		action = t.Action.FieldTouched,
-		element = p5
+		element = p2
 	})
 end
 
-function t.sendButtonClicked(p6, p7)
+function t.sendButtonClicked(p1, p2)
 	-- upvalues: t (ref), rbxAnalyticsService (ref)
 	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
-		section = p6,
+		section = p1,
 		action = t.Action.ButtonClicked,
-		element = p7
+		element = p2
 	})
 end
 

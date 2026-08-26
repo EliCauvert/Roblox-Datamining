@@ -4,9 +4,9 @@ local playerPermissionsModule = require(game:GetService("CoreGui"):WaitForChild(
 
 return function()
 	-- upvalues: getPlaytestModeStoreModule (ref), playerPermissionsModule (ref), playersService (ref)
-	local var3 = getPlaytestModeStoreModule(false)
+	local var1 = getPlaytestModeStoreModule(false)
 	task.spawn(function()
-		-- upvalues: var3 (ref), playerPermissionsModule (copy), playersService (copy)
-		var3.setHasEditAccess(playerPermissionsModule.CanPlayerManagePlaceAsync(playersService.LocalPlayer))
+		-- upvalues: var1 (ref), playerPermissionsModule (copy), playersService (copy)
+		var1.setHasEditAccess(playerPermissionsModule.CanPlayerManagePlaceAsync(playersService.LocalPlayer))
 	end)
 end

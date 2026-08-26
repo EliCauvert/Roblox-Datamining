@@ -2,9 +2,9 @@
 local var1 = nil
 
 return {
-	isAllowListedUserId = function(p0)
+	isAllowListedUserId = function(p1)
 		-- upvalues: var1 (write), rccInExperienceNameSettingsEnabledAllowList (ref)
-		local var2 = tostring(p0)
+		local var2 = tostring(p1)
 		
 		if var1 == nil then
 			var1 = {}

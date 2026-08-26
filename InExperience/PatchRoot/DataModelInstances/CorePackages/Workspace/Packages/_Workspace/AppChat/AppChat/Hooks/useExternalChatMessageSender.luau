@@ -32,113 +32,113 @@ local _ = {
 	Declined = "declined"
 }
 
-local function _(p0, p1)
-	return { conversationId = p1, status = p0 }
+local function _(p1, p2)
+	return { conversationId = p2, status = p1 }
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: statusCodes (ref), appChatNetworkingModule (ref)
-	local var20 = p2 and (p2.responseCode == statusCodes.OK and (p2.responseBody and (p2.responseBody.messages and p2.responseBody.messages[1])))
-	local status = var20 and var20.status
+	local var1 = p1 and (p1.responseCode == statusCodes.OK and (p1.responseBody and (p1.responseBody.messages and p1.responseBody.messages[1])))
+	local status = var1 and var1.status
 	
-	return var20 ~= nil and (if status ~= nil then if status ~= "" then status == appChatNetworkingModule.Constants.ResponseStatus.SUCCESS else true else true)
+	return var1 ~= nil and (if status ~= nil then if status ~= "" then status == appChatNetworkingModule.Constants.ResponseStatus.SUCCESS else true else true)
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: useDispatch (ref), getChatModerationStatusDataHydrationModule (ref), useAppPolicyModule (ref), useSelector (ref), getDeepValue2Module (ref), useIsChatEnabledModule (ref), useIsChatUserMessagesEnabledModule (ref), useIsGroupChatEnabledModule (ref), retrievalStatus (ref), fFlagAppChatNilGuardReceivedChatResponseModule (ref), reactModule (ref), getConversationSendEligibilityStatusModule (ref), promiseModule (ref), createConversationFromFriendPlaceholderModule (ref), receivedConversationModule (ref), sendTextMessageModule (ref), statusCodes (ref), appChatNetworkingModule (ref), navigateWithOsaGateModule (ref), navigateIntoChatModule_1 (ref), navigateIntoChatModule (ref), enumScreensModule (ref), isNavigationAvailable (ref)
-	local var22 = useDispatch()
-	local var23 = getChatModerationStatusDataHydrationModule()
-	local var24 = useAppPolicyModule(function(p4)
-		return p4.getCanUsePlatformChat()
+	local var1 = useDispatch()
+	local var2 = getChatModerationStatusDataHydrationModule()
+	local var3 = useAppPolicyModule(function(p2)
+		return p2.getCanUsePlatformChat()
 	end)
-	local var25 = useAppPolicyModule(function(p5)
-		return p5.getCanSeeChatTerminology()
+	local var4 = useAppPolicyModule(function(p2)
+		return p2.getCanSeeChatTerminology()
 	end)
-	local var26 = useSelector(function(p6)
+	local var5 = useSelector(function(p2)
 		-- upvalues: getDeepValue2Module (copy)
-		return getDeepValue2Module(p6, "ChatAppReducer.ChatSettings.retrievalStatus")
+		return getDeepValue2Module(p2, "ChatAppReducer.ChatSettings.retrievalStatus")
 	end)
-	local var27 = useSelector(function(p7)
-		return tonumber(p7.LocalUserId) or 0
+	local var6 = useSelector(function(p2)
+		return tonumber(p2.LocalUserId) or 0
 	end)
-	local var28 = useSelector(function(p8)
-		return p8.Navigation ~= nil
+	local var7 = useSelector(function(p2)
+		return p2.Navigation ~= nil
 	end)
-	local var29 = useIsChatEnabledModule()
-	local var30 = useIsChatUserMessagesEnabledModule()
-	local var31 = useIsGroupChatEnabledModule()
-	local var32 = var26 ~= retrievalStatus.Done
-	local fFlagAppChatNilGuardReceivedChatResponseModule_1 = not var32 and (var24 and (var25 and (var29 and (var30 and (fFlagAppChatNilGuardReceivedChatResponseModule or not p3)))))
-	local var34 = reactModule.useCallback(function(p9, p10)
-		-- upvalues: getConversationSendEligibilityStatusModule (copy), fFlagAppChatNilGuardReceivedChatResponseModule_1 (ref), var31 (ref), var23 (ref)
+	local var8 = useIsChatEnabledModule()
+	local var9 = useIsChatUserMessagesEnabledModule()
+	local var10 = useIsGroupChatEnabledModule()
+	local var11 = var5 ~= retrievalStatus.Done
+	local fFlagAppChatNilGuardReceivedChatResponseModule_1 = not var11 and (var3 and (var4 and (var8 and (var9 and (fFlagAppChatNilGuardReceivedChatResponseModule or not p1)))))
+	local var12 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: getConversationSendEligibilityStatusModule (copy), fFlagAppChatNilGuardReceivedChatResponseModule_1 (ref), var10 (ref), var2 (ref)
 		return getConversationSendEligibilityStatusModule({
 			scope = false,
-			allowConversationStatusLoading = p10,
-			conversation = p9,
+			allowConversationStatusLoading = p3,
+			conversation = p2,
 			currentTimestamp = DateTime.now().UnixTimestamp,
 			isAvailable = fFlagAppChatNilGuardReceivedChatResponseModule_1,
-			isGroupChatEnabled = var31,
-			timeoutStore = var23
+			isGroupChatEnabled = var10,
+			timeoutStore = var2
 		})
 	end, {
 		fFlagAppChatNilGuardReceivedChatResponseModule_1,
-		var31,
-		var23
+		var10,
+		var2
 	})
-	local var35 = reactModule.useCallback(function(p11)
-		-- upvalues: var34 (ref)
-		return var34(p11, false) == "eligible"
-	end, { var34 })
-	local var36 = reactModule.useCallback(function(p12, p13)
-		-- upvalues: var35 (ref), promiseModule (copy), createConversationFromFriendPlaceholderModule (copy), var27 (ref), var34 (ref), var22 (ref), receivedConversationModule (copy), sendTextMessageModule (copy), statusCodes (copy), appChatNetworkingModule (copy), navigateWithOsaGateModule (copy)
-		if not var35(p12) then
+	local var13 = reactModule.useCallback(function(p2)
+		-- upvalues: var12 (ref)
+		return var12(p2, false) == "eligible"
+	end, { var12 })
+	local var14 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var13 (ref), promiseModule (copy), createConversationFromFriendPlaceholderModule (copy), var6 (ref), var12 (ref), var1 (ref), receivedConversationModule (copy), sendTextMessageModule (copy), statusCodes (copy), appChatNetworkingModule (copy), navigateWithOsaGateModule (copy)
+		if not var13(p2) then
 			return promiseModule.resolve({ conversationId = nil, status = "failure" })
 		end
-		local var40
-		local isFriends = p12.source == "friends"
+		local var15
+		local isFriends = p2.source == "friends"
 		local _ = nil
 		
 		if isFriends then
-			var40 = createConversationFromFriendPlaceholderModule(p12, var27)
+			var15 = createConversationFromFriendPlaceholderModule(p2, var6)
 			
-			return if var40 == nil then promiseModule.resolve({ conversationId = nil, status = "failure" }) else var40:andThen(function(p14)
-				-- upvalues: var34 (copy), isFriends (ref), var22 (copy), receivedConversationModule (copy), promiseModule (copy), sendTextMessageModule (copy), p13 (ref), statusCodes (copy), appChatNetworkingModule (copy), navigateWithOsaGateModule (copy)
-				local id = p14 and p14.id
+			return if var15 == nil then promiseModule.resolve({ conversationId = nil, status = "failure" }) else var15:andThen(function(p4)
+				-- upvalues: var12 (copy), isFriends (ref), var1 (copy), receivedConversationModule (copy), promiseModule (copy), sendTextMessageModule (copy), p3 (ref), statusCodes (copy), appChatNetworkingModule (copy), navigateWithOsaGateModule (copy)
+				local id = p4 and p4.id
 				
-				if p14 == nil or id == nil or (id == "" or p14.source == "friends") or var34(p14, isFriends) ~= "eligible" then
+				if p4 == nil or id == nil or (id == "" or p4.source == "friends") or var12(p4, isFriends) ~= "eligible" then
 					return { conversationId = nil, status = "failure" }
 				elseif isFriends then
-					var22(receivedConversationModule(p14))
+					var1(receivedConversationModule(p4))
 				end
-				return promiseModule.new(function(p15)
-					-- upvalues: var22 (copy), sendTextMessageModule (copy), id (ref), p13 (copy), statusCodes (copy), appChatNetworkingModule (copy), navigateWithOsaGateModule (copy)
+				return promiseModule.new(function(p5)
+					-- upvalues: var1 (copy), sendTextMessageModule (copy), id (ref), p3 (copy), statusCodes (copy), appChatNetworkingModule (copy), navigateWithOsaGateModule (copy)
 					local function sendMessage()
-						-- upvalues: var22 (copy), sendTextMessageModule (copy), id (copy), p13 (copy), p15 (ref), statusCodes (copy), appChatNetworkingModule (copy)
-						var22(sendTextMessageModule(id, p13, nil)):andThen(function(p16)
-							-- upvalues: p15 (copy), statusCodes (copy), appChatNetworkingModule (copy), id (copy)
-							local var43 = p16 and (p16.responseCode == statusCodes.OK and (p16.responseBody and (p16.responseBody.messages and p16.responseBody.messages[1])))
-							local status = var43 and var43.status
-							p15(if var43 ~= nil and (if status ~= nil then if status ~= "" then status == appChatNetworkingModule.Constants.ResponseStatus.SUCCESS else true else true) then { status = "success", conversationId = id } else { conversationId = nil, status = "failure" })
+						-- upvalues: var1 (copy), sendTextMessageModule (copy), id (copy), p3 (copy), p5 (ref), statusCodes (copy), appChatNetworkingModule (copy)
+						var1(sendTextMessageModule(id, p3, nil)):andThen(function(p6)
+							-- upvalues: p5 (copy), statusCodes (copy), appChatNetworkingModule (copy), id (copy)
+							local var16 = p6 and (p6.responseCode == statusCodes.OK and (p6.responseBody and (p6.responseBody.messages and p6.responseBody.messages[1])))
+							local status = var16 and var16.status
+							p5(if var16 ~= nil and (if status ~= nil then if status ~= "" then status == appChatNetworkingModule.Constants.ResponseStatus.SUCCESS else true else true) then { status = "success", conversationId = id } else { conversationId = nil, status = "failure" })
 						end, function()
-							-- upvalues: p15 (copy)
-							p15({ conversationId = nil, status = "failure" })
+							-- upvalues: p5 (copy)
+							p5({ conversationId = nil, status = "failure" })
 						end)
 					end
 					
 					navigateWithOsaGateModule({
 						conversationId = id,
-						dispatch = var22,
+						dispatch = var1,
 						onAccepted = function()
 							-- upvalues: sendMessage (ref)
 							sendMessage()
 						end,
 						onDeclined = function()
-							-- upvalues: p15 (ref)
-							p15({ conversationId = nil, status = "declined" })
+							-- upvalues: p5 (ref)
+							p5({ conversationId = nil, status = "declined" })
 						end,
 						onError = function()
-							-- upvalues: p15 (ref)
-							p15({ conversationId = nil, status = "failure" })
+							-- upvalues: p5 (ref)
+							p5({ conversationId = nil, status = "failure" })
 						end
 					})
 				end)
@@ -146,30 +146,30 @@ return function(p3)
 				return { conversationId = nil, status = "failure" }
 			end)
 		end
-		var40 = promiseModule.resolve(p12)
-	end, { var35, var22, var34, var27 })
-	local var37 = reactModule.useCallback(function(p17)
-		-- upvalues: var22 (ref), navigateIntoChatModule_1 (copy), navigateIntoChatModule (copy), enumScreensModule (copy)
-		var22(navigateIntoChatModule_1({ conversationId = p17 }, true))
+		var15 = promiseModule.resolve(p2)
+	end, { var13, var1, var12, var6 })
+	local var15 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref), navigateIntoChatModule_1 (copy), navigateIntoChatModule (copy), enumScreensModule (copy)
+		var1(navigateIntoChatModule_1({ conversationId = p2 }, true))
 		
-		if p17 == nil then
-			var22(navigateIntoChatModule({ screen = enumScreensModule.ChatLanding, params = {} }))
+		if p2 == nil then
+			var1(navigateIntoChatModule({ screen = enumScreensModule.ChatLanding, params = {} }))
 		end
-	end, { var22 })
-	local var38 = not p3 and (isNavigationAvailable() or var28)
+	end, { var1 })
+	local var16 = not p1 and (isNavigationAvailable() or var7)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: fFlagAppChatNilGuardReceivedChatResponseModule_1 (ref), var31 (ref), var32 (ref), var35 (ref), var38 (ref), var37 (ref), var36 (ref)
+		-- upvalues: fFlagAppChatNilGuardReceivedChatResponseModule_1 (ref), var10 (ref), var11 (ref), var13 (ref), var16 (ref), var15 (ref), var14 (ref)
 		return {
 			isAvailable = fFlagAppChatNilGuardReceivedChatResponseModule_1,
-			isGroupChatEnabled = var31,
-			isLoading = var32,
-			canSendToConversation = var35,
-			navigateToChat = if var38 then var37 else nil,
-			sendToConversation = var36
+			isGroupChatEnabled = var10,
+			isLoading = var11,
+			canSendToConversation = var13,
+			navigateToChat = if var16 then var15 else nil,
+			sendToConversation = var14
 		}
 	end, {
-		fFlagAppChatNilGuardReceivedChatResponseModule_1, var31, var32, var35, var37,
-		var38, var36
+		fFlagAppChatNilGuardReceivedChatResponseModule_1, var10, var11, var13, var15,
+		var16, var14
 	})
 end

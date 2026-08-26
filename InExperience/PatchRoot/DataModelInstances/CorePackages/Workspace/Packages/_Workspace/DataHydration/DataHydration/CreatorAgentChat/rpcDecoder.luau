@@ -1,12 +1,12 @@
 ﻿local httpService = game:GetService("HttpService")
 local _ = require(script:FindFirstAncestor("DataHydration").Parent.HttpClient)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: httpService (ref)
-	if p0 == nil or p0 == "" then
+	if p1 == nil or p1 == "" then
 		return nil
 	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, if typeof(p0) == "buffer" then buffer.tostring(p0) else p0)
+	local ok, status = pcall(httpService.JSONDecode, httpService, if typeof(p1) == "buffer" then buffer.tostring(p1) else p1)
 	
 	return if ok then status else nil
 end

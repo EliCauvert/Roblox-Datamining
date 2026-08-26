@@ -28,24 +28,24 @@ local capturePreviewTileModule = require(coreScriptsPlayerFeedback.Components.Ca
 local capturePickerGridModule = require(coreScriptsPlayerFeedback.Components.CapturePickerGrid)
 local capturePickerPreviewModule = require(coreScriptsPlayerFeedback.Components.CapturePickerPreview)
 local getCaptureKeyModule = require(coreScriptsPlayerFeedback.Utils.getCaptureKey)
-local var13 = reactModule.memo(function(p0)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), capturePreviewTileModule (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconVariant (ref), text (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var15 = useTokens()
-	local var16 = 0
+	local var2 = useTokens()
+	local var3 = 0
 	
-	for i in p0.uploadStatuses do
-		var16 += 1
+	for i in p1.uploadStatuses do
+		var3 += 1
 	end
-	local var17 = var16 > 0
-	local var18 = useLocalization({
+	local var4 = var3 > 0
+	local var5 = useLocalization({
 		CapturesAdd = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add",
 		CapturesHint = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint",
 		CapturesEditSelection = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection",
 		CapturesUploadError = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError",
 		CapturesHeading = {
 			"CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading",
-			count = tostring(var16),
-			max = tostring(p0.maxSelections)
+			count = tostring(var3),
+			max = tostring(p1.maxSelections)
 		}
 	})
 	local t = {
@@ -64,37 +64,37 @@ local var13 = reactModule.memo(function(p0)
 	}
 	local t_1 = {}
 	
-	for i_1, v in p0.uploadStatuses do
+	for i_1, v in p1.uploadStatuses do
 		table.insert(t_1, { key = i_1, captureStatus = v })
 	end
-	table.sort(t_1, function(p1, p2)
-		return (p1.captureStatus.order or 0) < (p2.captureStatus.order or 0)
+	table.sort(t_1, function(p2, p3)
+		return (p2.captureStatus.order or 0) < (p3.captureStatus.order or 0)
 	end)
-	local var21 = 0
+	local var6 = 0
 	
 	for i_2, v_1 in t_1 do
-		var21 += 1
+		var6 += 1
 		local key = v_1.key
 		t[v_1.key] = reactModule.createElement(capturePreviewTileModule, {
 			capture = v_1.captureStatus.capture,
 			status = v_1.captureStatus.status,
 			failureReason = v_1.captureStatus.failureReason,
-			layoutOrder = var21,
+			layoutOrder = var6,
 			onRemove = function()
-				-- upvalues: p0 (ref), key (ref)
-				p0.onCaptureRemoved(key)
+				-- upvalues: p1 (ref), key (ref)
+				p1.onCaptureRemoved(key)
 			end
 		})
 	end
-	if var17 then
+	if var4 then
 		t.EditSelectionButton = reactModule.createElement("ImageButton", {
-			BackgroundColor3 = var15.Color.Surface.Surface_300.Color3,
+			BackgroundColor3 = var2.Color.Surface.Surface_300.Color3,
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			Image = "",
-			LayoutOrder = var21 + 1,
+			LayoutOrder = var6 + 1,
 			Size = UDim2.new(0, 80, 0, 80),
-			[reactModule.Event.Activated] = p0.onPickerOpen
+			[reactModule.Event.Activated] = p1.onPickerOpen
 		}, {
 			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
 			Layout = reactModule.createElement("UIListLayout", {
@@ -109,61 +109,61 @@ local var13 = reactModule.memo(function(p0)
 				name = builderIconsModule.Icon.Image,
 				size = iconSize.Medium,
 				variant = iconVariant.Filled,
-				style = { Color3 = var15.Color.Content.Muted.Color3 }
+				style = { Color3 = var2.Color.Content.Muted.Color3 }
 			}),
 			Label = reactModule.createElement(text, {
 				tag = "auto-xy text-caption-small text-wrap content-muted",
 				LayoutOrder = 2,
-				Text = var18.CapturesEditSelection
+				Text = var5.CapturesEditSelection
 			})
 		})
 	end
-	local var22 = false
+	local var7 = false
 	
-	for i_3, v_2 in p0.uploadStatuses do
+	for i_3, v_2 in p1.uploadStatuses do
 		if v_2.status == "failed" and v_2.failureReason ~= Enum.UploadCaptureResult.CaptureModerated then
-			var22 = true
+			var7 = true
 		end
 	end
 	return reactModule.createElement(view, {
 		tag = "col gap-small size-full-0 auto-y",
 		LayoutOrder = 3,
-		GroupTransparency = if p0.category == "" then 0.75 else 0,
+		GroupTransparency = if p1.category == "" then 0.75 else 0,
 		padding = { top = UDim.new(0, 4), bottom = UDim.new(0, 4) }
 	}, {
-		Heading = if var17 then reactModule.createElement(text, {
+		Heading = if var4 then reactModule.createElement(text, {
 			tag = "size-0 auto-xy text-title-medium text-wrap text-align-x-left text-align-y-top",
 			LayoutOrder = 1,
-			Text = var18.CapturesHeading,
-			textStyle = var15.Color.Content.Emphasis
+			Text = var5.CapturesHeading,
+			textStyle = var2.Color.Content.Emphasis
 		}) else nil,
-		PreviewGrid = if var17 then reactModule.createElement("Frame", {
+		PreviewGrid = if var4 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0)
 		}, t) else nil,
-		ErrorHint = if var22 then reactModule.createElement(text, {
+		ErrorHint = if var7 then reactModule.createElement(text, {
 			tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-alert",
 			LayoutOrder = 3,
-			Text = var18.CapturesUploadError
+			Text = var5.CapturesUploadError
 		}) else nil,
-		EmptyRow = if not var17 then reactModule.createElement(view, {
+		EmptyRow = if not var4 then reactModule.createElement(view, {
 			tag = "row align-y-center gap-medium size-full-0 auto-y",
 			LayoutOrder = 2
 		}, {
 			AddButton = reactModule.createElement(button, {
 				LayoutOrder = 1,
-				text = var18.CapturesAdd,
+				text = var5.CapturesAdd,
 				variant = buttonVariant.Standard,
 				size = inputSize.Medium,
-				onActivated = p0.onPickerOpen,
-				isDisabled = p0.category == ""
+				onActivated = p1.onPickerOpen,
+				isDisabled = p1.category == ""
 			}),
 			Hint = reactModule.createElement(text, {
 				tag = "fill size-full-0 text-body-medium text-wrap text-align-x-left content-muted",
 				LayoutOrder = 2,
-				Text = var18.CapturesHint
+				Text = var5.CapturesHint
 			})
 		}) else nil
 	})
@@ -173,40 +173,40 @@ local t = {
 	TICKET_CATEGORY_PURCHASING_ISSUE = true
 }
 
-return reactModule.memo(function(p3)
-	-- upvalues: useTokens (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (ref), useCaptureUploadsModule (ref), useGalleryCapturesModule (ref), reactModule (ref), constantsModule (ref), useLocalization (ref), t (ref), getCaptureKeyModule (ref), useEscapeDismissModule (ref), dialog (ref), capturePickerPreviewModule (ref), capturePickerGridModule (ref), view (ref), text (ref), dropdown (ref), inputSize (ref), inputVariant (ref), textArea (ref), var13 (ref), checkbox (ref), buttonVariant (ref)
-	local var23 = useTokens()
-	local description = p3.description
-	local setDescription = p3.setDescription
-	local category = p3.category
-	local setCategory = p3.setCategory
-	local shareUserId = p3.shareUserId
-	local setShareUserId = p3.setShareUserId
-	local var24 = nil
-	local var25 = nil
-	local var26 = nil
-	local var27 = nil
-	local var28 = nil
-	local var29 = nil
-	local var30 = nil
-	local var31 = nil
+return reactModule.memo(function(p2)
+	-- upvalues: useTokens (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (ref), useCaptureUploadsModule (ref), useGalleryCapturesModule (ref), reactModule (ref), constantsModule (ref), useLocalization (ref), t (ref), getCaptureKeyModule (ref), useEscapeDismissModule (ref), dialog (ref), capturePickerPreviewModule (ref), capturePickerGridModule (ref), view (ref), text (ref), dropdown (ref), inputSize (ref), inputVariant (ref), textArea (ref), var1 (ref), checkbox (ref), buttonVariant (ref)
+	local var8 = useTokens()
+	local description = p2.description
+	local setDescription = p2.setDescription
+	local category = p2.category
+	local setCategory = p2.setCategory
+	local shareUserId = p2.shareUserId
+	local setShareUserId = p2.setShareUserId
+	local var9 = nil
+	local var10 = nil
+	local var11 = nil
+	local var12 = nil
+	local var13 = nil
+	local var14 = nil
+	local var15 = nil
+	local var16 = nil
 	
 	if fFlagEnablePlayerSupportCaptureAttachmentsModule then
-		var24 = useCaptureUploadsModule()
-		var25 = useGalleryCapturesModule()
-		local var32, var33 = reactModule.useState(false)
-		var26 = var32
-		var27 = var33
-		local var34, var35 = reactModule.useState({})
-		var28 = var34
-		var29 = var35
-		local var36, var37 = reactModule.useState(nil)
-		var30 = var36
-		var31 = var37
+		var9 = useCaptureUploadsModule()
+		var10 = useGalleryCapturesModule()
+		local var17, var18 = reactModule.useState(false)
+		var11 = var17
+		var12 = var18
+		local var19, var20 = reactModule.useState({})
+		var13 = var19
+		var14 = var20
+		local var21, var22 = reactModule.useState(nil)
+		var15 = var21
+		var16 = var22
 	end
 	local MIN_FEEDBACK_LENGTH = constantsModule.MIN_FEEDBACK_LENGTH
 	local MAX_PLAYER_SUPPORT_LENGTH = constantsModule.MAX_PLAYER_SUPPORT_LENGTH
-	local var38 = useLocalization({
+	local var23 = useLocalization({
 		Title = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Title",
 		ReportAbuseLead = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead",
 		ReportAbuseLink = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link",
@@ -238,139 +238,139 @@ return reactModule.memo(function(p3)
 	local list = {
 		{
 			id = "TICKET_CATEGORY_BUG_REPORT",
-			text = var38.CategoryItemBugReport
+			text = var23.CategoryItemBugReport
 		},
 		{
 			id = "TICKET_CATEGORY_DATA_RESTORE_REQUEST",
-			text = var38.CategoryItemDataRestoreRequest
+			text = var23.CategoryItemDataRestoreRequest
 		},
 		{
 			id = "TICKET_CATEGORY_PURCHASING_ISSUE",
-			text = var38.CategoryItemPurchasingIssue
+			text = var23.CategoryItemPurchasingIssue
 		},
 		{
 			id = "TICKET_CATEGORY_OTHER",
-			text = var38.CategoryItemOther
+			text = var23.CategoryItemOther
 		}
 	}
 	local t_1 = {
-		TICKET_CATEGORY_BUG_REPORT = var38.DescriptionPlaceholderBugReport,
-		TICKET_CATEGORY_DATA_RESTORE_REQUEST = var38.DescriptionPlaceholderDataRestoreRequest,
-		TICKET_CATEGORY_PURCHASING_ISSUE = var38.DescriptionPlaceholderPurchasingIssue,
-		TICKET_CATEGORY_OTHER = var38.DescriptionPlaceholderOther
+		TICKET_CATEGORY_BUG_REPORT = var23.DescriptionPlaceholderBugReport,
+		TICKET_CATEGORY_DATA_RESTORE_REQUEST = var23.DescriptionPlaceholderDataRestoreRequest,
+		TICKET_CATEGORY_PURCHASING_ISSUE = var23.DescriptionPlaceholderPurchasingIssue,
+		TICKET_CATEGORY_OTHER = var23.DescriptionPlaceholderOther
 	}
-	local var41 = t[category] == true
-	local var41_1 = var41 or shareUserId
+	local var24 = t[category] == true
+	local var25 = var24 or shareUserId
 	local _ = {}
-	local var43 = 0
-	local var44 = false
-	local var45 = nil
-	local var46 = nil
-	local var47 = nil
+	local var26 = 0
+	local var27 = false
+	local var28 = nil
+	local var29 = nil
+	local var30 = nil
 	
 	if fFlagEnablePlayerSupportCaptureAttachmentsModule then
-		var45 = reactModule.useCallback(function()
-			-- upvalues: category (ref), var27 (write)
+		var28 = reactModule.useCallback(function()
+			-- upvalues: category (ref), var12 (write)
 			if category == "" then
 				return
 			end
-			var27(true)
+			var12(true)
 		end, { category })
 		reactModule.useEffect(function()
-			-- upvalues: var26 (write), var29 (write), var31 (write), var24 (write), var25 (write)
-			if not var26 then
-				var29({})
-				var31(nil)
+			-- upvalues: var11 (write), var14 (write), var16 (write), var9 (write), var10 (write)
+			if not var11 then
+				var14({})
+				var16(nil)
 				
 				return
 			end
 			local t = {}
 			
-			for i in var24.uploadStatuses do
+			for i in var9.uploadStatuses do
 				t[i] = true
 			end
-			var29(t)
-			var31(nil)
-			var25.load()
-		end, { var26 })
-		local var48 = reactModule.useMemo(function()
-			-- upvalues: var25 (write), var28 (write), getCaptureKeyModule (copy)
+			var14(t)
+			var16(nil)
+			var10.load()
+		end, { var11 })
+		local var31 = reactModule.useMemo(function()
+			-- upvalues: var10 (write), var13 (write), getCaptureKeyModule (copy)
 			local t = {}
 			
-			for i, v in var25.captures do
-				if var28[getCaptureKeyModule(v)] then
+			for i, v in var10.captures do
+				if var13[getCaptureKeyModule(v)] then
 					table.insert(t, v)
 				end
 			end
 			return t
-		end, { var25.captures, var28 })
-		var43 = #var48
-		var44 = var43 >= 5
-		var46 = reactModule.useCallback(function(p4)
-			-- upvalues: getCaptureKeyModule (copy), var29 (write), var44 (write)
-			local var58 = getCaptureKeyModule(p4)
-			var29(function(p5)
-				-- upvalues: var58 (ref), var44 (copy)
-				local var59 = p5[var58] == true
+		end, { var10.captures, var13 })
+		var26 = #var31
+		var27 = var26 >= 5
+		var29 = reactModule.useCallback(function(p3)
+			-- upvalues: getCaptureKeyModule (copy), var14 (write), var27 (write)
+			local var32 = getCaptureKeyModule(p3)
+			var14(function(p4)
+				-- upvalues: var32 (ref), var27 (copy)
+				local var33 = p4[var32] == true
 				
-				if not var59 and var44 then
-					return p5
+				if not var33 and var27 then
+					return p4
 				end
-				local cloned = table.clone(p5)
+				local cloned = table.clone(p4)
 				
-				if var59 then
-					cloned[var58] = nil
+				if var33 then
+					cloned[var32] = nil
 					
 					return cloned
 				end
-				cloned[var58] = true
+				cloned[var32] = true
 				
 				return cloned
 			end)
-		end, { var44 })
-		local var49 = next(var24.uploadStatuses) ~= nil
+		end, { var27 })
+		local var32 = next(var9.uploadStatuses) ~= nil
 		
-		var47 = function()
-			-- upvalues: var43 (write), var49 (ref), var24 (write), var48 (write), var27 (write)
-			if var43 == 0 and not var49 then
+		var30 = function()
+			-- upvalues: var26 (write), var32 (ref), var9 (write), var31 (write), var12 (write)
+			if var26 == 0 and not var32 then
 				return
 			end
-			var24.onCapturesAdded(var48)
-			var27(false)
+			var9.onCapturesAdded(var31)
+			var12(false)
 		end
 	end
-	local var50 = nil
+	local var32 = nil
 	
 	if fFlagEnablePlayerSupportCaptureAttachmentsModule then
-		local var51 = if var30 then var30.CaptureTime else nil
+		local var33 = if var15 then var15.CaptureTime else nil
 		local robloxLocaleId = game:GetService("LocalizationService").RobloxLocaleId
-		var50 = useLocalization({
+		var32 = useLocalization({
 			dateTime = {
 				"CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime",
-				date = if var51 then var51:FormatLocalTime("L", robloxLocaleId) else "",
-				time = if var51 then var51:FormatLocalTime("LT", robloxLocaleId) else ""
+				date = if var33 then var33:FormatLocalTime("L", robloxLocaleId) else "",
+				time = if var33 then var33:FormatLocalTime("LT", robloxLocaleId) else ""
 			}
 		})
 	end
-	local var52 = MIN_FEEDBACK_LENGTH <= #description and (#description <= MAX_PLAYER_SUPPORT_LENGTH and (category ~= "" and (var24 and (not var24.anyUploading and (not var24 or not var24.hasNonModerationFailure)))))
-	local var53 = reactModule.useCallback(function()
-		-- upvalues: var52 (ref), description (ref), category (ref), var41_1 (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var24 (write), p3 (ref)
-		if var52 then
+	local var34 = MIN_FEEDBACK_LENGTH <= #description and (#description <= MAX_PLAYER_SUPPORT_LENGTH and (category ~= "" and (var9 and (not var9.anyUploading and (not var9 or not var9.hasNonModerationFailure)))))
+	local var35 = reactModule.useCallback(function()
+		-- upvalues: var34 (ref), description (ref), category (ref), var25 (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (write), p2 (ref)
+		if var34 then
 			pcall(function()
-				-- upvalues: description (copy), category (copy), var41_1 (copy), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var24 (copy)
+				-- upvalues: description (copy), category (copy), var25 (copy), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (copy)
 				local socialService = game:GetService("SocialService")
 				
 				if socialService.SignalFeedbackSubmissionCompleted then
 					local t = {
 						Description = description,
 						Category = category,
-						ShareUserIdPreference = if var41_1 then "SHARE_USER_ID_PREFERENCE_SHARE" else "SHARE_USER_ID_PREFERENCE_DO_NOT_SHARE"
+						ShareUserIdPreference = if var25 then "SHARE_USER_ID_PREFERENCE_SHARE" else "SHARE_USER_ID_PREFERENCE_DO_NOT_SHARE"
 					}
 					
 					if fFlagEnablePlayerSupportCaptureAttachmentsModule then
 						local t_1 = {}
 						
-						for i, v in var24.uploadStatuses do
+						for i, v in var9.uploadStatuses do
 							if v.status == "succeeded" and v.assetId ~= nil then
 								table.insert(t_1, v.assetId)
 							end
@@ -382,15 +382,15 @@ return reactModule.memo(function(p3)
 					socialService:SignalFeedbackSubmissionCompleted("", t)
 				end
 			end)
-			p3.closePrompt()
+			p2.closePrompt()
 			
 			return
 		end
 	end, {
-		description, category, var41_1, var52, var24 or false, p3.closePrompt
+		description, category, var25, var34, var9 or false, p2.closePrompt
 	})
-	local var54 = reactModule.useCallback(function()
-		-- upvalues: p3 (ref)
+	local var36 = reactModule.useCallback(function()
+		-- upvalues: p2 (ref)
 		pcall(function()
 			local socialService = game:GetService("SocialService")
 			
@@ -398,11 +398,11 @@ return reactModule.memo(function(p3)
 				socialService:SignalFeedbackSubmissionPermissionDenied()
 			end
 		end)
-		p3.onFormAbandoned()
-		p3.closePrompt()
-	end, { p3.closePrompt, p3.onFormAbandoned })
-	local var55 = reactModule.useCallback(function()
-		-- upvalues: p3 (ref)
+		p2.onFormAbandoned()
+		p2.closePrompt()
+	end, { p2.closePrompt, p2.onFormAbandoned })
+	local var37 = reactModule.useCallback(function()
+		-- upvalues: p2 (ref)
 		pcall(function()
 			local socialService = game:GetService("SocialService")
 			
@@ -410,8 +410,8 @@ return reactModule.memo(function(p3)
 				socialService:SignalFeedbackSubmissionPermissionDenied()
 			end
 		end)
-		p3.onFormAbandoned()
-		p3.closePrompt()
+		p2.onFormAbandoned()
+		p2.closePrompt()
 		pcall(function()
 			local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
 			local modules = robloxGui and robloxGui:FindFirstChild("Modules") or nil
@@ -425,56 +425,56 @@ return reactModule.memo(function(p3)
 				return
 			end
 		end)
-	end, { p3.closePrompt, p3.onFormAbandoned })
+	end, { p2.closePrompt, p2.onFormAbandoned })
 	useEscapeDismissModule("PlayerSupportPromptCancel", if fFlagEnablePlayerSupportCaptureAttachmentsModule then reactModule.useCallback(function()
-		-- upvalues: var30 (write), var31 (write), var26 (write), var27 (write), var54 (ref)
-		if var30 then
-			var31(nil)
+		-- upvalues: var15 (write), var16 (write), var11 (write), var12 (write), var36 (ref)
+		if var15 then
+			var16(nil)
 			
 			return
-		elseif var26 then
-			var27(false)
+		elseif var11 then
+			var12(false)
 			
 			return
 		end
-		var54()
-	end, { var30, var26, var54 }) else var54)
+		var36()
+	end, { var15, var11, var36 }) else var36)
 	
-	return reactModule.createElement(dialog.Root, { hasBackdrop = true, onClose = var54 }, {
+	return reactModule.createElement(dialog.Root, { hasBackdrop = true, onClose = var36 }, {
 		Title = reactModule.createElement(dialog.Title, {
-			text = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var26 and var30 ~= nil then if var30.CaptureTime ~= nil then var38.CapturesAdd else var50.dateTime elseif fFlagEnablePlayerSupportCaptureAttachmentsModule and var26 then var38.CapturesAdd else var38.Title
+			text = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 and var15 ~= nil then if var15.CaptureTime ~= nil then var23.CapturesAdd else var32.dateTime elseif fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then var23.CapturesAdd else var23.Title
 		}),
-		Content = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var26 then reactModule.createElement(dialog.Content, { LayoutOrder = 1 }, {
-			PickerBody = if var30 ~= nil then reactModule.createElement(capturePickerGridModule, {
+		Content = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then reactModule.createElement(dialog.Content, { LayoutOrder = 1 }, {
+			PickerBody = if var15 ~= nil then reactModule.createElement(capturePickerGridModule, {
 				maxSelections = 5,
-				captures = var25.captures,
-				isLoading = var25.isLoading,
-				hasMore = var25.hasMore,
-				selectedKeys = var28,
-				onToggle = var46,
-				onPreview = function(p8)
-					-- upvalues: var31 (write)
-					var31(p8)
+				captures = var10.captures,
+				isLoading = var10.isLoading,
+				hasMore = var10.hasMore,
+				selectedKeys = var13,
+				onToggle = var29,
+				onPreview = function(p3)
+					-- upvalues: var16 (write)
+					var16(p3)
 				end,
-				onLoadMore = var25.loadMore
-			}) else reactModule.createElement(capturePickerPreviewModule, { capture = var30 })
+				onLoadMore = var10.loadMore
+			}) else reactModule.createElement(capturePickerPreviewModule, { capture = var15 })
 		}) else reactModule.createElement(dialog.Content, { LayoutOrder = 1 }, {
 			Body = reactModule.createElement(view, {
 				tag = "col gap-medium size-full-0 auto-y",
-				padding = { top = UDim.new(0, -(var23.Gap.XLarge - var23.Gap.Large)) }
+				padding = { top = UDim.new(0, -(var8.Gap.XLarge - var8.Gap.Large)) }
 			}, {
 				ReportAbuseRow = reactModule.createElement(view, { tag = "row gap-small auto-y", LayoutOrder = 0 }, {
 					Lead = reactModule.createElement(text, {
 						tag = "auto-xy",
 						LayoutOrder = 1,
-						Text = var38.ReportAbuseLead
+						Text = var23.ReportAbuseLead
 					}),
 					Link = reactModule.createElement(text, {
 						RichText = true,
 						tag = "auto-xy",
 						LayoutOrder = 2,
-						Text = var38.ReportAbuseLink,
-						onActivated = var55,
+						Text = var23.ReportAbuseLink,
+						onActivated = var37,
 						selection = { Selectable = true }
 					})
 				}),
@@ -485,33 +485,33 @@ return reactModule.memo(function(p3)
 					Label = reactModule.createElement(text, {
 						tag = "size-0 auto-xy text-title-medium text-wrap text-align-x-left text-align-y-top",
 						LayoutOrder = 1,
-						Text = var38.CategoryLabel,
-						textStyle = var23.Color.Content.Emphasis
+						Text = var23.CategoryLabel,
+						textStyle = var8.Color.Content.Emphasis
 					}),
 					DropdownBorder = reactModule.createElement(view, {
 						tag = "radius-medium",
 						LayoutOrder = 2,
-						Size = UDim2.new(1, -var23.Stroke.Standard * 2, 0, 0),
-						Position = UDim2.new(0, var23.Stroke.Standard, 0, 0),
+						Size = UDim2.new(1, -var8.Stroke.Standard * 2, 0, 0),
+						Position = UDim2.new(0, var8.Stroke.Standard, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						stroke = {
-							Color = var23.Color.Stroke.Default.Color3,
-							Thickness = var23.Stroke.Standard,
-							Transparency = var23.Color.Stroke.Default.Transparency
+							Color = var8.Color.Stroke.Default.Color3,
+							Thickness = var8.Stroke.Standard,
+							Transparency = var8.Color.Stroke.Default.Transparency
 						},
-						cornerRadius = UDim.new(0, var23.Radius.Medium)
+						cornerRadius = UDim.new(0, var8.Radius.Medium)
 					}, {
 						Dropdown = reactModule.createElement(dropdown.Root, {
 							label = "",
 							value = if category ~= "" then nil else category,
-							placeholder = var38.CategoryPlaceholder,
+							placeholder = var23.CategoryPlaceholder,
 							items = list,
 							size = inputSize.Medium,
 							variant = inputVariant.Utility,
 							width = UDim.new(1, 0),
-							onItemChanged = function(p6)
+							onItemChanged = function(p3)
 								-- upvalues: setCategory (ref)
-								setCategory(tostring(p6))
+								setCategory(tostring(p3))
 							end
 						})
 					})
@@ -524,21 +524,21 @@ return reactModule.memo(function(p3)
 					Label = reactModule.createElement(text, {
 						tag = "size-0 auto-xy text-title-medium text-wrap text-align-x-left text-align-y-top",
 						LayoutOrder = 1,
-						Text = var38.DescriptionLabel,
-						textStyle = var23.Color.Content.Emphasis
+						Text = var23.DescriptionLabel,
+						textStyle = var8.Color.Content.Emphasis
 					}),
 					InputBorderSlot = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
 						InputBorder = reactModule.createElement(view, {
 							tag = "radius-medium",
-							Size = UDim2.new(1, -var23.Stroke.Standard * 2, 0, 0),
-							Position = UDim2.new(0, var23.Stroke.Standard, 0, 0),
+							Size = UDim2.new(1, -var8.Stroke.Standard * 2, 0, 0),
+							Position = UDim2.new(0, var8.Stroke.Standard, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
 							stroke = {
-								Color = var23.Color.Stroke.Default.Color3,
-								Thickness = var23.Stroke.Standard,
-								Transparency = var23.Color.Stroke.Default.Transparency
+								Color = var8.Color.Stroke.Default.Color3,
+								Thickness = var8.Stroke.Standard,
+								Transparency = var8.Color.Stroke.Default.Transparency
 							},
-							cornerRadius = UDim.new(0, var23.Radius.Medium)
+							cornerRadius = UDim.new(0, var8.Radius.Medium)
 						}, {
 							Input = reactModule.createElement(textArea, {
 								label = "",
@@ -557,16 +557,16 @@ return reactModule.memo(function(p3)
 					Hint = reactModule.createElement(text, {
 						tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left text-align-y-top",
 						LayoutOrder = 3,
-						Text = var38.DescriptionHint,
-						textStyle = var23.Color.Content.Emphasis
+						Text = var23.DescriptionHint,
+						textStyle = var8.Color.Content.Emphasis
 					})
 				}),
-				CapturesSection = if fFlagEnablePlayerSupportCaptureAttachmentsModule then reactModule.createElement(var13, {
+				CapturesSection = if fFlagEnablePlayerSupportCaptureAttachmentsModule then reactModule.createElement(var1, {
 					maxSelections = 5,
-					uploadStatuses = var24.uploadStatuses,
+					uploadStatuses = var9.uploadStatuses,
 					category = category,
-					onCaptureRemoved = var24.onCaptureRemoved,
-					onPickerOpen = var45
+					onCaptureRemoved = var9.onCaptureRemoved,
+					onPickerOpen = var28
 				}) else nil,
 				ShareCheckboxRow = reactModule.createElement(view, {
 					tag = "col gap-xsmall size-full-0 auto-y",
@@ -574,12 +574,12 @@ return reactModule.memo(function(p3)
 				}, {
 					Checkbox = reactModule.createElement(checkbox, {
 						LayoutOrder = 1,
-						label = if var41 then var38.ShareUserIdLabelRequired else var38.ShareUserIdLabel,
-						isChecked = var41_1,
-						isDisabled = var41,
-						onActivated = function(p7)
+						label = if var24 then var23.ShareUserIdLabelRequired else var23.ShareUserIdLabel,
+						isChecked = var25,
+						isDisabled = var24,
+						onActivated = function(p3)
 							-- upvalues: setShareUserId (ref)
-							setShareUserId(p7)
+							setShareUserId(p3)
 						end,
 						size = inputSize.Medium
 					}),
@@ -587,56 +587,56 @@ return reactModule.memo(function(p3)
 						tag = "size-full-0 auto-y",
 						LayoutOrder = 2,
 						padding = {
-							left = UDim.new(0, var23.Size.Size_600 + var23.Gap.Medium)
+							left = UDim.new(0, var8.Size.Size_600 + var8.Gap.Medium)
 						}
 					}, {
 						Hint = reactModule.createElement(text, {
 							tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-muted",
-							Text = var38.ShareUserIdHint
+							Text = var23.ShareUserIdHint
 						})
 					})
 				})
 			})
 		}),
-		Actions = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var26 then reactModule.createElement(dialog.Actions, {
+		Actions = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 2,
-			actions = if var30 ~= nil then {
+			actions = if var15 ~= nil then {
 				{
-					text = var38.Add,
-					variant = if var43 > 0 then buttonVariant.Emphasis else buttonVariant.Standard,
-					isDisabled = var43 == 0 and not next(var24.uploadStatuses),
-					onActivated = var47
+					text = var23.Add,
+					variant = if var26 > 0 then buttonVariant.Emphasis else buttonVariant.Standard,
+					isDisabled = var26 == 0 and not next(var9.uploadStatuses),
+					onActivated = var30
 				},
 				{
-					text = var38.Cancel,
+					text = var23.Cancel,
 					variant = buttonVariant.Standard,
 					onActivated = function()
-						-- upvalues: var27 (write)
-						var27(false)
+						-- upvalues: var12 (write)
+						var12(false)
 					end
 				}
 			} else (function()
-				-- upvalues: getCaptureKeyModule (copy), var30 (write), var28 (write), var44 (write), var38 (ref), buttonVariant (copy), var46 (write), var31 (write)
-				local var71 = var28[getCaptureKeyModule(var30)] == true
-				local var71_1 = var71 or not var44
+				-- upvalues: getCaptureKeyModule (copy), var15 (write), var13 (write), var27 (write), var23 (ref), buttonVariant (copy), var29 (write), var16 (write)
+				local var38 = var13[getCaptureKeyModule(var15)] == true
+				local var39 = var38 or not var27
 				
 				return {
 					{
-						text = if var71 then var38.Deselect else var38.Select,
-						variant = if var71 then buttonVariant.SoftEmphasis elseif var71_1 then buttonVariant.Emphasis else buttonVariant.Standard,
-						isDisabled = not var71_1 and not var71,
+						text = if var38 then var23.Deselect else var23.Select,
+						variant = if var38 then buttonVariant.SoftEmphasis elseif var39 then buttonVariant.Emphasis else buttonVariant.Standard,
+						isDisabled = not var39 and not var38,
 						onActivated = function()
-							-- upvalues: var46 (copy), var30 (copy), var31 (copy)
-							var46(var30)
-							var31(nil)
+							-- upvalues: var29 (copy), var15 (copy), var16 (copy)
+							var29(var15)
+							var16(nil)
 						end
 					},
 					{
-						text = var38.Cancel,
+						text = var23.Cancel,
 						variant = buttonVariant.Standard,
 						onActivated = function()
-							-- upvalues: var31 (copy)
-							var31(nil)
+							-- upvalues: var16 (copy)
+							var16(nil)
 						end
 					}
 				}
@@ -645,10 +645,10 @@ return reactModule.memo(function(p3)
 			LayoutOrder = 2,
 			actions = {
 				{
-					text = var38.Send,
-					variant = if var52 then buttonVariant.Emphasis else buttonVariant.Standard,
-					onActivated = var53,
-					isDisabled = not var52
+					text = var23.Send,
+					variant = if var34 then buttonVariant.Emphasis else buttonVariant.Standard,
+					onActivated = var35,
+					isDisabled = not var34
 				}
 			}
 		})

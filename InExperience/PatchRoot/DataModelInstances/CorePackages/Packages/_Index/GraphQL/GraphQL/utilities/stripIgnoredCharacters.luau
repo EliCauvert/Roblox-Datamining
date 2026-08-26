@@ -13,41 +13,41 @@ local dedentBlockStringValue = blockStringModule.dedentBlockStringValue
 local getBlockStringIndentation = blockStringModule.getBlockStringIndentation
 local dedentBlockString = nil
 
-local function stripIgnoredCharacters(p0)
+local function stripIgnoredCharacters(p1)
 	-- upvalues: isSource (ref), source (ref), lexer (ref), tokenKind (ref), isPunctuatorTokenKind (ref), string (ref), dedentBlockString (write)
-	local var5 = if isSource(p0) then p0 else source.new(p0)
-	local body = var5.body
-	local var6 = lexer.new(var5)
-	local var7 = ""
-	local var8 = false
-	while var6:advance().kind ~= tokenKind.EOF do
-		local token = var6.token
+	local var1 = if isSource(p1) then p1 else source.new(p1)
+	local body = var1.body
+	local var2 = lexer.new(var1)
+	local var3 = ""
+	local var4 = false
+	while var2:advance().kind ~= tokenKind.EOF do
+		local token = var2.token
 		local kind = token.kind
-		local var9 = not isPunctuatorTokenKind(token.kind)
+		local var5 = not isPunctuatorTokenKind(token.kind)
 		
-		if var8 and (var9 or token.kind == tokenKind.SPREAD) then
-			var7 ..= " "
+		if var4 and (var5 or token.kind == tokenKind.SPREAD) then
+			var3 ..= " "
 		end
-		local var10 = string.slice(body, token.start, token._end)
-		var7 = if kind == tokenKind.BLOCK_STRING then var7 .. dedentBlockString(var10) else var7 .. var10
-		var8 = var9
+		local var6 = string.slice(body, token.start, token._end)
+		var3 = if kind == tokenKind.BLOCK_STRING then var3 .. dedentBlockString(var6) else var3 .. var10
+		var4 = var5
 	end
-	return var7
+	return var3
 end
 
-dedentBlockString = function(p1)
+dedentBlockString = function(p2)
 	-- upvalues: string (ref), dedentBlockStringValue (ref), getBlockStringIndentation (ref)
-	local var11 = dedentBlockStringValue(string.slice(p1, 4, -3))
+	local var7 = dedentBlockStringValue(string.slice(p2, 4, -3))
 	
-	if getBlockStringIndentation(var11) > 0 then
-		var11 = "\n" .. var11
+	if getBlockStringIndentation(var7) > 0 then
+		var7 = "\n" .. var11
 	end
-	local charCount = utf8.len(var11)
+	local charCount = utf8.len(var7)
 	assert(charCount ~= nil, "invalid utf8 detected: " .. var11)
-	local var13 = string.slice(var11, charCount)
+	local var8 = string.slice(var7, charCount)
 	
-	if (var13 == "\"" and string.slice(var11, -4) ~= "\\\"\"\"") or var13 == "\\" then
-		var11 ..= "\n"
+	if (var8 == "\"" and string.slice(var7, -4) ~= "\\\"\"\"") or var8 == "\\" then
+		var7 ..= "\n"
 	end
 	return "\"\"\"" .. var11 .. "\"\"\""
 end

@@ -3,23 +3,23 @@ local cryo = inGameMenuDependenciesModule.Cryo
 local parent = script.Parent.Parent
 
 return inGameMenuDependenciesModule.Rodux.createReducer({ dialogOpen = false, enabled = true, customCallback = nil }, {
-	[require(parent.Actions.SetRespawning).name] = function(p0, p1)
+	[require(parent.Actions.SetRespawning).name] = function(p1, p2)
 		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p0, { dialogOpen = p1.respawning })
+		return cryo.Dictionary.join(p1, { dialogOpen = p2.respawning })
 	end,
-	[require(parent.Actions.SetMenuOpen).name] = function(p2, p3)
+	[require(parent.Actions.SetMenuOpen).name] = function(p1, p2)
 		-- upvalues: cryo (ref)
-		return if p3.menuOpen then p2 else cryo.Dictionary.join(p2, { dialogOpen = false })
+		return if p2.menuOpen then p1 else cryo.Dictionary.join(p1, { dialogOpen = false })
 	end,
-	[require(parent.Actions.SetCurrentPage).name] = function(p4, _)
+	[require(parent.Actions.SetCurrentPage).name] = function(p1, _)
 		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p4, { dialogOpen = false })
+		return cryo.Dictionary.join(p1, { dialogOpen = false })
 	end,
-	[require(parent.Actions.SetRespawnBehavior).name] = function(p5, p6)
+	[require(parent.Actions.SetRespawnBehavior).name] = function(p1, p2)
 		return {
-			customCallback = p6.customCallback,
-			enabled = p6.respawnEnabled,
-			dialogOpen = if not p6.respawnEnabled then false else p5.dialogOpen
+			customCallback = p2.customCallback,
+			enabled = p2.respawnEnabled,
+			dialogOpen = if not p2.respawnEnabled then false else p1.dialogOpen
 		}
 	end
 })

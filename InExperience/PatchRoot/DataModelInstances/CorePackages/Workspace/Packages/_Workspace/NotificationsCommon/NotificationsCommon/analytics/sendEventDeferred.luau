@@ -1,7 +1,7 @@
 ﻿local eventIngestService = game:GetService("EventIngestService")
 local getPlatformTarget = require(script.Parent.Parent.Parent.Analytics).getPlatformTarget
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
-	eventIngestService:SendEventDeferred(getPlatformTarget(), p0, p1, p2 or {})
+	eventIngestService:SendEventDeferred(getPlatformTarget(), p1, p2, p3 or {})
 end

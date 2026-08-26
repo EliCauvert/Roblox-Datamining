@@ -3,37 +3,37 @@ local _ = require(viewRecyclerRoblox.Parent.ViewRecycler).Axis
 local signalsExperimentalModule = require(viewRecyclerRoblox.Parent.SignalsExperimental)
 local axisMapModule = require(viewRecyclerRoblox.RobloxAdapter.axisMap)
 
-local function _(p0)
-	for i, v in p0 do
+local function _(p1)
+	for i, v in p1 do
 		v:Disconnect()
 	end
-	table.clear(p0)
+	table.clear(p1)
 end
 
 return {
-	new = function(p1)
+	new = function(p2)
 		-- upvalues: axisMapModule (ref), signalsExperimentalModule (ref)
-		local axis = p1.axis
-		local activationMargin = p1.activationMargin or 0
-		local retentionMargin = p1.retentionMargin or activationMargin
+		local axis = p2.axis
+		local activationMargin = p2.activationMargin or 0
+		local retentionMargin = p2.retentionMargin or activationMargin
 		assert(activationMargin >= 0, "activationMargin must be non-negative")
 		assert(activationMargin <= retentionMargin, "retentionMargin must be at least activationMargin")
-		local var5 = nil
+		local var1 = nil
 		local t = {}
 		local t_1 = {}
-		local var8 = false
+		local var2 = false
 		
-		local function updateTargetGeometry(p2)
-			-- upvalues: var5 (write), axisMapModule (copy), axis (ref)
-			if var5 == nil or not p2.target:IsDescendantOf(var5) then
-				p2.contentStart = nil
-				p2.contentEnd = nil
+		local function updateTargetGeometry(p3)
+			-- upvalues: var1 (write), axisMapModule (copy), axis (ref)
+			if var1 == nil or not p3.target:IsDescendantOf(var1) then
+				p3.contentStart = nil
+				p3.contentEnd = nil
 				
 				return
 			end
-			local var13 = axisMapModule.mainOf(var5.CanvasPosition, axis) + axisMapModule.mainOf(p2.target.AbsolutePosition, axis) - axisMapModule.mainOf(var5.AbsolutePosition, axis)
-			p2.contentStart = var13
-			p2.contentEnd = var13 + axisMapModule.mainOf(p2.target.AbsoluteSize, axis)
+			local var3 = axisMapModule.mainOf(var1.CanvasPosition, axis) + axisMapModule.mainOf(p3.target.AbsolutePosition, axis) - axisMapModule.mainOf(var1.AbsolutePosition, axis)
+			p3.contentStart = var3
+			p3.contentEnd = var3 + axisMapModule.mainOf(p3.target.AbsoluteSize, axis)
 		end
 		
 		local function _(p3, p4)
@@ -58,28 +58,28 @@ return {
 		
 		local function deactivateAll()
 			-- upvalues: t_1 (ref), signalsExperimentalModule (copy)
-			local var14 = nil
+			local var3 = nil
 			
 			for i, v in t_1 do
 				if v.active then
 					v.active = false
-					var14 = var14 or {}
-					table.insert(var14, v)
+					var3 = var3 or {}
+					table.insert(var3, v)
 				end
 			end
-			if var14 == nil then
+			if var3 == nil then
 				return
 			end
-			local var15 = nil
+			local var4 = nil
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var14 (ref), var15 (ref)
-				if var14 ~= nil then
-					for i, v in var14 do
+				-- upvalues: var3 (ref), var4 (ref)
+				if var3 ~= nil then
+					for i, v in var3 do
 						v.setActive(false)
 					end
 				end
-				if var15 ~= nil then
-					for i, v in var15 do
+				if var4 ~= nil then
+					for i, v in var4 do
 						v.setActive(true)
 					end
 				end
@@ -87,51 +87,51 @@ return {
 		end
 		
 		local function evaluate()
-			-- upvalues: var8 (write), var5 (write), deactivateAll (ref), axisMapModule (copy), axis (ref), t_1 (ref), retentionMargin (ref), activationMargin (ref), signalsExperimentalModule (copy)
-			if var8 then return end
-			if var5 == nil then
+			-- upvalues: var2 (write), var1 (write), deactivateAll (ref), axisMapModule (copy), axis (ref), t_1 (ref), retentionMargin (ref), activationMargin (ref), signalsExperimentalModule (copy)
+			if var2 then return end
+			if var1 == nil then
 				deactivateAll()
 				
 				return
 			end
-			local var16 = axisMapModule.mainOf(var5.CanvasPosition, axis)
-			local var17 = var16 + axisMapModule.mainOf(var5.AbsoluteWindowSize, axis)
-			local var18 = nil
-			local var19 = nil
+			local var5 = axisMapModule.mainOf(var1.CanvasPosition, axis)
+			local var6 = var5 + axisMapModule.mainOf(var1.AbsoluteWindowSize, axis)
+			local var7 = nil
+			local var8 = nil
 			
 			for i, v in t_1 do
-				local var20 = false
+				local var9 = false
 				local contentStart = v.contentStart
 				local contentEnd = v.contentEnd
 				
 				if contentStart ~= nil and contentEnd ~= nil then
-					local var21 = if v.active then retentionMargin else activationMargin
-					var20 = var16 - var21 < contentEnd and contentStart < var17 + var21
+					local var10 = if v.active then retentionMargin else activationMargin
+					var9 = var5 - var10 < contentEnd and contentStart < var6 + var10
 				end
-				if var20 ~= v.active then
-					v.active = var20
+				if var9 ~= v.active then
+					v.active = var9
 					
-					if var20 then
-						var19 = var19 or {}
-						table.insert(var19, v)
+					if var9 then
+						var8 = var8 or {}
+						table.insert(var8, v)
 					else
-						var18 = var18 or {}
-						table.insert(var18, v)
+						var7 = var7 or {}
+						table.insert(var7, v)
 					end
 				end
 			end
-			if var18 == nil and var19 == nil then
+			if var7 == nil and var8 == nil then
 				return
 			end
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var18 (ref), var19 (ref)
-				if var18 ~= nil then
-					for i, v in var18 do
+				-- upvalues: var7 (ref), var8 (ref)
+				if var7 ~= nil then
+					for i, v in var7 do
 						v.setActive(false)
 					end
 				end
-				if var19 ~= nil then
-					for i, v in var19 do
+				if var8 ~= nil then
+					for i, v in var8 do
 						v.setActive(true)
 					end
 				end
@@ -140,22 +140,22 @@ return {
 		
 		local _ = nil
 		
-		local var12 = function(p5)
-			-- upvalues: var8 (write), var5 (write), t (ref), deactivateAll (ref), evaluate (ref), var12 (write), t_1 (ref), updateTargetGeometry (ref)
-			if var8 or p5 == var5 then return end
+		local var11 = function(p5)
+			-- upvalues: var2 (write), var1 (write), t (ref), deactivateAll (ref), evaluate (ref), var11 (write), t_1 (ref), updateTargetGeometry (ref)
+			if var2 or p5 == var1 then return end
 			for i, v in t do
 				v:Disconnect()
 			end
 			table.clear(t)
 			deactivateAll()
-			var5 = p5
+			var1 = p5
 			
 			if p5 == nil then return end
 			table.insert(t, p5:GetPropertyChangedSignal("CanvasPosition"):Connect(evaluate))
 			table.insert(t, p5:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(evaluate))
 			table.insert(t, p5.Destroying:Connect(function()
-				-- upvalues: var12 (copy)
-				var12(nil)
+				-- upvalues: var11 (copy)
+				var11(nil)
 			end))
 			
 			for i_1, v_1 in t_1 do
@@ -165,10 +165,10 @@ return {
 		end
 		
 		return {
-			setViewport = var12,
+			setViewport = var11,
 			register = function(p6, p7)
-				-- upvalues: var8 (write), t_1 (ref), signalsExperimentalModule (copy), updateTargetGeometry (ref), evaluate (ref)
-				if var8 then
+				-- upvalues: var2 (write), t_1 (ref), signalsExperimentalModule (copy), updateTargetGeometry (ref), evaluate (ref)
+				if var2 then
 					return function() end
 				end
 				assert(t_1[p6] == nil, "target is already registered")
@@ -181,12 +181,12 @@ return {
 					connections = {}
 				}
 				t_1[p6] = t
-				local var23 = false
+				local var12 = false
 				
 				local function unregister()
-					-- upvalues: var23 (write), t_1 (copy), p6 (ref), t (ref), signalsExperimentalModule (copy)
-					if var23 then return end
-					var23 = true
+					-- upvalues: var12 (write), t_1 (copy), p6 (ref), t (ref), signalsExperimentalModule (copy)
+					if var12 then return end
+					var12 = true
 					
 					if t_1[p6] ~= t then return end
 					t_1[p6] = nil
@@ -202,16 +202,16 @@ return {
 						local list = { t }
 						
 						if list == nil then return end
-						local var27 = nil
+						local var13 = nil
 						signalsExperimentalModule.batch(function()
-							-- upvalues: list (ref), var27 (ref)
+							-- upvalues: list (ref), var13 (ref)
 							if list ~= nil then
 								for i, v in list do
 									v.setActive(false)
 								end
 							end
-							if var27 ~= nil then
-								for i, v in var27 do
+							if var13 ~= nil then
+								for i, v in var13 do
 									v.setActive(true)
 								end
 							end
@@ -234,15 +234,15 @@ return {
 				return unregister
 			end,
 			destroy = function()
-				-- upvalues: var8 (write), t (ref), t_1 (ref), var5 (write), signalsExperimentalModule (copy)
-				if var8 then return end
-				var8 = true
+				-- upvalues: var2 (write), t (ref), t_1 (ref), var1 (write), signalsExperimentalModule (copy)
+				if var2 then return end
+				var2 = true
 				
 				for i, v in t do
 					v:Disconnect()
 				end
 				table.clear(t)
-				local var28 = nil
+				local var14 = nil
 				
 				for i_1, v_1 in t_1 do
 					t_1[i_1] = nil
@@ -255,25 +255,25 @@ return {
 					
 					if v_1.active then
 						v_1.active = false
-						var28 = var28 or {}
-						table.insert(var28, v_1)
+						var14 = var14 or {}
+						table.insert(var14, v_1)
 					end
 				end
-				var5 = nil
+				var1 = nil
 				
-				if var28 == nil then
+				if var14 == nil then
 					return
 				end
-				local var29 = nil
+				local var15 = nil
 				signalsExperimentalModule.batch(function()
-					-- upvalues: var28 (ref), var29 (ref)
-					if var28 ~= nil then
-						for i, v in var28 do
+					-- upvalues: var14 (ref), var15 (ref)
+					if var14 ~= nil then
+						for i, v in var14 do
 							v.setActive(false)
 						end
 					end
-					if var29 ~= nil then
-						for i, v in var29 do
+					if var15 ~= nil then
+						for i, v in var15 do
 							v.setActive(true)
 						end
 					end

@@ -6,38 +6,38 @@ local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local getSduiClientPageScope = sduiSharedUtilitiesModule.getSduiClientPageScope
 local chartsSortDetailScopeFieldsModule = require(charts.ChartsSortDetailPage.ChartsSortDetailScopeFields)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: getSduiApiStore (ref)
-	return not getSduiApiStore().isInFlight(p0)
+	return not getSduiApiStore().isInFlight(p1)
 end
 
 local _ = function(p1, p2)
 	-- upvalues: getSduiClientPageScope (ref), chartsSortDetailScopeFieldsModule (ref)
-	local var5 = getSduiClientPageScope(p1)
+	local var1 = getSduiClientPageScope(p1)
 	
 	if p2 then
-		var5.set(chartsSortDetailScopeFieldsModule.SafeGenre, var5.get(chartsSortDetailScopeFieldsModule.DesiredGenre))
+		var1.set(chartsSortDetailScopeFieldsModule.SafeGenre, var1.get(chartsSortDetailScopeFieldsModule.DesiredGenre))
 		
 		return
 	end
-	var5.set(chartsSortDetailScopeFieldsModule.DesiredGenre, var5.get(chartsSortDetailScopeFieldsModule.SafeGenre))
+	var1.set(chartsSortDetailScopeFieldsModule.DesiredGenre, var1.get(chartsSortDetailScopeFieldsModule.SafeGenre))
 end
 
-local function settleGenreRefresh(value, p3)
+local function settleGenreRefresh(value, p1)
 	-- upvalues: promiseModule (ref), getSduiClientPageScope (ref), chartsSortDetailScopeFieldsModule (ref)
-	if typeof(p3) == "table" then
-		local var6 = getSduiClientPageScope(value)
-		var6.set(chartsSortDetailScopeFieldsModule.SafeGenre, var6.get(chartsSortDetailScopeFieldsModule.DesiredGenre))
+	if typeof(p1) == "table" then
+		local var1 = getSduiClientPageScope(value)
+		var1.set(chartsSortDetailScopeFieldsModule.SafeGenre, var1.get(chartsSortDetailScopeFieldsModule.DesiredGenre))
 		
-		return promiseModule.resolve(p3)
+		return promiseModule.resolve(p1)
 	end
 	return promiseModule.reject("ChartsSortDetail genre refresh non-table result")
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: getSduiApiStore (ref), getSduiClientPageScope (ref), chartsSortDetailScopeFieldsModule (ref), settleGenreRefresh (ref), promiseModule (ref)
-	local configKey = p4.configKey
-	local selectedGenre = p4.selectedGenre
+	local configKey = p1.configKey
+	local selectedGenre = p1.selectedGenre
 	
 	if typeof(configKey) ~= "string" or configKey == "" then
 		return nil
@@ -46,15 +46,15 @@ return function(p4)
 	elseif getSduiApiStore().isInFlight(configKey) then
 		getSduiClientPageScope(configKey).set(chartsSortDetailScopeFieldsModule.DesiredGenre, selectedGenre)
 		
-		return getSduiApiStore().refreshFromApi({ configKey = configKey, loadTimer = p4.loadTimer }):andThen(function(p6)
+		return getSduiApiStore().refreshFromApi({ configKey = configKey, loadTimer = p1.loadTimer }):andThen(function(p2)
 			-- upvalues: settleGenreRefresh (copy), configKey (ref)
-			return settleGenreRefresh(configKey, p6)
-		end):catch(function(p5)
+			return settleGenreRefresh(configKey, p2)
+		end):catch(function(p2)
 			-- upvalues: configKey (ref), getSduiClientPageScope (copy), chartsSortDetailScopeFieldsModule (copy), promiseModule (copy)
-			local var7 = getSduiClientPageScope(configKey)
-			var7.set(chartsSortDetailScopeFieldsModule.DesiredGenre, var7.get(chartsSortDetailScopeFieldsModule.SafeGenre))
+			local var1 = getSduiClientPageScope(configKey)
+			var1.set(chartsSortDetailScopeFieldsModule.DesiredGenre, var1.get(chartsSortDetailScopeFieldsModule.SafeGenre))
 			
-			return promiseModule.reject(p5)
+			return promiseModule.reject(p2)
 		end)
 	end
 	return nil

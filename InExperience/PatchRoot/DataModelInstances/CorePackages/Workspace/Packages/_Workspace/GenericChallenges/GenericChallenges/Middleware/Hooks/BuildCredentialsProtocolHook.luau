@@ -10,39 +10,39 @@ local getFIntLuaAppCredentialsProtocolTimeout = require(parent.CredentialsProtoc
 local enableGetCredentialsInCredentialsProtocolHook = game:DefineFastFlag("EnableGetCredentialsInCredentialsProtocolHook", false)
 local executeJavaScriptInWebViewModule = require(genericChallenges.Utils.ExecuteJavaScriptInWebView)
 
-return function(p0)
+return function(p1)
 	-- upvalues: default (ref), executeJavaScriptInWebViewModule (ref), getFFlagLuaAppEnableCredentialsProtocol (ref), javascriptHybridModule (ref), getFIntLuaAppCredentialsProtocolAvailableTimeout (ref), enableGetCredentialsInCredentialsProtocolHook (ref), getFIntLuaAppCredentialsProtocolTimeout (ref), httpService (ref)
-	local var5 = default
-	local var6 = executeJavaScriptInWebViewModule
-	local var7 = getFFlagLuaAppEnableCredentialsProtocol()
+	local var1 = default
+	local var2 = executeJavaScriptInWebViewModule
+	local var3 = getFFlagLuaAppEnableCredentialsProtocol()
 	
-	if p0 ~= nil and p0.defaultExecuteJavaScriptInWebView ~= nil then
-		var6 = p0.defaultExecuteJavaScriptInWebView
+	if p1 ~= nil and p1.defaultExecuteJavaScriptInWebView ~= nil then
+		var2 = p1.defaultExecuteJavaScriptInWebView
 	end
-	if p0 ~= nil and p0.defaultCredentialsProtocol ~= nil then
-		var5 = p0.defaultCredentialsProtocol
+	if p1 ~= nil and p1.defaultCredentialsProtocol ~= nil then
+		var1 = p1.defaultCredentialsProtocol
 	end
-	if p0 ~= nil and p0.defaultCredentialsProtocolEnabled ~= nil then
-		var7 = p0.defaultCredentialsProtocolEnabled
+	if p1 ~= nil and p1.defaultCredentialsProtocolEnabled ~= nil then
+		var3 = p1.defaultCredentialsProtocolEnabled
 	end
-	return function(p1)
-		-- upvalues: var7 (write), javascriptHybridModule (copy), var5 (write), default (copy), getFIntLuaAppCredentialsProtocolAvailableTimeout (copy), var6 (write), enableGetCredentialsInCredentialsProtocolHook (copy), getFIntLuaAppCredentialsProtocolTimeout (copy), httpService (copy)
-		if var7 then
-			if p1.feature == javascriptHybridModule.Feature.CredentialsProtocolAvailable then
-				var5:isAvailable(default.CredentialsTypes.FIDO2, getFIntLuaAppCredentialsProtocolAvailableTimeout()):andThen(function(p2)
-					-- upvalues: var6 (copy), p1 (ref)
-					var6.Execute(p1.data.callId, tostring(p2.isAvailable or false))
+	return function(p2)
+		-- upvalues: var3 (write), javascriptHybridModule (copy), var1 (write), default (copy), getFIntLuaAppCredentialsProtocolAvailableTimeout (copy), var2 (write), enableGetCredentialsInCredentialsProtocolHook (copy), getFIntLuaAppCredentialsProtocolTimeout (copy), httpService (copy)
+		if var3 then
+			if p2.feature == javascriptHybridModule.Feature.CredentialsProtocolAvailable then
+				var1:isAvailable(default.CredentialsTypes.FIDO2, getFIntLuaAppCredentialsProtocolAvailableTimeout()):andThen(function(p3)
+					-- upvalues: var2 (copy), p2 (ref)
+					var2.Execute(p2.data.callId, tostring(p3.isAvailable or false))
 				end):catch(function()
-					-- upvalues: var6 (copy), p1 (ref)
-					var6.Execute(p1.data.callId, "false")
+					-- upvalues: var2 (copy), p2 (ref)
+					var2.Execute(p2.data.callId, "false")
 				end)
-			elseif enableGetCredentialsInCredentialsProtocolHook and p1.feature == javascriptHybridModule.Feature.GetCredentials then
-				var5:getCredentials(default.CredentialsTypes.FIDO2, p1.data.authenticationOptionsJSON, getFIntLuaAppCredentialsProtocolTimeout()):andThen(function(p3)
-					-- upvalues: var6 (copy), p1 (ref), httpService (copy)
-					var6.Execute(p1.data.callId, if p3 then httpService:JSONEncode(p3) else "")
+			elseif enableGetCredentialsInCredentialsProtocolHook and p2.feature == javascriptHybridModule.Feature.GetCredentials then
+				var1:getCredentials(default.CredentialsTypes.FIDO2, p2.data.authenticationOptionsJSON, getFIntLuaAppCredentialsProtocolTimeout()):andThen(function(p3)
+					-- upvalues: var2 (copy), p2 (ref), httpService (copy)
+					var2.Execute(p2.data.callId, if p3 then httpService:JSONEncode(p3) else "")
 				end):catch(function()
-					-- upvalues: var6 (copy), p1 (ref)
-					var6.Execute(p1.data.callId, "")
+					-- upvalues: var2 (copy), p2 (ref)
+					var2.Execute(p2.data.callId, "")
 				end)
 			end
 		end

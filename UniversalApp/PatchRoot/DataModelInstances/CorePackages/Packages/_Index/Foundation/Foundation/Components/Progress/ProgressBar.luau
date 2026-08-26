@@ -143,9 +143,9 @@ return function(p1)
 		}, {
 			Gradient = reactModule.createElement("UIGradient", {
 				Color = ColorSequence.new(var2.Color.Content.Emphasis.Color3),
-				Transparency = if var6 then usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p1)
+				Transparency = if var6 then usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p2)
 					-- upvalues: var3 (ref), var2 (ref)
-					return if var3.reducedMotion then NumberSequence.new(p1) else NumberSequence.new({
+					return if var3.reducedMotion then NumberSequence.new(p2) else NumberSequence.new({
 						NumberSequenceKeypoint.new(0, 1),
 						NumberSequenceKeypoint.new(0.2, 1),
 						NumberSequenceKeypoint.new(0.5, var2.Color.Content.Emphasis.Transparency),
@@ -153,9 +153,9 @@ return function(p1)
 						NumberSequenceKeypoint.new(1, 1)
 					})
 				end) else mapBindableModule(var5, getBarSequenceFromProgress),
-				Offset = if var6 then useRotationModule(1):map(function(p1)
+				Offset = if var6 then useRotationModule(1):map(function(p2)
 					-- upvalues: var3 (ref), constantsModule (copy)
-					return if var3.reducedMotion then Vector2.new(0, 0) else Vector2.new(p1 * constantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
+					return if var3.reducedMotion then Vector2.new(0, 0) else Vector2.new(p2 * constantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
 				end) else nil
 			})
 		})

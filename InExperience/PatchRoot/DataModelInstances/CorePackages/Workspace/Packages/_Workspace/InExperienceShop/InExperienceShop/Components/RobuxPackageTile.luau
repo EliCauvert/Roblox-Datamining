@@ -20,13 +20,13 @@ local t = {
 	robux = "Feature.Home.Robux"
 }
 
-local function _(p0, p1, p2)
-	return if p0 then `{p1} + {p2}` else p1
+local function _(p1, p2, p3)
+	return if p1 then `{p2} + {p3}` else p2
 end
 
-local function renderMediaContent(p3)
+local function renderMediaContent(p1)
 	-- upvalues: formatPriceModule (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref), image (ref), uDim2 (ref)
-	local var7 = p3.hasBonusItem == true
+	local var1 = p1.hasBonusItem == true
 	
 	return {
 		RobuxGroup = reactModule.createElement(view, {
@@ -37,51 +37,51 @@ local function renderMediaContent(p3)
 			RobuxIcon = reactModule.createElement(icon, {
 				testId = "RobuxPackageTile-RobuxIcon",
 				LayoutOrder = 1,
-				name = p3.robuxImage,
+				name = p1.robuxImage,
 				size = iconSize.Medium
 			}),
 			RobuxAmount = reactModule.createElement(text, {
 				tag = "auto-xy text-heading-medium content-emphasis",
 				testId = "RobuxPackageTile-MediaRobuxAmount",
 				LayoutOrder = 2,
-				Text = formatPriceModule(p3.robuxAmount)
+				Text = formatPriceModule(p1.robuxAmount)
 			})
 		}),
-		PlusSign = if var7 and p3.bonusItemThumbnail then reactModule.createElement(text, {
+		PlusSign = if var1 and p1.bonusItemThumbnail then reactModule.createElement(text, {
 			tag = "auto-xy text-heading-medium content-emphasis",
 			Text = "+",
 			testId = "RobuxPackageTile-PlusSign",
 			LayoutOrder = 2
 		}) else nil,
-		BonusItemImage = if var7 and p3.bonusItemThumbnail then reactModule.createElement(image, {
+		BonusItemImage = if var1 and p1.bonusItemThumbnail then reactModule.createElement(image, {
 			tag = "radius-medium bg-shift-200",
 			testId = "RobuxPackageTile-BonusItemImage",
 			LayoutOrder = 3,
 			Size = uDim2,
-			Image = p3.bonusItemThumbnail,
+			Image = p1.bonusItemThumbnail,
 			ScaleType = Enum.ScaleType.Fit
 		}) else nil
 	}
 end
 
-return reactModule.memo(function(p4)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), t (ref), MEDIA_HEIGHT_SCALE_FALLBACK (ref), reactModule (ref), view (ref), renderMediaContent (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var8 = useLocalization(t)
-	local robux = var8.robux
+	local var1 = useLocalization(t)
+	local robux = var1.robux
 	
 	return reactModule.createElement(view, {
 		tag = "col fill size-full-0 auto-y radius-medium clip bg-shift-200",
 		testId = "RobuxPackageTile",
-		LayoutOrder = p4.LayoutOrder,
-		onActivated = p4.onTileActivated
+		LayoutOrder = p1.LayoutOrder,
+		onActivated = p1.onTileActivated
 	}, {
 		MediaWrapper = reactModule.createElement(view, {
 			tag = "row align-x-center align-y-center gap-small size-full-0 bg-shift-200",
 			testId = "RobuxPackageTile-MediaWrapper",
 			LayoutOrder = 1,
-			Size = UDim2.fromScale(1, p4.mediaHeightScale or MEDIA_HEIGHT_SCALE_FALLBACK),
+			Size = UDim2.fromScale(1, p1.mediaHeightScale or MEDIA_HEIGHT_SCALE_FALLBACK),
 			SizeConstraint = Enum.SizeConstraint.RelativeXX
-		}, renderMediaContent(p4)),
+		}, renderMediaContent(p1)),
 		TileContent = reactModule.createElement(view, {
 			tag = "col gap-medium size-full-0 auto-y padding-medium",
 			LayoutOrder = 2
@@ -91,7 +91,7 @@ return reactModule.memo(function(p4)
 					tag = "size-full-0 auto-y text-title-medium text-align-x-left text-truncate-end content-emphasis",
 					testId = "RobuxPackageTile-Title",
 					LayoutOrder = 1,
-					Text = if p4.hasBonusItem then `{robux} + {var8.bonusItem}` else robux
+					Text = if p1.hasBonusItem then `{robux} + {var1.bonusItem}` else robux
 				}),
 				RobuxAmount = reactModule.createElement(view, {
 					tag = "row align-y-center auto-xy",
@@ -102,18 +102,18 @@ return reactModule.memo(function(p4)
 						tag = "auto-xy text-body-medium text-truncate-end content-default",
 						testId = "RobuxPackageTile-PriceLabel",
 						LayoutOrder = 1,
-						Text = p4.currencyAmountStr
+						Text = p1.currencyAmountStr
 					})
 				})
 			}),
 			Footer = reactModule.createElement(button, {
 				testId = "RobuxPackageTile-BuyButton",
 				LayoutOrder = 2,
-				text = var8.buy,
-				variant = if p4.isPrimaryRobuxPackage == true then buttonVariant.SoftEmphasis else buttonVariant.Standard,
+				text = var1.buy,
+				variant = if p1.isPrimaryRobuxPackage == true then buttonVariant.SoftEmphasis else buttonVariant.Standard,
 				size = inputSize.Small,
 				width = UDim.new(1, 0),
-				onActivated = p4.onBuyActivated or function() end
+				onActivated = p1.onBuyActivated or function() end
 			})
 		})
 	})

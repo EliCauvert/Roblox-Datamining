@@ -7,14 +7,14 @@ local UGCValidationService = game:GetService("UGCValidationService")
 return function(vectorA, vectorB)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
 	local currentTime = tick()
-	local var4 = if vectorB then vectorB.isServer else nil
-	local var5, var6 = pcallDeferredModule(function()
+	local var1 = if vectorB then vectorB.isServer else nil
+	local var2, var3 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), vectorA (ref)
 		return UGCValidationService:ValidateEditableMeshTriangleArea(vectorA.editableMesh)
 	end, vectorB)
 	
-	if var5 then
-		if var6 then
+	if var2 then
+		if var3 then
 			analyticsModule.recordScriptTime(script.Name, currentTime, vectorB)
 			
 			return true
@@ -27,7 +27,7 @@ return function(vectorA, vectorB)
 	else
 		analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshTriangleArea_FailedToLoadMesh, nil, vectorB)
 		
-		if var4 then
+		if var1 then
 			error(string.format("Failed to load model mesh %s. Make sure mesh exists and try again.", vectorA.fullName))
 		end
 		return false, {

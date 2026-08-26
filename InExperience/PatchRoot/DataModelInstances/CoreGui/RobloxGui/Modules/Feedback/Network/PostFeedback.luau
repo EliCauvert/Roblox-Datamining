@@ -5,20 +5,20 @@ local playersService = game:GetService("Players")
 local promise = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Promise
 local getFFlagEnableSendImageFeedbackToBackendModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: httpService (ref)
-	return httpService:RequestInternal(p0):Start(function(p3, p4)
-		-- upvalues: p1 (ref), p2 (ref)
-		if p3 then
-			p1()
+	return httpService:RequestInternal(p1):Start(function(p4, p5)
+		-- upvalues: p2 (ref), p3 (ref)
+		if p4 then
+			p2()
 			
 			return
 		end
-		p2(tostring(p4.StatusMessage))
+		p3(tostring(p5.StatusMessage))
 	end)
 end
 
-return function(p5, p6, p7, p8, p9, p10, p11)
+return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: getFFlagEnableSendImageFeedbackToBackendModule (ref), playersService (ref), constantsModule (ref), urlModule (ref), httpService (ref), promise (ref)
 	local t
 	local _ = nil
@@ -26,47 +26,47 @@ return function(p5, p6, p7, p8, p9, p10, p11)
 	if getFFlagEnableSendImageFeedbackToBackendModule() then
 		local inGameTranslations = constantsModule.ServiceSourceType.InGameTranslations
 		
-		if p8 == "" or p8 == nil then
-			p8 = "UID_" .. game.GameId
+		if p4 == "" or p4 == nil then
+			p4 = "UID_" .. game.GameId
 			inGameTranslations = constantsModule.ServiceSourceType.InGameTranslationsNoEntryId
 		end
-		if p5 == constantsModule.ContentType.Image then
+		if p1 == constantsModule.ContentType.Image then
 			inGameTranslations = constantsModule.ServiceSourceType.InGameUniverseAndImageAsset
 		end
 		t = {
 			LocalizationFeedback = {
 				FeedbackTarget = {
-					ServiceSource = { Type = inGameTranslations, ExternalId = p8 },
-					Source = { ContentType = p5, Value = p6 },
-					Translation = { ContentType = p5, Value = p7 }
+					ServiceSource = { Type = inGameTranslations, ExternalId = p4 },
+					Source = { ContentType = p1, Value = p2 },
+					Translation = { ContentType = p1, Value = p3 }
 				},
 				Locale = if playersService.LocalPlayer.LocaleId then playersService.LocalPlayer.LocaleId:gsub("-", "_") else "",
-				ReasonType = p11,
+				ReasonType = p7,
 				Suggestion = {
 					ContentType = constantsModule.ContentType.Text,
-					Value = p9
+					Value = p5
 				},
-				Comments = p10
+				Comments = p6
 			}
 		}
 	else
-		local var5 = 1
+		local var1 = 1
 		
-		if p8 == "" or p8 == nil then
-			p8 = "UID_" .. game.GameId
-			var5 = 2
+		if p4 == "" or p4 == nil then
+			p4 = "UID_" .. game.GameId
+			var1 = 2
 		end
 		t = {
 			LocalizationFeedback = {
 				FeedbackTarget = {
-					ServiceSource = { Type = var5, ExternalId = p8 },
-					Source = { ContentType = 1, Value = p6 },
-					Translation = { ContentType = 1, Value = p7 }
+					ServiceSource = { Type = var1, ExternalId = p4 },
+					Source = { ContentType = 1, Value = p2 },
+					Translation = { ContentType = 1, Value = p3 }
 				},
 				Locale = if playersService.LocalPlayer.LocaleId then playersService.LocalPlayer.LocaleId:gsub("-", "_") else "",
-				ReasonType = p11,
-				Suggestion = { ContentType = 1, Value = p9 },
-				Comments = p10
+				ReasonType = p7,
+				Suggestion = { ContentType = 1, Value = p5 },
+				Comments = p6
 			}
 		}
 	end
@@ -80,18 +80,18 @@ return function(p5, p6, p7, p8, p9, p10, p11)
 		}
 	}
 	
-	return promise.new(function(p12, p13)
+	return promise.new(function(p8, p9)
 		-- upvalues: t_1 (ref), httpService (copy)
 		spawn(function()
-			-- upvalues: t_1 (copy), p12 (ref), p13 (ref), httpService (copy)
-			local _ = httpService:RequestInternal(t_1):Start(function(p14, p15)
-				-- upvalues: p12 (ref), p13 (ref)
-				if p14 then
-					p12()
+			-- upvalues: t_1 (copy), p8 (ref), p9 (ref), httpService (copy)
+			local _ = httpService:RequestInternal(t_1):Start(function(p10, p11)
+				-- upvalues: p8 (ref), p9 (ref)
+				if p10 then
+					p8()
 					
 					return
 				end
-				p13(tostring(p15.StatusMessage))
+				p9(tostring(p11.StatusMessage))
 			end)
 		end)
 	end)

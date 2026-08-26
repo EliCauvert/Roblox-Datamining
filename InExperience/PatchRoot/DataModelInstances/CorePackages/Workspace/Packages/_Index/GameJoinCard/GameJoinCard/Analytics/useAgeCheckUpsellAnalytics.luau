@@ -5,30 +5,30 @@ local gameJoinCardButtonAction = require(script.Parent.AnalyticsConstants).GameJ
 local useGameJoinCardAnalyticsModule = require(script.Parent.useGameJoinCardAnalytics)
 
 return {
-	useAgeCheckCompletionLogger = function(p0)
+	useAgeCheckCompletionLogger = function(p1)
 		-- upvalues: reactModule (ref), useGameJoinCardAnalyticsModule (ref)
-		local var2 = if p0 ~= "" then nil else p0
+		local var1 = if p1 ~= "" then nil else p1
 		
-		return reactModule.useCallback(function(p1)
-			-- upvalues: useGameJoinCardAnalyticsModule (copy), var2 (ref)
-			useGameJoinCardAnalyticsModule.logJoinCardAgeCheckVerificationOutcome({ universeId = var2, outcome = p1 })
-		end, { var2 })
+		return reactModule.useCallback(function(p2)
+			-- upvalues: useGameJoinCardAnalyticsModule (copy), var1 (ref)
+			useGameJoinCardAnalyticsModule.logJoinCardAgeCheckVerificationOutcome({ universeId = var1, outcome = p2 })
+		end, { var1 })
 	end,
-	useAgeCheckPressLogger = function(p2)
+	useAgeCheckPressLogger = function(p1)
 		-- upvalues: reactModule (ref), useGameJoinCardAnalyticsModule (ref), gameJoinCardButtonAction (ref), dependencyArray (ref)
-		local userId = p2.userId
-		local absolutePosition = p2.absolutePosition
-		local joinAgeCheckUpsellFlow = p2.joinAgeCheckUpsellFlow
-		local var3 = if p2.universeId ~= "" then nil else p2.universeId
+		local userId = p1.userId
+		local absolutePosition = p1.absolutePosition
+		local joinAgeCheckUpsellFlow = p1.joinAgeCheckUpsellFlow
+		local var1 = if p1.universeId ~= "" then nil else p1.universeId
 		
 		return reactModule.useCallback(function()
-			-- upvalues: useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), userId (ref), var3 (ref), absolutePosition (ref), joinAgeCheckUpsellFlow (ref)
+			-- upvalues: useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), userId (ref), var1 (ref), absolutePosition (ref), joinAgeCheckUpsellFlow (ref)
 			useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.AgeCheckUnlock, {
 				friendId = userId,
-				universeId = var3,
+				universeId = var1,
 				absolutePosition = absolutePosition
 			})
 			joinAgeCheckUpsellFlow()
-		end, dependencyArray(userId, var3, absolutePosition, joinAgeCheckUpsellFlow))
+		end, dependencyArray(userId, var1, absolutePosition, joinAgeCheckUpsellFlow))
 	end
 }

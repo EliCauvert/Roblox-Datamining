@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	return if p0 == nil then p1 or 0 elseif p1 == nil then p0 or 0 else 1 - (1 - p0) * (1 - p1)
+﻿return function(p1, p2)
+	return if p1 == nil then p2 or 0 elseif p2 == nil then p1 or 0 else 1 - (1 - p1) * (1 - p2)
 end

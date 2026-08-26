@@ -8,25 +8,25 @@
 	BrickColor.new("Brick yellow").Color
 }
 
-local function HashNameToColor(p0)
-	local var2 = 0
+local function HashNameToColor(p1)
+	local var1 = 0
 	
-	for i = 1, #p0 do
-		local byteValue = string.byte(string.sub(p0, i, i))
-		local var4 = #p0 - i + 1
+	for i = 1, #p1 do
+		local byteValue = string.byte(string.sub(p1, i, i))
+		local var2 = #p1 - i + 1
 		
-		if #p0 % 2 == 1 then
-			var4 -= 1
+		if #p1 % 2 == 1 then
+			var2 -= 1
 		end
-		if var4 % 4 >= 2 then
+		if var2 % 4 >= 2 then
 			byteValue = -byteValue
 		end
-		var2 += byteValue
+		var1 += byteValue
 	end
-	return var2
+	return var1
 end
 
-return function(p1)
+return function(p2)
 	-- upvalues: list (ref), HashNameToColor (ref)
-	return list[(HashNameToColor(p1) + 0) % #list + 1]
+	return list[(HashNameToColor(p2) + 0) % #list + 1]
 end

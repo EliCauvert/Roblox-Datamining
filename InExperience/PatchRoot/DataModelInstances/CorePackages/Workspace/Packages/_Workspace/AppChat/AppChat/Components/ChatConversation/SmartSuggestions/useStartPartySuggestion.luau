@@ -9,36 +9,36 @@ local squadButtonClickIntentionEnum = require(parent.Squads.Enums).SquadButtonCl
 local squadButtonSourceEnum = require(parent.Squads.Enums).SquadButtonSourceEnum
 local enumScreensModule = require(appChat.EnumScreens)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useNavigation (ref), useCurrentSquadId (ref), reactModule (ref), squadExternalContractContext (ref), eventNamesModule (ref), squadButtonSourceEnum (ref), squadButtonClickIntentionEnum (ref), enumScreensModule (ref)
-	local var4 = useNavigation()
-	local var5 = useCurrentSquadId()
-	local var6 = reactModule.useContext(squadExternalContractContext)
-	local fireSquadAnalytics = var6.fireSquadAnalytics
-	local var7 = var6.useParentChannelHasGroupUp(p0)
-	local squadLocation = var6.squadLocation
-	local var8 = p1 and var5 == nil
+	local var1 = useNavigation()
+	local var2 = useCurrentSquadId()
+	local var3 = reactModule.useContext(squadExternalContractContext)
+	local fireSquadAnalytics = var3.fireSquadAnalytics
+	local var4 = var3.useParentChannelHasGroupUp(p1)
+	local squadLocation = var3.squadLocation
+	local var5 = p2 and var2 == nil
 	
 	return {
-		canStartParty = var8,
-		startParty = reactModule.useCallback(function(p2)
-			-- upvalues: var8 (ref), fireSquadAnalytics (ref), eventNamesModule (copy), squadButtonSourceEnum (copy), squadLocation (ref), var7 (ref), squadButtonClickIntentionEnum (copy), var4 (ref), enumScreensModule (copy)
-			if var8 then
+		canStartParty = var5,
+		startParty = reactModule.useCallback(function(p3)
+			-- upvalues: var5 (ref), fireSquadAnalytics (ref), eventNamesModule (copy), squadButtonSourceEnum (copy), squadLocation (ref), var4 (ref), squadButtonClickIntentionEnum (copy), var1 (ref), enumScreensModule (copy)
+			if var5 then
 				fireSquadAnalytics(eventNamesModule.EnterSquadButtonPressed, {
-					conversationId = p2,
+					conversationId = p3,
 					squadButtonSource = squadButtonSourceEnum.ChatConversationSmartSuggestion,
 					squadLocation = squadLocation,
-					userIntention = if var7 then squadButtonClickIntentionEnum.Join else squadButtonClickIntentionEnum.Create
+					userIntention = if var4 then squadButtonClickIntentionEnum.Join else squadButtonClickIntentionEnum.Create
 				})
-				var4.navigate(enumScreensModule.SquadLobby, { conversationId = p2 })
+				var1.navigate(enumScreensModule.SquadLobby, { conversationId = p3 })
 				
 				return
 			end
 		end, {
-			var8,
+			var5,
 			fireSquadAnalytics,
-			var7,
 			var4,
+			var1,
 			squadLocation
 		})
 	}

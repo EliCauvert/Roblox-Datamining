@@ -11,15 +11,15 @@ local selectionEffectModule = require(parent.SelectionEffect)
 local wheelTextModule = require(parent.WheelText)
 local wheelBackground = roactModule.PureComponent:extend("WheelBackground")
 
-function wheelBackground.renderContent(p0, p1)
+function wheelBackground.renderContent(p1, p2)
 	-- upvalues: constantsModule (ref), roactModule (ref), colors (ref), selectionGradientModule (ref), selectionEffectModule (ref), wheelTextModule (ref)
-	local layout = constantsModule.Layouts[p0.props.layout]
+	local layout = constantsModule.Layouts[p1.props.layout]
 	
 	return roactModule.createElement("Folder", {}, {
-		BackgroundCircleOverlay = if p1 then roactModule.createElement("Frame", {
+		BackgroundCircleOverlay = if p2 then roactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = colors.Flint:Lerp(Color3.new(0, 0, 0), p1),
-			BackgroundTransparency = constantsModule.WheelBackgroundTransparency * p1
+			BackgroundColor3 = colors.Flint:Lerp(Color3.new(0, 0, 0), p2),
+			BackgroundTransparency = constantsModule.WheelBackgroundTransparency * p2
 		}, {
 			roactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
 		}) else roactModule.createElement("ImageLabel", {
@@ -60,14 +60,14 @@ function wheelBackground.renderContent(p0, p1)
 	})
 end
 
-function wheelBackground.render(p2)
+function wheelBackground.render(p1)
 	-- upvalues: withStyle (ref)
-	return withStyle(function(p3)
-		-- upvalues: p2 (ref)
-		return p2:renderContent(p3.Settings.PreferredTransparency)
+	return withStyle(function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderContent(p2.Settings.PreferredTransparency)
 	end)
 end
 
-return roactRoduxModule.connect(function(p4)
-	return { layout = p4.layout }
+return roactRoduxModule.connect(function(p1)
+	return { layout = p1.layout }
 end, nil)(wheelBackground)

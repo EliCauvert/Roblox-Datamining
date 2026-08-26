@@ -3,20 +3,20 @@ local createSignal = require(script:FindFirstAncestor("Moments").Parent.Signals)
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal(false)
-	local var2, var3 = createSignal(nil)
+	local var1, var2 = createSignal(false)
+	local var3, var4 = createSignal(nil)
 	
 	return {
-		getIsOpen = var0,
-		getContext = var2,
-		open = function(p0)
-			-- upvalues: var3 (ref), var1 (ref)
-			var3(p0)
-			var1(true)
+		getIsOpen = var1,
+		getContext = var3,
+		open = function(p1)
+			-- upvalues: var4 (ref), var2 (ref)
+			var4(p1)
+			var2(true)
 		end,
 		close = function()
-			-- upvalues: var1 (ref)
-			var1(false)
+			-- upvalues: var2 (ref)
+			var2(false)
 		end
 	}
 end

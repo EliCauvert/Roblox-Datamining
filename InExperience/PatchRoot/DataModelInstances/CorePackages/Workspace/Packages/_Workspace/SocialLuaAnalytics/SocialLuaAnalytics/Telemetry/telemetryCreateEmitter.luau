@@ -4,17 +4,17 @@ local socialLuaAnalyticsUseTelemetryServiceAsDefault = game:DefineFastFlag("Soci
 
 return function(value)
 	-- upvalues: socialLuaAnalyticsUseTelemetryServiceAsDefault (ref), fireTelemetryModule (ref)
-	local var2 = if value.shouldUseTelemetryService ~= nil then socialLuaAnalyticsUseTelemetryServiceAsDefault else value.shouldUseTelemetryService
+	local var1 = if value.shouldUseTelemetryService ~= nil then socialLuaAnalyticsUseTelemetryServiceAsDefault else value.shouldUseTelemetryService
 	
-	local function emitTelemetry(p0, p1)
-		-- upvalues: fireTelemetryModule (copy), value (ref), var2 (ref)
+	local function emitTelemetry(p1, p2)
+		-- upvalues: fireTelemetryModule (copy), value (ref), var1 (ref)
 		return fireTelemetryModule({
 			telemetryImpl = value.telemetryImpl,
-			eventList = { defaults = value.defaultTelemetryConfig, [p0.name] = p0 },
+			eventList = { defaults = value.defaultTelemetryConfig, [p1.name] = p1 },
 			loggerImpl = value.loggerImpl,
-			shouldUseTelemetryService = var2,
+			shouldUseTelemetryService = var1,
 			telemetryServiceImpl = value.telemetryServiceImpl
-		})(p0.name, p1, if value.getSharedInfo then value.getSharedInfo() else {}, p0.eventStreamCtx)
+		})(p1.name, p2, if value.getSharedInfo then value.getSharedInfo() else {}, p1.eventStreamCtx)
 	end
 	
 	return {

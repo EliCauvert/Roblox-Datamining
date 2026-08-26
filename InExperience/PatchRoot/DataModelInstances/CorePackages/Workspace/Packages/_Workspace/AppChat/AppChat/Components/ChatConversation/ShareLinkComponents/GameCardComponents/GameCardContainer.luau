@@ -40,12 +40,12 @@ local experienceService = require(parent.ExperienceService).ExperienceService
 local setGamePlaySession = require(parent.RobloxAppSessionization).SetGamePlaySession
 local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
 local httpRequestModule = require(parent.HttpRequest)
-local var19 = httpRequestModule.config({
-	requestFunction = function(p0, p1, p2)
+local var1 = httpRequestModule.config({
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: gameCardContainer (ref), httpRequestModule (ref)
-		gameCardContainer:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
+		gameCardContainer:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 		
-		return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
+		return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
 	maxRetryCount = if fFlagLuaAppDefaultHttpRetry then game:DefineFastInt("GameCardContainerHttpRetryCount", 4) else nil
 })
@@ -57,157 +57,157 @@ local t = {
 	universeId = nil,
 	conversationId = nil,
 	luaChatPlayTogetherEnabled = nil,
-	networkImpl = var19,
+	networkImpl = var1,
 	eventStream = eventStream.new(rbxAnalyticsService),
 	eventIngest = eventIngest.new(eventIngestService),
 	onDetailsOpened = function() end,
-	onPlayButtonActivated = function(p3)
+	onPlayButtonActivated = function(p1)
 		-- upvalues: setGamePlaySession (ref), sessionType (ref), reportAnEventModule (ref), cryoModule (ref), gameParams (ref), appChatShutdownBeforeLaunch (ref), experienceService (ref)
-		local placeId = p3.placeId
-		local senderUserId = p3.senderUserId
-		setGamePlaySession(p3.sessionService, sessionType.StructuralIdentifier.GamePlayFromChat, true)
-		reportAnEventModule(p3, "clickBtnFromLinkCardInChat", "touch")
+		local placeId = p1.placeId
+		local senderUserId = p1.senderUserId
+		setGamePlaySession(p1.sessionService, sessionType.StructuralIdentifier.GamePlayFromChat, true)
+		reportAnEventModule(p1, "clickBtnFromLinkCardInChat", "touch")
 		
 		if placeId then
-			local var24 = function(p4)
-				-- upvalues: p3 (write), cryoModule (copy), reportAnEventModule (copy)
-				p3 = cryoModule.Dictionary.join(p3, { joinAttemptId = p4 })
-				reportAnEventModule(p3, "gamePlayIntent", "PlayGameFromLinkCard")
+			local var2 = function(p2)
+				-- upvalues: p1 (write), cryoModule (copy), reportAnEventModule (copy)
+				p1 = cryoModule.Dictionary.join(p1, { joinAttemptId = p2 })
+				reportAnEventModule(p1, "gamePlayIntent", "PlayGameFromLinkCard")
 			end
 			
-			local var25 = gameParams.fromParams({ userId = senderUserId, placeId = placeId })
+			local var3 = gameParams.fromParams({ userId = senderUserId, placeId = placeId })
 			
 			if appChatShutdownBeforeLaunch then
 				game:Shutdown()
 			end
-			experienceService:LaunchExperience(var25, "PlayGameFromLinkCard", var24)
+			experienceService:LaunchExperience(var3, "PlayGameFromLinkCard", var2)
 		end
 	end,
-	openDetails = function(p5)
+	openDetails = function(p1)
 		-- upvalues: reportAnEventModule (ref)
-		local universeId = p5.universeId
-		local placeId = p5.placeId
-		reportAnEventModule(p5, "clickLinkCardInChat", "touch")
-		p5.onDetailsOpened()
-		p5.openGameDetailsPage(universeId, "LuaChatAssetCard")
-		local reportOpenGameDetailFromChat = p5.analytics and p5.analytics.reportOpenGameDetailFromChat
+		local universeId = p1.universeId
+		local placeId = p1.placeId
+		reportAnEventModule(p1, "clickLinkCardInChat", "touch")
+		p1.onDetailsOpened()
+		p1.openGameDetailsPage(universeId, "LuaChatAssetCard")
+		local reportOpenGameDetailFromChat = p1.analytics and p1.analytics.reportOpenGameDetailFromChat
 		
 		if reportOpenGameDetailFromChat then
-			reportOpenGameDetailFromChat(placeId, p5.conversationId, universeId, "GameDetailFromLinkCard")
+			reportOpenGameDetailFromChat(placeId, p1.conversationId, universeId, "GameDetailFromLinkCard")
 		end
 	end
 }
 
-local function _(p6, p7)
-	return p6.GameDetails[p7] or {}
+local function _(p1, p2)
+	return p1.GameDetails[p2] or {}
 end
 
-local _ = function(p8, p9)
-	return p8.PlayabilityStatus[p9] or {}
+local _ = function(p1, p2)
+	return p1.PlayabilityStatus[p2] or {}
 end
 
-function GameCardContainer(p10)
+function GameCardContainer(p1)
 	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), useCallback (ref), constructGameThumbnailUrlModule (ref), constantsModule (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), useDispatch (ref), apiFetchGameDetails (ref), apiFetchPlayabilityStatus (ref), dataHydrationModule (ref), signalsModule (ref), useMemo (ref), useSignalState (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useEffect (ref), chatConversationTelemetryEventsModule (ref), roundedVariantModule (ref), reactModule (ref), gameCardGroupableModule (ref), useIsInExperienceModule (ref), getFFlagAppChatHidePlayButtonsInExpModule (ref), withLocalization (ref)
-	local var27 = cryoModule.Dictionary.join(t, p10)
+	local var2 = cryoModule.Dictionary.join(t, p1)
 	
-	if not var27.universeId then
+	if not var2.universeId then
 		assert("universeId does not exist", "universeId does not exist")
 	end
-	local var28 = useSelector(useCallback(function(p11)
-		-- upvalues: var27 (ref)
-		return p11.GameDetails[var27.universeId] or {}
-	end, { var27.universeId }))
-	local var29 = useSelector(useCallback(function(p12)
-		-- upvalues: var27 (ref)
-		return p12.PlayabilityStatus[var27.universeId] or {}
-	end, { var27.universeId }))
-	local var30 = constructGameThumbnailUrlModule(var27.placeId, constantsModule.GameCard.THUMBNAIL_WIDTH, constantsModule.GameCard.THUMBNAIL_HEIGHT)
-	local universeId = `rbxthumb://type=GameIcon&id={var27.universeId}&w={150}&h={150}`
-	local var32 = useIsExternalNavigationAvailableModule({ enumScreensModule.GameDetail })
-	local placeId = var27.placeId or var28.rootPlaceId
-	local name = var28.name
-	local description = var28.description or ""
-	local price = var28.price or 0
-	local var36 = useDispatch()
+	local var3 = useSelector(useCallback(function(p2)
+		-- upvalues: var2 (ref)
+		return p2.GameDetails[var2.universeId] or {}
+	end, { var2.universeId }))
+	local var4 = useSelector(useCallback(function(p2)
+		-- upvalues: var2 (ref)
+		return p2.PlayabilityStatus[var2.universeId] or {}
+	end, { var2.universeId }))
+	local var5 = constructGameThumbnailUrlModule(var2.placeId, constantsModule.GameCard.THUMBNAIL_WIDTH, constantsModule.GameCard.THUMBNAIL_HEIGHT)
+	local universeId = `rbxthumb://type=GameIcon&id={var2.universeId}&w={150}&h={150}`
+	local var6 = useIsExternalNavigationAvailableModule({ enumScreensModule.GameDetail })
+	local placeId = var2.placeId or var3.rootPlaceId
+	local name = var3.name
+	local description = var3.description or ""
+	local price = var3.price or 0
+	local var7 = useDispatch()
 	
-	local var37 = function(p13, p14)
-		-- upvalues: var36 (ref), apiFetchGameDetails (copy), apiFetchPlayabilityStatus (copy)
-		var36(apiFetchGameDetails.Fetch(p13, { p14 }))
-		var36(apiFetchPlayabilityStatus.Fetch(p13, { p14 }))
+	local var8 = function(p2, p3)
+		-- upvalues: var7 (ref), apiFetchGameDetails (copy), apiFetchPlayabilityStatus (copy)
+		var7(apiFetchGameDetails.Fetch(p2, { p3 }))
+		var7(apiFetchPlayabilityStatus.Fetch(p2, { p3 }))
 	end
 	
 	local votesStore = dataHydrationModule.Game.getVotesStore(false)
-	local var39 = signalsModule.createSignal(nil)
+	local var9 = signalsModule.createSignal(nil)
 	local notReady = signalsModule.createSignal("NotReady")
-	local var41 = useMemo(function()
-		-- upvalues: var27 (ref), var39 (ref), notReady (ref), votesStore (ref)
-		return if var27.universeId then votesStore.getAndFetchVotes({ var27.universeId })[var27.universeId] or { data = var39, status = notReady } else { data = var39, status = notReady }
-	end, { votesStore, var27.universeId })
-	local var42 = useSignalState(var41.data)
-	local var43 = useSignalState(var41.status)
-	local var44 = useMemo(function()
-		-- upvalues: var42 (ref)
-		if var42 and var42.upVotes and var42.downVotes then
-			local var51 = var42.upVotes + var42.downVotes
+	local var10 = useMemo(function()
+		-- upvalues: var2 (ref), var9 (ref), notReady (ref), votesStore (ref)
+		return if var2.universeId then votesStore.getAndFetchVotes({ var2.universeId })[var2.universeId] or { data = var9, status = notReady } else { data = var9, status = notReady }
+	end, { votesStore, var2.universeId })
+	local var11 = useSignalState(var10.data)
+	local var12 = useSignalState(var10.status)
+	local var13 = useMemo(function()
+		-- upvalues: var11 (ref)
+		if var11 and var11.upVotes and var11.downVotes then
+			local var14 = var11.upVotes + var11.downVotes
 			
-			return if var51 > 0 then tostring(math.floor(var42.upVotes / var51 * 100)) .. "%" else "--"
+			return if var14 > 0 then tostring(math.floor(var11.upVotes / var14 * 100)) .. "%" else "--"
 		end
-	end, { var42 })
-	local var45 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
+	end, { var11 })
+	local var14 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
 	useEffect(function()
-		-- upvalues: var27 (ref), var37 (ref)
-		local universeId = var27.universeId
+		-- upvalues: var2 (ref), var8 (ref)
+		local universeId = var2.universeId
 		
 		if universeId then
-			var37(var27.networkImpl, universeId)
+			var8(var2.networkImpl, universeId)
 			
 			return
 		end
-	end, { var27.universeId, var27.networkImpl })
-	local var46 = useCallback(function()
-		-- upvalues: var45 (ref), chatConversationTelemetryEventsModule (copy), var27 (ref), placeId (ref)
-		var45.emit(chatConversationTelemetryEventsModule.GameCardThumbnailClicked, { universeId = var27.universeId, placeId = placeId })
-		var27:openDetails()
-	end, { var45, var27.openDetails, var27.universeId, placeId })
-	local var47 = useCallback(function()
-		-- upvalues: var45 (ref), chatConversationTelemetryEventsModule (copy), var27 (ref), placeId (ref)
-		var45.emit(chatConversationTelemetryEventsModule.GameCardPlayButtonClicked, { universeId = var27.universeId, placeId = placeId })
-		var27:onPlayButtonActivated()
+	end, { var2.universeId, var2.networkImpl })
+	local var15 = useCallback(function()
+		-- upvalues: var14 (ref), chatConversationTelemetryEventsModule (copy), var2 (ref), placeId (ref)
+		var14.emit(chatConversationTelemetryEventsModule.GameCardThumbnailClicked, { universeId = var2.universeId, placeId = placeId })
+		var2:openDetails()
+	end, { var14, var2.openDetails, var2.universeId, placeId })
+	local var16 = useCallback(function()
+		-- upvalues: var14 (ref), chatConversationTelemetryEventsModule (copy), var2 (ref), placeId (ref)
+		var14.emit(chatConversationTelemetryEventsModule.GameCardPlayButtonClicked, { universeId = var2.universeId, placeId = placeId })
+		var2:onPlayButtonActivated()
 	end, {
-		var45,
-		var27.onPlayButtonActivated,
-		var27.universeId,
+		var14,
+		var2.onPlayButtonActivated,
+		var2.universeId,
 		placeId
 	})
-	local var48 = useCallback(function()
-		-- upvalues: var45 (ref), chatConversationTelemetryEventsModule (copy), var27 (ref), placeId (ref)
-		var45.emit(chatConversationTelemetryEventsModule.GameCardMetadataClicked, { universeId = var27.universeId, placeId = placeId })
-		var27:openDetails()
-	end, { var45, var27.openDetails, var27.universeId, placeId })
+	local var17 = useCallback(function()
+		-- upvalues: var14 (ref), chatConversationTelemetryEventsModule (copy), var2 (ref), placeId (ref)
+		var14.emit(chatConversationTelemetryEventsModule.GameCardMetadataClicked, { universeId = var2.universeId, placeId = placeId })
+		var2:openDetails()
+	end, { var14, var2.openDetails, var2.universeId, placeId })
 	
-	local function renderCard(p15)
-		-- upvalues: roundedVariantModule (copy), var46 (ref), var47 (ref), var48 (ref), reactModule (copy), gameCardGroupableModule (copy)
+	local function renderCard(p2)
+		-- upvalues: roundedVariantModule (copy), var15 (ref), var16 (ref), var17 (ref), reactModule (copy), gameCardGroupableModule (copy)
 		return reactModule.createElement(gameCardGroupableModule, {
 			thumbnailAspectRatio = 1.777777777778,
-			gameName = p15.gameName,
-			gameDescription = p15.gameDescription,
-			gameThumbnail = p15.gameThumbnail,
-			gameRating = p15.gameRating,
-			gamePlayerCount = p15.gamePlayerCount,
-			thumbnailRoundedVariant = if p15.isStartOfGroup then roundedVariantModule.Top elseif p15.isIncoming then roundedVariantModule.TopRight else roundedVariantModule.TopLeft,
-			shouldShowPlayButton = if p15.isPlayButtonEnabled and p15.playabilityStatus then p15.playabilityStatus.isPlayable == true else false,
-			onPlayButtonActivated = if p15.onPlayButtonActivated then var47 else nil,
-			onThumbnailActivated = if p15.openDetails then var46 else nil,
-			onMetadataActivated = if p15.openDetails then var48 else nil,
-			isRepliedTo = p15.isRepliedTo,
-			isIncoming = p15.isIncoming,
-			isPending = p15.isPending,
-			isLoading = if p15.universeId then if p15.gameName then if p15.gameThumbnail then if p15.votesStatus ~= "NotReady" then not p15.gamePlayerCount else true else not p15.gameThumbnail else not p15.gameName else not p15.universeId,
-			LayoutOrder = p15.layoutOrder
+			gameName = p2.gameName,
+			gameDescription = p2.gameDescription,
+			gameThumbnail = p2.gameThumbnail,
+			gameRating = p2.gameRating,
+			gamePlayerCount = p2.gamePlayerCount,
+			thumbnailRoundedVariant = if p2.isStartOfGroup then roundedVariantModule.Top elseif p2.isIncoming then roundedVariantModule.TopRight else roundedVariantModule.TopLeft,
+			shouldShowPlayButton = if p2.isPlayButtonEnabled and p2.playabilityStatus then p2.playabilityStatus.isPlayable == true else false,
+			onPlayButtonActivated = if p2.onPlayButtonActivated then var16 else nil,
+			onThumbnailActivated = if p2.openDetails then var15 else nil,
+			onMetadataActivated = if p2.openDetails then var17 else nil,
+			isRepliedTo = p2.isRepliedTo,
+			isIncoming = p2.isIncoming,
+			isPending = p2.isPending,
+			isLoading = if p2.universeId then if p2.gameName then if p2.gameThumbnail then if p2.votesStatus ~= "NotReady" then not p2.gamePlayerCount else true else not p2.gameThumbnail else not p2.gameName else not p2.universeId,
+			LayoutOrder = p2.layoutOrder
 		})
 	end
 	
-	local var50 = if getFFlagAppChatHidePlayButtonsInExpModule() then if useIsInExperienceModule() then false else true else true
+	local var18 = if getFFlagAppChatHidePlayButtonsInExpModule() then if useIsInExperienceModule() then false else true else true
 	
 	return withLocalization({
 		purchaseGameText = "Feature.GameDetails.Heading.PurchaseGame",
@@ -215,22 +215,22 @@ function GameCardContainer(p10)
 		playText = "Common.VisitGame.Label.Play",
 		noDescriptionText = "Feature.Chat.Label.NoDescriptionYet"
 	})(function(_)
-		-- upvalues: cryoModule (copy), var27 (ref), var28 (ref), var29 (ref), universeId (ref), placeId (ref), name (ref), description (ref), price (ref), var50 (ref), var32 (ref), enumScreensModule (copy), var37 (ref), var30 (ref), var44 (ref), var43 (ref), renderCard (ref)
-		return renderCard(cryoModule.Dictionary.join(var27, {
-			details = var28,
-			playabilityStatus = var29,
+		-- upvalues: cryoModule (copy), var2 (ref), var3 (ref), var4 (ref), universeId (ref), placeId (ref), name (ref), description (ref), price (ref), var18 (ref), var6 (ref), enumScreensModule (copy), var8 (ref), var5 (ref), var13 (ref), var12 (ref), renderCard (ref)
+		return renderCard(cryoModule.Dictionary.join(var2, {
+			details = var3,
+			playabilityStatus = var4,
 			gameIcon = universeId,
 			placeId = placeId,
 			gameName = name,
 			gameDescription = description,
 			gamePrice = price,
-			isPlayButtonEnabled = var50,
-			viewDetailsEnabled = var32[enumScreensModule.GameDetail],
-			fetchGameData = var37,
-			gameThumbnail = var30,
-			gameRating = var44,
-			gamePlayerCount = var28.playing or 0,
-			votesStatus = var43
+			isPlayButtonEnabled = var18,
+			viewDetailsEnabled = var6[enumScreensModule.GameDetail],
+			fetchGameData = var8,
+			gameThumbnail = var5,
+			gameRating = var13,
+			gamePlayerCount = var3.playing or 0,
+			votesStatus = var12
 		}))
 	end)
 end

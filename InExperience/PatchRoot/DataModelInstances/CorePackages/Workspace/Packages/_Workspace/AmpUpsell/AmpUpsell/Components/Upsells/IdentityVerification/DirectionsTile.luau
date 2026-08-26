@@ -7,15 +7,15 @@ local images = UIBloxModule.App.ImageSet.Images
 local useStyle = UIBloxModule.Core.Style.useStyle
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), imageSetLabel (ref), iconSize (ref), images (ref), styledTextLabel (ref)
-	local var2 = useStyle()
-	local frameHeight = p0.frameHeight
+	local var1 = useStyle()
+	local frameHeight = p1.frameHeight
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, frameHeight),
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -29,8 +29,8 @@ return function(p0)
 			AnchorPoint = Vector2.new(0, 0.5),
 			Size = UDim2.new(0, iconSize.Large, 0, iconSize.Large),
 			ScaleType = Enum.ScaleType.Fit,
-			Image = images[p0.imagePath],
-			ImageTransparency = var2.Theme.SystemPrimaryDefault.Transparency
+			Image = images[p1.imagePath],
+			ImageTransparency = var1.Theme.SystemPrimaryDefault.Transparency
 		}),
 		TextFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -46,9 +46,9 @@ return function(p0)
 			Header = reactModule.createElement(styledTextLabel, {
 				lineHeight = 1,
 				layoutOrder = 1,
-				text = p0.headerText,
-				fontStyle = var2.Font.Header2,
-				colorStyle = var2.Theme.TextEmphasis,
+				text = p1.headerText,
+				fontStyle = var1.Font.Header2,
+				colorStyle = var1.Theme.TextEmphasis,
 				size = UDim2.new(1, 0, 0.5, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Left,
@@ -57,9 +57,9 @@ return function(p0)
 			Body = reactModule.createElement(styledTextLabel, {
 				lineHeight = 1,
 				layoutOrder = 2,
-				text = p0.descriptionText,
-				fontStyle = var2.Font.CaptionBody,
-				colorStyle = var2.Theme.TextDefault,
+				text = p1.descriptionText,
+				fontStyle = var1.Font.CaptionBody,
+				colorStyle = var1.Theme.TextDefault,
 				size = UDim2.new(1, 0, 0.5, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Left,

@@ -21,20 +21,20 @@ return {
 	layoutOrder = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.FullScreenFrame,
 	onChanged = (function()
 		-- upvalues: valueChangedSignal (ref), gameSettings (ref), guiService (ref)
-		local var5 = valueChangedSignal.new(gameSettings:InFullScreen())
-		var5:connect(function(p0)
+		local var1 = valueChangedSignal.new(gameSettings:InFullScreen())
+		var1:connect(function(p1)
 			-- upvalues: gameSettings (copy), guiService (copy)
-			if p0 == gameSettings:InFullScreen() then
+			if p1 == gameSettings:InFullScreen() then
 				return
 			end
 			guiService:ToggleFullscreen()
 		end, true)
 		gameSettings.FullscreenChanged:Connect(function(p1)
-			-- upvalues: var5 (ref)
-			var5:set(p1)
+			-- upvalues: var1 (ref)
+			var1:set(p1)
 		end)
 		
-		return var5
+		return var1
 	end)(),
 	availability = availabilitySignal.new(if utilsModule.getDeviceType() ~= utilsModule.DeviceTypes.Desktop then utilsModule.getDeviceType() == utilsModule.DeviceTypes.Unknown else true)
 }

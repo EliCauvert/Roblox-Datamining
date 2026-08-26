@@ -1,19 +1,19 @@
 ﻿local insert = table.insert
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: insert (ref)
 	local t = {}
-	p1 = p1 or 1
-	local var2 = p2 or #p0
+	p2 = p2 or 1
+	local var1 = p3 or #p1
 	
-	if p1 < 0 then
-		p1 = #p0 + p1
+	if p2 < 0 then
+		p2 = #p1 + p2
 	end
-	if var2 and var2 < 0 then
-		var2 = #p0 + var2
+	if var1 and var1 < 0 then
+		var1 = #p1 + var1
 	end
-	for i = p1, var2 do
-		insert(t, p0[i])
+	for i = p2, var1 do
+		insert(t, p1[i])
 	end
 	return t
 end

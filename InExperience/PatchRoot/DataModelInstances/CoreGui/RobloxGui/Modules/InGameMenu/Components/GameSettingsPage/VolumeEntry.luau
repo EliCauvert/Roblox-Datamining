@@ -28,16 +28,16 @@ volumeEntry.validateProps = t.strictInterface({
 	buttonRef = t.optional(t.table)
 })
 
-function volumeEntry.init(p0)
+function volumeEntry.init(p1)
 	-- upvalues: userGameSettingsService (ref)
 	function p0.onVolumeChanged()
-		-- upvalues: p0 (ref), userGameSettingsService (copy)
-		p0:setState({
+		-- upvalues: p1 (ref), userGameSettingsService (copy)
+		p1:setState({
 			volume = math.floor(userGameSettingsService.MasterVolume * 10 + 0.5)
 		})
 	end
 	
-	p0.onVolumeChanged()
+	p1.onVolumeChanged()
 end
 
 function volumeEntry.render(p1)

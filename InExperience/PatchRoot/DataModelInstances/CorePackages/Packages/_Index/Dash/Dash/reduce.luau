@@ -1,8 +1,8 @@
-﻿return function(p0, p1, p2)
-	local var0 = p2
+﻿return function(p1, p2, p3)
+	local var1 = p3
 	
-	for i, v in p0 do
-		var0 = p1(var0, v, i)
+	for i, v in p1 do
+		var1 = p2(var1, v, i)
 	end
-	return var0
+	return var1
 end

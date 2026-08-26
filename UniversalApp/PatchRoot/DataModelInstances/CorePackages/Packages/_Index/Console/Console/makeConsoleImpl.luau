@@ -10,9 +10,9 @@ return function()
 		return string.rep("  ", var1)
 	end
 	
-	function t.log(p0, ...)
+	function t.log(p1, ...)
 		-- upvalues: inspect (copy), var1 (write)
-		print(string.rep("  ", var1) .. (if typeof(p0) == "string" then string.format(p0, ...) else inspect(p0)))
+		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
 	end
 	
 	function t.debug(p1, ...)
@@ -20,30 +20,30 @@ return function()
 		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
 	end
 	
-	function t.info(p2, ...)
+	function t.info(p1, ...)
 		-- upvalues: inspect (copy), var1 (write)
-		print(string.rep("  ", var1) .. (if typeof(p2) == "string" then string.format(p2, ...) else inspect(p2)))
+		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
 	end
 	
-	function t.warn(p3, ...)
+	function t.warn(p1, ...)
 		-- upvalues: inspect (copy), var1 (write)
-		warn(string.rep("  ", var1) .. (if typeof(p3) == "string" then string.format(p3, ...) else inspect(p3)))
+		warn(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
 	end
 	
-	function t.error(p4, ...)
+	function t.error(p1, ...)
 		-- upvalues: inspect (copy), var1 (write)
-		warn(string.rep("  ", var1) .. (if typeof(p4) == "string" then string.format(p4, ...) else inspect(p4)))
+		warn(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
 	end
 	
-	function t.group(p5, ...)
+	function t.group(p1, ...)
 		-- upvalues: inspect (copy), var1 (write)
-		print(string.rep("  ", var1) .. (if typeof(p5) == "string" then string.format(p5, ...) else inspect(p5)))
+		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
 		var1 += 1
 	end
 	
-	function t.groupCollapsed(p6, ...)
+	function t.groupCollapsed(p1, ...)
 		-- upvalues: inspect (copy), var1 (write)
-		print(string.rep("  ", var1) .. (if typeof(p6) == "string" then string.format(p6, ...) else inspect(p6)))
+		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
 		var1 += 1
 	end
 	

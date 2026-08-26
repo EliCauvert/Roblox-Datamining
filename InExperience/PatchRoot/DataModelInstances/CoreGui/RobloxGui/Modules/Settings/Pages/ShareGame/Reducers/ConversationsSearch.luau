@@ -5,20 +5,20 @@ local setSearchAreaActiveModule = require(shareGame.Actions.SetSearchAreaActive)
 local setSearchTextModule = require(shareGame.Actions.SetSearchText)
 local t = { SearchAreaActive = false, SearchText = "" }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref), setSearchAreaActiveModule (ref), immutable (ref), setSearchTextModule (ref), closePageModule (ref)
-	p0 = p0 or t
+	p1 = p1 or t
 	
-	if p1.type == setSearchAreaActiveModule.name then
-		p0 = immutable.Set(p0, "SearchAreaActive", p1.isActive)
+	if p2.type == setSearchAreaActiveModule.name then
+		p1 = immutable.Set(p1, "SearchAreaActive", p2.isActive)
 		
-		return p0
-	elseif p1.type == setSearchTextModule.name then
-		p0 = immutable.Set(p0, "SearchText", p1.searchText)
+		return p1
+	elseif p2.type == setSearchTextModule.name then
+		p1 = immutable.Set(p1, "SearchText", p2.searchText)
 		
-		return p0
-	elseif p1.type == closePageModule.name then
-		p0 = t
+		return p1
+	elseif p2.type == closePageModule.name then
+		p1 = t
 	end
-	return p0
+	return p1
 end

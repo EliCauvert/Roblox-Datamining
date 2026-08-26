@@ -16,8 +16,8 @@ local t = {
 	CompleteTransition = var6
 }
 setmetatable(t, {
-	__index = function(_, p0)
-		error(("%q is not a valid member of StackActions"):format(tostring(p0)), 2)
+	__index = function(_, p1)
+		error(("%q is not a valid member of StackActions"):format(tostring(p1)), 2)
 	end
 })
 
@@ -28,18 +28,18 @@ function t.pop(p1)
 	return if p1 then object.assign(t, p1) else t
 end
 
-function t.popToTop(p2)
+function t.popToTop(p1)
 	-- upvalues: var2 (ref), object (ref)
 	local t = { type = var2 }
 	
-	return if p2 then object.assign(t, p2) else t
+	return if p1 then object.assign(t, p1) else t
 end
 
-function t.push(p3)
+function t.push(p1)
 	-- upvalues: var3 (ref), object (ref)
 	local t = { type = var3 }
 	
-	return if p3 then object.assign(t, p3) else t
+	return if p1 then object.assign(t, p1) else t
 end
 
 function t.reset(value)
@@ -49,18 +49,18 @@ function t.reset(value)
 	return if value then object.assign(t, value) else t
 end
 
-function t.replace(p4)
+function t.replace(p1)
 	-- upvalues: var5 (ref), object (ref)
 	local t = { preserveFocus = true, type = var5 }
 	
-	return if p4 then object.assign(t, p4) else t
+	return if p1 then object.assign(t, p1) else t
 end
 
-function t.completeTransition(p5)
+function t.completeTransition(p1)
 	-- upvalues: var6 (ref), object (ref)
 	local t = { preserveFocus = true, type = var6 }
 	
-	return if p5 then object.assign(t, p5) else t
+	return if p1 then object.assign(t, p1) else t
 end
 
 return t

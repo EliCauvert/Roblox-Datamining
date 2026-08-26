@@ -8,24 +8,24 @@ local argCheckModule = require(parent.ArgCheck)
 local roactNavigationModule = require(parent.RoactNavigation)
 local RNAdapterThunkModule = require(navigationRodux.Thunks.RNAdapterThunk)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: argCheckModule (ref), fFlagSignalsNavP2NavigationPrimitives (ref), var1 (ref), RNAdapterThunkModule (ref), setNavigationLockedModule (ref), roactNavigationModule (ref), cryoModule (ref)
-	argCheckModule.isType(p0, "table", "page")
-	argCheckModule.isTypeOrNil(p1, "boolean", "bypassNavigationLock")
+	argCheckModule.isType(p1, "table", "page")
+	argCheckModule.isTypeOrNil(p2, "boolean", "bypassNavigationLock")
 	
 	return if fFlagSignalsNavP2NavigationPrimitives then function()
-		-- upvalues: var1 (copy), p0 (ref), p1 (ref)
-		var1.sideways(var1.fromLegacyPage(p0), p1)
-	end else RNAdapterThunkModule.new("NavigateSideways", function(p2, p3)
-		-- upvalues: p1 (ref), setNavigationLockedModule (copy), roactNavigationModule (copy), p0 (ref), cryoModule (copy)
-		if p2:getState().Navigation.lockNavigationActions and not p1 then
+		-- upvalues: var1 (copy), p1 (ref), p2 (ref)
+		var1.sideways(var1.fromLegacyPage(p1), p2)
+	end else RNAdapterThunkModule.new("NavigateSideways", function(p3, p4)
+		-- upvalues: p2 (ref), setNavigationLockedModule (copy), roactNavigationModule (copy), p1 (ref), cryoModule (copy)
+		if p3:getState().Navigation.lockNavigationActions and not p2 then
 			return
 		end
-		p2:dispatch(setNavigationLockedModule(true))
-		p3(roactNavigationModule.Actions.navigate({
-			routeName = p0.name,
-			key = p0.key,
-			params = cryoModule.Dictionary.join(p0, { name = cryoModule.None, rnKey = cryoModule.None })
+		p3:dispatch(setNavigationLockedModule(true))
+		p4(roactNavigationModule.Actions.navigate({
+			routeName = p1.name,
+			key = p1.key,
+			params = cryoModule.Dictionary.join(p1, { name = cryoModule.None, rnKey = cryoModule.None })
 		}))
 	end)
 end

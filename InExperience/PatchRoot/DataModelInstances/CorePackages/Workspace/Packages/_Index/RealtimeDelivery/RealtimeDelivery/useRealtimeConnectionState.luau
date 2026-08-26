@@ -3,20 +3,20 @@ local useRobloxEventReceiverModule = require(script.Parent.useRobloxEventReceive
 
 return function()
 	-- upvalues: useRobloxEventReceiverModule (ref), reactModule (ref)
-	local var2 = useRobloxEventReceiverModule()
-	local var3, var4 = reactModule.useState(Enum.ConnectionState.Connected)
+	local var1 = useRobloxEventReceiverModule()
+	local var2, var3 = reactModule.useState(Enum.ConnectionState.Connected)
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var4 (ref)
-		local signalR = var2:observeEvent("signalR", function(p0)
-			-- upvalues: var4 (copy)
-			var4(p0)
+		-- upvalues: var1 (ref), var3 (ref)
+		local signalR = var1:observeEvent("signalR", function(p1)
+			-- upvalues: var3 (copy)
+			var3(p1)
 		end)
 		
 		return function()
 			-- upvalues: signalR (ref)
 			signalR:disconnect()
 		end
-	end, { var2 })
+	end, { var1 })
 	
-	return var3
+	return var2
 end

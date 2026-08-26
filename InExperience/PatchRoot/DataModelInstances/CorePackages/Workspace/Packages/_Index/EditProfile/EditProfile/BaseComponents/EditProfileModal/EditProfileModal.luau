@@ -5,22 +5,22 @@ local dialog = foundationModule.Dialog
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), dialog (ref), buttonVariant (ref)
-	local var2 = useLocalization({ title = p0.titleKey, saveButtonText = p0.saveKey })
+	local var1 = useLocalization({ title = p1.titleKey, saveButtonText = p1.saveKey })
 	
-	return reactModule.createElement(dialog.Root, { onClose = p0.onClose }, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var2.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, p0.component),
+	return reactModule.createElement(dialog.Root, { onClose = p1.onClose }, {
+		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
+		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, p1.component),
 		Actions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var2.saveButtonText,
+					text = var1.saveButtonText,
 					variant = buttonVariant.Emphasis,
-					isLoading = p0.isLoading,
-					isDisabled = p0.isDisabled,
-					onActivated = p0.onSave
+					isLoading = p1.isLoading,
+					isDisabled = p1.isDisabled,
+					onActivated = p1.onSave
 				}
 			}
 		})

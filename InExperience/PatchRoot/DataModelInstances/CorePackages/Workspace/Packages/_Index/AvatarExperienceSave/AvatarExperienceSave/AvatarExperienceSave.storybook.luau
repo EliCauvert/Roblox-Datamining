@@ -17,10 +17,10 @@ return {
 	name = "AvatarExperienceSave",
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: t (ref), reactModule (ref), foundationProvider (ref), t_2 (ref), t_1 (ref)
-		return function(p1)
-			-- upvalues: t (copy), reactModule (copy), foundationProvider (copy), t_2 (copy), t_1 (copy), p0 (ref)
+		return function(p2)
+			-- upvalues: t (copy), reactModule (copy), foundationProvider (copy), t_2 (copy), t_1 (copy), p1 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -35,9 +35,9 @@ return {
 				FoundationProvider = reactModule.createElement(foundationProvider, {
 					DONOTUSE_colorUpdate = true,
 					styleTable = t_2,
-					colorMode = t[p1.theme],
-					device = t_1[p1.platform]
-				}, { Child = reactModule.createElement(p0, p1) })
+					colorMode = t[p2.theme],
+					device = t_1[p2.platform]
+				}, { Child = reactModule.createElement(p1, p2) })
 			})
 		end
 	end

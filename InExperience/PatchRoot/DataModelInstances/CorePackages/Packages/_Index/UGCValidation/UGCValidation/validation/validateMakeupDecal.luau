@@ -10,45 +10,45 @@ local validateMakeupDecalUVZonesModule = require(parent.validation.validateMakeu
 local getFFlagUGCValidateDecalTextureLimitsModule = require(parent.flags.getFFlagUGCValidateDecalTextureLimits)
 local validateTextureSizeModule = require(parent.validation.validateTextureSize)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: failureReasonsAccumulatorModule (ref), parseContentIdsModule (ref), constantsModule (ref), getEditableImageFromContextModule (ref), analyticsModule (ref), getFFlagUGCValidateDecalTextureLimitsModule (ref), constantsInterfaceModule (ref), validateTextureSizeModule (ref), validateMakeupDecalUVZonesModule (ref)
 	local currentTime = tick()
-	local assetTypeEnum = p1.assetTypeEnum
-	local wrapTextureTransfer = p0:FindFirstChildOfClass("WrapTextureTransfer")
-	assert(wrapTextureTransfer ~= nil, string.format("WrapTextureTransfer child not found for %s", p0.Name))
-	local var11 = failureReasonsAccumulatorModule.new()
-	local var12 = nil
+	local assetTypeEnum = p2.assetTypeEnum
+	local wrapTextureTransfer = p1:FindFirstChildOfClass("WrapTextureTransfer")
+	assert(wrapTextureTransfer ~= nil, string.format("WrapTextureTransfer child not found for %s", p1.Name))
+	local var1 = failureReasonsAccumulatorModule.new()
+	local var2 = nil
 	
-	for i, v in parseContentIdsModule.parse(p0, constantsModule.TEXTURE_CONTENT_ID_FIELDS, p1) do
+	for i, v in parseContentIdsModule.parse(p1, constantsModule.TEXTURE_CONTENT_ID_FIELDS, p2) do
 		local t = {
 			fullName = v.instance:GetFullName() .. "." .. v.fieldName,
 			fieldName = v.fieldName,
 			contentId = v.instance[v.fieldName]
 		}
-		local var14, var15 = getEditableImageFromContextModule(v.instance, v.fieldName, p1)
+		local var3, var4 = getEditableImageFromContextModule(v.instance, v.fieldName, p2)
 		
-		if not var14 then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateMakeupDecal_FailedToLoadTexture, nil, p1)
-			var11:updateReasons(false, {
-				string.format("Failed to load %s for Decal %s. Make sure TextureContent exists and is valid and try again.", t.fieldName, p0.Name)
+		if not var3 then
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateMakeupDecal_FailedToLoadTexture, nil, p2)
+			var1:updateReasons(false, {
+				string.format("Failed to load %s for Decal %s. Make sure TextureContent exists and is valid and try again.", t.fieldName, p1.Name)
 			})
 		end
-		t.editableImage = var15
+		t.editableImage = var4
 		
 		if v.fieldName == "ColorMap" then
-			var12 = var15
+			var2 = var4
 		end
-		var11:updateReasons(validateTextureSizeModule(t, nil, p1, if getFFlagUGCValidateDecalTextureLimitsModule() and assetTypeEnum then constantsInterfaceModule.getTextureLimit(assetTypeEnum, v.instance, v.fieldName) else nil))
+		var1:updateReasons(validateTextureSizeModule(t, nil, p2, if getFFlagUGCValidateDecalTextureLimitsModule() and assetTypeEnum then constantsInterfaceModule.getTextureLimit(assetTypeEnum, v.instance, v.fieldName) else nil))
 	end
-	if var12 then
-		var11:updateReasons(validateMakeupDecalUVZonesModule(p0, var12, wrapTextureTransfer, constantsModule.MAKEUP_INFO.AssetUVBounds[assetTypeEnum], p1))
-		analyticsModule.recordScriptTime(script.Name, currentTime, p1)
+	if var2 then
+		var1:updateReasons(validateMakeupDecalUVZonesModule(p1, var2, wrapTextureTransfer, constantsModule.MAKEUP_INFO.AssetUVBounds[assetTypeEnum], p2))
+		analyticsModule.recordScriptTime(script.Name, currentTime, p2)
 		
-		return var11:getFinalResults()
+		return var1:getFinalResults()
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateMakeupDecal_NoColorMap, nil, p1)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validateMakeupDecal_NoColorMap, nil, p2)
 	
 	return false, {
-		string.format("No ColorMap found for Decal %s. Makeup Decals are required to have a valid ColorMap.", p0.Name)
+		string.format("No ColorMap found for Decal %s. Makeup Decals are required to have a valid ColorMap.", p1.Name)
 	}
 end

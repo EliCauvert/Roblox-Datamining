@@ -5,12 +5,12 @@ local dictionary = require(parent.llama).Dictionary
 local actions = expChat.Actions
 
 return roduxModule.createReducer({ preferredTransparency = 1 }, {
-	[require(actions.ClientSettingsLoaded).name] = function(p0, p1)
+	[require(actions.ClientSettingsLoaded).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, p1.value)
+		return dictionary.join(p1, p2.value)
 	end,
-	[require(actions.ClientSettingsChanged).name] = function(p2, p3)
+	[require(actions.ClientSettingsChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p2, { [p3.property] = p3.value })
+		return dictionary.join(p1, { [p2.property] = p2.value })
 	end
 })

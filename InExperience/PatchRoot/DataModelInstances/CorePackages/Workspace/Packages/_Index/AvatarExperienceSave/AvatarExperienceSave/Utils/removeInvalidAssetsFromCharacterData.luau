@@ -2,13 +2,13 @@
 local tutilsModule = require(avatarExperienceSave.Parent.tutils)
 local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: tutilsModule (ref)
-	local var2 = false
+	local var1 = false
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		if value.equipped.EquippedAssets[v] and value.equipped.EquippedAssets[v][i] then
-			var2 = true
+			var1 = true
 			value.equipped.EquippedAssets[v][i] = nil
 			
 			if tutilsModule.fieldCount(value.equipped.EquippedAssets[v]) == 0 then
@@ -16,5 +16,5 @@ return function(value, p0)
 			end
 		end
 	end
-	return value, var2
+	return value, var1
 end

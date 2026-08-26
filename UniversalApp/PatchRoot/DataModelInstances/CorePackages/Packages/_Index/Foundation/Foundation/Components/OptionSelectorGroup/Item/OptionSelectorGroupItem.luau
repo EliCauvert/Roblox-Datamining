@@ -27,17 +27,17 @@ local orientationModule = require(foundation.Enums.Orientation)
 local useOptionSelectorGroupModule = require(script.Parent.Parent.useOptionSelectorGroup)
 
 local function _(p1, p2)
-	return p2:map(function(p1)
-		-- upvalues: p1 (ref)
-		return if p1 == nil then p1 else p1 + (1 - p1) * p1
+	return p2:map(function(p3)
+		-- upvalues: p3 (ref)
+		return if p3 == nil then p3 else p3 + (1 - p3) * p3
 	end)
 end
 
 local function getTextStyle(p1, p2, p3)
 	-- upvalues: reactModule (ref)
-	return reactModule.joinBindings({ p1, p2 }):map(function(p1)
+	return reactModule.joinBindings({ p1, p2 }):map(function(p4)
 		-- upvalues: p3 (ref)
-		return { Color3 = p3, Transparency = p1[2] }
+		return { Color3 = p3, Transparency = p4[2] }
 	end)
 end
 
@@ -51,9 +51,9 @@ local function renderIcon(p1)
 		return reactModule.createElement(imageModule, {
 			Image = p1.icon,
 			Size = UDim2.fromOffset(iconExtent, iconExtent),
-			imageStyle = p1.transparency:map(function(p1)
-				-- upvalues: p1 (ref)
-				return { Color3 = p1.contentColor, Transparency = p1 }
+			imageStyle = p1.transparency:map(function(p2)
+				-- upvalues: p2 (ref)
+				return { Color3 = p2.contentColor, Transparency = p2 }
 			end),
 			LayoutOrder = p1.layoutOrder,
 			testId = `{p1.testId}--icon`
@@ -63,9 +63,9 @@ local function renderIcon(p1)
 	local t = {
 		name = var1.name,
 		size = p1.iconSize,
-		style = p1.transparency:map(function(p1)
-			-- upvalues: p1 (ref)
-			return { Color3 = p1.contentColor, Transparency = p1 }
+		style = p1.transparency:map(function(p2)
+			-- upvalues: p2 (ref)
+			return { Color3 = p2.contentColor, Transparency = p2 }
 		end),
 		LayoutOrder = p1.layoutOrder,
 		testId = `{p1.testId}--icon`
@@ -185,9 +185,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		local t_2 = {}
 		local t_3 = { Color = var13.Color3 }
 		local transparency = var13.Transparency
-		t_3.Transparency = var15.transparency:map(function(p1)
+		t_3.Transparency = var15.transparency:map(function(p3)
 			-- upvalues: transparency (ref)
-			return if transparency == nil then p1 else transparency + (1 - transparency) * p1
+			return if transparency == nil then p3 else transparency + (1 - transparency) * p3
 		end)
 		t_2.stroke = t_3
 		t_2.Size = var9
@@ -223,9 +223,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local t_1 = {}
 	local t_2 = { Color = var13.Color3 }
 	local transparency = var13.Transparency
-	t_2.Transparency = var15.transparency:map(function(p1)
+	t_2.Transparency = var15.transparency:map(function(p3)
 		-- upvalues: transparency (ref)
-		return if transparency == nil then p1 else transparency + (1 - transparency) * p1
+		return if transparency == nil then p3 else transparency + (1 - transparency) * p3
 	end)
 	t_1.stroke = t_2
 	t_1.Size = var9
@@ -252,9 +252,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					LayoutOrder = 0,
 					name = var1.icon,
 					size = var11.icon.size,
-					style = var15.transparency:map(function(p1)
+					style = var15.transparency:map(function(p3)
 						-- upvalues: color3 (ref)
-						return { Color3 = color3, Transparency = p1 }
+						return { Color3 = color3, Transparency = p3 }
 					end),
 					testId = `{var1.testId}--icon`
 				}) else nil,
@@ -264,9 +264,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					name = "check-large",
 					LayoutOrder = 3,
 					size = var11.icon.size,
-					style = var15.transparency:map(function(p1)
+					style = var15.transparency:map(function(p3)
 						-- upvalues: color3 (ref), var3 (ref)
-						return { Color3 = color3, Transparency = if var3 then p1 else 1 }
+						return { Color3 = color3, Transparency = if var3 then p3 else 1 }
 					end),
 					testId = if var3 then `{var1.testId}--checkmark-selected` else `{var25.testId}--checkmark-unselected`
 				})

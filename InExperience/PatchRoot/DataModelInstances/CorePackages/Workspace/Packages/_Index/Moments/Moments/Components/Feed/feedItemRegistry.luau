@@ -3,9 +3,9 @@ local momentModule = require(script.Parent.Items.Moment)
 local endStateModule = require(script.Parent.Items.EndState)
 local t = {}
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref)
-	for i, v in p0 do
+	for i, v in p1 do
 		t[v.kind] = v
 	end
 end

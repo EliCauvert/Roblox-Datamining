@@ -6,8 +6,8 @@ return {
 	Events = {
 		ModalRendered = modalTelemetryModule.Events.modalRenderedWithSequence({
 			modalSequence = modalTelemetryModule.Enums.ModalSequence.ConversationOverlay,
-			counterFormat = function(p0, _)
-				return { modalVariant = p0.modalVariant }
+			counterFormat = function(p1, _)
+				return { modalVariant = p1.modalVariant }
 			end
 		}),
 		ModalAction = modalTelemetryModule.Events.modalActionWithSequence({
@@ -18,11 +18,11 @@ return {
 		}),
 		ModalActionResult = modalTelemetryModule.Events.modalActionResultWithSequence({
 			modalSequence = modalTelemetryModule.Enums.ModalSequence.ConversationOverlay,
-			counterFormat = function(p2, _)
+			counterFormat = function(p1, _)
 				return {
-					modalVariant = p2.modalVariant,
-					action = p2.action,
-					actionResult = p2.actionResult
+					modalVariant = p1.modalVariant,
+					action = p1.action,
+					actionResult = p1.actionResult
 				}
 			end
 		})

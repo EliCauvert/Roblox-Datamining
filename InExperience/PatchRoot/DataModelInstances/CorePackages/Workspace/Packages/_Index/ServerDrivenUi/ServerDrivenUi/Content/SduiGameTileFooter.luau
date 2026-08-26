@@ -10,13 +10,13 @@ local sduiTileFooterModule = require(serverDrivenUi.Content.SduiTileFooter)
 local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
 local fFlagLuaAppFixInlineSignalsReactPattern = require(parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: sduiInGameFriendsDataModule (ref), fFlagLuaAppFixInlineSignalsReactPattern (ref), reactModule (ref), signalsReactModule (ref), sduiTileFooterModule (ref), sduiGameTileActiveFriendsFooterModule (ref), images (ref), abbreviateCount (ref)
 	local _ = nil
 	local getInGameFriendsByGame = sduiInGameFriendsDataModule.getInGameFriendsByGame
-	local var6 = if fFlagLuaAppFixInlineSignalsReactPattern then signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
-		-- upvalues: getInGameFriendsByGame (ref), p0 (ref)
-		local universeId = getInGameFriendsByGame(p2)[p0.universeId]
+	local var1 = if fFlagLuaAppFixInlineSignalsReactPattern then signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
+		-- upvalues: getInGameFriendsByGame (ref), p1 (ref)
+		local universeId = getInGameFriendsByGame(p2)[p1.universeId]
 		
 		if universeId then
 			for i in universeId do
@@ -24,9 +24,9 @@ return reactModule.memo(function(p0)
 			end
 		end
 		return false
-	end, { getInGameFriendsByGame, p0.universeId })) else signalsReactModule.useSignalState(function(p1)
-		-- upvalues: getInGameFriendsByGame (ref), p0 (ref)
-		local universeId = getInGameFriendsByGame(p1)[p0.universeId]
+	end, { getInGameFriendsByGame, p1.universeId })) else signalsReactModule.useSignalState(function(p3)
+		-- upvalues: getInGameFriendsByGame (ref), p1 (ref)
+		local universeId = getInGameFriendsByGame(p3)[p1.universeId]
 		
 		if universeId then
 			for i in universeId do
@@ -36,40 +36,40 @@ return reactModule.memo(function(p0)
 		return false
 	end)
 	
-	if (p0.isSelected or p0.isHovered) and (p0.ageRatingText and p0.ageRatingText ~= "") then
+	if (p1.isSelected or p1.isHovered) and (p1.ageRatingText and p1.ageRatingText ~= "") then
 		return reactModule.createElement(sduiTileFooterModule, {
 			testId = "--sdui-game-tile-footer-age-rating",
-			leftText = p0.ageRatingText,
-			analyticsContext = p0.analyticsContext
+			leftText = p1.ageRatingText,
+			analyticsContext = p1.analyticsContext
 		})
-	elseif var6 then
+	elseif var1 then
 		return reactModule.createElement(sduiGameTileActiveFriendsFooterModule, {
 			testId = "--sdui-game-tile-footer-active-friends",
 			hideBorder = true,
-			placeId = p0.placeId,
-			universeId = p0.universeId,
-			sduiContext = p0.sduiContext,
-			analyticsContext = p0.analyticsContext
+			placeId = p1.placeId,
+			universeId = p1.universeId,
+			sduiContext = p1.sduiContext,
+			analyticsContext = p1.analyticsContext
 		})
-	elseif not p0.ratingText or p0.ratingText == "" then
-		return p0.footerComponent
+	elseif not p1.ratingText or p1.ratingText == "" then
+		return p1.footerComponent
 	end
-	local sduiContext = p0.sduiContext
-	local ratingText = p0.ratingText
-	local var7 = if p0.ratingText then images["icons/status/games/rating_small"] else nil
-	local var8 = nil
-	local var9 = nil
+	local sduiContext = p1.sduiContext
+	local ratingText = p1.ratingText
+	local var2 = if p1.ratingText then images["icons/status/games/rating_small"] else nil
+	local var3 = nil
+	local var4 = nil
 	
-	if p0.playerCount ~= nil then
-		var9 = if p0.playerCount == -1 then "--" else abbreviateCount(p0.playerCount, sduiContext.dependencies.localization:GetLocale())
-		var8 = images["icons/status/games/people-playing_small"]
+	if p1.playerCount ~= nil then
+		var4 = if p1.playerCount == -1 then "--" else abbreviateCount(p1.playerCount, sduiContext.dependencies.localization:GetLocale())
+		var3 = images["icons/status/games/people-playing_small"]
 	end
 	return reactModule.createElement(sduiTileFooterModule, {
 		testId = "--sdui-game-tile-footer-rating",
-		sduiContext = p0.sduiContext,
+		sduiContext = p1.sduiContext,
 		leftText = ratingText,
-		leftIcon = var7,
-		rightText = var9,
-		rightIcon = var8
+		leftIcon = var2,
+		rightText = var4,
+		rightIcon = var3
 	})
 end)

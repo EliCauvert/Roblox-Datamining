@@ -1,10 +1,10 @@
 ﻿local utilModule = require(script.Parent:WaitForChild("Util"))
 
-function ProcessMessage(p0, p1, _)
-	if string.sub(p0, 1, 4):lower() ~= "/cls" and string.sub(p0, 1, 6):lower() ~= "/clear" then
+function ProcessMessage(p1, p2, _)
+	if string.sub(p1, 1, 4):lower() ~= "/cls" and string.sub(p1, 1, 6):lower() ~= "/clear" then
 		return false
 	end
-	local currentChannel = p1:GetCurrentChannel()
+	local currentChannel = p2:GetCurrentChannel()
 	
 	if currentChannel then
 		currentChannel:ClearMessageLog()

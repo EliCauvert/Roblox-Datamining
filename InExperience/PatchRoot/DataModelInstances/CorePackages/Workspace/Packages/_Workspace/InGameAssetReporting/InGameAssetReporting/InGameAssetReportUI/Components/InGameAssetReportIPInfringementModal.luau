@@ -13,57 +13,57 @@ local t = { stiffness = 400, damping = 40, mass = 1 }
 
 return function(value)
 	-- upvalues: reactModule (ref), useLocalization (ref), reactOtterModule (ref), t (ref), view (ref), text (ref), interactiveAlert (ref), buttonType (ref)
-	local var6, var7 = reactModule.useState(true)
-	local var8 = useLocalization({
+	local var1, var2 = reactModule.useState(true)
+	local var3 = useLocalization({
 		yourReportCode = "Feature.ReportAbuse.Label.YourReportCode",
 		ipInfringementModalText = "Feature.ReportAbuse.Description.IpInfringementReportModal",
 		reportCompleteClose = "Feature.ReportAbuse.Action.Close",
 		thankYouIpInfringementReport = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 	})
-	local var9, var10 = reactOtterModule.useAnimatedBinding(1, function()
-		-- upvalues: var6 (ref), value (ref)
-		if not var6 then
+	local var4, var5 = reactOtterModule.useAnimatedBinding(1, function()
+		-- upvalues: var1 (ref), value (ref)
+		if not var1 then
 			value.onClose()
 		end
 	end)
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var6 (ref)
-		return if var6 then 0 else 1
-	end, { var6 })
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref)
+		return if var1 then 0 else 1
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), reactOtterModule (copy), var11 (ref), t (copy)
-		var10(reactOtterModule.spring(var11, t))
-	end, { var11 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref)
-		var7(false)
-	end, { var7 })
+		-- upvalues: var5 (ref), reactOtterModule (copy), var6 (ref), t (copy)
+		var5(reactOtterModule.spring(var6, t))
+	end, { var6 })
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref)
+		var2(false)
+	end, { var2 })
 	
 	return reactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		BackgroundTransparency = var9:map(function(p0)
-			return p0 + 0.3
+		BackgroundTransparency = var4:map(function(p1)
+			return p1 + 0.3
 		end),
 		BackgroundColor3 = Color3.fromHex("#000000"),
 		Size = UDim2.new(1, 0, 1, 0),
 		Text = "",
 		Position = UDim2.fromScale(0.5, 0.5),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		[reactModule.Event.Activated] = var12,
+		[reactModule.Event.Activated] = var7,
 		ZIndex = 10
 	}, {
 		Alert = reactModule.createElement(interactiveAlert, {
 			richText = true,
 			screenSize = value.screenSize,
-			title = var8.thankYouIpInfringementReport,
+			title = var3.thankYouIpInfringementReport,
 			middleContent = reactModule.useCallback(function()
-				-- upvalues: reactModule (copy), view (copy), text (copy), var8 (ref), value (ref)
+				-- upvalues: reactModule (copy), view (copy), text (copy), var3 (ref), value (ref)
 				return reactModule.createElement(view, { tag = "auto-xy col gap-small align-x-center" }, {
 					text1 = reactModule.createElement(text, {
 						tag = "auto-xy text-title-medium content-default text-align-x-center",
 						LayoutOrder = 1,
-						Text = var8.yourReportCode
+						Text = var3.yourReportCode
 					}),
 					text2 = reactModule.createElement(text, {
 						tag = "auto-xy text-heading-medium content-emphasis text-align-x-center",
@@ -74,19 +74,19 @@ return function(value)
 						tag = "auto-xy text-body-medium content-default text-align-x-center text-wrap",
 						RichText = true,
 						LayoutOrder = 3,
-						Text = var8.ipInfringementModalText
+						Text = var3.ipInfringementModalText
 					})
 				})
 			end, { value.reportCode }),
 			anchorPoint = Vector2.new(0.5, 0.5),
-			position = var9:map(function(p1)
+			position = var4:map(function(p1)
 				return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), p1)
 			end),
 			buttonStackInfo = {
 				buttons = {
 					{
 						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = var12, text = var8.reportCompleteClose }
+						props = { onActivated = var7, text = var3.reportCompleteClose }
 					}
 				}
 			}

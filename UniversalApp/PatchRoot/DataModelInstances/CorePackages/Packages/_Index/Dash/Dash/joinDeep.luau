@@ -3,21 +3,21 @@ local noneModule = require(parent.None)
 local _ = require(parent.Types)
 local forEachModule = require(parent.forEach)
 
-local function joinDeep(p0, p1)
+local function joinDeep(p1, p2)
 	-- upvalues: forEachModule (ref), joinDeep (ref), noneModule (ref)
-	local cloned = table.clone(p0)
-	forEachModule(p1, function(p2, p3)
-		-- upvalues: p0 (ref), cloned (ref), joinDeep (copy), noneModule (copy)
-		if typeof(p0[p3]) == "table" and typeof(p2) == "table" then
-			cloned[p3] = joinDeep(p0[p3], p2)
+	local cloned = table.clone(p1)
+	forEachModule(p2, function(p3, p4)
+		-- upvalues: p1 (ref), cloned (ref), joinDeep (copy), noneModule (copy)
+		if typeof(p1[p4]) == "table" and typeof(p3) == "table" then
+			cloned[p4] = joinDeep(p1[p4], p3)
 			
 			return
-		elseif p2 == noneModule then
-			cloned[p3] = nil
+		elseif p3 == noneModule then
+			cloned[p4] = nil
 			
 			return
 		end
-		cloned[p3] = p2
+		cloned[p4] = p3
 	end)
 	
 	return cloned

@@ -9,16 +9,16 @@ local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages
 local fFlagFixSpatialUICaptures = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagFixSpatialUICaptures
 local updateGalleryIcon = game:DefineFastFlag("UpdateGalleryIcon", false)
 local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local var6 = capturesPolicy.PolicyImplementation.read()
-local var7 = (if var6 then capturesPolicy.Mapper(var6).eligibleForCapturesFeature() else false) and (if isInExperienceUIVREnabled and fFlagFixSpatialUICaptures then not isSpatial() else true)
+local var1 = capturesPolicy.PolicyImplementation.read()
+local var2 = (if var1 then capturesPolicy.Mapper(var1).eligibleForCapturesFeature() else false) and (if isInExperienceUIVREnabled and fFlagFixSpatialUICaptures then not isSpatial() else true)
 
-if var7 then
+if var2 then
 	local capturesPage = inGameMenuIntegrationUtilsModule.createPageOpenSignal("CapturesPage")
 	
 	return serviceModule:register({
 		id = "gallery",
 		label = "Feature.Captures.Title.Gallery",
-		initialAvailability = if var7 then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
+		initialAvailability = if var2 then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
 		sideSheetPlacement = sideSheetPlacement.Page,
 		activated = function(_)
 			-- upvalues: inGameMenuIntegrationUtilsModule (ref), capturesPage (ref)

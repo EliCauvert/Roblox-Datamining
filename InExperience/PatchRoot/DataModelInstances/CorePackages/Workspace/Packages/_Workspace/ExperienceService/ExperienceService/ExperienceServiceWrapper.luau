@@ -1,31 +1,31 @@
 ﻿local experienceService = game:GetService("ExperienceService")
 
 return {
-	LaunchExperience = function(_, p0, p1, p2)
+	LaunchExperience = function(_, p1, p2, p3)
 		-- upvalues: experienceService (ref)
-		if p1 == nil then
-			if p2 == nil then
-				experienceService:LaunchExperience(p0)
+		if p2 == nil then
+			if p3 == nil then
+				experienceService:LaunchExperience(p1)
 				
 				return
 			end
-			experienceService:LaunchExperienceFromSourceWithCallback(p0, "", p2)
+			experienceService:LaunchExperienceFromSourceWithCallback(p1, "", p3)
 			
 			return
-		elseif p2 == nil then
-			experienceService:LaunchExperienceFromSource(p0, p1)
+		elseif p3 == nil then
+			experienceService:LaunchExperienceFromSource(p1, p2)
 			
 			return
 		end
-		experienceService:LaunchExperienceFromSourceWithCallback(p0, p1, p2)
+		experienceService:LaunchExperienceFromSourceWithCallback(p1, p2, p3)
 	end,
-	RegisterForExperienceJoin = function(_, p3)
+	RegisterForExperienceJoin = function(_, p1)
 		-- upvalues: experienceService (ref)
-		return experienceService:RegisterForExperienceJoin(p3)
+		return experienceService:RegisterForExperienceJoin(p1)
 	end,
-	RegisterForExperienceLeave = function(_, p4)
+	RegisterForExperienceLeave = function(_, p1)
 		-- upvalues: experienceService (ref)
-		return experienceService:RegisterForExperienceLeave(p4)
+		return experienceService:RegisterForExperienceLeave(p1)
 	end,
 	GetPendingJoinAttempt = function(_)
 		-- upvalues: experienceService (ref)

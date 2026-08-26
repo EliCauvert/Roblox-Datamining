@@ -3,11 +3,11 @@ local reactModule = require(genericAbuseReporting.Parent.React)
 local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), textWithTranslationModule (ref)
-	return if p0.eyebrow then reactModule.createElement(textWithTranslationModule, {
+	return if p1.eyebrow then reactModule.createElement(textWithTranslationModule, {
 		tag = "size-full-0 auto-y text-label-large",
-		input = p0.eyebrow,
-		LayoutOrder = p0.layoutOrder
+		input = p1.eyebrow,
+		LayoutOrder = p1.layoutOrder
 	}) else nil
 end)

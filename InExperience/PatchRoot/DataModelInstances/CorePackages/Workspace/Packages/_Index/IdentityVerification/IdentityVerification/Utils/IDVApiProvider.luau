@@ -13,22 +13,22 @@ local showFeatureRestriction = universalFeatureRestrictionsModule.showFeatureRes
 local abuseVector = universalFeatureRestrictionsModule.AbuseVector
 local buildAgeVerificationFeatureRestrictionOverridesModule = require(identityVerification.Utils.buildAgeVerificationFeatureRestrictionOverrides)
 local fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule = require(identityVerification.Flags.FFlagEnableFeatureRestrictionOnAgeVerificationAttempt)
-local var8 = urlBuilder.new({
+local var1 = urlBuilder.new({
 	path = "age-verification-service/v1/persona-id-verification/verified-status",
 	base = urlBase.APIS,
 	query = { token = "{token}" }
 })
-local var9 = urlBuilder.new({
+local var2 = urlBuilder.new({
 	path = "age-verification-service/v1/persona-id-verification/start-verification",
 	base = urlBase.APIS
 })
-local var10 = urlBuilder.new({
+local var3 = urlBuilder.new({
 	path = "age-verification-service/v1/persona-id-verification/start-liveness-verification",
 	base = urlBase.APIS
 })()
 
-local function _(p0)
-	return if type(p0) == "table" then p0.StatusCode or (p0.responseCode or (p0.status or p0.statusCode)) else nil
+local function _(p1)
+	return if type(p1) == "table" then p1.StatusCode or (p1.responseCode or (p1.status or p1.statusCode)) else nil
 end
 
 local _ = function(p1)
@@ -40,16 +40,16 @@ local _ = function(p1)
 	end
 end
 
-local function startVerification(p2, p3)
-	-- upvalues: var9 (ref), var10 (ref), fetch (ref), promiseModule (ref), httpService (ref), cryoModule (ref), response (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
-	p3 = p3 or var9()
-	local var13 = p3 ~= var10
+local function startVerification(p1, p2)
+	-- upvalues: var2 (ref), var3 (ref), fetch (ref), promiseModule (ref), httpService (ref), cryoModule (ref), response (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
+	p2 = p2 or var2()
+	local var4 = p2 ~= var3
 	
-	return promiseModule.new(function(p4, p5)
-		-- upvalues: fetch (ref), p3 (ref), httpService (copy), cryoModule (copy), p2 (ref), response (copy), var13 (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy)
-		local var14 = fetch(p3, {
+	return promiseModule.new(function(p3, p4)
+		-- upvalues: fetch (ref), p2 (ref), httpService (copy), cryoModule (copy), p1 (ref), response (copy), var4 (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy)
+		local var5 = fetch(p2, {
 			method = "POST",
-			body = httpService:JSONEncode(cryoModule.Dictionary.join({ generatedLink = true }, p2 or {})),
+			body = httpService:JSONEncode(cryoModule.Dictionary.join({ generatedLink = true }, p1 or {})),
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
@@ -59,106 +59,106 @@ local function startVerification(p2, p3)
 			return response.error()
 		end):expect()
 		
-		if var14.ok then
-			local var15 = var14:json():catch(function()
+		if var5.ok then
+			local var6 = var5:json():catch(function()
 				return nil
 			end):expect()
 			
-			if var15 then
-				p4({
-					emailSent = var15.emailSent,
-					sessionIdentifier = var15.sessionIdentifier,
-					daysUntilNextVerification = var15.daysUntilNextVerification,
-					verificationLink = var15.verificationLink,
-					sessionToken = var15.sessionToken
+			if var6 then
+				p3({
+					emailSent = var6.emailSent,
+					sessionIdentifier = var6.sessionIdentifier,
+					daysUntilNextVerification = var6.daysUntilNextVerification,
+					verificationLink = var6.verificationLink,
+					sessionToken = var6.sessionToken
 				})
 				
 				return
 			end
-			p5("Failed to decode HTTP response as JSON for IDV Verification")
+			p4("Failed to decode HTTP response as JSON for IDV Verification")
 			
 			return
-		elseif var13 then
-			if fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and var14.status == 403 then
+		elseif var4 then
+			if fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and var5.status == 403 then
 				showFeatureRestriction(abuseVector.AgeVerification, buildAgeVerificationFeatureRestrictionOverridesModule())
 			end
 		end
-		p5(string.format("Got start-verification HTTP Response: %d", var14.status))
+		p4(string.format("Got start-verification HTTP Response: %d", var5.status))
 	end)
 end
 
 return {
 	startVerification = startVerification,
-	startVerificationWithWrappedNetworking = function(p6, p7)
-		-- upvalues: promiseModule (ref), var9 (ref), cryoModule (ref), httpService (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
-		return promiseModule.new(function(p8, p9)
-			-- upvalues: var9 (copy), cryoModule (copy), p7 (ref), p6 (ref), httpService (copy), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy)
-			p6(var9(), "POST", {
-				postBody = httpService:JSONEncode(cryoModule.Dictionary.join({ generatedLink = true }, p7 or {}))
-			}):catch(function(p11)
-				-- upvalues: fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy), p9 (ref)
-				if fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and (if type(p11) == "table" then p11.StatusCode or (p11.responseCode or (p11.status or p11.statusCode)) else nil) == 403 then
+	startVerificationWithWrappedNetworking = function(p1, p2)
+		-- upvalues: promiseModule (ref), var2 (ref), cryoModule (ref), httpService (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
+		return promiseModule.new(function(p3, p4)
+			-- upvalues: var2 (copy), cryoModule (copy), p2 (ref), p1 (ref), httpService (copy), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy)
+			p1(var2(), "POST", {
+				postBody = httpService:JSONEncode(cryoModule.Dictionary.join({ generatedLink = true }, p2 or {}))
+			}):catch(function(p5)
+				-- upvalues: fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy), p4 (ref)
+				if fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and (if type(p5) == "table" then p5.StatusCode or (p5.responseCode or (p5.status or p5.statusCode)) else nil) == 403 then
 					showFeatureRestriction(abuseVector.AgeVerification, buildAgeVerificationFeatureRestrictionOverridesModule())
 				end
-				p9("Got error on start-verificatin")
-			end):andThen(function(p10)
-				-- upvalues: p9 (ref), p8 (ref)
-				if not p10 or not p10[1] then
-					p9("Got start-verification HTTP with no valid response")
+				p4("Got error on start-verificatin")
+			end):andThen(function(p5)
+				-- upvalues: p4 (ref), p3 (ref)
+				if not p5 or not p5[1] then
+					p4("Got start-verification HTTP with no valid response")
 					
 					return
 				end
-				local var16 = p10[1]
+				local var4 = p5[1]
 				
-				if var16 then
-					p8({
-						emailSent = var16.emailSent,
-						sessionIdentifier = var16.sessionIdentifier,
-						daysUntilNextVerification = var16.daysUntilNextVerification,
-						verificationLink = var16.verificationLink,
-						sessionToken = var16.sessionToken
+				if var4 then
+					p3({
+						emailSent = var4.emailSent,
+						sessionIdentifier = var4.sessionIdentifier,
+						daysUntilNextVerification = var4.daysUntilNextVerification,
+						verificationLink = var4.verificationLink,
+						sessionToken = var4.sessionToken
 					})
 					
 					return
 				end
-				p9("Failed to decode HTTP response as JSON for IDV Verification")
+				p4("Failed to decode HTTP response as JSON for IDV Verification")
 			end)
 		end)
 	end,
-	startLivenessVerification = function(p12)
-		-- upvalues: startVerification (ref), var10 (ref)
-		return startVerification(p12, var10)
+	startLivenessVerification = function(p1)
+		-- upvalues: startVerification (ref), var3 (ref)
+		return startVerification(p1, var3)
 	end,
-	getVerifiedStatus = function(p13)
-		-- upvalues: fetch (ref), promiseModule (ref), var8 (ref), response (ref)
-		return promiseModule.new(function(p14, p15)
-			-- upvalues: var8 (copy), p13 (ref), fetch (ref), response (copy)
-			local var17 = fetch(var8({ token = p13 }), { method = "GET" }):catch(function()
+	getVerifiedStatus = function(p1)
+		-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), response (ref)
+		return promiseModule.new(function(p2, p3)
+			-- upvalues: var1 (copy), p1 (ref), fetch (ref), response (copy)
+			local var4 = fetch(var1({ token = p1 }), { method = "GET" }):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()
 			
-			if not var17.ok then
-				p15(string.format("Got verified-status verification HTTP Response: %d", var17.status))
+			if not var4.ok then
+				p3(string.format("Got verified-status verification HTTP Response: %d", var4.status))
 				
 				return
 			end
-			local var18 = var17:json():catch(function()
+			local var5 = var4:json():catch(function()
 				return nil
 			end):expect()
 			
-			if var18 then
-				p14({
-					isPending = var18.isPending,
-					sessionStatus = var18.sessionStatus,
-					sessionErrorCode = var18.sessionErrorCode,
-					isVerified = var18.isVerified,
-					ageEstimationNextStep = var18.ageEstimationNextStep
+			if var5 then
+				p2({
+					isPending = var5.isPending,
+					sessionStatus = var5.sessionStatus,
+					sessionErrorCode = var5.sessionErrorCode,
+					isVerified = var5.isVerified,
+					ageEstimationNextStep = var5.ageEstimationNextStep
 				})
 				
 				return
 			end
-			p15("Failed to decode HTTP response as JSON for get IDV Verification status")
+			p3("Failed to decode HTTP response as JSON for get IDV Verification status")
 		end)
 	end
 }

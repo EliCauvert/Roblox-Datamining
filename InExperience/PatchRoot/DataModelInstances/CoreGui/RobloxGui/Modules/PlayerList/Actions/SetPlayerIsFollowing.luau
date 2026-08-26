@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerIsFollowing", function(p0, p1)
-	return { player = p0, userId = p0.UserId, isFollowing = p1 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerIsFollowing", function(p1, p2)
+	return { player = p1, userId = p1.UserId, isFollowing = p2 }
 end)

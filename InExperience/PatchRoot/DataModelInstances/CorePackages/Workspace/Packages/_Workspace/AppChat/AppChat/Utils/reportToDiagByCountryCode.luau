@@ -1,6 +1,6 @@
 ﻿local reportToDiagByCountryCode = require(script:FindFirstAncestor("AppChat").Parent.Analytics).ReportToDiagByCountryCode
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: reportToDiagByCountryCode (ref)
-	reportToDiagByCountryCode(p0, p1, p2 * 1000, 100)
+	reportToDiagByCountryCode(p1, p2, p3 * 1000, 100)
 end

@@ -10,7 +10,7 @@ return function(p1)
 	local var1 = getAgentRollbackRequestStoreModule(false)
 	local var2 = reactModule.useRef({})
 	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useCallback(function(p1)
+	local var4 = reactModule.useCallback(function(p2)
 		-- upvalues: var3 (ref)
 		local current = var3.current
 		
@@ -18,35 +18,35 @@ return function(p1)
 			return false
 		end
 		var3.current = nil
-		p1.stop()
+		p2.stop()
 		current.rejectStartup()
 		
 		return true
 	end, {})
-	local var5 = reactModule.useCallback(function(p1, p2, p3)
-		-- upvalues: p1 (ref), var3 (ref)
-		if p1.session == nil or p1.activeTurnHandleRef.current ~= nil then
+	local var5 = reactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: p2 (ref), var3 (ref)
+		if p2.session == nil or p2.activeTurnHandleRef.current ~= nil then
 			return false
 		end
-		var3.current = { requestId = p1.id, rejectStartup = p3 }
-		p1.startRollbackTurn(p1, function()
-			-- upvalues: var3 (copy), p1 (ref), p2 (ref)
+		var3.current = { requestId = p2.id, rejectStartup = p4 }
+		p2.startRollbackTurn(p2, function()
+			-- upvalues: var3 (copy), p2 (ref), p3 (ref)
 			local current = var3.current
 			
-			if current == nil or current.requestId ~= p1.id then
-				return
-			end
-			var3.current = nil
-			p2()
-		end, function()
-			-- upvalues: var3 (copy), p1 (ref), p3 (ref)
-			local current = var3.current
-			
-			if current == nil or current.requestId ~= p1.id then
+			if current == nil or current.requestId ~= p2.id then
 				return
 			end
 			var3.current = nil
 			p3()
+		end, function()
+			-- upvalues: var3 (copy), p2 (ref), p4 (ref)
+			local current = var3.current
+			
+			if current == nil or current.requestId ~= p2.id then
+				return
+			end
+			var3.current = nil
+			p4()
 		end)
 		
 		return true

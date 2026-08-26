@@ -12,12 +12,12 @@ local removedConversationModule = require(appChat.Conversations.Actions.RemovedC
 local conversationModule = require(appChat.Models.Conversation)
 local fFlagAppChatShowOSAOnPageEntry = sharedFlagsModule.FFlagAppChatShowOSAOnPageEntry
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagAppChatShowOSAOnPageEntry (ref), fetchLatestConversationDetailsModule (ref), shouldShowU13ChatOptInForConversationModule (ref), conversationModule (ref), constantsModule (ref), shouldShowOSAForConversationModule (ref), getOverlayStoreModule (ref), loggerModule (ref), overlayTypesModule (ref), httpService (ref), removedConversationModule (ref)
-	local conversationId = p0.conversationId
-	local dispatch = p0.dispatch
-	local onAccepted = p0.onAccepted
-	local onDeclined = p0.onDeclined
+	local conversationId = p1.conversationId
+	local dispatch = p1.dispatch
+	local onAccepted = p1.onAccepted
+	local onDeclined = p1.onDeclined
 	
 	if not fFlagAppChatShowOSAOnPageEntry then
 		onAccepted()
@@ -25,41 +25,41 @@ return function(p0)
 		return
 	elseif conversationId and conversationId ~= "" then
 		dispatch(fetchLatestConversationDetailsModule(conversationId)):andThen(function()
-			-- upvalues: dispatch (ref), conversationId (ref), shouldShowU13ChatOptInForConversationModule (copy), p0 (ref), conversationModule (copy), constantsModule (copy), shouldShowOSAForConversationModule (copy), onAccepted (ref), getOverlayStoreModule (copy), loggerModule (copy), overlayTypesModule (copy), httpService (copy), removedConversationModule (copy), onDeclined (ref)
-			local var12 = nil
+			-- upvalues: dispatch (ref), conversationId (ref), shouldShowU13ChatOptInForConversationModule (copy), p1 (ref), conversationModule (copy), constantsModule (copy), shouldShowOSAForConversationModule (copy), onAccepted (ref), getOverlayStoreModule (copy), loggerModule (copy), overlayTypesModule (copy), httpService (copy), removedConversationModule (copy), onDeclined (ref)
+			local var1 = nil
 			dispatch(function(p2)
-				-- upvalues: var12 (write), conversationId (copy)
-				var12 = p2:getState().ChatAppReducer.Conversations[conversationId]
+				-- upvalues: var1 (write), conversationId (copy)
+				var1 = p2:getState().ChatAppReducer.Conversations[conversationId]
 			end)
 			local osaContextCard = nil
-			local var13 = shouldShowU13ChatOptInForConversationModule(var12)
+			local var2 = shouldShowU13ChatOptInForConversationModule(var1)
 			
-			if var13 and p0.requireMultiUserForU13 then
-				var13 = var12 and var12.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
+			if var2 and p1.requireMultiUserForU13 then
+				var2 = var1 and var1.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
 			end
-			if var13 then
+			if var2 then
 				osaContextCard = constantsModule.OptInVariant.ChatOptInInfoCard
-			elseif shouldShowOSAForConversationModule(var12) then
+			elseif shouldShowOSAForConversationModule(var1) then
 				osaContextCard = constantsModule.OptInVariant.OsaContextCard
 			end
 			if osaContextCard then
-				local var14 = getOverlayStoreModule(false)
+				local var3 = getOverlayStoreModule(false)
 				loggerModule:debug("[OSA Gate] Showing overlay variant={} for conversation {}", osaContextCard, conversationId)
-				var14.showOverlay(overlayTypesModule.GroupOSADialog, {
+				var3.showOverlay(overlayTypesModule.GroupOSADialog, {
 					conversationId = conversationId,
 					impressionId = httpService:GenerateGUID(false),
 					modalVariant = osaContextCard,
 					onJoin = function()
-						-- upvalues: var14 (ref), onAccepted (copy)
-						var14.dismissOverlay()
+						-- upvalues: var3 (ref), onAccepted (copy)
+						var3.dismissOverlay()
 						onAccepted()
 					end,
 					onDecline = function()
-						-- upvalues: conversationId (copy), var12 (write), conversationModule (copy), dispatch (copy), removedConversationModule (copy), var14 (ref), onDeclined (copy)
-						if conversationId and var12 and var12.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then
+						-- upvalues: conversationId (copy), var1 (write), conversationModule (copy), dispatch (copy), removedConversationModule (copy), var3 (ref), onDeclined (copy)
+						if conversationId and var1 and var1.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then
 							dispatch(removedConversationModule(conversationId))
 						end
-						var14.dismissOverlay()
+						var3.dismissOverlay()
 						
 						if onDeclined then
 							onDeclined()
@@ -76,12 +76,12 @@ return function(p0)
 				return
 			end
 			onAccepted()
-		end):catch(function(p1)
-			-- upvalues: loggerModule (copy), conversationId (ref), p0 (ref)
-			loggerModule:warning("[OSA Gate] Error fetching conversation details for {}: {}", conversationId, tostring(p1))
+		end):catch(function(p2)
+			-- upvalues: loggerModule (copy), conversationId (ref), p1 (ref)
+			loggerModule:warning("[OSA Gate] Error fetching conversation details for {}: {}", conversationId, tostring(p2))
 			
-			if p0.onError then
-				p0.onError(p1)
+			if p1.onError then
+				p1.onError(p2)
 			end
 		end)
 		

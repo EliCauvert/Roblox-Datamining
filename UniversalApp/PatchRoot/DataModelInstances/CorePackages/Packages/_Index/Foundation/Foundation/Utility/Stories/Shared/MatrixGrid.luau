@@ -20,23 +20,23 @@ return {
 		local text = "row align-y-center gap-" .. rowGap .. " auto-xy"
 		local text_1 = "row align-y-center gap-" .. rowGap .. " auto-x"
 		
-		local function _(p1)
-			-- upvalues: p1 (ref)
-			return if p1.cellColumnWidths then p1.cellColumnWidths[p1] else p1.cellColumnWidth
+		local function _(p2)
+			-- upvalues: p2 (ref)
+			return if p2.cellColumnWidths then p2.cellColumnWidths[p2] else p2.cellColumnWidth
 		end
 		
 		local var1 = 1
 		local t = {}
 		
-		local function renderCells(p1)
-			-- upvalues: p1 (ref), reactModule (copy), viewModule (copy), var4 (ref)
+		local function renderCells(p2)
+			-- upvalues: p2 (ref), reactModule (copy), viewModule (copy), var4 (ref)
 			local t = {}
 			
-			for i, v in p1 do
-				local var1 = if p1.cellColumnWidths then p1.cellColumnWidths[i] else p1.cellColumnWidth
+			for i, v in p2 do
+				local var5 = if p2.cellColumnWidths then p2.cellColumnWidths[i] else p2.cellColumnWidth
 				t[`Cell-{i}`] = reactModule.createElement(viewModule, {
 					tag = `col auto-xy {var4}`,
-					Size = if var1 then UDim2.fromOffset(var1, 0) else nil,
+					Size = if var5 then UDim2.fromOffset(var5, 0) else nil,
 					LayoutOrder = i
 				}, { Content = v })
 			end
@@ -44,35 +44,35 @@ return {
 		end
 		
 		if var2 then
-			local var2 = dashModule.map(p1.columnHeaders, function(p1, p2)
-				-- upvalues: p1 (ref), reactModule (copy), textModule (copy), var3 (ref)
-				local var1 = if p1.cellColumnWidths then p1.cellColumnWidths[p2] else p1.cellColumnWidth
+			local var6 = dashModule.map(p2.columnHeaders, function(p3, p4)
+				-- upvalues: p3 (ref), reactModule (copy), textModule (copy), var3 (ref)
+				local var7 = if p3.cellColumnWidths then p3.cellColumnWidths[p4] else p3.cellColumnWidth
 				
 				return reactModule.createElement(textModule, {
-					Text = p1,
+					Text = p3,
 					tag = `auto-xy text-caption-small content-muted {var3}`,
-					Size = if var1 then UDim2.fromOffset(var1, 0) else nil,
-					LayoutOrder = p2
+					Size = if var7 then UDim2.fromOffset(var7, 0) else nil,
+					LayoutOrder = p4
 				})
 			end)
 			
-			if var1 then
-				t.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {text}`, LayoutOrder = var1 }, {
+			if var5 then
+				t.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {text}`, LayoutOrder = var5 }, {
 					Corner = reactModule.createElement(viewModule, {
 						LayoutOrder = 1,
 						Size = UDim2.fromOffset(labelColumnWidth, 0)
 					}),
-					Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = text_1 }, var2)
+					Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = text_1 }, var6)
 				})
 			else
-				t.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {text}`, LayoutOrder = var1 }, var2)
+				t.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {text}`, LayoutOrder = var5 }, var6)
 			end
-			var1 += 1
+			var5 += 1
 		end
-		for i, v in p1.rows do
+		for i, v in p2.rows do
 			local t_1 = {}
 			
-			if var1 then
+			if var5 then
 				t_1.Label = reactModule.createElement(viewModule, {
 					tag = "col align-y-center size-full-0 auto-y clip",
 					LayoutOrder = 1,
@@ -95,13 +95,13 @@ return {
 						Transparency = v.stroke.Transparency,
 						Thickness = v.stroke.Thickness
 					},
-					LayoutOrder = var1
+					LayoutOrder = var5
 				}, t_1)
 			elseif v.backgroundStyle then
 				t[`Row-{i}`] = reactModule.createElement(viewModule, {
 					tag = text_2,
 					backgroundStyle = v.backgroundStyle,
-					LayoutOrder = var1
+					LayoutOrder = var5
 				}, t_1)
 			elseif v.stroke then
 				t[`Row-{i}`] = reactModule.createElement(viewModule, {
@@ -111,34 +111,34 @@ return {
 						Transparency = v.stroke.Transparency,
 						Thickness = v.stroke.Thickness
 					},
-					LayoutOrder = var1
+					LayoutOrder = var5
 				}, t_1)
 			else
-				t[`Row-{i}`] = reactModule.createElement(viewModule, { tag = text_2, LayoutOrder = var1 }, t_1)
+				t[`Row-{i}`] = reactModule.createElement(viewModule, { tag = text_2, LayoutOrder = var5 }, t_1)
 			end
-			var1 += 1
+			var5 += 1
 		end
 		return reactModule.createElement(viewModule, { tag = "col auto-xy" }, t)
 	end,
-	matrixLabel = function(p1)
+	matrixLabel = function(p3)
 		-- upvalues: reactModule (ref), textModule (ref)
 		return reactModule.createElement(textModule, {
 			tag = "auto-xy text-caption-small text-align-x-left content-default",
-			Text = p1
+			Text = p3
 		})
 	end,
-	matrixInfoLabel = function(p1, p2)
+	matrixInfoLabel = function(p3, p4)
 		-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
 		return reactModule.createElement(viewModule, { tag = "col gap-xsmall size-full-0 auto-y" }, {
 			Title = reactModule.createElement(textModule, {
 				tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-default",
 				LayoutOrder = 1,
-				Text = p1
+				Text = p3
 			}),
 			Subtitle = reactModule.createElement(textModule, {
 				tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-muted",
 				LayoutOrder = 2,
-				Text = p2
+				Text = p4
 			})
 		})
 	end

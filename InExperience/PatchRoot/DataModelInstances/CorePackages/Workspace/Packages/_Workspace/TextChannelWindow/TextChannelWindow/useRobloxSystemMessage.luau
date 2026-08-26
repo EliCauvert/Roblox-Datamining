@@ -6,28 +6,28 @@ local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useIn
 
 return function()
 	-- upvalues: messageWriterContextModule (ref), useInExperienceLocalization (ref), reactModule (ref), messageModule (ref)
-	local var3 = messageWriterContextModule.useMessageWriter()
-	local var4 = useInExperienceLocalization()
+	local var1 = messageWriterContextModule.useMessageWriter()
+	local var2 = useInExperienceLocalization()
 	
 	return {
-		displayRobloxSystemMessage = reactModule.useCallback(function(p0, p1)
-			-- upvalues: var3 (ref), var4 (ref), messageModule (copy)
-			if not var3 then return end
-			local var5 = var4(p0)
+		displayRobloxSystemMessage = reactModule.useCallback(function(p1, p2)
+			-- upvalues: var1 (ref), var2 (ref), messageModule (copy)
+			if not var1 then return end
+			local var3 = var2(p1)
 			
-			if var5 == "" then
-				var5 = p1
+			if var3 == "" then
+				var3 = p2
 			end
-			if var5 == "" then
+			if var3 == "" then
 				return
 			end
-			var3.write(messageModule.createSystemMessage(var5, "Roblox.ChatDisabled.Info"))
-		end, { var3, var4 }),
+			var1.write(messageModule.createSystemMessage(var3, "Roblox.ChatDisabled.Info"))
+		end, { var1, var2 }),
 		clearAvailabilityMessage = reactModule.useCallback(function()
-			-- upvalues: var3 (ref)
-			if var3 then
-				var3.remove("Roblox.ChatDisabled.Info")
+			-- upvalues: var1 (ref)
+			if var1 then
+				var1.remove("Roblox.ChatDisabled.Info")
 			end
-		end, { var3 })
+		end, { var1 })
 	}
 end

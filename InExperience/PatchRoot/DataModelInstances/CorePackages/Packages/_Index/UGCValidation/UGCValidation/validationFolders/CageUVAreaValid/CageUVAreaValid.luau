@@ -13,11 +13,11 @@ return {
 	conditionalData = {},
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateCageUV),
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref)
-		for i, v in p1.outerCagesData do
+		for i, v in p2.outerCagesData do
 			if not UGCValidationService:ValidateEditableMeshCageUVTriangleArea(v.editable) then
-				p0:fail(errorSourceStringsModule.Keys.CageUV_ZeroAreaTriangle, { partName = i })
+				p1:fail(errorSourceStringsModule.Keys.CageUV_ZeroAreaTriangle, { partName = i })
 			end
 		end
 	end

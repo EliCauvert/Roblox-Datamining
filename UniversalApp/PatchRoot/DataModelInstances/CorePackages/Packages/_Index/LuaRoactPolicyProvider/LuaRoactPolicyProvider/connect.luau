@@ -4,100 +4,100 @@ local cryoModule = require(parent.Cryo)
 local loggerModule = require(script.Parent.Logger)
 local appPolicyContextModule = require(script.Parent.AppPolicyContext)
 
-local function mergePolicies(p0, p1)
+local function mergePolicies(p1, p2)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	
-	for i, v in ipairs(p1) do
-		t = cryoModule.Dictionary.join(t, v(p0))
+	for i, v in ipairs(p2) do
+		t = cryoModule.Dictionary.join(t, v(p1))
 	end
 	return t
 end
 
-return function(p2)
+return function(p3)
 	-- upvalues: loggerModule (ref), roactModule (ref), mergePolicies (ref), cryoModule (ref), appPolicyContextModule (ref)
-	assert(p2, "expected getPolicyImpl")
+	assert(p3, "expected getPolicyImpl")
 	
-	return function(p3)
-		-- upvalues: loggerModule (copy), roactModule (copy), mergePolicies (copy), p2 (ref), cryoModule (copy), appPolicyContextModule (copy)
-		assert(type(p3) == "function", "connect expects mapper to be a function")
+	return function(p4)
+		-- upvalues: loggerModule (copy), roactModule (copy), mergePolicies (copy), p3 (ref), cryoModule (copy), appPolicyContextModule (copy)
+		assert(type(p4) == "function", "connect expects mapper to be a function")
 		
-		return function(p4)
-			-- upvalues: loggerModule (copy), roactModule (copy), mergePolicies (copy), p2 (copy), p3 (ref), cryoModule (copy), appPolicyContextModule (copy)
-			local var6 = ("AppPolicy(%s)"):format(tostring(p4))
-			local var7 = loggerModule:new(var6)
-			var7:setContext({ prefix = string.format("%s: ", var6) })
-			local formattedText = string.format("%s: Not a descendent of PolicyProvider", var6)
-			local var9 = roactModule.PureComponent:extend(var6)
-			var7:trace("Connected to component: {}", tostring(p4))
+		return function(p5)
+			-- upvalues: loggerModule (copy), roactModule (copy), mergePolicies (copy), p3 (copy), p4 (ref), cryoModule (copy), appPolicyContextModule (copy)
+			local var1 = ("AppPolicy(%s)"):format(tostring(p5))
+			local var2 = loggerModule:new(var1)
+			var2:setContext({ prefix = string.format("%s: ", var1) })
+			local formattedText = string.format("%s: Not a descendent of PolicyProvider", var1)
+			local var3 = roactModule.PureComponent:extend(var1)
+			var2:trace("Connected to component: {}", tostring(p5))
 			
-			function var9.init(p5, p6)
-				-- upvalues: formattedText (ref), mergePolicies (copy), p2 (copy), var7 (ref)
-				p5.policyContext = p6.policy
-				assert(p5.policyContext, formattedText)
+			function var9.init(p6, p7)
+				-- upvalues: formattedText (ref), mergePolicies (copy), p3 (copy), var2 (ref)
+				p6.policyContext = p7.policy
+				assert(p6.policyContext, formattedText)
 				
 				function p5.setWithEmptyPolicy()
-					-- upvalues: p5 (ref), mergePolicies (copy)
-					p5.state = {
-						policy = mergePolicies({}, p5.policyContext.presentationPolicy)
+					-- upvalues: p6 (ref), mergePolicies (copy)
+					p6.state = {
+						policy = mergePolicies({}, p6.policyContext.presentationPolicy)
 					}
 				end
 				
-				if p5.policyContext.staticExternalPolicy then
-					p5.state = {
-						policy = mergePolicies(p5.policyContext.staticExternalPolicy, p5.policyContext.presentationPolicy)
+				if p6.policyContext.staticExternalPolicy then
+					p6.state = {
+						policy = mergePolicies(p6.policyContext.staticExternalPolicy, p6.policyContext.presentationPolicy)
 					}
 					
 					return
 				end
-				local var10 = p2.read()
+				local var4 = p3.read()
 				
-				if var10 then
-					p5.state = {
-						policy = mergePolicies(var10, p5.policyContext.presentationPolicy)
+				if var4 then
+					p6.state = {
+						policy = mergePolicies(var4, p6.policyContext.presentationPolicy)
 					}
 				else
-					p5.setWithEmptyPolicy()
-					var7:trace("No app policy data available")
+					p6.setWithEmptyPolicy()
+					var2:trace("No app policy data available")
 				end
-				function p5.onPolicyChanged(p7)
-					-- upvalues: p5 (ref), mergePolicies (copy)
-					p5:setState({
-						policy = mergePolicies(p7, p5.policyContext.presentationPolicy)
+				function p5.onPolicyChanged(p8)
+					-- upvalues: p6 (ref), mergePolicies (copy)
+					p6:setState({
+						policy = mergePolicies(p8, p6.policyContext.presentationPolicy)
 					})
 				end
 			end
 			
-			function var9.didMount(p8)
-				-- upvalues: p2 (copy), var7 (ref)
-				if p8.policyContext.staticExternalPolicy then
+			function var9.didMount(p6)
+				-- upvalues: p3 (copy), var2 (ref)
+				if p6.policyContext.staticExternalPolicy then
 					return
 				end
-				p8.connection = p2.onPolicyChanged(function(p9)
-					-- upvalues: var7 (copy), p8 (ref)
-					var7:trace("Received policy update from MemStorageService")
-					p8.onPolicyChanged(p9)
+				p6.connection = p3.onPolicyChanged(function(p7)
+					-- upvalues: var2 (copy), p6 (ref)
+					var2:trace("Received policy update from MemStorageService")
+					p6.onPolicyChanged(p7)
 				end)
 			end
 			
-			function var9.render(p10)
-				-- upvalues: p3 (copy), cryoModule (copy), roactModule (copy), p4 (ref)
-				return roactModule.createElement(p4, cryoModule.Dictionary.join(p10.props.innerProps, p3(p10.state.policy, p10.props.innerProps)))
+			function var9.render(p6)
+				-- upvalues: p4 (copy), cryoModule (copy), roactModule (copy), p5 (ref)
+				return roactModule.createElement(p5, cryoModule.Dictionary.join(p6.props.innerProps, p4(p6.state.policy, p6.props.innerProps)))
 			end
 			
-			function var9.willUnmount(p11)
-				if p11.connection then
-					p11.connection:Disconnect()
+			function var9.willUnmount(p6)
+				if p6.connection then
+					p6.connection:Disconnect()
 				end
-				p11.onPolicyChange = nil
+				p6.onPolicyChange = nil
 			end
 			
-			return function(p12)
-				-- upvalues: roactModule (copy), appPolicyContextModule (copy), var9 (ref)
+			return function(p6)
+				-- upvalues: roactModule (copy), appPolicyContextModule (copy), var3 (ref)
 				return roactModule.createElement(appPolicyContextModule.Consumer, {
-					render = function(p13)
-						-- upvalues: roactModule (copy), var9 (copy), p12 (ref)
-						return roactModule.createElement(var9, { innerProps = p12, policy = p13 })
+					render = function(p7)
+						-- upvalues: roactModule (copy), var3 (copy), p6 (ref)
+						return roactModule.createElement(var3, { innerProps = p6, policy = p7 })
 					end
 				})
 			end

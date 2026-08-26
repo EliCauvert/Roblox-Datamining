@@ -2,40 +2,40 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal(nil)
-	local var2, var3 = createSignal(nil)
+	local var1, var2 = createSignal(nil)
+	local var3, var4 = createSignal(nil)
 	
 	return {
-		getDeepLinkedMomentId = var0,
-		getDeepLinkedMomentTargetIdType = var2,
+		getDeepLinkedMomentId = var1,
+		getDeepLinkedMomentTargetIdType = var3,
 		setDeepLinkedMomentId = function(value)
-			-- upvalues: var1 (ref), var3 (ref)
-			var1(value)
-			var3(if value ~= nil then nil else nil)
+			-- upvalues: var2 (ref), var4 (ref)
+			var2(value)
+			var4(if value ~= nil then nil else nil)
 		end,
-		setDeepLinkedMoment = function(value, p0)
-			-- upvalues: var1 (ref), var3 (ref)
-			var1(value)
-			var3(if value ~= nil then nil else p0)
+		setDeepLinkedMoment = function(value, p1)
+			-- upvalues: var2 (ref), var4 (ref)
+			var2(value)
+			var4(if value ~= nil then nil else p1)
 		end,
 		consumeDeepLinkedMoment = function()
-			-- upvalues: var0 (ref), var2 (ref), var1 (ref), var3 (ref)
-			local var4 = var0(false)
-			local var5 = var2(false)
-			var1(nil)
-			var3(nil)
+			-- upvalues: var1 (ref), var3 (ref), var2 (ref), var4 (ref)
+			local var5 = var1(false)
+			local var6 = var3(false)
+			var2(nil)
+			var4(nil)
 			
-			return if var4 == nil then nil else { targetId = var4, targetIdType = var5 }
+			return if var5 == nil then nil else { targetId = var5, targetIdType = var6 }
 		end,
 		consumeDeepLinkedMomentId = function()
-			-- upvalues: var0 (ref), var2 (ref), var1 (ref), var3 (ref)
-			local var6 = var0(false)
-			local var7 = var2(false)
-			var1(nil)
-			var3(nil)
-			local var8 = if var6 == nil then nil else { targetId = var6, targetIdType = var7 }
+			-- upvalues: var1 (ref), var3 (ref), var2 (ref), var4 (ref)
+			local var5 = var1(false)
+			local var6 = var3(false)
+			var2(nil)
+			var4(nil)
+			local var7 = if var5 == nil then nil else { targetId = var5, targetIdType = var6 }
 			
-			return if var8 == nil then nil else var8.targetId
+			return if var7 == nil then nil else var7.targetId
 		end
 	}
 end

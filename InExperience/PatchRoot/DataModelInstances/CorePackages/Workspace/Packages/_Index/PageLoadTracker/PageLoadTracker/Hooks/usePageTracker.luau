@@ -27,9 +27,9 @@ end
 
 return function()
 	-- upvalues: reactModule (ref), pageTrackerContextModule (ref), fFlagLuaAppEnableChatMilestones (ref), createNoOpTracker (ref)
-	local var3 = reactModule.useContext(pageTrackerContextModule)
+	local var1 = reactModule.useContext(pageTrackerContextModule)
 	
-	if var3 == nil then
+	if var1 == nil then
 		if fFlagLuaAppEnableChatMilestones then
 			return reactModule.useMemo(function()
 				-- upvalues: createNoOpTracker (copy)
@@ -38,5 +38,5 @@ return function()
 		end
 		error("usePageTracker must be used within a PageTrackerContext.Provider")
 	end
-	return var3
+	return var1
 end

@@ -8,9 +8,9 @@ local _ = {
 }
 
 return {
-	getHumanoidDescription = function(p0)
+	getHumanoidDescription = function(p1)
 		-- upvalues: playersService (ref)
-		local var1 = playersService:GetPlayerByUserId(p0)
+		local var1 = playersService:GetPlayerByUserId(p1)
 		local t = {
 			BackAccessory = "",
 			BodyTypeScale = 0,

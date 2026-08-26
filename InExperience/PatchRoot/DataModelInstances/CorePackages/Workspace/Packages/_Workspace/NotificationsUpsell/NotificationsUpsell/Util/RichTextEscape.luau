@@ -5,9 +5,9 @@
 	["'"] = "&apos;"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref)
-	local var1 = p0:gsub("&", "&amp;")
+	local var1 = p1:gsub("&", "&amp;")
 	
 	for i, v in pairs(t) do
 		var1 = var1:gsub(i, v)

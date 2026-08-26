@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return Content.fromObject(p0)
+﻿return function(p1)
+	return Content.fromObject(p1)
 end

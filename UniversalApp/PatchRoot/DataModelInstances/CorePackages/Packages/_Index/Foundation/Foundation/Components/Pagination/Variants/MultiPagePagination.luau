@@ -61,43 +61,43 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		return t
 	end, { var5, var8.selection })
 	local pageSlotId = paginationSlotsUtilsModule.getPageSlotId(var1.page)
-	local var1 = usePaginationAnimatedHighlightModule(pageSlotId, var9, var10, size, var5)
+	local var11 = usePaginationAnimatedHighlightModule(pageSlotId, var9, var10, size, var5)
 	
 	return var8.createLayout(reactModule.createElement(viewModule, {
 		LayoutOrder = 2,
 		tag = "auto-xy",
-		testId = `{var1.testId}--pages`,
+		testId = `{var11.testId}--pages`,
 		ref = var9
 	}, {
-		ActivePageHighlight = if not paginationUtilsModule.needsWidePageSlot(var1.page) then reactModule.createElement(viewModule, {
+		ActivePageHighlight = if not paginationUtilsModule.needsWidePageSlot(var11.page) then reactModule.createElement(viewModule, {
 			Active = false,
 			tag = "radius-circle clip",
 			ZIndex = 1,
 			backgroundStyle = useChipVariantsModule(var2, if size == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium, chipVariantModule.Utility, true, false, false).chip.backgroundStyle,
-			Size = reactModule.joinBindings({ var1.highlightWidth, var1.activeItemHeight }):map(function(p1)
-				return UDim2.fromOffset(p1[1], p1[2])
+			Size = reactModule.joinBindings({ var11.highlightWidth, var11.activeItemHeight }):map(function(p3)
+				return UDim2.fromOffset(p3[1], p3[2])
 			end),
-			Position = var1.highlightPosition:map(function(p1)
-				return UDim2.fromOffset(p1, 0)
+			Position = var11.highlightPosition:map(function(p3)
+				return UDim2.fromOffset(p3, 0)
 			end),
-			Visible = var1.isVisible,
+			Visible = var11.isVisible,
 			selection = { Selectable = false },
-			testId = `{var1.testId}--active-page-highlight`
+			testId = `{var11.testId}--active-page-highlight`
 		}) else nil,
 		PagesRow = reactModule.createElement(viewModule, {
 			tag = "row gap-xsmall auto-xy",
 			LayoutOrder = 1,
 			ZIndex = 2,
 			onAbsoluteSizeChanged = reactModule.useCallback(function()
-				-- upvalues: var10 (ref), pageSlotId (ref), var9 (ref), var1 (ref)
-				local var1 = var10[pageSlotId]
+				-- upvalues: var10 (ref), pageSlotId (ref), var9 (ref), var11 (ref)
+				local var12 = var10[pageSlotId]
 				
-				if var1 and var1.current and var9.current then
-					var1.updateHighlight(var1, true)
+				if var12 and var12.current and var9.current then
+					var12.updateHighlight(var12, true)
 				end
-			end, { pageSlotId, var10, var1.updateHighlight })
+			end, { pageSlotId, var10, var11.updateHighlight })
 		}, reactModule.useMemo(function()
-			-- upvalues: var5 (ref), reactModule (copy), ellipsisModule (copy), size (ref), var1 (ref), paginationSlotsUtilsModule (copy), var8 (ref), pageNumberSlotModule (copy)
+			-- upvalues: var5 (ref), reactModule (copy), ellipsisModule (copy), size (ref), var11 (ref), paginationSlotsUtilsModule (copy), var8 (ref), pageNumberSlotModule (copy)
 			local t = {}
 			
 			for i, v in var5 do
@@ -105,18 +105,18 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					t[if i == 2 then "ellipsis-leading" else "ellipsis-trailing"] = reactModule.createElement(ellipsisModule, {
 						slotSize = size,
 						LayoutOrder = i,
-						testId = `{var1.testId}--ellipsis-{i}`
+						testId = `{var11.testId}--ellipsis-{i}`
 					})
 				else
 					local pageSlotId = paginationSlotsUtilsModule.getPageSlotId(v)
 					local slotBindings = var8.selection.getSlotBindings(pageSlotId)
 					t[`Page-{v}`] = reactModule.createElement(pageNumberSlotModule, {
 						slotSize = size,
-						isChecked = v == var1.page,
+						isChecked = v == var11.page,
 						LayoutOrder = i,
-						onPageActivated = var1.onActivated,
+						onPageActivated = var11.onActivated,
 						page = v,
-						testId = `{var1.testId}--page-{v}`,
+						testId = `{var11.testId}--page-{v}`,
 						ref = var8.selection.getSlotRef(pageSlotId),
 						Selectable = slotBindings.Selectable,
 						NextSelectionLeft = slotBindings.NextSelectionLeft,
@@ -128,7 +128,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			end
 			return t
 		end, {
-			var5, var1.page, size, var1.testId, var1.onActivated, var8.selection
+			var5, var11.page, size, var11.testId, var11.onActivated, var8.selection
 		}))
 	}), nil)
 end))

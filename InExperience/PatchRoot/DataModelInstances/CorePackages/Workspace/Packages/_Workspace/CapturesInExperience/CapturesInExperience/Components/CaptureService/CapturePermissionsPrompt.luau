@@ -14,52 +14,52 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useScreenSize = robloxAppHooksModule.useScreenSize
 local permissionPromptFinishedModule = require(parent.Thunks.PermissionPromptFinished)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), useLocalization (ref), useScreenSize (ref), reactModule (ref), permissionPromptFinishedModule (ref), buttonType (ref), text (ref), interactiveAlert (ref)
-	local var7 = useDispatch()
-	local var8 = useLocalization({
+	local var1 = useDispatch()
+	local var2 = useLocalization({
 		allowAccessToCapturesTitle = "Feature.Captures.Title.AllowAccessToCaptures",
 		allowAccessToCapturesBody = "Feature.Captures.Body.AllowAccessToCaptures",
 		allow = "Feature.Captures.Action.Allow",
 		dontAllow = "Feature.Captures.Action.DontAllow"
 	})
-	local var9 = useScreenSize()
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), permissionPromptFinishedModule (copy), p0 (ref)
-		var7(permissionPromptFinishedModule(p0.promptId, true))
-	end, { p0.promptId })
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), permissionPromptFinishedModule (copy), p0 (ref)
-		var7(permissionPromptFinishedModule(p0.promptId, false))
-	end, { p0.promptId })
+	local var3 = useScreenSize()
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), permissionPromptFinishedModule (copy), p1 (ref)
+		var1(permissionPromptFinishedModule(p1.promptId, true))
+	end, { p1.promptId })
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), permissionPromptFinishedModule (copy), p1 (ref)
+		var1(permissionPromptFinishedModule(p1.promptId, false))
+	end, { p1.promptId })
 	
 	return reactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = false,
 		buttonStackInfo = reactModule.useMemo(function()
-			-- upvalues: buttonType (copy), var10 (ref), var8 (ref), var11 (ref)
+			-- upvalues: buttonType (copy), var4 (ref), var2 (ref), var5 (ref)
 			return {
 				buttons = {
 					{
 						isDefaultChild = false,
 						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = var10, text = var8.allow }
+						props = { onActivated = var4, text = var2.allow }
 					},
 					{
 						isDefaultChild = true,
-						props = { onActivated = var11, text = var8.dontAllow }
+						props = { onActivated = var5, text = var2.dontAllow }
 					}
 				}
 			}
-		end, { var10, var11 }),
+		end, { var4, var5 }),
 		middleContent = reactModule.useCallback(function()
-			-- upvalues: reactModule (copy), text (copy), var8 (ref)
+			-- upvalues: reactModule (copy), text (copy), var2 (ref)
 			return reactModule.createElement(text, {
 				tag = "size-full-1200 text-align-x-center text-body-large text-wrap",
-				Text = var8.allowAccessToCapturesBody
+				Text = var2.allowAccessToCapturesBody
 			})
 		end, {}),
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = var9,
-		title = var8.allowAccessToCapturesTitle
+		screenSize = var3,
+		title = var2.allowAccessToCapturesTitle
 	})
 end

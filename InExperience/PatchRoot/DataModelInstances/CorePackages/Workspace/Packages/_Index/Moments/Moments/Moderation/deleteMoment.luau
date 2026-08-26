@@ -8,12 +8,12 @@ local fFlagMomentsPassFeedItemIdToBackendApis = require(parent.SharedFlags).FFla
 local text = httpModule.Url.APIS_URL .. "content-captures-api/v2/moments/"
 local text_1 = httpModule.Url.APIS_URL .. "/posts-api/v1/content-posts/delete/"
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), promiseModule (ref), getFFlagMomentsFixDeleteModule (ref), httpClientModule (ref), text_1 (ref), text (ref)
-	local var7 = p0
+	local var1 = p1
 	
 	if fFlagMomentsPassFeedItemIdToBackendApis then
-		if p2 == nil or p2 == "" then
+		if p3 == nil or p3 == "" then
 			return promiseModule.reject("feedItemId is required to delete a Moment")
 		end
 	else
@@ -21,7 +21,7 @@ return function(p0, p1, p2)
 			method = "DELETE",
 			analyticsKey = "moments.delete-moment",
 			url = text .. var7,
-			network = p1,
+			network = p2,
 			decode = function(_)
 				return { ok = true }
 			end
@@ -30,11 +30,11 @@ return function(p0, p1, p2)
 			analyticsKey = "moments.delete-moment",
 			url = text_1 .. p0,
 			body = {},
-			network = p1,
+			network = p2,
 			decode = function(_)
 				return { ok = true }
 			end
 		}))
 	end
-	var7 = "by-feed-item/" .. p2
+	var1 = "by-feed-item/" .. p2
 end

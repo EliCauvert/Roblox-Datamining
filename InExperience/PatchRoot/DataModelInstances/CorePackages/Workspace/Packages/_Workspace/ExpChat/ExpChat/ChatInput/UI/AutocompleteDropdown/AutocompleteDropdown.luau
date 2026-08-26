@@ -8,57 +8,57 @@ local dictionary = require(parent.llama).Dictionary
 local configModule = require(expChat.Config)
 local autocompleteEntryModule = require(script.Parent.AutocompleteEntry)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useStyle (ref), dictionary (ref), autocompleteEntryModule (ref), list (ref), configModule (ref), textChatService (ref)
-	local var5 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	local theme = useStyle().Theme
-	local var6 = reactModule.useCallback(function(p1)
-		-- upvalues: dictionary (copy), reactModule (copy), autocompleteEntryModule (copy), p0 (ref), list (copy)
-		local var18 = dictionary.map(p1, function(p2, p3)
-			-- upvalues: reactModule (copy), autocompleteEntryModule (copy), p0 (copy), list (copy), p1 (ref)
+	local var2 = reactModule.useCallback(function(p2)
+		-- upvalues: dictionary (copy), reactModule (copy), autocompleteEntryModule (copy), p1 (ref), list (copy)
+		local var3 = dictionary.map(p2, function(p3, p4)
+			-- upvalues: reactModule (copy), autocompleteEntryModule (copy), p1 (copy), list (copy), p2 (ref)
 			return reactModule.createElement(autocompleteEntryModule, {
-				result = p2,
-				layoutOrder = p3,
-				chatInputBarSettings = p0.chatInputBarSettings,
-				setTransparency = p0.setTransparency,
-				transparencyValue = p0.transparencyValue,
-				isDividerVisible = list.count(p1) ~= p3,
-				selectedIndex = p0.selectedIndex,
-				autocompleteType = p0.autocompleteType,
-				onAutocompleteDropdownHover = p0.onAutocompleteDropdownHover,
-				onAutocompleteSelected = p0.onAutocompleteSelected
-			}), p2
+				result = p3,
+				layoutOrder = p4,
+				chatInputBarSettings = p1.chatInputBarSettings,
+				setTransparency = p1.setTransparency,
+				transparencyValue = p1.transparencyValue,
+				isDividerVisible = list.count(p2) ~= p4,
+				selectedIndex = p1.selectedIndex,
+				autocompleteType = p1.autocompleteType,
+				onAutocompleteDropdownHover = p1.onAutocompleteDropdownHover,
+				onAutocompleteSelected = p1.onAutocompleteSelected
+			}), p3
 		end)
-		var18["$layout"] = reactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder })
+		var3["$layout"] = reactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder })
 		
-		return var18
+		return var3
 	end)
 	
 	local function setCanvasPosition()
-		-- upvalues: var5 (ref), p0 (ref), configModule (copy)
-		if not var5.current then
+		-- upvalues: var1 (ref), p1 (ref), configModule (copy)
+		if not var1.current then
 			return Vector2.new(0, 0)
 		end
-		local current = p0.autocompleteDropdownRef.current
-		local var19 = if current then current.AbsoluteSize.Y else configModule.AutocompleteFrameDefaultSizeY
-		local var20 = p0.chatInputBarSettings.TextSize + 16
-		local var21 = 0
+		local current = p1.autocompleteDropdownRef.current
+		local var3 = if current then current.AbsoluteSize.Y else configModule.AutocompleteFrameDefaultSizeY
+		local var4 = p1.chatInputBarSettings.TextSize + 16
+		local var5 = 0
 		
 		if current and current:FindFirstChild("ScrollBarFrame") and (current.ScrollBarFrame:FindFirstChild("ScrollViewFrame") and current.ScrollBarFrame.ScrollViewFrame:FindFirstChild("ScrollView")) and current.ScrollBarFrame.ScrollViewFrame.ScrollView:FindFirstChild("OffsetFrame") then
 			for i, v in ipairs(current.ScrollBarFrame.ScrollViewFrame.ScrollView.OffsetFrame:GetChildren()) do
-				if v.ClassName == "Frame" and v.LayoutOrder <= p0.selectedIndex then
-					var21 += v.AbsoluteSize.Y
+				if v.ClassName == "Frame" and v.LayoutOrder <= p1.selectedIndex then
+					var5 += v.AbsoluteSize.Y
 					
-					if v.LayoutOrder == p0.selectedIndex then
-						var20 = v.AbsoluteSize.Y
+					if v.LayoutOrder == p1.selectedIndex then
+						var4 = v.AbsoluteSize.Y
 					end
 				end
 			end
 		end
-		local y = var5.current.CanvasPosition.Y
-		local var22 = var21 - var20
+		local y = var1.current.CanvasPosition.Y
+		local var6 = var5 - var4
 		
-		return Vector2.new(0, if var22 < y then var22 elseif y + var19 < var21 then var21 - var19 else y)
+		return Vector2.new(0, if var6 < y then var6 elseif y + var3 < var5 then var5 - var3 else y)
 	end
 	
 	local verticalAlignment = nil
@@ -70,42 +70,42 @@ return reactModule.memo(function(p0)
 		enabled = chatWindowConfiguration.Enabled
 	end
 	local y
-	local var9 = verticalAlignment == Enum.VerticalAlignment.Top and not enabled
-	local var10 = p0.textBoxRef.current and p0.textBoxRef.current.AbsoluteSize.Y + 20
-	local chatWindow = p0.autocompleteDropdownRef.current and (p0.autocompleteDropdownRef.current:FindFirstAncestor("appLayout") and (p0.autocompleteDropdownRef.current:FindFirstAncestor("appLayout"):FindFirstChild("chatWindow") or nil))
+	local var7 = verticalAlignment == Enum.VerticalAlignment.Top and not enabled
+	local var8 = p1.textBoxRef.current and p1.textBoxRef.current.AbsoluteSize.Y + 20
+	local chatWindow = p1.autocompleteDropdownRef.current and (p1.autocompleteDropdownRef.current:FindFirstAncestor("appLayout") and (p1.autocompleteDropdownRef.current:FindFirstAncestor("appLayout"):FindFirstChild("chatWindow") or nil))
 	local createElement = reactModule.createElement
-	local var12 = "Frame"
+	local var9 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		ZIndex = 2,
-		AnchorPoint = var9 and Vector2.new(0, 0) or Vector2.new(0, 1),
-		Size = UDim2.new(0.95, 0, 0, if #p0.results > 3 then configModule.AutocompleteFrameDefaultSizeY else #p0.results * configModule.AutocompleteEntryDefaultSizeY),
-		Position = UDim2.new(0, 0, 0, if var9 then var10 else 0),
-		Visible = p0.activated and #p0.results > 0,
-		ref = p0.autocompleteDropdownRef
+		AnchorPoint = var7 and Vector2.new(0, 0) or Vector2.new(0, 1),
+		Size = UDim2.new(0.95, 0, 0, if #p1.results > 3 then configModule.AutocompleteFrameDefaultSizeY else #p1.results * configModule.AutocompleteEntryDefaultSizeY),
+		Position = UDim2.new(0, 0, 0, if var7 then var8 else 0),
+		Visible = p1.activated and #p1.results > 0,
+		ref = p1.autocompleteDropdownRef
 	}
 	local t_1 = {}
 	local createElement_1 = reactModule.createElement
-	local var15 = "UISizeConstraint"
+	local var10 = "UISizeConstraint"
 	local t_2 = {}
 	local new = Vector2.new
 	local chatWindowMaxWidth = configModule.ChatWindowMaxWidth
 	
-	if chatWindow and not var9 then
+	if chatWindow and not var7 then
 		y = chatWindow.AbsoluteSize.Y or 1e999
 	end
 	t_2.MaxSize = new(chatWindowMaxWidth, y)
-	t_1.UISizeConstraint = createElement_1(var15, t_2)
+	t_1.UISizeConstraint = createElement_1(var10, t_2)
 	t_1.ScrollBarFrame = reactModule.createElement("Frame", {
 		ZIndex = 2,
 		Size = UDim2.fromScale(1, 1),
-		BackgroundTransparency = p0.setTransparency(0, p0.transparencyValue),
-		BackgroundColor3 = p0.chatInputBarSettings.BackgroundColor3
+		BackgroundTransparency = p1.setTransparency(0, p1.transparencyValue),
+		BackgroundColor3 = p1.chatInputBarSettings.BackgroundColor3
 	}, {
 		Border = reactModule.createElement("UIStroke", {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 			Color = configModule.ChatInputBarBorderColor3,
-			Transparency = p0.setTransparency(configModule.ChatInputBarBorderTransparency, p0.transparencyValue)
+			Transparency = p1.setTransparency(configModule.ChatInputBarBorderTransparency, p1.transparencyValue)
 		}),
 		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 3) }),
 		ScrollViewFrame = reactModule.createElement("Frame", {
@@ -123,17 +123,17 @@ return reactModule.memo(function(p0)
 				ZIndex = 2,
 				Size = UDim2.new(1, -4, 1, 0),
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
-				CanvasSize = UDim2.new(0, 0, 0, #p0.results * configModule.AutocompleteEntryDefaultSizeY),
+				CanvasSize = UDim2.new(0, 0, 0, #p1.results * configModule.AutocompleteEntryDefaultSizeY),
 				CanvasPosition = setCanvasPosition(),
 				ScrollBarImageColor3 = theme.UIEmphasis.Color,
-				ScrollBarImageTransparency = p0.setTransparency(0, p0.transparencyValue),
+				ScrollBarImageTransparency = p1.setTransparency(0, p1.transparencyValue),
 				VerticalScrollBarInset = Enum.ScrollBarInset.Always,
-				ref = var5
+				ref = var1
 			}, {
-				OffsetFrame = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 8, 1, 0) }, var6(p0.results))
+				OffsetFrame = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 8, 1, 0) }, var2(p1.results))
 			})
 		})
 	})
 	
-	return createElement(var12, t, t_1)
+	return createElement(var9, t, t_1)
 end)

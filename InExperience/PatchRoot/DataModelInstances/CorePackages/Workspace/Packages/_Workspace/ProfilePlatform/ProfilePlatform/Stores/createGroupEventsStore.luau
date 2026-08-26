@@ -7,55 +7,55 @@ local httpStoreModule = require(parent.HttpStore)
 local fFlagLuaAppUseAppHttpStore = require(parent.SharedFlags).FFlagLuaAppUseAppHttpStore
 local internalHttpStoreModule = require(parent.InternalHttpStore)
 local _ = require(profilePlatform.Parent.GraphQLServer)
-local var5 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/groups/{id}")
-local var6 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{eventId}/rsvps")
+local var1 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/groups/{id}")
+local var2 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{eventId}/rsvps")
 local fFlagEnableCommunityProfileLoadingSkeletonsModule = require(profilePlatform.Flags.FFlagEnableCommunityProfileLoadingSkeletons)
 local t = {}
 
-return function(p0)
-	-- upvalues: internalHttpStoreModule (ref), fFlagLuaAppUseAppHttpStore (ref), httpStoreModule (ref), signalsModule (ref), var5 (ref), t (ref), httpService (ref), fFlagEnableCommunityProfileLoadingSkeletonsModule (ref), var6 (ref)
+return function(p1)
+	-- upvalues: internalHttpStoreModule (ref), fFlagLuaAppUseAppHttpStore (ref), httpStoreModule (ref), signalsModule (ref), var1 (ref), t (ref), httpService (ref), fFlagEnableCommunityProfileLoadingSkeletonsModule (ref), var2 (ref)
 	local httpStore = internalHttpStoreModule.GetHttpStore()
 	
 	if fFlagLuaAppUseAppHttpStore then
-		local var10 = httpStoreModule.Instance.get()
+		local var3 = httpStoreModule.Instance.get()
 		
-		if var10 then
-			httpStore = var10
+		if var3 then
+			httpStore = var3
 		end
 	end
-	local var11, var12 = signalsModule.createSignal(0)
+	local var4, var5 = signalsModule.createSignal(0)
 	local t_1 = {}
-	local var14, var15 = signalsModule.createSignal(t_1)
+	local var6, var7 = signalsModule.createSignal(t_1)
 	
-	local _ = function(p1, p2)
-		-- upvalues: t_1 (write), var15 (ref)
+	local _ = function(p2, p3)
+		-- upvalues: t_1 (write), var7 (ref)
 		local cloned = table.clone(t_1)
-		cloned[p1] = p2
-		var15(cloned)
+		cloned[p2] = p3
+		var7(cloned)
 		t_1 = cloned
 	end
 	
-	local var16 = signalsModule.createComputed(function(p3)
-		-- upvalues: var11 (ref), p0 (ref), var5 (copy), httpStore (write)
-		return httpStore.fetch(string.format("GetEvents_%d_%d", p0, var11(p3)), { Method = "GET", Url = var5({ id = p0 }) })
+	local var8 = signalsModule.createComputed(function(p2)
+		-- upvalues: var4 (ref), p1 (ref), var1 (copy), httpStore (write)
+		return httpStore.fetch(string.format("GetEvents_%d_%d", p1, var4(p2)), { Method = "GET", Url = var1({ id = p1 }) })
 	end)
-	local var17 = t
-	local var18 = nil
+	local var9 = t
+	local var10 = nil
 	
 	return {
-		getEvents = signalsModule.createComputed(function(p4)
-			-- upvalues: var16 (ref), var14 (ref), httpService (copy), var17 (write)
-			local var20 = var16(p4)(p4)
-			local var21 = var14(p4)
+		getEvents = signalsModule.createComputed(function(p2)
+			-- upvalues: var8 (ref), var6 (ref), httpService (copy), var9 (write)
+			local var11 = var8(p2)(p2)
+			local var12 = var6(p2)
 			
-			if var20.status == "Success" then
+			if var11.status == "Success" then
 				local t = {}
-				local ok, status = pcall(httpService.JSONDecode, httpService, var20.response.Body)
+				local ok, status = pcall(httpService.JSONDecode, httpService, var11.response.Body)
 				
 				if ok then
 					for i, v in pairs(status.data) do
 						v.universeId = tostring(v.universeId)
-						local id = var21[v.id]
+						local id = var12[v.id]
 						
 						if id ~= nil then
 							v.userRsvpStatus = id
@@ -63,52 +63,52 @@ return function(p0)
 						t[i] = v
 					end
 				end
-				var17 = t
+				var9 = t
 				
 				return t
 			else
-				return if var20.status == "Failed" then {} else var17
+				return if var11.status == "Failed" then {} else var9
 			end
 		end),
-		isLoading = if fFlagEnableCommunityProfileLoadingSkeletonsModule then signalsModule.createComputed(function(p5)
-			-- upvalues: var16 (ref)
-			return var16(p5)(p5).status == "Fetching"
+		isLoading = if fFlagEnableCommunityProfileLoadingSkeletonsModule then signalsModule.createComputed(function(p3)
+			-- upvalues: var8 (ref)
+			return var8(p3)(p3).status == "Fetching"
 		end) else nil,
-		updateRsvpStatus = function(p6, p7)
-			-- upvalues: var6 (copy), httpService (copy), httpStore (write), t_1 (write), var15 (ref), var18 (write), signalsModule (copy)
-			local var23 = httpStore.fetch(string.format("UpdateEventRsvpStatus_%s_%s", p6.id, p7), {
+		updateRsvpStatus = function(p3, p4)
+			-- upvalues: var2 (copy), httpService (copy), httpStore (write), t_1 (write), var7 (ref), var10 (write), signalsModule (copy)
+			local var13 = httpStore.fetch(string.format("UpdateEventRsvpStatus_%s_%s", p3.id, p4), {
 				Method = "POST",
-				Url = var6({ eventId = p6.id }),
-				Body = httpService:JSONEncode({ rsvpStatus = p7 }),
+				Url = var2({ eventId = p3.id }),
+				Body = httpService:JSONEncode({ rsvpStatus = p4 }),
 				Headers = { ["Content-Type"] = "application/json" }
 			})
-			local id = t_1[p6.id]
+			local id = t_1[p3.id]
 			local cloned = table.clone(t_1)
-			cloned[p6.id] = p7
-			var15(cloned)
+			cloned[p3.id] = p4
+			var7(cloned)
 			t_1 = cloned
 			
-			if var18 then
-				var18()
+			if var10 then
+				var10()
 			end
-			var18 = signalsModule.createEffect(function(p8)
-				-- upvalues: var23 (ref), p6 (ref), id (ref), t_1 (copy), var15 (copy)
-				if var23(p8).status == "Failed" then
+			var10 = signalsModule.createEffect(function(p5)
+				-- upvalues: var13 (ref), p3 (ref), id (ref), t_1 (copy), var7 (copy)
+				if var13(p5).status == "Failed" then
 					local cloned = table.clone(t_1)
-					cloned[p6.id] = id
-					var15(cloned)
+					cloned[p3.id] = id
+					var7(cloned)
 					t_1 = cloned
 				end
 			end)
 			
-			return var23
+			return var13
 		end,
 		refetch = function()
-			-- upvalues: var12 (ref), var15 (ref)
-			var12(function(p9)
-				return p9 + 1
+			-- upvalues: var5 (ref), var7 (ref)
+			var5(function(p3)
+				return p3 + 1
 			end)
-			var15(function(_)
+			var7(function(_)
 				return {}
 			end)
 		end

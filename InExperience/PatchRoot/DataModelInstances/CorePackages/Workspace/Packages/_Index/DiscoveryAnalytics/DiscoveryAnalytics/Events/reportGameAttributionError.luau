@@ -3,7 +3,7 @@ local parent = discoveryAnalytics.Parent
 local loggingProtocolModule = require(parent.LoggingProtocol)
 local tModule = require(parent.t)
 local reportWarningModule = require(discoveryAnalytics.Points.reportWarning)
-local var4 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	errorType = tModule.string,
 	clickedUniverseId = tModule.string,
 	universeId = tModule.optional(tModule.string),
@@ -23,15 +23,15 @@ local t = {
 	lastUpdated = { 25, 7, 30 }
 }
 
-return function(p0, p1)
-	-- upvalues: var4 (ref), reportWarningModule (ref), loggingProtocolModule (ref), t (ref)
-	local var6, var7 = var4(p1)
+return function(p1, p2)
+	-- upvalues: var1 (ref), reportWarningModule (ref), loggingProtocolModule (ref), t (ref)
+	local var2, var3 = var1(p2)
 	
-	if not var6 then
-		reportWarningModule(loggingProtocolModule.default, "EventLogging", var7)
+	if not var2 then
+		reportWarningModule(loggingProtocolModule.default, "EventLogging", var3)
 	end
 	loggingProtocolModule.default:logRobloxTelemetryEvent(t, {
 		"addSessionInfo",
 		loggingProtocolModule.StandardizedFields.addOsInfo
-	}, p1, p0)
+	}, p2, p1)
 end

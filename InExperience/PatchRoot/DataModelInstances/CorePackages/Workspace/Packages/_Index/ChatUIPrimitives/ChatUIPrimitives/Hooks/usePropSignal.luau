@@ -5,13 +5,13 @@ local useStableSignalModule = require(script.Parent.useStableSignal)
 
 return function(value)
 	-- upvalues: useStableSignalModule (ref), reactModule (ref)
-	local var2, var3 = useStableSignalModule(value)
+	local var1, var2 = useStableSignalModule(value)
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), value (ref), var3 (ref)
-		if var2(false) ~= value then
-			var3(value)
+		-- upvalues: var1 (ref), value (ref), var2 (ref)
+		if var1(false) ~= value then
+			var2(value)
 		end
-	end, { value, var2, var3 })
+	end, { value, var1, var2 })
 	
-	return var2
+	return var1
 end

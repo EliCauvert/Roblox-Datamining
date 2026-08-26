@@ -20,16 +20,16 @@ end
 return {
 	getSettingsGearEnabled = function()
 		-- upvalues: fFlagStreamNotificationUXSettingsHeader (ref), ixpHelper (ref), getFStringNotificationsStreamNotificationUXLayer (ref), streamNotificationUXSettingsGearVariant (ref)
-		local var3 = fFlagStreamNotificationUXSettingsHeader
+		local var1 = fFlagStreamNotificationUXSettingsHeader
 		
-		if var3 then
+		if var1 then
 			local ixpLayerData = ixpHelper.getIxpLayerData(getFStringNotificationsStreamNotificationUXLayer())
 			
 			if ixpLayerData and ixpLayerData[streamNotificationUXSettingsGearVariant] ~= nil then
 				return ixpLayerData[streamNotificationUXSettingsGearVariant] == true
 			end
-			var3 = false
+			var1 = false
 		end
-		return var3
+		return var1
 	end
 }

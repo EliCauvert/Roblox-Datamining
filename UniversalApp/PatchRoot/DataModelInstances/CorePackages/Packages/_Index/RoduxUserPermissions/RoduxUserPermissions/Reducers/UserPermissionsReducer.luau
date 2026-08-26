@@ -10,16 +10,16 @@ local t = {
 	userSettingsMetadata = {}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), isPhoneVerifiedModule (ref), userSettingsModule (ref), userSettingsMetadataModule (ref)
-	return function(p1, p2)
-		-- upvalues: t (copy), isPhoneVerifiedModule (copy), p0 (ref), userSettingsModule (copy), userSettingsMetadataModule (copy)
-		p1 = p1 or t
+	return function(p2, p3)
+		-- upvalues: t (copy), isPhoneVerifiedModule (copy), p1 (ref), userSettingsModule (copy), userSettingsMetadataModule (copy)
+		p2 = p2 or t
 		
 		return {
-			isPhoneVerified = isPhoneVerifiedModule(p0)(p1.isPhoneVerified, p2),
-			userSettings = userSettingsModule(p0)(p1.userSettings, p2),
-			userSettingsMetadata = userSettingsMetadataModule(p0)(p1.userSettingsMetadata, p2)
+			isPhoneVerified = isPhoneVerifiedModule(p1)(p2.isPhoneVerified, p3),
+			userSettings = userSettingsModule(p1)(p2.userSettings, p3),
+			userSettingsMetadata = userSettingsMetadataModule(p1)(p2.userSettingsMetadata, p3)
 		}
 	end
 end

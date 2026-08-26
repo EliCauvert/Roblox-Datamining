@@ -2,58 +2,58 @@
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 local t = {}
-local var2 = require(script.Parent.UserProfileStore).get()
+local var1 = require(script.Parent.UserProfileStore).get()
 
 local function _(value)
 	-- upvalues: t (write), createSignal (ref)
 	if not t[value] then
-		local var5, var6 = createSignal(false)
-		t[value] = { getter = var5, setter = var6 }
+		local var2, var3 = createSignal(false)
+		t[value] = { getter = var2, setter = var3 }
 	end
 	return t[value]
 end
 
-local function hasUserVerifiedBadge(p0, p1)
-	-- upvalues: var2 (ref)
-	local ok, status = pcall(var2.fetchNamesByUserIds({ tostring(p0) }), p1)
+local function hasUserVerifiedBadge(p1, p2)
+	-- upvalues: var1 (ref)
+	local ok, status = pcall(var1.fetchNamesByUserIds({ tostring(p1) }), p2)
 	
 	if not ok then
 		status = { status = "failed", data = {} }
 	end
-	return if status.status == "success" and #status.data > 0 and status.data[1].getIsVerified then status.data[1].getIsVerified(p1) else false
+	return if status.status == "success" and #status.data > 0 and status.data[1].getIsVerified then status.data[1].getIsVerified(p2) else false
 end
 
 local t_1 = {
-	setBadgeVisibility = function(value, p2)
+	setBadgeVisibility = function(value, p1)
 		-- upvalues: t (write), createSignal (ref)
 		if not t[value] then
-			local var7, var8 = createSignal(false)
-			t[value] = { getter = var7, setter = var8 }
+			local var2, var3 = createSignal(false)
+			t[value] = { getter = var2, setter = var3 }
 		end
-		t[value].setter(p2)
+		t[value].setter(p1)
 	end,
 	getBadgeVisibilitySignal = function(value)
 		-- upvalues: t (write), createSignal (ref), createComputed (ref), hasUserVerifiedBadge (ref)
 		if not t[value] then
-			local var9, var10 = createSignal(false)
-			t[value] = { getter = var9, setter = var10 }
+			local var2, var3 = createSignal(false)
+			t[value] = { getter = var2, setter = var3 }
 		end
-		local var11 = t[value]
+		local var4 = t[value]
 		
-		return createComputed(function(p3)
-			-- upvalues: hasUserVerifiedBadge (copy), value (ref), var11 (ref)
-			return hasUserVerifiedBadge(value, p3) and var11.getter(p3)
+		return createComputed(function(p1)
+			-- upvalues: hasUserVerifiedBadge (copy), value (ref), var4 (ref)
+			return hasUserVerifiedBadge(value, p1) and var4.getter(p1)
 		end)
 	end,
-	isBadgeVisible = function(p4)
+	isBadgeVisible = function(p1)
 		-- upvalues: hasUserVerifiedBadge (ref), t (write), createSignal (ref)
-		local var12 = hasUserVerifiedBadge(p4, false)
+		local var2 = hasUserVerifiedBadge(p1, false)
 		
-		if not t[p4] then
-			local var13, var14 = createSignal(false)
-			t[p4] = { getter = var13, setter = var14 }
+		if not t[p1] then
+			local var3, var4 = createSignal(false)
+			t[p1] = { getter = var3, setter = var4 }
 		end
-		return var12 and t[p4].getter(false)
+		return var2 and t[p1].getter(false)
 	end,
 	reset = function()
 		-- upvalues: t (write)

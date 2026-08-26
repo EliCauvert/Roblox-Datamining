@@ -5,27 +5,27 @@ return function()
 	local tbl = setmetatable({}, { __mode = "v" })
 	
 	return {
-		register = function(p0, p1)
+		register = function(p1, p2)
 			-- upvalues: tbl (ref), appCommonLibModule (copy)
-			local var2 = tbl[p0]
+			local var1 = tbl[p1]
 			
-			if var2 == nil then
-				var2 = appCommonLibModule.Signal.new()
-				tbl[p0] = var2
+			if var1 == nil then
+				var1 = appCommonLibModule.Signal.new()
+				tbl[p1] = var1
 			end
-			local var3 = var2:connect(p1)
+			local var2 = var1:connect(p2)
 			
 			return function()
-				-- upvalues: var3 (ref)
-				var3.disconnect()
+				-- upvalues: var2 (ref)
+				var2.disconnect()
 			end
 		end,
-		activate = function(p2)
+		activate = function(p1)
 			-- upvalues: tbl (ref)
-			local var4 = tbl[p2]
+			local var1 = tbl[p1]
 			
-			if var4 then
-				var4:fire()
+			if var1 then
+				var1:fire()
 			end
 		end
 	}

@@ -11,39 +11,39 @@ local fFlagMarketplaceCatalogCategoryTrackLastReceived = sharedFlagsModule.FFlag
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), fFlagMarketplaceCatalogCategoryTrackLastReceived (ref), signalsModule (ref)
-	local var6 = createDataCacheModule()
-	local var7 = createDataResolverModule({
-		cache = var6,
+	local var1 = createDataCacheModule()
+	local var2 = createDataResolverModule({
+		cache = var1,
 		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
 		end
 	})
-	local var8 = nil
-	local var9 = nil
+	local var3 = nil
+	local var4 = nil
 	
 	if fFlagMarketplaceCatalogCategoryTrackLastReceived then
-		local var10, var11 = signalsModule.createSignal({})
-		var8 = var10
-		var9 = var11
+		local var5, var6 = signalsModule.createSignal({})
+		var3 = var5
+		var4 = var6
 	end
 	return {
-		getMarketplaceCatalogCategory = var7.getCachedItem,
-		getMarketplaceCatalogCategories = var7.getCachedItems,
-		updateMarketplaceCatalogCategories = if fFlagMarketplaceCatalogCategoryTrackLastReceived then function(p0)
-			-- upvalues: var9 (write), var6 (ref)
-			var9(p0)
-			var6.updateItems(p0)
-		end else var6.updateItems,
-		updateMarketplaceCatalogCategory = var6.updateItem,
-		getLastReceivedCategories = var8,
+		getMarketplaceCatalogCategory = var2.getCachedItem,
+		getMarketplaceCatalogCategories = var2.getCachedItems,
+		updateMarketplaceCatalogCategories = if fFlagMarketplaceCatalogCategoryTrackLastReceived then function(p1)
+			-- upvalues: var4 (write), var1 (ref)
+			var4(p1)
+			var1.updateItems(p1)
+		end else var1.updateItems,
+		updateMarketplaceCatalogCategory = var1.updateItem,
+		getLastReceivedCategories = var3,
 		clear = if fFlagMarketplaceCatalogCategoryTrackLastReceived then function()
-			-- upvalues: var9 (write), var7 (ref)
-			if var9 then
-				var9({})
+			-- upvalues: var4 (write), var2 (ref)
+			if var4 then
+				var4({})
 			end
-			var7.clear()
-		end else var7.clear,
-		dispose = var7.dispose
+			var2.clear()
+		end else var2.clear,
+		dispose = var2.dispose
 	}
 end

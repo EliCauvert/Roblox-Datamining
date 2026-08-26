@@ -9,7 +9,7 @@ function t.hideOverlay()
 	end
 end
 
-function t.showOverlay(p0, p1, p2)
+function t.showOverlay(p1, p2, p3)
 	-- upvalues: t (ref), var1 (write)
 	t.hideOverlay()
 	local textOverlay = Instance.new("Frame")
@@ -22,7 +22,7 @@ function t.showOverlay(p0, p1, p2)
 	textOverlay.ZIndex = 100
 	local overlayLabel = Instance.new("TextLabel")
 	overlayLabel.Name = "OverlayLabel"
-	overlayLabel.Text = p0
+	overlayLabel.Text = p1
 	overlayLabel.TextColor3 = Color3.new(1, 1, 1)
 	overlayLabel.TextScaled = true
 	overlayLabel.TextWrapped = true
@@ -33,11 +33,11 @@ function t.showOverlay(p0, p1, p2)
 	overlayLabel.Font = Enum.Font.SourceSans
 	overlayLabel.Parent = textOverlay
 	overlayLabel.ZIndex = 200
-	textOverlay.Parent = p2
+	textOverlay.Parent = p3
 	var1 = textOverlay
 	task.spawn(function()
-		-- upvalues: p1 (ref), var1 (copy), textOverlay (ref), t (copy)
-		task.wait(p1)
+		-- upvalues: p2 (ref), var1 (copy), textOverlay (ref), t (copy)
+		task.wait(p2)
 		
 		if var1 == textOverlay then
 			t.hideOverlay()

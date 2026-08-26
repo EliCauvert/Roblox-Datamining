@@ -36,19 +36,19 @@ local t_1 = {
 	}
 }
 
-local var6 = function(p0)
+local var1 = function(p1)
 	local t = {}
 	
-	for i, v in ipairs(p0) do
+	for i, v in ipairs(p1) do
 		t[#t + 1] = { v.X, v.Y }
 	end
 	return t
 end
 
-local var7 = function(p1)
+local var2 = function(p2)
 	local t = {}
 	
-	for i, v in pairs(p1) do
+	for i, v in pairs(p2) do
 		t[#t + 1] = {
 			assetId = v.assetId,
 			distance = v.distance,
@@ -66,11 +66,11 @@ local var7 = function(p1)
 	return t
 end
 
-local var8 = function(p2)
-	-- upvalues: var6 (ref)
+local var3 = function(p3)
+	-- upvalues: var1 (ref)
 	local t = {}
 	
-	for i, v in pairs(p2) do
+	for i, v in pairs(p3) do
 		t[#t + 1] = {
 			userId = tostring(i),
 			distance = v.distance,
@@ -81,7 +81,7 @@ local var8 = function(p2)
 				maxY = v.boundingBox.max.Y
 			},
 			hitRate = v.hitRate,
-			convexHull = var6(v.convexHull)
+			convexHull = var1(v.convexHull)
 		}
 		
 		if v.pointProcessingStats ~= nil then
@@ -96,63 +96,63 @@ local var8 = function(p2)
 	return t
 end
 
-local var9 = function(p3)
-	-- upvalues: t (write), getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var8 (ref), var7 (ref), var6 (ref)
-	local var14 = false
+local var4 = function(p4)
+	-- upvalues: t (write), getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var3 (ref), var2 (ref), var1 (ref)
+	local var5 = false
 	
 	for i, v in pairs(t.identifiedAvatars) do
-		var14 = true
+		var5 = true
 		break
 	end
-	local var15 = false
+	local var6 = false
 	
 	if getFFlagReportAnythingEnableAdReport() then
 		for v, v_1 in pairs(t.identifiedAds) do
-			var15 = true
+			var6 = true
 			break
 		end
 	end
-	if var14 then
-		p3.tags.IDENTIFIED_AVATARS = {
+	if var5 then
+		p4.tags.IDENTIFIED_AVATARS = {
 			valueList = {
-				{ data = httpService:JSONEncode(var8(t.identifiedAvatars)) }
+				{ data = httpService:JSONEncode(var3(t.identifiedAvatars)) }
 			}
 		}
 	end
 	if t.avatarIDStats then
-		p3.tags.AVATAR_ID_STATS = {
+		p4.tags.AVATAR_ID_STATS = {
 			valueList = { { data = httpService:JSONEncode(t.avatarIDStats) } }
 		}
 	end
-	if var15 and getFFlagReportAnythingEnableAdReport() then
-		p3.tags.IDENTIFIED_ADS = {
-			valueList = { { data = httpService:JSONEncode(var7(t.identifiedAds)) } }
+	if var6 and getFFlagReportAnythingEnableAdReport() then
+		p4.tags.IDENTIFIED_ADS = {
+			valueList = { { data = httpService:JSONEncode(var2(t.identifiedAds)) } }
 		}
 	end
 	if t.adIDStats and getFFlagReportAnythingEnableAdReport() then
-		p3.tags.AD_ID_STATS = {
+		p4.tags.AD_ID_STATS = {
 			valueList = { { data = httpService:JSONEncode(t.adIDStats) } }
 		}
 	end
 	if #t.screenshotId > 0 then
-		p3.tags.SCREENSHOT_ID = { valueList = { { data = t.screenshotId } } }
+		p4.tags.SCREENSHOT_ID = { valueList = { { data = t.screenshotId } } }
 	end
 	if #t.annotationPoints > 0 then
-		p3.tags.RA_ANNOTATION_POINTS = {
+		p4.tags.RA_ANNOTATION_POINTS = {
 			valueList = {
-				{ data = httpService:JSONEncode(var6(t.annotationPoints)) }
+				{ data = httpService:JSONEncode(var1(t.annotationPoints)) }
 			}
 		}
 	end
-	p3.tags.RA_ANNOTATION_OPTION_SEEN = {
+	p4.tags.RA_ANNOTATION_OPTION_SEEN = {
 		valueList = { { data = tostring(t.annotationOptionSeen) } }
 	}
-	p3.tags.RA_ANNOTATION_PAGE_SEEN = {
+	p4.tags.RA_ANNOTATION_PAGE_SEEN = {
 		valueList = { { data = tostring(t.annotationPageSeen) } }
 	}
 end
 
-local var10 = function()
+local var7 = function()
 	-- upvalues: t (write), getFFlagRAEnableCircleRegion (ref), getAvatarsForRegion (ref), getAvatarsForPoint (ref), getFFlagReportAnythingEnableAdReport (ref), getAdsForPoint (ref)
 	local t_1 = {}
 	local t_2 = {}
@@ -161,37 +161,37 @@ local var10 = function()
 	
 	for i, v in ipairs(t.annotationPoints) do
 		local i_2
-		local var20 = 1e999
-		local var21 = nil
+		local var8 = 1e999
+		local var9 = nil
 		
 		for i_1, v_1 in pairs(if getFFlagRAEnableCircleRegion() then getAvatarsForRegion(t.identifiedAvatars, v, t.annotationCircleRadius, t.screenSizeWidth, t.screenSizeHeight) else getAvatarsForPoint(t.identifiedAvatars, v)) do
 			i_2 = t.identifiedAvatars[i_1].distance
 			
-			if i_2 < var20 then
-				var20 = i_2
-				var21 = i_1
+			if i_2 < var8 then
+				var8 = i_2
+				var9 = i_1
 			end
 		end
-		local var22 = nil
+		local var10 = nil
 		
 		if getFFlagReportAnythingEnableAdReport() then
-			local var23 = 1e999
+			local var11 = 1e999
 			
 			for i_2, v_2 in pairs(getAdsForPoint(t.identifiedAds, v)) do
 				local distance = t.identifiedAds[i_2].distance
 				
-				if distance < var23 then
-					var23 = distance
-					var22 = i_2
+				if distance < var11 then
+					var11 = distance
+					var10 = i_2
 				end
 			end
 		end
-		if var21 ~= nil and not t_1[var21] then
-			t_1[var21] = true
-			t_3[#t_3 + 1] = t.identifiedAvatars[var21].player
-		elseif getFFlagReportAnythingEnableAdReport() and var22 ~= nil and not t_2[var22] then
-			t_2[var22] = true
-			t_4[#t_4 + 1] = t.identifiedAds[var22]
+		if var9 ~= nil and not t_1[var9] then
+			t_1[var9] = true
+			t_3[#t_3 + 1] = t.identifiedAvatars[var9].player
+		elseif getFFlagReportAnythingEnableAdReport() and var10 ~= nil and not t_2[var10] then
+			t_2[var10] = true
+			t_4[#t_4 + 1] = t.identifiedAds[var10]
 		end
 	end
 	t.selectedAbusers = t_3
@@ -207,10 +207,10 @@ return {
 		-- upvalues: t (write)
 		return t.annotationCircleRadius
 	end,
-	setAspectRatioDimensions = function(value, p4)
+	setAspectRatioDimensions = function(value, p5)
 		-- upvalues: t (write)
 		t.screenSizeWidth = value
-		t.screenSizeHeight = p4
+		t.screenSizeHeight = p5
 	end,
 	setScreenshotId = function(value)
 		-- upvalues: t (write)
@@ -251,11 +251,11 @@ return {
 		return t.screenshotContentId
 	end,
 	setAnnotationPoints = function(value)
-		-- upvalues: t (write), var10 (ref)
+		-- upvalues: t (write), var7 (ref)
 		t.annotationPoints = value
 		t.annotationOptionSeen = true
 		t.annotationPageSeen = true
-		var10()
+		var7()
 	end,
 	getSelectedAbusers = function()
 		-- upvalues: t (write)
@@ -297,7 +297,7 @@ return {
 		return t.annotationPageSeen
 	end,
 	buildExperienceReportRequest = function(p5)
-		-- upvalues: t_1 (ref), var9 (ref), t (write), getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var7 (ref)
+		-- upvalues: t_1 (ref), var4 (ref), t (write), getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var2 (ref)
 		local t_2 = {
 			tags = {
 				ENTRY_POINT = { valueList = { { data = "in-experience" } } },
@@ -310,61 +310,61 @@ return {
 				VARIANT = { valueList = { { data = p5.variant or t_1.Variant.CS } } }
 			}
 		}
-		var9(t_2)
+		var4(t_2)
 		
 		if #t.selectedAds > 0 and getFFlagReportAnythingEnableAdReport() then
 			t_2.tags.REPORT_TARGET_ADS = {
-				valueList = { { data = httpService:JSONEncode(var7(t.selectedAds)) } }
+				valueList = { { data = httpService:JSONEncode(var2(t.selectedAds)) } }
 			}
 		end
 		return httpService:JSONEncode(t_2)
 	end,
-	buildOtherReportRequest = function(p6)
-		-- upvalues: t_1 (ref), var9 (ref), t (write), getFFlagGetHumanoidDescription (ref), getHumanoidDescription (ref), httpService (ref)
+	buildOtherReportRequest = function(p5)
+		-- upvalues: t_1 (ref), var4 (ref), t (write), getFFlagGetHumanoidDescription (ref), getHumanoidDescription (ref), httpService (ref)
 		local t_2 = {
 			tags = {
 				ENTRY_POINT = { valueList = { { data = "in-experience" } } },
-				SUBMITTER_USER_ID = { valueList = { { data = tostring(p6.localUserId) } } },
-				REPORTED_ABUSE_CATEGORY = { valueList = { { data = p6.abuseReason } } },
-				REPORTER_COMMENT = { valueList = { { data = p6.abuseComment } } },
+				SUBMITTER_USER_ID = { valueList = { { data = tostring(p5.localUserId) } } },
+				REPORTED_ABUSE_CATEGORY = { valueList = { { data = p5.abuseReason } } },
+				REPORTER_COMMENT = { valueList = { { data = p5.abuseComment } } },
 				REPORTED_ABUSE_VECTOR = { valueList = { { data = "avatar" } } },
-				IN_EXP_MENU_ENTRY_POINT = { valueList = { { data = p6.menuEntryPoint } } },
+				IN_EXP_MENU_ENTRY_POINT = { valueList = { { data = p5.menuEntryPoint } } },
 				VARIANT = {
-					valueList = { { data = p6.variant or t_1.Variant.Unknown } }
+					valueList = { { data = p5.variant or t_1.Variant.Unknown } }
 				}
 			}
 		}
-		var9(t_2)
+		var4(t_2)
 		
 		if #t.selectedAbusers > 0 then
-			local var26 = tostring(t.selectedAbusers[1].UserId)
+			local var12 = tostring(t.selectedAbusers[1].UserId)
 			local t_3 = {}
 			
 			for i, v in ipairs(t.selectedAbusers) do
 				t_3[#t_3 + 1] = tostring(v.UserId)
 			end
 			if getFFlagGetHumanoidDescription() then
-				local var28, var29 = getHumanoidDescription(t.selectedAbusers[1].UserId)
-				t_2.tags.REPORT_TARGET_HUMANOID_DESCRIPTION = { valueList = { { data = httpService:JSONEncode(var28) } } }
-				t_2.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = var29 } } }
+				local var13, var14 = getHumanoidDescription(t.selectedAbusers[1].UserId)
+				t_2.tags.REPORT_TARGET_HUMANOID_DESCRIPTION = { valueList = { { data = httpService:JSONEncode(var13) } } }
+				t_2.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = var14 } } }
 				local t_4 = {}
 				
 				for i_1, v_1 in ipairs(t.selectedAbusers) do
-					local var31, var32 = getHumanoidDescription(v_1.UserId)
-					t_4[#t_4 + 1] = { humanoidDescription = var31, outputMessage = var32 }
+					local var15, var16 = getHumanoidDescription(v_1.UserId)
+					t_4[#t_4 + 1] = { humanoidDescription = var15, outputMessage = var16 }
 				end
 				t_2.tags.RA_ALL_ANNOTATED_HUMANOID_DESCRIPTIONS = { valueList = { { data = httpService:JSONEncode(t_4) } } }
 			end
-			t_2.tags.REPORT_TARGET_USER_ID = { valueList = { { data = tostring(var26) } } }
+			t_2.tags.REPORT_TARGET_USER_ID = { valueList = { { data = tostring(var12) } } }
 			t_2.tags.RA_ALL_ANNOTATED_USER_IDS = { valueList = { { data = httpService:JSONEncode(t_3) } } }
-		elseif p6.formSelectedAbuserUserId then
+		elseif p5.formSelectedAbuserUserId then
 			if getFFlagGetHumanoidDescription() then
-				local var33, var34 = getHumanoidDescription(p6.formSelectedAbuserUserId)
-				t_2.tags.REPORT_TARGET_HUMANOID_DESCRIPTION = { valueList = { { data = httpService:JSONEncode(var33) } } }
-				t_2.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = var34 } } }
+				local var17, var18 = getHumanoidDescription(p5.formSelectedAbuserUserId)
+				t_2.tags.REPORT_TARGET_HUMANOID_DESCRIPTION = { valueList = { { data = httpService:JSONEncode(var17) } } }
+				t_2.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = var18 } } }
 			end
 			t_2.tags.REPORT_TARGET_USER_ID = {
-				valueList = { { data = tostring(p6.formSelectedAbuserUserId) } }
+				valueList = { { data = tostring(p5.formSelectedAbuserUserId) } }
 			}
 		end
 		return httpService:JSONEncode(t_2)

@@ -10,50 +10,50 @@ local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannel
 local analytics = expChatSharedModule.Analytics
 local fFlagExpChatReportVirtualCommandTelemetry = expChatSharedModule.Flags.FFlagExpChatReportVirtualCommandTelemetry
 local context = expChatSharedModule.context
-local var6 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
+local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(p0, p1, p2, p3)
-	-- upvalues: context (ref), var6 (ref), fFlagExpChatReportVirtualCommandTelemetry (ref), analytics (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), universeChatSystemMessageAddedModule (ref)
+return function(p1, p2, p3, p4)
+	-- upvalues: context (ref), var1 (ref), fFlagExpChatReportVirtualCommandTelemetry (ref), analytics (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), universeChatSystemMessageAddedModule (ref)
 	if not context.translator then
-		var6:warning("context.translator is nil, cannot execute command")
+		var1:warning("context.translator is nil, cannot execute command")
 		
 		return false
 	end
-	for i, v in ipairs(p2) do
+	for i, v in ipairs(p3) do
 		for i_1, v_1 in ipairs(v.alias) do
-			if p0 == v_1 or string.find(p0, "^" .. v_1 .. "%s") ~= nil then
+			if p1 == v_1 or string.find(p1, "^" .. v_1 .. "%s") ~= nil then
 				if fFlagExpChatReportVirtualCommandTelemetry then
 					analytics:reportTextChatCommandClientSent(v.name)
 				end
 				task.spawn(function()
-					-- upvalues: v (ref), context (copy), p1 (ref), p0 (ref), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), p3 (ref), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), universeChatSystemMessageAddedModule (copy)
-					local var7 = v.clientRun(context.store, p1, p0, context)
+					-- upvalues: v (ref), context (copy), p2 (ref), p1 (ref), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), p4 (ref), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), universeChatSystemMessageAddedModule (copy)
+					local var2 = v.clientRun(context.store, p2, p1, context)
 					
-					if var7 ~= nil then
-						local key = var7.key
+					if var2 ~= nil then
+						local key = var2.key
 						local joined = nil
 						
 						if type(key) == "string" and key ~= "" then
-							joined = context.translator:FormatByKey(key, var7.args)
+							joined = context.translator:FormatByKey(key, var2.args)
 						elseif type(key) == "table" and #key > 0 then
 							local t = {}
 							
 							for i, v_1 in key do
-								table.insert(t, context.translator:FormatByKey(v_1, var7.args))
+								table.insert(t, context.translator:FormatByKey(v_1, var2.args))
 							end
 							joined = table.concat(t, "\n")
 						end
 						if joined then
 							if fFlagExpChatUseMessagesStore then
-								getMessagesStoreModule(false).addSystemMessage(joined, p3, var7.metadata)
+								getMessagesStoreModule(false).addSystemMessage(joined, p4, var2.metadata)
 								
 								if fFlagExpChatUseChannelTabsStore then
-									getChannelTabsStoreModule(false).markChannelUnread(p3)
+									getChannelTabsStoreModule(false).markChannelUnread(p4)
 									
 									return
 								end
 							else
-								context.store:dispatch(universeChatSystemMessageAddedModule(joined, p3, var7.metadata))
+								context.store:dispatch(universeChatSystemMessageAddedModule(joined, p4, var2.metadata))
 							end
 						end
 					end

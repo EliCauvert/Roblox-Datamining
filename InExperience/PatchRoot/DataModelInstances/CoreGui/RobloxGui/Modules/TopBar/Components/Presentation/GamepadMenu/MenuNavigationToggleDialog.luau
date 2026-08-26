@@ -12,87 +12,87 @@ local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTex
 local useDesignTokens = require(corePackagesService.Workspace.Packages.Style).useDesignTokens
 local parent = script.Parent.Parent.Parent.Parent
 local chrome = parent.Parent.Chrome
-local var6 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
-local var7 = if fFlagEnableConsoleExpControls and not var6 then nil else require(parent.Components.GamepadConnector)
+local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var2 = if fFlagEnableConsoleExpControls and not var1 then nil else require(parent.Components.GamepadConnector)
 local useObservableValueModule = require(chrome.ChromeShared.Hooks.useObservableValue)
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local fFlagLocalizeMenuNavigationToggleDialogModule = require(coreGuiService.RobloxGui.Modules.TopBar.Flags.FFlagLocalizeMenuNavigationToggleDialog)
 
-return function(p0)
-	-- upvalues: useDesignTokens (ref), fFlagLocalizeMenuNavigationToggleDialogModule (ref), userInputService (ref), reactModule (ref), localizationService (ref), useEventConnection (ref), localization (ref), getTextSize (ref), var6 (ref), fFlagEnableConsoleExpControls (ref), useObservableValueModule (ref), var7 (ref)
-	local var12, var13
-	local var10 = useDesignTokens()
-	local captionMedium = var10.Typography.CaptionMedium
-	local size400 = var10.Size.Size_400
-	local size150 = var10.Size.Size_150
-	local medium = var10.Radius.Medium
-	local size600 = var10.Size.Size_600
-	local overMedia0 = var10.Color.OverMedia.OverMedia_0
-	local color3 = var10.Color.Content.Emphasis.Color3
-	local size100 = var10.Size.Size_100
-	local var11 = if fFlagLocalizeMenuNavigationToggleDialogModule and game:GetEngineFeature("GetImageForKeyCode") then userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonSelect) else "rbxasset://textures/ui/Controls/DesignSystem/ButtonSelect@2x.png"
+return function(p1)
+	-- upvalues: useDesignTokens (ref), fFlagLocalizeMenuNavigationToggleDialogModule (ref), userInputService (ref), reactModule (ref), localizationService (ref), useEventConnection (ref), localization (ref), getTextSize (ref), var1 (ref), fFlagEnableConsoleExpControls (ref), useObservableValueModule (ref), var2 (ref)
+	local var3, var4
+	local var5 = useDesignTokens()
+	local captionMedium = var5.Typography.CaptionMedium
+	local size400 = var5.Size.Size_400
+	local size150 = var5.Size.Size_150
+	local medium = var5.Radius.Medium
+	local size600 = var5.Size.Size_600
+	local overMedia0 = var5.Color.OverMedia.OverMedia_0
+	local color3 = var5.Color.Content.Emphasis.Color3
+	local size100 = var5.Size.Size_100
+	local var6 = if fFlagLocalizeMenuNavigationToggleDialogModule and game:GetEngineFeature("GetImageForKeyCode") then userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonSelect) else "rbxasset://textures/ui/Controls/DesignSystem/ButtonSelect@2x.png"
 	local _ = nil
 	local _ = nil
 	
 	if fFlagLocalizeMenuNavigationToggleDialogModule then
-		local var14, var15 = reactModule.useState(localizationService.RobloxLocaleId)
+		local var7, var8 = reactModule.useState(localizationService.RobloxLocaleId)
 		useEventConnection(localizationService:GetPropertyChangedSignal("RobloxLocaleId"), function()
-			-- upvalues: var15 (ref), localizationService (copy)
-			var15(localizationService.RobloxLocaleId)
+			-- upvalues: var8 (ref), localizationService (copy)
+			var8(localizationService.RobloxLocaleId)
 		end)
-		local var16, var17 = reactModule.useMemo(function()
-			-- upvalues: localization (copy), var14 (ref)
-			local var24 = localization.new(var14)
-			local ok, status = pcall(var24.Format, var24, "CoreScripts.InGameMenu.VirtualCursorHintPreIcon")
-			local ok_1, status_1 = pcall(var24.Format, var24, "CoreScripts.InGameMenu.VirtualCursorHintPostIcon")
-			local var25 = if ok then status else "Some experiences require pressing"
+		local var9, var10 = reactModule.useMemo(function()
+			-- upvalues: localization (copy), var7 (ref)
+			local var11 = localization.new(var7)
+			local ok, status = pcall(var11.Format, var11, "CoreScripts.InGameMenu.VirtualCursorHintPreIcon")
+			local ok_1, status_1 = pcall(var11.Format, var11, "CoreScripts.InGameMenu.VirtualCursorHintPostIcon")
+			local var12 = if ok then status else "Some experiences require pressing"
 			
 			if ok_1 then
-				return var25, status_1
+				return var12, status_1
 			end
-			return var25, "to toggle menu navigation"
-		end, { var14 })
-		var12 = var16
-		var13 = var17
+			return var12, "to toggle menu navigation"
+		end, { var7 })
+		var3 = var9
+		var4 = var10
 	else
 		local _ = {
 			VirtualCursorHintPreIcon = "Some experiences require pressing ",
 			VirtualCursorHintPostIcon = " to toggle menu navigation"
 		}
-		var12 = "Some experiences require pressing "
-		var13 = " to toggle menu navigation"
+		var3 = "Some experiences require pressing "
+		var4 = " to toggle menu navigation"
 	end
-	local var18, var19 = reactModule.useMemo(function()
-		-- upvalues: getTextSize (copy), var12 (write), captionMedium (ref), var13 (write)
-		return getTextSize(var12, captionMedium.FontSize, captionMedium.Font, Vector2.new(1e999, 1e999)), getTextSize(var13, captionMedium.FontSize, captionMedium.Font, Vector2.new(1e999, 1e999))
-	end, { captionMedium.FontSize, captionMedium.Font, var12, var13 })
-	local var20 = nil
+	local var11, var12 = reactModule.useMemo(function()
+		-- upvalues: getTextSize (copy), var3 (write), captionMedium (ref), var4 (write)
+		return getTextSize(var3, captionMedium.FontSize, captionMedium.Font, Vector2.new(1e999, 1e999)), getTextSize(var4, captionMedium.FontSize, captionMedium.Font, Vector2.new(1e999, 1e999))
+	end, { captionMedium.FontSize, captionMedium.Font, var3, var4 })
+	local var13 = nil
 	
-	if not var6 then
-		var20 = nil
+	if not var1 then
+		var13 = nil
 	elseif fFlagEnableConsoleExpControls then
-		var20 = useObservableValueModule(var7:getSelectedCoreObject())
+		var13 = useObservableValueModule(var2:getSelectedCoreObject())
 	end
-	local var23
+	local var14
 	local createElement = reactModule.createElement
-	local var21 = "Frame"
+	local var15 = "Frame"
 	local t = {
 		BackgroundColor3 = overMedia0.Color3,
 		BackgroundTransparency = overMedia0.Transparency,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Position = p0.Position
+		Position = p1.Position
 	}
 	
-	if var6 and fFlagEnableConsoleExpControls then
-		var23 = var20 ~= nil
-		var23 = nil
+	if var1 and fFlagEnableConsoleExpControls then
+		var14 = var13 ~= nil
+		var14 = nil
 	else
-		var23 = true
+		var14 = true
 	end
-	t.Visible = var23
+	t.Visible = var14
 	
-	return createElement(var21, t, {
+	return createElement(var15, t, {
 		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, medium) }),
 		Layout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
@@ -105,8 +105,8 @@ return function(p0)
 			TextWrapped = false,
 			BackgroundTransparency = 1,
 			LayoutOrder = 0,
-			Size = UDim2.fromOffset(var18.X, var18.Y),
-			Text = var12,
+			Size = UDim2.fromOffset(var11.X, var11.Y),
+			Text = var3,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			TextColor3 = color3,
@@ -117,14 +117,14 @@ return function(p0)
 			BackgroundTransparency = 1,
 			LayoutOrder = 100,
 			Size = UDim2.fromOffset(size600, size600),
-			Image = var11
+			Image = var6
 		}),
 		RightText = reactModule.createElement("TextLabel", {
 			TextWrapped = false,
 			BackgroundTransparency = 1,
 			LayoutOrder = 200,
-			Size = UDim2.fromOffset(var19.X, var19.Y),
-			Text = var13,
+			Size = UDim2.fromOffset(var12.X, var12.Y),
+			Text = var4,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			TextColor3 = color3,

@@ -17,13 +17,13 @@ local t = { dampingRatio = 1, frequency = 2 }
 if game:GetEngineFeature("TextChatServiceSettingsSaved") then
 	gameSettings.ChatTranslationFTUXShown = true
 end
-function chatTranslationFTUX.init(p0)
+function chatTranslationFTUX.init(p1)
 	-- upvalues: roactModule (ref), otterModule (ref)
-	local var10, var11 = roactModule.createBinding(1)
-	p0.transparency = var10
-	p0.updateTransparency = var11
-	p0.transparencyMotor = otterModule.createSingleMotor(1)
-	p0.transparencyMotor:onStep(p0.updateTransparency)
+	local var1, var2 = roactModule.createBinding(1)
+	p1.transparency = var1
+	p1.updateTransparency = var2
+	p1.transparencyMotor = otterModule.createSingleMotor(1)
+	p1.transparencyMotor:onStep(p1.updateTransparency)
 end
 
 function chatTranslationFTUX.render(p1)
@@ -108,31 +108,31 @@ function chatTranslationFTUX.render(p1)
 	})
 end
 
-function chatTranslationFTUX.fadeOut(p3)
+function chatTranslationFTUX.fadeOut(p1)
 	-- upvalues: otterModule (ref), t (ref)
-	if not p3.isFadingOut then
-		p3.isFadingOut = true
-		p3.transparencyMotor:setGoal((function(p4)
+	if not p1.isFadingOut then
+		p1.isFadingOut = true
+		p1.transparencyMotor:setGoal((function(p2)
 			-- upvalues: otterModule (copy), t (copy)
-			return otterModule.spring(p4, t)
+			return otterModule.spring(p2, t)
 		end)(1))
 	end
 end
 
-function chatTranslationFTUX.didMount(p5)
+function chatTranslationFTUX.didMount(p1)
 	-- upvalues: otterModule (ref), t (ref)
-	p5.transparencyMotor:setGoal((function(p6)
+	p1.transparencyMotor:setGoal((function(p2)
 		-- upvalues: otterModule (copy), t (copy)
-		return otterModule.spring(p6, t)
+		return otterModule.spring(p2, t)
 	end)(0))
-	p5.props.timer:start():andThen(function()
-		-- upvalues: p5 (ref)
-		p5:fadeOut()
+	p1.props.timer:start():andThen(function()
+		-- upvalues: p1 (ref)
+		p1:fadeOut()
 	end)
 end
 
-function chatTranslationFTUX.willUnmount(p7)
-	p7.transparencyMotor:destroy()
+function chatTranslationFTUX.willUnmount(p1)
+	p1.transparencyMotor:destroy()
 end
 
 return localizationModule.connect(function()

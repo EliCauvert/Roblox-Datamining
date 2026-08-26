@@ -1,5 +1,5 @@
 ﻿local _ = script.Parent.Parent
 
-return function(p0, p1)
-	return if p1 then if p0.PremiumPriceInRobux == nil then p0.PriceInRobux or 0 else p0.PremiumPriceInRobux else p0.PriceInRobux or 0
+return function(p1, p2)
+	return if p2 then if p1.PremiumPriceInRobux == nil then p1.PriceInRobux or 0 else p1.PremiumPriceInRobux else p1.PriceInRobux or 0
 end

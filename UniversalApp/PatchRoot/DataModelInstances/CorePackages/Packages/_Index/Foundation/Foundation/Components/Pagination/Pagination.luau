@@ -9,10 +9,10 @@ local t = {
 	variant = paginationVariantModule.MultiPage
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), paginationVariantModule (ref), reactModule (ref), multiPagePaginationModule (ref), directionalPaginationModule (ref)
-	local var7 = withDefaultsModule(p0, t)
-	var7.ref = p1
+	local var1 = withDefaultsModule(p1, t)
+	var1.ref = p2
 	
-	return if var7.variant == paginationVariantModule.MultiPage then reactModule.createElement(multiPagePaginationModule, var7) else reactModule.createElement(directionalPaginationModule, var7)
+	return if var1.variant == paginationVariantModule.MultiPage then reactModule.createElement(multiPagePaginationModule, var1) else reactModule.createElement(directionalPaginationModule, var1)
 end))

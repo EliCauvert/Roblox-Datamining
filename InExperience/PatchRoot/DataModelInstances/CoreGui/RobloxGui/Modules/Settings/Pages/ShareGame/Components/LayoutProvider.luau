@@ -10,14 +10,14 @@ local setIsSmallTouchScreenModule = require(shareGame.Actions.SetIsSmallTouchScr
 local setDeviceLayoutModule = require(shareGame.Actions.SetDeviceLayout)
 local layoutProvider = roactModule.Component:extend("LayoutProvider")
 
-function layoutProvider.didMount(p0)
+function layoutProvider.didMount(p1)
 	if workspace.CurrentCamera then
-		p0:setObservedCamera(workspace.CurrentCamera)
+		p1:setObservedCamera(workspace.CurrentCamera)
 	end
-	p0.cameraChangedListener = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-		-- upvalues: p0 (ref)
+	p1.cameraChangedListener = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+		-- upvalues: p1 (ref)
 		if workspace.CurrentCamera then
-			p0:setObservedCamera(workspace.CurrentCamera)
+			p1:setObservedCamera(workspace.CurrentCamera)
 		end
 	end)
 end
@@ -31,14 +31,14 @@ function layoutProvider.willUnmount(p1)
 	end
 end
 
-function layoutProvider.setObservedCamera(value, p2)
+function layoutProvider.setObservedCamera(value, p1)
 	if value.viewportSizeListener then
 		value.viewportSizeListener:Disconnect()
 	end
-	value:checkAllDeviceInfo(p2.ViewportSize)
-	value.viewportSizeListener = p2:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-		-- upvalues: p2 (ref), value (ref)
-		local viewportSize = p2.ViewportSize
+	value:checkAllDeviceInfo(p1.ViewportSize)
+	value.viewportSizeListener = p1:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+		-- upvalues: p1 (ref), value (ref)
+		local viewportSize = p1.ViewportSize
 		
 		if viewportSize.X <= 1 or viewportSize.Y <= 1 then
 			return
@@ -47,61 +47,61 @@ function layoutProvider.setObservedCamera(value, p2)
 	end)
 end
 
-function layoutProvider.checkDeviceOrientation(p3, p4)
+function layoutProvider.checkDeviceOrientation(p1, p2)
 	-- upvalues: constantsModule (ref)
-	local var8 = if p4.Y < p4.X then constantsModule.DeviceOrientation.LANDSCAPE else constantsModule.DeviceOrientation.PORTRAIT
+	local var1 = if p2.Y < p2.X then constantsModule.DeviceOrientation.LANDSCAPE else constantsModule.DeviceOrientation.PORTRAIT
 	
-	if p3._deviceOrientation ~= var8 then
-		p3._deviceOrientation = var8
-		p3.props.setDeviceOrientation(var8)
+	if p1._deviceOrientation ~= var1 then
+		p1._deviceOrientation = var1
+		p1.props.setDeviceOrientation(var1)
 	end
 end
 
-function layoutProvider.checkDeviceIsSmallTouchScreen(p5, p6)
+function layoutProvider.checkDeviceIsSmallTouchScreen(p1, p2)
 	-- upvalues: userInputService (ref)
-	local var9 = userInputService.TouchEnabled and (if p6.X >= 700 then p6.Y < 500 else true)
+	local var1 = userInputService.TouchEnabled and (if p2.X >= 700 then p2.Y < 500 else true)
 	
-	if p5._isSmallTouchScreen ~= var9 then
-		p5._isSmallTouchScreen = var9
-		p5.props.setIsSmallTouchScreen(p5._isSmallTouchScreen)
+	if p1._isSmallTouchScreen ~= var1 then
+		p1._isSmallTouchScreen = var1
+		p1.props.setIsSmallTouchScreen(p1._isSmallTouchScreen)
 	end
 end
 
-function layoutProvider.checkDeviceLayout(p7)
+function layoutProvider.checkDeviceLayout(p1)
 	-- upvalues: constantsModule (ref), userInputService (ref)
-	local var10 = if p7._isSmallTouchScreen then if p7._deviceOrientation == constantsModule.DeviceOrientation.LANDSCAPE then constantsModule.DeviceLayout.PHONE_LANDSCAPE else constantsModule.DeviceLayout.PHONE_PORTRAIT elseif userInputService.TouchEnabled then if p7._deviceOrientation == constantsModule.DeviceOrientation.LANDSCAPE then constantsModule.DeviceLayout.TABLET_LANDSCAPE else constantsModule.DeviceLayout.TABLET_PORTRAIT else constantsModule.DeviceLayout.DESKTOP
+	local var1 = if p1._isSmallTouchScreen then if p1._deviceOrientation == constantsModule.DeviceOrientation.LANDSCAPE then constantsModule.DeviceLayout.PHONE_LANDSCAPE else constantsModule.DeviceLayout.PHONE_PORTRAIT elseif userInputService.TouchEnabled then if p1._deviceOrientation == constantsModule.DeviceOrientation.LANDSCAPE then constantsModule.DeviceLayout.TABLET_LANDSCAPE else constantsModule.DeviceLayout.TABLET_PORTRAIT else constantsModule.DeviceLayout.DESKTOP
 	
-	if p7._deviceLayout ~= var10 then
-		p7._deviceLayout = var10
-		p7.props.setDeviceLayout(p7._deviceLayout)
+	if p1._deviceLayout ~= var1 then
+		p1._deviceLayout = var1
+		p1.props.setDeviceLayout(p1._deviceLayout)
 	end
 end
 
-function layoutProvider.checkAllDeviceInfo(p8, p9)
-	p8:checkDeviceOrientation(p9)
-	p8:checkDeviceIsSmallTouchScreen(p9)
-	p8:checkDeviceLayout()
+function layoutProvider.checkAllDeviceInfo(p1, p2)
+	p1:checkDeviceOrientation(p2)
+	p1:checkDeviceIsSmallTouchScreen(p2)
+	p1:checkDeviceLayout()
 end
 
-function layoutProvider.render(p10)
+function layoutProvider.render(p1)
 	-- upvalues: roactModule (ref)
-	return roactModule.oneChild(p10.props[roactModule.Children])
+	return roactModule.oneChild(p1.props[roactModule.Children])
 end
 
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p11)
+return roactRoduxModule.UNSTABLE_connect2(nil, function(p1)
 	-- upvalues: setDeviceOrientation (ref), setIsSmallTouchScreenModule (ref), setDeviceLayoutModule (ref)
 	return {
 		setDeviceOrientation = function(value)
-			-- upvalues: p11 (ref), setDeviceOrientation (copy)
-			return p11(setDeviceOrientation(value))
+			-- upvalues: p1 (ref), setDeviceOrientation (copy)
+			return p1(setDeviceOrientation(value))
 		end,
 		setIsSmallTouchScreen = function(value)
-			-- upvalues: p11 (ref), setIsSmallTouchScreenModule (copy)
-			return p11(setIsSmallTouchScreenModule(value))
+			-- upvalues: p1 (ref), setIsSmallTouchScreenModule (copy)
+			return p1(setIsSmallTouchScreenModule(value))
 		end,
 		setDeviceLayout = function(value)
-			-- upvalues: p11 (ref), setDeviceLayoutModule (copy)
-			return p11(setDeviceLayoutModule(value))
+			-- upvalues: p1 (ref), setDeviceLayoutModule (copy)
+			return p1(setDeviceLayoutModule(value))
 		end
 	}
 end)(layoutProvider)

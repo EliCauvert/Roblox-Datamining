@@ -34,70 +34,70 @@ local fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule = require(profil
 local fFlagProfileCurrentlyPlayingEDPFromCardModule = require(profilePlatform.Flags.FFlagProfileCurrentlyPlayingEDPFromCard)
 local fFlagProfilePlatformImproveGameDetailsAnalytics = require(parent.SharedFlags).FFlagProfilePlatformImproveGameDetailsAnalytics
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useDispatch (ref), fFlagProfileCurrentlyPlayingEDPFromCardModule (ref), fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule (ref), useNavigation (ref), useProfileWrapperContextModule (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), reactModule (ref), networkingGamesModule (ref), useSelector (ref), getDeepValueModule (ref), appPage (ref), openGameDetails (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), contentProviderService (ref), fFlagProfileCurrentlyPlayingIXPEnabledModule (ref), IXPService (ref), fStringSocialProfileCurrentlyPlayingLayerModule (ref), horizontalPageMargin (ref), view (ref), stateLayerAffordance (ref), image (ref), skeleton (ref), radius (ref), text (ref)
-	local var15 = useTokens()
-	local var16 = useProfileJsonComponentModule(enumsModule.Components.CurrentlyPlaying)
-	local var17 = useDispatch()
-	local var18 = if fFlagProfileCurrentlyPlayingEDPFromCardModule or fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then useNavigation() else nil
-	local var19 = if fFlagProfileCurrentlyPlayingEDPFromCardModule or fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then useProfileWrapperContextModule() else nil
-	local profileId = var19 and var19.profileId
-	local var21 = if fFlagProfilePlatformImproveGameDetailsAnalytics then useRoactService(roactAnalyticsCommonGameEvents) else nil
-	local universeId = var16.universeId
+	local var1 = useTokens()
+	local var2 = useProfileJsonComponentModule(enumsModule.Components.CurrentlyPlaying)
+	local var3 = useDispatch()
+	local var4 = if fFlagProfileCurrentlyPlayingEDPFromCardModule or fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then useNavigation() else nil
+	local var5 = if fFlagProfileCurrentlyPlayingEDPFromCardModule or fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then useProfileWrapperContextModule() else nil
+	local profileId = var5 and var5.profileId
+	local var6 = if fFlagProfilePlatformImproveGameDetailsAnalytics then useRoactService(roactAnalyticsCommonGameEvents) else nil
+	local universeId = var2.universeId
 	reactModule.useEffect(function()
-		-- upvalues: universeId (ref), var17 (ref), networkingGamesModule (copy)
+		-- upvalues: universeId (ref), var3 (ref), networkingGamesModule (copy)
 		if universeId then
-			var17(networkingGamesModule.GetExperiencesDetails.API({ tostring(universeId) })):catch(function(p1)
+			var3(networkingGamesModule.GetExperiencesDetails.API({ tostring(universeId) })):catch(function(p2)
 				-- upvalues: universeId (copy)
-				warn("CurrentlyPlaying: failed to fetch experience details for universeId", universeId, p1)
+				warn("CurrentlyPlaying: failed to fetch experience details for universeId", universeId, p2)
 			end)
 			
 			return
 		end
-	end, { universeId, var17 })
-	local var22 = useSelector(function(p2)
+	end, { universeId, var3 })
+	local var7 = useSelector(function(p2)
 		-- upvalues: getDeepValueModule (copy), universeId (ref)
 		return getDeepValueModule(p2, `ProfilePlatform.Games.byGameId.{tostring(universeId)}`)
 	end)
-	local rootPlaceId = var22 and var22.rootPlaceId
-	local var24 = if var22 then var22.name else ""
-	local var25 = if fFlagProfileCurrentlyPlayingEDPFromCardModule or fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then reactModule.useCallback(function(p3)
-		-- upvalues: rootPlaceId (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), var21 (ref), universeId (ref), appPage (copy), profileId (ref), var17 (ref), openGameDetails (copy), var18 (ref)
+	local rootPlaceId = var7 and var7.rootPlaceId
+	local var8 = if var7 then var7.name else ""
+	local var9 = if fFlagProfileCurrentlyPlayingEDPFromCardModule or fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then reactModule.useCallback(function(p2)
+		-- upvalues: rootPlaceId (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), var6 (ref), universeId (ref), appPage (copy), profileId (ref), var3 (ref), openGameDetails (copy), var4 (ref)
 		if rootPlaceId == nil then return end
 		if fFlagProfilePlatformImproveGameDetailsAnalytics then
-			var21.reportOpenGameDetailFromProfileContext(rootPlaceId, tostring(universeId), appPage.ProfilePlatform, profileId, p3)
+			var6.reportOpenGameDetailFromProfileContext(rootPlaceId, tostring(universeId), appPage.ProfilePlatform, profileId, p2)
 		end
-		var17(openGameDetails(tostring(universeId), var18, { mountAsFullView = true, showBackButton = true }))
+		var3(openGameDetails(tostring(universeId), var4, { mountAsFullView = true, showBackButton = true }))
 	end, {
-		universeId, rootPlaceId, profileId, var21, var17, var18
+		universeId, rootPlaceId, profileId, var6, var3, var4
 	}) else nil
-	local var26 = if fFlagProfileCurrentlyPlayingEDPFromCardModule then reactModule.useCallback(function()
-		-- upvalues: var25 (ref)
-		var25("ProfilePlatformCurrentlyPlayingCard")
-	end, { var25 }) else nil
-	local var27 = if fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then reactModule.useCallback(function()
-		-- upvalues: var25 (ref)
-		var25("ProfilePlatformCurrentlyPlayingThumbnail")
-	end, { var25 }) else nil
-	local var28 = if fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then reactModule.useCallback(function()
-		-- upvalues: var25 (ref)
-		var25("ProfilePlatformCurrentlyPlayingGameName")
-	end, { var25 }) else nil
-	local var29 = if universeId then getRbxThumb(thumbnailType.GameIcon, universeId, thumbnailSize.Small) else nil
-	local var30, var31 = reactModule.useState(if var29 then contentProviderService:GetAssetFetchStatus(var29) else Enum.AssetFetchStatus.None)
+	local var10 = if fFlagProfileCurrentlyPlayingEDPFromCardModule then reactModule.useCallback(function()
+		-- upvalues: var9 (ref)
+		var9("ProfilePlatformCurrentlyPlayingCard")
+	end, { var9 }) else nil
+	local var11 = if fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then reactModule.useCallback(function()
+		-- upvalues: var9 (ref)
+		var9("ProfilePlatformCurrentlyPlayingThumbnail")
+	end, { var9 }) else nil
+	local var12 = if fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then reactModule.useCallback(function()
+		-- upvalues: var9 (ref)
+		var9("ProfilePlatformCurrentlyPlayingGameName")
+	end, { var9 }) else nil
+	local var13 = if universeId then getRbxThumb(thumbnailType.GameIcon, universeId, thumbnailSize.Small) else nil
+	local var14, var15 = reactModule.useState(if var13 then contentProviderService:GetAssetFetchStatus(var13) else Enum.AssetFetchStatus.None)
 	reactModule.useEffect(function()
-		-- upvalues: var29 (ref), contentProviderService (copy), var31 (ref)
-		if var29 then
-			local var34 = contentProviderService:GetAssetFetchStatusChangedSignal(var29):Connect(var31)
+		-- upvalues: var13 (ref), contentProviderService (copy), var15 (ref)
+		if var13 then
+			local var16 = contentProviderService:GetAssetFetchStatusChangedSignal(var13):Connect(var15)
 			
 			return function()
-				-- upvalues: var34 (ref)
-				var34:Disconnect()
+				-- upvalues: var16 (ref)
+				var16:Disconnect()
 			end
 		end
-	end, { var29 })
-	local var32 = getDeepValueModule(var16, "ageRecommendation.ageRecommendationSummary.ageRecommendation.displayNameWithHeaderShort")
-	local var33 = if var24 ~= "" then var30 == Enum.AssetFetchStatus.Loading else true
+	end, { var13 })
+	local var16 = getDeepValueModule(var2, "ageRecommendation.ageRecommendationSummary.ageRecommendation.displayNameWithHeaderShort")
+	local var17 = if var8 ~= "" then var14 == Enum.AssetFetchStatus.Loading else true
 	reactModule.useEffect(function()
 		-- upvalues: fFlagProfileCurrentlyPlayingIXPEnabledModule (copy), universeId (ref), IXPService (copy), fStringSocialProfileCurrentlyPlayingLayerModule (copy)
 		if fFlagProfileCurrentlyPlayingIXPEnabledModule and universeId then
@@ -109,54 +109,54 @@ return function(p0)
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		size = UDim2.new(1, 0, 0, 0),
-		layoutOrder = p0.layoutOrder
+		layoutOrder = p1.layoutOrder
 	}, {
 		Content = reactModule.createElement(view, {
 			tag = "row align-y-center gap-medium size-full-0 auto-y padding-large stroke-standard stroke-default radius-medium bg-shift-100",
-			onActivated = if fFlagProfileCurrentlyPlayingEDPFromCardModule and not var33 then var26 else nil,
-			stateLayer = if fFlagProfileCurrentlyPlayingEDPFromCardModule and not var33 then { affordance = stateLayerAffordance.None } else nil
+			onActivated = if fFlagProfileCurrentlyPlayingEDPFromCardModule and not var17 then var10 else nil,
+			stateLayer = if fFlagProfileCurrentlyPlayingEDPFromCardModule and not var17 then { affordance = stateLayerAffordance.None } else nil
 		}, {
-			GameThumbnail = if not var33 then reactModule.createElement(image, {
+			GameThumbnail = if not var17 then reactModule.createElement(image, {
 				tag = "radius-small aspect-1-1 size-1000-1000 auto-xy align-y-center",
 				LayoutOrder = 1,
-				Image = var29,
-				onActivated = if fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then var27 else nil,
+				Image = var13,
+				onActivated = if fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then var11 else nil,
 				stateLayer = if fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then { affordance = stateLayerAffordance.None } else nil
 			}) else reactModule.createElement(skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var15.Size.Size_1000, var15.Size.Size_1000),
+				Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000),
 				Radius = radius.Small
 			}),
 			TextStack = reactModule.createElement(view, {
 				tag = "col align-y-center fill gap-xsmall auto-y content-default",
 				LayoutOrder = 2
 			}, {
-				GameTitle = if not var33 then if fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then reactModule.createElement(view, {
+				GameTitle = if not var17 then if fFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then reactModule.createElement(view, {
 					tag = "size-full-0 auto-y",
 					LayoutOrder = 1,
-					onActivated = var28,
+					onActivated = var12,
 					stateLayer = { affordance = stateLayerAffordance.None }
 				}, {
 					Label = reactModule.createElement(text, {
 						tag = "emphasis size-full-0 auto-y text-title-medium text-align-x-left text-truncate-end",
-						Text = var24
+						Text = var8
 					})
 				}) else reactModule.createElement(text, {
 					tag = "emphasis size-full-0 auto-y text-title-medium text-align-x-left text-truncate-end",
 					LayoutOrder = 1,
-					Text = var24
+					Text = var8
 				}) else reactModule.createElement(skeleton, {
 					LayoutOrder = 1,
-					Size = UDim2.new(0.7, 0, 0, var15.Typography.TitleMedium.FontSize),
+					Size = UDim2.new(0.7, 0, 0, var1.Typography.TitleMedium.FontSize),
 					Radius = radius.Small
 				}),
-				AgeRecommendationText = if not var33 then reactModule.createElement(text, {
+				AgeRecommendationText = if not var17 then reactModule.createElement(text, {
 					tag = "size-full-0 auto-y text-body-medium text-align-x-left text-truncate-end",
 					LayoutOrder = 2,
-					Text = var32
+					Text = var16
 				}) else reactModule.createElement(skeleton, {
 					LayoutOrder = 2,
-					Size = UDim2.new(0.5, 0, 0, var15.Typography.BodyMedium.FontSize),
+					Size = UDim2.new(0.5, 0, 0, var1.Typography.BodyMedium.FontSize),
 					Radius = radius.Small
 				})
 			})

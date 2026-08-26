@@ -7,12 +7,12 @@ local fFlagEnableLuaAccountSwitch = require(parent.SharedFlags).FFlagEnableLuaAc
 local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
 local recordSignOutModule = require(authCommon.Utils.recordSignOut)
 
-local function recordSignOutOnLogoutAll(value, p0)
+local function recordSignOutOnLogoutAll(value, p1)
 	-- upvalues: getLoggedInUsersMetadataRequestModule (ref), recordSignOutModule (ref)
-	local var7, var8 = getLoggedInUsersMetadataRequestModule(value, p0):await()
+	local var1, var2 = getLoggedInUsersMetadataRequestModule(value, p1):await()
 	
-	if var7 and var8 and (var8.responseBody and var8.responseBody.logged_in_users_metadata) then
-		for i, v in ipairs(var8.responseBody.logged_in_users_metadata) do
+	if var1 and var2 and (var2.responseBody and var2.responseBody.logged_in_users_metadata) then
+		for i, v in ipairs(var2.responseBody.logged_in_users_metadata) do
 			pcall(function()
 				-- upvalues: recordSignOutModule (copy), v (ref)
 				recordSignOutModule(v, true)
@@ -21,20 +21,20 @@ local function recordSignOutOnLogoutAll(value, p0)
 	end
 end
 
-return function(p1, _)
+return function(p2, _)
 	-- upvalues: fFlagEnableLuaAccountSwitch (ref), promiseModule (ref), appStorageUtilitiesModule (ref), recordSignOutOnLogoutAll (ref), logoutAllLoggedInUsersRequestModule (ref)
 	if fFlagEnableLuaAccountSwitch then
 		local accountBlob = appStorageUtilitiesModule.getAccountBlob()
-		pcall(recordSignOutOnLogoutAll, p1, accountBlob)
+		pcall(recordSignOutOnLogoutAll, p2, accountBlob)
 		appStorageUtilitiesModule.setAccountBlob("")
 		appStorageUtilitiesModule.flush()
 		
-		return logoutAllLoggedInUsersRequestModule(p1, accountBlob):andThen(function(p3)
+		return logoutAllLoggedInUsersRequestModule(p2, accountBlob):andThen(function(p3)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve(p3.responseBody)
-		end):catch(function(p2)
+		end):catch(function(p3)
 			-- upvalues: promiseModule (copy)
-			return if p2.data then promiseModule.reject(p2.data.errorCode) elseif p2.StatusCode then promiseModule.reject({ p2.StatusCode }) else promiseModule.reject()
+			return if p3.data then promiseModule.reject(p3.data.errorCode) elseif p3.StatusCode then promiseModule.reject({ p3.StatusCode }) else promiseModule.reject()
 		end)
 	end
 	return promiseModule.resolve()

@@ -81,10 +81,10 @@ local function Dialog(p1)
 		}))
 		var15(otterModule.ease(0, { duration = var9.Time.Time_100 }))
 	end, {})
-	local var18 = reactModule.useCallback(function(p1)
+	local var18 = reactModule.useCallback(function(p2)
 		-- upvalues: var12 (ref), var13 (ref), reducedMotion (ref), var17 (ref), otterModule (copy), size800 (ref), var15 (ref), var9 (ref), var11 (ref)
 		if var12.current then return end
-		var13.current = p1
+		var13.current = p2
 		
 		if reducedMotion then
 			var12.current = true
@@ -112,10 +112,10 @@ local function Dialog(p1)
 		end
 	end, { var19 })
 	local var20, var21 = reactModule.useState(false)
-	local var22 = reactModule.useCallback(function(p1)
+	local var22 = reactModule.useCallback(function(p2)
 		-- upvalues: var19 (ref), var21 (ref)
-		if p1 then
-			var19.Parent = p1
+		if p2 then
+			var19.Parent = p2
 			var21(true)
 			
 			return
@@ -126,9 +126,9 @@ local function Dialog(p1)
 	local var23 = reactModule.createElement(viewModule, { ZIndex = 2, tag = var2.container.tag }, {
 		Shadow = reactModule.createElement(imageModule, {
 			Image = SHADOW_IMAGE,
-			Size = var4:map(function(p1)
+			Size = var4:map(function(p2)
 				-- upvalues: SHADOW_SIZE (copy)
-				return UDim2.fromOffset(p1.X + SHADOW_SIZE * 2, p1.Y + SHADOW_SIZE * 2)
+				return UDim2.fromOffset(p2.X + SHADOW_SIZE * 2, p2.Y + SHADOW_SIZE * 2)
 			end),
 			slice = {
 				scale = 2,
@@ -210,11 +210,11 @@ local function Dialog(p1)
 					var1.onClose(onCloseCallbackReasonModule.BackdropClick)
 				end
 			end,
-			backgroundStyle = if reducedMotion or not var14 then var2.backdrop.backgroundStyle else var14:map(function(p1)
+			backgroundStyle = if reducedMotion or not var14 then var2.backdrop.backgroundStyle else var14:map(function(p2)
 				-- upvalues: var2 (ref)
 				return {
 					Color3 = var2.backdrop.backgroundStyle.Color3,
-					Transparency = math.lerp(var2.backdrop.backgroundStyle.Transparency, 1, p1)
+					Transparency = math.lerp(var2.backdrop.backgroundStyle.Transparency, 1, p2)
 				}
 			end),
 			testId = `{var1.testId}--backdrop`
@@ -226,17 +226,17 @@ local function Dialog(p1)
 	t_4.DialogContentWrapper = reactModule.createElement(viewModule, {
 		ZIndex = 2,
 		ref = if not reducedMotion then var22 else nil,
-		Position = if reducedMotion or not var16 then nil else var16:map(function(p1)
-			return UDim2.new(0.5, 0, 0.5, p1)
+		Position = if reducedMotion or not var16 then nil else var16:map(function(p2)
+			return UDim2.new(0.5, 0, 0.5, p2)
 		end),
 		sizeConstraint = if not reducedMotion then { MaxSize = Vector2.new(var3 + SHADOW_SIZE * 2, 1e999) } else nil,
 		tag = {
 			["anchor-center-center size-full"] = not reducedMotion,
 			["size-full"] = reducedMotion
 		},
-		GroupTransparency = if reducedMotion or not var10 or not var16 then nil else var16:map(function(p1)
+		GroupTransparency = if reducedMotion or not var10 or not var16 then nil else var16:map(function(p2)
 			-- upvalues: size800 (ref)
-			return p1 / size800
+			return p2 / size800
 		end)
 	}, if reducedMotion then { DialogShadowWrapper = var23, Dialog = createElement } else nil)
 	createElement_3 = createElement_3(var26, t_3, t_4)

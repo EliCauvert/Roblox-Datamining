@@ -3,28 +3,28 @@ local parent = profilePlatform.Parent
 local enumsModule = require(profilePlatform.Common.Enums)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 local fFlagProfilePlatformEnableBundlesInAssetsCarousel = require(parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
-local var2 = 0
+local var1 = 0
 
 local _ = function()
-	-- upvalues: var2 (write)
-	var2 += 1
+	-- upvalues: var1 (write)
+	var1 += 1
 	
-	return tostring(var2)
+	return tostring(var1)
 end
 
 return {
-	mock = function(p0, p1)
-		-- upvalues: var2 (write), enumsModule (ref)
+	mock = function(p1, p2)
+		-- upvalues: var1 (write), enumsModule (ref)
 		local t = {}
-		local var4 = tostring(p0)
+		local var2 = tostring(p1)
 		
-		if not var4 then
-			var2 += 1
-			var4 = tostring(var2)
+		if not var2 then
+			var1 += 1
+			var2 = tostring(var1)
 		end
-		t.id = var4
+		t.id = var2
 		t.assetType = "0"
-		t.itemType = p1 or enumsModule.ItemTypes.Asset
+		t.itemType = p2 or enumsModule.ItemTypes.Asset
 		t.name = ""
 		
 		return t

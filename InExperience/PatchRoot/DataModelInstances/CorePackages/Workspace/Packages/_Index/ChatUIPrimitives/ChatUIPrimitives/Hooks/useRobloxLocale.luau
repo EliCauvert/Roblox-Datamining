@@ -5,11 +5,11 @@ local useEventConnection = require(parent.ReactUtils).useEventConnection
 
 return function()
 	-- upvalues: reactModule (ref), localizationService (ref), useEventConnection (ref)
-	local var2, var3 = reactModule.useState(localizationService.RobloxLocaleId)
+	local var1, var2 = reactModule.useState(localizationService.RobloxLocaleId)
 	useEventConnection(localizationService:GetPropertyChangedSignal("RobloxLocaleId"), function()
-		-- upvalues: var3 (ref), localizationService (copy)
-		var3(localizationService.RobloxLocaleId)
+		-- upvalues: var2 (ref), localizationService (copy)
+		var2(localizationService.RobloxLocaleId)
 	end, {})
 	
-	return var2
+	return var1
 end

@@ -1,13 +1,13 @@
-﻿local function _(p0)
-	local var7 = newproxy(true)
-	p0 = ("Mocks.%s"):format(p0)
+﻿local function _(p1)
+	local var1 = newproxy(true)
+	p1 = ("Mocks.%s"):format(p1)
 	
-	getmetatable(var7).__tostring = function()
-		-- upvalues: p0 (write)
-		return p0
+	getmetatable(var1).__tostring = function()
+		-- upvalues: p1 (write)
+		return p1
 	end
 	
-	return var7
+	return var1
 end
 
 local t = {}
@@ -20,41 +20,41 @@ getmetatable(var1).__tostring = function()
 end
 
 t.Calls = var1
-local var3 = newproxy(true)
+local var2 = newproxy(true)
 calls = ("Mocks.%s"):format("Children")
+
+getmetatable(var2).__tostring = function()
+	-- upvalues: calls (write)
+	return calls
+end
+
+t.Children = var2
+local var3 = newproxy(true)
+calls = ("Mocks.%s"):format("Lock")
 
 getmetatable(var3).__tostring = function()
 	-- upvalues: calls (write)
 	return calls
 end
 
-t.Children = var3
+t.Lock = var3
 local var4 = newproxy(true)
-calls = ("Mocks.%s"):format("Lock")
+calls = ("Mocks.%s"):format("None")
 
 getmetatable(var4).__tostring = function()
 	-- upvalues: calls (write)
 	return calls
 end
 
-t.Lock = var4
+t.None = var4
 local var5 = newproxy(true)
-calls = ("Mocks.%s"):format("None")
+calls = ("Mocks.%s"):format("ReturnValue")
 
 getmetatable(var5).__tostring = function()
 	-- upvalues: calls (write)
 	return calls
 end
 
-t.None = var5
-local var6 = newproxy(true)
-calls = ("Mocks.%s"):format("ReturnValue")
-
-getmetatable(var6).__tostring = function()
-	-- upvalues: calls (write)
-	return calls
-end
-
-t.ReturnValue = var6
+t.ReturnValue = var5
 
 return t

@@ -6,36 +6,36 @@ local _ = require(genericChallenges.Types.ChallengeParameters)
 local getFFlagEnableUnifiedWebViews = require(genericChallenges.Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
 local browserService = game:GetService("BrowserService")
 local httpService = game:GetService("HttpService")
-local var5 = if getFFlagEnableUnifiedWebViews() then game:GetService("WebViewService") else nil
+local var1 = if getFFlagEnableUnifiedWebViews() then game:GetService("WebViewService") else nil
 local t = {}
 t.__index = t
 
-function t.new(p0)
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref), var5 (ref), browserService (ref), challengeHeadersModule (ref), buildChallengeWebViewUrlModule (ref), t (ref)
+function t.new(p1)
+	-- upvalues: getFFlagEnableUnifiedWebViews (ref), var1 (ref), browserService (ref), challengeHeadersModule (ref), buildChallengeWebViewUrlModule (ref), t (ref)
 	local t_1 = {}
 	
 	if getFFlagEnableUnifiedWebViews() then
-		t_1.webViewService = p0.webViewService or var5
+		t_1.webViewService = p1.webViewService or var1
 	else
-		t_1.browserService = p0.browserService or browserService
+		t_1.browserService = p1.browserService or browserService
 	end
-	t_1.challengeUrl = buildChallengeWebViewUrlModule(if p0.rawResponseHeaders ~= nil then challengeHeadersModule.new(p0.rawResponseHeaders) else nil, p0.challengeType, p0.challengeParameters)
-	t_1.title = p0.title
+	t_1.challengeUrl = buildChallengeWebViewUrlModule(if p1.rawResponseHeaders ~= nil then challengeHeadersModule.new(p1.rawResponseHeaders) else nil, p1.challengeType, p1.challengeParameters)
+	t_1.title = p1.title
 	
-	if p0.hybridCallback ~= nil then
-		t_1.hybridCallback = p0.hybridCallback
+	if p1.hybridCallback ~= nil then
+		t_1.hybridCallback = p1.hybridCallback
 	end
-	if p0.closeCallback ~= nil then
-		t_1.closeCallback = p0.closeCallback
+	if p1.closeCallback ~= nil then
+		t_1.closeCallback = p1.closeCallback
 	end
-	if p0.openCallback ~= nil then
-		t_1.openCallback = p0.openCallback
+	if p1.openCallback ~= nil then
+		t_1.openCallback = p1.openCallback
 	end
 	t_1.hybridCallbackConnection = nil
 	t_1.modal = false
 	
-	if p0.modal ~= nil then
-		t_1.modal = p0.modal
+	if p1.modal ~= nil then
+		t_1.modal = p1.modal
 	end
 	return setmetatable(t_1, t)
 end
@@ -54,12 +54,12 @@ function t:setCloseCallback(p1)
 	self.closeCallback = p1
 end
 
-function t:setOpenCallback(p2)
-	self.openCallback = p2
+function t:setOpenCallback(p1)
+	self.openCallback = p1
 end
 
-function t:setHybridCallback(p3)
-	self.hybridCallback = p3
+function t:setHybridCallback(p1)
+	self.hybridCallback = p1
 end
 
 function t:open()

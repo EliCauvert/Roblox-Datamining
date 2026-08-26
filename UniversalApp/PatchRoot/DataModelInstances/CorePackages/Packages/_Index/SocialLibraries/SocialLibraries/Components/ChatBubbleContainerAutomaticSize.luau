@@ -13,39 +13,39 @@ local t = {
 	overrideImageColor = false
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: react (ref), t (ref), UIBlox (ref), rect (ref), object (ref)
-	local var3, var4 = react.useState(0)
-	local absoluteSize = p0[react.Change.AbsoluteSize] or t[react.Change.AbsoluteSize]
+	local var1, var2 = react.useState(0)
+	local absoluteSize = p1[react.Change.AbsoluteSize] or t[react.Change.AbsoluteSize]
 	
-	return UIBlox.Style.withStyle(function(p1)
-		-- upvalues: p0 (ref), t (copy), react (copy), var3 (ref), rect (copy), absoluteSize (ref), object (copy), var4 (ref)
-		local children = p0.children or {}
-		local hasTail = p0.hasTail or t.hasTail
-		local isIncoming = p0.isIncoming or t.isIncoming
-		local isPending = p0.isPending or t.isPending
-		local var10 = if isIncoming then p1.Theme.UIDefault elseif isPending then p1.Theme.UIMuted else p1.Theme.UIEmphasis
-		local color = var10.Color
-		local transparency = var10.Transparency
+	return UIBlox.Style.withStyle(function(p2)
+		-- upvalues: p1 (ref), t (copy), react (copy), var1 (ref), rect (copy), absoluteSize (ref), object (copy), var2 (ref)
+		local children = p1.children or {}
+		local hasTail = p1.hasTail or t.hasTail
+		local isIncoming = p1.isIncoming or t.isIncoming
+		local isPending = p1.isPending or t.isPending
+		local var3 = if isIncoming then p2.Theme.UIDefault elseif isPending then p2.Theme.UIMuted else p2.Theme.UIEmphasis
+		local color = var3.Color
+		local transparency = var3.Transparency
 		
-		if p0.overrideImageColor or t.overrideImageColor then
+		if p1.overrideImageColor or t.overrideImageColor then
 			color = nil
 			
 			if not isPending then
 				transparency = nil
 			end
 		end
-		local uDim = UDim.new(0, p0.padding or t.padding)
+		local uDim = UDim.new(0, p1.padding or t.padding)
 		
 		return react.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			Size = UDim2.new(0, var3 + 6, 0, 0),
-			LayoutOrder = p0.LayoutOrder or t.LayoutOrder
+			Size = UDim2.new(0, var1 + 6, 0, 0),
+			LayoutOrder = p1.LayoutOrder or t.LayoutOrder
 		}, {
 			bubble = react.createElement("ImageLabel", {
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Size = UDim2.new(0, var3, 0, 0),
+				Size = UDim2.new(0, var1, 0, 0),
 				AnchorPoint = isIncoming and Vector2.new(0, 0) or Vector2.new(1, 0),
 				BackgroundTransparency = 1,
 				ImageColor3 = color,
@@ -54,9 +54,9 @@ return function(p0)
 				SliceCenter = rect,
 				ImageTransparency = transparency,
 				Position = isIncoming and UDim2.new(0, 6, 0, 0) or UDim2.new(1, -6, 0, 0),
-				[react.Change.AbsoluteSize] = function(p2)
+				[react.Change.AbsoluteSize] = function(p3)
 					-- upvalues: absoluteSize (copy)
-					absoluteSize(p2)
+					absoluteSize(p3)
 				end
 			}, object.assign(table.clone(children), {
 				["$margin"] = react.createElement("UIPadding", {
@@ -67,8 +67,8 @@ return function(p0)
 				}),
 				["$layout"] = react.createElement("UIListLayout", {
 					[react.Change.AbsoluteContentSize] = function(p3)
-						-- upvalues: var4 (copy), uDim (ref)
-						var4(p3.AbsoluteContentSize.X + uDim.Offset * 2)
+						-- upvalues: var2 (copy), uDim (ref)
+						var2(p3.AbsoluteContentSize.X + uDim.Offset * 2)
 					end
 				})
 			})),

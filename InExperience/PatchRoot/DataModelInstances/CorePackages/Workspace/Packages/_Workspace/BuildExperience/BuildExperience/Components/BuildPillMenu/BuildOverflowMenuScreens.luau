@@ -95,9 +95,9 @@ local function useGameInfo(p1)
 	
 	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var1 (ref), dataHydrationModule (copy)
-		return signalsModule.createComputed(function(p1)
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: var1 (copy), dataHydrationModule (copy)
-			return if var1 == nil then nil else dataHydrationModule.Game.getGameInfoStore(p1).getAndFetchGameInfo(var1).data(p1)
+			return if var1 == nil then nil else dataHydrationModule.Game.getGameInfoStore(p2).getAndFetchGameInfo(var1).data(p2)
 		end)
 	end, { var1 }))
 end

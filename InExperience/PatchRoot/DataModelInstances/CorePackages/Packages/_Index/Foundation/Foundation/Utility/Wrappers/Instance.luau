@@ -1,5 +1,5 @@
 ﻿return {
-	GetPropertyChangedSignal = function(value, p0)
-		return value:GetPropertyChangedSignal(p0)
+	GetPropertyChangedSignal = function(value, p1)
+		return value:GetPropertyChangedSignal(p1)
 	end
 }

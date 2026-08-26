@@ -10,26 +10,26 @@ local t = {
 	ok = "Feature.Moments.Action.Ok"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref)
-	local var4 = useLocalization(t)
+	local var1 = useLocalization(t)
 	
 	return reactModule.createElement(dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
 		size = foundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var4.title }),
+		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var4.body })
+			DialogText = reactModule.createElement(dialog.Text, { Text = var1.body })
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var4.ok,
+					text = var1.ok,
 					variant = foundationModule.Enums.ButtonVariant.Standard,
-					onActivated = p0.onDismiss
+					onActivated = p1.onDismiss
 				}
 			}
 		})

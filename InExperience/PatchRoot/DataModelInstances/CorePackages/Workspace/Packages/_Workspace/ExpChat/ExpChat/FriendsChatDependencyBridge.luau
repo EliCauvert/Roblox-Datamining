@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local friendsChatDependencyContextModule = require(parent.FriendsChat.FriendsChatDependencyContext)
 local t = { ChatWindow = require(expChat.ChatWindow.UI.ChatWindow) }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), friendsChatDependencyContextModule (ref), t (ref)
-	return reactModule.createElement(friendsChatDependencyContextModule.Provider, { value = t }, p0.children)
+	return reactModule.createElement(friendsChatDependencyContextModule.Provider, { value = t }, p1.children)
 end

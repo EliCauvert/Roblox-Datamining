@@ -1,24 +1,24 @@
-﻿return function(p0)
-	local var0 = false
+﻿return function(p1)
 	local var1 = false
-	local var2 = true
-	local var3 = 1
+	local var2 = false
+	local var3 = true
+	local var4 = 1
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		if type(i) == "string" then
-			var1 = true
+			var2 = true
 		elseif type(i) == "number" then
-			if var3 ~= i then
-				var2 = false
+			if var4 ~= i then
+				var3 = false
 			end
-			var0 = true
+			var1 = true
 		end
 		return false
-		if not var1 or not var0 then
-			var3 += 1
+		if not var2 or not var1 then
+			var4 += 1
 			continue
 		end
 		return false
 	end
-	return if var0 then var2 else true
+	return if var1 then var3 else true
 end

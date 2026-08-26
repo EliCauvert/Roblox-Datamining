@@ -1,7 +1,7 @@
-﻿return function(p0)
+﻿return function(p1)
 	local t = {}
 	
-	for i, v in p0:GetChildren() do
+	for i, v in p1:GetChildren() do
 		if v:IsA("MakeupDescription") then
 			table.insert(t, v)
 		end

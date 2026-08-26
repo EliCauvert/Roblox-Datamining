@@ -26,25 +26,25 @@ itemTileName.validateProps = tModule.strictInterface({
 	horizontalAlignment = tModule.optional(tModule.enum(Enum.HorizontalAlignment))
 })
 
-function itemTileName.render(p0)
+function itemTileName.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), emojiTextLabelModule (ref), emojiModule (ref), imagesModule (ref), imageTextLabelModule (ref), skeleton (ref)
-	local layoutOrder = p0.props.LayoutOrder
-	local maxHeight = p0.props.maxHeight
-	local maxWidth = p0.props.maxWidth
-	local name = p0.props.name
-	local titleIcon = p0.props.titleIcon
-	local useMaxHeight = p0.props.useMaxHeight
-	local fluidSizing = p0.props.fluidSizing
-	local hasVerifiedBadge = p0.props.hasVerifiedBadge
-	local richText = p0.props.richText
-	local var9 = if p0.props.horizontalAlignment == Enum.HorizontalAlignment.Center then Enum.TextXAlignment.Center else nil
+	local layoutOrder = p1.props.LayoutOrder
+	local maxHeight = p1.props.maxHeight
+	local maxWidth = p1.props.maxWidth
+	local name = p1.props.name
+	local titleIcon = p1.props.titleIcon
+	local useMaxHeight = p1.props.useMaxHeight
+	local fluidSizing = p1.props.fluidSizing
+	local hasVerifiedBadge = p1.props.hasVerifiedBadge
+	local richText = p1.props.richText
+	local var1 = if p1.props.horizontalAlignment == Enum.HorizontalAlignment.Center then Enum.TextXAlignment.Center else nil
 	
-	return withStyleModule(function(p1)
-		-- upvalues: p0 (ref), name (ref), maxWidth (ref), maxHeight (ref), hasVerifiedBadge (ref), roactModule (copy), emojiTextLabelModule (copy), richText (ref), fluidSizing (ref), emojiModule (copy), layoutOrder (ref), titleIcon (ref), imagesModule (copy), imageTextLabelModule (copy), var9 (ref), useMaxHeight (ref), skeleton (copy)
-		local theme = p1.Theme
-		local font = p1.Font
-		local titleFontStyle = p0.props.titleFontStyle or font.Header2
-		local var11 = if titleFontStyle.RelativeSize then font.BaseSize * titleFontStyle.RelativeSize else titleFontStyle.FontSize
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), name (ref), maxWidth (ref), maxHeight (ref), hasVerifiedBadge (ref), roactModule (copy), emojiTextLabelModule (copy), richText (ref), fluidSizing (ref), emojiModule (copy), layoutOrder (ref), titleIcon (ref), imagesModule (copy), imageTextLabelModule (copy), var1 (ref), useMaxHeight (ref), skeleton (copy)
+		local theme = p2.Theme
+		local font = p2.Font
+		local titleFontStyle = p1.props.titleFontStyle or font.Header2
+		local var2 = if titleFontStyle.RelativeSize then font.BaseSize * titleFontStyle.RelativeSize else titleFontStyle.FontSize
 		
 		if name == nil then
 			return roactModule.createElement("Frame", {
@@ -52,17 +52,17 @@ function itemTileName.render(p0)
 				LayoutOrder = layoutOrder,
 				Size = UDim2.new(0, maxWidth, 0, maxHeight)
 			}, {
-				FirstLine = roactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, var11) }),
+				FirstLine = roactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, var2) }),
 				SecondLine = roactModule.createElement(skeleton, {
-					Position = UDim2.fromOffset(0, var11 + 4),
-					Size = UDim2.new(0.4, 0, 0, var11)
+					Position = UDim2.fromOffset(0, var2 + 4),
+					Size = UDim2.new(0.4, 0, 0, var2)
 				})
 			})
 		end
 		local vector2 = Vector2.new(maxWidth, maxHeight)
 		local t = {
-			Color = p0.props.nameTextColor or theme.TextEmphasis.Color,
-			Transparency = p0.props.nameTextTransparency or theme.TextEmphasis.Transparency
+			Color = p1.props.nameTextColor or theme.TextEmphasis.Color,
+			Transparency = p1.props.nameTextTransparency or theme.TextEmphasis.Transparency
 		}
 		
 		if hasVerifiedBadge then
@@ -80,7 +80,7 @@ function itemTileName.render(p0)
 				LayoutOrder = layoutOrder
 			})
 		end
-		local var14 = if titleIcon then titleIcon.ImageRectSize / imagesModule.ImagesResolutionScale else Vector2.new(0, 0)
+		local var3 = if titleIcon then titleIcon.ImageRectSize / imagesModule.ImagesResolutionScale else Vector2.new(0, 0)
 		
 		return roactModule.createElement(imageTextLabelModule, {
 			padding = 4,
@@ -89,7 +89,7 @@ function itemTileName.render(p0)
 				Image = titleIcon,
 				ImageColor3 = theme.IconEmphasis.Color,
 				ImageTransparency = theme.IconEmphasis.Transparency,
-				Size = UDim2.new(0, var14.X, 0, var14.Y),
+				Size = UDim2.new(0, var3.X, 0, var3.Y),
 				AnchorPoint = Vector2.new(0, 0),
 				Position = UDim2.new(0, 0, 0, 0)
 			} or nil),
@@ -100,7 +100,7 @@ function itemTileName.render(p0)
 				Text = name,
 				TextTruncate = Enum.TextTruncate.SplitWord,
 				RichText = richText,
-				TextXAlignment = var9
+				TextXAlignment = var1
 			},
 			frameProps = { BackgroundTransparency = 1, LayoutOrder = layoutOrder },
 			maxSize = vector2,

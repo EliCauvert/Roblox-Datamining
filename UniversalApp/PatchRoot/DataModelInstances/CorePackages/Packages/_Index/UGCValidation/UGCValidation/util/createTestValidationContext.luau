@@ -1,17 +1,17 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
 local _ = require(script.Parent.Parent.util.Types)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: UGCValidationService (ref)
 	local t = {
 		isServer = true,
 		validateMeshPartAccessories = false,
-		assetTypeEnum = p0
+		assetTypeEnum = p1
 	}
 	local t_1 = {}
 	local t_2 = {}
 	
-	for i, v in p1 do
+	for i, v in p2 do
 		for i_1, v_1 in v:GetDescendants() do
 			if v_1:IsA("BinaryStringValue") then
 				if v_1.Name == "MeshId" or v_1.Name == "CageMeshId" or v_1.Name == "ReferenceMeshId" then

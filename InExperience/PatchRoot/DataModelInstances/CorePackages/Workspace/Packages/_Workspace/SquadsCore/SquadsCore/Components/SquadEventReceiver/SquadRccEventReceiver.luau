@@ -12,87 +12,87 @@ local actOnPartyNudgeModule = require(squadsCore.Thunks.actOnPartyNudge)
 local createConversationModule = require(squadsCore.Thunks.createConversation)
 local encodeUserIdsModule = require(squadsCore.Common.encodeUserIds)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), squadExternalContractContextModule (ref), squadRccEventManagerModule (ref), useDispatch (ref), constantsModule (ref), httpService (ref), eventNamesModule (ref), encodeUserIdsModule (ref), createConversationModule (ref), actOnPartyNudgeModule (ref), robloxReplicatedStorageService (ref)
-	local var11 = reactModule.useContext(squadExternalContractContextModule)
-	local var12 = var11.useIsChatEnabled()
-	local var13 = var11.useIsLoadingChatSettings()
+	local var1 = reactModule.useContext(squadExternalContractContextModule)
+	local var2 = var1.useIsChatEnabled()
+	local var3 = var1.useIsLoadingChatSettings()
 	reactModule.useEffect(function()
-		-- upvalues: squadRccEventManagerModule (copy), p0 (ref), var12 (ref)
-		squadRccEventManagerModule:fireSquadChangeEvent(p0.currentSquadId, var12)
-	end, { p0.currentSquadId, var12 })
-	local var14 = useDispatch()
-	local var15 = reactModule.useRef({})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), constantsModule (copy), httpService (copy), var11 (ref), eventNamesModule (copy), encodeUserIdsModule (copy), var14 (ref), createConversationModule (copy), actOnPartyNudgeModule (copy), p0 (ref), var12 (ref)
-		for i, v in ipairs(var15.current) do
+		-- upvalues: squadRccEventManagerModule (copy), p1 (ref), var2 (ref)
+		squadRccEventManagerModule:fireSquadChangeEvent(p1.currentSquadId, var2)
+	end, { p1.currentSquadId, var2 })
+	local var4 = useDispatch()
+	local var5 = reactModule.useRef({})
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), constantsModule (copy), httpService (copy), var1 (ref), eventNamesModule (copy), encodeUserIdsModule (copy), var4 (ref), createConversationModule (copy), actOnPartyNudgeModule (copy), p1 (ref), var2 (ref)
+		for i, v in ipairs(var5.current) do
 			local partySourceType = v.partySourceType
 			local data = v.data
 			
 			if partySourceType == "PartyNudge" and data.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE then
-				local var17 = httpService:GenerateGUID(false)
-				var11.fireSquadAnalytics(eventNamesModule.SquadCreateOrJoinFromRCC, {
+				local var7 = httpService:GenerateGUID(false)
+				var1.fireSquadAnalytics(eventNamesModule.SquadCreateOrJoinFromRCC, {
 					partySourceType = partySourceType,
 					nudgeType = data.nudgeType,
 					nudgeId = data.nudgeId,
-					partyAttemptId = var17,
+					partyAttemptId = var7,
 					inviteeUserIds = encodeUserIdsModule({ data.inviteeId })
 				})
-				var14(createConversationModule({
+				var4(createConversationModule({
 					conversationType = "one_to_one",
 					source = "createOrJoinPartyRemoteEvent",
 					userIds = { tostring(data.inviteeId) },
-					squadContext = var11,
-					onSuccessCallback = function(p1)
-						-- upvalues: var14 (copy), actOnPartyNudgeModule (copy), p0 (copy), constantsModule (copy), data (ref), var11 (copy), var12 (copy), var17 (ref)
-						var14(actOnPartyNudgeModule(if p0.currentSquadId == "" then constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION else constantsModule.REJECT_START_PARTY_REQUEST_ACTION, data.nudgeId, false, var11.setSquadPrompt, var11.fireSquadAnalytics, var11.squadLocation, var12, var17, p1))
+					squadContext = var1,
+					onSuccessCallback = function(p2)
+						-- upvalues: var4 (copy), actOnPartyNudgeModule (copy), p1 (copy), constantsModule (copy), data (ref), var1 (copy), var2 (copy), var7 (ref)
+						var4(actOnPartyNudgeModule(if p1.currentSquadId == "" then constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION else constantsModule.REJECT_START_PARTY_REQUEST_ACTION, data.nudgeId, false, var1.setSquadPrompt, var1.fireSquadAnalytics, var1.squadLocation, var2, var7, p2))
 					end,
 					onErrorCallback = function()
-						-- upvalues: var14 (copy), actOnPartyNudgeModule (copy), constantsModule (copy), data (ref), var11 (copy), var12 (copy), var17 (ref)
-						var14(actOnPartyNudgeModule(constantsModule.REJECT_START_PARTY_REQUEST_ACTION, data.nudgeId, false, var11.setSquadPrompt, var11.fireSquadAnalytics, var11.squadLocation, var12, var17))
+						-- upvalues: var4 (copy), actOnPartyNudgeModule (copy), constantsModule (copy), data (ref), var1 (copy), var2 (copy), var7 (ref)
+						var4(actOnPartyNudgeModule(constantsModule.REJECT_START_PARTY_REQUEST_ACTION, data.nudgeId, false, var1.setSquadPrompt, var1.fireSquadAnalytics, var1.squadLocation, var2, var7))
 					end
 				}))
 			end
 		end
-		var15.current = {}
+		var5.current = {}
 	end, {
-		var12,
-		var11,
-		var11.setSquadPrompt,
-		var11.fireSquadAnalytics,
-		var11.squadLocation
+		var2,
+		var1,
+		var1.setSquadPrompt,
+		var1.fireSquadAnalytics,
+		var1.squadLocation
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var12 (ref), var16 (ref), var15 (ref), robloxReplicatedStorageService (copy)
-		if not var13 then
-			if var12 then
-				var16()
+		-- upvalues: var3 (ref), var2 (ref), var6 (ref), var5 (ref), robloxReplicatedStorageService (copy)
+		if not var3 then
+			if var2 then
+				var6()
 			else
-				var15.current = {}
+				var5.current = {}
 			end
 		end
-		local var18 = nil
+		local var8 = nil
 		coroutine.wrap(function()
-			-- upvalues: robloxReplicatedStorageService (copy), var18 (write), var13 (copy), var15 (copy), var12 (copy), var16 (copy)
-			var18 = robloxReplicatedStorageService:WaitForChild("CreateOrJoinParty", 1e999).OnClientEvent:Connect(function(p2, p3)
-				-- upvalues: var13 (copy), var15 (copy), var12 (copy), var16 (copy)
-				if var13 then
-					table.insert(var15.current, { partySourceType = p2, data = p3 })
+			-- upvalues: robloxReplicatedStorageService (copy), var8 (write), var3 (copy), var5 (copy), var2 (copy), var6 (copy)
+			var8 = robloxReplicatedStorageService:WaitForChild("CreateOrJoinParty", 1e999).OnClientEvent:Connect(function(p2, p3)
+				-- upvalues: var3 (copy), var5 (copy), var2 (copy), var6 (copy)
+				if var3 then
+					table.insert(var5.current, { partySourceType = p2, data = p3 })
 					
 					return
-				elseif var12 then
-					var16()
+				elseif var2 then
+					var6()
 				end
 			end)
 		end)()
 		
 		return function()
-			-- upvalues: var18 (write)
-			if var18 then
-				var18:Disconnect()
+			-- upvalues: var8 (write)
+			if var8 then
+				var8:Disconnect()
 			end
 		end
-	end, { var13, var12, var16 })
+	end, { var3, var2, var6 })
 	
 	return nil
 end

@@ -1,9 +1,9 @@
 ﻿return {
-	extractFieldsFromUserEntry = function(p0)
-		return if p0 then {
-			presence = if p0.presence then p0.presence.userPresenceType else "",
-			friendStatus = if p0.isFriend then "friend" else "notFriend",
-			presenceUniverseId = if p0.presence and p0.presence.universeId and p0.presence.universeId ~= "" then p0.presence.universeId else "-1"
+	extractFieldsFromUserEntry = function(p1)
+		return if p1 then {
+			presence = if p1.presence then p1.presence.userPresenceType else "",
+			friendStatus = if p1.isFriend then "friend" else "notFriend",
+			presenceUniverseId = if p1.presence and p1.presence.universeId and p1.presence.universeId ~= "" then p1.presence.universeId else "-1"
 		} else {}
 	end
 }

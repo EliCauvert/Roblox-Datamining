@@ -2,23 +2,23 @@
 
 return function()
 	-- upvalues: createMockHttpStore (ref)
-	local var0 = createMockHttpStore()
+	local var1 = createMockHttpStore()
 	
 	return {
 		get = function()
-			-- upvalues: var0 (ref)
-			return var0
+			-- upvalues: var1 (ref)
+			return var1
 		end,
 		_create = function()
-			-- upvalues: var0 (ref)
-			return var0
+			-- upvalues: var1 (ref)
+			return var1
 		end,
 		_dispose = function()
-			-- upvalues: var0 (ref)
-			var0.reset()
+			-- upvalues: var1 (ref)
+			var1.reset()
 		end,
-		setResponse = var0.setResponse,
-		reset = var0.reset,
-		mockStore = var0
+		setResponse = var1.setResponse,
+		reset = var1.reset,
+		mockStore = var1
 	}
 end

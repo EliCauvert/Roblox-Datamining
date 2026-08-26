@@ -31,52 +31,52 @@ local t_1 = {
 	onDismissed = function() end
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t_1 (ref), useNavigation (ref), t (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useGetConversationFromIdModule (ref), fFlagAppChatConsolidateTrustedFriendsModalModule (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), reactModule (ref), conversationTopModalTelemetryModule (ref), modalTelemetryModule (ref), enumScreensModule (ref), conversationBannerModule (ref)
-	local var15 = cryoModule.Dictionary.union(t_1, p0)
-	local var16 = useNavigation()
-	local modalVariant = t[var15.modalVariant]
+	local var1 = cryoModule.Dictionary.union(t_1, p1)
+	local var2 = useNavigation()
+	local modalVariant = t[var1.modalVariant]
 	local joined = nil
-	local var18 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
-	local var19 = useGetConversationFromIdModule(var15.conversationId)
+	local var3 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
+	local var4 = useGetConversationFromIdModule(var1.conversationId)
 	
-	if var19 and var19.participants then
-		joined = table.concat(var19.participants, ",")
+	if var4 and var4.participants then
+		joined = table.concat(var4.participants, ",")
 	end
-	local var20 = if fFlagAppChatConsolidateTrustedFriendsModalModule then useGetOneToOneFriendIdFromConversationIdModule(var15.conversationId) else nil
+	local var5 = if fFlagAppChatConsolidateTrustedFriendsModalModule then useGetOneToOneFriendIdFromConversationIdModule(var1.conversationId) else nil
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), conversationTopModalTelemetryModule (copy), var15 (ref), joined (write)
-		var18.emit(conversationTopModalTelemetryModule.Events.ModalRendered, { modalVariant = var15.modalVariant, modalContext = joined })
-	end, { var15.modalVariant })
+		-- upvalues: var3 (ref), conversationTopModalTelemetryModule (copy), var1 (ref), joined (write)
+		var3.emit(conversationTopModalTelemetryModule.Events.ModalRendered, { modalVariant = var1.modalVariant, modalContext = joined })
+	end, { var1.modalVariant })
 	
 	return if modalVariant then reactModule.createElement(conversationBannerModule, {
-		actionText = var15.actionText,
-		bodyText = var15.bodyText,
+		actionText = var1.actionText,
+		bodyText = var1.bodyText,
 		onDismissed = reactModule.useCallback(function()
-			-- upvalues: var15 (ref), var18 (ref), conversationTopModalTelemetryModule (copy), modalTelemetryModule (copy), joined (write)
-			var15.onDismissed()
-			var18.emit(conversationTopModalTelemetryModule.Events.ModalAction, {
-				modalVariant = var15.modalVariant,
+			-- upvalues: var1 (ref), var3 (ref), conversationTopModalTelemetryModule (copy), modalTelemetryModule (copy), joined (write)
+			var1.onDismissed()
+			var3.emit(conversationTopModalTelemetryModule.Events.ModalAction, {
+				modalVariant = var1.modalVariant,
 				action = modalTelemetryModule.Enums.ModalActions.Dismiss,
 				modalContext = joined
 			})
-		end, { var15.onDismissed }),
+		end, { var1.onDismissed }),
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: modalVariant (ref), var16 (ref), enumScreensModule (copy), fFlagAppChatConsolidateTrustedFriendsModalModule (copy), var20 (ref), var15 (ref), var18 (ref), conversationTopModalTelemetryModule (copy), modalTelemetryModule (copy), joined (write)
+			-- upvalues: modalVariant (ref), var2 (ref), enumScreensModule (copy), fFlagAppChatConsolidateTrustedFriendsModalModule (copy), var5 (ref), var1 (ref), var3 (ref), conversationTopModalTelemetryModule (copy), modalTelemetryModule (copy), joined (write)
 			if modalVariant then
-				var16.navigate(enumScreensModule.TrustedConnectionsUpsell, {
+				var2.navigate(enumScreensModule.TrustedConnectionsUpsell, {
 					isOverlay = true,
-					userId = if fFlagAppChatConsolidateTrustedFriendsModalModule then var20 else nil,
+					userId = if fFlagAppChatConsolidateTrustedFriendsModalModule then var5 else nil,
 					modalVariant = modalVariant.onActivatedOverlayVariant,
-					conversationId = var15.conversationId
+					conversationId = var1.conversationId
 				})
 			end
-			var18.emit(conversationTopModalTelemetryModule.Events.ModalAction, {
-				modalVariant = var15.modalVariant,
+			var3.emit(conversationTopModalTelemetryModule.Events.ModalAction, {
+				modalVariant = var1.modalVariant,
 				action = modalTelemetryModule.Enums.ModalActions.PrimaryCta,
 				modalContext = joined
 			})
-		end, { var16, modalVariant, var20 }),
-		layoutOrder = var15.layoutOrder
+		end, { var2, modalVariant, var5 }),
+		layoutOrder = var1.layoutOrder
 	}) else nil
 end)

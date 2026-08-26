@@ -4,14 +4,14 @@ local roactModule = require(parent_1.Parent.Roact)
 local styleConsumerModule = require(parent.StyleConsumer)
 local _ = require(parent_1.App.Style.StyleTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roactModule (ref), styleConsumerModule (ref)
-	assert(type(p0) == "function", "Expect renderCallback to be a function.")
+	assert(type(p1) == "function", "Expect renderCallback to be a function.")
 	
 	return roactModule.createElement(styleConsumerModule, {
-		render = function(p1)
-			-- upvalues: p0 (ref)
-			return p0(p1.style)
+		render = function(p2)
+			-- upvalues: p1 (ref)
+			return p1(p2.style)
 		end
 	})
 end

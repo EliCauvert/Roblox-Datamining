@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p0)
-	return { helpModalVisible = p0 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
+	return { helpModalVisible = p1 }
 end)

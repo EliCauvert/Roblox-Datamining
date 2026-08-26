@@ -12,9 +12,9 @@ local wearTimeListModule = require(script.Parent.WearTimeList)
 local _ = require(script.Parent.useWearTimeSelectedOptionViewModel)
 local useWearTimePopoverFocusNavigationBindingsModule = require(script.Parent.useWearTimePopoverFocusNavigationBindings)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useWearTimePopoverFocusNavigationBindingsModule (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), view (ref), text (ref), foundationModule (ref), enums (ref), popover (ref), popoverAlign (ref), popoverSide (ref), wearTimeListModule (ref)
-	local tokens = p0.tokens
+	local tokens = p1.tokens
 	
 	return reactModule.createElement(view, { tag = "auto-xy" }, {
 		TriggerButton = reactModule.createElement("TextButton", {
@@ -22,12 +22,12 @@ return function(p0)
 			Size = UDim2.fromScale(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BorderSizePixel = 0,
-			Transparency = p0.tokens.Color.Shift.Shift_200.Transparency,
-			BackgroundColor3 = p0.tokens.Color.Shift.Shift_200.Color3,
-			ref = p0.anchorRef,
+			Transparency = p1.tokens.Color.Shift.Shift_200.Transparency,
+			BackgroundColor3 = p1.tokens.Color.Shift.Shift_200.Color3,
+			ref = p1.anchorRef,
 			[reactModule.Event.Activated] = function()
-				-- upvalues: p0 (ref)
-				p0.setIsOpen(not p0.isOpen)
+				-- upvalues: p1 (ref)
+				p1.setIsOpen(not p1.isOpen)
 			end
 		}, {
 			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, tokens.Radius.Circle) }),
@@ -49,7 +49,7 @@ return function(p0)
 				Duration = reactModule.createElement(text, {
 					tag = "auto-xy",
 					LayoutOrder = 2,
-					Text = p0.listLabelText,
+					Text = p1.listLabelText,
 					textStyle = tokens.Color.Content.Emphasis,
 					fontStyle = {
 						Font = tokens.Typography.TitleSmall.Font,
@@ -64,29 +64,29 @@ return function(p0)
 				})
 			})
 		}),
-		Popover = reactModule.createElement(popover.Root, { isOpen = p0.isOpen }, {
-			Anchor = reactModule.createElement(popover.Anchor, { anchorRef = p0.anchorRef }),
+		Popover = reactModule.createElement(popover.Root, { isOpen = p1.isOpen }, {
+			Anchor = reactModule.createElement(popover.Anchor, { anchorRef = p1.anchorRef }),
 			Content = reactModule.createElement(popover.Content, {
 				hasArrow = false,
 				align = popoverAlign.Start,
 				side = popoverSide.Bottom,
 				onPressedOutside = function()
-					-- upvalues: p0 (ref)
-					p0.setIsOpen(false)
+					-- upvalues: p1 (ref)
+					p1.setIsOpen(false)
 				end
 			}, {
 				ContentWrapper = reactModule.createElement(view, {
 					tag = "auto-y",
 					Size = UDim2.new(0, tokens.Size.Size_2900 * 2, 0, 0),
 					ref = useWearTimePopoverFocusNavigationBindingsModule(reactModule.useCallback(function()
-						-- upvalues: p0 (ref)
-						p0.setIsOpen(false)
-					end, { p0.setIsOpen }), p0.isOpen, if fFlagAXFixIaBTimedOptionsPopoverFocus then p0.anchorRef else nil)
+						-- upvalues: p1 (ref)
+						p1.setIsOpen(false)
+					end, { p1.setIsOpen }), p1.isOpen, if fFlagAXFixIaBTimedOptionsPopoverFocus then p1.anchorRef else nil)
 				}, {
 					WearTimeList = reactModule.createElement(wearTimeListModule, {
-						options = p0.updatedOptions,
-						selectedIndex = p0.selectedIndex,
-						onOptionActivated = p0.handleOptionActivated
+						options = p1.updatedOptions,
+						selectedIndex = p1.selectedIndex,
+						onOptionActivated = p1.handleOptionActivated
 					})
 				})
 			})

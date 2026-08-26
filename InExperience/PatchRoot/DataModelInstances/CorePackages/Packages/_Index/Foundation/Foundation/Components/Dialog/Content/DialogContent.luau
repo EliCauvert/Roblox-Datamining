@@ -8,17 +8,17 @@ local useScrollBarPaddingModule = require(script.Parent.useScrollBarPadding)
 local useDialogVariants = require(script.Parent.Parent.useDialogVariants).useDialogVariants
 local useDialogModule = require(script.Parent.Parent.useDialog)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useScrollBarPaddingModule (ref), useDialogVariants (ref), useDialogModule (ref), reactModule (ref), scrollViewModule (ref), withCommonPropsModule (ref), visibilityModule (ref)
-	local var7, var8, var9 = useScrollBarPaddingModule()
-	local var10 = useDialogVariants()
-	p0.testId = `{useDialogModule().testId}--content`
+	local var1, var2, var3 = useScrollBarPaddingModule()
+	local var4 = useDialogVariants()
+	p1.testId = `{useDialogModule().testId}--content`
 	
-	return reactModule.createElement(scrollViewModule, withCommonPropsModule(p0, {
+	return reactModule.createElement(scrollViewModule, withCommonPropsModule(p1, {
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			CanvasSize = UDim2.new(0, 0, 0, 0),
-			scrollBarVisibility = if var7 then visibilityModule.Auto else visibilityModule.None
+			scrollBarVisibility = if var1 then visibilityModule.Auto else visibilityModule.None
 		},
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -26,21 +26,21 @@ return function(p0)
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
 		selection = {
-			Selectable = (p0.Selectable == nil or p0.Selectable) and var7,
-			NextSelectionUp = p0.NextSelectionUp,
-			NextSelectionDown = p0.NextSelectionDown,
-			NextSelectionLeft = p0.NextSelectionLeft,
-			NextSelectionRight = p0.NextSelectionRight
+			Selectable = (p1.Selectable == nil or p1.Selectable) and var1,
+			NextSelectionUp = p1.NextSelectionUp,
+			NextSelectionDown = p1.NextSelectionDown,
+			NextSelectionLeft = p1.NextSelectionLeft,
+			NextSelectionRight = p1.NextSelectionRight
 		},
-		onAbsoluteCanvasSizeChanged = var9,
-		onAbsoluteWindowSizeChanged = var9,
-		tag = var10.content.tag
+		onAbsoluteCanvasSizeChanged = var3,
+		onAbsoluteWindowSizeChanged = var3,
+		tag = var4.content.tag
 	}), {
 		ScrollPadding = reactModule.createElement("UIPadding", {
-			PaddingRight = var8:map(function(p1)
-				return UDim.new(0, p1)
+			PaddingRight = var2:map(function(p2)
+				return UDim.new(0, p2)
 			end)
 		}),
-		ScrollContent = reactModule.createElement(reactModule.Fragment, nil, p0.children)
+		ScrollContent = reactModule.createElement(reactModule.Fragment, nil, p1.children)
 	})
 end

@@ -5,13 +5,13 @@ local setDevConsoleVisibilityModule = require(script.Parent.Parent.Actions.SetDe
 local setDevConsoleMinimizedModule = require(script.Parent.Parent.Actions.SetDevConsoleMinimized)
 local reportDevConsoleTabEventsThrottleHundredthsPercent = game:DefineFastInt("ReportDevConsoleTabEventsThrottleHundredthsPercent", 0)
 
-function ReportDevConsoleOpenClose(p0, p1)
+function ReportDevConsoleOpenClose(p1, p2)
 	-- upvalues: setDevConsoleVisibilityModule (ref), rbxAnalyticsService (ref)
-	if p1.type == setDevConsoleVisibilityModule.name then
-		local visibleStartTime = p0:getState().DisplayOptions.visibleStartTime
+	if p2.type == setDevConsoleVisibilityModule.name then
+		local visibleStartTime = p1:getState().DisplayOptions.visibleStartTime
 		
-		if p1.isVisible ~= p0:getState().DisplayOptions.isVisible then
-			if p1.isVisible then
+		if p2.isVisible ~= p1:getState().DisplayOptions.isVisible then
+			if p2.isVisible then
 				rbxAnalyticsService:ReportCounter("DevConsoleStartVisible", 1)
 				
 				return
@@ -21,24 +21,24 @@ function ReportDevConsoleOpenClose(p0, p1)
 	end
 end
 
-function getTabAnalyticsKeyName(p2, p3)
-	return if p3 == nil then string.format("%s", p2) else string.format("%s_%s", p2, if p3 then "Client" else "Server")
+function getTabAnalyticsKeyName(p1, p2)
+	return if p2 == nil then string.format("%s", p1) else string.format("%s_%s", p1, if p2 then "Client" else "Server")
 end
 
-function dispatchTabAnalytics(p4)
+function dispatchTabAnalytics(p1)
 	-- upvalues: dashModule (ref), rbxAnalyticsService (ref), reportDevConsoleTabEventsThrottleHundredthsPercent (ref)
 	rbxAnalyticsService:ReportInfluxSeries("devConsoleMetric", dashModule.join({
 		calledFrom = "devConsoleTabChange",
 		placeId = game.PlaceId
-	}, p4), reportDevConsoleTabEventsThrottleHundredthsPercent)
+	}, p1), reportDevConsoleTabEventsThrottleHundredthsPercent)
 end
 
-function ReportTabChange(p5, p6)
+function ReportTabChange(p1, p2)
 	-- upvalues: setActiveTabModule (ref), setDevConsoleVisibilityModule (ref), setDevConsoleMinimizedModule (ref)
-	if p6.type == setActiveTabModule.name then
-		local mainView = p5:getState().MainView
-		local newTabIndex = p6.newTabIndex
-		local isClientView = p6.isClientView
+	if p2.type == setActiveTabModule.name then
+		local mainView = p1:getState().MainView
+		local newTabIndex = p2.newTabIndex
+		local isClientView = p2.isClientView
 		
 		if newTabIndex == mainView.currTabIndex and (isClientView == nil or isClientView == mainView.isClientView) then
 			return
@@ -50,20 +50,20 @@ function ReportTabChange(p5, p6)
 			
 			return
 		end
-	elseif p6.type == setDevConsoleVisibilityModule.name then
-		local mainView = p5:getState().MainView
-		dispatchTabAnalytics(if p6.isVisible then {
+	elseif p2.type == setDevConsoleVisibilityModule.name then
+		local mainView = p1:getState().MainView
+		dispatchTabAnalytics(if p2.isVisible then {
 			initTab = "StartVisible",
 			endTab = getTabAnalyticsKeyName(mainView.currTabIndex, mainView.isClientView)
-		} elseif p5:getState().DisplayOptions.isMinimized then { initTab = "Minimized", endTab = "EndVisible" } else {
+		} elseif p1:getState().DisplayOptions.isMinimized then { initTab = "Minimized", endTab = "EndVisible" } else {
 			endTab = "EndVisible",
 			initTab = getTabAnalyticsKeyName(mainView.currTabIndex, mainView.isClientView)
 		})
 		
 		return
-	elseif p6.type == setDevConsoleMinimizedModule.name then
-		local mainView = p5:getState().MainView
-		dispatchTabAnalytics(if p6.isMinimized then {
+	elseif p2.type == setDevConsoleMinimizedModule.name then
+		local mainView = p1:getState().MainView
+		dispatchTabAnalytics(if p2.isMinimized then {
 			endTab = "Minimized",
 			initTab = getTabAnalyticsKeyName(mainView.currTabIndex, mainView.isClientView)
 		} else {
@@ -73,11 +73,11 @@ function ReportTabChange(p5, p6)
 	end
 end
 
-return function(p7, p8)
-	return function(p9)
-		-- upvalues: p8 (ref), p7 (ref)
-		ReportTabChange(p8, p9)
-		ReportDevConsoleOpenClose(p8, p9)
-		p7(p9)
+return function(p1, p2)
+	return function(p3)
+		-- upvalues: p2 (ref), p1 (ref)
+		ReportTabChange(p2, p3)
+		ReportDevConsoleOpenClose(p2, p3)
+		p1(p3)
 	end
 end

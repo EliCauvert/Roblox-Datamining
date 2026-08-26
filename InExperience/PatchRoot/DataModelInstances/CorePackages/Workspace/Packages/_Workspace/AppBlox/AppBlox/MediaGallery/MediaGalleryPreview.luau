@@ -14,7 +14,7 @@ local thumbnailButtonModule = require(script.Parent.ThumbnailButton)
 local calcMediaGallerySizesFromHeightModule = require(script.Parent.calcMediaGallerySizesFromHeight)
 local calcMediaGallerySizesFromWidthModule = require(script.Parent.calcMediaGallerySizesFromWidth)
 local getShowItemsModule = require(script.Parent.getShowItems)
-local var9 = getIconSize(iconSize.Medium)
+local var1 = getIconSize(iconSize.Medium)
 local t = { frequency = 4, dampingRatio = 1 }
 local mediaGalleryPreview = roactModule.Component:extend("MediaGalleryPreview")
 mediaGalleryPreview.validateProps = tModule.strictInterface({
@@ -38,28 +38,28 @@ mediaGalleryPreview.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function mediaGalleryPreview.getDerivedStateFromProps(p0, p1)
+function mediaGalleryPreview.getDerivedStateFromProps(p1, p2)
 	-- upvalues: getShowItemsModule (ref)
-	if p1.items == p0.items and p1.numberOfThumbnails == p0.numberOfThumbnails then
+	if p2.items == p1.items and p2.numberOfThumbnails == p1.numberOfThumbnails then
 		return
 	end
-	local var12, var13, var14 = getShowItemsModule(p0)
+	local var2, var3, var4 = getShowItemsModule(p1)
 	
 	return {
-		items = p0.items,
-		numberOfThumbnails = p0.numberOfThumbnails,
-		itemsToShow = var12,
-		youTubeVideoItemsSize = var13,
-		imageItemsSize = var14,
-		animationOn = var14 > 1,
-		animatedIndex = var13 + 1,
-		selectedIndex = var13 + 1
+		items = p1.items,
+		numberOfThumbnails = p1.numberOfThumbnails,
+		itemsToShow = var2,
+		youTubeVideoItemsSize = var3,
+		imageItemsSize = var4,
+		animationOn = var4 > 1,
+		animatedIndex = var3 + 1,
+		selectedIndex = var3 + 1
 	}
 end
 
-function mediaGalleryPreview.init(p2)
+function mediaGalleryPreview.init(p1)
 	-- upvalues: otterModule (ref), roactModule (ref)
-	p2.state = {
+	p1.state = {
 		items = nil,
 		numberOfThumbnails = 1,
 		itemsToShow = nil,
@@ -71,49 +71,49 @@ function mediaGalleryPreview.init(p2)
 		showArrows = false,
 		focusIndex = 1
 	}
-	p2.animationTime = 0
-	p2.scrolling = false
-	p2.scrollMotor = otterModule.createSingleMotor(0)
-	local var15, var16 = roactModule.createBinding(UDim2.fromScale(1, 1))
-	p2.contentSize = var15
-	p2.updateContentSize = var16
-	local var17, var18 = roactModule.createBinding(UDim2.fromScale(1, 0.5))
-	p2.previewSize = var17
-	p2.updatePreviewSize = var18
-	local var19, var20 = roactModule.createBinding(UDim2.fromScale(1, 0.5))
-	p2.paginationSize = var19
-	p2.updatePaginationSize = var20
-	local var21, var22 = roactModule.createBinding(UDim2.fromScale(0, 0))
-	p2.thumbnailSize = var21
-	p2.updateThumbnailSize = var22
-	local var23, var24 = roactModule.createBinding(Vector2.new(0, 0))
-	p2.canvasPosition = var23
-	p2.updateCanvasPosition = var24
-	local var25, var26 = roactModule.createBinding(0)
-	p2.progress = var25
-	p2.updateProgress = var26
-	local var27, var28 = roactModule.createBinding(0)
-	p2.previewTransparency = var27
-	p2.updatePreviewTransparency = var28
+	p1.animationTime = 0
+	p1.scrolling = false
+	p1.scrollMotor = otterModule.createSingleMotor(0)
+	local var2, var3 = roactModule.createBinding(UDim2.fromScale(1, 1))
+	p1.contentSize = var2
+	p1.updateContentSize = var3
+	local var4, var5 = roactModule.createBinding(UDim2.fromScale(1, 0.5))
+	p1.previewSize = var4
+	p1.updatePreviewSize = var5
+	local var6, var7 = roactModule.createBinding(UDim2.fromScale(1, 0.5))
+	p1.paginationSize = var6
+	p1.updatePaginationSize = var7
+	local var8, var9 = roactModule.createBinding(UDim2.fromScale(0, 0))
+	p1.thumbnailSize = var8
+	p1.updateThumbnailSize = var9
+	local var10, var11 = roactModule.createBinding(Vector2.new(0, 0))
+	p1.canvasPosition = var10
+	p1.updateCanvasPosition = var11
+	local var12, var13 = roactModule.createBinding(0)
+	p1.progress = var12
+	p1.updateProgress = var13
+	local var14, var15 = roactModule.createBinding(0)
+	p1.previewTransparency = var14
+	p1.updatePreviewTransparency = var15
 	
-	function p2.onResize(p3)
-		-- upvalues: p2 (ref)
-		p2:updateSizes(p3)
-		p2.updateCanvasPosition(Vector2.new(p2:getCanvasPositionX(), 0))
+	function p2.onResize(p2)
+		-- upvalues: p1 (ref)
+		p1:updateSizes(p2)
+		p1.updateCanvasPosition(Vector2.new(p1:getCanvasPositionX(), 0))
 	end
 	
-	function p2.onMouseLeave(_, p4)
-		-- upvalues: p2 (ref)
-		if p4.UserInputType == Enum.UserInputType.MouseMovement then
-			p2.resetAnimation()
-			p2:setState(function(p5)
-				-- upvalues: p2 (copy)
-				local selectedIndex = p5.selectedIndex
+	function p2.onMouseLeave(_, p2)
+		-- upvalues: p1 (ref)
+		if p2.UserInputType == Enum.UserInputType.MouseMovement then
+			p1.resetAnimation()
+			p1:setState(function(p3)
+				-- upvalues: p1 (copy)
+				local selectedIndex = p3.selectedIndex
 				
 				return {
-					animationOn = p5.imageItemsSize > 1,
+					animationOn = p3.imageItemsSize > 1,
 					animatedIndex = selectedIndex,
-					focusIndex = p2.getNextFocusIndex(selectedIndex)
+					focusIndex = p1.getNextFocusIndex(selectedIndex)
 				}
 			end)
 			
@@ -122,20 +122,20 @@ function mediaGalleryPreview.init(p2)
 	end
 	
 	function p2.onPreviewActivated()
-		-- upvalues: p2 (ref)
-		p2.resetAnimation()
-		p2:setState({ animationOn = false })
+		-- upvalues: p1 (ref)
+		p1.resetAnimation()
+		p1:setState({ animationOn = false })
 		
-		if p2.props.onPreviewActivated then
-			p2.props.onPreviewActivated(p2.state.itemsToShow[p2.state.selectedIndex].originalIndex)
+		if p1.props.onPreviewActivated then
+			p1.props.onPreviewActivated(p1.state.itemsToShow[p1.state.selectedIndex].originalIndex)
 		end
 	end
 	
-	function p2.onMouseEnterPagination(_, p6)
-		-- upvalues: p2 (ref)
-		if p6.UserInputType == Enum.UserInputType.MouseMovement then
-			p2:setState(function(p7)
-				if p7.showArrows then
+	function p2.onMouseEnterPagination(_, p2)
+		-- upvalues: p1 (ref)
+		if p2.UserInputType == Enum.UserInputType.MouseMovement then
+			p1:setState(function(p3)
+				if p3.showArrows then
 					return
 				end
 				return { showArrows = true }
@@ -145,11 +145,11 @@ function mediaGalleryPreview.init(p2)
 		end
 	end
 	
-	function p2.onMouseLeavePagination(_, p8)
-		-- upvalues: p2 (ref)
-		if p8.UserInputType == Enum.UserInputType.MouseMovement then
-			p2:setState(function(p9)
-				if p9.showArrows then
+	function p2.onMouseLeavePagination(_, p2)
+		-- upvalues: p1 (ref)
+		if p2.UserInputType == Enum.UserInputType.MouseMovement then
+			p1:setState(function(p3)
+				if p3.showArrows then
 					return { showArrows = false }
 				end
 			end)
@@ -159,133 +159,133 @@ function mediaGalleryPreview.init(p2)
 	end
 	
 	function p2.onCycleLeftActivated()
-		-- upvalues: p2 (ref)
-		if p2.scrolling then
+		-- upvalues: p1 (ref)
+		if p1.scrolling then
 			return
 		end
-		local maxValue = math.max(p2.state.focusIndex - 1, 1)
-		p2.resetAnimation()
-		p2:setState({ animationOn = false, focusIndex = maxValue })
+		local maxValue = math.max(p1.state.focusIndex - 1, 1)
+		p1.resetAnimation()
+		p1:setState({ animationOn = false, focusIndex = maxValue })
 	end
 	
 	function p2.onCycleRightActivated()
-		-- upvalues: p2 (ref)
-		if p2.scrolling then
+		-- upvalues: p1 (ref)
+		if p1.scrolling then
 			return
 		end
-		local minValue = math.min(p2.state.focusIndex + 1, #p2.props.items)
-		p2.resetAnimation()
-		p2:setState({ animationOn = false, focusIndex = minValue })
+		local minValue = math.min(p1.state.focusIndex + 1, #p1.props.items)
+		p1.resetAnimation()
+		p1:setState({ animationOn = false, focusIndex = minValue })
 	end
 	
-	function p2.onItemActivated(p10)
-		-- upvalues: p2 (ref)
-		local isYouTubeVideo = p2.state.itemsToShow[p10].isYouTubeVideo
-		local selectedIndex = p2.state.selectedIndex
-		p2.resetAnimation()
-		p2:setState({
+	function p2.onItemActivated(p2)
+		-- upvalues: p1 (ref)
+		local isYouTubeVideo = p1.state.itemsToShow[p2].isYouTubeVideo
+		local selectedIndex = p1.state.selectedIndex
+		p1.resetAnimation()
+		p1:setState({
 			animationOn = false,
-			selectedIndex = if not isYouTubeVideo then p10 else nil
+			selectedIndex = if not isYouTubeVideo then p2 else nil
 		})
 		
 		if isYouTubeVideo then
-			p2.onVideoPlayActivated(p10)
+			p1.onVideoPlayActivated(p2)
 		end
-		if p2.props.onThumbnailActivated then
-			p2.props.onThumbnailActivated(selectedIndex, p10)
-		end
-	end
-	
-	function p2.onItemPlayActivated(p11)
-		-- upvalues: p2 (ref)
-		p2.resetAnimation()
-		p2:setState({ animationOn = false })
-		p2.onVideoPlayActivated(p11)
-	end
-	
-	function p2.onVideoPlayActivated(p12)
-		-- upvalues: p2 (ref)
-		if p2.props.onVideoPlayActivated then
-			p2.props.onVideoPlayActivated(p2.state.itemsToShow[p12].originalIndex)
+		if p1.props.onThumbnailActivated then
+			p1.props.onThumbnailActivated(selectedIndex, p2)
 		end
 	end
 	
-	function p2.getNextFocusIndex(p13)
-		-- upvalues: p2 (ref)
-		local focusIndex = p2.state.focusIndex
-		local numberOfThumbnails = p2.props.numberOfThumbnails
+	function p2.onItemPlayActivated(p2)
+		-- upvalues: p1 (ref)
+		p1.resetAnimation()
+		p1:setState({ animationOn = false })
+		p1.onVideoPlayActivated(p2)
+	end
+	
+	function p2.onVideoPlayActivated(p2)
+		-- upvalues: p1 (ref)
+		if p1.props.onVideoPlayActivated then
+			p1.props.onVideoPlayActivated(p1.state.itemsToShow[p2].originalIndex)
+		end
+	end
+	
+	function p2.getNextFocusIndex(p2)
+		-- upvalues: p1 (ref)
+		local focusIndex = p1.state.focusIndex
+		local numberOfThumbnails = p1.props.numberOfThumbnails
 		
-		return if p13 < focusIndex then p13 elseif focusIndex + numberOfThumbnails <= p13 then p13 - numberOfThumbnails + 1 else focusIndex
+		return if p2 < focusIndex then p2 elseif focusIndex + numberOfThumbnails <= p2 then p2 - numberOfThumbnails + 1 else focusIndex
 	end
 	
 	function p2.resetAnimation()
-		-- upvalues: p2 (ref)
-		p2.animationTime = 0
-		p2.updateProgress(0)
-		p2.updatePreviewTransparency(0)
+		-- upvalues: p1 (ref)
+		p1.animationTime = 0
+		p1.updateProgress(0)
+		p1.updatePreviewTransparency(0)
 	end
 	
-	function p2.renderSteppedCallback(p14)
-		-- upvalues: p2 (ref)
-		p2.animationTime += p14
-		local var31 = p2.animationTime - 4.5
+	function p2.renderSteppedCallback(p2)
+		-- upvalues: p1 (ref)
+		p1.animationTime += p2
+		local var16 = p1.animationTime - 4.5
 		
-		if p2.animationTime > 5 then
-			p2.animationTime = 0
-			p2.updateProgress(0)
-			local youTubeVideoItemsSize = p2.state.youTubeVideoItemsSize
-			local var32 = (p2.state.animatedIndex - youTubeVideoItemsSize) % p2.state.imageItemsSize + 1 + youTubeVideoItemsSize
-			p2:setState({
-				animatedIndex = var32,
-				selectedIndex = var32,
-				focusIndex = p2.getNextFocusIndex(var32)
+		if p1.animationTime > 5 then
+			p1.animationTime = 0
+			p1.updateProgress(0)
+			local youTubeVideoItemsSize = p1.state.youTubeVideoItemsSize
+			local var17 = (p1.state.animatedIndex - youTubeVideoItemsSize) % p1.state.imageItemsSize + 1 + youTubeVideoItemsSize
+			p1:setState({
+				animatedIndex = var17,
+				selectedIndex = var17,
+				focusIndex = p1.getNextFocusIndex(var17)
 			})
 			
 			return
 		end
-		p2.updateProgress(p2.animationTime / 5)
+		p1.updateProgress(p1.animationTime / 5)
 		
-		if var31 > 0 then
-			p2.updatePreviewTransparency(var31 / 0.5)
+		if var16 > 0 then
+			p1.updatePreviewTransparency(var16 / 0.5)
 		end
 	end
 	
-	function p2.scrollMotorOnStep(p15)
-		-- upvalues: p2 (ref)
-		p2.updateCanvasPosition(Vector2.new(p15, 0))
+	function p2.scrollMotorOnStep(p2)
+		-- upvalues: p1 (ref)
+		p1.updateCanvasPosition(Vector2.new(p2, 0))
 	end
 	
 	function p2.scrollMotorOnComplete()
-		-- upvalues: p2 (ref)
-		p2.scrolling = false
+		-- upvalues: p1 (ref)
+		p1.scrolling = false
 	end
 	
-	p2.scrollMotor:onStep(p2.scrollMotorOnStep)
-	p2.scrollMotor:onComplete(p2.scrollMotorOnComplete)
+	p1.scrollMotor:onStep(p1.scrollMotorOnStep)
+	p1.scrollMotor:onComplete(p1.scrollMotorOnComplete)
 end
 
-function mediaGalleryPreview.render(p16)
-	-- upvalues: withStyle (ref), roactModule (ref), iconButton (ref), var9 (ref), images (ref), eventConnection (ref), runService (ref)
-	local layoutOrder = p16.props.layoutOrder
-	local anchorPoint = p16.props.anchorPoint
-	local position = p16.props.position
-	local size = p16.props.size
-	local numberOfThumbnails = p16.props.numberOfThumbnails
-	local itemsCount = #p16.props.items
-	local itemsToShow = p16.state.itemsToShow
-	local showArrows = p16.state.showArrows
-	local focusIndex = p16.state.focusIndex
-	local selectedIndex = p16.state.selectedIndex
-	local animationOn = p16.state.animationOn
-	local youTubeVideoItemsSize = p16.state.youTubeVideoItemsSize
-	local var34 = itemsCount > 1 and not animationOn
-	local var35 = if animationOn then (selectedIndex - youTubeVideoItemsSize) % p16.state.imageItemsSize + 1 + youTubeVideoItemsSize else nil
-	local var36 = numberOfThumbnails < itemsCount
-	local var37 = focusIndex <= 1
-	local var38 = #itemsToShow < focusIndex + numberOfThumbnails
+function mediaGalleryPreview.render(p1)
+	-- upvalues: withStyle (ref), roactModule (ref), iconButton (ref), var1 (ref), images (ref), eventConnection (ref), runService (ref)
+	local layoutOrder = p1.props.layoutOrder
+	local anchorPoint = p1.props.anchorPoint
+	local position = p1.props.position
+	local size = p1.props.size
+	local numberOfThumbnails = p1.props.numberOfThumbnails
+	local itemsCount = #p1.props.items
+	local itemsToShow = p1.state.itemsToShow
+	local showArrows = p1.state.showArrows
+	local focusIndex = p1.state.focusIndex
+	local selectedIndex = p1.state.selectedIndex
+	local animationOn = p1.state.animationOn
+	local youTubeVideoItemsSize = p1.state.youTubeVideoItemsSize
+	local var2 = itemsCount > 1 and not animationOn
+	local var3 = if animationOn then (selectedIndex - youTubeVideoItemsSize) % p1.state.imageItemsSize + 1 + youTubeVideoItemsSize else nil
+	local var4 = numberOfThumbnails < itemsCount
+	local var5 = focusIndex <= 1
+	local var6 = #itemsToShow < focusIndex + numberOfThumbnails
 	
-	return withStyle(function(p17)
-		-- upvalues: roactModule (copy), layoutOrder (ref), size (ref), anchorPoint (ref), position (ref), p16 (ref), var34 (ref), animationOn (ref), var35 (ref), itemsToShow (ref), selectedIndex (ref), var36 (ref), showArrows (ref), iconButton (copy), var9 (copy), images (copy), var37 (ref), var38 (ref), eventConnection (copy), runService (copy)
+	return withStyle(function(p2)
+		-- upvalues: roactModule (copy), layoutOrder (ref), size (ref), anchorPoint (ref), position (ref), p1 (ref), var2 (ref), animationOn (ref), var3 (ref), itemsToShow (ref), selectedIndex (ref), var4 (ref), showArrows (ref), iconButton (copy), var1 (copy), images (copy), var5 (ref), var6 (ref), eventConnection (copy), runService (copy)
 		return roactModule.createElement("Frame", {
 			LayoutOrder = layoutOrder,
 			Size = size,
@@ -293,13 +293,13 @@ function mediaGalleryPreview.render(p16)
 			Position = position,
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
-			[roactModule.Change.AbsoluteSize] = p16.onResize,
-			[roactModule.Event.InputEnded] = if var34 then p16.onMouseLeave else nil
+			[roactModule.Change.AbsoluteSize] = p1.onResize,
+			[roactModule.Event.InputEnded] = if var2 then p1.onMouseLeave else nil
 		}, {
 			Content = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				Size = p16.contentSize
+				Size = p1.contentSize
 			}, {
 				ListLayout = roactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
@@ -310,84 +310,84 @@ function mediaGalleryPreview.render(p16)
 				Preview = roactModule.createElement("Frame", {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
-					Size = p16.previewSize
+					Size = p1.previewSize
 				}, {
 					AnimationLabel = animationOn and (roactModule.createElement("ImageLabel", {
 						BackgroundTransparency = 1,
 						ZIndex = -1,
 						Size = UDim2.fromScale(1, 1),
-						Image = var35 and itemsToShow[var35].imageId
+						Image = var3 and itemsToShow[var3].imageId
 					}, {
 						Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 					}) or nil),
 					Button = roactModule.createElement("ImageButton", {
 						Size = UDim2.fromScale(1, 1),
 						Image = itemsToShow[selectedIndex].imageId,
-						ImageTransparency = p16.previewTransparency,
+						ImageTransparency = p1.previewTransparency,
 						BackgroundTransparency = 1,
 						AutoButtonColor = false,
 						ZIndex = 1,
-						[roactModule.Event.Activated] = p16.onPreviewActivated
+						[roactModule.Event.Activated] = p1.onPreviewActivated
 					}, {
 						Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 					})
 				}),
 				Pagination = roactModule.createElement("Frame", {
 					LayoutOrder = 2,
-					Size = p16.paginationSize,
+					Size = p1.paginationSize,
 					BorderSizePixel = 0,
 					BackgroundTransparency = 1,
-					[roactModule.Event.InputBegan] = if var36 then p16.onMouseEnterPagination else nil,
-					[roactModule.Event.InputEnded] = if var36 then p16.onMouseLeavePagination else nil
+					[roactModule.Event.InputBegan] = if var4 then p1.onMouseEnterPagination else nil,
+					[roactModule.Event.InputEnded] = if var4 then p1.onMouseLeavePagination else nil
 				}, {
 					LeftArrow = showArrows and roactModule.createElement(iconButton, {
-						size = UDim2.new(0, var9, 1, 0),
+						size = UDim2.new(0, var1, 1, 0),
 						anchorPoint = Vector2.new(0, 0.5),
 						position = UDim2.fromScale(0, 0.5),
 						icon = images["icons/actions/cycleLeft"],
-						isDisabled = var37,
-						onActivated = p16.onCycleLeftActivated
+						isDisabled = var5,
+						onActivated = p1.onCycleLeftActivated
 					}) or nil,
-					Scroller = p16:renderScroller(p17),
+					Scroller = p1:renderScroller(p2),
 					RightArrow = showArrows and roactModule.createElement(iconButton, {
-						size = UDim2.new(0, var9, 1, 0),
+						size = UDim2.new(0, var1, 1, 0),
 						anchorPoint = Vector2.new(1, 0.5),
 						position = UDim2.fromScale(1, 0.5),
 						icon = images["icons/actions/cycleRight"],
-						isDisabled = var38,
-						onActivated = p16.onCycleRightActivated
+						isDisabled = var6,
+						onActivated = p1.onCycleRightActivated
 					}) or nil
 				})
 			}),
 			EventConnection = animationOn and roactModule.createElement(eventConnection, {
 				event = runService.RenderStepped,
-				callback = p16.renderSteppedCallback
+				callback = p1.renderSteppedCallback
 			}) or nil
 		})
 	end)
 end
 
-function mediaGalleryPreview.renderScroller(p18, p19)
-	-- upvalues: roactModule (ref), var9 (ref)
+function mediaGalleryPreview.renderScroller(p1, p2)
+	-- upvalues: roactModule (ref), var1 (ref)
 	return roactModule.createElement("ScrollingFrame", {
 		BackgroundTransparency = 1,
 		ScrollBarThickness = 0,
 		ClipsDescendants = true,
 		Selectable = false,
-		Size = UDim2.new(1, -var9 * 2, 1, 0),
+		Size = UDim2.new(1, -var1 * 2, 1, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5),
 		ScrollingDirection = Enum.ScrollingDirection.X,
 		AutomaticCanvasSize = Enum.AutomaticSize.XY,
-		CanvasPosition = p18.canvasPosition
-	}, p18:renderThumbnails(p19))
+		CanvasPosition = p1.canvasPosition
+	}, p1:renderThumbnails(p2))
 end
 
-function mediaGalleryPreview.renderThumbnails(p20, p21)
+function mediaGalleryPreview.renderThumbnails(p1, p2)
 	-- upvalues: roactModule (ref), thumbnailButtonModule (ref)
-	local selectedIndex = p20.state.selectedIndex
-	local animationOn = p20.state.animationOn
-	local animatedIndex = p20.state.animatedIndex
+	local selectedIndex = p1.state.selectedIndex
+	local animationOn = p1.state.animationOn
+	local animatedIndex = p1.state.animatedIndex
 	local t = {
 		ListLayout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
@@ -397,12 +397,12 @@ function mediaGalleryPreview.renderThumbnails(p20, p21)
 		})
 	}
 	
-	for i, v in ipairs(p20.state.itemsToShow) do
+	for i, v in ipairs(p1.state.itemsToShow) do
 		t["item" .. i] = roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			LayoutOrder = i,
-			Size = p20.thumbnailSize
+			Size = p1.thumbnailSize
 		}, {
 			Thumbnail = roactModule.createElement(thumbnailButtonModule, {
 				useScaledPlayButton = true,
@@ -410,19 +410,19 @@ function mediaGalleryPreview.renderThumbnails(p20, p21)
 				imageId = v.imageId,
 				isVideo = v.isYouTubeVideo,
 				isSelected = i == selectedIndex,
-				onActivated = if v.imageId and v.imageId ~= "" then p20.onItemActivated else nil,
-				onPlayActivated = if v.isYouTubeVideo then p20.onItemPlayActivated else nil
+				onActivated = if v.imageId and v.imageId ~= "" then p1.onItemActivated else nil,
+				onPlayActivated = if v.isYouTubeVideo then p1.onItemPlayActivated else nil
 			}),
-			TimerBar = animationOn and i == animatedIndex and p20:renderTimerBar(p21) or nil
+			TimerBar = animationOn and i == animatedIndex and p1:renderTimerBar(p2) or nil
 		})
 	end
 	return t
 end
 
-function mediaGalleryPreview.renderTimerBar(p22, p23)
+function mediaGalleryPreview.renderTimerBar(p3, p4)
 	-- upvalues: roactModule (ref)
-	local UIDefault = p23.Theme.UIDefault
-	local secondaryContent = p23.Theme.SecondaryContent
+	local UIDefault = p4.Theme.UIDefault
+	local secondaryContent = p4.Theme.SecondaryContent
 	
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -435,7 +435,7 @@ function mediaGalleryPreview.renderTimerBar(p22, p23)
 	}, {
 		Background = roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = p22.thumbnailSize,
+			Size = p3.thumbnailSize,
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.fromScale(0, 1),
 			BackgroundColor3 = UIDefault.Color,
@@ -446,13 +446,13 @@ function mediaGalleryPreview.renderTimerBar(p22, p23)
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
 				ClipsDescendants = true,
-				Size = p22.progress:map(function(p24)
-					return UDim2.fromScale(p24, 1)
+				Size = p3.progress:map(function(p5)
+					return UDim2.fromScale(p5, 1)
 				end)
 			}, {
 				Foreground = roactModule.createElement("Frame", {
 					BorderSizePixel = 0,
-					Size = p22.thumbnailSize,
+					Size = p3.thumbnailSize,
 					BackgroundColor3 = secondaryContent.Color,
 					BackgroundTransparency = secondaryContent.Transparency
 				}, {
@@ -463,41 +463,41 @@ function mediaGalleryPreview.renderTimerBar(p22, p23)
 	})
 end
 
-function mediaGalleryPreview.didUpdate(p25, _, p26)
-	if p25.state.focusIndex ~= p26.focusIndex then
-		p25:scrollToNewIndex()
+function mediaGalleryPreview.didUpdate(p3, _, p4)
+	if p3.state.focusIndex ~= p4.focusIndex then
+		p3:scrollToNewIndex()
 	end
-	if p25.state.selectedIndex ~= p26.selectedIndex then
-		p25.updatePreviewTransparency(0)
+	if p3.state.selectedIndex ~= p4.selectedIndex then
+		p3.updatePreviewTransparency(0)
 	end
 end
 
-function mediaGalleryPreview.updateSizes(p27, p28)
+function mediaGalleryPreview.updateSizes(p3, p4)
 	-- upvalues: calcMediaGallerySizesFromWidthModule (ref), calcMediaGallerySizesFromHeightModule (ref)
-	local x = p28.AbsoluteSize.X
-	local y = p28.AbsoluteSize.Y
-	local numberOfThumbnails = p27.props.numberOfThumbnails
-	local var40 = calcMediaGallerySizesFromWidthModule(x, numberOfThumbnails, p27.props.fullWidth)
+	local x = p4.AbsoluteSize.X
+	local y = p4.AbsoluteSize.Y
+	local numberOfThumbnails = p3.props.numberOfThumbnails
+	local var2 = calcMediaGallerySizesFromWidthModule(x, numberOfThumbnails, p3.props.fullWidth)
 	
-	if y < var40.contentSize.Y.Offset then
-		var40 = calcMediaGallerySizesFromHeightModule(y, numberOfThumbnails, p27.props.fullWidth)
+	if y < var2.contentSize.Y.Offset then
+		var2 = calcMediaGallerySizesFromHeightModule(y, numberOfThumbnails, p3.props.fullWidth)
 	end
-	p27.updateContentSize(var40.contentSize)
-	p27.updatePreviewSize(var40.previewSize)
-	p27.updatePaginationSize(var40.paginationSize)
-	p27.updateThumbnailSize(var40.thumbnailSize)
+	p3.updateContentSize(var2.contentSize)
+	p3.updatePreviewSize(var2.previewSize)
+	p3.updatePaginationSize(var2.paginationSize)
+	p3.updateThumbnailSize(var2.thumbnailSize)
 end
 
-function mediaGalleryPreview.getCanvasPositionX(p29)
-	return (p29.state.focusIndex - 1) * (p29.thumbnailSize:getValue().X.Offset + 12)
+function mediaGalleryPreview.getCanvasPositionX(p3)
+	return (p3.state.focusIndex - 1) * (p3.thumbnailSize:getValue().X.Offset + 12)
 end
 
-function mediaGalleryPreview.scrollToNewIndex(p30)
+function mediaGalleryPreview.scrollToNewIndex(p3)
 	-- upvalues: otterModule (ref), t (ref)
-	local canvasPositionX = p30:getCanvasPositionX()
-	p30.scrollMotor:setGoal(otterModule.instant(p30.canvasPosition:getValue().X))
-	p30.scrollMotor:setGoal(otterModule.spring(canvasPositionX, t))
-	p30.scrolling = true
+	local canvasPositionX = p3:getCanvasPositionX()
+	p3.scrollMotor:setGoal(otterModule.instant(p3.canvasPosition:getValue().X))
+	p3.scrollMotor:setGoal(otterModule.spring(canvasPositionX, t))
+	p3.scrolling = true
 end
 
 return mediaGalleryPreview

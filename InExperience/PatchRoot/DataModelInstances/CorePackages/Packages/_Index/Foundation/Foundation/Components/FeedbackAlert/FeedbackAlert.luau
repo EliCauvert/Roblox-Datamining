@@ -24,88 +24,88 @@ local iconVariant = builderIconsModule.IconVariant
 local useFeedbackAlertVariantsModule = require(script.Parent.useFeedbackAlertVariants)
 local t = { testId = "--foundation-feedback-alert" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useFeedbackAlertVariantsModule (ref), reactUtilsModule (ref), escapeRichTextModule (ref), reactModule (ref), controlStateModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), alertConstantsModule (ref), iconSizeModule (ref), iconVariant (ref), textModule (ref), stateLayerAffordanceModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref), alertActionsModule (ref)
-	local var21 = withDefaultsModule(p0, t)
-	local var22 = useFeedbackAlertVariantsModule(useTokensModule(), var21.severity)
-	local var23 = reactUtilsModule.useComposedRef(p1)
-	local var24 = if var21.link then escapeRichTextModule(var21.link.text) else nil
-	local var25, var26 = reactModule.useState(false)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useFeedbackAlertVariantsModule(useTokensModule(), var1.severity)
+	local var3 = reactUtilsModule.useComposedRef(p2)
+	local var4 = if var1.link then escapeRichTextModule(var1.link.text) else nil
+	local var5, var6 = reactModule.useState(false)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var21, {
-		tag = var22.container.tag,
-		stroke = var22.stroke,
-		backgroundStyle = var22.backgroundStyle,
-		ref = var23
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		tag = var2.container.tag,
+		stroke = var2.stroke,
+		backgroundStyle = var2.backgroundStyle,
+		ref = var3
 	}), {
 		HeaderRow = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
-			tag = var22.headerRow.tag,
-			testId = `{var21.testId}--header`
+			tag = var2.headerRow.tag,
+			testId = `{var1.testId}--header`
 		}, {
 			Icon = reactModule.createElement(iconModule, {
 				LayoutOrder = 1,
-				name = alertConstantsModule.SEVERITY_TO_ICON[var21.severity],
+				name = alertConstantsModule.SEVERITY_TO_ICON[var1.severity],
 				size = iconSizeModule.Large,
 				variant = iconVariant.Filled,
-				style = var22.icon.style,
-				testId = `{var21.testId}--icon`
+				style = var2.icon.style,
+				testId = `{var1.testId}--icon`
 			}),
 			Content = reactModule.createElement(viewModule, {
 				LayoutOrder = 2,
 				tag = "row align-y-center fill gap-xsmall auto-y",
-				testId = `{var21.testId}--content`
+				testId = `{var1.testId}--content`
 			}, {
 				Title = reactModule.createElement(textModule, {
 					LayoutOrder = 1,
-					Text = var21.title,
-					tag = var22.title.tag,
-					testId = `{var21.testId}--title`
+					Text = var1.title,
+					tag = var2.title.tag,
+					testId = `{var1.testId}--title`
 				}),
-				Subtitle = if var21.subtitle then reactModule.createElement(textModule, {
+				Subtitle = if var1.subtitle then reactModule.createElement(textModule, {
 					LayoutOrder = 2,
-					Text = var21.subtitle,
-					tag = var22.subtitle.tag,
-					testId = `{var21.testId}--subtitle`
+					Text = var1.subtitle,
+					tag = var2.subtitle.tag,
+					testId = `{var1.testId}--subtitle`
 				}) else nil,
-				Separator = if var21.link then reactModule.createElement(textModule, {
+				Separator = if var1.link then reactModule.createElement(textModule, {
 					Text = "\194\183",
 					tag = "auto-xy text-body-medium content-default",
 					LayoutOrder = 3,
-					testId = `{var21.testId}--separator`
+					testId = `{var1.testId}--separator`
 				}) else nil,
-				Link = if var21.link then reactModule.createElement(textModule, {
+				Link = if var1.link then reactModule.createElement(textModule, {
 					RichText = true,
 					LayoutOrder = 4,
-					Text = if var25 then `<u>{var24}</u>` else var24,
-					tag = var22.link.tag,
+					Text = if var5 then `<u>{var4}</u>` else var4,
+					tag = var2.link.tag,
 					stateLayer = { affordance = stateLayerAffordanceModule.None },
-					onStateChanged = reactModule.useCallback(function(p2)
-						-- upvalues: var26 (ref), controlStateModule (copy)
-						var26(p2 == controlStateModule.Hover)
+					onStateChanged = reactModule.useCallback(function(p3)
+						-- upvalues: var6 (ref), controlStateModule (copy)
+						var6(p3 == controlStateModule.Hover)
 					end, {}),
-					onActivated = var21.link.onActivated,
-					testId = `{var21.testId}--link`
+					onActivated = var1.link.onActivated,
+					testId = `{var1.testId}--link`
 				}) else nil
 			}),
-			Close = if var21.onClose ~= nil then nil else reactModule.createElement(closeAffordanceModule, {
+			Close = if var1.onClose ~= nil then nil else reactModule.createElement(closeAffordanceModule, {
 				LayoutOrder = 3,
-				onActivated = var21.onClose,
+				onActivated = var1.onClose,
 				size = inputSizeModule.XSmall,
 				variant = closeAffordanceVariantModule.Utility,
-				testId = `{var21.testId}--close`
+				testId = `{var1.testId}--close`
 			})
 		}),
-		Description = if var21.description then reactModule.createElement(textModule, {
+		Description = if var1.description then reactModule.createElement(textModule, {
 			LayoutOrder = 2,
-			Text = var21.description,
-			tag = var22.description.tag,
-			testId = `{var21.testId}--description`
+			Text = var1.description,
+			tag = var2.description.tag,
+			testId = `{var1.testId}--description`
 		}) else nil,
 		Actions = reactModule.createElement(alertActionsModule, {
 			LayoutOrder = 3,
-			actions = var21.actions,
-			testId = `{var21.testId}--actions`
+			actions = var1.actions,
+			testId = `{var1.testId}--actions`
 		})
 	})
 end))

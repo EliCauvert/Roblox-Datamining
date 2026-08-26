@@ -27,12 +27,12 @@ local t = {
 	publicVoiceFocusedUserIds = {}
 }
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: t (ref), utilsModule (ref)
-	if p0 then
-		t.participants = utilsModule.stringMapToNumberMap(p0.participants)
-		t.activeUserIds = p0.activeUserIds
-		t.publicVoiceFocusedUserIds = utilsModule.stringMapToNumberMap(p0.publicVoiceFocusedUserIds)
+	if p1 then
+		t.participants = utilsModule.stringMapToNumberMap(p1.participants)
+		t.activeUserIds = p1.activeUserIds
+		t.publicVoiceFocusedUserIds = utilsModule.stringMapToNumberMap(p1.publicVoiceFocusedUserIds)
 	end
 	return t
 end
@@ -59,142 +59,142 @@ return function(p1)
 			
 			return cryo.Dictionary.join(p2, { participants = cloned })
 		end,
-		[participantRemoved.name] = function(p4, p5)
+		[participantRemoved.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local userId = p5.payload.userId
+			local userId = p3.payload.userId
 			
-			if not p4.participants[userId] then
-				return p4
+			if not p2.participants[userId] then
+				return p2
 			end
-			local cloned = table.clone(p4.participants)
-			local cloned_1 = table.clone(p4.activeUserIds)
-			local publicVoiceFocusedUserIds = p4.publicVoiceFocusedUserIds
+			local cloned = table.clone(p2.participants)
+			local cloned_1 = table.clone(p2.activeUserIds)
+			local publicVoiceFocusedUserIds = p2.publicVoiceFocusedUserIds
 			local index = table.find(cloned_1, userId)
 			cloned[userId] = nil
 			
 			if publicVoiceFocusedUserIds[userId] then
-				publicVoiceFocusedUserIds = table.clone(p4.publicVoiceFocusedUserIds)
+				publicVoiceFocusedUserIds = table.clone(p2.publicVoiceFocusedUserIds)
 				publicVoiceFocusedUserIds[userId] = nil
 			end
 			if index then
 				table.remove(cloned_1, index)
 			end
-			return cryo.Dictionary.join(p4, {
+			return cryo.Dictionary.join(p2, {
 				participants = cloned,
 				activeUserIds = cloned_1,
 				publicVoiceFocusedUserIds = publicVoiceFocusedUserIds
 			})
 		end,
-		[participantWasMuted.name] = function(p6, p7)
+		[participantWasMuted.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local userId = p7.payload.userId
+			local userId = p3.payload.userId
 			
-			if not p6.participants[userId] then
-				return p6
+			if not p2.participants[userId] then
+				return p2
 			end
-			local participants = p6.participants
-			local activeUserIds = p6.activeUserIds
+			local participants = p2.participants
+			local activeUserIds = p2.activeUserIds
 			local index = table.find(activeUserIds, userId)
 			
 			if not participants[userId].isMuted then
-				participants = table.clone(p6.participants)
+				participants = table.clone(p2.participants)
 				participants[userId].isMuted = true
 			end
 			if index then
-				activeUserIds = table.clone(p6.activeUserIds)
+				activeUserIds = table.clone(p2.activeUserIds)
 				table.remove(activeUserIds, index)
 			end
-			return cryo.Dictionary.join(p6, {
+			return cryo.Dictionary.join(p2, {
 				participants = participants,
 				activeUserIds = activeUserIds
 			})
 		end,
-		[participantWasUnmuted.name] = function(p8, p9)
+		[participantWasUnmuted.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local userId = p9.payload.userId
+			local userId = p3.payload.userId
 			
-			if p8.participants[userId] and p8.participants[userId].isMuted then
-				local cloned = table.clone(p8.participants)
+			if p2.participants[userId] and p2.participants[userId].isMuted then
+				local cloned = table.clone(p2.participants)
 				cloned[userId].isMuted = false
 				
-				return cryo.Dictionary.join(p8, { participants = cloned })
+				return cryo.Dictionary.join(p2, { participants = cloned })
 			end
-			return p8
+			return p2
 		end,
-		[voiceChangerWasEnabled.name] = function(p10, p11)
+		[voiceChangerWasEnabled.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local userId = p11.payload.userId
+			local userId = p3.payload.userId
 			
-			if p10.participants[userId] then
-				local cloned = table.clone(p10.participants)
-				local cloned_1 = table.clone(p10.participants[userId])
+			if p2.participants[userId] then
+				local cloned = table.clone(p2.participants)
+				local cloned_1 = table.clone(p2.participants[userId])
 				cloned_1.isVoiceChangerActive = true
 				cloned[userId] = cloned_1
 				
-				return cryo.Dictionary.join(p10, { participants = cloned })
+				return cryo.Dictionary.join(p2, { participants = cloned })
 			end
-			return p10
+			return p2
 		end,
-		[voiceChangerWasDisabled.name] = function(p12, p13)
+		[voiceChangerWasDisabled.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local userId = p13.payload.userId
+			local userId = p3.payload.userId
 			
-			if p12.participants[userId] then
-				local cloned = table.clone(p12.participants)
-				local cloned_1 = table.clone(p12.participants[userId])
+			if p2.participants[userId] then
+				local cloned = table.clone(p2.participants)
+				local cloned_1 = table.clone(p2.participants[userId])
 				cloned_1.isVoiceChangerActive = false
 				cloned[userId] = cloned_1
 				
-				return cryo.Dictionary.join(p12, { participants = cloned })
+				return cryo.Dictionary.join(p2, { participants = cloned })
 			end
-			return p12
+			return p2
 		end,
-		[voicePackWasSet.name] = function(p14, p15)
+		[voicePackWasSet.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local userId = p15.payload.userId
+			local userId = p3.payload.userId
 			
-			if p14.participants[userId] then
-				local cloned = table.clone(p14.participants)
-				local cloned_1 = table.clone(p14.participants[userId])
-				cloned_1.selectedVoicePack = p15.payload.voicePackName or "None"
+			if p2.participants[userId] then
+				local cloned = table.clone(p2.participants)
+				local cloned_1 = table.clone(p2.participants[userId])
+				cloned_1.selectedVoicePack = p3.payload.voicePackName or "None"
 				cloned[userId] = cloned_1
 				
-				return cryo.Dictionary.union(p14, { participants = cloned })
+				return cryo.Dictionary.union(p2, { participants = cloned })
 			end
-			return p14
+			return p2
 		end,
-		[voiceChangerFeedbackWasEnabled.name] = function(p16, p17)
+		[voiceChangerFeedbackWasEnabled.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local userId = p17.payload.userId
+			local userId = p3.payload.userId
 			
-			if p16.participants[userId] then
-				local cloned = table.clone(p16.participants)
-				local cloned_1 = table.clone(p16.participants[userId])
+			if p2.participants[userId] then
+				local cloned = table.clone(p2.participants)
+				local cloned_1 = table.clone(p2.participants[userId])
 				cloned_1.isVoiceChangerHearMyselfActive = true
 				cloned[userId] = cloned_1
 				
-				return cryo.Dictionary.join(p16, { participants = cloned })
+				return cryo.Dictionary.join(p2, { participants = cloned })
 			end
-			return p16
+			return p2
 		end,
-		[voiceChangerFeedbackWasDisabled.name] = function(p18, p19)
+		[voiceChangerFeedbackWasDisabled.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local userId = p19.payload.userId
+			local userId = p3.payload.userId
 			
-			if p18.participants[userId] then
-				local cloned = table.clone(p18.participants)
-				local cloned_1 = table.clone(p18.participants[userId])
+			if p2.participants[userId] then
+				local cloned = table.clone(p2.participants)
+				local cloned_1 = table.clone(p2.participants[userId])
 				cloned_1.isVoiceChangerHearMyselfActive = false
 				cloned[userId] = cloned_1
 				
-				return cryo.Dictionary.join(p18, { participants = cloned })
+				return cryo.Dictionary.join(p2, { participants = cloned })
 			end
-			return p18
+			return p2
 		end,
-		[participantIsActive.name] = function(p20, p21)
+		[participantIsActive.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local userId = p21.payload.userId
-			local cloned = table.clone(p20.activeUserIds)
+			local userId = p3.payload.userId
+			local cloned = table.clone(p2.activeUserIds)
 			local index = table.find(cloned, userId)
 			
 			if not index then
@@ -203,77 +203,77 @@ return function(p1)
 				table.remove(cloned, index)
 				table.insert(cloned, userId)
 			end
-			return cryo.Dictionary.join(p20, { activeUserIds = cloned })
+			return cryo.Dictionary.join(p2, { activeUserIds = cloned })
 		end,
-		[participantIsInactive.name] = function(p22, p23)
+		[participantIsInactive.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local index = table.find(p22.activeUserIds, p23.payload.userId)
+			local index = table.find(p2.activeUserIds, p3.payload.userId)
 			
 			if index then
-				local cloned = table.clone(p22.activeUserIds)
+				local cloned = table.clone(p2.activeUserIds)
 				table.remove(cloned, index)
 				
-				return cryo.Dictionary.join(p22, { activeUserIds = cloned })
+				return cryo.Dictionary.join(p2, { activeUserIds = cloned })
 			end
-			return p22
+			return p2
 		end,
-		[experienceJoined.name] = function(p24, p25)
+		[experienceJoined.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local payload = p25.payload
+			local payload = p3.payload
 			
-			return if payload.participants and payload.activeUserIds then cryo.Dictionary.join(p24, {
+			return if payload.participants and payload.activeUserIds then cryo.Dictionary.join(p2, {
 				participants = payload.participants,
 				activeUserIds = payload.activeUserIds,
 				publicVoiceFocusedUserIds = payload.publicVoiceFocusedUserIds
-			}) else p24
+			}) else p2
 		end,
-		[restoreState.name] = function(p26, p27)
+		[restoreState.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			return if p27.payload.Participants then cryo.Dictionary.join({}, p27.payload.Participants) else p26
+			return if p3.payload.Participants then cryo.Dictionary.join({}, p3.payload.Participants) else p2
 		end,
-		[participantAudioFocusChanged.name] = function(p28, p29)
+		[participantAudioFocusChanged.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
-			local contextIds = p29.payload.contextIds
-			local cloned = table.clone(p28.publicVoiceFocusedUserIds)
+			local contextIds = p3.payload.contextIds
+			local cloned = table.clone(p2.publicVoiceFocusedUserIds)
 			
 			if contextIds then
 				for i, v in pairs(contextIds) do
-					local var25 = tonumber(i)
+					local var1 = tonumber(i)
 					
-					if var25 then
+					if var1 then
 						if v == 1 then
-							cloned[var25] = true
+							cloned[var1] = true
 						else
-							cloned[var25] = nil
+							cloned[var1] = nil
 						end
 					end
 				end
 			end
-			return cryo.Dictionary.join(p28, { publicVoiceFocusedUserIds = cloned })
+			return cryo.Dictionary.join(p2, { publicVoiceFocusedUserIds = cloned })
 		end,
-		[muteParticipant.name] = function(p30, p31)
+		[muteParticipant.name] = function(p4, p5)
 			-- upvalues: cryo (copy)
-			local userId = p31.payload.userId
+			local userId = p5.payload.userId
 			
-			if p30.participants[userId] and not p30.participants[userId].isMutedLocally then
-				local cloned = table.clone(p30.participants)
+			if p4.participants[userId] and not p4.participants[userId].isMutedLocally then
+				local cloned = table.clone(p4.participants)
 				cloned[userId].isMutedLocally = true
 				
-				return cryo.Dictionary.join(p30, { participants = cloned })
+				return cryo.Dictionary.join(p4, { participants = cloned })
 			end
-			return p30
+			return p4
 		end,
-		[unmuteParticipant.name] = function(p32, p33)
+		[unmuteParticipant.name] = function(p4, p5)
 			-- upvalues: cryo (copy)
-			local userId = p33.payload.userId
+			local userId = p5.payload.userId
 			
-			if p32.participants[userId] and p32.participants[userId].isMutedLocally == true then
-				local cloned = table.clone(p32.participants)
+			if p4.participants[userId] and p4.participants[userId].isMutedLocally == true then
+				local cloned = table.clone(p4.participants)
 				cloned[userId].isMutedLocally = false
 				
-				return cryo.Dictionary.join(p32, { participants = cloned })
+				return cryo.Dictionary.join(p4, { participants = cloned })
 			end
-			return p32
+			return p4
 		end,
 		[experienceLeft.name] = function()
 			return {

@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	p0:sendTelemetryEvent(p1, "close3DFullView")
+﻿return function(p1, p2)
+	p1:sendTelemetryEvent(p2, "close3DFullView")
 end

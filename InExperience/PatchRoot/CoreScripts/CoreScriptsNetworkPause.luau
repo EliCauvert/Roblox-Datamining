@@ -24,23 +24,23 @@ local t = {
 	lastUpdated = { 2026, 6, 2 }
 }
 local processTime = os.clock()
-local var13 = 0
-local var14 = 0
-local var15 = nil
+local var1 = 0
+local var2 = 0
+local var3 = nil
 local frozen = table.freeze({
 	UNPAUSED = "unpaused",
 	PENDING_SHOW = "pendingShow",
 	PAUSED = "paused",
 	RAPID_PAUSE_PENDING_DISMISS = "rapidPausePendingDismiss"
 })
-local var17 = true
+local var4 = true
 local UNPAUSED = frozen.UNPAUSED
-local var18 = -1e999
-local var19 = false
-local var20 = nil
-local var21 = nil
-local var22 = networkPauseNotificationModule.new()
-local var23 = create("ScreenGui")({
+local var5 = -1e999
+local var6 = false
+local var7 = nil
+local var8 = nil
+local var9 = networkPauseNotificationModule.new()
+local var10 = create("ScreenGui")({
 	Name = "RobloxNetworkPauseNotification",
 	OnTopOfCoreBlur = true,
 	DisplayOrder = 8,
@@ -50,112 +50,112 @@ local var23 = create("ScreenGui")({
 })
 
 local function reportPauseSessionAnalytics()
-	-- upvalues: var14 (write), var15 (write), telemetryService (ref), t (ref), processTime (ref), var13 (write), var23 (ref)
-	local var28 = var14
+	-- upvalues: var2 (write), var3 (write), telemetryService (ref), t (ref), processTime (ref), var1 (write), var10 (ref)
+	local var11 = var2
 	
-	if var15 ~= nil then
-		var28 += (os.clock() - var15) * 1000
+	if var3 ~= nil then
+		var11 += (os.clock() - var3) * 1000
 	end
 	telemetryService:LogEvent(t, {
 		customFields = {
 			sessionDurationMs = (os.clock() - processTime) * 1000,
-			pauseCount = var13,
-			totalPauseDurationMs = var28,
-			pauseEnabled = var23.Enabled
+			pauseCount = var1,
+			totalPauseDurationMs = var11,
+			pauseEnabled = var10.Enabled
 		}
 	})
 end
 
 local function _(value)
-	-- upvalues: var22 (ref), runService (ref), streamingPauseUIAnalyticsEnabled (ref), var15 (write), var13 (write), var14 (write)
+	-- upvalues: var9 (ref), runService (ref), streamingPauseUIAnalyticsEnabled (ref), var3 (write), var1 (write), var2 (write)
 	if value then
-		var22:Show()
+		var9:Show()
 	else
-		var22:Hide()
+		var9:Hide()
 	end
 	runService:SetRobloxGuiFocused(value)
 	
 	if streamingPauseUIAnalyticsEnabled then
 		if value then
-			if var15 == nil then
-				var15 = os.clock()
-				var13 += 1
+			if var3 == nil then
+				var3 = os.clock()
+				var1 += 1
 				
 				return
 			end
-		elseif var15 ~= nil then
-			var14 += (os.clock() - var15) * 1000
-			var15 = nil
+		elseif var3 ~= nil then
+			var2 += (os.clock() - var3) * 1000
+			var3 = nil
 		end
 	end
 end
 
 local _ = function()
-	-- upvalues: var20 (write), var21 (write)
-	if var20 ~= nil then
-		task.cancel(var20)
-		var20 = nil
+	-- upvalues: var7 (write), var8 (write)
+	if var7 ~= nil then
+		task.cancel(var7)
+		var7 = nil
 	end
-	if var21 ~= nil then
-		task.cancel(var21)
-		var21 = nil
+	if var8 ~= nil then
+		task.cancel(var8)
+		var8 = nil
 	end
 end
 
 local _ = function()
-	-- upvalues: var18 (write), rapidGameplayPauseIntervalMs (ref)
-	return (os.clock() - var18) * 1000 < rapidGameplayPauseIntervalMs
+	-- upvalues: var5 (write), rapidGameplayPauseIntervalMs (ref)
+	return (os.clock() - var5) * 1000 < rapidGameplayPauseIntervalMs
 end
 
-local function enterStage(p0)
-	-- upvalues: UNPAUSED (write), var20 (write), var21 (write), frozen (ref), var19 (write), var22 (ref), runService (ref), streamingPauseUIAnalyticsEnabled (ref), var15 (write), var14 (write), gameplayPauseShowDelayMs (ref), localPlayer (write), var23 (ref), enterStage (ref), var18 (write), rapidGameplayPauseIntervalMs (ref), var13 (write), rapidGameplayPauseMinNotificationDurationMs (ref)
-	UNPAUSED = p0
+local function enterStage(p1)
+	-- upvalues: UNPAUSED (write), var7 (write), var8 (write), frozen (ref), var6 (write), var9 (ref), runService (ref), streamingPauseUIAnalyticsEnabled (ref), var3 (write), var2 (write), gameplayPauseShowDelayMs (ref), localPlayer (write), var10 (ref), enterStage (ref), var5 (write), rapidGameplayPauseIntervalMs (ref), var1 (write), rapidGameplayPauseMinNotificationDurationMs (ref)
+	UNPAUSED = p1
 	
-	if var20 ~= nil then
-		task.cancel(var20)
-		var20 = nil
+	if var7 ~= nil then
+		task.cancel(var7)
+		var7 = nil
 	end
-	if var21 ~= nil then
-		task.cancel(var21)
-		var21 = nil
+	if var8 ~= nil then
+		task.cancel(var8)
+		var8 = nil
 	end
-	if p0 == frozen.UNPAUSED then
-		var19 = false
-		var22:Hide()
+	if p1 == frozen.UNPAUSED then
+		var6 = false
+		var9:Hide()
 		runService:SetRobloxGuiFocused(false)
 		
-		if streamingPauseUIAnalyticsEnabled and var15 ~= nil then
-			var14 += (os.clock() - var15) * 1000
-			var15 = nil
+		if streamingPauseUIAnalyticsEnabled and var3 ~= nil then
+			var2 += (os.clock() - var3) * 1000
+			var3 = nil
 			
 			return
 		end
-	elseif p0 == frozen.PENDING_SHOW then
-		var20 = task.delay(gameplayPauseShowDelayMs / 1000, function()
-			-- upvalues: var20 (copy), UNPAUSED (copy), frozen (copy), localPlayer (copy), var23 (copy), enterStage (copy)
-			var20 = nil
+	elseif p1 == frozen.PENDING_SHOW then
+		var7 = task.delay(gameplayPauseShowDelayMs / 1000, function()
+			-- upvalues: var7 (copy), UNPAUSED (copy), frozen (copy), localPlayer (copy), var10 (copy), enterStage (copy)
+			var7 = nil
 			
-			if UNPAUSED == frozen.PENDING_SHOW and localPlayer.GameplayPaused and var23.Enabled then
+			if UNPAUSED == frozen.PENDING_SHOW and localPlayer.GameplayPaused and var10.Enabled then
 				enterStage(frozen.PAUSED)
 			end
 		end)
 		
 		return
-	elseif p0 == frozen.PAUSED then
-		var19 = (os.clock() - var18) * 1000 < rapidGameplayPauseIntervalMs
-		var22:Show()
+	elseif p1 == frozen.PAUSED then
+		var6 = (os.clock() - var5) * 1000 < rapidGameplayPauseIntervalMs
+		var9:Show()
 		runService:SetRobloxGuiFocused(true)
 		
-		if streamingPauseUIAnalyticsEnabled and var15 == nil then
-			var15 = os.clock()
-			var13 += 1
+		if streamingPauseUIAnalyticsEnabled and var3 == nil then
+			var3 = os.clock()
+			var1 += 1
 			
 			return
 		end
-	elseif p0 == frozen.RAPID_PAUSE_PENDING_DISMISS then
-		var21 = task.delay(rapidGameplayPauseMinNotificationDurationMs / 1000, function()
-			-- upvalues: var21 (copy), UNPAUSED (copy), frozen (copy), localPlayer (copy), enterStage (copy)
-			var21 = nil
+	elseif p1 == frozen.RAPID_PAUSE_PENDING_DISMISS then
+		var8 = task.delay(rapidGameplayPauseMinNotificationDurationMs / 1000, function()
+			-- upvalues: var8 (copy), UNPAUSED (copy), frozen (copy), localPlayer (copy), enterStage (copy)
+			var8 = nil
 			
 			if UNPAUSED == frozen.RAPID_PAUSE_PENDING_DISMISS and not localPlayer.GameplayPaused then
 				enterStage(frozen.UNPAUSED)
@@ -165,12 +165,12 @@ local function enterStage(p0)
 end
 
 local function onGameplayPausedChanged()
-	-- upvalues: localPlayer (write), var23 (ref), var17 (write), UNPAUSED (write), frozen (ref), var18 (write), rapidGameplayPauseIntervalMs (ref), enterStage (ref), var19 (write)
-	local var29 = localPlayer.GameplayPaused and (var23.Enabled and not var17)
-	var17 = false
+	-- upvalues: localPlayer (write), var10 (ref), var4 (write), UNPAUSED (write), frozen (ref), var5 (write), rapidGameplayPauseIntervalMs (ref), enterStage (ref), var6 (write)
+	local var11 = localPlayer.GameplayPaused and (var10.Enabled and not var4)
+	var4 = false
 	
-	if var29 then
-		if UNPAUSED == frozen.RAPID_PAUSE_PENDING_DISMISS or (os.clock() - var18) * 1000 < rapidGameplayPauseIntervalMs then
+	if var11 then
+		if UNPAUSED == frozen.RAPID_PAUSE_PENDING_DISMISS or (os.clock() - var5) * 1000 < rapidGameplayPauseIntervalMs then
 			enterStage(frozen.PAUSED)
 			
 			return
@@ -179,13 +179,13 @@ local function onGameplayPausedChanged()
 		
 		return
 	elseif UNPAUSED ~= frozen.UNPAUSED then
-		var18 = os.clock()
+		var5 = os.clock()
 	end
 	if UNPAUSED == frozen.PENDING_SHOW then
 		enterStage(frozen.UNPAUSED)
 		
 		return
-	elseif var19 then
+	elseif var6 then
 		enterStage(frozen.RAPID_PAUSE_PENDING_DISMISS)
 		
 		return
@@ -196,11 +196,11 @@ end
 localPlayer:GetPropertyChangedSignal("GameplayPaused"):Connect(onGameplayPausedChanged)
 
 local function enableNotification(p1)
-	-- upvalues: var23 (ref), onGameplayPausedChanged (ref), enterStage (ref), frozen (ref)
+	-- upvalues: var10 (ref), onGameplayPausedChanged (ref), enterStage (ref), frozen (ref)
 	assert(type(p1) == "boolean", "Specified argument 'enabled' must be of type boolean")
 	
-	if p1 == var23.Enabled then return end
-	var23.Enabled = p1
+	if p1 == var10.Enabled then return end
+	var10.Enabled = p1
 	
 	if p1 then
 		onGameplayPausedChanged()
@@ -210,7 +210,7 @@ local function enableNotification(p1)
 	enterStage(frozen.UNPAUSED)
 end
 
-var22:SetParent(var23)
+var9:SetParent(var10)
 guiService.NetworkPausedEnabledChanged:Connect(enableNotification)
 
 if streamingPauseUIAnalyticsEnabled then

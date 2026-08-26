@@ -4,163 +4,163 @@ local _ = require(viewRecycler.Core.Types)
 local itemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 local mutationControllerModule = require(script.Parent.MutationController)
 
-local function getItems(p0, p1, p2, p3)
-	local list = table.create(math.max(0, p3 - p2 + 1))
+local function getItems(p1, p2, p3, p4)
+	local list = table.create(math.max(0, p4 - p3 + 1))
 	
-	for i = p2, math.min(p3, p0) do
-		table.insert(list, p1(i))
+	for i = p3, math.min(p4, p1) do
+		table.insert(list, p2(i))
 	end
 	return list
 end
 
-return function(p4, p5)
+return function(p5, p6)
 	-- upvalues: itemKeyRegistryModule (ref), mutationControllerModule (ref), getItems (ref), dataSourceChangeTypeModule (ref)
-	p4 = p4 or {}
+	p5 = p5 or {}
 	local t = {}
 	local t_1 = {}
-	local var9 = itemKeyRegistryModule.create(p5, "DataSource.deque")
-	local var10 = var9.rebuild(p4)
-	local maxValue = math.max(8, #p4)
-	local var12 = 1
-	local p4Count = #p4
+	local var1 = itemKeyRegistryModule.create(p6, "DataSource.deque")
+	local var2 = var1.rebuild(p5)
+	local maxValue = math.max(8, #p5)
+	local var3 = 1
+	local p4Count = #p5
 	
-	for i, v in p4 do
+	for i, v in p5 do
 		t[i] = v
-		t_1[i] = var10[i]
+		t_1[i] = var2[i]
 	end
-	local var14 = mutationControllerModule(function()
+	local var4 = mutationControllerModule(function()
 		-- upvalues: p4Count (write)
 		return p4Count
 	end, function()
-		-- upvalues: t (write), t_1 (write), maxValue (write), var12 (write), p4Count (write), var9 (ref)
+		-- upvalues: t (write), t_1 (write), maxValue (write), var3 (write), p4Count (write), var1 (ref)
 		return {
 			values = table.clone(t),
 			keys = table.clone(t_1),
 			capacity = maxValue,
-			head = var12,
+			head = var3,
 			count = p4Count,
-			keyRegistry = var9.snapshot()
+			keyRegistry = var1.snapshot()
 		}
-	end, function(p6)
-		-- upvalues: t (write), t_1 (write), maxValue (write), var12 (write), p4Count (write), var9 (ref)
-		t = p6.values
-		t_1 = p6.keys
-		maxValue = p6.capacity
-		var12 = p6.head
-		p4Count = p6.count
-		var9.restore(p6.keyRegistry)
+	end, function(p7)
+		-- upvalues: t (write), t_1 (write), maxValue (write), var3 (write), p4Count (write), var1 (ref)
+		t = p7.values
+		t_1 = p7.keys
+		maxValue = p7.capacity
+		var3 = p7.head
+		p4Count = p7.count
+		var1.restore(p7.keyRegistry)
 	end)
 	
 	local function _(p7)
-		-- upvalues: var12 (write), maxValue (write)
-		return (var12 + p7 - 2) % maxValue + 1
+		-- upvalues: var3 (write), maxValue (write)
+		return (var3 + p7 - 2) % maxValue + 1
 	end
 	
 	local function ensureCapacity()
-		-- upvalues: p4Count (write), maxValue (write), t (write), var12 (write), t_1 (write)
+		-- upvalues: p4Count (write), maxValue (write), t (write), var3 (write), t_1 (write)
 		if p4Count < maxValue then return end
-		local var17 = maxValue * 2
+		local var5 = maxValue * 2
 		local t_2 = {}
 		local t_3 = {}
 		
 		for i = 1, p4Count do
-			t_2[i] = t[(var12 + i - 2) % maxValue + 1]
-			t_3[i] = t_1[(var12 + i - 2) % maxValue + 1]
+			t_2[i] = t[(var3 + i - 2) % maxValue + 1]
+			t_3[i] = t_1[(var3 + i - 2) % maxValue + 1]
 		end
 		t = t_2
 		t_1 = t_3
-		maxValue = var17
-		var12 = 1
+		maxValue = var5
+		var3 = 1
 	end
 	
-	local var16 = nil
+	local var6 = nil
 	
 	return {
 		getItemCount = function()
 			-- upvalues: p4Count (write)
 			return p4Count
 		end,
-		getItem = function(p8)
-			-- upvalues: t (write), var12 (write), maxValue (write)
-			return t[(var12 + p8 - 2) % maxValue + 1]
+		getItem = function(p7)
+			-- upvalues: t (write), var3 (write), maxValue (write)
+			return t[(var3 + p7 - 2) % maxValue + 1]
 		end,
-		getItemKey = function(p9)
-			-- upvalues: t_1 (write), var12 (write), maxValue (write)
-			return t_1[(var12 + p9 - 2) % maxValue + 1]
+		getItemKey = function(p7)
+			-- upvalues: t_1 (write), var3 (write), maxValue (write)
+			return t_1[(var3 + p7 - 2) % maxValue + 1]
 		end,
-		getItems = function(p10, p11)
-			-- upvalues: getItems (copy), p4Count (write), var16 (write)
-			return getItems(p4Count, var16.getItem, p10, p11)
+		getItems = function(p7, p8)
+			-- upvalues: getItems (copy), p4Count (write), var6 (write)
+			return getItems(p4Count, var6.getItem, p7, p8)
 		end,
-		subscribe = var14.subscribe,
-		transaction = var14.transaction,
-		pushFront = function(p12)
-			-- upvalues: p4Count (write), var9 (ref), ensureCapacity (ref), var12 (write), maxValue (write), t (write), t_1 (write), var14 (ref), dataSourceChangeTypeModule (copy)
-			local var20 = var9.claim(p12, 1)
+		subscribe = var4.subscribe,
+		transaction = var4.transaction,
+		pushFront = function(p7)
+			-- upvalues: p4Count (write), var1 (ref), ensureCapacity (ref), var3 (write), maxValue (write), t (write), t_1 (write), var4 (ref), dataSourceChangeTypeModule (copy)
+			local var7 = var1.claim(p7, 1)
 			ensureCapacity()
-			var12 = (var12 - 2) % maxValue + 1
-			t[var12] = p12
-			t_1[var12] = var20
+			var3 = (var3 - 2) % maxValue + 1
+			t[var3] = p7
+			t_1[var3] = var7
 			p4Count += 1
-			var14.emit({
+			var4.emit({
 				index = 1,
 				type = dataSourceChangeTypeModule.Insert,
-				keys = { var20 }
+				keys = { var7 }
 			}, p4Count)
 		end,
-		pushBack = function(p13)
-			-- upvalues: p4Count (write), var9 (ref), ensureCapacity (ref), var12 (write), maxValue (write), t (write), t_1 (write), var14 (ref), dataSourceChangeTypeModule (copy)
-			local var21 = var9.claim(p13, p4Count + 1)
+		pushBack = function(p7)
+			-- upvalues: p4Count (write), var1 (ref), ensureCapacity (ref), var3 (write), maxValue (write), t (write), t_1 (write), var4 (ref), dataSourceChangeTypeModule (copy)
+			local var7 = var1.claim(p7, p4Count + 1)
 			ensureCapacity()
-			local var22 = (var12 + (p4Count + 1) - 2) % maxValue + 1
-			t[var22] = p13
-			t_1[var22] = var21
+			local var8 = (var3 + (p4Count + 1) - 2) % maxValue + 1
+			t[var8] = p7
+			t_1[var8] = var7
 			p4Count += 1
-			var14.emit({
+			var4.emit({
 				type = dataSourceChangeTypeModule.Insert,
 				index = p4Count,
-				keys = { var21 }
+				keys = { var7 }
 			}, p4Count)
 		end,
 		popFront = function()
-			-- upvalues: p4Count (write), t (write), var12 (write), t_1 (write), var9 (ref), maxValue (write), var14 (ref), dataSourceChangeTypeModule (copy)
+			-- upvalues: p4Count (write), t (write), var3 (write), t_1 (write), var1 (ref), maxValue (write), var4 (ref), dataSourceChangeTypeModule (copy)
 			if p4Count == 0 then
 				return nil
 			end
-			local var23 = t[var12]
-			t[var12] = nil
-			local var24 = t_1[var12]
-			t_1[var12] = nil
-			var9.release(var24)
-			var12 = var12 % maxValue + 1
+			local var7 = t[var3]
+			t[var3] = nil
+			local var8 = t_1[var3]
+			t_1[var3] = nil
+			var1.release(var8)
+			var3 = var3 % maxValue + 1
 			p4Count -= 1
-			var14.emit({
+			var4.emit({
 				index = 1,
 				type = dataSourceChangeTypeModule.Remove,
-				keys = { var24 }
+				keys = { var8 }
 			}, p4Count)
 			
-			return var23
+			return var7
 		end,
 		popBack = function()
-			-- upvalues: p4Count (write), var12 (write), maxValue (write), t (write), t_1 (write), var9 (ref), var14 (ref), dataSourceChangeTypeModule (copy)
+			-- upvalues: p4Count (write), var3 (write), maxValue (write), t (write), t_1 (write), var1 (ref), var4 (ref), dataSourceChangeTypeModule (copy)
 			if p4Count == 0 then
 				return nil
 			end
-			local var25 = (var12 + p4Count - 2) % maxValue + 1
-			local var26 = t[var25]
-			t[var25] = nil
-			local var27 = t_1[var25]
-			t_1[var25] = nil
-			var9.release(var27)
+			local var7 = (var3 + p4Count - 2) % maxValue + 1
+			local var8 = t[var7]
+			t[var7] = nil
+			local var9 = t_1[var7]
+			t_1[var7] = nil
+			var1.release(var9)
 			p4Count -= 1
-			var14.emit({
+			var4.emit({
 				type = dataSourceChangeTypeModule.Remove,
 				index = p4Count,
-				keys = { var27 }
+				keys = { var9 }
 			}, p4Count)
 			
-			return var26
+			return var8
 		end
 	}
 end

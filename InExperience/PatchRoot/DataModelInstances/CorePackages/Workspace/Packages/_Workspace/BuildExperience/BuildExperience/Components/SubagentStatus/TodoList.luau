@@ -8,19 +8,19 @@ local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
 
-local function createTrailingIndicator(p0, p1)
+local function createTrailingIndicator(p1, p2)
 	-- upvalues: subagentTaskStatus (ref), reactModule (ref), view (ref), loadingIndicatorModule (ref)
-	return if p0.status == nil or p0.status == subagentTaskStatus.Pending then nil else reactModule.createElement(view, { tag = "auto-xy" }, {
-		Indicator = reactModule.createElement(loadingIndicatorModule, { status = p0.status, testId = `{p1}-loading-indicator` })
+	return if p1.status == nil or p1.status == subagentTaskStatus.Pending then nil else reactModule.createElement(view, { tag = "auto-xy" }, {
+		Indicator = reactModule.createElement(loadingIndicatorModule, { status = p1.status, testId = `{p2}-loading-indicator` })
 	})
 end
 
-return reactModule.memo(function(p2)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), list (ref), createTrailingIndicator (ref), inputSize (ref)
-	local testId = p2.testId or "subagent-status-list"
+	local testId = p1.testId or "subagent-status-list"
 	local t = {}
 	
-	for i, v in p2.items do
+	for i, v in p1.items do
 		local testId_1 = v.testId or `{testId}-item-{i}`
 		t[`Item{i}`] = reactModule.createElement(list.Item, {
 			LayoutOrder = i,
@@ -32,7 +32,7 @@ return reactModule.memo(function(p2)
 	end
 	return reactModule.createElement(list.Root, {
 		hasDivider = false,
-		LayoutOrder = p2.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		isContained = { isContained = false, hasMargin = false },
 		size = inputSize.Medium,
 		testId = testId

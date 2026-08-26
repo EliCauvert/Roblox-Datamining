@@ -2,11 +2,11 @@
 local reactGlobalsModule = require(parent.ReactGlobals)
 local console = require(parent.LuauPolyfill).console
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: console (ref)
 	return function()
-		-- upvalues: console (copy), p0 (ref)
-		console.error(p0 .. " is only available in tests, not in production")
+		-- upvalues: console (copy), p1 (ref)
+		console.error(p1 .. " is only available in tests, not in production")
 	end
 end
 

@@ -1,7 +1,7 @@
-﻿return function(p0, ...)
+﻿return function(p1, ...)
 	local t = {}
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		t[i] = true
 	end
 	for i_1 = 1, select("#", ...) do

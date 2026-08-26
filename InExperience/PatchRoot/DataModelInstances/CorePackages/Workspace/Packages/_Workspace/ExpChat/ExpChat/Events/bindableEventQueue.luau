@@ -2,13 +2,13 @@
 
 return {
 	queue = {},
-	add = function(p0, p1)
-		p0.queue[#p0.queue + 1] = p1
+	add = function(p1, p2)
+		p1.queue[#p1.queue + 1] = p2
 	end,
-	flush = function(p2)
+	flush = function(p1)
 		-- upvalues: dispatchBindableEventModule (ref)
-		if #p2.queue then
-			for i, v in pairs(p2.queue) do
+		if #p1.queue then
+			for i, v in pairs(p1.queue) do
 				dispatchBindableEventModule:Fire(v)
 			end
 		end

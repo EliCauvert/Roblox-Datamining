@@ -6,17 +6,17 @@ local constantsModule = require(parent.Resources.Constants)
 local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
 local setMenuIconTooltipOpenModule = require(parent.Actions.SetMenuIconTooltipOpen)
 
-return function(p0)
+return function(p1)
 	-- upvalues: guiService (ref), setMenuOpenModule (ref), setCurrentPageModule (ref), constantsModule (ref), setMenuIconTooltipOpenModule (ref), sendAnalyticsModule (ref)
-	return function(p1)
-		-- upvalues: guiService (copy), setMenuOpenModule (copy), setCurrentPageModule (copy), constantsModule (copy), setMenuIconTooltipOpenModule (copy), sendAnalyticsModule (copy), p0 (ref)
+	return function(p2)
+		-- upvalues: guiService (copy), setMenuOpenModule (copy), setCurrentPageModule (copy), constantsModule (copy), setMenuIconTooltipOpenModule (copy), sendAnalyticsModule (copy), p1 (ref)
 		guiService:SetMenuIsOpen(true, "InGameMenu")
-		p1:dispatch(setMenuOpenModule(true))
-		p1:dispatch(setCurrentPageModule(constantsModule.MainPagePageKey))
+		p2:dispatch(setMenuOpenModule(true))
+		p2:dispatch(setCurrentPageModule(constantsModule.MainPagePageKey))
 		
-		if p1:getState().nativeClosePrompt.menuIconTooltipOpen then
-			p1:dispatch(setMenuIconTooltipOpenModule(false))
+		if p2:getState().nativeClosePrompt.menuIconTooltipOpen then
+			p2:dispatch(setMenuIconTooltipOpenModule(false))
 		end
-		sendAnalyticsModule(constantsModule.AnalyticsMenuOpenName, constantsModule.AnalyticsMenuActionName, { source = p0 })
+		sendAnalyticsModule(constantsModule.AnalyticsMenuOpenName, constantsModule.AnalyticsMenuActionName, { source = p1 })
 	end
 end

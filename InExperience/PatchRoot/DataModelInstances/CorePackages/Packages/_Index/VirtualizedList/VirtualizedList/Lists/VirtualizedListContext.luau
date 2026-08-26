@@ -4,22 +4,22 @@ local reactModule = require(parent.React)
 local useMemo = reactModule.useMemo
 local useContext = reactModule.useContext
 local t = {}
-local var2 = reactModule.createContext(nil)
-t.VirtualizedListContext = var2
+local var1 = reactModule.createContext(nil)
+t.VirtualizedListContext = var1
 
 if _G.__DEV__ then
-	var2.displayName = "VirtualizedListContext"
+	var1.displayName = "VirtualizedListContext"
 end
 function t.VirtualizedListContextResetter(value)
-	-- upvalues: reactModule (ref), var2 (ref)
-	return reactModule.createElement(var2.Provider, { value = nil }, value.children)
+	-- upvalues: reactModule (ref), var1 (ref)
+	return reactModule.createElement(var1.Provider, { value = nil }, value.children)
 end
 
-function t.VirtualizedListContextProvider(p0)
-	-- upvalues: useMemo (ref), reactModule (ref), var2 (ref)
-	local value = p0.value
+function t.VirtualizedListContextProvider(p1)
+	-- upvalues: useMemo (ref), reactModule (ref), var1 (ref)
+	local value = p1.value
 	
-	return reactModule.createElement(var2.Provider, {
+	return reactModule.createElement(var1.Provider, {
 		value = useMemo(function()
 			-- upvalues: value (ref)
 			return {
@@ -43,15 +43,15 @@ function t.VirtualizedListContextProvider(p0)
 			value.unregisterAsNestedChild, value.debugInfo.cellKey,
 			value.debugInfo.horizontal, value.debugInfo.listKey, value.debugInfo.parent
 		})
-	}, p0.children)
+	}, p1.children)
 end
 
 function t.VirtualizedListCellContextProvider(p1)
-	-- upvalues: useContext (ref), var2 (ref), reactModule (ref), object (ref)
-	local var3 = useContext(var2)
+	-- upvalues: useContext (ref), var1 (ref), reactModule (ref), object (ref)
+	local var2 = useContext(var1)
 	
-	return reactModule.createElement(var2.Provider, {
-		value = if var3 == nil then nil else object.assign(table.clone(var3), { cellKey = p1.cellKey })
+	return reactModule.createElement(var1.Provider, {
+		value = if var2 == nil then nil else object.assign(table.clone(var2), { cellKey = p1.cellKey })
 	}, p1.children)
 end
 

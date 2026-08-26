@@ -21,25 +21,25 @@ local getAppContextModule = require(parent.Utility.getAppContext)
 local default = require(parent_1.LoggingProtocol).default
 local tooExpensiveUpsellShownCounter = require(parent.Generic.Events.TooExpensiveUpsellCounter).TooExpensiveUpsellShownCounter
 
-local function MiddleContent(p0)
+local function MiddleContent(p1)
 	-- upvalues: useLocalization (ref), formatNumberModule (ref), localizationService (ref), reactModule (ref), view (ref), productDetailsModule (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-xxlarge auto-y size-full-0 align-x-center align-y-center"
 	}, {
 		ProductDetails = reactModule.createElement(productDetailsModule, {
 			layoutOrder = 1,
-			isPortrait = p0.isPortrait,
-			model = p0.product.model,
-			itemIcon = p0.product.itemIcon,
-			itemName = p0.product.itemName,
-			itemRobuxCost = p0.product.itemRobuxCost
+			isPortrait = p1.isPortrait,
+			model = p1.product.model,
+			itemIcon = p1.product.itemIcon,
+			itemName = p1.product.itemName,
+			itemRobuxCost = p1.product.itemRobuxCost
 		}),
 		BuyRobuxDetails = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "auto-xy text-label-medium content-emphasis text-align-x-center size-full-0",
 			Text = useLocalization({
 				DontHaveEnough = "IAPExperience.InsufficientRobux.Text.BuyRobux"
-			}).DontHaveEnough:gsub("{robux}", utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.product.itemRobuxCost - p0.balanceAmount)),
+			}).DontHaveEnough:gsub("{robux}", utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.itemRobuxCost - p1.balanceAmount)),
 			padding = { bottom = UDim.new(0, -12) }
 		})
 	})
@@ -47,7 +47,7 @@ end
 
 local function ButtonStackInfo(p1)
 	-- upvalues: useLocalization (ref), buttonType (ref)
-	local var14 = useLocalization({
+	local var1 = useLocalization({
 		RobuxStoreButton = "IAPExperience.InsufficientRobux.Action.RobuxStore",
 		ButtonCancel = "IAPExperience.InsufficientRobux.Action.Cancel"
 	})
@@ -58,7 +58,7 @@ local function ButtonStackInfo(p1)
 			{
 				props = {
 					onActivated = p1.buttons.cancelPurchaseActivated,
-					text = var14.ButtonCancel,
+					text = var1.ButtonCancel,
 					inputIcon = p1.buttons.cancelControllerIcon
 				}
 			}
@@ -67,7 +67,7 @@ local function ButtonStackInfo(p1)
 				buttonType = buttonType.PrimaryContextual,
 				props = {
 					onActivated = p1.buttons.buyItemActivated,
-					text = var14.RobuxStoreButton,
+					text = var1.RobuxStoreButton,
 					inputIcon = p1.buttons.buyItemControllerIcon
 				}
 			}
@@ -75,47 +75,47 @@ local function ButtonStackInfo(p1)
 	}
 end
 
-local function RobuxUpsellModalTooExpensive(p2)
+local function RobuxUpsellModalTooExpensive(p1)
 	-- upvalues: reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), tooExpensiveUpsellShownCounter (ref), interactiveAlert (ref), robuxUpsellModalTitleModule (ref), MiddleContent (ref), ButtonStackInfo (ref), robuxUpsellModalFooterModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: loggerModule (copy), p2 (ref), getAppContextModule (copy), default (copy), tooExpensiveUpsellShownCounter (copy)
+		-- upvalues: loggerModule (copy), p1 (ref), getAppContextModule (copy), default (copy), tooExpensiveUpsellShownCounter (copy)
 		loggerModule.debug({
 			message = "Too Expensive Upsell Modal Shown",
-			screenHeight = p2.screenSize.Y,
-			screenWidth = p2.screenSize.X,
-			portrait = p2.screenSize.X < p2.screenSize.Y,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y,
 			appContext = getAppContextModule()
 		})
 		default:logRobloxTelemetryCounter(tooExpensiveUpsellShownCounter, 1, {
-			screenHeight = p2.screenSize.Y,
-			screenWidth = p2.screenSize.X,
-			portrait = p2.screenSize.X < p2.screenSize.Y,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y,
 			appContext = getAppContextModule()
 		})
 	end, {})
 	
 	return reactModule.createElement(interactiveAlert, {
 		title = "",
-		screenSize = p2.screenSize,
+		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
 		titleContent = function()
-			-- upvalues: reactModule (copy), robuxUpsellModalTitleModule (copy), p2 (ref)
+			-- upvalues: reactModule (copy), robuxUpsellModalTitleModule (copy), p1 (ref)
 			return reactModule.createElement(robuxUpsellModalTitleModule, {
-				balanceAmount = p2.balanceAmount,
-				cancelPurchaseActivated = p2.buttons.cancelPurchaseActivated
+				balanceAmount = p1.balanceAmount,
+				cancelPurchaseActivated = p1.buttons.cancelPurchaseActivated
 			})
 		end,
 		middleContent = function()
-			-- upvalues: reactModule (copy), MiddleContent (copy), p2 (ref)
+			-- upvalues: reactModule (copy), MiddleContent (copy), p1 (ref)
 			return reactModule.createElement(MiddleContent, {
-				product = p2.product,
-				balanceAmount = p2.balanceAmount,
-				isQuest = p2.isQuest,
-				isPortrait = p2.screenSize.X < p2.screenSize.Y
+				product = p1.product,
+				balanceAmount = p1.balanceAmount,
+				isQuest = p1.isQuest,
+				isPortrait = p1.screenSize.X < p1.screenSize.Y
 			})
 		end,
-		buttonStackInfo = ButtonStackInfo({ buttons = p2.buttons, isQuest = p2.isQuest }),
+		buttonStackInfo = ButtonStackInfo({ buttons = p1.buttons, isQuest = p1.isQuest }),
 		footerContent = function()
 			-- upvalues: reactModule (copy), robuxUpsellModalFooterModule (copy)
 			return reactModule.createElement(robuxUpsellModalFooterModule)
@@ -123,11 +123,11 @@ local function RobuxUpsellModalTooExpensive(p2)
 	})
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), RobuxUpsellModalTooExpensive (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		RobuxUpsellModalTooExpensive = reactModule.createElement(RobuxUpsellModalTooExpensive, p3)
+		RobuxUpsellModalTooExpensive = reactModule.createElement(RobuxUpsellModalTooExpensive, p1)
 	})
 end

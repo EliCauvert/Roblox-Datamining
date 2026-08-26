@@ -2,9 +2,9 @@
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	return setmetatable({ goalTime = p0 }, t)
+	return setmetatable({ goalTime = p1 }, t)
 end
 
 function t:start()

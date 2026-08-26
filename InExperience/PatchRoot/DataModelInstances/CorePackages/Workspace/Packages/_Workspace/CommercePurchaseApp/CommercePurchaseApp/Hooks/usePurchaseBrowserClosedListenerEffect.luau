@@ -12,26 +12,26 @@ local commercePurchaseEndedModule = require(commercePurchaseApp.Store.Actions.Co
 
 return function()
 	-- upvalues: useDispatch (ref), useSelector (ref), selectPromptStateModule (ref), selectCommerceProductIdModule (ref), selectCheckoutSessionIdModule (ref), reactModule (ref), commerceService (ref), commercePurchasePromptStateEnumModule (ref), commercePurchaseEndedModule (ref)
-	local var8 = useDispatch()
-	local var9 = useSelector(selectPromptStateModule)
-	local var10 = useSelector(selectCommerceProductIdModule)
-	local var11 = useSelector(selectCheckoutSessionIdModule)
+	local var1 = useDispatch()
+	local var2 = useSelector(selectPromptStateModule)
+	local var3 = useSelector(selectCommerceProductIdModule)
+	local var4 = useSelector(selectCheckoutSessionIdModule)
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), commerceService (copy), var9 (ref), commercePurchasePromptStateEnumModule (copy), var10 (ref), var11 (ref), commercePurchaseEndedModule (copy)
-		local var12 = if var8 then commerceService.PurchaseBrowserClosed:Connect(function()
-			-- upvalues: var9 (copy), commercePurchasePromptStateEnumModule (copy), commerceService (copy), var10 (copy), var11 (copy), var8 (copy), commercePurchaseEndedModule (copy)
-			if var9 == commercePurchasePromptStateEnumModule.Checkout then
-				commerceService:SignalPromptCommerceProductPurchaseFinished(var10, true, var11)
-				var8(commercePurchaseEndedModule())
+		-- upvalues: var1 (ref), commerceService (copy), var2 (ref), commercePurchasePromptStateEnumModule (copy), var3 (ref), var4 (ref), commercePurchaseEndedModule (copy)
+		local var5 = if var1 then commerceService.PurchaseBrowserClosed:Connect(function()
+			-- upvalues: var2 (copy), commercePurchasePromptStateEnumModule (copy), commerceService (copy), var3 (copy), var4 (copy), var1 (copy), commercePurchaseEndedModule (copy)
+			if var2 == commercePurchasePromptStateEnumModule.Checkout then
+				commerceService:SignalPromptCommerceProductPurchaseFinished(var3, true, var4)
+				var1(commercePurchaseEndedModule())
 			end
 		end) else nil
 		
 		return function()
-			-- upvalues: var12 (write)
-			if var12 then
-				var12:Disconnect()
-				var12 = nil
+			-- upvalues: var5 (write)
+			if var5 then
+				var5:Disconnect()
+				var5 = nil
 			end
 		end
-	end, { var8, var9, var10, var11 })
+	end, { var1, var2, var3, var4 })
 end

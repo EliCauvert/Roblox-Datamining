@@ -97,38 +97,38 @@ local t = {
 }
 local conversationThumbnail = roactModule.PureComponent:extend("ConversationThumbnail")
 
-function conversationThumbnail.render(p0)
+function conversationThumbnail.render(p1)
 	-- upvalues: t (ref), constants (ref), inviteAvatarThumbnailSize (ref), getRbxthumbWithTypeSizeAndOptions (ref), constantsModule (ref), roactModule (ref), GRAY3 (ref)
-	local size = p0.props.size
-	local layoutOrder = p0.props.layoutOrder
-	local zIndex = p0.props.zIndex
-	local users = p0.props.users
+	local size = p1.props.size
+	local layoutOrder = p1.props.layoutOrder
+	local zIndex = p1.props.zIndex
+	local users = p1.props.users
 	local usersCount = #users
 	local t_1 = {}
 	
 	for i, v in ipairs(users) do
-		local var7 = t[usersCount][i]
+		local var1 = t[usersCount][i]
 		t_1["AvatarHolder-" .. i] = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
-			Size = var7.FrameSize,
-			Position = var7.FramePosition,
+			Size = var1.FrameSize,
+			Position = var1.FramePosition,
 			ZIndex = zIndex
 		}, {
 			Avatar = roactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
-				Size = var7.Size,
-				Position = var7.Position,
+				Size = var1.Size,
+				Position = var1.Position,
 				Image = (if v then getRbxthumbWithTypeSizeAndOptions(v.id, constantsModule.InviteAvatarRbxthumbType, constants.RbxThumbnailSizeToNumberSize[inviteAvatarThumbnailSize]) else nil) or "rbxasset://textures/ui/LuaApp/graphic/ph-avatar-portrait.png",
 				ZIndex = zIndex
 			})
 		})
 		
-		if var7.Border then
+		if var1.Border then
 			t_1["Border-" .. i] = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = var7.Border.BorderSize,
-				Position = var7.Border.BorderPosition,
+				Size = var1.Border.BorderSize,
+				Position = var1.Border.BorderPosition,
 				BackgroundColor3 = GRAY3,
 				ZIndex = zIndex
 			})

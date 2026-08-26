@@ -7,14 +7,14 @@ local playerContext = UIBloxModule.App.Indicator.PlayerContext
 local button = UIBloxModule.App.Button.Button
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), button (ref), buttonType (ref), playerName (ref), playerContext (ref)
-	local var2 = useDesignTokens(function(p1)
+	local var1 = useDesignTokens(function(p2)
 		return {
-			contextTextSpacing = p1.Size.Size_150,
-			joinEventSpacing = p1.Size.Size_300,
-			padding = p1.Size.Size_400,
-			joinEventButtonHeight = p1.Size.Size_1200
+			contextTextSpacing = p2.Size.Size_150,
+			joinEventSpacing = p2.Size.Size_300,
+			padding = p2.Size.Size_400,
+			joinEventButtonHeight = p2.Size.Size_1200
 		}
 	end)
 	
@@ -23,8 +23,8 @@ return function(p0)
 		Size = UDim2.new(1, 0, 0, 0),
 		BackgroundTransparency = 1,
 		[reactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: p0 (ref)
-			p0.onHeaderHeightChanged(p2.AbsoluteSize.Y)
+			-- upvalues: p1 (ref)
+			p1.onHeaderHeightChanged(p2.AbsoluteSize.Y)
 		end
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
@@ -33,34 +33,34 @@ return function(p0)
 			HorizontalAlignment = Enum.HorizontalAlignment.Left
 		}),
 		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var2.padding),
-			PaddingBottom = UDim.new(0, var2.padding),
-			PaddingLeft = UDim.new(0, var2.padding),
-			PaddingRight = UDim.new(0, var2.padding)
+			PaddingTop = UDim.new(0, var1.padding),
+			PaddingBottom = UDim.new(0, var1.padding),
+			PaddingLeft = UDim.new(0, var1.padding),
+			PaddingRight = UDim.new(0, var1.padding)
 		}),
 		PlayerName = reactModule.createElement(playerName, {
 			layoutOrder = 1,
 			automaticSize = Enum.AutomaticSize.XY,
-			displayNameItem = p0.displayNameItem,
-			userNameItem = p0.userNameItem,
-			vendorNameItem = p0.vendorNameItem
+			displayNameItem = p1.displayNameItem,
+			userNameItem = p1.userNameItem,
+			vendorNameItem = p1.vendorNameItem
 		}),
-		ContextTextSpacing = if p0.contextText then reactModule.createElement("Frame", {
+		ContextTextSpacing = if p1.contextText then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 0, var2.contextTextSpacing)
+			Size = UDim2.new(1, 0, 0, var1.contextTextSpacing)
 		}) else nil,
-		PlayerContext = if p0.contextText then reactModule.createElement(playerContext, {
+		PlayerContext = if p1.contextText then reactModule.createElement(playerContext, {
 			layoutOrder = 3,
 			Selectable = false,
-			icon = p0.contextIcon,
-			iconColor = p0.contextIconColor,
-			iconTransparency = p0.contextIconTransparency,
-			text = p0.contextText
+			icon = p1.contextIcon,
+			iconColor = p1.contextIconColor,
+			iconTransparency = p1.contextIconTransparency,
+			text = p1.contextText
 		}) else nil,
 		JoinButton = (function()
-			-- upvalues: p0 (ref), reactModule (copy), var2 (ref), button (copy), buttonType (copy)
-			return if p0.renderJoinEventButton or p0.joinEventText then reactModule.createElement("Frame", {
+			-- upvalues: p1 (ref), reactModule (copy), var1 (ref), button (copy), buttonType (copy)
+			return if p1.renderJoinEventButton or p1.joinEventText then reactModule.createElement("Frame", {
 				LayoutOrder = 5,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 0),
@@ -74,15 +74,15 @@ return function(p0)
 				JoinEventSpacing = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
-					Size = UDim2.new(1, 0, 0, var2.joinEventSpacing)
+					Size = UDim2.new(1, 0, 0, var1.joinEventSpacing)
 				}),
-				JoinButton = if p0.renderJoinEventButton then p0.renderJoinEventButton() else reactModule.createElement(button, {
+				JoinButton = if p1.renderJoinEventButton then p1.renderJoinEventButton() else reactModule.createElement(button, {
 					isLoading = false,
 					layoutOrder = 5,
 					buttonType = buttonType.PrimaryContextual,
-					onActivated = p0.joinEventOnActivated,
-					size = UDim2.new(1, 0, 0, var2.joinEventButtonHeight),
-					text = p0.joinEventText
+					onActivated = p1.joinEventOnActivated,
+					size = UDim2.new(1, 0, 0, var1.joinEventButtonHeight),
+					text = p1.joinEventText
 				})
 			}) else nil
 		end)()

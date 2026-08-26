@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	return if p1 then if p1 and p1[p0] ~= nil then p1[p0] elseif p2 == nil then nil else p2 else nil
+﻿return function(p1, p2, p3)
+	return if p2 then if p2 and p2[p1] ~= nil then p2[p1] elseif p3 == nil then nil else p3 else nil
 end

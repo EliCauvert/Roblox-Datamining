@@ -4,12 +4,12 @@ local cryoModule = require(parent.Cryo)
 local _ = require(avatarExperienceRodux.Types.RoduxTypes)
 
 return require(parent.Rodux).createReducer({ enabled = false, errorOccurred = false }, {
-	[require(avatarExperienceRodux.Actions.SetCameraButtonStatus).name] = function(p0, p1)
+	[require(avatarExperienceRodux.Actions.SetCameraButtonStatus).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, { enabled = p1.status })
+		return cryoModule.Dictionary.join(p1, { enabled = p2.status })
 	end,
-	[require(avatarExperienceRodux.Actions.SetCameraButtonErrorOccurred).name] = function(p2, p3)
+	[require(avatarExperienceRodux.Actions.SetCameraButtonErrorOccurred).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p2, { errorOccurred = p3.errorOccurred })
+		return cryoModule.Dictionary.join(p1, { errorOccurred = p2.errorOccurred })
 	end
 })

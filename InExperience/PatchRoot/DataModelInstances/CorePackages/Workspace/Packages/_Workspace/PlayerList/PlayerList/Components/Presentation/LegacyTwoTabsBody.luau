@@ -17,17 +17,17 @@ local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerLi
 return reactModule.memo(function(value)
 	-- upvalues: reactModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), useLegacyVisibilityMirrorModule (ref), signalsReactModule (ref), view (ref), platformLeaderboardViewModule (ref), leaderboardTabsModule (ref), localizationProvider (ref), foundationProvider (ref), theme (ref)
 	local server, server_1 = reactModule.useState("server")
-	local var11 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
+	local var1 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
 		-- upvalues: inExperienceLocalesModule (copy), localizationService (copy)
 		return inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
 	end, {}) else nil
-	local var12 = reactModule.useCallback(function()
+	local var2 = reactModule.useCallback(function()
 		-- upvalues: server_1 (ref)
 		server_1("server")
 	end, {})
-	local var13 = if server ~= "server" then not signalsReactModule.useSignalState(useLegacyVisibilityMirrorModule(value.isVisible)) else true
-	local var14 = value.platformBodyHeight == nil
-	local var15 = if var13 then if var14 then reactModule.createElement("Frame", {
+	local var3 = if server ~= "server" then not signalsReactModule.useSignalState(useLegacyVisibilityMirrorModule(value.isVisible)) else true
+	local var4 = value.platformBodyHeight == nil
+	local var5 = if var3 then if var4 then reactModule.createElement("Frame", {
 		Name = "LegacyTwoTabsServerBody",
 		LayoutOrder = 3,
 		BackgroundTransparency = 1,
@@ -54,10 +54,10 @@ return reactModule.memo(function(value)
 	local t = {
 		BackgroundTransparency = 1,
 		LayoutOrder = value.layoutOrder,
-		Size = if var14 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, 0)
+		Size = if var4 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, 0)
 	}
 	
-	if not var14 then
+	if not var4 then
 		t.AutomaticSize = Enum.AutomaticSize.Y
 	end
 	local frame = reactModule.createElement("Frame", t, {
@@ -79,15 +79,15 @@ return reactModule.memo(function(value)
 			LeaderboardTabs = reactModule.createElement(leaderboardTabsModule, {
 				activeTabId = server,
 				onActivated = server_1,
-				onPlatformTabsUnavailable = var12
+				onPlatformTabsUnavailable = var2
 			})
 		}),
-		TitleBar = if var13 then value.titleBar else nil,
-		Body = var15
+		TitleBar = if var3 then value.titleBar else nil,
+		Body = var5
 	})
 	
 	if fFlagPlayerListLocalizeGameTextModule then
-		frame = reactModule.createElement(localizationProvider, { localization = var11 }, { Column = frame })
+		frame = reactModule.createElement(localizationProvider, { localization = var1 }, { Column = frame })
 	end
 	return reactModule.createElement(foundationProvider, { theme = theme.Dark }, { Column = frame })
 end)

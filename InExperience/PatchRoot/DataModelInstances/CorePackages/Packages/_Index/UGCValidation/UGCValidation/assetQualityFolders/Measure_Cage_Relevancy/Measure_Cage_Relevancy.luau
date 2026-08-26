@@ -8,9 +8,9 @@ local UGCMinCageRelevancyThreshold = game:DefineFastInt("UGCMinCageRelevancyThre
 return {
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityLC),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: UGCMinCageRelevancyThreshold (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
-		local handleOuterCage = p1.aqsSummaryData.Measure_Cage_Relevancy.Handle_OuterCage
+		local handleOuterCage = p2.aqsSummaryData.Measure_Cage_Relevancy.Handle_OuterCage
 		local outerCageFaceRelevantPercent = handleOuterCage and tonumber(handleOuterCage.outer_cage_face_relevant_percent)
 		
 		if outerCageFaceRelevantPercent == nil then
@@ -18,12 +18,12 @@ return {
 			
 			return
 		elseif outerCageFaceRelevantPercent * 100 < UGCMinCageRelevancyThreshold then
-			p0:fail(errorSourceStringsModule.Keys.MeasureCageRelevancy, {
+			p1:fail(errorSourceStringsModule.Keys.MeasureCageRelevancy, {
 				outer_cage_face_irrelevant_percent = string.format("%.2f", 100 - outerCageFaceRelevantPercent * 100)
 			})
 		end
 		if getFFlagUGCValidateAQScoreWarningsModule() and handleOuterCage.score ~= nil and tonumber(handleOuterCage.score) ~= 100 then
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_CageRelevancy, {
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_CageRelevancy, {
 				score = tostring(math.floor(tonumber(handleOuterCage.score) or 0)),
 				irrelevant_percent = string.format("%.2f", 100 - (tonumber(handleOuterCage.outer_cage_face_relevant_percent) or 0) * 100)
 			})

@@ -2,7 +2,7 @@
 local nodeTypeModule = require(markdown.Enums.NodeType)
 local _ = require(markdown.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: nodeTypeModule (ref)
-	return p0.name ~= "TAG" and (if p0.type ~= nodeTypeModule.Block then p0.type == nodeTypeModule.TextBlock else true)
+	return p1.name ~= "TAG" and (if p1.type ~= nodeTypeModule.Block then p1.type == nodeTypeModule.TextBlock else true)
 end

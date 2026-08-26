@@ -8,23 +8,23 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local enums = foundationModule.Enums
 local getFFlagCurrencyTransferFlowUIImprovementFixModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFlowUIImprovementFix)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), button (ref), enums (ref), buttonVariant (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-x-center align-y-center gap-small auto-xy padding-y-medium",
-		LayoutOrder = p0.layoutOrder or 1
+		LayoutOrder = p1.layoutOrder or 1
 	}, {
 		ChipsContainer = reactModule.createElement(view, {
 			tag = "row align-x-center align-y-center gap-small auto-xy"
 		}, table.unpack(reactModule.useMemo(function()
-			-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), p0 (ref), reactModule (copy), button (copy), enums (copy), buttonVariant (copy)
+			-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), p1 (ref), reactModule (copy), button (copy), enums (copy), buttonVariant (copy)
 			local t = {}
-			local var5 = getFFlagCurrencyTransferFlowUIImprovementFixModule()
+			local var1 = getFFlagCurrencyTransferFlowUIImprovementFixModule()
 			
-			for i, v in ipairs(p0.chips) do
-				local var6 = p0.selectedAmount == v.amount
+			for i, v in ipairs(p1.chips) do
+				local var2 = p1.selectedAmount == v.amount
 				
-				if var5 then
+				if var1 then
 					t[i] = reactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						AutomaticSize = Enum.AutomaticSize.X,
@@ -44,7 +44,7 @@ return function(p0)
 							ChipButton = reactModule.createElement(button, {
 								text = v.text,
 								icon = enums.IconName.Robux,
-								variant = if var6 then buttonVariant.Subtle else buttonVariant.Standard,
+								variant = if var2 then buttonVariant.Subtle else buttonVariant.Standard,
 								size = enums.ChipSize.Medium,
 								onActivated = function() end
 							})
@@ -55,13 +55,13 @@ return function(p0)
 							Text = "",
 							ZIndex = 5,
 							[reactModule.Event.Activated] = function()
-								-- upvalues: p0 (copy), v (ref)
-								p0.onChipSelected(v.amount)
+								-- upvalues: p1 (copy), v (ref)
+								p1.onChipSelected(v.amount)
 							end,
-							[reactModule.Event.InputBegan] = function(_, p1)
-								-- upvalues: p0 (copy), v (ref)
-								if p1.UserInputType == Enum.UserInputType.Touch then
-									p0.onChipSelected(v.amount)
+							[reactModule.Event.InputBegan] = function(_, p2)
+								-- upvalues: p1 (copy), v (ref)
+								if p2.UserInputType == Enum.UserInputType.Touch then
+									p1.onChipSelected(v.amount)
 								end
 							end
 						})
@@ -71,16 +71,16 @@ return function(p0)
 						text = v.text,
 						icon = enums.IconName.Robux,
 						onActivated = function()
-							-- upvalues: p0 (copy), v (ref)
-							p0.onChipSelected(v.amount)
+							-- upvalues: p1 (copy), v (ref)
+							p1.onChipSelected(v.amount)
 						end,
 						LayoutOrder = i,
-						variant = if var6 then buttonVariant.Subtle else buttonVariant.Standard,
+						variant = if var2 then buttonVariant.Subtle else buttonVariant.Standard,
 						size = enums.ChipSize.Medium
 					})
 				end
 			end
 			return t
-		end, { p0.chips, p0.selectedAmount, p0.onChipSelected })))
+		end, { p1.chips, p1.selectedAmount, p1.onChipSelected })))
 	})
 end

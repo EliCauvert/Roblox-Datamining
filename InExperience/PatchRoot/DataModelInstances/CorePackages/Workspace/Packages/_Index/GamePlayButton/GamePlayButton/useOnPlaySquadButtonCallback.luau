@@ -6,20 +6,20 @@ local reactModule = require(parent.React)
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: useDispatch (ref), reactModule (ref), getFFlagIsSquadEnabled (ref), playButtonStatesModule (ref), openCentralOverlayForGameDetailsSquadModule (ref)
-	local var4 = useDispatch()
+	local var1 = useDispatch()
 	
-	return reactModule.useCallback(function(p4)
-		-- upvalues: getFFlagIsSquadEnabled (copy), p1 (ref), playButtonStatesModule (copy), var4 (ref), openCentralOverlayForGameDetailsSquadModule (copy), p0 (ref), p2 (ref), p3 (ref)
-		if getFFlagIsSquadEnabled() and p1 == playButtonStatesModule.PlayableWithParty then
-			var4(openCentralOverlayForGameDetailsSquadModule(p0, p4.AbsolutePosition, p4.AbsoluteSize, p2, p3))
+	return reactModule.useCallback(function(p5)
+		-- upvalues: getFFlagIsSquadEnabled (copy), p2 (ref), playButtonStatesModule (copy), var1 (ref), openCentralOverlayForGameDetailsSquadModule (copy), p1 (ref), p3 (ref), p4 (ref)
+		if getFFlagIsSquadEnabled() and p2 == playButtonStatesModule.PlayableWithParty then
+			var1(openCentralOverlayForGameDetailsSquadModule(p1, p5.AbsolutePosition, p5.AbsoluteSize, p3, p4))
 		end
 	end, {
-		var4,
-		p0,
-		p2,
+		var1,
 		p1,
-		p3
+		p3,
+		p2,
+		p4
 	})
 end

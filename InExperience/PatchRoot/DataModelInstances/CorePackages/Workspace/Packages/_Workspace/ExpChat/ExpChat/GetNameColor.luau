@@ -15,32 +15,32 @@ else
 		BrickColor.new("Brick yellow").Color
 	}
 	
-	local function GetNameValue(p0)
-		local var3 = 0
+	local function GetNameValue(p1)
+		local var1 = 0
 		
-		for i = 1, #p0 do
-			local byteValue = string.byte(string.sub(p0, i, i))
-			local var5 = #p0 - i + 1
+		for i = 1, #p1 do
+			local byteValue = string.byte(string.sub(p1, i, i))
+			local var2 = #p1 - i + 1
 			
-			if #p0 % 2 == 1 then
-				var5 -= 1
+			if #p1 % 2 == 1 then
+				var2 -= 1
 			end
-			if var5 % 4 >= 2 then
+			if var2 % 4 >= 2 then
 				byteValue = -byteValue
 			end
-			var3 += byteValue
+			var1 += byteValue
 		end
-		return var3
+		return var1
 	end
 	
-	local computeNameColor = function(p1)
+	local computeNameColor = function(p2)
 		-- upvalues: list (ref), GetNameValue (ref)
-		return list[(GetNameValue(p1) + 0) % #list + 1]
+		return list[(GetNameValue(p2) + 0) % #list + 1]
 	end
 end
-return function(p2)
+return function(p1)
 	-- upvalues: playersService (ref), computeNameColor (write)
-	local var6 = playersService:GetPlayerByUserId(p2)
+	local var1 = playersService:GetPlayerByUserId(p1)
 	
-	return if var6 then if var6.Team == nil then computeNameColor(var6.Name) else var6.TeamColor.Color else Color3.fromRGB(255, 255, 255)
+	return if var1 then if var1.Team == nil then computeNameColor(var1.Name) else var1.TeamColor.Color else Color3.fromRGB(255, 255, 255)
 end

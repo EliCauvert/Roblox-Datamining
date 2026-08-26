@@ -6,30 +6,30 @@ return function()
 	-- upvalues: signalsModule (ref)
 	local t = {}
 	
-	local function getOrCreateResponse(p0, p1)
+	local function getOrCreateResponse(p1, p2)
 		-- upvalues: t (write), signalsModule (copy)
-		if not t[p0] then
-			local var3, var4 = signalsModule.createSignal({ status = "NotStarted", config = p1 })
-			t[p0] = { get = var3, set = var4 }
+		if not t[p1] then
+			local var1, var2 = signalsModule.createSignal({ status = "NotStarted", config = p2 })
+			t[p1] = { get = var1, set = var2 }
 		end
-		return t[p0]
+		return t[p1]
 	end
 	
 	return {
-		fetch = function(p2, p3)
+		fetch = function(p1, p2)
 			-- upvalues: getOrCreateResponse (ref)
-			return getOrCreateResponse(p2 or p3.Url, p3).get, function() end
+			return getOrCreateResponse(p1 or p2.Url, p2).get, function() end
 		end,
 		cancelAll = function() end,
-		setResponse = function(value, p4)
+		setResponse = function(value, p1)
 			-- upvalues: t (write), signalsModule (copy)
 			if t[value] then
-				t[value].set(p4)
+				t[value].set(p1)
 				
 				return
 			end
-			local var5, var6 = signalsModule.createSignal(p4)
-			t[value] = { get = var5, set = var6 }
+			local var1, var2 = signalsModule.createSignal(p1)
+			t[value] = { get = var1, set = var2 }
 		end,
 		reset = function()
 			-- upvalues: t (write)

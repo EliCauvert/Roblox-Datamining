@@ -2,64 +2,64 @@
 local conversationHeaderFadeLayoutModule = require(script.Parent.ConversationHeaderFadeLayout)
 local getMessageFadeSequenceModule = require(script.Parent.getMessageFadeSequence)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), conversationHeaderFadeLayoutModule (ref), getMessageFadeSequenceModule (ref)
-	local transparencyValue = p0.transparencyValue
-	local conversationId = p0.conversationId
+	local transparencyValue = p1.transparencyValue
+	local conversationId = p1.conversationId
+	local var1, var2 = reactModule.useBinding(0)
 	local var3, var4 = reactModule.useBinding(0)
 	local var5, var6 = reactModule.useBinding(0)
-	local var7, var8 = reactModule.useBinding(0)
-	local var9 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref)
-		var4(p1.AbsoluteSize.Y)
+	local var7 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref)
+		var2(p2.AbsoluteSize.Y)
 	end, {})
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref)
-		var8(p2.AbsoluteSize.Y)
-	end, {})
-	local var11 = reactModule.useCallback(function(p3, p4)
+	local var8 = reactModule.useCallback(function(p2)
 		-- upvalues: var6 (ref)
-		var6(math.clamp(p3.Y, 0, p4))
+		var6(p2.AbsoluteSize.Y)
 	end, {})
+	local var9 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var4 (ref)
+		var4(math.clamp(p2.Y, 0, p3))
+	end, {})
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: conversationHeaderFadeLayoutModule (copy), var1 (ref)
+		return conversationHeaderFadeLayoutModule.getHeaderOverlapPadding(var1)
+	end, { var1 })
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: conversationHeaderFadeLayoutModule (copy), var1 (ref), transparencyValue (ref)
+		return conversationHeaderFadeLayoutModule.getHeaderVisibleHeight(var1, transparencyValue)
+	end, { var1, transparencyValue })
 	local var12 = reactModule.useMemo(function()
-		-- upvalues: conversationHeaderFadeLayoutModule (copy), var3 (ref)
-		return conversationHeaderFadeLayoutModule.getHeaderOverlapPadding(var3)
-	end, { var3 })
+		-- upvalues: conversationHeaderFadeLayoutModule (copy), var1 (ref), var11 (ref), var3 (ref)
+		return conversationHeaderFadeLayoutModule.getContentTopPadding(var1, var11, var3)
+	end, { var1, var11, var3 })
 	local var13 = reactModule.useMemo(function()
-		-- upvalues: conversationHeaderFadeLayoutModule (copy), var3 (ref), transparencyValue (ref)
-		return conversationHeaderFadeLayoutModule.getHeaderVisibleHeight(var3, transparencyValue)
-	end, { var3, transparencyValue })
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: conversationHeaderFadeLayoutModule (copy), var3 (ref), var13 (ref), var5 (ref)
-		return conversationHeaderFadeLayoutModule.getContentTopPadding(var3, var13, var5)
-	end, { var3, var13, var5 })
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var3 (ref), var13 (ref), var7 (ref), getMessageFadeSequenceModule (copy)
+		-- upvalues: reactModule (copy), var1 (ref), var11 (ref), var5 (ref), getMessageFadeSequenceModule (copy)
 		return reactModule.joinBindings({
-			headerHeight = var3,
-			headerVisibleHeight = var13,
-			viewportHeight = var7
-		}):map(function(p5)
+			headerHeight = var1,
+			headerVisibleHeight = var11,
+			viewportHeight = var5
+		}):map(function(p2)
 			-- upvalues: getMessageFadeSequenceModule (copy)
-			return getMessageFadeSequenceModule(p5.headerHeight, p5.viewportHeight, if p5.headerHeight > 0 then p5.headerVisibleHeight / p5.headerHeight else 0)
+			return getMessageFadeSequenceModule(p2.headerHeight, p2.viewportHeight, if p2.headerHeight > 0 then p2.headerVisibleHeight / p2.headerHeight else 0)
 		end)
-	end, { var3, var13, var7 })
-	local var16 = reactModule.useMemo(function()
+	end, { var1, var11, var5 })
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: conversationHeaderFadeLayoutModule (copy), transparencyValue (ref)
 		return conversationHeaderFadeLayoutModule.getHeaderInteractable(transparencyValue)
 	end, { transparencyValue })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref)
-		var6(0)
+		-- upvalues: var4 (ref)
+		var4(0)
 	end, { conversationId })
 	
 	return {
-		onHeaderAbsoluteSizeChanged = var9,
-		onMessageViewportAbsoluteSizeChanged = var10,
-		onMessageCanvasPositionChanged = var11,
-		headerLayoutPadding = var12,
-		contentTopPadding = var14,
-		messageFadeSequence = var15,
-		headerInteractable = var16
+		onHeaderAbsoluteSizeChanged = var7,
+		onMessageViewportAbsoluteSizeChanged = var8,
+		onMessageCanvasPositionChanged = var9,
+		headerLayoutPadding = var10,
+		contentTopPadding = var12,
+		messageFadeSequence = var13,
+		headerInteractable = var14
 	}
 end

@@ -26,81 +26,81 @@ local t = {
 	expectedFailures = {}
 }
 
-local function calculateMeshSizeForPart(p0, p1)
+local function calculateMeshSizeForPart(p1, p2)
 	-- upvalues: getEditableMeshFromContextModule (ref), getMeshSizeModule (ref)
 	local t = {
 		fieldName = "MeshId",
-		fullName = p0:GetFullName(),
-		contentId = p0.MeshId,
-		context = p0.Name
+		fullName = p1:GetFullName(),
+		contentId = p1.MeshId,
+		context = p1.Name
 	}
-	local var12, var13 = getEditableMeshFromContextModule(p0, "MeshId", p1)
+	local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p2)
 	
-	if var12 then
-		t.editableMesh = var13
+	if var1 then
+		t.editableMesh = var2
 		
 		return true, getMeshSizeModule(t)
 	end
 	return false, nil
 end
 
-local function validateWrapTargetComparison(p2, p3, p4, p5)
+local function validateWrapTargetComparison(p1, p2, p3, p4)
 	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), errorSourceStringsModule (ref), getMeshMinMaxModule (ref)
-	local var14, _, var15 = getMeshInfoModule(p3, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p4)
+	local var1, _, var2 = getMeshInfoModule(p2, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p3)
 	
-	if not var14 then
-		p5:fail(errorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = p3:GetFullName() }, p3)
+	if not var1 then
+		p4:fail(errorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = p2:GetFullName() }, p2)
 		
 		return
 	end
-	local wrapTarget = p3:FindFirstChildWhichIsA("WrapTarget")
+	local wrapTarget = p2:FindFirstChildWhichIsA("WrapTarget")
 	
 	if not wrapTarget then return end
-	local var17, _, var18 = getMeshInfoModule(wrapTarget, constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p4)
+	local var3, _, var4 = getMeshInfoModule(wrapTarget, constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p3)
 	
-	if not var17 then
-		p5:fail(errorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = wrapTarget:GetFullName() }, p3)
+	if not var3 then
+		p4:fail(errorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = wrapTarget:GetFullName() }, p2)
 		
 		return
 	end
-	var15.scale = p2
-	var18.scale = p2
+	var2.scale = p1
+	var4.scale = p1
 	local renderVsWrapMeshMaxDiff = constantsModule.RenderVsWrapMeshMaxDiff
-	local var19, _, var20, var21 = getMeshMinMaxModule(var15, p4)
+	local var5, _, var6, var7 = getMeshMinMaxModule(var2, p3)
 	
-	if not var19 then
-		p5:fetchError("Failed to read mesh: " .. var15.fullName)
+	if not var5 then
+		p4:fetchError("Failed to read mesh: " .. var15.fullName)
 		
 		return
 	end
-	local var22, _, var23, var24 = getMeshMinMaxModule(var18, p4)
+	local var8, _, var9, var10 = getMeshMinMaxModule(var4, p3)
 	
-	if not var22 then
-		p5:fetchError("Failed to read mesh: " .. var18.fullName)
+	if not var8 then
+		p4:fetchError("Failed to read mesh: " .. var18.fullName)
 		
 		return
-	elseif renderVsWrapMeshMaxDiff < (var20 - var23).Magnitude or renderVsWrapMeshMaxDiff < (var21 - var24).Magnitude then
-		p5:fail(errorSourceStringsModule.Keys.BodyMesh_SizeMismatch, {
-			meshContext = var15.fullName .. "." .. var15.fieldName,
+	elseif renderVsWrapMeshMaxDiff < (var6 - var9).Magnitude or renderVsWrapMeshMaxDiff < (var7 - var10).Magnitude then
+		p4:fail(errorSourceStringsModule.Keys.BodyMesh_SizeMismatch, {
+			meshContext = var2.fullName .. "." .. var15.fieldName,
 			maxDiff = string.format("%.2f", renderVsWrapMeshMaxDiff),
-			otherMeshContext = var18.fullName .. "." .. var18.fieldName
-		}, p3)
+			otherMeshContext = var4.fullName .. "." .. var18.fieldName
+		}, p2)
 	end
 end
 
-function t.run(p6, p7)
+function t.run(p1, p2)
 	-- upvalues: validationEnumsModule (ref), calculateMeshSizeForPart (ref), errorSourceStringsModule (ref), getExpectedPartSizeModule (ref), validateWrapTargetComparison (ref), constantsModule (ref)
-	local rootInstance = p7.rootInstance
-	local assetType = p7.uploadEnum.assetType
-	local var25 = p7.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+	local rootInstance = p2.rootInstance
+	local assetType = p2.uploadEnum.assetType
+	local var1 = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
 	local t = {}
 	
-	if p7.renderMeshesData then
+	if p2.renderMeshesData then
 		local descendants = rootInstance:GetDescendants()
 		table.insert(descendants, rootInstance)
 		
 		for i, v in descendants do
-			local name = p7.renderMeshesData[v.Name]
+			local name = p2.renderMeshesData[v.Name]
 			
 			if name and name.editable then
 				t[v] = {
@@ -112,13 +112,13 @@ function t.run(p6, p7)
 			end
 		end
 	end
-	if p7.outerCagesData then
+	if p2.outerCagesData then
 		local descendants = rootInstance:GetDescendants()
 		table.insert(descendants, rootInstance)
 		
 		for i, v in descendants do
 			if v:IsA("BaseWrap") and v.Parent then
-				local name = p7.outerCagesData[v.Parent.Name]
+				local name = p2.outerCagesData[v.Parent.Name]
 				
 				if name and name.editable then
 					t[v] = {
@@ -133,35 +133,35 @@ function t.run(p6, p7)
 	end
 	local t_1 = {
 		assetTypeEnum = assetType,
-		isServer = var25,
+		isServer = var1,
 		editableMeshes = t,
 		bypassFlags = { skipPhysicsDataReset = true }
 	}
 	
-	local function validateSingleMeshPart(p8)
-		-- upvalues: calculateMeshSizeForPart (copy), t_1 (ref), p6 (ref), errorSourceStringsModule (copy), getExpectedPartSizeModule (copy), validateWrapTargetComparison (copy)
-		local var33, var34 = calculateMeshSizeForPart(p8, t_1)
+	local function validateSingleMeshPart(p3)
+		-- upvalues: calculateMeshSizeForPart (copy), t_1 (ref), p1 (ref), errorSourceStringsModule (copy), getExpectedPartSizeModule (copy), validateWrapTargetComparison (copy)
+		local var2, var3 = calculateMeshSizeForPart(p3, t_1)
 		
-		if var33 and var34 then
-			validateWrapTargetComparison(getExpectedPartSizeModule(p8, t_1) / var34, p8, t_1, p6)
+		if var2 and var3 then
+			validateWrapTargetComparison(getExpectedPartSizeModule(p3, t_1) / var3, p3, t_1, p1)
 			
 			return
 		end
-		p6:fail(errorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = p8:GetFullName() }, p8)
+		p1:fail(errorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = p3:GetFullName() }, p3)
 	end
 	
-	local var31 = constantsModule.ASSET_TYPE_INFO[assetType]
+	local var2 = constantsModule.ASSET_TYPE_INFO[assetType]
 	
 	if Enum.AssetType.DynamicHead == assetType then
 		validateSingleMeshPart(rootInstance)
 		
 		return
-	elseif not var31 then return end
-	for i_1 in pairs(var31.subParts) do
-		local var32 = rootInstance:FindFirstChild(i_1)
+	elseif not var2 then return end
+	for i_1 in pairs(var2.subParts) do
+		local var3 = rootInstance:FindFirstChild(i_1)
 		
-		if var32 then
-			validateSingleMeshPart(var32)
+		if var3 then
+			validateSingleMeshPart(var3)
 		end
 	end
 end

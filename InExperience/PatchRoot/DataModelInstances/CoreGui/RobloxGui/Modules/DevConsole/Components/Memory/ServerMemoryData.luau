@@ -1,13 +1,13 @@
 ﻿local signalModule = require(script.Parent.Parent.Parent.Signal)
 local circularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
 local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).MemoryFormatting.ChartHeaderNames
-local var2 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
+local var1 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1)
-		return p0.name < p1.name
+	[chartHeaderNames[1]] = function(p1, p2)
+		return p1.name < p2.name
 	end,
-	[chartHeaderNames[2]] = function(p2, p3)
-		return p2.dataStats.dataSet:back().data < p3.dataStats.dataSet:back().data
+	[chartHeaderNames[2]] = function(p1, p2)
+		return p1.dataStats.dataSet:back().data < p2.dataStats.dataSet:back().data
 	end
 }
 local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
@@ -37,67 +37,67 @@ function t_1.new()
 	return t
 end
 
-function t_1:updateEntry(p4, p5, p6, p7)
-	-- upvalues: circularBufferModule (ref), var2 (ref)
-	if not p4[p6] then
-		local var8 = circularBufferModule.new(var2)
-		var8:push_back({ data = p7, time = self._lastUpdate })
-		p4[p6] = { min = p7, max = p7, dataSet = var8 }
-		table.insert(p5, { name = p6, dataStats = p4[p6] })
+function t_1:updateEntry(p1, p2, p3, p4)
+	-- upvalues: circularBufferModule (ref), var1 (ref)
+	if not p1[p3] then
+		local var2 = circularBufferModule.new(var1)
+		var2:push_back({ data = p4, time = self._lastUpdate })
+		p1[p3] = { min = p4, max = p4, dataSet = var2 }
+		table.insert(p2, { name = p3, dataStats = p1[p3] })
 		
 		return
 	end
-	local max = p4[p6].max
-	local min = p4[p6].min
-	local var9 = p4[p6].dataSet:push_back({ data = p7, time = self._lastUpdate })
+	local max = p1[p3].max
+	local min = p1[p3].min
+	local var3 = p1[p3].dataSet:push_back({ data = p4, time = self._lastUpdate })
 	
-	if var9 then
-		local var10 = p4[p6].dataSet:iterator()
-		local var11 = var10:next()
+	if var3 then
+		local var4 = p1[p3].dataSet:iterator()
+		local var5 = var4:next()
 		
-		if max == var9.data then
+		if max == var3.data then
 			max = min
-			while var11 do
-				max = if var11.data < max then max else var11.data
-				var11 = var10:next()
+			while var5 do
+				max = if var5.data < max then max else var5.data
+				var5 = var4:next()
 			end
 		end
-		if min == var9.data then
+		if min == var3.data then
 			min = max
-			while var11 do
-				min = if min < var11.data then min else var11.data
-				var11 = var10:next()
+			while var5 do
+				min = if min < var5.data then min else var5.data
+				var5 = var4:next()
 			end
 		end
 	end
-	p4[p6].max = if max < p7 then p7 else max
-	p4[p6].min = if min < p7 then min else p7
+	p1[p3].max = if max < p4 then p4 else max
+	p1[p3].min = if min < p4 then min else p4
 end
 
-function t_1:updateEntryList(p8, p9, p10)
-	local var12 = 0
+function t_1:updateEntryList(p5, p6, p7)
+	local var6 = 0
 	
-	for i, v in pairs(p10) do
-		local var13 = v / 1048576
-		var12 += var13
-		self:updateEntry(p8, p9, i, var13)
+	for i, v in pairs(p7) do
+		local var7 = v / 1048576
+		var6 += var7
+		self:updateEntry(p5, p6, i, var7)
 	end
-	for i_1, v_1 in pairs(p8) do
-		if p10[i_1] == nil then
-			p8[i_1] = nil
+	for i_1, v_1 in pairs(p5) do
+		if p7[i_1] == nil then
+			p5[i_1] = nil
 			
-			for i_2, v_2 in ipairs(p9) do
+			for i_2, v_2 in ipairs(p6) do
 				if i_1 == v_2.name then
-					table.remove(p9, i_2)
+					table.remove(p6, i_2)
 					continue
 				end
 			end
 		end
 	end
-	return var12
+	return var6
 end
 
-function t_1:updateWithTreeStats(p11)
+function t_1:updateWithTreeStats(p8)
 	local t = {
 		PlaceMemory = 0,
 		CoreMemory = 0,
@@ -106,7 +106,7 @@ function t_1:updateWithTreeStats(p11)
 		CoreScriptMemory = 0
 	}
 	
-	for i, v in pairs(p11) do
+	for i, v in pairs(p8) do
 		if i == "totalServerMemory" then
 			self._totalMemory = v / 1048576
 		elseif i == "developerTags" then
@@ -162,26 +162,26 @@ function t_1:getSortType()
 	return self._sortType
 end
 
-local function recursiveSort(p12, p13)
+local function recursiveSort(p9, p10)
 	-- upvalues: recursiveSort (ref)
-	table.sort(p12, p13)
+	table.sort(p9, p10)
 	
-	for i, v in pairs(p12) do
+	for i, v in pairs(p9) do
 		if v.dataStats.sortedChildren then
-			recursiveSort(v.dataStats.sortedChildren, p13)
+			recursiveSort(v.dataStats.sortedChildren, p10)
 		end
 	end
 end
 
-function t_1:setSortType(p14)
+function t_1:setSortType(p11)
 	-- upvalues: t (ref), recursiveSort (ref)
-	if t[p14] then
-		self._sortType = p14
+	if t[p11] then
+		self._sortType = p11
 		recursiveSort(self._memoryDataSorted, t[self._sortType])
 		
 		return
 	end
-	error(string.format("attempted to pass invalid sortType: %s", tostring(p14)), 2)
+	error(string.format("attempted to pass invalid sortType: %s", tostring(p11)), 2)
 end
 
 function t_1:getMemoryData()
@@ -194,31 +194,31 @@ end
 
 function t_1:start()
 	-- upvalues: getClientReplicatorModule (ref)
-	local var17 = getClientReplicatorModule()
+	local var8 = getClientReplicatorModule()
 	
-	if var17 and not self._statsListenerConnection then
-		self._statsListenerConnection = var17.StatsReceived:connect(function(p15)
+	if var8 and not self._statsListenerConnection then
+		self._statsListenerConnection = var8.StatsReceived:connect(function(p11)
 			-- upvalues: self (ref)
-			if not p15.ServerMemoryTree then return end
+			if not p11.ServerMemoryTree then return end
 			self._lastUpdate = os.time()
-			local serverMemoryTree = p15.ServerMemoryTree
+			local serverMemoryTree = p11.ServerMemoryTree
 			
 			if serverMemoryTree then
 				self:updateWithTreeStats(serverMemoryTree)
 				self._treeViewUpdated:Fire(self._memoryDataSorted)
 			end
 		end)
-		var17:RequestServerStats(true)
+		var8:RequestServerStats(true)
 		self._isRunning = true
 	end
 end
 
 function t_1:stop()
 	-- upvalues: getClientReplicatorModule (ref)
-	local var18 = getClientReplicatorModule()
+	local var8 = getClientReplicatorModule()
 	
-	if var18 then
-		var18:RequestServerStats(false)
+	if var8 then
+		var8:RequestServerStats(false)
 		self._statsListenerConnection:Disconnect()
 		self._isRunning = false
 	end

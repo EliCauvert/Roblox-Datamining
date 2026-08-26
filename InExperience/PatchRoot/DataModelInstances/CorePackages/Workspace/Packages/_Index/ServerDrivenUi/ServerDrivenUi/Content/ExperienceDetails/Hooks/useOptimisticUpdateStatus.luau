@@ -2,36 +2,36 @@
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), signalsModule (ref)
-	local var2 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
+		-- upvalues: var1 (ref)
 		return function()
-			-- upvalues: var2 (copy)
-			if var2.current then
-				var2.current()
+			-- upvalues: var1 (copy)
+			if var1.current then
+				var1.current()
 			end
 		end
 	end, {})
 	
 	return reactModule.useCallback(function(...)
-		-- upvalues: var2 (ref), p0 (ref), signalsModule (copy), p1 (ref)
-		if var2.current then
-			var2.current()
-			var2.current = nil
+		-- upvalues: var1 (ref), p1 (ref), signalsModule (copy), p2 (ref)
+		if var1.current then
+			var1.current()
+			var1.current = nil
 		end
-		local var3 = p0(...)
+		local var2 = p1(...)
 		
-		if var3 then
-			var2.current = signalsModule.createEffect(function(p2)
-				-- upvalues: var3 (ref), p1 (copy)
-				local var4 = var3(p2)
+		if var2 then
+			var1.current = signalsModule.createEffect(function(p3)
+				-- upvalues: var2 (ref), p2 (copy)
+				local var3 = var2(p3)
 				
-				if var4 ~= nil then
-					p1(var4)
+				if var3 ~= nil then
+					p2(var3)
 				end
 			end)
 		end
-	end, { p0, p1 })
+	end, { p1, p2 })
 end

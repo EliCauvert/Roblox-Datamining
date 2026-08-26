@@ -1,5 +1,5 @@
 ﻿local _ = require(script.Parent.Parent.Models.CollectibleInstance)
 
-return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p0, p1)
-	return { collectibleItemId = p0, collectibleItemInstances = p1 }
+return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1, p2)
+	return { collectibleItemId = p1, collectibleItemInstances = p2 }
 end)

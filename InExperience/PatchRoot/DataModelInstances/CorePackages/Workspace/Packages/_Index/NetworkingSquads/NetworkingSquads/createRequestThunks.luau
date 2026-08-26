@@ -14,21 +14,21 @@ local createSendSquadVoiceAbuseReportModule = require(networkRequests.createSend
 local createReinviteToSquadModule = require(networkRequests.createReinviteToSquad)
 local createSetRegroupPromptShownModule = require(networkRequests.createSetRegroupPromptShown)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createCreateOrJoinSquadModule (ref), createGetSquadActiveModule (ref), createGetSquadFromSquadIdModule (ref), createJoinSquadModule (ref), createActOnPartyNudgeModule (ref), createLeaveSquadModule (ref), createSquadInviteModule (ref), createCreateExperienceInviteModule (ref), createGetExperienceInviteModule (ref), createVoteForExperienceInviteModule (ref), createReinviteToSquadModule (ref), createSendSquadVoiceAbuseReportModule (ref), createSetRegroupPromptShownModule (ref)
 	return {
-		CreateOrJoinSquad = createCreateOrJoinSquadModule(p0),
-		GetSquadActive = createGetSquadActiveModule(p0),
-		GetSquadFromSquadId = createGetSquadFromSquadIdModule(p0),
-		JoinSquad = createJoinSquadModule(p0),
-		ActOnPartyNudge = createActOnPartyNudgeModule(p0),
-		LeaveSquad = createLeaveSquadModule(p0),
-		SquadInvite = createSquadInviteModule(p0),
-		CreateExperienceInvite = createCreateExperienceInviteModule(p0),
-		GetExperienceInvite = createGetExperienceInviteModule(p0),
-		VoteForExperienceInvite = createVoteForExperienceInviteModule(p0),
-		ReinviteToSquad = createReinviteToSquadModule(p0),
-		SendSquadVoiceAbuseReport = createSendSquadVoiceAbuseReportModule(p0),
-		SetRegroupPromptShown = createSetRegroupPromptShownModule(p0)
+		CreateOrJoinSquad = createCreateOrJoinSquadModule(p1),
+		GetSquadActive = createGetSquadActiveModule(p1),
+		GetSquadFromSquadId = createGetSquadFromSquadIdModule(p1),
+		JoinSquad = createJoinSquadModule(p1),
+		ActOnPartyNudge = createActOnPartyNudgeModule(p1),
+		LeaveSquad = createLeaveSquadModule(p1),
+		SquadInvite = createSquadInviteModule(p1),
+		CreateExperienceInvite = createCreateExperienceInviteModule(p1),
+		GetExperienceInvite = createGetExperienceInviteModule(p1),
+		VoteForExperienceInvite = createVoteForExperienceInviteModule(p1),
+		ReinviteToSquad = createReinviteToSquadModule(p1),
+		SendSquadVoiceAbuseReport = createSendSquadVoiceAbuseReportModule(p1),
+		SetRegroupPromptShown = createSetRegroupPromptShownModule(p1)
 	}
 end

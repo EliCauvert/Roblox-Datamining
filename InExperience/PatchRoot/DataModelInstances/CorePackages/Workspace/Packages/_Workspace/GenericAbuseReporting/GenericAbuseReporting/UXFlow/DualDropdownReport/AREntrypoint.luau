@@ -12,55 +12,55 @@ local _ = require(genericAbuseReporting.Analytics.submitAnalytics)
 local useActiveDialogModule = require(script.Parent.useActiveDialog)
 local _ = { Form = "Form", Complete = "Complete", Error = "Error" }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useActiveDialogModule (ref), reactModule (ref), layerCollectorProvider (ref), foundationProvider (ref), analyticsProviderModule (ref), localizationKeysProviderModule (ref), dualDropdownReportModule (ref), reportCompleteDialogModule (ref), reportFailedDialogModule (ref)
-	local var8, var9 = useActiveDialogModule()
-	local var10 = reactModule.useCallback(function(p1, p2, p3)
-		-- upvalues: p0 (ref), var9 (ref)
-		local var11 = if p0.onSubmitProps.hasNextSteps then p0.onSubmitProps.onProceedToNextStep(p1, p2, p3) else p0.onSubmitProps.onSubmit(p1, p2, p3)
+	local var1, var2 = useActiveDialogModule()
+	local var3 = reactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: p1 (ref), var2 (ref)
+		local var4 = if p1.onSubmitProps.hasNextSteps then p1.onSubmitProps.onProceedToNextStep(p2, p3, p4) else p1.onSubmitProps.onSubmit(p2, p3, p4)
 		
-		if var11 then
-			var9("Complete")
+		if var4 then
+			var2("Complete")
 			
-			return var11
+			return var4
 		end
-		var9("Error")
+		var2("Error")
 		
-		return var11
-	end, { p0.onSubmitProps })
+		return var4
+	end, { p1.onSubmitProps })
 	
 	return reactModule.createElement(layerCollectorProvider, {}, {
 		FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
 			analytics = reactModule.createElement(analyticsProviderModule, {
-				onBeforeSubmitAnalytics = p0.onBeforeSubmitAnalytics,
-				onSubmitAnalytics = p0.onSubmitAnalytics
+				onBeforeSubmitAnalytics = p1.onBeforeSubmitAnalytics,
+				onSubmitAnalytics = p1.onSubmitAnalytics
 			}, {
-				localizationKeys = reactModule.createElement(localizationKeysProviderModule, { localizationKeys = p0.localizationKeys }, {
-					submitDialog = var8 == "Form" and reactModule.createElement(dualDropdownReportModule, {
-						analyticsContext = p0.analyticsContext,
-						reportProblems = p0.reportProblems,
-						reportSurfaces = p0.reportSurfaces,
-						onSubmitProps = if p0.onSubmitProps.hasNextSteps then {
-							hasNextSteps = p0.onSubmitProps.hasNextSteps,
-							onProceedToNextStep = var10
+				localizationKeys = reactModule.createElement(localizationKeysProviderModule, { localizationKeys = p1.localizationKeys }, {
+					submitDialog = var1 == "Form" and reactModule.createElement(dualDropdownReportModule, {
+						analyticsContext = p1.analyticsContext,
+						reportProblems = p1.reportProblems,
+						reportSurfaces = p1.reportSurfaces,
+						onSubmitProps = if p1.onSubmitProps.hasNextSteps then {
+							hasNextSteps = p1.onSubmitProps.hasNextSteps,
+							onProceedToNextStep = var3
 						} else {
-							hasNextSteps = p0.onSubmitProps.hasNextSteps,
-							onSubmit = var10
+							hasNextSteps = p1.onSubmitProps.hasNextSteps,
+							onSubmit = var3
 						},
-						onCloseProps = p0.onCloseProps
+						onCloseProps = p1.onCloseProps
 					}),
-					completeDialog = var8 == "Complete" and reactModule.createElement(reportCompleteDialogModule, {
+					completeDialog = var1 == "Complete" and reactModule.createElement(reportCompleteDialogModule, {
 						onDismiss = reactModule.useCallback(function()
-							-- upvalues: p0 (ref)
-							if p0.onComplete then
-								p0.onComplete()
+							-- upvalues: p1 (ref)
+							if p1.onComplete then
+								p1.onComplete()
 							end
-						end, { p0.onComplete })
+						end, { p1.onComplete })
 					}),
-					errorDialog = var8 == "Error" and reactModule.createElement(reportFailedDialogModule, {
+					errorDialog = var1 == "Error" and reactModule.createElement(reportFailedDialogModule, {
 						onDismiss = reactModule.useCallback(function()
-							-- upvalues: var9 (ref)
-							var9("Form")
+							-- upvalues: var2 (ref)
+							var2("Form")
 						end, {})
 					})
 				})

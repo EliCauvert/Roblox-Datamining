@@ -2,12 +2,12 @@
 local appendModule = require(parent.append)
 local forEachModule = require(parent.forEach)
 
-return function(p0)
+return function(p1)
 	-- upvalues: forEachModule (ref), appendModule (ref)
 	local t = {}
-	forEachModule(p0, function(p1)
+	forEachModule(p1, function(p2)
 		-- upvalues: appendModule (copy), t (ref)
-		appendModule(t, p1)
+		appendModule(t, p2)
 	end)
 	
 	return t

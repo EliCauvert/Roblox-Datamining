@@ -10,25 +10,25 @@ local getImageData = require(parent.RobloxAppAssets).GetImageData
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local graphite = colors.Graphite
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), functionalCountryCodeSelectorButtonModule (ref), graphite (ref), imageSetLabel (ref), getImageData (ref)
-	local dropdownVisible = p0.dropdownVisible
-	local countryCodeList = p0.countryCodeList
-	local onCountryCodeSelected = p0.onCountryCodeSelected
-	local position = p0.position
-	local maxHeight = p0.maxHeight
-	local var4 = useStyle()
+	local dropdownVisible = p1.dropdownVisible
+	local countryCodeList = p1.countryCodeList
+	local onCountryCodeSelected = p1.onCountryCodeSelected
+	local position = p1.position
+	local maxHeight = p1.maxHeight
+	local var1 = useStyle()
 	
 	return if dropdownVisible then reactModule.createElement(imageSetLabel, {
 		ZIndex = 2,
 		BackgroundTransparency = 1,
 		ImageTransparency = 0,
-		Size = p0.size or UDim2.new(1, 0, 0, maxHeight),
+		Size = p1.size or UDim2.new(1, 0, 0, maxHeight),
 		Position = position,
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(9, 9, 9, 9),
 		Image = getImageData("LuaApp/buttons/buttonFill"),
-		ImageColor3 = var4.Theme.BackgroundUIDefault.Color
+		ImageColor3 = var1.Theme.BackgroundUIDefault.Color
 	}, {
 		Boundary = reactModule.createElement(imageSetLabel, {
 			ZIndex = 2,
@@ -37,8 +37,8 @@ return function(p0)
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(9, 9, 9, 9),
 			Image = getImageData("LuaApp/buttons/buttonStroke"),
-			ImageColor3 = var4.Theme.UIDefault.Color,
-			ImageTransparency = var4.Theme.UIDefault.Transparency
+			ImageColor3 = var1.Theme.UIDefault.Color,
+			ImageTransparency = var1.Theme.UIDefault.Transparency
 		}),
 		ScrollingFrame = reactModule.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,
@@ -52,30 +52,30 @@ return function(p0)
 			ListHolder = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, -8, 1, maxHeight)
-			}, (function(p1)
+			}, (function(p2)
 				-- upvalues: reactModule (copy), functionalCountryCodeSelectorButtonModule (copy), onCountryCodeSelected (ref), graphite (copy)
 				local list = {
 					reactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
 					reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 8) })
 				}
-				local var6 = 1
+				local var2 = 1
 				
-				for i, v in ipairs(p1) do
+				for i, v in ipairs(p2) do
 					table.insert(list, reactModule.createElement(functionalCountryCodeSelectorButtonModule, {
 						BoldPrefixEnabled = true,
 						CountryCode = v,
 						Size = UDim2.new(1, 0, 0, 48),
-						LayoutOrder = var6,
+						LayoutOrder = var2,
 						ListButtonProps = { TextSize = 14, SelectionCallback = onCountryCodeSelected }
 					}))
-					var6 += 1
+					var2 += 1
 					table.insert(list, reactModule.createElement("Frame", {
 						BorderSizePixel = 0,
 						Size = UDim2.new(1, 0, 0, 1),
 						BackgroundColor3 = graphite,
-						LayoutOrder = var6
+						LayoutOrder = var2
 					}))
-					var6 += 1
+					var2 += 1
 				end
 				return list
 			end)(countryCodeList))

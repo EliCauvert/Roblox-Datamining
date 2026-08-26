@@ -24,124 +24,124 @@ itemsList.validateProps = tModule.strictInterface({
 	addAnalyticsInfo = tModule.callback
 })
 
-function itemsList.init(p0)
+function itemsList.init(p1)
 	-- upvalues: roactModule (ref), getAssetsDifferenceModule (ref)
-	p0:setState({
+	p1:setState({
 		canvasSizeY = 0,
 		loading = true,
 		addedAssetNames = nil,
 		removedAssetNames = nil
 	})
-	p0.mounted = false
-	p0.frameRef = roactModule.createRef()
-	local var12, var13 = roactModule.createBinding(false)
-	p0.topGradientVisibleBinding = var12
-	p0.updateTopGradientVisibleBinding = var13
-	local var14, var15 = roactModule.createBinding(false)
-	p0.bottomGradientVisibleBinding = var14
-	p0.updateBottomGradientVisibleBinding = var15
-	p0.addedSectionRef = roactModule.createRef()
-	p0.removedSectionRef = roactModule.createRef()
-	p0.noChangedAssetsRef = roactModule.createRef()
-	p0.lastWasScrollable = nil
+	p1.mounted = false
+	p1.frameRef = roactModule.createRef()
+	local var1, var2 = roactModule.createBinding(false)
+	p1.topGradientVisibleBinding = var1
+	p1.updateTopGradientVisibleBinding = var2
+	local var3, var4 = roactModule.createBinding(false)
+	p1.bottomGradientVisibleBinding = var3
+	p1.updateBottomGradientVisibleBinding = var4
+	p1.addedSectionRef = roactModule.createRef()
+	p1.removedSectionRef = roactModule.createRef()
+	p1.noChangedAssetsRef = roactModule.createRef()
+	p1.lastWasScrollable = nil
 	
 	function p0.checkIsScrollable()
-		-- upvalues: p0 (ref)
-		local value = p0.frameRef:getValue()
+		-- upvalues: p1 (ref)
+		local value = p1.frameRef:getValue()
 		
 		if not value then return end
-		if not p0.props.itemListScrollableUpdated then return end
-		local var17 = value.AbsoluteSize.Y < p0.state.canvasSizeY
+		if not p1.props.itemListScrollableUpdated then return end
+		local var5 = value.AbsoluteSize.Y < p1.state.canvasSizeY
 		
-		if var17 ~= p0.lastWasScrollable then
-			p0.lastWasScrollable = var17
-			p0.props.itemListScrollableUpdated(var17, value.AbsoluteSize.Y)
+		if var5 ~= p1.lastWasScrollable then
+			p1.lastWasScrollable = var5
+			p1.props.itemListScrollableUpdated(var5, value.AbsoluteSize.Y)
 		end
 	end
 	
-	function p0.onContentSizeChanged(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ canvasSizeY = p1.AbsoluteContentSize.Y })
+	function p0.onContentSizeChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ canvasSizeY = p2.AbsoluteContentSize.Y })
 	end
 	
 	function p0.firstEntryPositionChanged(p2)
-		-- upvalues: p0 (ref)
-		local value = p0.frameRef:getValue()
+		-- upvalues: p1 (ref)
+		local value = p1.frameRef:getValue()
 		
 		if not value then return end
 		if p2.AbsolutePosition.Y < value.AbsolutePosition.Y then
-			p0.updateTopGradientVisibleBinding(true)
+			p1.updateTopGradientVisibleBinding(true)
 			
 			return
 		end
-		p0.updateTopGradientVisibleBinding(false)
+		p1.updateTopGradientVisibleBinding(false)
 	end
 	
-	function p0.lastEntryPositionChanged(p3)
-		-- upvalues: p0 (ref)
-		local value = p0.frameRef:getValue()
+	function p0.lastEntryPositionChanged(p2)
+		-- upvalues: p1 (ref)
+		local value = p1.frameRef:getValue()
 		
 		if not value then return end
-		if value.AbsolutePosition.Y + value.AbsoluteSize.Y < p3.AbsolutePosition.Y + p3.AbsoluteSize.Y then
-			p0.updateBottomGradientVisibleBinding(true)
+		if value.AbsolutePosition.Y + value.AbsoluteSize.Y < p2.AbsolutePosition.Y + p2.AbsoluteSize.Y then
+			p1.updateBottomGradientVisibleBinding(true)
 			
 			return
 		end
-		p0.updateBottomGradientVisibleBinding(false)
+		p1.updateBottomGradientVisibleBinding(false)
 	end
 	
 	function p0.loadAssetNames()
-		-- upvalues: getAssetsDifferenceModule (copy), p0 (ref)
+		-- upvalues: getAssetsDifferenceModule (copy), p1 (ref)
 		coroutine.wrap(function()
-			-- upvalues: getAssetsDifferenceModule (copy), p0 (copy)
-			getAssetsDifferenceModule(p0.props.humanoidDescription):andThen(function(p4)
-				-- upvalues: p0 (copy)
-				if p0.mounted then
-					p0.props.addAnalyticsInfo(p4.addedAssetIds, p4.removedAssetIds)
-					p0:setState({
+			-- upvalues: getAssetsDifferenceModule (copy), p1 (copy)
+			getAssetsDifferenceModule(p1.props.humanoidDescription):andThen(function(p2)
+				-- upvalues: p1 (copy)
+				if p1.mounted then
+					p1.props.addAnalyticsInfo(p2.addedAssetIds, p2.removedAssetIds)
+					p1:setState({
 						loading = false,
-						addedAssetNames = p4.addedNames,
-						removedAssetNames = p4.removedNames
+						addedAssetNames = p2.addedNames,
+						removedAssetNames = p2.removedNames
 					})
 				end
 			end, function(_)
-				-- upvalues: p0 (copy)
-				if p0.mounted then
-					p0:setState({ loading = false })
+				-- upvalues: p1 (copy)
+				if p1.mounted then
+					p1:setState({ loading = false })
 				end
 			end)
 		end)()
 	end
 	
 	function p0.onRetryLoading()
-		-- upvalues: p0 (ref)
-		p0:setState({ loading = true })
+		-- upvalues: p1 (ref)
+		p1:setState({ loading = true })
 		
-		if p0.props.humanoidDescription then
-			p0.loadAssetNames()
+		if p1.props.humanoidDescription then
+			p1.loadAssetNames()
 			
 			return
 		end
-		p0.props.retryLoadDescription()
+		p1.props.retryLoadDescription()
 	end
 end
 
-function itemsList.createEntriesList(p5)
+function itemsList.createEntriesList(p1)
 	-- upvalues: robloxTranslatorModule (ref), roactModule (ref), roactGamepadModule (ref), listSectionModule (ref)
 	local t = {}
 	
-	if #p5.state.addedAssetNames > 0 then
+	if #p1.state.addedAssetNames > 0 then
 		table.insert(t, roactModule.createElement(roactGamepadModule.Focusable[listSectionModule], {
 			headerText = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.Adding"),
-			items = p5.state.addedAssetNames,
+			items = p1.state.addedAssetNames,
 			layoutOrder = 1,
 			isFirstSection = true,
-			isLastSection = #p5.state.removedAssetNames == 0,
-			NextSelectionDown = p5.removedSectionRef,
-			[roactModule.Ref] = p5.addedSectionRef
+			isLastSection = #p1.state.removedAssetNames == 0,
+			NextSelectionDown = p1.removedSectionRef,
+			[roactModule.Ref] = p1.addedSectionRef
 		}))
 		
-		if #p5.state.removedAssetNames > 0 then
+		if #p1.state.removedAssetNames > 0 then
 			table.insert(t, roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
@@ -149,54 +149,54 @@ function itemsList.createEntriesList(p5)
 			}))
 		end
 	end
-	if #p5.state.removedAssetNames > 0 then
+	if #p1.state.removedAssetNames > 0 then
 		table.insert(t, roactModule.createElement(roactGamepadModule.Focusable[listSectionModule], {
 			headerText = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.Removing"),
-			items = p5.state.removedAssetNames,
+			items = p1.state.removedAssetNames,
 			layoutOrder = 3,
-			isFirstSection = #p5.state.addedAssetNames == 0,
+			isFirstSection = #p1.state.addedAssetNames == 0,
 			isLastSection = true,
-			NextSelectionUp = p5.addedSectionRef,
-			[roactModule.Ref] = p5.removedSectionRef
+			NextSelectionUp = p1.addedSectionRef,
+			[roactModule.Ref] = p1.removedSectionRef
 		}))
 	end
-	if #p5.state.addedAssetNames == 0 and #p5.state.removedAssetNames == 0 then
+	if #p1.state.addedAssetNames == 0 and #p1.state.removedAssetNames == 0 then
 		table.insert(t, roactModule.createElement(roactGamepadModule.Focusable[listSectionModule], {
 			headerText = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.NoChangedAssets"),
 			items = {},
 			layoutOrder = 1,
 			isFirstSection = true,
 			isLastSection = true,
-			[roactModule.Ref] = p5.noChangedAssetsRef
+			[roactModule.Ref] = p1.noChangedAssetsRef
 		}))
 	end
 	return t
 end
 
-function itemsList.renderItemsList(p6)
+function itemsList.renderItemsList(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), roactGamepadModule (ref), verticalScrollViewWithMargin (ref)
-	return withStyle(function(p7)
-		-- upvalues: p6 (ref), roactModule (copy), roactGamepadModule (copy), verticalScrollViewWithMargin (copy)
-		local theme = p7.Theme
-		local var21 = p6:createEntriesList()
-		var21.Layout = roactModule.createElement("UIListLayout", {
+	return withStyle(function(p2)
+		-- upvalues: p1 (ref), roactModule (copy), roactGamepadModule (copy), verticalScrollViewWithMargin (copy)
+		local theme = p2.Theme
+		local var1 = p1:createEntriesList()
+		var1.Layout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			Padding = UDim.new(0, 10),
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			[roactModule.Change.AbsoluteContentSize] = p6.onContentSizeChanged
+			[roactModule.Change.AbsoluteContentSize] = p1.onContentSizeChanged
 		})
 		
 		return roactModule.createElement(roactGamepadModule.Focusable.Frame, {
-			defaultChild = p6.addedSectionRef,
+			defaultChild = p1.addedSectionRef,
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
-			[roactModule.Ref] = p6.frameRef
+			[roactModule.Ref] = p1.frameRef
 		}, {
 			TopGradient = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				ZIndex = 2,
-				Visible = p6.topGradientVisibleBinding,
+				Visible = p1.topGradientVisibleBinding,
 				Size = UDim2.new(1, 0, 0, 30),
 				Position = UDim2.fromScale(0, 0),
 				BackgroundColor3 = Color3.new(1, 1, 1)
@@ -215,12 +215,12 @@ function itemsList.renderItemsList(p6)
 			}),
 			ScrollView = roactModule.createElement(verticalScrollViewWithMargin, {
 				size = UDim2.fromScale(1, 1),
-				canvasSizeY = UDim.new(0, p6.state.canvasSizeY)
-			}, var21),
+				canvasSizeY = UDim.new(0, p1.state.canvasSizeY)
+			}, var1),
 			BottomGradient = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				ZIndex = 2,
-				Visible = p6.bottomGradientVisibleBinding,
+				Visible = p1.bottomGradientVisibleBinding,
 				Size = UDim2.new(1, 0, 0, 30),
 				Position = UDim2.fromScale(0, 1),
 				AnchorPoint = Vector2.new(0, 1),
@@ -251,52 +251,52 @@ function itemsList.renderLoading(_)
 	})
 end
 
-function itemsList.renderFailed(p8)
+function itemsList.renderFailed(p1)
 	-- upvalues: roactModule (ref), emptyState (ref), robloxTranslatorModule (ref)
 	return roactModule.createElement(emptyState, {
 		text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.ItemsListLoadingFailed"),
 		size = UDim2.fromScale(1, 1),
-		onActivated = p8.onRetryLoading
+		onActivated = p1.onRetryLoading
 	})
 end
 
-function itemsList.render(p9)
-	return if p9.state.loading and not p9.props.loadingFailed then p9:renderLoading() elseif p9.state.addedAssetNames then p9:renderItemsList() else p9:renderFailed()
+function itemsList.render(p1)
+	return if p1.state.loading and not p1.props.loadingFailed then p1:renderLoading() elseif p1.state.addedAssetNames then p1:renderItemsList() else p1:renderFailed()
 end
 
-function itemsList.didMount(p10)
-	p10.mounted = true
+function itemsList.didMount(p1)
+	p1.mounted = true
 	
-	if p10.props.humanoidDescription then
-		p10.loadAssetNames()
+	if p1.props.humanoidDescription then
+		p1.loadAssetNames()
 	end
-	p10.checkIsScrollable()
+	p1.checkIsScrollable()
 end
 
-function itemsList.didUpdate(p11, p12, _)
+function itemsList.didUpdate(p1, p2, _)
 	-- upvalues: roactModule (ref)
-	p11.checkIsScrollable()
+	p1.checkIsScrollable()
 	
-	if p12.humanoidDescription ~= p11.props.humanoidDescription then
-		p11:setState({
+	if p2.humanoidDescription ~= p1.props.humanoidDescription then
+		p1:setState({
 			loading = true,
 			addedAssetNames = roactModule.None,
 			removedAssetNames = roactModule.None
 		})
-		p11.loadAssetNames()
+		p1.loadAssetNames()
 	end
 end
 
-function itemsList.willUnmount(p13)
-	p13.mounted = false
+function itemsList.willUnmount(p1)
+	p1.mounted = false
 end
 
-return roactRoduxModule.connect(nil, function(p14)
+return roactRoduxModule.connect(nil, function(p1)
 	-- upvalues: addAnalyticsInfoModule (ref)
 	return {
-		addAnalyticsInfo = function(p15)
-			-- upvalues: p14 (ref), addAnalyticsInfoModule (copy)
-			return p14(addAnalyticsInfoModule(p15))
+		addAnalyticsInfo = function(p2)
+			-- upvalues: p1 (ref), addAnalyticsInfoModule (copy)
+			return p1(addAnalyticsInfoModule(p2))
 		end
 	}
 end)(itemsList)

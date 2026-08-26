@@ -14,30 +14,30 @@ local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPres
 local fFlagExpChatUniverseChatPresetEnabledModule = require(expChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
 local expChatPresetChatLoadAnalyticsTimeoutMs = game:DefineFastInt("ExpChatPresetChatLoadAnalyticsTimeoutMs", 20000)
 local expChatReconcileOnAgeVerifiedChange = game:DefineFastFlag("ExpChatReconcileOnAgeVerifiedChange", false)
-local var14 = if expChatReconcileOnAgeVerifiedChange then require(script.Parent.ExpChatEventReceiver) else nil
+local var1 = if expChatReconcileOnAgeVerifiedChange then require(script.Parent.ExpChatEventReceiver) else nil
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
-local var15 = if fFlagExpChatEnableFriendsTab then require(script.Parent.FriendsChatEventReceiverConnector) else nil
+local var2 = if fFlagExpChatEnableFriendsTab then require(script.Parent.FriendsChatEventReceiverConnector) else nil
 local focusHotKeyReceiverModule = require(script.Parent.FocusHotKey.FocusHotKeyReceiver)
 local getFFlagExpChatTelemetryEventTriggerModule = require(expChat.Flags.getFFlagExpChatTelemetryEventTrigger)
 
 local function computePresetBitmap(value)
 	-- upvalues: getPresetChatStoreModule (ref), constantsModule (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), textChatService (ref)
-	local var20 = getPresetChatStoreModule(false)
+	local var3 = getPresetChatStoreModule(false)
 	
-	if not var20.getIsEnabled() or var20.getAccessLevel() ~= constantsModule.AccessLevel.Enabled then
+	if not var3.getIsEnabled() or var3.getAccessLevel() ~= constantsModule.AccessLevel.Enabled then
 		return 0
 	end
-	local var21 = 0
+	local var4 = 0
 	
 	for i in pairs(value) do
 		if i ~= "RBXSystem" then
-			var21 = if i == "RBXGeneral" then bit32.bor(var21, 1) else bit32.bor(var21, 4)
+			var4 = if i == "RBXGeneral" then bit32.bor(var4, 1) else bit32.bor(var4, 4)
 		end
 	end
 	if fFlagExpChatUniverseChatPresetEnabledModule and textChatService:HasAllocatedUniverseChatContext("global") then
-		var21 = bit32.bor(var21, 2)
+		var4 = bit32.bor(var4, 2)
 	end
-	return var21
+	return var4
 end
 
 local app = roactModule.Component:extend("App")
@@ -49,8 +49,8 @@ app.defaultProps = {
 	isSpatialUIEnabled = false,
 	store = createStoreModule(),
 	translator = {
-		FormatByKey = function(_, p0)
-			return tostring(p0)
+		FormatByKey = function(_, p1)
+			return tostring(p1)
 		end
 	},
 	gameTranslator = {
@@ -60,28 +60,28 @@ app.defaultProps = {
 	}
 }
 
-function app.render(p2)
-	-- upvalues: roactModule (ref), roactRoduxModule (ref), localizationModule (ref), gameLocalizationModule (ref), expChatReconcileOnAgeVerifiedChange (ref), var14 (ref), fFlagExpChatEnableFriendsTab (ref), var15 (ref), focusHotKeyReceiverModule (ref), appContainerModule (ref)
-	return p2.props.isDefaultChatEnabled and roactModule.createElement(roactRoduxModule.StoreProvider, { store = p2.props.store }, {
-		localization = roactModule.createElement(localizationModule.Provider, { value = p2.props.translator }, {
-			gameLocalization = roactModule.createElement(gameLocalizationModule.Provider, { value = p2.props.gameTranslator }, {
-				eventReceiver = if expChatReconcileOnAgeVerifiedChange then roactModule.createElement(var14) else nil,
-				friendsChatEventReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(var15) else nil,
+function app.render(p1)
+	-- upvalues: roactModule (ref), roactRoduxModule (ref), localizationModule (ref), gameLocalizationModule (ref), expChatReconcileOnAgeVerifiedChange (ref), var1 (ref), fFlagExpChatEnableFriendsTab (ref), var2 (ref), focusHotKeyReceiverModule (ref), appContainerModule (ref)
+	return p1.props.isDefaultChatEnabled and roactModule.createElement(roactRoduxModule.StoreProvider, { store = p1.props.store }, {
+		localization = roactModule.createElement(localizationModule.Provider, { value = p1.props.translator }, {
+			gameLocalization = roactModule.createElement(gameLocalizationModule.Provider, { value = p1.props.gameTranslator }, {
+				eventReceiver = if expChatReconcileOnAgeVerifiedChange then roactModule.createElement(var1) else nil,
+				friendsChatEventReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(var2) else nil,
 				focusHotKeyReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(focusHotKeyReceiverModule) else nil,
 				container = roactModule.createElement(appContainerModule, {
-					isChatInputBarVisible = p2.props.isChatInputBarVisible,
-					isChatWindowVisible = p2.props.isChatWindowVisible,
-					isChannelBarVisible = p2.props.isChannelBarVisible,
-					getIconVoiceIndicator = p2.props.getIconVoiceIndicator,
-					onClickedVoiceIndicator = p2.props.onClickedVoiceIndicator,
-					onClickedCameraIndicator = p2.props.onClickedCameraIndicator,
-					selfViewListenerChanged = p2.props.selfViewListenerChanged,
-					getPermissions = p2.props.getPermissions,
-					displayCameraDeniedToast = p2.props.displayCameraDeniedToast,
-					isCamEnabledForUserAndPlace = p2.props.isCamEnabledForUserAndPlace,
-					isCameraOnlyUser = p2.props.isCameraOnlyUser,
-					isVoiceServiceInitialized = p2.props.isVoiceServiceInitialized,
-					isSpatialUIEnabled = p2.props.isSpatialUIEnabled
+					isChatInputBarVisible = p1.props.isChatInputBarVisible,
+					isChatWindowVisible = p1.props.isChatWindowVisible,
+					isChannelBarVisible = p1.props.isChannelBarVisible,
+					getIconVoiceIndicator = p1.props.getIconVoiceIndicator,
+					onClickedVoiceIndicator = p1.props.onClickedVoiceIndicator,
+					onClickedCameraIndicator = p1.props.onClickedCameraIndicator,
+					selfViewListenerChanged = p1.props.selfViewListenerChanged,
+					getPermissions = p1.props.getPermissions,
+					displayCameraDeniedToast = p1.props.displayCameraDeniedToast,
+					isCamEnabledForUserAndPlace = p1.props.isCamEnabledForUserAndPlace,
+					isCameraOnlyUser = p1.props.isCameraOnlyUser,
+					isVoiceServiceInitialized = p1.props.isVoiceServiceInitialized,
+					isSpatialUIEnabled = p1.props.isSpatialUIEnabled
 				})
 			})
 		})
@@ -89,22 +89,22 @@ function app.render(p2)
 end
 
 if getFFlagExpChatTelemetryEventTriggerModule() then
-	function app.didMount(p3)
+	function app.didMount(p1)
 		-- upvalues: fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), expChatPresetChatLoadAnalyticsTimeoutMs (ref), textChatService (ref), computePresetBitmap (ref)
-		local expChatLoadStartTime = p3.props.expChatLoadStartTime
+		local expChatLoadStartTime = p1.props.expChatLoadStartTime
 		
 		if expChatLoadStartTime then
 			if fFlagExpChatPresetChatEnabled then
-				local var22 = os.clock() - expChatLoadStartTime
-				local var23 = getPresetChatStoreModule(false)
+				local var5 = os.clock() - expChatLoadStartTime
+				local var6 = getPresetChatStoreModule(false)
 				task.spawn(function()
-					-- upvalues: var23 (ref), expChatPresetChatLoadAnalyticsTimeoutMs (copy), p3 (ref), textChatService (copy), var22 (ref), computePresetBitmap (copy)
+					-- upvalues: var6 (ref), expChatPresetChatLoadAnalyticsTimeoutMs (copy), p1 (ref), textChatService (copy), var5 (ref), computePresetBitmap (copy)
 					local processTime = os.clock()
-					while var23.getIsLoading() and os.clock() - processTime < expChatPresetChatLoadAnalyticsTimeoutMs / 1000 do
+					while var6.getIsLoading() and os.clock() - processTime < expChatPresetChatLoadAnalyticsTimeoutMs / 1000 do
 						task.wait()
 					end
-					local state = p3.props.store:getState()
-					textChatService:SendExpChatLoadSuccess(var22, {
+					local state = p1.props.store:getState()
+					textChatService:SendExpChatLoadSuccess(var5, {
 						preset_bitmap = computePresetBitmap(if state.TextChannels then state.TextChannels.allTextChannels else {})
 					})
 				end)

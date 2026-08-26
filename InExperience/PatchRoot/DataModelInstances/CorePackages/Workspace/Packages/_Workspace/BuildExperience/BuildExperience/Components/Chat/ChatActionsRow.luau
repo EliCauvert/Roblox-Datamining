@@ -11,34 +11,34 @@ local function constantSource()
 	return 0
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), constantSource (ref), signalsReactModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
-	local var4 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
-		-- upvalues: p0 (ref), constantSource (copy)
-		if p0.getIsComposerEmpty ~= nil then
-			return p0.getIsComposerEmpty(p1)
-		elseif typeof(p1) == "function" then
-			p1(constantSource)
+	local var1 = signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
+		-- upvalues: p1 (ref), constantSource (copy)
+		if p1.getIsComposerEmpty ~= nil then
+			return p1.getIsComposerEmpty(p2)
+		elseif typeof(p2) == "function" then
+			p2(constantSource)
 		end
-		return p0.isComposerEmpty == true
-	end, { p0.getIsComposerEmpty, p0.isComposerEmpty }))
-	local var5 = p0.isAssistantResponding and (p0.canStopAssistantResponse ~= false and p0.canSendWhileResponding ~= true)
+		return p1.isComposerEmpty == true
+	end, { p1.getIsComposerEmpty, p1.isComposerEmpty }))
+	local var2 = p1.isAssistantResponding and (p1.canStopAssistantResponse ~= false and p1.canSendWhileResponding ~= true)
 	
 	return reactModule.createElement(iconButton, {
 		isCircular = true,
-		LayoutOrder = p0.LayoutOrder,
-		icon = if var5 then iconName.StopSmall else iconName.ArrowWideShortUp,
+		LayoutOrder = p1.LayoutOrder,
+		icon = if var2 then iconName.StopSmall else iconName.ArrowWideShortUp,
 		size = inputSize.Small,
-		variant = if var5 then buttonVariant.Standard elseif not var4 then buttonVariant.Emphasis else buttonVariant.Standard,
-		isDisabled = not var5 and (var4 or p0.isSendDisabled == true),
+		variant = if var2 then buttonVariant.Standard elseif not var1 then buttonVariant.Emphasis else buttonVariant.Standard,
+		isDisabled = not var2 and (var1 or p1.isSendDisabled == true),
 		onActivated = function()
-			-- upvalues: var5 (ref), p0 (ref)
-			if var5 then
-				p0.onStop()
+			-- upvalues: var2 (ref), p1 (ref)
+			if var2 then
+				p1.onStop()
 				
 				return
 			end
-			p0.onSend()
+			p1.onSend()
 		end
 	})
 end

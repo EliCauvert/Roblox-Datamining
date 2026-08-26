@@ -18,14 +18,14 @@ local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 
-return function(p0)
+return function(p1)
 	-- upvalues: useRoactService (ref), appLinking (ref), reactModule (ref), useLocalization (ref), fullscreenPageWithSafeArea (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), dialog (ref), dialogSize (ref), view (ref), loading (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref), fillBehavior (ref)
-	local webLink = p0.webLink
-	local onCancel = p0.onCancel
-	local sessionId = p0.sessionId
-	local var3 = useRoactService(appLinking)
-	local var4, var5 = reactModule.useState(false)
-	local var6 = useLocalization({
+	local webLink = p1.webLink
+	local onCancel = p1.onCancel
+	local sessionId = p1.sessionId
+	local var1 = useRoactService(appLinking)
+	local var2, var3 = reactModule.useState(false)
+	local var4 = useLocalization({
 		title = "Feature.BiometricChallenge.Title.ConfirmHuman",
 		bodyText = "Feature.BiometricChallenge.Content.LivenessHostedPrompt",
 		loadingText = "Feature.BiometricChallenge.Content.Loading",
@@ -44,15 +44,15 @@ return function(p0)
 				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ModerationOverlay
 			}, {
 				Dialog = reactModule.createElement(dialog.Root, { hasBackdrop = true, size = dialogSize.Medium }, {
-					DialogTitle = not var4 and reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var6.title }),
+					DialogTitle = not var2 and reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var4.title }),
 					DialogContent = reactModule.createElement(dialog.Content, nil, {
 						DialogView = reactModule.createElement(view, { tag = "col fill auto-xy items-center gap-medium" }, {
-							Loading = var4 and reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy margin-top-medium" }, { reactModule.createElement(loading, {}) }),
-							DialogBody = var4 and reactModule.createElement(text, {
+							Loading = var2 and reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy margin-top-medium" }, { reactModule.createElement(loading, {}) }),
+							DialogBody = var2 and reactModule.createElement(text, {
 								LayoutOrder = 2,
 								tag = "text-wrap auto-y size-full-0 text-body-medium",
-								Text = var6.loadingText
-							}) or reactModule.createElement(dialog.Text, { LayoutOrder = 2, Text = var6.bodyText }),
+								Text = var4.loadingText
+							}) or reactModule.createElement(dialog.Text, { LayoutOrder = 2, Text = var4.bodyText }),
 							DialogFooter = reactModule.createElement(view, {
 								tag = "row size-full-0 auto-y gap-small",
 								LayoutOrder = 3
@@ -61,25 +61,25 @@ return function(p0)
 									LayoutOrder = 1,
 									variant = buttonVariant.Standard,
 									size = inputSize.Medium,
-									text = var6.cancelButton,
+									text = var4.cancelButton,
 									fillBehavior = fillBehavior.Fill,
 									onActivated = reactModule.useCallback(function()
 										-- upvalues: onCancel (ref)
 										onCancel()
 									end, { onCancel, sessionId })
 								}),
-								ContinueButton = not var4 and reactModule.createElement(button, {
+								ContinueButton = not var2 and reactModule.createElement(button, {
 									icon = "icons/navigation/externallink_medium",
 									LayoutOrder = 2,
 									variant = buttonVariant.Emphasis,
 									size = inputSize.Medium,
-									text = var6.continueButton,
+									text = var4.continueButton,
 									fillBehavior = fillBehavior.Fill,
 									onActivated = reactModule.useCallback(function()
-										-- upvalues: var5 (ref), var3 (ref), webLink (ref)
-										var5(true)
-										var3:openURL(webLink)
-									end, { var3, webLink, sessionId })
+										-- upvalues: var3 (ref), var1 (ref), webLink (ref)
+										var3(true)
+										var1:openURL(webLink)
+									end, { var1, webLink, sessionId })
 								})
 							})
 						})

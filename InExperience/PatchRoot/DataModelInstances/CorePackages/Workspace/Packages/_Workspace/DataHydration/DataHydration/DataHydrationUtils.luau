@@ -4,12 +4,12 @@ local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlag
 local var1 = if fFlagAddFriendsPageTrustedFriendRequestSection then require(parent.Cryo) else nil
 
 return {
-	areAllKeysPresent = function(p0, p1)
-		if p0 == nil or type(p0) ~= "table" then
-			return #p1 == 0
+	areAllKeysPresent = function(p1, p2)
+		if p1 == nil or type(p1) ~= "table" then
+			return #p2 == 0
 		end
-		for i, v in p1 do
-			if p0[v] == nil then
+		for i, v in p2 do
+			if p1[v] == nil then
 				return false
 			end
 		end
@@ -21,23 +21,23 @@ return {
 		
 		return if var2 == nil or var2 <= 0 then nil else var2
 	end,
-	mergeListsWithoutDuplicates = if fFlagAddFriendsPageTrustedFriendRequestSection then function(p2, p3, p4)
+	mergeListsWithoutDuplicates = if fFlagAddFriendsPageTrustedFriendRequestSection then function(p3, p4, p5)
 		-- upvalues: var1 (ref)
-		if p3 and #p3 ~= 0 then
-			if p2 and #p2 ~= 0 then
-				local var3 = var1.List.toSet(var1.List.map(p2, function(p5)
-					-- upvalues: p4 (ref)
-					return if p4 then p5[p4] else p5
+		if p4 and #p4 ~= 0 then
+			if p3 and #p3 ~= 0 then
+				local var2 = var1.List.toSet(var1.List.map(p3, function(p6)
+					-- upvalues: p5 (ref)
+					return if p5 then p6[p5] else p6
 				end))
 				
-				return var1.List.join(table.clone(p2), var1.List.filter(p3, function(p6)
-					-- upvalues: p4 (ref), var3 (ref)
-					return not var3[if p4 then p6[p4] else p6]
+				return var1.List.join(table.clone(p3), var1.List.filter(p4, function(p6)
+					-- upvalues: p5 (ref), var2 (ref)
+					return not var2[if p5 then p6[p5] else p6]
 				end))
 			end
-			return p3
+			return p4
 		else
-			return p2 or {}
+			return p3 or {}
 		end
 	end else nil
 }

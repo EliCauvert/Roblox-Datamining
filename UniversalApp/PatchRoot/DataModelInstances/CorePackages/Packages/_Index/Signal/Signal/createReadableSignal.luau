@@ -6,9 +6,9 @@ return function(value)
 	local var3 = value
 	
 	return {
-		subscribe = function(_, p0)
+		subscribe = function(_, p1)
 			-- upvalues: var1 (ref)
-			return var1:subscribe(p0)
+			return var1:subscribe(p1)
 		end,
 		getValue = function(_)
 			-- upvalues: var3 (write)

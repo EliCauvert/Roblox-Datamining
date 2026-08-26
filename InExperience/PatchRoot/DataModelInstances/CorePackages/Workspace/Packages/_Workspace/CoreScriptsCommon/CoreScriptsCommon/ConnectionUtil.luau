@@ -9,29 +9,29 @@ function t.new()
 	return tbl
 end
 
-function t:connect(p0, p1, p2)
-	if self.connections[p0] then
-		self.connections[p0]()
+function t:connect(p1, p2, p3)
+	if self.connections[p1] then
+		self.connections[p1]()
 	end
-	local var2 = p1:Connect(p2)
+	local var1 = p2:Connect(p3)
 	
-	self.connections[p0] = function()
-		-- upvalues: var2 (ref)
-		var2:Disconnect()
+	self.connections[p1] = function()
+		-- upvalues: var1 (ref)
+		var1:Disconnect()
 	end
 end
 
-function t:connectManual(p3, p4)
-	if self.connections[p3] then
-		self.connections[p3]()
+function t:connectManual(p1, p2)
+	if self.connections[p1] then
+		self.connections[p1]()
 	end
-	self.connections[p3] = p4
+	self.connections[p1] = p2
 end
 
-function t:disconnect(p5)
-	if self.connections[p5] then
-		self.connections[p5]()
-		self.connections[p5] = nil
+function t:disconnect(p1)
+	if self.connections[p1] then
+		self.connections[p1]()
+		self.connections[p1] = nil
 	end
 end
 

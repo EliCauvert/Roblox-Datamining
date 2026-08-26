@@ -57,11 +57,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}),
 		BottomBorder = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
-			backgroundStyle = innerScrollY:map(function(p1)
+			backgroundStyle = innerScrollY:map(function(p3)
 				-- upvalues: var1 (ref)
 				return {
 					Color3 = var1.Color.Stroke.Default.Color3,
-					Transparency = math.lerp(1, var1.Color.Stroke.Default.Transparency, math.clamp(p1 / var1.Size.Size_1200, 0, 1))
+					Transparency = math.lerp(1, var1.Color.Stroke.Default.Transparency, math.clamp(p3 / var1.Size.Size_1200, 0, 1))
 				}
 			end),
 			testId = `{testId}--header--bottom-border`,

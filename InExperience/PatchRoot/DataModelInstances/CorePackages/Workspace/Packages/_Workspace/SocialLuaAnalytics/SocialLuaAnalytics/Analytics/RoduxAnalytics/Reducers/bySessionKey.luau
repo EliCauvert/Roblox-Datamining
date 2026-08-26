@@ -9,9 +9,9 @@ local t = {}
 return function(_)
 	-- upvalues: rodux (ref), t (ref), sessionIdUpdatedModule (ref), dash (ref)
 	return rodux.createReducer(t, {
-		[sessionIdUpdatedModule.name] = function(p0, p1)
+		[sessionIdUpdatedModule.name] = function(p1, p2)
 			-- upvalues: dash (copy), t (copy)
-			return dash.join(p0 or t, { [p1.payload.sessionKey] = p1.payload.sessionId })
+			return dash.join(p1 or t, { [p2.payload.sessionKey] = p2.payload.sessionId })
 		end
 	})
 end

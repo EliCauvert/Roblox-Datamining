@@ -30,77 +30,77 @@ local t = {
 	safeAreaSize = Vector2.new(96, 144)
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fixDeviceSafePaddingAccess (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
-	local var14 = t
+	local var1 = t
 	
-	if p0.tokens then
-		var14 = cryoModule.Dictionary.join(var14, p0.tokens)
+	if p1.tokens then
+		var1 = cryoModule.Dictionary.join(var1, p1.tokens)
 	end
-	local var15, var16 = reactModule.useState(true)
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: getPlatformConfigModule (copy), p0 (ref)
-		return getPlatformConfigModule(p0.deviceType)
-	end, { p0.deviceType })
-	local var18 = reactModule.useRef(nil)
-	local var19, var20 = reactModule.useState(Vector2.new(0, 0))
-	local var21 = reactModule.useCallback(function(p1)
-		-- upvalues: var20 (ref)
-		var20(p1.AbsoluteSize)
+	local var2, var3 = reactModule.useState(true)
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: getPlatformConfigModule (copy), p1 (ref)
+		return getPlatformConfigModule(p1.deviceType)
+	end, { p1.deviceType })
+	local var5 = reactModule.useRef(nil)
+	local var6, var7 = reactModule.useState(Vector2.new(0, 0))
+	local var8 = reactModule.useCallback(function(p2)
+		-- upvalues: var7 (ref)
+		var7(p2.AbsoluteSize)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), var20 (ref)
-		if var18.current then
-			var20(var18.current.AbsoluteSize)
+		-- upvalues: var5 (ref), var7 (ref)
+		if var5.current then
+			var7(var5.current.AbsoluteSize)
 		end
 	end, {})
-	local var22 = if p0.thumbnailHeight then p0.thumbnailHeight else var17.thumbnailHeight
-	local var23 = if p0.headerBarBackgroundHeight ~= nil then var17.headerBarBackgroundHeight else p0.headerBarBackgroundHeight
-	local var24 = if p0.sideMargin then p0.sideMargin else var17.sideMargin
-	local var25 = reactModule.useMemo(function()
+	local var9 = if p1.thumbnailHeight then p1.thumbnailHeight else var4.thumbnailHeight
+	local var10 = if p1.headerBarBackgroundHeight ~= nil then var4.headerBarBackgroundHeight else p1.headerBarBackgroundHeight
+	local var11 = if p1.sideMargin then p1.sideMargin else var4.sideMargin
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: signal (copy)
 		return signal.new()
 	end, {})
-	local renderFullscreenContent = p0.renderFullscreenContent
-	local var26, var27 = useAnimateFullscreenModule(if p0.isFullscreen == nil then false else p0.isFullscreen, renderFullscreenContent, var14.animationConfig)
-	local var28 = useDetailsPageRenderItemsModule(p0.componentList, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), detailsPageHeaderModule (copy), p0 (ref), var22 (ref), var25 (ref), var24 (ref), var23 (ref), var14 (write)
+	local renderFullscreenContent = p1.renderFullscreenContent
+	local var13, var14 = useAnimateFullscreenModule(if p1.isFullscreen == nil then false else p1.isFullscreen, renderFullscreenContent, var1.animationConfig)
+	local var15 = useDetailsPageRenderItemsModule(p1.componentList, reactModule.useMemo(function()
+		-- upvalues: reactModule (copy), detailsPageHeaderModule (copy), p1 (ref), var9 (ref), var12 (ref), var11 (ref), var10 (ref), var1 (write)
 		return reactModule.createElement(detailsPageHeaderModule, {
-			thumbnailImageUrl = p0.thumbnailImageUrl,
-			thumbnailAspectRatio = p0.thumbnailAspectRatio,
-			thumbnailHeight = var22,
-			titleText = p0.titleText,
-			subTitleText = p0.subTitleText,
-			actionBarLabelText = p0.actionBarLabelText,
-			renderActionBarLabelImpressionsDetector = p0.renderActionBarLabelImpressionsDetector,
-			scrollViewPositionChangedSignal = var25,
-			renderInfoContent = p0.renderInfoContent,
-			actionBarProps = p0.actionBarProps,
-			sideMargin = var24,
-			headerBarBackgroundHeight = var23,
-			deviceType = p0.deviceType,
-			thumbnailShadowHeight = var14.thumbnailShadowHeight,
-			gradientHeight = var14.headerGradientHeight,
-			actionBarHeight = var14.actionBarHeight,
-			actionBarWidth = p0.actionBarWidth or var14.actionBarWidth,
-			itemPadding = var14.thumbnailMargin,
-			bottomMargin = var14.headerBottomMargin
+			thumbnailImageUrl = p1.thumbnailImageUrl,
+			thumbnailAspectRatio = p1.thumbnailAspectRatio,
+			thumbnailHeight = var9,
+			titleText = p1.titleText,
+			subTitleText = p1.subTitleText,
+			actionBarLabelText = p1.actionBarLabelText,
+			renderActionBarLabelImpressionsDetector = p1.renderActionBarLabelImpressionsDetector,
+			scrollViewPositionChangedSignal = var12,
+			renderInfoContent = p1.renderInfoContent,
+			actionBarProps = p1.actionBarProps,
+			sideMargin = var11,
+			headerBarBackgroundHeight = var10,
+			deviceType = p1.deviceType,
+			thumbnailShadowHeight = var1.thumbnailShadowHeight,
+			gradientHeight = var1.headerGradientHeight,
+			actionBarHeight = var1.actionBarHeight,
+			actionBarWidth = p1.actionBarWidth or var1.actionBarWidth,
+			itemPadding = var1.thumbnailMargin,
+			bottomMargin = var1.headerBottomMargin
 		})
 	end, {
-		p0.thumbnailImageUrl, p0.thumbnailAspectRatio, var22, p0.titleText,
-		p0.subTitleText, p0.actionBarLabelText, p0.renderInfoContent,
-		p0.actionBarProps, var24, var23, p0.deviceType, var14.thumbnailShadowHeight,
-		var14.headerGradientHeight, var14.thumbnailMargin, var14.headerBottomMargin,
-		var14.actionBarHeight, var14.actionBarWidth, p0.actionBarWidth,
-		p0.renderActionBarLabelImpressionsDetector, var25
-	}), var19, var14.safeAreaSize)
-	local var29 = if not fixDeviceSafePaddingAccess then if fFlagEnableLeftNavOnConsole or fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil elseif fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
+		p1.thumbnailImageUrl, p1.thumbnailAspectRatio, var9, p1.titleText,
+		p1.subTitleText, p1.actionBarLabelText, p1.renderInfoContent,
+		p1.actionBarProps, var11, var10, p1.deviceType, var1.thumbnailShadowHeight,
+		var1.headerGradientHeight, var1.thumbnailMargin, var1.headerBottomMargin,
+		var1.actionBarHeight, var1.actionBarWidth, p1.actionBarWidth,
+		p1.renderActionBarLabelImpressionsDetector, var12
+	}), var6, var1.safeAreaSize)
+	local var16 = if not fixDeviceSafePaddingAccess then if fFlagEnableLeftNavOnConsole or fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil elseif fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
 	
 	return reactModule.createElement(if fFlagEnableLeftNavOnConsole then fullscreenFrameModule else "Frame", {
-		[reactModule.Change.AbsoluteSize] = var21,
+		[reactModule.Change.AbsoluteSize] = var8,
 		Size = if fFlagEnableLeftNavOnConsole then nil else UDim2.fromScale(1, 1),
 		BackgroundTransparency = 1,
-		ref = var18
+		ref = var5
 	}, {
 		BackgroundImage = reactModule.createElement("Frame", {
 			ZIndex = 1,
@@ -111,65 +111,65 @@ return function(p0)
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.new(1, 0, 1, 0),
-				Image = p0.bannerImageUrl,
+				Image = p1.bannerImageUrl,
 				ScaleType = Enum.ScaleType.Crop
 			}),
-			BackgroundContent = if fFlagLuaAppEdpConsoleMediaGalleryVideo then if p0.backgroundContentOverride then p0.backgroundContentOverride else reactModule.createElement(loadableImage, {
+			BackgroundContent = if fFlagLuaAppEdpConsoleMediaGalleryVideo then if p1.backgroundContentOverride then p1.backgroundContentOverride else reactModule.createElement(loadableImage, {
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.new(1, 0, 1, 0),
-				Image = p0.bannerImageUrl,
+				Image = p1.bannerImageUrl,
 				ScaleType = Enum.ScaleType.Crop
 			}) else nil
 		}),
 		Overlay = reactModule.createElement(overlay, {
 			ZIndex = 2,
 			gradientDirection = "topRight",
-			showGradient = var15
+			showGradient = var2
 		}),
 		Content = reactModule.createElement(animatedFlatList, {
 			animated = true,
 			UNSTABLE_forceSiblingLayoutUpdate = true,
 			onSelectedIndexChanged = reactModule.useCallback(function(p2)
-				-- upvalues: var25 (ref), var28 (ref), var16 (ref)
-				var25:fire()
+				-- upvalues: var12 (ref), var15 (ref), var3 (ref)
+				var12:fire()
 				
-				if var28[p2].showCornerGradient == false then
-					var16(false)
+				if var15[p2].showCornerGradient == false then
+					var3(false)
 					
 					return
 				end
-				var16(true)
-			end, { var28, var25 }),
-			initialNumToRender = #var28,
-			data = var28,
-			renderItem = reactModule.useCallback(function(p3)
-				-- upvalues: reactModule (copy), detailsPageRenderItemModule (copy), var14 (write)
+				var3(true)
+			end, { var15, var12 }),
+			initialNumToRender = #var15,
+			data = var15,
+			renderItem = reactModule.useCallback(function(p2)
+				-- upvalues: reactModule (copy), detailsPageRenderItemModule (copy), var1 (write)
 				return reactModule.createElement(detailsPageRenderItemModule, {
-					item = p3.item,
-					itemPadding = var14.itemPadding,
-					safeArea = var14.safeAreaSize
+					item = p2.item,
+					itemPadding = var1.itemPadding,
+					safeArea = var1.safeAreaSize
 				})
-			end, { var14.itemPadding, var14.safeAreaSize }),
+			end, { var1.itemPadding, var1.safeAreaSize }),
 			ItemSeparatorComponent = reactModule.useCallback(function()
-				-- upvalues: reactModule (copy), var14 (write)
+				-- upvalues: reactModule (copy), var1 (write)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					Size = UDim2.new(1, 0, 0, var14.itemPadding)
+					Size = UDim2.new(1, 0, 0, var1.itemPadding)
 				})
-			end, { var14.itemPadding }),
+			end, { var1.itemPadding }),
 			ListFooterComponent = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, var14.trailingWhitespace)
+				Size = UDim2.new(1, 0, 0, var1.trailingWhitespace)
 			}),
 			ListHeaderComponent = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, var14.safeAreaSize.Y)
+				Size = UDim2.new(1, 0, 0, var1.safeAreaSize.Y)
 			}),
-			viewOffset = var14.safeAreaSize.Y,
+			viewOffset = var1.safeAreaSize.Y,
 			contentContainerStyle = { BackgroundTransparency = 1 },
 			style = {
 				BackgroundTransparency = 1,
@@ -177,11 +177,11 @@ return function(p0)
 				ScrollingEnabled = true,
 				Selectable = false,
 				ZIndex = 3,
-				Position = if fFlagEnableLeftNavOnConsole then UDim2.fromOffset(0, -var29.top) else nil,
-				Size = if fFlagExtendScrollingFramesBySafeInsets or fFlagEnableLeftNavOnConsole then UDim2.new(1, 0, 1, var29.top + var29.bottom) else nil,
+				Position = if fFlagEnableLeftNavOnConsole then UDim2.fromOffset(0, -var16.top) else nil,
+				Size = if fFlagExtendScrollingFramesBySafeInsets or fFlagEnableLeftNavOnConsole then UDim2.new(1, 0, 1, var16.top + var16.bottom) else nil,
 				VerticalScrollBarInset = Enum.ScrollBarInset.None
 			},
-			animationConfig = var14.animationConfig,
+			animationConfig = var1.animationConfig,
 			overrideAutomaticCanvasSize = if fFlagEnableLeftNavOnConsole then false else true,
 			isSequentiallySelectable = if fixConsoleEDPDirectionalNavigation then true else nil
 		}),
@@ -189,9 +189,9 @@ return function(p0)
 			BorderSizePixel = 0,
 			ZIndex = 4,
 			Size = UDim2.fromScale(1, 1),
-			GroupTransparency = var27
+			GroupTransparency = var14
 		}, {
-			FullscreenContent = if var26 then renderFullscreenContent() else nil
+			FullscreenContent = if var13 then renderFullscreenContent() else nil
 		})
 	})
 end

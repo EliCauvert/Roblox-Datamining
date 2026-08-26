@@ -33,11 +33,11 @@ function t.resetCurrentFiber()
 	end
 end
 
-function t.setCurrentFiber(p0)
+function t.setCurrentFiber(p1)
 	-- upvalues: dEV (ref), reactDebugCurrentFrame (ref), getCurrentFiberStackInDev (ref), t (ref)
 	if dEV then
 		reactDebugCurrentFrame.getCurrentStack = getCurrentFiberStackInDev
-		t.current = p0
+		t.current = p1
 		t.isRendering = false
 	end
 end

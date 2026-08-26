@@ -10,55 +10,55 @@ local t = {
 	[tostring(Enum.AssetType.DressSkirtAccessory.Value)] = "LCBottoms"
 }
 
-function getTryOnItemComparisonData(p0)
+function getTryOnItemComparisonData(p1)
 	-- upvalues: t (ref), itemTypeEnumModule (ref)
 	local t_1 = {}
 	local t_2 = {}
-	local var5 = false
-	local var6 = false
+	local var1 = false
+	local var2 = false
 	
 	local function _(value)
 		-- upvalues: t_1 (ref), t (copy), t_2 (ref)
 		t_1[value] = true
-		local var9 = t[value]
+		local var3 = t[value]
 		
-		if var9 then
-			t_2[var9] = true
+		if var3 then
+			t_2[var3] = true
 		end
 	end
 	
-	if p0.itemType == itemTypeEnumModule.Asset then
-		local itemSubType = p0.itemSubType
+	if p1.itemType == itemTypeEnumModule.Asset then
+		local itemSubType = p1.itemSubType
 		t_1[itemSubType] = true
-		local var7 = t[itemSubType]
+		local var3 = t[itemSubType]
 		
-		if var7 then
-			t_2[var7] = true
+		if var3 then
+			t_2[var3] = true
 		end
-		if p0.itemSubType == tostring(Enum.AssetType.Head.Value) or p0.itemSubType == tostring(Enum.AssetType.Face.Value) then
-			var5 = true
+		if p1.itemSubType == tostring(Enum.AssetType.Head.Value) or p1.itemSubType == tostring(Enum.AssetType.Face.Value) then
+			var1 = true
 		end
-	elseif p0.itemType == itemTypeEnumModule.Bundle and p0.bundleInfo then
-		if p0.itemSubType == tostring(Enum.BundleType.DynamicHead.Value) then
-			var6 = true
+	elseif p1.itemType == itemTypeEnumModule.Bundle and p1.bundleInfo then
+		if p1.itemSubType == tostring(Enum.BundleType.DynamicHead.Value) then
+			var2 = true
 		end
-		for i, v in p0.bundleInfo do
+		for i, v in p1.bundleInfo do
 			local assetType = v.assetType
 			t_1[assetType] = true
-			local var8 = t[assetType]
+			local var4 = t[assetType]
 			
-			if var8 then
-				t_2[var8] = true
+			if var4 then
+				t_2[var4] = true
 			end
 		end
 	end
 	return {
 		assetTypes = t_1,
 		layeredClothingCategories = t_2,
-		isClassicHeadOrFace = var5,
-		isDynamicHead = var6,
-		itemType = p0.itemType,
-		itemSubType = p0.itemSubType
+		isClassicHeadOrFace = var1,
+		isDynamicHead = var2,
+		itemType = p1.itemType,
+		itemSubType = p1.itemSubType
 	}
 end
 

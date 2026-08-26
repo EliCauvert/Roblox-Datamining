@@ -16,7 +16,7 @@ local t = {
 	MilkyWay = "MilkyWay",
 	Pioneer = "Pioneer"
 }
-local var3 = enumerate(script.Name, t)
-addRawValueMethodToEnumModule(var3, t)
+local var1 = enumerate(script.Name, t)
+addRawValueMethodToEnumModule(var1, t)
 
-return var3
+return var1

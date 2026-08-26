@@ -4,17 +4,17 @@ local roduxModule = require(parent.Rodux)
 local _ = require(parent.SocialCommon)
 local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local var4 = false
+local var1 = false
 
-return roduxModule.makeActionCreator(script.Name, function(p0)
-	-- upvalues: fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), var4 (write)
+return roduxModule.makeActionCreator(script.Name, function(p1)
+	-- upvalues: fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), var1 (write)
 	if fFlagAppChatPerfTrackingModule then
-		if p0 == nil then
+		if p1 == nil then
 			appChatPerfTrackerModule.cancel(appChatPerfTrackerModule.Events.ChatLandingTTI, {})
 		else
-			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatLandingTTI, { entryPoint = p0, coldStart = not var4 })
-			var4 = true
+			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatLandingTTI, { entryPoint = p1, coldStart = not var1 })
+			var1 = true
 		end
 	end
-	return { entryPoint = p0 }
+	return { entryPoint = p1 }
 end)

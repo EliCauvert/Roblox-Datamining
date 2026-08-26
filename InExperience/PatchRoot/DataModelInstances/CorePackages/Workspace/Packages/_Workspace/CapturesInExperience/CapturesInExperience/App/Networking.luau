@@ -7,15 +7,15 @@ local shareLinksNetworkingModule = require(parent_1.ShareLinksNetworking)
 local shareLinksRoduxModule = require(parent_1.ShareLinksRodux)
 local fFlagCreateMomentsToastModule = require(parent.Flags.FFlagCreateMomentsToast)
 local httpRequest = luaSocialLibrariesDepsModule.httpRequest
-local var6 = lumberyakModule.Logger.new(nil, require(parent.Constants).LoggerKey)
-local var7 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
+local var1 = lumberyakModule.Logger.new(nil, require(parent.Constants).LoggerKey)
+local var2 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = "NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2)
-			-- upvalues: var6 (ref), httpRequest (ref)
-			var6:debug(`Request: [ requestMethod = {p1}, url = {p0} ]`)
+		requestFunction = function(p1, p2, p3)
+			-- upvalues: var1 (ref), httpRequest (ref)
+			var1:debug(`Request: [ requestMethod = {p2}, url = {p1} ]`)
 			
-			return httpRequest.requestFunctions.HttpRbxApi(p0, p1, p2)
+			return httpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
 		maxRetryCount = game:DefineFastInt("CapturesMaxHttpRequestRetries", 2),
 		maxWaitTime = game:DefineFastInt("CapturesMaxHttpRequestWaitTime", 8)
@@ -23,8 +23,8 @@ local var7 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
 })
 
 return {
-	RoduxNetworking = var7,
-	ContentSharingNetworking = if fFlagCreateMomentsToastModule then contentSharingNetworkingModule.config({ roduxNetworking = var7 }) else nil,
-	ShareLinksNetworking = shareLinksNetworkingModule.config({ roduxNetworking = var7 }),
+	RoduxNetworking = var2,
+	ContentSharingNetworking = if fFlagCreateMomentsToastModule then contentSharingNetworkingModule.config({ roduxNetworking = var2 }) else nil,
+	ShareLinksNetworking = shareLinksNetworkingModule.config({ roduxNetworking = var2 }),
 	ShareLinksRodux = shareLinksRoduxModule.config({ keyPath = "ShareLinks" })
 }

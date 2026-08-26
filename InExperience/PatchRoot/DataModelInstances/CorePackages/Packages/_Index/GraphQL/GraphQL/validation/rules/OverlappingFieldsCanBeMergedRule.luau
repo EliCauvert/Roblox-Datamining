@@ -32,137 +32,137 @@ local doTypesConflict = nil
 local subfieldConflicts = nil
 local t_1 = nil
 
-local function reasonMessage(p0)
+local function reasonMessage(p1)
 	-- upvalues: array (ref), reasonMessage (ref)
-	return if array.isArray(p0) then table.concat(array.map(p0, function(p1)
+	return if array.isArray(p1) then table.concat(array.map(p1, function(p2)
 		-- upvalues: reasonMessage (copy)
-		return ("subfields \"%s\" conflict because "):format(p1[1]) .. reasonMessage(p1[2])
-	end), " and ") else p0
+		return ("subfields \"%s\" conflict because "):format(p2[1]) .. reasonMessage(p2[2])
+	end), " and ") else p1
 end
 
-function t.OverlappingFieldsCanBeMergedRule(p2)
+function t.OverlappingFieldsCanBeMergedRule(p1)
 	-- upvalues: t_1 (write), findConflictsWithinSelectionSet (write), array (ref), reasonMessage (ref), graphQLError (ref)
-	local var21 = t_1.new()
+	local var1 = t_1.new()
 	local t = {}
 	
 	return {
-		SelectionSet = function(_, p3)
-			-- upvalues: findConflictsWithinSelectionSet (copy), p2 (ref), t (ref), var21 (ref), array (copy), reasonMessage (copy), graphQLError (copy)
-			for i, v in ipairs(findConflictsWithinSelectionSet(p2, t, var21, p2:getParentType(), p3)) do
-				local var23 = v[1]
-				local var24 = var23[2]
-				p2:reportError(graphQLError.new(("Fields \"%s\" conflict because %s. Use different aliases on the fields to fetch both if this was intentional."):format(var23[1], if array.isArray(var24) then table.concat(array.map(var24, function(p4)
+		SelectionSet = function(_, p2)
+			-- upvalues: findConflictsWithinSelectionSet (copy), p1 (ref), t (ref), var1 (ref), array (copy), reasonMessage (copy), graphQLError (copy)
+			for i, v in ipairs(findConflictsWithinSelectionSet(p1, t, var1, p1:getParentType(), p2)) do
+				local var2 = v[1]
+				local var3 = var2[2]
+				p1:reportError(graphQLError.new(("Fields \"%s\" conflict because %s. Use different aliases on the fields to fetch both if this was intentional."):format(var2[1], if array.isArray(var3) then table.concat(array.map(var3, function(p3)
 					-- upvalues: reasonMessage (copy)
-					return ("subfields \"%s\" conflict because "):format(p4[1]) .. reasonMessage(p4[2])
-				end), " and ") else var24), array.concat(v[2], v[3])))
+					return ("subfields \"%s\" conflict because "):format(p3[1]) .. reasonMessage(p3[2])
+				end), " and ") else var3), array.concat(v[2], v[3])))
 			end
 		end
 	}
 end
 
-findConflictsWithinSelectionSet = function(value, p5, p6, p7, p8)
+findConflictsWithinSelectionSet = function(value, p2, p3, p4, p5)
 	-- upvalues: getFieldsAndFragmentNames (write), collectConflictsWithin (write), collectConflictsBetweenFieldsAndFragment (write), collectConflictsBetweenFragments (write)
 	local t = {}
-	local var26 = getFieldsAndFragmentNames(value, p5, p7, p8)
-	local var27 = var26[1]
-	local var28 = var26[2]
-	collectConflictsWithin(value, t, p5, p6, var27)
+	local var2 = getFieldsAndFragmentNames(value, p2, p4, p5)
+	local var3 = var2[1]
+	local var4 = var2[2]
+	collectConflictsWithin(value, t, p2, p3, var3)
 	
-	if #var28 ~= 0 then
-		for i_1 = 1, #var28 do
-			collectConflictsBetweenFieldsAndFragment(value, t, p5, p6, false, var27, var28[i_1])
+	if #var4 ~= 0 then
+		for i_1 = 1, #var4 do
+			collectConflictsBetweenFieldsAndFragment(value, t, p2, p3, false, var3, var4[i_1])
 			
-			for i = i_1 + 1, #var28 do
-				collectConflictsBetweenFragments(value, t, p5, p6, false, var28[i_1], var28[i])
+			for i = i_1 + 1, #var4 do
+				collectConflictsBetweenFragments(value, t, p2, p3, false, var4[i_1], var4[i])
 			end
 		end
 	end
 	return t
 end
 
-collectConflictsBetweenFieldsAndFragment = function(p9, p10, p11, p12, p13, p14, p15)
+collectConflictsBetweenFieldsAndFragment = function(p6, p7, p8, p9, p10, p11, p12)
 	-- upvalues: getReferencedFieldsAndFragmentNames (write), collectConflictsBetween (write), collectConflictsBetweenFieldsAndFragment (write)
-	local var29 = p9:getFragment(p15)
+	local var5 = p6:getFragment(p12)
 	
-	if not var29 then return end
-	local var30 = getReferencedFieldsAndFragmentNames(p9, p11, var29)
-	local var31 = var30[1]
-	local var32 = var30[2]
+	if not var5 then return end
+	local var6 = getReferencedFieldsAndFragmentNames(p6, p8, var5)
+	local var7 = var6[1]
+	local var8 = var6[2]
 	
-	if p14 == var31 then return end
-	collectConflictsBetween(p9, p10, p11, p12, p13, p14, var31)
+	if p11 == var7 then return end
+	collectConflictsBetween(p6, p7, p8, p9, p10, p11, var7)
 	
-	for i = 1, #var32 do
-		collectConflictsBetweenFieldsAndFragment(p9, p10, p11, p12, p13, p14, var32[i])
+	for i = 1, #var8 do
+		collectConflictsBetweenFieldsAndFragment(p6, p7, p8, p9, p10, p11, var8[i])
 	end
 end
 
-collectConflictsBetweenFragments = function(p16, p17, p18, p19, p20, p21, p22)
+collectConflictsBetweenFragments = function(p13, p14, p15, p16, p17, p18, p19)
 	-- upvalues: getReferencedFieldsAndFragmentNames (write), collectConflictsBetween (write), collectConflictsBetweenFragments (write)
-	if p21 == p22 then return end
-	if p19:has(p21, p22, p20) then return end
-	p19:add(p21, p22, p20)
-	local var33 = p16:getFragment(p21)
-	local var34 = p16:getFragment(p22)
+	if p18 == p19 then return end
+	if p16:has(p18, p19, p17) then return end
+	p16:add(p18, p19, p17)
+	local var9 = p13:getFragment(p18)
+	local var10 = p13:getFragment(p19)
 	
-	if not var33 or not var34 then return end
-	local var35 = getReferencedFieldsAndFragmentNames(p16, p18, var33)
-	local var36 = var35[1]
-	local var37 = var35[2]
-	local var38 = getReferencedFieldsAndFragmentNames(p16, p18, var34)
-	local var39 = var38[2]
-	collectConflictsBetween(p16, p17, p18, p19, p20, var36, var38[1])
+	if not var9 or not var10 then return end
+	local var11 = getReferencedFieldsAndFragmentNames(p13, p15, var9)
+	local var12 = var11[1]
+	local var13 = var11[2]
+	local var14 = getReferencedFieldsAndFragmentNames(p13, p15, var10)
+	local var15 = var14[2]
+	collectConflictsBetween(p13, p14, p15, p16, p17, var12, var14[1])
 	
-	for i = 1, #var39 do
-		collectConflictsBetweenFragments(p16, p17, p18, p19, p20, p21, var39[i])
+	for i = 1, #var15 do
+		collectConflictsBetweenFragments(p13, p14, p15, p16, p17, p18, var15[i])
 	end
-	for i_1 = 1, #var37 do
-		collectConflictsBetweenFragments(p16, p17, p18, p19, p20, var37[i_1], p22)
+	for i_1 = 1, #var13 do
+		collectConflictsBetweenFragments(p13, p14, p15, p16, p17, var13[i_1], p19)
 	end
 end
 
-local function findConflictsBetweenSubSelectionSets(value, p23, p24, p25, p26, p27, p28, p29)
+local function findConflictsBetweenSubSelectionSets(value, p20, p21, p22, p23, p24, p25, p26)
 	-- upvalues: getFieldsAndFragmentNames (write), collectConflictsBetween (write), collectConflictsBetweenFieldsAndFragment (write), collectConflictsBetweenFragments (write)
 	local t = {}
-	local var41 = getFieldsAndFragmentNames(value, p23, p26, p27)
-	local var42 = var41[1]
-	local var43 = var41[2]
-	local var44 = getFieldsAndFragmentNames(value, p23, p28, p29)
-	local var45 = var44[1]
-	local var46 = var44[2]
-	collectConflictsBetween(value, t, p23, p24, p25, var42, var45)
+	local var16 = getFieldsAndFragmentNames(value, p20, p23, p24)
+	local var17 = var16[1]
+	local var18 = var16[2]
+	local var19 = getFieldsAndFragmentNames(value, p20, p25, p26)
+	local var20 = var19[1]
+	local var21 = var19[2]
+	collectConflictsBetween(value, t, p20, p21, p22, var17, var20)
 	
-	if #var46 ~= 0 then
-		for i = 1, #var46 do
-			collectConflictsBetweenFieldsAndFragment(value, t, p23, p24, p25, var42, var46[i])
+	if #var21 ~= 0 then
+		for i = 1, #var21 do
+			collectConflictsBetweenFieldsAndFragment(value, t, p20, p21, p22, var17, var21[i])
 		end
 	end
-	if #var43 ~= 0 then
-		for i_1 = 1, #var43 do
-			collectConflictsBetweenFieldsAndFragment(value, t, p23, p24, p25, var45, var43[i_1])
+	if #var18 ~= 0 then
+		for i_1 = 1, #var18 do
+			collectConflictsBetweenFieldsAndFragment(value, t, p20, p21, p22, var20, var18[i_1])
 		end
 	end
-	for i_3 = 1, #var43 do
-		for i_2 = 1, #var46 do
-			collectConflictsBetweenFragments(value, t, p23, p24, p25, var43[i_3], var46[i_2])
+	for i_3 = 1, #var18 do
+		for i_2 = 1, #var21 do
+			collectConflictsBetweenFragments(value, t, p20, p21, p22, var18[i_3], var21[i_2])
 		end
 	end
 	return t
 end
 
-collectConflictsWithin = function(p30, p31, p32, p33, p34)
+collectConflictsWithin = function(p27, p28, p29, p30, p31)
 	-- upvalues: findConflict (write)
-	for i, v in p34 do
-		local var47 = v[1]
-		local var48 = v[2]
+	for i, v in p31 do
+		local var22 = v[1]
+		local var23 = v[2]
 		
-		if #var48 > 1 then
-			for i_2 = 1, #var48 do
-				for i_1 = i_2 + 1, #var48 do
-					local var49 = findConflict(p30, p32, p33, false, var47, var48[i_2], var48[i_1])
+		if #var23 > 1 then
+			for i_2 = 1, #var23 do
+				for i_1 = i_2 + 1, #var23 do
+					local var24 = findConflict(p27, p29, p30, false, var22, var23[i_2], var23[i_1])
 					
-					if var49 then
-						table.insert(p31, var49)
+					if var24 then
+						table.insert(p28, var24)
 					end
 				end
 			end
@@ -170,20 +170,20 @@ collectConflictsWithin = function(p30, p31, p32, p33, p34)
 	end
 end
 
-collectConflictsBetween = function(p35, p36, p37, p38, p39, p40, p41)
+collectConflictsBetween = function(p32, p33, p34, p35, p36, p37, p38)
 	-- upvalues: findConflict (write)
-	for i, v in ipairs(p40:keys()) do
-		local var50 = p41[v]
+	for i, v in ipairs(p37:keys()) do
+		local var25 = p38[v]
 		
-		if var50 then
-			local var51 = p40[v]
+		if var25 then
+			local var26 = p37[v]
 			
-			for i_2 = 1, #var51 do
-				for i_1 = 1, #var50 do
-					local var52 = findConflict(p35, p37, p38, p39, v, var51[i_2], var50[i_1])
+			for i_2 = 1, #var26 do
+				for i_1 = 1, #var25 do
+					local var27 = findConflict(p32, p34, p35, p36, v, var26[i_2], var25[i_1])
 					
-					if var52 then
-						table.insert(p36, var52)
+					if var27 then
+						table.insert(p33, var27)
 					end
 				end
 			end
@@ -191,75 +191,75 @@ collectConflictsBetween = function(p35, p36, p37, p38, p39, p40, p41)
 	end
 end
 
-findConflict = function(p42, p43, p44, p45, p46, p47, p48)
+findConflict = function(p39, p40, p41, p42, p43, p44, p45)
 	-- upvalues: isObjectType (ref), sameArguments (write), doTypesConflict (write), inspect (ref), findConflictsBetweenSubSelectionSets (ref), getNamedType (ref), subfieldConflicts (write)
-	local var53 = p47[1]
-	local var54 = p47[2]
-	local var55 = p47[3]
-	local var56 = p48[1]
-	local var57 = p48[2]
-	local var58 = p48[3]
-	local var59 = p45 or (var53 ~= var56 and (isObjectType(var53) and isObjectType(var56)))
+	local var28 = p44[1]
+	local var29 = p44[2]
+	local var30 = p44[3]
+	local var31 = p45[1]
+	local var32 = p45[2]
+	local var33 = p45[3]
+	local var34 = p42 or (var28 ~= var31 and (isObjectType(var28) and isObjectType(var31)))
 	
-	if not var59 then
-		local value = var54.name.value
-		local value_1 = var57.name.value
+	if not var34 then
+		local value = var29.name.value
+		local value_1 = var32.name.value
 		
 		if value ~= value_1 then
 			return {
 				{
-					p46,
+					p43,
 					("\"%s\" and \"%s\" are different fields"):format(value, value_1)
 				},
-				{ var54 },
-				{ var57 }
+				{ var29 },
+				{ var32 }
 			}
-		elseif not sameArguments(var54.arguments or {}, var57.arguments or {}) then
+		elseif not sameArguments(var29.arguments or {}, var32.arguments or {}) then
 			return {
-				{ p46, "they have differing arguments" },
-				{ var54 },
-				{ var57 }
+				{ p43, "they have differing arguments" },
+				{ var29 },
+				{ var32 }
 			}
 		end
 	end
-	local type = var55 and var55.type
-	local type_1 = var58 and var58.type
+	local type = var30 and var30.type
+	local type_1 = var33 and var33.type
 	
 	if type and type_1 and doTypesConflict(type, type_1) then
 		return {
 			{
-				p46,
+				p43,
 				("they return conflicting types \"%s\" and \"%s\""):format(inspect(type), inspect(type_1))
 			},
-			{ var54 },
-			{ var57 }
+			{ var29 },
+			{ var32 }
 		}
 	end
-	local selectionSet = var54.selectionSet
-	local selectionSet_1 = var57.selectionSet
+	local selectionSet = var29.selectionSet
+	local selectionSet_1 = var32.selectionSet
 	
-	return if selectionSet and selectionSet_1 then subfieldConflicts(findConflictsBetweenSubSelectionSets(p42, p43, p44, var59, getNamedType(type), selectionSet, getNamedType(type_1), selectionSet_1), p46, var54, var57) else nil
+	return if selectionSet and selectionSet_1 then subfieldConflicts(findConflictsBetweenSubSelectionSets(p39, p40, p41, var34, getNamedType(type), selectionSet, getNamedType(type_1), selectionSet_1), p43, var29, var32) else nil
 end
 
 local sameValue = nil
 local _collectFieldsAndFragmentNames = nil
 
-sameArguments = function(p49, p50)
+sameArguments = function(p39, p40)
 	-- upvalues: array (ref), sameValue (write)
-	return #p49 == #p50 and array.every(p49, function(p51)
-		-- upvalues: array (copy), p50 (ref), sameValue (copy)
-		local var62 = array.find(p50, function(p52)
-			-- upvalues: p51 (ref)
-			return p52.name.value == p51.name.value
+	return #p39 == #p40 and array.every(p39, function(p41)
+		-- upvalues: array (copy), p40 (ref), sameValue (copy)
+		local var28 = array.find(p40, function(p42)
+			-- upvalues: p41 (ref)
+			return p42.name.value == p41.name.value
 		end)
 		
-		return if var62 then sameValue(p51.value, var62.value) else false
+		return if var28 then sameValue(p41.value, var28.value) else false
 	end)
 end
 
-sameValue = function(p53, p54)
+sameValue = function(p39, p40)
 	-- upvalues: print (ref)
-	return print(p53) == print(p54)
+	return print(p39) == print(p40)
 end
 
 doTypesConflict = function(vectorA, vectorB)
@@ -267,68 +267,68 @@ doTypesConflict = function(vectorA, vectorB)
 	return if isListType(vectorA) then if isListType(vectorB) then doTypesConflict(vectorA.ofType, vectorB.ofType) else true elseif isListType(vectorB) then true elseif isNonNullType(vectorA) then if isNonNullType(vectorB) then doTypesConflict(vectorA.ofType, vectorB.ofType) else true elseif isNonNullType(vectorB) then true elseif isLeafType(vectorA) or isLeafType(vectorB) then vectorA ~= vectorB else false
 end
 
-getFieldsAndFragmentNames = function(p55, p56, p57, p58)
+getFieldsAndFragmentNames = function(p39, p40, p41, p42)
 	-- upvalues: map (ref), _collectFieldsAndFragmentNames (write), object (ref)
-	local var63 = p56[p58]
+	local var28 = p40[p42]
 	
-	if not var63 then
-		local var64 = map.new()
+	if not var28 then
+		local var29 = map.new()
 		local t = {}
-		_collectFieldsAndFragmentNames(p55, p57, p58, var64, t)
-		var63 = { var64, object.keys(t) }
-		p56[p58] = var63
+		_collectFieldsAndFragmentNames(p39, p41, p42, var29, t)
+		var28 = { var29, object.keys(t) }
+		p40[p42] = var28
 	end
-	return var63
+	return var28
 end
 
-getReferencedFieldsAndFragmentNames = function(p59, p60, p61)
+getReferencedFieldsAndFragmentNames = function(p39, p40, p41)
 	-- upvalues: typeFromAST (ref), getFieldsAndFragmentNames (write)
-	local selectionSet = p60[p61.selectionSet]
+	local selectionSet = p40[p41.selectionSet]
 	
-	return selectionSet or getFieldsAndFragmentNames(p59, p60, typeFromAST(p59:getSchema(), p61.typeCondition), p61.selectionSet)
+	return selectionSet or getFieldsAndFragmentNames(p39, p40, typeFromAST(p39:getSchema(), p41.typeCondition), p41.selectionSet)
 end
 
-_collectFieldsAndFragmentNames = function(p62, p63, p64, p65, p66)
+_collectFieldsAndFragmentNames = function(p39, p40, p41, p42, p43)
 	-- upvalues: kind (ref), isObjectType (ref), isInterfaceType (ref), nullModule (ref), typeFromAST (ref), _collectFieldsAndFragmentNames (write)
-	for i, v in ipairs(p64.selections) do
+	for i, v in ipairs(p41.selections) do
 		local kind_1 = v.kind
 		
 		if kind_1 ~= kind.FIELD then
 			if kind_1 == kind.FRAGMENT_SPREAD then
-				p66[v.name.value] = true
+				p43[v.name.value] = true
 			elseif kind_1 == kind.INLINE_FRAGMENT then
 				local typeCondition = v.typeCondition
-				_collectFieldsAndFragmentNames(p62, if typeCondition then typeFromAST(p62:getSchema(), typeCondition) else p63, v.selectionSet, p65, p66)
+				_collectFieldsAndFragmentNames(p39, if typeCondition then typeFromAST(p39:getSchema(), typeCondition) else p40, v.selectionSet, p42, p43)
 			end
 		end
 		local value = v.name.value
-		local var66 = if isObjectType(p63) or isInterfaceType(p63) then p63:getFields():get(value) else nil
-		local var67 = if v.alias then v.alias.value else value
+		local var28 = if isObjectType(p40) or isInterfaceType(p40) then p40:getFields():get(value) else nil
+		local var29 = if v.alias then v.alias.value else value
 		
-		if not p65[var67] then
-			p65[var67] = {}
+		if not p42[var29] then
+			p42[var29] = {}
 		end
-		table.insert(p65[var67], { p63 or nullModule, v or nullModule, var66 or nullModule })
+		table.insert(p42[var29], { p40 or nullModule, v or nullModule, var28 or nullModule })
 	end
 end
 
-subfieldConflicts = function(p67, p68, p69, p70)
+subfieldConflicts = function(p44, p45, p46, p47)
 	-- upvalues: array (ref)
-	return if #p67 > 0 then {
+	return if #p44 > 0 then {
 		{
-			p68,
-			array.map(p67, function(p71)
-				return p71[1]
+			p45,
+			array.map(p44, function(p48)
+				return p48[1]
 			end)
 		},
-		array.reduce(p67, function(p72, p73)
+		array.reduce(p44, function(p48, p49)
 			-- upvalues: array (copy)
-			return array.concat(p72, p73[2])
-		end, { p69 }),
-		array.reduce(p67, function(p74, p75)
+			return array.concat(p48, p49[2])
+		end, { p46 }),
+		array.reduce(p44, function(p48, p49)
 			-- upvalues: array (copy)
-			return array.concat(p74, p75[3])
-		end, { p70 })
+			return array.concat(p48, p49[3])
+		end, { p47 })
 	} else nil
 end
 
@@ -343,26 +343,26 @@ function t_1.new()
 	return tbl
 end
 
-function t_1.has(p76, p77, p78, p79)
-	local var69 = p76._data[p77]
-	local var70 = var69 and var69[p78]
+function t_1.has(p44, p45, p46, p47)
+	local var30 = p44._data[p45]
+	local var31 = var30 and var30[p46]
 	
-	return if var70 == nil then false elseif p79 == false then var70 == false else true
+	return if var31 == nil then false elseif p47 == false then var31 == false else true
 end
 
-function t_1.add(p80, p81, p82, p83)
-	p80:_pairSetAdd(p81, p82, p83)
-	p80:_pairSetAdd(p82, p81, p83)
+function t_1.add(p44, p45, p46, p47)
+	p44:_pairSetAdd(p45, p46, p47)
+	p44:_pairSetAdd(p46, p45, p47)
 end
 
-function t_1._pairSetAdd(value, p84, p85, p86)
-	local var71 = value._data[p84]
+function t_1._pairSetAdd(value, p44, p45, p46)
+	local var30 = value._data[p44]
 	
-	if not var71 then
-		var71 = {}
-		value._data[p84] = var71
+	if not var30 then
+		var30 = {}
+		value._data[p44] = var30
 	end
-	var71[p85] = p86
+	var30[p45] = p46
 end
 
 return t

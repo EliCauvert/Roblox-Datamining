@@ -16,25 +16,25 @@ local progressChecklistModule = require(script.Parent.ProgressChecklist)
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), idvWithQRCodeUpsellStrings (ref), useStyle (ref), analyticsServiceModule (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), sendButtonClickEventModule (ref), appScreensModule (ref), buttonType (ref), directionsTileModule (ref), progressChecklistModule (ref), roactModule (ref), linkButton (ref)
-	local featureName = p0.featureName
-	local var9 = useLocalization(idvWithQRCodeUpsellStrings)
-	local var10 = useStyle()
-	local onClose = p0.onClose
-	local openPrivacyPolicyLink = p0.openPrivacyPolicyLink
-	local font = var10.Font.Body.Font
-	local transparency = var10.Theme.TextEmphasis.Transparency
-	local var11 = var10.Font.BaseSize * var10.Font.CaptionBody.RelativeSize
-	local analyticsService = p0.analyticsService or analyticsServiceModule.EventStream
-	local idvLink = p0.idvLink
-	local latestStepCompleted = p0.latestStepCompleted
-	local openIdvLink = p0.openIdvLink
+	local featureName = p1.featureName
+	local var1 = useLocalization(idvWithQRCodeUpsellStrings)
+	local var2 = useStyle()
+	local onClose = p1.onClose
+	local openPrivacyPolicyLink = p1.openPrivacyPolicyLink
+	local font = var2.Font.Body.Font
+	local transparency = var2.Theme.TextEmphasis.Transparency
+	local var3 = var2.Font.BaseSize * var2.Font.CaptionBody.RelativeSize
+	local analyticsService = p1.analyticsService or analyticsServiceModule.EventStream
+	local idvLink = p1.idvLink
+	local latestStepCompleted = p1.latestStepCompleted
+	local openIdvLink = p1.openIdvLink
 	
 	return reactModule.createElement(partialPageModal, {
-		title = var9.title,
-		screenSize = useSelector(function(p1)
-			return p1.ScreenSize
+		title = var1.title,
+		screenSize = useSelector(function(p2)
+			return p2.ScreenSize
 		end),
 		onCloseClicked = reactModule.useCallback(function()
 			-- upvalues: sendButtonClickEventModule (copy), analyticsService (ref), appScreensModule (copy), featureName (ref), onClose (ref)
@@ -54,7 +54,7 @@ return function(p0)
 							sendButtonClickEventModule(analyticsService, appScreensModule.IDVDirectLinkUpsell, featureName, "CloseModal")
 							onClose()
 						end, { analyticsService, featureName }),
-						text = var9.cancel
+						text = var1.cancel
 					}
 				},
 				{
@@ -68,7 +68,7 @@ return function(p0)
 								openIdvLink(idvLink)
 							end
 						end, { openIdvLink, idvLink, analyticsService, featureName }),
-						text = var9.startVerification
+						text = var1.startVerification
 					}
 				}
 			}
@@ -93,7 +93,7 @@ return function(p0)
 				BackgroundTransparency = 0,
 				LayoutOrder = 1,
 				Size = UDim2.new(1, 0, 0, 72),
-				BackgroundColor3 = var10.Theme.BackgroundContrast.Color
+				BackgroundColor3 = var2.Theme.BackgroundContrast.Color
 			}, {
 				UIPadding = reactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 12),
@@ -105,8 +105,8 @@ return function(p0)
 				IDDirection = reactModule.createElement(directionsTileModule, {
 					imagePath = "icons/menu/document",
 					frameHeight = 48,
-					headerText = var9.idDirectionsHeader,
-					descriptionText = var9.idDirectionsBody
+					headerText = var1.idDirectionsHeader,
+					descriptionText = var1.idDirectionsBody
 				})
 			}) else reactModule.createElement(progressChecklistModule, {
 				entryHeight = 18,
@@ -128,10 +128,10 @@ return function(p0)
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Text = var9.disclaimer,
+					Text = var1.disclaimer,
 					Font = font,
-					TextSize = var11,
-					TextColor3 = var10.Theme.TextDefault.Color,
+					TextSize = var3,
+					TextColor3 = var2.Theme.TextDefault.Color,
 					TextTransparency = transparency,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					AutomaticSize = Enum.AutomaticSize.XY
@@ -140,7 +140,7 @@ return function(p0)
 					layoutOrder = 2,
 					fontStyle = "CaptionBody",
 					underlineAlwaysEnabled = true,
-					text = var9.privacyLinkText,
+					text = var1.privacyLinkText,
 					onActivated = function()
 						-- upvalues: sendButtonClickEventModule (copy), analyticsService (ref), appScreensModule (copy), featureName (ref), openPrivacyPolicyLink (ref)
 						sendButtonClickEventModule(analyticsService, appScreensModule.IDVDirectLinkUpsell, featureName, "OpenPrivacyPolicy")

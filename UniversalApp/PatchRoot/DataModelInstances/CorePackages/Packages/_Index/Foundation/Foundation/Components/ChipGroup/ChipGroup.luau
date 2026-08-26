@@ -82,11 +82,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		local var6, var7 = reactModule.useBinding(false)
 		local var8 = reactModule.useRef(nil)
 		local var9 = useClippingRectModule(var8)
-		local var10 = reactModule.useCallback(function(p1)
+		local var10 = reactModule.useCallback(function(p3)
 			-- upvalues: var2 (ref), var5 (ref), var7 (ref)
-			if var2.hasScrim and p1.AbsoluteWindowSize.X ~= 0 then
-				var5(p1.CanvasPosition.X ~= 0)
-				var7(p1.AbsoluteWindowSize.X + p1.CanvasPosition.X < p1.AbsoluteCanvasSize.X - 1)
+			if var2.hasScrim and p3.AbsoluteWindowSize.X ~= 0 then
+				var5(p3.CanvasPosition.X ~= 0)
+				var7(p3.AbsoluteWindowSize.X + p3.CanvasPosition.X < p3.AbsoluteCanvasSize.X - 1)
 				
 				return
 			end
@@ -149,9 +149,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			ScrimWrapper = if var2.hasScrim then reactModule.createElement(viewModule, {
 				tag = "row flex-between",
 				ZIndex = 2,
-				Size = var9:map(function(p1)
+				Size = var9:map(function(p3)
 					-- upvalues: scrimWidth (ref)
-					return UDim2.fromOffset(p1.Max.X - p1.Min.X, scrimWidth)
+					return UDim2.fromOffset(p3.Max.X - p3.Min.X, scrimWidth)
 				end),
 				AnchorPoint = Vector2.new(0.5, 0),
 				Position = UDim2.fromScale(0.5, 0)

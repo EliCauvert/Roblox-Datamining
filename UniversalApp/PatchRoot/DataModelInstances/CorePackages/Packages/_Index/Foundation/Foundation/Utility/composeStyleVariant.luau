@@ -22,19 +22,19 @@ end
 function composeStyleVariant(p1, ...)
 	-- upvalues: dashModule (ref), mergeTags (ref)
 	local var1 = dashModule.copy(p1)
-	dashModule.forEachArgs(function(p1)
+	dashModule.forEachArgs(function(p2)
 		-- upvalues: var1 (ref), dashModule (copy), mergeTags (copy)
-		if p1 == nil then return end
-		for i, v in p1 do
-			local var1 = var1
-			local var2 = var1[i] or {}
-			local var3 = dashModule.join(var2, v)
-			var3.tag = mergeTags(var2.tag, v.tag)
-			var1[i] = var3
+		if p2 == nil then return end
+		for i, v in p2 do
+			local var2 = var2
+			local var3 = var2[i] or {}
+			local var4 = dashModule.join(var3, v)
+			var4.tag = mergeTags(var3.tag, v.tag)
+			var2[i] = var4
 		end
 	end, ...)
 	
-	return var1
+	return var2
 end
 
 return composeStyleVariant

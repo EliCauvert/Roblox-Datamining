@@ -1,13 +1,13 @@
 ﻿local logger = require(script.Parent.Parent.Parent.Loggers).Logger
 local httpService = game:GetService("HttpService")
 
-local function _(p0)
-	if not p0 then
-		p0 = {}
+local function _(p1)
+	if not p1 then
+		p1 = {}
 	end
-	p0.packageName = "IAPExperience"
+	p1.packageName = "IAPExperience"
 	
-	return p0
+	return p1
 end
 
 return {
@@ -17,22 +17,22 @@ return {
 		p1.packageName = "IAPExperience"
 		logger:debug(httpService:JSONEncode(p1))
 	end,
-	info = function(p2)
+	info = function(p1)
 		-- upvalues: logger (ref), httpService (ref)
-		p2 = p2 or {}
-		p2.packageName = "IAPExperience"
-		logger:info(httpService:JSONEncode(p2))
+		p1 = p1 or {}
+		p1.packageName = "IAPExperience"
+		logger:info(httpService:JSONEncode(p1))
 	end,
-	warn = function(p3)
+	warn = function(p1)
 		-- upvalues: logger (ref), httpService (ref)
-		p3 = p3 or {}
-		p3.packageName = "IAPExperience"
-		logger:warn(httpService:JSONEncode(p3))
+		p1 = p1 or {}
+		p1.packageName = "IAPExperience"
+		logger:warn(httpService:JSONEncode(p1))
 	end,
-	error = function(p4)
+	error = function(p1)
 		-- upvalues: logger (ref), httpService (ref)
-		p4 = p4 or {}
-		p4.packageName = "IAPExperience"
-		logger:error(httpService:JSONEncode(p4))
+		p1 = p1 or {}
+		p1.packageName = "IAPExperience"
+		logger:error(httpService:JSONEncode(p1))
 	end
 }

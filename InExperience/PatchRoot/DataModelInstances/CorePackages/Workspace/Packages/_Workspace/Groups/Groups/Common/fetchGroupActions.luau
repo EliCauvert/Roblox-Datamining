@@ -1,15 +1,15 @@
 ﻿local httpService = game:GetService("HttpService")
 local urlBuilder = require(script:FindFirstAncestor("Groups").Parent.UrlBuilder).UrlBuilder
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: urlBuilder (ref), httpService (ref)
-	return p0(urlBuilder.fromString("apis:profile-platform-api/v1/profiles/get")(), "POST", {
+	return p1(urlBuilder.fromString("apis:profile-platform-api/v1/profiles/get")(), "POST", {
 		postBody = httpService:JSONEncode({
 			profileType = "Community",
-			profileId = p1,
+			profileId = p2,
 			components = { { component = "Actions" } }
 		})
-	}):andThen(function(p2)
-		return p2.responseBody
+	}):andThen(function(p3)
+		return p3.responseBody
 	end)
 end

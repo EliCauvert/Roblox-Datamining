@@ -1,30 +1,30 @@
-﻿return function(p0)
-	return function(_, p1, p2, p3)
-		-- upvalues: p0 (ref)
-		p1 = p1 or {}
+﻿return function(p1)
+	return function(_, p2, p3, p4)
+		-- upvalues: p1 (ref)
 		p2 = p2 or {}
+		p3 = p3 or {}
 		
-		if #p2 == 0 then
-			return p1
-		elseif #p1 == 0 then
+		if #p3 == 0 then
 			return p2
+		elseif #p2 == 0 then
+			return p3
 		end
 		local t = {}
-		local cloned = table.clone(p1)
+		local cloned = table.clone(p2)
 		
 		for i, v in cloned do
-			local var6 = p3:readField(p0, v)
+			local var1 = p4:readField(p1, v)
 			
-			if var6 then
-				t[var6] = i
+			if var1 then
+				t[var1] = i
 			end
 		end
-		for i_1, v_1 in p2 do
-			local var4 = p3:readField(p0, v_1)
+		for i_1, v_1 in p3 do
+			local var2 = p4:readField(p1, v_1)
 			
-			if var4 and t[var4] then
-				local var5 = t[var4]
-				cloned[var5] = p3:mergeObjects(cloned[var5], v_1)
+			if var2 and t[var2] then
+				local var3 = t[var2]
+				cloned[var3] = p4:mergeObjects(cloned[var3], v_1)
 			else
 				table.insert(cloned, v_1)
 			end

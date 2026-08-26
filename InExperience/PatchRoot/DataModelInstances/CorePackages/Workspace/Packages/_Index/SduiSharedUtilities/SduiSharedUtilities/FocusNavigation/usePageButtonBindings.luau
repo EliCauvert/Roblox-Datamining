@@ -4,34 +4,34 @@ local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local sduiFocusTagsModule = require(script.Parent.SduiFocusTags)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), collectionService (ref), sduiFocusTagsModule (ref), reactFocusNavigationModule (ref)
-	local var4, var5 = reactModule.useState(true)
+	local var1, var2 = reactModule.useState(true)
 	reactModule.useEffect(function()
-		-- upvalues: collectionService (copy), sduiFocusTagsModule (copy), p0 (ref), var5 (ref)
+		-- upvalues: collectionService (copy), sduiFocusTagsModule (copy), p1 (ref), var2 (ref)
 		local function updateSuppression()
-			-- upvalues: collectionService (copy), sduiFocusTagsModule (copy), p0 (copy), var5 (copy)
-			local var9 = false
+			-- upvalues: collectionService (copy), sduiFocusTagsModule (copy), p1 (copy), var2 (copy)
+			local var3 = false
 			
 			for i, v in collectionService:GetTagged(sduiFocusTagsModule.SuppressBindings) do
-				if p0.current and v:IsDescendantOf(p0.current) then
-					var9 = true
+				if p1.current and v:IsDescendantOf(p1.current) then
+					var3 = true
 					break
 				end
 			end
-			var5(not var9)
+			var2(not var3)
 		end
 		
 		updateSuppression()
-		local var7 = collectionService:GetInstanceAddedSignal(sduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
-		local var8 = collectionService:GetInstanceRemovedSignal(sduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
+		local var4 = collectionService:GetInstanceAddedSignal(sduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
+		local var5 = collectionService:GetInstanceRemovedSignal(sduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
 		
 		return function()
-			-- upvalues: var7 (ref), var8 (ref)
-			var7:Disconnect()
-			var8:Disconnect()
+			-- upvalues: var4 (ref), var5 (ref)
+			var4:Disconnect()
+			var5:Disconnect()
 		end
-	end, { p0 })
+	end, { p1 })
 	
-	return reactFocusNavigationModule.useEventHandlerMap(if var4 then p2 else {}, reactFocusNavigationModule.useEventMap(if var4 then p1 else {}, reactModule.useRef(nil)))
+	return reactFocusNavigationModule.useEventHandlerMap(if var1 then p3 else {}, reactFocusNavigationModule.useEventMap(if var1 then p2 else {}, reactModule.useRef(nil)))
 end

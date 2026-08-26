@@ -11,35 +11,35 @@ return roduxModule.createReducer({
 	_devTextBoxEnabled = false,
 	value = true
 }, {
-	[require(actions.ChatInputBarConfigurationEnabled).name] = function(p0, p1)
+	[require(actions.ChatInputBarConfigurationEnabled).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, {
-			_propertyEnabled = p1.enabled,
-			value = p0._coreGuiEnabled and (not p0._devTextBoxEnabled and p1.enabled)
+		return dictionary.join(p1, {
+			_propertyEnabled = p2.enabled,
+			value = p1._coreGuiEnabled and (not p1._devTextBoxEnabled and p2.enabled)
 		})
 	end,
-	[require(actions.SetCoreGuiEnabledChanged).name] = function(p2, p3)
+	[require(actions.SetCoreGuiEnabledChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p2, {
-			_coreGuiEnabled = p3.enabled,
-			value = p2._propertyEnabled and (not p2._devTextBoxEnabled and p3.enabled)
+		return dictionary.join(p1, {
+			_coreGuiEnabled = p2.enabled,
+			value = p1._propertyEnabled and (not p1._devTextBoxEnabled and p2.enabled)
 		})
 	end,
-	[require(actions.DevTextBoxEnabledChanged).name] = function(p4, p5)
+	[require(actions.DevTextBoxEnabledChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p4, {
-			_devTextBoxEnabled = p5.enabled,
-			value = p4._coreGuiEnabled and p5.enabled
+		return dictionary.join(p1, {
+			_devTextBoxEnabled = p2.enabled,
+			value = p1._coreGuiEnabled and p2.enabled
 		})
 	end,
-	[expChatSharedModule.Actions.ClientAppLoaded.name] = function(p6, p7)
+	[expChatSharedModule.Actions.ClientAppLoaded.name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
 		local isChatCoreGuiEnabled
-		if not p6._propertyEnabled then
-			isChatCoreGuiEnabled = p6._devTextBoxEnabled and p7.isChatCoreGuiEnabled
+		if not p1._propertyEnabled then
+			isChatCoreGuiEnabled = p1._devTextBoxEnabled and p2.isChatCoreGuiEnabled
 		end
-		return dictionary.join(p6, {
-			_coreGuiEnabled = p7.isChatCoreGuiEnabled,
+		return dictionary.join(p1, {
+			_coreGuiEnabled = p2.isChatCoreGuiEnabled,
 			value = isChatCoreGuiEnabled
 		})
 	end

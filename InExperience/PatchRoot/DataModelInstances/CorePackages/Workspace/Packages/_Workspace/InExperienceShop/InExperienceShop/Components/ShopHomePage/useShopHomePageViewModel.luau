@@ -7,19 +7,19 @@ local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop
 local _ = require(inExperienceShop.Types)
 local _ = require(script.Parent.ShopHomePageView)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), signal (ref), categorySectionModule (ref)
-	local itemsPerRow = p0.itemsPerRow
-	local var4 = reactModule.useMemo(function()
+	local itemsPerRow = p1.itemsPerRow
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), signal (copy)
 		return if fFlagEnableInExperienceShopUnifiedLoggingModule then signal.new() else nil
 	end, {})
 	
 	return {
-		data = p0.sections,
-		renderItem = reactModule.useCallback(function(p1)
-			-- upvalues: reactModule (copy), categorySectionModule (copy), itemsPerRow (ref), p0 (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var4 (ref)
-			local item = p1.item
+		data = p1.sections,
+		renderItem = reactModule.useCallback(function(p2)
+			-- upvalues: reactModule (copy), categorySectionModule (copy), itemsPerRow (ref), p1 (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var1 (ref)
+			local item = p2.item
 			
 			return reactModule.createElement(categorySectionModule, {
 				sectionId = item.id,
@@ -29,29 +29,29 @@ return function(p0)
 				featuredRobuxPackage = item.featuredRobuxPackage,
 				paymentSessionId = item.paymentSessionId,
 				itemsPerRow = itemsPerRow,
-				onCategoryActivated = p0.onCategoryActivated,
-				onItemActivated = p0.onItemActivated,
-				isPageVisible = p0.Visible ~= false,
-				scrollImpressionsSignal = if fFlagEnableInExperienceShopUnifiedLoggingModule then var4 else nil,
-				LayoutOrder = p1.index
+				onCategoryActivated = p1.onCategoryActivated,
+				onItemActivated = p1.onItemActivated,
+				isPageVisible = p1.Visible ~= false,
+				scrollImpressionsSignal = if fFlagEnableInExperienceShopUnifiedLoggingModule then var1 else nil,
+				LayoutOrder = p2.index
 			})
 		end, {
 			itemsPerRow,
-			p0.onCategoryActivated,
-			p0.onItemActivated,
-			p0.Visible,
-			var4
+			p1.onCategoryActivated,
+			p1.onItemActivated,
+			p1.Visible,
+			var1
 		}),
 		keyExtractor = reactModule.useCallback(function(p2)
 			return p2.id
 		end, {}),
-		LayoutOrder = p0.LayoutOrder,
-		Visible = p0.Visible,
+		LayoutOrder = p1.LayoutOrder,
+		Visible = p1.Visible,
 		onScroll = if fFlagEnableInExperienceShopUnifiedLoggingModule then reactModule.useCallback(function(_)
-			-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var4 (ref)
-			if fFlagEnableInExperienceShopUnifiedLoggingModule and var4 then
-				var4:fire()
+			-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var1 (ref)
+			if fFlagEnableInExperienceShopUnifiedLoggingModule and var1 then
+				var1:fire()
 			end
-		end, { var4 }) else nil
+		end, { var1 }) else nil
 	}
 end

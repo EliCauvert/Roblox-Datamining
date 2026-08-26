@@ -8,10 +8,10 @@ local fitFrameVerticalModule = require(appChat.Components.ChatConversation.Asset
 local buyToPlay = roactModule.PureComponent:extend("BuyToPlay")
 buyToPlay.defaultProps = { text = "Buy to play!", gamePrice = 100 }
 
-function buyToPlay.render(p0)
+function buyToPlay.render(p1)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), fitFrameVerticalModule (ref), constantsModule (ref), playButtonModule (ref)
-	return UIBloxModule.Style.withStyle(function(p1)
-		-- upvalues: roactModule (copy), fitFrameVerticalModule (copy), constantsModule (copy), p0 (ref), playButtonModule (copy)
+	return UIBloxModule.Style.withStyle(function(p2)
+		-- upvalues: roactModule (copy), fitFrameVerticalModule (copy), constantsModule (copy), p1 (ref), playButtonModule (copy)
 		return roactModule.createElement(fitFrameVerticalModule, {
 			BackgroundTransparency = 1,
 			width = UDim.new(1, 0),
@@ -32,23 +32,23 @@ function buyToPlay.render(p0)
 					LayoutOrder = 1,
 					Size = UDim2.new(0, 16, 1, 0),
 					Image = constantsModule.SmallRobuxIcon,
-					ImageColor3 = p1.Theme.ContextualPrimaryDefault.Color
+					ImageColor3 = p2.Theme.ContextualPrimaryDefault.Color
 				}),
 				priceLabel = roactModule.createElement("TextLabel", {
 					TextSize = 16,
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					Size = UDim2.new(1, -16, 1, 0),
-					Text = p0.props.gamePrice,
-					TextColor3 = p1.Theme.ContextualPrimaryDefault.Color,
+					Text = p1.props.gamePrice,
+					TextColor3 = p2.Theme.ContextualPrimaryDefault.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Font = Enum.Font.Gotham
 				})
 			}),
 			playButton = roactModule.createElement(playButtonModule, {
 				LayoutOrder = 2,
-				placeId = p0.placeId,
-				text = p0.props.text
+				placeId = p1.placeId,
+				text = p1.props.text
 			})
 		})
 	end)

@@ -2,12 +2,12 @@
 local luauPolyfillModule = require(appChatNetworking.Parent.LuauPolyfill)
 local CHAT_PLATFORM_BASE_URLModule = require(appChatNetworking.url.CHAT_PLATFORM_BASE_URL)
 
-return require(script.Parent.RoduxNetworking).POST(script.Name, function(p0, p1, p2)
+return require(script.Parent.RoduxNetworking).POST(script.Name, function(p1, p2, p3)
 	-- upvalues: luauPolyfillModule (ref), CHAT_PLATFORM_BASE_URLModule (ref)
-	return p0(CHAT_PLATFORM_BASE_URLModule):path("v1"):path("add-users"):body({
-		conversation_id = p1,
-		user_ids = luauPolyfillModule.Array.map(p2, function(p3)
-			return tonumber(p3)
+	return p1(CHAT_PLATFORM_BASE_URLModule):path("v1"):path("add-users"):body({
+		conversation_id = p2,
+		user_ids = luauPolyfillModule.Array.map(p3, function(p4)
+			return tonumber(p4)
 		end)
 	})
 end)

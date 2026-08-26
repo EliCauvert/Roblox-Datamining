@@ -2,12 +2,12 @@
 local breadcrumbModule = require(script.Parent.Breadcrumb)
 local t = {}
 t.__index = t
-local var3 = tModule.tuple(tModule.optional(tModule.strictInterface({ limit = tModule.optional(tModule.numberPositive) })))
+local var1 = tModule.tuple(tModule.optional(tModule.strictInterface({ limit = tModule.optional(tModule.numberPositive) })))
 
-function t.new(p0)
-	-- upvalues: var3 (ref), t (ref)
-	assert(var3(p0))
-	local limit = (p0 or {}).limit or 200
+function t.new(p1)
+	-- upvalues: var1 (ref), t (ref)
+	assert(var1(p1))
+	local limit = (p1 or {}).limit or 200
 	
 	return setmetatable({
 		_writeIndex = 1,

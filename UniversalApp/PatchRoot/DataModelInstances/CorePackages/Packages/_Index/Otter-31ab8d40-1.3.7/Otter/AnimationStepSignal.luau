@@ -1,14 +1,14 @@
 ﻿local runService = game:GetService("RunService")
 local t = {}
 local t_1 = {
-	Connect = function(_, p0)
+	Connect = function(_, p1)
 		-- upvalues: t (ref)
-		t[p0] = true
+		t[p1] = true
 		
 		return {
 			Disconnect = function()
-				-- upvalues: t (copy), p0 (ref)
-				t[p0] = nil
+				-- upvalues: t (copy), p1 (ref)
+				t[p1] = nil
 			end
 		}
 	end,
@@ -25,10 +25,10 @@ return {
 		-- upvalues: t_1 (ref), runService (ref)
 		return if _G.__OTTER_MOCK_ANIMATION_STEP_SIGNAL__ then t_1:Connect(p2) else runService.RenderStepped:Connect(p2)
 	end,
-	Fire = function(_, p3)
+	Fire = function(_, p2)
 		-- upvalues: t_1 (ref)
 		if _G.__OTTER_MOCK_ANIMATION_STEP_SIGNAL__ then
-			t_1:Fire(p3 or 0.016666666667)
+			t_1:Fire(p2 or 0.016666666667)
 			
 			return
 		end

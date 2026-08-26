@@ -9,11 +9,11 @@ local conversationRoduxSeedModule = require(appChat.Utils.ConversationRoduxSeed)
 local isFriendsPlaceholderConversationId = conversationRoduxSeedModule.isFriendsPlaceholderConversationId
 local normalizeStoreConversationForRodux = conversationRoduxSeedModule.normalizeStoreConversationForRodux
 local t = {
-	navigateToRootedChatDetails = function(p0, p1)
+	navigateToRootedChatDetails = function(p1, p2)
 		-- upvalues: roactNavigationModule (ref), enumScreensModule (ref)
 		return roactNavigationModule.Actions.navigate({
 			routeName = enumScreensModule.ChatLandingStack,
-			params = { conversationId = p0 },
+			params = { conversationId = p1 },
 			action = roactNavigationModule.StackActions.reset({
 				index = 1,
 				actions = {
@@ -21,8 +21,8 @@ local t = {
 						routeName = enumScreensModule.ChatDetails,
 						params = {
 							isRooted = true,
-							conversationId = p0,
-							rootedNavigationRequestId = p1
+							conversationId = p1,
+							rootedNavigationRequestId = p2
 						}
 					})
 				}
@@ -31,22 +31,22 @@ local t = {
 	end
 }
 
-function t.tryNavigateToRootedChatDetails(p2, p3)
+function t.tryNavigateToRootedChatDetails(p1, p2)
 	-- upvalues: getFFlagAppChatEnableRootedNavigationModule (ref), getConversationStoreModule (ref), receivedConversationModule (ref), normalizeStoreConversationForRodux (ref), isFriendsPlaceholderConversationId (ref), conversationChannelsModule (ref), t (ref)
-	local conversationId = p3 and p3.conversationId
+	local conversationId = p2 and p2.conversationId
 	
-	if not conversationId or p3.rooted ~= true or not getFFlagAppChatEnableRootedNavigationModule() then
+	if not conversationId or p2.rooted ~= true or not getFFlagAppChatEnableRootedNavigationModule() then
 		return false
 	end
 	local conversation = getConversationStoreModule(false).getConversation(conversationId, false)
 	
 	if conversation then
-		p2.dispatch(receivedConversationModule(normalizeStoreConversationForRodux(conversation)))
+		p1.dispatch(receivedConversationModule(normalizeStoreConversationForRodux(conversation)))
 	end
 	if conversation == nil and not isFriendsPlaceholderConversationId(conversationId) or conversation ~= nil and conversation.source ~= conversationChannelsModule.Source.Friends then
-		p2.fetchLatestConversationDetails(conversationId)
+		p1.fetchLatestConversationDetails(conversationId)
 	end
-	p2.callback(t.navigateToRootedChatDetails(conversationId, p3.rootedNavigationRequestId))
+	p1.callback(t.navigateToRootedChatDetails(conversationId, p2.rootedNavigationRequestId))
 	
 	return true
 end

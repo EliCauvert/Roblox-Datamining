@@ -27,26 +27,26 @@ local t = {
 	expectedFailures = {}
 }
 
-local function walkInstanceTree(p0, p1, p2)
+local function walkInstanceTree(p1, p2, p3)
 	-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref), describeProblematicPropertiesModule (ref)
-	local descendants = p1:GetDescendants()
-	table.insert(descendants, p1)
+	local descendants = p2:GetDescendants()
+	table.insert(descendants, p2)
 	
 	for i, v in descendants do
-		local className = p2[v.ClassName]
-		local var14, var15 = UGCValidationService:ValidatePropertiesSensible(v, className)
+		local className = p3[v.ClassName]
+		local var1, var2 = UGCValidationService:ValidatePropertiesSensible(v, className)
 		
-		if not var14 then
-			p0:fail(errorSourceStringsModule.Keys.PropertiesNotSensible, {
+		if not var1 then
+			p1:fail(errorSourceStringsModule.Keys.PropertiesNotSensible, {
 				ClassName = v.ClassName,
 				InstancePath = v:GetFullName(),
-				ProblematicProperties = describeProblematicPropertiesModule(var15, className)
+				ProblematicProperties = describeProblematicPropertiesModule(var2, className)
 			})
 		end
 	end
 end
 
-function t.run(p3, p4)
+function t.run(p4, p5)
 	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), getFIntUGCValidateMaxHSRDataLenModule (ref), getFFlagUGCValidateWrapDataCapsModule (ref), validationEnumsModule (ref), list (ref), getFIntUGCValidateMaxHSRMeshIdDataLenModule (ref), walkInstanceTree (ref)
 	if not getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then return end
 	local t = {
@@ -54,9 +54,9 @@ function t.run(p3, p4)
 	}
 	
 	if getFFlagUGCValidateWrapDataCapsModule() then
-		local consumerEnv = p4.consumerConfig.consumerEnv
-		local var17 = consumerEnv == validationEnumsModule.ConsumerEnv.Backend
-		local var18 = consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC and table.find(list, p4.uploadCategory) ~= nil
+		local consumerEnv = p5.consumerConfig.consumerEnv
+		local var3 = consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+		local var4 = consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC and table.find(list, p5.uploadCategory) ~= nil
 		local t_1 = {
 			HSRMeshIdData = getFIntUGCValidateMaxHSRMeshIdDataLenModule()
 		}
@@ -64,11 +64,11 @@ function t.run(p3, p4)
 			HSRMeshIdData = getFIntUGCValidateMaxHSRMeshIdDataLenModule()
 		}
 		
-		if var17 then
+		if var3 then
 			t_1.HSRData = 0
 			t_2.HSRData = 0
 		end
-		if var18 then
+		if var4 then
 			t_1.TemporaryCageMeshId = 0
 			t_2.TemporaryCageMeshId = 0
 			t_2.TemporaryReferenceId = 0
@@ -76,11 +76,11 @@ function t.run(p3, p4)
 		t.WrapTarget = t_1
 		t.WrapLayer = t_2
 	end
-	walkInstanceTree(p3, p4.rootInstance, t)
+	walkInstanceTree(p4, p5.rootInstance, t)
 	
-	for i, v in p4.hsrAssets do
+	for i, v in p5.hsrAssets do
 		for i_1, v_1 in v do
-			walkInstanceTree(p3, v_1, t)
+			walkInstanceTree(p4, v_1, t)
 		end
 	end
 end

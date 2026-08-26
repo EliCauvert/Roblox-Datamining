@@ -10,7 +10,7 @@ local withStyle = UIBlox.Style.withStyle
 local getIconSize = UIBlox.App.ImageSet.getIconSize
 local externalEventConnectionModule = require(script.Parent.ExternalEventConnection)
 local spinnerModule = require(script.Parent.Spinner)
-local var5 = getIconSize(UIBlox.App.ImageSet.Enum.IconSize.Medium)
+local var1 = getIconSize(UIBlox.App.ImageSet.Enum.IconSize.Medium)
 local _ = { Start = -240, End = 0 }
 local _ = { Start = 1, End = 0 }
 local t_1 = { dampingRatio = 1, frequency = 3.5 }
@@ -39,73 +39,73 @@ refreshScrollingFrameNew.validateProps = t.interface({
 	[roact.Children] = t.optional(t.any)
 })
 
-function refreshScrollingFrameNew.init(p0)
+function refreshScrollingFrameNew.init(p1)
 	-- upvalues: refreshScrollingFrameNew (ref), roact (ref), otter (ref), t_1 (ref), userGameSettingsService (ref)
-	p0.state = { isRefreshing = false }
-	p0.startHeight = 0
-	p0.isUserInteracting = false
-	local forwardRef = p0.props.forwardRef
+	p1.state = { isRefreshing = false }
+	p1.startHeight = 0
+	p1.isUserInteracting = false
+	local forwardRef = p1.props.forwardRef
 	assert(type(forwardRef) ~= "function", ("%s does not support function ref forwarding"):format(tostring(refreshScrollingFrameNew)))
-	p0.scrollingFrameRef = forwardRef or roact.createRef()
-	p0.spinnerFrameRef = roact.createRef()
-	p0.spinnerRef = roact.createRef()
+	p1.scrollingFrameRef = forwardRef or roact.createRef()
+	p1.spinnerFrameRef = roact.createRef()
+	p1.spinnerRef = roact.createRef()
 	
-	function p0.updateSpinner(p1)
-		-- upvalues: p0 (ref)
-		if p0.spinnerFrameRef.current then
-			p0.spinnerFrameRef.current.Size = UDim2.new(1, 0, 0, p1)
-			local var9 = p1 / p0.props.refreshThreshold
+	function p0.updateSpinner(p2)
+		-- upvalues: p1 (ref)
+		if p1.spinnerFrameRef.current then
+			p1.spinnerFrameRef.current.Size = UDim2.new(1, 0, 0, p2)
+			local var2 = p2 / p1.props.refreshThreshold
 			
-			if p0.props.usesBuilderIcon then
-				local minValue = math.min(1, math.max(0, var9))
-				p0.spinnerRef.current.TextTransparency = 1 * (1 - minValue) + 0 * minValue
+			if p1.props.usesBuilderIcon then
+				local minValue = math.min(1, math.max(0, var2))
+				p1.spinnerRef.current.TextTransparency = 1 * (1 - minValue) + 0 * minValue
 			else
-				local minValue = math.min(1, math.max(0, var9))
-				p0.spinnerRef.current.ImageTransparency = 1 * (1 - minValue) + 0 * minValue
+				local minValue = math.min(1, math.max(0, var2))
+				p1.spinnerRef.current.ImageTransparency = 1 * (1 - minValue) + 0 * minValue
 			end
-			if not p0.state.isRefreshing then
-				local minValue = math.min(1, math.max(0, var9))
-				p0.spinnerRef.current.Rotation = -240 * (1 - minValue) + 0 * minValue
+			if not p1.state.isRefreshing then
+				local minValue = math.min(1, math.max(0, var2))
+				p1.spinnerRef.current.Rotation = -240 * (1 - minValue) + 0 * minValue
 			end
 		end
 	end
 	
-	p0.motor = otter.createSingleMotor(0)
-	p0.motor:onStep(p0.updateSpinner)
+	p1.motor = otter.createSingleMotor(0)
+	p1.motor:onStep(p1.updateSpinner)
 	
 	function p0.resetSpinner()
-		-- upvalues: p0 (ref), otter (copy), t_1 (copy)
-		p0.motor:setGoal(otter.spring(0, t_1))
+		-- upvalues: p1 (ref), otter (copy), t_1 (copy)
+		p1.motor:setGoal(otter.spring(0, t_1))
 	end
 	
 	function p0.scrollBack()
-		-- upvalues: p0 (ref), userGameSettingsService (copy)
-		if p0.scrollingFrameRef.current then
+		-- upvalues: p1 (ref), userGameSettingsService (copy)
+		if p1.scrollingFrameRef.current then
 			if userGameSettingsService.ReducedMotion then
-				p0.scrollingFrameRef.current.CanvasPosition = Vector2.new(0, 0)
+				p1.scrollingFrameRef.current.CanvasPosition = Vector2.new(0, 0)
 				
 				return
 			end
-			p0.scrollingFrameRef.current:ScrollToTop()
+			p1.scrollingFrameRef.current:ScrollToTop()
 		end
 	end
 	
 	function p0.dispatchRefresh()
-		-- upvalues: p0 (ref), otter (copy), t_1 (copy)
-		local refresh = p0.props.refresh
-		local refreshThreshold = p0.props.refreshThreshold
-		local isRefreshing = p0.state.isRefreshing
+		-- upvalues: p1 (ref), otter (copy), t_1 (copy)
+		local refresh = p1.props.refresh
+		local refreshThreshold = p1.props.refreshThreshold
+		local isRefreshing = p1.state.isRefreshing
 		
 		if refresh == nil then return end
 		if not isRefreshing then
-			p0:setState({ isRefreshing = true })
-			p0.motor:setGoal(otter.spring(refreshThreshold, t_1))
+			p1:setState({ isRefreshing = true })
+			p1.motor:setGoal(otter.spring(refreshThreshold, t_1))
 			
 			local function onRefreshComplete()
-				-- upvalues: p0 (copy)
-				if p0.isMounted then
-					p0:setState({ isRefreshing = false })
-					p0.resetSpinner()
+				-- upvalues: p1 (copy)
+				if p1.isMounted then
+					p1:setState({ isRefreshing = false })
+					p1.resetSpinner()
 				end
 			end
 			
@@ -114,85 +114,85 @@ function refreshScrollingFrameNew.init(p0)
 	end
 	
 	function p0.onInputBegan(_)
-		-- upvalues: p0 (ref)
-		if not p0.isUserInteracting then
-			p0.startHeight = p0.scrollingFrameRef.current.CanvasPosition.Y
+		-- upvalues: p1 (ref)
+		if not p1.isUserInteracting then
+			p1.startHeight = p1.scrollingFrameRef.current.CanvasPosition.Y
 		end
-		p0.isUserInteracting = true
+		p1.isUserInteracting = true
 	end
 	
 	function p0.onInputEnded(_)
-		-- upvalues: p0 (ref)
-		p0.isUserInteracting = false
-		local startHeight = p0.startHeight
-		p0.startHeight = 0
+		-- upvalues: p1 (ref)
+		p1.isUserInteracting = false
+		local startHeight = p1.startHeight
+		p1.startHeight = 0
 		
-		if p0.props.refresh ~= nil and p0.scrollingFrameRef.current then
-			local var14 = -p0.scrollingFrameRef.current.CanvasPosition.Y
+		if p1.props.refresh ~= nil and p1.scrollingFrameRef.current then
+			local var2 = -p1.scrollingFrameRef.current.CanvasPosition.Y
 			
-			if p0.props.refreshThreshold < var14 and startHeight < var14 then
-				p0.dispatchRefresh()
+			if p1.props.refreshThreshold < var2 and startHeight < var2 then
+				p1.dispatchRefresh()
 				
 				return
-			elseif var14 > 0 then
-				p0.resetSpinner()
+			elseif var2 > 0 then
+				p1.resetSpinner()
 			end
 		end
 	end
 	
 	function p0.statusBarTapCallback()
-		-- upvalues: p0 (ref)
-		if p0.props.onStatusBarTapped then
-			p0.props.onStatusBarTapped()
+		-- upvalues: p1 (ref)
+		if p1.props.onStatusBarTapped then
+			p1.props.onStatusBarTapped()
 		end
-		p0.scrollBack()
+		p1.scrollBack()
 	end
 	
 	function p0.onCanvasPositionChanged(p2)
-		-- upvalues: p0 (ref), otter (copy)
-		if p0.props.onCanvasPositionChangedCallback ~= nil then
-			p0.props.onCanvasPositionChangedCallback(p2)
+		-- upvalues: p1 (ref), otter (copy)
+		if p1.props.onCanvasPositionChangedCallback ~= nil then
+			p1.props.onCanvasPositionChangedCallback(p2)
 		end
-		if p0.props.refresh ~= nil and p0.isUserInteracting and not p0.state.isRefreshing then
-			local var15 = -p2.CanvasPosition.Y
+		if p1.props.refresh ~= nil and p1.isUserInteracting and not p1.state.isRefreshing then
+			local var2 = -p2.CanvasPosition.Y
 			
-			if var15 >= 0 and var15 <= p0.props.refreshThreshold then
-				p0.motor:setGoal(otter.instant(var15))
+			if var2 >= 0 and var2 <= p1.props.refreshThreshold then
+				p1.motor:setGoal(otter.instant(var2))
 			end
 		end
 	end
 	
-	function p0.onCanvasSizeChanged(p3)
-		-- upvalues: p0 (ref)
-		if p0.props.onCanvasSizeChangedCallback ~= nil then
-			p0.props.onCanvasSizeChangedCallback(p3)
+	function p0.onCanvasSizeChanged(p2)
+		-- upvalues: p1 (ref)
+		if p1.props.onCanvasSizeChangedCallback ~= nil then
+			p1.props.onCanvasSizeChangedCallback(p2)
 		end
 	end
 end
 
-function refreshScrollingFrameNew.didMount(p4)
-	p4.isMounted = true
-	p4.resetSpinner()
+function refreshScrollingFrameNew.didMount(p1)
+	p1.isMounted = true
+	p1.resetSpinner()
 end
 
-function refreshScrollingFrameNew.willUnmount(p5)
-	p5.isMounted = false
-	p5.motor:destroy()
-	p5.motor = nil
+function refreshScrollingFrameNew.willUnmount(p1)
+	p1.isMounted = false
+	p1.motor:destroy()
+	p1.motor = nil
 end
 
-function refreshScrollingFrameNew.render(p6)
-	-- upvalues: roact (ref), withStyle (ref), cryo (ref), spinnerModule (ref), var5 (ref), externalEventConnectionModule (ref), userInputService (ref)
-	local children = p6.props[roact.Children]
-	local isRefreshing = p6.state.isRefreshing
+function refreshScrollingFrameNew.render(p1)
+	-- upvalues: roact (ref), withStyle (ref), cryo (ref), spinnerModule (ref), var1 (ref), externalEventConnectionModule (ref), userInputService (ref)
+	local children = p1.props[roact.Children]
+	local isRefreshing = p1.state.isRefreshing
 	
 	return withStyle(function(_)
-		-- upvalues: roact (copy), p6 (ref), cryo (copy), spinnerModule (copy), var5 (copy), isRefreshing (ref), children (ref), externalEventConnectionModule (copy), userInputService (copy)
-		return roact.createElement(p6.props.ScrollingElement, cryo.Dictionary.join({
-			[roact.Change.CanvasPosition] = p6.onCanvasPositionChanged,
-			[roact.Change.CanvasSize] = p6.onCanvasSizeChanged,
-			[roact.Ref] = p6.scrollingFrameRef
-		}, p6.props.scrollingElementProps), {
+		-- upvalues: roact (copy), p1 (ref), cryo (copy), spinnerModule (copy), var1 (copy), isRefreshing (ref), children (ref), externalEventConnectionModule (copy), userInputService (copy)
+		return roact.createElement(p1.props.ScrollingElement, cryo.Dictionary.join({
+			[roact.Change.CanvasPosition] = p1.onCanvasPositionChanged,
+			[roact.Change.CanvasSize] = p1.onCanvasSizeChanged,
+			[roact.Ref] = p1.scrollingFrameRef
+		}, p1.props.scrollingElementProps), {
 			Layout = roact.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -203,14 +203,14 @@ function refreshScrollingFrameNew.render(p6)
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				ClipsDescendants = false,
-				[roact.Ref] = p6.spinnerFrameRef
+				[roact.Ref] = p1.spinnerFrameRef
 			}, {
 				Spinner = roact.createElement(spinnerModule, {
-					Size = UDim2.new(0, var5, 0, var5),
+					Size = UDim2.new(0, var1, 0, var1),
 					AnchorPoint = Vector2.new(0.5, 1),
 					Position = UDim2.new(0.5, 0, 1, 0),
 					isSpinning = isRefreshing,
-					[roact.Ref] = p6.spinnerRef
+					[roact.Ref] = p1.spinnerRef
 				})
 			}),
 			Content = roact.createElement("Frame", {
@@ -221,21 +221,21 @@ function refreshScrollingFrameNew.render(p6)
 			}, children),
 			inputBegan = roact.createElement(externalEventConnectionModule, {
 				event = userInputService.InputBegan,
-				callback = p6.onInputBegan
+				callback = p1.onInputBegan
 			}),
 			inputEnded = roact.createElement(externalEventConnectionModule, {
 				event = userInputService.InputEnded,
-				callback = p6.onInputEnded
+				callback = p1.onInputEnded
 			}),
 			statusBarTapped = roact.createElement(externalEventConnectionModule, {
 				event = userInputService.StatusBarTapped,
-				callback = p6.statusBarTapCallback
+				callback = p1.statusBarTapCallback
 			})
 		})
 	end)
 end
 
-return roact.forwardRef(function(p7, p8)
+return roact.forwardRef(function(p1, p2)
 	-- upvalues: roact (ref), refreshScrollingFrameNew (ref), cryo (ref)
-	return roact.createElement(refreshScrollingFrameNew, cryo.Dictionary.join(p7, { forwardRef = p8 }))
+	return roact.createElement(refreshScrollingFrameNew, cryo.Dictionary.join(p1, { forwardRef = p2 }))
 end)

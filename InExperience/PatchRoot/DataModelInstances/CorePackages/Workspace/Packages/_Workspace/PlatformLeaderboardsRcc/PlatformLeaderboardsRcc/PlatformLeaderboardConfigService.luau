@@ -10,36 +10,36 @@ local fFlagPlatformLeaderboardDebugLogging = sharedFlagsModule.FFlagPlatformLead
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: signal (ref), t (ref), platformLeaderboardConfigPollMaxJitterSeconds (ref), platformLeaderboardConfigPollIntervalSeconds (ref), fFlagPlatformLeaderboardDebugLogging (ref)
 	local tbl = setmetatable({
 		_config = nil,
 		_pollTimer = nil,
-		_fetcher = p0,
+		_fetcher = p1,
 		_configChanged = signal.new()
 	}, t)
-	local ok, status, var5 = pcall(p0.fetchConfig)
+	local ok, status, var1 = pcall(p1.fetchConfig)
 	
 	if ok and status then
-		tbl._config = var5
+		tbl._config = var1
 	end
-	local var6 = nil
+	local var2 = nil
 	
 	local function pollLoop()
-		-- upvalues: tbl (ref), var6 (write), platformLeaderboardConfigPollMaxJitterSeconds (copy), platformLeaderboardConfigPollIntervalSeconds (copy)
-		while tbl._pollTimer == var6 do
+		-- upvalues: tbl (ref), var2 (write), platformLeaderboardConfigPollMaxJitterSeconds (copy), platformLeaderboardConfigPollIntervalSeconds (copy)
+		while tbl._pollTimer == var2 do
 			task.wait(platformLeaderboardConfigPollIntervalSeconds + math.random() * platformLeaderboardConfigPollMaxJitterSeconds)
-			local ok, status, var8 = pcall(tbl._fetcher.fetchConfig)
+			local ok, status, var3 = pcall(tbl._fetcher.fetchConfig)
 			
 			if ok and status then
-				tbl:updateConfig(var8)
+				tbl:updateConfig(var3)
 			end
 		end
 	end
 	
 	tbl._pollTimer = task.defer(function()
-		-- upvalues: pollLoop (ref), tbl (ref), var6 (write), fFlagPlatformLeaderboardDebugLogging (copy)
-		if not pcall(pollLoop) and tbl._pollTimer == var6 then
+		-- upvalues: pollLoop (ref), tbl (ref), var2 (write), fFlagPlatformLeaderboardDebugLogging (copy)
+		if not pcall(pollLoop) and tbl._pollTimer == var2 then
 			if fFlagPlatformLeaderboardDebugLogging then
 				warn("[PlatformLeaderboard] ConfigService poll loop terminated unexpectedly")
 			end
@@ -50,18 +50,18 @@ function t.new(p0)
 	return tbl
 end
 
-local function _(p1, p2)
-	return p1 == p2 or (if p1 == nil or p2 == nil then false else p1.leaderboardId == p2.leaderboardId and p1.unit == p2.unit)
+local function _(p2, p3)
+	return p2 == p3 or (if p2 == nil or p3 == nil then false else p2.leaderboardId == p3.leaderboardId and p2.unit == p3.unit)
 end
 
-function t:updateConfig(p3)
+function t:updateConfig(p2)
 	local config = self._config
 	
-	if config == p3 or (if config == nil or p3 == nil then false else config.leaderboardId == p3.leaderboardId and config.unit == p3.unit) then
+	if config == p2 or (if config == nil or p2 == nil then false else config.leaderboardId == p2.leaderboardId and config.unit == p2.unit) then
 		return
 	end
 	local config_1 = self._config
-	self._config = p3
+	self._config = p2
 	self._configChanged:fire(config_1, self._config)
 end
 
@@ -73,8 +73,8 @@ function t:hasActiveConfig()
 	return self._config ~= nil
 end
 
-function t:onConfigChanged(p4)
-	return self._configChanged:connect(p4)
+function t:onConfigChanged(p2)
+	return self._configChanged:connect(p2)
 end
 
 function t:teardown()

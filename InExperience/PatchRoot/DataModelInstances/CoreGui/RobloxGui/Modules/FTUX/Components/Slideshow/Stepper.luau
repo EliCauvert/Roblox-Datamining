@@ -2,11 +2,11 @@
 local reactModule = require(corePackagesService.Packages.React)
 local luauPolyfillModule = require(corePackagesService.Packages.LuauPolyfill)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), luauPolyfillModule (ref)
-	local numberOfSteps = p0.numberOfSteps
-	local layoutOrder = p0.layoutOrder
-	local numberActivated = p0.numberActivated
+	local numberOfSteps = p1.numberOfSteps
+	local layoutOrder = p1.layoutOrder
+	local numberActivated = p1.numberActivated
 	local t = {}
 	
 	for i = 1, numberOfSteps do
@@ -23,11 +23,11 @@ return function(p0)
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		VerticalAlignment = Enum.VerticalAlignment.Center,
 		SortOrder = Enum.SortOrder.LayoutOrder
-	}), luauPolyfillModule.Array.map(t, function(_, p1)
+	}), luauPolyfillModule.Array.map(t, function(_, p2)
 		-- upvalues: reactModule (copy), numberActivated (ref), numberOfSteps (ref)
 		return reactModule.createElement("Frame", {
-			LayoutOrder = p1,
-			BackgroundTransparency = if p1 <= numberActivated then 0 else 0.7,
+			LayoutOrder = p2,
+			BackgroundTransparency = if p2 <= numberActivated then 0 else 0.7,
 			Size = UDim2.new(1 / numberOfSteps, 0, 0.5, 0),
 			Position = UDim2.new(0, 0, 0, 0),
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255)

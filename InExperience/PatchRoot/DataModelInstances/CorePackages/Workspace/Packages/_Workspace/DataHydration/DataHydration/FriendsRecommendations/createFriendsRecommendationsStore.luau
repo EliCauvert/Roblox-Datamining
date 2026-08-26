@@ -23,60 +23,60 @@ local function _()
 	if currentUserId ~= "" then
 		return currentUserId
 	end
-	local var9 = getLocalPlayerUserId()
+	local var1 = getLocalPlayerUserId()
 	
-	return if var9 then tostring(var9) else ""
+	return if var1 then tostring(var1) else ""
 end
 
-local function normalizeRecommendation(p0)
+local function normalizeRecommendation(p1)
 	-- upvalues: t (ref)
-	local var10 = if p0.contactId and p0.contactId ~= "" then p0.contactId else nil
+	local var1 = if p1.contactId and p1.contactId ~= "" then p1.contactId else nil
 	
 	return {
-		id = tostring(var10 or p0.id),
-		rank = p0.rank or 0,
-		hasIncomingFriendRequest = if p0.friendRequest then true else false,
-		type = if var10 then "Contact" else "User",
+		id = tostring(var1 or p1.id),
+		rank = p1.rank or 0,
+		hasIncomingFriendRequest = if p1.friendRequest then true else false,
+		type = if var1 then "Contact" else "User",
 		contactProps = {
-			contactId = var10,
-			displayName = p0.displayName,
-			thumbnailEntities = p0.thumbnailEntities
+			contactId = var1,
+			displayName = p1.displayName,
+			thumbnailEntities = p1.thumbnailEntities
 		},
 		contextProps = {
-			contextType = if p0.contextType and t[p0.contextType] then p0.contextType else nil,
-			mutualFriendsCount = p0.mutualFriendsCount or (if p0.mutualFriendsList then #p0.mutualFriendsList else nil)
+			contextType = if p1.contextType and t[p1.contextType] then p1.contextType else nil,
+			mutualFriendsCount = p1.mutualFriendsCount or (if p1.mutualFriendsList then #p1.mutualFriendsList else nil)
 		}
 	}
 end
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), requestsModule (ref), localUserIdStore (ref), getLocalPlayerUserId (ref), cryoModule (ref), normalizeRecommendation (ref)
-	local var11 = createDataResolverModule({
+	local var1 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = createDataCacheModule(),
 		fetchFn = function(p1, _)
 			-- upvalues: requestsModule (copy), localUserIdStore (copy), getLocalPlayerUserId (copy), cryoModule (copy), normalizeRecommendation (copy)
-			local var13
+			local var2
 			local getFriendsRecommendations = requestsModule.GetFriendsRecommendations
 			local currentUserId = localUserIdStore.getCurrentUserId(false)
 			
 			if currentUserId == "" then
-				local var14 = getLocalPlayerUserId()
-				var13 = if var14 then tostring(var14) else ""
+				local var3 = getLocalPlayerUserId()
+				var2 = if var3 then tostring(var3) else ""
 			else
-				var13 = currentUserId
+				var2 = currentUserId
 			end
-			return getFriendsRecommendations(var13, p1):andThen(function(p2)
+			return getFriendsRecommendations(var2, p1):andThen(function(p2)
 				-- upvalues: cryoModule (copy), normalizeRecommendation (copy)
-				local var15 = if p2.data then cryoModule.List.map(p2.data, normalizeRecommendation) else nil
+				local var4 = if p2.data then cryoModule.List.map(p2.data, normalizeRecommendation) else nil
 				
-				if var15 then
-					table.sort(var15, function(p3, p4)
+				if var4 then
+					table.sort(var4, function(p3, p4)
 						return (p3.rank or 0) < (p4.rank or 0)
 					end)
 				end
 				return {
-					data = var15,
+					data = var4,
 					recommendationRequestId = p2.recommendationRequestId
 				}
 			end)
@@ -84,21 +84,21 @@ return function()
 	})
 	
 	return {
-		getFriendsRecommendations = function(p5, p6)
-			-- upvalues: var11 (ref)
-			return if p6 and p6.skipFetch then var11.getCachedItem(p5) else var11.getAndFetchItem(p5)
+		getFriendsRecommendations = function(p1, p2)
+			-- upvalues: var1 (ref)
+			return if p2 and p2.skipFetch then var1.getCachedItem(p1) else var1.getAndFetchItem(p1)
 		end,
-		refreshFriendsRecommendations = function(p7)
-			-- upvalues: var11 (ref)
-			return var11.fetchItem(p7)
+		refreshFriendsRecommendations = function(p1)
+			-- upvalues: var1 (ref)
+			return var1.fetchItem(p1)
 		end,
 		clear = function()
-			-- upvalues: var11 (ref)
-			var11.clear()
+			-- upvalues: var1 (ref)
+			var1.clear()
 		end,
 		dispose = function()
-			-- upvalues: var11 (ref)
-			var11.dispose()
+			-- upvalues: var1 (ref)
+			var1.dispose()
 		end
 	}
 end

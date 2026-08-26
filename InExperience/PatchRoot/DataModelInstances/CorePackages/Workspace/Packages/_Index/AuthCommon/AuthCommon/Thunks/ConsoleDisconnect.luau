@@ -5,21 +5,21 @@ local authPlatformDisconnectModule = require(authCommon.Http.Requests.AuthPlatfo
 local enableConsoleDisconnectNetworkingErrorToast = game:DefineFastFlag("EnableConsoleDisconnectNetworkingErrorToast", false)
 local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: authPlatformDisconnectModule (ref), promiseModule (ref), enableConsoleDisconnectNetworkingErrorToast (ref), setNetworkingErrorToast (ref)
-	return function(p3)
-		-- upvalues: authPlatformDisconnectModule (copy), p0 (ref), p2 (ref), p1 (ref), promiseModule (copy), enableConsoleDisconnectNetworkingErrorToast (copy), setNetworkingErrorToast (copy)
-		return authPlatformDisconnectModule(p0):andThen(function()
-			-- upvalues: p3 (ref), p2 (copy), p0 (copy), p1 (copy), promiseModule (copy)
-			p3:dispatch(p2(p0, p1))
+	return function(p4)
+		-- upvalues: authPlatformDisconnectModule (copy), p1 (ref), p3 (ref), p2 (ref), promiseModule (copy), enableConsoleDisconnectNetworkingErrorToast (copy), setNetworkingErrorToast (copy)
+		return authPlatformDisconnectModule(p1):andThen(function()
+			-- upvalues: p4 (ref), p3 (copy), p1 (copy), p2 (copy), promiseModule (copy)
+			p4:dispatch(p3(p1, p2))
 			
 			return promiseModule.resolve()
-		end, function(p4)
-			-- upvalues: enableConsoleDisconnectNetworkingErrorToast (copy), p3 (ref), setNetworkingErrorToast (copy), promiseModule (copy)
+		end, function(p5)
+			-- upvalues: enableConsoleDisconnectNetworkingErrorToast (copy), p4 (ref), setNetworkingErrorToast (copy), promiseModule (copy)
 			if enableConsoleDisconnectNetworkingErrorToast then
-				p3:dispatch(setNetworkingErrorToast(p4))
+				p4:dispatch(setNetworkingErrorToast(p5))
 			end
-			return promiseModule.reject(p4)
+			return promiseModule.reject(p5)
 		end)
 	end
 end

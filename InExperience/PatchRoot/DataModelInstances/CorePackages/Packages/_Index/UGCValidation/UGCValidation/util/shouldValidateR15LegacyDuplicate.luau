@@ -2,12 +2,12 @@
 local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: constantsModule (ref)
-	if not p0 or not p0.consumerConfig or not p0.consumerConfig.enforceR15FolderStructure then
+	if not p1 or not p1.consumerConfig or not p1.consumerConfig.enforceR15FolderStructure then
 		return false
 	end
-	local uploadEnum = p0.uploadEnum
+	local uploadEnum = p1.uploadEnum
 	
 	if uploadEnum.bundleType == Enum.BundleType.BodyParts then
 		return true

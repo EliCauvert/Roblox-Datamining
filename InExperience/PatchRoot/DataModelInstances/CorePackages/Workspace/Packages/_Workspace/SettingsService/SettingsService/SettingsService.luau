@@ -19,83 +19,83 @@ function t.new()
 	}, t)
 end
 
-function t:registerSetting(p0)
+function t:registerSetting(p1)
 	-- upvalues: signalsModule (ref), settingEnumModule (ref)
-	self._disposables[p0.id] = {}
+	self._disposables[p1.id] = {}
 	
-	if p0.alreadyLocalized == nil then
-		p0.alreadyLocalized = true
+	if p1.alreadyLocalized == nil then
+		p1.alreadyLocalized = true
 	end
-	local var5, var6 = signalsModule.createSignal(true)
+	local var1, var2 = signalsModule.createSignal(true)
 	
-	if p0.onAvailabilityChanged then
-		table.insert(self._disposables[p0.id], signalsModule.createEffect(function(p1)
-			-- upvalues: var5 (ref), p0 (ref)
-			p0.onAvailabilityChanged(var5(p1))
+	if p1.onAvailabilityChanged then
+		table.insert(self._disposables[p1.id], signalsModule.createEffect(function(p2)
+			-- upvalues: var1 (ref), p1 (ref)
+			p1.onAvailabilityChanged(var1(p2))
 		end))
 	end
-	if p0.initialAvailability ~= nil then
-		var6(p0.initialAvailability)
+	if p1.initialAvailability ~= nil then
+		var2(p1.initialAvailability)
 	end
-	local var7, var8 = signalsModule.createSignal(true)
+	local var3, var4 = signalsModule.createSignal(true)
 	
-	if p0.onVisibilityChanged then
-		table.insert(self._disposables[p0.id], signalsModule.createEffect(function(p2)
-			-- upvalues: var7 (ref), p0 (ref)
-			p0.onVisibilityChanged(var7(p2))
+	if p1.onVisibilityChanged then
+		table.insert(self._disposables[p1.id], signalsModule.createEffect(function(p2)
+			-- upvalues: var3 (ref), p1 (ref)
+			p1.onVisibilityChanged(var3(p2))
 		end))
 	end
-	if p0.initialVisibility ~= nil then
-		var8(p0.initialVisibility)
+	if p1.initialVisibility ~= nil then
+		var4(p1.initialVisibility)
 	end
-	self._signals[p0.id] = {
-		availability = var5,
-		setAvailability = var6,
-		visibility = var7,
-		setVisibility = var8
+	self._signals[p1.id] = {
+		availability = var1,
+		setAvailability = var2,
+		visibility = var3,
+		setVisibility = var4
 	}
-	p0.subscribeAvailable = var5
-	p0.subscribeVisible = var7
+	p1.subscribeAvailable = var1
+	p1.subscribeVisible = var3
 	
-	if not p0.alreadyLocalized then
-		p0.label = self:_updateLocalization(p0.label)
-		p0.description = self:_updateLocalization(p0.description)
+	if not p1.alreadyLocalized then
+		p1.label = self:_updateLocalization(p1.label)
+		p1.description = self:_updateLocalization(p1.description)
 	end
-	local var9 = p0
+	local var5 = p1
 	
-	if var9.field_type == settingEnumModule.Selector then
-		var9 = self:_registerSelector(var9)
-	elseif var9.field_type == settingEnumModule.Slider then
-		var9 = self:_registerSlider(var9)
-	elseif var9.field_type == settingEnumModule.Dropdown then
-		var9 = self:_registerDropdown(var9)
-	elseif var9.field_type == settingEnumModule.TextButton then
-		var9 = self:_registerTextButton(var9)
-	elseif var9.field_type == settingEnumModule.Toggle then
-		var9 = self:_registerToggle(var9)
+	if var5.field_type == settingEnumModule.Selector then
+		var5 = self:_registerSelector(var5)
+	elseif var5.field_type == settingEnumModule.Slider then
+		var5 = self:_registerSlider(var5)
+	elseif var5.field_type == settingEnumModule.Dropdown then
+		var5 = self:_registerDropdown(var5)
+	elseif var5.field_type == settingEnumModule.TextButton then
+		var5 = self:_registerTextButton(var5)
+	elseif var5.field_type == settingEnumModule.Toggle then
+		var5 = self:_registerToggle(var5)
 	else
-		error(tostring(var9.field_type) .. " is not a valid field_type")
+		error(tostring(var5.field_type) .. " is not a valid field_type")
 	end
-	self._settings[var9.id] = var9
+	self._settings[var5.id] = var5
 	
-	return var9
+	return var5
 end
 
-function t:setting(p3)
-	if not self._settings[p3] then
+function t:setting(p1)
+	if not self._settings[p1] then
 		error("No setting registered with id: " .. p3)
 	end
-	return self._settings[p3]
+	return self._settings[p1]
 end
 
-function t:updateSetting(p4, p5)
-	assert(typeof(self:setting(p4)) == "table", "No setting registered with id: " .. p4)
+function t:updateSetting(p1, p2)
+	assert(typeof(self:setting(p1)) == "table", "No setting registered with id: " .. p4)
 	
-	if p5.available ~= nil then
-		self._signals[p4].setAvailability(p5.available)
+	if p2.available ~= nil then
+		self._signals[p1].setAvailability(p2.available)
 	end
-	if p5.visible ~= nil then
-		self._signals[p4].setVisibility(p5.visible)
+	if p2.visible ~= nil then
+		self._signals[p1].setVisibility(p2.visible)
 	end
 end
 
@@ -110,66 +110,66 @@ function t:disconnect()
 	self._settings = {}
 end
 
-function t:_updateLocalization(p6)
-	if p6 == nil then
+function t:_updateLocalization(p1)
+	if p1 == nil then
 		return nil
 	end
 	local localization = self._localization
 	
-	return if typeof(p6) == "string" then localization:Format(p6) else localization:Format(p6.key, p6.args)
+	return if typeof(p1) == "string" then localization:Format(p1) else localization:Format(p1.key, p1.args)
 end
 
-function t._registerToggle(_, p7)
-	return p7
+function t._registerToggle(_, p1)
+	return p1
 end
 
-function t:_registerOptions(p8, p9)
-	for i, v in ipairs(p9) do
-		if not p8 then
+function t:_registerOptions(p1, p2)
+	for i, v in ipairs(p2) do
+		if not p1 then
 			v.text = self:_updateLocalization(v.text)
 		end
-		local var10 = v.initialAvailability ~= nil or v.initialAvailability
+		local var1 = v.initialAvailability ~= nil or v.initialAvailability
 		
 		if v.onAvailabilityChanged then
-			v.onAvailabilityChanged(var10)
+			v.onAvailabilityChanged(var1)
 		end
 	end
-	return p9
+	return p2
 end
 
-function t:_registerSlider(p10)
-	if not p10.alreadyLocalized then
-		p10.sliderLeftLabel = self:_updateLocalization(p10.sliderLeftLabel)
-		p10.sliderRightLabel = self:_updateLocalization(p10.sliderRightLabel)
+function t:_registerSlider(p3)
+	if not p3.alreadyLocalized then
+		p3.sliderLeftLabel = self:_updateLocalization(p3.sliderLeftLabel)
+		p3.sliderRightLabel = self:_updateLocalization(p3.sliderRightLabel)
 	end
-	return p10
+	return p3
 end
 
-function t:_registerTextButton(p11)
-	if not p11.alreadyLocalized then
-		p11.text = self:_updateLocalization(p11.text)
+function t:_registerTextButton(p3)
+	if not p3.alreadyLocalized then
+		p3.text = self:_updateLocalization(p3.text)
 	end
-	return p11
+	return p3
 end
 
-function t:_registerDropdown(p12)
+function t:_registerDropdown(p3)
 	-- upvalues: valueChangedSignalModule (ref)
-	if not p12.alreadyLocalized then
-		p12.placeholder = self:_updateLocalization(p12.placeholder)
+	if not p3.alreadyLocalized then
+		p3.placeholder = self:_updateLocalization(p3.placeholder)
 	end
-	p12.onMenuOpenChange = p12.onMenuOpenChange or valueChangedSignalModule.new(nil)
-	p12.options = self:_registerOptions(p12.alreadyLocalized, p12.options)
+	p3.onMenuOpenChange = p3.onMenuOpenChange or valueChangedSignalModule.new(nil)
+	p3.options = self:_registerOptions(p3.alreadyLocalized, p3.options)
 	
-	return p12
+	return p3
 end
 
-function t:_registerSelector(p13)
-	if not p13.alreadyLocalized then
-		p13.placeholder = self:_updateLocalization(p13.placeholder)
+function t:_registerSelector(p3)
+	if not p3.alreadyLocalized then
+		p3.placeholder = self:_updateLocalization(p3.placeholder)
 	end
-	p13.options = self:_registerOptions(p13.alreadyLocalized, p13.options)
+	p3.options = self:_registerOptions(p3.alreadyLocalized, p3.options)
 	
-	return p13
+	return p3
 end
 
 return t

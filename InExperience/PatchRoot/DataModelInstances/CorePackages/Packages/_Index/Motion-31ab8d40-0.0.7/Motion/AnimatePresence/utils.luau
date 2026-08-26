@@ -1,8 +1,8 @@
 ﻿local reactModule = require(script.Parent.Parent.Parent.React)
 
 return {
-	getChildKey = function(p0)
-		return if p0 == nil then nil elseif type(p0) == "table" then if p0.key == nil then if p0.props and p0.props.key ~= nil then p0.props.key else nil else p0.key else nil
+	getChildKey = function(p1)
+		return if p1 == nil then nil elseif type(p1) == "table" then if p1.key == nil then if p1.props and p1.props.key ~= nil then p1.props.key else nil else p1.key else nil
 	end,
 	onlyElements = function(p1)
 		-- upvalues: reactModule (ref)
@@ -17,8 +17,8 @@ return {
 		return t
 	end,
 	useIdFallback = function()
-		local var2 = tostring(math.random(1000000))
+		local var1 = tostring(math.random(1000000))
 		
-		return if var2 == nil then "id-" .. var2 else var2
+		return if var1 == nil then "id-" .. var2 else var1
 	end
 }

@@ -11,76 +11,76 @@ local _ = require(tiltLoadingScreen.Types)
 
 return function(value)
 	-- upvalues: reactModule (ref), createTiltLoadingScreenModelModule (ref), signalsReactModule (ref), useScreenSizeModule (ref), loadingScreenTelemetryModule (ref), constantsModule (ref)
-	local var7 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: createTiltLoadingScreenModelModule (copy), value (ref)
 		return createTiltLoadingScreenModelModule(value)
 	end, { value })
-	local var8 = signalsReactModule.useSignalState(var7.getAssetInfo)
-	local var9 = signalsReactModule.useSignalState(var7.getUniverseId)
-	local var10 = signalsReactModule.useSignalState(var7.getFollowUserId)
-	local var11 = signalsReactModule.useSignalState(var7.getIsAutoTranslated)
-	local var12 = signalsReactModule.useSignalState(var7.getIsSubjectToChinaPolicies)
-	local var13 = signalsReactModule.useSignalState(var7.getJoinState)
-	local var14 = signalsReactModule.useSignalState(var7.getQueuePosition)
-	local var15 = signalsReactModule.useSignalState(var7.getQueueTreatment)
-	local var16 = signalsReactModule.useSignalState(var7.getServerStatusText)
-	local var17 = useScreenSizeModule()
-	local var18 = reactModule.useRef(var11)
-	local var19 = reactModule.useRef(false)
+	local var2 = signalsReactModule.useSignalState(var1.getAssetInfo)
+	local var3 = signalsReactModule.useSignalState(var1.getUniverseId)
+	local var4 = signalsReactModule.useSignalState(var1.getFollowUserId)
+	local var5 = signalsReactModule.useSignalState(var1.getIsAutoTranslated)
+	local var6 = signalsReactModule.useSignalState(var1.getIsSubjectToChinaPolicies)
+	local var7 = signalsReactModule.useSignalState(var1.getJoinState)
+	local var8 = signalsReactModule.useSignalState(var1.getQueuePosition)
+	local var9 = signalsReactModule.useSignalState(var1.getQueueTreatment)
+	local var10 = signalsReactModule.useSignalState(var1.getServerStatusText)
+	local var11 = useScreenSizeModule()
+	local var12 = reactModule.useRef(var5)
+	local var13 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref)
-		var7.start()
+		-- upvalues: var1 (ref)
+		var1.start()
 		
-		return var7.destroy
-	end, { var7 })
-	var18.current = var11
-	var19.current = not (var9 <= 0)
+		return var1.destroy
+	end, { var1 })
+	var12.current = var5
+	var13.current = not (var3 <= 0)
 	reactModule.useEffect(function()
-		-- upvalues: var19 (ref), var18 (ref), loadingScreenTelemetryModule (copy)
+		-- upvalues: var13 (ref), var12 (ref), loadingScreenTelemetryModule (copy)
 		return function()
-			-- upvalues: var19 (copy), var18 (copy), loadingScreenTelemetryModule (copy)
-			if var19.current and var18.current == nil then
+			-- upvalues: var13 (copy), var12 (copy), loadingScreenTelemetryModule (copy)
+			if var13.current and var12.current == nil then
 				loadingScreenTelemetryModule.countPlayerLocalizationChoiceNotReady()
 			end
 		end
 	end, {})
 	
 	return {
-		isMobile = math.min(var17.X, var17.Y) <= constantsModule.MOBILE_BREAKPOINT,
+		isMobile = math.min(var11.X, var11.Y) <= constantsModule.MOBILE_BREAKPOINT,
 		gameData = reactModule.useMemo(function()
-			-- upvalues: var8 (ref)
-			return if var8 then {
-				name = var8.name or "",
-				creator = var8.creatorName or "",
-				verified = var8.creatorHasVerifiedBadge == true
+			-- upvalues: var2 (ref)
+			return if var2 then {
+				name = var2.name or "",
+				creator = var2.creatorName or "",
+				verified = var2.creatorHasVerifiedBadge == true
 			} else nil
-		end, { var8 }),
-		thumbnailUrl = if var9 > 0 then string.format("rbxthumb://type=GameIcon&id=%d&w=256&h=256", var9) else "",
-		isAutoTranslated = var11,
+		end, { var2 }),
+		thumbnailUrl = if var3 > 0 then string.format("rbxthumb://type=GameIcon&id=%d&w=256&h=256", var3) else "",
+		isAutoTranslated = var5,
 		statusPanel = {
-			status = var13,
-			statusText = var16,
-			queuePosition = var14,
-			queueTreatment = var15,
-			followUserId = var10,
-			isSubjectToChinaPolicies = var12,
+			status = var7,
+			statusText = var10,
+			queuePosition = var8,
+			queueTreatment = var9,
+			followUserId = var4,
+			isSubjectToChinaPolicies = var6,
 			onAutoJoinNewServer = reactModule.useCallback(function()
-				-- upvalues: var7 (ref)
-				var7.launchExperience()
-			end, { var7 }),
-			onJoinNewServer = reactModule.useCallback(function(p0)
-				-- upvalues: var7 (ref)
-				var7.logQueuedStateButtonClick("JoinNewServer", p0)
-				var7.launchExperience()
-			end, { var7 }),
+				-- upvalues: var1 (ref)
+				var1.launchExperience()
+			end, { var1 }),
+			onJoinNewServer = reactModule.useCallback(function(p1)
+				-- upvalues: var1 (ref)
+				var1.logQueuedStateButtonClick("JoinNewServer", p1)
+				var1.launchExperience()
+			end, { var1 }),
 			onJoinTheLine = reactModule.useCallback(function(p1)
-				-- upvalues: var7 (ref)
-				var7.logQueuedStateButtonClick("JoinTheLine", p1)
-			end, { var7 }),
+				-- upvalues: var1 (ref)
+				var1.logQueuedStateButtonClick("JoinTheLine", p1)
+			end, { var1 }),
 			onShowConnectionHealth = reactModule.useCallback(function()
-				-- upvalues: var7 (ref)
-				var7.showConnectionHealth()
-			end, { var7 })
+				-- upvalues: var1 (ref)
+				var1.showConnectionHealth()
+			end, { var1 })
 		}
 	}
 end

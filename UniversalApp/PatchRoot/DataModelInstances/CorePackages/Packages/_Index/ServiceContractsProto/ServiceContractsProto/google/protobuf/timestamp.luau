@@ -4,98 +4,98 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
-		seconds = if p0 == nil or p0.seconds == nil then 0 else p0.seconds,
-		nanos = if p0 == nil or p0.nanos == nil then 0 else p0.nanos
+		seconds = if p1 == nil or p1.seconds == nil then 0 else p1.seconds,
+		nanos = if p1 == nil or p1.nanos == nil then 0 else p1.nanos
 	}, t_1)
 end
 
 function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6 = 0
+	local var1 = 0
 	
 	if self.seconds ~= nil and self.seconds ~= 0 then
-		local var7, var8 = protoModule.writeTag(buff, var6, 1, protoModule.wireTypes.varint)
-		var7, var8 = protoModule.writeVarInt(var7, var8, self.seconds)
-		buff = var7
-		var6 = var8
+		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.varint)
+		var2, var8 = protoModule.writeVarInt(var2, var3, self.seconds)
+		buff = var2
+		var1 = var3
 	end
 	if self.nanos ~= nil and self.nanos ~= 0 then
-		local var9, var10 = protoModule.writeTag(buff, var6, 2, protoModule.wireTypes.varint)
-		var9, var10 = protoModule.writeVarInt(var9, var10, self.nanos)
-		buff = var9
-		var6 = var10
+		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.varint)
+		var4, var10 = protoModule.writeVarInt(var4, var5, self.nanos)
+		buff = var4
+		var1 = var5
 	end
-	local buff_1 = buffer.create(var6)
-	buffer.copy(buff_1, 0, buff, 0, var6)
+	local buff_1 = buffer.create(var1)
+	buffer.copy(buff_1, 0, buff, 0, var1)
 	
 	return buff_1
 end
 
 function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
-	local var12 = t_1.new()
-	local var13 = 0
-	while var13 < buffer.len(p1) do
+	local var1 = t_1.new()
+	local var2 = 0
+	while var2 < buffer.len(p1) do
 		local _ = nil
 		local _ = nil
-		local var14, var15, var16 = protoModule.readTag(p1, var13)
-		local var17 = var14
-		local var18 = var15
-		var13 = var16
+		local var3, var4, var5 = protoModule.readTag(p1, var2)
+		local var6 = var3
+		local var7 = var4
+		var2 = var5
 		
-		if var18 == protoModule.wireTypes.varint then
-			if var17 == 1 then
+		if var7 == protoModule.wireTypes.varint then
+			if var6 == 1 then
 				local _ = nil
-				local var19, var20 = protoModule.readVarIntI64(p1, var13)
-				var13 = var20
-				var12.seconds = var19
-			elseif var17 == 2 then
+				local var8, var9 = protoModule.readVarIntI64(p1, var2)
+				var2 = var9
+				var1.seconds = var8
+			elseif var6 == 2 then
 				local _ = nil
-				local var21, var22 = protoModule.readVarIntI32(p1, var13)
-				var13 = var22
-				var12.nanos = var21
+				local var10, var11 = protoModule.readVarIntI32(p1, var2)
+				var2 = var11
+				var1.nanos = var10
 			else
 				local _ = nil
-				local var23, var24 = protoModule.readVarInt(p1, var13)
-				local _ = var23
-				var13 = var24
+				local var12, var13 = protoModule.readVarInt(p1, var2)
+				local _ = var12
+				var2 = var13
 			end
-		elseif var18 == protoModule.wireTypes.lengthDelimited then
+		elseif var7 == protoModule.wireTypes.lengthDelimited then
 			local _ = nil
-			local var25, var26 = protoModule.readVarInt(p1, var13)
-			var13 = var26 + var25
-		elseif var18 == protoModule.wireTypes.i32 then
+			local var14, var15 = protoModule.readVarInt(p1, var2)
+			var2 = var15 + var14
+		elseif var7 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var27, var28 = protoModule.readFixed32(p1, var13)
-			local _ = var27
-			var13 = var28
-		elseif var18 == protoModule.wireTypes.i64 then
+			local var16, var17 = protoModule.readFixed32(p1, var2)
+			local _ = var16
+			var2 = var17
+		elseif var7 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var29, var30 = protoModule.readFixed64(p1, var13)
-			local _ = var29
-			var13 = var30
+			local var18, var19 = protoModule.readFixed64(p1, var2)
+			local _ = var18
+			var2 = var19
 		else
 			error("Unsupported wire type: " .. var18)
 		end
 	end
-	return var12
+	return var1
 end
 
 local function serializeFractionalNanos(p2)
 	return if p2 % 1000000 == 0 then string.format(".%03d", p2) elseif p2 % 1000 == 0 then string.format(".%06d", p2) else string.format(".%09d", p2)
 end
 
-local function _(p3)
-	local var31 = assert(tonumber(p3), "Invalid nanos string received, couldn't turn into a number")
+local function _(p2)
+	local var20 = assert(tonumber(p2), "Invalid nanos string received, couldn't turn into a number")
 	
-	for i = #p3 + 1, 9 do
-		var31 += 10 ^ (i - 1)
+	for i = #p2 + 1, 9 do
+		var20 += 10 ^ (i - 1)
 	end
-	return var31
+	return var20
 end
 
 function t_1:jsonEncode()
@@ -114,14 +114,14 @@ function t_1:jsonEncode()
 	return string.format("%04d-%02d-%02dT%02d:%02d:%02d%sZ", dateString.year, dateString.month, dateString.day, dateString.hour, dateString.min, dateString.sec, if self.nanos == 0 then "" else serializeFractionalNanos(self.nanos))
 end
 
-function t_1.jsonDecode(p4)
+function t_1.jsonDecode(p3)
 	-- upvalues: t_1 (ref)
-	local match, match_1, match_2, match_3, match_4, match_5, match_6 = string.match(p4, "^([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)(.*)Z$")
+	local match, match_1, match_2, match_3, match_4, match_5, match_6 = string.match(p3, "^([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)(.*)Z$")
 	
 	if match == nil or match_1 == nil or (match_2 == nil or match_3 == nil) or (match_4 == nil or match_5 == nil or match_6 == nil) then
 		error("Invalid timestamp provided")
 	end
-	local var40 = 0
+	local var21 = 0
 	
 	if #match_6 ~= 0 then
 		local match_7 = string.match(match_6, "^%.([0-9]+)$")
@@ -129,12 +129,12 @@ function t_1.jsonDecode(p4)
 		if match_7 == nil then
 			error("Invalid nanoseconds provided in timestamp: `" .. match_6 .. "`")
 		end
-		local var42 = assert(tonumber(match_7), "Invalid nanos string received, couldn't turn into a number")
+		local var22 = assert(tonumber(match_7), "Invalid nanos string received, couldn't turn into a number")
 		
 		for i = #match_7 + 1, 9 do
-			var42 += 10 ^ (i - 1)
+			var22 += 10 ^ (i - 1)
 		end
-		var40 = var42
+		var21 = var22
 	end
 	return t_1.new({
 		seconds = os.time({
@@ -145,7 +145,7 @@ function t_1.jsonDecode(p4)
 			min = assert(tonumber(match_4), "Invalid formatted min"),
 			sec = assert(tonumber(match_5), "Invalid formatted sec")
 		}),
-		nanos = var40
+		nanos = var21
 	})
 end
 

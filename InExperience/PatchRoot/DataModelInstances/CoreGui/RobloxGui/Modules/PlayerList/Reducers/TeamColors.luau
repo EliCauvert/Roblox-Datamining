@@ -4,16 +4,16 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local actions = script.Parent.Parent.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.AddTeam).name] = function(p0, p1)
+	[require(actions.AddTeam).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, { [p1.team] = p1.team.TeamColor })
+		return cryoModule.Dictionary.join(p1, { [p2.team] = p2.team.TeamColor })
 	end,
-	[require(actions.RemoveTeam).name] = function(p2, p3)
+	[require(actions.RemoveTeam).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p2, { [p3.team] = cryoModule.None })
+		return cryoModule.Dictionary.join(p1, { [p2.team] = cryoModule.None })
 	end,
-	[require(actions.SetTeamColor).name] = function(p4, p5)
+	[require(actions.SetTeamColor).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p4, { [p5.team] = p5.teamColor })
+		return cryoModule.Dictionary.join(p1, { [p2.team] = p2.teamColor })
 	end
 })

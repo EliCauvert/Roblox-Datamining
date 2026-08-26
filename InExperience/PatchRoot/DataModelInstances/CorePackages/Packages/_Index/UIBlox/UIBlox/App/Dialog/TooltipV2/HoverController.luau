@@ -9,46 +9,46 @@ local tooltipControllerModule = require(parent.TooltipController)
 local controlStateModule = require(parent_1.Core.Control.Enum.ControlState)
 local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), UIBloxConfigModule (ref), constantsModule (ref), controlStateModule (ref), luauPolyfillModule (ref), tooltipControllerModule (ref)
-	local var6, var7 = reactModule.useState(false)
-	local var8 = reactModule.useRef(tick())
+	local var1, var2 = reactModule.useState(false)
+	local var3 = reactModule.useRef(tick())
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref)
+		-- upvalues: var3 (ref)
 		return function()
-			-- upvalues: var8 (copy)
-			var8.current = tick()
+			-- upvalues: var3 (copy)
+			var3.current = tick()
 		end
 	end, if UIBloxConfigModule.enableTooltipV2HoverControllerReRenderFix then {} else nil)
-	local delayTime = p0.delayTime or constantsModule.DEFAULT_DELAY_TIME
-	local var10 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: p0 (ref), var7 (ref), controlStateModule (copy), var8 (ref), delayTime (ref)
-		if p0.disabled then
-			var7(false)
+	local delayTime = p1.delayTime or constantsModule.DEFAULT_DELAY_TIME
+	local var4 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: p1 (ref), var2 (ref), controlStateModule (copy), var3 (ref), delayTime (ref)
+		if p1.disabled then
+			var2(false)
 			
 			return
-		elseif p2 == controlStateModule.Hover or p2 == controlStateModule.Selected then
-			local current = var8.current
+		elseif p3 == controlStateModule.Hover or p3 == controlStateModule.Selected then
+			local current = var3.current
 			delay(delayTime, function()
-				-- upvalues: var8 (copy), current (ref), var7 (copy)
-				if var8.current == current then
-					var7(true)
+				-- upvalues: var3 (copy), current (ref), var2 (copy)
+				if var3.current == current then
+					var2(true)
 				end
 			end)
 			
 			return
-		elseif p1 == controlStateModule.Hover or p1 == controlStateModule.Selected then
-			var8.current = tick()
-			var7(false)
+		elseif p2 == controlStateModule.Hover or p2 == controlStateModule.Selected then
+			var3.current = tick()
+			var2(false)
 		end
 	end, { delayTime })
 	
-	return reactModule.createElement(tooltipControllerModule, luauPolyfillModule.Object.assign({}, p0, {
+	return reactModule.createElement(tooltipControllerModule, luauPolyfillModule.Object.assign({}, p1, {
 		delayTime = luauPolyfillModule.Object.None,
-		active = var6,
-		renderTriggerPoint = function(p3)
-			-- upvalues: p0 (ref), var10 (ref)
-			return p0.renderTriggerPoint(p3, var10)
+		active = var1,
+		renderTriggerPoint = function(p2)
+			-- upvalues: p1 (ref), var4 (ref)
+			return p1.renderTriggerPoint(p2, var4)
 		end
 	}))
 end

@@ -10,18 +10,18 @@ local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), buttonType (ref), imageSetLabel (ref), iconSize (ref), images (ref), styledTextLabel (ref)
-	local errorTitle = p0.errorTitle
-	local errorDescription = p0.errorDescription
-	local onClose = p0.onClose
-	local var2 = useStyle()
+	local errorTitle = p1.errorTitle
+	local errorDescription = p1.errorDescription
+	local onClose = p1.onClose
+	local var1 = useStyle()
 	
 	return reactModule.createElement(partialPageModal, {
 		bottomPadding = 20,
 		title = errorTitle,
-		screenSize = useSelector(function(p1)
-			return p1.ScreenSize
+		screenSize = useSelector(function(p2)
+			return p2.ScreenSize
 		end),
 		onCloseClicked = function()
 			-- upvalues: onClose (ref)
@@ -39,7 +39,7 @@ return function(p0)
 							-- upvalues: onClose (ref)
 							onClose()
 						end,
-						text = p0.buttonText
+						text = p1.buttonText
 					}
 				}
 			}
@@ -66,14 +66,14 @@ return function(p0)
 				Size = UDim2.new(0, iconSize.XXLarge, 0, iconSize.XXLarge),
 				ScaleType = Enum.ScaleType.Fit,
 				Image = images["icons/graphic/error_xlarge"],
-				ImageTransparency = var2.Theme.SystemPrimaryDefault.Transparency
+				ImageTransparency = var1.Theme.SystemPrimaryDefault.Transparency
 			}),
 			ErrorText = reactModule.createElement(styledTextLabel, {
 				lineHeight = 1,
 				layoutOrder = 2,
 				text = errorDescription,
-				fontStyle = var2.Font.CaptionBody,
-				colorStyle = var2.Theme.TextEmphasis,
+				fontStyle = var1.Font.CaptionBody,
+				colorStyle = var1.Theme.TextEmphasis,
 				size = UDim2.new(1, 0, 0, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Center,

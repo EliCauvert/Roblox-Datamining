@@ -15,69 +15,69 @@ local fFlagTCUpdateProfileCTAButton = require(parent.SharedFlags).FFlagTCUpdateP
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local _ = require(trustedContacts.Common.Types)
 
-local function TrustedFriendsVPCPrologue(p0)
+local function TrustedFriendsVPCPrologue(p1)
 	-- upvalues: useLocalization (ref), fFlagConnectionsToFriendsRename (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), fFlagTCUpdateProfileCTAButton (ref), contexts (ref), fStringConnectionGraphCoreAmpNameSpace (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
-	local var5 = useLocalization({
+	local var1 = useLocalization({
 		cancel = "CommonUI.Controls.Action.Cancel",
 		ask = "Feature.Friends.Label.Ask",
 		askYourParent = "Feature.Friends.Label.AskYourParent",
 		vpcRequired = if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.AddFriendVPC" else "Feature.Friends.Label.AddConnectionVPC"
 	})
-	local fireAnalyticsEvent = useTCAnalytics({ friendId = p0.userId }).fireAnalyticsEvent
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.externalNavigation.closeModal()
-	end, { p0.externalNavigation })
-	local var7 = reactModule.useCallback(function(_, _)
-		-- upvalues: fFlagTCUpdateProfileCTAButton (copy), p0 (ref)
-		if fFlagTCUpdateProfileCTAButton and p0.completionCallback then
-			p0.completionCallback()
+	local fireAnalyticsEvent = useTCAnalytics({ friendId = p1.userId }).fireAnalyticsEvent
+	local var2 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		p1.externalNavigation.closeModal()
+	end, { p1.externalNavigation })
+	local var3 = reactModule.useCallback(function(_, _)
+		-- upvalues: fFlagTCUpdateProfileCTAButton (copy), p1 (ref)
+		if fFlagTCUpdateProfileCTAButton and p1.completionCallback then
+			p1.completionCallback()
 		end
 	end, {
-		if fFlagTCUpdateProfileCTAButton then p0.completionCallback else nil
+		if fFlagTCUpdateProfileCTAButton then p1.completionCallback else nil
 	})
 	
 	return reactModule.createElement(dialog.Root, { size = dialogSize.Small }, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var5.askYourParent }),
+		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.askYourParent }),
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Text = reactModule.createElement(dialog.Text, { Text = var5.vpcRequired })
+			Text = reactModule.createElement(dialog.Text, { Text = var1.vpcRequired })
 		}),
 		Buttons = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var5.ask,
+					text = var1.ask,
 					variant = buttonVariant.Emphasis,
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var6 (ref), p0 (ref), var7 (ref), contexts (copy), fStringConnectionGraphCoreAmpNameSpace (copy)
+						-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var2 (ref), p1 (ref), var3 (ref), contexts (copy), fStringConnectionGraphCoreAmpNameSpace (copy)
 						fireAnalyticsEvent(eventNames.TrustedFriendsVPCAskClicked)
-						var6()
-						p0.externalNavigation.openAmpWizard({
+						var2()
+						p1.externalNavigation.openAmpWizard({
 							featureName = "TriggerTrustedFriendVPCRecourse",
-							completionCallback = var7,
-							recourseData = { targetUserId = p0.userId },
+							completionCallback = var3,
+							recourseData = { targetUserId = p1.userId },
 							entryPointEventCtx = contexts.TrustedFriendsVPCPrologue,
 							extraParameters = {
-								{ name = "targetUser", type = "UserId", value = p0.userId }
+								{ name = "targetUser", type = "UserId", value = p1.userId }
 							},
 							nameSpace = fStringConnectionGraphCoreAmpNameSpace
 						})
 					end, {
 						fireAnalyticsEvent,
-						var6,
-						p0.externalNavigation,
-						p0.userId,
-						var7
+						var2,
+						p1.externalNavigation,
+						p1.userId,
+						var3
 					})
 				},
 				{
-					text = var5.cancel,
+					text = var1.cancel,
 					variant = buttonVariant.Standard,
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var6 (ref)
+						-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var2 (ref)
 						fireAnalyticsEvent(eventNames.TrustedFriendsVPCCancelClicked)
-						var6()
-					end, { var6, fireAnalyticsEvent })
+						var2()
+					end, { var2, fireAnalyticsEvent })
 				}
 			}
 		})
@@ -85,12 +85,12 @@ local function TrustedFriendsVPCPrologue(p0)
 end
 
 return {
-	Screen = function(p1)
+	Screen = function(p2)
 		-- upvalues: reactModule (ref), TrustedFriendsVPCPrologue (ref)
 		return reactModule.createElement(TrustedFriendsVPCPrologue, {
-			userId = p1.navigation.getParam("userId"),
-			completionCallback = p1.navigation.getParam("completionCallback"),
-			externalNavigation = p1.screenProps.externalNavigation
+			userId = p2.navigation.getParam("userId"),
+			completionCallback = p2.navigation.getParam("completionCallback"),
+			externalNavigation = p2.screenProps.externalNavigation
 		})
 	end
 }

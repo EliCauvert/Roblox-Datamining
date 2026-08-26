@@ -3,9 +3,9 @@
 return {
 	fields = {
 		profileInsights = {
-			merge = function(_, p0, p1)
+			merge = function(_, p1, p2)
 				-- upvalues: mergeListsModule (ref)
-				return mergeListsModule(p0, p1)
+				return mergeListsModule(p1, p2)
 			end
 		}
 	}

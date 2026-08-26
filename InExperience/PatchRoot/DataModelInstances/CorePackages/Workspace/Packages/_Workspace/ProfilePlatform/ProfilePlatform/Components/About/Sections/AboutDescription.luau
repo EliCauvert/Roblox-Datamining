@@ -9,26 +9,26 @@ local text = foundationModule.Text
 local useLocalization = localizationModule.Hooks.useLocalization
 local fFlagProfileAboutDetailsUseSheet = require(parent.SharedFlags).FFlagProfileAboutDetailsUseSheet
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), fFlagProfileAboutDetailsUseSheet (ref), text (ref)
-	local var5 = useLocalization({
+	local var1 = useLocalization({
 		about = textKeysModule.About,
-		aboutHeading = { textKeysModule.AboutDetailsHeading, name = p0.name },
+		aboutHeading = { textKeysModule.AboutDetailsHeading, name = p1.name },
 		noBioYet = textKeysModule.NoBioYet
 	})
-	local description = p0.description
+	local description = p1.description
 	
 	if description == nil or description == "" then
-		description = var5.noBioYet
+		description = var1.noBioYet
 	end
 	return reactModule.createElement(view, {
 		tag = "col size-full-0 auto-y gap-small align-x-left",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		AboutTitle = if not fFlagProfileAboutDetailsUseSheet then reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-heading-small text-align-x-left",
-			Text = if p0.name then var5.aboutHeading else var5.about
+			Text = if p1.name then var1.aboutHeading else var1.about
 		}) else nil,
 		AboutDescription = reactModule.createElement(text, {
 			LayoutOrder = 2,

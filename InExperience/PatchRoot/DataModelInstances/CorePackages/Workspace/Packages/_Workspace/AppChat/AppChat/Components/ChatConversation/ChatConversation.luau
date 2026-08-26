@@ -14,7 +14,7 @@ local IXPService = game:GetService("IXPService")
 local roactNavigationModule = require(parent.RoactNavigation)
 local messageListModule = require(script.Parent.MessageList)
 local replyComposeBarContainerModule = require(script.Parent.ReplyComposeBarContainer)
-local var11 = if require(appChat.Flags.FFlagAppChatNewChatInputBar) then require(script.Parent.ChatInputBar) else require(script.Parent.ChatInputBarDeprecated)
+local var1 = if require(appChat.Flags.FFlagAppChatNewChatInputBar) then require(script.Parent.ChatInputBar) else require(script.Parent.ChatInputBarDeprecated)
 local userTypingIndicatorModule = require(script.Parent.UserTypingIndicator)
 local name = require(appChat.Logger):new(script.Name)
 local withChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.withChatPagePadding)
@@ -42,7 +42,7 @@ local fFlagAppChatUseSwipeForRepliesModule = require(appChat.Flags.FFlagAppChatU
 local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
 local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppChatMessageTTIMilestones)
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local var35 = if fFlagAppChatEnableDoubleOptIn then require(script.Parent.ConversationTopModalContainer) else require(script.Parent.ConversationTopModalContainerDeprecated)
+local var2 = if fFlagAppChatEnableDoubleOptIn then require(script.Parent.ConversationTopModalContainer) else require(script.Parent.ConversationTopModalContainerDeprecated)
 local conversationBottomModalContainerModule = require(script.Parent.ConversationModal.ConversationBottomModalContainer)
 local chatConversation = roactModule.PureComponent:extend("ChatConversation")
 chatConversation.defaultProps = {
@@ -96,9 +96,9 @@ chatConversation.defaultProps = {
 	shouldHideMoreMenuButton = false
 }
 
-function chatConversation.init(p0)
+function chatConversation.init(p1)
 	-- upvalues: roactModule (ref), userInputService (ref), memoize (ref), name (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), statusCodes (ref), sendMessageErrorModule (ref), chatConversationTelemetryEventsModule (ref), dateTime (ref), fFlagAppChatReplyComposeBarContainerModule (ref), conversationExitTypeModule (ref), fFlagAppChatUseSwipeForRepliesModule (ref), getReplyingToStoreModule (ref), globalLongPressSignalModule (ref), focusNavigationService (ref), coreGui (ref)
-	p0.state = {
+	p1.state = {
 		inputBarHeight = 0,
 		keyboardOffset = 0,
 		replyComposeBarHeight = 0,
@@ -107,486 +107,486 @@ function chatConversation.init(p0)
 		bottomModalHeight = 0,
 		tooltipText = ""
 	}
-	p0.inputBoxRef = p0.props.inputBoxRef or roactModule.createRef()
-	p0.inputBarRef = roactModule.createRef()
-	p0.conversationViewRef = roactModule.createRef()
-	p0.messageListRef = roactModule.createRef()
+	p1.inputBoxRef = p1.props.inputBoxRef or roactModule.createRef()
+	p1.inputBarRef = roactModule.createRef()
+	p1.conversationViewRef = roactModule.createRef()
+	p1.messageListRef = roactModule.createRef()
 	
 	function p0.getKeyboardOffset()
-		-- upvalues: userInputService (copy), p0 (ref)
-		if userInputService.OnScreenKeyboardVisible and p0.inputBoxRef:getValue() and p0.inputBoxRef:getValue():IsFocused() then
-			if p0.props.keyboardOffset ~= nil then
-				return p0.props.keyboardOffset
+		-- upvalues: userInputService (copy), p1 (ref)
+		if userInputService.OnScreenKeyboardVisible and p1.inputBoxRef:getValue() and p1.inputBoxRef:getValue():IsFocused() then
+			if p1.props.keyboardOffset ~= nil then
+				return p1.props.keyboardOffset
 			end
-			local value = p0.conversationViewRef:getValue()
+			local value = p1.conversationViewRef:getValue()
 			
 			return if value then value.AbsolutePosition.Y + value.AbsoluteSize.Y - userInputService.OnScreenKeyboardPosition.Y else 0
 		end
 	end
 	
 	function p0.updateKeyboardOffset()
-		-- upvalues: p0 (ref)
-		if not p0.isMounted then return end
-		local keyboardOffset = p0.getKeyboardOffset()
+		-- upvalues: p1 (ref)
+		if not p1.isMounted then return end
+		local keyboardOffset = p1.getKeyboardOffset()
 		
-		if p0.state.keyboardOffset ~= keyboardOffset then
-			p0:setState({ keyboardOffset = keyboardOffset })
+		if p1.state.keyboardOffset ~= keyboardOffset then
+			p1:setState({ keyboardOffset = keyboardOffset })
 		end
 	end
 	
-	function p0.onKeyboardOffsetChanged(p1)
-		-- upvalues: p0 (ref)
-		if not p0.isMounted then return end
-		if not p0.inputBoxRef:getValue() or not p0.inputBoxRef:getValue():IsFocused() then
-			p1 = 0
+	function p0.onKeyboardOffsetChanged(p2)
+		-- upvalues: p1 (ref)
+		if not p1.isMounted then return end
+		if not p1.inputBoxRef:getValue() or not p1.inputBoxRef:getValue():IsFocused() then
+			p2 = 0
 		end
-		if p0.state.keyboardOffset ~= p1 then
-			p0:setState({ keyboardOffset = p1 })
+		if p1.state.keyboardOffset ~= p2 then
+			p1:setState({ keyboardOffset = p2 })
 		end
 	end
 	
 	function p0.clearKeyboardOffset()
-		-- upvalues: p0 (ref)
-		p0:setState({ keyboardOffset = 0 })
+		-- upvalues: p1 (ref)
+		p1:setState({ keyboardOffset = 0 })
 	end
 	
-	p0.loadNext = memoize(function(p2, p3)
-		-- upvalues: p0 (ref)
+	p1.loadNext = memoize(function(p2, p3)
+		-- upvalues: p1 (ref)
 		return function()
-			-- upvalues: p2 (ref), p3 (ref), p0 (copy)
-			local var40 = p2(p3)
+			-- upvalues: p2 (ref), p3 (ref), p1 (copy)
+			local var3 = p2(p3)
 			
-			if var40 then
-				var40:catch(function()
-					-- upvalues: p0 (copy)
-					p0.showNetworkErrorToast()
+			if var3 then
+				var3:catch(function()
+					-- upvalues: p1 (copy)
+					p1.showNetworkErrorToast()
 				end)
 			end
 		end
 	end)
-	p0.markAsRead = memoize(function(p4, p5)
-		-- upvalues: p0 (ref)
+	p1.markAsRead = memoize(function(p2, p3)
+		-- upvalues: p1 (ref)
 		return function()
-			-- upvalues: p0 (copy), p4 (ref), p5 (ref)
-			if p0.props.readingMessagesIsEnabled then
-				p4(p5)
+			-- upvalues: p1 (copy), p2 (ref), p3 (ref)
+			if p1.props.readingMessagesIsEnabled then
+				p2(p3)
 			end
 		end
 	end)
 	
 	function p0.showNetworkErrorToast()
-		-- upvalues: p0 (ref)
-		p0.props.navigateToToast({
+		-- upvalues: p1 (ref)
+		p1.props.navigateToToast({
 			toastProps = {
-				toastContent = { toastTitle = p0.props.networkErrorText }
+				toastContent = { toastTitle = p1.props.networkErrorText }
 			}
 		})
 	end
 	
-	p0.onSendChat = memoize(function(p6, p7, p8, p9, p10, p11, p12, p13)
-		-- upvalues: name (copy), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), p0 (ref), statusCodes (copy), sendMessageErrorModule (copy), chatConversationTelemetryEventsModule (copy), dateTime (copy)
-		return function(p14)
-			-- upvalues: p10 (ref), name (copy), p7 (write), p11 (ref), p9 (ref), p12 (ref), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), p0 (copy), p6 (ref), statusCodes (copy), p8 (ref), sendMessageErrorModule (copy), p13 (ref), chatConversationTelemetryEventsModule (copy), dateTime (copy)
-			local var41
-			if p10 and p10.source == "friends" then
-				name:info("Creating a conversation for friend conversation {} via onSendChat", p7)
-				var41, var42 = p11(p7, p9):await()
+	p1.onSendChat = memoize(function(p2, p3, p4, p5, p6, p7, p8, p9)
+		-- upvalues: name (copy), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), p1 (ref), statusCodes (copy), sendMessageErrorModule (copy), chatConversationTelemetryEventsModule (copy), dateTime (copy)
+		return function(p10)
+			-- upvalues: p6 (ref), name (copy), p3 (write), p7 (ref), p5 (ref), p8 (ref), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), p1 (copy), p2 (ref), statusCodes (copy), p4 (ref), sendMessageErrorModule (copy), p9 (ref), chatConversationTelemetryEventsModule (copy), dateTime (copy)
+			local var3
+			if p6 and p6.source == "friends" then
+				name:info("Creating a conversation for friend conversation {} via onSendChat", p3)
+				var3, var42 = p7(p3, p5):await()
 				
-				if var41 and var42 then
-					name:debug("Created conversation {} for friend conversation {} via onSendChat", var42.id, p7)
-					p7 = var42.id
-					p12(var42.id)
+				if var3 and var42 then
+					name:debug("Created conversation {} for friend conversation {} via onSendChat", var42.id, p3)
+					p3 = var42.id
+					p8(var42.id)
 				else
 					name:error("Could not create conversation. Error: {}", tostring(var42))
 					
 					return
 				end
 			end
-			name:info("Sending message '{}' to conversationId {} via onSendChat", p14, p7)
+			name:info("Sending message '{}' to conversationId {} via onSendChat", p10, p3)
 			
 			if fFlagAppChatPerfTrackingModule then
 				if fFlagAppChatMessageTTIMilestonesModule then
-					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendTTI, { conversationId = tostring(p7) })
+					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendTTI, { conversationId = tostring(p3) })
 				else
-					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendToPendingRender, { conversationId = tostring(p7) })
-					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendToFinalRender, { conversationId = tostring(p7) })
+					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendToPendingRender, { conversationId = tostring(p3) })
+					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendToFinalRender, { conversationId = tostring(p3) })
 				end
 			end
-			var41 = nil
+			var3 = nil
 			
-			if fFlagAppChatSignalsReplyStoreModule and p0.props.replyingToMessageId then
-				var41 = { id = p0.props.replyingToMessageId }
+			if fFlagAppChatSignalsReplyStoreModule and p1.props.replyingToMessageId then
+				var3 = { id = p1.props.replyingToMessageId }
 			elseif not fFlagAppChatSignalsReplyStoreModule then
-				var41 = p0.props.replyingToMessage
+				var3 = p1.props.replyingToMessage
 			end
-			local var43 = p6(p7, p14, var41)
+			local var4 = p2(p3, p10, var3)
 			
-			if var43 then
-				var43:andThen(function(p15)
-					-- upvalues: statusCodes (copy), p0 (copy), p8 (copy), p7 (copy)
-					if p15 and p15.StatusCode == statusCodes.CONFLICT then
-						p0.showNetworkErrorToast()
+			if var4 then
+				var4:andThen(function(p11)
+					-- upvalues: statusCodes (copy), p1 (copy), p4 (copy), p3 (copy)
+					if p11 and p11.StatusCode == statusCodes.CONFLICT then
+						p1.showNetworkErrorToast()
 						
 						return
-					elseif p8 then
-						p8(p7)
+					elseif p4 then
+						p4(p3)
 					end
 				end)
-			elseif p8 then
-				p8(p7)
+			elseif p4 then
+				p4(p3)
 			end
-			p0.closeReplying()
+			p1.closeReplying()
 			local t = {
 				messageSentResult = sendMessageErrorModule.OtherFailure,
-				recipientIds = p0.props.recipientIdsSerialized
+				recipientIds = p1.props.recipientIdsSerialized
 			}
 			
-			if var43 then
-				var43:andThen(function(p16)
-					-- upvalues: sendMessageErrorModule (copy), statusCodes (copy), dateTime (copy), p13 (copy), chatConversationTelemetryEventsModule (copy), p0 (copy)
+			if var4 then
+				var4:andThen(function(p11)
+					-- upvalues: sendMessageErrorModule (copy), statusCodes (copy), dateTime (copy), p9 (copy), chatConversationTelemetryEventsModule (copy), p1 (copy)
 					local noResponse
 					local _ = nil
 					local id = nil
 					local id_1 = nil
 					local senderUserId = nil
-					local var45 = nil
-					local var46 = nil
-					local statusCode = p16 and p16.StatusCode
+					local var5 = nil
+					local var6 = nil
+					local statusCode = p11 and p11.StatusCode
 					
-					if not p16 then
+					if not p11 then
 						noResponse = sendMessageErrorModule.NoResponse
 					elseif statusCode == statusCodes.CONFLICT then
 						noResponse = sendMessageErrorModule.Conflict
-					elseif not p16.responseBody then
+					elseif not p11.responseBody then
 						noResponse = sendMessageErrorModule.NoResponseBody
-					elseif not p16.responseBody.messages or #p16.responseBody.messages == 0 then
+					elseif not p11.responseBody.messages or #p11.responseBody.messages == 0 then
 						noResponse = sendMessageErrorModule.NoMessages
-					elseif p16.responseBody.messages[1].status then
-						noResponse = p16.responseBody.messages[1].status
-						id = p16.responseBody.messages[1].id
+					elseif p11.responseBody.messages[1].status then
+						noResponse = p11.responseBody.messages[1].status
+						id = p11.responseBody.messages[1].id
 						
-						if p16.responseBody.messages[1].replies_to then
-							local repliesTo = p16.responseBody.messages[1].replies_to
+						if p11.responseBody.messages[1].replies_to then
+							local repliesTo = p11.responseBody.messages[1].replies_to
 							id_1 = repliesTo.id
 							senderUserId = repliesTo.sender_user_id
-							var45 = tostring(dateTime.fromIsoDate(repliesTo.created_at).dateTime)
-							var46 = if repliesTo.content then #repliesTo.content else nil
+							var5 = tostring(dateTime.fromIsoDate(repliesTo.created_at).dateTime)
+							var6 = if repliesTo.content then #repliesTo.content else nil
 						end
 					else
 						noResponse = sendMessageErrorModule.NoMessageStatus
 					end
-					p13.emit(chatConversationTelemetryEventsModule.ConversationMessageSent, {
+					p9.emit(chatConversationTelemetryEventsModule.ConversationMessageSent, {
 						messageSentResult = noResponse,
 						messageId = id,
-						recipientIds = p0.props.recipientIdsSerialized,
+						recipientIds = p1.props.recipientIdsSerialized,
 						targetMessageId = id_1,
 						targetMessageSenderId = senderUserId,
-						targetMessageSentAt = var45,
-						targetMessageLength = var46
+						targetMessageSentAt = var5,
+						targetMessageLength = var6
 					})
 				end):catch(function()
-					-- upvalues: p13 (copy), chatConversationTelemetryEventsModule (copy), t (ref)
-					p13.emit(chatConversationTelemetryEventsModule.ConversationMessageSent, t)
+					-- upvalues: p9 (copy), chatConversationTelemetryEventsModule (copy), t (ref)
+					p9.emit(chatConversationTelemetryEventsModule.ConversationMessageSent, t)
 				end)
 				
 				return
 			end
-			p13.emit(chatConversationTelemetryEventsModule.ConversationMessageSent, t)
+			p9.emit(chatConversationTelemetryEventsModule.ConversationMessageSent, t)
 		end
 	end)
-	p0.onSendBtnClicked = memoize(function(p17)
+	p1.onSendBtnClicked = memoize(function(p2)
 		-- upvalues: chatConversationTelemetryEventsModule (copy)
-		return function(p18)
-			-- upvalues: p17 (ref), chatConversationTelemetryEventsModule (copy)
-			p17.emit(chatConversationTelemetryEventsModule.ConversationSendBtnClicked, { sendBtnClickResult = p18 })
+		return function(p3)
+			-- upvalues: p2 (ref), chatConversationTelemetryEventsModule (copy)
+			p2.emit(chatConversationTelemetryEventsModule.ConversationSendBtnClicked, { sendBtnClickResult = p3 })
 		end
 	end)
 	
 	function p0.isMoreMenuEnabled()
-		-- upvalues: p0 (ref)
-		return p0.props.moreMenuEnabled
+		-- upvalues: p1 (ref)
+		return p1.props.moreMenuEnabled
 	end
 	
-	p0.reportInputBarReady = if fFlagAppChatPerfTrackingModule then function(p19)
-		-- upvalues: p0 (ref)
-		if p0.props.onChatInputBarReady and p0.props.shouldShowChatInputBar and p19 > 0 then
-			p0.props.onChatInputBarReady()
+	p1.reportInputBarReady = if fFlagAppChatPerfTrackingModule then function(p2)
+		-- upvalues: p1 (ref)
+		if p1.props.onChatInputBarReady and p1.props.shouldShowChatInputBar and p2 > 0 then
+			p1.props.onChatInputBarReady()
 		end
 	end else nil
 	
-	if p0.isMoreMenuEnabled() or fFlagAppChatReplyComposeBarContainerModule then
-		function p0.onHeightChanged(p20)
-			-- upvalues: fFlagAppChatPerfTrackingModule (copy), p0 (ref)
+	if p1.isMoreMenuEnabled() or fFlagAppChatReplyComposeBarContainerModule then
+		function p0.onHeightChanged(p2)
+			-- upvalues: fFlagAppChatPerfTrackingModule (copy), p1 (ref)
 			if fFlagAppChatPerfTrackingModule then
-				p0.reportInputBarReady(p20.AbsoluteSize.Y)
+				p1.reportInputBarReady(p2.AbsoluteSize.Y)
 			end
-			p0:setState(function(p21, _)
-				-- upvalues: p20 (ref)
-				return if p20.AbsoluteSize.Y == p21.inputBarHeight then {} else { inputBarHeight = p20.AbsoluteSize.Y }
+			p1:setState(function(p3, _)
+				-- upvalues: p2 (ref)
+				return if p2.AbsoluteSize.Y == p3.inputBarHeight then {} else { inputBarHeight = p2.AbsoluteSize.Y }
 			end)
 		end
 	else
-		function p0.onHeightChanged(p22)
-			-- upvalues: fFlagAppChatPerfTrackingModule (copy), p0 (ref)
+		function p0.onHeightChanged(p2)
+			-- upvalues: fFlagAppChatPerfTrackingModule (copy), p1 (ref)
 			if fFlagAppChatPerfTrackingModule then
-				p0.reportInputBarReady(p22)
+				p1.reportInputBarReady(p2)
 			end
-			p0:setState(function(p23, _)
-				-- upvalues: p22 (ref)
-				return if p22 == p23.inputBarHeight then {} else { inputBarHeight = p22 }
+			p1:setState(function(p3, _)
+				-- upvalues: p2 (ref)
+				return if p2 == p3.inputBarHeight then {} else { inputBarHeight = p2 }
 			end)
 		end
 	end
-	p0.lastTypingRequest = 0
+	p1.lastTypingRequest = 0
 	
 	function p0.chatInputTextChanged()
-		-- upvalues: p0 (ref)
-		if p0.props.conversation and p0.props.conversation.source == "friends" then return end
+		-- upvalues: p1 (ref)
+		if p1.props.conversation and p1.props.conversation.source == "friends" then return end
 		local currentTime = tick()
 		
-		if currentTime - p0.lastTypingRequest >= 3 then
-			p0.lastTypingRequest = currentTime
-			p0.props.postTypingStatus(p0.props.conversationId, true)
+		if currentTime - p1.lastTypingRequest >= 3 then
+			p1.lastTypingRequest = currentTime
+			p1.props.postTypingStatus(p1.props.conversationId, true)
 		end
 	end
 	
-	p0.exitTypeForAnalytics = conversationExitTypeModule.Default
+	p1.exitTypeForAnalytics = conversationExitTypeModule.Default
 	
 	if not fFlagAppChatUseSwipeForRepliesModule then
-		function p0.onTouchSwipe(_, p24, p25)
-			-- upvalues: p0 (ref), conversationExitTypeModule (copy)
-			if not p0.props.wideMode and p24 == Enum.SwipeDirection.Right and p25 == 1 then
-				p0.exitTypeForAnalytics = conversationExitTypeModule.SwipedRight
-				p0.props.navigateBack()
+		function p0.onTouchSwipe(_, p2, p3)
+			-- upvalues: p1 (ref), conversationExitTypeModule (copy)
+			if not p1.props.wideMode and p2 == Enum.SwipeDirection.Right and p3 == 1 then
+				p1.exitTypeForAnalytics = conversationExitTypeModule.SwipedRight
+				p1.props.navigateBack()
 			end
 		end
 	end
 	function p0.fireAnalyticsEventOnUnmount()
-		-- upvalues: p0 (ref), conversationExitTypeModule (copy)
-		p0.props.onConversationUnmount(p0.exitTypeForAnalytics)
-		p0.exitTypeForAnalytics = conversationExitTypeModule.Default
+		-- upvalues: p1 (ref), conversationExitTypeModule (copy)
+		p1.props.onConversationUnmount(p1.exitTypeForAnalytics)
+		p1.exitTypeForAnalytics = conversationExitTypeModule.Default
 	end
 	
 	function p0.closeKeyboard()
-		-- upvalues: p0 (ref)
-		if p0.inputBoxRef:getValue() then
-			p0.inputBoxRef:getValue():ReleaseFocus()
+		-- upvalues: p1 (ref)
+		if p1.inputBoxRef:getValue() then
+			p1.inputBoxRef:getValue():ReleaseFocus()
 		end
 	end
 	
 	function p0.closeReplying()
-		-- upvalues: fFlagAppChatSignalsReplyStoreModule (copy), getReplyingToStoreModule (copy), p0 (ref)
+		-- upvalues: fFlagAppChatSignalsReplyStoreModule (copy), getReplyingToStoreModule (copy), p1 (ref)
 		if fFlagAppChatSignalsReplyStoreModule then
 			getReplyingToStoreModule(false).clear()
 			
 			return
 		end
-		p0.props.replyingToMessageDispatch(nil)
+		p1.props.replyingToMessageDispatch(nil)
 	end
 	
 	function p0.onPointerInput()
-		-- upvalues: globalLongPressSignalModule (copy), p0 (ref)
+		-- upvalues: globalLongPressSignalModule (copy), p1 (ref)
 		globalLongPressSignalModule.dismiss()
-		p0.closeKeyboard()
+		p1.closeKeyboard()
 	end
 	
 	function p0.onSizeChange()
-		-- upvalues: p0 (ref)
-		p0.updateKeyboardOffset()
+		-- upvalues: p1 (ref)
+		p1.updateKeyboardOffset()
 	end
 	
-	function p0.calculateScrollOffset(p26)
-		return p26.AbsoluteCanvasSize.Y - p26.CanvasPosition.Y - p26.AbsoluteWindowSize.Y
+	function p0.calculateScrollOffset(p2)
+		return p2.AbsoluteCanvasSize.Y - p2.CanvasPosition.Y - p2.AbsoluteWindowSize.Y
 	end
 	
-	function p0.setBannerHeight(p27)
-		-- upvalues: p0 (ref)
-		p0:setState({ conversationBannerHeight = p27 })
+	function p0.setBannerHeight(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ conversationBannerHeight = p2 })
 	end
 	
-	function p0.setBottomModalHeight(p28)
-		-- upvalues: p0 (ref)
-		p0:setState({ bottomModalHeight = p28 })
+	function p0.setBottomModalHeight(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ bottomModalHeight = p2 })
 	end
 	
 	if not fFlagAppChatReplyComposeBarContainerModule then
-		function p0.setReplyComposeBarHeight(p29)
-			-- upvalues: p0 (ref)
-			p0:setState({ replyComposeBarHeight = p29 })
+		function p0.setReplyComposeBarHeight(p2)
+			-- upvalues: p1 (ref)
+			p1:setState({ replyComposeBarHeight = p2 })
 		end
 	end
-	function p0.onMessageListSizeChange(p30)
-		-- upvalues: p0 (ref)
-		p0:setState({ messageListHeight = p30.AbsoluteSize.Y })
+	function p0.onMessageListSizeChange(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ messageListHeight = p2.AbsoluteSize.Y })
 	end
 	
-	p0.focusNavigationService = focusNavigationService.new(coreGui)
+	p1.focusNavigationService = focusNavigationService.new(coreGui)
 end
 
-function chatConversation.didMount(p31)
+function chatConversation.didMount(p1)
 	-- upvalues: focusBehaviorsModule (ref), appChatNewChatInputBarIxpEnabled (ref), IXPService (ref), appChatNewChatInputBarIxpLayer (ref)
-	p31.isMounted = true
-	p31.markAsRead(p31.props.markConversationAsRead, p31.props.conversationId)()
-	local value = p31.inputBarRef:getValue()
-	p31.focusNavigationService:registerFocusBehavior(p31.conversationViewRef:getValue(), focusBehaviorsModule.mostRecentOrDefault(value))
+	p1.isMounted = true
+	p1.markAsRead(p1.props.markConversationAsRead, p1.props.conversationId)()
+	local value = p1.inputBarRef:getValue()
+	p1.focusNavigationService:registerFocusBehavior(p1.conversationViewRef:getValue(), focusBehaviorsModule.mostRecentOrDefault(value))
 	
-	if not p31.props.wideMode and p31.focusNavigationService.focusedGuiObject:getValue() ~= nil then
-		p31.focusNavigationService:focusGuiObject(value)
+	if not p1.props.wideMode and p1.focusNavigationService.focusedGuiObject:getValue() ~= nil then
+		p1.focusNavigationService:focusGuiObject(value)
 	end
-	if appChatNewChatInputBarIxpEnabled and p31.props.shouldShowChatInputBar then
+	if appChatNewChatInputBarIxpEnabled and p1.props.shouldShowChatInputBar then
 		IXPService:LogFlagLinkedUserLayerExposure(appChatNewChatInputBarIxpLayer)
 	end
 end
 
-function chatConversation.willUpdate(p32, p33, _)
-	if p33.chatIsVisible ~= p32.props.chatIsVisible and not p33.chatIsVisible then
-		p32.closeKeyboard()
+function chatConversation.willUpdate(p1, p2, _)
+	if p2.chatIsVisible ~= p1.props.chatIsVisible and not p2.chatIsVisible then
+		p1.closeKeyboard()
 	end
 end
 
-function chatConversation.didUpdate(p34, p35, p36)
+function chatConversation.didUpdate(p1, p2, p3)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref)
-	if p34.props.wideMode and p34.props.navigation.getParam("navigatedWithFocus") then
-		local value = p34.inputBarRef:getValue()
-		p34.props.navigation.setParams({ navigatedWithFocus = false })
-		p34.focusNavigationService:focusGuiObject(value)
+	if p1.props.wideMode and p1.props.navigation.getParam("navigatedWithFocus") then
+		local value = p1.inputBarRef:getValue()
+		p1.props.navigation.setParams({ navigatedWithFocus = false })
+		p1.focusNavigationService:focusGuiObject(value)
 	end
-	if p35.conversationId ~= p34.props.conversationId then
+	if p2.conversationId ~= p1.props.conversationId then
 		if fFlagAppChatPerfTrackingModule then
-			p34.reportInputBarReady(p34.state.inputBarHeight)
+			p1.reportInputBarReady(p1.state.inputBarHeight)
 		end
-		if p34.inputBoxRef:getValue() then
-			p34.inputBoxRef:getValue().Text = ""
-			p34.inputBoxRef:getValue():ReleaseFocus()
+		if p1.inputBoxRef:getValue() then
+			p1.inputBoxRef:getValue().Text = ""
+			p1.inputBoxRef:getValue():ReleaseFocus()
 		end
-		p34.closeReplying()
-		p34.markAsRead(p34.props.markConversationAsRead, p34.props.conversationId, false)()
+		p1.closeReplying()
+		p1.markAsRead(p1.props.markConversationAsRead, p1.props.conversationId, false)()
 	end
-	if fFlagAppChatPerfTrackingModule and p35.shouldShowChatInputBar ~= p34.props.shouldShowChatInputBar then
-		p34.reportInputBarReady(p34.state.inputBarHeight)
+	if fFlagAppChatPerfTrackingModule and p2.shouldShowChatInputBar ~= p1.props.shouldShowChatInputBar then
+		p1.reportInputBarReady(p1.state.inputBarHeight)
 	end
-	local listRef = p34.messageListRef and (p34.messageListRef.current and p34.messageListRef.current._listRef)
-	local var52 = listRef and (listRef._scrollRef and listRef._scrollRef.getNativeScrollRef())
-	local var53 = p34.state.messageListHeight - p36.messageListHeight
+	local listRef = p1.messageListRef and (p1.messageListRef.current and p1.messageListRef.current._listRef)
+	local var3 = listRef and (listRef._scrollRef and listRef._scrollRef.getNativeScrollRef())
+	local var4 = p1.state.messageListHeight - p3.messageListHeight
 	
-	if listRef and var52 and (p36.messageListHeight ~= 0 and var53 ~= 0) then
-		local var54 = p34.calculateScrollOffset(var52._nativeRef.current)
+	if listRef and var3 and (p3.messageListHeight ~= 0 and var4 ~= 0) then
+		local var5 = p1.calculateScrollOffset(var3._nativeRef.current)
 		
-		if var54 <= 0 then return end
-		listRef:scrollToOffset({ offset = var54 + var53 })
+		if var5 <= 0 then return end
+		listRef:scrollToOffset({ offset = var5 + var4 })
 	end
 end
 
-function chatConversation.willUnmount(p37)
-	p37.fireAnalyticsEventOnUnmount()
-	p37.closeReplying()
-	p37.keyboardConnections = {}
-	p37.isMounted = false
-	p37.focusNavigationService:teardown()
+function chatConversation.willUnmount(p1)
+	p1.fireAnalyticsEventOnUnmount()
+	p1.closeReplying()
+	p1.keyboardConnections = {}
+	p1.isMounted = false
+	p1.focusNavigationService:teardown()
 end
 
-function chatConversation.render(p38)
-	-- upvalues: withRoactChatAnalyticsModule (ref), withStyle (ref), withChatPagePaddingModule (ref), roactModule (ref), fFlagAppChatUseSwipeForRepliesModule (ref), keyboardOffsetEventHandlerModule (ref), var35 (ref), fFlagAppChatEnableDoubleOptIn (ref), fFlagAppChatReplyComposeBarContainerModule (ref), messageListModule (ref), userTypingIndicatorModule (ref), reactModule (ref), foundationModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), fFlagAppChatSmartSuggestionsModule (ref), smartSuggestionsChipRowContainerModule (ref), replyComposeBarContainerModule (ref), chatConversationMoreMenuModule (ref), var11 (ref), conversationBottomModalContainerModule (ref)
+function chatConversation.render(p1)
+	-- upvalues: withRoactChatAnalyticsModule (ref), withStyle (ref), withChatPagePaddingModule (ref), roactModule (ref), fFlagAppChatUseSwipeForRepliesModule (ref), keyboardOffsetEventHandlerModule (ref), var2 (ref), fFlagAppChatEnableDoubleOptIn (ref), fFlagAppChatReplyComposeBarContainerModule (ref), messageListModule (ref), userTypingIndicatorModule (ref), reactModule (ref), foundationModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), fFlagAppChatSmartSuggestionsModule (ref), smartSuggestionsChipRowContainerModule (ref), replyComposeBarContainerModule (ref), chatConversationMoreMenuModule (ref), var1 (ref), conversationBottomModalContainerModule (ref)
 	local isFriends
-	local var55 = #p38.props.usersTyping > 0 and p38.props.displayNamesAvailable
+	local var3 = #p1.props.usersTyping > 0 and p1.props.displayNamesAvailable
 	
-	if p38.props.conversation then
-		isFriends = p38.props.conversation.source == "friends"
+	if p1.props.conversation then
+		isFriends = p1.props.conversation.source == "friends"
 		isFriends = nil
 	else
 		isFriends = false
 	end
-	local text = "MessageList" .. tostring(p38.props.conversationId)
+	local text = "MessageList" .. tostring(p1.props.conversationId)
 	
-	return withRoactChatAnalyticsModule(function(p39)
-		-- upvalues: withStyle (copy), withChatPagePaddingModule (copy), p38 (ref), roactModule (copy), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var35 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (ref), messageListModule (copy), isFriends (ref), var55 (ref), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var11 (copy), conversationBottomModalContainerModule (copy)
-		return withStyle(function(p40)
-			-- upvalues: withChatPagePaddingModule (copy), p38 (copy), roactModule (copy), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var35 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (copy), messageListModule (copy), isFriends (copy), var55 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var11 (copy), p39 (ref), conversationBottomModalContainerModule (copy)
-			return withChatPagePaddingModule(function(p41)
-				-- upvalues: p38 (copy), roactModule (copy), p40 (ref), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var35 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (copy), messageListModule (copy), isFriends (copy), var55 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var11 (copy), p39 (copy), conversationBottomModalContainerModule (copy)
-				local var62
-				local var58 = if p38.isMoreMenuEnabled() then if p38.props.shouldDisableChatInputBar then UDim.new(0, p41.right) else UDim.new(0, math.max(p41.right - 6, 0)) else nil
+	return withRoactChatAnalyticsModule(function(p2)
+		-- upvalues: withStyle (copy), withChatPagePaddingModule (copy), p1 (ref), roactModule (copy), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var2 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (ref), messageListModule (copy), isFriends (ref), var3 (ref), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var1 (copy), conversationBottomModalContainerModule (copy)
+		return withStyle(function(p3)
+			-- upvalues: withChatPagePaddingModule (copy), p1 (copy), roactModule (copy), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var2 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (copy), messageListModule (copy), isFriends (copy), var3 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var1 (copy), p2 (ref), conversationBottomModalContainerModule (copy)
+			return withChatPagePaddingModule(function(p4)
+				-- upvalues: p1 (copy), roactModule (copy), p3 (ref), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var2 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (copy), messageListModule (copy), isFriends (copy), var3 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var1 (copy), p2 (copy), conversationBottomModalContainerModule (copy)
+				local var4
+				local var5 = if p1.isMoreMenuEnabled() then if p1.props.shouldDisableChatInputBar then UDim.new(0, p4.right) else UDim.new(0, math.max(p4.right - 6, 0)) else nil
 				local createElement = roactModule.createElement
-				local var59 = "TextButton"
+				local var6 = "TextButton"
 				local t = {
 					AutoButtonColor = false,
-					BackgroundColor3 = p40.Theme.BackgroundDefault.Color,
+					BackgroundColor3 = p3.Theme.BackgroundDefault.Color,
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 0, 1, 0),
 					Text = "",
-					Transparency = p40.Tokens.Color.None.Transparency,
-					[roactModule.Event.TouchSwipe] = if not fFlagAppChatUseSwipeForRepliesModule then p38.onTouchSwipe else nil,
-					[roactModule.Event.TouchTap] = p38.onPointerInput,
-					[roactModule.Event.MouseButton1Down] = p38.onPointerInput,
-					[roactModule.Ref] = p38.conversationViewRef,
+					Transparency = p3.Tokens.Color.None.Transparency,
+					[roactModule.Event.TouchSwipe] = if not fFlagAppChatUseSwipeForRepliesModule then p1.onTouchSwipe else nil,
+					[roactModule.Event.TouchTap] = p1.onPointerInput,
+					[roactModule.Event.MouseButton1Down] = p1.onPointerInput,
+					[roactModule.Ref] = p1.conversationViewRef,
 					Selectable = false
 				}
 				local t_1 = {
 					KeyboardOffsetEventHandler = roactModule.createElement(keyboardOffsetEventHandlerModule, {
-						onKeyboardOffsetChanged = p38.onKeyboardOffsetChanged,
-						parentViewRef = p38.conversationViewRef
+						onKeyboardOffsetChanged = p1.onKeyboardOffsetChanged,
+						parentViewRef = p1.conversationViewRef
 					}),
 					Layout = roactModule.createElement("UIListLayout", {
-						HorizontalAlignment = if p38.isMoreMenuEnabled() then nil else Enum.HorizontalAlignment.Right,
+						HorizontalAlignment = if p1.isMoreMenuEnabled() then nil else Enum.HorizontalAlignment.Right,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					ConversationTopModal = roactModule.createElement(var35, {
+					ConversationTopModal = roactModule.createElement(var2, {
 						layoutOrder = 1,
-						conversationId = if fFlagAppChatEnableDoubleOptIn then p38.props.conversationId else nil,
-						conversation = if fFlagAppChatEnableDoubleOptIn then nil else p38.props.conversation,
-						navigateToScreen = if fFlagAppChatEnableDoubleOptIn then nil else p38.props.navigateToScreen,
-						setModalHeight = p38.setBannerHeight
+						conversationId = if fFlagAppChatEnableDoubleOptIn then p1.props.conversationId else nil,
+						conversation = if fFlagAppChatEnableDoubleOptIn then nil else p1.props.conversation,
+						navigateToScreen = if fFlagAppChatEnableDoubleOptIn then nil else p1.props.navigateToScreen,
+						setModalHeight = p1.setBannerHeight
 					}),
 					MessageListFrame = roactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
 						LayoutOrder = 2,
-						[roactModule.Change.AbsoluteSize] = p38.onMessageListSizeChange,
-						Size = UDim2.new(1, 0, 1, (-p38.state.inputBarHeight) - p38.state.keyboardOffset - (if not fFlagAppChatReplyComposeBarContainerModule then p38.state.replyComposeBarHeight else 0) - p38.state.conversationBannerHeight - p38.state.bottomModalHeight)
+						[roactModule.Change.AbsoluteSize] = p1.onMessageListSizeChange,
+						Size = UDim2.new(1, 0, 1, (-p1.state.inputBarHeight) - p1.state.keyboardOffset - (if not fFlagAppChatReplyComposeBarContainerModule then p1.state.replyComposeBarHeight else 0) - p1.state.conversationBannerHeight - p1.state.bottomModalHeight)
 					}, {
 						[text] = roactModule.createElement(messageListModule, {
 							bottomMargin = 28,
 							Size = UDim2.new(1, 0, 1, 0),
-							conversationId = p38.props.conversationId,
-							isDebugEnabled = p38.props.isDebugEnabled,
-							itemList = p38.props.itemList,
-							loadNext = if isFriends then nil else p38.loadNext(p38.props.getOlderMessages, p38.props.conversationId),
-							localUserId = p38.props.localUserId,
-							markAsRead = p38.markAsRead(p38.props.markConversationAsRead, p38.props.conversationId),
-							messageListRef = p38.messageListRef,
-							openViewProfile = p38.props.openViewProfile,
-							onDetailsOpened = p38.closeKeyboard,
-							closeKeyboard = p38.closeKeyboard,
-							inputBoxRef = p38.inputBoxRef,
-							wideMode = p38.props.wideMode,
-							viewProfileOnAvatarPressed = p38.props.viewProfileOnAvatarPressed,
-							readingMessagesIsEnabled = p38.props.readingMessagesIsEnabled,
-							invalidMessageTypeText = p38.props.invalidMessageTypeText,
-							messageDefaultNoticeText = p38.props.messageDefaultNoticeText,
-							messageModeratedNoticeText = p38.props.messageModeratedNoticeText,
-							messageHiddenNoticeText = p38.props.messageHiddenNoticeText,
-							unknownUserText = p38.props.unknownUserText,
-							openGameDetailsPage = p38.props.openGameDetailsPage,
-							openMomentsDeepLink = p38.props.openMomentsDeepLink,
-							scrollToTopOnInitialOsaLoad = p38.props.scrollToTopOnInitialOsaLoad,
-							isInitialMessageLoading = p38.props.isInitialMessageLoading
+							conversationId = p1.props.conversationId,
+							isDebugEnabled = p1.props.isDebugEnabled,
+							itemList = p1.props.itemList,
+							loadNext = if isFriends then nil else p1.loadNext(p1.props.getOlderMessages, p1.props.conversationId),
+							localUserId = p1.props.localUserId,
+							markAsRead = p1.markAsRead(p1.props.markConversationAsRead, p1.props.conversationId),
+							messageListRef = p1.messageListRef,
+							openViewProfile = p1.props.openViewProfile,
+							onDetailsOpened = p1.closeKeyboard,
+							closeKeyboard = p1.closeKeyboard,
+							inputBoxRef = p1.inputBoxRef,
+							wideMode = p1.props.wideMode,
+							viewProfileOnAvatarPressed = p1.props.viewProfileOnAvatarPressed,
+							readingMessagesIsEnabled = p1.props.readingMessagesIsEnabled,
+							invalidMessageTypeText = p1.props.invalidMessageTypeText,
+							messageDefaultNoticeText = p1.props.messageDefaultNoticeText,
+							messageModeratedNoticeText = p1.props.messageModeratedNoticeText,
+							messageHiddenNoticeText = p1.props.messageHiddenNoticeText,
+							unknownUserText = p1.props.unknownUserText,
+							openGameDetailsPage = p1.props.openGameDetailsPage,
+							openMomentsDeepLink = p1.props.openMomentsDeepLink,
+							scrollToTopOnInitialOsaLoad = p1.props.scrollToTopOnInitialOsaLoad,
+							isInitialMessageLoading = p1.props.isInitialMessageLoading
 						}),
-						UserTypingIndicator = var55 and roactModule.createElement(userTypingIndicatorModule, {
+						UserTypingIndicator = var3 and roactModule.createElement(userTypingIndicatorModule, {
 							ZIndex = 2,
 							height = 28,
 							AnchorPoint = Vector2.new(0, 1),
 							Position = UDim2.new(0, 0, 1, 0),
-							usersTyping = p38.props.usersTyping,
-							oneUserTyping = p38.props.oneUserTyping,
-							twoUsersTyping = p38.props.twoUsersTyping,
-							severalUsersTyping = p38.props.severalUsersTyping
+							usersTyping = p1.props.usersTyping,
+							oneUserTyping = p1.props.oneUserTyping,
+							twoUsersTyping = p1.props.twoUsersTyping,
+							severalUsersTyping = p1.props.severalUsersTyping
 						})
 					})
 				}
 				
 				if fFlagAppChatReplyComposeBarContainerModule then
-					local var65
-					var62 = reactModule.createElement
+					local var7
+					var4 = reactModule.createElement
 					local view = foundationModule.View
 					local t_2 = { LayoutOrder = 3 }
 					local t_3 = {
@@ -594,159 +594,159 @@ function chatConversation.render(p38)
 					}
 					
 					if fFlagAppChatSignalsReplyStoreModule then
-						var65 = p38.props.replyingToMessageId ~= nil
-						var65 = nil
+						var7 = p1.props.replyingToMessageId ~= nil
+						var7 = nil
 					else
-						var65 = p38.props.replyingToMessage
+						var7 = p1.props.replyingToMessage
 					end
-					t_3["bg-surface-100"] = var65
+					t_3["bg-surface-100"] = var7
 					t_2.tag = t_3
-					t_2.onAbsoluteSizeChanged = p38.onHeightChanged
-					t_2.padding = { left = UDim.new(0, p41.left), right = var58 }
-					var62 = var62(view, t_2, {
+					t_2.onAbsoluteSizeChanged = p1.onHeightChanged
+					t_2.padding = { left = UDim.new(0, p4.left), right = var5 }
+					var4 = var4(view, t_2, {
 						SmartSuggestionsChipRow = if fFlagAppChatSmartSuggestionsModule then reactModule.createElement(smartSuggestionsChipRowContainerModule, {
 							LayoutOrder = 0,
-							conversationId = p38.props.conversationId,
-							sendMessage = p38.props.sendMessage,
-							sendGameLinkChatMessage = p38.props.sendGameLinkChatMessage
+							conversationId = p1.props.conversationId,
+							sendMessage = p1.props.sendMessage,
+							sendGameLinkChatMessage = p1.props.sendGameLinkChatMessage
 						}) else nil,
-						ReplyComposeBar = if if fFlagAppChatSignalsReplyStoreModule then p38.props.replyingToMessageId else p38.props.replyingToMessage then roactModule.createElement(replyComposeBarContainerModule, {
+						ReplyComposeBar = if if fFlagAppChatSignalsReplyStoreModule then p1.props.replyingToMessageId else p1.props.replyingToMessage then roactModule.createElement(replyComposeBarContainerModule, {
 							LayoutOrder = 1,
-							message = if not fFlagAppChatSignalsReplyStoreModule then p38.props.replyingToMessage else nil,
-							close = p38.closeReplying,
-							inputBoxRef = p38.inputBoxRef
+							message = if not fFlagAppChatSignalsReplyStoreModule then p1.props.replyingToMessage else nil,
+							close = p1.closeReplying,
+							inputBoxRef = p1.inputBoxRef
 						}) else nil,
-						Divider = if p38.isMoreMenuEnabled() and not p38.props.shouldShowChatInputBar and not p38.props.shouldHideMoreMenuButton then reactModule.createElement(foundationModule.View, {
+						Divider = if p1.isMoreMenuEnabled() and not p1.props.shouldShowChatInputBar and not p1.props.shouldHideMoreMenuButton then reactModule.createElement(foundationModule.View, {
 							LayoutOrder = 4,
 							tag = "size-full-0 auto-y stroke-standard stroke-default"
 						}) else nil,
-						ActionInputContainer = if p38.isMoreMenuEnabled() then reactModule.createElement(foundationModule.View, {
+						ActionInputContainer = if p1.isMoreMenuEnabled() then reactModule.createElement(foundationModule.View, {
 							LayoutOrder = 2,
 							tag = "size-full-0 row gap-small auto-y align-y-center"
 						}, {
-							MoreMenu = if not p38.props.shouldHideMoreMenuButton then roactModule.createElement(chatConversationMoreMenuModule, {
+							MoreMenu = if not p1.props.shouldHideMoreMenuButton then roactModule.createElement(chatConversationMoreMenuModule, {
 								layoutOrder = 1,
-								conversation = p38.props.conversation,
-								conversationId = p38.props.conversationId,
-								navigateToSquadLobby = p38.props.navigateToSquadLobby,
-								showButtonText = not p38.props.shouldShowChatInputBar,
-								tooltipText = p38.state.tooltipText
+								conversation = p1.props.conversation,
+								conversationId = p1.props.conversationId,
+								navigateToSquadLobby = p1.props.navigateToSquadLobby,
+								showButtonText = not p1.props.shouldShowChatInputBar,
+								tooltipText = p1.state.tooltipText
 							}) else nil,
-							ChatInputBar = if p38.props.shouldShowChatInputBar then roactModule.createElement(var11, {
+							ChatInputBar = if p1.props.shouldShowChatInputBar then roactModule.createElement(var1, {
 								LayoutOrder = 2,
-								onFocusLost = p38.clearKeyboardOffset,
-								conversationId = p38.props.conversationId,
-								inputBoxRef = p38.inputBoxRef,
-								inputBarRef = p38.inputBarRef,
-								localUserId = p38.props.localUserId,
-								messageListRef = p38.messageListRef,
-								onSendChat = p38.onSendChat(p38.props.sendMessage, p38.props.conversationId, p38.props.markConversationAsRead, p39, p38.props.conversation, p38.props.createFriendConversation, p38.props.navigateToChatConversation, p38.props.telemetry),
-								onSendBtnClicked = p38.onSendBtnClicked(p38.props.telemetry),
-								onTextChanged = p38.chatInputTextChanged,
-								placeholderText = p38.props.chatInputPlaceholder,
-								isDisabled = p38.props.shouldDisableChatInputBar,
-								inputBarDisabledText = p38.props.inputBarDisabledText,
-								disabledEndTimestampDisplay = p38.props.inputBarDisabledEndTimestampDisplay,
-								onDisabledInputBarActivated = p38.props.onDisabledInputBarActivated,
-								moreMenuEnabled = p38.isMoreMenuEnabled()
+								onFocusLost = p1.clearKeyboardOffset,
+								conversationId = p1.props.conversationId,
+								inputBoxRef = p1.inputBoxRef,
+								inputBarRef = p1.inputBarRef,
+								localUserId = p1.props.localUserId,
+								messageListRef = p1.messageListRef,
+								onSendChat = p1.onSendChat(p1.props.sendMessage, p1.props.conversationId, p1.props.markConversationAsRead, p2, p1.props.conversation, p1.props.createFriendConversation, p1.props.navigateToChatConversation, p1.props.telemetry),
+								onSendBtnClicked = p1.onSendBtnClicked(p1.props.telemetry),
+								onTextChanged = p1.chatInputTextChanged,
+								placeholderText = p1.props.chatInputPlaceholder,
+								isDisabled = p1.props.shouldDisableChatInputBar,
+								inputBarDisabledText = p1.props.inputBarDisabledText,
+								disabledEndTimestampDisplay = p1.props.inputBarDisabledEndTimestampDisplay,
+								onDisabledInputBarActivated = p1.props.onDisabledInputBarActivated,
+								moreMenuEnabled = p1.isMoreMenuEnabled()
 							}) else nil
 						}) else nil,
-						ChatInputBar = if p38.isMoreMenuEnabled() or not p38.props.shouldShowChatInputBar then nil else roactModule.createElement(var11, {
+						ChatInputBar = if p1.isMoreMenuEnabled() or not p1.props.shouldShowChatInputBar then nil else roactModule.createElement(var1, {
 							LayoutOrder = 4,
-							onFocusLost = p38.clearKeyboardOffset,
-							conversationId = p38.props.conversationId,
-							inputBoxRef = p38.inputBoxRef,
-							inputBarRef = p38.inputBarRef,
-							localUserId = p38.props.localUserId,
-							messageListRef = p38.messageListRef,
-							onSendChat = p38.onSendChat(p38.props.sendMessage, p38.props.conversationId, p38.props.markConversationAsRead, p39, p38.props.conversation, p38.props.createFriendConversation, p38.props.navigateToChatConversation, p38.props.telemetry),
-							onSendBtnClicked = p38.onSendBtnClicked(p38.props.telemetry),
-							onTextChanged = p38.chatInputTextChanged,
-							placeholderText = p38.props.chatInputPlaceholder,
-							isDisabled = p38.props.shouldDisableChatInputBar,
-							inputBarDisabledText = p38.props.inputBarDisabledText,
-							disabledEndTimestampDisplay = p38.props.inputBarDisabledEndTimestampDisplay,
-							onDisabledInputBarActivated = p38.props.onDisabledInputBarActivated,
-							moreMenuEnabled = p38.isMoreMenuEnabled()
+							onFocusLost = p1.clearKeyboardOffset,
+							conversationId = p1.props.conversationId,
+							inputBoxRef = p1.inputBoxRef,
+							inputBarRef = p1.inputBarRef,
+							localUserId = p1.props.localUserId,
+							messageListRef = p1.messageListRef,
+							onSendChat = p1.onSendChat(p1.props.sendMessage, p1.props.conversationId, p1.props.markConversationAsRead, p2, p1.props.conversation, p1.props.createFriendConversation, p1.props.navigateToChatConversation, p1.props.telemetry),
+							onSendBtnClicked = p1.onSendBtnClicked(p1.props.telemetry),
+							onTextChanged = p1.chatInputTextChanged,
+							placeholderText = p1.props.chatInputPlaceholder,
+							isDisabled = p1.props.shouldDisableChatInputBar,
+							inputBarDisabledText = p1.props.inputBarDisabledText,
+							disabledEndTimestampDisplay = p1.props.inputBarDisabledEndTimestampDisplay,
+							onDisabledInputBarActivated = p1.props.onDisabledInputBarActivated,
+							moreMenuEnabled = p1.isMoreMenuEnabled()
 						})
 					})
 				else
-					var62 = nil
+					var4 = nil
 				end
-				t_1.ReplyAndInputContainer = var62
-				t_1.ReplyComposeBar = if fFlagAppChatReplyComposeBarContainerModule or not (if fFlagAppChatSignalsReplyStoreModule then p38.props.replyingToMessageId else p38.props.replyingToMessage) then nil else roactModule.createElement(replyComposeBarContainerModule, {
+				t_1.ReplyAndInputContainer = var4
+				t_1.ReplyComposeBar = if fFlagAppChatReplyComposeBarContainerModule or not (if fFlagAppChatSignalsReplyStoreModule then p1.props.replyingToMessageId else p1.props.replyingToMessage) then nil else roactModule.createElement(replyComposeBarContainerModule, {
 					LayoutOrder = 3,
-					message = if not fFlagAppChatSignalsReplyStoreModule then p38.props.replyingToMessage else nil,
-					close = p38.closeReplying,
-					setReplyComposeBarHeight = p38.setReplyComposeBarHeight,
-					inputBoxRef = p38.inputBoxRef
+					message = if not fFlagAppChatSignalsReplyStoreModule then p1.props.replyingToMessage else nil,
+					close = p1.closeReplying,
+					setReplyComposeBarHeight = p1.setReplyComposeBarHeight,
+					inputBoxRef = p1.inputBoxRef
 				})
-				t_1.Divider = if fFlagAppChatReplyComposeBarContainerModule or not p38.isMoreMenuEnabled() or (p38.props.shouldShowChatInputBar or p38.props.shouldHideMoreMenuButton) then nil else reactModule.createElement(foundationModule.View, {
+				t_1.Divider = if fFlagAppChatReplyComposeBarContainerModule or not p1.isMoreMenuEnabled() or (p1.props.shouldShowChatInputBar or p1.props.shouldHideMoreMenuButton) then nil else reactModule.createElement(foundationModule.View, {
 					LayoutOrder = 4,
 					tag = "size-full-0 auto-y stroke-standard stroke-default"
 				})
-				t_1.ActionInputContainer = if fFlagAppChatReplyComposeBarContainerModule or not p38.isMoreMenuEnabled() then nil else reactModule.createElement(foundationModule.View, {
+				t_1.ActionInputContainer = if fFlagAppChatReplyComposeBarContainerModule or not p1.isMoreMenuEnabled() then nil else reactModule.createElement(foundationModule.View, {
 					tag = "size-full-0 row gap-small auto-y align-y-center padding-y-small",
-					LayoutOrder = if not p38.props.shouldShowChatInputBar then 4 else 5,
-					padding = { left = UDim.new(0, p41.left), right = var58 },
-					onAbsoluteSizeChanged = p38.onHeightChanged
+					LayoutOrder = if not p1.props.shouldShowChatInputBar then 4 else 5,
+					padding = { left = UDim.new(0, p4.left), right = var5 },
+					onAbsoluteSizeChanged = p1.onHeightChanged
 				}, {
-					MoreMenu = if not p38.props.shouldHideMoreMenuButton then roactModule.createElement(chatConversationMoreMenuModule, {
+					MoreMenu = if not p1.props.shouldHideMoreMenuButton then roactModule.createElement(chatConversationMoreMenuModule, {
 						layoutOrder = 1,
-						conversation = p38.props.conversation,
-						conversationId = p38.props.conversationId,
-						navigateToSquadLobby = p38.props.navigateToSquadLobby,
-						showButtonText = not p38.props.shouldShowChatInputBar,
-						tooltipText = p38.state.tooltipText
+						conversation = p1.props.conversation,
+						conversationId = p1.props.conversationId,
+						navigateToSquadLobby = p1.props.navigateToSquadLobby,
+						showButtonText = not p1.props.shouldShowChatInputBar,
+						tooltipText = p1.state.tooltipText
 					}) else nil,
-					ChatInputBar = if p38.props.shouldShowChatInputBar then roactModule.createElement(var11, {
+					ChatInputBar = if p1.props.shouldShowChatInputBar then roactModule.createElement(var1, {
 						LayoutOrder = 2,
-						onFocusLost = p38.clearKeyboardOffset,
-						conversationId = p38.props.conversationId,
-						inputBoxRef = p38.inputBoxRef,
-						inputBarRef = p38.inputBarRef,
-						localUserId = p38.props.localUserId,
-						messageListRef = p38.messageListRef,
-						onSendChat = p38.onSendChat(p38.props.sendMessage, p38.props.conversationId, p38.props.markConversationAsRead, p39, p38.props.conversation, p38.props.createFriendConversation, p38.props.navigateToChatConversation, p38.props.telemetry),
-						onSendBtnClicked = p38.onSendBtnClicked(p38.props.telemetry),
-						onTextChanged = p38.chatInputTextChanged,
-						placeholderText = p38.props.chatInputPlaceholder,
-						isDisabled = p38.props.shouldDisableChatInputBar,
-						inputBarDisabledText = p38.props.inputBarDisabledText,
-						disabledEndTimestampDisplay = p38.props.inputBarDisabledEndTimestampDisplay,
-						onDisabledInputBarActivated = p38.props.onDisabledInputBarActivated,
-						moreMenuEnabled = p38.props.moreMenuEnabled
+						onFocusLost = p1.clearKeyboardOffset,
+						conversationId = p1.props.conversationId,
+						inputBoxRef = p1.inputBoxRef,
+						inputBarRef = p1.inputBarRef,
+						localUserId = p1.props.localUserId,
+						messageListRef = p1.messageListRef,
+						onSendChat = p1.onSendChat(p1.props.sendMessage, p1.props.conversationId, p1.props.markConversationAsRead, p2, p1.props.conversation, p1.props.createFriendConversation, p1.props.navigateToChatConversation, p1.props.telemetry),
+						onSendBtnClicked = p1.onSendBtnClicked(p1.props.telemetry),
+						onTextChanged = p1.chatInputTextChanged,
+						placeholderText = p1.props.chatInputPlaceholder,
+						isDisabled = p1.props.shouldDisableChatInputBar,
+						inputBarDisabledText = p1.props.inputBarDisabledText,
+						disabledEndTimestampDisplay = p1.props.inputBarDisabledEndTimestampDisplay,
+						onDisabledInputBarActivated = p1.props.onDisabledInputBarActivated,
+						moreMenuEnabled = p1.props.moreMenuEnabled
 					}) else nil
 				})
-				t_1.ChatInputBar = if fFlagAppChatReplyComposeBarContainerModule or p38.isMoreMenuEnabled() or not p38.props.shouldShowChatInputBar then nil else roactModule.createElement(var11, {
+				t_1.ChatInputBar = if fFlagAppChatReplyComposeBarContainerModule or p1.isMoreMenuEnabled() or not p1.props.shouldShowChatInputBar then nil else roactModule.createElement(var1, {
 					LayoutOrder = 4,
-					onFocusLost = p38.clearKeyboardOffset,
-					conversationId = p38.props.conversationId,
-					inputBoxRef = p38.inputBoxRef,
-					inputBarRef = p38.inputBarRef,
-					localUserId = p38.props.localUserId,
-					messageListRef = p38.messageListRef,
-					onHeightChanged = if p38.isMoreMenuEnabled() then nil else p38.onHeightChanged,
-					onSendChat = p38.onSendChat(p38.props.sendMessage, p38.props.conversationId, p38.props.markConversationAsRead, p39, p38.props.conversation, p38.props.createFriendConversation, p38.props.navigateToChatConversation, p38.props.telemetry),
-					onSendBtnClicked = p38.onSendBtnClicked(p38.props.telemetry),
-					onTextChanged = p38.chatInputTextChanged,
-					placeholderText = p38.props.chatInputPlaceholder,
-					isDisabled = p38.props.shouldDisableChatInputBar,
-					inputBarDisabledText = p38.props.inputBarDisabledText,
-					disabledEndTimestampDisplay = p38.props.inputBarDisabledEndTimestampDisplay,
-					onDisabledInputBarActivated = p38.props.onDisabledInputBarActivated,
-					moreMenuEnabled = p38.props.moreMenuEnabled
+					onFocusLost = p1.clearKeyboardOffset,
+					conversationId = p1.props.conversationId,
+					inputBoxRef = p1.inputBoxRef,
+					inputBarRef = p1.inputBarRef,
+					localUserId = p1.props.localUserId,
+					messageListRef = p1.messageListRef,
+					onHeightChanged = if p1.isMoreMenuEnabled() then nil else p1.onHeightChanged,
+					onSendChat = p1.onSendChat(p1.props.sendMessage, p1.props.conversationId, p1.props.markConversationAsRead, p2, p1.props.conversation, p1.props.createFriendConversation, p1.props.navigateToChatConversation, p1.props.telemetry),
+					onSendBtnClicked = p1.onSendBtnClicked(p1.props.telemetry),
+					onTextChanged = p1.chatInputTextChanged,
+					placeholderText = p1.props.chatInputPlaceholder,
+					isDisabled = p1.props.shouldDisableChatInputBar,
+					inputBarDisabledText = p1.props.inputBarDisabledText,
+					disabledEndTimestampDisplay = p1.props.inputBarDisabledEndTimestampDisplay,
+					onDisabledInputBarActivated = p1.props.onDisabledInputBarActivated,
+					moreMenuEnabled = p1.props.moreMenuEnabled
 				})
 				t_1.BottomModal = reactModule.createElement(conversationBottomModalContainerModule, {
 					layoutOrder = 5,
-					conversationId = p38.props.conversationId,
-					onHeightChanged = p38.setBottomModalHeight,
-					legacyBottomModalText = p38.props.bottomModalText,
-					shouldShowLegacyBottomModal = p38.props.shouldShowLegacyBottomModal,
-					shouldShowChatInputBar = p38.props.shouldShowChatInputBar
+					conversationId = p1.props.conversationId,
+					onHeightChanged = p1.setBottomModalHeight,
+					legacyBottomModalText = p1.props.bottomModalText,
+					shouldShowLegacyBottomModal = p1.props.shouldShowLegacyBottomModal,
+					shouldShowChatInputBar = p1.props.shouldShowChatInputBar
 				})
 				
-				return createElement(var59, t, t_1)
+				return createElement(var6, t, t_1)
 			end)
 		end)
 	end)

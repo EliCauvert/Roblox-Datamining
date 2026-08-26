@@ -7,7 +7,7 @@ local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetN
 local setGameVotesModule = require(gameVotesRodux.GameVotes.SetGameVotes)
 local getGameVotesModule = require(gameVotesRodux.GameVotes.GetGameVotes)
 
-local function _(p0)
+local function _(p1)
 	return "luaapp.gamesapi.game-votes" .. p0
 end
 
@@ -30,16 +30,16 @@ return {
 				p3:dispatch(setGameVotesModule(p2, if responseBody.upVotes < 0 then 0 else responseBody.upVotes, if responseBody.downVotes < 0 then 0 else responseBody.downVotes))
 				
 				return promiseModule.resolve(p4)
-			end, function(p5)
+			end, function(p4)
 				-- upvalues: p3 (ref), setNetworkingErrorToast (copy), promiseModule (copy)
-				p3:dispatch(setNetworkingErrorToast(p5))
+				p3:dispatch(setNetworkingErrorToast(p4))
 				
-				return promiseModule.reject(p5)
+				return promiseModule.reject(p4)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p6, p7)
+	GetFetchingStatus = function(p1, p2)
 		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p6, "luaapp.gamesapi.game-votes" .. p7)
+		return performFetch.GetStatus(p1, "luaapp.gamesapi.game-votes" .. p7)
 	end
 }

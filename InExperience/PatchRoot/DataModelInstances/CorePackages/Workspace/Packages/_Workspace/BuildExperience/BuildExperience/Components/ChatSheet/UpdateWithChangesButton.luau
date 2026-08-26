@@ -10,7 +10,7 @@ local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), button (ref), inputSize (ref), buttonVariant (ref)
 	return reactModule.createElement(button, {
 		text = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
@@ -19,7 +19,7 @@ return function(p0)
 		size = inputSize.Medium,
 		variant = buttonVariant.Emphasis,
 		width = UDim.new(1, 0),
-		onActivated = p0.onActivated,
-		LayoutOrder = p0.LayoutOrder
+		onActivated = p1.onActivated,
+		LayoutOrder = p1.LayoutOrder
 	})
 end

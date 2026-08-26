@@ -1,13 +1,13 @@
 ﻿return function(value)
-	local var0 = nil
+	local var1 = nil
 	local value_1 = value[tostring(Enum.AssetType.Gear.Value)]
 	
 	if value_1 then
-		local var1, _ = next(value_1)
+		local var2, _ = next(value_1)
 		
-		if var1 then
-			var0 = tonumber(var1)
+		if var2 then
+			var1 = tonumber(var2)
 		end
 	end
-	return var0
+	return var1
 end

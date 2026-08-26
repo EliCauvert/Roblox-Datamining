@@ -22,103 +22,103 @@ local t = {
 	expectedFailures = {}
 }
 
-local function comparitorMethodImpl(p0, p1, p2)
+local function comparitorMethodImpl(p1, p2, p3)
 	-- upvalues: constantsModule (ref)
-	if p2 == constantsModule.COMPARISON_METHODS.SMALLER then
-		return p0 < p1
-	elseif p2 == constantsModule.COMPARISON_METHODS.SMALLER_EQ then
-		return p0 <= p1
-	elseif p2 == constantsModule.COMPARISON_METHODS.FUZZY_EQ then
-		return math.abs(p0 - p1) <= 0.00001
-	elseif p2 == constantsModule.COMPARISON_METHODS.EXACT_EQ then
-		return p0 == p1
-	elseif p2 == constantsModule.COMPARISON_METHODS.GREATER_EQ then
-		return p1 <= p0
-	elseif p2 == constantsModule.COMPARISON_METHODS.GREATER then
-		return p1 < p0
+	if p3 == constantsModule.COMPARISON_METHODS.SMALLER then
+		return p1 < p2
+	elseif p3 == constantsModule.COMPARISON_METHODS.SMALLER_EQ then
+		return p1 <= p2
+	elseif p3 == constantsModule.COMPARISON_METHODS.FUZZY_EQ then
+		return math.abs(p1 - p2) <= 0.00001
+	elseif p3 == constantsModule.COMPARISON_METHODS.EXACT_EQ then
+		return p1 == p2
+	elseif p3 == constantsModule.COMPARISON_METHODS.GREATER_EQ then
+		return p2 <= p1
+	elseif p3 == constantsModule.COMPARISON_METHODS.GREATER then
+		return p2 < p1
 	end
 	error("Invalid comparitor method: " .. p2)
 end
 
-local function doesPropertyMatchExpectations(p3, p4, p5)
+local function doesPropertyMatchExpectations(p1, p2, p3)
 	-- upvalues: cryoModule (ref), getFFlagUGCValidationEyebrowEyelashSupportModule (ref), constantsModule (ref), doesPropertyMatchExpectations (ref), comparitorMethodImpl (ref)
-	if p4 == cryoModule.None then
-		return p3 == nil
-	elseif getFFlagUGCValidationEyebrowEyelashSupportModule() and typeof(p4) == "table" and p5 == constantsModule.COMPARISON_METHODS.FOUND_IN then
-		local var10 = false
+	if p2 == cryoModule.None then
+		return p1 == nil
+	elseif getFFlagUGCValidationEyebrowEyelashSupportModule() and typeof(p2) == "table" and p3 == constantsModule.COMPARISON_METHODS.FOUND_IN then
+		local var1 = false
 		
-		for i, v in p4 do
-			var10 = var10 or doesPropertyMatchExpectations(p3, v, constantsModule.COMPARISON_METHODS.EXACT_EQ)
+		for i, v in p2 do
+			var1 = var1 or doesPropertyMatchExpectations(p1, v, constantsModule.COMPARISON_METHODS.EXACT_EQ)
 		end
-		return var10
+		return var1
 	else
-		return typeof(p3) == typeof(p4) and (if typeof(p4) == "number" then comparitorMethodImpl(p3, p4, p5) elseif typeof(p4) == "Vector3" then comparitorMethodImpl(p3.X, p4.X, p5) and (comparitorMethodImpl(p3.Y, p4.Y, p5) and comparitorMethodImpl(p3.Z, p4.Z, p5)) elseif typeof(p4) == "Color3" then comparitorMethodImpl(p3.R, p4.R, p5) and (comparitorMethodImpl(p3.G, p4.G, p5) and comparitorMethodImpl(p3.B, p4.B, p5)) else p3 == p4)
+		return typeof(p1) == typeof(p2) and (if typeof(p2) == "number" then comparitorMethodImpl(p1, p2, p3) elseif typeof(p2) == "Vector3" then comparitorMethodImpl(p1.X, p2.X, p3) and (comparitorMethodImpl(p1.Y, p2.Y, p3) and comparitorMethodImpl(p1.Z, p2.Z, p3)) elseif typeof(p2) == "Color3" then comparitorMethodImpl(p1.R, p2.R, p3) and (comparitorMethodImpl(p1.G, p2.G, p3) and comparitorMethodImpl(p1.B, p2.B, p3)) else p1 == p2)
 	end
 end
 
-local function _(p6, p7)
-	if typeof(p7) == "CFrame" and p6 == "PositionMagnitude" then
-		return true, p7.Position.Magnitude
-	elseif typeof(p7) == "CFrame" and p6 == "Orientation" then
-		return true, Vector3.new(p7:ToOrientation())
-	elseif typeof(p7) == "CFrame" and p6 == "Position" then
-		return true, p7.Position
+local function _(p4, p5)
+	if typeof(p5) == "CFrame" and p4 == "PositionMagnitude" then
+		return true, p5.Position.Magnitude
+	elseif typeof(p5) == "CFrame" and p4 == "Orientation" then
+		return true, Vector3.new(p5:ToOrientation())
+	elseif typeof(p5) == "CFrame" and p4 == "Position" then
+		return true, p5.Position
 	end
 	return false
 end
 
-local function getAllActiveTestsOnProperty(p8, p9, p10, p11)
+local function getAllActiveTestsOnProperty(p4, p5, p6, p7)
 	-- upvalues: constantsModule (ref), getAllActiveTestsOnProperty (ref)
-	if typeof(p11) ~= "table" then
+	if typeof(p7) ~= "table" then
 		return {
 			{
-				p9,
-				p10,
-				p11,
+				p5,
+				p6,
+				p7,
 				constantsModule.COMPARISON_METHODS.FUZZY_EQ
 			}
 		}
 	end
-	for i, v in p11 do
+	for i, v in p7 do
 		if i == constantsModule.INCLUSION_METHODS.INCLUSION_LIST then
-			if table.find(v, p8) == nil then
+			if table.find(v, p4) == nil then
 				return {}
 			end
-		elseif i == constantsModule.INCLUSION_METHODS.EXCLUSION_LIST and table.find(v, p8) ~= nil then
+		elseif i == constantsModule.INCLUSION_METHODS.EXCLUSION_LIST and table.find(v, p4) ~= nil then
 			return {}
 		end
 	end
 	local t = {}
 	
 	for v, v_1 in constantsModule.COMPARISON_METHODS do
-		if p11[v_1] ~= nil then
-			table.insert(t, { p9, p10, p11[v_1], v_1 })
+		if p7[v_1] ~= nil then
+			table.insert(t, { p5, p6, p7[v_1], v_1 })
 		end
 	end
-	local var12 = 1
-	while p11[var12] ~= nil do
-		local var13 = getAllActiveTestsOnProperty(p8, p9, p10, p11[var12])
-		table.move(var13, 1, #var13, #t + 1, t)
-		var12 += 1
+	local var2 = 1
+	while p7[var2] ~= nil do
+		local var3 = getAllActiveTestsOnProperty(p4, p5, p6, p7[var2])
+		table.move(var3, 1, #var3, #t + 1, t)
+		var2 += 1
 	end
-	for i_2, v_2 in p11 do
-		local var14, position
-		if typeof(p10) == "CFrame" and i_2 == "PositionMagnitude" then
-			var14 = true
-			position = p10.Position.Magnitude
-		elseif typeof(p10) == "CFrame" and i_2 == "Orientation" then
-			var14 = true
-			position = Vector3.new(p10:ToOrientation())
-		elseif typeof(p10) == "CFrame" and i_2 == "Position" then
-			var14 = true
-			position = p10.Position
+	for i_2, v_2 in p7 do
+		local var4, position
+		if typeof(p6) == "CFrame" and i_2 == "PositionMagnitude" then
+			var4 = true
+			position = p6.Position.Magnitude
+		elseif typeof(p6) == "CFrame" and i_2 == "Orientation" then
+			var4 = true
+			position = Vector3.new(p6:ToOrientation())
+		elseif typeof(p6) == "CFrame" and i_2 == "Position" then
+			var4 = true
+			position = p6.Position
 		else
-			var14 = false
+			var4 = false
 			position = nil
 		end
-		if var14 then
-			for i_3, v_3 in getAllActiveTestsOnProperty(p8, i_2, position, v_2) do
-				v_3[1] = p9 .. "." .. v_3[1]
+		if var4 then
+			for i_3, v_3 in getAllActiveTestsOnProperty(p4, i_2, position, v_2) do
+				v_3[1] = p5 .. "." .. v_3[1]
 				table.insert(t, v_3)
 			end
 		end
@@ -126,10 +126,10 @@ local function getAllActiveTestsOnProperty(p8, p9, p10, p11)
 	return t
 end
 
-function t.run(p12, p13)
+function t.run(p8, p9)
 	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref), getAllActiveTestsOnProperty (ref), doesPropertyMatchExpectations (ref), valueToStringModule (ref)
-	local rootInstance = p13.rootInstance
-	local assetType = p13.uploadEnum.assetType
+	local rootInstance = p9.rootInstance
+	local assetType = p9.uploadEnum.assetType
 	local descendants = rootInstance:GetDescendants()
 	table.insert(descendants, rootInstance)
 	
@@ -147,7 +147,7 @@ function t.run(p12, p13)
 							local unpacked, unpacked_1, unpacked_2, unpacked_3 = table.unpack(v_3)
 							
 							if not doesPropertyMatchExpectations(unpacked_1, unpacked_2, unpacked_3) then
-								p12:fail(errorSourceStringsModule.Keys.PropertyValueInvalid, {
+								p8:fail(errorSourceStringsModule.Keys.PropertyValueInvalid, {
 									PropertyName = unpacked,
 									InstancePath = v:GetFullName(),
 									ComparisonMethod = unpacked_3,
@@ -156,7 +156,7 @@ function t.run(p12, p13)
 							end
 						end
 					else
-						p12:fail(errorSourceStringsModule.Keys.PropertyNotFound, { PropertyName = i_2, InstancePath = v:GetFullName() })
+						p8:fail(errorSourceStringsModule.Keys.PropertyNotFound, { PropertyName = i_2, InstancePath = v:GetFullName() })
 					end
 				end
 			end

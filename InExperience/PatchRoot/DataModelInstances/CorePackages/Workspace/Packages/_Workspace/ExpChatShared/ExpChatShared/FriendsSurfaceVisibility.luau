@@ -1,6 +1,6 @@
-﻿local var0, var1 = require(script:FindFirstAncestor("ExpChatShared").Parent.Signals).createSignal(nil)
+﻿local var1, var2 = require(script:FindFirstAncestor("ExpChatShared").Parent.Signals).createSignal(nil)
 
 return {
-	getVisibleConversationId = var0,
-	setVisibleConversationId = var1
+	getVisibleConversationId = var1,
+	setVisibleConversationId = var2
 }

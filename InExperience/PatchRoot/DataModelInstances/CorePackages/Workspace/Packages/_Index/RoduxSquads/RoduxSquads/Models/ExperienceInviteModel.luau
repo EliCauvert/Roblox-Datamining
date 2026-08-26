@@ -6,27 +6,27 @@ local experienceInviteVoteTypeModule = require(roduxSquads.Enums.ExperienceInvit
 local experienceInviteTypeModule = require(roduxSquads.Enums.ExperienceInviteType)
 local fFlagEnablePrivatePartyAcceptInvite = require(parent.SharedFlags).FFlagEnablePrivatePartyAcceptInvite
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: experienceInviteVoteTypeModule (ref)
-	local var6 = 0
+	local var1 = 0
 	
-	for i = 1, #p0 do
-		if p0[i].voteType == experienceInviteVoteTypeModule.Accept then
-			var6 += 1
+	for i = 1, #p1 do
+		if p1[i].voteType == experienceInviteVoteTypeModule.Accept then
+			var1 += 1
 		end
 	end
-	return var6
+	return var1
 end
 
 local t = {}
 
-function t.new(p1)
+function t.new(p2)
 	-- upvalues: t (ref)
-	assert(t.isValid(p1))
+	assert(t.isValid(p2))
 	t.__index = t
-	setmetatable(p1, t)
+	setmetatable(p2, t)
 	
-	return p1
+	return p2
 end
 
 function t.mock(p2)
@@ -39,20 +39,20 @@ function t.mock(p2)
 			voteType = experienceInviteVoteTypeModule.Accept
 		}
 	}
-	local var8 = 0
+	local var2 = 0
 	
 	for i = 1, #p2 do
 		if p2[i].voteType == experienceInviteVoteTypeModule.Accept then
-			var8 += 1
+			var2 += 1
 		end
 	end
-	var8 = t.new({
+	var2 = t.new({
 		createdAtTime = p2.createdAtTime or "2024-07-19T21:02:47.777+00:00",
 		experienceInviteId = p2.experienceInviteId or "987",
 		experienceDetail = p2.experienceDetail or { placeId = 15308759682, gameInstanceId = "instanceId" },
 		inviterId = p2.inviterId or 123456,
 		membershipEntityId = p2.membershipEntityId or "54321",
-		spotsTaken = var8,
+		spotsTaken = var2,
 		state = p2.state or experienceInviteStateModule.Active,
 		totalSpots = p2.totalSpots or 6,
 		versionId = p2.version or 1,
@@ -60,9 +60,9 @@ function t.mock(p2)
 	})
 	
 	if fFlagEnablePrivatePartyAcceptInvite then
-		var8.inviteType = p2.inviteType or experienceInviteTypeModule.PlayWithPartyInPublicServer
+		var2.inviteType = p2.inviteType or experienceInviteTypeModule.PlayWithPartyInPublicServer
 	end
-	return var8
+	return var2
 end
 
 function t.format(p3)
@@ -76,14 +76,14 @@ function t.format(p3)
 		inviterId = p3.inviterId,
 		membershipEntityId = p3.membershipEntityId
 	}
-	local var10 = 0
+	local var3 = 0
 	
 	for i = 1, #votes do
 		if votes[i].voteType == experienceInviteVoteTypeModule.Accept then
-			var10 += 1
+			var3 += 1
 		end
 	end
-	t_1.spotsTaken = var10
+	t_1.spotsTaken = var3
 	t_1.state = p3.state
 	t_1.totalSpots = p3.totalSpots
 	t_1.versionId = p3.versionId

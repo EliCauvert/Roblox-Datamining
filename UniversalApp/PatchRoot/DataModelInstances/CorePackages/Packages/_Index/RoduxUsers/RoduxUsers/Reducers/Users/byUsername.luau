@@ -8,78 +8,78 @@ local userRemovedModule = require(actions.UserRemoved)
 local userUpdatedModule = require(actions.UserUpdated)
 local userModelModule = require(models.UserModel)
 
-local _ = function(p0, p1)
-	local var8 = nil
+local _ = function(p1, p2)
+	local var1 = nil
 	
-	for i, v in pairs(p1) do
-		if v == p0 then
-			var8 = i
+	for i, v in pairs(p2) do
+		if v == p1 then
+			var1 = i
 			
-			return var8
+			return var1
 		end
 	end
-	return var8
+	return var1
 end
 
-local var6 = function(p2, p3)
+local var2 = function(p3, p4)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	
-	for i, v in ipairs(p3) do
+	for i, v in ipairs(p4) do
 		if v.name then
 			t[v.name] = tostring(v.id)
 		end
 	end
-	return cryoModule.Dictionary.join(p2, t)
+	return cryoModule.Dictionary.join(p3, t)
 end
 
 local t = {}
 
-return function(p4)
-	-- upvalues: roduxModule (ref), t (ref), var6 (ref), userUpdatedModule (ref), userModelModule (ref), cryoModule (ref), userRemovedModule (ref)
-	local usersNetworking = p4.usersNetworking
-	local friendsNetworking = p4.friendsNetworking
+return function(p5)
+	-- upvalues: roduxModule (ref), t (ref), var2 (ref), userUpdatedModule (ref), userModelModule (ref), cryoModule (ref), userRemovedModule (ref)
+	local usersNetworking = p5.usersNetworking
+	local friendsNetworking = p5.friendsNetworking
 	
 	return roduxModule.createReducer(t, {
-		[usersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p5, p6)
-			-- upvalues: var6 (copy)
-			return var6(p5, { p6.responseBody })
+		[usersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p6, p7)
+			-- upvalues: var2 (copy)
+			return var2(p6, { p7.responseBody })
 		end,
-		[usersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p7, p8)
-			-- upvalues: var6 (copy)
-			return var6(p7, p8.responseBody.data)
+		[usersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p6, p7)
+			-- upvalues: var2 (copy)
+			return var2(p6, p7.responseBody.data)
 		end,
-		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p9, p10)
-			-- upvalues: var6 (copy)
-			return var6(p9, p10.responseBody.data)
+		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p6, p7)
+			-- upvalues: var2 (copy)
+			return var2(p6, p7.responseBody.data)
 		end,
-		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p11, p12)
-			-- upvalues: var6 (copy)
-			return var6(p11, p12.responseBody.data)
+		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p6, p7)
+			-- upvalues: var2 (copy)
+			return var2(p6, p7.responseBody.data)
 		end,
-		[friendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p13, p14)
-			-- upvalues: var6 (copy)
-			return var6(p13, p14.responseBody.data)
+		[friendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p6, p7)
+			-- upvalues: var2 (copy)
+			return var2(p6, p7.responseBody.data)
 		end,
-		[userUpdatedModule.name] = function(p15, p16)
+		[userUpdatedModule.name] = function(p6, p7)
 			-- upvalues: userModelModule (copy), cryoModule (copy)
-			assert(userModelModule.isValid(p16.payload))
+			assert(userModelModule.isValid(p7.payload))
 			
-			return cryoModule.Dictionary.join(p15, { [p16.payload.username] = p16.payload.id })
+			return cryoModule.Dictionary.join(p6, { [p7.payload.username] = p7.payload.id })
 		end,
-		[userRemovedModule.name] = function(p17, p18)
+		[userRemovedModule.name] = function(p6, p7)
 			-- upvalues: cryoModule (copy)
-			assert(type(p18.payload.id) == "string", "Expected id to be a string")
-			local id = p18.payload.id
-			local var10 = nil
+			assert(type(p7.payload.id) == "string", "Expected id to be a string")
+			local id = p7.payload.id
+			local var3 = nil
 			
-			for i, v in pairs(p17) do
+			for i, v in pairs(p6) do
 				if v == id then
-					var10 = i
+					var3 = i
 					break
 				end
 			end
-			return if var10 then cryoModule.Dictionary.join(p17, { [var10] = cryoModule.None }) else p17
+			return if var3 then cryoModule.Dictionary.join(p6, { [var3] = cryoModule.None }) else p6
 		end
 	})
 end

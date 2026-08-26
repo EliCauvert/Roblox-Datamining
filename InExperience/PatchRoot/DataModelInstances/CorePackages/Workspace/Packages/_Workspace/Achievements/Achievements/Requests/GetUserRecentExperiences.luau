@@ -3,14 +3,14 @@ local promiseModule = require(parent.Promise)
 local dashModule = require(parent.Dash)
 local makeOmniRecommendationsRequest = require(parent.GraphQlShared).MakeOmniRecommendationsRequest
 
-return function(p0, _)
+return function(p1, _)
 	-- upvalues: makeOmniRecommendationsRequest (ref), promiseModule (ref), dashModule (ref)
-	return makeOmniRecommendationsRequest(p0, "Home", "0", nil, nil, nil, { tostring(100000003) }):andThen(function(p1)
+	return makeOmniRecommendationsRequest(p1, "Home", "0", nil, nil, nil, { tostring(100000003) }):andThen(function(p2)
 		-- upvalues: promiseModule (copy), dashModule (copy)
-		if p1.responseBody == nil then
+		if p2.responseBody == nil then
 			return promiseModule.reject("Response has no body.")
 		end
-		local sorts = p1.responseBody.sorts
+		local sorts = p2.responseBody.sorts
 		
 		if not sorts then
 			return promiseModule.reject("Response has no sorts.")
@@ -30,8 +30,8 @@ return function(p0, _)
 		end
 		local tCount = #t
 		
-		if not dashModule.find(t, function(p2)
-			return p2.contentId == game.GameId
+		if not dashModule.find(t, function(p3)
+			return p3.contentId == game.GameId
 		end) then
 			tCount += 1
 		end

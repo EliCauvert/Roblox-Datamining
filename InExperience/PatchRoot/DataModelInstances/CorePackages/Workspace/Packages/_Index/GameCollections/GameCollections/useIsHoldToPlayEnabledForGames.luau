@@ -14,9 +14,9 @@ return function()
 	-- upvalues: useUserExperiment (ref), appUserLayers (ref), responsiveModule (ref), useUiModeInfo (ref), fFlagGuacStickyShortcutBarEnabled (ref), var2 (ref), fFlagLuaAppEnableStickyShortcutBar (ref), var1 (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), uiMode (ref)
 	local var3 = useUserExperiment({
 		appUserLayers.PlatformExcellenceQualityImprovementConsoles
-	}, function(p0)
+	}, function(p1)
 		-- upvalues: appUserLayers (copy)
-		return (p0[appUserLayers.PlatformExcellenceQualityImprovementConsoles] or {}).enableHoldToPlay
+		return (p1[appUserLayers.PlatformExcellenceQualityImprovementConsoles] or {}).enableHoldToPlay
 	end)
 	local var4 = responsiveModule.useLastInput()
 	local var5 = useUiModeInfo()

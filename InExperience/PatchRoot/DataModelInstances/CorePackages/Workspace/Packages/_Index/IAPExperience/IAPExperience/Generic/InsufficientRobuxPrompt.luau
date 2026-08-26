@@ -19,7 +19,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.render(p0)
+function name.render(p1)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -35,39 +35,39 @@ function name.render(p0)
 			cancel = { key = "IAPExperience.InsufficientRobux.Action.Cancel" },
 			buyRobux = { key = "IAPExperience.InsufficientRobux.Action.BuyRobux" }
 		},
-		render = function(p1)
-			-- upvalues: p0 (ref)
-			return p0:renderAlert(p1)
+		render = function(p2)
+			-- upvalues: p1 (ref)
+			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function name.renderAlert(p2, p3)
+function name.renderAlert(p1, p2)
 	-- upvalues: withStyle (ref), roactModule (ref), interactiveAlert (ref), buttonType (ref), fitFrameVertical (ref), roactFitComponentsModule (ref), fitTextLabel (ref), fitFrameHorizontal (ref), imageSetLabel (ref), robux (ref)
-	return withStyle(function(p4)
-		-- upvalues: roactModule (copy), interactiveAlert (copy), p2 (ref), p3 (ref), buttonType (copy), fitFrameVertical (copy), roactFitComponentsModule (copy), fitTextLabel (copy), fitFrameHorizontal (copy), imageSetLabel (copy), robux (copy)
-		local font = p4.Font
-		local theme = p4.Theme
-		local var5 = font.BaseSize * font.Body.RelativeSize
+	return withStyle(function(p3)
+		-- upvalues: roactModule (copy), interactiveAlert (copy), p1 (ref), p2 (ref), buttonType (copy), fitFrameVertical (copy), roactFitComponentsModule (copy), fitTextLabel (copy), fitFrameHorizontal (copy), imageSetLabel (copy), robux (copy)
+		local font = p3.Font
+		local theme = p3.Theme
+		local var1 = font.BaseSize * font.Body.RelativeSize
 		
 		return roactModule.createElement(interactiveAlert, {
-			screenSize = p2.props.screenSize,
-			title = p3.title,
-			bodyText = p3.dontHaveEnough,
+			screenSize = p1.props.screenSize,
+			title = p2.title,
+			bodyText = p2.dontHaveEnough,
 			buttonStackInfo = {
 				buttons = {
 					{
 						isDefaultChild = true,
-						props = { onActivated = p2.props.closePrompt, text = p3.cancel }
+						props = { onActivated = p1.props.closePrompt, text = p2.cancel }
 					},
 					{
 						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = p2.props.buyRobux, text = p3.buyRobux }
+						props = { onActivated = p1.props.buyRobux, text = p2.buyRobux }
 					}
 				}
 			},
 			middleContent = function()
-				-- upvalues: roactModule (copy), fitFrameVertical (copy), roactFitComponentsModule (copy), fitTextLabel (copy), font (ref), p3 (copy), theme (ref), var5 (ref), fitFrameHorizontal (copy), imageSetLabel (copy), robux (copy), p2 (copy)
+				-- upvalues: roactModule (copy), fitFrameVertical (copy), roactFitComponentsModule (copy), fitTextLabel (copy), font (ref), p2 (copy), theme (ref), var1 (ref), fitFrameHorizontal (copy), imageSetLabel (copy), robux (copy), p1 (copy)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
 					margin = roactFitComponentsModule.Rect.quad(10, 0, 10, 0),
@@ -82,10 +82,10 @@ function name.renderAlert(p2, p3)
 						LayoutOrder = 0,
 						width = fitTextLabel.Width.FitToText,
 						Font = font.Body.Font,
-						Text = p3.currentBalance,
+						Text = p2.currentBalance,
 						TextColor3 = theme.TextDefault.Color,
 						TextTransparency = theme.TextDefault.Transparency,
-						TextSize = var5
+						TextSize = var1
 					}),
 					RobuxAmount = roactModule.createElement(fitFrameHorizontal, {
 						BackgroundTransparency = 1,
@@ -98,7 +98,7 @@ function name.renderAlert(p2, p3)
 						Icon = roactModule.createElement(imageSetLabel, {
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
-							Size = UDim2.fromOffset(var5, var5),
+							Size = UDim2.fromOffset(var1, var1),
 							Image = robux,
 							ImageColor3 = theme.TextDefault.Color,
 							ImageTransparency = theme.TextDefault.Transparency
@@ -107,11 +107,11 @@ function name.renderAlert(p2, p3)
 							LayoutOrder = 2,
 							BackgroundTransparency = 1,
 							width = fitTextLabel.Width.FitToText,
-							Text = p2.props.robuxBalance,
+							Text = p1.props.robuxBalance,
 							Font = font.Body.Font,
 							TextColor3 = theme.TextDefault.Color,
 							TextTransparency = theme.TextDefault.Transparency,
-							TextSize = var5
+							TextSize = var1
 						})
 					})
 				})

@@ -23,13 +23,13 @@ function t:getSize()
 	return #self.data
 end
 
-function t:checkCompatible(p0)
+function t:checkCompatible(p1)
 	-- upvalues: t (ref)
-	if typeof(self) ~= typeof(t) or typeof(p0) ~= typeof(t) then
+	if typeof(self) ~= typeof(t) or typeof(p1) ~= typeof(t) then
 		error("vector operation on non-vector type")
 		
 		return false
-	elseif #self.data == #p0.data then
+	elseif #self.data == #p1.data then
 		return true
 	end
 	error("operating on vectors of different dimension")
@@ -42,72 +42,72 @@ function t:__index(p1)
 	return if typeof(p1) == "number" then self.data[p1] else t[p1]
 end
 
-function t:__newindex(p2, p3)
-	if typeof(p2) == "number" then
-		self.data[p2] = p3
+function t:__newindex(p1, p2)
+	if typeof(p1) == "number" then
+		self.data[p1] = p2
 		
 		return
 	end
-	rawset(self, p2, p3)
+	rawset(self, p1, p2)
 end
 
-function t:__add(p4)
+function t:__add(p1)
 	-- upvalues: t (ref)
-	t.checkCompatible(self, p4)
+	t.checkCompatible(self, p1)
 	local t_1 = {}
 	
 	for i = 1, #self.data do
-		table.insert(t_1, self.data[i] + p4.data[i])
+		table.insert(t_1, self.data[i] + p1.data[i])
 	end
 	return t.new(t_1)
 end
 
-function t:__sub(p5)
+function t:__sub(p2)
 	-- upvalues: t (ref)
-	t.checkCompatible(self, p5)
+	t.checkCompatible(self, p2)
 	local t_1 = {}
 	
 	for i = 1, #self.data do
-		table.insert(t_1, self.data[i] - p5.data[i])
+		table.insert(t_1, self.data[i] - p2.data[i])
 	end
 	return t.new(t_1)
 end
 
-function t:__mul(p6)
+function t:__mul(p3)
 	-- upvalues: t (ref)
-	if typeof(self) == typeof(t) and typeof(p6) == "number" then
+	if typeof(self) == typeof(t) and typeof(p3) == "number" then
 		local t_1 = {}
 		
 		for i, v in self.data do
-			table.insert(t_1, v * p6)
+			table.insert(t_1, v * p3)
 		end
 		return t.new(t_1)
 	else
-		t.checkCompatible(self, p6)
+		t.checkCompatible(self, p3)
 		local t_1 = {}
 		
 		for i = 1, #self.data do
-			table.insert(t_1, self.data[i] * p6.data[i])
+			table.insert(t_1, self.data[i] * p3.data[i])
 		end
 		return t.new(t_1)
 	end
 end
 
-function t:__div(p7)
+function t:__div(p4)
 	-- upvalues: t (ref)
-	if typeof(self) == typeof(t) and typeof(p7) == "number" then
+	if typeof(self) == typeof(t) and typeof(p4) == "number" then
 		local t_1 = {}
 		
 		for i, v in self.data do
-			table.insert(t_1, v / p7)
+			table.insert(t_1, v / p4)
 		end
 		return t.new(t_1)
 	else
-		t.checkCompatible(self, p7)
+		t.checkCompatible(self, p4)
 		local t_1 = {}
 		
 		for i = 1, #self.data do
-			table.insert(t_1, self.data[i] / p7.data[i])
+			table.insert(t_1, self.data[i] / p4.data[i])
 		end
 		return t.new(t_1)
 	end
@@ -116,12 +116,12 @@ end
 function t:dot(vectorB)
 	-- upvalues: t (ref)
 	t.checkCompatible(self, vectorB)
-	local var9 = 0
+	local var1 = 0
 	
 	for i = 1, #self.data do
-		var9 += self.data[i] * vectorB.data[i]
+		var1 += self.data[i] * vectorB.data[i]
 	end
-	return var9
+	return var1
 end
 
 function t:cross(vectorB)
@@ -137,23 +137,23 @@ function t:cross(vectorB)
 end
 
 function t:magnitude()
-	local var10 = 0
+	local var2 = 0
 	
 	for i, v in self.data do
-		var10 += v ^ 2
+		var2 += v ^ 2
 	end
-	return math.sqrt(var10)
+	return math.sqrt(var2)
 end
 
-function t:fuzzyEq(p8, p9)
+function t:fuzzyEq(p5, p6)
 	-- upvalues: t (ref)
-	if not t.checkCompatible(self, p8) then
+	if not t.checkCompatible(self, p5) then
 		return false
 	end
-	p9 = p9 or 0.00001
+	p6 = p6 or 0.00001
 	
 	for i = 1, #self.data do
-		if p9 >= math.abs(self.data[i] - p8.data[i]) then
+		if p6 >= math.abs(self.data[i] - p5.data[i]) then
 			continue
 		end
 		return false

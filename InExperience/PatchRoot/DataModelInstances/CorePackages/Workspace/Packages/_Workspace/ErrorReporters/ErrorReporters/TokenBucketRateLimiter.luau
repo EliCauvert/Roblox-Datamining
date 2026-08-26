@@ -1,13 +1,13 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
-	tbl.maxTokens = p0.maxTokens
-	tbl.refillRate = p0.refillRate
-	tbl.refillIntervalSeconds = p0.refillIntervalSeconds
-	tbl.currentTokens = p0.initialTokens or p0.maxTokens
+	tbl.maxTokens = p1.maxTokens
+	tbl.refillRate = p1.refillRate
+	tbl.refillIntervalSeconds = p1.refillIntervalSeconds
+	tbl.currentTokens = p1.initialTokens or p1.maxTokens
 	tbl.lastRefillTime = tick()
 	
 	if tbl.maxTokens < tbl.currentTokens then
@@ -18,14 +18,14 @@ end
 
 function t:refill()
 	local currentTime = tick()
-	local var3 = currentTime - self.lastRefillTime
+	local var1 = currentTime - self.lastRefillTime
 	
-	if var3 < 0 then
+	if var1 < 0 then
 		self.lastRefillTime = currentTime
 		
 		return
 	end
-	local floored = math.floor(var3 / self.refillIntervalSeconds)
+	local floored = math.floor(var1 / self.refillIntervalSeconds)
 	
 	if floored > 0 then
 		self.currentTokens = math.min(self.maxTokens, self.currentTokens + floored * self.refillRate)

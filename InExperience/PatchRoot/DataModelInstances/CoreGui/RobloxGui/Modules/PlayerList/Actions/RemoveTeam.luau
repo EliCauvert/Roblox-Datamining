@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("RemoveTeam", function(p0)
-	return { team = p0 }
+﻿return require(script.Parent.Parent.ActionCreator)("RemoveTeam", function(p1)
+	return { team = p1 }
 end)

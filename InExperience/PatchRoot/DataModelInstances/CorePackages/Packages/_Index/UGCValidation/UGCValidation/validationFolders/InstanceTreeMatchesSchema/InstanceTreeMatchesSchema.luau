@@ -14,21 +14,21 @@ return {
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)
-		local rootInstance = p1.rootInstance
+		local rootInstance = p2.rootInstance
 		
 		if constantsModule.BANNED_NAMES[rootInstance.Name] then
-			p0:fail(errorSourceStringsModule.Keys.InstanceTreeBannedName, { InstancePath = rootInstance:GetFullName() })
+			p1:fail(errorSourceStringsModule.Keys.InstanceTreeBannedName, { InstancePath = rootInstance:GetFullName() })
 		end
 		for i, v in rootInstance:GetDescendants() do
 			for i_1, v_1 in constantsModule.BANNED_CLASS_NAMES do
 				if v:IsA(v_1) then
-					p0:fail(errorSourceStringsModule.Keys.InstanceTreeBannedClass, { InstancePath = v:GetFullName(), ClassName = v_1 })
+					p1:fail(errorSourceStringsModule.Keys.InstanceTreeBannedClass, { InstancePath = v:GetFullName(), ClassName = v_1 })
 				end
 			end
 			if constantsModule.BANNED_NAMES[v.Name] then
-				p0:fail(errorSourceStringsModule.Keys.InstanceTreeBannedName, { InstancePath = v:GetFullName() })
+				p1:fail(errorSourceStringsModule.Keys.InstanceTreeBannedName, { InstancePath = v:GetFullName() })
 			end
 		end
 	end

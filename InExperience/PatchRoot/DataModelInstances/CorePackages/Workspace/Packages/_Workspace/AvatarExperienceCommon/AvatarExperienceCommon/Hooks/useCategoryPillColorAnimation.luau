@@ -4,48 +4,48 @@ local reactOtterModule = require(parent.ReactOtter)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local mutedError = require(parent.Loggers).mutedError
 
-local function interpolateColors(p0, p1, p2)
+local function interpolateColors(p1, p2, p3)
 	-- upvalues: mutedError (ref)
-	local color3 = p1.Color3
-	local color3_1 = p2.Color3
-	local transparency = p1.Transparency
-	local transparency_1 = p2.Transparency
+	local color3 = p2.Color3
+	local color3_1 = p3.Color3
+	local transparency = p2.Transparency
+	local transparency_1 = p3.Transparency
 	
 	if color3 == nil or color3_1 == nil or (transparency == nil or transparency_1 == nil) then
 		mutedError("useCategoryPillColorAnimation: ColorStyle is nil")
 		
-		return p1
+		return p2
 	end
 	return {
-		Color3 = color3:Lerp(color3_1, p0),
-		Transparency = transparency + (transparency_1 - transparency) * p0
+		Color3 = color3:Lerp(color3_1, p1),
+		Transparency = transparency + (transparency_1 - transparency) * p1
 	}
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), interpolateColors (ref)
-	local var3 = useTokens()
-	local var4, var5 = reactOtterModule.useAnimatedBinding(if p3 then 1 else 0)
+	local var1 = useTokens()
+	local var2, var3 = reactOtterModule.useAnimatedBinding(if p1 then 1 else 0)
 	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), var5 (ref), reactOtterModule (copy)
-		local var6 = if p3 then 1 else 0
+		-- upvalues: p1 (ref), var3 (ref), reactOtterModule (copy)
+		local var4 = if p1 then 1 else 0
 		
-		if p3 then
-			var5(reactOtterModule.spring(var6, { frequency = 1.2, dampingRatio = 1 }))
+		if p1 then
+			var3(reactOtterModule.spring(var4, { frequency = 1.2, dampingRatio = 1 }))
 			
 			return
 		end
-		var5(reactOtterModule.instant(var6))
-	end, { p3 })
+		var3(reactOtterModule.instant(var4))
+	end, { p1 })
 	
 	return {
-		animatedBackgroundStyle = var4:map(function(p4)
-			-- upvalues: interpolateColors (copy), var3 (ref)
-			return interpolateColors(p4, var3.Color.ActionStandard.Background, var3.Color.ActionSubEmphasis.Background)
+		animatedBackgroundStyle = var2:map(function(p2)
+			-- upvalues: interpolateColors (copy), var1 (ref)
+			return interpolateColors(p2, var1.Color.ActionStandard.Background, var1.Color.ActionSubEmphasis.Background)
 		end),
-		animatedTextStyle = var4:map(function(p5)
-			-- upvalues: interpolateColors (copy), var3 (ref)
-			return interpolateColors(p5, var3.Color.ActionStandard.Foreground, var3.Color.ActionSubEmphasis.Foreground)
+		animatedTextStyle = var2:map(function(p2)
+			-- upvalues: interpolateColors (copy), var1 (ref)
+			return interpolateColors(p2, var1.Color.ActionStandard.Foreground, var1.Color.ActionSubEmphasis.Foreground)
 		end)
 	}
 end

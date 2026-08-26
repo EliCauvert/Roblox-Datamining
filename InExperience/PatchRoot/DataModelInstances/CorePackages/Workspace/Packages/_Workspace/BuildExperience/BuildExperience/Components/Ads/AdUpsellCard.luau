@@ -13,9 +13,9 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: foundationModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), buttonVariant (ref)
-	local var5 = if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		title = localizationStringsModule.AD_UPSELL_CARD_TITLE,
 		description = localizationStringsModule.AD_UPSELL_CARD_DESC,
 		create = localizationStringsModule.AD_UPSELL_CARD_CREATE
@@ -24,7 +24,7 @@ return function(p0)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-medium stroke-standard stroke-default radius-large",
 		testId = "AdUpsellCard",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Icon = reactModule.createElement(icon, {
 			LayoutOrder = 1,
@@ -36,21 +36,21 @@ return function(p0)
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-				Text = if fFlagBuildLocalization then var5.title else localizationStringsModule.AD_UPSELL_CARD_TITLE
+				Text = if fFlagBuildLocalization then var1.title else localizationStringsModule.AD_UPSELL_CARD_TITLE
 			}),
 			Description = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-emphasis",
-				Text = if fFlagBuildLocalization then var5.description else localizationStringsModule.AD_UPSELL_CARD_DESC
+				Text = if fFlagBuildLocalization then var1.description else localizationStringsModule.AD_UPSELL_CARD_DESC
 			})
 		}),
 		Action = reactModule.createElement(button, {
 			LayoutOrder = 3,
 			testId = "AdUpsellCard.Create",
-			text = if fFlagBuildLocalization then var5.create else localizationStringsModule.AD_UPSELL_CARD_CREATE,
+			text = if fFlagBuildLocalization then var1.create else localizationStringsModule.AD_UPSELL_CARD_CREATE,
 			variant = buttonVariant.SoftEmphasis,
-			isLoading = p0.isCreatePending == true,
-			onActivated = p0.onCreate
+			isLoading = p1.isCreatePending == true,
+			onActivated = p1.onCreate
 		})
 	})
 end

@@ -15,36 +15,36 @@ local accessoryType = foundationModule.Enums.AccessoryType
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: useUserProfileInfoModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), icon (ref), iconName (ref), iconSize (ref), list (ref), accessoryType (ref), view (ref)
-	local PRIVATE_INVITES_UNKNOWN_USER, var8
-	local var6 = useUserProfileInfoModule(p0.userId)
-	local var7 = if fFlagBuildLocalization then useLocalization({
+	local PRIVATE_INVITES_UNKNOWN_USER, var1
+	local var2 = useUserProfileInfoModule(p1.userId)
+	local var3 = if fFlagBuildLocalization then useLocalization({
 		unknownUser = localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER,
 		username = {
 			localizationStringsModule.USER_PICKER_USERNAME,
-			USERNAME = var6.username
+			USERNAME = var2.username
 		}
 	}) else nil
 	local _ = nil
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		PRIVATE_INVITES_UNKNOWN_USER = var7.unknownUser
-		var8 = var7.username
+		PRIVATE_INVITES_UNKNOWN_USER = var3.unknownUser
+		var1 = var3.username
 	else
 		PRIVATE_INVITES_UNKNOWN_USER = localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER
-		var8 = localizationStringsModule.formatUserPickerUsername(var6.username)
+		var1 = localizationStringsModule.formatUserPickerUsername(var2.username)
 	end
-	local var9 = useTokens()
+	local var4 = useTokens()
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder,
-		onActivated = p0.onToggle,
+		LayoutOrder = p1.layoutOrder,
+		onActivated = p1.onToggle,
 		stateLayer = {},
-		isDisabled = p0.isDisabled,
-		testId = p0.testId
+		isDisabled = p1.isDisabled,
+		testId = p1.testId
 	}, {
 		Item = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -53,21 +53,21 @@ return function(p0)
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
 			Item = reactModule.createElement(list.Item, {
-				leading = { type = accessoryType.Avatar, userId = p0.userId },
-				title = if var6.displayName ~= "" then PRIVATE_INVITES_UNKNOWN_USER else var6.displayName,
-				description = var8,
-				trailing = if p0.isSelected then reactModule.createElement(icon, {
+				leading = { type = accessoryType.Avatar, userId = p1.userId },
+				title = if var2.displayName ~= "" then PRIVATE_INVITES_UNKNOWN_USER else var2.displayName,
+				description = var1,
+				trailing = if p1.isSelected then reactModule.createElement(icon, {
 					name = iconName.CheckLarge,
 					size = iconSize.Medium,
-					style = var9.Color.Content.Emphasis
+					style = var4.Color.Content.Emphasis
 				}) else nil
 			}),
-			Scrim = if p0.isDisabled then reactModule.createElement("Frame", {
+			Scrim = if p1.isDisabled then reactModule.createElement("Frame", {
 				BackgroundTransparency = 0.5,
 				BorderSizePixel = 0,
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1),
-				BackgroundColor3 = var9.Color.Surface.Surface_100.Color3
+				BackgroundColor3 = var4.Color.Surface.Surface_100.Color3
 			}) else nil
 		})
 	})

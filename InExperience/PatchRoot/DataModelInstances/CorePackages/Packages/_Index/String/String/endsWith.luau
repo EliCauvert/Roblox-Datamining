@@ -1,19 +1,19 @@
-﻿return function(p0, p1, p2)
-	local var0 = p1:len()
+﻿return function(p1, p2, p3)
+	local var1 = p2:len()
 	
-	if var0 == 0 then
+	if var1 == 0 then
 		return true
 	end
-	local var1 = p0:len()
-	p2 = p2 or var1
+	local var2 = p1:len()
+	p3 = p3 or var2
 	
-	if var1 < p2 then
-		p2 = var1
+	if var2 < p3 then
+		p3 = var2
 	end
-	if p2 < 1 then
+	if p3 < 1 then
 		return false
 	end
-	local var3 = p2 - var0 + 1
+	local var3 = p3 - var1 + 1
 	
-	return p0:find(p1, var3, true) == var3
+	return p1:find(p2, var3, true) == var3
 end

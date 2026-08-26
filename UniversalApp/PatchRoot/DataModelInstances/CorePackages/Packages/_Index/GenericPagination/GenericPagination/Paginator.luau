@@ -4,18 +4,18 @@ local linkedList = dependenciesModule.LinkedList
 local promise = dependenciesModule.Promise
 local t_1 = { llRoot = nil, llIndex = nil, _isFetching = false }
 t_1.__index = t_1
-local var2 = t.strictInterface({
+local var1 = t.strictInterface({
 	pageSize = t.number,
 	fetchWithCursor = t.callback,
 	fetchInit = t.callback
 })
 
-function t_1.new(p0)
-	-- upvalues: var2 (ref), t_1 (ref)
-	assert(var2(p0))
+function t_1.new(p1)
+	-- upvalues: var1 (ref), t_1 (ref)
+	assert(var1(p1))
 	local t = {}
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		t[i] = v
 	end
 	setmetatable(t, t_1)
@@ -28,12 +28,12 @@ function t_1:_init()
 	-- upvalues: linkedList (ref)
 	self._isFetching = true
 	
-	return self.fetchInit():andThen(function(p1, p2)
+	return self.fetchInit():andThen(function(p2, p3)
 		-- upvalues: self (ref), linkedList (copy)
 		self.llRoot = linkedList.createNode()
 		self.llIndex = self.llRoot
-		self.llIndex:CreatePrevious(p1)
-		self.llIndex:CreateNext(p2)
+		self.llIndex:CreatePrevious(p2)
+		self.llIndex:CreateNext(p3)
 		self._isFetching = false
 	end)
 end
@@ -55,14 +55,14 @@ function t_1:getNext()
 	self.llIndex = self.llIndex.next
 	self._isFetching = true
 	
-	return self.fetchWithCursor(value):andThen(function(p3, p4)
+	return self.fetchWithCursor(value):andThen(function(p2, p3)
 		-- upvalues: self (ref)
-		self.llIndex.previous.value = p3
+		self.llIndex.previous.value = p2
 		
 		if self.llIndex.next then
-			self.llIndex.next.value = p4
+			self.llIndex.next.value = p3
 		else
-			self.llIndex:CreateNext(p4)
+			self.llIndex:CreateNext(p3)
 		end
 		self._isFetching = false
 	end)
@@ -81,14 +81,14 @@ function t_1:getPrevious()
 	self.llIndex = self.llIndex.previous
 	self._isFetching = true
 	
-	return self.fetchWithCursor(value, true):andThen(function(p5, p6)
+	return self.fetchWithCursor(value, true):andThen(function(p2, p3)
 		-- upvalues: self (ref)
-		self.llIndex.next.value = p6
+		self.llIndex.next.value = p3
 		
 		if self.llIndex.previous then
-			self.llIndex.previous.value = p5
+			self.llIndex.previous.value = p2
 		else
-			self.llIndex:CreatePrevious(p5)
+			self.llIndex:CreatePrevious(p2)
 		end
 		self._isFetching = false
 	end)

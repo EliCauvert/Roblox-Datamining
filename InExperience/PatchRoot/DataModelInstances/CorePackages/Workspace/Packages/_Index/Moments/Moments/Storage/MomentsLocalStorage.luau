@@ -23,17 +23,17 @@ return {
 			appStorageService:Flush()
 		end)
 	end,
-	getField = function(p0)
+	getField = function(p1)
 		-- upvalues: get (ref)
-		return get()[p0]
+		return get()[p1]
 	end,
 	setField = function(value, p1)
 		-- upvalues: get (ref), appStorageService (ref), httpService (ref)
-		local var3 = get()
-		var3[value] = p1
+		local var1 = get()
+		var1[value] = p1
 		pcall(function()
-			-- upvalues: appStorageService (copy), httpService (copy), var3 (ref)
-			appStorageService:SetItem("MomentsLocalStorage", httpService:JSONEncode(var3))
+			-- upvalues: appStorageService (copy), httpService (copy), var1 (ref)
+			appStorageService:SetItem("MomentsLocalStorage", httpService:JSONEncode(var1))
 			appStorageService:Flush()
 		end)
 	end

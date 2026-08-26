@@ -6,16 +6,16 @@ local tutilsModule = require(parent.tutils)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
 
-local function selectView(p0)
-	return p0.view
+local function selectView(p1)
+	return p1.view
 end
 
 return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), viewTypeModule (ref), useSelector (ref), selectView (ref), tutilsModule (ref)
-	local var5 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.useMemo(function()
-		-- upvalues: viewTypeModule (copy), p1 (ref), var5 (ref)
+		-- upvalues: viewTypeModule (copy), p1 (ref), var1 (ref)
 		return {
 			[viewTypeModule.Wide] = {
 				ContainerSize = UDim2.new(0, 800, 0.9, -p1),
@@ -27,14 +27,14 @@ return function(p1)
 			[viewTypeModule.WideLandscape] = {
 				ContainerSize = UDim2.new(0.95, 0, 1, -p1),
 				ContainerAnchorPoint = Vector2.new(0.5, 0),
-				ContainerPosition = UDim2.new(0.5, 0, 0, p1 + var5.Padding.XSmall),
+				ContainerPosition = UDim2.new(0.5, 0, 0, p1 + var1.Padding.XSmall),
 				OverlaySize = UDim2.new(1, 0, 1, p1),
 				OverlayPosition = UDim2.new(0, 0, 0, -p1)
 			},
 			[viewTypeModule.Compact] = {
 				ContainerSize = UDim2.new(1, 0, 1, -p1),
 				ContainerAnchorPoint = Vector2.new(0, 0),
-				ContainerPosition = UDim2.new(0, 0, 0, p1 + var5.Padding.Small),
+				ContainerPosition = UDim2.new(0, 0, 0, p1 + var1.Padding.Small),
 				OverlaySize = UDim2.new(1, 0, 1, p1),
 				OverlayPosition = UDim2.new(0, 0, 0, -p1)
 			}

@@ -14,13 +14,13 @@ local validateDynamicHeadMeshPartFormatModule = require(parent.validation.valida
 local validatePackageModule = require(parent.validation.validatePackage)
 local validateEmoteAnimationModule = require(parent.validation.ValidateEmoteAnimation)
 
-local function validateBodyPartInternal(p0)
+local function validateBodyPartInternal(p1)
 	-- upvalues: constantsInterfaceModule (ref), validateDynamicHeadMeshPartFormatModule (ref), validateLimbsAndTorsoModule (ref)
-	local assetTypeEnum = p0.assetTypeEnum
+	local assetTypeEnum = p1.assetTypeEnum
 	assert(assetTypeEnum ~= nil, "assetTypeEnum is required in validateBodyPartInternal")
 	assert(constantsInterfaceModule.isBodyPart(assetTypeEnum))
 	
-	return if Enum.AssetType.DynamicHead == assetTypeEnum then validateDynamicHeadMeshPartFormatModule(p0) else validateLimbsAndTorsoModule(p0)
+	return if Enum.AssetType.DynamicHead == assetTypeEnum then validateDynamicHeadMeshPartFormatModule(p1) else validateLimbsAndTorsoModule(p1)
 end
 
 return function(p1)
@@ -42,9 +42,9 @@ return function(p1)
 	elseif assetTypeEnum == Enum.AssetType.Model then
 		return validatePackageModule(p1)
 	elseif validateMeshPartAccessories then
-		local var14 = instances[1]
+		local var1 = instances[1]
 		
-		return if isMeshPartAccessoryModule(var14) then if isLayeredClothingModule(var14) then validateLayeredClothingAccessoryModule(p1) else validateMeshPartAccessoryModule(p1) else validateLegacyAccessoryModule(p1)
+		return if isMeshPartAccessoryModule(var1) then if isLayeredClothingModule(var1) then validateLayeredClothingAccessoryModule(p1) else validateMeshPartAccessoryModule(p1) else validateLegacyAccessoryModule(p1)
 	end
 	return if isLayeredClothingModule(instances[1]) then validateLayeredClothingAccessoryModule(p1) else validateLegacyAccessoryModule(p1)
 end

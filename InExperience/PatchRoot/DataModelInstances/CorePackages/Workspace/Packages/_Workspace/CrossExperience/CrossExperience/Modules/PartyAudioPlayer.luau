@@ -20,21 +20,21 @@ function t.new()
 	return t_1
 end
 
-function t:addSound(p0, p1)
+function t:addSound(p1, p2)
 	-- upvalues: audioPlayerUpdateAssetAPIEngineFeature (ref)
 	local audioPlayer = Instance.new("AudioPlayer")
 	audioPlayer.Parent = workspace
 	
 	if audioPlayerUpdateAssetAPIEngineFeature then
-		audioPlayer.Asset = p1
+		audioPlayer.Asset = p2
 	else
-		audioPlayer.AssetId = p1
+		audioPlayer.AssetId = p2
 	end
 	local wire = Instance.new("Wire")
 	wire.Parent = workspace
 	wire.SourceInstance = audioPlayer
 	wire.TargetInstance = self.sfxAudioFader
-	self.audioPlayers[p0] = audioPlayer
+	self.audioPlayers[p1] = audioPlayer
 end
 
 function t:initialize()
@@ -67,13 +67,13 @@ function t:initialize()
 	end
 end
 
-function t:playSound(p2)
+function t:playSound(p1)
 	if not self.isInitialized then
 		self:initialize()
 	end
-	if self.isInitialized and self.audioPlayers[p2] then
-		self.audioPlayers[p2].TimePosition = 0
-		self.audioPlayers[p2]:Play()
+	if self.isInitialized and self.audioPlayers[p1] then
+		self.audioPlayers[p1].TimePosition = 0
+		self.audioPlayers[p1]:Play()
 		
 		return
 	end

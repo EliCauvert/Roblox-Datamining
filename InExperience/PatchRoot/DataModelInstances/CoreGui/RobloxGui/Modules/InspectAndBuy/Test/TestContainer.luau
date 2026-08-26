@@ -12,22 +12,22 @@ local renderWithCoreScriptsStyleProviderModule = require(parent_1.Common.renderW
 local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContext)
 local testContainer = roactModule.Component:extend("TestContainer")
 
-function testContainer.init(p0)
+function testContainer.init(p1)
 	-- upvalues: roduxModule (ref), inspectAndBuyReducerModule (ref), constantsModule (ref), compactViewModule (ref), wideViewModule (ref)
-	p0.store = p0.props.overrideStore or roduxModule.Store.new(inspectAndBuyReducerModule, {}, { roduxModule.thunkMiddleware })
-	p0.views = {}
-	p0.views[constantsModule.View.Compact] = compactViewModule
-	p0.views[constantsModule.View.Wide] = wideViewModule
+	p1.store = p1.props.overrideStore or roduxModule.Store.new(inspectAndBuyReducerModule, {}, { roduxModule.thunkMiddleware })
+	p1.views = {}
+	p1.views[constantsModule.View.Compact] = compactViewModule
+	p1.views[constantsModule.View.Wide] = wideViewModule
 end
 
 function testContainer.render(p1)
 	-- upvalues: roactModule (ref), inspectAndBuyContextModule (ref), roactRoduxModule (ref), renderWithCoreScriptsStyleProviderModule (ref)
-	local var11 = 0
+	local var1 = 0
 	
 	for i, v in p1.props[roactModule.Children] do
-		var11 += 1
+		var1 += 1
 	end
-	assert(var11 > 0, "TestContainer: no children provided, nothing will be tested")
+	assert(var1 > 0, "TestContainer: no children provided, nothing will be tested")
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Provider, { value = p1.views }, {
 		roactModule.createElement(roactRoduxModule.StoreProvider, { store = p1.store }, {

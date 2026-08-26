@@ -6,38 +6,38 @@ local gameInviteModule = require(parent.GameInvite)
 local gameInviteModalManager = gameInviteModule.GameInviteModalManager
 local gameInviteAnalyticsManager = gameInviteModule.GameInviteAnalyticsManager
 
-return function(p0, _, p1)
+return function(p1, _, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), gameInviteAnalyticsManager (ref), gameInviteModalManager (ref)
-	local var2 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var2 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.OpenGameInvite
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	assert(var2, "actionParams must exist")
-	local universeId = var2.universeId
-	local rootPlaceId = var2.rootPlaceId
-	local trigger = var2.trigger
-	local buttonName = var2.buttonName
+	assert(var1, "actionParams must exist")
+	local universeId = var1.universeId
+	local rootPlaceId = var1.rootPlaceId
+	local trigger = var1.trigger
+	local buttonName = var1.buttonName
 	
 	if typeof(rootPlaceId) ~= "string" or rootPlaceId == "" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "rootPlaceId",
 			name = sduiActionType.OpenGameInvite,
 			message = `Invalid or missing rootPlaceId: {rootPlaceId}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	elseif typeof(trigger) ~= "string" or trigger == "" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "trigger",
 			name = sduiActionType.OpenGameInvite,
 			message = `Invalid or missing trigger: {trigger}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	elseif typeof(buttonName) == "string" and buttonName ~= "" then

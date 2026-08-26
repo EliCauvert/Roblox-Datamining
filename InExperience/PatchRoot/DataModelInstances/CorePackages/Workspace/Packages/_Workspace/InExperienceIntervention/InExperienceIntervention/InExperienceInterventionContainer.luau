@@ -10,18 +10,18 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 
 function InExperienceInterventionContainer()
 	-- upvalues: reactModule (ref), inExperienceInterventionUIStateReducerModule (ref), constants (ref), useLocalization (ref), cryoModule (ref), inExperienceInterventionEventReceiverModule (ref), inExperienceInterventionDialogManagerModule (ref)
-	local var6, var7 = reactModule.useReducer(inExperienceInterventionUIStateReducerModule, constants.InitialUIState)
-	local var8 = reactModule.useCallback(function(p0)
-		-- upvalues: cryoModule (copy), var7 (ref)
-		var7(cryoModule.Dictionary.join(p0, { dispatchTimestamp = DateTime.now().UnixTimestamp }))
-	end, { var7 })
+	local var1, var2 = reactModule.useReducer(inExperienceInterventionUIStateReducerModule, constants.InitialUIState)
+	local var3 = reactModule.useCallback(function(p1)
+		-- upvalues: cryoModule (copy), var2 (ref)
+		var2(cryoModule.Dictionary.join(p1, { dispatchTimestamp = DateTime.now().UnixTimestamp }))
+	end, { var2 })
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		EventReceiver = reactModule.createElement(inExperienceInterventionEventReceiverModule, {
-			uiStateDispatch = var8,
+			uiStateDispatch = var3,
 			localizedText = useLocalization(constants.localizationKeys)
 		}),
-		DialogManager = reactModule.createElement(inExperienceInterventionDialogManagerModule, { uiState = var6, uiStateDispatch = var8 })
+		DialogManager = reactModule.createElement(inExperienceInterventionDialogManagerModule, { uiState = var1, uiStateDispatch = var3 })
 	})
 end
 

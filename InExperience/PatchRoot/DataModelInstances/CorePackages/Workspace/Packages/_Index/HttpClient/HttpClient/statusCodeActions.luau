@@ -2,29 +2,29 @@
 local t = {}
 
 return {
-	add = function(p0, p1)
+	add = function(p1, p2)
 		-- upvalues: t (write)
-		local var1 = t[p0]
+		local var1 = t[p1]
 		
 		if var1 == nil then
 			var1 = {}
-			t[p0] = var1
+			t[p1] = var1
 		end
-		table.insert(var1, p1)
+		table.insert(var1, p2)
 	end,
-	remove = function(p2, p3)
+	remove = function(p1, p2)
 		-- upvalues: t (write)
-		local var2 = t[p2]
+		local var1 = t[p1]
 		
-		if var2 == nil then return end
-		for i, v in var2 do
-			if v == p3 then
-				table.remove(var2, i)
+		if var1 == nil then return end
+		for i, v in var1 do
+			if v == p2 then
+				table.remove(var1, i)
 				break
 			end
 		end
-		if #var2 == 0 then
-			t[p2] = nil
+		if #var1 == 0 then
+			t[p1] = nil
 		end
 	end,
 	clear = function()

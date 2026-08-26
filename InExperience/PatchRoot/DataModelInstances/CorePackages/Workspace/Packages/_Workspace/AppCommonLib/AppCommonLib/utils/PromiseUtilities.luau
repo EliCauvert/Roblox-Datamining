@@ -3,76 +3,76 @@ local resultModule = require(parent.Result)
 local promiseModule = require(parent.Promise)
 
 return {
-	Batch = function(p0, p1)
+	Batch = function(p1, p2)
 		-- upvalues: promiseModule (ref), resultModule (ref)
-		assert(type(p0) == "table", "PromiseUtilities expects a list of Promises!")
-		local var2 = 0
+		assert(type(p1) == "table", "PromiseUtilities expects a list of Promises!")
+		local var1 = 0
 		
-		for i, v in pairs(p0) do
+		for i, v in pairs(p1) do
 			assert(promiseModule.is(v), "PromiseUtilities expects a list of Promises!")
-			var2 += 1
+			var1 += 1
 		end
-		return promiseModule.new(function(p2, _)
-			-- upvalues: resultModule (copy), var2 (write), p0 (ref), p1 (ref)
-			local var3 = 0
+		return promiseModule.new(function(p3, _)
+			-- upvalues: resultModule (copy), var1 (write), p1 (ref), p2 (ref)
+			local var2 = 0
 			local t = {}
 			
-			local function _(p3, p4, p5)
-				-- upvalues: t (ref), resultModule (copy), var3 (write), var2 (copy), p2 (ref)
-				t[p3] = resultModule.new(p4, p5)
-				var3 += 1
+			local function _(p4, p5, p6)
+				-- upvalues: t (ref), resultModule (copy), var2 (write), var1 (copy), p3 (ref)
+				t[p4] = resultModule.new(p5, p6)
+				var2 += 1
 				
-				if var3 == var2 then
-					p2(t)
+				if var2 == var1 then
+					p3(t)
 				end
 			end
 			
-			if next(p0) == nil then
-				p2(t)
+			if next(p1) == nil then
+				p3(t)
 			end
-			for i, v in pairs(p0) do
-				v:andThen(function(p6, ...)
-					-- upvalues: i (ref), t (ref), resultModule (copy), var3 (write), var2 (copy), p2 (ref)
+			for i, v in pairs(p1) do
+				v:andThen(function(p4, ...)
+					-- upvalues: i (ref), t (ref), resultModule (copy), var2 (write), var1 (copy), p3 (ref)
 					if select("#", ...) > 0 then
 						warn("Promises in PromiseUtilities.Batch should not return tuple")
 					end
-					t[i] = resultModule.new(true, p6)
-					var3 += 1
+					t[i] = resultModule.new(true, p4)
+					var2 += 1
 					
-					if var3 == var2 then
-						p2(t)
+					if var2 == var1 then
+						p3(t)
 					end
-				end, function(p7)
-					-- upvalues: i (ref), t (ref), resultModule (copy), var3 (write), var2 (copy), p2 (ref), p1 (copy)
-					t[i] = resultModule.new(false, p7)
-					var3 += 1
+				end, function(p4)
+					-- upvalues: i (ref), t (ref), resultModule (copy), var2 (write), var1 (copy), p3 (ref), p2 (copy)
+					t[i] = resultModule.new(false, p4)
+					var2 += 1
 					
-					if var3 == var2 then
-						p2(t)
+					if var2 == var1 then
+						p3(t)
 					end
-					if p1 then
-						p1(p7)
+					if p2 then
+						p2(p4)
 					end
 				end)
 			end
 		end)
 	end,
-	CountResults = function(p8)
-		local var5 = 0
-		local var6 = 0
+	CountResults = function(p3)
+		local var2 = 0
+		local var3 = 0
 		
-		for i, v in pairs(p8) do
-			local var7, _ = v:unwrap()
+		for i, v in pairs(p3) do
+			local var4, _ = v:unwrap()
 			
-			if not var7 then
-				var6 += 1
+			if not var4 then
+				var3 += 1
 			end
-			var5 += 1
+			var2 += 1
 		end
 		return {
-			successCount = var5 - var6,
-			failureCount = var6,
-			totalCount = var5
+			successCount = var2 - var3,
+			failureCount = var3,
+			totalCount = var2
 		}
 	end
 }

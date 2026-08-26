@@ -1,6 +1,6 @@
 ﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
 local _ = require(momentsCreationFlow.Enums.CreationFlowState)
 
-return require(momentsCreationFlow.Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { currentState = p0 }
+return require(momentsCreationFlow.Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { currentState = p1 }
 end)

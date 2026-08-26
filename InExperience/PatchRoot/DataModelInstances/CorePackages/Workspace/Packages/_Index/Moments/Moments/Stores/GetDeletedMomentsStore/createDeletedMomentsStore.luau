@@ -8,12 +8,12 @@ return function()
 	
 	return {
 		getDeletedIds = var1,
-		markDeleted = function(p0)
+		markDeleted = function(p1)
 			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
 			local var3 = var1(false)
 			
-			if not table.find(var3, p0) then
-				var2(cryoModule.List.join(var3, { p0 }))
+			if not table.find(var3, p1) then
+				var2(cryoModule.List.join(var3, { p1 }))
 			end
 		end
 	}

@@ -38,20 +38,20 @@ return function(_)
 			testId = if fFlagCoreUiMigrateUIBloxToFoundation then "VRGamepadInstructions" else nil,
 			[reactModule.Tag] = if fFlagCoreUiMigrateUIBloxToFoundation then nil else "data-testid=VRGamepadInstructions"
 		}, {
-			array.map(controlsModule.questGamepadLabels, function(p0, p1)
+			array.map(controlsModule.questGamepadLabels, function(p1, p2)
 				-- upvalues: t (copy), withLocalizationModule (copy), roact (copy), themedTextLabelModule (copy)
-				return withLocalizationModule({ t[p0.labelKey] })(function(p2)
-					-- upvalues: roact (copy), themedTextLabelModule (copy), p0 (ref), p1 (ref)
+				return withLocalizationModule({ t[p1.labelKey] })(function(p3)
+					-- upvalues: roact (copy), themedTextLabelModule (copy), p1 (ref), p2 (ref)
 					return roact.createElement(themedTextLabelModule, {
 						fontKey = "Header2",
 						themeKey = "TextEmphasis",
 						TextScaled = true,
-						key = p0.labelKey,
-						TextXAlignment = p0.xAlignment or Enum.TextXAlignment.Right,
-						Size = UDim2.new(p0.width, 0, 0.026, 0),
-						Text = p2[1],
-						LayoutOrder = p1,
-						Position = UDim2.new(p0.xPosition, 0, p0.yPosition, 0)
+						key = p1.labelKey,
+						TextXAlignment = p1.xAlignment or Enum.TextXAlignment.Right,
+						Size = UDim2.new(p1.width, 0, 0.026, 0),
+						Text = p3[1],
+						LayoutOrder = p2,
+						Position = UDim2.new(p1.xPosition, 0, p1.yPosition, 0)
 					})
 				end)
 			end)

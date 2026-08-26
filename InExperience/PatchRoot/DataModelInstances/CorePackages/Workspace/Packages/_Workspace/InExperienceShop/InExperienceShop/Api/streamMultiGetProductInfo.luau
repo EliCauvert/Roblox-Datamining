@@ -2,33 +2,33 @@
 local getProductInfoModule = require(script.Parent.getProductInfo)
 local _ = require(script.Parent.multiGetProductInfo)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: promiseModule (ref), getProductInfoModule (ref)
-	local p0Count = #p0
+	local p0Count = #p1
 	
 	if p0Count == 0 then
 		return promiseModule.resolve({})
 	end
 	local list = table.create(p0Count)
-	local var4 = 0
+	local var1 = 0
 	
-	return promiseModule.new(function(p2)
-		-- upvalues: p0 (ref), getProductInfoModule (copy), list (ref), p1 (ref), var4 (write), p0Count (ref)
-		for i, v in ipairs(p0) do
-			getProductInfoModule(v.id, v.infoType):andThen(function(p5)
+	return promiseModule.new(function(p3)
+		-- upvalues: p1 (ref), getProductInfoModule (copy), list (ref), p2 (ref), var1 (write), p0Count (ref)
+		for i, v in ipairs(p1) do
+			getProductInfoModule(v.id, v.infoType):andThen(function(p4)
 				-- upvalues: v (ref)
-				return { ok = true, request = v, value = p5 }
+				return { ok = true, request = v, value = p4 }
 			end):catch(function(p4)
 				-- upvalues: v (ref)
 				return { ok = false, request = v, err = p4 }
-			end):andThen(function(p3)
-				-- upvalues: list (copy), i (ref), p1 (copy), var4 (copy), p0Count (copy), p2 (ref)
-				list[i] = p3
-				p1.onResult(p3)
-				var4 += 1
+			end):andThen(function(p4)
+				-- upvalues: list (copy), i (ref), p2 (copy), var1 (copy), p0Count (copy), p3 (ref)
+				list[i] = p4
+				p2.onResult(p4)
+				var1 += 1
 				
-				if var4 == p0Count then
-					p2(list)
+				if var1 == p0Count then
+					p3(list)
 				end
 			end)
 		end

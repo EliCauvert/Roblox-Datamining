@@ -1,8 +1,8 @@
 ﻿local requestTypeModule = require(script.Parent.Parent.Enums.RequestType)
 
-function isMultiItemPurchase(p0)
+function isMultiItemPurchase(p1)
 	-- upvalues: requestTypeModule (ref)
-	return p0 == requestTypeModule.Look
+	return p1 == requestTypeModule.Look
 end
 
 return isMultiItemPurchase

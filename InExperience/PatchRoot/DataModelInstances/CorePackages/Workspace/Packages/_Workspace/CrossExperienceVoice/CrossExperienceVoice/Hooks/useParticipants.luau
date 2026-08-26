@@ -4,7 +4,7 @@ local getFFlagEnableCrossExpVoice = dependenciesModule.SharedFlags.GetFFlagEnabl
 
 return function()
 	-- upvalues: getFFlagEnableCrossExpVoice (ref), useSelector (ref)
-	return if getFFlagEnableCrossExpVoice() then useSelector(function(p0)
-		return if p0 and p0.Squad and p0.Squad.CrossExperienceVoice then p0.Squad.CrossExperienceVoice.Participants.participants else nil
+	return if getFFlagEnableCrossExpVoice() then useSelector(function(p1)
+		return if p1 and p1.Squad and p1.Squad.CrossExperienceVoice then p1.Squad.CrossExperienceVoice.Participants.participants else nil
 	end) else nil
 end

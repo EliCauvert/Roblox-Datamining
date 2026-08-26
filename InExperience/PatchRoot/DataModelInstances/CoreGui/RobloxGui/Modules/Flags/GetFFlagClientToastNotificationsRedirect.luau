@@ -3,21 +3,21 @@ local clientToastNotificationsRedirect4 = game:DefineFastFlag("ClientToastNotifi
 local enableClientToastNotificationsRedirectExperiment = game:DefineFastFlag("EnableClientToastNotificationsRedirectExperiment", false)
 local clientToastNotificationsRedirectLayerName = game:DefineFastString("ClientToastNotificationsRedirectLayerName", "Notification.Toast")
 local clientToastNotificationsRedirectLayerValue = game:DefineFastString("ClientToastNotificationsRedirectLayerValue", "NotificationRedirect")
-local var4 = false
-local var5 = nil
-local var6 = nil
+local var1 = false
+local var2 = nil
+local var3 = nil
 
 return function()
-	-- upvalues: enableClientToastNotificationsRedirectExperiment (ref), var4 (write), var5 (write), var6 (write), IXPServiceWrapper (ref), clientToastNotificationsRedirectLayerName (ref), clientToastNotificationsRedirect4 (ref), clientToastNotificationsRedirectLayerValue (ref)
-	if enableClientToastNotificationsRedirectExperiment and not var4 then
+	-- upvalues: enableClientToastNotificationsRedirectExperiment (ref), var1 (write), var2 (write), var3 (write), IXPServiceWrapper (ref), clientToastNotificationsRedirectLayerName (ref), clientToastNotificationsRedirect4 (ref), clientToastNotificationsRedirectLayerValue (ref)
+	if enableClientToastNotificationsRedirectExperiment and not var1 then
 		local ok, status = pcall(function()
-			-- upvalues: var4 (copy), IXPServiceWrapper (copy), clientToastNotificationsRedirectLayerName (copy)
-			var4 = true
+			-- upvalues: var1 (copy), IXPServiceWrapper (copy), clientToastNotificationsRedirectLayerName (copy)
+			var1 = true
 			
 			return IXPServiceWrapper:GetLayerData(clientToastNotificationsRedirectLayerName)
 		end)
-		var5 = ok
-		var6 = status
+		var2 = ok
+		var3 = status
 	end
-	return clientToastNotificationsRedirect4 or var5 and (var6 and var6[clientToastNotificationsRedirectLayerValue])
+	return clientToastNotificationsRedirect4 or var2 and (var3 and var3[clientToastNotificationsRedirectLayerValue])
 end

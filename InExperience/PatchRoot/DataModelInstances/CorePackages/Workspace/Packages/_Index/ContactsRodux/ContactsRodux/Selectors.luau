@@ -1,6 +1,6 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
-		sortContacts = require(script.sortContacts)(p0),
+		sortContacts = require(script.sortContacts)(p1),
 		getPhoneNumber = require(script.getPhoneNumber)
 	}
 end

@@ -1,18 +1,18 @@
 ﻿local parent = script.Parent.Parent
 local devAssert = require(parent.jsutils.devAssert).devAssert
 local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local var0 = nil
+local var1 = nil
 local _ = nil
 
 return {
-	assertValidName = function(p0)
-		-- upvalues: var0 (write)
-		local var1 = var0(p0)
+	assertValidName = function(p1)
+		-- upvalues: var1 (write)
+		local var2 = var1(p1)
 		
-		if var1 then
-			error(var1)
+		if var2 then
+			error(var2)
 		end
-		return p0
+		return p1
 	end,
 	isValidNameError = function(p1)
 		-- upvalues: devAssert (ref), graphQLError (ref)

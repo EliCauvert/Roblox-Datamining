@@ -13,24 +13,24 @@ local t = {
 	[suggestionType.StartParty] = foundationModule.Enums.IconName.ThreePeople
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: t (ref), reactModule (ref), view (ref), divider (ref), chipGroup (ref), chipSize (ref), chipGroupVariant (ref)
 	local t_1 = {}
 	
-	for i, v in p0.suggestions do
+	for i, v in p1.suggestions do
 		t_1[i] = {
 			text = v.display_text,
 			leading = t[v.type],
 			onActivated = function()
-				-- upvalues: p0 (ref), v (ref)
-				p0.onActivated(v)
+				-- upvalues: p1 (ref), v (ref)
+				p1.onActivated(v)
 			end
 		}
 	end
 	return reactModule.createElement(view, {
 		tag = "col gap-small size-full-0 auto-y clip",
 		testId = "SmartSuggestionsChipRow--clip",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Divider = reactModule.createElement(divider, {
 			LayoutOrder = 1,

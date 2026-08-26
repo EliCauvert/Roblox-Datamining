@@ -12,40 +12,40 @@ local getBooleanParam = sduiActionParams.getBooleanParam
 local fFlagSduiDismissPromptAction = require(parent.SharedFlags).FFlagSduiDismissPromptAction
 local sduiDismissPromptActionModule = require(sduiSharedContent.Actions.SduiDismissPromptAction)
 
-return function(p0, p1, p2, _)
+return function(p1, p2, p3, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), getStringParam (ref), toastType (ref), setCurrentToastMessage (ref), fFlagSduiDismissPromptAction (ref), getBooleanParam (ref), sduiDismissPromptActionModule (ref)
-	local var4 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var4 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.ShowToast
-		}, p2.appPage)
+		}, p3.appPage)
 		
 		return
 	end
-	local var5 = getStringParam(var4, "toastMessage")
+	local var2 = getStringParam(var1, "toastMessage")
 	
-	if var5 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var2 == nil then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: toastMessage",
 			propName = "toastMessage",
 			name = sduiActionType.ShowToast
-		}, p2.appPage)
+		}, p3.appPage)
 		
 		return
 	end
-	local var6 = getStringParam(var4, "toastType")
-	p2.dependencies.dispatch(setCurrentToastMessage({
+	local var3 = getStringParam(var1, "toastType")
+	p3.dependencies.dispatch(setCurrentToastMessage({
 		isLocalized = true,
-		toastMessage = var5,
-		toastType = if var6 and toastType[var6] then toastType[var6] else toastType.SuccessConfirmation
+		toastMessage = var2,
+		toastType = if var3 and toastType[var3] then toastType[var3] else toastType.SuccessConfirmation
 	}))
 	
-	if fFlagSduiDismissPromptAction and getBooleanParam(var4, "dismissPrompt", false) then
+	if fFlagSduiDismissPromptAction and getBooleanParam(var1, "dismissPrompt", false) then
 		sduiDismissPromptActionModule({
 			actionType = sduiActionType.DismissPrompt,
-			actionParams = { promptType = var4.promptType, promptId = var4.promptId }
-		}, p1, p2)
+			actionParams = { promptType = var1.promptType, promptId = var1.promptId }
+		}, p2, p3)
 	end
 end

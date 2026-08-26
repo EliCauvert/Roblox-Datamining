@@ -8,15 +8,15 @@ local foundationProvider = foundationModule.FoundationProvider
 local localization = require(parent.AppLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
 
-return function(p0)
+return function(p1)
 	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationProvider (ref), foundationModule (ref), transferContextModule (ref)
-	local var5 = localization.new(localizationService.RobloxLocaleId)
+	local var1 = localization.new(localizationService.RobloxLocaleId)
 	
-	return function(p1)
-		-- upvalues: reactModule (copy), localizationProvider (copy), var5 (ref), foundationProvider (copy), foundationModule (copy), transferContextModule (copy), p0 (ref)
-		return reactModule.createElement(localizationProvider, { localization = var5 }, {
+	return function(p2)
+		-- upvalues: reactModule (copy), localizationProvider (copy), var1 (ref), foundationProvider (copy), foundationModule (copy), transferContextModule (copy), p1 (ref)
+		return reactModule.createElement(localizationProvider, { localization = var1 }, {
 			reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-				reactModule.createElement(transferContextModule.Provider, { value = p0.transferStore }, p1.children)
+				reactModule.createElement(transferContextModule.Provider, { value = p1.transferStore }, p2.children)
 			})
 		})
 	end

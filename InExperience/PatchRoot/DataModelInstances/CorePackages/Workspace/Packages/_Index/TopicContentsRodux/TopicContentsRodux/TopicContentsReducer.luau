@@ -8,25 +8,25 @@ local _ = require(parent.DiscoveryTypes)
 
 return {
 	key = "TopicContentsKey",
-	reducer = function(p0, p1)
+	reducer = function(p1, p2)
 		-- upvalues: addTopicInfos (ref), topicContentsModelModule (ref), cryoModule (ref), addTopicContentsModule (ref)
-		local var4 = p0 or {}
+		local var1 = p1 or {}
 		
-		if p1.type == addTopicInfos.name then
+		if p2.type == addTopicInfos.name then
 			local t = {}
 			
-			for i, v in pairs(p1.topicInfos) do
-				t[v.uniqueKey] = var4[v.uniqueKey] or topicContentsModelModule.new()
+			for i, v in pairs(p2.topicInfos) do
+				t[v.uniqueKey] = var1[v.uniqueKey] or topicContentsModelModule.new()
 			end
-			var4 = cryoModule.Dictionary.join(var4, t)
+			var1 = cryoModule.Dictionary.join(var1, t)
 			
-			return var4
-		elseif p1.type == addTopicContentsModule.name then
-			local topicContents = p1.topicContents
-			local topicKey = var4[p1.topicKey]
+			return var1
+		elseif p2.type == addTopicContentsModule.name then
+			local topicContents = p2.topicContents
+			local topicKey = var1[p2.topicKey]
 			
 			if topicKey ~= nil then
-				if p1.isAppend then
+				if p2.isAppend then
 					topicContents.entries = cryoModule.List.join(topicKey.entries, topicContents.entries)
 				end
 				if topicContents.updatedTimestamp == nil then
@@ -36,8 +36,8 @@ return {
 			if topicContents.updatedTimestamp == nil then
 				topicContents.updatedTimestamp = tick()
 			end
-			var4 = cryoModule.Dictionary.join(var4, { [p1.topicKey] = topicContents })
+			var1 = cryoModule.Dictionary.join(var1, { [p2.topicKey] = topicContents })
 		end
-		return var4
+		return var1
 	end
 }

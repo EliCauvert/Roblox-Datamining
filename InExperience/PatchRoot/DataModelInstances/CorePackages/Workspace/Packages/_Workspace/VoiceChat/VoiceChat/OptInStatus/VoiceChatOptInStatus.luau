@@ -2,12 +2,12 @@
 local setVoiceChatOptInStatusModule = require(voiceChat.OptInStatus.SetVoiceChatOptInStatus)
 local cryoModule = require(voiceChat.Parent.Cryo)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: setVoiceChatOptInStatusModule (ref), cryoModule (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	if p1.type == setVoiceChatOptInStatusModule.name then
-		p0 = cryoModule.Dictionary.join(p0, { isUserOptIn = p1.isUserOptIn })
+	if p2.type == setVoiceChatOptInStatusModule.name then
+		p1 = cryoModule.Dictionary.join(p1, { isUserOptIn = p2.isUserOptIn })
 	end
-	return p0
+	return p1
 end

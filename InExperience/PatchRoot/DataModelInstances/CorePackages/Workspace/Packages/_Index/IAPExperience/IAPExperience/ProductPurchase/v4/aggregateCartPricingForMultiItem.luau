@@ -1,16 +1,16 @@
 ﻿local cartPricingResponseLineItemModule = require(script.Parent.cartPricingResponseLineItem)
 
-return function(p0)
+return function(p1)
 	-- upvalues: cartPricingResponseLineItemModule (ref)
-	if type(p0) ~= "table" then
+	if type(p1) ~= "table" then
 		return nil
 	end
-	local errors = p0.errors
+	local errors = p1.errors
 	
 	if type(errors) == "table" and next(errors) ~= nil then
 		return nil
 	end
-	local items = p0.items
+	local items = p1.items
 	
 	if type(items) ~= "table" or next(items) == nil then
 		return nil

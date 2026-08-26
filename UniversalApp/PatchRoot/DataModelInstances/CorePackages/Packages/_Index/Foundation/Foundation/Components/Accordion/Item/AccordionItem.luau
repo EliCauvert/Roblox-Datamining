@@ -149,8 +149,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			LayoutOrder = 2,
 			ClipsDescendants = true,
 			testId = `{var1.testId}--content`,
-			Size = if var9 then var9:map(function(p1)
-				return UDim2.new(1, 0, 0, p1)
+			Size = if var9 then var9:map(function(p3)
+				return UDim2.new(1, 0, 0, p3)
 			end) else nil
 		}, {
 			AnimatedContainer = reactModule.createElement(viewModule, {

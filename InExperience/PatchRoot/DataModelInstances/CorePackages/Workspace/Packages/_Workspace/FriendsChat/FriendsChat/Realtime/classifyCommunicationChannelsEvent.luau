@@ -16,21 +16,21 @@ local t_1 = {
 	ChannelMarkedRead = "fetchConversationDetails"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), communicationChannelsTypesModule (ref), t_1 (ref)
-	if p0 == nil then
+	if p1 == nil then
 		return t
-	elseif p0.ChannelVertical ~= "PlatformChat" then
+	elseif p1.ChannelVertical ~= "PlatformChat" then
 		return t
-	elseif table.find(communicationChannelsTypesModule.ChannelTypeAllowlist, p0.ChannelType) == nil then
+	elseif table.find(communicationChannelsTypesModule.ChannelTypeAllowlist, p1.ChannelType) == nil then
 		return t
 	end
-	local type = t_1[p0.Type]
+	local type = t_1[p1.Type]
 	
 	if type == nil then
 		return t
 	end
-	local channelId = p0.ChannelId
+	local channelId = p1.ChannelId
 	
 	return if channelId == nil or channelId == "" then t else { kind = type, channelId = channelId }
 end

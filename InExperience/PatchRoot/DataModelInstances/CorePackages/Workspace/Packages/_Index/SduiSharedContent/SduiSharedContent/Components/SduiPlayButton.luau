@@ -15,52 +15,52 @@ local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFla
 local fFlagLuaAppLaunchWhenLoadingEdp = require(parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = require(parent.SharedFlags).FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), getSduiActionHandlerRegistry (ref), sduiActionType (ref), findAnalyticsField (ref), fFlagSduiExperienceDetailsSupport (ref), useSduiReportExperienceLaunchedModule (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), executeAction (ref), getSduiFocusActivationStore (ref), playButton (ref), cryoModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
-	local analyticsContext = p0.analyticsContext
-	local placeId = p0.placeId or p0.rootPlaceId
+	local analyticsContext = p1.analyticsContext
+	local placeId = p1.placeId or p1.rootPlaceId
 	
-	return reactModule.createElement(playButton, cryoModule.Dictionary.join(p0, {
-		AnchorPoint = p0.anchorPoint,
-		LayoutOrder = p0.layoutOrder,
-		Position = p0.position,
-		tag = if fFlagSduiExperienceDetailsSupport then p0.tag else nil,
-		expandWidthForSecondaryPlayButton = p0.expandWidthForSecondaryPlayButton,
-		preferSecondaryPlayButton = p0.preferSecondaryPlayButton,
-		onRegisterActivation = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then reactModule.useCallback(function(p1)
-			-- upvalues: p0 (ref), getSduiFocusActivationStore (copy)
-			local tag = p0.tag
+	return reactModule.createElement(playButton, cryoModule.Dictionary.join(p1, {
+		AnchorPoint = p1.anchorPoint,
+		LayoutOrder = p1.layoutOrder,
+		Position = p1.position,
+		tag = if fFlagSduiExperienceDetailsSupport then p1.tag else nil,
+		expandWidthForSecondaryPlayButton = p1.expandWidthForSecondaryPlayButton,
+		preferSecondaryPlayButton = p1.preferSecondaryPlayButton,
+		onRegisterActivation = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then reactModule.useCallback(function(p2)
+			-- upvalues: p1 (ref), getSduiFocusActivationStore (copy)
+			local tag = p1.tag
 			
-			return if tag == nil then function() end else getSduiFocusActivationStore().register(tag, p1)
-		end, { p0.tag }) else nil else nil,
-		fetchDelayInSeconds = p0.fetchDelayInSeconds or 0.1,
-		universeId = p0.universeId,
-		placeId = p0.placeId,
-		useUIBloxButton = if fFlagSduiExperienceDetailsSupport then p0.enableUiBloxButton else nil,
-		reportExperienceLaunched = useSduiReportExperienceLaunchedModule(p0.sduiContext, p0.analyticsContext, p0.universeId, placeId, p0.rootPlaceId or placeId, p0.appliedFilters, if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport and p0.experienceJoinData then p0.experienceJoinData.launchData else nil else nil),
-		onPurchaseRequiredCallback = if p0.openGameDetailsOnPurchaseRequired then reactModule.useCallback(function()
-			-- upvalues: getSduiActionHandlerRegistry (copy), sduiActionType (copy), p0 (ref)
+			return if tag == nil then function() end else getSduiFocusActivationStore().register(tag, p2)
+		end, { p1.tag }) else nil else nil,
+		fetchDelayInSeconds = p1.fetchDelayInSeconds or 0.1,
+		universeId = p1.universeId,
+		placeId = p1.placeId,
+		useUIBloxButton = if fFlagSduiExperienceDetailsSupport then p1.enableUiBloxButton else nil,
+		reportExperienceLaunched = useSduiReportExperienceLaunchedModule(p1.sduiContext, p1.analyticsContext, p1.universeId, placeId, p1.rootPlaceId or placeId, p1.appliedFilters, if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport and p1.experienceJoinData then p1.experienceJoinData.launchData else nil else nil),
+		onPurchaseRequiredCallback = if p1.openGameDetailsOnPurchaseRequired then reactModule.useCallback(function()
+			-- upvalues: getSduiActionHandlerRegistry (copy), sduiActionType (copy), p1 (ref)
 			local actionHandlerConfig = getSduiActionHandlerRegistry().getActionHandlerConfig(sduiActionType.OpenGameDetails)
 			
 			if actionHandlerConfig and actionHandlerConfig.handler then
-				actionHandlerConfig.handler(nil, p0.analyticsContext, p0.sduiContext)
+				actionHandlerConfig.handler(nil, p1.analyticsContext, p1.sduiContext)
 			end
-		end, { p0.sduiContext, p0.analyticsContext }) else nil,
+		end, { p1.sduiContext, p1.analyticsContext }) else nil,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: fFlagLuaAppResetHoverOnSduiPlayButtonActivation (copy), p0 (ref), sduiActionType (copy), executeAction (copy), analyticsContext (ref)
-			if fFlagLuaAppResetHoverOnSduiPlayButtonActivation and p0.onActivatedEffect then
-				p0.onActivatedEffect()
+			-- upvalues: fFlagLuaAppResetHoverOnSduiPlayButtonActivation (copy), p1 (ref), sduiActionType (copy), executeAction (copy), analyticsContext (ref)
+			if fFlagLuaAppResetHoverOnSduiPlayButtonActivation and p1.onActivatedEffect then
+				p1.onActivatedEffect()
 			end
-			executeAction({ actionType = sduiActionType.PlayButtonClick }, analyticsContext, p0.sduiContext)
+			executeAction({ actionType = sduiActionType.PlayButtonClick }, analyticsContext, p1.sduiContext)
 		end, {
 			analyticsContext,
-			p0.sduiContext,
-			if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then p0.onActivatedEffect else nil
+			p1.sduiContext,
+			if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then p1.onActivatedEffect else nil
 		}),
 		referralSource = findAnalyticsField("referralSource", analyticsContext.analyticsData),
 		eventContext = findAnalyticsField("eventContext", analyticsContext.analyticsData, "ExperienceTile"),
 		launchSource = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then findAnalyticsField("launchSource", analyticsContext.analyticsData) else nil else nil,
-		launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then p0.launchWhenLoading else nil,
-		launchOnReleaseAfterUnmount = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then p0.launchOnReleaseAfterUnmount else nil
+		launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then p1.launchWhenLoading else nil,
+		launchOnReleaseAfterUnmount = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then p1.launchOnReleaseAfterUnmount else nil
 	}))
 end)

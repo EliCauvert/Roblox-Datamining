@@ -24,8 +24,8 @@ local t_1 = {
 	Join = "join"
 }
 
-local function _(value, p0)
-	return if value == "AddReaction" or value == "RemoveReaction" then p0.reactionType or "" else ""
+local function _(value, p1)
+	return if value == "AddReaction" or value == "RemoveReaction" then p1.reactionType or "" else ""
 end
 
 return function(p1)
@@ -48,34 +48,34 @@ return function(p1)
 				signalTracker:recordSignal(p2.itemId, "View", string.format("%.1f", p3.durationSeconds))
 			end
 		end,
-		logAction = function(p4, p5, p6)
+		logAction = function(p2, p3, p4)
 			-- upvalues: t (copy), fFlagMomentsRealtimeSessionTelemetry (copy), t_1 (copy), analytics (copy), emitRecommendationActionModule (copy), getMomentsSessionId (ref), signalTracker (ref)
-			local var7 = t[p4]
+			local var1 = t[p2]
 			
-			if var7 == nil then
+			if var1 == nil then
 				return nil
 			elseif fFlagMomentsRealtimeSessionTelemetry then
-				local var8 = t_1[p4]
+				local var2 = t_1[p2]
 				
-				if var8 ~= nil then
-					analytics.reportMomentsEngagement(var8)
+				if var2 ~= nil then
+					analytics.reportMomentsEngagement(var2)
 				end
 			end
-			local var9 = emitRecommendationActionModule({
-				itemId = p5.itemId,
-				tracingId = p5.tracingId or "",
+			local var3 = emitRecommendationActionModule({
+				itemId = p3.itemId,
+				tracingId = p3.tracingId or "",
 				momentsSessionId = getMomentsSessionId(false),
-				actionType = var7,
-				reactionType = p6.reactionType,
-				destinationPlaceId = p6.destinationPlaceId,
-				commentText = p6.commentText,
-				actionWeight = p6.actionWeight
+				actionType = var1,
+				reactionType = p4.reactionType,
+				destinationPlaceId = p4.destinationPlaceId,
+				commentText = p4.commentText,
+				actionWeight = p4.actionWeight
 			})
 			
 			if signalTracker then
-				signalTracker:recordSignal(p5.itemId, p4, if p4 == "AddReaction" or p4 == "RemoveReaction" then p6.reactionType or "" else "")
+				signalTracker:recordSignal(p3.itemId, p2, if p2 == "AddReaction" or p2 == "RemoveReaction" then p4.reactionType or "" else "")
 			end
-			return var9
+			return var3
 		end
 	}
 end

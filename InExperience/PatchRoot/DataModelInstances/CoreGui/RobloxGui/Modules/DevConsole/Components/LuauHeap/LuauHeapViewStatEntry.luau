@@ -13,19 +13,19 @@ local cellPadding = constantsModule.LuauHeapFormatting.CellPadding
 local valuePadding = constantsModule.LuauHeapFormatting.ValuePadding
 local luauHeapViewStatEntry = roactModule.PureComponent:extend("LuauHeapViewStatEntry")
 
-local function BorderedCellLabel(p0)
+local function BorderedCellLabel(p1)
 	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
 	return roactModule.createFragment({
 		Label = roactModule.createElement(cellLabelModule, {
 			richText = true,
-			text = p0.text,
-			size = p0.size,
-			pos = p0.pos
+			text = p1.text,
+			size = p1.size,
+			pos = p1.pos
 		}),
 		LeftBorder = roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(UDim.new(0, lineWidth), p0.size.Y),
-			Position = UDim2.fromOffset(-valuePadding, 0) + p0.pos,
+			Size = UDim2.new(UDim.new(0, lineWidth), p1.size.Y),
+			Position = UDim2.fromOffset(-valuePadding, 0) + p1.pos,
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = lineColor
 		})

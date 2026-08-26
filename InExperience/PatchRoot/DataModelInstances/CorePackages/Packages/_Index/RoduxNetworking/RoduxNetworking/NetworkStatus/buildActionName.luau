@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return "networkStatus:" .. tostring(p0.keyPath)
+﻿return function(p1)
+	return "networkStatus:" .. tostring(p1.keyPath)
 end

@@ -11,7 +11,7 @@ local t = {
 	lastUpdated = { 25, 4, 25 }
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagLoggingGamepadOpenExpControlsMenuModule (ref), telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref), t (ref)
 	if not fFlagLoggingGamepadOpenExpControlsMenuModule then return end
 	local list, t_1
@@ -25,11 +25,11 @@ return function(p0)
 			"addPlaySessionId",
 			"addSessionInfo"
 		}
-		t_1 = { is_toggle_open = tostring(p0) }
+		t_1 = { is_toggle_open = tostring(p1) }
 	else
 		list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
 		t_1 = {
-			is_toggle_open = tostring(p0),
+			is_toggle_open = tostring(p1),
 			playsessionid = rbxAnalyticsService:GetPlaySessionId()
 		}
 	end

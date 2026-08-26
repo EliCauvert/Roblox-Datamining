@@ -1,8 +1,8 @@
 ﻿local promiseModule = require(script.Parent.Parent.Promise)
 
-return function(p0)
+return function(p1)
 	-- upvalues: promiseModule (ref)
-	return p0.getPremiumUpsellPrecheck():andThen(function(_)
+	return p1.getPremiumUpsellPrecheck():andThen(function(_)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.resolve(true)
 	end):catch(function(_)

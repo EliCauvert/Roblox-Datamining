@@ -5,37 +5,37 @@ local useBinding = reactModule.useBinding
 local useEffect = reactModule.useEffect
 local determineChatTimeoutInfoModule = require(interventionShared.Utils.determineChatTimeoutInfo)
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: useBinding (ref), useEffect (ref), determineChatTimeoutInfoModule (ref), runService (ref)
-	local var4, var5 = useBinding("")
-	local var6, var7 = useBinding("")
-	local var8 = if value and value ~= "" then DateTime.fromIsoDate(value) else nil
+	local var1, var2 = useBinding("")
+	local var3, var4 = useBinding("")
+	local var5 = if value and value ~= "" then DateTime.fromIsoDate(value) else nil
 	useEffect(function()
-		-- upvalues: determineChatTimeoutInfoModule (copy), var8 (ref), p0 (ref), var5 (ref), var7 (ref)
-		local _, var9, var10 = determineChatTimeoutInfoModule(var8, p0)
-		var5(var9)
-		var7(var10)
-	end, { var8, p0 })
+		-- upvalues: determineChatTimeoutInfoModule (copy), var5 (ref), p1 (ref), var2 (ref), var4 (ref)
+		local _, var6, var7 = determineChatTimeoutInfoModule(var5, p1)
+		var2(var6)
+		var4(var7)
+	end, { var5, p1 })
 	useEffect(function()
-		-- upvalues: var8 (ref), runService (copy), determineChatTimeoutInfoModule (copy), p0 (ref), var5 (ref), var7 (ref)
+		-- upvalues: var5 (ref), runService (copy), determineChatTimeoutInfoModule (copy), p1 (ref), var2 (ref), var4 (ref)
 		local heartbeatConnection = nil
 		
-		if var8 == nil then return end
-		if var8.UnixTimestamp - DateTime.now().UnixTimestamp <= 0 then
+		if var5 == nil then return end
+		if var5.UnixTimestamp - DateTime.now().UnixTimestamp <= 0 then
 			return
 		end
-		local var12 = 0
+		local var6 = 0
 		heartbeatConnection = runService.Heartbeat:Connect(function()
-			-- upvalues: var12 (write), determineChatTimeoutInfoModule (copy), var8 (copy), p0 (copy), var5 (copy), var7 (copy), heartbeatConnection (write)
+			-- upvalues: var6 (write), determineChatTimeoutInfoModule (copy), var5 (copy), p1 (copy), var2 (copy), var4 (copy), heartbeatConnection (write)
 			local processTime = os.clock()
 			
-			if processTime - var12 < 1 then return end
-			var12 = processTime
-			local var14, var15, var16 = determineChatTimeoutInfoModule(var8, p0)
-			var5(var15)
-			var7(var16)
+			if processTime - var6 < 1 then return end
+			var6 = processTime
+			local var7, var8, var9 = determineChatTimeoutInfoModule(var5, p1)
+			var2(var8)
+			var4(var9)
 			
-			if var14 <= 0 and heartbeatConnection then
+			if var7 <= 0 and heartbeatConnection then
 				heartbeatConnection:Disconnect()
 			end
 		end)
@@ -46,7 +46,7 @@ return function(value, p0)
 				heartbeatConnection:Disconnect()
 			end
 		end
-	end, { var8 })
+	end, { var5 })
 	
-	return { heading = var4, description = var6 }
+	return { heading = var1, description = var3 }
 end

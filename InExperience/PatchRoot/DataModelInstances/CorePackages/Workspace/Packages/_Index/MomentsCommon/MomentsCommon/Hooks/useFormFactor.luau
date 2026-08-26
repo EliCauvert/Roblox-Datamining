@@ -5,10 +5,10 @@ local formFactorModule = require(momentsCommon.Enums.FormFactor)
 
 return function()
 	-- upvalues: useScreenSizeModule (ref), reactModule (ref), formFactorModule (ref)
-	local var4 = useScreenSizeModule()
+	local var1 = useScreenSizeModule()
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var4 (ref), formFactorModule (copy)
-		return if var4.X < 600 then formFactorModule.MobilePortrait elseif var4.Y < 480 then formFactorModule.MobileLandscape else formFactorModule.Wide
-	end, { var4 })
+		-- upvalues: var1 (ref), formFactorModule (copy)
+		return if var1.X < 600 then formFactorModule.MobilePortrait elseif var1.Y < 480 then formFactorModule.MobileLandscape else formFactorModule.Wide
+	end, { var1 })
 end

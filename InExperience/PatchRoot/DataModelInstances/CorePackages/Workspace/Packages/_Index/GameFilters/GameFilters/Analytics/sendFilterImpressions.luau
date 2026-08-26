@@ -6,31 +6,31 @@ local filterImpressionsEventModule = require(gameFilters.Analytics.filterImpress
 local getOptionContextTagModule = require(gameFilters.Analytics.getOptionContextTag)
 local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: fFlagLuaAppChartsFilterOptionTextTag (ref), getOptionContextTagModule (ref), argCheckModule (ref), filterImpressionsEventModule (ref)
-	if not p0 then return end
-	if not p1 or #p1 == 0 then return end
+	if not p1 then return end
 	if not p2 or #p2 == 0 then return end
+	if not p3 or #p3 == 0 then return end
 	local t = {
-		gameSetTypeId = p4.gameSetTypeId,
-		gameSetTargetId = p4.gameSetTargetId,
-		sortPos = p4.sortPos
+		gameSetTypeId = p5.gameSetTypeId,
+		gameSetTargetId = p5.gameSetTargetId,
+		sortPos = p5.sortPos
 	}
 	local t_1 = {}
 	local t_2 = {}
 	local t_3 = {}
-	local var8 = if fFlagLuaAppChartsFilterOptionTextTag then {} else nil
+	local var1 = if fFlagLuaAppChartsFilterOptionTextTag then {} else nil
 	
-	for i, v in p1 do
-		local var10 = p2[v]
+	for i, v in p2 do
+		local var2 = p3[v]
 		
-		if var10 then
+		if var2 then
 			table.insert(t_1, v)
-			table.insert(t_2, var10.filterId)
-			table.insert(t_3, var10.selectedOptionId)
+			table.insert(t_2, var2.filterId)
+			table.insert(t_3, var2.selectedOptionId)
 			
 			if fFlagLuaAppChartsFilterOptionTextTag then
-				table.insert(var8, getOptionContextTagModule(var10, var10.selectedOptionId) or "0")
+				table.insert(var1, getOptionContextTagModule(var2, var2.selectedOptionId) or "0")
 			end
 		end
 	end
@@ -39,11 +39,11 @@ return function(p0, p1, p2, p3, p4)
 	argCheckModule.assert(t_2Count == #t_3)
 	
 	if fFlagLuaAppChartsFilterOptionTextTag then
-		argCheckModule.assert(t_2Count == #var8)
+		argCheckModule.assert(t_2Count == #var1)
 	end
 	t.absPositions = table.concat(t_1, ",")
 	t.filterIds = table.concat(t_2, ",")
 	t.selectedOptionIds = table.concat(t_3, ",")
-	t.selectedOptionContextTags = if fFlagLuaAppChartsFilterOptionTextTag then table.concat(var8, ",") else nil
-	filterImpressionsEventModule(p0, p3, t)
+	t.selectedOptionContextTags = if fFlagLuaAppChartsFilterOptionTextTag then table.concat(var1, ",") else nil
+	filterImpressionsEventModule(p1, p4, t)
 end

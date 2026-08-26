@@ -18,9 +18,9 @@ if math.random(0, 10000) <= game:GetFastInt("CoreScriptsProfilerSamplingHundredt
 	local t_1 = {}
 	t_1.__index = t_1
 	
-	function t_1.new(p0)
+	function t_1.new(p1)
 		-- upvalues: t_1 (ref)
-		return setmetatable({ profiler = nil, profilingActive = false, context = p0 }, t_1)
+		return setmetatable({ profiler = nil, profilingActive = false, context = p1 }, t_1)
 	end
 	
 	function t_1:start()
@@ -61,37 +61,37 @@ if math.random(0, 10000) <= game:GetFastInt("CoreScriptsProfilerSamplingHundredt
 		end
 	end
 	
-	local function sortPackageStatsByDuration(p2)
+	local function sortPackageStatsByDuration(p1)
 		local t = {}
 		
-		for i, v in p2 do
+		for i, v in p1 do
 			table.insert(t, {
 				packageName = i,
 				count = v.count,
 				totalDuration = v.totalDuration
 			})
 		end
-		table.sort(t, function(p3, p4)
-			return p4.totalDuration < p3.totalDuration
+		table.sort(t, function(p2, p3)
+			return p3.totalDuration < p2.totalDuration
 		end)
 		
 		return t
 	end
 	
-	function t_1:reportResults(p5)
+	function t_1:reportResults(p2)
 		-- upvalues: profilerDataParserModule (ref), sortPackageStatsByDuration (ref), coreScriptsProfilerTelemetryLimit (ref), deviceTier (ref), telemetryService (ref), t (ref)
-		local var11 = sortPackageStatsByDuration(profilerDataParserModule.new(p5):getPackageStatistics())
+		local var1 = sortPackageStatsByDuration(profilerDataParserModule.new(p2):getPackageStatistics())
 		local deviceMemoryTier = deviceTier.GetDeviceMemoryTier()
 		
-		for i = 1, math.min(#var11, coreScriptsProfilerTelemetryLimit) do
-			local var13 = var11[i]
+		for i = 1, math.min(#var1, coreScriptsProfilerTelemetryLimit) do
+			local var2 = var1[i]
 			telemetryService:LogStat(t, {
 				customFields = {
-					packageName = var13.packageName,
+					packageName = var2.packageName,
 					context = self.context,
 					deviceTier = deviceMemoryTier
 				}
-			}, var13.totalDuration * 1000)
+			}, var2.totalDuration * 1000)
 		end
 	end
 	
@@ -103,14 +103,14 @@ if math.random(0, 10000) <= game:GetFastInt("CoreScriptsProfilerSamplingHundredt
 		end
 	end
 	
-	local var9 = nil
+	local var3 = nil
 	
-	return function(p6)
-		-- upvalues: var9 (write), t_1 (ref)
-		if not var9 then
-			var9 = t_1.new(p6)
+	return function(p3)
+		-- upvalues: var3 (write), t_1 (ref)
+		if not var3 then
+			var3 = t_1.new(p3)
 		end
-		return var9
+		return var3
 	end
 end
 return nil

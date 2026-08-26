@@ -4,8 +4,8 @@ local makeMomentMetadataModule = require(momentsCreation.Utils.makeMomentMetadat
 local makeRegistrationInfoModule = require(momentsCreation.Utils.makeRegistrationInfo)
 local uploadMomentModule = require(momentsCreation.Upload.uploadMoment)
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: makeMomentMetadataModule (ref), makeRegistrationInfoModule (ref), uploadMomentModule (ref)
-	local var4 = makeMomentMetadataModule(p0, p2, p1, p3.resolvedTimeLength)
-	uploadMomentModule(p0, var4, makeRegistrationInfoModule(p0, var4), p3.localizations, p3.uploadStore, p3.toastStore, nil, nil, p3.creationSessionId)
+	local var1 = makeMomentMetadataModule(p1, p3, p2, p4.resolvedTimeLength)
+	uploadMomentModule(p1, var1, makeRegistrationInfoModule(p1, var1), p4.localizations, p4.uploadStore, p4.toastStore, nil, nil, p4.creationSessionId)
 end

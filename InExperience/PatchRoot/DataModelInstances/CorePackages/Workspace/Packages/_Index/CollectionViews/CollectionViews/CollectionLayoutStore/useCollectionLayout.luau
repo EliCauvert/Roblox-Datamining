@@ -8,24 +8,24 @@ local collectionItemSize = require(collectionViews.CollectionViewTypes).Collecti
 local collectionLayoutStoreContextModule = require(collectionViews.CollectionLayoutStore.CollectionLayoutStoreContext)
 local getMainCollectionLayoutStoreModule = require(collectionViews.CollectionLayoutStore.getMainCollectionLayoutStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: foundationModule (ref), collectionItemSize (ref), appCompositionModule (ref), reactModule (ref), collectionLayoutStoreContextModule (ref), getMainCollectionLayoutStoreModule (ref), signalsReactModule (ref)
-	local var7 = foundationModule.Hooks.useTokens()
-	p0 = p0 or collectionItemSize.Small
-	local var9 = appCompositionModule.useCompositionLayout()
-	local var10 = reactModule.useContext(collectionLayoutStoreContextModule) or getMainCollectionLayoutStoreModule(false)
-	local var11 = signalsReactModule.useSignalState(var10.getItemsPerRow[p0])
+	local var1 = foundationModule.Hooks.useTokens()
+	p1 = p1 or collectionItemSize.Small
+	local var2 = appCompositionModule.useCompositionLayout()
+	local var3 = reactModule.useContext(collectionLayoutStoreContextModule) or getMainCollectionLayoutStoreModule(false)
+	local var4 = signalsReactModule.useSignalState(var3.getItemsPerRow[p1])
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var7 (ref), var11 (ref), var10 (ref)
+		-- upvalues: var2 (ref), var1 (ref), var4 (ref), var3 (ref)
 		return {
-			margin = var9.margin,
-			gutter = var9.gutter,
-			carouselPeek = var9.carouselPeek,
-			verticalGap = var7.Gap.Large,
-			itemsPerRow = var11,
-			getContainerWidth = var10.getContainerWidth,
-			getDesignSpaceContainerWidth = var10.getDesignSpaceContainerWidth
+			margin = var2.margin,
+			gutter = var2.gutter,
+			carouselPeek = var2.carouselPeek,
+			verticalGap = var1.Gap.Large,
+			itemsPerRow = var4,
+			getContainerWidth = var3.getContainerWidth,
+			getDesignSpaceContainerWidth = var3.getDesignSpaceContainerWidth
 		}
-	end, { var9, var11, var7, var10 })
+	end, { var2, var4, var1, var3 })
 end

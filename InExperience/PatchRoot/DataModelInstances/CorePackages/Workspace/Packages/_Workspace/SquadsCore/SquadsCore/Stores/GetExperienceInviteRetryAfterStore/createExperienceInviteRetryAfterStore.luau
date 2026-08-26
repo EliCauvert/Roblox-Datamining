@@ -2,8 +2,8 @@
 local _ = require(parent.Signals)
 local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScopedSignal
 
-local function defaultSchedule(p0, p1)
-	local delayedThread = task.delay(p0, p1)
+local function defaultSchedule(p1, p2)
+	local delayedThread = task.delay(p1, p2)
 	
 	return function()
 		-- upvalues: delayedThread (ref)
@@ -11,48 +11,48 @@ local function defaultSchedule(p0, p1)
 	end
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: defaultSchedule (ref), createSessionScopedSignal (ref)
-	local var2 = if p2 then p2.schedule else defaultSchedule
-	local var3, var4 = createSessionScopedSignal(nil)
-	local var5 = nil
+	local var1 = if p1 then p1.schedule else defaultSchedule
+	local var2, var3 = createSessionScopedSignal(nil)
+	local var4 = nil
 	
 	local _ = function()
-		-- upvalues: var5 (write)
-		if var5 then
-			var5()
-			var5 = nil
+		-- upvalues: var4 (write)
+		if var4 then
+			var4()
+			var4 = nil
 		end
 	end
 	
 	return {
-		getBlockedSquadId = var3,
-		block = function(p3, p4)
-			-- upvalues: var5 (write), var4 (ref), var2 (ref)
-			if var5 then
-				var5()
-				var5 = nil
+		getBlockedSquadId = var2,
+		block = function(p2, p3)
+			-- upvalues: var4 (write), var3 (ref), var1 (ref)
+			if var4 then
+				var4()
+				var4 = nil
 			end
-			if p4 <= 0 then
-				var4(nil)
+			if p3 <= 0 then
+				var3(nil)
 				
 				return
 			end
-			var4(p3)
-			var5 = var2(p4, function()
-				-- upvalues: var5 (copy), var4 (copy)
-				var5 = nil
-				var4(nil)
+			var3(p2)
+			var4 = var1(p3, function()
+				-- upvalues: var4 (copy), var3 (copy)
+				var4 = nil
+				var3(nil)
 			end)
 		end,
-		unblock = function(p5)
-			-- upvalues: var3 (ref), var5 (write), var4 (ref)
-			if p5 ~= nil and var3(false) ~= p5 then return end
-			if var5 then
-				var5()
-				var5 = nil
+		unblock = function(p2)
+			-- upvalues: var2 (ref), var4 (write), var3 (ref)
+			if p2 ~= nil and var2(false) ~= p2 then return end
+			if var4 then
+				var4()
+				var4 = nil
 			end
-			var4(nil)
+			var3(nil)
 		end
 	}
 end

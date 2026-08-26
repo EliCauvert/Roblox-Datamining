@@ -12,9 +12,9 @@ local t = {
 	InStudio = enumsModule.PresenceTypes.InStudio
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref), enumsModule (ref)
-	local var3 = t[p0] or enumsModule.PresenceTypes.Offline
+	local var1 = t[p1] or enumsModule.PresenceTypes.Offline
 	
-	return if var3 == enumsModule.PresenceTypes.InGame and p1 == nil then enumsModule.PresenceTypes.Online else var3
+	return if var1 == enumsModule.PresenceTypes.InGame and p2 == nil then enumsModule.PresenceTypes.Online else var1
 end

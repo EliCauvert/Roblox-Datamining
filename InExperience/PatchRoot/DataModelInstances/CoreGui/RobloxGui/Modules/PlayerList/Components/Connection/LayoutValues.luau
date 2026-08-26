@@ -2,9 +2,9 @@
 local layoutValuesContextModule = require(script.Parent.LayoutValuesContext)
 
 return {
-	Provider = function(p0)
+	Provider = function(p1)
 		-- upvalues: roactModule (ref), layoutValuesContextModule (ref)
-		return roactModule.createElement(layoutValuesContextModule.Provider, { value = p0.layoutValues }, roactModule.oneChild(p0[roactModule.Children]))
+		return roactModule.createElement(layoutValuesContextModule.Provider, { value = p1.layoutValues }, roactModule.oneChild(p1[roactModule.Children]))
 	end,
 	Consumer = layoutValuesContextModule.Consumer,
 	WithLayoutValues = function(p1)

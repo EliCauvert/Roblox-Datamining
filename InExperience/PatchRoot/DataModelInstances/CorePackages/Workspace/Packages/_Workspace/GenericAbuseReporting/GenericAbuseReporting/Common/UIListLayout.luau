@@ -1,13 +1,13 @@
 ﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("UIListLayout", {
-		FillDirection = p0.FillDirection,
-		HorizontalAlignment = p0.HorizontalAlignment,
-		Padding = p0.Padding,
+		FillDirection = p1.FillDirection,
+		HorizontalAlignment = p1.HorizontalAlignment,
+		Padding = p1.Padding,
 		SortOrder = Enum.SortOrder.LayoutOrder,
-		VerticalAlignment = p0.VerticalAlignment,
-		ref = p0.Ref
+		VerticalAlignment = p1.VerticalAlignment,
+		ref = p1.Ref
 	})
 end

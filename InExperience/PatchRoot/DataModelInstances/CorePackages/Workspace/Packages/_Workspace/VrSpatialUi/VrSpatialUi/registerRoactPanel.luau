@@ -4,9 +4,9 @@ local UIManagerModule = require(vrSpatialUi.UIManager)
 local constantsModule = require(vrSpatialUi.Constants)
 local fFlagEnableSpatialUIBottomBarFixPlaceFilterModule = require(vrSpatialUi.Flags.FFlagEnableSpatialUIBottomBarFixPlaceFilter)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	local part = Instance.new("Part")
-	part.Name = p0
+	part.Name = p1
 	part.Anchored = true
 	part.CanCollide = false
 	part.CanTouch = false
@@ -15,18 +15,18 @@ local function _(p0, p1)
 	part.Transparency = 1
 	part.Size = Vector3.new(0.050000000745, 0.050000000745, 0.050000000745)
 	part:SetAttribute("_isProtectedSpatialUIPart", true)
-	part.Parent = p1
+	part.Parent = p2
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: httpService (ref)
-	if p2:GetAttribute("_isProtectedSpatialUIPart") then
+	if p1:GetAttribute("_isProtectedSpatialUIPart") then
 		return
 	end
-	local name = p2.Name
-	local parent = p2.Parent
-	p2:SetAttribute("_isProtectedSpatialUIPart", true)
-	p2.Name = httpService:GenerateGUID(false)
+	local name = p1.Name
+	local parent = p1.Parent
+	p1:SetAttribute("_isProtectedSpatialUIPart", true)
+	p1.Name = httpService:GenerateGUID(false)
 	local part = Instance.new("Part")
 	part.Name = name
 	part.Anchored = true
@@ -66,26 +66,26 @@ local _ = function(value)
 	part.Parent = parent
 end
 
-return function(p3, p4, p5)
+return function(p1, p2, p3)
 	-- upvalues: constantsModule (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (ref), httpService (ref), UIManagerModule (ref)
 	local t = nil
-	local var9 = constantsModule.ROACT_PANEL_UIGROUP_MAP[p4]
+	local var1 = constantsModule.ROACT_PANEL_UIGROUP_MAP[p2]
 	
-	if var9 then
+	if var1 then
 		t = {
-			uiGroupElementOffset = constantsModule.ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP[p4]
+			uiGroupElementOffset = constantsModule.ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP[p2]
 		}
 	end
 	local t_1 = {
 		headScale = 1,
-		panelObject = p3.current,
+		panelObject = p1.current,
 		uiType = constantsModule.SpatialUIType.SpatialUIRoact,
-		panelType = p4,
-		panelPositionProps = { uiGroup = var9, cameraFixedPanelProp = t }
+		panelType = p2,
+		panelPositionProps = { uiGroup = var1, cameraFixedPanelProp = t }
 	}
 	
-	if fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and p4 == constantsModule.PanelType.BottomBar then
-		local current = p3.current
+	if fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and p2 == constantsModule.PanelType.BottomBar then
+		local current = p1.current
 		
 		if current ~= nil then
 			local adornee = current.Adornee
@@ -109,5 +109,5 @@ return function(p3, p4, p5)
 			end
 		end
 	end
-	UIManagerModule.getInstance():registerRoactPanel(p4, t_1, p5)
+	UIManagerModule.getInstance():registerRoactPanel(p2, t_1, p3)
 end

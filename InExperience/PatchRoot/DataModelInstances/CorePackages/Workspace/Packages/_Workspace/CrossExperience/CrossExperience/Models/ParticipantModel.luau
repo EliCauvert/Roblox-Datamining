@@ -3,13 +3,13 @@ local fFlagEnablePartyVoiceChangersInLua = dependenciesModule.SharedFlags.FFlagE
 local t = dependenciesModule.t
 local t_1 = {}
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
-	assert(t_1.isValid(p0))
+	assert(t_1.isValid(p1))
 	t_1.__index = t_1
-	setmetatable(p0, t_1)
+	setmetatable(p1, t_1)
 	
-	return p0
+	return p1
 end
 
 function t_1.format(p1)

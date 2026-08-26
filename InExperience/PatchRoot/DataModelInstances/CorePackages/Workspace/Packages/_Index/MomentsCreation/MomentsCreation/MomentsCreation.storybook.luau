@@ -12,16 +12,16 @@ return {
 	name = "MomentsCreation",
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), foundationProvider (ref), t (ref), colorMode (ref), device (ref)
-		return function(p1)
-			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p0 (ref)
+		return function(p2)
+			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p1 (ref)
 			return reactModule.createElement(foundationProvider, {
-				colorMode = t[p1.theme] or colorMode.Dark,
-				device = device[p1.platform] or device.Phone,
-				preferences = p1.settings,
-				scale = p1.settings and p1.settings.scale
-			}, { Child = reactModule.createElement(p0, p1) })
+				colorMode = t[p2.theme] or colorMode.Dark,
+				device = device[p2.platform] or device.Phone,
+				preferences = p2.settings,
+				scale = p2.settings and p2.settings.scale
+			}, { Child = reactModule.createElement(p1, p2) })
 		end
 	end,
 	storyRoots = { momentsCreation }

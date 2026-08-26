@@ -20,19 +20,19 @@ local fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModul
 local fStringSocialProfileCurrentlyPlayingLayerModule = require(profilePlatform.Flags.FStringSocialProfileCurrentlyPlayingLayer)
 local fFlagProfileCurrentlyPlayingIXPEnabledModule = require(profilePlatform.Flags.FFlagProfileCurrentlyPlayingIXPEnabled)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (ref), useDispatch (ref), useEffectOnMount (ref), networkingGamesModule (ref), reactModule (ref), fFlagProfileCurrentlyPlayingIXPEnabledModule (ref), IXPService (ref), fStringSocialProfileCurrentlyPlayingLayerModule (ref), useSelector (ref), getDeepValue (ref), contextualPresenceModule (ref), contextualMutualFriendsModule (ref), contextualPlayedTogetherModule (ref), contextualGenericModule (ref), horizontalPageMargin (ref)
-	local var20
+	local var1
 	local sourceInfo = useProfileWrapperContextModule().sourceInfo
 	local contextualInformation = (useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader) or {}).contextualInformation
 	local context = contextualInformation.context
 	local contextDetails = contextualInformation.contextDetails
-	local var15 = if context == enumsModule.ContextualTypes.SentFromExperience then contextDetails[context].sourceUniverseId elseif fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and context == enumsModule.ContextualTypes.PlayedTogether then contextDetails[context].mostFrequentUniverseId else nil
-	local var16 = useDispatch()
+	local var2 = if context == enumsModule.ContextualTypes.SentFromExperience then contextDetails[context].sourceUniverseId elseif fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and context == enumsModule.ContextualTypes.PlayedTogether then contextDetails[context].mostFrequentUniverseId else nil
+	local var3 = useDispatch()
 	useEffectOnMount(function()
-		-- upvalues: context (ref), enumsModule (copy), fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (copy), var16 (ref), networkingGamesModule (copy), var15 (ref)
+		-- upvalues: context (ref), enumsModule (copy), fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (copy), var3 (ref), networkingGamesModule (copy), var2 (ref)
 		if context == enumsModule.ContextualTypes.SentFromExperience or fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and context == enumsModule.ContextualTypes.PlayedTogether then
-			var16(networkingGamesModule.GetExperiencesDetails.API({ var15 })):catch(function(_) end)
+			var3(networkingGamesModule.GetExperiencesDetails.API({ var2 })):catch(function(_) end)
 		end
 	end)
 	reactModule.useEffect(function()
@@ -41,32 +41,32 @@ return function(p0)
 			IXPService:LogFlagLinkedUserLayerExposure(fStringSocialProfileCurrentlyPlayingLayerModule)
 		end
 	end, { context })
-	local var17 = useSelector(function(p1)
-		-- upvalues: getDeepValue (copy), var15 (ref)
-		return getDeepValue(p1, `ProfilePlatform.Games.byGameId.{tostring(var15)}.name`) or ""
+	local var4 = useSelector(function(p2)
+		-- upvalues: getDeepValue (copy), var2 (ref)
+		return getDeepValue(p2, `ProfilePlatform.Games.byGameId.{tostring(var2)}.name`) or ""
 	end)
-	local var18 = getDeepValue(sourceInfo, "contextualOverride.icon")
-	local var19 = getDeepValue(sourceInfo, "contextualOverride.text")
+	local var5 = getDeepValue(sourceInfo, "contextualOverride.icon")
+	local var6 = getDeepValue(sourceInfo, "contextualOverride.text")
 	local _ = nil
 	
 	if context == enumsModule.ContextualTypes.Presence then
-		var20 = reactModule.createElement(contextualPresenceModule)
+		var1 = reactModule.createElement(contextualPresenceModule)
 	elseif context == enumsModule.ContextualTypes.MutualFriends then
-		local var21 = contextDetails[context]
-		var20 = reactModule.createElement(contextualMutualFriendsModule, {
-			mutualFriends = var21.mutualFriends,
-			mutualFriendsCount = var21.mutualFriendsCount
+		local var7 = contextDetails[context]
+		var1 = reactModule.createElement(contextualMutualFriendsModule, {
+			mutualFriends = var7.mutualFriends,
+			mutualFriendsCount = var7.mutualFriendsCount
 		})
-	var20 = if fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and context == enumsModule.ContextualTypes.PlayedTogether then reactModule.createElement(contextualPlayedTogetherModule, { experienceName = var17 }) else reactModule.createElement(contextualGenericModule, {
+	var1 = if fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and context == enumsModule.ContextualTypes.PlayedTogether then reactModule.createElement(contextualPlayedTogetherModule, { experienceName = var4 }) else reactModule.createElement(contextualGenericModule, {
 		contextualType = context,
-		experienceName = var17,
-		iconOverride = var18,
-		textOverride = var19
+		experienceName = var4,
+		iconOverride = var5,
+		textOverride = var6
 	})
 	return reactModule.createElement(horizontalPageMargin, {
 		useAutomaticSizing = true,
 		backgroundTransparency = 1,
-		size = p0.size,
-		layoutOrder = p0.layoutOrder
-	}, { contextualInformation = var20 })
+		size = p1.size,
+		layoutOrder = p1.layoutOrder
+	}, { contextualInformation = var1 })
 end

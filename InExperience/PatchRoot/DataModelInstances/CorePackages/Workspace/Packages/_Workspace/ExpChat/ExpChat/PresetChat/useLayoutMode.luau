@@ -12,7 +12,7 @@ end
 
 return function()
 	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), userInputService (ref)
-	local var6 = signalsReactModule.useSignalState(getPresetChatStoreModule(false).getLayoutModeOverride)
+	local var1 = signalsReactModule.useSignalState(getPresetChatStoreModule(false).getLayoutModeOverride)
 	
-	return if var6 == constantsModule.LayoutMode.Tray or var6 == constantsModule.LayoutMode.FlyOut then var6 elseif fFlagExpChatPresetChatGamepadEnabledModule and userInputService.PreferredInput == Enum.PreferredInput.Gamepad then constantsModule.LayoutMode.FlyOut elseif userInputService.TouchEnabled and not userInputService.MouseEnabled then constantsModule.LayoutMode.Tray else constantsModule.LayoutMode.FlyOut
+	return if var1 == constantsModule.LayoutMode.Tray or var1 == constantsModule.LayoutMode.FlyOut then var1 elseif fFlagExpChatPresetChatGamepadEnabledModule and userInputService.PreferredInput == Enum.PreferredInput.Gamepad then constantsModule.LayoutMode.FlyOut elseif userInputService.TouchEnabled and not userInputService.MouseEnabled then constantsModule.LayoutMode.Tray else constantsModule.LayoutMode.FlyOut
 end

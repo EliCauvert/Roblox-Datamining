@@ -3,10 +3,10 @@ local playersService = game:GetService("Players")
 local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 local engineAudioSTTIsDictationEnabled = game:DefineFastFlag("EngineAudioSTTIsDictationEnabled", false)
 
-local function _(p0)
-	if p0.current then
-		p0.current:Destroy()
-		p0.current = nil
+local function _(p1)
+	if p1.current then
+		p1.current:Destroy()
+		p1.current = nil
 	end
 end
 
@@ -17,38 +17,38 @@ local _ = function(p1)
 	end
 end
 
-local _ = function(p2)
-	local textConnection = p2.textConnection
+local _ = function(p1)
+	local textConnection = p1.textConnection
 	
 	if textConnection.current then
 		textConnection.current:Disconnect()
 		textConnection.current = nil
 	end
-	local vadConnection = p2.vadConnection
+	local vadConnection = p1.vadConnection
 	
 	if vadConnection.current then
 		vadConnection.current:Disconnect()
 		vadConnection.current = nil
 	end
-	local wire = p2.wire
+	local wire = p1.wire
 	
 	if wire.current then
 		wire.current:Destroy()
 		wire.current = nil
 	end
-	local audioSTT = p2.audioSTT
+	local audioSTT = p1.audioSTT
 	
 	if audioSTT.current then
 		audioSTT.current:Destroy()
 		audioSTT.current = nil
 	end
-	local audioDeviceInput = p2.audioDeviceInput
+	local audioDeviceInput = p1.audioDeviceInput
 	
 	if audioDeviceInput.current then
 		audioDeviceInput.current:Destroy()
 		audioDeviceInput.current = nil
 	end
-	local container = p2.container
+	local container = p1.container
 	
 	if container.current then
 		container.current:Destroy()
@@ -58,118 +58,118 @@ end
 
 return function()
 	-- upvalues: reactModule (ref), playersService (ref), coreGuiService (ref), engineAudioSTTIsDictationEnabled (ref)
-	local var4, var5 = reactModule.useState(nil)
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef(nil)
+	local var5 = reactModule.useRef(nil)
 	local var6 = reactModule.useRef(nil)
 	local var7 = reactModule.useRef(nil)
 	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useRef(nil)
-	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: var6 (ref), var7 (ref), var8 (ref), var9 (ref), var10 (ref), var11 (ref)
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), var4 (ref), var5 (ref), var6 (ref), var7 (ref), var8 (ref)
 		return {
-			audioDeviceInput = var6,
-			audioSTT = var7,
-			wire = var8,
-			container = var9,
-			textConnection = var10,
-			vadConnection = var11
+			audioDeviceInput = var3,
+			audioSTT = var4,
+			wire = var5,
+			container = var6,
+			textConnection = var7,
+			vadConnection = var8
 		}
 	end, {})
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), var5 (ref)
-		local textConnection = var12.textConnection
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var9 (ref), var2 (ref)
+		local textConnection = var9.textConnection
 		
 		if textConnection.current then
 			textConnection.current:Disconnect()
 			textConnection.current = nil
 		end
-		local vadConnection = var12.vadConnection
+		local vadConnection = var9.vadConnection
 		
 		if vadConnection.current then
 			vadConnection.current:Disconnect()
 			vadConnection.current = nil
 		end
-		local wire = var12.wire
+		local wire = var9.wire
 		
 		if wire.current then
 			wire.current:Destroy()
 			wire.current = nil
 		end
-		local audioSTT = var12.audioSTT
+		local audioSTT = var9.audioSTT
 		
 		if audioSTT.current then
 			audioSTT.current:Destroy()
 			audioSTT.current = nil
 		end
-		local audioDeviceInput = var12.audioDeviceInput
+		local audioDeviceInput = var9.audioDeviceInput
 		
 		if audioDeviceInput.current then
 			audioDeviceInput.current:Destroy()
 			audioDeviceInput.current = nil
 		end
-		local container = var12.container
+		local container = var9.container
 		
 		if container.current then
 			container.current:Destroy()
 			container.current = nil
 		end
-		var5(nil)
-	end, { var12 })
-	local var14 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: playersService (copy), var12 (ref), coreGuiService (copy), engineAudioSTTIsDictationEnabled (copy), var5 (ref)
+		var2(nil)
+	end, { var9 })
+	local var11 = reactModule.useCallback(function(p1, p2)
+		-- upvalues: playersService (copy), var9 (ref), coreGuiService (copy), engineAudioSTTIsDictationEnabled (copy), var2 (ref)
 		local localPlayer = playersService.LocalPlayer
 		
 		if not localPlayer then
 			error("No local player")
 		end
-		local textConnection = var12.textConnection
+		local textConnection = var9.textConnection
 		
 		if textConnection.current then
 			textConnection.current:Disconnect()
 			textConnection.current = nil
 		end
-		local vadConnection = var12.vadConnection
+		local vadConnection = var9.vadConnection
 		
 		if vadConnection.current then
 			vadConnection.current:Disconnect()
 			vadConnection.current = nil
 		end
-		local wire = var12.wire
+		local wire = var9.wire
 		
 		if wire.current then
 			wire.current:Destroy()
 			wire.current = nil
 		end
-		local audioSTT = var12.audioSTT
+		local audioSTT = var9.audioSTT
 		
 		if audioSTT.current then
 			audioSTT.current:Destroy()
 			audioSTT.current = nil
 		end
-		local audioDeviceInput = var12.audioDeviceInput
+		local audioDeviceInput = var9.audioDeviceInput
 		
 		if audioDeviceInput.current then
 			audioDeviceInput.current:Destroy()
 			audioDeviceInput.current = nil
 		end
-		local container = var12.container
+		local container = var9.container
 		
 		if container.current then
 			container.current:Destroy()
 			container.current = nil
 		end
-		local var15 = p4 ~= nil and p4.continuous == true
+		local var12 = p2 ~= nil and p2.continuous == true
 		local expChatDictation = Instance.new("Folder")
 		expChatDictation.Name = "ExpChatDictation"
 		expChatDictation.Parent = coreGuiService
-		var12.container.current = expChatDictation
+		var9.container.current = expChatDictation
 		local audioDeviceInput_1 = Instance.new("AudioDeviceInput")
 		audioDeviceInput_1.Player = localPlayer
 		audioDeviceInput_1.Muted = false
 		audioDeviceInput_1.Parent = expChatDictation
 		audioDeviceInput_1.Active = true
-		var12.audioDeviceInput.current = audioDeviceInput_1
+		var9.audioDeviceInput.current = audioDeviceInput_1
 		local audioSpeechToText = Instance.new("AudioSpeechToText")
 		
 		if engineAudioSTTIsDictationEnabled then
@@ -177,87 +177,87 @@ return function()
 		end
 		audioSpeechToText.Enabled = true
 		audioSpeechToText.Parent = expChatDictation
-		var12.audioSTT.current = audioSpeechToText
+		var9.audioSTT.current = audioSpeechToText
 		local wire_1 = Instance.new("Wire")
 		wire_1.SourceInstance = audioDeviceInput_1
 		wire_1.TargetInstance = audioSpeechToText
 		wire_1.Parent = expChatDictation
-		var12.wire.current = wire_1
-		var12.textConnection.current = audioSpeechToText:GetPropertyChangedSignal("Text"):Connect(function()
-			-- upvalues: audioSpeechToText (ref), var15 (ref), p3 (ref)
+		var9.wire.current = wire_1
+		var9.textConnection.current = audioSpeechToText:GetPropertyChangedSignal("Text"):Connect(function()
+			-- upvalues: audioSpeechToText (ref), var12 (ref), p1 (ref)
 			local text = audioSpeechToText.Text
 			
 			if text and text ~= "" then
-				if var15 then
+				if var12 then
 					audioSpeechToText.Text = ""
 				end
-				p3.onTranscription(text)
+				p1.onTranscription(text)
 			end
 		end)
 		
-		if p3.onSpeechStarted then
-			local onSpeechStarted = p3.onSpeechStarted
-			var12.vadConnection.current = audioSpeechToText:GetPropertyChangedSignal("VoiceDetected"):Connect(function()
+		if p1.onSpeechStarted then
+			local onSpeechStarted = p1.onSpeechStarted
+			var9.vadConnection.current = audioSpeechToText:GetPropertyChangedSignal("VoiceDetected"):Connect(function()
 				-- upvalues: audioSpeechToText (ref), onSpeechStarted (ref)
 				if audioSpeechToText.VoiceDetected then
 					onSpeechStarted()
 				end
 			end)
 		end
-		var5(audioDeviceInput_1)
+		var2(audioDeviceInput_1)
 		
 		return audioDeviceInput_1
-	end, { var12 })
+	end, { var9 })
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref)
+		-- upvalues: var9 (ref)
 		return function()
-			-- upvalues: var12 (copy)
-			local textConnection = var12.textConnection
+			-- upvalues: var9 (copy)
+			local textConnection = var9.textConnection
 			
 			if textConnection.current then
 				textConnection.current:Disconnect()
 				textConnection.current = nil
 			end
-			local vadConnection = var12.vadConnection
+			local vadConnection = var9.vadConnection
 			
 			if vadConnection.current then
 				vadConnection.current:Disconnect()
 				vadConnection.current = nil
 			end
-			local wire = var12.wire
+			local wire = var9.wire
 			
 			if wire.current then
 				wire.current:Destroy()
 				wire.current = nil
 			end
-			local audioSTT = var12.audioSTT
+			local audioSTT = var9.audioSTT
 			
 			if audioSTT.current then
 				audioSTT.current:Destroy()
 				audioSTT.current = nil
 			end
-			local audioDeviceInput = var12.audioDeviceInput
+			local audioDeviceInput = var9.audioDeviceInput
 			
 			if audioDeviceInput.current then
 				audioDeviceInput.current:Destroy()
 				audioDeviceInput.current = nil
 			end
-			local container = var12.container
+			local container = var9.container
 			
 			if container.current then
 				container.current:Destroy()
 				container.current = nil
 			end
 		end
-	end, { var12 })
+	end, { var9 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var14 (ref), var13 (ref), var4 (ref), var6 (ref)
+		-- upvalues: var11 (ref), var10 (ref), var1 (ref), var3 (ref)
 		return {
-			start = var14,
-			stop = var13,
-			audioDeviceInput = var4,
-			audioDeviceInputRef = var6
+			start = var11,
+			stop = var10,
+			audioDeviceInput = var1,
+			audioDeviceInputRef = var3
 		}
-	end, { var14, var13, var4 })
+	end, { var11, var10, var1 })
 end

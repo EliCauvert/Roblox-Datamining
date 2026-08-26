@@ -10,31 +10,31 @@ local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local fFlagSduiAllowNoConfigsBuilt = require(parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
 local fFlagEdpGameLeavePromptsHandlerEnabled = require(parent.SharedFlags).FFlagEdpGameLeavePromptsHandlerEnabled
 
-local function getPromptsUrl(p0, p1)
+local function getPromptsUrl(p1, p2)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref)
-	local var3 = urlBuilder.new({
+	local var1 = urlBuilder.new({
 		path = "modals-api/v1/prompts",
 		base = urlBase.APIS,
-		query = { entryPoint = p0 }
+		query = { entryPoint = p1 }
 	})()
 	
-	return if p1 == nil then var3 else `{var3}&clientAttributes={httpService:UrlEncode(httpService:JSONEncode(p1))}`
+	return if p2 == nil then var1 else `{var1}&clientAttributes={httpService:UrlEncode(httpService:JSONEncode(p2))}`
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: parent (ref), getSduiApiStore (ref), sduiResponseType (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), getPromptsUrl (ref), urlBuilder (ref), urlBase (ref), fFlagSduiAllowNoConfigsBuilt (ref)
 	getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.ProtobufJson,
-		url = if fFlagEdpGameLeavePromptsHandlerEnabled then getPromptsUrl(p2.entryPoint, p2.clientAttributes) else urlBuilder.new({
+		url = if fFlagEdpGameLeavePromptsHandlerEnabled then getPromptsUrl(p1.entryPoint, p1.clientAttributes) else urlBuilder.new({
 			path = "modals-api/v1/prompts",
 			base = urlBase.APIS,
-			query = { entryPoint = p2.entryPoint }
+			query = { entryPoint = p1.entryPoint }
 		})(),
-		surfaceKey = p2.surfaceKey,
-		configKey = p2.configKey,
-		clearOnEmptyResponse = p2.clearOnEmptyResponse,
-		allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then p2.allowNoConfigsBuilt else nil,
-		loadTimer = p2.loadTimer,
+		surfaceKey = p1.surfaceKey,
+		configKey = p1.configKey,
+		clearOnEmptyResponse = p1.clearOnEmptyResponse,
+		allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then p1.allowNoConfigsBuilt else nil,
+		loadTimer = p1.loadTimer,
 		apiProto = require(parent.ServiceContractsProto).apppageplatform.prompts.prompts.GetEligiblePromptsResponse
-	}, p3)
+	}, p2)
 end

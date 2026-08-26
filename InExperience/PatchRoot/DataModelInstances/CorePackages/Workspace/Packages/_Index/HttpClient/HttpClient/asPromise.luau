@@ -4,82 +4,82 @@ local signalsModule = require(parent.Signals)
 local _ = require(script.Parent.types)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: promiseModule (ref), t (ref), signalsModule (ref)
 	local t_1 = {}
 	
-	return promiseModule.new(function(p1, p2, p3)
-		-- upvalues: t (copy), t_1 (ref), p0 (ref), signalsModule (copy)
-		local var4 = false
-		local var5 = false
+	return promiseModule.new(function(p2, p3, p4)
+		-- upvalues: t (copy), t_1 (ref), p1 (ref), signalsModule (copy)
+		local var1 = false
+		local var2 = false
 		
 		local function _()
-			-- upvalues: var5 (write), t (copy), t_1 (copy)
-			if var5 then return end
-			var5 = true
-			local var9 = t[t_1]
+			-- upvalues: var2 (write), t (copy), t_1 (copy)
+			if var2 then return end
+			var2 = true
+			local var3 = t[t_1]
 			t[t_1] = nil
 			
-			if var9 ~= nil then
-				var9()
+			if var3 ~= nil then
+				var3()
 			end
 		end
 		
 		local function settle(value)
-			-- upvalues: var4 (write), var5 (write), t (copy), t_1 (copy), p1 (ref), p2 (ref)
-			if var4 then return end
-			var4 = true
+			-- upvalues: var1 (write), var2 (write), t (copy), t_1 (copy), p2 (ref), p3 (ref)
+			if var1 then return end
+			var1 = true
 			
-			if not var5 then
-				var5 = true
-				local var10 = t[t_1]
+			if not var2 then
+				var2 = true
+				local var3 = t[t_1]
 				t[t_1] = nil
 				
-				if var10 ~= nil then
-					var10()
+				if var3 ~= nil then
+					var3()
 				end
 			end
 			if value.status == "succeeded" then
-				p1(value.result)
+				p2(value.result)
 				
 				return
 			end
-			p2({
+			p3({
 				responseCode = value.errorCode,
 				errorMessage = value.error
 			})
 		end
 		
-		local var7 = p0.state(false)
+		local var3 = p1.state(false)
 		
-		if var7.status ~= "pending" then
-			settle(var7)
+		if var3.status ~= "pending" then
+			settle(var3)
 			
 			return
 		end
 		local _ = nil
-		local var8 = signalsModule.createEffect(function(p4)
-			-- upvalues: p0 (copy), settle (ref)
-			local var11 = p0.state(p4)
+		local var4 = signalsModule.createEffect(function(p5)
+			-- upvalues: p1 (copy), settle (ref)
+			local var5 = p1.state(p5)
 			
-			if var11.status == "pending" then
+			if var5.status == "pending" then
 				return
 			end
-			settle(var11)
+			settle(var5)
 		end)
-		t[t_1] = var8
-		p3(function()
-			-- upvalues: var4 (write), var5 (write), t (copy), t_1 (copy)
-			if var4 then return end
-			var4 = true
+		t[t_1] = var4
+		p4(function()
+			-- upvalues: var1 (write), var2 (write), t (copy), t_1 (copy)
+			if var1 then return end
+			var1 = true
 			
-			if var5 then return end
-			var5 = true
-			local var12 = t[t_1]
+			if var2 then return end
+			var2 = true
+			local var5 = t[t_1]
 			t[t_1] = nil
 			
-			if var12 ~= nil then
-				var12()
+			if var5 ~= nil then
+				var5()
 			end
 		end)
 	end)

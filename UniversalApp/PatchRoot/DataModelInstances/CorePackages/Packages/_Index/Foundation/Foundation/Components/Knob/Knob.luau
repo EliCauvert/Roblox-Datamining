@@ -32,11 +32,11 @@ return reactModule.memo(function(p1)
 	local var3 = usePresentationContext()
 	local var4 = useKnobVariantsModule(var2, var1.size, var3 and var3.colorNamespace == colorNamespaceModule.Inverse)
 	local style = var1.style or var4.knob.style
-	local var5 = reactModule.useCallback(function(p1)
+	local var5 = reactModule.useCallback(function(p2)
 		-- upvalues: var2 (ref)
 		return {
 			Color3 = var2.Color.Extended.White.White_100.Color3,
-			Transparency = p1.Transparency
+			Transparency = p2.Transparency
 		}
 	end, { var2 })
 	local var6 = reactModule.useMemo(function()
@@ -45,9 +45,9 @@ return reactModule.memo(function(p1)
 		
 		if var1.stroke and var1.stroke.Thickness then
 			if reactIsModule.isBinding(var1.stroke.Thickness) then
-				return var1.stroke.Thickness:map(function(p1)
+				return var1.stroke.Thickness:map(function(p2)
 					-- upvalues: size (write)
-					return size - UDim2.fromOffset(p1 * 2, p1 * 2)
+					return size - UDim2.fromOffset(p2 * 2, p2 * 2)
 				end)
 			end
 			local thickness = var1.stroke.Thickness
@@ -65,11 +65,11 @@ return reactModule.memo(function(p1)
 		}, reactModule.createElement(iconModule, {
 			name = var1.icon.name,
 			variant = var1.icon.variant,
-			style = if var1.isDisabled then useBindableModule(var4.knob.style):map(function(p1)
+			style = if var1.isDisabled then useBindableModule(var4.knob.style):map(function(p2)
 				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
 				return {
-					Color3 = p1.Color3,
-					Transparency = blendTransparenciesModule(p1.Transparency, constantsModule.DISABLED_TRANSPARENCY)
+					Color3 = p2.Color3,
+					Transparency = blendTransparenciesModule(p2.Transparency, constantsModule.DISABLED_TRANSPARENCY)
 				}
 			end) else var4.knob.style,
 			size = var4.knob.iconSize,
@@ -77,21 +77,21 @@ return reactModule.memo(function(p1)
 		})) else reactModule.createElement(viewModule, {
 			ZIndex = 4,
 			tag = var4.knob.tag,
-			backgroundStyle = if var1.isDisabled then useBindableModule(style):map(function(p1)
+			backgroundStyle = if var1.isDisabled then useBindableModule(style):map(function(p2)
 				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
 				return {
-					Color3 = p1.Color3,
-					Transparency = blendTransparenciesModule(p1.Transparency, constantsModule.DISABLED_TRANSPARENCY)
+					Color3 = p2.Color3,
+					Transparency = blendTransparenciesModule(p2.Transparency, constantsModule.DISABLED_TRANSPARENCY)
 				}
 			end) else style,
 			Size = var6,
-			stroke = useBindableModule(if var1.stroke then var1.stroke.Transparency else nil):map(function(p1)
+			stroke = useBindableModule(if var1.stroke then var1.stroke.Transparency else nil):map(function(p2)
 				-- upvalues: var1 (ref), dashModule (copy), blendTransparenciesModule (copy), constantsModule (copy)
 				local stroke = var1.stroke
 				
-				if var1.stroke and p1 ~= nil and var1.isDisabled then
+				if var1.stroke and p2 ~= nil and var1.isDisabled then
 					stroke = dashModule.join(stroke, {
-						Transparency = blendTransparenciesModule(p1, constantsModule.DISABLED_TRANSPARENCY)
+						Transparency = blendTransparenciesModule(p2, constantsModule.DISABLED_TRANSPARENCY)
 					})
 				end
 				return stroke

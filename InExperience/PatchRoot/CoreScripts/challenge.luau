@@ -1,37 +1,37 @@
-﻿local var0, var1 = ...
-arg0 = var0
-arg1 = var1
+﻿local var1, var2 = ...
+arg0 = var1
+arg1 = var2
 
-local function x1(p0, p1)
-	return p0 + p1
+local function x1(p1, p2)
+	return p1 + p2
 end
 
-local function x2(p2, p3)
-	return p2 - p3
+local function x2(p1, p2)
+	return p1 - p2
 end
 
-local function x3(p4, p5)
-	return p5 - p4
+local function x3(p1, p2)
+	return p2 - p1
 end
 
-local function x4(p6, p7)
-	return tonumber(tostring(p7 % 1000) .. tostring(math.abs(p6 % 1000)))
+local function x4(p1, p2)
+	return tonumber(tostring(p2 % 1000) .. tostring(math.abs(p1 % 1000)))
 end
 
-local function x5(p8, p9)
-	return tonumber(tostring(p9 % 1337) .. tostring(math.abs(p8 % 1337)))
+local function x5(p1, p2)
+	return tonumber(tostring(p2 % 1337) .. tostring(math.abs(p1 % 1337)))
 end
 
-local function x6(p10, p11)
-	return p10 % 1000 * (p11 % 1000)
+local function x6(p1, p2)
+	return p1 % 1000 * (p2 % 1000)
 end
 
-local function x7(p12, p13)
-	return p12 % 1337 * (p13 % 1337)
+local function x7(p1, p2)
+	return p1 % 1337 * (p2 % 1337)
 end
 
-local function x8(p14, p15)
-	return (p14 + p15) % 1000 * ((p14 - p15) % 1000)
+local function x8(p1, p2)
+	return (p1 + p2) % 1000 * ((p1 - p2) % 1000)
 end
 
 local list = {
@@ -40,11 +40,11 @@ local list = {
 local random = Random.new(5)
 
 for _ = 1, 32 do
-	local var12 = random:NextInteger(1, 8)
-	local var13 = random:NextInteger(1, 8)
-	local var14 = list[var12]
-	list[var12] = list[var13]
-	list[var13] = var14
+	local var3 = random:NextInteger(1, 8)
+	local var4 = random:NextInteger(1, 8)
+	local var5 = list[var3]
+	list[var3] = list[var4]
+	list[var4] = var5
 end
 local t = {
 	[list[1]] = x1,
@@ -57,14 +57,14 @@ local t = {
 	[list[8]] = x8
 }
 
-return (function(p16, p17)
+return (function(p1, p2)
 	-- upvalues: t (ref)
-	local var16 = 393
-	local var17 = 1
+	local var6 = 393
+	local var7 = 1
 	
 	for _ = 1, 16 do
-		var16 = (var16 + t[math.abs(p17 + var16 + var17) % 8 + 1](var16 + p16, p17)) % 10000000
-		var17 += 1
+		var6 = (var6 + t[math.abs(p2 + var6 + var7) % 8 + 1](var6 + p1, p2)) % 10000000
+		var7 += 1
 	end
-	return var16
+	return var6
 end)(arg0, arg1)

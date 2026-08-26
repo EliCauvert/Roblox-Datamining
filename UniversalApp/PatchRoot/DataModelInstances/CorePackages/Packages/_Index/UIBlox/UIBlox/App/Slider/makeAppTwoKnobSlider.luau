@@ -9,22 +9,22 @@ local makeAppSliderModule = require(parent.makeAppSlider)
 local withStyleModule = require(parent_2.Core.Style.withStyle)
 local validateStyleModule = require(parent_1.Style.Validator.validateStyle)
 
-local function wrapStyleAndRef(p0)
+local function wrapStyleAndRef(p1)
 	-- upvalues: roactModule (ref), withStyleModule (ref), cryoModule (ref)
-	return roactModule.forwardRef(function(p1, p2)
-		-- upvalues: withStyleModule (copy), cryoModule (copy), roactModule (copy), p0 (ref)
-		return withStyleModule(function(p3)
-			-- upvalues: cryoModule (copy), p1 (ref), p2 (ref), roactModule (copy), p0 (copy)
-			return roactModule.createElement(p0, cryoModule.Dictionary.join(p1, { style = p3, forwardedRef = p2 }))
+	return roactModule.forwardRef(function(p2, p3)
+		-- upvalues: withStyleModule (copy), cryoModule (copy), roactModule (copy), p1 (ref)
+		return withStyleModule(function(p4)
+			-- upvalues: cryoModule (copy), p2 (ref), p3 (ref), roactModule (copy), p1 (copy)
+			return roactModule.createElement(p1, cryoModule.Dictionary.join(p2, { style = p4, forwardedRef = p3 }))
 		end)
 	end)
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: roactModule (ref), makeAppSliderModule (ref), tModule (ref), validateStyleModule (ref), wrapStyleAndRef (ref)
-	local var7 = roactModule.PureComponent:extend("TwoKnobAppSliderFor" .. p4)
-	local var8 = makeAppSliderModule(p4, true)
-	var7.validateProps = tModule.intersection(tModule.strictInterface({
+	local var1 = roactModule.PureComponent:extend("TwoKnobAppSliderFor" .. p4)
+	local var2 = makeAppSliderModule(p1, true)
+	var1.validateProps = tModule.intersection(tModule.strictInterface({
 		lowerValue = tModule.number,
 		upperValue = tModule.number,
 		min = tModule.number,
@@ -44,18 +44,18 @@ return function(p4)
 		NextSelectionDown = tModule.optional(tModule.table),
 		focusController = tModule.optional(tModule.table),
 		style = validateStyleModule
-	}), function(p5)
-		if p5.upperValue < p5.lowerValue then
+	}), function(p2)
+		if p2.upperValue < p2.lowerValue then
 			return false, "The upper value must be greater than or equal to the lower"
 		end
 		return true
 	end)
-	var7.defaultProps = { stepInterval = 1, width = UDim.new(1, 0) }
+	var1.defaultProps = { stepInterval = 1, width = UDim.new(1, 0) }
 	
-	function var7.render(p6)
-		-- upvalues: roactModule (copy), var8 (ref)
-		return roactModule.createElement(var8, p6.props)
+	function var7.render(p2)
+		-- upvalues: roactModule (copy), var2 (ref)
+		return roactModule.createElement(var2, p2.props)
 	end
 	
-	return wrapStyleAndRef(var7)
+	return wrapStyleAndRef(var1)
 end

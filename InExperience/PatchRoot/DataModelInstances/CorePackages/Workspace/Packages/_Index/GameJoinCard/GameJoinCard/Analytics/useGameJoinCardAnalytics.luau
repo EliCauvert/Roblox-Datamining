@@ -44,8 +44,8 @@ local t_4 = {
 	lastUpdated = { 2026, 5, 19 }
 }
 
-local function _(p0)
-	return if p0 == nil or p0 == "" then nil else tonumber(p0)
+local function _(p1)
+	return if p1 == nil or p1 == "" then nil else tonumber(p1)
 end
 
 local function buildGameJoinCardCommonFields(p1)
@@ -57,17 +57,17 @@ local function buildGameJoinCardCommonFields(p1)
 		t.uid = localPlayer.UserId
 	end
 	if p1.friendId and p1.friendId ~= "" then
-		local var11 = tonumber(p1.friendId)
+		local var1 = tonumber(p1.friendId)
 		
-		if var11 then
-			t.cardUserId = var11
+		if var1 then
+			t.cardUserId = var1
 		end
 	end
 	local universeId = p1.universeId
-	local var12 = if universeId == nil or universeId == "" then nil else tonumber(universeId)
+	local var2 = if universeId == nil or universeId == "" then nil else tonumber(universeId)
 	
-	if var12 then
-		t.universeId = var12
+	if var2 then
+		t.universeId = var2
 	end
 	if p1.absolutePosition ~= nil then
 		t.carouselAbsolutePosition = math.floor(p1.absolutePosition)
@@ -76,32 +76,32 @@ local function buildGameJoinCardCommonFields(p1)
 end
 
 return {
-	logGameJoinCardButtonEvent = function(p2, p3)
+	logGameJoinCardButtonEvent = function(p1, p2)
 		-- upvalues: buildGameJoinCardCommonFields (ref), telemetryService (ref), t (ref)
-		local var13 = buildGameJoinCardCommonFields(p3 or {})
-		var13.buttonAction = p2
+		local var1 = buildGameJoinCardCommonFields(p2 or {})
+		var1.buttonAction = p1
 		telemetryService:LogEvent(t, {
 			eventContext = "gameJoinCard",
-			customFields = var13,
+			customFields = var1,
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logGameJoinCardPageLoaded = function(p4)
+	logGameJoinCardPageLoaded = function(p1)
 		-- upvalues: buildGameJoinCardCommonFields (ref), telemetryService (ref), t_1 (ref)
 		telemetryService:LogEvent(t_1, {
 			eventContext = "gameJoinCard",
-			customFields = buildGameJoinCardCommonFields(p4 or {}),
+			customFields = buildGameJoinCardCommonFields(p1 or {}),
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logJoinCardAgeCheckUpsellImpression = function(p5)
+	logJoinCardAgeCheckUpsellImpression = function(p1)
 		-- upvalues: telemetryService (ref), t_2 (ref)
 		local t = {}
-		local universeId = p5.universeId
-		local var15 = if universeId == nil or universeId == "" then nil else tonumber(universeId)
+		local universeId = p1.universeId
+		local var1 = if universeId == nil or universeId == "" then nil else tonumber(universeId)
 		
-		if var15 then
-			t.universeId = var15
+		if var1 then
+			t.universeId = var1
 		end
 		telemetryService:LogEvent(t_2, {
 			eventContext = "gameJoinCard",
@@ -109,14 +109,14 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logJoinCardAgeCheckVerificationOutcome = function(p6)
+	logJoinCardAgeCheckVerificationOutcome = function(p1)
 		-- upvalues: ageCheckUpsellOutcome (ref), telemetryService (ref), t_3 (ref)
-		local t = { outcome = ageCheckUpsellOutcome[p6.outcome] }
-		local universeId = p6.universeId
-		local var17 = if universeId == nil or universeId == "" then nil else tonumber(universeId)
+		local t = { outcome = ageCheckUpsellOutcome[p1.outcome] }
+		local universeId = p1.universeId
+		local var1 = if universeId == nil or universeId == "" then nil else tonumber(universeId)
 		
-		if var17 then
-			t.universeId = var17
+		if var1 then
+			t.universeId = var1
 		end
 		telemetryService:LogEvent(t_3, {
 			eventContext = "gameJoinCard",
@@ -124,14 +124,14 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logJoinCardCtaLoadTime = function(p7)
+	logJoinCardCtaLoadTime = function(p1)
 		-- upvalues: telemetryService (ref), t_4 (ref)
 		telemetryService:LogEvent(t_4, {
 			eventContext = "gameJoinCard",
 			customFields = {
-				durationMs = math.max(0, math.floor(p7.durationMs)),
-				ctaType = p7.ctaType,
-				wasCached = p7.wasCached
+				durationMs = math.max(0, math.floor(p1.durationMs)),
+				ctaType = p1.ctaType,
+				wasCached = p1.wasCached
 			},
 			standardizedFields = { "addSessionInfo" }
 		})

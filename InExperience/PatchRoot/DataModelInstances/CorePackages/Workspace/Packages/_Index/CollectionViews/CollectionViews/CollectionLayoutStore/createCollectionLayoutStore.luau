@@ -7,26 +7,26 @@ local collectionBreakpointConfigModule = require(script.Parent.CollectionBreakpo
 local resolveBreakpoint = collectionBreakpointConfigModule.resolveBreakpoint
 local getItemsPerRow = collectionBreakpointConfigModule.getItemsPerRow
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: displayModule (ref), signalsModule (ref), resolveBreakpoint (ref), collectionItemSize (ref), getItemsPerRow (ref)
 	local getPlatformScale = displayModule.GetDisplayStore(false).getPlatformScale
-	local var4 = signalsModule.createComputed(function(p2)
-		-- upvalues: p0 (ref)
-		return p0(p2) > 0
+	local var1 = signalsModule.createComputed(function(p3)
+		-- upvalues: p1 (ref)
+		return p1(p3) > 0
 	end)
-	local var5 = if p1 then signalsModule.createComputed(function(p3)
-		-- upvalues: p0 (ref), p1 (ref)
-		local var9 = p0(p3)
+	local var2 = if p2 then signalsModule.createComputed(function(p3)
+		-- upvalues: p1 (ref), p2 (ref)
+		local var3 = p1(p3)
 		
-		return if var9 > 0 then var9 else p1.getContainerWidth(p3)
-	end) else p0
-	local var6 = signalsModule.createComputed(function(p4)
-		-- upvalues: var5 (ref), getPlatformScale (ref)
-		return var5(p4) / getPlatformScale(p4)
+		return if var3 > 0 then var3 else p2.getContainerWidth(p3)
+	end) else p1
+	local var3 = signalsModule.createComputed(function(p3)
+		-- upvalues: var2 (ref), getPlatformScale (ref)
+		return var2(p3) / getPlatformScale(p3)
 	end)
-	local var7 = signalsModule.createComputed(function(p5)
-		-- upvalues: resolveBreakpoint (copy), var6 (ref)
-		return resolveBreakpoint(var6(p5))
+	local var4 = signalsModule.createComputed(function(p3)
+		-- upvalues: resolveBreakpoint (copy), var3 (ref)
+		return resolveBreakpoint(var3(p3))
 	end)
 	local t = {}
 	
@@ -37,24 +37,24 @@ return function(p0, p1)
 		collectionItemSize.Large,
 		collectionItemSize.XLarge
 	} do
-		t[v] = signalsModule.createComputed(function(p6)
-			-- upvalues: getItemsPerRow (copy), var7 (ref), v (ref)
-			return getItemsPerRow(var7(p6), v)
+		t[v] = signalsModule.createComputed(function(p3)
+			-- upvalues: getItemsPerRow (copy), var4 (ref), v (ref)
+			return getItemsPerRow(var4(p3), v)
 		end)
 	end
 	return {
-		getContainerWidth = var5,
-		getDesignSpaceContainerWidth = var6,
+		getContainerWidth = var2,
+		getDesignSpaceContainerWidth = var3,
 		getItemsPerRow = t,
-		getNumItemsForAllCategories = signalsModule.createComputed(function(p7)
+		getNumItemsForAllCategories = signalsModule.createComputed(function(p3)
 			-- upvalues: t (ref)
 			local t_1 = {}
 			
 			for i, v in t do
-				t_1[i] = v(p7)
+				t_1[i] = v(p3)
 			end
 			return t_1
 		end),
-		getIsContainerMeasured = var4
+		getIsContainerMeasured = var1
 	}
 end

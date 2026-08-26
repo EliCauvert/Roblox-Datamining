@@ -10,148 +10,148 @@ local responsiveModule = require(parent.Responsive)
 local useLastInput = responsiveModule.useLastInput
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: reactModule (ref), useLastInput (ref), runService (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), responsiveModule (ref), videoPlaybackDetectionMethod (ref), mediaPlayerModule (ref)
 	local createElement_1
-	local videoId = p0.videoId
-	local var6 = reactModule.useRef(nil)
-	local isFullscreen = p0.isFullscreen or false
-	local var8, var9 = reactModule.useState(p0.isMuted ~= nil or p0.isMuted)
-	local var10 = reactModule.useRef(nil)
-	local var11, var12 = reactModule.useState(false)
-	local var13 = useLastInput()
-	local var14, var15 = reactModule.useState(false)
-	local var16, var17 = reactModule.useState(0)
-	reactModule.useImperativeHandle(p1, function()
-		-- upvalues: var6 (ref), var9 (ref), var8 (ref), var11 (ref), var16 (ref)
+	local videoId = p1.videoId
+	local var1 = reactModule.useRef(nil)
+	local isFullscreen = p1.isFullscreen or false
+	local var2, var3 = reactModule.useState(p1.isMuted ~= nil or p1.isMuted)
+	local var4 = reactModule.useRef(nil)
+	local var5, var6 = reactModule.useState(false)
+	local var7 = useLastInput()
+	local var8, var9 = reactModule.useState(false)
+	local var10, var11 = reactModule.useState(0)
+	reactModule.useImperativeHandle(p2, function()
+		-- upvalues: var1 (ref), var3 (ref), var2 (ref), var5 (ref), var10 (ref)
 		return {
 			setTimePosition = function(value)
-				-- upvalues: var6 (copy)
-				local current = var6.current
+				-- upvalues: var1 (copy)
+				local current = var1.current
 				
 				if current then
 					current.TimePosition = value
 				end
 			end,
 			toggleMute = function()
-				-- upvalues: var9 (copy), var8 (copy)
-				var9(not var8)
+				-- upvalues: var3 (copy), var2 (copy)
+				var3(not var2)
 			end,
 			togglePlayPause = function()
-				-- upvalues: var6 (copy), var11 (copy), var16 (copy)
-				local current = var6.current
+				-- upvalues: var1 (copy), var5 (copy), var10 (copy)
+				local current = var1.current
 				
 				if not current then return end
-				if var11 then
+				if var5 then
 					current:Pause()
 					
 					return
-				elseif var16 - 0.2 <= current.TimePosition then
+				elseif var10 - 0.2 <= current.TimePosition then
 					current.TimePosition = 0
 				end
 				current:Play()
 			end
 		}
-	end, { var8, var11, var16 })
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var8 (ref)
-		local current = var6.current
+	end, { var2, var5, var10 })
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), var2 (ref)
+		local current = var1.current
 		
 		if current then
-			current.Volume = if var8 then 0 else 1
+			current.Volume = if var2 then 0 else 1
 		end
-	end, { var8 })
-	local var19 = reactModule.useCallback(function()
+	end, { var2 })
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy)
 		return reactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 		})
 	end, {})
-	local var20 = reactModule.useCallback(function(_)
-		-- upvalues: var6 (ref), var18 (ref), var17 (ref)
-		local current = var6.current
+	local var14 = reactModule.useCallback(function(_)
+		-- upvalues: var1 (ref), var12 (ref), var11 (ref)
+		local current = var1.current
 		
 		if current then
-			var18()
-			var17(current.TimeLength)
+			var12()
+			var11(current.TimeLength)
 			
 			return
 		end
 	end, {})
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref)
-		var15(true)
+	local var15 = reactModule.useCallback(function()
+		-- upvalues: var9 (ref)
+		var9(true)
 	end, {})
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref)
-		var15(false)
+	local var16 = reactModule.useCallback(function()
+		-- upvalues: var9 (ref)
+		var9(false)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref)
-		var18()
-	end, { var8 })
+		-- upvalues: var12 (ref)
+		var12()
+	end, { var2 })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var16 (ref), var11 (ref)
-		local current = var6.current
+		-- upvalues: var1 (ref), var10 (ref), var5 (ref)
+		local current = var1.current
 		
-		if not current or var16 == 0 then return end
-		if var11 and var16 - 0.2 <= current.TimePosition then
+		if not current or var10 == 0 then return end
+		if var5 and var10 - 0.2 <= current.TimePosition then
 			current.TimePosition = 0
 		end
-	end, { var11, var16 })
+	end, { var5, var10 })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var16 (ref), p0 (ref)
-		local current = var6.current
+		-- upvalues: var1 (ref), var10 (ref), p1 (ref)
+		local current = var1.current
 		
-		if not current or var16 == 0 then return end
-		if p0.initialTimePosition then
-			if var16 - 0.2 <= p0.initialTimePosition then
+		if not current or var10 == 0 then return end
+		if p1.initialTimePosition then
+			if var10 - 0.2 <= p1.initialTimePosition then
 				current.TimePosition = 0
 				
 				return
 			end
-			current.TimePosition = p0.initialTimePosition
+			current.TimePosition = p1.initialTimePosition
 		end
-	end, { p0.initialTimePosition, var16 })
+	end, { p1.initialTimePosition, var10 })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), isFullscreen (ref), var12 (ref)
-		local current = var6.current
+		-- upvalues: var1 (ref), isFullscreen (ref), var6 (ref)
+		local current = var1.current
 		
 		if current and isFullscreen then
 			current:Play()
-			var12(true)
+			var6(true)
 		end
 	end, { isFullscreen })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), runService (copy), var17 (ref), p0 (ref), var11 (ref), var8 (ref), var12 (ref)
-		local current = var6.current
+		-- upvalues: var1 (ref), runService (copy), var11 (ref), p1 (ref), var5 (ref), var2 (ref), var6 (ref)
+		local current = var1.current
 		
 		if current then
 			local renderSteppedConnection = runService.RenderStepped:Connect(function()
-				-- upvalues: current (ref), var17 (copy), p0 (copy), var11 (copy), var8 (copy)
+				-- upvalues: current (ref), var11 (copy), p1 (copy), var5 (copy), var2 (copy)
 				local timePosition = current.TimePosition
 				local timeLength = current.TimeLength
-				var17(timeLength)
+				var11(timeLength)
 				
-				if p0.onTimeUpdate then
-					p0.onTimeUpdate(timePosition)
+				if p1.onTimeUpdate then
+					p1.onTimeUpdate(timePosition)
 				end
-				if p0.onProgressUpdate then
-					p0.onProgressUpdate(timePosition, timeLength, var11, var8)
+				if p1.onProgressUpdate then
+					p1.onProgressUpdate(timePosition, timeLength, var5, var2)
 				end
 			end)
 			local playedConnection = current.Played:Connect(function()
-				-- upvalues: var12 (copy)
-				var12(true)
+				-- upvalues: var6 (copy)
+				var6(true)
 			end)
 			local pausedConnection = current.Paused:Connect(function()
-				-- upvalues: var12 (copy)
-				var12(false)
+				-- upvalues: var6 (copy)
+				var6(false)
 			end)
 			local endedConnection = current.Ended:Connect(function()
-				-- upvalues: var12 (copy)
-				var12(false)
+				-- upvalues: var6 (copy)
+				var6(false)
 			end)
 			
 			return function()
@@ -162,26 +162,26 @@ return reactModule.forwardRef(function(p0, p1)
 				endedConnection:Disconnect()
 			end
 		end
-	end, { var8, var11, p0.onProgressUpdate, p0.onTimeUpdate })
+	end, { var2, var5, p1.onProgressUpdate, p1.onTimeUpdate })
 	
 	local function handleExpand()
-		-- upvalues: p0 (ref), var6 (ref)
-		if p0.onExpandCallback then
-			p0.onExpandCallback(if var6.current then var6.current.TimePosition else 0)
+		-- upvalues: p1 (ref), var1 (ref)
+		if p1.onExpandCallback then
+			p1.onExpandCallback(if var1.current then var1.current.TimePosition else 0)
 		end
 	end
 	
 	local createElement = reactModule.createElement
-	local var24 = "Frame"
+	local var17 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		ClipsDescendants = not isFullscreen,
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.fromScale(1, 1),
 		ZIndex = if isFullscreen then 1000 else 1,
-		ref = var10,
-		[reactModule.Event.MouseEnter] = var21,
-		[reactModule.Event.MouseLeave] = var22
+		ref = var4,
+		[reactModule.Event.MouseEnter] = var15,
+		[reactModule.Event.MouseLeave] = var16
 	}
 	local t_1 = {}
 	
@@ -194,16 +194,16 @@ return reactModule.forwardRef(function(p0, p1)
 			itemIndex = nil,
 			videoDwellTimeInSec = 1,
 			videoVisiblePercent = 80,
-			isHovered = var14,
-			isHoverSupported = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else var13 ~= responsiveModule.Input.Touch,
-			playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback and var13 ~= responsiveModule.Input.Touch then videoPlaybackDetectionMethod.Hover else nil,
-			onPlaybackChange = function(p2)
-				-- upvalues: var12 (ref)
-				var12(p2)
+			isHovered = var8,
+			isHoverSupported = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else var7 ~= responsiveModule.Input.Touch,
+			playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback and var7 ~= responsiveModule.Input.Touch then videoPlaybackDetectionMethod.Hover else nil,
+			onPlaybackChange = function(p3)
+				-- upvalues: var6 (ref)
+				var6(p3)
 			end,
-			itemFrameRef = var10,
+			itemFrameRef = var4,
 			videoKey = videoId,
-			videoPlaybackCoordinator = p0.videoPlaybackCoordinator
+			videoPlaybackCoordinator = p1.videoPlaybackCoordinator
 		})
 	end
 	t_1.VideoPlaybackDetector = createElement_1
@@ -215,22 +215,22 @@ return reactModule.forwardRef(function(p0, p1)
 		ZIndex = if isFullscreen then 1001 else 1
 	}, {
 		VideoContent = reactModule.createElement(mediaPlayerModule, {
-			cornerRadius = p0.cornerRadius,
+			cornerRadius = p1.cornerRadius,
 			isFullScreen = isFullscreen,
-			Looped = p0.looped,
+			Looped = p1.looped,
 			onExpandCallback = handleExpand,
-			onVideoLoaded = var20,
-			Playing = var11,
+			onVideoLoaded = var14,
+			Playing = var5,
 			Position = UDim2.fromScale(0.5, 0.5),
-			renderOnFailed = var19,
+			renderOnFailed = var13,
 			Size = UDim2.fromScale(1, 1),
-			thumbnailImage = p0.thumbnailImage,
-			timeLength = var16,
+			thumbnailImage = p1.thumbnailImage,
+			timeLength = var10,
 			Video = videoId,
-			videoRef = var6,
+			videoRef = var1,
 			ZIndex = if isFullscreen then 1001 else 1
 		})
 	})
 	
-	return createElement(var24, t, t_1)
+	return createElement(var17, t, t_1)
 end)

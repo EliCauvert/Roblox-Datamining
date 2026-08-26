@@ -10,10 +10,10 @@ local t = {
 	reasonSelection = cryoModule.None
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: analyticsActions (ref), constantsModule (ref), fFlagAddPreselectedAbuseTypeAnalytics (ref), cryoModule (ref), t (ref)
-	local cloned = table.clone(p0)
-	local type = p1.type
+	local cloned = table.clone(p1)
+	local type = p2.type
 	
 	if type == analyticsActions.Reset then
 		local menuEverShown = cloned.menuEverShown
@@ -23,7 +23,7 @@ return function(p0, p1)
 		return cloned
 	elseif type == analyticsActions.SetMenuOpenedTimestamp then
 		cloned.menuEverShown = true
-		cloned.menuOpenedUnixTimestampMilliseconds = p1.timestamp
+		cloned.menuOpenedUnixTimestampMilliseconds = p2.timestamp
 		
 		return cloned
 	elseif type == analyticsActions.IncrementExperiencePersonChanged then
@@ -47,13 +47,13 @@ return function(p0, p1)
 		
 		return cloned
 	elseif type == analyticsActions.SetViewportInformation then
-		cloned.viewportSizeX = p1.viewportSizeX
-		cloned.viewportSizeY = p1.viewportSizeY
-		cloned.isPortraitMode = p1.viewportSizeX < p1.viewportSizeY
+		cloned.viewportSizeX = p2.viewportSizeX
+		cloned.viewportSizeY = p2.viewportSizeY
+		cloned.isPortraitMode = p2.viewportSizeX < p2.viewportSizeY
 		
 		return cloned
 	elseif type == analyticsActions.SetMemoryRequirementMet then
-		cloned.memoryRequirementMet = p1.memoryRequirementMet
+		cloned.memoryRequirementMet = p2.memoryRequirementMet
 		
 		return cloned
 	elseif type == analyticsActions.SetSubmissionCompleted then
@@ -61,19 +61,19 @@ return function(p0, p1)
 		
 		return cloned
 	elseif type == analyticsActions.SetTypeOfAbuseSelection then
-		cloned.typeofabuseSelection = p1.selection
+		cloned.typeofabuseSelection = p2.selection
 		
 		return cloned
 	elseif fFlagAddPreselectedAbuseTypeAnalytics and type == analyticsActions.SetPreselectedAbuseSelection then
-		cloned.preselectedAbuseSelection = p1.selection
+		cloned.preselectedAbuseSelection = p2.selection
 		
 		return cloned
 	elseif type == analyticsActions.SetReasonSelection then
-		cloned.reasonSelection = p1.selection
+		cloned.reasonSelection = p2.selection
 		
 		return cloned
 	elseif type == analyticsActions.SetCommentAdded then
-		cloned.commentAdded = p1.commentAdded
+		cloned.commentAdded = p2.commentAdded
 		
 		return cloned
 	elseif type == analyticsActions.SwitchToExperienceInitialSelections then

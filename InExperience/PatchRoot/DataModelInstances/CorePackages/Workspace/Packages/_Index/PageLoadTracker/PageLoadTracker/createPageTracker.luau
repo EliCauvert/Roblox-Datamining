@@ -6,8 +6,8 @@ local sharedFlagsModule = require(script.Parent.Parent.SharedFlags)
 local isElementContentfulModule = require(script.Parent.isElementContentful)
 local IDLE_TIMEOUT_SECONDS = pageLoadConfigModule.IDLE_TIMEOUT_SECONDS
 
-local function _(p0)
-	return p0.AbsoluteSize.X * p0.AbsoluteSize.Y
+local function _(p1)
+	return p1.AbsoluteSize.X * p1.AbsoluteSize.Y
 end
 
 return function()
@@ -43,86 +43,86 @@ return function()
 				p1:complete()
 			end)
 		end,
-		logMilestone = function(p3)
+		logMilestone = function(p1)
 			-- upvalues: IDLE_TIMEOUT_SECONDS (copy)
-			if not p3.isActive then return end
-			p3.lastActivityTime = os.clock()
+			if not p1.isActive then return end
+			p1.lastActivityTime = os.clock()
 			
-			if p3.timeoutThread then
-				task.cancel(p3.timeoutThread)
+			if p1.timeoutThread then
+				task.cancel(p1.timeoutThread)
 			end
-			p3.timeoutThread = task.delay(IDLE_TIMEOUT_SECONDS, function()
-				-- upvalues: p3 (ref)
-				p3:complete()
+			p1.timeoutThread = task.delay(IDLE_TIMEOUT_SECONDS, function()
+				-- upvalues: p1 (ref)
+				p1:complete()
 			end)
 		end,
-		sendMilestone = function(p4, p5, p6)
+		sendMilestone = function(p1, p2, p3)
 			-- upvalues: sharedFlagsModule (copy), recordMilestoneModule (copy)
-			local var4 = if sharedFlagsModule.FFlagLuaAppEnableContentfulPaintTracking then ((p6 or os.clock()) - p4.startTime) * 1000 else (os.clock() - p4.startTime) * 1000
+			local var1 = if sharedFlagsModule.FFlagLuaAppEnableContentfulPaintTracking then ((p3 or os.clock()) - p1.startTime) * 1000 else (os.clock() - p1.startTime) * 1000
 			
 			if sharedFlagsModule.FFlagLuaAppEnableMilestoneDeduplication then
-				if p4.sentMilestones[p5] then return end
-				p4.sentMilestones[p5] = true
+				if p1.sentMilestones[p2] then return end
+				p1.sentMilestones[p2] = true
 			end
 			recordMilestoneModule({
-				app_page_name = p4.pageName,
-				milestone_name = p5,
-				time_from_start = var4,
-				first_load = p4.numLoads == 1
+				app_page_name = p1.pageName,
+				milestone_name = p2,
+				time_from_start = var1,
+				first_load = p1.numLoads == 1
 			})
 		end,
-		onComponentAdded = function(p7, p8)
+		onComponentAdded = function(p1, p2)
 			-- upvalues: sharedFlagsModule (copy), isElementContentfulModule (copy)
-			if not p7.isActive then return end
-			if sharedFlagsModule.FFlagLuaAppEnableContentfulPaintTracking and isElementContentfulModule(p8) then
-				local var5 = p8.AbsoluteSize.X * p8.AbsoluteSize.Y
+			if not p1.isActive then return end
+			if sharedFlagsModule.FFlagLuaAppEnableContentfulPaintTracking and isElementContentfulModule(p2) then
+				local var1 = p2.AbsoluteSize.X * p2.AbsoluteSize.Y
 				
-				if p7.LCPCandidate.guiArea < var5 then
-					p7:sendMilestone("first_contentful_paint")
-					p7.LCPCandidate = { guiArea = var5, timestamp = os.clock() }
+				if p1.LCPCandidate.guiArea < var1 then
+					p1:sendMilestone("first_contentful_paint")
+					p1.LCPCandidate = { guiArea = var1, timestamp = os.clock() }
 				end
 			end
-			p7:logMilestone()
+			p1:logMilestone()
 		end,
-		stop = function(p9)
+		stop = function(p1)
 			-- upvalues: sharedFlagsModule (copy)
-			if not p9.isActive then return end
-			if p9.timeoutThread then
-				task.cancel(p9.timeoutThread)
-				p9.timeoutThread = nil
+			if not p1.isActive then return end
+			if p1.timeoutThread then
+				task.cancel(p1.timeoutThread)
+				p1.timeoutThread = nil
 			end
-			p9.isActive = false
+			p1.isActive = false
 			
 			if sharedFlagsModule.FFlagPageLoadAllowImprovedDisconnectTiming then
-				p9.onCompleteSignal:fire()
+				p1.onCompleteSignal:fire()
 			end
 		end,
-		complete = function(p10)
+		complete = function(p1)
 			-- upvalues: sharedFlagsModule (copy), recordMilestoneModule (copy)
-			if not p10.isActive then return end
+			if not p1.isActive then return end
 			if not sharedFlagsModule.FFlagLuaAppEnableContentfulPaintTracking then
-				p10.isActive = false
+				p1.isActive = false
 			end
-			p10.timeoutThread = nil
+			p1.timeoutThread = nil
 			
 			if sharedFlagsModule.FFlagLuaAppEnableContentfulPaintTracking then
-				p10:sendMilestone("initial_viewport_loaded", p10.lastActivityTime)
+				p1:sendMilestone("initial_viewport_loaded", p1.lastActivityTime)
 				
 				if not sharedFlagsModule.FFlagLuaAppLCPTimingFix then
-					p10:sendMilestone("largest_contentful_paint", p10.LCPCandidate.timestamp)
-				elseif p10.LCPCandidate.guiArea > 0 then
-					p10:sendMilestone("largest_contentful_paint", p10.LCPCandidate.timestamp)
+					p1:sendMilestone("largest_contentful_paint", p1.LCPCandidate.timestamp)
+				elseif p1.LCPCandidate.guiArea > 0 then
+					p1:sendMilestone("largest_contentful_paint", p1.LCPCandidate.timestamp)
 				end
 			else
 				recordMilestoneModule({
 					milestone_name = "initial_viewport_loaded",
-					app_page_name = p10.pageName,
-					time_from_start = (p10.lastActivityTime - p10.startTime) * 1000,
-					first_load = p10.numLoads == 1
+					app_page_name = p1.pageName,
+					time_from_start = (p1.lastActivityTime - p1.startTime) * 1000,
+					first_load = p1.numLoads == 1
 				})
 			end
 			if sharedFlagsModule.FFlagPageLoadAllowImprovedDisconnectTiming then
-				p10.onCompleteSignal:fire()
+				p1.onCompleteSignal:fire()
 			end
 		end
 	}

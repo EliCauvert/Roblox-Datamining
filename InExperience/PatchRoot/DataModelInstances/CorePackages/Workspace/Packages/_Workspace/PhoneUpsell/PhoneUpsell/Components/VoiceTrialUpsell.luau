@@ -21,79 +21,79 @@ local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 local postUpsellTrialOptInModule = require(phoneUpsell.Http.Requests.PostUpsellTrialOptIn)
 local t = {}
 
-local function getButtonStackProps(p0, p1, p2, p3, p4)
+local function getButtonStackProps(p1, p2, p3, p4, p5)
 	-- upvalues: buttonType (ref)
 	local list = {
 		{
 			buttonType = buttonType.PrimarySystem,
-			props = { onActivated = p2, text = p0 }
+			props = { onActivated = p3, text = p1 }
 		}
 	}
 	
-	if p3 and p3 ~= "" then
+	if p4 and p4 ~= "" then
 		table.insert(list, 1, {
 			buttonType = buttonType.Secondary,
-			props = { onActivated = p4, text = p3 }
+			props = { onActivated = p5, text = p4 }
 		})
 	end
-	return { buttonHeight = p1, buttons = list }
+	return { buttonHeight = p2, buttons = list }
 end
 
-return function(p5)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useDispatch (ref), useRef (ref), useStyle (ref), useLocalization (ref), useRoactService (ref), roactNetworking (ref), postUserOptIn (ref), postUpsellTrialOptInModule (ref), setCurrentToastMessage (ref), toastRoduxModule (ref), images (ref), reactModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), interactiveAlert (ref), getButtonStackProps (ref)
-	local var10 = cryoModule.Dictionary.union(t, p5)
+	local var1 = cryoModule.Dictionary.union(t, p1)
 	local t_1 = {
 		titleKey = "Feature.VerificationUpsell.Heading.TryVoiceChat",
 		descriptionKey = "Feature.VerificationUpsell.Description.VoiceLegalConsent2",
 		buttonKey = "Feature.VerificationUpsell.Action.TurnOn",
 		extraButtonKey = "Feature.VerificationUpsell.Action.NotNow.2"
 	}
-	local var12 = useDispatch()
-	local var13 = useRef(nil)
-	local var14 = useStyle()
-	local baseSize = var14.Font.BaseSize
-	local var15 = useLocalization(t_1)
-	local var16 = useRoactService(roactNetworking)
+	local var2 = useDispatch()
+	local var3 = useRef(nil)
+	local var4 = useStyle()
+	local baseSize = var4.Font.BaseSize
+	local var5 = useLocalization(t_1)
+	local var6 = useRoactService(roactNetworking)
 	
 	return reactModule.createElement(focusNavigableSurfaceWrapper, {
 		isIsolated = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		frameProps = { ref = var13 }
+		frameProps = { ref = var3 }
 	}, {
 		Modal = reactModule.createElement(interactiveAlert, {
-			title = var15.titleKey,
-			screenSize = if var13 and var13.current then var13.current.AbsoluteSize else Vector2.new(500, 500),
-			buttonStackInfo = getButtonStackProps(var15.buttonKey, var14.Tokens.Size.Size_1200, function()
-				-- upvalues: var10 (ref), postUserOptIn (copy), var16 (ref), postUpsellTrialOptInModule (copy), var12 (ref), setCurrentToastMessage (copy), toastRoduxModule (copy), images (copy), var14 (ref)
-				var10.onClose()
-				postUserOptIn(var16, true, false):andThen(function(_)
-					-- upvalues: postUpsellTrialOptInModule (copy), var16 (copy), var10 (copy)
-					return postUpsellTrialOptInModule(var16, var10.upsellCardType)
+			title = var5.titleKey,
+			screenSize = if var3 and var3.current then var3.current.AbsoluteSize else Vector2.new(500, 500),
+			buttonStackInfo = getButtonStackProps(var5.buttonKey, var4.Tokens.Size.Size_1200, function()
+				-- upvalues: var1 (ref), postUserOptIn (copy), var6 (ref), postUpsellTrialOptInModule (copy), var2 (ref), setCurrentToastMessage (copy), toastRoduxModule (copy), images (copy), var4 (ref)
+				var1.onClose()
+				postUserOptIn(var6, true, false):andThen(function(_)
+					-- upvalues: postUpsellTrialOptInModule (copy), var6 (copy), var1 (copy)
+					return postUpsellTrialOptInModule(var6, var1.upsellCardType)
 				end):andThen(function()
-					-- upvalues: var12 (copy), setCurrentToastMessage (copy), toastRoduxModule (copy), images (copy), var14 (copy), var10 (copy)
-					var12(setCurrentToastMessage({
+					-- upvalues: var2 (copy), setCurrentToastMessage (copy), toastRoduxModule (copy), images (copy), var4 (copy), var1 (copy)
+					var2(setCurrentToastMessage({
 						toastMessage = "Feature.VerificationUpsell.Heading.VoiceChatTurnedOn",
 						isLocalized = false,
 						slideIn = true,
 						toastType = toastRoduxModule.Enums.ToastType.SuccessConfirmation,
 						toastIcon = images["icons/status/success_large"],
-						toastIconColorStyle = { Color = var14.Tokens.Color.System.Success.Color3 }
+						toastIconColorStyle = { Color = var4.Tokens.Color.System.Success.Color3 }
 					}))
-					var10.onCompletion()
+					var1.onCompletion()
 				end):catch(function()
-					-- upvalues: var12 (copy), setCurrentToastMessage (copy), toastRoduxModule (copy), var14 (copy)
-					var12(setCurrentToastMessage({
+					-- upvalues: var2 (copy), setCurrentToastMessage (copy), toastRoduxModule (copy), var4 (copy)
+					var2(setCurrentToastMessage({
 						toastMessage = "Feature.VerificationUpsell.Heading.VoiceChatJoinFailed",
 						isLocalized = false,
 						slideIn = true,
 						toastType = toastRoduxModule.Enums.ToastType.NetworkingError,
-						toastIconColorStyle = { Color = var14.Tokens.Color.System.Alert.Color3 }
+						toastIconColorStyle = { Color = var4.Tokens.Color.System.Alert.Color3 }
 					}))
 				end)
-			end, var15.extraButtonKey, var10.onClose),
-			onCloseClicked = var10.onClose,
+			end, var5.extraButtonKey, var1.onClose),
+			onCloseClicked = var1.onClose,
 			middleContent = function()
-				-- upvalues: reactModule (copy), var15 (ref), baseSize (ref), var14 (ref)
+				-- upvalues: reactModule (copy), var5 (ref), baseSize (ref), var4 (ref)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -104,11 +104,11 @@ return function(p5)
 						BackgroundTransparency = 1,
 						TextWrapped = true,
 						RichText = true,
-						Text = var15.descriptionKey,
+						Text = var5.descriptionKey,
 						TextSize = baseSize,
-						TextColor3 = var14.Theme.TextDefault.Color,
-						TextTransparency = var14.Theme.TextDefault.Transparency,
-						Font = var14.Font.Body.Font,
+						TextColor3 = var4.Theme.TextDefault.Color,
+						TextTransparency = var4.Theme.TextDefault.Transparency,
+						Font = var4.Font.Body.Font,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y

@@ -12,35 +12,35 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local MAX_ACTION_COUNT = require(script.Parent.AlertConstants).MAX_ACTION_COUNT
 local t = { testId = "--foundation-alert-actions" }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), MAX_ACTION_COUNT (ref), loggerModule (ref), dashModule (ref), inputSizeModule (ref), buttonModule (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var10 = withDefaultsModule(p0, t)
+	local var1 = withDefaultsModule(p1, t)
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), MAX_ACTION_COUNT (copy), loggerModule (copy)
-		if var10.actions and MAX_ACTION_COUNT < #var10.actions then
+		-- upvalues: var1 (ref), MAX_ACTION_COUNT (copy), loggerModule (copy)
+		if var1.actions and MAX_ACTION_COUNT < #var1.actions then
 			loggerModule:warning(`Alert components only support up to {MAX_ACTION_COUNT} actions`)
 		end
-	end, { var10.actions })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var10 (ref), MAX_ACTION_COUNT (copy), dashModule (copy), inputSizeModule (copy), reactModule (copy), buttonModule (copy)
-		if not var10.actions or #var10.actions <= 0 then
+	end, { var1.actions })
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), MAX_ACTION_COUNT (copy), dashModule (copy), inputSizeModule (copy), reactModule (copy), buttonModule (copy)
+		if not var1.actions or #var1.actions <= 0 then
 			return nil
 		end
 		local t = {}
 		
-		for i, v in var10.actions do
+		for i, v in var1.actions do
 			if MAX_ACTION_COUNT < i then break end
 			t["ActionButton" .. i] = reactModule.createElement(buttonModule, dashModule.join(v, {
 				LayoutOrder = i,
 				size = inputSizeModule.Small,
-				testId = `{var10.testId}--action-{i}`
+				testId = `{var1.testId}--action-{i}`
 			}))
 		end
 		return t
-	end, { var10.actions, var10.testId })
+	end, { var1.actions, var1.testId })
 	
-	return if var11 then reactModule.createElement(viewModule, withCommonPropsModule(var10, {
-		tag = var10.tag or "auto-xy row gap-small",
-		padding = var10.padding
-	}), var11) else nil
+	return if var2 then reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		tag = var1.tag or "auto-xy row gap-small",
+		padding = var1.padding
+	}), var2) else nil
 end)

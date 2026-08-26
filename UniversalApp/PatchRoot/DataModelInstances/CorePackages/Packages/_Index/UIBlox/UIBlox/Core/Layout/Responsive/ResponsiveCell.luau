@@ -16,98 +16,98 @@ responsiveCell.validateProps = tModule.interface({
 	gridCellRef = tModule.optional(tModule.union(tModule.table, tModule.callback))
 })
 
-local function findProp(p0, p1, p2)
-	if p2 == nil then
-		p2 = "default"
+local function findProp(p1, p2, p3)
+	if p3 == nil then
+		p3 = "default"
 	end
-	return if p0[p1 .. "_" .. p2] == nil then if p0[p1] == nil then nil elseif type(p0[p1]) == "table" then if p0[p1][p2] == nil then p0[p1].default else p0[p1][p2] else p0[p1] else p0[p1 .. "_" .. p2]
+	return if p1[p2 .. "_" .. p2] == nil then if p1[p2] == nil then nil elseif type(p1[p2]) == "table" then if p1[p2][p3] == nil then p1[p2].default else p1[p2][p3] else p1[p2] else p1[p2 .. "_" .. p2]
 end
 
-function responsiveCell.getColspan(p3, p4)
+function responsiveCell.getColspan(p1, p2)
 	-- upvalues: findProp (ref)
-	local var6 = findProp(p3.props, "colspan", p4)
+	local var1 = findProp(p1.props, "colspan", p2)
 	
-	return if var6 == nil then 1 else var6
+	return if var1 == nil then 1 else var1
 end
 
-function responsiveCell.getRowspan(p5, p6)
+function responsiveCell.getRowspan(p1, p2)
 	-- upvalues: findProp (ref)
-	local var7 = findProp(p5.props, "rowspan", p6)
+	local var1 = findProp(p1.props, "rowspan", p2)
 	
-	return if var7 == nil then 1 else var7
+	return if var1 == nil then 1 else var1
 end
 
-function responsiveCell.getOrder(p7, p8)
+function responsiveCell.getOrder(p1, p2)
 	-- upvalues: findProp (ref)
-	return if p7.props.layoutOrder then p7.props.layoutOrder else findProp(p7.props, "order", p8)
+	return if p1.props.layoutOrder then p1.props.layoutOrder else findProp(p1.props, "order", p2)
 end
 
-local function _(value, p9)
+local function _(value, p1)
 	local floored = math.floor(value)
-	p9.subPixelOffset += value - floored
-	local floored_1 = math.floor(p9.subPixelOffset + 0.5)
-	p9.subPixelOffset -= floored_1
+	p1.subPixelOffset += value - floored
+	local floored_1 = math.floor(p1.subPixelOffset + 0.5)
+	p1.subPixelOffset -= floored_1
 	
 	return floored + floored_1
 end
 
-function responsiveCell.getSize(_, p10, p11, p12)
+function responsiveCell.getSize(_, p1, p2, p3)
 	-- upvalues: responsiveLayoutConfigReaderModule (ref)
-	local var10 = responsiveLayoutConfigReaderModule.getValue(p12, "gutter") or 0
+	local var1 = responsiveLayoutConfigReaderModule.getValue(p3, "gutter") or 0
 	
-	if p12.multiLine then
-		return UDim2.new(p10, (p10 - 1) * var10, p11, (p11 - 1) * (responsiveLayoutConfigReaderModule.getValue(p12, "verticalGutter") or var10))
+	if p3.multiLine then
+		return UDim2.new(p1, (p1 - 1) * var1, p2, (p2 - 1) * (responsiveLayoutConfigReaderModule.getValue(p3, "verticalGutter") or var1))
 	end
-	local var11 = responsiveLayoutConfigReaderModule.getValue(p12, "columns") or 1
+	local var2 = responsiveLayoutConfigReaderModule.getValue(p3, "columns") or 1
 	
-	if p12.scrollable then
-		var11 *= math.max(p12.pages, 1)
+	if p3.scrollable then
+		var2 *= math.max(p3.pages, 1)
 	end
 	local new = UDim2.new
-	local var12 = p10 / var11
-	local var13 = (p10 / var11 - 1) * var10
-	local floored = math.floor(var13)
-	p12.subPixelOffset += var13 - floored
-	local floored_1 = math.floor(p12.subPixelOffset + 0.5)
-	p12.subPixelOffset -= floored_1
+	local var3 = p1 / var2
+	local var4 = (p1 / var2 - 1) * var1
+	local floored = math.floor(var4)
+	p3.subPixelOffset += var4 - floored
+	local floored_1 = math.floor(p3.subPixelOffset + 0.5)
+	p3.subPixelOffset -= floored_1
 	
-	return new(var12, floored + floored_1, 1, 0)
+	return new(var3, floored + floored_1, 1, 0)
 end
 
-function responsiveCell.render(p13)
+function responsiveCell.render(p1)
 	-- upvalues: roactModule (ref), responsiveLayoutContextModule (ref)
 	return roactModule.createElement(responsiveLayoutContextModule.Consumer, {
-		render = function(p14)
-			-- upvalues: p13 (ref), roactModule (copy)
-			local breakpointColspan = p13:getColspan(p14.breakpoint)
-			local var17 = if p14.multiLine then p13:getRowspan(p14.breakpoint) else 1
+		render = function(p2)
+			-- upvalues: p1 (ref), roactModule (copy)
+			local breakpointColspan = p1:getColspan(p2.breakpoint)
+			local var1 = if p2.multiLine then p1:getRowspan(p2.breakpoint) else 1
 			
-			if breakpointColspan <= 0 or var17 <= 0 then
+			if breakpointColspan <= 0 or var1 <= 0 then
 				return nil
 			end
-			local breakpointOrder = p13:getOrder(p14.breakpoint)
-			local var19 = if breakpointOrder then string.format("ResponsiveCell%02d", breakpointOrder) else "ResponsiveCell"
-			local var20 = p14.multiLine and (if breakpointColspan <= 1 then var17 > 1 else true)
+			local breakpointOrder = p1:getOrder(p2.breakpoint)
+			local var2 = if breakpointOrder then string.format("ResponsiveCell%02d", breakpointOrder) else "ResponsiveCell"
+			local var3 = p2.multiLine and (if breakpointColspan <= 1 then var1 > 1 else true)
 			local frame = roactModule.createElement("Frame", {
-				Name = if var20 then nil else var19,
-				Size = p13:getSize(breakpointColspan, var17, p14),
-				AutomaticSize = if p14.relativeHeight then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
+				Name = if var3 then nil else var2,
+				Size = p1:getSize(breakpointColspan, var1, p2),
+				AutomaticSize = if p2.relativeHeight then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
 				LayoutOrder = breakpointOrder,
-				ZIndex = p13.props.zIndex,
-				[roactModule.Ref] = p13.props.gridCellRef
-			}, p13.props[roactModule.Children])
+				ZIndex = p1.props.zIndex,
+				[roactModule.Ref] = p1.props.gridCellRef
+			}, p1.props[roactModule.Children])
 			
-			return if var20 then roactModule.createElement("Frame", {
+			return if var3 then roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Name = var19,
+				Name = var2,
 				LayoutOrder = breakpointOrder
 			}, { ResponsiveCellInner = frame }) else frame
 		end
 	})
 end
 
-return roactModule.forwardRef(function(p15, p16)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), responsiveCell (ref), object (ref)
-	return roactModule.createElement(responsiveCell, object.assign({}, p15, { gridCellRef = p16 }))
+	return roactModule.createElement(responsiveCell, object.assign({}, p1, { gridCellRef = p2 }))
 end)

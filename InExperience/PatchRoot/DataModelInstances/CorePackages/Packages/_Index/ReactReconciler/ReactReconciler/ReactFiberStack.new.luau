@@ -4,68 +4,68 @@ local console = require(parent.Shared).console
 local _ = require(script.Parent.ReactInternalTypes)
 local t = {}
 local t_1 = {}
-local var3 = if reactGlobalsModule.__DEV__ then {} else nil
-local var4 = 0
+local var1 = if reactGlobalsModule.__DEV__ then {} else nil
+local var2 = 0
 
 return {
-	createCursor = function(p0)
-		return { current = p0 }
+	createCursor = function(p1)
+		return { current = p1 }
 	end,
 	isEmpty = function()
-		-- upvalues: var4 (write)
-		return var4 == 0
+		-- upvalues: var2 (write)
+		return var2 == 0
 	end,
 	pop = function(p1, p2)
-		-- upvalues: var4 (write), reactGlobalsModule (ref), console (ref), var3 (write), t_1 (ref), t (ref)
-		if var4 < 1 then
+		-- upvalues: var2 (write), reactGlobalsModule (ref), console (ref), var1 (write), t_1 (ref), t (ref)
+		if var2 < 1 then
 			if reactGlobalsModule.__DEV__ then
 				console.error("Unexpected pop.")
 			end
 			return
-		elseif reactGlobalsModule.__DEV__ and p2 ~= var3[var4] then
+		elseif reactGlobalsModule.__DEV__ and p2 ~= var1[var2] then
 			console.error("Unexpected Fiber popped.")
 		end
-		local var5 = t_1[var4]
+		local var3 = t_1[var2]
 		
-		if var5 == t then
+		if var3 == t then
 			p1.current = nil
 		else
-			p1.current = var5
+			p1.current = var3
 		end
-		t_1[var4] = nil
+		t_1[var2] = nil
 		
 		if reactGlobalsModule.__DEV__ then
-			var3[var4] = nil
+			var1[var2] = nil
 		end
-		var4 -= 1
+		var2 -= 1
 	end,
-	push = function(p3, p4, p5)
-		-- upvalues: var4 (write), t_1 (ref), t (ref), reactGlobalsModule (ref), var3 (write)
-		var4 += 1
-		local current = p3.current
+	push = function(p1, p2, p3)
+		-- upvalues: var2 (write), t_1 (ref), t (ref), reactGlobalsModule (ref), var1 (write)
+		var2 += 1
+		local current = p1.current
 		
 		if current == nil then
-			t_1[var4] = t
+			t_1[var2] = t
 		else
-			t_1[var4] = current
+			t_1[var2] = current
 		end
 		if reactGlobalsModule.__DEV__ then
-			var3[var4] = p5
+			var1[var2] = p3
 		end
-		p3.current = p4
+		p1.current = p2
 	end,
 	checkThatStackIsEmpty = function()
-		-- upvalues: reactGlobalsModule (ref), var4 (write), console (ref)
-		if reactGlobalsModule.__DEV__ and var4 ~= 0 then
+		-- upvalues: reactGlobalsModule (ref), var2 (write), console (ref)
+		if reactGlobalsModule.__DEV__ and var2 ~= 0 then
 			console.error("Expected an empty stack. Something was not reset properly.")
 		end
 	end,
 	resetStackAfterFatalErrorInDev = function()
-		-- upvalues: reactGlobalsModule (ref), var4 (write), t_1 (ref), var3 (write)
+		-- upvalues: reactGlobalsModule (ref), var2 (write), t_1 (ref), var1 (write)
 		if reactGlobalsModule.__DEV__ then
-			var4 = 0
+			var2 = 0
 			table.clear(t_1)
-			table.clear(var3)
+			table.clear(var1)
 		end
 	end
 }

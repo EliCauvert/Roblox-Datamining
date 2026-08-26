@@ -10,18 +10,18 @@ local addEconomicRestrictionKeysToLocalization = IAPExperienceModule.Utility.add
 local alertPromptModule = require(bulkPurchaseApp.Components.AlertPrompt)
 local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
 
-local function BulkPurchaseErrorText(p0)
+local function BulkPurchaseErrorText(p1)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), styledTextLabel (ref)
-	local var8 = useDesignTokens()
+	local var1 = useDesignTokens()
 	
 	return reactModule.createElement(styledTextLabel, {
 		size = UDim2.fromScale(1, 0),
 		automaticSize = Enum.AutomaticSize.Y,
-		fontStyle = var8.Typography.BodyLarge,
-		colorStyle = var8.Color.Content.Default,
+		fontStyle = var1.Typography.BodyLarge,
+		colorStyle = var1.Color.Content.Default,
 		textXAlignment = Enum.TextXAlignment.Center,
-		text = p0.text,
-		layoutOrder = p0.layoutOrder
+		text = p1.text,
+		layoutOrder = p1.layoutOrder
 	})
 end
 
@@ -58,7 +58,7 @@ local t_1 = {
 
 return function(p1)
 	-- upvalues: useDesignTokens (ref), t (ref), t_1 (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), errorCodeEnumModule (ref), formatEconomicRestrictionText (ref), reactModule (ref), BulkPurchaseErrorText (ref), alertPromptModule (ref)
-	local var9 = useDesignTokens()
+	local var1 = useDesignTokens()
 	local _ = nil
 	local t_2 = {
 		title = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorHeading",
@@ -67,17 +67,17 @@ return function(p1)
 		tryAgain = t_1[p1.errorCode]
 	}
 	addEconomicRestrictionKeysToLocalization(t_2)
-	local var11 = useLocalization(t_2)
+	local var2 = useLocalization(t_2)
 	
 	if p1.errorCode == errorCodeEnumModule.EconomicRestriction and p1.errorMetadata then
-		var11.errorReason = formatEconomicRestrictionText(var11, p1.errorMetadata, true)
+		var2.errorReason = formatEconomicRestrictionText(var2, p1.errorMetadata, true)
 	end
 	return reactModule.createElement(alertPromptModule, {
-		title = var11.title,
-		dismissCTA = var11.dismissCTA,
+		title = var2.title,
+		dismissCTA = var2.dismissCTA,
 		onDismiss = p1.onDismiss,
 		middleContent = function()
-			-- upvalues: reactModule (copy), var9 (ref), BulkPurchaseErrorText (copy), var11 (write)
+			-- upvalues: reactModule (copy), var1 (ref), BulkPurchaseErrorText (copy), var2 (write)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -88,10 +88,10 @@ return function(p1)
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Top,
-					Padding = UDim.new(0, var9.Size.Size_400)
+					Padding = UDim.new(0, var1.Size.Size_400)
 				}),
-				ErrorReason = reactModule.createElement(BulkPurchaseErrorText, { layoutOrder = 1, text = var11.errorReason }),
-				TryAgain = if var11.tryAgain then reactModule.createElement(BulkPurchaseErrorText, { layoutOrder = 2, text = var11.tryAgain }) else nil
+				ErrorReason = reactModule.createElement(BulkPurchaseErrorText, { layoutOrder = 1, text = var2.errorReason }),
+				TryAgain = if var2.tryAgain then reactModule.createElement(BulkPurchaseErrorText, { layoutOrder = 2, text = var2.tryAgain }) else nil
 			})
 		end
 	})

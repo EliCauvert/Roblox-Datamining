@@ -2,15 +2,15 @@
 local chatConstantsModule = require(clientChatModules:WaitForChild("ChatConstants"))
 local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
 
-return function(p0)
+return function(p1)
 	-- upvalues: chatSettingsModule (ref), chatConstantsModule (ref)
 	if chatSettingsModule and chatSettingsModule.AllowMeCommand then
-		p0:RegisterFilterMessageFunction("me_command", function(_, p1, _)
+		p1:RegisterFilterMessageFunction("me_command", function(_, p2, _)
 			-- upvalues: chatConstantsModule (copy)
-			local message = p1.Message
+			local message = p2.Message
 			
 			if message and string.sub(message, 1, 4):lower() == "/me " then
-				p1.MessageType = chatConstantsModule.MessageTypeMeCommand
+				p2.MessageType = chatConstantsModule.MessageTypeMeCommand
 			end
 		end)
 	end

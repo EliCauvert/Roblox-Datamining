@@ -1,16 +1,16 @@
 ﻿local roduxNetworkingModule = require(script.Parent.RoduxNetworking)
 local text = require(script:FindFirstAncestor("AppChat").Parent.Http).Url.APIS_URL .. "profile-platform-api/v1/profiles/get"
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: roduxNetworkingModule (ref), text (ref)
-	return (p1 or roduxNetworkingModule.getNetworkImpl())(text, "POST", {
+	return (p2 or roduxNetworkingModule.getNetworkImpl())(text, "POST", {
 		postBody = {
 			profileType = "User",
 			includeComponentOrdering = false,
-			profileId = p0,
+			profileId = p1,
 			components = { { component = "Actions" } }
 		}
-	}):andThen(function(p2)
-		return p2 and (p2.responseBody and (p2.responseBody.components and (p2.responseBody.components.Actions and p2.responseBody.components.Actions.contextual))) or {}
+	}):andThen(function(p3)
+		return p3 and (p3.responseBody and (p3.responseBody.components and (p3.responseBody.components.Actions and p3.responseBody.components.Actions.contextual))) or {}
 	end)
 end

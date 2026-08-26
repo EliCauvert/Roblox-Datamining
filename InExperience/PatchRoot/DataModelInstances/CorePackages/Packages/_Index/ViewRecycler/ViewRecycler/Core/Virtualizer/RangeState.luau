@@ -7,39 +7,39 @@ local INDEX_RANGE_KEYS = typesModule.INDEX_RANGE_KEYS
 return function()
 	-- upvalues: typesModule (ref), createEventModule (ref), recordModule (ref), INDEX_RANGE_KEYS (ref)
 	local EMPTY_INDEX_RANGE = typesModule.EMPTY_INDEX_RANGE
-	local var4 = false
-	local var5 = false
-	local var6 = 0
-	local var7 = createEventModule()
+	local var1 = false
+	local var2 = false
+	local var3 = 0
+	local var4 = createEventModule()
 	
 	return {
-		report = function(p0)
-			-- upvalues: var4 (write), recordModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var5 (write), var6 (write), var7 (ref)
-			if var4 and recordModule.containsEqual(EMPTY_INDEX_RANGE, p0, INDEX_RANGE_KEYS) then return end
-			var4 = true
-			EMPTY_INDEX_RANGE = p0
-			var5 = false
+		report = function(p1)
+			-- upvalues: var1 (write), recordModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var2 (write), var3 (write), var4 (ref)
+			if var1 and recordModule.containsEqual(EMPTY_INDEX_RANGE, p1, INDEX_RANGE_KEYS) then return end
+			var1 = true
+			EMPTY_INDEX_RANGE = p1
+			var2 = false
 			
-			if var6 > 0 then
-				var7.fire(p0)
+			if var3 > 0 then
+				var4.fire(p1)
 			end
 		end,
 		set = function(value)
-			-- upvalues: var4 (write), recordModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var5 (write)
-			if var4 and recordModule.containsEqual(EMPTY_INDEX_RANGE, value, INDEX_RANGE_KEYS) then
+			-- upvalues: var1 (write), recordModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var2 (write)
+			if var1 and recordModule.containsEqual(EMPTY_INDEX_RANGE, value, INDEX_RANGE_KEYS) then
 				return
 			end
-			var4 = true
+			var1 = true
 			EMPTY_INDEX_RANGE = value
-			var5 = true
+			var2 = true
 		end,
 		publish = function()
-			-- upvalues: var5 (write), var6 (write), var7 (ref), EMPTY_INDEX_RANGE (write)
-			if not var5 then return end
-			var5 = false
+			-- upvalues: var2 (write), var3 (write), var4 (ref), EMPTY_INDEX_RANGE (write)
+			if not var2 then return end
+			var2 = false
 			
-			if var6 > 0 then
-				var7.fire(EMPTY_INDEX_RANGE)
+			if var3 > 0 then
+				var4.fire(EMPTY_INDEX_RANGE)
 			end
 		end,
 		get = function()
@@ -47,25 +47,25 @@ return function()
 			return EMPTY_INDEX_RANGE
 		end,
 		connect = function(p1)
-			-- upvalues: var6 (write), var7 (ref)
-			var6 += 1
-			local var8 = var7.connect(p1)
-			local var9 = true
+			-- upvalues: var3 (write), var4 (ref)
+			var3 += 1
+			local var5 = var4.connect(p1)
+			local var6 = true
 			
 			return function()
-				-- upvalues: var9 (write), var6 (copy), var8 (ref)
-				if var9 then
-					var9 = false
-					var6 -= 1
-					var8()
+				-- upvalues: var6 (write), var3 (copy), var5 (ref)
+				if var6 then
+					var6 = false
+					var3 -= 1
+					var5()
 					
 					return
 				end
 			end
 		end,
 		isObserved = function()
-			-- upvalues: var6 (write)
-			return var6 > 0
+			-- upvalues: var3 (write)
+			return var3 > 0
 		end
 	}
 end

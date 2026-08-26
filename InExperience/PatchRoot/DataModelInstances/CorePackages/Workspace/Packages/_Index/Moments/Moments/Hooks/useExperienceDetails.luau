@@ -3,32 +3,32 @@ local signalsModule = require(parent.Signals)
 local gameGetGameInfoStoreModule = require(parent.DataHydration.GameGetGameInfoStore)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local t = { name = nil, creatorName = nil, isCreatorVerified = false }
-local var3 = signalsModule.createComputed(function()
+local var1 = signalsModule.createComputed(function()
 	return nil
 end)
 
-return function(p0)
-	-- upvalues: gameGetGameInfoStoreModule (ref), var3 (ref), useSignalState (ref), t (ref)
-	local var4 = if p0 and p0 ~= 0 then tostring(p0) else nil
-	local var5 = useSignalState(if var4 then gameGetGameInfoStoreModule(false).getAndFetchGameInfo(var4).data else var3)
+return function(p1)
+	-- upvalues: gameGetGameInfoStoreModule (ref), var1 (ref), useSignalState (ref), t (ref)
+	local var2 = if p1 and p1 ~= 0 then tostring(p1) else nil
+	local var3 = useSignalState(if var2 then gameGetGameInfoStoreModule(false).getAndFetchGameInfo(var2).data else var1)
 	
-	if var5 == nil then
+	if var3 == nil then
 		return t
 	end
-	local var7
-	local creator = var5.creator
+	local var4
+	local creator = var3.creator
 	local t_1 = {
-		name = var5.name,
+		name = var3.name,
 		creatorName = if creator then creator.name else nil
 	}
 	
 	if creator then
-		var7 = creator.hasVerifiedBadge == true
-		var7 = nil
+		var4 = creator.hasVerifiedBadge == true
+		var4 = nil
 	else
-		var7 = false
+		var4 = false
 	end
-	t_1.isCreatorVerified = var7
+	t_1.isCreatorVerified = var4
 	
 	return t_1
 end

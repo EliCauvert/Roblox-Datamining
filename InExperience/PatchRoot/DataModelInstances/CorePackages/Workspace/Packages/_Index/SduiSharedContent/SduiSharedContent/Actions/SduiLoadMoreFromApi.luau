@@ -8,50 +8,50 @@ local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 
-return function(p0, _, p1)
+return function(p1, _, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiPageAnalytics (ref), sduiLoadTimer (ref), getSduiApiStore (ref), fFlagSduiChartsSupport (ref)
-	local var2 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var2 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.LoadMoreFromApi
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	assert(var2, "actionParams must exist")
-	local configKey = var2.configKey
+	assert(var1, "actionParams must exist")
+	local configKey = var1.configKey
 	
 	if typeof(configKey) ~= "string" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "configKey",
 			name = sduiActionType.LoadMoreFromApi,
 			message = `Invalid or missing configKey: {configKey}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local surfaceKey = var2.surfaceKey
+	local surfaceKey = var1.surfaceKey
 	
 	if typeof(surfaceKey) ~= "string" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "surfaceKey",
 			name = sduiActionType.LoadMoreFromApi,
 			message = `Invalid or missing surfaceKey: {surfaceKey}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
 	sduiPageAnalytics.sendLoadMoreEvent(surfaceKey)
-	local var3 = sduiLoadTimer.createLoadTimer(surfaceKey)
-	var3.start("loadMore")
-	local var4 = getSduiApiStore().loadMoreFromApi({ configKey = configKey, loadTimer = var3 })
+	local var2 = sduiLoadTimer.createLoadTimer(surfaceKey)
+	var2.start("loadMore")
+	local var3 = getSduiApiStore().loadMoreFromApi({ configKey = configKey, loadTimer = var2 })
 	
 	if fFlagSduiChartsSupport then
-		var4:finally(function()
-			-- upvalues: var3 (ref)
-			var3.logRefreshComplete()
+		var3:finally(function()
+			-- upvalues: var2 (ref)
+			var2.logRefreshComplete()
 		end)
 	end
 end

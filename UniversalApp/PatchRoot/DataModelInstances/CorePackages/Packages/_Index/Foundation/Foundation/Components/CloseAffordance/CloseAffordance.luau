@@ -25,44 +25,44 @@ local t = {
 	variant = closeAffordanceVariantModule.OverMedia
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useCloseAffordanceVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), constantsModule (ref), iconModule (ref), builderIconsModule (ref), iconVariant (ref)
-	local var13 = withDefaultsModule(p0, t)
-	local var14 = useTokensModule()
-	local var15 = useCloseAffordanceVariantsModule(var14, var13.size, var13.variant, usePresentationContext().colorNamespace, var13.hasPadding, var13.isCircular)
-	local uDim = UDim.new(0, var15.container.radius)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = useCloseAffordanceVariantsModule(var2, var1.size, var1.variant, usePresentationContext().colorNamespace, var1.hasPadding, var1.isCircular)
+	local uDim = UDim.new(0, var3.container.radius)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var13, {
-		Size = var15.container.size,
-		onActivated = var13.onActivated,
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		Size = var3.container.size,
+		onActivated = var1.onActivated,
 		selection = {
-			Selectable = if var13.isDisabled then false else var13.Selectable,
-			NextSelectionUp = var13.NextSelectionUp,
-			NextSelectionDown = var13.NextSelectionDown,
-			NextSelectionLeft = var13.NextSelectionLeft,
-			NextSelectionRight = var13.NextSelectionRight
+			Selectable = if var1.isDisabled then false else var1.Selectable,
+			NextSelectionUp = var1.NextSelectionUp,
+			NextSelectionDown = var1.NextSelectionDown,
+			NextSelectionLeft = var1.NextSelectionLeft,
+			NextSelectionRight = var1.NextSelectionRight
 		},
-		isDisabled = var13.isDisabled,
-		padding = var15.container.padding,
+		isDisabled = var1.isDisabled,
+		padding = var3.container.padding,
 		cornerRadius = uDim,
-		stateLayer = var15.container.stateLayer,
+		stateLayer = var3.container.stateLayer,
 		cursor = reactModule.useMemo(function()
-			-- upvalues: uDim (ref), var14 (ref)
+			-- upvalues: uDim (ref), var2 (ref)
 			return {
 				radius = uDim,
-				offset = var14.Size.Size_150,
-				borderWidth = var14.Stroke.Thicker
+				offset = var2.Size.Size_150,
+				borderWidth = var2.Stroke.Thicker
 			}
-		end, { var14, uDim }),
-		tag = var15.container.tag,
-		GroupTransparency = if var13.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
-		ref = p1
+		end, { var2, uDim }),
+		tag = var3.container.tag,
+		GroupTransparency = if var1.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
+		ref = p2
 	}), {
 		Icon = reactModule.createElement(iconModule, {
 			name = builderIconsModule.Icon.X,
 			variant = iconVariant.Regular,
-			size = var15.content.iconSize,
-			style = var15.content.style
+			size = var3.content.iconSize,
+			style = var3.content.style
 		})
 	})
 end))

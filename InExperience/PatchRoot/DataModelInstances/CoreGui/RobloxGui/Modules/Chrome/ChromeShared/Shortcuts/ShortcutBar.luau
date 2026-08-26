@@ -20,43 +20,43 @@ local fFlagGamepadIconSupportCheck = sharedFlagsModule.FFlagGamepadIconSupportCh
 
 function ChromeShortcutBar(_)
 	-- upvalues: reactModule (ref), useTokens (ref), useObservableValueModule (ref), viewportUtilModule (ref), fFlagGamepadIconSupportCheck (ref), gamepadConnectorModule (ref), serviceModule (ref), userInputService (ref), isSpatial (ref), fFlagEnableConsoleExpControls (ref), reactRobloxModule (ref), constantsModule (ref), shortcutBar (ref), coreGuiService (ref)
-	local var13, var14 = reactModule.useState({})
-	local var15, var16 = reactModule.useState({})
-	local var17, var18 = reactModule.useBinding(false)
-	local var19 = useTokens()
-	local var20 = useObservableValueModule(viewportUtilModule.screenSize)
-	local var21 = reactModule.useRef(0)
+	local var1, var2 = reactModule.useState({})
+	local var3, var4 = reactModule.useState({})
+	local var5, var6 = reactModule.useBinding(false)
+	local var7 = useTokens()
+	local var8 = useObservableValueModule(viewportUtilModule.screenSize)
+	local var9 = reactModule.useRef(0)
 	
 	local function checkOverflow()
-		-- upvalues: var21 (ref), var20 (ref), var13 (ref), var16 (ref)
-		if var20.X < var21.current then
-			local var25 = 1
+		-- upvalues: var9 (ref), var8 (ref), var1 (ref), var4 (ref)
+		if var8.X < var9.current then
+			local var10 = 1
 			
-			for i, v in var13 do
-				if v.displayPriority <= var13[var25].displayPriority then
-					var25 = i
+			for i, v in var1 do
+				if v.displayPriority <= var1[var10].displayPriority then
+					var10 = i
 				end
 			end
-			local cloned = table.clone(var13)
-			table.remove(cloned, var25)
-			var16(cloned)
+			local cloned = table.clone(var1)
+			table.remove(cloned, var10)
+			var4(cloned)
 		end
 	end
 	
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), checkOverflow (ref)
-		var16({})
+		-- upvalues: var4 (ref), checkOverflow (ref)
+		var4({})
 		checkOverflow()
-	end, { var20 })
+	end, { var8 })
 	reactModule.useEffect(function()
-		-- upvalues: fFlagGamepadIconSupportCheck (copy), gamepadConnectorModule (copy), serviceModule (copy), var14 (ref), var16 (ref), userInputService (copy), isSpatial (copy), fFlagEnableConsoleExpControls (copy), var18 (ref)
+		-- upvalues: fFlagGamepadIconSupportCheck (copy), gamepadConnectorModule (copy), serviceModule (copy), var2 (ref), var4 (ref), userInputService (copy), isSpatial (copy), fFlagEnableConsoleExpControls (copy), var6 (ref)
 		local function updateShortcuts()
-			-- upvalues: fFlagGamepadIconSupportCheck (copy), gamepadConnectorModule (copy), serviceModule (copy), var14 (copy), var16 (copy)
+			-- upvalues: fFlagGamepadIconSupportCheck (copy), gamepadConnectorModule (copy), serviceModule (copy), var2 (copy), var4 (copy)
 			if fFlagGamepadIconSupportCheck and not gamepadConnectorModule:getGamepadActive():get() then
 				return
 			end
-			var14(serviceModule:getCurrentShortcuts())
-			var16({})
+			var2(serviceModule:getCurrentShortcuts())
+			var4({})
 		end
 		
 		serviceModule:onShortcutBarChanged():connect(updateShortcuts)
@@ -81,8 +81,8 @@ function ChromeShortcutBar(_)
 				return
 			end
 			local function shouldShowShortcutBar()
-				-- upvalues: showTopBar (ref), gamepadActive (ref), var18 (copy)
-				var18(showTopBar:get() and gamepadActive:get())
+				-- upvalues: showTopBar (ref), gamepadActive (ref), var6 (copy)
+				var6(showTopBar:get() and gamepadActive:get())
 			end
 			
 			showTopBar:connect(shouldShowShortcutBar)
@@ -91,7 +91,7 @@ function ChromeShortcutBar(_)
 	end, {})
 	local t = {}
 	
-	for i, v in if #var15 > 0 then var15 else var13 do
+	for i, v in if #var3 > 0 then var3 else var1 do
 		if v.label then
 			local t_1 = { icon = "", text = "" }
 			
@@ -107,18 +107,18 @@ function ChromeShortcutBar(_)
 			Name = "ShortcutBar",
 			DisplayOrder = constantsModule.SHORTCUTBAR_DISPLAYORDER,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-			Enabled = if fFlagEnableConsoleExpControls then nil else var17
+			Enabled = if fFlagEnableConsoleExpControls then nil else var5
 		}, {
 			reactModule.createElement("Frame", {
 				Name = "ShortcutBarWrapper",
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Position = UDim2.new(0.5, 0, 1, if var19 then -var19.Gap.Medium else 0),
+				Position = UDim2.new(0.5, 0, 1, if var7 then -var7.Gap.Medium else 0),
 				AnchorPoint = Vector2.new(0.5, 1),
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				[reactModule.Change.AbsoluteSize] = function(p0)
-					-- upvalues: var21 (ref), checkOverflow (ref)
-					var21.current = p0.AbsoluteSize.X
+				[reactModule.Change.AbsoluteSize] = function(p1)
+					-- upvalues: var9 (ref), checkOverflow (ref)
+					var9.current = p1.AbsoluteSize.X
 					checkOverflow()
 				end
 			}, {

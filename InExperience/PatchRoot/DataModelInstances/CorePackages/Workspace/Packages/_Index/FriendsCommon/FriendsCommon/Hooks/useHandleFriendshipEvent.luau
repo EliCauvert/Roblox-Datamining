@@ -4,8 +4,8 @@ local handleFriendshipEventModule = require(friendsCommon.EventHandlers.handleFr
 
 return function()
 	-- upvalues: reactModule (ref), handleFriendshipEventModule (ref)
-	return reactModule.useCallback(function(p0)
+	return reactModule.useCallback(function(p1)
 		-- upvalues: handleFriendshipEventModule (copy)
-		handleFriendshipEventModule({ friendshipUpdate = p0 })
+		handleFriendshipEventModule({ friendshipUpdate = p1 })
 	end, {})
 end

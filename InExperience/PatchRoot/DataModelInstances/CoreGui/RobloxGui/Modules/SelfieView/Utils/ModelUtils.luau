@@ -13,11 +13,11 @@ local t = {
 	SurfaceAppearance = "SurfaceAppearance"
 }
 
-local function getFaceControls(p0)
-	if p0 == nil then
+local function getFaceControls(p1)
+	if p1 == nil then
 		return
 	end
-	return p0:FindFirstChildWhichIsA("FaceControls", true)
+	return p1:FindFirstChildWhichIsA("FaceControls", true)
 end
 
 local function getNeck(p1, p2)
@@ -66,30 +66,30 @@ local function getHead(p6)
 		return nil
 	end
 	local parent = nil
-	local var19 = if p6 == nil then nil else p6:FindFirstChildWhichIsA("FaceControls", true)
+	local var1 = if p6 == nil then nil else p6:FindFirstChildWhichIsA("FaceControls", true)
 	
-	if var19 ~= nil and var19.Parent and (var19.Parent.ClassName == "MeshPart" or var19.Parent.ClassName == "Part") then
-		parent = var19.Parent
+	if var1 ~= nil and var1.Parent and (var1.Parent.ClassName == "MeshPart" or var1.Parent.ClassName == "Part") then
+		parent = var1.Parent
 	end
 	return parent or findObjectOfNameAndTypeName("Head", "MeshPart", p6) or findObjectOfNameAndTypeName("Head", "Part", p6)
 end
 
-local function getAnimator(p7, p8)
-	local var22
+local function getAnimator(p6, p7)
+	local var1
 	local animator = nil
 	local _ = nil
 	
-	if p8 > 0 then
-		local humanoid = p7:WaitForChild("Humanoid", p8)
-		var22 = if humanoid then if humanoid:IsA("Humanoid") then humanoid else p7:FindFirstChildWhichIsA("Humanoid") else p7:FindFirstChildWhichIsA("Humanoid")
+	if p7 > 0 then
+		local humanoid = p6:WaitForChild("Humanoid", p7)
+		var1 = if humanoid then if humanoid:IsA("Humanoid") then humanoid else p6:FindFirstChildWhichIsA("Humanoid") else p6:FindFirstChildWhichIsA("Humanoid")
 	else
-		var22 = p7:FindFirstChildWhichIsA("Humanoid")
+		var1 = p6:FindFirstChildWhichIsA("Humanoid")
 	end
-	if var22 ~= nil then
-		animator = if p8 > 0 then var22:WaitForChild("Animator", p8) else var22:FindFirstChild("Animator")
+	if var1 ~= nil then
+		animator = if p7 > 0 then var1:WaitForChild("Animator", p7) else var1:FindFirstChild("Animator")
 	end
 	if animator == nil then
-		animator = p7:FindFirstChildWhichIsA("Animator", true)
+		animator = p6:FindFirstChildWhichIsA("Animator", true)
 	end
 	return animator
 end
@@ -100,17 +100,17 @@ local list = {
 	"LeftLowerArm", "LeftUpperArm", "RightHand", "RightLowerArm", "RightUpperArm"
 }
 
-local function updateTransparency(p9, p10)
+local function updateTransparency(p6, p7)
 	-- upvalues: list (ref), collectionService (ref)
-	for i, v in ipairs(p9:GetDescendants()) do
+	for i, v in ipairs(p6:GetDescendants()) do
 		if v:IsA("Decal") then
 			v.Transparency = 0
 		elseif v:IsA("MeshPart") then
 			if v.Parent and v.Parent:IsA("Accessory") or table.find(list, v.Name) then
-				if table.find(p10, v.MeshId) then
-					v.Transparency = p10[v.MeshId]
+				if table.find(p7, v.MeshId) then
+					v.Transparency = p7[v.MeshId]
 				else
-					p10[v.MeshId] = v.Transparency
+					p7[v.MeshId] = v.Transparency
 				end
 			end
 		elseif v:IsA("Part") then
@@ -124,11 +124,11 @@ local function updateTransparency(p9, p10)
 	end
 end
 
-local function shouldMarkCloneDirtyForDescendant(p11)
+local function shouldMarkCloneDirtyForDescendant(p8)
 	-- upvalues: t (ref)
-	if p11:IsA("MeshPart") or p11:IsA("Part") or p11:IsA("Decal") then
-		return p11.Transparency < 1
-	elseif t[p11.ClassName] then
+	if p8:IsA("MeshPart") or p8:IsA("Part") or p8:IsA("Decal") then
+		return p8.Transparency < 1
+	elseif t[p8.ClassName] then
 		return true
 	end
 end
@@ -142,47 +142,47 @@ local function resetPartOrientation(value)
 	end
 end
 
-local function _(p12, p13)
-	local var23 = p12:FindFirstChild(p13)
+local function _(p8, p9)
+	local var1 = p8:FindFirstChild(p9)
 	
-	if var23 then
-		var23:Destroy()
+	if var1 then
+		var1:Destroy()
 	end
 end
 
-local function removeScripts(p14)
-	local animate = p14:FindFirstChild("Animate")
+local function removeScripts(p8)
+	local animate = p8:FindFirstChild("Animate")
 	
 	if animate then
 		animate:Destroy()
 	end
-	local health = p14:FindFirstChild("Health")
+	local health = p8:FindFirstChild("Health")
 	
 	if health then
 		health:Destroy()
 	end
-	for i, v in pairs(p14:GetDescendants()) do
+	for i, v in pairs(p8:GetDescendants()) do
 		if v:IsA("BaseScript") then
 			v:Destroy()
 		end
 	end
 end
 
-local function removeTags(p15)
+local function removeTags(p9)
 	-- upvalues: collectionService (ref)
-	for i, v in ipairs(collectionService:GetTags(p15)) do
+	for i, v in ipairs(collectionService:GetTags(p9)) do
 		if v ~= "NoFace" then
-			collectionService:RemoveTag(p15, v)
+			collectionService:RemoveTag(p9, v)
 		end
 	end
-	for i, v_1 in ipairs(p15:GetDescendants()) do
+	for i, v_1 in ipairs(p9:GetDescendants()) do
 		for i_2, v_2 in ipairs(collectionService:GetTags(v_1)) do
 			if v_2 ~= "NoFace" then
 				collectionService:RemoveTag(v_1, v_2)
 			end
 		end
 	end
-	local _ = collectionService:GetTags(p15)
+	local _ = collectionService:GetTags(p9)
 end
 
 local t_1 = {
@@ -222,9 +222,9 @@ local t_1 = {
 	WrapTextureTransfer = "WrapTextureTransfer"
 }
 
-local function disableScripts(p16)
+local function disableScripts(p10)
 	-- upvalues: disableScripts (ref)
-	for i, v in p16:GetChildren() do
+	for i, v in p10:GetChildren() do
 		if v:IsA("Script") then
 			v.Disabled = true
 			v.Parent = nil
@@ -233,9 +233,9 @@ local function disableScripts(p16)
 	end
 end
 
-local function removeUI(p17)
+local function removeUI(p11)
 	-- upvalues: removeUI (ref)
-	for i, v in p17:GetChildren() do
+	for i, v in p11:GetChildren() do
 		if v:IsA("GuiObject") or v:IsA("ScreenGui") or (v:IsA("BillboardGui") or v:IsA("AdGui")) or v:IsA("SurfaceGui") then
 			v.Parent = nil
 		end
@@ -243,9 +243,9 @@ local function removeUI(p17)
 	end
 end
 
-local function removeInstancesStrict(p18)
+local function removeInstancesStrict(p12)
 	-- upvalues: t_1 (ref), removeInstancesStrict (ref)
-	for i, v in p18:GetChildren() do
+	for i, v in p12:GetChildren() do
 		if not t_1[v.ClassName] then
 			v.Parent = nil
 		end
@@ -263,19 +263,19 @@ return {
 	resetPartOrientation = resetPartOrientation,
 	removeScripts = removeScripts,
 	removeTags = removeTags,
-	sanitizeCharacter = function(p19)
+	sanitizeCharacter = function(p13)
 		-- upvalues: removeInstancesStrict (ref)
-		if p19 then
-			removeInstancesStrict(p19)
+		if p13 then
+			removeInstancesStrict(p13)
 			
 			return
 		end
 	end,
-	isValidAvatar = function(p20)
+	isValidAvatar = function(p13)
 		-- upvalues: getAnimator (ref), getHead (ref)
-		return if getAnimator(p20, 10) then getHead(p20) else false
+		return if getAnimator(p13, 10) then getHead(p13) else false
 	end,
-	hasDynamicHead = function(p21)
-		return (if p21 == nil then nil else p21:FindFirstChildWhichIsA("FaceControls", true)) ~= nil
+	hasDynamicHead = function(p13)
+		return (if p13 == nil then nil else p13:FindFirstChildWhichIsA("FaceControls", true)) ~= nil
 	end
 }

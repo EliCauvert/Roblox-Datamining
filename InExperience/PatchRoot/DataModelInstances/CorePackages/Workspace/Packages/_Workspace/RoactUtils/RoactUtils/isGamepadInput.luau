@@ -2,7 +2,7 @@
 local inputTypeConstants = require(parent.InputType).InputTypeConstants
 local getInputGroup = require(parent.InputType).getInputGroup
 
-return function(p0)
+return function(p1)
 	-- upvalues: getInputGroup (ref), inputTypeConstants (ref)
-	return getInputGroup(p0) == inputTypeConstants.Gamepad
+	return getInputGroup(p1) == inputTypeConstants.Gamepad
 end

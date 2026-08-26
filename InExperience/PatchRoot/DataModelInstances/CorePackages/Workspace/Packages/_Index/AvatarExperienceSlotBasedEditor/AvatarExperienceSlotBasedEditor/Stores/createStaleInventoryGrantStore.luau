@@ -4,25 +4,25 @@ local signalsModule = require(parent.Signals)
 
 return function()
 	-- upvalues: signalsModule (ref), cryoModule (ref)
-	local var2, var3 = signalsModule.createSignal({})
+	local var1, var2 = signalsModule.createSignal({})
 	
 	return {
-		getStaleSearchUuids = var2,
-		isSearchUuidStale = function(p0)
-			-- upvalues: var2 (ref)
-			return var2(false)[p0] == true
+		getStaleSearchUuids = var1,
+		isSearchUuidStale = function(p1)
+			-- upvalues: var1 (ref)
+			return var1(false)[p1] == true
 		end,
 		markSearchUuidStale = function(p1)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			if var2(false)[p1] == true then
+			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+			if var1(false)[p1] == true then
 				return
 			end
-			var3(cryoModule.Dictionary.join(var2(false), { [p1] = true }))
+			var2(cryoModule.Dictionary.join(var1(false), { [p1] = true }))
 		end,
-		clearSearchUuidStale = function(p2)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			if var2(false)[p2] == true then
-				var3(cryoModule.Dictionary.join(var2(false), { [p2] = cryoModule.None }))
+		clearSearchUuidStale = function(p1)
+			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+			if var1(false)[p1] == true then
+				var2(cryoModule.Dictionary.join(var1(false), { [p1] = cryoModule.None }))
 				
 				return
 			end

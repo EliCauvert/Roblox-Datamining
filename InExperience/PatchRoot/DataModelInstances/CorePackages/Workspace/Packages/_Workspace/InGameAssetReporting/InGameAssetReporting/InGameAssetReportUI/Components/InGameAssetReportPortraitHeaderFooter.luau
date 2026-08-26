@@ -9,10 +9,10 @@ local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local images = UIBloxModule.App.ImageSet.Images
 local withStyle = UIBloxModule.Style.withStyle
 
-local function _(p0, _, _)
+local function _(p1, _, _)
 	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
 	return function()
-		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p0 (ref)
+		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p1 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 30, 1, 0)
@@ -27,7 +27,7 @@ local function _(p0, _, _)
 				layoutOrder = 1,
 				iconSize = iconSize.Medium,
 				icon = images["icons/navigation/pushBack"],
-				onActivated = p0
+				onActivated = p1
 			})
 		})
 	end
@@ -58,10 +58,10 @@ local _ = function(p1)
 	end
 end
 
-local _ = function(_, p3, p4, p5, p6)
+local _ = function(_, p1, p2, p3, p4)
 	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
 	return function()
-		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p5 (ref), p3 (ref), p6 (ref), p4 (ref)
+		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p3 (ref), p1 (ref), p4 (ref), p2 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 60, 1, 0)
@@ -76,26 +76,26 @@ local _ = function(_, p3, p4, p5, p6)
 				layoutOrder = 1,
 				iconSize = iconSize.Medium,
 				icon = images["icons/actions/edit/undo"],
-				isDisabled = not p5,
-				onActivated = p3
+				isDisabled = not p3,
+				onActivated = p1
 			}),
 			RedoButton = reactModule.createElement(iconButton, {
 				layoutOrder = 2,
 				iconSize = iconSize.Medium,
 				icon = images["icons/actions/edit/redo"],
-				isDisabled = not p6,
-				onActivated = p4
+				isDisabled = not p4,
+				onActivated = p2
 			})
 		})
 	end
 end
 
 return {
-	PortraitModeHeader = function(p7)
+	PortraitModeHeader = function(p1)
 		-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), withStyle (ref)
-		local isRedoEnabled = p7.isRedoEnabled or p7.isUndoEnabled
+		local isRedoEnabled = p1.isRedoEnabled or p1.isUndoEnabled
 		local createElement = reactModule.createElement
-		local var3 = "Frame"
+		local var1 = "Frame"
 		local t = {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 0.1,
@@ -112,9 +112,9 @@ return {
 			margin = 12,
 			isSecondary = true
 		}
-		local backAction = p7.backAction
-		local _ = p7.isRedoEnabled
-		local _ = p7.isUndoEnabled
+		local backAction = p1.backAction
+		local _ = p1.isRedoEnabled
+		local _ = p1.isUndoEnabled
 		
 		function t_2.renderLeft()
 			-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), backAction (ref)
@@ -138,13 +138,13 @@ return {
 		end
 		
 		if isRedoEnabled then
-			local _ = p7.annotationPoints
-			local undoAnnotationPoints = p7.undoAnnotationPoints
-			local redoAnnotationPoints = p7.redoAnnotationPoints
-			local isUndoEnabled = p7.isUndoEnabled
-			local isRedoEnabled_1 = p7.isRedoEnabled
+			local _ = p1.annotationPoints
+			local undoAnnotationPoints = p1.undoAnnotationPoints
+			local redoAnnotationPoints = p1.redoAnnotationPoints
+			local isUndoEnabled = p1.isUndoEnabled
+			local isRedoEnabled_1 = p1.isRedoEnabled
 			
-			local var7 = function()
+			local var2 = function()
 				-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), isUndoEnabled (ref), undoAnnotationPoints (ref), isRedoEnabled_1 (ref), redoAnnotationPoints (ref)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -173,24 +173,24 @@ return {
 				})
 			end
 		else
-			local var7 = function() end
+			local var2 = function() end
 		end
-		t_2.renderRight = var7
-		local titleText = p7.titleText
+		t_2.renderRight = var2
+		local titleText = p1.titleText
 		
 		function t_2.renderCenter()
 			-- upvalues: withStyle (copy), reactModule (copy), titleText (ref)
-			return withStyle(function(p8)
+			return withStyle(function(p2)
 				-- upvalues: reactModule (copy), titleText (copy)
 				local currentCamera = game.Workspace.CurrentCamera
-				local theme = p8.Theme
+				local theme = p2.Theme
 				
 				return reactModule.createElement("TextLabel", {
 					TextSize = 20,
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					Text = titleText,
-					Font = p8.Font.Header2.Font,
+					Font = p2.Font.Header2.Font,
 					TextColor3 = theme.TextEmphasis.Color,
 					TextTransparency = theme.TextEmphasis.Transparency,
 					TextXAlignment = Enum.TextXAlignment.Center,
@@ -202,9 +202,9 @@ return {
 		
 		t_1.Bar = createElement_1(headerBar, t_2)
 		
-		return createElement(var3, t, t_1)
+		return createElement(var1, t, t_1)
 	end,
-	PortraitModeFooter = function(p9)
+	PortraitModeFooter = function(p1)
 		-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref)
 		return reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -234,7 +234,7 @@ return {
 					buttons = {
 						{
 							buttonType = buttonType.PrimarySystem,
-							props = { onActivated = p9.nextAction, text = p9.nextText }
+							props = { onActivated = p1.nextAction, text = p1.nextText }
 						}
 					}
 				})

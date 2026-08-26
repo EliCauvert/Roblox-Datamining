@@ -6,29 +6,29 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local getResponsiveSizeModule = require(script.Parent.getResponsiveSize)
 local useDialogModule = require(script.Parent.useDialog)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokensModule (ref), useOverlayModule (ref), useDialogModule (ref), reactModule (ref), getResponsiveSizeModule (ref)
-	local var6 = useTokensModule()
-	local var7 = useOverlayModule()
-	local var8 = useDialogModule()
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var8 (ref), getResponsiveSizeModule (copy), p0 (ref), var6 (ref)
-		if var7 then
-			var8.setResponsiveSize(getResponsiveSizeModule(var7.AbsoluteSize.X, p0, var6))
+	local var1 = useTokensModule()
+	local var2 = useOverlayModule()
+	local var3 = useDialogModule()
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), var3 (ref), getResponsiveSizeModule (copy), p1 (ref), var1 (ref)
+		if var2 then
+			var3.setResponsiveSize(getResponsiveSizeModule(var2.AbsoluteSize.X, p1, var1))
 			
 			return
 		end
-	end, { var7, p0, var6, var8.size })
+	end, { var2, p1, var1, var3.size })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var7 (ref), var9 (ref)
-		if var7 then
-			var9()
-			local var10 = var7:GetPropertyChangedSignal("AbsoluteSize"):Connect(var9)
+		-- upvalues: var2 (ref), var4 (ref)
+		if var2 then
+			var4()
+			local var5 = var2:GetPropertyChangedSignal("AbsoluteSize"):Connect(var4)
 			
 			return function()
-				-- upvalues: var10 (ref)
-				var10:Disconnect()
+				-- upvalues: var5 (ref)
+				var5:Disconnect()
 			end
 		end
-	end, { var7, p0, var9 })
+	end, { var2, p1, var4 })
 end

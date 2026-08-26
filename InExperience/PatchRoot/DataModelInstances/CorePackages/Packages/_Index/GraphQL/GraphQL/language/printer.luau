@@ -12,9 +12,9 @@ local indent = nil
 local _ = nil
 local hasMultilineItems = nil
 
-local function print_(p0)
+local function print_(p1)
 	-- upvalues: visit (ref), t (write)
-	return visit(p0, { leave = t })
+	return visit(p1, { leave = t })
 end
 
 local function addDescription(p1)
@@ -26,41 +26,41 @@ local function addDescription(p1)
 end
 
 t = {
-	Name = function(_, p3)
-		return p3.value
+	Name = function(_, p1)
+		return p1.value
 	end,
-	Variable = function(_, p4)
-		return "$" .. tostring(p4.name)
+	Variable = function(_, p1)
+		return "$" .. tostring(p1.name)
 	end,
-	Document = function(_, p5)
+	Document = function(_, p1)
 		-- upvalues: join (write)
-		return join(p5.definitions, "\n\n") .. "\n"
+		return join(p1.definitions, "\n\n") .. "\n"
 	end,
-	OperationDefinition = function(_, p6)
+	OperationDefinition = function(_, p1)
 		-- upvalues: wrap (write), join (write)
-		local operation = p6.operation
-		local name = p6.name
-		local var10 = wrap("(", join(p6.variableDefinitions, ", "), ")")
-		local var11 = join(p6.directives, " ")
-		local selectionSet = p6.selectionSet
+		local operation = p1.operation
+		local name = p1.name
+		local var1 = wrap("(", join(p1.variableDefinitions, ", "), ")")
+		local var2 = join(p1.directives, " ")
+		local selectionSet = p1.selectionSet
 		
-		return if name or var11 and var11 ~= "" or (var10 and var10 ~= "" or operation ~= "query") then join({ operation, join({ name, var10 }), var11, selectionSet }, " ") else selectionSet
+		return if name or var2 and var2 ~= "" or (var1 and var1 ~= "" or operation ~= "query") then join({ operation, join({ name, var1 }), var2, selectionSet }, " ") else selectionSet
 	end,
-	VariableDefinition = function(_, p7)
+	VariableDefinition = function(_, p1)
 		-- upvalues: wrap (write), join (write)
-		return tostring(p7.variable) .. ": " .. tostring(p7.type) .. wrap(" = ", p7.defaultValue) .. wrap(" ", join(p7.directives, " "))
+		return tostring(p1.variable) .. ": " .. tostring(p1.type) .. wrap(" = ", p1.defaultValue) .. wrap(" ", join(p1.directives, " "))
 	end,
-	SelectionSet = function(_, p8)
+	SelectionSet = function(_, p1)
 		-- upvalues: block (write)
-		return block(p8.selections)
+		return block(p1.selections)
 	end,
-	Field = function(_, p9)
+	Field = function(_, p1)
 		-- upvalues: wrap (write), join (write), indent (write)
-		local alias = p9.alias
-		local name = p9.name
-		local arguments = p9.arguments
-		local directives = p9.directives
-		local selectionSet = p9.selectionSet
+		local alias = p1.alias
+		local name = p1.name
+		local arguments = p1.arguments
+		local directives = p1.directives
+		local selectionSet = p1.selectionSet
 		local text = wrap("", alias, ": ") .. tostring(name)
 		local text_1 = text .. wrap("(", join(arguments, ", "), ")")
 		local charCount = utf8.len(text_1)
@@ -71,254 +71,254 @@ t = {
 		end
 		return join({ text_1, join(directives, " "), selectionSet }, " ")
 	end,
-	Argument = function(_, p10)
-		return tostring(p10.name) .. ": " .. tostring(p10.value)
+	Argument = function(_, p1)
+		return tostring(p1.name) .. ": " .. tostring(p1.value)
 	end,
-	FragmentSpread = function(_, p11)
+	FragmentSpread = function(_, p1)
 		-- upvalues: wrap (write), join (write)
-		return "..." .. tostring(p11.name) .. wrap(" ", join(p11.directives, " "))
+		return "..." .. tostring(p1.name) .. wrap(" ", join(p1.directives, " "))
 	end,
-	InlineFragment = function(_, p12)
+	InlineFragment = function(_, p1)
 		-- upvalues: join (write), wrap (write)
 		return join({
 			"...",
-			wrap("on ", p12.typeCondition),
-			join(p12.directives, " "),
-			p12.selectionSet
+			wrap("on ", p1.typeCondition),
+			join(p1.directives, " "),
+			p1.selectionSet
 		}, " ")
 	end,
-	FragmentDefinition = function(_, p13)
+	FragmentDefinition = function(_, p1)
 		-- upvalues: wrap (write), join (write)
-		return "fragment " .. tostring(p13.name) .. wrap("(", join(p13.variableDefinitions, ", "), ")") .. " " .. "on " .. tostring(p13.typeCondition) .. " " .. wrap("", join(p13.directives, " "), " ") .. tostring(p13.selectionSet)
+		return "fragment " .. tostring(p1.name) .. wrap("(", join(p1.variableDefinitions, ", "), ")") .. " " .. "on " .. tostring(p1.typeCondition) .. " " .. wrap("", join(p1.directives, " "), " ") .. tostring(p1.selectionSet)
 	end,
-	IntValue = function(_, p14)
-		return p14.value
+	IntValue = function(_, p1)
+		return p1.value
 	end,
-	FloatValue = function(_, p15)
-		return p15.value
+	FloatValue = function(_, p1)
+		return p1.value
 	end,
-	StringValue = function(_, p16, p17)
+	StringValue = function(_, p1, p2)
 		-- upvalues: printBlockString (ref), httpService (ref)
-		local value = p16.value
+		local value = p1.value
 		
-		return if p16.block then printBlockString(value, if p17 == "description" then "" else "  ") else httpService:JSONEncode(value)
+		return if p1.block then printBlockString(value, if p2 == "description" then "" else "  ") else httpService:JSONEncode(value)
 	end,
-	BooleanValue = function(_, p18)
-		return if p18.value then "true" else "false"
+	BooleanValue = function(_, p1)
+		return if p1.value then "true" else "false"
 	end,
 	NullValue = function(_, _)
 		return "null"
 	end,
-	EnumValue = function(_, p19)
-		return p19.value
+	EnumValue = function(_, p1)
+		return p1.value
 	end,
-	ListValue = function(_, p20)
+	ListValue = function(_, p1)
 		-- upvalues: join (write)
-		return "[" .. join(p20.values, ", ") .. "]"
+		return "[" .. join(p1.values, ", ") .. "]"
 	end,
-	ObjectValue = function(_, p21)
+	ObjectValue = function(_, p1)
 		-- upvalues: join (write)
-		return "{" .. join(p21.fields, ", ") .. "}"
+		return "{" .. join(p1.fields, ", ") .. "}"
 	end,
-	ObjectField = function(_, p22)
-		return p22.name .. ": " .. p22.value
+	ObjectField = function(_, p1)
+		return p1.name .. ": " .. p22.value
 	end,
-	Directive = function(_, p23)
+	Directive = function(_, p1)
 		-- upvalues: wrap (write), join (write)
-		return "@" .. tostring(p23.name) .. wrap("(", join(p23.arguments, ", "), ")")
+		return "@" .. tostring(p1.name) .. wrap("(", join(p1.arguments, ", "), ")")
 	end,
-	NamedType = function(_, p24)
-		return p24.name
+	NamedType = function(_, p1)
+		return p1.name
 	end,
-	ListType = function(_, p25)
-		return "[" .. tostring(p25.type) .. "]"
+	ListType = function(_, p1)
+		return "[" .. tostring(p1.type) .. "]"
 	end,
-	NonNullType = function(_, p26)
-		return tostring(p26.type) .. "!"
+	NonNullType = function(_, p1)
+		return tostring(p1.type) .. "!"
 	end,
-	SchemaDefinition = addDescription(function(p27)
+	SchemaDefinition = addDescription(function(p1)
 		-- upvalues: join (write), block (write)
 		return join({
 			"schema",
-			join(p27.directives, " "),
-			block(p27.operationTypes)
+			join(p1.directives, " "),
+			block(p1.operationTypes)
 		}, " ")
 	end),
-	OperationTypeDefinition = function(_, p28)
-		return tostring(p28.operation) .. ": " .. tostring(p28.type)
+	OperationTypeDefinition = function(_, p1)
+		return tostring(p1.operation) .. ": " .. tostring(p1.type)
 	end,
-	ScalarTypeDefinition = addDescription(function(p29)
+	ScalarTypeDefinition = addDescription(function(p1)
 		-- upvalues: join (write)
-		return join({ "scalar", p29.name, join(p29.directives, " ") }, " ")
+		return join({ "scalar", p1.name, join(p1.directives, " ") }, " ")
 	end),
-	ObjectTypeDefinition = addDescription(function(p30)
+	ObjectTypeDefinition = addDescription(function(p1)
 		-- upvalues: join (write), wrap (write), block (write)
 		return join({
 			"type",
-			p30.name,
-			wrap("implements ", join(p30.interfaces, " & ")),
-			join(p30.directives, " "),
-			block(p30.fields)
+			p1.name,
+			wrap("implements ", join(p1.interfaces, " & ")),
+			join(p1.directives, " "),
+			block(p1.fields)
 		}, " ")
 	end),
-	FieldDefinition = addDescription(function(p31)
+	FieldDefinition = addDescription(function(p1)
 		-- upvalues: hasMultilineItems (write), wrap (write), indent (write), join (write)
-		local arguments = p31.arguments
+		local arguments = p1.arguments
 		
-		return tostring(p31.name) .. (if hasMultilineItems(arguments) then wrap("(\n", indent(join(arguments, "\n")), "\n)") else wrap("(", join(arguments, ", "), ")")) .. ": " .. tostring(p31.type) .. wrap(" ", join(p31.directives, " "))
+		return tostring(p1.name) .. (if hasMultilineItems(arguments) then wrap("(\n", indent(join(arguments, "\n")), "\n)") else wrap("(", join(arguments, ", "), ")")) .. ": " .. tostring(p1.type) .. wrap(" ", join(p1.directives, " "))
 	end),
-	InputValueDefinition = addDescription(function(p32)
+	InputValueDefinition = addDescription(function(p1)
 		-- upvalues: join (write), wrap (write)
 		return join({
-			tostring(p32.name) .. ": " .. tostring(p32.type),
-			wrap("= ", p32.defaultValue),
-			join(p32.directives, " ")
+			tostring(p1.name) .. ": " .. tostring(p1.type),
+			wrap("= ", p1.defaultValue),
+			join(p1.directives, " ")
 		}, " ")
 	end),
-	InterfaceTypeDefinition = addDescription(function(p33)
+	InterfaceTypeDefinition = addDescription(function(p1)
 		-- upvalues: join (write), wrap (write), block (write)
 		return join({
 			"interface",
-			p33.name,
-			wrap("implements ", join(p33.interfaces, " & ")),
-			join(p33.directives, " "),
-			block(p33.fields)
+			p1.name,
+			wrap("implements ", join(p1.interfaces, " & ")),
+			join(p1.directives, " "),
+			block(p1.fields)
 		}, " ")
 	end),
-	UnionTypeDefinition = addDescription(function(p34)
+	UnionTypeDefinition = addDescription(function(p1)
 		-- upvalues: join (write)
-		local types = p34.types
+		local types = p1.types
 		
 		return join({
 			"union",
-			p34.name,
-			join(p34.directives, " "),
+			p1.name,
+			join(p1.directives, " "),
 			if types and #types ~= 0 then "= " .. join(types, " | ") else ""
 		}, " ")
 	end),
-	EnumTypeDefinition = addDescription(function(p35)
+	EnumTypeDefinition = addDescription(function(p1)
 		-- upvalues: join (write), block (write)
 		return join({
 			"enum",
-			p35.name,
-			join(p35.directives, " "),
-			block(p35.values)
+			p1.name,
+			join(p1.directives, " "),
+			block(p1.values)
 		}, " ")
 	end),
-	EnumValueDefinition = addDescription(function(p36)
+	EnumValueDefinition = addDescription(function(p1)
 		-- upvalues: join (write)
-		return join({ p36.name, join(p36.directives, " ") }, " ")
+		return join({ p1.name, join(p1.directives, " ") }, " ")
 	end),
-	InputObjectTypeDefinition = addDescription(function(p37)
+	InputObjectTypeDefinition = addDescription(function(p1)
 		-- upvalues: join (write), block (write)
 		return join({
 			"input",
-			p37.name,
-			join(p37.directives, " "),
-			block(p37.fields)
+			p1.name,
+			join(p1.directives, " "),
+			block(p1.fields)
 		}, " ")
 	end),
-	DirectiveDefinition = addDescription(function(p38)
+	DirectiveDefinition = addDescription(function(p1)
 		-- upvalues: hasMultilineItems (write), wrap (write), indent (write), join (write)
-		local arguments = p38.arguments
+		local arguments = p1.arguments
 		
-		return "directive @" .. tostring(p38.name) .. (if hasMultilineItems(arguments) then wrap("(\n", indent(join(arguments, "\n")), "\n)") else wrap("(", join(arguments, ", "), ")")) .. (if p38.repeatable then " repeatable" else "") .. " on " .. join(p38.locations, " | ")
+		return "directive @" .. tostring(p1.name) .. (if hasMultilineItems(arguments) then wrap("(\n", indent(join(arguments, "\n")), "\n)") else wrap("(", join(arguments, ", "), ")")) .. (if p1.repeatable then " repeatable" else "") .. " on " .. join(p1.locations, " | ")
 	end),
-	SchemaExtension = function(_, p39)
+	SchemaExtension = function(_, p1)
 		-- upvalues: join (write), block (write)
 		return join({
 			"extend schema",
-			join(p39.directives, " "),
-			block(p39.operationTypes)
+			join(p1.directives, " "),
+			block(p1.operationTypes)
 		}, " ")
 	end,
-	ScalarTypeExtension = function(_, p40)
+	ScalarTypeExtension = function(_, p1)
 		-- upvalues: join (write)
-		return join({ "extend scalar", p40.name, join(p40.directives, " ") }, " ")
+		return join({ "extend scalar", p1.name, join(p1.directives, " ") }, " ")
 	end,
-	ObjectTypeExtension = function(_, p41)
+	ObjectTypeExtension = function(_, p1)
 		-- upvalues: join (write), wrap (write), block (write)
 		return join({
 			"extend type",
-			p41.name,
-			wrap("implements ", join(p41.interfaces, " & ")),
-			join(p41.directives, " "),
-			block(p41.fields)
+			p1.name,
+			wrap("implements ", join(p1.interfaces, " & ")),
+			join(p1.directives, " "),
+			block(p1.fields)
 		}, " ")
 	end,
-	InterfaceTypeExtension = function(_, p42)
+	InterfaceTypeExtension = function(_, p1)
 		-- upvalues: join (write), wrap (write), block (write)
 		return join({
 			"extend interface",
-			p42.name,
-			wrap("implements ", join(p42.interfaces, " & ")),
-			join(p42.directives, " "),
-			block(p42.fields)
+			p1.name,
+			wrap("implements ", join(p1.interfaces, " & ")),
+			join(p1.directives, " "),
+			block(p1.fields)
 		}, " ")
 	end,
-	UnionTypeExtension = function(_, p43)
+	UnionTypeExtension = function(_, p1)
 		-- upvalues: join (write)
-		local types = p43.types
+		local types = p1.types
 		
 		return join({
 			"extend union",
-			p43.name,
-			join(p43.directives, " "),
+			p1.name,
+			join(p1.directives, " "),
 			if types and #types ~= 0 then "= " .. join(types, " | ") else ""
 		}, " ")
 	end,
-	EnumTypeExtension = function(_, p44)
+	EnumTypeExtension = function(_, p1)
 		-- upvalues: join (write), block (write)
 		return join({
 			"extend enum",
-			p44.name,
-			join(p44.directives, " "),
-			block(p44.values)
+			p1.name,
+			join(p1.directives, " "),
+			block(p1.values)
 		}, " ")
 	end,
-	InputObjectTypeExtension = function(_, p45)
+	InputObjectTypeExtension = function(_, p1)
 		-- upvalues: join (write), block (write)
 		return join({
 			"extend input",
-			p45.name,
-			join(p45.directives, " "),
-			block(p45.fields)
+			p1.name,
+			join(p1.directives, " "),
+			block(p1.fields)
 		}, " ")
 	end
 }
 
-join = function(p46, p47)
+join = function(p1, p2)
 	-- upvalues: array (ref)
-	p47 = p47 or ""
+	p2 = p2 or ""
 	
-	return if p46 then array.join(array.filter(p46, function(p48)
-		return tostring(p48) and p48 ~= ""
-	end), p47) else ""
+	return if p1 then array.join(array.filter(p1, function(p3)
+		return tostring(p3) and p3 ~= ""
+	end), p2) else ""
 end
 
-block = function(p49)
+block = function(p1)
 	-- upvalues: wrap (write), indent (write), join (write)
-	return wrap("{\n", indent(join(p49, "\n")), "\n}")
+	return wrap("{\n", indent(join(p1, "\n")), "\n}")
 end
 
-wrap = function(p50, p51, p52)
-	p52 = p52 or ""
+wrap = function(p1, p2, p3)
+	p3 = p3 or ""
 	
-	return if p51 == nil or p51 == "" then "" else p50 .. tostring(p51) .. tostring(p52)
+	return if p2 == nil or p2 == "" then "" else p1 .. tostring(p2) .. tostring(p3)
 end
 
-indent = function(p53)
+indent = function(p1)
 	-- upvalues: wrap (write)
-	return wrap("  ", p53:gsub("\n", "\n  "))
+	return wrap("  ", p1:gsub("\n", "\n  "))
 end
 
-local function isMultiline(p54)
-	return string.find(tostring(p54), "\n") ~= nil
+local function isMultiline(p1)
+	return string.find(tostring(p1), "\n") ~= nil
 end
 
-hasMultilineItems = function(p55)
+hasMultilineItems = function(p1)
 	-- upvalues: array (ref), isMultiline (write)
-	return p55 ~= nil and array.some(p55, isMultiline)
+	return p1 ~= nil and array.some(p1, isMultiline)
 end
 
 return { print = print_ }

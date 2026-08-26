@@ -3,35 +3,35 @@ local cryoModule = require(socialLuaAnalytics.Parent.Cryo)
 local createFireEventModule = require(socialLuaAnalytics.Analytics.FireEvent.createFireEvent)
 local _ = require(script.Parent.Parent.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), createFireEventModule (ref)
-	local infoForAllEvents = p0.infoForAllEvents or {}
+	local infoForAllEvents = p1.infoForAllEvents or {}
 	
-	local var4 = function()
+	local var1 = function()
 		-- upvalues: infoForAllEvents (write)
 		return infoForAllEvents
 	end
 	
 	return {
 		fireAnalyticsEvent = createFireEventModule({
-			EventStream = p0.eventLists.EventStream,
-			Diag = p0.eventLists.Diag,
-			Telemetry = p0.eventLists.Telemetry
+			EventStream = p1.eventLists.EventStream,
+			Diag = p1.eventLists.Diag,
+			Telemetry = p1.eventLists.Telemetry
 		})({
 			analytics = {
-				EventStream = p0.analyticsImpl.EventStream,
-				Diag = p0.analyticsImpl.Diag,
-				Telemetry = p0.analyticsImpl.Telemetry
+				EventStream = p1.analyticsImpl.EventStream,
+				Diag = p1.analyticsImpl.Diag,
+				Telemetry = p1.analyticsImpl.Telemetry
 			},
-			getInfoForAllEvents = var4,
-			loggerImpl = p0.loggerImpl
+			getInfoForAllEvents = var1,
+			loggerImpl = p1.loggerImpl
 		}),
-		updateInfoForAllEvents = function(p1)
+		updateInfoForAllEvents = function(p2)
 			-- upvalues: infoForAllEvents (write), cryoModule (copy)
-			infoForAllEvents = cryoModule.Dictionary.join(infoForAllEvents, p1)
+			infoForAllEvents = cryoModule.Dictionary.join(infoForAllEvents, p2)
 			
 			return infoForAllEvents
 		end,
-		getInfoForAllEvents = var4
+		getInfoForAllEvents = var1
 	}
 end

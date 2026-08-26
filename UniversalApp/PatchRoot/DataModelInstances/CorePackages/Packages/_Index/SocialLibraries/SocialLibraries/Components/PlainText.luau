@@ -15,31 +15,31 @@ plainText.defaultProps = {
 	[roact.Change.AbsoluteSize] = function() end
 }
 
-function plainText.render(p0)
+function plainText.render(p1)
 	-- upvalues: withStyle (ref), roact (ref), chatBubbleContainerModule (ref), fitTextLabel (ref)
-	return withStyle(function(p1)
-		-- upvalues: p0 (ref), roact (copy), chatBubbleContainerModule (copy), fitTextLabel (copy)
-		local innerPadding = p0.props.innerPadding
-		local body = p1.Font.Body
+	return withStyle(function(p2)
+		-- upvalues: p1 (ref), roact (copy), chatBubbleContainerModule (copy), fitTextLabel (copy)
+		local innerPadding = p1.props.innerPadding
+		local body = p2.Font.Body
 		
 		return roact.createElement(chatBubbleContainerModule, {
-			isIncoming = p0.props.isIncoming,
-			hasTail = p0.props.hasTail,
-			isPending = p0.props.isPending,
+			isIncoming = p1.props.isIncoming,
+			hasTail = p1.props.hasTail,
+			isPending = p1.props.isPending,
 			padding = innerPadding,
-			LayoutOrder = p0.props.LayoutOrder,
-			[roact.Change.AbsoluteSize] = p0.props[roact.Change.AbsoluteSize]
+			LayoutOrder = p1.props.LayoutOrder,
+			[roact.Change.AbsoluteSize] = p1.props[roact.Change.AbsoluteSize]
 		}, {
 			textContent = roact.createElement(fitTextLabel, {
 				BackgroundTransparency = 1,
-				Text = p0.props.text,
+				Text = p1.props.text,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				TextColor3 = p1.Theme.TextEmphasis.Color,
+				TextColor3 = p2.Theme.TextEmphasis.Color,
 				width = fitTextLabel.Width.FitToText,
-				maximumWidth = math.max(0, p0.props.maxWidth - innerPadding),
-				Font = p0.props.font or body.Font,
-				TextSize = p0.props.textSize or p1.Font.BaseSize * body.RelativeSize,
-				TextTransparency = if p0.props.isPending then p1.Theme.TextMuted.Transparency else 0,
+				maximumWidth = math.max(0, p1.props.maxWidth - innerPadding),
+				Font = p1.props.font or body.Font,
+				TextSize = p1.props.textSize or p2.Font.BaseSize * body.RelativeSize,
+				TextTransparency = if p1.props.isPending then p2.Theme.TextMuted.Transparency else 0,
 				TextYAlignment = Enum.TextYAlignment.Top
 			})
 		})

@@ -5,19 +5,19 @@ local _ = require(virtualEventsState.types)
 local virtualEventModel = require(virtualEventsState.network).NetworkingVirtualEvents.VirtualEventModel
 local loggerModule = require(virtualEventsState.logger)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), virtualEventModel (ref), loggerModule (ref), cryoModule (ref)
 	return roduxModule.createReducer({}, {
-		[p0.GetActiveVirtualEvents.Succeeded.name] = function(_, p1)
+		[p1.GetActiveVirtualEvents.Succeeded.name] = function(_, p2)
 			-- upvalues: virtualEventModel (copy), loggerModule (copy)
 			local t = {}
 			
-			for i, v in p1.responseBody.data do
-				local var5 = virtualEventModel.fromResponse(v)
+			for i, v in p2.responseBody.data do
+				local var1 = virtualEventModel.fromResponse(v)
 				
-				if var5 then
-					if var5.eventTime.startTime and var5.eventTime.endTime then
-						t[v.id] = var5
+				if var1 then
+					if var1.eventTime.startTime and var1.eventTime.endTime then
+						t[v.id] = var1
 					else
 						loggerModule:debug("Discarding VirtualEvent with ID {} (malformed start or end time)", v.id)
 					end
@@ -25,30 +25,30 @@ return function(p0)
 			end
 			return t
 		end,
-		[p0.GetActiveVirtualEvents.Failed.name] = function(_, _)
+		[p1.GetActiveVirtualEvents.Failed.name] = function(_, _)
 			return {}
 		end,
-		[p0.GetVirtualEvent.Succeeded.name] = function(p2, p3)
+		[p1.GetVirtualEvent.Succeeded.name] = function(p3, p4)
 			-- upvalues: virtualEventModel (copy), cryoModule (copy)
 			local t = {}
-			local var7 = virtualEventModel.fromResponse(p3.responseBody)
+			local var2 = virtualEventModel.fromResponse(p4.responseBody)
 			
-			if var7 then
-				t[var7.id] = var7
+			if var2 then
+				t[var2.id] = var2
 			end
-			return cryoModule.Dictionary.join(p2, t)
+			return cryoModule.Dictionary.join(p3, t)
 		end,
-		[p0.GetVirtualEvent.Failed.name] = function(p4, _)
-			return p4
+		[p1.GetVirtualEvent.Failed.name] = function(p3, _)
+			return p3
 		end,
-		[p0.UpdateMyRsvpStatus.Succeeded.name] = function(p5, p6)
+		[p1.UpdateMyRsvpStatus.Succeeded.name] = function(p3, p4)
 			-- upvalues: cryoModule (copy)
-			local var8 = p6.ids[1]
-			local var9 = p5[var8]
+			local var2 = p4.ids[1]
+			local var3 = p3[var2]
 			
-			return if var9 then cryoModule.Dictionary.join(p5, {
-				[var8] = cryoModule.Dictionary.join(var9, { userRsvpStatus = p6.postBody.rsvpStatus })
-			}) else p5
+			return if var3 then cryoModule.Dictionary.join(p3, {
+				[var2] = cryoModule.Dictionary.join(var3, { userRsvpStatus = p4.postBody.rsvpStatus })
+			}) else p3
 		end
 	})
 end

@@ -9,9 +9,9 @@ local robloxSubscriptionPurchaseAppModule = require(parent.RobloxSubscriptionPur
 local surfaceName = robloxSubscriptionPurchaseAppModule.SurfaceName
 local surfaceContext = robloxSubscriptionPurchaseAppModule.SurfaceContext
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), reactModule (ref), surfaceName (ref), surfaceContext (ref), inExpAmpWizardController (ref), ampWizardTransferConstantsModule (ref)
-	local onClose = p0.onClose
+	local onClose = p1.onClose
 	local upsellSubscriptionTitle = useLocalization(transferLocalizationKeysModule.Presets.SubscriptionUpsellContainer).UpsellSubscriptionTitle or ""
 	reactModule.useEffect(function()
 		-- upvalues: upsellSubscriptionTitle (ref), surfaceName (copy), surfaceContext (copy), inExpAmpWizardController (copy), onClose (ref), ampWizardTransferConstantsModule (copy)

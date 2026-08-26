@@ -22,57 +22,57 @@ local t_1 = {
 	[Enum.DeviceLevel.Medium] = 2,
 	[Enum.DeviceLevel.High] = 3
 }
-local var9 = nil
-local var10 = nil
+local var1 = nil
+local var2 = nil
 
 local function _()
-	-- upvalues: var9 (write), sduiForcePerfLevel (ref), t (ref), userInputService (ref), t_1 (ref)
-	if var9 == nil then
-		var9 = if sduiForcePerfLevel ~= "" then t_1[userInputService:GetDeviceLevel()] or 3 else t[sduiForcePerfLevel] or 3
+	-- upvalues: var1 (write), sduiForcePerfLevel (ref), t (ref), userInputService (ref), t_1 (ref)
+	if var1 == nil then
+		var1 = if sduiForcePerfLevel ~= "" then t_1[userInputService:GetDeviceLevel()] or 3 else t[sduiForcePerfLevel] or 3
 	end
-	return var9
+	return var1
 end
 
 local function getImageQualityValue()
-	-- upvalues: sduiForceImageQualityLevel (ref), t (ref), var9 (write), sduiForcePerfLevel (ref), userInputService (ref), t_1 (ref), var10 (write), guiService (ref), argCheckModule (ref)
+	-- upvalues: sduiForceImageQualityLevel (ref), t (ref), var1 (write), sduiForcePerfLevel (ref), userInputService (ref), t_1 (ref), var2 (write), guiService (ref), argCheckModule (ref)
 	if sduiForceImageQualityLevel ~= "" then
 		return t[sduiForceImageQualityLevel] or 3
-	elseif var9 == nil then
-		var9 = if sduiForcePerfLevel == "" then t_1[userInputService:GetDeviceLevel()] or t.High else t[sduiForcePerfLevel] or t.High
+	elseif var1 == nil then
+		var1 = if sduiForcePerfLevel == "" then t_1[userInputService:GetDeviceLevel()] or t.High else t[sduiForcePerfLevel] or t.High
 	end
-	local var12 = var9
+	local var3 = var1
 	
-	if var12 == 1 then
+	if var3 == 1 then
 		return 1
-	elseif var12 == 2 then
+	elseif var3 == 2 then
 		return 2
-	elseif var12 ~= 3 then
-		argCheckModule.assert(true, `Unexpected performanceLevel {var12}`)
+	elseif var3 ~= 3 then
+		argCheckModule.assert(true, `Unexpected performanceLevel {var3}`)
 		
 		return 3
-	elseif var10 == nil then
-		var10 = guiService:GetResolutionScale()
+	elseif var2 == nil then
+		var2 = guiService:GetResolutionScale()
 	end
-	return if var10 >= 2 then 3 else 2
+	return if var2 >= 2 then 3 else 2
 end
 
 return {
 	PERF_KEY = "performanceLevel",
 	IMAGE_QUALITY_KEY = "imageQualityLevel",
-	shouldIncludeKey = function(p0)
-		return p0 == "imageQualityLevel" or p0 == "performanceLevel"
+	shouldIncludeKey = function(p1)
+		return p1 == "imageQualityLevel" or p1 == "performanceLevel"
 	end,
 	shouldFailConditionEarly = function(p1, p2, p3)
-		-- upvalues: var9 (write), sduiForcePerfLevel (ref), t (ref), userInputService (ref), t_1 (ref), sduiErrorsModule (ref), getImageQualityValue (ref)
+		-- upvalues: var1 (write), sduiForcePerfLevel (ref), t (ref), userInputService (ref), t_1 (ref), sduiErrorsModule (ref), getImageQualityValue (ref)
 		if p1 == "performanceLevel" then
-			if var9 == nil then
-				var9 = if sduiForcePerfLevel == "" then t_1[userInputService:GetDeviceLevel()] or t.High else t[sduiForcePerfLevel] or t.High
+			if var1 == nil then
+				var1 = if sduiForcePerfLevel == "" then t_1[userInputService:GetDeviceLevel()] or t.High else t[sduiForcePerfLevel] or t.High
 			end
-			local var13 = var9
-			local var14 = t[p2]
+			local var3 = var1
+			local var4 = t[p2]
 			
-			if var14 then
-				return var13 ~= var14
+			if var4 then
+				return var3 ~= var4
 			end
 			p3.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidResponsiveCondition, { name = p1, value = p2 }, p3.appPage)
 			
@@ -80,140 +80,140 @@ return {
 		elseif p1 ~= "imageQualityLevel" then
 			return false
 		end
-		local var15 = getImageQualityValue()
-		local var16 = t[p2]
+		local var5 = getImageQualityValue()
+		local var6 = t[p2]
 		
-		if var16 then
-			return var15 ~= var16
+		if var6 then
+			return var5 ~= var6
 		end
 		p3.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidResponsiveCondition, { name = p1, value = p2 }, p3.appPage)
 		
 		return false
 	end,
 	setDeviceLevelValueForTests = function(value)
-		-- upvalues: var9 (write)
-		var9 = value
+		-- upvalues: var1 (write)
+		var1 = value
 	end,
 	setResolutionScaleForTests = function(value)
-		-- upvalues: var10 (write)
-		var10 = value
+		-- upvalues: var2 (write)
+		var2 = value
 	end,
-	adaptThumbnailDimensions = function(p4, p5, p6, p7, p8)
+	adaptThumbnailDimensions = function(p1, p2, p3, p4, p5)
 		-- upvalues: getImageQualityValue (ref), argCheckModule (ref)
-		local var17 = getImageQualityValue()
+		local var3 = getImageQualityValue()
 		
-		if var17 == 3 then
-			return p4, p5
-		elseif var17 == 1 then
-			return p6, p7
-		elseif var17 ~= 2 then
-			argCheckModule.assert(true, `Unexpected imageQualityLevel {var17}`)
-		elseif p4 == 1320 and p5 == 440 then
-			if p6 <= 660 and p7 <= 220 then
+		if var3 == 3 then
+			return p1, p2
+		elseif var3 == 1 then
+			return p3, p4
+		elseif var3 ~= 2 then
+			argCheckModule.assert(true, `Unexpected imageQualityLevel {var3}`)
+		elseif p1 == 1320 and p2 == 440 then
+			if p3 <= 660 and p4 <= 220 then
 				return 660, 220
 			end
-		elseif p4 == 384 and p5 == 216 then
-			if (p8 == "GameThumbnail" or p8 == "Asset") and (p6 <= 256 and p7 <= 144) then
+		elseif p1 == 384 and p2 == 216 then
+			if (p5 == "GameThumbnail" or p5 == "Asset") and (p3 <= 256 and p4 <= 144) then
 				return 256, 144
 			end
-		elseif p4 == 768 and p5 == 432 or p4 == 576 and p5 == 324 then
-			if (p8 == "GameThumbnail" or p8 == "Asset") and (p6 <= 384 and p7 <= 216) then
+		elseif p1 == 768 and p2 == 432 or p1 == 576 and p2 == 324 then
+			if (p5 == "GameThumbnail" or p5 == "Asset") and (p3 <= 384 and p4 <= 216) then
 				return 384, 216
 			end
-		elseif p4 == 512 and p5 == 512 then
-			if p8 == "GameIcon" and p6 <= 256 and p7 <= 256 then
+		elseif p1 == 512 and p2 == 512 then
+			if p5 == "GameIcon" and p3 <= 256 and p4 <= 256 then
 				return 256, 256
 			end
-		elseif p4 == 700 and p5 == 700 and (p8 == "Asset" and p6 <= 420) and p7 <= 420 then
+		elseif p1 == 700 and p2 == 700 and (p5 == "Asset" and p3 <= 420) and p4 <= 420 then
 			return 420, 420
 		end
-		return p4, p5
+		return p1, p2
 	end,
-	checkResponsiveConditions = function(p9, p10, p11, p12, p13, p14)
-		-- upvalues: sduiConditionKey (ref), getImageQualityValue (ref), t (ref), sduiErrorsModule (ref), var9 (write), sduiForcePerfLevel (ref), userInputService (ref), t_1 (ref)
+	checkResponsiveConditions = function(p1, p2, p3, p4, p5, p6)
+		-- upvalues: sduiConditionKey (ref), getImageQualityValue (ref), t (ref), sduiErrorsModule (ref), var1 (write), sduiForcePerfLevel (ref), userInputService (ref), t_1 (ref)
 		local t_2 = {}
 		
-		if not p9 then
+		if not p1 then
 			return t_2
 		end
-		local var19
-		assert(p9, "allConditionalProps must exist")
+		local var3
+		assert(p1, "allConditionalProps must exist")
 		
-		for i, v in p9 do
-			var19 = nil
+		for i, v in p1 do
+			var3 = nil
 			
 			if v.conditions then
 				for i_1, v_1 in v.conditions do
-					local var20, var21
+					local var4, var5
 					if i_1 == sduiConditionKey.minScreenWidth then
-						if p10.X < v_1 then
-							var19 = true
+						if p2.X < v_1 then
+							var3 = true
 							break
 						end
 					elseif i_1 == sduiConditionKey.maxScreenWidth then
-						if v_1 < p10.X then
-							var19 = true
+						if v_1 < p2.X then
+							var3 = true
 							break
 						end
 					elseif i_1 == sduiConditionKey.isPortrait then
-						if v_1 and p10.Y < p10.X then
-							var19 = true
+						if v_1 and p2.Y < p2.X then
+							var3 = true
 							break
-						elseif not v_1 and p10.X < p10.Y then
-							var19 = true
+						elseif not v_1 and p2.X < p2.Y then
+							var3 = true
 							break
 						end
 					elseif i_1 == sduiConditionKey.lastInput then
-						if v_1 ~= p11 then
-							var19 = true
+						if v_1 ~= p3 then
+							var3 = true
 							break
 						end
 					elseif i_1 == sduiConditionKey.preferredInput then
-						if v_1 ~= p12 then
-							var19 = true
+						if v_1 ~= p4 then
+							var3 = true
 							break
 						end
 					elseif i_1 == sduiConditionKey.isSpatial then
-						if not p13 and v_1 or p13 and not v_1 then
-							var19 = true
+						if not p5 and v_1 or p5 and not v_1 then
+							var3 = true
 							break
 						end
 					elseif i_1 == sduiConditionKey.imageQualityLevel then
-						var20 = getImageQualityValue()
-						var21 = t[v_1]
+						var4 = getImageQualityValue()
+						var5 = t[v_1]
 						
-						if not var21 then
-							p14.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidResponsiveCondition, { name = i_1, value = v_1 }, p14.appPage)
-							var19 = true
+						if not var5 then
+							p6.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidResponsiveCondition, { name = i_1, value = v_1 }, p6.appPage)
+							var3 = true
 							break
-						elseif var20 ~= var21 then
-							var19 = true
+						elseif var4 ~= var5 then
+							var3 = true
 							break
 						end
 					elseif i_1 == sduiConditionKey.performanceLevel then
-						if var9 == nil then
+						if var1 == nil then
 							if sduiForcePerfLevel == "" then
-								var9 = t_1[userInputService:GetDeviceLevel()] or t.High
+								var1 = t_1[userInputService:GetDeviceLevel()] or t.High
 							else
-								var21 = t[sduiForcePerfLevel] or t.High
-								var9 = var21
+								var5 = t[sduiForcePerfLevel] or t.High
+								var1 = var5
 							end
 						end
-						var20 = var9
-						var21 = t[v_1]
+						var4 = var1
+						var5 = t[v_1]
 						
-						if not var21 then
-							p14.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidResponsiveCondition, { name = i_1, value = v_1 }, p14.appPage)
-							var19 = true
+						if not var5 then
+							p6.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidResponsiveCondition, { name = i_1, value = v_1 }, p6.appPage)
+							var3 = true
 							break
-						elseif var20 ~= var21 then
-							var19 = true
+						elseif var4 ~= var5 then
+							var3 = true
 							break
 						end
 					end
 				end
 			end
-			t_2[i] = var19
+			t_2[i] = var3
 		end
 		return t_2
 	end,

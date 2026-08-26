@@ -18,37 +18,37 @@ enterOutfitNamePrompt.validateProps = tModule.strictInterface({
 	performCreateOutfit = tModule.callback
 })
 
-function enterOutfitNamePrompt.init(p0)
+function enterOutfitNamePrompt.init(p1)
 	-- upvalues: roactModule (ref)
-	p0:setState({
+	p1:setState({
 		outfitName = "",
 		alertPosition = UDim2.fromScale(0.5, 0.5)
 	})
-	p0.textBoxRef = roactModule.createRef()
+	p1.textBoxRef = roactModule.createRef()
 	
 	function p0.confirmCreateOutfit()
-		-- upvalues: p0 (ref)
-		p0.props.performCreateOutfit(p0.state.outfitName)
+		-- upvalues: p1 (ref)
+		p1.props.performCreateOutfit(p1.state.outfitName)
 	end
 	
-	function p0.textUpdated(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ outfitName = p1 })
+	function p0.textUpdated(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ outfitName = p2 })
 	end
 end
 
-function enterOutfitNamePrompt.render(p2)
+function enterOutfitNamePrompt.render(p1)
 	-- upvalues: roactModule (ref), promptWithTextFieldModule (ref), robloxTranslatorModule (ref), buttonType (ref)
 	return roactModule.createElement(promptWithTextFieldModule, {
-		fieldText = p2.state.outfitName,
-		onFieldTextUpdated = p2.textUpdated,
+		fieldText = p1.state.outfitName,
+		onFieldTextUpdated = p1.textUpdated,
 		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptTitle"),
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
-						onActivated = p2.props.signalCreateOutfitPermissionDenied,
+						onActivated = p1.props.signalCreateOutfitPermissionDenied,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptNo")
 					}
 				},
@@ -56,8 +56,8 @@ function enterOutfitNamePrompt.render(p2)
 					isDefaultChild = false,
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						isDisabled = p2.state.outfitName == "",
-						onActivated = p2.confirmCreateOutfit,
+						isDisabled = p1.state.outfitName == "",
+						onActivated = p1.confirmCreateOutfit,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.EnterOutfitNamePromptYes")
 					}
 				}
@@ -66,18 +66,18 @@ function enterOutfitNamePrompt.render(p2)
 	})
 end
 
-return roactRoduxModule.connect(function(p3)
-	return { screenSize = p3.screenSize }
-end, function(p4)
+return roactRoduxModule.connect(function(p1)
+	return { screenSize = p1.screenSize }
+end, function(p1)
 	-- upvalues: signalCreateOutfitPermissionDeniedModule (ref), performCreateOutfitModule (ref)
 	return {
 		signalCreateOutfitPermissionDenied = function()
-			-- upvalues: p4 (ref), signalCreateOutfitPermissionDeniedModule (copy)
-			return p4(signalCreateOutfitPermissionDeniedModule)
+			-- upvalues: p1 (ref), signalCreateOutfitPermissionDeniedModule (copy)
+			return p1(signalCreateOutfitPermissionDeniedModule)
 		end,
-		performCreateOutfit = function(p5)
-			-- upvalues: p4 (ref), performCreateOutfitModule (copy)
-			return p4(performCreateOutfitModule(p5))
+		performCreateOutfit = function(p2)
+			-- upvalues: p1 (ref), performCreateOutfitModule (copy)
+			return p1(performCreateOutfitModule(p2))
 		end
 	}
 end)(enterOutfitNamePrompt)

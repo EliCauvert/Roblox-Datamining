@@ -9,19 +9,19 @@ local array = luauPolyfillModule.Array
 local set = luauPolyfillModule.Set
 local weakMap = luauPolyfillModule.WeakMap
 local broadcast = nil
-local var3 = slot.new()
-t.cacheSlot = var3
-local var4 = weakMap.new()
+local var1 = slot.new()
+t.cacheSlot = var1
+local var2 = weakMap.new()
 
-local function getCacheInfo(p0)
-	-- upvalues: var4 (ref), set (ref), dep (ref)
-	local var6 = var4:get(p0)
+local function getCacheInfo(p1)
+	-- upvalues: var2 (ref), set (ref), dep (ref)
+	local var3 = var2:get(p1)
 	
-	if not var6 then
-		var6 = { vars = set.new(), dep = dep() }
-		var4:set(p0, var6)
+	if not var3 then
+		var3 = { vars = set.new(), dep = dep() }
+		var2:set(p1, var3)
 	end
-	return var6
+	return var3
 end
 
 function t.forgetCache(p1)
@@ -32,86 +32,86 @@ function t.forgetCache(p1)
 	end)
 end
 
-function t.recallCache(p3)
+function t.recallCache(p1)
 	-- upvalues: getCacheInfo (ref)
-	getCacheInfo(p3).vars:forEach(function(p4)
-		-- upvalues: p3 (ref)
-		return p4:attachCache(p3)
+	getCacheInfo(p1).vars:forEach(function(p2)
+		-- upvalues: p1 (ref)
+		return p2:attachCache(p1)
 	end)
 end
 
-function t.makeVar(p5)
-	-- upvalues: set (ref), getCacheInfo (ref), broadcast (write), array (ref), var3 (ref)
-	local var7 = set.new()
-	local var8 = set.new()
+function t.makeVar(p1)
+	-- upvalues: set (ref), getCacheInfo (ref), broadcast (write), array (ref), var1 (ref)
+	local var3 = set.new()
+	local var4 = set.new()
 	local tbl = nil
-	local var10 = nil
+	local var5 = nil
 	tbl = setmetatable({}, {
 		__call = function(_, ...)
-			-- upvalues: p5 (write), var7 (ref), getCacheInfo (copy), tbl (write), broadcast (copy), array (copy), var8 (ref), var3 (copy), var10 (write)
+			-- upvalues: p1 (write), var3 (ref), getCacheInfo (copy), tbl (write), broadcast (copy), array (copy), var4 (ref), var1 (copy), var5 (write)
 			if select("#", ...) >= 1 then
-				local var11 = ({ ... })[1]
+				local var6 = ({ ... })[1]
 				
-				if p5 ~= var11 then
-					p5 = var11
-					var7:forEach(function(p6)
+				if p1 ~= var6 then
+					p1 = var6
+					var3:forEach(function(p2)
 						-- upvalues: getCacheInfo (copy), tbl (copy), broadcast (copy)
-						getCacheInfo(p6).dep:dirty(tbl)
-						broadcast(p6)
+						getCacheInfo(p2).dep:dirty(tbl)
+						broadcast(p2)
 					end)
-					local var12 = array.from(var8)
-					var8:clear()
-					array.forEach(var12, function(p7)
-						-- upvalues: p5 (copy)
-						p7(p5)
+					local var7 = array.from(var4)
+					var4:clear()
+					array.forEach(var7, function(p2)
+						-- upvalues: p1 (copy)
+						p2(p1)
 					end)
 				end
 			else
-				local value = var3:getValue()
+				local value = var1:getValue()
 				
 				if value then
-					var10(value)
+					var5(value)
 					getCacheInfo(value).dep(tbl)
 				end
 			end
-			return p5
+			return p1
 		end
 	})
 	
-	function tbl.onNextChange(_, p8)
-		-- upvalues: var8 (ref)
-		var8:add(p8)
+	function tbl.onNextChange(_, p2)
+		-- upvalues: var4 (ref)
+		var4:add(p2)
 		
 		return function()
-			-- upvalues: var8 (copy), p8 (ref)
-			var8:delete(p8)
+			-- upvalues: var4 (copy), p2 (ref)
+			var4:delete(p2)
 		end
 	end
 	
-	var10 = function(p9)
-		-- upvalues: var7 (ref), getCacheInfo (copy), tbl (write)
-		var7:add(p9)
-		getCacheInfo(p9).vars:add(tbl)
+	var5 = function(p2)
+		-- upvalues: var3 (ref), getCacheInfo (copy), tbl (write)
+		var3:add(p2)
+		getCacheInfo(p2).vars:add(tbl)
 		
 		return tbl
 	end
 	
-	function tbl.attachCache(_, p10)
-		-- upvalues: var10 (write)
-		return var10(p10)
+	function tbl.attachCache(_, p2)
+		-- upvalues: var5 (write)
+		return var5(p2)
 	end
 	
-	function tbl.forgetCache(_, p11)
-		-- upvalues: var7 (ref)
-		return var7:delete(p11)
+	function tbl.forgetCache(_, p2)
+		-- upvalues: var3 (ref)
+		return var3:delete(p2)
 	end
 	
 	return tbl
 end
 
-broadcast = function(p12)
-	if p12.broadcastWatches ~= nil then
-		p12:broadcastWatches()
+broadcast = function(p1)
+	if p1.broadcastWatches ~= nil then
+		p1:broadcastWatches()
 	end
 end
 

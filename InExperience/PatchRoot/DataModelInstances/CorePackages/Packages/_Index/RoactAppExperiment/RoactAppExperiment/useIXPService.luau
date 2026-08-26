@@ -4,7 +4,7 @@ local experimentContextModule = require(script.Parent.ExperimentContext)
 
 return function()
 	-- upvalues: reactModule (ref), experimentContextModule (ref), IXPService (ref)
-	local var3 = reactModule.useContext(experimentContextModule)
+	local var1 = reactModule.useContext(experimentContextModule)
 	
-	return var3 or IXPService
+	return var1 or IXPService
 end

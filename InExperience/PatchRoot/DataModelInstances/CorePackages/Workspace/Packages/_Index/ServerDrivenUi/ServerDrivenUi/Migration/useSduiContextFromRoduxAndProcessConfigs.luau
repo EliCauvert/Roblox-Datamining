@@ -13,53 +13,53 @@ local _ = require(parent.SduiCoreSystem)
 local fFlagLuaAppLayoutParamsInContext = require(parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
 local fFlagLuaAppUseEffectInSignalPreprocessing = require(parent.SharedFlags).FFlagLuaAppUseEffectInSignalPreprocessing
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: useSelector (ref), sduiConfigReducerModule (ref), tutilsModule (ref), useSduiContextModule (ref), fFlagLuaAppLayoutParamsInContext (ref), fFlagLuaAppUseEffectInSignalPreprocessing (ref), reactModule (ref), getSduiFeedStoreModule (ref), getItemCollectionKeyModule (ref), processCollectionConfigModule (ref)
-	p2 = p2 or p0
-	local var9 = useSelector(function(p3)
-		-- upvalues: sduiConfigReducerModule (copy), p2 (ref)
+	p3 = p3 or p1
+	local var1 = useSelector(function(p4)
+		-- upvalues: sduiConfigReducerModule (copy), p3 (ref)
 		local t = {}
-		local var12 = p3.Personalization[sduiConfigReducerModule.key][p2]
+		local var2 = p4.Personalization[sduiConfigReducerModule.key][p3]
 		
-		if var12 then
-			t.templates = if var12.rootConfig then var12.rootConfig.templates else nil
-			t.dataUpdatedTimestamp = var12.dataUpdatedTimestamp
-			t.itemCollections = var12.itemCollections
+		if var2 then
+			t.templates = if var2.rootConfig then var2.rootConfig.templates else nil
+			t.dataUpdatedTimestamp = var2.dataUpdatedTimestamp
+			t.itemCollections = var2.itemCollections
 		end
 		return t
 	end, tutilsModule.shallowEqual)
-	local var10 = useSduiContextModule({
-		appPage = p0,
-		templates = var9.templates,
-		dataUpdatedTimestamp = var9.dataUpdatedTimestamp,
-		pageLayoutConfig = if fFlagLuaAppLayoutParamsInContext then p1 else nil
+	local var2 = useSduiContextModule({
+		appPage = p1,
+		templates = var1.templates,
+		dataUpdatedTimestamp = var1.dataUpdatedTimestamp,
+		pageLayoutConfig = if fFlagLuaAppLayoutParamsInContext then p2 else nil
 	});
 	(if fFlagLuaAppUseEffectInSignalPreprocessing then reactModule.useEffect else reactModule.useLayoutEffect)(function()
-		-- upvalues: getSduiFeedStoreModule (copy), p2 (ref), var9 (ref), getItemCollectionKeyModule (copy), processCollectionConfigModule (copy), var10 (ref)
-		local var13 = getSduiFeedStoreModule(p2)
+		-- upvalues: getSduiFeedStoreModule (copy), p3 (ref), var1 (ref), getItemCollectionKeyModule (copy), processCollectionConfigModule (copy), var2 (ref)
+		local var3 = getSduiFeedStoreModule(p3)
 		local t = {}
 		
-		if var9.itemCollections then
-			for i, v in var9.itemCollections do
+		if var1.itemCollections then
+			for i, v in var1.itemCollections do
 				t[getItemCollectionKeyModule(v.topicId, v.sortIndex)] = {
-					sduiConfig = processCollectionConfigModule(v.sduiConfig, v.topicId, var10),
+					sduiConfig = processCollectionConfigModule(v.sduiConfig, v.topicId, var2),
 					dataUpdatedTimestamp = v.dataUpdatedTimestamp
 				}
 			end
-			var13.updateData({
-				templates = var9.templates,
+			var3.updateData({
+				templates = var1.templates,
 				itemCollections = t,
-				dataUpdatedTimestamp = var9.dataUpdatedTimestamp
+				dataUpdatedTimestamp = var1.dataUpdatedTimestamp
 			})
 		end
 		return function() end
 	end, {
-		var10,
-		var9.itemCollections,
-		var9.templates,
-		var9.dataUpdatedTimestamp,
-		p2
+		var2,
+		var1.itemCollections,
+		var1.templates,
+		var1.dataUpdatedTimestamp,
+		p3
 	})
 	
-	return var10
+	return var2
 end

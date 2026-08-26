@@ -96,10 +96,10 @@ local t_3 = {
 	[Enum.UserCFrame.RightHand] = Enum.VRTouchpad.Right
 }
 
-function t_2.new(p0)
+function t_2.new(p1)
 	-- upvalues: t_2 (ref), t_3 (ref), VRService (ref), create (ref), t (ref), granite (ref)
 	local tbl = setmetatable({}, t_2)
-	tbl.userCFrame = p0
+	tbl.userCFrame = p1
 	tbl.touchpad = t_3[tbl.userCFrame]
 	tbl.touchpadMode = VRService:GetTouchpadMode(tbl.touchpad)
 	tbl.onTouchpadModeChangedConn = VRService.TouchpadModeChanged:connect(function(...)
@@ -121,12 +121,12 @@ function t_2.new(p0)
 	tbl.parts = {}
 	
 	for i, v in pairs(t) do
-		local var7 = Vector3.new(0.032999999821, 0.032999999821, 0.032999999821)
+		local var1 = Vector3.new(0.032999999821, 0.032999999821, 0.032999999821)
 		
 		if v.scale then
-			var7 *= v.scale
+			var1 *= v.scale
 		end
-		local var8 = create("Part")({
+		local var2 = create("Part")({
 			Anchored = true,
 			CanCollide = false,
 			CanQuery = false,
@@ -139,21 +139,21 @@ function t_2.new(p0)
 		})
 		local _ = create("SpecialMesh")({
 			Name = "Mesh",
-			Parent = var8,
+			Parent = var2,
 			MeshId = v.meshId,
 			TextureId = v.textureId,
-			Scale = var7
+			Scale = var1
 		})
 		local _ = create("Weld")({
 			Name = "Weld",
-			Parent = var8,
+			Parent = var2,
 			Part0 = tbl.origin,
-			Part1 = var8,
+			Part1 = var2,
 			C0 = v.offset
 		})
-		tbl.parts[i] = var8
+		tbl.parts[i] = var2
 	end
-	local var6 = create("Part")({
+	local var3 = create("Part")({
 		Name = "TrackpadIndicator",
 		Anchored = true,
 		Transparency = 1,
@@ -168,97 +168,97 @@ function t_2.new(p0)
 	})
 	create("Weld")({
 		Name = "Weld",
-		Parent = var6,
+		Parent = var3,
 		Part0 = tbl.origin,
-		Part1 = var6,
+		Part1 = var3,
 		C0 = t.Trackpad.offset
 	})
-	tbl.parts.TrackpadIndicator = var6
+	tbl.parts.TrackpadIndicator = var3
 	tbl.model.PrimaryPart = tbl.origin
 	tbl:onTouchpadModeChanged(tbl.touchpad, VRService:GetTouchpadMode(tbl.touchpad))
 	
 	return tbl
 end
 
-function t_2:setPartVisible(p1, p2)
-	local var9 = self.parts[p1]
+function t_2:setPartVisible(p2, p3)
+	local var4 = self.parts[p2]
 	
-	if var9 then
-		var9.Transparency = if p2 then 0 else 1
+	if var4 then
+		var4.Transparency = if p3 then 0 else 1
 	end
 end
 
-function t_2:setABXYEnabled(p3)
-	self:setPartVisible("ButtonA", p3)
-	self:setPartVisible("ButtonB", p3)
-	self:setPartVisible("ButtonX", p3)
-	self:setPartVisible("ButtonY", p3)
+function t_2:setABXYEnabled(p2)
+	self:setPartVisible("ButtonA", p2)
+	self:setPartVisible("ButtonB", p2)
+	self:setPartVisible("ButtonX", p2)
+	self:setPartVisible("ButtonY", p2)
 end
 
-function t_2:setCFrame(p4)
-	self.model:SetPrimaryPartCFrame(p4)
+function t_2:setCFrame(p2)
+	self.model:SetPrimaryPartCFrame(p2)
 end
 
-function t_2:setCFrameAndScale(p5, p6)
+function t_2:setCFrameAndScale(p2, p3)
 	-- upvalues: t (ref)
-	self.model:SetPrimaryPartCFrame(p5)
+	self.model:SetPrimaryPartCFrame(p2)
 	
-	if self.scale ~= p6 then
-		self.scale = p6
+	if self.scale ~= p3 then
+		self.scale = p3
 		
 		for i, v in pairs(t) do
-			local var10 = self.parts[i]
+			local var4 = self.parts[i]
 			
-			if var10 then
-				local var11 = Vector3.new(0.032999999821, 0.032999999821, 0.032999999821)
+			if var4 then
+				local var5 = Vector3.new(0.032999999821, 0.032999999821, 0.032999999821)
 				
 				if v.scale then
-					var11 *= v.scale
+					var5 *= v.scale
 				end
-				local mesh = var10:FindFirstChild("Mesh")
-				local weld = var10:FindFirstChild("Weld")
-				local var14 = CFrame.new(v.offset.p * self.scale) * (v.offset - v.offset.p)
-				var10.CFrame = p5 * var14
+				local mesh = var4:FindFirstChild("Mesh")
+				local weld = var4:FindFirstChild("Weld")
+				local var6 = CFrame.new(v.offset.p * self.scale) * (v.offset - v.offset.p)
+				var4.CFrame = p2 * var6
 				
 				if mesh then
-					mesh.Scale = var11 * self.scale
+					mesh.Scale = var5 * self.scale
 				end
 				if weld then
-					weld.C0 = var14
+					weld.C0 = var6
 				end
 			end
 		end
 	end
 end
 
-function t_2:setButtonState(p7, p8)
+function t_2:setButtonState(p4, p5)
 	-- upvalues: t (ref)
-	local var15 = t[p7]
+	local var7 = t[p4]
 	
-	if not var15 then return end
-	local offset = var15.offset
-	local moveOffset = var15.moveOffset
+	if not var7 then return end
+	local offset = var7.offset
+	local moveOffset = var7.moveOffset
 	
 	if offset and moveOffset then
 		offset = CFrame.new(offset.p * self.scale) * (offset - offset.p)
 		moveOffset = CFrame.new(moveOffset.p * self.scale) * (moveOffset - moveOffset.p)
-		local var16 = self.parts[p7]
+		local var8 = self.parts[p4]
 		
-		if var16 then
-			local mesh = var16:FindFirstChild("Mesh")
-			local weld = var16:FindFirstChild("Weld")
+		if var8 then
+			local mesh = var8:FindFirstChild("Mesh")
+			local weld = var8:FindFirstChild("Weld")
 			
 			if weld then
-				if p8 then
-					var16.CFrame = self.origin.CFrame * offset * moveOffset
+				if p5 then
+					var8.CFrame = self.origin.CFrame * offset * moveOffset
 					weld.C0 = offset * moveOffset
 				else
-					var16.CFrame = self.origin.CFrame * offset
+					var8.CFrame = self.origin.CFrame * offset
 					weld.C0 = offset
 				end
 			end
 			if mesh then
-				if p8 then
+				if p5 then
 					mesh.VertexColor = Vector3.new(0.5, 0.5, 0.5)
 					
 					return
@@ -269,7 +269,7 @@ function t_2:setButtonState(p7, p8)
 	end
 end
 
-function t_2:setTriggerState(p9)
+function t_2:setTriggerState(p4)
 	-- upvalues: t (ref)
 	local offset = t.Trigger.offset
 	offset = CFrame.new(offset.p * self.scale) * (offset - offset.p)
@@ -278,13 +278,13 @@ function t_2:setTriggerState(p9)
 	
 	if weld then
 		local vector3 = Vector3.new(0, 0.05 * self.scale, -0.025 * self.scale)
-		local var21 = offset * CFrame.new(vector3) * CFrame.Angles(p9 * -0.349065850399 + 0, 0, 0) * CFrame.new(-vector3)
-		trigger.CFrame = self.origin.CFrame * var21
-		weld.C0 = var21
+		local var7 = offset * CFrame.new(vector3) * CFrame.Angles(p4 * -0.349065850399 + 0, 0, 0) * CFrame.new(-vector3)
+		trigger.CFrame = self.origin.CFrame * var7
+		weld.C0 = var7
 	end
 end
 
-function t_2:setTrackpadState(p10)
+function t_2:setTrackpadState(p4)
 	-- upvalues: t (ref)
 	local trackpadIndicator = self.parts.TrackpadIndicator
 	local weld = trackpadIndicator:FindFirstChild("Weld")
@@ -292,77 +292,77 @@ function t_2:setTrackpadState(p10)
 	offset = CFrame.new(offset.p * self.scale) * (offset - offset.p)
 	
 	if weld then
-		local var23 = offset * CFrame.new(0, 0.01 * self.scale, 0) * (CFrame.Angles(0.11344640138, 0, 0) * CFrame.new(0, 0.002 * self.scale * p10.magnitude ^ 3, 0)):toWorldSpace(CFrame.new(Vector3.new(p10.X, 0, -p10.Y) * 0.055))
-		trackpadIndicator.CFrame = self.origin.CFrame * var23
-		weld.C0 = var23
+		local var7 = offset * CFrame.new(0, 0.01 * self.scale, 0) * (CFrame.Angles(0.11344640138, 0, 0) * CFrame.new(0, 0.002 * self.scale * p4.magnitude ^ 3, 0)):toWorldSpace(CFrame.new(Vector3.new(p4.X, 0, -p4.Y) * 0.055))
+		trackpadIndicator.CFrame = self.origin.CFrame * var7
+		weld.C0 = var7
 	end
 end
 
-function t_2:onButtonInputChanged(p11, p12)
-	if self.userCFrame == Enum.UserCFrame.RightHand and p11.KeyCode == Enum.KeyCode.ButtonR3 or self.userCFrame == Enum.UserCFrame.LeftHand and p11.KeyCode == Enum.KeyCode.ButtonL3 then
-		self:setButtonState("Trackpad", p12)
+function t_2:onButtonInputChanged(p4, p5)
+	if self.userCFrame == Enum.UserCFrame.RightHand and p4.KeyCode == Enum.KeyCode.ButtonR3 or self.userCFrame == Enum.UserCFrame.LeftHand and p4.KeyCode == Enum.KeyCode.ButtonL3 then
+		self:setButtonState("Trackpad", p5)
 		
 		return
-	elseif self.userCFrame == Enum.UserCFrame.RightHand and p11.KeyCode == Enum.KeyCode.ButtonR1 or self.userCFrame == Enum.UserCFrame.LeftHand and p11.KeyCode == Enum.KeyCode.ButtonL1 then
-		self:setButtonState("LeftGrip", p12)
-		self:setButtonState("RightGrip", p12)
+	elseif self.userCFrame == Enum.UserCFrame.RightHand and p4.KeyCode == Enum.KeyCode.ButtonR1 or self.userCFrame == Enum.UserCFrame.LeftHand and p4.KeyCode == Enum.KeyCode.ButtonL1 then
+		self:setButtonState("LeftGrip", p5)
+		self:setButtonState("RightGrip", p5)
 		
 		return
-	elseif self.userCFrame == Enum.UserCFrame.RightHand and p11.KeyCode == Enum.KeyCode.ButtonStart or self.userCFrame == Enum.UserCFrame.LeftHand and p11.KeyCode == Enum.KeyCode.ButtonSelect then
-		self:setButtonState("MenuButton", p12)
+	elseif self.userCFrame == Enum.UserCFrame.RightHand and p4.KeyCode == Enum.KeyCode.ButtonStart or self.userCFrame == Enum.UserCFrame.LeftHand and p4.KeyCode == Enum.KeyCode.ButtonSelect then
+		self:setButtonState("MenuButton", p5)
 		
 		return
 	elseif self.touchpadMode == Enum.VRTouchpadMode.ABXY then
-		if p11.KeyCode == Enum.KeyCode.ButtonA then
-			self:setButtonState("ButtonA", p12)
+		if p4.KeyCode == Enum.KeyCode.ButtonA then
+			self:setButtonState("ButtonA", p5)
 			
 			return
-		elseif p11.KeyCode == Enum.KeyCode.ButtonB then
-			self:setButtonState("ButtonB", p12)
+		elseif p4.KeyCode == Enum.KeyCode.ButtonB then
+			self:setButtonState("ButtonB", p5)
 			
 			return
-		elseif p11.KeyCode == Enum.KeyCode.ButtonX then
-			self:setButtonState("ButtonX", p12)
+		elseif p4.KeyCode == Enum.KeyCode.ButtonX then
+			self:setButtonState("ButtonX", p5)
 			
 			return
-		elseif p11.KeyCode == Enum.KeyCode.ButtonY then
-			self:setButtonState("ButtonY", p12)
+		elseif p4.KeyCode == Enum.KeyCode.ButtonY then
+			self:setButtonState("ButtonY", p5)
 			
 			return
 		end
 	end
 end
 
-function t_2:onInputBegan(p13)
-	self:onButtonInputChanged(p13, true)
+function t_2:onInputBegan(p4)
+	self:onButtonInputChanged(p4, true)
 	
-	if self.userCFrame == Enum.UserCFrame.RightHand and p13.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and p13.KeyCode == Enum.KeyCode.Thumbstick1 then
+	if self.userCFrame == Enum.UserCFrame.RightHand and p4.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and p4.KeyCode == Enum.KeyCode.Thumbstick1 then
 		self:setPartVisible("TrackpadIndicator", true)
 	end
 end
 
-function t_2:onInputChanged(p14)
-	if self.userCFrame == Enum.UserCFrame.RightHand and p14.KeyCode == Enum.KeyCode.ButtonR2 or self.userCFrame == Enum.UserCFrame.LeftHand and p14.KeyCode == Enum.KeyCode.ButtonL2 then
-		self:setTriggerState(p14.Position.Z)
+function t_2:onInputChanged(p4)
+	if self.userCFrame == Enum.UserCFrame.RightHand and p4.KeyCode == Enum.KeyCode.ButtonR2 or self.userCFrame == Enum.UserCFrame.LeftHand and p4.KeyCode == Enum.KeyCode.ButtonL2 then
+		self:setTriggerState(p4.Position.Z)
 	end
-	if self.userCFrame == Enum.UserCFrame.RightHand and p14.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and p14.KeyCode == Enum.KeyCode.Thumbstick1 then
-		self:setTrackpadState(p14.Position)
+	if self.userCFrame == Enum.UserCFrame.RightHand and p4.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and p4.KeyCode == Enum.KeyCode.Thumbstick1 then
+		self:setTrackpadState(p4.Position)
 	end
 end
 
-function t_2:onInputEnded(p15)
-	self:onButtonInputChanged(p15, false)
+function t_2:onInputEnded(p4)
+	self:onButtonInputChanged(p4, false)
 	
-	if self.userCFrame == Enum.UserCFrame.RightHand and p15.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and p15.KeyCode == Enum.KeyCode.Thumbstick1 then
+	if self.userCFrame == Enum.UserCFrame.RightHand and p4.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and p4.KeyCode == Enum.KeyCode.Thumbstick1 then
 		self:setPartVisible("TrackpadIndicator", false)
 	end
 end
 
-function t_2:onTouchpadModeChanged(p16, p17)
-	if p16 ~= self.touchpad then return end
-	self.touchpadMode = p17
+function t_2:onTouchpadModeChanged(p4, p5)
+	if p4 ~= self.touchpad then return end
+	self.touchpadMode = p5
 	
-	if p17 == Enum.VRTouchpadMode.ABXY then
+	if p5 == Enum.VRTouchpadMode.ABXY then
 		self:setABXYEnabled(true)
 		
 		return
@@ -378,11 +378,11 @@ function t_2:destroy()
 	self.model:Destroy()
 end
 
-function t_2:getButtonPart(p18)
+function t_2:getButtonPart(p4)
 	-- upvalues: t_1 (ref)
-	local var24 = t_1[p18]
+	local var7 = t_1[p4]
 	
-	return if var24 then self.parts[var24] else nil
+	return if var7 then self.parts[var7] else nil
 end
 
 return t_2

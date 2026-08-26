@@ -17,56 +17,56 @@ local t = {
 	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), popoverFocusRestorationContextModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), fFlagAXTimedOptionsPopoverSkipFocusOnCursor (ref), useLastInputMode (ref), getFirstFocusableDescendant (ref), guiService (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
-	local var8 = reactModule.useRef(nil)
-	local var9, var10 = reactModule.useState(false)
-	local var11 = if fFlagAXFixIaBTimedOptionsPopoverFocus then reactModule.useContext(popoverFocusRestorationContextModule) else nil
+	local var1 = reactModule.useRef(nil)
+	local var2, var3 = reactModule.useState(false)
+	local var4 = if fFlagAXFixIaBTimedOptionsPopoverFocus then reactModule.useContext(popoverFocusRestorationContextModule) else nil
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), p1 (ref)
-		var10(p1)
-	end, { p1 })
-	useFocusNavigableSurfaceRegistryConnection(var8 and var8.current, focusNavigableSurfaceIdentifierEnum.PopUp, var9)
-	local var12 = if fFlagAXFixIaBTimedOptionsPopoverFocus and fFlagAXTimedOptionsPopoverSkipFocusOnCursor then useLastInputMode() else nil
+		-- upvalues: var3 (ref), p2 (ref)
+		var3(p2)
+	end, { p2 })
+	useFocusNavigableSurfaceRegistryConnection(var1 and var1.current, focusNavigableSurfaceIdentifierEnum.PopUp, var2)
+	local var5 = if fFlagAXFixIaBTimedOptionsPopoverFocus and fFlagAXTimedOptionsPopoverSkipFocusOnCursor then useLastInputMode() else nil
 	
 	if fFlagAXFixIaBTimedOptionsPopoverFocus then
-		local var13 = reactModule.useRef(false)
+		local var6 = reactModule.useRef(false)
 		reactModule.useEffect(function()
-			-- upvalues: fFlagAXTimedOptionsPopoverSkipFocusOnCursor (copy), var12 (ref), var9 (ref), var13 (ref), var8 (ref), getFirstFocusableDescendant (copy), guiService (copy), var11 (ref), p2 (ref)
-			local var14 = not fFlagAXTimedOptionsPopoverSkipFocusOnCursor or var12 == "Focus"
+			-- upvalues: fFlagAXTimedOptionsPopoverSkipFocusOnCursor (copy), var5 (ref), var2 (ref), var6 (ref), var1 (ref), getFirstFocusableDescendant (copy), guiService (copy), var4 (ref), p3 (ref)
+			local var7 = not fFlagAXTimedOptionsPopoverSkipFocusOnCursor or var5 == "Focus"
 			
-			if var9 and not var13.current then
-				if var14 then
-					local current = var8.current
+			if var2 and not var6.current then
+				if var7 then
+					local current = var1.current
 					
 					if current and current:IsDescendantOf(game) then
-						local var16 = getFirstFocusableDescendant(current)
+						local var8 = getFirstFocusableDescendant(current)
 						
-						if var16 then
-							guiService.SelectedCoreObject = var16
+						if var8 then
+							guiService.SelectedCoreObject = var8
 						end
 					end
 				end
-			elseif not var9 and var13.current and (var11 and var14) then
-				local current = p2 and p2.current
+			elseif not var2 and var6.current and (var4 and var7) then
+				local current = p3 and p3.current
 				
 				if current and current:IsDescendantOf(game) then
 					guiService.SelectedCoreObject = current
 				end
 			end
-			var13.current = var9
-		end, { var9, var11, p2, var12 })
+			var6.current = var2
+		end, { var2, var4, p3, var5 })
 	end
 	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p0 (ref)
+		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p1 (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p3)
-					-- upvalues: p0 (copy)
-					p3.cancelled = true
-					p0()
+				handler = inputHandlersModule.onRelease(function(p4)
+					-- upvalues: p1 (copy)
+					p4.cancelled = true
+					p1()
 				end)
 			}
 		}
-	end, { p0 }), reactFocusNavigationModule.useEventMap(t, var8))
+	end, { p1 }), reactFocusNavigationModule.useEventMap(t, var1))
 end

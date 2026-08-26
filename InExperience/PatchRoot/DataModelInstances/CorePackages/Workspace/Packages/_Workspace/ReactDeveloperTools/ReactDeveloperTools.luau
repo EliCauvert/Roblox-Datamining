@@ -5,9 +5,9 @@ local debugLuaAppReactDevToolsHost = game:DefineFastString("DebugLuaAppReactDevT
 local debugLuaAppReactDevToolsPort = game:DefineFastInt("DebugLuaAppReactDevToolsPort", 8097)
 
 return {
-	startup = function(p0)
+	startup = function(p1)
 		-- upvalues: debugLuaAppEnableReactDevTools (ref), parent (ref), debugLuaAppReactDevToolsHost (ref), debugLuaAppReactDevToolsPort (ref), debugLuaAppsReactDevToolsProfileOnStart (ref)
-		if debugLuaAppEnableReactDevTools or p0 then
+		if debugLuaAppEnableReactDevTools or p1 then
 			_G.__PROFILE__ = true
 			_G.__DEV__ = true
 			require(parent.Dev.ReactDevtoolsCore).backend.connectToDevtools({

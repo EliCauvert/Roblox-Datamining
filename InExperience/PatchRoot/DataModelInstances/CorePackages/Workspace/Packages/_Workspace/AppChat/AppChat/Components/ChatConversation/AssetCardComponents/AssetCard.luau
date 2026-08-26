@@ -15,12 +15,12 @@ assetCard.defaultProps = {
 	end
 }
 
-function assetCard.render(p0)
+function assetCard.render(p1)
 	-- upvalues: roactModule (ref), UIBloxModule (ref), fitFrameVerticalModule (ref), headerModule (ref), bodyModule (ref)
-	local children = p0.props[roactModule.Children]
+	local children = p1.props[roactModule.Children]
 	
 	return UIBloxModule.Style.withStyle(function(_)
-		-- upvalues: roactModule (copy), fitFrameVerticalModule (copy), headerModule (copy), p0 (ref), bodyModule (copy), children (ref)
+		-- upvalues: roactModule (copy), fitFrameVerticalModule (copy), headerModule (copy), p1 (ref), bodyModule (copy), children (ref)
 		return roactModule.createElement(fitFrameVerticalModule, {
 			BackgroundTransparency = 1,
 			Visible = true,
@@ -35,16 +35,16 @@ function assetCard.render(p0)
 			}, {
 				header = roactModule.createElement(headerModule, {
 					LayoutOrder = 1,
-					cardTitle = p0.props.cardTitle or nil,
-					isLoading = p0.props.isLoading
+					cardTitle = p1.props.cardTitle or nil,
+					isLoading = p1.props.isLoading
 				}),
 				body = roactModule.createElement(bodyModule, {
 					LayoutOrder = 2,
-					cardIcon = p0.props.cardIcon,
-					cardBodyText = p0.props.cardBodyText or nil,
-					isLoading = p0.props.isLoading,
-					contentLoadedCallback = p0.props.contentLoadedCallback,
-					bodyActivated = p0.props.bodyActivated
+					cardIcon = p1.props.cardIcon,
+					cardBodyText = p1.props.cardBodyText or nil,
+					isLoading = p1.props.isLoading,
+					contentLoadedCallback = p1.props.contentLoadedCallback,
+					bodyActivated = p1.props.bodyActivated
 				})
 			}),
 			bottomSpacing = roactModule.createElement(fitFrameVerticalModule, {

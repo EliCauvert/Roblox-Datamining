@@ -1,9 +1,9 @@
 ﻿return {
-	fireAnalyticsEvent = function(p0, p1)
-		return p0, p1
+	fireAnalyticsEvent = function(p1, p2)
+		return p1, p2
 	end,
-	updateInfoForAllEvents = function(p2)
-		return p2
+	updateInfoForAllEvents = function(p1)
+		return p1
 	end,
 	getInfoForAllEvents = function()
 		return { analyticsTag = "DefaultAnalytics" }

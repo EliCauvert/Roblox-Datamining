@@ -15,39 +15,39 @@ end
 
 return function()
 	-- upvalues: reactModule (ref), constantsModule (ref), tnSIXPWrapperModule (ref), runScreenshotCaptureSequenceModule (ref)
-	local var5 = reactModule.useRef({
+	local var1 = reactModule.useRef({
 		screenshotId = "",
 		identificationResults = constantsModule.InitialIdentificationResults
 	})
-	local var6, var7 = reactModule.useState(false)
+	local var2, var3 = reactModule.useState(false)
 	local idle = reactModule.useRef("idle")
-	local var9 = tnSIXPWrapperModule.getReportAnythingAvatarEnabled() or tnSIXPWrapperModule.getReportAnythingExperienceEnabled()
-	local var10 = reactModule.useRef(var9)
-	var10.current = var9
+	local var4 = tnSIXPWrapperModule.getReportAnythingAvatarEnabled() or tnSIXPWrapperModule.getReportAnythingExperienceEnabled()
+	local var5 = reactModule.useRef(var4)
+	var5.current = var4
 	
 	return {
-		captureIfApplicable = reactModule.useCallback(function(p0)
-			-- upvalues: var10 (ref), idle (ref), runScreenshotCaptureSequenceModule (copy), var7 (ref), var5 (ref)
-			if var10.current and idle.current == "idle" then
+		captureIfApplicable = reactModule.useCallback(function(p1)
+			-- upvalues: var5 (ref), idle (ref), runScreenshotCaptureSequenceModule (copy), var3 (ref), var1 (ref)
+			if var5.current and idle.current == "idle" then
 				idle.current = "capturing"
 				runScreenshotCaptureSequenceModule({
-					hide = p0.hide,
-					show = p0.show,
+					hide = p1.hide,
+					show = p1.show,
 					onScreenshotTaken = function()
-						-- upvalues: var7 (copy)
-						var7(true)
+						-- upvalues: var3 (copy)
+						var3(true)
 					end,
-					onScreenshotUploaded = function(p1)
-						-- upvalues: var5 (copy)
-						var5.current = {
-							screenshotId = p1,
-							identificationResults = var5.current.identificationResults
+					onScreenshotUploaded = function(p2)
+						-- upvalues: var1 (copy)
+						var1.current = {
+							screenshotId = p2,
+							identificationResults = var1.current.identificationResults
 						}
 					end,
 					onIdentificationCompleted = function(p2)
-						-- upvalues: var5 (copy)
-						var5.current = {
-							screenshotId = var5.current.screenshotId,
+						-- upvalues: var1 (copy)
+						var1.current = {
+							screenshotId = var1.current.screenshotId,
 							identificationResults = p2
 						}
 					end,
@@ -61,20 +61,20 @@ return function()
 			end
 		end, {}),
 		reset = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), constantsModule (copy), idle (ref), var7 (ref)
-			var5.current = {
+			-- upvalues: var1 (ref), constantsModule (copy), idle (ref), var3 (ref)
+			var1.current = {
 				screenshotId = "",
 				identificationResults = constantsModule.InitialIdentificationResults
 			}
 			idle.current = "idle"
-			var7(false)
+			var3(false)
 		end, {}),
 		getIsCapturing = reactModule.useCallback(function()
 			-- upvalues: idle (ref)
 			return idle.current == "capturing"
 		end, {}),
-		isCaptureApplicable = var9,
-		isScreenshotTaken = var6,
-		snapshotRef = var5
+		isCaptureApplicable = var4,
+		isScreenshotTaken = var2,
+		snapshotRef = var1
 	}
 end

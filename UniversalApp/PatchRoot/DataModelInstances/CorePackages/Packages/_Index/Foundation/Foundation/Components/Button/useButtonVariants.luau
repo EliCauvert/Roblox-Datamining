@@ -11,7 +11,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 
 local var1 = function(p1)
 	-- upvalues: getSharedVariantsModule (ref), inputSizeModule (ref), flagsModule (ref)
-	local var1 = getSharedVariantsModule(p1)
+	local var2 = getSharedVariantsModule(p1)
 	
 	return {
 		common = {
@@ -22,8 +22,8 @@ local var1 = function(p1)
 			[inputSizeModule.XSmall] = {
 				container = {
 					tag = "gap-xsmall padding-small",
-					radius = var1.sizes[inputSizeModule.XSmall].container.radius,
-					height = var1.sizes[inputSizeModule.XSmall].container.height
+					radius = var2.sizes[inputSizeModule.XSmall].container.radius,
+					height = var2.sizes[inputSizeModule.XSmall].container.height
 				},
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_300, p1.Size.Size_300)
@@ -38,8 +38,8 @@ local var1 = function(p1)
 			[inputSizeModule.Small] = {
 				container = {
 					tag = "gap-xsmall padding-small",
-					radius = var1.sizes[inputSizeModule.Small].container.radius,
-					height = var1.sizes[inputSizeModule.Small].container.height
+					radius = var2.sizes[inputSizeModule.Small].container.radius,
+					height = var2.sizes[inputSizeModule.Small].container.height
 				},
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
@@ -54,8 +54,8 @@ local var1 = function(p1)
 			[inputSizeModule.Medium] = {
 				container = {
 					tag = "gap-small padding-medium",
-					radius = var1.sizes[inputSizeModule.Medium].container.radius,
-					height = var1.sizes[inputSizeModule.Medium].container.height
+					radius = var2.sizes[inputSizeModule.Medium].container.radius,
+					height = var2.sizes[inputSizeModule.Medium].container.height
 				},
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
@@ -70,8 +70,8 @@ local var1 = function(p1)
 			[inputSizeModule.Large] = {
 				container = {
 					tag = "gap-small padding-medium",
-					radius = var1.sizes[inputSizeModule.Large].container.radius,
-					height = var1.sizes[inputSizeModule.Large].container.height
+					radius = var2.sizes[inputSizeModule.Large].container.radius,
+					height = var2.sizes[inputSizeModule.Large].container.height
 				},
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
@@ -84,7 +84,7 @@ local var1 = function(p1)
 				}
 			}
 		},
-		types = var1.types
+		types = var2.types
 	}
 end
 

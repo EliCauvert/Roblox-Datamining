@@ -16,31 +16,31 @@ local _ = require(script.Parent.CancelUserSubscriptionRequestPrompt)
 
 return function()
 	-- upvalues: useSelector (ref), selectExpirationDateModule (ref), selectSubscriptionIdModule (ref), useDispatch (ref), reactModule (ref), cancelSubscriptionEndedModule (ref), cancelSubscriptionRequestedModule (ref), marketplaceService (ref), cancelSubscriptionSucceededModule (ref), cancelSubscriptionFailedModule (ref), errorStateEnumModule (ref)
-	local var10 = useSelector(selectExpirationDateModule) or ""
-	local var11 = useSelector(selectSubscriptionIdModule) or ""
-	local var12 = useDispatch()
+	local var1 = useSelector(selectExpirationDateModule) or ""
+	local var2 = useSelector(selectSubscriptionIdModule) or ""
+	local var3 = useDispatch()
 	
 	return {
 		onCancel = reactModule.useCallback(function()
-			-- upvalues: var12 (ref), cancelSubscriptionEndedModule (copy)
-			var12(cancelSubscriptionEndedModule())
-		end, { var12 }),
+			-- upvalues: var3 (ref), cancelSubscriptionEndedModule (copy)
+			var3(cancelSubscriptionEndedModule())
+		end, { var3 }),
 		onConfirm = reactModule.useCallback(function()
-			-- upvalues: var12 (ref), cancelSubscriptionRequestedModule (copy), marketplaceService (copy), var11 (ref), cancelSubscriptionSucceededModule (copy), cancelSubscriptionFailedModule (copy), errorStateEnumModule (copy)
-			var12(cancelSubscriptionRequestedModule())
+			-- upvalues: var3 (ref), cancelSubscriptionRequestedModule (copy), marketplaceService (copy), var2 (ref), cancelSubscriptionSucceededModule (copy), cancelSubscriptionFailedModule (copy), errorStateEnumModule (copy)
+			var3(cancelSubscriptionRequestedModule())
 			local ok, _ = pcall(function()
-				-- upvalues: marketplaceService (copy), var11 (copy)
-				return marketplaceService:PerformCancelSubscription(var11)
+				-- upvalues: marketplaceService (copy), var2 (copy)
+				return marketplaceService:PerformCancelSubscription(var2)
 			end)
 			
 			if ok then
-				var12(cancelSubscriptionSucceededModule(var11))
+				var3(cancelSubscriptionSucceededModule(var2))
 				
 				return
 			end
-			var12(cancelSubscriptionFailedModule(errorStateEnumModule.ErrorCancelling, var11))
-		end, { var12 }),
-		expirationDate = var10,
-		subscriptionId = var11
+			var3(cancelSubscriptionFailedModule(errorStateEnumModule.ErrorCancelling, var2))
+		end, { var3 }),
+		expirationDate = var1,
+		subscriptionId = var2
 	}
 end

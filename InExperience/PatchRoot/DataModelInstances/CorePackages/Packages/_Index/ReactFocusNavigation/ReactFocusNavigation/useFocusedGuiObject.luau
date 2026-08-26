@@ -3,24 +3,24 @@ local focusNavigationContextModule = require(script.Parent.FocusNavigationContex
 
 return function()
 	-- upvalues: reactModule (ref), focusNavigationContextModule (ref)
-	local var2 = reactModule.useContext(focusNavigationContextModule)
-	local var3 = if var2 then var2.focusedGuiObject:getValue() else nil
-	local var4, var5 = reactModule.useState(var3)
+	local var1 = reactModule.useContext(focusNavigationContextModule)
+	local var2 = if var1 then var1.focusedGuiObject:getValue() else nil
+	local var3, var4 = reactModule.useState(var2)
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var3 (ref), var5 (ref), var2 (ref)
-		if var4 ~= var3 then
-			var5(var3)
+		-- upvalues: var3 (ref), var2 (ref), var4 (ref), var1 (ref)
+		if var3 ~= var2 then
+			var4(var2)
 		end
-		if var2 then
-			local var6 = var2.focusedGuiObject:subscribe(var5)
+		if var1 then
+			local var5 = var1.focusedGuiObject:subscribe(var4)
 			
 			return function()
-				-- upvalues: var6 (ref)
-				var6:unsubscribe()
+				-- upvalues: var5 (ref)
+				var5:unsubscribe()
 			end
 		end
 		return nil
-	end, { var2 })
+	end, { var1 })
 	
-	return var4
+	return var3
 end

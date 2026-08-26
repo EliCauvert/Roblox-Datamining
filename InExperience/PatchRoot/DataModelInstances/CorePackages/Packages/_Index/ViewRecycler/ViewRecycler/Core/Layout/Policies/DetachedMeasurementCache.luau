@@ -1,24 +1,24 @@
-﻿local function _(p0)
-	if p0 == nil then
+﻿local function _(p1)
+	if p1 == nil then
 		return 256
-	elseif p0 == "unlimited" then
+	elseif p1 == "unlimited" then
 		return nil
 	end
-	assert(type(p0) == "number" and (p0 >= 0 and (p0 < 1e999 and p0 % 1 == 0)), "Layout.measured: detachedMeasurementCapacity must be zero, a positive integer, or \"unlimited\"")
+	assert(type(p1) == "number" and (p1 >= 0 and (p1 < 1e999 and p1 % 1 == 0)), "Layout.measured: detachedMeasurementCapacity must be zero, a positive integer, or \"unlimited\"")
 	
-	return p0
+	return p1
 end
 
 return {
 	new = function(p1)
-		local var0
+		local var1
 		if p1 == nil then
-			var0 = 256
+			var1 = 256
 		elseif p1 == "unlimited" then
-			var0 = nil
+			var1 = nil
 		else
 			assert(type(p1) == "number" and (p1 >= 0 and (p1 < 1e999 and p1 % 1 == 0)), "Layout.measured: detachedMeasurementCapacity must be zero, a positive integer, or \"unlimited\"")
-			var0 = p1
+			var1 = p1
 		end
 		local t = {}
 		local var2 = nil
@@ -41,27 +41,27 @@ return {
 			p2.next = nil
 		end
 		
-		local _ = function(p3)
+		local _ = function(p2)
 			-- upvalues: var3 (write), var2 (write)
-			p3.previous = var3
+			p2.previous = var3
 			
 			if var3 == nil then
-				var2 = p3
+				var2 = p2
 			else
-				var3.next = p3
+				var3.next = p2
 			end
-			var3 = p3
+			var3 = p2
 		end
 		
 		return {
-			put = function(p4, p5)
-				-- upvalues: var0 (ref), t (ref), var2 (write), var3 (write), var4 (write)
-				if var0 == 0 then return end
-				local var5 = t[p4]
+			put = function(p2, p3)
+				-- upvalues: var1 (ref), t (ref), var2 (write), var3 (write), var4 (write)
+				if var1 == 0 then return end
+				local var5 = t[p2]
 				
 				if var5 == nil then
-					local t_1 = { previous = nil, next = nil, key = p4, value = p5 }
-					t[p4] = t_1
+					local t_1 = { previous = nil, next = nil, key = p2, value = p3 }
+					t[p2] = t_1
 					t_1.previous = var3
 					
 					if var3 == nil then
@@ -72,27 +72,27 @@ return {
 					var3 = t_1
 					var4 += 1
 					
-					if var0 ~= nil and var0 < var4 then
-						local var8 = var2
+					if var1 ~= nil and var1 < var4 then
+						local var6 = var2
 						
-						if var8.previous == nil then
-							var2 = var8.next
+						if var6.previous == nil then
+							var2 = var6.next
 						else
-							var8.previous.next = var8.next
+							var6.previous.next = var6.next
 						end
-						if var8.next == nil then
-							var3 = var8.previous
+						if var6.next == nil then
+							var3 = var6.previous
 						else
-							var8.next.previous = var8.previous
+							var6.next.previous = var6.previous
 						end
-						var8.previous = nil
-						var8.next = nil
-						t[var8.key] = nil
+						var6.previous = nil
+						var6.next = nil
+						t[var6.key] = nil
 						var4 -= 1
 					end
 					return
 				else
-					var5.value = p5
+					var5.value = p3
 					
 					if var5.previous == nil then
 						var2 = var5.next
@@ -106,39 +106,39 @@ return {
 					end
 					var5.previous = nil
 					var5.next = nil
-					local var6 = var5
-					var6.previous = var3
+					local var7 = var5
+					var7.previous = var3
 					
 					if var3 == nil then
-						var2 = var6
+						var2 = var7
 					else
-						var3.next = var6
+						var3.next = var7
 					end
-					var3 = var6
+					var3 = var7
 				end
 			end,
-			take = function(p6)
+			take = function(p2)
 				-- upvalues: t (ref), var2 (write), var3 (write), var4 (write)
-				local var9 = t[p6]
+				local var5 = t[p2]
 				
-				if var9 == nil then
+				if var5 == nil then
 					return nil
-				elseif var9.previous == nil then
-					var2 = var9.next
+				elseif var5.previous == nil then
+					var2 = var5.next
 				else
-					var9.previous.next = var9.next
+					var5.previous.next = var5.next
 				end
-				if var9.next == nil then
-					var3 = var9.previous
+				if var5.next == nil then
+					var3 = var5.previous
 				else
-					var9.next.previous = var9.previous
+					var5.next.previous = var5.previous
 				end
-				var9.previous = nil
-				var9.next = nil
-				t[p6] = nil
+				var5.previous = nil
+				var5.next = nil
+				t[p2] = nil
 				var4 -= 1
 				
-				return var9.value
+				return var5.value
 			end
 		}
 	end

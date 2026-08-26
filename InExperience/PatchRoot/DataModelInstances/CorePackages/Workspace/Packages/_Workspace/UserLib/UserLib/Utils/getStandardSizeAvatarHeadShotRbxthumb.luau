@@ -1,7 +1,7 @@
 ﻿local getRbxthumbWithTypeSizeAndOptionsModule = require(script.Parent.getRbxthumbWithTypeSizeAndOptions)
 local constantsModule = require(script.Parent.Constants)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getRbxthumbWithTypeSizeAndOptionsModule (ref), constantsModule (ref)
-	return getRbxthumbWithTypeSizeAndOptionsModule(p0, constantsModule.RbxthumbTypes.AvatarHeadShot, 150, nil, nil, p1)
+	return getRbxthumbWithTypeSizeAndOptionsModule(p1, constantsModule.RbxthumbTypes.AvatarHeadShot, 150, nil, nil, p2)
 end

@@ -1,9 +1,9 @@
 ﻿local getTemporaryPlusBackgroundIdsModule = require(script.Parent.getTemporaryPlusBackgroundIds)
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: getTemporaryPlusBackgroundIdsModule (ref)
-	if p0 ~= nil then
-		return p0
+	if p1 ~= nil then
+		return p1
 	end
 	local var1, var2 = getTemporaryPlusBackgroundIdsModule()
 	

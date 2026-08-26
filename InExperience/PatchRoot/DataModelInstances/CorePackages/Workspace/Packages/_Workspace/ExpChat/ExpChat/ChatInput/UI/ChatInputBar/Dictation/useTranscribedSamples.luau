@@ -7,9 +7,9 @@ return function()
 	
 	return {
 		binding = var1,
-		begin = function(p0)
+		begin = function(p1)
 			-- upvalues: var3 (ref)
-			var3.current = var3.current or p0
+			var3.current = var3.current or p1
 		end,
 		commit = function(p1)
 			-- upvalues: var3 (ref), var1 (ref), var2 (ref)

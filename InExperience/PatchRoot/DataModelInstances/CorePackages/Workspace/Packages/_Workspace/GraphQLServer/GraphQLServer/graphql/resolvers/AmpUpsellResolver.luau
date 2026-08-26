@@ -3,12 +3,12 @@
 return {
 	default = {
 		UpsellFeatureAccessResponse = {
-			featureAccess = function(p0)
+			featureAccess = function(p1)
 				return {
-					featureName = p0.featureName,
-					access = p0.access,
-					recourse = p0.recourse,
-					recourses = p0.recourses
+					featureName = p1.featureName,
+					access = p1.access,
+					recourse = p1.recourse,
+					recourses = p1.recourses
 				}
 			end
 		},
@@ -17,9 +17,9 @@ return {
 				-- upvalues: ampUpsellConnectorModule (ref)
 				return ampUpsellConnectorModule.getFeatureAccessFromFeatureNamesList(p1.featureNames, p2.fetchImpl)
 			end,
-			getUpsellFeatureAccess = function(_, p3, p4)
+			getUpsellFeatureAccess = function(_, p1, p2)
 				-- upvalues: ampUpsellConnectorModule (ref)
-				return ampUpsellConnectorModule.getUpsellFeatureAccessFromFeatureName(p3.featureName, p3.successfulActions, p4.fetchImpl, p3.nameSpace, p3.extraParameters)
+				return ampUpsellConnectorModule.getUpsellFeatureAccessFromFeatureName(p1.featureName, p1.successfulActions, p2.fetchImpl, p1.nameSpace, p1.extraParameters)
 			end
 		}
 	}

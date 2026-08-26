@@ -38,30 +38,30 @@ imageTextLabel.defaultProps = {
 	frameProps = {}
 }
 
-function imageTextLabel.render(p0)
+function imageTextLabel.render(p1)
 	-- upvalues: withStyleModule (ref), getWrappedTextWithIconModule (ref), getTextSizeModule (ref), roactModule (ref), cryoModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref)
-	local genericTextLabelProps = p0.props.genericTextLabelProps
-	local imageProps = p0.props.imageProps
-	local frameProps = p0.props.frameProps
-	local padding = p0.props.padding
-	local text = p0.props.genericTextLabelProps.Text
-	local maxSize = p0.props.maxSize
-	local useMaxHeight = p0.props.useMaxHeight
-	local richText = p0.props.richText
+	local genericTextLabelProps = p1.props.genericTextLabelProps
+	local imageProps = p1.props.imageProps
+	local frameProps = p1.props.frameProps
+	local padding = p1.props.padding
+	local text = p1.props.genericTextLabelProps.Text
+	local maxSize = p1.props.maxSize
+	local useMaxHeight = p1.props.useMaxHeight
+	local richText = p1.props.richText
 	
-	return withStyleModule(function(p1)
-		-- upvalues: genericTextLabelProps (ref), imageProps (ref), text (write), getWrappedTextWithIconModule (copy), padding (ref), getTextSizeModule (copy), maxSize (ref), useMaxHeight (ref), roactModule (copy), cryoModule (copy), frameProps (ref), imageSetComponentModule (copy), genericTextLabelModule (copy), p0 (ref), richText (ref)
+	return withStyleModule(function(p2)
+		-- upvalues: genericTextLabelProps (ref), imageProps (ref), text (write), getWrappedTextWithIconModule (copy), padding (ref), getTextSizeModule (copy), maxSize (ref), useMaxHeight (ref), roactModule (copy), cryoModule (copy), frameProps (ref), imageSetComponentModule (copy), genericTextLabelModule (copy), p1 (ref), richText (ref)
 		local fontStyle = genericTextLabelProps.fontStyle
-		local var12 = if fontStyle.RelativeSize then p1.Font.BaseSize * fontStyle.RelativeSize else fontStyle.FontSize
+		local var1 = if fontStyle.RelativeSize then p2.Font.BaseSize * fontStyle.RelativeSize else fontStyle.FontSize
 		local font = fontStyle.Font
 		
 		if imageProps then
-			text = getWrappedTextWithIconModule(text, var12, font, imageProps.Size.X.Offset, padding)
+			text = getWrappedTextWithIconModule(text, var1, font, imageProps.Size.X.Offset, padding)
 		end
-		local var13 = getTextSizeModule(text, var12, font, Vector2.new(maxSize.X, maxSize.Y))
+		local var2 = getTextSizeModule(text, var1, font, Vector2.new(maxSize.X, maxSize.Y))
 		
 		return roactModule.createElement("Frame", cryoModule.Dictionary.join(frameProps, {
-			Size = UDim2.new(0, var13.X, 0, if useMaxHeight then maxSize.Y else var13.Y)
+			Size = UDim2.new(0, var2.X, 0, if useMaxHeight then maxSize.Y else var2.Y)
 		}), {
 			Icon = if imageProps then roactModule.createElement(imageSetComponentModule.Label, imageProps) else nil,
 			Name = roactModule.createElement(genericTextLabelModule, cryoModule.Dictionary.join(genericTextLabelProps, {
@@ -71,7 +71,7 @@ function imageTextLabel.render(p0)
 				Size = UDim2.new(1, 0, 1, 0),
 				TextXAlignment = genericTextLabelProps.TextXAlignment or Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
-				fluidSizing = if imageProps then false else p0.props.fluidSizing,
+				fluidSizing = if imageProps then false else p1.props.fluidSizing,
 				maxSize = maxSize,
 				RichText = richText
 			}))

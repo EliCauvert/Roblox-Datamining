@@ -25,28 +25,28 @@ settingsFullScreenTitleBar.validateProps = t.strictInterface({
 })
 settingsFullScreenTitleBar.defaultProps = { titleText = "Roblox" }
 
-function settingsFullScreenTitleBar.init(p0)
-	p0:setState({ isTriggered = false })
+function settingsFullScreenTitleBar.init(p1)
+	p1:setState({ isTriggered = false })
 	
 	function p0.show()
-		-- upvalues: p0 (ref)
-		p0:setTriggered(true)
+		-- upvalues: p1 (ref)
+		p1:setTriggered(true)
 	end
 	
 	function p0.hide()
-		-- upvalues: p0 (ref)
-		p0:setTriggered(false)
+		-- upvalues: p1 (ref)
+		p1:setTriggered(false)
 	end
 	
 	function p0.cancel()
-		-- upvalues: p0 (ref)
-		p0:unsetTriggered()
+		-- upvalues: p1 (ref)
+		p1:unsetTriggered()
 	end
 	
 	function p0.onFullscreenChanged()
-		-- upvalues: p0 (ref)
-		p0:unsetTriggered()
-		p0:setState({ isTriggered = false })
+		-- upvalues: p1 (ref)
+		p1:unsetTriggered()
+		p1:setState({ isTriggered = false })
 	end
 end
 
@@ -84,7 +84,7 @@ function settingsFullScreenTitleBar.leaveGame(_)
 	settings().Rendering.QualityLevel = getDefaultQualityLevel()
 end
 
-function settingsFullScreenTitleBar.render(p2)
+function settingsFullScreenTitleBar.render(p1)
 	-- upvalues: roact (ref), coreGuiService (ref), constantsModule (ref), externalEventConnectionModule (ref), userGameSettingsService (ref), fullscreenTitleBar (ref), renderWithCoreScriptsStyleProviderModule (ref)
 	return renderWithCoreScriptsStyleProviderModule({
 		FullscreenTitleBar = roact.createElement(roact.Portal, { target = coreGuiService }, {
@@ -96,43 +96,43 @@ function settingsFullScreenTitleBar.render(p2)
 			}, {
 				FullscreenChangedEvent = roact.createElement(externalEventConnectionModule, {
 					event = userGameSettingsService.FullscreenChanged,
-					callback = p2.onFullscreenChanged
+					callback = p1.onFullscreenChanged
 				}),
 				TriggerArea = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 0, 0, 1),
-					[roact.Event.MouseEnter] = p2.show,
-					[roact.Event.MouseLeave] = p2.cancel
+					[roact.Event.MouseEnter] = p1.show,
+					[roact.Event.MouseLeave] = p1.cancel
 				}),
 				Bar = roact.createElement(fullscreenTitleBar, {
-					title = p2.props.titleText,
-					isTriggered = p2.state.isTriggered,
-					onDisappear = p2.hide,
-					onHover = p2.cancel,
-					exitFullscreen = p2.toggleFullscreen,
-					closeRoblox = p2.props.onClose or p2.leaveGame
+					title = p1.props.titleText,
+					isTriggered = p1.state.isTriggered,
+					onDisappear = p1.hide,
+					onHover = p1.cancel,
+					exitFullscreen = p1.toggleFullscreen,
+					closeRoblox = p1.props.onClose or p1.leaveGame
 				})
 			})
 		})
 	})
 end
 
-function settingsFullScreenTitleBar.willUnmount(p3)
-	p3:unsetTriggered()
+function settingsFullScreenTitleBar.willUnmount(p1)
+	p1:unsetTriggered()
 end
 
 return {
-	mount = function(p4, p5, p6)
+	mount = function(p1, p2, p3)
 		-- upvalues: roact (ref), settingsFullScreenTitleBar (ref)
-		return roact.mount(roact.createElement(settingsFullScreenTitleBar, p4 or {}), p5, p6)
+		return roact.mount(roact.createElement(settingsFullScreenTitleBar, p1 or {}), p2, p3)
 	end,
-	update = function(p7, p8)
+	update = function(p1, p2)
 		-- upvalues: roact (ref), settingsFullScreenTitleBar (ref)
-		return roact.update(p7, roact.createElement(settingsFullScreenTitleBar, p8))
+		return roact.update(p1, roact.createElement(settingsFullScreenTitleBar, p2))
 	end,
-	unmount = function(p9)
+	unmount = function(p1)
 		-- upvalues: roact (ref)
-		return roact.unmount(p9)
+		return roact.unmount(p1)
 	end
 }

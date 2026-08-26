@@ -5,22 +5,22 @@ local useCallback = reactModule.useCallback
 local useReducer = reactModule.useReducer
 local immutable = appCommonLibModule.Immutable
 
-local function externalNavigationByScreenReducer(p0, p1)
+local function externalNavigationByScreenReducer(p1, p2)
 	-- upvalues: immutable (ref)
-	if p1.callback == nil then
-		return immutable.RemoveFromDictionary(p0, p1.screen)
+	if p2.callback == nil then
+		return immutable.RemoveFromDictionary(p1, p2.screen)
 	end
-	assert(p1.callback ~= nil, "")
+	assert(p2.callback ~= nil, "")
 	
-	return immutable.Set(p0, p1.screen, p1.callback)
+	return immutable.Set(p1, p2.screen, p2.callback)
 end
 
 return function()
 	-- upvalues: useReducer (ref), externalNavigationByScreenReducer (ref), useCallback (ref)
-	local var3, var4 = useReducer(externalNavigationByScreenReducer, {})
+	local var1, var2 = useReducer(externalNavigationByScreenReducer, {})
 	
-	return var3, useCallback(function(p2, p3)
-		-- upvalues: var4 (ref)
-		var4({ callback = p2, screen = p3 })
-	end, { var4 })
+	return var1, useCallback(function(p1, p2)
+		-- upvalues: var2 (ref)
+		var2({ callback = p1, screen = p2 })
+	end, { var2 })
 end

@@ -12,27 +12,27 @@ local toArray = helpersModule.toArray
 local t_1 = { setDirty = true, dispose = true, forget = true }
 local _ = require(script.Parent.depTypes)
 
-function t.dep(p0)
+function t.dep(p1)
 	-- upvalues: parentEntrySlot (ref), set (ref), maybeUnsubscribe (ref), hasOwnProperty (ref), t_1 (ref), array (ref), toArray (ref)
 	local t = {}
-	local var5 = if p0 ~= nil then p0 else p0.subscribe
+	local var1 = if p1 ~= nil then p1 else p1.subscribe
 	local tbl = setmetatable({}, {
-		__call = function(_, p1)
-			-- upvalues: parentEntrySlot (copy), t (ref), set (copy), var5 (ref), maybeUnsubscribe (copy)
+		__call = function(_, p2)
+			-- upvalues: parentEntrySlot (copy), t (ref), set (copy), var1 (ref), maybeUnsubscribe (copy)
 			local value = parentEntrySlot:getValue()
 			
 			if value ~= nil then
-				local var8 = t[p1]
+				local var2 = t[p2]
 				
-				if not var8 then
-					var8 = set.new()
-					t[p1] = var8
+				if not var2 then
+					var2 = set.new()
+					t[p2] = var2
 				end
-				value:dependOn(var8)
+				value:dependOn(var2)
 				
-				if type(var5) == "function" then
-					maybeUnsubscribe(var8)
-					var8.unsubscribe = var5(p1)
+				if type(var1) == "function" then
+					maybeUnsubscribe(var2)
+					var2.unsubscribe = var1(p2)
 				end
 			end
 		end
@@ -40,16 +40,16 @@ function t.dep(p0)
 	
 	function tbl.dirty(_, p2, p3)
 		-- upvalues: t (ref), hasOwnProperty (copy), t_1 (copy), array (copy), toArray (copy), maybeUnsubscribe (copy)
-		local var9 = t[p2]
+		local var2 = t[p2]
 		
-		if var9 then
-			local var10 = if p3 and hasOwnProperty(t_1, p3) then p3 else "setDirty"
-			array.forEach(toArray(var9), function(p4)
-				-- upvalues: var10 (ref)
-				p4[var10](p4)
+		if var2 then
+			local var3 = if p3 and hasOwnProperty(t_1, p3) then p3 else "setDirty"
+			array.forEach(toArray(var2), function(p4)
+				-- upvalues: var3 (ref)
+				p4[var3](p4)
 			end)
 			t[p2] = nil
-			maybeUnsubscribe(var9)
+			maybeUnsubscribe(var2)
 		end
 	end
 	

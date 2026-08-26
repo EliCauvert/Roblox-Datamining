@@ -6,86 +6,86 @@ local dataHydrationModule = require(parent.DataHydration)
 local presenceType = dataHydrationModule.Presence.PresenceEnums.PresenceType
 local usePresenceImpressionEventsModule = require(script.Parent.usePresenceImpressionEvents)
 local useFriendsListOrderedByIdPresenceImpressionEventsEnabled = game:DefineFastFlag("UseFriendsListOrderedByIdPresenceImpressionEventsEnabled", false)
-local var5 = dataHydrationModule.Friends.FriendsStore.get()
+local var1 = dataHydrationModule.Friends.FriendsStore.get()
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: cryoModule (ref), presenceType (ref)
-	return cryoModule.List.map(p0, function(p1)
+	return cryoModule.List.map(p1, function(p2)
 		-- upvalues: presenceType (copy), cryoModule (copy)
-		return if p1.presence and p1.presence.userPresenceType == presenceType.InGame and p1.presence.universeId == "" then cryoModule.Dictionary.join(p1, {
-			presence = cryoModule.Dictionary.join(p1.presence, { userPresenceType = presenceType.Online })
-		}) else p1
+		return if p2.presence and p2.presence.userPresenceType == presenceType.InGame and p2.presence.universeId == "" then cryoModule.Dictionary.join(p2, {
+			presence = cryoModule.Dictionary.join(p2.presence, { userPresenceType = presenceType.Online })
+		}) else p2
 	end)
 end
 
-local var6 = function(p2, p3)
+local var2 = function(p1, p2)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	
-	for i, v in p2 do
+	for i, v in p1 do
 		t[v.id] = v.presence
 	end
 	local _ = nil
 	
-	return cryoModule.List.sort(p2, function(p4, p5)
-		return p5.sortScore < p4.sortScore
-	end), cryoModule.List.filter(p3 or {}, function(p6)
+	return cryoModule.List.sort(p1, function(p3, p4)
+		return p4.sortScore < p3.sortScore
+	end), cryoModule.List.filter(p2 or {}, function(p3)
 		-- upvalues: t (ref)
-		return not t[p6.id]
+		return not t[p3.id]
 	end)
 end
 
 return function(_)
-	-- upvalues: reactModule (ref), var5 (ref), useSignalState (ref), var6 (ref), cryoModule (ref), presenceType (ref), useFriendsListOrderedByIdPresenceImpressionEventsEnabled (ref), usePresenceImpressionEventsModule (ref), dataHydrationModule (ref)
-	local var8 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: var5 (copy)
-		return var5.GetOnlineFriends()
+	-- upvalues: reactModule (ref), var1 (ref), useSignalState (ref), var2 (ref), cryoModule (ref), presenceType (ref), useFriendsListOrderedByIdPresenceImpressionEventsEnabled (ref), usePresenceImpressionEventsModule (ref), dataHydrationModule (ref)
+	local var3 = useSignalState(reactModule.useMemo(function()
+		-- upvalues: var1 (copy)
+		return var1.GetOnlineFriends()
 	end, {}))
-	local var9 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: var5 (copy)
-		return var5.GetAllFriends()
+	local var4 = useSignalState(reactModule.useMemo(function()
+		-- upvalues: var1 (copy)
+		return var1.GetAllFriends()
 	end, {}))
-	local var10 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: var5 (copy)
-		return var5.GetAllFriendsStatus()
+	local var5 = useSignalState(reactModule.useMemo(function()
+		-- upvalues: var1 (copy)
+		return var1.GetAllFriendsStatus()
 	end, {}))
-	local var11 = if var9 then var9.friends else nil
-	local var12 = if var9 then var9.hasMore else nil
-	local var8_1 = var8 or {}
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), var5 (copy)
-		if var12 then
-			var5.FetchMoreFriends()
+	local var6 = if var4 then var4.friends else nil
+	local var7 = if var4 then var4.hasMore else nil
+	local var8 = var3 or {}
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), var1 (copy)
+		if var7 then
+			var1.FetchMoreFriends()
 			
 			return
 		end
-	end, { var12 })
+	end, { var7 })
 	
-	local var15 = function()
-		-- upvalues: var5 (copy)
-		var5.RefetchOnlineFriends()
-		var5.RefetchAllFriends()
+	local var10 = function()
+		-- upvalues: var1 (copy)
+		var1.RefetchOnlineFriends()
+		var1.RefetchAllFriends()
 	end
 	
-	local var16, var17 = reactModule.useMemo(function()
-		-- upvalues: var6 (copy), var8_1 (ref), cryoModule (copy), presenceType (copy), var11 (ref)
-		return var6(cryoModule.List.map(var8_1, function(p7)
+	local var11, var12 = reactModule.useMemo(function()
+		-- upvalues: var2 (copy), var8 (ref), cryoModule (copy), presenceType (copy), var6 (ref)
+		return var2(cryoModule.List.map(var8, function(p3)
 			-- upvalues: presenceType (copy), cryoModule (copy)
-			return if p7.presence and p7.presence.userPresenceType == presenceType.InGame and p7.presence.universeId == "" then cryoModule.Dictionary.join(p7, {
-				presence = cryoModule.Dictionary.join(p7.presence, { userPresenceType = presenceType.Online })
-			}) else p7
-		end), var11)
-	end, { var8_1, var11 })
+			return if p3.presence and p3.presence.userPresenceType == presenceType.InGame and p3.presence.universeId == "" then cryoModule.Dictionary.join(p3, {
+				presence = cryoModule.Dictionary.join(p3.presence, { userPresenceType = presenceType.Online })
+			}) else p3
+		end), var6)
+	end, { var8, var6 })
 	
 	if useFriendsListOrderedByIdPresenceImpressionEventsEnabled then
-		usePresenceImpressionEventsModule(var8_1)
+		usePresenceImpressionEventsModule(var8)
 	end
 	return {
-		onlineFriends = var16,
-		offlineFriends = var17,
-		fetchMoreFriends = var14,
-		refreshFriendsData = var15,
-		isEndOfList = not var12,
-		isLoading = var9 == nil and var10 == dataHydrationModule.DataStatus.NotReady
+		onlineFriends = var11,
+		offlineFriends = var12,
+		fetchMoreFriends = var9,
+		refreshFriendsData = var10,
+		isEndOfList = not var7,
+		isLoading = var4 == nil and var5 == dataHydrationModule.DataStatus.NotReady
 	}
 end

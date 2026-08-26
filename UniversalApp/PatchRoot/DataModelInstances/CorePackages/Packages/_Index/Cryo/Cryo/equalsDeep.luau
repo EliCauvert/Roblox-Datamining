@@ -1,17 +1,17 @@
 ﻿local equalObjectsModule = require(script.Parent.equalObjects)
 
-local function compareDeep(p0, p1)
+local function compareDeep(p1, p2)
 	-- upvalues: compareDeep (ref)
-	if type(p0) ~= "table" or type(p1) ~= "table" then
-		return p0 == p1
+	if type(p1) ~= "table" or type(p2) ~= "table" then
+		return p1 == p2
 	end
-	for i, v in p0 do
-		if not compareDeep(p1[i], v) then
+	for i, v in p1 do
+		if not compareDeep(p2[i], v) then
 			return false
 		end
 	end
-	for i, v in p1 do
-		if not compareDeep(p0[i], v) then
+	for i, v in p2 do
+		if not compareDeep(p1[i], v) then
 			return false
 		end
 	end
@@ -23,10 +23,10 @@ return function(...)
 	if equalObjectsModule(...) then
 		return true
 	end
-	local var2 = select(1, ...)
+	local var1 = select(1, ...)
 	
 	for i = 2, select("#", ...) do
-		if compareDeep(var2, select(i, ...)) then
+		if compareDeep(var1, select(i, ...)) then
 			continue
 		end
 		return false

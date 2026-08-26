@@ -8,30 +8,30 @@
 	Players = { {} }
 }
 
-local function _(p0, p1)
-	assert(if type(p1) ~= "nil" then type(p1) == "number" else true, "requiredRank must be a number or nil")
+local function _(p1, p2)
+	assert(if type(p2) ~= "nil" then type(p2) == "number" else true, "requiredRank must be a number or nil")
 	
-	return function(p2)
-		-- upvalues: p1 (ref), p0 (ref)
-		if not p2 or not p2.UserId then
+	return function(p3)
+		-- upvalues: p2 (ref), p1 (ref)
+		if not p3 or not p3.UserId then
 			return false
 		end
-		local _ = p2.UserId
-		local var3 = false
+		local _ = p3.UserId
+		local var1 = false
 		local ok, status = pcall(function()
-			-- upvalues: p1 (copy), var3 (write), p2 (ref), p0 (copy)
-			if p1 then
-				var3 = p1 < p2:GetRankInGroup(p0)
+			-- upvalues: p2 (copy), var1 (write), p3 (ref), p1 (copy)
+			if p2 then
+				var1 = p2 < p3:GetRankInGroup(p1)
 				
 				return
 			end
-			var3 = p2:IsInGroup(p0)
+			var1 = p3:IsInGroup(p1)
 		end)
 		
 		if not ok and status then
 			print("Error checking in group: " .. status)
 		end
-		return var3
+		return var1
 	end
 end
 
@@ -43,41 +43,41 @@ end
 			local rank = v.Rank
 			assert(if type(rank) ~= "nil" then type(rank) == "number" else true, "requiredRank must be a number or nil")
 			
-			function v.IsInGroup(p3)
+			function v.IsInGroup(p1)
 				-- upvalues: rank (ref), groupId (ref)
-				if not p3 or not p3.UserId then
+				if not p1 or not p1.UserId then
 					return false
 				end
-				local _ = p3.UserId
-				local var3 = false
+				local _ = p1.UserId
+				local var1 = false
 				local ok, status = pcall(function()
-					-- upvalues: rank (copy), var3 (write), p3 (ref), groupId (copy)
+					-- upvalues: rank (copy), var1 (write), p1 (ref), groupId (copy)
 					if rank then
-						var3 = rank < p3:GetRankInGroup(groupId)
+						var1 = rank < p1:GetRankInGroup(groupId)
 						
 						return
 					end
-					var3 = p3:IsInGroup(groupId)
+					var1 = p1:IsInGroup(groupId)
 				end)
 				
 				if not ok and status then
 					print("Error checking in group: " .. status)
 				end
-				return var3
+				return var1
 			end
 		end
 	end
 end)()
 local playersService = game:GetService("Players")
 
-local function GetSpecialChatColor(p4)
+local function GetSpecialChatColor(p1)
 	-- upvalues: t (ref), playersService (ref)
 	if t.Players then
-		local var4 = playersService:FindFirstChild(p4)
+		local var1 = playersService:FindFirstChild(p1)
 		
-		if var4 then
+		if var1 then
 			for i, v in pairs(t.Players) do
-				if var4.UserId == v.UserId then
+				if var1.UserId == v.UserId then
 					return v.ChatColor
 				end
 			end
@@ -85,14 +85,14 @@ local function GetSpecialChatColor(p4)
 	end
 	if t.Groups then
 		for i, v in pairs(t.Groups) do
-			if v.IsInGroup(playersService:FindFirstChild(p4)) then
+			if v.IsInGroup(playersService:FindFirstChild(p1)) then
 				return v.ChatColor
 			end
 		end
 	end
 end
 
-return function(p5)
+return function(p2)
 	-- upvalues: GetSpecialChatColor (ref), playersService (ref)
 	local list = {
 		Color3.new(0.992156862745, 0.160784313725, 0.262745098039),
@@ -104,81 +104,81 @@ return function(p5)
 		BrickColor.new("Brick yellow").Color
 	}
 	
-	local function GetNameValue(p6)
-		local var9 = 0
+	local function GetNameValue(p3)
+		local var2 = 0
 		
-		for i = 1, #p6 do
-			local byteValue = string.byte(string.sub(p6, i, i))
-			local var11 = #p6 - i + 1
+		for i = 1, #p3 do
+			local byteValue = string.byte(string.sub(p3, i, i))
+			local var3 = #p3 - i + 1
 			
-			if #p6 % 2 == 1 then
-				var11 -= 1
+			if #p3 % 2 == 1 then
+				var3 -= 1
 			end
-			if var11 % 4 >= 2 then
+			if var3 % 4 >= 2 then
 				byteValue = -byteValue
 			end
-			var9 += byteValue
+			var2 += byteValue
 		end
-		return var9
+		return var2
 	end
 	
-	local function _(p7)
+	local function _(p4)
 		-- upvalues: list (ref), GetNameValue (ref)
-		return list[(GetNameValue(p7) + 0) % #list + 1]
+		return list[(GetNameValue(p4) + 0) % #list + 1]
 	end
 	
-	local _ = function(p8)
+	local _ = function(p4)
 		-- upvalues: list (ref), GetNameValue (ref)
-		local player = p8:GetPlayer()
+		local player = p4:GetPlayer()
 		
-		return if player and player.Team ~= nil then player.TeamColor.Color else list[(GetNameValue(p8.Name) + 0) % #list + 1]
+		return if player and player.Team ~= nil then player.TeamColor.Color else list[(GetNameValue(p4.Name) + 0) % #list + 1]
 	end
 	
-	local function onNewSpeaker(p9)
-		-- upvalues: p5 (ref), list (ref), GetNameValue (ref), GetSpecialChatColor (copy)
-		local var13 = p5:GetSpeaker(p9)
+	local function onNewSpeaker(p4)
+		-- upvalues: p2 (ref), list (ref), GetNameValue (ref), GetSpecialChatColor (copy)
+		local var4 = p2:GetSpeaker(p4)
 		
-		if not var13:GetExtraData("NameColor") then
-			local player = var13:GetPlayer()
-			var13:SetExtraData("NameColor", if player and player.Team ~= nil then player.TeamColor.Color else list[(GetNameValue(var13.Name) + 0) % #list + 1])
+		if not var4:GetExtraData("NameColor") then
+			local player = var4:GetPlayer()
+			var4:SetExtraData("NameColor", if player and player.Team ~= nil then player.TeamColor.Color else list[(GetNameValue(var4.Name) + 0) % #list + 1])
 		end
-		if not var13:GetExtraData("ChatColor") then
-			local var15 = GetSpecialChatColor(p9)
+		if not var4:GetExtraData("ChatColor") then
+			local var5 = GetSpecialChatColor(p4)
 			
-			if var15 then
-				var13:SetExtraData("ChatColor", var15)
+			if var5 then
+				var4:SetExtraData("ChatColor", var5)
 			end
 		end
-		if not var13:GetExtraData("Tags") then
-			var13:SetExtraData("Tags", {})
+		if not var4:GetExtraData("Tags") then
+			var4:SetExtraData("Tags", {})
 		end
 	end
 	
-	p5.SpeakerAdded:connect(onNewSpeaker)
+	p2.SpeakerAdded:connect(onNewSpeaker)
 	
-	for i, v in pairs(p5:GetSpeakerList()) do
+	for i, v in pairs(p2:GetSpeakerList()) do
 		onNewSpeaker(v)
 	end
 	local t = {}
-	playersService.PlayerAdded:connect(function(p10)
-		-- upvalues: p5 (ref), list (ref), GetNameValue (ref), t (ref)
-		t[p10] = p10.Changed:connect(function(p11)
-			-- upvalues: p5 (copy), p10 (ref), list (copy), GetNameValue (copy)
-			local nameSpeaker = p5:GetSpeaker(p10.Name)
+	playersService.PlayerAdded:connect(function(p4)
+		-- upvalues: p2 (ref), list (ref), GetNameValue (ref), t (ref)
+		t[p4] = p4.Changed:connect(function(p5)
+			-- upvalues: p2 (copy), p4 (ref), list (copy), GetNameValue (copy)
+			local nameSpeaker = p2:GetSpeaker(p4.Name)
 			
-			if nameSpeaker and (p11 == "TeamColor" or p11 == "Neutral" or p11 == "Team") then
+			if nameSpeaker and (p5 == "TeamColor" or p5 == "Neutral" or p5 == "Team") then
 				local player = nameSpeaker:GetPlayer()
 				nameSpeaker:SetExtraData("NameColor", if player and player.Team ~= nil then player.TeamColor.Color else list[(GetNameValue(nameSpeaker.Name) + 0) % #list + 1])
 			end
 		end)
 	end)
-	playersService.PlayerRemoving:connect(function(p12)
+	playersService.PlayerRemoving:connect(function(p4)
 		-- upvalues: t (ref)
-		local var18 = t[p12]
+		local var4 = t[p4]
 		
-		if var18 then
-			var18:Disconnect()
+		if var4 then
+			var4:Disconnect()
 		end
-		t[p12] = nil
+		t[p4] = nil
 	end)
 end

@@ -11,11 +11,11 @@ local constantsModule = require(parent.Constants)
 local getFFlagEnableVoiceChatMuteForVideoCaptures = require(parent_1.SharedFlags).GetFFlagEnableVoiceChatMuteForVideoCaptures
 local getFFlagEnableCrossExperienceVoiceCaptureMute = require(parent_1.SharedFlags).GetFFlagEnableCrossExperienceVoiceCaptureMute
 
-local function maybeMuteVoiceChat(p0)
+local function maybeMuteVoiceChat(p1)
 	-- upvalues: getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref), default (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref)
 	if game:GetEngineFeature("ReenableMomentsVoice") then return end
 	if getFFlagEnableCrossExperienceVoiceCaptureMute() then
-		if p0 then
+		if p1 then
 			default_1:MuteAll("Capture")
 		else
 			default_1:UnmuteAll("Capture")
@@ -23,10 +23,10 @@ local function maybeMuteVoiceChat(p0)
 	end
 	if default:UserVoiceEnabled() and default:IsInitialized() then
 		if not getFFlagEnableCrossExperienceVoiceCaptureMute() then
-			default:MuteAll(p0, "Capture")
+			default:MuteAll(p1, "Capture")
 		end
 		if getFFlagEnableVoiceChatMuteForVideoCaptures then
-			if p0 then
+			if p1 then
 				default:RequestHidePublicVoiceUI()
 				
 				return

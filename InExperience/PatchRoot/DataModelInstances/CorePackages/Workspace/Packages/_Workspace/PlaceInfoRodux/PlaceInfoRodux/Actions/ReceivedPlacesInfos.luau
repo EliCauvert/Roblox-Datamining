@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("PlaceInfoRodux").Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { placesInfos = p0 }
+﻿return require(script:FindFirstAncestor("PlaceInfoRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { placesInfos = p1 }
 end)

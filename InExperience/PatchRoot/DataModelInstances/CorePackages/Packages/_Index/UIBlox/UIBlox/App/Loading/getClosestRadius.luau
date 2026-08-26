@@ -1,29 +1,29 @@
 ﻿local radius = require(script.Parent.Parent.Parent.Parent.Foundation).Enums.Radius
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: radius (ref)
-	if not p1 or p1 == UDim.new(0, 0) then
+	if not p2 or p2 == UDim.new(0, 0) then
 		return radius.None
-	elseif p1.Scale >= 0.5 then
+	elseif p2.Scale >= 0.5 then
 		return radius.Circle
 	end
-	local var0 = nil
-	local var1 = 1e999
+	local var1 = nil
+	local var2 = 1e999
 	
 	for i, v in {
 		[radius.None] = 0,
 		[radius.XSmall] = 2,
-		[radius.Small] = p0.Small,
-		[radius.Medium] = p0.Medium,
-		[radius.Large] = p0.XLarge,
-		[radius.Circle] = p0.Circle
+		[radius.Small] = p1.Small,
+		[radius.Medium] = p1.Medium,
+		[radius.Large] = p1.XLarge,
+		[radius.Circle] = p1.Circle
 	} do
-		local absValue = math.abs(p1.Offset - v)
+		local absValue = math.abs(p2.Offset - v)
 		
-		if absValue < var1 then
-			var1 = absValue
-			var0 = i
+		if absValue < var2 then
+			var2 = absValue
+			var1 = i
 		end
 	end
-	return var0
+	return var1
 end

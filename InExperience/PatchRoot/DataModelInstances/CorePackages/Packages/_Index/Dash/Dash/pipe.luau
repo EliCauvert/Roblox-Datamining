@@ -1,16 +1,16 @@
-﻿return function(p0, ...)
-	local var0 = select("#", ...)
+﻿return function(p1, ...)
+	local var1 = select("#", ...)
 	
-	if var0 == 0 then
-		return p0
+	if var1 == 0 then
+		return p1
 	end
 	local list = { ... }
 	
 	return function(...)
-		-- upvalues: p0 (ref), var0 (ref), list (ref)
-		local list_1 = { p0(...) }
+		-- upvalues: p1 (ref), var1 (ref), list (ref)
+		local list_1 = { p1(...) }
 		
-		for i = 1, var0 do
+		for i = 1, var1 do
 			list_1 = { list[i](unpack(list_1)) }
 		end
 		return unpack(list_1)

@@ -9,39 +9,39 @@
 		4,
 		8
 	}),
-	options = function(p0, p1)
-		local list = { p0 }
+	options = function(p1, p2)
+		local list = { p1 }
 		
-		for i, v in p1 do
-			if v ~= p0 then
+		for i, v in p2 do
+			if v ~= p1 then
 				table.insert(list, v)
 			end
 		end
 		return list
 	end,
-	merge = function(p2, p3)
-		local cloned = table.clone(p2)
+	merge = function(p3, p4)
+		local cloned = table.clone(p3)
 		
-		if p3 ~= nil then
-			for i, v in p3 do
+		if p4 ~= nil then
+			for i, v in p4 do
 				cloned[i] = if type(v) == "table" then v[1] else v
 			end
 		end
 		return cloned
 	end,
-	positiveInteger = function(p4, p5)
-		return if type(p4) == "number" and p4 == p4 then math.max(1, math.round(p4)) else p5
+	positiveInteger = function(p5, p6)
+		return if type(p5) == "number" and p5 == p5 then math.max(1, math.round(p5)) else p6
 	end,
-	nonNegativeNumber = function(p6, p7)
-		return if type(p6) == "number" and p6 == p6 then math.max(0, p6) else p7
+	nonNegativeNumber = function(p5, p6)
+		return if type(p5) == "number" and p5 == p5 then math.max(0, p5) else p6
 	end,
-	resolveAxis = function(p8, p9)
-		return if p8 == "horizontal" then p9.Axis.X else p9.Axis.Y
+	resolveAxis = function(p5, p6)
+		return if p5 == "horizontal" then p6.Axis.X else p6.Axis.Y
 	end,
-	resolveAlignment = function(p10, p11)
-		return if p10 == "start" then p11.ScrollAlignment.Start elseif p10 == "end" then p11.ScrollAlignment.End else p11.ScrollAlignment.Center
+	resolveAlignment = function(p5, p6)
+		return if p5 == "start" then p6.ScrollAlignment.Start elseif p5 == "end" then p6.ScrollAlignment.End else p6.ScrollAlignment.Center
 	end,
-	resolvePresentationMode = function(p12, _)
-		return if p12 == "immediate" then "ReadyOnAssignment" else "ReadyOnCommit"
+	resolvePresentationMode = function(p5, _)
+		return if p5 == "immediate" then "ReadyOnAssignment" else "ReadyOnCommit"
 	end
 }

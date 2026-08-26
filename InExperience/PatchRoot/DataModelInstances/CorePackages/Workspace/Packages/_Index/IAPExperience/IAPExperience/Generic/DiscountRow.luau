@@ -10,22 +10,22 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local priceLineItemModule = require(IAPExperience.Generic.PriceLineItem)
 local discountType = require(IAPExperience.ProductPurchase.PricingTypes).DiscountType
 local fFlagPurchasePromptFetchCartPricing = require(IAPExperience.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
-local var6 = getIconRichText(iconName.Robux)
+local var1 = getIconRichText(iconName.Robux)
 
-local function _(p0, p1)
-	return if p0 == nil or p0 == "" then p1 else p0
+local function _(p1, p2)
+	return if p1 == nil or p1 == "" then p2 else p1
 end
 
-local function RobloxSubscriptionDiscountRow(p2)
-	-- upvalues: localizationService (ref), reactModule (ref), var6 (ref), formatNumberModule (ref), useLocalization (ref), priceLineItemModule (ref), fFlagPurchasePromptFetchCartPricing (ref)
+local function RobloxSubscriptionDiscountRow(p1)
+	-- upvalues: localizationService (ref), reactModule (ref), var1 (ref), formatNumberModule (ref), useLocalization (ref), priceLineItemModule (ref), fFlagPurchasePromptFetchCartPricing (ref)
 	local discountLabel
-	local discount = p2.discount
+	local discount = p1.discount
 	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var6 (copy), formatNumberModule (copy), robloxLocaleId (ref), discount (ref)
-		return string.format("- %s %s", var6, formatNumberModule(robloxLocaleId, discount.amountInRobux))
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: var1 (copy), formatNumberModule (copy), robloxLocaleId (ref), discount (ref)
+		return string.format("- %s %s", var1, formatNumberModule(robloxLocaleId, discount.amountInRobux))
 	end, { robloxLocaleId, discount.amountInRobux })
-	local var11 = useLocalization({
+	local var3 = useLocalization({
 		discountLabel = if discount.percent > 0 then {
 			"IAPExperience.PurchasePrompt.Label.BlackbirdDiscount",
 			discountPercentage = discount.percent
@@ -35,28 +35,28 @@ local function RobloxSubscriptionDiscountRow(p2)
 	local t = {}
 	
 	if fFlagPurchasePromptFetchCartPricing then
-		local label = p2.label
-		discountLabel = if label == nil or label == "" then var11.discountLabel else label
+		local label = p1.label
+		discountLabel = if label == nil or label == "" then var3.discountLabel else label
 	else
-		discountLabel = var11.discountLabel
+		discountLabel = var3.discountLabel
 	end
 	t.label = discountLabel
-	t.amount = var10
-	t.LayoutOrder = p2.LayoutOrder
+	t.amount = var2
+	t.LayoutOrder = p1.LayoutOrder
 	
 	return createElement(priceLineItemModule, t)
 end
 
-local function GenericDiscountRow(p3)
-	-- upvalues: localizationService (ref), reactModule (ref), var6 (ref), formatNumberModule (ref), useLocalization (ref), priceLineItemModule (ref), fFlagPurchasePromptFetchCartPricing (ref)
+local function GenericDiscountRow(p1)
+	-- upvalues: localizationService (ref), reactModule (ref), var1 (ref), formatNumberModule (ref), useLocalization (ref), priceLineItemModule (ref), fFlagPurchasePromptFetchCartPricing (ref)
 	local discountLabel
-	local discount = p3.discount
+	local discount = p1.discount
 	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: var6 (copy), formatNumberModule (copy), robloxLocaleId (ref), discount (ref)
-		return string.format("- %s %s", var6, formatNumberModule(robloxLocaleId, discount.amountInRobux))
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: var1 (copy), formatNumberModule (copy), robloxLocaleId (ref), discount (ref)
+		return string.format("- %s %s", var1, formatNumberModule(robloxLocaleId, discount.amountInRobux))
 	end, { robloxLocaleId, discount.amountInRobux })
-	local var14 = useLocalization({
+	local var3 = useLocalization({
 		discountLabel = if discount.percent > 0 then {
 			"IAPExperience.PurchasePrompt.Label.GenericDiscount",
 			discountPercentage = discount.percent
@@ -66,14 +66,14 @@ local function GenericDiscountRow(p3)
 	local t = {}
 	
 	if fFlagPurchasePromptFetchCartPricing then
-		local label = p3.label
-		discountLabel = if label == nil or label == "" then var14.discountLabel else label
+		local label = p1.label
+		discountLabel = if label == nil or label == "" then var3.discountLabel else label
 	else
-		discountLabel = var14.discountLabel
+		discountLabel = var3.discountLabel
 	end
 	t.label = discountLabel
-	t.amount = var13
-	t.LayoutOrder = p3.LayoutOrder
+	t.amount = var2
+	t.LayoutOrder = p1.LayoutOrder
 	
 	return createElement(priceLineItemModule, t)
 end
@@ -83,7 +83,7 @@ local t = {
 	[discountType.RobloxPlusSubscription] = RobloxSubscriptionDiscountRow
 }
 
-return function(p4)
+return function(p1)
 	-- upvalues: t (ref), GenericDiscountRow (ref), reactModule (ref)
-	return reactModule.createElement(t[p4.discount.type] or GenericDiscountRow, p4)
+	return reactModule.createElement(t[p1.discount.type] or GenericDiscountRow, p1)
 end

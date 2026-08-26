@@ -16,22 +16,22 @@ local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
 local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
 local MUSIC_WINDOW_MAX_SIZE = constantsModule.MUSIC_WINDOW_MAX_SIZE
 local useSignalState = signalsReactModule.useSignalState
-local var14 = windowSizeSignalModule.new(MUSIC_WINDOW_MAX_SIZE.X, MUSIC_WINDOW_MAX_SIZE.Y)
-local var15 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function()
+local var1 = windowSizeSignalModule.new(MUSIC_WINDOW_MAX_SIZE.X, MUSIC_WINDOW_MAX_SIZE.Y)
+local var2 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: serviceModule (ref)
 	return serviceModule:isWindowOpen("music_entrypoint")
 end)
-local var16, var17 = signalsModule.createSignal(false)
+local var3, var4 = signalsModule.createSignal(false)
 
 local function focusMusicWindow()
-	-- upvalues: guiService (ref), var17 (ref)
+	-- upvalues: guiService (ref), var4 (ref)
 	guiService:SetMenuIsOpen(true, "music_entrypoint")
-	var17(true)
+	var4(true)
 end
 
 local function unfocusMusicWindow()
-	-- upvalues: var17 (ref), guiService (ref)
-	var17(false)
+	-- upvalues: var4 (ref), guiService (ref)
+	var4(false)
 	guiService:SetMenuIsOpen(false, "music_entrypoint")
 end
 
@@ -42,13 +42,13 @@ return serviceModule:register({
 	label = "CoreScripts.TopBar.Music",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = sideSheetPlacement.Page,
-	windowSize = var14,
+	windowSize = var1,
 	activated = function()
-		-- upvalues: responsiveModule (ref), chromeModule (ref), focusMusicWindow (ref), var15 (ref), serviceModule (ref)
+		-- upvalues: responsiveModule (ref), chromeModule (ref), focusMusicWindow (ref), var2 (ref), serviceModule (ref)
 		if responsiveModule.GetInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
 			chromeModule.FocusUtils.FocusOffChrome(focusMusicWindow)
 			
-			if var15:get() then
+			if var2:get() then
 				return
 			else
 				serviceModule:toggleWindow("music_entrypoint")
@@ -59,26 +59,26 @@ return serviceModule:register({
 			serviceModule:toggleWindow("music_entrypoint")
 		end
 	end,
-	isActivated = var15,
+	isActivated = var2,
 	components = {
 		Icon = function(_)
-			-- upvalues: commonIconModule (ref), var15 (ref)
-			return commonIconModule("icons/common/music", "icons/common/musicFilled_medium", var15)
+			-- upvalues: commonIconModule (ref), var2 (ref)
+			return commonIconModule("icons/common/music", "icons/common/musicFilled_medium", var2)
 		end,
 		Window = function()
-			-- upvalues: useSignalState (ref), var16 (ref), reactModule (ref), foundationModule (ref), var14 (ref), songbirdModule (ref), var17 (ref), guiService (ref), serviceModule (ref), unfocusMusicWindow (ref)
+			-- upvalues: useSignalState (ref), var3 (ref), reactModule (ref), foundationModule (ref), var1 (ref), songbirdModule (ref), var4 (ref), guiService (ref), serviceModule (ref), unfocusMusicWindow (ref)
 			return reactModule.createElement(foundationModule.View, {
 				tag = "auto-xy",
 				onAbsoluteSizeChanged = function(value)
-					-- upvalues: var14 (copy)
-					var14:requestSize(value.AbsoluteSize.X, value.AbsoluteSize.Y)
+					-- upvalues: var1 (copy)
+					var1:requestSize(value.AbsoluteSize.X, value.AbsoluteSize.Y)
 				end
 			}, {
 				ChromeWindowWrapper = reactModule.createElement(songbirdModule.ChromeWindowWrapper, {
-					isFocused = useSignalState(var16),
+					isFocused = useSignalState(var3),
 					onClose = function()
-						-- upvalues: var17 (copy), guiService (copy), serviceModule (copy)
-						var17(false)
+						-- upvalues: var4 (copy), guiService (copy), serviceModule (copy)
+						var4(false)
 						guiService:SetMenuIsOpen(false, "music_entrypoint")
 						serviceModule:toggleWindow("music_entrypoint")
 					end,

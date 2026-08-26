@@ -11,24 +11,24 @@ return {
 		-- upvalues: promiseModule (ref), emptyAvailabilities (ref)
 		return promiseModule.resolve(emptyAvailabilities())
 	end,
-	parseResponse = function(p0)
+	parseResponse = function(p1)
 		-- upvalues: emptyAvailabilities (ref)
-		local var3 = emptyAvailabilities()
+		local var1 = emptyAvailabilities()
 		
-		if typeof(p0) ~= "table" or typeof(p0.trialAvailabilities) ~= "table" then
-			return var3
+		if typeof(p1) ~= "table" or typeof(p1.trialAvailabilities) ~= "table" then
+			return var1
 		end
-		for i, v in p0.trialAvailabilities do
+		for i, v in p1.trialAvailabilities do
 			if typeof(v) == "table" and v.gamePassId ~= nil then
-				local var4 = tostring(v.gamePassId)
+				local var2 = tostring(v.gamePassId)
 				
 				if v.status == "FREE_TRIAL_AVAILABLE" then
-					var3.available[var4] = true
+					var1.available[var2] = true
 				elseif v.status == "ACTIVE" then
-					var3.active[var4] = true
+					var1.active[var2] = true
 				end
 			end
 		end
-		return var3
+		return var1
 	end
 }

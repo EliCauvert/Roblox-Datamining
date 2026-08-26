@@ -4,8 +4,8 @@ local promptStateModule = require(currencyTransfers.Enums.PromptState)
 local _ = require(currencyTransfers.Models.InitiateTransferModel)
 local setTransferPromptStateModule = require(currencyTransfers.Actions.Send.setTransferPromptState)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: setTransferPromptStateModule (ref), promptStateModule (ref)
-	p0.setSelectedAmount(p1)
-	setTransferPromptStateModule(p0, promptStateModule.TransferConfirm)
+	p1.setSelectedAmount(p2)
+	setTransferPromptStateModule(p1, promptStateModule.TransferConfirm)
 end

@@ -57,18 +57,18 @@ return reactModule.memo(function(p1)
 			var6()
 		end
 	end, { var6, guiService.ViewportDisplaySize })
-	local var8 = reactModule.useCallback(function(p1)
+	local var8 = reactModule.useCallback(function(p2)
 		-- upvalues: var2 (ref), var1 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), dateTimeParsingUtilitiesModule (copy)
-		var2(p1)
+		var2(p2)
 		
-		if p1:match("^%s*$") then return end
+		if p2:match("^%s*$") then return end
 		if var1.variant == dateTimePickerVariantModule.Dual then
-			local var1 = p1:split("-")
-			var1.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(var1[1]), dateTimeUtilitiesModule.getDateTimeFromText(var1[2]))
+			local var9 = p2:split("-")
+			var9.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(var9[1]), dateTimeUtilitiesModule.getDateTimeFromText(var9[2]))
 			
 			return
 		end
-		var1.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(dateTimeParsingUtilitiesModule.trimInputText(p1)))
+		var9.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(dateTimeParsingUtilitiesModule.trimInputText(p2)))
 	end, { var1.onChanged, var1.variant })
 	local var9 = reactModule.useCallback(function()
 		-- upvalues: var1 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), var3 (ref), var2 (ref), var5 (ref)

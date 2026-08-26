@@ -64,82 +64,82 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end
 		return current
 	end, { var2.segments })
-	local var1 = useAnimatedHighlightModule(var2.value, p2 or var7, var9, if flagsModule.FoundationSegmentedControlBeta then var2.size else nil, if flagsModule.FoundationSegmentedControlBeta then var4 else nil)
-	local activeItemHeight = var1.activeItemHeight
-	local highlightPosition = var1.highlightPosition
-	local highlightWidth = var1.highlightWidth
-	local var2, var3 = reactModule.useBinding(Vector2.new(0, 0))
-	local var4 = var3
-	local var5 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (write)
-		var4(p1.AbsoluteSize)
+	local var10 = useAnimatedHighlightModule(var2.value, p2 or var7, var9, if flagsModule.FoundationSegmentedControlBeta then var2.size else nil, if flagsModule.FoundationSegmentedControlBeta then var4 else nil)
+	local activeItemHeight = var10.activeItemHeight
+	local highlightPosition = var10.highlightPosition
+	local highlightWidth = var10.highlightWidth
+	local var11, var12 = reactModule.useBinding(Vector2.new(0, 0))
+	local var13 = var12
+	local var14 = reactModule.useCallback(function(p3)
+		-- upvalues: var13 (write)
+		var13(p3.AbsoluteSize)
 	end, { var6.container.tag })
-	local var6 = reactModule.useCallback(function(p1)
-		-- upvalues: var9 (write), var2 (ref)
-		local var1 = 0
+	local var15 = reactModule.useCallback(function(p3)
+		-- upvalues: var9 (write), var11 (ref)
+		local var16 = 0
 		
-		if p1.current then
-			local current = var9[var2.value].current
+		if p3.current then
+			local current = var9[var11.value].current
 			
 			if current then
-				var1 = current.AbsolutePosition.Y - p1.current.AbsolutePosition.Y
+				var16 = current.AbsolutePosition.Y - p3.current.AbsolutePosition.Y
 			end
 		end
-		return var1
-	end, { var2.value })
+		return var16
+	end, { var11.value })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var2, {
-		tag = if flagsModule.FoundationSegmentedControlBeta and var1 then "size-full-0 auto-y" else nil,
-		Size = if flagsModule.FoundationSegmentedControlBeta then if not var1 then var2:map(function(p1)
-			return UDim2.fromOffset(p1.X, p1.Y)
-		end) else nil else var2:map(function(p1)
-			return UDim2.fromOffset(p1.X, p1.Y)
+	return reactModule.createElement(viewModule, withCommonPropsModule(var11, {
+		tag = if flagsModule.FoundationSegmentedControlBeta and var10 then "size-full-0 auto-y" else nil,
+		Size = if flagsModule.FoundationSegmentedControlBeta then if not var10 then var11:map(function(p3)
+			return UDim2.fromOffset(p3.X, p3.Y)
+		end) else nil else var11:map(function(p3)
+			return UDim2.fromOffset(p3.X, p3.Y)
 		end)
 	}), {
 		SegmentsContainer = reactModule.createElement(viewModule, withDefaultsModule({
-			tag = var6.container.tag,
-			stroke = if flagsModule.FoundationSegmentedControlBeta then var6.container.stroke else nil,
+			tag = var15.container.tag,
+			stroke = if flagsModule.FoundationSegmentedControlBeta then var15.container.stroke else nil,
 			ref = p2 or var7,
-			testId = `{var2.testId}--segments-container`
+			testId = `{var11.testId}--segments-container`
 		}, {
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
-				-- upvalues: var2 (ref), var5 (write)
-				if var2.onAbsoluteSizeChanged then
-					var2.onAbsoluteSizeChanged(p1)
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p3)
+				-- upvalues: var11 (ref), var14 (write)
+				if var11.onAbsoluteSizeChanged then
+					var11.onAbsoluteSizeChanged(p3)
 				end
-				var5(p1)
-			end, { var2.onAbsoluteSizeChanged, var5 })
-		}), dashModule.map(var2.segments, function(p1, p2)
-			-- upvalues: reactModule (copy), segmentModule (copy), var2 (ref), flagsModule (copy), var3 (ref), var4 (ref), var9 (write)
-			return reactModule.createElement(reactModule.Fragment, { key = tostring(p1.id) }, {
+				var14(p3)
+			end, { var11.onAbsoluteSizeChanged, var14 })
+		}), dashModule.map(var11.segments, function(p3, p4)
+			-- upvalues: reactModule (copy), segmentModule (copy), var11 (ref), flagsModule (copy), var12 (ref), var13 (ref), var9 (write)
+			return reactModule.createElement(reactModule.Fragment, { key = tostring(p3.id) }, {
 				Segment = reactModule.createElement(segmentModule, {
-					id = p1.id,
-					size = var2.size,
-					variant = if flagsModule.FoundationSegmentedControlBeta then var3 else nil,
-					fillBehavior = if flagsModule.FoundationSegmentedControlBeta then var4 else nil,
-					isCircular = var2.isCircular,
-					text = p1.text,
-					icon = p1.icon,
-					isActive = p1.id == var2.value,
-					onActivated = var2.onActivated,
-					LayoutOrder = (p2 - 1) * 2 + 1,
-					testId = `{var2.testId}--segment-{p7.id}`,
-					ref = var9[p1.id]
+					id = p3.id,
+					size = var11.size,
+					variant = if flagsModule.FoundationSegmentedControlBeta then var12 else nil,
+					fillBehavior = if flagsModule.FoundationSegmentedControlBeta then var13 else nil,
+					isCircular = var11.isCircular,
+					text = p3.text,
+					icon = p3.icon,
+					isActive = p3.id == var11.value,
+					onActivated = var11.onActivated,
+					LayoutOrder = (p4 - 1) * 2 + 1,
+					testId = `{var11.testId}--segment-{p7.id}`,
+					ref = var9[p3.id]
 				})
 			})
 		end)),
 		Overlay = reactModule.createElement(viewModule, {
-			tag = var6.segment.tag,
-			backgroundStyle = if flagsModule.FoundationSegmentedControlBeta then var5.Color.Shift.Shift_300 else var5.Color.Shift.Shift_400,
-			Size = reactModule.joinBindings({ highlightWidth, activeItemHeight }):map(function(p1)
-				return UDim2.fromOffset(p1[1], p1[2])
+			tag = var15.segment.tag,
+			backgroundStyle = if flagsModule.FoundationSegmentedControlBeta then var14.Color.Shift.Shift_300 else var14.Color.Shift.Shift_400,
+			Size = reactModule.joinBindings({ highlightWidth, activeItemHeight }):map(function(p3)
+				return UDim2.fromOffset(p3[1], p3[2])
 			end),
-			Position = highlightPosition:map(function(p1)
-				-- upvalues: var6 (write), p2 (ref), var7 (write)
-				return UDim2.fromOffset(p1, var6(p2 or var7))
+			Position = highlightPosition:map(function(p3)
+				-- upvalues: var15 (write), p2 (ref), var7 (write)
+				return UDim2.fromOffset(p3, var15(p2 or var7))
 			end),
-			ZIndex = var2.ZIndex + 1,
-			testId = `{var2.testId}--animated-overlay`
+			ZIndex = var11.ZIndex + 1,
+			testId = `{var11.testId}--animated-overlay`
 		})
 	})
 end))

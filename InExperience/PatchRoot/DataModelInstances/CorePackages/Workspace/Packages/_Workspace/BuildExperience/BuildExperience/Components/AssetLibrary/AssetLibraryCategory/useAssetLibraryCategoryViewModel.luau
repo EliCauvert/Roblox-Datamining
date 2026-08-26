@@ -13,32 +13,32 @@ local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBui
 
 return function(value)
 	-- upvalues: useAssetLibraryStringsModule (ref), creatorInventoryModule (ref), reactModule (ref), createAssetLibraryBrowseStoreModule (ref), signalsModule (ref), getAssetTileSubtitleModule (ref), signalsReactModule (ref), sendBuildExperienceEventModule (ref)
-	local var9 = useAssetLibraryStringsModule()
+	local var1 = useAssetLibraryStringsModule()
 	local inventoryStore = value.inventoryStore or creatorInventoryModule.getCreatorInventoryStore(false)
-	local var11 = reactModule.useMemo(function()
+	local var2 = reactModule.useMemo(function()
 		-- upvalues: value (ref), createAssetLibraryBrowseStoreModule (copy)
 		return if value.browseStore == nil then createAssetLibraryBrowseStoreModule({ initialQuery = value.query }) else value.browseStore
 	end, { value.browseStore, value.query })
 	reactModule.useEffect(function()
-		-- upvalues: value (ref), var11 (ref)
+		-- upvalues: value (ref), var2 (ref)
 		return function()
-			-- upvalues: value (copy), var11 (copy)
+			-- upvalues: value (copy), var2 (copy)
 			if value.browseStore == nil then
-				var11.destroy()
+				var2.destroy()
 			end
 		end
-	end, { var11, value.browseStore })
-	local var12 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var11 (ref), value (ref), inventoryStore (ref), getAssetTileSubtitleModule (copy), var9 (ref)
-		return signalsModule.createComputed(function(p0)
-			-- upvalues: var11 (copy), value (copy), inventoryStore (copy), getAssetTileSubtitleModule (copy), var9 (copy)
-			local debouncedQuery = var11.getDebouncedQuery(p0)
-			local assetType = var11.getPageTokens(p0)[value.assetType]
+	end, { var2, value.browseStore })
+	local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var2 (ref), value (ref), inventoryStore (ref), getAssetTileSubtitleModule (copy), var1 (ref)
+		return signalsModule.createComputed(function(p1)
+			-- upvalues: var2 (copy), value (copy), inventoryStore (copy), getAssetTileSubtitleModule (copy), var1 (copy)
+			local debouncedQuery = var2.getDebouncedQuery(p1)
+			local assetType = var2.getPageTokens(p1)[value.assetType]
 			local t = {}
 			local t_1 = {}
-			local var16 = "Ready"
+			local var4 = "Ready"
 			local nextPageToken = nil
-			local var17 = false
+			local var5 = false
 			local t_2 = {}
 			
 			for i, v in assetType do
@@ -49,25 +49,25 @@ return function(value)
 					query = debouncedQuery,
 					pageToken = if v == "" then nil else v
 				})
-				local var22 = andFetchSearch.status(p0)
+				local var6 = andFetchSearch.status(p1)
 				
-				if var22 == "Failed" then
+				if var6 == "Failed" then
 					table.insert(t_2, v)
 					
 					if #t == 0 then
-						var16 = "Failed"
+						var4 = "Failed"
 					else
-						var17 = true
+						var5 = true
 					end
-				elseif var22 == "NotReady" and #t == 0 and var16 ~= "Failed" then
-					var16 = "Loading"
+				elseif var6 == "NotReady" and #t == 0 and var4 ~= "Failed" then
+					var4 = "Loading"
 				end
-				local var23 = andFetchSearch.data(p0)
+				local var7 = andFetchSearch.data(p1)
 				
-				if var23 ~= nil then
-					nextPageToken = var23.nextPageToken
+				if var7 ~= nil then
+					nextPageToken = var7.nextPageToken
 					
-					for i_1, v_1 in var23.assetIds do
+					for i_1, v_1 in var7.assetIds do
 						if not t_1[v_1] then
 							t_1[v_1] = true
 							table.insert(t, v_1)
@@ -78,14 +78,14 @@ return function(value)
 			local t_3 = {}
 			
 			for i_1, v_1 in t do
-				local var20 = inventoryStore.getAsset(value.universeId, v_1).data(p0)
+				local var8 = inventoryStore.getAsset(value.universeId, v_1).data(p1)
 				
-				if var20 ~= nil then
+				if var8 ~= nil then
 					table.insert(t_3, {
 						assetId = v_1,
 						assetType = value.assetType,
-						displayName = var20.displayName,
-						subtitle = getAssetTileSubtitleModule(var20, var9),
+						displayName = var8.displayName,
+						subtitle = getAssetTileSubtitleModule(var8, var1),
 						thumbnail = if value.assetType == "Audio" then nil else `rbxthumb://type=Asset&id={v_1}&w=420&h=420`,
 						onActivated = value.onOpenAsset
 					})
@@ -93,54 +93,54 @@ return function(value)
 			end
 			return {
 				assets = t_3,
-				status = var16,
+				status = var4,
 				nextPageToken = nextPageToken,
-				loadMoreFailed = var17,
+				loadMoreFailed = var5,
 				failedPageTokens = t_2
 			}
 		end)
 	end, {
-		var11, inventoryStore, value.assetType, value.onOpenAsset, value.universeId,
-		var9
+		var2, inventoryStore, value.assetType, value.onOpenAsset, value.universeId,
+		var1
 	}))
 	
 	return {
-		title = if value.assetType == "Model" then var9.model elseif value.assetType == "Image" then var9.image else var9.audio,
-		assets = var12.assets,
-		status = var12.status,
-		hasMore = not var12.loadMoreFailed and (var12.nextPageToken ~= nil and var12.nextPageToken ~= ""),
-		loadMoreFailed = var12.loadMoreFailed,
-		strings = var9,
+		title = if value.assetType == "Model" then var1.model elseif value.assetType == "Image" then var1.image else var1.audio,
+		assets = var3.assets,
+		status = var3.status,
+		hasMore = not var3.loadMoreFailed and (var3.nextPageToken ~= nil and var3.nextPageToken ~= ""),
+		loadMoreFailed = var3.loadMoreFailed,
+		strings = var1,
 		onBack = value.onBack,
 		onLoadMore = reactModule.useCallback(function()
-			-- upvalues: var12 (ref), sendBuildExperienceEventModule (copy), value (ref), var11 (ref)
-			if var12.nextPageToken ~= nil then
+			-- upvalues: var3 (ref), sendBuildExperienceEventModule (copy), value (ref), var2 (ref)
+			if var3.nextPageToken ~= nil then
 				sendBuildExperienceEventModule("ASSET_LIBRARY_LOAD_MORE", { universeId = value.universeId }, { assetType = tostring(value.assetType) })
-				var11.addPageToken(value.assetType, var12.nextPageToken)
+				var2.addPageToken(value.assetType, var3.nextPageToken)
 			end
 		end, {
-			var11,
+			var2,
 			value.assetType,
 			value.universeId,
-			var12.nextPageToken
+			var3.nextPageToken
 		}),
 		onRetry = reactModule.useCallback(function()
-			-- upvalues: var12 (ref), inventoryStore (ref), value (ref), var11 (ref)
-			for i, v in var12.failedPageTokens do
+			-- upvalues: var3 (ref), inventoryStore (ref), value (ref), var2 (ref)
+			for i, v in var3.failedPageTokens do
 				inventoryStore.fetchSearch({
 					maxPageSize = 30,
 					universeId = value.universeId,
 					assetType = value.assetType,
-					query = var11.getDebouncedQuery(false),
+					query = var2.getDebouncedQuery(false),
 					pageToken = if v == "" then nil else v
 				})
 			end
 		end, {
-			var11,
+			var2,
 			inventoryStore,
 			value.assetType,
 			value.universeId,
-			var12.failedPageTokens
+			var3.failedPageTokens
 		})
 	}
 end

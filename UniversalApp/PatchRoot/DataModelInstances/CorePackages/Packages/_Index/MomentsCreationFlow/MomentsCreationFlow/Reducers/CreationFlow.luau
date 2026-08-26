@@ -13,35 +13,35 @@ return require(parent.Rodux).createReducer({
 	currentState = require(momentsCreationFlow.Enums.CreationFlowState).Gallery,
 	musicList = {}
 }, {
-	[require(momentsCreationFlow.Actions.CreationFlowStateUpdated).name] = function(p0, p1)
+	[require(momentsCreationFlow.Actions.CreationFlowStateUpdated).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.union(p0, { currentState = p1.currentState })
+		return cryoModule.Dictionary.union(p1, { currentState = p2.currentState })
 	end,
-	[require(momentsCreationFlow.Actions.MusicSearchRetrieved).name] = function(p2, p3)
+	[require(momentsCreationFlow.Actions.MusicSearchRetrieved).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.union(p2, { musicList = p3.musics })
+		return cryoModule.Dictionary.union(p1, { musicList = p2.musics })
 	end,
-	[require(momentsCreationFlow.Actions.SelectedCaptureUpdated).name] = function(p4, p5)
+	[require(momentsCreationFlow.Actions.SelectedCaptureUpdated).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.union(p4, { capture = p5.capture })
+		return cryoModule.Dictionary.union(p1, { capture = p2.capture })
 	end,
-	[require(momentsCreationFlow.Actions.TextOverlayEditsUpdated).name] = function(p6, p7)
+	[require(momentsCreationFlow.Actions.TextOverlayEditsUpdated).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.union(p6, { textOverlayEdits = p7.textOverlayEdits })
+		return cryoModule.Dictionary.union(p1, { textOverlayEdits = p2.textOverlayEdits })
 	end,
-	[require(momentsCreationFlow.Actions.TrimEditUpdated).name] = function(p8, p9)
+	[require(momentsCreationFlow.Actions.TrimEditUpdated).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.union(p8, { trimEdit = p9.trimEdit })
+		return cryoModule.Dictionary.union(p1, { trimEdit = p2.trimEdit })
 	end,
-	[require(momentsCreationFlow.Actions.MusicEditUpdated).name] = function(p10, p11)
+	[require(momentsCreationFlow.Actions.MusicEditUpdated).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.union(p10, { musicEdit = p11.musicEdit })
+		return cryoModule.Dictionary.union(p1, { musicEdit = p2.musicEdit })
 	end,
-	[require(momentsCreationFlow.Actions.DescriptionUpdated).name] = function(p12, p13)
+	[require(momentsCreationFlow.Actions.DescriptionUpdated).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.union(p12, { description = p13.description })
+		return cryoModule.Dictionary.union(p1, { description = p2.description })
 	end,
-	[require(momentsCreationFlow.Actions.ClearEdits).name] = function(_, p14)
+	[require(momentsCreationFlow.Actions.ClearEdits).name] = function(_, p1)
 		return {
 			active = true,
 			capture = nil,
@@ -49,7 +49,7 @@ return require(parent.Rodux).createReducer({
 			musicEdit = nil,
 			textOverlayEdits = nil,
 			trimEdit = nil,
-			currentState = p14.newState,
+			currentState = p1.newState,
 			musicList = {}
 		}
 	end

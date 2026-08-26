@@ -1,12 +1,12 @@
 ﻿local r15plusUtilsModule = require(script.Parent.Parent.util.R15plusUtils)
 
-return function(p0)
+return function(p1)
 	-- upvalues: r15plusUtilsModule (ref)
 	if not r15plusUtilsModule.checkFlagEnabledForAllowHrd() then
-		return p0.CFrame
+		return p1.CFrame
 	end
-	local cFrame = p0.CFrame
-	local parent = p0.Parent
+	local cFrame = p1.CFrame
+	local parent = p1.Parent
 	while parent and parent:IsA("Attachment") do
 		cFrame = parent.CFrame * cFrame
 		parent = parent.Parent

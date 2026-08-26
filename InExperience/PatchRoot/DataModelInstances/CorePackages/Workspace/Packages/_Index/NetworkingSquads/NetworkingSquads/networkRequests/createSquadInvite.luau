@@ -2,16 +2,16 @@
 local SQUAD_URLModule = require(script.Parent.Parent.SQUAD_URL)
 local _ = require(script.Parent.Parent.networkingSquadTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: SQUAD_URLModule (ref), httpService (ref)
-	local var2 = nil
-	local squadInvite = p0.roduxNetworking.POST("SquadInvite", function(p1, p2)
-		-- upvalues: p0 (ref), var2 (write), SQUAD_URLModule (copy), httpService (copy)
-		if p0.useMockedResponse then
-			var2 = {
+	local var1 = nil
+	local squadInvite = p1.roduxNetworking.POST("SquadInvite", function(p2, p3)
+		-- upvalues: p1 (ref), var1 (write), SQUAD_URLModule (copy), httpService (copy)
+		if p1.useMockedResponse then
+			var1 = {
 				responseBody = {
 					channelUpgraded = false,
-					parentChannelId = p2.parentChannelId,
+					parentChannelId = p3.parentChannelId,
 					results = {
 						{
 							userId = 3447631062,
@@ -21,20 +21,20 @@ return function(p0)
 				}
 			}
 		end
-		return p1(SQUAD_URLModule):path("group-up"):path("v1"):path("invite"):body({
-			groupUpId = p2.squadId,
-			invitedUserIds = p2.invitedUserIds,
-			parentChannelId = p2.parentChannelId,
-			isReparented = p2.isReparented,
+		return p2(SQUAD_URLModule):path("group-up"):path("v1"):path("invite"):body({
+			groupUpId = p3.squadId,
+			invitedUserIds = p3.invitedUserIds,
+			parentChannelId = p3.parentChannelId,
+			isReparented = p3.isReparented,
 			requestId = httpService:GenerateGUID()
 		})
 	end)
 	
-	if p0.useMockedResponse then
+	if p1.useMockedResponse then
 		squadInvite.Mock.clear()
 		squadInvite.Mock.reply(function()
-			-- upvalues: var2 (write)
-			return var2
+			-- upvalues: var1 (write)
+			return var1
 		end)
 	end
 	return squadInvite

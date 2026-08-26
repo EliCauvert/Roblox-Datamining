@@ -7,25 +7,25 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local text = require(parent.AppCommonLib).Text
 local t = { width = require(script.Parent.Constants).TILE_SIZE }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), text (ref), styledTextLabel (ref)
-	local var4 = cryoModule.Dictionary.join(t, p0)
-	local var5 = useStyle()
-	local font = var5.Font
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = useStyle()
+	local font = var2.Font
 	
 	return reactModule.createElement(styledTextLabel, {
 		lineHeight = 1,
 		fluidSizing = false,
 		richText = true,
-		layoutOrder = var4.layoutOrder,
-		text = var4.name,
+		layoutOrder = var1.layoutOrder,
+		text = var1.name,
 		fontStyle = font.CaptionHeader,
-		colorStyle = var5.Theme.TextEmphasis,
-		size = UDim2.fromOffset(var4.width, reactModule.useMemo(function()
-			-- upvalues: text (copy), var4 (ref), font (ref)
-			return text.GetTextHeight(var4.name, font.CaptionHeader.Font, font.BaseSize * font.CaptionHeader.RelativeSize, 10000)
+		colorStyle = var2.Theme.TextEmphasis,
+		size = UDim2.fromOffset(var1.width, reactModule.useMemo(function()
+			-- upvalues: text (copy), var1 (ref), font (ref)
+			return text.GetTextHeight(var1.name, font.CaptionHeader.Font, font.BaseSize * font.CaptionHeader.RelativeSize, 10000)
 		end, {
-			var4.name,
+			var1.name,
 			font.CaptionHeader.Font,
 			font.BaseSize * font.CaptionHeader.RelativeSize
 		})),

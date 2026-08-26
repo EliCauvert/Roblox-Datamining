@@ -14,14 +14,14 @@ return {
 			customFields = customFieldsModule
 		})
 	end,
-	reportFailedDevtoolsConnection = function(p0)
+	reportFailedDevtoolsConnection = function(p1)
 		-- upvalues: reportCounterModule (ref), object (ref), customFieldsModule (ref)
 		reportCounterModule({
 			eventName = "react_failed_devtools_connection",
 			description = "A failed connection to React Devtools",
 			links = "https://roblox.atlassian.net/wiki/spaces/luauee/pages/3836510338/DevTools+Telemetry",
 			lastUpdated = { 2025, 8, 28 },
-			customFields = object.assign({}, customFieldsModule, { error_type = p0 })
+			customFields = object.assign({}, customFieldsModule, { error_type = p1 })
 		})
 	end
 }

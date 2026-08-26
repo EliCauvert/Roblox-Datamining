@@ -2,10 +2,10 @@
 local promiseModule = require(parent.Promise)
 local getFIntAccountSwitchRelaunchFallbackSeconds = require(parent.SharedFlags).GetFIntAccountSwitchRelaunchFallbackSeconds
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: promiseModule (ref), getFIntAccountSwitchRelaunchFallbackSeconds (ref)
-	return ((p1 or {}).delay or promiseModule.delay)(getFIntAccountSwitchRelaunchFallbackSeconds()):andThen(function()
-		-- upvalues: p0 (ref)
-		p0()
+	return ((p2 or {}).delay or promiseModule.delay)(getFIntAccountSwitchRelaunchFallbackSeconds()):andThen(function()
+		-- upvalues: p1 (ref)
+		p1()
 	end)
 end

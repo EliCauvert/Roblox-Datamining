@@ -50,109 +50,109 @@ avatarEditorPromptsApp.validateProps = tModule.strictInterface({
 	screenSizeUpdated = tModule.callback
 })
 
-function avatarEditorPromptsApp.init(p0)
+function avatarEditorPromptsApp.init(p1)
 	-- upvalues: t (ref), userInputService (ref), roactGamepadModule (ref)
-	p0:setState({
+	p1:setState({
 		isGamepad = t[userInputService:GetLastInputType()] or false
 	})
 	
-	function p0.absoluteSizeChanged(p1)
-		-- upvalues: p0 (ref)
-		p0.props.screenSizeUpdated(p1.AbsoluteSize)
+	function p0.absoluteSizeChanged(p2)
+		-- upvalues: p1 (ref)
+		p1.props.screenSizeUpdated(p2.AbsoluteSize)
 	end
 	
-	p0.focusController = roactGamepadModule.createFocusController()
-	p0.selectedCoreGuiObject = nil
-	p0.selectedGuiObject = nil
+	p1.focusController = roactGamepadModule.createFocusController()
+	p1.selectedCoreGuiObject = nil
+	p1.selectedGuiObject = nil
 end
 
-function avatarEditorPromptsApp.render(p2)
+function avatarEditorPromptsApp.render(p1)
 	-- upvalues: t_1 (ref), roactModule (ref), connectionModule (ref), externalEventConnection (ref), userInputService (ref), t (ref), roactGamepadModule (ref)
-	local var24 = nil
+	local var1 = nil
 	
-	if p2.props.promptType then
-		local promptType = t_1[p2.props.promptType]
+	if p1.props.promptType then
+		local promptType = t_1[p1.props.promptType]
 		
 		if promptType then
-			var24 = roactModule.createElement(promptType)
+			var1 = roactModule.createElement(promptType)
 		else
 			error("Unexpected prompt type!")
 		end
 	end
-	return if var24 == nil then nil else roactModule.createElement("ScreenGui", {
+	return if var1 == nil then nil else roactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		AutoLocalize = false,
 		DisplayOrder = -1,
-		[roactModule.Change.AbsoluteSize] = p2.absoluteSizeChanged
+		[roactModule.Change.AbsoluteSize] = p1.absoluteSizeChanged
 	}, {
 		Connection = roactModule.createElement(connectionModule),
 		LastInputTypeConnection = roactModule.createElement(externalEventConnection, {
 			event = userInputService.LastInputTypeChanged,
-			callback = function(p3)
-				-- upvalues: p2 (ref), t (copy)
-				p2:setState({ isGamepad = t[p3] or false })
+			callback = function(p2)
+				-- upvalues: p1 (ref), t (copy)
+				p1:setState({ isGamepad = t[p2] or false })
 			end
 		}) or nil,
 		PromptFrame = roactModule.createElement(roactGamepadModule.Focusable.Frame, {
 			BackgroundTransparency = 1,
-			focusController = p2.focusController,
+			focusController = p1.focusController,
 			Size = UDim2.fromScale(1, 1)
-		}, { Prompt = var24 }) or nil
+		}, { Prompt = var1 }) or nil
 	})
 end
 
-function avatarEditorPromptsApp.revertSelectedGuiObject(p4)
+function avatarEditorPromptsApp.revertSelectedGuiObject(p1)
 	-- upvalues: localPlayer (ref), coreGuiService (ref), guiService (ref)
 	local playerGui = localPlayer and localPlayer:FindFirstChildWhichIsA("PlayerGui")
 	
-	if p4.selectedCoreGuiObject and p4.selectedCoreGuiObject:IsDescendantOf(coreGuiService) then
-		guiService.SelectedCoreObject = p4.selectedCoreGuiObject
-	elseif p4.selectedGuiObject and p4.selectedGuiObject:IsDescendantOf(playerGui) then
-		guiService.SelectedObject = p4.selectedGuiObject
+	if p1.selectedCoreGuiObject and p1.selectedCoreGuiObject:IsDescendantOf(coreGuiService) then
+		guiService.SelectedCoreObject = p1.selectedCoreGuiObject
+	elseif p1.selectedGuiObject and p1.selectedGuiObject:IsDescendantOf(playerGui) then
+		guiService.SelectedObject = p1.selectedGuiObject
 		guiService.SelectedCoreObject = nil
 	else
 		guiService.SelectedCoreObject = nil
 	end
-	p4.selectedCoreGuiObject = nil
-	p4.selectedGuiObject = nil
+	p1.selectedCoreGuiObject = nil
+	p1.selectedGuiObject = nil
 end
 
-function avatarEditorPromptsApp.didUpdate(p5, p6, p7)
+function avatarEditorPromptsApp.didUpdate(p1, p2, p3)
 	-- upvalues: guiService (ref)
-	local var26 = p5.state.isGamepad and p5.props.promptType ~= nil
+	local var1 = p1.state.isGamepad and p1.props.promptType ~= nil
 	
-	if var26 ~= (p7.isGamepad and p6.promptType ~= nil) then
-		if var26 then
-			p5.selectedCoreGuiObject = guiService.SelectedCoreObject
-			p5.selectedGuiObject = guiService.SelectedObject
+	if var1 ~= (p3.isGamepad and p2.promptType ~= nil) then
+		if var1 then
+			p1.selectedCoreGuiObject = guiService.SelectedCoreObject
+			p1.selectedGuiObject = guiService.SelectedObject
 			guiService.SelectedObject = nil
-			p5.focusController.captureFocus()
+			p1.focusController.captureFocus()
 			
 			return
 		end
-		p5.focusController.releaseFocus()
+		p1.focusController.releaseFocus()
 		
-		if p5.state.isGamepad then
-			p5:revertSelectedGuiObject()
+		if p1.state.isGamepad then
+			p1:revertSelectedGuiObject()
 		end
 	end
 end
 
-function avatarEditorPromptsApp.willUnmount(p8)
-	if p8.state.isGamepad then
-		p8:revertSelectedGuiObject()
+function avatarEditorPromptsApp.willUnmount(p1)
+	if p1.state.isGamepad then
+		p1:revertSelectedGuiObject()
 	end
 end
 
-return roactRoduxModule.connect(function(p9)
-	return { promptType = p9.promptInfo.promptType }
-end, function(p10)
+return roactRoduxModule.connect(function(p1)
+	return { promptType = p1.promptInfo.promptType }
+end, function(p1)
 	-- upvalues: screenSizeUpdatedModule (ref)
 	return {
-		screenSizeUpdated = function(p11)
-			-- upvalues: p10 (ref), screenSizeUpdatedModule (copy)
-			return p10(screenSizeUpdatedModule(p11))
+		screenSizeUpdated = function(p2)
+			-- upvalues: p1 (ref), screenSizeUpdatedModule (copy)
+			return p1(screenSizeUpdatedModule(p2))
 		end
 	}
 end)(avatarEditorPromptsApp)

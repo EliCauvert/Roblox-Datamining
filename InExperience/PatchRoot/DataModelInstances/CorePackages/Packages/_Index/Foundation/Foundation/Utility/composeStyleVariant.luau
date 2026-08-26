@@ -2,8 +2,8 @@
 local dashModule = require(foundation.Parent.Dash)
 local _ = require(foundation.Components.Types)
 
-local function _(p0)
-	return if type(p0) == "string" then { [p0] = true } else p0
+local function _(p1)
+	return if type(p1) == "string" then { [p1] = true } else p1
 end
 
 local function mergeTags(p1, p2)
@@ -11,30 +11,30 @@ local function mergeTags(p1, p2)
 	return if p1 then if p2 then if type(p1) == "table" or type(p2) == "table" then dashModule.join(if type(p1) == "string" then { [p1] = true } else p1, if type(p2) == "string" then { [p2] = true } else p2) else `{p1} {p2}` else p1 else p2
 end
 
-local _ = function(p3, p4)
+local _ = function(p1, p2)
 	-- upvalues: dashModule (ref), mergeTags (ref)
-	local var3 = dashModule.join(p3, p4)
-	var3.tag = mergeTags(p3.tag, p4.tag)
+	local var1 = dashModule.join(p1, p2)
+	var1.tag = mergeTags(p1.tag, p2.tag)
 	
-	return var3
+	return var1
 end
 
-function composeStyleVariant(p5, ...)
+function composeStyleVariant(p1, ...)
 	-- upvalues: dashModule (ref), mergeTags (ref)
-	local var4 = dashModule.copy(p5)
-	dashModule.forEachArgs(function(p6)
-		-- upvalues: var4 (ref), dashModule (copy), mergeTags (copy)
-		if p6 == nil then return end
-		for i, v in p6 do
-			local var5 = var4
-			local var6 = var4[i] or {}
-			local var7 = dashModule.join(var6, v)
-			var7.tag = mergeTags(var6.tag, v.tag)
-			var5[i] = var7
+	local var1 = dashModule.copy(p1)
+	dashModule.forEachArgs(function(p2)
+		-- upvalues: var1 (ref), dashModule (copy), mergeTags (copy)
+		if p2 == nil then return end
+		for i, v in p2 do
+			local var2 = var1
+			local var3 = var1[i] or {}
+			local var4 = dashModule.join(var3, v)
+			var4.tag = mergeTags(var3.tag, v.tag)
+			var2[i] = var4
 		end
 	end, ...)
 	
-	return var4
+	return var1
 end
 
 return composeStyleVariant

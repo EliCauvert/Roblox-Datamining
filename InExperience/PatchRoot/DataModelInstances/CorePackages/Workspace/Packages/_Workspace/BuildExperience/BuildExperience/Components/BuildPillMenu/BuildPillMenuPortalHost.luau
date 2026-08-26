@@ -5,27 +5,27 @@ local reactModule = require(parent.React)
 local getBuildPillMenuPortalStoreModule = require(buildExperience.Stores.GetBuildPillMenuPortalStore)
 local view = foundationModule.View
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: getBuildPillMenuPortalStoreModule (ref), reactModule (ref), view (ref)
-	local var4 = getBuildPillMenuPortalStoreModule()
-	local var5 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref)
-		var4.setPortalTarget(p1)
-	end, { var4 })
+	local var1 = getBuildPillMenuPortalStoreModule()
+	local var2 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref)
+		var1.setPortalTarget(p2)
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
+		-- upvalues: var1 (ref)
 		return function()
-			-- upvalues: var4 (copy)
-			var4.setPortalTarget(nil)
+			-- upvalues: var1 (copy)
+			var1.setPortalTarget(nil)
 		end
-	end, { var4 })
+	end, { var1 })
 	
 	return reactModule.createElement(view, {
 		tag = "auto-xy",
-		AnchorPoint = p0.anchorPoint,
-		LayoutOrder = p0.layoutOrder,
-		Position = p0.position,
-		ref = var5,
-		testId = p0.testId or "build-pill-menu-portal-host"
+		AnchorPoint = p1.anchorPoint,
+		LayoutOrder = p1.layoutOrder,
+		Position = p1.position,
+		ref = var2,
+		testId = p1.testId or "build-pill-menu-portal-host"
 	})
 end)

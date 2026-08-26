@@ -27,29 +27,29 @@ informativeToast.defaultProps = {
 	size = UDim2.new(1, 0, 1, 0)
 }
 
-function informativeToast.render(p0)
+function informativeToast.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), toastFrameModule (ref)
-	return withStyleModule(function(p1)
-		-- upvalues: roactModule (copy), p0 (ref), toastFrameModule (copy)
-		local theme = p1.Theme
+	return withStyleModule(function(p2)
+		-- upvalues: roactModule (copy), p1 (ref), toastFrameModule (copy)
+		local theme = p2.Theme
 		
 		return roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
-			AnchorPoint = p0.props.anchorPoint,
+			AnchorPoint = p1.props.anchorPoint,
 			BackgroundColor3 = theme.BackgroundUIContrast.Color,
-			BackgroundTransparency = theme.BackgroundUIContrast.Transparency * p1.Settings.PreferredTransparency,
-			LayoutOrder = p0.props.layoutOrder,
-			Position = p0.props.position,
-			Size = p0.props.size
+			BackgroundTransparency = theme.BackgroundUIContrast.Transparency * p2.Settings.PreferredTransparency,
+			LayoutOrder = p1.props.layoutOrder,
+			Position = p1.props.position,
+			Size = p1.props.size
 		}, {
 			ToastFrame = roactModule.createElement(toastFrameModule, {
-				iconProps = p0.props.iconProps,
-				iconChildren = p0.props.iconChildren,
-				padding = p0.props.padding,
-				subtitleTextProps = p0.props.subtitleTextProps,
-				textFrameSize = p0.props.textFrameSize,
-				titleTextProps = p0.props.titleTextProps
+				iconProps = p1.props.iconProps,
+				iconChildren = p1.props.iconChildren,
+				padding = p1.props.padding,
+				subtitleTextProps = p1.props.subtitleTextProps,
+				textFrameSize = p1.props.textFrameSize,
+				titleTextProps = p1.props.titleTextProps
 			})
 		})
 	end)

@@ -18,7 +18,7 @@ local localization = inExperienceLocalesModule.Localization
 local foundationProvider = foundationModule.FoundationProvider
 local t = { colorMode = foundationModule.Enums.ColorMode.Dark }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: getLocalizationServiceStore (ref), signalsReactModule (ref), localization (ref), reactModule (ref), serviceProvider (ref), appEventIngestService (ref), eventIngest (ref), eventIngestService (ref), roactAnalytics (ref), analytics (ref), localizationProvider (ref), foundationProvider (ref), t (ref), utilsModule (ref)
 	return reactModule.createElement(serviceProvider, {
 		services = {
@@ -30,9 +30,9 @@ return reactModule.memo(function(p0)
 			localization = localization.new(signalsReactModule.useSignalState(getLocalizationServiceStore(false).getRobloxLocaleId))
 		}, {
 			FoundationProvider = reactModule.createElement(foundationProvider, {
-				colorMode = p0.theme or t.colorMode,
+				colorMode = p1.theme or t.colorMode,
 				device = utilsModule.getDeviceType()
-			}, p0.children)
+			}, p1.children)
 		})
 	})
 end)

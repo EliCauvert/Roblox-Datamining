@@ -23,52 +23,52 @@ local useIsChatUserMessagesEnabledModule = require(appChat.Hooks.useIsChatUserMe
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
 local useIsRobloxSubscriber = userProfilesModule.Hooks.useIsRobloxSubscriber
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useDispatch (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), useChatPagePaddingModule (ref), reactModule (ref), useIsChatUserMessagesEnabledModule (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), useUserProfilesFetch (ref), userProfilesModule (ref), useRecordModalSequenceResponseForConversationModule (ref), useGetConversationFromIdModule (ref), appChatNetworkingModule (ref), useIsGuiInChatVisibleModule (ref), useSelector (ref), roduxNetworkingModule (ref), API (ref), name (ref), getUsernameFromId (ref), getCombinedNameFromId (ref), getThumbnailsForUserIdsModule (ref), foundationModule (ref), osaContextCardOneToOneModule (ref)
-	local var15 = useDispatch()
-	local conversationId = useGetOneToOneFriendIdFromConversationIdModule(p0.conversationId) or ""
-	local var17 = useChatPagePaddingModule()
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var17 (ref)
+	local var1 = useDispatch()
+	local conversationId = useGetOneToOneFriendIdFromConversationIdModule(p1.conversationId) or ""
+	local var2 = useChatPagePaddingModule()
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref)
 		return {
-			left = UDim.new(0, var17.left),
-			right = UDim.new(0, var17.right)
+			left = UDim.new(0, var2.left),
+			right = UDim.new(0, var2.right)
 		}
-	end, { var17.left, var17.right })
-	local var19 = useIsChatUserMessagesEnabledModule()
-	local var20 = useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck and conversationId ~= "" then conversationId else nil)
-	local var21 = useUserProfilesFetch({
+	end, { var2.left, var2.right })
+	local var4 = useIsChatUserMessagesEnabledModule()
+	local var5 = useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck and conversationId ~= "" then conversationId else nil)
+	local var6 = useUserProfilesFetch({
 		overrideRetryCount = 4,
 		userIds = { conversationId },
 		query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	})
-	local var22, var23 = reactModule.useState(false)
-	local var24 = useRecordModalSequenceResponseForConversationModule(p0.conversationId)
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), conversationId (ref)
-		if p0.openViewProfile then
-			p0.openViewProfile(conversationId)
+	local var7, var8 = reactModule.useState(false)
+	local var9 = useRecordModalSequenceResponseForConversationModule(p1.conversationId)
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), conversationId (ref)
+		if p1.openViewProfile then
+			p1.openViewProfile(conversationId)
 		end
 	end, { conversationId })
-	local var26 = useGetConversationFromIdModule(p0.conversationId)
-	local var27 = var26 and var26.osaAcknowledgementStatus == appChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse.Unacknowledged
-	local var28 = reactModule.useRef(nil)
-	local var29 = if var27 then useIsGuiInChatVisibleModule(var28, { var28.current }) else false
-	local var30 = useSelector(function(p1)
-		-- upvalues: appChatNetworkingModule (copy), p0 (ref)
-		return appChatNetworkingModule.rodux.RecordModalSequenceResponse.getStatus(p1, p0.conversationId)
+	local var11 = useGetConversationFromIdModule(p1.conversationId)
+	local var12 = var11 and var11.osaAcknowledgementStatus == appChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse.Unacknowledged
+	local var13 = reactModule.useRef(nil)
+	local var14 = if var12 then useIsGuiInChatVisibleModule(var13, { var13.current }) else false
+	local var15 = useSelector(function(p2)
+		-- upvalues: appChatNetworkingModule (copy), p1 (ref)
+		return appChatNetworkingModule.rodux.RecordModalSequenceResponse.getStatus(p2, p1.conversationId)
 	end)
-	local var31, var32 = reactModule.useState(nil)
-	local var33, var34 = reactModule.useState(nil)
+	local var16, var17 = reactModule.useState(nil)
+	local var18, var19 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var27 (ref), var29 (ref), var30 (ref), roduxNetworkingModule (copy), var22 (ref), var24 (ref), var23 (ref), var26 (ref), var15 (ref), API (copy), p0 (ref), name (copy)
-		if var27 and var29 and (var30 ~= roduxNetworkingModule.Enum.NetworkStatus.Fetching and not var22) and var24 then
-			var24("record_has_seen", "conversation_inline_top_modal", nil, "OsaContextCard"):andThen(function()
-				-- upvalues: var23 (copy), var26 (copy), var15 (copy), API (copy), p0 (copy)
-				var23(true)
+		-- upvalues: var12 (ref), var14 (ref), var15 (ref), roduxNetworkingModule (copy), var7 (ref), var9 (ref), var8 (ref), var11 (ref), var1 (ref), API (copy), p1 (ref), name (copy)
+		if var12 and var14 and (var15 ~= roduxNetworkingModule.Enum.NetworkStatus.Fetching and not var7) and var9 then
+			var9("record_has_seen", "conversation_inline_top_modal", nil, "OsaContextCard"):andThen(function()
+				-- upvalues: var8 (copy), var11 (copy), var1 (copy), API (copy), p1 (copy)
+				var8(true)
 				
-				if var26 and var26.source ~= "friends" then
-					var15(API(p0.conversationId))
+				if var11 and var11.source ~= "friends" then
+					var1(API(p1.conversationId))
 				end
 			end):catch(function(p2)
 				-- upvalues: name (copy)
@@ -76,34 +76,34 @@ return reactModule.memo(function(p0)
 			end)
 		end
 	end, {
-		var27, var29, var30, var24, var22, var15, p0.conversationId
+		var12, var14, var15, var9, var7, var1, p1.conversationId
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var21 (ref), conversationId (ref), getUsernameFromId (copy), var32 (ref), var34 (ref), getCombinedNameFromId (copy)
-		if var21.data and conversationId then
-			local var35 = getUsernameFromId(var21.data, conversationId)
-			var32(if var35 then "@" .. var35 else nil)
-			var34(getCombinedNameFromId(var21.data, conversationId))
+		-- upvalues: var6 (ref), conversationId (ref), getUsernameFromId (copy), var17 (ref), var19 (ref), getCombinedNameFromId (copy)
+		if var6.data and conversationId then
+			local var20 = getUsernameFromId(var6.data, conversationId)
+			var17(if var20 then "@" .. var35 else nil)
+			var19(getCombinedNameFromId(var6.data, conversationId))
 		end
-	end, { var21.data, conversationId })
+	end, { var6.data, conversationId })
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "col size-full-0 auto-y align-x-center padding-top-xxlarge padding-bottom-large",
-		padding = var18
+		padding = var3
 	}, {
 		OsaContextCardOneToOne = reactModule.createElement(osaContextCardOneToOneModule, {
-			displayName = var33,
-			username = var31,
+			displayName = var18,
+			username = var16,
 			avatarThumbnail = reactModule.useMemo(function()
 				-- upvalues: getThumbnailsForUserIdsModule (copy), conversationId (ref)
 				return getThumbnailsForUserIdsModule({ conversationId })[1]
 			end, { conversationId }),
-			onAvatarActivated = var25,
-			hasError = if var21.error then true else false,
-			isChatUserMessagesEnabled = var19,
-			ref = var28,
+			onAvatarActivated = var10,
+			hasError = if var6.error then true else false,
+			isChatUserMessagesEnabled = var4,
+			ref = var13,
 			userId = conversationId,
-			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var20 else nil
+			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var5 else nil
 		})
 	})
 end)

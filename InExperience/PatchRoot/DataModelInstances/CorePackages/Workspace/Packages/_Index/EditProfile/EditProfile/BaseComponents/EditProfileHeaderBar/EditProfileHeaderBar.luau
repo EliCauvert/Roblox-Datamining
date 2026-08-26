@@ -10,7 +10,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local useTokens = foundationModule.Hooks.useTokens
 local editProfileIncreaseTopPadding = game:DefineFastFlag("EditProfileIncreaseTopPadding", false)
 
-return function(p0)
+return function(p1)
 	-- upvalues: editProfileIncreaseTopPadding (ref), useTokens (ref), reactModule (ref), view (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = if editProfileIncreaseTopPadding then "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge" else "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-xxlarge",
@@ -25,21 +25,21 @@ return function(p0)
 				icon = iconName.ChevronLargeLeft,
 				size = iconSize.Medium,
 				variant = buttonVariant.Utility,
-				onActivated = p0.onClose
+				onActivated = p1.onClose
 			}),
 			HeaderText = reactModule.createElement(text, {
 				tag = "text-heading-small auto-xy",
 				LayoutOrder = 2,
-				Text = p0.headerText
+				Text = p1.headerText
 			})
 		}),
-		SaveButton = if p0.onSave then reactModule.createElement(iconButton, {
+		SaveButton = if p1.onSave then reactModule.createElement(iconButton, {
 			isCircular = true,
 			icon = iconName.CheckLarge,
 			size = iconSize.Medium,
 			variant = buttonVariant.Utility,
-			onActivated = p0.onSave,
-			isDisabled = p0.isLoading or p0.isDisabled == true
+			onActivated = p1.onSave,
+			isDisabled = p1.isLoading or p1.isDisabled == true
 		}) else nil
 	})
 end

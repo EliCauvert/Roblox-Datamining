@@ -5,8 +5,8 @@ local _ = {
 	PlayedTogether = "Feature.Friends.Label.Frequent"
 }
 
-local _ = function(p0)
-	return if p0.mutualFriendsCount then p0.mutualFriendsCount elseif p0.mutualFriendsList then #p0.mutualFriendsList else 0
+local _ = function(p1)
+	return if p1.mutualFriendsCount then p1.mutualFriendsCount elseif p1.mutualFriendsList then #p1.mutualFriendsList else 0
 end
 
 return function(p1)

@@ -17,15 +17,15 @@ local colorMode = foundationModule.Enums.ColorMode
 local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 local constants = UIBloxModule.App.Style.Constants
 local contentProvider = UIBloxModule.App.Context.ContentProvider
-local var12 = roduxModule.combineReducers({
+local var1 = roduxModule.combineReducers({
 	VirtualEvents = virtualEventsStateModule.installReducer()
 })
 
-return function(p0, p1)
-	-- upvalues: roduxModule (ref), var12 (ref), reactModule (ref), roactRoduxModule (ref), contentProvider (ref), mockContentProvider (ref), localizationModule (ref), robloxAppLocalesModule (ref), foundationProvider (ref), colorMode (ref), appStyleProvider (ref), constants (ref), roactNavigationModule (ref), designTokenProvider (ref), graphQLServerModule (ref), apolloClientModule (ref)
+return function(p1, p2)
+	-- upvalues: roduxModule (ref), var1 (ref), reactModule (ref), roactRoduxModule (ref), contentProvider (ref), mockContentProvider (ref), localizationModule (ref), robloxAppLocalesModule (ref), foundationProvider (ref), colorMode (ref), appStyleProvider (ref), constants (ref), roactNavigationModule (ref), designTokenProvider (ref), graphQLServerModule (ref), apolloClientModule (ref)
 	local t = {
 		StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, {
-			store = (if p1 then p1.store else nil) or roduxModule.Store.new(var12, if p1 then p1.initialStoreState else nil, { roduxModule.thunkMiddleware })
+			store = (if p2 then p2.store else nil) or roduxModule.Store.new(var1, if p2 then p2.initialStoreState else nil, { roduxModule.thunkMiddleware })
 		}, {
 			ContentProvider = reactModule.createElement(contentProvider.Provider, { value = mockContentProvider.new() }, {
 				LocalizationProvider = reactModule.createElement(localizationModule.LocalizationProvider, {
@@ -50,7 +50,7 @@ return function(p0, p1)
 								}
 							}, {
 								DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
-									Children = reactModule.createElement(reactModule.Fragment, nil, p0)
+									Children = reactModule.createElement(reactModule.Fragment, nil, p1)
 								})
 							})
 						})
@@ -60,27 +60,27 @@ return function(p0, p1)
 		})
 	}
 	
-	if p1 then
-		if p1.mockResolvers then
-			local var14 = graphQLServerModule.GraphQLServer.new({ mockResolvers = p1.mockResolvers })
+	if p2 then
+		if p2.mockResolvers then
+			local var2 = graphQLServerModule.GraphQLServer.new({ mockResolvers = p2.mockResolvers })
 			t = {
 				ApolloProvider = reactModule.createElement(apolloClientModule.ApolloProvider, {
 					client = apolloClientModule.ApolloClient.new({
 						cache = apolloClientModule.InMemoryCache.new({}),
 						link = apolloClientModule.HttpLink.new({
 							uri = "/api",
-							fetch = function(_, p2)
-								-- upvalues: var14 (ref)
-								return var14:fetchLocal(p2)
+							fetch = function(_, p3)
+								-- upvalues: var2 (ref)
+								return var2:fetchLocal(p3)
 							end
 						})
 					})
 				}, t)
 			}
 		end
-		if p1.mockNavigation then
+		if p2.mockNavigation then
 			t = {
-				NavigationProvider = reactModule.createElement(roactNavigationModule.Provider, { value = p1.mockNavigation }, t)
+				NavigationProvider = reactModule.createElement(roactNavigationModule.Provider, { value = p2.mockNavigation }, t)
 			}
 		end
 	end

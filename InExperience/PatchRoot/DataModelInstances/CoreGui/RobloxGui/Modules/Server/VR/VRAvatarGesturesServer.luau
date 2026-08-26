@@ -26,9 +26,9 @@ function t.new()
 	return tbl
 end
 
-function cleanCharacter(p0)
-	if p0.Character then
-		local humanoid = p0.Character:FindFirstChild("Humanoid")
+function cleanCharacter(p1)
+	if p1.Character then
+		local humanoid = p1.Character:FindFirstChild("Humanoid")
 		
 		if humanoid then
 			for i, v in pairs({
@@ -36,47 +36,47 @@ function cleanCharacter(p0)
 				"TrackedIKRightHand",
 				"TrackedIKHead"
 			}) do
-				local var9 = humanoid:FindFirstChild(v)
+				local var1 = humanoid:FindFirstChild(v)
 				
-				if var9 then
-					var9:Destroy()
+				if var1 then
+					var1:Destroy()
 				end
 			end
 		end
 		for i, v in pairs({ "TrackedLeftHand", "TrackedRightHand", "TrackedHead" }) do
-			local var10 = p0.Character:FindFirstChild(v)
+			local var2 = p1.Character:FindFirstChild(v)
 			
-			if var10 then
-				var10:Destroy()
+			if var2 then
+				var2:Destroy()
 			end
 		end
 	end
 end
 
-function t:onPlayerChanged(p1, p2)
+function t:onPlayerChanged(p2, p3)
 	-- upvalues: avatarUtil (ref)
-	self.VRPlayers[p1] = p2 or nil
+	self.VRPlayers[p2] = p3 or nil
 	
-	if not p2 then
-		cleanCharacter(p1)
+	if not p3 then
+		cleanCharacter(p2)
 		
 		return
 	elseif not self.avatarUtil then
 		self.avatarUtil = avatarUtil.new()
 	end
-	self.avatarUtil:connectPlayerCharacterChanges(p1, function(p3)
+	self.avatarUtil:connectPlayerCharacterChanges(p2, function(p4)
 		-- upvalues: self (ref)
-		self:onCharacterChanged(p3)
+		self:onCharacterChanged(p4)
 	end)
 end
 
-function t:onPlayerAdded(p4)
+function t:onPlayerAdded(p2)
 	-- upvalues: rbxAnalyticsService (ref), VRAvatarGesturesAnalyticsThrottleHundrethsPercent (ref)
 	if next(self.VRPlayers) ~= nil then
 		rbxAnalyticsService:ReportInfluxSeries("VRAvatarGestures", {
 			calledFrom = "ServerPlayerAddedWithVRPlayer",
 			placeId = game.PlaceId,
-			playerUserID = p4.UserId
+			playerUserID = p2.UserId
 		}, VRAvatarGesturesAnalyticsThrottleHundrethsPercent)
 	end
 end
@@ -91,17 +91,17 @@ function t:onAvatarGesturesChanged()
 			avatarGesturesVRPlayer_1.Name = "AvatarGesturesVRPlayer"
 			avatarGesturesVRPlayer_1.Parent = robloxReplicatedStorageService
 		end
-		self.connections:connect("VRPlayerOnServerEvent", avatarGesturesVRPlayer_1.OnServerEvent, function(p5, p6)
+		self.connections:connect("VRPlayerOnServerEvent", avatarGesturesVRPlayer_1.OnServerEvent, function(p2, p3)
 			-- upvalues: self (ref)
-			self:onPlayerChanged(p5, p6)
+			self:onPlayerChanged(p2, p3)
 		end)
-		self.connections:connect("PlayerAdded", playersService.PlayerAdded, function(p7)
+		self.connections:connect("PlayerAdded", playersService.PlayerAdded, function(p2)
 			-- upvalues: self (ref)
-			self:onPlayerAdded(p7)
+			self:onPlayerAdded(p2)
 		end)
-		self.connections:connect("PlayerRemoving", playersService.PlayerRemoving, function(p8)
+		self.connections:connect("PlayerRemoving", playersService.PlayerRemoving, function(p2)
 			-- upvalues: self (ref)
-			self:onPlayerChanged(p8, false)
+			self:onPlayerChanged(p2, false)
 		end)
 		
 		return
@@ -117,104 +117,104 @@ function t:onAvatarGesturesChanged()
 	end
 end
 
-function t.findOrCreateColliders(_, p9, p10)
+function t.findOrCreateColliders(_, p2, p3)
 	-- upvalues: playersService (ref)
-	local var12 = playersService:GetPlayerFromCharacter(p10)
+	local var3 = playersService:GetPlayerFromCharacter(p3)
 	local text = "Tracked" .. p9
-	local var14 = p10:FindFirstChild(text)
+	local var4 = p3:FindFirstChild(text)
 	
-	if not var14 then
-		var14 = Instance.new("Part")
-		var14.Name = text
-		var14.Transparency = 1
-		var14.CanCollide = false
-		var14.Parent = p10
-		var14:SetNetworkOwner(var12)
+	if not var4 then
+		var4 = Instance.new("Part")
+		var4.Name = text
+		var4.Transparency = 1
+		var4.CanCollide = false
+		var4.Parent = p3
+		var4:SetNetworkOwner(var3)
 	end
-	local var15 = var14:FindFirstChild(text .. "Attachment")
+	local var5 = var4:FindFirstChild(text .. "Attachment")
 	
-	if not var15 then
-		var15 = Instance.new("Attachment")
-		var15.Name = text .. "Attachment"
-		var15.Parent = var14
+	if not var5 then
+		var5 = Instance.new("Attachment")
+		var5.Name = text .. "Attachment"
+		var5.Parent = var4
 	end
-	local var16 = var14:FindFirstChild(text .. "AlignPosition")
+	local var6 = var4:FindFirstChild(text .. "AlignPosition")
 	
-	if not var16 then
-		var16 = Instance.new("AlignPosition")
-		var16.Name = text .. "AlignPosition"
-		var16.Mode = Enum.PositionAlignmentMode.OneAttachment
-		var16.Attachment0 = var15
-		var16.RigidityEnabled = true
-		var16.Parent = var14
+	if not var6 then
+		var6 = Instance.new("AlignPosition")
+		var6.Name = text .. "AlignPosition"
+		var6.Mode = Enum.PositionAlignmentMode.OneAttachment
+		var6.Attachment0 = var5
+		var6.RigidityEnabled = true
+		var6.Parent = var4
 	end
-	local var17 = var14:FindFirstChild(text .. "AlignOrientation")
+	local var7 = var4:FindFirstChild(text .. "AlignOrientation")
 	
-	if not var17 then
-		var17 = Instance.new("AlignOrientation")
-		var17.Name = text .. "AlignOrientation"
-		var17.Mode = Enum.OrientationAlignmentMode.OneAttachment
-		var17.Attachment0 = var15
-		var17.RigidityEnabled = true
-		var17.Parent = var14
+	if not var7 then
+		var7 = Instance.new("AlignOrientation")
+		var7.Name = text .. "AlignOrientation"
+		var7.Mode = Enum.OrientationAlignmentMode.OneAttachment
+		var7.Attachment0 = var5
+		var7.RigidityEnabled = true
+		var7.Parent = var4
 	end
-	local var18 = p10:FindFirstChild(p9)
+	local var8 = p3:FindFirstChild(p2)
 	
-	if var18 then
-		var14.Size = var18.Size
-		var14.CFrame = var18.CFrame
-		var16.Position = var18.Position
-		var17.CFrame = var18.CFrame
+	if var8 then
+		var4.Size = var8.Size
+		var4.CFrame = var8.CFrame
+		var6.Position = var8.Position
+		var7.CFrame = var8.CFrame
 	else
-		var14.Size = Vector3.new(1, 1, 1)
-		var14.CFrame = p10.WorldPivot
-		var16.Position = p10.WorldPivot.Position
-		var17.CFrame = p10.WorldPivot
+		var4.Size = Vector3.new(1, 1, 1)
+		var4.CFrame = p3.WorldPivot
+		var6.Position = p3.WorldPivot.Position
+		var7.CFrame = p3.WorldPivot
 	end
-	local humanoid = p10:FindFirstChild("Humanoid")
+	local humanoid = p3:FindFirstChild("Humanoid")
 	
 	if humanoid then
 		local text_1 = "TrackedIK" .. p9
-		local var21 = humanoid:FindFirstChild(text_1)
+		local var9 = humanoid:FindFirstChild(text_1)
 		
-		if not var21 then
-			var21 = Instance.new("IKControl")
-			var21.Name = text_1
+		if not var9 then
+			var9 = Instance.new("IKControl")
+			var9.Name = text_1
 		end
-		var21.SmoothTime = 0.1
-		var21.Parent = humanoid
-		var21.Target = var14
+		var9.SmoothTime = 0.1
+		var9.Parent = humanoid
+		var9.Target = var4
 	end
 end
 
-function t:createHandCollider(p11, p12)
-	self:findOrCreateColliders(p11 .. "Hand", p12)
-	local var22 = p12:FindFirstChild(p11 .. "Hand")
-	local humanoid = p12:FindFirstChild("Humanoid")
+function t:createHandCollider(p2, p3)
+	self:findOrCreateColliders(p2 .. "Hand", p3)
+	local var3 = p3:FindFirstChild(p2 .. "Hand")
+	local humanoid = p3:FindFirstChild("Humanoid")
 	
 	if humanoid then
-		local var24 = humanoid:FindFirstChild("TrackedIK" .. p11 .. "Hand")
+		local var4 = humanoid:FindFirstChild("TrackedIK" .. p11 .. "Hand")
 		
-		if var24 then
-			var24.Type = Enum.IKControlType.Transform
-			local var25 = p12:FindFirstChild(p11 .. "UpperArm")
+		if var4 then
+			var4.Type = Enum.IKControlType.Transform
+			local var5 = p3:FindFirstChild(p2 .. "UpperArm")
 			
-			if var25 then
-				var24.ChainRoot = var22
+			if var5 then
+				var4.ChainRoot = var3
 				coroutine.wrap(function()
-					-- upvalues: var24 (ref), var25 (ref)
+					-- upvalues: var4 (ref), var5 (ref)
 					task.wait(0.1)
-					var24.ChainRoot = var25
+					var4.ChainRoot = var5
 				end)()
 			end
-			if var22 then
-				var24.EndEffector = var22
+			if var3 then
+				var4.EndEffector = var3
 			end
-			var24.Priority = 1
+			var4.Priority = 1
 		end
 	end
-	if var22 then
-		local ragdollBallSocket = var22:FindFirstChild("RagdollBallSocket")
+	if var3 then
+		local ragdollBallSocket = var3:FindFirstChild("RagdollBallSocket")
 		
 		if ragdollBallSocket then
 			ragdollBallSocket.LimitsEnabled = false
@@ -222,17 +222,17 @@ function t:createHandCollider(p11, p12)
 	end
 end
 
-function t:createHeadCollider(p13)
-	self:findOrCreateColliders("Head", p13)
-	local head = p13:FindFirstChild("Head")
-	local humanoid = p13:FindFirstChild("Humanoid")
+function t:createHeadCollider(p2)
+	self:findOrCreateColliders("Head", p2)
+	local head = p2:FindFirstChild("Head")
+	local humanoid = p2:FindFirstChild("Humanoid")
 	
 	if humanoid then
 		local trackedIKHead = humanoid:FindFirstChild("TrackedIKHead")
 		
 		if trackedIKHead then
 			trackedIKHead.Type = Enum.IKControlType.Rotation
-			local upperTorso = p13:FindFirstChild("UpperTorso")
+			local upperTorso = p2:FindFirstChild("UpperTorso")
 			
 			if upperTorso then
 				trackedIKHead.ChainRoot = upperTorso
@@ -244,12 +244,12 @@ function t:createHeadCollider(p13)
 	end
 end
 
-function t:onCharacterChanged(p14)
+function t:onCharacterChanged(p2)
 	-- upvalues: playersService (ref), VRService (ref)
-	if self.VRPlayers[playersService:GetPlayerFromCharacter(p14)] and VRService.AvatarGestures then
-		self:createHandCollider("Left", p14)
-		self:createHandCollider("Right", p14)
-		self:createHeadCollider(p14)
+	if self.VRPlayers[playersService:GetPlayerFromCharacter(p2)] and VRService.AvatarGestures then
+		self:createHandCollider("Left", p2)
+		self:createHandCollider("Right", p2)
+		self:createHeadCollider(p2)
 	end
 end
 

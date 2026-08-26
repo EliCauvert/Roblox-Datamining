@@ -8,19 +8,19 @@ local function _()
 	return if localPlayer then localPlayer.Character else nil
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: playersService (ref), constantsModule (ref)
 	local t = {}
 	local t_1 = {}
 	
-	if not p0 then
+	if not p1 then
 		local localPlayer = playersService.LocalPlayer
-		p0 = if not localPlayer then nil else localPlayer.Character
+		p1 = if not localPlayer then nil else localPlayer.Character
 	end
-	if not p0 then
+	if not p1 then
 		return t
 	end
-	local humanoid = p0:FindFirstChildOfClass("Humanoid")
+	local humanoid = p1:FindFirstChildOfClass("Humanoid")
 	
 	if not humanoid then
 		return t
@@ -33,11 +33,11 @@ return function(p0)
 	for i, v in constantsModule.AssetTypeIdStringToHumanoidDescriptionProp do
 		if constantsModule.AssetTypeIdToAccessoryTypeEnum[i] == nil then
 			for i_1, v_1 in string.split(humanoidDescription[v] or "") do
-				local var6 = tonumber(v_1)
+				local var1 = tonumber(v_1)
 				
-				if var6 and var6 ~= 0 and not t_1[var6] then
-					t_1[var6] = true
-					table.insert(t, var6)
+				if var1 and var1 ~= 0 and not t_1[var1] then
+					t_1[var1] = true
+					table.insert(t, var1)
 				end
 			end
 		end

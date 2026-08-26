@@ -30,11 +30,11 @@ local getSearchQueryStoreModule = require(buildExperience.Stores.GetSearchQueryS
 local _ = require(buildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local buildSearchBarWidth = game:DefineFastInt("BuildSearchBarWidth", 400)
 
-local function renderFlyoutLeftHeader(p0)
+local function renderFlyoutLeftHeader(p1)
 	-- upvalues: reactModule (ref), flyoutLeftHeader (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), fFlagEnableHomeRobloxLogo (ref), flyoutSidePanelIXP (ref)
 	return reactModule.createElement(flyoutLeftHeader, {
 		isRobloxLogoEnabled = false,
-		titleText = if fFlagBuildLocalization then p0 else localizationStringsModule.BUILD_HEADER_TITLE,
+		titleText = if fFlagBuildLocalization then p1 else localizationStringsModule.BUILD_HEADER_TITLE,
 		isFlyoutEntrypointEnabled = if fFlagEnableHomeRobloxLogo then flyoutSidePanelIXP.isFlyoutSidePanelEnabled() else nil,
 		isAlternateEntryPointEnabled = flyoutSidePanelIXP.isAlternateEntryPointEnabled()
 	})
@@ -60,14 +60,14 @@ local function AgentSpec(p1)
 	})
 end
 
-local function HeaderSearch(p2)
+local function HeaderSearch(p1)
 	-- upvalues: useScaledValue (ref), buildSearchBarWidth (ref), useTokens (ref), signalsReactModule (ref), useLocalization (ref), reactModule (ref), view (ref), searchBarContainerModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var19 = useScaledValue(buildSearchBarWidth)
+	local var1 = useScaledValue(buildSearchBarWidth)
 	local size2200 = useTokens().Size.Size_2200
-	local searchQueryStore = p2.searchQueryStore
-	local var20 = searchQueryStore.useIsSearchActive()
-	local var21 = signalsReactModule.useSignalBinding(searchQueryStore.getDraftQuery)
-	local var22 = useLocalization({
+	local searchQueryStore = p1.searchQueryStore
+	local var2 = searchQueryStore.useIsSearchActive()
+	local var3 = signalsReactModule.useSignalBinding(searchQueryStore.getDraftQuery)
+	local var4 = useLocalization({
 		searchbarPlaceholder = "Feature.Build.Label.SearchGames",
 		cancelText = "Feature.Build.Action.Cancel"
 	})
@@ -87,15 +87,15 @@ local function HeaderSearch(p2)
 		SearchBarContainer = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "row align-y-center shrink",
-			Size = UDim2.new(0, var19, 1, 0)
+			Size = UDim2.new(0, var1, 1, 0)
 		}, {
 			SearchBar = reactModule.createElement(searchBarContainerModule, {
 				clear = searchQueryStore.clear,
 				onDismiss = searchQueryStore.endSearch,
 				onFocusGained = searchQueryStore.beginSearch,
 				onFocusLost = searchQueryStore.endSearchIfEmpty,
-				placeholder = var22.searchbarPlaceholder,
-				query = var21,
+				placeholder = var4.searchbarPlaceholder,
+				query = var3,
 				setQuery = searchQueryStore.setQuery
 			})
 		}),
@@ -103,10 +103,10 @@ local function HeaderSearch(p2)
 			LayoutOrder = 3,
 			tag = "row align-y-center fill size-0-full"
 		}, {
-			Cancel = if var20 then reactModule.createElement(button, {
+			Cancel = if var2 then reactModule.createElement(button, {
 				testId = "BuildPageHeader.SearchCancelButton",
 				width = UDim.new(0, size2200),
-				text = var22.cancelText,
+				text = var4.cancelText,
 				variant = buttonVariant.Utility,
 				size = inputSize.Medium,
 				onActivated = searchQueryStore.endSearch
@@ -115,38 +115,38 @@ local function HeaderSearch(p2)
 	})
 end
 
-local function HeaderCenter(p3)
+local function HeaderCenter(p1)
 	-- upvalues: displayModule (ref), signalsReactModule (ref), reactModule (ref), HeaderSearch (ref), getSearchQueryStoreModule (ref)
 	return if signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize) == Enum.DisplaySize.Small then nil else reactModule.createElement(HeaderSearch, {
-		searchQueryStore = p3.searchQueryStore or getSearchQueryStoreModule()
+		searchQueryStore = p1.searchQueryStore or getSearchQueryStoreModule()
 	})
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), flyoutSidePanelIXP (ref), reactModule (ref), fFlagBuildAddSearchIconAndMoveSearchbarModule (ref), displayModule (ref), signalsReactModule (ref), getSearchQueryStoreModule (ref), HeaderCenter (ref), creatorAgentChatModule (ref), AgentSpec (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), renderEmptyRight (ref), headerBar (ref), renderFlyoutLeftHeader (ref), agentSpecDebugSheetModule (ref)
-	local var23 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ title = localizationStringsModule.BUILD_HEADER_TITLE }) else nil).title else localizationStringsModule.BUILD_HEADER_TITLE
-	local var24 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
-	local var25, var26 = reactModule.useState(false)
-	local var27 = false
-	local var28 = false
+	local var1 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ title = localizationStringsModule.BUILD_HEADER_TITLE }) else nil).title else localizationStringsModule.BUILD_HEADER_TITLE
+	local var2 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
+	local var3, var4 = reactModule.useState(false)
+	local var5 = false
+	local var6 = false
 	local searchQueryStore = nil
 	
 	if fFlagBuildAddSearchIconAndMoveSearchbarModule then
-		local var30 = signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize)
-		searchQueryStore = p4.searchQueryStore or getSearchQueryStoreModule()
-		var27 = var30 ~= Enum.DisplaySize.Small
-		var28 = var30 == Enum.DisplaySize.Small and p4.onOpenSearch ~= nil
+		local var7 = signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize)
+		searchQueryStore = p1.searchQueryStore or getSearchQueryStoreModule()
+		var5 = var7 ~= Enum.DisplaySize.Small
+		var6 = var7 == Enum.DisplaySize.Small and p1.onOpenSearch ~= nil
 	end
-	local var31 = if fFlagBuildAddSearchIconAndMoveSearchbarModule and var27 then function()
+	local var8 = if fFlagBuildAddSearchIconAndMoveSearchbarModule and var5 then function()
 		-- upvalues: reactModule (copy), HeaderCenter (copy), searchQueryStore (write)
 		return reactModule.createElement(HeaderCenter, { searchQueryStore = searchQueryStore })
 	end else nil
-	local var32 = creatorAgentChatModule.experimentOverride.isEnabled()
-	local var33 = if var32 then reactModule.createElement(AgentSpec, {
+	local var9 = creatorAgentChatModule.experimentOverride.isEnabled()
+	local var10 = if var9 then reactModule.createElement(AgentSpec, {
 		LayoutOrder = if fFlagBuildAddSearchIconAndMoveSearchbarModule then 2 else nil,
 		onActivated = function()
-			-- upvalues: var26 (ref)
-			var26(true)
+			-- upvalues: var4 (ref)
+			var4(true)
 		end,
 		testId = if fFlagBuildAddSearchIconAndMoveSearchbarModule then "BuildPageHeader.AgentSpecButton" else nil
 	}) else nil
@@ -155,46 +155,46 @@ return function(p4)
 		ZIndex = 3,
 		tag = "composition-content-header size-full-0 auto-y",
 		testId = "BuildPageHeader",
-		LayoutOrder = p4.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, p4.height)
+		LayoutOrder = p1.LayoutOrder,
+		Size = UDim2.new(1, 0, 0, p1.height)
 	}, {
 		HeaderBar = reactModule.createElement(headerBar, {
 			isTitleCentered = false,
-			barHeight = p4.height,
+			barHeight = p1.height,
 			paddingLeft = UDim.new(0, 0),
 			paddingRight = UDim.new(0, 0),
-			renderLeft = if var24 then if fFlagBuildLocalization then function()
-				-- upvalues: renderFlyoutLeftHeader (copy), var23 (ref)
-				return renderFlyoutLeftHeader(var23)
+			renderLeft = if var2 then if fFlagBuildLocalization then function()
+				-- upvalues: renderFlyoutLeftHeader (copy), var1 (ref)
+				return renderFlyoutLeftHeader(var1)
 			end else renderFlyoutLeftHeader else nil,
-			title = if var24 then nil else var23,
-			renderCenter = var31,
-			renderRight = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then if var28 or var32 then function()
-				-- upvalues: reactModule (copy), view (copy), var28 (write), iconButton (copy), iconName (copy), p4 (ref), inputSize (copy), buttonVariant (copy), var33 (ref)
+			title = if var2 then nil else var1,
+			renderCenter = var8,
+			renderRight = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then if var6 or var9 then function()
+				-- upvalues: reactModule (copy), view (copy), var6 (write), iconButton (copy), iconName (copy), p1 (ref), inputSize (copy), buttonVariant (copy), var10 (ref)
 				return reactModule.createElement(view, {
 					tag = "row align-y-center gap-medium auto-xy",
 					testId = "BuildPageHeader.RightActions"
 				}, {
-					Search = if var28 then reactModule.createElement(iconButton, {
+					Search = if var6 then reactModule.createElement(iconButton, {
 						LayoutOrder = 1,
 						isCircular = true,
 						testId = "BuildPageHeader.SearchButton",
 						icon = iconName.MagnifyingGlass,
-						onActivated = p4.onOpenSearch,
+						onActivated = p1.onOpenSearch,
 						size = inputSize.Medium,
 						variant = buttonVariant.Utility
 					}) else nil,
-					AgentSpec = var33
+					AgentSpec = var10
 				})
-			end else renderEmptyRight elseif var32 then function()
-				-- upvalues: var33 (ref)
-				return var33
+			end else renderEmptyRight elseif var9 then function()
+				-- upvalues: var10 (ref)
+				return var10
 			end else nil
 		}),
-		AgentSpecSheet = if var25 then reactModule.createElement(agentSpecDebugSheetModule, {
+		AgentSpecSheet = if var3 then reactModule.createElement(agentSpecDebugSheetModule, {
 			onClose = function()
-				-- upvalues: var26 (ref)
-				var26(false)
+				-- upvalues: var4 (ref)
+				var4(false)
 			end
 		}) else nil
 	})

@@ -12,9 +12,9 @@ local t = {
 	BorderPaddingSize = 20,
 	AssetTextMaxSize = 14,
 	ContainerBackgroundColor = require(script.Parent.Colors).Carbon,
-	ContainerSize = function(p0)
+	ContainerSize = function(p1)
 		-- upvalues: constantsModule (ref)
-		return UDim2.new(1, 0, 1, -constantsModule.TopBarHeight * p0)
+		return UDim2.new(1, 0, 1, -constantsModule.TopBarHeight * p1)
 	end,
 	ContainerAnchorPoint = Vector2.new(0.5, 0),
 	ContainerPosition = function(p1)
@@ -39,8 +39,8 @@ local t = {
 }
 setmetatable(t, {
 	__newindex = function(_, _, _) end,
-	__index = function(_, p2)
-		error("CompactView table has no value: " .. tostring(p2))
+	__index = function(_, p1)
+		error("CompactView table has no value: " .. tostring(p1))
 	end
 })
 

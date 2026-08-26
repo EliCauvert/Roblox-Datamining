@@ -4,16 +4,16 @@ local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local propResultCategory = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 
-local function buildDefaultProp(p0, p1, p2, p3, p4, p5, p6, p7)
+local function buildDefaultProp(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: sduiPropUtilsModule (ref), propResultCategory (ref), buildDefaultProp (ref)
-	if p0 == "literal" then
-		return sduiPropUtilsModule.generateStaticPropValue(p1, p6), propResultCategory.Literal
-	elseif p0 == "token" then
-		return sduiPropUtilsModule.generateTokenBindingPropValue(p1, p4, p6), propResultCategory.PropSignal
-	elseif p0 == "binding_path" then
-		return sduiPropUtilsModule.generateDynamicBindingPropValue(p1, p2, p4, p3, p6), propResultCategory.PropSignal
-	elseif p0 == "conditional" then
-		return sduiPropUtilsModule.generateConditionalPropValue(p1, p2, p4, p5, p3, p7 or buildDefaultProp, p6), propResultCategory.PropSignal
+	if p1 == "literal" then
+		return sduiPropUtilsModule.generateStaticPropValue(p2, p7), propResultCategory.Literal
+	elseif p1 == "token" then
+		return sduiPropUtilsModule.generateTokenBindingPropValue(p2, p5, p7), propResultCategory.PropSignal
+	elseif p1 == "binding_path" then
+		return sduiPropUtilsModule.generateDynamicBindingPropValue(p2, p3, p5, p4, p7), propResultCategory.PropSignal
+	elseif p1 == "conditional" then
+		return sduiPropUtilsModule.generateConditionalPropValue(p2, p3, p5, p6, p4, p8 or buildDefaultProp, p7), propResultCategory.PropSignal
 	end
 	return nil, propResultCategory.Failed
 end

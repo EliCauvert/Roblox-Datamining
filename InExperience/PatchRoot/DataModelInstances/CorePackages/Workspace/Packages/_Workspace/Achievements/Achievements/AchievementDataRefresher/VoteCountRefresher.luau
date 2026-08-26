@@ -8,58 +8,58 @@ local _ = require(parent.LuauPolyfill)
 local dashModule = require(parent.Dash)
 
 return {
-	init = function(p0, p1, p2, p3, p4)
-		p0.fireVoteCountChanged = p1
-		p0.store = p2
-		p0.requestImpl = p3
-		p0.platformCloudStorageService = p4
+	init = function(p1, p2, p3, p4, p5)
+		p1.fireVoteCountChanged = p2
+		p1.store = p3
+		p1.requestImpl = p4
+		p1.platformCloudStorageService = p5
 	end,
-	start = function(p5)
+	start = function(p1)
 		-- upvalues: loggerModule (ref)
-		p5.storeChangedConnection = p5.store.changed:connect(function(p6, p7)
-			-- upvalues: p5 (ref), loggerModule (copy)
-			local localUserGameVoteCounter = p6.LocalUserGameVoteCounter
+		p1.storeChangedConnection = p1.store.changed:connect(function(p2, p3)
+			-- upvalues: p1 (ref), loggerModule (copy)
+			local localUserGameVoteCounter = p2.LocalUserGameVoteCounter
 			
-			if p7.LocalUserGameVoteCounter ~= localUserGameVoteCounter and localUserGameVoteCounter.voteCountSinceAppStart > 0 then
-				p5:_checkPollster(localUserGameVoteCounter.lastUniverseId):catch(function(p8)
+			if p3.LocalUserGameVoteCounter ~= localUserGameVoteCounter and localUserGameVoteCounter.voteCountSinceAppStart > 0 then
+				p1:_checkPollster(localUserGameVoteCounter.lastUniverseId):catch(function(p4)
 					-- upvalues: loggerModule (copy)
-					loggerModule:warning(p8)
+					loggerModule:warning(p4)
 				end)
 			end
 		end)
 	end,
-	_checkPollster = function(p9, p10)
+	_checkPollster = function(p1, p2)
 		-- upvalues: promiseModule (ref), dashModule (ref), getUserVoteCountModule (ref), loggerModule (ref)
-		return if p9.platformCloudStorageService and p9.platformCloudStorageService:IsUserDataAvailable() then promiseModule.new(function()
-			-- upvalues: p9 (ref), dashModule (copy), p10 (ref)
-			local data = p9.platformCloudStorageService:GetUserDataAsync("UniversesVoted").data or {}
+		return if p1.platformCloudStorageService and p1.platformCloudStorageService:IsUserDataAvailable() then promiseModule.new(function()
+			-- upvalues: p1 (ref), dashModule (copy), p2 (ref)
+			local data = p1.platformCloudStorageService:GetUserDataAsync("UniversesVoted").data or {}
 			
-			if #data < 5 and not dashModule.includes(data, p10) then
-				table.insert(data, p10)
-				p9.platformCloudStorageService:SetUserDataAsync("UniversesVoted", { data = data })
+			if #data < 5 and not dashModule.includes(data, p2) then
+				table.insert(data, p2)
+				p1.platformCloudStorageService:SetUserDataAsync("UniversesVoted", { data = data })
 			end
-			p9.fireVoteCountChanged(#data)
-		end) else getUserVoteCountModule(p9.requestImpl):andThen(function(p11)
-			-- upvalues: loggerModule (copy), p9 (ref)
-			if p11.responseBody == nil then
+			p1.fireVoteCountChanged(#data)
+		end) else getUserVoteCountModule(p1.requestImpl):andThen(function(p3)
+			-- upvalues: loggerModule (copy), p1 (ref)
+			if p3.responseBody == nil then
 				loggerModule:warning("Response has no body.")
 				
 				return
 			end
-			local voteCount = p11.responseBody.voteCount
+			local voteCount = p3.responseBody.voteCount
 			
 			if voteCount == nil then
 				loggerModule:warning("Response has no voteCount field.")
 				
 				return
 			end
-			p9.fireVoteCountChanged(voteCount)
+			p1.fireVoteCountChanged(voteCount)
 		end)
 	end,
-	stop = function(p12)
-		if p12.storeChangedConnection then
-			p12.storeChangedConnection:disconnect()
-			p12.storeChangedConnection = nil
+	stop = function(p1)
+		if p1.storeChangedConnection then
+			p1.storeChangedConnection:disconnect()
+			p1.storeChangedConnection = nil
 		end
 	end
 }

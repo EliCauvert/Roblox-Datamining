@@ -9,14 +9,14 @@ local playtestersOnlyShareDialogModule = require(buildExperience.Components.Shar
 local _ = require(buildExperience.utils.useExperienceShareFlow)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), friendsOnlyShareDialogModule (ref), playtestersOnlyShareDialogModule (ref)
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		FriendsOnlyShareDialog = if p0.activeDialog == "friends" then reactModule.createElement(friendsOnlyShareDialogModule, { onCancel = p0.onCancel, onShare = p0.onConfirmFriends }) else nil,
-		PlaytestersOnlyShareDialog = if p0.activeDialog == "playtesters" then reactModule.createElement(playtestersOnlyShareDialogModule, {
-			onCancel = p0.onCancel,
-			onShare = p0.onConfirmPlaytesters,
-			errorText = if p0.hasShareError then if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+		FriendsOnlyShareDialog = if p1.activeDialog == "friends" then reactModule.createElement(friendsOnlyShareDialogModule, { onCancel = p1.onCancel, onShare = p1.onConfirmFriends }) else nil,
+		PlaytestersOnlyShareDialog = if p1.activeDialog == "playtesters" then reactModule.createElement(playtestersOnlyShareDialogModule, {
+			onCancel = p1.onCancel,
+			onShare = p1.onConfirmPlaytesters,
+			errorText = if p1.hasShareError then if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 				shareLinkError = localizationStringsModule.PRIVATE_INVITES_SHARE_LINK_ERROR
 			}) else nil).shareLinkError else localizationStringsModule.PRIVATE_INVITES_SHARE_LINK_ERROR else nil
 		}) else nil

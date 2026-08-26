@@ -11,10 +11,10 @@ function t:get()
 	return self._value
 end
 
-function t:set(p0)
-	if self._value ~= p0 then
-		self._value = p0
-		self._changeSignal:fire(p0)
+function t:set(p1)
+	if self._value ~= p1 then
+		self._value = p1
+		self._changeSignal:fire(p1)
 	end
 end
 

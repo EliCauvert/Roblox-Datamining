@@ -6,8 +6,8 @@ local _ = require(foundation.Enums.ThemeName)
 local tokenProcessingUtilitiesModule = require(foundation.Providers.Style.Tokens.TokenProcessingUtilities)
 local tokensModule = require(foundation.Providers.Style.Tokens)
 
-local function _(p0)
-	return p0:gsub("%.", ""):gsub("_", "")
+local function _(p1)
+	return p1:gsub("%.", ""):gsub("_", "")
 end
 
 local function emitLeafAttributes(p1, p2, p3)
@@ -34,10 +34,10 @@ return function(p4, p5, p6, p7)
 	local tokens = tokensModule.getTokens(p5, p6, 1, nil, if flagsModule.FoundationThemeName then p4 else nil)
 	
 	for i, v in p7 do
-		local var7 = tokenProcessingUtilitiesModule.resolveTokenOverride(tokens, i, v)
+		local var1 = tokenProcessingUtilitiesModule.resolveTokenOverride(tokens, i, v)
 		
-		if var7 ~= nil then
-			emitLeafAttributes(t, i:gsub("%.", ""):gsub("_", ""), var7)
+		if var1 ~= nil then
+			emitLeafAttributes(t, i:gsub("%.", ""):gsub("_", ""), var1)
 		end
 	end
 	return t

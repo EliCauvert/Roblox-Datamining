@@ -14,17 +14,17 @@ function t.new()
 	return t_1
 end
 
-function t:requestHover(p0)
-	if self.hoveredKey == p0 then return end
-	if self.waitingForHover == p0 then return end
+function t:requestHover(p1)
+	if self.hoveredKey == p1 then return end
+	if self.waitingForHover == p1 then return end
 	if self.hoveredKey == nil or self.waitingForHover ~= nil then
-		self.hoveredKey = p0
+		self.hoveredKey = p1
 		self.waitingForHover = nil
 		self.changed:fire(self.hoveredKey)
 		
 		return
 	end
-	self.waitingForHover = p0
+	self.waitingForHover = p1
 end
 
 function t:cancelHover(p1)

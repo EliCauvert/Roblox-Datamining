@@ -16,14 +16,14 @@ local t_1 = {
 	End = popoverAlign.End
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), tooltip (ref), t (ref), t_1 (ref)
-	return if p0.anchor == nil then nil else reactModule.createElement(tooltip, {
-		title = p0.title or "",
-		text = p0.text,
-		shortcut = if p0.shortcut and #p0.shortcut > 0 then p0.shortcut else nil,
-		side = t[p0.side or ""],
-		align = t_1[p0.align or ""],
-		LayoutOrder = p0.layoutOrder
-	}, p0.anchor)
+	return if p1.anchor == nil then nil else reactModule.createElement(tooltip, {
+		title = p1.title or "",
+		text = p1.text,
+		shortcut = if p1.shortcut and #p1.shortcut > 0 then p1.shortcut else nil,
+		side = t[p1.side or ""],
+		align = t_1[p1.align or ""],
+		LayoutOrder = p1.layoutOrder
+	}, p1.anchor)
 end)

@@ -4,26 +4,26 @@ local _ = require(viewRecycler.Core.Types)
 local itemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 local mutationControllerModule = require(script.Parent.MutationController)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: itemKeyRegistryModule (ref), mutationControllerModule (ref), dataSourceChangeTypeModule (ref)
-	local cloned = table.clone(p0 or {})
-	local var5 = itemKeyRegistryModule.create(p1, "DataSource.sequence")
-	local var6 = var5.rebuild(cloned)
-	local var7 = mutationControllerModule(function()
+	local cloned = table.clone(p1 or {})
+	local var1 = itemKeyRegistryModule.create(p2, "DataSource.sequence")
+	local var2 = var1.rebuild(cloned)
+	local var3 = mutationControllerModule(function()
 		-- upvalues: cloned (write)
 		return #cloned
 	end, function()
-		-- upvalues: cloned (write), var6 (write), var5 (ref)
+		-- upvalues: cloned (write), var2 (write), var1 (ref)
 		return {
 			values = table.clone(cloned),
-			keys = table.clone(var6),
-			keyRegistry = var5.snapshot()
+			keys = table.clone(var2),
+			keyRegistry = var1.snapshot()
 		}
-	end, function(p2)
-		-- upvalues: cloned (write), var6 (write), var5 (ref)
-		cloned = p2.values
-		var6 = p2.keys
-		var5.restore(p2.keyRegistry)
+	end, function(p3)
+		-- upvalues: cloned (write), var2 (write), var1 (ref)
+		cloned = p3.values
+		var2 = p3.keys
+		var1.restore(p3.keyRegistry)
 	end)
 	local _ = nil
 	local t = {
@@ -35,172 +35,172 @@ return function(p0, p1)
 			-- upvalues: cloned (write)
 			return cloned[p3]
 		end,
-		getItemKey = function(p4)
-			-- upvalues: var6 (write)
-			return var6[p4]
+		getItemKey = function(p3)
+			-- upvalues: var2 (write)
+			return var2[p3]
 		end,
-		getItems = function(p5, p6)
+		getItems = function(p3, p4)
 			-- upvalues: cloned (write)
-			return table.move(cloned, p5, p6, 1, {})
+			return table.move(cloned, p3, p4, 1, {})
 		end,
-		subscribe = var7.subscribe,
-		transaction = var7.transaction
+		subscribe = var3.subscribe,
+		transaction = var3.transaction
 	}
 	
-	function t.append(p7)
+	function t.append(p3)
 		-- upvalues: t (write), cloned (write)
-		t.insert(#cloned + 1, p7)
+		t.insert(#cloned + 1, p3)
 	end
 	
-	function t.prepend(p8)
+	function t.prepend(p3)
 		-- upvalues: t (write)
-		t.insert(1, p8)
+		t.insert(1, p3)
 	end
 	
-	function t.insert(p9, p10)
-		-- upvalues: cloned (write), var5 (ref), var6 (write), var7 (ref), dataSourceChangeTypeModule (copy)
+	function t.insert(p3, p4)
+		-- upvalues: cloned (write), var1 (ref), var2 (write), var3 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
-		assert(p9 >= 1 and p9 <= clonedCount + 1, "DataSource.sequence: insert index out of range")
-		local var10 = var5.claim(p10, p9)
-		table.insert(cloned, p9, p10)
-		table.insert(var6, p9, var10)
-		var7.emit({
+		assert(p3 >= 1 and p3 <= clonedCount + 1, "DataSource.sequence: insert index out of range")
+		local var4 = var1.claim(p4, p3)
+		table.insert(cloned, p3, p4)
+		table.insert(var2, p3, var4)
+		var3.emit({
 			type = dataSourceChangeTypeModule.Insert,
-			index = p9,
-			keys = { var10 }
+			index = p3,
+			keys = { var4 }
 		}, clonedCount)
 	end
 	
-	function t.remove(p11, p12)
-		-- upvalues: cloned (write), var6 (write), var5 (ref), var7 (ref), dataSourceChangeTypeModule (copy)
+	function t.remove(p3, p4)
+		-- upvalues: cloned (write), var2 (write), var1 (ref), var3 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
-		p12 = p12 or 1
-		assert(p12 > 0 and (p11 >= 1 and p11 + p12 - 1 <= clonedCount), "DataSource.sequence: remove range out of range")
-		local list = table.create(p12)
+		p4 = p4 or 1
+		assert(p4 > 0 and (p3 >= 1 and p3 + p4 - 1 <= clonedCount), "DataSource.sequence: remove range out of range")
+		local list = table.create(p4)
 		
-		for i = 1, p12 do
-			table.remove(cloned, p11)
-			local removed = table.remove(var6, p11)
+		for i = 1, p4 do
+			table.remove(cloned, p3)
+			local removed = table.remove(var2, p3)
 			list[i] = removed
-			var5.release(removed)
+			var1.release(removed)
 		end
-		var7.emit({
+		var3.emit({
 			type = dataSourceChangeTypeModule.Remove,
-			index = p11,
+			index = p3,
 			keys = list
 		}, clonedCount)
 	end
 	
-	function t.setItem(value, p13)
-		-- upvalues: cloned (write), var6 (write), var5 (ref), var7 (ref), dataSourceChangeTypeModule (copy)
+	function t.setItem(value, p5)
+		-- upvalues: cloned (write), var2 (write), var1 (ref), var3 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
 		assert(value >= 1 and value <= clonedCount, "DataSource.sequence: setItem index out of range")
-		local var16 = var6[value]
-		var5.assertPreserved(var16, p13, value)
-		cloned[value] = p13
-		var7.emit({
+		local var4 = var2[value]
+		var1.assertPreserved(var4, p5, value)
+		cloned[value] = p5
+		var3.emit({
 			type = dataSourceChangeTypeModule.Update,
-			keys = { var16 }
+			keys = { var4 }
 		}, clonedCount)
 	end
 	
-	function t.moveItem(p14, p15)
-		-- upvalues: cloned (write), var6 (write), var7 (ref), dataSourceChangeTypeModule (copy)
+	function t.moveItem(p5, p6)
+		-- upvalues: cloned (write), var2 (write), var3 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
-		assert(p14 >= 1 and p14 <= clonedCount, "DataSource.sequence: moveItem source index out of range")
-		assert(p15 >= 1 and p15 <= clonedCount, "DataSource.sequence: moveItem destination index out of range")
+		assert(p5 >= 1 and p5 <= clonedCount, "DataSource.sequence: moveItem source index out of range")
+		assert(p6 >= 1 and p6 <= clonedCount, "DataSource.sequence: moveItem destination index out of range")
 		
-		if p14 == p15 then
+		if p5 == p6 then
 			return
 		end
-		local removed = table.remove(var6, p14)
-		table.insert(cloned, p15, table.remove(cloned, p14))
-		table.insert(var6, p15, removed)
-		var7.emit({
+		local removed = table.remove(var2, p5)
+		table.insert(cloned, p6, table.remove(cloned, p5))
+		table.insert(var2, p6, removed)
+		var3.emit({
 			type = dataSourceChangeTypeModule.Move,
-			fromIndex = p14,
-			toIndex = p15,
+			fromIndex = p5,
+			toIndex = p6,
 			key = removed
 		}, clonedCount)
 	end
 	
-	function t.reorder(p16)
-		-- upvalues: cloned (write), var6 (write), var7 (ref), dataSourceChangeTypeModule (copy)
+	function t.reorder(p5)
+		-- upvalues: cloned (write), var2 (write), var3 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
-		assert(#p16 == clonedCount, "DataSource.sequence: reorder must contain every key")
+		assert(#p5 == clonedCount, "DataSource.sequence: reorder must contain every key")
 		local t = {}
 		
-		for i, v in var6 do
+		for i, v in var2 do
 			t[v] = cloned[i]
 		end
 		local list = table.create(clonedCount)
 		local list_1 = table.create(clonedCount)
 		local t_1 = {}
 		
-		for i_1, v_1 in p16 do
+		for i_1, v_1 in p5 do
 			assert(t[v_1] ~= nil and t_1[v_1] == nil, "DataSource.sequence: reorder must contain every key once")
 			t_1[v_1] = true
 			list[i_1] = t[v_1]
 			list_1[i_1] = v_1
 		end
 		cloned = list
-		var6 = list_1
-		var7.emit({
+		var2 = list_1
+		var3.emit({
 			type = dataSourceChangeTypeModule.Reorder,
 			keys = table.clone(list_1)
 		}, clonedCount)
 	end
 	
-	function t.replaceItems(p17, p18, p19)
-		-- upvalues: cloned (write), var7 (ref), t (write), var5 (ref), var6 (write), dataSourceChangeTypeModule (copy)
-		assert(p17 >= 1 and (p17 <= p18 and p18 <= #cloned), "DataSource.sequence: replaceItems range out of range")
-		var7.transaction(function()
-			-- upvalues: t (copy), p17 (ref), p18 (ref), p19 (ref), cloned (copy), var5 (copy), var6 (copy), var7 (copy), dataSourceChangeTypeModule (copy)
-			t.remove(p17, p18 - p17 + 1)
+	function t.replaceItems(p6, p7, p8)
+		-- upvalues: cloned (write), var3 (ref), t (write), var1 (ref), var2 (write), dataSourceChangeTypeModule (copy)
+		assert(p6 >= 1 and (p6 <= p7 and p7 <= #cloned), "DataSource.sequence: replaceItems range out of range")
+		var3.transaction(function()
+			-- upvalues: t (copy), p6 (ref), p7 (ref), p8 (ref), cloned (copy), var1 (copy), var2 (copy), var3 (copy), dataSourceChangeTypeModule (copy)
+			t.remove(p6, p7 - p6 + 1)
 			
-			if #p19 == 0 then return end
+			if #p8 == 0 then return end
 			local clonedCount = #cloned
-			local list = table.create(#p19)
+			local list = table.create(#p8)
 			
-			for i, v in p19 do
-				list[i] = var5.claim(v, p17 + i - 1)
+			for i, v in p8 do
+				list[i] = var1.claim(v, p6 + i - 1)
 			end
-			local list_1 = table.create(clonedCount + #p19)
-			local list_2 = table.create(clonedCount + #p19)
+			local list_1 = table.create(clonedCount + #p8)
+			local list_2 = table.create(clonedCount + #p8)
 			
-			if p17 > 1 then
-				table.move(cloned, 1, p17 - 1, 1, list_1)
-				table.move(var6, 1, p17 - 1, 1, list_2)
+			if p6 > 1 then
+				table.move(cloned, 1, p6 - 1, 1, list_1)
+				table.move(var2, 1, p6 - 1, 1, list_2)
 			end
-			for i_1, v_1 in p19 do
-				local var28 = p17 + i_1 - 1
-				list_1[var28] = v_1
-				list_2[var28] = list[i_1]
+			for i_1, v_1 in p8 do
+				local var4 = p6 + i_1 - 1
+				list_1[var4] = v_1
+				list_2[var4] = list[i_1]
 			end
-			if p17 <= clonedCount then
-				table.move(cloned, p17, clonedCount, p17 + #p19, list_1)
-				table.move(var6, p17, clonedCount, p17 + #p19, list_2)
+			if p6 <= clonedCount then
+				table.move(cloned, p6, clonedCount, p6 + #p8, list_1)
+				table.move(var2, p6, clonedCount, p6 + #p8, list_2)
 			end
 			cloned = list_1
-			var6 = list_2
-			var7.emit({
+			var2 = list_2
+			var3.emit({
 				type = dataSourceChangeTypeModule.Insert,
-				index = p17,
+				index = p6,
 				keys = list
 			}, clonedCount)
 		end)
 	end
 	
 	function t.reset(value)
-		-- upvalues: cloned (write), var5 (ref), var6 (write), var7 (ref), dataSourceChangeTypeModule (copy)
+		-- upvalues: cloned (write), var1 (ref), var2 (write), var3 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
 		local cloned_1 = table.clone(value)
-		local var31 = var5.rebuild(cloned_1)
+		local var5 = var1.rebuild(cloned_1)
 		cloned = cloned_1
-		var6 = var31
-		var7.emit({
+		var2 = var5
+		var3.emit({
 			type = dataSourceChangeTypeModule.Reset,
-			keys = table.clone(var31)
+			keys = table.clone(var5)
 		}, clonedCount)
 	end
 	

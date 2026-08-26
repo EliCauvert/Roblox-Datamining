@@ -1,13 +1,13 @@
-﻿return function(p0)
-	return function(p1, p2)
-		-- upvalues: p0 (ref)
-		if p1 == nil then
-			p1 = {}
+﻿return function(p1)
+	return function(p2, p3)
+		-- upvalues: p1 (ref)
+		if p2 == nil then
+			p2 = {}
 		end
 		local t = {}
 		
-		for i, v in pairs(p0) do
-			t[i] = v(p1[i], p2)
+		for i, v in pairs(p1) do
+			t[i] = v(p2[i], p3)
 		end
 		return t
 	end

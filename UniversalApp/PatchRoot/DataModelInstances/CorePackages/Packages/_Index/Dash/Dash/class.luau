@@ -1,24 +1,24 @@
 ﻿local parent = script.Parent
 local _ = require(parent.Types)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: parent (ref)
-	require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw(p0)
+	require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw(p1)
 end
 
-local var0 = function()
+local var1 = function()
 	return {}
 end
 
 local function class(p1, p2)
-	-- upvalues: var0 (ref), class (ref), parent (ref)
-	p2 = p2 or var0
+	-- upvalues: var1 (ref), class (ref), parent (ref)
+	p2 = p2 or var1
 	local t = { name = p1 }
 	
 	function t.new(...)
 		-- upvalues: p2 (ref), t (ref)
-		local var4 = p2(...)
-		setmetatable(var4, {
+		local var2 = p2(...)
+		setmetatable(var2, {
 			__index = t,
 			__tostring = t.toString,
 			__eq = t.equals,
@@ -30,10 +30,10 @@ local function class(p1, p2)
 			__div = t.__div,
 			__mod = t.__mod
 		})
-		var4.Class = t
-		var4:_init(...)
+		var2.Class = t
+		var2:_init(...)
 		
-		return var4
+		return var2
 	end
 	
 	function t._init(_) end
@@ -42,10 +42,10 @@ local function class(p1, p2)
 		-- upvalues: t (ref)
 		local ok, status = pcall(function()
 			-- upvalues: p3 (ref), t (copy)
-			local var5 = getmetatable(p3)
-			while var5 do
-				if var5.__index ~= t then
-					var5 = getmetatable(var5.__index)
+			local var2 = getmetatable(p3)
+			while var2 do
+				if var2.__index ~= t then
+					var2 = getmetatable(var2.__index)
 					continue
 				end
 				return true
@@ -58,18 +58,18 @@ local function class(p1, p2)
 	
 	function t.extend(p4, p5, p6)
 		-- upvalues: class (copy), t (ref)
-		local var6 = class(p5, p6 or t.new)
-		setmetatable(var6, { __index = p4 })
+		local var2 = class(p5, p6 or t.new)
+		setmetatable(var2, { __index = p4 })
 		
-		return var6
+		return var2
 	end
 	
-	function t.toString(p7)
-		return p7.name
+	function t.toString(p4)
+		return p4.name
 	end
 	
-	function t.equals(p8, p9)
-		return rawequal(p8, p9)
+	function t.equals(p4, p5)
+		return rawequal(p4, p5)
 	end
 	
 	function t:__lt(_)

@@ -5,7 +5,7 @@ local cryo = inGameMenuDependenciesModule.Cryo
 local t = inGameMenuDependenciesModule.t
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local globalConfigModule = require(script.Parent.Parent.GlobalConfig)
-local var3 = t.strictInterface({
+local var1 = t.strictInterface({
 	Size = t.optional(t.UDim2),
 	Position = t.optional(t.UDim2),
 	AnchorPoint = t.optional(t.Vector2),
@@ -13,23 +13,23 @@ local var3 = t.strictInterface({
 	Visible = t.optional(t.boolean)
 })
 
-return function(p0)
-	-- upvalues: globalConfigModule (ref), var3 (ref), withFoundationOrUIBloxStyle (ref), roact (ref), cryo (ref)
+return function(p1)
+	-- upvalues: globalConfigModule (ref), var1 (ref), withFoundationOrUIBloxStyle (ref), roact (ref), cryo (ref)
 	if globalConfigModule.propValidation then
-		assert(var3(p0))
+		assert(var1(p1))
 	end
-	return withFoundationOrUIBloxStyle(function(p1)
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				Divider = {
-					Color = p1.Color.Stroke.Emphasis.Color3,
-					Transparency = p1.Color.Stroke.Emphasis.Transparency
+					Color = p2.Color.Stroke.Emphasis.Color3,
+					Transparency = p2.Color.Stroke.Emphasis.Transparency
 				}
 			}
 		}
 	end, function(p2)
-		-- upvalues: roact (copy), cryo (copy), p0 (ref)
-		return roact.createElement("Frame", cryo.Dictionary.join({ Size = UDim2.new(1, 0, 0, 1) }, p0, {
+		-- upvalues: roact (copy), cryo (copy), p1 (ref)
+		return roact.createElement("Frame", cryo.Dictionary.join({ Size = UDim2.new(1, 0, 0, 1) }, p1, {
 			BorderSizePixel = 0,
 			BackgroundColor3 = p2.Theme.Divider.Color,
 			BackgroundTransparency = p2.Theme.Divider.Transparency

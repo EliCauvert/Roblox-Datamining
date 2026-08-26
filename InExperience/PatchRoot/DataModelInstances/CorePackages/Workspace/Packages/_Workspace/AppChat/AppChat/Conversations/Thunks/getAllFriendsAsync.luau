@@ -12,61 +12,61 @@ local llama = require(parent.LuaSocialLibrariesDeps).llama
 local receiveUsersPresence = require(parent.UserLib).Utils.receiveUsersPresence
 local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
 
-return function(p0)
+return function(p1)
 	-- upvalues: playersService (ref), networkingFriendsModule (ref), roduxNetworkingModule (ref), promiseModule (ref), userModel (ref), setUserIsFriend (ref), llama (ref), addUsers (ref), fFlagAppChatPresenceStoreMigrationModule (ref), networkingPresenceModule (ref), receiveUsersPresence (ref)
-	return function(p1)
-		-- upvalues: playersService (copy), networkingFriendsModule (copy), roduxNetworkingModule (copy), promiseModule (copy), p0 (ref), userModel (copy), setUserIsFriend (copy), llama (copy), addUsers (copy), fFlagAppChatPresenceStoreMigrationModule (copy), networkingPresenceModule (copy), receiveUsersPresence (copy)
+	return function(p2)
+		-- upvalues: playersService (copy), networkingFriendsModule (copy), roduxNetworkingModule (copy), promiseModule (copy), p1 (ref), userModel (copy), setUserIsFriend (copy), llama (copy), addUsers (copy), fFlagAppChatPresenceStoreMigrationModule (copy), networkingPresenceModule (copy), receiveUsersPresence (copy)
 		local localPlayer = playersService.LocalPlayer
 		assert(localPlayer, "Local Player not found")
 		local userId = localPlayer.UserId
 		
-		return if networkingFriendsModule.GetFriendsFromUserId.getStatus(p1:getState(), userId) == roduxNetworkingModule.Enum.NetworkStatus.Fetching then promiseModule.resolve({}) else p1:dispatch(networkingFriendsModule.GetFriendsFromUserId.API(userId)):andThen(function(p3)
-			-- upvalues: p1 (ref), p0 (copy), userModel (copy), setUserIsFriend (copy), llama (copy), addUsers (copy), fFlagAppChatPresenceStoreMigrationModule (copy), networkingPresenceModule (copy), receiveUsersPresence (copy)
+		return if networkingFriendsModule.GetFriendsFromUserId.getStatus(p2:getState(), userId) == roduxNetworkingModule.Enum.NetworkStatus.Fetching then promiseModule.resolve({}) else p2:dispatch(networkingFriendsModule.GetFriendsFromUserId.API(userId)):andThen(function(p3)
+			-- upvalues: p2 (ref), p1 (copy), userModel (copy), setUserIsFriend (copy), llama (copy), addUsers (copy), fFlagAppChatPresenceStoreMigrationModule (copy), networkingPresenceModule (copy), receiveUsersPresence (copy)
 			local data = p3.responseBody.data
-			local users = p1:getState().Users or {}
+			local users = p2:getState().Users or {}
 			local t = {}
-			local var9 = if p0 then {} else nil
+			local var1 = if p1 then {} else nil
 			
 			for i, v in ipairs(data) do
-				local var11 = tostring(v.id)
+				local var2 = tostring(v.id)
 				
-				if p0 then
-					table.insert(var9, var11)
+				if p1 then
+					table.insert(var1, var2)
 				end
-				if users[var11] == nil then
-					t[var11] = userModel.fromDataTable({
+				if users[var2] == nil then
+					t[var2] = userModel.fromDataTable({
 						isFriend = true,
 						id = v.id,
 						name = v.name,
 						displayName = v.displayName
 					})
 				else
-					p1:dispatch(setUserIsFriend(var11, true))
+					p2:dispatch(setUserIsFriend(var2, true))
 				end
 			end
-			local var10 = llama.Dictionary.keys(t)
-			p1:dispatch(addUsers(t))
+			local var3 = llama.Dictionary.keys(t)
+			p2:dispatch(addUsers(t))
 			
 			if not fFlagAppChatPresenceStoreMigrationModule then
-				if p0 then
-					p1:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(var9)):andThen(function(p5)
-						-- upvalues: receiveUsersPresence (copy), p1 (copy)
-						receiveUsersPresence(p5.responseBody.userPresences, p1)
+				if p1 then
+					p2:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(var1)):andThen(function(p4)
+						-- upvalues: receiveUsersPresence (copy), p2 (copy)
+						receiveUsersPresence(p4.responseBody.userPresences, p2)
 						
-						return p5
+						return p4
 					end):catch(function(p4)
 						warn("NetworkingPresence failure in getAllFriendsAsync, Status: " .. tostring(p4))
 					end)
 					
 					return p3
 				end
-				p1:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(var10)):catch(function(p6)
-					warn("NetworkingPresence failure in getAllFriendsAsync, Status: " .. tostring(p6))
+				p2:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(var3)):catch(function(p4)
+					warn("NetworkingPresence failure in getAllFriendsAsync, Status: " .. tostring(p4))
 				end)
 			end
 			return p3
-		end):catch(function(p2)
-			warn("NetworkingFriends failure in getAllFriendsAsync, Status: " .. tostring(p2))
+		end):catch(function(p4)
+			warn("NetworkingFriends failure in getAllFriendsAsync, Status: " .. tostring(p4))
 		end)
 	end
 end

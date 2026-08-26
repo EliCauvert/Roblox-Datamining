@@ -6,29 +6,29 @@ local t = {
 	Size48x48 = "rbxasset://textures/ui/LuaChat/graphic/gr-profile-border-48x48.png"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), useCursor (ref), reactModule (ref)
 	return reactModule.createElement("ImageButton", {
 		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundColor3 = p0.circleInteriorBackgroundColor3,
-		BackgroundTransparency = p0.circleInteriorBackgroundTransparency,
+		BackgroundColor3 = p1.circleInteriorBackgroundColor3,
+		BackgroundTransparency = p1.circleInteriorBackgroundTransparency,
 		BorderSizePixel = 0,
 		Image = "",
 		SelectionImageObject = useCursor(),
 		AutoButtonColor = false,
 		ClipsDescendants = true,
-		[reactModule.Event.Activated] = p0.onActivated,
-		Selectable = p0.selectable,
-		LayoutOrder = p0.LayoutOrder
+		[reactModule.Event.Activated] = p1.onActivated,
+		Selectable = p1.selectable,
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		imageMask = reactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 2,
-			Image = t[p0.overlaySize or "Size36x36"],
-			ImageColor3 = p0.circleColor3,
-			ImageTransparency = p0.circleTransparency,
+			Image = t[p1.overlaySize or "Size36x36"],
+			ImageColor3 = p1.circleColor3,
+			ImageTransparency = p1.circleTransparency,
 			Size = UDim2.fromScale(1, 1)
-		}, p0.renderAboveMask)
-	}, p0.children)
+		}, p1.renderAboveMask)
+	}, p1.children)
 end

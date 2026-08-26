@@ -9,15 +9,15 @@ local fFlagLuaAppIedpOverlayAndNavigationFix = require(parent.SharedFlags).FFlag
 
 return function()
 	-- upvalues: reactModule (ref), teleportService (ref), fireInExperienceDetailsPromptOpenedEvent (ref), discoveryEventErrorLogger (ref), fFlagLuaAppIedpOverlayAndNavigationFix (ref), inExperienceDetailsPromptContainerModule (ref)
-	local var4, var5 = reactModule.useState(nil)
-	local var6, var7 = reactModule.useState(false)
+	local var1, var2 = reactModule.useState(nil)
+	local var3, var4 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: teleportService (copy), var5 (ref), var7 (ref), fireInExperienceDetailsPromptOpenedEvent (copy)
-		local openExperienceDetailsPromptConnection = teleportService.OpenExperienceDetailsPrompt:Connect(function(p0)
-			-- upvalues: var5 (copy), var7 (copy), fireInExperienceDetailsPromptOpenedEvent (copy)
-			var5(tostring(p0))
-			var7(true)
-			fireInExperienceDetailsPromptOpenedEvent({ targetUniverseId = tostring(p0) })
+		-- upvalues: teleportService (copy), var2 (ref), var4 (ref), fireInExperienceDetailsPromptOpenedEvent (copy)
+		local openExperienceDetailsPromptConnection = teleportService.OpenExperienceDetailsPrompt:Connect(function(p1)
+			-- upvalues: var2 (copy), var4 (copy), fireInExperienceDetailsPromptOpenedEvent (copy)
+			var2(tostring(p1))
+			var4(true)
+			fireInExperienceDetailsPromptOpenedEvent({ targetUniverseId = tostring(p1) })
 		end)
 		
 		return function()
@@ -28,34 +28,34 @@ return function()
 		end
 	end, {})
 	
-	if not var6 or not var4 then
+	if not var3 or not var1 then
 		return nil
 	end
 	local function _()
-		-- upvalues: var5 (ref), var7 (ref)
-		var5(nil)
-		var7(false)
+		-- upvalues: var2 (ref), var4 (ref)
+		var2(nil)
+		var4(false)
 	end
 	
 	local t = {
-		universeId = var4,
+		universeId = var1,
 		onJoin = function(p1)
-			-- upvalues: teleportService (copy), var5 (ref), var7 (ref), discoveryEventErrorLogger (copy), var4 (ref)
+			-- upvalues: teleportService (copy), var2 (ref), var4 (ref), discoveryEventErrorLogger (copy), var1 (ref)
 			if p1 then
 				teleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.TeleportAttempted)
 				teleportService:Teleport(p1)
-				var5(nil)
-				var7(false)
+				var2(nil)
+				var4(false)
 				
 				return
 			end
-			discoveryEventErrorLogger.reportError("InExperienceDetailsPromptAppOnJoinMissingRootPlaceId", "Missing valid root place id for universe id", { universeId = var4 })
+			discoveryEventErrorLogger.reportError("InExperienceDetailsPromptAppOnJoinMissingRootPlaceId", "Missing valid root place id for universe id", { universeId = var1 })
 		end,
 		onClose = function()
-			-- upvalues: teleportService (copy), var5 (ref), var7 (ref)
+			-- upvalues: teleportService (copy), var2 (ref), var4 (ref)
 			teleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.PromptClosed)
-			var5(nil)
-			var7(false)
+			var2(nil)
+			var4(false)
 		end
 	}
 	

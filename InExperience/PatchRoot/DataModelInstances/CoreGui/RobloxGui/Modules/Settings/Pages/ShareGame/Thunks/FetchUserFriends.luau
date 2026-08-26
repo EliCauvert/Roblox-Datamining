@@ -7,12 +7,12 @@ local constantsModule = require(shareGame.Constants)
 local userSortsModule = require(robloxGui.Modules.Settings.Enum.UserSorts)
 local getFFlagInviteListRerank = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagInviteListRerank
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: retrievalStatus (ref), apiFetchUsersFriendsModule (ref), constantsModule (ref), getFFlagInviteListRerank (ref), userSortsModule (ref)
-	return function(p2)
-		-- upvalues: p1 (ref), retrievalStatus (copy), apiFetchUsersFriendsModule (copy), p0 (ref), constantsModule (copy), getFFlagInviteListRerank (copy), userSortsModule (copy)
-		if p2:getState().Friends.retrievalStatus[p1] ~= retrievalStatus.Fetching then
-			p2:dispatch(apiFetchUsersFriendsModule(p0, p1, constantsModule.ThumbnailRequest.InviteToGame, if getFFlagInviteListRerank() then userSortsModule.StatusFrequents else nil))
+	return function(p3)
+		-- upvalues: p2 (ref), retrievalStatus (copy), apiFetchUsersFriendsModule (copy), p1 (ref), constantsModule (copy), getFFlagInviteListRerank (copy), userSortsModule (copy)
+		if p3:getState().Friends.retrievalStatus[p2] ~= retrievalStatus.Fetching then
+			p3:dispatch(apiFetchUsersFriendsModule(p1, p2, constantsModule.ThumbnailRequest.InviteToGame, if getFFlagInviteListRerank() then userSortsModule.StatusFrequents else nil))
 		end
 	end
 end

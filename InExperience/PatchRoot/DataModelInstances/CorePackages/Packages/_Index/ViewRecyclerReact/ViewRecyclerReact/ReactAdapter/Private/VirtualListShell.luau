@@ -3,17 +3,17 @@ local axis = require(viewRecyclerReact.Parent.ViewRecycler).Axis
 local reactModule = require(viewRecyclerReact.Parent.React)
 local createElement = reactModule.createElement
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), axis (ref), createElement (ref)
-	local var2, var3 = reactModule.useState({
+	local var1, var2 = reactModule.useState({
 		thickness = 12,
 		verticalPosition = Enum.VerticalScrollBarPosition.Right
 	})
-	local var4 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(nil)
 	local t = {
 		Size = UDim2.fromScale(1, 1),
-		ScrollingDirection = if p0.axis == axis.X then Enum.ScrollingDirection.X else Enum.ScrollingDirection.Y,
-		[reactModule.Tag] = p0.tag
+		ScrollingDirection = if p1.axis == axis.X then Enum.ScrollingDirection.X else Enum.ScrollingDirection.Y,
+		[reactModule.Tag] = p1.tag
 	}
 	local t_1 = { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }
 	local t_2 = {
@@ -25,8 +25,8 @@ return function(p0)
 		[reactModule.Change.CanvasPosition] = true
 	}
 	
-	if p0.scrollingFrameProps ~= nil then
-		for i, v in p0.scrollingFrameProps do
+	if p1.scrollingFrameProps ~= nil then
+		for i, v in p1.scrollingFrameProps do
 			if t[i] ~= nil or t_2[i] then
 				error(`VirtualList: {tostring(i)} is already used by ViewRecycler`)
 			end
@@ -43,41 +43,41 @@ return function(p0)
 	if t.ZIndex ~= nil then
 		t_1.ZIndex = t.ZIndex
 	end
-	t.ref = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref), p0 (ref), var3 (ref)
-		local current = var4.current
+	t.ref = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), p1 (ref), var2 (ref)
+		local current = var3.current
 		
 		if current ~= nil then
-			var4.current = nil
+			var3.current = nil
 			current()
 		end
-		p0.internalRef.current = p1
-		p0.onScrollingFrameChanged(p1)
+		p1.internalRef.current = p2
+		p1.onScrollingFrameChanged(p2)
 		
-		if p1 == nil then
+		if p2 == nil then
 			return
 		end
 		local function updateScrollBarState()
-			-- upvalues: var3 (copy), p1 (ref)
-			var3({
-				thickness = p1.ScrollBarThickness,
-				verticalPosition = p1.VerticalScrollBarPosition
+			-- upvalues: var2 (copy), p2 (ref)
+			var2({
+				thickness = p2.ScrollBarThickness,
+				verticalPosition = p2.VerticalScrollBarPosition
 			})
 		end
 		
-		var3({
-			thickness = p1.ScrollBarThickness,
-			verticalPosition = p1.VerticalScrollBarPosition
+		var2({
+			thickness = p2.ScrollBarThickness,
+			verticalPosition = p2.VerticalScrollBarPosition
 		})
-		local var9 = p1:GetPropertyChangedSignal("ScrollBarThickness"):Connect(updateScrollBarState)
-		local var10 = p1:GetPropertyChangedSignal("VerticalScrollBarPosition"):Connect(updateScrollBarState)
+		local var4 = p2:GetPropertyChangedSignal("ScrollBarThickness"):Connect(updateScrollBarState)
+		local var5 = p2:GetPropertyChangedSignal("VerticalScrollBarPosition"):Connect(updateScrollBarState)
 		
 		function var4.current()
-			-- upvalues: var9 (ref), var10 (ref)
-			var9:Disconnect()
-			var10:Disconnect()
+			-- upvalues: var4 (ref), var5 (ref)
+			var4:Disconnect()
+			var5:Disconnect()
 		end
-	end, { p0.internalRef, p0.onScrollingFrameChanged })
+	end, { p1.internalRef, p1.onScrollingFrameChanged })
 	
 	return createElement("Frame", t_1, {
 		ScrollingFrame = createElement("ScrollingFrame", t),
@@ -87,14 +87,14 @@ return function(p0)
 			ClipsDescendants = true,
 			Name = "ViewRecyclerOverlay",
 			Selectable = false,
-			Position = UDim2.fromOffset(if p0.axis == axis.Y and var2.verticalPosition == Enum.VerticalScrollBarPosition.Left then var2.thickness else 0, 0),
-			Size = if p0.axis == axis.X then UDim2.new(1, 0, 1, -var2.thickness) else UDim2.new(1, -var2.thickness, 1, 0),
+			Position = UDim2.fromOffset(if p1.axis == axis.Y and var1.verticalPosition == Enum.VerticalScrollBarPosition.Left then var1.thickness else 0, 0),
+			Size = if p1.axis == axis.X then UDim2.new(1, 0, 1, -var1.thickness) else UDim2.new(1, -var1.thickness, 1, 0),
 			ZIndex = t.ZIndex,
 			ref = reactModule.useCallback(function(p2)
-				-- upvalues: p0 (ref)
-				p0.viewportOverlayRef.current = p2
-				p0.onViewportOverlayChanged(p2)
-			end, { p0.onViewportOverlayChanged, p0.viewportOverlayRef })
+				-- upvalues: p1 (ref)
+				p1.viewportOverlayRef.current = p2
+				p1.onViewportOverlayChanged(p2)
+			end, { p1.onViewportOverlayChanged, p1.viewportOverlayRef })
 		})
 	})
 end

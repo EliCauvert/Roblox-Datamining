@@ -20,8 +20,8 @@ sliderEntry.validateProps = t.strictInterface({
 	buttonRef = t.optional(t.table)
 })
 
-function sliderEntry.init(p0)
-	p0.state = { isFrameSelectable = true }
+function sliderEntry.init(p1)
+	p1.state = { isFrameSelectable = true }
 end
 
 function sliderEntry.render(p1)

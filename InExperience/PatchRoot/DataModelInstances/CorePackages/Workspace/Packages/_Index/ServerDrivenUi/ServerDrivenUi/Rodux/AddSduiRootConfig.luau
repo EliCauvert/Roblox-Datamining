@@ -1,12 +1,12 @@
 ﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local _ = require(parent.SduiCoreSystem)
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3, p4)
+return require(parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3, p4, p5)
 	return {
-		page = p0,
-		rootConfig = p1,
-		dataUpdatedTimestamp = p2,
-		expectedSduiFeedItems = p3,
-		customFeedStoreKey = p4
+		page = p1,
+		rootConfig = p2,
+		dataUpdatedTimestamp = p3,
+		expectedSduiFeedItems = p4,
+		customFeedStoreKey = p5
 	}
 end)

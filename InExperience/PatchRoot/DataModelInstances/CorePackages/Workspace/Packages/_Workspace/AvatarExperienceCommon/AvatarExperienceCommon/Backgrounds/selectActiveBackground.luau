@@ -10,10 +10,10 @@ local function scanTryOnForBackground(value)
 	end
 	for i, v in value do
 		if not v.isUnequipped and v.itemType == "Asset" and v.itemSubType == avatarBackground then
-			local var3 = tonumber(v.itemId)
+			local var1 = tonumber(v.itemId)
 			
-			if var3 then
-				return var3
+			if var1 then
+				return var1
 			end
 		end
 	end
@@ -25,16 +25,16 @@ local function _(value)
 	if not value then
 		return nil
 	end
-	local var4 = value[avatarBackground]
+	local var2 = value[avatarBackground]
 	
-	if not var4 then
+	if not var2 then
 		return nil
 	end
-	for i in var4 do
-		local var5 = tonumber(i)
+	for i in var2 do
+		local var3 = tonumber(i)
 		
-		if var5 then
-			return var5
+		if var3 then
+			return var3
 		end
 	end
 	return nil
@@ -45,39 +45,39 @@ return function(value)
 	if not avatarBackground then
 		return nil
 	end
-	local var6 = value and value.AvatarExperience
+	local var4 = value and value.AvatarExperience
 	
 	if avatarExperienceFlagsModule.FFlagAXBackgroundsCustomizeHydration then
-		local outfitTryOn = var6 and (var6.AvatarScene and var6.AvatarScene.OutfitTryOn)
-		local var8 = scanTryOnForBackground(outfitTryOn and outfitTryOn.TryOnItems)
+		local outfitTryOn = var4 and (var4.AvatarScene and var4.AvatarScene.OutfitTryOn)
+		local var5 = scanTryOnForBackground(outfitTryOn and outfitTryOn.TryOnItems)
 		
-		if var8 then
-			return var8
+		if var5 then
+			return var5
 		end
 	end
-	local profileConfiguration = var6 and (var6.AvatarScene and var6.AvatarScene.ProfileConfiguration)
+	local profileConfiguration = var4 and (var4.AvatarScene and var4.AvatarScene.ProfileConfiguration)
 	
 	if profileConfiguration and profileConfiguration.BackgroundAssetId ~= nil then
 		local backgroundAssetId = profileConfiguration.BackgroundAssetId
 		
 		return if backgroundAssetId == nOBACKGROUNDASSETID then nil else backgroundAssetId
 	end
-	local character = var6 and (var6.AvatarEditor and var6.AvatarEditor.Character)
+	local character = var4 and (var4.AvatarEditor and var4.AvatarEditor.Character)
 	local equippedAssets = character and character.EquippedAssets
 	
 	if not equippedAssets then
 		return nil
 	end
-	local var12 = equippedAssets[avatarBackground]
+	local var6 = equippedAssets[avatarBackground]
 	
-	if not var12 then
+	if not var6 then
 		return nil
 	end
-	for i in var12 do
-		local var13 = tonumber(i)
+	for i in var6 do
+		local var7 = tonumber(i)
 		
-		if var13 then
-			return var13
+		if var7 then
+			return var7
 		end
 	end
 	return nil

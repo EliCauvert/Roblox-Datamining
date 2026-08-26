@@ -21,40 +21,40 @@ local t = {
 	ChatWindowMaxHeight = configModule.ChatWindowMaxHeight
 }
 
-local function makeInterpolators(p0)
+local function makeInterpolators(p1)
 	-- upvalues: clientSettingsUtilityModule (ref)
 	return {
 		getBackgroundColor = function(value)
-			-- upvalues: clientSettingsUtilityModule (copy), p0 (ref)
-			return clientSettingsUtilityModule.getBackgroundColor(value, p0)
+			-- upvalues: clientSettingsUtilityModule (copy), p1 (ref)
+			return clientSettingsUtilityModule.getBackgroundColor(value, p1)
 		end,
 		getBackgroundTransparency = function(value)
-			-- upvalues: clientSettingsUtilityModule (copy), p0 (ref)
-			return clientSettingsUtilityModule.getBackgroundTransparency(value, p0)
+			-- upvalues: clientSettingsUtilityModule (copy), p1 (ref)
+			return clientSettingsUtilityModule.getBackgroundTransparency(value, p1)
 		end
 	}
 end
 
 return function(p1)
 	-- upvalues: reactModule (ref), clientSettingsModule (ref), fFlagExpChatUseChatConfigStore (ref), signalsReactModule (ref), getChatConfigurationStoreModule (ref), useSelector (ref), makeInterpolators (ref), usePropSignal (ref), t (ref), getTransparencyStoreModule (ref), provider (ref)
-	local var13 = reactModule.useContext(clientSettingsModule)
-	local var14 = usePropSignal(if fFlagExpChatUseChatConfigStore then signalsReactModule.useSignalState(getChatConfigurationStoreModule(false).getChatInputBarSettings) else useSelector(function(p2)
+	local var1 = reactModule.useContext(clientSettingsModule)
+	local var2 = usePropSignal(if fFlagExpChatUseChatConfigStore then signalsReactModule.useSignalState(getChatConfigurationStoreModule(false).getChatInputBarSettings) else useSelector(function(p2)
 		return p2.ChatLayout.ChatInputBarSettings
 	end))
-	local var15 = usePropSignal(reactModule.useMemo(function()
-		-- upvalues: makeInterpolators (copy), var13 (ref)
-		return makeInterpolators(var13)
-	end, { var13 }))
+	local var3 = usePropSignal(reactModule.useMemo(function()
+		-- upvalues: makeInterpolators (copy), var1 (ref)
+		return makeInterpolators(var1)
+	end, { var1 }))
 	
 	return reactModule.createElement(provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: var14 (ref), t (copy), var15 (ref), getTransparencyStoreModule (copy)
+			-- upvalues: var2 (ref), t (copy), var3 (ref), getTransparencyStoreModule (copy)
 			return {
-				getChatInputBarSettings = var14,
+				getChatInputBarSettings = var2,
 				chatWindowSettings = t,
-				getInterpolators = var15,
+				getInterpolators = var3,
 				getTransparencyStore = getTransparencyStoreModule
 			}
-		end, { var14, var15 })
+		end, { var2, var3 })
 	}, p1.children)
 end

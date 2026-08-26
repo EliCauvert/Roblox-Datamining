@@ -1,13 +1,13 @@
 ﻿local momentsCommonModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.MomentsCommon)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: momentsCommonModule (ref)
 	return {
-		assetTotalDuration = if p0.CaptureType == Enum.CaptureType.Screenshot then momentsCommonModule.Constants.ScreenshotMusicDuration else p0.TimeLength,
-		captureType = p0.CaptureType,
-		description = p1,
-		universeId = p0.SourceUniverseId,
-		placeId = p0.SourcePlaceId,
-		edits = p2
+		assetTotalDuration = if p1.CaptureType == Enum.CaptureType.Screenshot then momentsCommonModule.Constants.ScreenshotMusicDuration else p1.TimeLength,
+		captureType = p1.CaptureType,
+		description = p2,
+		universeId = p1.SourceUniverseId,
+		placeId = p1.SourcePlaceId,
+		edits = p3
 	}
 end

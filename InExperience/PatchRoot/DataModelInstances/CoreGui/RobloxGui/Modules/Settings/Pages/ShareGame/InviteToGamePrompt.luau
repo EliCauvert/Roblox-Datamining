@@ -19,9 +19,9 @@ local getFFlagAbuseReportAnalyticsHasLaunchDataModule = require(modules.Settings
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	local t_1 = { isActive = false, mountTarget = p0 }
+	local t_1 = { isActive = false, mountTarget = p1 }
 	setmetatable(t_1, t)
 	
 	return t_1
@@ -34,30 +34,30 @@ function t:withSocialServiceAndLocalPlayer(p1, p2)
 	return self
 end
 
-function t:withAnalytics(p3)
-	self.analytics = p3
+function t:withAnalytics(p1)
+	self.analytics = p1
 	
 	return self
 end
 
-function t:withRequestImpl(p4)
-	self.requestImpl = p4
+function t:withRequestImpl(p1)
+	self.requestImpl = p1
 	
 	return self
 end
 
-function t:_createTree(p5, p6)
+function t:_createTree(p1, p2)
 	-- upvalues: getFFlagEnableSharedInviteStoreModule (ref), inviteStoreModule (ref), roduxModule (ref), appReducerModule (ref), renderWithCoreScriptsStyleProviderModule (ref), roactModule (ref), fullModalShareGameComponentModule (ref)
 	return renderWithCoreScriptsStyleProviderModule({
 		FullModalShareGame = roactModule.createElement(fullModalShareGameComponentModule, {
 			store = if getFFlagEnableSharedInviteStoreModule() then inviteStoreModule else roduxModule.Store.new(appReducerModule, nil, { roduxModule.thunkMiddleware }),
-			isVisible = p5,
+			isVisible = p1,
 			analytics = self.analytics,
-			promptMessage = p6 and p6.promptMessage,
-			inviteUserId = p6 and p6.inviteUserId,
-			inviteMessageId = p6 and p6.inviteMessageId,
-			launchData = p6 and p6.launchData,
-			isLoading = p6 and p6.isLoading,
+			promptMessage = p2 and p2.promptMessage,
+			inviteUserId = p2 and p2.inviteUserId,
+			inviteMessageId = p2 and p2.inviteMessageId,
+			launchData = p2 and p2.launchData,
+			isLoading = p2 and p2.isLoading,
 			requestImpl = self.requestImpl,
 			onAfterClosePage = function(_)
 				-- upvalues: self (ref)
@@ -67,28 +67,28 @@ function t:_createTree(p5, p6)
 	})
 end
 
-function t:show(p7)
+function t:show(p1)
 	-- upvalues: constantsModule (ref), gameInviteEvents (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), roactModule (ref), contextActionService (ref)
 	if self.isActive then return end
-	self.isLoading = p7 and p7.isLoading
+	self.isLoading = p1 and p1.isLoading
 	self.isActive = not self.isLoading
 	
-	if p7 then
-		self.analytics:sendEvent(if p7.inviteUserId then constantsModule.Triggers.DeveloperSingle else constantsModule.Triggers.DeveloperMultiple, gameInviteEvents.ModalOpened, if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then {
-			isLaunchDataProvided = p7.launchData ~= nil and p7.launchData ~= ""
+	if p1 then
+		self.analytics:sendEvent(if p1.inviteUserId then constantsModule.Triggers.DeveloperSingle else constantsModule.Triggers.DeveloperMultiple, gameInviteEvents.ModalOpened, if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then {
+			isLaunchDataProvided = p1.launchData ~= nil and p1.launchData ~= ""
 		} else nil)
 	end
 	if self.instance then
-		self.instance = roactModule.update(self.instance, self:_createTree(true, p7))
+		self.instance = roactModule.update(self.instance, self:_createTree(true, p1))
 	else
-		self.instance = roactModule.mount(self:_createTree(true, p7), self.mountTarget, "invitePrompt")
+		self.instance = roactModule.mount(self:_createTree(true, p1), self.mountTarget, "invitePrompt")
 	end
 	if self.analytics and not self.isLoading then
 		self.analytics:inputShareGameEntryPoint()
 	end
-	contextActionService:BindCoreAction("hideInvitePrompt", function(_, p8, _)
+	contextActionService:BindCoreAction("hideInvitePrompt", function(_, p2, _)
 		-- upvalues: self (ref)
-		if p8 == Enum.UserInputState.Begin then
+		if p2 == Enum.UserInputState.Begin then
 			self:hide()
 		end
 	end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Backspace)

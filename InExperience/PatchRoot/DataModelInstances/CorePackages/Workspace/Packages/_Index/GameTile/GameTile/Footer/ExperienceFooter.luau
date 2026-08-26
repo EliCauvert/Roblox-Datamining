@@ -20,28 +20,28 @@ local argCheckModule = require(parent.ArgCheck)
 local getUserInputIsSelectionOnlyModule = require(gameTile.Footer.getUserInputIsSelectionOnly)
 local uDim2 = UDim2.fromScale(1, 1)
 
-return function(p0)
+return function(p1)
 	-- upvalues: argCheckModule (ref), usePlayerCountTextModule (ref), useStyle (ref), useDesignTokens (ref), useLocalization (ref), getUserInputIsSelectionOnlyModule (ref), reactModule (ref), styledTextLabel (ref), sponsoredTooltipHover (ref), tooltipOrientation (ref), uDim2 (ref), coPlayFooter (ref), colors (ref), coPlayFooterModule (ref), textFooter (ref), socialProofFooter (ref), statGroup (ref)
-	if p0.automaticSize then
-		argCheckModule.isNotNil(p0.size, "If props.automaticSize is defined, props.size should also be defined.  Otherwise size falls back to a 1, 1 scale for this component.")
+	if p1.automaticSize then
+		argCheckModule.isNotNil(p1.size, "If props.automaticSize is defined, props.size should also be defined.  Otherwise size falls back to a 1, 1 scale for this component.")
 	end
-	local isShowSponsoredLabel = p0.isSponsored and p0.isShowSponsoredLabel
-	local isStatsOnly = p0.isStatsOnly
-	local isPlayable = p0.isPlayable
-	local requiresPurchase = p0.requiresPurchase
-	local rating = p0.rating or ""
-	local playingCount = p0.playingCount or 0
-	local coPlayFriends = p0.coPlayFriends
-	local showAgeRating = p0.showAgeRating
-	local ageRatingTextLabel = p0.ageRatingTextLabel
-	local useExperienceTileMetadata = p0.useExperienceTileMetadata
-	local onActivateSponsoredTooltip = p0.onActivateSponsoredTooltip
-	local var11 = usePlayerCountTextModule(playingCount)
-	local var12 = useStyle()
-	local font = var12.Font
-	local theme = var12.Theme
+	local isShowSponsoredLabel = p1.isSponsored and p1.isShowSponsoredLabel
+	local isStatsOnly = p1.isStatsOnly
+	local isPlayable = p1.isPlayable
+	local requiresPurchase = p1.requiresPurchase
+	local rating = p1.rating or ""
+	local playingCount = p1.playingCount or 0
+	local coPlayFriends = p1.coPlayFriends
+	local showAgeRating = p1.showAgeRating
+	local ageRatingTextLabel = p1.ageRatingTextLabel
+	local useExperienceTileMetadata = p1.useExperienceTileMetadata
+	local onActivateSponsoredTooltip = p1.onActivateSponsoredTooltip
+	local var1 = usePlayerCountTextModule(playingCount)
+	local var2 = useStyle()
+	local font = var2.Font
+	local theme = var2.Theme
 	local global = useDesignTokens().Global
-	local var13 = useLocalization({
+	local var3 = useLocalization({
 		sponsoredText = "Feature.GamePage.Label.Sponsored",
 		notPlayableText = "Feature.ExperienceDetails.Label.NotPlayable",
 		ageRatingText = ageRatingTextLabel or nil,
@@ -50,13 +50,13 @@ return function(p0)
 	
 	if isStatsOnly then
 		if isShowSponsoredLabel then
-			local var14 = getUserInputIsSelectionOnlyModule()
+			local var4 = getUserInputIsSelectionOnlyModule()
 			
 			return if useExperienceTileMetadata then reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.fromScale(1, 1),
-				BackgroundColor3 = var12.Tokens.Color.Shift.Shift_200.Color3,
-				BackgroundTransparency = var12.Tokens.Color.Shift.Shift_200.Transparency
+				BackgroundColor3 = var2.Tokens.Color.Shift.Shift_200.Color3,
+				BackgroundTransparency = var2.Tokens.Color.Shift.Shift_200.Transparency
 			}, {
 				Layout = reactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
@@ -71,13 +71,13 @@ return function(p0)
 					LayoutOrder = 1,
 					Size = UDim2.new(0, 0, 1, 0),
 					AutomaticSize = Enum.AutomaticSize.X,
-					Text = var13.sponsoredText,
+					Text = var3.sponsoredText,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = var12.Font.CaptionHeader.Font,
-					TextSize = var12.Font.BaseSize * var12.Font.CaptionHeader.RelativeSize,
-					TextColor3 = var12.Tokens.Color.Content.Emphasis.Color3,
-					TextTransparency = var12.Tokens.Color.Content.Emphasis.Transparency
+					Font = var2.Font.CaptionHeader.Font,
+					TextSize = var2.Font.BaseSize * var2.Font.CaptionHeader.RelativeSize,
+					TextColor3 = var2.Tokens.Color.Content.Emphasis.Color3,
+					TextTransparency = var2.Tokens.Color.Content.Emphasis.Transparency
 				}),
 				SponsoredTooltip = reactModule.createElement(sponsoredTooltipHover, {
 					layoutOrder = 2,
@@ -85,19 +85,19 @@ return function(p0)
 					tooltipOrientation = tooltipOrientation.Bottom,
 					onActivateTooltip = onActivateSponsoredTooltip,
 					size = UDim2.new(0, 16, 0, 16),
-					color = var12.Tokens.Color.Content.Emphasis.Color3,
-					selectable = var14
+					color = var2.Tokens.Color.Content.Emphasis.Color3,
+					selectable = var4
 				})
 			}, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var12.Tokens.Radius.Small) })
+				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var2.Tokens.Radius.Small) })
 			}) else reactModule.createElement("Frame", {
-				Size = p0.size or uDim2,
-				Position = p0.position,
-				AnchorPoint = p0.anchorPoint,
-				LayoutOrder = p0.layoutOrder,
+				Size = p1.size or uDim2,
+				Position = p1.position,
+				AnchorPoint = p1.anchorPoint,
+				LayoutOrder = p1.layoutOrder,
 				BackgroundTransparency = theme.UIDefault.Transparency,
 				BackgroundColor3 = theme.UIDefault.Color,
-				AutomaticSize = p0.automaticSize
+				AutomaticSize = p1.automaticSize
 			}, {
 				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
 				SponsoredLabel = reactModule.createElement("Frame", {
@@ -122,7 +122,7 @@ return function(p0)
 						textYAlignment = Enum.TextYAlignment.Center,
 						automaticSize = Enum.AutomaticSize.X,
 						size = UDim2.new(0, 0, 1, 0),
-						text = var13.sponsoredText,
+						text = var3.sponsoredText,
 						textTruncate = Enum.TextTruncate.AtEnd
 					}),
 					SponsoredTooltip = reactModule.createElement(sponsoredTooltipHover, {
@@ -131,7 +131,7 @@ return function(p0)
 						onActivateTooltip = onActivateSponsoredTooltip,
 						size = UDim2.new(0, 16, 0, 16),
 						color = theme.TextEmphasis.Color,
-						selectable = var14
+						selectable = var4
 					})
 				})
 			})
@@ -140,7 +140,7 @@ return function(p0)
 				showEmphasisBorder = true,
 				faceGroupCount = 2,
 				users = coPlayFriends,
-				labelText = var13.friendsText,
+				labelText = var3.friendsText,
 				styleProps = {
 					badgeBorderWidth = 3,
 					faceWidth = global.Size_250,
@@ -148,7 +148,7 @@ return function(p0)
 					faceGroupGap = -global.Space_75,
 					containerGap = global.Space_50,
 					badgeHeight = global.Size_250,
-					fontStyle = var12.Font.CaptionHeader,
+					fontStyle = var2.Font.CaptionHeader,
 					badgeSpacingLeading = global.Space_50,
 					badgeSpacingTrailing = global.Space_50,
 					badgeBackgroundColor = { Transparency = 0, Color = colors.Smoke },
@@ -156,24 +156,24 @@ return function(p0)
 				}
 			}) else reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = p0.size or uDim2,
-				Position = p0.position,
-				AnchorPoint = p0.anchorPoint,
-				LayoutOrder = p0.layoutOrder,
-				AutomaticSize = p0.automaticSize
+				Size = p1.size or uDim2,
+				Position = p1.position,
+				AnchorPoint = p1.anchorPoint,
+				LayoutOrder = p1.layoutOrder,
+				AutomaticSize = p1.automaticSize
 			}, {
 				CoPlayFooter = reactModule.createElement(coPlayFooterModule, { friends = coPlayFriends })
 			})
 		elseif showAgeRating then
-			local var15 = if p0.localizedAgeRatingTextLabel then p0.localizedAgeRatingTextLabel else var13.ageRatingText
+			local var5 = if p1.localizedAgeRatingTextLabel then p1.localizedAgeRatingTextLabel else var3.ageRatingText
 			
-			return if useExperienceTileMetadata then reactModule.createElement(textFooter, { text = var15 }) else reactModule.createElement("Frame", {
+			return if useExperienceTileMetadata then reactModule.createElement(textFooter, { text = var5 }) else reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = p0.size or uDim2,
-				Position = p0.position,
-				AnchorPoint = p0.anchorPoint,
-				LayoutOrder = p0.layoutOrder,
-				AutomaticSize = p0.automaticSize
+				Size = p1.size or uDim2,
+				Position = p1.position,
+				AnchorPoint = p1.anchorPoint,
+				LayoutOrder = p1.layoutOrder,
+				AutomaticSize = p1.automaticSize
 			}, {
 				UIPadding = reactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 2),
@@ -189,29 +189,29 @@ return function(p0)
 					textXAlignment = Enum.TextXAlignment.Left,
 					textYAlignment = Enum.TextYAlignment.Center,
 					size = UDim2.new(1, 0, 2, 0),
-					text = var15,
+					text = var5,
 					textTruncate = Enum.TextTruncate.AtEnd
 				})
 			})
 		end
-		return if p0.showFriendActivity and not useExperienceTileMetadata then reactModule.createElement("TextLabel", {
+		return if p1.showFriendActivity and not useExperienceTileMetadata then reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = p0.size or uDim2,
+			Size = p1.size or uDim2,
 			TextColor3 = theme.TextMuted.Color,
 			Font = font.Body.Font,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			Text = p0.friendActivityTitle,
+			Text = p1.friendActivityTitle,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextSize = font.BaseSize * font.Body.RelativeSize,
 			TextTransparency = theme.TextMuted.Transparency
-		}) elseif isPlayable == false and not requiresPurchase then if useExperienceTileMetadata then reactModule.createElement(textFooter, { text = var13.notPlayableText }) else reactModule.createElement("Frame", {
+		}) elseif isPlayable == false and not requiresPurchase then if useExperienceTileMetadata then reactModule.createElement(textFooter, { text = var3.notPlayableText }) else reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = p0.size or uDim2,
-			Position = p0.position,
-			AnchorPoint = p0.anchorPoint,
-			LayoutOrder = p0.layoutOrder,
-			AutomaticSize = p0.automaticSize
+			Size = p1.size or uDim2,
+			Position = p1.position,
+			AnchorPoint = p1.anchorPoint,
+			LayoutOrder = p1.layoutOrder,
+			AutomaticSize = p1.automaticSize
 		}, {
 			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
 			PlayabilityLabel = reactModule.createElement(styledTextLabel, {
@@ -222,18 +222,18 @@ return function(p0)
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Center,
 				size = UDim2.new(1, 0, 1, 0),
-				text = var13.notPlayableText,
+				text = var3.notPlayableText,
 				textTruncate = Enum.TextTruncate.AtEnd
 			})
-		}) elseif useExperienceTileMetadata then reactModule.createElement(socialProofFooter, { ratingText = rating, playingText = var11 }) else reactModule.createElement("Frame", {
+		}) elseif useExperienceTileMetadata then reactModule.createElement(socialProofFooter, { ratingText = rating, playingText = var1 }) else reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = p0.size or uDim2,
-			Position = p0.position,
-			AnchorPoint = p0.anchorPoint,
-			LayoutOrder = p0.layoutOrder,
-			AutomaticSize = p0.automaticSize
+			Size = p1.size or uDim2,
+			Position = p1.position,
+			AnchorPoint = p1.anchorPoint,
+			LayoutOrder = p1.layoutOrder,
+			AutomaticSize = p1.automaticSize
 		}, {
-			ExperienceStats = reactModule.createElement(statGroup, { ratingText = rating, playingText = var11 })
+			ExperienceStats = reactModule.createElement(statGroup, { ratingText = rating, playingText = var1 })
 		})
 	end
 end

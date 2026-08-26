@@ -6,28 +6,28 @@ local getLuckyRecommendationStoreModule = require(squadsCore.Stores.GetLuckyReco
 
 return function()
 	-- upvalues: getLuckyRecommendationStoreModule (ref), reactModule (ref), signalsModule (ref)
-	local var4 = getLuckyRecommendationStoreModule(false)
-	local var5, var6 = reactModule.useState(function()
-		-- upvalues: var4 (ref)
-		return var4.getState(false)
+	local var1 = getLuckyRecommendationStoreModule(false)
+	local var2, var3 = reactModule.useState(function()
+		-- upvalues: var1 (ref)
+		return var1.getState(false)
 	end)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: signalsModule (copy), var6 (ref), var4 (ref)
-		return signalsModule.createEffect(function(p0)
-			-- upvalues: var6 (copy), var4 (copy)
-			var6(var4.getState(p0))
+		-- upvalues: signalsModule (copy), var3 (ref), var1 (ref)
+		return signalsModule.createEffect(function(p1)
+			-- upvalues: var3 (copy), var1 (copy)
+			var3(var1.getState(p1))
 		end)
-	end, { var4.getState })
+	end, { var1.getState })
 	
 	return {
-		state = var5,
+		state = var2,
 		actions = reactModule.useMemo(function()
-			-- upvalues: var4 (ref)
+			-- upvalues: var1 (ref)
 			return {
-				startRoll = var4.startRoll,
-				endRoll = var4.endRoll,
-				cancelFetch = var4.cancelFetch
+				startRoll = var1.startRoll,
+				endRoll = var1.endRoll,
+				cancelFetch = var1.cancelFetch
 			}
-		end, { var4.startRoll, var4.endRoll, var4.cancelFetch })
+		end, { var1.startRoll, var1.endRoll, var1.cancelFetch })
 	}
 end

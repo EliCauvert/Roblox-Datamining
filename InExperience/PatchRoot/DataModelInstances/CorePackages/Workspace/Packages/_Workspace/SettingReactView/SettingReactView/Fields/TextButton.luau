@@ -7,28 +7,28 @@ local enums = foundationModule.Enums
 local buttonVariant = enums.ButtonVariant
 local buttonSize = enums.ButtonSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), button (ref), buttonVariant (ref), buttonSize (ref)
 	local text
 	local _ = nil
 	local _ = nil
 	
-	if p0.text and type(p0.text) == "table" then
-		local var2, var3 = reactModule.useState(p0.text:get())
-		text = var2
-		p0.text:connect(var3)
+	if p1.text and type(p1.text) == "table" then
+		local var1, var2 = reactModule.useState(p1.text:get())
+		text = var1
+		p1.text:connect(var2)
 	else
-		text = p0.text
+		text = p1.text
 	end
 	return reactModule.createElement(button, {
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: p0 (ref)
-			if p0.onActivated then
-				p0.onActivated:signal():fire()
+			-- upvalues: p1 (ref)
+			if p1.onActivated then
+				p1.onActivated:signal():fire()
 			end
-		end, { p0.onActivated }),
+		end, { p1.onActivated }),
 		text = text,
-		isDisabled = not p0.onActivated,
+		isDisabled = not p1.onActivated,
 		variant = buttonVariant.Standard,
 		size = buttonSize.Medium
 	})

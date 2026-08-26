@@ -4,25 +4,25 @@ local contactImportGreenFindFriendsButtonExperimentVariable = game:DefineFastStr
 local contactImportRemoveCloseButtonExperimentVariable = game:DefineFastString("ContactImportRemoveCloseButtonExperimentVariable", "remove_close_button")
 local useUserExperiment = roactAppExperimentModule.useUserExperiment
 
-local var4 = function(p0)
+local var1 = function(p1)
 	-- upvalues: contactImportLayer (ref), contactImportGreenFindFriendsButtonExperimentVariable (ref)
-	return ((p0 or {})[contactImportLayer] or {})[contactImportGreenFindFriendsButtonExperimentVariable] == true
+	return ((p1 or {})[contactImportLayer] or {})[contactImportGreenFindFriendsButtonExperimentVariable] == true
 end
 
-local var5 = function(p1)
+local var2 = function(p1)
 	-- upvalues: contactImportLayer (ref), contactImportRemoveCloseButtonExperimentVariable (ref)
 	return ((p1 or {})[contactImportLayer] or {})[contactImportRemoveCloseButtonExperimentVariable] == true
 end
 
 return {
-	isGreenFindFriendsButtonExperimentEnabled = var4,
-	isRemoveCloseButtonExperimentEnabled = var5,
-	useIsGreenFindFriendsButtonExperimentEnabled = function(p2)
-		-- upvalues: useUserExperiment (ref), contactImportLayer (ref), var4 (ref)
-		return useUserExperiment({ contactImportLayer }, var4, p2.isExposureEnabled)
+	isGreenFindFriendsButtonExperimentEnabled = var1,
+	isRemoveCloseButtonExperimentEnabled = var2,
+	useIsGreenFindFriendsButtonExperimentEnabled = function(p1)
+		-- upvalues: useUserExperiment (ref), contactImportLayer (ref), var1 (ref)
+		return useUserExperiment({ contactImportLayer }, var1, p1.isExposureEnabled)
 	end,
-	useIsRemoveCloseButtonExperimentEnabled = function(p3)
-		-- upvalues: useUserExperiment (ref), contactImportLayer (ref), var5 (ref)
-		return useUserExperiment({ contactImportLayer }, var5, p3.isExposureEnabled)
+	useIsRemoveCloseButtonExperimentEnabled = function(p1)
+		-- upvalues: useUserExperiment (ref), contactImportLayer (ref), var2 (ref)
+		return useUserExperiment({ contactImportLayer }, var2, p1.isExposureEnabled)
 	end
 }

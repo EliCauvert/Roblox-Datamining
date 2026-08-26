@@ -4,22 +4,22 @@ local _ = require(socialLuaAnalytics.Analytics.Enums.SupportedTelemetryBackends)
 local formatEventStreamFieldsModule = require(socialLuaAnalytics.Telemetry.formatEventStreamFields)
 local _ = require(socialLuaAnalytics.Analytics.Enums.Contexts)
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), formatEventStreamFieldsModule (ref)
 	return {
-		name = p0.name,
-		description = p0.description,
-		eventStreamCtx = p0.eventStreamCtx,
-		lastUpdated = p0.lastUpdated,
-		backendsList = cryoModule.List.map(p0.backendsList, function(p1)
+		name = p1.name,
+		description = p1.description,
+		eventStreamCtx = p1.eventStreamCtx,
+		lastUpdated = p1.lastUpdated,
+		backendsList = cryoModule.List.map(p1.backendsList, function(p2)
 			-- upvalues: formatEventStreamFieldsModule (copy), cryoModule (copy)
-			return if p1.type == "EventIngest" then cryoModule.Dictionary.join(p1, {
+			return if p2.type == "EventIngest" then cryoModule.Dictionary.join(p2, {
 				format = function(...)
-					-- upvalues: p1 (ref), formatEventStreamFieldsModule (copy)
-					return formatEventStreamFieldsModule(p1.format(...))
+					-- upvalues: p2 (ref), formatEventStreamFieldsModule (copy)
+					return formatEventStreamFieldsModule(p2.format(...))
 				end
-			}) else p1
+			}) else p2
 		end),
-		throttlingThousandths = p0.throttlingThousandths
+		throttlingThousandths = p1.throttlingThousandths
 	}
 end

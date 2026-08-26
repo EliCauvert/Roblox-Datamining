@@ -5,23 +5,23 @@ local roduxModule = require(parent.Rodux)
 local dashModule = require(parent.Dash)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), t (ref), dashModule (ref)
 	return roduxModule.createReducer(t, {
-		[p0.friendsNetworking.GetFollowingExists.Succeeded.name] = function(p1, p2)
+		[p1.friendsNetworking.GetFollowingExists.Succeeded.name] = function(p2, p3)
 			-- upvalues: dashModule (copy)
 			local t = {}
-			dashModule.forEach(p2.responseBody.followings, function(p3)
+			dashModule.forEach(p3.responseBody.followings, function(p4)
 				-- upvalues: t (ref)
-				t[tostring(p3.userId)] = { isFollowed = p3.isFollowed, isFollowing = p3.isFollowing }
+				t[tostring(p4.userId)] = { isFollowed = p4.isFollowed, isFollowing = p4.isFollowing }
 			end)
 			
-			return dashModule.join(p1, t)
+			return dashModule.join(p2, t)
 		end,
-		[p0.userBlockingNetworking.BlockUserById.Succeeded.name] = function(p4, p5)
+		[p1.userBlockingNetworking.BlockUserById.Succeeded.name] = function(p2, p3)
 			-- upvalues: dashModule (copy)
-			return dashModule.join(p4, {
-				[tostring(p5.namedIds.users)] = { isFollowed = false, isFollowing = false }
+			return dashModule.join(p2, {
+				[tostring(p3.namedIds.users)] = { isFollowed = false, isFollowing = false }
 			})
 		end
 	})

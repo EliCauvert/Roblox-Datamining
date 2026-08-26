@@ -1,6 +1,6 @@
 ﻿local circularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
 local signalModule = require(script.Parent.Parent.Parent.Signal)
-local var2 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
+local var1 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
 local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
 local t = {}
 t.__index = t
@@ -26,41 +26,41 @@ function t:getCurrentData()
 	return self._dataStoresData, self._dataStoresDataCount
 end
 
-function t:updateValue(p0, p1)
-	-- upvalues: circularBufferModule (ref), var2 (ref)
-	if not self._dataStoresData[p0] then
-		local var6 = circularBufferModule.new(var2)
-		var6:push_back({ value = p1, time = self._lastUpdateTime })
-		self._dataStoresData[p0] = { max = p1, min = p1, dataSet = var6 }
+function t:updateValue(p1, p2)
+	-- upvalues: circularBufferModule (ref), var1 (ref)
+	if not self._dataStoresData[p1] then
+		local var2 = circularBufferModule.new(var1)
+		var2:push_back({ value = p2, time = self._lastUpdateTime })
+		self._dataStoresData[p1] = { max = p2, min = p2, dataSet = var2 }
 		
 		return
 	end
-	local var7 = self._dataStoresData[p0]
-	local max = var7.max
-	local min = var7.min
-	local var8 = self._dataStoresData[p0].dataSet:push_back({ value = p1, time = self._lastUpdateTime })
+	local var3 = self._dataStoresData[p1]
+	local max = var3.max
+	local min = var3.min
+	local var4 = self._dataStoresData[p1].dataSet:push_back({ value = p2, time = self._lastUpdateTime })
 	
-	if var8 then
-		local var9 = self._dataStoresData[p0].dataSet:iterator()
-		local var10 = var9:next()
+	if var4 then
+		local var5 = self._dataStoresData[p1].dataSet:iterator()
+		local var6 = var5:next()
 		
-		if max == var8.value then
+		if max == var4.value then
 			max = min
-			while var10 do
-				max = if var10.value < max then max else var10.value
-				var10 = var9:next()
+			while var6 do
+				max = if var6.value < max then max else var6.value
+				var6 = var5:next()
 			end
 		end
-		if min == var8.value then
+		if min == var4.value then
 			min = max
-			while var10 do
-				min = if min < var10.value then min else var10.value
-				var10 = var9:next()
+			while var6 do
+				min = if min < var6.value then min else var6.value
+				var6 = var5:next()
 			end
 		end
 	end
-	self._dataStoresData[p0].max = if max < p1 then p1 else max
-	self._dataStoresData[p0].min = if min < p1 then min else p1
+	self._dataStoresData[p1].max = if max < p2 then p2 else max
+	self._dataStoresData[p1].min = if min < p2 then min else p2
 end
 
 function t:isRunning()
@@ -69,28 +69,28 @@ end
 
 function t:start()
 	-- upvalues: getClientReplicatorModule (ref)
-	local var11 = getClientReplicatorModule()
+	local var7 = getClientReplicatorModule()
 	
-	if var11 and not self._statsListenerConnection then
-		self._statsListenerConnection = var11.StatsReceived:connect(function(p2)
+	if var7 and not self._statsListenerConnection then
+		self._statsListenerConnection = var7.StatsReceived:connect(function(p3)
 			-- upvalues: self (ref)
-			local dataStoreBudget = p2.DataStoreBudget
+			local dataStoreBudget = p3.DataStoreBudget
 			self._lastUpdateTime = os.time()
 			
 			if dataStoreBudget then
-				local var12 = 0
+				local var8 = 0
 				
 				for i, v in pairs(dataStoreBudget) do
 					if type(v) == "number" then
 						self:updateValue(i, v)
-						var12 += 1
+						var8 += 1
 					end
 				end
-				self._dataStoresDataCount = var12
+				self._dataStoresDataCount = var8
 				self._dataStoresUpdated:Fire(self._dataStoresData, self._dataStoresDataCount)
 			end
 		end)
-		var11:RequestServerStats(true)
+		var7:RequestServerStats(true)
 		self._isRunning = true
 	end
 end

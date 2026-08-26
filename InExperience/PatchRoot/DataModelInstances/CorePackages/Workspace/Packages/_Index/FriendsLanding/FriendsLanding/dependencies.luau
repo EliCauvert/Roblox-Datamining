@@ -3,7 +3,7 @@ local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
 local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
 local _ = require(parent.React)
 local friendsLanding = require(parent.Lumberyak).Logger.new(nil, "FriendsLanding")
-local var3 = friendsLanding:new("FriendsLanding Networking")
+local var1 = friendsLanding:new("FriendsLanding Networking")
 local friendsLandingHttpRetryCount = game:DefineFastInt("FriendsLandingHttpRetryCount", 3)
 local coreGuiService = game:GetService("CoreGui")
 local playersService = game:GetService("Players")
@@ -16,22 +16,22 @@ local getFStringSocialFriendsLayer = require(parent.SharedFlags).getFStringSocia
 local challengeRequestWrapper = require(parent.GenericChallenges).Middleware.ChallengeRequestWrapper
 local enableFriendsLandingChallengeInterceptor = game:DefineFastFlag("EnableFriendsLandingChallengeInterceptor", false)
 local httpRequest = luaSocialLibrariesDepsModule.httpRequest
-local var11 = httpRequest.config({
-	requestFunction = function(p0, p1, p2)
-		-- upvalues: var3 (ref), httpRequest (ref)
-		var3:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
+local var2 = httpRequest.config({
+	requestFunction = function(p1, p2, p3)
+		-- upvalues: var1 (ref), httpRequest (ref)
+		var1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 		
-		return httpRequest.requestFunctions.RequestInternal(p0, p1, p2)
+		return httpRequest.requestFunctions.RequestInternal(p1, p2, p3)
 	end,
-	postRequestFunction = function(p3, p4)
-		-- upvalues: var3 (ref)
-		var3:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p4.requestMethod, p4.url, p3.StatusCode, p3.Body))
+	postRequestFunction = function(p1, p2)
+		-- upvalues: var1 (ref)
+		var1:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
 	end,
 	maxRetryCount = friendsLandingHttpRetryCount
 })
-local var12 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
+local var3 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = "FriendsLanding.NetworkStatus",
-	networkImpl = if enableFriendsLandingChallengeInterceptor then challengeRequestWrapper(var11) else var11
+	networkImpl = if enableFriendsLandingChallengeInterceptor then challengeRequestWrapper(var2) else var2
 })
 local contactImporterModule = require(parent.ContactImporter)
 
@@ -67,7 +67,7 @@ return {
 	UniversalAppPolicy = require(parent.UniversalAppPolicy).UniversalAppPolicy,
 	tutils = require(parent.tutils),
 	AnalyticsService = require(parent.Analytics).Analytics.new(game:GetService("RbxAnalyticsService")),
-	RoduxNetworking = var12,
+	RoduxNetworking = var3,
 	RoduxFriends = require(parent.FriendsRodux).config({ keyPath = "FriendsLanding.Friends" }),
 	Dash = require(parent.Dash),
 	RoduxPresence = luaSocialLibrariesDepsModule.RoduxPresence.config({ keyPath = "FriendsLanding.Presence" }),
@@ -76,7 +76,7 @@ return {
 	LocalizationService = localizationService,
 	TextService = textService,
 	NetworkingFriendsEnums = require(parent.FriendsNetworking).Enums,
-	FriendsNetworking = require(parent.FriendsNetworking).config({ roduxNetworking = var12 }),
+	FriendsNetworking = require(parent.FriendsNetworking).config({ roduxNetworking = var3 }),
 	Otter = otterModule,
 	CollisionMatchers = luaSocialLibrariesDepsModule.CollisionMatchers,
 	getFStringSocialAddFriendsPageLayer = getFStringSocialAddFriendsPageLayer,

@@ -12,22 +12,22 @@ local t = {
 	PendingFriendRequest = buttonTypes.Pending
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: t (ref), var1 (ref), buttonTypes (ref)
-	if not p0 or not p0.buttons then
+	if not p1 or not p1.buttons then
 		return nil
 	end
-	for i, v in p0.buttons do
+	for i, v in p1.buttons do
 		local type = t[v.type]
 		
 		if type then
-			local var3 = p1[type]
+			local var2 = p2[type]
 			
 			return {
 				type = type,
-				onActivated = if var3 then function()
-					-- upvalues: var3 (ref), p2 (ref)
-					var3(p2)
+				onActivated = if var2 then function()
+					-- upvalues: var2 (ref), p3 (ref)
+					var2(p3)
 				end else var1,
 				isDisabled = type == buttonTypes.Pending or nil,
 				disabledReason = v.disabledReason

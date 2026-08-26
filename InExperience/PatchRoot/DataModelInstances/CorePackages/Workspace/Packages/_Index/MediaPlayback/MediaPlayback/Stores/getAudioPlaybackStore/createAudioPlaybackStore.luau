@@ -11,229 +11,229 @@ local getFFlagAudioPreviewLuaModule = require(mediaPlayback.Flags.getFFlagAudioP
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: signalsExperimentalModule (ref), signalsModule (ref)
-	signalsExperimentalModule.onDisposed(p0, signalsModule.createEffect(p1))
+	signalsExperimentalModule.onDisposed(p1, signalsModule.createEffect(p2))
 end
 
-local _ = function(p2, p3)
+local _ = function(p1, p2)
 	-- upvalues: getFFlagAudioPreviewLuaModule (ref)
-	return if getFFlagAudioPreviewLuaModule() and p3 then tostring(p2) .. ":preview" else tostring(p2)
+	return if getFFlagAudioPreviewLuaModule() and p2 then tostring(p1) .. ":preview" else tostring(p1)
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: createSignal (ref), createConsumerCounterStoreModule (ref), createVolumeStoreModule (ref), createPlaylistStoreModule (ref), getFFlagAudioPreviewLuaModule (ref), createAudioStoreModule (ref), cryoModule (ref), createComputed (ref), signalsExperimentalModule (ref), signalsModule (ref)
-	local var9, var10 = createSignal({})
-	local var11 = createConsumerCounterStoreModule()
-	local var12 = createVolumeStoreModule()
-	local var13 = createPlaylistStoreModule()
+	local var1, var2 = createSignal({})
+	local var3 = createConsumerCounterStoreModule()
+	local var4 = createVolumeStoreModule()
+	local var5 = createPlaylistStoreModule()
 	
-	local function getOrCreateAudioStore(p5, p6)
-		-- upvalues: getFFlagAudioPreviewLuaModule (copy), var9 (ref), createAudioStoreModule (copy), var10 (ref), cryoModule (copy), var11 (ref)
-		local var28 = if getFFlagAudioPreviewLuaModule() and p6 then tostring(p5) .. ":preview" else tostring(p5)
-		local var29 = var9(false)[var28]
+	local function getOrCreateAudioStore(p2, p3)
+		-- upvalues: getFFlagAudioPreviewLuaModule (copy), var1 (ref), createAudioStoreModule (copy), var2 (ref), cryoModule (copy), var3 (ref)
+		local var6 = if getFFlagAudioPreviewLuaModule() and p3 then tostring(p2) .. ":preview" else tostring(p2)
+		local var7 = var1(false)[var6]
 		
-		if not var29 then
-			var29 = createAudioStoreModule(p5, p6)
-			var10(function(p7)
-				-- upvalues: cryoModule (copy), var28 (ref), var29 (write)
-				return cryoModule.Dictionary.join(p7, { [var28] = var29 })
+		if not var7 then
+			var7 = createAudioStoreModule(p2, p3)
+			var2(function(p4)
+				-- upvalues: cryoModule (copy), var6 (ref), var7 (write)
+				return cryoModule.Dictionary.join(p4, { [var6] = var7 })
 			end)
 		end
-		var11.subscribe(var28)
+		var3.subscribe(var6)
 		
-		return var29
+		return var7
 	end
 	
-	local var15, var16 = createSignal({})
-	local var17 = nil
-	local var18 = createComputed(function(p8)
-		-- upvalues: var15 (ref), var17 (write)
-		local var30 = var15(p8)
-		local var31 = var30[#var30]
+	local var6, var7 = createSignal({})
+	local var8 = nil
+	local var9 = createComputed(function(p2)
+		-- upvalues: var6 (ref), var8 (write)
+		local var10 = var6(p2)
+		local var11 = var10[#var10]
 		
-		if var31 then
-			var17 = var31
+		if var11 then
+			var8 = var11
 		end
-		return var17
+		return var8
 	end)
 	
 	local function _()
-		-- upvalues: var18 (ref), var13 (ref), getOrCreateAudioStore (ref)
-		local var32 = var18(false)
+		-- upvalues: var9 (ref), var5 (ref), getOrCreateAudioStore (ref)
+		local var10 = var9(false)
 		
-		if var32 then
-			local next = var13.getNext(var32.assetId)
+		if var10 then
+			local next = var5.getNext(var10.assetId)
 			
 			return if next then getOrCreateAudioStore(next) else nil
 		end
 	end
 	
-	local var19 = createComputed(function(p9)
-		-- upvalues: var18 (ref), var13 (ref)
-		local var34 = var18(p9)
+	local var10 = createComputed(function(p2)
+		-- upvalues: var9 (ref), var5 (ref)
+		local var11 = var9(p2)
 		
-		return if var34 then var13.getNext(var34.assetId) ~= nil else false
+		return if var11 then var5.getNext(var11.assetId) ~= nil else false
 	end)
-	local var20 = createComputed(function(p10)
-		-- upvalues: var18 (ref), var13 (ref)
-		local var35 = var18(p10)
+	local var11 = createComputed(function(p2)
+		-- upvalues: var9 (ref), var5 (ref)
+		local var12 = var9(p2)
 		
-		return if var35 then var13.getPrev(var35.assetId) ~= nil else false
+		return if var12 then var5.getPrev(var12.assetId) ~= nil else false
 	end)
 	
 	local function stopAll()
-		-- upvalues: var9 (ref)
-		for i, v in var9(false) do
+		-- upvalues: var1 (ref)
+		for i, v in var1(false) do
 			v.stop()
 		end
 	end
 	
 	local function pauseAll()
-		-- upvalues: var9 (ref)
-		for i, v in var9(false) do
+		-- upvalues: var1 (ref)
+		for i, v in var1(false) do
 			v.pause()
 		end
 	end
 	
 	local function playNextSong()
-		-- upvalues: var18 (ref), var13 (ref), getOrCreateAudioStore (ref)
-		local var36 = var18(false)
+		-- upvalues: var9 (ref), var5 (ref), getOrCreateAudioStore (ref)
+		local var12 = var9(false)
 		
-		if var36 then
-			local next = var13.getNext(var36.assetId)
+		if var12 then
+			local next = var5.getNext(var12.assetId)
 			
 			if next then
-				local var38 = getOrCreateAudioStore(next)
-				var36.stop()
-				var38.play()
+				local var13 = getOrCreateAudioStore(next)
+				var12.stop()
+				var13.play()
 			end
 		end
 	end
 	
 	local function playPrevSong()
-		-- upvalues: var18 (ref), var13 (ref), getOrCreateAudioStore (ref)
-		local var39 = var18(false)
+		-- upvalues: var9 (ref), var5 (ref), getOrCreateAudioStore (ref)
+		local var12 = var9(false)
 		
-		if var39 then
-			local prev = var13.getPrev(var39.assetId)
+		if var12 then
+			local prev = var5.getPrev(var12.assetId)
 			
 			if prev then
-				local var41 = getOrCreateAudioStore(prev)
-				var39.stop()
-				var41.play()
+				local var13 = getOrCreateAudioStore(prev)
+				var12.stop()
+				var13.play()
 			end
 		end
 	end
 	
-	local function destroyByKey(p11)
-		-- upvalues: var9 (ref), var11 (ref), var10 (ref), cryoModule (copy)
-		local var42 = var9(false)[p11]
+	local function destroyByKey(p2)
+		-- upvalues: var1 (ref), var3 (ref), var2 (ref), cryoModule (copy)
+		local var12 = var1(false)[p2]
 		
-		if var42 then
-			if var11.unsubscribe(p11) > 0 then return end
-			var42.destroy()
-			var10(function(p12)
-				-- upvalues: cryoModule (copy), p11 (ref)
-				return cryoModule.Dictionary.join(p12, { [p11] = cryoModule.None })
+		if var12 then
+			if var3.unsubscribe(p2) > 0 then return end
+			var12.destroy()
+			var2(function(p3)
+				-- upvalues: cryoModule (copy), p2 (ref)
+				return cryoModule.Dictionary.join(p3, { [p2] = cryoModule.None })
 			end)
 		end
 	end
 	
-	local function destroyAudioStore(p13, p14)
+	local function destroyAudioStore(p2, p3)
 		-- upvalues: destroyByKey (ref), getFFlagAudioPreviewLuaModule (copy)
-		destroyByKey(if getFFlagAudioPreviewLuaModule() and p14 then tostring(p13) .. ":preview" else tostring(p13))
+		destroyByKey(if getFFlagAudioPreviewLuaModule() and p3 then tostring(p2) .. ":preview" else tostring(p2))
 	end
 	
 	local function destroy()
-		-- upvalues: var9 (ref), var10 (ref), var16 (ref)
-		for i, v in var9(false) do
+		-- upvalues: var1 (ref), var2 (ref), var7 (ref)
+		for i, v in var1(false) do
 			v.destroy()
 		end
-		var10({})
-		var16({})
+		var2({})
+		var7({})
 	end
 	
-	signalsExperimentalModule.onDisposed(p4, signalsModule.createEffect(function(p15)
-		-- upvalues: var11 (ref), destroyByKey (ref)
-		for i, v in var11.getConsumerCounts(p15) do
+	signalsExperimentalModule.onDisposed(p1, signalsModule.createEffect(function(p2)
+		-- upvalues: var3 (ref), destroyByKey (ref)
+		for i, v in var3.getConsumerCounts(p2) do
 			if v <= 0 then
 				destroyByKey(i)
 			end
 		end
 	end))
-	signalsExperimentalModule.onDisposed(p4, signalsModule.createEffect(function(p16)
-		-- upvalues: var9 (ref), destroyByKey (ref)
-		for i, v in var9(p16) do
-			if v.getIsDestroyed(p16) then
+	signalsExperimentalModule.onDisposed(p1, signalsModule.createEffect(function(p3)
+		-- upvalues: var1 (ref), destroyByKey (ref)
+		for i, v in var1(p3) do
+			if v.getIsDestroyed(p3) then
 				destroyByKey(i)
 			end
 		end
 	end))
-	signalsExperimentalModule.onDisposed(p4, signalsModule.createEffect(function(p17)
-		-- upvalues: var9 (ref), cryoModule (copy), var15 (ref), var16 (ref)
-		for i, v in var9(p17) do
-			local isPlaying = v.getIsPlaying(p17)
-			local var44 = cryoModule.List.find(var15(p17), v)
-			local var45 = var44 ~= nil
+	signalsExperimentalModule.onDisposed(p1, signalsModule.createEffect(function(p4)
+		-- upvalues: var1 (ref), cryoModule (copy), var6 (ref), var7 (ref)
+		for i, v in var1(p4) do
+			local isPlaying = v.getIsPlaying(p4)
+			local var12 = cryoModule.List.find(var6(p4), v)
+			local var13 = var12 ~= nil
 			
-			if var45 and not isPlaying then
-				var16(function(p18)
-					-- upvalues: cryoModule (copy), var44 (ref)
-					return cryoModule.List.removeIndex(p18, var44)
+			if var13 and not isPlaying then
+				var7(function(p5)
+					-- upvalues: cryoModule (copy), var12 (ref)
+					return cryoModule.List.removeIndex(p5, var12)
 				end)
-			elseif isPlaying and not var45 then
-				var16(function(p19)
+			elseif isPlaying and not var13 then
+				var7(function(p5)
 					-- upvalues: cryoModule (copy), v (ref)
-					return cryoModule.List.join(p19, { v })
+					return cryoModule.List.join(p5, { v })
 				end)
 			end
 		end
 	end))
-	signalsExperimentalModule.onDisposed(p4, signalsModule.createEffect(function(p20)
-		-- upvalues: var12 (ref), var9 (ref)
-		local volume = var12.getVolume(p20)
+	signalsExperimentalModule.onDisposed(p1, signalsModule.createEffect(function(p5)
+		-- upvalues: var4 (ref), var1 (ref)
+		local volume = var4.getVolume(p5)
 		
-		for i, v in var9(p20) do
+		for i, v in var1(p5) do
 			v.setVolume(volume)
 		end
 	end))
-	signalsExperimentalModule.onDisposed(p4, signalsModule.createEffect(function(p21)
-		-- upvalues: var18 (ref), var19 (ref), var13 (ref), getOrCreateAudioStore (ref)
-		local var47 = var18(p21)
+	signalsExperimentalModule.onDisposed(p1, signalsModule.createEffect(function(p6)
+		-- upvalues: var9 (ref), var10 (ref), var5 (ref), getOrCreateAudioStore (ref)
+		local var14 = var9(p6)
 		
-		if var47 and var47.getIsElapsed(p21) and var19(p21) then
-			local var50
-			local var48 = var18(false)
+		if var14 and var14.getIsElapsed(p6) and var10(p6) then
+			local var15
+			local var16 = var9(false)
 			
-			if var48 then
-				local next = var13.getNext(var48.assetId)
-				var50 = if next then getOrCreateAudioStore(next) else nil
+			if var16 then
+				local next = var5.getNext(var16.assetId)
+				var15 = if next then getOrCreateAudioStore(next) else nil
 			end
-			if var50 then
-				var50.play()
+			if var15 then
+				var15.play()
 			end
 		end
 	end))
 	
 	return {
-		getAudioStores = var9,
+		getAudioStores = var1,
 		stopAll = stopAll,
 		pauseAll = pauseAll,
-		getLastPlayedAudioStore = var18,
+		getLastPlayedAudioStore = var9,
 		getOrCreateAudioStore = getOrCreateAudioStore,
-		getPlayingAudioStores = var15,
+		getPlayingAudioStores = var6,
 		destroyAudioStore = destroyAudioStore,
 		destroy = destroy,
-		getGlobalVolume = var12.getVolume,
-		setGlobalVolume = var12.setVolume,
-		mute = var12.mute,
-		unmute = var12.unmute,
-		getIsMuted = var12.getIsMuted,
-		hasNextSong = var19,
-		hasPrevSong = var20,
+		getGlobalVolume = var4.getVolume,
+		setGlobalVolume = var4.setVolume,
+		mute = var4.mute,
+		unmute = var4.unmute,
+		getIsMuted = var4.getIsMuted,
+		hasNextSong = var10,
+		hasPrevSong = var11,
 		playNextSong = playNextSong,
 		playPrevSong = playPrevSong,
-		setPlaylist = var13.set
+		setPlaylist = var5.set
 	}
 end

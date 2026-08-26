@@ -2,15 +2,15 @@
 local useQuery = require(parent.ApolloClient).useQuery
 local queries = require(parent.ApolloLocalState).queries
 
-return function(p0)
+return function(p1)
 	-- upvalues: useQuery (ref), queries (ref)
 	return useQuery(queries.profilesInsightsByUserIds, {
 		errorPolicy = "all",
-		skip = not p0.userIds or p0.skip,
+		skip = not p1.userIds or p1.skip,
 		variables = {
-			userIds = p0.userIds,
-			rankingStrategy = p0.rankingStrategy
+			userIds = p1.userIds,
+			rankingStrategy = p1.rankingStrategy
 		},
-		fetchPolicy = p0.fetchPolicy
+		fetchPolicy = p1.fetchPolicy
 	})
 end

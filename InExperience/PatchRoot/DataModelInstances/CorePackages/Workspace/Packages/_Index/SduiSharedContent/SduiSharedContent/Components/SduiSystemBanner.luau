@@ -2,20 +2,20 @@
 local reactModule = require(parent.React)
 local systemBanner = require(parent.Foundation).SystemBanner
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), systemBanner (ref)
 	return reactModule.createElement(systemBanner, {
-		severity = p0.severity,
-		variant = p0.variant,
-		title = p0.title,
-		description = p0.description,
-		actions = p0.actions,
-		onClose = p0.onClose,
-		AnchorPoint = p0.anchorPoint,
-		LayoutOrder = p0.layoutOrder,
-		Position = p0.position,
-		Visible = p0.visible,
-		ZIndex = p0.zIndex,
-		testId = p0.testId
+		severity = p1.severity,
+		variant = p1.variant,
+		title = p1.title,
+		description = p1.description,
+		actions = p1.actions,
+		onClose = p1.onClose,
+		AnchorPoint = p1.anchorPoint,
+		LayoutOrder = p1.layoutOrder,
+		Position = p1.position,
+		Visible = p1.visible,
+		ZIndex = p1.zIndex,
+		testId = p1.testId
 	})
 end)

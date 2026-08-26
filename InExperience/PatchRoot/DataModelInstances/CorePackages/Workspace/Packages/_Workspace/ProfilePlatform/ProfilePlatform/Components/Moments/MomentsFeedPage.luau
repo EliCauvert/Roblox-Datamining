@@ -36,51 +36,51 @@ local reportMoment = momentsModule.reportMoment
 
 return if fFlagEnableArgusImmersiveNav then function()
 	-- upvalues: useNavigation (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useDispatch (ref), closeCentralOverlay (ref), reportMoment (ref), fFlagMomentsReportWithFeedId (ref), openDynamicAbuseReport (ref), abuseVector (ref), fFlagAbuseReportSubmissionTargetV4 (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
-	local var19 = useNavigation()
-	local extraProps = var19.getParam("extraProps")
-	local var21 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
-	local var22 = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var21 (ref), var19 (ref)
-		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var21) })
-		var19.goBack()
-	end, { var19.goBack, var21 })
-	local var24 = nil
+	local var1 = useNavigation()
+	local extraProps = var1.getParam("extraProps")
+	local var2 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
+	local var3 = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var2 (ref), var1 (ref)
+		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var2) })
+		var1.goBack()
+	end, { var1.goBack, var2 })
+	local var5 = nil
 	
 	if fFlagEnableReportingFlowForMomentsFeed then
-		local var25 = useDispatch()
-		var24 = reactModule.useCallback(function(p1)
-			-- upvalues: var25 (ref), closeCentralOverlay (copy), reportMoment (copy), fFlagMomentsReportWithFeedId (copy), openDynamicAbuseReport (copy), abuseVector (copy), fFlagAbuseReportSubmissionTargetV4 (copy)
-			local var27 = false
+		local var6 = useDispatch()
+		var5 = reactModule.useCallback(function(p1)
+			-- upvalues: var6 (ref), closeCentralOverlay (copy), reportMoment (copy), fFlagMomentsReportWithFeedId (copy), openDynamicAbuseReport (copy), abuseVector (copy), fFlagAbuseReportSubmissionTargetV4 (copy)
+			local var7 = false
 			
 			local function submitMomentsIp(_)
-				-- upvalues: var27 (write), p1 (ref), var25 (copy), closeCentralOverlay (copy), reportMoment (copy), fFlagMomentsReportWithFeedId (copy)
-				var27 = true
+				-- upvalues: var7 (write), p1 (ref), var6 (copy), closeCentralOverlay (copy), reportMoment (copy), fFlagMomentsReportWithFeedId (copy)
+				var7 = true
 				
 				local function _(p2)
-					-- upvalues: p1 (copy), var25 (copy), closeCentralOverlay (copy)
+					-- upvalues: p1 (copy), var6 (copy), closeCentralOverlay (copy)
 					p1.onClose()
-					var25(closeCentralOverlay())
+					var6(closeCentralOverlay())
 					
 					if p1.onIpReportCode then
 						p1.onIpReportCode(p2)
 					end
 				end
 				
-				return reportMoment(if fFlagMomentsReportWithFeedId then p1.feedItemId else p1.momentId, "IntellectualProperty"):andThen(function(p3)
-					-- upvalues: p1 (copy), var25 (copy), closeCentralOverlay (copy)
-					local reportCode = p3.reportCode
+				return reportMoment(if fFlagMomentsReportWithFeedId then p1.feedItemId else p1.momentId, "IntellectualProperty"):andThen(function(p2)
+					-- upvalues: p1 (copy), var6 (copy), closeCentralOverlay (copy)
+					local reportCode = p2.reportCode
 					p1.onClose()
-					var25(closeCentralOverlay())
+					var6(closeCentralOverlay())
 					
 					if p1.onIpReportCode then
 						p1.onIpReportCode(reportCode)
 					end
-					return p3
+					return p2
 				end, function()
-					-- upvalues: p1 (copy), var25 (copy), closeCentralOverlay (copy)
+					-- upvalues: p1 (copy), var6 (copy), closeCentralOverlay (copy)
 					p1.onClose()
-					var25(closeCentralOverlay())
+					var6(closeCentralOverlay())
 					
 					if p1.onIpReportCode then
 						p1.onIpReportCode(nil)
@@ -88,80 +88,80 @@ return if fFlagEnableArgusImmersiveNav then function()
 				end)
 			end
 			
-			var25(openDynamicAbuseReport({
+			var6(openDynamicAbuseReport({
 				abuseVector = abuseVector.MomentsFeed,
 				targetId = p1.feedItemId,
 				onSubmit = function()
-					-- upvalues: var27 (write), p1 (ref)
-					if var27 then
+					-- upvalues: var7 (write), p1 (ref)
+					if var7 then
 						return
 					end
 					p1.onSubmit()
 				end,
 				onClose = function()
-					-- upvalues: p1 (ref), var25 (copy), closeCentralOverlay (copy)
+					-- upvalues: p1 (ref), var6 (copy), closeCentralOverlay (copy)
 					p1.onClose()
-					var25(closeCentralOverlay())
+					var6(closeCentralOverlay())
 				end,
-				onCustomSubmit = if not fFlagAbuseReportSubmissionTargetV4 then function(p4)
+				onCustomSubmit = if not fFlagAbuseReportSubmissionTargetV4 then function(p2)
 					-- upvalues: submitMomentsIp (ref)
-					return if p4.endpoint == "moments-ip" then submitMomentsIp(p4) else nil
+					return if p2.endpoint == "moments-ip" then submitMomentsIp(p2) else nil
 				end else nil,
 				clientActionHandlers = if fFlagAbuseReportSubmissionTargetV4 then { ["moments-ip"] = submitMomentsIp } else nil
 			}))
-		end, { var25 })
+		end, { var6 })
 	end
-	local var26 = useScreenSize()
+	local var7 = useScreenSize()
 	
 	return reactModule.createElement(view, {
 		tag = "bg-surface-0",
-		Size = UDim2.fromOffset(var26.X, var26.Y)
+		Size = UDim2.fromOffset(var7.X, var7.Y)
 	}, {
 		Presentation = reactModule.createElement(momentsImmersivePresentation, {
 			sessionSource = "profile",
 			feedKind = immersiveFeedKind.User,
-			targetUserId = var21,
-			initialIndex = var22,
-			onBack = var23,
-			openMomentsFeedReport = var24
+			targetUserId = var2,
+			initialIndex = var3,
+			onBack = var4,
+			openMomentsFeedReport = var5
 		})
 	})
 end else function()
 	-- upvalues: useNavigation (ref), reactModule (ref), createUserMomentsFeedSourceModule (ref), fireAnalyticsEvent (ref), eventNames (ref), useScreenSize (ref), useSelector (ref), useStatusBarHeight (ref), view (ref), foundationProvider (ref), colorMode (ref), feed (ref), iconButton (ref), buttonSize (ref)
-	local var11 = useNavigation()
-	local extraProps = var11.getParam("extraProps")
-	local var13 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
-	local var14 = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: createUserMomentsFeedSourceModule (copy), var13 (ref), var14 (ref)
-		return createUserMomentsFeedSourceModule(var13, { initialIndex = var14 })
-	end, { var13, var14 })
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var13 (ref), var11 (ref)
-		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var13) })
-		var11.goBack()
-	end, { var11.goBack, var13 })
-	local var17 = useScreenSize()
-	local var18 = useSelector(function(p0)
-		return p0.GlobalGuiInset
+	local var1 = useNavigation()
+	local extraProps = var1.getParam("extraProps")
+	local var2 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
+	local var3 = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: createUserMomentsFeedSourceModule (copy), var2 (ref), var3 (ref)
+		return createUserMomentsFeedSourceModule(var2, { initialIndex = var3 })
+	end, { var2, var3 })
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var2 (ref), var1 (ref)
+		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var2) })
+		var1.goBack()
+	end, { var1.goBack, var2 })
+	local var6 = useScreenSize()
+	local var7 = useSelector(function(p1)
+		return p1.GlobalGuiInset
 	end)
 	
 	return reactModule.createElement(view, {
 		tag = "bg-surface-0",
-		Size = UDim2.fromOffset(var17.X, var17.Y),
+		Size = UDim2.fromOffset(var6.X, var6.Y),
 		padding = {
-			top = UDim.new(0, var18.top + useStatusBarHeight()),
-			bottom = UDim.new(0, var18.bottom),
-			left = UDim.new(0, var18.left),
-			right = UDim.new(0, var18.right)
+			top = UDim.new(0, var7.top + useStatusBarHeight()),
+			bottom = UDim.new(0, var7.bottom),
+			left = UDim.new(0, var7.left),
+			right = UDim.new(0, var7.right)
 		}
 	}, {
 		OnVideoUI = reactModule.createElement(foundationProvider, { colorMode = colorMode.Dark }, {
 			Feed = reactModule.createElement(feed, {
 				active = true,
 				playbackActive = true,
-				source = var15,
-				initialIndex = var14
+				source = var4,
+				initialIndex = var3
 			}),
 			CloseButtonContainer = reactModule.createElement(view, {
 				tag = "position-top-left anchor-top-left auto-xy padding-large",
@@ -170,7 +170,7 @@ end else function()
 				CloseButton = reactModule.createElement(iconButton, {
 					icon = "icons/navigation/close",
 					size = buttonSize.Medium,
-					onActivated = var16
+					onActivated = var5
 				})
 			})
 		})

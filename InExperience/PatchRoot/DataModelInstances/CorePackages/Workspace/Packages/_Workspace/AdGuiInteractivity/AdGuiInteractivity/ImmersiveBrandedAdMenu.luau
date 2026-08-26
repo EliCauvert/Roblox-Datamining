@@ -14,68 +14,68 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useMeasurableRef = foundationModule.Hooks.useMeasurableRef
 local _ = { WhyThisAd = "whyThisAd", ReportAd = "reportAd" }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), useMeasurableRef (ref), guiService (ref), adsInteractivityTelemetryModule (ref), immersiveBrandedAdWhyThisAdDialogModule (ref), immersiveBrandedAdReportAdDialogModule (ref), menu (ref), inputSize (ref), popoverSide (ref)
-	local screenPosition = p0.screenPosition
-	local var8 = useLocalization({
+	local screenPosition = p1.screenPosition
+	local var1 = useLocalization({
 		WhyThisAdText = "CoreScripts.Ads.Label.WhyThisAd",
 		ReportAdText = "CoreScripts.Ads.Label.ReportAd"
 	})
-	local var9, var10 = reactModule.useState(nil)
-	local var11 = useMeasurableRef(screenPosition)
+	local var2, var3 = reactModule.useState(nil)
+	local var4 = useMeasurableRef(screenPosition)
 	reactModule.useEffect(function()
-		-- upvalues: guiService (copy), p0 (ref)
+		-- upvalues: guiService (copy), p1 (ref)
 		local menuOpenedConnection = guiService.MenuOpened:Connect(function()
-			-- upvalues: p0 (copy)
-			p0.onDismiss()
+			-- upvalues: p1 (copy)
+			p1.onDismiss()
 		end)
 		
 		return function()
 			-- upvalues: menuOpenedConnection (ref)
 			menuOpenedConnection:Disconnect()
 		end
-	end, { p0.onDismiss })
+	end, { p1.onDismiss })
 	
-	return if var9 == "whyThisAd" then reactModule.createElement(immersiveBrandedAdWhyThisAdDialogModule, {
-		advertiserName = p0.advertiserName,
-		onDismiss = p0.onDismiss
-	}) elseif var9 == "reportAd" then reactModule.createElement(immersiveBrandedAdReportAdDialogModule, {
-		immersiveBrandedAdId = p0.immersiveBrandedAdId,
-		onDismiss = p0.onDismiss
+	return if var2 == "whyThisAd" then reactModule.createElement(immersiveBrandedAdWhyThisAdDialogModule, {
+		advertiserName = p1.advertiserName,
+		onDismiss = p1.onDismiss
+	}) elseif var2 == "reportAd" then reactModule.createElement(immersiveBrandedAdReportAdDialogModule, {
+		immersiveBrandedAdId = p1.immersiveBrandedAdId,
+		onDismiss = p1.onDismiss
 	}) else reactModule.createElement(reactModule.Fragment, nil, {
 		menu = reactModule.createElement(menu, {
 			isOpen = true,
 			items = reactModule.useMemo(function()
-				-- upvalues: var8 (ref)
+				-- upvalues: var1 (ref)
 				return {
 					{
 						id = "whyThisAd",
 						icon = "icons/actions/info_small",
-						text = var8.WhyThisAdText
+						text = var1.WhyThisAdText
 					},
 					{
 						id = "reportAd",
 						icon = "icons/actions/feedback",
-						text = var8.ReportAdText
+						text = var1.ReportAdText
 					}
 				}
-			end, { var8.WhyThisAdText, var8.ReportAdText }),
+			end, { var1.WhyThisAdText, var1.ReportAdText }),
 			size = inputSize.Small,
 			side = popoverSide.Right,
-			onActivated = reactModule.useCallback(function(p1)
-				-- upvalues: adsInteractivityTelemetryModule (copy), var10 (ref)
-				if p1 == "whyThisAd" then
+			onActivated = reactModule.useCallback(function(p2)
+				-- upvalues: adsInteractivityTelemetryModule (copy), var3 (ref)
+				if p2 == "whyThisAd" then
 					adsInteractivityTelemetryModule.logImmersiveBrandedAdButtonClickCounter("whyThisAd")
-					var10("whyThisAd")
+					var3("whyThisAd")
 					
 					return
-				elseif p1 == "reportAd" then
+				elseif p2 == "reportAd" then
 					adsInteractivityTelemetryModule.logImmersiveBrandedAdButtonClickCounter("reportAd")
-					var10("reportAd")
+					var3("reportAd")
 				end
 			end, {}),
-			onPressedOutside = p0.onDismiss,
-			anchorRef = var11
+			onPressedOutside = p1.onDismiss,
+			anchorRef = var4
 		}),
 		modal = reactModule.createElement("TextButton", {
 			Text = "",

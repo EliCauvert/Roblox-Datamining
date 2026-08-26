@@ -9,49 +9,49 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
 local gameTileTypesModule = require(gameTile.GameTileTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), gameTileTypesModule (ref), getGameTileMetadataFontModule (ref), reactModule (ref), imageSetLabel (ref)
-	local var12, var13
-	local var5 = useDesignTokens()
-	local var6 = useTextSizeOffset()
-	local var7 = useTokens()
-	local var8 = if p0.isUnifiedGameTile then var7.Size.Size_500 else var5.Size.Size_500
-	local var9 = if not p0.isUnifiedGameTile then if p0.isNarrowScreenXSmall and p0.gameTileLayoutType == gameTileTypesModule.GameTileLayoutType.Narrow then var7.Gap.XXSmall else var7.Gap.XSmall else var5.Size.Size_100
-	local var10 = if p0.isUnifiedGameTile then var7.Color.Content.Default else var5.Color.Content.Default
-	local var11 = getGameTileMetadataFontModule(p0.useLargerFont, var5, var7 or nil, if p0.isUnifiedGameTile then true else nil)
-	local fontSize = var11.FontSize
+	local var1, var2
+	local var3 = useDesignTokens()
+	local var4 = useTextSizeOffset()
+	local var5 = useTokens()
+	local var6 = if p1.isUnifiedGameTile then var5.Size.Size_500 else var3.Size.Size_500
+	local var7 = if not p1.isUnifiedGameTile then if p1.isNarrowScreenXSmall and p1.gameTileLayoutType == gameTileTypesModule.GameTileLayoutType.Narrow then var5.Gap.XXSmall else var5.Gap.XSmall else var3.Size.Size_100
+	local var8 = if p1.isUnifiedGameTile then var5.Color.Content.Default else var3.Color.Content.Default
+	local var9 = getGameTileMetadataFontModule(p1.useLargerFont, var3, var5 or nil, if p1.isUnifiedGameTile then true else nil)
+	local fontSize = var9.FontSize
 	local _ = nil
 	local _ = nil
 	
-	if p0.iconSize then
-		var12 = p0.iconSize
-		var13 = var5.Size.Size_500
+	if p1.iconSize then
+		var1 = p1.iconSize
+		var2 = var3.Size.Size_500
 	else
-		var12 = fontSize / 1.26
-		var13 = var12
+		var1 = fontSize / 1.26
+		var2 = var1
 	end
 	return reactModule.createElement("Frame", {
 		ClipsDescendants = false,
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, var8 + var6),
+		Size = UDim2.new(1, 0, 0, var6 + var4),
 		AutomaticSize = Enum.AutomaticSize.None,
-		Position = p0.Position
+		Position = p1.Position
 	}, {
 		IconSlot = reactModule.createElement("Frame", {
 			LayoutOrder = 1,
 			ClipsDescendants = false,
 			BackgroundTransparency = 1,
-			Size = UDim2.fromOffset(var13, var13),
+			Size = UDim2.fromOffset(var2, var2),
 			Position = UDim2.fromScale(0, 0.5),
 			AnchorPoint = Vector2.new(0, 0.5)
 		}, {
-			Icon = if p0.iconElement then p0.iconElement else reactModule.createElement(imageSetLabel, {
+			Icon = if p1.iconElement then p1.iconElement else reactModule.createElement(imageSetLabel, {
 				ImageTransparency = 0,
 				BackgroundTransparency = 1,
-				Image = p0.icon,
-				ImageColor3 = var10.Color3,
+				Image = p1.icon,
+				ImageColor3 = var8.Color3,
 				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.fromOffset(var12, var12),
+				Size = UDim2.fromOffset(var1, var1),
 				AnchorPoint = Vector2.new(0.5, 0.5)
 			})
 		}),
@@ -59,15 +59,15 @@ return function(p0)
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			TextWrapped = false,
-			Text = p0.text,
-			Size = UDim2.new(1, -(var13 + var9), 0, fontSize + var6),
+			Text = p1.text,
+			Size = UDim2.new(1, -(var2 + var7), 0, fontSize + var4),
 			AutomaticSize = Enum.AutomaticSize.None,
-			Position = UDim2.new(0, var13 + var9, 0.5, 0),
+			Position = UDim2.new(0, var2 + var7, 0.5, 0),
 			AnchorPoint = Vector2.new(0, 0.5),
 			TextSize = fontSize,
-			Font = var11.Font,
-			TextTransparency = var10.Transparency,
-			TextColor3 = var10.Color3,
+			Font = var9.Font,
+			TextTransparency = var8.Transparency,
+			TextColor3 = var8.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center

@@ -26,7 +26,7 @@ educationalPopup.validateProps = t.strictInterface({
 	isClosingApp = t.boolean
 })
 
-function educationalPopup.init(p0)
+function educationalPopup.init(p1)
 	-- upvalues: sendAnalyticsModule (ref), guiService (ref), notificationTypeList (ref)
 	function p0.onCancel()
 		-- upvalues: sendAnalyticsModule (copy), guiService (copy), notificationTypeList (copy)
@@ -71,22 +71,22 @@ function educationalPopup.render(p1)
 	end)
 end
 
-function educationalPopup.didUpdate(p3)
+function educationalPopup.didUpdate(p1)
 	-- upvalues: guiService (ref)
-	guiService:SetMenuIsOpen(p3.props.isClosingApp, "EducationalPopup")
+	guiService:SetMenuIsOpen(p1.props.isClosingApp, "EducationalPopup")
 end
 
-return roactRodux.UNSTABLE_connect2(function(p4, _)
+return roactRodux.UNSTABLE_connect2(function(p1, _)
 	return {
-		isClosingApp = p4.nativeClosePrompt.closingApp,
-		screenSize = p4.screenSize
+		isClosingApp = p1.nativeClosePrompt.closingApp,
+		screenSize = p1.screenSize
 	}
-end, function(p5)
+end, function(p1)
 	-- upvalues: closeNativeClosePromptModule (ref), rbxAnalyticsService (ref), sendAnalyticsModule (ref), leaveGameModule (ref)
 	return {
 		onDismiss = function()
-			-- upvalues: p5 (ref), closeNativeClosePromptModule (copy), rbxAnalyticsService (copy), sendAnalyticsModule (copy)
-			p5(closeNativeClosePromptModule())
+			-- upvalues: p1 (ref), closeNativeClosePromptModule (copy), rbxAnalyticsService (copy), sendAnalyticsModule (copy)
+			p1(closeNativeClosePromptModule())
 			rbxAnalyticsService:ReportCounter("EducationalPopup_Dismiss", 1)
 			sendAnalyticsModule("educational_popup", "educational_dismiss_prompt", {})
 		end,

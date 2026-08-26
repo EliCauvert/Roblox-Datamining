@@ -12,18 +12,18 @@ local t = {
 
 return {
 	roact = roactModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: t (ref), roactModule (ref), mockProvidersModule (ref), cryoModule (ref)
-		return function(p1)
-			-- upvalues: t (copy), roactModule (copy), mockProvidersModule (copy), p0 (ref), cryoModule (copy)
+		return function(p2)
+			-- upvalues: t (copy), roactModule (copy), mockProvidersModule (copy), p1 (ref), cryoModule (copy)
 			local props
-			if p1 then
-				props = p1.definition and (p1.definition.props or {})
+			if p2 then
+				props = p2.definition and (p2.definition.props or {})
 			end
 			return roactModule.createElement(mockProvidersModule, {
-				themeName = (if p1 then t[p1.theme] else t.Default).themeName
+				themeName = (if p2 then t[p2.theme] else t.Default).themeName
 			}, {
-				story = roactModule.createElement(p0, cryoModule.Dictionary.union(props, p1))
+				story = roactModule.createElement(p1, cryoModule.Dictionary.union(props, p2))
 			})
 		end
 	end

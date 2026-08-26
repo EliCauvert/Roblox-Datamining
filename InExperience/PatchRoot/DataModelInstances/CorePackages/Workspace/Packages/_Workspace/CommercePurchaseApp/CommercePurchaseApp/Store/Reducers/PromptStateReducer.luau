@@ -17,27 +17,27 @@ return roduxModule.createReducer({ promptState = commercePurchasePromptStateEnum
 		-- upvalues: commercePurchasePromptStateEnumModule (ref)
 		return { promptState = commercePurchasePromptStateEnumModule.None }
 	end,
-	[commercePurchaseFailedModule.name] = function(p0, p1)
+	[commercePurchaseFailedModule.name] = function(p1, p2)
 		-- upvalues: commercePurchasePromptStateEnumModule (ref)
-		local cloned = table.clone(p0)
-		cloned.errorCode = p1.errorCode
+		local cloned = table.clone(p1)
+		cloned.errorCode = p2.errorCode
 		cloned.promptState = commercePurchasePromptStateEnumModule.Error
 		
 		return cloned
 	end,
-	[commercePurchaseStartedModule.name] = function(p2, p3)
+	[commercePurchaseStartedModule.name] = function(p1, p2)
 		-- upvalues: commercePurchasePromptStateEnumModule (ref)
-		local cloned = table.clone(p2)
+		local cloned = table.clone(p1)
 		cloned.promptState = commercePurchasePromptStateEnumModule.Started
-		cloned.commerceProductId = p3.commerceProductId
+		cloned.commerceProductId = p2.commerceProductId
 		
 		return cloned
 	end,
-	[commercePurchaseCheckoutModule.name] = function(p4, p5)
+	[commercePurchaseCheckoutModule.name] = function(p1, p2)
 		-- upvalues: commercePurchasePromptStateEnumModule (ref)
-		local cloned = table.clone(p4)
+		local cloned = table.clone(p1)
 		cloned.promptState = commercePurchasePromptStateEnumModule.Checkout
-		cloned.checkoutSessionId = p5.checkoutSessionId
+		cloned.checkoutSessionId = p2.checkoutSessionId
 		
 		return cloned
 	end

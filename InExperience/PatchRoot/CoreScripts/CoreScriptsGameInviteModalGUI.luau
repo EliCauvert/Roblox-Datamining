@@ -9,9 +9,9 @@ local gameInviteModule = require(corePackagesService.Workspace.Packages.GameInvi
 local renderCoreScriptGameInviteModalContainer = gameInviteModule.renderCoreScriptGameInviteModalContainer
 local gameInviteModalManager = gameInviteModule.GameInviteModalManager
 
-local var6 = function(p0)
+local var1 = function(p1)
 	-- upvalues: playerListManagerModule (ref), fFlagGameInviteModalUnlockMouse (ref), userInputService (ref), VRService (ref), mouseIconOverrideService (ref)
-	if p0 then
+	if p1 then
 		playerListManagerModule:HideTemp("GameInviteMenu", true)
 		
 		if fFlagGameInviteModalUnlockMouse and userInputService.MouseEnabled and not VRService.VREnabled then
@@ -29,4 +29,4 @@ local var6 = function(p0)
 end
 
 renderCoreScriptGameInviteModalContainer(require(coreGuiService.RobloxGui.Modules.ApolloClient))
-gameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(var6)
+gameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(var1)

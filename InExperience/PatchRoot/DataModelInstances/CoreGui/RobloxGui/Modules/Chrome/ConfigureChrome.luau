@@ -37,18 +37,18 @@ end
 
 local function configureUnibar()
 	-- upvalues: fFlagAddMapToNineDot (ref), buildMenuOrderModule (ref), isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), fFlagExpChatCanShowFriendsTab (ref), argoPartyExperimentation (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), constantsModule (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), constantsModule_1 (ref), guiService (ref), fFlagEnableInExperienceShop (ref)
-	local var12
+	local var1
 	local _ = nil
 	
 	if fFlagAddMapToNineDot then
-		var12 = buildMenuOrderModule()
+		var1 = buildMenuOrderModule()
 	else
-		var12 = { "leaderboard", "emotes", "backpack" }
-		table.insert(var12, "respawn")
-		table.insert(var12, 1, "trust_and_safety")
+		var1 = { "leaderboard", "emotes", "backpack" }
+		table.insert(var1, "respawn")
+		table.insert(var1, 1, "trust_and_safety")
 		
 		if isConnectDropdownEnabledModule() and (not fFlagRemoveFriendsChatUnibarEntrypoints or not fFlagExpChatCanShowFriendsTab or not argoPartyExperimentation.getIsRenameEnabled()) then
-			table.insert(var12, 1, "connect_dropdown")
+			table.insert(var1, 1, "connect_dropdown")
 		end
 	end
 	local list = { "nine_dot", "chat", "toggle_mic_mute" }
@@ -76,23 +76,23 @@ local function configureUnibar()
 	end
 	if not fFlagAddMapToNineDot then
 		if not isInExperienceUIVREnabled then
-			table.insert(var12, 2, "camera_entrypoint")
-			table.insert(var12, 2, "selfie_view")
+			table.insert(var1, 2, "camera_entrypoint")
+			table.insert(var1, 2, "selfie_view")
 		elseif not isSpatial() then
-			table.insert(var12, 2, "camera_entrypoint")
-			table.insert(var12, 2, "selfie_view")
+			table.insert(var1, 2, "camera_entrypoint")
+			table.insert(var1, 2, "selfie_view")
 		end
 		if fFlagEnableInExperienceAvatarSwitcher then
-			table.insert(var12, 3, constantsModule_1.AVATAR_SWITCHER_ID)
+			table.insert(var1, 3, constantsModule_1.AVATAR_SWITCHER_ID)
 		end
 		if not isSpatial() and not guiService:IsTenFootInterface() then
-			table.insert(var12, 4, "music_entrypoint")
+			table.insert(var1, 4, "music_entrypoint")
 		end
 		if fFlagEnableInExperienceShop then
-			table.insert(var12, 2, constantsModule_1.IN_EXPERIENCE_SHOP_ID)
+			table.insert(var1, 2, constantsModule_1.IN_EXPERIENCE_SHOP_ID)
 		end
 	end
-	serviceModule:configureSubMenu("nine_dot", var12)
+	serviceModule:configureSubMenu("nine_dot", var1)
 end
 
 require(chrome.Integrations)

@@ -2,34 +2,34 @@
 local object = luauPolyfillModule.Object
 local array = luauPolyfillModule.Array
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: array (ref)
-	local var2 = false
+	local var1 = false
 	
-	if typeof(p0) == "table" then
-		var2 = not (array.isArray(p0) and #p0 > 0)
+	if typeof(p1) == "table" then
+		var1 = not (array.isArray(p1) and #p1 > 0)
 	end
-	return var2
+	return var1
 end
 
 local function mergeDeep(p1, p2)
 	-- upvalues: array (ref), object (ref), mergeDeep (ref)
-	local var3 = p1[1] or {}
+	local var1 = p1[1] or {}
 	local t = {}
 	
 	for i, v in p1 do
-		local var5 = false
+		local var2 = false
 		
-		if typeof(var3) == "table" then
-			var5 = not (array.isArray(var3) and #var3 > 0)
+		if typeof(var1) == "table" then
+			var2 = not (array.isArray(var1) and #var1 > 0)
 		end
-		if var5 then
-			var5 = false
+		if var2 then
+			var2 = false
 			
 			if typeof(v) == "table" then
-				var5 = not (array.isArray(v) and #v > 0)
+				var2 = not (array.isArray(v) and #v > 0)
 			end
-			if var5 then
+			if var2 then
 				for i_1, v_1 in v do
 					if type(v_1) ~= "table" then
 						object.assign(t, { [i_1] = v_1 })

@@ -15,73 +15,73 @@ local unselectedGray = constantsModule.Color.UnselectedGray
 local buttonWidth = constantsModule.MicroProfilerFormatting.ButtonWidth
 local profilerExportView = roactModule.PureComponent:extend("ProfilerExportView")
 
-local function _(p0, p1, p2)
-	local var7 = ""
-	local var8 = if p0 then "client" else "server"
-	local sessionStartTime = p1 and p1.SessionStartTime
+local function _(p1, p2, p3)
+	local var1 = ""
+	local var2 = if p1 then "client" else "server"
+	local sessionStartTime = p2 and p2.SessionStartTime
 	
 	if sessionStartTime then
-		var7 = os.date("%Y%b%d-%H%M%S-", sessionStartTime / 1000) or ""
+		var1 = os.date("%Y%b%d-%H%M%S-", sessionStartTime / 1000) or ""
 	end
 	return "scriptprofiler-" .. var7 .. var8 .. p2
 end
 
 function profilerExportView.init(_) end
 
-function profilerExportView.didMount(p3)
+function profilerExportView.didMount(p1)
 	local t = {}
-	local data = p3.props.client.data
-	local var11 = ""
+	local data = p1.props.client.data
+	local var1 = ""
 	local sessionStartTime = data and data.SessionStartTime
 	
 	if sessionStartTime then
-		var11 = os.date("%Y%b%d-%H%M%S-", sessionStartTime / 1000) or ""
+		var1 = os.date("%Y%b%d-%H%M%S-", sessionStartTime / 1000) or ""
 	end
 	t.exportFilenameClient = "scriptprofiler-" .. var11 .. "client" .. ".json"
-	local data_1 = p3.props.server.data
-	local var13 = ""
+	local data_1 = p1.props.server.data
+	local var2 = ""
 	local sessionStartTime_1 = data_1 and data_1.SessionStartTime
 	
 	if sessionStartTime_1 then
-		var13 = os.date("%Y%b%d-%H%M%S-", sessionStartTime_1 / 1000) or ""
+		var2 = os.date("%Y%b%d-%H%M%S-", sessionStartTime_1 / 1000) or ""
 	end
 	t.exportFilenameServer = "scriptprofiler-" .. var13 .. "server" .. ".json"
-	p3:setState(t)
+	p1:setState(t)
 end
 
 function profilerExportView.didUpdate(_) end
 
-function profilerExportView.renderExportInputAndButton(p4, p5, p6, p7)
+function profilerExportView.renderExportInputAndButton(p1, p2, p3, p4)
 	-- upvalues: roactModule (ref), unselectedGray (ref), buttonTextSize (ref), mainWindow (ref), constantsModule (ref), scrollingTextBoxModule (ref), mainWindowHeader (ref), scriptProfilerService (ref)
 	return roactModule.createElement("TextLabel", {
 		BackgroundTransparency = 0,
 		Size = UDim2.new(0.9, 0, 0, 30),
 		Position = UDim2.new(0.05, 0, 0, 37.5),
 		BackgroundColor3 = unselectedGray,
-		Text = if p7 then "" else "Complete a profiling session to export data",
+		Text = if p4 then "" else "Complete a profiling session to export data",
 		TextSize = buttonTextSize,
 		Font = mainWindow,
 		TextColor3 = constantsModule.Color.Text
-	}, if p7 then {
+	}, if p4 then {
 		InputField = roactModule.createElement(scrollingTextBoxModule, {
 			ShowNativeInput = true,
 			ClearTextOnFocus = false,
 			PlaceholderText = "Filename for export",
-			Text = p6,
+			Text = p3,
 			TextSize = buttonTextSize,
 			Font = mainWindow,
 			Size = UDim2.new(0.8, 0, 1, 0),
 			Position = UDim2.new(0, 0, 0, 0),
 			TextColor3 = constantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextBoxFocusLost = function(p8, _, _)
-				-- upvalues: p5 (ref), p4 (ref)
-				if p5 then
-					p4:setState({ exportFilenameClient = p8.text })
+			TextBoxFocusLost = function(p5, _, _)
+				-- upvalues: p2 (ref), p1 (ref)
+				if p2 then
+					p1:setState({ exportFilenameClient = p5.text })
 					
 					return
 				end
-				p4:setState({ exportFilenameServer = p8.text })
+				p1:setState({ exportFilenameServer = p5.text })
 			end
 		}),
 		ExportButton = roactModule.createElement("TextButton", {
@@ -95,35 +95,35 @@ function profilerExportView.renderExportInputAndButton(p4, p5, p6, p7)
 			TextYAlignment = Enum.TextYAlignment.Center,
 			BackgroundColor3 = unselectedGray,
 			[roactModule.Event.Activated] = function()
-				-- upvalues: scriptProfilerService (copy), p7 (ref), p6 (ref), p5 (ref), p4 (ref)
-				local var15 = scriptProfilerService:SaveScriptProfilingData(p7, p6)
+				-- upvalues: scriptProfilerService (copy), p4 (ref), p3 (ref), p2 (ref), p1 (ref)
+				local var1 = scriptProfilerService:SaveScriptProfilingData(p4, p3)
 				
-				if p5 then
-					p4:setState({ clientSavePath = var15 })
+				if p2 then
+					p1:setState({ clientSavePath = var1 })
 					
 					return
 				end
-				p4:setState({ serverSavePath = var15 })
+				p1:setState({ serverSavePath = var1 })
 			end
 		})
 	} else {})
 end
 
-function profilerExportView.renderExportSection(p9, p10, p11)
+function profilerExportView.renderExportSection(p1, p2, p3)
 	-- upvalues: roactModule (ref), buttonWidth (ref), mainWindowHeader (ref), buttonTextSize (ref), constantsModule (ref), unselectedGray (ref)
 	local exportFilenameClient, serializedData, clientSavePath
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	
-	if p10 then
-		exportFilenameClient = p9.state.exportFilenameClient
-		serializedData = p9.props.client.serializedData
-		clientSavePath = p9.state.clientSavePath
+	if p2 then
+		exportFilenameClient = p1.state.exportFilenameClient
+		serializedData = p1.props.client.serializedData
+		clientSavePath = p1.state.clientSavePath
 	else
-		exportFilenameClient = p9.state.exportFilenameServer
-		serializedData = p9.props.server.serializedData
-		clientSavePath = p9.state.serverSavePath
+		exportFilenameClient = p1.state.exportFilenameServer
+		serializedData = p1.props.server.serializedData
+		clientSavePath = p1.state.serverSavePath
 	end
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -134,7 +134,7 @@ function profilerExportView.renderExportSection(p9, p10, p11)
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, buttonWidth, 0, 30),
 			Position = UDim2.new(0.1, 0, 0, 0),
-			Text = p11,
+			Text = p3,
 			Font = mainWindowHeader,
 			TextSize = buttonTextSize,
 			TextColor3 = constantsModule.Color.Text,
@@ -146,7 +146,7 @@ function profilerExportView.renderExportSection(p9, p10, p11)
 			Size = UDim2.new(1, 0, 0, 1),
 			Position = UDim2.new(0, 0, 0, 30)
 		}),
-		Export = p9:renderExportInputAndButton(p10, exportFilenameClient, serializedData),
+		Export = p1:renderExportInputAndButton(p2, exportFilenameClient, serializedData),
 		SavedPath = if not clientSavePath then nil else roactModule.createElement("TextBox", {
 			BackgroundTransparency = 1,
 			TextEditable = false,
@@ -164,31 +164,31 @@ function profilerExportView.renderExportSection(p9, p10, p11)
 	})
 end
 
-function profilerExportView.render(p12)
+function profilerExportView.render(p1)
 	-- upvalues: roactModule (ref), constantsModule (ref), mainRowPadding (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
-		Size = p12.props.size,
+		Size = p1.props.size,
 		BackgroundColor3 = constantsModule.Color.BaseGray
 	}, {
 		UIListLayout = roactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, mainRowPadding * 2),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		Row = p12:renderExportSection(true, "Client"),
+		Row = p1:renderExportSection(true, "Client"),
 		HorizontalLine = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
 			Size = UDim2.new(1, 0, 0, mainRowPadding)
 		}),
-		Row2 = p12:renderExportSection(false, "Server")
+		Row2 = p1:renderExportSection(false, "Server")
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p13, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
-		client = p13.ScriptProfiler.client,
-		server = p13.ScriptProfiler.server
+		client = p1.ScriptProfiler.client,
+		server = p1.ScriptProfiler.server
 	}
 end, nil)(profilerExportView)

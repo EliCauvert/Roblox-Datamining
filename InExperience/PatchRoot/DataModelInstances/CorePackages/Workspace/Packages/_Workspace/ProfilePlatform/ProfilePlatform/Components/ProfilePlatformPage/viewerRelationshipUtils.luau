@@ -14,9 +14,9 @@ local t = {
 	_ = friendStatusModule.Unknown
 }
 
-local function getViewerRelationshipFromProfileResponse(p0)
+local function getViewerRelationshipFromProfileResponse(p1)
 	-- upvalues: getDeepValueModule (ref), enumsModule (ref)
-	return getDeepValueModule(p0, `responseBody.components.{enumsModule.Components.UserProfileHeader}.viewerRelationship`)
+	return getDeepValueModule(p1, `responseBody.components.{enumsModule.Components.UserProfileHeader}.viewerRelationship`)
 end
 
 local function getContextualInformationFromProfileResponse(p1)
@@ -24,23 +24,23 @@ local function getContextualInformationFromProfileResponse(p1)
 	return getDeepValueModule(p1, `responseBody.components.{enumsModule.Components.UserProfileHeader}.contextualInformation`)
 end
 
-local function _(p2)
-	return if p2 then p2.trustedFriendStatus or nil else nil
+local function _(p1)
+	return if p1 then p1.trustedFriendStatus or nil else nil
 end
 
-local _ = function(p3)
+local _ = function(p1)
 	-- upvalues: t (ref)
-	return t[p3]
+	return t[p1]
 end
 
 return {
 	getViewerRelationshipFromProfileResponse = getViewerRelationshipFromProfileResponse,
 	getContextualInformationFromProfileResponse = getContextualInformationFromProfileResponse,
-	mapViewerRelationshipAndContextToAnalyticsFriendStatus = function(p4, p5)
+	mapViewerRelationshipAndContextToAnalyticsFriendStatus = function(p1, p2)
 		-- upvalues: enumsModule (ref), friendStatusModule (ref), t (ref)
-		local var7 = if p4 then p4.friendshipStatus else "Invalid"
+		local var1 = if p1 then p1.friendshipStatus else "Invalid"
 		
-		return if p5 and p5.context == enumsModule.ContextualTypes.AccountDeleted and var7 == "Friends" then friendStatusModule.Ineligible else t[var7]
+		return if p2 and p2.context == enumsModule.ContextualTypes.AccountDeleted and var1 == "Friends" then friendStatusModule.Ineligible else t[var1]
 	end,
 	isViewerTrustedFriendsFromViewerRelationship = function(_)
 -- FATAL: Failed to generate AST for `isViewerTrustedFriendsFromViewerRelationship` function:

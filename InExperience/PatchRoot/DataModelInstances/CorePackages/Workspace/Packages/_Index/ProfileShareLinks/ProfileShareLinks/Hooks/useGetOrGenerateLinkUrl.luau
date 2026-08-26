@@ -6,10 +6,10 @@ local networkingModule = require(profileShareLinks.Networking.Networking)
 
 return function()
 	-- upvalues: useDispatch (ref), reactModule (ref), networkingModule (ref)
-	local var3 = useDispatch()
+	local var1 = useDispatch()
 	
 	return reactModule.useCallback(function()
-		-- upvalues: var3 (ref), networkingModule (copy)
-		return var3(networkingModule.ShareLinksNetworking.GetOrGenerateLink.API({ linkType = "Profile" })):catch(function() end)
-	end, { var3 })
+		-- upvalues: var1 (ref), networkingModule (copy)
+		return var1(networkingModule.ShareLinksNetworking.GetOrGenerateLink.API({ linkType = "Profile" })):catch(function() end)
+	end, { var1 })
 end

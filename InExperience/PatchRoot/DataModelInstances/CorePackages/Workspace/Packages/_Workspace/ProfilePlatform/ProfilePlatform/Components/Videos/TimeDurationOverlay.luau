@@ -4,8 +4,8 @@ local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
 local text = foundationModule.Text
 
-local function formatTime(p0)
-	return string.format("%02d:%02d", math.floor(p0 / 60), math.floor(p0 % 60))
+local function formatTime(p1)
+	return string.format("%02d:%02d", math.floor(p1 / 60), math.floor(p1 % 60))
 end
 
 return function(p1)

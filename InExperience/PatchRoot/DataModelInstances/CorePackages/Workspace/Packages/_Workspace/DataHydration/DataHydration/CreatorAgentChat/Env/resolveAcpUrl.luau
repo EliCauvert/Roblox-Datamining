@@ -21,16 +21,16 @@ local function resolveCreatorAgentAcp()
 	
 	if ok and typeof(status) == "string" then
 		local match = string.match(status, "sitetest(%d+)%.robloxlabs%.com")
-		local var7 = if match == nil then nil else tonumber(match)
+		local var1 = if match == nil then nil else tonumber(match)
 		
-		return if var7 == nil then {
+		return if var1 == nil then {
 			gateway = "robloxlabs-v1",
 			sitetestNumber = nil,
 			url = acpProtocolModule.acpUrl()
 		} else {
 			gateway = "robloxlabs-v1",
-			url = `https://apis.sitetest{var7}.robloxlabs.com{acpProtocolModule.ACP_PATH}`,
-			sitetestNumber = var7
+			url = `https://apis.sitetest{var1}.robloxlabs.com{acpProtocolModule.ACP_PATH}`,
+			sitetestNumber = var1
 		}
 	end
 end

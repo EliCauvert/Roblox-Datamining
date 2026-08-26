@@ -36,25 +36,25 @@ pcall(function()
 	end
 end)
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: appPage (ref), var1 (write), isVRAppBuild (ref)
-	if not p0 or not p0.Diag then return end
-	if not p1 then return end
-	local var3 = "Other"
+	if not p1 or not p1.Diag then return end
+	if not p2 then return end
+	local var2 = "Other"
 	
-	if p1 == appPage.Home or p1 == appPage.Games then
-		if p3 == 1 then
-			var3 = "GamesList"
-		elseif p1 == appPage.Home then
-			var3 = "Home"
+	if p2 == appPage.Home or p2 == appPage.Games then
+		if p4 == 1 then
+			var2 = "GamesList"
+		elseif p2 == appPage.Home then
+			var2 = "Home"
 		else
-			assert(p1 == appPage.Games, `{p1} should always be Games here`)
-			var3 = "Games"
+			assert(p2 == appPage.Games, `{p2} should always be Games here`)
+			var2 = "Games"
 		end
-	elseif p1 == "recommended" then
-		var3 = "GameDetail"
-	elseif p1 == appPage.SearchPage then
-		var3 = "SearchPage"
+	elseif p2 == "recommended" then
+		var2 = "GameDetail"
+	elseif p2 == appPage.SearchPage then
+		var2 = "SearchPage"
 	end
-	p0.Diag:reportCounterSimple((if isVRAppBuild() then "VR" else var1) .. "-GameImps-" .. var3, p2)
+	p1.Diag:reportCounterSimple((if isVRAppBuild() then "VR" else var1) .. "-GameImps-" .. var3, p3)
 end

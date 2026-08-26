@@ -2,25 +2,25 @@
 local reactModule = require(chrome.Parent.React)
 local _ = require(chrome.Common.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
-	local var2, var3 = reactModule.useState(if p0 == nil then nil else p0:get())
+	local var1, var2 = reactModule.useState(if p1 == nil then nil else p1:get())
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var3 (ref), var2 (ref)
-		if p0 == nil then return end
-		local var4 = p0:connect(function(p1)
-			-- upvalues: var3 (copy)
-			var3(p1)
+		-- upvalues: p1 (ref), var2 (ref), var1 (ref)
+		if p1 == nil then return end
+		local var3 = p1:connect(function(p2)
+			-- upvalues: var2 (copy)
+			var2(p2)
 		end)
 		
-		if var2 ~= p0:get() then
-			var3(p0:get())
+		if var1 ~= p1:get() then
+			var2(p1:get())
 		end
 		return function()
-			-- upvalues: var4 (ref)
-			var4:disconnect()
+			-- upvalues: var3 (ref)
+			var3:disconnect()
 		end
-	end, { p0 })
+	end, { p1 })
 	
-	return var2
+	return var1
 end

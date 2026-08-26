@@ -4,18 +4,18 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local actions = script.Parent.Parent.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.AddPlayer).name] = function(p0, p1)
+	[require(actions.AddPlayer).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, { [p1.userId] = {} })
+		return cryoModule.Dictionary.join(p1, { [p2.userId] = {} })
 	end,
-	[require(actions.RemovePlayer).name] = function(p2, p3)
+	[require(actions.RemovePlayer).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p2, { [p3.userId] = cryoModule.None })
+		return cryoModule.Dictionary.join(p1, { [p2.userId] = cryoModule.None })
 	end,
-	[require(actions.SetPlayerLeaderstat).name] = function(p4, p5)
+	[require(actions.SetPlayerLeaderstat).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return if p4[p5.userId] == nil then p4 else cryoModule.Dictionary.join(p4, {
-			[p5.userId] = cryoModule.Dictionary.join(p4[p5.userId], { [p5.leaderstat] = p5.value })
+		return if p1[p2.userId] == nil then p1 else cryoModule.Dictionary.join(p1, {
+			[p2.userId] = cryoModule.Dictionary.join(p1[p2.userId], { [p2.leaderstat] = p2.value })
 		})
 	end
 })

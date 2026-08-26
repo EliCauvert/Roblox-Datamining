@@ -9,9 +9,9 @@ local t = {
 	RemoveTryOn = constantsModule.AVATAR_EVENT_COUNTER_NAME.AXRemoveTryOnBackground
 }
 local t_1 = {
-	report = function(p0)
+	report = function(p1)
 		-- upvalues: sendAXCounterV2Module (ref), t (ref)
-		sendAXCounterV2Module(t[p0])
+		sendAXCounterV2Module(t[p1])
 	end
 }
 

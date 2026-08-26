@@ -1,8 +1,8 @@
 ﻿local playersService = game:GetService("Players")
 
-return function(p0)
+return function(p1)
 	-- upvalues: playersService (ref)
-	local localPlayer = (p0 or playersService).LocalPlayer
+	local localPlayer = (p1 or playersService).LocalPlayer
 	
 	return if localPlayer then tostring(localPlayer.UserId) else nil
 end

@@ -7,22 +7,22 @@ local getShouldRefetchMessagesModule = require(appChat.Conversations.getShouldRe
 local paginateAndRefreshConversations = require(appChat.Logger):new("paginateAndRefreshConversations")
 local paginateForNewerMessagesModule = require(appChat.Conversations.Thunks.paginateForNewerMessages)
 
-local function paginateAndRefreshConversations_1(p0)
+local function paginateAndRefreshConversations_1(p1)
 	-- upvalues: appChatNetworkingModule (ref), getDeepValueModule (ref), conversationChannelsModule (ref), hasConversationChangedModule (ref), getShouldRefetchMessagesModule (ref), paginateAndRefreshConversations (ref), paginateForNewerMessagesModule (ref), paginateAndRefreshConversations_1 (ref)
-	return function(p1)
-		-- upvalues: appChatNetworkingModule (copy), p0 (ref), getDeepValueModule (copy), conversationChannelsModule (copy), hasConversationChangedModule (copy), getShouldRefetchMessagesModule (copy), paginateAndRefreshConversations (copy), paginateForNewerMessagesModule (copy), paginateAndRefreshConversations_1 (copy)
-		local state = p1:getState()
+	return function(p2)
+		-- upvalues: appChatNetworkingModule (copy), p1 (ref), getDeepValueModule (copy), conversationChannelsModule (copy), hasConversationChangedModule (copy), getShouldRefetchMessagesModule (copy), paginateAndRefreshConversations (copy), paginateForNewerMessagesModule (copy), paginateAndRefreshConversations_1 (copy)
+		local state = p2:getState()
 		
-		return p1:dispatch(appChatNetworkingModule.rodux.GetUserConversations.API(p0)):andThen(function(p3)
-			-- upvalues: getDeepValueModule (copy), state (ref), conversationChannelsModule (copy), hasConversationChangedModule (copy), getShouldRefetchMessagesModule (copy), paginateAndRefreshConversations (copy), p1 (ref), paginateForNewerMessagesModule (copy), paginateAndRefreshConversations_1 (copy)
+		return p2:dispatch(appChatNetworkingModule.rodux.GetUserConversations.API(p1)):andThen(function(p3)
+			-- upvalues: getDeepValueModule (copy), state (ref), conversationChannelsModule (copy), hasConversationChangedModule (copy), getShouldRefetchMessagesModule (copy), paginateAndRefreshConversations (copy), p2 (ref), paginateForNewerMessagesModule (copy), paginateAndRefreshConversations_1 (copy)
 			for i, v in p3.responseBody.conversations do
-				local var10 = getDeepValueModule(state, `ChatAppReducer.Conversations.{tostring(v.id)}`)
-				local var11 = conversationChannelsModule.fromChannelsApi(v)
+				local var1 = getDeepValueModule(state, `ChatAppReducer.Conversations.{tostring(v.id)}`)
+				local var2 = conversationChannelsModule.fromChannelsApi(v)
 				
-				if hasConversationChangedModule({ new = var11, existing = var10 }) then
-					if getShouldRefetchMessagesModule({ new = var11, existing = var10 }) then
-						paginateAndRefreshConversations:debug("Fetching missing messages for conversation: {}", var11.id)
-						p1:dispatch(paginateForNewerMessagesModule(var11))
+				if hasConversationChangedModule({ new = var2, existing = var1 }) then
+					if getShouldRefetchMessagesModule({ new = var2, existing = var1 }) then
+						paginateAndRefreshConversations:debug("Fetching missing messages for conversation: {}", var2.id)
+						p2:dispatch(paginateForNewerMessagesModule(var2))
 					end
 				end
 				return
@@ -30,49 +30,49 @@ local function paginateAndRefreshConversations_1(p0)
 			local nextCursor = p3.responseBody.next_cursor
 			
 			if nextCursor and nextCursor ~= "" and typeof(nextCursor) == "string" then
-				return p1:dispatch(paginateAndRefreshConversations_1(nextCursor))
+				return p2:dispatch(paginateAndRefreshConversations_1(nextCursor))
 			end
-		end):catch(function(p2)
-			warn("Failure in paginateAndRefreshConversations: ", tostring(p2))
+		end):catch(function(p4)
+			warn("Failure in paginateAndRefreshConversations: ", tostring(p4))
 			
-			return p2
+			return p4
 		end)
 	end
 end
 
 return function()
 	-- upvalues: appChatNetworkingModule (ref), getDeepValueModule (ref), conversationChannelsModule (ref), hasConversationChangedModule (ref), getShouldRefetchMessagesModule (ref), paginateAndRefreshConversations (ref), paginateForNewerMessagesModule (ref), paginateAndRefreshConversations_1 (ref)
-	return function(p4)
+	return function(p2)
 		-- upvalues: appChatNetworkingModule (copy), getDeepValueModule (copy), conversationChannelsModule (copy), hasConversationChangedModule (copy), getShouldRefetchMessagesModule (copy), paginateAndRefreshConversations (copy), paginateForNewerMessagesModule (copy), paginateAndRefreshConversations_1 (copy)
-		local var12 = nil
+		local var1 = nil
 		
-		return p4:dispatch(function(p5)
-			-- upvalues: appChatNetworkingModule (copy), var12 (ref), getDeepValueModule (copy), conversationChannelsModule (copy), hasConversationChangedModule (copy), getShouldRefetchMessagesModule (copy), paginateAndRefreshConversations (copy), paginateForNewerMessagesModule (copy), paginateAndRefreshConversations_1 (copy)
-			local state = p5:getState()
+		return p2:dispatch(function(p3)
+			-- upvalues: appChatNetworkingModule (copy), var1 (ref), getDeepValueModule (copy), conversationChannelsModule (copy), hasConversationChangedModule (copy), getShouldRefetchMessagesModule (copy), paginateAndRefreshConversations (copy), paginateForNewerMessagesModule (copy), paginateAndRefreshConversations_1 (copy)
+			local state = p3:getState()
 			
-			return p5:dispatch(appChatNetworkingModule.rodux.GetUserConversations.API(var12)):andThen(function(p7)
-				-- upvalues: getDeepValueModule (copy), state (ref), conversationChannelsModule (copy), hasConversationChangedModule (copy), getShouldRefetchMessagesModule (copy), paginateAndRefreshConversations (copy), p5 (ref), paginateForNewerMessagesModule (copy), paginateAndRefreshConversations_1 (copy)
-				for i, v in p7.responseBody.conversations do
-					local var10 = getDeepValueModule(state, `ChatAppReducer.Conversations.{tostring(v.id)}`)
-					local var11 = conversationChannelsModule.fromChannelsApi(v)
+			return p3:dispatch(appChatNetworkingModule.rodux.GetUserConversations.API(var1)):andThen(function(p4)
+				-- upvalues: getDeepValueModule (copy), state (ref), conversationChannelsModule (copy), hasConversationChangedModule (copy), getShouldRefetchMessagesModule (copy), paginateAndRefreshConversations (copy), p3 (ref), paginateForNewerMessagesModule (copy), paginateAndRefreshConversations_1 (copy)
+				for i, v in p4.responseBody.conversations do
+					local var2 = getDeepValueModule(state, `ChatAppReducer.Conversations.{tostring(v.id)}`)
+					local var3 = conversationChannelsModule.fromChannelsApi(v)
 					
-					if hasConversationChangedModule({ new = var11, existing = var10 }) then
-						if getShouldRefetchMessagesModule({ new = var11, existing = var10 }) then
-							paginateAndRefreshConversations:debug("Fetching missing messages for conversation: {}", var11.id)
-							p5:dispatch(paginateForNewerMessagesModule(var11))
+					if hasConversationChangedModule({ new = var3, existing = var2 }) then
+						if getShouldRefetchMessagesModule({ new = var3, existing = var2 }) then
+							paginateAndRefreshConversations:debug("Fetching missing messages for conversation: {}", var3.id)
+							p3:dispatch(paginateForNewerMessagesModule(var3))
 						end
 					end
 					return
 				end
-				local nextCursor = p7.responseBody.next_cursor
+				local nextCursor = p4.responseBody.next_cursor
 				
 				if nextCursor and nextCursor ~= "" and typeof(nextCursor) == "string" then
-					return p5:dispatch(paginateAndRefreshConversations_1(nextCursor))
+					return p3:dispatch(paginateAndRefreshConversations_1(nextCursor))
 				end
-			end):catch(function(p6)
-				warn("Failure in paginateAndRefreshConversations: ", tostring(p6))
+			end):catch(function(p5)
+				warn("Failure in paginateAndRefreshConversations: ", tostring(p5))
 				
-				return p6
+				return p5
 			end)
 		end)
 	end

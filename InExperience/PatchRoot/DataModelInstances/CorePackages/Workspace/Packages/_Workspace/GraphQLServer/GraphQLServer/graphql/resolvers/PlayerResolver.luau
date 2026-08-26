@@ -3,9 +3,9 @@ local findAvatarHeadshotById = require(script.Parent.Parent.connectors.PlayerCon
 local _ = require(script.Parent.Parent.generatedTypes)
 t.default = {
 	Player = {
-		avatarHeadshot = function(p0, _, p1, _)
+		avatarHeadshot = function(p1, _, p2, _)
 			-- upvalues: findAvatarHeadshotById (ref)
-			return findAvatarHeadshotById(p0.id, p1.fetchImpl)
+			return findAvatarHeadshotById(p1.id, p2.fetchImpl)
 		end
 	}
 }

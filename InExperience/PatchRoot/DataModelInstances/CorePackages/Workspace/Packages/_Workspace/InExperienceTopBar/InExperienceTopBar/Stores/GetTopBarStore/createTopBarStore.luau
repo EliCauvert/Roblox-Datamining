@@ -4,10 +4,10 @@ local createSignal = require(script:FindFirstAncestor("InExperienceTopBar").Pare
 return function()
 	-- upvalues: createSignal (ref), starterGuiService (ref)
 	local var1, var2 = createSignal(true)
-	starterGuiService:RegisterSetCore("TopbarEnabled", function(p0)
+	starterGuiService:RegisterSetCore("TopbarEnabled", function(p1)
 		-- upvalues: var2 (ref)
-		if type(p0) == "boolean" then
-			var2(p0)
+		if type(p1) == "boolean" then
+			var2(p1)
 			
 			return
 		end

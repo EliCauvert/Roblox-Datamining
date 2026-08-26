@@ -25,81 +25,81 @@ local t_2 = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop
 }
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: reactModule (ref), t_1 (ref), cryoModule (ref), t_2 (ref), t (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref), t_1 (copy), p0 (ref), cryoModule (copy), t_2 (copy), t (copy), p2 (ref)
-		local var15 = p1 or t_1
+		-- upvalues: p2 (ref), t_1 (copy), p1 (ref), cryoModule (copy), t_2 (copy), t (copy), p3 (ref)
+		local var1 = p2 or t_1
 		
-		if p0 then
-			var15 = cryoModule.Dictionary.join(t_2, var15)
+		if p1 then
+			var1 = cryoModule.Dictionary.join(t_2, var1)
 		end
-		return cryoModule.Dictionary.join(t, var15, { ref = p2 })
-	end, { p0, p1, p2 })
+		return cryoModule.Dictionary.join(t, var1, { ref = p3 })
+	end, { p1, p2, p3 })
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: fFlagFocusRootUseHooksModule (ref), useFocusRootModule (ref), reactModule (ref), baseFocusRootModule (ref), t_1 (ref), reactFocusNavigationModule (ref), useFocusNavigableSurfaceRegistryConnectionModule (ref), useDescendantHasFocusModule (ref), useAutoFocusModule (ref), useLastInputModeModule (ref), guiService (ref), cryoModule (ref), t_2 (ref), t (ref)
 	if fFlagFocusRootUseHooksModule then
 		return reactModule.createElement(baseFocusRootModule, {
-			ref = useFocusRootModule(p3),
-			isIsolated = p3.isIsolated,
-			frameProps = p3.frameProps
-		}, p3.children)
+			ref = useFocusRootModule(p1),
+			isIsolated = p1.isIsolated,
+			frameProps = p1.frameProps
+		}, p1.children)
 	end
-	local var16 = if p3.frameProps and p3.frameProps.ref then p3.frameProps.ref.current else nil
+	local var1 = if p1.frameProps and p1.frameProps.ref then p1.frameProps.ref.current else nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var17, var18 = reactModule.useState(var16)
-	local var19 = var17
-	local var20 = reactFocusNavigationModule.useEventHandlerMap(p3.eventHandlers or t_1, reactFocusNavigationModule.useEventMap(p3.eventMap or t_1, var18))
-	local var21 = p3.isFocusable == nil or p3.isFocusable
-	local var22 = if p3.shouldRestoreFocus == nil or p3.shouldRestoreFocus then reactFocusNavigationModule.useMostRecentFocusBehavior(var20) else var20
-	useFocusNavigableSurfaceRegistryConnectionModule(var19, p3.surfaceIdentifier, var21)
-	local var23 = useAutoFocusModule({ var19 }, 0.1)
-	local var24 = p3.isAutoFocusRoot and (var21 and (useLastInputModeModule() == "Focus" and (var19 and not useDescendantHasFocusModule(var19))))
+	local var2, var3 = reactModule.useState(var1)
+	local var4 = var2
+	local var5 = reactFocusNavigationModule.useEventHandlerMap(p1.eventHandlers or t_1, reactFocusNavigationModule.useEventMap(p1.eventMap or t_1, var3))
+	local var6 = p1.isFocusable == nil or p1.isFocusable
+	local var7 = if p1.shouldRestoreFocus == nil or p1.shouldRestoreFocus then reactFocusNavigationModule.useMostRecentFocusBehavior(var5) else var5
+	useFocusNavigableSurfaceRegistryConnectionModule(var4, p1.surfaceIdentifier, var6)
+	local var8 = useAutoFocusModule({ var4 }, 0.1)
+	local var9 = p1.isAutoFocusRoot and (var6 and (useLastInputModeModule() == "Focus" and (var4 and not useDescendantHasFocusModule(var4))))
 	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), var23 (ref)
-		local var26 = if var24 then var23() else nil
+		-- upvalues: var9 (ref), var8 (ref)
+		local var10 = if var9 then var8() else nil
 		
 		return function()
-			-- upvalues: var26 (write)
-			if var26 then
-				var26.cancel()
+			-- upvalues: var10 (write)
+			if var10 then
+				var10.cancel()
 			end
 		end
-	end, { var24, var23 })
-	local var25 = reactModule.useRef(var19)
+	end, { var9, var8 })
+	local var10 = reactModule.useRef(var4)
 	reactModule.useEffect(function()
-		-- upvalues: var19 (write), var25 (ref)
-		if var19 then
-			var25.current = var19
+		-- upvalues: var4 (write), var10 (ref)
+		if var4 then
+			var10.current = var4
 		end
-	end, { var19 })
+	end, { var4 })
 	reactModule.useEffect(function()
-		-- upvalues: var25 (ref), guiService (copy)
+		-- upvalues: var10 (ref), guiService (copy)
 		return function()
-			-- upvalues: var25 (copy), guiService (copy)
-			if not var25.current then return end
+			-- upvalues: var10 (copy), guiService (copy)
+			if not var10.current then return end
 			local selectedCoreObject = guiService.SelectedCoreObject
 			
 			if not selectedCoreObject then return end
-			if selectedCoreObject:IsDescendantOf(var25.current) or not selectedCoreObject:IsDescendantOf(game) then
+			if selectedCoreObject:IsDescendantOf(var10.current) or not selectedCoreObject:IsDescendantOf(game) then
 				guiService.SelectedCoreObject = nil
 			end
 		end
 	end, {})
-	local isIsolated = p3.isIsolated
-	local frameProps = p3.frameProps
+	local isIsolated = p1.isIsolated
+	local frameProps = p1.frameProps
 	
 	return reactModule.createElement("Frame", reactModule.useMemo(function()
-		-- upvalues: frameProps (ref), t_1 (copy), isIsolated (ref), cryoModule (copy), t_2 (copy), t (copy), var22 (ref)
-		local var15 = frameProps or t_1
+		-- upvalues: frameProps (ref), t_1 (copy), isIsolated (ref), cryoModule (copy), t_2 (copy), t (copy), var7 (ref)
+		local var11 = frameProps or t_1
 		
 		if isIsolated then
-			var15 = cryoModule.Dictionary.join(t_2, var15)
+			var11 = cryoModule.Dictionary.join(t_2, var11)
 		end
-		return cryoModule.Dictionary.join(t, var15, { ref = var22 })
-	end, { isIsolated, frameProps, var22 }), p3.children)
+		return cryoModule.Dictionary.join(t, var11, { ref = var7 })
+	end, { isIsolated, frameProps, var7 }), p1.children)
 end

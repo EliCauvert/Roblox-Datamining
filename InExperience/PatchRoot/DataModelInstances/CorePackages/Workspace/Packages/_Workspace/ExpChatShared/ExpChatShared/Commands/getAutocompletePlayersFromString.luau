@@ -2,21 +2,21 @@
 local dictionary = require(parent.llama).Dictionary
 local list = require(parent.llama).List
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: dictionary (ref), list (ref)
 	local t = {}
-	local lowerText = string.lower(p1)
+	local lowerText = string.lower(p2)
 	
 	if string.sub(lowerText, 1, 1) == "@" then
 		lowerText = string.sub(lowerText, 2)
-		t = dictionary.values(dictionary.filter(p0.byUsername, function(_, p2)
+		t = dictionary.values(dictionary.filter(p1.byUsername, function(_, p3)
 			-- upvalues: lowerText (ref)
-			return string.find(p2, "^" .. lowerText) ~= nil
+			return string.find(p3, "^" .. lowerText) ~= nil
 		end))
 	else
 		lowerText = lowerText
 		
-		for i, v in pairs(dictionary.filter(p0.byDisplayName, function(_, p3)
+		for i, v in pairs(dictionary.filter(p1.byDisplayName, function(_, p3)
 			-- upvalues: lowerText (ref)
 			return string.find(p3, "^" .. lowerText) ~= nil
 		end)) do
@@ -25,8 +25,8 @@ return function(p0, p1)
 			end
 		end
 	end
-	return list.map(t, function(p4)
-		-- upvalues: p0 (ref)
-		return p0.byUserId[tostring(p4)]
+	return list.map(t, function(p3)
+		-- upvalues: p1 (ref)
+		return p1.byUserId[tostring(p3)]
 	end)
 end

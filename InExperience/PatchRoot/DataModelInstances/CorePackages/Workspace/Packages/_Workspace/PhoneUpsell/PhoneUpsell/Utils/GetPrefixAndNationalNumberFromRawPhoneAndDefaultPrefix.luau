@@ -1,9 +1,9 @@
-﻿return function(p0, p1)
-	local var0 = p0:gsub("%D", "")
+﻿return function(p1, p2)
 	local var1 = p1:gsub("%D", "")
+	local var2 = p2:gsub("%D", "")
 	
-	if string.find(var0, var1) == 1 then
-		return p1, string.sub(var0, string.len(var1) + 1)
+	if string.find(var1, var2) == 1 then
+		return p2, string.sub(var1, string.len(var2) + 1)
 	end
-	return p1, var0
+	return p2, var1
 end

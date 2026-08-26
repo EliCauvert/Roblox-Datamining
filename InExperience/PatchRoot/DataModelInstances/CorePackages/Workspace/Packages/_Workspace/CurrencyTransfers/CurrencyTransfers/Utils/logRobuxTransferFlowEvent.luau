@@ -3,14 +3,14 @@ local _ = require(currencyTransfers.Stores.createTransferStore)
 local buildRobuxTransferFlowPayloadModule = require(currencyTransfers.Utils.buildRobuxTransferFlowPayload)
 local sendRobuxTransferFlowEventModule = require(currencyTransfers.Utils.sendRobuxTransferFlowEvent)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: buildRobuxTransferFlowPayloadModule (ref), sendRobuxTransferFlowEventModule (ref)
-	local var3 = buildRobuxTransferFlowPayloadModule(p0, p1)
+	local var1 = buildRobuxTransferFlowPayloadModule(p1, p2)
 	
-	if p2 then
-		for i, v in pairs(p2) do
-			var3[i] = v
+	if p3 then
+		for i, v in pairs(p3) do
+			var1[i] = v
 		end
 	end
-	sendRobuxTransferFlowEventModule(var3)
+	sendRobuxTransferFlowEventModule(var1)
 end

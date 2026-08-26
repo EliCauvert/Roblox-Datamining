@@ -15,54 +15,54 @@ local getShareLinkV2StoreModule = require(appChat.Stores.GetShareLinkV2Store)
 local fFlagAppChatResolveShareLinkV2Module = require(appChat.Flags.FFlagAppChatResolveShareLinkV2)
 local fFlagAppChatMomentShareCardModule = require(appChat.Flags.FFlagAppChatMomentShareCard)
 
-local function ShareLinkV1Container(p0)
+local function ShareLinkV1Container(p1)
 	-- upvalues: getShareLinkStoreModule (ref), useSignalState (ref), useDispatch (ref), useEffect (ref), name (ref), reactModule (ref), gameCardContainerModule (ref)
-	local linkId = p0.shareLink.linkId
-	local linkType = p0.shareLink.linkType
-	local var13 = getShareLinkStoreModule(false)
-	local var14 = useSignalState(var13.getShareLinkMetadataComputed(linkId))
-	local var15 = useDispatch()
+	local linkId = p1.shareLink.linkId
+	local linkType = p1.shareLink.linkType
+	local var1 = getShareLinkStoreModule(false)
+	local var2 = useSignalState(var1.getShareLinkMetadataComputed(linkId))
+	local var3 = useDispatch()
 	useEffect(function()
-		-- upvalues: var14 (ref), var13 (ref), var15 (ref), linkId (ref), linkType (ref), name (copy)
-		if var14 then
+		-- upvalues: var2 (ref), var1 (ref), var3 (ref), linkId (ref), linkType (ref), name (copy)
+		if var2 then
 			name:warning("ShareLinkContainer: Missing linkId or linkType in props.")
 			
 			return
 		end
-		var13.fetchShareLinkMetadata(var15, linkId, linkType)
-	end, { linkId, linkType, var14 })
+		var1.fetchShareLinkMetadata(var3, linkId, linkType)
+	end, { linkId, linkType, var2 })
 	
 	return reactModule.createElement(gameCardContainerModule, {
-		universeId = if var14 then var14.universeId else nil,
-		placeId = if var14 then var14.placeId else nil,
-		conversationId = p0.conversationId,
-		senderUserId = p0.senderUserId,
-		onDetailsOpened = p0.onDetailsOpened,
-		openGameDetailsPage = p0.openGameDetailsPage,
-		networkImpl = p0.networkImpl,
-		eventStream = p0.eventStream,
-		eventIngest = p0.eventIngest,
-		luaChatPlayTogetherEnabled = p0.luaChatPlayTogetherEnabled,
-		isStartOfGroup = p0.isStartOfGroup,
-		isIncoming = p0.isIncoming,
-		isUnfiltered = p0.isUnfiltered,
-		isPending = p0.isPending,
-		isRepliedTo = p0.isRepliedTo
+		universeId = if var2 then var2.universeId else nil,
+		placeId = if var2 then var2.placeId else nil,
+		conversationId = p1.conversationId,
+		senderUserId = p1.senderUserId,
+		onDetailsOpened = p1.onDetailsOpened,
+		openGameDetailsPage = p1.openGameDetailsPage,
+		networkImpl = p1.networkImpl,
+		eventStream = p1.eventStream,
+		eventIngest = p1.eventIngest,
+		luaChatPlayTogetherEnabled = p1.luaChatPlayTogetherEnabled,
+		isStartOfGroup = p1.isStartOfGroup,
+		isIncoming = p1.isIncoming,
+		isUnfiltered = p1.isUnfiltered,
+		isPending = p1.isPending,
+		isRepliedTo = p1.isRepliedTo
 	})
 end
 
 local function ShareLinkV2Container(p1)
 	-- upvalues: getShareLinkV2StoreModule (ref), reactModule (ref), useSignalState (ref), fFlagAppChatMomentShareCardModule (ref), shareLinkClassificationModule (ref), momentShareCardContainerModule (ref)
 	local linkId = p1.shareLink.linkId
-	local var16 = getShareLinkV2StoreModule(false)
-	local var17 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: var16 (ref), linkId (ref)
-		return var16.getAndFetchClassification(linkId)
-	end, { var16, linkId }).data)
+	local var1 = getShareLinkV2StoreModule(false)
+	local var2 = useSignalState(reactModule.useMemo(function()
+		-- upvalues: var1 (ref), linkId (ref)
+		return var1.getAndFetchClassification(linkId)
+	end, { var1, linkId }).data)
 	
-	return if fFlagAppChatMomentShareCardModule and var17 and var17.type == shareLinkClassificationModule.Moment then reactModule.createElement(momentShareCardContainerModule, {
-		momentId = var17.momentId,
-		targetIdType = var17.targetIdType,
+	return if fFlagAppChatMomentShareCardModule and var2 and var2.type == shareLinkClassificationModule.Moment then reactModule.createElement(momentShareCardContainerModule, {
+		momentId = var2.momentId,
+		targetIdType = var2.targetIdType,
 		openMomentsDeepLink = p1.openMomentsDeepLink,
 		isStartOfGroup = p1.isStartOfGroup,
 		isIncoming = p1.isIncoming,
@@ -70,7 +70,7 @@ local function ShareLinkV2Container(p1)
 	}) else nil
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: fFlagAppChatResolveShareLinkV2Module (ref), reactModule (ref), ShareLinkV2Container (ref), ShareLinkV1Container (ref)
-	return if fFlagAppChatResolveShareLinkV2Module and p2.shareLink.version == 2 then reactModule.createElement(ShareLinkV2Container, p2) else reactModule.createElement(ShareLinkV1Container, p2)
+	return if fFlagAppChatResolveShareLinkV2Module and p1.shareLink.version == 2 then reactModule.createElement(ShareLinkV2Container, p1) else reactModule.createElement(ShareLinkV1Container, p1)
 end

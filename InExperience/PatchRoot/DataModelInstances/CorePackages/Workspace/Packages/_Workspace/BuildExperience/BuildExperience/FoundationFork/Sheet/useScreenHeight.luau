@@ -4,26 +4,26 @@ local useScreenModule = require(foundation.Providers.Overlay.useScreen)
 
 return function()
 	-- upvalues: useScreenModule (ref), reactModule (ref)
-	local var2 = useScreenModule()
-	local var3, var4 = reactModule.useState(if var2 then var2.AbsoluteSize.Y else 0)
+	local var1 = useScreenModule()
+	local var2, var3 = reactModule.useState(if var1 then var1.AbsoluteSize.Y else 0)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), var4 (ref)
-		local var5 = nil
+		-- upvalues: var1 (ref), var3 (ref)
+		local var4 = nil
 		
-		if var2 then
-			var4(var2.AbsoluteSize.Y)
-			var5 = var2:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var4 (copy), var2 (copy)
-				var4(var2.AbsoluteSize.Y)
+		if var1 then
+			var3(var1.AbsoluteSize.Y)
+			var4 = var1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+				-- upvalues: var3 (copy), var1 (copy)
+				var3(var1.AbsoluteSize.Y)
 			end)
 		end
 		return function()
-			-- upvalues: var5 (write)
-			if var5 then
-				var5:Disconnect()
+			-- upvalues: var4 (write)
+			if var4 then
+				var4:Disconnect()
 			end
 		end
-	end, { var2 })
+	end, { var1 })
 	
-	return var3
+	return var2
 end

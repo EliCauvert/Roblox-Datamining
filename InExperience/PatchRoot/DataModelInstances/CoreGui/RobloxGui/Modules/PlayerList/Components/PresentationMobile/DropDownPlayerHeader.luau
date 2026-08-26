@@ -36,50 +36,50 @@ dropDownPlayerHeader.validateProps = tModule.strictInterface({
 	canShowPlatformProfile = tModule.optional(tModule.boolean)
 })
 
-function dropDownPlayerHeader.render(p0)
+function dropDownPlayerHeader.render(p1)
 	-- upvalues: withLayoutValues (ref), withStyle (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), fFlagPlayerListDropDownShowPlatformName (ref), roactModule (ref), emojiTextLabel (ref), emoji (ref), fFlagEnableMobilePlayerListOnConsole (ref), view (ref), status (ref), image (ref), text (ref)
-	return withLayoutValues(function(p1)
-		-- upvalues: withStyle (copy), p0 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), fFlagPlayerListDropDownShowPlatformName (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy), fFlagEnableMobilePlayerListOnConsole (copy), view (copy), status (copy), image (copy), text (copy)
-		return withStyle(function(p2)
-			-- upvalues: p1 (write), p0 (copy), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), fFlagPlayerListDropDownShowPlatformName (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy), fFlagEnableMobilePlayerListOnConsole (copy), view (copy), status (copy), image (copy), text (copy)
-			local var11
-			p1 = p0.props.layoutValues
-			local tokens = p0.props.tokens
+	return withLayoutValues(function(p2)
+		-- upvalues: withStyle (copy), p1 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), fFlagPlayerListDropDownShowPlatformName (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy), fFlagEnableMobilePlayerListOnConsole (copy), view (copy), status (copy), image (copy), text (copy)
+		return withStyle(function(p3)
+			-- upvalues: p2 (write), p1 (copy), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), fFlagPlayerListDropDownShowPlatformName (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy), fFlagEnableMobilePlayerListOnConsole (copy), view (copy), status (copy), image (copy), text (copy)
+			local var1
+			p2 = p1.props.layoutValues
+			local tokens = p1.props.tokens
 			local size3000 = tokens.Size.Size_3000
 			local size500 = tokens.Size.Size_500
-			local player = p0.props.player
-			local var10 = if fFlagEnableVerifiedBadgeStore then p0.props.showVerifiedBadge else userLibModule.Utils.isPlayerVerified(player)
+			local player = p1.props.player
+			local var2 = if fFlagEnableVerifiedBadgeStore then p1.props.showVerifiedBadge else userLibModule.Utils.isPlayerVerified(player)
 			
 			if fFlagPlayerListDropDownShowPlatformName then
-				var11 = p0.props.platformName
+				var1 = p1.props.platformName
 				
-				if var11 then
-					var11 = p0.props.platformName ~= ""
-					var11 = nil
+				if var1 then
+					var1 = p1.props.platformName ~= ""
+					var1 = nil
 				end
 			else
-				var11 = nil
+				var1 = nil
 			end
-			local var12 = if fFlagPlayerListDropDownShowPlatformName then p0.props.canShowPlatformProfile else nil
+			local var3 = if fFlagPlayerListDropDownShowPlatformName then p1.props.canShowPlatformProfile else nil
 			
 			return roactModule.createElement("TextButton", {
 				BackgroundTransparency = 1,
 				Text = "",
 				LayoutOrder = 0,
 				Selectable = false,
-				Size = UDim2.new(1, 0, 0, p1.DropDownHeaderSizeY)
+				Size = UDim2.new(1, 0, 0, p2.DropDownHeaderSizeY)
 			}, {
 				Background = roactModule.createElement("ImageLabel", {
 					BackgroundTransparency = 1,
 					Image = "rbxasset://textures/ui/PlayerList/NewAvatarBackground.png",
-					ImageTransparency = p0.props.transparency,
-					Size = UDim2.new(1, 0, 0, p1.DropDownHeaderBackgroundSize),
+					ImageTransparency = p1.props.transparency,
+					Size = UDim2.new(1, 0, 0, p2.DropDownHeaderBackgroundSize),
 					Position = UDim2.new(0, 0, 1, 0),
 					AnchorPoint = Vector2.new(0, 1)
 				}, {
 					TextContainerFrame = roactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
-						Visible = p0.props.contentVisible,
+						Visible = p1.props.contentVisible,
 						Size = UDim2.new(1, -size3000, 1, 0),
 						Position = UDim2.new(0, tokens.Size.Size_2700, 0, 0)
 					}, {
@@ -89,15 +89,15 @@ function dropDownPlayerHeader.render(p0)
 							Padding = UDim.new(0, 0),
 							VerticalAlignment = Enum.VerticalAlignment.Center
 						}),
-						DisplayName = var10 and roactModule.createElement(emojiTextLabel, {
+						DisplayName = var2 and roactModule.createElement(emojiTextLabel, {
 							fluidSizing = false,
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
-							fontStyle = p2.Font.Header2,
-							colorStyle = p2.Theme.TextEmphasis,
+							fontStyle = p3.Font.Header2,
+							colorStyle = p3.Theme.TextEmphasis,
 							emoji = emoji.Verified,
-							maxSize = Vector2.new(p1.PlayerDropDownSizeXMobile - size3000, size500),
-							TextSize = if fFlagEnableMobilePlayerListOnConsole then p1.DropDownHeaderDisplayNameTextSize else p2.Font.BaseSize * p2.Font.Header2.RelativeSize,
+							maxSize = Vector2.new(p2.PlayerDropDownSizeXMobile - size3000, size500),
+							TextSize = if fFlagEnableMobilePlayerListOnConsole then p2.DropDownHeaderDisplayNameTextSize else p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
 							AutomaticSize = if fFlagEnableMobilePlayerListOnConsole then Enum.AutomaticSize.X else nil,
 							Text = player.DisplayName,
 							TextXAlignment = Enum.TextXAlignment.Left,
@@ -108,17 +108,17 @@ function dropDownPlayerHeader.render(p0)
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, 0, 0, size500),
 							Text = player.DisplayName,
-							Font = p2.Font.Header2.Font,
-							TextSize = if fFlagEnableMobilePlayerListOnConsole then p1.DropDownHeaderDisplayNameTextSize else p2.Font.BaseSize * p2.Font.Header2.RelativeSize,
-							TextColor3 = p2.Theme.TextEmphasis.Color,
-							TextTransparency = p2.Theme.TextEmphasis.Transparency,
+							Font = p3.Font.Header2.Font,
+							TextSize = if fFlagEnableMobilePlayerListOnConsole then p2.DropDownHeaderDisplayNameTextSize else p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
+							TextColor3 = p3.Theme.TextEmphasis.Color,
+							TextTransparency = p3.Theme.TextEmphasis.Transparency,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextTruncate = Enum.TextTruncate.AtEnd,
 							TextScaled = if fFlagEnableMobilePlayerListOnConsole then nil else true
 						}, {
 							SizeConstraint = if fFlagEnableMobilePlayerListOnConsole then nil else roactModule.createElement("UITextSizeConstraint", {
-								MaxTextSize = p2.Font.BaseSize * p2.Font.Header2.RelativeSize,
-								MinTextSize = p2.Font.BaseSize * p2.Font.Footer.RelativeSize
+								MaxTextSize = p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
+								MinTextSize = p3.Font.BaseSize * p3.Font.Footer.RelativeSize
 							})
 						}),
 						PlayerName = roactModule.createElement("TextLabel", {
@@ -126,26 +126,26 @@ function dropDownPlayerHeader.render(p0)
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, 0, 0, size500),
 							Text = "@" .. player.Name,
-							Font = p2.Font.CaptionHeader.Font,
-							TextSize = if fFlagEnableMobilePlayerListOnConsole then p1.DropDownHeaderPlayerNameTextSize else p2.Font.BaseSize * p2.Font.CaptionHeader.RelativeSize,
-							TextColor3 = p2.Theme.TextMuted.Color,
-							TextTransparency = p2.Theme.TextMuted.Transparency,
+							Font = p3.Font.CaptionHeader.Font,
+							TextSize = if fFlagEnableMobilePlayerListOnConsole then p2.DropDownHeaderPlayerNameTextSize else p3.Font.BaseSize * p3.Font.CaptionHeader.RelativeSize,
+							TextColor3 = p3.Theme.TextMuted.Color,
+							TextTransparency = p3.Theme.TextMuted.Transparency,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextTruncate = Enum.TextTruncate.AtEnd,
 							TextScaled = if fFlagEnableMobilePlayerListOnConsole then nil else true
 						}, {
 							SizeConstraint = if fFlagEnableMobilePlayerListOnConsole then nil else roactModule.createElement("UITextSizeConstraint", {
-								MaxTextSize = p2.Font.BaseSize * p2.Font.CaptionHeader.RelativeSize,
-								MinTextSize = p2.Font.BaseSize * p2.Font.Footer.RelativeSize
+								MaxTextSize = p3.Font.BaseSize * p3.Font.CaptionHeader.RelativeSize,
+								MinTextSize = p3.Font.BaseSize * p3.Font.Footer.RelativeSize
 							})
 						}),
-						PlatformName = fFlagPlayerListDropDownShowPlatformName and (var11 and roactModule.createElement(view, {
+						PlatformName = fFlagPlayerListDropDownShowPlatformName and (var1 and roactModule.createElement(view, {
 							LayoutOrder = 3,
 							tag = "row align-y-center gap-xsmall radius-small",
 							Size = UDim2.new(1, 0, 0, size500),
-							onActivated = if var12 then function()
-								-- upvalues: p0 (copy), status (copy)
-								local platformProfileId = p0.props.platformProfileId
+							onActivated = if var3 then function()
+								-- upvalues: p1 (copy), status (copy)
+								local platformProfileId = p1.props.platformProfileId
 								
 								if status and platformProfileId and platformProfileId ~= "" then
 									status:ShowProfile(platformProfileId)
@@ -157,21 +157,21 @@ function dropDownPlayerHeader.render(p0)
 								Image = "rbxasset://textures/ui/Shell/Icons/PlatformLogo@3x.png",
 								tag = "size-400",
 								imageStyle = {
-									Color3 = p2.Theme.TextMuted.Color,
-									Transparency = if var12 then 0 else 0.4
+									Color3 = p3.Theme.TextMuted.Color,
+									Transparency = if var3 then 0 else 0.4
 								}
 							}),
 							PlatformNameButton = roactModule.createElement(text, {
 								LayoutOrder = 2,
 								tag = "auto-y fill text-align-x-left text-truncate-end",
-								Text = p0.props.platformName,
+								Text = p1.props.platformName,
 								fontStyle = {
-									Font = p2.Font.CaptionHeader.Font,
-									FontSize = p1.DropDownHeaderPlayerNameTextSize
+									Font = p3.Font.CaptionHeader.Font,
+									FontSize = p2.DropDownHeaderPlayerNameTextSize
 								},
 								textStyle = {
-									Color3 = p2.Theme.TextMuted.Color,
-									Transparency = if var12 then p2.Theme.TextMuted.Transparency else math.clamp(p2.Theme.TextMuted.Transparency + 0.3, 0, 1)
+									Color3 = p3.Theme.TextMuted.Color,
+									Transparency = if var3 then p3.Theme.TextMuted.Transparency else math.clamp(p3.Theme.TextMuted.Transparency + 0.3, 0, 1)
 								}
 							})
 						}))
@@ -181,54 +181,54 @@ function dropDownPlayerHeader.render(p0)
 					BackgroundTransparency = 1,
 					ZIndex = 2,
 					Position = UDim2.new(0, tokens.Size.Size_1400, 0, 0),
-					Size = UDim2.new(0, p1.DropDownHeaderSizeY, 0, p1.DropDownHeaderSizeY),
+					Size = UDim2.new(0, p2.DropDownHeaderSizeY, 0, p2.DropDownHeaderSizeY),
 					AnchorPoint = Vector2.new(0.5, 0),
-					ImageTransparency = p0.props.transparency,
+					ImageTransparency = p1.props.transparency,
 					Image = ("rbxthumb://type=AvatarHeadShot&id=%d&w=150&h=150"):format(player.UserId)
 				}),
-				Divider = not p0.props.lastButton and roactModule.createElement("Frame", {
+				Divider = not p1.props.lastButton and roactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					ZIndex = 3,
 					Size = UDim2.new(1, 0, 0, 1),
 					Position = UDim2.new(0, 0, 1, 0),
 					AnchorPoint = Vector2.new(0, 1),
-					Visible = p0.props.contentVisible,
-					BackgroundTransparency = p2.Theme.Divider.Transparency,
-					BackgroundColor3 = p2.Theme.Divider.Color
+					Visible = p1.props.contentVisible,
+					BackgroundTransparency = p3.Theme.Divider.Transparency,
+					BackgroundColor3 = p3.Theme.Divider.Color
 				})
 			})
 		end)
 	end)
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: useLayoutValues (ref), useTokens (ref), fFlagEnableVerifiedBadgeStore (ref), useVerifiedBadge (ref), fFlagPlayerListDropDownShowPlatformName (ref), userProfilesModule (ref), status (ref), roactModule (ref), dropDownPlayerHeader (ref), cryoModule (ref)
-	local var13 = useLayoutValues()
-	local var14 = useTokens()
-	local var15 = if fFlagEnableVerifiedBadgeStore then useVerifiedBadge(p3.player) else nil
+	local var1 = useLayoutValues()
+	local var2 = useTokens()
+	local var3 = if fFlagEnableVerifiedBadgeStore then useVerifiedBadge(p1.player) else nil
 	local platformNameFromId = nil
 	local platformProfileIdFromId = nil
-	local var18 = nil
+	local var4 = nil
 	
 	if fFlagPlayerListDropDownShowPlatformName then
-		local var19 = tostring(p3.player.UserId)
-		local var20 = userProfilesModule.Hooks.useUserProfilesFetch({
-			userIds = { var19 },
+		local var5 = tostring(p1.player.UserId)
+		local var6 = userProfilesModule.Hooks.useUserProfilesFetch({
+			userIds = { var5 },
 			query = userProfilesModule.Queries.userProfilesDisplayUserPlatformNamesByUserIds
 		})
 		
-		if var20.data then
-			platformNameFromId = userProfilesModule.Selectors.getPlatformNameFromId(var20.data, var19)
-			platformProfileIdFromId = userProfilesModule.Selectors.getPlatformProfileIdFromId(var20.data, var19)
+		if var6.data then
+			platformNameFromId = userProfilesModule.Selectors.getPlatformNameFromId(var6.data, var5)
+			platformProfileIdFromId = userProfilesModule.Selectors.getPlatformProfileIdFromId(var6.data, var5)
 		end
-		var18 = game:GetEngineFeature("PlatformFriendsService") and (game:GetEngineFeature("PlatformFriendsProfile") and (status and (status:IsProfileEnabled() and (platformProfileIdFromId and platformProfileIdFromId ~= ""))))
+		var4 = game:GetEngineFeature("PlatformFriendsService") and (game:GetEngineFeature("PlatformFriendsProfile") and (status and (status:IsProfileEnabled() and (platformProfileIdFromId and platformProfileIdFromId ~= ""))))
 	end
-	return roactModule.createElement(dropDownPlayerHeader, cryoModule.Dictionary.join(p3, {
-		layoutValues = var13,
-		tokens = var14,
-		showVerifiedBadge = if fFlagEnableVerifiedBadgeStore then var15 else nil,
+	return roactModule.createElement(dropDownPlayerHeader, cryoModule.Dictionary.join(p1, {
+		layoutValues = var1,
+		tokens = var2,
+		showVerifiedBadge = if fFlagEnableVerifiedBadgeStore then var3 else nil,
 		platformName = if fFlagPlayerListDropDownShowPlatformName then platformNameFromId else nil,
 		platformProfileId = if fFlagPlayerListDropDownShowPlatformName then platformProfileIdFromId else nil,
-		canShowPlatformProfile = if fFlagPlayerListDropDownShowPlatformName then var18 else nil
+		canShowPlatformProfile = if fFlagPlayerListDropDownShowPlatformName then var4 else nil
 	}))
 end

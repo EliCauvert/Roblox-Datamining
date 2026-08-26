@@ -9,25 +9,25 @@ local t = {
 	isFetchingConversations = false
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: getConversationListStoreModule (ref), reactModule (ref), signalsModule (ref), t (ref), signalsReactModule (ref)
-	local var6 = getConversationListStoreModule(false)
-	local var7 = p0 ~= false
+	local var1 = getConversationListStoreModule(false)
+	local var2 = p1 ~= false
 	
 	return {
 		items = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var7 (ref), var6 (ref)
-			return signalsModule.createComputed(function(p1)
-				-- upvalues: var7 (copy), var6 (copy)
-				return if var7 then var6.getConversations(p1) else {}
-			end)
-		end, { var6, var7 })),
-		listStatus = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var7 (ref), t (copy), var6 (ref)
+			-- upvalues: signalsModule (copy), var2 (ref), var1 (ref)
 			return signalsModule.createComputed(function(p2)
-				-- upvalues: var7 (copy), t (copy), var6 (copy)
-				return if var7 then var6.getListStatus(p2) else t
+				-- upvalues: var2 (copy), var1 (copy)
+				return if var2 then var1.getConversations(p2) else {}
 			end)
-		end, { var6, var7 }))
+		end, { var1, var2 })),
+		listStatus = signalsReactModule.useSignalState(reactModule.useMemo(function()
+			-- upvalues: signalsModule (copy), var2 (ref), t (copy), var1 (ref)
+			return signalsModule.createComputed(function(p2)
+				-- upvalues: var2 (copy), t (copy), var1 (copy)
+				return if var2 then var1.getListStatus(p2) else t
+			end)
+		end, { var1, var2 }))
 	}
 end

@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local _ = require(parent.FocusNavigationUtils)
 
-return function(value, p0, p1)
+return function(value, p1, p2)
 	-- upvalues: reactModule (ref)
 	local var1, var2 = reactModule.useState(nil)
 	local var3 = reactModule.useRef(false)
@@ -10,22 +10,22 @@ return function(value, p0, p1)
 	local var5 = if value then value.onHoldCompleted else nil
 	
 	return {
-		tileRef = reactModule.useCallback(function(p2)
-			-- upvalues: p0 (ref), var4 (ref), var2 (ref)
-			if p0 then
-				p0(p2)
+		tileRef = reactModule.useCallback(function(p3)
+			-- upvalues: p1 (ref), var4 (ref), var2 (ref)
+			if p1 then
+				p1(p3)
 			end
 			if var4 then
-				var2(p2)
+				var2(p3)
 			end
-		end, { p0, var4 }),
+		end, { p1, var4 }),
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: var3 (ref), p1 (ref)
+			-- upvalues: var3 (ref), p2 (ref)
 			if var3.current then return end
-			if p1 then
-				p1()
+			if p2 then
+				p2()
 			end
-		end, { p1 }),
+		end, { p2 }),
 		holdDetectorProps = if value and var1 then {
 			guiObject = var1,
 			onHoldDetected = reactModule.useCallback(function(p3)
@@ -34,9 +34,9 @@ return function(value, p0, p1)
 					var5(nil, p3)
 				end
 			end, { var5 }),
-			setDisabledForHold = reactModule.useCallback(function(p4)
+			setDisabledForHold = reactModule.useCallback(function(p3)
 				-- upvalues: var3 (ref)
-				var3.current = p4
+				var3.current = p3
 			end, {}),
 			keyCode = value.keyCode,
 			focusNavigationEventName = value.focusNavigationEventName

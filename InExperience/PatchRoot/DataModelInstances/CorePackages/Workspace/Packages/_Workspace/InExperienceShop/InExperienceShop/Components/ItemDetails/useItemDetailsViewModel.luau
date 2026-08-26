@@ -8,37 +8,37 @@ local abuseVectorModule = require(parent.GenericAbuseReporting.AbuseVector)
 local initiateShopItemPurchaseModule = require(inExperienceShop.initiateShopItemPurchase)
 local formatUpdatedDateModule = require(inExperienceShop.Utils.formatUpdatedDate)
 local getInExperienceShopStoreModule = require(inExperienceShop.Stores.getInExperienceShopStore)
-local var8 = if sharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal then require(inExperienceShop.Analytics.Constants).ShopPageType else nil
+local var1 = if sharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal then require(inExperienceShop.Analytics.Constants).ShopPageType else nil
 local useShopReportOverflowModule = require(inExperienceShop.Hooks.useShopReportOverflow)
 local _ = require(inExperienceShop.Types)
 local _ = require(script.Parent.ItemDetailsView)
 local t = { product = "Feature.DeveloperProducts.Label.Product" }
 
-local function _(p0, p1)
-	return if p0 == "GamePass" then "Game pass" else p1
+local function _(p1, p2)
+	return if p1 == "GamePass" then "Game pass" else p2
 end
 
-return function(p2)
-	-- upvalues: useLocalization (ref), t (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), var8 (ref), sharedFlagsModule (ref), abuseVectorModule (ref), useShopReportOverflowModule (ref), formatUpdatedDateModule (ref)
-	local item = p2.item
-	local var11 = useLocalization(t)
-	local var12 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
-	local var13 = signalsReactModule.useSignalState(function(p3)
-		-- upvalues: var12 (ref), item (ref)
-		return var12.getOwnership(p3)[item.id]
+return function(p1)
+	-- upvalues: useLocalization (ref), t (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), var1 (ref), sharedFlagsModule (ref), abuseVectorModule (ref), useShopReportOverflowModule (ref), formatUpdatedDateModule (ref)
+	local item = p1.item
+	local var2 = useLocalization(t)
+	local var3 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
+	local var4 = signalsReactModule.useSignalState(function(p2)
+		-- upvalues: var3 (ref), item (ref)
+		return var3.getOwnership(p2)[item.id]
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: item (ref), var12 (ref)
+		-- upvalues: item (ref), var3 (ref)
 		if item.itemType == "GamePass" then
-			var12.fetchGamePassOwnership(item.id)
+			var3.fetchGamePassOwnership(item.id)
 		end
-	end, { item.id, item.itemType, var12.fetchGamePassOwnership })
-	local var14 = if var13 ~= nil then item.isOwned else var13
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: initiateShopItemPurchaseModule (copy), item (ref), var8 (copy)
-		initiateShopItemPurchaseModule(item.id, item.itemType, if var8 then var8.Category else nil)
+	end, { item.id, item.itemType, var3.fetchGamePassOwnership })
+	local var5 = if var4 ~= nil then item.isOwned else var4
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: initiateShopItemPurchaseModule (copy), item (ref), var1 (copy)
+		initiateShopItemPurchaseModule(item.id, item.itemType, if var1 then var1.Category else nil)
 	end, { item.id, item.itemType })
-	local var16 = useShopReportOverflowModule.useShopReportOverflow({
+	local var7 = useShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
 		buildReportSession = reactModule.useCallback(function()
 			-- upvalues: item (ref), abuseVectorModule (copy)
@@ -51,45 +51,45 @@ return function(p2)
 			}
 		end, { item.id, item.itemType })
 	})
-	local var17 = reactModule.useMemo(function()
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: formatUpdatedDateModule (copy), item (ref)
 		return formatUpdatedDateModule(item.updated)
 	end, { item.updated })
-	local var18 = if item.itemType == "GamePass" then "Game pass" else var11.product
-	local var19, var20 = reactModule.useState(false)
+	local var9 = if item.itemType == "GamePass" then "Game pass" else var2.product
+	local var10, var11 = reactModule.useState(false)
 	
 	return {
 		itemId = item.id,
 		name = item.name,
 		thumbnail = item.thumbnail,
 		price = item.price,
-		isOwned = var14,
-		isBuyDisabled = p2.disableBuy == true,
+		isOwned = var5,
+		isBuyDisabled = p1.disableBuy == true,
 		description = item.description,
 		creator = item.creator,
-		categoryLabel = var18,
-		updated = var17,
-		isCompact = var19,
-		isOverflowMenuOpen = var16.isOverflowMenuOpen,
-		isReportingEnabled = var16.isReportingEnabled,
-		reportSession = var16.reportSession,
-		onClose = p2.onClose,
-		onBuyActivated = var15,
-		onOverflowActivated = var16.onOverflowActivated,
-		onOverflowMenuClosed = var16.onOverflowMenuClosed,
-		onMenuItemActivated = var16.onMenuItemActivated,
-		onReportClose = var16.onReportClose,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p4)
-			-- upvalues: var20 (ref)
-			local x = p4.AbsoluteSize.X
+		categoryLabel = var9,
+		updated = var8,
+		isCompact = var10,
+		isOverflowMenuOpen = var7.isOverflowMenuOpen,
+		isReportingEnabled = var7.isReportingEnabled,
+		reportSession = var7.reportSession,
+		onClose = p1.onClose,
+		onBuyActivated = var6,
+		onOverflowActivated = var7.onOverflowActivated,
+		onOverflowMenuClosed = var7.onOverflowMenuClosed,
+		onMenuItemActivated = var7.onMenuItemActivated,
+		onReportClose = var7.onReportClose,
+		onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
+			-- upvalues: var11 (ref)
+			local x = p2.AbsoluteSize.X
 			
 			if x <= 0 then
 				return
 			end
-			local var21 = x < 480
-			var20(function(p5)
-				-- upvalues: var21 (ref)
-				return if p5 == var21 then p5 else var21
+			local var12 = x < 480
+			var11(function(p3)
+				-- upvalues: var12 (ref)
+				return if p3 == var12 then p3 else var12
 			end)
 		end, {})
 	}

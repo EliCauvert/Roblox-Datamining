@@ -3,12 +3,12 @@ local parent = script.Parent.Parent.Parent
 local getPlatformTarget = require(parent.Analytics).getPlatformTarget
 local cryoModule = require(parent.Cryo)
 
-return function(p0)
+return function(p1)
 	-- upvalues: rbxAnalyticsService (ref), cryoModule (ref), getPlatformTarget (ref)
 	local playSessionId = rbxAnalyticsService:GetPlaySessionId()
 	
-	return function(p1, p2, p3)
-		-- upvalues: cryoModule (copy), playSessionId (ref), p0 (ref), getPlatformTarget (copy)
-		p0:SendEventDeferred(getPlatformTarget(), p1, p2, cryoModule.Dictionary.join(p3 or {}, { playSessionId = playSessionId }))
+	return function(p2, p3, p4)
+		-- upvalues: cryoModule (copy), playSessionId (ref), p1 (ref), getPlatformTarget (copy)
+		p1:SendEventDeferred(getPlatformTarget(), p2, p3, cryoModule.Dictionary.join(p4 or {}, { playSessionId = playSessionId }))
 	end
 end

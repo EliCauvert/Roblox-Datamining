@@ -1,21 +1,21 @@
 ﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 local parentContainerContextModule = require(script.Parent.ParentContainerContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), parentContainerContextModule (ref)
 	return reactModule.createElement(parentContainerContextModule.Provider, {
 		value = {
-			getParentContainer = p0.getParentContainer,
-			visibilitySignal = p0.visibilitySignal,
-			getRequestedRoute = p0.getRequestedRoute,
-			requestedRouteSignal = p0.requestedRouteSignal,
-			clearRequestedRoute = p0.clearRequestedRoute,
-			getShouldSetAppChatVisible = p0.getShouldSetAppChatVisible,
-			entryPoint = p0.entryPoint,
-			hideParentContainer = p0.hideParentContainer,
-			showParentContainer = p0.showParentContainer,
-			updateCurrentSquadId = p0.updateCurrentSquadId,
-			openFriendsChatConversation = p0.openFriendsChatConversation
+			getParentContainer = p1.getParentContainer,
+			visibilitySignal = p1.visibilitySignal,
+			getRequestedRoute = p1.getRequestedRoute,
+			requestedRouteSignal = p1.requestedRouteSignal,
+			clearRequestedRoute = p1.clearRequestedRoute,
+			getShouldSetAppChatVisible = p1.getShouldSetAppChatVisible,
+			entryPoint = p1.entryPoint,
+			hideParentContainer = p1.hideParentContainer,
+			showParentContainer = p1.showParentContainer,
+			updateCurrentSquadId = p1.updateCurrentSquadId,
+			openFriendsChatConversation = p1.openFriendsChatConversation
 		}
-	}, p0.children)
+	}, p1.children)
 end

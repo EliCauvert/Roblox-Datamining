@@ -8,14 +8,14 @@ local text = foundationModule.Text
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
-	local var4 = useLegacyAndTransparencyAwarePanelStyleModule(p0.useLegacyPanelStyling)
+	local var1 = useLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
 	
 	return reactModule.createElement(view, {
-		tag = var4.panelTag,
-		LayoutOrder = p0.layoutOrder,
-		backgroundStyle = var4.backgroundStyle
+		tag = var1.panelTag,
+		LayoutOrder = p1.layoutOrder,
+		backgroundStyle = var1.backgroundStyle
 	}, {
 		Message = reactModule.createElement(text, {
 			tag = "size-full-0 auto-y text-body-small text-align-x-center content-default",

@@ -4,9 +4,9 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local iconWithTooltip = require(parent.AppBlox).IconWithTooltip
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), iconWithTooltip (ref), cryoModule (ref)
-	return reactModule.createElement(iconWithTooltip, cryoModule.Dictionary.join(p0, {
+	return reactModule.createElement(iconWithTooltip, cryoModule.Dictionary.join(p1, {
 		triggerPointName = "SponsoredTooltip",
 		hoverText = useLocalization({
 			SponsoredDisclosure = "CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic"

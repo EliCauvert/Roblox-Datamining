@@ -22,24 +22,24 @@ local t = {
 	onIconActivated = function() end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), reactModule (ref), baseCellModule (ref), foundationModule (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), iconButton (ref)
-	local var9 = cryoModule.Dictionary.join(t, p0)
-	local style = var9.style or useStyle()
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local style = var1.style or useStyle()
 	local theme = style.Theme
 	local size300 = style.Tokens.Size.Size_300
-	local var11 = useTokens()
-	local var12 = useIsInExperienceModule()
-	local var13, var14 = reactModule.useBinding(0)
+	local var2 = useTokens()
+	local var3 = useIsInExperienceModule()
+	local var4, var5 = reactModule.useBinding(0)
 	
 	return reactModule.createElement(baseCellModule, {
 		Selectable = false,
 		isDisabled = true,
 		showDivider = false,
-		Size = UDim2.new(1, 0, 0, var9.cellHeight),
-		BackgroundColor3 = if var12 then var11.Color.None.Color3 else theme.BackgroundDefault.Color,
-		BackgroundTransparency = if var12 then var11.Color.None.Transparency else style.Theme.BackgroundDefault.Transparency,
-		LayoutOrder = var9.layoutOrder,
+		Size = UDim2.new(1, 0, 0, var1.cellHeight),
+		BackgroundColor3 = if var3 then var2.Color.None.Color3 else theme.BackgroundDefault.Color,
+		BackgroundTransparency = if var3 then var2.Color.None.Transparency else style.Theme.BackgroundDefault.Transparency,
+		LayoutOrder = var1.layoutOrder,
 		dividerColor3 = theme.Divider.Color,
 		dividerTransparency = theme.Divider.Transparency
 	}, {
@@ -49,33 +49,33 @@ return function(p0)
 		}),
 		Content = reactModule.createElement(foundationModule.View, {
 			tag = "row size-full align-y-center",
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
-				-- upvalues: var14 (ref)
-				var14(p1.AbsoluteSize.X)
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
+				-- upvalues: var5 (ref)
+				var5(p2.AbsoluteSize.X)
 			end, {})
 		}, {
 			Text = reactModule.createElement(foundationModule.Text, {
 				LayoutOrder = 1,
 				tag = "size-0-full auto-x content-emphasis text-align-x-left text-title-large text-truncate-end",
-				Text = var9.bodyText,
+				Text = var1.bodyText,
 				sizeConstraint = {
-					MaxSize = var13:map(function(p2)
-						-- upvalues: fFlagHideConversationTypeInfoIfNoWebViewModule (copy), var9 (ref)
-						local var15 = p2 - (if fFlagHideConversationTypeInfoIfNoWebViewModule and not var9.shouldShowIcon then 0 else var9.iconCellWidth)
+					MaxSize = var4:map(function(p2)
+						-- upvalues: fFlagHideConversationTypeInfoIfNoWebViewModule (copy), var1 (ref)
+						local var6 = p2 - (if fFlagHideConversationTypeInfoIfNoWebViewModule and not var1.shouldShowIcon then 0 else var1.iconCellWidth)
 						
-						return Vector2.new(if var15 > 0 then var15 else 1e999, 1e999)
+						return Vector2.new(if var6 > 0 then var6 else 1e999, 1e999)
 					end)
 				}
 			}),
-			InfoIcon = if fFlagHideConversationTypeInfoIfNoWebViewModule and not var9.shouldShowIcon then nil else reactModule.createElement(iconButton, {
+			InfoIcon = if fFlagHideConversationTypeInfoIfNoWebViewModule and not var1.shouldShowIcon then nil else reactModule.createElement(iconButton, {
 				backgroundTransparency = 1,
 				layoutOrder = 2,
-				icon = var9.iconImage,
+				icon = var1.iconImage,
 				iconColor3 = theme.IconDefault.Color,
-				iconSize = var9.iconSize,
+				iconSize = var1.iconSize,
 				iconTransparency = theme.IconDefault.Transparency,
-				size = UDim2.fromOffset(var9.iconCellWidth, var9.iconCellWidth),
-				onActivated = var9.onIconActivated
+				size = UDim2.fromOffset(var1.iconCellWidth, var1.iconCellWidth),
+				onActivated = var1.onIconActivated
 			})
 		})
 	})

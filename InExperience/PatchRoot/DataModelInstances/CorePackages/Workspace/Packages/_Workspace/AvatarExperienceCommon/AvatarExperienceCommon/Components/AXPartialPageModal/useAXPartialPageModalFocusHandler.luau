@@ -7,21 +7,21 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local useFocusNavigableSurfaceRegistryConnection = focusNavigationUtilsModule.useFocusNavigableSurfaceRegistryConnection
 local wasLastInputGamepad = require(parent.RoactUtils).wasLastInputGamepad
 
-return function(p0)
+return function(p1)
 	-- upvalues: useOverlay (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), useFocusGuiObject (ref), wasLastInputGamepad (ref), reactModule (ref)
-	local var2 = useOverlay()
-	useFocusNavigableSurfaceRegistryConnection(p0.current, focusNavigableSurfaceIdentifierEnum.CentralOverlay)
-	local var3 = useFocusGuiObject()
-	local var4 = wasLastInputGamepad()
+	local var1 = useOverlay()
+	useFocusNavigableSurfaceRegistryConnection(p1.current, focusNavigableSurfaceIdentifierEnum.CentralOverlay)
+	local var2 = useFocusGuiObject()
+	local var3 = wasLastInputGamepad()
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var2 (ref), var4 (ref), var3 (ref)
-		if p0.current and var2 == nil and var4 then
+		-- upvalues: p1 (ref), var1 (ref), var3 (ref), var2 (ref)
+		if p1.current and var1 == nil and var3 then
 			task.delay(0.1, function()
-				-- upvalues: var3 (copy), p0 (copy)
-				var3(p0.current)
+				-- upvalues: var2 (copy), p1 (copy)
+				var2(p1.current)
 			end)
 		end
-	end, { var3, var2, var4 })
+	end, { var2, var1, var3 })
 	
-	return var2
+	return var1
 end

@@ -2,14 +2,14 @@
 local recommendationContextTypes = require(parent.Analytics.Enums).RecommendationContextTypes
 local fFlagSocialCarouselMigrateRecommendations = require(parent.Parent.SharedFlags).FFlagSocialCarouselMigrateRecommendations
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagSocialCarouselMigrateRecommendations (ref), recommendationContextTypes (ref)
-	if p0 == nil then
+	if p1 == nil then
 		return nil
 	elseif not fFlagSocialCarouselMigrateRecommendations then
-		return recommendationContextTypes[p0.rawValue()].rawValue()
+		return recommendationContextTypes[p1.rawValue()].rawValue()
 	end
-	local var0 = recommendationContextTypes[if type(p0) == "string" then p0 else p0.rawValue()]
+	local var1 = recommendationContextTypes[if type(p1) == "string" then p1 else p1.rawValue()]
 	
-	return if var0 then var0.rawValue() else nil
+	return if var1 then var1.rawValue() else nil
 end

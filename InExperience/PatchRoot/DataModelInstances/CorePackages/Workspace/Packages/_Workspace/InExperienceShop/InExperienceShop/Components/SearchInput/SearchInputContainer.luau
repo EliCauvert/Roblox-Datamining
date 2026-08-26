@@ -2,7 +2,7 @@
 local searchInputViewModule = require(script.Parent.SearchInputView)
 local useSearchInputViewModelModule = require(script.Parent.useSearchInputViewModel)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSearchInputViewModelModule (ref), reactModule (ref), searchInputViewModule (ref)
-	return reactModule.createElement(searchInputViewModule, useSearchInputViewModelModule(p0))
+	return reactModule.createElement(searchInputViewModule, useSearchInputViewModelModule(p1))
 end

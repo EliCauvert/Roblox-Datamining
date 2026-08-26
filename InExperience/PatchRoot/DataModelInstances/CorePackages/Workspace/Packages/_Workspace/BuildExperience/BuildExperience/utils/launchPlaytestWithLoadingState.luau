@@ -2,48 +2,48 @@
 local playtestExperienceModule = require(script.Parent.playtestExperience)
 local releaseAnyFocusModule = require(script.Parent.releaseAnyFocus)
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: getPlaytestLoadingStoreModule (ref), releaseAnyFocusModule (ref), playtestExperienceModule (ref)
-	local var3 = getPlaytestLoadingStoreModule()
+	local var1 = getPlaytestLoadingStoreModule()
 	
-	if var3.getIsPlaytestLoadingForPlaceId(p0)() then
+	if var1.getIsPlaytestLoadingForPlaceId(p1)() then
 		return false
 	end
-	var3.setPlaytestStatusForPlaceId(p0, "Loading")
+	var1.setPlaytestStatusForPlaceId(p1, "Loading")
 	task.defer(function()
-		-- upvalues: releaseAnyFocusModule (copy), playtestExperienceModule (copy), p0 (ref), p1 (ref), p2 (ref), var3 (ref), p3 (ref)
-		local var4 = nil
-		local var5 = "experience_launch"
+		-- upvalues: releaseAnyFocusModule (copy), playtestExperienceModule (copy), p1 (ref), p2 (ref), p3 (ref), var1 (ref), p4 (ref)
+		local var2 = nil
+		local var3 = "experience_launch"
 		
 		if not xpcall(function()
-			-- upvalues: releaseAnyFocusModule (copy), var5 (write), playtestExperienceModule (copy), p0 (copy), p1 (copy), p2 (copy), var3 (copy), p3 (copy)
+			-- upvalues: releaseAnyFocusModule (copy), var3 (write), playtestExperienceModule (copy), p1 (copy), p2 (copy), p3 (copy), var1 (copy), p4 (copy)
 			releaseAnyFocusModule()
-			var5 = playtestExperienceModule(p0, p1, {
-				isTeamTest = p2,
+			var3 = playtestExperienceModule(p1, p2, {
+				isTeamTest = p3,
 				onTeleportFailed = function()
-					-- upvalues: var3 (copy), p0 (copy), p3 (copy)
-					var3.setPlaytestStatusForPlaceId(p0, "Idle")
+					-- upvalues: var1 (copy), p1 (copy), p4 (copy)
+					var1.setPlaytestStatusForPlaceId(p1, "Idle")
 					
-					if p3 ~= nil then
-						p3()
+					if p4 ~= nil then
+						p4()
 					end
 				end
 			})
-		end, function(p4)
-			-- upvalues: var4 (write)
-			var4 = debug.traceback(tostring(p4), 2)
+		end, function(p5)
+			-- upvalues: var2 (write)
+			var2 = debug.traceback(tostring(p5), 2)
 		end) then
-			var3.setPlaytestStatusForPlaceId(p0, "Idle")
+			var1.setPlaytestStatusForPlaceId(p1, "Idle")
 			
-			if p3 ~= nil then
-				p3()
+			if p4 ~= nil then
+				p4()
 			end
-			error(var4 or "Failed to launch playtest", 0)
+			error(var2 or "Failed to launch playtest", 0)
 		end
-		if var5 == "teleport_pending" then
+		if var3 == "teleport_pending" then
 			return
 		end
-		var3.setPlaytestStatusForPlaceId(p0, "Completed")
+		var1.setPlaytestStatusForPlaceId(p1, "Completed")
 	end)
 	
 	return true

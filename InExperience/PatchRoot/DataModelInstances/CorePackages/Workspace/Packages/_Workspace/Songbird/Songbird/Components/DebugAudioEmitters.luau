@@ -43,15 +43,15 @@ local list = {
 	}
 }
 
-local function spawnAudioEmitter(p0)
+local function spawnAudioEmitter(p1)
 	local part = Instance.new("Part")
-	part.Position = p0.position
+	part.Position = p1.position
 	part.Anchored = true
-	part.Name = p0.title
+	part.Name = p1.title
 	
-	if p0.className == "Sound" then
+	if p1.className == "Sound" then
 		local sound = Instance.new("Sound")
-		sound.SoundId = p0.assetId
+		sound.SoundId = p1.assetId
 		sound.Looped = true
 		sound.RollOffMinDistance = 10
 		sound.RollOffMaxDistance = 40
@@ -59,7 +59,7 @@ local function spawnAudioEmitter(p0)
 		sound:Play()
 	else
 		local audioPlayer = Instance.new("AudioPlayer")
-		audioPlayer.Asset = p0.assetId
+		audioPlayer.Asset = p1.assetId
 		audioPlayer.Looping = true
 		audioPlayer.Parent = part
 		local audioEmitter = Instance.new("AudioEmitter")
@@ -93,11 +93,11 @@ return function()
 			local t = {}
 			
 			for i, v in list do
-				local var15 = spawnAudioEmitter(v)
+				local var1 = spawnAudioEmitter(v)
 				local billboardGui = Instance.new("BillboardGui")
 				billboardGui.ExtentsOffsetWorldSpace = Vector3.new(0, 10, 0)
 				billboardGui.Size = UDim2.fromScale(10, 2)
-				billboardGui.Adornee = var15
+				billboardGui.Adornee = var1
 				local textLabel = Instance.new("TextLabel")
 				textLabel.Text = v.title
 				textLabel.Size = UDim2.fromScale(1, 1)
@@ -110,8 +110,8 @@ return function()
 				UIStroke.Color = Color3.fromHex("#202020")
 				UIStroke.Thickness = 2
 				UIStroke.Parent = textLabel
-				billboardGui.Parent = var15
-				table.insert(t, var15)
+				billboardGui.Parent = var1
+				table.insert(t, var1)
 			end
 			local sound = Instance.new("Sound")
 			sound.SoundId = "rbxassetid://9048375035"

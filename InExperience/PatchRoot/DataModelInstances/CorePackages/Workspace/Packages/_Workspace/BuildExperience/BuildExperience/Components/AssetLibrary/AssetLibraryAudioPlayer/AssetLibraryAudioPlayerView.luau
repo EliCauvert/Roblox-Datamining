@@ -11,15 +11,15 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local inputSize = foundationModule.Enums.InputSize
 
-local function formatTime(p0)
-	local maxValue = math.max(0, math.floor(p0))
+local function formatTime(p1)
+	local maxValue = math.max(0, math.floor(p1))
 	
 	return `{math.floor(maxValue / 60)}:{string.format("%02d", maxValue % 60)}`
 end
 
 return function(value)
 	-- upvalues: reactModule (ref), view (ref), image (ref), icon (ref), iconName (ref), iconSize (ref), text (ref), formatTime (ref), iconButton (ref), inputSize (ref), buttonVariant (ref)
-	local var4 = value.elapsed:map(function(p1)
+	local var1 = value.elapsed:map(function(p1)
 		-- upvalues: value (ref)
 		return if value.duration <= 0 then 0 else math.clamp(p1 / value.duration, 0, 1)
 	end)
@@ -80,15 +80,15 @@ return function(value)
 				}, {
 					Progress = reactModule.createElement(view, {
 						tag = "radius-circle bg-action-emphasis",
-						Size = var4:map(function(p2)
-							return UDim2.new(p2, 0, 1, 0)
+						Size = var1:map(function(p1)
+							return UDim2.new(p1, 0, 1, 0)
 						end)
 					}),
 					Thumb = reactModule.createElement(view, {
 						tag = "anchor-center-center radius-circle bg-action-emphasis",
 						testId = "AssetLibrary.AudioPlayer.Timeline.Thumb",
-						Position = var4:map(function(p3)
-							return UDim2.new(p3, 0, 0.5, 0)
+						Position = var1:map(function(p1)
+							return UDim2.new(p1, 0, 0.5, 0)
 						end),
 						Size = UDim2.fromOffset(16, 16)
 					})
@@ -101,9 +101,9 @@ return function(value)
 				Remaining = reactModule.createElement(text, {
 					tag = "anchor-top-right auto-xy text-caption-large content-default",
 					Position = UDim2.new(1, 0, 0, 14),
-					Text = value.elapsed:map(function(p4)
+					Text = value.elapsed:map(function(p1)
 						-- upvalues: value (ref)
-						local maxValue = math.max(0, math.floor(math.max(0, value.duration - p4)))
+						local maxValue = math.max(0, math.floor(math.max(0, value.duration - p1)))
 						
 						return `-{`{math.floor(maxValue / 60)}:{string.format("%02d", maxValue % 60)}`}`
 					end)

@@ -8,8 +8,8 @@ local t = {
 	lastUpdated = { 24, 12, 2 }
 }
 
-local function _(p0)
-	return (if typeof(p0) == "table" then tostring(p0.StatusCode) else nil) or "unknown"
+local function _(p1)
+	return (if typeof(p1) == "table" then tostring(p1.StatusCode) else nil) or "unknown"
 end
 
 return function(p1, p2, p3)

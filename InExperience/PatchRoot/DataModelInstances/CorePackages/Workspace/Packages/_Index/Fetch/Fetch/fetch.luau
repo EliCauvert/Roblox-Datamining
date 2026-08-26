@@ -4,12 +4,12 @@ local promiseModule = require(parent.Promise)
 local response = require(script.Parent.Response).Response
 local request = require(script.Parent.Request).Request
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: response (ref)
-	return response.new(p0.Body, {
-		status = p0.StatusCode,
-		statusText = p0.StatusMessage,
-		headers = p0.Headers
+	return response.new(p1.Body, {
+		status = p1.StatusCode,
+		statusText = p1.StatusMessage,
+		headers = p1.Headers
 	})
 end
 

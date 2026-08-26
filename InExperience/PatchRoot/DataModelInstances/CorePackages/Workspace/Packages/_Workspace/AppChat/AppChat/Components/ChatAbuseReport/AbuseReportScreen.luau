@@ -10,9 +10,9 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local appFocusRoot = focusNavigationUtilsModule.AppFocusRoot
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), frameModule (ref), chatAbuseReportModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local navigation = p0.navigation
+	local navigation = p1.navigation
 	
 	return reactModule.createElement(appFocusRoot, {
 		isIsolated = true,
@@ -23,10 +23,10 @@ return function(p0)
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), navigation (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p1)
+					handler = inputHandlersModule.onRelease(function(p2)
 						-- upvalues: navigation (copy)
 						navigation.pop()
-						p1:cancel()
+						p2:cancel()
 					end)
 				}
 			}

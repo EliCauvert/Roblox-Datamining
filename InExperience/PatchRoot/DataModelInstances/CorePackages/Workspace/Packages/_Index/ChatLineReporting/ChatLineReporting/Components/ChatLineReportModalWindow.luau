@@ -8,39 +8,39 @@ local iconButton = foundationModule.IconButton
 local modalWindow = UIBloxModule.App.Dialog.Modal.ModalWindow
 local view = foundationModule.View
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), modalWindow (ref), view (ref), headerBar (ref), iconButton (ref), buttonStack (ref)
-	local var3 = not not p0.buttonStackProps
+	local var1 = not not p1.buttonStackProps
 	
 	return reactModule.createElement(modalWindow, {
 		isFullHeight = false,
-		screenSize = p0.screenSize,
-		position = p0.position,
-		anchorPoint = p0.anchorPoint
+		screenSize = p1.screenSize,
+		position = p1.position,
+		anchorPoint = p1.anchorPoint
 	}, {
 		Content = reactModule.createElement(view, {
 			tag = {
 				["size-full-0 auto-y col"] = true,
-				["padding-bottom-small"] = not var3,
-				["padding-bottom-xxlarge"] = var3
+				["padding-bottom-small"] = not var1,
+				["padding-bottom-xxlarge"] = var1
 			}
 		}, {
 			TitleContainer = reactModule.createElement(headerBar, {
 				backgroundTransparency = 1,
 				margin = 10,
-				title = p0.title,
+				title = p1.title,
 				renderLeft = function()
-					-- upvalues: reactModule (copy), iconButton (copy), p0 (ref)
+					-- upvalues: reactModule (copy), iconButton (copy), p1 (ref)
 					return reactModule.createElement(iconButton, {
 						icon = "icons/navigation/close",
-						onActivated = p0.onCloseClicked
+						onActivated = p1.onCloseClicked
 					})
 				end,
 				renderRight = function()
-					-- upvalues: reactModule (copy), iconButton (copy), p0 (ref)
+					-- upvalues: reactModule (copy), iconButton (copy), p1 (ref)
 					return reactModule.createElement(iconButton, {
 						icon = "icons/actions/info",
-						onActivated = p0.onInfoClicked
+						onActivated = p1.onInfoClicked
 					})
 				end
 			}),
@@ -51,11 +51,11 @@ return function(p0)
 			MiddleContent = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y padding-x-xxlarge",
 				LayoutOrder = 2
-			}, p0.children),
-			Buttons = var3 and reactModule.createElement(view, {
+			}, p1.children),
+			Buttons = var1 and reactModule.createElement(view, {
 				tag = "size-full-0 padding-x-xxlarge auto-y",
 				LayoutOrder = 3
-			}, reactModule.createElement(buttonStack, p0.buttonStackProps))
+			}, reactModule.createElement(buttonStack, p1.buttonStackProps))
 		})
 	})
 end

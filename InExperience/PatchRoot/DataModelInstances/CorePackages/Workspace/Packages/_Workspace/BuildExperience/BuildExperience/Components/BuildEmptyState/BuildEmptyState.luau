@@ -13,44 +13,44 @@ local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: playersService (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref)
-	local BUILD_SUBLINE, var10
+	local BUILD_SUBLINE, var1
 	local localPlayer = playersService.LocalPlayer
-	local var6 = if localPlayer then localPlayer.DisplayName else ""
-	local var7 = if localPlayer then localPlayer.Name else ""
-	local var8 = if fFlagBuildLocalization then useLocalization({
+	local var2 = if localPlayer then localPlayer.DisplayName else ""
+	local var3 = if localPlayer then localPlayer.Name else ""
+	local var4 = if fFlagBuildLocalization then useLocalization({
 		subline = localizationStringsModule.BUILD_SUBLINE,
-		title = if var6 ~= "" then localizationStringsModule.BUILD_GREETING else {
+		title = if var2 ~= "" then localizationStringsModule.BUILD_GREETING else {
 			localizationStringsModule.BUILD_GREETING_WITH_NAME,
-			DISPLAY_NAME = var6
+			DISPLAY_NAME = var2
 		}
 	}) else nil
-	local var9 = useTokens()
-	local size1400 = var9.Size.Size_1400
+	local var5 = useTokens()
+	local size1400 = var5.Size.Size_1400
 	local _ = nil
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		BUILD_SUBLINE = var8.subline
-		var10 = var8.title
+		BUILD_SUBLINE = var4.subline
+		var1 = var4.title
 	else
 		BUILD_SUBLINE = localizationStringsModule.BUILD_SUBLINE
-		var10 = reactModule.useMemo(function()
-			-- upvalues: localizationStringsModule (copy), var7 (ref)
-			return localizationStringsModule.formatBuildGreeting(var7)
-		end, { var7 })
+		var1 = reactModule.useMemo(function()
+			-- upvalues: localizationStringsModule (copy), var3 (ref)
+			return localizationStringsModule.formatBuildGreeting(var3)
+		end, { var3 })
 	end
 	return reactModule.createElement(view, {
 		tag = "col align-x-center gap-small auto-xy",
-		LayoutOrder = p0.LayoutOrder,
-		testId = p0.testId or "BuildEmptyState"
+		LayoutOrder = p1.LayoutOrder,
+		testId = p1.testId or "BuildEmptyState"
 	}, {
 		Nebula = reactModule.createElement(icon, {
 			LayoutOrder = 1,
 			name = iconName.Nebula,
 			size = size1400,
-			style = var9.Color.Content.Emphasis
+			style = var5.Color.Content.Emphasis
 		}),
 		Headings = reactModule.createElement(view, {
 			LayoutOrder = 2,
@@ -59,7 +59,7 @@ return function(p0)
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small content-emphasis",
-				Text = var10
+				Text = var1
 			}),
 			Subline = reactModule.createElement(text, {
 				LayoutOrder = 2,

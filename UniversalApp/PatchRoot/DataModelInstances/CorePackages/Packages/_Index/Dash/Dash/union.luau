@@ -2,11 +2,11 @@
 local noneModule = require(parent.None)
 local _ = require(parent.Types)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: noneModule (ref)
-	local cloned = table.clone(p0)
+	local cloned = table.clone(p1)
 	
-	for i, v in p1 do
+	for i, v in p2 do
 		if v == noneModule then
 			cloned[i] = nil
 		else

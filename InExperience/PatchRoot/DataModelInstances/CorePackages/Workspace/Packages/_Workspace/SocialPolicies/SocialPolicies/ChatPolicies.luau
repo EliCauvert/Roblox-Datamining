@@ -1,48 +1,48 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
 		getChatConversationHeaderGroupDetails = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatConversationHeaderGroupDetails or false
+			-- upvalues: p1 (ref)
+			return p1.ChatConversationHeaderGroupDetails or false
 		end,
 		getChatHeaderSearch = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatHeaderSearch or false
+			-- upvalues: p1 (ref)
+			return p1.ChatHeaderSearch or false
 		end,
 		getChatHeaderCreateChatGroup = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatHeaderCreateChatGroup or false
+			-- upvalues: p1 (ref)
+			return p1.ChatHeaderCreateChatGroup or false
 		end,
 		getChatHeaderHomeButton = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatHeaderHomeButton or false
+			-- upvalues: p1 (ref)
+			return p1.ChatHeaderHomeButton or false
 		end,
 		getChatHeaderNotifications = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatHeaderNotifications or false
+			-- upvalues: p1 (ref)
+			return p1.ChatHeaderNotifications or false
 		end,
 		getChatPlayTogether = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatPlayTogether or false
+			-- upvalues: p1 (ref)
+			return p1.ChatPlayTogether or false
 		end,
 		getChatShareGameToChatFromChat = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatShareGameToChatFromChat or false
+			-- upvalues: p1 (ref)
+			return p1.ChatShareGameToChatFromChat or false
 		end,
 		getChatTapConversationThumbnail = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatTapConversationThumbnail or false
+			-- upvalues: p1 (ref)
+			return p1.ChatTapConversationThumbnail or false
 		end,
 		getChatReportingDisabled = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatReportingDisabled or false
+			-- upvalues: p1 (ref)
+			return p1.ChatReportingDisabled or false
 		end,
 		getChatViewProfileOption = function()
-			-- upvalues: p0 (ref)
-			return p0.ChatViewProfileOption or false
+			-- upvalues: p1 (ref)
+			return p1.ChatViewProfileOption or false
 		end,
 		getContactImporterEnabled = function()
-			-- upvalues: p0 (ref)
-			return p0.ContactImporterEnabled or false
+			-- upvalues: p1 (ref)
+			return p1.ContactImporterEnabled or false
 		end
 	}
 end

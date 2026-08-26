@@ -1,11 +1,11 @@
 ﻿local appPage = require(script:FindFirstAncestor("AppStartup").Parent.RobloxAppEnums).AppPage
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: appPage (ref)
-	if p0 then
-		p1(appPage.SingleSignOnContainer)
+	if p1 then
+		p2(appPage.SingleSignOnContainer)
 		
 		return
 	end
-	p1(appPage.Startup)
+	p2(appPage.Startup)
 end

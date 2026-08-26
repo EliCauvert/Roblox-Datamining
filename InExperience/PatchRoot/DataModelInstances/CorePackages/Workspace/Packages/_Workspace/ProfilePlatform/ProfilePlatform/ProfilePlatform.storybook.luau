@@ -16,11 +16,11 @@ local t = {
 }
 local t_1 = { language = "en-us" }
 
-local var8 = function(p0)
+local var1 = function(p1)
 	-- upvalues: roduxModule (ref), cryoModule (ref)
 	return roduxModule.Store.new(function()
-		-- upvalues: cryoModule (copy), p0 (ref)
-		return cryoModule.Dictionary.join(p0, { ScreenSize = Vector2.new(600, 600) })
+		-- upvalues: cryoModule (copy), p1 (ref)
+		return cryoModule.Dictionary.join(p1, { ScreenSize = Vector2.new(600, 600) })
 	end, {}, { roduxModule.thunkMiddleware })
 end
 
@@ -35,12 +35,12 @@ return {
 			controls = cryoModule.Dictionary.join(t_1, p1.controls or {})
 		})
 	end,
-	mapStory = function(p2)
-		-- upvalues: roactModule (ref), appStyleProvider (ref), t (ref), roactRoduxModule (ref), var8 (ref), mockLocale (ref)
-		return function(p3)
-			-- upvalues: roactModule (copy), appStyleProvider (copy), t (copy), roactRoduxModule (copy), var8 (copy), mockLocale (copy), p2 (ref)
-			return roactModule.createElement(appStyleProvider, { style = if p3 then t[p3.theme] else t.Default }, {
-				storeProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = var8(p3.definition.state or {}) }, { Child = mockLocale(p2, p3) })
+	mapStory = function(p1)
+		-- upvalues: roactModule (ref), appStyleProvider (ref), t (ref), roactRoduxModule (ref), var1 (ref), mockLocale (ref)
+		return function(p2)
+			-- upvalues: roactModule (copy), appStyleProvider (copy), t (copy), roactRoduxModule (copy), var1 (copy), mockLocale (copy), p1 (ref)
+			return roactModule.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, {
+				storeProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = var1(p2.definition.state or {}) }, { Child = mockLocale(p1, p2) })
 			})
 		end
 	end

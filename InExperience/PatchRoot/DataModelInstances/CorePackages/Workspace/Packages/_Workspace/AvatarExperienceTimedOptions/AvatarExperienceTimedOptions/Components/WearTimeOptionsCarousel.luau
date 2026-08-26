@@ -10,19 +10,19 @@ local _ = require(parent.AvatarExperienceCommon)
 local wearTimeOptionButtonModule = require(script.Parent.WearTimeOptionButton)
 local AXTooltip = require(parent.AvatarExperienceUIKit).AXTooltipComponents.AXTooltip
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), wearTimeOptionButtonModule (ref), view (ref), text (ref), foundationModule (ref), enums (ref), AXTooltip (ref)
-	local var3 = useTokens()
-	local var4 = useLocalization({
+	local var1 = useTokens()
+	local var2 = useLocalization({
 		wearTimeOptions = "Feature.Durables.ItemDetails.WearTimeOptions.Title",
 		tooltipText = "Feature.Durables.FTUX.Tooltip"
 	})
-	local var5, var6 = reactModule.useState(false)
+	local var3, var4 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref)
+		-- upvalues: var4 (ref)
 		local delayedThread = task.delay(5, function()
-			-- upvalues: var6 (copy)
-			var6(false)
+			-- upvalues: var4 (copy)
+			var4(false)
 		end)
 		
 		return function()
@@ -30,39 +30,39 @@ return function(p0)
 			task.cancel(delayedThread)
 		end
 	end, {})
-	local var7, var8 = reactModule.useState(function()
-		-- upvalues: p0 (ref)
-		for i, v in p0.options do
+	local var5, var6 = reactModule.useState(function()
+		-- upvalues: p1 (ref)
+		for i, v in p1.options do
 			if v.selected then
 				return i
 			end
 		end
 		return 1
 	end)
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), reactModule (copy), wearTimeOptionButtonModule (copy), var7 (ref), var8 (ref)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), reactModule (copy), wearTimeOptionButtonModule (copy), var5 (ref), var6 (ref)
 		local t = {}
 		
-		for i, v in p0.options do
+		for i, v in p1.options do
 			t[i] = reactModule.createElement(wearTimeOptionButtonModule, {
-				option = { days = v.days, price = v.price, selected = i == var7 },
+				option = { days = v.days, price = v.price, selected = i == var5 },
 				onActivated = function()
-					-- upvalues: var8 (copy), i (ref), p0 (copy)
-					var8(i)
+					-- upvalues: var6 (copy), i (ref), p1 (copy)
+					var6(i)
 					
-					if p0.onOptionActivated then
-						p0.onOptionActivated(i)
+					if p1.onOptionActivated then
+						p1.onOptionActivated(i)
 					end
 				end,
 				LayoutOrder = i
 			})
 		end
 		return t
-	end, { p0.options, var7, p0.onOptionActivated })
+	end, { p1.options, var5, p1.onOptionActivated })
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col gap-medium",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Heading = reactModule.createElement(view, {
 			tag = "auto-xy row gap-xxsmall align-y-center",
@@ -70,11 +70,11 @@ return function(p0)
 		}, {
 			HeadingText = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				Text = var4.wearTimeOptions,
-				textStyle = var3.Color.Content.Emphasis,
+				Text = var2.wearTimeOptions,
+				textStyle = var1.Color.Content.Emphasis,
 				fontStyle = {
-					Font = var3.Typography.TitleLarge.Font,
-					FontSize = var3.FontSize.FontSize_500
+					Font = var1.Typography.TitleLarge.Font,
+					FontSize = var1.FontSize.FontSize_500
 				},
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
@@ -83,30 +83,30 @@ return function(p0)
 					icon = enums.IconName.CircleI,
 					size = enums.IconSize.Small,
 					onActivated = function()
-						-- upvalues: var6 (ref)
-						var6(true)
+						-- upvalues: var4 (ref)
+						var4(true)
 					end
 				}),
 				Tooltip = reactModule.createElement(AXTooltip, {
 					popoverSide = "Top",
-					isOpen = var5,
-					tooltipText = var4.tooltipText,
-					maxWidth = var3.Size.Size_1200 * 3,
+					isOpen = var3,
+					tooltipText = var2.tooltipText,
+					maxWidth = var1.Size.Size_1200 * 3,
 					onTooltipActivated = function()
-						-- upvalues: var6 (ref)
-						var6(false)
+						-- upvalues: var4 (ref)
+						var4(false)
 					end
 				})
 			})
 		}),
-		CarouselContainer = if p0.useWrapping then reactModule.createElement(view, {
+		CarouselContainer = if p1.useWrapping then reactModule.createElement(view, {
 			tag = "row wrap gap-medium align-y-center size-full-0 auto-y",
 			LayoutOrder = 2,
 			wrap = true
-		}, var9) else reactModule.createElement(view, {
+		}, var7) else reactModule.createElement(view, {
 			tag = "size-full-0",
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 0, var3.Size.Size_1200)
+			Size = UDim2.new(1, 0, 0, var1.Size.Size_1200)
 		}, {
 			ScrollingFrame = reactModule.createElement("ScrollingFrame", {
 				ScrollBarThickness = 0,
@@ -115,12 +115,12 @@ return function(p0)
 				ClipsDescendants = false,
 				Selectable = false,
 				Size = UDim2.new(1, 0, 1, 0),
-				CanvasSize = UDim2.new(0, 0, 0, var3.Size.Size_1200),
+				CanvasSize = UDim2.new(0, 0, 0, var1.Size.Size_1200),
 				AutomaticCanvasSize = Enum.AutomaticSize.X,
 				ScrollingDirection = Enum.ScrollingDirection.X,
 				ElasticBehavior = Enum.ElasticBehavior.Always
 			}, reactModule.createElement(view, { tag = "row gap-medium align-y-center auto-xy" }, {
-				Options = reactModule.createElement(reactModule.Fragment, nil, var9)
+				Options = reactModule.createElement(reactModule.Fragment, nil, var7)
 			}))
 		})
 	})

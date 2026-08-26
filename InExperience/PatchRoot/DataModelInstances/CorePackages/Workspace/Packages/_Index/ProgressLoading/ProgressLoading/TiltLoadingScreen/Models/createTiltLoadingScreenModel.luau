@@ -21,13 +21,13 @@ local createDataResolver = dataHydrationModule.createDataResolver
 local queuePositionEnabledEngineFeature = game:GetEngineFeature("QueuePositionEnabled")
 local fFlagEnableLuaAppsFollowUserId_1 = game:GetEngineFeature("ExperienceServiceFollowUserIdEnabled") and fFlagEnableLuaAppsFollowUserId
 local placeJoinStateEnabledEngineFeature = game:GetEngineFeature("PlaceJoinStateEnabled")
-local var17 = httpModule.NetworkLayers.requestInternalWrapper(httpService)
+local var1 = httpModule.NetworkLayers.requestInternalWrapper(httpService)
 
-local function defaultFetchUniverseId(p0)
-	-- upvalues: httpModule (ref), var17 (ref)
-	local var21, var22 = var17(string.format("%suniverses/v1/places/%d/universe", httpModule.Url.APIS_URL, p0), "GET"):await()
+local function defaultFetchUniverseId(p1)
+	-- upvalues: httpModule (ref), var1 (ref)
+	local var2, var3 = var1(string.format("%suniverses/v1/places/%d/universe", httpModule.Url.APIS_URL, p1), "GET"):await()
 	
-	return if var21 and var22 and var22.responseBody then var22.responseBody.universeId else nil
+	return if var2 and var3 and var3.responseBody then var3.responseBody.universeId else nil
 end
 
 local function defaultFetchProductInfo(p1)
@@ -35,26 +35,26 @@ local function defaultFetchProductInfo(p1)
 	return marketplaceService:GetProductInfoAsync(p1)
 end
 
-local function defaultFetchPlayerLocalizationChoice(p2)
-	-- upvalues: var17 (ref), httpModule (ref)
-	return var17(string.format("%sv1/user-localization-settings/player-choice/%s", httpModule.Url.GAME_INTERNATIONALIZATION_URL, p2), "GET"):andThen(function(p3)
-		-- upvalues: p2 (ref)
-		if not p3 or not p3.responseBody then
+local function defaultFetchPlayerLocalizationChoice(p1)
+	-- upvalues: var1 (ref), httpModule (ref)
+	return var1(string.format("%sv1/user-localization-settings/player-choice/%s", httpModule.Url.GAME_INTERNATIONALIZATION_URL, p1), "GET"):andThen(function(p2)
+		-- upvalues: p1 (ref)
+		if not p2 or not p2.responseBody then
 			error({
 				errorType = "PlayerLocalizationChoiceResponseError",
-				responseCode = p3 and p3.responseCode,
-				errorMessage = if p3 then "Missing response body" else "No response",
-				customFields = { universeId = p2 }
+				responseCode = p2 and p2.responseCode,
+				errorMessage = if p2 then "Missing response body" else "No response",
+				customFields = { universeId = p1 }
 			})
 		end
-		local responseBody = p3.responseBody
+		local responseBody = p2.responseBody
 		
 		if responseBody.IsPlayerChoiceEnabled == nil then
 			error({
 				errorType = "PlayerLocalizationChoiceMissingKey",
 				errorMessage = "Missing IsPlayerChoiceEnabled in response body",
-				responseCode = p3.responseCode,
-				customFields = { universeId = p2, responseBody = responseBody }
+				responseCode = p2.responseCode,
+				customFields = { universeId = p1, responseBody = responseBody }
 			})
 		end
 		return responseBody
@@ -66,560 +66,560 @@ local function _()
 	return if placeJoinStateEnabledEngineFeature then if queueExperimentation.getIsAutoJoinNewServerEnabled() then constantsModule.AUTO_JOIN_TREATMENT elseif queueExperimentation.getIsJoinNewServerButtonEnabled() then constantsModule.JOIN_NEW_SERVER_TREATMENT else nil else nil
 end
 
-return function(p4, p5)
+return function(p1, p2)
 	-- upvalues: experienceService (ref), guiService (ref), defaultFetchUniverseId (ref), defaultFetchProductInfo (ref), cachedPolicyServiceModule (ref), defaultFetchPlayerLocalizationChoice (ref), marketplaceGetMarketplaceAssetStoreModule (ref), createDataCache (ref), createDataResolver (ref), loadingScreenTelemetryModule (ref), signalsModule (ref), placeJoinStateEnabledEngineFeature (ref), queueExperimentation (ref), constantsModule (ref), fFlagEnableLuaAppsFollowUserId_1 (ref), queuePositionEnabledEngineFeature (ref), userInputService (ref)
-	local var44, ok
-	local var23 = if p5 and p5.dataModel then p5.dataModel else game
-	local var24 = if p5 and p5.experienceService then p5.experienceService else experienceService
-	local var25 = if p5 and p5.guiService then p5.guiService else guiService
-	local var26 = if p5 then p5.fetchUniverseId else defaultFetchUniverseId
-	local var27 = if p5 then p5.fetchProductInfo else defaultFetchProductInfo
-	local var28 = if p5 then p5.fetchIsSubjectToChinaPolicies else function()
+	local var2, ok
+	local var3 = if p2 and p2.dataModel then p2.dataModel else game
+	local var4 = if p2 and p2.experienceService then p2.experienceService else experienceService
+	local var5 = if p2 and p2.guiService then p2.guiService else guiService
+	local var6 = if p2 then p2.fetchUniverseId else defaultFetchUniverseId
+	local var7 = if p2 then p2.fetchProductInfo else defaultFetchProductInfo
+	local var8 = if p2 then p2.fetchIsSubjectToChinaPolicies else function()
 		-- upvalues: cachedPolicyServiceModule (copy)
 		return cachedPolicyServiceModule:IsSubjectToChinaPolicies()
 	end
-	local var29 = if p5 then p5.fetchPlayerLocalizationChoice else defaultFetchPlayerLocalizationChoice
+	local var9 = if p2 then p2.fetchPlayerLocalizationChoice else defaultFetchPlayerLocalizationChoice
 	
 	local function _()
-		-- upvalues: var25 (ref)
-		if not var25.GetUiMessage then
+		-- upvalues: var5 (ref)
+		if not var5.GetUiMessage then
 			return ""
 		end
-		local ok, status = pcall(var25.GetUiMessage, var25)
+		local ok, status = pcall(var5.GetUiMessage, var5)
 		
 		return if ok and type(status) == "string" then status else ""
 	end
 	
-	local var30 = marketplaceGetMarketplaceAssetStoreModule(false)
-	local var31 = createDataCache()
-	local var32 = createDataResolver({
+	local var10 = marketplaceGetMarketplaceAssetStoreModule(false)
+	local var11 = createDataCache()
+	local var12 = createDataResolver({
 		supportsMultiGet = false,
-		cache = var31,
-		logError = function(p6)
+		cache = var11,
+		logError = function(p3)
 			-- upvalues: loadingScreenTelemetryModule (copy)
-			if type(p6) == "table" then
-				loadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ responseCode = p6.responseCode, errorType = p6.errorType })
+			if type(p3) == "table" then
+				loadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ responseCode = p3.responseCode, errorType = p3.errorType })
 				
 				return
 			end
 			loadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ errorType = "PlayerLocalizationChoiceFetchError" })
 		end,
-		fetchFn = function(p7)
-			-- upvalues: var29 (ref)
-			return var29(p7)
+		fetchFn = function(p3)
+			-- upvalues: var9 (ref)
+			return var9(p3)
 		end
 	})
-	local var33 = if p4 > 0 then p4 else var23.PlaceId
-	local var34, var35 = signalsModule.createSignal(if var33 > 0 then var33 else 0)
-	local var36, var37 = signalsModule.createSignal(if var23.GameId > 0 then var23.GameId else 0)
-	local var38 = if not placeJoinStateEnabledEngineFeature then nil elseif queueExperimentation.getIsAutoJoinNewServerEnabled() then constantsModule.AUTO_JOIN_TREATMENT elseif queueExperimentation.getIsJoinNewServerButtonEnabled() then constantsModule.JOIN_NEW_SERVER_TREATMENT else nil
-	local var39 = signalsModule.createSignal(var38)
-	local var40, var41 = signalsModule.createSignal("")
-	local var42, var43 = signalsModule.createSignal(nil)
+	local var13 = if p1 > 0 then p1 else var3.PlaceId
+	local var14, var15 = signalsModule.createSignal(if var13 > 0 then var13 else 0)
+	local var16, var17 = signalsModule.createSignal(if var3.GameId > 0 then var3.GameId else 0)
+	local var18 = if not placeJoinStateEnabledEngineFeature then nil elseif queueExperimentation.getIsAutoJoinNewServerEnabled() then constantsModule.AUTO_JOIN_TREATMENT elseif queueExperimentation.getIsJoinNewServerButtonEnabled() then constantsModule.JOIN_NEW_SERVER_TREATMENT else nil
+	local var19 = signalsModule.createSignal(var18)
+	local var20, var21 = signalsModule.createSignal("")
+	local var22, var23 = signalsModule.createSignal(nil)
 	local createSignal = signalsModule.createSignal
 	
-	if var25.GetUiMessage then
-		ok, status = pcall(var25.GetUiMessage, var25)
-		var44 = if ok and type(status) == "string" then status else ""
+	if var5.GetUiMessage then
+		ok, status = pcall(var5.GetUiMessage, var5)
+		var2 = if ok and type(status) == "string" then status else ""
 	else
-		var44 = ""
+		var2 = ""
 	end
-	createSignal, var44 = createSignal(var44)
+	createSignal, var44 = createSignal(var2)
 	ok, var45 = signalsModule.createSignal(0)
-	local var46, var47 = signalsModule.createSignal(false)
-	local var48 = signalsModule.createComputed(function(p8)
-		-- upvalues: var34 (ref), var30 (ref)
-		local var66 = var34(p8)
+	local var24, var25 = signalsModule.createSignal(false)
+	local var26 = signalsModule.createComputed(function(p3)
+		-- upvalues: var14 (ref), var10 (ref)
+		local var27 = var14(p3)
 		
-		if var66 <= 0 then
+		if var27 <= 0 then
 			return nil
 		end
-		local var67 = var30.getMarketplaceAssetInfo(tostring(var66)).data(p8)
+		local var28 = var10.getMarketplaceAssetInfo(tostring(var27)).data(p3)
 		
-		return if var67 then {
-			name = var67.name,
-			creatorName = var67.creatorName,
-			creatorHasVerifiedBadge = var67.creatorHasVerifiedBadge
+		return if var28 then {
+			name = var28.name,
+			creatorName = var28.creatorName,
+			creatorHasVerifiedBadge = var28.creatorHasVerifiedBadge
 		} else nil
 	end)
-	local var49 = false
-	local var50 = signalsModule.createComputed(function(p9)
-		-- upvalues: var36 (ref), var49 (write), loadingScreenTelemetryModule (copy), var32 (ref)
-		local var68 = var36(p9)
+	local var27 = false
+	local var28 = signalsModule.createComputed(function(p3)
+		-- upvalues: var16 (ref), var27 (write), loadingScreenTelemetryModule (copy), var12 (ref)
+		local var29 = var16(p3)
 		
-		if var68 <= 0 then
-			if not var49 then
-				var49 = true
+		if var29 <= 0 then
+			if not var27 then
+				var27 = true
 				loadingScreenTelemetryModule.countAutoTranslateZeroUniverseId()
 			end
 			return nil
 		else
-			local var69 = var32.getAndFetchItem(tostring(var68)).data(p9)
+			local var30 = var12.getAndFetchItem(tostring(var29)).data(p3)
 			
-			return if var69 then var69.IsPlayerChoiceEnabled else nil
+			return if var30 then var30.IsPlayerChoiceEnabled else nil
 		end
 	end)
-	local var51 = false
-	local var52 = false
-	local var53 = nil
-	local var54 = nil
-	local var55 = nil
-	local var56 = nil
-	local var57 = nil
-	local var58 = nil
-	local var59 = nil
-	local var60 = nil
-	local var61 = false
-	local var62 = false
+	local var29 = false
+	local var30 = false
+	local var31 = nil
+	local var32 = nil
+	local var33 = nil
+	local var34 = nil
+	local var35 = nil
+	local var36 = nil
+	local var37 = nil
+	local var38 = nil
+	local var39 = false
+	local var40 = false
 	
-	local _ = function(p10)
-		if p10 and coroutine.status(p10) ~= "dead" then
-			task.cancel(p10)
+	local _ = function(p3)
+		if p3 and coroutine.status(p3) ~= "dead" then
+			task.cancel(p3)
 		end
 	end
 	
-	local _ = function(p11)
-		if p11 then
-			p11:Disconnect()
+	local _ = function(p3)
+		if p3 then
+			p3:Disconnect()
 		end
 		return nil
 	end
 	
 	local _ = function()
-		-- upvalues: fFlagEnableLuaAppsFollowUserId_1 (copy), var24 (ref)
-		if not fFlagEnableLuaAppsFollowUserId_1 or not var24.GetFollowUserId then
+		-- upvalues: fFlagEnableLuaAppsFollowUserId_1 (copy), var4 (ref)
+		if not fFlagEnableLuaAppsFollowUserId_1 or not var4.GetFollowUserId then
 			return 0
 		end
-		local ok, status = pcall(var24.GetFollowUserId, var24)
+		local ok, status = pcall(var4.GetFollowUserId, var4)
 		
 		return if ok and type(status) == "number" then status else 0
 	end
 	
 	local _ = function()
-		-- upvalues: var24 (ref)
-		if not var24.GetFollowUserId then
+		-- upvalues: var4 (ref)
+		if not var4.GetFollowUserId then
 			return 0
 		end
-		local ok, status = pcall(var24.GetFollowUserId, var24)
+		local ok, status = pcall(var4.GetFollowUserId, var4)
 		
 		return if ok and type(status) == "number" then status else 0
 	end
 	
 	local _ = function()
-		-- upvalues: queuePositionEnabledEngineFeature (copy), var24 (ref)
-		if not queuePositionEnabledEngineFeature or not var24.GetQueuePosition then
+		-- upvalues: queuePositionEnabledEngineFeature (copy), var4 (ref)
+		if not queuePositionEnabledEngineFeature or not var4.GetQueuePosition then
 			return nil
 		end
-		local ok, status = pcall(var24.GetQueuePosition, var24)
+		local ok, status = pcall(var4.GetQueuePosition, var4)
 		
 		return if ok and type(status) == "number" then status else nil
 	end
 	
 	local function updateQueuePosition()
-		-- upvalues: var43 (ref), queuePositionEnabledEngineFeature (copy), var24 (ref)
-		local var70
-		if queuePositionEnabledEngineFeature and var24.GetQueuePosition then
-			local ok, status = pcall(var24.GetQueuePosition, var24)
-			var70 = if ok and type(status) == "number" then status else nil
+		-- upvalues: var23 (ref), queuePositionEnabledEngineFeature (copy), var4 (ref)
+		local var41
+		if queuePositionEnabledEngineFeature and var4.GetQueuePosition then
+			local ok, status = pcall(var4.GetQueuePosition, var4)
+			var41 = if ok and type(status) == "number" then status else nil
 		else
-			var70 = nil
+			var41 = nil
 		end
-		var43(var70)
+		var23(var41)
 	end
 	
-	local _ = function(p12)
-		-- upvalues: var61 (write), constantsModule (copy), var34 (ref), var24 (ref), queueExperimentation (copy)
-		if not var61 and p12 == constantsModule.QUEUED_STATE and var34(false) > 0 then
-			local var71
-			if var24.GetFollowUserId then
-				local ok, status = pcall(var24.GetFollowUserId, var24)
-				var71 = if ok and type(status) == "number" then status else 0
+	local _ = function(p3)
+		-- upvalues: var39 (write), constantsModule (copy), var14 (ref), var4 (ref), queueExperimentation (copy)
+		if not var39 and p3 == constantsModule.QUEUED_STATE and var14(false) > 0 then
+			local var41
+			if var4.GetFollowUserId then
+				local ok, status = pcall(var4.GetFollowUserId, var4)
+				var41 = if ok and type(status) == "number" then status else 0
 			else
-				var71 = 0
+				var41 = 0
 			end
-			if var71 <= 0 or not queueExperimentation.isInExperiment() then
+			if var41 <= 0 or not queueExperimentation.isInExperiment() then
 				return
 			else
-				var61 = true
+				var39 = true
 				queueExperimentation.logExposure()
 			end
 		end
 	end
 	
-	local function updateJoinState(p13)
-		-- upvalues: var41 (ref), constantsModule (copy), var43 (ref), var61 (write), var34 (ref), var24 (ref), queueExperimentation (copy)
-		if type(p13) ~= "string" then return end
-		var41(p13)
+	local function updateJoinState(p3)
+		-- upvalues: var21 (ref), constantsModule (copy), var23 (ref), var39 (write), var14 (ref), var4 (ref), queueExperimentation (copy)
+		if type(p3) ~= "string" then return end
+		var21(p3)
 		
-		if p13 ~= constantsModule.QUEUED_STATE then
-			var43(nil)
+		if p3 ~= constantsModule.QUEUED_STATE then
+			var23(nil)
 		end
-		if not var61 and p13 == constantsModule.QUEUED_STATE and var34(false) > 0 then
-			local var72
-			if var24.GetFollowUserId then
-				local ok, status = pcall(var24.GetFollowUserId, var24)
-				var72 = if ok and type(status) == "number" then status else 0
+		if not var39 and p3 == constantsModule.QUEUED_STATE and var14(false) > 0 then
+			local var41
+			if var4.GetFollowUserId then
+				local ok, status = pcall(var4.GetFollowUserId, var4)
+				var41 = if ok and type(status) == "number" then status else 0
 			else
-				var72 = 0
+				var41 = 0
 			end
-			if var72 > 0 then
+			if var41 > 0 then
 				if not queueExperimentation.isInExperiment() then return end
-				var61 = true
+				var39 = true
 				queueExperimentation.logExposure()
 			end
 		end
 	end
 	
-	local _ = function(p14)
-		-- upvalues: var52 (write), var36 (ref), var37 (ref), var54 (write)
-		if var52 or p14 <= 0 or var36(false) > 0 then return end
-		var37(p14)
+	local _ = function(p3)
+		-- upvalues: var30 (write), var16 (ref), var17 (ref), var32 (write)
+		if var30 or p3 <= 0 or var16(false) > 0 then return end
+		var17(p3)
 		
-		if var54 then
-			var54:Disconnect()
+		if var32 then
+			var32:Disconnect()
 		end
-		var54 = nil
+		var32 = nil
 	end
 	
 	local function watchUniverseId()
-		-- upvalues: var54 (write), var52 (write), var36 (ref), var23 (ref), var37 (ref)
-		local var73 = var54
+		-- upvalues: var32 (write), var30 (write), var16 (ref), var3 (ref), var17 (ref)
+		local var41 = var32
 		
-		if var73 then
-			var73:Disconnect()
+		if var41 then
+			var41:Disconnect()
 		end
-		var54 = nil
+		var32 = nil
 		
-		if var52 or var36(false) > 0 then return end
-		var54 = var23:GetPropertyChangedSignal("GameId"):Connect(function()
-			-- upvalues: var23 (copy), var52 (copy), var36 (copy), var37 (copy), var54 (copy)
-			local gameId = var23.GameId
+		if var30 or var16(false) > 0 then return end
+		var32 = var3:GetPropertyChangedSignal("GameId"):Connect(function()
+			-- upvalues: var3 (copy), var30 (copy), var16 (copy), var17 (copy), var32 (copy)
+			local gameId = var3.GameId
 			
-			if not var52 and gameId > 0 then
-				if var36(false) > 0 then return end
-				var37(gameId)
-				local var75 = var54
+			if not var30 and gameId > 0 then
+				if var16(false) > 0 then return end
+				var17(gameId)
+				local var42 = var32
 				
-				if var75 then
-					var75:Disconnect()
+				if var42 then
+					var42:Disconnect()
 				end
-				var54 = nil
+				var32 = nil
 			end
 		end)
-		local gameId = var23.GameId
+		local gameId = var3.GameId
 		
-		if not var52 and gameId > 0 then
-			if var36(false) > 0 then return end
-			var37(gameId)
-			local var74 = var54
+		if not var30 and gameId > 0 then
+			if var16(false) > 0 then return end
+			var17(gameId)
+			local var42 = var32
 			
-			if var74 then
-				var74:Disconnect()
+			if var42 then
+				var42:Disconnect()
 			end
-			var54 = nil
+			var32 = nil
 		end
 	end
 	
-	local _ = function(p15)
-		-- upvalues: var36 (ref), var59 (write), var26 (ref), var52 (write), var34 (ref), var37 (ref), var54 (write)
-		if var36(false) > 0 then return end
-		if var59 and coroutine.status(var59) ~= "dead" then
-			task.cancel(var59)
+	local _ = function(p3)
+		-- upvalues: var16 (ref), var37 (write), var6 (ref), var30 (write), var14 (ref), var17 (ref), var32 (write)
+		if var16(false) > 0 then return end
+		if var37 and coroutine.status(var37) ~= "dead" then
+			task.cancel(var37)
 		end
-		var59 = task.defer(function()
-			-- upvalues: var26 (copy), p15 (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
-			local ok, status = pcall(var26, p15)
+		var37 = task.defer(function()
+			-- upvalues: var6 (copy), p3 (ref), var30 (copy), var14 (copy), var16 (copy), var17 (copy), var32 (copy)
+			local ok, status = pcall(var6, p3)
 			
-			if not var52 and p15 == var34(false) and (ok and type(status) == "number") and (not var52 and status > 0) then
-				if var36(false) > 0 then return end
-				var37(status)
-				local var76 = var54
+			if not var30 and p3 == var14(false) and (ok and type(status) == "number") and (not var30 and status > 0) then
+				if var16(false) > 0 then return end
+				var17(status)
+				local var41 = var32
 				
-				if var76 then
-					var76:Disconnect()
+				if var41 then
+					var41:Disconnect()
 				end
-				var54 = nil
+				var32 = nil
 			end
 		end)
 	end
 	
-	local _ = function(p16)
-		-- upvalues: var58 (write), var27 (ref), var52 (write), var34 (ref), var30 (ref)
-		if var58 and coroutine.status(var58) ~= "dead" then
-			task.cancel(var58)
+	local _ = function(p3)
+		-- upvalues: var36 (write), var7 (ref), var30 (write), var14 (ref), var10 (ref)
+		if var36 and coroutine.status(var36) ~= "dead" then
+			task.cancel(var36)
 		end
-		var58 = task.defer(function()
-			-- upvalues: var27 (copy), p16 (ref), var52 (copy), var34 (copy), var30 (copy)
-			local ok, status = pcall(var27, p16)
+		var36 = task.defer(function()
+			-- upvalues: var7 (copy), p3 (ref), var30 (copy), var14 (copy), var10 (copy)
+			local ok, status = pcall(var7, p3)
 			
 			if not ok then
 				print(string.format("LoadingScreen:GetGameProductInfo: %s", tostring(status)))
 				
 				return
-			elseif var52 or p16 ~= var34(false) then return end
-			local var79
+			elseif var30 or p3 ~= var14(false) then return end
+			local var41
 			local creator = status.Creator
-			local updateMarketplaceAssetInfo = var30.updateMarketplaceAssetInfo
-			local var77 = tostring(p16)
+			local updateMarketplaceAssetInfo = var10.updateMarketplaceAssetInfo
+			local var42 = tostring(p3)
 			local t = {
 				name = status.Name or "",
 				creatorName = if creator then creator.Name or "" else ""
 			}
 			
 			if creator then
-				var79 = creator.HasVerifiedBadge == true
-				var79 = nil
+				var41 = creator.HasVerifiedBadge == true
+				var41 = nil
 			else
-				var79 = false
+				var41 = false
 			end
-			t.creatorHasVerifiedBadge = var79
-			updateMarketplaceAssetInfo(var77, t)
+			t.creatorHasVerifiedBadge = var41
+			updateMarketplaceAssetInfo(var42, t)
 		end)
 	end
 	
 	local _ = function()
-		-- upvalues: var60 (write), var28 (ref), var52 (write), var47 (ref)
-		if var60 and coroutine.status(var60) ~= "dead" then
-			task.cancel(var60)
+		-- upvalues: var38 (write), var8 (ref), var30 (write), var25 (ref)
+		if var38 and coroutine.status(var38) ~= "dead" then
+			task.cancel(var38)
 		end
-		var60 = task.defer(function()
-			-- upvalues: var28 (copy), var52 (copy), var47 (copy)
-			local ok, status = pcall(var28)
+		var38 = task.defer(function()
+			-- upvalues: var8 (copy), var30 (copy), var25 (copy)
+			local ok, status = pcall(var8)
 			
-			if not var52 and ok and type(status) == "boolean" then
-				var47(status)
+			if not var30 and ok and type(status) == "boolean" then
+				var25(status)
 			end
 		end)
 	end
 	
-	local _ = function(p17)
-		-- upvalues: var58 (write), var27 (ref), var52 (write), var34 (ref), var30 (ref), var36 (ref), var59 (write), var26 (ref), var37 (ref), var54 (write)
-		if p17 <= 0 then return end
-		if var58 and coroutine.status(var58) ~= "dead" then
-			task.cancel(var58)
+	local _ = function(p3)
+		-- upvalues: var36 (write), var7 (ref), var30 (write), var14 (ref), var10 (ref), var16 (ref), var37 (write), var6 (ref), var17 (ref), var32 (write)
+		if p3 <= 0 then return end
+		if var36 and coroutine.status(var36) ~= "dead" then
+			task.cancel(var36)
 		end
-		var58 = task.defer(function()
-			-- upvalues: var27 (copy), p17 (ref), var52 (copy), var34 (copy), var30 (copy)
-			local ok, status = pcall(var27, p17)
+		var36 = task.defer(function()
+			-- upvalues: var7 (copy), p3 (ref), var30 (copy), var14 (copy), var10 (copy)
+			local ok, status = pcall(var7, p3)
 			
 			if not ok then
 				print(string.format("LoadingScreen:GetGameProductInfo: %s", tostring(status)))
 				
 				return
-			elseif var52 or p17 ~= var34(false) then return end
-			local var79
+			elseif var30 or p3 ~= var14(false) then return end
+			local var41
 			local creator = status.Creator
-			local updateMarketplaceAssetInfo = var30.updateMarketplaceAssetInfo
-			local var77 = tostring(p17)
+			local updateMarketplaceAssetInfo = var10.updateMarketplaceAssetInfo
+			local var42 = tostring(p3)
 			local t = {
 				name = status.Name or "",
 				creatorName = if creator then creator.Name or "" else ""
 			}
 			
 			if creator then
-				local var79 = creator.HasVerifiedBadge == true
-				var79 = nil
+				local var41 = creator.HasVerifiedBadge == true
+				var41 = nil
 			else
-				var79 = false
+				var41 = false
 			end
-			t.creatorHasVerifiedBadge = var79
-			updateMarketplaceAssetInfo(var77, t)
+			t.creatorHasVerifiedBadge = var41
+			updateMarketplaceAssetInfo(var42, t)
 		end)
 		
-		if var36(false) > 0 then return end
-		if var59 and coroutine.status(var59) ~= "dead" then
-			task.cancel(var59)
+		if var16(false) > 0 then return end
+		if var37 and coroutine.status(var37) ~= "dead" then
+			task.cancel(var37)
 		end
-		var59 = task.defer(function()
-			-- upvalues: var26 (copy), p17 (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
-			local ok, status = pcall(var26, p17)
+		var37 = task.defer(function()
+			-- upvalues: var6 (copy), p3 (ref), var30 (copy), var14 (copy), var16 (copy), var17 (copy), var32 (copy)
+			local ok, status = pcall(var6, p3)
 			
-			if not var52 and p17 == var34(false) and (ok and type(status) == "number") and (not var52 and status > 0) then
-				if var36(false) > 0 then return end
-				var37(status)
-				local var76 = var54
+			if not var30 and p3 == var14(false) and (ok and type(status) == "number") and (not var30 and status > 0) then
+				if var16(false) > 0 then return end
+				var17(status)
+				local var41 = var32
 				
-				if var76 then
-					var76:Disconnect()
+				if var41 then
+					var41:Disconnect()
 				end
-				var54 = nil
+				var32 = nil
 			end
 		end)
 	end
 	
-	local _ = function(p18)
-		-- upvalues: var52 (write), var34 (ref), var35 (ref), var53 (write), var58 (write), var27 (ref), var30 (ref), var36 (ref), var59 (write), var26 (ref), var37 (ref), var54 (write)
-		if var52 or p18 <= 0 or var34(false) == p18 then return end
-		var35(p18)
-		local var80 = var53
+	local _ = function(p3)
+		-- upvalues: var30 (write), var14 (ref), var15 (ref), var31 (write), var36 (write), var7 (ref), var10 (ref), var16 (ref), var37 (write), var6 (ref), var17 (ref), var32 (write)
+		if var30 or p3 <= 0 or var14(false) == p3 then return end
+		var15(p3)
+		local var41 = var31
 		
-		if var80 then
-			var80:Disconnect()
+		if var41 then
+			var41:Disconnect()
 		end
-		var53 = nil
+		var31 = nil
 		
-		if p18 <= 0 then return end
-		if var58 and coroutine.status(var58) ~= "dead" then
-			task.cancel(var58)
+		if p3 <= 0 then return end
+		if var36 and coroutine.status(var36) ~= "dead" then
+			task.cancel(var36)
 		end
-		var58 = task.defer(function()
-			-- upvalues: var27 (copy), p18 (ref), var52 (copy), var34 (copy), var30 (copy)
-			local ok, status = pcall(var27, p18)
+		var36 = task.defer(function()
+			-- upvalues: var7 (copy), p3 (ref), var30 (copy), var14 (copy), var10 (copy)
+			local ok, status = pcall(var7, p3)
 			
 			if not ok then
 				print(string.format("LoadingScreen:GetGameProductInfo: %s", tostring(status)))
 				
 				return
-			elseif var52 or p18 ~= var34(false) then return end
-			local var79
+			elseif var30 or p3 ~= var14(false) then return end
+			local var42
 			local creator = status.Creator
-			local updateMarketplaceAssetInfo = var30.updateMarketplaceAssetInfo
-			local var77 = tostring(p18)
+			local updateMarketplaceAssetInfo = var10.updateMarketplaceAssetInfo
+			local var43 = tostring(p3)
 			local t = {
 				name = status.Name or "",
 				creatorName = if creator then creator.Name or "" else ""
 			}
 			
 			if creator then
-				local var79 = creator.HasVerifiedBadge == true
-				var79 = nil
+				local var42 = creator.HasVerifiedBadge == true
+				var42 = nil
 			else
-				var79 = false
+				var42 = false
 			end
-			t.creatorHasVerifiedBadge = var79
-			updateMarketplaceAssetInfo(var77, t)
+			t.creatorHasVerifiedBadge = var42
+			updateMarketplaceAssetInfo(var43, t)
 		end)
 		
-		if var36(false) > 0 then return end
-		if var59 and coroutine.status(var59) ~= "dead" then
-			task.cancel(var59)
+		if var16(false) > 0 then return end
+		if var37 and coroutine.status(var37) ~= "dead" then
+			task.cancel(var37)
 		end
-		var59 = task.defer(function()
-			-- upvalues: var26 (copy), p18 (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
-			local ok, status = pcall(var26, p18)
+		var37 = task.defer(function()
+			-- upvalues: var6 (copy), p3 (ref), var30 (copy), var14 (copy), var16 (copy), var17 (copy), var32 (copy)
+			local ok, status = pcall(var6, p3)
 			
-			if not var52 and p18 == var34(false) and (ok and type(status) == "number") and (not var52 and status > 0) then
-				if var36(false) > 0 then return end
-				var37(status)
-				local var76 = var54
+			if not var30 and p3 == var14(false) and (ok and type(status) == "number") and (not var30 and status > 0) then
+				if var16(false) > 0 then return end
+				var17(status)
+				local var42 = var32
 				
-				if var76 then
-					var76:Disconnect()
+				if var42 then
+					var42:Disconnect()
 				end
-				var54 = nil
+				var32 = nil
 			end
 		end)
 	end
 	
 	return {
-		getAssetInfo = var48,
+		getAssetInfo = var26,
 		getFollowUserId = ok,
-		getIsAutoTranslated = var50,
-		getIsSubjectToChinaPolicies = var46,
-		getJoinState = var40,
-		getQueuePosition = var42,
-		getQueueTreatment = var39,
+		getIsAutoTranslated = var28,
+		getIsSubjectToChinaPolicies = var24,
+		getJoinState = var20,
+		getQueuePosition = var22,
+		getQueueTreatment = var19,
 		getServerStatusText = createSignal,
-		getUniverseId = var36,
+		getUniverseId = var16,
 		launchExperience = function()
-			-- upvalues: var34 (ref), var24 (ref)
-			local var81 = var34(false)
+			-- upvalues: var14 (ref), var4 (ref)
+			local var41 = var14(false)
 			
-			if var81 > 0 and var24.LaunchExperience then
-				var24:LaunchExperience({ placeId = var81 })
+			if var41 > 0 and var4.LaunchExperience then
+				var4:LaunchExperience({ placeId = var41 })
 			end
 		end,
-		logQueuedStateButtonClick = function(p19, p20)
-			-- upvalues: var38 (ref), loadingScreenTelemetryModule (copy), fFlagEnableLuaAppsFollowUserId_1 (copy), ok (ref), var34 (ref), queuePositionEnabledEngineFeature (copy), var42 (ref), var36 (ref)
-			if var38 then
+		logQueuedStateButtonClick = function(p3, p4)
+			-- upvalues: var18 (ref), loadingScreenTelemetryModule (copy), fFlagEnableLuaAppsFollowUserId_1 (copy), ok (ref), var14 (ref), queuePositionEnabledEngineFeature (copy), var22 (ref), var16 (ref)
+			if var18 then
 				loadingScreenTelemetryModule.logQueuedStateButtonClick({
-					buttonName = p19,
+					buttonName = p3,
 					joinTargetUserId = if fFlagEnableLuaAppsFollowUserId_1 then ok(false) else nil,
-					placeId = var34(false),
-					positionInQueue = if queuePositionEnabledEngineFeature then var42(false) else nil,
-					timeElapsedMs = p20,
-					universeId = var36(false)
+					placeId = var14(false),
+					positionInQueue = if queuePositionEnabledEngineFeature then var22(false) else nil,
+					timeElapsedMs = p4,
+					universeId = var16(false)
 				})
 				
 				return
 			end
 		end,
 		showConnectionHealth = function()
-			-- upvalues: var25 (ref), var62 (write)
-			if var25.ShowStatsBasedOnInputString then
-				var62 = true
-				var25:ShowStatsBasedOnInputString("ConnectionHealth")
+			-- upvalues: var5 (ref), var40 (write)
+			if var5.ShowStatsBasedOnInputString then
+				var40 = true
+				var5:ShowStatsBasedOnInputString("ConnectionHealth")
 			end
 		end,
 		start = function()
-			-- upvalues: var51 (write), var52 (write), var34 (ref), var53 (write), var23 (ref), var35 (ref), var58 (write), var27 (ref), var30 (ref), var36 (ref), var59 (write), var26 (ref), var37 (ref), var54 (write), watchUniverseId (ref), var60 (write), var28 (ref), var47 (ref), var45 (ref), fFlagEnableLuaAppsFollowUserId_1 (copy), var24 (ref), var25 (ref), var57 (write), var44 (ref), queueExperimentation (copy), var41 (ref), constantsModule (copy), var43 (ref), var61 (write), var55 (write), updateJoinState (ref), queuePositionEnabledEngineFeature (copy), var56 (write), updateQueuePosition (ref)
-			if var51 or var52 then return end
-			var51 = true
+			-- upvalues: var29 (write), var30 (write), var14 (ref), var31 (write), var3 (ref), var15 (ref), var36 (write), var7 (ref), var10 (ref), var16 (ref), var37 (write), var6 (ref), var17 (ref), var32 (write), watchUniverseId (ref), var38 (write), var8 (ref), var25 (ref), var45 (ref), fFlagEnableLuaAppsFollowUserId_1 (copy), var4 (ref), var5 (ref), var35 (write), var2 (ref), queueExperimentation (copy), var21 (ref), constantsModule (copy), var23 (ref), var39 (write), var33 (write), updateJoinState (ref), queuePositionEnabledEngineFeature (copy), var34 (write), updateQueuePosition (ref)
+			if var29 or var30 then return end
+			var29 = true
 			
-			if var34(false) <= 0 then
-				var53 = var23:GetPropertyChangedSignal("PlaceId"):Connect(function()
-					-- upvalues: var23 (copy), var52 (copy), var34 (copy), var35 (copy), var53 (copy), var58 (copy), var27 (copy), var30 (copy), var36 (copy), var59 (copy), var26 (copy), var37 (copy), var54 (copy)
-					local placeId = var23.PlaceId
+			if var14(false) <= 0 then
+				var31 = var3:GetPropertyChangedSignal("PlaceId"):Connect(function()
+					-- upvalues: var3 (copy), var30 (copy), var14 (copy), var15 (copy), var31 (copy), var36 (copy), var7 (copy), var10 (copy), var16 (copy), var37 (copy), var6 (copy), var17 (copy), var32 (copy)
+					local placeId = var3.PlaceId
 					
-					if not var52 and placeId > 0 then
-						if var34(false) == placeId then return end
-						var35(placeId)
-						local var89 = var53
+					if not var30 and placeId > 0 then
+						if var14(false) == placeId then return end
+						var15(placeId)
+						local var41 = var31
 						
-						if var89 then
-							var89:Disconnect()
+						if var41 then
+							var41:Disconnect()
 						end
-						var53 = nil
+						var31 = nil
 						
 						if placeId <= 0 then return end
-						if var58 and coroutine.status(var58) ~= "dead" then
-							task.cancel(var58)
+						if var36 and coroutine.status(var36) ~= "dead" then
+							task.cancel(var36)
 						end
-						var58 = task.defer(function()
-							-- upvalues: var27 (copy), placeId (ref), var52 (copy), var34 (copy), var30 (copy)
-							local ok, status = pcall(var27, placeId)
+						var36 = task.defer(function()
+							-- upvalues: var7 (copy), placeId (ref), var30 (copy), var14 (copy), var10 (copy)
+							local ok, status = pcall(var7, placeId)
 							
 							if not ok then
 								print(string.format("LoadingScreen:GetGameProductInfo: %s", tostring(status)))
 								
 								return
-							elseif var52 or placeId ~= var34(false) then return end
-							local var79
+							elseif var30 or placeId ~= var14(false) then return end
+							local var42
 							local creator = status.Creator
-							local updateMarketplaceAssetInfo = var30.updateMarketplaceAssetInfo
-							local var77 = tostring(placeId)
+							local updateMarketplaceAssetInfo = var10.updateMarketplaceAssetInfo
+							local var43 = tostring(placeId)
 							local t = {
 								name = status.Name or "",
 								creatorName = if creator then creator.Name or "" else ""
 							}
 							
 							if creator then
-								local var79 = creator.HasVerifiedBadge == true
-								var79 = nil
+								local var42 = creator.HasVerifiedBadge == true
+								var42 = nil
 							else
-								var79 = false
+								var42 = false
 							end
-							t.creatorHasVerifiedBadge = var79
-							updateMarketplaceAssetInfo(var77, t)
+							t.creatorHasVerifiedBadge = var42
+							updateMarketplaceAssetInfo(var43, t)
 						end)
 						
-						if var36(false) > 0 then return end
-						if var59 and coroutine.status(var59) ~= "dead" then
-							task.cancel(var59)
+						if var16(false) > 0 then return end
+						if var37 and coroutine.status(var37) ~= "dead" then
+							task.cancel(var37)
 						end
-						var59 = task.defer(function()
-							-- upvalues: var26 (copy), placeId (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
-							local ok, status = pcall(var26, placeId)
+						var37 = task.defer(function()
+							-- upvalues: var6 (copy), placeId (ref), var30 (copy), var14 (copy), var16 (copy), var17 (copy), var32 (copy)
+							local ok, status = pcall(var6, placeId)
 							
-							if not var52 and placeId == var34(false) and (ok and type(status) == "number") and (not var52 and status > 0) then
-								if var36(false) > 0 then return end
-								var37(status)
-								local var76 = var54
+							if not var30 and placeId == var14(false) and (ok and type(status) == "number") and (not var30 and status > 0) then
+								if var16(false) > 0 then return end
+								var17(status)
+								local var42 = var32
 								
-								if var76 then
-									var76:Disconnect()
+								if var42 then
+									var42:Disconnect()
 								end
-								var54 = nil
+								var32 = nil
 							end
 						end)
 					end
@@ -627,272 +627,272 @@ return function(p4, p5)
 			end
 			watchUniverseId()
 			
-			if var60 and coroutine.status(var60) ~= "dead" then
-				task.cancel(var60)
+			if var38 and coroutine.status(var38) ~= "dead" then
+				task.cancel(var38)
 			end
-			local var82, ok_2
-			var60 = task.defer(function()
-				-- upvalues: var28 (copy), var52 (copy), var47 (copy)
-				local ok, status = pcall(var28)
+			local var41, ok_2
+			var38 = task.defer(function()
+				-- upvalues: var8 (copy), var30 (copy), var25 (copy)
+				local ok, status = pcall(var8)
 				
-				if not var52 and ok and type(status) == "boolean" then
-					var47(status)
+				if not var30 and ok and type(status) == "boolean" then
+					var25(status)
 				end
 			end)
 			
-			if fFlagEnableLuaAppsFollowUserId_1 and var24.GetFollowUserId then
-				ok_2, status = pcall(var24.GetFollowUserId, var24)
-				var82 = if ok_2 and type(status) == "number" then status else 0
+			if fFlagEnableLuaAppsFollowUserId_1 and var4.GetFollowUserId then
+				ok_2, status = pcall(var4.GetFollowUserId, var4)
+				var41 = if ok_2 and type(status) == "number" then status else 0
 			else
-				var82 = 0
+				var41 = 0
 			end
-			local var83
-			var45(var82)
+			local var42
+			var45(var41)
 			
-			if var25.UiMessageChanged then
-				var57 = var25.UiMessageChanged:Connect(function(p21, p22)
-					-- upvalues: var44 (copy)
-					if p21 == Enum.UiMessageType.UiMessageInfo and type(p22) == "string" then
-						var44(p22)
+			if var5.UiMessageChanged then
+				var35 = var5.UiMessageChanged:Connect(function(p3, p4)
+					-- upvalues: var2 (copy)
+					if p3 == Enum.UiMessageType.UiMessageInfo and type(p4) == "string" then
+						var2(p4)
 					end
 				end)
 			end
-			if var25.GetUiMessage then
-				ok_2, status = pcall(var25.GetUiMessage, var25)
-				var83 = if ok_2 and type(status) == "string" then status else ""
+			if var5.GetUiMessage then
+				ok_2, status = pcall(var5.GetUiMessage, var5)
+				var42 = if ok_2 and type(status) == "string" then status else ""
 			else
-				var83 = ""
+				var42 = ""
 			end
-			var44(var83)
+			var2(var42)
 			
 			if queueExperimentation.isInExperiment() then
 				local status
-				if var24.GetPlaceJoinState then
-					local ok_2, status = pcall(var24.GetPlaceJoinState, var24)
+				if var4.GetPlaceJoinState then
+					local ok_2, status = pcall(var4.GetPlaceJoinState, var4)
 					
 					if ok_2 and type(status) == "string" then
-						var41(status)
+						var21(status)
 						
 						if status ~= constantsModule.QUEUED_STATE then
-							var43(nil)
+							var23(nil)
 						end
-						if not var61 and status == constantsModule.QUEUED_STATE and var34(false) > 0 then
-							if var24.GetFollowUserId then
-								status, status_1 = pcall(var24.GetFollowUserId, var24)
+						if not var39 and status == constantsModule.QUEUED_STATE and var14(false) > 0 then
+							if var4.GetFollowUserId then
+								status, status_1 = pcall(var4.GetFollowUserId, var4)
 								ok_2 = if status and type(status_1) == "number" then status_1 else 0
 							else
 								ok_2 = 0
 							end
 							if ok_2 > 0 and queueExperimentation.isInExperiment() then
-								var61 = true
+								var39 = true
 								queueExperimentation.logExposure()
 							end
 						end
 					end
 				end
-				if var24.PlaceJoinStateChanged then
-					var55 = var24.PlaceJoinStateChanged:Connect(updateJoinState)
+				if var4.PlaceJoinStateChanged then
+					var33 = var4.PlaceJoinStateChanged:Connect(updateJoinState)
 				end
-				if queuePositionEnabledEngineFeature and var24.QueuePositionChanged then
-					var56 = var24.QueuePositionChanged:Connect(updateQueuePosition)
+				if queuePositionEnabledEngineFeature and var4.QueuePositionChanged then
+					var34 = var4.QueuePositionChanged:Connect(updateQueuePosition)
 				end
 				if queuePositionEnabledEngineFeature then
-					local var85
-					local var84 = var43
+					local var43
+					local var44 = var23
 					
-					if queuePositionEnabledEngineFeature and var24.GetQueuePosition then
-						ok_2, status = pcall(var24.GetQueuePosition, var24)
-						var85 = if ok_2 and type(status) == "number" then status else nil
+					if queuePositionEnabledEngineFeature and var4.GetQueuePosition then
+						ok_2, status = pcall(var4.GetQueuePosition, var4)
+						var43 = if ok_2 and type(status) == "number" then status else nil
 					else
-						var85 = nil
+						var43 = nil
 					end
-					var84(var85)
+					var44(var43)
 				end
 			end
-			if var34(false) <= 0 then
-				local placeId = var23.PlaceId
+			if var14(false) <= 0 then
+				local placeId = var3.PlaceId
 				
-				if var52 or placeId <= 0 then return end
-				if var34(false) == placeId then return end
-				var35(placeId)
-				ok_2 = var53
+				if var30 or placeId <= 0 then return end
+				if var14(false) == placeId then return end
+				var15(placeId)
+				ok_2 = var31
 				
 				if ok_2 then
 					ok_2:Disconnect()
 				end
-				var53 = nil
+				var31 = nil
 				
 				if placeId <= 0 then return end
-				if var58 and coroutine.status(var58) ~= "dead" then
-					task.cancel(var58)
+				if var36 and coroutine.status(var36) ~= "dead" then
+					task.cancel(var36)
 				end
-				var58 = task.defer(function()
-					-- upvalues: var27 (copy), placeId (ref), var52 (copy), var34 (copy), var30 (copy)
-					local ok, status = pcall(var27, placeId)
+				var36 = task.defer(function()
+					-- upvalues: var7 (copy), placeId (ref), var30 (copy), var14 (copy), var10 (copy)
+					local ok, status = pcall(var7, placeId)
 					
 					if not ok then
 						print(string.format("LoadingScreen:GetGameProductInfo: %s", tostring(status)))
 						
 						return
-					elseif var52 or placeId ~= var34(false) then return end
-					local var79
+					elseif var30 or placeId ~= var14(false) then return end
+					local var45
 					local creator = status.Creator
-					local updateMarketplaceAssetInfo = var30.updateMarketplaceAssetInfo
-					local var77 = tostring(placeId)
+					local updateMarketplaceAssetInfo = var10.updateMarketplaceAssetInfo
+					local var46 = tostring(placeId)
 					local t = {
 						name = status.Name or "",
 						creatorName = if creator then creator.Name or "" else ""
 					}
 					
 					if creator then
-						local var79 = creator.HasVerifiedBadge == true
-						var79 = nil
+						local var45 = creator.HasVerifiedBadge == true
+						var45 = nil
 					else
-						var79 = false
+						var45 = false
 					end
-					t.creatorHasVerifiedBadge = var79
-					updateMarketplaceAssetInfo(var77, t)
+					t.creatorHasVerifiedBadge = var45
+					updateMarketplaceAssetInfo(var46, t)
 				end)
 				
-				if var36(false) > 0 then return end
-				if var59 and coroutine.status(var59) ~= "dead" then
-					task.cancel(var59)
+				if var16(false) > 0 then return end
+				if var37 and coroutine.status(var37) ~= "dead" then
+					task.cancel(var37)
 				end
-				var59 = task.defer(function()
-					-- upvalues: var26 (copy), placeId (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
-					local ok, status = pcall(var26, placeId)
+				var37 = task.defer(function()
+					-- upvalues: var6 (copy), placeId (ref), var30 (copy), var14 (copy), var16 (copy), var17 (copy), var32 (copy)
+					local ok, status = pcall(var6, placeId)
 					
-					if not var52 and placeId == var34(false) and (ok and type(status) == "number") and (not var52 and status > 0) then
-						if var36(false) > 0 then return end
-						var37(status)
-						local var76 = var54
+					if not var30 and placeId == var14(false) and (ok and type(status) == "number") and (not var30 and status > 0) then
+						if var16(false) > 0 then return end
+						var17(status)
+						local var45 = var32
 						
-						if var76 then
-							var76:Disconnect()
+						if var45 then
+							var45:Disconnect()
 						end
-						var54 = nil
+						var32 = nil
 					end
 				end)
 				
 				return
 			else
-				local var86 = var34(false)
+				local var45 = var14(false)
 				
-				if var86 <= 0 then return end
-				local var87 = var58
+				if var45 <= 0 then return end
+				local var46 = var36
 				
-				if var87 and coroutine.status(var87) ~= "dead" then
-					task.cancel(var87)
+				if var46 and coroutine.status(var46) ~= "dead" then
+					task.cancel(var46)
 				end
-				var58 = task.defer(function()
-					-- upvalues: var27 (copy), var86 (ref), var52 (copy), var34 (copy), var30 (copy)
-					local ok, status = pcall(var27, var86)
+				var36 = task.defer(function()
+					-- upvalues: var7 (copy), var45 (ref), var30 (copy), var14 (copy), var10 (copy)
+					local ok, status = pcall(var7, var45)
 					
 					if not ok then
 						print(string.format("LoadingScreen:GetGameProductInfo: %s", tostring(status)))
 						
 						return
-					elseif var52 or var86 ~= var34(false) then return end
-					local var79
+					elseif var30 or var45 ~= var14(false) then return end
+					local var47
 					local creator = status.Creator
-					local updateMarketplaceAssetInfo = var30.updateMarketplaceAssetInfo
-					local var77 = tostring(var86)
+					local updateMarketplaceAssetInfo = var10.updateMarketplaceAssetInfo
+					local var48 = tostring(var45)
 					local t = {
 						name = status.Name or "",
 						creatorName = if creator then creator.Name or "" else ""
 					}
 					
 					if creator then
-						local var79 = creator.HasVerifiedBadge == true
-						var79 = nil
+						local var47 = creator.HasVerifiedBadge == true
+						var47 = nil
 					else
-						var79 = false
+						var47 = false
 					end
-					t.creatorHasVerifiedBadge = var79
-					updateMarketplaceAssetInfo(var77, t)
+					t.creatorHasVerifiedBadge = var47
+					updateMarketplaceAssetInfo(var48, t)
 				end)
 				
-				if var36(false) > 0 then return end
-				local var88 = var59
+				if var16(false) > 0 then return end
+				local var47 = var37
 				
-				if var88 and coroutine.status(var88) ~= "dead" then
-					task.cancel(var88)
+				if var47 and coroutine.status(var47) ~= "dead" then
+					task.cancel(var47)
 				end
-				var59 = task.defer(function()
-					-- upvalues: var26 (copy), var86 (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
-					local ok, status = pcall(var26, var86)
+				var37 = task.defer(function()
+					-- upvalues: var6 (copy), var45 (ref), var30 (copy), var14 (copy), var16 (copy), var17 (copy), var32 (copy)
+					local ok, status = pcall(var6, var45)
 					
-					if not var52 and var86 == var34(false) and (ok and type(status) == "number") and (not var52 and status > 0) then
-						if var36(false) > 0 then return end
-						var37(status)
-						local var76 = var54
+					if not var30 and var45 == var14(false) and (ok and type(status) == "number") and (not var30 and status > 0) then
+						if var16(false) > 0 then return end
+						var17(status)
+						local var48 = var32
 						
-						if var76 then
-							var76:Disconnect()
+						if var48 then
+							var48:Disconnect()
 						end
-						var54 = nil
+						var32 = nil
 					end
 				end)
 			end
 		end,
 		destroy = function()
-			-- upvalues: var52 (write), var53 (write), var54 (write), var55 (write), var56 (write), var57 (write), var58 (write), var59 (write), var60 (write), var32 (ref), var31 (ref), var62 (write), var25 (ref), userInputService (copy)
-			if var52 then return end
-			var52 = true
+			-- upvalues: var30 (write), var31 (write), var32 (write), var33 (write), var34 (write), var35 (write), var36 (write), var37 (write), var38 (write), var12 (ref), var11 (ref), var40 (write), var5 (ref), userInputService (copy)
+			if var30 then return end
+			var30 = true
 			
-			if var53 then
-				var53:Disconnect()
+			if var31 then
+				var31:Disconnect()
 			end
-			var53 = nil
+			var31 = nil
 			
-			if var54 then
-				var54:Disconnect()
+			if var32 then
+				var32:Disconnect()
 			end
-			var54 = nil
+			var32 = nil
 			
-			if var55 then
-				var55:Disconnect()
+			if var33 then
+				var33:Disconnect()
 			end
-			var55 = nil
+			var33 = nil
 			
-			if var56 then
-				var56:Disconnect()
+			if var34 then
+				var34:Disconnect()
 			end
-			var56 = nil
-			local var90 = var57
+			var34 = nil
+			local var41 = var35
 			
-			if var90 then
-				var90:Disconnect()
+			if var41 then
+				var41:Disconnect()
 			end
-			var57 = nil
-			local var91 = var58
+			var35 = nil
+			local var42 = var36
 			
-			if var91 and coroutine.status(var91) ~= "dead" then
-				task.cancel(var91)
+			if var42 and coroutine.status(var42) ~= "dead" then
+				task.cancel(var42)
 			end
-			local var92 = var59
+			local var43 = var37
 			
-			if var92 and coroutine.status(var92) ~= "dead" then
-				task.cancel(var92)
+			if var43 and coroutine.status(var43) ~= "dead" then
+				task.cancel(var43)
 			end
-			local var93 = var60
+			local var44 = var38
 			
-			if var93 and coroutine.status(var93) ~= "dead" then
-				task.cancel(var93)
+			if var44 and coroutine.status(var44) ~= "dead" then
+				task.cancel(var44)
 			end
-			var32.clear()
-			var31.clear()
-			var32.dispose()
+			var12.clear()
+			var11.clear()
+			var12.dispose()
 			
-			if var62 and var25.CloseStatsBasedOnInputString then
+			if var40 and var5.CloseStatsBasedOnInputString then
 				local inputBeganConnection = nil
 				inputBeganConnection = userInputService.InputBegan:Connect(function()
-					-- upvalues: inputBeganConnection (write), var25 (copy)
+					-- upvalues: inputBeganConnection (write), var5 (copy)
 					if inputBeganConnection then
 						inputBeganConnection:Disconnect()
 						inputBeganConnection = nil
 					end
-					var25:CloseStatsBasedOnInputString("ConnectionHealth")
+					var5:CloseStatsBasedOnInputString("ConnectionHealth")
 				end)
 			end
 		end

@@ -2,10 +2,10 @@
 local _ = require(parent.networkingChatTypes)
 local CHAT_URLModule = require(parent.CHAT_URL)
 
-return function(p0)
+return function(p1)
 	-- upvalues: CHAT_URLModule (ref)
-	return p0.roduxNetworking.POST({ Name = "RemoveFromConversation" }, function(p1, p2, p3)
+	return p1.roduxNetworking.POST({ Name = "RemoveFromConversation" }, function(p2, p3, p4)
 		-- upvalues: CHAT_URLModule (copy)
-		return p1(CHAT_URLModule):path("v2"):path("remove-from-conversation"):body({ participantUserId = p2, conversationId = p3 }):setStatusIds({ p3 })
+		return p2(CHAT_URLModule):path("v2"):path("remove-from-conversation"):body({ participantUserId = p3, conversationId = p4 }):setStatusIds({ p4 })
 	end)
 end

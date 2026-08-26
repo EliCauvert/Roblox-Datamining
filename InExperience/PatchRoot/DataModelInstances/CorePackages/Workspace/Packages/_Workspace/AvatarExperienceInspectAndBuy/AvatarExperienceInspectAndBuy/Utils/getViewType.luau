@@ -1,15 +1,15 @@
 ﻿local viewTypeModule = require(script:FindFirstAncestor("AvatarExperienceInspectAndBuy").Enums.ViewType)
 local mobileBreakpointInspectAndBuy = game:DefineFastInt("MobileBreakpointInspectAndBuy", 850)
 
-return function(p0)
+return function(p1)
 	-- upvalues: viewTypeModule (ref), mobileBreakpointInspectAndBuy (ref)
 	local wide = viewTypeModule.Wide
 	
-	if p0.Y < p0.X and p0.X < mobileBreakpointInspectAndBuy then
+	if p1.Y < p1.X and p1.X < mobileBreakpointInspectAndBuy then
 		wide = viewTypeModule.WideLandscape
 		
 		return wide
-	elseif p0.X < mobileBreakpointInspectAndBuy then
+	elseif p1.X < mobileBreakpointInspectAndBuy then
 		wide = viewTypeModule.Compact
 	end
 	return wide

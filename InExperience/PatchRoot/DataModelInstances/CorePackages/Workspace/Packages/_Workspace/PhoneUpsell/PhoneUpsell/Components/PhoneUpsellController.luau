@@ -17,9 +17,9 @@ local openModal = require(parent.NotificationModalsManager).OpenModal
 local closeModal = require(parent.NotificationModalsManager).CloseModal
 local inExperienceProviderContainer = require(parent.InExperienceContainer).InExperienceProviderContainer
 local inGameUpsellContainerModule = require(phoneUpsell.Components.InGame.InGameUpsellContainer)
-local var7 = nil
+local var1 = nil
 
-local var8 = function(p0)
+local var2 = function(p1)
 	-- upvalues: useLocalization (ref), useStyle (ref), reactModule (ref), toast (ref), images (ref)
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		PhoneToast = reactModule.createElement(toast, {
@@ -33,7 +33,7 @@ local var8 = function(p0)
 				toastTitle = useLocalization({
 					titleKey = "Feature.VerificationUpsell.Heading.PhoneNumberVerified"
 				}).titleKey,
-				onDismissed = p0.onDismissed
+				onDismissed = p1.onDismissed
 			}
 		})
 	})
@@ -41,12 +41,12 @@ end
 
 return {
 	openPhoneUpsell = function(p1)
-		-- upvalues: var7 (write), reactRobloxModule (ref), openModal (ref), inExperienceProviderContainer (ref), reactModule (ref), inGameUpsellContainerModule (ref), cryoModule (ref), closeModal (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), var8 (ref), getFFlagNotificationModalSetMenuIsOpen (ref)
-		if var7 == nil then
+		-- upvalues: var1 (write), reactRobloxModule (ref), openModal (ref), inExperienceProviderContainer (ref), reactModule (ref), inGameUpsellContainerModule (ref), cryoModule (ref), closeModal (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), var2 (ref), getFFlagNotificationModalSetMenuIsOpen (ref)
+		if var1 == nil then
 			local phoneUpsellToasts = Instance.new("Folder")
 			phoneUpsellToasts.Name = "PhoneUpsellToasts"
 			phoneUpsellToasts.Parent = game:GetService("CoreGui")
-			var7 = reactRobloxModule.createRoot(phoneUpsellToasts)
+			var1 = reactRobloxModule.createRoot(phoneUpsellToasts)
 		end
 		openModal("PHONE_UPSELL_KEY", inExperienceProviderContainer, {
 			DisableBackgroundDismiss = true,
@@ -61,13 +61,13 @@ return {
 						end
 					end,
 					onSuccess = function()
-						-- upvalues: closeModal (copy), p1 (ref), var7 (copy), reactModule (copy), localizationProvider (copy), localization (copy), localizationService (copy), styleProviderWithDefaultTheme (copy), var8 (copy)
+						-- upvalues: closeModal (copy), p1 (ref), var1 (copy), reactModule (copy), localizationProvider (copy), localization (copy), localizationService (copy), styleProviderWithDefaultTheme (copy), var2 (copy)
 						closeModal("PHONE_UPSELL_KEY")
 						
 						if p1.onSuccessBeforeToast then
 							p1.onSuccessBeforeToast()
 						end
-						var7:render(reactModule.createElement("ScreenGui", {
+						var1:render(reactModule.createElement("ScreenGui", {
 							IgnoreGuiInset = true,
 							ResetOnSpawn = false,
 							DisplayOrder = 0,
@@ -80,13 +80,13 @@ return {
 								}, {
 									StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, {}, {
 										Frame = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-											Toast = reactModule.createElement(var8, {
+											Toast = reactModule.createElement(var2, {
 												onDismissed = function()
-													-- upvalues: p1 (copy), var7 (copy)
+													-- upvalues: p1 (copy), var1 (copy)
 													if p1.onSuccess then
 														p1.onSuccess()
 													end
-													var7:unmount()
+													var1:unmount()
 												end
 											}, {})
 										})

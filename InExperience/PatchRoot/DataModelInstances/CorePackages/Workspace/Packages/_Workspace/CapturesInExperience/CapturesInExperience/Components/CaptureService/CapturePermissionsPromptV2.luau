@@ -19,11 +19,11 @@ local eventNamesModule = require(parent.Analytics.EventNames)
 local permissionPromptFinishedModule = require(parent.Thunks.PermissionPromptFinished)
 local fFlagCapturePermissionsPromptFreeMouseModule = require(parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), usePinInputStateWhileOpenModule (ref), fFlagCapturePermissionsPromptFreeMouseModule (ref), reactModule (ref), eventNamesModule (ref), permissionPromptFinishedModule (ref), dialog (ref), dialogSize (ref), view (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var9 = useAnalyticsModule()
-	local var10 = useDispatch()
-	local var11 = useLocalization({
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3 = useLocalization({
 		allow = "Feature.Captures.Action.Allow",
 		allowAccessToCapturesBody = "Feature.Captures.Body.AllowAccessToCaptures",
 		allowAccessToCapturesTitle = "Feature.Captures.Title.AllowAccessToCaptures",
@@ -31,8 +31,8 @@ return function(p0)
 	})
 	usePinInputStateWhileOpenModule(fFlagCapturePermissionsPromptFreeMouseModule)
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), eventNamesModule (copy)
-		var9.fireEvent(eventNamesModule.CapturePermissionsPromptViewed)
+		-- upvalues: var1 (ref), eventNamesModule (copy)
+		var1.fireEvent(eventNamesModule.CapturePermissionsPromptViewed)
 	end, {})
 	
 	return reactModule.createElement(dialog.Root, { size = dialogSize.Small }, {
@@ -47,7 +47,7 @@ return function(p0)
 		}, {
 			DialogTitleText = reactModule.createElement(text, {
 				tag = "auto-xy text-heading-small text-wrap",
-				Text = var11.allowAccessToCapturesTitle
+				Text = var3.allowAccessToCapturesTitle
 			})
 		}),
 		DialogContent = reactModule.createElement(view, {
@@ -57,31 +57,31 @@ return function(p0)
 			DialogContentText = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-body-small text-wrap padding-bottom-xsmall",
-				Text = var11.allowAccessToCapturesBody
+				Text = var3.allowAccessToCapturesBody
 			}),
 			Buttons = reactModule.createElement(view, {
 				LayoutOrder = 2,
 				tag = "row align-x-center align-y-center auto-xy gap-medium"
 			}, {
 				AcceptButton = reactModule.createElement(button, {
-					text = var11.allow,
+					text = var3.allow,
 					variant = buttonVariant.Emphasis,
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: var9 (ref), eventNamesModule (copy), var10 (ref), permissionPromptFinishedModule (copy), p0 (ref)
-						var9.fireEvent(eventNamesModule.CapturePermissionsPromptAccepted)
-						var10(permissionPromptFinishedModule(p0.promptId, true))
-					end, { p0.promptId }),
+						-- upvalues: var1 (ref), eventNamesModule (copy), var2 (ref), permissionPromptFinishedModule (copy), p1 (ref)
+						var1.fireEvent(eventNamesModule.CapturePermissionsPromptAccepted)
+						var2(permissionPromptFinishedModule(p1.promptId, true))
+					end, { p1.promptId }),
 					size = inputSize.Small,
 					width = UDim.new(0.45, 0)
 				}),
 				RejectButton = reactModule.createElement(button, {
-					text = var11.dontAllow,
+					text = var3.dontAllow,
 					variant = buttonVariant.Standard,
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: var9 (ref), eventNamesModule (copy), var10 (ref), permissionPromptFinishedModule (copy), p0 (ref)
-						var9.fireEvent(eventNamesModule.CapturePermissionsPromptRejected)
-						var10(permissionPromptFinishedModule(p0.promptId, false))
-					end, { p0.promptId }),
+						-- upvalues: var1 (ref), eventNamesModule (copy), var2 (ref), permissionPromptFinishedModule (copy), p1 (ref)
+						var1.fireEvent(eventNamesModule.CapturePermissionsPromptRejected)
+						var2(permissionPromptFinishedModule(p1.promptId, false))
+					end, { p1.promptId }),
 					size = inputSize.Small,
 					width = UDim.new(0.45, 0)
 				})

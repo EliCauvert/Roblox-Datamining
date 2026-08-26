@@ -18,52 +18,52 @@ local t = {
 
 return function()
 	-- upvalues: createSignal (ref), createComputed (ref), displayModule (ref), getChatStatusStoreModule (ref), getPresetChatStoreModule (ref), isUserChatEnabledModule (ref), t (ref), list (ref), createEffect (ref), promptsApiModule (ref)
-	local var9, var10 = createSignal(false)
-	local var11, var12 = createSignal(false)
-	local var13, var14 = createSignal(false)
-	local var15 = createComputed(function(p0)
+	local var1, var2 = createSignal(false)
+	local var3, var4 = createSignal(false)
+	local var5, var6 = createSignal(false)
+	local var7 = createComputed(function(p1)
 		-- upvalues: displayModule (copy)
-		return displayModule.GetDisplayStore(p0).getViewportSize(p0).X >= 720
+		return displayModule.GetDisplayStore(p1).getViewportSize(p1).X >= 720
 	end)
-	local var16 = getChatStatusStoreModule(false)
-	local var17 = getPresetChatStoreModule(false)
+	local var8 = getChatStatusStoreModule(false)
+	local var9 = getPresetChatStoreModule(false)
 	local t_1 = {
 		GlobalChatTooltip = function(p1)
-			-- upvalues: isUserChatEnabledModule (copy), var16 (ref), var13 (ref)
-			return isUserChatEnabledModule(var16.getChatStatus(p1)) and var13(p1)
+			-- upvalues: isUserChatEnabledModule (copy), var8 (ref), var5 (ref)
+			return isUserChatEnabledModule(var8.getChatStatus(p1)) and var5(p1)
 		end,
 		PresetChatTooltip = function(value)
-			-- upvalues: var17 (ref)
-			return var17.getIsEnabled(value) and var17.getAccessLevel(value) == "Enabled"
+			-- upvalues: var9 (ref)
+			return var9.getIsEnabled(value) and var9.getAccessLevel(value) == "Enabled"
 		end
 	}
 	local t_2 = {}
 	
-	local function ensureTooltip(p2)
+	local function ensureTooltip(p1)
 		-- upvalues: t_2 (ref), createSignal (copy), t (copy), createComputed (copy)
-		local var23 = t_2[p2]
+		local var10 = t_2[p1]
 		
-		if var23 then
-			return var23
+		if var10 then
+			return var10
 		end
-		local var24, var25 = createSignal(t)
+		local var11, var12 = createSignal(t)
 		local t_1 = {
-			getEntry = var24,
-			setEntry = var25,
-			getIsEligible = createComputed(function(p3)
-				-- upvalues: var24 (ref)
-				return var24(p3).isEligible
+			getEntry = var11,
+			setEntry = var12,
+			getIsEligible = createComputed(function(p2)
+				-- upvalues: var11 (ref)
+				return var11(p2).isEligible
 			end),
-			getIsDismissed = createComputed(function(p4)
-				-- upvalues: var24 (ref)
-				return var24(p4).isDismissed
+			getIsDismissed = createComputed(function(p2)
+				-- upvalues: var11 (ref)
+				return var11(p2).isDismissed
 			end),
-			getShouldShow = createComputed(function(p5)
-				-- upvalues: var24 (ref)
-				return var24(p5).shouldShow
+			getShouldShow = createComputed(function(p2)
+				-- upvalues: var11 (ref)
+				return var11(p2).shouldShow
 			end)
 		}
-		t_2[p2] = t_1
+		t_2[p1] = t_1
 		
 		return t_1
 	end
@@ -71,152 +71,152 @@ return function()
 	for i, v in list do
 		ensureTooltip(v)
 	end
-	local function _(value, p6, p7)
+	local function _(value, p1, p2)
 		-- upvalues: ensureTooltip (ref)
-		ensureTooltip(value).setEntry(function(p8)
-			-- upvalues: p6 (ref), p7 (ref)
-			if p8[p6] == p7 then
-				return p8
+		ensureTooltip(value).setEntry(function(p3)
+			-- upvalues: p1 (ref), p2 (ref)
+			if p3[p1] == p2 then
+				return p3
 			end
-			local cloned = table.clone(p8)
-			cloned[p6] = p7
+			local cloned = table.clone(p3)
+			cloned[p1] = p2
 			
 			return cloned
 		end)
 	end
 	
-	local _ = function(p9, p10)
+	local _ = function(p1, p2)
 		-- upvalues: t_1 (ref), t_2 (ref)
-		local var28 = t_1[p10]
+		local var10 = t_1[p2]
 		
-		if var28 ~= nil and not var28(p9) then
+		if var10 ~= nil and not var10(p1) then
 			return false
 		end
-		local var29 = t_2[p10]
+		local var11 = t_2[p2]
 		
-		if var29 == nil then
+		if var11 == nil then
 			return false
 		end
-		local entry = var29.getEntry(p9)
+		local entry = var11.getEntry(p1)
 		
 		return entry.isEligible and not entry.isDismissed
 	end
 	
-	local var21, var22 = createSignal(nil)
+	local var10, var11 = createSignal(nil)
 	
 	return {
-		getIsChatWindowOpen = var9,
-		setIsChatWindowOpen = var10,
-		getIsChatInputBarVisible = var11,
-		setIsChatInputBarVisible = var12,
-		getIsScreenWideEnough = var15,
-		setIsGlobalChatAvailable = var14,
-		getActiveTooltipKey = var21,
-		getIsEligible = function(p11)
+		getIsChatWindowOpen = var1,
+		setIsChatWindowOpen = var2,
+		getIsChatInputBarVisible = var3,
+		setIsChatInputBarVisible = var4,
+		getIsScreenWideEnough = var7,
+		setIsGlobalChatAvailable = var6,
+		getActiveTooltipKey = var10,
+		getIsEligible = function(p1)
 			-- upvalues: ensureTooltip (ref)
-			return ensureTooltip(p11).getIsEligible
+			return ensureTooltip(p1).getIsEligible
 		end,
-		setIsEligible = function(value, p12)
+		setIsEligible = function(value, p1)
 			-- upvalues: ensureTooltip (ref)
-			local var31 = "isEligible"
-			ensureTooltip(value).setEntry(function(p13)
-				-- upvalues: var31 (ref), p12 (ref)
-				if p13[var31] == p12 then
-					return p13
+			local var12 = "isEligible"
+			ensureTooltip(value).setEntry(function(p2)
+				-- upvalues: var12 (ref), p1 (ref)
+				if p2[var12] == p1 then
+					return p2
 				end
-				local cloned = table.clone(p13)
-				cloned[var31] = p12
+				local cloned = table.clone(p2)
+				cloned[var12] = p1
 				
 				return cloned
 			end)
 		end,
-		getIsDismissed = function(p14)
+		getIsDismissed = function(p1)
 			-- upvalues: ensureTooltip (ref)
-			return ensureTooltip(p14).getIsDismissed
+			return ensureTooltip(p1).getIsDismissed
 		end,
-		setIsDismissed = function(value, p15)
+		setIsDismissed = function(value, p1)
 			-- upvalues: ensureTooltip (ref)
-			local var32 = "isDismissed"
-			ensureTooltip(value).setEntry(function(p16)
-				-- upvalues: var32 (ref), p15 (ref)
-				if p16[var32] == p15 then
-					return p16
+			local var12 = "isDismissed"
+			ensureTooltip(value).setEntry(function(p2)
+				-- upvalues: var12 (ref), p1 (ref)
+				if p2[var12] == p1 then
+					return p2
 				end
-				local cloned = table.clone(p16)
-				cloned[var32] = p15
+				local cloned = table.clone(p2)
+				cloned[var12] = p1
 				
 				return cloned
 			end)
 		end,
-		getShouldShow = function(p17)
+		getShouldShow = function(p1)
 			-- upvalues: ensureTooltip (ref)
-			return ensureTooltip(p17).getShouldShow
+			return ensureTooltip(p1).getShouldShow
 		end,
-		setShouldShow = function(value, p18)
+		setShouldShow = function(value, p1)
 			-- upvalues: ensureTooltip (ref)
-			local var33 = "shouldShow"
-			ensureTooltip(value).setEntry(function(p19)
-				-- upvalues: var33 (ref), p18 (ref)
-				if p19[var33] == p18 then
-					return p19
+			local var12 = "shouldShow"
+			ensureTooltip(value).setEntry(function(p2)
+				-- upvalues: var12 (ref), p1 (ref)
+				if p2[var12] == p1 then
+					return p2
 				end
-				local cloned = table.clone(p19)
-				cloned[var33] = p18
+				local cloned = table.clone(p2)
+				cloned[var12] = p1
 				
 				return cloned
 			end)
 		end,
-		reportImpression = function(p20)
+		reportImpression = function(p1)
 			-- upvalues: promptsApiModule (copy)
-			promptsApiModule.reportImpression(p20)
+			promptsApiModule.reportImpression(p1)
 		end,
-		activeTooltipKeyEffect = createEffect(function(p21)
-			-- upvalues: var21 (ref), t_1 (ref), t_2 (ref), list (copy), var22 (ref)
-			local var34 = var21(false)
+		activeTooltipKeyEffect = createEffect(function(p1)
+			-- upvalues: var10 (ref), t_1 (ref), t_2 (ref), list (copy), var11 (ref)
+			local var12 = var10(false)
 			
-			if var34 ~= nil then
-				local var36
-				local var35 = t_1[var34]
+			if var12 ~= nil then
+				local var13
+				local var14 = t_1[var12]
 				
-				if var35 == nil or var35(p21) then
-					local var37 = t_2[var34]
+				if var14 == nil or var14(p1) then
+					local var15 = t_2[var12]
 					
-					if var37 == nil then
-						var36 = false
+					if var15 == nil then
+						var13 = false
 					else
-						local entry = var37.getEntry(p21)
-						var36 = entry.isEligible and not entry.isDismissed
+						local entry = var15.getEntry(p1)
+						var13 = entry.isEligible and not entry.isDismissed
 					end
 				else
-					var36 = false
+					var13 = false
 				end
-				if var36 then return end
+				if var13 then return end
 			end
 			for i, v in list do
-				local var40
-				local var39 = t_1[v]
+				local var16
+				local var17 = t_1[v]
 				
-				if var39 == nil or var39(p21) then
-					local var41 = t_2[v]
+				if var17 == nil or var17(p1) then
+					local var18 = t_2[v]
 					
-					if var41 == nil then
-						var40 = false
+					if var18 == nil then
+						var16 = false
 					else
-						local entry = var41.getEntry(p21)
-						var40 = entry.isEligible and not entry.isDismissed
+						local entry = var18.getEntry(p1)
+						var16 = entry.isEligible and not entry.isDismissed
 					end
 				else
-					var40 = false
+					var16 = false
 				end
-				if var40 then
-					if var34 ~= v then
-						var22(v)
+				if var16 then
+					if var12 ~= v then
+						var11(v)
 					end
 					return
 				end
 			end
-			if var34 ~= nil then
-				var22(nil)
+			if var12 ~= nil then
+				var11(nil)
 			end
 		end)
 	}

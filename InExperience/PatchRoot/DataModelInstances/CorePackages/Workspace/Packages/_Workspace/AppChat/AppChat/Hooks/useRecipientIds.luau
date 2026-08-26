@@ -1,16 +1,16 @@
 ﻿local useSelector = require(script:FindFirstAncestor("AppChat").Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSelector (ref)
-	local var0 = useSelector(function(p1)
-		return tonumber(p1.LocalUserId)
+	local var1 = useSelector(function(p2)
+		return tonumber(p2.LocalUserId)
 	end)
 	local t = {}
 	
-	for i, v in if p0 then p0.participants else {} do
+	for i, v in if p1 then p1.participants else {} do
 		local var2 = tonumber(v)
 		
-		if var2 and var2 ~= var0 then
+		if var2 and var2 ~= var1 then
 			table.insert(t, var2)
 		end
 	end

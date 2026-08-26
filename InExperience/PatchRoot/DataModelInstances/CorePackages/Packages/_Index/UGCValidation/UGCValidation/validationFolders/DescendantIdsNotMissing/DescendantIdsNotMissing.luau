@@ -8,12 +8,12 @@ local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.ge
 local getFFlagUGCValidateCheckDescendantIdsLoadableModule = require(parent.flags.getFFlagUGCValidateCheckDescendantIdsLoadable)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: constantsModule (ref)
-	local className = constantsModule.CONTENT_ID_EDITABLE_PROPERTY[p0.ClassName]
-	local var7 = className and className[p1]
+	local className = constantsModule.CONTENT_ID_EDITABLE_PROPERTY[p1.ClassName]
+	local var1 = className and className[p2]
 	
-	return if var7 then p0[var7].SourceType == Enum.ContentSourceType.Object else false
+	return if var1 then p1[var1].SourceType == Enum.ContentSourceType.Object else false
 end
 
 return {
@@ -25,12 +25,12 @@ return {
 	},
 	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
 	expectedFailures = {},
-	run = function(p2, p3)
+	run = function(p1, p2)
 		-- upvalues: validationEnumsModule (ref), constantsModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), getFFlagUGCValidateCheckDescendantIdsLoadableModule (ref), UGCValidationService (ref)
-		local var8 = p3.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
+		local var1 = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
 		local t = {}
 		
-		for i, v in p3.contentIds do
+		for i, v in p2.contentIds do
 			for i_1, v_1 in v do
 				local instance = t[v_1.instance]
 				
@@ -42,8 +42,8 @@ return {
 			end
 		end
 		local v_2, ok
-		local descendants = p3.rootInstance:GetDescendants()
-		table.insert(descendants, p3.rootInstance)
+		local descendants = p2.rootInstance:GetDescendants()
+		table.insert(descendants, p2.rootInstance)
 		
 		for i_1, v_1 in descendants do
 			v_2 = constantsModule.CONTENT_ID_FIELDS[v_1.ClassName]
@@ -55,21 +55,21 @@ return {
 				
 				for i_2, v_3 in v_2 do
 					v_4 = v_1[v_3]
-					local var14 = className ~= nil and className[v_3] == true
+					local var2 = className ~= nil and className[v_3] == true
 					
 					if v_4 == "" then
-						if var14 then
-							if var8 then
+						if var2 then
+							if var1 then
 								local className_1 = constantsModule.CONTENT_ID_EDITABLE_PROPERTY[v_1.ClassName]
-								local var15 = className_1 and className_1[v_3]
+								local var3 = className_1 and className_1[v_3]
 								
-								if not (if not var15 then false else v_1[var15].SourceType == Enum.ContentSourceType.Object) then
-									p2:fail(errorSourceStringsModule.Keys.DescendantIdMissing, { InstanceFullName = v_1:GetFullName(), FieldName = v_3 })
+								if not (if not var3 then false else v_1[var3].SourceType == Enum.ContentSourceType.Object) then
+									p1:fail(errorSourceStringsModule.Keys.DescendantIdMissing, { InstanceFullName = v_1:GetFullName(), FieldName = v_3 })
 								end
 							end
 						end
 					elseif not ok or not ok[v_3] then
-						p2:fail(errorSourceStringsModule.Keys.DescendantIdMalformed, { InstanceFullName = v_1:GetFullName(), FieldName = v_3 })
+						p1:fail(errorSourceStringsModule.Keys.DescendantIdMalformed, { InstanceFullName = v_1:GetFullName(), FieldName = v_3 })
 					end
 				end
 				if getFFlagUGCValidateAllowEmissivesModule() then
@@ -77,33 +77,33 @@ return {
 					
 					if className_1 then
 						for v_3, v_4 in className_1 do
-							local var13 = v_1[v_4]
+							local var4 = v_1[v_4]
 							
-							if var13.SourceType == Enum.ContentSourceType.Uri and var13.Uri ~= "" and (not ok or not ok[v_4]) then
-								p2:fail(errorSourceStringsModule.Keys.DescendantIdMalformed, { InstanceFullName = v_1:GetFullName(), FieldName = v_4 })
+							if var4.SourceType == Enum.ContentSourceType.Uri and var4.Uri ~= "" and (not ok or not ok[v_4]) then
+								p1:fail(errorSourceStringsModule.Keys.DescendantIdMalformed, { InstanceFullName = v_1:GetFullName(), FieldName = v_4 })
 							end
 						end
 					end
 				end
 			end
 		end
-		local var11 = p3.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+		local var5 = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
 		
-		if var11 or getFFlagUGCValidateCheckDescendantIdsLoadableModule() then
-			for i_2, v_2 in p3.contentIds do
-				local var12 = v_2[1]
+		if var5 or getFFlagUGCValidateCheckDescendantIdsLoadableModule() then
+			for i_2, v_2 in p2.contentIds do
+				local var6 = v_2[1]
 				ok, status = pcall(function()
 					-- upvalues: UGCValidationService (copy), i_2 (ref)
 					return UGCValidationService:CanLoadAsset("rbxassetid://" .. i_2)
 				end)
 				
 				if not ok or not status then
-					if var11 then
-						p2:fetchError(string.format("Failed to load asset referenced by %s.%s. Make sure the asset exists and try again.", var12.instance:GetFullName(), var12.fieldName))
+					if var5 then
+						p1:fetchError(string.format("Failed to load asset referenced by %s.%s. Make sure the asset exists and try again.", var6.instance:GetFullName(), var6.fieldName))
 					else
-						p2:fail(errorSourceStringsModule.Keys.AssetDoesNotExist, {
+						p1:fail(errorSourceStringsModule.Keys.AssetDoesNotExist, {
 							AssetId = i_2,
-							InstancePath = var12.instance:GetFullName()
+							InstancePath = var6.instance:GetFullName()
 						})
 					end
 				end

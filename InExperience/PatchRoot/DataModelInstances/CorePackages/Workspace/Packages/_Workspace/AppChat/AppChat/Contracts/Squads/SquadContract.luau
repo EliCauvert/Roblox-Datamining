@@ -29,77 +29,77 @@ local httpService = game:GetService("HttpService")
 local createExperienceInvite = require(parent.Squads.Thunks).CreateExperienceInvite
 
 return {
-	fetchParentChannelDetails = function(p0, p1)
+	fetchParentChannelDetails = function(p1, p2)
 		-- upvalues: fetchLatestConversationDetailsModule (ref)
-		return p0(fetchLatestConversationDetailsModule(p1))
+		return p1(fetchLatestConversationDetailsModule(p2))
 	end,
-	inviteToParentChannel = function(p2, p3, p4)
+	inviteToParentChannel = function(p1, p2, p3)
 		-- upvalues: conversationModule (ref), appChatNetworkingModule (ref), expandToGroupConversationModule (ref)
-		return if p3.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then p2(appChatNetworkingModule.rodux.AddUserToConversation.API(p3.id, p4)):andThen(function()
-			-- upvalues: p3 (ref)
-			return p3.id
-		end) else p2(expandToGroupConversationModule(p3.id, p4)):andThen(function(p5)
-			return p5.id
+		return if p2.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then p1(appChatNetworkingModule.rodux.AddUserToConversation.API(p2.id, p3)):andThen(function()
+			-- upvalues: p2 (ref)
+			return p2.id
+		end) else p1(expandToGroupConversationModule(p2.id, p3)):andThen(function(p4)
+			return p4.id
 		end)
 	end,
 	navigateIntoSquadLobby = navigateIntoSquadLobbyModule,
-	removeUserFromParentChannel = function(p6, p7, p8)
+	removeUserFromParentChannel = function(p1, p2, p3)
 		-- upvalues: appChatNetworkingModule (ref)
-		return p6(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p7, p8))
+		return p1(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p2, p3))
 	end,
 	createConversation = createConversationModule,
 	createFriendConversation = createFriendConversationModule,
-	createExperienceInvite = if fFlagEnableSquadRegroupExperimentation then function(p9, p10, p11)
+	createExperienceInvite = if fFlagEnableSquadRegroupExperimentation then function(p1, p2, p3)
 		-- upvalues: createExperienceInvite (ref)
-		return createExperienceInvite(p9, p10, p11)
+		return createExperienceInvite(p1, p2, p3)
 	end else nil,
 	useGetConversationFromId = useGetConversationFromIdModule,
-	useParentChannelHasGroupUp = function(p12)
+	useParentChannelHasGroupUp = function(p1)
 		-- upvalues: useGetConversationHasGroupUpFromIdModule (ref)
-		return useGetConversationHasGroupUpFromIdModule(p12)
+		return useGetConversationHasGroupUpFromIdModule(p1)
 	end,
-	useParentChannelHasSquadAccess = function(p13)
+	useParentChannelHasSquadAccess = function(p1)
 		-- upvalues: useGetConversationFromIdModule (ref), conversationChannelsModule (ref), useIsUserPendingModule (ref)
-		assert(p13 ~= nil, "Missing parent channel ID")
-		local var20 = useGetConversationFromIdModule(p13) or {}
+		assert(p1 ~= nil, "Missing parent channel ID")
+		local var1 = useGetConversationFromIdModule(p1) or {}
 		
-		return var20.source == "friends" or not useIsUserPendingModule(var20) and not (var20.participantPendingStatus == conversationChannelsModule.UserPendingStatus.Pending)
+		return var1.source == "friends" or not useIsUserPendingModule(var1) and not (var1.participantPendingStatus == conversationChannelsModule.UserPendingStatus.Pending)
 	end,
-	useParentChannelIsPartyVoiceEligible = function(p14)
+	useParentChannelIsPartyVoiceEligible = function(p1)
 		-- upvalues: useGetConversationFromIdModule (ref), moderationType (ref)
-		local var21 = useGetConversationFromIdModule(p14)
+		local var1 = useGetConversationFromIdModule(p1)
 		
-		return if var21 and var21.moderationType ~= nil then var21.moderationType == moderationType.TrustedComms else nil
+		return if var1 and var1.moderationType ~= nil then var1.moderationType == moderationType.TrustedComms else nil
 	end,
-	useParentChannelTitleSelector = function(p15)
+	useParentChannelTitleSelector = function(p1)
 		-- upvalues: useGetConversationFromIdModule (ref), getConversationTitleModule (ref)
-		return getConversationTitleModule(useGetConversationFromIdModule(p15))
+		return getConversationTitleModule(useGetConversationFromIdModule(p1))
 	end,
 	useIsChatEnabled = useIsChatEnabledModule,
 	useIsLoadingChatSettings = function()
 		-- upvalues: useSelector (ref), fFlagReadAppChatFetchingVariable (ref), getDeepValueModule (ref), retrievalStatus (ref)
-		return useSelector(function(p16)
+		return useSelector(function(p1)
 			-- upvalues: fFlagReadAppChatFetchingVariable (copy), getDeepValueModule (copy), retrievalStatus (copy)
-			return if fFlagReadAppChatFetchingVariable then getDeepValueModule(p16, "ChatAppReducer.ChatSettings.retrievalStatus") ~= retrievalStatus.Done else nil
+			return if fFlagReadAppChatFetchingVariable then getDeepValueModule(p1, "ChatAppReducer.ChatSettings.retrievalStatus") ~= retrievalStatus.Done else nil
 		end)
 	end,
 	useIsChatUserMessagesEnabled = useIsChatUserMessagesEnabledModule,
 	shouldShowOSAForConversation = if fFlagAppChatNavigateBackIfOSAUnacknowledged then shouldShowOSAForConversationModule else nil,
-	showGroupOSADialog = if fFlagEnableDialogAfterSquadJoin then function(p17, p18, p19)
+	showGroupOSADialog = if fFlagEnableDialogAfterSquadJoin then function(p1, p2, p3)
 		-- upvalues: getOverlayStoreModule (ref), overlayTypesModule (ref), httpService (ref)
-		local var22 = getOverlayStoreModule(false)
-		var22.showOverlay(overlayTypesModule.GroupOSADialog, {
-			conversationId = p17,
+		local var1 = getOverlayStoreModule(false)
+		var1.showOverlay(overlayTypesModule.GroupOSADialog, {
+			conversationId = p1,
 			impressionId = httpService:GenerateGUID(false),
 			onJoin = function()
-				-- upvalues: var22 (ref), p18 (ref)
-				var22.dismissOverlay()
-				p18()
+				-- upvalues: var1 (ref), p2 (ref)
+				var1.dismissOverlay()
+				p2()
 			end,
 			onDecline = function()
-				-- upvalues: var22 (ref), p19 (ref)
-				var22.dismissOverlay()
-				p19()
+				-- upvalues: var1 (ref), p3 (ref)
+				var1.dismissOverlay()
+				p3()
 			end
 		})
 	end else nil

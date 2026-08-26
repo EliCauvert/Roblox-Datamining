@@ -8,22 +8,22 @@ return function()
 	-- upvalues: signalsModule (ref)
 	local t = {}
 	
-	local function getOrCreateEntry(p0)
+	local function getOrCreateEntry(p1)
 		-- upvalues: t (ref), signalsModule (copy)
-		local var4 = t[p0]
+		local var1 = t[p1]
 		
-		if var4 == nil then
-			local var5, var6 = signalsModule.createSignal(nil)
-			local var7, var8 = signalsModule.createSignal(false)
-			local var9, var10 = signalsModule.createSignal(false)
-			var4 = {
-				metadata = { get = var5, set = var6 },
-				hasShown = { get = var7, set = var8 },
-				primaryHandlerClaimed = { get = var9, set = var10 }
+		if var1 == nil then
+			local var2, var3 = signalsModule.createSignal(nil)
+			local var4, var5 = signalsModule.createSignal(false)
+			local var6, var7 = signalsModule.createSignal(false)
+			var1 = {
+				metadata = { get = var2, set = var3 },
+				hasShown = { get = var4, set = var5 },
+				primaryHandlerClaimed = { get = var6, set = var7 }
 			}
-			t[p0] = var4
+			t[p1] = var1
 		end
-		return var4
+		return var1
 	end
 	
 	return {
@@ -31,36 +31,36 @@ return function()
 			-- upvalues: getOrCreateEntry (ref)
 			return getOrCreateEntry(p1).metadata.get
 		end,
-		setMetadata = function(value, p2)
+		setMetadata = function(value, p1)
 			-- upvalues: getOrCreateEntry (ref)
-			getOrCreateEntry(value).metadata.set(p2)
+			getOrCreateEntry(value).metadata.set(p1)
 		end,
-		getHasShownGetter = function(p3)
+		getHasShownGetter = function(p1)
 			-- upvalues: getOrCreateEntry (ref)
-			return getOrCreateEntry(p3).hasShown.get
+			return getOrCreateEntry(p1).hasShown.get
 		end,
-		setHasShown = function(value, p4)
+		setHasShown = function(value, p1)
 			-- upvalues: getOrCreateEntry (ref)
-			getOrCreateEntry(value).hasShown.set(p4)
+			getOrCreateEntry(value).hasShown.set(p1)
 		end,
-		getPrimaryHandlerClaimedGetter = function(p5)
+		getPrimaryHandlerClaimedGetter = function(p1)
 			-- upvalues: getOrCreateEntry (ref)
-			return getOrCreateEntry(p5).primaryHandlerClaimed.get
+			return getOrCreateEntry(p1).primaryHandlerClaimed.get
 		end,
-		tryClaimPrimaryHandler = function(p6)
+		tryClaimPrimaryHandler = function(p1)
 			-- upvalues: getOrCreateEntry (ref)
-			local var11 = getOrCreateEntry(p6)
+			local var1 = getOrCreateEntry(p1)
 			
-			if var11.primaryHandlerClaimed.get() then
+			if var1.primaryHandlerClaimed.get() then
 				return false
 			end
-			var11.primaryHandlerClaimed.set(true)
+			var1.primaryHandlerClaimed.set(true)
 			
 			return true
 		end,
-		releasePrimaryHandler = function(p7)
+		releasePrimaryHandler = function(p1)
 			-- upvalues: getOrCreateEntry (ref)
-			getOrCreateEntry(p7).primaryHandlerClaimed.set(false)
+			getOrCreateEntry(p1).primaryHandlerClaimed.set(false)
 		end
 	}
 end

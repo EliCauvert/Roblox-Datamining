@@ -8,12 +8,12 @@ local var1 = tModule.strictInterface({
 	pageName = tModule.optional(tModule.string)
 })
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: var1 (ref), flaggedMutedError (ref)
-	local var2, var3 = var1(p1)
+	local var2, var3 = var1(p2)
 	
 	if not var2 then
 		flaggedMutedError("UnlockPlayIntentEventInterface", var3)
 	end
-	p0:sendEventDeferred("PlayButton", "unlockPlayIntent", p1)
+	p1:sendEventDeferred("PlayButton", "unlockPlayIntent", p2)
 end

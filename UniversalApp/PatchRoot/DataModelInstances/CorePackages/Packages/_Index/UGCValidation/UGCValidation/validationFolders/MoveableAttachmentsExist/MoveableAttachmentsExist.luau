@@ -13,17 +13,17 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = r15plusUtilsModule.checkFlagEnabledForAllowHrd,
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: getAllInstancesIsAModule (ref), r15plusUtilsModule (ref), getAllInstancesWithNameModule (ref), errorSourceStringsModule (ref)
-		for i, v in getAllInstancesIsAModule(p1.rootInstance, "MeshPart") do
-			p0:setReportingInstance(v)
+		for i, v in getAllInstancesIsAModule(p2.rootInstance, "MeshPart") do
+			p1:setReportingInstance(v)
 			
 			for i_1, v_1 in r15plusUtilsModule.getNameWhitelistOfClassInSchema(r15plusUtilsModule.getAvatarBoneSchema(v.Name), "Attachment") do
 				if v_1 then
-					local var5 = getAllInstancesWithNameModule(v, i_1)
+					local var1 = getAllInstancesWithNameModule(v, i_1)
 					
-					if #var5 ~= 1 or var5[1].ClassName ~= "Attachment" then
-						p0:fail(errorSourceStringsModule.Keys.MissingRequiredAttachment, { attName = i_1, partName = v.Name })
+					if #var1 ~= 1 or var1[1].ClassName ~= "Attachment" then
+						p1:fail(errorSourceStringsModule.Keys.MissingRequiredAttachment, { attName = i_1, partName = v.Name })
 					end
 				end
 			end

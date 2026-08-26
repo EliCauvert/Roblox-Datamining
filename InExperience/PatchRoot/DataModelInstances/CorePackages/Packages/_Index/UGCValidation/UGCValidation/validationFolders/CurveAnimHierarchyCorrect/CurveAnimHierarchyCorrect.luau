@@ -22,30 +22,30 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFFlagUGCValidateMaxTotalInstancesModule (ref), errorSourceStringsModule (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateDuplicatesInAnimationModule (ref), getFFlagUGCValidateEmotesBonesAllowedModule (ref)
-	for i, v in p1.curveAnimations do
+	for i, v in p2.curveAnimations do
 		local count = #v:GetDescendants()
 		
 		if getFFlagUGCValidateMaxTotalInstancesModule() >= count then
-			local var10 = 0
+			local var1 = 0
 			
 			for i_1, v_1 in v:GetChildren() do
 				if v_1:IsA("Folder") and curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) then
-					var10 += 1
+					var1 += 1
 					
-					if var10 > 1 then
-						p0:fail(errorSourceStringsModule.Keys.CurveAnim_MultipleBodyRoots)
+					if var1 > 1 then
+						p1:fail(errorSourceStringsModule.Keys.CurveAnim_MultipleBodyRoots)
 						
 						return
 					end
 				end
 			end
-			if not getFFlagUGCValidateDuplicatesInAnimationModule() or var10 ~= 0 then
+			if not getFFlagUGCValidateDuplicatesInAnimationModule() or var1 ~= 0 then
 				for i_1, v_1 in v:GetChildren() do
 					if v_1:IsA("MarkerCurve") or v_1:IsA("AnimationRigData") then
 						if getFFlagUGCValidateDuplicatesInAnimationModule() and #v_1:GetChildren() > 0 then
-							p0:fail(errorSourceStringsModule.Keys.CurveAnim_ChildrenOnMarkerOrRig)
+							p1:fail(errorSourceStringsModule.Keys.CurveAnim_ChildrenOnMarkerOrRig)
 							
 							return
 						end
@@ -54,30 +54,30 @@ function t.run(p0, p1)
 						if getFFlagUGCValidateDuplicatesInAnimationModule() then
 							if curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) or getFFlagUGCValidateEmotesBonesAllowedModule() then
 								if not getFFlagUGCValidateEmotesBonesAllowedModule() and not curveAnimationHierarchyUtilsModule.validateCurveAnimationBodyPartFolder(v_1) then
-									p0:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBodyPartHierarchy, { folderName = v_1.Name })
+									p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBodyPartHierarchy, { folderName = v_1.Name })
 									
 									return
 								end
 							end
-							p0:fail(errorSourceStringsModule.Keys.CurveAnim_UnexpectedChild, { childName = v_1.Name })
+							p1:fail(errorSourceStringsModule.Keys.CurveAnim_UnexpectedChild, { childName = v_1.Name })
 							
 							return
 						elseif not getFFlagUGCValidateEmotesBonesAllowedModule() and not curveAnimationHierarchyUtilsModule.validateCurveAnimationBodyPartFolder(v_1) then
-							p0:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBodyPartHierarchy, { folderName = v_1.Name })
+							p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBodyPartHierarchy, { folderName = v_1.Name })
 							
 							return
 						end
 					end
-					p0:fail(errorSourceStringsModule.Keys.CurveAnim_UnexpectedChild, { childName = v_1.Name })
+					p1:fail(errorSourceStringsModule.Keys.CurveAnim_UnexpectedChild, { childName = v_1.Name })
 					
 					return
 				end
 			end
-			p0:fail(errorSourceStringsModule.Keys.CurveAnim_NoBodyRoot)
+			p1:fail(errorSourceStringsModule.Keys.CurveAnim_NoBodyRoot)
 			
 			return
 		end
-		p0:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyDescendants, {
+		p1:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyDescendants, {
 			count = tostring(count),
 			maxAllowed = tostring(getFFlagUGCValidateMaxTotalInstancesModule())
 		})

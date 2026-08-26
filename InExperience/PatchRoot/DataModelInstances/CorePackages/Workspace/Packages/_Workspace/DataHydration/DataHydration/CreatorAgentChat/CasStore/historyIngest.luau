@@ -9,8 +9,8 @@ local t = {
 	state_change = true
 }
 
-local function _(p0)
-	local sequenceId = p0.sequenceId
+local function _(p1)
+	local sequenceId = p1.sequenceId
 	
 	return if typeof(sequenceId) == "number" then sequenceId else nil
 end
@@ -22,37 +22,37 @@ local _ = function(p1)
 	return typeof(sessionUpdate) == "string" and t[sessionUpdate] == true
 end
 
-local function orderHistoryItems(p2)
+local function orderHistoryItems(p1)
 	local t = {}
 	
-	for i, v in p2 do
+	for i, v in p1 do
 		local t_1 = { update = v, originalIndex = i }
 		local sequenceId = v.sequenceId
 		t_1.sequenceId = if typeof(sequenceId) == "number" then sequenceId else nil
 		table.insert(t, t_1)
 	end
-	table.sort(t, function(p3, p4)
-		return if p3.sequenceId == nil or p4.sequenceId == nil then p3.originalIndex < p4.originalIndex else p3.sequenceId < p4.sequenceId
+	table.sort(t, function(p2, p3)
+		return if p2.sequenceId == nil or p3.sequenceId == nil then p2.originalIndex < p3.originalIndex else p2.sequenceId < p3.sequenceId
 	end)
 	
 	return t
 end
 
 return {
-	ingestSessionHistory = function(p5, p6, p7, p8)
+	ingestSessionHistory = function(p2, p3, p4, p5)
 		-- upvalues: orderHistoryItems (ref), t (ref), acpProtocolModule (ref)
-		assert(typeof(p6) == "string" and p6 ~= "", "sessionId is required")
-		local activeTurnInternals = p5.getActiveTurnInternals(p6)
+		assert(typeof(p3) == "string" and p3 ~= "", "sessionId is required")
+		local activeTurnInternals = p2.getActiveTurnInternals(p3)
 		
 		if activeTurnInternals == nil then
 			return {}
 		end
 		local t_1 = {}
 		
-		for i, v in orderHistoryItems(p7) do
+		for i, v in orderHistoryItems(p4) do
 			local sequenceId = v.sequenceId
 			
-			if sequenceId ~= nil and (p8 == nil or p8 < sequenceId) then
+			if sequenceId ~= nil and (p5 == nil or p5 < sequenceId) then
 				local _ = false
 				local sessionUpdate = v.update.sessionUpdate
 				
@@ -60,13 +60,13 @@ return {
 					kind = "notification",
 					notification = {
 						method = acpProtocolModule.Notifications.SessionUpdate,
-						params = { sessionId = p6, update = v.update }
+						params = { sessionId = p3, update = v.update }
 					}
 				}, { sequenceNumber = sequenceId }, false) else activeTurnInternals.noteProcessedSequenceNumber(sequenceId) then
 					table.insert(t_1, sequenceId)
 				end
 				if activeTurnInternals.isDone() then
-					p5.onTurnDone(activeTurnInternals)
+					p2.onTurnDone(activeTurnInternals)
 					
 					return t_1
 				end

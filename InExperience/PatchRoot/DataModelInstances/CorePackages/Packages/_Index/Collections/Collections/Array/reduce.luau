@@ -1,33 +1,33 @@
 ﻿local dEV = _G.__DEV__
 local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: dEV (ref)
 	if dEV then
-		if typeof(p0) ~= "table" then
-			error(string.format("Array.reduce called on %s", typeof(p0)))
+		if typeof(p1) ~= "table" then
+			error(string.format("Array.reduce called on %s", typeof(p1)))
 		end
-		if typeof(p1) ~= "function" then
+		if typeof(p2) ~= "function" then
 			error("callback is not a function")
 		end
 	end
-	local var2
-	local p0Count = #p0
+	local var1
+	local p0Count = #p1
 	local _ = nil
-	local var1 = 1
+	local var2 = 1
 	
-	if p2 == nil then
-		var1 = 2
+	if p3 == nil then
+		var2 = 2
 		
 		if p0Count == 0 then
 			error("reduce of empty array with no initial value")
 		end
-		var2 = p0[1]
+		var1 = p1[1]
 	else
-		var2 = p2
+		var1 = p3
 	end
-	for i = var1, p0Count do
-		var2 = p1(var2, p0[i], i, p0)
+	for i = var2, p0Count do
+		var1 = p2(var1, p1[i], i, p1)
 	end
-	return var2
+	return var1
 end

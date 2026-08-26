@@ -7,24 +7,24 @@ local configModule = require(expChat.Config)
 local presetEntryTextModule = require(expChat.Autocomplete.PresetEntryText)
 local fFlagExpChatPresetChatAutocompleteEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatAutocompleteEnabled)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useCursor (ref), reactModule (ref), configModule (ref), emojiListModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), presetEntryTextModule (ref)
 	return reactModule.createElement("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, configModule.AutocompleteEntryDefaultSizeY),
 		BackgroundTransparency = 1,
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		ZIndex = 2,
-		[reactModule.Event.MouseEnter] = p0.onAutocompleteDropdownHover
+		[reactModule.Event.MouseEnter] = p1.onAutocompleteDropdownHover
 	}, {
 		TextLabelButton = reactModule.createElement("TextButton", {
-			Size = UDim2.new(1, 0, 1, if p0.isDividerVisible then -1 else 0),
-			BackgroundTransparency = p0.setTransparency(if p0.layoutOrder == p0.selectedIndex then configModule.AutocompleteSelectedTransparency else 1, p0.transparencyValue),
-			BackgroundColor3 = if p0.layoutOrder == p0.selectedIndex then configModule.AutocompleteSelectedColor else nil,
+			Size = UDim2.new(1, 0, 1, if p1.isDividerVisible then -1 else 0),
+			BackgroundTransparency = p1.setTransparency(if p1.layoutOrder == p1.selectedIndex then configModule.AutocompleteSelectedTransparency else 1, p1.transparencyValue),
+			BackgroundColor3 = if p1.layoutOrder == p1.selectedIndex then configModule.AutocompleteSelectedColor else nil,
 			SelectionImageObject = useCursor(),
 			Text = "",
 			ZIndex = 3,
-			[reactModule.Event.Activated] = p0.onAutocompleteSelected
+			[reactModule.Event.Activated] = p1.onAutocompleteSelected
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
 				PaddingLeft = UDim.new(0, 15),
@@ -37,25 +37,25 @@ return function(p0)
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			EmojiLabel = p0.autocompleteType == "emojis" and reactModule.createElement("TextLabel", {
+			EmojiLabel = p1.autocompleteType == "emojis" and reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				RichText = true,
 				TextWrapped = true,
 				LayoutOrder = 1,
 				ZIndex = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				FontFace = p0.chatInputBarSettings.FontFace,
+				FontFace = p1.chatInputBarSettings.FontFace,
 				Size = UDim2.new(0, 0, 0, 0),
-				Text = string.format("%s", emojiListModule[p0.result].base),
-				TextColor3 = p0.chatInputBarSettings.TextColor3,
-				TextSize = p0.chatInputBarSettings.TextSize,
-				TextStrokeColor3 = p0.chatInputBarSettings.TextStrokeColor3,
-				TextStrokeTransparency = p0.setTransparency(p0.chatInputBarSettings.TextStrokeTransparency, p0.transparencyValue),
-				TextTransparency = p0.setTransparency(0, p0.transparencyValue),
+				Text = string.format("%s", emojiListModule[p1.result].base),
+				TextColor3 = p1.chatInputBarSettings.TextColor3,
+				TextSize = p1.chatInputBarSettings.TextSize,
+				TextStrokeColor3 = p1.chatInputBarSettings.TextStrokeColor3,
+				TextStrokeTransparency = p1.setTransparency(p1.chatInputBarSettings.TextStrokeTransparency, p1.transparencyValue),
+				TextTransparency = p1.setTransparency(0, p1.transparencyValue),
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top
 			}),
-			SpaceLabel = p0.autocompleteType == "emojis" and reactModule.createElement("TextLabel", {
+			SpaceLabel = p1.autocompleteType == "emojis" and reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				RichText = true,
 				Text = "  ",
@@ -64,12 +64,12 @@ return function(p0)
 				LayoutOrder = 2,
 				ZIndex = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				FontFace = p0.chatInputBarSettings.FontFace,
+				FontFace = p1.chatInputBarSettings.FontFace,
 				Size = UDim2.new(0, 0, 0, 0),
-				TextColor3 = p0.chatInputBarSettings.TextColor3,
-				TextStrokeColor3 = p0.chatInputBarSettings.TextStrokeColor3,
-				TextStrokeTransparency = p0.setTransparency(p0.chatInputBarSettings.TextStrokeTransparency, p0.transparencyValue),
-				TextTransparency = p0.setTransparency(0, p0.transparencyValue),
+				TextColor3 = p1.chatInputBarSettings.TextColor3,
+				TextStrokeColor3 = p1.chatInputBarSettings.TextStrokeColor3,
+				TextStrokeTransparency = p1.setTransparency(p1.chatInputBarSettings.TextStrokeTransparency, p1.transparencyValue),
+				TextTransparency = p1.setTransparency(0, p1.transparencyValue),
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top
 			}),
@@ -80,25 +80,25 @@ return function(p0)
 				LayoutOrder = 3,
 				ZIndex = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				FontFace = p0.chatInputBarSettings.FontFace,
+				FontFace = p1.chatInputBarSettings.FontFace,
 				Size = UDim2.new(0, 0, 0, 0),
-				Text = if fFlagExpChatPresetChatAutocompleteEnabledModule and p0.autocompleteType == "presets" then presetEntryTextModule.decorate(p0.result, p0.chatInputBarSettings.TextSize) else string.format("%s", p0.result),
-				TextColor3 = p0.chatInputBarSettings.TextColor3,
-				TextSize = p0.chatInputBarSettings.TextSize,
-				TextStrokeColor3 = p0.chatInputBarSettings.TextStrokeColor3,
-				TextStrokeTransparency = p0.setTransparency(p0.chatInputBarSettings.TextStrokeTransparency, p0.transparencyValue),
-				TextTransparency = p0.setTransparency(0, p0.transparencyValue),
+				Text = if fFlagExpChatPresetChatAutocompleteEnabledModule and p1.autocompleteType == "presets" then presetEntryTextModule.decorate(p1.result, p1.chatInputBarSettings.TextSize) else string.format("%s", p1.result),
+				TextColor3 = p1.chatInputBarSettings.TextColor3,
+				TextSize = p1.chatInputBarSettings.TextSize,
+				TextStrokeColor3 = p1.chatInputBarSettings.TextStrokeColor3,
+				TextStrokeTransparency = p1.setTransparency(p1.chatInputBarSettings.TextStrokeTransparency, p1.transparencyValue),
+				TextTransparency = p1.setTransparency(0, p1.transparencyValue),
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top
 			})
 		}),
-		Divider = p0.isDividerVisible and reactModule.createElement("Frame", {
+		Divider = p1.isDividerVisible and reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 2,
 			Size = UDim2.new(1, 0, 0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1),
-			BackgroundTransparency = p0.setTransparency(configModule.ChatInputBarBorderTransparency, p0.transparencyValue),
+			BackgroundTransparency = p1.setTransparency(configModule.ChatInputBarBorderTransparency, p1.transparencyValue),
 			BackgroundColor3 = configModule.ChatInputBarBorderColor3
 		}) or nil
 	})

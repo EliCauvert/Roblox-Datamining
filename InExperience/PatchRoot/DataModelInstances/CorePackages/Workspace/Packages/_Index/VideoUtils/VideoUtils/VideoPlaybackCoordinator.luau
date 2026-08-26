@@ -12,7 +12,7 @@ local t = {}
 t.__index = t
 t.preferredFramerateThrottling = false
 t.isSettingFramerateThrottleAllowedByPolicy = false
-local var6 = 0
+local var1 = 0
 
 function t.new()
 	-- upvalues: signal (ref), t (ref)
@@ -30,10 +30,10 @@ function t.new()
 	return t_1
 end
 
-function t.__setRunServiceThrottleFramerateEnabled(_, p0)
+function t.__setRunServiceThrottleFramerateEnabled(_, p1)
 	-- upvalues: t (ref), runService (ref)
 	if t.isSettingFramerateThrottleAllowedByPolicy then
-		runService:setThrottleFramerateEnabled(p0)
+		runService:setThrottleFramerateEnabled(p1)
 		
 		return
 	end
@@ -44,77 +44,77 @@ function t.isPlaybackAllowed(_, p1, p2)
 	return fFlagLuaAppEdpMediaGalleryFullScreen and p2 or not p1
 end
 
-function t:isPlaybackCandidate(p3, p4, p5, p6, p7)
+function t:isPlaybackCandidate(p1, p2, p3, p4, p5)
 	-- upvalues: getIsInstanceVisibleModule (ref)
-	return if self:isPlaybackAllowed(p3, p4) then getIsInstanceVisibleModule(p5.current, p6, p7) else false
+	return if self:isPlaybackAllowed(p1, p2) then getIsInstanceVisibleModule(p3.current, p4, p5) else false
 end
 
-function t:forcePlayback(p8, p9, p10, p11)
-	if self.playingVideoKey == p8 then
+function t:forcePlayback(p1, p2, p3, p4)
+	if self.playingVideoKey == p1 then
 		return
 	end
-	self:__cancelCurrentPlayback(p9, p10, nil, self.videoAnalytics)
-	self:requestPlayback(p8, false, 0, p10, p11)
+	self:__cancelCurrentPlayback(p2, p3, nil, self.videoAnalytics)
+	self:requestPlayback(p1, false, 0, p3, p4)
 end
 
-function t:requestPlayback(p12, p13, p14, p15, p16)
-	if self.playingVideoKey == p12 then return end
-	if self.videoDwellTaskHandles[p12] ~= nil then return end
-	if p13 then
-		self.videoDwellTaskHandles[p12] = task.delay(p14, function()
-			-- upvalues: self (ref), p12 (ref), p15 (ref), p16 (ref)
-			self.videoDwellTaskHandles[p12] = nil
-			self:__startPlayback(p12, p15, p16)
+function t:requestPlayback(p1, p2, p3, p4, p5)
+	if self.playingVideoKey == p1 then return end
+	if self.videoDwellTaskHandles[p1] ~= nil then return end
+	if p2 then
+		self.videoDwellTaskHandles[p1] = task.delay(p3, function()
+			-- upvalues: self (ref), p1 (ref), p4 (ref), p5 (ref)
+			self.videoDwellTaskHandles[p1] = nil
+			self:__startPlayback(p1, p4, p5)
 		end)
 		
 		return
 	end
-	self:__startPlayback(p12, p15, p16)
+	self:__startPlayback(p1, p4, p5)
 end
 
-function t:__startPlayback(p17, p18, p19)
-	-- upvalues: fFlagLuaAppVideoPlaybackRefCount (ref), var6 (write), httpService (ref)
+function t:__startPlayback(p1, p2, p3)
+	-- upvalues: fFlagLuaAppVideoPlaybackRefCount (ref), var1 (write), httpService (ref)
 	self:__setRunServiceThrottleFramerateEnabled(false)
 	
 	if fFlagLuaAppVideoPlaybackRefCount and self.playingVideoKey == nil then
-		var6 += 1
+		var1 += 1
 	end
-	self.playingVideoKey = p17
+	self.playingVideoKey = p1
 	self.currentPlaybackSessionId = httpService:GenerateGUID(false)
 	self.currentPlaybackSessionStartTime = tick()
-	self.videoAnalytics = p19
-	self.playingVideoItemIndex = p18
+	self.videoAnalytics = p3
+	self.playingVideoItemIndex = p2
 	
-	if p19 then
-		p19.reportVideoPlay(p18, self.currentPlaybackSessionId)
+	if p3 then
+		p3.reportVideoPlay(p2, self.currentPlaybackSessionId)
 	end
-	self.changed:fire(p17)
+	self.changed:fire(p1)
 end
 
-function t:cancelPlayback(p20, p21, p22, p23)
-	-- upvalues: fFlagLuaAppVideoPlaybackRefCount (ref), var6 (write), t (ref)
-	local var8
-	if self.playingVideoKey == p20 then
-		self:__cancelCurrentPlayback(p21, p22, nil, p23)
-	elseif self.videoDwellTaskHandles[p20] ~= nil then
-		task.cancel(self.videoDwellTaskHandles[p20])
-		self.videoDwellTaskHandles[p20] = nil
+function t:cancelPlayback(p1, p2, p3, p4)
+	-- upvalues: fFlagLuaAppVideoPlaybackRefCount (ref), var1 (write), t (ref)
+	local var2
+	if self.playingVideoKey == p1 then
+		self:__cancelCurrentPlayback(p2, p3, nil, p4)
+	elseif self.videoDwellTaskHandles[p1] ~= nil then
+		task.cancel(self.videoDwellTaskHandles[p1])
+		self.videoDwellTaskHandles[p1] = nil
 	end
 	if fFlagLuaAppVideoPlaybackRefCount then
-		var8 = var6 == 0
-		var8 = nil
+		var2 = var1 == 0
+		var2 = nil
 	else
-		var8 = self.playingVideoKey == nil
+		var2 = self.playingVideoKey == nil
 	end
-	if var8 then
+	if var2 then
 		self:__setRunServiceThrottleFramerateEnabled(t.preferredFramerateThrottling)
 	end
 end
 
-function t:reset(p24, _, p25, _)
-	-- upvalues: fFlagLuaAppVideoPlaybackRefCount (ref), var6 (write), t (ref)
+function t:reset(p1, _, p2, _)
+	-- upvalues: fFlagLuaAppVideoPlaybackRefCount (ref), var1 (write), t (ref)
 	if self.playingVideoKey ~= nil then
-		self:__cancelCurrentPlayback(p24, self.playingVideoItemIndex, p25, self.videoAnalytics)
+		self:__cancelCurrentPlayback(p1, self.playingVideoItemIndex, p2, self.videoAnalytics)
 	end
 	for i, v in self.videoDwellTaskHandles do
 		if v ~= nil then
@@ -123,22 +123,22 @@ function t:reset(p24, _, p25, _)
 	end
 	self.videoDwellTaskHandles = {}
 	
-	if not fFlagLuaAppVideoPlaybackRefCount or var6 == 0 then
+	if not fFlagLuaAppVideoPlaybackRefCount or var1 == 0 then
 		self:__setRunServiceThrottleFramerateEnabled(t.preferredFramerateThrottling)
 	end
 end
 
-function t:__cancelCurrentPlayback(p26, p27, p28, p29)
-	-- upvalues: argCheckModule (ref), fFlagLuaAppVideoPlaybackRefCount (ref), var6 (write)
+function t:__cancelCurrentPlayback(p3, p4, p5, p6)
+	-- upvalues: argCheckModule (ref), fFlagLuaAppVideoPlaybackRefCount (ref), var1 (write)
 	local currentPlaybackSessionStartTime = self.currentPlaybackSessionStartTime
 	
-	if p29 then
+	if p6 then
 		local currentTime = tick()
 		argCheckModule.assert(currentPlaybackSessionStartTime and currentPlaybackSessionStartTime <= currentTime)
-		p29.reportVideoEnd(p27, p26, self.currentPlaybackSessionId, if currentPlaybackSessionStartTime and currentPlaybackSessionStartTime <= currentTime then currentTime - currentPlaybackSessionStartTime else -1, p28)
+		p6.reportVideoEnd(p4, p3, self.currentPlaybackSessionId, if currentPlaybackSessionStartTime and currentPlaybackSessionStartTime <= currentTime then currentTime - currentPlaybackSessionStartTime else -1, p5)
 	end
 	if fFlagLuaAppVideoPlaybackRefCount and self.playingVideoKey ~= nil then
-		var6 -= 1
+		var1 -= 1
 	end
 	self.playingVideoKey = nil
 	self.currentPlaybackSessionId = nil
@@ -148,20 +148,20 @@ function t:__cancelCurrentPlayback(p26, p27, p28, p29)
 	self.changed:fire(nil)
 end
 
-function t.setIsSettingFramerateThrottleAllowedByPolicy(_, p30)
+function t.setIsSettingFramerateThrottleAllowedByPolicy(_, p3)
 	-- upvalues: t (ref)
-	t.isSettingFramerateThrottleAllowedByPolicy = p30
+	t.isSettingFramerateThrottleAllowedByPolicy = p3
 end
 
-function t.setPreferredFramerateThrottling(_, p31)
+function t.setPreferredFramerateThrottling(_, p3)
 	-- upvalues: t (ref)
-	t.preferredFramerateThrottling = p31
+	t.preferredFramerateThrottling = p3
 end
 
 if fFlagLuaAppVideoPlaybackRefCount then
 	function t.isAnyPlaying()
-		-- upvalues: var6 (write)
-		return var6 > 0
+		-- upvalues: var1 (write)
+		return var1 > 0
 	end
 end
 t.default = t.new()

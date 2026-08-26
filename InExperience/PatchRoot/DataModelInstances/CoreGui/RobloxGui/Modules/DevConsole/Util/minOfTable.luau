@@ -1,13 +1,13 @@
-﻿return function(p0, p1)
+﻿return function(p1, p2)
 	local t = {}
 	
-	for i, v in pairs(p0) do
-		if not p1[i] then
+	for i, v in pairs(p1) do
+		if not p2[i] then
 			error("tables did not have matching indices")
 			
 			return
 		end
-		t[i] = if v < p1[i] then v else p1[i]
+		t[i] = if v < p2[i] then v else p2[i]
 	end
 	return t
 end

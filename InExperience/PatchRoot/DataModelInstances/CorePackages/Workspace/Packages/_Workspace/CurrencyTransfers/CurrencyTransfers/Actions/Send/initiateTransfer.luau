@@ -16,33 +16,33 @@ local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTr
 local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p0)
+return function(p1)
 	-- upvalues: promptStateModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), initiateTransferRequestModule (ref), setTransferPromptStateModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), failureReasonModule (ref), handleTransferBlockModule (ref), transferRetryOriginModule (ref), handleTransferErrorModule (ref)
-	local networkImpl = p0.getNetworkImpl()
-	local setPromptState = p0.setPromptState
-	local setTransferRequestId = p0.setTransferRequestId
-	local setRobuxBalanceAmount = p0.setRobuxBalanceAmount
-	local setBalanceReceivedFromApi = p0.setBalanceReceivedFromApi
-	local setUserRelationshipDetail = p0.setUserRelationshipDetail
-	local setRecipient = p0.setRecipient
-	local setSender = p0.setSender
-	local setMinimumTransferAmount = p0.setMinimumTransferAmount
-	local setMaximumTransferAmount = p0.setMaximumTransferAmount
-	local recipientUserId = p0.getRecipientUserId(false)
+	local networkImpl = p1.getNetworkImpl()
+	local setPromptState = p1.setPromptState
+	local setTransferRequestId = p1.setTransferRequestId
+	local setRobuxBalanceAmount = p1.setRobuxBalanceAmount
+	local setBalanceReceivedFromApi = p1.setBalanceReceivedFromApi
+	local setUserRelationshipDetail = p1.setUserRelationshipDetail
+	local setRecipient = p1.setRecipient
+	local setSender = p1.setSender
+	local setMinimumTransferAmount = p1.setMinimumTransferAmount
+	local setMaximumTransferAmount = p1.setMaximumTransferAmount
+	local recipientUserId = p1.getRecipientUserId(false)
 	setPromptState(promptStateModule.TransferRequested)
 	
 	if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-		logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.initiate_attempted)
+		logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.initiate_attempted)
 	end
 	local t = { recipientId = recipientUserId }
-	local transferOrigination = p0.getTransferOrigination()
+	local transferOrigination = p1.getTransferOrigination()
 	
 	if transferOrigination then
 		t.transferOrigination = transferOrigination
 	end
 	initiateTransferRequestModule(t, nil, networkImpl):andThen(function(p2)
-		-- upvalues: setTransferPromptStateModule (copy), p0 (ref), promptStateModule (copy), setTransferRequestId (ref), setRobuxBalanceAmount (ref), setBalanceReceivedFromApi (ref), setUserRelationshipDetail (ref), setRecipient (ref), setSender (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), setMinimumTransferAmount (ref), setMaximumTransferAmount (ref), logCurrencyTransferCounterModule (copy), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
-		setTransferPromptStateModule(p0, promptStateModule.TransferStarted)
+		-- upvalues: setTransferPromptStateModule (copy), p1 (ref), promptStateModule (copy), setTransferRequestId (ref), setRobuxBalanceAmount (ref), setBalanceReceivedFromApi (ref), setUserRelationshipDetail (ref), setRecipient (ref), setSender (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), setMinimumTransferAmount (ref), setMaximumTransferAmount (ref), logCurrencyTransferCounterModule (copy), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
+		setTransferPromptStateModule(p1, promptStateModule.TransferStarted)
 		
 		if p2 and p2.transferRequestId and p2.robuxTransfer then
 			setTransferRequestId(p2.transferRequestId)
@@ -60,29 +60,29 @@ return function(p0)
 					setMaximumTransferAmount(p2.maximumTransferAmount)
 				end
 			end
-			setTransferPromptStateModule(p0, promptStateModule.TransferInput)
-			logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferInitiateSucceededCounter)
+			setTransferPromptStateModule(p1, promptStateModule.TransferInput)
+			logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferInitiateSucceededCounter)
 			
 			if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-				logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.initiate_succeeded)
+				logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.initiate_succeeded)
 			end
 		end
-	end):catch(function(p1)
-		-- upvalues: logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleTransferBlockModule (copy), transferRetryOriginModule (copy), handleTransferErrorModule (copy)
-		logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferInitiateFailedCounter)
+	end):catch(function(p2)
+		-- upvalues: logCurrencyTransferCounterModule (copy), p1 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleTransferBlockModule (copy), transferRetryOriginModule (copy), handleTransferErrorModule (copy)
+		logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferInitiateFailedCounter)
 		
 		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.initiate_failed)
+			logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.initiate_failed)
 		end
-		if typeof(p1) ~= "table" or not p1.errorMessage then
-			handleTransferErrorModule(p0, nil)
+		if typeof(p2) ~= "table" or not p2.errorMessage then
+			handleTransferErrorModule(p1, nil)
 			
 			return
-		elseif p1.failureReason == failureReasonModule.AmpRecourseAvailable and p1.ampRecourseActions and p1.ampFeatureCheck then
-			handleTransferBlockModule(p0, p1.ampRecourseActions, p1.ampFeatureCheck, transferRetryOriginModule.InitiateTransfer)
+		elseif p2.failureReason == failureReasonModule.AmpRecourseAvailable and p2.ampRecourseActions and p2.ampFeatureCheck then
+			handleTransferBlockModule(p1, p2.ampRecourseActions, p2.ampFeatureCheck, transferRetryOriginModule.InitiateTransfer)
 			
 			return
 		end
-		handleTransferErrorModule(p0, p1)
+		handleTransferErrorModule(p1, p2)
 	end)
 end

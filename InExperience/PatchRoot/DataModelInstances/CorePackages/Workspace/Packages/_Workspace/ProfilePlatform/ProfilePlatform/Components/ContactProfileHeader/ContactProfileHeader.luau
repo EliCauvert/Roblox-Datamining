@@ -13,32 +13,32 @@ local images = UIBloxModule.App.ImageSet.Images
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local horizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), useStyle (ref), useStyleMetadata (ref), reactModule (ref), imageSetLabel (ref), images (ref), loadableImage (ref), constantsModule (ref), horizontalPageMargin (ref), styledTextLabel (ref)
-	local var5 = useLocalization({
+	local var1 = useLocalization({
 		contactsProfileBody = {
 			textKeysModule.ContactsProfileBody,
-			contactName = p0.contactName
+			contactName = p1.contactName
 		},
 		failedMessage = textKeysModule.NoInternet,
 		fromContacts = textKeysModule.FromContacts
 	})
-	local var6 = useStyle()
-	local var7 = useStyleMetadata()
-	local theme = var6.Theme
-	local font = var6.Font
+	local var2 = useStyle()
+	local var3 = useStyleMetadata()
+	local theme = var2.Theme
+	local font = var2.Font
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 400),
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Background = reactModule.createElement(imageSetLabel, {
 			BorderSizePixel = 0,
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 1),
-			Image = images[var6.Theme.PlayerBackgroundDefault.Image],
-			ImageColor3 = if var7 and var7.HasSurfaceOverrides then var6.Theme.BackgroundUIDefault.Color:Lerp(var6.Theme.PlayerBackgroundDefault.Color, var6.Theme.Overlay.Transparency) else nil
+			Image = images[var2.Theme.PlayerBackgroundDefault.Image],
+			ImageColor3 = if var3 and var3.HasSurfaceOverrides then var2.Theme.BackgroundUIDefault.Color:Lerp(var2.Theme.PlayerBackgroundDefault.Color, var2.Theme.Overlay.Transparency) else nil
 		}),
 		AvatarThumbnail = reactModule.createElement(loadableImage, {
 			BackgroundTransparency = 1,
@@ -48,7 +48,7 @@ return function(p0)
 			Position = UDim2.new(0.5, 0, 0.5, -48),
 			Size = UDim2.new(1, -96, 1, -96),
 			ScaleType = Enum.ScaleType.Fit,
-			Image = p0.avatarThumbnailUrl
+			Image = p1.avatarThumbnailUrl
 		}),
 		TopGradient = reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -98,7 +98,7 @@ return function(p0)
 			}),
 			ContactName = reactModule.createElement(styledTextLabel, {
 				layoutOrder = 2,
-				text = p0.contactName,
+				text = p1.contactName,
 				size = UDim2.new(1, 0, 0, 24),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Left,
@@ -114,7 +114,7 @@ return function(p0)
 			FromContacts = reactModule.createElement(styledTextLabel, {
 				layoutOrder = 4,
 				size = UDim2.new(1, 0, 0, 16),
-				text = var5.fromContacts,
+				text = var1.fromContacts,
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Center,

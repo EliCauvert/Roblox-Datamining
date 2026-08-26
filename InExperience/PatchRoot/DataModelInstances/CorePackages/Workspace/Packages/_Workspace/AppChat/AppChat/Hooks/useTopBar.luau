@@ -4,16 +4,16 @@ local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
 
 return function(value)
 	-- upvalues: getTopBarStoreModule (ref), reactModule (ref)
-	local var3 = getTopBarStoreModule(false)
+	local var1 = getTopBarStoreModule(false)
 	
 	return {
-		setScreenTopBar = reactModule.useCallback(function(p0)
-			-- upvalues: var3 (ref), value (ref)
-			var3.setScreenTopBar(value, p0)
+		setScreenTopBar = reactModule.useCallback(function(p1)
+			-- upvalues: var1 (ref), value (ref)
+			var1.setScreenTopBar(value, p1)
 		end, { value }),
 		clearScreenTopBar = reactModule.useCallback(function()
-			-- upvalues: var3 (ref), value (ref)
-			var3.clearScreenTopBar(value)
+			-- upvalues: var1 (ref), value (ref)
+			var1.clearScreenTopBar(value)
 		end, { value })
 	}
 end

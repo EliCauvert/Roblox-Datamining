@@ -14,14 +14,14 @@ local providerContainer = roactUtilsModule.Components.ProviderContainer
 local roactAppPolicy = universalAppPolicyModule.RoactAppPolicy
 local styleProviderWithDefaultTheme = styleModule.StyleProviderWithDefaultTheme
 
-local function reducer(p0)
-	return p0 or {}
+local function reducer(p1)
+	return p1 or {}
 end
 
 return function(p1)
 	-- upvalues: roduxModule (ref), reducer (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), layerCollectorProvider (ref), roactRoduxModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), reactModule (ref), providerContainer (ref)
 	local t = {}
-	local var10 = roduxModule.Store.new(reducer, {}, { roduxModule.thunkMiddleware })
+	local var1 = roduxModule.Store.new(reducer, {}, { roduxModule.thunkMiddleware })
 	table.insert(t, {
 		class = styleProviderWithDefaultTheme,
 		props = { withDarkTheme = true }
@@ -39,7 +39,7 @@ return function(p1)
 	table.insert(t, { class = layerCollectorProvider, props = {} })
 	table.insert(t, {
 		class = roactRoduxModule.StoreProvider,
-		props = { store = var10 }
+		props = { store = var1 }
 	})
 	table.insert(t, {
 		class = roactAppPolicy.Provider,

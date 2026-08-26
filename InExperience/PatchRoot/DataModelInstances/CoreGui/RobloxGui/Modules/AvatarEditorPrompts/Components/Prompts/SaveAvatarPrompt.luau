@@ -25,58 +25,58 @@ saveAvatarPrompt.validateProps = tModule.strictInterface({
 	signalSaveAvatarPermissionDenied = tModule.callback
 })
 
-function saveAvatarPrompt.init(p0)
+function saveAvatarPrompt.init(p1)
 	-- upvalues: roactModule (ref), itemsListModule (ref), humanoidViewportModule (ref)
-	p0.mounted = false
-	p0:setState({
+	p1.mounted = false
+	p1:setState({
 		conformedHumanoidDescription = nil,
 		getConformedDescriptionFailed = false,
 		itemListScrollable = false
 	})
-	p0.middleContentRef = roactModule.createRef()
-	local var13, var14 = roactModule.createBinding(UDim2.new(1, 0, 0, 200))
-	p0.contentSize = var13
-	p0.updateContentSize = var14
+	p1.middleContentRef = roactModule.createRef()
+	local var1, var2 = roactModule.createBinding(UDim2.new(1, 0, 0, 200))
+	p1.contentSize = var1
+	p1.updateContentSize = var2
 	
-	function p0.onAlertSizeChanged(p1)
-		-- upvalues: p0 (ref)
-		local absoluteSize = p1.AbsoluteSize
+	function p0.onAlertSizeChanged(p2)
+		-- upvalues: p1 (ref)
+		local absoluteSize = p2.AbsoluteSize
 		
-		if not p0.middleContentRef:getValue() then return end
-		local y = p0.middleContentRef:getValue().AbsoluteSize.Y
-		local var15 = p0.props.screenSize.Y - 60 - (absoluteSize.Y - y)
-		local var16 = p0.middleContentRef:getValue().AbsoluteSize.X / 2 - 10 + 80
+		if not p1.middleContentRef:getValue() then return end
+		local y = p1.middleContentRef:getValue().AbsoluteSize.Y
+		local var3 = p1.props.screenSize.Y - 60 - (absoluteSize.Y - y)
+		local var4 = p1.middleContentRef:getValue().AbsoluteSize.X / 2 - 10 + 80
 		
-		if var16 < var15 then
-			var15 = var16
+		if var4 < var3 then
+			var3 = var4
 		end
-		if y ~= var15 then
-			p0.updateContentSize(UDim2.new(1, 0, 0, var15))
+		if y ~= var3 then
+			p1.updateContentSize(UDim2.new(1, 0, 0, var3))
 		end
 	end
 	
 	function p0.itemListScrollableUpdated(p2, p3)
-		-- upvalues: p0 (ref)
-		if p3 == p0.contentSize:getValue().Y.Offset then
-			p0:setState({ itemListScrollable = p2 })
+		-- upvalues: p1 (ref)
+		if p3 == p1.contentSize:getValue().Y.Offset then
+			p1:setState({ itemListScrollable = p2 })
 		end
 	end
 	
 	function p0.retryLoadDescription()
-		-- upvalues: p0 (ref)
-		p0:setState({ getConformedDescriptionFailed = false })
-		p0:getConformedHumanoidDescription()
+		-- upvalues: p1 (ref)
+		p1:setState({ getConformedDescriptionFailed = false })
+		p1:getConformedHumanoidDescription()
 	end
 	
 	function p0.renderAlertMiddleContent()
-		-- upvalues: p0 (ref), roactModule (copy), itemsListModule (copy), humanoidViewportModule (copy)
-		local conformedHumanoidDescription = p0.state.conformedHumanoidDescription
-		local getConformedDescriptionFailed = p0.state.getConformedDescriptionFailed
+		-- upvalues: p1 (ref), roactModule (copy), itemsListModule (copy), humanoidViewportModule (copy)
+		local conformedHumanoidDescription = p1.state.conformedHumanoidDescription
+		local getConformedDescriptionFailed = p1.state.getConformedDescriptionFailed
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = p0.contentSize,
-			[roactModule.Ref] = p0.middleContentRef
+			Size = p1.contentSize,
+			[roactModule.Ref] = p1.middleContentRef
 		}, {
 			ItemsListFrame = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -84,9 +84,9 @@ function saveAvatarPrompt.init(p0)
 			}, {
 				ItemsList = roactModule.createElement(itemsListModule, {
 					humanoidDescription = conformedHumanoidDescription,
-					retryLoadDescription = p0.retryLoadDescription,
+					retryLoadDescription = p1.retryLoadDescription,
 					loadingFailed = getConformedDescriptionFailed,
-					itemListScrollableUpdated = p0.itemListScrollableUpdated
+					itemListScrollableUpdated = p1.itemListScrollableUpdated
 				})
 			}),
 			HumanoidViewportFrame = roactModule.createElement("Frame", {
@@ -102,26 +102,26 @@ function saveAvatarPrompt.init(p0)
 				HumanoidViewport = roactModule.createElement(humanoidViewportModule, {
 					humanoidDescription = conformedHumanoidDescription,
 					loadingFailed = getConformedDescriptionFailed,
-					retryLoadDescription = p0.retryLoadDescription,
-					rigType = p0.props.rigType
+					retryLoadDescription = p1.retryLoadDescription,
+					rigType = p1.props.rigType
 				})
 			}),
-			UISizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = p0.contentMaxSize })
+			UISizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = p1.contentMaxSize })
 		})
 	end
 end
 
-function saveAvatarPrompt.render(p4)
+function saveAvatarPrompt.render(p1)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref)
 	return roactModule.createElement(interactiveAlert, {
 		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.SaveAvatarPromptTitle"),
-		bodyText = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.SaveAvatarPromptText", { RBX_NAME = p4.props.gameName }),
+		bodyText = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.SaveAvatarPromptText", { RBX_NAME = p1.props.gameName }),
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
-						onActivated = p4.props.signalSaveAvatarPermissionDenied,
+						onActivated = p1.props.signalSaveAvatarPermissionDenied,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.SaveAvatarPromptNo")
 					}
 				},
@@ -129,76 +129,76 @@ function saveAvatarPrompt.render(p4)
 					isDefaultChild = false,
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = p4.props.performSaveAvatar,
+						onActivated = p1.props.performSaveAvatar,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.SaveAvatarPromptYes")
 					}
 				}
 			}
 		},
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = p4.props.screenSize,
-		middleContent = p4.renderAlertMiddleContent,
-		onAbsoluteSizeChanged = p4.onAlertSizeChanged,
-		isMiddleContentFocusable = p4.state.itemListScrollable
+		screenSize = p1.props.screenSize,
+		middleContent = p1.renderAlertMiddleContent,
+		onAbsoluteSizeChanged = p1.onAlertSizeChanged,
+		isMiddleContentFocusable = p1.state.itemListScrollable
 	})
 end
 
-function saveAvatarPrompt.getConformedHumanoidDescription(p5, p6)
+function saveAvatarPrompt.getConformedHumanoidDescription(p1, p2)
 	-- upvalues: getConformedHumanoidDescriptionModule (ref)
-	getConformedHumanoidDescriptionModule(p6, true):andThen(function(p7)
-		-- upvalues: p5 (ref)
-		if p5.mounted then
-			p5:setState({ conformedHumanoidDescription = p7 })
+	getConformedHumanoidDescriptionModule(p2, true):andThen(function(p3)
+		-- upvalues: p1 (ref)
+		if p1.mounted then
+			p1:setState({ conformedHumanoidDescription = p3 })
 			
 			return
 		end
 	end, function(_)
-		-- upvalues: p5 (ref)
-		if p5.mounted then
-			p5:setState({ getConformedDescriptionFailed = true })
+		-- upvalues: p1 (ref)
+		if p1.mounted then
+			p1:setState({ getConformedDescriptionFailed = true })
 			
 			return
 		end
 	end)
 end
 
-function saveAvatarPrompt.didMount(p8)
-	p8.mounted = true
-	p8:getConformedHumanoidDescription(p8.props.humanoidDescription)
+function saveAvatarPrompt.didMount(p1)
+	p1.mounted = true
+	p1:getConformedHumanoidDescription(p1.props.humanoidDescription)
 end
 
-function saveAvatarPrompt.didUpdate(p9, p10, _)
+function saveAvatarPrompt.didUpdate(p1, p2, _)
 	-- upvalues: roactModule (ref)
-	if p9.props.humanoidDescription ~= p10.humanoidDescription then
-		p9:setState({
+	if p1.props.humanoidDescription ~= p2.humanoidDescription then
+		p1:setState({
 			getConformedDescriptionFailed = false,
 			conformedHumanoidDescription = roactModule.None
 		})
-		p9:getConformedHumanoidDescription(p9.props.humanoidDescription)
+		p1:getConformedHumanoidDescription(p1.props.humanoidDescription)
 	end
 end
 
-function saveAvatarPrompt.willUnmount(p11)
-	p11.mounted = false
+function saveAvatarPrompt.willUnmount(p1)
+	p1.mounted = false
 end
 
-return roactRoduxModule.connect(function(p12)
+return roactRoduxModule.connect(function(p1)
 	return {
-		gameName = p12.gameName,
-		screenSize = p12.screenSize,
-		humanoidDescription = p12.promptInfo.humanoidDescription,
-		rigType = p12.promptInfo.rigType
+		gameName = p1.gameName,
+		screenSize = p1.screenSize,
+		humanoidDescription = p1.promptInfo.humanoidDescription,
+		rigType = p1.promptInfo.rigType
 	}
-end, function(p13)
+end, function(p1)
 	-- upvalues: signalSaveAvatarPermissionDeniedModule (ref), performSaveAvatarModule (ref)
 	return {
 		signalSaveAvatarPermissionDenied = function()
-			-- upvalues: p13 (ref), signalSaveAvatarPermissionDeniedModule (copy)
-			return p13(signalSaveAvatarPermissionDeniedModule)
+			-- upvalues: p1 (ref), signalSaveAvatarPermissionDeniedModule (copy)
+			return p1(signalSaveAvatarPermissionDeniedModule)
 		end,
 		performSaveAvatar = function()
-			-- upvalues: p13 (ref), performSaveAvatarModule (copy)
-			return p13(performSaveAvatarModule)
+			-- upvalues: p1 (ref), performSaveAvatarModule (copy)
+			return p1(performSaveAvatarModule)
 		end
 	}
 end)(saveAvatarPrompt)

@@ -14,20 +14,20 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), searchEmptyStateModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), searchBarContainerModule (ref), headerBar (ref), refreshScrollingFrame (ref)
-	local var7 = reactModule.createElement(view, {
+	local var1 = reactModule.createElement(view, {
 		tag = "composition-content-body col size-full-0 auto-y",
 		testId = "SearchPage.ContentBody"
-	}, if p0.showEmptyState then {
+	}, if p1.showEmptyState then {
 		EmptyState = reactModule.createElement(searchEmptyStateModule, { testId = "SearchPage.EmptyState" })
 	} else {
 		Content = reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y",
 			testId = "SearchPage.Content"
-		}, p0.children)
+		}, p1.children)
 	})
-	local var8 = reactModule.createElement(view, {
+	local var2 = reactModule.createElement(view, {
 		tag = "composition-content-body row align-y-center gap-small size-full",
 		testId = "SearchPage.SearchBarContentBody"
 	}, {
@@ -36,12 +36,12 @@ return function(p0)
 			isCircular = true,
 			testId = "SearchPage.Back",
 			icon = iconName.ChevronLargeLeft,
-			onActivated = p0.onBack,
+			onActivated = p1.onBack,
 			size = inputSize.Large,
 			variant = buttonVariant.Utility
 		}),
 		Search = reactModule.createElement(view, { LayoutOrder = 2, tag = "fill auto-y" }, {
-			SearchBar = reactModule.createElement(searchBarContainerModule, p0.searchBarProps)
+			SearchBar = reactModule.createElement(searchBarContainerModule, p1.searchBarProps)
 		})
 	})
 	
@@ -51,22 +51,22 @@ return function(p0)
 				Layout = if fFlagBuildDesktopReadinessModule then reactModule.createElement(view, {
 					tag = "composition-layout-detail size-full",
 					testId = "SearchPage.SearchBarLayout"
-				}, { ContentBody = var8 }) else var8
+				}, { ContentBody = var2 }) else var2
 			})
 		}),
 		Results = reactModule.createElement(refreshScrollingFrame, {
 			usesBuilderIcon = true,
-			createFooter = p0.createFooter,
-			onCanvasPositionChangedCallback = p0.onCanvasPositionChangedCallback,
-			onCanvasSizeChangedCallback = p0.onCanvasSizeChangedCallback,
-			ref = p0.scrollingFrameRef,
-			refresh = p0.refresh,
-			scrollingElementProps = p0.scrollingElementProps
+			createFooter = p1.createFooter,
+			onCanvasPositionChangedCallback = p1.onCanvasPositionChangedCallback,
+			onCanvasSizeChangedCallback = p1.onCanvasSizeChangedCallback,
+			ref = p1.scrollingFrameRef,
+			refresh = p1.refresh,
+			scrollingElementProps = p1.scrollingElementProps
 		}, if fFlagBuildDesktopReadinessModule then {
 			ContentLayout = reactModule.createElement(view, {
 				tag = "composition-layout-detail size-full-0 auto-y",
 				testId = "SearchPage.ContentLayout"
-			}, { ContentBody = var7 })
-		} else { ContentBody = var7 })
+			}, { ContentBody = var1 })
+		} else { ContentBody = var1 })
 	})
 end

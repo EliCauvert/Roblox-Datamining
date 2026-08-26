@@ -12,57 +12,57 @@ local useEffect = reactModule.useEffect
 
 return function(value)
 	-- upvalues: useCurrentCameraModule (ref), sceneAnalysisContextModule (ref), useCameraStateModule (ref), useCallback (ref), getSourceAssetsInView (ref), getSourceAssetsInRange (ref), useEffect (ref), sceneUnderstandingModule (ref), enumsModule (ref)
-	local var7 = useCurrentCameraModule()
-	local var8 = sceneAnalysisContextModule.use()
-	local var9 = useCameraStateModule(var7)
-	local var10 = useCallback(function(p0, p1)
-		if #p1 ~= #p0 then
+	local var1 = useCurrentCameraModule()
+	local var2 = sceneAnalysisContextModule.use()
+	local var3 = useCameraStateModule(var1)
+	local var4 = useCallback(function(p1, p2)
+		if #p2 ~= #p1 then
 			return true
 		end
-		for i, v in p0 do
-			if not table.find(p1, v) then
+		for i, v in p1 do
+			if not table.find(p2, v) then
 				return true
 			end
 		end
 		return false
 	end, {})
-	local var11 = useCallback(function()
-		-- upvalues: getSourceAssetsInView (copy), var7 (ref), value (ref), var8 (ref), var10 (ref), getSourceAssetsInRange (copy)
-		local var12 = getSourceAssetsInView(var7, if value then value.viewportQueryOptions else nil)
-		var8.setAssetsInView(function(p2)
-			-- upvalues: var10 (copy), var12 (ref)
-			return if var10(p2, var12) then var12 else p2
+	local var5 = useCallback(function()
+		-- upvalues: getSourceAssetsInView (copy), var1 (ref), value (ref), var2 (ref), var4 (ref), getSourceAssetsInRange (copy)
+		local var6 = getSourceAssetsInView(var1, if value then value.viewportQueryOptions else nil)
+		var2.setAssetsInView(function(p3)
+			-- upvalues: var4 (copy), var6 (ref)
+			return if var4(p3, var6) then var6 else p3
 		end)
-		local var13 = getSourceAssetsInRange(var7.CFrame.Position, if value then value.rangeQueryOptions else nil)
-		var8.setAssetsInRange(function(p3)
-			-- upvalues: var10 (copy), var13 (ref)
-			return if var10(p3, var13) then var13 else p3
+		local var7 = getSourceAssetsInRange(var1.CFrame.Position, if value then value.rangeQueryOptions else nil)
+		var2.setAssetsInRange(function(p3)
+			-- upvalues: var4 (copy), var7 (ref)
+			return if var4(p3, var7) then var7 else p3
 		end)
-	end, { var7, value, var8 })
+	end, { var1, value, var2 })
 	useEffect(function()
-		-- upvalues: sceneUnderstandingModule (copy), var11 (ref)
-		local descendantAddedConnection = workspace.DescendantAdded:Connect(function(p4)
-			-- upvalues: sceneUnderstandingModule (copy), var11 (copy)
-			if sceneUnderstandingModule.isSourceAsset(p4) then
-				var11()
+		-- upvalues: sceneUnderstandingModule (copy), var5 (ref)
+		local descendantAddedConnection = workspace.DescendantAdded:Connect(function(p3)
+			-- upvalues: sceneUnderstandingModule (copy), var5 (copy)
+			if sceneUnderstandingModule.isSourceAsset(p3) then
+				var5()
 			end
 		end)
-		var11()
+		var5()
 		
 		return function()
 			-- upvalues: descendantAddedConnection (ref)
 			descendantAddedConnection:Disconnect()
 		end
-	end, { var11 })
+	end, { var5 })
 	useEffect(function()
-		-- upvalues: var9 (ref), enumsModule (copy), var11 (ref)
-		if var9 == enumsModule.CameraState.Idle then
-			var11()
+		-- upvalues: var3 (ref), enumsModule (copy), var5 (ref)
+		if var3 == enumsModule.CameraState.Idle then
+			var5()
 		end
-	end, { var9 })
+	end, { var3 })
 	
 	return {
-		assetsInRange = var8.assetsInRange,
-		assetsInView = var8.assetsInView
+		assetsInRange = var2.assetsInRange,
+		assetsInView = var2.assetsInView
 	}
 end

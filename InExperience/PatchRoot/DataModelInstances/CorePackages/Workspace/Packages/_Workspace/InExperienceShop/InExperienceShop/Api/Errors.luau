@@ -1,32 +1,32 @@
 ﻿local promiseModule = require(script:FindFirstAncestor("InExperienceShop").Parent.Promise)
 
 return {
-	networkError = function(p0, p1)
-		return { kind = "Network", message = p0, cause = p1 }
+	networkError = function(p1, p2)
+		return { kind = "Network", message = p1, cause = p2 }
 	end,
-	parseError = function(p2, p3)
-		return { kind = "Parse", message = p2, cause = p3 }
+	parseError = function(p1, p2)
+		return { kind = "Parse", message = p1, cause = p2 }
 	end,
-	schemaError = function(p4, p5)
-		return { kind = "Schema", message = p4, cause = p5 }
+	schemaError = function(p1, p2)
+		return { kind = "Schema", message = p1, cause = p2 }
 	end,
-	engineError = function(p6, p7)
-		return { kind = "Engine", message = p6, cause = p7 }
+	engineError = function(p1, p2)
+		return { kind = "Engine", message = p1, cause = p2 }
 	end,
-	rejectNetwork = function(p8, p9)
+	rejectNetwork = function(p1, p2)
 		-- upvalues: promiseModule (ref)
-		return promiseModule.reject({ kind = "Network", message = p8, cause = p9 })
+		return promiseModule.reject({ kind = "Network", message = p1, cause = p2 })
 	end,
-	rejectParse = function(p10, p11)
+	rejectParse = function(p1, p2)
 		-- upvalues: promiseModule (ref)
-		return promiseModule.reject({ kind = "Parse", message = p10, cause = p11 })
+		return promiseModule.reject({ kind = "Parse", message = p1, cause = p2 })
 	end,
-	rejectSchema = function(p12, p13)
+	rejectSchema = function(p1, p2)
 		-- upvalues: promiseModule (ref)
-		return promiseModule.reject({ kind = "Schema", message = p12, cause = p13 })
+		return promiseModule.reject({ kind = "Schema", message = p1, cause = p2 })
 	end,
-	rejectEngine = function(p14, p15)
+	rejectEngine = function(p1, p2)
 		-- upvalues: promiseModule (ref)
-		return promiseModule.reject({ kind = "Engine", message = p14, cause = p15 })
+		return promiseModule.reject({ kind = "Engine", message = p1, cause = p2 })
 	end
 }

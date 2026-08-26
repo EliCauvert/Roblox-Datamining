@@ -1,6 +1,6 @@
 ﻿local assets = require(script:FindFirstAncestor("Foundation").Parent.FoundationCloudAssets).Assets
 
-return function(p0)
+return function(p1)
 	-- upvalues: assets (ref)
-	return assets[p0] ~= nil
+	return assets[p1] ~= nil
 end

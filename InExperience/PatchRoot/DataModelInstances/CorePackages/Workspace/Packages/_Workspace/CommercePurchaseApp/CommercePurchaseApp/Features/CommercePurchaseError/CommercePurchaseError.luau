@@ -26,23 +26,23 @@ local t_1 = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useScreenSize (ref), useLocalization (ref), fFlagAddCommerceErrorsModule (ref), t_1 (ref), t (ref), reactModule (ref), interactiveAlert (ref), images (ref)
-	local var7 = useLocalization({
+	local var1 = useLocalization({
 		dismissCTA = "CoreScripts.CommercePurchasePrompt.ErrorPrompt.DismissCTA",
-		title = if fFlagAddCommerceErrorsModule then t_1[p0.errorCode].title else "CoreScripts.CommercePurchasePrompt.ErrorPrompt.CantBuy",
-		errorReason = if fFlagAddCommerceErrorsModule then t_1[p0.errorCode].reason else t[p0.errorCode]
+		title = if fFlagAddCommerceErrorsModule then t_1[p1.errorCode].title else "CoreScripts.CommercePurchasePrompt.ErrorPrompt.CantBuy",
+		errorReason = if fFlagAddCommerceErrorsModule then t_1[p1.errorCode].reason else t[p1.errorCode]
 	})
 	
 	return reactModule.createElement(interactiveAlert, {
-		title = var7.title,
+		title = var1.title,
 		titleIcon = images["icons/status/error_large"],
-		bodyText = var7.errorReason,
+		bodyText = var1.errorReason,
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
-					props = { onActivated = p0.onDismiss, text = var7.dismissCTA }
+					props = { onActivated = p1.onDismiss, text = var1.dismissCTA }
 				}
 			}
 		},

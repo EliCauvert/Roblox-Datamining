@@ -19,39 +19,39 @@ local t_1 = {
 	[controlStateModule.Pressed] = "IconDefault"
 }
 
-local function getCellStyle(p0, p1, p2)
+local function getCellStyle(p1, p2, p3)
 	-- upvalues: controlStateModule (ref)
-	local var12 = p0[p1] or p0[controlStateModule.Default]
+	local var1 = p1[p2] or p1[controlStateModule.Default]
 	local t = {
-		Color = p2.Theme[var12].Color,
-		Transparency = p2.Theme[var12].Transparency
+		Color = p3.Theme[var1].Color,
+		Transparency = p3.Theme[var1].Transparency
 	}
 	
-	if p1 == controlStateModule.Default or p1 == controlStateModule.Disabled then
+	if p2 == controlStateModule.Default or p2 == controlStateModule.Disabled then
 		t.Transparency = 1
 	end
 	return t
 end
 
-local function getIconStyle(p3, p4, p5)
+local function getIconStyle(p1, p2, p3)
 	-- upvalues: controlStateModule (ref)
-	local var14 = p3[p4] or p3[controlStateModule.Default]
+	local var1 = p1[p2] or p1[controlStateModule.Default]
 	local t = {
-		Color = p5.Theme[var14].Color,
-		Transparency = p5.Theme[var14].Transparency
+		Color = p3.Theme[var1].Color,
+		Transparency = p3.Theme[var1].Transparency
 	}
 	
-	if p4 == controlStateModule.Disabled or p4 == controlStateModule.Pressed then
+	if p2 == controlStateModule.Disabled or p2 == controlStateModule.Pressed then
 		t.Transparency = 0.5 * t.Transparency + 0.5
 	end
 	return t
 end
 
-local function _(p6, p7)
+local function _(p1, p2)
 	-- upvalues: controlStateModule (ref)
-	local t = { Color = p6.Color, Transparency = p6.Transparency }
+	local t = { Color = p1.Color, Transparency = p1.Transparency }
 	
-	if p7 == controlStateModule.Disabled or p7 == controlStateModule.Pressed then
+	if p2 == controlStateModule.Disabled or p2 == controlStateModule.Pressed then
 		t.Transparency = 0.5 * t.Transparency + 0.5
 	end
 	return t
@@ -77,34 +77,34 @@ genericSelectionCell.validateProps = tModule.strictInterface({
 })
 genericSelectionCell.defaultProps = { isSelected = false }
 
-function genericSelectionCell.init(p8)
+function genericSelectionCell.init(p1)
 	-- upvalues: controlStateModule (ref)
-	p8.state = { controlState = controlStateModule.Default }
+	p1.state = { controlState = controlStateModule.Default }
 	
-	function p8.onStateChanged(_, p9)
-		-- upvalues: p8 (ref)
-		p8:setState({ controlState = p9 })
+	function p8.onStateChanged(_, p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ controlState = p2 })
 	end
 end
 
-function genericSelectionCell.render(p10)
+function genericSelectionCell.render(p1)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), getIconStyle (ref), t_1 (ref), getCellStyle (ref), t (ref), roactModule (ref), genericCellModule (ref), imageSetComponentModule (ref)
-	assert(p10.validateProps(p10.props))
+	assert(p1.validateProps(p1.props))
 	
-	return withStyleModule(function(p11)
-		-- upvalues: p10 (ref), controlStateModule (copy), getIconStyle (copy), t_1 (copy), getCellStyle (copy), t (copy), roactModule (copy), genericCellModule (copy), imageSetComponentModule (copy)
-		local font = p11.Font
-		local theme = p11.Theme
-		local var17 = if p10.props.useDefaultControlState then controlStateModule.Default else p10.state.controlState
-		local var18 = getIconStyle(t_1, var17, p11)
-		local var19 = getCellStyle(t, var17, p11)
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), controlStateModule (copy), getIconStyle (copy), t_1 (copy), getCellStyle (copy), t (copy), roactModule (copy), genericCellModule (copy), imageSetComponentModule (copy)
+		local font = p2.Font
+		local theme = p2.Theme
+		local var1 = if p1.props.useDefaultControlState then controlStateModule.Default else p1.state.controlState
+		local var2 = getIconStyle(t_1, var1, p2)
+		local var3 = getCellStyle(t, var1, p2)
 		local textEmphasis = theme.TextEmphasis
 		local t_2 = {
 			Color = textEmphasis.Color,
 			Transparency = textEmphasis.Transparency
 		}
 		
-		if var17 == controlStateModule.Disabled or var17 == controlStateModule.Pressed then
+		if var1 == controlStateModule.Disabled or var1 == controlStateModule.Pressed then
 			t_2.Transparency = 0.5 * t_2.Transparency + 0.5
 		end
 		local textDefault = theme.TextDefault
@@ -113,61 +113,61 @@ function genericSelectionCell.render(p10)
 			Transparency = textDefault.Transparency
 		}
 		
-		if var17 == controlStateModule.Disabled or var17 == controlStateModule.Pressed then
+		if var1 == controlStateModule.Disabled or var1 == controlStateModule.Pressed then
 			t_3.Transparency = 0.5 * t_3.Transparency + 0.5
 		end
 		return roactModule.createElement(genericCellModule, {
-			titleText = p10.props.text,
-			colorStyle = var19,
+			titleText = p1.props.text,
+			colorStyle = var3,
 			textStyle = t_2,
 			fontStyle = font.Header2,
-			subtitleText = p10.props.subtitleText,
+			subtitleText = p1.props.subtitleText,
 			subtitleTextStyle = t_3,
 			subtitleFontStyle = font.Body,
-			rightContentWidth = p10.props.defaultImageSize,
-			onActivated = p10.props.onActivated,
+			rightContentWidth = p1.props.defaultImageSize,
+			onActivated = p1.props.onActivated,
 			dividerStyle = theme.Divider,
-			isDisabled = p10.props.isDisabled,
-			[roactModule.Ref] = p10.props.controlRef,
-			NextSelectionUp = p10.props.NextSelectionUp,
-			NextSelectionDown = p10.props.NextSelectionDown,
-			NextSelectionLeft = p10.props.NextSelectionLeft,
-			NextSelectionRight = p10.props.NextSelectionRight,
-			SelectionImageObject = p10.props.SelectionImageObject,
+			isDisabled = p1.props.isDisabled,
+			[roactModule.Ref] = p1.props.controlRef,
+			NextSelectionUp = p1.props.NextSelectionUp,
+			NextSelectionDown = p1.props.NextSelectionDown,
+			NextSelectionLeft = p1.props.NextSelectionLeft,
+			NextSelectionRight = p1.props.NextSelectionRight,
+			SelectionImageObject = p1.props.SelectionImageObject,
 			renderRightContent = function()
-				-- upvalues: roactModule (copy), p10 (copy), imageSetComponentModule (copy), var18 (ref)
+				-- upvalues: roactModule (copy), p1 (copy), imageSetComponentModule (copy), var2 (ref)
 				return roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
-					Size = UDim2.new(0, p10.props.defaultImageSize, 1, 0)
+					Size = UDim2.new(0, p1.props.defaultImageSize, 1, 0)
 				}, {
 					SelectionImage = roactModule.createElement(imageSetComponentModule.Label, {
 						BackgroundTransparency = 1,
-						Image = p10.props.defaultImage,
-						Size = UDim2.new(0, p10.props.defaultImageSize, 0, p10.props.defaultImageSize),
-						ImageColor3 = var18.Color,
-						ImageTransparency = var18.Transparency,
+						Image = p1.props.defaultImage,
+						Size = UDim2.new(0, p1.props.defaultImageSize, 0, p1.props.defaultImageSize),
+						ImageColor3 = var2.Color,
+						ImageTransparency = var2.Transparency,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.5, 0, 0.5, 0)
 					}, {
-						SelectedImage = p10.props.isSelected and roactModule.createElement(imageSetComponentModule.Label, {
+						SelectedImage = p1.props.isSelected and roactModule.createElement(imageSetComponentModule.Label, {
 							BackgroundTransparency = 1,
-							Image = p10.props.selectedImage,
-							Size = UDim2.new(0, p10.props.selectedImageSize, 0, p10.props.selectedImageSize),
-							ImageColor3 = var18.Color,
-							ImageTransparency = var18.Transparency,
+							Image = p1.props.selectedImage,
+							Size = UDim2.new(0, p1.props.selectedImageSize, 0, p1.props.selectedImageSize),
+							ImageColor3 = var2.Color,
+							ImageTransparency = var2.Transparency,
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.new(0.5, 0, 0.5, 0)
 						})
 					})
 				})
 			end,
-			onStateChanged = p10.onStateChanged
+			onStateChanged = p1.onStateChanged
 		})
 	end)
 end
 
-return roactModule.forwardRef(function(p12, p13)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), genericSelectionCell (ref), cryoModule (ref)
-	return roactModule.createElement(genericSelectionCell, cryoModule.Dictionary.join(p12, { controlRef = p13 }))
+	return roactModule.createElement(genericSelectionCell, cryoModule.Dictionary.join(p1, { controlRef = p2 }))
 end)

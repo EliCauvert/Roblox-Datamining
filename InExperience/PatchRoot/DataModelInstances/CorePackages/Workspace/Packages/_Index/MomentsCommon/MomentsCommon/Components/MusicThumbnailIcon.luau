@@ -16,21 +16,21 @@ local t_1 = {
 	[musicThumbnailIconSizeModule.Large] = 4
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: getRbxThumb (ref), foundationModule (ref), useImageLoadingStateModule (ref), t (ref), reactModule (ref), image (ref), t_1 (ref), skeleton (ref)
-	local var7 = getRbxThumb(foundationModule.Enums.ThumbnailType.Asset, p0.assetId)
-	local size = t[p0.size]
+	local var1 = getRbxThumb(foundationModule.Enums.ThumbnailType.Asset, p1.assetId)
+	local size = t[p1.size]
 	
 	return reactModule.createElement(image, {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		cornerRadius = UDim.new(0, t_1[p0.size]),
-		Image = var7,
+		cornerRadius = UDim.new(0, t_1[p1.size]),
+		Image = var1,
 		Position = UDim2.fromScale(0.5, 0.5),
 		ScaleType = Enum.ScaleType.Fit,
 		Size = UDim2.fromOffset(size, size)
 	}, {
-		Skeleton = if not useImageLoadingStateModule(var7) then reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1) }) else nil
+		Skeleton = if not useImageLoadingStateModule(var1) then reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1) }) else nil
 	})
 end

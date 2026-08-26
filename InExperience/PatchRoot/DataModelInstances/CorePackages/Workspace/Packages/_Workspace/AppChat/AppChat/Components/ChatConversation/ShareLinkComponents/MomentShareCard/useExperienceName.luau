@@ -5,18 +5,18 @@ local signalsReactModule = require(parent.SignalsReact)
 local gameGetGameInfoStoreModule = require(parent.DataHydration.GameGetGameInfoStore)
 local dataStatus = require(parent.DataHydration).DataStatus
 local fFlagAppChatMomentShareCardLoadingSkeletonsModule = require(appChat.Flags.FFlagAppChatMomentShareCardLoadingSkeletons)
-local var5 = signalsModule.createComputed(function()
+local var1 = signalsModule.createComputed(function()
 	return nil
 end)
 
-return function(p0, p1)
-	-- upvalues: gameGetGameInfoStoreModule (ref), signalsReactModule (ref), var5 (ref), fFlagAppChatMomentShareCardLoadingSkeletonsModule (ref), dataStatus (ref)
-	local var6 = if p0 and p0 ~= 0 then tostring(p0) else nil
-	local var7 = if p1 and var6 then gameGetGameInfoStoreModule(false).getAndFetchGameInfo(var6) else nil
-	local var8 = signalsReactModule.useSignalState(if var7 then var7.data else var5)
+return function(p1, p2)
+	-- upvalues: gameGetGameInfoStoreModule (ref), signalsReactModule (ref), var1 (ref), fFlagAppChatMomentShareCardLoadingSkeletonsModule (ref), dataStatus (ref)
+	local var2 = if p1 and p1 ~= 0 then tostring(p1) else nil
+	local var3 = if p2 and var2 then gameGetGameInfoStoreModule(false).getAndFetchGameInfo(var2) else nil
+	local var4 = signalsReactModule.useSignalState(if var3 then var3.data else var1)
 	
 	return {
-		name = if var8 then var8.name else nil,
-		isLoading = (if fFlagAppChatMomentShareCardLoadingSkeletonsModule then signalsReactModule.useSignalState(if var7 then var7.status else var5) else nil) == dataStatus.NotReady
+		name = if var4 then var4.name else nil,
+		isLoading = (if fFlagAppChatMomentShareCardLoadingSkeletonsModule then signalsReactModule.useSignalState(if var3 then var3.status else var1) else nil) == dataStatus.NotReady
 	}
 end

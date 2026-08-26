@@ -12,9 +12,9 @@ local fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable = require(virtualEvents.
 local images = UIBloxModule.App.ImageSet.Images
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: useLocalization (ref), fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable (ref), useRoactService (ref), roactNetworking (ref), usePlayButtonState (ref), getEventCtaButtonStateModule (ref), reactModule (ref), buttonType (ref), images (ref)
-	local var4 = useLocalization({
+	local var1 = useLocalization({
 		notifyMe = "Feature.VirtualEvents.NotifyMe",
 		unfollowEvent = "Feature.VirtualEvents.UnfollowEvent",
 		joinEvent = "Feature.VirtualEvents.JoinEvent",
@@ -24,66 +24,66 @@ return function(p0, p1, p2, p3)
 	local isJoinEventDisabled = nil
 	
 	if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then
-		local var5 = getEventCtaButtonStateModule(usePlayButtonState(useRoactService(roactNetworking), tostring(p0.universeId)))
-		isJoinEventDisabled = var5.isJoinEventDisabled
-		isRsvpDisabled = var5.isRsvpDisabled
+		local var2 = getEventCtaButtonStateModule(usePlayButtonState(useRoactService(roactNetworking), tostring(p1.universeId)))
+		isJoinEventDisabled = var2.isJoinEventDisabled
+		isRsvpDisabled = var2.isRsvpDisabled
 	end
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), p1 (ref), buttonType (copy), var4 (ref), images (copy), p2 (ref), p3 (ref), fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable (copy), isRsvpDisabled (write), isJoinEventDisabled (write)
-		return if p0.eventStatus == "cancelled" or p0.eventStatus == "moderated" then {
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), p2 (ref), buttonType (copy), var1 (ref), images (copy), p3 (ref), p4 (ref), fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable (copy), isRsvpDisabled (write), isJoinEventDisabled (write)
+		return if p1.eventStatus == "cancelled" or p1.eventStatus == "moderated" then {
 			props = {
 				buttonType = buttonType.Secondary,
-				text = var4.goHome,
-				onActivated = p2.onClose,
-				buttonRef = p3
+				text = var1.goHome,
+				onActivated = p3.onClose,
+				buttonRef = p4
 			}
-		} elseif p1 == "Upcoming" or p1 == "UpcomingImminent" then if p0.userRsvpStatus == "going" then {
+		} elseif p2 == "Upcoming" or p2 == "UpcomingImminent" then if p1.userRsvpStatus == "going" then {
 			props = {
 				buttonType = buttonType.Secondary,
-				text = var4.unfollowEvent,
+				text = var1.unfollowEvent,
 				icon = images["icons/actions/favoriteOn"],
-				onActivated = p2.onRsvpChanged,
-				buttonRef = p3,
+				onActivated = p3.onRsvpChanged,
+				buttonRef = p4,
 				isDisabled = if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isRsvpDisabled else nil
 			}
 		} else {
 			props = {
 				buttonType = buttonType.PrimarySystem,
-				text = var4.notifyMe,
+				text = var1.notifyMe,
 				icon = images["icons/actions/favoriteOff"],
-				onActivated = p2.onRsvpChanged,
-				buttonRef = p3,
+				onActivated = p3.onRsvpChanged,
+				buttonRef = p4,
 				isDisabled = if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isRsvpDisabled else nil
 			}
-		} elseif p1 == "Ongoing" or p1 == "ElapsedImminent" then {
+		} elseif p2 == "Ongoing" or p2 == "ElapsedImminent" then {
 			props = {
 				buttonType = buttonType.PrimaryContextual,
-				text = var4.joinEvent,
-				onActivated = p2.onJoinEvent,
-				buttonRef = p3,
+				text = var1.joinEvent,
+				onActivated = p3.onJoinEvent,
+				buttonRef = p4,
 				isDisabled = if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isJoinEventDisabled else nil
 			}
 		} else nil
 	end, {
-		p0, p1, p2, p3,
+		p1, p2, p3, p4,
 		if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isRsvpDisabled else nil,
 		if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isJoinEventDisabled else nil
 	})
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), p1 (ref), images (copy), p2 (ref)
-		return if p0.eventStatus == "cancelled" or p0.eventStatus == "moderated" or p1 == "Elapsed" then nil else {
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), p2 (ref), images (copy), p3 (ref)
+		return if p1.eventStatus == "cancelled" or p1.eventStatus == "moderated" or p2 == "Elapsed" then nil else {
 			props = {
 				userInteractionEnabled = true,
 				anchorPoint = Vector2.new(0.5, 0.5),
 				position = UDim2.fromScale(0.5, 0.5),
 				icon = images["icons/actions/share"],
-				onActivated = p2.onShare
+				onActivated = p3.onShare
 			}
 		}
-	end, { p0, p1, p2 })
+	end, { p1, p2, p3 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var6 (ref), var7 (ref)
-		return { button = var6, icons = { var7 } }
-	end, { var6, var7 })
+		-- upvalues: var3 (ref), var4 (ref)
+		return { button = var3, icons = { var4 } }
+	end, { var3, var4 })
 end

@@ -9,41 +9,41 @@ local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.Sideshe
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
 local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), view (ref), text (ref)
-	local var6 = if fFlagSideSheetFocusNav then reactModule.useRef(nil) else nil
+	local var1 = if fFlagSideSheetFocusNav then reactModule.useRef(nil) else nil
 	
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-small size-full-0 auto-y radius-medium",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: p0 (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
-			p0.onActivated()
+			-- upvalues: p1 (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
+			p1.onActivated()
 			toggleSideSheetModule(false)
 			sidesheetAnalyticsModule.logSidesheetClosed(analyticsConstantsModule.Source.ItemSelected)
-		end, { p0.onActivated }),
-		selection = if fFlagSideSheetFocusNav and p0.disableGamepadDirections then {
-			NextSelectionRight = if p0.disableGamepadDirections.right then var6 else nil,
-			NextSelectionLeft = if p0.disableGamepadDirections.left then var6 else nil
+		end, { p1.onActivated }),
+		selection = if fFlagSideSheetFocusNav and p1.disableGamepadDirections then {
+			NextSelectionRight = if p1.disableGamepadDirections.right then var1 else nil,
+			NextSelectionLeft = if p1.disableGamepadDirections.left then var1 else nil
 		} else nil,
-		ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p1)
-			-- upvalues: var6 (ref), p0 (ref)
-			if var6 then
-				var6.current = p1
+		ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p2)
+			-- upvalues: var1 (ref), p1 (ref)
+			if var1 then
+				var1.current = p2
 			end
-			if p1 and p0.firstIntegrationToFocusCallback then
-				p0.firstIntegrationToFocusCallback(p1)
+			if p2 and p1.firstIntegrationToFocusCallback then
+				p1.firstIntegrationToFocusCallback(p2)
 			end
-		end, { p0.firstIntegrationToFocusCallback }) else nil else nil
+		end, { p1.firstIntegrationToFocusCallback }) else nil else nil
 	}, {
 		IconContainer = reactModule.createElement(view, {
 			tag = "align-x-center align-y-center size-1000 auto-xy",
 			LayoutOrder = 1
-		}, { Icon = p0.icon({ visible = true }) }),
+		}, { Icon = p1.icon({ visible = true }) }),
 		Label = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "auto-xy padding-y-small text-title-medium text-align-x-left text-truncate-split content-emphasis",
-			Text = p0.label
+			Text = p1.label
 		})
 	})
 end)

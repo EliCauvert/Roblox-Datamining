@@ -1,23 +1,23 @@
-﻿return function(p0)
+﻿return function(p1)
 	local t = {}
 	t.info = {
-		webbundle = p0.fromString("www:bundles/{assetId}"),
-		webasset = p0.fromString("www:catalog/{assetId}"),
-		webpage = function(p1)
+		webbundle = p1.fromString("www:bundles/{assetId}"),
+		webasset = p1.fromString("www:catalog/{assetId}"),
+		webpage = function(p2)
 			-- upvalues: t (ref)
-			if p1.assetType == "Bundle" then
-				return t.info.webbundle(p1)
-			elseif p1.assetType == "Asset" then
-				return t.info.webasset(p1)
+			if p2.assetType == "Bundle" then
+				return t.info.webbundle(p2)
+			elseif p2.assetType == "Asset" then
+				return t.info.webasset(p2)
 			end
-			warn(string.format("%s - unknown assetType of %s", tostring(script.name), tostring(p1.assetType)))
+			warn(string.format("%s - unknown assetType of %s", tostring(script.name), tostring(p2.assetType)))
 			
 			return nil
 		end,
 		appsflyer = function(p2)
-			-- upvalues: p0 (ref), t (ref)
-			return p0.fromString("appsflyer:Ebh5?pid=share&is_retargeting=true&af_dp={mobileUrl}&af_web_dp={webUrl}")({
-				mobileUrl = p0.fromString("mobilenav:item_details?itemId={assetId}&itemType={assetType}")(p2),
+			-- upvalues: p1 (ref), t (ref)
+			return p1.fromString("appsflyer:Ebh5?pid=share&is_retargeting=true&af_dp={mobileUrl}&af_web_dp={webUrl}")({
+				mobileUrl = p1.fromString("mobilenav:item_details?itemId={assetId}&itemType={assetType}")(p2),
 				webUrl = t.info.webpage(p2)
 			})
 		end

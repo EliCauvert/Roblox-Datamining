@@ -41,109 +41,109 @@ return {
 		end
 		return t
 	end,
-	reducer = function(p1, p2)
+	reducer = function(p2, p3)
 		-- upvalues: dashModule (ref), fFlagAbuseReportMenuV2 (ref), getInitialState (ref)
 		local var1 = nil
 		
-		if p2.type == "gotoNode" then
-			if not p2.payload or not p2.payload.nodeId then
-				error(`gotoNode action requires payload.nodeId, got: {dashModule.pretty(p2, { depth = 5 })}`)
+		if p3.type == "gotoNode" then
+			if not p3.payload or not p3.payload.nodeId then
+				error(`gotoNode action requires payload.nodeId, got: {dashModule.pretty(p3, { depth = 5 })}`)
 			end
-			local cloned = table.clone(p1.stack)
+			local cloned = table.clone(p2.stack)
 			table.insert(cloned, {
-				nodeId = p2.payload.nodeId,
+				nodeId = p3.payload.nodeId,
 				store = {},
-				enterTime = p2.payload.enterTime
+				enterTime = p3.payload.enterTime
 			})
-			var1 = dashModule.join(p1, {
+			var1 = dashModule.join(p2, {
 				navigationState = "idle",
 				lastNavigationDirection = "forward",
 				stack = cloned
 			})
 			
 			return var1
-		elseif p2.type == "replaceAndGotoNode" then
-			local var2 = dashModule.last(p1.stack)
+		elseif p3.type == "replaceAndGotoNode" then
+			local var2 = dashModule.last(p2.stack)
 			
 			if not var2 then
 				error("Stack is empty, cannot replace and go to node")
 			end
-			local var3 = dashModule.slice(p1.stack, 1, #p1.stack - 1)
+			local var3 = dashModule.slice(p2.stack, 1, #p2.stack - 1)
 			table.insert(var3, {
-				nodeId = p2.payload.nodeId,
+				nodeId = p3.payload.nodeId,
 				store = var2.store,
-				enterTime = p2.payload.enterTime
+				enterTime = p3.payload.enterTime
 			})
-			var1 = dashModule.join(p1, {
+			var1 = dashModule.join(p2, {
 				navigationState = "idle",
 				lastNavigationDirection = "forward",
 				stack = var3
 			})
 			
 			return var1
-		elseif p2.type == "goBack" then
-			if #p1.stack <= 1 then
+		elseif p3.type == "goBack" then
+			if #p2.stack <= 1 then
 				warn("Cannot go back from stack with only one or zero items")
 				
-				return p1
+				return p2
 			end
-			var1 = dashModule.join(p1, {
+			var1 = dashModule.join(p2, {
 				lastNavigationDirection = "back",
-				stack = dashModule.slice(p1.stack, 1, #p1.stack - 1)
+				stack = dashModule.slice(p2.stack, 1, #p2.stack - 1)
 			})
 			
 			return var1
-		elseif p2.type == "updateDataAndNavigateNext" then
-			local var4 = dashModule.last(p1.stack)
+		elseif p3.type == "updateDataAndNavigateNext" then
+			local var4 = dashModule.last(p2.stack)
 			
 			if not var4 then
 				error("Stack is empty, cannot update data")
 			end
 			if fFlagAbuseReportMenuV2 then
-				if p2.payload.expectedFromNodeId and p2.payload.expectedFromNodeId ~= var4.nodeId then
-					return p1
-				elseif p1.navigationState == "idle" then
-					local var5 = dashModule.slice(p1.stack, 1, #p1.stack - 1)
-					table.insert(var5, dashModule.join(var4, { store = dashModule.join(var4.store, p2.payload.store) }))
-					var1 = dashModule.join(p1, { navigationState = "gotoNext", stack = var5 })
+				if p3.payload.expectedFromNodeId and p3.payload.expectedFromNodeId ~= var4.nodeId then
+					return p2
+				elseif p2.navigationState == "idle" then
+					local var5 = dashModule.slice(p2.stack, 1, #p2.stack - 1)
+					table.insert(var5, dashModule.join(var4, { store = dashModule.join(var4.store, p3.payload.store) }))
+					var1 = dashModule.join(p2, { navigationState = "gotoNext", stack = var5 })
 					
 					return var1
 				else
-					return p1
+					return p2
 				end
 			end
-		elseif p2.type == "navigateFailure" then
-			local var6 = dashModule.last(p1.stack)
+		elseif p3.type == "navigateFailure" then
+			local var6 = dashModule.last(p2.stack)
 			
 			if not var6 then
 				error("Stack is empty, cannot navigate after failure")
 			end
-			if p2.payload.expectedFromNodeId ~= var6.nodeId then
-				return p1
-			elseif p1.navigationState == "idle" then
-				var1 = dashModule.join(p1, { navigationState = "gotoFailure" })
+			if p3.payload.expectedFromNodeId ~= var6.nodeId then
+				return p2
+			elseif p2.navigationState == "idle" then
+				var1 = dashModule.join(p2, { navigationState = "gotoFailure" })
 				
 				return var1
 			end
-			return p1
-		elseif p2.type == "startedSubmission" then
-			var1 = dashModule.join(p1, { submissionState = "submitting" })
+			return p2
+		elseif p3.type == "startedSubmission" then
+			var1 = dashModule.join(p2, { submissionState = "submitting" })
 			
 			return var1
-		elseif p2.type == "completedSubmission" then
-			var1 = dashModule.join(p1, { submissionState = "completed" })
+		elseif p3.type == "completedSubmission" then
+			var1 = dashModule.join(p2, { submissionState = "completed" })
 			
 			return var1
-		elseif p2.type == "submissionFailed" then
-			var1 = dashModule.join(p1, { submissionState = "failed" })
+		elseif p3.type == "submissionFailed" then
+			var1 = dashModule.join(p2, { submissionState = "failed" })
 			
 			return var1
-		elseif p2.type == "reset" then
-			var1 = getInitialState(p2.payload.runId, p2.payload.initialEnterTime, p2.payload.startNodeId)
+		elseif p3.type == "reset" then
+			var1 = getInitialState(p3.payload.runId, p3.payload.initialEnterTime, p3.payload.startNodeId)
 			
 			return var1
 		end
-		error("Unknown action type: " .. tostring(p2.type))
+		error("Unknown action type: " .. tostring(p3.type))
 		
 		return var1
 	end

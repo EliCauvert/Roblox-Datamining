@@ -24,80 +24,80 @@ local focusNavigationEventNameEnum = focusNavigationUtils.FocusNavigationEventNa
 local friendsLandingFilter = roact.PureComponent:extend("FriendsLandingFilter")
 friendsLandingFilter.defaultProps = { analytics = nil, navigation = nil }
 
-function friendsLandingFilter.init(p0)
+function friendsLandingFilter.init(p1)
 	-- upvalues: focusNavigationEventNameEnum (ref), inputHandlers (ref), memoize (ref), buttonClickEventsModule (ref), filterStatesModule (ref), textService (ref), navigationParamKeysModule (ref)
-	p0.state = { selectedValue = p0.props.filter }
+	p1.state = { selectedValue = p1.props.filter }
 	
 	function p0.onClose()
-		-- upvalues: p0 (ref)
-		p0.props.navigation.goBack()
+		-- upvalues: p1 (ref)
+		p1.props.navigation.goBack()
 	end
 	
-	p0.focusEventHandlers = {
+	p1.focusEventHandlers = {
 		[focusNavigationEventNameEnum.NavigateBack] = {
-			handler = inputHandlers.onRelease(function(p1)
-				-- upvalues: p0 (ref)
-				p0.onClose()
-				p1:cancel()
+			handler = inputHandlers.onRelease(function(p2)
+				-- upvalues: p1 (ref)
+				p1.onClose()
+				p2:cancel()
 			end)
 		}
 	}
-	p0.onApply = memoize(function(p2)
-		-- upvalues: p0 (ref), buttonClickEventsModule (copy), filterStatesModule (copy)
+	p1.onApply = memoize(function(p2)
+		-- upvalues: p1 (ref), buttonClickEventsModule (copy), filterStatesModule (copy)
 		return function()
-			-- upvalues: p0 (copy), buttonClickEventsModule (copy), p2 (ref), filterStatesModule (copy)
-			p0.props.analytics:buttonClick(buttonClickEventsModule.FriendFilterApply, { filter = p0.state.selectedValue })
-			p2(p0.state.selectedValue)
-			p0.onClose()
+			-- upvalues: p1 (copy), buttonClickEventsModule (copy), p2 (ref), filterStatesModule (copy)
+			p1.props.analytics:buttonClick(buttonClickEventsModule.FriendFilterApply, { filter = p1.state.selectedValue })
+			p2(p1.state.selectedValue)
+			p1.onClose()
 			
-			if p0.state.selectedValue == filterStatesModule.Inactive then
-				p0.onFewestInteractionsSelection()()
+			if p1.state.selectedValue == filterStatesModule.Inactive then
+				p1.onFewestInteractionsSelection()()
 			end
 		end
 	end)
 	
-	function p0.setSelectedValue(p3)
-		-- upvalues: p0 (ref)
-		p0:setState({ selectedValue = p3 })
+	function p0.setSelectedValue(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ selectedValue = p2 })
 	end
 	
-	function p0.onCurrentSelected(p4)
-		-- upvalues: p0 (ref)
-		return p4 == p0.state.selectedValue
+	function p0.onCurrentSelected(p2)
+		-- upvalues: p1 (ref)
+		return p2 == p1.state.selectedValue
 	end
 	
-	function p0.getAlertPlacement(p5, p6, p7, p8)
+	function p0.getAlertPlacement(p2, p3, p4, p5)
 		-- upvalues: textService (copy)
-		local var9 = 0
-		local var10 = ""
+		local var1 = 0
+		local var2 = ""
 		
-		for i, v in ipairs(p6) do
-			if v.id == p5 then
-				var9 = i
-				var10 = v.text
+		for i, v in ipairs(p3) do
+			if v.id == p2 then
+				var1 = i
+				var2 = v.text
 				break
 			end
 		end
-		assert(var9 ~= 0, "getAlertPlacement expects alertFilterId to have an entry in filterButtons")
+		assert(var1 ~= 0, "getAlertPlacement expects alertFilterId to have an entry in filterButtons")
 		
-		return UDim2.fromOffset(24 + textService:GetTextSize(var10, p8.Header2.RelativeSize * p8.BaseSize, p8.Header2.Font, Vector2.new(10000, 10000)).X + 12, (var9 - 1) * 57 + math.floor(28 - p7 / 2))
+		return UDim2.fromOffset(24 + textService:GetTextSize(var2, p5.Header2.RelativeSize * p5.BaseSize, p5.Header2.Font, Vector2.new(10000, 10000)).X + 12, (var1 - 1) * 57 + math.floor(28 - p4 / 2))
 	end
 	
 	function p0.showInactiveFilterOption()
-		-- upvalues: p0 (ref), navigationParamKeysModule (copy)
-		return if p0.props.navigation.getParam then p0.props.navigation.getParam(navigationParamKeysModule.ShowInactiveFilterOption) else nil
+		-- upvalues: p1 (ref), navigationParamKeysModule (copy)
+		return if p1.props.navigation.getParam then p1.props.navigation.getParam(navigationParamKeysModule.ShowInactiveFilterOption) else nil
 	end
 	
 	function p0.onFewestInteractionsSelection()
-		-- upvalues: p0 (ref), navigationParamKeysModule (copy)
-		return if p0.props.navigation.getParam then p0.props.navigation.getParam(navigationParamKeysModule.OnFewestInteractionsSelection) else nil
+		-- upvalues: p1 (ref), navigationParamKeysModule (copy)
+		return if p1.props.navigation.getParam then p1.props.navigation.getParam(navigationParamKeysModule.OnFewestInteractionsSelection) else nil
 	end
 end
 
-function friendsLandingFilter.render(p9)
+function friendsLandingFilter.render(p2)
 	-- upvalues: withStyle (ref), withLocalization (ref), makeFilterButtonsModule (ref), roact (ref), partialPageModal (ref), buttonType (ref), smallRadioButtonGroup (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	return withStyle(function(_)
-		-- upvalues: withLocalization (copy), makeFilterButtonsModule (copy), p9 (ref), roact (copy), partialPageModal (copy), buttonType (copy), smallRadioButtonGroup (copy), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy)
+		-- upvalues: withLocalization (copy), makeFilterButtonsModule (copy), p2 (ref), roact (copy), partialPageModal (copy), buttonType (copy), smallRadioButtonGroup (copy), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy)
 		return withLocalization({
 			apply = "CommonUI.Messages.Action.Apply",
 			all = "Feature.Friends.Label.All",
@@ -107,28 +107,28 @@ function friendsLandingFilter.render(p9)
 			offline = "Common.Presence.Label.Offline",
 			filterBy = "Feature.Friends.Heading.FilterBy",
 			upsellNew = "Feature.Catalog.Label.New"
-		})(function(p10)
-			-- upvalues: makeFilterButtonsModule (copy), p9 (copy), roact (copy), partialPageModal (copy), buttonType (copy), smallRadioButtonGroup (copy), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy)
-			local var11 = makeFilterButtonsModule(p10, p9.showInactiveFilterOption())
+		})(function(p3)
+			-- upvalues: makeFilterButtonsModule (copy), p2 (copy), roact (copy), partialPageModal (copy), buttonType (copy), smallRadioButtonGroup (copy), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy)
+			local var1 = makeFilterButtonsModule(p3, p2.showInactiveFilterOption())
 			
 			return roact.createElement(focusNavigableSurfaceWrapper, {
 				isIsolated = true,
 				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-				customEventHandlers = p9.focusEventHandlers
+				customEventHandlers = p2.focusEventHandlers
 			}, {
 				Modal = roact.createElement(partialPageModal, {
 					marginSize = 0,
-					title = p10.filterBy,
-					screenSize = p9.props.screenSize,
-					onCloseClicked = p9.onClose,
+					title = p3.filterBy,
+					screenSize = p2.props.screenSize,
+					onCloseClicked = p2.onClose,
 					buttonStackProps = {
 						buttons = {
 							{
 								buttonType = buttonType.PrimarySystem,
 								props = {
-									isDisabled = p9.onCurrentSelected(p9.props.filter),
-									onActivated = p9.onApply(p9.props.setFilterKeys),
-									text = p10.apply
+									isDisabled = p2.onCurrentSelected(p2.props.filter),
+									onActivated = p2.onApply(p2.props.setFilterKeys),
+									text = p3.apply
 								}
 							}
 						}
@@ -136,12 +136,12 @@ function friendsLandingFilter.render(p9)
 				}, {
 					ButtonContainer = roact.createElement("Frame", {
 						BackgroundTransparency = 1,
-						Size = UDim2.new(1, 0, 0, #var11 * 58 + 20)
+						Size = UDim2.new(1, 0, 0, #var1 * 58 + 20)
 					}, {
 						RadioButtons = roact.createElement(smallRadioButtonGroup, {
-							onActivated = p9.setSelectedValue,
-							selectedValue = p9.state.selectedValue,
-							items = var11
+							onActivated = p2.setSelectedValue,
+							selectedValue = p2.state.selectedValue,
+							items = var1
 						})
 					})
 				})
@@ -150,12 +150,12 @@ function friendsLandingFilter.render(p9)
 	end)
 end
 
-return compose(friendsLandingAnalyticsModule.connect(function(p11)
-	return { analytics = p11 }
-end), friendsLandingContextModule.connect(function(p12, _)
+return compose(friendsLandingAnalyticsModule.connect(function(p2)
+	return { analytics = p2 }
+end), friendsLandingContextModule.connect(function(p2, _)
 	return {
-		filter = p12.filter,
-		screenSize = p12.screenSize,
-		setFilterKeys = p12.setFilterKeys
+		filter = p2.filter,
+		screenSize = p2.screenSize,
+		setFilterKeys = p2.setFilterKeys
 	}
 end))(friendsLandingFilter)

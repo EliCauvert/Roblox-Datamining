@@ -7,30 +7,30 @@ local fFlagEnableContextFeaturesForOmniRecommendations = require(parent.SharedFl
 local getFFlagHomePYMKUseProfileFrameThumbnail = require(parent.SharedFlags).GetFFlagHomePYMKUseProfileFrameThumbnail
 local addSystemInfoToArgs = discoveryUtilsModule.AddSystemInfoToArgs
 local omniRecommendationsPageType = discoveryUtilsModule.OmniRecommendationsPageType
-local var2 = urlBuilder.new({
+local var1 = urlBuilder.new({
 	path = "/discovery-api/omni-recommendation",
 	base = url.APIS_URL
 })
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: omniRecommendationsPageType (ref), fFlagEnableContextFeaturesForOmniRecommendations (ref), getFFlagHomePYMKUseProfileFrameThumbnail (ref), addSystemInfoToArgs (ref), var2 (ref), httpService (ref)
+return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
+	-- upvalues: omniRecommendationsPageType (ref), fFlagEnableContextFeaturesForOmniRecommendations (ref), getFFlagHomePYMKUseProfileFrameThumbnail (ref), addSystemInfoToArgs (ref), var1 (ref), httpService (ref)
 	local t = {
-		pageType = omniRecommendationsPageType.fromAppPage(p1),
-		sessionId = p2,
-		pageToken = p3,
-		supportedTreatmentTypes = p4,
-		requestIntent = p5,
-		topicIds = p6,
-		sduiTreatmentTypes = p7
+		pageType = omniRecommendationsPageType.fromAppPage(p2),
+		sessionId = p3,
+		pageToken = p4,
+		supportedTreatmentTypes = p5,
+		requestIntent = p6,
+		topicIds = p7,
+		sduiTreatmentTypes = p8
 	}
 	
-	if fFlagEnableContextFeaturesForOmniRecommendations and p8 then
-		t.contextFeatures = p8
+	if fFlagEnableContextFeaturesForOmniRecommendations and p9 then
+		t.contextFeatures = p9
 	end
-	if getFFlagHomePYMKUseProfileFrameThumbnail() and p9 then
-		t.includePymkSortProfileFrame = p9
+	if getFFlagHomePYMKUseProfileFrameThumbnail() and p10 then
+		t.includePymkSortProfileFrame = p10
 	end
 	addSystemInfoToArgs(t)
 	
-	return p0(var2(), "POST", { postBody = httpService:JSONEncode(t) })
+	return p1(var1(), "POST", { postBody = httpService:JSONEncode(t) })
 end

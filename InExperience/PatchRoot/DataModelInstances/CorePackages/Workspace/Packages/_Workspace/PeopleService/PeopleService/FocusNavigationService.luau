@@ -11,131 +11,131 @@ return (function()
 	local t_2 = {}
 	local t_3 = {}
 	local t_4 = {}
-	local var9 = nil
-	local var10 = nil
-	local var11 = nil
-	local var12 = false
+	local var2 = nil
+	local var3 = nil
+	local var4 = nil
+	local var5 = false
 	
-	local function registerFrame(p0, p1)
+	local function registerFrame(p1, p2)
 		-- upvalues: t_3 (ref)
-		t_3[p1] = p0
+		t_3[p2] = p1
 	end
 	
-	local function unregisterFrame(p2)
+	local function unregisterFrame(p1)
 		-- upvalues: t_3 (ref)
-		t_3[p2] = nil
+		t_3[p1] = nil
 	end
 	
-	local function registerScrollCallback(p3, p4)
+	local function registerScrollCallback(p1, p2)
 		-- upvalues: t_4 (ref)
-		t_4[p3] = p4
+		t_4[p1] = p2
 	end
 	
-	local function unregisterScrollCallback(p5)
+	local function unregisterScrollCallback(p1)
 		-- upvalues: t_4 (ref)
-		t_4[p5] = nil
+		t_4[p1] = nil
 	end
 	
 	local function saveScrollPosition()
-		-- upvalues: settingsHubServiceModule (copy), var11 (write)
-		local var23 = settingsHubServiceModule.hubRef()
+		-- upvalues: settingsHubServiceModule (copy), var4 (write)
+		local var6 = settingsHubServiceModule.hubRef()
 		
-		if var23 and var23.PageView then
-			var11 = var23.PageView.CanvasPosition
+		if var6 and var6.PageView then
+			var4 = var6.PageView.CanvasPosition
 		end
 	end
 	
 	local function _()
-		-- upvalues: var11 (write), settingsHubServiceModule (copy), var12 (write)
-		if var11 then
-			local var24 = settingsHubServiceModule.hubRef()
+		-- upvalues: var4 (write), settingsHubServiceModule (copy), var5 (write)
+		if var4 then
+			local var6 = settingsHubServiceModule.hubRef()
 			
-			if var24 and var24.PageView then
-				var24.PageView.CanvasPosition = var11
-				var11 = nil
-				var12 = false
+			if var6 and var6.PageView then
+				var6.PageView.CanvasPosition = var4
+				var4 = nil
+				var5 = false
 			end
 		end
 	end
 	
 	local function getFirstPersonButton()
 		-- upvalues: t (ref), t_2 (ref)
-		local var25 = nil
-		local var26 = 1e999
+		local var6 = nil
+		local var7 = 1e999
 		
 		for i, v in pairs(t) do
 			if i ~= -1 then
-				local var27 = t_2[i]
+				local var8 = t_2[i]
 				
-				if var27 < var26 then
-					local var28 = nil
-					local var29 = 1e999
+				if var8 < var7 then
+					local var9 = nil
+					local var10 = 1e999
 					
 					for i_1, v_1 in pairs(v) do
-						if v_1.LayoutOrder and v_1.LayoutOrder < var29 then
-							var29 = v_1.LayoutOrder
-							var28 = v_1
+						if v_1.LayoutOrder and v_1.LayoutOrder < var10 then
+							var10 = v_1.LayoutOrder
+							var9 = v_1
 						end
 					end
-					if var28 then
-						var26 = var27
-						var25 = var28
+					if var9 then
+						var7 = var8
+						var6 = var9
 					end
 				end
 			end
 		end
-		return var25
+		return var6
 	end
 	
 	local function handleSelectionChange()
-		-- upvalues: guiService (copy), var10 (write), t_1 (ref), getFirstPersonButton (ref), var12 (write), var11 (write), settingsHubServiceModule (copy), t_4 (ref), t_3 (ref)
+		-- upvalues: guiService (copy), var3 (write), t_1 (ref), getFirstPersonButton (ref), var5 (write), var4 (write), settingsHubServiceModule (copy), t_4 (ref), t_3 (ref)
 		local selectedCoreObject = guiService.SelectedCoreObject
 		
-		if var10 and selectedCoreObject then
-			local var30 = t_1[var10]
-			local var31 = t_1[selectedCoreObject]
+		if var3 and selectedCoreObject then
+			local var11 = t_1[var3]
+			local var12 = t_1[selectedCoreObject]
 			
-			if var30 and var30 < 0 and (var31 and var31 >= 0) then
-				local var32 = getFirstPersonButton()
+			if var11 and var11 < 0 and (var12 and var12 >= 0) then
+				local var13 = getFirstPersonButton()
 				
-				if var32 then
+				if var13 then
 					task.defer(function()
-						-- upvalues: guiService (copy), var32 (ref)
-						guiService.SelectedCoreObject = var32
+						-- upvalues: guiService (copy), var13 (ref)
+						guiService.SelectedCoreObject = var13
 					end)
 				end
 			end
 		end
 		if selectedCoreObject then
-			local var33 = t_1[selectedCoreObject]
+			local var14 = t_1[selectedCoreObject]
 			
-			if var33 then
-				if var12 and var11 then
-					if var11 then
-						local var34 = settingsHubServiceModule.hubRef()
+			if var14 then
+				if var5 and var4 then
+					if var4 then
+						local var15 = settingsHubServiceModule.hubRef()
 						
-						if var34 and var34.PageView then
-							var34.PageView.CanvasPosition = var11
-							var11 = nil
-							var12 = false
+						if var15 and var15.PageView then
+							var15.PageView.CanvasPosition = var4
+							var4 = nil
+							var5 = false
 						end
 					end
 					return
 				else
-					local var35 = t_4[var33]
+					local var16 = t_4[var14]
 					
-					if var35 then
-						var35()
+					if var16 then
+						var16()
 					else
-						local var36 = t_3[var33]
+						local var17 = t_3[var14]
 						
-						if var36 then
-							local var37 = settingsHubServiceModule.hubRef()
+						if var17 then
+							local var18 = settingsHubServiceModule.hubRef()
 							
-							if var37 then
+							if var18 then
 								task.defer(function()
-									-- upvalues: var37 (ref), var36 (ref)
-									var37:ScrollToFrame(var36, true)
+									-- upvalues: var18 (ref), var17 (ref)
+									var18:ScrollToFrame(var17, true)
 								end)
 							end
 						end
@@ -143,56 +143,56 @@ return (function()
 				end
 			end
 		end
-		var10 = selectedCoreObject
+		var3 = selectedCoreObject
 	end
 	
 	local _ = function()
-		-- upvalues: var9 (write), guiService (copy), handleSelectionChange (ref)
-		if not var9 then
-			var9 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(handleSelectionChange)
+		-- upvalues: var2 (write), guiService (copy), handleSelectionChange (ref)
+		if not var2 then
+			var2 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(handleSelectionChange)
 		end
 	end
 	
 	local _ = function()
-		-- upvalues: var9 (write)
-		if var9 then
-			var9:Disconnect()
-			var9 = nil
+		-- upvalues: var2 (write)
+		if var2 then
+			var2:Disconnect()
+			var2 = nil
 		end
 	end
 	
-	local function registerButtonRow(p6, p7, p8)
-		-- upvalues: t (ref), t_2 (ref), t_1 (ref), var9 (write), guiService (copy), handleSelectionChange (ref)
-		if not t[p6] then
-			t[p6] = {}
+	local function registerButtonRow(p1, p2, p3)
+		-- upvalues: t (ref), t_2 (ref), t_1 (ref), var2 (write), guiService (copy), handleSelectionChange (ref)
+		if not t[p1] then
+			t[p1] = {}
 		end
-		t_2[p6] = p8
+		t_2[p1] = p3
 		
-		for i, v in ipairs(p7) do
-			t[p6][v.Name] = v
-			t_1[v] = p6
+		for i, v in ipairs(p2) do
+			t[p1][v.Name] = v
+			t_1[v] = p1
 		end
-		if not var9 then
-			var9 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(handleSelectionChange)
+		if not var2 then
+			var2 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(handleSelectionChange)
 		end
 	end
 	
-	local function unregisterButtonRow(p9)
-		-- upvalues: t (ref), t_1 (ref), t_2 (ref), t_4 (ref), var9 (write)
-		local var38 = t[p9]
+	local function unregisterButtonRow(p4)
+		-- upvalues: t (ref), t_1 (ref), t_2 (ref), t_4 (ref), var2 (write)
+		local var11 = t[p4]
 		
-		if var38 then
-			for i, v in pairs(var38) do
+		if var11 then
+			for i, v in pairs(var11) do
 				t_1[v] = nil
 			end
 		end
-		t[p9] = nil
-		t_2[p9] = nil
-		t_4[p9] = nil
+		t[p4] = nil
+		t_2[p4] = nil
+		t_4[p4] = nil
 		
-		if not next(t) and var9 then
-			var9:Disconnect()
-			var9 = nil
+		if not next(t) and var2 then
+			var2:Disconnect()
+			var2 = nil
 		end
 	end
 	
@@ -201,46 +201,46 @@ return (function()
 		local selectedCoreObject = guiService.SelectedCoreObject
 		
 		if selectedCoreObject then
-			local var39 = t_1[selectedCoreObject]
+			local var12 = t_1[selectedCoreObject]
 			local name = selectedCoreObject.Name
 			
-			if var39 and name then
-				return var39, name
+			if var12 and name then
+				return var12, name
 			end
 		end
 		return nil, nil
 	end
 	
-	local function findButtonForUser(p10, p11)
+	local function findButtonForUser(p5, p6)
 		-- upvalues: t (ref)
-		local var40 = t[p10]
+		local var12 = t[p5]
 		
-		if not var40 then
+		if not var12 then
 			return nil
 		end
-		local var41 = var40[p11]
+		local var13 = var12[p6]
 		
-		if var41 then
-			return var41
+		if var13 then
+			return var13
 		end
-		local var42 = nil
+		local var14 = nil
 		
-		for i, v in pairs(var40) do
-			if not var42 or v.LayoutOrder < var42.LayoutOrder then
-				var42 = v
+		for i, v in pairs(var12) do
+			if not var14 or v.LayoutOrder < var14.LayoutOrder then
+				var14 = v
 			end
 		end
-		return var42
+		return var14
 	end
 	
-	local _ = function(p12, p13)
+	local _ = function(p7, p8)
 		-- upvalues: t_2 (ref)
-		if #p13 == 0 then
+		if #p8 == 0 then
 			return nil
 		end
-		local var43 = t_2[p12]
+		local var15 = t_2[p7]
 		
-		return if var43 then if p13[var43] then p13[var43].UserId elseif var43 > 1 and p13[var43 - 1] then p13[var43 - 1].UserId else p13[1].UserId else p13[1].UserId
+		return if var15 then if p8[var15] then p8[var15].UserId elseif var15 > 1 and p8[var15 - 1] then p8[var15 - 1].UserId else p8[1].UserId else p8[1].UserId
 	end
 	
 	return {
@@ -250,55 +250,55 @@ return (function()
 		unregisterFrame = unregisterFrame,
 		registerScrollCallback = registerScrollCallback,
 		unregisterScrollCallback = unregisterScrollCallback,
-		handlePersonRemoved = function(p14)
+		handlePersonRemoved = function(p7)
 			-- upvalues: var1 (copy), guiService (copy), t_1 (ref), t_2 (ref), t (ref), findButtonForUser (ref)
 			local v
-			local var44 = var1.people(false)
+			local var15 = var1.people(false)
 			
-			for i, v in ipairs(var44) do
-				if v.UserId == p14 then return end
+			for i, v in ipairs(var15) do
+				if v.UserId == p7 then return end
 			end
-			local var45, var46, var47
+			local var16, var17, var18
 			local selectedCoreObject = guiService.SelectedCoreObject
 			
 			if selectedCoreObject then
-				var45 = t_1[selectedCoreObject]
+				var16 = t_1[selectedCoreObject]
 				v = selectedCoreObject.Name
 				
-				if var45 and v then
-					var46 = var45
-					var47 = v
+				if var16 and v then
+					var17 = var16
+					var18 = v
 				else
-					var46 = nil
-					var47 = nil
+					var17 = nil
+					var18 = nil
 				end
-				if var46 ~= p14 or not var47 then return end
-				if #var44 == 0 then
+				if var17 ~= p7 or not var18 then return end
+				if #var15 == 0 then
 					selectedCoreObject = nil
 				else
-					var45 = t_2[p14]
-					selectedCoreObject = if not var45 then if var44[var45] then var44[var45].UserId elseif var45 > 1 and var44[var45 - 1] then var44[var45 - 1].UserId else var44[1].UserId else var44[1].UserId
+					var16 = t_2[p7]
+					selectedCoreObject = if not var16 then if var15[var16] then var15[var16].UserId elseif var16 > 1 and var15[var16 - 1] then var15[var16 - 1].UserId else var15[1].UserId else var15[1].UserId
 				end
 				if selectedCoreObject and t[selectedCoreObject] then
-					var45 = findButtonForUser(selectedCoreObject, var47)
+					var16 = findButtonForUser(selectedCoreObject, var18)
 					
-					if var45 then
+					if var16 then
 						task.defer(function()
-							-- upvalues: guiService (copy), var45 (ref)
-							guiService.SelectedCoreObject = var45
+							-- upvalues: guiService (copy), var16 (ref)
+							guiService.SelectedCoreObject = var16
 						end)
 						
 						return
 					end
 				end
 				for i_1, v_1 in pairs(t) do
-					if i_1 ~= p14 then
-						local var48 = findButtonForUser(i_1, var47)
+					if i_1 ~= p7 then
+						local var19 = findButtonForUser(i_1, var18)
 						
-						if var48 then
+						if var19 then
 							task.defer(function()
-								-- upvalues: guiService (copy), var48 (ref)
-								guiService.SelectedCoreObject = var48
+								-- upvalues: guiService (copy), var19 (ref)
+								guiService.SelectedCoreObject = var19
 							end)
 							
 							return
@@ -307,19 +307,19 @@ return (function()
 				end
 			end
 		end,
-		hasSelectablePlatformButton = function(p15)
+		hasSelectablePlatformButton = function(p8)
 			-- upvalues: var1 (copy), peopleUtilityModule (copy)
-			if p15 then
-				local var49 = var1.getPlatformName(p15)(false)
+			if p8 then
+				local var20 = var1.getPlatformName(p8)(false)
 				
-				return var49 and (type(var49) == "string" and string.len(var49) > 0) and peopleUtilityModule.canShowPlatformProfile(var1.getPlatformProfileId(p15)(false) or "")
+				return var20 and (type(var20) == "string" and string.len(var20) > 0) and peopleUtilityModule.canShowPlatformProfile(var1.getPlatformProfileId(p8)(false) or "")
 			end
 			return false
 		end,
 		saveScrollPosition = saveScrollPosition,
 		setBlockingModalRestoreMode = function(value)
-			-- upvalues: var12 (write)
-			var12 = value
+			-- upvalues: var5 (write)
+			var5 = value
 		end,
 		getFirstPersonButton = getFirstPersonButton
 	}

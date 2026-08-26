@@ -17,20 +17,20 @@ local utilsModule = require(script.Parent.Utils)
 local getLegacyPageFromRoactNavigationRoute = utilsModule.getLegacyPageFromRoactNavigationRoute
 local getLegacyRouteFromRoactNavigationState = utilsModule.getLegacyRouteFromRoactNavigationState
 
-local function legacyPageEqual(p0, p1)
+local function legacyPageEqual(p1, p2)
 	-- upvalues: tutilsModule (ref)
-	return tutilsModule.shallowEqual(p0, p1)
+	return tutilsModule.shallowEqual(p1, p2)
 end
 
-local function legacyRouteEqual(p2, p3)
+local function legacyRouteEqual(p1, p2)
 	-- upvalues: tutilsModule (ref)
-	if p2 == p3 then
+	if p1 == p2 then
 		return true
-	elseif p2 == nil or p3 == nil or #p2 ~= #p3 then
+	elseif p1 == nil or p2 == nil or #p1 ~= #p2 then
 		return false
 	end
-	for i = 1, #p2 do
-		if tutilsModule.shallowEqual(p2[i], p3[i]) then
+	for i = 1, #p1 do
+		if tutilsModule.shallowEqual(p1[i], p2[i]) then
 			continue
 		end
 		return false
@@ -38,15 +38,15 @@ local function legacyRouteEqual(p2, p3)
 	return true
 end
 
-local function legacyHistoryEqual(p4, p5)
+local function legacyHistoryEqual(p3, p4)
 	-- upvalues: legacyRouteEqual (ref)
-	if p4 == p5 then
+	if p3 == p4 then
 		return true
-	elseif p4 == nil or p5 == nil or #p4 ~= #p5 then
+	elseif p3 == nil or p4 == nil or #p3 ~= #p4 then
 		return false
 	end
-	for i = 1, #p4 do
-		if legacyRouteEqual(p4[i], p5[i]) then
+	for i = 1, #p3 do
+		if legacyRouteEqual(p3[i], p4[i]) then
 			continue
 		end
 		return false
@@ -54,111 +54,111 @@ local function legacyHistoryEqual(p4, p5)
 	return true
 end
 
-local function routeStateEqual(p6, p7)
+local function routeStateEqual(p5, p6)
 	-- upvalues: tutilsModule (ref)
-	if p6 == p7 then
+	if p5 == p6 then
 		return true
-	elseif type(p6) ~= "table" or type(p7) ~= "table" then
+	elseif type(p5) ~= "table" or type(p6) ~= "table" then
 		return false
 	end
-	local var12 = false
+	local var1 = false
 	
-	if p6.routeName == p7.routeName then
-		var12 = false
+	if p5.routeName == p6.routeName then
+		var1 = false
 		
-		if p6.key == p7.key then
-			var12 = tutilsModule.shallowEqual
-			var12 = var12(p6.params or {}, p7.params or {})
+		if p5.key == p6.key then
+			var1 = tutilsModule.shallowEqual
+			var1 = var1(p5.params or {}, p6.params or {})
 		end
 	end
-	return var12
+	return var1
 end
 
-return function(p8)
+return function(p5)
 	-- upvalues: signalsModule (ref), constantsModule (ref), fFlagAppIaHomeSubTab (ref), getLegacyPageFromRoactNavigationRoute (ref), cryoModule (ref), fFlagSignalsNavP3Final (ref), legacyHistoryEqual (ref), getLegacyRouteFromRoactNavigationState (ref), legacyRouteEqual (ref), fFlagSignalsNavProjected (ref), getCurrentNavigationState (ref), getCurrentRouteState (ref), routeStateEqual (ref), legacyPageEqual (ref), fFlagSignalsNavP2NavigationPrimitives (ref)
-	local var13 = signalsModule.createComputed(function(p9)
-		-- upvalues: p8 (ref), constantsModule (copy), fFlagAppIaHomeSubTab (copy), getLegacyPageFromRoactNavigationRoute (copy), cryoModule (copy)
+	local var1 = signalsModule.createComputed(function(p6)
+		-- upvalues: p5 (ref), constantsModule (copy), fFlagAppIaHomeSubTab (copy), getLegacyPageFromRoactNavigationRoute (copy), cryoModule (copy)
 		local t = {}
-		local state = p8.getState(p9)
+		local state = p5.getState(p6)
 		
 		for i = 1, state.index do
-			local var23 = state.routes[i]
+			local var2 = state.routes[i]
 			
-			if var23.routes and var23.routeName == constantsModule.TempRnSwitchNavigatorName then
-				var23 = var23.routes[var23.index]
+			if var2.routes and var2.routeName == constantsModule.TempRnSwitchNavigatorName then
+				var2 = var2.routes[var2.index]
 			end
-			if fFlagAppIaHomeSubTab and var23.routes and var23.routeName == constantsModule.HomeContainerName then
-				var23 = var23.routes[var23.index]
+			if fFlagAppIaHomeSubTab and var2.routes and var2.routeName == constantsModule.HomeContainerName then
+				var2 = var2.routes[var2.index]
 			end
-			table.insert(t, cryoModule.List.join(t[i - 1] or {}, { getLegacyPageFromRoactNavigationRoute(var23) }))
+			table.insert(t, cryoModule.List.join(t[i - 1] or {}, { getLegacyPageFromRoactNavigationRoute(var2) }))
 		end
 		return t
 	end, if fFlagSignalsNavP3Final then legacyHistoryEqual else nil)
-	local var14 = signalsModule.createComputed(function(p10)
-		-- upvalues: p8 (ref), getLegacyRouteFromRoactNavigationState (copy)
-		return getLegacyRouteFromRoactNavigationState(p8.getState(p10))
+	local var3 = signalsModule.createComputed(function(p7)
+		-- upvalues: p5 (ref), getLegacyRouteFromRoactNavigationState (copy)
+		return getLegacyRouteFromRoactNavigationState(p5.getState(p7))
 	end, if fFlagSignalsNavP3Final then legacyRouteEqual else nil)
-	local var15 = signalsModule.createComputed(function(p11)
-		-- upvalues: fFlagSignalsNavProjected (copy), p8 (ref), getCurrentNavigationState (copy), getCurrentRouteState (copy)
-		return if fFlagSignalsNavProjected then getCurrentNavigationState(p8.getState(p11)) else getCurrentRouteState(p8.getNavigation(p11))
+	local var4 = signalsModule.createComputed(function(p7)
+		-- upvalues: fFlagSignalsNavProjected (copy), p5 (ref), getCurrentNavigationState (copy), getCurrentRouteState (copy)
+		return if fFlagSignalsNavProjected then getCurrentNavigationState(p5.getState(p7)) else getCurrentRouteState(p5.getNavigation(p7))
 	end, if fFlagSignalsNavP3Final then routeStateEqual else nil)
-	local var16 = signalsModule.createComputed(function(p12)
-		-- upvalues: var13 (ref)
-		local var24 = var13(p12)
+	local var5 = signalsModule.createComputed(function(p7)
+		-- upvalues: var1 (ref)
+		local var6 = var1(p7)
 		
-		return var24[#var24]
+		return var6[#var6]
 	end, if fFlagSignalsNavP3Final then legacyRouteEqual else nil)
-	local var17 = signalsModule.createComputed(function(p13)
-		-- upvalues: var13 (ref)
-		local var25 = var13(p13)
-		local var26 = var25[#var25]
+	local var6 = signalsModule.createComputed(function(p7)
+		-- upvalues: var1 (ref)
+		local var7 = var1(p7)
+		local var8 = var7[#var7]
 		
-		return var26[#var26]
+		return var8[#var8]
 	end, if fFlagSignalsNavP3Final then legacyPageEqual else nil)
-	local var18 = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p14)
-		-- upvalues: var13 (ref)
-		local var27 = var13(p14)
-		local var28 = var27[#var27]
+	local var7 = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p7)
+		-- upvalues: var1 (ref)
+		local var8 = var1(p7)
+		local var9 = var8[#var8]
 		
-		return var28[#var28].name
+		return var9[#var9].name
 	end) else nil
 	local t = {}
 	local t_1 = {}
 	
 	return {
-		getHistory = var13,
-		getCurrentRoute = var15,
-		getCurrentLegacyRoute = var16,
-		getCurrentPage = var17,
-		getCurrentPageName = var18,
+		getHistory = var1,
+		getCurrentRoute = var4,
+		getCurrentLegacyRoute = var5,
+		getCurrentPage = var6,
+		getCurrentPageName = var7,
 		getIsCurrentPageSignal = function(value)
-			-- upvalues: t (ref), signalsModule (copy), var18 (ref)
-			local var29 = t[value]
+			-- upvalues: t (ref), signalsModule (copy), var7 (ref)
+			local var8 = t[value]
 			
-			if var29 then
-				return var29
+			if var8 then
+				return var8
 			end
-			local var30 = signalsModule.createComputed(function(p15)
-				-- upvalues: var18 (copy), value (ref)
-				return var18(p15) == value
+			local var9 = signalsModule.createComputed(function(p7)
+				-- upvalues: var7 (copy), value (ref)
+				return var7(p7) == value
 			end)
-			t[value] = var30
+			t[value] = var9
 			
-			return var30
+			return var9
 		end,
 		getRouteContainsPageSignal = function(value)
-			-- upvalues: t_1 (ref), signalsModule (copy), var14 (ref)
-			local var31 = t_1[value]
+			-- upvalues: t_1 (ref), signalsModule (copy), var3 (ref)
+			local var8 = t_1[value]
 			
-			if var31 then
-				return var31
+			if var8 then
+				return var8
 			end
-			local var32 = signalsModule.createComputed(function(p16)
-				-- upvalues: var14 (copy), value (ref)
-				local var33 = var14(p16)
+			local var9 = signalsModule.createComputed(function(p7)
+				-- upvalues: var3 (copy), value (ref)
+				local var10 = var3(p7)
 				
-				if var33 then
-					for i, v in var33 do
+				if var10 then
+					for i, v in var10 do
 						if v.name == value then
 							return true
 						end
@@ -166,31 +166,31 @@ return function(p8)
 				end
 				return false
 			end)
-			t_1[value] = var32
+			t_1[value] = var9
 			
-			return var32
+			return var9
 		end,
-		getCurrentTabName = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p17)
-			-- upvalues: var13 (ref)
-			local var34 = var13(p17)
+		getCurrentTabName = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p7)
+			-- upvalues: var1 (ref)
+			local var10 = var1(p7)
 			
-			return var34[#var34][1].name
+			return var10[#var10][1].name
 		end) else nil,
-		getCanGoBack = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p18)
-			-- upvalues: var13 (ref)
-			local var35 = var13(p18)
+		getCanGoBack = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p7)
+			-- upvalues: var1 (ref)
+			local var10 = var1(p7)
 			
-			return #var35[#var35] > 1
+			return #var10[#var10] > 1
 		end) else nil,
-		getRouteDepth = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p19)
-			-- upvalues: var13 (ref)
-			local var36 = var13(p19)
+		getRouteDepth = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p7)
+			-- upvalues: var1 (ref)
+			local var10 = var1(p7)
 			
-			return #var36[#var36]
+			return #var10[#var10]
 		end) else nil,
-		getCurrentRouteKey = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p20)
-			-- upvalues: var15 (ref)
-			return var15(p20).key or ""
+		getCurrentRouteKey = if fFlagSignalsNavP2NavigationPrimitives then signalsModule.createComputed(function(p7)
+			-- upvalues: var4 (ref)
+			return var4(p7).key or ""
 		end) else nil
 	}
 end

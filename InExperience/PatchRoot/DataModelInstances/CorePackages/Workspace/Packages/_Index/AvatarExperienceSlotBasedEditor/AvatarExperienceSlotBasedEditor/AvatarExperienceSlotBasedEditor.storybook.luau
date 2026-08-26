@@ -33,19 +33,19 @@ return {
 	storyRoot = avatarExperienceSlotBasedEditor,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: t (ref), reactModule (ref), localizationProvider (ref), localization (ref), appStyleProvider (ref), t_2 (ref), roactRoduxModule (ref), createStore (ref), designTokenProvider (ref), foundationProvider (ref), t_1 (ref)
-		return function(p1)
-			-- upvalues: t (copy), reactModule (copy), localizationProvider (copy), localization (copy), appStyleProvider (copy), t_2 (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), foundationProvider (copy), t_1 (copy), p0 (ref)
+		return function(p2)
+			-- upvalues: t (copy), reactModule (copy), localizationProvider (copy), localization (copy), appStyleProvider (copy), t_2 (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), foundationProvider (copy), t_1 (copy), p1 (ref)
 			return reactModule.createElement(localizationProvider, { localization = localization.new("en-us") }, {
-				AppStyleProvider = reactModule.createElement(appStyleProvider, { style = if p1 then t_2[p1.theme] else t_2.Default }, {
+				AppStyleProvider = reactModule.createElement(appStyleProvider, { style = if p2 then t_2[p2.theme] else t_2.Default }, {
 					StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
 						DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
 							FoundationProvider = reactModule.createElement(foundationProvider, {
-								colorMode = t[p1.theme],
-								device = t_1[p1.platform],
-								preferences = p1.settings
-							}, { Child = reactModule.createElement(p0, p1) })
+								colorMode = t[p2.theme],
+								device = t_1[p2.platform],
+								preferences = p2.settings
+							}, { Child = reactModule.createElement(p1, p2) })
 						})
 					})
 				})

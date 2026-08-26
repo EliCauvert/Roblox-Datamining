@@ -2,11 +2,11 @@
 
 return function()
 	-- upvalues: setCentralOverlayModule (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: setCentralOverlayModule (copy)
-		if p0:getState().CentralOverlay.Configs.DisableBackButtonClose then
+		if p1:getState().CentralOverlay.Configs.DisableBackButtonClose then
 			return
 		end
-		p0:dispatch(setCentralOverlayModule())
+		p1:dispatch(setCentralOverlayModule())
 	end
 end

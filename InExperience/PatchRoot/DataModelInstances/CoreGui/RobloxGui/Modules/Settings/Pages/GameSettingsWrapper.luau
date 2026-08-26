@@ -20,29 +20,29 @@ local migration = builderIconsModule.Migration
 
 return if fFlagRefactorInExpSettingsInDevelopment then (function()
 	-- upvalues: settingsPageFactoryModule (ref), constants (write), migration (ref), builderIconsModule (ref), reactModule (ref), foundationProvider (ref), foundationModule (ref), utils (write), reactRobloxModule (ref)
-	local var7 = settingsPageFactoryModule:CreateNewPage()
-	var7.TabHeader.Name = constants.GAMESETTINGS.TAB_HEADER.NAME
+	local var1 = settingsPageFactoryModule:CreateNewPage()
+	var1.TabHeader.Name = constants.GAMESETTINGS.TAB_HEADER.NAME
 	local settings = migration.uiblox["icons/common/settings"]
-	var7.TabHeader.TabLabel.Icon.Text = settings.name
-	var7.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[settings.variant]
-	var7.TabHeader.TabLabel.Title.Text = constants.GAMESETTINGS.TAB_HEADER.TEXT
-	var7.Page:ClearAllChildren()
-	var7.PageOpen = false
+	var1.TabHeader.TabLabel.Icon.Text = settings.name
+	var1.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[settings.variant]
+	var1.TabHeader.TabLabel.Title.Text = constants.GAMESETTINGS.TAB_HEADER.TEXT
+	var1.Page:ClearAllChildren()
+	var1.PageOpen = false
 	
 	function var7.OpenSettingsPage()
-		-- upvalues: var7 (ref)
-		var7.PageOpen = true
+		-- upvalues: var1 (ref)
+		var1.PageOpen = true
 	end
 	
 	function var7.CloseSettingsPage()
-		-- upvalues: var7 (ref)
-		var7.PageOpen = false
+		-- upvalues: var1 (ref)
+		var1.PageOpen = false
 	end
 	
-	reactRobloxModule.createRoot(var7.Page):render(reactModule.createElement(foundationProvider, {
+	reactRobloxModule.createRoot(var1.Page):render(reactModule.createElement(foundationProvider, {
 		colorMode = foundationModule.Enums.ColorMode.Dark,
 		device = utils.getDeviceType()
 	}, {}))
 	
-	return var7
+	return var1
 end)() else require(modules.Settings.Pages.GameSettings)

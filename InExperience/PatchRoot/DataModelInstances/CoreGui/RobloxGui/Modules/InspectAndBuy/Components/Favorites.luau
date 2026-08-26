@@ -28,10 +28,10 @@ function favorites.setText(value)
 	end
 end
 
-function favorites.init(p0)
+function favorites.init(p1)
 	-- upvalues: getSelectionImageObjectRegularModule (ref)
-	p0.numFavorites = ""
-	p0.selectionImageObject = getSelectionImageObjectRegularModule()
+	p1.numFavorites = ""
+	p1.selectionImageObject = getSelectionImageObjectRegularModule()
 end
 
 function favorites.willUpdate(p1, p2)
@@ -41,12 +41,12 @@ function favorites.willUpdate(p1, p2)
 	
 	if p2.assetInfo then
 		local assetInfo = p2.assetInfo
-		local var11 = assetInfo.parentBundleId ~= nil
+		local var1 = assetInfo.parentBundleId ~= nil
 		
 		if not p2.gotCurrentFavoriteCount then
 			coroutine.wrap(function()
-				-- upvalues: var11 (ref), getAssetFavoriteCount (ref), assetInfo (ref), utilityFunctionsModule (copy), getBundleFavoriteCount (ref)
-				if var11 then
+				-- upvalues: var1 (ref), getAssetFavoriteCount (ref), assetInfo (ref), utilityFunctionsModule (copy), getBundleFavoriteCount (ref)
+				if var1 then
 					getBundleFavoriteCount(utilityFunctionsModule.getBundleId(assetInfo))
 					
 					return
@@ -57,9 +57,9 @@ function favorites.willUpdate(p1, p2)
 	end
 end
 
-function favorites.render(p3)
+function favorites.render(p1)
 	-- upvalues: roactModule (ref), appFonts (ref)
-	p3:setText()
+	p1:setText()
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -71,14 +71,14 @@ function favorites.render(p3)
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/InspectMenu/ico_favorite.png",
 			Size = UDim2.new(0, 16, 0, 16),
-			SelectionImageObject = p3.selectionImageObject
+			SelectionImageObject = p1.selectionImageObject
 		}),
 		FavoriteText = roactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextSize = 12,
 			Size = UDim2.new(1, -16, 1, 0),
 			Position = UDim2.new(0, 21, 0, 0),
-			Text = p3.numFavorites or "",
+			Text = p1.numFavorites or "",
 			Font = appFonts.default:getDefault(),
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextColor3 = Color3.new(1, 1, 1)
@@ -86,28 +86,28 @@ function favorites.render(p3)
 	})
 end
 
-function favorites.shouldUpdate(_, p4)
-	return p4.detailsInformation.viewingDetails
+function favorites.shouldUpdate(_, p1)
+	return p1.detailsInformation.viewingDetails
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p5, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: gotCurrentFavoriteCountModule (ref)
 	return {
-		detailsInformation = p5.detailsInformation,
-		assetInfo = p5.assets[p5.detailsInformation.assetId],
-		bundleInfo = p5.bundles,
-		gotCurrentFavoriteCount = gotCurrentFavoriteCountModule(p5)
+		detailsInformation = p1.detailsInformation,
+		assetInfo = p1.assets[p1.detailsInformation.assetId],
+		bundleInfo = p1.bundles,
+		gotCurrentFavoriteCount = gotCurrentFavoriteCountModule(p1)
 	}
-end, function(p6)
+end, function(p1)
 	-- upvalues: getAssetFavoriteCountModule (ref), getBundleFavoriteCountModule (ref)
 	return {
 		getAssetFavoriteCount = function(value)
-			-- upvalues: p6 (ref), getAssetFavoriteCountModule (copy)
-			p6(getAssetFavoriteCountModule(value))
+			-- upvalues: p1 (ref), getAssetFavoriteCountModule (copy)
+			p1(getAssetFavoriteCountModule(value))
 		end,
-		getBundleFavoriteCount = function(p7)
-			-- upvalues: p6 (ref), getBundleFavoriteCountModule (copy)
-			p6(getBundleFavoriteCountModule(p7))
+		getBundleFavoriteCount = function(p2)
+			-- upvalues: p1 (ref), getBundleFavoriteCountModule (copy)
+			p1(getBundleFavoriteCountModule(p2))
 		end
 	}
 end)(favorites)

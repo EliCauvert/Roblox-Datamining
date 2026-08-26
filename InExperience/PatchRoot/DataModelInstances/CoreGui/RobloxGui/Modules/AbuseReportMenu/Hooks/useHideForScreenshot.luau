@@ -17,56 +17,56 @@ local _ = function()
 	return if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames / 60 else abuseReportMenuScreenshotWaitFrames / 60
 end
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: reactModule (ref), fFlagIEMTabFocusNav (ref), guiService (ref), runService (ref), userGameSettingsService (ref), abuseReportMenuScreenshotReduceMotionWaitFrames (ref), abuseReportMenuScreenshotWaitFrames (ref)
-	local var7, var8 = reactModule.useState(false)
-	local var9 = if fFlagIEMTabFocusNav then reactModule.useRef(nil) else nil
+	local var1, var2 = reactModule.useState(false)
+	local var3 = if fFlagIEMTabFocusNav then reactModule.useRef(nil) else nil
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var7 (ref), fFlagIEMTabFocusNav (copy), var9 (ref), guiService (copy), var8 (ref), p0 (ref), p2 (ref), runService (copy), p4 (ref), userGameSettingsService (copy), abuseReportMenuScreenshotReduceMotionWaitFrames (copy), abuseReportMenuScreenshotWaitFrames (copy), p3 (ref), p5 (ref)
-		if p1 then
-			if var7 then
-				if fFlagIEMTabFocusNav and var9.current and var9.current:IsDescendantOf(game) then
-					guiService.SelectedCoreObject = var9.current
-					var9.current = nil
+		-- upvalues: p2 (ref), var1 (ref), fFlagIEMTabFocusNav (copy), var3 (ref), guiService (copy), var2 (ref), p1 (ref), p3 (ref), runService (copy), p5 (ref), userGameSettingsService (copy), abuseReportMenuScreenshotReduceMotionWaitFrames (copy), abuseReportMenuScreenshotWaitFrames (copy), p4 (ref), p6 (ref)
+		if p2 then
+			if var1 then
+				if fFlagIEMTabFocusNav and var3.current and var3.current:IsDescendantOf(game) then
+					guiService.SelectedCoreObject = var3.current
+					var3.current = nil
 				end
-				var8(false)
+				var2(false)
 				
 				return
-			elseif not p0 then return end
+			elseif not p1 then return end
 			if fFlagIEMTabFocusNav then
-				var9.current = guiService.SelectedCoreObject
+				var3.current = guiService.SelectedCoreObject
 			end
-			var8(true)
-			p2()
+			var2(true)
+			p3()
 			local heartbeatConnection = nil
-			local var11 = 0
-			local var12 = 0
+			local var4 = 0
+			local var5 = 0
 			local heartbeatConnection_1 = nil
 			local processTime = os.clock()
 			heartbeatConnection = runService.Heartbeat:Connect(function()
-				-- upvalues: var11 (write), p4 (copy), heartbeatConnection (write)
-				if var11 == 1 then
-					p4()
+				-- upvalues: var4 (write), p5 (copy), heartbeatConnection (write)
+				if var4 == 1 then
+					p5()
 					heartbeatConnection:Disconnect()
 					
 					return
 				end
-				var11 += 1
+				var4 += 1
 			end)
 			heartbeatConnection_1 = runService.Heartbeat:Connect(function()
-				-- upvalues: processTime (ref), userGameSettingsService (copy), abuseReportMenuScreenshotReduceMotionWaitFrames (copy), abuseReportMenuScreenshotWaitFrames (copy), var12 (write), heartbeatConnection_1 (write), p3 (copy)
-				if (if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames / 60 else abuseReportMenuScreenshotWaitFrames / 60) <= os.clock() - processTime and (if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames else abuseReportMenuScreenshotWaitFrames) <= var12 then
+				-- upvalues: processTime (ref), userGameSettingsService (copy), abuseReportMenuScreenshotReduceMotionWaitFrames (copy), abuseReportMenuScreenshotWaitFrames (copy), var5 (write), heartbeatConnection_1 (write), p4 (copy)
+				if (if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames / 60 else abuseReportMenuScreenshotWaitFrames / 60) <= os.clock() - processTime and (if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames else abuseReportMenuScreenshotWaitFrames) <= var5 then
 					heartbeatConnection_1:Disconnect()
-					p3()
+					p4()
 					
 					return
 				end
-				var12 += 1
+				var5 += 1
 			end)
 			
 			return
-		elseif not var7 then
-			p5()
+		elseif not var1 then
+			p6()
 		end
-	end, { p1 })
+	end, { p2 })
 end

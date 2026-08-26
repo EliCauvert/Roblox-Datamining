@@ -4,36 +4,36 @@ local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local responsiveModule = require(parent.Responsive)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: responsiveModule (ref), reactFocusNavigationModule (ref), reactModule (ref), collectionService (ref)
-	local var4 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
-	local var5 = reactFocusNavigationModule.useFocusGuiObject()
-	local var6 = reactModule.useRef(false)
+	local var1 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
+	local var2 = reactFocusNavigationModule.useFocusGuiObject()
+	local var3 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), p1 (ref), collectionService (copy), p0 (ref), var6 (ref), var5 (ref)
-		if not var4 then return end
-		local current = p1.current
+		-- upvalues: var1 (ref), p2 (ref), collectionService (copy), p1 (ref), var3 (ref), var2 (ref)
+		if not var1 then return end
+		local current = p2.current
 		
 		if not current then return end
-		for i, v in collectionService:GetTagged(p0) do
-			if not var6.current and v:IsDescendantOf(current) then
-				var6.current = true
-				var5(v)
+		for i, v in collectionService:GetTagged(p1) do
+			if not var3.current and v:IsDescendantOf(current) then
+				var3.current = true
+				var2(v)
 				
 				return
 			end
 		end
-		local var7 = collectionService:GetInstanceAddedSignal(p0):Connect(function(p2)
-			-- upvalues: var6 (copy), current (ref), var5 (copy)
-			if not var6.current and current and p2:IsDescendantOf(current) then
-				var6.current = true
-				var5(p2)
+		local var4 = collectionService:GetInstanceAddedSignal(p1):Connect(function(p3)
+			-- upvalues: var3 (copy), current (ref), var2 (copy)
+			if not var3.current and current and p3:IsDescendantOf(current) then
+				var3.current = true
+				var2(p3)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var7 (ref)
-			var7:Disconnect()
+			-- upvalues: var4 (ref)
+			var4:Disconnect()
 		end
-	end, { var4, p0, var5 })
+	end, { var1, p1, var2 })
 end

@@ -20,8 +20,8 @@ local fFlagPlayerListReduceRerendersModule = require(parent.Parent.Flags.FFlagPl
 local fFlagPlayerListFoundationSubscriptionIcon = playerListModule.Flags.FFlagPlayerListFoundationSubscriptionIcon
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 
-local function _(p0)
-	return p0 ~= nil and (p0 ~= "" and p0:match("^%w+://.*$") == nil)
+local function _(p1)
+	return p1 ~= nil and (p1 ~= "" and p1:match("^%w+://.*$") == nil)
 end
 
 local playerIcon = roactModule.PureComponent:extend("PlayerIcon")
@@ -49,34 +49,34 @@ local _ = function(p1, p2)
 	return if p2.isBlocked then p1.BlockedIcon else friendStatus or nil
 end
 
-local function getIconImage(p3, p4, p5, p6)
+local function getIconImage(p1, p2, p3, p4)
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref)
-	local friendStatus = p3.FriendIcons[p6.friendStatus]
-	local var17 = if p6.isBlocked then p3.BlockedIcon else friendStatus or nil
+	local friendStatus = p1.FriendIcons[p4.friendStatus]
+	local var1 = if p4.isBlocked then p1.BlockedIcon else friendStatus or nil
 	
-	if var17 then
-		return var17
-	elseif p5.isPlaceOwner then
-		return p3.PlaceOwnerIcon
-	elseif p3.CustomPlayerIcons[p4.UserId] then
-		return p3.CustomPlayerIcons[p4.UserId]
-	elseif p5.specialGroupIcon then
-		return p5.specialGroupIcon
-	elseif p6.isFollowing then
-		return p3.FollowingIcon
+	if var1 then
+		return var1
+	elseif p3.isPlaceOwner then
+		return p1.PlaceOwnerIcon
+	elseif p1.CustomPlayerIcons[p2.UserId] then
+		return p1.CustomPlayerIcons[p2.UserId]
+	elseif p3.specialGroupIcon then
+		return p3.specialGroupIcon
+	elseif p4.isFollowing then
+		return p1.FollowingIcon
 	end
-	local var18 = p4.MembershipType == Enum.MembershipType.Premium
+	local var2 = p2.MembershipType == Enum.MembershipType.Premium
 	
 	if fFlagEnableBlackbirdCheck then
-		if game:GetEngineFeature("ReadHasRobloxSubscriptionLua") and p4.HasRobloxSubscription then
-			return p3.SubscriptionIcon
-		elseif not fFlagHidePremiumIconography and var18 then
-			local membershipType = p3.MembershipIcons[p4.MembershipType]
+		if game:GetEngineFeature("ReadHasRobloxSubscriptionLua") and p2.HasRobloxSubscription then
+			return p1.SubscriptionIcon
+		elseif not fFlagHidePremiumIconography and var2 then
+			local membershipType = p1.MembershipIcons[p2.MembershipType]
 			
 			return membershipType or ""
 		end
-	elseif var18 then
-		local membershipType = p3.MembershipIcons[p4.MembershipType]
+	elseif var2 then
+		local membershipType = p1.MembershipIcons[p2.MembershipType]
 		
 		if membershipType then
 			return membershipType
@@ -84,12 +84,12 @@ local function getIconImage(p3, p4, p5, p6)
 	end
 end
 
-function playerIcon.render(p7)
+function playerIcon.render(p1)
 	-- upvalues: withLayoutValues (ref), roactModule (ref), getIconImage (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), fFlagPlayerListFoundationSubscriptionIcon (ref), foundationModule (ref), imageSetLabel (ref)
 	return withLayoutValues(function(_)
-		-- upvalues: p7 (ref), roactModule (copy), getIconImage (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), fFlagPlayerListFoundationSubscriptionIcon (copy), foundationModule (copy), imageSetLabel (copy)
-		layoutValues = p7.props.layoutValues
-		local avatarIcon = p7.props.playerIconInfo and p7.props.playerIconInfo.avatarIcon
+		-- upvalues: p1 (ref), roactModule (copy), getIconImage (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), fFlagPlayerListFoundationSubscriptionIcon (copy), foundationModule (copy), imageSetLabel (copy)
+		layoutValues = p1.props.layoutValues
+		local avatarIcon = p1.props.playerIconInfo and p1.props.playerIconInfo.avatarIcon
 		
 		if avatarIcon == nil then
 			avatarIcon = layoutValues.DefaultThumbnail
@@ -97,7 +97,7 @@ function playerIcon.render(p7)
 		if layoutValues.IsTenFoot then
 			return roactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
-				LayoutOrder = p7.props.layoutOrder or 1,
+				LayoutOrder = p1.props.layoutOrder or 1,
 				Size = layoutValues.PlayerIconBackgroundSize,
 				Image = layoutValues.PlayerBackgroundImage
 			}, {
@@ -110,28 +110,28 @@ function playerIcon.render(p7)
 					Image = avatarIcon
 				})
 			})
-		elseif p7.props.isSmallTouchDevice then
-			local var20 = getIconImage(layoutValues, p7.props.player, p7.props.playerIconInfo, p7.props.playerRelationship)
+		elseif p1.props.isSmallTouchDevice then
+			local var1 = getIconImage(layoutValues, p1.props.player, p1.props.playerIconInfo, p1.props.playerRelationship)
 			
-			if fFlagCoreUiMigrateUIBloxToFoundation or fFlagPlayerListFoundationSubscriptionIcon and typeof(var20) == "table" and var20.isFoundationIcon then
-				local var21 = if typeof(var20) == "table" then var20.name else var20
+			if fFlagCoreUiMigrateUIBloxToFoundation or fFlagPlayerListFoundationSubscriptionIcon and typeof(var1) == "table" and var1.isFoundationIcon then
+				local var2 = if typeof(var1) == "table" then var1.name else var1
 				
 				if fFlagCoreUiMigrateUIBloxToFoundation then
-					if typeof(var20) == "table" and var20.Image ~= nil then
-						var21 = var20.Image
+					if typeof(var1) == "table" and var1.Image ~= nil then
+						var2 = var1.Image
 					end
-					local var22 = var21
+					local var3 = var2
 					
-					return if var22 ~= nil and (var22 ~= "" and var22:match("^%w+://.*$") == nil) then roactModule.createElement(foundationModule.Icon, {
-						name = var21,
+					return if var3 ~= nil and (var3 ~= "" and var3:match("^%w+://.*$") == nil) then roactModule.createElement(foundationModule.Icon, {
+						name = var2,
 						size = foundationModule.Enums.IconSize.Medium,
 						AnchorPoint = Vector2.new(0, 0.5),
 						Position = UDim2.new(0, layoutValues.PlayerNamePaddingXMobile, 0.5, 0)
 					}) else roactModule.createElement(foundationModule.Image, {
-						Image = var21,
-						imageRect = if typeof(var20) == "table" then {
-							offset = var20.ImageRectOffset,
-							size = var20.ImageRectSize
+						Image = var2,
+						imageRect = if typeof(var1) == "table" then {
+							offset = var1.ImageRectOffset,
+							size = var1.ImageRectSize
 						} else nil,
 						Size = layoutValues.PlayerIconSizeMobile,
 						AnchorPoint = Vector2.new(0, 0.5),
@@ -145,56 +145,56 @@ function playerIcon.render(p7)
 					AnchorPoint = Vector2.new(0, 0.5),
 					Position = UDim2.new(0, layoutValues.PlayerNamePaddingXMobile, 0.5, 0),
 					Size = layoutValues.PlayerIconSizeMobile,
-					Image = var20
+					Image = var1
 				})
 			end
 		else
-			local var23 = getIconImage(layoutValues, p7.props.player, p7.props.playerIconInfo, p7.props.playerRelationship)
+			local var4 = getIconImage(layoutValues, p1.props.player, p1.props.playerIconInfo, p1.props.playerRelationship)
 			
-			if not fFlagCoreUiMigrateUIBloxToFoundation and (not fFlagPlayerListFoundationSubscriptionIcon or typeof(var23) ~= "table" or not var23.isFoundationIcon) then
+			if not fFlagCoreUiMigrateUIBloxToFoundation and (not fFlagPlayerListFoundationSubscriptionIcon or typeof(var4) ~= "table" or not var4.isFoundationIcon) then
 				return roactModule.createElement(imageSetLabel, {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					LayoutOrder = p7.props.layoutOrder,
+					LayoutOrder = p1.props.layoutOrder,
 					Size = layoutValues.PlayerIconSize,
-					Image = var23
+					Image = var4
 				})
 			end
-			local var24 = if typeof(var23) == "table" then var23.name else var23
+			local var5 = if typeof(var4) == "table" then var4.name else var4
 			
 			if fFlagCoreUiMigrateUIBloxToFoundation then
-				if typeof(var23) == "table" and var23.Image ~= nil then
-					var24 = var23.Image
+				if typeof(var4) == "table" and var4.Image ~= nil then
+					var5 = var4.Image
 				end
-				local var25 = var24
+				local var6 = var5
 				
-				return if var25 ~= nil and (var25 ~= "" and var25:match("^%w+://.*$") == nil) then roactModule.createElement(foundationModule.Icon, {
-					name = var24,
+				return if var6 ~= nil and (var6 ~= "" and var6:match("^%w+://.*$") == nil) then roactModule.createElement(foundationModule.Icon, {
+					name = var5,
 					size = foundationModule.Enums.IconSize.Small,
-					LayoutOrder = p7.props.layoutOrder
+					LayoutOrder = p1.props.layoutOrder
 				}) else roactModule.createElement(foundationModule.Image, {
-					Image = var24,
-					imageRect = if typeof(var23) == "table" then {
-						offset = var23.ImageRectOffset,
-						size = var23.ImageRectSize
+					Image = var5,
+					imageRect = if typeof(var4) == "table" then {
+						offset = var4.ImageRectOffset,
+						size = var4.ImageRectSize
 					} else nil,
 					Size = layoutValues.PlayerIconSize,
-					LayoutOrder = p7.props.layoutOrder
+					LayoutOrder = p1.props.layoutOrder
 				})
 			end
 		end
 	end)
 end
 
-local function mapStateToProps(p8)
+local function mapStateToProps(p1)
 	return {
-		isSmallTouchDevice = p8.displayOptions.isSmallTouchDevice
+		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice
 	}
 end
 
-local var16 = function(p9)
+local var1 = function(p1)
 	-- upvalues: useLayoutValues (ref), reactModule (ref), playerIcon (ref), cryoModule (ref)
-	return reactModule.createElement(playerIcon, cryoModule.Dictionary.join(p9, { layoutValues = useLayoutValues() }))
+	return reactModule.createElement(playerIcon, cryoModule.Dictionary.join(p1, { layoutValues = useLayoutValues() }))
 end
 
-return if fFlagPlayerListReduceRerendersModule then reactModule.memo(roactRoduxModule.connect(mapStateToProps, nil)(var16)) else roactRoduxModule.connect(mapStateToProps, nil)(var16)
+return if fFlagPlayerListReduceRerendersModule then reactModule.memo(roactRoduxModule.connect(mapStateToProps, nil)(var1)) else roactRoduxModule.connect(mapStateToProps, nil)(var1)

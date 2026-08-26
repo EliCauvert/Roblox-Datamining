@@ -17,61 +17,61 @@ local VRComfortSettingsPage = roact.PureComponent:extend("VRComfortSettingsPage"
 VRComfortSettingsPage.validateProps = t.strictInterface({ closeMenu = t.callback, pageTitle = t.string })
 
 local function _()
-	local var7 = 0
+	local var1 = 0
 	
 	return function()
-		-- upvalues: var7 (write)
-		var7 += 1
+		-- upvalues: var1 (write)
+		var1 += 1
 		
-		return var7
+		return var1
 	end
 end
 
-function VRComfortSettingsPage.render(p0)
+function VRComfortSettingsPage.render(p1)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), pageModule (ref), comfortSettingsEntryModule (write), VRComfortAutoToggleEntryModule (write)
 	return withFoundationOrUIBloxStyle(function(_)
 		return {}
 	end, function(_)
-		-- upvalues: roact (copy), pageModule (copy), p0 (ref), comfortSettingsEntryModule (copy), VRComfortAutoToggleEntryModule (copy)
-		local var8 = 0
+		-- upvalues: roact (copy), pageModule (copy), p1 (ref), comfortSettingsEntryModule (copy), VRComfortAutoToggleEntryModule (copy)
+		local var1 = 0
 		
-		local var9 = function()
-			-- upvalues: var8 (write)
-			var8 += 1
+		local var2 = function()
+			-- upvalues: var1 (write)
+			var1 += 1
 			
-			return var8
+			return var1
 		end
 		
 		return roact.createElement(pageModule, {
 			zIndex = 2,
-			pageTitle = p0.props.pageTitle,
-			position = p0.props.position
+			pageTitle = p1.props.pageTitle,
+			position = p1.props.position
 		}, {
 			Layout = roact.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Right,
 				VerticalAlignment = Enum.VerticalAlignment.Top
 			}),
-			VRComfortSettings = if game:GetEngineFeature("VRMoreComfortSettings") then roact.createElement(comfortSettingsEntryModule, { LayoutOrder = var9() }) else nil,
+			VRComfortSettings = if game:GetEngineFeature("VRMoreComfortSettings") then roact.createElement(comfortSettingsEntryModule, { LayoutOrder = var2() }) else nil,
 			VignetteEnabled = if game:GetEngineFeature("VRMoreComfortSettings") then roact.createElement(VRComfortAutoToggleEntryModule, {
 				labelKey = "CoreScripts.InGameMenu.GameSettings.VignetteEnabled",
 				customValueKey = "VignetteEnabledCustomOption",
 				derivedValueKey = "VignetteEnabled",
-				LayoutOrder = var9()
+				LayoutOrder = var2()
 			}) else nil,
 			VRSteppedRotationEnabled = if game:GetEngineFeature("VRMoreComfortSettings") then roact.createElement(VRComfortAutoToggleEntryModule, {
 				labelKey = "CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled",
 				customValueKey = "VRSmoothRotationEnabledCustomOption",
 				derivedValueKey = "VRSmoothRotationEnabled",
 				checkedValue = false,
-				LayoutOrder = var9()
+				LayoutOrder = var2()
 			}) else nil,
 			VRThirdPersonFixedCamEnabled = if game:GetEngineFeature("VRMoreComfortSettings") then roact.createElement(VRComfortAutoToggleEntryModule, {
 				labelKey = "CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled",
 				customValueKey = "VRThirdPersonFollowCamEnabledCustomOption",
 				derivedValueKey = "VRThirdPersonFollowCamEnabled",
 				checkedValue = false,
-				LayoutOrder = var9()
+				LayoutOrder = var2()
 			}) else nil
 		})
 	end)

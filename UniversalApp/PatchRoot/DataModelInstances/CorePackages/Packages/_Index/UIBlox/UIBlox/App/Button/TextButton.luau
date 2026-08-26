@@ -63,91 +63,91 @@ textButton.defaultProps = {
 	debugGetTextSize = getTextSizeModule
 }
 
-function textButton.init(p0)
+function textButton.init(p1)
 	-- upvalues: controlStateModule (ref)
-	p0:setState({ controlState = controlStateModule.Initialize })
+	p1:setState({ controlState = controlStateModule.Initialize })
 	
-	function p0.onStateChanged(p1, p2)
-		-- upvalues: p0 (ref)
-		p0:setState({ controlState = p2 })
+	function p0.onStateChanged(p2, p3)
+		-- upvalues: p1 (ref)
+		p1:setState({ controlState = p3 })
 		
-		if p0.props.onStateChanged then
-			p0.props.onStateChanged(p1, p2)
+		if p1.props.onStateChanged then
+			p1.props.onStateChanged(p2, p3)
 		end
 	end
 end
 
-function textButton.render(p3)
+function textButton.render(p1)
 	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p4)
-		-- upvalues: p3 (ref)
-		return p3:renderWithProviders(p4, nil, nil)
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderWithProviders(p2, nil, nil)
 	end)
 end
 
-function textButton.renderWithProviders(p5, p6, p7, p8)
+function textButton.renderWithProviders(p1, p2, p3, p4)
 	-- upvalues: controlStateModule (ref), getContentStyleModule (ref), cleanRichTextTagsModule (ref), roactModule (ref), interactableModule (ref), reactModule (ref), uDim (ref), cursorKindModule (ref), genericTextLabelModule (ref)
-	local debugControlState = p5.props.debugControlState or p5.state.controlState
-	local var21 = getContentStyleModule({
-		[controlStateModule.Default] = p5.props.colorStyleDefault,
-		[controlStateModule.Hover] = p5.props.colorStyleHover
-	}, debugControlState, p6)
-	local fontStyle = p6.Font[p5.props.fontStyle]
-	local var22 = fontStyle.RelativeSize * p6.Font.BaseSize
-	local x = p5.props.debugGetTextSize(p5.props.richText and cleanRichTextTagsModule(p5.props.text) or p5.props.text, var22, fontStyle.Font, Vector2.new(10000, 0)).X
-	local var23 = if p5.props.showBackground then p5.props.backgroundColor or p6.Theme.UIMuted else { Color = nil, Transparency = 1 }
-	local verticalPadding = p5.props.verticalPadding
-	local horizontalPadding = p5.props.horizontalPadding
-	local backgroundOnHover = p6.Theme.BackgroundOnHover
+	local debugControlState = p1.props.debugControlState or p1.state.controlState
+	local var1 = getContentStyleModule({
+		[controlStateModule.Default] = p1.props.colorStyleDefault,
+		[controlStateModule.Hover] = p1.props.colorStyleHover
+	}, debugControlState, p2)
+	local fontStyle = p2.Font[p1.props.fontStyle]
+	local var2 = fontStyle.RelativeSize * p2.Font.BaseSize
+	local x = p1.props.debugGetTextSize(p1.props.richText and cleanRichTextTagsModule(p1.props.text) or p1.props.text, var2, fontStyle.Font, Vector2.new(10000, 0)).X
+	local var3 = if p1.props.showBackground then p1.props.backgroundColor or p2.Theme.UIMuted else { Color = nil, Transparency = 1 }
+	local verticalPadding = p1.props.verticalPadding
+	local horizontalPadding = p1.props.horizontalPadding
+	local backgroundOnHover = p2.Theme.BackgroundOnHover
 	
-	if p5.props.hoverBackgroundEnabled and debugControlState == controlStateModule.Hover then
-		var23 = if var23.Color then {
-			Color = var23.Color:Lerp(backgroundOnHover.Color, 1 - backgroundOnHover.Transparency),
-			Transparency = var23.Transparency
+	if p1.props.hoverBackgroundEnabled and debugControlState == controlStateModule.Hover then
+		var3 = if var3.Color then {
+			Color = var3.Color:Lerp(backgroundOnHover.Color, 1 - backgroundOnHover.Transparency),
+			Transparency = var3.Transparency
 		} else backgroundOnHover
 	end
 	return roactModule.createElement(interactableModule, {
-		[reactModule.Tag] = p5.props[reactModule.Tag],
-		AnchorPoint = p5.props.anchorPoint,
-		LayoutOrder = p5.props.layoutOrder,
-		Position = p5.props.position,
-		Size = p5.props.size,
-		isDisabled = p5.props.isDisabled,
-		onStateChanged = p5.onStateChanged,
-		userInteractionEnabled = p5.props.userInteractionEnabled,
-		BackgroundColor3 = var23.Color,
-		BackgroundTransparency = var23.Transparency,
+		[reactModule.Tag] = p1.props[reactModule.Tag],
+		AnchorPoint = p1.props.anchorPoint,
+		LayoutOrder = p1.props.layoutOrder,
+		Position = p1.props.position,
+		Size = p1.props.size,
+		isDisabled = p1.props.isDisabled,
+		onStateChanged = p1.onStateChanged,
+		userInteractionEnabled = p1.props.userInteractionEnabled,
+		BackgroundColor3 = var3.Color,
+		BackgroundTransparency = var3.Transparency,
 		AutoButtonColor = false,
-		SelectionImageObject = if p8 then p8(uDim) else p7 and p7(cursorKindModule.RoundedRectNoInset),
-		[roactModule.Event.Activated] = p5.props.onActivated
+		SelectionImageObject = if p4 then p4(uDim) else p3 and p3(cursorKindModule.RoundedRectNoInset),
+		[roactModule.Event.Activated] = p1.props.onActivated
 	}, {
 		corner = roactModule.createElement("UICorner", { CornerRadius = uDim }),
 		sizeConstraint = roactModule.createElement("UISizeConstraint", {
-			MinSize = Vector2.new(x + horizontalPadding * 2, var22 + verticalPadding * 2)
+			MinSize = Vector2.new(x + horizontalPadding * 2, var2 + verticalPadding * 2)
 		}),
 		textLabel = roactModule.createElement(genericTextLabelModule, {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Text = p5.props.text,
+			Text = p1.props.text,
 			fontStyle = fontStyle,
-			colorStyle = var21,
-			RichText = p5.props.richText
+			colorStyle = var1,
+			RichText = p1.props.richText
 		})
 	})
 end
 
-local function TextButtonFunctionalWrapper(p9)
+local function TextButtonFunctionalWrapper(p1)
 	-- upvalues: useCursorModule (ref), uDim (ref), roactModule (ref), textButton (ref), cryoModule (ref)
-	return roactModule.createElement(textButton, cryoModule.Dictionary.join(p9, { cursor = useCursorModule(uDim) }))
+	return roactModule.createElement(textButton, cryoModule.Dictionary.join(p1, { cursor = useCursorModule(uDim) }))
 end
 
 local textButtonOuterWrapper = roactModule.PureComponent:extend("TextButtonOuterWrapper")
 textButtonOuterWrapper.validateProps = textButton.validateProps
 
-function textButtonOuterWrapper.render(p10)
+function textButtonOuterWrapper.render(p1)
 	-- upvalues: roactModule (ref), TextButtonFunctionalWrapper (ref)
-	return roactModule.createElement(TextButtonFunctionalWrapper, p10.props)
+	return roactModule.createElement(TextButtonFunctionalWrapper, p1.props)
 end
 
 return textButtonOuterWrapper

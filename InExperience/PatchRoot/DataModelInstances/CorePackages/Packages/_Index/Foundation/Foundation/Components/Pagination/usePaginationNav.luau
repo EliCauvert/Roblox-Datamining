@@ -8,93 +8,93 @@ local navPaginationLayoutModule = require(script.Parent.Nav.NavPaginationLayout)
 local paginationSlotsUtilsModule = require(script.Parent.paginationSlotsUtils)
 local usePaginationSelectionChainModule = require(script.Parent.usePaginationSelectionChain)
 
-local function useNavCallbacks(p0, p1)
+local function useNavCallbacks(p1, p2)
 	-- upvalues: reactModule (ref), paginationDirectionModule (ref)
 	return {
-		onDirectionActivated = reactModule.useCallback(function(p2)
-			-- upvalues: paginationDirectionModule (copy), p0 (ref)
-			if p2 == paginationDirectionModule.First then
-				p0.onActivated(1)
+		onDirectionActivated = reactModule.useCallback(function(p3)
+			-- upvalues: paginationDirectionModule (copy), p1 (ref)
+			if p3 == paginationDirectionModule.First then
+				p1.onActivated(1)
 				
 				return
-			elseif p2 == paginationDirectionModule.Last then
-				if p0.count == nil then
+			elseif p3 == paginationDirectionModule.Last then
+				if p1.count == nil then
 					return
 				else
-					p0.onActivated(p0.count)
+					p1.onActivated(p1.count)
 					
 					return
 				end
-			elseif p2 == paginationDirectionModule.Backward then
-				p0.onActivated(p0.page - 1)
+			elseif p3 == paginationDirectionModule.Backward then
+				p1.onActivated(p1.page - 1)
 				
 				return
 			end
-			p0.onActivated(p0.page + 1)
-		end, { p0.count, p0.onActivated, p0.page }),
-		isFirstDisabled = p1.isFirstDisabled or p1.isBackDisabled
+			p1.onActivated(p1.page + 1)
+		end, { p1.count, p1.onActivated, p1.page }),
+		isFirstDisabled = p2.isFirstDisabled or p2.isBackDisabled
 	}
 end
 
-local function _(p3, p4, p5)
+local function _(p1, p2, p3)
 	-- upvalues: withCommonPropsModule (ref)
-	local var8 = withCommonPropsModule(p3, p4)
-	var8.ref = p5
+	local var1 = withCommonPropsModule(p1, p2)
+	var1.ref = p3
 	
-	return var8
+	return var1
 end
 
-return function(p6, p7, p8)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), paginationSlotsUtilsModule (ref), usePaginationSelectionChainModule (ref), useNavCallbacks (ref), navPaginationLayoutModule (ref), withCommonPropsModule (ref)
-	local disabledState = p7.disabledState
-	local var9 = usePaginationSelectionChainModule(reactModule.useMemo(function()
-		-- upvalues: paginationSlotsUtilsModule (copy), p7 (ref), disabledState (ref)
+	local disabledState = p2.disabledState
+	local var1 = usePaginationSelectionChainModule(reactModule.useMemo(function()
+		-- upvalues: paginationSlotsUtilsModule (copy), p2 (ref), disabledState (ref)
 		return paginationSlotsUtilsModule.getPaginationSelectableSlotOrder({
-			hasFirstLastButtons = p7.hasFirstLastButtons,
+			hasFirstLastButtons = p2.hasFirstLastButtons,
 			isFirstDisabled = disabledState.isFirstDisabled,
 			isBackDisabled = disabledState.isBackDisabled,
 			isForwardDisabled = disabledState.isForwardDisabled,
 			isLastDisabled = disabledState.isLastDisabled,
-			pageSlots = p7.pageSlots,
-			currentPage = p7.currentPage
+			pageSlots = p2.pageSlots,
+			currentPage = p2.currentPage
 		})
 	end, {
-		p7.hasFirstLastButtons, p7.currentPage, p7.pageSlots,
+		p2.hasFirstLastButtons, p2.currentPage, p2.pageSlots,
 		disabledState.isBackDisabled, disabledState.isFirstDisabled,
 		disabledState.isForwardDisabled, disabledState.isLastDisabled
 	}), {
-		NextSelectionUp = p6.NextSelectionUp,
-		NextSelectionDown = p6.NextSelectionDown
-	}, p8)
-	local var10 = useNavCallbacks(p6, {
+		NextSelectionUp = p1.NextSelectionUp,
+		NextSelectionDown = p1.NextSelectionDown
+	}, p3)
+	local var2 = useNavCallbacks(p1, {
 		isBackDisabled = disabledState.isBackDisabled,
 		isFirstDisabled = disabledState.isFirstDisabled
 	})
 	
 	return {
-		selection = var9,
-		createLayout = reactModule.useCallback(function(p9, p10)
-			-- upvalues: reactModule (copy), navPaginationLayoutModule (copy), p6 (ref), disabledState (ref), var10 (ref), var9 (ref), p7 (ref), withCommonPropsModule (copy)
+		selection = var1,
+		createLayout = reactModule.useCallback(function(p4, p5)
+			-- upvalues: reactModule (copy), navPaginationLayoutModule (copy), p1 (ref), disabledState (ref), var2 (ref), var1 (ref), p2 (ref), withCommonPropsModule (copy)
 			local createElement = reactModule.createElement
-			local var11 = withCommonPropsModule(p6, {
-				pageContent = p9,
-				size = p6.size,
+			local var3 = withCommonPropsModule(p1, {
+				pageContent = p4,
+				size = p1.size,
 				isBackDisabled = disabledState.isBackDisabled,
-				isFirstDisabled = var10.isFirstDisabled,
+				isFirstDisabled = var2.isFirstDisabled,
 				isForwardDisabled = disabledState.isForwardDisabled,
 				isLastDisabled = disabledState.isLastDisabled,
-				onDirectionActivated = var10.onDirectionActivated,
-				selection = var9,
-				hasFirstLastButtons = p7.hasFirstLastButtons,
-				testId = p6.testId
+				onDirectionActivated = var2.onDirectionActivated,
+				selection = var1,
+				hasFirstLastButtons = p2.hasFirstLastButtons,
+				testId = p1.testId
 			})
-			var11.ref = p10
+			var3.ref = p5
 			
-			return createElement(navPaginationLayoutModule, var11)
+			return createElement(navPaginationLayoutModule, var3)
 		end, {
-			p7.hasFirstLastButtons, disabledState.isBackDisabled,
+			p2.hasFirstLastButtons, disabledState.isBackDisabled,
 			disabledState.isForwardDisabled, disabledState.isLastDisabled,
-			var10.isFirstDisabled, var10.onDirectionActivated, p6, var9
+			var2.isFirstDisabled, var2.onDirectionActivated, p1, var1
 		})
 	}
 end

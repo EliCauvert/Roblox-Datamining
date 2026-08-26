@@ -13,7 +13,7 @@ return function()
 	experienceChatDebug.ResetOnSpawn = false
 	experienceChatDebug.DisplayOrder = -1
 	experienceChatDebug.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	local var5 = 7
+	local var1 = 7
 	local list = {
 		{
 			vertical = Enum.VerticalAlignment.Top,
@@ -57,15 +57,15 @@ return function()
 	UIListLayout.Parent = experienceChatDebug
 	
 	local function _()
-		-- upvalues: list (ref), var5 (write), UIListLayout (ref)
-		local var17 = list[var5]
-		UIListLayout.VerticalAlignment = var17.vertical
-		UIListLayout.HorizontalAlignment = var17.horizontal
+		-- upvalues: list (ref), var1 (write), UIListLayout (ref)
+		local var2 = list[var1]
+		UIListLayout.VerticalAlignment = var2.vertical
+		UIListLayout.HorizontalAlignment = var2.horizontal
 	end
 	
-	local var9 = list[var5]
-	UIListLayout.VerticalAlignment = var9.vertical
-	UIListLayout.HorizontalAlignment = var9.horizontal
+	local var2 = list[var1]
+	UIListLayout.VerticalAlignment = var2.vertical
+	UIListLayout.HorizontalAlignment = var2.horizontal
 	local imageButton = Instance.new("ImageButton")
 	imageButton.AutomaticSize = Enum.AutomaticSize.XY
 	imageButton.Size = UDim2.new(0, 200, 0, 20)
@@ -73,15 +73,15 @@ return function()
 	imageButton.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
 	imageButton.Parent = experienceChatDebug
 	imageButton.Activated:Connect(function()
-		-- upvalues: var5 (write), list (ref), UIListLayout (ref)
-		var5 += 1
+		-- upvalues: var1 (write), list (ref), UIListLayout (ref)
+		var1 += 1
 		
-		if #list < var5 then
-			var5 = 1
+		if #list < var1 then
+			var1 = 1
 		end
-		local var18 = list[var5]
-		UIListLayout.VerticalAlignment = var18.vertical
-		UIListLayout.HorizontalAlignment = var18.horizontal
+		local var3 = list[var1]
+		UIListLayout.VerticalAlignment = var3.vertical
+		UIListLayout.HorizontalAlignment = var3.horizontal
 	end)
 	
 	local function clearEntries()
@@ -98,7 +98,7 @@ return function()
 	UIListLayout_1.VerticalAlignment = Enum.VerticalAlignment.Bottom
 	UIListLayout_1.Parent = imageButton
 	
-	local function addEntryToContainer(p0, p1, p2)
+	local function addEntryToContainer(p1, p2, p3)
 		-- upvalues: t (write), imageButton (ref)
 		if #t > 10 then
 			local removed = table.remove(t, 1)
@@ -109,10 +109,10 @@ return function()
 		end
 		local textLabel = Instance.new("TextLabel")
 		textLabel.AutomaticSize = Enum.AutomaticSize.X
-		textLabel.BackgroundTransparency = p2
-		textLabel.BackgroundColor3 = p1
+		textLabel.BackgroundTransparency = p3
+		textLabel.BackgroundColor3 = p2
 		textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-		textLabel.Text = p0
+		textLabel.Text = p1
 		textLabel.RichText = true
 		textLabel.TextTruncate = Enum.TextTruncate.AtEnd
 		textLabel.TextYAlignment = Enum.TextYAlignment.Top
@@ -127,38 +127,38 @@ return function()
 	local char = utf8.char(128227)
 	local char_1 = utf8.char(128229)
 	
-	local function formatEntry(p3, p4)
+	local function formatEntry(p1, p2)
 		-- upvalues: char (ref), char_1 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), addEntryToContainer (ref)
-		local var23
-		local var21 = if p3.Status == Enum.TextChatMessageStatus.Sending then `{char} Sent` else `{char_1} Rec.`
+		local var3
+		local var4 = if p1.Status == Enum.TextChatMessageStatus.Sending then `{char} Sent` else `{char_1} Rec.`
 		local _ = nil
-		local var22 = if p4 == "Global" then "RBXGlobal" elseif p3.TextChannel and p4 == "Local" then p3.TextChannel.Name else "Unknown"
+		local var5 = if p2 == "Global" then "RBXGlobal" elseif p1.TextChannel and p2 == "Local" then p1.TextChannel.Name else "Unknown"
 		
-		if p3.Status ~= Enum.TextChatMessageStatus.Success then
-			var23 = p3.Status == Enum.TextChatMessageStatus.Sending
+		if p1.Status ~= Enum.TextChatMessageStatus.Success then
+			var3 = p1.Status == Enum.TextChatMessageStatus.Sending
 		end
-		addEntryToContainer(`{var21} [{var22}{if p3.TextChannel and p3.TextChannel.DirectChatRequester then " <font color='#00E344'>(Direct)</font>" else ""}] {if getFFlagExpChatProtectedChatInternalAPIs() then p3.TextInternal else p3.Text} {if var23 then `({p3.Status.Name})` else ""}`, if var23 then Color3.fromRGB(255, 0, 0) else Color3.fromRGB(32, 32, 32), if var23 then 0.5 else 1)
+		addEntryToContainer(`{var4} [{var5}{if p1.TextChannel and p1.TextChannel.DirectChatRequester then " <font color='#00E344'>(Direct)</font>" else ""}] {if getFFlagExpChatProtectedChatInternalAPIs() then p1.TextInternal else p1.Text} {if var3 then `({p1.Status.Name})` else ""}`, if var3 then Color3.fromRGB(255, 0, 0) else Color3.fromRGB(32, 32, 32), if var3 then 0.5 else 1)
 	end
 	
 	if expChatDebuggerIncomingMessageEventEngineFeature then
-		textChatService.OnIncomingMessageEvent:Connect(function(p5)
+		textChatService.OnIncomingMessageEvent:Connect(function(p3)
 			-- upvalues: formatEntry (ref)
-			formatEntry(p5, "Local")
+			formatEntry(p3, "Local")
 		end)
 	else
-		textChatService.MessageReceived:Connect(function(p6)
+		textChatService.MessageReceived:Connect(function(p3)
 			-- upvalues: formatEntry (ref)
-			formatEntry(p6, "Local")
+			formatEntry(p3, "Local")
 		end)
-		textChatService.SendingMessage:Connect(function(p7)
+		textChatService.SendingMessage:Connect(function(p3)
 			-- upvalues: formatEntry (ref)
-			formatEntry(p7, "Local")
+			formatEntry(p3, "Local")
 		end)
 	end
 	if getFFlagTextChatEnableUniverseChatTabs() and expChatDebugGlobalChat then
-		textChatService.UniverseChatMessageReceived:Connect(function(p8)
+		textChatService.UniverseChatMessageReceived:Connect(function(p3)
 			-- upvalues: formatEntry (ref)
-			formatEntry(p8, "Global")
+			formatEntry(p3, "Global")
 		end)
 	end
 	experienceChatDebug.Parent = coreGuiService

@@ -11,58 +11,58 @@ local _ = require(avatarExperienceInspectAndBuy.Types)
 local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
 local useTokens = foundationModule.Hooks.useTokens
 
-local var7 = function(p0, p1)
+local var1 = function(p1, p2)
 	-- upvalues: viewTypeModule (ref)
-	return if p0 == viewTypeModule.Compact then {
-		left = UDim.new(0, p1.Padding.Medium),
-		right = UDim.new(0, p1.Padding.Medium)
-	} elseif p0 == viewTypeModule.Wide then {
-		top = UDim.new(0, p1.Padding.XLarge),
-		left = UDim.new(0, p1.Margin.Large * 2),
-		right = UDim.new(0, p1.Margin.Large * 2),
-		bottom = UDim.new(0, p1.Padding.XLarge)
-	} elseif p0 == viewTypeModule.WideLandscape then {
-		left = UDim.new(0, p1.Padding.Small),
-		right = UDim.new(0, p1.Padding.Medium),
-		top = UDim.new(0, p1.Padding.XSmall)
+	return if p1 == viewTypeModule.Compact then {
+		left = UDim.new(0, p2.Padding.Medium),
+		right = UDim.new(0, p2.Padding.Medium)
+	} elseif p1 == viewTypeModule.Wide then {
+		top = UDim.new(0, p2.Padding.XLarge),
+		left = UDim.new(0, p2.Margin.Large * 2),
+		right = UDim.new(0, p2.Margin.Large * 2),
+		bottom = UDim.new(0, p2.Padding.XLarge)
+	} elseif p1 == viewTypeModule.WideLandscape then {
+		left = UDim.new(0, p2.Padding.Small),
+		right = UDim.new(0, p2.Padding.Medium),
+		top = UDim.new(0, p2.Padding.XSmall)
 	} else nil
 end
 
-return reactModule.forwardRef(function(p2, p3)
-	-- upvalues: useTokens (ref), viewTypeModule (ref), reactModule (ref), itemsViewHeaderModule (ref), var7 (ref), avatarItemsViewModule (ref), buyActionBarLayoutModule (ref)
-	local view = p2.view
-	local var8 = useTokens()
-	local onInspectMenuClosed = p2.onInspectMenuClosed
+return reactModule.forwardRef(function(p1, p2)
+	-- upvalues: useTokens (ref), viewTypeModule (ref), reactModule (ref), itemsViewHeaderModule (ref), var1 (ref), avatarItemsViewModule (ref), buyActionBarLayoutModule (ref)
+	local view = p1.view
+	local var2 = useTokens()
+	local onInspectMenuClosed = p1.onInspectMenuClosed
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		Header = reactModule.createElement(itemsViewHeaderModule, {
 			view = view,
-			headerHeight = var8.Size.Size_1300,
-			padding = var7(view, var8),
-			headerText = p2.headerText,
-			subheaderText = p2.subheaderText,
+			headerHeight = var2.Size.Size_1300,
+			padding = var1(view, var2),
+			headerText = p1.headerText,
+			subheaderText = p1.subheaderText,
 			onBackButtonClick = function()
 				-- upvalues: onInspectMenuClosed (ref)
 				onInspectMenuClosed()
 			end,
-			purchaseButtonProps = p2.buyActionBarProps.purchaseButtonProps
+			purchaseButtonProps = p1.buyActionBarProps.purchaseButtonProps
 		}),
 		List = reactModule.createElement(avatarItemsViewModule, {
-			items = p2.items,
+			items = p1.items,
 			view = view,
-			headerHeightOffset = var8.Size.Size_1300,
-			actionBarHeightOffset = var8.Size.Size_2700,
-			onItemCardActivated = p2.onItemCardActivated,
-			ref = p3
+			headerHeightOffset = var2.Size.Size_1300,
+			actionBarHeightOffset = var2.Size.Size_2700,
+			onItemCardActivated = p1.onItemCardActivated,
+			ref = p2
 		}),
-		BuyActionBarLayout = if p2.view == viewTypeModule.Compact then reactModule.createElement(buyActionBarLayoutModule, {
+		BuyActionBarLayout = if p1.view == viewTypeModule.Compact then reactModule.createElement(buyActionBarLayoutModule, {
 			enableTopBorder = true,
 			ZIndex = 2,
-			buyActionBarProps = p2.buyActionBarProps,
+			buyActionBarProps = p1.buyActionBarProps,
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1),
-			padding = UDim.new(0, var8.Padding.Medium),
-			Size = UDim2.new(1, 0, 0, var8.Size.Size_2700)
+			padding = UDim.new(0, var2.Padding.Medium),
+			Size = UDim2.new(1, 0, 0, var2.Size.Size_2700)
 		}) else nil
 	})
 end)

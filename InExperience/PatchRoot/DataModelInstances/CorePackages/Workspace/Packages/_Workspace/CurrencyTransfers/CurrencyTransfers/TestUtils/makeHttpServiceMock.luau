@@ -1,33 +1,33 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: httpService (ref)
 	return {
 		lastRequestParams = nil,
 		lastEncodedBody = nil,
-		RequestInternal = function(p2, p3)
-			-- upvalues: httpService (copy), p1 (ref), p0 (ref)
-			p2.lastRequestParams = p3
+		RequestInternal = function(p3, p4)
+			-- upvalues: httpService (copy), p2 (ref), p1 (ref)
+			p3.lastRequestParams = p4
 			
 			return {
-				Start = function(_, p4)
-					-- upvalues: httpService (copy), p1 (copy), p0 (copy)
+				Start = function(_, p5)
+					-- upvalues: httpService (copy), p2 (copy), p1 (copy)
 					task.defer(function()
-						-- upvalues: httpService (copy), p1 (copy), p0 (copy), p4 (ref)
-						p4(true, { Body = httpService:JSONEncode(p1 or {}), StatusCode = p0 })
+						-- upvalues: httpService (copy), p2 (copy), p1 (copy), p5 (ref)
+						p5(true, { Body = httpService:JSONEncode(p2 or {}), StatusCode = p1 })
 					end)
 				end
 			}
 		end,
-		JSONEncode = function(p5, p6)
+		JSONEncode = function(p3, p4)
 			-- upvalues: httpService (copy)
-			p5.lastEncodedBody = p6
+			p3.lastEncodedBody = p4
 			
-			return httpService:JSONEncode(p6)
+			return httpService:JSONEncode(p4)
 		end,
-		JSONDecode = function(_, p7)
+		JSONDecode = function(_, p3)
 			-- upvalues: httpService (copy)
-			return httpService:JSONDecode(p7)
+			return httpService:JSONDecode(p3)
 		end
 	}
 end

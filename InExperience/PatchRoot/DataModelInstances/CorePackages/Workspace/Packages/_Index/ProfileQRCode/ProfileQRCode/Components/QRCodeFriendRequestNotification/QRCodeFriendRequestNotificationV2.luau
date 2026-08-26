@@ -22,28 +22,28 @@ local eventNamesModule = require(profileQRCode.Analytics.EventNames)
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagProfileQrCodeDeprecateUserReduxModule = require(profileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), textKeysModule (ref), useStyle (ref), useLocalUserInfoModule (ref), useCombinedUserNameModule (ref), fFlagProfileQrCodeDeprecateUserReduxModule (ref), useAnalyticsModule (ref), reactModule (ref), eventNamesModule (ref), view (ref), userTile (ref), layoutMode (ref), foundationModule (ref), styledTextLabel (ref), button (ref), buttonVariant (ref), inputSize (ref), fillBehavior (ref)
-	local var11 = useTokens()
-	local var12 = useLocalization({
+	local var1 = useTokens()
+	local var2 = useLocalization({
 		accept = "CommonUI.Controls.Action.Accept",
 		dismiss = "CommonUI.Messages.Action.Dismiss",
 		notificationRequest = textKeysModule.NotificationRequestText
 	})
-	local var13 = useStyle()
-	local var14 = useLocalUserInfoModule(p0.userId)
-	local var15 = useCombinedUserNameModule(p0.userId)
-	local var16 = if var15 == "" then if var14 then var14.displayName or (var14.username or "") else "" else var15 .. " @" .. (var14.username or (if fFlagProfileQrCodeDeprecateUserReduxModule then "" else nil))
-	local var17 = useAnalyticsModule()
-	local var18, var19 = reactModule.useState(false)
+	local var3 = useStyle()
+	local var4 = useLocalUserInfoModule(p1.userId)
+	local var5 = useCombinedUserNameModule(p1.userId)
+	local var6 = if var5 == "" then if var4 then var4.displayName or (var4.username or "") else "" else var5 .. " @" .. (var4.username or (if fFlagProfileQrCodeDeprecateUserReduxModule then "" else nil))
+	local var7 = useAnalyticsModule()
+	local var8, var9 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var19 (ref)
-		var19(false)
-	end, { p0.userId })
+		-- upvalues: var9 (ref)
+		var9(false)
+	end, { p1.userId })
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), eventNamesModule (copy), p0 (ref)
-		var17.fireEvent(eventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p0.notificationQueueSize })
-	end, { p0.userId, var17.fireEvent, p0.notificationQueueSize })
+		-- upvalues: var7 (ref), eventNamesModule (copy), p1 (ref)
+		var7.fireEvent(eventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p1.notificationQueueSize })
+	end, { p1.userId, var7.fireEvent, p1.notificationQueueSize })
 	
 	return reactModule.createElement(view, {
 		ZIndex = 2,
@@ -59,20 +59,20 @@ return function(p0)
 		}, {
 			AvatarSlot = reactModule.createElement(view, { tag = "no-flex auto-xy", LayoutOrder = 1 }, {
 				UserTile = reactModule.createElement(userTile, {
-					userId = p0.userId,
+					userId = p1.userId,
 					layoutMode = layoutMode.compact,
 					userPresenceType = foundationModule.Enums.UserPresence.None,
-					avatarSize = UDim2.new(0, var11.Size.Size_1000, 0, var11.Size.Size_1000)
+					avatarSize = UDim2.new(0, var1.Size.Size_1000, 0, var1.Size.Size_1000)
 				})
 			}),
 			ContentColumn = reactModule.createElement(view, { tag = "col fill gap-xsmall auto-y", LayoutOrder = 2 }, {
 				Username = reactModule.createElement(styledTextLabel, {
 					layoutOrder = 1,
 					textWrapped = true,
-					text = var16,
-					fontStyle = var13.Font.Header2,
-					colorStyle = var13.Theme.TextDefault,
-					size = UDim2.new(1, 0, 0, var11.Size.Size_500),
+					text = var6,
+					fontStyle = var3.Font.Header2,
+					colorStyle = var3.Theme.TextDefault,
+					size = UDim2.new(1, 0, 0, var1.Size.Size_500),
 					automaticSize = Enum.AutomaticSize.Y,
 					textXAlignment = Enum.TextXAlignment.Left,
 					textYAlignment = Enum.TextYAlignment.Center
@@ -81,10 +81,10 @@ return function(p0)
 					layoutOrder = 2,
 					textWrapped = true,
 					lineHeight = 1,
-					text = var12.notificationRequest,
-					fontStyle = var13.Font.Body,
-					colorStyle = var13.Theme.TextDefault,
-					size = UDim2.new(1, 0, 0, var11.Size.Size_700),
+					text = var2.notificationRequest,
+					fontStyle = var3.Font.Body,
+					colorStyle = var3.Theme.TextDefault,
+					size = UDim2.new(1, 0, 0, var1.Size.Size_700),
 					automaticSize = Enum.AutomaticSize.Y,
 					textXAlignment = Enum.TextXAlignment.Left,
 					textYAlignment = Enum.TextYAlignment.Center
@@ -95,25 +95,25 @@ return function(p0)
 				}, {
 					AcceptSlot = reactModule.createElement(view, { tag = "fill auto-xy", LayoutOrder = 1 }, {
 						AcceptButton = reactModule.createElement(button, {
-							text = var12.accept,
+							text = var2.accept,
 							variant = buttonVariant.Emphasis,
 							size = inputSize.Small,
 							fillBehavior = fillBehavior.Fill,
-							isDisabled = var18,
+							isDisabled = var8,
 							onActivated = function()
-								-- upvalues: var19 (ref), p0 (ref)
-								var19(true)
-								p0.onAccept(p0.userId)
+								-- upvalues: var9 (ref), p1 (ref)
+								var9(true)
+								p1.onAccept(p1.userId)
 							end
 						})
 					}),
 					DismissSlot = reactModule.createElement(view, { tag = "fill auto-xy", LayoutOrder = 2 }, {
 						DismissButton = reactModule.createElement(button, {
-							text = var12.dismiss,
+							text = var2.dismiss,
 							variant = buttonVariant.Standard,
 							size = inputSize.Small,
 							fillBehavior = fillBehavior.Fill,
-							onActivated = p0.onClose
+							onActivated = p1.onClose
 						})
 					})
 				})

@@ -2,56 +2,56 @@
 local array = luauPolyfillModule.Array
 local string = luauPolyfillModule.String
 
-function dedent(p0, ...)
+function dedent(p1, ...)
 	-- upvalues: array (ref)
 	local list = { ... }
-	local var2 = ""
+	local var1 = ""
 	
-	if array.isArray(p0) then
-		for i = 1, #p0 do
-			var2 ..= p0[i]
+	if array.isArray(p1) then
+		for i = 1, #p1 do
+			var1 ..= p1[i]
 			
 			if i <= #list then
-				var2 ..= list[i]
+				var1 ..= list[i]
 			end
 		end
 	else
-		var2 = p0
+		var1 = p1
 	end
-	local var3 = removeTrailingSpacesAndTabs(removeLeadingNewLines(var2))
-	local var4 = ""
+	local var2 = removeTrailingSpacesAndTabs(removeLeadingNewLines(var1))
+	local var3 = ""
 	
-	for i_1 = 1, string.len(var3) do
-		local substring = string.sub(var3, i_1, i_1)
+	for i_1 = 1, string.len(var2) do
+		local substring = string.sub(var2, i_1, i_1)
 		
 		if substring ~= " " and substring ~= "\t" then break end
-		var4 ..= substring
+		var3 ..= substring
 	end
-	return removeCommonIndent(var3, var4)
+	return removeCommonIndent(var2, var3)
 end
 
-function removeLeadingNewLines(p1)
+function removeLeadingNewLines(p2)
 	-- upvalues: string (ref)
-	local var6 = string.findOr(p1, { "\n*" })
+	local var4 = string.findOr(p2, { "\n*" })
 	
-	if var6 ~= nil and var6.index == 1 then
-		p1 = string.sub(p1, string.len(var6.match) + 1)
+	if var4 ~= nil and var4.index == 1 then
+		p2 = string.sub(p2, string.len(var4.match) + 1)
 	end
-	return p1
+	return p2
 end
 
 function removeTrailingSpacesAndTabs(value)
 	-- upvalues: string (ref)
 	local _ = nil
-	local var7 = nil
-	local var8 = 1
+	local var4 = nil
+	local var5 = 1
 	repeat
-		local var9 = string.findOr(value, { " +", "\t+" }, var8)
-		if var9 == nil then continue end
-		var7 = if var7 == nil or var7.index + string.len(var7.match) ~= var9.index then var9 else { index = var7.index, match = var7.match .. var9.match }
-		var8 = var9.index + string.len(var9.match)
-	until var9 == nil or string.len(value) < var8
-	return if var7 == nil or var7.index + string.len(var7.match) ~= string.len(value) + 1 then value else string.sub(value, 1, var7.index - 1)
+		local var6 = string.findOr(value, { " +", "\t+" }, var5)
+		if var6 == nil then continue end
+		var4 = if var4 == nil or var4.index + string.len(var4.match) ~= var6.index then var6 else { index = var4.index, match = var4.match .. var9.match }
+		var5 = var6.index + string.len(var6.match)
+	until var6 == nil or string.len(value) < var5
+	return if var4 == nil or var4.index + string.len(var4.match) ~= string.len(value) + 1 then value else string.sub(value, 1, var4.index - 1)
 end
 
 function removeCommonIndent(p2, p3)

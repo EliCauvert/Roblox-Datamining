@@ -9,46 +9,46 @@ local _ = require(script.Parent.types)
 local string = luauPolyfillModule.String
 local jsonModule = require(script.Parent.json)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: string (ref)
-	p0 = tostring(p0)
+	p1 = tostring(p1)
 	
-	if string.charCodeAt(p0, 1) == 65279 then
-		p0 = string.slice(p0, 2)
+	if string.charCodeAt(p1, 1) == 65279 then
+		p1 = string.slice(p1, 2)
 	end
-	return p0
+	return p1
 end
 
 local _ = function(p1)
 	-- upvalues: jsonModule (ref), string (ref)
 	local parse = jsonModule.parse
-	local var3 = tostring(p1)
+	local var1 = tostring(p1)
 	
-	if string.charCodeAt(var3, 1) == 65279 then
-		var3 = string.slice(var3, 2)
+	if string.charCodeAt(var1, 1) == 65279 then
+		var1 = string.slice(var1, 2)
 	end
-	return parse(var3)
+	return parse(var1)
 end
 
-function t.parseGraphQLJSON(p2, p3, p4)
+function t.parseGraphQLJSON(p1, p2, p3)
 	-- upvalues: jsonModule (ref), string (ref), boolean (ref), buildClientSchema (ref), error (ref)
 	local parse = jsonModule.parse
-	local var4 = tostring(p3)
+	local var1 = tostring(p2)
 	
-	if string.charCodeAt(var4, 1) == 65279 then
-		var4 = string.slice(var4, 2)
+	if string.charCodeAt(var1, 1) == 65279 then
+		var1 = string.slice(var1, 2)
 	end
-	parse = parse(var4)
+	parse = parse(var1)
 	
 	if boolean.toJSBoolean(parse.data) then
 		parse = parse.data
 	end
 	if parse.kind == "Document" then
-		return { location = p2, document = parse }
+		return { location = p1, document = parse }
 	elseif boolean.toJSBoolean(parse.__schema) then
-		return { location = p2, schema = buildClientSchema(parse, p4) }
+		return { location = p1, schema = buildClientSchema(parse, p3) }
 	elseif typeof(parse) == "string" then
-		return { location = p2, rawSDL = parse }
+		return { location = p1, rawSDL = parse }
 	end
 	error(error.new("Not valid JSON content"))
 end

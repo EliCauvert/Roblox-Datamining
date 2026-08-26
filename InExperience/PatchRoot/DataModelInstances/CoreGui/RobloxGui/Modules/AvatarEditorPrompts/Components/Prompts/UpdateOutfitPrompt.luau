@@ -23,19 +23,19 @@ updateOutfitPrompt.validateProps = tModule.strictInterface({
 	showCustomOutfitNames = tModule.boolean
 })
 
-function updateOutfitPrompt.render(p0)
+function updateOutfitPrompt.render(p1)
 	-- upvalues: robloxTranslatorModule (ref), roactModule (ref), promptWithAvatarViewportModule (ref), buttonType (ref)
 	return roactModule.createElement(promptWithAvatarViewportModule, {
-		humanoidDescription = p0.props.humanoidDescription,
-		rigType = p0.props.rigType,
+		humanoidDescription = p1.props.humanoidDescription,
+		rigType = p1.props.rigType,
 		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptTitle"),
-		bodyText = if p0.props.showCustomOutfitNames then robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptText", { RBX_NAME = p0.props.outfitName }) else robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptTextNoOutfitName"),
+		bodyText = if p1.props.showCustomOutfitNames then robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptText", { RBX_NAME = p1.props.outfitName }) else robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptTextNoOutfitName"),
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
-						onActivated = p0.props.signalUpdateOutfitPermissionDenied,
+						onActivated = p1.props.signalUpdateOutfitPermissionDenied,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptNo")
 					}
 				},
@@ -43,7 +43,7 @@ function updateOutfitPrompt.render(p0)
 					isDefaultChild = false,
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = p0.props.performUpdateOutfit,
+						onActivated = p1.props.performUpdateOutfit,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UpdateOutfitPromptYes")
 					}
 				}
@@ -52,8 +52,8 @@ function updateOutfitPrompt.render(p0)
 	})
 end
 
-return avatarEditorPromptsPolicyModule.connect(function(p3, _)
-	return { showCustomOutfitNames = p3.getCustomOutfitNames() }
+return avatarEditorPromptsPolicyModule.connect(function(p1, _)
+	return { showCustomOutfitNames = p1.getCustomOutfitNames() }
 end)(roactRoduxModule.connect(function(p1)
 	return {
 		screenSize = p1.screenSize,
@@ -61,16 +61,16 @@ end)(roactRoduxModule.connect(function(p1)
 		rigType = p1.promptInfo.rigType,
 		outfitName = p1.promptInfo.outfitName
 	}
-end, function(p2)
+end, function(p1)
 	-- upvalues: signalUpdateOutfitPermissionDeniedModule (ref), performUpdateOutfitModule (ref)
 	return {
 		signalUpdateOutfitPermissionDenied = function()
-			-- upvalues: p2 (ref), signalUpdateOutfitPermissionDeniedModule (copy)
-			return p2(signalUpdateOutfitPermissionDeniedModule)
+			-- upvalues: p1 (ref), signalUpdateOutfitPermissionDeniedModule (copy)
+			return p1(signalUpdateOutfitPermissionDeniedModule)
 		end,
 		performUpdateOutfit = function()
-			-- upvalues: p2 (ref), performUpdateOutfitModule (copy)
-			return p2(performUpdateOutfitModule)
+			-- upvalues: p1 (ref), performUpdateOutfitModule (copy)
+			return p1(performUpdateOutfitModule)
 		end or nil
 	}
 end)(updateOutfitPrompt))

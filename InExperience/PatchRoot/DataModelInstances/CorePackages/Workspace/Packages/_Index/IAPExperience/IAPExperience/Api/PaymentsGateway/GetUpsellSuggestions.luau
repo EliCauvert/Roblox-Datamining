@@ -10,39 +10,39 @@ local fStringIXPLayerMobileUpsellModule = require(parent.Flags.FStringIXPLayerMo
 local text = url.APIS_URL .. "payments-gateway/v1/products/get-upsell-suggestions"
 local enableUpsellVirtualItemBadge = game:DefineFastFlag("EnableUpsellVirtualItemBadge", false)
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7)
+return function(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: enableUpsellVirtualItemBadge (ref), loggerModule (ref), IXPServiceWrapper (ref), fStringIXPLayerMobileUpsellModule (ref), text (ref), httpRbxApiService (ref), httpService (ref)
 	local badgingV2Variant = nil
 	
 	if enableUpsellVirtualItemBadge then
 		loggerModule.debug({ message = "Virtual item flag is on" })
-		local var6 = IXPServiceWrapper:GetLayerData(fStringIXPLayerMobileUpsellModule)
-		loggerModule.debug({ message = "Layer data", layerData = var6 })
+		local var1 = IXPServiceWrapper:GetLayerData(fStringIXPLayerMobileUpsellModule)
+		loggerModule.debug({ message = "Layer data", layerData = var1 })
 		
-		if var6 and var6.badgingV2Variant then
-			badgingV2Variant = var6.badgingV2Variant
+		if var1 and var1.badgingV2Variant then
+			badgingV2Variant = var1.badgingV2Variant
 			IXPServiceWrapper:LogUserLayerExposure(fStringIXPLayerMobileUpsellModule)
 		end
 	end
 	local t = {
-		upsell_platform = p0,
-		user_robux_balance = p1,
-		attempt_robux_amount = p2,
-		max_packages = p3,
+		upsell_platform = p1,
+		user_robux_balance = p2,
+		attempt_robux_amount = p3,
+		max_packages = p4,
 		virtual_item_badge_variant = badgingV2Variant
 	}
 	
-	if p4 ~= nil then
-		t.item_product_id = p4
-	end
 	if p5 ~= nil then
-		t.item_name = p5
+		t.item_product_id = p5
 	end
 	if p6 ~= nil then
-		t.universe_id = p6
+		t.item_name = p6
 	end
 	if p7 ~= nil then
-		t.analytic_id = p7
+		t.universe_id = p7
+	end
+	if p8 ~= nil then
+		t.analytic_id = p8
 	end
 	loggerModule.debug({
 		message = "Making GetUpsellSuggestions API Call",
@@ -62,13 +62,13 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7)
 	if not ok then
 		return false, nil
 	end
-	local var8 = httpService:JSONDecode(status)
+	local var2 = httpService:JSONDecode(status)
 	local t_1 = {
 		products = {},
-		virtualItemBadgeType = var8.virtual_item_badge_type
+		virtualItemBadgeType = var2.virtual_item_badge_type
 	}
 	
-	for i, v in ipairs(var8.products) do
+	for i, v in ipairs(var2.products) do
 		t_1.products[i] = {
 			productId = v.roblox_product_id,
 			providerId = v.provider_product_id,

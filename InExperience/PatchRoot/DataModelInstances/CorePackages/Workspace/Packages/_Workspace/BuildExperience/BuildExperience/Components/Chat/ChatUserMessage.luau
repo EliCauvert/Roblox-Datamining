@@ -11,7 +11,7 @@ local fFlagBuildExperienceCopyChatMessagesModule = require(buildExperience.Flags
 local fFlagBuildExperienceRichTextUserMessagesModule = require(buildExperience.Flags.FFlagBuildExperienceRichTextUserMessages)
 local fFlagBuildExperienceUserMessageHapticFeedbackModule = require(buildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local var8 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then require(parent.InteractionFeedback).useTriggerFeedback else nil
+local var1 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then require(parent.InteractionFeedback).useTriggerFeedback else nil
 local menu = foundationModule.Menu
 local text = foundationModule.Text
 local view = foundationModule.View
@@ -31,17 +31,17 @@ local t_1 = {
 	["'"] = "&apos;"
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: reactModule (ref), t_1 (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: p0 (ref), t_1 (copy)
-		return string.gsub(p0, "[&<>\"']", t_1)
-	end, { p0 })
+		-- upvalues: p1 (ref), t_1 (copy)
+		return string.gsub(p1, "[&<>\"']", t_1)
+	end, { p1 })
 end
 
 local function UserMessageBubble(p1)
 	-- upvalues: useTokens (ref), fFlagBuildExperienceRichTextUserMessagesModule (ref), reactModule (ref), t_1 (ref), text (ref), t (ref), view (ref)
-	local var13 = useTokens()
+	local var2 = useTokens()
 	
 	if fFlagBuildExperienceRichTextUserMessagesModule then
 		local messageText = p1.messageText
@@ -50,7 +50,7 @@ local function UserMessageBubble(p1)
 			LayoutOrder = 1,
 			RichText = true,
 			tag = "auto-xy padding-medium text-body-medium text-wrap text-align-x-left bg-shift-200 content-emphasis",
-			cornerRadius = UDim.new(0, var13.Size.Size_500),
+			cornerRadius = UDim.new(0, var2.Size.Size_500),
 			onSecondaryActivated = p1.onSecondaryActivated,
 			stateLayer = if p1.onSecondaryActivated ~= nil then nil else t,
 			Text = reactModule.useMemo(function()
@@ -63,7 +63,7 @@ local function UserMessageBubble(p1)
 	return reactModule.createElement(view, {
 		LayoutOrder = 1,
 		tag = "auto-xy padding-medium bg-shift-200",
-		cornerRadius = UDim.new(0, var13.Size.Size_500),
+		cornerRadius = UDim.new(0, var2.Size.Size_500),
 		onSecondaryActivated = p1.onSecondaryActivated,
 		stateLayer = if p1.onSecondaryActivated ~= nil then nil else t,
 		testId = p1.testId
@@ -75,58 +75,58 @@ local function UserMessageBubble(p1)
 	})
 end
 
-local function CopyableUserMessageBubble(p2)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var8 (ref), iconName (ref), menu (ref), popoverAlign (ref), default (ref), popoverSide (ref), inputSize (ref), UserMessageBubble (ref)
-	local var14 = if fFlagBuildLocalization then useLocalization({ copyText = localizationStringsModule.CHAT_COPY_TEXT }) else nil
-	local var15, var16 = reactModule.useState(false)
-	local var17 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then var8() else nil
+local function CopyableUserMessageBubble(p1)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var1 (ref), iconName (ref), menu (ref), popoverAlign (ref), default (ref), popoverSide (ref), inputSize (ref), UserMessageBubble (ref)
+	local var2 = if fFlagBuildLocalization then useLocalization({ copyText = localizationStringsModule.CHAT_COPY_TEXT }) else nil
+	local var3, var4 = reactModule.useState(false)
+	local var5 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then var1() else nil
 	
 	return reactModule.createElement(menu, {
 		LayoutOrder = 1,
 		align = popoverAlign.End,
-		isOpen = var15,
+		isOpen = var3,
 		items = {
 			{
 				id = "copy-text",
 				icon = iconName.TwoStackedSquares,
-				text = if fFlagBuildLocalization then var14.copyText else localizationStringsModule.CHAT_COPY_TEXT
+				text = if fFlagBuildLocalization then var2.copyText else localizationStringsModule.CHAT_COPY_TEXT
 			}
 		},
-		onActivated = function(p3)
-			-- upvalues: default (copy), p2 (ref), var16 (ref)
-			if p3 == "copy-text" then
-				default:setClipboardText({ context = "Build-UserMessage", text = p2.messageText })
+		onActivated = function(p2)
+			-- upvalues: default (copy), p1 (ref), var4 (ref)
+			if p2 == "copy-text" then
+				default:setClipboardText({ context = "Build-UserMessage", text = p1.messageText })
 			end
-			var16(false)
+			var4(false)
 		end,
 		onPressedOutside = function()
-			-- upvalues: var16 (ref)
-			var16(false)
+			-- upvalues: var4 (ref)
+			var4(false)
 		end,
 		side = popoverSide.Bottom,
 		size = inputSize.Medium
 	}, {
 		Bubble = reactModule.createElement(UserMessageBubble, {
 			testId = "ChatUserMessage.Bubble",
-			messageText = p2.messageText,
+			messageText = p1.messageText,
 			onSecondaryActivated = function()
-				-- upvalues: fFlagBuildExperienceUserMessageHapticFeedbackModule (copy), var17 (ref), var16 (ref)
+				-- upvalues: fFlagBuildExperienceUserMessageHapticFeedbackModule (copy), var5 (ref), var4 (ref)
 				if fFlagBuildExperienceUserMessageHapticFeedbackModule then
-					var17("Default", "SecondaryActivated")
+					var5("Default", "SecondaryActivated")
 				end
-				var16(true)
+				var4(true)
 			end
 		})
 	})
 end
 
-return reactModule.memo(function(p4)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), CopyableUserMessageBubble (ref), UserMessageBubble (ref)
-	local text = p4.message.text
+	local text = p1.message.text
 	
 	return reactModule.createElement(view, {
 		tag = "row gap-small size-full-0 auto-y",
-		LayoutOrder = p4.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Spacer = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill" }),
 		Message = reactModule.createElement(view, {

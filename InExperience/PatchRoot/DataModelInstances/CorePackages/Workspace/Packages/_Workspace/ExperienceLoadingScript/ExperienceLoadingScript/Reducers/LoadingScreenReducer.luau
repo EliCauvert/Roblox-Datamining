@@ -3,8 +3,8 @@ local roduxModule = require(experienceLoadingScript.Parent.Rodux)
 
 return roduxModule.combineReducers({
 	isSubjectToChinaPolicies = roduxModule.createReducer(nil, {
-		[require(experienceLoadingScript.Actions.SetIsSubjectToChinaPolicies).name] = function(_, p0)
-			return p0.isSubjectToChinaPolicies
+		[require(experienceLoadingScript.Actions.SetIsSubjectToChinaPolicies).name] = function(_, p1)
+			return p1.isSubjectToChinaPolicies
 		end
 	}),
 	productInfo = roduxModule.createReducer(nil, {
@@ -13,8 +13,8 @@ return roduxModule.combineReducers({
 		end
 	}),
 	gameIds = roduxModule.createReducer(nil, {
-		[require(experienceLoadingScript.Actions.SetUniverseId).name] = function(_, p2)
-			return { universeId = p2.universeId, placeId = p2.placeId }
+		[require(experienceLoadingScript.Actions.SetUniverseId).name] = function(_, p1)
+			return { universeId = p1.universeId, placeId = p1.placeId }
 		end
 	})
 })

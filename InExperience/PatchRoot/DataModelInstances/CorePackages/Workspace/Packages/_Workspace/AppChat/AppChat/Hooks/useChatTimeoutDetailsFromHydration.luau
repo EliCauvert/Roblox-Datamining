@@ -9,48 +9,48 @@ local getChatModerationStatusDataHydrationModule = require(appChat.Stores.GetCha
 local getEffectiveChatTimeoutDetailsModule = require(appChat.Utils.getEffectiveChatTimeoutDetails)
 local _ = require(appChat.Utils.serializeChatTimeoutRange)
 
-local function areChatTimeoutDetailsEqual(p0, p1)
-	return p0.isTimedOut == p1.isTimedOut and (p0.timeoutEndTimestamp == p1.timeoutEndTimestamp and (p0.decisionEventId == p1.decisionEventId and p0.duration == p1.duration))
+local function areChatTimeoutDetailsEqual(p1, p2)
+	return p1.isTimedOut == p2.isTimedOut and (p1.timeoutEndTimestamp == p2.timeoutEndTimestamp and (p1.decisionEventId == p2.decisionEventId and p1.duration == p2.duration))
 end
 
-local function _(p2)
-	return if p2 == nil or p2.status ~= "active" then nil else {
-		endTimestamp = p2.endTimestamp,
-		decisionEventId = p2.decisionEventId,
-		duration = p2.duration
+local function _(p1)
+	return if p1 == nil or p1.status ~= "active" then nil else {
+		endTimestamp = p1.endTimestamp,
+		decisionEventId = p1.decisionEventId,
+		duration = p1.duration
 	}
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: reactModule (ref), createCurrentTimeSignal (ref), getChatModerationStatusDataHydrationModule (ref), signalsModule (ref), getEffectiveChatTimeoutDetailsModule (ref), dataHydrationModule (ref), areChatTimeoutDetailsEqual (ref)
-	local var7 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: createCurrentTimeSignal (copy)
 		return createCurrentTimeSignal(1)
 	end, {})
-	local var8 = getChatModerationStatusDataHydrationModule(false)
-	local userStatus = var8.getUserStatus()
-	local var10 = if p3.conversationId then var8.getConversationStatus(p3.conversationId) else userStatus
-	local conversationId = p3.conversationId
+	local var2 = getChatModerationStatusDataHydrationModule(false)
+	local userStatus = var2.getUserStatus()
+	local var3 = if p1.conversationId then var2.getConversationStatus(p1.conversationId) else userStatus
+	local conversationId = p1.conversationId
 	
 	return reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), userStatus (ref), var10 (ref), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), conversationId (ref), p3 (ref), var7 (ref), areChatTimeoutDetailsEqual (copy)
-		return signalsModule.createComputed(function(p4)
-			-- upvalues: userStatus (copy), var10 (copy), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), conversationId (copy), p3 (copy), var7 (copy)
-			local var11 = userStatus.data(p4)
-			local var12 = var10.data(p4)
+		-- upvalues: signalsModule (copy), userStatus (ref), var3 (ref), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), conversationId (ref), p1 (ref), var1 (ref), areChatTimeoutDetailsEqual (copy)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: userStatus (copy), var3 (copy), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), conversationId (copy), p1 (copy), var1 (copy)
+			local var4 = userStatus.data(p2)
+			local var5 = var3.data(p2)
 			
-			return getEffectiveChatTimeoutDetailsModule(if userStatus.status(p4) == dataHydrationModule.DataStatus.Failed then nil elseif var11 == nil or var11.status ~= "active" then nil else {
-				endTimestamp = var11.endTimestamp,
-				decisionEventId = var11.decisionEventId,
-				duration = var11.duration
-			}, if not conversationId or var10.status(p4) == dataHydrationModule.DataStatus.Failed then if var12 == nil or var12.status ~= "active" then nil else {
-				endTimestamp = var12.endTimestamp,
-				decisionEventId = var12.decisionEventId,
-				duration = var12.duration
-			} else nil, p3.conversationModerationType, var7(p4))
+			return getEffectiveChatTimeoutDetailsModule(if userStatus.status(p2) == dataHydrationModule.DataStatus.Failed then nil elseif var4 == nil or var4.status ~= "active" then nil else {
+				endTimestamp = var4.endTimestamp,
+				decisionEventId = var4.decisionEventId,
+				duration = var4.duration
+			}, if not conversationId or var3.status(p2) == dataHydrationModule.DataStatus.Failed then if var5 == nil or var5.status ~= "active" then nil else {
+				endTimestamp = var5.endTimestamp,
+				decisionEventId = var5.decisionEventId,
+				duration = var5.duration
+			} else nil, p1.conversationModerationType, var1(p2))
 		end, areChatTimeoutDetailsEqual)
 	end, {
-		conversationId, var10.data, var10.status, var7, p3.conversationModerationType,
+		conversationId, var3.data, var3.status, var1, p1.conversationModerationType,
 		userStatus.data, userStatus.status
 	})
 end

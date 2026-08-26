@@ -2,13 +2,13 @@
 local reactModule = require(parent.React)
 local view = require(parent.Foundation).View
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-large size-full-0 auto-y",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
-		Start = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill auto-y" }, { Content = p0.startSlot }),
-		End = reactModule.createElement(view, { LayoutOrder = 2, tag = "auto-xy" }, { Content = p0.endSlot })
+		Start = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill auto-y" }, { Content = p1.startSlot }),
+		End = reactModule.createElement(view, { LayoutOrder = 2, tag = "auto-xy" }, { Content = p1.endSlot })
 	})
 end

@@ -5,20 +5,20 @@ local getActionTelemetryFieldValue = require(parent.SduiCoreSystem).getActionTel
 local openSearchResultsWithQueryParamsModule = require(serverDrivenUi.Actions.openSearchResultsWithQueryParams)
 local luaAppSduiQuerySuggestionClickedSortPos = game:DefineFastFlag("LuaAppSduiQuerySuggestionClickedSortPos", false)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: getActionTelemetryFieldValue (ref), openSearchResultsWithQueryParamsModule (ref), querySuggestionClicked (ref), luaAppSduiQuerySuggestionClickedSortPos (ref)
-	local var3 = getActionTelemetryFieldValue(p0, p1, "queryText") or openSearchResultsWithQueryParamsModule.resolveSearchQuery(p0)
+	local var1 = getActionTelemetryFieldValue(p1, p2, "queryText") or openSearchResultsWithQueryParamsModule.resolveSearchQuery(p1)
 	
-	if typeof(var3) == "string" and var3 ~= "" then
-		local var4 = getActionTelemetryFieldValue(p0, p1, "itemPosition")
-		local var5 = getActionTelemetryFieldValue(p0, p1, "collectionPosition")
-		local var6 = getActionTelemetryFieldValue(p0, p1, "collectionId")
-		querySuggestionClicked(p2.appPage, {
+	if typeof(var1) == "string" and var1 ~= "" then
+		local var2 = getActionTelemetryFieldValue(p1, p2, "itemPosition")
+		local var3 = getActionTelemetryFieldValue(p1, p2, "collectionPosition")
+		local var4 = getActionTelemetryFieldValue(p1, p2, "collectionId")
+		querySuggestionClicked(p3.appPage, {
 			componentType = "Pill",
-			pos = if typeof(var4) == "number" then var4 else nil,
-			sortPos = if luaAppSduiQuerySuggestionClickedSortPos then tonumber(var5) elseif typeof(var5) == "number" then var5 else nil,
-			sortId = if var6 ~= nil then nil else tostring(var6),
-			queryText = var3
+			pos = if typeof(var2) == "number" then var2 else nil,
+			sortPos = if luaAppSduiQuerySuggestionClickedSortPos then tonumber(var3) elseif typeof(var3) == "number" then var3 else nil,
+			sortId = if var4 ~= nil then nil else tostring(var4),
+			queryText = var1
 		})
 		
 		return

@@ -22,7 +22,7 @@ local function createStore(_)
 	end, {}, { roduxModule.thunkMiddleware })
 end
 
-local function mockNavigation(p0)
+local function mockNavigation(p1)
 	-- upvalues: reactModule (ref), roactNavigationModule (ref)
 	return reactModule.createElement(roactNavigationModule.Provider, {
 		value = {
@@ -33,12 +33,12 @@ local function mockNavigation(p0)
 			addListener = function()
 				return { remove = function() end }
 			end,
-			getParam = function(_, p1)
-				return p1
+			getParam = function(_, p2)
+				return p2
 			end,
 			navigate = function() end
 		}
-	}, { Child = p0 })
+	}, { Child = p1 })
 end
 
 return {
@@ -46,14 +46,14 @@ return {
 	storyRoot = userList,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p2)
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), styleProviderWithDefaultTheme (ref), roactRoduxModule (ref), createStore (ref), mockNavigation (ref), foundationProvider (ref), foundationModule (ref), designTokenProvider (ref)
-		return function(p3)
-			-- upvalues: reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), createStore (copy), mockNavigation (copy), foundationProvider (copy), foundationModule (copy), designTokenProvider (copy), p2 (ref)
+		return function(p2)
+			-- upvalues: reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), createStore (copy), mockNavigation (copy), foundationProvider (copy), foundationModule (copy), designTokenProvider (copy), p1 (ref)
 			return reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
 				reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore(nil) }, {
 					navigationProvider = mockNavigation(reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Light }, {
-						designTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = p2(p3) })
+						designTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = p1(p2) })
 					}))
 				})
 			})

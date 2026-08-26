@@ -14,18 +14,18 @@ local var1 = t.interface({
 	})
 })
 
-return function(p0)
+return function(p1)
 	-- upvalues: var1 (ref)
-	local var2, _ = var1(p0)
+	local var2, _ = var1(p1)
 	
 	return if var2 then {
-		productId = p0.productId,
-		mobileProductId = p0.mobileProductId,
-		robuxAmount = p0.robuxAmount,
-		isSubscriptionOnly = p0.isSubscriptionOnly,
-		premiumFeatureTypeName = p0.premiumFeatureTypeName,
-		description = p0.description,
-		price = p0.price.amount,
-		currencySymbol = p0.price.currency.currencySymbol
+		productId = p1.productId,
+		mobileProductId = p1.mobileProductId,
+		robuxAmount = p1.robuxAmount,
+		isSubscriptionOnly = p1.isSubscriptionOnly,
+		premiumFeatureTypeName = p1.premiumFeatureTypeName,
+		description = p1.description,
+		price = p1.price.amount,
+		currencySymbol = p1.price.currency.currencySymbol
 	} else nil
 end

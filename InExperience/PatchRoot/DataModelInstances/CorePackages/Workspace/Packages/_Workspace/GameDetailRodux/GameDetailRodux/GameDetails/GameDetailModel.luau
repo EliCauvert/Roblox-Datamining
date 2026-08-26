@@ -8,14 +8,14 @@ local t = {
 	end
 }
 
-function t.mock(p0, p1, p2)
+function t.mock(p1, p2, p3)
 	-- upvalues: t (ref), dateTime (ref)
 	local var1 = t.new()
 	local var2 = dateTime.new()
 	local var3 = dateTime.fromUnixTimestamp(var2:GetUnixTimestamp() + 60)
-	var1.id = p0
+	var1.id = p1
 	var1.rootPlaceId = "370731277"
-	var1.name = p1
+	var1.name = p2
 	var1.description = "This is MeepCity"
 	var1.creator = {
 		id = 123247,
@@ -30,7 +30,7 @@ function t.mock(p0, p1, p2)
 	var1.allowedGearCategories = {}
 	var1.playing = 49252
 	var1.visits = 2358954901
-	var1.maxPlayers = p2 or 110
+	var1.maxPlayers = p3 or 110
 	var1.created = var2:GetIsoDate()
 	var1.updated = var3:GetIsoDate()
 	var1.studioAccessToApisAllowed = true
@@ -42,48 +42,48 @@ function t.mock(p0, p1, p2)
 	return var1
 end
 
-function t.fromJsonData(p3)
+function t.fromJsonData(p1)
 	-- upvalues: t (ref), getZendeskUrl (ref), fFlagLuaAppEdpNonSduiBuildAttribution (ref)
-	local var4 = t.new()
-	var4.id = tostring(p3.id)
-	var4.rootPlaceId = tostring(p3.rootPlaceId)
-	var4.name = p3.name
-	var4.description = p3.description
-	var4.creator = {
-		id = p3.creator.id,
-		name = p3.creator.name,
-		type = p3.creator.type,
-		isRNVAccount = p3.creator.isRNVAccount,
-		hasVerifiedBadge = p3.creator.hasVerifiedBadge
+	local var1 = t.new()
+	var1.id = tostring(p1.id)
+	var1.rootPlaceId = tostring(p1.rootPlaceId)
+	var1.name = p1.name
+	var1.description = p1.description
+	var1.creator = {
+		id = p1.creator.id,
+		name = p1.creator.name,
+		type = p1.creator.type,
+		isRNVAccount = p1.creator.isRNVAccount,
+		hasVerifiedBadge = p1.creator.hasVerifiedBadge
 	}
-	var4.price = p3.price
-	var4.isExperimental = p3.isExperimental
-	var4.allowedGearGenres = p3.allowedGearGenres
-	var4.allowedGearCategories = p3.allowedGearCategories
-	var4.playing = p3.playing
-	var4.visits = p3.visits
-	var4.maxPlayers = p3.maxPlayers
-	var4.created = p3.created
-	var4.updated = p3.updated
-	var4.studioAccessToApisAllowed = p3.studioAccessToApisAllowed
-	var4.universeAvatarType = p3.universeAvatarType
-	var4.genre = p3.genre
-	var4.genre_l1 = p3.genre_l1
-	var4.genre_l2 = p3.genre_l2
-	var4.licenseDescription = p3.licenseDescription
-	var4.localizedFiatPrice = p3.localizedFiatPrice
-	var4.refundLink = p3.refundLink
+	var1.price = p1.price
+	var1.isExperimental = p1.isExperimental
+	var1.allowedGearGenres = p1.allowedGearGenres
+	var1.allowedGearCategories = p1.allowedGearCategories
+	var1.playing = p1.playing
+	var1.visits = p1.visits
+	var1.maxPlayers = p1.maxPlayers
+	var1.created = p1.created
+	var1.updated = p1.updated
+	var1.studioAccessToApisAllowed = p1.studioAccessToApisAllowed
+	var1.universeAvatarType = p1.universeAvatarType
+	var1.genre = p1.genre
+	var1.genre_l1 = p1.genre_l1
+	var1.genre_l2 = p1.genre_l2
+	var1.licenseDescription = p1.licenseDescription
+	var1.localizedFiatPrice = p1.localizedFiatPrice
+	var1.refundLink = p1.refundLink
 	
-	if p3.refundPolicy then
-		var4.refundPolicy = {
-			policyText = p3.refundPolicy.policyText,
-			learnMoreUrl = getZendeskUrl(p3.refundPolicy.learnMoreBaseUrl, p3.refundPolicy.locale, p3.refundPolicy.articleId)
+	if p1.refundPolicy then
+		var1.refundPolicy = {
+			policyText = p1.refundPolicy.policyText,
+			learnMoreUrl = getZendeskUrl(p1.refundPolicy.learnMoreBaseUrl, p1.refundPolicy.locale, p1.refundPolicy.articleId)
 		}
 	end
 	if fFlagLuaAppEdpNonSduiBuildAttribution then
-		var4.creationSource = p3.creationSource
+		var1.creationSource = p1.creationSource
 	end
-	return var4
+	return var1
 end
 
 return t

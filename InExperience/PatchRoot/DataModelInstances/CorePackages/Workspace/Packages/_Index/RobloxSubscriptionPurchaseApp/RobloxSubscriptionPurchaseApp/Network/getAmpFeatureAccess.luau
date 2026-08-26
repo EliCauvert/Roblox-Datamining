@@ -10,8 +10,8 @@ return function()
 	return httpRequestModule.new():get(url.APIS_URL .. "access-management/v1/feature-access?" .. url:makeQueryString({
 		featureNames = robloxPlusAmpFeatureName,
 		namespace = robloxPlusAmpNamespace
-	})):andThen(function(p0)
-		local features = p0 and p0.features
+	})):andThen(function(p1)
+		local features = p1 and p1.features
 		
 		return if type(features) == "table" and #features > 0 then features[1].access else nil
 	end):catch(function()

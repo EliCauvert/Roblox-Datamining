@@ -7,8 +7,8 @@ end)
 
 if t == nil then
 	t = {
-		Get = function(_, _, p0)
-			return p0
+		Get = function(_, _, p1)
+			return p1
 		end
 	}
 end
@@ -18,13 +18,13 @@ function ProcessMessage(p1, p2, p3)
 		return false
 	end
 	local substring = string.sub(p1, 4)
-	local var3 = p2:GetChannel(substring)
+	local var1 = p2:GetChannel(substring)
 	
-	if var3 then
+	if var1 then
 		p2:SwitchCurrentChannel(substring)
 		
 		if not p3.ShowChannelsBar and p2:GetCurrentChannel() then
-			utilModule:SendSystemMessageToSelf(string.gsub(t:Get("GameChat_SwitchChannel_NowInChannel", string.format("You are now chatting in channel: '%s'", substring), { RBX_NAME = substring }), "{RBX_NAME}", substring), var3, {})
+			utilModule:SendSystemMessageToSelf(string.gsub(t:Get("GameChat_SwitchChannel_NowInChannel", string.format("You are now chatting in channel: '%s'", substring), { RBX_NAME = substring }), "{RBX_NAME}", substring), var1, {})
 		end
 	else
 		local currentChannel = p2:GetCurrentChannel()

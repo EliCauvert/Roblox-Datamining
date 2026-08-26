@@ -4,13 +4,13 @@ local signalsModule = require(parent.Signals)
 
 return function(value)
 	-- upvalues: reactModule (ref), signalsModule (ref)
-	local var2 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	
-	if var2.current == nil then
-		local var3, var4 = signalsModule.createSignal(value)
-		var2.current = { get = var3, set = var4 }
+	if var1.current == nil then
+		local var2, var3 = signalsModule.createSignal(value)
+		var1.current = { get = var2, set = var3 }
 	end
-	local current = var2.current
+	local current = var1.current
 	
 	return current.get, current.set
 end

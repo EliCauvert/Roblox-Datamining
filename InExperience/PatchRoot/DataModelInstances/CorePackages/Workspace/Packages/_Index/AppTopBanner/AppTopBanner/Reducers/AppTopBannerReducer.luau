@@ -13,28 +13,28 @@ local t = {
 }
 
 return roduxModule.createReducer(t, {
-	[require(appTopBanner.Actions.SetAppTopBanner).name] = function(p0, p1)
+	[require(appTopBanner.Actions.SetAppTopBanner).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref), constantsModule (ref), t (ref)
-		local isDisabled = p0.isDisabled
+		local isDisabled = p1.isDisabled
 		
-		if p1.expanded then
-			p0 = cryoModule.Dictionary.join(p0, {
-				expanded = p1.expanded,
-				appTopBannerType = p1.appTopBannerType,
-				appTopBannerContentProps = p1.appTopBannerContentProps,
-				onAppTopBannerClick = p1.onAppTopBannerClick,
-				appTopBannerContentHeight = p1.appTopBannerContentHeight or constantsModule.CONTENT_HEIGHT,
+		if p2.expanded then
+			p1 = cryoModule.Dictionary.join(p1, {
+				expanded = p2.expanded,
+				appTopBannerType = p2.appTopBannerType,
+				appTopBannerContentProps = p2.appTopBannerContentProps,
+				onAppTopBannerClick = p2.onAppTopBannerClick,
+				appTopBannerContentHeight = p2.appTopBannerContentHeight or constantsModule.CONTENT_HEIGHT,
 				isDisabled = isDisabled
 			})
 			
-			return p0
-		elseif p0.expanded ~= p1.expanded then
-			p0 = cryoModule.Dictionary.join(t, { isDisabled = isDisabled })
+			return p1
+		elseif p1.expanded ~= p2.expanded then
+			p1 = cryoModule.Dictionary.join(t, { isDisabled = isDisabled })
 		end
-		return p0
+		return p1
 	end,
-	[require(appTopBanner.Actions.DisableAppTopBanner).name] = function(p2, p3)
+	[require(appTopBanner.Actions.DisableAppTopBanner).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return if p2.isDisabled == p3.isDisabled then p2 else cryoModule.Dictionary.join(p2, { isDisabled = not p2.isDisabled })
+		return if p1.isDisabled == p2.isDisabled then p1 else cryoModule.Dictionary.join(p1, { isDisabled = not p1.isDisabled })
 	end
 })

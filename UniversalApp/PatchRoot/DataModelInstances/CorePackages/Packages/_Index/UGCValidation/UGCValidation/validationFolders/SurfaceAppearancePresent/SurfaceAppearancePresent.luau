@@ -13,34 +13,34 @@ return {
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: t (ref), errorSourceStringsModule (ref)
-		local rootInstance = p1.rootInstance
-		local var3 = t[p1.consumerConfig.source] == true
+		local rootInstance = p2.rootInstance
+		local var1 = t[p2.consumerConfig.source] == true
 		local descendants = rootInstance:GetDescendants()
 		table.insert(descendants, rootInstance)
 		
 		for i, v in descendants do
 			if v:IsA("MeshPart") then
-				local var5 = v.TextureID ~= ""
+				local var2 = v.TextureID ~= ""
 				
-				if var3 and not var5 then
-					local var6
+				if var1 and not var2 then
+					local var3
 					local textureContent = v.TextureContent
 					
 					if textureContent.Uri ~= nil then
-						var6 = if textureContent.Uri == "" then textureContent.Object ~= nil else true
+						var3 = if textureContent.Uri == "" then textureContent.Object ~= nil else true
 					end
-					var5 = var6
+					var2 = var3
 				end
 				local surfaceAppearance = v:FindFirstChildWhichIsA("SurfaceAppearance")
 				
-				if var5 then
+				if var2 then
 					if surfaceAppearance then
-						p0:fail(errorSourceStringsModule.Keys.SurfaceAppearance_TextureAndSABothDefined, { MeshPartFullName = v:GetFullName() }, v)
+						p1:fail(errorSourceStringsModule.Keys.SurfaceAppearance_TextureAndSABothDefined, { MeshPartFullName = v:GetFullName() }, v)
 					end
 				elseif not surfaceAppearance then
-					p0:fail(errorSourceStringsModule.Keys.SurfaceAppearance_MissingSA, { MeshPartFullName = v:GetFullName() }, v)
+					p1:fail(errorSourceStringsModule.Keys.SurfaceAppearance_MissingSA, { MeshPartFullName = v:GetFullName() }, v)
 				end
 			end
 		end

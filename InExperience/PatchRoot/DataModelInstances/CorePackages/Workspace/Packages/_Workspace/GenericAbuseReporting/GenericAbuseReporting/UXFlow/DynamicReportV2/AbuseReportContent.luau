@@ -14,40 +14,40 @@ local layoutSlotsProvider = layoutSlotsModule.LayoutSlotsProvider
 local loaderProvider = loaderContextModule.LoaderProvider
 local sheetSlots = layoutSlotsModule.sheetSlots
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useAbuseSheetFlowModule (ref), fFlagEnableInlineSurveyOnUserReport (ref), reactModule (ref), abuseReportDialogModule (ref), arTranslationProvider (ref), abuseReportAnalyticsProvider (ref), loaderProvider (ref), layoutSlotsProvider (ref), sheetSlots (ref)
-	local var6 = useAbuseSheetFlowModule(p0.rawConfig, {
-		abuseVector = p0.abuseVector,
-		targetId = p0.targetId,
-		onClose = p0.onClose,
-		open = p0.open,
-		onCustomSubmit = p0.onCustomSubmit,
-		clientActionHandlers = p0.clientActionHandlers,
-		onFinish = if fFlagEnableInlineSurveyOnUserReport then p0.onFinish else nil
+	local var1 = useAbuseSheetFlowModule(p1.rawConfig, {
+		abuseVector = p1.abuseVector,
+		targetId = p1.targetId,
+		onClose = p1.onClose,
+		open = p1.open,
+		onCustomSubmit = p1.onCustomSubmit,
+		clientActionHandlers = p1.clientActionHandlers,
+		onFinish = if fFlagEnableInlineSurveyOnUserReport then p1.onFinish else nil
 	})
-	reactModule.useImperativeHandle(p1, function()
-		-- upvalues: var6 (ref)
+	reactModule.useImperativeHandle(p2, function()
+		-- upvalues: var1 (ref)
 		return {
 			requestClose = function()
-				-- upvalues: var6 (copy)
-				if var6 then
-					var6.onClose()
+				-- upvalues: var1 (copy)
+				if var1 then
+					var1.onClose()
 				end
 			end
 		}
-	end, { var6 })
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), p0 (ref)
-		if not var6 then
-			p0.onResolveError()
+		-- upvalues: var1 (ref), p1 (ref)
+		if not var1 then
+			p1.onResolveError()
 		end
-	end, { var6, p0.onResolveError })
+	end, { var1, p1.onResolveError })
 	
-	return if var6 then reactModule.createElement(arTranslationProvider, { translations = var6.config.translations }, reactModule.createElement(abuseReportAnalyticsProvider, { analytics = var6.analytics }, reactModule.createElement(loaderProvider, { loaders = {}, open = p0.open }, reactModule.createElement(layoutSlotsProvider, { slots = sheetSlots }, reactModule.createElement(abuseReportDialogModule, {
-		abuseVector = p0.abuseVector,
-		targetId = p0.targetId,
-		onClose = p0.onClose,
-		abuseReportFlow = var6,
-		takeoverFocus = p0.takeoverFocus
+	return if var1 then reactModule.createElement(arTranslationProvider, { translations = var1.config.translations }, reactModule.createElement(abuseReportAnalyticsProvider, { analytics = var1.analytics }, reactModule.createElement(loaderProvider, { loaders = {}, open = p1.open }, reactModule.createElement(layoutSlotsProvider, { slots = sheetSlots }, reactModule.createElement(abuseReportDialogModule, {
+		abuseVector = p1.abuseVector,
+		targetId = p1.targetId,
+		onClose = p1.onClose,
+		abuseReportFlow = var1,
+		takeoverFocus = p1.takeoverFocus
 	}))))) else nil
 end)

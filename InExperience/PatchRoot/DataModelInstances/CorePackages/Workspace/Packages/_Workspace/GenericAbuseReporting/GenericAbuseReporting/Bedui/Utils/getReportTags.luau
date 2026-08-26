@@ -12,96 +12,96 @@ local fFlagEnableReportingFlowForDevSubs = sharedFlagsModule.FFlagEnableReportin
 local fFlagEnableReportingFlowForExperienceShop = sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop
 local fFlagGenericAbuseReportingUnifyReportTagsModule = require(genericAbuseReporting.Flags.FFlagGenericAbuseReportingUnifyReportTags)
 
-local var7 = function(p0)
+local var1 = function(p1)
 	-- upvalues: fFlagGenericAbuseReportingUnifyReportTagsModule (ref), valueToAbuseCategoryModule (ref), abuseCategoryModule (ref)
 	local t = {
 		ENTRY_POINT = "in-app",
-		SUBMITTER_USER_ID = p0.localPlayerUserId
+		SUBMITTER_USER_ID = p1.localPlayerUserId
 	}
 	
 	if fFlagGenericAbuseReportingUnifyReportTagsModule then
-		t.REPORTED_ABUSE_CATEGORY = valueToAbuseCategoryModule[p0.formData.legacy_abuse_category] or (p0.formData.abuse_category or abuseCategoryModule.ABUSE_CATEGORY_INVALID)
+		t.REPORTED_ABUSE_CATEGORY = valueToAbuseCategoryModule[p1.formData.legacy_abuse_category] or (p1.formData.abuse_category or abuseCategoryModule.ABUSE_CATEGORY_INVALID)
 	else
-		t.REPORTED_ABUSE_CATEGORY = p0.formData.abuse_category or abuseCategoryModule.ABUSE_CATEGORY_INVALID
+		t.REPORTED_ABUSE_CATEGORY = p1.formData.abuse_category or abuseCategoryModule.ABUSE_CATEGORY_INVALID
 	end
-	t.REPORTER_COMMENT = p0.formData.free_comment or ""
+	t.REPORTER_COMMENT = p1.formData.free_comment or ""
 	
 	return t
 end
 
-local var8 = function(p1)
+local var2 = function(p1)
 	-- upvalues: dashModule (ref), abuseVectorModule (ref), fFlagEnableReportingFlowForDevSubs (ref), fFlagEnableReportingFlowForExperienceShop (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppEnableReportBadge (ref)
-	local var10 = dashModule.copy(p1.tags)
+	local var3 = dashModule.copy(p1.tags)
 	local targetId = p1.targetId
 	
 	if p1.abuseVector == abuseVectorModule.Looks or p1.abuseVector == abuseVectorModule.CommunityLooks then
 		local targetId_1 = p1.targetId
-		var10.REPORT_TARGET_LOOK_ID = targetId_1.lookId
-		var10.REPORT_TARGET_LOOK_INCLUDED_ASSET_IDS = targetId_1.lookAssetsIds
+		var3.REPORT_TARGET_LOOK_ID = targetId_1.lookId
+		var3.REPORT_TARGET_LOOK_INCLUDED_ASSET_IDS = targetId_1.lookAssetsIds
 	elseif p1.abuseVector == abuseVectorModule.UgcBundle then
-		var10.UGC_BUNDLE_ID = targetId
+		var3.UGC_BUNDLE_ID = targetId
 	elseif p1.abuseVector == abuseVectorModule.ContentPostScreenshot then
-		var10.CONTENT_POST_ID = targetId
+		var3.CONTENT_POST_ID = targetId
 	elseif p1.abuseVector == abuseVectorModule.UserProfile then
-		var10.REPORT_TARGET_USER_ID = targetId
+		var3.REPORT_TARGET_USER_ID = targetId
 	elseif p1.abuseVector == abuseVectorModule.Accessory then
-		var10.REPORT_TARGET_ASSET_ID = targetId
+		var3.REPORT_TARGET_ASSET_ID = targetId
 	elseif p1.abuseVector == abuseVectorModule.Place then
-		var10.REPORT_TARGET_ASSET_ID = targetId
+		var3.REPORT_TARGET_ASSET_ID = targetId
 	elseif fFlagEnableReportingFlowForDevSubs and p1.abuseVector == abuseVectorModule.Subscription then
 		local targetId_1 = p1.targetId
-		var10.REPORT_TARGET_SUBSCRIPTION_TARGET_KEY = targetId_1.subscriptionTargetKey
-		var10.REPORT_TARGET_ASSET_ID = targetId_1.imageAssetId
+		var3.REPORT_TARGET_SUBSCRIPTION_TARGET_KEY = targetId_1.subscriptionTargetKey
+		var3.REPORT_TARGET_ASSET_ID = targetId_1.imageAssetId
 	elseif fFlagEnableReportingFlowForExperienceShop and p1.abuseVector == abuseVectorModule.DeveloperProduct then
-		var10.REPORT_TARGET_DEVELOPER_PRODUCT_ID = targetId
+		var3.REPORT_TARGET_DEVELOPER_PRODUCT_ID = targetId
 	elseif fFlagEnableReportingFlowForExperienceShop and p1.abuseVector == abuseVectorModule.GamePass then
-		var10.REPORT_TARGET_GAME_PASS_ID = targetId
+		var3.REPORT_TARGET_GAME_PASS_ID = targetId
 	elseif fFlagEnableReportingFlowForExperienceShop and p1.abuseVector == abuseVectorModule.InExperienceShop then
-		var10.PLACE_ID = targetId
+		var3.PLACE_ID = targetId
 	elseif p1.abuseVector == abuseVectorModule.Group then
-		var10.REPORT_TARGET_GROUP_ID = targetId
+		var3.REPORT_TARGET_GROUP_ID = targetId
 	elseif p1.abuseVector == abuseVectorModule.Notifications then
-		var10.NOTIFICATION_ID = targetId
+		var3.NOTIFICATION_ID = targetId
 	elseif fFlagLuaAppEnableSponsoredReportAd and p1.abuseVector == abuseVectorModule.AdV2 then
-		var10.AD_ID = targetId
+		var3.AD_ID = targetId
 	elseif fFlagLuaAppEnableReportBadge and p1.abuseVector == abuseVectorModule.Badge then
-		var10.REPORT_TARGET_BADGE_ID = targetId
+		var3.REPORT_TARGET_BADGE_ID = targetId
 	end
 	if p1.abuseVector == abuseVectorModule.Accessory then
-		var10.REPORTED_ABUSE_VECTOR = if p1.custom then p1.custom.assetTypeName else abuseVectorModule.Accessory
+		var3.REPORTED_ABUSE_VECTOR = if p1.custom then p1.custom.assetTypeName else abuseVectorModule.Accessory
 		
-		if var10.REPORTED_ABUSE_VECTOR == "EmoteAnimation" then
-			var10.REPORTED_ABUSE_VECTOR = abuseVectorModule.Accessory
+		if var3.REPORTED_ABUSE_VECTOR == "EmoteAnimation" then
+			var3.REPORTED_ABUSE_VECTOR = abuseVectorModule.Accessory
 			
-			return var10
+			return var3
 		end
 	else
-		var10.REPORTED_ABUSE_VECTOR = p1.abuseVector
+		var3.REPORTED_ABUSE_VECTOR = p1.abuseVector
 	end
-	return var10
+	return var3
 end
 
-return function(p2)
-	-- upvalues: var7 (ref), var8 (ref), dashModule (ref)
-	local var11 = var8({
-		abuseVector = p2.abuseVector,
-		custom = p2.custom,
-		targetId = p2.targetId,
-		tags = var7({
-			formData = p2.formData,
-			localPlayerUserId = p2.localPlayerUserId
+return function(p1)
+	-- upvalues: var1 (ref), var2 (ref), dashModule (ref)
+	local var3 = var2({
+		abuseVector = p1.abuseVector,
+		custom = p1.custom,
+		targetId = p1.targetId,
+		tags = var1({
+			formData = p1.formData,
+			localPlayerUserId = p1.localPlayerUserId
 		})
 	})
-	dashModule.forEach(p2.additionalReportTags or {}, function(p3)
-		-- upvalues: var11 (write)
-		if not p3.tagKey or p3.tagKey == "" or (not p3.tagValue or p3.tagValue == "") then return end
-		if var11[p3.tagKey] == nil then
-			var11[p3.tagKey] = p3.tagValue
+	dashModule.forEach(p1.additionalReportTags or {}, function(p2)
+		-- upvalues: var3 (write)
+		if not p2.tagKey or p2.tagKey == "" or (not p2.tagValue or p2.tagValue == "") then return end
+		if var3[p2.tagKey] == nil then
+			var3[p2.tagKey] = p2.tagValue
 			
 			return
 		end
-		var11[p3.tagKey] ..= "," .. p3.tagValue
+		var3[p2.tagKey] ..= "," .. p3.tagValue
 	end)
 	
-	return var11
+	return var3
 end

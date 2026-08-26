@@ -6,16 +6,16 @@ local constantsModule = require(script.Parent.Parent.Constants)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local wheelText = roactModule.PureComponent:extend("WheelText")
 
-function wheelText.getWheelText(p0)
+function wheelText.getWheelText(p1)
 	-- upvalues: starterPlayerService (ref), robloxTranslatorModule (ref), constantsModule (ref)
-	local currentEmotes = p0.props.emotesPage.currentEmotes
-	local locale = p0.props.locale
-	local numberEmotesLoaded = p0.props.emotesPage.numberEmotesLoaded
+	local currentEmotes = p1.props.emotesPage.currentEmotes
+	local locale = p1.props.locale
+	local numberEmotesLoaded = p1.props.emotesPage.numberEmotesLoaded
 	
 	if next(currentEmotes) == nil then
 		return if starterPlayerService.UserEmotesEnabled and numberEmotesLoaded == 0 then robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.NoEmotesEquipped, locale) else robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.EmotesDisabled, locale)
 	end
-	local focusedSegmentIndex = currentEmotes[p0.props.emotesWheel.focusedSegmentIndex]
+	local focusedSegmentIndex = currentEmotes[p1.props.emotesWheel.focusedSegmentIndex]
 	
 	return focusedSegmentIndex or robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.SelectAnEmote, locale)
 end
@@ -40,11 +40,11 @@ function wheelText.render(p1)
 	})
 end
 
-return roactRoduxModule.connect(function(p2)
+return roactRoduxModule.connect(function(p1)
 	return {
-		emotesWheel = p2.emotesWheel,
-		emotesPage = p2.emotesPage,
-		layout = p2.layout,
-		locale = p2.locale
+		emotesWheel = p1.emotesWheel,
+		emotesPage = p1.emotesPage,
+		layout = p1.layout,
+		locale = p1.locale
 	}
 end, nil)(wheelText)

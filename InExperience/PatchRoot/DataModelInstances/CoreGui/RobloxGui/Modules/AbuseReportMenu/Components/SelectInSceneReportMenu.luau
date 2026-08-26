@@ -9,10 +9,10 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local cryoModule = require(corePackagesService.Packages.Cryo)
 local highlightModeVariants = require(corePackagesService.Workspace.Packages.InGameAssetReporting).HighlightModeVariants
-local var5 = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagHighlightModePreciseSelectionEnabled then require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
+local var1 = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagHighlightModePreciseSelectionEnabled then require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
 
-local var6 = function(p0, p1)
-	-- upvalues: robloxTranslatorModule (ref), highlightModeVariants (ref), var5 (write), cryoModule (ref), reactModule (ref), styledTextLabel (ref)
+local var2 = function(p1, p2)
+	-- upvalues: robloxTranslatorModule (ref), highlightModeVariants (ref), var1 (write), cryoModule (ref), reactModule (ref), styledTextLabel (ref)
 	local t = {
 		Layout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -21,21 +21,21 @@ local var6 = function(p0, p1)
 		})
 	}
 	
-	for i, v in ipairs(cryoModule.List.map(if p0 ~= highlightModeVariants.Default then {
-		var5:Format("Feature.ReportAbuse.Label.SelectInSceneDescriptionPrecise1"),
+	for i, v in ipairs(cryoModule.List.map(if p1 ~= highlightModeVariants.Default then {
+		var1:Format("Feature.ReportAbuse.Label.SelectInSceneDescriptionPrecise1"),
 		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
 		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3")
 	} else {
 		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription1"),
 		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
 		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3")
-	}, function(p2, p3)
-		-- upvalues: reactModule (copy), styledTextLabel (copy), p1 (ref)
+	}, function(p3, p4)
+		-- upvalues: reactModule (copy), styledTextLabel (copy), p2 (ref)
 		return reactModule.createElement(styledTextLabel, {
 			text = "\226\128\162 " .. p2,
-			fontStyle = p1.Font.Body,
-			colorStyle = p1.Theme.TextEmphasis,
-			layoutOrder = p3,
+			fontStyle = p2.Font.Body,
+			colorStyle = p2.Theme.TextEmphasis,
+			layoutOrder = p4,
 			automaticSize = Enum.AutomaticSize.XY
 		})
 	end)) do
@@ -50,9 +50,9 @@ local var6 = function(p0, p1)
 	}, t)
 end
 
-return function(p4)
-	-- upvalues: useStyle (ref), reactModule (ref), styledTextLabel (ref), robloxTranslatorModule (ref), var6 (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var8 = useStyle()
+return function(p3)
+	-- upvalues: useStyle (ref), reactModule (ref), styledTextLabel (ref), robloxTranslatorModule (ref), var2 (ref), button (ref), buttonType (ref), standardButtonSize (ref)
+	local var3 = useStyle()
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -69,11 +69,11 @@ return function(p4)
 		Title = reactModule.createElement(styledTextLabel, {
 			layoutOrder = 0,
 			text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Heading.ReportUsingSelectInScene"),
-			fontStyle = var8.Font.Header1,
-			colorStyle = var8.Theme.TextEmphasis,
+			fontStyle = var3.Font.Header1,
+			colorStyle = var3.Theme.TextEmphasis,
 			automaticSize = Enum.AutomaticSize.XY
 		}),
-		SubheadingFrame = if p4.variant then var6(p4.variant, var8) else reactModule.createElement("Frame", {
+		SubheadingFrame = if p3.variant then var2(p3.variant, var3) else reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
@@ -88,22 +88,22 @@ return function(p4)
 			Subheading1 = reactModule.createElement(styledTextLabel, {
 				layoutOrder = 0,
 				text = "\226\128\162 " .. robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription1"),
-				fontStyle = var8.Font.Body,
-				colorStyle = var8.Theme.TextEmphasis,
+				fontStyle = var3.Font.Body,
+				colorStyle = var3.Theme.TextEmphasis,
 				automaticSize = Enum.AutomaticSize.XY
 			}),
 			Subheading2 = reactModule.createElement(styledTextLabel, {
 				layoutOrder = 1,
 				text = "\226\128\162 " .. robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
-				fontStyle = var8.Font.Body,
-				colorStyle = var8.Theme.TextEmphasis,
+				fontStyle = var3.Font.Body,
+				colorStyle = var3.Theme.TextEmphasis,
 				automaticSize = Enum.AutomaticSize.XY
 			}),
 			Subheading3 = reactModule.createElement(styledTextLabel, {
 				layoutOrder = 2,
 				text = "\226\128\162 " .. robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3"),
-				fontStyle = var8.Font.Body,
-				colorStyle = var8.Theme.TextEmphasis,
+				fontStyle = var3.Font.Body,
+				colorStyle = var3.Theme.TextEmphasis,
 				automaticSize = Enum.AutomaticSize.XY
 			})
 		}),
@@ -116,18 +116,18 @@ return function(p4)
 			position = UDim2.new(0.5, 0, 0, 0),
 			anchorPoint = Vector2.new(0.5, 0),
 			onActivated = function()
-				-- upvalues: p4 (ref)
+				-- upvalues: p3 (ref)
 				local safetyService = game:GetService("SafetyService")
 				local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
 				
 				if game:GetEngineFeature("ExperienceStateCaptureIsInBackground") then
-					local var11 = nil
-					var11 = experienceStateCaptureService:GetPropertyChangedSignal("IsInBackground"):Connect(function()
-						-- upvalues: var11 (write), experienceStateCaptureService (ref), p4 (copy)
-						if not var11.Connected then return end
+					local var4 = nil
+					var4 = experienceStateCaptureService:GetPropertyChangedSignal("IsInBackground"):Connect(function()
+						-- upvalues: var4 (write), experienceStateCaptureService (ref), p3 (copy)
+						if not var4.Connected then return end
 						if not experienceStateCaptureService.IsInBackground then
-							p4.hideReportTab()
-							var11:Disconnect()
+							p3.hideReportTab()
+							var4:Disconnect()
 						end
 					end)
 				end

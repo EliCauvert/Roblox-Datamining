@@ -2,33 +2,33 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal(true)
-	local var2 = nil
-	local var3, var4 = createSignal(false)
+	local var1, var2 = createSignal(true)
+	local var3 = nil
+	local var4, var5 = createSignal(false)
 	
 	return {
-		getChromeVisible = var0,
+		getChromeVisible = var1,
 		setChromeVisible = function(value)
-			-- upvalues: var1 (ref)
-			var1(value)
+			-- upvalues: var2 (ref)
+			var2(value)
 		end,
 		revealChrome = function()
-			-- upvalues: var2 (write), var1 (ref)
-			if var2 == nil then
-				var1(true)
+			-- upvalues: var3 (write), var2 (ref)
+			if var3 == nil then
+				var2(true)
 				
 				return
 			end
-			var2()
+			var3()
 		end,
 		setRevealHandler = function(value)
-			-- upvalues: var2 (write)
-			var2 = value
+			-- upvalues: var3 (write)
+			var3 = value
 		end,
-		getOverlayCovering = var3,
+		getOverlayCovering = var4,
 		setOverlayCovering = function(value)
-			-- upvalues: var4 (ref)
-			var4(value)
+			-- upvalues: var5 (ref)
+			var5(value)
 		end
 	}
 end

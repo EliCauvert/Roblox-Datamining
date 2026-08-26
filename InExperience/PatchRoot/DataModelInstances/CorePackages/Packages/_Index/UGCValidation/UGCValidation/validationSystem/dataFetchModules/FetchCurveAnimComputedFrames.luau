@@ -3,12 +3,12 @@ local _ = require(parent.util.Types)
 local curveAnimationFrameCalculatorModule = require(parent.util.CurveAnimationFrameCalculator)
 
 return {
-	getData = function(p0)
+	getData = function(p1)
 		-- upvalues: curveAnimationFrameCalculatorModule (ref)
-		if #p0 == 0 then
+		if #p1 == 0 then
 			return nil
 		end
-		local var1 = p0[1]
+		local var1 = p1[1]
 		local ok, status, var2, var3, var4 = pcall(function()
 			-- upvalues: curveAnimationFrameCalculatorModule (copy), var1 (ref)
 			return curveAnimationFrameCalculatorModule.calculateAnimFramesAtOrigin(var1)

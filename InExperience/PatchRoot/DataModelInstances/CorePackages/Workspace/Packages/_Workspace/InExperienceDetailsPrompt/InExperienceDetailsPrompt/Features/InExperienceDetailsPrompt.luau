@@ -12,29 +12,29 @@ local inExperienceDetailsPromptActionsModule = require(inExperienceDetailsPrompt
 local fFlagLuaAppIedpOverlayAndNavigationFix = require(parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
 local fFlagLuaAppIedpFixPlayButton = require(parent.SharedFlags).FFlagLuaAppIedpFixPlayButton
 
-local function sheetChildren(p0)
+local function sheetChildren(p1)
 	-- upvalues: reactModule (ref), sheet (ref), inExperienceDetailsPromptErrorContentModule (ref), inExperienceDetailsPromptHeaderModule (ref), inExperienceDetailsPromptContentModule (ref), inExperienceDetailsPromptActionsModule (ref), fFlagLuaAppIedpFixPlayButton (ref)
-	return if p0.errorType then {
+	return if p1.errorType then {
 		Content = reactModule.createElement(sheet.Content, nil, {
-			ErrorContent = reactModule.createElement(inExperienceDetailsPromptErrorContentModule, { errorType = p0.errorType })
+			ErrorContent = reactModule.createElement(inExperienceDetailsPromptErrorContentModule, { errorType = p1.errorType })
 		})
 	} else {
 		Header = reactModule.createElement(inExperienceDetailsPromptHeaderModule, {
-			name = p0.name,
-			imageUri = p0.imageUri,
-			creator = p0.creator
+			name = p1.name,
+			imageUri = p1.imageUri,
+			creator = p1.creator
 		}),
 		Content = reactModule.createElement(sheet.Content, nil, {
 			MainContent = reactModule.createElement(inExperienceDetailsPromptContentModule, {
-				ageRecommendation = p0.ageRecommendation,
-				rating = p0.rating
+				ageRecommendation = p1.ageRecommendation,
+				rating = p1.rating
 			})
 		}),
 		Actions = reactModule.createElement(inExperienceDetailsPromptActionsModule, {
-			playability = p0.playability,
-			onJoin = p0.onJoin,
-			rootPlaceId = if fFlagLuaAppIedpFixPlayButton then p0.rootPlaceId else nil,
-			playabilityRetrievalStatus = p0.playabilityRetrievalStatus
+			playability = p1.playability,
+			onJoin = p1.onJoin,
+			rootPlaceId = if fFlagLuaAppIedpFixPlayButton then p1.rootPlaceId else nil,
+			playabilityRetrievalStatus = p1.playabilityRetrievalStatus
 		})
 	}
 end

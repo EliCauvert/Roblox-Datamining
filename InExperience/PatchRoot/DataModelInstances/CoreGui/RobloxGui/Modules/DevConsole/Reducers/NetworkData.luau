@@ -2,9 +2,9 @@
 local clientNetworkUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ClientNetworkUpdateSearchFilter)
 local serverNetworkUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ServerNetworkUpdateSearchFilter)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: clientNetworkUpdateSearchFilterModule (ref), immutableModule (ref), serverNetworkUpdateSearchFilterModule (ref)
-	p0 = p0 or { clientSearchTerm = "", serverSearchTerm = "" }
+	p1 = p1 or { clientSearchTerm = "", serverSearchTerm = "" }
 	
-	return if p1.type == clientNetworkUpdateSearchFilterModule.name then immutableModule.Set(p0, "clientSearchTerm", p1.searchTerm) elseif p1.type == serverNetworkUpdateSearchFilterModule.name then immutableModule.Set(p0, "serverSearchTerm", p1.searchTerm) else p0
+	return if p2.type == clientNetworkUpdateSearchFilterModule.name then immutableModule.Set(p1, "clientSearchTerm", p2.searchTerm) elseif p2.type == serverNetworkUpdateSearchFilterModule.name then immutableModule.Set(p1, "serverSearchTerm", p2.searchTerm) else p1
 end

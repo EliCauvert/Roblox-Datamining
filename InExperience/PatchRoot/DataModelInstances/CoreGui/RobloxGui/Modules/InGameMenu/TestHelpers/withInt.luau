@@ -1,7 +1,7 @@
-﻿return function(p0, p1, p2)
-	local var0 = game:SetFastIntForTesting(p0, p1)
-	local ok, status = pcall(p2)
-	game:SetFastIntForTesting(p0, var0)
+﻿return function(p1, p2, p3)
+	local var1 = game:SetFastIntForTesting(p1, p2)
+	local ok, status = pcall(p3)
+	game:SetFastIntForTesting(p1, var1)
 	
 	if not ok then
 		error(status)

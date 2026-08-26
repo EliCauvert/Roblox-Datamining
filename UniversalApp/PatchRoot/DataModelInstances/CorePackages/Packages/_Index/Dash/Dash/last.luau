@@ -1,14 +1,14 @@
-﻿return function(p0, p1)
-	for i = #p0, 1, -1 do
-		local var0 = p0[i]
+﻿return function(p1, p2)
+	for i = #p1, 1, -1 do
+		local var1 = p1[i]
 		
-		if p1 then
-			if not p1 or not p1(var0, i) then
+		if p2 then
+			if not p2 or not p2(var1, i) then
 				continue
 			end
-			return var0
+			return var1
 		end
-		return var0
+		return var1
 	end
 	return nil
 end

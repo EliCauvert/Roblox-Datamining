@@ -6,26 +6,26 @@ local signalsReactModule = require(parent.SignalsReact)
 local fFlagMomentsNonInfiniteScrollEndStateFixesModule = require(moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
 local useFeed = require(moments.Components.Feed.FeedContext).useFeed
 local momentsEndStateViewModule = require(script.Parent.MomentsEndStateView)
-local var6 = if fFlagMomentsNonInfiniteScrollEndStateFixesModule then signalsModule.createSignal(true) else nil
+local var1 = if fFlagMomentsNonInfiniteScrollEndStateFixesModule then signalsModule.createSignal(true) else nil
 
-return function(p0)
-	-- upvalues: useFeed (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), signalsReactModule (ref), var6 (write), reactModule (ref), momentsEndStateViewModule (ref)
-	local var7 = useFeed()
-	local var8 = true
+return function(p1)
+	-- upvalues: useFeed (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), signalsReactModule (ref), var1 (write), reactModule (ref), momentsEndStateViewModule (ref)
+	local var2 = useFeed()
+	local var3 = true
 	
 	if fFlagMomentsNonInfiniteScrollEndStateFixesModule then
-		var8 = signalsReactModule.useSignalState(var7.getCanLoadMoreBeyondLimit or var6)
+		var3 = signalsReactModule.useSignalState(var2.getCanLoadMoreBeyondLimit or var1)
 	end
-	local loadMoreBeyondLimit = var7.loadMoreBeyondLimit
+	local loadMoreBeyondLimit = var2.loadMoreBeyondLimit
 	
 	return reactModule.createElement(momentsEndStateViewModule, {
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		onLoadMore = reactModule.useCallback(function()
 			-- upvalues: loadMoreBeyondLimit (ref)
 			if loadMoreBeyondLimit ~= nil then
 				loadMoreBeyondLimit()
 			end
 		end, { loadMoreBeyondLimit }),
-		showLoadMore = var8
+		showLoadMore = var3
 	})
 end

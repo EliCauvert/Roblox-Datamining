@@ -37,66 +37,66 @@ local t_1 = {
 	[badgeVariantModule.Neutral] = if flagsModule.FoundationBadgeBetaUpdate then badgeVariantModule.Standard else nil
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), t_1 (ref), useScaledValueModule (ref), useTokensModule (ref), reactModule (ref), iconPositionModule (ref), useBadgeVariantsModule (ref), flagsModule (ref), iconSizeModule (ref), useIconSizeModule (ref), isBuilderOrMigratedIcon (ref), iconModule (ref), isMigrated (ref), uiblox (ref), iconVariant (ref), getIconScaleModule (ref), viewModule (ref), imageModule (ref), withCommonPropsModule (ref), textModule (ref)
-	local var23 = withDefaultsModule(p0, t)
-	local variant = t_1[var23.variant] or var23.variant
-	local var25 = useScaledValueModule(200)
-	local var26 = useTokensModule()
-	local var27 = reactModule.useMemo(function()
-		-- upvalues: var23 (ref), iconPositionModule (copy)
-		return if typeof(var23.icon) == "string" then { name = var23.icon, position = iconPositionModule.Left } else var23.icon
-	end, { var23.icon })
-	local var28 = var23.text ~= nil and #var23.text > 0
-	local var29 = useBadgeVariantsModule(var26, variant, var23.shape, if flagsModule.FoundationBadgeBetaUpdate then var23.size else nil, if flagsModule.FoundationBadgeBetaUpdate and var27 then var27.position else nil, if flagsModule.FoundationBadgeBetaUpdate then nil else not var28)
-	local var30 = if flagsModule.FoundationBadgeBetaUpdate then var29.icon.size else iconSizeModule.XSmall
-	local var31 = useIconSizeModule(var30, true)
-	local var32 = nil
+	local var1 = withDefaultsModule(p1, t)
+	local variant = t_1[var1.variant] or var1.variant
+	local var2 = useScaledValueModule(200)
+	local var3 = useTokensModule()
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), iconPositionModule (copy)
+		return if typeof(var1.icon) == "string" then { name = var1.icon, position = iconPositionModule.Left } else var1.icon
+	end, { var1.icon })
+	local var5 = var1.text ~= nil and #var1.text > 0
+	local var6 = useBadgeVariantsModule(var3, variant, var1.shape, if flagsModule.FoundationBadgeBetaUpdate then var1.size else nil, if flagsModule.FoundationBadgeBetaUpdate and var4 then var4.position else nil, if flagsModule.FoundationBadgeBetaUpdate then nil else not var5)
+	local var7 = if flagsModule.FoundationBadgeBetaUpdate then var6.icon.size else iconSizeModule.XSmall
+	local var8 = useIconSizeModule(var7, true)
+	local var9 = nil
 	
-	if var27 ~= nil then
-		local var33 = if var27.position == iconPositionModule.Left then 1 else 3
+	if var4 ~= nil then
+		local var10 = if var4.position == iconPositionModule.Left then 1 else 3
 		
-		if isBuilderOrMigratedIcon(var27.name) then
-			var32 = reactModule.createElement(iconModule, {
-				name = if isMigrated(var27.name) then uiblox[var27.name].name else var27.name,
-				variant = if isMigrated(var27.name) then uiblox[var27.name].variant elseif flagsModule.FoundationBadgeBetaUpdate then var27.variant or iconVariant.Filled else var27.variant,
-				size = var30,
-				style = if flagsModule.FoundationBadgeBetaUpdate then var29.icon.style else var29.content.style,
-				LayoutOrder = var33,
-				testId = `{var23.testId}--icon`
+		if isBuilderOrMigratedIcon(var4.name) then
+			var9 = reactModule.createElement(iconModule, {
+				name = if isMigrated(var4.name) then uiblox[var4.name].name else var4.name,
+				variant = if isMigrated(var4.name) then uiblox[var4.name].variant elseif flagsModule.FoundationBadgeBetaUpdate then var4.variant or iconVariant.Filled else var4.variant,
+				size = var7,
+				style = if flagsModule.FoundationBadgeBetaUpdate then var6.icon.style else var6.content.style,
+				LayoutOrder = var10,
+				testId = `{var1.testId}--icon`
 			})
 		else
-			local var34, var35 = getIconScaleModule(var27.name, var30)
+			local var11, var12 = getIconScaleModule(var4.name, var7)
 			
-			if var34 then
-				var32 = reactModule.createElement(viewModule, { Size = var31 }, reactModule.createElement(imageModule, {
-					Image = var27.name,
-					Size = UDim2.fromOffset(var34.X, var34.Y),
-					imageStyle = if flagsModule.FoundationBadgeBetaUpdate then var29.icon.style else var29.content.style,
-					scale = var35,
+			if var11 then
+				var9 = reactModule.createElement(viewModule, { Size = var8 }, reactModule.createElement(imageModule, {
+					Image = var4.name,
+					Size = UDim2.fromOffset(var11.X, var11.Y),
+					imageStyle = if flagsModule.FoundationBadgeBetaUpdate then var6.icon.style else var6.content.style,
+					scale = var12,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
-					LayoutOrder = var33,
-					testId = `{var23.testId}--icon`
+					LayoutOrder = var10,
+					testId = `{var1.testId}--icon`
 				}))
 			end
 		end
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var23, {
-		backgroundStyle = var29.container.backgroundStyle,
-		stroke = if flagsModule.FoundationBadgeBetaUpdate then nil else var29.container.stroke,
-		tag = var29.container.tag,
-		ref = p1
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		backgroundStyle = var6.container.backgroundStyle,
+		stroke = if flagsModule.FoundationBadgeBetaUpdate then nil else var6.container.stroke,
+		tag = var6.container.tag,
+		ref = p2
 	}), {
-		Icon = var32,
-		Text = if var28 then reactModule.createElement(textModule, {
+		Icon = var9,
+		Text = if var5 then reactModule.createElement(textModule, {
 			RichText = true,
 			LayoutOrder = 2,
-			Text = var23.text,
-			textStyle = var29.content.style,
-			tag = var29.text.tag,
-			testId = `{var23.testId}--text`,
-			sizeConstraint = if flagsModule.FoundationBadgeBetaUpdate then { MaxSize = Vector2.new(var25, 1e999) } else nil
+			Text = var1.text,
+			textStyle = var6.content.style,
+			tag = var6.text.tag,
+			testId = `{var1.testId}--text`,
+			sizeConstraint = if flagsModule.FoundationBadgeBetaUpdate then { MaxSize = Vector2.new(var2, 1e999) } else nil
 		}) else nil
 	})
 end))

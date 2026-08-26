@@ -7,15 +7,15 @@ local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleW
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 
-local function formatTime(p0)
-	local maxValue = math.max(0, p0)
+local function formatTime(p1)
+	local maxValue = math.max(0, p1)
 	
 	return string.format("%d:%02d", math.floor(maxValue / 60), math.floor(maxValue % 60))
 end
 
 return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), formatTime (ref), getColorStyleWithTransparencyModule (ref), reactModule (ref), text (ref)
-	local var6 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(text, {
 		tag = "auto-xy text-label-medium content-emphasis",
@@ -25,9 +25,9 @@ return reactModule.memo(function(p1)
 			
 			return string.format("%s / %s", string.format("%d:%02d", math.floor(maxValue / 60), math.floor(maxValue % 60)), formatTime(p2.duration))
 		end),
-		textStyle = p1.animationRatio:map(function(p3)
-			-- upvalues: getColorStyleWithTransparencyModule (copy), var6 (ref)
-			return getColorStyleWithTransparencyModule(var6.Color.Content.Emphasis, 1 - p3)
+		textStyle = p1.animationRatio:map(function(p2)
+			-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
+			return getColorStyleWithTransparencyModule(var1.Color.Content.Emphasis, 1 - p2)
 		end),
 		LayoutOrder = p1.LayoutOrder
 	})

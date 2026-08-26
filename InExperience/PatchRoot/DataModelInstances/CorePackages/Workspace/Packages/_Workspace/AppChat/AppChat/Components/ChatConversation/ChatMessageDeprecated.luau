@@ -35,9 +35,9 @@ local t_1 = {
 	component = hiddenMessageModule
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref)
-	return if p0 and p0.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[p0.messageType]
+	return if p1 and p1.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[p1.messageType]
 end
 
 local useTokens = require(parent.Foundation).Hooks.useTokens
@@ -92,150 +92,150 @@ function chatMessage.init(p1)
 		return if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p1.props.messageId or p2) else string.gsub(p2, "[^%s]", "#")
 	end
 	
-	function p1.messageMaxWidth(p3, p4)
-		local var16 = 128
+	function p1.messageMaxWidth(p2, p3)
+		local var1 = 128
 		
-		if p3 then
-			var16 += 112
+		if p2 then
+			var1 += 112
 		end
-		return p4 - var16
+		return p3 - var1
 	end
 	
 	if fFlagAppChatEnableAutotranslationModule then
-		p1.getBubbleMaxWidth = memoize(function(p5, p6, p7, p8, p9)
+		p1.getBubbleMaxWidth = memoize(function(p2, p3, p4, p5, p6)
 			-- upvalues: text (copy), p1 (ref)
-			return if p9 then math.max(text.GetTextBounds(p6, p8, p1.props.autotranslationOriginalTextFontSize, Vector2.new(p5, 10000)).X, text.GetTextBounds(p9, p8, p7, Vector2.new(p5, 10000)).X) + 20 else text.GetTextBounds(p6, p8, p7, Vector2.new(p5, 10000)).X + 20
+			return if p6 then math.max(text.GetTextBounds(p3, p5, p1.props.autotranslationOriginalTextFontSize, Vector2.new(p2, 10000)).X, text.GetTextBounds(p6, p5, p4, Vector2.new(p2, 10000)).X) + 20 else text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000)).X + 20
 		end)
 		
 		return
 	end
-	p1.getBubbleMaxWidth = memoize(function(p10, p11, p12, p13)
+	p1.getBubbleMaxWidth = memoize(function(p2, p3, p4, p5)
 		-- upvalues: text (copy)
-		return text.GetTextBounds(p11, p13, p12, Vector2.new(p10, 10000)).X + 20
+		return text.GetTextBounds(p3, p5, p4, Vector2.new(p2, 10000)).X + 20
 	end)
 end
 
-function chatMessage.render(p14)
+function chatMessage.render(p1)
 	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref), loggerModule (ref), pruneConsecutiveNewLines (ref), withStyle (ref), roactModule (ref), chatMessageContainerAutomaticSizeModule (ref), cryoModule (ref), reactModule (ref), fFlagAppChatEnableAutotranslationModule (ref)
-	local props = p14.props
-	local var17 = if props and props.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[props.messageType]
-	props = p14.messageMaxWidth(p14.props.wideMode, p14.props.parentWidth)
+	local props = p1.props
+	local var1 = if props and props.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[props.messageType]
+	props = p1.messageMaxWidth(p1.props.wideMode, p1.props.parentWidth)
 	
-	if var17 then
-		local var18 = pruneConsecutiveNewLines(p14.props.content)
-		var18 = p14.props.moderated and p14.getModeratedText(var18) or var18
-		local content = p14.props.repliesTo and (p14.props.repliesTo.messageType and p14.props.repliesTo.content)
+	if var1 then
+		local var2 = pruneConsecutiveNewLines(p1.props.content)
+		var2 = p1.props.moderated and p1.getModeratedText(var2) or var2
+		local content = p1.props.repliesTo and (p1.props.repliesTo.messageType and p1.props.repliesTo.content)
 		
-		return withStyle(function(p15)
-			-- upvalues: roactModule (copy), chatMessageContainerAutomaticSizeModule (copy), cryoModule (copy), p14 (ref), props (ref), var17 (ref), reactModule (copy), content (ref), messageModelModule (copy), t_1 (copy), t (copy), fFlagAppChatEnableAutotranslationModule (copy), var18 (ref)
-			local body = p15.Font.Body
-			local var20 = p15.Font.BaseSize * body.RelativeSize
-			local var21 = p15.Font.BaseSize * p15.Font.BodySmall.RelativeSize
+		return withStyle(function(p2)
+			-- upvalues: roactModule (copy), chatMessageContainerAutomaticSizeModule (copy), cryoModule (copy), p1 (ref), props (ref), var1 (ref), reactModule (copy), content (ref), messageModelModule (copy), t_1 (copy), t (copy), fFlagAppChatEnableAutotranslationModule (copy), var2 (ref)
+			local body = p2.Font.Body
+			local var3 = p2.Font.BaseSize * body.RelativeSize
+			local var4 = p2.Font.BaseSize * p2.Font.BodySmall.RelativeSize
 			
-			return roactModule.createElement(chatMessageContainerAutomaticSizeModule, cryoModule.Dictionary.join(p14.props, {
+			return roactModule.createElement(chatMessageContainerAutomaticSizeModule, cryoModule.Dictionary.join(p1.props, {
 				messageMaxWidth = props,
-				messageTypePaddingOffset = var17.paddingOffset,
-				messageId = p14.props.messageId,
-				isPending = p14.props.isSending or (p14.props.moderated or p14.props.failed),
-				visibility = p14.props.visibility,
-				renderMessage = function(p16, p17)
-					-- upvalues: reactModule (copy), cryoModule (copy), p14 (copy), content (copy), roactModule (copy), messageModelModule (copy), t_1 (copy), t (copy), body (ref), props (copy), var21 (ref), p15 (ref), var17 (copy), fFlagAppChatEnableAutotranslationModule (copy), var18 (copy), var20 (ref)
-					local var25
+				messageTypePaddingOffset = var1.paddingOffset,
+				messageId = p1.props.messageId,
+				isPending = p1.props.isSending or (p1.props.moderated or p1.props.failed),
+				visibility = p1.props.visibility,
+				renderMessage = function(p3, p4)
+					-- upvalues: reactModule (copy), cryoModule (copy), p1 (copy), content (copy), roactModule (copy), messageModelModule (copy), t_1 (copy), t (copy), body (ref), props (copy), var4 (ref), p2 (ref), var1 (copy), fFlagAppChatEnableAutotranslationModule (copy), var2 (copy), var3 (ref)
+					local var5
 					local createElement = reactModule.createElement
-					local var22 = "ImageButton"
-					local var23 = cryoModule.Dictionary.join({
+					local var6 = "ImageButton"
+					local var7 = cryoModule.Dictionary.join({
 						BackgroundTransparency = 1,
 						AutomaticSize = Enum.AutomaticSize.XY
-					}, p16 or {})
+					}, p3 or {})
 					local t_2 = {
 						UIListLayout = reactModule.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Vertical,
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
-							HorizontalAlignment = if p14.props.isIncoming then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Right,
+							HorizontalAlignment = if p1.props.isIncoming then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Right,
 							Padding = UDim.new(0, 10)
 						})
 					}
 					
 					if content then
-						var25 = roactModule.createElement
-						local repliesTo = p14.props.repliesTo
-						var25 = var25((if repliesTo and repliesTo.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[repliesTo.messageType]).component, {
-							additionalProps = p14.props.additionalProps,
+						var5 = roactModule.createElement
+						local repliesTo = p1.props.repliesTo
+						var5 = var5((if repliesTo and repliesTo.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[repliesTo.messageType]).component, {
+							additionalProps = p1.props.additionalProps,
 							font = body.Font,
 							hasTail = false,
 							innerPadding = 10,
-							isIncoming = p14.props.isIncoming,
+							isIncoming = p1.props.isIncoming,
 							isPending = false,
-							isUnfiltered = p14.props.isUnfiltered,
+							isUnfiltered = p1.props.isUnfiltered,
 							isRepliedTo = true,
-							isLastMessageInMessageGroup = p14.props.isLastMessageInMessageGroup,
+							isLastMessageInMessageGroup = p1.props.isLastMessageInMessageGroup,
 							maxWidth = props,
-							messageDefaultNoticeText = p14.props.messageDefaultNoticeText,
-							messageModeratedNoticeText = p14.props.messageModeratedNoticeText,
-							parentWidth = p14.props.parentWidth,
-							text = p14.props.repliesTo.content,
-							textSize = var21,
-							wideMode = p14.props.wideMode,
-							[roactModule.Change.AbsoluteSize] = p14.messageSizeChanged,
+							messageDefaultNoticeText = p1.props.messageDefaultNoticeText,
+							messageModeratedNoticeText = p1.props.messageModeratedNoticeText,
+							parentWidth = p1.props.parentWidth,
+							text = p1.props.repliesTo.content,
+							textSize = var4,
+							wideMode = p1.props.wideMode,
+							[roactModule.Change.AbsoluteSize] = p1.messageSizeChanged,
 							LayoutOrder = 1
 						})
 					else
-						var25 = nil
+						var5 = nil
 					end
-					t_2.repliesTo = var25
+					t_2.repliesTo = var5
 					t_2.mainMessage = reactModule.createElement("Frame", {
 						AutomaticSize = Enum.AutomaticSize.XY,
 						BackgroundTransparency = 1,
-						[reactModule.Change.AbsoluteSize] = p14.messageSizeChanged,
+						[reactModule.Change.AbsoluteSize] = p1.messageSizeChanged,
 						LayoutOrder = 2,
-						ref = if p17 then p17.ref else nil
+						ref = if p4 then p4.ref else nil
 					}, {
 						UIListLayout = reactModule.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Horizontal,
 							HorizontalAlignment = Enum.HorizontalAlignment.Left,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
 							SortOrder = Enum.SortOrder.LayoutOrder,
-							Padding = UDim.new(0, p15.Tokens.Size.Size_100)
+							Padding = UDim.new(0, p2.Tokens.Size.Size_100)
 						}),
-						Icons = if p17 then p17.Icons else nil,
-						[var17.name] = roactModule.createElement(var17.component, {
-							additionalProps = p14.props.additionalProps,
+						Icons = if p4 then p4.Icons else nil,
+						[var1.name] = roactModule.createElement(var1.component, {
+							additionalProps = p1.props.additionalProps,
 							font = body.Font,
-							hasTail = p14.props.isNewSender,
+							hasTail = p1.props.isNewSender,
 							innerPadding = 10,
-							isIncoming = p14.props.isIncoming,
-							isPending = p14.props.isSending or (p14.props.moderated or p14.props.failed),
-							isUnfiltered = p14.props.isUnfiltered,
-							isLastMessageInMessageGroup = p14.props.isLastMessageInMessageGroup,
-							isLastIncomingChatMessage = p14.props.isLastIncomingChatMessage,
-							isPressed = if p17 then p17.isPressed else nil,
-							maxWidth = if fFlagAppChatEnableAutotranslationModule then p14.getBubbleMaxWidth(props, var18, var20, body.Font, p14.props.translatedText) else p14.getBubbleMaxWidth(props, var18, var20, body.Font),
-							messageDefaultNoticeText = p14.props.messageDefaultNoticeText,
-							messageModeratedNoticeText = p14.props.messageModeratedNoticeText,
-							parentWidth = p14.props.parentWidth,
-							text = var18,
-							textSize = var20,
-							wideMode = p14.props.wideMode,
-							[roactModule.Change.AbsoluteSize] = p14.messageSizeChanged,
-							LayoutOrder = if p14.props.isIncoming then 1 else 2,
-							translatedText = if fFlagAppChatEnableAutotranslationModule then p14.props.translatedText else nil
+							isIncoming = p1.props.isIncoming,
+							isPending = p1.props.isSending or (p1.props.moderated or p1.props.failed),
+							isUnfiltered = p1.props.isUnfiltered,
+							isLastMessageInMessageGroup = p1.props.isLastMessageInMessageGroup,
+							isLastIncomingChatMessage = p1.props.isLastIncomingChatMessage,
+							isPressed = if p4 then p4.isPressed else nil,
+							maxWidth = if fFlagAppChatEnableAutotranslationModule then p1.getBubbleMaxWidth(props, var2, var3, body.Font, p1.props.translatedText) else p1.getBubbleMaxWidth(props, var2, var3, body.Font),
+							messageDefaultNoticeText = p1.props.messageDefaultNoticeText,
+							messageModeratedNoticeText = p1.props.messageModeratedNoticeText,
+							parentWidth = p1.props.parentWidth,
+							text = var2,
+							textSize = var3,
+							wideMode = p1.props.wideMode,
+							[roactModule.Change.AbsoluteSize] = p1.messageSizeChanged,
+							LayoutOrder = if p1.props.isIncoming then 1 else 2,
+							translatedText = if fFlagAppChatEnableAutotranslationModule then p1.props.translatedText else nil
 						})
 					})
 					
-					return createElement(var22, var23, t_2)
+					return createElement(var6, var7, t_2)
 				end
 			}))
 		end)
 	end
-	loggerModule:warning("ChatMessage doesn't support messageType: {}", p14.props.messageType)
+	loggerModule:warning("ChatMessage doesn't support messageType: {}", p1.props.messageType)
 	
 	return nil
 end
 
-return if fFlagAppChatEnableAutotranslationModule then function(p18)
+return if fFlagAppChatEnableAutotranslationModule then function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), chatMessage (ref), cryoModule (ref)
-	return reactModule.createElement(chatMessage, cryoModule.Dictionary.union(p18, {
+	return reactModule.createElement(chatMessage, cryoModule.Dictionary.union(p1, {
 		autotranslationOriginalTextFontSize = useTokens().Typography.BodySmall.FontSize
 	}))
 end else chatMessage

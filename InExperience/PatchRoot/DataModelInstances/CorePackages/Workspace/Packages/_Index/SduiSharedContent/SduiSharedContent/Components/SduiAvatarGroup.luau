@@ -3,43 +3,43 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(parent.SduiCompat)
 
-local function normalizeAvatars(p0)
-	if typeof(p0) ~= "table" then
+local function normalizeAvatars(p1)
+	if typeof(p1) ~= "table" then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		if typeof(v) == "table" then
-			local var4 = tonumber(v.userId)
+			local var1 = tonumber(v.userId)
 			
-			if var4 then
-				table.insert(t, { userId = var4, userPresence = v.userPresence })
+			if var1 then
+				table.insert(t, { userId = var1, userPresence = v.userPresence })
 			end
 		else
-			local var5 = tonumber(v)
+			local var2 = tonumber(v)
 			
-			if var5 then
-				table.insert(t, { userId = var5 })
+			if var2 then
+				table.insert(t, { userId = var2 })
 			end
 		end
 	end
 	return t
 end
 
-return reactModule.memo(function(p1)
+return reactModule.memo(function(p2)
 	-- upvalues: normalizeAvatars (ref), reactModule (ref), foundationModule (ref)
-	local var6 = normalizeAvatars(p1.avatars)
+	local var3 = normalizeAvatars(p2.avatars)
 	
-	return if var6 then reactModule.createElement(foundationModule.AvatarGroup, {
-		LayoutOrder = p1.layoutOrder,
-		Visible = p1.visible,
-		ZIndex = p1.zIndex,
-		avatars = var6,
-		backplateStyle = p1.backplateStyle,
-		max = p1.max,
-		size = p1.size,
-		testId = p1.testId,
-		type = p1.type
+	return if var3 then reactModule.createElement(foundationModule.AvatarGroup, {
+		LayoutOrder = p2.layoutOrder,
+		Visible = p2.visible,
+		ZIndex = p2.zIndex,
+		avatars = var3,
+		backplateStyle = p2.backplateStyle,
+		max = p2.max,
+		size = p2.size,
+		testId = p2.testId,
+		type = p2.type
 	}) else nil
 end)

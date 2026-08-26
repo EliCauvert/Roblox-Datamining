@@ -6,9 +6,9 @@ local renderableInlineElementModule = require(inlineLayoutElements.RenderableInl
 local image = foundationModule.Image
 local t = {}
 
-local function mapProps(p0)
+local function mapProps(p1)
 	-- upvalues: dashModule (ref)
-	return dashModule.omit(p0, { "id" })
+	return dashModule.omit(p1, { "id" })
 end
 
 function t.new(p1)

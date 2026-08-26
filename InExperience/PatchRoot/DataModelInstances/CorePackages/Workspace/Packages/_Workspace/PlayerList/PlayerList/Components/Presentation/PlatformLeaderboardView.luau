@@ -22,81 +22,81 @@ local useLocalization = require(parent_1.Localization).Hooks.useLocalization
 local loadingState = emptyAndErrorStatesModule.LoadingState
 local emptyFriendsState = emptyAndErrorStatesModule.EmptyFriendsState
 local serviceUnavailableState = emptyAndErrorStatesModule.ServiceUnavailableState
-local var14 = signalsModule.createSignal(nil)
-local var15 = signalsModule.createSignal(nil)
-local var16 = require(parent_1.CoreScriptsRoactCommon).Utilities.createSignalMap()
+local var1 = signalsModule.createSignal(nil)
+local var2 = signalsModule.createSignal(nil)
+local var3 = require(parent_1.CoreScriptsRoactCommon).Utilities.createSignalMap()
 
-local function _(p0, p1)
-	return if p0 == nil then "Unable to load" else `Last updated {math.max(0, math.floor((p1 - p0) / 60))} min ago`
+local function _(p1, p2)
+	return if p1 == nil then "Unable to load" else `Last updated {math.max(0, math.floor((p2 - p1) / 60))} min ago`
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: usePlatformLeaderboardModule (ref), useTokens (ref), constantsModule (ref), useReportPanelContentHeightModule (ref), reactModule (ref), useGamepadStickScrollModule (ref), var16 (ref), var14 (ref), var15 (ref), signalsReactModule (ref), signalsModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), playersService (ref), resolveDisplayNameModule (ref), getPeopleHeaderLabelModule (ref), serviceUnavailableState (ref), loadingState (ref), emptyFriendsState (ref), platformEntryViewModule (ref), scrollView (ref), view (ref), text (ref)
-	local tab = p2.tab
+return reactModule.memo(function(p1)
+	-- upvalues: usePlatformLeaderboardModule (ref), useTokens (ref), constantsModule (ref), useReportPanelContentHeightModule (ref), reactModule (ref), useGamepadStickScrollModule (ref), var3 (ref), var1 (ref), var2 (ref), signalsReactModule (ref), signalsModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), playersService (ref), resolveDisplayNameModule (ref), getPeopleHeaderLabelModule (ref), serviceUnavailableState (ref), loadingState (ref), emptyFriendsState (ref), platformEntryViewModule (ref), scrollView (ref), view (ref), text (ref)
+	local tab = p1.tab
 	local isFriends = tab == "Friends"
-	local var18 = p2.legacyPanelBackgroundColor ~= nil
-	local var19 = usePlatformLeaderboardModule()
+	local var4 = p1.legacyPanelBackgroundColor ~= nil
+	local var5 = usePlatformLeaderboardModule()
 	local scale = useTokens().Config.UI.Scale
-	local var20 = constantsModule.PLATFORM_ROW_HEIGHT * scale
-	local var21 = constantsModule.PLATFORM_HEADER_HEIGHT * scale
-	local var22 = 26 * scale
-	local var23 = constantsModule.PLATFORM_RANK_WIDTH * scale
-	local var24 = constantsModule.PLATFORM_SCORE_WIDTH * scale
-	local var25 = useReportPanelContentHeightModule(var21 + var20 + var22)
-	local var26 = reactModule.useRef(nil)
-	local var27 = reactModule.useCallback(function(p3)
-		-- upvalues: var26 (ref), var25 (ref)
-		var26.current = p3
-		var25(p3)
-	end, { var25 })
-	useGamepadStickScrollModule({ scrollingFrameRef = var26, enabled = not var18 })
-	local var28 = if var19 then if isFriends then var19.friendsEntries else var19.globalEntries else var16
-	local var29 = if var19 then if isFriends then var19.getFriendsLastRefreshedAt else var19.getGlobalLastRefreshedAt else var14
-	local var30 = if var19 then if isFriends then var19.getUserFriendScore else var19.getUserScore else var14
-	local var31 = if var19 then if isFriends then var19.getUserFriendRank else var19.getUserRank else var14
-	local var32 = if var19 then var19.getUnit else var15
+	local var6 = constantsModule.PLATFORM_ROW_HEIGHT * scale
+	local var7 = constantsModule.PLATFORM_HEADER_HEIGHT * scale
+	local var8 = 26 * scale
+	local var9 = constantsModule.PLATFORM_RANK_WIDTH * scale
+	local var10 = constantsModule.PLATFORM_SCORE_WIDTH * scale
+	local var11 = useReportPanelContentHeightModule(var7 + var6 + var8)
+	local var12 = reactModule.useRef(nil)
+	local var13 = reactModule.useCallback(function(p2)
+		-- upvalues: var12 (ref), var11 (ref)
+		var12.current = p2
+		var11(p2)
+	end, { var11 })
+	useGamepadStickScrollModule({ scrollingFrameRef = var12, enabled = not var4 })
+	local var14 = if var5 then if isFriends then var5.friendsEntries else var5.globalEntries else var3
+	local var15 = if var5 then if isFriends then var5.getFriendsLastRefreshedAt else var5.getGlobalLastRefreshedAt else var1
+	local var16 = if var5 then if isFriends then var5.getUserFriendScore else var5.getUserScore else var1
+	local var17 = if var5 then if isFriends then var5.getUserFriendRank else var5.getUserRank else var1
+	local var18 = if var5 then var5.getUnit else var2
 	local loading, loading_1 = reactModule.useState("loading")
-	local var35, var36 = reactModule.useState(0)
-	local var37 = reactModule.useRef(false)
-	local var38 = signalsReactModule.useSignalState(var28.getAllData)
-	local var39 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var29 (ref)
-		return signalsModule.createComputed(function(p4)
-			-- upvalues: var29 (copy)
-			return var29(p4) ~= nil
+	local var19, var20 = reactModule.useState(0)
+	local var21 = reactModule.useRef(false)
+	local var22 = signalsReactModule.useSignalState(var14.getAllData)
+	local var23 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var15 (ref)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var15 (copy)
+			return var15(p2) ~= nil
 		end)
-	end, { var29 }))
-	local var40 = 0
+	end, { var15 }))
+	local var24 = 0
 	
-	for i in pairs(var38) do
-		var40 += 1
+	for i in pairs(var22) do
+		var24 += 1
 	end
-	local var44
+	local var25
 	local rankHeader = nil
 	local _ = nil
 	
 	if fFlagPlayerListLocalizeGameTextModule then
-		local var41 = signalsReactModule.useSignalState(var29)
-		local _, var42 = reactModule.useState(0)
+		local var26 = signalsReactModule.useSignalState(var15)
+		local _, var27 = reactModule.useState(0)
 		reactModule.useEffect(function()
-			-- upvalues: var42 (ref)
+			-- upvalues: var27 (ref)
 			local delayedThread = nil
 			
 			local function schedule()
-				-- upvalues: delayedThread (write), var42 (copy), schedule (ref)
+				-- upvalues: delayedThread (write), var27 (copy), schedule (ref)
 				delayedThread = task.delay(300, function()
-					-- upvalues: var42 (copy), schedule (copy)
-					var42(function(p5)
-						return p5 + 1
+					-- upvalues: var27 (copy), schedule (copy)
+					var27(function(p2)
+						return p2 + 1
 					end)
 					schedule()
 				end)
 			end
 			
 			delayedThread = task.delay(300, function()
-				-- upvalues: var42 (copy), schedule (ref)
-				var42(function(p6)
-					return p6 + 1
+				-- upvalues: var27 (copy), schedule (ref)
+				var27(function(p2)
+					return p2 + 1
 				end)
 				schedule()
 			end)
@@ -109,35 +109,35 @@ return reactModule.memo(function(p2)
 				end
 			end
 		end, {})
-		local var43 = useLocalization({
+		local var28 = useLocalization({
 			rankHeader = "InGame.PlayerList.RankHeader",
 			footerUnableToLoad = "InGame.PlayerList.FooterUnableToLoad",
 			footerLastUpdated = {
 				"InGame.PlayerList.FooterLastUpdated",
-				minutes = if var41 == nil then 0 else math.max(0, math.floor((os.time() - var41) / 60))
+				minutes = if var26 == nil then 0 else math.max(0, math.floor((os.time() - var26) / 60))
 			}
 		})
-		rankHeader = var43.rankHeader
-		var44 = if var41 == nil then var43.footerUnableToLoad else var43.footerLastUpdated
+		rankHeader = var28.rankHeader
+		var25 = if var26 == nil then var28.footerUnableToLoad else var28.footerLastUpdated
 	else
-		local var45 = signalsReactModule.useSignalBinding(var29)
-		local var46, var47 = reactModule.useBinding(os.time())
+		local var29 = signalsReactModule.useSignalBinding(var15)
+		local var30, var31 = reactModule.useBinding(os.time())
 		reactModule.useEffect(function()
-			-- upvalues: var47 (ref)
+			-- upvalues: var31 (ref)
 			local delayedThread = nil
 			
 			local function schedule()
-				-- upvalues: delayedThread (write), var47 (copy), schedule (ref)
+				-- upvalues: delayedThread (write), var31 (copy), schedule (ref)
 				delayedThread = task.delay(300, function()
-					-- upvalues: var47 (copy), schedule (copy)
-					var47(os.time())
+					-- upvalues: var31 (copy), schedule (copy)
+					var31(os.time())
 					schedule()
 				end)
 			end
 			
 			delayedThread = task.delay(300, function()
-				-- upvalues: var47 (copy), schedule (ref)
-				var47(os.time())
+				-- upvalues: var31 (copy), schedule (ref)
+				var31(os.time())
 				schedule()
 			end)
 			
@@ -149,144 +149,144 @@ return reactModule.memo(function(p2)
 				end
 			end
 		end, {})
-		var44 = reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), var45 (ref), var46 (ref)
-			return reactModule.joinBindings({ lastRefreshedAt = var45, tick = var46 }):map(function(p7)
-				local lastRefreshedAt = p7.lastRefreshedAt
+		var25 = reactModule.useMemo(function()
+			-- upvalues: reactModule (copy), var29 (ref), var30 (ref)
+			return reactModule.joinBindings({ lastRefreshedAt = var29, tick = var30 }):map(function(p2)
+				local lastRefreshedAt = p2.lastRefreshedAt
 				
 				return if lastRefreshedAt == nil then "Unable to load" else `Last updated {math.max(0, math.floor((os.time() - lastRefreshedAt) / 60))} min ago`
 			end)
-		end, { var45, var46 })
+		end, { var29, var30 })
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var19 (ref), tab (ref)
-		if var19 then
-			var19:fireTabOpened(tab)
+		-- upvalues: var5 (ref), tab (ref)
+		if var5 then
+			var5:fireTabOpened(tab)
 		end
 		return function()
-			-- upvalues: var19 (copy), tab (copy)
-			if var19 then
-				var19:fireTabClosed(tab)
+			-- upvalues: var5 (copy), tab (copy)
+			if var5 then
+				var5:fireTabClosed(tab)
 			end
 		end
-	end, { var19, tab })
+	end, { var5, tab })
 	reactModule.useEffect(function()
-		-- upvalues: var37 (ref), loading_1 (ref), var39 (ref)
-		var37.current = false
+		-- upvalues: var21 (ref), loading_1 (ref), var23 (ref)
+		var21.current = false
 		loading_1("loading")
 		
-		if var39 then
+		if var23 then
 			return function()
-				-- upvalues: var37 (copy)
-				var37.current = true
+				-- upvalues: var21 (copy)
+				var21.current = true
 			end
 		end
 		local delayedThread = task.delay(30, function()
-			-- upvalues: var37 (copy), loading_1 (copy)
-			if not var37.current then
+			-- upvalues: var21 (copy), loading_1 (copy)
+			if not var21.current then
 				loading_1("error")
 			end
 		end)
 		
 		return function()
-			-- upvalues: var37 (copy), delayedThread (ref)
-			var37.current = true
+			-- upvalues: var21 (copy), delayedThread (ref)
+			var21.current = true
 			task.cancel(delayedThread)
 		end
-	end, { var19, tab, var39, var35 })
+	end, { var5, tab, var23, var19 })
 	local localPlayer = playersService.LocalPlayer
-	local var48 = reactModule.useMemo(function()
+	local var32 = reactModule.useMemo(function()
 		-- upvalues: localPlayer (ref), resolveDisplayNameModule (copy)
 		return if localPlayer then resolveDisplayNameModule(localPlayer) else nil
 	end, { localPlayer })
-	local var49 = signalsReactModule.useSignalState(var32)
-	local var50 = getPeopleHeaderLabelModule()
-	local var51 = reactModule.useCallback(function()
-		-- upvalues: var19 (ref), tab (ref), loading_1 (ref), var36 (ref)
-		if var19 then
-			var19:fireTabClosed(tab)
-			var19:fireTabOpened(tab)
+	local var33 = signalsReactModule.useSignalState(var18)
+	local var34 = getPeopleHeaderLabelModule()
+	local var35 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), tab (ref), loading_1 (ref), var20 (ref)
+		if var5 then
+			var5:fireTabClosed(tab)
+			var5:fireTabOpened(tab)
 		end
 		loading_1("loading")
-		var36(function(p8)
-			return p8 + 1
+		var20(function(p2)
+			return p2 + 1
 		end)
-	end, { var19, tab })
+	end, { var5, tab })
 	
-	if var19 == nil or not var39 then
+	if var5 == nil or not var23 then
 		return if loading == "error" then reactModule.createElement(serviceUnavailableState, {
-			onRetry = var51,
-			layoutOrder = p2.layoutOrder,
-			useLegacyPanelStyling = var18
+			onRetry = var35,
+			layoutOrder = p1.layoutOrder,
+			useLegacyPanelStyling = var4
 		}) else reactModule.createElement(loadingState, {
-			layoutOrder = p2.layoutOrder,
-			useLegacyPanelStyling = var18
+			layoutOrder = p1.layoutOrder,
+			useLegacyPanelStyling = var4
 		})
-	elseif isFriends and var40 == 0 then
+	elseif isFriends and var24 == 0 then
 		return reactModule.createElement(emptyFriendsState, {
-			layoutOrder = p2.layoutOrder,
-			useLegacyPanelStyling = var18
+			layoutOrder = p1.layoutOrder,
+			useLegacyPanelStyling = var4
 		})
 	end
 	local t = {}
 	
-	for i_1, v in pairs(var38) do
+	for i_1, v in pairs(var22) do
 		t[`Row_{i_1}`] = reactModule.createElement(platformEntryViewModule, {
 			isViewer = false,
 			showDivider = true,
 			scoreGetter = v.getScore,
 			rankGetter = v.getRank,
 			displayName = v.displayName,
-			rowHeight = var20,
-			rankWidth = var23,
-			scoreWidth = var24
+			rowHeight = var6,
+			rankWidth = var9,
+			scoreWidth = var10
 		})
 	end
 	return reactModule.createElement(view, {
 		tag = "col fill size-full-0",
-		LayoutOrder = p2.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
-		ColumnHeader = if var18 then reactModule.createElement("Frame", {
+		ColumnHeader = if var4 then reactModule.createElement("Frame", {
 			Name = "LegacyPlatformColumnHeader",
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, var21)
+			Size = UDim2.new(1, 0, 0, var7)
 		}, {
 			Header = reactModule.createElement(platformEntryViewModule, {
 				isHeader = true,
-				scoreLabel = var49,
-				peopleHeaderText = var50,
+				scoreLabel = var33,
+				peopleHeaderText = var34,
 				rankHeaderText = rankHeader,
-				rowHeight = var21,
-				rankWidth = var23,
-				scoreWidth = var24
+				rowHeight = var7,
+				rankWidth = var9,
+				scoreWidth = var10
 			})
 		}) else reactModule.createElement(view, {
 			tag = "size-full-0 bg-surface-100",
 			LayoutOrder = 1,
-			Size = UDim2.new(1, 0, 0, var21)
+			Size = UDim2.new(1, 0, 0, var7)
 		}, {
 			Header = reactModule.createElement(platformEntryViewModule, {
 				isHeader = true,
-				scoreLabel = var49,
-				peopleHeaderText = var50,
+				scoreLabel = var33,
+				peopleHeaderText = var34,
 				rankHeaderText = rankHeader,
-				rowHeight = var21,
-				rankWidth = var23,
-				scoreWidth = var24
+				rowHeight = var7,
+				rankWidth = var9,
+				scoreWidth = var10
 			})
 		}),
 		PinnedViewer = reactModule.createElement(platformEntryViewModule, {
 			isViewer = true,
 			layoutOrder = 3,
-			scoreGetter = var30,
-			rankGetter = var31,
-			displayName = var48,
-			highlightViewerRow = not var18,
-			rowHeight = var20,
-			rankWidth = var23,
-			scoreWidth = var24
+			scoreGetter = var16,
+			rankGetter = var17,
+			displayName = var32,
+			highlightViewerRow = not var4,
+			rowHeight = var6,
+			rankWidth = var9,
+			scoreWidth = var10
 		}),
 		RowList = reactModule.createElement(view, { tag = "col fill size-full-0", LayoutOrder = 5 }, {
 			Rows = reactModule.createElement(scrollView, {
@@ -297,19 +297,19 @@ return reactModule.memo(function(p2)
 					SortOrder = Enum.SortOrder.LayoutOrder
 				},
 				scroll = {
-					AutomaticCanvasSize = if not var18 then nil else Enum.AutomaticSize.Y,
+					AutomaticCanvasSize = if not var4 then nil else Enum.AutomaticSize.Y,
 					ScrollingDirection = Enum.ScrollingDirection.Y
 				},
-				scrollingFrameRef = if not var18 then var27 else nil,
+				scrollingFrameRef = if not var4 then var13 else nil,
 				selection = constantsModule.NOT_SELECTABLE
 			}, t)
 		}),
-		Footer = if var18 then reactModule.createElement("Frame", {
+		Footer = if var4 then reactModule.createElement("Frame", {
 			Name = "LegacyPlatformFooter",
 			LayoutOrder = 6,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, var22)
+			Size = UDim2.new(1, 0, 0, var8)
 		}, {
 			FooterInner = reactModule.createElement(view, {
 				tag = "row align-x-right align-y-center size-full padding-x-medium padding-y-xsmall",
@@ -317,17 +317,17 @@ return reactModule.memo(function(p2)
 			}, {
 				FooterText = reactModule.createElement(text, {
 					tag = "auto-xy text-caption-small text-align-x-right content-muted",
-					Text = var44
+					Text = var25
 				})
 			})
 		}) else reactModule.createElement(view, {
 			tag = "row align-x-right align-y-center size-full-0 padding-x-medium padding-y-xsmall stroke-standard stroke-default bg-surface-100",
 			LayoutOrder = 6,
-			Size = UDim2.new(1, 0, 0, var22)
+			Size = UDim2.new(1, 0, 0, var8)
 		}, {
 			FooterText = reactModule.createElement(text, {
 				tag = "auto-xy text-caption-small text-align-x-right content-muted",
-				Text = var44
+				Text = var25
 			})
 		})
 	})

@@ -11,55 +11,55 @@ local useConversationRowPresentationModule = require(script.Parent.useConversati
 local squadButtonSourceEnum = squadsModule.Enums.SquadButtonSourceEnum
 local squadComponentAccessWrapper = squadsModule.SquadComponentAccessWrapper
 local squadJoinButton = squadsModule.SquadJoinButton
-local var9 = reactModule.memo(conversationFacePileModule)
+local var1 = reactModule.memo(conversationFacePileModule)
 
-return reactModule.memo(function(p0)
-	-- upvalues: useConversationRowPresentationModule (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), var9 (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), domLocatorsModule (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
-	local var10 = useConversationRowPresentationModule({
-		conversationId = p0.conversationId,
-		entryHeight = p0.entryHeight,
-		isSquadEnabled = p0.isSquadEnabled,
-		isWideMode = p0.isWideMode,
-		onActivated = p0.onActivated,
-		onSquadJoinButtonActivated = p0.onSquadJoinButtonActivated,
-		fireImpressionEvent = p0.fireImpressionEvent,
-		fireClickEvent = p0.fireClickEvent
+return reactModule.memo(function(p1)
+	-- upvalues: useConversationRowPresentationModule (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), var1 (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), domLocatorsModule (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
+	local var2 = useConversationRowPresentationModule({
+		conversationId = p1.conversationId,
+		entryHeight = p1.entryHeight,
+		isSquadEnabled = p1.isSquadEnabled,
+		isWideMode = p1.isWideMode,
+		onActivated = p1.onActivated,
+		onSquadJoinButtonActivated = p1.onSquadJoinButtonActivated,
+		fireImpressionEvent = p1.fireImpressionEvent,
+		fireClickEvent = p1.fireClickEvent
 	})
-	local var11 = foundationModule.Hooks.useTokens()
+	local var3 = foundationModule.Hooks.useTokens()
 	
-	if not var10.hasConversation then
+	if not var2.hasConversation then
 		return nil
 	end
-	local var27
-	local uDim = UDim.new(0, var10.pagePaddingLeft)
-	local uDim_1 = UDim.new(0, var10.pagePaddingRight)
-	local var14 = p0.showBackground ~= false
+	local var4
+	local uDim = UDim.new(0, var2.pagePaddingLeft)
+	local uDim_1 = UDim.new(0, var2.pagePaddingRight)
+	local var5 = p1.showBackground ~= false
 	local createElement = reactModule.createElement
 	local view = foundationModule.View
 	local t = {
 		BorderSizePixel = 0,
-		backgroundStyle = var11.Color.None,
-		Size = UDim2.new(1, 0, 0, var10.entryHeight),
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then var10.testId else nil
+		backgroundStyle = var3.Color.None,
+		Size = UDim2.new(1, 0, 0, var2.entryHeight),
+		testId = if fFlagDebugAppChatEnableDomLocatorsModule then var2.testId else nil
 	}
 	local t_1 = {}
 	local createElement_1 = reactModule.createElement
 	local view_1 = foundationModule.View
 	local t_2 = {
 		Name = "cell",
-		tag = { ["size-full"] = true, ["bg-surface-0"] = var14 },
-		backgroundStyle = if var14 then nil else var11.Color.None,
+		tag = { ["size-full"] = true, ["bg-surface-0"] = var5 },
+		backgroundStyle = if var5 then nil else var3.Color.None,
 		Size = UDim2.fromScale(1, 1),
 		selection = { Selectable = true },
-		onActivated = var10.onRowActivated,
-		stateLayer = if var14 then {
+		onActivated = var2.onRowActivated,
+		stateLayer = if var5 then {
 			affordance = foundationModule.Enums.StateLayerAffordance.Background
 		} else nil,
-		ref = var10.rowRef
+		ref = var2.rowRef
 	}
 	local t_3 = {
-		debugCellContainer = if p0.debugCellValue then reactModule.createElement("Folder", {}, {
-			debugCell = reactModule.createElement("StringValue", { Value = p0.debugCellValue })
+		debugCellContainer = if p1.debugCellValue then reactModule.createElement("Folder", {}, {
+			debugCell = reactModule.createElement("StringValue", { Value = p1.debugCellValue })
 		}) else nil
 	}
 	local createElement_2 = reactModule.createElement
@@ -71,12 +71,12 @@ return reactModule.memo(function(p0)
 	}
 	local t_5 = {
 		avatar = reactModule.createElement(foundationModule.View, { tag = "size-1000-1000", LayoutOrder = 0 }, {
-			facePile = reactModule.createElement(var9, {
+			facePile = reactModule.createElement(var1, {
 				selectable = false,
-				conversationId = var10.conversationId,
-				onActivated = var10.onRowActivated,
-				participants = var10.participants,
-				localUserId = p0.localUserId
+				conversationId = var2.conversationId,
+				onActivated = var2.onRowActivated,
+				participants = var2.participants,
+				localUserId = p1.localUserId
 			})
 		})
 	}
@@ -109,25 +109,25 @@ return reactModule.memo(function(p0)
 					tag = "shrink auto-xy text-title-large text-align-x-left text-truncate-split content-default",
 					Name = "title",
 					LayoutOrder = 1,
-					Text = var10.title
+					Text = var2.title
 				}),
 				subscriptionBadge = reactModule.createElement(foundationModule.View, {
 					tag = "size-400-400",
 					Name = "subscriptionBadge",
 					LayoutOrder = 2,
-					Visible = var10.showSubscriptionBadge
+					Visible = var2.showSubscriptionBadge
 				}, {
 					icon = reactModule.createElement(foundationModule.Icon, {
 						name = foundationModule.Enums.IconName.RobloxPlus,
 						size = foundationModule.Enums.IconSize.Small,
-						style = var11.Color.Content.Emphasis
+						style = var3.Color.Content.Emphasis
 					})
 				})
 			}),
 			subtitle = reactModule.createElement(foundationModule.Text, {
 				tag = "size-full-0 auto-y text-body-small text-align-x-left text-truncate-end content-default",
 				LayoutOrder = 2,
-				Text = var10.subtitleText
+				Text = var2.subtitleText
 			})
 		})
 	}
@@ -140,48 +140,48 @@ return reactModule.memo(function(p0)
 	}
 	local t_11 = {}
 	
-	if var10.showSquadButton then
-		var27 = reactModule.createElement
-		var27 = var27(foundationModule.View, {
+	if var2.showSquadButton then
+		var4 = reactModule.createElement
+		var4 = var4(foundationModule.View, {
 			tag = "row align-x-right align-y-center auto-xy",
 			LayoutOrder = 0
 		}, {
-			wrapper = reactModule.createElement(squadComponentAccessWrapper, { parentChannelId = var10.conversationId }, {
+			wrapper = reactModule.createElement(squadComponentAccessWrapper, { parentChannelId = var2.conversationId }, {
 				button = reactModule.createElement(squadJoinButton, {
 					isFullWidth = false,
 					isInCard = false,
 					layoutOrder = 0,
 					Selectable = false,
 					shouldAnimate = false,
-					conversationId = var10.conversationId,
-					onActivated = var10.onSquadActivated,
+					conversationId = var2.conversationId,
+					onActivated = var2.onSquadActivated,
 					squadButtonSource = squadButtonSourceEnum.ConversationEntry,
-					squadLocation = var10.squadLocation,
-					testId = if fFlagDebugAppChatEnableDomLocatorsModule and var10.locatorTitle then domLocatorsModule.chatLandingConversationEntrySquadButton(var10.locatorTitle) else nil
+					squadLocation = var2.squadLocation,
+					testId = if fFlagDebugAppChatEnableDomLocatorsModule and var2.locatorTitle then domLocatorsModule.chatLandingConversationEntrySquadButton(var2.locatorTitle) else nil
 				})
 			})
 		})
 	else
-		var27 = nil
+		var4 = nil
 	end
-	t_11.squadButton = var27
+	t_11.squadButton = var4
 	t_11.timestampCluster = reactModule.createElement(foundationModule.View, {
 		tag = "row align-y-center gap-xsmall auto-xy",
 		Name = "timestampCluster",
 		LayoutOrder = 1,
-		Visible = var10.showTimestamp
+		Visible = var2.showTimestamp
 	}, {
 		timestamp = reactModule.createElement(foundationModule.Text, {
 			tag = "auto-xy text-body-small content-default",
 			Name = "timeStamp",
 			LayoutOrder = 1,
-			Text = var10.timestampText
+			Text = var2.timestampText
 		}),
 		unreadDot = reactModule.createElement(foundationModule.View, {
 			tag = "size-200-200 radius-circle bg-action-emphasis",
 			Name = "unreadDot",
 			LayoutOrder = 2,
-			Visible = var10.showUnread
+			Visible = var2.showUnread
 		})
 	})
 	t_9.rightContent = createElement_5(view_5, t_10, t_11)

@@ -12,11 +12,11 @@ local t_1 = {
 	expectedFailures = {}
 }
 
-local function getIsOpaque(p0)
-	local var6 = p0:ReadPixelsBuffer(Vector2.new(0, 0), p0.Size)
+local function getIsOpaque(p1)
+	local var1 = p1:ReadPixelsBuffer(Vector2.new(0, 0), p1.Size)
 	
-	for i = 0, buffer.len(var6) - 1, 4 do
-		if buffer.readu8(var6, i + 3) >= 255 then
+	for i = 0, buffer.len(var1) - 1, 4 do
+		if buffer.readu8(var1, i + 3) >= 255 then
 			continue
 		end
 		return false
@@ -24,13 +24,13 @@ local function getIsOpaque(p0)
 	return true
 end
 
-function t_1.run(p1, p2)
+function t_1.run(p2, p3)
 	-- upvalues: fetchAllDesiredDataModule (ref), errorSourceStringsModule (ref), t (ref), getIsOpaque (ref)
-	local rootInstance = p2.rootInstance
-	local meshTextures = p2.meshTextures
+	local rootInstance = p3.rootInstance
+	local meshTextures = p3.meshTextures
 	
 	if not meshTextures or meshTextures == fetchAllDesiredDataModule.DATA_FETCH_FAILURE then
-		p1:fetchError("Failed to load texture data for surface appearance opacity check")
+		p2:fetchError("Failed to load texture data for surface appearance opacity check")
 		
 		return
 	end
@@ -43,22 +43,22 @@ function t_1.run(p1, p2)
 			
 			if surfaceAppearance then
 				if surfaceAppearance.AlphaMode ~= Enum.AlphaMode.Overlay then
-					p1:fail(errorSourceStringsModule.Keys.SAOpacity_InvalidAlphaMode, { FullName = v:GetFullName() }, surfaceAppearance)
+					p2:fail(errorSourceStringsModule.Keys.SAOpacity_InvalidAlphaMode, { FullName = v:GetFullName() }, surfaceAppearance)
 				end
 				local name = meshTextures[v.Name]
 				
 				if name and name.isPBR then
 					for i_1, v_1 in t do
-						local var9 = name[i_1]
+						local var2 = name[i_1]
 						
-						if var9 then
-							if not var9.editable then
-								p1:fail(errorSourceStringsModule.Keys.SAOpacity_FailedToLoadTexture, {
+						if var2 then
+							if not var2.editable then
+								p2:fail(errorSourceStringsModule.Keys.SAOpacity_FailedToLoadTexture, {
 									FullName = surfaceAppearance:GetFullName(),
 									FieldName = i_1
 								}, surfaceAppearance)
-							elseif not getIsOpaque(var9.editable) then
-								p1:fail(errorSourceStringsModule.Keys.SAOpacity_TextureNotOpaque, { FullName = surfaceAppearance:GetFullName() .. "." .. i_1 }, surfaceAppearance)
+							elseif not getIsOpaque(var2.editable) then
+								p2:fail(errorSourceStringsModule.Keys.SAOpacity_TextureNotOpaque, { FullName = surfaceAppearance:GetFullName() .. "." .. i_1 }, surfaceAppearance)
 							end
 						end
 					end

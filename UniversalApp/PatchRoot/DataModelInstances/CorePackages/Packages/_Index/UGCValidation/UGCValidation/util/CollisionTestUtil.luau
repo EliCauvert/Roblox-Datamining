@@ -1,7 +1,7 @@
 ﻿return {
-	pointInAxisAlignedBounds = function(p0, p1, p2)
-		local var0 = p0 - p1
+	pointInAxisAlignedBounds = function(p1, p2, p3)
+		local var1 = p1 - p2
 		
-		return -p2.X / 2 <= var0.X and (var0.X <= p2.X / 2 and (-p2.Y / 2 <= var0.Y and (var0.Y <= p2.Y / 2 and (-p2.Z / 2 <= var0.Z and var0.Z <= p2.Z / 2))))
+		return -p3.X / 2 <= var1.X and (var1.X <= p3.X / 2 and (-p3.Y / 2 <= var1.Y and (var1.Y <= p3.Y / 2 and (-p3.Z / 2 <= var1.Z and var1.Z <= p3.Z / 2))))
 	end
 }

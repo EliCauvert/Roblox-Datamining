@@ -7,42 +7,42 @@ local presetCooldownContextModule = require(script.Parent.PresetCooldownContext)
 
 return function(value)
 	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), reactModule (ref), presetCooldownContextModule (ref)
-	local var5 = getPresetChatStoreModule(false)
-	local var6 = signalsReactModule.useSignalState(var5.getPresetCooldownEndsAt)
-	local var7 = var6 ~= nil and os.clock() < var6
+	local var1 = getPresetChatStoreModule(false)
+	local var2 = signalsReactModule.useSignalState(var1.getPresetCooldownEndsAt)
+	local var3 = var2 ~= nil and os.clock() < var2
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var5 (ref)
-		if var6 == nil then return end
-		local var8 = var6 - os.clock()
+		-- upvalues: var2 (ref), var1 (ref)
+		if var2 == nil then return end
+		local var4 = var2 - os.clock()
 		
-		if var8 <= 0 then
-			var5.setPresetCooldownEndsAt(nil)
+		if var4 <= 0 then
+			var1.setPresetCooldownEndsAt(nil)
 			
 			return
 		end
-		local var9 = false
-		task.delay(var8, function()
-			-- upvalues: var9 (write), var5 (copy), var6 (copy)
-			if var9 then return end
-			if var5.getPresetCooldownEndsAt(false) == var6 then
-				var5.setPresetCooldownEndsAt(nil)
+		local var5 = false
+		task.delay(var4, function()
+			-- upvalues: var5 (write), var1 (copy), var2 (copy)
+			if var5 then return end
+			if var1.getPresetCooldownEndsAt(false) == var2 then
+				var1.setPresetCooldownEndsAt(nil)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var9 (write)
-			var9 = true
+			-- upvalues: var5 (write)
+			var5 = true
 		end
 	end, {
-		var6,
-		var5.setPresetCooldownEndsAt,
-		var5.getPresetCooldownEndsAt
+		var2,
+		var1.setPresetCooldownEndsAt,
+		var1.getPresetCooldownEndsAt
 	})
 	
 	return reactModule.createElement(presetCooldownContextModule.Provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), var7 (ref)
-			return { endsAt = var6, isCooldownActive = var7 }
-		end, { var6, var7 })
+			-- upvalues: var2 (ref), var3 (ref)
+			return { endsAt = var2, isCooldownActive = var3 }
+		end, { var2, var3 })
 	}, value.children)
 end

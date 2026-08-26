@@ -15,13 +15,13 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: UGCValidationService (ref), getFIntMaxTotalSurfaceAreaModule (ref), errorSourceStringsModule (ref)
-		for i, v in p1.renderMeshesData do
+		for i, v in p2.renderMeshesData do
 			local editable = UGCValidationService:CalculateEditableMeshTotalSurfaceArea(v.editable, v.scale)
 			
 			if getFIntMaxTotalSurfaceAreaModule() < editable then
-				p0:fail(errorSourceStringsModule.Keys.MeshGeometry_SurfaceAreaExceeded, {
+				p1:fail(errorSourceStringsModule.Keys.MeshGeometry_SurfaceAreaExceeded, {
 					meshName = i,
 					surfaceArea = string.format("%.2f", editable),
 					maxSurfaceArea = tostring(getFIntMaxTotalSurfaceAreaModule())

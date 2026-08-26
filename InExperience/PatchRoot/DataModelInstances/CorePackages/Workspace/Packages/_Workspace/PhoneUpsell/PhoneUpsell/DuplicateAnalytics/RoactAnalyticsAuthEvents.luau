@@ -6,30 +6,30 @@ local eventStreamConstantsModule = require(phoneUpsell.DuplicateAnalytics.EventS
 local roactAnalytics = require(parent.RoactServiceTags).RoactAnalytics
 
 return {
-	get = function(p0)
+	get = function(p1)
 		-- upvalues: roactAnalytics (ref), upsellCardModalActionModule (ref), eventStreamConstantsModule (ref), upsellCardFormInteractionModule (ref)
-		local var4 = roactAnalytics.get(p0)
+		local var1 = roactAnalytics.get(p1)
 		
 		return {
-			reportModalShownWithSection = function(p1, p2, p3)
-				-- upvalues: upsellCardModalActionModule (copy), var4 (ref), eventStreamConstantsModule (copy)
-				upsellCardModalActionModule(var4.EventStream, p1, "", eventStreamConstantsModule.ActionType.Shown, p2, p3)
+			reportModalShownWithSection = function(p2, p3, p4)
+				-- upvalues: upsellCardModalActionModule (copy), var1 (ref), eventStreamConstantsModule (copy)
+				upsellCardModalActionModule(var1.EventStream, p2, "", eventStreamConstantsModule.ActionType.Shown, p3, p4)
 			end,
-			reportModalShownWithSectionAndError = function(p4, p5, p6, p7, p8)
-				-- upvalues: upsellCardModalActionModule (copy), var4 (ref), eventStreamConstantsModule (copy)
-				upsellCardModalActionModule(var4.EventStream, p4, p5, eventStreamConstantsModule.ActionType.Shown, p6, p7, p8)
+			reportModalShownWithSectionAndError = function(p2, p3, p4, p5, p6)
+				-- upvalues: upsellCardModalActionModule (copy), var1 (ref), eventStreamConstantsModule (copy)
+				upsellCardModalActionModule(var1.EventStream, p2, p3, eventStreamConstantsModule.ActionType.Shown, p4, p5, p6)
 			end,
-			reportModalDismissedWithSection = function(p9, p10, p11)
-				-- upvalues: upsellCardModalActionModule (copy), var4 (ref), eventStreamConstantsModule (copy)
-				upsellCardModalActionModule(var4.EventStream, p9, "", eventStreamConstantsModule.ActionType.Dismiss, p10, p11)
+			reportModalDismissedWithSection = function(p2, p3, p4)
+				-- upvalues: upsellCardModalActionModule (copy), var1 (ref), eventStreamConstantsModule (copy)
+				upsellCardModalActionModule(var1.EventStream, p2, "", eventStreamConstantsModule.ActionType.Dismiss, p3, p4)
 			end,
-			reportModalActionWithSection = function(p12, p13, p14, p15, p16, p17)
-				-- upvalues: upsellCardModalActionModule (copy), var4 (ref)
-				upsellCardModalActionModule(var4.EventStream, p12, p13, p14, p15, p16, p17)
+			reportModalActionWithSection = function(p2, p3, p4, p5, p6, p7)
+				-- upvalues: upsellCardModalActionModule (copy), var1 (ref)
+				upsellCardModalActionModule(var1.EventStream, p2, p3, p4, p5, p6, p7)
 			end,
-			reportInteractWithActionAndSection = function(p18, p19, p20, p21, p22, p23)
-				-- upvalues: upsellCardFormInteractionModule (copy), var4 (ref)
-				upsellCardFormInteractionModule(var4.EventStream, p18, p19, p20, p21, p22, p23)
+			reportInteractWithActionAndSection = function(p2, p3, p4, p5, p6, p7)
+				-- upvalues: upsellCardFormInteractionModule (copy), var1 (ref)
+				upsellCardFormInteractionModule(var1.EventStream, p2, p3, p4, p5, p6, p7)
 			end
 		}
 	end

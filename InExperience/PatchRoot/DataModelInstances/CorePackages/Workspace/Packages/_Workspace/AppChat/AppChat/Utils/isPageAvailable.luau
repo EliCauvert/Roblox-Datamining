@@ -12,7 +12,7 @@ local t = {
 }
 local t_1 = { [enumScreensModule.Groups] = true }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: isPlacementInExperience (ref), t (ref), fFlagAppChatOnConsoles (ref), t_1 (ref)
-	return if isPlacementInExperience(p1) and t[p0] then false else fFlagAppChatOnConsoles and p2 == false and t_1[p0]
+	return if isPlacementInExperience(p2) and t[p1] then false else fFlagAppChatOnConsoles and p3 == false and t_1[p1]
 end

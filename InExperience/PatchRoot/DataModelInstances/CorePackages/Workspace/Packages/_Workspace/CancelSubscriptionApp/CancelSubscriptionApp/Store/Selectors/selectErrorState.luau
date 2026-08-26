@@ -2,6 +2,6 @@
 local _ = require(cancelSubscriptionApp.Store.Types)
 local _ = require(cancelSubscriptionApp.Enums.ErrorStateEnum)
 
-return function(p0)
-	return p0.errorState
+return function(p1)
+	return p1.errorState
 end

@@ -3,13 +3,13 @@ local tModule = require(roduxGames.Parent.t)
 local creatorType = require(roduxGames.Enums).CreatorType
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -23,12 +23,12 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: t (ref), creatorType (ref)
 	return t.new({
-		creatorId = tostring(p2.id),
-		creatorName = p2.name,
-		creatorType = creatorType.fromRawValue(p2.type)
+		creatorId = tostring(p1.id),
+		creatorName = p1.name,
+		creatorType = creatorType.fromRawValue(p1.type)
 	})
 end
 

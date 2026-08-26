@@ -10,86 +10,86 @@ local _ = require(unifiedLogging.SduiAnalyticsTypes)
 local calculateRowPositionFieldsModule = require(unifiedLogging.calculateRowPositionFields)
 local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
 
-local var7 = function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
+local var1 = function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
 	-- upvalues: discoveryEventErrorLogger (ref)
-	if p0 then
+	if p1 then
 		return {
-			collectionComponentType = p8,
-			itemComponentType = p9,
-			collectionId = p5,
-			collectionPosition = p4,
-			totalNumberOfItems = p6,
-			contentType = p3,
-			itemId = p0.id,
-			itemPosition = p1,
-			positionInRow = p10,
-			rowNumber = p2,
-			feedRowNumber = p11,
-			positionInTopic = p1,
-			actionType = p7
+			collectionComponentType = p9,
+			itemComponentType = p10,
+			collectionId = p6,
+			collectionPosition = p5,
+			totalNumberOfItems = p7,
+			contentType = p4,
+			itemId = p1.id,
+			itemPosition = p2,
+			positionInRow = p11,
+			rowNumber = p3,
+			feedRowNumber = p12,
+			positionInTopic = p2,
+			actionType = p8
 		}
 	end
-	discoveryEventErrorLogger.reportError("SendItemActionEventNilEntry", `Entry at index {p1} was nil when sending item action event for collection {p5}`, { entryIndex = p1, collectionId = p5 })
+	discoveryEventErrorLogger.reportError("SendItemActionEventNilEntry", `Entry at index {p2} was nil when sending item action event for collection {p6}`, { entryIndex = p2, collectionId = p6 })
 	
 	return {}
 end
 
-local _ = function(p12, p13)
+local _ = function(p13, p14)
 	-- upvalues: userEntryUtilsModule (ref)
-	local var8 = userEntryUtilsModule.extractFieldsFromUserEntry(p12)
+	local var2 = userEntryUtilsModule.extractFieldsFromUserEntry(p13)
 	
 	return {
-		sourceCarousel = p13,
-		presence = var8.presence,
-		friendStatus = var8.friendStatus,
-		presenceUniverseId = var8.presenceUniverseId
+		sourceCarousel = p14,
+		presence = var2.presence,
+		friendStatus = var2.friendStatus,
+		presenceUniverseId = var2.presenceUniverseId
 	}
 end
 
 return {
-	sendFromItemCollection = if fFlagEnableTopSongsSort then function(p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24)
-		-- upvalues: discoveryEventErrorLogger (ref), var7 (ref), itemActionEventModule (ref)
-		if p14 and p15 then
-			itemActionEventModule(p14, p19, p23, var7(p16, p18, p17, p23, p20, p21, p22, p24))
+	sendFromItemCollection = if fFlagEnableTopSongsSort then function(p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23)
+		-- upvalues: discoveryEventErrorLogger (ref), var1 (ref), itemActionEventModule (ref)
+		if p13 and p14 then
+			itemActionEventModule(p13, p18, p22, var1(p15, p17, p16, p22, p19, p20, p21, p23))
 			
 			return
 		end
-		discoveryEventErrorLogger.reportError("SendItemActionEventNilServiceItemCollection", "Event Ingest or App Analytics was nil when trying to send an itemActionEvent for collection", { eventIngest = p14, appAnalytics = p15 })
+		discoveryEventErrorLogger.reportError("SendItemActionEventNilServiceItemCollection", "Event Ingest or App Analytics was nil when trying to send an itemActionEvent for collection", { eventIngest = p13, appAnalytics = p14 })
 	end else nil,
-	sendFromFriendsCarousel = function(p25, p26, p27, p28, p29, p30, p31, p32, p33, p34)
-		-- upvalues: discoveryEventErrorLogger (ref), contentTypeModule (ref), var7 (ref), userEntryUtilsModule (ref), cryoModule (ref), itemActionEventModule (ref)
-		if p25 and p26 then
+	sendFromFriendsCarousel = function(p13, p14, p15, p16, p17, p18, p19, p20, p21, p22)
+		-- upvalues: discoveryEventErrorLogger (ref), contentTypeModule (ref), var1 (ref), userEntryUtilsModule (ref), cryoModule (ref), itemActionEventModule (ref)
+		if p13 and p14 then
 			local user = contentTypeModule.User
-			local var9 = userEntryUtilsModule.extractFieldsFromUserEntry(p27)
-			itemActionEventModule(p25, p29, user, cryoModule.Dictionary.union(var7(p27, p28, 1, user, p30, p31, p32, p34), {
-				sourceCarousel = p33,
-				presence = var9.presence,
-				friendStatus = var9.friendStatus,
-				presenceUniverseId = var9.presenceUniverseId
+			local var2 = userEntryUtilsModule.extractFieldsFromUserEntry(p15)
+			itemActionEventModule(p13, p17, user, cryoModule.Dictionary.union(var1(p15, p16, 1, user, p18, p19, p20, p22), {
+				sourceCarousel = p21,
+				presence = var2.presence,
+				friendStatus = var2.friendStatus,
+				presenceUniverseId = var2.presenceUniverseId
 			}))
 			
 			return
 		end
-		discoveryEventErrorLogger.reportError("SendItemActionEventNilService", `Event Ingest or App Analytics was nil when trying to send an itemActionEvent for collection {p31}`, { eventIngest = p25, appAnalytics = p26, sortId = p31 })
+		discoveryEventErrorLogger.reportError("SendItemActionEventNilService", `Event Ingest or App Analytics was nil when trying to send an itemActionEvent for collection {p19}`, { eventIngest = p13, appAnalytics = p14, sortId = p19 })
 	end,
-	sendFromServerDrivenUi = function(p35, p36, p37, p38, p39, p40, p41, p42, p43, p44, _, p45, p46, p47)
-		-- upvalues: discoveryEventErrorLogger (ref), calculateRowPositionFieldsModule (ref), var7 (ref), cryoModule (ref), appStorageService (ref), itemActionEventModule (ref)
-		if not p35 then
-			discoveryEventErrorLogger.reportError("SendItemActionEventFromSduiNilService", `Event Ingest was nil when trying to send an itemActionEvent for collection {p40}`, { eventIngest = p35, collectionId = p40 })
+	sendFromServerDrivenUi = function(p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, _, p33, p34, p35)
+		-- upvalues: discoveryEventErrorLogger (ref), calculateRowPositionFieldsModule (ref), var1 (ref), cryoModule (ref), appStorageService (ref), itemActionEventModule (ref)
+		if not p23 then
+			discoveryEventErrorLogger.reportError("SendItemActionEventFromSduiNilService", `Event Ingest was nil when trying to send an itemActionEvent for collection {p28}`, { eventIngest = p23, collectionId = p28 })
 			
 			return
 		end
-		local var10 = calculateRowPositionFieldsModule(p37, p42, p47)
-		local var11 = cryoModule.Dictionary.join(p38, p36, p46 or {}, var7(p36, p37, var10.rowInSort, p41, p43, p40, p44, p45, p38.collectionComponentType, p36.itemComponentType, var10.positionInRow, var10.rowOnPage))
+		local var3 = calculateRowPositionFieldsModule(p25, p30, p35)
+		local var4 = cryoModule.Dictionary.join(p26, p24, p34 or {}, var1(p24, p25, var3.rowInSort, p29, p31, p28, p32, p33, p26.collectionComponentType, p24.itemComponentType, var3.positionInRow, var3.rowOnPage))
 		local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 		
 		if mobileAdvertisingIdItem and mobileAdvertisingIdItem ~= "" then
-			var11.mobileAdvertisingId = mobileAdvertisingIdItem
+			var4.mobileAdvertisingId = mobileAdvertisingIdItem
 		end
-		if var11.collectionId and type(var11.collectionId) == "string" and type(tonumber(var11.collectionId)) ~= "number" then
-			var11.collectionIdStr = var11.collectionId
-			var11.collectionId = nil
+		if var4.collectionId and type(var4.collectionId) == "string" and type(tonumber(var4.collectionId)) ~= "number" then
+			var4.collectionIdStr = var4.collectionId
+			var4.collectionId = nil
 		end
-		itemActionEventModule(p35, p39, p41, var11)
+		itemActionEventModule(p23, p27, p29, var4)
 	end
 }

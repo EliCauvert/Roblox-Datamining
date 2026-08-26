@@ -13,78 +13,78 @@ local fixFocusWhenInGameMenuIsOpen = game:DefineFastFlag("FixFocusWhenInGameMenu
 local _ = { PromptRsvp = "PromptRsvp" }
 local t = { PromptRsvp = rsvpPromptModule }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useState (ref), reactModule (ref), cryoModule (ref), t (ref), fixFocusWhenInGameMenuIsOpen (ref), guiService (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var8, var9 = useState({ promptType = nil, promptData = nil, promptQueue = {} })
-	local promptData = var8.promptData
-	local promptType = var8.promptType
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: cryoModule (copy), var8 (ref), var9 (ref)
-		if cryoModule.isEmpty(var8.promptQueue) then
-			var9({ promptType = nil, promptData = {}, promptQueue = {} })
+	local var1, var2 = useState({ promptType = nil, promptData = nil, promptQueue = {} })
+	local promptData = var1.promptData
+	local promptType = var1.promptType
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: cryoModule (copy), var1 (ref), var2 (ref)
+		if cryoModule.isEmpty(var1.promptQueue) then
+			var2({ promptType = nil, promptData = {}, promptQueue = {} })
 			
 			return
 		end
-		var9(cryoModule.Dictionary.join(var8, {
-			promptType = var8.promptQueue[1].promptType,
-			promptData = var8.promptQueue[1].promptData,
-			promptQueue = cryoModule.List.removeIndex(var8.promptQueue, 1)
+		var2(cryoModule.Dictionary.join(var1, {
+			promptType = var1.promptQueue[1].promptType,
+			promptData = var1.promptQueue[1].promptData,
+			promptQueue = cryoModule.List.removeIndex(var1.promptQueue, 1)
 		}))
-	end, { var8, var9 })
-	local var11 = nil
+	end, { var1, var2 })
+	local var4 = nil
 	
 	if promptType then
-		local var12 = t[promptType]
+		local var5 = t[promptType]
 		
-		if var12 then
-			var11 = reactModule.createElement(var12, {
-				enableInputDelayed = p0.enableInputDelayed,
+		if var5 then
+			var4 = reactModule.createElement(var5, {
+				enableInputDelayed = p1.enableInputDelayed,
 				promptData = promptData,
-				closePrompt = var10,
-				overrideUseWideMode = p0.overrideUseWideMode
+				closePrompt = var3,
+				overrideUseWideMode = p1.overrideUseWideMode
 			})
 		else
 			error(`Unexpected prompt type: {promptType}!`)
 		end
 	end
-	local var13 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var8 (ref), var9 (ref), cryoModule (copy)
-		if var8.promptType == nil then
-			var9({
+	local var6 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+		if var1.promptType == nil then
+			var2({
 				promptType = "PromptRsvp",
-				promptData = { eventId = p1, eventDetails = p2 },
+				promptData = { eventId = p2, eventDetails = p3 },
 				promptQueue = {}
 			})
 			
 			return
 		end
-		var9(cryoModule.Dictionary.join(var8, {
-			promptQueue = cryoModule.List.join(var8.promptQueue, {
+		var2(cryoModule.Dictionary.join(var1, {
+			promptQueue = cryoModule.List.join(var1.promptQueue, {
 				{
 					promptType = "PromptRsvp",
-					promptData = { eventId = p1, eventDetails = p2 }
+					promptData = { eventId = p2, eventDetails = p3 }
 				}
 			})
 		}))
-	end, { var8, var9 })
-	local var14 = nil
+	end, { var1, var2 })
+	local var7 = nil
 	local _ = nil
 	
 	if fixFocusWhenInGameMenuIsOpen then
-		local var15, var16 = reactModule.useState(guiService.MenuIsOpen)
-		var14 = var15
-		local var17 = var16
+		local var8, var9 = reactModule.useState(guiService.MenuIsOpen)
+		var7 = var8
+		local var10 = var9
 		reactModule.useEffect(function()
-			-- upvalues: var11 (write), var17 (write), guiService (copy)
-			if var11 then
-				var17(guiService.MenuIsOpen)
+			-- upvalues: var4 (write), var10 (write), guiService (copy)
+			if var4 then
+				var10(guiService.MenuIsOpen)
 				local menuOpenedConnection = guiService.MenuOpened:Connect(function()
-					-- upvalues: var17 (copy)
-					var17(true)
+					-- upvalues: var10 (copy)
+					var10(true)
 				end)
 				local menuClosedConnection = guiService.MenuClosed:Connect(function()
-					-- upvalues: var17 (copy)
-					var17(false)
+					-- upvalues: var10 (copy)
+					var10(false)
 				end)
 				
 				return function()
@@ -93,15 +93,15 @@ return function(p0)
 					menuClosedConnection:Disconnect()
 				end
 			end
-		end, { var11 })
+		end, { var4 })
 	end
 	return reactModule.createElement(reactModule.Fragment, {}, {
-		PromptConnections = reactModule.createElement(promptConnectionsModule, { openRsvpPrompt = var13, closePrompt = var10 }),
-		FocusNavigationCoreScriptsWrapper = if var11 then reactModule.createElement(focusRoot, {
+		PromptConnections = reactModule.createElement(promptConnectionsModule, { openRsvpPrompt = var6, closePrompt = var3 }),
+		FocusNavigationCoreScriptsWrapper = if var4 then reactModule.createElement(focusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
 			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay,
-			isFocusable = if fixFocusWhenInGameMenuIsOpen then not var14 else nil
-		}, { Prompt = var11 }) else nil
+			isFocusable = if fixFocusWhenInGameMenuIsOpen then not var7 else nil
+		}, { Prompt = var4 }) else nil
 	})
 end

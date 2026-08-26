@@ -24,61 +24,61 @@ local t_1 = {
 	[conversationTopModal.TrustedConnectionRequest] = conversationBannerContainerModule
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), getDeepValue2Module (ref), modalConfigurationModule (ref), t_1 (ref), useDispatch (ref), useRecordModalSequenceResponseForConversationModule (ref), reactModule (ref), useIsGuiInChatVisibleModule (ref), useRecordModalSeenWithDelayModule (ref), modalSequence (ref), fIntAppChatModalSeenImpressionDelayMsModule (ref), name (ref), dismissedChatModalModule (ref), appChatNetworkingModule (ref), conversationTopModal (ref), foundationModule (ref)
-	local var16 = cryoModule.Dictionary.union(t, p0)
-	local var17 = useSelector(function(p1)
-		-- upvalues: getDeepValue2Module (copy), var16 (ref), modalConfigurationModule (copy)
-		return getDeepValue2Module(p1, `ChatAppReducer.Modals.conversationTopModals.{var16.conversationId}`) or modalConfigurationModule.default
+	local var1 = cryoModule.Dictionary.union(t, p1)
+	local var2 = useSelector(function(p2)
+		-- upvalues: getDeepValue2Module (copy), var1 (ref), modalConfigurationModule (copy)
+		return getDeepValue2Module(p2, `ChatAppReducer.Modals.conversationTopModals.{var1.conversationId}`) or modalConfigurationModule.default
 	end)
-	local modalLayout = var17.modal_layout
-	local modalVariant = t_1[var17.modal_variant]
-	local var18 = useDispatch()
-	local var19 = useRecordModalSequenceResponseForConversationModule(var16.conversationId)
-	local var20 = reactModule.useRef(nil)
+	local modalLayout = var2.modal_layout
+	local modalVariant = t_1[var2.modal_variant]
+	local var3 = useDispatch()
+	local var4 = useRecordModalSequenceResponseForConversationModule(var1.conversationId)
+	local var5 = reactModule.useRef(nil)
 	useRecordModalSeenWithDelayModule({
 		modalSequence = modalSequence.ConversationTopModal,
-		modalVariant = var17.modal_variant,
+		modalVariant = var2.modal_variant,
 		actionToRecord = modalLayout.seen_record_action,
 		delayMs = fIntAppChatModalSeenImpressionDelayMsModule,
-		canRecordAction = useIsGuiInChatVisibleModule(var20, { var20.current, modalVariant }) and modalVariant ~= nil,
-		conversationId = var16.conversationId
+		canRecordAction = useIsGuiInChatVisibleModule(var5, { var5.current, modalVariant }) and modalVariant ~= nil,
+		conversationId = var1.conversationId
 	})
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var19 (ref), var17 (ref), modalSequence (copy), name (copy), var18 (ref), dismissedChatModalModule (copy), appChatNetworkingModule (copy), var16 (ref)
-		var19(var17.modal_layout.dismissed_record_action, modalSequence.ConversationTopModal, nil, var17.modal_variant):catch(function(p2)
-			-- upvalues: name (copy), var17 (copy)
-			name:warning(`Error in ConversationOverlayContainer {var17.modal_layout.id} -> RecordModalSequenceResponse: {tostring(p2)}`)
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref), var2 (ref), modalSequence (copy), name (copy), var3 (ref), dismissedChatModalModule (copy), appChatNetworkingModule (copy), var1 (ref)
+		var4(var2.modal_layout.dismissed_record_action, modalSequence.ConversationTopModal, nil, var2.modal_variant):catch(function(p2)
+			-- upvalues: name (copy), var2 (copy)
+			name:warning(`Error in ConversationOverlayContainer {var2.modal_layout.id} -> RecordModalSequenceResponse: {tostring(p2)}`)
 		end)
-		var18(dismissedChatModalModule(appChatNetworkingModule.Constants.ModalSequence.ConversationTopModal, var16.conversationId))
+		var3(dismissedChatModalModule(appChatNetworkingModule.Constants.ModalSequence.ConversationTopModal, var1.conversationId))
 	end, {
-		var16.conversationId,
-		var17.modal_layout.dismissed_record_action,
-		var17.modal_variant,
-		var19,
-		var18
+		var1.conversationId,
+		var2.modal_layout.dismissed_record_action,
+		var2.modal_variant,
+		var4,
+		var3
 	})
-	local var22 = reactModule.useCallback(function(p3)
-		-- upvalues: var16 (ref)
-		var16.setModalHeight(p3.AbsoluteSize.Y)
-	end, { var16.setModalHeight })
-	local var23 = nil
+	local var7 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref)
+		var1.setModalHeight(p2.AbsoluteSize.Y)
+	end, { var1.setModalHeight })
+	local var8 = nil
 	
 	if modalVariant then
-		var23 = reactModule.createElement(modalVariant, {
-			conversationId = var16.conversationId,
-			modalVariant = var17.modal_variant,
-			onDismissed = var21,
+		var8 = reactModule.createElement(modalVariant, {
+			conversationId = var1.conversationId,
+			modalVariant = var2.modal_variant,
+			onDismissed = var6,
 			bodyText = modalLayout.body and modalLayout.body.text,
 			actionText = modalLayout.buttons and (modalLayout.buttons[1] and modalLayout.buttons[1].text)
 		})
-	elseif var17.modal_variant ~= nil and var17.modal_variant ~= conversationTopModal.None then
-		name:warning(`Unsupported ConversationTopModal variant: {var17.modal_variant}`)
+	elseif var2.modal_variant ~= nil and var2.modal_variant ~= conversationTopModal.None then
+		name:warning(`Unsupported ConversationTopModal variant: {var2.modal_variant}`)
 	end
 	return reactModule.createElement(foundationModule.View, {
 		tag = "gui-objects-default auto-y size-full-0",
-		LayoutOrder = var16.layoutOrder,
-		onAbsoluteSizeChanged = var22,
-		ref = var20
-	}, { conversationTopModal = var23 })
+		LayoutOrder = var1.layoutOrder,
+		onAbsoluteSizeChanged = var7,
+		ref = var5
+	}, { conversationTopModal = var8 })
 end)

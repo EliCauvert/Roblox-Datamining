@@ -1,17 +1,17 @@
-﻿return function(p0, p1)
-	local var0 = false
+﻿return function(p1, p2)
+	local var1 = false
 	
 	return function(...)
-		-- upvalues: var0 (write), p0 (ref), p1 (ref)
-		if var0 then
+		-- upvalues: var1 (write), p1 (ref), p2 (ref)
+		if var1 then
 			return
 		end
-		var0 = true
-		task.delay(p0, function()
-			-- upvalues: var0 (copy)
-			var0 = false
+		var1 = true
+		task.delay(p1, function()
+			-- upvalues: var1 (copy)
+			var1 = false
 		end)
 		
-		return p1(...)
+		return p2(...)
 	end
 end

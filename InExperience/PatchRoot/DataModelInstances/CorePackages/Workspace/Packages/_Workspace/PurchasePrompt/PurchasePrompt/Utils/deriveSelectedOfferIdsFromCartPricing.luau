@@ -1,8 +1,8 @@
 ﻿local deriveCartPricingView = require(script:FindFirstAncestor("PurchasePrompt").Parent.IAPExperience).deriveCartPricingView
 
-return function(p0)
+return function(p1)
 	-- upvalues: deriveCartPricingView (ref)
-	local var0 = deriveCartPricingView(p0)
+	local var1 = deriveCartPricingView(p1)
 	
-	return if var0 == nil then {} else var0.selectedOfferIds
+	return if var1 == nil then {} else var1.selectedOfferIds
 end

@@ -3,10 +3,10 @@ local array = require(navigation.Parent.LuauPolyfill).Array
 local getFocusedRoutesModule = require(navigation.getFocusedRoutes)
 local _ = require(script.Parent.types)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: array (ref), getFocusedRoutesModule (ref)
-	return array.find(getFocusedRoutesModule(p0), function(p2)
-		-- upvalues: p1 (ref)
-		return p2.routeName == p1
+	return array.find(getFocusedRoutesModule(p1), function(p3)
+		-- upvalues: p2 (ref)
+		return p3.routeName == p2
 	end) ~= nil
 end

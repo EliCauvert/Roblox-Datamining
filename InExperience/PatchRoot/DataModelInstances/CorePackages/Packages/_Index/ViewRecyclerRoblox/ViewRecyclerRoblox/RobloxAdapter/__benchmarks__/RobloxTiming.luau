@@ -9,33 +9,33 @@ local responsibilityCatalogModule = require(viewRecycler.Core.Diagnostics.__benc
 local create = require(viewRecyclerRoblox.RobloxAdapter.createRecyclingScope).create
 local createVirtualizerModule = require(viewRecyclerRoblox.RobloxAdapter.createVirtualizer)
 
-local function record(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	return p0.create({
+local function record(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
+	return p1.create({
 		suite = "view-recycler-roblox",
 		layer = "robloxHost",
 		owner = "roblox",
-		responsibility = p1,
-		timingClass = p2,
-		workload = p3,
-		description = p4,
-		scale = { operations = p7 },
+		responsibility = p2,
+		timingClass = p3,
+		workload = p4,
+		description = p5,
+		scale = { operations = p8 },
 		timing = {
 			unit = "ms",
-			basis = p5,
-			operationsPerSample = p7,
-			includesSchedulerWaits = p6
+			basis = p6,
+			operationsPerSample = p8,
+			includesSchedulerWaits = p7
 		},
-		arms = { viewRecycler = p8 },
-		evidence = p9
+		arms = { viewRecycler = p9 },
+		evidence = p10
 	})
 end
 
-local function placementWorkload(p10, p11, p12, p13, p14)
+local function placementWorkload(p1, p2, p3, p4, p5)
 	-- upvalues: record (ref), responsibilityCatalogModule (ref)
 	local folder = Instance.new("Folder")
 	local folder_1 = Instance.new("Folder")
 	local frame = Instance.new("Frame")
-	local var25 = p10.CanvasItemPlacer.createState()
+	local var1 = p1.CanvasItemPlacer.createState()
 	local t = {
 		position = UDim2.fromOffset(0, 40),
 		size = UDim2.new(1, 0, 0, 40),
@@ -46,106 +46,106 @@ local function placementWorkload(p10, p11, p12, p13, p14)
 		size = t.size,
 		automaticSize = t.automaticSize
 	}
-	p10.CanvasItemPlacer.place(frame, folder, t, var25, true)
-	local var28 = 0
-	local var29 = 0
-	local var30 = 0
-	local var31 = record(p12, responsibilityCatalogModule.Roblox.GeometryPlacement, "hostBoundary", "geometry-placement-paths", "Groups changed, unchanged, and reparented CanvasItemPlacer paths.", "placementPathBatch", false, p13, p11.measure(function()
-		-- upvalues: var28 (write), var29 (write), var30 (write), p13 (ref), p10 (ref), frame (ref), folder (ref), t_1 (ref), var25 (ref), folder_1 (ref), t (ref)
-		var28 = 0
-		var29 = 0
-		var30 = 0
+	p1.CanvasItemPlacer.place(frame, folder, t, var1, true)
+	local var2 = 0
+	local var3 = 0
+	local var4 = 0
+	local var5 = record(p3, responsibilityCatalogModule.Roblox.GeometryPlacement, "hostBoundary", "geometry-placement-paths", "Groups changed, unchanged, and reparented CanvasItemPlacer paths.", "placementPathBatch", false, p4, p2.measure(function()
+		-- upvalues: var2 (write), var3 (write), var4 (write), p4 (ref), p1 (ref), frame (ref), folder (ref), t_1 (ref), var1 (ref), folder_1 (ref), t (ref)
+		var2 = 0
+		var3 = 0
+		var4 = 0
 		
-		for _ = 1, p13 do
-			var28 += p10.CanvasItemPlacer.place(frame, folder, t_1, var25, true)
-			var29 += p10.CanvasItemPlacer.place(frame, folder, t_1, var25, true)
-			var30 += p10.CanvasItemPlacer.place(frame, folder_1, t_1, var25, true)
-			var30 += p10.CanvasItemPlacer.place(frame, folder, t, var25, true)
+		for _ = 1, p4 do
+			var2 += p1.CanvasItemPlacer.place(frame, folder, t_1, var1, true)
+			var3 += p1.CanvasItemPlacer.place(frame, folder, t_1, var1, true)
+			var4 += p1.CanvasItemPlacer.place(frame, folder_1, t_1, var1, true)
+			var4 += p1.CanvasItemPlacer.place(frame, folder, t, var1, true)
 		end
-	end, p14), {
-		placementCalls = p13 * 4,
-		changedPropertyWrites = var28,
-		unchangedPropertyWrites = var29,
-		reparentPropertyWrites = var30
+	end, p5), {
+		placementCalls = p4 * 4,
+		changedPropertyWrites = var2,
+		unchangedPropertyWrites = var3,
+		reparentPropertyWrites = var4
 	})
-	p10.CanvasItemPlacer.detach(frame, var25)
+	p1.CanvasItemPlacer.detach(frame, var1)
 	frame:Destroy()
 	folder:Destroy()
 	folder_1:Destroy()
 	
-	return var31
+	return var5
 end
 
-local function createPlacementRoutingFixture(p15, p16, p17)
+local function createPlacementRoutingFixture(p6, p7, p8)
 	local scrollingFrame = Instance.new("ScrollingFrame")
 	local frame = Instance.new("Frame")
 	local frame_1 = Instance.new("Frame")
-	local var35 = p17
-	local var36 = 0
+	local var6 = p8
+	local var7 = 0
 	local t = { key = "row", index = 1, value = "row", generation = 1 }
-	local var38 = p15.CanvasItemViewRuntime.new({
+	local var8 = p6.CanvasItemViewRuntime.new({
 		selfSizing = false,
 		container = scrollingFrame,
-		viewportContainer = if p16 then frame else nil,
-		axis = p15.Axis.Y,
+		viewportContainer = if p7 then frame else nil,
+		axis = p6.Axis.Y,
 		onItemMeasurements = function() end,
 		onItemViewPresentationChanged = function() end
 	})
 	
 	local function placementIntent()
-		-- upvalues: t (ref), var36 (write), var35 (write)
+		-- upvalues: t (ref), var7 (write), var6 (write)
 		return {
 			contentStartOffset = 0,
 			measurementIdentity = nil,
 			assignment = t,
 			itemLayout = { startOffset = 0, length = 40 },
-			canvasPlacement = { mainAxisLength = 40, mainAxisOffset = var36 },
-			viewportPlacement = if var35 then {
+			canvasPlacement = { mainAxisLength = 40, mainAxisOffset = var7 },
+			viewportPlacement = if var6 then {
 				mainAxisLength = 40,
 				viewportRelative = true,
-				mainAxisOffset = var36
+				mainAxisOffset = var7
 			} else nil
 		}
 	end
 	
-	var38.applyHostState(frame_1, {
+	var8.applyHostState(frame_1, {
 		phase = "presented",
 		visible = true,
 		host = frame_1,
 		assignment = t
 	})
-	var38.applyPlacementIntent(frame_1, placementIntent())
+	var8.applyPlacementIntent(frame_1, placementIntent())
 	
 	return {
 		canvas = scrollingFrame,
 		overlay = frame,
 		host = frame_1,
-		runtime = var38,
-		setPlacement = function(value, p18)
-			-- upvalues: var36 (write), var35 (write)
-			var36 = value
-			var35 = p18
+		runtime = var8,
+		setPlacement = function(value, p9)
+			-- upvalues: var7 (write), var6 (write)
+			var7 = value
+			var6 = p9
 		end,
 		publishPlacementGeometry = function()
-			-- upvalues: var38 (ref), frame_1 (ref), placementIntent (ref)
-			var38.applyPlacementIntent(frame_1, placementIntent())
+			-- upvalues: var8 (ref), frame_1 (ref), placementIntent (ref)
+			var8.applyPlacementIntent(frame_1, placementIntent())
 		end
 	}
 end
 
-local function _(p19)
-	p19.runtime.destroy()
-	p19.host:Destroy()
-	p19.overlay:Destroy()
-	p19.canvas:Destroy()
+local function _(p6)
+	p6.runtime.destroy()
+	p6.host:Destroy()
+	p6.overlay:Destroy()
+	p6.canvas:Destroy()
 end
 
-local function placementRoutingWorkload(p20, p21, p22, p23, p24)
+local function placementRoutingWorkload(p6, p7, p8, p9, p10)
 	-- upvalues: createPlacementRoutingFixture (ref), responsibilityCatalogModule (ref)
-	local var40 = createPlacementRoutingFixture(p20, false, true)
-	local var41 = createPlacementRoutingFixture(p20, true, true)
-	local var42 = createPlacementRoutingFixture(p20, true, true)
-	local var43 = p22.create({
+	local var6 = createPlacementRoutingFixture(p6, false, true)
+	local var7 = createPlacementRoutingFixture(p6, true, true)
+	local var8 = createPlacementRoutingFixture(p6, true, true)
+	local var9 = p8.create({
 		suite = "view-recycler-roblox",
 		layer = "robloxHost",
 		owner = "roblox",
@@ -153,65 +153,65 @@ local function placementRoutingWorkload(p20, p21, p22, p23, p24)
 		workload = "viewport-overlay-placement-routing",
 		description = "Compares retained overlay and canvas-fallback geometry with canvas-to-overlay routing transitions.",
 		responsibility = responsibilityCatalogModule.Roblox.GeometryPlacement,
-		scale = { operations = p23 },
+		scale = { operations = p9 },
 		timing = {
 			unit = "ms",
 			basis = "placementPublicationBatch",
 			includesSchedulerWaits = false,
-			operationsPerSample = p23
+			operationsPerSample = p9
 		},
 		arms = {
-			canvasFallback = p21.measure(function()
-				-- upvalues: p23 (ref), var40 (ref)
-				for i = 1, p23 do
-					var40.setPlacement(i, true)
-					var40.publishPlacementGeometry(i)
+			canvasFallback = p7.measure(function()
+				-- upvalues: p9 (ref), var6 (ref)
+				for i = 1, p9 do
+					var6.setPlacement(i, true)
+					var6.publishPlacementGeometry(i)
 				end
-			end, p24),
-			viewportOverlay = p21.measure(function()
-				-- upvalues: p23 (ref), var41 (ref)
-				for i = 1, p23 do
-					var41.setPlacement(i, true)
-					var41.publishPlacementGeometry(i)
+			end, p10),
+			viewportOverlay = p7.measure(function()
+				-- upvalues: p9 (ref), var7 (ref)
+				for i = 1, p9 do
+					var7.setPlacement(i, true)
+					var7.publishPlacementGeometry(i)
 				end
-			end, p24),
-			routingTransitions = p21.measure(function()
-				-- upvalues: p23 (ref), var42 (ref)
-				for i = 1, p23 do
-					var42.setPlacement(i, i % 2 == 0)
-					var42.publishPlacementGeometry(i)
+			end, p10),
+			routingTransitions = p7.measure(function()
+				-- upvalues: p9 (ref), var8 (ref)
+				for i = 1, p9 do
+					var8.setPlacement(i, i % 2 == 0)
+					var8.publishPlacementGeometry(i)
 				end
-			end, p24)
+			end, p10)
 		},
 		evidence = {
-			canvasFallbackGeometryPublications = p23,
-			overlayGeometryPublications = p23,
-			routingPublications = p23,
-			routingReparents = p23,
-			canvasFallbackHostParent = var40.host.Parent == var40.canvas,
-			overlayHostParent = var41.host.Parent == var41.overlay,
-			routedHostInOverlay = var42.host.Parent == var42.overlay,
-			canvasFallbackHostOffset = var40.host.Position.Y.Offset,
-			overlayHostOffset = var41.host.Position.Y.Offset
+			canvasFallbackGeometryPublications = p9,
+			overlayGeometryPublications = p9,
+			routingPublications = p9,
+			routingReparents = p9,
+			canvasFallbackHostParent = var6.host.Parent == var6.canvas,
+			overlayHostParent = var7.host.Parent == var7.overlay,
+			routedHostInOverlay = var8.host.Parent == var8.overlay,
+			canvasFallbackHostOffset = var6.host.Position.Y.Offset,
+			overlayHostOffset = var7.host.Position.Y.Offset
 		}
 	})
-	var40.runtime.destroy()
-	var40.host:Destroy()
-	var40.overlay:Destroy()
-	var40.canvas:Destroy()
-	var41.runtime.destroy()
-	var41.host:Destroy()
-	var41.overlay:Destroy()
-	var41.canvas:Destroy()
-	var42.runtime.destroy()
-	var42.host:Destroy()
-	var42.overlay:Destroy()
-	var42.canvas:Destroy()
+	var6.runtime.destroy()
+	var6.host:Destroy()
+	var6.overlay:Destroy()
+	var6.canvas:Destroy()
+	var7.runtime.destroy()
+	var7.host:Destroy()
+	var7.overlay:Destroy()
+	var7.canvas:Destroy()
+	var8.runtime.destroy()
+	var8.host:Destroy()
+	var8.overlay:Destroy()
+	var8.canvas:Destroy()
 	
-	return var43
+	return var9
 end
 
-local function reparentSelectionWorkload(p25, p26, p27, p28)
+local function reparentSelectionWorkload(p11, p12, p13, p14)
 	-- upvalues: reparentableHostModule (ref), guiService (ref), record (ref), responsibilityCatalogModule (ref)
 	local screenGui = Instance.new("ScreenGui")
 	screenGui.Parent = game:GetService("CoreGui")
@@ -223,150 +223,150 @@ local function reparentSelectionWorkload(p25, p26, p27, p28)
 	local textButton = Instance.new("TextButton")
 	textButton.Selectable = true
 	textButton.Parent = benchmarkHost
-	local var49 = 0
-	local var50 = 0
-	local var51 = 0
-	local var52 = record(p26, responsibilityCatalogModule.Roblox.ReparentSelection, "hostBoundary", "reparent-selection-cleanup", "Places ReparentableHost instances and clears descendant selection while detaching.", "reparentSelectionBatch", false, p27, p25.measure(function()
-		-- upvalues: var49 (write), var50 (write), var51 (write), p27 (ref), reparentableHostModule (copy), benchmarkHost (ref), frame (ref), frame_1 (ref), guiService (copy), textButton (ref)
-		var49 = 0
-		var50 = 0
-		var51 = 0
+	local var10 = 0
+	local var11 = 0
+	local var12 = 0
+	local var13 = record(p12, responsibilityCatalogModule.Roblox.ReparentSelection, "hostBoundary", "reparent-selection-cleanup", "Places ReparentableHost instances and clears descendant selection while detaching.", "reparentSelectionBatch", false, p13, p11.measure(function()
+		-- upvalues: var10 (write), var11 (write), var12 (write), p13 (ref), reparentableHostModule (copy), benchmarkHost (ref), frame (ref), frame_1 (ref), guiService (copy), textButton (ref)
+		var10 = 0
+		var11 = 0
+		var12 = 0
 		
-		for i = 1, p27 do
+		for i = 1, p13 do
 			reparentableHostModule.place(benchmarkHost, {
 				placeholder = if i % 2 == 0 then frame else frame_1,
 				automaticSize = Enum.AutomaticSize.Y
 			})
-			var49 += 1
+			var10 += 1
 			
 			if i == 1 then
 				guiService.SelectedObject = textButton
 			end
 			reparentableHostModule.detach(benchmarkHost)
-			var51 += 1
+			var12 += 1
 			
 			if i == 1 and guiService.SelectedObject == nil then
-				var50 += 1
+				var11 += 1
 			end
 		end
-	end, p28), {
-		placements = var49,
-		selectionClears = var50,
-		detachments = var51,
+	end, p14), {
+		placements = var10,
+		selectionClears = var11,
+		detachments = var12,
 		finalParentIsNil = benchmarkHost.Parent == nil
 	})
 	reparentableHostModule.destroy(benchmarkHost)
 	screenGui:Destroy()
 	
-	return var52
+	return var13
 end
 
-local function leaseLifecycleWorkload(p29, p30, p31, p32, p33)
+local function leaseLifecycleWorkload(p15, p16, p17, p18, p19)
 	-- upvalues: record (ref), responsibilityCatalogModule (ref)
 	local folder = Instance.new("Folder")
 	local frame = Instance.new("Frame")
-	local var55 = p29.CanvasItemViewRuntime.new({
+	local var14 = p15.CanvasItemViewRuntime.new({
 		selfSizing = false,
 		container = folder,
-		axis = p29.Axis.Y,
+		axis = p15.Axis.Y,
 		onItemMeasurements = function() end,
 		onItemViewPresentationChanged = function() end
 	})
-	local var56 = nil
-	local var57 = 0
-	local var58 = 0
-	local var59 = record(p31, responsibilityCatalogModule.Roblox.LeaseLifecycle, "integrated", "canvas-item-view-runtime-lease-lifecycle", "Transitions one CanvasItemViewRuntime host Lease through attachment and detachment without measurement work.", "leaseAttachDetachBatch", false, p32, p30.measure(function()
-		-- upvalues: var57 (write), var58 (write), p32 (ref), var56 (write), var55 (ref), frame (ref), folder (ref)
-		var57 = 0
-		var58 = 0
+	local var15 = nil
+	local var16 = 0
+	local var17 = 0
+	local var18 = record(p17, responsibilityCatalogModule.Roblox.LeaseLifecycle, "integrated", "canvas-item-view-runtime-lease-lifecycle", "Transitions one CanvasItemViewRuntime host Lease through attachment and detachment without measurement work.", "leaseAttachDetachBatch", false, p18, p16.measure(function()
+		-- upvalues: var16 (write), var17 (write), p18 (ref), var15 (write), var14 (ref), frame (ref), folder (ref)
+		var16 = 0
+		var17 = 0
 		
-		for i = 1, p32 do
-			var56 = { key = "row", index = 1, value = "row", generation = i }
-			var55.applyPlacementIntent(frame, {
+		for i = 1, p18 do
+			var15 = { key = "row", index = 1, value = "row", generation = i }
+			var14.applyPlacementIntent(frame, {
 				viewportPlacement = nil,
 				contentStartOffset = 0,
 				measurementIdentity = nil,
-				assignment = var56,
+				assignment = var15,
 				itemLayout = { startOffset = 0, length = 40 },
 				canvasPlacement = {}
 			})
-			var55.applyHostState(frame, {
+			var14.applyHostState(frame, {
 				phase = "presented",
 				visible = true,
 				host = frame,
-				assignment = var56
+				assignment = var15
 			})
 			
 			if frame.Parent == folder then
-				var57 += 1
+				var16 += 1
 			end
-			var55.applyHostState(frame, nil)
-			var56 = nil
+			var14.applyHostState(frame, nil)
+			var15 = nil
 			
 			if frame.Parent == nil and not frame.Visible then
-				var58 += 1
+				var17 += 1
 			end
 		end
-	end, p33), {
-		attachments = var57,
-		detachments = var58,
+	end, p19), {
+		attachments = var16,
+		detachments = var17,
 		finalParentIsNil = frame.Parent == nil
 	})
-	var55.destroy()
+	var14.destroy()
 	frame:Destroy()
 	folder:Destroy()
 	
-	return var59
+	return var18
 end
 
-local function createScrollHost(p34, p35)
+local function createScrollHost(p20, p21)
 	-- upvalues: viewRecyclerModule (ref)
-	local offset = p35.CanvasSize.Y.Offset
-	local var60 = 0
-	local var61 = 0
-	local var62 = viewRecyclerModule.DataSource.snapshot({}, function(p36)
-		return p36
+	local offset = p21.CanvasSize.Y.Offset
+	local var19 = 0
+	local var20 = 0
+	local var21 = viewRecyclerModule.DataSource.snapshot({}, function(p22)
+		return p22
 	end)
 	local t = {
-		dispatch = function(p37)
-			-- upvalues: viewRecyclerModule (copy), var60 (write), var61 (write)
-			if p37.type == viewRecyclerModule.VirtualizerCommandType.SetViewportSize then
-				var60 += 1
-			elseif p37.type == viewRecyclerModule.VirtualizerCommandType.ObserveScrollOffset then
-				var61 += 1
+		dispatch = function(p22)
+			-- upvalues: viewRecyclerModule (copy), var19 (write), var20 (write)
+			if p22.type == viewRecyclerModule.VirtualizerCommandType.SetViewportSize then
+				var19 += 1
+			elseif p22.type == viewRecyclerModule.VirtualizerCommandType.ObserveScrollOffset then
+				var20 += 1
 			end
 			return {
 				snapshot = nil,
 				effects = {},
-				result = if p37.type == viewRecyclerModule.VirtualizerCommandType.ApplyScrollAnchorOffset then p37.offset else nil
+				result = if p22.type == viewRecyclerModule.VirtualizerCommandType.ApplyScrollAnchorOffset then p22.offset else nil
 			}
 		end,
 		getSnapshot = function()
 			-- upvalues: offset (write)
 			return { contentLength = offset }
 		end,
-		query = function(p38)
-			-- upvalues: viewRecyclerModule (copy), p35 (ref), offset (write)
-			return if p38.type == viewRecyclerModule.VirtualizerQueryType.GetScrollOffsetForItem then 0 else {
+		query = function(p22)
+			-- upvalues: viewRecyclerModule (copy), p21 (ref), offset (write)
+			return if p22.type == viewRecyclerModule.VirtualizerQueryType.GetScrollOffsetForItem then 0 else {
 				atStart = true,
 				atEnd = false,
-				scrollOffset = p35.CanvasPosition.Y,
-				viewportLength = p35.AbsoluteWindowSize.Y,
+				scrollOffset = p21.CanvasPosition.Y,
+				viewportLength = p21.AbsoluteWindowSize.Y,
 				contentLength = offset,
 				distanceFromEnd = offset
 			}
 		end
 	}
-	local var64 = p34.ScrollHostCoordinator.new({
+	local var22 = p20.ScrollHostCoordinator.new({
 		dispatch = t.dispatch,
 		getSnapshot = t.getSnapshot,
 		query = t.query,
 		getInstance = function()
-			-- upvalues: p35 (ref)
-			return p35
+			-- upvalues: p21 (ref)
+			return p21
 		end,
 		getConfiguration = function()
-			-- upvalues: p34 (ref), var62 (ref)
+			-- upvalues: p20 (ref), var21 (ref)
 			return {
 				initialScrollAlignment = nil,
 				autoScrollOnChange = nil,
@@ -376,88 +376,88 @@ local function createScrollHost(p34, p35)
 				onViewportChanged = nil,
 				onScrollOffsetChanged = nil,
 				onContentLengthChanged = nil,
-				axis = p34.Axis.Y,
-				dataSource = var62
+				axis = p20.Axis.Y,
+				dataSource = var21
 			}
 		end
 	})
-	local var65 = var64.connect()
-	var60 = 0
-	var61 = 0
+	local var23 = var22.connect()
+	var19 = 0
+	var20 = 0
 	
-	return var64, function()
-		-- upvalues: var60 (write), var61 (write)
-		return var60, var61
-	end, function(p39)
-		-- upvalues: offset (write), var64 (ref), viewRecyclerModule (copy)
+	return var22, function()
+		-- upvalues: var19 (write), var20 (write)
+		return var19, var20
+	end, function(p22)
+		-- upvalues: offset (write), var22 (ref), viewRecyclerModule (copy)
 		local t = { contentLength = offset }
-		var64.handleUpdate(t, {
+		var22.handleUpdate(t, {
 			snapshot = t,
 			effects = {
 				{
 					type = viewRecyclerModule.VirtualizerEffectType.ScrollPositionChanged,
-					offset = p39
+					offset = p22
 				}
 			},
 			presentation = { assignmentsChanged = false, placementChanged = false }
 		})
-	end, function(p40)
+	end, function(p22)
 		-- upvalues: offset (write)
-		offset = p40
-	end, var65
+		offset = p22
+	end, var23
 end
 
-local function scrollSynchronizationWorkload(p41, p42, p43, p44, p45)
+local function scrollSynchronizationWorkload(p20, p21, p22, p23, p24)
 	-- upvalues: createScrollHost (ref), record (ref), responsibilityCatalogModule (ref)
 	local scrollingFrame = Instance.new("ScrollingFrame")
 	scrollingFrame.Size = UDim2.fromOffset(400, 400)
 	scrollingFrame.CanvasSize = UDim2.fromOffset(400, 4000)
-	local var68, var69, var70, _, var71 = createScrollHost(p41, scrollingFrame)
-	local var72 = p42.measure(function()
-		-- upvalues: p44 (ref), var68 (ref), var70 (ref), scrollingFrame (ref)
-		for i = 1, p44 do
-			var68.hostChanged()
-			var70(i)
+	local var19, var20, var21, _, var22 = createScrollHost(p20, scrollingFrame)
+	local var23 = p21.measure(function()
+		-- upvalues: p23 (ref), var19 (ref), var21 (ref), scrollingFrame (ref)
+		for i = 1, p23 do
+			var19.hostChanged()
+			var21(i)
 			scrollingFrame.CanvasPosition = scrollingFrame.CanvasPosition
 		end
-	end, p45)
-	local var73, var74 = var69()
-	local var75 = record(p43, responsibilityCatalogModule.Roblox.ScrollViewportSync, "hostBoundary", "scroll-viewport-offset-correction-sync", "Synchronizes viewport geometry and attributes host-reported offsets to Programmatic or User scroll.", "scrollSynchronizationBatch", false, p44, var72, {
-		viewportUpdates = var73,
-		runtimeUpdates = var74,
+	end, p24)
+	local var24, var25 = var20()
+	local var26 = record(p22, responsibilityCatalogModule.Roblox.ScrollViewportSync, "hostBoundary", "scroll-viewport-offset-correction-sync", "Synchronizes viewport geometry and attributes host-reported offsets to Programmatic or User scroll.", "scrollSynchronizationBatch", false, p23, var23, {
+		viewportUpdates = var24,
+		runtimeUpdates = var25,
 		finalScrollOffset = scrollingFrame.CanvasPosition.Y
 	})
-	var71()
+	var22()
 	scrollingFrame:Destroy()
 	
-	return var75
+	return var26
 end
 
-local function canvasPublicationWorkload(p46, p47, p48, p49, p50)
+local function canvasPublicationWorkload(p25, p26, p27, p28, p29)
 	-- upvalues: createScrollHost (ref), record (ref), responsibilityCatalogModule (ref)
 	local scrollingFrame = Instance.new("ScrollingFrame")
-	local _, _, var77, var78, var79 = createScrollHost(p46, scrollingFrame)
-	local var80 = 0
-	local var81 = record(p48, responsibilityCatalogModule.Roblox.CanvasPublication, "hostBoundary", "canvas-size-publication", "Computes and publishes adapter canvas sizes to a ScrollingFrame.", "canvasPublicationBatch", false, p49, p47.measure(function()
-		-- upvalues: var80 (write), p49 (ref), var78 (ref), var77 (ref)
-		var80 = 0
+	local _, _, var24, var25, var26 = createScrollHost(p25, scrollingFrame)
+	local var27 = 0
+	local var28 = record(p27, responsibilityCatalogModule.Roblox.CanvasPublication, "hostBoundary", "canvas-size-publication", "Computes and publishes adapter canvas sizes to a ScrollingFrame.", "canvasPublicationBatch", false, p28, p26.measure(function()
+		-- upvalues: var27 (write), p28 (ref), var25 (ref), var24 (ref)
+		var27 = 0
 		
-		for i = 1, p49 do
-			var78(i * 40)
-			var77(0)
-			var80 += 1
+		for i = 1, p28 do
+			var25(i * 40)
+			var24(0)
+			var27 += 1
 		end
-	end, p50), {
-		canvasPublications = var80,
+	end, p29), {
+		canvasPublications = var27,
 		finalCanvasLength = scrollingFrame.CanvasSize.Y.Offset
 	})
-	var79()
+	var26()
 	scrollingFrame:Destroy()
 	
-	return var81
+	return var28
 end
 
-local function measurementSchedulingWorkload(p51, p52, p53, p54, p55)
+local function measurementSchedulingWorkload(p30, p31, p32, p33, p34)
 	-- upvalues: measurementBatcherModule (ref), record (ref), responsibilityCatalogModule (ref)
 	local frame = Instance.new("Frame")
 	frame.Size = UDim2.fromOffset(100, 40)
@@ -468,74 +468,74 @@ local function measurementSchedulingWorkload(p51, p52, p53, p54, p55)
 		itemRevision = 0
 	}
 	local t_1 = {}
-	local var85 = p52.measure(function()
-		-- upvalues: p51 (ref), frame (ref), t (ref), measurementBatcherModule (copy), p54 (ref), t_1 (write)
+	local var29 = p31.measure(function()
+		-- upvalues: p30 (ref), frame (ref), t (ref), measurementBatcherModule (copy), p33 (ref), t_1 (write)
 		local t_2 = {}
-		local var87 = 0
-		local var88 = 0
-		local var89 = 0
-		local var90 = p51.Measurer.attach({
+		local var30 = 0
+		local var31 = 0
+		local var32 = 0
+		local var33 = p30.Measurer.attach({
 			instance = frame,
-			axis = p51.Axis.Y,
+			axis = p30.Axis.Y,
 			getIdentity = function()
 				-- upvalues: t (copy)
 				return t
 			end,
 			onItemMeasured = function() end
 		})
-		local var91 = measurementBatcherModule.new(function(p56)
-			-- upvalues: var87 (write), var88 (write)
-			var87 += 1
-			var88 += #p56
-		end, function(p57)
+		local var34 = measurementBatcherModule.new(function(p35)
+			-- upvalues: var30 (write), var31 (write)
+			var30 += 1
+			var31 += #p35
+		end, function(p35)
 			-- upvalues: t_2 (ref)
-			table.insert(t_2, p57)
+			table.insert(t_2, p35)
 		end)
 		
-		for i = 1, p54 do
+		for i = 1, p33 do
 			t.itemRevision = i
-			var90.scheduleSettle()
-			var90.scheduleSettle()
-			var91.add({
+			var33.scheduleSettle()
+			var33.scheduleSettle()
+			var34.add({
 				itemKey = "row",
 				assignmentGeneration = 1,
 				length = 40,
 				itemRevision = i
 			})
-			var91.add({
+			var34.add({
 				itemKey = "row",
 				assignmentGeneration = 1,
 				length = 41,
 				itemRevision = i
 			})
 			table.remove(t_2, 1)()
-			var91.add({
+			var34.add({
 				itemKey = "cancelled",
 				assignmentGeneration = 1,
 				length = 0,
 				itemRevision = i
 			})
-			var91.cancelPending()
+			var34.cancelPending()
 			table.remove(t_2, 1)()
-			var89 += 1
+			var32 += 1
 		end
 		t_1 = {
-			settleRequests = p54 * 2,
-			uniquePendingHeartbeats = var90.getPendingCount(),
-			batchFlushes = var87,
-			batchedMeasurements = var88,
-			cancellations = var89,
+			settleRequests = p33 * 2,
+			uniquePendingHeartbeats = var33.getPendingCount(),
+			batchFlushes = var30,
+			batchedMeasurements = var31,
+			cancellations = var32,
 			deferredCallbacksRemaining = #t_2
 		}
-		var91.destroy()
-		var90.disconnect()
-	end, p55)
+		var34.destroy()
+		var33.disconnect()
+	end, p34)
 	frame:Destroy()
 	
-	return record(p53, responsibilityCatalogModule.Roblox.MeasurementScheduling, "phased", "measurement-adapter-scheduling", "Schedules deduplicated settles, flushes measurement batches, and cancels stale batches without yielding.", "adapterMeasurementSchedulingBatch", false, p54, var85, t_1)
+	return record(p32, responsibilityCatalogModule.Roblox.MeasurementScheduling, "phased", "measurement-adapter-scheduling", "Schedules deduplicated settles, flushes measurement batches, and cancels stale batches without yielding.", "adapterMeasurementSchedulingBatch", false, p33, var29, t_1)
 end
 
-local function measurementHeartbeatWorkload(p58, p59, p60, p61)
+local function measurementHeartbeatWorkload(p35, p36, p37, p38)
 	-- upvalues: runService (ref), record (ref), responsibilityCatalogModule (ref)
 	local screenGui = Instance.new("ScreenGui")
 	screenGui.Parent = game:GetService("CoreGui")
@@ -549,77 +549,77 @@ local function measurementHeartbeatWorkload(p58, p59, p60, p61)
 		assignmentGeneration = 1,
 		itemRevision = 0
 	}
-	local var95 = 0
-	local var96 = 0
-	local var97 = -1
+	local var30 = 0
+	local var31 = 0
+	local var32 = -1
 	local bindableEvent = Instance.new("BindableEvent")
-	local var99 = p58.Measurer.attach({
+	local var33 = p35.Measurer.attach({
 		instance = frame,
-		axis = p58.Axis.Y,
+		axis = p35.Axis.Y,
 		getIdentity = function()
 			-- upvalues: t (ref)
 			return t
 		end,
-		onItemMeasured = function(_, p62)
-			-- upvalues: var95 (write), var97 (write), bindableEvent (ref)
-			var95 += 1
-			var97 = p62
+		onItemMeasured = function(_, p39)
+			-- upvalues: var30 (write), var32 (write), bindableEvent (ref)
+			var30 += 1
+			var32 = p39
 			bindableEvent:Fire()
 		end
 	})
-	local clock = p61.clock or os.clock
-	local var101 = record(p60, responsibilityCatalogModule.Roblox.MeasurementScheduling, "hostBoundary", "measurement-heartbeat-observation", "Observes one scheduled Roblox measurement after its required Heartbeat boundary.", "heartbeatMeasurementObservation", true, 1, p59.run(function()
-		-- upvalues: t (ref), var95 (write), var99 (ref), clock (ref), bindableEvent (ref), var96 (write)
+	local clock = p38.clock or os.clock
+	local var34 = record(p37, responsibilityCatalogModule.Roblox.MeasurementScheduling, "hostBoundary", "measurement-heartbeat-observation", "Observes one scheduled Roblox measurement after its required Heartbeat boundary.", "heartbeatMeasurementObservation", true, 1, p36.run(function()
+		-- upvalues: t (ref), var30 (write), var33 (ref), clock (ref), bindableEvent (ref), var31 (write)
 		t.itemRevision += 1
-		var99.scheduleSettle()
-		local var102 = clock()
+		var33.scheduleSettle()
+		local var35 = clock()
 		bindableEvent.Event:Wait()
-		local var103 = (clock() - var102) * 1000
-		var96 = var95 - var95
-		assert(var96 == 1, "scheduled measurement did not settle on Heartbeat")
+		local var36 = (clock() - var35) * 1000
+		var31 = var30 - var30
+		assert(var31 == 1, "scheduled measurement did not settle on Heartbeat")
 		
-		return var103
-	end, p61), {
+		return var36
+	end, p38), {
 		completionBarrier = "RunService.Heartbeat",
-		observedMeasurements = var96,
-		lastMeasuredLength = var97,
-		pendingHeartbeats = var99.getPendingCount()
+		observedMeasurements = var31,
+		lastMeasuredLength = var32,
+		pendingHeartbeats = var33.getPendingCount()
 	})
-	var99.disconnect()
+	var33.disconnect()
 	bindableEvent:Destroy()
 	screenGui:Destroy()
 	
-	return var101
+	return var34
 end
 
-local function createFakeGui(p63)
+local function createFakeGui(p35)
 	local t = {}
 	local t_1 = {}
 	local bindableEvent = Instance.new("BindableEvent")
 	table.insert(t_1, bindableEvent)
 	
 	return {
-		AbsolutePosition = p63.position or Vector2.zero,
-		AbsoluteSize = p63.size or Vector2.zero,
-		AbsoluteWindowSize = p63.windowSize or Vector2.zero,
-		CanvasPosition = p63.canvasPosition or Vector2.zero,
-		Parent = p63.parent,
+		AbsolutePosition = p35.position or Vector2.zero,
+		AbsoluteSize = p35.size or Vector2.zero,
+		AbsoluteWindowSize = p35.windowSize or Vector2.zero,
+		CanvasPosition = p35.canvasPosition or Vector2.zero,
+		Parent = p35.parent,
 		Destroying = bindableEvent.Event,
-		GetPropertyChangedSignal = function(_, p64)
+		GetPropertyChangedSignal = function(_, p36)
 			-- upvalues: t (ref), t_1 (ref)
-			local var107 = t[p64]
+			local var30 = t[p36]
 			
-			if var107 == nil then
-				var107 = Instance.new("BindableEvent")
-				t[p64] = var107
-				table.insert(t_1, var107)
+			if var30 == nil then
+				var30 = Instance.new("BindableEvent")
+				t[p36] = var30
+				table.insert(t_1, var30)
 			end
-			return var107.Event
+			return var30.Event
 		end,
-		IsDescendantOf = function(p65, p66)
-			local parent = p65.Parent
+		IsDescendantOf = function(p36, p37)
+			local parent = p36.Parent
 			while parent ~= nil do
-				if parent ~= p66 then
+				if parent ~= p37 then
 					parent = parent.Parent
 					continue
 				end
@@ -627,12 +627,12 @@ local function createFakeGui(p63)
 			end
 			return false
 		end,
-		fire = function(_, p67)
+		fire = function(_, p38)
 			-- upvalues: t (ref)
-			local var108 = t[p67]
+			local var30 = t[p38]
 			
-			if var108 ~= nil then
-				var108:Fire()
+			if var30 ~= nil then
+				var30:Fire()
 			end
 		end,
 		destroy = function(_)
@@ -644,137 +644,137 @@ local function createFakeGui(p63)
 	}
 end
 
-local function viewportActivationWorkload(p68, p69, p70, p71, p72)
+local function viewportActivationWorkload(p38, p39, p40, p41, p42)
 	-- upvalues: createFakeGui (ref), record (ref), responsibilityCatalogModule (ref)
-	local var109 = createFakeGui({
+	local var30 = createFakeGui({
 		position = Vector2.new(0, 0),
 		windowSize = Vector2.new(100, 100)
 	})
-	local var110 = createFakeGui({
+	local var31 = createFakeGui({
 		position = Vector2.new(0, 150),
 		size = Vector2.new(10, 10),
-		parent = var109
+		parent = var30
 	})
-	local var111 = 0
-	local var112 = p68.ViewportCoordinator.new({ axis = p68.Axis.Y })
-	var112.setViewport(var109)
-	local var113 = record(p70, responsibilityCatalogModule.Roblox.ViewportActivation, "integrated", "viewport-activation-transitions", "Evaluates positive activation transitions alongside unchanged no-op evaluations.", "viewportActivationBatch", false, p71, p69.measure(function()
-		-- upvalues: p71 (ref), var110 (ref)
-		for _ = 1, p71 do
-			var110.AbsolutePosition = Vector2.new(0, 50)
-			var110:fire("AbsolutePosition")
-			var110:fire("AbsolutePosition")
-			var110.AbsolutePosition = Vector2.new(0, 150)
-			var110:fire("AbsolutePosition")
+	local var32 = 0
+	local var33 = p38.ViewportCoordinator.new({ axis = p38.Axis.Y })
+	var33.setViewport(var30)
+	local var34 = record(p40, responsibilityCatalogModule.Roblox.ViewportActivation, "integrated", "viewport-activation-transitions", "Evaluates positive activation transitions alongside unchanged no-op evaluations.", "viewportActivationBatch", false, p41, p39.measure(function()
+		-- upvalues: p41 (ref), var31 (ref)
+		for _ = 1, p41 do
+			var31.AbsolutePosition = Vector2.new(0, 50)
+			var31:fire("AbsolutePosition")
+			var31:fire("AbsolutePosition")
+			var31.AbsolutePosition = Vector2.new(0, 150)
+			var31:fire("AbsolutePosition")
 		end
-	end, p72), {
-		evaluations = p71 * 3,
-		transitions = var111 - var111,
-		noOpEvaluations = p71
+	end, p42), {
+		evaluations = p41 * 3,
+		transitions = var32 - var32,
+		noOpEvaluations = p41
 	})
-	var112.register(var110, function()
-		-- upvalues: var111 (write)
-		var111 += 1
+	var33.register(var31, function()
+		-- upvalues: var32 (write)
+		var32 += 1
 	end)()
-	var112.destroy()
-	var110:destroy()
-	var109:destroy()
+	var33.destroy()
+	var31:destroy()
+	var30:destroy()
 	
-	return var113
+	return var34
 end
 
-local function teardownWorkload(p73, p74, p75, p76, p77)
+local function teardownWorkload(p43, p44, p45, p46, p47)
 	-- upvalues: viewRecyclerModule (ref), create (ref), createVirtualizerModule (ref), record (ref), responsibilityCatalogModule (ref)
-	local clock = p77.clock or os.clock
-	local var115 = 0
-	local var116 = 0
-	local var117 = 0
-	local var118 = 0
-	local var119 = 0
-	local var120 = 0
+	local clock = p47.clock or os.clock
+	local var35 = 0
+	local var36 = 0
+	local var37 = 0
+	local var38 = 0
+	local var39 = 0
+	local var40 = 0
 	
-	return record(p75, responsibilityCatalogModule.Roblox.Teardown, "integrated", "full-adapter-teardown", "Destroys populated Roblox virtualizers, host Leases, connections, measurement state, and owned RecyclingScopes.", "fullAdapterTeardownBatch", false, p76, p74.run(function()
-		-- upvalues: var115 (write), var116 (write), var117 (write), var119 (write), var120 (write), p76 (ref), var118 (write), viewRecyclerModule (copy), create (copy), createVirtualizerModule (copy), p73 (ref), clock (ref)
-		var115 = 0
-		var116 = 0
-		var117 = 0
-		var119 = 0
-		var120 = 0
-		local var121 = 0
+	return record(p45, responsibilityCatalogModule.Roblox.Teardown, "integrated", "full-adapter-teardown", "Destroys populated Roblox virtualizers, host Leases, connections, measurement state, and owned RecyclingScopes.", "fullAdapterTeardownBatch", false, p46, p44.run(function()
+		-- upvalues: var35 (write), var36 (write), var37 (write), var39 (write), var40 (write), p46 (ref), var38 (write), viewRecyclerModule (copy), create (copy), createVirtualizerModule (copy), p43 (ref), clock (ref)
+		var35 = 0
+		var36 = 0
+		var37 = 0
+		var39 = 0
+		var40 = 0
+		local var41 = 0
 		
-		for _ = 1, p76 do
-			var118 += 1
+		for _ = 1, p46 do
+			var38 += 1
 			local scrollingFrame = Instance.new("ScrollingFrame")
 			scrollingFrame.Size = UDim2.fromOffset(100, 40)
-			local var123 = viewRecyclerModule.Layout.uniform({ itemLength = 20 })
-			local var124 = create({
+			local var42 = viewRecyclerModule.Layout.uniform({ itemLength = 20 })
+			local var43 = create({
 				itemViewAdapter = {
 					create = function()
 						return Instance.new("Frame")
 					end,
 					update = function() end
 				},
-				destroyItemView = function(p78)
-					-- upvalues: var116 (copy)
-					var116 += 1
-					p78:Destroy()
+				destroyItemView = function(p48)
+					-- upvalues: var36 (copy)
+					var36 += 1
+					p48:Destroy()
 				end
 			})
-			local var125 = createVirtualizerModule({
+			local var44 = createVirtualizerModule({
 				scrollingFrame = scrollingFrame,
-				axis = p73.Axis.Y,
-				dataSource = viewRecyclerModule.DataSource.snapshot({ `a-{var118}`, `b-{var118}` }, function(p79)
-					return p79
+				axis = p43.Axis.Y,
+				dataSource = viewRecyclerModule.DataSource.snapshot({ `a-{var38}`, `b-{var38}` }, function(p48)
+					return p48
 				end),
-				layout = var123,
-				recyclingScope = var124,
+				layout = var42,
+				recyclingScope = var43,
 				getItemViewType = function()
 					return "row"
 				end
 			})
-			local var126 = clock()
-			var125.destroy()
-			local var127 = (clock() - var126) * 1000
-			local var128 = clock()
-			var124.destroy()
-			local var129 = (clock() - var128) * 1000
-			var119 += var127
-			var120 += var129
-			var121 += var127 + var129
-			var115 += 1
-			var125.destroy()
-			var124.destroy()
-			var117 += 1
-			var123.destroy()
+			local var45 = clock()
+			var44.destroy()
+			local var46 = (clock() - var45) * 1000
+			local var47 = clock()
+			var43.destroy()
+			local var48 = (clock() - var47) * 1000
+			var39 += var46
+			var40 += var48
+			var41 += var46 + var48
+			var35 += 1
+			var44.destroy()
+			var43.destroy()
+			var37 += 1
+			var42.destroy()
 			scrollingFrame:Destroy()
 		end
-		return var121
-	end, p77), {
-		adaptersDestroyed = var115,
-		itemViewsDestroyed = var116,
-		idempotentDestroyCalls = var117,
-		milestones = { hostTeardownMs = var119, scopeTeardownMs = var120 }
+		return var41
+	end, p47), {
+		adaptersDestroyed = var35,
+		itemViewsDestroyed = var36,
+		idempotentDestroyCalls = var37,
+		milestones = { hostTeardownMs = var39, scopeTeardownMs = var40 }
 	})
 end
 
 return {
-	run = function(p80, p81, p82, p83)
+	run = function(p48, p49, p50, p51)
 		-- upvalues: placementWorkload (ref), placementRoutingWorkload (ref), reparentSelectionWorkload (ref), leaseLifecycleWorkload (ref), scrollSynchronizationWorkload (ref), canvasPublicationWorkload (ref), measurementSchedulingWorkload (ref), measurementHeartbeatWorkload (ref), viewportActivationWorkload (ref), teardownWorkload (ref)
-		p83 = p83 or {}
-		local operationCount = p83.operationCount or 100
+		p51 = p51 or {}
+		local operationCount = p51.operationCount or 100
 		assert(operationCount >= 1 and operationCount % 1 == 0, "operationCount must be a positive integer")
 		
 		return {
-			placementWorkload(p80, p81, p82, operationCount, p83),
-			placementRoutingWorkload(p80, p81, p82, operationCount, p83),
-			reparentSelectionWorkload(p81, p82, operationCount, p83),
-			leaseLifecycleWorkload(p80, p81, p82, operationCount, p83),
-			scrollSynchronizationWorkload(p80, p81, p82, operationCount, p83),
-			canvasPublicationWorkload(p80, p81, p82, operationCount, p83),
-			measurementSchedulingWorkload(p80, p81, p82, operationCount, p83),
-			measurementHeartbeatWorkload(p80, p81, p82, p83),
-			viewportActivationWorkload(p80, p81, p82, operationCount, p83),
-			teardownWorkload(p80, p81, p82, operationCount, p83)
+			placementWorkload(p48, p49, p50, operationCount, p51),
+			placementRoutingWorkload(p48, p49, p50, operationCount, p51),
+			reparentSelectionWorkload(p49, p50, operationCount, p51),
+			leaseLifecycleWorkload(p48, p49, p50, operationCount, p51),
+			scrollSynchronizationWorkload(p48, p49, p50, operationCount, p51),
+			canvasPublicationWorkload(p48, p49, p50, operationCount, p51),
+			measurementSchedulingWorkload(p48, p49, p50, operationCount, p51),
+			measurementHeartbeatWorkload(p48, p49, p50, p51),
+			viewportActivationWorkload(p48, p49, p50, operationCount, p51),
+			teardownWorkload(p48, p49, p50, operationCount, p51)
 		}
 	end
 }

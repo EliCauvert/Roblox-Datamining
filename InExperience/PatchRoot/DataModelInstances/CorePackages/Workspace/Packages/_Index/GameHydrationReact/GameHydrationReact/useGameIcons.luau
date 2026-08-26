@@ -2,7 +2,7 @@
 local _ = require(gameHydrationReact.Parent.DataHydration)
 local useGameIconsForSizeModule = require(gameHydrationReact.useGameIconsForSize)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useGameIconsForSizeModule (ref)
-	return useGameIconsForSizeModule(p0, p1)
+	return useGameIconsForSizeModule(p1, p2)
 end

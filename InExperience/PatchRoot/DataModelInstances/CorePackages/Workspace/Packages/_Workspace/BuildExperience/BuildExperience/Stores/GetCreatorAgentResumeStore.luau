@@ -4,14 +4,14 @@ local signalsReactModule = require(parent.SignalsReact)
 
 return signalsModule.createComputed(function()
 	-- upvalues: signalsModule (ref), signalsReactModule (ref)
-	local var2, var3 = signalsModule.createSignal(nil)
+	local var1, var2 = signalsModule.createSignal(nil)
 	
 	return {
-		getActiveTarget = var2,
+		getActiveTarget = var1,
 		useActiveTarget = function()
-			-- upvalues: signalsReactModule (copy), var2 (ref)
-			return signalsReactModule.useSignalState(var2)
+			-- upvalues: signalsReactModule (copy), var1 (ref)
+			return signalsReactModule.useSignalState(var1)
 		end,
-		setActiveTarget = var3
+		setActiveTarget = var2
 	}
 end)

@@ -127,14 +127,14 @@ return {
 	keyIndex = t_5,
 	getMinWidthFor = function(a)
 		-- upvalues: t_1 (ref)
-		local var9 = t_1[a]
+		local var1 = t_1[a]
 		
-		return if var9 == nil then 0 else var9.minWidth
+		return if var1 == nil then 0 else var1.minWidth
 	end,
 	getMinHeightFor = function(a)
 		-- upvalues: t_3 (ref)
-		local var10 = t_3[a]
+		local var1 = t_3[a]
 		
-		return if var10 == nil then 0 else var10.minHeight
+		return if var1 == nil then 0 else var1.minHeight
 	end
 }

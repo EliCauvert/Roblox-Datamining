@@ -11,8 +11,8 @@ if t == nil then
 	t = {}
 end
 if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p0)
-		return p0
+	function t.FormatMessageToSend(_, _, p1)
+		return p1
 	end
 end
 return function(p1)
@@ -27,25 +27,25 @@ return function(p1)
 		if p3:lower() ~= "/?" and p3:lower() ~= "/help" then
 			return false
 		end
-		local var5 = p1:GetSpeaker(p2)
-		var5:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_Desc", "These are the basic chat commands."), p4)
+		local var1 = p1:GetSpeaker(p2)
+		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_Desc", "These are the basic chat commands."), p4)
 		
 		if chatSettingsModule.AllowMeCommand then
-			var5:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_MeCommand", "/me <text> : roleplaying command for doing actions."), p4)
+			var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_MeCommand", "/me <text> : roleplaying command for doing actions."), p4)
 		end
-		var5:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_SwitchChannelCommand", "/c <channel> : switch channel menu tabs."), p4)
+		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_SwitchChannelCommand", "/c <channel> : switch channel menu tabs."), p4)
 		
 		if if chatSettingsModule.ShowJoinAndLeaveHelpText ~= nil then false else chatSettingsModule.ShowJoinAndLeaveHelpText then
-			var5:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_JoinChannelCommand", "/join <channel> or /j <channel> : join channel."), p4)
-			var5:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_LeaveChannelCommand", "/leave <channel> or /l <channel> : leave channel. (leaves current if none specified)"), p4)
+			var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_JoinChannelCommand", "/join <channel> or /j <channel> : join channel."), p4)
+			var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_LeaveChannelCommand", "/leave <channel> or /l <channel> : leave channel. (leaves current if none specified)"), p4)
 		end
-		var5:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_WhisperCommand", "/whisper <speaker> or /w <speaker> : open private message channel with speaker."), p4)
-		var5:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_MuteCommand", "/mute <speaker> : mute a speaker."), p4)
-		var5:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_UnMuteCommand", "/unmute <speaker> : unmute a speaker."), p4)
-		local player = var5:GetPlayer()
+		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_WhisperCommand", "/whisper <speaker> or /w <speaker> : open private message channel with speaker."), p4)
+		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_MuteCommand", "/mute <speaker> : mute a speaker."), p4)
+		var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_UnMuteCommand", "/unmute <speaker> : unmute a speaker."), p4)
+		local player = var1:GetPlayer()
 		
 		if player and player.Team then
-			var5:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_TeamCommand", "/team <message> or /t <message> : send a team chat to players on your team."), p4)
+			var1:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatCommandsTeller_TeamCommand", "/team <message> or /t <message> : send a team chat to players on your team."), p4)
 		end
 		return true
 	end, chatConstantsModule.StandardPriority)

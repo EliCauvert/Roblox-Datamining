@@ -5,10 +5,10 @@ local useCreatorCreditPageViewModelModule = require(script.Parent.useCreatorCred
 
 return function(_)
 	-- upvalues: useCreatorCreditPageViewModelModule (ref), reactModule (ref), creatorCreditPageViewModule (ref), dailyLimitBottomSheetModule (ref)
-	local var4 = useCreatorCreditPageViewModelModule()
+	local var1 = useCreatorCreditPageViewModelModule()
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		Page = reactModule.createElement(creatorCreditPageViewModule, var4.pageProps),
-		LimitSheet = reactModule.createElement(dailyLimitBottomSheetModule, var4.limitSheetProps)
+		Page = reactModule.createElement(creatorCreditPageViewModule, var1.pageProps),
+		LimitSheet = reactModule.createElement(dailyLimitBottomSheetModule, var1.limitSheetProps)
 	})
 end

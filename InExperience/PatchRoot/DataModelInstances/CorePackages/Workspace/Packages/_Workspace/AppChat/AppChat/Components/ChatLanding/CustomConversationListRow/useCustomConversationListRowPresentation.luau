@@ -2,15 +2,15 @@
 local reactModule = require(appChat.Parent.React)
 local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useChatPagePaddingModule (ref), reactModule (ref)
-	local var3 = useChatPagePaddingModule()
-	local onActivated = p0.onActivated
+	local var1 = useChatPagePaddingModule()
+	local onActivated = p1.onActivated
 	
 	return {
-		entryHeight = p0.entryHeight or 64,
-		pagePaddingLeft = var3.left,
-		pagePaddingRight = var3.right,
+		entryHeight = p1.entryHeight or 64,
+		pagePaddingLeft = var1.left,
+		pagePaddingRight = var1.right,
 		onActivated = reactModule.useCallback(function()
 			-- upvalues: onActivated (ref)
 			if onActivated ~= nil then

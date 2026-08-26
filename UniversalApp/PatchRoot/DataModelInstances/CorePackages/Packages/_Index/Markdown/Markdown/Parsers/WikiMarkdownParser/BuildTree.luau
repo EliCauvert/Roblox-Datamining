@@ -50,10 +50,10 @@ function t.buildTree(p1, p2)
 				type = getNodeTypeModule("STYLED_TEXT", p2)
 			})
 		elseif STYLED_TEXT[var2.name] then
-			if not t.closeNode(list, function(p1)
+			if not t.closeNode(list, function(p3)
 				-- upvalues: var2 (ref)
-				if p1.name == "STYLED_TEXT" and p1.attributes and p1.attributes.style then
-					assert(p1.attributes.style == var2.name, `Can't put {var9.name} at {var9.offset} inside {p2.attributes.style} at {p2.offset}`)
+				if p3.name == "STYLED_TEXT" and p3.attributes and p3.attributes.style then
+					assert(p3.attributes.style == var2.name, `Can't put {var9.name} at {var9.offset} inside {p2.attributes.style} at {p2.offset}`)
 					
 					return true
 				end
@@ -68,9 +68,9 @@ function t.buildTree(p1, p2)
 				})
 			end
 		elseif LISTS[var2.name] and var2.capture then
-			t.closeNode(list, function(p1)
+			t.closeNode(list, function(p3)
 				-- upvalues: isNodeBlockModule (copy)
-				return isNodeBlockModule(p1)
+				return isNodeBlockModule(p3)
 			end)
 			insert(list, {
 				name = "LIST_ITEM",
@@ -80,9 +80,9 @@ function t.buildTree(p1, p2)
 				type = getNodeTypeModule("LIST_ITEM", p2)
 			})
 		elseif var2.isBlock then
-			t.closeNode(list, function(p1)
+			t.closeNode(list, function(p3)
 				-- upvalues: isNodeBlockModule (copy)
-				return isNodeBlockModule(p1)
+				return isNodeBlockModule(p3)
 			end)
 			local t_2 = {}
 			
@@ -174,10 +174,10 @@ function t.buildTree(p1, p2)
 			end
 		elseif var2.name == "CLOSE" and var2.capture then
 			local var8 = var2.capture[1]
-			assert(t.closeNode(list, function(p1)
+			assert(t.closeNode(list, function(p3)
 				-- upvalues: var8 (ref), var2 (ref)
-				if p1.name == "TAG" then
-					assert(p1.text == var8, `Found <{p1.text}> at {p1.offset} when trying to close </{var8}> at {var2.offset}`)
+				if p3.name == "TAG" then
+					assert(p3.text == var8, `Found <{p3.text}> at {p3.offset} when trying to close </{var8}> at {var2.offset}`)
 					
 					return true
 				end
@@ -194,53 +194,53 @@ function t.buildTree(p1, p2)
 		end
 		var1 += 1
 	end
-	t.closeNode(list, function(p1)
+	t.closeNode(list, function(p3)
 		-- upvalues: isNodeBlockModule (copy)
-		return isNodeBlockModule(p1)
+		return isNodeBlockModule(p3)
 	end)
-	t.closeNode(list, function(p1)
-		return p1.name == "ROOT"
+	t.closeNode(list, function(p3)
+		return p3.name == "ROOT"
 	end)
 	
 	return t_1
 end
 
-function t.closeNode(p1, p2)
+function t.closeNode(p3, p4)
 	-- upvalues: t (ref), insert (ref)
-	local var1 = t.findLastNodeIndex(p1, p2)
+	local var9 = t.findLastNodeIndex(p3, p4)
 	
-	if not var1 then
+	if not var9 then
 		return nil
 	end
-	local var2 = p1[var1]
+	local var10 = p3[var9]
 	
-	for i = var1 + 1, #p1 do
-		insert(var2.children, p1[i])
+	for i = var9 + 1, #p3 do
+		insert(var10.children, p3[i])
 	end
-	for _ = var1 + 1, #p1 do
-		table.remove(p1)
+	for _ = var9 + 1, #p3 do
+		table.remove(p3)
 	end
-	local var3 = p1[var1 - 1]
+	local var11 = p3[var9 - 1]
 	
-	if var3 then
-		table.remove(p1)
-		insert(var3.children, var2)
+	if var11 then
+		table.remove(p3)
+		insert(var11.children, var10)
 	end
-	return var2
+	return var10
 end
 
-function t.findLastNodeIndex(p1, p2)
-	for i = #p1, 1, -1 do
-		local var1
-		local var2 = p1[i]
+function t.findLastNodeIndex(p5, p6)
+	for i = #p5, 1, -1 do
+		local var12
+		local var13 = p5[i]
 		
-		if typeof(p2) == "string" then
-			var1 = var2.name == p2
-			var1 = nil
+		if typeof(p6) == "string" then
+			var12 = var13.name == p6
+			var12 = nil
 		else
-			var1 = p2(var2)
+			var12 = p6(var13)
 		end
-		if not var1 then
+		if not var12 then
 			continue
 		end
 		return i
@@ -248,10 +248,10 @@ function t.findLastNodeIndex(p1, p2)
 	return nil
 end
 
-function t.parseXmlAttributes(p1)
+function t.parseXmlAttributes(p7)
 	local t = {}
 	
-	for i, v in p1:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]+)\"%s*") do
+	for i, v in p7:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]+)\"%s*") do
 		t[i] = v
 	end
 	return t

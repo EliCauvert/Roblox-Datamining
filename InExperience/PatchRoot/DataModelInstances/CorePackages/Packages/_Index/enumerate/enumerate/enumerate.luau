@@ -1,76 +1,76 @@
-﻿local function strict(p0, p1)
-	p1 = p1 or tostring(p0)
+﻿local function strict(p1, p2)
+	p2 = p2 or tostring(p1)
 	
-	return setmetatable(p0, {
-		__index = function(_, p2)
-			-- upvalues: p1 (ref)
-			error(("%q (%s) is not a valid member of %s"):format(tostring(p2), typeof(p2), p1), 2)
+	return setmetatable(p1, {
+		__index = function(_, p3)
+			-- upvalues: p2 (ref)
+			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), p2), 2)
 		end,
 		__newindex = function(_, p3, _)
-			-- upvalues: p1 (ref)
-			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), p1), 2)
+			-- upvalues: p2 (ref)
+			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), p2), 2)
 		end
 	})
 end
 
-local function addEnumValue(p4, p5, p6, p7, p8)
+local function addEnumValue(p1, p2, p3, p4, p5)
 	-- upvalues: strict (ref)
-	local isString = typeof(p7) == "string"
+	local isString = typeof(p4) == "string"
 	assert(isString, "Only string names are supported for enums!")
 	
 	if isString then
-		assert(p7 ~= "fromRawValue", "fromRawValue is reserved")
-		assert(p7 ~= "isEnumValue", "isEnumValue is reserved")
-		assert(p7 ~= "allValues", "allValues is reserved")
+		assert(p4 ~= "fromRawValue", "fromRawValue is reserved")
+		assert(p4 ~= "isEnumValue", "isEnumValue is reserved")
+		assert(p4 ~= "allValues", "allValues is reserved")
 	end
-	assert(p4[p7] == nil, "Enum value names can only be used once!")
-	assert(p5[p7] == nil, "Enum values can only be used once!")
-	local var4 = newproxy(true)
-	local var5 = getmetatable(var4)
+	assert(p1[p4] == nil, "Enum value names can only be used once!")
+	assert(p2[p4] == nil, "Enum values can only be used once!")
+	local var1 = newproxy(true)
+	local var2 = getmetatable(var1)
 	
 	function var5.__tostring()
-		-- upvalues: p6 (ref), p7 (ref)
-		return ("%s.%s"):format(p6, p7)
+		-- upvalues: p3 (ref), p4 (ref)
+		return ("%s.%s"):format(p3, p4)
 	end
 	
-	var5.__index = strict({
+	var2.__index = strict({
 		rawValue = function()
-			-- upvalues: p8 (ref)
-			return p8
+			-- upvalues: p5 (ref)
+			return p5
 		end
 	})
-	p4[p7] = var4
-	p5[p8] = var4
+	p1[p4] = var1
+	p2[p5] = var1
 end
 
-return function(p9, p10)
+return function(p1, p2)
 	-- upvalues: addEnumValue (ref), strict (ref)
-	assert(typeof(p9) == "string", "Bad argument #1 - enums must be created using a string name!")
-	assert(typeof(p10) == "table", "Bad argument #2 - enums must be created using a table!")
+	assert(typeof(p1) == "string", "Bad argument #1 - enums must be created using a string name!")
+	assert(typeof(p2) == "table", "Bad argument #2 - enums must be created using a table!")
 	local t = {}
 	local t_1 = {}
 	
-	if p10[1] == nil then
-		for i, v in pairs(p10) do
-			addEnumValue(t, t_1, p9, i, v)
+	if p2[1] == nil then
+		for i, v in pairs(p2) do
+			addEnumValue(t, t_1, p1, i, v)
 		end
 	else
-		for i, v in ipairs(p10) do
-			addEnumValue(t, t_1, p9, v, v)
+		for i, v in ipairs(p2) do
+			addEnumValue(t, t_1, p1, v, v)
 		end
 	end
-	function t.fromRawValue(p11)
+	function t.fromRawValue(p3)
 		-- upvalues: t_1 (ref)
-		return t_1[p11]
+		return t_1[p3]
 	end
 	
-	function t.isEnumValue(p12)
+	function t.isEnumValue(p3)
 		-- upvalues: t (ref)
-		if typeof(p12) ~= "userdata" then
+		if typeof(p3) ~= "userdata" then
 			return false
 		end
 		for i, v in pairs(t) do
-			if v == p12 then
+			if v == p3 then
 				return true
 			end
 		end
@@ -87,14 +87,14 @@ return function(p9, p10)
 		return t
 	end
 	
-	local var8 = newproxy(true)
-	local var9 = getmetatable(var8)
-	var9.__index = strict(t, p9)
+	local var1 = newproxy(true)
+	local var2 = getmetatable(var1)
+	var2.__index = strict(t, p1)
 	
 	function var9.__tostring()
-		-- upvalues: p9 (ref)
-		return p9
+		-- upvalues: p1 (ref)
+		return p1
 	end
 	
-	return var8
+	return var1
 end

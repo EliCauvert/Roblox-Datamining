@@ -4,12 +4,12 @@ local cryoModule = require(parent.Cryo)
 local _ = require(parent.DiscoveryTypes)
 local setPageSessionTimestampModule = require(pageSessionRodux.SetPageSessionTimestamp)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: setPageSessionTimestampModule (ref), cryoModule (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	if p1.type == setPageSessionTimestampModule.name then
-		p0 = cryoModule.Dictionary.join(p0, { [p1.page] = p1.timestamp })
+	if p2.type == setPageSessionTimestampModule.name then
+		p1 = cryoModule.Dictionary.join(p1, { [p2.page] = p2.timestamp })
 	end
-	return p0
+	return p1
 end

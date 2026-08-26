@@ -16,8 +16,8 @@ local useSignalState = signalsReactModule.useSignalState
 local t = { frequency = 4, dampingRatio = 1 }
 local t_1 = { duration = 0.15, easingStyle = Enum.EasingStyle.Quad }
 
-local function defaultSchedule(p0, p1)
-	local delayedThread = task.delay(p0 / 1000, p1)
+local function defaultSchedule(p1, p2)
+	local delayedThread = task.delay(p1 / 1000, p2)
 	
 	return function()
 		-- upvalues: delayedThread (ref)
@@ -25,92 +25,92 @@ local function defaultSchedule(p0, p1)
 	end
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: momentContextModule (ref), useTokens (ref), usePreferences (ref), reactModule (ref), reactOtterModule (ref), signalsModule (ref), useSignalState (ref), t (ref), t_1 (ref), defaultSchedule (ref), playbackToggleIndicatorMachineModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref)
 	local controller = momentContextModule.useMoment().controller
-	local var11 = useTokens()
+	local var1 = useTokens()
 	local reducedMotion = usePreferences().reducedMotion
-	local var12, var13 = reactModule.useState(false)
-	local var14, var15 = reactOtterModule.useAnimatedBinding(0)
-	local var16 = useSignalState(reactModule.useMemo(function()
+	local var2, var3 = reactModule.useState(false)
+	local var4, var5 = reactOtterModule.useAnimatedBinding(0)
+	local var6 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p3)
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: controller (copy)
-			return if controller == nil then false else controller.getState(p3).isPlaying
+			return if controller == nil then false else controller.getState(p2).isPlaying
 		end)
 	end, { controller }))
-	local var17 = reactModule.useRef(nil)
+	local var7 = reactModule.useRef(nil)
 	
-	function var17.current(p4)
-		-- upvalues: reducedMotion (ref), reactOtterModule (copy), t (copy), t_1 (copy), var15 (ref)
-		var15(if reducedMotion then reactOtterModule.instant(if p4 == "enter" then 1 else 0) elseif p4 == "enter" then reactOtterModule.spring(1, t) else reactOtterModule.ease(0, t_1))
+	function var17.current(p2)
+		-- upvalues: reducedMotion (ref), reactOtterModule (copy), t (copy), t_1 (copy), var5 (ref)
+		var5(if reducedMotion then reactOtterModule.instant(if p2 == "enter" then 1 else 0) elseif p2 == "enter" then reactOtterModule.spring(1, t) else reactOtterModule.ease(0, t_1))
 	end
 	
-	local var18 = reactModule.useRef(nil)
-	var18.current = p2.scheduleOverride or defaultSchedule
-	local var19 = reactModule.useMemo(function()
-		-- upvalues: playbackToggleIndicatorMachineModule (copy), var18 (ref), var13 (ref), var17 (ref)
+	local var8 = reactModule.useRef(nil)
+	var8.current = p1.scheduleOverride or defaultSchedule
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: playbackToggleIndicatorMachineModule (copy), var8 (ref), var3 (ref), var7 (ref)
 		return playbackToggleIndicatorMachineModule({ dwellMs = 800, exitDurationMs = 150 }, {
-			schedule = function(p5, p6)
-				-- upvalues: var18 (copy)
-				return var18.current(p5, p6)
+			schedule = function(p2, p3)
+				-- upvalues: var8 (copy)
+				return var8.current(p2, p3)
 			end,
-			setMounted = var13,
-			animate = function(p7)
-				-- upvalues: var17 (copy)
-				var17.current(p7)
+			setMounted = var3,
+			animate = function(p2)
+				-- upvalues: var7 (copy)
+				var7.current(p2)
 			end
 		})
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var19 (ref)
+		-- upvalues: var9 (ref)
 		return function()
-			-- upvalues: var19 (copy)
-			var19.dispose()
+			-- upvalues: var9 (copy)
+			var9.dispose()
 		end
-	end, { var19 })
+	end, { var9 })
 	reactModule.useEffect(function()
-		-- upvalues: controller (ref), signalsModule (copy), var19 (ref)
+		-- upvalues: controller (ref), signalsModule (copy), var9 (ref)
 		if controller == nil then
 			return
 		end
-		local var20 = nil
+		local var10 = nil
 		
-		return signalsModule.createEffect(function(p8)
-			-- upvalues: controller (copy), var20 (write), var19 (copy)
-			local userToggleNonce = controller.getUserToggleNonce(p8)
+		return signalsModule.createEffect(function(p2)
+			-- upvalues: controller (copy), var10 (write), var9 (copy)
+			local userToggleNonce = controller.getUserToggleNonce(p2)
 			
-			if var20 == nil then
-				var20 = userToggleNonce
+			if var10 == nil then
+				var10 = userToggleNonce
 				
 				return
-			elseif userToggleNonce == var20 then
+			elseif userToggleNonce == var10 then
 				return
 			end
-			var20 = userToggleNonce
-			var19.notifyUserToggle()
+			var10 = userToggleNonce
+			var9.notifyUserToggle()
 		end)
-	end, { controller, var19 })
+	end, { controller, var9 })
 	
-	return if var12 then reactModule.createElement(view, {
+	return if var2 then reactModule.createElement(view, {
 		tag = "position-center-center anchor-center-center",
 		BackgroundTransparency = 1,
 		ZIndex = 3,
 		Size = UDim2.fromOffset(64, 64),
-		scale = var14:map(function(p9)
-			return p9 * 0.25 + 0.75
+		scale = var4:map(function(p2)
+			return p2 * 0.25 + 0.75
 		end)
 	}, {
 		Circle = reactModule.createElement(view, {
 			tag = "row align-x-center align-y-center size-full radius-circle clip bg-over-media-0",
-			GroupTransparency = var14:map(function(p10)
-				return 1 - p10
+			GroupTransparency = var4:map(function(p2)
+				return 1 - p2
 			end)
 		}, {
 			Glyph = reactModule.createElement(icon, {
-				name = if var16 then iconName.PauseLarge else iconName.PlayLarge,
+				name = if var6 then iconName.PauseLarge else iconName.PlayLarge,
 				size = iconSize.Large,
-				style = var11.Color.Content.Emphasis
+				style = var1.Color.Content.Emphasis
 			})
 		})
 	}) else nil

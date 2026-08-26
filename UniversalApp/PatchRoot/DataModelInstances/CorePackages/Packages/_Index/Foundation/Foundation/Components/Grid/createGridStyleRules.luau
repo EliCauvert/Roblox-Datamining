@@ -14,10 +14,10 @@ local function createGridStyleRule(p1, p2)
 	})
 end
 
-return function(p1)
+return function(p3)
 	-- upvalues: createGridStyleRule (ref), reactModule (ref), styleRuleModule (ref)
-	local breakpoint = p1.breakpoint
-	local grid = p1.grid
+	local breakpoint = p3.breakpoint
+	local grid = p3.grid
 	local var1 = grid.columns[breakpoint.order[#breakpoint.order]]
 	local t = {}
 	local t_1 = {}

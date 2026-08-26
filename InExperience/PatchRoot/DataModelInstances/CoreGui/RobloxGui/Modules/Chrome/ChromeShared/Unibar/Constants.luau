@@ -17,40 +17,40 @@ local _ = {
 	Portrait = "Portrait",
 	Sensor = "Sensor"
 }
-local var4 = getStyleTokensModule()
+local var1 = getStyleTokensModule()
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: tenFootInterfaceModule (ref)
-	return (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * p0
+	return (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * p1
 end
 
 return {
-	ICON_CELL_WIDTH = var4.Size.Size_1100,
+	ICON_CELL_WIDTH = var1.Size.Size_1100,
 	DIVIDER_CELL_WIDTH = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 5,
-	ICON_SIZE = var4.Size.Size_900,
+	ICON_SIZE = var1.Size.Size_900,
 	ICON_NAME_PREFIX = if fFlagEnableConsoleExpControls then "IconHitArea_" else nil,
-	ICON_HIGHLIGHT_SIZE = UDim2.new(0, var4.Size.Size_900, 0, var4.Size.Size_900),
-	ICON_DIVIDER_SIZE = UDim2.new(0, (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 1, 0, var4.Size.Size_700),
-	ICON_DIVIDER_POSITION = UDim2.new(0, var4.Size.Size_50, 0.5, 0),
-	ICON_BADGE_OFFSET_X = var4.Gap.XXLarge,
+	ICON_HIGHLIGHT_SIZE = UDim2.new(0, var1.Size.Size_900, 0, var1.Size.Size_900),
+	ICON_DIVIDER_SIZE = UDim2.new(0, (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 1, 0, var1.Size.Size_700),
+	ICON_DIVIDER_POSITION = UDim2.new(0, var1.Size.Size_50, 0.5, 0),
+	ICON_BADGE_OFFSET_X = var1.Gap.XXLarge,
 	ICON_BADGE_OFFSET_Y = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 5,
-	MEDIUM_ICON_SIZE = var4.Size.Size_700,
-	UNIBAR_END_PADDING = var4.Padding.XSmall,
+	MEDIUM_ICON_SIZE = var1.Size.Size_700,
+	UNIBAR_END_PADDING = var1.Padding.XSmall,
 	MENU_SUBMENU_PADDING = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 10,
-	UNIBAR_LEFT_MARGIN = var4.Padding.Small,
-	MENU_ICON_SCREEN_SIDE_OFFSET = var4.Gap.Large,
-	SUB_MENU_ROW_HEIGHT = var4.Size.Size_1400,
+	UNIBAR_LEFT_MARGIN = var1.Padding.Small,
+	MENU_ICON_SCREEN_SIDE_OFFSET = var1.Gap.Large,
+	SUB_MENU_ROW_HEIGHT = var1.Size.Size_1400,
 	SUBMENU_CORNER_RADIUS = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 10,
-	SUBMENU_PADDING_LEFT = var4.Padding.Small,
-	SUBMENU_PADDING_RIGHT = var4.Padding.Small,
-	SUBMENU_ROW_LABEL_FONT = var4.Typography.TitleLarge,
-	SUBMENU_ROW_PADDING = var4.Padding.Small,
+	SUBMENU_PADDING_LEFT = var1.Padding.Small,
+	SUBMENU_PADDING_RIGHT = var1.Padding.Small,
+	SUBMENU_ROW_LABEL_FONT = var1.Typography.TitleLarge,
+	SUBMENU_ROW_PADDING = var1.Padding.Small,
 	SUBMENU_ROW_CORNER_RADIUS = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 10,
-	SUBMENU_BOTTOM_PADDING = var4.Padding.XLarge,
+	SUBMENU_BOTTOM_PADDING = var1.Padding.XLarge,
 	PIN_ICON_SIZE = UDim2.new(0, (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 18, 0, (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 18),
-	PIN_BUTTON_SIZE = var4.Size.Size_1000,
+	PIN_BUTTON_SIZE = var1.Size.Size_1000,
 	PIN_RIGHT_PADDING = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 13,
-	PIN_CORNER_RADIUS = var4.Radius.Medium,
+	PIN_CORNER_RADIUS = var1.Radius.Medium,
 	NEW_BADGE_SIZE = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 66,
 	MENU_ANIMATION_SPRING = {
 		dampingRatio = 1.1,
@@ -69,11 +69,11 @@ return {
 	TILTMENU_LEAVE_DIALOG_SHORTCUTBAR_ID = if fFlagChromeShortcutRemoveRespawnOnLeavePage then "tiltMenuLeaveDialogShortcuts" else nil,
 	SHORTCUTBAR_DISPLAYORDER = 100,
 	WINDOW_HOST_GUI_NAME = "WindowHost",
-	CLOSE_BUTTON_FRAME = UDim2.fromOffset(var4.Size.Size_1100, var4.Size.Size_1100),
+	CLOSE_BUTTON_FRAME = UDim2.fromOffset(var1.Size.Size_1100, var1.Size.Size_1100),
 	CLOSE_BUTTON_SIZE = UDim2.fromOffset((if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 22, (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 22),
 	CLOSE_ICON_SIZE = iconSize.Small,
-	CORNER_RADIUS = UDim.new(0, var4.Radius.Medium),
-	WINDOW_DEFAULT_PADDING = var4.Padding.Small,
+	CORNER_RADIUS = UDim.new(0, var1.Radius.Medium),
+	WINDOW_DEFAULT_PADDING = var1.Padding.Small,
 	WINDOW_ICON_SIZE = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 42,
 	DRAG_MAGNITUDE_THRESHOLD = 10,
 	WINDOW_MIN_DRAG_DISTANCE = 25,

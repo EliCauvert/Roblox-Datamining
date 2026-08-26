@@ -19,18 +19,18 @@ chatConnector.validateProps = tModule.strictInterface({
 	updateChatMessages = tModule.callback
 })
 
-function chatConnector.didMount(p0)
+function chatConnector.didMount(p1)
 	-- upvalues: gameSettings (ref), chatSelectorModule (ref)
-	chatSelectorModule:SetVisible(if p0.props.isSmallTouchScreen then false else gameSettings.ChatVisible)
-	p0.props.updateChatMessages(chatSelectorModule:GetMessageCount())
-	p0.props.updateChatVisible(chatSelectorModule:GetVisibility())
-	p0.chatVisibleConnection = chatSelectorModule.VisibilityStateChanged:connect(function(p1)
-		-- upvalues: p0 (ref)
-		p0.props.updateChatVisible(p1)
+	chatSelectorModule:SetVisible(if p1.props.isSmallTouchScreen then false else gameSettings.ChatVisible)
+	p1.props.updateChatMessages(chatSelectorModule:GetMessageCount())
+	p1.props.updateChatVisible(chatSelectorModule:GetVisibility())
+	p1.chatVisibleConnection = chatSelectorModule.VisibilityStateChanged:connect(function(p2)
+		-- upvalues: p1 (ref)
+		p1.props.updateChatVisible(p2)
 	end)
-	p0.chatMessagesConnection = chatSelectorModule.MessagesChanged:connect(function(p2)
-		-- upvalues: p0 (ref)
-		p0.props.updateChatMessages(p2)
+	p1.chatMessagesConnection = chatSelectorModule.MessagesChanged:connect(function(p2)
+		-- upvalues: p1 (ref)
+		p1.props.updateChatMessages(p2)
 	end)
 end
 
@@ -38,25 +38,25 @@ function chatConnector.render(_)
 	return nil
 end
 
-function chatConnector.willUnmount(p3)
-	p3.chatVisibleConnection:disconnect()
-	p3.chatMessagesConnection:disconnect()
+function chatConnector.willUnmount(p1)
+	p1.chatVisibleConnection:disconnect()
+	p1.chatMessagesConnection:disconnect()
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4)
+return roactRoduxModule.UNSTABLE_connect2(function(p1)
 	return {
-		isSmallTouchScreen = p4.displayOptions.isSmallTouchDevice
+		isSmallTouchScreen = p1.displayOptions.isSmallTouchDevice
 	}
-end, function(p5)
+end, function(p1)
 	-- upvalues: updateChatVisibleModule (ref), updateChatMessagesModule (ref)
 	return {
-		updateChatVisible = function(p6)
-			-- upvalues: p5 (ref), updateChatVisibleModule (copy)
-			return p5(updateChatVisibleModule(p6))
+		updateChatVisible = function(p2)
+			-- upvalues: p1 (ref), updateChatVisibleModule (copy)
+			return p1(updateChatVisibleModule(p2))
 		end,
-		updateChatMessages = function(p7)
-			-- upvalues: p5 (ref), updateChatMessagesModule (copy)
-			return p5(updateChatMessagesModule(p7))
+		updateChatMessages = function(p2)
+			-- upvalues: p1 (ref), updateChatMessagesModule (copy)
+			return p1(updateChatMessagesModule(p2))
 		end
 	}
 end)(chatConnector)

@@ -10,27 +10,27 @@ local getFFlagFixConnectTabSearchBarHeight = dependenciesModule.GetFFlagFixConne
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local reactModule = require(parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useUiModeInfo (ref), uiMode (ref), fFlagEnableLeftNavOnConsole (ref), constantsModule (ref), useDesignTokens (ref), reactModule (ref), headerBar (ref), getFFlagFixConnectTabSearchBarHeight (ref)
 	if useUiModeInfo().uiMode == uiMode.TenFoot and not fFlagEnableLeftNavOnConsole then
 		return nil
 	end
-	local var4 = if fFlagEnableLeftNavOnConsole then useDesignTokens().Size.Size_2400 else constantsModule.TOP_BAR_HEIGHT
+	local var1 = if fFlagEnableLeftNavOnConsole then useDesignTokens().Size.Size_2400 else constantsModule.TOP_BAR_HEIGHT
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = -1,
 		ZIndex = 2,
-		Size = UDim2.new(1, 0, 0, var4)
+		Size = UDim2.new(1, 0, 0, var1)
 	}, {
 		headerBar = reactModule.createElement(headerBar, {
-			title = p0.title,
-			barHeight = var4,
-			renderLeft = p0.renderLeft,
-			renderCenter = p0.renderCenter,
-			renderRight = p0.renderRight,
-			isSecondary = p0.isSecondary,
-			shouldHideSecondaryLeftItem = p0.shouldHideSecondaryLeftItem,
+			title = p1.title,
+			barHeight = var1,
+			renderLeft = p1.renderLeft,
+			renderCenter = p1.renderCenter,
+			renderRight = p1.renderRight,
+			isSecondary = p1.isSecondary,
+			shouldHideSecondaryLeftItem = p1.shouldHideSecondaryLeftItem,
 			paddingTop = if getFFlagFixConnectTabSearchBarHeight() then UDim.new(0, 0) else nil,
 			paddingBottom = if getFFlagFixConnectTabSearchBarHeight() then UDim.new(0, 0) else nil
 		})

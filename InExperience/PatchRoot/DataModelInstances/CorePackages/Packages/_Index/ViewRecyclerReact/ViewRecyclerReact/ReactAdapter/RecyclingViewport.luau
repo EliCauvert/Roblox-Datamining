@@ -10,25 +10,25 @@ local createElement = reactModule.createElement
 local record = viewRecyclerModule.Adapter._Private.Record
 local frozen = table.freeze({ "axis", "activationMargin", "retentionMargin" })
 
-local function _(value, p0)
+local function _(value, p1)
 	if value == nil then return end
 	if type(value) == "function" then
-		value(p0)
+		value(p1)
 		
 		return
 	end
-	value.current = p0
+	value.current = p1
 end
 
 return {
 	create = function(p1)
 		-- upvalues: recyclingScopeModule (ref), reactModule (ref), recyclingScopeContextModule (ref), record (ref), frozen (ref), viewRecyclerRobloxModule (ref), axis (ref), createElement (ref), recyclingViewportContextModule (ref)
-		local var8 = recyclingScopeModule.create(p1)
+		local var1 = recyclingScopeModule.create(p1)
 		
 		return function(p2)
-			-- upvalues: reactModule (copy), recyclingScopeContextModule (copy), record (copy), frozen (copy), viewRecyclerRobloxModule (copy), axis (copy), createElement (copy), recyclingViewportContextModule (copy), var8 (ref)
-			local var9 = reactModule.useContext(recyclingScopeContextModule)
-			local var10 = reactModule.useState(function()
+			-- upvalues: reactModule (copy), recyclingScopeContextModule (copy), record (copy), frozen (copy), viewRecyclerRobloxModule (copy), axis (copy), createElement (copy), recyclingViewportContextModule (copy), var1 (ref)
+			local var2 = reactModule.useContext(recyclingScopeContextModule)
+			local var3 = reactModule.useState(function()
 				-- upvalues: p2 (ref)
 				return {
 					axis = p2.axis,
@@ -36,19 +36,19 @@ return {
 					retentionMargin = p2.retentionMargin
 				}
 			end)
-			assert(record.containsEqual(p2, var10, frozen), "RecyclingViewport: axis and margins cannot change during its lifetime")
-			local var11 = reactModule.useState(function()
-				-- upvalues: viewRecyclerRobloxModule (copy), var10 (ref)
-				return viewRecyclerRobloxModule.ViewportCoordinator.new(var10)
+			assert(record.containsEqual(p2, var3, frozen), "RecyclingViewport: axis and margins cannot change during its lifetime")
+			local var4 = reactModule.useState(function()
+				-- upvalues: viewRecyclerRobloxModule (copy), var3 (ref)
+				return viewRecyclerRobloxModule.ViewportCoordinator.new(var3)
 			end)
-			local var12 = reactModule.useState(function()
-				-- upvalues: var11 (ref)
-				return { register = var11.register }
+			local var5 = reactModule.useState(function()
+				-- upvalues: var4 (ref)
+				return { register = var4.register }
 			end)
 			local scrollingFrameRef = p2.scrollingFrameRef
-			local var13 = reactModule.useCallback(function(p3)
-				-- upvalues: var11 (ref), scrollingFrameRef (ref)
-				var11.setViewport(p3)
+			local var6 = reactModule.useCallback(function(p3)
+				-- upvalues: var4 (ref), scrollingFrameRef (ref)
+				var4.setViewport(p3)
 				
 				if scrollingFrameRef == nil then return end
 				if type(scrollingFrameRef) == "function" then
@@ -57,18 +57,18 @@ return {
 					return
 				end
 				scrollingFrameRef.current = p3
-			end, { var11, scrollingFrameRef })
+			end, { var4, scrollingFrameRef })
 			reactModule.useEffect(function()
-				-- upvalues: var11 (ref)
+				-- upvalues: var4 (ref)
 				return function()
-					-- upvalues: var11 (copy)
-					var11.destroy()
+					-- upvalues: var4 (copy)
+					var4.destroy()
 				end
-			end, { var11 })
+			end, { var4 })
 			local t = {
 				Size = UDim2.fromScale(1, 1),
 				ScrollingDirection = if p2.axis == axis.X then Enum.ScrollingDirection.X else Enum.ScrollingDirection.Y,
-				ref = var13
+				ref = var6
 			}
 			
 			if p2.scrollingFrameProps ~= nil then
@@ -79,19 +79,19 @@ return {
 					t[i] = v
 				end
 			end
-			local var15 = createElement(recyclingViewportContextModule.Provider, { value = var12 }, {
+			local var7 = createElement(recyclingViewportContextModule.Provider, { value = var5 }, {
 				Viewport = createElement("ScrollingFrame", t, p2.children)
 			})
 			
-			if var9 == nil then
-				return createElement(var8, {
+			if var2 == nil then
+				return createElement(var1, {
 					maxPoolSize = p2.maxPoolSize,
 					diagnostics = p2.diagnostics
-				}, { Viewport = var15 })
+				}, { Viewport = var7 })
 			end
 			assert(p2.maxPoolSize == nil and p2.diagnostics == nil, "RecyclingViewport: configure recycling options on the ancestor RecyclingScope")
 			
-			return var15
+			return var7
 		end
 	end
 }

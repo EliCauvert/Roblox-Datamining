@@ -18,99 +18,99 @@ local slider = foundationModule.Slider
 local view = foundationModule.View
 local textOverlay = momentsCommonModule.TextOverlay
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useRef (ref), useBinding (ref), useState (ref), useOnScreenKeyboardHeightModule (ref), useCallback (ref), dashModule (ref), useEffectOnceModule (ref), reactModule (ref), textService (ref), view (ref), foundationModule (ref), slider (ref), knob (ref), textOverlay (ref)
-	local var8 = useDeviceInsets()
-	local var9 = useTokens()
-	local var10 = useRef(nil)
-	local var11, var12 = useBinding(UDim2.fromOffset(0, 0))
-	local var13, var14 = useState(Vector2.new(0, 0))
-	local var15 = useOnScreenKeyboardHeightModule()
-	local var16 = p0.textOverlayEdits and p0.textOverlayEdits[1]
-	local var17 = useCallback(function()
-		-- upvalues: var10 (ref)
-		if var10.current then
-			var10.current:CaptureFocus()
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = useRef(nil)
+	local var4, var5 = useBinding(UDim2.fromOffset(0, 0))
+	local var6, var7 = useState(Vector2.new(0, 0))
+	local var8 = useOnScreenKeyboardHeightModule()
+	local var9 = p1.textOverlayEdits and p1.textOverlayEdits[1]
+	local var10 = useCallback(function()
+		-- upvalues: var3 (ref)
+		if var3.current then
+			var3.current:CaptureFocus()
 		end
 	end, {})
-	local var18 = useCallback(function(p1)
-		-- upvalues: p0 (ref), dashModule (copy), var16 (ref)
-		local charCount = utf8.len(p1.Text)
+	local var11 = useCallback(function(p2)
+		-- upvalues: p1 (ref), dashModule (copy), var9 (ref)
+		local charCount = utf8.len(p2.Text)
 		
 		if charCount ~= nil and charCount >= 100 then
-			p1.Text = string.sub(p1.Text, 1, utf8.offset(p1.Text, 101) - 1)
+			p2.Text = string.sub(p2.Text, 1, utf8.offset(p2.Text, 101) - 1)
 		end
-		p0.onTextOverlayUpdated({ dashModule.joinDeep(var16, { text = p1.Text }) })
-	end, { var16, p0.onTextOverlayUpdated })
-	local var19 = useCallback(function(p2)
-		-- upvalues: p0 (ref), dashModule (copy), var16 (ref)
-		if p0.textOverlayEdits then
-			p0.onTextOverlayUpdated({
-				dashModule.joinDeep(var16, { textOverlayStyle = { fontSize = p2 } })
+		p1.onTextOverlayUpdated({ dashModule.joinDeep(var9, { text = p2.Text }) })
+	end, { var9, p1.onTextOverlayUpdated })
+	local var12 = useCallback(function(p2)
+		-- upvalues: p1 (ref), dashModule (copy), var9 (ref)
+		if p1.textOverlayEdits then
+			p1.onTextOverlayUpdated({
+				dashModule.joinDeep(var9, { textOverlayStyle = { fontSize = p2 } })
 			})
 			
 			return
 		end
-	end, { p0.onTextOverlayUpdated, var16 })
-	local var20 = useCallback(function(p3)
-		-- upvalues: var14 (ref)
-		var14(p3.AbsoluteSize)
+	end, { p1.onTextOverlayUpdated, var9 })
+	local var13 = useCallback(function(p2)
+		-- upvalues: var7 (ref)
+		var7(p2.AbsoluteSize)
 	end, {})
 	useEffectOnceModule(function()
-		-- upvalues: var17 (ref)
-		var17()
-	end, var10.current ~= nil and p0.textOverlayEdits ~= nil)
+		-- upvalues: var10 (ref)
+		var10()
+	end, var3.current ~= nil and p1.textOverlayEdits ~= nil)
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), var15 (ref), var12 (ref), textService (copy), var13 (ref)
-		if not var16 then return end
-		if var15 == 0 then
-			var12(UDim2.fromOffset(0, 0))
+		-- upvalues: var9 (ref), var8 (ref), var5 (ref), textService (copy), var6 (ref)
+		if not var9 then return end
+		if var8 == 0 then
+			var5(UDim2.fromOffset(0, 0))
 			
 			return
 		end
-		local wTextSize = textService:GetTextSize("W", var16.textOverlayStyle.fontSize, var16.textOverlayStyle.font, Vector2.new(var13.X, var13.Y))
-		var12(UDim2.fromOffset(math.min(wTextSize.X * 30, var13.X / 2), math.min(wTextSize.Y * 5, var13.Y / 2)))
-	end, { var13, var16, var15 })
+		local wTextSize = textService:GetTextSize("W", var9.textOverlayStyle.fontSize, var9.textOverlayStyle.font, Vector2.new(var6.X, var6.Y))
+		var5(UDim2.fromOffset(math.min(wTextSize.X * 30, var6.X / 2), math.min(wTextSize.Y * 5, var6.Y / 2)))
+	end, { var6, var9, var8 })
 	
-	return if p0.textOverlayEdits then reactModule.createElement(view, {
+	return if p1.textOverlayEdits then reactModule.createElement(view, {
 		tag = "bg-over-media-0 size-full",
-		onAbsoluteSizeChanged = var20,
+		onAbsoluteSizeChanged = var13,
 		stateLayer = {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		},
-		ZIndex = p0.zIndex or 1
+		ZIndex = p1.zIndex or 1
 	}, {
-		Controls = if var15 == 0 then reactModule.createElement(view, {
+		Controls = if var8 == 0 then reactModule.createElement(view, {
 			tag = "auto-y anchor-bottom-center col gap-large position-bottom-center size-full-0"
 		}, {
 			Padding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, var9.Padding.XLarge),
-				PaddingBottom = UDim.new(0, var9.Padding.XLarge),
-				PaddingLeft = UDim.new(0, math.max(var8.left, var9.Padding.XLarge)),
-				PaddingRight = UDim.new(0, math.max(var8.right, var9.Padding.XLarge))
+				PaddingTop = UDim.new(0, var2.Padding.XLarge),
+				PaddingBottom = UDim.new(0, var2.Padding.XLarge),
+				PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+				PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 			}),
 			FontSizeSlider = reactModule.createElement(slider, {
 				LayoutOrder = 2,
 				knob = reactModule.createElement(knob, { size = foundationModule.Enums.InputSize.Large }),
 				knobVisibility = foundationModule.Enums.Visibility.Always,
-				onValueChanged = var19,
+				onValueChanged = var12,
 				size = foundationModule.Enums.InputSize.XSmall,
 				range = NumberRange.new(10, 32),
-				value = p0.textOverlayEdits[1].textOverlayStyle.fontSize,
+				value = p1.textOverlayEdits[1].textOverlayStyle.fontSize,
 				variant = foundationModule.Enums.SliderVariant.Standard
 			})
 		}) else nil,
 		TextOverlay = reactModule.createElement(textOverlay, {
 			editable = true,
-			onActivated = var17,
-			size = var11,
-			textOverlayEdit = dashModule.joinDeep(var16, {
+			onActivated = var10,
+			size = var4,
+			textOverlayEdit = dashModule.joinDeep(var9, {
 				rotation = 0,
 				scale = 1,
 				position = UDim2.fromScale(0.5, 0.5)
 			}),
-			onTextChanged = var18,
-			textBoxRef = var10
+			onTextChanged = var11,
+			textBoxRef = var3
 		})
 	}) else nil
 end

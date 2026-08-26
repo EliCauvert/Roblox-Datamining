@@ -1,12 +1,12 @@
 ﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 local cursorContextModule = require(script.Parent.CursorContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), cursorContextModule (ref)
 	return reactModule.createElement(cursorContextModule.Consumer, {
-		render = function(p1)
-			-- upvalues: p0 (ref)
-			return p0(p1.getCursor)
+		render = function(p2)
+			-- upvalues: p1 (ref)
+			return p1(p2.getCursor)
 		end
 	})
 end

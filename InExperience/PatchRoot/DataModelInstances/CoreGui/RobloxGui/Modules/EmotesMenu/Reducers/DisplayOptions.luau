@@ -8,24 +8,24 @@ return require(corePackagesService.Packages.Rodux).createReducer({
 	errorVisible = false,
 	errorText = ""
 }, {
-	[require(actions.ShowMenu).name] = function(p0, _)
+	[require(actions.ShowMenu).name] = function(p1, _)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, { menuVisible = true })
+		return cryoModule.Dictionary.join(p1, { menuVisible = true })
 	end,
 	[require(actions.HideMenu).name] = function(p1, _)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p1, { menuVisible = false })
 	end,
-	[require(actions.ShowError).name] = function(p2, p3)
+	[require(actions.ShowError).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p2, { errorVisible = true, errorText = p3.errorText })
+		return cryoModule.Dictionary.join(p1, { errorVisible = true, errorText = p2.errorText })
 	end,
-	[require(actions.HideError).name] = function(p4, _)
+	[require(actions.HideError).name] = function(p1, _)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p4, { errorVisible = false })
+		return cryoModule.Dictionary.join(p1, { errorVisible = false })
 	end,
-	[require(actions.SetGuiInset).name] = function(p5, p6)
+	[require(actions.SetGuiInset).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p5, { guiInset = p6.guiInset })
+		return cryoModule.Dictionary.join(p1, { guiInset = p2.guiInset })
 	end
 })

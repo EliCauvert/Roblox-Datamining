@@ -3,7 +3,7 @@ local cryo = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchaseP
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: cryo (ref), t (ref), userInputService (ref)
 	local t_1 = {
 		_inputConnection = nil,
@@ -14,21 +14,21 @@ function t.new(p0)
 			clickTimeWindow = 1,
 			initialDelay = 1,
 			buttonInput = nil
-		}, p0 or {})
+		}, p1 or {})
 	}
 	setmetatable(t_1, t)
-	t_1._inputConnection = userInputService.InputBegan:Connect(function(p1)
+	t_1._inputConnection = userInputService.InputBegan:Connect(function(p2)
 		-- upvalues: t_1 (ref)
-		t_1:_onInput(p1)
+		t_1:_onInput(p2)
 	end)
 	
 	return t_1
 end
 
-function t:_onInput(p2)
-	local userInputType = p2.UserInputType
+function t:_onInput(p1)
+	local userInputType = p1.UserInputType
 	
-	if (self._options.buttonInput ~= nil and p2.KeyCode == self._options.buttonInput) or (if userInputType ~= Enum.UserInputType.MouseButton1 then userInputType == Enum.UserInputType.Touch else true) then
+	if (self._options.buttonInput ~= nil and p1.KeyCode == self._options.buttonInput) or (if userInputType ~= Enum.UserInputType.MouseButton1 then userInputType == Enum.UserInputType.Touch else true) then
 		self._clickCount += 1
 		delay(self._options.clickTimeWindow, function()
 			-- upvalues: self (ref)

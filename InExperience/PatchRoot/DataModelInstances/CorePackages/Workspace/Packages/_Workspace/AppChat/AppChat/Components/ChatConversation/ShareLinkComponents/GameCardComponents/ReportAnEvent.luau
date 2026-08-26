@@ -1,24 +1,24 @@
 ﻿local gamePlayIntent = require(script:FindFirstAncestor("AppChat").Parent.DiscoveryAnalytics).Events.gamePlayIntent
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: gamePlayIntent (ref)
 	local t, eventIngest
 	local _ = nil
 	local _ = nil
 	
-	if p1 == "gamePlayIntent" then
+	if p2 == "gamePlayIntent" then
 		t = {
-			conversationId = p0.conversationId,
-			rootPlaceId = p0.placeId,
-			joinAttemptId = p0.joinAttemptId
+			conversationId = p1.conversationId,
+			rootPlaceId = p1.placeId,
+			joinAttemptId = p1.joinAttemptId
 		}
-		eventIngest = p0.eventIngest
+		eventIngest = p1.eventIngest
 	else
-		t = { conversationId = p0.conversationId, placeId = p0.placeId }
-		eventIngest = p0.eventStream
+		t = { conversationId = p1.conversationId, placeId = p1.placeId }
+		eventIngest = p1.eventStream
 	end
-	if p1 == "gamePlayIntent" then
-		gamePlayIntent(eventIngest, p2, {
+	if p2 == "gamePlayIntent" then
+		gamePlayIntent(eventIngest, p3, {
 			placeId = t.rootPlaceId,
 			rootPlaceId = tonumber(t.rootPlaceId),
 			conversationId = t.conversationId,
@@ -27,5 +27,5 @@ return function(p0, p1, p2)
 		
 		return
 	end
-	eventIngest:setRBXEventStream(p2, p1, t)
+	eventIngest:setRBXEventStream(p3, p2, t)
 end

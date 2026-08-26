@@ -7,32 +7,32 @@ local _ = require(script.Parent.EventNames)
 local eventStreamActionListModule = require(script.Parent.EventStreamActionList)
 local telemetryActionListModule = require(script.Parent.TelemetryActionList)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fireEventStream (ref), eventStreamActionListModule (ref), fireDiagCounter (ref), diagActionListModule (ref), fireTelemetry (ref), telemetryActionListModule (ref)
-	local var4 = fireEventStream({
-		eventStreamImpl = p0.analytics.EventStream,
+	local var1 = fireEventStream({
+		eventStreamImpl = p1.analytics.EventStream,
 		eventList = eventStreamActionListModule,
-		infoForAllEvents = p0.infoForAllEvents
+		infoForAllEvents = p1.infoForAllEvents
 	})
-	local var5 = fireDiagCounter({
-		diagImpl = p0.analytics.Diag,
+	local var2 = fireDiagCounter({
+		diagImpl = p1.analytics.Diag,
 		eventList = diagActionListModule
 	})
-	local var6 = fireTelemetry({
-		telemetryImpl = p0.analytics.Telemetry,
+	local var3 = fireTelemetry({
+		telemetryImpl = p1.analytics.Telemetry,
 		eventList = telemetryActionListModule
 	})
 	
-	return function(p1, p2)
-		-- upvalues: diagActionListModule (copy), var5 (ref), telemetryActionListModule (copy), var6 (ref), eventStreamActionListModule (copy), var4 (ref)
-		if diagActionListModule[p1] then
-			var5(p1)
+	return function(p2, p3)
+		-- upvalues: diagActionListModule (copy), var2 (ref), telemetryActionListModule (copy), var3 (ref), eventStreamActionListModule (copy), var1 (ref)
+		if diagActionListModule[p2] then
+			var2(p2)
 		end
-		if telemetryActionListModule[p1] then
-			var6(p1, p2)
+		if telemetryActionListModule[p2] then
+			var3(p2, p3)
 		end
-		if eventStreamActionListModule[p1] then
-			var4(p1, p2)
+		if eventStreamActionListModule[p2] then
+			var1(p2, p3)
 		end
 	end
 end

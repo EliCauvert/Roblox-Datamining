@@ -91,14 +91,14 @@ t.__index = t
 function t.new()
 	-- upvalues: t (ref), build (ref), tweenService (ref), tweenInfo (ref), tweenInfo_1 (ref), uDim2 (ref)
 	local tbl = setmetatable({}, t)
-	local var11 = build()
-	local var12 = tweenService:Create(var11, tweenInfo, { ImageTransparency = 0 })
-	local var13 = tweenService:Create(var11, tweenInfo, { ImageTransparency = 1 })
-	local icon = tweenService:Create(var11.Upper.IconContainer.Icon, tweenInfo_1, { ImageTransparency = 0.75, Size = uDim2 })
-	tbl.__gui = var11
+	local var1 = build()
+	local var2 = tweenService:Create(var1, tweenInfo, { ImageTransparency = 0 })
+	local var3 = tweenService:Create(var1, tweenInfo, { ImageTransparency = 1 })
+	local icon = tweenService:Create(var1.Upper.IconContainer.Icon, tweenInfo_1, { ImageTransparency = 0.75, Size = uDim2 })
+	tbl.__gui = var1
 	tbl.__guiParent = nil
 	tbl.__show = false
-	tbl.__animations = { show = var12, hide = var13, pulse = icon }
+	tbl.__animations = { show = var2, hide = var3, pulse = icon }
 	
 	return tbl
 end
@@ -118,11 +118,11 @@ function t:Hide()
 	self.__animations.pulse:Cancel()
 end
 
-function t:SetParent(p0)
-	self.__guiParent = p0
+function t:SetParent(p1)
+	self.__guiParent = p1
 	
 	if self.__show then
-		self.__gui.Parent = p0
+		self.__gui.Parent = p1
 	end
 end
 

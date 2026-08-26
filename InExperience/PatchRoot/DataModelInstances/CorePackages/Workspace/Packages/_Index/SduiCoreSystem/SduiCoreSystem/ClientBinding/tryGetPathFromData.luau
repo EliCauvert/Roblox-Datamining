@@ -1,17 +1,17 @@
-﻿return function(p0, p1, p2)
-	if p0 == nil or p1 == nil then
+﻿return function(p1, p2, p3)
+	if p1 == nil or p2 == nil then
 		return false, nil
 	end
-	local var0 = p0
+	local var1 = p1
 	
-	for i = p2 or 1, #p1 do
-		local var1 = p1[i]
+	for i = p3 or 1, #p2 do
+		local var2 = p2[i]
 		
-		if var0 ~= nil then
-			var0 = var0[var1]
+		if var1 ~= nil then
+			var1 = var1[var2]
 			continue
 		end
 		return false, nil
 	end
-	return var0 ~= nil, var0
+	return var1 ~= nil, var1
 end

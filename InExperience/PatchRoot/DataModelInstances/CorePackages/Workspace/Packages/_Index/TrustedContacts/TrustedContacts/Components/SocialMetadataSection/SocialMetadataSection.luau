@@ -25,62 +25,62 @@ local fStringParentLinkAmpNameSpace = require(parent.SharedFlags).FStringParentL
 local getFFlagEnableProfileInsightsApolloMigration = require(parent.SharedFlags).GetFFlagEnableProfileInsightsApolloMigration
 local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
 local socialMetadataSectionMigrateUserProfileToSignals = game:DefineFastFlag("SocialMetadataSectionMigrateUserProfileToSignals", false)
-local var11 = if socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Stores.UserProfileStore.get() else nil
+local var1 = if socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Stores.UserProfileStore.get() else nil
 
-return function(p0)
-	-- upvalues: socialMetadataSectionMigrateUserProfileToSignals (ref), userProfilesModule (ref), reactModule (ref), signalsModule (ref), var11 (ref), signalsReactModule (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), fFlagTFProfileInsightsBypassCache (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), isCustomNilModule (ref), useLocalization (ref), ampApiProvider (ref), fStringParentLinkAmpNameSpace (ref), accessResponseEnum (ref), foundationModule (ref), view (ref), userTile (ref), layoutMode (ref), skeleton (ref), fFlagProfilePlatformAddTC (ref), socialMetadataIconsAndTextsSectionModule (ref)
-	local var12 = if not socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = { p0.userId },
+return function(p1)
+	-- upvalues: socialMetadataSectionMigrateUserProfileToSignals (ref), userProfilesModule (ref), reactModule (ref), signalsModule (ref), var1 (ref), signalsReactModule (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), fFlagTFProfileInsightsBypassCache (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), isCustomNilModule (ref), useLocalization (ref), ampApiProvider (ref), fStringParentLinkAmpNameSpace (ref), accessResponseEnum (ref), foundationModule (ref), view (ref), userTile (ref), layoutMode (ref), skeleton (ref), fFlagProfilePlatformAddTC (ref), socialMetadataIconsAndTextsSectionModule (ref)
+	local var2 = if not socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Hooks.useUserProfilesFetch({
+		userIds = { p1.userId },
 		query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	}) else nil
-	local var13 = ""
-	local var14 = ""
+	local var3 = ""
+	local var4 = ""
 	
-	if not socialMetadataSectionMigrateUserProfileToSignals and var12 and var12.data then
-		var13 = userProfilesModule.Selectors.getCombinedNameFromId(var12.data, p0.userId) or ""
-		var14 = userProfilesModule.Selectors.getUsernameFromId(var12.data, p0.userId) or ""
+	if not socialMetadataSectionMigrateUserProfileToSignals and var2 and var2.data then
+		var3 = userProfilesModule.Selectors.getCombinedNameFromId(var2.data, p1.userId) or ""
+		var4 = userProfilesModule.Selectors.getUsernameFromId(var2.data, p1.userId) or ""
 	end
 	if socialMetadataSectionMigrateUserProfileToSignals then
-		local var15 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var11 (copy), p0 (ref)
-			return signalsModule.createComputed(function(p1)
-				-- upvalues: var11 (copy), p0 (copy)
-				local var27 = var11 and var11.fetchNamesByUserIds({ tostring(p0.userId) })(p1)
-				local var28 = var27 and (var27.data and var27.data[1])
-				local names = var28 and var28.names
+		local var5 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+			-- upvalues: signalsModule (copy), var1 (copy), p1 (ref)
+			return signalsModule.createComputed(function(p2)
+				-- upvalues: var1 (copy), p1 (copy)
+				local var6 = var1 and var1.fetchNamesByUserIds({ tostring(p1.userId) })(p2)
+				local var7 = var6 and (var6.data and var6.data[1])
+				local names = var7 and var7.names
 				
 				return {
-					combinedName = if names then names.getCombinedName(p1) else "",
+					combinedName = if names then names.getCombinedName(p2) else "",
 					username = if names then names.getUsername() else ""
 				}
 			end)
-		end, { p0.userId }))
-		var14 = var15.username
-		var13 = var15.combinedName
+		end, { p1.userId }))
+		var4 = var5.username
+		var3 = var5.combinedName
 	end
-	local var19
+	local var6
 	local t = {}
 	local _ = nil
 	
 	if getFFlagEnableProfileInsightsApolloMigration() then
-		local var17, var18 = useSignalProfileInsightsByUserId({
+		local var7, var8 = useSignalProfileInsightsByUserId({
 			rankingStrategy = "tc_info_boost",
-			userId = p0.userId,
+			userId = p1.userId,
 			forceFetch = fFlagTFProfileInsightsBypassCache
 		})
-		t = var17
-		var19 = var18
+		t = var7
+		var6 = var8
 	else
-		local var20 = useProfileInsightsByUserIds({
+		local var9 = useProfileInsightsByUserIds({
 			rankingStrategy = "tc_info_boost",
 			fetchPolicy = "network-only",
-			userIds = { p0.userId }
+			userIds = { p1.userId }
 		})
 		
-		if var20 and var20.data and not var20.loading then
-			t = getProfileInsightsByUserIdFromData(var20.data, p0.userId)
+		if var9 and var9.data and not var9.loading then
+			t = getProfileInsightsByUserIdFromData(var9.data, p1.userId)
 		end
-		var19 = var20.loading
+		var6 = var9.loading
 	end
 	local _ = {
 		under13 = "AccountIdentity.AgeCheck.Label.AgeBandUnder13",
@@ -97,37 +97,37 @@ return function(p0)
 		ageGroup18To24 = "AccountIdentity.AgeCheck.Label.AgeGroup18To24",
 		ageGroupOver25 = "AccountIdentity.AgeCheck.Label.AgeGroupOver25"
 	}
-	local var21 = useLocalization({
+	local var10 = useLocalization({
 		yourLinkedParent = "Feature.Friends.Label.YourLinkedParent",
 		userAgeVerifiedBracket = if not isCustomNilModule(t.userAgeVerifiedBracket) then t.userAgeVerifiedBracket else nil
 	})
 	local _ = nil
 	local _ = nil
-	local var22, var23 = reactModule.useState(false)
-	local var24 = var22
-	local var25 = var23
+	local var11, var12 = reactModule.useState(false)
+	local var13 = var11
+	local var14 = var12
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), ampApiProvider (copy), fStringParentLinkAmpNameSpace (copy), var25 (write), accessResponseEnum (copy)
-		var25(ampApiProvider.upsellFeatureAccess("IsLinkedChildOf", {}, fStringParentLinkAmpNameSpace, {
-			{ name = "otherUser", type = "UserId", value = p0.userId }
+		-- upvalues: p1 (ref), ampApiProvider (copy), fStringParentLinkAmpNameSpace (copy), var14 (write), accessResponseEnum (copy)
+		var14(ampApiProvider.upsellFeatureAccess("IsLinkedChildOf", {}, fStringParentLinkAmpNameSpace, {
+			{ name = "otherUser", type = "UserId", value = p1.userId }
 		}).access == accessResponseEnum.Granted)
-	end, { p0.userId })
-	local var26 = reactModule.useMemo(function()
-		-- upvalues: var21 (ref)
-		return if var21.userAgeVerifiedBracket then ` \226\128\162 {var21.userAgeVerifiedBracket}` else nil
-	end, { var21.userAgeVerifiedBracket })
+	end, { p1.userId })
+	local var15 = reactModule.useMemo(function()
+		-- upvalues: var10 (ref)
+		return if var10.userAgeVerifiedBracket then ` \226\128\162 {var10.userAgeVerifiedBracket}` else nil
+	end, { var10.userAgeVerifiedBracket })
 	
 	return reactModule.createElement(view, {
 		LayoutOrder = 2,
 		tag = {
 			["col size-full-0 auto-y align-x-left radius-medium bg-shift-100"] = true,
-			["gap-medium padding-medium"] = p0.isVerticallyConstrained,
-			["gap-large padding-large"] = not p0.isVerticallyConstrained
+			["gap-medium padding-medium"] = p1.isVerticallyConstrained,
+			["gap-large padding-large"] = not p1.isVerticallyConstrained
 		}
 	}, {
 		AvatarWithNames = reactModule.useMemo(function()
-			-- upvalues: foundationModule (copy), reactModule (copy), view (copy), userTile (copy), p0 (ref), layoutMode (copy), var24 (write), var21 (ref), var13 (write), var14 (write), var26 (ref)
-			local var30 = foundationModule.Hooks.useTokens()
+			-- upvalues: foundationModule (copy), reactModule (copy), view (copy), userTile (copy), p1 (ref), layoutMode (copy), var13 (write), var10 (ref), var3 (write), var4 (write), var15 (ref)
+			local var16 = foundationModule.Hooks.useTokens()
 			
 			return reactModule.createElement(view, {
 				tag = "size-0-1200 auto-x row align-y-center",
@@ -135,21 +135,21 @@ return function(p0)
 			}, {
 				UserTile = reactModule.createElement(userTile, {
 					onActivated = nil,
-					userId = p0.userId,
+					userId = p1.userId,
 					userPresenceType = foundationModule.Enums.UserPresence.None,
 					layoutMode = layoutMode.wide,
-					title = if var24 then var21.yourLinkedParent else var13,
-					subtitle = if var14 ~= "" then nil else `@{var14}{var26 or ""}`,
-					titleStyle = var30.Typography.TitleMedium,
-					subtitleStyle = var30.Typography.BodyMedium
+					title = if var13 then var10.yourLinkedParent else var3,
+					subtitle = if var4 ~= "" then nil else `@{var4}{var15 or ""}`,
+					titleStyle = var16.Typography.TitleMedium,
+					subtitleStyle = var16.Typography.BodyMedium
 				})
 			})
 		end, {
-			p0.userId, var13, var24, var25, var21.yourLinkedParent, var14, var26
+			p1.userId, var3, var13, var14, var10.yourLinkedParent, var4, var15
 		}),
-		SocialMetadataIconAndTextList = if var19 then reactModule.createElement(skeleton, {
+		SocialMetadataIconAndTextList = if var6 then reactModule.createElement(skeleton, {
 			Size = UDim2.new(1, 0, 0, 50),
-			LayoutOrder = if fFlagProfilePlatformAddTC then p0.layoutOrder else 2
+			LayoutOrder = if fFlagProfilePlatformAddTC then p1.layoutOrder else 2
 		}) else reactModule.createElement(socialMetadataIconsAndTextsSectionModule, {
 			profileInsightIconItems = reactModule.useMemo(function()
 				-- upvalues: isCustomNilModule (copy), t (write)
@@ -161,8 +161,8 @@ return function(p0)
 					localizedCountryName = if not isCustomNilModule(t.localizedCountryName) then t.localizedCountryName else nil
 				}
 			end, { t }),
-			isVerticallyConstrained = p0.isVerticallyConstrained,
-			layoutOrder = if fFlagProfilePlatformAddTC then p0.layoutOrder else 2
+			isVerticallyConstrained = p1.isVerticallyConstrained,
+			layoutOrder = if fFlagProfilePlatformAddTC then p1.layoutOrder else 2
 		})
 	})
 end

@@ -9,41 +9,41 @@ local constantsModule = require(script.Parent.Parent.Parent.Constants)
 local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
 local mainViewServerStats = roactModule.Component:extend("MainViewServerStats")
 
-function mainViewServerStats.init(p0)
+function mainViewServerStats.init(p1)
 	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ utilTabHeight = p1 })
+	function p0.onUtilTabHeightChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ utilTabHeight = p2 })
 	end
 	
 	function p0.onSearchTermChanged(p2)
-		-- upvalues: p0 (ref)
-		p0.props.dispatchServerStatsUpdateSearchFilter(p2, {})
+		-- upvalues: p1 (ref)
+		p1.props.dispatchServerStatsUpdateSearchFilter(p2, {})
 	end
 	
-	p0.utilRef = roactModule.createRef()
-	p0.state = { utilTabHeight = 0 }
+	p1.utilRef = roactModule.createRef()
+	p1.state = { utilTabHeight = 0 }
 end
 
-function mainViewServerStats.didMount(p3)
-	p3:setState({ utilTabHeight = p3.utilRef.current.Size.Y.Offset })
+function mainViewServerStats.didMount(p1)
+	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewServerStats.didUpdate(p4)
-	local size = p4.utilRef.current.Size
+function mainViewServerStats.didUpdate(p1)
+	local size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p4.state.utilTabHeight then
-		p4:setState({ utilTabHeight = size.Y.Offset })
+	if size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = size.Y.Offset })
 	end
 end
 
-function mainViewServerStats.render(p5)
+function mainViewServerStats.render(p1)
 	-- upvalues: roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), serverStatsChartModule (ref)
-	local size = p5.props.size
-	local formFactor = p5.props.formFactor
-	local tabList = p5.props.tabList
-	local statsSearchTerm = p5.props.statsSearchTerm
-	local utilTabHeight = p5.state.utilTabHeight
+	local size = p1.props.size
+	local formFactor = p1.props.formFactor
+	local tabList = p1.props.tabList
+	local statsSearchTerm = p1.props.statsSearchTerm
+	local utilTabHeight = p1.state.utilTabHeight
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -61,9 +61,9 @@ function mainViewServerStats.render(p5)
 			formFactor = formFactor,
 			tabList = tabList,
 			searchTerm = statsSearchTerm,
-			refForParent = p5.utilRef,
-			onHeightChanged = p5.onUtilTabHeightChanged,
-			onSearchTermChanged = p5.onSearchTermChanged
+			refForParent = p1.utilRef,
+			onHeightChanged = p1.onUtilTabHeightChanged,
+			onSearchTermChanged = p1.onSearchTermChanged
 		}),
 		ServerStats = utilTabHeight > 0 and roactModule.createElement(serverStatsChartModule, {
 			layoutOrder = 2,
@@ -73,14 +73,14 @@ function mainViewServerStats.render(p5)
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p6, _)
-	return { statsSearchTerm = p6.ServerStatsData.statsSearchTerm }
-end, function(p7)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+	return { statsSearchTerm = p1.ServerStatsData.statsSearchTerm }
+end, function(p1)
 	-- upvalues: serverStatsUpdateSearchFilterModule (ref)
 	return {
-		dispatchServerStatsUpdateSearchFilter = function(p8, p9)
-			-- upvalues: p7 (ref), serverStatsUpdateSearchFilterModule (copy)
-			p7(serverStatsUpdateSearchFilterModule(p8, p9))
+		dispatchServerStatsUpdateSearchFilter = function(p2, p3)
+			-- upvalues: p1 (ref), serverStatsUpdateSearchFilterModule (copy)
+			p1(serverStatsUpdateSearchFilterModule(p2, p3))
 		end
 	}
 end)(mainViewServerStats)

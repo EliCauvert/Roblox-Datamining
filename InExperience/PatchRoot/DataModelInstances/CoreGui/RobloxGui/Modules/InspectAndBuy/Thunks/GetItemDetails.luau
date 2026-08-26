@@ -12,37 +12,37 @@ local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKey
 local sendCounterModule = require(parent.Thunks.SendCounter)
 local constantsModule = require(parent.Constants)
 local list = { networkModule }
-local var12 = createInspectAndBuyKeyMapperModule("getItemDetails")
+local var1 = createInspectAndBuyKeyMapperModule("getItemDetails")
 
-return function(p0, p1)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var12 (ref), performFetch (ref), assetInfoModule (ref), setAssetsModule (ref), bundleInfoModule (ref), setBundlesModule (ref), sendCounterModule (ref), constantsModule (ref), getExperiencePlayabilityModule (ref), getExperienceInfoModule (ref)
-	return thunkModule.new(script.Name, list, function(p2, p3)
-		-- upvalues: networkModule (copy), var12 (copy), p0 (ref), p1 (ref), performFetch (copy), assetInfoModule (copy), setAssetsModule (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy)
-		local var13 = p3[networkModule]
+return function(p1, p2)
+	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), assetInfoModule (ref), setAssetsModule (ref), bundleInfoModule (ref), setBundlesModule (ref), sendCounterModule (ref), constantsModule (ref), getExperiencePlayabilityModule (ref), getExperienceInfoModule (ref)
+	return thunkModule.new(script.Name, list, function(p3, p4)
+		-- upvalues: networkModule (copy), var1 (copy), p1 (ref), p2 (ref), performFetch (copy), assetInfoModule (copy), setAssetsModule (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy)
+		local var2 = p4[networkModule]
 		
-		return performFetch.Single(var12(p2:getState().storeId, p0, p1), function()
-			-- upvalues: var13 (ref), p0 (copy), p1 (copy), assetInfoModule (copy), p2 (ref), setAssetsModule (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy)
-			return var13.getItemDetails(p0, p1):andThen(function(p4)
-				-- upvalues: p1 (copy), assetInfoModule (copy), p2 (copy), setAssetsModule (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy)
-				if p1 == Enum.AvatarItemType.Asset then
-					p2:dispatch(setAssetsModule({ assetInfoModule.fromGetItemDetails(p4) }))
-				elseif p1 == Enum.AvatarItemType.Bundle then
-					p2:dispatch(setBundlesModule({ bundleInfoModule.fromGetItemDetails(p4) }))
+		return performFetch.Single(var1(p3:getState().storeId, p1, p2), function()
+			-- upvalues: var2 (ref), p1 (copy), p2 (copy), assetInfoModule (copy), p3 (ref), setAssetsModule (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy)
+			return var2.getItemDetails(p1, p2):andThen(function(p5)
+				-- upvalues: p2 (copy), assetInfoModule (copy), p3 (copy), setAssetsModule (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy)
+				if p2 == Enum.AvatarItemType.Asset then
+					p3:dispatch(setAssetsModule({ assetInfoModule.fromGetItemDetails(p5) }))
+				elseif p2 == Enum.AvatarItemType.Bundle then
+					p3:dispatch(setBundlesModule({ bundleInfoModule.fromGetItemDetails(p5) }))
 				else
-					p2:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetailsRespondedWithUnknownItemType))
+					p3:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetailsRespondedWithUnknownItemType))
 				end
-				if p4.CreatingUniverseId then
-					p2:dispatch(getExperiencePlayabilityModule(p4.CreatingUniverseId))
-					p2:dispatch(getExperienceInfoModule(p4.CreatingUniverseId))
+				if p5.CreatingUniverseId then
+					p3:dispatch(getExperiencePlayabilityModule(p5.CreatingUniverseId))
+					p3:dispatch(getExperienceInfoModule(p5.CreatingUniverseId))
 				end
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetails .. constantsModule.CounterSuffix.RequestSucceeded))
+				p3:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetails .. constantsModule.CounterSuffix.RequestSucceeded))
 			end, function(_)
-				-- upvalues: p2 (copy), sendCounterModule (copy), constantsModule (copy)
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetails .. constantsModule.CounterSuffix.RequestRejected))
+				-- upvalues: p3 (copy), sendCounterModule (copy), constantsModule (copy)
+				p3:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetails .. constantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p2):catch(function(_)
-			-- upvalues: p2 (ref), sendCounterModule (copy), constantsModule (copy)
-			p2:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetails .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p3):catch(function(_)
+			-- upvalues: p3 (ref), sendCounterModule (copy), constantsModule (copy)
+			p3:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetails .. constantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

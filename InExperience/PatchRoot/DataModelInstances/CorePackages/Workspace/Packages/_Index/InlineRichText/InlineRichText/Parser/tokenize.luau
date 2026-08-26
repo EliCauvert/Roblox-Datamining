@@ -10,83 +10,83 @@ local list = {
 	{ name = "CLOSE", pattern = "^</([%w-]+)%s?([^>]*)>" }
 }
 local t = {
-	OPEN = function(p0, p1, p2)
+	OPEN = function(p1, p2, p3)
 		-- upvalues: parseXmlAttributesModule (ref), tokenNameModule (ref)
-		table.insert(p0, {
+		table.insert(p1, {
 			name = tokenNameModule.Open,
-			text = p1,
-			attributes = parseXmlAttributesModule(p2)
+			text = p2,
+			attributes = parseXmlAttributesModule(p3)
 		})
 	end,
-	CLOSE = function(p3, p4)
+	CLOSE = function(p1, p2)
 		-- upvalues: tokenNameModule (ref)
-		table.insert(p3, { name = tokenNameModule.Close, text = p4, attributes = {} })
+		table.insert(p1, { name = tokenNameModule.Close, text = p2, attributes = {} })
 	end,
-	OPEN_CLOSE = function(p5, p6, p7)
+	OPEN_CLOSE = function(p1, p2, p3)
 		-- upvalues: parseXmlAttributesModule (ref), tokenNameModule (ref)
-		table.insert(p5, {
+		table.insert(p1, {
 			name = tokenNameModule.Open,
-			text = p6,
-			attributes = parseXmlAttributesModule(p7)
+			text = p2,
+			attributes = parseXmlAttributesModule(p3)
 		})
-		table.insert(p5, { name = tokenNameModule.Close, text = p6, attributes = {} })
+		table.insert(p1, { name = tokenNameModule.Close, text = p2, attributes = {} })
 	end
 }
 
-return function(p8)
+return function(p1)
 	-- upvalues: list (ref), tokenNameModule (ref), escapeRichFormattingModule (ref), t (ref)
-	local var10, name, matchIndex, matchIndex_1, var14, var15
-	local var6 = 0
-	local var7 = 0
+	local var1, name, matchIndex, matchIndex_1, var2, var3
+	local var4 = 0
+	local var5 = 0
 	local t_1 = {}
-	local replaced = string.gsub(p8, "\n+", " ")
+	local replaced = string.gsub(p1, "\n+", " ")
 	
 	for i in string.gmatch(replaced, "()<") do
-		if i >= var6 then
-			var6 = i
-			var10 = false
+		if i >= var4 then
+			var4 = i
+			var1 = false
 			
 			for i_1, v in list do
 				name = v.name
 				local pattern = v.pattern
-				matchIndex, matchIndex_1 = string.find(replaced, pattern, var6)
+				matchIndex, matchIndex_1 = string.find(replaced, pattern, var4)
 				
 				if matchIndex and matchIndex_1 then
-					local list_1 = { string.match(replaced, pattern, var6) }
-					var14 = list_1[1]
-					var15 = list_1[2] or ""
+					local list_1 = { string.match(replaced, pattern, var4) }
+					var2 = list_1[1]
+					var3 = list_1[2] or ""
 					
-					if var14 then
-						if var6 ~= var7 then
+					if var2 then
+						if var4 ~= var5 then
 							table.insert(t_1, {
 								name = tokenNameModule.Text,
-								text = escapeRichFormattingModule(string.sub(replaced, var7, var6 - 1)),
+								text = escapeRichFormattingModule(string.sub(replaced, var5, var4 - 1)),
 								attributes = {}
 							})
 						end
-						if var14 ~= "br" then
-							t[name](t_1, var14, var15)
+						if var2 ~= "br" then
+							t[name](t_1, var2, var3)
 						elseif name == "OPEN" or name == "OPEN_CLOSE" then
 							table.insert(t_1, { text = "", name = tokenNameModule.Break, attributes = {} })
 						end
-						var6 += matchIndex_1 - matchIndex + 1
-						var7 = var6
-						var10 = true
+						var4 += matchIndex_1 - matchIndex + 1
+						var5 = var4
+						var1 = true
 						break
 					end
 				end
 			end
-			if not var10 then
-				var6 += 1
+			if not var1 then
+				var4 += 1
 			end
 		end
 	end
-	var6 = #replaced + 1
+	var4 = #replaced + 1
 	
-	if var6 ~= var7 then
+	if var4 ~= var5 then
 		table.insert(t_1, {
 			name = tokenNameModule.Text,
-			text = escapeRichFormattingModule(string.sub(replaced, var7, var6 - 1)),
+			text = escapeRichFormattingModule(string.sub(replaced, var5, var4 - 1)),
 			attributes = {}
 		})
 	end

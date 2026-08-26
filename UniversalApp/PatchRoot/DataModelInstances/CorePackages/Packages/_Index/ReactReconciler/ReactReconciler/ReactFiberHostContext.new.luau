@@ -7,58 +7,58 @@ local createCursor = unknownModule.createCursor
 local push = unknownModule.push
 local pop = unknownModule.pop
 local t = {}
+local var1 = createCursor(t)
+local var2 = createCursor(t)
 local var3 = createCursor(t)
-local var4 = createCursor(t)
-local var5 = createCursor(t)
 
-function requiredContext(p0)
-	return p0
+function requiredContext(p1)
+	return p1
 end
 
 function getRootHostContainer()
-	-- upvalues: var5 (ref)
-	return var5.current
-end
-
-function pushHostContainer(p1, p2)
-	-- upvalues: push (ref), var5 (ref), var4 (ref), var3 (ref), t (ref), getRootHostContext (ref), pop (ref)
-	push(var5, p2, p1)
-	push(var4, p1, p1)
-	push(var3, t, p1)
-	local var6 = getRootHostContext(p2)
-	pop(var3, p1)
-	push(var3, var6, p1)
-end
-
-function popHostContainer(p3)
-	-- upvalues: pop (ref), var3 (ref), var4 (ref), var5 (ref)
-	pop(var3, p3)
-	pop(var4, p3)
-	pop(var5, p3)
-end
-
-function getHostContext()
 	-- upvalues: var3 (ref)
 	return var3.current
 end
 
-function pushHostContext(p4)
-	-- upvalues: var5 (ref), var3 (ref), getChildHostContext (ref), push (ref), var4 (ref)
-	local var7 = requiredContext(var3.current)
-	local var8 = getChildHostContext(var7, p4.type, requiredContext(var5.current))
-	
-	if var7 == var8 then
-		return
-	end
-	push(var4, p4, p4)
-	push(var3, var8, p4)
+function pushHostContainer(p1, p2)
+	-- upvalues: push (ref), var3 (ref), var2 (ref), var1 (ref), t (ref), getRootHostContext (ref), pop (ref)
+	push(var3, p2, p1)
+	push(var2, p1, p1)
+	push(var1, t, p1)
+	local var4 = getRootHostContext(p2)
+	pop(var1, p1)
+	push(var1, var4, p1)
 end
 
-function popHostContext(p5)
-	-- upvalues: var4 (ref), pop (ref), var3 (ref)
-	if var4.current == p5 then
-		pop(var3, p5)
-		pop(var4, p5)
+function popHostContainer(p1)
+	-- upvalues: pop (ref), var1 (ref), var2 (ref), var3 (ref)
+	pop(var1, p1)
+	pop(var2, p1)
+	pop(var3, p1)
+end
+
+function getHostContext()
+	-- upvalues: var1 (ref)
+	return var1.current
+end
+
+function pushHostContext(p1)
+	-- upvalues: var3 (ref), var1 (ref), getChildHostContext (ref), push (ref), var2 (ref)
+	local var4 = requiredContext(var1.current)
+	local var5 = getChildHostContext(var4, p1.type, requiredContext(var3.current))
+	
+	if var4 == var5 then
+		return
+	end
+	push(var2, p1, p1)
+	push(var1, var5, p1)
+end
+
+function popHostContext(p1)
+	-- upvalues: var2 (ref), pop (ref), var1 (ref)
+	if var2.current == p1 then
+		pop(var1, p1)
+		pop(var2, p1)
 		
 		return
 	end

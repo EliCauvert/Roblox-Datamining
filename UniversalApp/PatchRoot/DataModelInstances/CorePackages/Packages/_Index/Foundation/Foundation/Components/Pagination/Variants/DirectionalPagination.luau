@@ -61,7 +61,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		if not var4 then
 			return nil
 		end
-		local var1 = tostring(var2.page)
+		local var9 = tostring(var2.page)
 		
 		return if paginationUtilsModule.needsWidePageSlot(var2.page) then reactModule.createElement(chipModule, {
 			LayoutOrder = 2,
@@ -70,7 +70,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			onActivated = function() end,
 			size = if size == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium,
 			testId = `{var2.testId}--page-label`,
-			text = var1,
+			text = var9,
 			variant = chipVariantModule.Utility
 		}) else reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
@@ -79,7 +79,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}, {
 			Text = reactModule.createElement(textModule, {
 				LayoutOrder = 1,
-				Text = var1,
+				Text = var9,
 				tag = paginationUtilsModule.getPageLabelTag(size)
 			})
 		})

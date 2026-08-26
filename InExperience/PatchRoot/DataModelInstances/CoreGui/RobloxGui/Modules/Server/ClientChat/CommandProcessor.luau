@@ -26,10 +26,10 @@ function t_1.SetupCommandProcessors(value)
 	end
 end
 
-function t_1.ProcessCompletedChatMessage(p0, p1, p2)
+function t_1.ProcessCompletedChatMessage(p1, p2, p3)
 	-- upvalues: chatSettingsModule (ref)
-	for i = 1, #p0.CompletedMessageProcessors do
-		if not p0.CompletedMessageProcessors[i](p1, p2, chatSettingsModule) then
+	for i = 1, #p1.CompletedMessageProcessors do
+		if not p1.CompletedMessageProcessors[i](p2, p3, chatSettingsModule) then
 			continue
 		end
 		return true
@@ -37,15 +37,15 @@ function t_1.ProcessCompletedChatMessage(p0, p1, p2)
 	return false
 end
 
-function t_1.ProcessInProgressChatMessage(p3, p4, p5, p6)
+function t_1.ProcessInProgressChatMessage(p4, p5, p6, p7)
 	-- upvalues: chatSettingsModule (ref)
-	for i = 1, #p3.InProgressMessageProcessors do
-		local var8 = p3.InProgressMessageProcessors[i](p4, p5, p6, chatSettingsModule)
+	for i = 1, #p4.InProgressMessageProcessors do
+		local var1 = p4.InProgressMessageProcessors[i](p5, p6, p7, chatSettingsModule)
 		
-		if not var8 then
+		if not var1 then
 			continue
 		end
-		return var8
+		return var1
 	end
 	return nil
 end

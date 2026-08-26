@@ -7,9 +7,9 @@ local createDataResolverModule = require(dataHydration.createDataResolver)
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref)
-	local var4 = createDataCacheModule()
-	local var5 = createDataResolverModule({
-		cache = var4,
+	local var1 = createDataCacheModule()
+	local var2 = createDataResolverModule({
+		cache = var1,
 		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
@@ -17,11 +17,11 @@ return function()
 	})
 	
 	return {
-		getMarketplaceAssetInfo = var5.getCachedItem,
-		getMarketplaceAssetInfos = var5.getCachedItems,
-		updateMarketplaceAssetInfo = var4.updateItem,
-		updateMarketplaceAssetInfos = var4.updateItems,
-		clear = var4.clear,
-		dispose = var4.dispose
+		getMarketplaceAssetInfo = var2.getCachedItem,
+		getMarketplaceAssetInfos = var2.getCachedItems,
+		updateMarketplaceAssetInfo = var1.updateItem,
+		updateMarketplaceAssetInfos = var1.updateItems,
+		clear = var1.clear,
+		dispose = var1.dispose
 	}
 end

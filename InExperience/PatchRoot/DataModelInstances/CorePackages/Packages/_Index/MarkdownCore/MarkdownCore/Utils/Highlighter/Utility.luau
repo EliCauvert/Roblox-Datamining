@@ -1,6 +1,6 @@
 ﻿return {
-	sanitizeRichText = function(p0)
-		return string.gsub(string.gsub(string.gsub(string.gsub(string.gsub(p0, "&", "&amp;"), "<", "&lt;"), ">", "&gt;"), "\"", "&quot;"), "'", "&apos;")
+	sanitizeRichText = function(p1)
+		return string.gsub(string.gsub(string.gsub(string.gsub(string.gsub(p1, "&", "&amp;"), "<", "&lt;"), ">", "&gt;"), "\"", "&quot;"), "'", "&apos;")
 	end,
 	convertTabsToSpaces = function(value)
 		return string.gsub(value, "\t", "    ")

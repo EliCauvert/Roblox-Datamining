@@ -11,44 +11,44 @@ local useAssetLibraryStringsModule = require(script.Parent.Parent.useAssetLibrar
 local createAssetLibraryBrowseStoreModule = require(buildExperience.Stores.AssetLibrary.createAssetLibraryBrowseStore)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 
-local function _(p0, p1)
-	return if p0 == "Audio" then nil else `rbxthumb://type=Asset&id={p1}&w=420&h=420`
+local function _(p1, p2)
+	return if p1 == "Audio" then nil else `rbxthumb://type=Asset&id={p2}&w=420&h=420`
 end
 
-local function useCategoryState(p2, p3, p4, p5, p6, p7)
+local function useCategoryState(p1, p2, p3, p4, p5, p6)
 	-- upvalues: reactModule (ref), signalsModule (ref), getAssetTileSubtitleModule (ref), signalsReactModule (ref)
 	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p5 (ref), p2 (ref), p4 (ref), p3 (ref), getAssetTileSubtitleModule (copy), p7 (ref), p6 (ref)
-		return signalsModule.createComputed(function(p8)
-			-- upvalues: p5 (copy), p2 (copy), p4 (copy), p3 (copy), getAssetTileSubtitleModule (copy), p7 (copy), p6 (copy)
-			local debouncedQuery = p5.getDebouncedQuery(p8)
-			local var11 = p5.getPageTokens(p8)[p2]
+		-- upvalues: signalsModule (copy), p4 (ref), p1 (ref), p3 (ref), p2 (ref), getAssetTileSubtitleModule (copy), p6 (ref), p5 (ref)
+		return signalsModule.createComputed(function(p7)
+			-- upvalues: p4 (copy), p1 (copy), p3 (copy), p2 (copy), getAssetTileSubtitleModule (copy), p6 (copy), p5 (copy)
+			local debouncedQuery = p4.getDebouncedQuery(p7)
+			local var1 = p4.getPageTokens(p7)[p1]
 			local t = {}
 			local t_1 = {}
-			local var14 = "Ready"
+			local var2 = "Ready"
 			local nextPageToken = nil
 			
-			for i, v in var11 do
-				local andFetchSearch = p4.getAndFetchSearch({
+			for i, v in var1 do
+				local andFetchSearch = p3.getAndFetchSearch({
 					maxPageSize = 20,
-					universeId = p3,
-					assetType = p2,
+					universeId = p2,
+					assetType = p1,
 					query = debouncedQuery,
 					pageToken = if v == "" then nil else v
 				})
-				local var18 = andFetchSearch.status(p8)
+				local var3 = andFetchSearch.status(p7)
 				
-				if var18 == "Failed" then
-					var14 = "Failed"
-				elseif var18 == "NotReady" and var14 ~= "Failed" then
-					var14 = "Loading"
+				if var3 == "Failed" then
+					var2 = "Failed"
+				elseif var3 == "NotReady" and var2 ~= "Failed" then
+					var2 = "Loading"
 				end
-				local var19 = andFetchSearch.data(p8)
+				local var4 = andFetchSearch.data(p7)
 				
-				if var19 ~= nil then
-					nextPageToken = var19.nextPageToken
+				if var4 ~= nil then
+					nextPageToken = var4.nextPageToken
 					
-					for i_1, v_1 in var19.assetIds do
+					for i_1, v_1 in var4.assetIds do
 						if not t_1[v_1] then
 							t_1[v_1] = true
 							table.insert(t, v_1)
@@ -59,111 +59,111 @@ local function useCategoryState(p2, p3, p4, p5, p6, p7)
 			local t_2 = {}
 			
 			for i_1, v_1 in t do
-				local var16 = p4.getAsset(p3, v_1).data(p8)
+				local var5 = p3.getAsset(p2, v_1).data(p7)
 				
-				if var16 ~= nil then
+				if var5 ~= nil then
 					table.insert(t_2, {
 						assetId = v_1,
-						assetType = p2,
-						displayName = var16.displayName,
-						subtitle = getAssetTileSubtitleModule(var16, p7),
-						thumbnail = if p2 == "Audio" then nil else `rbxthumb://type=Asset&id={v_1}&w=420&h=420`,
-						onActivated = p6
+						assetType = p1,
+						displayName = var5.displayName,
+						subtitle = getAssetTileSubtitleModule(var5, p6),
+						thumbnail = if p1 == "Audio" then nil else `rbxthumb://type=Asset&id={v_1}&w=420&h=420`,
+						onActivated = p5
 					})
 				end
 			end
 			return {
 				assets = t_2,
-				status = var14,
+				status = var2,
 				nextPageToken = nextPageToken
 			}
 		end)
 	end, {
-		p2, p3, p4, p5, p6, p7
+		p1, p2, p3, p4, p5, p6
 	}))
 end
 
 return function(value)
 	-- upvalues: useAssetLibraryStringsModule (ref), creatorInventoryModule (ref), reactModule (ref), createAssetLibraryBrowseStoreModule (ref), signalsReactModule (ref), useCategoryState (ref), signalsModule (ref), sendBuildExperienceEventModule (ref)
-	local var20 = useAssetLibraryStringsModule()
+	local var6 = useAssetLibraryStringsModule()
 	local inventoryStore = value.inventoryStore or creatorInventoryModule.getCreatorInventoryStore(false)
-	local var22 = reactModule.useMemo(function()
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: value (ref), createAssetLibraryBrowseStoreModule (copy)
 		return if value.browseStore == nil then createAssetLibraryBrowseStoreModule() else value.browseStore
 	end, { value.browseStore })
-	local var23 = signalsReactModule.useSignalState(var22.getDraftQuery)
-	local var24, var25 = reactModule.useState(false)
-	local var26 = reactModule.useRef(nil)
+	local var8 = signalsReactModule.useSignalState(var7.getDraftQuery)
+	local var9, var10 = reactModule.useState(false)
+	local var11 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: value (ref), var22 (ref)
+		-- upvalues: value (ref), var7 (ref)
 		return function()
-			-- upvalues: value (copy), var22 (copy)
+			-- upvalues: value (copy), var7 (copy)
 			if value.browseStore == nil then
-				var22.destroy()
+				var7.destroy()
 			end
 		end
-	end, { var22, value.browseStore })
-	local var27 = useCategoryState("Model", value.universeId, inventoryStore, var22, value.onOpenAsset, var20)
-	local var28 = useCategoryState("Image", value.universeId, inventoryStore, var22, value.onOpenAsset, var20)
-	local var29 = useCategoryState("Audio", value.universeId, inventoryStore, var22, value.onOpenAsset, var20)
-	local status = var27.status
-	local status_1 = var28.status
-	local status_2 = var29.status
-	local var30 = reactModule.useRef({
+	end, { var7, value.browseStore })
+	local var12 = useCategoryState("Model", value.universeId, inventoryStore, var7, value.onOpenAsset, var6)
+	local var13 = useCategoryState("Image", value.universeId, inventoryStore, var7, value.onOpenAsset, var6)
+	local var14 = useCategoryState("Audio", value.universeId, inventoryStore, var7, value.onOpenAsset, var6)
+	local status = var12.status
+	local status_1 = var13.status
+	local status_2 = var14.status
+	local var15 = reactModule.useRef({
 		Model = "NotReady",
 		Image = "NotReady",
 		Audio = "NotReady"
 	})
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var22 (ref), sendBuildExperienceEventModule (copy), value (ref)
-		return signalsModule.createEffect(function(p9)
-			-- upvalues: var22 (copy), sendBuildExperienceEventModule (copy), value (copy)
-			local debouncedQuery = var22.getDebouncedQuery(p9)
+		-- upvalues: signalsModule (copy), var7 (ref), sendBuildExperienceEventModule (copy), value (ref)
+		return signalsModule.createEffect(function(p8)
+			-- upvalues: var7 (copy), sendBuildExperienceEventModule (copy), value (copy)
+			local debouncedQuery = var7.getDebouncedQuery(p8)
 			
 			if debouncedQuery ~= "" then
 				sendBuildExperienceEventModule("ASSET_LIBRARY_SEARCH", { universeId = value.universeId }, { queryLength = tostring(string.len(debouncedQuery)) })
 			end
 		end)
-	end, { var22, value.universeId })
+	end, { var7, value.universeId })
 	reactModule.useEffect(function()
-		-- upvalues: var30 (ref), sendBuildExperienceEventModule (copy), value (ref), status (ref), status_1 (ref), status_2 (ref)
-		local function reportFailure(p10, p11)
-			-- upvalues: var30 (copy), sendBuildExperienceEventModule (copy), value (copy)
-			if p11 == "Failed" and var30.current[p10] ~= "Failed" then
-				sendBuildExperienceEventModule("ASSET_LIBRARY_FETCH_FAILED", { universeId = value.universeId }, { assetType = tostring(p10) })
+		-- upvalues: var15 (ref), sendBuildExperienceEventModule (copy), value (ref), status (ref), status_1 (ref), status_2 (ref)
+		local function reportFailure(p8, p9)
+			-- upvalues: var15 (copy), sendBuildExperienceEventModule (copy), value (copy)
+			if p9 == "Failed" and var15.current[p8] ~= "Failed" then
+				sendBuildExperienceEventModule("ASSET_LIBRARY_FETCH_FAILED", { universeId = value.universeId }, { assetType = tostring(p8) })
 			end
-			var30.current[p10] = p11
+			var15.current[p8] = p9
 		end
 		
 		reportFailure("Model", status)
 		reportFailure("Image", status_1)
 		reportFailure("Audio", status_2)
 	end, { status, status_1, status_2, value.universeId })
-	local t = { Model = var27, Image = var28, Audio = var29 }
+	local t = { Model = var12, Image = var13, Audio = var14 }
 	
-	local function makeCategory(p12)
-		-- upvalues: t (ref), var20 (ref), value (ref), var22 (ref), inventoryStore (ref)
-		local var39 = t[p12]
+	local function makeCategory(p8)
+		-- upvalues: t (ref), var6 (ref), value (ref), var7 (ref), inventoryStore (ref)
+		local var16 = t[p8]
 		
 		return {
-			assetType = p12,
-			title = if p12 == "Model" then var20.model elseif p12 == "Image" then var20.image else var20.audio,
-			assets = var39.assets,
-			status = var39.status,
-			hasMore = var39.nextPageToken ~= nil and var39.nextPageToken ~= "",
+			assetType = p8,
+			title = if p8 == "Model" then var6.model elseif p8 == "Image" then var6.image else var6.audio,
+			assets = var16.assets,
+			status = var16.status,
+			hasMore = var16.nextPageToken ~= nil and var16.nextPageToken ~= "",
 			onOpenCategory = function()
-				-- upvalues: value (copy), p12 (ref), var22 (copy)
-				value.onOpenCategory(p12, var22.getDebouncedQuery(false))
+				-- upvalues: value (copy), p8 (ref), var7 (copy)
+				value.onOpenCategory(p8, var7.getDebouncedQuery(false))
 			end,
 			onRetry = function()
-				-- upvalues: var22 (copy), p12 (ref), inventoryStore (copy), value (copy)
-				local debouncedQuery = var22.getDebouncedQuery(false)
+				-- upvalues: var7 (copy), p8 (ref), inventoryStore (copy), value (copy)
+				local debouncedQuery = var7.getDebouncedQuery(false)
 				
-				for i, v in var22.getPageTokens(false)[p12] do
+				for i, v in var7.getPageTokens(false)[p8] do
 					inventoryStore.fetchSearch({
 						maxPageSize = 20,
 						universeId = value.universeId,
-						assetType = p12,
+						assetType = p8,
 						query = debouncedQuery,
 						pageToken = if v == "" then nil else v
 					})
@@ -177,61 +177,61 @@ return function(value)
 		makeCategory("Image"),
 		makeCategory("Audio")
 	}
-	local var34 = reactModule.useCallback(function(p13)
-		-- upvalues: var22 (ref)
-		if p13 == "" then
-			var22.clearQuery()
+	local var17 = reactModule.useCallback(function(p9)
+		-- upvalues: var7 (ref)
+		if p9 == "" then
+			var7.clearQuery()
 			
 			return
 		end
-		var22.setQuery(p13)
-	end, { var22 })
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: var25 (ref)
-		var25(true)
+		var7.setQuery(p9)
+	end, { var7 })
+	local var18 = reactModule.useCallback(function()
+		-- upvalues: var10 (ref)
+		var10(true)
 	end, {})
-	local var36 = reactModule.useCallback(function()
-		-- upvalues: var26 (ref), var22 (ref), var25 (ref)
-		local current = var26.current
+	local var19 = reactModule.useCallback(function()
+		-- upvalues: var11 (ref), var7 (ref), var10 (ref)
+		local current = var11.current
 		
 		if current ~= nil then
-			local var41 = if current:IsA("TextBox") then current else current:FindFirstChildWhichIsA("TextBox", true)
+			local var20 = if current:IsA("TextBox") then current else current:FindFirstChildWhichIsA("TextBox", true)
 			
-			if var41 ~= nil then
-				var41:ReleaseFocus()
+			if var20 ~= nil then
+				var20:ReleaseFocus()
 			end
 		end
-		var22.clearQuery()
-		var25(false)
-	end, { var22 })
+		var7.clearQuery()
+		var10(false)
+	end, { var7 })
 	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), var26 (ref)
-		if var24 then
+		-- upvalues: var9 (ref), var11 (ref)
+		if var9 then
 			task.defer(function()
-				-- upvalues: var26 (copy)
-				local current = var26.current
+				-- upvalues: var11 (copy)
+				local current = var11.current
 				
 				if current == nil then return end
-				local var42 = if current:IsA("TextBox") then current else current:FindFirstChildWhichIsA("TextBox", true)
+				local var20 = if current:IsA("TextBox") then current else current:FindFirstChildWhichIsA("TextBox", true)
 				
-				if var42 ~= nil then
-					var42:CaptureFocus()
+				if var20 ~= nil then
+					var20:CaptureFocus()
 				end
 			end)
 			
 			return
 		end
-	end, { var24 })
+	end, { var9 })
 	
 	return {
-		query = var23,
-		isSearchExpanded = var24,
+		query = var8,
+		isSearchExpanded = var9,
 		categories = list,
-		strings = var20,
-		searchInputRef = var26,
-		onQueryChanged = var34,
-		onSearchActivated = var35,
-		onSearchCancelled = var36,
+		strings = var6,
+		searchInputRef = var11,
+		onQueryChanged = var17,
+		onSearchActivated = var18,
+		onSearchCancelled = var19,
 		onBack = value.onBack
 	}
 end

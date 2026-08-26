@@ -13,15 +13,15 @@ local _ = require(script.Parent.BulkPurchaseError)
 
 return function()
 	-- upvalues: useSelector (ref), selectPurchaseResultsModule (ref), selectErrorCodeModule (ref), selectErrorMetadataModule (ref), useDispatch (ref), reactModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref)
-	local var7 = useSelector(selectPurchaseResultsModule)
-	local var8 = useDispatch()
+	local var1 = useSelector(selectPurchaseResultsModule)
+	local var2 = useDispatch()
 	
 	return {
 		onDismiss = reactModule.useCallback(function()
-			-- upvalues: marketplaceService (copy), var7 (ref), var8 (ref), bulkPurchaseEndedModule (copy)
-			marketplaceService:signalPromptBulkPurchaseFinished(3, var7)
-			var8(bulkPurchaseEndedModule())
-		end, { var7, var8 }),
+			-- upvalues: marketplaceService (copy), var1 (ref), var2 (ref), bulkPurchaseEndedModule (copy)
+			marketplaceService:signalPromptBulkPurchaseFinished(3, var1)
+			var2(bulkPurchaseEndedModule())
+		end, { var1, var2 }),
 		errorCode = useSelector(selectErrorCodeModule),
 		errorMetadata = useSelector(selectErrorMetadataModule)
 	}

@@ -4,11 +4,11 @@ local isInDSAFeaturesOverrideListModule = require(dsaIllegalContentReporting.Uti
 local getFFlagDSAIllegalContentReporting = require(dsaIllegalContentReporting.Parent.SharedFlags).GetFFlagDSAIllegalContentReporting
 local localizationService = game:GetService("LocalizationService")
 local playersService = game:GetService("Players")
-local var5 = false
+local var1 = false
 
 if getFFlagDSAIllegalContentReporting() then
 	task.spawn(function()
-		-- upvalues: playersService (ref), localizationService (ref), constantsModule (ref), var5 (write)
+		-- upvalues: playersService (ref), localizationService (ref), constantsModule (ref), var1 (write)
 		local localPlayer = playersService.LocalPlayer
 		while not localPlayer do
 			playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
@@ -19,7 +19,7 @@ if getFFlagDSAIllegalContentReporting() then
 		if not ok then return end
 		for i, v in ipairs(constantsModule.ELIGIBLE_COUNTRY_REGION_CODES) do
 			if status == v then
-				var5 = true
+				var1 = true
 				
 				return
 			end
@@ -27,8 +27,8 @@ if getFFlagDSAIllegalContentReporting() then
 	end)
 end
 function isShowEUDSAIllegalContentReportingLink()
-	-- upvalues: isInDSAFeaturesOverrideListModule (ref), getFFlagDSAIllegalContentReporting (ref), var5 (write)
-	return if isInDSAFeaturesOverrideListModule() then true else getFFlagDSAIllegalContentReporting() and var5
+	-- upvalues: isInDSAFeaturesOverrideListModule (ref), getFFlagDSAIllegalContentReporting (ref), var1 (write)
+	return if isInDSAFeaturesOverrideListModule() then true else getFFlagDSAIllegalContentReporting() and var1
 end
 
 return isShowEUDSAIllegalContentReportingLink

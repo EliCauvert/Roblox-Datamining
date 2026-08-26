@@ -65,9 +65,9 @@ local t_7 = {
 }
 local t_8 = { [t_6.id] = t_6, [t_7.id] = t_7 }
 
-local function getCharacter(p0)
+local function getCharacter(p1)
 	-- upvalues: promiseModule (ref), t_5 (ref), t_8 (ref)
-	return promiseModule.resolve(t_5[p0] or t_8[p0])
+	return promiseModule.resolve(t_5[p1] or t_8[p1])
 end
 
 return {
@@ -76,19 +76,19 @@ return {
 		return t_5[p1]
 	end,
 	getCharacter = getCharacter,
-	getDroid = function(p2)
+	getDroid = function(p1)
 		-- upvalues: t_8 (ref)
-		return t_8[p2]
+		return t_8[p1]
 	end,
-	getFriends = function(p3)
+	getFriends = function(p1)
 		-- upvalues: array (ref), getCharacter (ref)
-		return array.map(p3.friends, function(p4)
+		return array.map(p1.friends, function(p2)
 			-- upvalues: getCharacter (copy)
-			return getCharacter(p4)
+			return getCharacter(p2)
 		end)
 	end,
-	getHero = function(p5)
+	getHero = function(p1)
 		-- upvalues: t (ref), t_7 (ref)
-		return if p5 == 5 then t else t_7
+		return if p1 == 5 then t else t_7
 	end
 }

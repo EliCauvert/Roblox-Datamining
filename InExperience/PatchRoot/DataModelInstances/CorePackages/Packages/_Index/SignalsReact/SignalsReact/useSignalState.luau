@@ -13,16 +13,16 @@ local function getSignalVersion(value)
 		return value
 	end
 	
-	local var5 = nil
-	value(function(p0)
-		-- upvalues: var5 (write), dummyObserver (ref)
-		var5 = p0
+	local var1 = nil
+	value(function(p1)
+		-- upvalues: var1 (write), dummyObserver (ref)
+		var1 = p1
 		
 		return dummyObserver
 	end)
-	var5(dummyObserver, true)
+	var1(dummyObserver, true)
 	
-	return var5()
+	return var1()
 end
 
 local function getSignalSnapshot(value)
@@ -45,19 +45,19 @@ return if status then function(value)
 	end, { value }), getSignalSnapshot, subscribeToSignal)
 end else function(value)
 	-- upvalues: reactModule (ref), createEffect (ref)
-	local var6, var7 = reactModule.useState(function()
+	local var1, var2 = reactModule.useState(function()
 		-- upvalues: value (ref)
 		return value(false)
 	end)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var7 (ref), value (ref), createEffect (copy)
-		var7(value(false))
+		-- upvalues: var2 (ref), value (ref), createEffect (copy)
+		var2(value(false))
 		
-		return createEffect(function(p3)
-			-- upvalues: var7 (copy), value (copy)
-			var7(value(p3))
+		return createEffect(function(p1)
+			-- upvalues: var2 (copy), value (copy)
+			var2(value(p1))
 		end)
 	end, { value })
 	
-	return var6
+	return var1
 end

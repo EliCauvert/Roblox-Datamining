@@ -4,20 +4,20 @@ local shareGame = robloxGui.Modules.Settings.Pages.ShareGame
 local roactModule = require(corePackagesService.Packages.Roact)
 local constantsModule = require(shareGame.Constants)
 local themeModule = require(robloxGui.Modules.Settings.Theme)
-local var5 = require(shareGame.getTranslator)()
+local var1 = require(shareGame.getTranslator)()
 local friendsErrorPage = roactModule.PureComponent:extend("FriendsErrorPage")
 
-function friendsErrorPage.render(p0)
-	-- upvalues: roactModule (ref), var5 (ref), constantsModule (ref), themeModule (ref)
-	local layoutOrder = p0.props.LayoutOrder
-	local zIndex = p0.props.ZIndex
-	local var7 = 0
+function friendsErrorPage.render(p1)
+	-- upvalues: roactModule (ref), var1 (ref), constantsModule (ref), themeModule (ref)
+	local layoutOrder = p1.props.LayoutOrder
+	local zIndex = p1.props.ZIndex
+	local var2 = 0
 	
 	local function _()
-		-- upvalues: var7 (write)
-		var7 += 1
+		-- upvalues: var2 (write)
+		var2 += 1
 		
-		return var7
+		return var2
 	end
 	
 	return roactModule.createElement("Frame", {
@@ -36,11 +36,11 @@ function friendsErrorPage.render(p0)
 			BackgroundTransparency = 1,
 			TextTransparency = 0.22,
 			TextWrapped = true,
-			Text = var5:FormatByKey("Feature.SettingsHub.Label.LoadingFriendsListFailed"),
+			Text = var1:FormatByKey("Feature.SettingsHub.Label.LoadingFriendsListFailed"),
 			TextColor3 = constantsModule.Color.GRAY5,
 			TextSize = themeModule.textSize(21),
 			Font = themeModule.font(Enum.Font.SourceSans),
-			LayoutOrder = var7 + 1,
+			LayoutOrder = var2 + 1,
 			Size = UDim2.new(0, 280, 0, 42),
 			TextYAlignment = Enum.TextYAlignment.Top,
 			ZIndex = zIndex

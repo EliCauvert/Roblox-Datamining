@@ -22,41 +22,41 @@ local t_1 = {
 	}
 }
 
-local function _(p0, p1)
-	return typeof(p0) == "string" and string.lower(p0) == p1
+local function _(p1, p2)
+	return typeof(p1) == "string" and string.lower(p1) == p2
 end
 
-local function toolCallLooksLikeRequest(p2, p3)
-	local kind = p2.kind
+local function toolCallLooksLikeRequest(p1, p2)
+	local kind = p1.kind
 	
-	if not (typeof(kind) == "string" and string.lower(kind) == p3) then
-		kind = p2.title
+	if not (typeof(kind) == "string" and string.lower(kind) == p2) then
+		kind = p1.title
 		
-		if typeof(kind) == "string" and string.lower(kind) == p3 then
+		if typeof(kind) == "string" and string.lower(kind) == p2 then
 			return true
 		end
-		local rawInput = p2.rawInput
+		local rawInput = p1.rawInput
 		
 		if typeof(rawInput) ~= "table" then
 			return false
 		end
 		local name = rawInput.name
-		kind = typeof(name) == "string" and string.lower(name) == p3
+		kind = typeof(name) == "string" and string.lower(name) == p2
 		
 		if not kind then
 			local toolName = rawInput.toolName
-			kind = typeof(toolName) == "string" and string.lower(toolName) == p3
+			kind = typeof(toolName) == "string" and string.lower(toolName) == p2
 		end
 		return kind
 	end
 end
 
-local function hasPersistedToolResult(p4)
+local function hasPersistedToolResult(p1)
 	-- upvalues: httpService (ref)
-	if p4.content == nil then
+	if p1.content == nil then
 		return false
 	end
-	for i, v in p4.content do
+	for i, v in p1.content do
 		if v.type == "content" and v.content ~= nil then
 			local content = v.content
 			
@@ -72,21 +72,21 @@ local function hasPersistedToolResult(p4)
 	return false
 end
 
-local function findRequestInTurnState(p5, p6, p7)
+local function findRequestInTurnState(p2, p3, p4)
 	-- upvalues: hasPersistedToolResult (ref), toolCallLooksLikeRequest (ref)
 	local t = {}
 	
-	for i in p5.toolCalls do
+	for i in p2.toolCalls do
 		table.insert(t, i)
 	end
 	table.sort(t)
 	
 	for i_1, v in t do
-		if not p7 or not p7[v] then
-			local var7 = p5.toolCalls[v]
+		if not p4 or not p4[v] then
+			local var1 = p2.toolCalls[v]
 			
-			if (var7.status == nil or var7.status == "pending" or var7.status == "in_progress") and (not hasPersistedToolResult(var7) and toolCallLooksLikeRequest(var7, p6)) then
-				return v, var7.rawInput, var7.turnId, var7.referenceId
+			if (var1.status == nil or var1.status == "pending" or var1.status == "in_progress") and (not hasPersistedToolResult(var1) and toolCallLooksLikeRequest(var1, p3)) then
+				return v, var1.rawInput, var1.turnId, var1.referenceId
 			end
 		end
 	end
@@ -99,17 +99,17 @@ return {
 	SEARCH_LOCAL_TOOL_DEFINITION = t,
 	INSPECT_LOCAL_TOOL_DEFINITION = t_1,
 	toolCallLooksLikeRequest = toolCallLooksLikeRequest,
-	findSearchRequestInTurnState = function(p8, p9)
+	findSearchRequestInTurnState = function(p5, p6)
 		-- upvalues: findRequestInTurnState (ref)
-		return findRequestInTurnState(p8, "search_client_datamodel", p9)
+		return findRequestInTurnState(p5, "search_client_datamodel", p6)
 	end,
-	findInspectRequestInTurnState = function(p10, p11)
+	findInspectRequestInTurnState = function(p5, p6)
 		-- upvalues: findRequestInTurnState (ref)
-		return findRequestInTurnState(p10, "inspect_client_instance", p11)
+		return findRequestInTurnState(p5, "inspect_client_instance", p6)
 	end,
-	formatResultContent = function(p12)
+	formatResultContent = function(p5)
 		-- upvalues: httpService (ref)
-		local ok, status = pcall(httpService.JSONEncode, httpService, p12)
+		local ok, status = pcall(httpService.JSONEncode, httpService, p5)
 		
 		return if ok then if #status > 524288 then {
 			text = httpService:JSONEncode({

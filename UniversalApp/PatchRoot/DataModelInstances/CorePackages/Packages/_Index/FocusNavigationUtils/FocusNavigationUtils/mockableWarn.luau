@@ -1,9 +1,9 @@
 ﻿local _warn = warn
 
 return setmetatable({
-	mock = function(p0)
+	mock = function(p1)
 		-- upvalues: _warn (write)
-		_warn = p0
+		_warn = p1
 	end,
 	unmock = function()
 		-- upvalues: _warn (write)

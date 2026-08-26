@@ -14,51 +14,51 @@ local t = {
 	size = require(foundation.Enums.InputSize).Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), chatInternalTextInputModule (ref)
-	local var8 = withDefaultsModule(p0, t)
-	local var9 = useTokensModule()
-	local var10 = useTextInputVariantsModule(var9, var8.size, var8.variant)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = useTextInputVariantsModule(var2, var1.size, var1.variant)
 	
-	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var8, {
-		width = if var8.width then var8.width else nil,
-		label = var8.label,
-		hint = var8.hint,
-		hasError = var8.hasError,
-		isDisabled = var8.trailingElement ~= nil and var8.isDisabled,
-		isRequired = var8.isRequired,
-		input = function(p2)
-			-- upvalues: reactModule (copy), chatInternalTextInputModule (copy), var8 (ref), var9 (ref), var10 (ref)
+	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var1, {
+		width = if var1.width then var1.width else nil,
+		label = var1.label,
+		hint = var1.hint,
+		hasError = var1.hasError,
+		isDisabled = var1.trailingElement ~= nil and var1.isDisabled,
+		isRequired = var1.isRequired,
+		input = function(p3)
+			-- upvalues: reactModule (copy), chatInternalTextInputModule (copy), var1 (ref), var2 (ref), var3 (ref)
 			return reactModule.createElement(chatInternalTextInputModule, {
 				alwaysMultiLine = true,
 				manualFocusRelease = true,
 				textPaddingOnParent = true,
 				LayoutOrder = 2,
-				size = var8.size,
-				variant = var8.variant,
-				maxLines = var8.maxLines,
-				trailingAlignBottom = var8.trailingElement ~= nil,
-				composerDebug = var8.composerDebug,
-				focusBehavior = var8.focusBehavior,
-				onFocus = var8.onFocusGained,
-				onFocusLost = var8.onFocusLost,
-				onReturnPressed = var8.onReturnPressed,
-				onChanged = var8.onChanged,
-				text = var8.text,
-				hasError = var8.hasError,
-				isDisabled = var8.isDisabled,
-				hasClearButton = var8.hasClearButton,
-				placeholder = var8.placeholder,
+				size = var1.size,
+				variant = var1.variant,
+				maxLines = var1.maxLines,
+				trailingAlignBottom = var1.trailingElement ~= nil,
+				composerDebug = var1.composerDebug,
+				focusBehavior = var1.focusBehavior,
+				onFocus = var1.onFocusGained,
+				onFocusLost = var1.onFocusLost,
+				onReturnPressed = var1.onReturnPressed,
+				onChanged = var1.onChanged,
+				text = var1.text,
+				hasError = var1.hasError,
+				isDisabled = var1.isDisabled,
+				hasClearButton = var1.hasClearButton,
+				placeholder = var1.placeholder,
 				horizontalPadding = {
-					left = UDim.new(0, var9.Padding.Large),
-					right = if var8.trailingElement then UDim.new(0, var9.Padding.XSmall) else var10.container.horizontalPadding
+					left = UDim.new(0, var2.Padding.Large),
+					right = if var1.trailingElement then UDim.new(0, var2.Padding.XSmall) else var3.container.horizontalPadding
 				},
-				trailingElement = var8.trailingElement,
-				ref = p2,
-				testId = `{var8.testId}--input`
+				trailingElement = var1.trailingElement,
+				ref = p3,
+				testId = `{var1.testId}--input`
 			})
 		end,
-		textBoxRef = var8.textBoxRef,
-		ref = p1
+		textBoxRef = var1.textBoxRef,
+		ref = p2
 	}))
 end))

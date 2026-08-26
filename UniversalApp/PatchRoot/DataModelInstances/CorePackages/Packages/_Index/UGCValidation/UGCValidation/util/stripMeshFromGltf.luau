@@ -1,8 +1,8 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0)
+return function(p1)
 	-- upvalues: httpService (ref)
-	local var1 = httpService:JSONDecode(p0)
+	local var1 = httpService:JSONDecode(p1)
 	var1.meshes = nil
 	var1.materials = nil
 	var1.textures = nil
@@ -19,7 +19,7 @@ return function(p0)
 				t_2[i] = true
 			end
 		end
-		local var5 = 0
+		local var2 = 0
 		
 		for i_1, v_1 in ipairs(var1.nodes) do
 			if not t_2[i_1] then
@@ -37,17 +37,17 @@ return function(p0)
 					v_1.children = if #t_3 > 0 then t_3 else nil
 				end
 				table.insert(t, v_1)
-				t_1[i_1] = var5
-				var5 += 1
+				t_1[i_1] = var2
+				var2 += 1
 			end
 		end
 		for i_2, v_2 in ipairs(t) do
 			if v_2.children then
 				for i_3, v_3 in ipairs(v_2.children) do
-					local var9 = v_3 + 1
+					local var3 = v_3 + 1
 					
-					if t_1[var9] then
-						v_2.children[i_3] = t_1[var9]
+					if t_1[var3] then
+						v_2.children[i_3] = t_1[var3]
 					end
 				end
 			end
@@ -57,10 +57,10 @@ return function(p0)
 				if v_3.channels then
 					for i_4, v_4 in ipairs(v_3.channels) do
 						if v_4.target and v_4.target.node then
-							local var6 = v_4.target.node + 1
+							local var4 = v_4.target.node + 1
 							
-							if t_1[var6] then
-								v_4.target.node = t_1[var6]
+							if t_1[var4] then
+								v_4.target.node = t_1[var4]
 							end
 						end
 					end
@@ -73,10 +73,10 @@ return function(p0)
 					local t_3 = {}
 					
 					for i_4, v_4 in ipairs(v_3.nodes) do
-						local var8 = v_4 + 1
+						local var5 = v_4 + 1
 						
-						if t_1[var8] then
-							table.insert(t_3, t_1[var8])
+						if t_1[var5] then
+							table.insert(t_3, t_1[var5])
 						end
 					end
 					v_3.nodes = t_3

@@ -9,13 +9,13 @@ local t = {}
 return function(_)
 	-- upvalues: roduxModule (ref), t (ref), recommendationSourceCreatedModule (ref), llamaModule (ref)
 	return roduxModule.createReducer(t, {
-		[recommendationSourceCreatedModule.name] = function(p0, p1)
+		[recommendationSourceCreatedModule.name] = function(p1, p2)
 			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p0, {
-				[p1.payload.source] = llamaModule.List.reduce(p1.payload.recommendationIds or {}, function(p2, p3)
-					p2[tostring(p3)] = true
+			return llamaModule.Dictionary.join(p1, {
+				[p2.payload.source] = llamaModule.List.reduce(p2.payload.recommendationIds or {}, function(p3, p4)
+					p3[tostring(p4)] = true
 					
-					return p2
+					return p3
 				end, {})
 			})
 		end

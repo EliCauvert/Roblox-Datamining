@@ -24,31 +24,31 @@ local function _()
 	end
 end
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: urlBuilder (ref), fFlagForceGetGameIconsFromThumbnailsDeliveryApi (ref), url (ref), fFlagGetGameIconsFromThumbnailsDeliveryApiIxp (ref), IXPServiceWrapper (ref), appUserLayers (ref), sizeString (ref), fIntGameIconSmallSizePx (ref), fetch (ref), asPromise (ref)
-	local var7
-	p2 = p2 or {}
+	local var1
+	p3 = p3 or {}
 	local addQueryString = urlBuilder.addQueryString
 	local format = string.format
-	local var5 = "%sv1/games/icons"
+	local var2 = "%sv1/games/icons"
 	
 	if fFlagForceGetGameIconsFromThumbnailsDeliveryApi then
-		var7 = url.THUMBNAILSDELIVERY_URL
+		var1 = url.THUMBNAILSDELIVERY_URL
 	elseif fFlagGetGameIconsFromThumbnailsDeliveryApiIxp then
 		local serveThumbnailsFromEdgeLayerData = IXPServiceWrapper:GetLayerData(appUserLayers.ServeThumbnailsFromEdge)
-		var7 = if serveThumbnailsFromEdgeLayerData and serveThumbnailsFromEdgeLayerData.get_gamesicons_from_edge then url.THUMBNAILSDELIVERY_URL else url.THUMBNAILS_URL
+		var1 = if serveThumbnailsFromEdgeLayerData and serveThumbnailsFromEdgeLayerData.get_gamesicons_from_edge then url.THUMBNAILSDELIVERY_URL else url.THUMBNAILS_URL
 	end
 	return asPromise(fetch({
 		method = "GET",
 		analyticsKey = "games-icons.get",
-		network = p2.network,
-		url = addQueryString(format(var5, var7), {
+		network = p3.network,
+		url = addQueryString(format(var2, var1), {
 			format = "png",
-			universeIds = table.concat(p0, ","),
-			size = p1 or sizeString(fIntGameIconSmallSizePx)
+			universeIds = table.concat(p1, ","),
+			size = p2 or sizeString(fIntGameIconSmallSizePx)
 		}),
-		decode = function(p3)
-			return p3.data or {}
+		decode = function(p4)
+			return p4.data or {}
 		end
 	}))
 end

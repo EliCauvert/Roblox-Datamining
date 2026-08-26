@@ -15,11 +15,11 @@ local openValidationErrorModalModule = require(parent.Actions.OpenValidationErro
 local getFFlagUploadMakeupSupportModule = require(parent.Flags.GetFFlagUploadMakeupSupport)
 local promptImportAnimationClipFromVideoAsyncEnabledEngineFeature = game:GetEngineFeature("PromptImportAnimationClipFromVideoAsyncEnabled")
 
-local function updateModelAttachmentsWithWrapDeformers(p0)
+local function updateModelAttachmentsWithWrapDeformers(p1)
 	-- upvalues: robloxReplicatedStorageService (ref)
-	p0.Parent = robloxReplicatedStorageService
+	p1.Parent = robloxReplicatedStorageService
 	
-	for i, v in p0:GetChildren() do
+	for i, v in p1:GetChildren() do
 		if v:IsA("MeshPart") then
 			local wrapDeformer = v:FindFirstChildWhichIsA("WrapDeformer")
 			
@@ -37,33 +37,33 @@ end
 return function(value)
 	-- upvalues: experienceAuthService (ref), promptImportAnimationClipFromVideoAsyncEnabledEngineFeature (ref), openPublishAssetPromptModule (ref), assetService (ref), openPublishAvatarPromptModule (ref), getFFlagUploadMakeupSupportModule (ref), openPublishMakeupLookPromptModule (ref), openPublishAvatarAssetPromptModule (ref), openResultModalModule (ref), avatarCreationService (ref), setAccessoryInstanceModule (ref), setPriceInRobuxModule (ref), updateModelAttachmentsWithWrapDeformers (ref), setHumanoidModelModule (ref), openValidationErrorModalModule (ref)
 	local t = {}
-	table.insert(t, experienceAuthService.OpenAuthPrompt:Connect(function(p1, p2, p3)
+	table.insert(t, experienceAuthService.OpenAuthPrompt:Connect(function(p2, p3, p4)
 		-- upvalues: promptImportAnimationClipFromVideoAsyncEnabledEngineFeature (copy), value (ref), openPublishAssetPromptModule (copy), assetService (copy), openPublishAvatarPromptModule (copy), getFFlagUploadMakeupSupportModule (copy), openPublishMakeupLookPromptModule (copy), openPublishAvatarAssetPromptModule (copy)
-		if #p2 == 1 and p2[1] == Enum.ExperienceAuthScope.CreatorAssetsCreate and not (promptImportAnimationClipFromVideoAsyncEnabledEngineFeature and p3.isVideoToAnimationFlow) then
-			if p3.instanceToPublish then
-				value:dispatch(openPublishAssetPromptModule(p3.instanceToPublish, p3.assetType, p1, p2))
+		if #p3 == 1 and p3[1] == Enum.ExperienceAuthScope.CreatorAssetsCreate and not (promptImportAnimationClipFromVideoAsyncEnabledEngineFeature and p4.isVideoToAnimationFlow) then
+			if p4.instanceToPublish then
+				value:dispatch(openPublishAssetPromptModule(p4.instanceToPublish, p4.assetType, p2, p3))
 				
 				return
-			elseif p3.serializedInstance then
-				value:dispatch(openPublishAssetPromptModule(assetService:DeserializeInstance(p3.serializedInstance), p3.assetType, p1, p2))
+			elseif p4.serializedInstance then
+				value:dispatch(openPublishAssetPromptModule(assetService:DeserializeInstance(p4.serializedInstance), p4.assetType, p2, p3))
 				
 				return
-			elseif p3.outfitToPublish then
-				value:dispatch(openPublishAvatarPromptModule(p1, p2))
+			elseif p4.outfitToPublish then
+				value:dispatch(openPublishAvatarPromptModule(p2, p3))
 				
 				return
-			elseif getFFlagUploadMakeupSupportModule() and p3.makeupLookToPublish then
-				value:dispatch(openPublishMakeupLookPromptModule(p1, p2, p3.makeupEntries))
+			elseif getFFlagUploadMakeupSupportModule() and p4.makeupLookToPublish then
+				value:dispatch(openPublishMakeupLookPromptModule(p2, p3, p4.makeupEntries))
 				
 				return
-			elseif p3.accessoryToPublish then
-				value:dispatch(openPublishAvatarAssetPromptModule(p3.accessoryType, p1, p2))
+			elseif p4.accessoryToPublish then
+				value:dispatch(openPublishAvatarAssetPromptModule(p4.accessoryType, p2, p3))
 			end
 		end
 	end))
-	table.insert(t, assetService.OpenPublishResultModal:Connect(function(p4)
+	table.insert(t, assetService.OpenPublishResultModal:Connect(function(p2)
 		-- upvalues: value (ref), openResultModalModule (copy)
-		value:dispatch(openResultModalModule(p4))
+		value:dispatch(openResultModalModule(p2))
 	end))
 	
 	local function checkNewEventsExist()
@@ -72,32 +72,32 @@ return function(value)
 	end
 	
 	if pcall(checkNewEventsExist) then
-		table.insert(t, avatarCreationService.UgcValidationSuccess:Connect(function(p5, p6, p7)
+		table.insert(t, avatarCreationService.UgcValidationSuccess:Connect(function(p2, p3, p4)
 			-- upvalues: value (ref), getFFlagUploadMakeupSupportModule (copy), avatarCreationService (copy), setAccessoryInstanceModule (copy), setPriceInRobuxModule (copy), updateModelAttachmentsWithWrapDeformers (copy), setHumanoidModelModule (copy)
 			local state = value:getState()
 			
 			if state and (state.promptRequest.promptInfo.promptType == "PublishAvatarAsset" or getFFlagUploadMakeupSupportModule() and state.promptRequest.promptInfo.promptType == "PublishMakeupLook") then
-				value:dispatch(setAccessoryInstanceModule(avatarCreationService:DeserializeAvatarModel(p6)))
+				value:dispatch(setAccessoryInstanceModule(avatarCreationService:DeserializeAvatarModel(p3)))
 				
-				if p7 then
-					value:dispatch(setPriceInRobuxModule(p7))
+				if p4 then
+					value:dispatch(setPriceInRobuxModule(p4))
 				end
 				return
-			elseif state and state.promptRequest.promptInfo.guid == p5 then
-				local var20 = avatarCreationService:DeserializeAvatarModel(p6)
-				updateModelAttachmentsWithWrapDeformers(var20)
-				value:dispatch(setHumanoidModelModule(var20))
-				value:dispatch(setPriceInRobuxModule(p7))
+			elseif state and state.promptRequest.promptInfo.guid == p2 then
+				local var1 = avatarCreationService:DeserializeAvatarModel(p3)
+				updateModelAttachmentsWithWrapDeformers(var1)
+				value:dispatch(setHumanoidModelModule(var1))
+				value:dispatch(setPriceInRobuxModule(p4))
 			end
 		end))
 	end
 	if pcall(checkNewEventsExist) then
-		table.insert(t, avatarCreationService.UgcValidationFailure:Connect(function(p8, p9)
+		table.insert(t, avatarCreationService.UgcValidationFailure:Connect(function(p2, p3)
 			-- upvalues: value (ref), openValidationErrorModalModule (copy)
 			local state = value:getState()
 			
-			if state and state.promptRequest.promptInfo.guid == p8 then
-				value:dispatch(openValidationErrorModalModule(p9))
+			if state and state.promptRequest.promptInfo.guid == p2 then
+				value:dispatch(openValidationErrorModalModule(p3))
 			end
 		end))
 	end

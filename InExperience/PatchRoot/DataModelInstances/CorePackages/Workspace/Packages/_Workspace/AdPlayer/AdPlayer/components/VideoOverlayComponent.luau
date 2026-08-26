@@ -20,12 +20,12 @@ local adDropdownButtonOpen = flagsModule.GetAdDropdownButtonOpen()
 local adPlayerExitButton = flagsModule.GetAdPlayerExitButton()
 local font = Font.new("rbxasset://fonts/families/Inconsolata.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
-local function ExitButtonComponent(p0)
+local function ExitButtonComponent(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), image (ref), adPlayerExitButton (ref)
 	return reactModule.createElement(view, {
 		tag = "size-900 radius-circle",
 		backgroundStyle = useTokens().Color.Common.Scrim,
-		onActivated = p0.showExitConfirmationModal
+		onActivated = p1.showExitConfirmationModal
 	}, {
 		icon = reactModule.createElement(image, {
 			tag = "size-600 radius-circle position-center-center anchor-center-center",
@@ -49,147 +49,147 @@ local function TimerComponent(p1)
 	})
 end
 
-local function ScrimComponent(p3)
+local function ScrimComponent(p1)
 	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), view (ref)
-	local var21 = useTokens()
-	local var22, var23 = reactOtterModule.useAnimatedBinding(0)
+	local var1 = useTokens()
+	local var2, var3 = reactOtterModule.useAnimatedBinding(0)
 	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), var23 (ref), reactOtterModule (copy)
-		if p3.showScrim then
-			var23(reactOtterModule.instant(0))
+		-- upvalues: p1 (ref), var3 (ref), reactOtterModule (copy)
+		if p1.showScrim then
+			var3(reactOtterModule.instant(0))
 		else
-			local var25 = false
+			local var4 = false
 			task.delay(2, function()
-				-- upvalues: var25 (write), var23 (copy), reactOtterModule (copy)
-				if not var25 then
-					var23(reactOtterModule.spring(1))
+				-- upvalues: var4 (write), var3 (copy), reactOtterModule (copy)
+				if not var4 then
+					var3(reactOtterModule.spring(1))
 				end
 			end)
 			
 			return function()
-				-- upvalues: var25 (write)
-				var25 = true
+				-- upvalues: var4 (write)
+				var4 = true
 			end
 		end
 		return nil
-	end, { p3.showScrim })
-	local cloned = table.clone(p3.children or {})
+	end, { p1.showScrim })
+	local cloned = table.clone(p1.children or {})
 	cloned.scrim = reactModule.createElement(view, {
 		tag = "size-full",
 		ZIndex = -1,
-		backgroundStyle = var21.Color.Common.Scrim
+		backgroundStyle = var1.Color.Common.Scrim
 	})
 	
-	return reactModule.createElement(view, { tag = "size-full", ZIndex = 0, GroupTransparency = var22 }, cloned)
+	return reactModule.createElement(view, { tag = "size-full", ZIndex = 0, GroupTransparency = var2 }, cloned)
 end
 
-local function TopContainer(p4)
+local function TopContainer(p1)
 	-- upvalues: reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-1500 anchor-top-center position-top-center padding-x-medium padding-y-medium"
-	}, p4.children)
+	}, p1.children)
 end
 
-local function BottomContainer(p5)
+local function BottomContainer(p1)
 	-- upvalues: reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-700 anchor-bottom-center padding-x-medium",
 		Position = UDim2.new(0.5, 0, 1, -24)
-	}, p5.children)
+	}, p1.children)
 end
 
-local function BottomContainerListContainer(p6)
+local function BottomContainerListContainer(p1)
 	-- upvalues: flagsModule (ref), reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
-		Position = if flagsModule.GetEnableLuaRewardTimerUI() then UDim2.fromOffset(0, p6.yOffset or 0) else nil,
-		tag = if flagsModule.GetEnableLuaRewardTimerUI() then `size-full-500 row {if p6.isRightAligned then "align-x-right" else "align-x-left"} align-y-bottom gap-medium` else "size-full-500 row align-x-left align-y-center gap-medium"
-	}, p6.children)
+		Position = if flagsModule.GetEnableLuaRewardTimerUI() then UDim2.fromOffset(0, p1.yOffset or 0) else nil,
+		tag = if flagsModule.GetEnableLuaRewardTimerUI() then `size-full-500 row {if p1.isRightAligned then "align-x-right" else "align-x-left"} align-y-bottom gap-medium` else "size-full-500 row align-x-left align-y-center gap-medium"
+	}, p1.children)
 end
 
-return reactModule.forwardRef(function(p7, p8)
+return reactModule.forwardRef(function(p2, p3)
 	-- upvalues: reactModule (ref), useTokens (ref), view (ref), stateLayerAffordance (ref), BottomContainer (ref), adDropdownMenu (ref), BottomContainerListContainer (ref), adLabelComponentModule (ref), adDropdownButtonOpen (ref), adDropdownButtonDefault (ref), flagsModule (ref), getRewardInComponentModule (ref), ScrimComponent (ref), linearProgressComponentModule (ref), TimerComponent (ref), TopContainer (ref), ExitButtonComponent (ref)
-	local var26, var27 = reactModule.useState(false)
-	local var28, var29 = reactModule.useState(false)
-	local var30 = useTokens()
+	local var1, var2 = reactModule.useState(false)
+	local var3, var4 = reactModule.useState(false)
+	local var5 = useTokens()
 	
 	local function dismissModals()
-		-- upvalues: p7 (ref), var27 (ref)
-		p7.setPaused(false)
-		p7.dismissModals()
-		var27(false)
+		-- upvalues: p2 (ref), var2 (ref)
+		p2.setPaused(false)
+		p2.dismissModals()
+		var2(false)
 	end
 	
 	local function handleToggleAdsModal()
-		-- upvalues: p7 (ref), var27 (ref), var26 (ref)
-		p7.setPaused(false)
-		p7.dismissModals()
-		var27(false)
+		-- upvalues: p2 (ref), var2 (ref), var1 (ref)
+		p2.setPaused(false)
+		p2.dismissModals()
+		var2(false)
 		
-		if not var26 then
-			p7.setPaused(true)
-			var27(true)
+		if not var1 then
+			p2.setPaused(true)
+			var2(true)
 		end
 	end
 	
-	reactModule.useImperativeHandle(p8, function()
+	reactModule.useImperativeHandle(p3, function()
 		-- upvalues: dismissModals (ref)
 		return { dismissModals = dismissModals }
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var28 (ref), var29 (ref)
-		if var28 then
-			var29(false)
+		-- upvalues: var3 (ref), var4 (ref)
+		if var3 then
+			var4(false)
 		end
-	end, { var28 })
+	end, { var3 })
 	
 	return reactModule.createElement(view, {
 		tag = "size-full",
 		onActivated = function()
-			-- upvalues: p7 (ref), var27 (ref), var29 (ref)
-			p7.setPaused(false)
-			p7.dismissModals()
-			var27(false)
-			var29(true)
+			-- upvalues: p2 (ref), var2 (ref), var4 (ref)
+			p2.setPaused(false)
+			p2.dismissModals()
+			var2(false)
+			var4(true)
 		end,
 		stateLayer = { affordance = stateLayerAffordance.None }
 	}, {
 		persistentBottom = reactModule.createElement(BottomContainer, {}, {
 			adDropdownMenu = reactModule.createElement(adDropdownMenu, {
 				transparency = 0.2,
-				showDropDownMenu = var26,
-				onWhyThisAdActivated = p7.showWhyThisAd,
-				onReportAdActivated = p7.showReportAdModal,
+				showDropDownMenu = var1,
+				onWhyThisAdActivated = p2.showWhyThisAd,
+				onReportAdActivated = p2.showReportAdModal,
 				AnchorPoint = Vector2.new(0, 1),
-				Position = UDim2.fromOffset(0, -var30.Padding.Small)
+				Position = UDim2.fromOffset(0, -var5.Padding.Small)
 			}),
 			leftBottomListContainer = reactModule.createElement(BottomContainerListContainer, {}, {
 				adLabel = reactModule.createElement(adLabelComponentModule, {
-					Image = if var26 then adDropdownButtonOpen else adDropdownButtonDefault,
+					Image = if var1 then adDropdownButtonOpen else adDropdownButtonDefault,
 					handleToggleAdsModal = handleToggleAdsModal
 				})
 			}),
 			rightBottomListContainer = if flagsModule.GetEnableLuaRewardTimerUI() then reactModule.createElement(BottomContainerListContainer, { isRightAligned = true, yOffset = -4 }, {
-				getRewardInComponent = if p7.rewardWaitTime then reactModule.createElement(getRewardInComponentModule, {
-					rewardWaitTime = p7.rewardWaitTime,
-					rewardWaitAlpha = p7.rewardWaitAlpha
+				getRewardInComponent = if p2.rewardWaitTime then reactModule.createElement(getRewardInComponentModule, {
+					rewardWaitTime = p2.rewardWaitTime,
+					rewardWaitAlpha = p2.rewardWaitAlpha
 				}) else nil
 			}) else nil
 		}),
-		scrim = reactModule.createElement(ScrimComponent, { showScrim = var26 or (p7.parentModalOpen or var28) }, {
+		scrim = reactModule.createElement(ScrimComponent, { showScrim = var1 or (p2.parentModalOpen or var3) }, {
 			fadingBottom = reactModule.createElement(BottomContainer, {}, {
 				progressBar = reactModule.createElement(linearProgressComponentModule, {
-					alpha = p7.alpha,
+					alpha = p2.alpha,
 					Size = UDim2.new(1, 0, 0, 2),
 					Position = UDim2.fromScale(0.5, 1),
 					AnchorPoint = Vector2.new(0.5, 1)
 				}),
 				bottomListContainer = reactModule.createElement(BottomContainerListContainer, {}, {
 					dummyAdLabel = reactModule.createElement(adLabelComponentModule, { Visible = false }),
-					timer = reactModule.createElement(TimerComponent, { alpha = p7.alpha, totalDuration = p7.totalDuration })
+					timer = reactModule.createElement(TimerComponent, { alpha = p2.alpha, totalDuration = p2.totalDuration })
 				})
 			}),
 			top = reactModule.createElement(TopContainer, {}, {
-				closeButton = reactModule.createElement(ExitButtonComponent, { showExitConfirmationModal = p7.showExitConfirmationModal })
+				closeButton = reactModule.createElement(ExitButtonComponent, { showExitConfirmationModal = p2.showExitConfirmationModal })
 			})
 		})
 	})

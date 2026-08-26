@@ -2,8 +2,8 @@
 local diagnosticsModule = require(viewRecycler.Core.Diagnostics)
 local recyclingScopeModule = require(viewRecycler.Core.RecyclingScope)
 
-local function directBatch(p0)
-	p0()
+local function directBatch(p1)
+	p1()
 end
 
 return function(p1)
@@ -41,20 +41,20 @@ return function(p1)
 		adapter = {
 			create = function(p2)
 				-- upvalues: itemViewAdapter (ref), t (ref), t_1 (write)
-				local var10 = itemViewAdapter.create(p2)
-				t[var10] = true
-				table.insert(t_1, var10)
+				local var1 = itemViewAdapter.create(p2)
+				t[var1] = true
+				table.insert(t_1, var1)
 				
-				return var10
+				return var1
 			end,
-			destroy = function(p3)
+			destroy = function(p2)
 				-- upvalues: t (ref), t_2 (write)
-				t[p3] = nil
-				table.insert(t_2, p3)
+				t[p2] = nil
+				table.insert(t_2, p2)
 			end,
-			batch = function(p4)
+			batch = function(p2)
 				-- upvalues: batch (ref), flushLifecycleNotifications (ref)
-				local ok, status = pcall(batch, p4)
+				local ok, status = pcall(batch, p2)
 				flushLifecycleNotifications()
 				
 				if not ok then
@@ -63,15 +63,15 @@ return function(p1)
 			end
 		},
 		maxPoolSize = p1.maxPoolSize,
-		onPoolChanged = if diagnostics == nil then nil else function(p5)
+		onPoolChanged = if diagnostics == nil then nil else function(p2)
 			-- upvalues: diagnostics (ref), diagnosticsModule (copy)
 			diagnostics({
 				kind = diagnosticsModule.EventKind.PoolChanged,
-				action = p5.action,
-				itemViewType = p5.viewType,
-				occupiedDelta = p5.occupiedDelta,
-				vacantDelta = p5.vacantDelta,
-				totalDelta = p5.totalDelta
+				action = p2.action,
+				itemViewType = p2.viewType,
+				occupiedDelta = p2.occupiedDelta,
+				vacantDelta = p2.vacantDelta,
+				totalDelta = p2.totalDelta
 			})
 		end
 	})

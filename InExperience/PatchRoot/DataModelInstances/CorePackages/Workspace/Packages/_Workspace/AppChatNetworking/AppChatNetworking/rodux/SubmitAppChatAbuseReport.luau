@@ -11,15 +11,15 @@ local t = {
 	ABUSE_TYPE_OTHER = "ABUSE_CATEGORY_OTHER"
 }
 
-return require(script.Parent.RoduxNetworking).POST(script.Name, function(p0, p1)
+return require(script.Parent.RoduxNetworking).POST(script.Name, function(p1, p2)
 	-- upvalues: httpModule (ref), t (ref)
-	return p0(httpModule.Url.APIS_URL):path("abuse-reporting"):path("v1"):path("abuse-report"):body({
+	return p1(httpModule.Url.APIS_URL):path("abuse-reporting"):path("v1"):path("abuse-report"):body({
 		abuseVector = "web_chat",
 		targetType = "user",
-		category = t[p1.reportCategory] or "ABUSE_CATEGORY_OTHER",
-		comment = if string.len(p1.comment) > 0 then p1.comment else " ",
-		custom = { COMMUNICATION_CHANNEL_ID = p1.conversationId },
-		submitterId = p1.submitterUserId,
-		targetIdStr = p1.reportedUserId
+		category = t[p2.reportCategory] or "ABUSE_CATEGORY_OTHER",
+		comment = if string.len(p2.comment) > 0 then p2.comment else " ",
+		custom = { COMMUNICATION_CHANNEL_ID = p2.conversationId },
+		submitterId = p2.submitterUserId,
+		targetIdStr = p2.reportedUserId
 	})
 end)

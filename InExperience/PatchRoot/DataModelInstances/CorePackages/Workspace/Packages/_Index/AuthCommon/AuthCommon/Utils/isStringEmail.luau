@@ -1,8 +1,8 @@
-﻿return function(p0)
-	if p0 and p0 ~= "" then
-		assert(p0, "")
+﻿return function(p1)
+	if p1 and p1 ~= "" then
+		assert(p1, "")
 		
-		return string.find(p0, "^.+@.+%..+$") ~= nil
+		return string.find(p1, "^.+@.+%..+$") ~= nil
 	end
 	return false
 end

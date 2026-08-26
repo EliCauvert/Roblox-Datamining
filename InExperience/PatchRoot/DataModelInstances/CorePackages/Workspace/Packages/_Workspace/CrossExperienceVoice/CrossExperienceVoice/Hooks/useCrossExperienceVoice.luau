@@ -27,47 +27,59 @@ end
 
 return function(vectorA)
 	-- upvalues: useStore (ref), useDispatch (ref), react (ref), crossExperience (ref), loggerModule (ref), default (ref), voiceStatusChanged (ref), default_1 (ref), playersService (ref), fIntPartyVoiceJoinRequestPulseCheckTimeout (ref), fFlagFireErrorRCCTimeoutSignal (ref), getFFlagEnableCrossExpVoiceMemoryCheck (ref), cevReadinessSyncEngineFeature (ref), experienceService (ref), fFlagEnableCEVForceInitialize (ref), useEffect (ref)
-	local var6 = useStore()
-	local var7 = useDispatch()
+	local var1 = useStore()
+	local var2 = useDispatch()
+	local var3 = react.useRef(nil)
+	local var4 = react.useRef(nil)
+	local var5 = react.useRef(nil)
+	local var6 = react.useRef(nil)
+	local var7 = react.useRef(nil)
 	local var8 = react.useRef(nil)
 	local var9 = react.useRef(nil)
 	local var10 = react.useRef(nil)
 	local var11 = react.useRef(nil)
-	local var12 = react.useRef(nil)
-	local var13 = react.useRef(nil)
-	local var14 = react.useRef(nil)
-	local var15 = react.useRef(nil)
-	local var16 = react.useRef(nil)
-	local var17 = react.useMemo(function()
+	local var12 = react.useMemo(function()
 		-- upvalues: crossExperience (copy)
 		return crossExperience.EventManager.new(if game.PlaceId == 0 then crossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else crossExperience.Constants.EXPERIENCE_TYPE_UGC, true)
 	end, {})
-	local var18 = react.useRef(false)
+	local var13 = react.useRef(false)
 	
 	local _ = function()
-		-- upvalues: var18 (ref), var17 (ref), var6 (ref), loggerModule (copy)
-		if var18.current then
+		-- upvalues: var13 (ref), var12 (ref), var1 (ref), loggerModule (copy)
+		if var13.current then
 			return
 		end
-		var18.current = true
-		var17:subscribe(var6, loggerModule)
+		var13.current = true
+		var12:subscribe(var1, loggerModule)
 	end
 	
 	local _ = function()
-		-- upvalues: var18 (ref), var17 (ref), var6 (ref), loggerModule (copy)
-		if var18.current then
-			var18.current = false
-			var17:unsubscribe(var6, loggerModule)
+		-- upvalues: var13 (ref), var12 (ref), var1 (ref), loggerModule (copy)
+		if var13.current then
+			var13.current = false
+			var12:unsubscribe(var1, loggerModule)
 			
 			return
 		end
 	end
 	
-	local var19 = function()
-		-- upvalues: var18 (ref), var17 (ref), var6 (ref), loggerModule (copy), var9 (ref), var10 (ref), var11 (ref), var14 (ref), var15 (ref), var16 (ref), var8 (ref)
-		if var18.current then
-			var18.current = false
-			var17:unsubscribe(var6, loggerModule)
+	local var14 = function()
+		-- upvalues: var13 (ref), var12 (ref), var1 (ref), loggerModule (copy), var4 (ref), var5 (ref), var6 (ref), var9 (ref), var10 (ref), var11 (ref), var3 (ref)
+		if var13.current then
+			var13.current = false
+			var12:unsubscribe(var1, loggerModule)
+		end
+		if var4.current then
+			var4.current:Disconnect()
+			var4.current = nil
+		end
+		if var5.current then
+			var5.current:Disconnect()
+			var5.current = nil
+		end
+		if var6.current then
+			var6.current:Disconnect()
+			var6.current = nil
 		end
 		if var9.current then
 			var9.current:Disconnect()
@@ -81,29 +93,17 @@ return function(vectorA)
 			var11.current:Disconnect()
 			var11.current = nil
 		end
-		if var14.current then
-			var14.current:Disconnect()
-			var14.current = nil
-		end
-		if var15.current then
-			var15.current:Disconnect()
-			var15.current = nil
-		end
-		if var16.current then
-			var16.current:Disconnect()
-			var16.current = nil
-		end
-		if var8.current then
-			var8.current:Disconnect()
-			var8.current = nil
+		if var3.current then
+			var3.current:Disconnect()
+			var3.current = nil
 		end
 	end
 	
-	local var20 = function()
-		-- upvalues: var14 (ref), default (copy), var7 (ref), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy), fIntPartyVoiceJoinRequestPulseCheckTimeout (copy), var8 (ref), var6 (ref), fFlagFireErrorRCCTimeoutSignal (copy), var17 (ref), vectorA (ref), var15 (ref), getFFlagEnableCrossExpVoiceMemoryCheck (copy), var16 (ref), var9 (ref), var18 (ref), loggerModule (copy), cevReadinessSyncEngineFeature (copy), var10 (ref), var11 (ref), experienceService (copy), var12 (ref), var13 (ref), fFlagEnableCEVForceInitialize (copy)
-		var14.current = default.JoinRequested.Event:Connect(function()
-			-- upvalues: var7 (copy), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy)
-			var7(voiceStatusChanged({
+	local var15 = function()
+		-- upvalues: var9 (ref), default (copy), var2 (ref), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy), fIntPartyVoiceJoinRequestPulseCheckTimeout (copy), var3 (ref), var1 (ref), fFlagFireErrorRCCTimeoutSignal (copy), var12 (ref), vectorA (ref), var10 (ref), getFFlagEnableCrossExpVoiceMemoryCheck (copy), var11 (ref), var4 (ref), var13 (ref), loggerModule (copy), cevReadinessSyncEngineFeature (copy), var5 (ref), var6 (ref), experienceService (copy), var7 (ref), var8 (ref), fFlagEnableCEVForceInitialize (copy)
+		var9.current = default.JoinRequested.Event:Connect(function()
+			-- upvalues: var2 (copy), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy)
+			var2(voiceStatusChanged({
 				status = crossExperience.Constants.VOICE_STATUS.RCC_CONNECTING
 			}))
 			default_1:logPartyVoiceStatusChanged({
@@ -115,20 +115,20 @@ return function(vectorA)
 		end)
 		
 		if fIntPartyVoiceJoinRequestPulseCheckTimeout > 0 then
-			var8.current = default.JoinRequestPulseCheck.Event:Connect(function()
-				-- upvalues: var6 (copy), crossExperience (copy), fFlagFireErrorRCCTimeoutSignal (copy), var17 (copy), playersService (copy), var7 (copy), voiceStatusChanged (copy), vectorA (copy), default (copy)
-				local state = var6:getState()
+			var3.current = default.JoinRequestPulseCheck.Event:Connect(function()
+				-- upvalues: var1 (copy), crossExperience (copy), fFlagFireErrorRCCTimeoutSignal (copy), var12 (copy), playersService (copy), var2 (copy), voiceStatusChanged (copy), vectorA (copy), default (copy)
+				local state = var1:getState()
 				
 				if state and state.Squad and (state.Squad.CrossExperienceVoice and state.Squad.CrossExperienceVoice.Experience.voiceStatus == crossExperience.Constants.VOICE_STATUS.RCC_CONNECTING) then
 					if fFlagFireErrorRCCTimeoutSignal then
-						var17:notify(crossExperience.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
+						var12:notify(crossExperience.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
 							status = crossExperience.Constants.VOICE_STATUS.ERROR_RCC_TIMEOUT,
 							userId = if playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else ""
 						})
 						
 						return
 					end
-					var7(voiceStatusChanged({
+					var2(voiceStatusChanged({
 						status = crossExperience.Constants.VOICE_STATUS.ERROR_RCC_TIMEOUT
 					}))
 					
@@ -139,10 +139,10 @@ return function(vectorA)
 				end
 			end)
 		end
-		var15.current = default.JoinRequestSubmitted.Event:Connect(function(p0)
-			-- upvalues: var7 (copy), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy)
-			if not p0 then
-				var7(voiceStatusChanged({
+		var10.current = default.JoinRequestSubmitted.Event:Connect(function(p1)
+			-- upvalues: var2 (copy), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy)
+			if not p1 then
+				var2(voiceStatusChanged({
 					status = crossExperience.Constants.VOICE_STATUS.ERROR_START_BACKGROUND_DM
 				}))
 				default_1:logPartyVoiceStatusChanged({
@@ -155,10 +155,10 @@ return function(vectorA)
 		end)
 		
 		if getFFlagEnableCrossExpVoiceMemoryCheck() then
-			var16.current = default.JoinFeasibilityCheckPerformed.Event:Connect(function(p1)
-				-- upvalues: var7 (copy), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy)
+			var11.current = default.JoinFeasibilityCheckPerformed.Event:Connect(function(p1)
+				-- upvalues: var2 (copy), voiceStatusChanged (copy), crossExperience (copy), default_1 (copy), playersService (copy)
 				if not p1 then
-					var7(voiceStatusChanged({
+					var2(voiceStatusChanged({
 						status = crossExperience.Constants.VOICE_STATUS.ERROR_JOIN_FEASIBILITY_CHECK_FAILED
 					}))
 					default_1:logPartyVoiceStatusChanged({
@@ -170,65 +170,65 @@ return function(vectorA)
 				end
 			end)
 		end
-		var9.current = default.ExperienceJoined.Event:Connect(function()
-			-- upvalues: var18 (copy), var17 (copy), var6 (copy), loggerModule (copy), cevReadinessSyncEngineFeature (copy), default (copy)
-			if not var18.current then
-				var18.current = true
-				var17:subscribe(var6, loggerModule)
+		var4.current = default.ExperienceJoined.Event:Connect(function()
+			-- upvalues: var13 (copy), var12 (copy), var1 (copy), loggerModule (copy), cevReadinessSyncEngineFeature (copy), default (copy)
+			if not var13.current then
+				var13.current = true
+				var12:subscribe(var1, loggerModule)
 			end
 			if cevReadinessSyncEngineFeature then
 				default:signalCevReadinessSync()
 			end
 		end)
-		var10.current = default.ExperienceJoinFailed.Event:Connect(function()
-			-- upvalues: var18 (copy), var17 (copy), var6 (copy), loggerModule (copy)
-			if var18.current then
-				var18.current = false
-				var17:unsubscribe(var6, loggerModule)
+		var5.current = default.ExperienceJoinFailed.Event:Connect(function()
+			-- upvalues: var13 (copy), var12 (copy), var1 (copy), loggerModule (copy)
+			if var13.current then
+				var13.current = false
+				var12:unsubscribe(var1, loggerModule)
 				
 				return
 			end
 		end)
-		var11.current = default.ExperienceLeft.Event:Connect(function()
-			-- upvalues: var18 (copy), var17 (copy), var6 (copy), loggerModule (copy)
-			if var18.current then
-				var18.current = false
-				var17:unsubscribe(var6, loggerModule)
+		var6.current = default.ExperienceLeft.Event:Connect(function()
+			-- upvalues: var13 (copy), var12 (copy), var1 (copy), loggerModule (copy)
+			if var13.current then
+				var13.current = false
+				var12:unsubscribe(var1, loggerModule)
 				
 				return
 			end
 		end)
 		
 		if experienceService then
-			var12.current = experienceService:RegisterForExperienceJoin(function()
-				-- upvalues: var18 (copy), var17 (copy), var6 (copy), loggerModule (copy)
+			var7.current = experienceService:RegisterForExperienceJoin(function()
+				-- upvalues: var13 (copy), var12 (copy), var1 (copy), loggerModule (copy)
 				if game.PlaceId == 0 then
-					if not var18.current then return end
-					var18.current = false
-					var17:unsubscribe(var6, loggerModule)
+					if not var13.current then return end
+					var13.current = false
+					var12:unsubscribe(var1, loggerModule)
 				end
 			end)
-			var13.current = experienceService:RegisterForExperienceLeave(function()
-				-- upvalues: var17 (copy), var6 (copy), loggerModule (copy)
+			var8.current = experienceService:RegisterForExperienceLeave(function()
+				-- upvalues: var12 (copy), var1 (copy), loggerModule (copy)
 				if game.PlaceId == 0 then
-					var17:restoreStateFromBackground(var6, loggerModule)
+					var12:restoreStateFromBackground(var1, loggerModule)
 				end
 			end)
 		end
 		if fFlagEnableCEVForceInitialize and vectorA and vectorA.forceInitializeStoreOnMount then
-			if var18.current then return end
-			var18.current = true
-			var17:subscribe(var6, loggerModule)
+			if var13.current then return end
+			var13.current = true
+			var12:subscribe(var1, loggerModule)
 		end
 	end
 	
 	useEffect(function()
-		-- upvalues: var20 (ref), var19 (ref)
-		var20()
+		-- upvalues: var15 (ref), var14 (ref)
+		var15()
 		
 		return function()
-			-- upvalues: var19 (copy)
-			var19()
+			-- upvalues: var14 (copy)
+			var14()
 		end
 	end, {})
 	

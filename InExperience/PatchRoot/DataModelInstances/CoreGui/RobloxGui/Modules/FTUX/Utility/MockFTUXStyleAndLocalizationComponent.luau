@@ -5,14 +5,14 @@ local renderWithCoreScriptsStyleProviderModule = require(script.Parent.Parent.Pa
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
 
-return function(p0)
+return function(p1)
 	-- upvalues: roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), renderWithCoreScriptsStyleProviderModule (ref)
 	return roactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		FTUXMock = roactModule.createElement("ScreenGui", {}, {
 			ThemeProvider = renderWithCoreScriptsStyleProviderModule({
-				Frame = roactModule.createElement("Frame", { Size = UDim2.new(1, 0, 1, 0) }, p0)
+				Frame = roactModule.createElement("Frame", { Size = UDim2.new(1, 0, 1, 0) }, p1)
 			})
 		})
 	})

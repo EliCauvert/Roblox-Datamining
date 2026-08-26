@@ -1,9 +1,9 @@
 ﻿return require(game:GetService("CorePackages").Packages.Rodux).createReducer({ tryingOn = false, assetId = nil, assetTypeId = nil }, {
-	[require(script.Parent.Parent.Actions.SetTryingOnInfo).name] = function(_, p0)
+	[require(script.Parent.Parent.Actions.SetTryingOnInfo).name] = function(_, p1)
 		return {
-			tryingOn = p0.tryingOn,
-			assetId = p0.assetId,
-			assetTypeId = p0.assetTypeId
+			tryingOn = p1.tryingOn,
+			assetId = p1.assetId,
+			assetTypeId = p1.assetTypeId
 		}
 	end
 })

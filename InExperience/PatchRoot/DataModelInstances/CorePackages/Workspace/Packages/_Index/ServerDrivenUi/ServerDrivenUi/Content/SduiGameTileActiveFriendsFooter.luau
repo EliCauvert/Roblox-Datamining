@@ -12,26 +12,26 @@ local userProfilesModule = require(parent.UserProfiles)
 local useUserProfilesFetch = userProfilesModule.Hooks.useUserProfilesFetch
 local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	local t = {}
 	
-	for i = 1, p1 do
-		t[i] = p0[i].userId
+	for i = 1, p2 do
+		t[i] = p1[i].userId
 	end
 	return t
 end
 
-local function getDisplayText(p2, p3, p4)
+local function getDisplayText(p3, p4, p5)
 	local t = {}
 	
-	for i = 1, p4 do
-		t[i] = p2[i].displayName
+	for i = 1, p5 do
+		t[i] = p3[i].displayName
 	end
-	return table.concat(t, p3)
+	return table.concat(t, p4)
 end
 
-local function alphabeticalSort(x, p5)
-	return if x.displayName then if p5.displayName then x.displayName:lower() < p5.displayName:lower() else true else false
+local function alphabeticalSort(x, p6)
+	return if x.displayName then if p6.displayName then x.displayName:lower() < p6.displayName:lower() else true else false
 end
 
 local function getSortedFriendDisplayNames(p6, p7)
@@ -60,22 +60,22 @@ return reactModule.memo(function(p8)
 	local size = p8.size
 	local zIndex = p8.zIndex
 	local position = p8.position
-	local var13 = useTokens()
-	local iconWidth = p8.iconWidth or var13.Size.Size_500
-	local var15 = reactModule.useCallback(function(p9)
+	local var1 = useTokens()
+	local iconWidth = p8.iconWidth or var1.Size.Size_500
+	local var2 = reactModule.useCallback(function(p9)
 		-- upvalues: p8 (ref), sduiParsers (copy), sduiActionType (copy)
 		if p8.onActivated then
 			p8.onActivated(p9)
 			
 			return
 		end
-		local var25 = sduiParsers.safeParseCallback({
+		local var3 = sduiParsers.safeParseCallback({
 			actionType = sduiActionType.OpenJoinFriends,
 			actionParams = { placeId = p8.placeId, universeId = p8.universeId }
 		}, p8.sduiContext, p8.analyticsContext)
 		
-		if var25 then
-			var25(p9)
+		if var3 then
+			var3(p9)
 		end
 	end, {
 		p8.placeId,
@@ -84,32 +84,32 @@ return reactModule.memo(function(p8)
 		p8.onActivated,
 		p8.sduiContext
 	})
-	local var16 = useLocalization({ separator = "Feature.GameDetails.Label.FriendsSeparator" })
-	local var17 = signalsReactModule.useSignalState(sduiInGameFriendsDataModule.getInGameFriendsByGame)
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var17 (ref), p8 (ref)
+	local var3 = useLocalization({ separator = "Feature.GameDetails.Label.FriendsSeparator" })
+	local var4 = signalsReactModule.useSignalState(sduiInGameFriendsDataModule.getInGameFriendsByGame)
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), p8 (ref)
 		local t = {}
 		
-		for i, v in var17[p8.universeId] or {} do
+		for i, v in var4[p8.universeId] or {} do
 			table.insert(t, i)
 		end
 		return t
-	end, { var17, p8.universeId })
-	local var19 = useUserProfilesFetch({
-		userIds = var18,
+	end, { var4, p8.universeId })
+	local var6 = useUserProfilesFetch({
+		userIds = var5,
 		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds,
-		skip = #var18 == 0
+		skip = #var5 == 0
 	})
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: getSortedFriendDisplayNames (copy), var18 (ref), var19 (ref)
-		return getSortedFriendDisplayNames(var18, var19)
-	end, { var18, var19 })
-	local minValue = math.min(p8.maxAvatars or 3, #var20)
-	local var22 = getDisplayText(var20, var16.separator, minValue)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: getSortedFriendDisplayNames (copy), var5 (ref), var6 (ref)
+		return getSortedFriendDisplayNames(var5, var6)
+	end, { var5, var6 })
+	local minValue = math.min(p8.maxAvatars or 3, #var7)
+	local var8 = getDisplayText(var7, var3.separator, minValue)
 	local t = {}
 	
 	for i = 1, minValue do
-		t[i] = var20[i].userId
+		t[i] = var7[i].userId
 	end
 	local t_1 = {}
 	
@@ -117,7 +117,7 @@ return reactModule.memo(function(p8)
 		t_1[`userId_{i_1}`] = reactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 0,
 			LayoutOrder = i_1,
-			BackgroundColor3 = var13.Color.Content.Muted.Color3,
+			BackgroundColor3 = var1.Color.Content.Muted.Color3,
 			Image = `rbxthumb://type=AvatarHeadShot&id={t[i_1]}&w=100&h=100`,
 			Size = UDim2.fromOffset(iconWidth, iconWidth),
 			Position = UDim2.fromOffset((i_1 - 1) * iconWidth / 2, 0)
@@ -127,7 +127,7 @@ return reactModule.memo(function(p8)
 				Transparency = 0,
 				Thickness = 1,
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-				Color = var13.Color.System.Emphasis.Color3
+				Color = var1.Color.System.Emphasis.Color3
 			})
 		})
 	end
@@ -139,15 +139,15 @@ return reactModule.memo(function(p8)
 		layoutOrder = layoutOrder,
 		zIndex = zIndex,
 		sduiContext = p8.sduiContext,
-		textIconGap = var13.Gap.Small,
-		leftText = var22,
+		textIconGap = var1.Gap.Small,
+		leftText = var8,
 		leftTextFlexMode = Enum.UIFlexMode.Shrink,
 		leftIconComponent = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, t_1),
-		onActivated = var15,
+		onActivated = var2,
 		testId = p8.testId
 	})
 end)

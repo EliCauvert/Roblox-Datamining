@@ -1,59 +1,59 @@
 ﻿local _ = require(script.Parent.ProfilerDataFormatV2)
 local t = {
-	getDurations = function(p0, p1)
-		if p1 > 0 then
-			local var1 = p0.Nodes[p1]
+	getDurations = function(p1, p2)
+		if p2 > 0 then
+			local var1 = p1.Nodes[p2]
 			assert(var1 ~= nil)
 			
 			return var1.TotalDuration, var1.Duration
 		end
 		local var2 = 0
 		
-		for i, v in p0.Categories do
-			var2 += p0.Nodes[v.NodeId].TotalDuration
+		for i, v in p1.Categories do
+			var2 += p1.Nodes[v.NodeId].TotalDuration
 		end
 		return var2, 0
 	end,
-	getName = function(_, p2)
-		return p2 and p2.Name
+	getName = function(_, p3)
+		return p3 and p3.Name
 	end,
 	getSourceName = function(_, p3)
 		return p3 and p3.Source
 	end,
-	getLine = function(_, p4)
-		return p4 and p4.Line
+	getLine = function(_, p3)
+		return p3 and p3.Line
 	end,
-	getNativeFlag = function(_, p5)
-		return if p5 then p5.IsNative else false
+	getNativeFlag = function(_, p3)
+		return if p3 then p3.IsNative else false
 	end,
-	getPluginFlag = function(_, p6)
-		return if p6 then p6.IsPlugin else false
+	getPluginFlag = function(_, p3)
+		return if p3 then p3.IsPlugin else false
 	end,
-	standardizeChildren = function(_, p7)
-		return p7 and p7.Children
+	standardizeChildren = function(_, p3)
+		return p3 and p3.Children
 	end,
-	formatSessionLength = function(p8)
-		return if p8 then string.format("%02i:%02i:%02i.%04i", p8 / 3600000, p8 / 60000 % 60, p8 / 1000 % 60, p8 % 1000) else nil
+	formatSessionLength = function(p3)
+		return if p3 then string.format("%02i:%02i:%02i.%04i", p3 / 3600000, p3 / 60000 % 60, p3 / 1000 % 60, p3 % 1000) else nil
 	end,
-	formatTimer = function(p9)
-		return if p9 == nil then "" elseif p9 == 0 then "" elseif p9 >= 60 then string.format("%dm", p9 / 60) else string.format("%ds", p9)
+	formatTimer = function(p3)
+		return if p3 == nil then "" elseif p3 == 0 then "" elseif p3 >= 60 then string.format("%dm", p3 / 60) else string.format("%ds", p3)
 	end,
-	formatFrequency = function(p10)
-		return if p10 < 1000 then tostring(p10) .. " Hz" else tostring(p10 / 1000) .. " KHz"
+	formatFrequency = function(p3)
+		return if p3 < 1000 then tostring(p3) .. " Hz" else tostring(p3 / 1000) .. " KHz"
 	end
 }
 
-function t.getSourceLocationString(p11, p12, p13)
+function t.getSourceLocationString(p3, p4, p5)
 	-- upvalues: t (ref)
-	local sourceName = t.getSourceName(p11, p12)
-	local var4 = if sourceName and #sourceName ~= 0 then sourceName else p13
-	local var5 = var4
-	local line = t.getLine(p11, p12)
+	local sourceName = t.getSourceName(p3, p4)
+	local var3 = if sourceName and #sourceName ~= 0 then sourceName else p5
+	local var4 = var3
+	local line = t.getLine(p3, p4)
 	
 	if line and line >= 1 then
-		var5 = string.format("%s:%s", var4, tostring(line))
+		var4 = string.format("%s:%s", var3, tostring(line))
 	end
-	return var5
+	return var4
 end
 
 return t

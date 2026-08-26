@@ -15,8 +15,8 @@ while not localPlayer do
 	playersService.Changed:wait()
 	localPlayer = playersService.LocalPlayer
 end
-local function _(p0)
-	return Color3.new(p0.r ^ 2.2, p0.g ^ 2.2, p0.b ^ 2.2)
+local function _(p1)
+	return Color3.new(p1.r ^ 2.2, p1.g ^ 2.2, p1.b ^ 2.2)
 end
 
 local function addPartsToGame(...)
@@ -66,12 +66,12 @@ local function getLocalHumanoid()
 end
 
 local _ = function(p1, p2)
-	local var22 = p1 ^ p2
+	local var1 = p1 ^ p2
 	
-	if var22 ~= var22 then
-		var22 = math.abs(p1) ^ p2
+	if var1 ~= var1 then
+		var1 = math.abs(p1) ^ p2
 	end
-	return var22
+	return var1
 end
 
 local t = {
@@ -270,29 +270,29 @@ function t_3.new(_)
 		tbl.guiMenuIsOpen = false
 	end)
 	tbl.inputUserCFrame = VRService.GuiInputUserCFrame
-	VRService.Changed:connect(function(p3)
+	VRService.Changed:connect(function(p1)
 		-- upvalues: tbl (ref), VRService (copy)
-		if p3 == "GuiInputUserCFrame" then
+		if p1 == "GuiInputUserCFrame" then
 			tbl.inputUserCFrame = VRService.GuiInputUserCFrame
 			
 			return
-		elseif p3 == "PointerHitCFrame" or p3 == "DidPointerHit" then
+		elseif p1 == "PointerHitCFrame" or p1 == "DidPointerHit" then
 			tbl:cursorInputsChanged()
 			
 			return
-		elseif p3 == "VRSessionState" and VRService.VRSessionState == Enum.VRSessionState.Focused then
+		elseif p1 == "VRSessionState" and VRService.VRSessionState == Enum.VRSessionState.Focused then
 			tbl:updateInputUserCFrame()
 		end
 	end)
-	VRService.LaserPointerTriggered:connect(function(p4)
+	VRService.LaserPointerTriggered:connect(function(p1)
 		-- upvalues: tbl (ref)
-		if game:GetEngineFeature("ImprovedTriggerFire") and p4.UserInputState ~= Enum.UserInputState.End then return end
-		if (p4.KeyCode == Enum.KeyCode.ButtonR1 or p4.KeyCode == Enum.KeyCode.ButtonR2 or (p4.KeyCode == Enum.KeyCode.ButtonR3 or p4.KeyCode == Enum.KeyCode.ButtonA) or p4.KeyCode == Enum.KeyCode.ButtonB) and tbl.laserHand ~= 0 then
+		if game:GetEngineFeature("ImprovedTriggerFire") and p1.UserInputState ~= Enum.UserInputState.End then return end
+		if (p1.KeyCode == Enum.KeyCode.ButtonR1 or p1.KeyCode == Enum.KeyCode.ButtonR2 or (p1.KeyCode == Enum.KeyCode.ButtonR3 or p1.KeyCode == Enum.KeyCode.ButtonA) or p1.KeyCode == Enum.KeyCode.ButtonB) and tbl.laserHand ~= 0 then
 			tbl.laserHand = 0
 			tbl:updateInputUserCFrame()
 			
 			return
-		elseif (p4.KeyCode == Enum.KeyCode.ButtonL1 or p4.KeyCode == Enum.KeyCode.ButtonL2 or (p4.KeyCode == Enum.KeyCode.ButtonL3 or p4.KeyCode == Enum.KeyCode.ButtonX) or p4.KeyCode == Enum.KeyCode.ButtonY) and tbl.laserHand ~= 1 then
+		elseif (p1.KeyCode == Enum.KeyCode.ButtonL1 or p1.KeyCode == Enum.KeyCode.ButtonL2 or (p1.KeyCode == Enum.KeyCode.ButtonL3 or p1.KeyCode == Enum.KeyCode.ButtonX) or p1.KeyCode == Enum.KeyCode.ButtonY) and tbl.laserHand ~= 1 then
 			tbl.laserHand = 1
 			tbl:updateInputUserCFrame()
 		end
@@ -311,10 +311,10 @@ function t_3.hasAnyHandController()
 	return VRService:GetUserCFrameEnabled(Enum.UserCFrame.RightHand) or VRService:GetUserCFrameEnabled(Enum.UserCFrame.LeftHand)
 end
 
-function t_3.getModeName(p5)
+function t_3.getModeName(p1)
 	-- upvalues: t (ref)
 	for i, v in pairs(t) do
-		if p5 == v then
+		if p1 == v then
 			return i
 		end
 	end
@@ -323,7 +323,7 @@ end
 
 function t_3:updateInputUserCFrame()
 	-- upvalues: enableUserInputCFrameLogging (ref), VRService (ref)
-	local var24 = if enableUserInputCFrameLogging then VRService.GuiInputUserCFrame else nil
+	local var1 = if enableUserInputCFrameLogging then VRService.GuiInputUserCFrame else nil
 	
 	if VRService:GetUserCFrameEnabled(Enum.UserCFrame.RightHand) and self.laserHand == 0 then
 		VRService.GuiInputUserCFrame = Enum.UserCFrame.RightHand
@@ -336,7 +336,7 @@ function t_3:updateInputUserCFrame()
 	else
 		VRService.GuiInputUserCFrame = Enum.UserCFrame.Head
 	end
-	if enableUserInputCFrameLogging and var24 ~= VRService.GuiInputUserCFrame then
+	if enableUserInputCFrameLogging and var1 ~= VRService.GuiInputUserCFrame then
 		print("Updated GuiInputUserCFrame is: " .. tostring(VRService.GuiInputUserCFrame))
 	end
 end
@@ -373,25 +373,25 @@ function t_3:onModeChanged(_)
 	end
 end
 
-function t_3.setMode(_, p6)
+function t_3.setMode(_, p2)
 	-- upvalues: t (ref), VRService (ref)
-	if p6 == t.Disabled or p6 == t.Hidden then
+	if p2 == t.Disabled or p2 == t.Hidden then
 		VRService.LaserPointer = Enum.VRLaserPointerMode.Disabled
 		
 		return
-	elseif p6 == t.Pointer or p6 == t.Navigation then
+	elseif p2 == t.Pointer or p2 == t.Navigation then
 		VRService.LaserPointer = Enum.VRLaserPointerMode.Pointer
 		
 		return
-	elseif p6 == t.DualPointer then
+	elseif p2 == t.DualPointer then
 		VRService.LaserPointer = Enum.VRLaserPointerMode.DualPointer
 	end
 end
 
 function t_3.setEnableAmbidexterousPointer(_, _) end
 
-function t_3.calculateLaunchVelocity(_, p7, p8, p9)
-	return -(math.sqrt(p7 / 0.707106781187) * p8) / math.sqrt(2 * p9 * 0.707106781187 + 2 * p8 * 0.707106781187)
+function t_3.calculateLaunchVelocity(_, p2, p3, p4)
+	return -(math.sqrt(p2 / 0.707106781187) * p3) / math.sqrt(2 * p4 * 0.707106781187 + 2 * p3 * 0.707106781187)
 end
 
 function t_3.isHeadMounted(_)
@@ -403,23 +403,23 @@ function t_3:shouldForcePointer()
 	return self.externalForcePointer or self.guiMenuIsOpen
 end
 
-function t_3:setForcePointer(p10)
-	self.externalForcePointer = p10
+function t_3:setForcePointer(p2)
+	self.externalForcePointer = p2
 end
 
 function t_3.getNavigationOrigin(_)
 	-- upvalues: getLocalHumanoid (ref)
-	local var25 = getLocalHumanoid()
+	local var1 = getLocalHumanoid()
 	
-	if not var25 then return end
-	local torso = var25.Torso
+	if not var1 then return end
+	local torso = var1.Torso
 	
 	if torso then
-		return torso.Position + Vector3.new(0, (-(torso.Size.Y / 2)) - (if var25.RigType == Enum.HumanoidRigType.R6 then 2 else var25.HipHeight), 0)
+		return torso.Position + Vector3.new(0, (-(torso.Size.Y / 2)) - (if var1.RigType == Enum.HumanoidRigType.R6 then 2 else var1.HipHeight), 0)
 	end
 end
 
-function t_3.horzDistanceFromCharacter(_, p11)
+function t_3.horzDistanceFromCharacter(_, p2)
 	-- upvalues: localPlayer (write)
 	local character = localPlayer.Character
 	
@@ -428,19 +428,19 @@ function t_3.horzDistanceFromCharacter(_, p11)
 	end
 	local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
 	
-	return if humanoidRootPart then ((humanoidRootPart:GetRenderCFrame().p - p11) * Vector3.new(1, 0, 1)).magnitude else 1e999
+	return if humanoidRootPart then ((humanoidRootPart:GetRenderCFrame().p - p2) * Vector3.new(1, 0, 1)).magnitude else 1e999
 end
 
-function t_3:onNavigateAction(_, p12, _)
+function t_3:onNavigateAction(_, p2, _)
 	-- upvalues: VRService (ref)
-	if p12 == Enum.UserInputState.Begin then
+	if p2 == Enum.UserInputState.Begin then
 		VRService:RequestNavigation(CFrame.new(self.navHitPoint, self.navHitPoint + self.navHitNormal) * CFrame.Angles(1.570796326795, 0, 0), self.inputUserCFrame)
 	end
 end
 
-function t_3.setNavigationActionEnabled(value, p13)
+function t_3.setNavigationActionEnabled(value, p2)
 	-- upvalues: contextActionService (ref)
-	if p13 then
+	if p2 then
 		contextActionService:BindCoreAction("LaserPointerNavigate", function(...)
 			-- upvalues: value (ref)
 			value:onNavigateAction(...)
@@ -451,57 +451,57 @@ function t_3.setNavigationActionEnabled(value, p13)
 	contextActionService:UnbindCoreAction("LaserPointerNavigate")
 end
 
-function t_3:setArcLaunchParams(p14, p15, p16, p17)
-	local var27 = math.cos(p14) * p15
-	local var28 = math.sin(p14) * p15
+function t_3:setArcLaunchParams(p2, p3, p4, p5)
+	local var1 = math.cos(p2) * p3
+	local var2 = math.sin(p2) * p3
 	
-	if var27 == 0 then
-		var27 = 0.000001
+	if var1 == 0 then
+		var1 = 0.000001
 	end
-	self.parabola.A = -(0.5 * p16) * (1 / var27 ^ 2)
-	self.parabola.B = var28 / var27
+	self.parabola.A = -(0.5 * p4) * (1 / var1 ^ 2)
+	self.parabola.B = var2 / var1
 	self.parabola.C = 0
-	self.parabola.Range = p17 * 1.5
+	self.parabola.Range = p5 * 1.5
 end
 
-function t_3:renderAsParabola(p18, p19)
-	self.originPart.CFrame = CFrame.new(p18, p18 + p19 * Vector3.new(1, 0, 1)) * CFrame.Angles(0, 1.570796326795, 0)
+function t_3:renderAsParabola(p2, p3)
+	self.originPart.CFrame = CFrame.new(p2, p2 + p3 * Vector3.new(1, 0, 1)) * CFrame.Angles(0, 1.570796326795, 0)
 end
 
-function t_3:renderAsLaser(p20, p21)
-	self.originPart.CFrame = CFrame.new(p20, p21) * CFrame.Angles(0, 1.570796326795, 0)
+function t_3:renderAsLaser(p2, p3)
+	self.originPart.CFrame = CFrame.new(p2, p3) * CFrame.Angles(0, 1.570796326795, 0)
 	self.parabola.A = 0
 	self.parabola.B = 0.000001
 	self.parabola.C = 0
-	self.parabola.Range = (p21 - p20).magnitude
+	self.parabola.Range = (p3 - p2).magnitude
 end
 
-function t_3:renderOffhandLaser(p22, p23)
-	self.originPartOffhand.CFrame = CFrame.new(p22, p23) * CFrame.Angles(0, 1.570796326795, 0)
-	self.parabolaOffhand.Range = (p23 - p22).magnitude
+function t_3:renderOffhandLaser(p2, p3)
+	self.originPartOffhand.CFrame = CFrame.new(p2, p3) * CFrame.Angles(0, 1.570796326795, 0)
+	self.parabolaOffhand.Range = (p3 - p2).magnitude
 end
 
 if not VRLaserPointerRaycastChange then
-	function t_3:getLaserHit(p24, p25, p26)
-		local var29, var30, var31, _ = workspace:FindPartOnRayWithIgnoreList(Ray.new(p24, p25 * self.laserMaxDistance), p26)
+	function t_3:getLaserHit(p2, p3, p4)
+		local var1, var2, var3, _ = workspace:FindPartOnRayWithIgnoreList(Ray.new(p2, p3 * self.laserMaxDistance), p4)
 		
-		return var29, var30, var31, (var30 - p24).magnitude / math.max(self.laserMaxDistance, 0.1)
+		return var1, var2, var3, (var2 - p2).magnitude / math.max(self.laserMaxDistance, 0.1)
 	end
 end
-function t_3.canNavigateTo(_, p27, _, p28)
+function t_3.canNavigateTo(_, p2, _, p3)
 	-- upvalues: localPlayer (write)
 	local character = localPlayer.Character
 	
-	return if character then if character:FindFirstChild("HumanoidRootPart") then if p27 then p28.Y >= -0.000001 else false else false else false
+	return if character then if character:FindFirstChild("HumanoidRootPart") then if p2 then p3.Y >= -0.000001 else false else false else false
 end
 
-function t_3:checkHeadMountedMode(p29)
+function t_3:checkHeadMountedMode(p2)
 	-- upvalues: t (ref), guiService (ref)
 	if self:shouldForcePointer() then
 		self:setMode(t.Pointer)
 		
 		return
-	elseif p29 and p29:IsDescendantOf(guiService.CoreGuiFolder) then
+	elseif p2 and p2:IsDescendantOf(guiService.CoreGuiFolder) then
 		self:setMode(t.Pointer)
 		
 		return
@@ -509,13 +509,13 @@ function t_3:checkHeadMountedMode(p29)
 	self:setMode(t.Navigation)
 end
 
-function t_3:setNavigationValidState(p30)
+function t_3:setNavigationValidState(p2)
 	-- upvalues: t_1 (ref)
-	if p30 == self.navigationIsValid then return end
-	self.navigationIsValid = p30
+	if p2 == self.navigationIsValid then return end
+	self.navigationIsValid = p2
 	self.lastNavigationValidityChangeTime = tick()
 	
-	if p30 then
+	if p2 then
 		self.plopBallBounceStart = tick()
 		self.parabola.Color3 = t_1.ARC_COLOR_GOOD
 		self.plopAdorn.Visible = true
@@ -534,41 +534,41 @@ function t_3:setNavigationValidState(p30)
 	self.plopBall.BrickColor = t_1.PLOP_BALL_COLOR_BAD
 end
 
-function t_3:updateNavPlop(p31, p32)
+function t_3:updateNavPlop(p2, p3)
 	-- upvalues: t_1 (ref), vector2_1 (ref), vector2 (ref)
-	local var32 = tick() - self.plopBallBounceStart
-	local cFrame = CFrame.new(p31, p31 + p32)
-	local var34 = 0
+	local var1 = tick() - self.plopBallBounceStart
+	local cFrame = CFrame.new(p2, p2 + p3)
+	local var2 = 0
 	
 	if self.navigationIsValid then
-		local var35 = math.sin(var32 * 2 * 3.14159265359 / t_1.BALL_WAVE_PERIOD)
+		local var3 = math.sin(var1 * 2 * 3.14159265359 / t_1.BALL_WAVE_PERIOD)
 		local BALL_WAVE_EXP = t_1.BALL_WAVE_EXP
-		local var36 = var35 ^ BALL_WAVE_EXP
+		local var4 = var3 ^ BALL_WAVE_EXP
 		
-		if var36 ~= var36 then
-			var36 = math.abs(var35) ^ BALL_WAVE_EXP
+		if var4 ~= var4 then
+			var4 = math.abs(var3) ^ BALL_WAVE_EXP
 		end
-		var34 = t_1.BALL_WAVE_START + var36 * t_1.BALL_WAVE_AMPLITUDE
+		var2 = t_1.BALL_WAVE_START + var4 * t_1.BALL_WAVE_AMPLITUDE
 	end
 	self.plopPart.CFrame = cFrame
-	self.plopBall.CFrame = cFrame * CFrame.new(0, 0, -var34)
-	local var37 = var32 % t_1.PULSE_PERIOD
+	self.plopBall.CFrame = cFrame * CFrame.new(0, 0, -var2)
+	local var5 = var1 % t_1.PULSE_PERIOD
 	
-	if var37 > 0 then
-		local var38 = var37 / t_1.PULSE_DURATION
+	if var5 > 0 then
+		local var6 = var5 / t_1.PULSE_DURATION
 		
-		if var38 < 1 then
+		if var6 < 1 then
 			self.plopAdornPulse.Visible = true
 			local plopAdornPulse = self.plopAdornPulse
 			local PULSE_SIZE_0 = t_1.PULSE_SIZE_0
 			local PULSE_EXP = t_1.PULSE_EXP
-			local var39 = var38 ^ PULSE_EXP
+			local var7 = var6 ^ PULSE_EXP
 			
-			if var39 ~= var39 then
-				var39 = math.abs(var38) ^ PULSE_EXP
+			if var7 ~= var7 then
+				var7 = math.abs(var6) ^ PULSE_EXP
 			end
-			plopAdornPulse.Size = vector2_1 * (PULSE_SIZE_0 + var39 * (t_1.PULSE_SIZE_1 - t_1.PULSE_SIZE_0))
-			self.plopAdornPulse.Transparency = 0.5 + var38 * 0.5
+			plopAdornPulse.Size = vector2_1 * (PULSE_SIZE_0 + var7 * (t_1.PULSE_SIZE_1 - t_1.PULSE_SIZE_0))
+			self.plopAdornPulse.Transparency = 0.5 + var6 * 0.5
 			
 			return
 		else
@@ -579,17 +579,17 @@ function t_3:updateNavPlop(p31, p32)
 	end
 end
 
-function t_3:updateNavigationMode(p33, p34, p35)
-	self.navHitPoint = p33
-	self.navHitNormal = p34
-	self.navHitPart = p35
-	self:updateNavPlop(p33, p34)
+function t_3:updateNavigationMode(p2, p3, p4)
+	self.navHitPoint = p2
+	self.navHitNormal = p3
+	self.navHitPart = p4
+	self:updateNavPlop(p2, p3)
 	self:setNavigationValidState(self:canNavigateTo(self.navHitPart, self.navHitPoint, self.navHitNormal))
 end
 
-function t_3:showHitBallOnLaserPointer(p36)
+function t_3:showHitBallOnLaserPointer(p2)
 	-- upvalues: addPartsToGame (ref), removePartsFromGame (ref)
-	if p36 then
+	if p2 then
 		if self.showPlopBallOnPointer then
 			return
 		else
@@ -611,16 +611,16 @@ function t_3:cursorInputsChanged()
 	
 	if didPointerHit then
 		local pointerHitCFrame = VRService.PointerHitCFrame
-		local var40 = 1
-		local var41 = (VRUtilModule.GetUserCFrameWorldSpace(Enum.UserCFrame.Head).Position - pointerHitCFrame.Position).magnitude * 0.01
+		local var1 = 1
+		local var2 = (VRUtilModule.GetUserCFrameWorldSpace(Enum.UserCFrame.Head).Position - pointerHitCFrame.Position).magnitude * 0.01
 		
-		if var41 < 0.05 then
-			var40 = var41 / 0.05
-			var41 = 0.05
+		if var2 < 0.05 then
+			var1 = var2 / 0.05
+			var2 = 0.05
 		end
-		self.cursorPart.Size = Vector3.new(var41, var41, var41)
-		self.cursorPart.CFrame = pointerHitCFrame * CFrame.new(0, 0, var41 * 0.5)
-		self.cursorImage.Size = UDim2.new(var40, 0, var40, 0)
+		self.cursorPart.Size = Vector3.new(var2, var2, var2)
+		self.cursorPart.CFrame = pointerHitCFrame * CFrame.new(0, 0, var2 * 0.5)
+		self.cursorImage.Size = UDim2.new(var1, 0, var1, 0)
 	end
 end
 
@@ -628,26 +628,26 @@ function t_3:updateCursor_DEPRECATED()
 	-- upvalues: VRService (ref), VRUtilModule (ref)
 	if VRService.DidPointerHit then
 		local pointerHitCFrame = VRService.PointerHitCFrame
-		local var42 = if self:isHeadMounted() then VRUtilModule.GetUserCFrameWorldSpace(Enum.UserCFrame.Head) else VRUtilModule.GetUserCFrameWorldSpace(self.inputUserCFrame)
-		local p = var42.p
-		local lookVector = var42.lookVector
+		local var1 = if self:isHeadMounted() then VRUtilModule.GetUserCFrameWorldSpace(Enum.UserCFrame.Head) else VRUtilModule.GetUserCFrameWorldSpace(self.inputUserCFrame)
+		local p = var1.p
+		local lookVector = var1.lookVector
 		local position = pointerHitCFrame.Position
 		local lookVector_1 = pointerHitCFrame.lookVector
-		local var43 = lookVector_1:Dot(lookVector)
+		local var2 = lookVector_1:Dot(lookVector)
 		
-		if math.abs(var43) > 0.001 then
-			pointerHitCFrame = pointerHitCFrame.Rotation + (p + (position - p):Dot(lookVector_1) / var43 * lookVector)
+		if math.abs(var2) > 0.001 then
+			pointerHitCFrame = pointerHitCFrame.Rotation + (p + (position - p):Dot(lookVector_1) / var2 * lookVector)
 		end
-		local var44 = 1
-		local var45 = (workspace.CurrentCamera.CFrame.Position - pointerHitCFrame.Position).magnitude * 0.01
+		local var3 = 1
+		local var4 = (workspace.CurrentCamera.CFrame.Position - pointerHitCFrame.Position).magnitude * 0.01
 		
-		if var45 < 0.05 then
-			var44 = var45 / 0.05
-			var45 = 0.05
+		if var4 < 0.05 then
+			var3 = var4 / 0.05
+			var4 = 0.05
 		end
-		self.cursorPart.Size = Vector3.new(var45, var45, var45)
-		self.cursorPart.CFrame = pointerHitCFrame * CFrame.new(0, 0, var45 * 0.5)
-		self.cursorImage.Size = UDim2.new(var44, 0, var44, 0)
+		self.cursorPart.Size = Vector3.new(var4, var4, var4)
+		self.cursorPart.CFrame = pointerHitCFrame * CFrame.new(0, 0, var4 * 0.5)
+		self.cursorImage.Size = UDim2.new(var3, 0, var3, 0)
 	end
 	self.cursorSurfaceGui.Enabled = VRService.DidPointerHit
 end
@@ -677,13 +677,13 @@ function t_3:update(_)
 	local userCFrameWorldSpace = VRUtilModule.GetUserCFrameWorldSpace(self.inputUserCFrame)
 	local p = userCFrameWorldSpace.p
 	local lookVector = userCFrameWorldSpace.lookVector
-	local var47 = if VRService.DidPointerHit then p + lookVector * (VRService.PointerHitCFrame.Position - p).magnitude else p + lookVector * self.laserMaxDistance
+	local var1 = if VRService.DidPointerHit then p + lookVector * (VRService.PointerHitCFrame.Position - p).magnitude else p + lookVector * self.laserMaxDistance
 	
 	if self:isHeadMounted() then
 		self.parabola.Visible = false
 	else
 		self.parabola.Visible = true
-		self:renderAsLaser(p, var47)
+		self:renderAsLaser(p, var1)
 	end
 	if VRService.LaserPointer == Enum.VRLaserPointerMode.DualPointer then
 		if self:isHeadMounted() then

@@ -7,100 +7,100 @@ local view = foundationModule.View
 local useCallback = reactModule.useCallback
 local _ = require(parent.MomentsTypes)
 
-local function _(p0, p1)
-	return if p1 == nil then p0 elseif typeof(p1) == "number" then p0 * p1 else p1:map(function(p2)
-		-- upvalues: p0 (ref)
-		return p0 * p2
+local function _(p1, p2)
+	return if p2 == nil then p1 elseif typeof(p2) == "number" then p1 * p2 else p2:map(function(p3)
+		-- upvalues: p1 (ref)
+		return p1 * p3
 	end)
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: getFFlagMomentsStickerButtonModule (ref), reactModule (ref), useCallback (ref), view (ref), foundationModule (ref)
 	local _ = nil
-	local var4 = if getFFlagMomentsStickerButtonModule() then p3.overlayEdit or p3.textOverlayEdit else p3.textOverlayEdit
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(nil)
-	local var7 = useCallback(function(_, p4)
-		-- upvalues: p3 (ref), var6 (ref)
-		if p3.containerRef and p3.containerRef.current then
-			var6.current = p4
+	local var1 = if getFFlagMomentsStickerButtonModule() then p1.overlayEdit or p1.textOverlayEdit else p1.textOverlayEdit
+	local var2 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(nil)
+	local var4 = useCallback(function(_, p2)
+		-- upvalues: p1 (ref), var3 (ref)
+		if p1.containerRef and p1.containerRef.current then
+			var3.current = p2
 		end
-		if p3.onDragBegin then
-			p3.onDragBegin()
+		if p1.onDragBegin then
+			p1.onDragBegin()
 		end
-	end, { p3.containerRef, p3.onDragBegin })
-	local var8 = useCallback(function(_, p5)
-		-- upvalues: p3 (ref)
-		if p3.onDragContinue then
-			p3.onDragContinue(p5)
+	end, { p1.containerRef, p1.onDragBegin })
+	local var5 = useCallback(function(_, p2)
+		-- upvalues: p1 (ref)
+		if p1.onDragContinue then
+			p1.onDragContinue(p2)
 		end
-	end, { p3.onDragContinue })
-	local var9 = useCallback(function(_, p6)
-		-- upvalues: var6 (ref), p3 (ref)
-		if var6.current == p6 and p3.onActivated then
-			p3.onActivated()
+	end, { p1.onDragContinue })
+	local var6 = useCallback(function(_, p2)
+		-- upvalues: var3 (ref), p1 (ref)
+		if var3.current == p2 and p1.onActivated then
+			p1.onActivated()
 		end
-		if p3.onDragEnd then
-			p3.onDragEnd()
+		if p1.onDragEnd then
+			p1.onDragEnd()
 		end
-	end, { p3.onActivated, p3.onDragEnd })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: p3 (ref), reactModule (copy), var5 (ref), var7 (ref), var8 (ref), var9 (ref)
-		return if p3.draggable then reactModule.createElement("UIDragDetector", {
+	end, { p1.onActivated, p1.onDragEnd })
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), reactModule (copy), var2 (ref), var4 (ref), var5 (ref), var6 (ref)
+		return if p1.draggable then reactModule.createElement("UIDragDetector", {
 			BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,
-			BoundingUI = p3.boundingUI,
+			BoundingUI = p1.boundingUI,
 			DragStyle = Enum.UIDragDetectorDragStyle.TranslatePlane,
-			ref = var5,
-			ReferenceUIInstance = p3.referenceUI or p3.boundingUI,
+			ref = var2,
+			ReferenceUIInstance = p1.referenceUI or p1.boundingUI,
 			ResponseStyle = Enum.UIDragDetectorResponseStyle.Scale,
-			[reactModule.Event.DragStart] = var7,
-			[reactModule.Event.DragContinue] = var8,
-			[reactModule.Event.DragEnd] = var9
+			[reactModule.Event.DragStart] = var4,
+			[reactModule.Event.DragContinue] = var5,
+			[reactModule.Event.DragEnd] = var6
 		}) else nil
 	end, {
-		p3.boundingUI, p3.draggable, p3.referenceUI, var7, var8, var9
+		p1.boundingUI, p1.draggable, p1.referenceUI, var4, var5, var6
 	})
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "position-center-center anchor-center-center auto-xy padding-medium radius-medium bg-contrast",
-		ref = p3.containerRef,
-		onActivated = p3.onActivated,
-		onAbsoluteSizeChanged = p3.onAbsoluteSizeChanged,
-		Position = var4.position,
-		Rotation = var4.rotation
+		ref = p1.containerRef,
+		onActivated = p1.onActivated,
+		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
+		Position = var1.position,
+		Rotation = var1.rotation
 	}
-	local scale = var4.scale
-	local additionalScale = p3.additionalScale
-	t.scale = if additionalScale == nil then scale elseif typeof(additionalScale) == "number" then scale * additionalScale else additionalScale:map(function(p7)
+	local scale = var1.scale
+	local additionalScale = p1.additionalScale
+	t.scale = if additionalScale == nil then scale elseif typeof(additionalScale) == "number" then scale * additionalScale else additionalScale:map(function(p2)
 		-- upvalues: scale (ref)
-		return scale * p7
+		return scale * p2
 	end)
 	t.sizeConstraint = { MaxSize = Vector2.new(300, 1e999) }
 	t.stateLayer = {
 		affordance = foundationModule.Enums.StateLayerAffordance.None
 	}
-	t.ZIndex = var4.zIndex
+	t.ZIndex = var1.zIndex
 	
 	return createElement(view, t, {
-		UIDragDetector = var10,
+		UIDragDetector = var7,
 		TextInput = reactModule.createElement("TextBox", {
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
 			ClearTextOnFocus = false,
 			ClipsDescendants = true,
-			Font = var4.textOverlayStyle.font,
-			Interactable = p3.editable == true,
-			Text = var4.text,
-			TextColor3 = var4.textOverlayStyle.fontColor,
-			TextSize = var4.textOverlayStyle.fontSize,
-			TextXAlignment = var4.textOverlayStyle.textXAlignment,
+			Font = var1.textOverlayStyle.font,
+			Interactable = p1.editable == true,
+			Text = var1.text,
+			TextColor3 = var1.textOverlayStyle.fontColor,
+			TextSize = var1.textOverlayStyle.fontSize,
+			TextXAlignment = var1.textOverlayStyle.textXAlignment,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			TextWrapped = true,
-			Selectable = p3.editable == true,
-			Size = p3.size,
-			ZIndex = var4.zIndex,
-			ref = p3.textBoxRef,
-			[reactModule.Change.Text] = p3.onTextChanged
+			Selectable = p1.editable == true,
+			Size = p1.size,
+			ZIndex = var1.zIndex,
+			ref = p1.textBoxRef,
+			[reactModule.Change.Text] = p1.onTextChanged
 		})
 	})
 end

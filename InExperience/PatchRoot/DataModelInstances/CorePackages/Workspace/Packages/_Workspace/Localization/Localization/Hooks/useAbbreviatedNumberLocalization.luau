@@ -6,21 +6,21 @@ local abbreviateCountModule = require(localization.abbreviateCount)
 local localizationRoactContextModule = require(localization.LocalizationRoactContext)
 local useSignal = require(parent.RoactUtils).Hooks.useSignal
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), localizationRoactContextModule (ref), localizationService (ref), useSignal (ref), abbreviateCountModule (ref)
-	local var5 = reactModule.useContext(localizationRoactContextModule)
-	local var6, var7 = reactModule.useState(localizationService.RobloxLocaleId)
-	useSignal(var5.changed, reactModule.useCallback(function(_)
-		-- upvalues: var5 (ref), var6 (ref), var7 (ref)
-		local locale = var5:GetLocale()
+	local var1 = reactModule.useContext(localizationRoactContextModule)
+	local var2, var3 = reactModule.useState(localizationService.RobloxLocaleId)
+	useSignal(var1.changed, reactModule.useCallback(function(_)
+		-- upvalues: var1 (ref), var2 (ref), var3 (ref)
+		local locale = var1:GetLocale()
 		
-		if locale ~= var6 then
-			var7(locale)
+		if locale ~= var2 then
+			var3(locale)
 		end
-	end, { var5 }))
+	end, { var1 }))
 	
 	return reactModule.useMemo(function()
-		-- upvalues: p0 (ref), abbreviateCountModule (copy), var6 (ref)
-		return if p0 == nil then nil else abbreviateCountModule(p0, var6)
-	end, { p0, var6 })
+		-- upvalues: p1 (ref), abbreviateCountModule (copy), var2 (ref)
+		return if p1 == nil then nil else abbreviateCountModule(p1, var2)
+	end, { p1, var2 })
 end

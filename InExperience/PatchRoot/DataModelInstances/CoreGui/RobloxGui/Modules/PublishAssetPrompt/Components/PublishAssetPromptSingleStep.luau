@@ -48,9 +48,9 @@ publishAssetPromptSingleStep.validateProps = tModule.strictInterface({
 	closePrompt = tModule.callback
 })
 
-function publishAssetPromptSingleStep.getDefaultText(p0)
+function publishAssetPromptSingleStep.getDefaultText(p1)
 	-- upvalues: robloxTranslatorModule (ref), localPlayer (ref)
-	return if p0.props.assetType == Enum.AssetType.Model then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PackagesDefaultName", { RBX_NAME = if localPlayer then localPlayer.Name else "" }) else ""
+	return if p1.props.assetType == Enum.AssetType.Model then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PackagesDefaultName", { RBX_NAME = if localPlayer then localPlayer.Name else "" }) else ""
 end
 
 function publishAssetPromptSingleStep.init(p1)
@@ -117,10 +117,10 @@ function publishAssetPromptSingleStep.init(p1)
 		p1.closePrompt()
 	end
 	
-	function p1.onAssetNameUpdated(p3, p4)
+	function p1.onAssetNameUpdated(p2, p3)
 		-- upvalues: p1 (ref)
-		if p4 then
-			p1.assetName = p3
+		if p3 then
+			p1.assetName = p2
 			p1.isNameValid = true
 			
 			return
@@ -128,29 +128,29 @@ function publishAssetPromptSingleStep.init(p1)
 		p1.isNameValid = false
 	end
 	
-	function p1.onAssetDescriptionUpdated(p5, p6)
+	function p1.onAssetDescriptionUpdated(p2, p3)
 		-- upvalues: p1 (ref)
-		p1.assetDescription = p5
-		p1.isDescriptionValid = p6
+		p1.assetDescription = p2
+		p1.isDescriptionValid = p3
 	end
 	
 	p1.nameTextBoxRef = roactModule.createRef()
 	p1.descriptionTextBoxRef = roactModule.createRef()
 end
 
-function publishAssetPromptSingleStep.renderMiddle(p7, p8)
+function publishAssetPromptSingleStep.renderMiddle(p1, p2)
 	-- upvalues: withStyle (ref), enableEmotePublishEngineFeature (ref), roactModule (ref), roactGamepadModule (ref), objectViewportModule (ref), emoteThumbnailViewModule (ref), iconButton (ref), previewExpand (ref), edit (ref), nameTextBoxModule (ref), assetDescriptionTextBoxModule (ref)
-	return withStyle(function(p9)
-		-- upvalues: enableEmotePublishEngineFeature (copy), p7 (ref), roactModule (copy), roactGamepadModule (copy), objectViewportModule (copy), emoteThumbnailViewModule (copy), iconButton (copy), previewExpand (copy), edit (copy), p8 (ref), nameTextBoxModule (copy), assetDescriptionTextBoxModule (copy)
-		local font = p9.Font
-		local theme = p9.Theme
-		local var24 = enableEmotePublishEngineFeature and (p7.props.assetType == Enum.AssetType.EmoteAnimation and p7.props.assetInstance:IsA("AnimationClip"))
+	return withStyle(function(p3)
+		-- upvalues: enableEmotePublishEngineFeature (copy), p1 (ref), roactModule (copy), roactGamepadModule (copy), objectViewportModule (copy), emoteThumbnailViewModule (copy), iconButton (copy), previewExpand (copy), edit (copy), p2 (ref), nameTextBoxModule (copy), assetDescriptionTextBoxModule (copy)
+		local font = p3.Font
+		local theme = p3.Theme
+		local var1 = enableEmotePublishEngineFeature and (p1.props.assetType == Enum.AssetType.EmoteAnimation and p1.props.assetInstance:IsA("AnimationClip"))
 		
 		return roactModule.createElement(roactGamepadModule.Focusable.Frame, {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 150),
-			defaultChild = p7.nameTextBoxRef,
-			[roactModule.Ref] = p7.middleContentRef
+			defaultChild = p1.nameTextBoxRef,
+			[roactModule.Ref] = p1.middleContentRef
 		}, {
 			UISizeConstraint = roactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(200, 200) }),
 			TopSection = roactModule.createElement("Frame", {
@@ -161,16 +161,16 @@ function publishAssetPromptSingleStep.renderMiddle(p7, p8)
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0.4, 0, 1, 0)
 				}, {
-					ObjectViewport = not var24 and roactModule.createElement(objectViewportModule, { model = p7.props.assetInstance }) or nil,
-					EmoteThumbnailParent = var24 and roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+					ObjectViewport = not var1 and roactModule.createElement(objectViewportModule, { model = p1.props.assetInstance }) or nil,
+					EmoteThumbnailParent = var1 and roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 						AspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {
 							AspectRatio = 1,
 							AspectType = Enum.AspectType.FitWithinMaxSize,
 							DominantAxis = Enum.DominantAxis.Width
 						}),
 						EmoteThumbnailView = roactModule.createElement(emoteThumbnailViewModule, {
-							animationClip = p7.props.assetInstance,
-							thumbnailParameters = p7.state.thumbnailParameters
+							animationClip = p1.props.assetInstance,
+							thumbnailParameters = p1.state.thumbnailParameters
 						}),
 						PreviewButton = roactModule.createElement(iconButton, {
 							showBackground = true,
@@ -178,7 +178,7 @@ function publishAssetPromptSingleStep.renderMiddle(p7, p8)
 							anchorPoint = Vector2.new(1, 1),
 							icon = previewExpand,
 							size = UDim2.new(0, 30, 0, 30),
-							onActivated = p7.openAssetPreview
+							onActivated = p1.openAssetPreview
 						}),
 						EditButton = roactModule.createElement(iconButton, {
 							showBackground = true,
@@ -186,7 +186,7 @@ function publishAssetPromptSingleStep.renderMiddle(p7, p8)
 							anchorPoint = Vector2.new(0, 1),
 							icon = edit,
 							size = UDim2.new(0, 30, 0, 30),
-							onActivated = p7.openThumbnailEditor
+							onActivated = p1.openThumbnailEditor
 						})
 					}) or nil
 				}),
@@ -201,17 +201,17 @@ function publishAssetPromptSingleStep.renderMiddle(p7, p8)
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 15),
 						Font = font.Body.Font,
-						Text = p8.name,
+						Text = p2.name,
 						TextColor3 = theme.TextDefault.Color,
 						TextXAlignment = Enum.TextXAlignment.Left
 					}),
 					NameInput = roactModule.createElement(nameTextBoxModule, {
 						Size = UDim2.new(1, 0, 0, 30),
 						Position = UDim2.new(0, 0, 0, 15),
-						onNameUpdated = p7.onAssetNameUpdated,
-						nameTextBoxRef = p7.nameTextBoxRef,
-						NextSelectionDown = p7.descriptionTextBoxRef,
-						defaultName = p7.assetName
+						onNameUpdated = p1.onAssetNameUpdated,
+						nameTextBoxRef = p1.nameTextBoxRef,
+						NextSelectionDown = p1.descriptionTextBoxRef,
+						defaultName = p1.assetName
 					}),
 					DescriptionLabel = roactModule.createElement("TextLabel", {
 						TextSize = 12,
@@ -219,17 +219,17 @@ function publishAssetPromptSingleStep.renderMiddle(p7, p8)
 						Size = UDim2.new(1, 0, 0, 15),
 						Position = UDim2.new(0, 0, 0, 60),
 						Font = font.Body.Font,
-						Text = p8.description,
+						Text = p2.description,
 						TextColor3 = theme.TextDefault.Color,
 						TextXAlignment = Enum.TextXAlignment.Left
 					}),
 					DescriptionInput = roactModule.createElement(assetDescriptionTextBoxModule, {
 						Size = UDim2.new(1, 0, 0, 80),
 						Position = UDim2.new(0, 0, 0, 75),
-						onAssetDescriptionUpdated = p7.onAssetDescriptionUpdated,
-						descriptionTextBoxRef = p7.descriptionTextBoxRef,
-						NextSelectionUp = p7.nameTextBoxRef,
-						defaultDescription = p7.assetDescription
+						onAssetDescriptionUpdated = p1.onAssetDescriptionUpdated,
+						descriptionTextBoxRef = p1.descriptionTextBoxRef,
+						NextSelectionUp = p1.nameTextBoxRef,
+						defaultDescription = p1.assetDescription
 					})
 				})
 			}),
@@ -238,7 +238,7 @@ function publishAssetPromptSingleStep.renderMiddle(p7, p8)
 				BackgroundTransparency = 1,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 50),
-				Text = p8.disclaimer,
+				Text = p2.disclaimer,
 				Font = font.Body.Font,
 				TextColor3 = theme.TextEmphasis.Color,
 				AnchorPoint = Vector2.new(0, 1),
@@ -248,18 +248,18 @@ function publishAssetPromptSingleStep.renderMiddle(p7, p8)
 	end)
 end
 
-function publishAssetPromptSingleStep.renderAlertLocalized(p10, p11)
+function publishAssetPromptSingleStep.renderAlertLocalized(p1, p2)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), sendConsentDeniedOnCancel (ref), buttonType (ref), enableEmotePublishEngineFeature (ref), emoteThumbnailEditorModule (ref), previewViewportModule (ref)
-	local var25 = roactModule.createElement(interactiveAlert, {
+	local var1 = roactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = true,
-		title = p11.title,
+		title = p2.title,
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
-						onActivated = if sendConsentDeniedOnCancel then p10.denyAndClose else p10.closePrompt,
-						text = p11.cancel
+						onActivated = if sendConsentDeniedOnCancel then p1.denyAndClose else p1.closePrompt,
+						text = p2.cancel
 					}
 				},
 				{
@@ -269,30 +269,30 @@ function publishAssetPromptSingleStep.renderAlertLocalized(p10, p11)
 						isDelayedInput = true,
 						enableInputDelayed = true,
 						delayInputSeconds = 3,
-						onActivated = p10.confirmAndUpload,
-						text = p11.submit
+						onActivated = p1.confirmAndUpload,
+						text = p2.submit
 					}
 				}
 			}
 		},
 		middleContent = function()
-			-- upvalues: p10 (ref), p11 (ref)
-			return p10:renderMiddle(p11)
+			-- upvalues: p1 (ref), p2 (ref)
+			return p1:renderMiddle(p2)
 		end,
-		screenSize = p10.props.screenSize,
-		defaultChildRef = p10.props.defaultChildRef
+		screenSize = p1.props.screenSize,
+		defaultChildRef = p1.props.defaultChildRef
 	})
 	
 	return if enableEmotePublishEngineFeature then roactModule.createFragment({
-		Prompt = var25,
-		ThumbnailEditor = p10.state.showingThumbnailEditor and roactModule.createElement(emoteThumbnailEditorModule, {
-			animationClip = p10.props.assetInstance,
-			initialThumbnailParameters = p10.state.thumbnailParameters,
-			screenSize = p10.props.screenSize,
-			updateThumbnailCallback = p10.updateThumbnailParameters,
-			closePromptCallback = p10.closeThumbnailEditor
+		Prompt = var1,
+		ThumbnailEditor = p1.state.showingThumbnailEditor and roactModule.createElement(emoteThumbnailEditorModule, {
+			animationClip = p1.props.assetInstance,
+			initialThumbnailParameters = p1.state.thumbnailParameters,
+			screenSize = p1.props.screenSize,
+			updateThumbnailCallback = p1.updateThumbnailParameters,
+			closePromptCallback = p1.closeThumbnailEditor
 		}) or nil,
-		PreviewFrame = p10.state.showingAssetPreview and roactModule.createElement("Frame", {
+		PreviewFrame = p1.state.showingAssetPreview and roactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			Size = UDim2.new(0.5, 0, 0.5, 0),
 			BackgroundColor3 = Color3.new(0.2, 0.2, 0.2),
@@ -300,16 +300,16 @@ function publishAssetPromptSingleStep.renderAlertLocalized(p10, p11)
 			Position = UDim2.fromScale(0.5, 0.5)
 		}, {
 			PreviewViewport = roactModule.createElement(previewViewportModule, {
-				asset = p10.props.assetInstance,
-				closePreviewView = p10.closeAssetPreview
+				asset = p1.props.assetInstance,
+				closePreviewView = p1.closeAssetPreview
 			})
 		}) or nil
-	}) else var25
+	}) else var1
 end
 
-local function _(p12)
+local function _(p1)
 	-- upvalues: t (ref)
-	return t[p12] == true
+	return t[p1] == true
 end
 
 local function GetLocalizedStringsForAssetType(value)
@@ -345,24 +345,24 @@ local function GetLocalizedStringsForAssetType(value)
 	return t_1
 end
 
-function publishAssetPromptSingleStep.render(p13)
+function publishAssetPromptSingleStep.render(p1)
 	-- upvalues: GetLocalizedStringsForAssetType (ref)
-	return p13:renderAlertLocalized(GetLocalizedStringsForAssetType(p13.props.assetType))
+	return p1:renderAlertLocalized(GetLocalizedStringsForAssetType(p1.props.assetType))
 end
 
-return roactRoduxModule.connect(function(p14)
+return roactRoduxModule.connect(function(p1)
 	return {
-		assetInstance = p14.promptRequest.promptInfo.assetInstance,
-		assetType = p14.promptRequest.promptInfo.assetType,
-		guid = p14.promptRequest.promptInfo.guid,
-		scopes = p14.promptRequest.promptInfo.scopes
+		assetInstance = p1.promptRequest.promptInfo.assetInstance,
+		assetType = p1.promptRequest.promptInfo.assetType,
+		guid = p1.promptRequest.promptInfo.guid,
+		scopes = p1.promptRequest.promptInfo.scopes
 	}
-end, function(p15)
+end, function(p1)
 	-- upvalues: closeOpenPromptModule (ref)
 	return {
 		closePrompt = function()
-			-- upvalues: p15 (ref), closeOpenPromptModule (copy)
-			return p15(closeOpenPromptModule())
+			-- upvalues: p1 (ref), closeOpenPromptModule (copy)
+			return p1(closeOpenPromptModule())
 		end
 	}
 end)(publishAssetPromptSingleStep)

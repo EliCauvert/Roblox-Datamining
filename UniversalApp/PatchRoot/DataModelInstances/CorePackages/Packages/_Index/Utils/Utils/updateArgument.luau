@@ -6,47 +6,47 @@ local t = {}
 local kind = require(parent.GraphQL).Kind
 local astFromType = require(script.Parent.astFromType).astFromType
 
-function t.updateArgument(p0, p1, p2, p3, p4, p5, p6)
+function t.updateArgument(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: kind (ref), astFromType (ref), array (ref), object (ref)
-	p0[tostring(p3)] = {
+	p1[tostring(p4)] = {
 		kind = kind.ARGUMENT,
-		name = { kind = kind.NAME, value = p3 },
+		name = { kind = kind.NAME, value = p4 },
 		value = {
 			kind = kind.VARIABLE,
-			name = { kind = kind.NAME, value = p4 }
+			name = { kind = kind.NAME, value = p5 }
 		}
 	}
-	p1[tostring(p4)] = {
+	p2[tostring(p5)] = {
 		kind = kind.VARIABLE_DEFINITION,
 		variable = {
 			kind = kind.VARIABLE,
-			name = { kind = kind.NAME, value = p4 }
+			name = { kind = kind.NAME, value = p5 }
 		},
-		type = astFromType(p5)
+		type = astFromType(p6)
 	}
 	
-	if p6 ~= nil then
-		p2[tostring(p4)] = p6
+	if p7 ~= nil then
+		p3[tostring(p5)] = p7
 		
 		return
-	elseif array.indexOf(object.keys(p2), tostring(p4)) ~= -1 then
-		p2[tostring(p4)] = nil
+	elseif array.indexOf(object.keys(p3), tostring(p5)) ~= -1 then
+		p3[tostring(p5)] = nil
 	end
 end
 
-function t.createVariableNameGenerator(p7)
+function t.createVariableNameGenerator(p1)
 	-- upvalues: array (ref), object (ref)
-	local var2 = 0
+	local var1 = 0
 	
-	return function(p8)
-		-- upvalues: var2 (write), array (copy), object (copy), p7 (ref)
-		local var3
+	return function(p2)
+		-- upvalues: var1 (write), array (copy), object (copy), p1 (ref)
+		local var2
 		local _ = nil
 		repeat
-			var3 = ("_v%s_%s"):format(tostring(var2), p8)
-			var2 += 1
-		until array.indexOf(object.keys(p7), tostring(var3)) == -1
-		return var3
+			var2 = ("_v%s_%s"):format(tostring(var1), p2)
+			var1 += 1
+		until array.indexOf(object.keys(p1), tostring(var2)) == -1
+		return var2
 	end
 end
 

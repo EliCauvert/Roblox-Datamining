@@ -2,15 +2,15 @@
 local t = {}
 t.__index = t
 
-local function defaultCompareFn(p0, p1)
-	return p0 == p1
+local function defaultCompareFn(p1, p2)
+	return p1 == p2
 end
 
-function t.new(p2, p3)
+function t.new(p1, p2)
 	-- upvalues: defaultCompareFn (ref), signal (ref), t (ref)
 	return setmetatable({
-		_isEqual = p3 or defaultCompareFn,
-		_value = p2,
+		_isEqual = p2 or defaultCompareFn,
+		_value = p1,
 		_changeSignal = signal.new()
 	}, t)
 end
@@ -19,18 +19,18 @@ function t:get()
 	return self._value
 end
 
-function t:set(p4)
-	if not self._isEqual(self._value, p4) then
-		self._value = p4
-		self._changeSignal:fire(p4)
+function t:set(p1)
+	if not self._isEqual(self._value, p1) then
+		self._value = p1
+		self._changeSignal:fire(p1)
 	end
 end
 
-function t:connect(p5, p6)
-	local changeSignalConnection = self._changeSignal:connect(p5)
+function t:connect(p1, p2)
+	local changeSignalConnection = self._changeSignal:connect(p1)
 	
-	if p6 == true then
-		p5(self._value)
+	if p2 == true then
+		p1(self._value)
 	end
 	return changeSignalConnection
 end

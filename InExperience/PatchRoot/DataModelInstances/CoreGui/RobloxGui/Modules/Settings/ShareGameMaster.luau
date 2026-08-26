@@ -10,13 +10,13 @@ local inviteStoreModule = require(shareGame.InviteStore)
 local getFFlagEnableSharedInviteStoreModule = require(modules.Flags.GetFFlagEnableSharedInviteStore)
 
 return {
-	createApp = function(p0, p1)
+	createApp = function(p1, p2)
 		-- upvalues: getFFlagEnableSharedInviteStoreModule (ref), inviteStoreModule (ref), roduxModule (ref), appReducerModule (ref), roactModule (ref), roactRoduxModule (ref), appModule (ref)
 		local t = {
 			store = if getFFlagEnableSharedInviteStoreModule() then inviteStoreModule else roduxModule.Store.new(appReducerModule, nil, { roduxModule.thunkMiddleware })
 		}
 		t._instanceHandle = roactModule.mount(roactModule.createElement(roactRoduxModule.StoreProvider, { store = t.store }, {
-			App = roactModule.createElement(appModule, { analytics = p1, pageTarget = p0 })
+			App = roactModule.createElement(appModule, { analytics = p2, pageTarget = p1 })
 		}))
 		
 		return t

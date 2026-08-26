@@ -118,8 +118,8 @@ local sounds = Instance.new("Folder")
 sounds.Name = "Sounds"
 sounds.Parent = robloxGui
 
-local function safeRequire(p0)
-	local ok, status = pcall(require, p0)
+local function safeRequire(p1)
+	local ok, status = pcall(require, p1)
 	
 	if ok then
 		return status
@@ -133,18 +133,18 @@ if fFlagLuaAppEnableInExperienceDataModelStreamStarter then
 	scriptContextService:AddCoreScriptLocal("CoreScripts/InExperienceDataModelStreamStarter", script.Parent)
 end
 if game:GetEngineFeature("ProtocolLaunchPrivateChannelUpdateCheckEngineFeature") then
-	local var46
+	local var1
 	local channelUpdatePrompt = modules.ChannelUpdatePrompt
 	local ok, status = pcall(require, channelUpdatePrompt)
 	
 	if ok then
-		var46 = status
+		var1 = status
 	else
 		warn("Failure to Start CoreScript module " .. channelUpdatePrompt.Name .. ".\n" .. status)
-		var46 = nil
+		var1 = nil
 	end
-	if var46 then
-		var46.init()
+	if var1 then
+		var1.init()
 	end
 end
 if getFFlagChromeCentralizedConfiguration() then
@@ -160,22 +160,22 @@ if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableWhatsN
 	coroutine.wrap(safeRequire)(modules.InGameWhatsNew)
 end
 if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAppNavMyStatsTab then
-	local var47 = coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.BuildExperience)
-	local var48 = var47 and var47.BuildModeLaunch:hasBuildMode()
+	local var2 = coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.BuildExperience)
+	local var3 = var2 and var2.BuildModeLaunch:hasBuildMode()
 	
-	if var47 then
-		var47.mountCreatorAgentResumeToastReceiver(var48 == true)
+	if var2 then
+		var2.mountCreatorAgentResumeToastReceiver(var3 == true)
 	end
-	if var47 and var48 then
+	if var2 and var3 then
 		game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)
-		var47.mountChatSheet()
+		var2.mountChatSheet()
 	end
 end
 if fFlagTopBarRefactor then
-	local var49 = coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.InExperienceOverlay)
+	local var4 = coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.InExperienceOverlay)
 	
-	if var49 then
-		var49.createOverlay()
+	if var4 then
+		var4.createOverlay()
 	end
 end
 if game:GetEngineFeature("LuobuModerationStatus") then
@@ -235,18 +235,18 @@ if game:GetEngineFeature("EnableBubbleChatFromChatService") or ok and status the
 end
 coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref)
-	local var56
+	local var5
 	local purchasePrompt = corePackagesService.Workspace.Packages.PurchasePrompt
 	local ok, status = pcall(require, purchasePrompt)
 	
 	if ok then
-		var56 = status
+		var5 = status
 	else
 		warn("Failure to Start CoreScript module " .. purchasePrompt.Name .. ".\n" .. status)
-		var56 = nil
+		var5 = nil
 	end
-	if var56 then
-		var56.mountPurchasePrompt()
+	if var5 then
+		var5.mountPurchasePrompt()
 	end
 end)()
 
@@ -268,18 +268,18 @@ scriptContextService:AddCoreScriptLocal("CoreScripts/BlockPlayerPrompt", robloxG
 scriptContextService:AddCoreScriptLocal("CoreScripts/FriendPlayerPrompt", robloxGui)
 
 if enablePromptAgeCheckListener then
-	local var50
+	local var5
 	local promptAgeCheckHandler = modules.PromptAgeCheckHandler
 	local ok_1, status_1 = pcall(require, promptAgeCheckHandler)
 	
 	if ok_1 then
-		var50 = status_1
+		var5 = status_1
 	else
 		warn("Failure to Start CoreScript module " .. promptAgeCheckHandler.Name .. ".\n" .. status_1)
-		var50 = nil
+		var5 = nil
 	end
-	if var50 then
-		var50.init()
+	if var5 then
+		var5.init()
 	end
 end
 scriptContextService:AddCoreScriptLocal("CoreScripts/AvatarContextMenu", robloxGui)
@@ -372,84 +372,84 @@ scriptContextService:AddCoreScriptLocal("CoreScripts/AvatarMood", script.Parent)
 scriptContextService:AddCoreScriptLocal("CoreScripts/PortalTeleportGUI", robloxGui)
 coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref)
-	local var57
+	local var6
 	local adsEudsa = corePackagesService.Workspace.Packages.AdsEudsa
 	local ok, status = pcall(require, adsEudsa)
 	
 	if ok then
-		var57 = status
+		var6 = status
 	else
 		warn("Failure to Start CoreScript module " .. adsEudsa.Name .. ".\n" .. status)
-		var57 = nil
+		var6 = nil
 	end
-	if var57 and var57.starterScript then
-		var57.starterScript()
+	if var6 and var6.starterScript then
+		var6.starterScript()
 	end
 end)()
 
 if game:GetEngineFeature("EnableAdGuiInteractivityControlRefactor") then
 	coroutine.wrap(function()
 		-- upvalues: corePackagesService (ref)
-		local var58
+		local var6
 		local adGuiInteractivity = corePackagesService.Workspace.Packages.AdGuiInteractivity
 		local ok, status = pcall(require, adGuiInteractivity)
 		
 		if ok then
-			var58 = status
+			var6 = status
 		else
 			warn("Failure to Start CoreScript module " .. adGuiInteractivity.Name .. ".\n" .. status)
-			var58 = nil
+			var6 = nil
 		end
-		if var58 and var58.starterScript then
-			var58.starterScript()
+		if var6 and var6.starterScript then
+			var6.starterScript()
 		end
 	end)()
 end
 coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref)
-	local var59
+	local var6
 	local enhancedVideo = corePackagesService.Workspace.Packages.EnhancedVideo
 	local ok, status = pcall(require, enhancedVideo)
 	
 	if ok then
-		var59 = status
+		var6 = status
 	else
 		warn("Failure to Start CoreScript module " .. enhancedVideo.Name .. ".\n" .. status)
-		var59 = nil
+		var6 = nil
 	end
-	if var59 and var59.starterScript then
-		var59.starterScript()
+	if var6 and var6.starterScript then
+		var6.starterScript()
 	end
 end)()
 coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref)
-	local var60
+	local var6
 	local inExperienceClickout = corePackagesService.Workspace.Packages.InExperienceClickout
 	local ok, status = pcall(require, inExperienceClickout)
 	
 	if ok then
-		var60 = status
+		var6 = status
 	else
 		warn("Failure to Start CoreScript module " .. inExperienceClickout.Name .. ".\n" .. status)
-		var60 = nil
+		var6 = nil
 	end
-	if var60 and var60.starterScript then
-		var60.starterScript()
+	if var6 and var6.starterScript then
+		var6.starterScript()
 	end
 end)()
 
 if game:GetEngineFeature("EnableLuaAdPlayer") then
-	local var51
+	local var6
 	local adPlayer = corePackagesService.Workspace.Packages.AdPlayer
 	local ok_1, status_1 = pcall(require, adPlayer)
 	
 	if ok_1 then
-		var51 = status_1
+		var6 = status_1
 	else
 		warn("Failure to Start CoreScript module " .. adPlayer.Name .. ".\n" .. status_1)
-		var51 = nil
+		var6 = nil
 	end
-	var51.init()
+	var6.init()
 end
 if game:GetEngineFeature("EnableVoiceAttention") then
 	scriptContextService:AddCoreScriptLocal("CoreScripts/VoiceAttention", script.Parent)
@@ -522,10 +522,10 @@ end
 local reactPerfTrackerModule = require(modules.Common.ReactPerfTracker)
 
 if reactPerfTrackerModule then
-	local var53 = reactPerfTrackerModule.new()
+	local var7 = reactPerfTrackerModule.new()
 	task.delay(5, function()
-		-- upvalues: var53 (ref)
-		var53:start()
+		-- upvalues: var7 (ref)
+		var7:start()
 	end)
 end
 local reactSchedulingTrackerModule = require(modules.Common.ReactSchedulingTracker)
@@ -542,36 +542,36 @@ end
 if fFlagEnableAEGIS2CommsFAEUpsell then
 	coroutine.wrap(function()
 		-- upvalues: corePackagesService (ref)
-		local var61
+		local var8
 		local socialUpsell = corePackagesService.Workspace.Packages.SocialUpsell
 		local ok, status = pcall(require, socialUpsell)
 		
 		if ok then
-			var61 = status
+			var8 = status
 		else
 			warn("Failure to Start CoreScript module " .. socialUpsell.Name .. ".\n" .. status)
-			var61 = nil
+			var8 = nil
 		end
-		if var61 then
-			var61.Overlay.initializeInExpOverlay()
+		if var8 then
+			var8.Overlay.initializeInExpOverlay()
 		end
 	end)()
 end
 coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref), guiService (ref)
-	local var62
+	local var8
 	local display = corePackagesService.Workspace.Packages.Display
 	local ok, status = pcall(require, display)
 	
 	if ok then
-		var62 = status
+		var8 = status
 	else
 		warn("Failure to Start CoreScript module " .. display.Name .. ".\n" .. status)
-		var62 = nil
+		var8 = nil
 	end
 	guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function()
-		-- upvalues: var62 (ref), guiService (copy)
-		var62.GetDisplayStore().setTopBarHeight(guiService.TopbarInset.Height)
+		-- upvalues: var8 (ref), guiService (copy)
+		var8.GetDisplayStore().setTopBarHeight(guiService.TopbarInset.Height)
 	end)
 end)()
 

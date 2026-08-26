@@ -12,34 +12,34 @@ local useCurrentSquadId = require(parent.SquadsCore.Hooks).useCurrentSquadId
 local iconButton = foundationModule.IconButton
 local scheduledSquadsListSheet = require(parent.Squads.Components).ScheduledSquadsListSheet
 
-return function(p0)
+return function(p1)
 	-- upvalues: useCurrentSquadId (ref), reactModule (ref), squadExternalContractContext (ref), eventNamesModule (ref), scheduledSquadActionEnum (ref), iconButton (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), scheduledSquadsListSheet (ref)
-	local var7 = useCurrentSquadId()
-	local var8 = reactModule.useContext(squadExternalContractContext)
-	local var9, var10 = reactModule.useState(false)
+	local var1 = useCurrentSquadId()
+	local var2 = reactModule.useContext(squadExternalContractContext)
+	local var3, var4 = reactModule.useState(false)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		ScheduledSquadsListButton = reactModule.createElement(iconButton, {
 			icon = foundationModule.Enums.IconName.Calendar,
-			LayoutOrder = p0.layoutOrder,
+			LayoutOrder = p1.layoutOrder,
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: var8 (ref), eventNamesModule (copy), scheduledSquadActionEnum (copy), p0 (ref), var7 (ref), var10 (ref)
-				var8.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {
+				-- upvalues: var2 (ref), eventNamesModule (copy), scheduledSquadActionEnum (copy), p1 (ref), var1 (ref), var4 (ref)
+				var2.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {
 					actionType = scheduledSquadActionEnum.ViewSubscribedScheduledSquadsList,
-					source = p0.source,
-					squadId = var7,
-					squadLocation = var8.squadLocation
+					source = p1.source,
+					squadId = var1,
+					squadLocation = var2.squadLocation
 				})
-				var10(true)
-			end, { var7, var10, var8.fireSquadAnalytics, var8.squadLocation }),
+				var4(true)
+			end, { var1, var4, var2.fireSquadAnalytics, var2.squadLocation }),
 			testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("scheduledSquads") else nil
 		}),
 		ScheduledSquadsListSheet = reactModule.createElement(scheduledSquadsListSheet, {
-			isOpen = var9,
+			isOpen = var3,
 			onClose = reactModule.useCallback(function()
-				-- upvalues: var10 (ref)
-				var10(false)
-			end, { var10 })
+				-- upvalues: var4 (ref)
+				var4(false)
+			end, { var4 })
 		})
 	})
 end

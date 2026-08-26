@@ -8,20 +8,20 @@ local inputUtilitiesModule = require(parent.Utils.InputUtilities)
 
 return function()
 	-- upvalues: reactModule (ref), inputUtilitiesModule (ref), useEventConnection (ref), userInputService (ref)
-	local var4, var5 = reactModule.useState(false)
-	local var6 = reactModule.useCallback(function(p0)
-		-- upvalues: inputUtilitiesModule (copy), var5 (ref)
-		if inputUtilitiesModule.isTouchInput(p0) then
-			var5(false)
-		end
-	end, { var5 })
-	useEventConnection(userInputService.InputBegan, reactModule.useCallback(function(p1)
-		-- upvalues: inputUtilitiesModule (copy), var5 (ref)
+	local var1, var2 = reactModule.useState(false)
+	local var3 = reactModule.useCallback(function(p1)
+		-- upvalues: inputUtilitiesModule (copy), var2 (ref)
 		if inputUtilitiesModule.isTouchInput(p1) then
-			var5(true)
+			var2(false)
 		end
-	end, { var5 }))
-	useEventConnection(userInputService.InputEnded, var6)
+	end, { var2 })
+	useEventConnection(userInputService.InputBegan, reactModule.useCallback(function(p1)
+		-- upvalues: inputUtilitiesModule (copy), var2 (ref)
+		if inputUtilitiesModule.isTouchInput(p1) then
+			var2(true)
+		end
+	end, { var2 }))
+	useEventConnection(userInputService.InputEnded, var3)
 	
-	return var4
+	return var1
 end

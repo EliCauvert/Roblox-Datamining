@@ -13,13 +13,13 @@ feedbackBarHint.validateProps = tModule.strictInterface({
 	hintTextSize = tModule.optional(tModule.number)
 })
 
-function feedbackBarHint.render(p0)
+function feedbackBarHint.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), styledTextLabel (ref), feedbackBarHintSizeAdjustment (ref)
-	return withStyle(function(p1)
-		-- upvalues: roactModule (copy), p0 (ref), styledTextLabel (copy), feedbackBarHintSizeAdjustment (copy)
+	return withStyle(function(p2)
+		-- upvalues: roactModule (copy), p1 (ref), styledTextLabel (copy), feedbackBarHintSizeAdjustment (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = p0.props.layoutOrder,
+			LayoutOrder = p1.props.layoutOrder,
 			AutomaticSize = Enum.AutomaticSize.X
 		}, {
 			Layout = roactModule.createElement("UIListLayout", {
@@ -31,14 +31,14 @@ function feedbackBarHint.render(p0)
 			}),
 			FeedbackBarHintText = roactModule.createElement(styledTextLabel, {
 				layoutOrder = 2,
-				textSize = p0.props.hintTextSize,
-				maxSize = if p0.props.maxWidth then if feedbackBarHintSizeAdjustment then Vector2.new(1000, p0.props.maxWidth) else Vector2.new(p0.props.maxWidth) else nil,
-				fontStyle = p1.Font.Header2,
-				colorStyle = p1.Theme.TextEmphasis,
-				automaticSize = if not p0.props.maxWidth then Enum.AutomaticSize.X else nil,
-				fluidSizing = if p0.props.maxWidth then true else false,
-				text = p0.props.text,
-				textTruncate = if p0.props.maxWidth then Enum.TextTruncate.AtEnd else nil,
+				textSize = p1.props.hintTextSize,
+				maxSize = if p1.props.maxWidth then if feedbackBarHintSizeAdjustment then Vector2.new(1000, p1.props.maxWidth) else Vector2.new(p1.props.maxWidth) else nil,
+				fontStyle = p2.Font.Header2,
+				colorStyle = p2.Theme.TextEmphasis,
+				automaticSize = if not p1.props.maxWidth then Enum.AutomaticSize.X else nil,
+				fluidSizing = if p1.props.maxWidth then true else false,
+				text = p1.props.text,
+				textTruncate = if p1.props.maxWidth then Enum.TextTruncate.AtEnd else nil,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Center
 			})

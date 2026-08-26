@@ -9,21 +9,21 @@ local radius = foundationModule.Enums.Radius
 local useTokens = foundationModule.Hooks.useTokens
 local _ = require(avatarExperienceControlBar.ControlBarTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), popover (ref), popoverAlign (ref), popoverSide (ref), radius (ref), foundationModule (ref)
-	return reactModule.createElement(popover.Root, { isOpen = p0.open or false }, {
-		Anchor = reactModule.createElement(popover.Anchor, nil, p0.children),
+	return reactModule.createElement(popover.Root, { isOpen = p1.open or false }, {
+		Anchor = reactModule.createElement(popover.Anchor, nil, p1.children),
 		Content = reactModule.createElement(popover.Content, {
-			align = p0.align or popoverAlign.Center,
-			side = p0.side or popoverSide.Right,
+			align = p1.align or popoverAlign.Center,
+			side = p1.side or popoverSide.Right,
 			backgroundStyle = useTokens().Color.OverMedia.OverMedia_0,
-			radius = p0.radius or radius.Small
+			radius = p1.radius or radius.Small
 		}, reactModule.createElement(foundationModule.View, { tag = "col gap-small padding-medium auto-xy" }, {
-			Title = if p0.titleText then reactModule.createElement(foundationModule.Text, {
+			Title = if p1.titleText then reactModule.createElement(foundationModule.Text, {
 				tag = "auto-xy text-title-medium content-emphasis",
-				Text = p0.titleText
+				Text = p1.titleText
 			}) else nil,
-			Subtitle = if p0.bodyText then reactModule.createElement(foundationModule.Text, { tag = "auto-xy text-body-small", Text = p0.bodyText }) else nil
+			Subtitle = if p1.bodyText then reactModule.createElement(foundationModule.Text, { tag = "auto-xy text-body-small", Text = p1.bodyText }) else nil
 		}))
 	})
 end

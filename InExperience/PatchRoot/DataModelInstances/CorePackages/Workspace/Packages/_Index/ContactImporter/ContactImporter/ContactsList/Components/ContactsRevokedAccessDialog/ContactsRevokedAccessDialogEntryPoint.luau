@@ -4,7 +4,7 @@ local dashModule = require(parent.Dash)
 local useNavigation = require(parent.Navigation).useNavigation
 local contactsRevokedAccessDialogModule = require(script.Parent.ContactsRevokedAccessDialog)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigation (ref), reactModule (ref), contactsRevokedAccessDialogModule (ref), dashModule (ref)
-	return reactModule.createElement(contactsRevokedAccessDialogModule, dashModule.join(p0, { navigation = useNavigation() }))
+	return reactModule.createElement(contactsRevokedAccessDialogModule, dashModule.join(p1, { navigation = useNavigation() }))
 end

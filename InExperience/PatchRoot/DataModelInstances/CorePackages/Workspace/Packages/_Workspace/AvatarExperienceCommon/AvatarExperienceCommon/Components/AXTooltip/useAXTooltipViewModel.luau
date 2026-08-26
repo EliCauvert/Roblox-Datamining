@@ -9,34 +9,34 @@ local AXTooltipStoreModule = require(avatarExperienceCommon.Stores.AXTooltipStor
 local AXTooltipTimeToDismiss = game:DefineFastInt("AXTooltipTimeToDismiss", 5)
 local _ = require(parent.AvatarExperienceUIKit)
 
-return function(p0)
+return function(p1)
 	-- upvalues: AXTooltipStoreModule (ref), useLocalization (ref), useIsSpatial (ref), useEarlyIsFocused (ref), signalsReactModule (ref), reactModule (ref), AXTooltipTimeToDismiss (ref)
-	local var5 = AXTooltipStoreModule(false)
-	local localizedText = p0.localizedText or useLocalization({ tooltipText = p0.tooltipLocalizationKey }).tooltipText
-	local var7 = p0.showTooltip and (signalsReactModule.useSignalState(var5.getIsTooltipAllowedToBeShown(p0.tooltipStorageKey)) and (useEarlyIsFocused() and not useIsSpatial()))
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), p0 (ref)
-		var5.dismissTooltip(p0.tooltipStorageKey)
-	end, { p0.tooltipStorageKey })
+	local var1 = AXTooltipStoreModule(false)
+	local localizedText = p1.localizedText or useLocalization({ tooltipText = p1.tooltipLocalizationKey }).tooltipText
+	local var2 = p1.showTooltip and (signalsReactModule.useSignalState(var1.getIsTooltipAllowedToBeShown(p1.tooltipStorageKey)) and (useEarlyIsFocused() and not useIsSpatial()))
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), p1 (ref)
+		var1.dismissTooltip(p1.tooltipStorageKey)
+	end, { p1.tooltipStorageKey })
 	
-	if p0.dismissTooltipRef and p0.showTooltip then
-		p0.dismissTooltipRef.current = var8
+	if p1.dismissTooltipRef and p1.showTooltip then
+		p1.dismissTooltipRef.current = var3
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), AXTooltipTimeToDismiss (copy), var5 (ref), p0 (ref)
-		if var7 then
+		-- upvalues: var2 (ref), AXTooltipTimeToDismiss (copy), var1 (ref), p1 (ref)
+		if var2 then
 			task.spawn(function()
-				-- upvalues: AXTooltipTimeToDismiss (copy), var5 (copy), p0 (copy)
+				-- upvalues: AXTooltipTimeToDismiss (copy), var1 (copy), p1 (copy)
 				task.wait(AXTooltipTimeToDismiss)
-				var5.dismissTooltip(p0.tooltipStorageKey, true)
+				var1.dismissTooltip(p1.tooltipStorageKey, true)
 			end)
 		end
-	end, { var7 })
+	end, { var2 })
 	
 	return {
-		isOpen = var7,
-		popoverSide = p0.popoverSide,
+		isOpen = var2,
+		popoverSide = p1.popoverSide,
 		tooltipText = localizedText,
-		onTooltipActivated = var8
+		onTooltipActivated = var3
 	}
 end

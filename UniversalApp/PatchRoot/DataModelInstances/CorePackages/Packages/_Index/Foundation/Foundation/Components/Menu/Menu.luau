@@ -14,34 +14,34 @@ local t = {
 	align = require(foundation.Enums.PopoverAlign).Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), popoverModule (ref), withCommonPropsModule (ref), radiusModule (ref), baseMenuModule (ref)
-	local var9 = withDefaultsModule(p0, t)
-	local var10 = useTokensModule()
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
 	
-	return reactModule.createElement(popoverModule.Root, { isOpen = var9.isOpen, testId = var9.testId }, {
-		Anchor = reactModule.createElement(popoverModule.Anchor, withCommonPropsModule(var9, { anchorRef = var9.anchorRef }), if var9.anchorRef then nil else var9.children),
+	return reactModule.createElement(popoverModule.Root, { isOpen = var1.isOpen, testId = var1.testId }, {
+		Anchor = reactModule.createElement(popoverModule.Anchor, withCommonPropsModule(var1, { anchorRef = var1.anchorRef }), if var1.anchorRef then nil else var1.children),
 		Content = reactModule.createElement(popoverModule.Content, {
 			hasArrow = false,
 			side = {
-				position = var9.side,
-				offset = var10.Stroke.Standard + var10.Padding.Small
+				position = var1.side,
+				offset = var2.Stroke.Standard + var2.Padding.Small
 			},
-			align = var9.align,
-			onPressedOutside = var9.onPressedOutside,
-			backgroundStyle = var10.Color.Surface.Surface_200,
+			align = var1.align,
+			onPressedOutside = var1.onPressedOutside,
+			backgroundStyle = var2.Color.Surface.Surface_200,
 			radius = radiusModule.Medium,
-			ref = p1,
-			selection = var9.selection,
-			selectionGroup = var9.selectionGroup
+			ref = p2,
+			selection = var1.selection,
+			selectionGroup = var1.selectionGroup
 		}, reactModule.createElement(reactModule.Fragment, nil, {
 			Menu = reactModule.createElement(baseMenuModule.Root, {
-				items = var9.items,
-				size = var9.size,
-				width = var9.width,
-				maxHeight = var9.maxHeight,
-				onActivated = var9.onActivated,
-				onNestedLeafActivated = var9.onPressedOutside,
+				items = var1.items,
+				size = var1.size,
+				width = var1.width,
+				maxHeight = var1.maxHeight,
+				onActivated = var1.onActivated,
+				onNestedLeafActivated = var1.onPressedOutside,
 				radius = radiusModule.Medium
 			})
 		}))

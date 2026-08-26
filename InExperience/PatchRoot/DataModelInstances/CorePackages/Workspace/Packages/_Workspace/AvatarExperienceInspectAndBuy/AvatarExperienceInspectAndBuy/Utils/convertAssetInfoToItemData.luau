@@ -5,52 +5,52 @@ local tutilsModule = require(parent.tutils)
 local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AXCommon).Enums.ItemTypeEnum
 local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: tutilsModule (ref), itemTypeEnum (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref)
 	local t = {
-		id = p0.assetId,
-		name = p0.name,
-		meta = p0.meta,
-		description = p0.description,
+		id = p1.assetId,
+		name = p1.name,
+		meta = p1.meta,
+		description = p1.description,
 		itemType = itemTypeEnum.Asset,
-		itemSubType = p0.assetTypeId,
+		itemSubType = p1.assetTypeId,
 		creator = {
-			creatorId = p0.creatorId or "",
-			creatorName = p0.creatorName or "",
-			creatorHasVerifiedBadge = p0.creatorHasVerifiedBadge or false
+			creatorId = p1.creatorId or "",
+			creatorName = p1.creatorName or "",
+			creatorHasVerifiedBadge = p1.creatorHasVerifiedBadge or false
 		},
-		saleLocationType = p0.saleLocationType,
-		itemRestrictions = p0.itemRestrictions or {},
-		priceInRobux = p0.price,
-		noPriceStatus = p0.noPriceStatus,
-		catalogPriceStatus = p0.catalogPriceStatus,
-		isOwned = p0.owned,
-		isOffSale = p0.isOffSale,
-		collectibleItemId = p0.collectibleItemId,
-		creatingUniverseId = p0.creatingUniverseId
+		saleLocationType = p1.saleLocationType,
+		itemRestrictions = p1.itemRestrictions or {},
+		priceInRobux = p1.price,
+		noPriceStatus = p1.noPriceStatus,
+		catalogPriceStatus = p1.catalogPriceStatus,
+		isOwned = p1.owned,
+		isOffSale = p1.isOffSale,
+		collectibleItemId = p1.collectibleItemId,
+		creatingUniverseId = p1.creatingUniverseId
 	}
 	local t_1 = {
-		quantityLimitPerUser = p0.collectibleQuantityLimitPerUser,
-		resellableCount = p0.resellableCount or (if p1 then tutilsModule.fieldCount(p1) else 0),
-		collectibleLowestAvailableResaleProductId = p0.collectibleLowestAvailableResaleProductId,
-		collectibleLowestAvailableResaleItemInstanceId = p0.collectibleLowestAvailableResaleItemInstanceId,
-		unitsAvailableForConsumption = p0.remaining
+		quantityLimitPerUser = p1.collectibleQuantityLimitPerUser,
+		resellableCount = p1.resellableCount or (if p2 then tutilsModule.fieldCount(p2) else 0),
+		collectibleLowestAvailableResaleProductId = p1.collectibleLowestAvailableResaleProductId,
+		collectibleLowestAvailableResaleItemInstanceId = p1.collectibleLowestAvailableResaleItemInstanceId,
+		unitsAvailableForConsumption = p1.remaining
 	}
-	local hasResellers = p0.hasResellers
+	local hasResellers = p1.hasResellers
 	
-	if not hasResellers and p0.collectibleLowestAvailableResaleProductId ~= nil then
-		hasResellers = p0.collectibleLowestAvailableResaleProductId ~= ""
+	if not hasResellers and p1.collectibleLowestAvailableResaleProductId ~= nil then
+		hasResellers = p1.collectibleLowestAvailableResaleProductId ~= ""
 	end
 	t_1.hasResellers = hasResellers
-	t_1.lowestResalePrice = p0.collectibleLowestResalePrice or 0
-	t_1.totalQuantity = p0.collectibleTotalQuantity or 0
-	t_1.experiences = p0 and (p0.saleLocation and (p0.saleLocation.UniverseIds or {}))
+	t_1.lowestResalePrice = p1.collectibleLowestResalePrice or 0
+	t_1.totalQuantity = p1.collectibleTotalQuantity or 0
+	t_1.experiences = p1 and (p1.saleLocation and (p1.saleLocation.UniverseIds or {}))
 	t.collectibleItemDetails = t_1
 	t.favoritesDetails = {
-		numFavorites = p0.numFavorites,
-		isFavorited = p0.isFavorited
+		numFavorites = p1.numFavorites,
+		isFavorited = p1.isFavorited
 	}
-	t.timedOptions = if fFlagAXEnableIaBTimedOptionsBulkPurchase then p0.timedOptions else nil
+	t.timedOptions = if fFlagAXEnableIaBTimedOptionsBulkPurchase then p1.timedOptions else nil
 	
 	return t
 end

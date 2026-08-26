@@ -27,9 +27,9 @@ local list = {
 if fFlagEnablePartyVoiceChangersInLua then
 	table.insert(list, enumScreensModule.SquadVoiceChangers)
 end
-local var16 = function(p0)
+local var1 = function(p1)
 	-- upvalues: reactModule (ref), squadAddFriendsIconButtonModule (ref)
-	local navigation = p0.navigation
+	local navigation = p1.navigation
 	
 	return {
 		renderRight = function()
@@ -76,9 +76,9 @@ function squadLobbyScreen.init(p1)
 		end
 	end
 	
-	function p1.openSquadVoiceAbuseReport(p3)
+	function p1.openSquadVoiceAbuseReport(p2)
 		-- upvalues: p1 (ref), enumScreensModule (copy)
-		p1.props.navigation.navigate(enumScreensModule.SquadVoiceReportAbuse, { reportData = p3 })
+		p1.props.navigation.navigate(enumScreensModule.SquadVoiceReportAbuse, { reportData = p2 })
 	end
 	
 	if fFlagEnablePartyVoiceChangersInLua then
@@ -87,27 +87,27 @@ function squadLobbyScreen.init(p1)
 			p1.props.navigation.navigate(enumScreensModule.SquadVoiceChangers)
 		end
 	end
-	function p1.navigateToSquadInviteFriends(p4)
+	function p1.navigateToSquadInviteFriends(p2)
 		-- upvalues: p1 (ref), enumScreensModule (copy)
-		p1.props.navigation.navigate(enumScreensModule.SquadInviteFriends, { conversationId = p4 })
+		p1.props.navigation.navigate(enumScreensModule.SquadInviteFriends, { conversationId = p2 })
 	end
 	
 	function p1.navigateAwayFromSquad()
 		-- upvalues: p1 (ref), list (copy)
 		if p1.hasNavigatedAwayFromSquad then return end
-		local var19 = p1.props.navigation._dangerouslyGetParent()
+		local var2 = p1.props.navigation._dangerouslyGetParent()
 		
-		if var19 then
-			local state = var19.state
+		if var2 then
+			local state = var2.state
 			
 			if state then
 				local key = nil
 				
 				for i = state.index, 1, -1 do
-					local var20 = state.routes[i]
+					local var3 = state.routes[i]
 					
-					if table.find(list, var20.routeName) then
-						key = var20.key
+					if table.find(list, var3.routeName) then
+						key = var3.key
 						continue
 					end
 					if key then
@@ -121,77 +121,77 @@ function squadLobbyScreen.init(p1)
 	end
 end
 
-function squadLobbyScreen.willUnmount(p5)
-	if p5.ixpSubscription then
-		p5.ixpSubscription.remove()
+function squadLobbyScreen.willUnmount(p2)
+	if p2.ixpSubscription then
+		p2.ixpSubscription.remove()
 	end
-	if p5.willFocusSubscription then
-		p5.willFocusSubscription:remove()
+	if p2.willFocusSubscription then
+		p2.willFocusSubscription:remove()
 	end
-	if p5.didBlurSubscription then
-		p5.didBlurSubscription:remove()
+	if p2.didBlurSubscription then
+		p2.didBlurSubscription:remove()
 	end
 end
 
-function squadLobbyScreen.render(p6)
+function squadLobbyScreen.render(p2)
 	-- upvalues: withChatPlacementContext (ref), chatPlacementContextModule (ref), reactModule (ref), squadLobbyModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), fFlagExpChatEnableFriendsTab (ref), parentContainerContextModule (ref)
-	return withChatPlacementContext(function(p7)
-		-- upvalues: p6 (ref), chatPlacementContextModule (copy), reactModule (copy), squadLobbyModule (copy), fFlagEnablePartyVoiceChangersInLua (copy), fFlagExpChatEnableFriendsTab (copy), parentContainerContextModule (copy)
-		local var21 = chatPlacementContextModule.isPlacementInExperience(p7.chatPlacement)
+	return withChatPlacementContext(function(p3)
+		-- upvalues: p2 (ref), chatPlacementContextModule (copy), reactModule (copy), squadLobbyModule (copy), fFlagEnablePartyVoiceChangersInLua (copy), fFlagExpChatEnableFriendsTab (copy), parentContainerContextModule (copy)
+		local var2 = chatPlacementContextModule.isPlacementInExperience(p3.chatPlacement)
 		
-		if not p6.state.isFocused then
+		if not p2.state.isFocused then
 			return nil
 		end
-		local var22 = function(p8)
-			-- upvalues: reactModule (copy), squadLobbyModule (copy), p6 (copy), fFlagEnablePartyVoiceChangersInLua (copy), var21 (ref)
+		local var3 = function(p4)
+			-- upvalues: reactModule (copy), squadLobbyModule (copy), p2 (copy), fFlagEnablePartyVoiceChangersInLua (copy), var2 (ref)
 			return reactModule.createElement(squadLobbyModule, {
-				navigateToHomePage = p6.navigateToHomePage,
-				openViewProfile = p6.openViewProfile,
-				openSquadVoiceAbuseReport = p6.openSquadVoiceAbuseReport,
-				navigateAwayFromSquad = p6.navigateAwayFromSquad,
-				navigateToChat = p8,
-				navigateToSquadInviteFriends = p6.navigateToSquadInviteFriends,
-				openSquadVoiceChangers = if fFlagEnablePartyVoiceChangersInLua then p6.openSquadVoiceChangers else nil,
-				isInExperience = var21,
-				isWideMode = p6.props.isWideMode
+				navigateToHomePage = p2.navigateToHomePage,
+				openViewProfile = p2.openViewProfile,
+				openSquadVoiceAbuseReport = p2.openSquadVoiceAbuseReport,
+				navigateAwayFromSquad = p2.navigateAwayFromSquad,
+				navigateToChat = p4,
+				navigateToSquadInviteFriends = p2.navigateToSquadInviteFriends,
+				openSquadVoiceChangers = if fFlagEnablePartyVoiceChangersInLua then p2.openSquadVoiceChangers else nil,
+				isInExperience = var2,
+				isWideMode = p2.props.isWideMode
 			})
 		end
 		
-		return if fFlagExpChatEnableFriendsTab and var21 then reactModule.createElement(parentContainerContextModule.Consumer, {
-			render = function(p9)
-				-- upvalues: var22 (ref), p6 (copy)
-				return var22(function(p10)
-					-- upvalues: p9 (ref), p6 (copy)
-					return p9.openFriendsChatConversation(p10):andThen(function(p11)
-						-- upvalues: p6 (copy)
-						p6.navigateAwayFromSquad()
+		return if fFlagExpChatEnableFriendsTab and var2 then reactModule.createElement(parentContainerContextModule.Consumer, {
+			render = function(p4)
+				-- upvalues: var3 (ref), p2 (copy)
+				return var3(function(p5)
+					-- upvalues: p4 (ref), p2 (copy)
+					return p4.openFriendsChatConversation(p5):andThen(function(p6)
+						-- upvalues: p2 (copy)
+						p2.navigateAwayFromSquad()
 						
-						return p11
+						return p6
 					end)
 				end)
 			end
-		}) else var22(nil)
+		}) else var3(nil)
 	end)
 end
 
 local wideSquadLobbyScreen = reactModule.PureComponent:extend("WideSquadLobbyScreen")
-wideSquadLobbyScreen.navigationOptions = var16
+wideSquadLobbyScreen.navigationOptions = var1
 
 function wideSquadLobbyScreen.init(_) end
 
-function wideSquadLobbyScreen.render(p12)
+function wideSquadLobbyScreen.render(p2)
 	-- upvalues: reactModule (ref), squadLobbyScreen (ref), cryoModule (ref)
-	return reactModule.createElement(squadLobbyScreen, cryoModule.Dictionary.union(p12.props, { isWideMode = true }))
+	return reactModule.createElement(squadLobbyScreen, cryoModule.Dictionary.union(p2.props, { isWideMode = true }))
 end
 
 local compactSquadLobbyScreen = reactModule.PureComponent:extend("CompactSquadLobbyScreen")
-compactSquadLobbyScreen.navigationOptions = var16
+compactSquadLobbyScreen.navigationOptions = var1
 
 function compactSquadLobbyScreen.init(_) end
 
-function compactSquadLobbyScreen.render(p13)
+function compactSquadLobbyScreen.render(p2)
 	-- upvalues: reactModule (ref), squadLobbyScreen (ref), cryoModule (ref)
-	return reactModule.createElement(squadLobbyScreen, cryoModule.Dictionary.union(p13.props, { isWideMode = false }))
+	return reactModule.createElement(squadLobbyScreen, cryoModule.Dictionary.union(p2.props, { isWideMode = false }))
 end
 
 return {

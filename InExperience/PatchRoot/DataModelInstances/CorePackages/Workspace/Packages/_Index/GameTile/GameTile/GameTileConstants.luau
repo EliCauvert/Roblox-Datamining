@@ -15,17 +15,17 @@ return {
 		ImageBottomRight = "ImageBottomRight"
 	},
 	TileBadgePositionCalculators = {
-		ImageTopLeft = function(p0)
-			return UDim2.new(0, p0, 0, p0), Vector2.new(0, 0)
+		ImageTopLeft = function(p1)
+			return UDim2.new(0, p1, 0, p1), Vector2.new(0, 0)
 		end,
 		ImageBottomLeft = function(p1)
 			return UDim2.new(0, p1, 1, -p1), Vector2.new(0, 1)
 		end,
-		ImageTopRight = function(p2)
-			return UDim2.new(1, -p2, 0, p2), Vector2.new(1, 0)
+		ImageTopRight = function(p1)
+			return UDim2.new(1, -p1, 0, p1), Vector2.new(1, 0)
 		end,
-		ImageBottomRight = function(p3)
-			return UDim2.new(1, -p3, 1, -p3), Vector2.new(1, 1)
+		ImageBottomRight = function(p1)
+			return UDim2.new(1, -p1, 1, -p1), Vector2.new(1, 1)
 		end
 	},
 	TileBadgeIconNamesByType = {

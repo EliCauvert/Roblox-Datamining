@@ -8,9 +8,9 @@ local experienceGenreStoreTypesModule = require(script.Parent.ExperienceGenreSto
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
-	return (p0 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
+	return (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 end
 
 return {
@@ -52,9 +52,9 @@ return {
 			end
 		}))
 	end,
-	setExperienceGenre = function(value, p5)
+	setExperienceGenre = function(value, p1)
 		-- upvalues: urlBase (ref), experienceGenreStoreTypesModule (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
-		local baseUrl = (p5 or {}).baseUrl or urlBase.APIS
+		local baseUrl = (p1 or {}).baseUrl or urlBase.APIS
 		local t = {
 			universeId = value.universeId,
 			genre = value.genre,
@@ -67,11 +67,11 @@ return {
 		return asPromise(fetch({
 			method = "POST",
 			analyticsKey = "experience-genre.set",
-			network = (p5 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
+			network = (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
 			url = baseUrl .. "/experience-genre-api/v1/Creator/ExperienceGenre",
 			body = t,
-			decode = function(p6)
-				return p6
+			decode = function(p2)
+				return p2
 			end
 		}))
 	end

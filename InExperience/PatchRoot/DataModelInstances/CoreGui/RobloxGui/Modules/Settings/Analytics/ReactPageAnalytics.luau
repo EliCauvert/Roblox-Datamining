@@ -28,29 +28,29 @@ function t.new()
 	return setmetatable({}, t)
 end
 
-function t._logEventWithStandardizedFields(_, p0, p1, p2)
+function t._logEventWithStandardizedFields(_, p1, p2, p3)
 	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
 	local list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
-	p2 = p2 or {}
+	p3 = p3 or {}
 	
 	if telemetryServicePlaySessionInfoEnabledEngineFeature then
 		table.insert(list, "addPlaySessionId")
 	else
-		p2.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+		p3.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	telemetryService:LogEvent(p0, {
-		eventContext = p1,
+	telemetryService:LogEvent(p1, {
+		eventContext = p2,
 		standardizedFields = list,
-		customFields = p2
+		customFields = p3
 	})
 end
 
-function t:openPage(p3)
-	self:_logEventWithStandardizedFields(self.configs.openPage, `open_{p3}_page`)
+function t:openPage(p1)
+	self:_logEventWithStandardizedFields(self.configs.openPage, `open_{p1}_page`)
 end
 
-function t:closePage(p4)
-	self:_logEventWithStandardizedFields(self.configs.closePage, `close_{p4}_page`)
+function t:closePage(p1)
+	self:_logEventWithStandardizedFields(self.configs.closePage, `close_{p1}_page`)
 end
 
 return t

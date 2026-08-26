@@ -5,41 +5,41 @@ local badge = require(parent.Foundation).Badge
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useRemainingTimeModule = require(avatarExperienceUIKit.Utils.useRemainingTime)
 
-local function _(p0, p1)
-	local unit = p0.unit
-	local var3 = p0.value ~= 1
+local function _(p1, p2)
+	local unit = p1.unit
+	local var1 = p1.value ~= 1
 	
-	return if unit == "days" then if var3 then p1.dayPlural else p1.daySingular elseif unit == "hours" then if var3 then p1.hourPlural else p1.hourSingular elseif unit == "minutes" then if var3 then p1.minutePlural else p1.minuteSingular elseif var3 then p1.secondPlural else p1.secondSingular
+	return if unit == "days" then if var1 then p2.dayPlural else p2.daySingular elseif unit == "hours" then if var1 then p2.hourPlural else p2.hourSingular elseif unit == "minutes" then if var1 then p2.minutePlural else p2.minuteSingular elseif var1 then p2.secondPlural else p2.secondSingular
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useRemainingTimeModule (ref), useLocalization (ref), reactModule (ref), badge (ref)
-	local var4 = useRemainingTimeModule(p2.endTime)
-	local var5 = if var4 then var4.value else 0
-	local var6 = useLocalization({
+	local var1 = useRemainingTimeModule(p1.endTime)
+	local var2 = if var1 then var1.value else 0
+	local var3 = useLocalization({
 		daySingular = "Feature.Catalog.Label.Timer.Day.Singular",
 		hourSingular = "Feature.Catalog.Label.Timer.Hour.Singular",
 		minuteSingular = "Feature.Catalog.Label.Timer.Minute.Singular",
 		secondSingular = "Feature.Catalog.Label.Timer.Second.Singular",
-		dayPlural = { "Feature.Catalog.Label.Timer.Day.Plural", number = var5 },
-		hourPlural = { "Feature.Catalog.Label.Timer.Hour.Plural", number = var5 },
+		dayPlural = { "Feature.Catalog.Label.Timer.Day.Plural", number = var2 },
+		hourPlural = { "Feature.Catalog.Label.Timer.Hour.Plural", number = var2 },
 		minutePlural = {
 			"Feature.Catalog.Label.Timer.Minute.Plural",
-			number = var5
+			number = var2
 		},
 		secondPlural = {
 			"Feature.Catalog.Label.Timer.Second.Plural",
-			number = var5
+			number = var2
 		}
 	})
 	
-	if var4 and var4.value >= 0 then
+	if var1 and var1.value >= 0 then
 		local createElement = reactModule.createElement
-		local t = { LayoutOrder = p2.LayoutOrder }
-		local unit = var4.unit
-		local var8 = var4.value ~= 1
-		t.text = if unit == "days" then if var8 then var6.dayPlural else var6.daySingular elseif unit == "hours" then if var8 then var6.hourPlural else var6.hourSingular elseif unit == "minutes" then if var8 then var6.minutePlural else var6.minuteSingular elseif var8 then var6.secondPlural else var6.secondSingular
-		t.variant = p2.badgeVariant
+		local t = { LayoutOrder = p1.LayoutOrder }
+		local unit = var1.unit
+		local var4 = var1.value ~= 1
+		t.text = if unit == "days" then if var4 then var3.dayPlural else var3.daySingular elseif unit == "hours" then if var4 then var3.hourPlural else var3.hourSingular elseif unit == "minutes" then if var4 then var3.minutePlural else var3.minuteSingular elseif var4 then var3.secondPlural else var3.secondSingular
+		t.variant = p1.badgeVariant
 		
 		return createElement(badge, t)
 	end

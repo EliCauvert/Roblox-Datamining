@@ -8,9 +8,9 @@ local function getEconomyUserCurrencyUrl()
 	return string.gsub(string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www."), "http:", "https:"), "https://www.", "https://economy.") .. "v1/user/currency"
 end
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: httpRequestModule (ref), getEconomyUserCurrencyUrl (ref)
-	return (if p1 ~= nil then httpRequestModule.new(p0) else httpRequestModule.fromNetworkImpl(p1)):get(getEconomyUserCurrencyUrl()):andThen(function(p2)
-		return (if p2.robux ~= nil then p2.Robux else p2.robux) or 0
+	return (if p2 ~= nil then httpRequestModule.new(p1) else httpRequestModule.fromNetworkImpl(p2)):get(getEconomyUserCurrencyUrl()):andThen(function(p3)
+		return (if p3.robux ~= nil then p3.Robux else p3.robux) or 0
 	end)
 end

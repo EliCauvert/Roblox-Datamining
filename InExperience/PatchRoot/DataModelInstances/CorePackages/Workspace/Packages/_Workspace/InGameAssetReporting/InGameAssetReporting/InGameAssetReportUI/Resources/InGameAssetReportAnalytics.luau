@@ -3,7 +3,7 @@ local eventIngestService = game:GetService("EventIngestService")
 local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local parent = inGameAssetReporting.Parent
 local eventIngest = require(parent.Analytics).AnalyticsReporters.EventIngest
-local var3 = require(parent.Analytics).Analytics.new(rbxAnalyticsService)
+local var1 = require(parent.Analytics).Analytics.new(rbxAnalyticsService)
 local cryoModule = require(parent.Cryo)
 local _ = require(inGameAssetReporting.InGameAssetReportUI.Resources.Types)
 local t = {
@@ -11,16 +11,16 @@ local t = {
 	SubmittedAbuseType = game:DefineFastString("InGameAssetReportingSubmittedAbuseTypeStat", "SubmittedAbuseType")
 }
 
-function submitAnalytics(p0, p1)
-	-- upvalues: eventIngest (ref), eventIngestService (ref), var3 (ref), cryoModule (ref), t (ref)
-	local var6 = eventIngest.new(eventIngestService)
-	local diag = var3.Diag
-	local floored = math.floor(workspace:GetServerTimeNow() * 1000 - p0.accumulated_time_ms)
-	local var8 = cryoModule.Dictionary.join(p0, { accumulated_time_ms = floored, interaction_type = p1 })
-	local text = p0.context .. "_" .. t.SubmittedAbuseType .. "_" .. p0.reason_selection
-	diag:reportStats(p0.context .. "_" .. t.ReportTimeSpent, floored)
+function submitAnalytics(p1, p2)
+	-- upvalues: eventIngest (ref), eventIngestService (ref), var1 (ref), cryoModule (ref), t (ref)
+	local var2 = eventIngest.new(eventIngestService)
+	local diag = var1.Diag
+	local floored = math.floor(workspace:GetServerTimeNow() * 1000 - p1.accumulated_time_ms)
+	local var3 = cryoModule.Dictionary.join(p1, { accumulated_time_ms = floored, interaction_type = p2 })
+	local text = p1.context .. "_" .. t.SubmittedAbuseType .. "_" .. p0.reason_selection
+	diag:reportStats(p1.context .. "_" .. t.ReportTimeSpent, floored)
 	diag:reportCounter(text, 1)
-	var6:sendEventDeferred(p0.context, p0.event_type, var8)
+	var2:sendEventDeferred(p1.context, p1.event_type, var3)
 end
 
 return submitAnalytics

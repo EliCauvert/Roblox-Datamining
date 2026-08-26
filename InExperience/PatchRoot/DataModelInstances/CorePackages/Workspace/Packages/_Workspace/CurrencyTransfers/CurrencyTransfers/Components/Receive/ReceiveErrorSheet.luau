@@ -21,22 +21,22 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local failureReasonModule = require(currencyTransfers.Enums.FailureReason)
 local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: failureReasonModule (ref), transferLocaleFormatModule (ref)
-	if not p0 then
-		return p1.GenericError, p1.TryAgain
+	if not p1 then
+		return p2.GenericError, p2.TryAgain
 	end
 	local accountDisabled
-	local OK = p1.OK
+	local OK = p2.OK
 	local _ = nil
 	
-	if p0 == failureReasonModule.TransferDisabledForUser then
-		accountDisabled = p1.AccountDisabled
-	elseif p0 == failureReasonModule.TransferExpired then
-		accountDisabled = transferLocaleFormatModule.substituteUsername(p1.TransferExpired, tostring(p2))
+	if p1 == failureReasonModule.TransferDisabledForUser then
+		accountDisabled = p2.AccountDisabled
+	elseif p1 == failureReasonModule.TransferExpired then
+		accountDisabled = transferLocaleFormatModule.substituteUsername(p2.TransferExpired, tostring(p3))
 	else
-		accountDisabled = p1.GenericError
-		OK = p1.TryAgain
+		accountDisabled = p2.GenericError
+		OK = p2.TryAgain
 	end
 	return accountDisabled, OK
 end
@@ -44,52 +44,52 @@ end
 return function(_)
 	-- upvalues: useTransferStoreModule (ref), useTokens (ref), signalsReactModule (ref), failureReasonModule (ref), reactModule (ref), getTransferRequestByIdRequestModule (ref), useUserNameFromUserIdModule (ref), useLocalization (ref), transferLocalizationKeysModule (ref), transferLocaleFormatModule (ref), sheet (ref), useScaledValue (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local genericError, tryAgain
-	local var10 = useTransferStoreModule()
-	local var11 = useTokens()
-	local var12 = signalsReactModule.useSignalState(var10.getErrorTransferModel)
-	local var13 = signalsReactModule.useSignalState(var10.getSender)
-	local var14 = signalsReactModule.useSignalState(var10.getRobuxTransfer)
-	local var15 = signalsReactModule.useSignalState(var10.getTransferRequestId)
-	local triggerOnClose = var10.triggerOnClose
-	local var16 = if var12 then var12.failureReason else nil
-	local var17 = var16 == failureReasonModule.TransferExpired
+	local var1 = useTransferStoreModule()
+	local var2 = useTokens()
+	local var3 = signalsReactModule.useSignalState(var1.getErrorTransferModel)
+	local var4 = signalsReactModule.useSignalState(var1.getSender)
+	local var5 = signalsReactModule.useSignalState(var1.getRobuxTransfer)
+	local var6 = signalsReactModule.useSignalState(var1.getTransferRequestId)
+	local triggerOnClose = var1.triggerOnClose
+	local var7 = if var3 then var3.failureReason else nil
+	local var8 = var7 == failureReasonModule.TransferExpired
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), var13 (ref), var14 (ref), var15 (ref), getTransferRequestByIdRequestModule (copy), var10 (ref)
-		if var17 and not var13 and (not var14 or not var14.sender) and var15 then
-			getTransferRequestByIdRequestModule({ transferRequestId = var15 }, nil, var10.getNetworkImpl()):andThen(function(p3)
-				-- upvalues: var10 (copy)
-				if p3 and p3.transfer and p3.transfer.sender then
-					var10.setSender(p3.transfer.sender)
+		-- upvalues: var8 (ref), var4 (ref), var5 (ref), var6 (ref), getTransferRequestByIdRequestModule (copy), var1 (ref)
+		if var8 and not var4 and (not var5 or not var5.sender) and var6 then
+			getTransferRequestByIdRequestModule({ transferRequestId = var6 }, nil, var1.getNetworkImpl()):andThen(function(p1)
+				-- upvalues: var1 (copy)
+				if p1 and p1.transfer and p1.transfer.sender then
+					var1.setSender(p1.transfer.sender)
 				end
 			end):catch(function() end)
 			
 			return
 		end
-	end, { var17, var15, var13, var14 })
-	local var13_1 = var13 or (if var14 then var14.sender else nil)
-	local var19 = if var13_1 then var13_1.targetId else nil
-	local var20 = useUserNameFromUserIdModule(if var17 and var19 and var19 ~= 0 then var19 else nil)
-	local var21 = if var13_1 and (var13_1.targetName or var13_1.targetDisplayName) then var13_1.targetName or var13_1.targetDisplayName elseif var17 and var20 and var20 ~= "" then var20 else nil
-	local var22 = useLocalization(transferLocalizationKeysModule.Presets.ReceiveErrorSheet)
+	end, { var8, var6, var4, var5 })
+	local var9 = var4 or (if var5 then var5.sender else nil)
+	local var10 = if var9 then var9.targetId else nil
+	local var11 = useUserNameFromUserIdModule(if var8 and var10 and var10 ~= 0 then var10 else nil)
+	local var12 = if var9 and (var9.targetName or var9.targetDisplayName) then var9.targetName or var9.targetDisplayName elseif var8 and var11 and var11 ~= "" then var11 else nil
+	local var13 = useLocalization(transferLocalizationKeysModule.Presets.ReceiveErrorSheet)
 	
-	if var16 then
+	if var7 then
 		local accountDisabled
-		local OK = var22.OK
+		local OK = var13.OK
 		local _ = nil
 		
-		if var16 == failureReasonModule.TransferDisabledForUser then
-			accountDisabled = var22.AccountDisabled
-		elseif var16 == failureReasonModule.TransferExpired then
-			accountDisabled = transferLocaleFormatModule.substituteUsername(var22.TransferExpired, tostring(var21))
+		if var7 == failureReasonModule.TransferDisabledForUser then
+			accountDisabled = var13.AccountDisabled
+		elseif var7 == failureReasonModule.TransferExpired then
+			accountDisabled = transferLocaleFormatModule.substituteUsername(var13.TransferExpired, tostring(var12))
 		else
-			accountDisabled = var22.GenericError
-			OK = var22.TryAgain
+			accountDisabled = var13.GenericError
+			OK = var13.TryAgain
 		end
 		genericError = accountDisabled
 		tryAgain = OK
 	else
-		genericError = var22.GenericError
-		tryAgain = var22.TryAgain
+		genericError = var13.GenericError
+		tryAgain = var13.TryAgain
 	end
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
@@ -107,7 +107,7 @@ return function(_)
 					ErrorIcon = reactModule.createElement(icon, {
 						tag = "content-inverse-emphasis",
 						name = enums.IconName.TriangleExclamation,
-						size = var11.Size.Size_1200
+						size = var2.Size.Size_1200
 					})
 				}),
 				ErrorMessage = reactModule.createElement(text, {

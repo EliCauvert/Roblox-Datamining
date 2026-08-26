@@ -17,28 +17,28 @@ local minFrameWidth = constantsModule.ServerJobsFormatting.MinFrameWidth
 local lineGraphHeight = constantsModule.GeneralFormatting.LineGraphHeight
 local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 local list = {
-	function(p0)
-		return p0 and string.format("%.4f%%", p0) or ""
+	function(p1)
+		return p1 and string.format("%.4f%%", p1) or ""
 	end,
 	function(p1)
 		return p1 and string.format("%.4f/s", p1) or ""
 	end,
-	function(p2)
-		return p2 and string.format("%.4fms", p2) or ""
+	function(p1)
+		return p1 and string.format("%.4fms", p1) or ""
 	end
 }
 local noResultSearchStr = constantsModule.GeneralFormatting.NoResultSearchStr
-local var9 = 0
+local var1 = 0
 local t = {}
 local t_1 = {}
 local t_2 = {}
-local var13 = entryFrameHeight - lineWidth
+local var2 = entryFrameHeight - lineWidth
 
 for i, v in ipairs(valueCellWidth) do
-	table.insert(t, UDim2.new(var9, cellPadding, 0, 0))
+	table.insert(t, UDim2.new(var1, cellPadding, 0, 0))
 	table.insert(t_1, UDim2.new(v, -cellPadding, 0, headerFrameHeight))
-	table.insert(t_2, UDim2.new(v, -cellPadding, 0, var13))
-	var9 += v
+	table.insert(t_2, UDim2.new(v, -cellPadding, 0, var2))
+	var1 += v
 end
 local t_3 = {}
 
@@ -47,116 +47,116 @@ for i_1, v_1 in ipairs(t) do
 end
 local serverJobsChart = roactModule.Component:extend("ServerJobsChart")
 
-local function getX(p3)
-	return p3.time
+local function getX(p1)
+	return p1.time
 end
 
-local function getDutyCycle(p4)
-	return p4.data[1]
+local function getDutyCycle(p1)
+	return p1.data[1]
 end
 
-local function getStepsPerSec(p5)
-	return p5.data[2]
+local function getStepsPerSec(p1)
+	return p1.data[2]
 end
 
-local function getStepTime(p6)
-	return p6.data[3]
+local function getStepTime(p1)
+	return p1.data[3]
 end
 
-function serverJobsChart.init(p7, p8)
+function serverJobsChart.init(p1, p2)
 	-- upvalues: roactModule (ref)
-	local currentData = p8.ServerJobsData:getCurrentData()
+	local currentData = p2.ServerJobsData:getCurrentData()
 	
-	function p7.getOnButtonPress(p9)
-		-- upvalues: p7 (ref)
+	function p7.getOnButtonPress(p3)
+		-- upvalues: p1 (ref)
 		return function(_, _)
-			-- upvalues: p7 (copy), p9 (ref)
-			p7:setState({ expandIndex = p7.state.expandIndex ~= p9 and p9 })
+			-- upvalues: p1 (copy), p3 (ref)
+			p1:setState({ expandIndex = p1.state.expandIndex ~= p3 and p3 })
 		end
 	end
 	
-	function p7.onSortChanged(p10)
-		-- upvalues: p8 (ref), p7 (ref)
-		if p10 == p8.ServerJobsData:getSortType() then
-			p7:setState({ reverseSort = not p7.state.reverseSort })
+	function p7.onSortChanged(p3)
+		-- upvalues: p2 (ref), p1 (ref)
+		if p3 == p2.ServerJobsData:getSortType() then
+			p1:setState({ reverseSort = not p1.state.reverseSort })
 			
 			return
 		end
-		p8.ServerJobsData:setSortType(p10)
-		p7:setState({ reverseSort = false })
+		p2.ServerJobsData:setSortType(p3)
+		p1:setState({ reverseSort = false })
 	end
 	
 	function p7.onCanvasPosChanged()
-		-- upvalues: p7 (ref)
-		local canvasPosition = p7.scrollingRef.current.CanvasPosition
+		-- upvalues: p1 (ref)
+		local canvasPosition = p1.scrollingRef.current.CanvasPosition
 		
-		if p7.state.canvasPos ~= canvasPosition then
-			p7:setState({ canvasPos = canvasPosition })
+		if p1.state.canvasPos ~= canvasPosition then
+			p1:setState({ canvasPos = canvasPosition })
 		end
 	end
 	
-	p7.scrollingRef = roactModule.createRef()
-	p7.state = {
+	p1.scrollingRef = roactModule.createRef()
+	p1.state = {
 		reverseSort = false,
 		expandIndex = nil,
 		serverJobsList = currentData
 	}
 end
 
-function serverJobsChart.willUpdate(p11)
-	if p11.canvasPosConnector then
-		p11.canvasPosConnector:Disconnect()
+function serverJobsChart.willUpdate(p1)
+	if p1.canvasPosConnector then
+		p1.canvasPosConnector:Disconnect()
 	end
 end
 
-function serverJobsChart.didUpdate(p12)
-	if p12.scrollingRef.current then
-		p12.canvasPosConnector = p12.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p12.onCanvasPosChanged)
-		local absoluteSize = p12.scrollingRef.current.AbsoluteSize
-		local absScrollSize = p12.state.absScrollSize
+function serverJobsChart.didUpdate(p1)
+	if p1.scrollingRef.current then
+		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
+		local absoluteSize = p1.scrollingRef.current.AbsoluteSize
+		local absScrollSize = p1.state.absScrollSize
 		
 		if absoluteSize.X ~= absScrollSize.X or absoluteSize.Y ~= absScrollSize.Y then
-			p12:setState({ absScrollSize = absoluteSize })
+			p1:setState({ absScrollSize = absoluteSize })
 		end
 	end
 end
 
-function serverJobsChart.didMount(p13)
-	p13.statsConnector = p13.props.ServerJobsData:Signal():Connect(function(p14)
-		-- upvalues: p13 (ref)
-		p13:setState({ serverJobsList = p14 })
+function serverJobsChart.didMount(p1)
+	p1.statsConnector = p1.props.ServerJobsData:Signal():Connect(function(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ serverJobsList = p2 })
 	end)
 	
-	if p13.scrollingRef.current then
-		p13.canvasPosConnector = p13.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p13.onCanvasPosChanged)
-		p13:setState({
-			absScrollSize = p13.scrollingRef.current.AbsoluteSize,
-			canvasPos = p13.scrollingRef.current.CanvasPosition
+	if p1.scrollingRef.current then
+		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
+		p1:setState({
+			absScrollSize = p1.scrollingRef.current.AbsoluteSize,
+			canvasPos = p1.scrollingRef.current.CanvasPosition
 		})
 	end
 end
 
-function serverJobsChart.willUnmount(p15)
-	p15.statsConnector:Disconnect()
-	p15.statsConnector = nil
+function serverJobsChart.willUnmount(p1)
+	p1.statsConnector:Disconnect()
+	p1.statsConnector = nil
 	
-	if p15.canvasPosConnector then
-		p15.canvasPosConnector:Disconnect()
-		p15.canvasPosConnector = nil
+	if p1.canvasPosConnector then
+		p1.canvasPosConnector:Disconnect()
+		p1.canvasPosConnector = nil
 	end
 end
 
-function serverJobsChart.render(p16)
+function serverJobsChart.render(p1)
 	-- upvalues: minFrameWidth (ref), roactModule (ref), constantsModule (ref), entryFrameHeight (ref), lineGraphHeight (ref), cellPadding (ref), cellLabelModule (ref), t_1 (ref), t (ref), chartHeaderNames (ref), list (ref), t_3 (ref), lineWidth (ref), lineColor (ref), bannerButtonModule (ref), lineGraphModule (ref), getX (ref), getDutyCycle (ref), convertTimeStampModule (ref), getStepsPerSec (ref), getStepTime (ref), noResultSearchStr (ref), headerButtonModule (ref), headerFrameHeight (ref)
 	local t_2 = {}
-	local searchTerm = p16.props.searchTerm
-	local size = p16.props.size
-	local layoutOrder = p16.props.layoutOrder
-	local serverJobsList = p16.state.serverJobsList
-	local reverseSort = p16.state.reverseSort
-	local expandIndex = p16.state.expandIndex
-	local canvasPos = p16.state.canvasPos
-	local absScrollSize = p16.state.absScrollSize
+	local searchTerm = p1.props.searchTerm
+	local size = p1.props.size
+	local layoutOrder = p1.props.layoutOrder
+	local serverJobsList = p1.state.serverJobsList
+	local reverseSort = p1.state.reverseSort
+	local expandIndex = p1.state.expandIndex
+	local canvasPos = p1.state.canvasPos
+	local absScrollSize = p1.state.absScrollSize
 	local x = absScrollSize and math.max(absScrollSize.X, minFrameWidth) or minFrameWidth
 	local serverJobsListCount = #serverJobsList
 	
@@ -170,29 +170,29 @@ function serverJobsChart.render(p16)
 			LayoutOrder = layoutOrder
 		})
 	end
-	local var24 = 0
+	local var3 = 0
 	
 	if absScrollSize then
-		local var25 = -1
-		local var26 = 0
+		local var4 = -1
+		local var5 = 0
 		
 		for i, v in pairs(serverJobsList) do
 			local name = v.name
 			
 			if not searchTerm or string.find(name:lower(), searchTerm:lower()) ~= nil then
 				local dataStats = v.dataStats
-				local var27 = dataStats.dataSet:back()
-				local var28 = expandIndex == name
-				local var29 = if var28 then entryFrameHeight + 3 * lineGraphHeight / 2 + cellPadding * 4 else entryFrameHeight
+				local var6 = dataStats.dataSet:back()
+				local var7 = expandIndex == name
+				local var8 = if var7 then entryFrameHeight + 3 * lineGraphHeight / 2 + cellPadding * 4 else entryFrameHeight
 				
-				if canvasPos.Y <= var24 + var29 then
-					if var26 < absScrollSize.Y then
-						local var30 = if reverseSort then serverJobsListCount - i else i
+				if canvasPos.Y <= var3 + var8 then
+					if var5 < absScrollSize.Y then
+						local var9 = if reverseSort then serverJobsListCount - i else i
 						local t_4 = {
 							[name] = roactModule.createElement(cellLabelModule, { text = name, size = t_1[1], pos = t[1] })
 						}
 						
-						for i_1, v_1 in pairs(var27.data) do
+						for i_1, v_1 in pairs(var6.data) do
 							t_4[chartHeaderNames[i_1]] = roactModule.createElement(cellLabelModule, {
 								text = list[i_1](v_1),
 								size = t_1[i_1 + 1],
@@ -215,16 +215,16 @@ function serverJobsChart.render(p16)
 						})
 						t_2[name] = roactModule.createElement("Frame", {
 							BackgroundTransparency = 1,
-							Size = UDim2.new(0, x, 0, var29),
-							LayoutOrder = var30 + 1
+							Size = UDim2.new(0, x, 0, var8),
+							LayoutOrder = var9 + 1
 						}, {
 							Button = roactModule.createElement(bannerButtonModule, {
 								size = UDim2.new(1, 0, 0, entryFrameHeight),
 								pos = UDim2.new(),
-								isExpanded = var28,
-								onButtonPress = p16.getOnButtonPress(name)
+								isExpanded = var7,
+								onButtonPress = p1.getOnButtonPress(name)
 							}, t_4),
-							DutyCycleGraph = var28 and roactModule.createElement(lineGraphModule, {
+							DutyCycleGraph = var7 and roactModule.createElement(lineGraphModule, {
 								axisLabelX = "Timestamp",
 								pos = UDim2.new(0, 0, 0, entryFrameHeight + cellPadding),
 								size = UDim2.new(0, x, 0, lineGraphHeight / 2),
@@ -237,7 +237,7 @@ function serverJobsChart.render(p16)
 								stringFormatY = list[1],
 								axisLabelY = name .. " " .. chartHeaderNames[2]
 							}),
-							StepsPerSecGraph = var28 and roactModule.createElement(lineGraphModule, {
+							StepsPerSecGraph = var7 and roactModule.createElement(lineGraphModule, {
 								axisLabelX = "Timestamp",
 								pos = UDim2.new(0, 0, 0, entryFrameHeight + lineGraphHeight / 2 + cellPadding * 2),
 								size = UDim2.new(0, x, 0, lineGraphHeight / 2),
@@ -250,7 +250,7 @@ function serverJobsChart.render(p16)
 								stringFormatY = list[2],
 								axisLabelY = name .. " " .. chartHeaderNames[3]
 							}),
-							StepTimeGraph = var28 and roactModule.createElement(lineGraphModule, {
+							StepTimeGraph = var7 and roactModule.createElement(lineGraphModule, {
 								axisLabelX = "Timestamp",
 								pos = UDim2.new(0, 0, 0, entryFrameHeight + lineGraphHeight + cellPadding * 3),
 								size = UDim2.new(0, x, 0, lineGraphHeight / 2),
@@ -265,16 +265,16 @@ function serverJobsChart.render(p16)
 							})
 						})
 					end
-					if var25 < 0 then
-						var25 = var24
+					if var4 < 0 then
+						var4 = var3
 					else
-						var26 += var29
+						var5 += var8
 					end
 				end
-				var24 += var29
+				var3 += var8
 			end
 		end
-		if var25 == -1 then
+		if var4 == -1 then
 			t_2.emptyResult = roactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				Size = size,
@@ -285,7 +285,7 @@ function serverJobsChart.render(p16)
 			t_2.WindowingPadding = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var25)
+				Size = UDim2.new(1, 0, 0, var4)
 			})
 		end
 	end
@@ -296,7 +296,7 @@ function serverJobsChart.render(p16)
 			text = chartHeaderNames[i],
 			size = t_1[i],
 			pos = t[i],
-			sortfunction = p16.onSortChanged
+			sortfunction = p1.onSortChanged
 		})
 	end
 	t_4.upperHorizontalLine = roactModule.createElement("Frame", {
@@ -343,8 +343,8 @@ function serverJobsChart.render(p16)
 			BackgroundTransparency = 1,
 			VerticalScrollBarInset = 1,
 			ScrollBarThickness = 5,
-			CanvasSize = UDim2.new(0, x, 0, var24),
-			[roactModule.Ref] = p16.scrollingRef
+			CanvasSize = UDim2.new(0, x, 0, var3),
+			[roactModule.Ref] = p1.scrollingRef
 		}, t_2)
 	})
 end

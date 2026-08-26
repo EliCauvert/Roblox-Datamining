@@ -21,28 +21,28 @@ if not avatarJointUpgradeFeatureEngineFeature then
 	onRagdoll = robloxReplicatedStorageService:WaitForChild("OnRagdoll", 1e999)
 	
 	if onRagdoll and onRagdoll:IsA("RemoteEvent") then
-		local function onOwnedHumanoidDeath(p0, p1)
+		local function onOwnedHumanoidDeath(p1, p2)
 			-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), deathType (ref), ragdollRiggingModule (ref), onRagdoll (write)
 			if avatarJointUpgradeFeatureEngineFeature then
 				if deathType.Value == "Ragdoll" then
-					ragdollRiggingModule.disableMotors(p0, p1.RigType)
+					ragdollRiggingModule.disableMotors(p1, p2.RigType)
 					
 					return
 				end
 			else
-				local var10 = ragdollRiggingModule.disableMotors(p0, p1.RigType)
-				local animator = p1:FindFirstChildWhichIsA("Animator")
+				local var1 = ragdollRiggingModule.disableMotors(p1, p2.RigType)
+				local animator = p2:FindFirstChildWhichIsA("Animator")
 				
 				if animator then
-					animator:ApplyJointVelocities(var10)
+					animator:ApplyJointVelocities(var1)
 				end
-				onRagdoll:FireServer(p1)
+				onRagdoll:FireServer(p2)
 				wait(0.1)
-				ragdollRiggingModule.easeJointFriction_OLD(p0, 0.85)
+				ragdollRiggingModule.easeJointFriction_OLD(p1, 0.85)
 			end
 		end
 		
-		humanoidReadyUtilModule.registerHumanoidReady(function(p2, p3, p4)
+		humanoidReadyUtilModule.registerHumanoidReady(function(p1, p2, p3)
 			-- upvalues: deathType (ref), ragdollRiggingModule (ref), localPlayer (write), onOwnedHumanoidDeath (ref)
 			local characterRemovingConnection = nil
 			local diedConnection = nil
@@ -53,24 +53,24 @@ if not avatarJointUpgradeFeatureEngineFeature then
 				diedConnection:Disconnect()
 			end
 			
-			diedConnection = p4.Died:Connect(function()
-				-- upvalues: characterRemovingConnection (write), diedConnection (write), deathType (copy), ragdollRiggingModule (copy), p3 (ref), p2 (ref), localPlayer (copy), onOwnedHumanoidDeath (copy), p4 (ref)
+			diedConnection = p3.Died:Connect(function()
+				-- upvalues: characterRemovingConnection (write), diedConnection (write), deathType (copy), ragdollRiggingModule (copy), p2 (ref), p1 (ref), localPlayer (copy), onOwnedHumanoidDeath (copy), p3 (ref)
 				characterRemovingConnection:Disconnect()
 				diedConnection:Disconnect()
 				
 				if deathType.Value == "Ragdoll" then
 					delay(2, function()
-						-- upvalues: ragdollRiggingModule (copy), p3 (copy)
-						ragdollRiggingModule.disableParticleEmittersAndFadeOut(p3, 0.4)
+						-- upvalues: ragdollRiggingModule (copy), p2 (copy)
+						ragdollRiggingModule.disableParticleEmittersAndFadeOut(p2, 0.4)
 					end)
 				end
-				if p2 == localPlayer then
-					onOwnedHumanoidDeath(p3, p4)
+				if p1 == localPlayer then
+					onOwnedHumanoidDeath(p2, p3)
 				end
 			end)
-			characterRemovingConnection = p2.CharacterRemoving:Connect(function(p5)
-				-- upvalues: p3 (ref), characterRemovingConnection (write), diedConnection (write)
-				if p5 == p3 then
+			characterRemovingConnection = p1.CharacterRemoving:Connect(function(p4)
+				-- upvalues: p2 (ref), characterRemovingConnection (write), diedConnection (write)
+				if p4 == p2 then
 					characterRemovingConnection:Disconnect()
 					diedConnection:Disconnect()
 				end

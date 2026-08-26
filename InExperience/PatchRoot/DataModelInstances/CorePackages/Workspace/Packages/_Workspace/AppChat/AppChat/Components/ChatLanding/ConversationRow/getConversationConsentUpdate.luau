@@ -12,7 +12,7 @@ local t = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref)
-	return if p0 == nil then nil else t[p0]
+	return if p1 == nil then nil else t[p1]
 end

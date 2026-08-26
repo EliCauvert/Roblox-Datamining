@@ -21,22 +21,22 @@ local t = {
 	end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryo (ref), t (ref), useNavigation (ref), useLocalUserId (ref), useParticipant (ref), reactModule (ref), voicePackButtonModule (ref), crossExperienceVoiceManager (ref), foundationModule (ref), builderIconsModule (ref), iconSize (ref), enums (ref), inputSize (ref)
-	local var8 = cryo.Dictionary.join(t, p0)
-	local var9 = useNavigation()
-	local var10 = tonumber(useLocalUserId()) or -1
-	local var11 = useParticipant(var10)
-	local var12 = if var11 then var11.selectedVoicePack else nil
-	local var13 = if var11 then var11.isVoiceChangerActive else nil
-	local var14 = if var11 then var11.isVoiceChangerHearMyselfActive else nil
-	local wideMode = var9.getScreenProps("wideMode", false)
-	local var16 = "bg-surface-0"
-	local var17 = "bg-surface-0"
+	local var1 = cryo.Dictionary.join(t, p1)
+	local var2 = useNavigation()
+	local var3 = tonumber(useLocalUserId()) or -1
+	local var4 = useParticipant(var3)
+	local var5 = if var4 then var4.selectedVoicePack else nil
+	local var6 = if var4 then var4.isVoiceChangerActive else nil
+	local var7 = if var4 then var4.isVoiceChangerHearMyselfActive else nil
+	local wideMode = var2.getScreenProps("wideMode", false)
+	local var8 = "bg-surface-0"
+	local var9 = "bg-surface-0"
 	
-	if var8.enableTestingTheme then
-		var16 = "bg-system-alert"
-		var17 = "bg-system-warning"
+	if var1.enableTestingTheme then
+		var8 = "bg-system-alert"
+		var9 = "bg-system-warning"
 	end
 	local t_1 = {}
 	local list = {
@@ -45,43 +45,43 @@ return function(p0)
 		{ name = "Dreamy" }, { name = "Powerful" }, { name = "Ghost" }
 	}
 	
-	local function makeButton(p1, p2)
-		-- upvalues: list (ref), var8 (ref), reactModule (copy), voicePackButtonModule (copy), var13 (ref), var12 (ref), crossExperienceVoiceManager (copy), var10 (ref)
-		local var24
-		local var21 = list[p1] or { name = "Voicepack " .. p1 }
-		local var22 = if var8.fillListWithExtraVoicePacks then var21.name or "Voicepack " .. p1 else var21.name
+	local function makeButton(p2, p3)
+		-- upvalues: list (ref), var1 (ref), reactModule (copy), voicePackButtonModule (copy), var6 (ref), var5 (ref), crossExperienceVoiceManager (copy), var3 (ref)
+		local var10
+		local var11 = list[p2] or { name = "Voicepack " .. p1 }
+		local var12 = if var1.fillListWithExtraVoicePacks then var11.name or "Voicepack " .. p1 else var11.name
 		local createElement = reactModule.createElement
 		local t = {
-			LayoutOrder = p2,
-			voicePackName = var22,
-			isVoiceChangerActive = var13
+			LayoutOrder = p3,
+			voicePackName = var12,
+			isVoiceChangerActive = var6
 		}
 		
-		if var12 then
-			var24 = var22 == var12
-			var24 = nil
+		if var5 then
+			var10 = var12 == var5
+			var10 = nil
 		else
-			var24 = false
+			var10 = false
 		end
-		t.isSelected = var24
+		t.isSelected = var10
 		
 		function t.onActivated()
-			-- upvalues: crossExperienceVoiceManager (copy), var22 (ref), var13 (copy), var10 (copy)
-			crossExperienceVoiceManager.default:setVoicePack(var22)
+			-- upvalues: crossExperienceVoiceManager (copy), var12 (ref), var6 (copy), var3 (copy)
+			crossExperienceVoiceManager.default:setVoicePack(var12)
 			
-			if var22 == "None" and var13 then
-				crossExperienceVoiceManager.default:disableVoiceChanger(var10)
+			if var12 == "None" and var6 then
+				crossExperienceVoiceManager.default:disableVoiceChanger(var3)
 				
 				return
-			elseif var22 ~= "None" and not var13 then
-				crossExperienceVoiceManager.default:enableVoiceChanger(var10)
+			elseif var12 ~= "None" and not var6 then
+				crossExperienceVoiceManager.default:enableVoiceChanger(var3)
 			end
 		end
 		
 		return createElement(voicePackButtonModule, t)
 	end
 	
-	for i = 1, #list + (if var8.fillListWithExtraVoicePacks then 25 else 0) do
+	for i = 1, #list + (if var1.fillListWithExtraVoicePacks then 25 else 0) do
 		t_1["VoicePackButton_" .. i] = makeButton(i, i)
 	end
 	return reactModule.createElement(foundationModule.View, {
@@ -96,7 +96,7 @@ return function(p0)
 			CloseButton = reactModule.createElement(foundationModule.View, {
 				tag = "position-center-left anchor-center-left auto-xy radius-circle bg-action-subtle padding-xsmall",
 				ZIndex = 2,
-				onActivated = var8.closeSquadVoiceChangers
+				onActivated = var1.closeSquadVoiceChangers
 			}, {
 				Icon = reactModule.createElement(foundationModule.Icon, {
 					tag = "position-center-center anchor-center-center auto-xy",
@@ -108,7 +108,7 @@ return function(p0)
 				Text = "Done",
 				tag = "position-center-right anchor-center-right text-align-x-center text-align-y-center size-2200-0 auto-y text-label-large radius-medium padding-small text-wrap bg-action-subtle",
 				LayoutOrder = 2,
-				onActivated = var8.closeSquadVoiceChangers
+				onActivated = var1.closeSquadVoiceChangers
 			})
 		}) else reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 1 }, {
 			Title = reactModule.createElement(foundationModule.Text, {
@@ -120,7 +120,7 @@ return function(p0)
 				tag = "position-center-right anchor-center-right auto-xy radius-circle bg-action-subtle padding-xsmall",
 				LayoutOrder = 2,
 				ZIndex = 2,
-				onActivated = var8.closeSquadVoiceChangers
+				onActivated = var1.closeSquadVoiceChangers
 			}, {
 				Icon = reactModule.createElement(foundationModule.Icon, {
 					tag = "position-center-center anchor-center-center auto-xy",
@@ -134,7 +134,7 @@ return function(p0)
 			LayoutOrder = 3,
 			tag = {
 				["size-full-0 auto-y row align-x-left align-y-center padding-left-xxlarge padding-right-xxlarge"] = true,
-				["bg-system-warning"] = var8.enableTestingTheme
+				["bg-system-warning"] = var1.enableTestingTheme
 			}
 		}, {
 			HearMyselfLabel = reactModule.createElement(foundationModule.Text, {
@@ -150,15 +150,15 @@ return function(p0)
 					label = "",
 					size = inputSize.Medium,
 					onActivated = function(_)
-						-- upvalues: var14 (ref), crossExperienceVoiceManager (copy), var10 (ref)
-						if var14 then
-							crossExperienceVoiceManager.default:disableHearMyself(var10)
+						-- upvalues: var7 (ref), crossExperienceVoiceManager (copy), var3 (ref)
+						if var7 then
+							crossExperienceVoiceManager.default:disableHearMyself(var3)
 							
 							return
 						end
-						crossExperienceVoiceManager.default:enableHearMyself(var10)
+						crossExperienceVoiceManager.default:enableHearMyself(var3)
 					end,
-					isChecked = var14
+					isChecked = var7
 				})
 			})
 		}),
@@ -183,7 +183,7 @@ return function(p0)
 			Text = "Done",
 			tag = "position-center-center anchor-center-center text-align-x-center text-align-y-center size-full-0 auto-y text-label-large radius-medium padding-small text-wrap bg-action-subtle",
 			LayoutOrder = 5,
-			onActivated = var8.closeSquadVoiceChangers
+			onActivated = var1.closeSquadVoiceChangers
 		}) else nil
 	})
 end

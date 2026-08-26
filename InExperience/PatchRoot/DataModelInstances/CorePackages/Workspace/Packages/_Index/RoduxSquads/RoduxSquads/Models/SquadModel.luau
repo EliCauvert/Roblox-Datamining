@@ -7,63 +7,63 @@ local tModule = require(parent.t)
 local fFlagEnableSquadRegroupExperimentation = require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentation
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function tryGetSquadId(p1)
 	return p1.groupUpId or p1.squadId
 end
 
-function t.mock(p2)
+function t.mock(p1)
 	-- upvalues: cryoModule (ref), squadMemberModelModule (ref), squadInviteeModelModule (ref), t (ref), fFlagEnableSquadRegroupExperimentation (ref)
-	p2 = p2 or {}
+	p1 = p1 or {}
 	
 	return t.new({
-		squadId = tryGetSquadId(p2) or "12345",
-		initiatorId = p2.initiatorId or 54321,
-		createdAtTime = p2.createdAtTime or "2024-07-19T21:02:47.777+00:00",
-		updatedAtTime = p2.updatedAtTime or "2024-07-19T21:02:47.777+00:00",
-		deletedAtTime = p2.deletedAtTime,
-		parentChannelId = p2.parentChannelId or "23456",
-		members = cryoModule.List.map(p2.members or { { userId = 1234 } }, function(p3)
+		squadId = tryGetSquadId(p1) or "12345",
+		initiatorId = p1.initiatorId or 54321,
+		createdAtTime = p1.createdAtTime or "2024-07-19T21:02:47.777+00:00",
+		updatedAtTime = p1.updatedAtTime or "2024-07-19T21:02:47.777+00:00",
+		deletedAtTime = p1.deletedAtTime,
+		parentChannelId = p1.parentChannelId or "23456",
+		members = cryoModule.List.map(p1.members or { { userId = 1234 } }, function(p2)
 			-- upvalues: squadMemberModelModule (copy)
-			return squadMemberModelModule.mock(p3)
+			return squadMemberModelModule.mock(p2)
 		end),
-		invitees = cryoModule.List.map(p2.invitees or { { userId = 2345, invitedAtTimestampMs = 3333333 } }, function(p4)
+		invitees = cryoModule.List.map(p1.invitees or { { userId = 2345, invitedAtTimestampMs = 3333333 } }, function(p2)
 			-- upvalues: squadInviteeModelModule (copy)
-			return squadInviteeModelModule.mock(p4)
+			return squadInviteeModelModule.mock(p2)
 		end),
-		selfPermissions = if fFlagEnableSquadRegroupExperimentation then p2.selfPermissions or {
+		selfPermissions = if fFlagEnableSquadRegroupExperimentation then p1.selfPermissions or {
 			canSeeRegroupPromptToast = false,
 			canSeeRegroupJoinButton = false
 		} else nil
 	})
 end
 
-function t.format(p5)
+function t.format(p1)
 	-- upvalues: cryoModule (ref), squadMemberModelModule (ref), squadInviteeModelModule (ref), t (ref), fFlagEnableSquadRegroupExperimentation (ref)
 	return t.new({
-		createdAtTime = p5.createdAtTime,
-		deletedAtTime = p5.deletedAtTime,
-		initiatorId = p5.initiatorId,
-		invitees = cryoModule.List.map(p5.invitees, function(p6)
+		createdAtTime = p1.createdAtTime,
+		deletedAtTime = p1.deletedAtTime,
+		initiatorId = p1.initiatorId,
+		invitees = cryoModule.List.map(p1.invitees, function(p2)
 			-- upvalues: squadInviteeModelModule (copy)
-			return squadInviteeModelModule.format(p6)
+			return squadInviteeModelModule.format(p2)
 		end),
-		members = cryoModule.List.map(p5.members, function(p7)
+		members = cryoModule.List.map(p1.members, function(p2)
 			-- upvalues: squadMemberModelModule (copy)
-			return squadMemberModelModule.format(p7)
+			return squadMemberModelModule.format(p2)
 		end),
-		parentChannelId = p5.parentChannelId,
-		squadId = tryGetSquadId(p5),
-		updatedAtTime = p5.updatedAtTime,
-		selfPermissions = if fFlagEnableSquadRegroupExperimentation then p5.selfPermissions else nil
+		parentChannelId = p1.parentChannelId,
+		squadId = tryGetSquadId(p1),
+		updatedAtTime = p1.updatedAtTime,
+		selfPermissions = if fFlagEnableSquadRegroupExperimentation then p1.selfPermissions else nil
 	})
 end
 

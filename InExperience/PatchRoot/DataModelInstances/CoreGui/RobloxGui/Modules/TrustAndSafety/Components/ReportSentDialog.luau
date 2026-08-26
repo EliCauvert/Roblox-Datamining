@@ -39,15 +39,15 @@ reportSentDialog.validateProps = tModule.strictInterface({
 	reportCategory = tModule.optional(tModule.string)
 })
 
-function isPlayerUserIdMuted(p0)
+function isPlayerUserIdMuted(p1)
 	-- upvalues: default (ref)
 	local isMutedLocally = false
 	
 	if default.participants then
-		local var23 = default.participants[tostring(p0)]
+		local var1 = default.participants[tostring(p1)]
 		
-		if var23 then
-			isMutedLocally = var23.isMutedLocally
+		if var1 then
+			isMutedLocally = var1.isMutedLocally
 		end
 	end
 	return isMutedLocally
@@ -66,9 +66,9 @@ function reportSentDialog.init(p1)
 		})
 	end
 	
-	function p1.onMuteCheckBoxActivated(p3)
+	function p1.onMuteCheckBoxActivated(p2)
 		-- upvalues: p1 (ref)
-		p1:setState({ isMuteCheckBoxSelected = p3 })
+		p1:setState({ isMuteCheckBoxSelected = p2 })
 	end
 	
 	function p1.hasMuteChanged()
@@ -76,34 +76,34 @@ function reportSentDialog.init(p1)
 		return p1.state.isMuteCheckBoxSelected ~= p1.state.wasPlayerMutedWhenDialogOpened
 	end
 	
-	function p1.getToastMessage(p4)
+	function p1.getToastMessage(p2)
 		-- upvalues: p1 (ref)
 		local t = {
-			title = p4.toastDefaultTitle,
-			description = p4.toastDefaultDescription
+			title = p2.toastDefaultTitle,
+			description = p2.toastDefaultDescription
 		}
 		
 		if p1.state.isMuteCheckBoxSelected and p1.state.isBlockCheckBoxSelected then
-			t.title = p4.toastMutedAndBlockedTitle
-			t.description = p4.toastMutedAndBlockedDescription
+			t.title = p2.toastMutedAndBlockedTitle
+			t.description = p2.toastMutedAndBlockedDescription
 			
 			return t
 		elseif p1.state.isMuteCheckBoxSelected then
-			t.title = p4.toastMutedTitle
-			t.description = p4.toastMutedDescription
+			t.title = p2.toastMutedTitle
+			t.description = p2.toastMutedDescription
 			
 			return t
 		elseif p1.state.isBlockCheckBoxSelected then
-			t.title = p4.toastBlockedTitle
-			t.description = p4.toastBlockedDescription
+			t.title = p2.toastBlockedTitle
+			t.description = p2.toastBlockedDescription
 		end
 		return t
 	end
 	
-	function p1.onConfirm(p5)
+	function p1.onConfirm(p2)
 		-- upvalues: p1 (ref), default (copy), constantsModule_1 (copy)
 		if p1:isReportingPlayer() then
-			local toastMessage = p1.getToastMessage(p5)
+			local toastMessage = p1.getToastMessage(p2)
 			
 			if p1:hasMuteChanged() then
 				default:ToggleMutePlayer(p1.props.targetPlayer.UserId, constantsModule_1.VOICE_CONTEXT_TYPE.REPORT_MENU)
@@ -125,37 +125,37 @@ function reportSentDialog.init(p1)
 	end
 end
 
-function reportSentDialog.clearState(p6)
-	p6:setState({
+function reportSentDialog.clearState(p1)
+	p1:setState({
 		wasPlayerMutedWhenDialogOpened = false,
 		isMuteCheckBoxSelected = false,
 		isBlockCheckBoxSelected = false
 	})
 end
 
-function reportSentDialog.isVoiceReport(p7)
+function reportSentDialog.isVoiceReport(p1)
 	-- upvalues: constantsModule (ref)
-	return p7:isReportingPlayer() and p7.props.reportCategory == constantsModule.Category.Voice
+	return p1:isReportingPlayer() and p1.props.reportCategory == constantsModule.Category.Voice
 end
 
-function reportSentDialog.doesRequireConfirmation(p8)
-	return p8.state.isBlockCheckBoxSelected or p8:hasMuteChanged()
+function reportSentDialog.doesRequireConfirmation(p1)
+	return p1.state.isBlockCheckBoxSelected or p1:hasMuteChanged()
 end
 
-function reportSentDialog.isReportingPlayer(p9)
+function reportSentDialog.isReportingPlayer(p1)
 	-- upvalues: constantsModule (ref)
-	return p9.props.reportType == constantsModule.ReportType.Player and p9.props.targetPlayer ~= nil
+	return p1.props.reportType == constantsModule.ReportType.Player and p1.props.targetPlayer ~= nil
 end
 
-function reportSentDialog.renderFocusHandler(p10)
+function reportSentDialog.renderFocusHandler(p1)
 	-- upvalues: roactModule (ref), focusHandlerModule (ref), constantsModule (ref), guiService (ref), contextActionService (ref)
 	return roactModule.createElement(focusHandlerModule, {
-		isFocused = p10.props.inputType == constantsModule.InputType.Gamepad and p10.props.isReportSentOpen,
+		isFocused = p1.props.inputType == constantsModule.InputType.Gamepad and p1.props.isReportSentOpen,
 		didFocus = function()
-			-- upvalues: guiService (copy), p10 (ref), contextActionService (copy)
+			-- upvalues: guiService (copy), p1 (ref), contextActionService (copy)
 			guiService:RemoveSelectionGroup("ReportSentDialogGroup")
-			guiService:AddSelectionParent("ReportSentDialogGroup", p10.buttonRef:getValue())
-			guiService.SelectedCoreObject = p10.buttonRef:getValue()
+			guiService:AddSelectionParent("ReportSentDialogGroup", p1.buttonRef:getValue())
+			guiService.SelectedCoreObject = p1.buttonRef:getValue()
 			contextActionService:BindCoreAction("ReporSentDialogSinkAction", function(_, _)
 				return Enum.ContextActionResult.Sink
 			end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonY, Enum.KeyCode.ButtonX)
@@ -168,15 +168,15 @@ function reportSentDialog.renderFocusHandler(p10)
 	})
 end
 
-function reportSentDialog.renderBlockFrame(p11)
+function reportSentDialog.renderBlockFrame(p1)
 	-- upvalues: withLocalizationModule (ref), roactModule (ref), dividerModule (ref), blockPlayerItemModule (ref), assetsModule (ref)
-	return if p11:isReportingPlayer() then withLocalizationModule({
+	return if p1:isReportingPlayer() then withLocalizationModule({
 		mutePlayerText = "CoreScripts.InGameMenu.Report.Mute",
 		mutePlayerDescription = "CoreScripts.InGameMenu.Report.MuteDescription",
 		blockPlayerText = "CoreScripts.InGameMenu.Report.Block",
 		blockPlayerDescription = "CoreScripts.InGameMenu.Report.BlockDescription"
-	})(function(p12)
-		-- upvalues: roactModule (copy), dividerModule (copy), p11 (ref), blockPlayerItemModule (copy), assetsModule (copy)
+	})(function(p2)
+		-- upvalues: roactModule (copy), dividerModule (copy), p1 (ref), blockPlayerItemModule (copy), assetsModule (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
@@ -188,43 +188,43 @@ function reportSentDialog.renderBlockFrame(p11)
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
 			Divider = roactModule.createElement(dividerModule, { LayoutOrder = 1, Size = UDim2.new(1, 0, 0, 1) }),
-			MutePlayerItem = if p11:isVoiceReport() then roactModule.createElement(blockPlayerItemModule, {
+			MutePlayerItem = if p1:isVoiceReport() then roactModule.createElement(blockPlayerItemModule, {
 				layoutOrder = 2,
 				size = UDim2.new(1, 0, 0, 72),
-				text = p12.mutePlayerText,
-				description = p12.mutePlayerDescription,
+				text = p2.mutePlayerText,
+				description = p2.mutePlayerDescription,
 				icon = assetsModule.Images.MuteIcon.Image,
 				iconSize = assetsModule.Images.MuteIcon.Size,
-				isDisabled = p11.state.isBlockCheckBoxSelected,
-				isCheckBoxSelected = p11.state.isMuteCheckBoxSelected,
-				onCheckBoxActivated = p11.onMuteCheckBoxActivated
+				isDisabled = p1.state.isBlockCheckBoxSelected,
+				isCheckBoxSelected = p1.state.isMuteCheckBoxSelected,
+				onCheckBoxActivated = p1.onMuteCheckBoxActivated
 			}) else nil,
 			BlockPlayerItem = roactModule.createElement(blockPlayerItemModule, {
 				layoutOrder = 3,
 				size = UDim2.new(1, 0, 0, 72),
-				text = p12.blockPlayerText,
-				description = p12.blockPlayerDescription,
+				text = p2.blockPlayerText,
+				description = p2.blockPlayerDescription,
 				icon = assetsModule.Images.BlockIcon.Image,
 				iconSize = assetsModule.Images.BlockIcon.Size,
-				isCheckBoxSelected = p11.state.isBlockCheckBoxSelected,
-				onCheckBoxActivated = p11.onBlockCheckBoxActivated
+				isCheckBoxSelected = p1.state.isBlockCheckBoxSelected,
+				onCheckBoxActivated = p1.onBlockCheckBoxActivated
 			})
 		})
 	end) else nil
 end
 
-function reportSentDialog.renderContents(p13)
+function reportSentDialog.renderContents(p1)
 	-- upvalues: withStyle (ref), withLocalizationModule (ref), roactModule (ref), themedTextLabelModule (ref)
 	return withStyle(function(_)
-		-- upvalues: withLocalizationModule (copy), p13 (ref), roactModule (copy), themedTextLabelModule (copy)
+		-- upvalues: withLocalizationModule (copy), p1 (ref), roactModule (copy), themedTextLabelModule (copy)
 		return withLocalizationModule({
 			bodyText = "CoreScripts.InGameMenu.Report.ThanksForReportDescription",
 			otherStepsText = {
 				"CoreScripts.InGameMenu.Report.OtherStepsTitle",
-				RBX_NAME = p13.props.targetPlayer.Name
+				RBX_NAME = p1.props.targetPlayer.Name
 			}
-		})(function(p14)
-			-- upvalues: roactModule (copy), themedTextLabelModule (copy), p13 (copy)
+		})(function(p2)
+			-- upvalues: roactModule (copy), themedTextLabelModule (copy), p1 (copy)
 			return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 				Layout = roactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
@@ -255,7 +255,7 @@ function reportSentDialog.renderContents(p13)
 						TextWrapped = true,
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Size = UDim2.new(1, 0, 0, 0),
-						Text = p14.bodyText,
+						Text = p2.bodyText,
 						TextXAlignment = Enum.TextXAlignment.Left
 					}),
 					OtherStepsText = roactModule.createElement(themedTextLabelModule, {
@@ -266,96 +266,96 @@ function reportSentDialog.renderContents(p13)
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Position = UDim2.new(0, 0, 0, 12),
 						Size = UDim2.new(1, 0, 0, 0),
-						Text = p14.otherStepsText,
+						Text = p2.otherStepsText,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				}),
-				BlockFrame = p13:renderBlockFrame()
+				BlockFrame = p1:renderBlockFrame()
 			})
 		end)
 	end)
 end
 
-function reportSentDialog.render(p15)
+function reportSentDialog.render(p1)
 	-- upvalues: withLocalizationModule (ref), roactModule (ref), modalDialogModule (ref), button (ref), buttonType (ref)
-	return if p15:isReportingPlayer() then withLocalizationModule({
+	return if p1:isReportingPlayer() then withLocalizationModule({
 		titleText = "CoreScripts.InGameMenu.Report.ThanksForReport",
 		toastDefaultTitle = "CoreScripts.InGameMenu.Report.Confirmation.ThanksForReport",
 		toastDefaultDescription = "CoreScripts.InGameMenu.Report.Confirmation.ThanksForReportDescription",
 		toastMutedTitle = "CoreScripts.InGameMenu.Report.Confirmation.Muted",
 		toastMutedAndBlockedTitle = "CoreScripts.InGameMenu.Report.Confirmation.MutedAndBlocked",
 		toastBlockedTitle = "CoreScripts.InGameMenu.Report.Confirmation.Blocked",
-		dismissText = if p15:doesRequireConfirmation() then "CoreScripts.InGameMenu.Report.Confirm" else "CoreScripts.InGameMenu.Report.Done",
+		dismissText = if p1:doesRequireConfirmation() then "CoreScripts.InGameMenu.Report.Confirm" else "CoreScripts.InGameMenu.Report.Done",
 		toastMutedDescription = {
 			"CoreScripts.InGameMenu.Report.Confirmation.MutedDescriptionWithUser",
-			RBX_NAME = p15.props.targetPlayer.Name
+			RBX_NAME = p1.props.targetPlayer.Name
 		},
 		toastMutedAndBlockedDescription = {
 			"CoreScripts.InGameMenu.Report.Confirmation.MutedAndBlockedDescriptionWithUser",
-			RBX_NAME = p15.props.targetPlayer.Name
+			RBX_NAME = p1.props.targetPlayer.Name
 		},
 		toastBlockedDescription = {
 			"CoreScripts.InGameMenu.Report.Confirmation.MutedAndBlockedDescriptionWithUser",
-			RBX_NAME = p15.props.targetPlayer.Name
+			RBX_NAME = p1.props.targetPlayer.Name
 		}
-	})(function(p16)
-		-- upvalues: roactModule (copy), modalDialogModule (copy), p15 (ref), button (copy), buttonType (copy)
+	})(function(p2)
+		-- upvalues: roactModule (copy), modalDialogModule (copy), p1 (ref), button (copy), buttonType (copy)
 		return roactModule.createFragment({
 			ModalDialog = roactModule.createElement(modalDialogModule, {
-				visible = p15.props.isReportSentOpen,
-				screenSize = p15.props.screenSize,
-				titleText = p16.titleText,
-				contents = p15:renderContents(),
+				visible = p1.props.isReportSentOpen,
+				screenSize = p1.props.screenSize,
+				titleText = p2.titleText,
+				contents = p1:renderContents(),
 				actionButtons = roactModule.createElement(button, {
 					buttonType = buttonType.PrimarySystem,
 					size = UDim2.new(1, 0, 1, 0),
 					onActivated = function()
-						-- upvalues: p15 (copy), p16 (ref)
-						return p15.onConfirm(p16)
+						-- upvalues: p1 (copy), p2 (ref)
+						return p1.onConfirm(p2)
 					end,
-					text = p16.dismissText,
-					[roactModule.Ref] = p15.buttonRef
+					text = p2.dismissText,
+					[roactModule.Ref] = p1.buttonRef
 				}),
-				onDismiss = p15.onCancel
+				onDismiss = p1.onCancel
 			}),
-			FocusHandler = p15:renderFocusHandler()
+			FocusHandler = p1:renderFocusHandler()
 		})
 	end) else nil
 end
 
-function reportSentDialog.didUpdate(p17, p18, _)
-	if not p18.isReportSentOpen and p17.props.isReportSentOpen and p17:isVoiceReport() then
-		local var26 = isPlayerUserIdMuted(p17.props.targetPlayer.UserId)
-		p17:setState({
-			wasPlayerMutedWhenDialogOpened = var26,
-			isMuteCheckBoxSelected = var26
+function reportSentDialog.didUpdate(p1, p2, _)
+	if not p2.isReportSentOpen and p1.props.isReportSentOpen and p1:isVoiceReport() then
+		local var1 = isPlayerUserIdMuted(p1.props.targetPlayer.UserId)
+		p1:setState({
+			wasPlayerMutedWhenDialogOpened = var1,
+			isMuteCheckBoxSelected = var1
 		})
 	end
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p19, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: constantsModule (ref)
 	return {
-		isReportSentOpen = p19.report.currentPage == constantsModule.Page.ReportSent,
-		reportType = p19.report.reportType,
-		targetPlayer = p19.report.targetPlayer,
-		screenSize = p19.displayOptions.screenSize,
-		reportCategory = p19.report.reportCategory
+		isReportSentOpen = p1.report.currentPage == constantsModule.Page.ReportSent,
+		reportType = p1.report.reportType,
+		targetPlayer = p1.report.targetPlayer,
+		screenSize = p1.displayOptions.screenSize,
+		reportCategory = p1.report.reportCategory
 	}
-end, function(p20)
+end, function(p1)
 	-- upvalues: endReportFlowModule (ref), blockPlayerModule (ref), showToastModule (ref)
 	return {
 		closeDialog = function()
-			-- upvalues: p20 (ref), endReportFlowModule (copy)
-			p20(endReportFlowModule())
+			-- upvalues: p1 (ref), endReportFlowModule (copy)
+			p1(endReportFlowModule())
 		end,
-		blockPlayer = function(p21, p22, p23)
-			-- upvalues: p20 (ref), blockPlayerModule (copy)
-			p20(blockPlayerModule(p21, p22, p23))
+		blockPlayer = function(p2, p3, p4)
+			-- upvalues: p1 (ref), blockPlayerModule (copy)
+			p1(blockPlayerModule(p2, p3, p4))
 		end,
-		showToast = function(p24, p25)
-			-- upvalues: p20 (ref), showToastModule (copy)
-			p20(showToastModule(p24, p25))
+		showToast = function(p2, p3)
+			-- upvalues: p1 (ref), showToastModule (copy)
+			p1(showToastModule(p2, p3))
 		end
 	}
 end)(reportSentDialog)

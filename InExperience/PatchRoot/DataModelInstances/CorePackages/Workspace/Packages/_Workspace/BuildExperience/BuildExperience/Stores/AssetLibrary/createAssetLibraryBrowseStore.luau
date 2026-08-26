@@ -14,109 +14,109 @@ return function(value)
 	local schedule = value_1.schedule or task.delay
 	local cancel = value_1.cancel or task.cancel
 	local initialQuery = value_1.initialQuery or ""
-	local var9, var10 = signalsModule.createSignal(initialQuery)
-	local var11, var12 = signalsModule.createSignal(initialQuery)
-	local var13, var14 = signalsModule.createSignal(initialPageTokens())
-	local var15 = nil
+	local var1, var2 = signalsModule.createSignal(initialQuery)
+	local var3, var4 = signalsModule.createSignal(initialQuery)
+	local var5, var6 = signalsModule.createSignal(initialPageTokens())
+	local var7 = nil
 	
 	local function _()
-		-- upvalues: var15 (write), cancel (ref)
-		if var15 == nil then
+		-- upvalues: var7 (write), cancel (ref)
+		if var7 == nil then
 			return
 		end
-		pcall(cancel, var15)
-		var15 = nil
+		pcall(cancel, var7)
+		var7 = nil
 	end
 	
 	local _ = function()
-		-- upvalues: var14 (ref), initialPageTokens (copy)
-		var14(initialPageTokens())
+		-- upvalues: var6 (ref), initialPageTokens (copy)
+		var6(initialPageTokens())
 	end
 	
-	local _ = function(p0)
-		-- upvalues: signalsExperimentalModule (copy), var12 (ref), var14 (ref), initialPageTokens (copy)
+	local _ = function(p1)
+		-- upvalues: signalsExperimentalModule (copy), var4 (ref), var6 (ref), initialPageTokens (copy)
 		signalsExperimentalModule.batch(function()
-			-- upvalues: var12 (copy), p0 (ref), var14 (copy), initialPageTokens (copy)
-			var12(p0)
-			var14(initialPageTokens())
+			-- upvalues: var4 (copy), p1 (ref), var6 (copy), initialPageTokens (copy)
+			var4(p1)
+			var6(initialPageTokens())
 		end)
 	end
 	
 	return {
-		getDraftQuery = var9,
-		getDebouncedQuery = var11,
-		getPageTokens = var13,
+		getDraftQuery = var1,
+		getDebouncedQuery = var3,
+		getPageTokens = var5,
 		setQuery = function(value)
-			-- upvalues: var10 (ref), var15 (write), cancel (ref), var11 (ref), schedule (ref), debounceMs (ref), signalsExperimentalModule (copy), var12 (ref), var14 (ref), initialPageTokens (copy)
-			var10(value)
+			-- upvalues: var2 (ref), var7 (write), cancel (ref), var3 (ref), schedule (ref), debounceMs (ref), signalsExperimentalModule (copy), var4 (ref), var6 (ref), initialPageTokens (copy)
+			var2(value)
 			
-			if var15 ~= nil then
-				pcall(cancel, var15)
-				var15 = nil
+			if var7 ~= nil then
+				pcall(cancel, var7)
+				var7 = nil
 			end
-			if value == var11(false) then
+			if value == var3(false) then
 				return
 			end
-			var15 = schedule(debounceMs / 1000, function()
-				-- upvalues: var15 (copy), value (ref), signalsExperimentalModule (copy), var12 (copy), var14 (copy), initialPageTokens (copy)
-				var15 = nil
+			var7 = schedule(debounceMs / 1000, function()
+				-- upvalues: var7 (copy), value (ref), signalsExperimentalModule (copy), var4 (copy), var6 (copy), initialPageTokens (copy)
+				var7 = nil
 				signalsExperimentalModule.batch(function()
-					-- upvalues: var12 (copy), value (ref), var14 (copy), initialPageTokens (copy)
-					var12(value)
-					var14(initialPageTokens())
+					-- upvalues: var4 (copy), value (ref), var6 (copy), initialPageTokens (copy)
+					var4(value)
+					var6(initialPageTokens())
 				end)
 			end)
 		end,
 		clearQuery = function()
-			-- upvalues: var15 (write), cancel (ref), signalsExperimentalModule (copy), var10 (ref), var12 (ref), var14 (ref), initialPageTokens (copy)
-			if var15 ~= nil then
-				pcall(cancel, var15)
-				var15 = nil
+			-- upvalues: var7 (write), cancel (ref), signalsExperimentalModule (copy), var2 (ref), var4 (ref), var6 (ref), initialPageTokens (copy)
+			if var7 ~= nil then
+				pcall(cancel, var7)
+				var7 = nil
 			end
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var10 (copy), var12 (copy), var14 (copy), initialPageTokens (copy)
-				var10("")
-				var12("")
-				var14(initialPageTokens())
+				-- upvalues: var2 (copy), var4 (copy), var6 (copy), initialPageTokens (copy)
+				var2("")
+				var4("")
+				var6(initialPageTokens())
 			end)
 		end,
 		addPageToken = function(p1, p2)
-			-- upvalues: var13 (ref), var14 (ref)
+			-- upvalues: var5 (ref), var6 (ref)
 			if p2 == "" then return end
-			local var16 = var13(false)
+			local var8 = var5(false)
 			
-			if table.find(var16[p1], p2) == nil then
+			if table.find(var8[p1], p2) == nil then
 				local t = {
-					Model = table.clone(var16.Model),
-					Audio = table.clone(var16.Audio),
-					Image = table.clone(var16.Image)
+					Model = table.clone(var8.Model),
+					Audio = table.clone(var8.Audio),
+					Image = table.clone(var8.Image)
 				}
 				table.insert(t[p1], p2)
-				var14(t)
+				var6(t)
 				
 				return
 			end
 		end,
 		reset = function()
-			-- upvalues: var15 (write), cancel (ref), signalsExperimentalModule (copy), var10 (ref), var12 (ref), var14 (ref), initialPageTokens (copy)
-			if var15 ~= nil then
-				pcall(cancel, var15)
-				var15 = nil
+			-- upvalues: var7 (write), cancel (ref), signalsExperimentalModule (copy), var2 (ref), var4 (ref), var6 (ref), initialPageTokens (copy)
+			if var7 ~= nil then
+				pcall(cancel, var7)
+				var7 = nil
 			end
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var10 (copy), var12 (copy), var14 (copy), initialPageTokens (copy)
-				var10("")
-				var12("")
-				var14(initialPageTokens())
+				-- upvalues: var2 (copy), var4 (copy), var6 (copy), initialPageTokens (copy)
+				var2("")
+				var4("")
+				var6(initialPageTokens())
 			end)
 		end,
 		destroy = function()
-			-- upvalues: var15 (write), cancel (ref)
-			if var15 == nil then
+			-- upvalues: var7 (write), cancel (ref)
+			if var7 == nil then
 				return
 			end
-			pcall(cancel, var15)
-			var15 = nil
+			pcall(cancel, var7)
+			var7 = nil
 		end
 	}
 end

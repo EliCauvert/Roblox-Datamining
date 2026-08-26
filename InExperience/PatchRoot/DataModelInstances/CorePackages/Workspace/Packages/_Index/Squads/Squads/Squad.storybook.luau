@@ -17,25 +17,25 @@ local t = {
 }
 local t_1 = { language = "en-us" }
 
-local function useCreateOverlay(p0)
+local function useCreateOverlay(p1)
 	-- upvalues: reactModule (ref)
-	local var7 = reactModule.useRef(Instance.new("Frame"))
+	local var1 = reactModule.useRef(Instance.new("Frame"))
 	
-	if var7.current.Parent ~= p0.focus then
-		var7.current.Parent = p0.focus
+	if var1.current.Parent ~= p1.focus then
+		var1.current.Parent = p1.focus
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref)
-		var7.current.Size = UDim2.fromScale(1, 1)
-		var7.current.BackgroundTransparency = 1
+		-- upvalues: var1 (ref)
+		var1.current.Size = UDim2.fromScale(1, 1)
+		var1.current.BackgroundTransparency = 1
 		
 		return function()
-			-- upvalues: var7 (copy)
-			var7.current:Destroy()
+			-- upvalues: var1 (copy)
+			var1.current:Destroy()
 		end
 	end, {})
 	
-	return var7.current
+	return var1.current
 end
 
 return {
@@ -46,11 +46,11 @@ return {
 		-- upvalues: cryo (ref), t_1 (ref)
 		return cryo.Dictionary.join(p1, { controls = cryo.Dictionary.join(t_1, p1.controls or {}) })
 	end,
-	mapStory = function(p2)
+	mapStory = function(p1)
 		-- upvalues: useCreateOverlay (ref), t (ref), roact (ref), foundation (ref), appStyleProvider (ref), mockLocale (ref)
-		return function(p3)
-			-- upvalues: useCreateOverlay (copy), t (copy), roact (copy), foundation (copy), appStyleProvider (copy), mockLocale (copy), p2 (ref)
-			local var8 = if p3 then t[p3.theme] else t.Default
+		return function(p2)
+			-- upvalues: useCreateOverlay (copy), t (copy), roact (copy), foundation (copy), appStyleProvider (copy), mockLocale (copy), p1 (ref)
+			local var1 = if p2 then t[p2.theme] else t.Default
 			
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -59,10 +59,10 @@ return {
 			}, {
 				roact.createElement(foundation.FoundationProvider, {
 					device = "Desktop",
-					colorMode = var8.themeName,
-					overlayGui = useCreateOverlay(p3)
+					colorMode = var1.themeName,
+					overlayGui = useCreateOverlay(p2)
 				}, {
-					roact.createElement(appStyleProvider, { style = var8 }, { Child = mockLocale(p2, p3) })
+					roact.createElement(appStyleProvider, { style = var1 }, { Child = mockLocale(p1, p2) })
 				})
 			})
 		end

@@ -43,9 +43,9 @@ local t_4 = {
 }
 
 return {
-	sendLoadTimerEvent = function(p0)
+	sendLoadTimerEvent = function(p1)
 		-- upvalues: telemetryService (ref), t (ref)
-		telemetryService:LogEvent(t, { customFields = p0, standardizedFields = { "addOSInfo" } })
+		telemetryService:LogEvent(t, { customFields = p1, standardizedFields = { "addOSInfo" } })
 	end,
 	sendPageStatusEvent = function(p1, p2, p3)
 		-- upvalues: telemetryService (ref), t_2 (ref), t_4 (ref)
@@ -57,23 +57,23 @@ return {
 			}
 		})
 	end,
-	sendPagePayloadSizeEvent = function(p4, p5)
+	sendPagePayloadSizeEvent = function(p1, p2)
 		-- upvalues: telemetryService (ref), t_3 (ref)
-		local var6 = nil
+		local var1 = nil
 		
-		if typeof(p5) == "buffer" then
-			var6 = buffer.len(p5)
-		elseif typeof(p5) == "string" then
-			var6 = string.len(p5)
+		if typeof(p2) == "buffer" then
+			var1 = buffer.len(p2)
+		elseif typeof(p2) == "string" then
+			var1 = string.len(p2)
 		else
 			return
 		end
-		telemetryService:LogStat(t_3, { customFields = { pageKey = p4 } }, var6)
+		telemetryService:LogStat(t_3, { customFields = { pageKey = p1 } }, var1)
 	end,
-	sendLoadMoreEvent = function(p6)
+	sendLoadMoreEvent = function(p1)
 		-- upvalues: telemetryService (ref), t_1 (ref)
 		telemetryService:LogEvent(t_1, {
-			customFields = { surfaceKey = p6 },
+			customFields = { surfaceKey = p1 },
 			standardizedFields = { "addOSInfo" }
 		})
 	end

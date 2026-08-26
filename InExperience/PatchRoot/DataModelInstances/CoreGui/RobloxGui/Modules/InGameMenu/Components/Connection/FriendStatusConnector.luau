@@ -7,9 +7,9 @@ local setFriendStatusModule = require(parent.Actions.SetFriendStatus)
 local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
 local friendStatusConnector = roact.PureComponent:extend("FriendStatusConnector")
 
-function friendStatusConnector.init(p0)
+function friendStatusConnector.init(p1)
 	-- upvalues: playersService (ref)
-	p0.state = { localPlayer = playersService.LocalPlayer }
+	p1.state = { localPlayer = playersService.LocalPlayer }
 end
 
 function friendStatusConnector.render(p1)
@@ -29,9 +29,9 @@ function friendStatusConnector.render(p1)
 		}),
 		PlayerRemoving = roact.createElement(externalEventConnectionModule, {
 			event = playersService.PlayerRemoving,
-			callback = function(p3)
+			callback = function(p2)
 				-- upvalues: p1 (ref)
-				p1.props.setFriendStatus(p3.UserId, nil)
+				p1.props.setFriendStatus(p2.UserId, nil)
 			end
 		})
 	}
@@ -39,21 +39,21 @@ function friendStatusConnector.render(p1)
 	if p1.state.localPlayer then
 		t.FriendStatusChanged = roact.createElement(externalEventConnectionModule, {
 			event = playersService.LocalPlayer.FriendStatusChanged,
-			callback = function(p4, p5)
+			callback = function(p2, p3)
 				-- upvalues: p1 (ref)
-				p1.props.setFriendStatus(p4.UserId, p5)
+				p1.props.setFriendStatus(p2.UserId, p3)
 			end
 		})
 	end
 	return roact.createFragment(t)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p6)
+return roactRodux.UNSTABLE_connect2(nil, function(p1)
 	-- upvalues: setFriendStatusModule (ref)
 	return {
-		setFriendStatus = function(value, p7)
-			-- upvalues: p6 (ref), setFriendStatusModule (copy)
-			return p6(setFriendStatusModule(value, p7))
+		setFriendStatus = function(value, p2)
+			-- upvalues: p1 (ref), setFriendStatusModule (copy)
+			return p1(setFriendStatusModule(value, p2))
 		end
 	}
 end)(friendStatusConnector)

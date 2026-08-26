@@ -17,12 +17,12 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: errorSourceStringsModule (ref)
-	for i, v in p1.curveAnimations do
+	for i, v in p2.curveAnimations do
 		for i_1, v_1 in v:GetDescendants() do
 			if v_1:IsA("Script") or v_1:IsA("ModuleScript") then
-				p0:fail(errorSourceStringsModule.Keys.CurveAnim_ContainsScripts)
+				p1:fail(errorSourceStringsModule.Keys.CurveAnim_ContainsScripts)
 				
 				return
 			end

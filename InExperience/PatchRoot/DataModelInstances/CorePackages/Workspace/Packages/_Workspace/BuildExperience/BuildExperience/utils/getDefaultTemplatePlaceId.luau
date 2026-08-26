@@ -11,7 +11,7 @@ return function()
 		-- upvalues: contentProviderService (copy)
 		return contentProviderService.BaseUrl
 	end)
-	local var2 = if ok and typeof(status) == "string" then status else ""
+	local var1 = if ok and typeof(status) == "string" then status else ""
 	
-	return if string.find(var2, "sitetest3", 1, true) then t.sitetest3 elseif string.find(var2, "sitetest1", 1, true) then t.sitetest1 else t.production
+	return if string.find(var1, "sitetest3", 1, true) then t.sitetest3 elseif string.find(var1, "sitetest1", 1, true) then t.sitetest1 else t.production
 end

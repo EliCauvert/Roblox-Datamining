@@ -16,60 +16,60 @@ local fFlagAbuseReportLinkOpenedAnalytics = sharedFlagsModule.FFlagAbuseReportLi
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useOptionalAbuseReportAnalytics = abuseReportAnalyticsContextModule.useOptionalAbuseReportAnalytics
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useArTranslation (ref), useOpenLinkModule (ref), reactModule (ref), fFlagAbuseReportLinkOpenedAnalytics (ref), useOptionalAbuseReportAnalytics (ref), telemetryEventType (ref), addUnderlineToLinksInTextWithTranslation (ref), controlState (ref), text (ref), addFontStyleToTextWithTranslation (ref)
 	local translateIntoString = useArTranslation().translateIntoString
 	local translateIntoRichTextString = useArTranslation().translateIntoRichTextString
-	local var9 = useOpenLinkModule()
-	local var10, var11 = reactModule.useState(false)
-	local var12 = nil
+	local var1 = useOpenLinkModule()
+	local var2, var3 = reactModule.useState(false)
+	local var4 = nil
 	
 	if fFlagAbuseReportLinkOpenedAnalytics then
-		local var13 = useOptionalAbuseReportAnalytics()
-		var12 = if var13 then var13.sendEvent else nil
+		local var5 = useOptionalAbuseReportAnalytics()
+		var4 = if var5 then var5.sendEvent else nil
 	end
-	local var14, var15 = reactModule.useMemo(function()
-		-- upvalues: translateIntoRichTextString (ref), p0 (ref)
-		return translateIntoRichTextString(p0.input)
-	end, { p0.input, translateIntoRichTextString })
+	local var6, var7 = reactModule.useMemo(function()
+		-- upvalues: translateIntoRichTextString (ref), p1 (ref)
+		return translateIntoRichTextString(p1.input)
+	end, { p1.input, translateIntoRichTextString })
 	
 	return reactModule.createElement(text, {
 		RichText = true,
 		TextWrapped = true,
-		Text = if var10 then `<u>{var14}</u>` else var14,
+		Text = if var2 then `<u>{var6}</u>` else var6,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		fontStyle = if addFontStyleToTextWithTranslation then p0.fontStyle else nil,
-		tag = p0.tag,
-		LayoutOrder = p0.layoutOrder,
-		onActivated = if var15 ~= nil then nil else reactModule.useCallback(function()
-			-- upvalues: var15 (ref), fFlagAbuseReportLinkOpenedAnalytics (copy), var12 (write), telemetryEventType (copy), p0 (ref), var9 (ref), translateIntoString (ref)
-			local var16 = if var15 ~= nil then var15.href else nil
+		fontStyle = if addFontStyleToTextWithTranslation then p1.fontStyle else nil,
+		tag = p1.tag,
+		LayoutOrder = p1.layoutOrder,
+		onActivated = if var7 ~= nil then nil else reactModule.useCallback(function()
+			-- upvalues: var7 (ref), fFlagAbuseReportLinkOpenedAnalytics (copy), var4 (write), telemetryEventType (copy), p1 (ref), var1 (ref), translateIntoString (ref)
+			local var8 = if var7 ~= nil then var7.href else nil
 			
-			if fFlagAbuseReportLinkOpenedAnalytics and var12 and var16 then
-				var12({
+			if fFlagAbuseReportLinkOpenedAnalytics and var4 and var8 then
+				var4({
 					sub_event_type = telemetryEventType.LinkOpened,
 					link_detail = {
-						href = var16,
-						link_id = p0.linkId,
-						source = p0.linkSource
+						href = var8,
+						link_id = p1.linkId,
+						source = p1.linkSource
 					}
 				})
 			end
-			var9(translateIntoString(p0.input), var16)
+			var1(translateIntoString(p1.input), var8)
 		end, {
-			var15, p0.input, var9, translateIntoString,
-			if fFlagAbuseReportLinkOpenedAnalytics then var12 else nil,
-			if fFlagAbuseReportLinkOpenedAnalytics then p0.linkId else nil,
-			if fFlagAbuseReportLinkOpenedAnalytics then p0.linkSource else nil
+			var7, p1.input, var1, translateIntoString,
+			if fFlagAbuseReportLinkOpenedAnalytics then var4 else nil,
+			if fFlagAbuseReportLinkOpenedAnalytics then p1.linkId else nil,
+			if fFlagAbuseReportLinkOpenedAnalytics then p1.linkSource else nil
 		}),
-		onStateChanged = if addUnderlineToLinksInTextWithTranslation and var15 ~= nil then if addUnderlineToLinksInTextWithTranslation then reactModule.useCallback(function(p1)
-			-- upvalues: controlState (copy), var11 (ref)
-			if p1 == controlState.Hover then
-				var11(true)
+		onStateChanged = if addUnderlineToLinksInTextWithTranslation and var7 ~= nil then if addUnderlineToLinksInTextWithTranslation then reactModule.useCallback(function(p2)
+			-- upvalues: controlState (copy), var3 (ref)
+			if p2 == controlState.Hover then
+				var3(true)
 				
 				return
 			end
-			var11(false)
+			var3(false)
 		end, {}) else nil else nil
 	})
 end)

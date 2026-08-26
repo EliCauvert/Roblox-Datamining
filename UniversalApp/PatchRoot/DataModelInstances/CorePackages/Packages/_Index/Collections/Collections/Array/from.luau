@@ -11,13 +11,13 @@ local fromSetModule = require(script.fromSet)
 local fromMapModule = require(script.fromMap)
 local fromArrayModule = require(script.fromArray)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: isArrayModule (ref), fromArrayModule (ref), instanceOfModule (ref), setModule (ref), fromSetModule (ref), mapModule (ref), fromMapModule (ref), fromStringModule (ref)
-	if p0 == nil then
+	if p1 == nil then
 		error("cannot create array from a nil value")
 	end
-	local var8 = typeof(p0)
+	local var1 = typeof(p1)
 	local _ = nil
 	
-	return if var8 == "table" and isArrayModule(p0) then fromArrayModule(p0, p1, p2) elseif instanceOfModule(p0, setModule) then fromSetModule(p0, p1, p2) elseif instanceOfModule(p0, mapModule) then fromMapModule(p0, p1, p2) elseif var8 == "string" then fromStringModule(p0, p1, p2) else {}
+	return if var1 == "table" and isArrayModule(p1) then fromArrayModule(p1, p2, p3) elseif instanceOfModule(p1, setModule) then fromSetModule(p1, p2, p3) elseif instanceOfModule(p1, mapModule) then fromMapModule(p1, p2, p3) elseif var1 == "string" then fromStringModule(p1, p2, p3) else {}
 end

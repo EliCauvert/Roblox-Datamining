@@ -4,21 +4,21 @@ local signalsReactModule = require(parent.SignalsReact)
 local _ = require(script.Parent.PromptStyle)
 local getSduiApiStore = require(parent.SduiSharedUtilities).getSduiApiStore
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: signalsReactModule (ref), getSduiApiStore (ref), reactModule (ref)
-	local var2 = signalsReactModule.useSignalState(getSduiApiStore().getData(p0).data)
+	local var1 = signalsReactModule.useSignalState(getSduiApiStore().getData(p1).data)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var2 (ref), p1 (ref)
+		-- upvalues: var1 (ref), p2 (ref)
 		local t = {}
 		
-		if not var2 then
+		if not var1 then
 			return t
 		end
-		for i, v in var2 do
+		for i, v in var1 do
 			local category = v.category
 			
-			if p1 == nil or category == p1 then
+			if p2 == nil or category == p2 then
 				table.insert(t, {
 					identifier = v.identifier,
 					robloxComponentType = v.robloxComponentType,
@@ -29,5 +29,5 @@ return function(p0, p1)
 			end
 		end
 		return t
-	end, { var2, p1 })
+	end, { var1, p2 })
 end

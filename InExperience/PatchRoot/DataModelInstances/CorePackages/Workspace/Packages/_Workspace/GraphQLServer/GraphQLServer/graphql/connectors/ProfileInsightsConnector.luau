@@ -9,24 +9,24 @@ local fetch = require(parent.Fetch).fetch
 local _ = require(parent.LuauPolyfill)
 local _ = require(script.Parent.Parent.generatedTypes)
 local fFlagPlayerSearchEnableOnlineFrequents = require(parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
-local var2 = urlBuilder.new({
+local var1 = urlBuilder.new({
 	path = "profile-insights-api/v1/multiProfileInsights",
 	base = urlBase.APIS
 })
 
 return {
-	findProfileInsightsByUserIds = function(p0, p1, p2, p3)
-		-- upvalues: fetch (ref), promiseModule (ref), var2 (ref), httpService (ref), response (ref), graphQLError (ref)
-		local var3 = p3 or fetch
+	findProfileInsightsByUserIds = function(p1, p2, p3, p4)
+		-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), httpService (ref), response (ref), graphQLError (ref)
+		local var2 = p4 or fetch
 		
-		return promiseModule.new(function(p4, p5)
-			-- upvalues: var3 (ref), var2 (copy), httpService (copy), p0 (ref), p2 (ref), p1 (ref), response (copy), graphQLError (copy)
-			local var4 = var3(var2(), {
+		return promiseModule.new(function(p5, p6)
+			-- upvalues: var2 (ref), var1 (copy), httpService (copy), p1 (ref), p3 (ref), p2 (ref), response (copy), graphQLError (copy)
+			local var3 = var2(var1(), {
 				method = "POST",
 				body = httpService:JSONEncode({
-					userIds = p0,
-					count = if p2 then nil else p1 or 2,
-					rankingStrategy = p2
+					userIds = p1,
+					count = if p3 then nil else p2 or 2,
+					rankingStrategy = p3
 				}),
 				headers = {
 					["Content-Type"] = "application/json",
@@ -37,36 +37,36 @@ return {
 				return response.error()
 			end):expect()
 			
-			if not var4.ok then
-				p5(graphQLError.new(string.format("Failed to fetch profile insights. Error code: %d", var4.status)))
+			if not var3.ok then
+				p6(graphQLError.new(string.format("Failed to fetch profile insights. Error code: %d", var3.status)))
 				
 				return
 			end
-			local var5 = var4:json():catch(function()
+			local var4 = var3:json():catch(function()
 				return nil
 			end):expect()
 			
-			if var5 then
-				p4(var5.userInsights)
+			if var4 then
+				p5(var4.userInsights)
 				
 				return
 			end
-			p5(graphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", httpService:JSONEncode(p0))))
+			p6(graphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", httpService:JSONEncode(p1))))
 		end)
 	end,
-	findProfileInsightsByUserIdsFeed = function(p6, p7, p8, p9, p10)
-		-- upvalues: fFlagPlayerSearchEnableOnlineFrequents (ref), fetch (ref), promiseModule (ref), var2 (ref), httpService (ref), response (ref), graphQLError (ref)
-		local var6 = if fFlagPlayerSearchEnableOnlineFrequents then p9 else nil
-		local var7 = p10 or fetch
+	findProfileInsightsByUserIdsFeed = function(p1, p2, p3, p4, p5)
+		-- upvalues: fFlagPlayerSearchEnableOnlineFrequents (ref), fetch (ref), promiseModule (ref), var1 (ref), httpService (ref), response (ref), graphQLError (ref)
+		local var2 = if fFlagPlayerSearchEnableOnlineFrequents then p4 else nil
+		local var3 = p5 or fetch
 		
-		return promiseModule.new(function(p12, p13)
-			-- upvalues: var7 (ref), var2 (copy), httpService (copy), p6 (ref), var6 (ref), p7 (ref), response (copy), graphQLError (copy)
-			local var4 = var7(var2(), {
+		return promiseModule.new(function(p6, p7)
+			-- upvalues: var3 (ref), var1 (copy), httpService (copy), p1 (ref), var2 (ref), p2 (ref), response (copy), graphQLError (copy)
+			local var4 = var3(var1(), {
 				method = "POST",
 				body = httpService:JSONEncode({
-					userIds = p6,
-					count = if var6 then nil else p7 or 2,
-					rankingStrategy = var6
+					userIds = p1,
+					count = if var2 then nil else p2 or 2,
+					rankingStrategy = var2
 				}),
 				headers = {
 					["Content-Type"] = "application/json",
@@ -78,7 +78,7 @@ return {
 			end):expect()
 			
 			if not var4.ok then
-				p13(graphQLError.new(string.format("Failed to fetch profile insights. Error code: %d", var4.status)))
+				p7(graphQLError.new(string.format("Failed to fetch profile insights. Error code: %d", var4.status)))
 				
 				return
 			end
@@ -87,14 +87,14 @@ return {
 			end):expect()
 			
 			if var5 then
-				p12(var5.userInsights)
+				p6(var5.userInsights)
 				
 				return
 			end
-			p13(graphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", httpService:JSONEncode(p6))))
-		end):andThen(function(p11)
-			-- upvalues: p8 (ref)
-			return { pageId = p8, profileInsights = p11 }
+			p7(graphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", httpService:JSONEncode(p1))))
+		end):andThen(function(p6)
+			-- upvalues: p3 (ref)
+			return { pageId = p3, profileInsights = p6 }
 		end)
 	end
 }

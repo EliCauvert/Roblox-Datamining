@@ -20,13 +20,13 @@ local function buildDrdSchema(p1)
 	local t = {}
 	
 	for i, v in list do
-		local var1 = `{p1}Hand{v}`
-		t[`{var1}1`] = {
+		local var2 = `{p1}Hand{v}`
+		t[`{var2}1`] = {
 			ClassName = "Bone",
 			_children = {
-				[`{var1}2`] = {
+				[`{var2}2`] = {
 					ClassName = "Bone",
-					_children = { [`{var1}3`] = { ClassName = "Bone" } }
+					_children = { [`{var2}3`] = { ClassName = "Bone" } }
 				}
 			}
 		}
@@ -77,69 +77,69 @@ local t_2 = {
 }
 local t_3 = { LeftToeBase = { ClassName = "Bone" } }
 local t_4 = { RightToeBase = { ClassName = "Bone" } }
-local var2 = buildDrdSchema("Left")
-local var3 = buildDrdSchema("Right")
-local var4 = false
+local var3 = buildDrdSchema("Left")
+local var4 = buildDrdSchema("Right")
+local var5 = false
 
 function t.setIsBackendBundleUpload(value)
-	-- upvalues: var4 (write)
-	var4 = value
+	-- upvalues: var5 (write)
+	var5 = value
 end
 
 function t.checkFlagEnabledForAllowHrd()
-	-- upvalues: getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule (ref), getFFlagUGCValidationAllowHRDUploadModule (ref), getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), var4 (write)
-	return if getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() then if getFFlagUGCValidationAllowHRDUploadModule() then true else getFFlagDebugAllowHRDUploadOnBundleBackendModule() and var4 else false
+	-- upvalues: getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule (ref), getFFlagUGCValidationAllowHRDUploadModule (ref), getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), var5 (write)
+	return if getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() then if getFFlagUGCValidationAllowHRDUploadModule() then true else getFFlagDebugAllowHRDUploadOnBundleBackendModule() and var5 else false
 end
 
-local var1 = nil
 local var2 = nil
+local var3 = nil
 
 function t.getHrdJointLabels()
-	-- upvalues: var1 (write)
-	if var1 == nil then
-		var1 = Instance.new("HumanoidRigDescription"):GetJointLabels()
-	end
-	return var1
-end
-
-function t.getDrdJointLabels()
 	-- upvalues: var2 (write)
 	if var2 == nil then
-		var2 = Instance.new("DigitsRigDescription"):GetJointLabels()
+		var2 = Instance.new("HumanoidRigDescription"):GetJointLabels()
 	end
 	return var2
 end
 
-function t.getJointNameWhitelist()
-	-- upvalues: var1 (write), constantsModule (ref), t (ref)
-	if var1 ~= nil then
-		return var1
+function t.getDrdJointLabels()
+	-- upvalues: var3 (write)
+	if var3 == nil then
+		var3 = Instance.new("DigitsRigDescription"):GetJointLabels()
 	end
-	var1 = {}
-	
-	for i, v in constantsModule.R15_STANDARD_JOINT_NAMES do
-		var1[i] = true
-	end
-	for i_1, v_1 in t.getHrdJointLabels() do
-		var1[v_1.Name] = true
-	end
-	for i_2, v_2 in t.getDrdJointLabels() do
-		var1[`LeftHand{v_2.Name}`] = true
-		var1[`RightHand{v_2.Name}`] = true
-	end
-	return var1
+	return var3
 end
 
-function t.getNameWhitelistOfClassInSchema(p1, p2)
+function t.getJointNameWhitelist()
+	-- upvalues: var2 (write), constantsModule (ref), t (ref)
+	if var2 ~= nil then
+		return var2
+	end
+	var2 = {}
+	
+	for i, v in constantsModule.R15_STANDARD_JOINT_NAMES do
+		var2[i] = true
+	end
+	for i_1, v_1 in t.getHrdJointLabels() do
+		var2[v_1.Name] = true
+	end
+	for i_2, v_2 in t.getDrdJointLabels() do
+		var2[`LeftHand{v_2.Name}`] = true
+		var2[`RightHand{v_2.Name}`] = true
+	end
+	return var2
+end
+
+function t.getNameWhitelistOfClassInSchema(p2, p3)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
-	for i, v in p1 do
-		if v.ClassName == p2 then
+	for i, v in p2 do
+		if v.ClassName == p3 then
 			t_1[i] = true
 		end
 		if v._children ~= nil then
-			for i_1, v_1 in t.getNameWhitelistOfClassInSchema(v._children, p2) do
+			for i_1, v_1 in t.getNameWhitelistOfClassInSchema(v._children, p3) do
 				t_1[i_1] = v_1
 			end
 		end
@@ -147,12 +147,12 @@ function t.getNameWhitelistOfClassInSchema(p1, p2)
 	return t_1
 end
 
-function t.getSchemaFlatHierarchyList(p1, p2)
+function t.getSchemaFlatHierarchyList(p4, p5)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
-	for i, v in p1 do
-		local cloned = table.clone(p2)
+	for i, v in p4 do
+		local cloned = table.clone(p5)
 		table.insert(cloned, i)
 		t_1[i] = { ClassName = v.ClassName, path = cloned }
 		
@@ -170,19 +170,19 @@ function t.getFingerFlatSuffixes()
 	return list
 end
 
-function t.getDrdSchema(p1)
-	-- upvalues: var2 (ref), var3 (ref)
-	if p1 == "Left" then
-		return var2
-	elseif p1 == "Right" then
+function t.getDrdSchema(p6)
+	-- upvalues: var3 (ref), var4 (ref)
+	if p6 == "Left" then
 		return var3
+	elseif p6 == "Right" then
+		return var4
 	end
 	error("Invalid side: " .. p5)
 end
 
-function t.getAvatarBoneSchema(p1)
-	-- upvalues: t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref), var2 (ref), var3 (ref)
-	return if p1 == "Head" then t_1 elseif p1 == "UpperTorso" then t_2 elseif p1 == "LeftFoot" then t_3 elseif p1 == "RightFoot" then t_4 elseif p1 == "LeftHand" then var2 elseif p1 == "RightHand" then var3 else {}
+function t.getAvatarBoneSchema(p6)
+	-- upvalues: t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref), var3 (ref), var4 (ref)
+	return if p6 == "Head" then t_1 elseif p6 == "UpperTorso" then t_2 elseif p6 == "LeftFoot" then t_3 elseif p6 == "RightFoot" then t_4 elseif p6 == "LeftHand" then var3 elseif p6 == "RightHand" then var4 else {}
 end
 
 return t

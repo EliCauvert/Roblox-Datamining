@@ -1,45 +1,45 @@
 ﻿local t = {}
 t.mt = { __index = t }
 
-function t.new(_, p0)
+function t.new(_, p1)
 	-- upvalues: t (ref)
 	local t_1 = {}
-	local var5 = getmetatable(p0) == t.mt or nil
+	local var1 = getmetatable(p1) == t.mt or nil
 	
-	if type(p0) == "table" then
-		if var5 or #p0 <= 0 then
-			for i in pairs(p0) do
+	if type(p1) == "table" then
+		if var1 or #p1 <= 0 then
+			for i in pairs(p1) do
 				t_1[i] = true
 			end
 		else
-			for i, v in ipairs(p0) do
+			for i, v in ipairs(p1) do
 				t_1[v] = true
 			end
 		end
-	elseif p0 ~= nil then
-		t_1 = { [p0] = true }
+	elseif p1 ~= nil then
+		t_1 = { [p1] = true }
 	end
 	return setmetatable(t_1, t.mt)
 end
 
-function t.add(p1, p2)
-	if p2 ~= nil then
-		p1[p2] = true
+function t.add(p2, p3)
+	if p3 ~= nil then
+		p2[p3] = true
 	end
-	return p1
+	return p2
 end
 
-function t.remove(p3, p4)
-	if p4 ~= nil then
-		p3[p4] = nil
+function t.remove(p2, p3)
+	if p3 ~= nil then
+		p2[p3] = nil
 	end
-	return p3
+	return p2
 end
 
-function t.tolist(p5)
+function t.tolist(p2)
 	local t = {}
 	
-	for i in pairs(p5) do
+	for i in pairs(p2) do
 		table.insert(t, i)
 	end
 	return t
@@ -47,73 +47,73 @@ end
 
 t.to_list = t.tolist
 
-function t.mt:__add(p6)
+function t.mt:__add(p3)
 	-- upvalues: t (ref)
-	local var7 = t:new()
-	local var8 = t:new(p6)
+	local var2 = t:new()
+	local var3 = t:new(p3)
 	
 	for i in pairs(t:new(self)) do
-		var7[i] = true
+		var2[i] = true
 	end
-	for i_1 in pairs(var8) do
-		var7[i_1] = true
+	for i_1 in pairs(var3) do
+		var2[i_1] = true
 	end
-	return var7
+	return var2
 end
 
-function t.mt:__sub(p7)
+function t.mt:__sub(p4)
 	-- upvalues: t (ref)
-	local var9 = t:new()
-	local var10 = t:new(p7)
+	local var4 = t:new()
+	local var5 = t:new(p4)
 	
 	for i in pairs(t:new(self)) do
-		var9[i] = true
+		var4[i] = true
 	end
-	for i_1 in pairs(var10) do
-		var9[i_1] = nil
+	for i_1 in pairs(var5) do
+		var4[i_1] = nil
 	end
-	return var9
+	return var4
 end
 
-function t.mt:__mul(p8)
+function t.mt:__mul(p5)
 	-- upvalues: t (ref)
-	local var11 = t:new()
-	local var12 = t:new(p8)
+	local var6 = t:new()
+	local var7 = t:new(p5)
 	
 	for i in pairs(t:new(self)) do
-		var11[i] = var12[i]
+		var6[i] = var7[i]
 	end
-	return var11
+	return var6
 end
 
 function t.mt:__tostring()
-	local var13 = "{"
-	local var14 = ""
+	local var8 = "{"
+	local var9 = ""
 	
 	for i in pairs(self) do
-		var13 ..= var14 .. tostring(i)
-		var14 = ", "
+		var8 ..= var9 .. tostring(i)
+		var9 = ", "
 	end
-	return var13 .. "}"
+	return var8 .. "}"
 end
 
 local t_1 = {}
 t_1.mt = { __index = t_1 }
 
-function t_1.new(_, p9, p10, p11, p12, p13, p14)
+function t_1.new(_, p6, p7, p8, p9, p10, p11)
 	-- upvalues: t (ref), t_1 (ref)
 	local root = {
 		level = 0,
 		parent = nil,
 		root = nil,
 		id = nil,
-		index = p9,
-		name = p10,
+		index = p6,
+		name = p7,
 		nodes = {},
-		_openstart = p13,
-		_openend = p14,
-		_closestart = p13,
-		_closeend = p14,
+		_openstart = p10,
+		_openend = p11,
+		_closestart = p10,
+		_closeend = p11,
 		attributes = {},
 		classes = {},
 		deepernodes = t:new(),
@@ -130,67 +130,67 @@ function t_1.new(_, p9, p10, p11, p12, p13, p14)
 	root.descendent_ids = root.deeperids
 	root.descendant_classes = root.deeperclasses
 	
-	if not p11 then
+	if not p8 then
 		root.name = "root"
 		root.root = root
-		root._text = p10
-		local var16 = string.len(p10)
+		root._text = p7
+		local var10 = string.len(p7)
 		root._openstart = 1
-		root._openend = var16
+		root._openend = var10
 		root._closestart = 1
-		root._closeend = var16
-	elseif p12 then
-		root.root = p11.root
-		root.parent = p11
-		root.level = p11.level + 1
-		table.insert(p11.nodes, root)
+		root._closeend = var10
+	elseif p9 then
+		root.root = p8.root
+		root.parent = p8
+		root.level = p8.level + 1
+		table.insert(p8.nodes, root)
 	else
-		root.root = p11.root
-		root.parent = p11.parent or p11
-		root.level = p11.level
-		table.insert(if p11.parent then p11.parent.nodes else p11.nodes, root)
+		root.root = p8.root
+		root.parent = p8.parent or p8
+		root.level = p8.level
+		table.insert(if p8.parent then p8.parent.nodes else p8.nodes, root)
 	end
 	return setmetatable(root, t_1.mt)
 end
 
-function t_1.text(p15)
-	return string.sub(p15.root._text, p15._openstart, p15._closeend)
+function t_1.text(p6)
+	return string.sub(p6.root._text, p6._openstart, p6._closeend)
 end
 
 t_1.gettext = t_1.text
 
-function t_1.settext(value, p16)
-	value.root._text = p16
+function t_1.settext(value, p6)
+	value.root._text = p6
 end
 
-function t_1.textonly(p17)
-	return p17:text():gsub("<[^>]*>", "")
+function t_1.textonly(p6)
+	return p6:text():gsub("<[^>]*>", "")
 end
 
-function t_1.content(p18)
-	return string.sub(p18.root._text, p18._openend + 1, p18._closestart - 1)
+function t_1.content(p6)
+	return string.sub(p6.root._text, p6._openend + 1, p6._closestart - 1)
 end
 
 t_1.getcontent = t_1.content
 
-function t_1.addattribute(p19, p20, p21)
-	p19.attributes[p20] = p21
+function t_1.addattribute(p6, p7, p8)
+	p6.attributes[p7] = p8
 	
-	if string.lower(p20) == "id" then
-		p19.id = p21
+	if string.lower(p7) == "id" then
+		p6.id = p8
 		
 		return
-	elseif string.lower(p20) == "class" then
-		for i in string.gmatch(p21, "%S+") do
-			table.insert(p19.classes, i)
+	elseif string.lower(p7) == "class" then
+		for i in string.gmatch(p8, "%S+") do
+			table.insert(p6.classes, i)
 		end
 	end
 end
 
-function t_1.links(p22)
+function t_1.links(p9)
 	local t = {}
 	
-	for i, v in ipairs(p22:select("a[href]")) do
+	for i, v in ipairs(p9:select("a[href]")) do
 		if #v.attributes.href > 0 then
 			table.insert(t, v.attributes.href)
 		end
@@ -198,13 +198,13 @@ function t_1.links(p22)
 	return t
 end
 
-function t_1.absolutelinks(value, p23)
-	p23 = (p23 or (value.page_url or "")):split("?")[1]:split("#")[1]
-	local var18 = p23:split("://")
-	var18 = var18[#var18]:split("/")[1]
-	local var19 = if p23:find("://") then p23:split("://")[1] else "http"
-	while p23:sub(-1, -1) == "/" do
-		p23 = p23:sub(1, -2)
+function t_1.absolutelinks(value, p10)
+	p10 = (p10 or (value.page_url or "")):split("?")[1]:split("#")[1]
+	local var10 = p10:split("://")
+	var10 = var10[#var10]:split("/")[1]
+	local var11 = if p10:find("://") then p10:split("://")[1] else "http"
+	while p10:sub(-1, -1) == "/" do
+		p10 = p10:sub(1, -2)
 	end
 	local t = {}
 	
@@ -213,7 +213,7 @@ function t_1.absolutelinks(value, p23)
 			local href = v.attributes.href
 			
 			if not href:find("://") then
-				href = if href:sub(1, 2) == "//" then var19 .. ":" .. href elseif href:sub(1, 1) == "/" then var19 .. "://" .. var18 .. href else p23 .. "/" .. href
+				href = if href:sub(1, 2) == "//" then var11 .. ":" .. href elseif href:sub(1, 1) == "/" then var11 .. "://" .. var18 .. href else p10 .. "/" .. href
 			end
 			table.insert(t, href)
 		end
@@ -223,189 +223,189 @@ end
 
 t_1.absolute_links = t_1.absolutelinks
 
-local function _(p24, p25, p26)
+local function _(p11, p12, p13)
 	-- upvalues: t (ref)
-	p24[p25] = p24[p25] or t:new()
-	p24[p25]:add(p26)
+	p11[p12] = p11[p12] or t:new()
+	p11[p12]:add(p13)
 end
 
-function t_1.close(p27, p28, p29)
+function t_1.close(p11, p12, p13)
 	-- upvalues: t (ref)
-	if p28 and p29 then
-		p27._closestart = p28
-		p27._closeend = p29
+	if p12 and p13 then
+		p11._closestart = p12
+		p11._closeend = p13
 	end
-	local var21 = p27
+	local var12 = p11
 	while true do
-		var21 = var21.parent
-		if not var21 then break end
-		var21.deepernodes:add(p27)
-		local deeperelements = var21.deeperelements
-		local name = p27.name
+		var12 = var12.parent
+		if not var12 then break end
+		var12.deepernodes:add(p11)
+		local deeperelements = var12.deeperelements
+		local name = p11.name
 		deeperelements[name] = deeperelements[name] or t:new()
-		deeperelements[name]:add(p27)
+		deeperelements[name]:add(p11)
 		
-		for i in pairs(p27.attributes) do
-			local deeperattributes = var21.deeperattributes
+		for i in pairs(p11.attributes) do
+			local deeperattributes = var12.deeperattributes
 			deeperattributes[i] = deeperattributes[i] or t:new()
-			deeperattributes[i]:add(p27)
+			deeperattributes[i]:add(p11)
 		end
-		if p27.id then
-			local deeperids = var21.deeperids
-			local id = p27.id
+		if p11.id then
+			local deeperids = var12.deeperids
+			local id = p11.id
 			deeperids[id] = deeperids[id] or t:new()
-			deeperids[id]:add(p27)
+			deeperids[id]:add(p11)
 		end
-		for i, v in ipairs(p27.classes) do
-			local deeperclasses = var21.deeperclasses
+		for i, v in ipairs(p11.classes) do
+			local deeperclasses = var12.deeperclasses
 			deeperclasses[v] = deeperclasses[v] or t:new()
-			deeperclasses[v]:add(p27)
+			deeperclasses[v]:add(p11)
 		end
 	end
 end
 
-local function escape(p30)
-	return string.gsub(p30, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
+local function escape(p14)
+	return string.gsub(p14, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
 end
 
-local function select(p31, p32)
+local function select(p14, p15)
 	-- upvalues: t (ref), escape (ref)
-	if not p32 or type(p32) ~= "string" or p32 == "" then
+	if not p15 or type(p15) ~= "string" or p15 == "" then
 		return t:new()
 	end
-	local var29, var32
+	local var13, var14
 	local t_1 = {
-		[""] = p31.deeperelements,
-		["["] = p31.deeperattributes,
-		["#"] = p31.deeperids,
-		["."] = p31.deeperclasses
+		[""] = p14.deeperelements,
+		["["] = p14.deeperattributes,
+		["#"] = p14.deeperids,
+		["."] = p14.deeperclasses
 	}
 	
-	local function match(p33, p34)
-		-- upvalues: t (copy), t_1 (ref), p31 (ref), escape (copy)
-		local var47 = nil
-		local var48 = nil
+	local function match(p16, p17)
+		-- upvalues: t (copy), t_1 (ref), p14 (ref), escape (copy)
+		local var15 = nil
+		local var16 = nil
 		local substring = nil
 		
-		if p33 == "[" then
-			local match, match_1, match_2, match_3 = string.match(p34, "([^=|%*~%$!%^]+)([|%*~%$!%^]?)(=?)(.*)")
-			p34 = match
-			var47 = match_1
-			var48 = match_2
+		if p16 == "[" then
+			local match, match_1, match_2, match_3 = string.match(p17, "([^=|%*~%$!%^]+)([|%*~%$!%^]?)(=?)(.*)")
+			p17 = match
+			var15 = match_1
+			var16 = match_2
 			substring = match_3
 		end
-		local var54 = t:new(t_1[p33][p34])
+		local var17 = t:new(t_1[p16][p17])
 		
-		if var48 == "=" then
+		if var16 == "=" then
 			if #substring < 2 then
 				substring = "'" .. substring .. "'"
 			end
 			substring = string.sub(substring, 2, #substring - 1)
 			
-			if var47 == "!" then
-				var54 = t:new(p31.deepernodes)
+			if var15 == "!" then
+				var17 = t:new(p14.deepernodes)
 			end
-			for i in pairs(var54) do
-				local var55 = i.attributes[p34]
+			for i in pairs(var17) do
+				local var18 = i.attributes[p17]
 				
-				if var47 == "" and var55 ~= substring then
-					var54:remove(i)
-				elseif var47 == "!" and var55 == substring then
-					var54:remove(i)
-				elseif var47 == "|" and string.match(var55, "^[^-]*") ~= substring then
-					var54:remove(i)
-				elseif var47 == "*" and string.match(var55, escape(substring)) ~= substring then
-					var54:remove(i)
-				elseif var47 == "~" then
-					var54:remove(i)
+				if var15 == "" and var18 ~= substring then
+					var17:remove(i)
+				elseif var15 == "!" and var18 == substring then
+					var17:remove(i)
+				elseif var15 == "|" and string.match(var18, "^[^-]*") ~= substring then
+					var17:remove(i)
+				elseif var15 == "*" and string.match(var18, escape(substring)) ~= substring then
+					var17:remove(i)
+				elseif var15 == "~" then
+					var17:remove(i)
 					
-					for i_1 in string.gmatch(var55, "%S+") do
+					for i_1 in string.gmatch(var18, "%S+") do
 						if i_1 == substring then
-							var54:add(i)
+							var17:add(i)
 							continue
 						end
 					end
-				elseif var47 == "^" and string.match(var55, "^" .. string.gsub(substring, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")) ~= substring then
-					var54:remove(i)
-				elseif var47 == "$" and string.match(var55, string.gsub(substring, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1") .. "$") ~= substring then
-					var54:remove(i)
+				elseif var15 == "^" and string.match(var18, "^" .. string.gsub(substring, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")) ~= substring then
+					var17:remove(i)
+				elseif var15 == "$" and string.match(var18, string.gsub(substring, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1") .. "$") ~= substring then
+					var17:remove(i)
 				end
 			end
 		end
-		return var54
+		return var17
 	end
 	
-	local var24, var25, var26 = t:new({ p31 })
+	local var19, var20, var21 = t:new({ p14 })
 	
-	for i in string.gmatch(p32, "%S+") do
+	for i in string.gmatch(p15, "%S+") do
 		if i == ">" then
-			var26 = true
+			var21 = true
 			continue
 		end
 		local i_1
-		var25 = t:new()
+		var20 = t:new()
 		
-		for i_1 in pairs(var24) do
-			var25 += if var26 then t:new(i_1.nodes) else i_1.deepernodes
+		for i_1 in pairs(var19) do
+			var20 += if var21 then t:new(i_1.nodes) else i_1.deepernodes
 		end
-		var26 = false
+		var21 = false
 		
 		if i ~= "*" then
 			var28, var29 = t:new()
-			local var30 = 0
+			local var22 = 0
 			i_1 = 0
 			while true do
 				local _ = nil
-				local var31 = nil
-				var32 = nil
+				local var23 = nil
+				var14 = nil
 				local _ = nil
 				local _ = nil
 				local matchIndex, matchIndex_1, matchIndex_2, matchIndex_3, matchIndex_4, matchIndex_5, matchIndex_6 = string.find(i, "(%(?%)?)([:%[#.]?)([%w-_\\]+)([|%*~%$!%^]?=?)(['\"]?)", i_1 + 1)
-				var30 = matchIndex
+				var22 = matchIndex
 				i_1 = matchIndex_1
-				local var40 = matchIndex_2
-				var31 = matchIndex_3
-				var32 = matchIndex_4
-				local var41 = matchIndex_5
-				local var42 = matchIndex_6
-				if not var32 then break end
-				if var31 == ":" then
-					var29 = var32
+				local var24 = matchIndex_2
+				var23 = matchIndex_3
+				var14 = matchIndex_4
+				local var25 = matchIndex_5
+				local var26 = matchIndex_6
+				if not var14 then break end
+				if var23 == ":" then
+					var13 = var14
 					continue
 				end
-				if var40 == ")" then
-					var29 = nil
+				if var24 == ")" then
+					var13 = nil
 				end
-				if var31 == "[" and var42 ~= "" then
+				if var23 == "[" and var26 ~= "" then
 					local _ = nil
 					local matchIndex_7, matchIndex_8, matchIndex_9 = string.find(i, "(%b" .. var42 .. var42 .. ")]", i_1)
-					var30 = matchIndex_7
+					var22 = matchIndex_7
 					i_1 = matchIndex_8
-					var32 ..= var41 .. matchIndex_9
+					var14 ..= var25 .. matchIndex_9
 				end
-				local var46 = match(var31, var32)
+				local var27 = match(var23, var14)
 				
-				if var29 == "not" then
-					var28 += var46
+				if var13 == "not" then
+					var28 += var27
 				else
-					var25 *= var46
+					var20 *= var27
 				end
 			end
-			var25 -= var28
-			var24 = t:new(var25)
+			var20 -= var28
+			var19 = t:new(var20)
 		end
 	end
-	local var27 = var25:tolist()
-	table.sort(var27, function(p35, p36)
-		return p35.index < p36.index
+	local var28 = var20:tolist()
+	table.sort(var28, function(p18, p19)
+		return p18.index < p19.index
 	end)
 	
-	return var27
+	return var28
 end
 
-function t_1.select(p37, p38)
+function t_1.select(p18, p19)
 	-- upvalues: select (ref)
-	return select(p37, p38)
+	return select(p18, p19)
 end
 
 t_1.mt.__call = select

@@ -47,9 +47,9 @@ return function(p1)
 			isSelected = p1.isSelected,
 			autoplay = var2 == responsiveModule.Input.Touch,
 			videoPlaybackCoordinator = if p1.videoPlaybackContext then p1.videoPlaybackContext.videoPlaybackCoordinator else nil,
-			onPlaybackChange = reactModule.useCallback(function(p1)
+			onPlaybackChange = reactModule.useCallback(function(p2)
 				-- upvalues: var6 (ref)
-				var6(p1)
+				var6(p2)
 			end, {}),
 			videoDwellTimeInSec = p1.videoDwellTimeInSec,
 			videoVisiblePercent = p1.videoVisiblePercent,

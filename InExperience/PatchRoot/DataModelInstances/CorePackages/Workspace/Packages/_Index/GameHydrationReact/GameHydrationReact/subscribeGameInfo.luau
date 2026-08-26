@@ -2,8 +2,8 @@
 local signalsModule = require(parent.Signals)
 local dataHydrationModule = require(parent.DataHydration)
 
-local function _(p0)
-	return if p0 == nil then nil else tostring(p0)
+local function _(p1)
+	return if p1 == nil then nil else tostring(p1)
 end
 
 return function(p1)
@@ -11,7 +11,7 @@ return function(p1)
 	local gameInfoStore = dataHydrationModule.Game.getGameInfoStore(false)
 	local votesStore = dataHydrationModule.Game.getVotesStore(false)
 	local universeId = p1.universeId
-	local var4, var5 = signalsModule.createSignal(if universeId ~= nil then nil else tostring(universeId))
+	local var1, var2 = signalsModule.createSignal(if universeId ~= nil then nil else tostring(universeId))
 	local t = {}
 	
 	return {
@@ -20,15 +20,15 @@ return function(p1)
 			return t
 		end,
 		update = function(p2)
-			-- upvalues: var5 (ref)
-			var5(if p2 ~= nil then nil else tostring(p2))
+			-- upvalues: var2 (ref)
+			var2(if p2 ~= nil then nil else tostring(p2))
 		end,
-		dispose = signalsModule.createEffect(function(p3)
-			-- upvalues: var4 (ref), t (write), gameInfoStore (ref), votesStore (ref), p1 (ref)
-			local var7 = var4(p3)
-			t = if var7 == nil then {} else {
-				gameInfo = gameInfoStore.getGameInfo(var7).data(p3),
-				votes = votesStore.getVote(var7).data(p3)
+		dispose = signalsModule.createEffect(function(p2)
+			-- upvalues: var1 (ref), t (write), gameInfoStore (ref), votesStore (ref), p1 (ref)
+			local var3 = var1(p2)
+			t = if var3 == nil then {} else {
+				gameInfo = gameInfoStore.getGameInfo(var3).data(p2),
+				votes = votesStore.getVote(var3).data(p2)
 			}
 			p1.onChange(t)
 		end)

@@ -5,48 +5,48 @@ local startsWithModule = require(parent.startsWith)
 local concat = table.concat
 local insert = table.insert
 
-return function(p0, ...)
+return function(p1, ...)
 	-- upvalues: splitOnModule (ref), insert (ref), startsWithModule (ref), formatValueModule (ref), concat (ref)
-	local var8
+	local var1
 	local list = { ... }
-	local var4 = 1
-	local var5, var6 = splitOnModule(p0, "{[^{}]*}")
+	local var2 = 1
+	local var3, var4 = splitOnModule(p1, "{[^{}]*}")
 	local t = {}
 	
-	for i, v in var5 do
+	for i, v in var3 do
 		insert(t, v:gsub("{{", "{"):gsub("}}", "}"))
-		var8 = var6[i] and var6[i]:sub(2, -2)
+		var1 = var4[i] and var4[i]:sub(2, -2)
 		
-		if var8 then
-			local var9 = v:gmatch("{+$")()
+		if var1 then
+			local var5 = v:gmatch("{+$")()
 			
-			if var9 and #var9 % 2 == 1 then
-				insert(t, var8)
+			if var5 and #var5 % 2 == 1 then
+				insert(t, var1)
 				continue
 			end
-			local var10 = splitOnModule(var8, ":")
-			local var11 = startsWithModule(var10[1], "#")
-			local var12 = var11 and var10[1]:sub(2) or var10[1]
-			local var13 = tonumber(var12)
-			local var14 = var10[2]
-			local var15 = "nil"
+			local var6 = splitOnModule(var1, ":")
+			local var7 = startsWithModule(var6[1], "#")
+			local var8 = var7 and var6[1]:sub(2) or var6[1]
+			local var9 = tonumber(var8)
+			local var10 = var6[2]
+			local var11 = "nil"
 			
-			if var13 then
-				var15 = list[var13]
-			elseif var12:len() > 0 then
-				local var16 = list[1] and list[1][var12]
+			if var9 then
+				var11 = list[var9]
+			elseif var8:len() > 0 then
+				local var12 = list[1] and list[1][var8]
 				
-				if var16 ~= nil then
-					var15 = var16
+				if var12 ~= nil then
+					var11 = var12
 				end
 			else
-				var15 = list[var4]
-				var4 += 1
+				var11 = list[var2]
+				var2 += 1
 			end
-			if var11 then
-				var15 = #var15
+			if var7 then
+				var11 = #var11
 			end
-			insert(t, formatValueModule(var15, var14 or ""))
+			insert(t, formatValueModule(var11, var10 or ""))
 		end
 	end
 	return concat(t, "")

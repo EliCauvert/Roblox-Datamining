@@ -44,72 +44,72 @@ local t_3 = {
 	[catalogItemCardItemInfoEnumModule.DynamicHead] = t.DYNAMIC_HEAD
 }
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokens (ref), t_3 (ref), t_2 (ref), t_1 (ref), reactModule (ref), itemCardHeader (ref), itemCardHeaderCornersOverlay (ref), itemCardBadge (ref), itemCardStatus (ref), itemCardIcon (ref), catalogRowItemCardFooterModule (ref), fFlagAXDurables2Option (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref)
-	local var12 = useTokens()
-	local var13 = if p0.itemInfo then t_3[p0.itemInfo] else nil
-	local var14 = if p0.itemType then t_2[p0.itemType] else nil
-	local var15 = if p0.itemStatus and p0.itemStatus.type == "icon" then t_1[p0.itemStatus.iconType] else nil
+	local var1 = useTokens()
+	local var2 = if p1.itemInfo then t_3[p1.itemInfo] else nil
+	local var3 = if p1.itemType then t_2[p1.itemType] else nil
+	local var4 = if p1.itemStatus and p1.itemStatus.type == "icon" then t_1[p1.itemStatus.iconType] else nil
 	
 	return reactModule.createElement("TextButton", {
 		Text = "",
 		AutoButtonColor = false,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Event.Activated] = if p0.isDisabled then nil else p0.onActivated,
-		ref = p1,
-		AutomaticSize = p0.AutomaticSize,
-		LayoutOrder = p0.LayoutOrder,
+		[reactModule.Event.Activated] = if p1.isDisabled then nil else p1.onActivated,
+		ref = p2,
+		AutomaticSize = p1.AutomaticSize,
+		LayoutOrder = p1.LayoutOrder,
 		SelectionGroup = true,
 		ClipsDescendants = false,
-		[reactModule.Tag] = p0.tag
+		[reactModule.Tag] = p1.tag
 	}, {
 		HorizontalLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
-			Padding = UDim.new(0, var12.Gap.Medium)
+			Padding = UDim.new(0, var1.Gap.Medium)
 		}),
 		Header = reactModule.createElement(itemCardHeader, {
 			LayoutOrder = 1,
-			aspectRatio = p0.headerAspectRatio,
-			Size = p0.headerSize,
+			aspectRatio = p1.headerAspectRatio,
+			Size = p1.headerSize,
 			overlaySlot = reactModule.createElement(itemCardHeaderCornersOverlay, {
-				topLeftSlot = if p0.itemStatus and p0.itemStatus.type == "badge" then reactModule.createElement(itemCardBadge, {
+				topLeftSlot = if p1.itemStatus and p1.itemStatus.type == "badge" then reactModule.createElement(itemCardBadge, {
 					content = {
-						{ type = "icon", icon = t_1[p0.itemStatus.iconType] },
-						{ type = "text", text = p0.itemStatus.text }
+						{ type = "icon", icon = t_1[p1.itemStatus.iconType] },
+						{ type = "text", text = p1.itemStatus.text }
 					}
-				}) elseif p0.itemStatus then if p0.itemStatus.type == "text" then reactModule.createElement(itemCardStatus, { text = p0.itemStatus.text }) elseif var15 then reactModule.createElement(itemCardIcon, { icon = var15 }) else nil else nil,
-				bottomLeftSlot = if var14 then reactModule.createElement(itemCardBadge, { content = var14 }) else nil,
-				bottomRightSlot = if var13 then reactModule.createElement(itemCardBadge, { content = { { type = "icon", icon = var13 } } }) else nil
+				}) elseif p1.itemStatus then if p1.itemStatus.type == "text" then reactModule.createElement(itemCardStatus, { text = p1.itemStatus.text }) elseif var4 then reactModule.createElement(itemCardIcon, { icon = var4 }) else nil else nil,
+				bottomLeftSlot = if var3 then reactModule.createElement(itemCardBadge, { content = var3 }) else nil,
+				bottomRightSlot = if var2 then reactModule.createElement(itemCardBadge, { content = { { type = "icon", icon = var2 } } }) else nil
 			})
-		}, p0.presentationSlot),
+		}, p1.presentationSlot),
 		Footer = reactModule.createElement(catalogRowItemCardFooterModule, {
 			LayoutOrder = 2,
-			title = p0.title,
-			creatorName = if p0.creator then p0.creator.name else nil,
-			bundlePartsText = p0.bundlePartsText,
-			itemSubType = p0.itemSubType,
-			creatorHasVerifiedBadge = if p0.creator then p0.creator.verified else nil,
-			priceLineContent = p0.priceLineContent,
-			itemStatusInCheckout = if fFlagAXDurables2Option then p0.itemStatusInCheckout else nil,
-			expirationTime = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.expirationTime else nil,
-			isOwned = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.isOwned else nil,
-			timedOptions = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.timedOptions else nil,
-			onTimedOptionPriceChanged = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.onTimedOptionPriceChanged else nil,
-			selectedTimedOptionPrice = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.selectedTimedOptionPrice else nil,
-			setSelectedTimedOptionPrice = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.setSelectedTimedOptionPrice else nil,
-			selectedTimedOptionIndexInReducer = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.selectedTimedOptionIndexInReducer else nil,
-			wearTimeSelectedOptionInList = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.wearTimeSelectedOptionInList else nil,
-			onRemove = if fFlagAXDurables2Option then p0.onRemove else nil,
-			hideTimedOptionSelections = if fFlagAXDurables2Option then p0.hideTimedOptionSelections else nil,
-			Size = p0.footerSize,
-			AutomaticSize = if p0.footerAutomaticSize then p0.footerAutomaticSize else Enum.AutomaticSize.Y,
-			offersLocalized = if fFlagAXDurables2Option then p0.offersLocalized else nil,
-			offerApplied = if fFlagAXDurables2Option then p0.offerApplied else nil,
-			showOfferPillTooltip = if fFlagAXDurables2Option then p0.showOfferPillTooltip else nil
+			title = p1.title,
+			creatorName = if p1.creator then p1.creator.name else nil,
+			bundlePartsText = p1.bundlePartsText,
+			itemSubType = p1.itemSubType,
+			creatorHasVerifiedBadge = if p1.creator then p1.creator.verified else nil,
+			priceLineContent = p1.priceLineContent,
+			itemStatusInCheckout = if fFlagAXDurables2Option then p1.itemStatusInCheckout else nil,
+			expirationTime = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p1.expirationTime else nil,
+			isOwned = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p1.isOwned else nil,
+			timedOptions = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p1.timedOptions else nil,
+			onTimedOptionPriceChanged = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p1.onTimedOptionPriceChanged else nil,
+			selectedTimedOptionPrice = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p1.selectedTimedOptionPrice else nil,
+			setSelectedTimedOptionPrice = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p1.setSelectedTimedOptionPrice else nil,
+			selectedTimedOptionIndexInReducer = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p1.selectedTimedOptionIndexInReducer else nil,
+			wearTimeSelectedOptionInList = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p1.wearTimeSelectedOptionInList else nil,
+			onRemove = if fFlagAXDurables2Option then p1.onRemove else nil,
+			hideTimedOptionSelections = if fFlagAXDurables2Option then p1.hideTimedOptionSelections else nil,
+			Size = p1.footerSize,
+			AutomaticSize = if p1.footerAutomaticSize then p1.footerAutomaticSize else Enum.AutomaticSize.Y,
+			offersLocalized = if fFlagAXDurables2Option then p1.offersLocalized else nil,
+			offerApplied = if fFlagAXDurables2Option then p1.offerApplied else nil,
+			showOfferPillTooltip = if fFlagAXDurables2Option then p1.showOfferPillTooltip else nil
 		})
 	})
 end)

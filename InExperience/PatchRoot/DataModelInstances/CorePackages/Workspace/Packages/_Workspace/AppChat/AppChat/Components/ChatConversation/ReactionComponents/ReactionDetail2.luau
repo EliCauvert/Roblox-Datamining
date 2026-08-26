@@ -10,25 +10,25 @@ local white = colors.White
 local flint = colors.Flint
 local arialBold = Enum.Font.ArialBold
 
-local function Navigator(p0)
+local function Navigator(p1)
 	-- upvalues: reactionListModule (ref), reactModule (ref), cryoModule (ref), roactModule (ref), flint (ref), reactionMapModule (ref), arialBold (ref), white (ref)
 	local t = {}
-	local var8 = 0
-	local var9 = 1
+	local var1 = 0
+	local var2 = 1
 	
-	for i, v in p0.reactionData do
-		var8 += #v
+	for i, v in p1.reactionData do
+		var1 += #v
 	end
 	for i_1 in reactionListModule do
-		if p0.reactionData[reactionListModule[i_1]] ~= nil then
-			t[var9] = reactionListModule[i_1]
-			var9 += 1
+		if p1.reactionData[reactionListModule[i_1]] ~= nil then
+			t[var2] = reactionListModule[i_1]
+			var2 += 1
 		end
 	end
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 80),
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		verticalLayout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder })
 	}, {
@@ -73,25 +73,25 @@ local function Navigator(p0)
 				TextWrapped = true,
 				LayoutOrder = 2,
 				[reactModule.Event.Activated] = function()
-					-- upvalues: p0 (ref)
-					p0.setEmoji("All")
+					-- upvalues: p1 (ref)
+					p1.setEmoji("All")
 				end
 			}, {
 				corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0.4, 0) })
 			})
 		}, reactModule.useMemo(function()
-			-- upvalues: cryoModule (copy), t (ref), roactModule (copy), flint (copy), reactModule (copy), p0 (ref), reactionMapModule (copy), arialBold (copy), white (copy)
-			return cryoModule.List.map(t, function(p1, p2)
-				-- upvalues: roactModule (copy), flint (copy), reactModule (copy), p0 (copy), reactionMapModule (copy), arialBold (copy), white (copy)
+			-- upvalues: cryoModule (copy), t (ref), roactModule (copy), flint (copy), reactModule (copy), p1 (ref), reactionMapModule (copy), arialBold (copy), white (copy)
+			return cryoModule.List.map(t, function(p2, p3)
+				-- upvalues: roactModule (copy), flint (copy), reactModule (copy), p1 (copy), reactionMapModule (copy), arialBold (copy), white (copy)
 				return roactModule.createElement("TextButton", {
 					Size = UDim2.new(0, 54, 0, 28),
 					BackgroundColor3 = flint,
 					BorderSizePixel = 0,
 					Text = "",
-					LayoutOrder = p2 + 2,
+					LayoutOrder = p3 + 2,
 					[reactModule.Event.Activated] = function()
-						-- upvalues: p0 (copy), p1 (ref)
-						p0.setEmoji(p1)
+						-- upvalues: p1 (copy), p2 (ref)
+						p1.setEmoji(p2)
 					end
 				}, {
 					corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0.4, 0) }),
@@ -99,7 +99,7 @@ local function Navigator(p0)
 						BackgroundTransparency = 1,
 						Size = UDim2.new(0, 18, 0, 18),
 						Position = UDim2.new(0.16, 0, 0.5, -9),
-						Image = reactionMapModule[p1]
+						Image = reactionMapModule[p2]
 					}),
 					count = roactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
@@ -107,8 +107,8 @@ local function Navigator(p0)
 						TextWrapped = true,
 						Size = UDim2.new(0.5, 0, 1, 0),
 						Position = UDim2.new(0.5, 0, 0, 0),
-						Name = p1 .. "Filter",
-						Text = #p0.reactionData[p1],
+						Name = p2 .. "Filter",
+						Text = #p1.reactionData[p2],
 						Font = arialBold,
 						TextColor3 = white
 					})
@@ -118,7 +118,7 @@ local function Navigator(p0)
 	})
 end
 
-return function(p3)
+return function(p2)
 	-- upvalues: reactModule (ref), roactModule (ref), flint (ref), Navigator (ref), colors (ref), detailListModule (ref)
 	local all, all_1 = reactModule.useState("All")
 	
@@ -133,7 +133,7 @@ return function(p3)
 			navigator = roactModule.createElement(Navigator, {
 				LayoutOrder = 1,
 				setEmoji = all_1,
-				reactionData = p3.reactionData
+				reactionData = p2.reactionData
 			}),
 			bar = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -157,7 +157,7 @@ return function(p3)
 			detailList = roactModule.createElement(detailListModule, {
 				LayoutOrder = 4,
 				emoji = all,
-				reactionData = p3.reactionData
+				reactionData = p2.reactionData
 			})
 		})
 	}

@@ -3,215 +3,215 @@ local constantsModule = require(script.Parent.Parent.Constants)
 local cryoModule = require(parent.Cryo)
 local tModule = require(parent.t)
 local mutedError = require(parent.Loggers).mutedError
-local var3 = tModule.optional(tModule.strictInterface({
+local var1 = tModule.optional(tModule.strictInterface({
 	categoryType = tModule.optional(tModule.string),
 	value = tModule.optional(tModule.string)
 }))
 
-local function _(p0)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref)
-	return function(p1, p2, p3)
-		-- upvalues: var3 (copy), mutedError (copy), cryoModule (copy), constantsModule (copy), p0 (ref)
-		local var5, var6 = var3(p3)
+local function _(p1)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref)
+	return function(p2, p3, p4)
+		-- upvalues: var1 (copy), mutedError (copy), cryoModule (copy), constantsModule (copy), p1 (ref)
+		local var2, var3 = var1(p4)
 		
-		if not var5 then
-			mutedError(var6)
+		if not var2 then
+			mutedError(var3)
 		end
-		local t = { placeId = p2 }
+		local t = { placeId = p3 }
 		
-		if p3 then
-			t = cryoModule.Dictionary.join(t, p3)
+		if p4 then
+			t = cryoModule.Dictionary.join(t, p4)
 		end
-		p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, p0, t)
+		p2:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, p1, t)
 	end
 end
 
 local t = {}
 local clickPlayerFeedbackPromptCta = constantsModule.EventNames.ClickPlayerFeedbackPromptCta
 
-function t.ClickPlayerFeedbackPromptCta(p4, p5, p6)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackPromptCta (ref)
-	local var5, var6 = var3(p6)
+function t.ClickPlayerFeedbackPromptCta(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackPromptCta (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p5 }
+	local t = { placeId = p2 }
 	
-	if p6 then
-		t = cryoModule.Dictionary.join(t, p6)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p4:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackPromptCta, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackPromptCta, t)
 end
 
 local playerFeedbackPromptMounted = constantsModule.EventNames.PlayerFeedbackPromptMounted
 
-function t.PlayerFeedbackPromptMounted(p7, p8, p9)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), playerFeedbackPromptMounted (ref)
-	local var5, var6 = var3(p9)
+function t.PlayerFeedbackPromptMounted(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), playerFeedbackPromptMounted (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p8 }
+	local t = { placeId = p2 }
 	
-	if p9 then
-		t = cryoModule.Dictionary.join(t, p9)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p7:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, playerFeedbackPromptMounted, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, playerFeedbackPromptMounted, t)
 end
 
 local dismissPlayerFeedbackPrompt = constantsModule.EventNames.DismissPlayerFeedbackPrompt
 
-function t.DismissPlayerFeedbackPrompt(p10, p11, p12)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), dismissPlayerFeedbackPrompt (ref)
-	local var5, var6 = var3(p12)
+function t.DismissPlayerFeedbackPrompt(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), dismissPlayerFeedbackPrompt (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p11 }
+	local t = { placeId = p2 }
 	
-	if p12 then
-		t = cryoModule.Dictionary.join(t, p12)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p10:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, dismissPlayerFeedbackPrompt, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, dismissPlayerFeedbackPrompt, t)
 end
 
 local playerFeedbackFormModalMounted = constantsModule.EventNames.PlayerFeedbackFormModalMounted
 
-function t.PlayerFeedbackFormModalMounted(p13, p14, p15)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), playerFeedbackFormModalMounted (ref)
-	local var5, var6 = var3(p15)
+function t.PlayerFeedbackFormModalMounted(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), playerFeedbackFormModalMounted (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p14 }
+	local t = { placeId = p2 }
 	
-	if p15 then
-		t = cryoModule.Dictionary.join(t, p15)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p13:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, playerFeedbackFormModalMounted, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, playerFeedbackFormModalMounted, t)
 end
 
 local dismissPlayerFeedbackFormModal = constantsModule.EventNames.DismissPlayerFeedbackFormModal
 
-function t.DismissPlayerFeedbackFormModal(p16, p17, p18)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), dismissPlayerFeedbackFormModal (ref)
-	local var5, var6 = var3(p18)
+function t.DismissPlayerFeedbackFormModal(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), dismissPlayerFeedbackFormModal (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p17 }
+	local t = { placeId = p2 }
 	
-	if p18 then
-		t = cryoModule.Dictionary.join(t, p18)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p16:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, dismissPlayerFeedbackFormModal, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, dismissPlayerFeedbackFormModal, t)
 end
 
 local clickPlayerFeedbackFormModalDisclaimer = constantsModule.EventNames.ClickPlayerFeedbackFormModalDisclaimer
 
-function t.ClickPlayerFeedbackFormModalDisclaimer(p19, p20, p21)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormModalDisclaimer (ref)
-	local var5, var6 = var3(p21)
+function t.ClickPlayerFeedbackFormModalDisclaimer(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormModalDisclaimer (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p20 }
+	local t = { placeId = p2 }
 	
-	if p21 then
-		t = cryoModule.Dictionary.join(t, p21)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p19:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackFormModalDisclaimer, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackFormModalDisclaimer, t)
 end
 
 local clickPlayerFeedbackFormAbuseReportPrompt = constantsModule.EventNames.ClickPlayerFeedbackFormAbuseReportPrompt
 
-function t.ClickPlayerFeedbackFormAbuseReportPrompt(p22, p23, p24)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormAbuseReportPrompt (ref)
-	local var5, var6 = var3(p24)
+function t.ClickPlayerFeedbackFormAbuseReportPrompt(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormAbuseReportPrompt (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p23 }
+	local t = { placeId = p2 }
 	
-	if p24 then
-		t = cryoModule.Dictionary.join(t, p24)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p22:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackFormAbuseReportPrompt, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackFormAbuseReportPrompt, t)
 end
 
 local togglePlayerFeedbackFormModalReason = constantsModule.EventNames.TogglePlayerFeedbackFormModalReason
 
-function t.TogglePlayerFeedbackFormModalReason(p25, p26, p27)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), togglePlayerFeedbackFormModalReason (ref)
-	local var5, var6 = var3(p27)
+function t.TogglePlayerFeedbackFormModalReason(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), togglePlayerFeedbackFormModalReason (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p26 }
+	local t = { placeId = p2 }
 	
-	if p27 then
-		t = cryoModule.Dictionary.join(t, p27)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p25:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, togglePlayerFeedbackFormModalReason, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, togglePlayerFeedbackFormModalReason, t)
 end
 
 local focusPlayerFeedbackFormModalComment = constantsModule.EventNames.FocusPlayerFeedbackFormModalComment
 
-function t.FocusPlayerFeedbackFormModalComment(p28, p29, p30)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), focusPlayerFeedbackFormModalComment (ref)
-	local var5, var6 = var3(p30)
+function t.FocusPlayerFeedbackFormModalComment(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), focusPlayerFeedbackFormModalComment (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p29 }
+	local t = { placeId = p2 }
 	
-	if p30 then
-		t = cryoModule.Dictionary.join(t, p30)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p28:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, focusPlayerFeedbackFormModalComment, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, focusPlayerFeedbackFormModalComment, t)
 end
 
 local clickPlayerFeedbackFormModalSubmit = constantsModule.EventNames.ClickPlayerFeedbackFormModalSubmit
 
-function t.ClickPlayerFeedbackFormModalSubmit(p31, p32, p33)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormModalSubmit (ref)
-	local var5, var6 = var3(p33)
+function t.ClickPlayerFeedbackFormModalSubmit(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormModalSubmit (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p32 }
+	local t = { placeId = p2 }
 	
-	if p33 then
-		t = cryoModule.Dictionary.join(t, p33)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p31:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackFormModalSubmit, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, clickPlayerFeedbackFormModalSubmit, t)
 end
 
 local submitPlayerFeedbackFailCommentValidation = constantsModule.EventNames.SubmitPlayerFeedbackFailCommentValidation
 
-function t.SubmitPlayerFeedbackFailCommentValidation(p34, p35, p36)
-	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), submitPlayerFeedbackFailCommentValidation (ref)
-	local var5, var6 = var3(p36)
+function t.SubmitPlayerFeedbackFailCommentValidation(p1, p2, p3)
+	-- upvalues: var1 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), submitPlayerFeedbackFailCommentValidation (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var5 then
-		mutedError(var6)
+	if not var2 then
+		mutedError(var3)
 	end
-	local t = { placeId = p35 }
+	local t = { placeId = p2 }
 	
-	if p36 then
-		t = cryoModule.Dictionary.join(t, p36)
+	if p3 then
+		t = cryoModule.Dictionary.join(t, p3)
 	end
-	p34:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, submitPlayerFeedbackFailCommentValidation, t)
+	p1:sendEventDeferred(constantsModule.Context.GamePlayerFeedback, submitPlayerFeedbackFailCommentValidation, t)
 end
 
 return t

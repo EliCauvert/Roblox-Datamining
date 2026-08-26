@@ -1,20 +1,20 @@
-﻿return function(p0, p1)
-	local var0 = nil
+﻿return function(p1, p2)
 	local var1 = nil
 	local var2 = nil
 	local var3 = nil
+	local var4 = nil
 	
 	return function()
-		-- upvalues: var0 (write), var2 (write), p0 (ref), var1 (write), var3 (write), p1 (ref)
-		local var4, var5 = next(p0, var0)
-		var0 = var4
-		var2 = var5
-		local var6, var7 = next(p1, var1)
-		var1 = var6
-		var3 = var7
+		-- upvalues: var1 (write), var3 (write), p1 (ref), var2 (write), var4 (write), p2 (ref)
+		local var5, var6 = next(p1, var1)
+		var1 = var5
+		var3 = var6
+		local var7, var8 = next(p2, var2)
+		var2 = var7
+		var4 = var8
 		
-		if var2 and var3 then
-			return var2, var3
+		if var3 and var4 then
+			return var3, var4
 		end
 		return nil
 	end

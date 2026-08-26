@@ -4,184 +4,184 @@ local createSignal = signalsModule.createSignal
 local fFlagExpChatTransparentFocusSupportModule = require(expChat.Flags.FFlagExpChatTransparentFocusSupport)
 local fFlagExpChatDictationFadeOverrideModule = require(expChat.Flags.FFlagExpChatDictationFadeOverride)
 
-local var4 = function() end
+local var1 = function() end
 
 return function()
-	-- upvalues: createSignal (ref), fFlagExpChatTransparentFocusSupportModule (ref), signalsModule (ref), fFlagExpChatDictationFadeOverrideModule (ref), var4 (ref)
-	local var5, var6 = createSignal(0)
-	local var7, var8 = createSignal(0)
-	local var9, var10 = createSignal(false)
-	local var11, var12 = createSignal(false)
-	local var13, var14 = createSignal(false)
-	local var15, var16 = createSignal(false)
+	-- upvalues: createSignal (ref), fFlagExpChatTransparentFocusSupportModule (ref), signalsModule (ref), fFlagExpChatDictationFadeOverrideModule (ref), var1 (ref)
+	local var2, var3 = createSignal(0)
+	local var4, var5 = createSignal(0)
+	local var6, var7 = createSignal(false)
+	local var8, var9 = createSignal(false)
+	local var10, var11 = createSignal(false)
+	local var12, var13 = createSignal(false)
 	
 	local function _(value)
-		-- upvalues: var6 (ref), var8 (ref)
+		-- upvalues: var3 (ref), var5 (ref)
 		return function()
-			-- upvalues: value (ref), var6 (copy), var8 (copy)
+			-- upvalues: value (ref), var3 (copy), var5 (copy)
 			value()
-			var6(os.clock())
-			var8(os.clock())
+			var3(os.clock())
+			var5(os.clock())
 		end
 	end
 	
 	local t = {
-		getLastActivity = var5,
-		getLastMessageActivity = var7,
-		getIsTextBoxFocused = var9,
+		getLastActivity = var2,
+		getLastMessageActivity = var4,
+		getIsTextBoxFocused = var6,
 		getIsFocused = if fFlagExpChatTransparentFocusSupportModule then signalsModule.createComputed(function(p1)
-			-- upvalues: var9 (ref), var11 (ref), var13 (ref), fFlagExpChatDictationFadeOverrideModule (copy), var15 (ref)
-			return var9(p1) or (var11(p1) or (var13(p1) or fFlagExpChatDictationFadeOverrideModule and var15(p1)))
-		end) elseif fFlagExpChatDictationFadeOverrideModule then signalsModule.createComputed(function(p0)
-			-- upvalues: var9 (ref), var15 (ref)
-			return var9(p0) or var15(p0)
+			-- upvalues: var6 (ref), var8 (ref), var10 (ref), fFlagExpChatDictationFadeOverrideModule (copy), var12 (ref)
+			return var6(p1) or (var8(p1) or (var10(p1) or fFlagExpChatDictationFadeOverrideModule and var12(p1)))
+		end) elseif fFlagExpChatDictationFadeOverrideModule then signalsModule.createComputed(function(p1)
+			-- upvalues: var6 (ref), var12 (ref)
+			return var6(p1) or var12(p1)
 		end) else nil,
 		resetAllTransparency = function()
-			-- upvalues: var6 (ref), var8 (ref)
-			var6(os.clock())
-			var8(os.clock())
+			-- upvalues: var3 (ref), var5 (ref)
+			var3(os.clock())
+			var5(os.clock())
 		end,
 		resetTextTransparency = function()
-			-- upvalues: var8 (ref)
-			var8(os.clock())
+			-- upvalues: var5 (ref)
+			var5(os.clock())
 		end
 	}
 	
 	if fFlagExpChatTransparentFocusSupportModule then
-		local var19 = function()
-			-- upvalues: var10 (ref)
-			var10(true)
+		local var14 = function()
+			-- upvalues: var7 (ref)
+			var7(true)
 		end
 		
-		local var18 = function()
-			-- upvalues: var19 (ref), var6 (ref), var8 (ref)
-			var19()
-			var6(os.clock())
-			var8(os.clock())
+		local var15 = function()
+			-- upvalues: var14 (ref), var3 (ref), var5 (ref)
+			var14()
+			var3(os.clock())
+			var5(os.clock())
 		end
 	else
-		local var18 = function()
-			-- upvalues: var10 (ref), var6 (ref), var8 (ref)
-			var10(true)
-			var6(os.clock())
-			var8(os.clock())
+		local var15 = function()
+			-- upvalues: var7 (ref), var3 (ref), var5 (ref)
+			var7(true)
+			var3(os.clock())
+			var5(os.clock())
 		end
 	end
-	t.setTextboxFocus = var18
+	t.setTextboxFocus = var15
 	
-	local var20 = function()
-		-- upvalues: var10 (ref)
-		var10(false)
+	local var16 = function()
+		-- upvalues: var7 (ref)
+		var7(false)
 	end
 	
 	function t.clearTextboxFocus()
-		-- upvalues: var20 (ref), var6 (ref), var8 (ref)
-		var20()
-		var6(os.clock())
-		var8(os.clock())
+		-- upvalues: var16 (ref), var3 (ref), var5 (ref)
+		var16()
+		var3(os.clock())
+		var5(os.clock())
 	end
+	
+	if fFlagExpChatTransparentFocusSupportModule then
+		local var17 = function()
+			-- upvalues: var9 (ref)
+			var9(true)
+		end
+		
+		local var18 = function()
+			-- upvalues: var17 (ref), var3 (ref), var5 (ref)
+			var17()
+			var3(os.clock())
+			var5(os.clock())
+		end
+	else
+		local var18 = var1
+	end
+	t.setWindowFocusInput = var18
+	
+	if fFlagExpChatTransparentFocusSupportModule then
+		local var19 = function()
+			-- upvalues: var9 (ref)
+			var9(false)
+		end
+		
+		local var20 = function()
+			-- upvalues: var19 (ref), var3 (ref), var5 (ref)
+			var19()
+			var3(os.clock())
+			var5(os.clock())
+		end
+	else
+		local var20 = var1
+	end
+	t.clearWindowFocusInput = var20
 	
 	if fFlagExpChatTransparentFocusSupportModule then
 		local var21 = function()
-			-- upvalues: var12 (ref)
-			var12(true)
+			-- upvalues: var11 (ref)
+			var11(true)
 		end
 		
 		local var22 = function()
-			-- upvalues: var21 (ref), var6 (ref), var8 (ref)
+			-- upvalues: var21 (ref), var3 (ref), var5 (ref)
 			var21()
-			var6(os.clock())
-			var8(os.clock())
+			var3(os.clock())
+			var5(os.clock())
 		end
 	else
-		local var22 = var4
+		local var22 = var1
 	end
-	t.setWindowFocusInput = var22
+	t.setContextMenuOpen = var22
 	
 	if fFlagExpChatTransparentFocusSupportModule then
 		local var23 = function()
-			-- upvalues: var12 (ref)
-			var12(false)
+			-- upvalues: var11 (ref)
+			var11(false)
 		end
 		
 		local var24 = function()
-			-- upvalues: var23 (ref), var6 (ref), var8 (ref)
+			-- upvalues: var23 (ref), var3 (ref), var5 (ref)
 			var23()
-			var6(os.clock())
-			var8(os.clock())
+			var3(os.clock())
+			var5(os.clock())
 		end
 	else
-		local var24 = var4
+		local var24 = var1
 	end
-	t.clearWindowFocusInput = var24
+	t.clearContextMenuOpen = var24
 	
-	if fFlagExpChatTransparentFocusSupportModule then
+	if fFlagExpChatDictationFadeOverrideModule then
 		local var25 = function()
-			-- upvalues: var14 (ref)
-			var14(true)
+			-- upvalues: var13 (ref)
+			var13(true)
 		end
 		
 		local var26 = function()
-			-- upvalues: var25 (ref), var6 (ref), var8 (ref)
+			-- upvalues: var25 (ref), var3 (ref), var5 (ref)
 			var25()
-			var6(os.clock())
-			var8(os.clock())
+			var3(os.clock())
+			var5(os.clock())
 		end
 	else
-		local var26 = var4
+		local var26 = var1
 	end
-	t.setContextMenuOpen = var26
+	t.setDictationActive = var26
 	
-	if fFlagExpChatTransparentFocusSupportModule then
+	if fFlagExpChatDictationFadeOverrideModule then
 		local var27 = function()
-			-- upvalues: var14 (ref)
-			var14(false)
+			-- upvalues: var13 (ref)
+			var13(false)
 		end
 		
 		local var28 = function()
-			-- upvalues: var27 (ref), var6 (ref), var8 (ref)
+			-- upvalues: var27 (ref), var3 (ref), var5 (ref)
 			var27()
-			var6(os.clock())
-			var8(os.clock())
+			var3(os.clock())
+			var5(os.clock())
 		end
 	else
-		local var28 = var4
+		local var28 = var1
 	end
-	t.clearContextMenuOpen = var28
-	
-	if fFlagExpChatDictationFadeOverrideModule then
-		local var29 = function()
-			-- upvalues: var16 (ref)
-			var16(true)
-		end
-		
-		local var30 = function()
-			-- upvalues: var29 (ref), var6 (ref), var8 (ref)
-			var29()
-			var6(os.clock())
-			var8(os.clock())
-		end
-	else
-		local var30 = var4
-	end
-	t.setDictationActive = var30
-	
-	if fFlagExpChatDictationFadeOverrideModule then
-		local var31 = function()
-			-- upvalues: var16 (ref)
-			var16(false)
-		end
-		
-		local var32 = function()
-			-- upvalues: var31 (ref), var6 (ref), var8 (ref)
-			var31()
-			var6(os.clock())
-			var8(os.clock())
-		end
-	else
-		local var32 = var4
-	end
-	t.clearDictationActive = var32
+	t.clearDictationActive = var28
 	
 	return t
 end

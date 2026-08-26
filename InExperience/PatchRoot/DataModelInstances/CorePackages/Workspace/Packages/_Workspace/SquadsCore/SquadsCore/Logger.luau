@@ -4,8 +4,8 @@ local squadsCore = require(parent.Lumberyak).Logger.new(nil, "SquadsCore")
 squadsCore:setContext({ prefix = "[SquadsCore] - " })
 squadsCore:addSink({
 	maxLevel = if fFlagDebugSquadLogsEnabled then squadsCore.Levels.Debug else squadsCore.Levels.Warning,
-	log = function(_, p0, _)
-		print(p0)
+	log = function(_, p1, _)
+		print(p1)
 	end
 })
 

@@ -10,10 +10,10 @@ local t = {
 }
 
 return {
-	createDataHydrationMock = function(p0)
+	createDataHydrationMock = function(p1)
 		-- upvalues: t (ref)
 		local t_1 = {
-			Badges = if p0 then p0.Badges else {
+			Badges = if p1 then p1.Badges else {
 				getBadgeInfoStore = function()
 					return {
 						getBadgeInfo = function()
@@ -34,9 +34,9 @@ return {
 					}
 				end
 			},
-			Game = if p0 then p0.Game else nil,
-			SocialLink = if p0 then p0.SocialLink else nil,
-			MarketplaceCatalogCategory = if p0 then p0.MarketplaceCatalogCategory else {
+			Game = if p1 then p1.Game else nil,
+			SocialLink = if p1 then p1.SocialLink else nil,
+			MarketplaceCatalogCategory = if p1 then p1.MarketplaceCatalogCategory else {
 				getMarketplaceCatalogCategoryStore = function()
 					return {
 						getMarketplaceCatalogCategory = function()
@@ -59,7 +59,7 @@ return {
 					}
 				end
 			},
-			MarketplaceCatalogSort = if p0 then p0.MarketplaceCatalogSort else {
+			MarketplaceCatalogSort = if p1 then p1.MarketplaceCatalogSort else {
 				getMarketplaceCatalogSortStore = function()
 					return {
 						getMarketplaceCatalogSort = function()
@@ -82,19 +82,19 @@ return {
 					}
 				end
 			},
-			Song = if p0 then p0.Song else nil,
-			MarketplaceAsset = if p0 then p0.MarketplaceAsset else nil,
-			MarketplaceBundle = if p0 then p0.MarketplaceBundle else nil,
-			MarketplaceLook = if p0 then p0.MarketplaceLook else nil,
-			MediaAsset = if p0 then p0.MediaAsset else nil,
-			UserProfile = if p0 then p0.UserProfile else nil,
-			Community = if p0 then p0.Community else nil,
-			CommunityUserMembership = if p0 then p0.CommunityUserMembership else nil,
+			Song = if p1 then p1.Song else nil,
+			MarketplaceAsset = if p1 then p1.MarketplaceAsset else nil,
+			MarketplaceBundle = if p1 then p1.MarketplaceBundle else nil,
+			MarketplaceLook = if p1 then p1.MarketplaceLook else nil,
+			MediaAsset = if p1 then p1.MediaAsset else nil,
+			UserProfile = if p1 then p1.UserProfile else nil,
+			Community = if p1 then p1.Community else nil,
+			CommunityUserMembership = if p1 then p1.CommunityUserMembership else nil,
 			DataHydrationTypes = t
 		}
 		
-		if p0 and p0.extraFields then
-			for i, v in p0.extraFields do
+		if p1 and p1.extraFields then
+			for i, v in p1.extraFields do
 				t_1[i] = v
 			end
 		end

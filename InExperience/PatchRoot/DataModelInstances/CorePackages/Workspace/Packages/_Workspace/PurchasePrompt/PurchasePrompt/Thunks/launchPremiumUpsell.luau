@@ -22,30 +22,30 @@ local list = {
 
 return function()
 	-- upvalues: thunkModule (ref), list (ref), platformInterfaceModule (ref), externalSettingsModule (ref), analyticsModule (ref), purchaseCompleteRecievedModule (ref), setWindowStateModule (ref), windowStateModule (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), setPromptStateModule (ref), promptStateModule (ref), hideWindowModule (ref), playersService (ref), errorOccurredModule (ref), purchaseErrorModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1)
+	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: platformInterfaceModule (copy), externalSettingsModule (copy), analyticsModule (copy), purchaseCompleteRecievedModule (copy), setWindowStateModule (copy), windowStateModule (copy), getUpsellFlowModule (copy), upsellFlowModule (copy), setPromptStateModule (copy), promptStateModule (copy), hideWindowModule (copy), playersService (copy), errorOccurredModule (copy), purchaseErrorModule (copy)
-		local var16 = p1[platformInterfaceModule]
-		local var17 = p1[externalSettingsModule]
-		local var18 = p1[analyticsModule]
-		local premiumProductInfo = p0:getState().premiumProductInfo
+		local var1 = p2[platformInterfaceModule]
+		local var2 = p2[externalSettingsModule]
+		local var3 = p2[analyticsModule]
+		local premiumProductInfo = p1:getState().premiumProductInfo
 		
-		if var17.isStudio() then
-			var16.signalMockPurchasePremium()
-			p0:dispatch(purchaseCompleteRecievedModule())
+		if var2.isStudio() then
+			var1.signalMockPurchasePremium()
+			p1:dispatch(purchaseCompleteRecievedModule())
 			
-			return p0:dispatch(setWindowStateModule(windowStateModule.Hidden))
+			return p1:dispatch(setWindowStateModule(windowStateModule.Hidden))
 		end
-		local var19 = getUpsellFlowModule(var17.getPlatform())
-		var18.signalPremiumUpsellConfirmed()
+		local var4 = getUpsellFlowModule(var2.getPlatform())
+		var3.signalPremiumUpsellConfirmed()
 		
-		if var19 == upsellFlowModule.Web then
-			var16.startPremiumUpsell(premiumProductInfo.productId)
-			p0:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
-			p0:dispatch(hideWindowModule())
+		if var4 == upsellFlowModule.Web then
+			var1.startPremiumUpsell(premiumProductInfo.productId)
+			p1:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
+			p1:dispatch(hideWindowModule())
 			
 			return
-		elseif var19 ~= upsellFlowModule.Mobile then
-			p0:dispatch(errorOccurredModule(purchaseErrorModule.PremiumUnavailablePlatform))
+		elseif var4 ~= upsellFlowModule.Mobile then
+			p1:dispatch(errorOccurredModule(purchaseErrorModule.PremiumUnavailablePlatform))
 			
 			return
 		end
@@ -53,11 +53,11 @@ return function()
 		local localPlayer = playersService.LocalPlayer
 		
 		if game:GetEngineFeature("NativePurchaseWithLocalPlayer") then
-			var16.promptNativePurchaseWithLocalPlayer(mobileProductId)
+			var1.promptNativePurchaseWithLocalPlayer(mobileProductId)
 		else
-			var16.promptNativePurchase(localPlayer, mobileProductId)
+			var1.promptNativePurchase(localPlayer, mobileProductId)
 		end
-		p0:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
-		p0:dispatch(hideWindowModule())
+		p1:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
+		p1:dispatch(hideWindowModule())
 	end)
 end

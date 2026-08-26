@@ -26,24 +26,24 @@ local t = {
 	}
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: roactModule (ref), t (ref), cryoModule (ref), baseKnobModule (ref)
-	return roactModule.forwardRef(function(p1, p2)
-		-- upvalues: t (copy), p0 (ref), cryoModule (copy), roactModule (copy), baseKnobModule (copy)
-		return roactModule.createElement(baseKnobModule, cryoModule.Dictionary.join({}, p1, { colorMap = t[p0], forwardedRef = p2 }))
+	return roactModule.forwardRef(function(p2, p3)
+		-- upvalues: t (copy), p1 (ref), cryoModule (copy), roactModule (copy), baseKnobModule (copy)
+		return roactModule.createElement(baseKnobModule, cryoModule.Dictionary.join({}, p2, { colorMap = t[p1], forwardedRef = p3 }))
 	end)
 end
 
 local t_1 = {}
-local var7 = "contextual"
-t_1.ContextualKnob = roactModule.forwardRef(function(p3, p4)
-	-- upvalues: t (ref), var7 (ref), cryoModule (ref), roactModule (ref), baseKnobModule (ref)
-	return roactModule.createElement(baseKnobModule, cryoModule.Dictionary.join({}, p3, { colorMap = t[var7], forwardedRef = p4 }))
+local var1 = "contextual"
+t_1.ContextualKnob = roactModule.forwardRef(function(p1, p2)
+	-- upvalues: t (ref), var1 (ref), cryoModule (ref), roactModule (ref), baseKnobModule (ref)
+	return roactModule.createElement(baseKnobModule, cryoModule.Dictionary.join({}, p1, { colorMap = t[var1], forwardedRef = p2 }))
 end)
-local var8 = "system"
-t_1.SystemKnob = roactModule.forwardRef(function(p5, p6)
-	-- upvalues: t (ref), var8 (ref), cryoModule (ref), roactModule (ref), baseKnobModule (ref)
-	return roactModule.createElement(baseKnobModule, cryoModule.Dictionary.join({}, p5, { colorMap = t[var8], forwardedRef = p6 }))
+local var2 = "system"
+t_1.SystemKnob = roactModule.forwardRef(function(p1, p2)
+	-- upvalues: t (ref), var2 (ref), cryoModule (ref), roactModule (ref), baseKnobModule (ref)
+	return roactModule.createElement(baseKnobModule, cryoModule.Dictionary.join({}, p1, { colorMap = t[var2], forwardedRef = p2 }))
 end)
 
 return t_1

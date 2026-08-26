@@ -6,7 +6,7 @@ local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local buildNestedComponentPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildNestedComponentProp)
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: buildNestedComponentPropModule (ref)
-	return buildNestedComponentPropModule(p0, p1, p2, p3, p4, p5, true)
+	return buildNestedComponentPropModule(p1, p2, p3, p4, p5, p6, true)
 end

@@ -6,12 +6,12 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 
 return function()
 	-- upvalues: useProfileWrapperContextModule (ref), useSelector (ref), getDeepValueModule (ref), constantsModule (ref)
-	local var4 = useProfileWrapperContextModule()
-	local profileId = var4.profileId
-	local profileType = var4.profileType
+	local var1 = useProfileWrapperContextModule()
+	local profileId = var1.profileId
+	local profileType = var1.profileType
 	
-	return useSelector(function(p0)
+	return useSelector(function(p1)
 		-- upvalues: getDeepValueModule (copy), constantsModule (copy), profileType (ref), profileId (ref)
-		return getDeepValueModule(p0, `{constantsModule.RODUX_KEY}.Profiles.{profileType}.{profileId}`) or {}
+		return getDeepValueModule(p1, `{constantsModule.RODUX_KEY}.Profiles.{profileType}.{profileId}`) or {}
 	end)
 end

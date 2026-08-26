@@ -13,33 +13,33 @@ local keyValMap = require(jsutils.keyValMap).keyValMap
 local kind = require(language.kinds).Kind
 local _ = require(language.ast)
 
-local function valueFromASTUntyped(p0, p1)
+local function valueFromASTUntyped(p1, p2)
 	-- upvalues: kind (ref), nullModule (ref), array (ref), valueFromASTUntyped (ref), coerceToTable (ref), keyValMap (ref), invariant (ref), inspect (ref)
-	if p0.kind == kind.NULL then
+	if p1.kind == kind.NULL then
 		return nullModule
-	elseif p0.kind == kind.INT then
-		return tonumber(p0.value, 10)
-	elseif p0.kind == kind.FLOAT then
-		return tonumber(p0.value)
-	elseif p0.kind == kind.STRING or p0.kind == kind.ENUM or p0.kind == kind.BOOLEAN then
-		return p0.value
-	elseif p0.kind == kind.LIST then
-		return array.map(p0.values, function(p2)
-			-- upvalues: valueFromASTUntyped (copy), p1 (ref)
-			return valueFromASTUntyped(p2, p1)
+	elseif p1.kind == kind.INT then
+		return tonumber(p1.value, 10)
+	elseif p1.kind == kind.FLOAT then
+		return tonumber(p1.value)
+	elseif p1.kind == kind.STRING or p1.kind == kind.ENUM or p1.kind == kind.BOOLEAN then
+		return p1.value
+	elseif p1.kind == kind.LIST then
+		return array.map(p1.values, function(p3)
+			-- upvalues: valueFromASTUntyped (copy), p2 (ref)
+			return valueFromASTUntyped(p3, p2)
 		end)
-	elseif p0.kind == kind.OBJECT then
-		return coerceToTable(keyValMap(p0.fields, function(p3)
+	elseif p1.kind == kind.OBJECT then
+		return coerceToTable(keyValMap(p1.fields, function(p3)
 			return p3.name.value
-		end, function(p4)
-			-- upvalues: valueFromASTUntyped (copy), p1 (ref)
-			return valueFromASTUntyped(p4.value, p1)
+		end, function(p3)
+			-- upvalues: valueFromASTUntyped (copy), p2 (ref)
+			return valueFromASTUntyped(p3.value, p2)
 		end))
-	elseif p0.kind == kind.VARIABLE then
-		return p1 and p1[p0.name.value]
+	elseif p1.kind == kind.VARIABLE then
+		return p2 and p2[p1.name.value]
 	end
-	invariant(false, "Unexpected value node: " .. inspect(p0))
-	error("Unexpected value node: " .. inspect(p0))
+	invariant(false, "Unexpected value node: " .. inspect(p1))
+	error("Unexpected value node: " .. inspect(p1))
 end
 
 return { valueFromASTUntyped = valueFromASTUntyped }

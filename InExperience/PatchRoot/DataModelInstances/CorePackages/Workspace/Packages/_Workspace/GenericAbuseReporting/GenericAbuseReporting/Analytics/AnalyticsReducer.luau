@@ -2,34 +2,34 @@
 local parent = genericAbuseReporting.Parent
 local roduxModule = require(parent.Rodux)
 local dictionary = require(parent.Cryo).Dictionary
-local var2 = require(genericAbuseReporting.Logger):new("AbuseReport Analytics")
+local var1 = require(genericAbuseReporting.Logger):new("AbuseReport Analytics")
 
 return {
 	reducer = roduxModule.createReducer({}, {
-		[require(genericAbuseReporting.Analytics.Actions.OnFormLoaded).name] = function(p0, p1)
-			-- upvalues: var2 (ref), dictionary (ref)
-			var2:trace("OnFormLoaded")
+		[require(genericAbuseReporting.Analytics.Actions.OnFormLoaded).name] = function(p1, p2)
+			-- upvalues: var1 (ref), dictionary (ref)
+			var1:trace("OnFormLoaded")
 			
-			return dictionary.union(p0, {
-				context = p1.context,
-				place_id = p1.place_id,
-				accumulated_time_ms = p1.accumulated_time_ms
+			return dictionary.union(p1, {
+				context = p2.context,
+				place_id = p2.place_id,
+				accumulated_time_ms = p2.accumulated_time_ms
 			})
 		end,
-		[require(genericAbuseReporting.Analytics.Actions.OnFormReasonSelected).name] = function(p2, p3)
-			-- upvalues: var2 (ref), dictionary (ref)
-			var2:trace("OnFormReasonSelected - reason_selection: {}", p3.reason_selection)
+		[require(genericAbuseReporting.Analytics.Actions.OnFormReasonSelected).name] = function(p1, p2)
+			-- upvalues: var1 (ref), dictionary (ref)
+			var1:trace("OnFormReasonSelected - reason_selection: {}", p2.reason_selection)
 			
-			return dictionary.union(p2, {
-				reason_selection = p3.reason_selection,
-				reason_change_count = p2.reason_change_count + 1
+			return dictionary.union(p1, {
+				reason_selection = p2.reason_selection,
+				reason_change_count = p1.reason_change_count + 1
 			})
 		end,
-		[require(genericAbuseReporting.Analytics.Actions.OnFormCommentUpdated).name] = function(p4, p5)
-			-- upvalues: var2 (ref), dictionary (ref)
-			var2:trace("OnFormCommentUpdated - comment_added: {}", p5.comment_added)
+		[require(genericAbuseReporting.Analytics.Actions.OnFormCommentUpdated).name] = function(p1, p2)
+			-- upvalues: var1 (ref), dictionary (ref)
+			var1:trace("OnFormCommentUpdated - comment_added: {}", p2.comment_added)
 			
-			return dictionary.union(p4, { comment_added = p5.comment_added })
+			return dictionary.union(p1, { comment_added = p2.comment_added })
 		end
 	}),
 	initialState = {

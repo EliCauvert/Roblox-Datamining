@@ -11,48 +11,48 @@ local fFlagMoveInExperienceModeToEditProfile = sharedFlagsModule.FFlagMoveInExpe
 local fFlagAXEnableProfileTab = sharedFlagsModule.FFlagAXEnableProfileTab
 
 return {
-	[enumsModule.ProfileActions.EditProfile] = function(p0)
+	[enumsModule.ProfileActions.EditProfile] = function(p1)
 		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), fFlagAXEnableProfileTab (ref), refreshProfilePlatformUserInfoModule (ref), fFlagMoveInExperienceModeToEditProfile (ref)
 		return {
 			variant = buttonVariant.Standard,
-			text = p0.localized[enumsModule.ProfileActions.EditProfile],
+			text = p1.localized[enumsModule.ProfileActions.EditProfile],
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p0 (ref), eventNamesModule (copy), enumsModule (copy), fFlagAXEnableProfileTab (copy), refreshProfilePlatformUserInfoModule (copy), fFlagMoveInExperienceModeToEditProfile (copy)
-					local var6
-					p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonOpenEditProfilePage, { buttonSurface = p0.buttonSurface })
-					local navigate = p0.navigation.navigate
+					-- upvalues: p1 (ref), eventNamesModule (copy), enumsModule (copy), fFlagAXEnableProfileTab (copy), refreshProfilePlatformUserInfoModule (copy), fFlagMoveInExperienceModeToEditProfile (copy)
+					local var1
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonOpenEditProfilePage, { buttonSurface = p1.buttonSurface })
+					local navigate = p1.navigation.navigate
 					local editProfilePage = enumsModule.Screens.EditProfilePage
 					local t = {}
 					
 					if fFlagAXEnableProfileTab then
-						var6 = p0.profileWrapperContext.forceFullView == true
-						var6 = nil
+						var1 = p1.profileWrapperContext.forceFullView == true
+						var1 = nil
 					else
-						var6 = nil
+						var1 = nil
 					end
-					t.fullBleed = var6
+					t.fullBleed = var1
 					
-					function t.navigateToEditUsername(p1)
-						-- upvalues: p0 (copy), refreshProfilePlatformUserInfoModule (copy)
-						p0.navigateTo.editUsername({
-							showToast = p1,
+					function t.navigateToEditUsername(p2)
+						-- upvalues: p1 (copy), refreshProfilePlatformUserInfoModule (copy)
+						p1.navigateTo.editUsername({
+							showToast = p2,
 							onUsernameChanged = function()
-								-- upvalues: p0 (copy), refreshProfilePlatformUserInfoModule (copy)
-								p0.dispatch(refreshProfilePlatformUserInfoModule(p0.profileId))
+								-- upvalues: p1 (copy), refreshProfilePlatformUserInfoModule (copy)
+								p1.dispatch(refreshProfilePlatformUserInfoModule(p1.profileId))
 							end
 						})
 					end
 					
 					function t.onIdentityChange()
-						-- upvalues: p0 (copy), refreshProfilePlatformUserInfoModule (copy)
-						p0.dispatch(refreshProfilePlatformUserInfoModule(p0.profileId))
+						-- upvalues: p1 (copy), refreshProfilePlatformUserInfoModule (copy)
+						p1.dispatch(refreshProfilePlatformUserInfoModule(p1.profileId))
 					end
 					
 					t.onToggleInExperienceMode = if fFlagMoveInExperienceModeToEditProfile then function()
-						-- upvalues: p0 (copy), refreshProfilePlatformUserInfoModule (copy), eventNamesModule (copy)
-						p0.dispatch(refreshProfilePlatformUserInfoModule(p0.profileId))
-						p0.analytics.fireAnalyticsEvent(eventNamesModule.ToggleInExperienceModeButton, {})
+						-- upvalues: p1 (copy), refreshProfilePlatformUserInfoModule (copy), eventNamesModule (copy)
+						p1.dispatch(refreshProfilePlatformUserInfoModule(p1.profileId))
+						p1.analytics.fireAnalyticsEvent(eventNamesModule.ToggleInExperienceModeButton, {})
 					end else nil
 					navigate(editProfilePage, t)
 				end

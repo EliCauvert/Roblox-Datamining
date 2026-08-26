@@ -15,31 +15,31 @@ local selectedUsersContextModule = require(context.SelectedUsersContext)
 local getRenameFriendsToConnectionsEnabledFriendsMenuModule = require(friendsMenu.utils.getRenameFriendsToConnectionsEnabledFriendsMenu)
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), responsiveModule (ref), useLastInputMode (ref), useFocusGuiObject (ref), useStyle (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), getRenameFriendsToConnectionsEnabledFriendsMenuModule (ref), friendsMenuUserCardModule (ref), constantsModule (ref)
-	local var9 = reactModule.useContext(selectedUsersContextModule)
-	local var10 = responsiveModule.useBreakpointYOrLarger(responsiveModule.Keys.Medium)
-	local var11 = useLastInputMode()
-	local var12 = useFocusGuiObject()
-	local var13 = reactModule.useRef({})
-	local var14 = reactModule.useRef(nil)
-	local var15 = useStyle()
-	local theme = var15.Theme
-	local font = var15.Font
-	local var16 = useLocalization({
+	local var1 = reactModule.useContext(selectedUsersContextModule)
+	local var2 = responsiveModule.useBreakpointYOrLarger(responsiveModule.Keys.Medium)
+	local var3 = useLastInputMode()
+	local var4 = useFocusGuiObject()
+	local var5 = reactModule.useRef({})
+	local var6 = reactModule.useRef(nil)
+	local var7 = useStyle()
+	local theme = var7.Theme
+	local font = var7.Font
+	local var8 = useLocalization({
 		selectedFriendsCountText = {
 			if fFlagConnectionsToFriendsRename then "Feature.FriendsMenu.Label.SelectedFriendsCount" elseif getRenameFriendsToConnectionsEnabledFriendsMenuModule() then "Feature.FriendsMenu.Label.SelectedConnectionsCount" else "Feature.FriendsMenu.Label.SelectedFriendsCount",
-			numerator = var9.selectedFriendsSize,
-			denominator = p0.selectionLimit
+			numerator = var1.selectedFriendsSize,
+			denominator = p1.selectionLimit
 		},
 		selectedFriendsCountNoLimitText = {
 			if fFlagConnectionsToFriendsRename then "Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit" elseif getRenameFriendsToConnectionsEnabledFriendsMenuModule() then "Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit" else "Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit",
-			selectedCount = var9.selectedFriendsSize
+			selectedCount = var1.selectedFriendsSize
 		}
 	})
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var13 (ref), reactModule (copy), var9 (ref), friendsMenuUserCardModule (copy), var14 (ref)
-		var13.current = {}
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref), reactModule (copy), var1 (ref), friendsMenuUserCardModule (copy), var6 (ref)
+		var5.current = {}
 		local t = {
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -49,11 +49,11 @@ return function(p0)
 		}
 		local t_1 = {}
 		
-		for i, v in pairs(var9.selectedFriends) do
+		for i, v in pairs(var1.selectedFriends) do
 			table.insert(t_1, { userId = i, userData = v })
 		end
-		table.sort(t_1, function(p1, p2)
-			return p1.userData.layoutOrder < p2.userData.layoutOrder
+		table.sort(t_1, function(p2, p3)
+			return p2.userData.layoutOrder < p3.userData.layoutOrder
 		end)
 		
 		for i_1, v_1 in ipairs(t_1) do
@@ -65,41 +65,41 @@ return function(p0)
 				userId = userId,
 				unremovable = userData.unremovable,
 				onRemoved = function()
-					-- upvalues: var14 (copy), i_1 (ref)
-					var14.current = i_1
+					-- upvalues: var6 (copy), i_1 (ref)
+					var6.current = i_1
 				end,
-				ref = function(p3)
-					-- upvalues: var13 (copy), i_1 (ref)
-					var13.current[i_1] = p3
+				ref = function(p2)
+					-- upvalues: var5 (copy), i_1 (ref)
+					var5.current[i_1] = p2
 				end
 			})
 		end
 		return t
-	end, { var9.selectedFriends })
+	end, { var1.selectedFriends })
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), var11 (ref), var13 (ref), var12 (ref)
-		if not var14.current or var11 ~= "Focus" then return end
-		local current = var13.current
+		-- upvalues: var6 (ref), var3 (ref), var5 (ref), var4 (ref)
+		if not var6.current or var3 ~= "Focus" then return end
+		local current = var5.current
 		local currentCount = #current
 		
 		if currentCount == 0 then
-			var14.current = nil
+			var6.current = nil
 			
 			return
 		end
-		local current_1 = current[math.clamp(var14.current, 1, currentCount)]
+		local current_1 = current[math.clamp(var6.current, 1, currentCount)]
 		
 		if current_1 and current_1.Parent then
-			var12(current_1)
+			var4(current_1)
 		end
-		var14.current = nil
-	end, { var9.selectedFriends, var12, var11 })
+		var6.current = nil
+	end, { var1.selectedFriends, var4, var3 })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		VerticalLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -112,13 +112,13 @@ return function(p0)
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Font = font.Header2.Font,
-			Text = if p0.selectionLimit then var16.selectedFriendsCountText else var16.selectedFriendsCountNoLimitText,
+			Text = if p1.selectionLimit then var8.selectedFriendsCountText else var8.selectedFriendsCountNoLimitText,
 			TextColor3 = theme.TextEmphasis.Color,
 			TextSize = font.BaseSize * font.Header2.RelativeSize,
 			TextTransparency = theme.TextEmphasis.Transparency,
 			TextXAlignment = Enum.TextXAlignment.Left
 		}),
-		SelectedUsers = if var9.selectedFriendsSize == 0 or not var10 then nil else reactModule.createElement("ScrollingFrame", {
+		SelectedUsers = if var1.selectedFriendsSize == 0 or not var2 then nil else reactModule.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			ScrollBarThickness = 0,
@@ -126,6 +126,6 @@ return function(p0)
 			Size = UDim2.new(1, 0, 0, constantsModule.FRIEND_MENU_CARD_SIZE),
 			AutomaticCanvasSize = Enum.AutomaticSize.XY,
 			ScrollingDirection = Enum.ScrollingDirection.X
-		}, var17)
+		}, var9)
 	})
 end

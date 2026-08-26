@@ -10,10 +10,10 @@ local view = foundationModule.View
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSocialCarouselContextModule (ref), fFlagSocialCarouselShareQREnabled (ref), constantsModule (ref), fFlagConnectionsToFriendsRename (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
-	local var5 = useSocialCarouselContextModule()
-	local var6 = useLocalization(if fFlagSocialCarouselShareQREnabled then {
+	local var1 = useSocialCarouselContextModule()
+	local var2 = useLocalization(if fFlagSocialCarouselShareQREnabled then {
 		friendsHintBold = constantsModule.LOCALIZATION.FRIENDS_HINT_BOLD,
 		friendsHintPlain = constantsModule.LOCALIZATION.FRIENDS_HINT_PLAIN
 	} else {
@@ -21,15 +21,15 @@ return function(p0)
 		friendsHintBody = if fFlagConnectionsToFriendsRename then constantsModule.LOCALIZATION.FRIENDS_HINT_BODY else constantsModule.LOCALIZATION.CONNECTIONS_HINT_BODY
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), constantsModule (copy)
-		var5.onSuccessfulRender(constantsModule.ANALYTICS.UI_LOADING_EVENTS.EMPTY_HINT)
+		-- upvalues: var1 (ref), constantsModule (copy)
+		var1.onSuccessfulRender(constantsModule.ANALYTICS.UI_LOADING_EVENTS.EMPTY_HINT)
 	end, {})
 	
 	return reactModule.createElement(view, {
 		BackgroundTransparency = 1,
 		tag = "col auto-none align-y-center",
-		Size = UDim2.new(p0.itemSize.X.Scale, p0.itemSize.X.Offset + constantsModule.TILE_TEXT_WIDTH, p0.itemSize.Y.Scale, p0.itemSize.Y.Offset - constantsModule.TILE_TEXT_HEIGHT),
-		LayoutOrder = p0.index
+		Size = UDim2.new(p1.itemSize.X.Scale, p1.itemSize.X.Offset + constantsModule.TILE_TEXT_WIDTH, p1.itemSize.Y.Scale, p1.itemSize.Y.Offset - constantsModule.TILE_TEXT_HEIGHT),
+		LayoutOrder = p1.index
 	}, {
 		Content = reactModule.createElement(view, {
 			BackgroundTransparency = 1,
@@ -41,18 +41,18 @@ return function(p0)
 			HintText = reactModule.createElement(text, {
 				RichText = true,
 				tag = "text-body-small text-align-x-left auto-xy text-wrap",
-				Text = `<b>{var6.friendsHintBold}</b> {var6.friendsHintPlain}`
+				Text = `<b>{var2.friendsHintBold}</b> {var2.friendsHintPlain}`
 			})
 		} else {
 			Title = reactModule.createElement(text, {
 				tag = "text-title-medium text-align-x-left auto-xy text-wrap",
 				LayoutOrder = 1,
-				Text = var6.friendsHintTitle
+				Text = var2.friendsHintTitle
 			}),
 			Subtitle = reactModule.createElement(text, {
 				tag = "text-body-small text-align-x-left auto-xy text-wrap",
 				LayoutOrder = 2,
-				Text = var6.friendsHintBody
+				Text = var2.friendsHintBody
 			})
 		})
 	})

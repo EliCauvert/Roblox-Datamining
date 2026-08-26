@@ -11,21 +11,21 @@ local appPage = robloxAppEnumsModule.AppPage
 local useSduiContext = serverDrivenUiModule.useSduiContext
 local sduiComponent = serverDrivenUiModule.SduiComponent
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useSduiContext (ref), appPage (ref), reactModule (ref), reportModalImpressionModule (ref), sendModalImpressionEvent (ref), sduiComponent (ref)
-	local var6 = useRoactService(roactServiceTagsModule.RoactNetworking)
-	local var7 = useSduiContext({ appPage = appPage.Home, dataUpdatedTimestamp = os.time() })
-	local modalId = p0.modalId
-	local modalType = p0.modalType
+	local var1 = useRoactService(roactServiceTagsModule.RoactNetworking)
+	local var2 = useSduiContext({ appPage = appPage.Home, dataUpdatedTimestamp = os.time() })
+	local modalId = p1.modalId
+	local modalType = p1.modalType
 	reactModule.useEffect(function()
-		-- upvalues: reportModalImpressionModule (copy), var6 (ref), modalId (ref), modalType (ref), sendModalImpressionEvent (copy)
-		reportModalImpressionModule(var6, modalId, modalType)
+		-- upvalues: reportModalImpressionModule (copy), var1 (ref), modalId (ref), modalType (ref), sendModalImpressionEvent (copy)
+		reportModalImpressionModule(var1, modalId, modalType)
 		sendModalImpressionEvent(modalId, modalType)
 	end, {})
 	
 	return reactModule.createElement(sduiComponent, {
 		debugName = "SduiModal",
-		componentConfig = p0.sduiComponentConfig,
-		sduiContext = var7
+		componentConfig = p1.sduiComponentConfig,
+		sduiContext = var2
 	})
 end)

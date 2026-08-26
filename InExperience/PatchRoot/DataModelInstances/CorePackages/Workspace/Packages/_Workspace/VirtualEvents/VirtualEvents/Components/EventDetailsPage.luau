@@ -31,45 +31,45 @@ local mediaGalleryPreview = appBloxModule.MediaGalleryPreview
 local calcMediaGallerySizesFromWidth = appBloxModule.calcMediaGallerySizesFromWidth
 local listTable = UIBloxModule.App.Table.ListTable
 
-local var19 = function() end
+local var1 = function() end
 
-local t = { onClose = var19, onJoinEvent = var19, onShare = var19 }
+local t = { onClose = var1, onJoinEvent = var1, onShare = var1 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), useDeviceType (ref), useRoactService (ref), roactNetworking (ref), fFlagLuaAppLimitEventThumbnailToOneModule (ref), fetchEventThumbnailModule (ref), getGalleryItemsModule (ref), fetchEventThumbnailListModule (ref), useMutation (ref), requestsModule (ref), getEventTimerStatusModule (ref), calcMediaGallerySizesFromWidth (ref), responsiveModule (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), useActionBarPropsModule (ref), contentPosition (ref), attendanceModule (ref), mediaGalleryPreview (ref), eventDescriptionModule (ref), listTable (ref), eventHostedByModule (ref), detailsPageTemplate (ref), eventTimerModule (ref)
-	local var21 = cryoModule.Dictionary.join(t, p0)
-	local media = p0.virtualEvent.media
-	local experienceDetails = p0.virtualEvent.experienceDetails
-	local var22, var23 = reactModule.useState(0)
-	local var24 = useDeviceType()
-	local var25, var26 = reactModule.useState({})
-	local var27 = if var25[1] then var25[1].imageId else nil
-	local var28 = useRoactService(roactNetworking)
+	local var2 = cryoModule.Dictionary.join(t, p1)
+	local media = p1.virtualEvent.media
+	local experienceDetails = p1.virtualEvent.experienceDetails
+	local var3, var4 = reactModule.useState(0)
+	local var5 = useDeviceType()
+	local var6, var7 = reactModule.useState({})
+	local var8 = if var6[1] then var6[1].imageId else nil
+	local var9 = useRoactService(roactNetworking)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagLuaAppLimitEventThumbnailToOneModule (copy), fetchEventThumbnailModule (copy), var28 (ref), p0 (ref), var26 (ref), getGalleryItemsModule (copy), media (ref), fetchEventThumbnailListModule (copy)
+		-- upvalues: fFlagLuaAppLimitEventThumbnailToOneModule (copy), fetchEventThumbnailModule (copy), var9 (ref), p1 (ref), var7 (ref), getGalleryItemsModule (copy), media (ref), fetchEventThumbnailListModule (copy)
 		if fFlagLuaAppLimitEventThumbnailToOneModule then
-			fetchEventThumbnailModule(var28, p0.virtualEvent.id):andThen(function(p1)
-				-- upvalues: var26 (copy), getGalleryItemsModule (copy), media (copy)
+			fetchEventThumbnailModule(var9, p1.virtualEvent.id):andThen(function(p2)
+				-- upvalues: var7 (copy), getGalleryItemsModule (copy), media (copy)
 				local t = {}
 				
-				if p1 then
-					table.insert(t, { isYouTubeVideo = false, imageId = p1 })
+				if p2 then
+					table.insert(t, { isYouTubeVideo = false, imageId = p2 })
 				end
 				if #t > 0 then
-					var26(t)
+					var7(t)
 					
 					return
 				end
-				var26(getGalleryItemsModule(media))
+				var7(getGalleryItemsModule(media))
 			end, function()
-				-- upvalues: var26 (copy), getGalleryItemsModule (copy), media (copy)
-				var26(getGalleryItemsModule(media))
+				-- upvalues: var7 (copy), getGalleryItemsModule (copy), media (copy)
+				var7(getGalleryItemsModule(media))
 			end)
 			
 			return
 		end
-		fetchEventThumbnailListModule(var28, p0.virtualEvent.id):andThen(function(p2)
-			-- upvalues: var26 (copy), getGalleryItemsModule (copy), media (copy)
+		fetchEventThumbnailListModule(var9, p1.virtualEvent.id):andThen(function(p2)
+			-- upvalues: var7 (copy), getGalleryItemsModule (copy), media (copy)
 			local t = {}
 			
 			if p2 then
@@ -83,112 +83,112 @@ return function(p0)
 				end
 			end
 			if #t > 0 then
-				var26(t)
+				var7(t)
 				
 				return
 			end
-			var26(getGalleryItemsModule(media))
+			var7(getGalleryItemsModule(media))
 		end, function()
-			-- upvalues: var26 (copy), getGalleryItemsModule (copy), media (copy)
-			var26(getGalleryItemsModule(media))
+			-- upvalues: var7 (copy), getGalleryItemsModule (copy), media (copy)
+			var7(getGalleryItemsModule(media))
 		end)
-	end, { p0.virtualEvent.id, media })
-	local var29 = useMutation(requestsModule.UPDATE_RSVP_STATUS, {
-		variables = { virtualEventId = p0.virtualEvent.id },
-		update = function(_, p3, p4)
+	end, { p1.virtualEvent.id, media })
+	local var10 = useMutation(requestsModule.UPDATE_RSVP_STATUS, {
+		variables = { virtualEventId = p1.virtualEvent.id },
+		update = function(_, p2, p3)
 			-- upvalues: cryoModule (copy)
-			local virtualEvent = p4.data.virtualEventRsvp.virtualEvent
-			p3:modify({
-				id = p3:identify(virtualEvent),
+			local virtualEvent = p3.data.virtualEventRsvp.virtualEvent
+			p2:modify({
+				id = p2:identify(virtualEvent),
 				fields = {
-					rsvpCounters = function(_, p5)
+					rsvpCounters = function(_, p4)
 						-- upvalues: virtualEvent (ref), cryoModule (copy)
-						return cryoModule.Dictionary.join(p5, {
-							going = p5.going + (if virtualEvent.userRsvpStatus == "going" then 1 else -1)
+						return cryoModule.Dictionary.join(p4, {
+							going = p4.going + (if virtualEvent.userRsvpStatus == "going" then 1 else -1)
 						})
 					end
 				}
 			})
 		end
 	})
-	local var30 = reactModule.useMemo(function()
-		-- upvalues: getEventTimerStatusModule (copy), var21 (ref)
-		return getEventTimerStatusModule(var21.virtualEvent, var21.currentTime)
-	end, { var21.virtualEvent, var21.currentTime })
-	local var31 = reactModule.useCallback(function(p6)
-		-- upvalues: calcMediaGallerySizesFromWidth (copy), var22 (ref), var23 (ref)
-		local offset = calcMediaGallerySizesFromWidth(p6.AbsoluteSize.X, 5).contentSize.Y.Offset
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: getEventTimerStatusModule (copy), var2 (ref)
+		return getEventTimerStatusModule(var2.virtualEvent, var2.currentTime)
+	end, { var2.virtualEvent, var2.currentTime })
+	local var12 = reactModule.useCallback(function(p2)
+		-- upvalues: calcMediaGallerySizesFromWidth (copy), var3 (ref), var4 (ref)
+		local offset = calcMediaGallerySizesFromWidth(p2.AbsoluteSize.X, 5).contentSize.Y.Offset
 		
-		if offset ~= var22 then
-			var23(offset)
+		if offset ~= var3 then
+			var4(offset)
 		end
-	end, { var22 })
-	local var32 = reactModule.useCallback(function()
-		-- upvalues: var21 (ref), var29 (ref)
-		var29[1]({
+	end, { var3 })
+	local var13 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), var10 (ref)
+		var10[1]({
 			variables = {
-				rsvpStatus = if var21.virtualEvent.userRsvpStatus ~= "going" then "notGoing" else "going"
+				rsvpStatus = if var2.virtualEvent.userRsvpStatus ~= "going" then "notGoing" else "going"
 			}
-		}):andThen(function(p7)
-			-- upvalues: var21 (copy)
-			if var21.onRsvpChanged then
-				var21.onRsvpChanged(p7.data.virtualEventRsvp.virtualEvent.userRsvpStatus, p7.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
+		}):andThen(function(p2)
+			-- upvalues: var2 (copy)
+			if var2.onRsvpChanged then
+				var2.onRsvpChanged(p2.data.virtualEventRsvp.virtualEvent.userRsvpStatus, p2.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
 			end
 		end)
-	end, { var21.virtualEvent })
-	local var33 = reactModule.useRef(nil)
-	var33.current = responsiveModule.usePreferredInput()
-	local var34 = var33.current == responsiveModule.Input.Directional
-	local var35, var36 = reactFocusNavigationModule.useMostRecentOrDefaultFocusBehavior()
-	local var37 = useCloseWithBackButton(var36, p0.onClose)
-	local var38 = reactFocusNavigationModule.useFocusGuiObject()
-	local var39, var40 = reactModule.useState(nil)
-	local var41 = reactModule.useCallback(function(p8)
-		-- upvalues: var40 (ref), var35 (ref)
-		var40(p8)
+	end, { var2.virtualEvent })
+	local var14 = reactModule.useRef(nil)
+	var14.current = responsiveModule.usePreferredInput()
+	local var15 = var14.current == responsiveModule.Input.Directional
+	local var16, var17 = reactFocusNavigationModule.useMostRecentOrDefaultFocusBehavior()
+	local var18 = useCloseWithBackButton(var17, p1.onClose)
+	local var19 = reactFocusNavigationModule.useFocusGuiObject()
+	local var20, var21 = reactModule.useState(nil)
+	local var22 = reactModule.useCallback(function(p2)
+		-- upvalues: var21 (ref), var16 (ref)
+		var21(p2)
 		
-		if typeof(var35) == "function" then
-			var35(p8)
+		if typeof(var16) == "function" then
+			var16(p2)
 		end
-	end, { var35 })
+	end, { var16 })
 	reactModule.useEffect(function()
-		-- upvalues: var39 (ref), var33 (ref), responsiveModule (copy), var38 (ref)
-		if var39 and var33.current == responsiveModule.Input.Directional then
-			var38(var39)
+		-- upvalues: var20 (ref), var14 (ref), responsiveModule (copy), var19 (ref)
+		if var20 and var14.current == responsiveModule.Input.Directional then
+			var19(var20)
 		end
-	end, { var39, var38 })
-	local var42 = useActionBarPropsModule(var21.virtualEvent, var30, {
-		onClose = var21.onClose,
-		onJoinEvent = var21.onJoinEvent,
-		onShare = var21.onShare,
-		onRsvpChanged = var32
-	}, var41)
+	end, { var20, var19 })
+	local var23 = useActionBarPropsModule(var2.virtualEvent, var11, {
+		onClose = var2.onClose,
+		onJoinEvent = var2.onJoinEvent,
+		onShare = var2.onShare,
+		onRsvpChanged = var13
+	}, var22)
 	
 	return reactModule.createElement(detailsPageTemplate, {
-		deviceType = var24,
-		titleText = if p0.virtualEvent.eventStatus == "moderated" then "[CONTENT MODERATED]" else var21.virtualEvent.title,
-		thumbnailImageUrl = var27,
+		deviceType = var5,
+		titleText = if p1.virtualEvent.eventStatus == "moderated" then "[CONTENT MODERATED]" else var2.virtualEvent.title,
+		thumbnailImageUrl = var8,
 		thumbnailAspectRatio = Vector2.new(16, 9),
 		renderInfoContent = function()
-			-- upvalues: reactModule (copy), eventTimerModule (copy), var21 (ref), var30 (ref)
+			-- upvalues: reactModule (copy), eventTimerModule (copy), var2 (ref), var11 (ref)
 			return reactModule.createElement(eventTimerModule, {
-				virtualEvent = var21.virtualEvent,
-				status = var30,
-				currentTime = var21.currentTime
+				virtualEvent = var2.virtualEvent,
+				status = var11,
+				currentTime = var2.currentTime
 			})
 		end,
 		actionBarProps = if reactModule.useMemo(function()
-			-- upvalues: var42 (ref)
-			return var42.button or #var42.icons > 0
-		end, { var42 }) then var42 else nil,
-		componentList = if p0.virtualEvent.eventStatus == "cancelled" or p0.virtualEvent.eventStatus == "moderated" then {} else {
-			Attendance = if var30 ~= "Elapsed" then nil else {
+			-- upvalues: var23 (ref)
+			return var23.button or #var23.icons > 0
+		end, { var23 }) then var23 else nil,
+		componentList = if p1.virtualEvent.eventStatus == "cancelled" or p1.virtualEvent.eventStatus == "moderated" then {} else {
+			Attendance = if var11 ~= "Elapsed" then nil else {
 				portraitLayoutOrder = 1,
 				landscapeLayoutOrder = 1,
 				landscapePosition = contentPosition.Left,
 				renderComponent = function()
-					-- upvalues: reactModule (copy), attendanceModule (copy), var21 (ref), var30 (ref)
-					return reactModule.createElement(attendanceModule, { virtualEvent = var21.virtualEvent, eventStatus = var30 })
+					-- upvalues: reactModule (copy), attendanceModule (copy), var2 (ref), var11 (ref)
+					return reactModule.createElement(attendanceModule, { virtualEvent = var2.virtualEvent, eventStatus = var11 })
 				end
 			},
 			MediaGallery = {
@@ -196,13 +196,13 @@ return function(p0)
 				landscapeLayoutOrder = 1,
 				landscapePosition = contentPosition.Right,
 				renderComponent = function()
-					-- upvalues: reactModule (copy), var22 (ref), var31 (ref), mediaGalleryPreview (copy), var25 (ref)
+					-- upvalues: reactModule (copy), var3 (ref), var12 (ref), mediaGalleryPreview (copy), var6 (ref)
 					return reactModule.createElement("Frame", {
-						Size = UDim2.new(1, 0, 0, var22),
+						Size = UDim2.new(1, 0, 0, var3),
 						BackgroundTransparency = 1,
-						[reactModule.Change.AbsoluteSize] = var31
+						[reactModule.Change.AbsoluteSize] = var12
 					}, {
-						Gallery = reactModule.createElement(mediaGalleryPreview, { numberOfThumbnails = 5, items = var25 })
+						Gallery = reactModule.createElement(mediaGalleryPreview, { numberOfThumbnails = 5, items = var6 })
 					})
 				end
 			},
@@ -211,34 +211,34 @@ return function(p0)
 				landscapeLayoutOrder = 2,
 				landscapePosition = contentPosition.Left,
 				renderComponent = function()
-					-- upvalues: reactModule (copy), eventDescriptionModule (copy), var21 (ref), experienceDetails (ref)
+					-- upvalues: reactModule (copy), eventDescriptionModule (copy), var2 (ref), experienceDetails (ref)
 					return reactModule.createElement(eventDescriptionModule, {
-						description = var21.virtualEvent.description,
+						description = var2.virtualEvent.description,
 						experienceName = if experienceDetails then experienceDetails.name else nil,
-						experienceThumbnail = ("rbxthumb://type=GameIcon&id=%s&w=150&h=150"):format(var21.virtualEvent.universeId),
-						onExperienceTileActivated = var21.onExperienceTileActivated
+						experienceThumbnail = ("rbxthumb://type=GameIcon&id=%s&w=150&h=150"):format(var2.virtualEvent.universeId),
+						onExperienceTileActivated = var2.onExperienceTileActivated
 					})
 				end
 			},
-			EventInfo = if var21.virtualEvent.host then {
+			EventInfo = if var2.virtualEvent.host then {
 				portraitLayoutOrder = 4,
 				landscapeLayoutOrder = 2,
 				landscapePosition = contentPosition.Right,
 				renderComponent = function()
-					-- upvalues: reactModule (copy), listTable (copy), eventHostedByModule (copy), var21 (ref)
+					-- upvalues: reactModule (copy), listTable (copy), eventHostedByModule (copy), var2 (ref)
 					return reactModule.createElement(listTable, {
 						cells = {
 							reactModule.createElement(eventHostedByModule, {
-								host = var21.virtualEvent.host,
-								onActivated = var21.onHostActivated
+								host = var2.virtualEvent.host,
+								onActivated = var2.onHostActivated
 							})
 						}
 					})
 				end
 			} else nil
 		},
-		onClose = var21.onClose,
-		disableStickyActionBar = var34,
-		containerRef = var37
+		onClose = var2.onClose,
+		disableStickyActionBar = var15,
+		containerRef = var18
 	})
 end

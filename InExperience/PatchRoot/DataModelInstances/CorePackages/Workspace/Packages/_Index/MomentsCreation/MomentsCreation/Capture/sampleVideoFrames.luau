@@ -1,23 +1,23 @@
-﻿return function(p0, p1, p2, p3)
+﻿return function(p1, p2, p3, p4)
 	task.spawn(function()
-		-- upvalues: p0 (ref), p3 (ref), p1 (ref), p2 (ref)
+		-- upvalues: p1 (ref), p4 (ref), p2 (ref), p3 (ref)
 		local ok, status = pcall(function()
-			-- upvalues: p0 (copy), p3 (copy), p1 (copy)
-			local var0 = game:GetService("VideoService"):CreateVideoSamplerAsync(p0)
-			local p3_1 = p3 or 0
+			-- upvalues: p1 (copy), p4 (copy), p2 (copy)
+			local var1 = game:GetService("VideoService"):CreateVideoSamplerAsync(p1)
+			local p5 = p4 or 0
 			local t = {}
 			
-			for i = 0, math.floor(p1) - 1 do
-				table.insert(t, p3_1 + i)
+			for i = 0, math.floor(p2) - 1 do
+				table.insert(t, p5 + i)
 			end
-			return var0:GetSamplesAtTimesAsync(t)
+			return var1:GetSamplesAtTimesAsync(t)
 		end)
 		
 		if ok then
-			p2(status)
+			p3(status)
 			
 			return
 		end
-		p2({})
+		p3({})
 	end)
 end

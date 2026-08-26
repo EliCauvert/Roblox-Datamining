@@ -19,8 +19,8 @@ local function handleClearUserSpecificData(_)
 	return false
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: actionHandlers (ref), setLocalUserIdModule (ref), handleSetLocalUserId (ref), clearUserSpecificDataModule (ref), handleClearUserSpecificData (ref)
-	actionHandlers.register(p0, setLocalUserIdModule.name, handleSetLocalUserId)
-	actionHandlers.register(p0, clearUserSpecificDataModule.name, handleClearUserSpecificData)
+	actionHandlers.register(p1, setLocalUserIdModule.name, handleSetLocalUserId)
+	actionHandlers.register(p1, clearUserSpecificDataModule.name, handleClearUserSpecificData)
 end

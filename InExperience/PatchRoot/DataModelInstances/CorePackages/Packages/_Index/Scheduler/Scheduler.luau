@@ -1,9 +1,9 @@
 ﻿local reactGlobalsModule = require(script.Parent.ReactGlobals)
 
-local function _(p0)
+local function _(p1)
 	return function()
-		-- upvalues: p0 (ref)
-		error(p0 .. " is only available in tests, not in production")
+		-- upvalues: p1 (ref)
+		error(p1 .. " is only available in tests, not in production")
 	end
 end
 
@@ -36,68 +36,68 @@ local t = {
 	unstable_setSchedulerFlags = var1.unstable_setSchedulerFlags,
 	unstable_getSchedulerFlags = var1.unstable_getSchedulerFlags
 }
-local var5 = "unstable_flushAllWithoutAsserting"
+local var2 = "unstable_flushAllWithoutAsserting"
 
 function t.unstable_flushAllWithoutAsserting()
+	-- upvalues: var2 (ref)
+	error(var2 .. " is only available in tests, not in production")
+end
+
+local var3 = "unstable_flushAll"
+
+function t.unstable_flushAll()
+	-- upvalues: var3 (ref)
+	error(var3 .. " is only available in tests, not in production")
+end
+
+local var4 = "unstable_flushNumberOfYields"
+
+function t.unstable_flushNumberOfYields()
+	-- upvalues: var4 (ref)
+	error(var4 .. " is only available in tests, not in production")
+end
+
+local var5 = "unstable_clearYields"
+
+function t.unstable_clearYields()
 	-- upvalues: var5 (ref)
 	error(var5 .. " is only available in tests, not in production")
 end
 
-local var6 = "unstable_flushAll"
+local var6 = "unstable_clearYields"
 
-function t.unstable_flushAll()
+function t.unstable_flushUntilNextPaint()
 	-- upvalues: var6 (ref)
 	error(var6 .. " is only available in tests, not in production")
 end
 
-local var7 = "unstable_flushNumberOfYields"
+local var7 = "unstable_advanceTime"
 
-function t.unstable_flushNumberOfYields()
+function t.unstable_advanceTime()
 	-- upvalues: var7 (ref)
 	error(var7 .. " is only available in tests, not in production")
 end
 
-local var8 = "unstable_clearYields"
+local var8 = "unstable_flushExpired"
 
-function t.unstable_clearYields()
+function t.unstable_flushExpired()
 	-- upvalues: var8 (ref)
 	error(var8 .. " is only available in tests, not in production")
 end
 
-local var9 = "unstable_clearYields"
+local var9 = "unstable_yieldValue"
 
-function t.unstable_flushUntilNextPaint()
+function t.unstable_yieldValue()
 	-- upvalues: var9 (ref)
 	error(var9 .. " is only available in tests, not in production")
 end
 
-local var10 = "unstable_advanceTime"
-
-function t.unstable_advanceTime()
-	-- upvalues: var10 (ref)
-	error(var10 .. " is only available in tests, not in production")
-end
-
-local var11 = "unstable_flushExpired"
-
-function t.unstable_flushExpired()
-	-- upvalues: var11 (ref)
-	error(var11 .. " is only available in tests, not in production")
-end
-
-local var12 = "unstable_yieldValue"
-
-function t.unstable_yieldValue()
-	-- upvalues: var12 (ref)
-	error(var12 .. " is only available in tests, not in production")
-end
-
 local t_1 = {}
-local var14 = "unstable_wrap"
+local var10 = "unstable_wrap"
 
 function t_1.unstable_wrap()
-	-- upvalues: var14 (ref)
-	error(var14 .. " is only available in tests, not in production")
+	-- upvalues: var10 (ref)
+	error(var10 .. " is only available in tests, not in production")
 end
 
 t_1.__interactionsRef = {}

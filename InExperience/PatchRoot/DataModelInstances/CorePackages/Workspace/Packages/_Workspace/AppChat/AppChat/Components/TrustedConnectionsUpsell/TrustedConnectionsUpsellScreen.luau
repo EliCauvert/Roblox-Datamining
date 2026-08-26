@@ -8,20 +8,20 @@ local trustedConnectionsUpsellContainerModule = require(script.Parent.TrustedCon
 
 return function(_)
 	-- upvalues: useNavigation (ref), reactModule (ref), enumScreensModule (ref), name (ref), trustedConnectionsUpsellContainerModule (ref)
-	local var5 = useNavigation()
-	local conversationId = var5 and var5.getParam("conversationId", nil)
-	local modalVariant = var5 and var5.getParam("modalVariant", nil)
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), enumScreensModule (copy)
-		if var5 and var5.state.routeName == enumScreensModule.TrustedConnectionsUpsell then
-			var5.goBack(var5.state.key)
+	local var1 = useNavigation()
+	local conversationId = var1 and var1.getParam("conversationId", nil)
+	local modalVariant = var1 and var1.getParam("modalVariant", nil)
+	local var2 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), enumScreensModule (copy)
+		if var1 and var1.state.routeName == enumScreensModule.TrustedConnectionsUpsell then
+			var1.goBack(var1.state.key)
 		end
-	end, { var5 })
+	end, { var1 })
 	
 	if modalVariant and conversationId then
 		return reactModule.createElement(trustedConnectionsUpsellContainerModule, {
 			conversationId = conversationId,
-			dismissModal = var8,
+			dismissModal = var2,
 			modalVariant = modalVariant
 		})
 	end
@@ -29,7 +29,7 @@ return function(_)
 		conversationId = conversationId,
 		modalVariant = modalVariant
 	})
-	var5.goBack()
+	var1.goBack()
 	
 	return nil
 end

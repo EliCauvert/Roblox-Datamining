@@ -11,10 +11,10 @@ local t = {
 	lastUpdated = { 25, 9, 9 }
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: telemetryService (ref), t (ref), modalImpressionEventAddSessionInfo (ref)
 	telemetryService:LogEvent(t, {
 		standardizedFields = if modalImpressionEventAddSessionInfo then { "addSessionInfo" } else nil,
-		customFields = { modalId = p0, modalType = p1 }
+		customFields = { modalId = p1, modalType = p2 }
 	})
 end

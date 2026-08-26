@@ -29,99 +29,99 @@ local t_3 = {
 	[Enum.AssetType.RightLeg] = true
 }
 
-local function validateBasedOnBBoxes(p0, p1, p2, p3, p4)
+local function validateBasedOnBBoxes(p1, p2, p3, p4, p5)
 	-- upvalues: errorSourceStringsModule (ref)
-	local boundsData = p2[p0.Name].boundsData
-	local boundsData_1 = p2[p1.Name].boundsData
-	local var12 = true
+	local boundsData = p3[p1.Name].boundsData
+	local boundsData_1 = p3[p2.Name].boundsData
+	local var1 = true
 	
 	if boundsData_1.maxOverall and boundsData.maxOverall and boundsData.maxOverall.Y < boundsData_1.maxOverall.Y then
-		p4:fail(errorSourceStringsModule.Keys.Extents_PartAboveParent, {
-			lowerPart = p1.Name,
-			upperPart = p0.Name,
-			attachmentName = p3
-		}, p1)
-		var12 = false
+		p5:fail(errorSourceStringsModule.Keys.Extents_PartAboveParent, {
+			lowerPart = p2.Name,
+			upperPart = p1.Name,
+			attachmentName = p4
+		}, p2)
+		var1 = false
 	end
 	if boundsData.minOverall and boundsData_1.minOverall and boundsData.minOverall.Y < boundsData_1.minOverall.Y then
-		p4:fail(errorSourceStringsModule.Keys.Extents_ParentBelowPart, {
-			upperPart = p0.Name,
-			lowerPart = p1.Name,
-			attachmentName = p3
-		}, p0)
-		var12 = false
+		p5:fail(errorSourceStringsModule.Keys.Extents_ParentBelowPart, {
+			upperPart = p1.Name,
+			lowerPart = p2.Name,
+			attachmentName = p4
+		}, p1)
+		var1 = false
 	end
-	return var12
+	return var1
 end
 
-local function validateBasedOnAttachmentYPos(p5, p6, p7, p8)
+local function validateBasedOnAttachmentYPos(p1, p2, p3, p4)
 	-- upvalues: r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), errorSourceStringsModule (ref)
-	local var13 = p6:FindFirstChild(p7, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-	local var14 = p5:FindFirstChild(p7, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local var1 = p2:FindFirstChild(p3, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local var2 = p1:FindFirstChild(p3, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	
-	if not var13 or not var14 then return end
-	local size = p6.Size
-	local size_1 = p5.Size
-	local position = getAttachmentCFrameInPartSpaceModule(var13).Position
-	local position_1 = getAttachmentCFrameInPartSpaceModule(var14).Position
+	if not var1 or not var2 then return end
+	local size = p2.Size
+	local size_1 = p1.Size
+	local position = getAttachmentCFrameInPartSpaceModule(var1).Position
+	local position_1 = getAttachmentCFrameInPartSpaceModule(var2).Position
 	local y = (size / 2 - position).Y
 	local y_1 = (size / 2 + position).Y
 	local y_2 = (size_1 / 2 + position_1).Y
 	
 	if (size_1 / 2 - position_1).Y < y then
-		p8:fail(errorSourceStringsModule.Keys.Extents_PartAboveParent, {
-			lowerPart = p6.Name,
-			upperPart = p5.Name,
-			attachmentName = p7
-		}, p6)
+		p4:fail(errorSourceStringsModule.Keys.Extents_PartAboveParent, {
+			lowerPart = p2.Name,
+			upperPart = p1.Name,
+			attachmentName = p3
+		}, p2)
 	end
 	if y_1 < y_2 then
-		p8:fail(errorSourceStringsModule.Keys.Extents_ParentBelowPart, {
-			upperPart = p5.Name,
-			lowerPart = p6.Name,
-			attachmentName = p7
-		}, p5)
+		p4:fail(errorSourceStringsModule.Keys.Extents_ParentBelowPart, {
+			upperPart = p1.Name,
+			lowerPart = p2.Name,
+			attachmentName = p3
+		}, p1)
 	end
 end
 
-function t.run(p9, p10)
+function t.run(p1, p2)
 	-- upvalues: t_1 (ref), constantsModule (ref), boundsCalculatorModule (ref), t_2 (ref), validateBasedOnBBoxes (ref), t_3 (ref), validateBasedOnAttachmentYPos (ref)
-	local rootInstance = p10.rootInstance
-	local assetType = p10.uploadEnum.assetType
+	local rootInstance = p2.rootInstance
+	local assetType = p2.uploadEnum.assetType
 	
 	if not t_1[assetType] then return end
-	local var15 = constantsModule.ASSET_TYPE_INFO[assetType]
+	local var1 = constantsModule.ASSET_TYPE_INFO[assetType]
 	
-	if not var15 then return end
-	local renderMeshesData = p10.renderMeshesData
+	if not var1 then return end
+	local renderMeshesData = p2.renderMeshesData
 	
 	if not renderMeshesData then return end
-	local var16, _, var17 = boundsCalculatorModule.calculateIndividualAssetPartsDataFromData(rootInstance, assetType, renderMeshesData)
+	local var2, _, var3 = boundsCalculatorModule.calculateIndividualAssetPartsDataFromData(rootInstance, assetType, renderMeshesData)
 	
-	if not var16 then
-		p9:fetchError("Failed to calculate asset bounds data for extents check on " .. assetType.Name)
+	if not var2 then
+		p1:fetchError("Failed to calculate asset bounds data for extents check on " .. assetType.Name)
 		
 		return
 	end
-	for i, v in pairs(var15.subParts) do
-		local var18 = constantsModule.BODYPART_TO_PARENT[i]
+	for i, v in pairs(var1.subParts) do
+		local var4 = constantsModule.BODYPART_TO_PARENT[i]
 		
-		if var18 ~= nil then
-			local var19 = rootInstance:FindFirstChild(i)
-			local var20 = rootInstance:FindFirstChild(var18)
+		if var4 ~= nil then
+			local var5 = rootInstance:FindFirstChild(i)
+			local var6 = rootInstance:FindFirstChild(var4)
 			
-			if var19 and var20 then
-				local var21 = var20
-				local var22 = var19
+			if var5 and var6 then
+				local var7 = var6
+				local var8 = var5
 				
 				if t_2[i] then
-					var21 = var19
-					var22 = var20
+					var7 = var5
+					var8 = var6
 				end
 				local name = v.rigAttachmentToParent.name
 				
-				if (if var17[var21.Name] and var17[var22.Name] then validateBasedOnBBoxes(var21, var22, var17, name, p9) else true) and t_3[assetType] then
-					validateBasedOnAttachmentYPos(var21, var22, name, p9)
+				if (if var3[var7.Name] and var3[var8.Name] then validateBasedOnBBoxes(var7, var8, var3, name, p1) else true) and t_3[assetType] then
+					validateBasedOnAttachmentYPos(var7, var8, name, p1)
 				end
 			end
 		end

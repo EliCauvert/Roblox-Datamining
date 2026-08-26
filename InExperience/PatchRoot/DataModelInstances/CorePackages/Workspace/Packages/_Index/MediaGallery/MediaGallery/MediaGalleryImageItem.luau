@@ -11,15 +11,15 @@ local _ = require(mediaGallery.MediaGalleryTypes)
 local getImageUriModule = require(mediaGallery.getImageUri)
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), getImageUriModule (ref), fFlagSduiExperienceDetailsSupport (ref), image (ref), iconButton (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref)
-	local var4 = useTokens()
-	local imageId = p0.imageId
+	local var1 = useTokens()
+	local imageId = p1.imageId
 	
-	if p0.isYouTubeVideo and (imageId == nil or imageId == "") and p0.videoHash then
-		imageId = string.format("https://img.youtube.com/vi/%s/hqdefault.jpg", p0.videoHash)
+	if p1.isYouTubeVideo and (imageId == nil or imageId == "") and p1.videoHash then
+		imageId = string.format("https://img.youtube.com/vi/%s/hqdefault.jpg", p1.videoHash)
 	end
-	local uDim = UDim.new(0, p0.cornerRadius or var4.Radius.Medium)
+	local uDim = UDim.new(0, p1.cornerRadius or var1.Radius.Medium)
 	reactModule.useEffect(function()
 		-- upvalues: imageId (write), getImageUriModule (copy)
 		if imageId then
@@ -36,8 +36,8 @@ return reactModule.memo(function(p0)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		LayoutOrder = p0.itemIndex,
-		Size = p0.Size
+		LayoutOrder = p1.itemIndex,
+		Size = p1.Size
 	}, {
 		Image = reactModule.createElement(image, {
 			ZIndex = 1,
@@ -45,19 +45,19 @@ return reactModule.memo(function(p0)
 			Size = UDim2.fromScale(1, 1),
 			Image = getImageUriModule(imageId),
 			ScaleType = Enum.ScaleType.Crop,
-			onLoaded = if fFlagSduiExperienceDetailsSupport and p0.onMediaResolved then if fFlagSduiExperienceDetailsSupport then reactModule.useCallback(function(p1)
-				-- upvalues: p0 (ref)
-				if p0.onMediaResolved then
-					p0.onMediaResolved(p1 == Enum.AssetFetchStatus.Success)
+			onLoaded = if fFlagSduiExperienceDetailsSupport and p1.onMediaResolved then if fFlagSduiExperienceDetailsSupport then reactModule.useCallback(function(p2)
+				-- upvalues: p1 (ref)
+				if p1.onMediaResolved then
+					p1.onMediaResolved(p2 == Enum.AssetFetchStatus.Success)
 				end
-			end, { p0.onMediaResolved }) else nil else nil
+			end, { p1.onMediaResolved }) else nil else nil
 		}),
-		GradientOverlay = if p0.showGradient == false or not p0.gradientOverlayHeight then nil else reactModule.createElement("Frame", {
+		GradientOverlay = if p1.showGradient == false or not p1.gradientOverlayHeight then nil else reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 2,
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.fromScale(0, 1),
-			Size = UDim2.new(1, 0, 0, p0.gradientOverlayHeight),
+			Size = UDim2.new(1, 0, 0, p1.gradientOverlayHeight),
 			BackgroundColor3 = Color3.new(0, 0, 0)
 		}, {
 			Gradient = reactModule.createElement("UIGradient", {
@@ -69,38 +69,38 @@ return reactModule.memo(function(p0)
 			}),
 			UICorner = reactModule.createElement("UICorner", { CornerRadius = uDim })
 		}),
-		PlayButton = if p0.isYouTubeVideo then reactModule.createElement(iconButton, {
+		PlayButton = if p1.isYouTubeVideo then reactModule.createElement(iconButton, {
 			isCircular = true,
 			ZIndex = 3,
 			icon = { name = foundationModule.Enums.IconName.PlayLarge },
 			size = inputSize.Large,
 			variant = buttonVariant.OverMedia,
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: p0 (ref), imageId (write)
-				if p0.onYouTubeVideoPlay then
-					p0.onYouTubeVideoPlay({
-						index = p0.itemIndex,
+				-- upvalues: p1 (ref), imageId (write)
+				if p1.onYouTubeVideoPlay then
+					p1.onYouTubeVideoPlay({
+						index = p1.itemIndex,
 						imageId = imageId,
-						videoHash = p0.videoHash or "",
-						videoTitle = p0.videoTitle
+						videoHash = p1.videoHash or "",
+						videoTitle = p1.videoTitle
 					})
 					
 					return
 				end
 			end, {
-				p0.videoHash,
-				p0.videoTitle,
+				p1.videoHash,
+				p1.videoTitle,
 				imageId,
-				p0.onYouTubeVideoPlay,
-				p0.itemIndex
+				p1.onYouTubeVideoPlay,
+				p1.itemIndex
 			}),
 			AnchorPoint = Vector2.new(1, 1),
-			Position = UDim2.new(1, -var4.Size.Size_500, 1, -var4.Size.Size_500)
+			Position = UDim2.new(1, -var1.Size.Size_500, 1, -var1.Size.Size_500)
 		}) else nil,
-		ItemOverlay = if p0.overlay then reactModule.createElement("Frame", {
+		ItemOverlay = if p1.overlay then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 5,
 			Size = UDim2.fromScale(1, 1)
-		}, { Overlay = p0.overlay }) else nil
+		}, { Overlay = p1.overlay }) else nil
 	})
 end)

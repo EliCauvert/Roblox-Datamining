@@ -13,12 +13,12 @@ local withLocalizationModule = require(parent.Localization.withLocalization)
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local image = require(corePackagesService.Packages.Foundation).Image
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var9 = #controlsModule.gamepadLabels.right * 43 + 62
+local var1 = #controlsModule.gamepadLabels.right * 43 + 62
 
-local function verticalControlsList(p0)
+local function verticalControlsList(p1)
 	-- upvalues: withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
-	return withLocalizationModule(p0.controls)(function(p1)
-		-- upvalues: roact (copy), themedTextLabelModule (copy), p0 (ref)
+	return withLocalizationModule(p1.controls)(function(p2)
+		-- upvalues: roact (copy), themedTextLabelModule (copy), p1 (ref)
 		local t = {
 			ListLayout = roact.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
@@ -26,11 +26,11 @@ local function verticalControlsList(p0)
 			})
 		}
 		
-		for i, v in ipairs(p1) do
+		for i, v in ipairs(p2) do
 			t["controlLabel_" .. i] = roact.createElement(themedTextLabelModule, {
 				fontKey = "Header2",
 				themeKey = "TextEmphasis",
-				TextXAlignment = p0.TextXAlignment,
+				TextXAlignment = p1.TextXAlignment,
 				Size = UDim2.new(0, 1, 0, 22),
 				Text = v,
 				LayoutOrder = i
@@ -38,14 +38,14 @@ local function verticalControlsList(p0)
 		end
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Position = p0.Position,
+			Position = p1.Position,
 			Size = UDim2.new(0, 0, 1, 0)
 		}, t)
 	end)
 end
 
 return function(p2)
-	-- upvalues: userInputService (ref), roact (ref), controlLayoutContainerModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), assetsModule (ref), reactModule (ref), verticalControlsList (ref), controlsModule (ref), var9 (ref)
+	-- upvalues: userInputService (ref), roact (ref), controlLayoutContainerModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), assetsModule (ref), reactModule (ref), verticalControlsList (ref), controlsModule (ref), var1 (ref)
 	local platform = userInputService:GetPlatform()
 	
 	return roact.createElement(controlLayoutContainerModule, {
@@ -74,7 +74,7 @@ return function(p2)
 			}),
 			RightIconsControlslIst = roact.createElement(verticalControlsList, {
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Position = UDim2.new(1, 26, 0, var9),
+				Position = UDim2.new(1, 26, 0, var1),
 				controls = controlsModule.gamepadLabels.camera
 			})
 		})

@@ -8,7 +8,7 @@ local t = {
 	U13MonthlyThreshold2Modal = "U13MonthlyThreshold2Modal",
 	ParentalConsentWarningPaymentModal13To17 = "ParentalConsentWarningPaymentModal13To17"
 }
-local var2 = require(parent_1.enumerate)(script.Name, t)
-addRawValueMethodToEnumModule(var2, t)
+local var1 = require(parent_1.enumerate)(script.Name, t)
+addRawValueMethodToEnumModule(var1, t)
 
-return var2
+return var1

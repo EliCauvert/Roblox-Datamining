@@ -24,48 +24,48 @@ local t_2 = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop
 }
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: reactModule (ref), cryoModule (ref), t_2 (ref), t (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref), p0 (ref), cryoModule (copy), t_2 (copy), t (copy), p2 (ref)
-		local var10 = p1 or {}
+		-- upvalues: p2 (ref), p1 (ref), cryoModule (copy), t_2 (copy), t (copy), p3 (ref)
+		local var1 = p2 or {}
 		
-		if p0 then
-			var10 = cryoModule.Dictionary.join(t_2, var10)
+		if p1 then
+			var1 = cryoModule.Dictionary.join(t_2, var1)
 		end
-		return cryoModule.Dictionary.join(t, var10, { ref = p2 })
-	end, { p0, p1, p2 })
+		return cryoModule.Dictionary.join(t, var1, { ref = p3 })
+	end, { p1, p2, p3 })
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: t_1 (ref), reactModule (ref), reactFocusNavigationModule (ref), useDefaultFocusNavigationBindingsModule (ref), navigationModule (ref), useFocusNavigableSurfaceRegistryConnectionModule (ref), cryoModule (ref), t_2 (ref), t (ref)
-	local customEventHandlers = p3.customEventHandlers or t_1
-	local var12 = if p3.frameProps and p3.frameProps.ref then p3.frameProps.ref.current else nil
+	local customEventHandlers = p1.customEventHandlers or t_1
+	local var1 = if p1.frameProps and p1.frameProps.ref then p1.frameProps.ref.current else nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var13, var14 = reactModule.useState(var12)
-	var14 = useDefaultFocusNavigationBindingsModule(reactFocusNavigationModule.useEventHandlerMap(customEventHandlers, var14))
-	local isFocusable = p3.isFocusable
-	local var15 = navigationModule.useNavigationFocus()
-	local var16 = (isFocusable == nil or isFocusable) and (var15 == nil or var15)
-	local var17 = var14
-	local var18 = reactFocusNavigationModule.useMostRecentFocusBehavior(var14)
+	local var2, var3 = reactModule.useState(var1)
+	var3 = useDefaultFocusNavigationBindingsModule(reactFocusNavigationModule.useEventHandlerMap(customEventHandlers, var3))
+	local isFocusable = p1.isFocusable
+	local var4 = navigationModule.useNavigationFocus()
+	local var5 = (isFocusable == nil or isFocusable) and (var4 == nil or var4)
+	local var6 = var3
+	local var7 = reactFocusNavigationModule.useMostRecentFocusBehavior(var3)
 	
-	if p3.shouldRestoreFocus ~= nil or p3.shouldRestoreFocus then
-		var17 = var18
+	if p1.shouldRestoreFocus ~= nil or p1.shouldRestoreFocus then
+		var6 = var7
 	end
-	useFocusNavigableSurfaceRegistryConnectionModule(var13, p3.surfaceIdentifier, var16)
-	local isIsolated = p3.isIsolated
-	local frameProps = p3.frameProps
+	useFocusNavigableSurfaceRegistryConnectionModule(var2, p1.surfaceIdentifier, var5)
+	local isIsolated = p1.isIsolated
+	local frameProps = p1.frameProps
 	
 	return reactModule.createElement("Frame", reactModule.useMemo(function()
-		-- upvalues: frameProps (ref), isIsolated (ref), cryoModule (copy), t_2 (copy), t (copy), var17 (ref)
-		local var10 = frameProps or {}
+		-- upvalues: frameProps (ref), isIsolated (ref), cryoModule (copy), t_2 (copy), t (copy), var6 (ref)
+		local var8 = frameProps or {}
 		
 		if isIsolated then
-			var10 = cryoModule.Dictionary.join(t_2, var10)
+			var8 = cryoModule.Dictionary.join(t_2, var8)
 		end
-		return cryoModule.Dictionary.join(t, var10, { ref = var17 })
-	end, { isIsolated, frameProps, var17 }), p3.children)
+		return cryoModule.Dictionary.join(t, var8, { ref = var6 })
+	end, { isIsolated, frameProps, var6 }), p1.children)
 end

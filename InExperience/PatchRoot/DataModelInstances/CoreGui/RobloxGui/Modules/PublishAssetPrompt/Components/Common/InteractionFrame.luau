@@ -5,12 +5,12 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local roactModule = require(corePackagesService.Packages.Roact)
 local tModule = require(corePackagesService.Packages.t)
 
-local function _(p0)
-	local var7 = p0.UserInputType == Enum.UserInputType.Touch
-	local var8 = p0.UserInputType == Enum.UserInputType.MouseButton1
-	local var9 = p0.UserInputType == Enum.UserInputType.MouseButton2
+local function _(p1)
+	local var1 = p1.UserInputType == Enum.UserInputType.Touch
+	local var2 = p1.UserInputType == Enum.UserInputType.MouseButton1
+	local var3 = p1.UserInputType == Enum.UserInputType.MouseButton2
 	
-	return var7, var8 or var9, var8, var9
+	return var1, var2 or var3, var2, var3
 end
 
 local interactionFrame = roactModule.PureComponent:extend("InteractionFrame")
@@ -36,217 +36,217 @@ function interactionFrame.disconnectEvents(p1)
 	p1.renderSteppedConnection = nil
 end
 
-function interactionFrame.getActiveInput(p2, p3)
-	local var10 = p3.UserInputType == Enum.UserInputType.Touch
-	local var11 = p3.UserInputType == Enum.UserInputType.MouseMovement or (p3.UserInputType == Enum.UserInputType.MouseButton1 or p3.UserInputType == Enum.UserInputType.MouseButton2)
+function interactionFrame.getActiveInput(p1, p2)
+	local var1 = p2.UserInputType == Enum.UserInputType.Touch
+	local var2 = p2.UserInputType == Enum.UserInputType.MouseMovement or (p2.UserInputType == Enum.UserInputType.MouseButton1 or p2.UserInputType == Enum.UserInputType.MouseButton2)
 	
-	if not var11 and not var10 then return end
-	local var12 = nil
+	if not var2 and not var1 then return end
+	local var3 = nil
 	
-	if var11 then
-		var12 = p2.activeMouseInput
+	if var2 then
+		var3 = p1.activeMouseInput
 		
-		return var12
-	elseif var10 then
-		var12 = p2.activeTouchInputs[p3]
+		return var3
+	elseif var1 then
+		var3 = p1.activeTouchInputs[p2]
 	end
-	return var12
+	return var3
 end
 
-function interactionFrame.removeActivePointerInput(p4, p5, p6)
+function interactionFrame.removeActivePointerInput(p1, p2, p3)
 	-- upvalues: userInputService (ref)
-	if p6 then
+	if p3 then
 		if not userInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not userInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then return end
-		p4.activeMouseInput = nil
+		p1.activeMouseInput = nil
 	else
-		p4.activeTouchInputs[p5] = nil
-		p4.numActiveTouchInputs -= 1
+		p1.activeTouchInputs[p2] = nil
+		p1.numActiveTouchInputs -= 1
 	end
-	p4.numActiveInputs -= 1
+	p1.numActiveInputs -= 1
 	
-	if p4.numActiveInputs == 0 then
-		p4:disconnectEvents()
+	if p1.numActiveInputs == 0 then
+		p1:disconnectEvents()
 	end
 end
 
-function interactionFrame.handleDoubleTap(p7, p8, p9)
-	if p7.lastPrimaryPointerInputBeganPosition then
-		if p7.props.doubleTap and (p7.lastPrimaryPointerInputBeganPosition - p8.Position).Magnitude < 30 and p9 - p7.lastPrimaryPointerInputBeganTime < 0.25 then
-			p7.props.doubleTap()
+function interactionFrame.handleDoubleTap(p1, p2, p3)
+	if p1.lastPrimaryPointerInputBeganPosition then
+		if p1.props.doubleTap and (p1.lastPrimaryPointerInputBeganPosition - p2.Position).Magnitude < 30 and p3 - p1.lastPrimaryPointerInputBeganTime < 0.25 then
+			p1.props.doubleTap()
 		end
 	end
-	p7.lastPrimaryPointerInputBeganPosition = p8.Position
-	p7.lastPrimaryPointerInputBeganTime = p9
+	p1.lastPrimaryPointerInputBeganPosition = p2.Position
+	p1.lastPrimaryPointerInputBeganTime = p3
 end
 
-function interactionFrame.addActivePointerInput(p10, p11, p12, p13)
+function interactionFrame.addActivePointerInput(p1, p2, p3, p4)
 	-- upvalues: cryoModule (ref), userInputService (ref), runService (ref)
-	if p10:getActiveInput(p11) then return end
-	local t = { lastPosition = p11.Position, lastTime = p13 }
+	if p1:getActiveInput(p2) then return end
+	local t = { lastPosition = p2.Position, lastTime = p4 }
 	
-	if p12 then
-		p10.activeMouseInput = t
+	if p3 then
+		p1.activeMouseInput = t
 	else
-		p10.activeTouchInputs[p11] = cryoModule.Dictionary.join(t, {
+		p1.activeTouchInputs[p2] = cryoModule.Dictionary.join(t, {
 			lastDeltaTime = 0,
 			lastDeltaPosition = Vector3.new(0, 0, 0)
 		})
-		p10.numActiveTouchInputs += 1
+		p1.numActiveTouchInputs += 1
 	end
-	p10.numActiveInputs += 1
+	p1.numActiveInputs += 1
 	
-	if p10.numActiveInputs == 1 then
-		p10.props.setAngularVelocityByPixels(0)
-		p10.inputChangedConnection = userInputService.InputChanged:Connect(p10.onInputChanged)
-		p10.inputEndedConnection = userInputService.InputEnded:Connect(p10.onInputEnded)
-		p10.renderSteppedConnection = runService.RenderStepped:Connect(p10.setInputNotChanged)
+	if p1.numActiveInputs == 1 then
+		p1.props.setAngularVelocityByPixels(0)
+		p1.inputChangedConnection = userInputService.InputChanged:Connect(p1.onInputChanged)
+		p1.inputEndedConnection = userInputService.InputEnded:Connect(p1.onInputEnded)
+		p1.renderSteppedConnection = runService.RenderStepped:Connect(p1.setInputNotChanged)
 	end
 end
 
-function interactionFrame.init(p14)
+function interactionFrame.init(p1)
 	-- upvalues: userInputService (ref)
-	p14.inputChangedConnection = nil
-	p14.inputEndedConnection = nil
-	p14.lastPinchDistance = 1
-	p14.lastPanTime = 0
-	p14.lastPrimaryPointerInputBeganTime = 0
-	p14.lastPrimaryPointerInputBeganPosition = nil
-	p14.activeTouchInputs = {}
-	p14.numActiveTouchInputs = 0
-	p14.activeMouseInput = nil
-	p14.numActiveInputs = 0
+	p1.inputChangedConnection = nil
+	p1.inputEndedConnection = nil
+	p1.lastPinchDistance = 1
+	p1.lastPanTime = 0
+	p1.lastPrimaryPointerInputBeganTime = 0
+	p1.lastPrimaryPointerInputBeganPosition = nil
+	p1.activeTouchInputs = {}
+	p1.numActiveTouchInputs = 0
+	p1.activeMouseInput = nil
+	p1.numActiveInputs = 0
 	
-	function p14.handleScroll(_, p15)
-		-- upvalues: p14 (ref), userInputService (copy)
-		if p15.UserInputType == Enum.UserInputType.MouseWheel then
-			p14.props.zoomToPoint(-p15.Position.Z, userInputService:GetMouseLocation())
+	function p14.handleScroll(_, p2)
+		-- upvalues: p1 (ref), userInputService (copy)
+		if p2.UserInputType == Enum.UserInputType.MouseWheel then
+			p1.props.zoomToPoint(-p2.Position.Z, userInputService:GetMouseLocation())
 		end
 	end
 	
 	function p14.setInputNotChanged(_)
-		-- upvalues: p14 (ref)
-		for i, v in p14.activeTouchInputs do
+		-- upvalues: p1 (ref)
+		for i, v in p1.activeTouchInputs do
 			v.changedThisFrame = false
 		end
 	end
 	
-	function p14.onInputChanged(p16, _)
-		-- upvalues: p14 (ref), userInputService (copy)
-		local var14 = p16.UserInputType == Enum.UserInputType.MouseMovement
-		local var15 = p16.UserInputType == Enum.UserInputType.Touch
+	function p14.onInputChanged(p2, _)
+		-- upvalues: p1 (ref), userInputService (copy)
+		local var1 = p2.UserInputType == Enum.UserInputType.MouseMovement
+		local var2 = p2.UserInputType == Enum.UserInputType.Touch
 		
-		if not var14 and not var15 then return end
-		local var16 = p14:getActiveInput(p16)
+		if not var1 and not var2 then return end
+		local var3 = p1:getActiveInput(p2)
 		
-		if not var16 then return end
+		if not var3 then return end
 		local currentTime = tick()
-		local var18 = currentTime - var16.lastTime
-		local var19 = p16.Position - var16.lastPosition
-		local var20 = Vector2.new(var19.X, var19.Y) * Vector2.new(-1, 1)
+		local var4 = currentTime - var3.lastTime
+		local var5 = p2.Position - var3.lastPosition
+		local var6 = Vector2.new(var5.X, var5.Y) * Vector2.new(-1, 1)
 		local mouseButton2 = userInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)
 		
-		if (var14 and userInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or var15 and p14.numActiveTouchInputs == 1) and currentTime - p14.lastPanTime > 0.1 then
-			p14.props.rotateByPixels(-var20)
+		if (var1 and userInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or var2 and p1.numActiveTouchInputs == 1) and currentTime - p1.lastPanTime > 0.1 then
+			p1.props.rotateByPixels(-var6)
 		end
-		if var14 and mouseButton2 or var15 and p14.numActiveTouchInputs == 2 then
-			p14.props.panByPixels(var20 / p14.numActiveInputs)
-			p14.lastPanTime = currentTime
+		if var1 and mouseButton2 or var2 and p1.numActiveTouchInputs == 2 then
+			p1.props.panByPixels(var6 / p1.numActiveInputs)
+			p1.lastPanTime = currentTime
 		end
-		var16.lastPosition = p16.Position
-		var16.lastTime = currentTime
+		var3.lastPosition = p2.Position
+		var3.lastTime = currentTime
 		
-		if var15 then
-			if var16.changedThisFrame then
-				var16.lastDeltaPosition = var19 + var16.lastDeltaPosition
-				var16.lastDeltaTime = var18 + var16.lastDeltaTime
+		if var2 then
+			if var3.changedThisFrame then
+				var3.lastDeltaPosition = var5 + var3.lastDeltaPosition
+				var3.lastDeltaTime = var4 + var3.lastDeltaTime
 				
 				return
 			end
-			var16.lastDeltaPosition = var19
-			var16.lastDeltaTime = var18
-			var16.changedThisFrame = true
+			var3.lastDeltaPosition = var5
+			var3.lastDeltaTime = var4
+			var3.changedThisFrame = true
 		end
 	end
 	
-	function p14.onInputEnded(p17, _)
-		-- upvalues: p14 (ref)
-		local var22 = p17.UserInputType == Enum.UserInputType.Touch
-		local var23 = p17.UserInputType == Enum.UserInputType.MouseButton1
-		local var23_1 = var23 or p17.UserInputType == Enum.UserInputType.MouseButton2
+	function p14.onInputEnded(p2, _)
+		-- upvalues: p1 (ref)
+		local var1 = p2.UserInputType == Enum.UserInputType.Touch
+		local var2 = p2.UserInputType == Enum.UserInputType.MouseButton1
+		local var3 = var2 or p2.UserInputType == Enum.UserInputType.MouseButton2
 		
-		if not var22 and not var23_1 then return end
-		local var25 = p14:getActiveInput(p17)
+		if not var1 and not var3 then return end
+		local var4 = p1:getActiveInput(p2)
 		
-		if not var25 then return end
+		if not var4 then return end
 		local currentTime = tick()
 		
-		if (var22 and var25.changedThisFrame or var23) and (p14.numActiveInputs == 1 and currentTime - p14.lastPanTime > 0.1) then
-			local var27, var28
+		if (var1 and var4.changedThisFrame or var2) and (p1.numActiveInputs == 1 and currentTime - p1.lastPanTime > 0.1) then
+			local var5, var6
 			local _ = nil
 			local _ = nil
 			
-			if var23 then
-				var27 = p17.Position - var25.lastPosition
-				var28 = currentTime - var25.lastTime
+			if var2 then
+				var5 = p2.Position - var4.lastPosition
+				var6 = currentTime - var4.lastTime
 			else
-				var27 = var25.lastDeltaPosition
-				var28 = var25.lastDeltaTime
+				var5 = var4.lastDeltaPosition
+				var6 = var4.lastDeltaTime
 			end
-			p14.props.setAngularVelocityByPixels(var27.X / var28)
+			p1.props.setAngularVelocityByPixels(var5.X / var6)
 		end
-		p14:removeActivePointerInput(p17, var23_1)
+		p1:removeActivePointerInput(p2, var3)
 	end
 	
-	function p14.onInputBegan(p18, p19)
-		-- upvalues: p14 (ref)
-		p14.handleScroll(p18, p19)
-		local var29 = p19.UserInputType == Enum.UserInputType.Touch
-		local var30 = p19.UserInputType == Enum.UserInputType.MouseButton1
-		local var30_1 = var30 or p19.UserInputType == Enum.UserInputType.MouseButton2
+	function p14.onInputBegan(p2, p3)
+		-- upvalues: p1 (ref)
+		p1.handleScroll(p2, p3)
+		local var1 = p3.UserInputType == Enum.UserInputType.Touch
+		local var2 = p3.UserInputType == Enum.UserInputType.MouseButton1
+		local var3 = var2 or p3.UserInputType == Enum.UserInputType.MouseButton2
 		
-		if not var29 and not var30_1 then return end
+		if not var1 and not var3 then return end
 		local currentTime = tick()
 		
-		if var29 or var30 then
-			p14:handleDoubleTap(p19, currentTime)
+		if var1 or var2 then
+			p1:handleDoubleTap(p3, currentTime)
 		end
-		p14:addActivePointerInput(p19, var30_1, currentTime)
+		p1:addActivePointerInput(p3, var3, currentTime)
 	end
 	
-	function p14.onTouchPinch(_, p20, _, _, p21)
-		-- upvalues: p14 (ref)
-		if p20[2] == nil then return end
-		if p21 == Enum.UserInputState.Begin then
-			p14.lastPinchDistance = (p20[1] - p20[2]).Magnitude
+	function p14.onTouchPinch(_, p2, _, _, p3)
+		-- upvalues: p1 (ref)
+		if p2[2] == nil then return end
+		if p3 == Enum.UserInputState.Begin then
+			p1.lastPinchDistance = (p2[1] - p2[2]).Magnitude
 			
 			return
 		end
-		local magnitude = (p20[1] - p20[2]).Magnitude
-		local var33 = magnitude - p14.lastPinchDistance
-		p14.lastPinchDistance = magnitude
-		p14.props.zoomToPoint(var33 * -0.05, (p20[1] + p20[2]) / 2)
+		local magnitude = (p2[1] - p2[2]).Magnitude
+		local var1 = magnitude - p1.lastPinchDistance
+		p1.lastPinchDistance = magnitude
+		p1.props.zoomToPoint(var1 * -0.05, (p2[1] + p2[2]) / 2)
 	end
 end
 
-function interactionFrame.willUnmount(p22)
-	if p22.inputChangedConnection then
-		p22:disconnectEvents()
+function interactionFrame.willUnmount(p2)
+	if p2.inputChangedConnection then
+		p2:disconnectEvents()
 	end
 end
 
-function interactionFrame.render(p23)
+function interactionFrame.render(p2)
 	-- upvalues: roactModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = p23.props.Size or UDim2.new(1, 0, 1, 0),
-		Position = p23.props.Position,
-		ZIndex = p23.props.ZIndex,
-		Visible = p23.props.Visible,
+		Size = p2.props.Size or UDim2.new(1, 0, 1, 0),
+		Position = p2.props.Position,
+		ZIndex = p2.props.ZIndex,
+		Visible = p2.props.Visible,
 		Active = true,
-		[roactModule.Event.InputBegan] = p23.onInputBegan,
-		[roactModule.Event.InputChanged] = p23.handleScroll,
-		[roactModule.Event.TouchPinch] = p23.onTouchPinch
-	}, p23.props[roactModule.Children])
+		[roactModule.Event.InputBegan] = p2.onInputBegan,
+		[roactModule.Event.InputChanged] = p2.handleScroll,
+		[roactModule.Event.TouchPinch] = p2.onTouchPinch
+	}, p2.props[roactModule.Children])
 end
 
 return interactionFrame

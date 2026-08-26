@@ -9,9 +9,9 @@ local radius = foundationModule.Enums.Radius
 local skeleton = foundationModule.Skeleton
 local view = foundationModule.View
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), overlaidControlsProvider (ref), layout (ref), skeleton (ref), radius (ref), view (ref)
-	return reactModule.createElement(overlaidControlsProvider, { value = p0.shouldUseOverlaidControls }, {
+	return reactModule.createElement(overlaidControlsProvider, { value = p1.shouldUseOverlaidControls }, {
 		Layout = reactModule.createElement(layout, {
 			body = reactModule.createElement(reactModule.Fragment, nil, {
 				Title = reactModule.createElement(skeleton, {

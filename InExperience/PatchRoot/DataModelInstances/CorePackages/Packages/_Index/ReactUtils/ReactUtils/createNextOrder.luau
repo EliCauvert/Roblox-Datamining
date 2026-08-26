@@ -1,10 +1,10 @@
 ﻿return function()
-	local var0 = 0
+	local var1 = 0
 	
 	return function()
-		-- upvalues: var0 (write)
-		var0 += 1
+		-- upvalues: var1 (write)
+		var1 += 1
 		
-		return var0
+		return var1
 	end
 end

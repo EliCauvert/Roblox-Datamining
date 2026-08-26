@@ -9,24 +9,24 @@ return {
 	variant = "secondary",
 	fieldLabel = "AttachScreenshot",
 	componentName = "OptionalScreenshot",
-	getIsVisible = function(p0)
+	getIsVisible = function(p1)
 		-- upvalues: tnSIXPWrapperModule (ref), constantsModule (ref)
-		return tnSIXPWrapperModule.getReportAnythingAvatarEnabled() and (if p0.methodOfAbuse ~= constantsModule.AbuseMethods.Other then p0.methodOfAbuse == constantsModule.AbuseMethods.Avatar else true)
+		return tnSIXPWrapperModule.getReportAnythingAvatarEnabled() and (if p1.methodOfAbuse ~= constantsModule.AbuseMethods.Other then p1.methodOfAbuse == constantsModule.AbuseMethods.Avatar else true)
 	end,
 	getIsDisabled = function(_, p1)
 		return p1.reportAnythingState.attachCompleted
 	end,
-	getIconSrc = function(p2)
-		return if p2.reportAnythingState.attachCompleted then "icons/actions/accept" else "icons/controls/screenshot"
+	getIconSrc = function(p1)
+		return if p1.reportAnythingState.attachCompleted then "icons/actions/accept" else "icons/controls/screenshot"
 	end,
-	getButtonLabel = function(p3)
-		return if p3.reportAnythingState.attachCompleted then "SceneCaptured" else "CaptureScene"
+	getButtonLabel = function(p1)
+		return if p1.reportAnythingState.attachCompleted then "SceneCaptured" else "CaptureScene"
 	end,
-	onClick = function(_, _, p4)
+	onClick = function(_, _, p1)
 		-- upvalues: constantsModule (ref), annotationModalModule (ref)
-		p4.analyticsDispatch({
+		p1.analyticsDispatch({
 			type = constantsModule.AnalyticsActions.IncrementCaptureScene
 		})
-		annotationModalModule.mountAnnotationPage(constantsModule.ReportTypes.Person, p4.hideReportTab, p4.reportAnythingAnalytics, p4.reportAnythingState, p4.reportAnythingDispatch)
+		annotationModalModule.mountAnnotationPage(constantsModule.ReportTypes.Person, p1.hideReportTab, p1.reportAnythingAnalytics, p1.reportAnythingState, p1.reportAnythingDispatch)
 	end
 }

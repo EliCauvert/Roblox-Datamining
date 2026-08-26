@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Types.CreationFlowTypes)
 
-return function(p0)
+return function(p1)
 	local t = {}
 	local t_1 = {}
 	
@@ -11,22 +11,22 @@ return function(p0)
 		for i, v in t do
 			table.insert(t_1, v)
 		end
-		table.sort(t_1, function(p1, p2)
-			return (p1.cta.order or 0) < (p2.cta.order or 0)
+		table.sort(t_1, function(p2, p3)
+			return (p2.cta.order or 0) < (p3.cta.order or 0)
 		end)
 	end
 	
-	local function register(p3)
+	local function register(p2)
 		-- upvalues: t (ref), rebuildOrdered (ref)
-		for i, v in p3 do
+		for i, v in p2 do
 			t[v.kind] = v
 		end
 		rebuildOrdered()
 	end
 	
-	local function get(p4)
+	local function get(p3)
 		-- upvalues: t (ref)
-		return t[p4]
+		return t[p3]
 	end
 	
 	local function getAll()
@@ -34,8 +34,8 @@ return function(p0)
 		return t_1
 	end
 	
-	if p0 ~= nil then
-		for i, v in p0 do
+	if p1 ~= nil then
+		for i, v in p1 do
 			t[v.kind] = v
 		end
 		rebuildOrdered()

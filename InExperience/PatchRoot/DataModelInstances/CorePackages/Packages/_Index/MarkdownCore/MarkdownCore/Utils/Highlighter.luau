@@ -4,27 +4,27 @@ local themeModule = require(script.Theme)
 local defaultTokenColorsModule = require(script.Theme.defaultTokenColors)
 local t = { defaultLexer = require(script.Lexer) }
 
-function t.highlight(p0, p1)
+function t.highlight(p1, p2)
 	-- upvalues: themeModule (ref), defaultTokenColorsModule (ref), utilityModule (ref), t (ref)
-	if p1 then
-		themeModule.setColors(p1)
+	if p2 then
+		themeModule.setColors(p2)
 	else
 		themeModule.setColors(defaultTokenColorsModule)
 	end
-	local var4 = utilityModule.convertTabsToSpaces(utilityModule.removeControlChars(p0))
+	local var1 = utilityModule.convertTabsToSpaces(utilityModule.removeControlChars(p1))
 	local defaultLexer = t.defaultLexer
 	local iden = themeModule.getColor("iden")
-	local var6 = ""
+	local var2 = ""
 	
-	for i, v in defaultLexer.scan(var4) do
-		var6 ..= themeModule.getColoredRichText(themeModule.getColor(i) or iden, utilityModule.sanitizeRichText(v))
+	for i, v in defaultLexer.scan(var1) do
+		var2 ..= themeModule.getColoredRichText(themeModule.getColor(i) or iden, utilityModule.sanitizeRichText(v))
 	end
-	return var6
+	return var2
 end
 
-function t.getTokenColor(p2)
+function t.getTokenColor(p3)
 	-- upvalues: themeModule (ref)
-	return themeModule.getColor(p2)
+	return themeModule.getColor(p3)
 end
 
 return t

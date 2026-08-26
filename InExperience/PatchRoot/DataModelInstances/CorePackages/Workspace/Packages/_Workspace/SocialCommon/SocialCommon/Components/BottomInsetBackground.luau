@@ -13,8 +13,8 @@ return function()
 		BackgroundColor3 = var1.Theme.BackgroundDefault.Color,
 		BackgroundTransparency = var1.Theme.BackgroundDefault.Transparency,
 		Position = UDim2.new(0, 0, 1, 0),
-		Size = UDim2.new(1, 0, 0, useSelector(function(p0)
-			return if p0.GlobalGuiInset then p0.GlobalGuiInset.bottom else 0
+		Size = UDim2.new(1, 0, 0, useSelector(function(p1)
+			return if p1.GlobalGuiInset then p1.GlobalGuiInset.bottom else 0
 		end))
 	})
 end

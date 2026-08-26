@@ -4,9 +4,9 @@ local IAFlyoutDailyTooltipMaxShownCount = game:DefineFastInt("IAFlyoutDailyToolt
 local t = {}
 t.__index = t
 
-local function _(p0, p1)
-	local dateString = os.date("*t", p0)
-	local dateString_1 = os.date("*t", p1)
+local function _(p1, p2)
+	local dateString = os.date("*t", p1)
+	local dateString_1 = os.date("*t", p2)
 	
 	return dateString.year == dateString_1.year and (dateString.month == dateString_1.month and dateString.day == dateString_1.day)
 end
@@ -23,12 +23,12 @@ local function readStorage()
 			return 0, 0, 0
 		elseif string.find(status, ",") then
 			local match, match_1, match_2 = string.match(status, "(%d+),(%d+),(%d+)")
-			local var10 = tonumber(match) or 0
-			local var11 = tonumber(match_1) or 0
-			local var12 = tonumber(match_2)
+			local var1 = tonumber(match) or 0
+			local var2 = tonumber(match_1) or 0
+			local var3 = tonumber(match_2)
 			
-			if var12 then
-				return var10, var11, var12
+			if var3 then
+				return var1, var2, var3
 			end
 		end
 	end
@@ -47,8 +47,8 @@ function t.new()
 	}, t)
 end
 
-function t:setTimeProvider(p2)
-	self._getTime = p2
+function t:setTimeProvider(p1)
+	self._getTime = p1
 end
 
 function t:flyoutSidePanelOpened()
@@ -64,10 +64,10 @@ function t:getTooltipCount()
 	return self._totalCount
 end
 
-function t:tooltipSeenTimeHelper(p3)
+function t:tooltipSeenTimeHelper(p1)
 	-- upvalues: IAFlyoutDailyTooltipMaxShownCount (ref), IAFlyoutTooltipMaxShownCount (ref)
 	local dateString = os.date("*t", self:_getTime())
-	local dateString_1 = os.date("*t", p3)
+	local dateString_1 = os.date("*t", p1)
 	
 	if not (dateString.year == dateString_1.year and (dateString.month == dateString_1.month and dateString.day == dateString_1.day)) then
 		self._dailyCount = 0
@@ -90,13 +90,13 @@ function t:isTooltipActive()
 	end
 	self._hasChecked = true
 	local _ = 0
-	local var15, var16, var17 = readStorage()
-	self._dailyCount = var16
-	self._totalCount = var17
+	local var1, var2, var3 = readStorage()
+	self._dailyCount = var2
+	self._totalCount = var3
 	
 	if IAFlyoutTooltipMaxShownCount <= self._dailyCount or IAFlyoutTooltipMaxShownCount <= self._totalCount then
 		return false
-	elseif self:tooltipSeenTimeHelper(var15) then
+	elseif self:tooltipSeenTimeHelper(var1) then
 		self:updateTooltipAppStorageValue()
 		
 		return true

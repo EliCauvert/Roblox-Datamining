@@ -9,58 +9,58 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 local viewModule = require(foundation.Components.View)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), reactRobloxModule (ref)
-	local var9 = useTokensModule()
-	local var10 = reactModule.useContext(sheetContextModule)
-	local sheetHeightAvailable = var10.sheetHeightAvailable
-	local actionsHeight = var10.actionsHeight
-	local setActionsHeight = var10.setActionsHeight
-	local hasActionsDivider = var10.hasActionsDivider
-	local safeAreaPadding = var10.safeAreaPadding
-	local bottomPadding = var10.bottomPadding
-	local sheetType = var10.sheetType
-	local testId = var10.testId
+	local var1 = useTokensModule()
+	local var2 = reactModule.useContext(sheetContextModule)
+	local sheetHeightAvailable = var2.sheetHeightAvailable
+	local actionsHeight = var2.actionsHeight
+	local setActionsHeight = var2.setActionsHeight
+	local hasActionsDivider = var2.hasActionsDivider
+	local safeAreaPadding = var2.safeAreaPadding
+	local bottomPadding = var2.bottomPadding
+	local sheetType = var2.sheetType
+	local testId = var2.testId
 	assert(sheetHeightAvailable and (actionsHeight and (setActionsHeight and (hasActionsDivider and (safeAreaPadding and (bottomPadding and testId))))), "SheetActions must be used within a Sheet")
-	local innerSurface = var10.innerSurface
-	local var11 = sheetType == sheetTypeModule.Bottom
-	local var12 = reactModule.createElement(viewModule, {
+	local innerSurface = var2.innerSurface
+	local var3 = sheetType == sheetTypeModule.Bottom
+	local var4 = reactModule.createElement(viewModule, {
 		ZIndex = 1,
 		LayoutOrder = 3,
 		tag = {
 			["row gap-small size-full-0 auto-y"] = true,
-			["bg-surface-100"] = var11
+			["bg-surface-100"] = var3
 		},
 		padding = {
-			top = UDim.new(0, var9.Margin.Small),
-			left = UDim.new(0, var9.Margin.Small),
-			right = UDim.new(0, var9.Margin.Small),
-			bottom = UDim.new(0, bottomPadding + var9.Margin.Small)
+			top = UDim.new(0, var1.Margin.Small),
+			left = UDim.new(0, var1.Margin.Small),
+			right = UDim.new(0, var1.Margin.Small),
+			bottom = UDim.new(0, bottomPadding + var1.Margin.Small)
 		},
 		stroke = {
-			Color = var9.Color.Stroke.Default.Color3,
-			Transparency = var9.Color.Stroke.Default.Transparency,
-			Thickness = hasActionsDivider:map(function(p2)
-				-- upvalues: var9 (ref)
-				return if p2 then var9.Stroke.Standard else 0
+			Color = var1.Color.Stroke.Default.Color3,
+			Transparency = var1.Color.Stroke.Default.Transparency,
+			Thickness = hasActionsDivider:map(function(p3)
+				-- upvalues: var1 (ref)
+				return if p3 then var1.Stroke.Standard else 0
 			end)
 		},
-		onAbsoluteSizeChanged = if var11 then function(p3)
+		onAbsoluteSizeChanged = if var3 then function(p3)
 			-- upvalues: setActionsHeight (ref), bottomPadding (ref)
 			setActionsHeight(p3.AbsoluteSize.Y - bottomPadding)
 		end else nil,
 		testId = `{testId}--actions`,
-		Position = if var11 then reactModule.joinBindings({
+		Position = if var3 then reactModule.joinBindings({
 			sheetHeightAvailable = sheetHeightAvailable,
 			actionsHeight = actionsHeight
-		}):map(function(p4)
-			return UDim2.new(0, 0, 1, -math.min(p4.sheetHeightAvailable, p4.actionsHeight))
+		}):map(function(p3)
+			return UDim2.new(0, 0, 1, -math.min(p3.sheetHeightAvailable, p3.actionsHeight))
 		end) else nil,
-		ref = p1,
+		ref = p2,
 		onActivated = function() end,
 		selection = { Selectable = false },
 		stateLayer = { affordance = stateLayerAffordanceModule.None }
-	}, p0.children)
+	}, p1.children)
 	
-	return if var11 then innerSurface and reactRobloxModule.createPortal(var12, innerSurface) else var12
+	return if var3 then innerSurface and reactRobloxModule.createPortal(var4, innerSurface) else var4
 end))

@@ -17,9 +17,9 @@ local t_2 = {
 	[userModel.PresenceType.OFFLINE] = 0
 }
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: t (ref), t_1 (ref), presenceType (ref)
-	return if t.number(p0) then t_1[p0] else t_1[presenceType.Offline]
+	return if t.number(p1) then t_1[p1] else t_1[presenceType.Offline]
 end
 
 local _ = function(p1)
@@ -27,54 +27,54 @@ local _ = function(p1)
 	return if t.string(p1) then t_2[p1] else t_2[userModel.PresenceType.OFFLINE]
 end
 
-local var3 = function(p2, p3)
+local var1 = function(p1, p2)
 	-- upvalues: t (ref), t_1 (ref), presenceType (ref), t_2 (ref), userModel (ref)
-	local var4 = 0
-	local var5 = 0
+	local var2 = 0
+	local var3 = 0
 	
-	if p2.userPresenceType and p3.userPresenceType then
-		local var6 = p2.userPresenceType.rawValue()
-		var4 = if t.number(var6) then t_1[var6] else t_1[presenceType.Offline]
-		local var7 = p3.userPresenceType.rawValue()
+	if p1.userPresenceType and p2.userPresenceType then
+		local var4 = p1.userPresenceType.rawValue()
+		var2 = if t.number(var4) then t_1[var4] else t_1[presenceType.Offline]
+		local var5 = p2.userPresenceType.rawValue()
 		
-		if t.number(var7) then
-			var5 = t_1[var7]
+		if t.number(var5) then
+			var3 = t_1[var5]
 			
-			if var5 then
-				return var4, var5
+			if var3 then
+				return var2, var3
 			else
-				var5 = t_1[presenceType.Offline]
+				var3 = t_1[presenceType.Offline]
 				
-				return var4, var5
+				return var2, var3
 			end
 		end
-	elseif p2.presence and p3.presence then
-		local presence = p2.presence
-		var4 = if t.string(presence) then t_2[presence] else t_2[userModel.PresenceType.OFFLINE]
-		local presence_1 = p3.presence
-		var5 = if t.string(presence_1) then t_2[presence_1] else t_2[userModel.PresenceType.OFFLINE]
+	elseif p1.presence and p2.presence then
+		local presence = p1.presence
+		var2 = if t.string(presence) then t_2[presence] else t_2[userModel.PresenceType.OFFLINE]
+		local presence_1 = p2.presence
+		var3 = if t.string(presence_1) then t_2[presence_1] else t_2[userModel.PresenceType.OFFLINE]
 	end
 end
 
-local _ = function(p4, p5)
-	return p4.username or (p4.name or ""), p5.username or (p5.name or "")
+local _ = function(p1, p2)
+	return p1.username or (p1.name or ""), p2.username or (p2.name or "")
 end
 
-return function(p6, p7)
-	-- upvalues: var3 (ref), t (ref)
-	local var8, var9 = var3(p6, p7)
+return function(p1, p2)
+	-- upvalues: var1 (ref), t (ref)
+	local var2, var3 = var1(p1, p2)
 	
-	if var8 ~= var9 then
-		return var9 < var8
+	if var2 ~= var3 then
+		return var3 < var2
 	end
-	local var10 = if t.number(p6.friendRank) then p6.friendRank else 0
-	local var11 = if t.number(p7.friendRank) then p7.friendRank else 0
+	local var4 = if t.number(p1.friendRank) then p1.friendRank else 0
+	local var5 = if t.number(p2.friendRank) then p2.friendRank else 0
 	
-	if var10 ~= var11 then
-		return var10 < var11
+	if var4 ~= var5 then
+		return var4 < var5
 	end
-	local var12 = if t.string(p6.displayName) then p6.displayName else ""
-	local var13 = if t.string(p7.displayName) then p7.displayName else ""
+	local var6 = if t.string(p1.displayName) then p1.displayName else ""
+	local var7 = if t.string(p2.displayName) then p2.displayName else ""
 	
-	return if string.lower(var12) == string.lower(var13) then string.lower(p6.username or (p6.name or "")) < string.lower(p7.username or (p7.name or "")) else string.lower(var12) < string.lower(var13)
+	return if string.lower(var6) == string.lower(var7) then string.lower(p1.username or (p1.name or "")) < string.lower(p2.username or (p2.name or "")) else string.lower(var6) < string.lower(var7)
 end

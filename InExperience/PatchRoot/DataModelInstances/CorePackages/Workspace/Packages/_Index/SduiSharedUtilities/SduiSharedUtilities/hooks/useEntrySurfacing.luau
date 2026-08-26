@@ -4,12 +4,12 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local getSduiApiStoreModule = require(sduiSharedUtilities.getSduiApiStore)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), getSduiApiStoreModule (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p3)
-		-- upvalues: p1 (ref), p0 (ref), getSduiApiStoreModule (copy), p2 (ref)
-		local entrySurfacing = getSduiApiStoreModule().getEntrySurfacing(p0, if p1 then `{p0}_{p1}` else nil, p3)
+	return signalsReactModule.useSignalState(reactModule.useCallback(function(p4)
+		-- upvalues: p2 (ref), p1 (ref), getSduiApiStoreModule (copy), p3 (ref)
+		local entrySurfacing = getSduiApiStoreModule().getEntrySurfacing(p1, if p2 then `{p1}_{p2}` else nil, p4)
 		
-		return entrySurfacing and entrySurfacing[p2]
-	end, { p0, p1, p2 }))
+		return entrySurfacing and entrySurfacing[p3]
+	end, { p1, p2, p3 }))
 end

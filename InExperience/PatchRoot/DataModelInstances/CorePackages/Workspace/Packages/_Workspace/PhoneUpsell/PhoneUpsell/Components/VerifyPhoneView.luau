@@ -11,9 +11,9 @@ local getPartialPageModalMiddleContentWidth = UIBloxModule.App.Dialog.Modal.getP
 local linkButton = UIBloxModule.App.Button.LinkButton
 local getFFlagDisableVerifyPhoneViewOnSuccessModule = require(phoneUpsell.Flags.GetFFlagDisableVerifyPhoneViewOnSuccess)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), buttonType (ref), getFFlagDisableVerifyPhoneViewOnSuccessModule (ref), getPartialPageModalMiddleContentWidth (ref), partialPageModal (ref), textInputBoxWithBorder (ref), linkButton (ref)
-	local var4 = useStyle()
+	local var1 = useStyle()
 	local t = {
 		titleKey = "Feature.VerificationUpsell.Heading.VerifyYourPhone",
 		verificationCodeKey = "Feature.VerificationUpsell.Heading.VerificationCode",
@@ -24,26 +24,26 @@ return function(p0)
 		changePhoneNumberKey = "Feature.VerificationUpsell.Action.ChangePhoneNumber"
 	}
 	
-	if p0.extraButtonKey and p0.extraButtonKey ~= "" then
-		t.extraButtonKey = p0.extraButtonKey
+	if p1.extraButtonKey and p1.extraButtonKey ~= "" then
+		t.extraButtonKey = p1.extraButtonKey
 	end
-	local var6 = useLocalization(t)
-	local var7, var8 = reactModule.useState(false)
-	local var9, var10 = reactModule.useState(0)
+	local var2 = useLocalization(t)
+	local var3, var4 = reactModule.useState(false)
+	local var5, var6 = reactModule.useState(0)
 	
-	local function _(p1)
-		-- upvalues: p0 (ref)
-		return p1:gsub("{phoneNumber}", "+" .. p0.prefix .. p0.phoneNumber)
+	local function _(p2)
+		-- upvalues: p1 (ref)
+		return p2:gsub("{phoneNumber}", "+" .. p0.prefix .. p0.phoneNumber)
 	end
 	
 	return reactModule.createElement(partialPageModal, {
-		title = var6.titleKey,
-		screenSize = p0.screenSize,
+		title = var2.titleKey,
+		screenSize = p1.screenSize,
 		buttonStackProps = (function(p2, p3, p4, p5, p6, p7)
-			-- upvalues: var8 (ref), var10 (ref), var7 (ref), var9 (ref), buttonType (copy), getFFlagDisableVerifyPhoneViewOnSuccessModule (copy), p0 (ref)
+			-- upvalues: var4 (ref), var6 (ref), var3 (ref), var5 (ref), buttonType (copy), getFFlagDisableVerifyPhoneViewOnSuccessModule (copy), p1 (ref)
 			local function _()
-				-- upvalues: var7 (copy), p3 (ref), var9 (copy), p2 (ref)
-				return if var7 then p3 .. " (" .. var9 .. ")" else p2
+				-- upvalues: var3 (copy), p3 (ref), var5 (copy), p2 (ref)
+				return if var3 then p3 .. " (" .. var9 .. ")" else p2
 			end
 			
 			local list = {
@@ -51,30 +51,30 @@ return function(p0)
 					buttonType = buttonType.PrimarySystem,
 					props = {
 						onActivated = function()
-							-- upvalues: p5 (ref), var8 (copy), var10 (copy), p4 (ref)
+							-- upvalues: p5 (ref), var4 (copy), var6 (copy), p4 (ref)
 							p5()
-							var8(true)
-							var10(p4)
+							var4(true)
+							var6(p4)
 							local currentTime = tick()
 							
 							local function countDown()
-								-- upvalues: currentTime (ref), p4 (copy), var10 (copy), countDown (ref), var8 (copy)
-								local var14 = p4 - (tick() - currentTime)
+								-- upvalues: currentTime (ref), p4 (copy), var6 (copy), countDown (ref), var4 (copy)
+								local var7 = p4 - (tick() - currentTime)
 								
-								if var14 > 0 then
-									var10(math.round(var14))
+								if var7 > 0 then
+									var6(math.round(var7))
 									task.delay(1, countDown)
 									
 									return
 								end
-								var10(0)
-								var8(false)
+								var6(0)
+								var4(false)
 							end
 							
 							countDown()
 						end,
-						text = if var7 then p3 .. " (" .. var9 .. ")" else p2,
-						isDisabled = var7 or getFFlagDisableVerifyPhoneViewOnSuccessModule() and p0.isDisabled
+						text = if var3 then p3 .. " (" .. var9 .. ")" else p2,
+						isDisabled = var3 or getFFlagDisableVerifyPhoneViewOnSuccessModule() and p1.isDisabled
 					}
 				}
 			}
@@ -85,7 +85,7 @@ return function(p0)
 					props = {
 						onActivated = p7,
 						text = p6,
-						isDisabled = getFFlagDisableVerifyPhoneViewOnSuccessModule() and p0.isDisabled
+						isDisabled = getFFlagDisableVerifyPhoneViewOnSuccessModule() and p1.isDisabled
 					}
 				})
 			end
@@ -94,10 +94,10 @@ return function(p0)
 				forcedFillDirection = Enum.FillDirection.Vertical,
 				buttons = list
 			}
-		end)(var6.buttonKey, var6.buttonDisabledKey, 10, p0.onResendPhoneCode, var6.extraButtonKey, p0.onExtraButtonClick),
-		onCloseClicked = p0.onClose,
-		position = p0.isKeyboardShowing and UDim2.new(0.5, 0, 1, -p0.keyboardHeight) or nil,
-		anchorPoint = p0.isKeyboardShowing and Vector2.new(0.5, 1) or nil
+		end)(var2.buttonKey, var2.buttonDisabledKey, 10, p1.onResendPhoneCode, var2.extraButtonKey, p1.onExtraButtonClick),
+		onCloseClicked = p1.onClose,
+		position = p1.isKeyboardShowing and UDim2.new(0.5, 0, 1, -p1.keyboardHeight) or nil,
+		anchorPoint = p1.isKeyboardShowing and Vector2.new(0.5, 1) or nil
 	}, {
 		Middle = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -117,34 +117,34 @@ return function(p0)
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				TextWrapped = true,
-				Text = var6.descriptionKey:gsub("{phoneNumber}", "+" .. p0.prefix .. p0.phoneNumber),
-				TextSize = var4.Font.BaseSize,
-				TextColor3 = var4.Theme.TextDefault.Color,
-				TextTransparency = var4.Theme.TextDefault.Transparency,
-				Font = var4.Font.Body.Font,
+				Text = var2.descriptionKey:gsub("{phoneNumber}", "+" .. p0.prefix .. p0.phoneNumber),
+				TextSize = var1.Font.BaseSize,
+				TextColor3 = var1.Theme.TextDefault.Color,
+				TextTransparency = var1.Theme.TextDefault.Transparency,
+				Font = var1.Font.Body.Font,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = UDim2.new(0, getPartialPageModalMiddleContentWidth(p0.screenSize.X), 0, 0)
+				Size = UDim2.new(0, getPartialPageModalMiddleContentWidth(p1.screenSize.X), 0, 0)
 			}),
 			TextBox = reactModule.createElement(textInputBoxWithBorder, {
 				textInputHeight = 36,
 				layoutOrder = 2,
 				maxLength = 6,
-				text = p0.code,
-				textInputType = if p0.useOTPInputType then Enum.TextInputType.OneTimePassword else Enum.TextInputType.Number,
-				placeholderText = var6.placeholderKey,
-				errorText = p0.errorMessage,
-				onChangeTextCallback = p0.onCodeTextChange,
+				text = p1.code,
+				textInputType = if p1.useOTPInputType then Enum.TextInputType.OneTimePassword else Enum.TextInputType.Number,
+				placeholderText = var2.placeholderKey,
+				errorText = p1.errorMessage,
+				onChangeTextCallback = p1.onCodeTextChange,
 				Size = UDim2.new(1, 0, 0, 0),
-				onFocused = p0.onCodeInputFocus
+				onFocused = p1.onCodeInputFocus
 			}),
 			ChangePhoneButton = reactModule.createElement(linkButton, {
 				layoutOrder = 3,
 				fontStyle = "CaptionBody",
 				minPaddingX = 0,
 				minPaddingY = 0,
-				text = var6.changePhoneNumberKey,
-				onActivated = p0.returnToAddPhone
+				text = var2.changePhoneNumberKey,
+				onActivated = p1.returnToAddPhone
 			})
 		})
 	})

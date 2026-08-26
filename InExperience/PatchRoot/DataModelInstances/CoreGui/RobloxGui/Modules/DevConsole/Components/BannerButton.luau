@@ -8,21 +8,21 @@ local rightArrow = constantsModule.Image.RightArrow
 local downArrow = constantsModule.Image.DownArrow
 local bannerButton = roactModule.Component:extend("BannerButton")
 
-function bannerButton.render(p0)
+function bannerButton.render(p1)
 	-- upvalues: roactModule (ref), downArrow (ref), rightArrow (ref), arrowWidth (ref), lineWidth (ref), lineColor (ref), immutableModule (ref)
-	local children = p0.props[roactModule.Children] or {}
-	local size = p0.props.size
-	local pos = p0.props.pos
-	local isExpandable = p0.props.isExpandable
-	local isExpanded = p0.props.isExpanded
-	local layoutOrder = p0.props.layoutOrder
-	local inset = p0.props.inset or 0
-	local hideLines = p0.props.hideLines
-	local onButtonPress = p0.props.onButtonPress
-	local onMouseEnter = p0.props.onMouseEnter
-	local onMouseLeave = p0.props.onMouseLeave
-	local onMouseMove = p0.props.onMouseMove
-	local onMouse2Click = p0.props.onMouse2Click
+	local children = p1.props[roactModule.Children] or {}
+	local size = p1.props.size
+	local pos = p1.props.pos
+	local isExpandable = p1.props.isExpandable
+	local isExpanded = p1.props.isExpanded
+	local layoutOrder = p1.props.layoutOrder
+	local inset = p1.props.inset or 0
+	local hideLines = p1.props.hideLines
+	local onButtonPress = p1.props.onButtonPress
+	local onMouseEnter = p1.props.onMouseEnter
+	local onMouseLeave = p1.props.onMouseLeave
+	local onMouseMove = p1.props.onMouseMove
+	local onMouse2Click = p1.props.onMouse2Click
 	local t = {
 		BannerButtonArrow = onButtonPress and roactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,

@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref)
 	local var1 = useStyle()
 	
@@ -13,6 +13,6 @@ return function(p0)
 		BackgroundTransparency = var1.Tokens.Color.Common.Scrim.Transparency,
 		BorderSizePixel = 0,
 		Text = "",
-		[reactModule.Event.Activated] = p0.onDismiss
-	}, p0.children)
+		[reactModule.Event.Activated] = p1.onDismiss
+	}, p1.children)
 end

@@ -1,20 +1,20 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
 
-return function(p0, p1)
-	local var0 = 1 - (p1.Transparency or 0)
-	local var1 = 1 - (p0.Transparency or 0)
+return function(p1, p2)
+	local var1 = 1 - (p2.Transparency or 0)
+	local var2 = 1 - (p1.Transparency or 0)
 	
-	if var0 == 1 or var1 == 0 or p0.Color3 == nil then
+	if var1 == 1 or var2 == 0 or p1.Color3 == nil then
+		return p2
+	elseif var1 == 0 then
 		return p1
-	elseif var0 == 0 then
-		return p0
 	end
-	local var2 = 1 - var0
-	local var3 = var0 + var1 * var2
-	local var4 = if var3 > 0 then 1 / var3 else 0
+	local var3 = 1 - var1
+	local var4 = var1 + var2 * var3
+	local var5 = if var4 > 0 then 1 / var4 else 0
 	
 	return {
-		Color3 = Color3.new((p1.Color3.R * var0 + p0.Color3.R * (var1 * var2)) * var4, (p1.Color3.G * var0 + p0.Color3.G * (var1 * var2)) * var4, (p1.Color3.B * var0 + p0.Color3.B * (var1 * var2)) * var4),
-		Transparency = 1 - var3
+		Color3 = Color3.new((p2.Color3.R * var1 + p1.Color3.R * (var2 * var3)) * var5, (p2.Color3.G * var1 + p1.Color3.G * (var2 * var3)) * var5, (p2.Color3.B * var1 + p1.Color3.B * (var2 * var3)) * var5),
+		Transparency = 1 - var4
 	}
 end

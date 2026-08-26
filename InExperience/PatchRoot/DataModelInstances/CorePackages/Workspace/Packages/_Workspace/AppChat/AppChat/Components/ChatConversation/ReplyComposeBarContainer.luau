@@ -30,12 +30,12 @@ local t = {
 	setReplyComposeBarHeight = function(_) end
 }
 
-function getTargetMessageInfo(p0)
-	return if p0 then {
-		targetMessageSenderId = p0.senderTargetId,
-		targetMessageId = p0.id,
-		targetMessageSentAt = if p0.sent then p0.sent.dateTime else nil,
-		targetMessageLength = if p0.content then #p0.content else nil
+function getTargetMessageInfo(p1)
+	return if p1 then {
+		targetMessageSenderId = p1.senderTargetId,
+		targetMessageId = p1.id,
+		targetMessageSentAt = if p1.sent then p1.sent.dateTime else nil,
+		targetMessageLength = if p1.content then #p1.content else nil
 	} else {}
 end
 
@@ -47,131 +47,131 @@ local function _(value, p1, p2)
 	}
 end
 
-function ReplyComposeBarContainer(p3)
+function ReplyComposeBarContainer(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useLocalUserId (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), getConversationMessageStoreModule (ref), useSignalState (ref), reactModule (ref), fFlagAppChatReplyComposeBarContainerModule (ref), replyComposeBarConstantsModule (ref), chatConversationTelemetryEventsModule (ref), useSelector (ref), populateUserWithStateModule (ref), userProfilesModule (ref), useLocalization (ref), replyComposeBarModule (ref)
-	local var22, var26, var27
-	local var16 = cryoModule.Dictionary.union(t, p3)
-	local var17 = useStyle()
-	local var18 = useLocalUserId()
-	local var19 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
+	local var1, var2, var3
+	local var4 = cryoModule.Dictionary.union(t, p1)
+	local var5 = useStyle()
+	local var6 = useLocalUserId()
+	local var7 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
 	
 	if fFlagAppChatSignalsReplyStoreModule then
-		local var20 = getConversationMessageStoreModule(false)
-		local var21 = useSignalState(getReplyingToStoreModule(false).getMessageId)
-		var22 = reactModule.useMemo(function()
-			-- upvalues: var21 (ref), var20 (ref)
-			return if var21 == nil then nil else var20.messages(false)[var21]
-		end, { var21, var20 })
-		local var23 = if var22 and var22.sender_user_id then tostring(var22.sender_user_id) else nil
-		local var24 = if var22 then var22.content else nil
-		local var25 = if fFlagAppChatReplyComposeBarContainerModule then nil else var17.Tokens.Size.Size_1400 + replyComposeBarConstantsModule.VERTICAL_PADDING * 2 + replyComposeBarConstantsModule.BORDER_HEIGHT
+		local var8 = getConversationMessageStoreModule(false)
+		local var9 = useSignalState(getReplyingToStoreModule(false).getMessageId)
+		var1 = reactModule.useMemo(function()
+			-- upvalues: var9 (ref), var8 (ref)
+			return if var9 == nil then nil else var8.messages(false)[var9]
+		end, { var9, var8 })
+		local var10 = if var1 and var1.sender_user_id then tostring(var1.sender_user_id) else nil
+		local var11 = if var1 then var1.content else nil
+		local var12 = if fFlagAppChatReplyComposeBarContainerModule then nil else var5.Tokens.Size.Size_1400 + replyComposeBarConstantsModule.VERTICAL_PADDING * 2 + replyComposeBarConstantsModule.BORDER_HEIGHT
 		reactModule.useEffect(function()
-			-- upvalues: var19 (ref), chatConversationTelemetryEventsModule (copy), var23 (ref), var21 (ref), var24 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var16 (ref), var25 (ref)
-			var19.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeRendered, {
-				targetMessageSenderId = var23,
-				targetMessageId = var21,
-				targetMessageLength = if var24 then #var24 else nil
+			-- upvalues: var7 (ref), chatConversationTelemetryEventsModule (copy), var10 (ref), var9 (ref), var11 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var4 (ref), var12 (ref)
+			var7.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeRendered, {
+				targetMessageSenderId = var10,
+				targetMessageId = var9,
+				targetMessageLength = if var11 then #var11 else nil
 			})
 			
 			if fFlagAppChatReplyComposeBarContainerModule then
 				return function() end
 			end
-			var16.setReplyComposeBarHeight(var25)
+			var4.setReplyComposeBarHeight(var12)
 			
 			return function()
-				-- upvalues: var16 (copy)
-				var16.setReplyComposeBarHeight(0)
+				-- upvalues: var4 (copy)
+				var4.setReplyComposeBarHeight(0)
 			end
 		end, {})
-		var26 = useSelector(function(p4)
-			-- upvalues: var23 (ref), populateUserWithStateModule (copy)
-			local var34 = if p4 and p4.Users and var23 then p4.Users[var23] else nil
+		var2 = useSelector(function(p2)
+			-- upvalues: var10 (ref), populateUserWithStateModule (copy)
+			local var13 = if p2 and p2.Users and var10 then p2.Users[var10] else nil
 			
-			return if var34 then { targetUser = populateUserWithStateModule(p4, var34) } else {}
+			return if var13 then { targetUser = populateUserWithStateModule(p2, var13) } else {}
 		end)
-		var27 = userProfilesModule.Hooks.useUserProfilesFetch({
-			userIds = if var23 then { var23 } else {},
+		var3 = userProfilesModule.Hooks.useUserProfilesFetch({
+			userIds = if var10 then { var10 } else {},
 			query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 		})
 		local _ = nil
-		local var28 = if var26.targetUser and var26.targetUser.displayName and var26.targetUser.displayName ~= "" then var26.targetUser.displayName elseif var27.data and var27.data.userProfiles and (var27.data.userProfiles[1] and var27.data.userProfiles[1].names) then userProfilesModule.Selectors.getCombinedNameFromId(var27.data, var23) else var16.unknownUserKey
-		local var29 = var18 == var23
+		local var13 = if var2.targetUser and var2.targetUser.displayName and var2.targetUser.displayName ~= "" then var2.targetUser.displayName elseif var3.data and var3.data.userProfiles and (var3.data.userProfiles[1] and var3.data.userProfiles[1].names) then userProfilesModule.Selectors.getCombinedNameFromId(var3.data, var10) else var4.unknownUserKey
+		local var14 = var6 == var10
 		
 		return reactModule.createElement(replyComposeBarModule, {
-			LayoutOrder = var16.LayoutOrder,
-			totalHeight = if fFlagAppChatReplyComposeBarContainerModule then nil else var25,
+			LayoutOrder = var4.LayoutOrder,
+			totalHeight = if fFlagAppChatReplyComposeBarContainerModule then nil else var12,
 			replyingToUserText = useLocalization({
-				replyingToUserText = if var29 then var16.replyingToYourselfKey else {
-					var16.replyingToOthersKey,
-					DISPLAY_NAME = useLocalization(if var28 == var16.unknownUserKey then { replyingToUserName = var28 } else {}).replyingToUserName or var28
+				replyingToUserText = if var14 then var4.replyingToYourselfKey else {
+					var4.replyingToOthersKey,
+					DISPLAY_NAME = useLocalization(if var13 == var4.unknownUserKey then { replyingToUserName = var13 } else {}).replyingToUserName or var13
 				}
 			}).replyingToUserText,
-			replyingToUserContent = var24,
-			replyingToUserId = if var29 or not var26.targetUser then nil else var23,
+			replyingToUserContent = var11,
+			replyingToUserId = if var14 or not var2.targetUser then nil else var10,
 			onCloseActivated = reactModule.useCallback(function()
-				-- upvalues: var19 (ref), chatConversationTelemetryEventsModule (copy), var23 (ref), var21 (ref), var24 (ref), var16 (ref)
-				var19.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeCancelBtnActivated, {
-					targetMessageSenderId = var23,
-					targetMessageId = var21,
-					targetMessageLength = if var24 then #var24 else nil
+				-- upvalues: var7 (ref), chatConversationTelemetryEventsModule (copy), var10 (ref), var9 (ref), var11 (ref), var4 (ref)
+				var7.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeCancelBtnActivated, {
+					targetMessageSenderId = var10,
+					targetMessageId = var9,
+					targetMessageLength = if var11 then #var11 else nil
 				})
-				var16.close()
+				var4.close()
 			end, {
-				var16.close,
-				var19,
-				var23,
-				var21,
-				var24
+				var4.close,
+				var7,
+				var10,
+				var9,
+				var11
 			})
 		})
 	end
-	local var30 = if fFlagAppChatReplyComposeBarContainerModule then nil else var17.Tokens.Size.Size_1400 + replyComposeBarConstantsModule.VERTICAL_PADDING * 2 + replyComposeBarConstantsModule.BORDER_HEIGHT
+	local var15 = if fFlagAppChatReplyComposeBarContainerModule then nil else var5.Tokens.Size.Size_1400 + replyComposeBarConstantsModule.VERTICAL_PADDING * 2 + replyComposeBarConstantsModule.BORDER_HEIGHT
 	reactModule.useEffect(function()
-		-- upvalues: var19 (ref), chatConversationTelemetryEventsModule (copy), var16 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var30 (ref)
-		var19.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeRendered, getTargetMessageInfo(var16.message))
+		-- upvalues: var7 (ref), chatConversationTelemetryEventsModule (copy), var4 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var15 (ref)
+		var7.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeRendered, getTargetMessageInfo(var4.message))
 		
 		if fFlagAppChatReplyComposeBarContainerModule then
 			return function() end
 		end
-		var16.setReplyComposeBarHeight(var30)
+		var4.setReplyComposeBarHeight(var15)
 		
 		return function()
-			-- upvalues: var16 (copy)
-			var16.setReplyComposeBarHeight(0)
+			-- upvalues: var4 (copy)
+			var4.setReplyComposeBarHeight(0)
 		end
 	end, {})
-	local var31 = useSelector(function(p5)
-		-- upvalues: var16 (ref), populateUserWithStateModule (copy)
-		local var35 = if p5 and p5.Users and var16.message.senderTargetId then p5.Users[var16.message.senderTargetId] else nil
+	local var16 = useSelector(function(p2)
+		-- upvalues: var4 (ref), populateUserWithStateModule (copy)
+		local var17 = if p2 and p2.Users and var4.message.senderTargetId then p2.Users[var4.message.senderTargetId] else nil
 		
-		return if var35 then { targetUser = populateUserWithStateModule(p5, var35) } else {}
+		return if var17 then { targetUser = populateUserWithStateModule(p2, var17) } else {}
 	end)
-	local var32 = userProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = { var16.message.senderTargetId },
+	local var17 = userProfilesModule.Hooks.useUserProfilesFetch({
+		userIds = { var4.message.senderTargetId },
 		query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	})
-	var22 = nil
-	var22 = if var31.targetUser and var31.targetUser.displayName and var31.targetUser.displayName ~= "" then var31.targetUser.displayName elseif var32.data and var32.data.userProfiles and (var32.data.userProfiles[1] and var32.data.userProfiles[1].names) then userProfilesModule.Selectors.getCombinedNameFromId(var32.data, var16.message.senderTargetId) else var16.unknownUserKey
-	local var33 = var18 == var16.message.senderTargetId
-	var26 = useLocalization({
-		replyingToUserText = if var33 then var16.replyingToYourselfKey else {
-			var16.replyingToOthersKey,
-			DISPLAY_NAME = useLocalization(if var22 == var16.unknownUserKey then { replyingToUserName = var22 } else {}).replyingToUserName or var22
+	var1 = nil
+	var1 = if var16.targetUser and var16.targetUser.displayName and var16.targetUser.displayName ~= "" then var16.targetUser.displayName elseif var17.data and var17.data.userProfiles and (var17.data.userProfiles[1] and var17.data.userProfiles[1].names) then userProfilesModule.Selectors.getCombinedNameFromId(var17.data, var4.message.senderTargetId) else var4.unknownUserKey
+	local var18 = var6 == var4.message.senderTargetId
+	var2 = useLocalization({
+		replyingToUserText = if var18 then var4.replyingToYourselfKey else {
+			var4.replyingToOthersKey,
+			DISPLAY_NAME = useLocalization(if var1 == var4.unknownUserKey then { replyingToUserName = var1 } else {}).replyingToUserName or var1
 		}
 	}).replyingToUserText
-	var27 = if var33 or not var31.targetUser then nil else var16.message.senderTargetId
+	var3 = if var18 or not var16.targetUser then nil else var4.message.senderTargetId
 	
 	return reactModule.createElement(replyComposeBarModule, {
-		LayoutOrder = var16.LayoutOrder,
-		totalHeight = if fFlagAppChatReplyComposeBarContainerModule then nil else var30,
-		replyingToUserText = var26,
-		replyingToUserContent = var16.message.content,
-		replyingToUserId = var27,
+		LayoutOrder = var4.LayoutOrder,
+		totalHeight = if fFlagAppChatReplyComposeBarContainerModule then nil else var15,
+		replyingToUserText = var2,
+		replyingToUserContent = var4.message.content,
+		replyingToUserId = var3,
 		onCloseActivated = reactModule.useCallback(function()
-			-- upvalues: var19 (ref), chatConversationTelemetryEventsModule (copy), var16 (ref)
-			var19.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeCancelBtnActivated, getTargetMessageInfo(var16.message))
-			var16.close()
-		end, { var16.close, var19, var16.message })
+			-- upvalues: var7 (ref), chatConversationTelemetryEventsModule (copy), var4 (ref)
+			var7.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeCancelBtnActivated, getTargetMessageInfo(var4.message))
+			var4.close()
+		end, { var4.close, var7, var4.message })
 	})
 end
 

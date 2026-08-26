@@ -25,7 +25,7 @@ function t.__tostring()
 	return "Service(Analytics)"
 end
 
-function t.new(p0, p1, p2)
+function t.new(p1, p2, p3)
 	-- upvalues: t (ref), eventStreamReporter (ref), default (ref), playersService (ref), fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), unifiedEventLogEnums (ref), TIMED_OPTION_BY_DAYS (ref), itemTypeEnum (ref), userInputService (ref), httpService (ref), runService (ref), rbxAnalyticsService (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -33,116 +33,116 @@ function t.new(p0, p1, p2)
 	t_1.pid = tostring(game.PlaceId)
 	t_1.uid = tostring(playersService.LocalPlayer.UserId)
 	t_1.feature = "inspectAndBuy"
-	t_1.inspecteeUid = p0
-	t_1.ctx = p1
-	t_1.version = if fFlagAXEnableInspectAndBuyVersionAnalyticsModule then p2 else nil
+	t_1.inspecteeUid = p1
+	t_1.ctx = p2
+	t_1.version = if fFlagAXEnableInspectAndBuyVersionAnalyticsModule then p3 else nil
 	
 	function t_1.reportOpenInspectMenu()
 		-- upvalues: t_1 (ref)
 		t_1:report("inspectUser", {})
 	end
 	
-	function t_1.reportTryOnButtonClicked(p3, p4)
+	function t_1.reportTryOnButtonClicked(p4, p5)
 		-- upvalues: t_1 (ref)
-		t_1:report("tryItem", { itemType = p3, itemID = p4 })
+		t_1:report("tryItem", { itemType = p4, itemID = p5 })
 	end
 	
-	function t_1.reportFavoriteItem(p5, p6, p7, p8, p9, p10)
+	function t_1.reportFavoriteItem(p4, p5, p6, p7, p8, p9)
 		-- upvalues: t_1 (ref)
 		t_1:report("favoriteItem", {
-			itemType = p5,
-			itemID = p6,
-			favorite = p7,
-			success = p8,
-			failureReason = p9,
-			favoriteCount = p10
+			itemType = p4,
+			itemID = p5,
+			favorite = p6,
+			success = p7,
+			failureReason = p8,
+			favoriteCount = p9
 		})
 	end
 	
-	function t_1.reportPurchaseAttempt(p11, p12)
+	function t_1.reportPurchaseAttempt(p4, p5)
 		-- upvalues: t_1 (ref)
-		t_1:report("purchaseAttemptItem", { itemType = p11, itemID = p12 })
+		t_1:report("purchaseAttemptItem", { itemType = p4, itemID = p5 })
 	end
 	
-	function t_1.reportPurchaseAttemptUnifiedEvent(p13, p14, p15)
+	function t_1.reportPurchaseAttemptUnifiedEvent(p4, p5, p6)
 		-- upvalues: t_1 (ref), unifiedEventLogEnums (copy), TIMED_OPTION_BY_DAYS (copy), itemTypeEnum (copy)
 		t_1:reportUnifiedEvent({
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_ATTEMPT,
-			itemId = p14,
-			itemType = p13,
-			organicTimedOption = if p15.timedOptionDays ~= nil then nil else TIMED_OPTION_BY_DAYS[p15.timedOptionDays],
-			assetType = if p13 == itemTypeEnum.Asset then p15.itemSubType else nil,
-			bundleType = if p13 == itemTypeEnum.Bundle then p15.itemSubType else nil,
-			organicItemPrice = p15.price or 0
+			itemId = p5,
+			itemType = p4,
+			organicTimedOption = if p6.timedOptionDays ~= nil then nil else TIMED_OPTION_BY_DAYS[p6.timedOptionDays],
+			assetType = if p4 == itemTypeEnum.Asset then p6.itemSubType else nil,
+			bundleType = if p4 == itemTypeEnum.Bundle then p6.itemSubType else nil,
+			organicItemPrice = p6.price or 0
 		})
-		t_1:report("purchaseAttemptItem", { itemType = p13, itemID = p14 })
+		t_1:report("purchaseAttemptItem", { itemType = p4, itemID = p5 })
 	end
 	
-	function t_1.reportPurchaseSuccessUnifiedEvent(p16, p17, p18)
+	function t_1.reportPurchaseSuccessUnifiedEvent(p4, p5, p6)
 		-- upvalues: t_1 (ref), unifiedEventLogEnums (copy), TIMED_OPTION_BY_DAYS (copy), itemTypeEnum (copy)
 		t_1:reportUnifiedEvent({
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS,
-			itemId = p17,
-			itemType = p16,
-			organicTimedOption = if p18.timedOptionDays ~= nil then nil else TIMED_OPTION_BY_DAYS[p18.timedOptionDays],
-			assetType = if p16 == itemTypeEnum.Asset then p18.itemSubType else nil,
-			bundleType = if p16 == itemTypeEnum.Bundle then p18.itemSubType else nil,
-			organicItemPrice = p18.price or 0
+			itemId = p5,
+			itemType = p4,
+			organicTimedOption = if p6.timedOptionDays ~= nil then nil else TIMED_OPTION_BY_DAYS[p6.timedOptionDays],
+			assetType = if p4 == itemTypeEnum.Asset then p6.itemSubType else nil,
+			bundleType = if p4 == itemTypeEnum.Bundle then p6.itemSubType else nil,
+			organicItemPrice = p6.price or 0
 		})
-		t_1:report("purchaseSuccessItem", { itemType = p16, itemID = p17 })
+		t_1:report("purchaseSuccessItem", { itemType = p4, itemID = p5 })
 	end
 	
-	function t_1.reportPurchaseSuccess(p19, p20)
+	function t_1.reportPurchaseSuccess(p4, p5)
 		-- upvalues: t_1 (ref)
-		t_1:report("purchaseSuccessItem", { itemType = p19, itemID = p20 })
+		t_1:report("purchaseSuccessItem", { itemType = p4, itemID = p5 })
 	end
 	
-	function t_1.reportItemDetailPageOpened(p21, p22)
+	function t_1.reportItemDetailPageOpened(p4, p5)
 		-- upvalues: t_1 (ref)
-		t_1:report("itemDetailView", { itemType = p21, itemID = p22 })
+		t_1:report("itemDetailView", { itemType = p4, itemID = p5 })
 	end
 	
 	t_1.platformStr = (function()
 		-- upvalues: userInputService (copy), httpService (copy)
 		local platform = userInputService:GetPlatform()
-		local var11 = "Unknown"
+		local var1 = "Unknown"
 		
 		if platform == Enum.Platform.Windows then
-			var11 = "Windows"
+			var1 = "Windows"
 			
-			return var11
+			return var1
 		elseif platform == Enum.Platform.OSX then
-			var11 = "OSX"
+			var1 = "OSX"
 			
-			return var11
+			return var1
 		elseif platform == Enum.Platform.IOS then
-			var11 = "IOS"
+			var1 = "IOS"
 			
-			return var11
+			return var1
 		elseif platform == Enum.Platform.Android then
 			local userAgent = httpService:GetUserAgent()
-			var11 = if string.find(userAgent, "AmazonAppStore") then "Amazon" else "Android"
+			var1 = if string.find(userAgent, "AmazonAppStore") then "Amazon" else "Android"
 			
 			if string.find(userAgent, "OculusQuest3Store") then
-				var11 = "Quest"
+				var1 = "Quest"
 				
-				return var11
+				return var1
 			end
 		elseif platform == Enum.Platform.XBoxOne or platform == Enum.Platform.XBox360 then
-			var11 = "XBox"
+			var1 = "XBox"
 			
-			return var11
+			return var1
 		elseif platform == Enum.Platform.UWP then
-			var11 = "UWP"
+			var1 = "UWP"
 			
-			return var11
+			return var1
 		elseif platform == Enum.Platform.PS4 or platform == Enum.Platform.PS3 or platform == Enum.Platform.PS5 then
-			var11 = "PlayStation"
+			var1 = "PlayStation"
 		end
-		return var11
+		return var1
 	end)()
 	
-	function t_1.sendCounter(p23)
+	function t_1.sendCounter(p4)
 		-- upvalues: runService (copy), t_1 (ref), rbxAnalyticsService (copy)
 		if runService:IsStudio() then
 			return
@@ -153,23 +153,23 @@ function t.new(p0, p1, p2)
 	return t_1
 end
 
-function t:report(p24, p25)
+function t:report(p1, p2)
 	-- upvalues: fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), cryoModule (ref)
-	self.eventStream:sendTelemetryEvent(self.ctx, p24, cryoModule.Dictionary.join({
+	self.eventStream:sendTelemetryEvent(self.ctx, p1, cryoModule.Dictionary.join({
 		feature = "inspectAndBuy",
 		event_sender_api = 2,
 		pid = self.pid,
 		uid = self.uid,
 		inspecteeUid = self.inspecteeUid,
 		inspectAndBuyVersion = if fFlagAXEnableInspectAndBuyVersionAnalyticsModule then self.version else nil
-	}, p25))
+	}, p2))
 end
 
-function t:reportUnifiedEvent(p26)
+function t:reportUnifiedEvent(p1)
 	-- upvalues: unifiedLoggingSurface (ref), cryoModule (ref), unifiedEventLogConstants (ref)
 	self.eventStream:sendTelemetryEvent(self.ctx, unifiedEventLogConstants.EVENT_NAME, cryoModule.Dictionary.join({
 		surface = unifiedLoggingSurface.IN_EXPERIENCE_INSPECT_BUY
-	}, p26))
+	}, p1))
 end
 
 return t

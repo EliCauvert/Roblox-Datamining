@@ -2,14 +2,14 @@
 local _ = require(markdown.Types)
 local nodeTypeModule = require(markdown.Enums.NodeType)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: nodeTypeModule (ref)
-	local var2 = p1.nodeConfiguration[p0]
+	local var1 = p2.nodeConfiguration[p1]
 	
-	if var2 then
-		return var2.type
+	if var1 then
+		return var1.type
 	end
-	warn(`No node configuration found for {p0}`)
+	warn(`No node configuration found for {p1}`)
 	
 	return nodeTypeModule.Block
 end

@@ -6,32 +6,32 @@ local squadEnableRegroupVariant = game:DefineFastString("SquadEnableRegroupVaria
 local fFlagForceEnableSquadRegroup = sharedFlagsModule.FFlagForceEnableSquadRegroup
 local fFlagEnableSquadRegroupExperimentation = sharedFlagsModule.FFlagEnableSquadRegroupExperimentation
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: experimentCacheManager (ref), fStringSquadRegroupExpLayer (ref)
-	local var3 = experimentCacheManager.default:getLayerVariables(fStringSquadRegroupExpLayer)
+	local var1 = experimentCacheManager.default:getLayerVariables(fStringSquadRegroupExpLayer)
 	
-	return if var3 and var3[p0] ~= nil then var3[p0] else false
+	return if var1 and var1[p1] ~= nil then var1[p1] else false
 end
 
 return {
 	getSquadRegroupEnabled = function()
 		-- upvalues: fFlagForceEnableSquadRegroup (ref), fFlagEnableSquadRegroupExperimentation (ref), squadEnableRegroupVariant (ref), experimentCacheManager (ref), fStringSquadRegroupExpLayer (ref)
-		local var4 = fFlagForceEnableSquadRegroup
+		local var1 = fFlagForceEnableSquadRegroup
 		
-		if not var4 then
-			var4 = fFlagEnableSquadRegroupExperimentation
+		if not var1 then
+			var1 = fFlagEnableSquadRegroupExperimentation
 			
-			if var4 then
-				local var5 = squadEnableRegroupVariant
-				local var6 = experimentCacheManager.default:getLayerVariables(fStringSquadRegroupExpLayer)
+			if var1 then
+				local var2 = squadEnableRegroupVariant
+				local var3 = experimentCacheManager.default:getLayerVariables(fStringSquadRegroupExpLayer)
 				
-				if var6 and var6[var5] ~= nil then
-					return var6[var5]
+				if var3 and var3[var2] ~= nil then
+					return var3[var2]
 				end
-				var4 = false
+				var1 = false
 			end
 		end
-		return var4
+		return var1
 	end,
 	logExposure = function()
 		-- upvalues: fFlagForceEnableSquadRegroup (ref), fFlagEnableSquadRegroupExperimentation (ref), experimentCacheManager (ref), fStringSquadRegroupExpLayer (ref)

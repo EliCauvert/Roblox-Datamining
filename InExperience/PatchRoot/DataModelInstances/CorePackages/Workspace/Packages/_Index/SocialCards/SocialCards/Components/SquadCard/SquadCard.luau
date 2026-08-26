@@ -18,103 +18,103 @@ local setInterval = luauPolyfillModule.setInterval
 local squadStartedCardModule = require(socialCards.Components.SquadCard.SquadStartedCard)
 local squadEndedCardModule = require(socialCards.Components.SquadCard.SquadEndedCard)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), squadExternalContractContext (ref), useCurrentSquadSelector (ref), cryoModule (ref), useNavigationFocus (ref), squadViewFlags (ref), networkingSquads (ref), httpModule (ref), setInterval (ref), clearInterval (ref), squadStartedCardModule (ref), squadEndedCardModule (ref), foundationModule (ref)
-	local var13
-	local var9 = useDispatch()
-	local var10 = useLocalUserId()
-	local var11 = reactModule.useContext(squadExternalContractContext)
-	local var12 = useCurrentSquadSelector()
+	local var1
+	local var2 = useDispatch()
+	local var3 = useLocalUserId()
+	local var4 = reactModule.useContext(squadExternalContractContext)
+	local var5 = useCurrentSquadSelector()
 	
-	if var12 then
-		var13 = var12.squadId == p0.group_up_id
-		var13 = nil
+	if var5 then
+		var1 = var5.squadId == p1.group_up_id
+		var1 = nil
 	else
-		var13 = false
+		var1 = false
 	end
-	local var14 = reactModule.useCallback(function(p1)
-		-- upvalues: var13 (ref), var12 (ref), cryoModule (copy), var10 (ref)
-		if not var13 then
-			return cryoModule.List.filter(p1, function(p2)
-				-- upvalues: var10 (copy)
-				return tostring(p2) ~= var10
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref), var5 (ref), cryoModule (copy), var3 (ref)
+		if not var1 then
+			return cryoModule.List.filter(p2, function(p3)
+				-- upvalues: var3 (copy)
+				return tostring(p3) ~= var3
 			end)
 		end
 		local t = {}
 		
-		for i, v in ipairs(var12.members) do
+		for i, v in ipairs(var5.members) do
 			table.insert(t, v.userId)
 		end
 		return t
-	end, { var13, var12, var10 })
-	local var15, var16 = reactModule.useState(p0.is_alive)
-	local var17, var18 = reactModule.useState(var14(p0.participant_user_ids))
-	local var19 = var13 and useNavigationFocus()
+	end, { var1, var5, var3 })
+	local var7, var8 = reactModule.useState(p1.is_alive)
+	local var9, var10 = reactModule.useState(var6(p1.participant_user_ids))
+	local var11 = var1 and useNavigationFocus()
 	reactModule.useEffect(function()
-		-- upvalues: var19 (ref), var11 (ref), squadViewFlags (copy)
-		if var19 then
-			var11.updateSquadViewFlags(squadViewFlags.SquadSystemMessage, true)
+		-- upvalues: var11 (ref), var4 (ref), squadViewFlags (copy)
+		if var11 then
+			var4.updateSquadViewFlags(squadViewFlags.SquadSystemMessage, true)
 		end
 		return function()
-			-- upvalues: var19 (copy), var11 (copy), squadViewFlags (copy)
-			if var19 then
-				var11.updateSquadViewFlags(squadViewFlags.SquadSystemMessage, false)
+			-- upvalues: var11 (copy), var4 (copy), squadViewFlags (copy)
+			if var11 then
+				var4.updateSquadViewFlags(squadViewFlags.SquadSystemMessage, false)
 			end
 		end
-	end, { var11.updateSquadViewFlags, var19 })
+	end, { var4.updateSquadViewFlags, var11 })
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), var14 (ref), p0 (ref)
-		var18(var14(p0.participant_user_ids))
-	end, { var18, p0.participant_user_ids, var14 })
-	local var20 = reactModule.useCallback(function(p3)
-		-- upvalues: var9 (ref), networkingSquads (copy), var18 (ref), httpModule (copy), var16 (ref)
-		var9(networkingSquads.GetSquadFromSquadId.API({ squadId = p3 })):andThen(function(p5)
-			-- upvalues: var18 (copy)
-			if p5 and p5.responseBody and (p5.responseBody.groupUp and p5.responseBody.groupUp.members) then
+		-- upvalues: var10 (ref), var6 (ref), p1 (ref)
+		var10(var6(p1.participant_user_ids))
+	end, { var10, p1.participant_user_ids, var6 })
+	local var12 = reactModule.useCallback(function(p3)
+		-- upvalues: var2 (ref), networkingSquads (copy), var10 (ref), httpModule (copy), var8 (ref)
+		var2(networkingSquads.GetSquadFromSquadId.API({ squadId = p3 })):andThen(function(p4)
+			-- upvalues: var10 (copy)
+			if p4 and p4.responseBody and (p4.responseBody.groupUp and p4.responseBody.groupUp.members) then
 				local t = {}
 				
-				for i, v in ipairs(p5.responseBody.groupUp.members) do
+				for i, v in ipairs(p4.responseBody.groupUp.members) do
 					table.insert(t, v.userId)
 				end
-				var18(t)
+				var10(t)
 			end
-		end):catch(function(p4)
-			-- upvalues: httpModule (copy), var16 (copy)
-			if p4.StatusCode == httpModule.StatusCodes.NOT_FOUND then
-				var16(false)
+		end):catch(function(p5)
+			-- upvalues: httpModule (copy), var8 (copy)
+			if p5.StatusCode == httpModule.StatusCodes.NOT_FOUND then
+				var8(false)
 				
 				return
 			end
 			warn("Unsupported error type")
 		end)
-	end, { var9 })
+	end, { var2 })
 	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), var13 (ref), setInterval (copy), var20 (ref), p0 (ref), clearInterval (copy)
-		local var23 = if var15 and not var13 then setInterval(function()
-			-- upvalues: var20 (copy), p0 (copy)
-			var20(p0.group_up_id)
+		-- upvalues: var7 (ref), var1 (ref), setInterval (copy), var12 (ref), p1 (ref), clearInterval (copy)
+		local var13 = if var7 and not var1 then setInterval(function()
+			-- upvalues: var12 (copy), p1 (copy)
+			var12(p1.group_up_id)
 		end, 10000) else nil
 		
 		return function()
-			-- upvalues: var23 (write), clearInterval (copy)
-			if var23 then
-				clearInterval(var23)
+			-- upvalues: var13 (write), clearInterval (copy)
+			if var13 then
+				clearInterval(var13)
 			end
 		end
-	end, { var20, var15, var13, p0.group_up_id })
+	end, { var12, var7, var1, p1.group_up_id })
 	
 	return reactModule.createElement(foundationModule.View, {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(0, 280, 0, 0)
 	}, reactModule.useMemo(function()
-		-- upvalues: var15 (ref), reactModule (copy), squadStartedCardModule (copy), p0 (ref), var17 (ref), squadEndedCardModule (copy)
-		return if var15 then reactModule.createElement(squadStartedCardModule, {
-			conversationId = p0.conversation_id,
-			participantUserIds = var17,
-			squadLocation = p0.moduleLocation
+		-- upvalues: var7 (ref), reactModule (copy), squadStartedCardModule (copy), p1 (ref), var9 (ref), squadEndedCardModule (copy)
+		return if var7 then reactModule.createElement(squadStartedCardModule, {
+			conversationId = p1.conversation_id,
+			participantUserIds = var9,
+			squadLocation = p1.moduleLocation
 		}) else reactModule.createElement(squadEndedCardModule, {
-			conversationId = p0.conversation_id,
-			squadLocation = p0.moduleLocation
+			conversationId = p1.conversation_id,
+			squadLocation = p1.moduleLocation
 		})
-	end, { var15, var17, p0.conversation_id, p0.group_up_id }))
+	end, { var7, var9, p1.conversation_id, p1.group_up_id }))
 end

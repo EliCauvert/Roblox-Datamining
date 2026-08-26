@@ -15,18 +15,18 @@ local text_1 = foundationModule.Text
 local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), text (ref), getEventCategoryModule (ref), getVirtualEventDatesModule (ref), useLocalization (ref), attendanceChipModule (ref), text_1 (ref), descriptionExpanderModule (ref), icon (ref), iconSize (ref), formatDateModule (ref)
-	local var8 = useTokens()
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), text (copy)
-		return if p0.virtualEvent.description == nil then nil else text.Trim(p0.virtualEvent.description)
-	end, { p0.virtualEvent.description })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: getEventCategoryModule (copy), p0 (ref)
-		return getEventCategoryModule(p0.virtualEvent)
-	end, { p0.virtualEvent })
-	local var11 = useLocalization({
+	local var1 = useTokens()
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), text (copy)
+		return if p1.virtualEvent.description == nil then nil else text.Trim(p1.virtualEvent.description)
+	end, { p1.virtualEvent.description })
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: getEventCategoryModule (copy), p1 (ref)
+		return getEventCategoryModule(p1.virtualEvent)
+	end, { p1.virtualEvent })
+	local var4 = useLocalization({
 		interested = "Feature.VirtualEvents.AttendanceBeforeEvent",
 		newContent = "Feature.VirtualEvents.Label.NewContent",
 		itemDrop = "Feature.VirtualEvents.Label.ItemDrop",
@@ -59,30 +59,30 @@ return function(p0)
 			}),
 			EventAttendace = reactModule.createElement(attendanceChipModule, {
 				LayoutOrder = 1,
-				virtualEvent = p0.virtualEvent,
-				eventStatus = p0.eventStatus
+				virtualEvent = p1.virtualEvent,
+				eventStatus = p1.eventStatus
 			}),
 			EventTitle = reactModule.createElement(text_1, {
 				LayoutOrder = 2,
 				RichText = true,
 				TextWrapped = false,
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = p0.virtualEvent.title,
+				Text = p1.virtualEvent.title,
 				TextTruncate = Enum.TextTruncate.None,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				textStyle = var8.Color.Content.Emphasis,
-				fontStyle = var8.Typography.TitleLarge,
+				textStyle = var1.Color.Content.Emphasis,
+				fontStyle = var1.Typography.TitleLarge,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			Description = if var9 and var9 ~= "" then reactModule.createElement(descriptionExpanderModule, {
+			Description = if var2 and var2 ~= "" then reactModule.createElement(descriptionExpanderModule, {
 				layoutOrder = 3,
-				description = var9,
-				width = p0.containerSize.X - 32 - 16,
-				maxHeight = p0.containerSize.Y * 0.3,
-				isExpanded = p0.isExpanded,
-				setIsExpanded = p0.setIsExpanded
+				description = var2,
+				width = p1.containerSize.X - 32 - 16,
+				maxHeight = p1.containerSize.Y * 0.3,
+				isExpanded = p1.isExpanded,
+				setIsExpanded = p1.setIsExpanded
 			}) else nil,
-			EventCategory = if var10 and var11[var10] then reactModule.createElement("Frame", {
+			EventCategory = if var3 and var4[var3] then reactModule.createElement("Frame", {
 				LayoutOrder = 4,
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y
@@ -97,19 +97,19 @@ return function(p0)
 					LayoutOrder = 1,
 					name = "icons/common/poi_small",
 					size = iconSize.Small,
-					style = var8.Color.Content.Emphasis
+					style = var1.Color.Content.Emphasis
 				}),
 				Label = reactModule.createElement(text_1, {
 					LayoutOrder = 2,
 					TextWrapped = false,
-					Text = var11[var10],
+					Text = var4[var3],
 					TextTruncate = Enum.TextTruncate.None,
-					textStyle = var8.Color.Content.Emphasis,
-					fontStyle = var8.Typography.BodyLarge,
+					textStyle = var1.Color.Content.Emphasis,
+					fontStyle = var1.Typography.BodyLarge,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			}) else nil,
-			EventTime = if p0.eventStatus == "Upcoming" then reactModule.createElement("Frame", {
+			EventTime = if p1.eventStatus == "Upcoming" then reactModule.createElement("Frame", {
 				LayoutOrder = 5,
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y
@@ -124,18 +124,18 @@ return function(p0)
 					LayoutOrder = 1,
 					name = "icons/actions/calendar_small",
 					size = iconSize.Small,
-					style = var8.Color.Content.Emphasis
+					style = var1.Color.Content.Emphasis
 				}),
 				Label = reactModule.createElement(text_1, {
 					LayoutOrder = 2,
 					TextWrapped = false,
 					Text = formatDateModule(reactModule.useMemo(function()
-						-- upvalues: getVirtualEventDatesModule (copy), p0 (ref)
-						return getVirtualEventDatesModule(p0.virtualEvent)
-					end, { p0.virtualEvent }).startDate, true),
+						-- upvalues: getVirtualEventDatesModule (copy), p1 (ref)
+						return getVirtualEventDatesModule(p1.virtualEvent)
+					end, { p1.virtualEvent }).startDate, true),
 					TextTruncate = Enum.TextTruncate.None,
-					textStyle = var8.Color.Content.Emphasis,
-					fontStyle = var8.Typography.BodyLarge,
+					textStyle = var1.Color.Content.Emphasis,
+					fontStyle = var1.Typography.BodyLarge,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			}) else nil

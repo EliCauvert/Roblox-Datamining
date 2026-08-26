@@ -4,51 +4,51 @@ local foundationModule = require(parent.Foundation)
 local textInput = foundationModule.TextInput
 local iconName = foundationModule.Enums.IconName
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), textInput (ref), iconName (ref)
-	local var2, var3 = reactModule.useState("")
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		if var4.current then
-			task.cancel(var4.current)
-			var4.current = nil
+	local var1, var2 = reactModule.useState("")
+	local var3 = reactModule.useRef(nil)
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref)
+		if var3.current then
+			task.cancel(var3.current)
+			var3.current = nil
 		end
 	end, {})
-	local var6 = reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref), var5 (ref), var4 (ref), p0 (ref)
-		var3(p1)
-		var5()
-		var4.current = task.delay(0.4, function()
-			-- upvalues: p0 (copy), p1 (ref)
-			if p0.onTextChanged then
-				p0.onTextChanged(p1)
+	local var5 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref), var4 (ref), var3 (ref), p1 (ref)
+		var2(p2)
+		var4()
+		var3.current = task.delay(0.4, function()
+			-- upvalues: p1 (copy), p2 (ref)
+			if p1.onTextChanged then
+				p1.onTextChanged(p2)
 			end
 		end)
-	end, { p0.onTextChanged, var5 })
+	end, { p1.onTextChanged, var4 })
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref)
-		return var5
+		-- upvalues: var4 (ref)
+		return var4
 	end, {})
 	
 	return reactModule.createElement(textInput, {
 		label = "",
 		leadingIcon = "icons/common/search",
-		text = var2,
+		text = var1,
 		width = UDim.new(1, 0),
-		placeholder = p0.placeholderText or "",
-		onChanged = var6,
-		iconTrailing = if var2 ~= "" then nil else {
+		placeholder = p1.placeholderText or "",
+		onChanged = var5,
+		iconTrailing = if var1 ~= "" then nil else {
 			name = iconName.CircleX,
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: var5 (ref), var3 (ref), p0 (ref)
-				var5()
-				var3("")
+				-- upvalues: var4 (ref), var2 (ref), p1 (ref)
+				var4()
+				var2("")
 				
-				if p0.onTextChanged then
-					p0.onTextChanged("")
+				if p1.onTextChanged then
+					p1.onTextChanged("")
 				end
-			end, { p0.onTextChanged, var5 })
+			end, { p1.onTextChanged, var4 })
 		}
 	})
 end

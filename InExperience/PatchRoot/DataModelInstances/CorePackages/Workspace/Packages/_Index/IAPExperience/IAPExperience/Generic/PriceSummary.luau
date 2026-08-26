@@ -11,17 +11,17 @@ local useRobuxTextModule = require(parent.Generic.Hooks.useRobuxText)
 local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local _ = require(parent.ProductPurchase.PricingTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), reactModule (ref), formatNumberModule (ref), localizationService (ref), useRobuxTextModule (ref), view (ref), text (ref)
-	local var5 = if p0.itemPrice then p0.itemPrice.priceInRobux else p0.amount
-	local var6 = useLocalization({
+	local var1 = if p1.itemPrice then p1.itemPrice.priceInRobux else p1.amount
+	local var2 = useLocalization({
 		Total = "Feature.Catalog.Label.TotalUnformatted",
 		TotalPrice = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then "IAPExperience.PurchasePrompt.Label.TotalPriceV2" else nil
 	})
-	local var7 = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then useRobuxTextModule(var5) else reactModule.useMemo(function()
-		-- upvalues: formatNumberModule (copy), localizationService (copy), var5 (ref)
-		return utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, var5 or 0)
-	end, { var5, localizationService.RobloxLocaleId })
+	local var3 = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then useRobuxTextModule(var1) else reactModule.useMemo(function()
+		-- upvalues: formatNumberModule (copy), localizationService (copy), var1 (ref)
+		return utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, var1 or 0)
+	end, { var1, localizationService.RobloxLocaleId })
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-1300 padding-left-xxsmall padding-right-xxsmall padding-top-small padding-bottom-large"
@@ -36,7 +36,7 @@ return function(p0)
 			}, {
 				RobuxAmount = reactModule.createElement(text, {
 					LayoutOrder = 1,
-					Text = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then var6.TotalPrice else var6.Total,
+					Text = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then var2.TotalPrice else var2.Total,
 					tag = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then "auto-xy text-title-medium content-default text-align-x-left padding-y-xsmall" else "auto-xy text-label-medium content-default text-align-x-left padding-y-xsmall"
 				})
 			}),
@@ -49,11 +49,11 @@ return function(p0)
 					LayoutOrder = 2,
 					tag = "auto-xy text-title-medium content-emphasis text-align-x-right padding-y-xsmall",
 					RichText = true,
-					Text = var7
+					Text = var3
 				}) else reactModule.createElement(text, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-label-medium content-emphasis text-align-x-right padding-y-xsmall",
-					Text = var7
+					Text = var3
 				})
 			})
 		})

@@ -21,22 +21,22 @@ local function parseTranslationKey(value)
 	return text, table.concat(t, ".")
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFFlagEnableAuditSystemModule (ref), useMemo (ref), parseTranslationKey (ref), useCapturedAuditContent (ref)
 	if getFFlagEnableAuditSystemModule() then
-		local translationKey = p0.translationKey
-		local translatedSourceString = p0.translatedSourceString
-		local parameters = p0.parameters
+		local translationKey = p1.translationKey
+		local translatedSourceString = p1.translatedSourceString
+		local parameters = p1.parameters
 		useCapturedAuditContent(translationKey, useMemo(function()
 			-- upvalues: translationKey (ref), translatedSourceString (ref), parseTranslationKey (copy), parameters (ref)
 			if not translationKey or not translatedSourceString then
 				return nil
 			end
-			local var6, var7 = parseTranslationKey(translationKey)
+			local var1, var2 = parseTranslationKey(translationKey)
 			
-			return if var6 == "" then nil else {
-				translationKey = var7,
-				translationNamespace = var6,
+			return if var1 == "" then nil else {
+				translationKey = var2,
+				translationNamespace = var1,
 				translatedSourceString = translatedSourceString,
 				parameters = parameters
 			}

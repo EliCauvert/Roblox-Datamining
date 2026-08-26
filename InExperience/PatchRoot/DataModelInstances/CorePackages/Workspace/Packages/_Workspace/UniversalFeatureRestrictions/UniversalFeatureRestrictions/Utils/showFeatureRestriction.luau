@@ -2,7 +2,7 @@
 local featureRestrictionDisplaySignalModule = require(universalFeatureRestrictions.Signals.featureRestrictionDisplaySignal)
 local _ = require(universalFeatureRestrictions.Common.AbuseVector)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: featureRestrictionDisplaySignalModule (ref)
-	featureRestrictionDisplaySignalModule:fire({ abuseVector = p0, options = p1 })
+	featureRestrictionDisplaySignalModule:fire({ abuseVector = p1, options = p2 })
 end

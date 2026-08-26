@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if p0 ~= nil then if p0 ~= "" then if p0 ~= -1 then typeof(p0) == "table" and next(p0) == nil else true else true else true
+﻿return function(p1)
+	return if p1 ~= nil then if p1 ~= "" then if p1 ~= -1 then typeof(p1) == "table" and next(p1) == nil else true else true else true
 end

@@ -32,45 +32,45 @@ local t = {
 	itemOwned = "CoreScripts.BulkPurchasePrompt.RequestPrompt.ItemOwned"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), localizationRoactContext (ref), reactFocusNavigationModule (ref), fFlagFixVP8143Module (ref), useDesignTokens (ref), itemStatusKeyToLocalizationKeyModule (ref), mapItemsToRowPresentation (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), mapOwnedItemsToRowPresentation (ref), mapUnpurchasableItemsToRowPresentation (ref), fullPagePromptModule (ref), fullPagePromptTwoPanelLayoutModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref), fullPagePromptScrollListModule (ref), itemListModule (ref), dividerModule (ref), priceBoxModule (ref)
-	local var15 = useLocalization(t)
-	local var16 = reactModule.useContext(localizationRoactContext)
-	local var17, var18 = reactFocusNavigationModule.useDefaultFocusBehavior()
-	local var19 = if fFlagFixVP8143Module then reactModule.useCallback(function(p1)
-		-- upvalues: p0 (ref), var17 (ref)
-		if typeof(p0.purchaseButtonRef) == "table" then
-			p0.purchaseButtonRef.current = p1
+	local var1 = useLocalization(t)
+	local var2 = reactModule.useContext(localizationRoactContext)
+	local var3, var4 = reactFocusNavigationModule.useDefaultFocusBehavior()
+	local var5 = if fFlagFixVP8143Module then reactModule.useCallback(function(p2)
+		-- upvalues: p1 (ref), var3 (ref)
+		if typeof(p1.purchaseButtonRef) == "table" then
+			p1.purchaseButtonRef.current = p2
 		end
-		if typeof(var17) == "function" then
-			var17(p1)
+		if typeof(var3) == "function" then
+			var3(p2)
 			
 			return
-		elseif typeof(var17) == "table" then
-			var17.current = p1
+		elseif typeof(var3) == "table" then
+			var3.current = p2
 		end
-	end, { p0.purchaseButtonRef }) else nil
-	local var20 = useDesignTokens()
+	end, { p1.purchaseButtonRef }) else nil
+	local var6 = useDesignTokens()
 	local t_1 = {
-		LineHeight = var20.Typography.BodyLarge.LineHeight,
-		Font = var20.Typography.TitleLarge.Font,
-		FontSize = var20.Typography.BodyLarge.FontSize,
-		LetterSpacing = var20.Typography.BodyLarge.LetterSpacing
+		LineHeight = var6.Typography.BodyLarge.LineHeight,
+		Font = var6.Typography.TitleLarge.Font,
+		FontSize = var6.Typography.BodyLarge.FontSize,
+		LetterSpacing = var6.Typography.BodyLarge.LetterSpacing
 	}
-	local emphasis = var20.Color.Content.Emphasis
-	local var22, var23 = reactModule.useBinding(Vector2.new(0, 0))
-	local var24 = useLocalization(itemStatusKeyToLocalizationKeyModule)
-	local success = var20.Color.System.Success
-	local alert = var20.Color.System.Alert
-	local var25 = mapItemsToRowPresentation(p0.items, if fFlagBulkPurchaseEnablePurchaseOptionsModule then var16 else nil)
+	local emphasis = var6.Color.Content.Emphasis
+	local var7, var8 = reactModule.useBinding(Vector2.new(0, 0))
+	local var9 = useLocalization(itemStatusKeyToLocalizationKeyModule)
+	local success = var6.Color.System.Success
+	local alert = var6.Color.System.Alert
+	local var10 = mapItemsToRowPresentation(p1.items, if fFlagBulkPurchaseEnablePurchaseOptionsModule then var2 else nil)
 	local t_2 = {}
-	local var27 = mapOwnedItemsToRowPresentation(p0.ownedItems, emphasis, var15)
-	local var28 = mapUnpurchasableItemsToRowPresentation(p0.unpurchasableItems, var24, success, alert)
-	table.move(var27, 1, #var27, #t_2 + 1, t_2)
-	table.move(var28, 1, #var28, #t_2 + 1, t_2)
-	local var29 = #t_2 <= 0
+	local var11 = mapOwnedItemsToRowPresentation(p1.ownedItems, emphasis, var1)
+	local var12 = mapUnpurchasableItemsToRowPresentation(p1.unpurchasableItems, var9, success, alert)
+	table.move(var11, 1, #var11, #t_2 + 1, t_2)
+	table.move(var12, 1, #var12, #t_2 + 1, t_2)
+	local var13 = #t_2 <= 0
 	
-	return reactModule.createElement(fullPagePromptModule, { onClose = p0.onClose, title = var15.heading, ref = var18 }, reactModule.createElement(fullPagePromptTwoPanelLayoutModule, {
+	return reactModule.createElement(fullPagePromptModule, { onClose = p1.onClose, title = var1.heading, ref = var4 }, reactModule.createElement(fullPagePromptTwoPanelLayoutModule, {
 		size = reactModule.createBinding(UDim2.fromScale(1, 1)),
 		startSlot = reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -80,7 +80,7 @@ return function(p0)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
-			Padding = UDim.new(0, var20.Size.Size_600)
+			Padding = UDim.new(0, var6.Size.Size_600)
 		}), reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
@@ -88,36 +88,36 @@ return function(p0)
 			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = 1,
 			[reactModule.Change.AbsoluteSize] = function(p2)
-				-- upvalues: var23 (ref)
-				var23(p2.AbsoluteSize)
+				-- upvalues: var8 (ref)
+				var8(p2.AbsoluteSize)
 			end
-		}, reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var20.Size.Size_250) }), reactModule.createElement(lineItemLayoutModule, {
+		}, reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var6.Size.Size_250) }), reactModule.createElement(lineItemLayoutModule, {
 			LayoutOrder = 1,
 			startSlot = reactModule.createElement(styledTextLabel, {
 				fontStyle = t_1,
 				colorStyle = emphasis,
-				text = var15.listHeading
+				text = var1.listHeading
 			}),
 			endSlot = reactModule.createElement(styledTextLabel, {
 				fontStyle = t_1,
 				colorStyle = emphasis,
-				text = var15.itemCount:gsub("{.*}", tostring(#p0.items))
+				text = var1.itemCount:gsub("{.*}", tostring(#p1.items))
 			})
 		})), reactModule.createElement(fullPagePromptScrollListModule, {
 			LayoutOrder = 2,
-			size = var22:map(function(p3)
-				-- upvalues: var20 (ref)
-				return UDim2.new(1, 0, 1, -(p3.Y + var20.Size.Size_600))
+			size = var7:map(function(p2)
+				-- upvalues: var6 (ref)
+				return UDim2.new(1, 0, 1, -(p2.Y + var6.Size.Size_600))
 			end)
-		}, reactModule.createElement(itemListModule, { items = var25 }), if var29 then reactModule.createElement(dividerModule) else nil, if var29 then reactModule.createElement(itemListModule, { items = t_2 }) else nil)),
+		}, reactModule.createElement(itemListModule, { items = var10 }), if var13 then reactModule.createElement(dividerModule) else nil, if var13 then reactModule.createElement(itemListModule, { items = t_2 }) else nil)),
 		endSlot = reactModule.createElement(priceBoxModule, {
-			currentBalance = p0.currentBalance,
-			totalCost = p0.totalCost,
-			discountInformation = p0.discountInformation,
-			missingRobux = p0.currentBalance - p0.totalCost < 0,
-			onAccept = p0.onAccept,
-			buttonRef = if fFlagFixVP8143Module then var19 else var17,
-			isDisabled = p0.isDisabled
+			currentBalance = p1.currentBalance,
+			totalCost = p1.totalCost,
+			discountInformation = p1.discountInformation,
+			missingRobux = p1.currentBalance - p1.totalCost < 0,
+			onAccept = p1.onAccept,
+			buttonRef = if fFlagFixVP8143Module then var5 else var3,
+			isDisabled = p1.isDisabled
 		})
 	}))
 end

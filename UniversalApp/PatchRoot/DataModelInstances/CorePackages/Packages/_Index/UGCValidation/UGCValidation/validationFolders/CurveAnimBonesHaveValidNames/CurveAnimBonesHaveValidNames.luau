@@ -26,13 +26,13 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: curveAnimationHierarchyUtilsModule (ref), curveAnimBoneHierarchyUtilsModule (ref), errorSourceStringsModule (ref)
-	for i, v in p1.curveAnimations do
+	for i, v in p2.curveAnimations do
 		for i_1, v_1 in v:GetDescendants() do
 			if v_1:IsA("Folder") then
 				if curveAnimationHierarchyUtilsModule.folderHasAnimationTracks(v_1) and not curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) and not curveAnimBoneHierarchyUtilsModule.isBoneFolderName(v_1.Name) then
-					p0:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBoneName, { boneName = v_1.Name })
+					p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBoneName, { boneName = v_1.Name })
 				end
 			end
 		end

@@ -5,30 +5,30 @@ local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention
 
 return {
 	configName = "ChatTimeout",
-	shouldTriggerVisualTreatment = function(p0)
+	shouldTriggerVisualTreatment = function(p1)
 		-- upvalues: constants (ref)
-		return p0.type == constants.NotificationDialogType.ChatTimeout and (p0.abuseVector == constants.AbuseVectorType.ExperienceChat and not p0.acknowledgeable)
+		return p1.type == constants.NotificationDialogType.ChatTimeout and (p1.abuseVector == constants.AbuseVectorType.ExperienceChat and not p1.acknowledgeable)
 	end,
 	shouldTriggerBehavioralTreatment = function(p1)
 		-- upvalues: constants (ref)
 		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.ExperienceChat
 	end,
-	shouldTriggerEventReceived = function(p2)
+	shouldTriggerEventReceived = function(p1)
 		-- upvalues: constants (ref)
-		return p2.type == constants.NotificationDialogType.ChatTimeout and p2.abuseVector == constants.AbuseVectorType.ExperienceChat
+		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.ExperienceChat
 	end,
-	onTriggerVisualTreatment = function(p3, p4)
+	onTriggerVisualTreatment = function(p1, p2)
 		-- upvalues: constants (ref)
-		p3({
+		p1({
 			isShown = true,
 			type = constants.UIStateActions.ToggleNotificationDialog,
 			treatmentType = constants.TreatmentType.ChatTimeoutDialog,
-			detail = p4
+			detail = p2
 		})
 	end,
 	onTriggerBehavioralTreatment = function(_) end,
-	onTriggerEventReceived = function(p5)
+	onTriggerEventReceived = function(p1)
 		-- upvalues: inExperienceInterventionAnalyticsModule (ref)
-		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalMessageReceived, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, DateTime.now().UnixTimestampMillis, p5.decisionEventId, p5.evidence, p5.timeoutDurationSeconds)
+		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalMessageReceived, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, DateTime.now().UnixTimestampMillis, p1.decisionEventId, p1.evidence, p1.timeoutDurationSeconds)
 	end
 }

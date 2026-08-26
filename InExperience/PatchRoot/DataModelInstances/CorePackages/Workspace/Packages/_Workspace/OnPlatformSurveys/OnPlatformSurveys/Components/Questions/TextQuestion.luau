@@ -6,19 +6,19 @@ local textInput = foundationModule.TextInput
 local view = foundationModule.View
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), textInput (ref)
-	local onAnswerChanged = p0.onAnswerChanged
+	local onAnswerChanged = p1.onAnswerChanged
 	
-	return reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = p0.layoutOrder }, {
+	return reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, {
 		Input = reactModule.createElement(textInput, {
 			label = "",
-			text = p0.answer.text or "",
+			text = p1.answer.text or "",
 			width = UDim.new(1, 0),
-			isDisabled = p0.isDisabled,
-			onChanged = reactModule.useCallback(function(p1)
+			isDisabled = p1.isDisabled,
+			onChanged = reactModule.useCallback(function(p2)
 				-- upvalues: onAnswerChanged (ref)
-				onAnswerChanged({ text = p1 })
+				onAnswerChanged({ text = p2 })
 			end, { onAnswerChanged })
 		})
 	})

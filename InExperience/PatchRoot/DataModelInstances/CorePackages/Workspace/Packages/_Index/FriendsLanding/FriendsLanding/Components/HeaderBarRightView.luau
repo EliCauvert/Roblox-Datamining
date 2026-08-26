@@ -17,13 +17,13 @@ local sources = require(parent.SocialLuaAnalytics).Analytics.Enums.Sources
 local appPage = require(parent.RobloxAppEnums).AppPage
 local fFlagConnectionManagementChips = require(parent.SharedFlags).FFlagConnectionManagementChips
 
-local var7 = function(p0)
+local var1 = function(p1)
 	-- upvalues: roact (ref), iconButton (ref), images (ref)
 	return roact.createElement(iconButton, {
 		size = UDim2.fromOffset(0, 0),
 		icon = images["icons/common/search"],
-		layoutOrder = p0.layoutOrder,
-		onActivated = p0.goToSearchFriendsPage
+		layoutOrder = p1.layoutOrder,
+		onActivated = p1.goToSearchFriendsPage
 	})
 end
 
@@ -65,19 +65,19 @@ function headerBarRightView.init(p1)
 	end)
 end
 
-function headerBarRightView.render(p3)
-	-- upvalues: t (ref), enumScreensModule (ref), roact (ref), var7 (ref), addFriendsIconModule (ref), fFlagConnectionManagementChips (ref)
-	local navigation = p3.props.navigation
-	local var10 = nil
-	local var11 = nil
+function headerBarRightView.render(p1)
+	-- upvalues: t (ref), enumScreensModule (ref), roact (ref), var1 (ref), addFriendsIconModule (ref), fFlagConnectionManagementChips (ref)
+	local navigation = p1.props.navigation
+	local var2 = nil
+	local var3 = nil
 	
-	if p3.props.addFriendsPageSearchbarEnabled then
+	if p1.props.addFriendsPageSearchbarEnabled then
 		t.SHOW_ADDFRIENDS_ICON[enumScreensModule.SearchFriends] = false
 	end
 	if navigation and navigation.state then
 		local routeName = navigation.state.routeName
-		var10 = t.SHOW_SEARCHFRIENDS_ICON[routeName]
-		var11 = t.SHOW_ADDFRIENDS_ICON[routeName]
+		var2 = t.SHOW_SEARCHFRIENDS_ICON[routeName]
+		var3 = t.SHOW_ADDFRIENDS_ICON[routeName]
 	end
 	return roact.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -89,32 +89,32 @@ function headerBarRightView.render(p3)
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		SearchFriendsIcon = var10 and var7({
+		SearchFriendsIcon = var2 and var1({
 			layoutOrder = 1,
-			goToSearchFriendsPage = p3.goToSearchFriendsPage()
+			goToSearchFriendsPage = p1.goToSearchFriendsPage()
 		}),
 		Padding = roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			Size = UDim2.new(0, 0, 0, 0)
 		}),
-		AddFriendsIcon = var11 and roact.createElement(addFriendsIconModule, {
+		AddFriendsIcon = var3 and roact.createElement(addFriendsIconModule, {
 			layoutOrder = 3,
-			onActivated = p3.goToFriendRequestsPage(p3.props.navigateToLuaAppPages, p3.props.totalFriendCount),
-			friendRequestCount = p3.props.friendRequestCount,
-			showTooltip = if fFlagConnectionManagementChips then false else p3.props.totalFriendCount == 0
+			onActivated = p1.goToFriendRequestsPage(p1.props.navigateToLuaAppPages, p1.props.totalFriendCount),
+			friendRequestCount = p1.props.friendRequestCount,
+			showTooltip = if fFlagConnectionManagementChips then false else p1.props.totalFriendCount == 0
 		})
 	})
 end
 
-return compose(friendsLandingAnalyticsModule.connect(function(p4)
-	return { analytics = p4 }
-end), friendsLandingContextModule.connect(function(p5, _)
+return compose(friendsLandingAnalyticsModule.connect(function(p1)
+	return { analytics = p1 }
+end), friendsLandingContextModule.connect(function(p1, _)
 	return {
-		navigateToLuaAppPages = p5.navigateToLuaAppPages,
-		friendRequestCount = p5.friendRequestCount,
-		totalFriendCount = p5.totalFriendCount,
-		luaAddFriendsPageEnabled = p5.luaAddFriendsPageEnabled,
-		addFriendsPageSearchbarEnabled = p5.addFriendsPageSearchbarEnabled
+		navigateToLuaAppPages = p1.navigateToLuaAppPages,
+		friendRequestCount = p1.friendRequestCount,
+		totalFriendCount = p1.totalFriendCount,
+		luaAddFriendsPageEnabled = p1.luaAddFriendsPageEnabled,
+		addFriendsPageSearchbarEnabled = p1.addFriendsPageSearchbarEnabled
 	}
 end))(headerBarRightView)

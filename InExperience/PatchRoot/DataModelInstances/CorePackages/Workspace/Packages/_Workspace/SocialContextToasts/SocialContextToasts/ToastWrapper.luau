@@ -14,27 +14,27 @@ local getFFlagSocialContextToastEventStream = require(parent.SharedFlags).GetFFl
 local vector2 = Vector2.new(48, 48)
 local vector2_1 = Vector2.new(36, 36)
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: reactModule (ref), coPlayFooter (ref), colors (ref)
-	return function(p3)
-		-- upvalues: p0 (ref), reactModule (copy), coPlayFooter (copy), p2 (ref), p1 (ref), colors (copy)
-		local offset = p3.Size.X.Offset
-		local var9 = if #p0 == 1 then offset else (offset - -9) / 2
+	return function(p4)
+		-- upvalues: p1 (ref), reactModule (copy), coPlayFooter (copy), p3 (ref), p2 (ref), colors (copy)
+		local offset = p4.Size.X.Offset
+		local var1 = if #p1 == 1 then offset else (offset - -9) / 2
 		
 		return reactModule.createElement(coPlayFooter, {
 			faceGroupCount = 1,
-			users = p0,
-			size = p3.Size,
-			showEmphasisBorder = p2,
+			users = p1,
+			size = p4.Size,
+			showEmphasisBorder = p3,
 			styleProps = {
 				faceGroupGap = -9,
-				faceWidth = var9,
-				faceHeight = var9,
-				badgeHeight = var9,
-				badgeBorderColor = p1.Theme.SystemPrimaryContent,
-				faceBorderColor = p1.Theme.SystemPrimaryContent,
+				faceWidth = var1,
+				faceHeight = var1,
+				badgeHeight = var1,
+				badgeBorderColor = p2.Theme.SystemPrimaryContent,
+				faceBorderColor = p2.Theme.SystemPrimaryContent,
 				faceBackgroundColor = { colors.Smoke, Transparency = 0 },
-				showEmphasisBorder = p2
+				showEmphasisBorder = p3
 			}
 		})
 	end
@@ -42,66 +42,66 @@ end
 
 local t = { areUsersActive = true }
 
-return function(p4)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), getFFlagSocialContextToastEventStream (ref), reactModule (ref), socialContextToastEventsModule (ref), socialContextToastAnalyticsActionTypesModule (ref), useStyle (ref), getLocalizedStrings (ref), toast (ref), coPlayFooter (ref), colors (ref), vector2 (ref), vector2_1 (ref)
-	local var10 = cryoModule.Dictionary.join(t, p4)
-	local var11 = nil
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = nil
 	
 	if getFFlagSocialContextToastEventStream() then
-		local analyticsProps = var10.analyticsProps
-		var11 = reactModule.useCallback(function()
-			-- upvalues: var10 (ref), socialContextToastEventsModule (copy), analyticsProps (ref), socialContextToastAnalyticsActionTypesModule (copy)
+		local analyticsProps = var1.analyticsProps
+		var2 = reactModule.useCallback(function()
+			-- upvalues: var1 (ref), socialContextToastEventsModule (copy), analyticsProps (ref), socialContextToastAnalyticsActionTypesModule (copy)
 			socialContextToastEventsModule(analyticsProps.eventIngest, {
 				toastType = analyticsProps.toastType,
-				friendId = if var10.userIdList then table.concat(var10.userIdList) else nil,
+				friendId = if var1.userIdList then table.concat(var1.userIdList) else nil,
 				universeId = analyticsProps.gameId,
 				placeId = analyticsProps.placeId,
 				actionType = socialContextToastAnalyticsActionTypesModule.ForceDismissed
 			})
 		end)
 	end
-	if var10.onActivated == nil then
+	if var1.onActivated == nil then
 		if getFFlagSocialContextToastEventStream() then
-			var10.onActivated = var11
+			var1.onActivated = var2
 		else
 			function var10.onActivated() end
 		end
 	end
-	local var12 = useStyle()
-	local var13 = getLocalizedStrings(var10.toastStrings)
-	local userIdList = var10.userIdList
+	local var3 = useStyle()
+	local var4 = getLocalizedStrings(var1.toastStrings)
+	local userIdList = var1.userIdList
 	local createElement = reactModule.createElement
 	local t_1 = { duration = 6 }
 	local t_2 = {}
-	local areUsersActive = var10.areUsersActive
-	t_2.iconImage = if userIdList then function(p5)
-		-- upvalues: userIdList (ref), reactModule (copy), coPlayFooter (copy), areUsersActive (ref), var12 (ref), colors (copy)
-		local offset = p5.Size.X.Offset
-		local var9 = if #userIdList == 1 then offset else (offset - -9) / 2
+	local areUsersActive = var1.areUsersActive
+	t_2.iconImage = if userIdList then function(p2)
+		-- upvalues: userIdList (ref), reactModule (copy), coPlayFooter (copy), areUsersActive (ref), var3 (ref), colors (copy)
+		local offset = p2.Size.X.Offset
+		local var5 = if #userIdList == 1 then offset else (offset - -9) / 2
 		
 		return reactModule.createElement(coPlayFooter, {
 			faceGroupCount = 1,
 			users = userIdList,
-			size = p5.Size,
+			size = p2.Size,
 			showEmphasisBorder = areUsersActive,
 			styleProps = {
 				faceGroupGap = -9,
-				faceWidth = var9,
-				faceHeight = var9,
-				badgeHeight = var9,
-				badgeBorderColor = var12.Theme.SystemPrimaryContent,
-				faceBorderColor = var12.Theme.SystemPrimaryContent,
+				faceWidth = var5,
+				faceHeight = var5,
+				badgeHeight = var5,
+				badgeBorderColor = var3.Theme.SystemPrimaryContent,
+				faceBorderColor = var3.Theme.SystemPrimaryContent,
 				faceBackgroundColor = { colors.Smoke, Transparency = 0 },
 				showEmphasisBorder = areUsersActive
 			}
 		})
 	end else nil
-	t_2.toastTitle = var13.label
+	t_2.toastTitle = var4.label
 	t_2.iconSize = if userIdList and #userIdList > 1 then vector2 else vector2_1
-	t_2.onActivated = var10.onActivated
-	t_2.buttonText = var13.button
-	t_2.buttonType = var10.buttonType
-	t_2.onTouchSwipeUp = if getFFlagSocialContextToastEventStream() then var11 else nil
+	t_2.onActivated = var1.onActivated
+	t_2.buttonText = var4.button
+	t_2.buttonType = var1.buttonType
+	t_2.onTouchSwipeUp = if getFFlagSocialContextToastEventStream() then var2 else nil
 	t_1.toastContent = t_2
 	
 	return createElement(toast, t_1)

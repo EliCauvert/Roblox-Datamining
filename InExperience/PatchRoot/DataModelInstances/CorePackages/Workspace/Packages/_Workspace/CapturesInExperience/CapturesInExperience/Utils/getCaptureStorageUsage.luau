@@ -5,7 +5,7 @@ local _ = require(parent.Types)
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-function formatBytes(p0)
+function formatBytes(p1)
 	local list = {
 		"Bytes",
 		"KB",
@@ -13,15 +13,15 @@ function formatBytes(p0)
 		"GB",
 		"TB"
 	}
-	local floored = math.floor(math.log(p0) / 6.931471805599)
-	local var6 = p0 / math.pow(1024, floored)
-	local var7 = "%.2f%s"
+	local floored = math.floor(math.log(p1) / 6.931471805599)
+	local var1 = p1 / math.pow(1024, floored)
+	local var2 = "%.2f%s"
 	
 	if floored <= 2 then
-		var6 = math.round(var6)
-		var7 = "%d%s"
+		var1 = math.round(var1)
+		var2 = "%d%s"
 	end
-	return if list[floored + 1] then string.format(var7, var6, list[floored + 1]) else ""
+	return if list[floored + 1] then string.format(var2, var1, list[floored + 1]) else ""
 end
 
 return function(p1)

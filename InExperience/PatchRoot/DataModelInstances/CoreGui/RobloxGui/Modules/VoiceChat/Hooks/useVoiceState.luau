@@ -11,8 +11,8 @@ while not localPlayer do
 	playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
 	localPlayer = playersService.LocalPlayer
 end
-local var6 = if localPlayer then localPlayer.UserId else 0
-local var7 = if game:GetEngineFeature("VoiceChatSupported") then Enum.VoiceChatState else {
+local var1 = if localPlayer then localPlayer.UserId else 0
+local var2 = if game:GetEngineFeature("VoiceChatSupported") then Enum.VoiceChatState else {
 	Idle = 1,
 	Joining = 2,
 	JoiningRetry = 3,
@@ -22,18 +22,18 @@ local var7 = if game:GetEngineFeature("VoiceChatSupported") then Enum.VoiceChatS
 	Failed = 7
 }
 local t = {
-	[var7.Idle] = VOICE_STATE.HIDDEN,
-	[var7.Joining] = VOICE_STATE.CONNECTING,
-	[var7.JoiningRetry] = VOICE_STATE.CONNECTING,
-	[var7.Joined] = VOICE_STATE.MUTED,
-	[var7.Leaving] = VOICE_STATE.MUTED,
-	[var7.Ended] = VOICE_STATE.HIDDEN,
-	[var7.Failed] = VOICE_STATE.ERROR
+	[var2.Idle] = VOICE_STATE.HIDDEN,
+	[var2.Joining] = VOICE_STATE.CONNECTING,
+	[var2.JoiningRetry] = VOICE_STATE.CONNECTING,
+	[var2.Joined] = VOICE_STATE.MUTED,
+	[var2.Leaving] = VOICE_STATE.MUTED,
+	[var2.Ended] = VOICE_STATE.HIDDEN,
+	[var2.Failed] = VOICE_STATE.ERROR
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref), VOICE_STATE (ref)
-	return if t[p0] then t[p0] else VOICE_STATE.MUTED
+	return if t[p1] then t[p1] else VOICE_STATE.MUTED
 end
 
 local _ = function(p1)
@@ -62,192 +62,192 @@ local _ = function(p1)
 	return INACTIVE
 end
 
-return function(p2, p3, p4)
-	-- upvalues: default (ref), reactModule (ref), voiceStateContextModule (ref), VOICE_STATE (ref), var6 (ref), t (ref), var7 (write), blockedStatusChangedEvent (ref)
-	local var9 = if p4 then p4.voiceChatServiceManager else default
-	local var10 = reactModule.useContext(voiceStateContextModule.Context)
-	local var11, var12 = reactModule.useState(VOICE_STATE.HIDDEN)
+return function(p1, p2, p3)
+	-- upvalues: default (ref), reactModule (ref), voiceStateContextModule (ref), VOICE_STATE (ref), var1 (ref), t (ref), var2 (write), blockedStatusChangedEvent (ref)
+	local var3 = if p3 then p3.voiceChatServiceManager else default
+	local var4 = reactModule.useContext(voiceStateContextModule.Context)
+	local var5, var6 = reactModule.useState(VOICE_STATE.HIDDEN)
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), p2 (ref), p3 (ref), var12 (ref), VOICE_STATE (copy), var6 (copy), var11 (ref), t (copy), var9 (ref), var7 (copy), blockedStatusChangedEvent (copy)
-		if var10.voiceEnabled and p2 and not p3 then
-			local var13 = tonumber(p2)
-			local var14 = tostring(p2)
-			local var15 = var6 == var13
-			local var16 = nil
+		-- upvalues: var4 (ref), p1 (ref), p2 (ref), var6 (ref), VOICE_STATE (copy), var1 (copy), var5 (ref), t (copy), var3 (ref), var2 (copy), blockedStatusChangedEvent (copy)
+		if var4.voiceEnabled and p1 and not p2 then
+			local var7 = tonumber(p1)
+			local var8 = tostring(p1)
+			local var9 = var1 == var7
+			local var10 = nil
 			local t_1 = {}
-			local var18 = false
+			local var11 = false
 			
-			local function _(p5)
-				-- upvalues: var18 (write), var12 (copy)
-				if not var18 then
-					var12(p5)
+			local function _(p4)
+				-- upvalues: var11 (write), var6 (copy)
+				if not var11 then
+					var6(p4)
 				end
 			end
 			
 			local function setVoiceEnabled(value)
-				-- upvalues: var11 (copy), var15 (ref), t (copy), VOICE_STATE (copy), var9 (copy), var14 (ref), var16 (write), var7 (copy), var18 (write), var12 (copy)
-				local var20 = var11
+				-- upvalues: var5 (copy), var9 (ref), t (copy), VOICE_STATE (copy), var3 (copy), var8 (ref), var10 (write), var2 (copy), var11 (write), var6 (copy)
+				local var12 = var5
 				
-				if var15 then
-					var20 = if not t[value] then VOICE_STATE.MUTED else t[value]
+				if var9 then
+					var12 = if not t[value] then VOICE_STATE.MUTED else t[value]
 				else
-					local var21 = var9.participants[var14]
+					local var13 = var3.participants[var8]
 					
-					if var21 and not var16 then
+					if var13 and not var10 then
 						local INACTIVE = VOICE_STATE.INACTIVE
 						
-						if var21.subscriptionFailed then
+						if var13.subscriptionFailed then
 							INACTIVE = VOICE_STATE.ERROR
-						elseif not var21.subscriptionCompleted then
+						elseif not var13.subscriptionCompleted then
 							INACTIVE = VOICE_STATE.CONNECTING
-						elseif var21.isMutedLocally then
+						elseif var13.isMutedLocally then
 							INACTIVE = VOICE_STATE.LOCAL_MUTED
-						elseif var21.isMuted then
+						elseif var13.isMuted then
 							INACTIVE = VOICE_STATE.MUTED
-						elseif var21.isSignalActive then
+						elseif var13.isSignalActive then
 							INACTIVE = VOICE_STATE.TALKING
 						end
-						var20 = INACTIVE
+						var12 = INACTIVE
 					end
 				end
-				if value == var7.Failed then
-					if not var15 then
-						var20 = VOICE_STATE.HIDDEN
+				if value == var2.Failed then
+					if not var9 then
+						var12 = VOICE_STATE.HIDDEN
 					end
-				elseif value == var7.Joined and not var9.localMuted and var15 then
-					var20 = if var9.isTalking then VOICE_STATE.TALKING elseif var9.localMuted then VOICE_STATE.MUTED else VOICE_STATE.INACTIVE
+				elseif value == var2.Joined and not var3.localMuted and var9 then
+					var12 = if var3.isTalking then VOICE_STATE.TALKING elseif var3.localMuted then VOICE_STATE.MUTED else VOICE_STATE.INACTIVE
 				end
-				if not var18 then
-					var12(var20)
+				if not var11 then
+					var6(var12)
 				end
 			end
 			
-			setVoiceEnabled(var10.voiceState)
+			setVoiceEnabled(var4.voiceState)
 			delay(0, function()
-				-- upvalues: var18 (write), setVoiceEnabled (ref), var10 (copy), var15 (ref), t_1 (ref), var9 (copy), VOICE_STATE (copy), var12 (copy), var14 (ref), var16 (write), var13 (ref), blockedStatusChangedEvent (copy)
-				if var18 then return end
-				setVoiceEnabled(var10.voiceState)
+				-- upvalues: var11 (write), setVoiceEnabled (ref), var4 (copy), var9 (ref), t_1 (ref), var3 (copy), VOICE_STATE (copy), var6 (copy), var8 (ref), var10 (write), var7 (ref), blockedStatusChangedEvent (copy)
+				if var11 then return end
+				setVoiceEnabled(var4.voiceState)
 				
-				if var15 then
-					table.insert(t_1, var9.talkingChanged.Event:Connect(function(p6)
-						-- upvalues: VOICE_STATE (copy), var18 (copy), var12 (copy)
-						local var22 = if p6 then VOICE_STATE.TALKING else VOICE_STATE.INACTIVE
+				if var9 then
+					table.insert(t_1, var3.talkingChanged.Event:Connect(function(p4)
+						-- upvalues: VOICE_STATE (copy), var11 (copy), var6 (copy)
+						local var12 = if p4 then VOICE_STATE.TALKING else VOICE_STATE.INACTIVE
 						
-						if not var18 then
-							var12(var22)
+						if not var11 then
+							var6(var12)
 						end
 					end))
-					table.insert(t_1, var9.muteChanged.Event:Connect(function(p7)
-						-- upvalues: VOICE_STATE (copy), var18 (copy), var12 (copy)
-						local var23 = if p7 then VOICE_STATE.MUTED else VOICE_STATE.INACTIVE
+					table.insert(t_1, var3.muteChanged.Event:Connect(function(p4)
+						-- upvalues: VOICE_STATE (copy), var11 (copy), var6 (copy)
+						local var12 = if p4 then VOICE_STATE.MUTED else VOICE_STATE.INACTIVE
 						
-						if not var18 then
-							var12(var23)
+						if not var11 then
+							var6(var12)
 						end
 					end))
 					
 					return
 				end
-				table.insert(t_1, var9.participantsUpdate.Event:Connect(function(p8)
-					-- upvalues: var14 (copy), var16 (copy), VOICE_STATE (copy), var18 (copy), var12 (copy)
-					local var24 = p8[var14]
+				table.insert(t_1, var3.participantsUpdate.Event:Connect(function(p4)
+					-- upvalues: var8 (copy), var10 (copy), VOICE_STATE (copy), var11 (copy), var6 (copy)
+					local var12 = p4[var8]
 					
-					if var24 and not var16 then
+					if var12 and not var10 then
 						local INACTIVE = VOICE_STATE.INACTIVE
 						
-						if var24.subscriptionFailed then
+						if var12.subscriptionFailed then
 							INACTIVE = VOICE_STATE.ERROR
-						elseif not var24.subscriptionCompleted then
+						elseif not var12.subscriptionCompleted then
 							INACTIVE = VOICE_STATE.CONNECTING
-						elseif var24.isMutedLocally then
+						elseif var12.isMutedLocally then
 							INACTIVE = VOICE_STATE.LOCAL_MUTED
-						elseif var24.isMuted then
+						elseif var12.isMuted then
 							INACTIVE = VOICE_STATE.MUTED
-						elseif var24.isSignalActive then
+						elseif var12.isSignalActive then
 							INACTIVE = VOICE_STATE.TALKING
 						end
-						local var25 = INACTIVE
+						local var13 = INACTIVE
 						
-						if var18 then
+						if var11 then
 							return
 						else
-							var12(var25)
+							var6(var13)
 							
 							return
 						end
 					else
 						local HIDDEN = VOICE_STATE.HIDDEN
 						
-						if not var18 then
-							var12(HIDDEN)
+						if not var11 then
+							var6(HIDDEN)
 						end
 					end
 				end))
-				table.insert(t_1, var9.participantLeft.Event:Connect(function(_, p9)
-					-- upvalues: var13 (copy), VOICE_STATE (copy), var18 (copy), var12 (copy)
-					if p9 == var13 then
+				table.insert(t_1, var3.participantLeft.Event:Connect(function(_, p4)
+					-- upvalues: var7 (copy), VOICE_STATE (copy), var11 (copy), var6 (copy)
+					if p4 == var7 then
 						local HIDDEN = VOICE_STATE.HIDDEN
 						
-						if not var18 then
-							var12(HIDDEN)
+						if not var11 then
+							var6(HIDDEN)
 						end
 					end
 				end))
-				table.insert(t_1, var9.participantJoined.Event:Connect(function(_, p10)
-					-- upvalues: var13 (copy), VOICE_STATE (copy), var18 (copy), var12 (copy)
-					if p10 == var13 then
+				table.insert(t_1, var3.participantJoined.Event:Connect(function(_, p4)
+					-- upvalues: var7 (copy), VOICE_STATE (copy), var11 (copy), var6 (copy)
+					if p4 == var7 then
 						local HIDDEN = VOICE_STATE.HIDDEN
 						
-						if not var18 then
-							var12(HIDDEN)
+						if not var11 then
+							var6(HIDDEN)
 						end
 					end
 				end))
-				table.insert(t_1, blockedStatusChangedEvent:Connect(function(p11, p12)
-					-- upvalues: var13 (copy), var16 (copy), VOICE_STATE (copy), var18 (copy), var12 (copy), var9 (copy), var14 (copy)
-					if var13 == p11 then
-						if p12 then
-							var16 = true
+				table.insert(t_1, blockedStatusChangedEvent:Connect(function(p4, p5)
+					-- upvalues: var7 (copy), var10 (copy), VOICE_STATE (copy), var11 (copy), var6 (copy), var3 (copy), var8 (copy)
+					if var7 == p4 then
+						if p5 then
+							var10 = true
 							local HIDDEN = VOICE_STATE.HIDDEN
 							
-							if var18 then
+							if var11 then
 								return
 							else
-								var12(HIDDEN)
+								var6(HIDDEN)
 								
 								return
 							end
 						else
-							var16 = nil
-							local var26 = var9.participants[var14]
+							var10 = nil
+							local var12 = var3.participants[var8]
 							
-							if var26 then
+							if var12 then
 								local INACTIVE = VOICE_STATE.INACTIVE
 								
-								if var26.subscriptionFailed then
+								if var12.subscriptionFailed then
 									INACTIVE = VOICE_STATE.ERROR
-								elseif not var26.subscriptionCompleted then
+								elseif not var12.subscriptionCompleted then
 									INACTIVE = VOICE_STATE.CONNECTING
-								elseif var26.isMutedLocally then
+								elseif var12.isMutedLocally then
 									INACTIVE = VOICE_STATE.LOCAL_MUTED
-								elseif var26.isMuted then
+								elseif var12.isMuted then
 									INACTIVE = VOICE_STATE.MUTED
-								elseif var26.isSignalActive then
+								elseif var12.isSignalActive then
 									INACTIVE = VOICE_STATE.TALKING
 								end
-								local var27 = INACTIVE
+								local var13 = INACTIVE
 								
-								if var18 then
+								if var11 then
 								else
-									var12(var27)
+									var6(var13)
 									
 									return
 								end
 							else
 								local HIDDEN = VOICE_STATE.HIDDEN
 								
-								if not var18 then
-									var12(HIDDEN)
+								if not var11 then
+									var6(HIDDEN)
 								end
 							end
 						end
@@ -256,8 +256,8 @@ return function(p2, p3, p4)
 			end)
 			
 			return function()
-				-- upvalues: var18 (write), t_1 (ref)
-				var18 = true
+				-- upvalues: var11 (write), t_1 (ref)
+				var11 = true
 				delay(0, function()
 					-- upvalues: t_1 (copy)
 					for i, v in t_1 do
@@ -266,10 +266,10 @@ return function(p2, p3, p4)
 				end)
 			end
 		end
-		var12(VOICE_STATE.HIDDEN)
+		var6(VOICE_STATE.HIDDEN)
 		
 		return function() end
-	end, { p2, var10.voiceState, p3 == true })
+	end, { p1, var4.voiceState, p2 == true })
 	
-	return var11
+	return var5
 end

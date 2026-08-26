@@ -15,92 +15,92 @@ local t = {
 	overlayTransparency = 0.7,
 	transparent = false,
 	overlayColor3 = Color3.new(0, 0, 0),
-	renderOverlay = function(p0, p1, p2)
+	renderOverlay = function(p1, p2, p3)
 		-- upvalues: reactModule (ref), stackViewOverlayFrameModule (ref)
 		return reactModule.createElement(stackViewOverlayFrameModule, {
-			navigationOptions = p0,
-			initialTransitionValue = p1,
-			transitionChangedSignal = p2
+			navigationOptions = p1,
+			initialTransitionValue = p2,
+			transitionChangedSignal = p3
 		})
 	end
 }
 
-local function _(p3, p4)
-	return math.max(math.min(1 + p4 - p3, 1), 0)
+local function _(p1, p2)
+	return math.max(math.min(1 + p2 - p1, 1), 0)
 end
 
 local stackViewLayout = reactModule.Component:extend("StackViewLayout")
 
-function stackViewLayout.init(p5)
-	p5:setState({})
-	local index = p5.props.transitionProps.navigation.state.index
-	p5._isMounted = false
-	p5._positionLastValue = index
+function stackViewLayout.init(p1)
+	p1:setState({})
+	local index = p1.props.transitionProps.navigation.state.index
+	p1._isMounted = false
+	p1._positionLastValue = index
 	
-	function p5._renderScene(p6)
-		-- upvalues: p5 (ref)
-		return p5:_renderInnerScene(p6)
+	function p5._renderScene(p2)
+		-- upvalues: p1 (ref)
+		return p1:_renderInnerScene(p2)
 	end
 	
-	function p5._subscribeToOverlayUpdates(p7)
-		-- upvalues: p5 (ref)
-		local index = p5.props.transitionProps.scene.index
+	function p5._subscribeToOverlayUpdates(p2)
+		-- upvalues: p1 (ref)
+		local index = p1.props.transitionProps.scene.index
 		
-		return p5.props.transitionProps.position:onStep(function(p8)
-			-- upvalues: p7 (ref), index (ref)
-			p7(math.max(math.min(1 + p8 - index, 1), 0))
+		return p1.props.transitionProps.position:onStep(function(p3)
+			-- upvalues: p2 (ref), index (ref)
+			p2(math.max(math.min(1 + p3 - index, 1), 0))
 		end)
 	end
 end
 
-function stackViewLayout._renderCard(p9, p10, p11)
+function stackViewLayout._renderCard(p1, p2, p3)
 	-- upvalues: object (ref), reactModule (ref), stackViewCardModule (ref)
-	local transitionProps = p9.props.transitionProps
-	local lastTransitionProps = p9.props.lastTransitionProps
-	local transitionConfig = p9.state.transitionConfig
-	local cardColor3 = p11.cardColor3
-	local overlayEnabled = p11.overlayEnabled
-	local transparent = p11.transparent
-	local var8 = if lastTransitionProps then lastTransitionProps.scene.index else transitionProps.scene.index
+	local transitionProps = p1.props.transitionProps
+	local lastTransitionProps = p1.props.lastTransitionProps
+	local transitionConfig = p1.state.transitionConfig
+	local cardColor3 = p3.cardColor3
+	local overlayEnabled = p3.overlayEnabled
+	local transparent = p3.transparent
+	local var1 = if lastTransitionProps then lastTransitionProps.scene.index else transitionProps.scene.index
 	local t = {}
 	local screenInterpolator = transitionConfig.screenInterpolator
 	
 	if screenInterpolator then
-		t = screenInterpolator(object.assign(table.clone(transitionProps), { initialPositionValue = var8, scene = p10 }))
+		t = screenInterpolator(object.assign(table.clone(transitionProps), { initialPositionValue = var1, scene = p2 }))
 	end
 	return reactModule.createElement(stackViewCardModule, object.assign(table.clone(transitionProps), t, {
-		key = "card_" .. tostring(p10.key),
-		scene = p10,
-		renderScene = p9._renderScene,
+		key = "card_" .. tostring(p2.key),
+		scene = p2,
+		renderScene = p1._renderScene,
 		cardColor3 = if overlayEnabled or transparent then nil else cardColor3
 	}))
 end
 
-function stackViewLayout._renderInnerScene(p12, p13)
+function stackViewLayout._renderInnerScene(p1, p2)
 	-- upvalues: reactModule (ref), sceneViewModule (ref)
 	return reactModule.createElement(sceneViewModule, {
-		screenProps = p12.props.screenProps,
-		navigation = p13.descriptor.navigation,
-		component = p13.descriptor.getComponent()
+		screenProps = p1.props.screenProps,
+		navigation = p2.descriptor.navigation,
+		component = p2.descriptor.getComponent()
 	})
 end
 
-function stackViewLayout.render(p14)
+function stackViewLayout.render(p1)
 	-- upvalues: object (ref), t (ref), reactModule (ref)
-	local topMostOpaqueSceneIndex = p14.state.topMostOpaqueSceneIndex
+	local topMostOpaqueSceneIndex = p1.state.topMostOpaqueSceneIndex
 	local t_1 = {}
 	
-	for i, v in p14.props.transitionProps.scenes do
-		local var11 = v.index < topMostOpaqueSceneIndex and not v.isActive
-		local var12 = if v.descriptor.options then object.assign(table.clone(t), v.descriptor.options) else table.clone(t)
+	for i, v in p1.props.transitionProps.scenes do
+		local var1 = v.index < topMostOpaqueSceneIndex and not v.isActive
+		local var2 = if v.descriptor.options then object.assign(table.clone(t), v.descriptor.options) else table.clone(t)
 		t_1[tostring(v.key)] = reactModule.createElement(reactModule.Fragment, {}, {
-			AbsorbInput = if not (var11 or not var12.absorbInput) then reactModule.createElement("TextButton", {
+			AbsorbInput = if not (var1 or not var2.absorbInput) then reactModule.createElement("TextButton", {
 				Active = true,
 				AutoButtonColor = false,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Text = " ",
-				Selectable = var12.absorbInputSelectable,
+				Selectable = var2.absorbInputSelectable,
 				Size = UDim2.new(1, 0, 1, 0),
 				ZIndex = 2 * v.index - 1
 			}) else nil,
@@ -110,16 +110,16 @@ function stackViewLayout.render(p14)
 				ClipsDescendants = false,
 				Size = UDim2.new(1, 0, 1, 0),
 				ZIndex = 2 * v.index,
-				Visible = not var11
+				Visible = not var1
 			}, {
-				StationaryContent = if var12.overlayEnabled then reactModule.createElement("Frame", {
+				StationaryContent = if var2.overlayEnabled then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					ClipsDescendants = true,
 					BorderSizePixel = 0,
 					ZIndex = 1,
 					Size = UDim2.new(1, 0, 1, 0)
 				}, {
-					Overlay = var12:renderOverlay(math.max(math.min(1 + p14._positionLastValue - v.index, 1), 0), p14._subscribeToOverlayUpdates)
+					Overlay = var2:renderOverlay(math.max(math.min(1 + p1._positionLastValue - v.index, 1), 0), p1._subscribeToOverlayUpdates)
 				}) else nil,
 				DynamicContent = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -127,7 +127,7 @@ function stackViewLayout.render(p14)
 					BorderSizePixel = 0,
 					ZIndex = 2,
 					Size = UDim2.new(1, 0, 1, 0)
-				}, { ["card_" .. v.key] = p14:_renderCard(v, var12) })
+				}, { ["card_" .. v.key] = p1:_renderCard(v, var2) })
 			})
 		})
 	end
@@ -139,63 +139,63 @@ function stackViewLayout.render(p14)
 	}, t_1)
 end
 
-function stackViewLayout.getDerivedStateFromProps(p15, _)
+function stackViewLayout.getDerivedStateFromProps(p2, _)
 	-- upvalues: stackPresentationStyleModule (ref), object (ref), t (ref), stackViewTransitionConfigsModule (ref)
-	local transitionProps = p15.transitionProps
+	local transitionProps = p2.transitionProps
 	local scenes = transitionProps.scenes
 	local isTransitioning = transitionProps.navigation.state.isTransitioning
 	local scenesCount = #scenes
-	local var14 = if p15.mode ~= stackPresentationStyleModule.Modal then p15.mode == stackPresentationStyleModule.Overlay else true
-	local var15 = 0
+	local var3 = if p2.mode ~= stackPresentationStyleModule.Modal then p2.mode == stackPresentationStyleModule.Overlay else true
+	local var4 = 0
 	
 	for i = scenesCount, 1, -1 do
-		local var16 = scenes[i]
-		local var17 = if var16.descriptor.options then object.assign(table.clone(t), var16.descriptor.options) else table.clone(t)
+		local var5 = scenes[i]
+		local var6 = if var5.descriptor.options then object.assign(table.clone(t), var5.descriptor.options) else table.clone(t)
 		
-		if var17.transparent or var14 and var17.overlayEnabled or isTransitioning and i == scenesCount then
+		if var6.transparent or var3 and var6.overlayEnabled or isTransitioning and i == scenesCount then
 			continue
 		end
-		var15 = i
+		var4 = i
 		break
 	end
 	return {
-		topMostOpaqueSceneIndex = var15,
-		transitionConfig = stackViewTransitionConfigsModule.getTransitionConfig(p15.transitionConfig, p15.transitionProps, p15.lastTransitionProps, p15.mode)
+		topMostOpaqueSceneIndex = var4,
+		transitionConfig = stackViewTransitionConfigsModule.getTransitionConfig(p2.transitionConfig, p2.transitionProps, p2.lastTransitionProps, p2.mode)
 	}
 end
 
-function stackViewLayout.didMount(p16)
-	p16._isMounted = true
-	p16._positionDisconnector = p16.props.transitionProps.position:onStep(function(...)
-		-- upvalues: p16 (ref)
-		p16:_onPositionStep(...)
+function stackViewLayout.didMount(p3)
+	p3._isMounted = true
+	p3._positionDisconnector = p3.props.transitionProps.position:onStep(function(...)
+		-- upvalues: p3 (ref)
+		p3:_onPositionStep(...)
 	end)
 end
 
-function stackViewLayout.willUnmount(p17)
-	p17._isMounted = false
+function stackViewLayout.willUnmount(p3)
+	p3._isMounted = false
 	
-	if p17._positionDisconnector then
-		p17._positionDisconnector()
-		p17._positionDisconnector = nil
+	if p3._positionDisconnector then
+		p3._positionDisconnector()
+		p3._positionDisconnector = nil
 	end
 end
 
-function stackViewLayout.didUpdate(p18, p19)
-	local position = p18.props.transitionProps.position
+function stackViewLayout.didUpdate(p3, p4)
+	local position = p3.props.transitionProps.position
 	
-	if position ~= p19.transitionProps.position then
-		p18._positionDisconnector()
-		p18._positionDisconnector = position:onStep(function(...)
-			-- upvalues: p18 (ref)
-			p18:_onPositionStep(...)
+	if position ~= p4.transitionProps.position then
+		p3._positionDisconnector()
+		p3._positionDisconnector = position:onStep(function(...)
+			-- upvalues: p3 (ref)
+			p3:_onPositionStep(...)
 		end)
 	end
 end
 
-function stackViewLayout._onPositionStep(p20, p21)
-	if p20._isMounted then
-		p20._positionLastValue = p21
+function stackViewLayout._onPositionStep(p3, p4)
+	if p3._isMounted then
+		p3._positionLastValue = p4
 	end
 end
 

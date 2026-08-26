@@ -12,9 +12,9 @@
 	PURCHASE_PLACE_INVALID = Enum.MarketplaceItemPurchaseStatus.PlaceInvalid
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref)
-	local errorReason = t[p0.errorReason]
+	local errorReason = t[p1.errorReason]
 	
-	return if p0.status == "SUCCEEDED" then Enum.MarketplaceItemPurchaseStatus.Success else errorReason or Enum.MarketplaceItemPurchaseStatus.SystemError
+	return if p1.status == "SUCCEEDED" then Enum.MarketplaceItemPurchaseStatus.Success else errorReason or Enum.MarketplaceItemPurchaseStatus.SystemError
 end

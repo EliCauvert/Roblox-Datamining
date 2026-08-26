@@ -4,16 +4,16 @@ return require(game:GetService("CorePackages").Packages.InGameMenuDependencies).
 	inspectMenuEnabled = true,
 	inputType = require(parent.Resources.Constants).InputType.MouseAndKeyboard
 }, {
-	[require(parent.Actions.SetInspectMenuEnabled).name] = function(p0, p1)
+	[require(parent.Actions.SetInspectMenuEnabled).name] = function(p1, p2)
 		return {
-			inspectMenuEnabled = p1.enabled,
-			inputType = p0.inputType
+			inspectMenuEnabled = p2.enabled,
+			inputType = p1.inputType
 		}
 	end,
-	[require(parent.Actions.SetInputType).name] = function(p2, p3)
+	[require(parent.Actions.SetInputType).name] = function(p1, p2)
 		return {
-			inspectMenuEnabled = p2.inspectMenuEnabled,
-			inputType = p3.inputType
+			inspectMenuEnabled = p1.inspectMenuEnabled,
+			inputType = p2.inputType
 		}
 	end
 })

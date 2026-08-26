@@ -2,12 +2,12 @@
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref), scriptProfilerService (ref)
 	local tbl = setmetatable({ _data = nil }, t)
 	local ok, status = pcall(function()
-		-- upvalues: scriptProfilerService (copy), p0 (ref)
-		return scriptProfilerService:DeserializeJSON(p0)
+		-- upvalues: scriptProfilerService (copy), p1 (ref)
+		return scriptProfilerService:DeserializeJSON(p1)
 	end)
 	
 	if ok then
@@ -24,10 +24,10 @@ function t:getFunctionById(p1)
 	return if self._data then self._data.Functions[p1] else nil
 end
 
-function t:getNodeById(p2)
+function t:getNodeById(p1)
 	local data = self._data
 	
-	return if data then data.Nodes[p2] else nil
+	return if data then data.Nodes[p1] else nil
 end
 
 function t:getSessionDuration()
@@ -71,28 +71,28 @@ function t:getPackageStatistics()
 	if not self._data then
 		return {}
 	end
-	local var6, var9
+	local var1, var2
 	local t_1 = {}
 	
 	for i, v in self._data.Categories do
 		for i_1, v_1 in self._data.Nodes[v.NodeId].Children do
-			var6 = self._data.Nodes[v_1]
+			var1 = self._data.Nodes[v_1]
 			
-			for i_2, v_2 in var6.Children do
-				local var7 = tonumber(i_2)
+			for i_2, v_2 in var1.Children do
+				local var3 = tonumber(i_2)
 				
-				if not var7 then break end
-				local var8 = self._data.Functions[var7]
+				if not var3 then break end
+				local var4 = self._data.Functions[var3]
 				
-				if not var8 then break end
-				var9 = t.parsePackageName(var8.Source)
+				if not var4 then break end
+				var2 = t.parsePackageName(var4.Source)
 				
-				if not var9 then break end
-				if not t_1[var9] then
-					t_1[var9] = { count = 0, totalDuration = 0 }
+				if not var2 then break end
+				if not t_1[var2] then
+					t_1[var2] = { count = 0, totalDuration = 0 }
 				end
-				t_1[var9].count += 1
-				t_1[var9].totalDuration += var6.TotalDuration
+				t_1[var2].count += 1
+				t_1[var2].totalDuration += var1.TotalDuration
 				break
 			end
 		end

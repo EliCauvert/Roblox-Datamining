@@ -23,34 +23,34 @@ infoDialog.validateProps = t.strictInterface({
 	buttonRef = t.optional(t.table)
 })
 
-function infoDialog.render(p0)
+function infoDialog.render(p1)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), roact (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), dividerModule (ref), button (ref), buttonType (ref)
-	local props = p0.props
+	local props = p1.props
 	
-	return withFoundationOrUIBloxStyle(function(p1)
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				Overlay = {
-					Color = p1.Color.Common.Scrim.Color3,
-					Transparency = p1.Color.Common.Scrim.Transparency
+					Color = p2.Color.Common.Scrim.Color3,
+					Transparency = p2.Color.Common.Scrim.Transparency
 				},
 				BackgroundUIDefault = {
-					Color = p1.Color.Surface.Surface_300.Color3,
-					Transparency = p1.Color.Surface.Surface_300.Transparency
+					Color = p2.Color.Surface.Surface_300.Color3,
+					Transparency = p2.Color.Surface.Surface_300.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				Body = {
-					Font = p1.Typography.BodyLarge.Font,
-					RelativeSize = p1.Typography.BodyLarge.FontSize
+					Font = p2.Typography.BodyLarge.Font,
+					RelativeSize = p2.Typography.BodyLarge.FontSize
 				}
 			}
 		}
 	end, function(p2)
-		-- upvalues: props (ref), textService (copy), roact (copy), imageSetLabel (copy), assetsModule (copy), p0 (ref), themedTextLabelModule (copy), dividerModule (copy), button (copy), buttonType (copy)
-		local var8 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
-		local var9 = math.max(textService:GetTextSize(props.bodyText, var8, p2.Font.Body.Font, Vector2.new(264, 1e999)).Y, var8 * 2) + 48
+		-- upvalues: props (ref), textService (copy), roact (copy), imageSetLabel (copy), assetsModule (copy), p1 (ref), themedTextLabelModule (copy), dividerModule (copy), button (copy), buttonType (copy)
+		local var1 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
+		local var2 = math.max(textService:GetTextSize(props.bodyText, var1, p2.Font.Body.Font, Vector2.new(264, 1e999)).Y, var1 * 2) + 48
 		
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -74,7 +74,7 @@ function infoDialog.render(p0)
 				ImageTransparency = p2.Theme.BackgroundUIDefault.Transparency,
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				ScaleType = assetsModule.Images.RoundedRect.ScaleType,
-				Size = UDim2.new(0, 312, 0, var9 + 49 + 36 + 36 + 24 + 10),
+				Size = UDim2.new(0, 312, 0, var2 + 49 + 36 + 36 + 24 + 10),
 				SliceCenter = assetsModule.Images.RoundedRect.SliceCenter
 			}, {
 				Padding = roact.createElement("UIPadding", {
@@ -92,7 +92,7 @@ function infoDialog.render(p0)
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Size = UDim2.new(0, 36, 0, 36),
-					Image = p0.props.iconImage
+					Image = p1.props.iconImage
 				}),
 				Title = roact.createElement(themedTextLabelModule, {
 					fontKey = "Header1",
@@ -105,7 +105,7 @@ function infoDialog.render(p0)
 				BodyTextContainer = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
-					Size = UDim2.new(1, 0, 0, var9)
+					Size = UDim2.new(1, 0, 0, var2)
 				}, {
 					BodyText = roact.createElement(themedTextLabelModule, {
 						TextWrapped = true,
@@ -119,19 +119,19 @@ function infoDialog.render(p0)
 					size = UDim2.new(1, 0, 0, 36),
 					onActivated = props.onDismiss,
 					text = props.dismissText,
-					[roact.Ref] = p0.props.buttonRef
+					[roact.Ref] = p1.props.buttonRef
 				})
 			})
 		})
 	end)
 end
 
-function infoDialog.bindActions(p3)
+function infoDialog.bindActions(p1)
 	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, p4, _)
-		-- upvalues: p3 (ref)
-		if p4 == Enum.UserInputState.Begin then
-			p3.props.onDismiss()
+	contextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, p2, _)
+		-- upvalues: p1 (ref)
+		if p2 == Enum.UserInputState.Begin then
+			p1.props.onDismiss()
 		end
 	end, false, Enum.KeyCode.Escape)
 end
@@ -141,23 +141,23 @@ function infoDialog.unbindActions(_)
 	contextActionService:UnbindCoreAction("InGameMenuModalDismiss")
 end
 
-function infoDialog.didMount(p5)
-	if p5.props.visible then
-		p5:bindActions()
+function infoDialog.didMount(p1)
+	if p1.props.visible then
+		p1:bindActions()
 	end
 end
 
-function infoDialog.didUpdate(p6)
-	if p6.props.visible then
-		p6:bindActions()
+function infoDialog.didUpdate(p1)
+	if p1.props.visible then
+		p1:bindActions()
 		
 		return
 	end
-	p6:unbindActions()
+	p1:unbindActions()
 end
 
-function infoDialog.willUnmount(p7)
-	p7:unbindActions()
+function infoDialog.willUnmount(p1)
+	p1:unbindActions()
 end
 
 return infoDialog

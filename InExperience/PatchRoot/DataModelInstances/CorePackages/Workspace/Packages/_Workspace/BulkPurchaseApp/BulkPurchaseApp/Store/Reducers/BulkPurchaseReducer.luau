@@ -18,38 +18,38 @@ return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModu
 		-- upvalues: bulkPurchasePromptStateEnumModule (ref)
 		return { promptState = bulkPurchasePromptStateEnumModule.None }
 	end,
-	[bulkPurchaseSucceededModule.name] = function(p0, p1)
-		local cloned = table.clone(p0)
-		cloned.itemStatuses = p1.itemStatuses
-		cloned.promptState = p1.promptState
+	[bulkPurchaseSucceededModule.name] = function(p1, p2)
+		local cloned = table.clone(p1)
+		cloned.itemStatuses = p2.itemStatuses
+		cloned.promptState = p2.promptState
 		
 		return cloned
 	end,
-	[bulkPurchaseFailedModule.name] = function(p2, p3)
+	[bulkPurchaseFailedModule.name] = function(p1, p2)
 		-- upvalues: bulkPurchasePromptStateEnumModule (ref)
-		local cloned = table.clone(p2)
-		cloned.errorCode = p3.errorCode
+		local cloned = table.clone(p1)
+		cloned.errorCode = p2.errorCode
 		cloned.promptState = bulkPurchasePromptStateEnumModule.Error
-		cloned.errorMetadata = p3.errorMetadata
+		cloned.errorMetadata = p2.errorMetadata
 		
 		return cloned
 	end,
-	[bulkPurchaseRequestedModule.name] = function(p4, p5)
-		local cloned = table.clone(p4)
-		cloned.itemData = p5.itemData
-		cloned.options = p5.options
-		cloned.orderRequest = p5.orderRequest
-		cloned.balance = p5.balance
-		cloned.totalCost = p5.totalCost
-		cloned.discountInformation = p5.discountInformation
+	[bulkPurchaseRequestedModule.name] = function(p1, p2)
+		local cloned = table.clone(p1)
+		cloned.itemData = p2.itemData
+		cloned.options = p2.options
+		cloned.orderRequest = p2.orderRequest
+		cloned.balance = p2.balance
+		cloned.totalCost = p2.totalCost
+		cloned.discountInformation = p2.discountInformation
 		
 		return cloned
 	end,
-	[bulkPurchaseStartedModule.name] = function(p6, p7)
+	[bulkPurchaseStartedModule.name] = function(p1, p2)
 		-- upvalues: bulkPurchasePromptStateEnumModule (ref)
-		local cloned = table.clone(p6)
+		local cloned = table.clone(p1)
 		cloned.promptState = bulkPurchasePromptStateEnumModule.Request
-		cloned.balance = p7.balance
+		cloned.balance = p2.balance
 		
 		return cloned
 	end

@@ -2,13 +2,13 @@
 local promiseModule = require(authCommon.Parent.Promise)
 local logoutFromAllSessionsAndReauthenticateRequestModule = require(authCommon.Http.Requests.LogoutFromAllSessionsAndReauthenticateRequest)
 
-return function(p0)
+return function(p1)
 	-- upvalues: logoutFromAllSessionsAndReauthenticateRequestModule (ref), promiseModule (ref)
-	return logoutFromAllSessionsAndReauthenticateRequestModule(p0):andThen(function(p2)
+	return logoutFromAllSessionsAndReauthenticateRequestModule(p1):andThen(function(p2)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.resolve(p2.responseBody)
-	end):catch(function(p1)
+	end):catch(function(p2)
 		-- upvalues: promiseModule (copy)
-		return if p1.data then promiseModule.reject(p1.data.errorCode) elseif p1.StatusCode then promiseModule.reject({ p1.StatusCode }) else promiseModule.reject()
+		return if p2.data then promiseModule.reject(p2.data.errorCode) elseif p2.StatusCode then promiseModule.reject({ p2.StatusCode }) else promiseModule.reject()
 	end)
 end

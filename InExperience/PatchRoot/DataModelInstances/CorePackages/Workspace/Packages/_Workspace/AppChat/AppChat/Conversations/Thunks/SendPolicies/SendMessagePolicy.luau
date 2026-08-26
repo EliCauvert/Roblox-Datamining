@@ -9,8 +9,8 @@ function t.sendMessage(_, _)
 	return promiseModule.reject("Not implemented")
 end
 
-function t.onSuccess(_, _, p0)
-	return p0
+function t.onSuccess(_, _, p1)
+	return p1
 end
 
 function t.onFailure(_, _, p1)

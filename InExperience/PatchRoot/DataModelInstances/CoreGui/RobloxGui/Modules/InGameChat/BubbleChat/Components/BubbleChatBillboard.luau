@@ -5,7 +5,7 @@ local runService = game:GetService("RunService")
 local robloxGui = coreGuiService:WaitForChild("RobloxGui")
 local starterGuiService = game:GetService("StarterGui")
 local VRService = game:GetService("VRService")
-local var7 = require(script.Parent.Parent.Logger)(script.Name)
+local var1 = require(script.Parent.Parent.Logger)(script.Name)
 local roactModule = require(corePackagesService.Packages.Roact)
 local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
 local tModule = require(corePackagesService.Packages.t)
@@ -46,16 +46,16 @@ bubbleChatBillboard.validateProps = tModule.strictInterface({
 	voiceState = tModule.optional(tModule.string)
 })
 
-function getEasierUnmutingDistance(p0)
+function getEasierUnmutingDistance(p1)
 	-- upvalues: playersService (ref), easierUnmutingBasedOnCamera (ref)
-	if not p0 then
+	if not p1 then
 		return nil
 	end
 	local humanoidRootPart = playersService.LocalPlayer and (playersService.LocalPlayer.Character and playersService.LocalPlayer.Character:FindFirstChild("HumanoidRootPart"))
 	local position = humanoidRootPart and (humanoidRootPart.CFrame and humanoidRootPart.CFrame.Position)
 	local position_1 = workspace.CurrentCamera and workspace.CurrentCamera.CFrame.Position
 	
-	return if not (not easierUnmutingBasedOnCamera and position) then if position_1 then (p0 - position_1).Magnitude else nil else (p0 - position).Magnitude
+	return if not (not easierUnmutingBasedOnCamera and position) then if position_1 then (p1 - position_1).Magnitude else nil else (p1 - position).Magnitude
 end
 
 function bubbleChatBillboard.init(p1)
@@ -77,9 +77,9 @@ function bubbleChatBillboard.init(p1)
 		haveLoggedUserExposure = if easierUnmuting3 then false else nil
 	})
 	p1.isMounted = false
-	local var39, var40 = roactModule.createBinding(Vector3.new())
-	p1.offset = var39
-	p1.updateOffset = var40
+	local var2, var3 = roactModule.createBinding(Vector3.new())
+	p1.offset = var2
+	p1.updateOffset = var3
 	p1.offsetMotor = otterModule.createSingleMotor(0)
 	p1.offsetMotor:onStep(function(p2)
 		-- upvalues: p1 (ref)
@@ -123,11 +123,11 @@ function bubbleChatBillboard.init(p1)
 			default:ToggleMutePlayer(tonumber(p1.props.userId), if p1:isShowingDueToEasierUnmuting() then constantsModule_1.VOICE_CONTEXT_TYPE.EASIER_UNMUTING else constantsModule_1.VOICE_CONTEXT_TYPE.BUBBLE_CHAT)
 		end
 		local userId = p1.props.userId
-		local var42 = if userId ~= tostring(playersService.LocalPlayer.UserId) then "MicDark" else "SpeakerDark"
+		local var4 = if userId ~= tostring(playersService.LocalPlayer.UserId) then "MicDark" else "SpeakerDark"
 		
 		function p1.renderInsert()
-			-- upvalues: roactModule (copy), voiceIndicatorModule (copy), ok (write), userId (ref), var42 (ref)
-			return roactModule.createElement(voiceIndicatorModule, { onClicked = ok, userId = userId, iconStyle = var42 })
+			-- upvalues: roactModule (copy), voiceIndicatorModule (copy), ok (write), userId (ref), var4 (ref)
+			return roactModule.createElement(voiceIndicatorModule, { onClicked = ok, userId = userId, iconStyle = var4 })
 		end
 		
 		p1.insertSize = Vector2.new(28, 28)
@@ -159,9 +159,9 @@ function bubbleChatBillboard.init(p1)
 		end
 	end
 	if easierUnmuting3 and p1.state.isInEasierUnmutingTreatment and easierUnmutingHideIfMuted then
-		p1.participantsUpdateConnection = default.participantsUpdate.Event:Connect(function(p3)
+		p1.participantsUpdateConnection = default.participantsUpdate.Event:Connect(function(p2)
 			-- upvalues: p1 (ref)
-			local userId = p3[p1.props.userId]
+			local userId = p2[p1.props.userId]
 			
 			if not userId then return end
 			if userId.isMuted ~= p1.state.isMuted then
@@ -171,152 +171,152 @@ function bubbleChatBillboard.init(p1)
 	end
 end
 
-function bubbleChatBillboard.isShowingDueToEasierUnmuting(p4)
+function bubbleChatBillboard.isShowingDueToEasierUnmuting(p1)
 	-- upvalues: easierUnmuting3 (ref), constantsModule (ref), easierUnmutingHideIfMuted (ref)
-	local var44 = easierUnmuting3
+	local var2 = easierUnmuting3
 	
-	if var44 then
-		var44 = p4.state.isInEasierUnmutingTreatment
+	if var2 then
+		var2 = p1.state.isInEasierUnmutingTreatment
 		
-		if var44 then
-			var44 = false
+		if var2 then
+			var2 = false
 			
-			if p4.props.voiceState == constantsModule.VOICE_STATE.LOCAL_MUTED then
-				var44 = p4.state.isInsideEasierUnmutingDistance
+			if p1.props.voiceState == constantsModule.VOICE_STATE.LOCAL_MUTED then
+				var2 = p1.state.isInsideEasierUnmutingDistance
 				
-				if var44 then
-					var44 = not (easierUnmutingHideIfMuted and p4.state.isMuted)
+				if var2 then
+					var2 = not (easierUnmutingHideIfMuted and p1.state.isMuted)
 				end
 			end
 		end
 	end
-	return var44
+	return var2
 end
 
-function bubbleChatBillboard.checkCounterForTimeout(p5, p6)
+function bubbleChatBillboard.checkCounterForTimeout(p1, p2)
 	-- upvalues: playersService (ref), constantsModule (ref), bubbleVoiceTimeoutMillis (ref)
-	if p5.props.userId ~= tostring(playersService.LocalPlayer.UserId) and p5.state.lastVoiceState ~= constantsModule.VOICE_STATE.TALKING and p5.state.voiceStateCounter ~= p6 then
-		local voiceStateCounter = p5.state.voiceStateCounter
+	if p1.props.userId ~= tostring(playersService.LocalPlayer.UserId) and p1.state.lastVoiceState ~= constantsModule.VOICE_STATE.TALKING and p1.state.voiceStateCounter ~= p2 then
+		local voiceStateCounter = p1.state.voiceStateCounter
 		delay(bubbleVoiceTimeoutMillis / 1000, function()
-			-- upvalues: p5 (ref), voiceStateCounter (ref)
-			if p5.state.voiceStateCounter == voiceStateCounter and p5.isMounted then
-				p5:setState({ voiceTimedOut = true })
+			-- upvalues: p1 (ref), voiceStateCounter (ref)
+			if p1.state.voiceStateCounter == voiceStateCounter and p1.isMounted then
+				p1:setState({ voiceTimedOut = true })
 			end
 		end)
 	end
 end
 
-function bubbleChatBillboard.checkCounterForTimeoutWithEasierUnmuting(p7, p8)
+function bubbleChatBillboard.checkCounterForTimeoutWithEasierUnmuting(p1, p2)
 	-- upvalues: easierUnmuting3 (ref), playersService (ref), constantsModule (ref), bubbleVoiceTimeoutMillis (ref)
-	local var45 = if p8 then p8.voiceStateCounter else nil
+	local var2 = if p2 then p2.voiceStateCounter else nil
 	
-	if not easierUnmuting3 or not p7.state.isInEasierUnmutingTreatment then
-		return p7:checkCounterForTimeout(var45)
-	elseif p7.props.userId ~= tostring(playersService.LocalPlayer.UserId) and p7.state.voiceStateCounter ~= var45 and (p7.state.lastVoiceState ~= constantsModule.VOICE_STATE.TALKING and p7.state.lastVoiceState ~= constantsModule.VOICE_STATE.LOCAL_MUTED) then
-		local voiceStateCounter = p7.state.voiceStateCounter
+	if not easierUnmuting3 or not p1.state.isInEasierUnmutingTreatment then
+		return p1:checkCounterForTimeout(var2)
+	elseif p1.props.userId ~= tostring(playersService.LocalPlayer.UserId) and p1.state.voiceStateCounter ~= var2 and (p1.state.lastVoiceState ~= constantsModule.VOICE_STATE.TALKING and p1.state.lastVoiceState ~= constantsModule.VOICE_STATE.LOCAL_MUTED) then
+		local voiceStateCounter = p1.state.voiceStateCounter
 		delay(bubbleVoiceTimeoutMillis / 1000, function()
-			-- upvalues: p7 (ref), voiceStateCounter (ref)
-			if p7.state.voiceStateCounter == voiceStateCounter and p7.isMounted then
-				p7:setState({ voiceTimedOut = true })
+			-- upvalues: p1 (ref), voiceStateCounter (ref)
+			if p1.state.voiceStateCounter == voiceStateCounter and p1.isMounted then
+				p1:setState({ voiceTimedOut = true })
 			end
 		end)
 	end
 end
 
-function bubbleChatBillboard.didMount(p9)
+function bubbleChatBillboard.didMount(p1)
 	-- upvalues: otterModule (ref), playersService (ref), runService (ref), easierUnmuting3 (ref), easierUnmutingDisplayDistance (ref), constantsModule (ref), t (ref)
-	p9.isMounted = true
-	local adornee = p9.props.lastMessage and p9.props.lastMessage.adornee
-	p9:setState({ adornee = adornee })
-	local var47 = p9:getVerticalOffset(adornee)
-	p9.offsetGoal = var47
-	p9.offsetMotor:setGoal(otterModule.instant(var47))
+	p1.isMounted = true
+	local adornee = p1.props.lastMessage and p1.props.lastMessage.adornee
+	p1:setState({ adornee = adornee })
+	local var2 = p1:getVerticalOffset(adornee)
+	p1.offsetGoal = var2
+	p1.offsetMotor:setGoal(otterModule.instant(var2))
 	local userIdPlayerByUserId = nil
 	
 	if adornee then
 		userIdPlayerByUserId = playersService:GetPlayerFromCharacter(adornee)
-	elseif tonumber(p9.props.userId) then
-		userIdPlayerByUserId = playersService:GetPlayerByUserId(p9.props.userId)
+	elseif tonumber(p1.props.userId) then
+		userIdPlayerByUserId = playersService:GetPlayerByUserId(p1.props.userId)
 	end
 	if userIdPlayerByUserId then
 		if userIdPlayerByUserId.Character then
 			coroutine.wrap(function()
-				-- upvalues: p9 (ref), userIdPlayerByUserId (write)
-				p9:onCharacterAdded(userIdPlayerByUserId, userIdPlayerByUserId.Character)
+				-- upvalues: p1 (ref), userIdPlayerByUserId (write)
+				p1:onCharacterAdded(userIdPlayerByUserId, userIdPlayerByUserId.Character)
 			end)()
 		end
-		p9.characterConn = userIdPlayerByUserId.CharacterAdded:Connect(function(p10)
-			-- upvalues: p9 (ref), userIdPlayerByUserId (write)
-			p9:onCharacterAdded(userIdPlayerByUserId, p10)
+		p1.characterConn = userIdPlayerByUserId.CharacterAdded:Connect(function(p2)
+			-- upvalues: p1 (ref), userIdPlayerByUserId (write)
+			p1:onCharacterAdded(userIdPlayerByUserId, p2)
 		end)
 	end
-	p9.heartbeatConn = runService.Heartbeat:Connect(function()
-		-- upvalues: p9 (ref), easierUnmuting3 (copy), easierUnmutingDisplayDistance (copy), constantsModule (copy), otterModule (copy), t (copy)
-		local adorneeAdorneeInstance = p9:getAdorneeInstance(p9.state.adornee)
+	p1.heartbeatConn = runService.Heartbeat:Connect(function()
+		-- upvalues: p1 (ref), easierUnmuting3 (copy), easierUnmutingDisplayDistance (copy), constantsModule (copy), otterModule (copy), t (copy)
+		local adorneeAdorneeInstance = p1:getAdorneeInstance(p1.state.adornee)
 		
 		if workspace.CurrentCamera and adorneeAdorneeInstance then
-			local var50 = if adorneeAdorneeInstance:IsA("Attachment") then adorneeAdorneeInstance.WorldPosition else adorneeAdorneeInstance.Position
-			local magnitude = (workspace.CurrentCamera.CFrame.Position - var50).Magnitude
-			local var51 = magnitude < p9.state.savedChatSettings.MaxDistance
-			local var52 = magnitude < p9.state.savedChatSettings.MinimizeDistance
-			local var53 = false
+			local var3 = if adorneeAdorneeInstance:IsA("Attachment") then adorneeAdorneeInstance.WorldPosition else adorneeAdorneeInstance.Position
+			local magnitude = (workspace.CurrentCamera.CFrame.Position - var3).Magnitude
+			local var4 = magnitude < p1.state.savedChatSettings.MaxDistance
+			local var5 = magnitude < p1.state.savedChatSettings.MinimizeDistance
+			local var6 = false
 			
-			if easierUnmuting3 and p9.state.isInEasierUnmutingTreatment then
-				local var54 = getEasierUnmutingDistance(var50)
+			if easierUnmuting3 and p1.state.isInEasierUnmutingTreatment then
+				local var7 = getEasierUnmutingDistance(var3)
 				
-				if var54 ~= nil then
-					var53 = var54 < easierUnmutingDisplayDistance
+				if var7 ~= nil then
+					var6 = var7 < easierUnmutingDisplayDistance
 				end
 			end
-			if var52 ~= p9.state.isInsideMaximizeDistance or var51 ~= p9.state.isInsideRenderDistance or easierUnmuting3 and p9.state.isInEasierUnmutingTreatment and var53 ~= p9.state.isInsideEasierUnmutingDistance then
-				p9:setState({
-					isInsideRenderDistance = var51,
-					isInsideMaximizeDistance = var52,
-					isInsideEasierUnmutingDistance = var53
+			if var5 ~= p1.state.isInsideMaximizeDistance or var4 ~= p1.state.isInsideRenderDistance or easierUnmuting3 and p1.state.isInEasierUnmutingTreatment and var6 ~= p1.state.isInsideEasierUnmutingDistance then
+				p1:setState({
+					isInsideRenderDistance = var4,
+					isInsideMaximizeDistance = var5,
+					isInsideEasierUnmutingDistance = var6
 				})
 			end
 		end
-		local adorneeVerticalOffset = p9:getVerticalOffset(p9.state.adornee)
+		local adorneeVerticalOffset = p1:getVerticalOffset(p1.state.adornee)
 		
-		if constantsModule.BILLBOARD_OFFSET_EPSILON < math.abs(adorneeVerticalOffset - p9.offsetGoal) then
-			p9.offsetGoal = adorneeVerticalOffset
-			p9.offsetMotor:setGoal(otterModule.spring(adorneeVerticalOffset, t))
+		if constantsModule.BILLBOARD_OFFSET_EPSILON < math.abs(adorneeVerticalOffset - p1.offsetGoal) then
+			p1.offsetGoal = adorneeVerticalOffset
+			p1.offsetMotor:setGoal(otterModule.spring(adorneeVerticalOffset, t))
 		end
 	end)
 	
-	if easierUnmuting3 and p9.state.isInEasierUnmutingTreatment then
-		p9:checkCounterForTimeoutWithEasierUnmuting(nil)
+	if easierUnmuting3 and p1.state.isInEasierUnmutingTreatment then
+		p1:checkCounterForTimeoutWithEasierUnmuting(nil)
 	else
-		p9:checkCounterForTimeout(nil)
+		p1:checkCounterForTimeout(nil)
 	end
 end
 
-function bubbleChatBillboard.willUnmount(p11)
-	-- upvalues: var7 (ref), easierUnmuting3 (ref), easierUnmutingHideIfMuted (ref)
-	var7:trace("Unmounting billboards for {}", p11.state.shortId)
-	p11.isMounted = false
+function bubbleChatBillboard.willUnmount(p1)
+	-- upvalues: var1 (ref), easierUnmuting3 (ref), easierUnmutingHideIfMuted (ref)
+	var1:trace("Unmounting billboards for {}", p1.state.shortId)
+	p1.isMounted = false
 	
-	if p11.characterConn then
-		p11.characterConn:Disconnect()
-		p11.characterConn = nil
+	if p1.characterConn then
+		p1.characterConn:Disconnect()
+		p1.characterConn = nil
 	end
-	if p11.heartbeatConn then
-		p11.heartbeatConn:Disconnect()
-		p11.heartbeatConn = nil
+	if p1.heartbeatConn then
+		p1.heartbeatConn:Disconnect()
+		p1.heartbeatConn = nil
 	end
-	if p11.humanoidDiedConn then
-		p11.humanoidDiedConn:Disconnect()
-		p11.humanoidDiedConn = nil
+	if p1.humanoidDiedConn then
+		p1.humanoidDiedConn:Disconnect()
+		p1.humanoidDiedConn = nil
 	end
-	p11.offsetMotor:destroy()
+	p1.offsetMotor:destroy()
 	
-	if p11.selfViewVisibilityUpdatedSignal then
-		p11.selfViewVisibilityUpdatedSignal:disconnect()
-		p11.selfViewVisibilityUpdatedSignal = nil
+	if p1.selfViewVisibilityUpdatedSignal then
+		p1.selfViewVisibilityUpdatedSignal:disconnect()
+		p1.selfViewVisibilityUpdatedSignal = nil
 	end
-	if easierUnmuting3 and p11.state.isInEasierUnmutingTreatment and (easierUnmutingHideIfMuted and p11.participantsUpdateConnection) then
-		p11.participantsUpdateConnection:Disconnect()
-		p11.participantsUpdateConnection = nil
+	if easierUnmuting3 and p1.state.isInEasierUnmutingTreatment and (easierUnmutingHideIfMuted and p1.participantsUpdateConnection) then
+		p1.participantsUpdateConnection:Disconnect()
+		p1.participantsUpdateConnection = nil
 	end
 end
 
@@ -338,209 +338,209 @@ local function waitForFirst(...)
 	return bindableEvent.Event:Wait()
 end
 
-local function findFirstChildByNameAndClass(p12, p13, p14)
-	for i, v in ipairs(p12:GetChildren()) do
-		if v.Name == p13 and v:IsA(p14) then
+local function findFirstChildByNameAndClass(p1, p2, p3)
+	for i, v in ipairs(p1:GetChildren()) do
+		if v.Name == p2 and v:IsA(p3) then
 			return v
 		end
 	end
 end
 
-function bubbleChatBillboard.onCharacterAdded(p15, p16, p17)
-	-- upvalues: waitForFirst (ref), var7 (ref), getFFlagBubbleChatInexistantAdorneeFixModule (ref), findFirstChildByNameAndClass (ref)
-	if not p17.Parent then
-		waitForFirst(p17.AncestryChanged, p16.CharacterAdded)
+function bubbleChatBillboard.onCharacterAdded(p4, p5, p6)
+	-- upvalues: waitForFirst (ref), var1 (ref), getFFlagBubbleChatInexistantAdorneeFixModule (ref), findFirstChildByNameAndClass (ref)
+	if not p6.Parent then
+		waitForFirst(p6.AncestryChanged, p5.CharacterAdded)
 	end
-	if p16.Character ~= p17 or not p17.Parent then
-		var7:debug("Mismatched or unparented character in onCharacterAdded for {}", p15.state.shortId)
+	if p5.Character ~= p6 or not p6.Parent then
+		var1:debug("Mismatched or unparented character in onCharacterAdded for {}", p4.state.shortId)
 		
 		return
 	end
-	local humanoid = p17:FindFirstChildOfClass("Humanoid")
-	while p17:IsDescendantOf(game) and not humanoid do
-		waitForFirst(p17.ChildAdded, p17.AncestryChanged, p16.CharacterAdded)
-		humanoid = p17:FindFirstChildOfClass("Humanoid")
+	local humanoid = p6:FindFirstChildOfClass("Humanoid")
+	while p6:IsDescendantOf(game) and not humanoid do
+		waitForFirst(p6.ChildAdded, p6.AncestryChanged, p5.CharacterAdded)
+		humanoid = p6:FindFirstChildOfClass("Humanoid")
 	end
-	if p16.Character ~= p17 or not p17:IsDescendantOf(game) then
-		var7:debug("Mismatched or unparented character in onCharacterAdded for {}", p15.state.shortId)
+	if p5.Character ~= p6 or not p6:IsDescendantOf(game) then
+		var1:debug("Mismatched or unparented character in onCharacterAdded for {}", p4.state.shortId)
 		
 		return
 	end
-	local var60 = if getFFlagBubbleChatInexistantAdorneeFixModule() then p17.PrimaryPart else p17:FindFirstChild("HumanoidRootPart")
-	while p17:IsDescendantOf(game) and not var60 do
-		waitForFirst(p17.ChildAdded, p17.AncestryChanged, p16.CharacterAdded)
-		var60 = if getFFlagBubbleChatInexistantAdorneeFixModule() then p17.PrimaryPart else p17:FindFirstChild("HumanoidRootPart")
+	local var2 = if getFFlagBubbleChatInexistantAdorneeFixModule() then p6.PrimaryPart else p6:FindFirstChild("HumanoidRootPart")
+	while p6:IsDescendantOf(game) and not var2 do
+		waitForFirst(p6.ChildAdded, p6.AncestryChanged, p5.CharacterAdded)
+		var2 = if getFFlagBubbleChatInexistantAdorneeFixModule() then p6.PrimaryPart else p6:FindFirstChild("HumanoidRootPart")
 	end
-	if var60 and p17:IsDescendantOf(game) and (p16.Character == p17 and p15.isMounted) then
-		p15:setState({
-			adornee = if humanoid.Health == 0 then findFirstChildByNameAndClass(p17, "Head", "BasePart") else p17
+	if var2 and p6:IsDescendantOf(game) and (p5.Character == p6 and p4.isMounted) then
+		p4:setState({
+			adornee = if humanoid.Health == 0 then findFirstChildByNameAndClass(p6, "Head", "BasePart") else p6
 		})
 		
-		if p15.humanoidDiedConn then
-			p15.humanoidDiedConn:Disconnect()
-			p15.humanoidDiedConn = nil
+		if p4.humanoidDiedConn then
+			p4.humanoidDiedConn:Disconnect()
+			p4.humanoidDiedConn = nil
 		end
-		p15.humanoidDiedConn = humanoid.Died:Connect(function()
-			-- upvalues: p15 (ref), findFirstChildByNameAndClass (copy), p17 (ref)
-			p15:setState({
-				adornee = findFirstChildByNameAndClass(p17, "Head", "BasePart") or p17
+		p4.humanoidDiedConn = humanoid.Died:Connect(function()
+			-- upvalues: p4 (ref), findFirstChildByNameAndClass (copy), p6 (ref)
+			p4:setState({
+				adornee = findFirstChildByNameAndClass(p6, "Head", "BasePart") or p6
 			})
 		end)
 	end
 end
 
-function bubbleChatBillboard.getVerticalOffset(value, p18)
-	if p18 and p18:IsA("Model") then
-		local boundingBox, boundingBox_1 = p18:GetBoundingBox()
-		local var63 = value:getAdorneeInstance(p18)
+function bubbleChatBillboard.getVerticalOffset(value, p7)
+	if p7 and p7:IsA("Model") then
+		local boundingBox, boundingBox_1 = p7:GetBoundingBox()
+		local var3 = value:getAdorneeInstance(p7)
 		
-		return if var63 then if var63:IsA("BasePart") then boundingBox_1.Y / 2 - boundingBox:PointToObjectSpace(var63.Position).Y else 0 else boundingBox_1.Y / 2
+		return if var3 then if var3:IsA("BasePart") then boundingBox_1.Y / 2 - boundingBox:PointToObjectSpace(var3.Position).Y else 0 else boundingBox_1.Y / 2
 	end
-	return if p18 and p18:IsA("BasePart") then p18.Size.Y / 2 else 0
+	return if p7 and p7:IsA("BasePart") then p7.Size.Y / 2 else 0
 end
 
-function bubbleChatBillboard.getAdorneeInstance(p19, p20)
+function bubbleChatBillboard.getAdorneeInstance(p7, p8)
 	-- upvalues: getFFlagBubbleChatInexistantAdorneeFixModule (ref)
-	if not p20 then return end
-	if p20:IsA("Model") then
-		local adorneeName = p20:FindFirstChild(p19.state.savedChatSettings.AdorneeName, true)
+	if not p8 then return end
+	if p8:IsA("Model") then
+		local adorneeName = p8:FindFirstChild(p7.state.savedChatSettings.AdorneeName, true)
 		
 		if getFFlagBubbleChatInexistantAdorneeFixModule() then
-			adorneeName = adorneeName or p20.PrimaryPart
+			adorneeName = adorneeName or p8.PrimaryPart
 		end
 		if adorneeName and not adorneeName:IsA("BasePart") and not adorneeName:IsA("Attachment") then
 			return
 		else
 			return adorneeName
 		end
-	elseif p20:IsA("BasePart") or p20:IsA("Attachment") then
-		return p20
+	elseif p8:IsA("BasePart") or p8:IsA("Attachment") then
+		return p8
 	end
 end
 
-function bubbleChatBillboard.getRenderVoiceAndCameraBubble(p21)
+function bubbleChatBillboard.getRenderVoiceAndCameraBubble(p7)
 	-- upvalues: debugAllowControlButtonsNoVoiceChat (ref), playersService (ref), VRService (ref), enabled (ref)
-	return not (not p21.props.voiceEnabled and not debugAllowControlButtonsNoVoiceChat) and (if p21.props.userId == tostring(playersService.LocalPlayer.UserId) then if VRService.VREnabled or enabled() then false else p21.state.selfViewOpen else p21.props.voiceEnabled and not p21.state.voiceTimedOut)
+	return not (not p7.props.voiceEnabled and not debugAllowControlButtonsNoVoiceChat) and (if p7.props.userId == tostring(playersService.LocalPlayer.UserId) then if VRService.VREnabled or enabled() then false else p7.state.selfViewOpen else p7.props.voiceEnabled and not p7.state.voiceTimedOut)
 end
 
-function bubbleChatBillboard.shouldRenderCarat(p22)
-	return p22.props.chatSettings.TailVisible and not p22:getRenderVoiceAndCameraBubble()
+function bubbleChatBillboard.shouldRenderCarat(p7)
+	return p7.props.chatSettings.TailVisible and not p7:getRenderVoiceAndCameraBubble()
 end
 
-function bubbleChatBillboard.render(p23)
-	-- upvalues: playersService (ref), var7 (ref), easierUnmuting3 (ref), constantsModule (ref), easierUnmutingHideIfMuted (ref), VRService (ref), enabled (ref), roactModule (ref), voiceBubbleModule (ref), bubbleChatListModule (ref), chatBubbleDistantModule (ref)
-	local adorneeAdorneeInstance = p23:getAdorneeInstance(p23.state.adornee)
-	local var66 = p23.props.userId == tostring(playersService.LocalPlayer.UserId)
-	local savedChatSettings = p23.state.savedChatSettings
+function bubbleChatBillboard.render(p7)
+	-- upvalues: playersService (ref), var1 (ref), easierUnmuting3 (ref), constantsModule (ref), easierUnmutingHideIfMuted (ref), VRService (ref), enabled (ref), roactModule (ref), voiceBubbleModule (ref), bubbleChatListModule (ref), chatBubbleDistantModule (ref)
+	local adorneeAdorneeInstance = p7:getAdorneeInstance(p7.state.adornee)
+	local var3 = p7.props.userId == tostring(playersService.LocalPlayer.UserId)
+	local savedChatSettings = p7.state.savedChatSettings
 	
 	if not adorneeAdorneeInstance then
-		var7:trace("No adornee for {}", p23.state.shortId)
+		var1:trace("No adornee for {}", p7.state.shortId)
 		
 		return
-	elseif not p23.state.isInsideRenderDistance then
-		var7:trace("Not in range for {}", p23.state.shortId)
+	elseif not p7.state.isInsideRenderDistance then
+		var1:trace("Not in range for {}", p7.state.shortId)
 		
 		return
-	elseif easierUnmuting3 and p23.state.isInEasierUnmutingTreatment and p23.props.voiceState == constantsModule.VOICE_STATE.LOCAL_MUTED and (not p23.state.isInsideEasierUnmutingDistance or easierUnmutingHideIfMuted and p23.state.isMuted) then
-		var7:trace("Unmute toggle not applicable for {}", p23.state.shortId)
+	elseif easierUnmuting3 and p7.state.isInEasierUnmutingTreatment and p7.props.voiceState == constantsModule.VOICE_STATE.LOCAL_MUTED and (not p7.state.isInsideEasierUnmutingDistance or easierUnmutingHideIfMuted and p7.state.isMuted) then
+		var1:trace("Unmute toggle not applicable for {}", p7.state.shortId)
 		
 		return
 	end
 	local t = {}
 	local _ = nil
-	local var68 = if (VRService.VREnabled or enabled()) and var66 then false else p23.props.voiceEnabled and not p23.state.voiceTimedOut
+	local var4 = if (VRService.VREnabled or enabled()) and var3 then false else p7.props.voiceEnabled and not p7.state.voiceTimedOut
 	
-	if var68 and (not p23.props.bubbleChatEnabled or not p23.props.messageIds or #p23.props.messageIds == 0) then
+	if var4 and (not p7.props.bubbleChatEnabled or not p7.props.messageIds or #p7.props.messageIds == 0) then
 		t.VoiceBubble = roactModule.createElement(voiceBubbleModule, {
 			chatSettings = savedChatSettings,
-			renderInsert = p23.renderInsert,
-			insertSize = p23.insertSize,
-			isDistant = not p23.state.isInsideMaximizeDistance
+			renderInsert = p7.renderInsert,
+			insertSize = p7.insertSize,
+			isDistant = not p7.state.isInsideMaximizeDistance
 		})
 	end
-	if p23.state.hasMessage then
-		if p23.state.isInsideMaximizeDistance then
+	if p7.state.hasMessage then
+		if p7.state.isInsideMaximizeDistance then
 			t.BubbleChatList = roactModule.createElement(bubbleChatListModule, {
-				userId = p23.props.userId,
-				isVisible = p23.state.isInsideMaximizeDistance,
-				onLastBubbleFadeOut = p23.onLastBubbleFadeOut,
+				userId = p7.props.userId,
+				isVisible = p7.state.isInsideMaximizeDistance,
+				onLastBubbleFadeOut = p7.onLastBubbleFadeOut,
 				chatSettings = savedChatSettings,
-				renderFirstInsert = if var68 then p23.renderInsert else nil,
-				insertSize = p23.insertSize,
-				showCarat = p23:shouldRenderCarat()
+				renderFirstInsert = if var4 then p7.renderInsert else nil,
+				insertSize = p7.insertSize,
+				showCarat = p7:shouldRenderCarat()
 			})
 		else
 			t.DistantBubble = roactModule.createElement(chatBubbleDistantModule, {
-				fadingOut = not p23.props.messageIds or #p23.props.messageIds == 0,
-				onFadeOut = p23.onLastBubbleFadeOut,
+				fadingOut = not p7.props.messageIds or #p7.props.messageIds == 0,
+				onFadeOut = p7.onLastBubbleFadeOut,
 				chatSettings = savedChatSettings,
-				renderInsert = var68 and p23.renderInsert,
-				insertSize = p23.insertSize
+				renderInsert = var4 and p7.renderInsert,
+				insertSize = p7.insertSize
 			})
 		end
 	end
 	return roactModule.createElement("BillboardGui", {
 		ResetOnSpawn = false,
 		Adornee = adorneeAdorneeInstance,
-		Active = var68,
+		Active = var4,
 		Size = UDim2.fromOffset(500, 200),
 		SizeOffset = Vector2.new(0, 0.5),
-		StudsOffset = (if var66 then savedChatSettings.LocalPlayerStudsOffset else Vector3.new(0, 1, 0.10000000149)) + Vector3.new(0, savedChatSettings.VerticalStudsOffset, 0),
-		StudsOffsetWorldSpace = p23.offset
+		StudsOffset = (if var3 then savedChatSettings.LocalPlayerStudsOffset else Vector3.new(0, 1, 0.10000000149)) + Vector3.new(0, savedChatSettings.VerticalStudsOffset, 0),
+		StudsOffsetWorldSpace = p7.offset
 	}, t)
 end
 
-function bubbleChatBillboard.didUpdate(p24, _, p25)
+function bubbleChatBillboard.didUpdate(p7, _, p8)
 	-- upvalues: easierUnmuting3 (ref), playersService (ref), constantsModule (ref), IXPServiceWrapper (ref), easierUnmutingIXPLayerName (ref)
-	if (not p24.props.messageIds or #p24.props.messageIds == 0) and not p24.state.isInsideRenderDistance then
-		p24.onLastBubbleFadeOut()
+	if (not p7.props.messageIds or #p7.props.messageIds == 0) and not p7.state.isInsideRenderDistance then
+		p7.onLastBubbleFadeOut()
 	end
-	if p24.props.messageIds and #p24.props.messageIds > 0 then
-		p24.isFadingOut = false
+	if p7.props.messageIds and #p7.props.messageIds > 0 then
+		p7.isFadingOut = false
 	end
-	if easierUnmuting3 and p24.state.isInEasierUnmutingTreatment then
-		p24:checkCounterForTimeoutWithEasierUnmuting(p25)
+	if easierUnmuting3 and p7.state.isInEasierUnmutingTreatment then
+		p7:checkCounterForTimeoutWithEasierUnmuting(p8)
 	else
-		p24:checkCounterForTimeout(p25.voiceStateCounter)
+		p7:checkCounterForTimeout(p8.voiceStateCounter)
 	end
-	if easierUnmuting3 and p24.props.userId == tostring(playersService.LocalPlayer.UserId) and not p24.state.haveLoggedUserExposure and (p24.props.voiceState == constantsModule.VOICE_STATE.INACTIVE or p24.props.voiceState == constantsModule.VOICE_STATE.TALKING or p24.props.voiceState == constantsModule.VOICE_STATE.MUTED) then
+	if easierUnmuting3 and p7.props.userId == tostring(playersService.LocalPlayer.UserId) and not p7.state.haveLoggedUserExposure and (p7.props.voiceState == constantsModule.VOICE_STATE.INACTIVE or p7.props.voiceState == constantsModule.VOICE_STATE.TALKING or p7.props.voiceState == constantsModule.VOICE_STATE.MUTED) then
 		IXPServiceWrapper:LogUserLayerExposure(easierUnmutingIXPLayerName)
-		p24:setState({ haveLoggedUserExposure = true })
+		p7:setState({ haveLoggedUserExposure = true })
 	end
 end
 
-function bubbleChatBillboard.getDerivedStateFromProps(p26, p27)
-	local text = "..." .. string.sub(tostring(p26.userId), -4)
-	local var70 = not p27.hasMessage and (p26.messageIds and #p26.messageIds > 0)
+function bubbleChatBillboard.getDerivedStateFromProps(p7, p8)
+	local text = "..." .. string.sub(tostring(p7.userId), -4)
+	local var3 = not p8.hasMessage and (p7.messageIds and #p7.messageIds > 0)
 	local voiceState = nil
-	local var71 = nil
-	local var72 = nil
+	local var4 = nil
+	local var5 = nil
 	
-	if p27.lastVoiceState ~= p26.voiceState then
-		var71 = (p27.voiceStateCounter or 0) + 1
-		var72 = false
-		voiceState = p26.voiceState
+	if p8.lastVoiceState ~= p7.voiceState then
+		var4 = (p8.voiceStateCounter or 0) + 1
+		var5 = false
+		voiceState = p7.voiceState
 	end
 	return {
-		hasMessage = var70 or nil,
-		savedChatSettings = p26.lastMessage and p26.chatSettings,
+		hasMessage = var3 or nil,
+		savedChatSettings = p7.lastMessage and p7.chatSettings,
 		shortId = text,
-		voiceStateCounter = var71,
-		voiceTimedOut = var72,
+		voiceStateCounter = var4,
+		voiceTimedOut = var5,
 		lastVoiceState = voiceState
 	}
 end
 
-return roactRoduxModule.connect(function(p28, p29)
+return roactRoduxModule.connect(function(p7, p8)
 	-- upvalues: getSettingsForMessageModule (ref)
-	local userId = p28.userMessages[p29.userId]
-	local var73 = userId and (#userId >= 1 and userId[#userId])
-	local var74 = var73 and p28.messages[var73]
+	local userId = p7.userMessages[p8.userId]
+	local var3 = userId and (#userId >= 1 and userId[#userId])
+	local var4 = var3 and p7.messages[var3]
 	
 	return {
-		chatSettings = getSettingsForMessageModule(p28.chatSettings, var74),
+		chatSettings = getSettingsForMessageModule(p7.chatSettings, var4),
 		messageIds = userId,
-		lastMessage = var74,
-		voiceState = p28.voiceState[p29.userId]
+		lastMessage = var4,
+		voiceState = p7.voiceState[p8.userId]
 	}
 end)(bubbleChatBillboard)

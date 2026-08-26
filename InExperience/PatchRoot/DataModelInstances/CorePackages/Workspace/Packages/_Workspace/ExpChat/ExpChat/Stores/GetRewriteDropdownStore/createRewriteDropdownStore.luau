@@ -2,19 +2,19 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal(nil)
-	local var2, var3 = createSignal(nil)
+	local var1, var2 = createSignal(nil)
+	local var3, var4 = createSignal(nil)
 	
 	return {
-		getOpenMessageId = var0,
-		getComponentId = var2,
-		toggleDropdown = function(p0)
-			-- upvalues: var1 (ref)
-			var1(function(p1)
-				-- upvalues: p0 (ref)
-				return if p1 == p0 then nil else p0
+		getOpenMessageId = var1,
+		getComponentId = var3,
+		toggleDropdown = function(p1)
+			-- upvalues: var2 (ref)
+			var2(function(p2)
+				-- upvalues: p1 (ref)
+				return if p2 == p1 then nil else p1
 			end)
 		end,
-		setComponentId = var3
+		setComponentId = var4
 	}
 end

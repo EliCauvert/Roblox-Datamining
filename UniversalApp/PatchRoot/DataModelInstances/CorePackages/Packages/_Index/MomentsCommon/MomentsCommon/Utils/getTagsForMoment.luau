@@ -2,30 +2,30 @@
 local _ = require(momentsCommon.Types)
 local constantsModule = require(momentsCommon.Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: constantsModule (ref)
 	local t = {}
 	
-	if p0.captureType == Enum.CaptureType.Screenshot then
+	if p1.captureType == Enum.CaptureType.Screenshot then
 		table.insert(t, "screenshot")
-	elseif p0.captureType == Enum.CaptureType.Video then
+	elseif p1.captureType == Enum.CaptureType.Video then
 		table.insert(t, "video")
 	end
-	if p0.universeId then
-		table.insert(t, constantsModule.TagPrefix.Universe .. tostring(p0.universeId))
+	if p1.universeId then
+		table.insert(t, constantsModule.TagPrefix.Universe .. tostring(p1.universeId))
 	end
-	if p0.edits then
-		if p0.edits.trim then
+	if p1.edits then
+		if p1.edits.trim then
 			table.insert(t, "trim")
 		end
-		if p0.edits.music then
+		if p1.edits.music then
 			table.insert(t, "music")
 			
-			if p0.edits.music.assetId then
-				table.insert(t, constantsModule.TagPrefix.Music .. tostring(p0.edits.music.assetId))
+			if p1.edits.music.assetId then
+				table.insert(t, constantsModule.TagPrefix.Music .. tostring(p1.edits.music.assetId))
 			end
 		end
-		if p0.edits.textOverlays then
+		if p1.edits.textOverlays then
 			table.insert(t, "text_overlay")
 		end
 	end

@@ -6,63 +6,63 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local runService = require(foundation.Utility.Wrappers).Services.RunService
 
-local function _(p0, p1)
-	local z = p1.Z
+local function _(p1, p2)
+	local z = p2.Z
 	
-	return math.max(p1.X, p1.Y, z) * (1 / math.tan(math.rad(p0) / 2)) + z / 2
+	return math.max(p2.X, p2.Y, z) * (1 / math.tan(math.rad(p1) / 2)) + z / 2
 end
 
-local _ = function(value, p2, p3)
-	return CFrame.fromAxisAngle(p3, p2):VectorToWorldSpace(value)
+local _ = function(value, p1, p2)
+	return CFrame.fromAxisAngle(p2, p1):VectorToWorldSpace(value)
 end
 
 local t = { rotationSpeed = 0.01, fieldOfView = 70 }
 
-return function(p4)
+return function(p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), eventConnection (ref), runService (ref)
-	local var5 = withDefaultsModule(p4, t)
-	local var6 = useTokensModule()
-	local var7, var8 = reactModule.useState(var5.model)
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useRef(nil)
-	local var11, var12 = reactModule.useBinding(CFrame.new())
-	local var13, var14 = reactModule.useBinding(0)
-	local var15, var16 = reactModule.useState(CFrame.new())
-	local var17, var18 = reactModule.useState(Vector3.new())
-	local var19, var20 = reactModule.useState(0)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3, var4 = reactModule.useState(var1.model)
+	local var5 = reactModule.useRef(nil)
+	local var6 = reactModule.useRef(nil)
+	local var7, var8 = reactModule.useBinding(CFrame.new())
+	local var9, var10 = reactModule.useBinding(0)
+	local var11, var12 = reactModule.useState(CFrame.new())
+	local var13, var14 = reactModule.useState(Vector3.new())
+	local var15, var16 = reactModule.useState(0)
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var7 (ref)
-		if var10.current and var7 ~= nil then
-			var7.Parent = var10.current
+		-- upvalues: var6 (ref), var3 (ref)
+		if var6.current and var3 ~= nil then
+			var3.Parent = var6.current
 		end
 		return function()
-			-- upvalues: var7 (copy)
-			if var7 ~= nil then
-				var7.Parent = nil
+			-- upvalues: var3 (copy)
+			if var3 ~= nil then
+				var3.Parent = nil
 			end
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var16 (ref), var18 (ref), var20 (ref), var5 (ref)
-		if var7 ~= nil then
-			local pivot = var7:GetPivot()
-			var16(pivot)
-			var18(pivot.LookVector)
-			local extentsSize = var7:GetExtentsSize()
+		-- upvalues: var3 (ref), var12 (ref), var14 (ref), var16 (ref), var1 (ref)
+		if var3 ~= nil then
+			local pivot = var3:GetPivot()
+			var12(pivot)
+			var14(pivot.LookVector)
+			local extentsSize = var3:GetExtentsSize()
 			local z = extentsSize.Z
-			var20(math.max(extentsSize.X, extentsSize.Y, z) * (1 / math.tan(math.rad(var5.fieldOfView) / 2)) + z / 2)
+			var16(math.max(extentsSize.X, extentsSize.Y, z) * (1 / math.tan(math.rad(var1.fieldOfView) / 2)) + z / 2)
 		end
-	end, { var7 })
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var5 (ref), var10 (ref), var8 (ref)
-		if var7 ~= nil then
-			var7.Parent = nil
+		-- upvalues: var3 (ref), var1 (ref), var6 (ref), var4 (ref)
+		if var3 ~= nil then
+			var3.Parent = nil
 		end
-		if var5.model ~= nil then
-			var5.model.Parent = var10.current
-			var8(var5.model)
+		if var1.model ~= nil then
+			var1.model.Parent = var6.current
+			var4(var1.model)
 		end
-	end, { var5.model })
+	end, { var1.model })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -81,23 +81,23 @@ return function(p4)
 			Size = UDim2.new(1, 25, 1, 25),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			LightColor = var6.Color.Extended.Gray.Gray_200.Color3,
-			Ambient = var6.Color.Extended.Gray.Gray_200.Color3,
-			CurrentCamera = var9
+			LightColor = var2.Color.Extended.Gray.Gray_200.Color3,
+			Ambient = var2.Color.Extended.Gray.Gray_200.Color3,
+			CurrentCamera = var5
 		}, {
 			Camera = reactModule.createElement("Camera", {
 				CameraType = Enum.CameraType.Scriptable,
-				FieldOfView = var5.fieldOfView,
-				CFrame = var11,
-				ref = var9
+				FieldOfView = var1.fieldOfView,
+				CFrame = var7,
+				ref = var5
 			}),
-			WorldModel = reactModule.createElement("WorldModel", { ref = var10 }),
+			WorldModel = reactModule.createElement("WorldModel", { ref = var6 }),
 			RenderSteppedConnection = reactModule.createElement(eventConnection, {
 				event = runService.RenderStepped,
 				callback = function()
-					-- upvalues: var14 (ref), var13 (ref), var5 (ref), var17 (ref), var15 (ref), var19 (ref), var12 (ref)
-					var14(var13:getValue() + var5.rotationSpeed or 0)
-					var12(CFrame.new(var15.Position + CFrame.fromAxisAngle(Vector3.new(0, 1, 0), var13:getValue()):VectorToWorldSpace(var17) * var19, var15.Position))
+					-- upvalues: var10 (ref), var9 (ref), var1 (ref), var13 (ref), var11 (ref), var15 (ref), var8 (ref)
+					var10(var9:getValue() + var1.rotationSpeed or 0)
+					var8(CFrame.new(var11.Position + CFrame.fromAxisAngle(Vector3.new(0, 1, 0), var9:getValue()):VectorToWorldSpace(var13) * var15, var11.Position))
 				end
 			})
 		})

@@ -1,6 +1,6 @@
-﻿return function(p0)
-	while p0 and p0.index and p0.routes do
-		p0 = p0.routes[p0.index]
+﻿return function(p1)
+	while p1 and p1.index and p1.routes do
+		p1 = p1.routes[p1.index]
 	end
-	return p0
+	return p1
 end

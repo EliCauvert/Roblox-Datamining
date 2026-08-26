@@ -1,60 +1,60 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p0, p1, p2, p3)
+local function _(p1, p2, p3, p4)
 	local t = {
-		key = p0,
-		routeName = p0,
-		params = p1,
-		isTransitioning = p3
+		key = p1,
+		routeName = p1,
+		params = p2,
+		isTransitioning = p4
 	}
 	
-	if p2 ~= nil then
-		t.routes = p2
-		t.index = #p2
+	if p3 ~= nil then
+		t.routes = p3
+		t.index = #p3
 	end
 	return t
 end
 
 return {
-	createMockStackState = function(p4, p5)
+	createMockStackState = function(p1, p2)
 		local t = {
 			params = nil,
 			isTransitioning = false,
-			key = p4,
-			routeName = p4
+			key = p1,
+			routeName = p1
 		}
 		
-		if p5 ~= nil then
-			t.routes = p5
-			t.index = #p5
+		if p2 ~= nil then
+			t.routes = p2
+			t.index = #p2
 		end
 		return t
 	end,
-	createMockSwitchState = function(p6, p7)
+	createMockSwitchState = function(p1, p2)
 		local t = {
 			params = nil,
 			isTransitioning = nil,
-			key = p6,
-			routeName = p6
+			key = p1,
+			routeName = p1
 		}
 		
-		if p7 ~= nil then
-			t.routes = p7
-			t.index = #p7
+		if p2 ~= nil then
+			t.routes = p2
+			t.index = #p2
 		end
 		return t
 	end,
-	createMockScreenState = function(p8, p9)
+	createMockScreenState = function(p1, p2)
 		return {
 			isTransitioning = nil,
-			key = p8,
-			routeName = p8,
-			params = p9
+			key = p1,
+			routeName = p1,
+			params = p2
 		}
 	end,
-	createMockNavigationObject = function(p10)
+	createMockNavigationObject = function(p1)
 		return {
-			state = p10,
+			state = p1,
 			dispatch = function()
 				return true
 			end,
@@ -70,8 +70,8 @@ return {
 				getScreenOptions = function(_, _)
 					return {}
 				end,
-				getStateForAction = function(_, p11)
-					return p11
+				getStateForAction = function(_, p2)
+					return p2
 				end,
 				getComponentForRouteName = function(_)
 					return function()

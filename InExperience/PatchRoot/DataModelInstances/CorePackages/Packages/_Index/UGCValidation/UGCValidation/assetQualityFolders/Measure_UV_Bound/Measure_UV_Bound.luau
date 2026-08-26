@@ -12,9 +12,9 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: getFFlagUGCValidateAQMeshQualityBlockUploadModule (ref), errorSourceStringsModule (ref)
-		local measureUVBound = p1.aqsSummaryData.Measure_UV_Bound
+		local measureUVBound = p2.aqsSummaryData.Measure_UV_Bound
 		
 		if measureUVBound == nil then
 			if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
@@ -22,7 +22,7 @@ return {
 				
 				return
 			end
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_UV_Bound" })
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_UV_Bound" })
 			
 			return
 		else
@@ -37,13 +37,13 @@ return {
 							}
 							
 							if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
-								p0:fail(errorSourceStringsModule.Keys.AQSWarn_UVBound, t)
+								p1:fail(errorSourceStringsModule.Keys.AQSWarn_UVBound, t)
 							else
-								p0:warn(errorSourceStringsModule.Keys.AQSWarn_UVBound, t)
+								p1:warn(errorSourceStringsModule.Keys.AQSWarn_UVBound, t)
 							end
 						end
 					end
-					p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_UV_Bound" })
+					p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_UV_Bound" })
 					
 					return
 				end

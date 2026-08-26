@@ -8,28 +8,28 @@ local arialBold = Enum.Font.ArialBold
 local color3 = Color3.new(1, 1, 1)
 local color = Color3.fromRGB(100, 102, 104)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), reactionListModule (ref), cryoModule (ref), roactModule (ref), reactionMapModule (ref), color (ref), color3 (ref), arialBold (ref)
-	local var7 = 0
-	local var8 = false
-	local var9 = 0
+	local var1 = 0
+	local var2 = false
+	local var3 = 0
 	
-	for i, v in p0.reactionData do
+	for i, v in p1.reactionData do
 		if #v >= 2 then
-			var8 = true
+			var2 = true
 		end
-		var7 += #v
-		var9 += 1
+		var1 += #v
+		var3 += 1
 	end
-	if var9 > 3 then
-		var8 = true
+	if var3 > 3 then
+		var2 = true
 	end
 	return {
 		reactionCounter = roactModule.createElement("TextButton", {
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BorderSizePixel = 0,
 			Text = "",
-			[roactModule.Event.Activated] = p0.onPressed,
+			[roactModule.Event.Activated] = p1.onPressed,
 			BackgroundColor3 = color
 		}, {
 			corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
@@ -47,35 +47,35 @@ return function(p0)
 				Padding = UDim.new(0, 4)
 			})
 		}, reactModule.useMemo(function()
-			-- upvalues: reactionListModule (copy), p0 (ref), cryoModule (copy), roactModule (copy), reactionMapModule (copy)
-			local var10 = 1
+			-- upvalues: reactionListModule (copy), p1 (ref), cryoModule (copy), roactModule (copy), reactionMapModule (copy)
+			local var4 = 1
 			local t = {}
 			
 			for i in reactionListModule do
-				if var10 >= 4 then break end
-				if p0.reactionData[reactionListModule[i]] ~= nil then
-					t[var10] = reactionListModule[i]
-					var10 += 1
+				if var4 >= 4 then break end
+				if p1.reactionData[reactionListModule[i]] ~= nil then
+					t[var4] = reactionListModule[i]
+					var4 += 1
 				end
 			end
-			return cryoModule.List.map(t, function(p1, p2)
+			return cryoModule.List.map(t, function(p2, p3)
 				-- upvalues: roactModule (copy), reactionMapModule (copy)
 				return roactModule.createElement("ImageLabel", {
 					BorderSizePixel = 0,
 					BackgroundTransparency = 1,
-					Image = reactionMapModule[p1],
+					Image = reactionMapModule[p2],
 					Size = UDim2.new(0, 20, 0, 20),
 					ScaleType = Enum.ScaleType.Fit,
 					Name = "ShowReaction" .. p2
 				})
 			end)
 		end, {}), {
-			reactionCount = var8 and roactModule.createElement("TextLabel", {
+			reactionCount = var2 and roactModule.createElement("TextLabel", {
 				TextSize = 17,
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0, if var7 >= 10 then 15 else 10, 0, 20),
-				Text = var7,
+				Size = UDim2.new(0, if var1 >= 10 then 15 else 10, 0, 20),
+				Text = var1,
 				TextColor3 = color3,
 				Font = arialBold
 			})

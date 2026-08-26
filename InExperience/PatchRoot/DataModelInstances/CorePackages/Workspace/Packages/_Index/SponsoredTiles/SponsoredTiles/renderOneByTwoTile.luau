@@ -5,59 +5,59 @@ local reactModule = require(parent.React)
 local oneByTwoTileModule = require(sponsoredTiles.OneByTwoTile)
 local getTileBadgeByPositionConfigFromEntry = require(parent.GameTile).getTileBadgeByPositionConfigFromEntry
 local _ = require(parent.VideoUtils)
-local var3 = reactModule.memo(function(p0)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: getTileBadgeByPositionConfigFromEntry (ref), reactModule (ref), oneByTwoTileModule (ref)
-	local var4 = -((p0.maxItemIndex or 0) + 1)
+	local var2 = -((p1.maxItemIndex or 0) + 1)
 	
 	return reactModule.createElement(oneByTwoTileModule, {
-		size = p0.item.sizeOverride,
-		zIndex = if p0.zIndex then p0.zIndex + var4 else var4,
-		hoverKey = `OneByTwoTile_{p0.impressionsTag or ""}_{p0.index or "0"}_{p0.item.universeId or p0.item.clickoutUrl}`,
-		contentType = p0.item.contentType,
-		universeId = p0.item.universeId,
-		placeId = p0.item.placeId,
-		placeIdOverride = p0.item.placeIdOverride,
-		launchDataOverride = p0.item.launchDataOverride,
-		referralSource = p0.appPage,
-		reportGameDetailOpened = p0.reportGameDetailOpened,
-		reportExperienceLaunched = p0.reportExperienceLaunched,
-		launchExperienceEventContext = p0.launchExperienceEventContext,
-		topicId = p0.topicId,
-		badgeOverride = getTileBadgeByPositionConfigFromEntry(p0.item),
-		primaryImageAssetId = p0.item.primaryImageAssetId,
-		primaryVideoAssetId = p0.item.primaryVideoAssetId,
-		attributionThumbnailAssetId = p0.item.attributionThumbnailAssetId,
-		logoImageAssetId = p0.item.logoAssetId,
-		logoAspectRatio = p0.item.logoAspectRatio,
-		headline = p0.item.headline,
-		subtitle = p0.item.subtitle,
-		ctaText = p0.item.ctaText or "",
-		adId = p0.item.adId,
-		impressionsTag = p0.impressionsTag,
-		index = p0.index,
-		clickoutUrl = p0.item.clickoutUrl,
-		videoPlaybackContext = p0.videoPlaybackContext,
-		videoAnalytics = p0.videoAnalytics,
-		pageContext = p0.appPage,
-		payerName = p0.item.payerName,
-		appPage = p0.appPage,
-		sponsoredUserCohort = p0.sponsoredUserCohort,
-		setGameHidden = p0.setGameHidden,
-		enableSponsoredFeedback = p0.enableSponsoredFeedback,
-		enableReportAd = p0.enableReportAd,
-		enableExplicitFeedback = p0.enableExplicitFeedback,
+		size = p1.item.sizeOverride,
+		zIndex = if p1.zIndex then p1.zIndex + var2 else var2,
+		hoverKey = `OneByTwoTile_{p1.impressionsTag or ""}_{p1.index or "0"}_{p1.item.universeId or p1.item.clickoutUrl}`,
+		contentType = p1.item.contentType,
+		universeId = p1.item.universeId,
+		placeId = p1.item.placeId,
+		placeIdOverride = p1.item.placeIdOverride,
+		launchDataOverride = p1.item.launchDataOverride,
+		referralSource = p1.appPage,
+		reportGameDetailOpened = p1.reportGameDetailOpened,
+		reportExperienceLaunched = p1.reportExperienceLaunched,
+		launchExperienceEventContext = p1.launchExperienceEventContext,
+		topicId = p1.topicId,
+		badgeOverride = getTileBadgeByPositionConfigFromEntry(p1.item),
+		primaryImageAssetId = p1.item.primaryImageAssetId,
+		primaryVideoAssetId = p1.item.primaryVideoAssetId,
+		attributionThumbnailAssetId = p1.item.attributionThumbnailAssetId,
+		logoImageAssetId = p1.item.logoAssetId,
+		logoAspectRatio = p1.item.logoAspectRatio,
+		headline = p1.item.headline,
+		subtitle = p1.item.subtitle,
+		ctaText = p1.item.ctaText or "",
+		adId = p1.item.adId,
+		impressionsTag = p1.impressionsTag,
+		index = p1.index,
+		clickoutUrl = p1.item.clickoutUrl,
+		videoPlaybackContext = p1.videoPlaybackContext,
+		videoAnalytics = p1.videoAnalytics,
+		pageContext = p1.appPage,
+		payerName = p1.item.payerName,
+		appPage = p1.appPage,
+		sponsoredUserCohort = p1.sponsoredUserCohort,
+		setGameHidden = p1.setGameHidden,
+		enableSponsoredFeedback = p1.enableSponsoredFeedback,
+		enableReportAd = p1.enableReportAd,
+		enableExplicitFeedback = p1.enableExplicitFeedback,
 		onSelectionGained = reactModule.useCallback(function()
-			-- upvalues: p0 (ref)
-			if p0.onSelectionGained then
-				p0.onSelectionGained(p0.item, p0.index, p0.item.universeId)
+			-- upvalues: p1 (ref)
+			if p1.onSelectionGained then
+				p1.onSelectionGained(p1.item, p1.index, p1.item.universeId)
 			end
-		end, { p0.onSelectionGained, p0.item, p0.index }),
-		onSelectionLost = p0.onSelectionLost,
-		SelectionOrder = p0.SelectionOrder
+		end, { p1.onSelectionGained, p1.item, p1.index }),
+		onSelectionLost = p1.onSelectionLost,
+		SelectionOrder = p1.SelectionOrder
 	})
 end)
 
 return function(p1)
-	-- upvalues: reactModule (ref), var3 (ref), gameCollectionItemTypes (ref)
-	return reactModule.createElement(var3, p1), gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile
+	-- upvalues: reactModule (ref), var1 (ref), gameCollectionItemTypes (ref)
+	return reactModule.createElement(var1, p1), gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile
 end

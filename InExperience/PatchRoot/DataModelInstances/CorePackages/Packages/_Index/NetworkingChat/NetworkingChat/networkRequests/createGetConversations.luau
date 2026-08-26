@@ -2,10 +2,10 @@
 local _ = require(parent.networkingChatTypes)
 local CHAT_URLModule = require(parent.CHAT_URL)
 
-return function(p0)
+return function(p1)
 	-- upvalues: CHAT_URLModule (ref)
-	return p0.roduxNetworking.GET({ Name = "GetConversations" }, function(p1, p2)
+	return p1.roduxNetworking.GET({ Name = "GetConversations" }, function(p2, p3)
 		-- upvalues: CHAT_URLModule (copy)
-		return p1(CHAT_URLModule):path("v2"):path("get-conversations"):expandedQueryArgsWithIds("conversationIds", p2)
+		return p2(CHAT_URLModule):path("v2"):path("get-conversations"):expandedQueryArgsWithIds("conversationIds", p3)
 	end)
 end

@@ -12,20 +12,20 @@ local useTokens = foundationModule.Hooks.useTokens
 local constantsModule = require(momentsCreation.Constants)
 local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), reactModule (ref), view (ref), constantsModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref)
-	local var6 = useDeviceInsets()
-	local var7 = useTokens()
-	local var8 = useCreationFlowStringsModule()
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = useCreationFlowStringsModule()
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-center size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		padding = {
-			top = UDim.new(0, var7.Padding.Large),
-			bottom = UDim.new(0, math.max(var6.bottom, var7.Padding.Large)),
-			left = UDim.new(0, math.max(var6.left, var7.Padding.XLarge)),
-			right = UDim.new(0, math.max(var6.right, var7.Padding.XLarge))
+			top = UDim.new(0, var2.Padding.Large),
+			bottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Large)),
+			left = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+			right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 		}
 	}, {
 		SizeConstraint = reactModule.createElement(view, {
@@ -35,19 +35,19 @@ return function(p0)
 			ContinueButton = reactModule.createElement(button, {
 				LayoutOrder = 1,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-				onActivated = p0.onContinueCallback,
+				onActivated = p1.onContinueCallback,
 				size = inputSize.Medium,
-				text = var8.PublishingCtaContinue,
+				text = var3.PublishingCtaContinue,
 				variant = buttonVariant.Emphasis,
 				width = UDim.new(0.5, 0)
 			}),
-			ReturnToGalleryButton = if p0.onReturnToGalleryCallback then reactModule.createElement(button, {
+			ReturnToGalleryButton = if p1.onReturnToGalleryCallback then reactModule.createElement(button, {
 				LayoutOrder = 2,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-				text = var8.PublishingCtaReturn,
+				text = var3.PublishingCtaReturn,
 				variant = buttonVariant.Standard,
 				width = UDim.new(0.5, 0),
-				onActivated = p0.onReturnToGalleryCallback,
+				onActivated = p1.onReturnToGalleryCallback,
 				size = inputSize.Medium
 			}) else nil
 		})

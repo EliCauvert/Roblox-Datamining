@@ -11,43 +11,43 @@ local withLocalization = require(corePackagesService.Workspace.Packages.Localiza
 local helpModal = roactModule.PureComponent:extend("HelpModal")
 local fFlagTopBarSignalizeScreenSize = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
 
-function helpModal.init(p0)
+function helpModal.init(p1)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
 	function p0.onDismiss()
-		-- upvalues: p0 (ref)
-		p0.props.showHelpModal(false)
+		-- upvalues: p1 (ref)
+		p1.props.showHelpModal(false)
 	end
 	
 	if fFlagTopBarSignalizeScreenSize then
 		local getViewportSize = displayModule.GetDisplayStore(false).getViewportSize
-		p0.disposeScreenSize = signalsModule.createEffect(function(p1)
-			-- upvalues: p0 (ref), getViewportSize (ref)
-			p0:setState({ screenSize = getViewportSize(p1) })
+		p1.disposeScreenSize = signalsModule.createEffect(function(p2)
+			-- upvalues: p1 (ref), getViewportSize (ref)
+			p1:setState({ screenSize = getViewportSize(p2) })
 		end)
 	end
 end
 
-function helpModal.willUnmount(p2)
+function helpModal.willUnmount(p1)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	if fFlagTopBarSignalizeScreenSize then
-		p2.disposeScreenSize()
+		p1.disposeScreenSize()
 	end
 end
 
-function helpModal.render(p3)
+function helpModal.render(p1)
 	-- upvalues: withLocalization (ref), roactModule (ref), modalDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref), themedTextLabelModule (ref)
 	return withLocalization({
 		mainHeader = "CoreScripts.Feedback.Help.MainHeader",
 		instructionLabel = "CoreScripts.Feedback.Help.Instructions"
-	})(function(p4)
-		-- upvalues: roactModule (copy), modalDialogModule (copy), p3 (ref), fFlagTopBarSignalizeScreenSize (copy), themedTextLabelModule (copy)
+	})(function(p2)
+		-- upvalues: roactModule (copy), modalDialogModule (copy), p1 (ref), fFlagTopBarSignalizeScreenSize (copy), themedTextLabelModule (copy)
 		return roactModule.createElement(modalDialogModule, {
 			maxHeight = 130,
 			maxWidth = 540,
 			showCloseButton = true,
-			visible = p3.props.visible,
-			screenSize = if fFlagTopBarSignalizeScreenSize then p3.state.screenSize else p3.props.screenSize,
-			titleText = p4.mainHeader,
+			visible = p1.props.visible,
+			screenSize = if fFlagTopBarSignalizeScreenSize then p1.state.screenSize else p1.props.screenSize,
+			titleText = p2.mainHeader,
 			contents = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 				Padding = roactModule.createElement("UIPadding", {
 					PaddingLeft = UDim.new(0, 24),
@@ -66,27 +66,27 @@ function helpModal.render(p3)
 					AnchorPoint = Vector2.new(0, 0.5),
 					Position = UDim2.new(0, 76, 0.5, 0),
 					Size = UDim2.new(1, 0, 0.4, 36),
-					Text = p4.instructionLabel,
+					Text = p2.instructionLabel,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			}),
-			onDismiss = p3.onDismiss
+			onDismiss = p1.onDismiss
 		})
 	end)
 end
 
-return roactRoduxModule.connect(function(p5)
+return roactRoduxModule.connect(function(p1)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	return {
-		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p5.displayOptions.screenSize,
-		visible = p5.common.showHelpModal
+		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
+		visible = p1.common.showHelpModal
 	}
-end, function(p6)
+end, function(p1)
 	-- upvalues: showHelpModalThunkModule (ref)
 	return {
-		showHelpModal = function(p7)
-			-- upvalues: p6 (ref), showHelpModalThunkModule (copy)
-			p6(showHelpModalThunkModule(p7))
+		showHelpModal = function(p2)
+			-- upvalues: p1 (ref), showHelpModalThunkModule (copy)
+			p1(showHelpModalThunkModule(p2))
 		end
 	}
 end)(helpModal)

@@ -8,41 +8,41 @@ local _ = require(foundation.Components.Types)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local flagsModule = require(foundation.Utility.Flags)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: inputSizeModule (ref), flagsModule (ref)
 	return {
 		common = {
 			input = {
 				tag = "radius-circle",
-				cursorRadius = UDim.new(0, p0.Radius.Circle)
+				cursorRadius = UDim.new(0, p1.Radius.Circle)
 			},
 			checkmark = {
 				tag = "position-center-center anchor-center-center radius-circle",
-				style = p0.Inverse.Content.Emphasis
+				style = p1.Inverse.Content.Emphasis
 			}
 		},
 		sizes = {
 			[inputSizeModule.XSmall] = {
 				input = {
-					size = UDim2.fromOffset(p0.Size.Size_400, p0.Size.Size_400)
+					size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
 				},
 				checkmark = { tag = "size-150" }
 			},
 			[inputSizeModule.Small] = {
 				input = {
-					size = UDim2.fromOffset(p0.Size.Size_500, p0.Size.Size_500)
+					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
 				},
 				checkmark = { tag = "size-200" }
 			},
 			[inputSizeModule.Medium] = {
 				input = {
-					size = UDim2.fromOffset(p0.Size.Size_600, p0.Size.Size_600)
+					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
 				},
 				checkmark = { tag = "size-250" }
 			},
 			[inputSizeModule.Large] = {
 				input = {
-					size = if flagsModule.FoundationRadioBeta then UDim2.fromOffset(p0.Size.Size_600, p0.Size.Size_600) else UDim2.fromOffset(p0.Size.Size_700, p0.Size.Size_700)
+					size = if flagsModule.FoundationRadioBeta then UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600) else UDim2.fromOffset(p1.Size.Size_700, p1.Size.Size_700)
 				},
 				checkmark = {
 					tag = if flagsModule.FoundationRadioBeta then "size-250" else "size-300"

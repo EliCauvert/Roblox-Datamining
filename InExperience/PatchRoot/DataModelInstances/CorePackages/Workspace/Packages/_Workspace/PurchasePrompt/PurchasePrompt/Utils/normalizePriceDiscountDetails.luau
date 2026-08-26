@@ -7,14 +7,14 @@ local t = {
 	[discountType.RobloxPlusSubscription] = true
 }
 
-local function isValidRawDiscount(p0)
+local function isValidRawDiscount(p1)
 	-- upvalues: fFlagNormalizePriceDiscountAcceptLowercaseModule (ref)
-	if type(p0) ~= "table" then
+	if type(p1) ~= "table" then
 		return false
 	elseif fFlagNormalizePriceDiscountAcceptLowercaseModule then
-		local type = p0.Type or p0.type
-		local amountInRobux = p0.AmountInRobux or p0.amountInRobux
-		local percent = p0.Percent or p0.percent
+		local type = p1.Type or p1.type
+		local amountInRobux = p1.AmountInRobux or p1.amountInRobux
+		local percent = p1.Percent or p1.percent
 		
 		if type(type) ~= "string" or type == "" then
 			return false
@@ -25,7 +25,7 @@ local function isValidRawDiscount(p0)
 			return false
 		end
 	else
-		return not (type(p0.Type) ~= "string" or p0.Type == "") and (type(p0.AmountInRobux) == "number" and type(p0.Percent) == "number")
+		return not (type(p1.Type) ~= "string" or p1.Type == "") and (type(p1.AmountInRobux) == "number" and type(p1.Percent) == "number")
 	end
 end
 

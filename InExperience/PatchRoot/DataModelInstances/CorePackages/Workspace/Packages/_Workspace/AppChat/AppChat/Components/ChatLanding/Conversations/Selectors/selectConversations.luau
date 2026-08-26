@@ -2,35 +2,35 @@
 local getDeepValueModule = require(appChat.Utils.getDeepValue)
 local populateConversationWithStateModule = require(appChat.Conversations.populateConversationWithState)
 
-local function conversationSortPredicate(p0, p1)
-	return if p0.unixTime and p1.unixTime then p1.unixTime < p0.unixTime elseif p0.unixTime or p1.unixTime then (p0.unixTime or p1.unixTime) == p0.unixTime else string.lower(p0.title) < string.lower(p1.title)
+local function conversationSortPredicate(p1, p2)
+	return if p1.unixTime and p2.unixTime then p2.unixTime < p1.unixTime elseif p1.unixTime or p2.unixTime then (p1.unixTime or p2.unixTime) == p1.unixTime else string.lower(p1.title) < string.lower(p2.title)
 end
 
-local var4 = nil
-local var5 = nil
+local var1 = nil
+local var2 = nil
 
-return function(p2)
-	-- upvalues: getDeepValueModule (ref), var4 (write), var5 (write), populateConversationWithStateModule (ref), conversationSortPredicate (ref)
-	local var6 = getDeepValueModule(p2, "ChatAppReducer.Conversations")
+return function(p1)
+	-- upvalues: getDeepValueModule (ref), var1 (write), var2 (write), populateConversationWithStateModule (ref), conversationSortPredicate (ref)
+	local var3 = getDeepValueModule(p1, "ChatAppReducer.Conversations")
 	
-	if not var6 then
+	if not var3 then
 		return {}
 	end
-	local var7 = getDeepValueModule(p2, "ChatAppReducer.ConversationsAsync.latestMessagesIsFetching")
+	local var4 = getDeepValueModule(p1, "ChatAppReducer.ConversationsAsync.latestMessagesIsFetching")
 	
-	if var6 == var4 then
-		return var5
-	elseif var7 and var5 then
-		return var5
+	if var3 == var1 then
+		return var2
+	elseif var4 and var2 then
+		return var2
 	end
 	local t = {}
 	
-	for i, v in pairs(var6) do
-		table.insert(t, populateConversationWithStateModule(p2, v))
+	for i, v in pairs(var3) do
+		table.insert(t, populateConversationWithStateModule(p1, v))
 	end
 	table.sort(t, conversationSortPredicate)
-	var4 = var6
-	var5 = t
+	var1 = var3
+	var2 = t
 	
 	return t
 end

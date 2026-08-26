@@ -2,17 +2,17 @@
 local reactModule = require(socialUpsell.Parent.React)
 local getAgeVerifiedChangedSignalModule = require(socialUpsell.Signals.GetAgeVerifiedChangedSignal)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), getAgeVerifiedChangedSignalModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: getAgeVerifiedChangedSignalModule (copy), p0 (ref)
-		local var3 = getAgeVerifiedChangedSignalModule()
+		-- upvalues: getAgeVerifiedChangedSignalModule (copy), p1 (ref)
+		local var1 = getAgeVerifiedChangedSignalModule()
 		
-		if p0 then
-			var3:connect(p0)
+		if p1 then
+			var1:connect(p1)
 		end
 		return function() end
-	end, { p0 })
+	end, { p1 })
 	
 	return nil
 end

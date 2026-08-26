@@ -1,40 +1,40 @@
 ﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-function getOrSet(value, p0, p1, ...)
-	local var2 = value[p0]
+function getOrSet(value, p1, p2, ...)
+	local var1 = value[p1]
 	
-	if not var2 then
-		var2 = p1(...)
-		value[p0] = var2
+	if not var1 then
+		var1 = p2(...)
+		value[p1] = var1
 	end
-	return var2
+	return var1
 end
 
 function useVariantsState()
 	-- upvalues: reactModule (ref)
-	local var3 = reactModule.useRef({})
-	local var4 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef({})
+	local var2 = reactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: var4 (ref), var3 (ref)
-		if var4.current ~= p4 then
-			table.clear(var3.current)
-			var4.current = p4
+	return reactModule.useCallback(function(p1, p2, p3)
+		-- upvalues: var2 (ref), var1 (ref)
+		if var2.current ~= p3 then
+			table.clear(var1.current)
+			var2.current = p3
 		end
-		return getOrSet(var3.current, p2, p3, p4)
+		return getOrSet(var1.current, p1, p2, p3)
 	end, {})
 end
 
 local var1 = reactModule.createContext(nil)
 
-function useVariants(p5, p6, p7)
+function useVariants(p1, p2, p3)
 	-- upvalues: reactModule (ref), var1 (ref)
-	local var5 = reactModule.useContext(var1)
+	local var2 = reactModule.useContext(var1)
 	
-	if var5 == nil then
+	if var2 == nil then
 		error("VariantsContext hasn't been instantiated")
 	end
-	return var5(p5, p6, p7)
+	return var2(p1, p2, p3)
 end
 
 return {

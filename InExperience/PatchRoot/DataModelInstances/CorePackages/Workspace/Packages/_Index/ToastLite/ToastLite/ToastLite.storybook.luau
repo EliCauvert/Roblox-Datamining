@@ -16,11 +16,11 @@ return {
 	storyRoot = toastLite,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), appStyleProvider (ref), t (ref)
-		return function(p1)
-			-- upvalues: reactModule (copy), appStyleProvider (copy), t (copy), p0 (ref)
-			return reactModule.createElement(appStyleProvider, { style = if p1 then t[p1.theme] else t.Default }, { Child = reactModule.createElement(p0, p1) })
+		return function(p2)
+			-- upvalues: reactModule (copy), appStyleProvider (copy), t (copy), p1 (ref)
+			return reactModule.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = reactModule.createElement(p1, p2) })
 		end
 	end
 }

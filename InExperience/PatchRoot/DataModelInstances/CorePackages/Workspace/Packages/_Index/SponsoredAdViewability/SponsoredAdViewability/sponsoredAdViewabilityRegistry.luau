@@ -4,40 +4,40 @@ local constantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.sponsoredAdViewabilityTypes)
 local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
 local t = {}
-local var4 = 0
+local var1 = 0
 
 return {
-	bind = function(p0, p1)
-		-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), var4 (write), t (ref), constantsModule (ref), collectionService (ref)
+	bind = function(p1, p2)
+		-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), var1 (write), t (ref), constantsModule (ref), collectionService (ref)
 		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-			local isVideo = p1.mediaType == "video"
+			local isVideo = p2.mediaType == "video"
 			
-			if p1.mediaType ~= "image" and not isVideo then
+			if p2.mediaType ~= "image" and not isVideo then
 				return function() end
-			elseif isVideo ~= (p1.videoPlaybackStateRef ~= nil) then
+			elseif isVideo ~= (p2.videoPlaybackStateRef ~= nil) then
 				return function() end
-			elseif p1.isFullscreen == true and not isVideo then
+			elseif p2.isFullscreen == true and not isVideo then
 				return function() end
 			end
 		end
-		var4 += 1
-		local var6 = tostring(var4)
-		t[var6] = p1
-		p0:SetAttribute(constantsModule.ViewabilityTargetIdAttribute, var6)
-		collectionService:AddTag(p0, constantsModule.CandidateTag)
+		var1 += 1
+		local var2 = tostring(var1)
+		t[var2] = p2
+		p1:SetAttribute(constantsModule.ViewabilityTargetIdAttribute, var2)
+		collectionService:AddTag(p1, constantsModule.CandidateTag)
 		
 		return function()
-			-- upvalues: p0 (ref), constantsModule (copy), var6 (ref), collectionService (copy), t (copy)
-			if p0:GetAttribute(constantsModule.ViewabilityTargetIdAttribute) == var6 then
-				collectionService:RemoveTag(p0, constantsModule.CandidateTag)
-				p0:SetAttribute(constantsModule.ViewabilityTargetIdAttribute, nil)
+			-- upvalues: p1 (ref), constantsModule (copy), var2 (ref), collectionService (copy), t (copy)
+			if p1:GetAttribute(constantsModule.ViewabilityTargetIdAttribute) == var2 then
+				collectionService:RemoveTag(p1, constantsModule.CandidateTag)
+				p1:SetAttribute(constantsModule.ViewabilityTargetIdAttribute, nil)
 			end
-			t[var6] = nil
+			t[var2] = nil
 		end
 	end,
-	get = function(p2)
+	get = function(p1)
 		-- upvalues: t (ref)
-		return t[p2]
+		return t[p1]
 	end,
 	_clear = function()
 		-- upvalues: t (ref)
@@ -47,11 +47,11 @@ return {
 	end,
 	_size = function()
 		-- upvalues: t (ref)
-		local var7 = 0
+		local var2 = 0
 		
 		for i in t do
-			var7 += 1
+			var2 += 1
 		end
-		return var7
+		return var2
 	end
 }

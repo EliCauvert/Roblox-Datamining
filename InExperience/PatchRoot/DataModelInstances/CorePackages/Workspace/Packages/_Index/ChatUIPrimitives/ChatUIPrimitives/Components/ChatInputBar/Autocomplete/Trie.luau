@@ -1,12 +1,12 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.children = {}
 	tbl.isEndOfWord = false
-	tbl.data = p0
+	tbl.data = p1
 	
 	return tbl
 end

@@ -18,21 +18,21 @@ local t = {
 	Size = UDim2.fromScale(1, 1)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaults (ref), t (ref), usePulseBinding (ref), useTokens (ref), radius (ref), reactModule (ref), view (ref), withCommonProps (ref)
-	local var3 = withDefaults(p0, t)
-	local var4 = useTokens()
+	local var1 = withDefaults(p1, t)
+	local var2 = useTokens()
 	
-	return reactModule.createElement(view, withCommonProps(var3, {
-		cornerRadius = if var3.radius ~= radius.None then nil else UDim.new(0, var4.Radius[var3.radius]),
-		backgroundStyle = usePulseBinding(2):map(function(p2)
-			-- upvalues: var4 (ref)
+	return reactModule.createElement(view, withCommonProps(var1, {
+		cornerRadius = if var1.radius ~= radius.None then nil else UDim.new(0, var2.Radius[var1.radius]),
+		backgroundStyle = usePulseBinding(2):map(function(p3)
+			-- upvalues: var2 (ref)
 			return {
-				Color3 = var4.Color.Shift.Shift_300.Color3,
-				Transparency = (1 - p2) * var4.Color.Extended.White.White_10.Transparency + (var4.Color.Extended.White.White_10.Transparency - 0.1) * p2
+				Color3 = var2.Color.Shift.Shift_300.Color3,
+				Transparency = (1 - p3) * var2.Color.Extended.White.White_10.Transparency + (var2.Color.Extended.White.White_10.Transparency - 0.1) * p3
 			}
 		end),
-		Size = var3.Size,
-		ref = p1
+		Size = var1.Size,
+		ref = p2
 	}))
 end))

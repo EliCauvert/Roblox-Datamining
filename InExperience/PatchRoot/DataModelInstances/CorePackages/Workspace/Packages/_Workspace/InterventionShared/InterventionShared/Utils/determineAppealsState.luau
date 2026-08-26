@@ -1,13 +1,13 @@
 ﻿return function(a)
-	local var0 = if a.beginDate and a.beginDate ~= "" then DateTime.fromIsoDate(a.beginDate) else nil
-	local var1 = if a.endDate and a.endDate ~= "" then DateTime.fromIsoDate(a.endDate) else nil
+	local var1 = if a.beginDate and a.beginDate ~= "" then DateTime.fromIsoDate(a.beginDate) else nil
+	local var2 = if a.endDate and a.endDate ~= "" then DateTime.fromIsoDate(a.endDate) else nil
 	
-	if var0 and var1 then
-		local var2 = var1.UnixTimestamp - var0.UnixTimestamp > 1800
+	if var1 and var2 then
+		local var3 = var2.UnixTimestamp - var1.UnixTimestamp > 1800
 		
 		return {
-			isAppealable = var2 or a.onAppeal ~= nil,
-			shouldOpenAppealsPortal = var2
+			isAppealable = var3 or a.onAppeal ~= nil,
+			shouldOpenAppealsPortal = var3
 		}
 	end
 	return {

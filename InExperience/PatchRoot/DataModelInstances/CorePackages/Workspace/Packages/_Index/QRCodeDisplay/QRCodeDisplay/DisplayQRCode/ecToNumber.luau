@@ -1,5 +1,5 @@
 ﻿local _ = require(script:FindFirstAncestor("QRCodeDisplay").Common.ECLevels)
 
-return function(p0)
-	return tonumber(p0)
+return function(p1)
+	return tonumber(p1)
 end

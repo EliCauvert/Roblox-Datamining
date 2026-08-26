@@ -3,131 +3,131 @@ local popoverAlignModule = require(foundation.Enums.PopoverAlign)
 local popoverSideModule = require(foundation.Enums.PopoverSide)
 
 return {
-	adjustForOnScreenKeyboard = function(p0, p1, p2)
-		return Rect.new(p0.Min, Vector2.new(p0.Max.X, math.min(p0.Max.Y, (p1 - p2).Y)))
+	adjustForOnScreenKeyboard = function(p1, p2, p3)
+		return Rect.new(p1.Min, Vector2.new(p1.Max.X, math.min(p1.Max.Y, (p2 - p3).Y)))
 	end,
-	isOnScreen = function(p3, p4)
-		return p4.Max.X < p3.Min.X or p3.Max.X < p4.Min.X or (p4.Max.Y < p3.Min.Y or p3.Max.Y < p4.Min.Y)
+	isOnScreen = function(p1, p2)
+		return p2.Max.X < p1.Min.X or p1.Max.X < p2.Min.X or (p2.Max.Y < p1.Min.Y or p1.Max.Y < p2.Min.Y)
 	end,
-	calculateSide = function(p5, p6, p7, p8)
+	calculateSide = function(p1, p2, p3, p4)
 		-- upvalues: popoverSideModule (ref)
-		if p5 == popoverSideModule.Top then
-			if p6.Min.Y - p8.Y < p7.Min.Y and p6.Max.Y + p8.Y < p7.Max.Y then
+		if p1 == popoverSideModule.Top then
+			if p2.Min.Y - p4.Y < p3.Min.Y and p2.Max.Y + p4.Y < p3.Max.Y then
 				return popoverSideModule.Bottom
 			end
-		elseif p5 == popoverSideModule.Bottom then
-			if p7.Max.Y < p6.Max.Y + p8.Y and p7.Min.Y < p6.Min.Y - p8.Y then
+		elseif p1 == popoverSideModule.Bottom then
+			if p3.Max.Y < p2.Max.Y + p4.Y and p3.Min.Y < p2.Min.Y - p4.Y then
 				return popoverSideModule.Top
 			end
-		elseif p5 == popoverSideModule.Left then
-			if p6.Min.X - p8.X < p7.Min.X and p6.Max.X + p8.X < p7.Max.X then
+		elseif p1 == popoverSideModule.Left then
+			if p2.Min.X - p4.X < p3.Min.X and p2.Max.X + p4.X < p3.Max.X then
 				return popoverSideModule.Right
 			end
 		else
-			return if p5 == popoverSideModule.Right and p7.Max.X < p6.Max.X + p8.X and p7.Min.X < p6.Min.X - p8.X then popoverSideModule.Left else p5
+			return if p1 == popoverSideModule.Right and p3.Max.X < p2.Max.X + p4.X and p3.Min.X < p2.Min.X - p4.X then popoverSideModule.Left else p1
 		end
 	end,
-	calculatePositions = function(p9, p10, p11, p12, p13, p14, p15, p16)
+	calculatePositions = function(p1, p2, p3, p4, p5, p6, p7, p8)
 		-- upvalues: popoverSideModule (ref), popoverAlignModule (ref)
 		local t = { X = 0, Y = 0 }
 		local t_1 = { X = 0, Y = 0 }
 		local t_2 = { X = 0, Y = 0 }
-		local var6 = if p9 ~= popoverSideModule.Top then p9 == popoverSideModule.Bottom else true
-		local var7 = if p9 ~= popoverSideModule.Top then p9 == popoverSideModule.Left else true
-		local var8 = "X"
-		local var9 = "Y"
-		local height = p13.Height
-		local x = p13.Min.X
-		local y = p13.Min.Y
-		local y_1 = p16.Y
-		local x_1 = p16.X
-		local x_2 = p13.Max.X
-		local y_2 = p13.Max.Y
-		local y_3 = p14.Min.Y
-		local y_4 = p14.Max.Y
-		local x_3 = p14.Min.X
-		local x_4 = p14.Max.X
+		local var1 = if p1 ~= popoverSideModule.Top then p1 == popoverSideModule.Bottom else true
+		local var2 = if p1 ~= popoverSideModule.Top then p1 == popoverSideModule.Left else true
+		local var3 = "X"
+		local var4 = "Y"
+		local height = p5.Height
+		local x = p5.Min.X
+		local y = p5.Min.Y
+		local y_1 = p8.Y
+		local x_1 = p8.X
+		local x_2 = p5.Max.X
+		local y_2 = p5.Max.Y
+		local y_3 = p6.Min.Y
+		local y_4 = p6.Max.Y
+		local x_3 = p6.Min.X
+		local x_4 = p6.Max.X
 		
-		if var6 then
-			var8 = "Y"
-			var9 = "X"
-			height = p13.Width
-			x = p13.Min.Y
-			y = p13.Min.X
-			y_1 = p16.X
-			x_1 = p16.Y
-			x_2 = p13.Max.Y
-			y_2 = p13.Max.X
-			y_3 = p14.Min.X
-			y_4 = p14.Max.X
-			x_3 = p14.Min.Y
-			x_4 = p14.Max.Y
+		if var1 then
+			var3 = "Y"
+			var4 = "X"
+			height = p5.Width
+			x = p5.Min.Y
+			y = p5.Min.X
+			y_1 = p8.X
+			x_1 = p8.Y
+			x_2 = p5.Max.Y
+			y_2 = p5.Max.X
+			y_3 = p6.Min.X
+			y_4 = p6.Max.X
+			x_3 = p6.Min.Y
+			x_4 = p6.Max.Y
 		end
-		local var10 = p10 + p15
+		local var5 = p2 + p7
 		
-		if var7 then
-			t[var8] = x - var10 - x_1
-			t_1[var8] = x_1
+		if var2 then
+			t[var3] = x - var5 - x_1
+			t_1[var3] = x_1
 		else
-			t[var8] = x_2 + var10
-			t_1[var8] = 0
+			t[var3] = x_2 + var5
+			t_1[var3] = 0
 		end
-		if p11 == popoverAlignModule.Start then
-			t[var9] = y + p12
-		elseif p11 == popoverAlignModule.Center then
-			t[var9] = y + height / 2 - y_1 / 2 + p12
+		if p3 == popoverAlignModule.Start then
+			t[var4] = y + p4
+		elseif p3 == popoverAlignModule.Center then
+			t[var4] = y + height / 2 - y_1 / 2 + p4
 		else
-			t[var9] = y_2 + -p12
-			t_2[var9] = 1
+			t[var4] = y_2 + -p4
+			t_2[var4] = 1
 		end
-		local var11 = t[var9] - t_2[var9] * y_1
-		local var12 = var11 + y_1
+		local var6 = t[var4] - t_2[var4] * y_1
+		local var7 = var6 + y_1
 		
-		if var11 < y_3 then
-			t_2[var9] = 0
-			t[var9] = y_3
-		elseif y_4 < var12 then
-			t_2[var9] = 1
-			t[var9] = y_4
+		if var6 < y_3 then
+			t_2[var4] = 0
+			t[var4] = y_3
+		elseif y_4 < var7 then
+			t_2[var4] = 1
+			t[var4] = y_4
 		end
-		local var13 = t[var9] - t_2[var9] * y_1
-		local var14 = var13 + y_1
-		local maxValue = math.max(y, var13)
-		local minValue = math.min(y_2, var14)
-		t_1[var9] = (if maxValue <= minValue then (maxValue + minValue) / 2 elseif var14 < y then var14 - p15 else var13 + p15) - t[var9]
-		t[var8] = math.clamp(t[var8], x_3, math.max(x_4 - x_1 - var10, 0))
-		t.X -= p14.Min.X
-		t.Y -= p14.Min.Y
+		local var8 = t[var4] - t_2[var4] * y_1
+		local var9 = var8 + y_1
+		local maxValue = math.max(y, var8)
+		local minValue = math.min(y_2, var9)
+		t_1[var4] = (if maxValue <= minValue then (maxValue + minValue) / 2 elseif var9 < y then var9 - p7 else var8 + p7) - t[var4]
+		t[var3] = math.clamp(t[var3], x_3, math.max(x_4 - x_1 - var5, 0))
+		t.X -= p6.Min.X
+		t.Y -= p6.Min.Y
 		
 		return Vector2.new(t.X, t.Y), Vector2.new(t_1.X, t_1.Y), Vector2.new(t_2.X, t_2.Y)
 	end,
-	calculatePopoverBounds = function(p17, p18, p19, p20, p21)
+	calculatePopoverBounds = function(p1, p2, p3, p4, p5)
 		-- upvalues: popoverSideModule (ref)
-		local var17 = p21
+		local var1 = p5
 		
-		if p17 == popoverSideModule.Top or p17 == popoverSideModule.Bottom then
-			var17 += Vector2.new(p19, p18 + p20)
+		if p1 == popoverSideModule.Top or p1 == popoverSideModule.Bottom then
+			var1 += Vector2.new(p3, p2 + p4)
 			
-			return var17
+			return var1
 		end
-		return var17 + Vector2.new(p18 + p20, p19)
+		return var1 + Vector2.new(p2 + p4, p3)
 	end,
-	calculateAlign = function(p22, p23, p24, p25, p26)
+	calculateAlign = function(p1, p2, p3, p4, p5)
 		-- upvalues: popoverSideModule (ref), popoverAlignModule (ref)
-		if if p22 ~= popoverSideModule.Top then p22 == popoverSideModule.Bottom else true then
-			if p23 == popoverAlignModule.Start then
-				if p25.Max.X < p24.Min.X + p26.X then
+		if if p1 ~= popoverSideModule.Top then p1 == popoverSideModule.Bottom else true then
+			if p2 == popoverAlignModule.Start then
+				if p4.Max.X < p3.Min.X + p5.X then
 					return popoverAlignModule.End
 				end
-			elseif p23 == popoverAlignModule.End and p24.Max.X - p26.X < p25.Min.X then
+			elseif p2 == popoverAlignModule.End and p3.Max.X - p5.X < p4.Min.X then
 				return popoverAlignModule.Start
 			end
-		elseif p23 == popoverAlignModule.Start then
-			if p25.Max.Y < p24.Min.Y + p26.Y then
+		elseif p2 == popoverAlignModule.Start then
+			if p4.Max.Y < p3.Min.Y + p5.Y then
 				return popoverAlignModule.End
 			end
 		else
-			return if p23 == popoverAlignModule.End and p24.Max.Y - p26.Y < p25.Min.Y then popoverAlignModule.Start else p23
+			return if p2 == popoverAlignModule.End and p3.Max.Y - p5.Y < p4.Min.Y then popoverAlignModule.Start else p2
 		end
 	end
 }

@@ -6,29 +6,29 @@ local selectors = navigationRoduxModule.Selectors
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagUseNavigationSelectors = sharedFlagsModule.FFlagUseNavigationSelectors
 local fFlagSignalsNavP2NavigationPrimitives = sharedFlagsModule.FFlagSignalsNavP2NavigationPrimitives
-local var3 = if fFlagSignalsNavP2NavigationPrimitives then require(parent.RobloxAppNavigation).AppNavigationRegistry else nil
+local var1 = if fFlagSignalsNavP2NavigationPrimitives then require(parent.RobloxAppNavigation).AppNavigationRegistry else nil
 
-return function(p0)
-	-- upvalues: argCheckModule (ref), fFlagSignalsNavP2NavigationPrimitives (ref), var3 (ref), fFlagUseNavigationSelectors (ref), selectors (ref), applySetNavigationLocked (ref)
-	argCheckModule.isType(p0, "function", "navigationCallback")
+return function(p1)
+	-- upvalues: argCheckModule (ref), fFlagSignalsNavP2NavigationPrimitives (ref), var1 (ref), fFlagUseNavigationSelectors (ref), selectors (ref), applySetNavigationLocked (ref)
+	argCheckModule.isType(p1, "function", "navigationCallback")
 	
-	return function(p1)
-		-- upvalues: fFlagSignalsNavP2NavigationPrimitives (copy), var3 (copy), p0 (ref), fFlagUseNavigationSelectors (copy), selectors (copy), applySetNavigationLocked (copy)
+	return function(p2)
+		-- upvalues: fFlagSignalsNavP2NavigationPrimitives (copy), var1 (copy), p1 (ref), fFlagUseNavigationSelectors (copy), selectors (copy), applySetNavigationLocked (copy)
 		if fFlagSignalsNavP2NavigationPrimitives then
-			if var3.get().getIsNavigating(false) then
+			if var1.get().getIsNavigating(false) then
 				return
 			end
-			p0()
+			p1()
 			
 			return
 		else
-			local state = p1:getState()
+			local state = p2:getState()
 			
 			if if fFlagUseNavigationSelectors then selectors.selectNavigationLocked(state) else state.Navigation.lockNavigationActions then
 				return
 			end
-			p1:dispatch(applySetNavigationLocked(true))
-			p0()
+			p2:dispatch(applySetNavigationLocked(true))
+			p1()
 		end
 	end
 end

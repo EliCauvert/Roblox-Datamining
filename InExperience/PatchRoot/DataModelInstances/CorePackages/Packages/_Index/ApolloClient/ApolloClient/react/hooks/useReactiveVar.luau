@@ -6,21 +6,21 @@ local useState = reactModule.useState
 local _ = require(parent.cache)
 local t_1 = { __value = "nil placeholder" }
 
-function t.useReactiveVar(p0)
+function t.useReactiveVar(p1)
 	-- upvalues: useState (ref), useEffect (ref), t_1 (ref)
-	local var3 = p0()
-	local _, var4 = useState(var3)
+	local var1 = p1()
+	local _, var2 = useState(var1)
 	useEffect(function()
-		-- upvalues: p0 (ref), var3 (ref), var4 (ref)
-		local var5 = p0()
+		-- upvalues: p1 (ref), var1 (ref), var2 (ref)
+		local var3 = p1()
 		
-		if var3 == var5 then
-			return p0:onNextChange(var4)
+		if var1 == var3 then
+			return p1:onNextChange(var2)
 		end
-		var4(var5)
-	end, { var3 or t_1 })
+		var2(var3)
+	end, { var1 or t_1 })
 	
-	return var3
+	return var1
 end
 
 return t

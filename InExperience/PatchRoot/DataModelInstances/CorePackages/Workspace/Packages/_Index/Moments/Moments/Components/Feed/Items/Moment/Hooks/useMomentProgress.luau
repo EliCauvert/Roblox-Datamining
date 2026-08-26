@@ -4,17 +4,17 @@ local t = { time = 0, duration = 0, ratio = 0 }
 
 return function()
 	-- upvalues: momentContextModule (ref), signalsModule (ref), t (ref)
-	local var3 = momentContextModule.useMoment()
+	local var1 = momentContextModule.useMoment()
 	
-	return signalsModule.createComputed(function(p0)
-		-- upvalues: var3 (ref), t (copy)
-		local controller = var3.controller
+	return signalsModule.createComputed(function(p1)
+		-- upvalues: var1 (ref), t (copy)
+		local controller = var1.controller
 		
 		if controller == nil then
 			return t
 		end
-		local position = controller.getPosition(p0)
-		local duration = controller.getState(p0).duration
+		local position = controller.getPosition(p1)
+		local duration = controller.getState(p1).duration
 		
 		return if duration <= 0 then t else {
 			time = position,

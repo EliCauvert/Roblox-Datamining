@@ -1,10 +1,10 @@
 ﻿local coreGuiService = game:GetService("CoreGui")
 local t = {}
-local var2 = nil
+local var1 = nil
 
 function t.show()
-	-- upvalues: var2 (write), coreGuiService (ref)
-	if var2 and var2.Parent then
+	-- upvalues: var1 (write), coreGuiService (ref)
+	if var1 and var1.Parent then
 		return
 	end
 	local playWithRewardBlackoutCurtain = Instance.new("ScreenGui")
@@ -19,14 +19,14 @@ function t.show()
 	blackoutCurtainFrame.Active = true
 	blackoutCurtainFrame.Parent = playWithRewardBlackoutCurtain
 	playWithRewardBlackoutCurtain.Parent = coreGuiService
-	var2 = playWithRewardBlackoutCurtain
+	var1 = playWithRewardBlackoutCurtain
 end
 
 function t.hide()
-	-- upvalues: var2 (write)
-	if var2 then
-		var2:Destroy()
-		var2 = nil
+	-- upvalues: var1 (write)
+	if var1 then
+		var1:Destroy()
+		var1 = nil
 	end
 end
 

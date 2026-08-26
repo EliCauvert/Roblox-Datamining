@@ -4,12 +4,12 @@ local t = {
 	[aspectRatioModeModule.Square] = 1
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref)
-	local var2 = t[p0]
+	local var1 = t[p1]
 	
-	if not var2 then
-		error("Unkown aspect ratio " .. tostring(p0))
+	if not var1 then
+		error("Unkown aspect ratio " .. tostring(p1))
 	end
-	return var2
+	return var1
 end

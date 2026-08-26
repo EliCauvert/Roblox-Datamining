@@ -5,10 +5,10 @@ local isPointInsideBounds = pressCaptureUtilsModule.isPointInsideBounds
 local getInputPosition = pressCaptureUtilsModule.getInputPosition
 local isPressInput = pressCaptureUtilsModule.isPressInput
 
-local function _(p0)
-	if p0.inputEndedConnection then
-		p0.inputEndedConnection:Disconnect()
-		p0.inputEndedConnection = nil
+local function _(p1)
+	if p1.inputEndedConnection then
+		p1.inputEndedConnection:Disconnect()
+		p1.inputEndedConnection = nil
 	end
 end
 
@@ -23,45 +23,45 @@ local _ = function(p1)
 	end
 end
 
-local _ = function(p2)
-	p2.isPressed = false
-	p2.boundsPosition = nil
-	p2.boundsSize = nil
+local _ = function(p1)
+	p1.isPressed = false
+	p1.boundsPosition = nil
+	p1.boundsSize = nil
 	
-	if p2.destroyingConnection then
-		p2.destroyingConnection:Disconnect()
-		p2.destroyingConnection = nil
+	if p1.destroyingConnection then
+		p1.destroyingConnection:Disconnect()
+		p1.destroyingConnection = nil
 	end
-	if p2.instanceInputEndedConnection then
-		p2.instanceInputEndedConnection:Disconnect()
-		p2.instanceInputEndedConnection = nil
+	if p1.instanceInputEndedConnection then
+		p1.instanceInputEndedConnection:Disconnect()
+		p1.instanceInputEndedConnection = nil
 	end
 end
 
-local _ = function(p3)
-	p3.isPressed = false
-	p3.boundsPosition = nil
-	p3.boundsSize = nil
+local _ = function(p1)
+	p1.isPressed = false
+	p1.boundsPosition = nil
+	p1.boundsSize = nil
 	
-	if p3.destroyingConnection then
-		p3.destroyingConnection:Disconnect()
-		p3.destroyingConnection = nil
+	if p1.destroyingConnection then
+		p1.destroyingConnection:Disconnect()
+		p1.destroyingConnection = nil
 	end
-	if p3.instanceInputEndedConnection then
-		p3.instanceInputEndedConnection:Disconnect()
-		p3.instanceInputEndedConnection = nil
+	if p1.instanceInputEndedConnection then
+		p1.instanceInputEndedConnection:Disconnect()
+		p1.instanceInputEndedConnection = nil
 	end
-	if p3.inputEndedConnection then
-		p3.inputEndedConnection:Disconnect()
-		p3.inputEndedConnection = nil
+	if p1.inputEndedConnection then
+		p1.inputEndedConnection:Disconnect()
+		p1.inputEndedConnection = nil
 	end
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: reactModule (ref), getInputPosition (ref), isPointInsideBounds (ref), userInputService (ref), isPressInput (ref)
-	local var3 = reactModule.useRef(p4)
-	var3.current = p4
-	local var4 = reactModule.useRef({
+	local var1 = reactModule.useRef(p1)
+	var1.current = p1
+	local var2 = reactModule.useRef({
 		isPressed = false,
 		boundsPosition = nil,
 		boundsSize = nil,
@@ -69,19 +69,19 @@ return function(p4)
 		inputEndedConnection = nil,
 		instanceInputEndedConnection = nil
 	})
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef(false)
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var7 (ref), var3 (ref)
-		local current = var4.current
+	local var3 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef(nil)
+	local var5 = reactModule.useRef(false)
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), var5 (ref), var1 (ref)
+		local current = var2.current
 		
 		if current.isPressed then
-			if var7.current then return end
+			if var5.current then return end
 		else
-			var7.current = false
+			var5.current = false
 		end
-		var7.current = true
+		var5.current = true
 		current.isPressed = false
 		current.boundsPosition = nil
 		current.boundsSize = nil
@@ -98,15 +98,15 @@ return function(p4)
 			current.inputEndedConnection:Disconnect()
 			current.inputEndedConnection = nil
 		end
-		var3.current()
+		var1.current()
 	end, {})
-	local var9 = reactModule.useCallback(function(p5)
-		-- upvalues: var4 (ref), getInputPosition (copy), isPointInsideBounds (copy), var8 (ref)
-		local current = var4.current
+	local var7 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref), getInputPosition (copy), isPointInsideBounds (copy), var6 (ref)
+		local current = var2.current
 		
 		if current.isPressed and current.boundsPosition and current.boundsSize then
-			if isPointInsideBounds(getInputPosition(p5), current.boundsPosition, current.boundsSize) then
-				var8()
+			if isPointInsideBounds(getInputPosition(p2), current.boundsPosition, current.boundsSize) then
+				var6()
 				
 				return
 			end
@@ -145,32 +145,32 @@ return function(p4)
 				current.inputEndedConnection = nil
 			end
 		end
-	end, { var8 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), userInputService (copy), isPressInput (copy), var9 (ref)
-		local current = var4.current
+	end, { var6 })
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), userInputService (copy), isPressInput (copy), var7 (ref)
+		local current = var2.current
 		
 		if current.inputEndedConnection then
 			return
 		end
-		current.inputEndedConnection = userInputService.InputEnded:Connect(function(p6)
-			-- upvalues: isPressInput (copy), var9 (copy)
-			if isPressInput(p6) then
-				var9(p6)
+		current.inputEndedConnection = userInputService.InputEnded:Connect(function(p2)
+			-- upvalues: isPressInput (copy), var7 (copy)
+			if isPressInput(p2) then
+				var7(p2)
 				
 				return
 			end
 		end)
-	end, { var9 })
-	local var11 = reactModule.useCallback(function(p7)
-		-- upvalues: var4 (ref), var10 (ref), isPressInput (copy), var7 (ref)
-		if p7 == nil then
+	end, { var7 })
+	local var9 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref), var8 (ref), isPressInput (copy), var5 (ref)
+		if p2 == nil then
 			return function() end
 		end
 		local function onPressInstanceDestroyed()
-			-- upvalues: var4 (copy), var10 (copy)
-			if not var4.current.isPressed then return end
-			local current = var4.current
+			-- upvalues: var2 (copy), var8 (copy)
+			if not var2.current.isPressed then return end
+			local current = var2.current
 			
 			if current.destroyingConnection then
 				current.destroyingConnection:Disconnect()
@@ -180,17 +180,17 @@ return function(p4)
 				current.instanceInputEndedConnection:Disconnect()
 				current.instanceInputEndedConnection = nil
 			end
-			var10()
+			var8()
 		end
 		
-		local inputBeganConnection = p7.InputBegan:Connect(function(p8)
-			-- upvalues: isPressInput (copy), var4 (copy), var7 (copy), p7 (ref), onPressInstanceDestroyed (ref)
-			if not isPressInput(p8) then return end
-			local current = var4.current
-			var7.current = false
+		local inputBeganConnection = p2.InputBegan:Connect(function(p3)
+			-- upvalues: isPressInput (copy), var2 (copy), var5 (copy), p2 (ref), onPressInstanceDestroyed (ref)
+			if not isPressInput(p3) then return end
+			local current = var2.current
+			var5.current = false
 			current.isPressed = true
-			current.boundsPosition = p7.AbsolutePosition
-			current.boundsSize = p7.AbsoluteSize
+			current.boundsPosition = p2.AbsolutePosition
+			current.boundsSize = p2.AbsoluteSize
 			
 			if current.destroyingConnection then
 				current.destroyingConnection:Disconnect()
@@ -200,12 +200,12 @@ return function(p4)
 				current.instanceInputEndedConnection:Disconnect()
 				current.instanceInputEndedConnection = nil
 			end
-			current.destroyingConnection = p7.Destroying:Connect(onPressInstanceDestroyed)
-			current.instanceInputEndedConnection = p7.InputEnded:Connect(function(p9)
-				-- upvalues: isPressInput (copy), var4 (copy)
-				if not isPressInput(p9) then return end
-				if var4.current.isPressed then
-					local current = var4.current
+			current.destroyingConnection = p2.Destroying:Connect(onPressInstanceDestroyed)
+			current.instanceInputEndedConnection = p2.InputEnded:Connect(function(p4)
+				-- upvalues: isPressInput (copy), var2 (copy)
+				if not isPressInput(p4) then return end
+				if var2.current.isPressed then
+					local current = var2.current
 					current.isPressed = false
 					current.boundsPosition = nil
 					current.boundsSize = nil
@@ -230,40 +230,40 @@ return function(p4)
 			-- upvalues: inputBeganConnection (ref)
 			inputBeganConnection:Disconnect()
 		end
-	end, { var10 })
-	local var12 = reactModule.useCallback(function(p10)
-		-- upvalues: var5 (ref), var11 (ref)
-		if var5.current then
-			var5.current()
-			var5.current = nil
+	end, { var8 })
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), var9 (ref)
+		if var3.current then
+			var3.current()
+			var3.current = nil
 		end
-		if p10 and p10:IsA("GuiObject") then
-			var5.current = var11(p10)
+		if p2 and p2:IsA("GuiObject") then
+			var3.current = var9(p2)
 		end
-	end, { var11 })
-	local var13 = reactModule.useCallback(function(p11)
-		-- upvalues: var6 (ref), var11 (ref)
-		if var6.current then
-			var6.current()
-			var6.current = nil
+	end, { var9 })
+	local var11 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref), var9 (ref)
+		if var4.current then
+			var4.current()
+			var4.current = nil
 		end
-		if p11 and p11:IsA("GuiObject") then
-			var6.current = var11(p11)
+		if p2 and p2:IsA("GuiObject") then
+			var4.current = var9(p2)
 		end
-	end, { var11 })
+	end, { var9 })
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var6 (ref), var4 (ref), var10 (ref)
+		-- upvalues: var3 (ref), var4 (ref), var2 (ref), var8 (ref)
 		return function()
-			-- upvalues: var5 (copy), var6 (copy), var4 (copy), var10 (copy)
-			if var5.current then
-				var5.current()
-				var5.current = nil
+			-- upvalues: var3 (copy), var4 (copy), var2 (copy), var8 (copy)
+			if var3.current then
+				var3.current()
+				var3.current = nil
 			end
-			if var6.current then
-				var6.current()
-				var6.current = nil
+			if var4.current then
+				var4.current()
+				var4.current = nil
 			end
-			local current = var4.current
+			local current = var2.current
 			
 			if current.isPressed and not current.inputEndedConnection then
 				if current.destroyingConnection then
@@ -274,7 +274,7 @@ return function(p4)
 					current.instanceInputEndedConnection:Disconnect()
 					current.instanceInputEndedConnection = nil
 				end
-				var10()
+				var8()
 				
 				return
 			elseif not current.inputEndedConnection then
@@ -292,11 +292,11 @@ return function(p4)
 				end
 			end
 		end
-	end, { var10 })
+	end, { var8 })
 	
 	return {
-		onActivated = var8,
-		playButtonRef = var12,
-		loadingCaptureRef = var13
+		onActivated = var6,
+		playButtonRef = var10,
+		loadingCaptureRef = var11
 	}
 end

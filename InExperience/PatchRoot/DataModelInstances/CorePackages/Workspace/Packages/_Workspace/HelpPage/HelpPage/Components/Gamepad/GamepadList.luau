@@ -11,17 +11,17 @@ local icon = foundationModule.Icon
 local enums = foundationModule.Enums
 local useTokens = foundationModule.Hooks.useTokens
 local extraKeysEnumModule = require(parent.Enums.ExtraKeysEnum)
-local var4 = reactModule.memo(function(p0)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), text (ref)
 	return reactModule.createElement(text, {
 		tag = "auto-xy text-align-x-center text-align-y-center text-title-large",
-		Text = useLocalization({ action = p0.action }).action
+		Text = useLocalization({ action = p1.action }).action
 	})
 end)
-local var5 = reactModule.memo(function(p1)
+local var2 = reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), extraKeysEnumModule (ref), constantsModule (ref), view (ref), icon (ref), enums (ref)
-	local var6 = useTokens()
-	local var7 = reactModule.useMemo(function()
+	local var3 = useTokens()
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), extraKeysEnumModule (copy), constantsModule (copy)
 		local t = {}
 		
@@ -44,7 +44,7 @@ local var5 = reactModule.memo(function(p1)
 	return reactModule.createElement(view, {
 		tag = "align-x-center align-y-center auto-xy gap-xsmall row"
 	}, reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactModule (copy), view (copy), var6 (ref), var7 (ref), constantsModule (copy), icon (copy), enums (copy)
+		-- upvalues: p1 (ref), reactModule (copy), view (copy), var3 (ref), var4 (ref), constantsModule (copy), icon (copy), enums (copy)
 		local t = {}
 		
 		if p1.addBlankIcon and p1.layoutOrderReversed then
@@ -52,10 +52,10 @@ local var5 = reactModule.memo(function(p1)
 				BackgroundTransparency = 1,
 				LayoutOrder = -1,
 				key = "BlankIconBefore",
-				Size = UDim2.fromOffset(var6.Size.Size_600, var6.Size.Size_600)
+				Size = UDim2.fromOffset(var3.Size.Size_600, var3.Size.Size_600)
 			}))
 		end
-		for i, v in var7 do
+		for i, v in var4 do
 			table.insert(t, reactModule.createElement(view, {
 				tag = "align-x-center align-y-center auto-xy",
 				LayoutOrder = constantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[i],
@@ -65,13 +65,13 @@ local var5 = reactModule.memo(function(p1)
 			}))
 		end
 		return t
-	end, { var7, p1.addBlankIcon, p1.layoutOrderReversed }))
+	end, { var4, p1.addBlankIcon, p1.layoutOrderReversed }))
 end)
 
 return reactModule.memo(reactModule.memo(function(p2)
-	-- upvalues: reactModule (ref), constantsModule (ref), view (ref), var4 (ref), var5 (ref)
-	local var10, var11 = reactModule.useMemo(function()
-		-- upvalues: p2 (ref), constantsModule (copy), reactModule (copy), view (copy), var4 (copy), var5 (copy)
+	-- upvalues: reactModule (ref), constantsModule (ref), view (ref), var1 (ref), var2 (ref)
+	local var5, var6 = reactModule.useMemo(function()
+		-- upvalues: p2 (ref), constantsModule (copy), reactModule (copy), view (copy), var1 (copy), var2 (copy)
 		local t = {}
 		local t_1 = {}
 		
@@ -84,24 +84,24 @@ return reactModule.memo(reactModule.memo(function(p2)
 					input = if p2.isSpatial then gamepadInput.spatialGamepadInput elseif constantsModule.HELP_PAGE.GAMEPAD_PLAYSTATION_PLATFORMS[p2.platform] then gamepadInput.playstationInput else gamepadInput.xboxInput
 				end
 				if input ~= nil and #input > 0 then
-					local var14 = constantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[input[1]]
+					local var7 = constantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[input[1]]
 					
 					if p2.layoutOrderReversed then
-						var14 = -var14
+						var7 = -var7
 					end
 					table.insert(t, reactModule.createElement(view, {
 						tag = "align-y-center auto-x col size-0-1000",
-						LayoutOrder = var14,
+						LayoutOrder = var7,
 						key = "Text-" .. i
 					}, {
-						ActionText = reactModule.createElement(var4, { action = v.label })
+						ActionText = reactModule.createElement(var1, { action = v.label })
 					}))
 					table.insert(t_1, reactModule.createElement(view, {
 						tag = "align-y-center auto-x col size-0-1000",
-						LayoutOrder = var14,
+						LayoutOrder = var7,
 						key = "Icon-" .. i
 					}, {
-						IconContainer = reactModule.createElement(var5, {
+						IconContainer = reactModule.createElement(var2, {
 							buttons = input,
 							platform = p2.platform,
 							addBlankIcon = p2.addBlankIcon,
@@ -127,7 +127,7 @@ return reactModule.memo(reactModule.memo(function(p2)
 				["col auto-xy align-x-left"] = p2.layoutOrderReversed
 			},
 			LayoutOrder = if p2.layoutOrderReversed then 3 else 1
-		}, var10),
-		IconCol = reactModule.createElement(view, { tag = "col auto-xy", LayoutOrder = 2 }, var11)
+		}, var5),
+		IconCol = reactModule.createElement(view, { tag = "col auto-xy", LayoutOrder = 2 }, var6)
 	})
 end))

@@ -11,31 +11,31 @@ if require(expChat.Flags.FFlagExpChatUseChatMuteStore) then
 			getMutedGlobalUsernames = chatMuteModule.getMutedUsernames(),
 			getMutedGlobalDisplayNames = chatMuteModule.getMutedDisplayNames(),
 			getMutedGlobalUserIds = chatMuteModule.getMutedUserIds(),
-			muteGlobalUsername = function(p0)
+			muteGlobalUsername = function(p1)
 				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.mutePlayer({ username = p0 })
+				chatMuteModule.mutePlayer({ username = p1 })
 			end,
 			unmuteGlobalUsername = function(p1)
 				-- upvalues: chatMuteModule (copy)
 				chatMuteModule.unmutePlayer({ username = p1 })
 			end,
-			muteGlobalDisplayName = function(p2)
+			muteGlobalDisplayName = function(p1)
 				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.mutePlayer({ displayName = p2 })
+				chatMuteModule.mutePlayer({ displayName = p1 })
 			end,
-			unmuteGlobalDisplayName = function(p3)
+			unmuteGlobalDisplayName = function(p1)
 				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.unmutePlayer({ displayName = p3 })
+				chatMuteModule.unmutePlayer({ displayName = p1 })
 			end,
 			isUsernameMuted = chatMuteModule.isUsernameMuted,
 			isDisplayNameMuted = chatMuteModule.isDisplayNameMuted,
-			muteGlobalUserId = function(p4)
+			muteGlobalUserId = function(p1)
 				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.mutePlayer({ userId = tostring(p4) })
+				chatMuteModule.mutePlayer({ userId = tostring(p1) })
 			end,
-			unmuteGlobalUserId = function(p5)
+			unmuteGlobalUserId = function(p1)
 				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.unmutePlayer({ userId = tostring(p5) })
+				chatMuteModule.unmutePlayer({ userId = tostring(p1) })
 			end,
 			isUserIdMuted = chatMuteModule.isUserIdMuted
 		}

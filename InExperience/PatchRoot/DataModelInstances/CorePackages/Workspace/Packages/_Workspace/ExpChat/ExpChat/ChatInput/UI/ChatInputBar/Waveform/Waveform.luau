@@ -6,44 +6,44 @@ local ITEM_WIDTH = waveformAudioModule.ITEM_WIDTH
 local RENDER_INTERVAL = waveformAudioModule.RENDER_INTERVAL
 local t = { itemIdx = 0, height = 0.2, age = nil }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), ITEM_WIDTH (ref), waveformAudioModule (ref), useTickClock (ref), RENDER_INTERVAL (ref), t (ref), BAR_WIDTH (ref)
-	local var3 = p0.normalize == nil or p0.normalize
-	local bindBarStyle = p0.bindBarStyle
-	local onSample = p0.onSample
-	local var4, var5 = reactModule.useState(0)
-	local var6 = if p0.isActive and var4 > 0 then math.ceil(var4 / ITEM_WIDTH) + 1 else 0
+	local var1 = p1.normalize == nil or p1.normalize
+	local bindBarStyle = p1.bindBarStyle
+	local onSample = p1.onSample
+	local var2, var3 = reactModule.useState(0)
+	local var4 = if p1.isActive and var2 > 0 then math.ceil(var2 / ITEM_WIDTH) + 1 else 0
+	local var5, var6 = reactModule.useBinding(0)
 	local var7, var8 = reactModule.useBinding(0)
-	local var9, var10 = reactModule.useBinding(0)
-	local var11 = waveformAudioModule.useAudioAnalyzer(p0.audioDeviceInput)
-	local var12 = reactModule.useRef(0)
-	local var13 = reactModule.useRef({})
+	local var9 = waveformAudioModule.useAudioAnalyzer(p1.audioDeviceInput)
+	local var10 = reactModule.useRef(0)
+	local var11 = reactModule.useRef({})
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var12 (ref), var8 (ref), var10 (ref)
-		table.clear(var13.current)
-		var12.current = 0
+		-- upvalues: var11 (ref), var10 (ref), var6 (ref), var8 (ref)
+		table.clear(var11.current)
+		var10.current = 0
+		var6(0)
 		var8(0)
-		var10(0)
-	end, { p0.isActive, var6, var8, var10 })
+	end, { p1.isActive, var4, var6, var8 })
 	useTickClock({
 		intervalSec = RENDER_INTERVAL,
-		enabled = p0.isActive and var6 > 0,
+		enabled = p1.isActive and var4 > 0,
 		onTick = function()
-			-- upvalues: var7 (ref), waveformAudioModule (copy), var11 (ref), var12 (ref), var3 (ref), var13 (ref), var6 (ref), var8 (ref), onSample (ref)
-			local var14 = var7:getValue() + 1
-			local var15 = 0.2 + waveformAudioModule.sampleVolume(var11.current, var12, var3) * 0.8
-			local current = var13.current
-			current[var14] = { height = var15 }
-			current[var14 - var6] = nil
-			var8(var14)
+			-- upvalues: var5 (ref), waveformAudioModule (copy), var9 (ref), var10 (ref), var1 (ref), var11 (ref), var4 (ref), var6 (ref), onSample (ref)
+			local var12 = var5:getValue() + 1
+			local var13 = 0.2 + waveformAudioModule.sampleVolume(var9.current, var10, var1) * 0.8
+			local current = var11.current
+			current[var12] = { height = var13 }
+			current[var12 - var4] = nil
+			var6(var12)
 			
 			if onSample then
-				onSample(var14, var15)
+				onSample(var12, var13)
 			end
 		end,
-		onFrame = function(p1)
-			-- upvalues: var10 (ref)
-			var10(p1)
+		onFrame = function(p2)
+			-- upvalues: var8 (ref)
+			var8(p2)
 		end
 	})
 	
@@ -53,54 +53,54 @@ return reactModule.memo(function(p0)
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		[reactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: var4 (ref), var5 (ref)
+			-- upvalues: var2 (ref), var3 (ref)
 			local x = p2.AbsoluteSize.X
 			
-			if x ~= var4 then
-				var5(x)
+			if x ~= var2 then
+				var3(x)
 			end
 		end
 	}, reactModule.useMemo(function()
-		-- upvalues: var13 (ref), var6 (ref), ITEM_WIDTH (copy), var7 (ref), t (copy), bindBarStyle (ref), reactModule (copy), var9 (ref), BAR_WIDTH (copy)
+		-- upvalues: var11 (ref), var4 (ref), ITEM_WIDTH (copy), var5 (ref), t (copy), bindBarStyle (ref), reactModule (copy), var7 (ref), BAR_WIDTH (copy)
 		local t_1 = {}
-		local current = var13.current
+		local current = var11.current
 		
-		for i = 1, var6 do
-			local var17 = var6 - i
-			local var18 = (i - 1) * ITEM_WIDTH
-			local var19 = var7:map(function(p3)
-				-- upvalues: var17 (ref), t (copy), current (ref)
-				local var21 = p3 - var17
+		for i = 1, var4 do
+			local var12 = var4 - i
+			local var13 = (i - 1) * ITEM_WIDTH
+			local var14 = var5:map(function(p2)
+				-- upvalues: var12 (ref), t (copy), current (ref)
+				local var15 = p2 - var12
 				
-				if var21 <= 0 then
+				if var15 <= 0 then
 					return t
 				end
-				local var22 = current[var21]
+				local var16 = current[var15]
 				
-				return if var22 == nil then t else { itemIdx = var21, height = var22.height, age = var17 }
+				return if var16 == nil then t else { itemIdx = var15, height = var16.height, age = var12 }
 			end)
-			local var20 = bindBarStyle(var19)
+			local var15 = bindBarStyle(var14)
 			t_1["Bar" .. i] = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Position = var9:map(function(p4)
-					-- upvalues: var18 (ref), ITEM_WIDTH (copy)
-					return UDim2.new(0, var18 - p4 * ITEM_WIDTH, 0.5, 0)
+				Position = var7:map(function(p2)
+					-- upvalues: var13 (ref), ITEM_WIDTH (copy)
+					return UDim2.new(0, var13 - p2 * ITEM_WIDTH, 0.5, 0)
 				end),
 				AnchorPoint = Vector2.new(0, 0.5),
-				Size = var19:map(function(p5)
+				Size = var14:map(function(p2)
 					-- upvalues: BAR_WIDTH (copy)
-					return UDim2.new(0, BAR_WIDTH, p5.height, 0)
+					return UDim2.new(0, BAR_WIDTH, p2.height, 0)
 				end),
-				BackgroundColor3 = var20:map(function(p6)
-					return p6.color
+				BackgroundColor3 = var15:map(function(p2)
+					return p2.color
 				end),
-				BackgroundTransparency = var20:map(function(p7)
-					return p7.transparency
+				BackgroundTransparency = var15:map(function(p2)
+					return p2.transparency
 				end)
 			}, {
 				Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 			})
 		end
 		return t_1
-	end, { var6, var7, var9, bindBarStyle }))
+	end, { var4, var5, var7, bindBarStyle }))
 end)

@@ -1,10 +1,10 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiCoreSystem").ClientBinding.SduiClientBindingTypes)
 
-local function tryResolveTemplatePair(p0, p1, p2)
-	if p1 ~= nil then
-		return p1, true
-	elseif p0 and p0 ~= "" then
-		local templateForRobloxComponent = p2.getTemplateForRobloxComponent(p0)
+local function tryResolveTemplatePair(p1, p2, p3)
+	if p2 ~= nil then
+		return p2, true
+	elseif p1 and p1 ~= "" then
+		local templateForRobloxComponent = p3.getTemplateForRobloxComponent(p1)
 		
 		if templateForRobloxComponent then
 			return templateForRobloxComponent, false
@@ -13,36 +13,36 @@ local function tryResolveTemplatePair(p0, p1, p2)
 	return nil, false
 end
 
-local function resolveItemOverrides(p3, p4)
-	if p3 == nil or next(p3) == nil then
+local function resolveItemOverrides(p1, p2)
+	if p1 == nil or next(p1) == nil then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p3 do
-		local var5, var6
+	for i, v in p1 do
+		local var1, var2
 		local robloxComponent = v.roblox_component
 		local inlineComponent = v.inline_component
 		
 		if inlineComponent == nil then
 			if robloxComponent and robloxComponent ~= "" then
-				local templateForRobloxComponent = p4.getTemplateForRobloxComponent(robloxComponent)
+				local templateForRobloxComponent = p2.getTemplateForRobloxComponent(robloxComponent)
 				
 				if templateForRobloxComponent then
-					var5 = templateForRobloxComponent
-					var6 = false
+					var1 = templateForRobloxComponent
+					var2 = false
 				else
-					var5 = nil
-					var6 = false
+					var1 = nil
+					var2 = false
 				end
 			end
 		else
-			var5 = inlineComponent
-			var6 = true
+			var1 = inlineComponent
+			var2 = true
 		end
 		t[i] = {
-			template = var5,
-			isInline = var6,
+			template = var1,
+			isInline = var2,
 			inputs = v.inputs,
 			sortRankProp = v.sort_rank
 		}
@@ -50,214 +50,214 @@ local function resolveItemOverrides(p3, p4)
 	return t
 end
 
-local function _(p5, p6, p7, p8, p9)
-	local var10, var11
-	local var8 = if typeof(p5) == "table" then p5.roblox_component else nil
-	local var9 = if typeof(p5) == "table" then p5.inline_component else nil
+local function _(p3, p4, p5, p6, p7)
+	local var3, var4
+	local var5 = if typeof(p3) == "table" then p3.roblox_component else nil
+	local var6 = if typeof(p3) == "table" then p3.inline_component else nil
 	
-	if var9 == nil then
-		if var8 and var8 ~= "" then
-			local templateForRobloxComponent = p9.getTemplateForRobloxComponent(var8)
+	if var6 == nil then
+		if var5 and var5 ~= "" then
+			local templateForRobloxComponent = p7.getTemplateForRobloxComponent(var5)
 			
 			if templateForRobloxComponent then
-				var10 = templateForRobloxComponent
-				var11 = false
+				var3 = templateForRobloxComponent
+				var4 = false
 			else
-				var10 = nil
-				var11 = false
+				var3 = nil
+				var4 = false
 			end
 		end
 	else
-		var10 = var9
-		var11 = true
+		var3 = var6
+		var4 = true
 	end
-	if var10 then
-		return var10, var11
-	elseif p6 and p6.template then
-		return p6.template, p6.isInline
+	if var3 then
+		return var3, var4
+	elseif p4 and p4.template then
+		return p4.template, p4.isInline
 	end
-	return p7, p8
+	return p5, p6
 end
 
-local _ = function(p10, p11)
+local _ = function(p3, p4)
 	-- upvalues: tryResolveTemplatePair (ref)
-	if p10 == nil then
+	if p3 == nil then
 		return nil, false
 	end
-	return tryResolveTemplatePair(p10.roblox_component, p10.inline_component, p11)
+	return tryResolveTemplatePair(p3.roblox_component, p3.inline_component, p4)
 end
 
-local function buildBoundEntry(p12, p13, p14, p15, p16, p17, p18, p19)
-	local var16, var17
-	local var13 = if p18 and p13 then p18[p13] else nil
-	local var14 = if typeof(p12) == "table" then p12.roblox_component else nil
-	local var15 = if typeof(p12) == "table" then p12.inline_component else nil
+local function buildBoundEntry(p3, p4, p5, p6, p7, p8, p9, p10)
+	local var3, var4
+	local var5 = if p9 and p4 then p9[p4] else nil
+	local var6 = if typeof(p3) == "table" then p3.roblox_component else nil
+	local var7 = if typeof(p3) == "table" then p3.inline_component else nil
 	
-	if var15 == nil then
-		if var14 and var14 ~= "" then
-			local templateForRobloxComponent = p19.getTemplateForRobloxComponent(var14)
+	if var7 == nil then
+		if var6 and var6 ~= "" then
+			local templateForRobloxComponent = p10.getTemplateForRobloxComponent(var6)
 			
 			if templateForRobloxComponent then
-				var16 = templateForRobloxComponent
-				var17 = false
+				var3 = templateForRobloxComponent
+				var4 = false
 			else
-				var16 = nil
-				var17 = false
+				var3 = nil
+				var4 = false
 			end
 		end
 	else
-		var16 = var15
-		var17 = true
+		var3 = var7
+		var4 = true
 	end
-	local var19, var20
-	if var16 then
-		var19 = var16
-		var20 = var17
-	elseif var13 and var13.template then
-		var19 = var13.template
-		var20 = var13.isInline
+	local var8, var9
+	if var3 then
+		var8 = var3
+		var9 = var4
+	elseif var5 and var5.template then
+		var8 = var5.template
+		var9 = var5.isInline
 	else
-		var19 = p14
-		var20 = p15
+		var8 = p5
+		var9 = p6
 	end
 	return {
 		sourceMode = "data",
-		item = p12,
-		identifier = p13,
-		inputs = if var13 then var13.inputs else p16,
-		template = var19,
-		isInline = var20,
-		sortRankProp = (if typeof(p12) == "table" then p12.sort_rank else nil) or (if var13 then var13.sortRankProp else p17)
+		item = p3,
+		identifier = p4,
+		inputs = if var5 then var5.inputs else p7,
+		template = var8,
+		isInline = var9,
+		sortRankProp = (if typeof(p3) == "table" then p3.sort_rank else nil) or (if var5 then var5.sortRankProp else p8)
 	}
 end
 
 return {
-	normalizeLiteralItems = function(p20, p21, p22)
-		local var23, var24, robloxComponent
-		local var21 = if p21 then p21.inputs else nil
-		local var22 = if p21 then p21.sort_rank else nil
+	normalizeLiteralItems = function(p3, p4, p5)
+		local var3, var4, robloxComponent
+		local var5 = if p4 then p4.inputs else nil
+		local var6 = if p4 then p4.sort_rank else nil
 		
-		if p21 == nil then
-			var23 = nil
-			var24 = false
+		if p4 == nil then
+			var3 = nil
+			var4 = false
 		else
-			robloxComponent = p21.roblox_component
-			local inlineComponent = p21.inline_component
+			robloxComponent = p4.roblox_component
+			local inlineComponent = p4.inline_component
 			
 			if inlineComponent == nil then
 				if robloxComponent and robloxComponent ~= "" then
-					local templateForRobloxComponent = p22.getTemplateForRobloxComponent(robloxComponent)
+					local templateForRobloxComponent = p5.getTemplateForRobloxComponent(robloxComponent)
 					
 					if templateForRobloxComponent then
-						var23 = templateForRobloxComponent
-						var24 = false
+						var3 = templateForRobloxComponent
+						var4 = false
 					else
-						var23 = nil
-						var24 = false
+						var3 = nil
+						var4 = false
 					end
 				end
 			else
-				var23 = inlineComponent
-				var24 = true
+				var3 = inlineComponent
+				var4 = true
 			end
 		end
 		robloxComponent = {}
 		
-		for i, v in p20 do
+		for i, v in p3 do
 			local identifier = v.identifier
 			
 			if identifier == "" then
 				identifier = nil
 			end
-			local var28, var29
-			local var26 = if typeof(v) == "table" then v.roblox_component else nil
-			local var27 = if typeof(v) == "table" then v.inline_component else nil
+			local var7, var8
+			local var9 = if typeof(v) == "table" then v.roblox_component else nil
+			local var10 = if typeof(v) == "table" then v.inline_component else nil
 			
-			if var27 == nil then
-				if var26 and var26 ~= "" then
-					local templateForRobloxComponent = p22.getTemplateForRobloxComponent(var26)
+			if var10 == nil then
+				if var9 and var9 ~= "" then
+					local templateForRobloxComponent = p5.getTemplateForRobloxComponent(var9)
 					
 					if templateForRobloxComponent then
-						var28 = templateForRobloxComponent
-						var29 = false
+						var7 = templateForRobloxComponent
+						var8 = false
 					else
-						var28 = nil
-						var29 = false
+						var7 = nil
+						var8 = false
 					end
 				end
 			else
-				var28 = var27
-				var29 = true
+				var7 = var10
+				var8 = true
 			end
-			local var31, var32
-			if var28 then
-				var31 = var28
-				var32 = var29
+			local var11, var12
+			if var7 then
+				var11 = var7
+				var12 = var8
 			else
-				var31 = var23
-				var32 = var24
+				var11 = var3
+				var12 = var4
 			end
 			table.insert(robloxComponent, {
 				sourceMode = "literal",
 				item = v,
 				identifier = identifier,
-				inputs = v.inputs or var21,
-				template = var31,
-				isInline = var32,
-				sortRankProp = v.sort_rank or var22
+				inputs = v.inputs or var5,
+				template = var11,
+				isInline = var12,
+				sortRankProp = v.sort_rank or var6
 			})
 		end
 		return robloxComponent
 	end,
-	normalizeBoundData = function(p23, p24, p25, p26)
+	normalizeBoundData = function(p6, p7, p8, p9)
 		-- upvalues: resolveItemOverrides (ref), buildBoundEntry (ref)
-		if typeof(p23) ~= "table" then
+		if typeof(p6) ~= "table" then
 			return {}
 		end
-		local var35, var36, robloxComponent
-		local var33 = if p24 then p24.inputs else nil
-		local var34 = if p24 then p24.sort_rank else nil
+		local var13, var14, robloxComponent
+		local var15 = if p7 then p7.inputs else nil
+		local var16 = if p7 then p7.sort_rank else nil
 		
-		if p24 == nil then
-			var35 = nil
-			var36 = false
+		if p7 == nil then
+			var13 = nil
+			var14 = false
 		else
-			robloxComponent = p24.roblox_component
-			local inlineComponent = p24.inline_component
+			robloxComponent = p7.roblox_component
+			local inlineComponent = p7.inline_component
 			
 			if inlineComponent == nil then
 				if robloxComponent and robloxComponent ~= "" then
-					local templateForRobloxComponent = p26.getTemplateForRobloxComponent(robloxComponent)
+					local templateForRobloxComponent = p9.getTemplateForRobloxComponent(robloxComponent)
 					
 					if templateForRobloxComponent then
-						var35 = templateForRobloxComponent
-						var36 = false
+						var13 = templateForRobloxComponent
+						var14 = false
 					else
-						var35 = nil
-						var36 = false
+						var13 = nil
+						var14 = false
 					end
 				end
 			else
-				var35 = inlineComponent
-				var36 = true
+				var13 = inlineComponent
+				var14 = true
 			end
 		end
-		robloxComponent = resolveItemOverrides(p25, p26)
+		robloxComponent = resolveItemOverrides(p8, p9)
 		local t = {}
 		
-		if if p23[1] == nil then next(p23) == nil else true then
-			for i, v in p23 do
-				local var39 = if typeof(v) == "table" then v.identifier else nil
+		if if p6[1] == nil then next(p6) == nil else true then
+			for i, v in p6 do
+				local var17 = if typeof(v) == "table" then v.identifier else nil
 				
-				if var39 == "" then
-					var39 = nil
+				if var17 == "" then
+					var17 = nil
 				end
-				table.insert(t, buildBoundEntry(v, var39, var35, var36, var33, var34, robloxComponent, p26))
+				table.insert(t, buildBoundEntry(v, var17, var13, var14, var15, var16, robloxComponent, p9))
 			end
 			return t
 		else
-			for i, v in p23 do
-				table.insert(t, buildBoundEntry(v, tostring(i), var35, var36, var33, var34, robloxComponent, p26))
+			for i, v in p6 do
+				table.insert(t, buildBoundEntry(v, tostring(i), var13, var14, var15, var16, robloxComponent, p9))
 			end
 			return t
 		end

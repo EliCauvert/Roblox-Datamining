@@ -11,19 +11,19 @@ playButton.defaultProps = {
 	end
 }
 
-function playButton.render(p0)
+function playButton.render(p1)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), buttonModule (ref)
-	return UIBloxModule.Style.withStyle(function(p1)
-		-- upvalues: roactModule (copy), buttonModule (copy), p0 (ref)
+	return UIBloxModule.Style.withStyle(function(p2)
+		-- upvalues: roactModule (copy), buttonModule (copy), p1 (ref)
 		return roactModule.createElement(buttonModule, {
 			textSize = 23,
-			text = p0.props.text,
+			text = p1.props.text,
 			textColor = Color3.fromRGB(255, 255, 255),
-			font = p1.Font.Body.Font,
-			transparency = p1.Theme.ContextualPrimaryDefault.Transparency,
-			color = p1.Theme.ContextualPrimaryDefault.Color,
-			LayoutOrder = p0.props.LayoutOrder or 0,
-			onActivated = p0.props.onActivated
+			font = p2.Font.Body.Font,
+			transparency = p2.Theme.ContextualPrimaryDefault.Transparency,
+			color = p2.Theme.ContextualPrimaryDefault.Color,
+			LayoutOrder = p1.props.LayoutOrder or 0,
+			onActivated = p1.props.onActivated
 		})
 	end)
 end

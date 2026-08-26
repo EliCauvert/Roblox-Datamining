@@ -9,19 +9,19 @@ local modelsModule = require(script.Models)
 local enumsModule = require(script.Enums)
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: cryoModule (ref), networkingPresenceModule (ref), roduxNetworkingModule (ref), reducerModule (ref), actionsModule (ref), selectorsModule (ref), modelsModule (ref), enumsModule (ref)
-		p0 = cryoModule.Dictionary.join(p0, {
+		p1 = cryoModule.Dictionary.join(p1, {
 			presenceNetworking = networkingPresenceModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
 		})
 		
 		return {
 			installReducer = function()
-				-- upvalues: reducerModule (copy), p0 (write)
-				return reducerModule(p0)
+				-- upvalues: reducerModule (copy), p1 (write)
+				return reducerModule(p1)
 			end,
-			Actions = actionsModule(p0),
-			Selectors = selectorsModule(p0),
+			Actions = actionsModule(p1),
+			Selectors = selectorsModule(p1),
 			Models = modelsModule,
 			Enums = enumsModule
 		}

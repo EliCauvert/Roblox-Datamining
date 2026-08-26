@@ -2,7 +2,7 @@
 local _ = require(parent.Parent.Parent.Navigation)
 local getPageNameFromRouteModule = require(parent.getPageNameFromRoute)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getPageNameFromRouteModule (ref)
-	return if p0 and p0.routes and p0.index then getPageNameFromRouteModule(p0.routes[p0.index]) else nil
+	return if p1 and p1.routes and p1.index then getPageNameFromRouteModule(p1.routes[p1.index]) else nil
 end

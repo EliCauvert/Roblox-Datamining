@@ -5,14 +5,14 @@ return function(...)
 	local t = {}
 	
 	for i_1 = 1, select("#", ...) do
-		local var2 = select(i_1, ...)
+		local var1 = select(i_1, ...)
 		local tCount = #t
 		
-		for i = 1, #var2 do
-			if var2[i] == noneModule then
+		for i = 1, #var1 do
+			if var1[i] == noneModule then
 				tCount -= 1
 			else
-				t[tCount + i] = var2[i]
+				t[tCount + i] = var1[i]
 			end
 		end
 	end

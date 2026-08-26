@@ -2,7 +2,7 @@
 
 return function()
 	-- upvalues: useSelector (ref)
-	return useSelector(function(p0)
-		return p0.ScreenSize
+	return useSelector(function(p1)
+		return p1.ScreenSize
 	end)
 end

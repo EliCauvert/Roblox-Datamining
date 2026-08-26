@@ -6,10 +6,10 @@ local useSduiSocialDataModule = require(serverDrivenUi.DataStore.useSduiSocialDa
 
 return function()
 	-- upvalues: useSduiSocialDataModule (ref), reactModule (ref)
-	local var3 = useSduiSocialDataModule()
+	local var1 = useSduiSocialDataModule()
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var3 (ref)
-		return { social = var3 }
-	end, { var3 })
+		-- upvalues: var1 (ref)
+		return { social = var1 }
+	end, { var1 })
 end

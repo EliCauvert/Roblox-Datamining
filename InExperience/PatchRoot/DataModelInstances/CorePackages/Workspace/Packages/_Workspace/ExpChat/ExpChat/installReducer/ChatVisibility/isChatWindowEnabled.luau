@@ -11,32 +11,32 @@ return roduxModule.createReducer({
 	_topBarVisibility = true,
 	value = true
 }, {
-	[require(actions.ChatWindowConfigurationEnabled).name] = function(p0, p1)
+	[require(actions.ChatWindowConfigurationEnabled).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, {
-			_propertyEnabled = p1.enabled,
-			value = p0._topBarVisibility and (p0._coreGuiEnabled and p1.enabled)
+		return dictionary.join(p1, {
+			_propertyEnabled = p2.enabled,
+			value = p1._topBarVisibility and (p1._coreGuiEnabled and p2.enabled)
 		})
 	end,
-	[require(actions.ChatTopBarButtonActivated).name] = function(p2, p3)
+	[require(actions.ChatTopBarButtonActivated).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p2, {
-			_topBarVisibility = p3.isVisible,
-			value = p2._propertyEnabled and (p2._coreGuiEnabled and p3.isVisible)
+		return dictionary.join(p1, {
+			_topBarVisibility = p2.isVisible,
+			value = p1._propertyEnabled and (p1._coreGuiEnabled and p2.isVisible)
 		})
 	end,
-	[require(actions.SetCoreGuiEnabledChanged).name] = function(p4, p5)
+	[require(actions.SetCoreGuiEnabledChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p4, {
-			_coreGuiEnabled = p5.enabled,
-			value = p4._propertyEnabled and (p4._topBarVisibility and p5.enabled)
+		return dictionary.join(p1, {
+			_coreGuiEnabled = p2.enabled,
+			value = p1._propertyEnabled and (p1._topBarVisibility and p2.enabled)
 		})
 	end,
-	[expChatSharedModule.Actions.ClientAppLoaded.name] = function(p6, p7)
+	[expChatSharedModule.Actions.ClientAppLoaded.name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p6, {
-			_coreGuiEnabled = p7.isChatCoreGuiEnabled,
-			value = p6._propertyEnabled and (p6._topBarVisibility and p7.isChatCoreGuiEnabled)
+		return dictionary.join(p1, {
+			_coreGuiEnabled = p2.isChatCoreGuiEnabled,
+			value = p1._propertyEnabled and (p1._topBarVisibility and p2.isChatCoreGuiEnabled)
 		})
 	end
 })

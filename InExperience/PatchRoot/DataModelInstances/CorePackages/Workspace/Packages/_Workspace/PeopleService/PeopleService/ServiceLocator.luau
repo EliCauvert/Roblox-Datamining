@@ -3,40 +3,40 @@ local t = {}
 local t_1 = {}
 local getFFlagPeoplePageEnablePersonSignalStore = require(peopleService.Flags).GetFFlagPeoplePageEnablePersonSignalStore
 
-local function loadService(p0)
+local function loadService(p1)
 	-- upvalues: getFFlagPeoplePageEnablePersonSignalStore (ref), t_1 (write)
 	local focusNavigationServiceModule = nil
 	
-	if p0 == "PeopleUtility" then
+	if p1 == "PeopleUtility" then
 		focusNavigationServiceModule = require(script.Parent.PeopleUtility)
-	elseif p0 == "PeopleListStore" then
+	elseif p1 == "PeopleListStore" then
 		focusNavigationServiceModule = if getFFlagPeoplePageEnablePersonSignalStore() then require(script.Parent.PeopleListStore)() else require(script.Parent.PeopleListStore)
-	elseif p0 == "PeopleAnalyticsManager" then
+	elseif p1 == "PeopleAnalyticsManager" then
 		focusNavigationServiceModule = require(script.Parent.Analytics.PeopleAnalyticsManager)
-	elseif p0 == "PerUserVoiceVolumeSessionLifecycle" then
+	elseif p1 == "PerUserVoiceVolumeSessionLifecycle" then
 		focusNavigationServiceModule = require(script.Parent.Analytics.PerUserVoiceVolumeSessionLifecycle)
-	elseif p0 == "SettingsHubService" then
+	elseif p1 == "SettingsHubService" then
 		focusNavigationServiceModule = require(script.Parent.Integration.SettingsHubService)
-	elseif p0 == "PeopleVoiceChatStore" then
+	elseif p1 == "PeopleVoiceChatStore" then
 		focusNavigationServiceModule = require(script.Parent.ButtonStores.PeopleVoiceChatStore)
-	elseif p0 == "PeopleBlockStatusStore" then
+	elseif p1 == "PeopleBlockStatusStore" then
 		focusNavigationServiceModule = require(script.Parent.ButtonStores.PeopleBlockStatusStore)
-	elseif p0 == "FriendStatusStore" then
+	elseif p1 == "FriendStatusStore" then
 		focusNavigationServiceModule = require(script.Parent.ButtonStores.FriendStatusStore)
-	elseif p0 == "PeopleReportAbuseMenu" then
+	elseif p1 == "PeopleReportAbuseMenu" then
 		focusNavigationServiceModule = require(script.Parent.Integration.PeopleReportAbuseMenu)
-	elseif p0 == "PeopleBlockingModalManager" then
+	elseif p1 == "PeopleBlockingModalManager" then
 		focusNavigationServiceModule = require(script.Parent.Integration.PeopleBlockingModalManager)
-	elseif p0 == "Flags" then
+	elseif p1 == "Flags" then
 		focusNavigationServiceModule = require(script.Parent.Flags)
-	elseif p0 == "Constants" then
+	elseif p1 == "Constants" then
 		focusNavigationServiceModule = require(script.Parent.Constants)
-	elseif p0 == "FocusNavigationService" then
+	elseif p1 == "FocusNavigationService" then
 		focusNavigationServiceModule = require(script.Parent.FocusNavigationService)
 	else
 		error("Unknown service: " .. p0)
 	end
-	t_1[p0] = focusNavigationServiceModule
+	t_1[p1] = focusNavigationServiceModule
 	
 	return focusNavigationServiceModule
 end
@@ -46,17 +46,17 @@ function t.register(p1, p2)
 	t_1[p1] = p2
 end
 
-function t.get(p3)
+function t.get(p1)
 	-- upvalues: t_1 (write), loadService (ref)
-	if not t_1[p3] then
-		loadService(p3)
+	if not t_1[p1] then
+		loadService(p1)
 	end
-	return t_1[p3]
+	return t_1[p1]
 end
 
-function t.has(p4)
+function t.has(p1)
 	-- upvalues: t_1 (write)
-	return t_1[p4] ~= nil
+	return t_1[p1] ~= nil
 end
 
 function t.clear()

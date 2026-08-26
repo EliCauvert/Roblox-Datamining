@@ -15,112 +15,112 @@ local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEna
 
 return function()
 	-- upvalues: createNavigationMachineModule (ref), creationFlowStateModule (ref), createSelectionStoreModule (ref), createDescriptionStoreModule (ref), createEditsStoreModule (ref), createSignal (ref), createComputed (ref), fFlagMomentTextGenerationFilteredSignal (ref), getFFlagEnableMomentTextGeneration (ref)
-	local var8 = createNavigationMachineModule(creationFlowStateModule.Gallery)
-	local var9 = createSelectionStoreModule()
-	local var10 = createDescriptionStoreModule()
-	local var11 = createEditsStoreModule()
-	local var12, var13 = createSignal(false)
-	local var14, var15 = createSignal({})
-	local var16, var17 = createSignal(nil)
-	local var18, var19 = createSignal(false)
-	local var20, var21 = createSignal(nil)
-	local var22, var23 = createSignal(nil)
+	local var1 = createNavigationMachineModule(creationFlowStateModule.Gallery)
+	local var2 = createSelectionStoreModule()
+	local var3 = createDescriptionStoreModule()
+	local var4 = createEditsStoreModule()
+	local var5, var6 = createSignal(false)
+	local var7, var8 = createSignal({})
+	local var9, var10 = createSignal(nil)
+	local var11, var12 = createSignal(false)
+	local var13, var14 = createSignal(nil)
+	local var15, var16 = createSignal(nil)
 	
 	return {
-		getStep = var8.getStep,
-		getCurrentState = var8.getStep,
-		canNavigate = var8.canNavigate,
-		navigate = var8.navigate,
-		getActive = var12,
-		getSelectedCapture = var9.getSelectedCapture,
-		getDescription = var10.getDescription,
-		getGeneratedDescription = var10.getGeneratedDescription,
-		getGenerationToken = var10.getGenerationToken,
-		getGeneratedTextFeedback = var10.getGeneratedTextFeedback,
-		getGeneratedSummary = var10.getGeneratedSummary,
-		getMusicList = var14,
-		getMusicEdit = createComputed(function(p0)
-			-- upvalues: var11 (ref)
-			return var11.getMap(p0).music
+		getStep = var1.getStep,
+		getCurrentState = var1.getStep,
+		canNavigate = var1.canNavigate,
+		navigate = var1.navigate,
+		getActive = var5,
+		getSelectedCapture = var2.getSelectedCapture,
+		getDescription = var3.getDescription,
+		getGeneratedDescription = var3.getGeneratedDescription,
+		getGenerationToken = var3.getGenerationToken,
+		getGeneratedTextFeedback = var3.getGeneratedTextFeedback,
+		getGeneratedSummary = var3.getGeneratedSummary,
+		getMusicList = var7,
+		getMusicEdit = createComputed(function(p1)
+			-- upvalues: var4 (ref)
+			return var4.getMap(p1).music
 		end),
 		getTextOverlayEdits = createComputed(function(p1)
-			-- upvalues: var11 (ref)
-			return var11.getMap(p1).text
+			-- upvalues: var4 (ref)
+			return var4.getMap(p1).text
 		end),
-		getTrimEdit = createComputed(function(p2)
-			-- upvalues: var11 (ref)
-			return var11.getMap(p2).trim
+		getTrimEdit = createComputed(function(p1)
+			-- upvalues: var4 (ref)
+			return var4.getMap(p1).trim
 		end),
-		getEditsMap = var11.getMap,
-		getActiveSession = var16,
-		getIsGenerating = var18,
-		getActiveGeneration = var20,
-		getTTSAudio = var22,
-		updateCurrentState = function(p3)
-			-- upvalues: var8 (ref)
-			var8.reset(p3)
+		getEditsMap = var4.getMap,
+		getActiveSession = var9,
+		getIsGenerating = var11,
+		getActiveGeneration = var13,
+		getTTSAudio = var15,
+		updateCurrentState = function(p1)
+			-- upvalues: var1 (ref)
+			var1.reset(p1)
 		end,
-		onSelectedCaptureUpdated = function(p4)
-			-- upvalues: var9 (ref)
-			var9.setSelectedCapture(p4)
+		onSelectedCaptureUpdated = function(p1)
+			-- upvalues: var2 (ref)
+			var2.setSelectedCapture(p1)
 		end,
-		updateDescription = function(p5)
-			-- upvalues: var10 (ref)
-			var10.setDescription(p5)
+		updateDescription = function(p1)
+			-- upvalues: var3 (ref)
+			var3.setDescription(p1)
 		end,
 		setGeneratedDescription = function(value)
-			-- upvalues: var10 (ref)
-			var10.setGeneratedDescription(value)
+			-- upvalues: var3 (ref)
+			var3.setGeneratedDescription(value)
 		end,
 		setGenerationToken = function(value)
-			-- upvalues: var10 (ref)
-			var10.setGenerationToken(value)
+			-- upvalues: var3 (ref)
+			var3.setGenerationToken(value)
 		end,
 		setGeneratedTextFeedback = function(value)
-			-- upvalues: var10 (ref)
-			var10.setGeneratedTextFeedback(value)
+			-- upvalues: var3 (ref)
+			var3.setGeneratedTextFeedback(value)
 		end,
 		setGeneratedSummary = function(value)
-			-- upvalues: var10 (ref)
-			var10.setGeneratedSummary(value)
+			-- upvalues: var3 (ref)
+			var3.setGeneratedSummary(value)
 		end,
-		updateTrimEdit = function(p6)
-			-- upvalues: var11 (ref)
-			var11.setCommitted("trim", p6)
+		updateTrimEdit = function(p1)
+			-- upvalues: var4 (ref)
+			var4.setCommitted("trim", p1)
 		end,
-		updateMusicEdit = function(p7)
-			-- upvalues: var11 (ref)
-			var11.setCommitted("music", p7)
+		updateMusicEdit = function(p1)
+			-- upvalues: var4 (ref)
+			var4.setCommitted("music", p1)
 		end,
-		updateTextOverlayEdits = function(p8)
-			-- upvalues: var11 (ref)
-			var11.setCommitted("text", p8)
+		updateTextOverlayEdits = function(p1)
+			-- upvalues: var4 (ref)
+			var4.setCommitted("text", p1)
 		end,
-		setCommittedEdit = var11.setCommitted,
-		setActiveSession = var17,
-		setIsGenerating = var19,
-		setActiveGeneration = var21,
-		setTTSAudio = var23,
-		onMusicSearchRetrieved = function(p9)
-			-- upvalues: var15 (ref)
-			var15(p9)
+		setCommittedEdit = var4.setCommitted,
+		setActiveSession = var10,
+		setIsGenerating = var12,
+		setActiveGeneration = var14,
+		setTTSAudio = var16,
+		onMusicSearchRetrieved = function(p1)
+			-- upvalues: var8 (ref)
+			var8(p1)
 		end,
-		clearEdits = function(p10)
-			-- upvalues: var13 (ref), var9 (ref), var8 (ref), var10 (ref), fFlagMomentTextGenerationFilteredSignal (copy), getFFlagEnableMomentTextGeneration (copy), var15 (ref), var11 (ref), var17 (ref)
-			var13(true)
-			var9.setSelectedCapture(nil)
-			var8.reset(p10)
-			var10.setDescription("")
+		clearEdits = function(p1)
+			-- upvalues: var6 (ref), var2 (ref), var1 (ref), var3 (ref), fFlagMomentTextGenerationFilteredSignal (copy), getFFlagEnableMomentTextGeneration (copy), var8 (ref), var4 (ref), var10 (ref)
+			var6(true)
+			var2.setSelectedCapture(nil)
+			var1.reset(p1)
+			var3.setDescription("")
 			
 			if fFlagMomentTextGenerationFilteredSignal or getFFlagEnableMomentTextGeneration() then
-				var10.setGeneratedDescription(nil)
-				var10.setGenerationToken(nil)
-				var10.setGeneratedTextFeedback(nil)
-				var10.setGeneratedSummary(nil)
+				var3.setGeneratedDescription(nil)
+				var3.setGenerationToken(nil)
+				var3.setGeneratedTextFeedback(nil)
+				var3.setGeneratedSummary(nil)
 			end
-			var15({})
-			var11.clear()
-			var17(nil)
+			var8({})
+			var4.clear()
+			var10(nil)
 		end
 	}
 end

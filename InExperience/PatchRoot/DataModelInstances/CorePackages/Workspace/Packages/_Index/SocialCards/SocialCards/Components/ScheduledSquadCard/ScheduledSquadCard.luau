@@ -25,108 +25,108 @@ local useCurrentSquadId = require(parent.SquadsCore.Hooks).useCurrentSquadId
 local useScheduledSquad = require(parent.SquadsCore.Hooks).useScheduledSquad
 local scheduledSquadJustStartedThreshold = game:DefineFastInt("ScheduledSquadJustStartedThreshold", 300)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useNavigation (ref), reactModule (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useScheduledSquad (ref), scheduledSquadJustStartedThreshold (ref), cryoModule (ref), getScheduledSquadsStore (ref), userProfileStore (ref), useLocalization (ref), localizationService (ref), eventNamesModule (ref), scheduledSquadActionEnum (ref), scheduledSquadActionSourceEnum (ref), foundationModule (ref), avatarGroup (ref), inputSize (ref), avatarGroupType (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), scheduledSquadsMoreInfoSheet (ref)
-	local var7 = useTokens()
-	local var8 = useNavigation()
-	local var9 = reactModule.useContext(squadExternalContractContext)
-	local var10 = useCurrentSquadId()
-	local var11 = p0.startTime == nil
-	local var12, var13 = reactModule.useState(false)
-	local var14, var15 = reactModule.useState(true)
-	local var16, var17 = reactModule.useState(true)
-	local var18, var19 = reactModule.useState("")
-	local var20 = useScheduledSquad(p0.scheduledGroupUpId)
-	local var14_1 = var14 or var16
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref)
-		return if p0.startTime then DateTime.fromIsoDate(p0.startTime) else nil
-	end, { p0.startTime })
-	local var23 = reactModule.useMemo(function()
-		-- upvalues: var22 (ref)
-		return var22 and var22.UnixTimestamp < DateTime.now().UnixTimestamp
-	end, { var22 })
-	local var24 = reactModule.useMemo(function()
-		-- upvalues: var22 (ref), scheduledSquadJustStartedThreshold (copy)
-		return var22 and (var22.UnixTimestamp <= DateTime.now().UnixTimestamp and DateTime.now().UnixTimestamp - var22.UnixTimestamp < scheduledSquadJustStartedThreshold)
-	end, { var22 })
-	local var25 = reactModule.useMemo(function()
-		-- upvalues: var20 (ref), p0 (ref), cryoModule (copy)
-		return cryoModule.List.map((var20 or p0).subscribers, function(p1)
-			return p1.userId
+	local var1 = useTokens()
+	local var2 = useNavigation()
+	local var3 = reactModule.useContext(squadExternalContractContext)
+	local var4 = useCurrentSquadId()
+	local var5 = p1.startTime == nil
+	local var6, var7 = reactModule.useState(false)
+	local var8, var9 = reactModule.useState(true)
+	local var10, var11 = reactModule.useState(true)
+	local var12, var13 = reactModule.useState("")
+	local var14 = useScheduledSquad(p1.scheduledGroupUpId)
+	local var15 = var8 or var10
+	local var16 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref)
+		return if p1.startTime then DateTime.fromIsoDate(p1.startTime) else nil
+	end, { p1.startTime })
+	local var17 = reactModule.useMemo(function()
+		-- upvalues: var16 (ref)
+		return var16 and var16.UnixTimestamp < DateTime.now().UnixTimestamp
+	end, { var16 })
+	local var18 = reactModule.useMemo(function()
+		-- upvalues: var16 (ref), scheduledSquadJustStartedThreshold (copy)
+		return var16 and (var16.UnixTimestamp <= DateTime.now().UnixTimestamp and DateTime.now().UnixTimestamp - var16.UnixTimestamp < scheduledSquadJustStartedThreshold)
+	end, { var16 })
+	local var19 = reactModule.useMemo(function()
+		-- upvalues: var14 (ref), p1 (ref), cryoModule (copy)
+		return cryoModule.List.map((var14 or p1).subscribers, function(p2)
+			return p2.userId
 		end)
-	end, { var20, p0 })
+	end, { var14, p1 })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var23 (ref), getScheduledSquadsStore (copy), p0 (ref), var17 (ref)
-		if var11 or var23 then
-			var17(false)
+		-- upvalues: var5 (ref), var17 (ref), getScheduledSquadsStore (copy), p1 (ref), var11 (ref)
+		if var5 or var17 then
+			var11(false)
 			
 			return
 		end
-		getScheduledSquadsStore(false).fetchAndCacheScheduledSquadStatus(p0.scheduledGroupUpId, function()
-			-- upvalues: var17 (copy)
-			var17(false)
+		getScheduledSquadsStore(false).fetchAndCacheScheduledSquadStatus(p1.scheduledGroupUpId, function()
+			-- upvalues: var11 (copy)
+			var11(false)
 		end)
-	end, { var11, var23, p0.scheduledGroupUpId })
+	end, { var5, var17, p1.scheduledGroupUpId })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var23 (ref), var15 (ref), userProfileStore (copy), var20 (ref), p0 (ref), var19 (ref)
-		if var11 or var23 then
-			var15(false)
+		-- upvalues: var5 (ref), var17 (ref), var9 (ref), userProfileStore (copy), var14 (ref), p1 (ref), var13 (ref)
+		if var5 or var17 then
+			var9(false)
 			
 			return
 		end
 		userProfileStore.get().fetchNamesByUserIds({
-			tostring(if var20 then var20.initiatorId else p0.initiatorId)
+			tostring(if var14 then var14.initiatorId else p1.initiatorId)
 		}, function(p2)
-			-- upvalues: var19 (copy), var15 (copy)
+			-- upvalues: var13 (copy), var9 (copy)
 			local status = p2.status
 			local data = p2.data
 			
 			if status == "success" then
-				var19(data[1].names.getDisplayName(false))
-				var15(false)
+				var13(data[1].names.getDisplayName(false))
+				var9(false)
 				
 				return
 			elseif status == "failed" then
-				var15(false)
+				var9(false)
 			end
 		end)
 	end, {
-		p0 and p0.initiatorId,
-		var11,
-		var23,
-		var20 and var20.initiatorId
+		p1 and p1.initiatorId,
+		var5,
+		var17,
+		var14 and var14.initiatorId
 	})
-	local var26 = useLocalization({
+	local var20 = useLocalization({
 		deletedScheduledPartyText = "Feature.Squads.Label.DeletedScheduledParty",
 		goingText = "Feature.Squads.Description.Going",
 		partyText = "Feature.Squads.Label.Party",
 		scheduledPartyText = "Feature.Squads.Label.ScheduledParty",
-		usersPartyText = { "Feature.Squads.Label.UsersParty", displayName = var18 }
+		usersPartyText = { "Feature.Squads.Label.UsersParty", displayName = var12 }
 	})
 	
-	return if var14_1 then reactModule.createElement(foundationModule.View, { tag = "size-full-800" }, {
+	return if var15 then reactModule.createElement(foundationModule.View, { tag = "size-full-800" }, {
 		Skeleton = reactModule.createElement(foundationModule.Skeleton, {
-			Size = UDim2.new(0, 280, 0, var7.Size.Size_2500),
+			Size = UDim2.new(0, 280, 0, var1.Size.Size_2500),
 			radius = foundationModule.Enums.Radius.Large
 		})
 	}) else reactModule.createElement(foundationModule.View, {
 		tag = "auto-y bg-shift-200 radius-large col padding-y-medium padding-x-large align-x-center gap-medium flex-fill",
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: var13 (ref), var9 (ref), eventNamesModule (copy), scheduledSquadActionEnum (copy), p0 (ref), var20 (ref), p0 (ref), scheduledSquadActionSourceEnum (copy), var10 (ref)
-			var13(true)
-			var9.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {
+			-- upvalues: var7 (ref), var3 (ref), eventNamesModule (copy), scheduledSquadActionEnum (copy), p1 (ref), var14 (ref), p1 (ref), scheduledSquadActionSourceEnum (copy), var4 (ref)
+			var7(true)
+			var3.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {
 				actionType = scheduledSquadActionEnum.SeeMoreDetails,
-				conversationId = p0.parentChannelId,
-				scheduledSquadId = if var20 then var20.scheduledGroupUpId else p0.scheduledGroupUpId,
+				conversationId = p1.parentChannelId,
+				scheduledSquadId = if var14 then var14.scheduledGroupUpId else p1.scheduledGroupUpId,
 				source = scheduledSquadActionSourceEnum.ScheduledSquadCard,
-				squadId = var10,
-				squadLocation = var9.squadLocation
+				squadId = var4,
+				squadLocation = var3.squadLocation
 			})
 		end, {
-			var10, p0 and p0.scheduledGroupUpId, p0.parentChannelId,
-			var20 and var20.scheduledGroupUpId, var13, var9.fireSquadAnalytics,
-			var9.squadLocation
+			var4, p1 and p1.scheduledGroupUpId, p1.parentChannelId,
+			var14 and var14.scheduledGroupUpId, var7, var3.fireSquadAnalytics,
+			var3.squadLocation
 		}),
 		Size = UDim2.new(0, 280, 0, 0)
 	}, {
@@ -137,25 +137,25 @@ return function(p0)
 			Title = reactModule.createElement(foundationModule.Text, {
 				LayoutOrder = 1,
 				tag = "auto-y size-full-0 text-title-large text-align-x-left content-emphasis text-wrap",
-				Text = if var11 then var26.deletedScheduledPartyText elseif var23 then var26.partyText else var26.usersPartyText
+				Text = if var5 then var20.deletedScheduledPartyText elseif var17 then var20.partyText else var20.usersPartyText
 			}),
-			Date = if not var11 then reactModule.createElement(foundationModule.Text, {
+			Date = if not var5 then reactModule.createElement(foundationModule.Text, {
 				LayoutOrder = 2,
 				tag = "auto-y size-full-0 text-body-medium text-align-x-left content-default text-wrap",
-				Text = if var22 then var22:FormatLocalTime("llll", localizationService.RobloxLocaleId) else ""
+				Text = if var16 then var16:FormatLocalTime("llll", localizationService.RobloxLocaleId) else ""
 			}) else nil
 		}),
-		Interested = if not var11 then reactModule.createElement(foundationModule.View, {
+		Interested = if not var5 then reactModule.createElement(foundationModule.View, {
 			LayoutOrder = 2,
 			tag = "row size-full-0 auto-y gap-small align-x-left align-y-center"
 		}, {
 			AvatarGroup = reactModule.createElement(avatarGroup, {
 				LayoutOrder = 1,
 				max = 4,
-				avatars = var25,
+				avatars = var19,
 				backplateStyle = {
-					Color3 = var7.Color.Shift.Shift_200.Color3,
-					Transparency = var7.Color.Shift.Shift_200.Transparency
+					Color3 = var1.Color.Shift.Shift_200.Color3,
+					Transparency = var1.Color.Shift.Shift_200.Transparency
 				},
 				size = inputSize.XSmall,
 				type = avatarGroupType.Stacked
@@ -163,34 +163,34 @@ return function(p0)
 			InterestedCount = reactModule.createElement(foundationModule.Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium content-default",
-				Text = `{var26.goingText}`
+				Text = `{var20.goingText}`
 			})
 		}) else nil,
-		JoinButton = if var24 then reactModule.createElement(squadComponentAccessWrapper, { parentChannelId = p0.parentChannelId }, {
+		JoinButton = if var18 then reactModule.createElement(squadComponentAccessWrapper, { parentChannelId = p1.parentChannelId }, {
 			reactModule.createElement(squadJoinButton, {
 				isFullWidth = true,
 				isInCard = true,
 				layoutOrder = 3,
 				shouldAnimate = false,
-				conversationId = p0.parentChannelId,
+				conversationId = p1.parentChannelId,
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var8 (ref), p0 (ref)
-					var8.navigate("SquadLobby", {
-						conversationId = p0.parentChannelId,
-						extraParams = { scheduledGroupUpId = tostring(p0.scheduledGroupUpId) }
+					-- upvalues: var2 (ref), p1 (ref)
+					var2.navigate("SquadLobby", {
+						conversationId = p1.parentChannelId,
+						extraParams = { scheduledGroupUpId = tostring(p1.scheduledGroupUpId) }
 					})
-				end, { var8.navigate, p0.parentChannelId, p0.scheduledGroupUpId }),
+				end, { var2.navigate, p1.parentChannelId, p1.scheduledGroupUpId }),
 				squadButtonSource = squadButtonSourceEnum.ScheduledSquadCard,
-				squadLocation = var9.squadLocation
+				squadLocation = var3.squadLocation
 			})
 		}) else nil,
-		Sheet = if not var11 then reactModule.createElement(scheduledSquadsMoreInfoSheet, {
-			isOpen = var12,
+		Sheet = if not var5 then reactModule.createElement(scheduledSquadsMoreInfoSheet, {
+			isOpen = var6,
 			onClose = reactModule.useCallback(function()
-				-- upvalues: var13 (ref)
-				var13(false)
-			end, { var13 }),
-			scheduledSquad = var20 or p0
+				-- upvalues: var7 (ref)
+				var7(false)
+			end, { var7 }),
+			scheduledSquad = var14 or p1
 		}) else nil
 	})
 end

@@ -5,12 +5,12 @@ local dictionary = require(parent.llama).Dictionary
 local actions = expChat.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.AddReverseNudgeToxicUser).name] = function(p0, p1)
+	[require(actions.AddReverseNudgeToxicUser).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, { [p1.toxicUserId] = p1.reverseNudgeType })
+		return dictionary.join(p1, { [p2.toxicUserId] = p2.reverseNudgeType })
 	end,
-	[require(actions.RemoveReverseNudgeToxicUser).name] = function(p2, p3)
+	[require(actions.RemoveReverseNudgeToxicUser).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.removeKey(p2, p3.toxicUserId)
+		return dictionary.removeKey(p1, p2.toxicUserId)
 	end
 })

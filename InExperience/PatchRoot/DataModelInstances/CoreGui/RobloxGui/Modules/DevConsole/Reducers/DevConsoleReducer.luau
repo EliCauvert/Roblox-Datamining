@@ -13,23 +13,23 @@ local debugVisualizationsDataModule = require(parent.DebugVisualizationsData)
 local scriptProfilerModule = require(parent.ScriptProfiler)
 local luauHeapModule = require(parent.LuauHeap)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: devConsoleDisplayOptionsModule (ref), mainViewModule (ref), memoryDataModule (ref), networkDataModule (ref), scriptsDataModule (ref), dataStoresDataModule (ref), serverStatsDataModule (ref), serverJobsDataModule (ref), actionBindingsDataModule (ref), microProfilerModule (ref), debugVisualizationsDataModule (ref), scriptProfilerModule (ref), luauHeapModule (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
 	return {
-		DisplayOptions = devConsoleDisplayOptionsModule(p0.DisplayOptions, p1),
-		MainView = mainViewModule(p0.MainView, p1),
-		MemoryData = memoryDataModule(p0.MemoryData, p1),
-		NetworkData = networkDataModule(p0.NetworkData, p1),
-		ScriptsData = scriptsDataModule(p0.ScriptsData, p1),
-		DataStoresData = dataStoresDataModule(p0.DataStoresData, p1),
-		ServerStatsData = serverStatsDataModule(p0.ServerStatsData, p1),
-		ServerJobsData = serverJobsDataModule(p0.ServerJobsData, p1),
-		ActionBindingsData = actionBindingsDataModule(p0.ActionBindingsData, p1),
-		MicroProfiler = microProfilerModule(p0.MicroProfiler, p1),
-		DebugVisualizationsData = debugVisualizationsDataModule(p0.DebugVisualizationsData, p1),
-		ScriptProfiler = scriptProfilerModule(p0.ScriptProfiler, p1),
-		LuauHeap = luauHeapModule(p0.LuauHeap, p1)
+		DisplayOptions = devConsoleDisplayOptionsModule(p1.DisplayOptions, p2),
+		MainView = mainViewModule(p1.MainView, p2),
+		MemoryData = memoryDataModule(p1.MemoryData, p2),
+		NetworkData = networkDataModule(p1.NetworkData, p2),
+		ScriptsData = scriptsDataModule(p1.ScriptsData, p2),
+		DataStoresData = dataStoresDataModule(p1.DataStoresData, p2),
+		ServerStatsData = serverStatsDataModule(p1.ServerStatsData, p2),
+		ServerJobsData = serverJobsDataModule(p1.ServerJobsData, p2),
+		ActionBindingsData = actionBindingsDataModule(p1.ActionBindingsData, p2),
+		MicroProfiler = microProfilerModule(p1.MicroProfiler, p2),
+		DebugVisualizationsData = debugVisualizationsDataModule(p1.DebugVisualizationsData, p2),
+		ScriptProfiler = scriptProfilerModule(p1.ScriptProfiler, p2),
+		LuauHeap = luauHeapModule(p1.LuauHeap, p2)
 	}
 end

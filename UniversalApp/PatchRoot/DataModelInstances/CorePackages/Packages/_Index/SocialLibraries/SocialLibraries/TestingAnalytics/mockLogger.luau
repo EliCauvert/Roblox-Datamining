@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return { info = p0.fn() }
+﻿return function(p1)
+	return { info = p1.fn() }
 end

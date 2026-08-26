@@ -34,7 +34,7 @@ return function(p1)
 		end
 		return t
 	end, {})
-	local var1 = reactModule.useMemo(function()
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), dateTimeUtilitiesModule (copy), viewDate (ref)
 		local year, year_1
 		local _ = nil
@@ -76,12 +76,12 @@ return function(p1)
 				LayoutOrder = 1,
 				items = var8,
 				maxHeight = var5,
-				onItemChanged = reactModule.useCallback(function(p1)
-					-- upvalues: p1 (ref), viewDate (ref)
-					local var1 = tonumber(p1)
+				onItemChanged = reactModule.useCallback(function(p2)
+					-- upvalues: p2 (ref), viewDate (ref)
+					local var10 = tonumber(p2)
 					
-					if var1 then
-						p1.onViewDateChanged({ month = var1, year = viewDate.year })
+					if var10 then
+						p2.onViewDateChanged({ month = var10, year = viewDate.year })
 					end
 				end, { p1.onViewDateChanged, viewDate.year }),
 				scrollingFrameRef = useScrollToSelectedRefModule(var8, viewDate.month),
@@ -94,17 +94,17 @@ return function(p1)
 			YearDropdown = reactModule.createElement(dropdownModule.Root, {
 				label = "",
 				LayoutOrder = 2,
-				items = var1,
+				items = var9,
 				maxHeight = var5,
-				onItemChanged = reactModule.useCallback(function(p1)
-					-- upvalues: p1 (ref), viewDate (ref)
-					local var1 = tonumber(p1)
+				onItemChanged = reactModule.useCallback(function(p2)
+					-- upvalues: p2 (ref), viewDate (ref)
+					local var10 = tonumber(p2)
 					
-					if var1 then
-						p1.onViewDateChanged({ month = viewDate.month, year = var1 })
+					if var10 then
+						p2.onViewDateChanged({ month = viewDate.month, year = var10 })
 					end
 				end, { p1.onViewDateChanged, viewDate.month }),
-				scrollingFrameRef = useScrollToSelectedRefModule(var1, viewDate.year),
+				scrollingFrameRef = useScrollToSelectedRefModule(var9, viewDate.year),
 				size = inputSizeModule.XSmall,
 				testId = `{p1.testId}--year-dropdown`,
 				value = viewDate.year,

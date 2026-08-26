@@ -25,32 +25,32 @@ local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getCreationFlowStoreModule (ref), reactModule (ref), useSignalState (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), view (ref), constantsModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), generatedTextFeedbackContainerModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), text (ref)
-	local var12 = useDeviceInsets()
-	local var13 = useTokens()
-	local var14 = useCreationFlowStringsModule()
-	local var15 = getCreationFlowStoreModule(false)
-	local var16 = reactModule.useRef(nil)
-	local publishingCtaSecondary = var14.PublishingCtaSecondary
-	local var17 = useSignalState(var15.getDescription)
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = useCreationFlowStringsModule()
+	local var4 = getCreationFlowStoreModule(false)
+	local var5 = reactModule.useRef(nil)
+	local publishingCtaSecondary = var3.PublishingCtaSecondary
+	local var6 = useSignalState(var4.getDescription)
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), var17 (ref)
-		local current = var16.current
+		-- upvalues: var5 (ref), var6 (ref)
+		local current = var5.current
 		
 		if current ~= nil then
-			current.Text = var17
+			current.Text = var6
 		end
-	end, { var17 })
+	end, { var6 })
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-center size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		padding = {
-			top = UDim.new(0, var13.Padding.Large),
-			bottom = UDim.new(0, math.max(var12.bottom, var13.Padding.Large)),
-			left = UDim.new(0, math.max(var12.left, var13.Padding.XLarge)),
-			right = UDim.new(0, math.max(var12.right, var13.Padding.XLarge))
+			top = UDim.new(0, var2.Padding.Large),
+			bottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Large)),
+			left = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+			right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 		}
 	}, {
 		SizeConstraint = reactModule.createElement(view, {
@@ -68,32 +68,32 @@ return function(p0)
 					Font = Enum.Font.BuilderSans,
 					MaxVisibleGraphemes = 140,
 					MultiLine = false,
-					PlaceholderColor3 = var13.Color.Content.Muted.Color3,
-					PlaceholderText = var14.PublishingDescription,
-					ref = var16,
+					PlaceholderColor3 = var2.Color.Content.Muted.Color3,
+					PlaceholderText = var3.PublishingDescription,
+					ref = var5,
 					ShowNativeInput = true,
-					TextColor3 = var13.Color.ActionStandard.Foreground.Color3,
-					TextSize = var13.FontSize.FontSize_400,
+					TextColor3 = var2.Color.ActionStandard.Foreground.Color3,
+					TextSize = var2.FontSize.FontSize_400,
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = useCallback(function(p1)
-						local var18 = p1.Text:gsub("[\r\n]+", " ")
-						local charCount = utf8.len(var18)
+					[reactModule.Change.Text] = useCallback(function(p2)
+						local var7 = p2.Text:gsub("[\r\n]+", " ")
+						local charCount = utf8.len(var7)
 						
 						if charCount ~= nil and charCount >= 140 then
-							var18 = string.sub(var18, 1, utf8.offset(var18, 141) - 1)
+							var7 = string.sub(var7, 1, utf8.offset(var7, 141) - 1)
 						end
-						if var18 ~= p1.Text then
-							p1.Text = var18
+						if var7 ~= p2.Text then
+							p2.Text = var7
 						end
 					end, {}),
 					[reactModule.Event.FocusLost] = useCallback(function()
-						-- upvalues: var16 (ref), var15 (ref), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
-						local current = var16.current
-						var15.updateDescription(if current ~= nil then "" else current.Text)
+						-- upvalues: var5 (ref), var4 (ref), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
+						local current = var5.current
+						var4.updateDescription(if current ~= nil then "" else current.Text)
 						fireAnalyticsEventModule(eventNames.EditingFlowDescriptionEdited, cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeToolFieldFromKind("description"), makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow))))
-					end, { var15.updateDescription })
+					end, { var4.updateDescription })
 				})
 			}),
 			GeneratedTextFeedback = if fFlagMomentTextGenerationFilteredSignal then reactModule.createElement(generatedTextFeedbackContainerModule, { layoutOrder = 1 }) else nil,
@@ -104,9 +104,9 @@ return function(p0)
 				PostButton = reactModule.createElement(button, {
 					LayoutOrder = 1,
 					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-					onActivated = p0.onPublish,
+					onActivated = p1.onPublish,
 					size = inputSize.Medium,
-					text = var14.PublishingCtaPrimary,
+					text = var3.PublishingCtaPrimary,
 					variant = buttonVariant.Emphasis,
 					width = UDim.new(0.5, 0)
 				}),
@@ -116,14 +116,14 @@ return function(p0)
 					text = publishingCtaSecondary,
 					variant = buttonVariant.Standard,
 					width = UDim.new(0.5, 0),
-					onActivated = p0.onReturnToEditing,
+					onActivated = p1.onReturnToEditing,
 					size = inputSize.Medium
 				})
 			}),
 			Disclaimer = reactModule.createElement(text, {
 				LayoutOrder = 3,
 				tag = "auto-xy text-body-small text-align-x-center text-align-y-top content-neutral",
-				Text = var14.CreationTooltip
+				Text = var3.CreationTooltip
 			})
 		})
 	})

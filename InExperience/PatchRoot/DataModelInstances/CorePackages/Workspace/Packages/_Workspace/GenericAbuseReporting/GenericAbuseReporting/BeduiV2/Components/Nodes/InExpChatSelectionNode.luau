@@ -39,75 +39,75 @@ local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReport
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fixChatSelectorDropdownPadding = game:DefineFastFlag("FixChatSelectorDropdownPadding", false)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: reactModule (ref), scrollToItemModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), p1 (ref), scrollToItemModule (copy)
-		if not p0 then return end
-		local var17 = p1.current[p0]
+		-- upvalues: p1 (ref), p2 (ref), scrollToItemModule (copy)
+		if not p1 then return end
+		local var1 = p2.current[p1]
 		
-		if not var17 then return end
-		local scrollingFrame = var17:FindFirstAncestorWhichIsA("ScrollingFrame")
+		if not var1 then return end
+		local scrollingFrame = var1:FindFirstAncestorWhichIsA("ScrollingFrame")
 		
 		if not scrollingFrame then return end
-		local var19 = false
+		local var2 = false
 		local t = { current = scrollingFrame.Parent }
-		local t_1 = { current = var17 }
+		local t_1 = { current = var1 }
 		
 		local function _()
-			-- upvalues: var19 (write), scrollToItemModule (copy), t (ref), t_1 (ref)
-			if var19 then
+			-- upvalues: var2 (write), scrollToItemModule (copy), t (ref), t_1 (ref)
+			if var2 then
 				return
 			end
 			scrollToItemModule(t, t_1)
 		end
 		
-		if var17.AbsoluteSize.Y > 0 then
+		if var1.AbsoluteSize.Y > 0 then
 			scrollToItemModule(t, t_1)
 		else
-			local var22 = nil
-			var22 = var17:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var17 (ref), var22 (write), var19 (write), scrollToItemModule (copy), t (ref), t_1 (ref)
-				if var17.AbsoluteSize.Y > 0 then
-					var22:Disconnect()
+			local var3 = nil
+			var3 = var1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+				-- upvalues: var1 (ref), var3 (write), var2 (write), scrollToItemModule (copy), t (ref), t_1 (ref)
+				if var1.AbsoluteSize.Y > 0 then
+					var3:Disconnect()
 					
-					if var19 then return end
+					if var2 then return end
 					scrollToItemModule(t, t_1)
 				end
 			end)
 			task.delay(2, function()
-				-- upvalues: var22 (write)
-				if var22.Connected then
-					var22:Disconnect()
+				-- upvalues: var3 (write)
+				if var3.Connected then
+					var3:Disconnect()
 				end
 			end)
 		end
 		return function()
-			-- upvalues: var19 (write)
-			var19 = true
+			-- upvalues: var2 (write)
+			var2 = true
 		end
-	end, { p0 })
+	end, { p1 })
 end
 
 local REPORT_MESSAGE_NOT_SHOWN_ITEM_ID = useInExpCustomSubmitModule.REPORT_MESSAGE_NOT_SHOWN_ITEM_ID
 
 local function LoadingContent()
 	-- upvalues: useTokens (ref), reactModule (ref), sheet (ref), view (ref), dashModule (ref), skeleton (ref), radius (ref)
-	local var23 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(sheet.Content, nil, {
-		SkeletonContainer = reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, dashModule.map(table.create(5, true), function(_, p2)
-			-- upvalues: reactModule (copy), skeleton (copy), radius (copy), var23 (ref)
+		SkeletonContainer = reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, dashModule.map(table.create(5, true), function(_, p1)
+			-- upvalues: reactModule (copy), skeleton (copy), radius (copy), var1 (ref)
 			return reactModule.createElement(skeleton, {
-				key = tostring(p2),
+				key = tostring(p1),
 				radius = radius.Medium,
-				Size = UDim2.new(1, 0, 0, var23.Size.Size_800)
+				Size = UDim2.new(1, 0, 0, var1.Size.Size_800)
 			})
 		end))
 	})
 end
 
-local function ErrorContent(p3)
+local function ErrorContent(p1)
 	-- upvalues: useArTranslation (ref), reactModule (ref), sheet (ref), view (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local translateIntoString = useArTranslation().translateIntoString
 	
@@ -118,119 +118,119 @@ local function ErrorContent(p3)
 			ErrorText = reactModule.createElement(text, {
 				RichText = true,
 				tag = "auto-xy text-body-medium text-wrap text-align-x-left",
-				Text = translateIntoString(p3.errorText)
+				Text = translateIntoString(p1.errorText)
 			}),
 			RetryButton = reactModule.createElement(button, {
-				text = translateIntoString(p3.retryButtonText),
+				text = translateIntoString(p1.retryButtonText),
 				variant = buttonVariant.Standard,
 				fillBehavior = fillBehavior.Fit,
-				onActivated = p3.retry or function() end
+				onActivated = p1.retry or function() end
 			})
 		})
 	})
 end
 
-return reactModule.memo(function(p4)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), useGroupedListLoader (ref), scrollToItemModule (ref), telemetryEventType (ref), dashModule (ref), REPORT_MESSAGE_NOT_SHOWN_ITEM_ID (ref), useInExpFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), LoadingContent (ref), ErrorContent (ref), sheet (ref), view (ref), textWithTranslationModule (ref), text (ref), fixChatSelectorDropdownPadding (ref), inExpDropdownWithPopoverModule (ref), list (ref), icon (ref), iconName (ref), iconVariant (ref), fFlagAbuseReportSelectItemAddId (ref), listItemInputType (ref), footerModule (ref), dialogSize (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
-	local var24, var25 = reactModule.useState(p4.initialValue or nil)
-	local var26 = reactModule.useRef(nil)
-	local var27, var28 = reactModule.useState(nil)
-	local var29, var30 = reactModule.useState(true)
+	local var1, var2 = reactModule.useState(p1.initialValue or nil)
+	local var3 = reactModule.useRef(nil)
+	local var4, var5 = reactModule.useState(nil)
+	local var6, var7 = reactModule.useState(true)
 	local translateIntoString = useArTranslation().translateIntoString
-	local var31 = reactModule.useRef({})
-	local var32 = reactModule.useRef(false)
+	local var8 = reactModule.useRef({})
+	local var9 = reactModule.useRef(false)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
-	local var33 = reactModule.useRef(false)
-	local var34 = reactModule.useRef(false)
-	local var35 = reactModule.useRef(nil)
-	local var36 = reactModule.useRef(false)
-	local var37 = reactModule.useRef(false)
+	local var10 = reactModule.useRef(false)
+	local var11 = reactModule.useRef(false)
+	local var12 = reactModule.useRef(nil)
+	local var13 = reactModule.useRef(false)
+	local var14 = reactModule.useRef(false)
 	local layout = useLayoutSlots().Layout
-	local var38 = useGroupedListLoader(p4.items)
-	local data = var38.data or {}
+	local var15 = useGroupedListLoader(p1.items)
+	local data = var15.data or {}
 	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), var31 (ref), scrollToItemModule (copy)
-		if not var24 then return end
-		local var17 = var31.current[var24]
+		-- upvalues: var1 (ref), var8 (ref), scrollToItemModule (copy)
+		if not var1 then return end
+		local var16 = var8.current[var1]
 		
-		if not var17 then return end
-		local scrollingFrame = var17:FindFirstAncestorWhichIsA("ScrollingFrame")
+		if not var16 then return end
+		local scrollingFrame = var16:FindFirstAncestorWhichIsA("ScrollingFrame")
 		
 		if not scrollingFrame then return end
-		local var19 = false
+		local var17 = false
 		local t = { current = scrollingFrame.Parent }
-		local t_1 = { current = var17 }
+		local t_1 = { current = var16 }
 		
 		local function _()
-			-- upvalues: var19 (write), scrollToItemModule (copy), t (ref), t_1 (ref)
-			if var19 then
+			-- upvalues: var17 (write), scrollToItemModule (copy), t (ref), t_1 (ref)
+			if var17 then
 				return
 			end
 			scrollToItemModule(t, t_1)
 		end
 		
-		if var17.AbsoluteSize.Y > 0 then
+		if var16.AbsoluteSize.Y > 0 then
 			scrollToItemModule(t, t_1)
 		else
-			local var22 = nil
-			var22 = var17:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var17 (ref), var22 (write), var19 (write), scrollToItemModule (copy), t (ref), t_1 (ref)
-				if var17.AbsoluteSize.Y > 0 then
-					var22:Disconnect()
+			local var18 = nil
+			var18 = var16:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+				-- upvalues: var16 (ref), var18 (write), var17 (write), scrollToItemModule (copy), t (ref), t_1 (ref)
+				if var16.AbsoluteSize.Y > 0 then
+					var18:Disconnect()
 					
-					if var19 then return end
+					if var17 then return end
 					scrollToItemModule(t, t_1)
 				end
 			end)
 			task.delay(2, function()
-				-- upvalues: var22 (write)
-				if var22.Connected then
-					var22:Disconnect()
+				-- upvalues: var18 (write)
+				if var18.Connected then
+					var18:Disconnect()
 				end
 			end)
 		end
 		return function()
-			-- upvalues: var19 (write)
-			var19 = true
+			-- upvalues: var17 (write)
+			var17 = true
 		end
-	end, { var24 })
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var35 (ref), var33 (ref), var34 (ref)
-		local current = var35.current
+		-- upvalues: var12 (ref), var10 (ref), var11 (ref)
+		local current = var12.current
 		
 		if not current then return end
 		local scrollingFrame = current:FindFirstChildWhichIsA("ScrollingFrame", true)
 		
 		if scrollingFrame then
 			local function checkScrollbar()
-				-- upvalues: var33 (copy), scrollingFrame (ref)
-				var33.current = scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y
+				-- upvalues: var10 (copy), scrollingFrame (ref)
+				var10.current = scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y
 			end
 			
 			local function onScroll()
-				-- upvalues: scrollingFrame (ref), var34 (copy)
+				-- upvalues: scrollingFrame (ref), var11 (copy)
 				if scrollingFrame.CanvasPosition.Y > 0 then
-					var34.current = true
+					var11.current = true
 				end
 			end
 			
-			var33.current = scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y
-			local var53 = scrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(checkScrollbar)
-			local var54 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkScrollbar)
-			local var55 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(onScroll)
+			var10.current = scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y
+			local var16 = scrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(checkScrollbar)
+			local var17 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkScrollbar)
+			local var18 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(onScroll)
 			
 			return function()
-				-- upvalues: var53 (ref), var54 (ref), var55 (ref)
-				var53:Disconnect()
-				var54:Disconnect()
-				var55:Disconnect()
+				-- upvalues: var16 (ref), var17 (ref), var18 (ref)
+				var16:Disconnect()
+				var17:Disconnect()
+				var18:Disconnect()
 			end
 		end
-	end, { var38.loading })
+	end, { var15.loading })
 	reactModule.useEffect(function()
-		-- upvalues: var38 (ref), var36 (ref), sendEvent (ref), telemetryEventType (copy)
-		if var38.error and not var36.current then
-			var36.current = true
+		-- upvalues: var15 (ref), var13 (ref), sendEvent (ref), telemetryEventType (copy)
+		if var15.error and not var13.current then
+			var13.current = true
 			sendEvent({
 				sub_event_type = telemetryEventType.Error,
 				error_detail = {
@@ -238,109 +238,109 @@ return reactModule.memo(function(p4)
 				}
 			})
 		end
-	end, { var38.error, sendEvent })
-	local var40 = #data > 1
-	local var41 = reactModule.useMemo(function()
-		-- upvalues: var27 (ref), var24 (ref), data (ref)
-		if var27 then
-			return var27
-		elseif var24 then
+	end, { var15.error, sendEvent })
+	local var16 = #data > 1
+	local var17 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), var1 (ref), data (ref)
+		if var4 then
+			return var4
+		elseif var1 then
 			for i, v in ipairs(data) do
 				for i_1, v_1 in ipairs(v.items) do
-					if v_1.id == var24 then
+					if v_1.id == var1 then
 						return v.id
 					end
 				end
 			end
 		end
 		return if data[1] then data[1].id else nil
-	end, { var27, var24, data })
-	local var42 = reactModule.useMemo(function()
-		-- upvalues: data (ref), dashModule (copy), var41 (ref), p4 (ref), REPORT_MESSAGE_NOT_SHOWN_ITEM_ID (copy)
+	end, { var4, var1, data })
+	local var18 = reactModule.useMemo(function()
+		-- upvalues: data (ref), dashModule (copy), var17 (ref), p1 (ref), REPORT_MESSAGE_NOT_SHOWN_ITEM_ID (copy)
 		if #data == 0 then
 			return {}
 		end
-		local var56 = dashModule.find(data, function(p5)
-			-- upvalues: var41 (copy)
-			return p5.id == var41
+		local var19 = dashModule.find(data, function(p2)
+			-- upvalues: var17 (copy)
+			return p2.id == var17
 		end)
-		local var57 = if p4.reportMessageNotShownText and p4.reportMessageNotShownText ~= "" then {
+		local var20 = if p1.reportMessageNotShownText and p1.reportMessageNotShownText ~= "" then {
 			{
 				id = REPORT_MESSAGE_NOT_SHOWN_ITEM_ID,
-				label = p4.reportMessageNotShownText
+				label = p1.reportMessageNotShownText
 			}
 		} else {}
 		
-		for i, v in ipairs(if var56 then var56.items else {}) do
-			table.insert(var57, v)
+		for i, v in ipairs(if var19 then var19.items else {}) do
+			table.insert(var20, v)
 		end
-		return var57
-	end, { data, var41, p4.reportMessageNotShownText })
-	local var43 = if var42[#var42] then var42[#var42].id else nil
+		return var20
+	end, { data, var17, p1.reportMessageNotShownText })
+	local var21 = if var18[#var18] then var18[#var18].id else nil
 	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), var43 (ref), var31 (ref), scrollToItemModule (copy), var35 (ref)
-		if var24 then return end
-		if not var43 then return end
-		local var58 = var31.current[var43]
+		-- upvalues: var1 (ref), var21 (ref), var8 (ref), scrollToItemModule (copy), var12 (ref)
+		if var1 then return end
+		if not var21 then return end
+		local var22 = var8.current[var21]
 		
-		if not var58 then return end
-		local var59 = false
+		if not var22 then return end
+		local var23 = false
 		
 		local function _()
-			-- upvalues: var59 (write), scrollToItemModule (copy), var35 (copy), var58 (ref)
-			if var59 then
+			-- upvalues: var23 (write), scrollToItemModule (copy), var12 (copy), var22 (ref)
+			if var23 then
 				return
 			end
-			scrollToItemModule(var35, { current = var58 })
+			scrollToItemModule(var12, { current = var22 })
 		end
 		
-		if var58.AbsoluteSize.Y > 0 then
-			scrollToItemModule(var35, { current = var58 })
+		if var22.AbsoluteSize.Y > 0 then
+			scrollToItemModule(var12, { current = var22 })
 		else
-			local var60 = nil
-			var60 = var58:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var58 (ref), var60 (write), var59 (write), scrollToItemModule (copy), var35 (copy)
-				if var58.AbsoluteSize.Y > 0 then
-					var60:Disconnect()
+			local var24 = nil
+			var24 = var22:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+				-- upvalues: var22 (ref), var24 (write), var23 (write), scrollToItemModule (copy), var12 (copy)
+				if var22.AbsoluteSize.Y > 0 then
+					var24:Disconnect()
 					
-					if var59 then return end
-					scrollToItemModule(var35, { current = var58 })
+					if var23 then return end
+					scrollToItemModule(var12, { current = var22 })
 				end
 			end)
 			task.delay(2, function()
-				-- upvalues: var60 (write)
-				if var60.Connected then
-					var60:Disconnect()
+				-- upvalues: var24 (write)
+				if var24.Connected then
+					var24:Disconnect()
 				end
 			end)
 		end
 		return function()
-			-- upvalues: var59 (write)
-			var59 = true
+			-- upvalues: var23 (write)
+			var23 = true
 		end
-	end, { var43, var24 })
+	end, { var21, var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var38 (ref), var42 (ref), var37 (ref), sendEvent (ref), telemetryEventType (copy)
-		if not var38.loading and not var38.error and (#var42 == 0 and not var37.current) then
-			var37.current = true
+		-- upvalues: var15 (ref), var18 (ref), var14 (ref), sendEvent (ref), telemetryEventType (copy)
+		if not var15.loading and not var15.error and (#var18 == 0 and not var14.current) then
+			var14.current = true
 			sendEvent({ sub_event_type = telemetryEventType.EmptyState })
 		end
-	end, { var38.loading, var38.error, var42, sendEvent })
-	local var44 = reactModule.useCallback(function()
-		-- upvalues: var32 (ref), var30 (ref)
-		var32.current = true
-		var30(false)
+	end, { var15.loading, var15.error, var18, sendEvent })
+	local var22 = reactModule.useCallback(function()
+		-- upvalues: var9 (ref), var7 (ref)
+		var9.current = true
+		var7(false)
 	end, {})
-	local var45 = reactModule.useCallback(function()
-		-- upvalues: var30 (ref)
-		var30(false)
+	local var23 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref)
+		var7(false)
 	end, {})
-	local var46, var47 = reactModule.useState(false)
-	local var48 = useInExpFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, var45, not var46)
-	local var49 = reactModule.useMemo(function()
+	local var24, var25 = reactModule.useState(false)
+	local var26 = useInExpFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, var23, not var24)
+	local var27 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), data (ref)
-		return dashModule.map(data, function(p6)
-			return { id = p6.id, text = p6.label }
+		return dashModule.map(data, function(p2)
+			return { id = p2.id, text = p2.label }
 		end)
 	end, { data })
 	local _ = nil
@@ -350,96 +350,96 @@ return reactModule.memo(function(p4)
 		ChatSelectionSheet = reactModule.createElement(sheet.Root, {
 			centerSheetHeight = 1,
 			preferCenterSheet = true,
-			ref = var48,
-			isOpen = var29,
+			ref = var26,
+			isOpen = var6,
 			size = dialogSize.Medium,
 			snapPoints = { 0.9 },
 			onClose = function()
-				-- upvalues: var32 (ref), p4 (ref), var24 (ref), var26 (ref)
-				if var32.current then
-					var32.current = false
+				-- upvalues: var9 (ref), p1 (ref), var1 (ref), var3 (ref)
+				if var9.current then
+					var9.current = false
 					
-					if p4.onNext then
-						p4.onNext(var24, var26.current)
+					if p1.onNext then
+						p1.onNext(var1, var3.current)
 						
 						return
 					end
-				elseif p4.goBack then
-					p4.goBack()
+				elseif p1.goBack then
+					p1.goBack()
 				end
 			end
 		}, {
 			SheetHeader = reactModule.createElement(sheet.Header, nil, {
 				Title = reactModule.createElement(text, {
 					tag = "align-x-left auto-xy text-title-large text-truncate-end content-emphasis",
-					Text = translateIntoString(p4.title)
+					Text = translateIntoString(p1.title)
 				})
 			}),
-			SheetContent = if var38.loading then reactModule.createElement(LoadingContent) elseif var38.error then reactModule.createElement(ErrorContent, {
-				retry = var38.retry,
-				errorText = p4.errorText,
-				retryButtonText = p4.retryButtonText
-			}) elseif #var42 == 0 then reactModule.createElement(sheet.Content, nil, {
+			SheetContent = if var15.loading then reactModule.createElement(LoadingContent) elseif var15.error then reactModule.createElement(ErrorContent, {
+				retry = var15.retry,
+				errorText = p1.errorText,
+				retryButtonText = p1.retryButtonText
+			}) elseif #var18 == 0 then reactModule.createElement(sheet.Content, nil, {
 				Empty = reactModule.createElement(view, {
 					tag = "col align-x-center align-y-center gap-medium size-full"
 				}, {
-					Empty = reactModule.createElement(textWithTranslationModule, { tag = "auto-xy", LayoutOrder = 1, input = p4.emptyText }),
+					Empty = reactModule.createElement(textWithTranslationModule, { tag = "auto-xy", LayoutOrder = 1, input = p1.emptyText }),
 					ReportAMessageNotShown = reactModule.createElement(text, {
 						RichText = true,
 						tag = "auto-xy padding-small text-wrap text-align-x-center radius-medium",
 						LayoutOrder = 2,
-						Text = `<u>{translateIntoString(p4.reportMessageNotShownText)}</u>`,
+						Text = `<u>{translateIntoString(p1.reportMessageNotShownText)}</u>`,
 						onActivated = reactModule.useCallback(function()
-							-- upvalues: var25 (ref), REPORT_MESSAGE_NOT_SHOWN_ITEM_ID (copy), var26 (ref), p4 (ref), var44 (ref)
-							var25(REPORT_MESSAGE_NOT_SHOWN_ITEM_ID)
-							var26.current = {
+							-- upvalues: var2 (ref), REPORT_MESSAGE_NOT_SHOWN_ITEM_ID (copy), var3 (ref), p1 (ref), var22 (ref)
+							var2(REPORT_MESSAGE_NOT_SHOWN_ITEM_ID)
+							var3.current = {
 								id = REPORT_MESSAGE_NOT_SHOWN_ITEM_ID,
-								label = p4.reportMessageNotShownText
+								label = p1.reportMessageNotShownText
 							}
-							var44()
-						end, { var44 })
+							var22()
+						end, { var22 })
 					})
 				})
-			}) else reactModule.createElement(sheet.Content, { isContentFullBleed = true, ref = var35 }, {
-				ChannelDropdown = if fixChatSelectorDropdownPadding and var40 then reactModule.createElement(view, {
+			}) else reactModule.createElement(sheet.Content, { isContentFullBleed = true, ref = var12 }, {
+				ChannelDropdown = if fixChatSelectorDropdownPadding and var16 then reactModule.createElement(view, {
 					tag = "auto-xy padding-x-xlarge padding-top-xsmall",
 					LayoutOrder = 1
 				}, reactModule.createElement(inExpDropdownWithPopoverModule, {
 					LayoutOrder = 1,
-					value = var41,
-					items = var49,
-					onOpenChange = var47,
-					onItemChanged = function(p8)
-						-- upvalues: var41 (ref), var25 (ref), var28 (ref), sendEvent (ref), telemetryEventType (copy), data (ref)
-						local var41_1 = var41 or ""
-						local var64 = tostring(p8)
-						var25(nil)
-						var28(var64)
+					value = var17,
+					items = var27,
+					onOpenChange = var25,
+					onItemChanged = function(p2)
+						-- upvalues: var17 (ref), var2 (ref), var5 (ref), sendEvent (ref), telemetryEventType (copy), data (ref)
+						local var28 = var17 or ""
+						local var29 = tostring(p2)
+						var2(nil)
+						var5(var29)
 						sendEvent({
 							sub_event_type = telemetryEventType.TextChannelSwitch,
 							text_channel_switch_detail = {
-								previous_channel_name = var41_1,
-								new_channel_name = var64,
+								previous_channel_name = var28,
+								new_channel_name = var29,
 								channel_count = #data
 							}
 						})
 					end
-				})) elseif var40 then reactModule.createElement(inExpDropdownWithPopoverModule, {
+				})) elseif var16 then reactModule.createElement(inExpDropdownWithPopoverModule, {
 					LayoutOrder = 1,
-					value = var41,
-					items = var49,
-					onOpenChange = var47,
-					onItemChanged = function(p7)
-						-- upvalues: var41 (ref), var25 (ref), var28 (ref), sendEvent (ref), telemetryEventType (copy), data (ref)
-						local var41_1 = var41 or ""
-						local var62 = tostring(p7)
-						var25(nil)
-						var28(var62)
+					value = var17,
+					items = var27,
+					onOpenChange = var25,
+					onItemChanged = function(p2)
+						-- upvalues: var17 (ref), var2 (ref), var5 (ref), sendEvent (ref), telemetryEventType (copy), data (ref)
+						local var28 = var17 or ""
+						local var29 = tostring(p2)
+						var2(nil)
+						var5(var29)
 						sendEvent({
 							sub_event_type = telemetryEventType.TextChannelSwitch,
 							text_channel_switch_detail = {
-								previous_channel_name = var41_1,
-								new_channel_name = var62,
+								previous_channel_name = var28,
+								new_channel_name = var29,
 								channel_count = #data
 							}
 						})
@@ -450,56 +450,56 @@ return reactModule.memo(function(p4)
 					hasDivider = { hasDivider = true, isInset = false },
 					isContained = { isContained = false, hasMargin = true }
 				}, {
-					dashModule.map(var42, function(p9, p10)
-						-- upvalues: reactModule (copy), icon (copy), iconName (copy), iconVariant (copy), list (copy), translateIntoString (ref), var25 (ref), var26 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportSelectItemAddId (copy), var42 (ref), var33 (ref), var34 (ref), listItemInputType (copy), var24 (ref), var31 (ref)
+					dashModule.map(var18, function(p2, p3)
+						-- upvalues: reactModule (copy), icon (copy), iconName (copy), iconVariant (copy), list (copy), translateIntoString (ref), var2 (ref), var3 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportSelectItemAddId (copy), var18 (ref), var10 (ref), var11 (ref), listItemInputType (copy), var1 (ref), var8 (ref)
 						return reactModule.createElement(list.Item, {
-							description = translateIntoString(p9.label),
-							trailing = if p9.meta and p9.meta.presetId and p9.meta.presetId ~= "" then reactModule.createElement(icon, {
+							description = translateIntoString(p2.label),
+							trailing = if p2.meta and p2.meta.presetId and p2.meta.presetId ~= "" then reactModule.createElement(icon, {
 								name = iconName.LightningBolt,
 								variant = iconVariant.Filled
 							}) else nil,
 							onActivated = {
 								onActivated = function()
-									-- upvalues: var25 (copy), p9 (ref), var26 (copy), sendEvent (copy), telemetryEventType (copy), p10 (ref), fFlagAbuseReportSelectItemAddId (copy), var42 (copy), var33 (copy), var34 (copy)
-									var25(p9.id)
-									var26.current = p9
+									-- upvalues: var2 (copy), p2 (ref), var3 (copy), sendEvent (copy), telemetryEventType (copy), p3 (ref), fFlagAbuseReportSelectItemAddId (copy), var18 (copy), var10 (copy), var11 (copy)
+									var2(p2.id)
+									var3.current = p2
 									sendEvent({
 										sub_event_type = telemetryEventType.SelectItem,
 										select_item_detail = {
-											selected_index = p10,
-											selected_id = if fFlagAbuseReportSelectItemAddId then p9.id else nil,
-											list_length = #var42,
-											has_scroll = var33.current,
-											did_scroll = var34.current
+											selected_index = p3,
+											selected_id = if fFlagAbuseReportSelectItemAddId then p2.id else nil,
+											list_length = #var18,
+											has_scroll = var10.current,
+											did_scroll = var11.current
 										}
 									})
 								end,
 								inputType = listItemInputType.Radio,
-								isChecked = var24 == p9.id
+								isChecked = var1 == p2.id
 							},
-							LayoutOrder = p10,
-							ref = function(p11)
-								-- upvalues: var31 (copy), p9 (ref)
-								var31.current[p9.id] = p11
+							LayoutOrder = p3,
+							ref = function(p4)
+								-- upvalues: var8 (copy), p2 (ref)
+								var8.current[p2.id] = p4
 							end,
-							key = p9.id
+							key = p2.id
 						})
 					end)
 				}),
-				Footer = p4.footerItems and reactModule.createElement(footerModule, {
+				Footer = p1.footerItems and reactModule.createElement(footerModule, {
 					additionalTag = "padding-top-medium",
 					layoutOrder = 3,
-					footerItems = p4.footerItems
+					footerItems = p1.footerItems
 				})
 			}),
-			SheetActions = if var38.loading or var38.error or var24 == nil or var24 == REPORT_MESSAGE_NOT_SHOWN_ITEM_ID and #var42 <= 0 then nil else reactModule.createElement(sheet.Actions, nil, {
+			SheetActions = if var15.loading or var15.error or var1 == nil or var1 == REPORT_MESSAGE_NOT_SHOWN_ITEM_ID and #var18 <= 0 then nil else reactModule.createElement(sheet.Actions, nil, {
 				Button = reactModule.createElement(button, {
 					variant = buttonVariant.Emphasis,
-					text = translateIntoString(p4.nextButtonText),
-					isLoading = p4.isSubmitting,
-					isDisabled = p4.isSubmitting,
+					text = translateIntoString(p1.nextButtonText),
+					isLoading = p1.isSubmitting,
+					isDisabled = p1.isSubmitting,
 					fillBehavior = fillBehavior.Fill,
-					onActivated = var44
+					onActivated = var22
 				})
 			})
 		})

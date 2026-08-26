@@ -9,60 +9,60 @@ local userUpdatedModule = require(actions.UserUpdated)
 local userModelModule = require(models.UserModel)
 local t = {}
 
-local var7 = function(p0, p1)
+local var1 = function(p1, p2)
 	-- upvalues: userModelModule (ref), cryoModule (ref)
 	local t = {}
 	
-	for i, v in ipairs(p1) do
-		local var9 = tostring(v.id)
-		t[var9] = userModelModule.new({
-			id = var9,
+	for i, v in ipairs(p2) do
+		local var2 = tostring(v.id)
+		t[var2] = userModelModule.new({
+			id = var2,
 			username = v.name or "",
 			displayName = v.displayName or "",
 			hasVerifiedBadge = v.hasVerifiedBadge,
 			created = v.created
 		})
 	end
-	return cryoModule.Dictionary.join(p0, t)
+	return cryoModule.Dictionary.join(p1, t)
 end
 
-return function(p2)
-	-- upvalues: roduxModule (ref), t (ref), var7 (ref), userUpdatedModule (ref), userModelModule (ref), cryoModule (ref), userRemovedModule (ref)
-	local usersNetworking = p2.usersNetworking
-	local friendsNetworking = p2.friendsNetworking
+return function(p3)
+	-- upvalues: roduxModule (ref), t (ref), var1 (ref), userUpdatedModule (ref), userModelModule (ref), cryoModule (ref), userRemovedModule (ref)
+	local usersNetworking = p3.usersNetworking
+	local friendsNetworking = p3.friendsNetworking
 	
 	return roduxModule.createReducer(t, {
-		[usersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p3, p4)
-			-- upvalues: var7 (copy)
-			return var7(p3, { p4.responseBody })
+		[usersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p4, p5)
+			-- upvalues: var1 (copy)
+			return var1(p4, { p5.responseBody })
 		end,
-		[usersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p5, p6)
-			-- upvalues: var7 (copy)
-			return var7(p5, p6.responseBody.data)
+		[usersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p4, p5)
+			-- upvalues: var1 (copy)
+			return var1(p4, p5.responseBody.data)
 		end,
-		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p7, p8)
-			-- upvalues: var7 (copy)
-			return var7(p7, p8.responseBody.data)
+		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p4, p5)
+			-- upvalues: var1 (copy)
+			return var1(p4, p5.responseBody.data)
 		end,
-		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p9, p10)
-			-- upvalues: var7 (copy)
-			return var7(p9, p10.responseBody.data)
+		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p4, p5)
+			-- upvalues: var1 (copy)
+			return var1(p4, p5.responseBody.data)
 		end,
-		[friendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p11, p12)
-			-- upvalues: var7 (copy)
-			return var7(p11, p12.responseBody.data)
+		[friendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p4, p5)
+			-- upvalues: var1 (copy)
+			return var1(p4, p5.responseBody.data)
 		end,
-		[userUpdatedModule.name] = function(p13, p14)
+		[userUpdatedModule.name] = function(p4, p5)
 			-- upvalues: userModelModule (copy), cryoModule (copy)
-			assert(userModelModule.isValid(p14.payload))
+			assert(userModelModule.isValid(p5.payload))
 			
-			return cryoModule.Dictionary.join(p13, { [p14.payload.id] = p14.payload })
+			return cryoModule.Dictionary.join(p4, { [p5.payload.id] = p5.payload })
 		end,
-		[userRemovedModule.name] = function(p15, p16)
+		[userRemovedModule.name] = function(p4, p5)
 			-- upvalues: cryoModule (copy)
-			assert(type(p16.payload.id) == "string", "Expected id to be a string")
+			assert(type(p5.payload.id) == "string", "Expected id to be a string")
 			
-			return cryoModule.Dictionary.join(p15, { [p16.payload.id] = cryoModule.None })
+			return cryoModule.Dictionary.join(p4, { [p5.payload.id] = cryoModule.None })
 		end
 	})
 end

@@ -3,11 +3,11 @@ local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local url = require(parent.Http).Url
 
 return {
-	buildJoinCommunityUrl = function(p0)
+	buildJoinCommunityUrl = function(p1)
 		-- upvalues: urlBuilder (ref), url (ref)
 		return urlBuilder.new({
 			path = "v1/groups/{communityId}/users",
 			base = url.GROUPS_URL
-		})({ communityId = p0 })
+		})({ communityId = p1 })
 	end
 }

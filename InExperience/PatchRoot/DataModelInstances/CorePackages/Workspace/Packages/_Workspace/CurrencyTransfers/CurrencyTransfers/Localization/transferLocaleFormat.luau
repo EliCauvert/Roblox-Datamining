@@ -1,18 +1,18 @@
 ﻿return {
-	substituteAmount = function(p0, p1)
-		local replaced, _ = string.gsub(p0, "{amount}", tostring(p1))
+	substituteAmount = function(p1, p2)
+		local replaced, _ = string.gsub(p1, "{amount}", tostring(p2))
 		
 		return replaced
 	end,
-	substituteReceiverNotAllowed = function(p2, p3)
-		local var1 = tostring(p3)
-		local replaced, _ = string.gsub(p2, "{userName}", var1)
+	substituteReceiverNotAllowed = function(p1, p2)
+		local var1 = tostring(p2)
+		local replaced, _ = string.gsub(p1, "{userName}", var1)
 		local replaced_1, _ = string.gsub(replaced, "{username}", var1)
 		
 		return replaced_1
 	end,
-	substituteUsername = function(p4, p5)
-		local replaced, _ = string.gsub(p4, "{username}", tostring(p5))
+	substituteUsername = function(p1, p2)
+		local replaced, _ = string.gsub(p1, "{username}", tostring(p2))
 		
 		return replaced
 	end,

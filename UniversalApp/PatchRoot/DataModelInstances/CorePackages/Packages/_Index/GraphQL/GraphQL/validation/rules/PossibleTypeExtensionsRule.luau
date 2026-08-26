@@ -23,58 +23,58 @@ local t_1 = nil
 local typeToExtKind = nil
 local extensionKindToTypeName = nil
 
-function t.PossibleTypeExtensionsRule(p0)
+function t.PossibleTypeExtensionsRule(p1)
 	-- upvalues: isTypeDefinitionNode (ref), t_1 (write), typeToExtKind (write), extensionKindToTypeName (write), graphQLError (ref), object (ref), array (ref), suggestionList (ref), didYouMean (ref)
-	local schema = p0:getSchema()
+	local schema = p1:getSchema()
 	local t = {}
 	
-	for i, v in ipairs(p0:getDocument().definitions) do
+	for i, v in ipairs(p1:getDocument().definitions) do
 		if isTypeDefinitionNode(v) then
 			t[v.name.value] = v
 		end
 	end
-	local function checkExtension(p1)
-		-- upvalues: t (ref), schema (ref), t_1 (copy), typeToExtKind (copy), extensionKindToTypeName (copy), p0 (ref), graphQLError (copy), object (copy), array (copy), suggestionList (copy), didYouMean (copy)
-		local value = p1.name.value
-		local var10 = t[value]
-		local var11 = if schema then schema:getType(value) else nil
-		local var12 = nil
+	local function checkExtension(p2)
+		-- upvalues: t (ref), schema (ref), t_1 (copy), typeToExtKind (copy), extensionKindToTypeName (copy), p1 (ref), graphQLError (copy), object (copy), array (copy), suggestionList (copy), didYouMean (copy)
+		local value = p2.name.value
+		local var1 = t[value]
+		local var2 = if schema then schema:getType(value) else nil
+		local var3 = nil
 		
-		if var10 then
-			var12 = t_1[var10.kind]
-		elseif var11 then
-			var12 = typeToExtKind(var11)
+		if var1 then
+			var3 = t_1[var1.kind]
+		elseif var2 then
+			var3 = typeToExtKind(var2)
 		end
-		if var12 then
-			if var12 == p1.kind then
+		if var3 then
+			if var3 == p2.kind then
 				return
 			else
-				p0:reportError(graphQLError.new(("Cannot extend non-%s type \"%s\"."):format(extensionKindToTypeName(p1.kind), value), if var10 then { var10, p1 } else p1))
+				p1:reportError(graphQLError.new(("Cannot extend non-%s type \"%s\"."):format(extensionKindToTypeName(p2.kind), value), if var1 then { var1, p2 } else p2))
 				
 				return
 			end
 		else
-			local var13 = object.keys(t)
+			local var4 = object.keys(t)
 			
 			if schema then
-				var13 = array.concat(var13, schema:getTypeMap():keys())
+				var4 = array.concat(var4, schema:getTypeMap():keys())
 			end
-			p0:reportError(graphQLError.new(("Cannot extend type \"%s\" because it is not defined."):format(value) .. didYouMean(suggestionList(value, var13)), p1.name))
+			p1:reportError(graphQLError.new(("Cannot extend type \"%s\" because it is not defined."):format(value) .. didYouMean(suggestionList(value, var4)), p2.name))
 		end
 	end
 	
-	local var9 = function(_, ...)
+	local var1 = function(_, ...)
 		-- upvalues: checkExtension (ref)
 		return checkExtension(...)
 	end
 	
 	return {
-		ScalarTypeExtension = var9,
-		ObjectTypeExtension = var9,
-		InterfaceTypeExtension = var9,
-		UnionTypeExtension = var9,
-		EnumTypeExtension = var9,
-		InputObjectTypeExtension = var9
+		ScalarTypeExtension = var1,
+		ObjectTypeExtension = var1,
+		InterfaceTypeExtension = var1,
+		UnionTypeExtension = var1,
+		EnumTypeExtension = var1,
+		InputObjectTypeExtension = var1
 	}
 end
 
@@ -107,22 +107,22 @@ typeToExtKind = function(p2)
 	return nil
 end
 
-extensionKindToTypeName = function(p3)
+extensionKindToTypeName = function(p2)
 	-- upvalues: kind (ref), invariant (ref), inspect (ref)
-	if p3 == kind.SCALAR_TYPE_EXTENSION then
+	if p2 == kind.SCALAR_TYPE_EXTENSION then
 		return "scalar"
-	elseif p3 == kind.OBJECT_TYPE_EXTENSION then
+	elseif p2 == kind.OBJECT_TYPE_EXTENSION then
 		return "object"
-	elseif p3 == kind.INTERFACE_TYPE_EXTENSION then
+	elseif p2 == kind.INTERFACE_TYPE_EXTENSION then
 		return "interface"
-	elseif p3 == kind.UNION_TYPE_EXTENSION then
+	elseif p2 == kind.UNION_TYPE_EXTENSION then
 		return "union"
-	elseif p3 == kind.ENUM_TYPE_EXTENSION then
+	elseif p2 == kind.ENUM_TYPE_EXTENSION then
 		return "enum"
-	elseif p3 == kind.INPUT_OBJECT_TYPE_EXTENSION then
+	elseif p2 == kind.INPUT_OBJECT_TYPE_EXTENSION then
 		return "input object"
 	end
-	invariant(false, "Unexpected kind: " .. inspect(p3))
+	invariant(false, "Unexpected kind: " .. inspect(p2))
 	
 	return ""
 end

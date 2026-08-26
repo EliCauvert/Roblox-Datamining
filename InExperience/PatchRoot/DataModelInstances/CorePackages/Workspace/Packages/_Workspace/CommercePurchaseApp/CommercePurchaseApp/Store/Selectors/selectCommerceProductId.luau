@@ -1,5 +1,5 @@
 ﻿local _ = require(script:FindFirstAncestor("CommercePurchaseApp").Store.Types)
 
-return function(p0)
-	return p0.commercePurchaseState.commerceProductId
+return function(p1)
+	return p1.commercePurchaseState.commerceProductId
 end

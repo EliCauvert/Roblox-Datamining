@@ -6,28 +6,28 @@ local classifyShareLinkV2Module = require(appChat.Components.ChatConversation.Ut
 local name = require(appChat.Logger):new(script.Name)
 local fetchResolvedShareLinkModule = require(script.Parent.Requests.fetchResolvedShareLink)
 
-return function(p0)
+return function(p1)
 	-- upvalues: dataHydrationModule (ref), name (ref), httpClientModule (ref), fetchResolvedShareLinkModule (ref), classifyShareLinkV2Module (ref)
-	p0 = p0 or {}
-	local var7 = dataHydrationModule.createDataResolver({
+	p1 = p1 or {}
+	local var1 = dataHydrationModule.createDataResolver({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = dataHydrationModule.createDataCache(p0.ttlSeconds, p0.failedTtlSeconds),
-		logError = function(p1)
+		cache = dataHydrationModule.createDataCache(p1.ttlSeconds, p1.failedTtlSeconds),
+		logError = function(p2)
 			-- upvalues: name (copy)
-			name:warning(`Error resolving share link v2: {tostring(p1)}`)
+			name:warning(`Error resolving share link v2: {tostring(p2)}`)
 		end,
 		fetchFn = function(p2)
-			-- upvalues: httpClientModule (copy), fetchResolvedShareLinkModule (copy), p0 (ref), classifyShareLinkV2Module (copy)
-			return httpClientModule.asPromise(fetchResolvedShareLinkModule(p2, p0.network)):andThen(classifyShareLinkV2Module)
+			-- upvalues: httpClientModule (copy), fetchResolvedShareLinkModule (copy), p1 (ref), classifyShareLinkV2Module (copy)
+			return httpClientModule.asPromise(fetchResolvedShareLinkModule(p2, p1.network)):andThen(classifyShareLinkV2Module)
 		end
 	})
 	
 	return {
-		getCachedClassification = var7.getCachedItem,
-		fetchClassification = var7.fetchItem,
-		getAndFetchClassification = var7.getAndFetchItem,
-		clear = var7.clear,
-		dispose = var7.dispose
+		getCachedClassification = var1.getCachedItem,
+		fetchClassification = var1.fetchItem,
+		getAndFetchClassification = var1.getAndFetchItem,
+		clear = var1.clear,
+		dispose = var1.dispose
 	}
 end

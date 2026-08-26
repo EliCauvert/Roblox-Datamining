@@ -1,9 +1,9 @@
 ﻿local AVATAR_URLModule = require(script.Parent.Parent.AVATAR_URL)
 
-return function(p0)
+return function(p1)
 	-- upvalues: AVATAR_URLModule (ref)
-	return p0.roduxNetworking.GET({ Name = "GetCurrentlyWearing" }, function(p1, p2)
+	return p1.roduxNetworking.GET({ Name = "GetCurrentlyWearing" }, function(p2, p3)
 		-- upvalues: AVATAR_URLModule (copy)
-		return p1(AVATAR_URLModule):path("v1"):path("users"):id(p2):path("currently-wearing")
+		return p2(AVATAR_URLModule):path("v1"):path("users"):id(p3):path("currently-wearing")
 	end)
 end

@@ -6,12 +6,12 @@ local t = {
 	[14] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_14
 }
 
-function getTimedOptionForItemData(p0)
+function getTimedOptionForItemData(p1)
 	-- upvalues: t (ref), unifiedEventLogEnumsModule (ref)
-	if not p0 or not p0.timedOptions then
+	if not p1 or not p1.timedOptions then
 		return unifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT
 	end
-	for i, v in p0.timedOptions do
+	for i, v in p1.timedOptions do
 		if v.selected then
 			return t[v.days]
 		end

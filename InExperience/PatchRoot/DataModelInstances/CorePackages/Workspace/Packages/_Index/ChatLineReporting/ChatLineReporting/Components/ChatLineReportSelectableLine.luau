@@ -12,28 +12,28 @@ local view = foundationModule.View
 local constantsModule = require(chatLineReporting.Common.Constants)
 local chatLineReportEyebrowModule = require(chatLineReporting.Components.ChatLineReportEyebrow)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), getMessageTextModule (ref), view (ref), constantsModule (ref), chatLineReportEyebrowModule (ref), text (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconRichText (ref)
-	local var7, var8 = reactModule.useState(nil)
-	local var9 = getMessageTextModule(p0.message.useTranslation, p0.message.translation, p0.message.text)
-	local var7_1 = var7 or (p0.message.prefixText or "")
-	local userId = p0.message.userId
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = getMessageTextModule(p1.message.useTranslation, p1.message.translation, p1.message.text)
+	local var4 = var1 or (p1.message.prefixText or "")
+	local userId = p1.message.userId
 	
 	if userId and userId.data then
 		local names = userId.data.userProfiles[1].names
-		var8(string.gsub(var7_1, names.displayName, names.combinedName))
+		var2(string.gsub(var4, names.displayName, names.combinedName))
 	end
 	return reactModule.createElement(view, {
 		LayoutOrder = 2,
 		tag = "col",
-		Size = UDim2.new(0, p0.scrollViewSizeX - constantsModule.SelectableLineScrollbarOffset, 1, 0)
+		Size = UDim2.new(0, p1.scrollViewSizeX - constantsModule.SelectableLineScrollbarOffset, 1, 0)
 	}, {
-		eyebrow = reactModule.createElement(chatLineReportEyebrowModule, { message = p0.message, localizedText = p0.localizedText }),
+		eyebrow = reactModule.createElement(chatLineReportEyebrowModule, { message = p1.message, localizedText = p1.localizedText }),
 		chatText = reactModule.createElement(text, {
 			RichText = true,
 			tag = "auto-xy text-wrap text-align-x-left",
 			LayoutOrder = 2,
-			Text = if fFlagExpChatPresetChatEnabled and isPresetMessage(p0.message) then `{var7_1} {var9} {getPresetIconRichText(18)}` else `{var7_1} {var9}`
+			Text = if fFlagExpChatPresetChatEnabled and isPresetMessage(p1.message) then `{var4} {var3} {getPresetIconRichText(18)}` else `{var4} {var3}`
 		})
 	})
 end

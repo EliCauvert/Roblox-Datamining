@@ -32,80 +32,80 @@ local t = {
 	failureBodyKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Message.FailedToLeaveGroup.V2" else "Feature.Chat.Message.FailedToLeaveGroup"
 }
 
-function LeaveGroupDialogContainer(p0)
+function LeaveGroupDialogContainer(p1)
 	-- upvalues: cryoModule (ref), t (ref), useState (ref), useTelemetryModule (ref), chatDialogTelemetryLayerModule (ref), useEffectOnMount (ref), chatDetailsTelemetryEventsModule (ref), useDispatch (ref), useCallback (ref), appChatNetworkingModule (ref), useSelector (ref), getFFlagIsSquadEnabled (ref), removedConversationModule (ref), useLocalization (ref), reactModule (ref), leaveGroupDialogModule (ref), responseIndicator (ref)
-	local var11 = cryoModule.Dictionary.join(t, p0)
-	local var12, var13 = useState(true)
-	local var14, var15 = useState(false)
-	local var16, var17 = useState(false)
-	local var18 = useTelemetryModule(chatDialogTelemetryLayerModule.Context)
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2, var3 = useState(true)
+	local var4, var5 = useState(false)
+	local var6, var7 = useState(false)
+	local var8 = useTelemetryModule(chatDialogTelemetryLayerModule.Context)
 	useEffectOnMount(function()
-		-- upvalues: var18 (ref), chatDetailsTelemetryEventsModule (copy)
-		var18.emit(chatDetailsTelemetryEventsModule.LeaveGroupDialogRendered, {})
+		-- upvalues: var8 (ref), chatDetailsTelemetryEventsModule (copy)
+		var8.emit(chatDetailsTelemetryEventsModule.LeaveGroupDialogRendered, {})
 	end)
-	local var19 = useDispatch()
-	local var20 = useCallback(function(p1, p2)
-		-- upvalues: var19 (ref), appChatNetworkingModule (copy)
-		return var19(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p2, p1))
-	end, { var19 })
-	local var21 = useSelector(function(p3)
-		-- upvalues: var11 (ref), getFFlagIsSquadEnabled (copy)
-		local conversationId = p3.ChatAppReducer.Conversations[var11.conversationId] or { title = nil, hasGroupUp = nil }
+	local var9 = useDispatch()
+	local var10 = useCallback(function(p2, p3)
+		-- upvalues: var9 (ref), appChatNetworkingModule (copy)
+		return var9(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p3, p2))
+	end, { var9 })
+	local var11 = useSelector(function(p2)
+		-- upvalues: var1 (ref), getFFlagIsSquadEnabled (copy)
+		local conversationId = p2.ChatAppReducer.Conversations[var1.conversationId] or { title = nil, hasGroupUp = nil }
 		
 		return {
-			localUserId = p3.LocalUserId,
+			localUserId = p2.LocalUserId,
 			conversationTitle = conversationId.title,
 			hasGroupUp = if getFFlagIsSquadEnabled() then conversationId.hasGroupUp else nil
 		}
 	end)
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		LeaveGroupDialog = var12 and reactModule.createElement(leaveGroupDialogModule, cryoModule.Dictionary.join(var11, useLocalization({
-			titleText = var11.titleKey,
-			cancelText = var11.cancelKey,
-			confirmText = var11.confirmKey,
-			bodyText = var11.bodyKey,
-			failureTitleText = var11.failureTitleKey,
+		LeaveGroupDialog = var2 and reactModule.createElement(leaveGroupDialogModule, cryoModule.Dictionary.join(var1, useLocalization({
+			titleText = var1.titleKey,
+			cancelText = var1.cancelKey,
+			confirmText = var1.confirmKey,
+			bodyText = var1.bodyKey,
+			failureTitleText = var1.failureTitleKey,
 			failureBodyText = {
-				var11.failureBodyKey,
-				CONVERSATION_TITLE = var21.conversationTitle
+				var1.failureBodyKey,
+				CONVERSATION_TITLE = var11.conversationTitle
 			},
-			failureButtonText = var11.failureButtonKey
-		}), var21, {
+			failureButtonText = var1.failureButtonKey
+		}), var11, {
 			onActivated = useCallback(function()
-				-- upvalues: var15 (ref), var13 (ref), var18 (ref), chatDetailsTelemetryEventsModule (copy), var11 (ref), var20 (ref), var21 (ref), var19 (ref), removedConversationModule (copy), var17 (ref)
-				var15(true)
-				var13(false)
-				var18.emit(chatDetailsTelemetryEventsModule.LeaveGroupDialogLeaveClicked, {})
+				-- upvalues: var5 (ref), var3 (ref), var8 (ref), chatDetailsTelemetryEventsModule (copy), var1 (ref), var10 (ref), var11 (ref), var9 (ref), removedConversationModule (copy), var7 (ref)
+				var5(true)
+				var3(false)
+				var8.emit(chatDetailsTelemetryEventsModule.LeaveGroupDialogLeaveClicked, {})
 				
-				if var11.conversationId then
-					var20(var21.localUserId, var11.conversationId):andThen(function()
-						-- upvalues: var11 (copy), var19 (copy), removedConversationModule (copy)
-						if var11.isRooted then
-							var19(removedConversationModule(var11.conversationId))
+				if var1.conversationId then
+					var10(var11.localUserId, var1.conversationId):andThen(function()
+						-- upvalues: var1 (copy), var9 (copy), removedConversationModule (copy)
+						if var1.isRooted then
+							var9(removedConversationModule(var1.conversationId))
 						end
-						var11.onModalClose()
-						var11.onLeaveSuccess()
+						var1.onModalClose()
+						var1.onLeaveSuccess()
 					end):catch(function()
-						-- upvalues: var15 (copy), var13 (copy), var17 (copy)
-						var15(false)
-						var13(true)
-						var17(true)
+						-- upvalues: var5 (copy), var3 (copy), var7 (copy)
+						var5(false)
+						var3(true)
+						var7(true)
 					end)
 				end
 				return true
 			end, {
-				var21.localUserId, var21.hasGroupUp, var11.conversationId, var11.isRooted,
-				var11.onModalClose, var11.onLeaveSuccess, var19, var20, var18
+				var11.localUserId, var11.hasGroupUp, var1.conversationId, var1.isRooted,
+				var1.onModalClose, var1.onLeaveSuccess, var9, var10, var8
 			}),
-			displayFailed = var16,
+			displayFailed = var6,
 			onModalClose = useCallback(function(...)
-				-- upvalues: var18 (ref), chatDetailsTelemetryEventsModule (copy), var11 (ref)
-				var18.emit(chatDetailsTelemetryEventsModule.LeaveGroupDialogStayClicked, {})
-				var11.onModalClose(...)
-			end, { var11.onModalClose, var11.conversationId, var18 })
+				-- upvalues: var8 (ref), chatDetailsTelemetryEventsModule (copy), var1 (ref)
+				var8.emit(chatDetailsTelemetryEventsModule.LeaveGroupDialogStayClicked, {})
+				var1.onModalClose(...)
+			end, { var1.onModalClose, var1.conversationId, var8 })
 		})),
-		ResponseIndicator = var14 and reactModule.createElement(responseIndicator, {
+		ResponseIndicator = var4 and reactModule.createElement(responseIndicator, {
 			soakAreaTransparency = 0.8,
 			soakAreaColor3 = Color3.fromRGB(25, 25, 25)
 		})

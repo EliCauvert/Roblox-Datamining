@@ -10,18 +10,18 @@ local t = {}
 local function getAssetIds(value)
 	-- upvalues: constantsModule (ref), assetInfoModule (ref), fFlagAXInspectAndBuyMakeupSupport (ref)
 	local t = {}
-	local var8 = false
+	local var1 = false
 	
 	for i, v in constantsModule.AssetTypeIdStringToHumanoidDescriptionProp do
 		if constantsModule.AssetTypeIdToAccessoryTypeEnum[i] == nil then
-			local var9 = value[v] or ""
-			local var10 = if i ~= tostring(Enum.AssetType.Head.Value) then i == tostring(Enum.AssetType.DynamicHead.Value) else true
+			local var2 = value[v] or ""
+			local var3 = if i ~= tostring(Enum.AssetType.Head.Value) then i == tostring(Enum.AssetType.DynamicHead.Value) else true
 			
-			if not var8 or not var10 then
-				if var10 then
-					var8 = true
+			if not var1 or not var3 then
+				if var3 then
+					var1 = true
 				end
-				for i_3, v_1 in string.split(var9) do
+				for i_3, v_1 in string.split(var2) do
 					if tonumber(v_1) and v_1 ~= "0" then
 						table.insert(t, assetInfoModule.fromHumanoidDescription(v_1))
 					end
@@ -47,17 +47,17 @@ local function getAssetIds(value)
 	return t
 end
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: thunkModule (ref), t (ref), getAssetIds (ref), getAvatarPreviewModule (ref), setEquippedAssetsModule (ref)
-	return thunkModule.new(script.Name, t, function(p1, _)
-		-- upvalues: getAssetIds (copy), value (ref), p0 (ref), getAvatarPreviewModule (copy), setEquippedAssetsModule (copy)
-		local var11 = getAssetIds(value)
+	return thunkModule.new(script.Name, t, function(p2, _)
+		-- upvalues: getAssetIds (copy), value (ref), p1 (ref), getAvatarPreviewModule (copy), setEquippedAssetsModule (copy)
+		local var4 = getAssetIds(value)
 		
-		if p0 then
-			p1:dispatch(setEquippedAssetsModule(var11))
+		if p1 then
+			p2:dispatch(setEquippedAssetsModule(var4))
 			
 			return
 		end
-		p1:dispatch(getAvatarPreviewModule(var11))
+		p2:dispatch(getAvatarPreviewModule(var4))
 	end)
 end

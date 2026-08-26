@@ -5,16 +5,16 @@ local focusNavigationContextModule = require(script.Parent.FocusNavigationContex
 
 return function()
 	-- upvalues: reactModule (ref), focusNavigationContextModule (ref), mockableWarn (ref)
-	local var2 = reactModule.useContext(focusNavigationContextModule)
+	local var1 = reactModule.useContext(focusNavigationContextModule)
 	
-	return reactModule.useCallback(function(p0, p1)
-		-- upvalues: var2 (ref), mockableWarn (copy)
-		if var2 then
-			var2:focusGuiObject(p0, not not p1)
+	return reactModule.useCallback(function(p1, p2)
+		-- upvalues: var1 (ref), mockableWarn (copy)
+		if var1 then
+			var1:focusGuiObject(p1, not not p2)
 			
 			return
 		elseif _G.__DEV__ then
 			mockableWarn("Could not capture focus with no FocusNavigationService.\n\nIntroduce a ReactFocusNavigation.FocusNavigationProvider above this component in the tree and provide it with a value returned from FocusNavigationService.new(...)")
 		end
-	end, { var2 })
+	end, { var1 })
 end

@@ -5,9 +5,9 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local textKeysModule = require(profilePlatform.Common.TextKeys)
 local playerContext = require(parent.UIBlox).App.Indicator.PlayerContext
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), playerContext (ref)
-	local experienceName = p0.experienceName
+	local experienceName = p1.experienceName
 	
 	return reactModule.createElement(playerContext, {
 		text = useLocalization({

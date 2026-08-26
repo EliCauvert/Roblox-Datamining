@@ -18,55 +18,55 @@ VRComfortAutoToggleEntry.validateProps = t.strictInterface({
 })
 VRComfortAutoToggleEntry.defaultProps = { checkedValue = true }
 
-function VRComfortAutoToggleEntry.init(p0, p1)
+function VRComfortAutoToggleEntry.init(p1, p2)
 	-- upvalues: userGameSettingsService (ref), sendAnalyticsModule (ref), constantsModule (ref)
-	p0.derivedValueChangeEvent = userGameSettingsService:GetPropertyChangedSignal(p1.derivedValueKey)
-	p0:setState({
-		checked = userGameSettingsService[p1.derivedValueKey] == p1.checkedValue,
+	p1.derivedValueChangeEvent = userGameSettingsService:GetPropertyChangedSignal(p2.derivedValueKey)
+	p1:setState({
+		checked = userGameSettingsService[p2.derivedValueKey] == p2.checkedValue,
 		vrComfortSetting = userGameSettingsService.VRComfortSetting
 	})
 	
 	function p0.onExternalChange()
-		-- upvalues: userGameSettingsService (copy), p1 (ref), p0 (ref)
-		p0:setState({
-			checked = userGameSettingsService[p1.derivedValueKey] == p1.checkedValue
+		-- upvalues: userGameSettingsService (copy), p2 (ref), p1 (ref)
+		p1:setState({
+			checked = userGameSettingsService[p2.derivedValueKey] == p2.checkedValue
 		})
 	end
 	
 	function p0.onToggled()
-		-- upvalues: p0 (ref), userGameSettingsService (copy), p1 (ref), sendAnalyticsModule (copy), constantsModule (copy)
-		if p0.state.vrComfortSetting == Enum.VRComfortSetting.Custom then
-			if userGameSettingsService[p1.customValueKey] == p1.checkedValue then
-				userGameSettingsService[p1.customValueKey] = not p1.checkedValue
+		-- upvalues: p1 (ref), userGameSettingsService (copy), p2 (ref), sendAnalyticsModule (copy), constantsModule (copy)
+		if p1.state.vrComfortSetting == Enum.VRComfortSetting.Custom then
+			if userGameSettingsService[p2.customValueKey] == p2.checkedValue then
+				userGameSettingsService[p2.customValueKey] = not p2.checkedValue
 			else
-				userGameSettingsService[p1.customValueKey] = p1.checkedValue
+				userGameSettingsService[p2.customValueKey] = p2.checkedValue
 			end
 			sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, nil, {}, true)
 		end
 	end
 end
 
-function VRComfortAutoToggleEntry.render(p2)
+function VRComfortAutoToggleEntry.render(p1)
 	-- upvalues: roact (ref), toggleEntryModule (ref), externalEventConnectionModule (ref), VRComfortSettingPropertyChangedSignal (ref), userGameSettingsService (ref)
-	local props = p2.props
+	local props = p1.props
 	
 	return roact.createFragment({
 		Toggle = roact.createElement(toggleEntryModule, {
-			checked = p2.state.checked,
+			checked = p1.state.checked,
 			labelKey = props.labelKey,
 			LayoutOrder = props.LayoutOrder,
-			onToggled = p2.onToggled,
-			isDisabled = p2.state.vrComfortSetting ~= Enum.VRComfortSetting.Custom
+			onToggled = p1.onToggled,
+			isDisabled = p1.state.vrComfortSetting ~= Enum.VRComfortSetting.Custom
 		}),
 		DerivedValueListener = roact.createElement(externalEventConnectionModule, {
-			event = p2.derivedValueChangeEvent,
-			callback = p2.onExternalChange
+			event = p1.derivedValueChangeEvent,
+			callback = p1.onExternalChange
 		}),
 		VRComfortSettingListener = roact.createElement(externalEventConnectionModule, {
 			event = VRComfortSettingPropertyChangedSignal,
 			callback = function()
-				-- upvalues: p2 (ref), userGameSettingsService (copy)
-				p2:setState({
+				-- upvalues: p1 (ref), userGameSettingsService (copy)
+				p1:setState({
 					vrComfortSetting = userGameSettingsService.VRComfortSetting
 				})
 			end

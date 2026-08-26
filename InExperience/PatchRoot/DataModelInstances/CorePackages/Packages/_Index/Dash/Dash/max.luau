@@ -1,20 +1,20 @@
 ﻿local reduceModule = require(script.Parent.reduce)
 
-local var1 = function(p0, p1)
-	return p1 < p0
+local var1 = function(p1, p2)
+	return p2 < p1
 end
 
-return function(a, b, p2)
+return function(a, b, p1)
 	-- upvalues: var1 (ref), reduceModule (ref)
-	p2 = p2 or var1
+	p1 = p1 or var1
 	
-	return if b then reduceModule(a, function(p5, p6, p7)
-		-- upvalues: b (ref), p2 (ref)
-		local var3 = b(p6, p7)
+	return if b then reduceModule(a, function(p2, p3, p4)
+		-- upvalues: b (ref), p1 (ref)
+		local var2 = b(p3, p4)
 		
-		return if p5 then if p2(var3, p5.value) then { value = var3, original = p6 } else p5 else { value = var3, original = p6 }
-	end, nil).original else reduceModule(a, function(p3, p4)
-		-- upvalues: p2 (ref)
-		return if p3 then if p2(p4, p3) then p4 else p3 else p4
+		return if p2 then if p1(var2, p2.value) then { value = var2, original = p3 } else p2 else { value = var2, original = p3 }
+	end, nil).original else reduceModule(a, function(p2, p3)
+		-- upvalues: p1 (ref)
+		return if p2 then if p1(p3, p2) then p3 else p2 else p3
 	end, nil)
 end

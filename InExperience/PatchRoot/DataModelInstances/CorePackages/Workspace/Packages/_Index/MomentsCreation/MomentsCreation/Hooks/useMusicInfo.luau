@@ -5,24 +5,24 @@ local signalsModule = require(parent.Signals)
 local getMusicStoreModule = require(momentsCreation.Stores.GetMusicStore)
 local _ = require(momentsCreation.Stores.createMusicStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getMusicStoreModule (ref), reactModule (ref), signalsModule (ref)
-	local var4 = getMusicStoreModule()
-	local var5, var6 = reactModule.useState(var4.getInfoMap(false))
+	local var1 = getMusicStoreModule()
+	local var2, var3 = reactModule.useState(var1.getInfoMap(false))
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var6 (ref), var4 (ref)
-		return signalsModule.createEffect(function(p1)
-			-- upvalues: var6 (copy), var4 (copy)
-			var6(var4.getInfoMap(p1))
+		-- upvalues: signalsModule (copy), var3 (ref), var1 (ref)
+		return signalsModule.createEffect(function(p2)
+			-- upvalues: var3 (copy), var1 (copy)
+			var3(var1.getInfoMap(p2))
 		end)
-	end, { var4 })
-	local var7 = if p0 ~= nil then nil else var5[p0]
+	end, { var1 })
+	local var4 = if p1 ~= nil then nil else var2[p1]
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var7 (ref), var4 (ref)
-		if p0 ~= nil and var7 == nil then
-			var4.fetchInfo(p0)
+		-- upvalues: p1 (ref), var4 (ref), var1 (ref)
+		if p1 ~= nil and var4 == nil then
+			var1.fetchInfo(p1)
 		end
-	end, { p0, var7, var4 })
+	end, { p1, var4, var1 })
 	
-	return var7
+	return var4
 end

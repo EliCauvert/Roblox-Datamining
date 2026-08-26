@@ -22,7 +22,7 @@ local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTra
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: coreGuiService (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), chatPlacementContextModule (ref), reactRobloxModule (ref), roduxModule (ref), fFlagAppChatSignalsMessageStoreModule (ref), signalsMessageIngestionMiddlewareModule (ref), fFlagAppChatConversationStoreModule (ref), signalsConversationMiddlewareModule (ref), fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), appChat (ref), chatModerationStatusHydrationMiddlewareModule (ref), fFlagAppChatUnreadMessageCountStoreModule (ref), appChatReducerModule (ref), reactFocusNavigationModule (ref), reactModule (ref), provider (ref), inExperienceAppChatProvidersModule (ref), inExperienceAppChatModule (ref)
 	local appChat_1 = Instance.new("Folder")
 	appChat_1.Name = "AppChat"
@@ -33,7 +33,7 @@ return function(p0, p1, p2)
 			placement = chatPlacementContextModule.Enum.InExperienceDefault
 		})
 	end
-	local var21 = reactRobloxModule.createRoot(appChat_1)
+	local var1 = reactRobloxModule.createRoot(appChat_1)
 	local list = { roduxModule.thunkMiddleware }
 	
 	if fFlagAppChatSignalsMessageStoreModule then
@@ -51,17 +51,17 @@ return function(p0, p1, p2)
 	if fFlagAppChatUnreadMessageCountStoreModule then
 		table.insert(list, require(appChat.Middleware.SignalsUnreadMessageCountMiddleware))
 	end
-	local var23 = roduxModule.Store.new(appChatReducerModule, nil, list)
-	local var24 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
-	var21:render((function()
-		-- upvalues: reactModule (copy), reactFocusNavigationModule (copy), var24 (ref), provider (copy), inExperienceAppChatProvidersModule (copy), var23 (ref), p2 (ref), p1 (ref), p0 (ref), inExperienceAppChatModule (copy)
-		return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var24 }, {
+	local var2 = roduxModule.Store.new(appChatReducerModule, nil, list)
+	local var3 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+	var1:render((function()
+		-- upvalues: reactModule (copy), reactFocusNavigationModule (copy), var3 (ref), provider (copy), inExperienceAppChatProvidersModule (copy), var2 (ref), p3 (ref), p2 (ref), p1 (ref), inExperienceAppChatModule (copy)
+		return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var3 }, {
 			FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
 				InExperienceAppChatProviders = reactModule.createElement(inExperienceAppChatProvidersModule, {
-					store = var23,
-					updateAppChatUnreadMessagesCount = p2,
-					parentContainerContext = p1,
-					apolloClient = p0
+					store = var2,
+					updateAppChatUnreadMessagesCount = p3,
+					parentContainerContext = p2,
+					apolloClient = p1
 				}, {
 					appChat = reactModule.createElement(inExperienceAppChatModule)
 				})
@@ -69,5 +69,5 @@ return function(p0, p1, p2)
 		})
 	end)())
 	
-	return var21
+	return var1
 end

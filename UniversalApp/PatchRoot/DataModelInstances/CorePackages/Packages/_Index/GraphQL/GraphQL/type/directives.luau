@@ -22,9 +22,9 @@ local argsToArgsConfig = definitionModule.argsToArgsConfig
 local graphQLNonNull = definitionModule.GraphQLNonNull
 local t = nil
 
-function isDirective(p0)
+function isDirective(p1)
 	-- upvalues: instanceOfModule (ref), t (write)
-	return instanceOfModule(p0, t)
+	return instanceOfModule(p1, t)
 end
 
 function assertDirective(p1)
@@ -38,32 +38,32 @@ end
 t = {}
 t.__index = t
 
-function t.new(p2)
+function t.new(p1)
 	-- upvalues: toObjMap (ref), devAssert (ref), array (ref), isObjectLike (ref), instanceOfModule (ref), map (ref), coerceToMap (ref), t (write)
 	local t_1 = {
-		name = p2.name,
-		description = p2.description,
-		locations = p2.locations,
-		isRepeatable = if p2.isRepeatable then true else false,
-		extensions = p2.extensions and toObjMap(p2.extensions),
-		astNode = p2.astNode
+		name = p1.name,
+		description = p1.description,
+		locations = p1.locations,
+		isRepeatable = if p1.isRepeatable then true else false,
+		extensions = p1.extensions and toObjMap(p1.extensions),
+		astNode = p1.astNode
 	}
-	devAssert(p2.name, "Directive must be named.")
-	devAssert(array.isArray(p2.locations), ("@%s locations must be an Array."):format(p2.name))
-	local var11 = if p2.args then p2.args else {}
-	devAssert(isObjectLike(var11) and (not (array.isArray(var11) and next(var11) ~= nil) or instanceOfModule(var11, map)), ("@%s args must be an object with argument names as keys."):format(p2.name))
-	t_1.args = array.map(coerceToMap(var11):entries(), function(p3)
+	devAssert(p1.name, "Directive must be named.")
+	devAssert(array.isArray(p1.locations), ("@%s locations must be an Array."):format(p1.name))
+	local var1 = if p1.args then p1.args else {}
+	devAssert(isObjectLike(var1) and (not (array.isArray(var1) and next(var1) ~= nil) or instanceOfModule(var1, map)), ("@%s args must be an object with argument names as keys."):format(p1.name))
+	t_1.args = array.map(coerceToMap(var1):entries(), function(p2)
 		-- upvalues: toObjMap (copy)
-		local var12 = p3[2]
+		local var2 = p2[2]
 		
 		return {
-			name = p3[1],
-			description = var12.description,
-			type = var12.type,
-			defaultValue = var12.defaultValue,
-			deprecationReason = var12.deprecationReason,
-			extensions = var12.extensions and toObjMap(var12.extensions),
-			astNode = var12.astNode
+			name = p2[1],
+			description = var2.description,
+			type = var2.type,
+			defaultValue = var2.defaultValue,
+			deprecationReason = var2.deprecationReason,
+			extensions = var2.extensions and toObjMap(var2.extensions),
+			astNode = var2.astNode
 		}
 	end)
 	
@@ -95,7 +95,7 @@ function t:toJSON()
 	return self:toString()
 end
 
-local var5 = t.new({
+local var1 = t.new({
 	name = "include",
 	description = "Directs the executor to include this field or fragment only when the `if` argument is true.",
 	locations = {
@@ -113,7 +113,7 @@ local var5 = t.new({
 		}
 	})
 })
-local var6 = t.new({
+local var2 = t.new({
 	name = "skip",
 	description = "Directs the executor to skip this field or fragment when the `if` argument is true.",
 	locations = {
@@ -131,7 +131,7 @@ local var6 = t.new({
 		}
 	})
 })
-local var7 = t.new({
+local var3 = t.new({
 	name = "deprecated",
 	description = "Marks an element of a GraphQL schema as no longer supported.",
 	locations = {
@@ -151,7 +151,7 @@ local var7 = t.new({
 		}
 	})
 })
-local var8 = t.new({
+local var4 = t.new({
 	name = "specifiedBy",
 	description = "Exposes a URL that specifies the behaviour of this scalar.",
 	locations = { directiveLocation.SCALAR },
@@ -165,23 +165,23 @@ local var8 = t.new({
 		}
 	})
 })
-local var9 = object.freeze({ var5, var6, var7, var8 })
+local var5 = object.freeze({ var1, var2, var3, var4 })
 
 return {
 	DEFAULT_DEPRECATION_REASON = "No longer supported",
 	isDirective = isDirective,
 	assertDirective = assertDirective,
 	GraphQLDirective = t,
-	GraphQLIncludeDirective = var5,
-	GraphQLSkipDirective = var6,
-	GraphQLDeprecatedDirective = var7,
-	GraphQLSpecifiedByDirective = var8,
-	specifiedDirectives = var9,
-	isSpecifiedDirective = function(p4)
-		-- upvalues: array (ref), var9 (ref)
-		return array.some(var9, function(p5)
-			-- upvalues: p4 (ref)
-			return p5.name == p4.name
+	GraphQLIncludeDirective = var1,
+	GraphQLSkipDirective = var2,
+	GraphQLDeprecatedDirective = var3,
+	GraphQLSpecifiedByDirective = var4,
+	specifiedDirectives = var5,
+	isSpecifiedDirective = function(p1)
+		-- upvalues: array (ref), var5 (ref)
+		return array.some(var5, function(p2)
+			-- upvalues: p1 (ref)
+			return p2.name == p1.name
 		end)
 	end
 }

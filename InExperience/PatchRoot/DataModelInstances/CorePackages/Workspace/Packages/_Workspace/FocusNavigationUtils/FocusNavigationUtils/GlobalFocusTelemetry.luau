@@ -24,11 +24,11 @@ local t_2 = {
 }
 
 return {
-	sendAutoFocusFailureCounter = function(p0)
+	sendAutoFocusFailureCounter = function(p1)
 		-- upvalues: telemetryService (ref), t (ref)
 		telemetryService:LogCounter(t, {
 			customFields = {
-				FailureReason = if #p0 == 0 then "NoFocusTargets" else "FocusingTargetFailed"
+				FailureReason = if #p1 == 0 then "NoFocusTargets" else "FocusingTargetFailed"
 			}
 		})
 	end,

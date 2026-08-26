@@ -6,69 +6,69 @@ local reactModule = require(parent.React)
 local constantsModule = require(avatarExperienceCommon.Constants)
 local t = { dampingRatio = 1, frequency = 3.5 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), otterModule (ref), constantsModule (ref), t (ref), runService (ref)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useRef(0)
+	local var1 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(0)
 	
-	if p0.defaultUseProps then
-		if p0.defaultUseProps.buttonRefs ~= nil then
-			if p0.defaultUseProps.buttonWidth ~= nil then
+	if p1.defaultUseProps then
+		if p1.defaultUseProps.buttonRefs ~= nil then
+			if p1.defaultUseProps.buttonWidth ~= nil then
 				error("Cannot set both buttonWidth and buttonRefs")
 			end
-			if p0.defaultUseProps.numButtons ~= nil then
+			if p1.defaultUseProps.numButtons ~= nil then
 				error("Cannot set both numButtons and buttonRefs")
 			end
 		end
-		if p0.defaultUseProps.buttonWidth ~= nil and p0.defaultUseProps.numButtons == nil then
+		if p1.defaultUseProps.buttonWidth ~= nil and p1.defaultUseProps.numButtons == nil then
 			error("If setting buttonWidth must also set numButtons")
 		end
-		if p0.defaultUseProps.buttonWidth == nil and p0.defaultUseProps.numButtons ~= nil then
+		if p1.defaultUseProps.buttonWidth == nil and p1.defaultUseProps.numButtons ~= nil then
 			error("If setting numButtons must also set buttonWidth")
 		end
-		if p0.defaultUseProps.buttonRefs == nil and p0.defaultUseProps.buttonWidth == nil and p0.defaultUseProps.numButtons == nil then
+		if p1.defaultUseProps.buttonRefs == nil and p1.defaultUseProps.buttonWidth == nil and p1.defaultUseProps.numButtons == nil then
 			error("Must set either buttonRefs or (buttonWidth and numButtons)")
 		end
 	end
 	local function disconnectHoldConn()
-		-- upvalues: var6 (ref)
-		if var6.current then
-			var6.current:Disconnect()
-			var6.current = nil
+		-- upvalues: var1 (ref)
+		if var1.current then
+			var1.current:Disconnect()
+			var1.current = nil
 		end
 	end
 	
-	local function _(p1)
-		-- upvalues: p0 (ref)
-		return p0.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new(p1, 0)
+	local function _(p2)
+		-- upvalues: p1 (ref)
+		return p1.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new(p2, 0)
 	end
 	
 	local function setMotor(value)
-		-- upvalues: var7 (ref), otterModule (copy), p0 (ref)
-		if var7.current then
-			var7.current:destroy()
+		-- upvalues: var2 (ref), otterModule (copy), p1 (ref)
+		if var2.current then
+			var2.current:destroy()
 		end
-		var7.current = otterModule.createSingleMotor(value)
+		var2.current = otterModule.createSingleMotor(value)
 		
-		if var7.current then
-			var7.current:onStep(function(p2)
-				-- upvalues: p0 (copy)
-				p0.defaultUseProps.updateCanvasPosition(Vector2.new(p2, 0))
+		if var2.current then
+			var2.current:onStep(function(p2)
+				-- upvalues: p1 (copy)
+				p1.defaultUseProps.updateCanvasPosition(Vector2.new(p2, 0))
 			end)
-			var7.current:onComplete(function(p3)
-				-- upvalues: p0 (copy)
-				p0.defaultUseProps.updateCanvasPosition(Vector2.new(p3, 0))
+			var2.current:onComplete(function(p2)
+				-- upvalues: p1 (copy)
+				p1.defaultUseProps.updateCanvasPosition(Vector2.new(p2, 0))
 			end)
 		end
 	end
 	
-	local function getScrollToLocation(p4)
-		-- upvalues: p0 (ref), constantsModule (copy)
+	local function getScrollToLocation(p2)
+		-- upvalues: p1 (ref), constantsModule (copy)
 		local t = {}
-		local buttonRefs = p0.defaultUseProps.buttonRefs
-		local buttonWidth = p0.defaultUseProps.buttonWidth
-		local numButtons = p0.defaultUseProps.numButtons
+		local buttonRefs = p1.defaultUseProps.buttonRefs
+		local buttonWidth = p1.defaultUseProps.buttonWidth
+		local numButtons = p1.defaultUseProps.numButtons
 		
 		if buttonWidth and numButtons then
 			t = table.create(numButtons, buttonWidth)
@@ -84,130 +84,130 @@ return function(p0)
 				end
 			end
 		end
-		local current = p0.defaultUseProps.scrollingFrameRef.current
-		local buttonPadding = p0.defaultUseProps.buttonPadding
+		local current = p1.defaultUseProps.scrollingFrameRef.current
+		local buttonPadding = p1.defaultUseProps.buttonPadding
 		local _ = 0
 		
-		if p4 == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then
-			local var19 = 0
+		if p2 == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then
+			local var4 = 0
 			local _ = 0
 			
 			for i, v in t do
-				if var19 + v + buttonPadding > current.CanvasPosition.X then break end
-				var19 = var19 + v + buttonPadding
+				if var4 + v + buttonPadding > current.CanvasPosition.X then break end
+				var4 = var4 + v + buttonPadding
 			end
-			local var20 = var19
-			local var21 = 0
+			local var5 = var4
+			local var6 = 0
 			
 			for i_1, v_1 in t do
-				if var21 + v_1 + buttonPadding > current.AbsoluteSize.X * 0.8 then break end
-				var21 = var21 + v_1 + buttonPadding
-				var20 = var20 - v_1 - buttonPadding
+				if var6 + v_1 + buttonPadding > current.AbsoluteSize.X * 0.8 then break end
+				var6 = var6 + v_1 + buttonPadding
+				var5 = var5 - v_1 - buttonPadding
 			end
-			return math.max(0, var20)
+			return math.max(0, var5)
 		else
-			local var22 = 0
+			local var7 = 0
 			local _ = 0
 			
 			for i, v in t do
-				if var22 + v + buttonPadding > current.CanvasPosition.X then break end
-				var22 = var22 + v + buttonPadding
+				if var7 + v + buttonPadding > current.CanvasPosition.X then break end
+				var7 = var7 + v + buttonPadding
 			end
-			local var23 = var22
-			local var24 = 0
+			local var8 = var7
+			local var9 = 0
 			
 			for i_1, v_1 in t do
-				if var24 + v_1 + buttonPadding > current.AbsoluteSize.X * 0.8 then break end
-				var24 = var24 + v_1 + buttonPadding
-				var23 = var23 + v_1 + buttonPadding
+				if var9 + v_1 + buttonPadding > current.AbsoluteSize.X * 0.8 then break end
+				var9 = var9 + v_1 + buttonPadding
+				var8 = var8 + v_1 + buttonPadding
 			end
-			return var23
+			return var8
 		end
 	end
 	
-	local function getGoal(p5)
+	local function getGoal(p3)
 		-- upvalues: otterModule (copy), getScrollToLocation (ref), t (copy)
-		return otterModule.spring(getScrollToLocation(p5), t)
+		return otterModule.spring(getScrollToLocation(p3), t)
 	end
 	
-	local function onPressHoldInputBegan(p6, p7)
-		-- upvalues: var8 (ref), var6 (ref), runService (copy), constantsModule (copy), p0 (ref)
-		if p6.UserInputState ~= Enum.UserInputState.Begin then return end
-		var8.current = tick()
+	local function onPressHoldInputBegan(p3, p4)
+		-- upvalues: var3 (ref), var1 (ref), runService (copy), constantsModule (copy), p1 (ref)
+		if p3.UserInputState ~= Enum.UserInputState.Begin then return end
+		var3.current = tick()
 		
-		if var6.current then
-			var6.current:Disconnect()
-			var6.current = nil
+		if var1.current then
+			var1.current:Disconnect()
+			var1.current = nil
 		end
-		var6.current = runService.RenderStepped:Connect(function(p8)
-			-- upvalues: var8 (copy), constantsModule (copy), p7 (ref), p0 (copy)
-			p0.defaultUseProps.updateCanvasPosition(p0.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new((if p7 == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then -1 else 1) * 500 * p8 * (tick() - var8.current) ^ 2, 0))
+		var1.current = runService.RenderStepped:Connect(function(p5)
+			-- upvalues: var3 (copy), constantsModule (copy), p4 (ref), p1 (copy)
+			p1.defaultUseProps.updateCanvasPosition(p1.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new((if p4 == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then -1 else 1) * 500 * p5 * (tick() - var3.current) ^ 2, 0))
 		end)
 	end
 	
-	local function onPressHoldInputEnded(p9, p10)
-		-- upvalues: p0 (ref), var8 (ref), var7 (ref), setMotor (ref), getGoal (ref), otterModule (copy), var6 (ref)
-		if p9.UserInputState ~= Enum.UserInputState.End then return end
-		local current = p0.defaultUseProps.scrollingFrameRef.current
+	local function onPressHoldInputEnded(p3, p4)
+		-- upvalues: p1 (ref), var3 (ref), var2 (ref), setMotor (ref), getGoal (ref), otterModule (copy), var1 (ref)
+		if p3.UserInputState ~= Enum.UserInputState.End then return end
+		local current = p1.defaultUseProps.scrollingFrameRef.current
 		
-		if tick() - var8.current <= 0.5 then
-			if var7.current then
-				var7.current:destroy()
+		if tick() - var3.current <= 0.5 then
+			if var2.current then
+				var2.current:destroy()
 			end
 			setMotor(current.CanvasPosition.X)
 			
-			if var7.current then
-				var7.current:setGoal(getGoal(p10))
+			if var2.current then
+				var2.current:setGoal(getGoal(p4))
 			end
-		elseif var7.current then
-			var7.current:setGoal(otterModule.instant(current.CanvasPosition.X))
+		elseif var2.current then
+			var2.current:setGoal(otterModule.instant(current.CanvasPosition.X))
 		end
-		if var6.current then
-			var6.current:Disconnect()
-			var6.current = nil
+		if var1.current then
+			var1.current:Disconnect()
+			var1.current = nil
 		end
 	end
 	
-	local function handleInputBegan(_, p11)
-		-- upvalues: p0 (ref), onPressHoldInputBegan (ref)
-		local onPressHoldInputBegan_1 = p0.onPressHoldInputBegan or onPressHoldInputBegan
+	local function handleInputBegan(_, p3)
+		-- upvalues: p1 (ref), onPressHoldInputBegan (ref)
+		local onPressHoldInputBegan_1 = p1.onPressHoldInputBegan or onPressHoldInputBegan
 		
 		if onPressHoldInputBegan_1 then
-			onPressHoldInputBegan_1(p11, p0.navDirection or "")
+			onPressHoldInputBegan_1(p3, p1.navDirection or "")
 		end
 	end
 	
-	local function handleInputEnded(_, p12)
-		-- upvalues: p0 (ref), onPressHoldInputEnded (ref)
-		local onPressHoldInputEnded_1 = p0.onPressHoldInputEnded or onPressHoldInputEnded
+	local function handleInputEnded(_, p3)
+		-- upvalues: p1 (ref), onPressHoldInputEnded (ref)
+		local onPressHoldInputEnded_1 = p1.onPressHoldInputEnded or onPressHoldInputEnded
 		
 		if onPressHoldInputEnded_1 then
-			onPressHoldInputEnded_1(p12, p0.navDirection or "")
+			onPressHoldInputEnded_1(p3, p1.navDirection or "")
 		end
 	end
 	
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), setMotor (ref), var6 (ref), var7 (ref)
-		if p0.defaultUseProps then
+		-- upvalues: p1 (ref), setMotor (ref), var1 (ref), var2 (ref)
+		if p1.defaultUseProps then
 			setMotor(0)
 		end
 		return function()
-			-- upvalues: var6 (copy), var7 (copy)
-			if var6.current then
-				var6.current:Disconnect()
-				var6.current = nil
+			-- upvalues: var1 (copy), var2 (copy)
+			if var1.current then
+				var1.current:Disconnect()
+				var1.current = nil
 			end
-			if var7.current then
-				var7.current:destroy()
-				var7.current = nil
+			if var2.current then
+				var2.current:destroy()
+				var2.current = nil
 			end
 		end
 	end, {})
 	
 	return {
-		holdConnRef = var6,
-		motorRef = var7,
-		timeOfInputBeganRef = var8,
+		holdConnRef = var1,
+		motorRef = var2,
+		timeOfInputBeganRef = var3,
 		handleInputBegan = handleInputBegan,
 		handleInputEnded = handleInputEnded,
 		disconnectHoldConn = disconnectHoldConn

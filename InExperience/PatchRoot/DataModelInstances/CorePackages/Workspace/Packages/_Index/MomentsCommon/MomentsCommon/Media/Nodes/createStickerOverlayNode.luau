@@ -11,17 +11,17 @@ local _ = require(momentsCommon.Media.mediaNodeRegistry)
 local overlayScaleModule = require(momentsCommon.Media.overlayScale)
 local getFFlagMomentsStickerOverlayMediaRectModule = require(momentsCommon.Flags.GetFFlagMomentsStickerOverlayMediaRect)
 local fFlagMomentsOverlayContainerScaleFallbackModule = require(momentsCommon.Flags.FFlagMomentsOverlayContainerScaleFallback)
-local var8 = signalsModule.createSignal(Enum.ScaleType.Crop)
+local var1 = signalsModule.createSignal(Enum.ScaleType.Crop)
 
-local function StickerOverlayLayer(p0)
-	-- upvalues: reactModule (ref), signalsModule (ref), useSignalState (ref), var8 (ref), fFlagMomentsOverlayContainerScaleFallbackModule (ref), overlayDisplayModule (ref), stickerOverlayModule (ref)
-	local getResolution = p0.getResolution
-	local var11 = useSignalState(p0.getItemSize)
-	local var12 = useSignalState(reactModule.useMemo(function()
+local function StickerOverlayLayer(p1)
+	-- upvalues: reactModule (ref), signalsModule (ref), useSignalState (ref), var1 (ref), fFlagMomentsOverlayContainerScaleFallbackModule (ref), overlayDisplayModule (ref), stickerOverlayModule (ref)
+	local getResolution = p1.getResolution
+	local var2 = useSignalState(p1.getItemSize)
+	local var3 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), getResolution (ref)
-		return signalsModule.createComputed(function(p1)
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: getResolution (copy)
-			return getResolution(p1)
+			return getResolution(p2)
 		end)
 	end, { getResolution }))
 	
@@ -29,47 +29,47 @@ local function StickerOverlayLayer(p0)
 		draggable = false,
 		editable = false,
 		overlayComponent = stickerOverlayModule,
-		itemResolution = if fFlagMomentsOverlayContainerScaleFallbackModule and var12 == nil then var11 else var12,
-		itemSize = var11,
-		scaleType = useSignalState(p0.getScaleType or var8),
-		overlayEdits = { p0.overlay }
+		itemResolution = if fFlagMomentsOverlayContainerScaleFallbackModule and var3 == nil then var2 else var3,
+		itemSize = var2,
+		scaleType = useSignalState(p1.getScaleType or var1),
+		overlayEdits = { p1.overlay }
 	})
 end
 
-local function LegacyStickerOverlayLayer(p2)
+local function LegacyStickerOverlayLayer(p1)
 	-- upvalues: useSignalState (ref), overlayScaleModule (ref), reactModule (ref), stickerOverlayModule (ref)
 	return reactModule.createElement(stickerOverlayModule, {
 		draggable = false,
 		editable = false,
-		additionalScale = overlayScaleModule(1, useSignalState(p2.getItemSize).X),
-		overlayEdit = p2.overlay
+		additionalScale = overlayScaleModule(1, useSignalState(p1.getItemSize).X),
+		overlayEdit = p1.overlay
 	})
 end
 
 return {
 	kind = "sticker",
-	create = function(p3, _)
+	create = function(p1, _)
 		-- upvalues: getFFlagMomentsStickerOverlayMediaRectModule (ref), reactModule (ref), LegacyStickerOverlayLayer (ref), StickerOverlayLayer (ref)
-		local overlay = p3.overlay
+		local overlay = p1.overlay
 		assert(overlay ~= nil, "createStickerOverlayNode: spec.overlay (a StickerOverlayEdit) is required")
 		
 		return {
 			kind = "sticker",
 			usesDecoder = false,
-			id = p3.id,
+			id = p1.id,
 			assets = function()
 				return {}
 			end,
 			download = function() end,
-			zIndex = p3.zIndex or overlay.zIndex,
-			render = function(p4)
+			zIndex = p1.zIndex or overlay.zIndex,
+			render = function(p2)
 				-- upvalues: getFFlagMomentsStickerOverlayMediaRectModule (copy), reactModule (copy), LegacyStickerOverlayLayer (copy), overlay (ref), StickerOverlayLayer (copy)
 				return if getFFlagMomentsStickerOverlayMediaRectModule() then reactModule.createElement(StickerOverlayLayer, {
 					overlay = overlay,
-					getItemSize = p4.getItemSize,
-					getResolution = p4.getResolution,
-					getScaleType = p4.getScaleType
-				}) else reactModule.createElement(LegacyStickerOverlayLayer, { overlay = overlay, getItemSize = p4.getItemSize })
+					getItemSize = p2.getItemSize,
+					getResolution = p2.getResolution,
+					getScaleType = p2.getScaleType
+				}) else reactModule.createElement(LegacyStickerOverlayLayer, { overlay = overlay, getItemSize = p2.getItemSize })
 			end,
 			dispose = function() end
 		}

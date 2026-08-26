@@ -4,22 +4,22 @@ local fetchUniverseCreateModule = require(script.Parent.fetchUniverseCreate)
 local _ = require(script.Parent.UniverseCreateStoreTypes)
 local universeSearchModule = require(dataHydration.UniverseSearch)
 
-return function(p0)
+return function(p1)
 	-- upvalues: universeSearchModule (ref), fetchUniverseCreateModule (ref)
-	p0 = p0 or {}
-	local getSearchStore = p0.getSearchStore or function()
+	p1 = p1 or {}
+	local getSearchStore = p1.getSearchStore or function()
 		-- upvalues: universeSearchModule (copy)
 		return universeSearchModule.getUniverseSearchStore()
 	end
 	
 	return {
-		createUniverse = function(p1)
-			-- upvalues: fetchUniverseCreateModule (copy), p0 (ref), getSearchStore (ref)
-			return fetchUniverseCreateModule(p1, { network = p0.network, baseUrl = p0.baseUrl }):andThen(function(p2)
+		createUniverse = function(p2)
+			-- upvalues: fetchUniverseCreateModule (copy), p1 (ref), getSearchStore (ref)
+			return fetchUniverseCreateModule(p2, { network = p1.network, baseUrl = p1.baseUrl }):andThen(function(p3)
 				-- upvalues: getSearchStore (copy)
 				getSearchStore().invalidateAll()
 				
-				return p2
+				return p3
 			end)
 		end
 	}

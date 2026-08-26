@@ -6,55 +6,55 @@ local t = {
 	affordance = foundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getHoverTransparency(p0)
-	return if p0 then 0 else 0.2
+local function getHoverTransparency(p1)
+	return if p1 then 0 else 0.2
 end
 
 local function useHoverBinding()
 	-- upvalues: reactModule (ref), foundationModule (ref)
-	local var5, var6 = reactModule.useBinding(false)
+	local var1, var2 = reactModule.useBinding(false)
 	
-	return var5, reactModule.useCallback(function(p1)
-		-- upvalues: foundationModule (copy), var6 (ref)
+	return var1, reactModule.useCallback(function(p1)
+		-- upvalues: foundationModule (copy), var2 (ref)
 		if p1 == foundationModule.Enums.ControlState.Default then
-			var6(false)
+			var2(false)
 			
 			return
 		elseif p1 == foundationModule.Enums.ControlState.Hover then
-			var6(true)
+			var2(true)
 		end
 	end, {})
 end
 
-return reactModule.forwardRef(function(p2, p3)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokens (ref), useHoverBinding (ref), reactModule (ref), foundationModule (ref), t (ref), getHoverTransparency (ref)
-	local var7 = useTokens()
-	local var8, var9 = useHoverBinding()
+	local var1 = useTokens()
+	local var2, var3 = useHoverBinding()
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "radius-circle clip auto-xy",
-		ref = p3,
-		backgroundStyle = var7.Color.OverMedia.OverMedia_0,
-		LayoutOrder = p2.LayoutOrder,
+		ref = p2,
+		backgroundStyle = var1.Color.OverMedia.OverMedia_0,
+		LayoutOrder = p1.LayoutOrder,
 		stateLayer = t,
-		onStateChanged = if p2.disabled then nil else var9,
-		onActivated = p2.onActivated,
-		disabled = p2.disabled,
-		selection = { Selectable = p2.Selectable or false }
+		onStateChanged = if p1.disabled then nil else var3,
+		onActivated = p1.onActivated,
+		disabled = p1.disabled,
+		selection = { Selectable = p1.Selectable or false }
 	}, {
 		HoverHandler = reactModule.createElement(foundationModule.View, {
 			tag = "padding-small radius-circle clip auto-xy",
-			Size = if p2.size then UDim2.new(p2.size, p2.size) else UDim2.fromScale(1, 1),
-			GroupTransparency = p2.GroupTransparencyOverwrite or var8:map(getHoverTransparency),
-			backgroundStyle = var8:map(reactModule.useCallback(function(p4)
-				-- upvalues: var7 (ref), p2 (ref)
-				return if p4 then var7.Color.Shift.Shift_200 elseif p2.isActive then var7.Color.Shift.Shift_400 else {
+			Size = if p1.size then UDim2.new(p1.size, p1.size) else UDim2.fromScale(1, 1),
+			GroupTransparency = p1.GroupTransparencyOverwrite or var2:map(getHoverTransparency),
+			backgroundStyle = var2:map(reactModule.useCallback(function(p3)
+				-- upvalues: var1 (ref), p1 (ref)
+				return if p3 then var1.Color.Shift.Shift_200 elseif p1.isActive then var1.Color.Shift.Shift_400 else {
 					Transparency = 1,
-					Color3 = var7.Color.Shift.Shift_200.Color3
+					Color3 = var1.Color.Shift.Shift_200.Color3
 				}
-			end, { p2.isActive, var7 }))
+			end, { p1.isActive, var1 }))
 		}, {
-			Children = reactModule.createElement(reactModule.Fragment, nil, p2.children)
+			Children = reactModule.createElement(reactModule.Fragment, nil, p1.children)
 		})
 	})
 end)

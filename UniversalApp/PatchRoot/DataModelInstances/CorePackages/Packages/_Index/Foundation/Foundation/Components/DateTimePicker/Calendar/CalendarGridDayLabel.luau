@@ -40,10 +40,10 @@ return function(p1)
 		onActivated = if p1.isSelectable then p1.onActivated else nil,
 		onStateChanged = if p1.isSelectable then reactModule.useMemo(function()
 			-- upvalues: p1 (ref), controlStateModule (copy)
-			return if p1.onHoverEnter == nil then nil else function(p1)
-				-- upvalues: controlStateModule (copy), p1 (copy)
-				if p1 == controlStateModule.Hover then
-					p1.onHoverEnter()
+			return if p1.onHoverEnter == nil then nil else function(p2)
+				-- upvalues: controlStateModule (copy), p2 (copy)
+				if p2 == controlStateModule.Hover then
+					p2.onHoverEnter()
 				end
 			end
 		end, { p1.onHoverEnter }) else nil,

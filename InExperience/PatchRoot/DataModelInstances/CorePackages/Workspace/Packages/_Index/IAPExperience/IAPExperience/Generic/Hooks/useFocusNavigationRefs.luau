@@ -7,84 +7,84 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local useDefaultFocusBehavior = require(parent.ReactFocusNavigation).useDefaultFocusBehavior
 
-local function _(p0, p1)
-	return function(p2)
-		-- upvalues: p0 (ref), p1 (ref)
-		if type(p0) == "function" then
-			p0(p2)
-		elseif p0 ~= nil then
-			p0.current = p2
-		end
+local function _(p1, p2)
+	return function(p3)
+		-- upvalues: p1 (ref), p2 (ref)
 		if type(p1) == "function" then
-			p1(p2)
+			p1(p3)
+		elseif p1 ~= nil then
+			p1.current = p3
+		end
+		if type(p2) == "function" then
+			p2(p3)
 			
 			return
-		elseif p1 ~= nil then
-			p1.current = p2
+		elseif p2 ~= nil then
+			p2.current = p3
 		end
 	end
 end
 
-return function(p3, p4)
+return function(p1, p2)
 	-- upvalues: useDefaultFocusBehavior (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactModule (ref)
-	local var3, var4 = useDefaultFocusBehavior()
-	local var5 = useFocusRoot({
+	local var1, var2 = useDefaultFocusBehavior()
+	local var3 = useFocusRoot({
 		isAutoFocusRoot = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay,
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(p3) }
+			[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(p1) }
 		}
 	})
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var4 (ref)
-		return function(p5)
-			-- upvalues: var5 (ref), var4 (ref)
-			if type(var5) == "function" then
-				var5(p5)
-			elseif var5 ~= nil then
-				var5.current = p5
-			end
-			if type(var4) == "function" then
-				var4(p5)
-				
-				return
-			elseif var4 ~= nil then
-				var4.current = p5
-			end
-		end
-	end, { var5, var4 })
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), var3 (ref)
-		return function(p6)
-			-- upvalues: var7 (ref), var3 (ref)
-			if type(var7) == "function" then
-				var7(p6)
-			elseif var7 ~= nil then
-				var7.current = p6
-			end
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), var2 (ref)
+		return function(p3)
+			-- upvalues: var3 (ref), var2 (ref)
 			if type(var3) == "function" then
-				var3(p6)
+				var3(p3)
+			elseif var3 ~= nil then
+				var3.current = p3
+			end
+			if type(var2) == "function" then
+				var2(p3)
 				
 				return
-			elseif var3 ~= nil then
-				var3.current = p6
+			elseif var2 ~= nil then
+				var2.current = p3
 			end
 		end
-	end, { var3 })
-	local var9 = reactModule.useRef(false)
+	end, { var3, var2 })
+	local var5 = reactModule.useRef(nil)
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref), var1 (ref)
+		return function(p3)
+			-- upvalues: var5 (ref), var1 (ref)
+			if type(var5) == "function" then
+				var5(p3)
+			elseif var5 ~= nil then
+				var5.current = p3
+			end
+			if type(var1) == "function" then
+				var1(p3)
+				
+				return
+			elseif var1 ~= nil then
+				var1.current = p3
+			end
+		end
+	end, { var1 })
+	local var7 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var9 (ref), p4 (ref)
-		local current = var7.current
+		-- upvalues: var5 (ref), var7 (ref), p2 (ref)
+		local current = var5.current
 		
-		if current and not var9.current then
-			var9.current = true
+		if current and not var7.current then
+			var7.current = true
 			
-			if p4 then
-				p4(current)
+			if p2 then
+				p2(current)
 			end
 		end
-	end, { var7.current, p4 })
+	end, { var5.current, p2 })
 	
-	return var6, var8
+	return var4, var6
 end

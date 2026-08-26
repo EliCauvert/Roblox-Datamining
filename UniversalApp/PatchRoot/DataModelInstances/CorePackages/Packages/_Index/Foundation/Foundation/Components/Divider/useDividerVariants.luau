@@ -6,16 +6,16 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: orientationModule (ref), dividerVariantModule (ref)
 	return {
 		common = {
 			container = { tag = "col" },
-			stroke = { backgroundStyle = p0.Color.Stroke.Default },
+			stroke = { backgroundStyle = p1.Color.Stroke.Default },
 			line = {
 				tag = "size-full-200",
-				position = UDim2.fromOffset(0, p0.Size.Size_50),
-				backgroundStyle = p0.Color.Common.HeavyDivider
+				position = UDim2.fromOffset(0, p1.Size.Size_50),
+				backgroundStyle = p1.Color.Common.HeavyDivider
 			}
 		},
 		padding = {
@@ -26,11 +26,11 @@ local function variantsFactory(p0)
 		orientation = {
 			[orientationModule.Horizontal] = {
 				container = { tag = "size-full-0 auto-y" },
-				stroke = { Size = UDim2.new(1, 0, 0, p0.Stroke.Standard) }
+				stroke = { Size = UDim2.new(1, 0, 0, p1.Stroke.Standard) }
 			},
 			[orientationModule.Vertical] = {
 				container = { tag = "size-0-full auto-x" },
-				stroke = { Size = UDim2.new(0, p0.Stroke.Standard, 1, 0) }
+				stroke = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			}
 		}
 	}

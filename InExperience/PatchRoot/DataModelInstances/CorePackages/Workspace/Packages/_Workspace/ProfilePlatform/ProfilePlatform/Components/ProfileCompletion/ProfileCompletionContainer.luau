@@ -12,41 +12,41 @@ local useProfileCompletionDataModule = require(profilePlatform.Hooks.useProfileC
 local enumsModule = require(profilePlatform.Common.Enums)
 local useScreenSize = robloxAppHooksModule.useScreenSize
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useProfileAnalyticsContextModule (ref), useScreenSize (ref), useDynamicSizeMarginModule (ref), reactModule (ref), useProfileCompletionSduiContextModule (ref), socialServerDrivenUiModule (ref), useProfileCompletionDataModule (ref), roactNavigationModule (ref), socialSduiComponentWrapper (ref), enumsModule (ref)
-	local var10 = useProfileAnalyticsContextModule()
-	local var11 = useScreenSize()
-	local var12, var13 = useDynamicSizeMarginModule()
-	local var14, var15 = reactModule.useState(var11.X)
-	local var16 = useProfileCompletionSduiContextModule({ sideMargin = var12, containerWidth = var14 })
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref)
-		return { collectionPosition = p0.layoutOrder }
-	end, { p0.layoutOrder })
-	local var18 = reactModule.useRef(nil)
-	local var19 = reactModule.useCallback(function(p1)
-		-- upvalues: var13 (ref), var15 (ref)
-		var13(p1)
-		var15(p1.AbsoluteSize.X)
-	end, { var13, var15 })
+	local var1 = useProfileAnalyticsContextModule()
+	local var2 = useScreenSize()
+	local var3, var4 = useDynamicSizeMarginModule()
+	local var5, var6 = reactModule.useState(var2.X)
+	local var7 = useProfileCompletionSduiContextModule({ sideMargin = var3, containerWidth = var5 })
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref)
+		return { collectionPosition = p1.layoutOrder }
+	end, { p1.layoutOrder })
+	local var9 = reactModule.useRef(nil)
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref), var6 (ref)
+		var4(p2)
+		var6(p2.AbsoluteSize.X)
+	end, { var4, var6 })
 	reactModule.useEffect(function()
 		-- upvalues: socialServerDrivenUiModule (copy)
 		socialServerDrivenUiModule.registerSocialActions()
 	end, {})
-	local var20, var21 = useProfileCompletionDataModule()
+	local var11, var12 = useProfileCompletionDataModule()
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		NavEvents = reactModule.createElement(roactNavigationModule.NavigationEvents, { onDidFocus = var21 }),
-		Content = if var20 then reactModule.createElement(socialSduiComponentWrapper, {
+		NavEvents = reactModule.createElement(roactNavigationModule.NavigationEvents, { onDidFocus = var12 }),
+		Content = if var11 then reactModule.createElement(socialSduiComponentWrapper, {
 			testId = "profile-completion",
-			layoutOrder = p0.layoutOrder,
-			sduiContext = var16,
-			sduiComponentConfig = var20,
-			pageSideMargin = var12,
-			onFrameResized = var19,
-			verticalScrollingFrameRef = var18,
-			scrollViewPositionChangedSignal = var10.scrollViewPositionChangedSignal,
-			analyticsContext = var17,
+			layoutOrder = p1.layoutOrder,
+			sduiContext = var7,
+			sduiComponentConfig = var11,
+			pageSideMargin = var3,
+			onFrameResized = var10,
+			verticalScrollingFrameRef = var9,
+			scrollViewPositionChangedSignal = var1.scrollViewPositionChangedSignal,
+			analyticsContext = var8,
 			debugName = enumsModule.Components.ProfileCompletion
 		}) else nil
 	})

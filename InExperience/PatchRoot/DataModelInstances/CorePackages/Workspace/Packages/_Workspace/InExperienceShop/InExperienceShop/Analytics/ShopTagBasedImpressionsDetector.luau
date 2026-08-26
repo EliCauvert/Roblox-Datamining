@@ -4,67 +4,67 @@ local reactModule = require(parent.React)
 local unifiedEventLogConstants = require(parent.AvatarExperienceAnalytics).UnifiedEventLogConstants
 local shopScreenSizeImpressionsDetectorModule = require(script.Parent.ShopScreenSizeImpressionsDetector)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), collectionService (ref), unifiedEventLogConstants (ref), shopScreenSizeImpressionsDetectorModule (ref)
-	local var3 = reactModule.useRef({})
-	local var4 = reactModule.useRef({})
-	local var5 = reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref)
-		return not var3.current[p1:GetFullName()]
+	local var1 = reactModule.useRef({})
+	local var2 = reactModule.useRef({})
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref)
+		return not var1.current[p2:GetFullName()]
 	end, {})
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var4 (ref), p0 (ref)
+	local var4 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref), var2 (ref), p1 (ref)
 		local t = {}
 		
 		for i, v in p2 do
 			local fullName = v:GetFullName()
 			
-			if not var3.current[fullName] then
+			if not var1.current[fullName] then
 				t[fullName] = v
 				
-				if not var4.current[fullName] then
-					var4.current[fullName] = v.AncestryChanged:Connect(function()
-						-- upvalues: v (ref), var3 (copy), fullName (ref), var4 (copy)
+				if not var2.current[fullName] then
+					var2.current[fullName] = v.AncestryChanged:Connect(function()
+						-- upvalues: v (ref), var1 (copy), fullName (ref), var2 (copy)
 						if not v.Parent then
-							var3.current[fullName] = nil
+							var1.current[fullName] = nil
 							
-							if var4.current[fullName] then
-								var4.current[fullName]:Disconnect()
-								var4.current[fullName] = nil
+							if var2.current[fullName] then
+								var2.current[fullName]:Disconnect()
+								var2.current[fullName] = nil
 							end
 						end
 					end)
 				end
-				var3.current[fullName] = true
+				var1.current[fullName] = true
 			end
 		end
-		if next(t) and p0.extensions then
+		if next(t) and p1.extensions then
 			for i, v_1 in t do
-				for i_2, v_2 in p0.extensions do
+				for i_2, v_2 in p1.extensions do
 					v_2({ visibleInstance = v_1 })
 				end
 			end
 		end
-	end, { p0.extensions })
+	end, { p1.extensions })
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
+		-- upvalues: var2 (ref)
 		return function()
-			-- upvalues: var4 (copy)
-			for i, v in var4.current do
+			-- upvalues: var2 (copy)
+			for i, v in var2.current do
 				if v then
 					v:Disconnect()
 				end
 			end
-			var4.current = {}
+			var2.current = {}
 		end
 	end, {})
 	
 	return reactModule.createElement(shopScreenSizeImpressionsDetectorModule, {
-		parentRef = p0.parentRef,
-		pageFilter = p0.pageFilter,
-		onRequestImpressionsSignal = p0.requestImpressionsSignal,
-		filterImpressionFunc = var5,
-		onImpressionsDetected = var6,
+		parentRef = p1.parentRef,
+		pageFilter = p1.pageFilter,
+		onRequestImpressionsSignal = p1.requestImpressionsSignal,
+		filterImpressionFunc = var3,
+		onImpressionsDetected = var4,
 		collectObjectsFunc = reactModule.useCallback(function()
 			-- upvalues: collectionService (copy), unifiedEventLogConstants (copy)
 			return collectionService:GetTagged(unifiedEventLogConstants.TAG_NAME)

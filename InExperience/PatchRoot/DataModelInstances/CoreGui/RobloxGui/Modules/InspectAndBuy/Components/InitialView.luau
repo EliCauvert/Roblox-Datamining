@@ -8,22 +8,22 @@ local assetListModule = require(parent.Components.AssetList)
 local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContext)
 local initialView = roactModule.PureComponent:extend("InitialView")
 
-function initialView.render(p0)
+function initialView.render(p1)
 	-- upvalues: roactModule (ref), inspectAndBuyContextModule (ref), avatarHeadShotModule (ref), playerNameLabelModule (ref), assetListModule (ref)
-	local view = p0.props.view
-	local detailsInformation = p0.props.detailsInformation
+	local view = p1.props.view
+	local detailsInformation = p1.props.detailsInformation
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p1)
+		render = function(p2)
 			-- upvalues: view (ref), roactModule (copy), detailsInformation (ref), avatarHeadShotModule (copy), playerNameLabelModule (copy), assetListModule (copy)
-			local var8 = p1[view]
+			local var1 = p2[view]
 			
 			return roactModule.createElement("ScrollingFrame", {
 				BackgroundTransparency = 1,
 				ScrollBarThickness = 0,
 				Selectable = false,
-				Position = UDim2.new(0, var8.BorderPaddingSize, 0, 10),
-				Size = UDim2.new(1, -(2 * var8.BorderPaddingSize), 1, -36),
+				Position = UDim2.new(0, var1.BorderPaddingSize, 0, 10),
+				Size = UDim2.new(1, -(2 * var1.BorderPaddingSize), 1, -36),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
 				Visible = not detailsInformation.viewingDetails
 			}, {
@@ -35,7 +35,7 @@ function initialView.render(p0)
 				Top = roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, var8.TopSizeY)
+					Size = UDim2.new(1, 0, 0, var1.TopSizeY)
 				}, {
 					UIListLayout = roactModule.createElement("UIListLayout", {
 						Padding = UDim.new(0, 10),
@@ -51,9 +51,9 @@ function initialView.render(p0)
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
-		view = p2.view,
-		detailsInformation = p2.detailsInformation
+		view = p1.view,
+		detailsInformation = p1.detailsInformation
 	}
 end)(initialView)

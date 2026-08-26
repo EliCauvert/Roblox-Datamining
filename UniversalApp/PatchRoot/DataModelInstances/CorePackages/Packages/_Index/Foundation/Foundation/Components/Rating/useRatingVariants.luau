@@ -6,13 +6,13 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: chipSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
 			container = {
 				tag = "row align-y-center auto-xy radius-circle clip",
-				backgroundStyle = p0.Color.ActionStandard.Background
+				backgroundStyle = p1.Color.ActionStandard.Background
 			},
 			thumbUpSegment = {
 				tag = "row align-x-center align-y-center shrink-1 auto-x radius-circle"
@@ -20,7 +20,7 @@ local function variantsFactory(p0)
 			thumbDownSegment = {
 				tag = "row align-x-center align-y-center auto-x radius-circle"
 			},
-			text = { contentStyle = p0.Color.ActionStandard.Foreground }
+			text = { contentStyle = p1.Color.ActionStandard.Foreground }
 		},
 		sizes = {
 			[chipSizeModule.Small] = {
@@ -64,24 +64,24 @@ end
 return function(p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local rating = variantsContextModule.useVariants("Rating", variantsFactory, p1)
-	local var7 = rating.sizes[p2]
-	local var8 = composeStyleVariantModule(rating.common, {
-		thumbUpSegment = var7.thumbSegment,
-		thumbDownSegment = var7.thumbSegment,
-		text = var7.text
+	local var1 = rating.sizes[p2]
+	local var2 = composeStyleVariantModule(rating.common, {
+		thumbUpSegment = var1.thumbSegment,
+		thumbDownSegment = var1.thumbSegment,
+		text = var1.text
 	})
 	
 	return {
-		container = var8.container,
-		thumbUpSegment = var8.thumbUpSegment,
-		thumbDownSegment = var8.thumbDownSegment,
-		dividerContainer = var7.dividerContainer,
-		thumbUpIcon = var7.thumbUpIcon,
-		thumbDownIcon = var7.thumbDownIcon,
+		container = var2.container,
+		thumbUpSegment = var2.thumbUpSegment,
+		thumbDownSegment = var2.thumbDownSegment,
+		dividerContainer = var1.dividerContainer,
+		thumbUpIcon = var1.thumbUpIcon,
+		thumbDownIcon = var1.thumbDownIcon,
 		text = {
-			tag = var8.text.tag,
-			contentStyle = var8.text.contentStyle
+			tag = var2.text.tag,
+			contentStyle = var2.text.contentStyle
 		},
-		iconSize = var7.iconSize
+		iconSize = var1.iconSize
 	}
 end

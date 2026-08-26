@@ -8,17 +8,17 @@ local function _()
 	return if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 end
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: textChatService (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref)
-	local var3 = p0
+	local var1 = p1
 	
-	if var3 ~= nil and var3.Name ~= "RBXGeneral" then
+	if var1 ~= nil and var1.Name ~= "RBXGeneral" then
 		local RBXGeneral = textChatService:FindFirstChild("RBXGeneral", true)
-		var3 = if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
+		var1 = if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 	end
-	return if var3 then if pcall(function()
-		-- upvalues: var3 (write), value (ref)
-		var3:SendPresetAsync(value)
+	return if var1 then if pcall(function()
+		-- upvalues: var1 (write), value (ref)
+		var1:SendPresetAsync(value)
 	end) then "Sent" else "SendFailed" elseif fFlagExpChatUniverseChatPresetEnabledModule then if pcall(function()
 		-- upvalues: textChatService (copy), value (ref)
 		textChatService:SendUniverseChatPresetAsync(value)

@@ -27,9 +27,9 @@ return {
 		-- upvalues: createEditSessionModule (ref)
 		return createEditSessionModule()
 	end,
-	renderEditor = function(p0)
+	renderEditor = function(p1)
 		-- upvalues: reactModule (ref), musicOverlayModule (ref)
-		return reactModule.createElement(musicOverlayModule, { controller = p0 })
+		return reactModule.createElement(musicOverlayModule, { controller = p1 })
 	end,
 	toEdits = function(p1)
 		return { music = p1 }

@@ -3,8 +3,8 @@ local t = { __value = "null" }
 
 return {
 	NULL = t,
-	toJSBoolean = function(p0)
+	toJSBoolean = function(p1)
 		-- upvalues: boolean (ref), t (ref)
-		return boolean.toJSBoolean(p0) and p0 ~= t
+		return boolean.toJSBoolean(p1) and p1 ~= t
 	end
 }

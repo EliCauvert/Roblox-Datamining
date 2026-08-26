@@ -2,17 +2,17 @@
 local reactModule = require(reactUtils.Parent.React)
 local useEventConnectionModule = require(reactUtils.useEventConnection)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useEventConnectionModule (ref)
-	p0 = p0 or game:GetService("Selection")
-	local var4, var5 = reactModule.useState(function()
-		-- upvalues: p0 (ref)
-		return p0:Get()
+	p1 = p1 or game:GetService("Selection")
+	local var1, var2 = reactModule.useState(function()
+		-- upvalues: p1 (ref)
+		return p1:Get()
 	end)
-	useEventConnectionModule(p0.SelectionChanged, function()
-		-- upvalues: var5 (ref), p0 (ref)
-		var5(p0:Get())
+	useEventConnectionModule(p1.SelectionChanged, function()
+		-- upvalues: var2 (ref), p1 (ref)
+		var2(p1:Get())
 	end, {})
 	
-	return var4
+	return var1
 end

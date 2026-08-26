@@ -7,29 +7,29 @@ local _ = require(avatarSwitcher.types)
 
 return function()
 	-- upvalues: signalsModule (ref), jest (ref)
-	local var2, var3 = signalsModule.createSignal({})
-	local var4, var5 = signalsModule.createSignal(false)
-	local var6, var7 = signalsModule.createSignal(nil)
-	local var8, var9 = signalsModule.createSignal(nil)
-	local var10, var11 = signalsModule.createSignal(false)
-	local var12, var13 = signalsModule.createSignal(false)
-	local var14, var15 = signalsModule.createSignal(false)
-	local var16, var17 = signalsModule.createSignal(nil)
-	local var18, var19 = signalsModule.createSignal(nil)
-	local var20, var21 = signalsModule.createSignal(nil)
+	local var1, var2 = signalsModule.createSignal({})
+	local var3, var4 = signalsModule.createSignal(false)
+	local var5, var6 = signalsModule.createSignal(nil)
+	local var7, var8 = signalsModule.createSignal(nil)
+	local var9, var10 = signalsModule.createSignal(false)
+	local var11, var12 = signalsModule.createSignal(false)
+	local var13, var14 = signalsModule.createSignal(false)
+	local var15, var16 = signalsModule.createSignal(nil)
+	local var17, var18 = signalsModule.createSignal(nil)
+	local var19, var20 = signalsModule.createSignal(nil)
 	
 	return {
 		store = {
-			getOutfits = var2,
-			getLastPageReached = var4,
-			getSelectedOutfitId = var6,
-			getSelectedOutfitDetails = var8,
-			getRespawnPromptShown = var10,
-			getIsSwitching = var12,
-			getIsEmpty = var14,
-			getExperienceAvatarSupportType = var16,
-			getExperienceAvatarType = var18,
-			getPendingAvatarName = var20,
+			getOutfits = var1,
+			getLastPageReached = var3,
+			getSelectedOutfitId = var5,
+			getSelectedOutfitDetails = var7,
+			getRespawnPromptShown = var9,
+			getIsSwitching = var11,
+			getIsEmpty = var13,
+			getExperienceAvatarSupportType = var15,
+			getExperienceAvatarType = var17,
+			getPendingAvatarName = var19,
 			toggleRespawnPrompt = jest.fn(),
 			selectOutfit = jest.fn(),
 			fetchNextOutfitsPage = jest.fn(),
@@ -37,15 +37,15 @@ return function()
 			fetchExperienceAvatarSupportType = jest.fn(),
 			clearPendingAvatarName = jest.fn()
 		},
-		setOutfits = var3,
-		setLastPageReached = var5,
-		setSelectedOutfitId = var7,
-		setSelectedOutfitDetails = var9,
-		setRespawnPromptShown = var11,
-		setIsSwitching = var13,
-		setIsEmpty = var15,
-		setExperienceAvatarSupportType = var17,
-		setExperienceAvatarType = var19,
-		setPendingAvatarName = var21
+		setOutfits = var2,
+		setLastPageReached = var4,
+		setSelectedOutfitId = var6,
+		setSelectedOutfitDetails = var8,
+		setRespawnPromptShown = var10,
+		setIsSwitching = var12,
+		setIsEmpty = var14,
+		setExperienceAvatarSupportType = var16,
+		setExperienceAvatarType = var18,
+		setPendingAvatarName = var20
 	}
 end

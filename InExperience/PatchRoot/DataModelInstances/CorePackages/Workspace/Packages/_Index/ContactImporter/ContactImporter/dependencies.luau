@@ -8,25 +8,25 @@ local shareLinksRoduxModule = require(parent_1.ShareLinksRodux)
 local virtualizedListModule = require(parent_1.VirtualizedList)
 local urlBuilderModule = require(parent_1.UrlBuilder)
 local socialLuaAnalyticsModule = require(parent_1.SocialLuaAnalytics)
-local var7 = lumberyakModule.Logger.new(nil, "ContactImporter"):new("ContactImporter Networking")
+local var1 = lumberyakModule.Logger.new(nil, "ContactImporter"):new("ContactImporter Networking")
 local RODUX_KEY = require(parent.Common.Constants).RODUX_KEY
-local var8 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
+local var2 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = RODUX_KEY .. ".NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2)
-			-- upvalues: var7 (ref), httpRequest (ref)
-			var7:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
+		requestFunction = function(p1, p2, p3)
+			-- upvalues: var1 (ref), httpRequest (ref)
+			var1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 			
-			return httpRequest.requestFunctions.HttpRbxApi(p0, p1, p2)
+			return httpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
-		postRequestFunction = function(p3, p4)
-			-- upvalues: var7 (ref)
-			var7:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p4.requestMethod, p4.url, p3.StatusCode, p3.Body))
+		postRequestFunction = function(p1, p2)
+			-- upvalues: var1 (ref)
+			var1:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
 		end,
 		maxRetryCount = game:DefineFastInt("ContactImporterHttpRetryCount", 3)
 	})
 })
-local var9 = require(parent_1.ContactsRodux).config({ keyPath = RODUX_KEY .. ".Contacts" })
+local var3 = require(parent_1.ContactsRodux).config({ keyPath = RODUX_KEY .. ".Contacts" })
 local roactAppExperimentModule = require(parent_1.RoactAppExperiment)
 local UIBloxModule = require(parent_1.UIBlox)
 
@@ -46,22 +46,22 @@ return {
 	Promise = require(parent_1.Promise),
 	llama = luaSocialLibrariesDepsModule.llama,
 	memoize = require(parent_1.AppCommonLib).memoize,
-	RoduxNetworking = var8,
+	RoduxNetworking = var2,
 	enumerate = require(parent_1.enumerate),
 	IXPService = game:GetService("IXPService"),
-	ShareLinksNetworking = shareLinksNetworkingModule.config({ roduxNetworking = var8 }),
+	ShareLinksNetworking = shareLinksNetworkingModule.config({ roduxNetworking = var2 }),
 	SocialLibraries = luaSocialLibrariesDepsModule.SocialLibraries.config({}),
 	SocialModalsCommon = require(parent_1.SocialModalsCommon),
-	NetworkingContacts = require(parent_1.ContactsNetworking).config({ roduxNetworking = var8 }),
-	NetworkingFriends = require(parent_1.FriendsNetworking).config({ roduxNetworking = var8 }),
-	NetworkingUserSettings = luaSocialLibrariesDepsModule.NetworkingUserSettings.config({ roduxNetworking = var8 }),
-	NetworkingAccountInformation = luaSocialLibrariesDepsModule.NetworkingAccountInformation.config({ roduxNetworking = var8 }),
-	NetworkingAccountSettings = luaSocialLibrariesDepsModule.NetworkingAccountSettings.config({ roduxNetworking = var8 }),
+	NetworkingContacts = require(parent_1.ContactsNetworking).config({ roduxNetworking = var2 }),
+	NetworkingFriends = require(parent_1.FriendsNetworking).config({ roduxNetworking = var2 }),
+	NetworkingUserSettings = luaSocialLibrariesDepsModule.NetworkingUserSettings.config({ roduxNetworking = var2 }),
+	NetworkingAccountInformation = luaSocialLibrariesDepsModule.NetworkingAccountInformation.config({ roduxNetworking = var2 }),
+	NetworkingAccountSettings = luaSocialLibrariesDepsModule.NetworkingAccountSettings.config({ roduxNetworking = var2 }),
 	UrlBuilder = urlBuilderModule.UrlBuilder,
 	ContactsProtocol = require(parent_1.ContactsProtocol).ContactsProtocol,
 	SMSProtocol = require(parent_1.SMSProtocol).SMSProtocol,
 	PermissionsProtocol = require(parent_1.PermissionsProtocol).PermissionsProtocol,
-	RoduxContacts = var9,
+	RoduxContacts = var3,
 	RoduxUserPermissions = luaSocialLibrariesDepsModule.RoduxUserPermissions.config({ keyPath = RODUX_KEY .. ".UserPermissions" }),
 	ShareLinksRodux = shareLinksRoduxModule.config({ keyPath = RODUX_KEY .. ".ShareLinks" }),
 	AppStorageService = game:GetService("AppStorageService"),

@@ -10,39 +10,39 @@ local text = require(parent.AppCommonLib).Text
 local urlProcessor = urlMatchingModule.UrlProcessor
 local constants = urlMatchingModule.Constants
 local regex = urlMatchingModule.Regex
-local var7 = regex.zeroOrOneOf(regex.SLASH .. constantsModule.LOCALE_LANGUAGE_PATTERN .. regex.zeroOrOneOf(regex.DASH .. constantsModule.LOCALE_COUNTRY_PATTERN))
-local var8 = urlProcessor.new({
+local var1 = regex.zeroOrOneOf(regex.SLASH .. constantsModule.LOCALE_LANGUAGE_PATTERN .. regex.zeroOrOneOf(regex.DASH .. constantsModule.LOCALE_COUNTRY_PATTERN))
+local var2 = urlProcessor.new({
 	protocolStrict = false,
 	subdomainStrict = false,
 	trimPunctuation = true,
-	domainsPatterns = cryoModule.List.map(constantsModule.ROBLOX_DOMAIN_PATTERNS, function(p0)
-		-- upvalues: var7 (ref)
-		return p0 .. var7
+	domainsPatterns = cryoModule.List.map(constantsModule.ROBLOX_DOMAIN_PATTERNS, function(p1)
+		-- upvalues: var1 (ref)
+		return p1 .. var7
 	end),
 	subdomainPatterns = { constants.ANY_DOMAIN_NAME }
 }, robloxUrlMapModule)
 
 return function(p1)
-	-- upvalues: var8 (ref), fFlagAppChatFullPlaintextBeforeGameCardsModule (ref), addMessageModule (ref), text (ref)
+	-- upvalues: var2 (ref), fFlagAppChatFullPlaintextBeforeGameCardsModule (ref), addMessageModule (ref), text (ref)
 	local t = {}
-	local var10 = var8:process(p1)
+	local var3 = var2:process(p1)
 	
 	if fFlagAppChatFullPlaintextBeforeGameCardsModule then
 		t = addMessageModule(t, p1)
 		
-		for i, v in var10 do
+		for i, v in var3 do
 			table.insert(t, v.result)
 		end
 		return t
-	elseif var10 == nil or #var10 == 0 then
+	elseif var3 == nil or #var3 == 0 then
 		return addMessageModule(t, p1)
 	end
-	local var11 = 1
+	local var4 = 1
 	
-	for i, v in var10 do
-		t = addMessageModule(t, text.Trim(p1:sub(var11, v.startIndex - 1)))
+	for i, v in var3 do
+		t = addMessageModule(t, text.Trim(p1:sub(var4, v.startIndex - 1)))
 		table.insert(t, v.result)
-		var11 = v.endIndex + 1
+		var4 = v.endIndex + 1
 	end
-	return addMessageModule(t, text.Trim(p1:sub(var11)))
+	return addMessageModule(t, text.Trim(p1:sub(var4)))
 end

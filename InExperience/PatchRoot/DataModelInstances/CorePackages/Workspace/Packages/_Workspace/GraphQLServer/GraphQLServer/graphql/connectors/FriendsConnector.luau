@@ -18,7 +18,7 @@ local platformSpecificity = socialLuaAnalyticsModule.Analytics.Enums.PlatformSpe
 local httpService = game:GetService("HttpService")
 local loggingProtocolModule = require(parent.LoggingProtocol)
 local supportedTelemetryBackends = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
-local var6 = urlBuilder.new({
+local var1 = urlBuilder.new({
 	path = "users/{userId}/friends/find",
 	base = urlBase.FRIENDS,
 	query = {
@@ -27,7 +27,7 @@ local var6 = urlBuilder.new({
 		{ name = "cursor", value = "{cursor}", optional = true }
 	}
 })
-local var7 = urlBuilder.new({
+local var2 = urlBuilder.new({
 	path = "users/{userId}/friends/online",
 	base = urlBase.FRIENDS,
 	query = {
@@ -40,7 +40,7 @@ local _ = function()
 	return string.format("friends-sort-%s", httpService:GenerateGUID(false))
 end
 
-local var8 = socialLuaAnalyticsModule.Telemetry.createEmitter({
+local var3 = socialLuaAnalyticsModule.Telemetry.createEmitter({
 	telemetryImpl = loggingProtocolModule.default,
 	defaultTelemetryConfig = {
 		links = "https://docs.google.com/document/d/1uRCdl8pEuiW9wDiOTL39JPMGLhgxtpvVgiXovE8Xof4",
@@ -50,20 +50,20 @@ local var8 = socialLuaAnalyticsModule.Telemetry.createEmitter({
 		return {}
 	end
 })
-local var9 = socialLuaAnalyticsModule.Telemetry.new({
+local var4 = socialLuaAnalyticsModule.Telemetry.new({
 	name = "FriendsSortFeFindFriendsResponse",
 	description = "User making a request to /FindFriends",
 	lastUpdated = { 2026, 3, 18 },
 	backendsList = {
 		{
 			type = supportedTelemetryBackends.EventIngest,
-			format = function(p0, _)
-				return p0
+			format = function(p1, _)
+				return p1
 			end
 		}
 	}
 })
-local var10 = socialLuaAnalyticsModule.Telemetry.new({
+local var5 = socialLuaAnalyticsModule.Telemetry.new({
 	name = "FriendsSortFeGetAllOnlineFriendsResponse",
 	description = "User making a request to /GetAllOnlineFriends",
 	lastUpdated = { 2026, 3, 18 },
@@ -77,116 +77,116 @@ local var10 = socialLuaAnalyticsModule.Telemetry.new({
 	}
 })
 
-local _ = function(p2, p3, p4, p5)
-	-- upvalues: var8 (ref)
-	var8.emit(p4, {
-		requestId = p2,
-		friendIds = table.concat(p3, ","),
-		sortType = p5
+local _ = function(p1, p2, p3, p4)
+	-- upvalues: var3 (ref)
+	var3.emit(p3, {
+		requestId = p1,
+		friendIds = table.concat(p2, ","),
+		sortType = p4
 	})
 end
 
-local function fireLoadingEvent(p6, p7, p8)
+local function fireLoadingEvent(p1, p2, p3)
 	-- upvalues: createDiagMetricString (ref), getPlatformSuffix (ref), platformSpecificity (ref), diag (ref)
-	diag:reportStats(createDiagMetricString(p6, p7) .. getPlatformSuffix(platformSpecificity.BucketsOnly), p8)
+	diag:reportStats(createDiagMetricString(p1, p2) .. getPlatformSuffix(platformSpecificity.BucketsOnly), p3)
 end
 
 return {
-	getAllFriendsByUserId = reportPromiseLoadingTimeWrapper(function(p9, p10)
-		-- upvalues: fetch (ref), promiseModule (ref), var6 (ref), httpService (ref), response (ref), graphQLError (ref), var9 (ref), var8 (ref)
-		local var12 = p10 or fetch
+	getAllFriendsByUserId = reportPromiseLoadingTimeWrapper(function(p1, p2)
+		-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), httpService (ref), response (ref), graphQLError (ref), var4 (ref), var3 (ref)
+		local var6 = p2 or fetch
 		
-		return promiseModule.new(function(p11, p12)
-			-- upvalues: var6 (copy), p9 (ref), httpService (copy), var12 (ref), response (copy), graphQLError (copy), var9 (copy), var8 (copy)
+		return promiseModule.new(function(p3, p4)
+			-- upvalues: var1 (copy), p1 (ref), httpService (copy), var6 (ref), response (copy), graphQLError (copy), var4 (copy), var3 (copy)
 			local formattedText = string.format("friends-sort-%s", httpService:GenerateGUID(false))
-			local var14 = var12(var6({
-				userId = p9.userId,
-				limit = p9.pageLimit or 50,
-				cursor = p9.pageCursor,
-				userSort = p9.sort
+			local var7 = var6(var1({
+				userId = p1.userId,
+				limit = p1.pageLimit or 50,
+				cursor = p1.pageCursor,
+				userSort = p1.sort
 			}), {
 				method = "GET",
 				headers = { ["friends-sort"] = formattedText }
-			}):catch(function(p13)
+			}):catch(function(p5)
 				-- upvalues: response (copy)
-				local var17 = response.error()
-				var17.statusText = p13.message
+				local var8 = response.error()
+				var8.statusText = p5.message
 				
-				return var17
+				return var8
 			end):expect()
 			
-			if not var14.ok then
-				p12(graphQLError.new(var14.statusText, nil, nil, nil, nil, {
-					extensions = { status = var14.status, statusText = var14.statusText }
+			if not var7.ok then
+				p4(graphQLError.new(var7.statusText, nil, nil, nil, nil, {
+					extensions = { status = var7.status, statusText = var7.statusText }
 				}))
 				
 				return
 			end
-			local var15 = var14:json():catch(function()
+			local var8 = var7:json():catch(function()
 				return nil
 			end):expect()
 			
-			if not var15 then
-				p12(graphQLError.new("Failed to decode HTTP response as JSON for friends API"))
+			if not var8 then
+				p4(graphQLError.new("Failed to decode HTTP response as JSON for friends API"))
 				
 				return
 			end
-			p11(var15)
+			p3(var8)
 			
 			if formattedText == nil then return end
 			local t = {}
 			
-			for i, v in pairs(var15.PageItems) do
+			for i, v in pairs(var8.PageItems) do
 				table.insert(t, v.id)
 			end
-			var8.emit(var9, {
+			var3.emit(var4, {
 				sortType = "FriendScore",
 				requestId = formattedText,
 				friendIds = table.concat(t, ",")
 			})
 		end)
-	end, function(p14)
+	end, function(p3)
 		return {
 			fetch = "friends_find",
-			nextPage = p14.pageCursor and p14.pageCursor ~= ""
+			nextPage = p3.pageCursor and p3.pageCursor ~= ""
 		}
 	end, { fireEvent = fireLoadingEvent }),
-	getOnlineFriendsByUserId = reportPromiseLoadingTimeWrapper(function(p15, p16)
-		-- upvalues: fetch (ref), promiseModule (ref), var7 (ref), httpService (ref), response (ref), graphQLError (ref), var10 (ref), var8 (ref)
-		local var18 = p16 or fetch
+	getOnlineFriendsByUserId = reportPromiseLoadingTimeWrapper(function(p3, p4)
+		-- upvalues: fetch (ref), promiseModule (ref), var2 (ref), httpService (ref), response (ref), graphQLError (ref), var5 (ref), var3 (ref)
+		local var7 = p4 or fetch
 		
-		return promiseModule.new(function(p17, p18)
-			-- upvalues: var7 (copy), p15 (ref), httpService (copy), var18 (ref), response (copy), graphQLError (copy), var10 (copy), var8 (copy)
+		return promiseModule.new(function(p5, p6)
+			-- upvalues: var2 (copy), p3 (ref), httpService (copy), var7 (ref), response (copy), graphQLError (copy), var5 (copy), var3 (copy)
 			local formattedText = string.format("friends-sort-%s", httpService:GenerateGUID(false))
-			local var20 = var18(var7({ userId = p15.userId, userSort = p15.sort }), {
+			local var8 = var7(var2({ userId = p3.userId, userSort = p3.sort }), {
 				method = "GET",
 				headers = { ["friends-sort"] = formattedText }
-			}):catch(function(p19)
+			}):catch(function(p7)
 				-- upvalues: response (copy)
-				local var24 = response.error()
-				var24.statusText = p19.message
+				local var9 = response.error()
+				var9.statusText = p7.message
 				
-				return var24
+				return var9
 			end):expect()
 			
-			if not var20.ok then
-				p18(graphQLError.new(var20.statusText, nil, nil, nil, nil, {
-					extensions = { status = var20.status, statusText = var20.statusText }
+			if not var8.ok then
+				p6(graphQLError.new(var8.statusText, nil, nil, nil, nil, {
+					extensions = { status = var8.status, statusText = var8.statusText }
 				}))
 				
 				return
 			end
-			local var21 = var20:json():catch(function()
+			local var9 = var8:json():catch(function()
 				return nil
 			end):expect()
 			
-			if not var21 then
-				p18(graphQLError.new("Failed to decode HTTP response as JSON for friends API"))
+			if not var9 then
+				p6(graphQLError.new("Failed to decode HTTP response as JSON for friends API"))
 				
 				return
 			end
-			local data = var21.data or {}
-			p17(data)
+			local data = var9.data or {}
+			p5(data)
 			
 			if formattedText == nil then return end
 			local t = {}
@@ -194,7 +194,7 @@ return {
 			for i, v in data do
 				table.insert(t, v.id)
 			end
-			var8.emit(var10, {
+			var3.emit(var5, {
 				sortType = "Carousel",
 				requestId = formattedText,
 				friendIds = table.concat(t, ",")

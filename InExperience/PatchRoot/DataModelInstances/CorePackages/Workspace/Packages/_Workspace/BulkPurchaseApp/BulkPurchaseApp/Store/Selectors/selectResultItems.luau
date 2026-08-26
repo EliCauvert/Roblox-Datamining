@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("BulkPurchaseApp").Store.Types)
 
-local function _(p0)
-	return if p0 == "AvatarBundle" then Enum.MarketplaceProductType.AvatarBundle else Enum.MarketplaceProductType.AvatarAsset
+local function _(p1)
+	return if p1 == "AvatarBundle" then Enum.MarketplaceProductType.AvatarBundle else Enum.MarketplaceProductType.AvatarAsset
 end
 
 return function(p1)

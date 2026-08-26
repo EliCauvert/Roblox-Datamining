@@ -26,9 +26,9 @@ local function variantsFactory(_)
 	}
 end
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local optionSelectorGroup = variantsContextModule.useVariants("OptionSelectorGroup", variantsFactory, p0)
+	local optionSelectorGroup = variantsContextModule.useVariants("OptionSelectorGroup", variantsFactory, p1)
 	
-	return composeStyleVariantModule(optionSelectorGroup.common, optionSelectorGroup.sizes[p1], optionSelectorGroup.orientations[p2])
+	return composeStyleVariantModule(optionSelectorGroup.common, optionSelectorGroup.sizes[p2], optionSelectorGroup.orientations[p3])
 end

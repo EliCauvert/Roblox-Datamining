@@ -28,66 +28,66 @@ t.SessionConstants = {
 }
 local _ = { SUBMIT = 1, ABANDON = 2 }
 
-function t.new(p0, p1, p2)
+function t.new(p1, p2, p3)
 	-- upvalues: t (ref)
-	assert(p2, "Base context needs to be provided to ReportAbuseAnalytics")
-	local t_1 = { _eventStreamImpl = p0, _diagImpl = p1, _context = p2 }
+	assert(p3, "Base context needs to be provided to ReportAbuseAnalytics")
+	local t_1 = { _eventStreamImpl = p1, _diagImpl = p2, _context = p3 }
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-function t:reportFormSubmitted(p3, p4, p5)
+function t:reportFormSubmitted(p1, p2, p3)
 	-- upvalues: t (ref), cryoModule (ref)
 	local text = self._context .. "_" .. t.DiagCounters.SuccessfulSubmissionTime
 	local text_1 = self._context .. "_" .. t.DiagCounters.SubmittedMethodOfAbuse .. "_" .. p4
-	local var6 = cryoModule.Dictionary.join(p5 or {}, { timeToComplete = p3, methodOfAbuse = p4 })
-	self._diagImpl:reportStats(text, p3)
+	local var1 = cryoModule.Dictionary.join(p3 or {}, { timeToComplete = p1, methodOfAbuse = p2 })
+	self._diagImpl:reportStats(text, p1)
 	self._diagImpl:reportCounter(text_1, 1)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FormSubmitted, var6)
+	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FormSubmitted, var1)
 end
 
-function t:reportFormAbandoned(p6, p7)
+function t:reportFormAbandoned(p1, p2)
 	-- upvalues: t (ref), cryoModule (ref)
-	local var7 = cryoModule.Dictionary.join(p7 or {}, { timeToExit = p6 })
-	self._diagImpl:reportStats(self._context .. "_" .. t.DiagCounters.AbandonedSubmissionTime, p6)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FormAbandoned, var7)
+	local var1 = cryoModule.Dictionary.join(p2 or {}, { timeToExit = p1 })
+	self._diagImpl:reportStats(self._context .. "_" .. t.DiagCounters.AbandonedSubmissionTime, p1)
+	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FormAbandoned, var1)
 end
 
-function t:reportAnalyticsFieldChanged(p8)
+function t:reportAnalyticsFieldChanged(p1)
 	-- upvalues: t (ref)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FieldChanged, p8 or {})
+	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FieldChanged, p1 or {})
 end
 
-function t:reportButtonClick(p9)
+function t:reportButtonClick(p1)
 	-- upvalues: t (ref)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.ButtonActivated, p9 or {})
+	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.ButtonActivated, p1 or {})
 end
 
-function t:reportInGameAbuseReportInteraction(p10)
+function t:reportInGameAbuseReportInteraction(p1)
 	-- upvalues: t (ref)
 	local abandonedSubmissionTime = t.DiagCounters.AbandonedSubmissionTime
 	
-	if p10.interactionType == 1 then
+	if p1.interactionType == 1 then
 		abandonedSubmissionTime = t.DiagCounters.SuccessfulSubmissionTime
 		self._diagImpl:reportCounter(self._context .. "_" .. t.DiagCounters.SubmittedMethodOfAbuse .. "_" .. p10.inferredTypeofabuseSelection, 1)
 	end
-	self._diagImpl:reportStats(self._context .. "_" .. abandonedSubmissionTime, p10.timeSpentMs)
-	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.InGameAbuseReport, p10)
+	self._diagImpl:reportStats(self._context .. "_" .. abandonedSubmissionTime, p1.timeSpentMs)
+	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.InGameAbuseReport, p1)
 end
 
-function t:reportEventAndIncrement(p11, p12)
+function t:reportEventAndIncrement(p1, p2)
 	self._diagImpl:reportCounter(self._context .. "_" .. p11, 1)
-	self._eventStreamImpl:sendEventDeferred(self._context, p11, p12 or {})
+	self._eventStreamImpl:sendEventDeferred(self._context, p1, p2 or {})
 end
 
-function t.startAbuseReportSession(_, p13)
+function t.startAbuseReportSession(_, p1)
 	-- upvalues: sessionService (ref), t (ref)
 	if not sessionService:SessionExists(t.SessionConstants.StructuralIdentifier.AbuseReport) then
 		sessionService:SetSession(t.SessionConstants.StructuralIdentifier.Level1, t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.StructuralIdentifier.AbuseReport)
 	end
 	if not sessionService:GetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.EntryPoint) then
-		sessionService:SetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.EntryPoint, p13)
+		sessionService:SetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.EntryPoint, p1)
 	end
 	sessionService:SetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.DeleteOnGameLeave, "True")
 end

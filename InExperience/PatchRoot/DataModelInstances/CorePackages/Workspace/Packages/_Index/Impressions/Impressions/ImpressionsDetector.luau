@@ -24,10 +24,10 @@ impressionsDetector.validateProps = tModule.strictInterface({
 })
 impressionsDetector.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
 
-function impressionsDetector.init(p0)
-	p0.isMounted = false
-	p0.lastImpressionTick = nil
-	p0.nextImpressionTick = nil
+function impressionsDetector.init(p1)
+	p1.isMounted = false
+	p1.lastImpressionTick = nil
+	p1.nextImpressionTick = nil
 end
 
 function impressionsDetector._boundingBoxIntersectsView(p1, p2)
@@ -42,135 +42,135 @@ function impressionsDetector._boundingBoxIntersectsView(p1, p2)
 		return false
 	end
 	local absolutePosition = p2.AbsolutePosition
-	local var7 = absolutePosition + p2.AbsoluteSize
+	local var1 = absolutePosition + p2.AbsoluteSize
 	
-	return (viewPortBounds.min.X < var7.X and absolutePosition.X < viewPortBounds.max.X) and (viewPortBounds.min.Y < var7.Y and absolutePosition.Y < viewPortBounds.max.Y)
+	return (viewPortBounds.min.X < var1.X and absolutePosition.X < viewPortBounds.max.X) and (viewPortBounds.min.Y < var1.Y and absolutePosition.Y < viewPortBounds.max.Y)
 end
 
-function impressionsDetector._isInstanceVisible(p3, p4)
+function impressionsDetector._isInstanceVisible(p1, p2)
 	-- upvalues: argCheckModule (ref), fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref)
-	if not p3:_boundingBoxIntersectsView(p4) then
+	if not p1:_boundingBoxIntersectsView(p2) then
 		return false
 	end
-	local viewPortBounds = p3.props.viewPortBounds
+	local viewPortBounds = p1.props.viewPortBounds
 	argCheckModule.assert(viewPortBounds ~= nil)
 	local _ = nil
-	local var8 = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then p3.props.viewPortFillBounds or viewPortBounds else viewPortBounds
-	local var9 = var8.max - var8.min
+	local var1 = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then p1.props.viewPortFillBounds or viewPortBounds else viewPortBounds
+	local var2 = var1.max - var1.min
 	
-	if var9.X <= 0 or var9.Y <= 0 then
+	if var2.X <= 0 or var2.Y <= 0 then
 		return false
 	end
-	local var10 = var9 * p3.props.viewFillPercent
-	argCheckModule.assert(var10.X > 0 and var10.Y > 0)
+	local var3 = var2 * p1.props.viewFillPercent
+	argCheckModule.assert(var3.X > 0 and var3.Y > 0)
 	
-	if var10.X <= 0 or var10.Y <= 0 then
+	if var3.X <= 0 or var3.Y <= 0 then
 		return false
 	end
-	local absolutePosition = p4.AbsolutePosition
-	var9 = p4.AbsoluteSize
+	local absolutePosition = p2.AbsolutePosition
+	var2 = p2.AbsoluteSize
 	
-	if p3.props.skipZeroSizes and (var9.X == 0 or var9.Y == 0) then
+	if p1.props.skipZeroSizes and (var2.X == 0 or var2.Y == 0) then
 		return false
 	end
-	local var11 = absolutePosition + var9 / 2
-	local var12 = absolutePosition + var9
-	local var13 = viewPortBounds.min.X < var11.X and var11.X < viewPortBounds.max.X
-	local var14 = viewPortBounds.min.Y < var11.Y and var11.Y < viewPortBounds.max.Y
+	local var4 = absolutePosition + var2 / 2
+	local var5 = absolutePosition + var2
+	local var6 = viewPortBounds.min.X < var4.X and var4.X < viewPortBounds.max.X
+	local var7 = viewPortBounds.min.Y < var4.Y and var4.Y < viewPortBounds.max.Y
 	
-	if var13 and var14 then
+	if var6 and var7 then
 		return true
 	end
-	local var15 = var12:Min(viewPortBounds.max) - absolutePosition:Max(viewPortBounds.min)
-	local var16 = var10.X <= var15.X
+	local var8 = var5:Min(viewPortBounds.max) - absolutePosition:Max(viewPortBounds.min)
+	local var9 = var3.X <= var8.X
 	
-	if var14 and var16 then
+	if var7 and var9 then
 		return true
 	end
-	local var17 = var10.Y <= var15.Y
+	local var10 = var3.Y <= var8.Y
 	
-	return if var13 and var17 then true else var16 and var17
+	return if var6 and var10 then true else var9 and var10
 end
 
-function impressionsDetector._calculateImpressions(p5)
+function impressionsDetector._calculateImpressions(p1)
 	-- upvalues: collectionService (ref), constantsModule (ref), argCheckModule (ref)
-	if not p5.isMounted then return end
-	if not p5.props.isFocused then return end
-	p5.lastImpressionTick = tick()
+	if not p1.isMounted then return end
+	if not p1.props.isFocused then return end
+	p1.lastImpressionTick = tick()
 	
-	if p5.props.parentRef ~= nil then
-		local current = p5.props.parentRef.current
+	if p1.props.parentRef ~= nil then
+		local current = p1.props.parentRef.current
 		
-		if current == nil or not p5:_boundingBoxIntersectsView(current) then return end
+		if current == nil or not p1:_boundingBoxIntersectsView(current) then return end
 	end
 	local t = {}
 	
-	for i, v in ipairs(collectionService:GetTagged(p5.props.impressionsTag)) do
+	for i, v in ipairs(collectionService:GetTagged(p1.props.impressionsTag)) do
 		local itemIndexAttribute = v:GetAttribute(constantsModule.ItemIndex)
 		
-		if itemIndexAttribute and v:IsA("GuiObject") and p5:_isInstanceVisible(v) and (p5.props.filterImpressionFunc == nil or p5.props.filterImpressionFunc(itemIndexAttribute)) then
+		if itemIndexAttribute and v:IsA("GuiObject") and p1:_isInstanceVisible(v) and (p1.props.filterImpressionFunc == nil or p1.props.filterImpressionFunc(itemIndexAttribute)) then
 			table.insert(t, itemIndexAttribute)
 		end
 	end
 	if #t > 0 then
-		argCheckModule.assert(p5.props.onImpressionsDetected ~= nil)
-		p5.props.onImpressionsDetected(t)
+		argCheckModule.assert(p1.props.onImpressionsDetected ~= nil)
+		p1.props.onImpressionsDetected(t)
 	end
 end
 
-function impressionsDetector._requestImpressions(p6)
+function impressionsDetector._requestImpressions(p2)
 	-- upvalues: argCheckModule (ref)
-	if not p6.isMounted then return end
-	if not p6.props.isFocused then return end
-	if p6.nextImpressionTick ~= nil then return end
-	if not p6.props.impressionsTag then return end
-	local var20 = 0
+	if not p2.isMounted then return end
+	if not p2.props.isFocused then return end
+	if p2.nextImpressionTick ~= nil then return end
+	if not p2.props.impressionsTag then return end
+	local var1 = 0
 	
-	if p6.lastImpressionTick ~= nil then
-		p6.nextImpressionTick = p6.lastImpressionTick + p6.props.scanDebounceSeconds
-		var20 = p6.nextImpressionTick - tick()
+	if p2.lastImpressionTick ~= nil then
+		p2.nextImpressionTick = p2.lastImpressionTick + p2.props.scanDebounceSeconds
+		var1 = p2.nextImpressionTick - tick()
 	end
-	if var20 > 0 then
-		task.delay(var20, function()
-			-- upvalues: argCheckModule (copy), p6 (ref)
-			argCheckModule.assert(p6.nextImpressionTick ~= nil and p6.nextImpressionTick < tick())
-			p6.nextImpressionTick = nil
-			p6:_calculateImpressions()
+	if var1 > 0 then
+		task.delay(var1, function()
+			-- upvalues: argCheckModule (copy), p2 (ref)
+			argCheckModule.assert(p2.nextImpressionTick ~= nil and p2.nextImpressionTick < tick())
+			p2.nextImpressionTick = nil
+			p2:_calculateImpressions()
 		end)
 		
 		return
 	end
-	p6.nextImpressionTick = nil
-	p6:_calculateImpressions()
+	p2.nextImpressionTick = nil
+	p2:_calculateImpressions()
 end
 
 function impressionsDetector.render(_)
 	return nil
 end
 
-function impressionsDetector.didMount(p7)
-	p7.isMounted = true
-	p7:_requestImpressions()
+function impressionsDetector.didMount(p2)
+	p2.isMounted = true
+	p2:_requestImpressions()
 	
-	if p7.props.onRequestImpressionsSignal then
-		p7.onRequestImpressionsConnection = p7.props.onRequestImpressionsSignal:connect(function()
-			-- upvalues: p7 (ref)
-			p7:_requestImpressions()
+	if p2.props.onRequestImpressionsSignal then
+		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function()
+			-- upvalues: p2 (ref)
+			p2:_requestImpressions()
 		end)
 	end
 end
 
-function impressionsDetector.willUnmount(p8)
-	p8.isMounted = false
+function impressionsDetector.willUnmount(p2)
+	p2.isMounted = false
 	
-	if p8.onRequestImpressionsConnection ~= nil then
-		p8.onRequestImpressionsConnection:disconnect()
-		p8.onRequestImpressionsConnection = nil
+	if p2.onRequestImpressionsConnection ~= nil then
+		p2.onRequestImpressionsConnection:disconnect()
+		p2.onRequestImpressionsConnection = nil
 	end
 end
 
-function impressionsDetector.didUpdate(p9, _, _)
-	p9:_requestImpressions()
+function impressionsDetector.didUpdate(p2, _, _)
+	p2:_requestImpressions()
 end
 
 return withNavigationFocus(impressionDetectorWithoutNavigationModule)

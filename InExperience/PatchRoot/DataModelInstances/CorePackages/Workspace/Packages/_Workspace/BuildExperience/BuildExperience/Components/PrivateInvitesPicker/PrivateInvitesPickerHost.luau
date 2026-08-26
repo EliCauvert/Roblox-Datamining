@@ -2,12 +2,12 @@
 local reactModule = require(buildExperience.Parent.React)
 local privateInvitesPickerContainerModule = require(buildExperience.Components.PrivateInvitesPicker.PrivateInvitesPickerContainer)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), privateInvitesPickerContainerModule (ref)
 	return reactModule.createElement(privateInvitesPickerContainerModule, {
-		universeId = p0.universeId,
-		onClose = p0.onClose,
-		onInvitesSent = p0.onInvitesSent,
-		testId = p0.testId
+		universeId = p1.universeId,
+		onClose = p1.onClose,
+		onInvitesSent = p1.onInvitesSent,
+		testId = p1.testId
 	})
 end

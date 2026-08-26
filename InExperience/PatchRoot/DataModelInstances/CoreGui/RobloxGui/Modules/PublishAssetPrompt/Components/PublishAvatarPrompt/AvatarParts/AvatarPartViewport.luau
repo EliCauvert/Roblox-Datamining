@@ -15,13 +15,13 @@ avatarPartViewport.validateProps = tModule.strictInterface({
 	viewportSize = tModule.optional(tModule.Vector2)
 })
 
-function avatarPartViewport.init(p0)
+function avatarPartViewport.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.camera = nil
-	p0.modelRef = roactModule.createRef()
-	local var7, var8 = roactModule.createBinding(nil)
-	p0.camera = var7
-	p0.updateCamera = var8
+	p1.camera = nil
+	p1.modelRef = roactModule.createRef()
+	local var1, var2 = roactModule.createBinding(nil)
+	p1.camera = var1
+	p1.updateCamera = var2
 end
 
 function avatarPartViewport.createViewportCamera(p1)
@@ -34,82 +34,82 @@ function avatarPartViewport.createViewportCamera(p1)
 	return camera
 end
 
-function avatarPartViewport.addBodyPartMannequinToViewport(p2)
+function avatarPartViewport.addBodyPartMannequinToViewport(p1)
 	-- upvalues: mannequinUtility (ref), cameraUtility (ref)
-	local var10, var11, var12 = mannequinUtility.CreateBodyPartMannequin(p2.props.asset, false)
-	local var13, var14 = mannequinUtility.SetupBodyPartMannequin(var10, var11, var12, p2.props.asset)
-	var12.Parent = p2.modelRef:getValue()
-	local var15 = p2:createViewportCamera()
-	cameraUtility.SetupBodyPartCamera(var12, var13, var14, var15)
-	p2.updateCamera(var15)
+	local var1, var2, var3 = mannequinUtility.CreateBodyPartMannequin(p1.props.asset, false)
+	local var4, var5 = mannequinUtility.SetupBodyPartMannequin(var1, var2, var3, p1.props.asset)
+	var3.Parent = p1.modelRef:getValue()
+	local var6 = p1:createViewportCamera()
+	cameraUtility.SetupBodyPartCamera(var3, var4, var5, var6)
+	p1.updateCamera(var6)
 end
 
-function avatarPartViewport.addHeadModelToViewport(p3)
+function avatarPartViewport.addHeadModelToViewport(p1)
 	-- upvalues: mannequinUtility (ref), cameraUtility (ref)
-	local var16 = mannequinUtility.CreateHeadModel(p3.props.asset)
-	var16.Parent = p3.modelRef:getValue()
-	local var17 = p3:createViewportCamera()
-	cameraUtility.SetupHeadCamera(var16, var17)
-	p3.updateCamera(var17)
+	local var1 = mannequinUtility.CreateHeadModel(p1.props.asset)
+	var1.Parent = p1.modelRef:getValue()
+	local var2 = p1:createViewportCamera()
+	cameraUtility.SetupHeadCamera(var1, var2)
+	p1.updateCamera(var2)
 end
 
-function avatarPartViewport.addAccessoryToViewport(p4)
+function avatarPartViewport.addAccessoryToViewport(p1)
 	-- upvalues: cameraUtility (ref)
 	local model = Instance.new("Model")
-	p4.props.asset.Parent = model
-	model.Parent = p4.modelRef:getValue()
-	local var19 = p4:createViewportCamera()
-	cameraUtility.SetupAccessoryCamera(model, var19)
-	p4.updateCamera(var19)
+	p1.props.asset.Parent = model
+	model.Parent = p1.modelRef:getValue()
+	local var1 = p1:createViewportCamera()
+	cameraUtility.SetupAccessoryCamera(model, var1)
+	p1.updateCamera(var1)
 end
 
-function avatarPartViewport.addMakeupDecalToViewport(p5)
+function avatarPartViewport.addMakeupDecalToViewport(p1)
 	-- upvalues: makeupPreviewUtilsModule (ref)
-	local var20 = makeupPreviewUtilsModule.createMakeupThumbnailPreview(p5.props.asset, p5.props.assetType)
+	local var1 = makeupPreviewUtilsModule.createMakeupThumbnailPreview(p1.props.asset, p1.props.assetType)
 	
-	if not var20 then return end
-	var20.Parent = p5.modelRef:getValue()
-	local var21 = p5:createViewportCamera()
+	if not var1 then return end
+	var1.Parent = p1.modelRef:getValue()
+	local var2 = p1:createViewportCamera()
 	
-	if makeupPreviewUtilsModule.setupMakeupThumbnailCamera(var20, var21, p5.props.assetType) then
-		p5.updateCamera(var21)
+	if makeupPreviewUtilsModule.setupMakeupThumbnailCamera(var1, var2, p1.props.assetType) then
+		p1.updateCamera(var2)
 	end
 end
 
-function avatarPartViewport.didMount(p6)
+function avatarPartViewport.didMount(p1)
 	-- upvalues: getFFlagSingleUploadMakeupSupportModule (ref), makeupPreviewUtilsModule (ref)
-	local asset = p6.props.asset
+	local asset = p1.props.asset
 	
 	if typeof(asset) ~= "Instance" then
-		p6:addBodyPartMannequinToViewport()
+		p1:addBodyPartMannequinToViewport()
 		
 		return
 	elseif asset:IsA("MeshPart") then
-		p6:addHeadModelToViewport()
+		p1:addHeadModelToViewport()
 		
 		return
-	elseif getFFlagSingleUploadMakeupSupportModule() and (asset:IsA("Decal") or p6.props.assetType and makeupPreviewUtilsModule.isMakeupAssetType(p6.props.assetType)) then
-		p6:addMakeupDecalToViewport()
+	elseif getFFlagSingleUploadMakeupSupportModule() and (asset:IsA("Decal") or p1.props.assetType and makeupPreviewUtilsModule.isMakeupAssetType(p1.props.assetType)) then
+		p1:addMakeupDecalToViewport()
 		
 		return
 	end
-	p6:addAccessoryToViewport()
+	p1:addAccessoryToViewport()
 end
 
-function avatarPartViewport.render(p7)
+function avatarPartViewport.render(p1)
 	-- upvalues: withStyle (ref), constantsModule (ref), roactModule (ref)
-	return withStyle(function(p8)
-		-- upvalues: p7 (ref), constantsModule (copy), roactModule (copy)
-		local theme = p8.Theme
-		local var22 = if p7.props.viewportSize then p7.props.viewportSize else constantsModule.ItemCardWidthLandscape
+	return withStyle(function(p2)
+		-- upvalues: p1 (ref), constantsModule (copy), roactModule (copy)
+		local theme = p2.Theme
+		local var1 = if p1.props.viewportSize then p1.props.viewportSize else constantsModule.ItemCardWidthLandscape
 		
 		return roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 0,
-			LayoutOrder = p7.props.LayoutOrder,
+			LayoutOrder = p1.props.LayoutOrder,
 			BackgroundColor3 = theme.PlaceHolder.Color,
 			BackgroundTransparency = theme.PlaceHolder.Transparency,
-			Size = UDim2.fromOffset(var22, var22)
+			Size = UDim2.fromOffset(var1, var1)
 		}, {
 			UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 10) }),
 			AspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {
@@ -126,10 +126,10 @@ function avatarPartViewport.render(p7)
 				LightColor = constantsModule.ViewportLightColor,
 				Ambient = constantsModule.ViewportLightAmbient,
 				LightDirection = constantsModule.ViewportLightDirection,
-				CurrentCamera = p7.camera
+				CurrentCamera = p1.camera
 			}, {
 				UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 10) }),
-				WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p7.modelRef })
+				WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p1.modelRef })
 			})
 		})
 	end)

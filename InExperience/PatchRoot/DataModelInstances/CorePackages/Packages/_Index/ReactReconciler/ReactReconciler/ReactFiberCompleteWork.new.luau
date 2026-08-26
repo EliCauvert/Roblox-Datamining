@@ -1,7 +1,7 @@
-﻿local function _(p0)
+﻿local function _(p1)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	print("UNIMPLEMENTED ERROR: " .. tostring(p0))
+	print("UNIMPLEMENTED ERROR: " .. tostring(p1))
 	error("FIXME (roblox): " .. p0 .. " is unimplemented", 2)
 end
 
@@ -110,17 +110,17 @@ local _ = function(p1)
 	p1.flags = bit32.bor(p1.flags, update)
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: ref (ref)
-	p2.flags = bit32.bor(p2.flags, ref)
+	p1.flags = bit32.bor(p1.flags, ref)
 end
 
-local function hadNoMutationsEffects(p3, p4)
+local function hadNoMutationsEffects(p1, p2)
 	-- upvalues: mutationMask (ref), noFlags (ref)
-	if p3 ~= nil and p3.child == p4.child then
+	if p1 ~= nil and p1.child == p2.child then
 		return true
 	end
-	local child = p4.child
+	local child = p2.child
 	while child ~= nil do
 		if bit32.band(child.flags, mutationMask) == noFlags then
 			if bit32.band(child.subtreeFlags, mutationMask) == noFlags then
@@ -134,24 +134,24 @@ local function hadNoMutationsEffects(p3, p4)
 	return true
 end
 
-local var11 = nil
+local var1 = nil
 local _ = nil
 local updateHostComponent = nil
 local updateHostText = nil
 
 if supportsMutation then
-	var11 = function(p5, p6, _, _)
+	var1 = function(p3, p4, _, _)
 		-- upvalues: hostComponent (ref), hostText (ref), appendInitialChild (ref), enableFundamentalAPI (ref), fundamentalComponent (ref), hostPortal (ref)
-		local child = p6.child
+		local child = p4.child
 		while child ~= nil do
 			if child.tag == hostComponent or child.tag == hostText then
-				appendInitialChild(p5, child.stateNode)
+				appendInitialChild(p3, child.stateNode)
 			elseif enableFundamentalAPI and child.tag == fundamentalComponent then
-				appendInitialChild(p5, child.stateNode.instance)
+				appendInitialChild(p3, child.stateNode.instance)
 			elseif child.tag == hostPortal or child.child == nil then
-				if child ~= p6 then
+				if child ~= p4 then
 					while child.sibling == nil do
-						if child.return_ ~= nil and child.return_ ~= p6 then
+						if child.return_ ~= nil and child.return_ ~= p4 then
 							child = child.return_
 							continue
 						end
@@ -168,29 +168,29 @@ if supportsMutation then
 		end
 	end
 	
-	local var14 = function(_, _) end
+	local var2 = function(_, _) end
 	
-	updateHostComponent = function(p7, p8, p9, p10, p11)
+	updateHostComponent = function(p5, p6, p7, p8, p9)
 		-- upvalues: getHostContext (ref), prepareUpdate (ref), update (ref)
-		local memoizedProps = p7.memoizedProps
+		local memoizedProps = p5.memoizedProps
 		
-		if memoizedProps == p10 then return end
-		local var16 = prepareUpdate(p8.stateNode, p9, memoizedProps, p10, p11, getHostContext())
-		p8.updateQueue = var16
+		if memoizedProps == p8 then return end
+		local var3 = prepareUpdate(p6.stateNode, p7, memoizedProps, p8, p9, getHostContext())
+		p6.updateQueue = var3
 		
-		if var16 then
-			p8.flags = bit32.bor(p8.flags, update)
+		if var3 then
+			p6.flags = bit32.bor(p6.flags, update)
 		end
 	end
 	
-	updateHostText = function(_, p12, p13, p14)
+	updateHostText = function(_, p5, p6, p7)
 		-- upvalues: update (ref)
-		if p13 ~= p14 then
-			p12.flags = bit32.bor(p12.flags, update)
+		if p6 ~= p7 then
+			p5.flags = bit32.bor(p5.flags, update)
 		end
 	end
 elseif supportsPersistence then
-	var11 = function(_, _, _, _)
+	var1 = function(_, _, _, _)
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildren"))
@@ -204,333 +204,333 @@ elseif supportsPersistence then
 		error("FIXME (roblox): appendAllChildrenToContainer is unimplemented", 2)
 	end
 	
-	local function var14(p15, p16)
+	local function var14(p5, p6)
 		-- upvalues: hadNoMutationsEffects (ref), createContainerChildSet (ref), update (ref), finalizeContainerChildren (ref)
-		local stateNode = p16.stateNode
+		local stateNode = p6.stateNode
 		
-		if hadNoMutationsEffects(p15, p16) then
+		if hadNoMutationsEffects(p5, p6) then
 			return
 		end
 		local containerInfo = stateNode.containerInfo
-		local var17 = createContainerChildSet(containerInfo)
+		local var3 = createContainerChildSet(containerInfo)
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildrenToContainer"))
 		error("FIXME (roblox): appendAllChildrenToContainer is unimplemented", 2)
-		stateNode.pendingChildren = var17
-		p16.flags = bit32.bor(p16.flags, update)
-		finalizeContainerChildren(containerInfo, var17)
+		stateNode.pendingChildren = var3
+		p6.flags = bit32.bor(p6.flags, update)
+		finalizeContainerChildren(containerInfo, var3)
 	end
 else
-	local var14 = function(_, _) end
+	local var2 = function(_, _) end
 end
-local function bubbleProperties(p17)
+local function bubbleProperties(p5)
 	-- upvalues: noLanes (ref), noFlags (ref), enableProfilerTimer (ref), profileMode (ref), noMode (ref), mergeLanes (ref), staticMask (ref)
-	local var18 = p17.alternate ~= nil and p17.alternate.child == p17.child
-	local var19 = noLanes
-	local var20 = noFlags
+	local var3 = p5.alternate ~= nil and p5.alternate.child == p5.child
+	local var4 = noLanes
+	local var5 = noFlags
 	
-	if var18 then
-		if enableProfilerTimer and bit32.band(p17.mode, profileMode) ~= noMode then
-			local selfBaseDuration = p17.selfBaseDuration
-			local child = p17.child
+	if var3 then
+		if enableProfilerTimer and bit32.band(p5.mode, profileMode) ~= noMode then
+			local selfBaseDuration = p5.selfBaseDuration
+			local child = p5.child
 			while child ~= nil do
-				var19 = mergeLanes(var19, mergeLanes(child.lanes, child.childLanes))
-				var20 = bit32.bor(bit32.bor(var20, bit32.band(child.subtreeFlags, staticMask)), bit32.band(child.flags, staticMask))
+				var4 = mergeLanes(var4, mergeLanes(child.lanes, child.childLanes))
+				var5 = bit32.bor(bit32.bor(var5, bit32.band(child.subtreeFlags, staticMask)), bit32.band(child.flags, staticMask))
 				selfBaseDuration += child.treeBaseDuration
 				child = child.sibling
 			end
-			p17.treeBaseDuration = selfBaseDuration
+			p5.treeBaseDuration = selfBaseDuration
 		else
-			local child = p17.child
+			local child = p5.child
 			while child ~= nil do
-				var19 = bit32.bor(var19, bit32.bor(child.lanes, child.childLanes))
-				var20 = bit32.bor(bit32.bor(var20, bit32.band(child.subtreeFlags, staticMask)), bit32.band(child.flags, staticMask))
-				child.return_ = p17
+				var4 = bit32.bor(var4, bit32.bor(child.lanes, child.childLanes))
+				var5 = bit32.bor(bit32.bor(var5, bit32.band(child.subtreeFlags, staticMask)), bit32.band(child.flags, staticMask))
+				child.return_ = p5
 				child = child.sibling
 			end
 		end
-		p17.subtreeFlags = bit32.bor(p17.subtreeFlags, var20)
-	elseif enableProfilerTimer and bit32.band(p17.mode, profileMode) ~= noMode then
-		local actualDuration = p17.actualDuration
-		local selfBaseDuration = p17.selfBaseDuration
-		local child = p17.child
+		p5.subtreeFlags = bit32.bor(p5.subtreeFlags, var5)
+	elseif enableProfilerTimer and bit32.band(p5.mode, profileMode) ~= noMode then
+		local actualDuration = p5.actualDuration
+		local selfBaseDuration = p5.selfBaseDuration
+		local child = p5.child
 		while child ~= nil do
-			var19 = mergeLanes(var19, mergeLanes(child.lanes, child.childLanes))
-			var20 = bit32.bor(bit32.bor(var20, child.subtreeFlags), child.flags)
+			var4 = mergeLanes(var4, mergeLanes(child.lanes, child.childLanes))
+			var5 = bit32.bor(bit32.bor(var5, child.subtreeFlags), child.flags)
 			actualDuration += child.actualDuration
 			selfBaseDuration += child.treeBaseDuration
 			child = child.sibling
 		end
-		p17.actualDuration = actualDuration
-		p17.treeBaseDuration = selfBaseDuration
+		p5.actualDuration = actualDuration
+		p5.treeBaseDuration = selfBaseDuration
 	else
-		local child = p17.child
+		local child = p5.child
 		while child ~= nil do
-			var19 = bit32.bor(var19, bit32.bor(child.lanes, child.childLanes))
-			var20 = bit32.bor(bit32.bor(var20, child.subtreeFlags), child.flags)
-			child.return_ = p17
+			var4 = bit32.bor(var4, bit32.bor(child.lanes, child.childLanes))
+			var5 = bit32.bor(bit32.bor(var5, child.subtreeFlags), child.flags)
+			child.return_ = p5
 			child = child.sibling
 		end
 	end
-	p17.subtreeFlags = bit32.bor(p17.subtreeFlags, var20)
-	p17.childLanes = var19
+	p5.subtreeFlags = bit32.bor(p5.subtreeFlags, var5)
+	p5.childLanes = var4
 	
-	return var18
+	return var3
 end
 
 return {
-	completeWork = function(p18, p19, p20)
-		-- upvalues: indeterminateComponent (ref), lazyComponent (ref), simpleMemoComponent (ref), functionComponent (ref), forwardRef (ref), fragment (ref), mode (ref), contextConsumer (ref), memoComponent (ref), bubbleProperties (ref), classComponent (ref), isContextProvider (ref), popContext (ref), hostRoot (ref), popHostContainer (ref), popTopLevelContextObject (ref), resetWorkInProgressVersions (ref), popHydrationState (ref), update (ref), snapshot (ref), var14 (write), hostComponent (ref), popHostContext (ref), getRootHostContainer (ref), updateHostComponent (write), ref (ref), invariant (ref), getHostContext (ref), prepareToHydrateHostInstance (ref), createInstance (ref), var11 (write), finalizeInitialChildren (ref), hostText (ref), updateHostText (write), prepareToHydrateHostTextInstance (ref), createTextInstance (ref), profiler (ref), callback (ref), passive (ref), performedWork (ref), noFlags (ref), layoutMask (ref), deletion (ref), passiveMask (ref), suspenseComponent (ref), popSuspenseContext (ref), enableSuspenseServerRenderer (ref), prepareToHydrateHostSuspenseInstance (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), offscreenLane (ref), enableProfilerTimer (ref), profileMode (ref), noMode (ref), resetHydrationState (ref), didCapture (ref), transferActualDuration (ref), blockingMode (ref), hasSuspenseContext (ref), suspenseStackCursor (ref), invisibleParentSuspenseContext (ref), renderDidSuspend (ref), renderDidSuspendDelayIfPossible (ref), supportsPersistence (ref), supportsMutation (ref), enableSuspenseCallback (ref), hostPortal (ref), preparePortalMount (ref), contextProvider (ref), popProvider (ref), incompleteClassComponent (ref), suspenseListComponent (ref), fundamentalComponent (ref), scopeComponent (ref), block (ref), offscreenComponent (ref), legacyHiddenComponent (ref), popRenderLanes (ref), includesSomeLane (ref), unknownModule_4 (ref), concurrentMode (ref)
-		local var30
-		local pendingProps = p19.pendingProps
+	completeWork = function(p6, p7, p8)
+		-- upvalues: indeterminateComponent (ref), lazyComponent (ref), simpleMemoComponent (ref), functionComponent (ref), forwardRef (ref), fragment (ref), mode (ref), contextConsumer (ref), memoComponent (ref), bubbleProperties (ref), classComponent (ref), isContextProvider (ref), popContext (ref), hostRoot (ref), popHostContainer (ref), popTopLevelContextObject (ref), resetWorkInProgressVersions (ref), popHydrationState (ref), update (ref), snapshot (ref), var2 (write), hostComponent (ref), popHostContext (ref), getRootHostContainer (ref), updateHostComponent (write), ref (ref), invariant (ref), getHostContext (ref), prepareToHydrateHostInstance (ref), createInstance (ref), var1 (write), finalizeInitialChildren (ref), hostText (ref), updateHostText (write), prepareToHydrateHostTextInstance (ref), createTextInstance (ref), profiler (ref), callback (ref), passive (ref), performedWork (ref), noFlags (ref), layoutMask (ref), deletion (ref), passiveMask (ref), suspenseComponent (ref), popSuspenseContext (ref), enableSuspenseServerRenderer (ref), prepareToHydrateHostSuspenseInstance (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), offscreenLane (ref), enableProfilerTimer (ref), profileMode (ref), noMode (ref), resetHydrationState (ref), didCapture (ref), transferActualDuration (ref), blockingMode (ref), hasSuspenseContext (ref), suspenseStackCursor (ref), invisibleParentSuspenseContext (ref), renderDidSuspend (ref), renderDidSuspendDelayIfPossible (ref), supportsPersistence (ref), supportsMutation (ref), enableSuspenseCallback (ref), hostPortal (ref), preparePortalMount (ref), contextProvider (ref), popProvider (ref), incompleteClassComponent (ref), suspenseListComponent (ref), fundamentalComponent (ref), scopeComponent (ref), block (ref), offscreenComponent (ref), legacyHiddenComponent (ref), popRenderLanes (ref), includesSomeLane (ref), unknownModule_4 (ref), concurrentMode (ref)
+		local var6
+		local pendingProps = p7.pendingProps
 		
-		if p19.tag == indeterminateComponent or p19.tag == lazyComponent or (p19.tag == simpleMemoComponent or p19.tag == functionComponent) or (p19.tag == forwardRef or p19.tag == fragment or (p19.tag == mode or p19.tag == contextConsumer)) or p19.tag == memoComponent then
-			bubbleProperties(p19)
+		if p7.tag == indeterminateComponent or p7.tag == lazyComponent or (p7.tag == simpleMemoComponent or p7.tag == functionComponent) or (p7.tag == forwardRef or p7.tag == fragment or (p7.tag == mode or p7.tag == contextConsumer)) or p7.tag == memoComponent then
+			bubbleProperties(p7)
 			
 			return nil
-		elseif p19.tag == classComponent then
-			if isContextProvider(p19.type) then
-				popContext(p19)
+		elseif p7.tag == classComponent then
+			if isContextProvider(p7.type) then
+				popContext(p7)
 			end
-			bubbleProperties(p19)
+			bubbleProperties(p7)
 			
 			return nil
-		elseif p19.tag == hostRoot then
-			popHostContainer(p19)
-			popTopLevelContextObject(p19)
+		elseif p7.tag == hostRoot then
+			popHostContainer(p7)
+			popTopLevelContextObject(p7)
 			resetWorkInProgressVersions()
-			local stateNode = p19.stateNode
+			local stateNode = p7.stateNode
 			
 			if stateNode.pendingContext then
 				stateNode.context = stateNode.pendingContext
 				stateNode.pendingContext = nil
 			end
-			if p18 == nil or p18.child == nil then
-				if popHydrationState(p19) then
-					p19.flags = bit32.bor(p19.flags, update)
+			if p6 == nil or p6.child == nil then
+				if popHydrationState(p7) then
+					p7.flags = bit32.bor(p7.flags, update)
 				elseif not stateNode.hydrate then
-					p19.flags = bit32.bor(p19.flags, snapshot)
+					p7.flags = bit32.bor(p7.flags, snapshot)
 				end
 			end
-			var14(p18, p19)
-			bubbleProperties(p19)
+			var2(p6, p7)
+			bubbleProperties(p7)
 			
 			return nil
-		elseif p19.tag == hostComponent then
-			popHostContext(p19)
-			local var21 = getRootHostContainer()
-			local type = p19.type
+		elseif p7.tag == hostComponent then
+			popHostContext(p7)
+			local var7 = getRootHostContainer()
+			local type = p7.type
 			
-			if p18 == nil or p19.stateNode == nil then
+			if p6 == nil or p7.stateNode == nil then
 				if not pendingProps then
-					invariant(p19.stateNode ~= nil, "We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.")
-					bubbleProperties(p19)
+					invariant(p7.stateNode ~= nil, "We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.")
+					bubbleProperties(p7)
 					
 					return nil
 				end
-				local var22 = getHostContext()
+				local var8 = getHostContext()
 				
-				if not popHydrationState(p19) then
-					local var23 = createInstance(type, pendingProps, var21, var22, p19)
-					var11(var23, p19, false, false)
-					p19.stateNode = var23
+				if not popHydrationState(p7) then
+					local var9 = createInstance(type, pendingProps, var7, var8, p7)
+					var1(var9, p7, false, false)
+					p7.stateNode = var9
 					
-					if finalizeInitialChildren(var23, type, pendingProps, var21, var22) then
-						p19.flags = bit32.bor(p19.flags, update)
+					if finalizeInitialChildren(var9, type, pendingProps, var7, var8) then
+						p7.flags = bit32.bor(p7.flags, update)
 					end
-				elseif prepareToHydrateHostInstance(p19, var21, var22) then
-					p19.flags = bit32.bor(p19.flags, update)
+				elseif prepareToHydrateHostInstance(p7, var7, var8) then
+					p7.flags = bit32.bor(p7.flags, update)
 				end
-				if p19.ref ~= nil then
-					p19.flags = bit32.bor(p19.flags, ref)
+				if p7.ref ~= nil then
+					p7.flags = bit32.bor(p7.flags, ref)
 				end
 			else
-				updateHostComponent(p18, p19, type, pendingProps, var21)
+				updateHostComponent(p6, p7, type, pendingProps, var7)
 				
-				if p18.ref ~= p19.ref then
-					p19.flags = bit32.bor(p19.flags, ref)
+				if p6.ref ~= p7.ref then
+					p7.flags = bit32.bor(p7.flags, ref)
 				end
 			end
-			bubbleProperties(p19)
+			bubbleProperties(p7)
 			
 			return nil
-		elseif p19.tag == hostText then
-			if p18 and p19.stateNode ~= nil then
-				updateHostText(p18, p19, p18.memoizedProps, pendingProps)
+		elseif p7.tag == hostText then
+			if p6 and p7.stateNode ~= nil then
+				updateHostText(p6, p7, p6.memoizedProps, pendingProps)
 			elseif typeof(pendingProps) ~= "string" then
-				invariant(p19.stateNode ~= nil, "We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.")
+				invariant(p7.stateNode ~= nil, "We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.")
 			end
-			local var24 = getRootHostContainer()
-			local var25 = getHostContext()
+			local var10 = getRootHostContainer()
+			local var11 = getHostContext()
 			
-			if not popHydrationState(p19) then
-				p19.stateNode = createTextInstance(pendingProps, var24, var25, p19)
-			elseif prepareToHydrateHostTextInstance(p19) then
-				p19.flags = bit32.bor(p19.flags, update)
+			if not popHydrationState(p7) then
+				p7.stateNode = createTextInstance(pendingProps, var10, var11, p7)
+			elseif prepareToHydrateHostTextInstance(p7) then
+				p7.flags = bit32.bor(p7.flags, update)
 			end
-			bubbleProperties(p19)
+			bubbleProperties(p7)
 			
 			return nil
-		elseif p19.tag == profiler then
-			if not bubbleProperties(p19) then
-				local var26 = update
-				local var27 = callback
-				local var28 = passive
-				local subtreeFlags = p19.subtreeFlags
-				local flags = p19.flags
-				local var29 = flags
+		elseif p7.tag == profiler then
+			if not bubbleProperties(p7) then
+				local var12 = update
+				local var13 = callback
+				local var14 = passive
+				local subtreeFlags = p7.subtreeFlags
+				local flags = p7.flags
+				local var15 = flags
 				
 				if bit32.band(flags, performedWork) ~= noFlags or bit32.band(subtreeFlags, performedWork) ~= noFlags then
-					var29 = bit32.bor(var29, var26)
+					var15 = bit32.bor(var15, var12)
 				end
 				if bit32.band(flags, bit32.bor(layoutMask, deletion)) ~= noFlags or bit32.band(subtreeFlags, bit32.bor(layoutMask, deletion)) ~= noFlags then
-					var29 = bit32.bor(var29, var27)
+					var15 = bit32.bor(var15, var13)
 				end
 				if bit32.band(flags, passiveMask) ~= noFlags or bit32.band(subtreeFlags, passiveMask) ~= noFlags then
-					var29 = bit32.bor(var29, var28)
+					var15 = bit32.bor(var15, var14)
 				end
-				p19.flags = var29
+				p7.flags = var15
 			end
 			return nil
-		elseif p19.tag == suspenseComponent then
-			popSuspenseContext(p19)
-			local memoizedState = p19.memoizedState
+		elseif p7.tag == suspenseComponent then
+			popSuspenseContext(p7)
+			local memoizedState = p7.memoizedState
 			
 			if enableSuspenseServerRenderer and memoizedState ~= nil and memoizedState.dehydrated ~= nil then
-				if p18 == nil then
-					invariant(popHydrationState(p19), "A dehydrated suspense component was completed without a hydrated node. This is probably a bug in React.")
-					prepareToHydrateHostSuspenseInstance(p19)
+				if p6 == nil then
+					invariant(popHydrationState(p7), "A dehydrated suspense component was completed without a hydrated node. This is probably a bug in React.")
+					prepareToHydrateHostSuspenseInstance(p7)
 					
 					if enableSchedulerTracing then
 						markSpawnedWork(offscreenLane)
 					end
-					bubbleProperties(p19)
+					bubbleProperties(p7)
 					
-					if enableProfilerTimer and bit32.band(p19.mode, profileMode) ~= noMode and memoizedState ~= nil then
-						local child = p19.child
+					if enableProfilerTimer and bit32.band(p7.mode, profileMode) ~= noMode and memoizedState ~= nil then
+						local child = p7.child
 						
 						if child ~= nil then
-							p19.treeBaseDuration = child.treeBaseDuration
+							p7.treeBaseDuration = child.treeBaseDuration
 						end
 					end
 					return nil
 				else
 					resetHydrationState()
 					
-					if bit32.band(p19.flags, didCapture) == noFlags then
-						p19.memoizedState = nil
+					if bit32.band(p7.flags, didCapture) == noFlags then
+						p7.memoizedState = nil
 					end
-					p19.flags = bit32.bor(p19.flags, update)
-					bubbleProperties(p19)
+					p7.flags = bit32.bor(p7.flags, update)
+					bubbleProperties(p7)
 					
-					if enableProfilerTimer and bit32.band(p19.mode, profileMode) ~= noMode and memoizedState ~= nil then
-						local child = p19.child
+					if enableProfilerTimer and bit32.band(p7.mode, profileMode) ~= noMode and memoizedState ~= nil then
+						local child = p7.child
 						
 						if child ~= nil then
-							p19.treeBaseDuration -= child.treeBaseDuration
+							p7.treeBaseDuration -= child.treeBaseDuration
 						end
 					end
 					return nil
 				end
-			elseif bit32.band(p19.flags, didCapture) == noFlags then
-				var30 = memoizedState ~= nil
-				local var31 = false
+			elseif bit32.band(p7.flags, didCapture) == noFlags then
+				var6 = memoizedState ~= nil
+				local var16 = false
 				
-				if p18 ~= nil then
-					var31 = p18.memoizedState ~= nil
-				elseif p19.memoizedProps.fallback ~= nil then
-					popHydrationState(p19)
+				if p6 ~= nil then
+					var16 = p6.memoizedState ~= nil
+				elseif p7.memoizedProps.fallback ~= nil then
+					popHydrationState(p7)
 				end
-				if var30 and not var31 and bit32.band(p19.mode, blockingMode) ~= noMode then
-					if (p18 == nil and p19.memoizedProps.unstable_avoidThisFallback ~= true) or hasSuspenseContext(suspenseStackCursor.current, invisibleParentSuspenseContext) then
+				if var6 and not var16 and bit32.band(p7.mode, blockingMode) ~= noMode then
+					if (p6 == nil and p7.memoizedProps.unstable_avoidThisFallback ~= true) or hasSuspenseContext(suspenseStackCursor.current, invisibleParentSuspenseContext) then
 						renderDidSuspend()
 					else
 						renderDidSuspendDelayIfPossible()
 					end
 				end
-				if supportsPersistence and var30 then
-					p19.flags = bit32.bor(p19.flags, update)
+				if supportsPersistence and var6 then
+					p7.flags = bit32.bor(p7.flags, update)
 				end
-				if supportsMutation and (var30 or var31) then
-					p19.flags = bit32.bor(p19.flags, update)
+				if supportsMutation and (var6 or var16) then
+					p7.flags = bit32.bor(p7.flags, update)
 				end
-				if enableSuspenseCallback and p19.updateQueue ~= nil and p19.memoizedProps.suspenseCallback ~= nil then
-					p19.flags = bit32.bor(p19.flags, update)
+				if enableSuspenseCallback and p7.updateQueue ~= nil and p7.memoizedProps.suspenseCallback ~= nil then
+					p7.flags = bit32.bor(p7.flags, update)
 				end
-				bubbleProperties(p19)
+				bubbleProperties(p7)
 				
-				if enableProfilerTimer and bit32.band(p19.mode, profileMode) ~= noMode and var30 then
-					local child = p19.child
+				if enableProfilerTimer and bit32.band(p7.mode, profileMode) ~= noMode and var6 then
+					local child = p7.child
 					
 					if child ~= nil then
-						p19.treeBaseDuration -= child.treeBaseDuration
+						p7.treeBaseDuration -= child.treeBaseDuration
 					end
 				end
 				return nil
 			else
-				p19.lanes = p20
+				p7.lanes = p8
 				
-				if enableProfilerTimer and bit32.band(p19.mode, profileMode) ~= noMode then
-					transferActualDuration(p19)
+				if enableProfilerTimer and bit32.band(p7.mode, profileMode) ~= noMode then
+					transferActualDuration(p7)
 				end
-				return p19
+				return p7
 			end
-		elseif p19.tag == hostPortal then
-			popHostContainer(p19)
-			var14(p18, p19)
+		elseif p7.tag == hostPortal then
+			popHostContainer(p7)
+			var2(p6, p7)
 			
-			if p18 == nil then
-				preparePortalMount(p19.stateNode.containerInfo)
+			if p6 == nil then
+				preparePortalMount(p7.stateNode.containerInfo)
 			end
-			bubbleProperties(p19)
+			bubbleProperties(p7)
 			
 			return nil
-		elseif p19.tag == contextProvider then
-			popProvider(p19)
-			bubbleProperties(p19)
+		elseif p7.tag == contextProvider then
+			popProvider(p7)
+			bubbleProperties(p7)
 			
 			return nil
-		elseif p19.tag == incompleteClassComponent then
-			if isContextProvider(p19.type) then
-				popContext(p19)
+		elseif p7.tag == incompleteClassComponent then
+			if isContextProvider(p7.type) then
+				popContext(p7)
 			end
-			bubbleProperties(p19)
+			bubbleProperties(p7)
 			
 			return nil
-		elseif p19.tag == suspenseListComponent then
+		elseif p7.tag == suspenseListComponent then
 			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			print("UNIMPLEMENTED ERROR: " .. tostring("SuspenseListComponent"))
 			error("FIXME (roblox): SuspenseListComponent is unimplemented", 2)
-		elseif p19.tag == fundamentalComponent then
+		elseif p7.tag == fundamentalComponent then
 			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			print("UNIMPLEMENTED ERROR: " .. tostring("FundamentalComponent"))
 			error("FIXME (roblox): FundamentalComponent is unimplemented", 2)
-		elseif p19.tag == scopeComponent then
+		elseif p7.tag == scopeComponent then
 			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			print("UNIMPLEMENTED ERROR: " .. tostring("ScopeComponent"))
 			error("FIXME (roblox): ScopeComponent is unimplemented", 2)
-		elseif p19.tag == block then
+		elseif p7.tag == block then
 			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			print("UNIMPLEMENTED ERROR: " .. tostring("Block"))
 			error("FIXME (roblox): Block is unimplemented", 2)
-		elseif p19.tag ~= offscreenComponent and p19.tag ~= legacyHiddenComponent then
-			invariant(false, "Unknown unit of work tag (%s). This error is likely caused by a bug in React. Please file an issue.", tostring(p19.tag))
+		elseif p7.tag ~= offscreenComponent and p7.tag ~= legacyHiddenComponent then
+			invariant(false, "Unknown unit of work tag (%s). This error is likely caused by a bug in React. Please file an issue.", tostring(p7.tag))
 			
 			return nil
 		end
-		popRenderLanes(p19)
-		var30 = p19.memoizedState ~= nil
+		popRenderLanes(p7)
+		var6 = p7.memoizedState ~= nil
 		
-		if p18 ~= nil and p18.memoizedState ~= nil ~= var30 and pendingProps.mode ~= "unstable-defer-without-hiding" then
-			p19.flags = bit32.bor(p19.flags, update)
+		if p6 ~= nil and p6.memoizedState ~= nil ~= var6 and pendingProps.mode ~= "unstable-defer-without-hiding" then
+			p7.flags = bit32.bor(p7.flags, update)
 		end
-		if not var30 or includesSomeLane(unknownModule_4.subtreeRenderLanes, offscreenLane) or bit32.band(p19.mode, concurrentMode) == noMode then
-			bubbleProperties(p19)
+		if not var6 or includesSomeLane(unknownModule_4.subtreeRenderLanes, offscreenLane) or bit32.band(p7.mode, concurrentMode) == noMode then
+			bubbleProperties(p7)
 		end
 		return nil
 	end

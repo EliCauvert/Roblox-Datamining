@@ -5,22 +5,22 @@ local _ = require(script.Parent.Parent.generatedTypes)
 
 return {
 	Experience = {
-		thumbnails = function(p0, _, p1)
+		thumbnails = function(p1, _, p2)
 			-- upvalues: promiseModule (ref)
-			local thumbnails = p1.dataLoaders.thumbnails
+			local thumbnails = p2.dataLoaders.thumbnails
 			
-			return if thumbnails then thumbnails:load(p0.universeId):andThen(function(p2)
-				return if p2 then { { url = p2.imageUrl } } else {}
+			return if thumbnails then thumbnails:load(p1.universeId):andThen(function(p3)
+				return if p3 then { { url = p3.imageUrl } } else {}
 			end):catch(function()
 				return {}
 			end) else promiseModule.resolve({})
 		end
 	},
 	Query = {
-		experienceThumbnails = function(_, p3)
+		experienceThumbnails = function(_, p1)
 			-- upvalues: array (ref)
-			return array.map(p3.universeIds, function(p4)
-				return { universeId = p4 }
+			return array.map(p1.universeIds, function(p2)
+				return { universeId = p2 }
 			end)
 		end
 	}

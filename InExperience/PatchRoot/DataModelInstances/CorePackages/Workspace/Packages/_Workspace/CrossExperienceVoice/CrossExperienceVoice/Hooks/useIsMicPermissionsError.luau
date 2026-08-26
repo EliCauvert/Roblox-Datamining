@@ -4,7 +4,7 @@ local useVoiceStatusModule = require(crossExperienceVoice.Hooks.useVoiceStatus)
 
 return function()
 	-- upvalues: useVoiceStatusModule (ref), utils (ref)
-	local var2 = useVoiceStatusModule()
+	local var1 = useVoiceStatusModule()
 	
-	return if var2 == nil then false else utils.VoiceStatus.isMicPermissionsError(var2)
+	return if var1 == nil then false else utils.VoiceStatus.isMicPermissionsError(var1)
 end

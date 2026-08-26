@@ -22,34 +22,34 @@ local writeNamesQuery = dependenciesModule.UserProfiles.Mutations.writeNamesQuer
 local useEffectOnce = roactUtilsModule.Hooks.useEffectOnce
 local _ = { Moderated = "Moderated", Success = "Success" }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), constantsModule (ref), react (ref), useUserProfilesFetch (ref), userProfilesAllNamesByUserIds (ref), useAnalytics (ref), useSelector (ref), getDeepValue (ref), useEffectOnMount (ref), eventNames (ref), socialStopwatchModule (ref), loadingStages (ref), useEffectOnce (ref), networkingAliases (ref), writeNamesQuery (ref), setAliasModalModule (ref)
-	local var7 = useDispatch()
-	local param = p0.navigation.getParam(constantsModule.PROFILE_USER_ID)
-	local var9, var10 = react.useState(false)
-	local var11 = useUserProfilesFetch({
+	local var1 = useDispatch()
+	local param = p1.navigation.getParam(constantsModule.PROFILE_USER_ID)
+	local var2, var3 = react.useState(false)
+	local var4 = useUserProfilesFetch({
 		userIds = { param },
 		query = userProfilesAllNamesByUserIds
 	})
-	local var12 = useAnalytics()
-	local var13 = useSelector(function(p1)
-		return p1.ScreenSize
+	local var5 = useAnalytics()
+	local var6 = useSelector(function(p2)
+		return p2.ScreenSize
 	end)
-	local var14 = (getDeepValue(var11, "data.userProfiles") or {})[1] or {}
-	local var15 = getDeepValue(var14, "names.alias")
-	local var16 = getDeepValue(var14, "names.displayName")
+	local var7 = (getDeepValue(var4, "data.userProfiles") or {})[1] or {}
+	local var8 = getDeepValue(var7, "names.alias")
+	local var9 = getDeepValue(var7, "names.displayName")
 	useEffectOnMount(function()
-		-- upvalues: var12 (ref), eventNames (copy)
-		if var12 then
-			var12.fireAnalyticsEvent(eventNames.CustomizeNameModalOpened)
+		-- upvalues: var5 (ref), eventNames (copy)
+		if var5 then
+			var5.fireAnalyticsEvent(eventNames.CustomizeNameModalOpened)
 		end
 	end)
 	react.useEffect(function()
-		-- upvalues: socialStopwatchModule (copy), var12 (ref), eventNames (copy), loadingStages (copy)
-		local var17 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CustomizeNameOpened)
-		var12.fireAnalyticsEvent(eventNames.CustomizeNameLoadingStage, {
+		-- upvalues: socialStopwatchModule (copy), var5 (ref), eventNames (copy), loadingStages (copy)
+		local var10 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CustomizeNameOpened)
+		var5.fireAnalyticsEvent(eventNames.CustomizeNameLoadingStage, {
 			status = loadingStages.Fetching,
-			statValue = var17 and var17.timeElapsed
+			statValue = var10 and var10.timeElapsed
 		})
 		
 		return function()
@@ -58,57 +58,57 @@ return function(p0)
 		end
 	end, {})
 	useEffectOnce(function()
-		-- upvalues: socialStopwatchModule (copy), var12 (ref), eventNames (copy), var11 (ref), loadingStages (copy)
-		local var18 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CustomizeNameOpened)
-		var12.fireAnalyticsEvent(eventNames.CustomizeNameLoadingStage, {
-			status = if var11.data then loadingStages.Done else loadingStages.Failed,
-			statValue = var18 and var18.timeElapsed
+		-- upvalues: socialStopwatchModule (copy), var5 (ref), eventNames (copy), var4 (ref), loadingStages (copy)
+		local var10 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CustomizeNameOpened)
+		var5.fireAnalyticsEvent(eventNames.CustomizeNameLoadingStage, {
+			status = if var4.data then loadingStages.Done else loadingStages.Failed,
+			statValue = var10 and var10.timeElapsed
 		})
-	end, var11.data or var11.error)
+	end, var4.data or var4.error)
 	
 	return react.createElement(setAliasModalModule, {
-		screenSize = var13,
-		alias = var15,
-		displayName = var16,
+		screenSize = var6,
+		alias = var8,
+		displayName = var9,
 		cancelOnActivated = function()
-			-- upvalues: p0 (ref)
-			p0.navigation.pop()
+			-- upvalues: p1 (ref)
+			p1.navigation.pop()
 		end,
 		saveOnActivated = function(p2)
-			-- upvalues: var7 (ref), networkingAliases (copy), param (ref), getDeepValue (copy), var10 (ref), var12 (ref), eventNames (copy), writeNamesQuery (copy), var11 (ref), userProfilesAllNamesByUserIds (copy), var14 (ref), p0 (ref)
-			return var7(networkingAliases.SetUserTag.API(param, p2)):andThen(function(p3)
-				-- upvalues: getDeepValue (copy), var10 (copy), var12 (copy), eventNames (copy), p2 (ref), writeNamesQuery (copy), var11 (copy), userProfilesAllNamesByUserIds (copy), param (copy), var14 (copy), p0 (copy)
+			-- upvalues: var1 (ref), networkingAliases (copy), param (ref), getDeepValue (copy), var3 (ref), var5 (ref), eventNames (copy), writeNamesQuery (copy), var4 (ref), userProfilesAllNamesByUserIds (copy), var7 (ref), p1 (ref)
+			return var1(networkingAliases.SetUserTag.API(param, p2)):andThen(function(p3)
+				-- upvalues: getDeepValue (copy), var3 (copy), var5 (copy), eventNames (copy), p2 (ref), writeNamesQuery (copy), var4 (copy), userProfilesAllNamesByUserIds (copy), param (copy), var7 (copy), p1 (copy)
 				if getDeepValue(p3, "responseBody.status") == "Moderated" then
-					var10(true)
+					var3(true)
 					
-					if var12 then
-						var12.fireAnalyticsEvent(eventNames.CustomizeNameSaveAttemptInvalidInput, { alias = p2 })
+					if var5 then
+						var5.fireAnalyticsEvent(eventNames.CustomizeNameSaveAttemptInvalidInput, { alias = p2 })
 					end
 					return
-				elseif var12 then
-					var12.fireAnalyticsEvent(eventNames.CustomizeNameSaved, { alias = p2 })
+				elseif var5 then
+					var5.fireAnalyticsEvent(eventNames.CustomizeNameSaved, { alias = p2 })
 				end
 				writeNamesQuery({
-					client = var11.client,
+					client = var4.client,
 					query = userProfilesAllNamesByUserIds,
 					userId = param,
 					names = {
 						alias = p2,
-						contactName = getDeepValue(var14, "names.contactName"),
-						displayName = getDeepValue(var14, "names.displayName"),
-						username = getDeepValue(var14, "names.username")
+						contactName = getDeepValue(var7, "names.contactName"),
+						displayName = getDeepValue(var7, "names.displayName"),
+						username = getDeepValue(var7, "names.username")
 					}
 				})
-				p0.navigation.pop()
+				p1.navigation.pop()
 			end)
 		end,
-		hasSaveAliasError = var9,
+		hasSaveAliasError = var2,
 		onTextChanged = function()
-			-- upvalues: var9 (ref), var10 (ref)
-			if var9 then
-				var10(false)
+			-- upvalues: var2 (ref), var3 (ref)
+			if var2 then
+				var3(false)
 			end
 		end,
-		isLoading = var11.loading
+		isLoading = var4.loading
 	})
 end

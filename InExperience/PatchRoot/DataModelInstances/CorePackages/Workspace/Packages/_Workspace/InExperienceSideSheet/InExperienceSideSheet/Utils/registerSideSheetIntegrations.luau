@@ -2,11 +2,11 @@
 local _ = require(inExperienceSideSheet.Parent.Chrome)
 local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetIntegrationsStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getIntegrationsStoreModule (ref)
-	local var2 = getIntegrationsStoreModule()
-	var2.setUnibarIntegrations(p0.unibarIntegrations)
-	var2.setToggleIntegrations(p0.toggleIntegrations)
-	var2.setPageIntegrations(p0.pageIntegrations)
-	var2.setSessionActionIntegrations(p0.sessionActionIntegrations)
+	local var1 = getIntegrationsStoreModule()
+	var1.setUnibarIntegrations(p1.unibarIntegrations)
+	var1.setToggleIntegrations(p1.toggleIntegrations)
+	var1.setPageIntegrations(p1.pageIntegrations)
+	var1.setSessionActionIntegrations(p1.sessionActionIntegrations)
 end

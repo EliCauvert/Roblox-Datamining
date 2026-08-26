@@ -11,12 +11,12 @@ return function(value)
 		return 0
 	end
 	local count = #selectEquippedLayeredMakeupAssetsModule(value)
-	local var6 = 0
+	local var1 = 0
 	
 	for i, v in selectTryOnItemsModule(value) do
 		if v.selectedInTryOnManager and v.itemType and isMakeupAssetTypeModule(v.itemSubType) then
-			var6 += 1
+			var1 += 1
 		end
 	end
-	return count + var6
+	return count + var1
 end

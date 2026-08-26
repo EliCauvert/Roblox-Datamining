@@ -1,15 +1,15 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
 
-return function(p0, p1)
-	if type(p1) == "table" then
-		p1.AnchorPoint = p0.AnchorPoint
-		p1.LayoutOrder = p0.LayoutOrder
-		p1.Position = p0.Position
-		p1.Visible = p0.Visible
-		p1.ZIndex = p0.ZIndex
-		p1.onAbsoluteSizeChanged = p0.onAbsoluteSizeChanged
-		p1.onAbsolutePositionChanged = p0.onAbsolutePositionChanged
-		p1.testId = p0.testId
+return function(p1, p2)
+	if type(p2) == "table" then
+		p2.AnchorPoint = p1.AnchorPoint
+		p2.LayoutOrder = p1.LayoutOrder
+		p2.Position = p1.Position
+		p2.Visible = p1.Visible
+		p2.ZIndex = p1.ZIndex
+		p2.onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged
+		p2.onAbsolutePositionChanged = p1.onAbsolutePositionChanged
+		p2.testId = p1.testId
 	end
-	return p1
+	return p2
 end

@@ -11,9 +11,9 @@ local t = {
 	[iconSizeModule.XXLarge] = 192
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: iconSizeModule (ref), UIBloxConfigModule (ref), t (ref)
-	assert(iconSizeModule.isEnumValue(p0))
+	assert(iconSizeModule.isEnumValue(p1))
 	
-	return if p1 == nil or p1.Tokens == nil then t[p0] elseif p0 == iconSizeModule.Small then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_400 else p1.Tokens.Semantic.Icon.Size.Small elseif p0 == iconSizeModule.Medium then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_900 else p1.Tokens.Semantic.Icon.Size.Medium elseif p0 == iconSizeModule.Large then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_1200 else p1.Tokens.Semantic.Icon.Size.Large elseif p0 == iconSizeModule.XLarge then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_2400 else p1.Tokens.Semantic.Icon.Size.XLarge elseif p0 == iconSizeModule.XXLarge then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then 192 else p1.Tokens.Semantic.Icon.Size.XxLarge else nil
+	return if p2 == nil or p2.Tokens == nil then t[p1] elseif p1 == iconSizeModule.Small then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_400 else p2.Tokens.Semantic.Icon.Size.Small elseif p1 == iconSizeModule.Medium then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_900 else p2.Tokens.Semantic.Icon.Size.Medium elseif p1 == iconSizeModule.Large then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_1200 else p2.Tokens.Semantic.Icon.Size.Large elseif p1 == iconSizeModule.XLarge then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_2400 else p2.Tokens.Semantic.Icon.Size.XLarge elseif p1 == iconSizeModule.XXLarge then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then 192 else p2.Tokens.Semantic.Icon.Size.XxLarge else nil
 end

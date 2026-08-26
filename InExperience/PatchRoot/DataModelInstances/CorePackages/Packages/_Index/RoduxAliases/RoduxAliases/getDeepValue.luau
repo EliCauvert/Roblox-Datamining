@@ -1,12 +1,12 @@
-﻿return function(p0, p1)
-	local var0 = p0
+﻿return function(p1, p2)
+	local var1 = p1
 	
-	for i, v in ipairs(p1:split(".")) do
-		if var0[v] then
-			var0 = var0[v]
+	for i, v in ipairs(p2:split(".")) do
+		if var1[v] then
+			var1 = var1[v]
 			continue
 		end
 		return nil
 	end
-	return var0
+	return var1
 end

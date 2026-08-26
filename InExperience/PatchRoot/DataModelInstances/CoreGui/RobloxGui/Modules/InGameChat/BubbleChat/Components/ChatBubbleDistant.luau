@@ -21,20 +21,20 @@ chatBubbleDistant.validateProps = tModule.strictInterface({
 })
 chatBubbleDistant.defaultProps = { width = 32, height = 16 }
 
-local function _(p0)
-	local height = p0.height
+local function _(p1)
+	local height = p1.height
 	
-	if p0.renderInsert then
-		height = math.max(height, p0.insertSize.Y)
+	if p1.renderInsert then
+		height = math.max(height, p1.insertSize.Y)
 	end
-	return height + p0.chatSettings.Padding * 2
+	return height + p1.chatSettings.Padding * 2
 end
 
 function chatBubbleDistant.init(p1, p2)
 	-- upvalues: roactModule (ref), otterModule (ref)
-	local var9, var10 = roactModule.createBinding(0)
-	p1.width = var9
-	p1.updateWidth = var10
+	local var1, var2 = roactModule.createBinding(0)
+	p1.width = var1
+	p1.updateWidth = var2
 	p1.widthMotor = otterModule.createSingleMotor(0)
 	p1.widthMotor:onStep(function(p3)
 		-- upvalues: p1 (ref)
@@ -49,12 +49,12 @@ function chatBubbleDistant.init(p1, p2)
 	createBinding, var11 = createBinding(height + p2.chatSettings.Padding * 2)
 	p1.height = createBinding
 	p1.updateHeight = var11
-	p1.frameSize = roactModule.joinBindings({ p1.width, p1.height }):map(function(p4)
-		return UDim2.fromOffset(p4[1], p4[2])
+	p1.frameSize = roactModule.joinBindings({ p1.width, p1.height }):map(function(p3)
+		return UDim2.fromOffset(p3[1], p3[2])
 	end)
-	local var12, var13 = roactModule.createBinding(1)
-	p1.transparency = var12
-	p1.updateTransparency = var13
+	local var3, var4 = roactModule.createBinding(1)
+	p1.transparency = var3
+	p1.updateTransparency = var4
 	p1.transparencyMotor = otterModule.createSingleMotor(1)
 	p1.transparencyMotor:onStep(p1.updateTransparency)
 	
@@ -63,29 +63,29 @@ function chatBubbleDistant.init(p1, p2)
 	end
 end
 
-function chatBubbleDistant.getDerivedStateFromProps(p5, p6)
-	local chatSettings = p5.chatSettings
-	local var14 = if p5.renderInsert then p5.width + p5.insertSize.X + chatSettings.Padding * 2 else p5.width + chatSettings.Padding * 2
-	local height = p5.height
+function chatBubbleDistant.getDerivedStateFromProps(p1, p2)
+	local chatSettings = p1.chatSettings
+	local var1 = if p1.renderInsert then p1.width + p1.insertSize.X + chatSettings.Padding * 2 else p1.width + chatSettings.Padding * 2
+	local height = p1.height
 	
-	if p5.renderInsert then
-		height = math.max(height, p5.insertSize.Y)
+	if p1.renderInsert then
+		height = math.max(height, p1.insertSize.Y)
 	end
-	height += p5.chatSettings.Padding * 2
+	height += p1.chatSettings.Padding * 2
 	
-	return if var14 == p6.fullWidth and height == p6.fullHeight then nil else { fullWidth = var14, fullHeight = height }
+	return if var1 == p2.fullWidth and height == p2.fullHeight then nil else { fullWidth = var1, fullHeight = height }
 end
 
-function chatBubbleDistant.render(p7)
+function chatBubbleDistant.render(p1)
 	-- upvalues: roactModule (ref), cryoModule (ref), appFonts (ref)
-	local chatSettings = p7.props.chatSettings
+	local chatSettings = p1.props.chatSettings
 	local backgroundImage = chatSettings.BackgroundImage
 	local backgroundGradient = chatSettings.BackgroundGradient
 	
 	return roactModule.createElement("Frame", {
 		Transparency = 1,
 		AnchorPoint = Vector2.new(0.5, 1),
-		Size = UDim2.fromOffset(p7.state.fullWidth, p7.state.fullHeight),
+		Size = UDim2.fromOffset(p1.state.fullWidth, p1.state.fullHeight),
 		Position = UDim2.new(0.5, 0, 1, -8)
 	}, {
 		Scale = roactModule.createElement("UIScale", { Scale = 0.75 }),
@@ -96,17 +96,17 @@ function chatBubbleDistant.render(p7)
 			Position = UDim2.new(0.5, 0, 1, -1),
 			Size = UDim2.fromOffset(12, 8),
 			ImageColor3 = chatSettings.BackgroundColor3,
-			ImageTransparency = p7.transparency
+			ImageTransparency = p1.transparency
 		}),
 		RoundedFrame = roactModule.createElement("ImageLabel", cryoModule.Dictionary.join(backgroundImage, {
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
-			Size = p7.frameSize,
+			Size = p1.frameSize,
 			BackgroundColor3 = chatSettings.BackgroundColor3,
-			BackgroundTransparency = if backgroundImage.Image == "" then p7.transparency else 1,
+			BackgroundTransparency = if backgroundImage.Image == "" then p1.transparency else 1,
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.new(0.5, 0, 0, 0),
-			ImageTransparency = p7.transparency
+			ImageTransparency = p1.transparency
 		}), {
 			UICorner = chatSettings.CornerEnabled and roactModule.createElement("UICorner", { CornerRadius = chatSettings.CornerRadius }),
 			Contents = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
@@ -120,16 +120,16 @@ function chatBubbleDistant.render(p7)
 					FillDirection = Enum.FillDirection.Horizontal,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				Insert = p7.props.renderInsert and p7.props.renderInsert(),
+				Insert = p1.props.renderInsert and p1.props.renderInsert(),
 				Ellipsis = roactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					Text = "\226\128\166",
 					TextScaled = true,
 					LayoutOrder = 2,
 					TextColor3 = chatSettings.TextColor3,
-					TextTransparency = p7.transparency,
+					TextTransparency = p1.transparency,
 					Font = appFonts.default:getBlack(),
-					Size = UDim2.new(1, -(if p7.props.renderInsert then p7.props.insertSize.X else 0), 1, 0)
+					Size = UDim2.new(1, -(if p1.props.renderInsert then p1.props.insertSize.X else 0), 1, 0)
 				})
 			}),
 			Gradient = backgroundGradient.Enabled and roactModule.createElement("UIGradient", backgroundGradient)
@@ -137,47 +137,47 @@ function chatBubbleDistant.render(p7)
 	})
 end
 
-function chatBubbleDistant.fadeOut(p8)
+function chatBubbleDistant.fadeOut(p1)
 	-- upvalues: getTransparencySpringFromSettingsModule (ref)
-	if not p8.isFadingOut then
-		p8.isFadingOut = true
-		p8.transparencyMotor:onComplete(function()
-			-- upvalues: p8 (ref)
-			if p8.props.onFadeOut then
-				p8.props.onFadeOut()
+	if not p1.isFadingOut then
+		p1.isFadingOut = true
+		p1.transparencyMotor:onComplete(function()
+			-- upvalues: p1 (ref)
+			if p1.props.onFadeOut then
+				p1.props.onFadeOut()
 			end
 		end)
-		p8.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(p8.props.chatSettings)(1))
+		p1.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(p1.props.chatSettings)(1))
 	end
 end
 
-function chatBubbleDistant.didUpdate(p9, _, p10)
+function chatBubbleDistant.didUpdate(p1, _, p2)
 	-- upvalues: getSizeSpringFromSettingsModule (ref)
-	if p9.props.fadingOut then
-		p9:fadeOut()
+	if p1.props.fadingOut then
+		p1:fadeOut()
 		
 		return
-	elseif p9.state.fullHeight ~= p10.fullHeight then
-		p9.updateHeight(p9.state.fullHeight)
+	elseif p1.state.fullHeight ~= p2.fullHeight then
+		p1.updateHeight(p1.state.fullHeight)
 	end
-	if p9.state.fullWidth ~= p10.fullWidth then
-		p9.widthMotor:setGoal(getSizeSpringFromSettingsModule(p9.props.chatSettings)(p9.state.fullWidth))
+	if p1.state.fullWidth ~= p2.fullWidth then
+		p1.widthMotor:setGoal(getSizeSpringFromSettingsModule(p1.props.chatSettings)(p1.state.fullWidth))
 	end
 end
 
-function chatBubbleDistant.didMount(p11)
+function chatBubbleDistant.didMount(p1)
 	-- upvalues: getSizeSpringFromSettingsModule (ref), getTransparencySpringFromSettingsModule (ref)
-	if not p11.props.fadingOut then
-		local chatSettings = p11.props.chatSettings
-		local var15 = getSizeSpringFromSettingsModule(chatSettings)
-		p11.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(chatSettings)(p11.props.chatSettings.Transparency))
-		p11.widthMotor:setGoal(var15(p11.state.fullWidth))
+	if not p1.props.fadingOut then
+		local chatSettings = p1.props.chatSettings
+		local var1 = getSizeSpringFromSettingsModule(chatSettings)
+		p1.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(chatSettings)(p1.props.chatSettings.Transparency))
+		p1.widthMotor:setGoal(var1(p1.state.fullWidth))
 	end
 end
 
-function chatBubbleDistant.willUnmount(p12)
-	p12.transparencyMotor:destroy()
-	p12.widthMotor:destroy()
+function chatBubbleDistant.willUnmount(p1)
+	p1.transparencyMotor:destroy()
+	p1.widthMotor:destroy()
 end
 
 return chatBubbleDistant

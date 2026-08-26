@@ -7,25 +7,25 @@ local localizationRoactContextModule = require(script.Parent.LocalizationRoactCo
 local localizeStringsModule = require(script.Parent.localizeStrings)
 local localizationConsumer = reactModule.Component:extend("LocalizationConsumer")
 
-function localizationConsumer.init(p0)
+function localizationConsumer.init(p1)
 	-- upvalues: localizationService (ref)
-	local localization = p0.props.localization
+	local localization = p1.props.localization
 	
 	if localization == nil then
 		error("LocalizationConsumer must be below a LocalizationProvider.")
 	end
-	p0.state = { locale = localizationService.RobloxLocaleId }
+	p1.state = { locale = localizationService.RobloxLocaleId }
 	
 	function p0.updateLocalization(_)
-		-- upvalues: localization (ref), p0 (ref)
+		-- upvalues: localization (ref), p1 (ref)
 		local locale = localization:GetLocale()
 		
-		if locale ~= p0.state.locale then
-			p0:setState({ locale = locale })
+		if locale ~= p1.state.locale then
+			p1:setState({ locale = locale })
 		end
 	end
 	
-	p0.connections = { localization.changed:connect(p0.updateLocalization) }
+	p1.connections = { localization.changed:connect(p1.updateLocalization) }
 end
 
 function localizationConsumer.willUnmount(p1)
@@ -41,21 +41,21 @@ function localizationConsumer.render(p2)
 	local stringsToBeLocalized = p2.props.stringsToBeLocalized
 	argCheckModule.isType(render, "function", "LocalizationConsumer.props.render")
 	argCheckModule.isType(stringsToBeLocalized, "table", "LocalizationConsumer.props.stringsToBeLocalized")
-	local var8 = localizeStringsModule(localization, stringsToBeLocalized)
-	var8[robloxLocaleIdKeyModule] = p2.state.locale
+	local var1 = localizeStringsModule(localization, stringsToBeLocalized)
+	var1[robloxLocaleIdKeyModule] = p2.state.locale
 	
-	return render(var8)
+	return render(var1)
 end
 
-return function(p3)
+return function(p2)
 	-- upvalues: reactModule (ref), localizationRoactContextModule (ref), localizationConsumer (ref)
 	return reactModule.createElement(localizationRoactContextModule.Consumer, {
-		render = function(p4)
-			-- upvalues: reactModule (copy), localizationConsumer (copy), p3 (ref)
+		render = function(p3)
+			-- upvalues: reactModule (copy), localizationConsumer (copy), p2 (ref)
 			return reactModule.createElement(localizationConsumer, {
-				localization = p4,
-				render = p3.render,
-				stringsToBeLocalized = p3.stringsToBeLocalized
+				localization = p3,
+				render = p2.render,
+				stringsToBeLocalized = p2.stringsToBeLocalized
 			})
 		end
 	})

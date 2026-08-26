@@ -4,15 +4,15 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(avatarExperienceSave.SaveButton.useSaveButtonProps)
 
-return function(p0)
+return function(p1)
 	-- upvalues: foundationModule (ref), reactModule (ref)
 	return reactModule.createElement(foundationModule.Button, {
-		text = p0.text or "Save",
-		isDisabled = p0.disabled,
+		text = p1.text or "Save",
+		isDisabled = p1.disabled,
 		size = foundationModule.Enums.InputSize.Medium,
-		variant = if p0.disabled then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
-		onActivated = p0.onActivated,
+		variant = if p1.disabled then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
+		onActivated = p1.onActivated,
 		width = UDim.new(0, foundationModule.Hooks.useTokens().Size.Size_2300),
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	})
 end

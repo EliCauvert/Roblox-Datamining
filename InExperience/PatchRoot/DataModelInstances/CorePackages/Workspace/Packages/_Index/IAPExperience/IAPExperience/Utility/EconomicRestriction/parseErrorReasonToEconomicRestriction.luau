@@ -1,5 +1,5 @@
-﻿return function(p0)
-	local parts = string.split(p0, "/")
+﻿return function(p1)
+	local parts = string.split(p1, "/")
 	local partsCount = #parts
 	
 	return {

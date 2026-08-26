@@ -15,10 +15,10 @@ local t = {
 }
 local t_1 = {}
 
-local function _(p0, p1, p2, p3)
-	p0 = p0 / p3 - 1
+local function _(p1, p2, p3, p4)
+	p1 = p1 / p4 - 1
 	
-	return p2 * math.sqrt(1 - p0 * p0) + p1
+	return p3 * math.sqrt(1 - p1 * p1) + p2
 end
 
 local function IsGameRunning()
@@ -30,11 +30,11 @@ function GetSoundManager()
 	-- upvalues: t_1 (ref), t (ref), IsGameRunning (ref), utilityModule (ref), coreGuiService (ref), guiService (ref)
 	local t_2 = {
 		SoundHolder = nil,
-		CreateSound = function(_, p4)
+		CreateSound = function(_, p1)
 			-- upvalues: t (copy)
-			local text = "rbxasset://sounds/ui/Shell/" .. t[p4]
+			local text = "rbxasset://sounds/ui/Shell/" .. t[p1]
 			local sound = Instance.new("Sound")
-			sound.Name = p4
+			sound.Name = p1
 			sound.SoundId = text
 			
 			return sound
@@ -42,85 +42,85 @@ function GetSoundManager()
 	}
 	local t_3 = {}
 	
-	local function _(p5)
+	local function _(p1)
 		-- upvalues: t_1 (copy)
-		if t_1[p5] then
-			local removed = table.remove(t_1[p5], 1)
+		if t_1[p1] then
+			local removed = table.remove(t_1[p1], 1)
 			
 			if removed then
-				table.insert(t_1[p5], removed)
+				table.insert(t_1[p1], removed)
 				
 				return removed
 			end
 		end
 	end
 	
-	function t_2.Play(_, p6, p7, p8, p9, ...)
+	function t_2.Play(_, p1, p2, p3, p4, ...)
 		-- upvalues: t (copy), t_1 (copy), t_3 (ref), IsGameRunning (copy)
-		local var12 = nil
+		local var1 = nil
 		
-		if t[p6] then
-			local var14
-			if t_1[p6] then
-				local removed = table.remove(t_1[p6], 1)
+		if t[p1] then
+			local var2
+			if t_1[p1] then
+				local removed = table.remove(t_1[p1], 1)
 				
 				if removed then
-					table.insert(t_1[p6], removed)
-					var14 = removed
+					table.insert(t_1[p1], removed)
+					var2 = removed
 				else
-					var14 = nil
+					var2 = nil
 				end
-				if not var14 then
-					return var12
+				if not var2 then
+					return var1
 				end
-				var14.Volume = p7 or 1
-				var14.Looped = p8 or false
-				var14.Pitch = p9 or 1
-				var14:Play(...)
-				t_3[var14] = var14.Volume
+				var2.Volume = p2 or 1
+				var2.Looped = p3 or false
+				var2.Pitch = p4 or 1
+				var2:Play(...)
+				t_3[var2] = var2.Volume
 				
 				if not IsGameRunning() then
-					var14.Volume = 0
+					var2.Volume = 0
 				end
-				var12 = var14
+				var1 = var2
 				
-				return var12
+				return var1
 			end
 		else
 			spawn(function()
-				-- upvalues: p6 (ref)
-				error("Unable to find sound: " .. tostring(p6))
+				-- upvalues: p1 (ref)
+				error("Unable to find sound: " .. tostring(p1))
 			end)
 		end
 	end
 	
-	function t_2.IsPlaying(_, p10)
+	function t_2.IsPlaying(_, p1)
 		-- upvalues: t_2 (ref)
-		local var15 = t_2.SoundHolder:FindFirstChild(p10)
+		local var1 = t_2.SoundHolder:FindFirstChild(p1)
 		
-		return if var15 then var15.IsPlaying else false
+		return if var1 then var1.IsPlaying else false
 	end
 	
-	function t_2.Stop(_, p11, ...)
+	function t_2.Stop(_, p1, ...)
 		-- upvalues: t_2 (ref), t (copy)
-		if t_2.SoundHolder and t[p11] then
-			local var16 = t_2.SoundHolder:FindFirstChild(p11)
+		if t_2.SoundHolder and t[p1] then
+			local var1 = t_2.SoundHolder:FindFirstChild(p1)
 			
-			if var16 then
-				var16:Stop()
+			if var1 then
+				var1:Stop()
 			end
 		end
 	end
 	
-	function t_2.TweenSound(_, p12, p13, p14)
+	function t_2.TweenSound(_, p1, p2, p3)
 		-- upvalues: t_3 (ref), utilityModule (copy), IsGameRunning (copy)
-		t_3[p12] = nil
-		utilityModule.PropertyTweener(p12, "Volume", p12.Volume, p13, p14, function(...)
+		t_3[p1] = nil
+		utilityModule.PropertyTweener(p1, "Volume", p1.Volume, p2, p3, function(...)
 			-- upvalues: IsGameRunning (copy), utilityModule (copy)
 			return IsGameRunning() and utilityModule.EaseInOutQuad(...) or 0
 		end, true, function()
-			-- upvalues: t_3 (copy), p12 (ref), p13 (ref)
-			t_3[p12] = p13
+			-- upvalues: t_3 (copy), p1 (ref), p2 (ref)
+			t_3[p1] = p2
 		end)
 	end
 	
@@ -136,22 +136,22 @@ function GetSoundManager()
 			folder_1.Name = i
 			folder_1.Parent = t_2.SoundHolder
 			t_1[i] = {}
-			local var20 = t_2:CreateSound(i)
-			var20.Parent = folder_1
-			table.insert(t_1[i], var20)
-			local var21 = t_2:CreateSound(i)
-			var21.Parent = folder_1
-			table.insert(t_1[i], var21)
-			local var22 = t_2:CreateSound(i)
-			var22.Parent = folder_1
-			table.insert(t_1[i], var22)
+			local var1 = t_2:CreateSound(i)
+			var1.Parent = folder_1
+			table.insert(t_1[i], var1)
+			local var2 = t_2:CreateSound(i)
+			var2.Parent = folder_1
+			table.insert(t_1[i], var2)
+			local var3 = t_2:CreateSound(i)
+			var3.Parent = folder_1
+			table.insert(t_1[i], var3)
 		end
-		local var18 = nil
+		local var4 = nil
 		guiService:GetPropertyChangedSignal("SelectedCoreObject"):connect(function()
-			-- upvalues: guiService (copy), var18 (write)
+			-- upvalues: guiService (copy), var4 (write)
 			local selectedCoreObject = guiService.SelectedCoreObject
 			
-			if selectedCoreObject and var18 then
+			if selectedCoreObject and var4 then
 				local moveSelection = selectedCoreObject:FindFirstChild("MoveSelection")
 				
 				if moveSelection and moveSelection:IsA("Sound") then
@@ -159,7 +159,7 @@ function GetSoundManager()
 					moveSelection:Play()
 				end
 			end
-			var18 = selectedCoreObject
+			var4 = selectedCoreObject
 		end)
 		
 		if not IsGameRunning() then

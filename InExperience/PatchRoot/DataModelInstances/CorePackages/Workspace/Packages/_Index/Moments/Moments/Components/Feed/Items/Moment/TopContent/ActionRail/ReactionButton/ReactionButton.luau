@@ -27,62 +27,62 @@ local usePreferredInputModule = require(moments.Hooks.usePreferredInput)
 local thumbUp = builderIconsModule.Icon.ThumbUp
 local t = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 
-local var15 = function() end
+local var1 = function() end
 
-return reactModule.memo(function(p0)
-	-- upvalues: useTokens (ref), usePreferredInputModule (ref), momentContextModule (ref), useReactionCommitModule (ref), useSignalState (ref), reactModule (ref), reactOtterModule (ref), reactionType (ref), useMomentGesturesModule (ref), getColorStyleWithTransparencyModule (ref), t (ref), popover (ref), railItemModule (ref), var15 (ref), view (ref), icon (ref), thumbUp (ref), iconSize (ref), reaction (ref), popoverSide (ref), popoverAlign (ref), radius (ref), reactionPickerModule (ref)
-	local var16 = useTokens()
-	local var17 = usePreferredInputModule() == Enum.PreferredInput.Gamepad
+return reactModule.memo(function(p1)
+	-- upvalues: useTokens (ref), usePreferredInputModule (ref), momentContextModule (ref), useReactionCommitModule (ref), useSignalState (ref), reactModule (ref), reactOtterModule (ref), reactionType (ref), useMomentGesturesModule (ref), getColorStyleWithTransparencyModule (ref), t (ref), popover (ref), railItemModule (ref), var1 (ref), view (ref), icon (ref), thumbUp (ref), iconSize (ref), reaction (ref), popoverSide (ref), popoverAlign (ref), radius (ref), reactionPickerModule (ref)
+	local var2 = useTokens()
+	local var3 = usePreferredInputModule() == Enum.PreferredInput.Gamepad
 	local store = momentContextModule.useMoment().store
-	local var18 = useReactionCommitModule()
-	local var19 = useSignalState(store.getIsReactionPickerOpen)
-	local var20 = useSignalState(store.getSelectedReaction)
-	local var21 = var20 ~= nil
-	local var22 = reactModule.useCallback(function()
+	local var4 = useReactionCommitModule()
+	local var5 = useSignalState(store.getIsReactionPickerOpen)
+	local var6 = useSignalState(store.getSelectedReaction)
+	local var7 = var6 ~= nil
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: store (ref)
 		store.setReactionPickerOpen(false)
 	end, { store })
-	local var23, var24 = reactOtterModule.useAnimatedBinding(if var21 then 1 else 0)
+	local var9, var10 = reactOtterModule.useAnimatedBinding(if var7 then 1 else 0)
 	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), reactOtterModule (copy), var21 (ref)
-		var24(reactOtterModule.spring(if var21 then 1 else 0, { frequency = 6, dampingRatio = 1 }))
-	end, { var21 })
-	local var25 = reactModule.useRef(reactionType.ThumbsUp)
+		-- upvalues: var10 (ref), reactOtterModule (copy), var7 (ref)
+		var10(reactOtterModule.spring(if var7 then 1 else 0, { frequency = 6, dampingRatio = 1 }))
+	end, { var7 })
+	local var11 = reactModule.useRef(reactionType.ThumbsUp)
 	
-	if var20 ~= nil then
-		var25.current = var20
+	if var6 ~= nil then
+		var11.current = var6
 	end
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: store (ref), var18 (ref)
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: store (ref), var4 (ref)
 		if store.getIsReacted(false) then
-			var18("tapButton", nil, nil)
+			var4("tapButton", nil, nil)
 		end
 		store.setReactionPickerOpen(true)
-	end, { store, var18 })
+	end, { store, var4 })
 	
-	return reactModule.createElement(popover.Root, { isOpen = var19 }, {
+	return reactModule.createElement(popover.Root, { isOpen = var5 }, {
 		Anchor = reactModule.createElement(popover.Anchor, nil, {
 			ReactButton = reactModule.createElement(railItemModule, {
-				animationRatio = p0.animationRatio,
-				isDisabled = p0.isDisabled,
-				onActivated = if var17 then var26 else var15,
-				LayoutOrder = p0.LayoutOrder,
-				nativeRef = useMomentGesturesModule(not var17 and not p0.isDisabled, { onTap = var26 }).ref,
+				animationRatio = p1.animationRatio,
+				isDisabled = p1.isDisabled,
+				onActivated = if var3 then var12 else var1,
+				LayoutOrder = p1.LayoutOrder,
+				nativeRef = useMomentGesturesModule(not var3 and not p1.isDisabled, { onTap = var12 }).ref,
 				slot = reactModule.createElement(view, { tag = "size-800-800" }, {
 					Thumb = reactModule.createElement(icon, {
 						name = thumbUp,
 						size = iconSize.Large,
-						style = reactModule.joinBindings({ transition = var23, scrub = p0.animationRatio }):map(function(p1)
-							-- upvalues: getColorStyleWithTransparencyModule (copy), var16 (ref)
-							return getColorStyleWithTransparencyModule(var16.Color.Content.Emphasis, 1 - (1 - p1.transition) * (1 - p1.scrub))
+						style = reactModule.joinBindings({ transition = var9, scrub = p1.animationRatio }):map(function(p2)
+							-- upvalues: getColorStyleWithTransparencyModule (copy), var2 (ref)
+							return getColorStyleWithTransparencyModule(var2.Color.Content.Emphasis, 1 - (1 - p2.transition) * (1 - p2.scrub))
 						end),
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5)
 					}),
 					Reacted = reactModule.createElement(reaction, {
-						reactionType = var20 or var25.current,
+						reactionType = var6 or var11.current,
 						size = iconSize.Medium,
-						imageStyle = reactModule.joinBindings({ transition = var23, scrub = p0.animationRatio }):map(function(p2)
+						imageStyle = reactModule.joinBindings({ transition = var9, scrub = p1.animationRatio }):map(function(p2)
 							-- upvalues: getColorStyleWithTransparencyModule (copy), t (copy)
 							return getColorStyleWithTransparencyModule(t, 1 - p2.transition * (1 - p2.scrub))
 						end),
@@ -97,8 +97,8 @@ return reactModule.memo(function(p0)
 			side = { offset = 8, position = popoverSide.Top },
 			align = popoverAlign.End,
 			radius = radius.Circle,
-			backgroundStyle = var16.Color.OverMedia.OverMedia_100,
-			onPressedOutside = var22
+			backgroundStyle = var2.Color.OverMedia.OverMedia_100,
+			onPressedOutside = var8
 		}, {
 			ReactionPicker = reactModule.createElement(reactionPickerModule)
 		})

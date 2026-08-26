@@ -4,21 +4,21 @@ local reactModule = require(parent_1.React)
 local view = require(parent_1.Foundation).View
 local useZoomControllerModule = require(parent.Hooks.useZoomController)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useZoomControllerModule (ref), reactModule (ref), view (ref)
-	local var2, var3 = useZoomControllerModule(p0.active ~= nil or p0.active)
+	local var1, var2 = useZoomControllerModule(p1.active ~= nil or p1.active)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var2 (ref)
-		if p0.onZoomStatusChanged then
-			p0.onZoomStatusChanged(var2)
+		-- upvalues: p1 (ref), var1 (ref)
+		if p1.onZoomStatusChanged then
+			p1.onZoomStatusChanged(var1)
 		end
-	end, { var2, p0.onZoomStatusChanged })
+	end, { var1, p1.onZoomStatusChanged })
 	
 	return reactModule.createElement(view, {
 		tag = "anchor-center-center position-center-center size-full bg-action-subtle",
 		ZIndex = 1,
-		ref = var3
+		ref = var2
 	}, {
-		ZoomItem = reactModule.createElement(reactModule.Fragment, nil, p0.children)
+		ZoomItem = reactModule.createElement(reactModule.Fragment, nil, p1.children)
 	})
 end

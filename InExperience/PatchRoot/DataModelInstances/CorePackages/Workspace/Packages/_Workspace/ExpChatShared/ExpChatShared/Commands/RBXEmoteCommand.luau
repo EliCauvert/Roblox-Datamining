@@ -12,9 +12,9 @@ local t = {
 	cheer = true
 }
 
-local function _(p0)
+local function _(p1)
 	local text = nil
-	local humanoid = p0:FindFirstChildOfClass("Humanoid")
+	local humanoid = p1:FindFirstChildOfClass("Humanoid")
 	
 	if humanoid then
 		if humanoid.RigType == Enum.HumanoidRigType.R15 then
@@ -72,15 +72,15 @@ local function handleLegacyEmote(p1, p2)
 	}
 end
 
-local function getValidEmoteOrResponse(p3, p4)
-	local var11 = tonumber(p4, 10)
+local function getValidEmoteOrResponse(p1, p2)
+	local var1 = tonumber(p2, 10)
 	
-	if var11 then
-		local equippedEmotes = p3:GetEquippedEmotes()
+	if var1 then
+		local equippedEmotes = p1:GetEquippedEmotes()
 		
-		if equippedEmotes[var11] then
-			return equippedEmotes[var11].Name, nil
-		elseif var11 >= 1 and var11 <= 8 then
+		if equippedEmotes[var1] then
+			return equippedEmotes[var1].Name, nil
+		elseif var1 >= 1 and var1 <= 8 then
 			return nil, {
 				key = "CoreScripts.TextChat.Emote.Error.NotEquipped",
 				metadata = "Roblox.Emote.Error.EmoteNotEquipped"
@@ -91,8 +91,8 @@ local function getValidEmoteOrResponse(p3, p4)
 			metadata = "Roblox.Emote.Error.DoesNotExist"
 		}
 	else
-		for i, v in pairs(p3:GetEmotes()) do
-			if string.lower(i) == p4 then
+		for i, v in pairs(p1:GetEmotes()) do
+			if string.lower(i) == p2 then
 				return i, nil
 			end
 		end
@@ -106,14 +106,14 @@ end
 return {
 	name = script.Name,
 	alias = { "/emote", "/e" },
-	clientRun = function(p5, _, p6)
+	clientRun = function(p3, _, p4)
 		-- upvalues: emote (ref), t (ref), handleLegacyEmote (ref), starterPlayerService (ref), getValidEmoteOrResponse (ref)
 		local substring = nil
 		
-		if string.sub(p6, 1, 3):lower() == "/e " then
-			substring = string.sub(p6, 4)
-		elseif string.sub(p6, 1, 7):lower() == "/emote " then
-			substring = string.sub(p6, 8)
+		if string.sub(p4, 1, 3):lower() == "/e " then
+			substring = string.sub(p4, 4)
+		elseif string.sub(p4, 1, 7):lower() == "/emote " then
+			substring = string.sub(p4, 8)
 		end
 		if not substring then
 			emote:debug("No emote string given")
@@ -124,7 +124,7 @@ return {
 			}
 		end
 		local lowerText = string.lower(substring)
-		local localCharacter = p5:getState().LocalCharacter
+		local localCharacter = p3:getState().LocalCharacter
 		
 		if t[lowerText] then
 			emote:trace("Legacy emote found")
@@ -179,20 +179,20 @@ return {
 				metadata = "Roblox.Emote.Error.NotSupported"
 			}
 		end
-		local var17, var18 = getValidEmoteOrResponse(humanoidDescription, lowerText)
+		local var2, var3 = getValidEmoteOrResponse(humanoidDescription, lowerText)
 		
-		if not var17 then
+		if not var2 then
 			emote:debug("Could not find a valid emote within HumanoidDescription")
 			
-			return var18
+			return var3
 		end
 		local ok, status = pcall(function()
-			-- upvalues: humanoid (ref), var17 (ref)
-			return humanoid:PlayEmoteAsync(var17)
+			-- upvalues: humanoid (ref), var2 (ref)
+			return humanoid:PlayEmoteAsync(var2)
 		end)
 		
 		if ok and status then
-			emote:debug("Playing emote: {}", tostring(var17))
+			emote:debug("Playing emote: {}", tostring(var2))
 			
 			return nil
 		end

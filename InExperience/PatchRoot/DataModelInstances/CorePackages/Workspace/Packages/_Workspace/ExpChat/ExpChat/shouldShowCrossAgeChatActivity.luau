@@ -5,27 +5,27 @@ local var1 = if fFlagExpChatUseGuacForCrossAgeChat then require(parent.Universal
 local IXPServiceWrapperModule = require(expChat.IXPServiceWrapper)
 local expChatCrossAgeChatActivityIXPLayerName = game:DefineFastString("ExpChatCrossAgeChatActivityIXPLayerName", "User.Communication.AgeCheckedUser")
 local expChatCrossAgeChatActivityIXPLayerValue = game:DefineFastString("ExpChatCrossAgeChatActivityIXPLayerValue", "CrossAgeChatActivityEnabled")
-local var5 = nil
-local var6 = nil
+local var2 = nil
+local var3 = nil
 
 local function fetchIXPData()
-	-- upvalues: var5 (write), var6 (write), IXPServiceWrapperModule (ref), expChatCrossAgeChatActivityIXPLayerName (ref), expChatCrossAgeChatActivityIXPLayerValue (ref)
+	-- upvalues: var2 (write), var3 (write), IXPServiceWrapperModule (ref), expChatCrossAgeChatActivityIXPLayerName (ref), expChatCrossAgeChatActivityIXPLayerValue (ref)
 	local ok, status = pcall(function()
 		-- upvalues: IXPServiceWrapperModule (copy), expChatCrossAgeChatActivityIXPLayerName (copy)
 		return IXPServiceWrapperModule:GetLayerData(expChatCrossAgeChatActivityIXPLayerName)
 	end)
-	var5 = ok
-	var6 = status
+	var2 = ok
+	var3 = status
 	
-	if var5 and var6 and var6[expChatCrossAgeChatActivityIXPLayerValue] ~= nil then
+	if var2 and var3 and var3[expChatCrossAgeChatActivityIXPLayerValue] ~= nil then
 		IXPServiceWrapperModule:LogUserLayerExposure(expChatCrossAgeChatActivityIXPLayerName)
 		
-		return var6[expChatCrossAgeChatActivityIXPLayerValue]
+		return var3[expChatCrossAgeChatActivityIXPLayerValue]
 	end
 	return false
 end
 
 return function()
-	-- upvalues: fFlagExpChatUseGuacForCrossAgeChat (ref), var1 (write), var5 (write), var6 (write), expChatCrossAgeChatActivityIXPLayerValue (ref), fetchIXPData (ref)
-	return if fFlagExpChatUseGuacForCrossAgeChat then if var1.getAppFeaturePolicies().getShowCrossAgeChat() then if var5 and var6 then var6[expChatCrossAgeChatActivityIXPLayerValue] else fetchIXPData() else false else false
+	-- upvalues: fFlagExpChatUseGuacForCrossAgeChat (ref), var1 (write), var2 (write), var3 (write), expChatCrossAgeChatActivityIXPLayerValue (ref), fetchIXPData (ref)
+	return if fFlagExpChatUseGuacForCrossAgeChat then if var1.getAppFeaturePolicies().getShowCrossAgeChat() then if var2 and var3 then var3[expChatCrossAgeChatActivityIXPLayerValue] else fetchIXPData() else false else false
 end

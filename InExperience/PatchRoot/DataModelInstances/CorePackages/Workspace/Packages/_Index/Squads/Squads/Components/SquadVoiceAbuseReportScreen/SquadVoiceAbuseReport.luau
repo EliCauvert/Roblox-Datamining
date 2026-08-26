@@ -35,40 +35,40 @@ local list = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), react (ref), loggerModule (ref), httpService (ref), networkingSquads (ref), defaultTwoStepReportFlow (ref), list (ref)
-	local var6 = useDispatch()
+	local var1 = useDispatch()
 	
 	return react.createElement(defaultTwoStepReportFlow, {
 		analyticsContext = "Squad",
 		onSubmitProps = {
 			hasNextSteps = false,
-			onSubmit = react.useCallback(function(p1, p2)
-				-- upvalues: loggerModule (copy), httpService (copy), p0 (ref), var6 (ref), networkingSquads (copy)
-				loggerModule:info("Submitting abuse report. Reason: {}, Comment: {}, Data: {}", p1, p2, httpService:JSONEncode(p0.reportData))
-				local var7, var8 = var6(networkingSquads.SendSquadVoiceAbuseReport.API({
-					submitterUserId = p0.reportData.submitterUserId,
-					abuserUserId = p0.reportData.abuserUserId,
-					reportBeginTimestampMs = p0.reportData.reportBeginTimestampMs,
-					voiceChannelId = p0.reportData.voiceChannelId,
-					voiceUserIds = p0.reportData.voiceUserIds,
-					voiceUserCount = p0.reportData.voiceUserCount,
-					abuseReason = p1,
-					abuseComment = p2
+			onSubmit = react.useCallback(function(p2, p3)
+				-- upvalues: loggerModule (copy), httpService (copy), p1 (ref), var1 (ref), networkingSquads (copy)
+				loggerModule:info("Submitting abuse report. Reason: {}, Comment: {}, Data: {}", p2, p3, httpService:JSONEncode(p1.reportData))
+				local var2, var3 = var1(networkingSquads.SendSquadVoiceAbuseReport.API({
+					submitterUserId = p1.reportData.submitterUserId,
+					abuserUserId = p1.reportData.abuserUserId,
+					reportBeginTimestampMs = p1.reportData.reportBeginTimestampMs,
+					voiceChannelId = p1.reportData.voiceChannelId,
+					voiceUserIds = p1.reportData.voiceUserIds,
+					voiceUserCount = p1.reportData.voiceUserCount,
+					abuseReason = p2,
+					abuseComment = p3
 				})):await()
 				
-				if var7 then
-					loggerModule:info("Abuse report submitted successfully. Response: {}", httpService:JSONEncode(var8))
+				if var2 then
+					loggerModule:info("Abuse report submitted successfully. Response: {}", httpService:JSONEncode(var3))
 					
-					return var7
+					return var2
 				end
-				loggerModule:error("Failed to submit abuse report. Response: {}", httpService:JSONEncode(var8))
+				loggerModule:error("Failed to submit abuse report. Response: {}", httpService:JSONEncode(var3))
 				
-				return var7
-			end, { p0.reportData, var6 })
+				return var2
+			end, { p1.reportData, var1 })
 		},
-		onCloseProps = { hasPreviousSteps = false, onAbandon = p0.onAbandon },
-		onComplete = p0.onComplete,
+		onCloseProps = { hasPreviousSteps = false, onAbandon = p1.onAbandon },
+		onComplete = p1.onComplete,
 		reportCategories = list
 	})
 end

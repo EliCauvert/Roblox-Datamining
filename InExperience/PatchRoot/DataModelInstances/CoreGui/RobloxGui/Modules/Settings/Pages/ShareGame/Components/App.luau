@@ -13,10 +13,10 @@ local layoutProviderModule = require(shareGame.Components.LayoutProvider)
 local shareGameContainerModule = require(shareGame.Components.ShareGameContainer)
 local app = roactModule.PureComponent:extend("App")
 
-local function wrapWithProviders(p0)
+local function wrapWithProviders(p1)
 	-- upvalues: roactModule (ref), layoutProviderModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref)
 	return roactModule.createElement(layoutProviderModule, nil, {
-		PolicyProvider = roactModule.createElement(roactAppPolicy.Provider, { policy = { appFeaturePolicies } }, p0)
+		PolicyProvider = roactModule.createElement(roactAppPolicy.Provider, { policy = { appFeaturePolicies } }, p1)
 	})
 end
 
@@ -32,15 +32,15 @@ function app.render(p1)
 	})
 end
 
-function app.didMount(p2)
+function app.didMount(p1)
 	-- upvalues: eventStream (ref), rbxAnalyticsService (ref)
-	p2.eventStream = eventStream.new(rbxAnalyticsService)
+	p1.eventStream = eventStream.new(rbxAnalyticsService)
 end
 
-function app.willUnmount(p3)
-	p3.eventStream:releaseRBXEventStream()
+function app.willUnmount(p1)
+	p1.eventStream:releaseRBXEventStream()
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4, _)
-	return { isPageOpen = p4.Page.IsOpen }
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+	return { isPageOpen = p1.Page.IsOpen }
 end)(app)

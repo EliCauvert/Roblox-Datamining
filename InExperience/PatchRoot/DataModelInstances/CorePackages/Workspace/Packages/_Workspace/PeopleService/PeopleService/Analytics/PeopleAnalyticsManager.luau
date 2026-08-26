@@ -263,9 +263,9 @@ function t.trackGameInviteEntryPoint(_)
 	gameInviteAnalyticsManager:withButtonName(t.ButtonName.SettingsHub)
 end
 
-function t.trackToggleMuteSelf(_, p0)
+function t.trackToggleMuteSelf(_, p1)
 	-- upvalues: telemetryService (ref), t_1 (ref)
-	if p0 then
+	if p1 then
 		telemetryService:LogEvent(t_1.UnmuteSelf.eventConfig, {})
 		
 		return
@@ -286,9 +286,9 @@ function t.trackInspectButton(_, p1, p2, p3)
 	})
 end
 
-function t.trackToggleMuteAll(_, p4)
+function t.trackToggleMuteAll(_, p1)
 	-- upvalues: telemetryService (ref), t_1 (ref)
-	if p4 then
+	if p1 then
 		telemetryService:LogEvent(t_1.UnmuteAll.eventConfig, {})
 		
 		return
@@ -296,13 +296,13 @@ function t.trackToggleMuteAll(_, p4)
 	telemetryService:LogEvent(t_1.MuteAll.eventConfig, {})
 end
 
-function t.trackToggleMutePlayer(_, p5, p6, p7)
+function t.trackToggleMutePlayer(_, p1, p2, p3)
 	-- upvalues: telemetryService (ref), t_1 (ref), getFFlagAddPeoplePageCardLayout (ref)
-	if p6 then
+	if p2 then
 		telemetryService:LogEvent(t_1.UnmutePlayer.eventConfig, {
 			customFields = {
-				mutedUserId = p5,
-				entryPoint = if getFFlagAddPeoplePageCardLayout() then p7 else nil
+				mutedUserId = p1,
+				entryPoint = if getFFlagAddPeoplePageCardLayout() then p3 else nil
 			}
 		})
 		
@@ -310,13 +310,13 @@ function t.trackToggleMutePlayer(_, p5, p6, p7)
 	end
 	telemetryService:LogEvent(t_1.MutePlayer.eventConfig, {
 		customFields = {
-			mutedUserId = p5,
-			entryPoint = if getFFlagAddPeoplePageCardLayout() then p7 else nil
+			mutedUserId = p1,
+			entryPoint = if getFFlagAddPeoplePageCardLayout() then p3 else nil
 		}
 	})
 end
 
-function t.trackRequestFriendship(_, p8)
+function t.trackRequestFriendship(_, p1)
 	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), t_1 (ref), telemetryService (ref)
 	local requestFriendship = t_1.RequestFriendship
 	telemetryService:LogEvent(requestFriendship.eventConfig, {
@@ -324,42 +324,42 @@ function t.trackRequestFriendship(_, p8)
 		customFields = {
 			selectedItem = "RequestFriendship",
 			category = "Game",
-			entryPoint = if getFFlagAddPeoplePageCardLayout() then p8 else nil
+			entryPoint = if getFFlagAddPeoplePageCardLayout() then p1 else nil
 		}
 	})
 	telemetryService:LogCounter(requestFriendship.counterConfig, { customFields = { selectedItem = "RequestFriendship" } }, 1)
 end
 
-function t.trackBlockUserButtonClick(_, p9, p10, p11)
+function t.trackBlockUserButtonClick(_, p1, p2, p3)
 	-- upvalues: t_1 (ref), telemetryService (ref)
 	telemetryService:LogEvent(t_1.BlockUserButtonClick.eventConfig, {
-		customFields = { blockeeUserId = p9, blockerUserId = p10, source = p11 }
+		customFields = { blockeeUserId = p1, blockerUserId = p2, source = p3 }
 	})
 end
 
-function t.trackBlockUser(_, p12, p13, p14)
+function t.trackBlockUser(_, p1, p2, p3)
 	-- upvalues: t_1 (ref), telemetryService (ref)
 	telemetryService:LogEvent(t_1.BlockUser.eventConfig, {
-		customFields = { blockeeUserId = p12, blockerUserId = p13, source = p14 }
+		customFields = { blockeeUserId = p1, blockerUserId = p2, source = p3 }
 	})
 end
 
-function t.trackUnblockUser(_, p15, p16, p17)
+function t.trackUnblockUser(_, p1, p2, p3)
 	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), t_1 (ref), telemetryService (ref)
 	telemetryService:LogEvent(t_1.UnblockUser.eventConfig, {
 		customFields = {
-			blockeeUserId = p15,
-			blockerUserId = p16,
-			entryPoint = if getFFlagAddPeoplePageCardLayout() then p17 else nil
+			blockeeUserId = p1,
+			blockerUserId = p2,
+			entryPoint = if getFFlagAddPeoplePageCardLayout() then p3 else nil
 		}
 	})
 end
 
 if getFFlagAddPeoplePageCardLayout() then
-	function t.trackPeoplePageLayoutChanged(_, p18)
+	function t.trackPeoplePageLayoutChanged(_, p1)
 		-- upvalues: t_1 (ref), telemetryService (ref)
 		telemetryService:LogEvent(t_1.PeoplePageLayoutChanged.eventConfig, {
-			customFields = { layout = p18.Name },
+			customFields = { layout = p1.Name },
 			standardizedFields = {
 				"addPlaceId",
 				"addUniverseId",
@@ -369,10 +369,10 @@ if getFFlagAddPeoplePageCardLayout() then
 		})
 	end
 	
-	function t.trackPersonCardMenuToggled(_, p19)
+	function t.trackPersonCardMenuToggled(_, p1)
 		-- upvalues: t_1 (ref), telemetryService (ref)
 		telemetryService:LogEvent(t_1.PersonCardMenuToggled.eventConfig, {
-			customFields = { is_toggled_on = tostring(p19) },
+			customFields = { is_toggled_on = tostring(p1) },
 			standardizedFields = {
 				"addPlaceId",
 				"addUniverseId",
@@ -407,24 +407,24 @@ function t.getPerUserVoiceVolumeUxVariant()
 	return if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
 end
 
-function t.recordPerUserVoiceVolumeUiOpened(_, p20)
+function t.recordPerUserVoiceVolumeUiOpened(_, p1)
 	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), ENTRY_POINT (ref), t_2 (ref)
 	if not fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
-	if p20 == ENTRY_POINT.PEOPLE_LIST then
+	if p1 == ENTRY_POINT.PEOPLE_LIST then
 		t_2.openedVolumeUiList = true
 		
 		return
-	elseif p20 == ENTRY_POINT.PEOPLE_CARD then
+	elseif p1 == ENTRY_POINT.PEOPLE_CARD then
 		t_2.openedVolumeUiCard = true
 	end
 end
 
-function t.trackPerUserVoiceVolumeSliderTouch(_, p21)
+function t.trackPerUserVoiceVolumeSliderTouch(_, p1)
 	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), telemetryService (ref), t_1 (ref)
 	if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
 		telemetryService:LogCounter(t_1.PerUserVoiceVolumeSliderTouch.counterConfig, {
 			customFields = {
-				entryPoint = p21,
+				entryPoint = p1,
 				uxVariant = if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
 			}
 		}, 1)
@@ -433,79 +433,79 @@ function t.trackPerUserVoiceVolumeSliderTouch(_, p21)
 	end
 end
 
-function t.trackPerUserVoiceVolumeChanged(_, p22)
+function t.trackPerUserVoiceVolumeChanged(_, p1)
 	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), VOICE_VOLUME (ref), userGameSettingsService (ref), telemetryService (ref), t_1 (ref), t_2 (ref)
 	if not fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
-	if p22.newVolume == p22.oldVolume then return end
-	local var11
-	local var10 = if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
-	local wasMutedAtStart = p22.wasMutedAtStart
+	if p1.newVolume == p1.oldVolume then return end
+	local var1
+	local var2 = if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
+	local wasMutedAtStart = p1.wasMutedAtStart
 	
-	if var10 == uXVARIANT.SYNC then
-		local var12
-		var11 = false
+	if var2 == uXVARIANT.SYNC then
+		local var3
+		var1 = false
 		
 		if wasMutedAtStart == false then
-			local _ = p22.newVolume == VOICE_VOLUME.MIN
+			local _ = p1.newVolume == VOICE_VOLUME.MIN
 		end
 	else
-		var11 = nil
+		var1 = nil
 	end
-	if var10 == uXVARIANT.SYNC then
-		var12 = false
+	if var2 == uXVARIANT.SYNC then
+		var3 = false
 		
 		if wasMutedAtStart == true then
-			local _ = VOICE_VOLUME.MIN < p22.newVolume
+			local _ = VOICE_VOLUME.MIN < p1.newVolume
 		end
 	else
-		var12 = nil
+		var3 = nil
 	end
 	telemetryService:LogEvent(t_1.PerUserVoiceVolumeChanged.eventConfig, {
 		customFields = {
-			playSessionId = p22.playSessionId,
-			voiceSessionId = p22.voiceSessionId,
-			entryPoint = p22.entryPoint,
-			targetUserId = p22.targetUserId,
-			oldVolume = p22.oldVolume,
-			newVolume = p22.newVolume,
-			wasMutedAtStart = if var10 == uXVARIANT.DISABLE_WHEN_MUTED then nil else wasMutedAtStart,
-			mutedViaSlider = var11,
-			unmutedViaSlider = var12,
-			uxVariant = var10,
+			playSessionId = p1.playSessionId,
+			voiceSessionId = p1.voiceSessionId,
+			entryPoint = p1.entryPoint,
+			targetUserId = p1.targetUserId,
+			oldVolume = p1.oldVolume,
+			newVolume = p1.newVolume,
+			wasMutedAtStart = if var2 == uXVARIANT.DISABLE_WHEN_MUTED then nil else wasMutedAtStart,
+			mutedViaSlider = var1,
+			unmutedViaSlider = var3,
+			uxVariant = var2,
 			masterVolume = userGameSettingsService.MasterVolume,
 			voiceChatVolume = userGameSettingsService.VoiceChatVolume,
-			dragDurationMs = p22.dragDurationMs
+			dragDurationMs = p1.dragDurationMs
 		},
 		standardizedFields = { "addPlaceId", "addUniverseId" }
 	})
 	t_2.changedPerUserVolume = true
 	
-	if var11 then
+	if var1 then
 		telemetryService:LogCounter(t_1.PerUserVoiceVolumeMutedViaSlider.counterConfig, {
-			customFields = { entryPoint = p22.entryPoint, uxVariant = var10 }
+			customFields = { entryPoint = p1.entryPoint, uxVariant = var2 }
 		}, 1)
 	end
-	if var12 then
+	if var3 then
 		telemetryService:LogCounter(t_1.PerUserVoiceVolumeUnmutedViaSlider.counterConfig, {
-			customFields = { entryPoint = p22.entryPoint, uxVariant = var10 }
+			customFields = { entryPoint = p1.entryPoint, uxVariant = var2 }
 		}, 1)
 	end
 end
 
-function t.flushPerUserVoiceVolumeSession(_, p23, p24)
+function t.flushPerUserVoiceVolumeSession(_, p1, p2)
 	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), t_2 (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (ref), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), telemetryService (ref), t_1 (ref)
 	if not fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
 	if t_2.reported then return end
 	t_2.reported = true
-	local var13 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then t_2.openedVolumeUiList else nil
-	local var14 = if fFlagVoiceVolumeControlsPerUserPlayerGridMenu then t_2.openedVolumeUiCard else nil
+	local var1 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then t_2.openedVolumeUiList else nil
+	local var2 = if fFlagVoiceVolumeControlsPerUserPlayerGridMenu then t_2.openedVolumeUiCard else nil
 	telemetryService:LogEvent(t_1.PerUserVoiceVolumeSession.eventConfig, {
 		customFields = {
-			playSessionId = p23,
-			voiceSessionId = p24,
-			openedVolumeUi = if var13 ~= true then var14 == true else true,
-			openedVolumeUiList = var13,
-			openedVolumeUiCard = var14,
+			playSessionId = p1,
+			voiceSessionId = p2,
+			openedVolumeUi = if var1 ~= true then var2 == true else true,
+			openedVolumeUiList = var1,
+			openedVolumeUiCard = var2,
 			changedPerUserVolume = t_2.changedPerUserVolume,
 			uxVariant = if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
 		},

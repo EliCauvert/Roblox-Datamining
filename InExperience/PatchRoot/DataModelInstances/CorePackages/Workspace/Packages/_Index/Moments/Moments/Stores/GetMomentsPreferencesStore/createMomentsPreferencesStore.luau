@@ -8,41 +8,41 @@ local createComputed = signalsModule.createComputed
 
 return function()
 	-- upvalues: createSignal (ref), getFFlagMomentsFeedStartExpandedModule (ref), createComputed (ref), fFlagEnableArgus (ref)
-	local var3, var4 = createSignal(not getFFlagMomentsFeedStartExpandedModule())
+	local var1, var2 = createSignal(not getFFlagMomentsFeedStartExpandedModule())
+	local var3, var4 = createSignal(false)
 	local var5, var6 = createSignal(false)
 	local var7, var8 = createSignal(false)
-	local var9, var10 = createSignal(false)
 	
 	return {
-		getMinimized = var3,
-		getMediaScaleType = createComputed(function(p0)
-			-- upvalues: var3 (ref)
-			return if var3(p0) then Enum.ScaleType.Fit else Enum.ScaleType.Crop
+		getMinimized = var1,
+		getMediaScaleType = createComputed(function(p1)
+			-- upvalues: var1 (ref)
+			return if var1(p1) then Enum.ScaleType.Fit else Enum.ScaleType.Crop
 		end),
 		toggleFeedScaleType = function()
+			-- upvalues: fFlagEnableArgus (copy), var2 (ref), var1 (ref)
+			if fFlagEnableArgus then
+				var2(not var1(false))
+			end
+		end,
+		getFeedGlobalMute = var3,
+		toggleFeedGlobalMute = function()
 			-- upvalues: fFlagEnableArgus (copy), var4 (ref), var3 (ref)
 			if fFlagEnableArgus then
 				var4(not var3(false))
 			end
 		end,
-		getFeedGlobalMute = var5,
-		toggleFeedGlobalMute = function()
+		getDebugModeEnabled = var5,
+		toggleFeedDebugMode = function()
 			-- upvalues: fFlagEnableArgus (copy), var6 (ref), var5 (ref)
 			if fFlagEnableArgus then
 				var6(not var5(false))
 			end
 		end,
-		getDebugModeEnabled = var7,
-		toggleFeedDebugMode = function()
-			-- upvalues: fFlagEnableArgus (copy), var8 (ref), var7 (ref)
-			if fFlagEnableArgus then
-				var8(not var7(false))
-			end
-		end,
-		getIsTeleporting = var9,
+		getIsTeleporting = var7,
 		setTeleporting = function(value)
-			-- upvalues: var10 (ref)
-			var10(value)
+			-- upvalues: var8 (ref)
+			var8(value)
 		end
 	}
 end

@@ -26,14 +26,14 @@ local function joinSet(value)
 end
 
 return {
-	sendTypeUsageEvent = function(p0)
+	sendTypeUsageEvent = function(p1)
 		-- upvalues: telemetryService (ref), t (ref), joinSet (ref)
 		telemetryService:LogEvent(t, {
 			customFields = {
-				page = p0.page,
-				version = p0.version,
-				components = joinSet(p0.componentTypes),
-				actions = joinSet(p0.actionTypes)
+				page = p1.page,
+				version = p1.version,
+				components = joinSet(p1.componentTypes),
+				actions = joinSet(p1.actionTypes)
 			},
 			standardizedFields = { "addOSInfo" }
 		})

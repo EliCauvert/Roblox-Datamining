@@ -10,46 +10,46 @@ local t = {}
 t.__index = t
 t.__type = inlineElementTypeModule
 
-local function getSplitPoint(p0, p1)
-	local var7 = 0
+local function getSplitPoint(p1, p2)
+	local var1 = 0
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		local width = v:getWidth()
 		
-		if p1 >= var7 + width then
-			var7 += width
+		if p2 >= var1 + width then
+			var1 += width
 			continue
 		end
-		return i, p1 - var7
+		return i, p2 - var1
 	end
 	return -1, -1
 end
 
-local function _(p2, p3, p4, p5, p6, p7)
-	local var9 = nil
+local function _(p3, p4, p5, p6, p7, p8)
+	local var2 = nil
 	local _ = nil
 	
-	if p6 then
-		return var9, p4
-	elseif p4.canForceSplit and p7 then
-		local var10, var11 = p4:split(p5, true)
+	if p7 then
+		return var2, p5
+	elseif p5.canForceSplit and p8 then
+		local var3, var4 = p5:split(p6, true)
 		
-		return var10, var11
+		return var3, var4
 	end
-	var9 = p2
+	var2 = p3
 	
-	return var9, p3
+	return var2, p4
 end
 
-function t.new(p8, p9, p10, p11)
+function t.new(p3, p4, p5, p6)
 	-- upvalues: t (ref), isInlineElementModule (ref), hardBreakElementModule (ref)
 	local tbl = setmetatable({}, t)
-	tbl.WrapperElement = p8
-	tbl.wrapperElementProps = p9
+	tbl.WrapperElement = p3
+	tbl.wrapperElementProps = p4
 	tbl.Elements = {}
-	tbl.startingIndex = p11 or 1
+	tbl.startingIndex = p6 or 1
 	
-	for i, v in p10 do
+	for i, v in p5 do
 		if isInlineElementModule(v) and v ~= hardBreakElementModule then
 			table.insert(tbl.Elements, v)
 		else
@@ -66,77 +66,77 @@ end
 
 function t:getWidth()
 	-- upvalues: dashModule (ref)
-	return dashModule.sum(dashModule.map(self.Elements, function(p12)
-		return p12:getWidth()
+	return dashModule.sum(dashModule.map(self.Elements, function(p7)
+		return p7:getWidth()
 	end))
 end
 
-function t:_splitChildAtIndex(p13, p14)
-	local var13, var14 = self.Elements[p13]:split(p14, false)
+function t:_splitChildAtIndex(p7, p8)
+	local var2, var3 = self.Elements[p7]:split(p8, false)
 	
-	return var13, var14, var13:getWidth() <= p14
+	return var2, var3, var2:getWidth() <= p8
 end
 
-function t:split(p15, p16)
+function t:split(p7, p8)
 	-- upvalues: getSplitPoint (ref), t (ref)
 	local t_1 = {}
 	local t_2 = {}
-	local var17, var18 = getSplitPoint(self.Elements, p15)
+	local var2, var3 = getSplitPoint(self.Elements, p7)
 	
-	if var17 == -1 then
+	if var2 == -1 then
 		return self, nil
 	end
-	local var19 = var17 + 1
-	local var20, var21, var22 = self:_splitChildAtIndex(var17, var18)
+	local var4 = var2 + 1
+	local var5, var6, var7 = self:_splitChildAtIndex(var2, var3)
 	
-	if not var22 then
-		local var28
-		local var23 = var20
-		local var24 = var21
-		local var25 = self.Elements[var17]
-		local var26 = var17 > 1
-		local var27 = nil
+	if not var7 then
+		local var8
+		local var9 = var5
+		local var10 = var6
+		local var11 = self.Elements[var2]
+		local var12 = var2 > 1
+		local var13 = nil
 		local _ = nil
 		
-		if var26 then
-			var28 = var25
-		elseif var25.canForceSplit and p16 then
-			local var29, var30 = var25:split(var18, true)
-			var27 = var29
-			var28 = var30
+		if var12 then
+			var8 = var11
+		elseif var11.canForceSplit and p8 then
+			local var14, var15 = var11:split(var3, true)
+			var13 = var14
+			var8 = var15
 		else
-			var27 = var23
-			var28 = var24
+			var13 = var9
+			var8 = var10
 		end
-		var20 = var27
-		var21 = var28
+		var5 = var13
+		var6 = var8
 	end
-	if var17 > 1 then
-		table.move(self.Elements, 1, var17 - 1, 1, t_1)
+	if var2 > 1 then
+		table.move(self.Elements, 1, var2 - 1, 1, t_1)
 	end
-	if var20 then
-		table.insert(t_1, var20)
-		var19 -= 1
+	if var5 then
+		table.insert(t_1, var5)
+		var4 -= 1
 	end
-	if var21 then
-		table.insert(t_2, var21)
+	if var6 then
+		table.insert(t_2, var6)
 	end
-	if var17 < #self.Elements then
-		table.move(self.Elements, var17 + 1, #self.Elements, #t_2 + 1, t_2)
+	if var2 < #self.Elements then
+		table.move(self.Elements, var2 + 1, #self.Elements, #t_2 + 1, t_2)
 	end
-	local var31 = t.new(self.WrapperElement, self.wrapperElementProps, t_1, self.startingIndex)
+	local var16 = t.new(self.WrapperElement, self.wrapperElementProps, t_1, self.startingIndex)
 	
 	if #t_2 > 0 then
-		return var31, t.new(self.WrapperElement, self.wrapperElementProps, t_2, var19)
+		return var16, t.new(self.WrapperElement, self.wrapperElementProps, t_2, var4)
 	end
-	return var31, nil
+	return var16, nil
 end
 
-function t:render(p17, p18)
+function t:render(p7, p8)
 	-- upvalues: dashModule (ref), reactModule (ref)
-	return reactModule.createElement(self.WrapperElement, dashModule.join(self.wrapperElementProps, { id = p17, LayoutOrder = p18 }), dashModule.map(self.Elements, function(p19, p20)
-		-- upvalues: p17 (ref), self (ref)
-		return p19:render(`{p17}-{self.startingIndex + p20 - 1}`, p20)
+	return reactModule.createElement(self.WrapperElement, dashModule.join(self.wrapperElementProps, { id = p7, LayoutOrder = p8 }), dashModule.map(self.Elements, function(p9, p10)
+		-- upvalues: p7 (ref), self (ref)
+		return p9:render(`{p7}-{self.startingIndex + p10 - 1}`, p10)
 	end))
 end
 

@@ -16,37 +16,37 @@ local fFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(robloxSubsc
 local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
 local _ = require(robloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowCompleteReason)
 
-return function(p0)
+return function(p1)
 	-- upvalues: robloxSubscriptionStoreModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), getAppFeaturePolicies (ref), robloxSubscriptionHeadlessOverlayControllerModule (ref), transitionToErrorModule (ref), errorReasonModule (ref), promptStateModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), createPaymentSessionModule (ref), performRobloxSubscriptionPurchaseModule (ref)
-	local var12 = robloxSubscriptionStoreModule.get()
-	local entryContext = p0.entryContext
-	var12.setRobloxSubscriptionProduct(p0.productDetails)
-	var12.setOnFlowComplete(p0.onFlowComplete)
-	var12.setPurchaseFlowOptions({
-		skipWaitingForPurchaseResult = p0.skipWaitingForPurchaseResult == true
+	local var1 = robloxSubscriptionStoreModule.get()
+	local entryContext = p1.entryContext
+	var1.setRobloxSubscriptionProduct(p1.productDetails)
+	var1.setOnFlowComplete(p1.onFlowComplete)
+	var1.setPurchaseFlowOptions({
+		skipWaitingForPurchaseResult = p1.skipWaitingForPurchaseResult == true
 	})
 	
 	if entryContext then
-		var12.setEntryContext(entryContext)
+		var1.setEntryContext(entryContext)
 	end
 	logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalInitiatedCounter)
-	local var13 = robloxSubscriptionHeadlessOverlayControllerModule.render()
+	local var2 = robloxSubscriptionHeadlessOverlayControllerModule.render()
 	
 	if getAppFeaturePolicies().getDisableBlackbirdEntrypoints() then
 		transitionToErrorModule(errorReasonModule.UnsupportedPlatform, "startRobloxSubscriptionPurchaseFromUpsell")
 		
-		return var13
+		return var2
 	end
-	var12.setPromptState(promptStateModule.SubscriptionPurchaseRequested)
+	var1.setPromptState(promptStateModule.SubscriptionPurchaseRequested)
 	
 	if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
 		logSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalOpen")
 	end
-	createPaymentSessionModule(entryContext):andThen(function(p1)
-		-- upvalues: var12 (ref), performRobloxSubscriptionPurchaseModule (copy)
-		var12.setPaymentSessionId(p1)
+	createPaymentSessionModule(entryContext):andThen(function(p2)
+		-- upvalues: var1 (ref), performRobloxSubscriptionPurchaseModule (copy)
+		var1.setPaymentSessionId(p2)
 		performRobloxSubscriptionPurchaseModule()
 	end)
 	
-	return var13
+	return var2
 end

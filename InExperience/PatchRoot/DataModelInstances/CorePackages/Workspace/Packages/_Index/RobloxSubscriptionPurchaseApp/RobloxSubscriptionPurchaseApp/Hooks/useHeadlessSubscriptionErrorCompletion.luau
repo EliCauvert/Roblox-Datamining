@@ -8,11 +8,11 @@ local completeRobloxSubscriptionUpsellFlowModule = require(robloxSubscriptionPur
 
 return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), reactModule (ref), promptStateModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref)
-	local var6 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getPromptState)
+	local var1 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getPromptState)
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), promptStateModule (copy), completeRobloxSubscriptionUpsellFlowModule (copy)
-		if var6 == promptStateModule.Error then
+		-- upvalues: var1 (ref), promptStateModule (copy), completeRobloxSubscriptionUpsellFlowModule (copy)
+		if var1 == promptStateModule.Error then
 			completeRobloxSubscriptionUpsellFlowModule()
 		end
-	end, { var6 })
+	end, { var1 })
 end

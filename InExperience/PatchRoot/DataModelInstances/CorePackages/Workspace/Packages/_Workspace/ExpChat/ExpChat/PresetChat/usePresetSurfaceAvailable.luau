@@ -6,7 +6,7 @@ local constantsModule = require(expChat.PresetChat.Constants)
 
 return function(value)
 	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), constantsModule (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref)
-	local var5 = getPresetChatStoreModule(false)
+	local var1 = getPresetChatStoreModule(false)
 	
-	return not (not signalsReactModule.useSignalState(var5.getIsEnabled) or signalsReactModule.useSignalState(var5.getAccessLevel) ~= constantsModule.AccessLevel.Enabled) and (value == nil and not fFlagExpChatUniverseChatPresetEnabledModule)
+	return not (not signalsReactModule.useSignalState(var1.getIsEnabled) or signalsReactModule.useSignalState(var1.getAccessLevel) ~= constantsModule.AccessLevel.Enabled) and (value == nil and not fFlagExpChatUniverseChatPresetEnabledModule)
 end

@@ -9,7 +9,7 @@ local _ = require(videoUtils.Analytics.VideoAnalyticsTypes)
 local videoEngagementEvents = require(videoUtils.Analytics.Enums).VideoEngagementEvents
 local videoEngagementEventHundredthsPercent = game:DefineFastInt("VideoEngagementEventHundredthsPercent", 0)
 local t = {}
-local var7 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	videoAssetId = tModule.string,
 	source = tModule.string,
 	sourceId = tModule.string,
@@ -21,7 +21,7 @@ local var7 = tModule.strictInterface({
 	isFullscreen = tModule.optional(tModule.boolean),
 	volumeLevel = tModule.optional(tModule.number)
 })
-local var8 = tModule.strictInterface({
+local var2 = tModule.strictInterface({
 	loadTime = tModule.optional(tModule.number),
 	scrubStartTime = tModule.optional(tModule.number),
 	scrubEndTime = tModule.optional(tModule.number),
@@ -40,29 +40,29 @@ local t_1 = {
 }
 
 return {
-	reportVideoAction = function(p0, p1, p2, p3)
-		-- upvalues: var7 (ref), reportWarning (ref), loggingProtocolModule (ref), var8 (ref), cryoModule (ref), videoEngagementEvents (ref), t (ref), t_1 (ref), telemetryService (ref)
-		local var10, var11 = var7(p2)
+	reportVideoAction = function(p1, p2, p3, p4)
+		-- upvalues: var1 (ref), reportWarning (ref), loggingProtocolModule (ref), var2 (ref), cryoModule (ref), videoEngagementEvents (ref), t (ref), t_1 (ref), telemetryService (ref)
+		local var3, var4 = var1(p3)
 		
-		if not var10 then
-			reportWarning(loggingProtocolModule.default, "EventLogging", var11)
+		if not var3 then
+			reportWarning(loggingProtocolModule.default, "EventLogging", var4)
 		end
-		if p3 then
-			local var12, var13 = var8(p3)
+		if p4 then
+			local var5, var6 = var2(p4)
 			
-			if not var12 then
-				reportWarning(loggingProtocolModule.default, "EventLogging", var13)
+			if not var5 then
+				reportWarning(loggingProtocolModule.default, "EventLogging", var6)
 			end
 		end
-		telemetryService:LogEvent(cryoModule.Dictionary.join(t_1, { eventContext = p1 }), {
+		telemetryService:LogEvent(cryoModule.Dictionary.join(t_1, { eventContext = p2 }), {
 			standardizedFields = {
 				"addSessionInfo",
 				loggingProtocolModule.StandardizedFields.addOsInfo
 			},
-			customFields = cryoModule.Dictionary.join(p2, {
+			customFields = cryoModule.Dictionary.join(p3, {
 				videoEngagementEventType = videoEngagementEvents.VIDEO_ACTION,
-				actionType = p0
-			}, p3 or t)
+				actionType = p1
+			}, p4 or t)
 		})
 	end
 }

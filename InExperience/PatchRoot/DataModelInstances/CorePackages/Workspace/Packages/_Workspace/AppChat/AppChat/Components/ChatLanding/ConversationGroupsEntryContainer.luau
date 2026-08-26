@@ -20,39 +20,39 @@ local fFlagAppChatCustomConversationListRowModule = require(appChat.Flags.FFlagA
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local groups = images["icons/menu/groups"]
 
-function ConversationGroupsEntryContainer(p0)
+function ConversationGroupsEntryContainer(p1)
 	-- upvalues: getFFlagCommunitiesUseVisualConfigUtil (ref), getAppChatCommunitiesVisualConfigModule (ref), useLocalization (ref), getFFlagUseCommunitiesTranslation (ref), reactModule (ref), luaAppNavigationContextModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), images (ref), groups (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), chatLandingTelemetryEventsModule (ref), fFlagAppChatCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref)
-	local var14 = if getFFlagCommunitiesUseVisualConfigUtil() then getAppChatCommunitiesVisualConfigModule() else nil
-	local var15 = useLocalization({
+	local var1 = if getFFlagCommunitiesUseVisualConfigUtil() then getAppChatCommunitiesVisualConfigModule() else nil
+	local var2 = useLocalization({
 		createAndExploreGroupsText = "Feature.SocialTab.Label.CreateAndExploreGroups",
-		groupsText = if getFFlagCommunitiesUseVisualConfigUtil() then var14.label elseif getFFlagUseCommunitiesTranslation() then "Feature.SocialTab.Label.Groups" else "CommonUI.Features.Label.sGroups"
+		groupsText = if getFFlagCommunitiesUseVisualConfigUtil() then var1.label elseif getFFlagUseCommunitiesTranslation() then "Feature.SocialTab.Label.Groups" else "CommonUI.Features.Label.sGroups"
 	})
-	local var16 = reactModule.useContext(luaAppNavigationContextModule)
-	local var17 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
-	local var18 = if getFFlagCommunitiesUseVisualConfigUtil() then images[var14.icon] else groups
-	local var19 = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationListHeader("communities") else nil
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), chatLandingTelemetryEventsModule (copy), var16 (ref)
-		var17.emit(chatLandingTelemetryEventsModule.ChatLandingGroupsBtnClicked, {})
-		var16.navigateToGroups()
-	end, { var17, var16 })
+	local var3 = reactModule.useContext(luaAppNavigationContextModule)
+	local var4 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
+	local var5 = if getFFlagCommunitiesUseVisualConfigUtil() then images[var1.icon] else groups
+	local var6 = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationListHeader("communities") else nil
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref), chatLandingTelemetryEventsModule (copy), var3 (ref)
+		var4.emit(chatLandingTelemetryEventsModule.ChatLandingGroupsBtnClicked, {})
+		var3.navigateToGroups()
+	end, { var4, var3 })
 	
 	return if fFlagAppChatCustomConversationListRowModule then reactModule.createElement(customConversationListRowModule, {
 		key = "ConversationGroupsEntry",
-		entryHeight = p0.entryHeight,
+		entryHeight = p1.entryHeight,
 		entryIcon = iconName.ThreePeople,
-		onActivated = var20,
-		subTitleText = var15.createAndExploreGroupsText,
-		titleText = var15.groupsText,
-		testId = var19
+		onActivated = var7,
+		subTitleText = var2.createAndExploreGroupsText,
+		titleText = var2.groupsText,
+		testId = var6
 	}) else reactModule.createElement(customConversationListEntryModule, {
 		key = "ConversationGroupsEntry",
-		entryHeight = p0.entryHeight,
-		entryIcon = var18,
-		onActivated = var20,
-		subTitleText = var15.createAndExploreGroupsText,
-		titleText = var15.groupsText,
-		testId = var19
+		entryHeight = p1.entryHeight,
+		entryIcon = var5,
+		onActivated = var7,
+		subTitleText = var2.createAndExploreGroupsText,
+		titleText = var2.groupsText,
+		testId = var6
 	})
 end
 

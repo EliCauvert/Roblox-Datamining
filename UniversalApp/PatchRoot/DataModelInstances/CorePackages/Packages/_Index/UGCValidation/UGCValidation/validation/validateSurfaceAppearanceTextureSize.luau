@@ -15,37 +15,37 @@ local t = {
 	RoughnessMap = game:DefineFastInt("AccessoryRoughnessMapMaxSize", 256)
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: failureReasonsAccumulatorModule (ref), parseContentIdsModule (ref), constantsModule (ref), getEditableImageFromContextModule (ref), getFFlagUGCValidateAccessoryAssetSurfaceAppearanceTextureLimitsModule (ref), constantsInterfaceModule (ref), t (ref), validateTextureSizeModule (ref), analyticsModule (ref)
 	local currentTime = tick()
-	local descendants = p0:GetDescendants()
-	table.insert(descendants, p0)
-	local var11 = failureReasonsAccumulatorModule.new()
+	local descendants = p1:GetDescendants()
+	table.insert(descendants, p1)
+	local var1 = failureReasonsAccumulatorModule.new()
 	
 	for i, v in descendants do
 		if v:IsA("MeshPart") then
 			local surfaceAppearance = v:FindFirstChildWhichIsA("SurfaceAppearance")
 			
 			if surfaceAppearance then
-				for i_1, v_1 in parseContentIdsModule.parse(surfaceAppearance, constantsModule.TEXTURE_CONTENT_ID_FIELDS, p1) do
+				for i_1, v_1 in parseContentIdsModule.parse(surfaceAppearance, constantsModule.TEXTURE_CONTENT_ID_FIELDS, p2) do
 					local t_1 = {
 						fullName = v_1.instance:GetFullName() .. "." .. v_1.fieldName,
 						fieldName = v_1.fieldName,
 						contentId = v_1.instance[v_1.fieldName]
 					}
-					local var14, var15 = getEditableImageFromContextModule(v_1.instance, v_1.fieldName, p1)
+					local var2, var3 = getEditableImageFromContextModule(v_1.instance, v_1.fieldName, p2)
 					
-					if var14 then
-						t_1.editableImage = var15
+					if var2 then
+						t_1.editableImage = var3
 						local _ = nil
-						var11:updateReasons(validateTextureSizeModule(t_1, nil, p1, if getFFlagUGCValidateAccessoryAssetSurfaceAppearanceTextureLimitsModule() and p1.assetTypeEnum then constantsInterfaceModule.getTextureLimit(p1.assetTypeEnum, v_1.instance, v_1.fieldName) else t[v_1.fieldName]))
+						var1:updateReasons(validateTextureSizeModule(t_1, nil, p2, if getFFlagUGCValidateAccessoryAssetSurfaceAppearanceTextureLimitsModule() and p2.assetTypeEnum then constantsInterfaceModule.getTextureLimit(p2.assetTypeEnum, v_1.instance, v_1.fieldName) else t[v_1.fieldName]))
 					end
 					return false, { "Failed to load texture data" }
 				end
 			end
 		end
 	end
-	analyticsModule.recordScriptTime(script.Name, currentTime, p1)
+	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
 	
-	return var11:getFinalResults()
+	return var1:getFinalResults()
 end

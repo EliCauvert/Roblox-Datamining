@@ -9,7 +9,7 @@ local inviteFriendProviderModule = require(parent.InviteFriendProvider)
 local gameDetailsContextProviderModule = require(parent.GameDetailsContextProvider)
 local _ = require(parent_1.gameInviteModalType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), gameDetailsContextProviderModule (ref), getFFlagEnableCommonFriendsMenu (ref), inviteFriendProviderModule (ref), friendsListContextProvider (ref)
 	local trigger = nil
 	local inviteMessageId = nil
@@ -19,18 +19,18 @@ return function(p0)
 	local rootPlaceId = nil
 	local universeId = nil
 	
-	if p0.options then
-		trigger = p0.options.trigger
-		inviteMessageId = p0.options.inviteMessageId
-		launchData = p0.options.launchData
-		promptMessage = p0.options.promptMessage
-		isCoreScript = p0.isCoreScript or false
-		rootPlaceId = p0.options.rootPlaceId
-		universeId = p0.options.universeId
+	if p1.options then
+		trigger = p1.options.trigger
+		inviteMessageId = p1.options.inviteMessageId
+		launchData = p1.options.launchData
+		promptMessage = p1.options.promptMessage
+		isCoreScript = p1.isCoreScript or false
+		rootPlaceId = p1.options.rootPlaceId
+		universeId = p1.options.universeId
 	end
 	return reactModule.createElement(gameDetailsContextProviderModule, {
-		gameDetails = p0.gameDetails,
-		serverType = p0.serverType,
+		gameDetails = p1.gameDetails,
+		serverType = p1.serverType,
 		promptMessage = promptMessage,
 		trigger = trigger,
 		isCoreScript = isCoreScript
@@ -43,7 +43,7 @@ return function(p0)
 			isCoreScript = isCoreScript,
 			rootPlaceId = rootPlaceId,
 			universeId = universeId
-		}, p0.children) else reactModule.createElement(friendsListContextProvider, { isLoadingCustomParams = p0.isLoadingCustomParams }, reactModule.createElement(inviteFriendProviderModule, {
+		}, p1.children) else reactModule.createElement(friendsListContextProvider, { isLoadingCustomParams = p1.isLoadingCustomParams }, reactModule.createElement(inviteFriendProviderModule, {
 			trigger = trigger,
 			inviteMessageId = inviteMessageId,
 			launchData = launchData,
@@ -51,6 +51,6 @@ return function(p0)
 			isCoreScript = isCoreScript,
 			rootPlaceId = rootPlaceId,
 			universeId = universeId
-		}, p0.children))
+		}, p1.children))
 	})
 end

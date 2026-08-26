@@ -5,7 +5,7 @@ local _ = require(script.Parent.Parent.ValidationContext)
 local _ = require(parent.language.ast)
 
 return {
-	UniqueInputFieldNamesRule = function(p0)
+	UniqueInputFieldNamesRule = function(p1)
 		-- upvalues: graphQLError (ref)
 		local t = {}
 		local t_1 = {}
@@ -22,16 +22,16 @@ return {
 					t_1 = table.remove(t)
 				end
 			},
-			ObjectField = function(_, p1)
-				-- upvalues: t_1 (write), p0 (ref), graphQLError (copy)
-				local value = p1.name.value
+			ObjectField = function(_, p2)
+				-- upvalues: t_1 (write), p1 (ref), graphQLError (copy)
+				local value = p2.name.value
 				
 				if t_1[value] then
-					p0:reportError(graphQLError.new(("There can be only one input field named \"%s\"."):format(value), { t_1[value], p1.name }))
+					p1:reportError(graphQLError.new(("There can be only one input field named \"%s\"."):format(value), { t_1[value], p2.name }))
 					
 					return
 				end
-				t_1[value] = p1.name
+				t_1[value] = p2.name
 			end
 		}
 	end

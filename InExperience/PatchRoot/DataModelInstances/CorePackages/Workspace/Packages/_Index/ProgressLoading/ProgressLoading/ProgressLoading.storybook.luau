@@ -20,14 +20,14 @@ return {
 	storyRoot = progressLoading,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), foundationProvider (ref), t (ref), t_1 (ref)
-		return function(p1)
-			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), t_1 (copy), p0 (ref)
+		return function(p2)
+			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), t_1 (copy), p1 (ref)
 			return reactModule.createElement(foundationProvider, {
-				colorMode = if p1 then t[p1.theme] else t.Default,
-				device = if p1 then t_1[p1.platform] else "Desktop"
-			}, { Story = reactModule.createElement(p0, p1) })
+				colorMode = if p2 then t[p2.theme] else t.Default,
+				device = if p2 then t_1[p2.platform] else "Desktop"
+			}, { Story = reactModule.createElement(p1, p2) })
 		end
 	end
 }

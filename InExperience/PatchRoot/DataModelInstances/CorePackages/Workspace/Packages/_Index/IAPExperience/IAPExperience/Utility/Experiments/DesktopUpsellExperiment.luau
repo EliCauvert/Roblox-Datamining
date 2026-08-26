@@ -10,9 +10,9 @@ return {
 		if not newUpsellModalExperimentForDesktopV2 then
 			return t.Control
 		end
-		local var3 = IXPServiceWrapper:GetLayerData(desktopUpsellIXPLayer)
+		local var1 = IXPServiceWrapper:GetLayerData(desktopUpsellIXPLayer)
 		
-		return if var3 and var3.newUpsellModalVariant ~= nil then var3.newUpsellModalVariant else t.Control
+		return if var1 and var1.newUpsellModalVariant ~= nil then var1.newUpsellModalVariant else t.Control
 	end,
 	logExposure = function()
 		-- upvalues: newUpsellModalExperimentForDesktopV2 (ref), IXPServiceWrapper (ref), desktopUpsellIXPLayer (ref)
@@ -29,8 +29,8 @@ return {
 			IXPServiceWrapper:LogUserLayerExposure(desktopUpsellIXPLayer)
 		end
 		if newUpsellModalExperimentForDesktopV2 then
-			local var4 = IXPServiceWrapper:GetLayerData(desktopUpsellIXPLayer)
-			control = if var4 and var4.newUpsellModalVariant ~= nil then var4.newUpsellModalVariant else t.Control
+			local var1 = IXPServiceWrapper:GetLayerData(desktopUpsellIXPLayer)
+			control = if var1 and var1.newUpsellModalVariant ~= nil then var1.newUpsellModalVariant else t.Control
 		else
 			control = t.Control
 		end

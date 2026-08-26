@@ -15,41 +15,41 @@ local useSetupImpressionsTileTaggingModule = require(profilePlatform.Hooks.useSe
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), useSetupImpressionsTileTaggingModule (ref), constants (ref), getRbxthumbWithTypeSizeAndOptions (ref), fFlagProfilePlatformEnableExperiencesFooterModule (ref), useSelector (ref), getDeepValue (ref), t (ref), experienceTileV3 (ref), gameStats (ref)
-	local var7 = useStyle()
-	local var8 = reactModule.useRef(nil)
-	useSetupImpressionsTileTaggingModule(var8, p0.impressionsTag, p0.index)
-	local var9 = getRbxthumbWithTypeSizeAndOptions(p0.item.experienceId, constants.RbxthumbTypes.GameIcon, 150)
+	local var1 = useStyle()
+	local var2 = reactModule.useRef(nil)
+	useSetupImpressionsTileTaggingModule(var2, p1.impressionsTag, p1.index)
+	local var3 = getRbxthumbWithTypeSizeAndOptions(p1.item.experienceId, constants.RbxthumbTypes.GameIcon, 150)
 	local experienceId = nil
-	local fFlagProfilePlatformEnableExperiencesFooterModule_1 = p0.showFooter and fFlagProfilePlatformEnableExperiencesFooterModule
+	local fFlagProfilePlatformEnableExperiencesFooterModule_1 = p1.showFooter and fFlagProfilePlatformEnableExperiencesFooterModule
 	
 	if fFlagProfilePlatformEnableExperiencesFooterModule_1 then
-		experienceId = useSelector(function(p1)
+		experienceId = useSelector(function(p2)
 			-- upvalues: getDeepValue (copy), t (copy)
-			return getDeepValue(p1, "GameVotes") or t
-		end)[p0.item.experienceId]
+			return getDeepValue(p2, "GameVotes") or t
+		end)[p1.item.experienceId]
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = p0.index,
+		LayoutOrder = p1.index,
 		Size = UDim2.new(1, 0, 1, 0),
-		ref = var8
+		ref = var2
 	}, {
 		Tile = reactModule.createElement(experienceTileV3, {
 			contextTextLineCount = 1,
 			hasBackground = false,
 			isHoverEnabled = false,
 			hasOutline = false,
-			experienceName = p0.item.name,
-			thumbnail = var9,
-			onActivated = p0.onActivated,
+			experienceName = p1.item.name,
+			thumbnail = var3,
+			onActivated = p1.onActivated,
 			styleProps = {
 				bottomContentPadding = {
 					Left = 0,
 					Right = 0,
-					Top = var7.Tokens.Padding.Small,
-					Bottom = var7.Tokens.Padding.Small
+					Top = var1.Tokens.Padding.Small,
+					Bottom = var1.Tokens.Padding.Small
 				}
 			},
 			footer = if fFlagProfilePlatformEnableExperiencesFooterModule_1 then reactModule.createElement(gameStats, {
@@ -57,7 +57,7 @@ return function(p0)
 				stats = {
 					totalUpVotes = if experienceId then experienceId.upVotes else 0,
 					totalDownVotes = if experienceId then experienceId.downVotes else 0,
-					playerCount = p0.item.playing
+					playerCount = p1.item.playing
 				}
 			}) else nil,
 			footerHeight = if fFlagProfilePlatformEnableExperiencesFooterModule_1 then 32 else nil

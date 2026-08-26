@@ -18,7 +18,7 @@ local t_1 = {
 }
 
 return {
-	logAction = function(p0, p1)
+	logAction = function(p1, p2)
 		-- upvalues: telemetryService (write), t (ref), t_1 (ref)
 		local list = {
 			"addPlaceId",
@@ -27,14 +27,14 @@ return {
 			"addSessionId",
 			"addPlaySessionId"
 		}
-		local t_2 = { action = p0 }
+		local t_2 = { action = p1 }
 		
-		if p1 ~= nil then
-			if p1.isSelf ~= nil then
-				t_2.is_self = tostring(p1.isSelf)
+		if p2 ~= nil then
+			if p2.isSelf ~= nil then
+				t_2.is_self = tostring(p2.isSelf)
 			end
-			if p1.friendStatus ~= nil then
-				t_2.friend_status = p1.friendStatus
+			if p2.friendStatus ~= nil then
+				t_2.friend_status = p2.friendStatus
 			end
 		end
 		local t_3 = { standardizedFields = list, customFields = t_2 }

@@ -1,6 +1,6 @@
 ﻿local purchaseErrorModule = require(script:FindFirstAncestor("PurchasePrompt").Enums.PurchaseError)
 
-return function(p0)
+return function(p1)
 	-- upvalues: purchaseErrorModule (ref)
-	return if purchaseErrorModule.isMember(p0) then p0 elseif type(p0) == "table" and p0.errorCode == "PendingProductsLimitExceeded" then purchaseErrorModule.PendingProductsLimitExceeded else p0
+	return if purchaseErrorModule.isMember(p1) then p1 elseif type(p1) == "table" and p1.errorCode == "PendingProductsLimitExceeded" then purchaseErrorModule.PendingProductsLimitExceeded else p1
 end

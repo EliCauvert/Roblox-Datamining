@@ -8,27 +8,27 @@ local upsellEntrySurfaceType = socialUpsellModule.Analytics.Enum.UpsellEntrySurf
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 
-return function(p0, _, p1, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), appPage (ref), socialUpsellType (ref), upsellEntrySurfaceType (ref), startFacialAgeEstimation (ref)
-	local var2 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var2 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.OpenFacialAgeEstimation
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	assert(var2, "actionParams must exist")
-	local source = var2.source
+	assert(var1, "actionParams must exist")
+	local source = var1.source
 	
 	if source == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: source",
 			propName = "source",
 			name = sduiActionType.OpenFacialAgeEstimation
-		}, p1.appPage)
+		}, p2.appPage)
 	end
-	p1.dependencies.dispatch(startFacialAgeEstimation(if source == appPage.ProfilePlatform then socialUpsellType.FacialAgeEstimation .. upsellEntrySurfaceType.ProfileCompletion else socialUpsellType.FacialAgeEstimation .. upsellEntrySurfaceType.Unknown, nil, nil, source, false))
+	p2.dependencies.dispatch(startFacialAgeEstimation(if source == appPage.ProfilePlatform then socialUpsellType.FacialAgeEstimation .. upsellEntrySurfaceType.ProfileCompletion else socialUpsellType.FacialAgeEstimation .. upsellEntrySurfaceType.Unknown, nil, nil, source, false))
 end

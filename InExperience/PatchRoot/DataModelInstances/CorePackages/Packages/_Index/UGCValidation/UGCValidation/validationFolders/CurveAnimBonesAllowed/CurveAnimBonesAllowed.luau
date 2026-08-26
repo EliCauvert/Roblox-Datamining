@@ -29,14 +29,14 @@ t.prereqTests = {
 
 local function checkTrustedCreatorPermission()
 	-- upvalues: APIUtilModule (ref), httpService (ref)
-	local var9, var10 = APIUtilModule.requestAndRetryGet(string.format("https://itemconfiguration.%s/v1/permissions/action-allowed-for-item-type?trustedCreatorCheck=true&action=1&assetType=61", APIUtilModule.getBaseDomain()))
+	local var1, var2 = APIUtilModule.requestAndRetryGet(string.format("https://itemconfiguration.%s/v1/permissions/action-allowed-for-item-type?trustedCreatorCheck=true&action=1&assetType=61", APIUtilModule.getBaseDomain()))
 	
-	if not var9 then
-		return false, "Failed to check trusted creator permission: " .. tostring(var10)
+	if not var1 then
+		return false, "Failed to check trusted creator permission: " .. tostring(var2)
 	end
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), var10 (ref)
-		return httpService:JSONDecode(var10)
+		-- upvalues: httpService (copy), var2 (ref)
+		return httpService:JSONDecode(var2)
 	end)
 	
 	if ok then
@@ -45,28 +45,28 @@ local function checkTrustedCreatorPermission()
 	return false, "Failed to decode permission response"
 end
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFFlagUGCValidateEmotesBoneUserVerificationModule (ref), validationEnumsModule (ref), errorSourceStringsModule (ref), checkTrustedCreatorPermission (ref)
 	if not getFFlagUGCValidateEmotesBoneUserVerificationModule() then return end
-	local consumerEnv = p1.consumerConfig.consumerEnv
+	local consumerEnv = p2.consumerConfig.consumerEnv
 	
 	if consumerEnv == validationEnumsModule.ConsumerEnv.IEC then
-		p0:fail(errorSourceStringsModule.Keys.CurveAnim_BonesNotAllowed)
+		p1:fail(errorSourceStringsModule.Keys.CurveAnim_BonesNotAllowed)
 		
 		return
 	elseif consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
-		if not p1.consumerConfig.backendConfigs.isUserInTrustedCreatorProgram then
-			p0:fail(errorSourceStringsModule.Keys.CurveAnim_BonesNotAllowed)
+		if not p2.consumerConfig.backendConfigs.isUserInTrustedCreatorProgram then
+			p1:fail(errorSourceStringsModule.Keys.CurveAnim_BonesNotAllowed)
 		end
 		return
 	else
-		local var11, var12 = checkTrustedCreatorPermission()
+		local var1, var2 = checkTrustedCreatorPermission()
 		
-		if var12 then
-			p0:forceError(var12)
+		if var2 then
+			p1:forceError(var2)
 		end
-		if not var11 then
-			p0:fail(errorSourceStringsModule.Keys.CurveAnim_BonesNotAllowed)
+		if not var1 then
+			p1:fail(errorSourceStringsModule.Keys.CurveAnim_BonesNotAllowed)
 		end
 	end
 end

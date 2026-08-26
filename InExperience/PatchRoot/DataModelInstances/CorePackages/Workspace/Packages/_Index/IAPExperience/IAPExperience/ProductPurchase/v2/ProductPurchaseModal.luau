@@ -23,38 +23,38 @@ local default = require(parent_1.LoggingProtocol).default
 local purchaseModalV2ShownCounter = require(parent.Generic.Events.PurchaseModalCounter).PurchaseModalV2ShownCounter
 local fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule = require(parent.Flags.FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePrompt)
 
-local function ProductPurchaseModal(p0)
+local function ProductPurchaseModal(p1)
 	-- upvalues: fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), useDefaultFocusBehavior (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), purchaseModalV2ShownCounter (ref), useLocalization (ref), formatNumberModule (ref), localizationService (ref), useTokens (ref), useTextSizeOffset (ref), textService (ref), interactiveAlert (ref), productDetailsModule (ref), buttonType (ref), text (ref)
-	local var12 = nil
-	local var13 = nil
+	local var1 = nil
+	local var2 = nil
 	
 	if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
-		local var14, var15 = useDefaultFocusBehavior()
-		var12 = var14
-		var13 = var15
+		local var3, var4 = useDefaultFocusBehavior()
+		var1 = var3
+		var2 = var4
 	end
 	reactModule.useEffect(function()
-		-- upvalues: loggerModule (copy), p0 (ref), getAppContextModule (copy), default (copy), purchaseModalV2ShownCounter (copy)
+		-- upvalues: loggerModule (copy), p1 (ref), getAppContextModule (copy), default (copy), purchaseModalV2ShownCounter (copy)
 		loggerModule.debug({
 			message = "Purchase Modal V2 Shown",
-			screenHeight = p0.screenSize.Y,
-			screenWidth = p0.screenSize.X,
-			portrait = p0.screenSize.X < p0.screenSize.Y,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y,
 			appContext = getAppContextModule()
 		})
 		default:logRobloxTelemetryCounter(purchaseModalV2ShownCounter, 1, {
-			screenHeight = p0.screenSize.Y,
-			screenWidth = p0.screenSize.X,
-			portrait = p0.screenSize.X < p0.screenSize.Y,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y,
 			appContext = getAppContextModule()
 		})
 	end, {})
-	local var16 = useLocalization({
+	local var5 = useLocalization({
 		BuyItem = "IAPExperience.PurchasePrompt.Title.BuyItem",
 		RemainingBalance = "IAPExperience.PurchasePrompt.Text.RemainingBalanceV2"
 	})
-	local text_1 = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.balanceAmount - p0.product.itemRobuxCost)
-	local text_2 = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.product.itemRobuxCost)
+	local text_1 = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.balanceAmount - p1.product.itemRobuxCost)
+	local text_2 = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.itemRobuxCost)
 	local _ = nil
 	local _ = nil
 	local _ = nil
@@ -62,45 +62,45 @@ local function ProductPurchaseModal(p0)
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var19 = useTokens()
-	local var20 = useTextSizeOffset()
-	local var21, var22 = reactModule.useState(0)
-	local var23 = var21
-	local var24 = var22
-	var19 = var19.Typography.CaptionSmall
-	local var25 = var16.RemainingBalance:gsub("{robux}", text_1)
-	local var26 = reactModule.useCallback(function(p1)
-		-- upvalues: var23 (write), var24 (write)
-		if var23 ~= p1.AbsoluteSize.X then
-			var24(p1.AbsoluteSize.X)
+	local var6 = useTokens()
+	local var7 = useTextSizeOffset()
+	local var8, var9 = reactModule.useState(0)
+	local var10 = var8
+	local var11 = var9
+	var6 = var6.Typography.CaptionSmall
+	local var12 = var5.RemainingBalance:gsub("{robux}", text_1)
+	local var13 = reactModule.useCallback(function(p2)
+		-- upvalues: var10 (write), var11 (write)
+		if var10 ~= p2.AbsoluteSize.X then
+			var11(p2.AbsoluteSize.X)
 		end
-	end, { p0 })
-	local var27 = reactModule.useMemo(function()
-		-- upvalues: var19 (ref), textService (copy), var25 (write), var23 (write)
-		return var19.LineHeight * textService:GetTextSize(var25, var19.FontSize, var19.Font, Vector2.new(var23, 1e999)).Y
-	end, { var23, var20, var25 })
+	end, { p1 })
+	local var14 = reactModule.useMemo(function()
+		-- upvalues: var6 (ref), textService (copy), var12 (write), var10 (write)
+		return var6.LineHeight * textService:GetTextSize(var12, var6.FontSize, var6.Font, Vector2.new(var10, 1e999)).Y
+	end, { var10, var7, var12 })
 	
 	return reactModule.createElement(interactiveAlert, {
 		bottomMargin = 12,
-		defaultChildRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then var13 else nil,
-		screenSize = p0.screenSize,
+		defaultChildRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then var2 else nil,
+		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		title = var16.BuyItem,
+		title = var5.BuyItem,
 		onCloseClicked = function()
-			-- upvalues: p0 (ref)
-			if not p0.buttons.isDisabled then
-				p0.buttons.cancelActivated()
+			-- upvalues: p1 (ref)
+			if not p1.buttons.isDisabled then
+				p1.buttons.cancelActivated()
 			end
 		end,
-		onAbsoluteSizeChanged = var26,
+		onAbsoluteSizeChanged = var13,
 		middleContent = function()
-			-- upvalues: reactModule (copy), productDetailsModule (copy), p0 (ref)
+			-- upvalues: reactModule (copy), productDetailsModule (copy), p1 (ref)
 			return reactModule.createElement(productDetailsModule, {
 				isPortrait = false,
 				layoutOrder = 1,
-				itemIcon = p0.product.itemIcon,
-				itemName = p0.product.itemName
+				itemIcon = p1.product.itemIcon,
+				itemName = p1.product.itemName
 			})
 		end,
 		buttonStackInfo = {
@@ -110,34 +110,34 @@ local function ProductPurchaseModal(p0)
 				{
 					buttonType = buttonType.PrimaryContextual,
 					props = {
-						isDisabled = p0.buttons.isDisabled,
-						isDelayedInput = p0.buttons.buyItemIsDelayedInput,
-						enableInputDelayed = p0.buttons.buyItemEnableInputDelayed,
-						onActivated = p0.buttons.buyItemActivated,
+						isDisabled = p1.buttons.isDisabled,
+						isDelayedInput = p1.buttons.buyItemIsDelayedInput,
+						enableInputDelayed = p1.buttons.buyItemEnableInputDelayed,
+						onActivated = p1.buttons.buyItemActivated,
 						text = text_2,
-						inputIcon = p0.buttons.buyItemControllerIcon,
-						buttonRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then var12 else nil
+						inputIcon = p1.buttons.buyItemControllerIcon,
+						buttonRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then var1 else nil
 					}
 				}
 			}
 		},
 		footerContent = function()
-			-- upvalues: p0 (ref), reactModule (copy), text (copy), var25 (write), var27 (write), var26 (write)
-			return if p0.balanceAmountValid then reactModule.createElement(text, {
+			-- upvalues: p1 (ref), reactModule (copy), text (copy), var12 (write), var14 (write), var13 (write)
+			return if p1.balanceAmountValid then reactModule.createElement(text, {
 				tag = "content-muted text-caption-small align-x-center text-wrap",
-				Text = var25,
-				Size = UDim2.new(1, 0, 0, var27),
-				onAbsoluteSizeChanged = var26
+				Text = var12,
+				Size = UDim2.new(1, 0, 0, var14),
+				onAbsoluteSizeChanged = var13
 			}) else reactModule.None
 		end
 	})
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), ProductPurchaseModal (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		ProductPurchaseModal = reactModule.createElement(ProductPurchaseModal, p2)
+		ProductPurchaseModal = reactModule.createElement(ProductPurchaseModal, p1)
 	})
 end

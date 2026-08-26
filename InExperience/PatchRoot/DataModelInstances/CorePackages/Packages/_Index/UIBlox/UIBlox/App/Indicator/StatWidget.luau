@@ -18,26 +18,26 @@ local t = {
 	iconSize = getIconSizeModule(iconSizeModule.Large)
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyleModule (ref), cryoModule (ref), t (ref), reactModule (ref), label (ref), genericTextLabelModule (ref)
-	local var8 = useStyleModule()
-	local var9 = cryoModule.Dictionary.join(t, p0.styleProps or {})
-	local containerPaddingLeft = var9.containerPaddingLeft
-	local containerPaddingRight = var9.containerPaddingRight
-	local containerGap = var9.containerGap
-	local iconSize = var9.iconSize
+	local var1 = useStyleModule()
+	local var2 = cryoModule.Dictionary.join(t, p1.styleProps or {})
+	local containerPaddingLeft = var2.containerPaddingLeft
+	local containerPaddingRight = var2.containerPaddingRight
+	local containerGap = var2.containerGap
+	local iconSize = var2.iconSize
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Position = p0.position,
-		AnchorPoint = p0.anchorPoint,
-		Size = p0.size,
+		Position = p1.position,
+		AnchorPoint = p1.anchorPoint,
+		Size = p1.size,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		ListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
-			HorizontalAlignment = p0.horizontalAlignment,
+			HorizontalAlignment = p1.horizontalAlignment,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, containerGap)
 		}),
@@ -48,8 +48,8 @@ return function(p0)
 		Icon = reactModule.createElement(label, {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, iconSize, 0, iconSize),
-			Image = p0.icon,
-			ImageColor3 = (var9.iconContentColor or var8.Theme.IconEmphasis).Color,
+			Image = p1.icon,
+			ImageColor3 = (var2.iconContentColor or var1.Theme.IconEmphasis).Color,
 			Position = UDim2.new(0, 0, 0, 0)
 		}),
 		TextSection = reactModule.createElement("Frame", {
@@ -61,7 +61,7 @@ return function(p0)
 			ListLayout = reactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
-				Padding = UDim.new(0, var9.dataGap)
+				Padding = UDim.new(0, var2.dataGap)
 			}),
 			Number = reactModule.createElement(genericTextLabelModule, {
 				LayoutOrder = 1,
@@ -70,10 +70,10 @@ return function(p0)
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(0, 0),
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Text = p0.countText,
+				Text = p1.countText,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				colorStyle = var9.dataContentColor or var8.Theme.TextEmphasis,
-				fontStyle = var8.Font.Title,
+				colorStyle = var2.dataContentColor or var1.Theme.TextEmphasis,
+				fontStyle = var1.Font.Title,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}),
 			Label = reactModule.createElement(genericTextLabelModule, {
@@ -83,10 +83,10 @@ return function(p0)
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(0, 0),
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Text = p0.labelText,
+				Text = p1.labelText,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				colorStyle = var9.dataLabelContentColor or var8.Theme.TextEmphasis,
-				fontStyle = var8.Font.CaptionHeader,
+				colorStyle = var2.dataLabelContentColor or var1.Theme.TextEmphasis,
+				fontStyle = var1.Font.CaptionHeader,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			})
 		})

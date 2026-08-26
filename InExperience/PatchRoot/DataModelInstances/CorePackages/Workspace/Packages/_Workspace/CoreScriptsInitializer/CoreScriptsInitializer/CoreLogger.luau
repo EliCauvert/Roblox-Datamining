@@ -4,10 +4,10 @@ local debugLuaLogPattern = game:DefineFastString("DebugLuaLogPattern", "")
 coreLogger:setContext({ prefix = "[{loggerName}] - " })
 coreLogger:addSink({
 	maxLevel = var1,
-	log = function(_, p0, _)
+	log = function(_, p1, _)
 		-- upvalues: debugLuaLogPattern (ref)
-		if string.match(p0, debugLuaLogPattern) then
-			print(p0)
+		if string.match(p1, debugLuaLogPattern) then
+			print(p1)
 		end
 	end
 })

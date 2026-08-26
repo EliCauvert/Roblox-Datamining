@@ -61,43 +61,43 @@ local t_1 = {
 return {
 	TTI_CATEGORY = "AppChat",
 	Events = appChatPerfEventModule,
-	isTTIEvent = function(p0)
+	isTTIEvent = function(p1)
 		-- upvalues: t (ref)
-		return t[p0] ~= nil
+		return t[p1] ~= nil
 	end,
 	isIntervalEvent = function(p1)
 		-- upvalues: t_1 (ref)
 		return t_1[p1] ~= nil
 	end,
-	getTTIBaseName = function(p2)
+	getTTIBaseName = function(p1)
 		-- upvalues: t (ref)
-		return t[p2].baseName
+		return t[p1].baseName
 	end,
-	getTTIPage = function(p3)
+	getTTIPage = function(p1)
 		-- upvalues: t (ref)
-		return t[p3].page
+		return t[p1].page
 	end,
 	getTTICategory = function()
 		return "AppChat"
 	end,
-	buildTTIEventName = function(p4, p5, p6)
+	buildTTIEventName = function(p1, p2, p3)
 		-- upvalues: t (ref), chatPlacementContextModule (ref)
-		return t[p4].baseName .. (if chatPlacementContextModule.isPlacementInExperience(p5) then "_InExp" else "_UA") .. (if p6 then "_Cold" else "_Warm")
+		return t[p1].baseName .. (if chatPlacementContextModule.isPlacementInExperience(p2) then "_InExp" else "_UA") .. (if p3 then "_Cold" else "_Warm")
 	end,
-	getIntervalName = function(p7)
+	getIntervalName = function(p1)
 		-- upvalues: t_1 (ref)
-		return t_1[p7].name
+		return t_1[p1].name
 	end,
-	getParentTTI = function(p8)
+	getParentTTI = function(p1)
 		-- upvalues: t_1 (ref)
-		return t_1[p8].parentTTI
+		return t_1[p1].parentTTI
 	end,
-	getIntervalsForTTI = function(p9)
+	getIntervalsForTTI = function(p1)
 		-- upvalues: t_1 (ref)
 		local t = {}
 		
 		for i, v in t_1 do
-			if v.parentTTI == p9 then
+			if v.parentTTI == p1 then
 				table.insert(t, i)
 			end
 		end

@@ -11,21 +11,21 @@ local useTokens = foundationModule.Hooks.useTokens
 local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), useCallback (ref), view (ref), button (ref), foundationModule (ref), creationFlowLocalizationModule (ref)
-	local var6 = useDeviceInsets()
-	local var7 = useTokens()
-	local var8 = reactModule.useContext(creationFlowContextModule)
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = reactModule.useContext(creationFlowContextModule)
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-center auto-y align-y-bottom anchor-bottom-center col gap-large position-bottom-center size-full-0",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var7.Padding.Small),
-			PaddingBottom = UDim.new(0, math.max(var6.bottom, var7.Padding.Small)),
-			PaddingLeft = UDim.new(0, math.max(var6.left, var7.Padding.XLarge)),
-			PaddingRight = UDim.new(0, math.max(var6.right, var7.Padding.XLarge))
+			PaddingTop = UDim.new(0, var2.Padding.Small),
+			PaddingBottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Small)),
+			PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+			PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 		}),
 		Nav = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -34,27 +34,27 @@ return function(p0)
 			BackButton = reactModule.createElement(button, {
 				LayoutOrder = 1,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var8.getLocalization(creationFlowLocalizationModule.GeneralCtaBack),
+				text = var3.getLocalization(creationFlowLocalizationModule.GeneralCtaBack),
 				variant = foundationModule.Enums.ButtonVariant.Text,
 				onActivated = useCallback(function()
-					-- upvalues: p0 (ref)
-					if p0.onTextOverlayDiscard then
-						p0.onTextOverlayDiscard()
+					-- upvalues: p1 (ref)
+					if p1.onTextOverlayDiscard then
+						p1.onTextOverlayDiscard()
 					end
-				end, { p0.onTextOverlayDiscard }),
+				end, { p1.onTextOverlayDiscard }),
 				size = foundationModule.Enums.InputSize.Medium
 			}),
 			DoneButton = reactModule.createElement(button, {
 				LayoutOrder = 2,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var8.getLocalization(creationFlowLocalizationModule.GeneralCtaDone),
+				text = var3.getLocalization(creationFlowLocalizationModule.GeneralCtaDone),
 				variant = foundationModule.Enums.ButtonVariant.Text,
 				onActivated = useCallback(function()
-					-- upvalues: p0 (ref)
-					if p0.onTextOverlaySave then
-						p0.onTextOverlaySave()
+					-- upvalues: p1 (ref)
+					if p1.onTextOverlaySave then
+						p1.onTextOverlaySave()
 					end
-				end, { p0.onTextOverlaySave }),
+				end, { p1.onTextOverlaySave }),
 				size = foundationModule.Enums.InputSize.Medium
 			})
 		})

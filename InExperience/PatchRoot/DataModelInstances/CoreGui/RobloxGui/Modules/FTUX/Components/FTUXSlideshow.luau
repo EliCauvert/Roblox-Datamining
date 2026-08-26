@@ -10,30 +10,30 @@ local descriptionModule = require(parent.Components.Slideshow.Description)
 local endItemModule = require(parent.Components.Slideshow.EndItem)
 local eventHandlerModule = require(parent.Events.EventHandler)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), FTUXSlideshowDataModule (ref), FTUXConstantsModule (ref), eventHandlerModule (ref), headerModule (ref), titleModule (ref), descriptionModule (ref), stepperModule (ref), endItemModule (ref)
-	local var9, var10 = reactModule.useState(1)
-	local platform = p0.platform
-	local var11 = FTUXSlideshowDataModule[platform]
+	local var1, var2 = reactModule.useState(1)
+	local platform = p1.platform
+	local var3 = FTUXSlideshowDataModule[platform]
 	local panelConstants = FTUXConstantsModule[platform].PanelConstants
-	local var12 = var11[var9]
+	local var4 = var3[var1]
 	local CONTENT_HEIGHT_RATIO = panelConstants.CONTENT_HEIGHT_RATIO
 	local FOOTER_HEIGHT_RATIO = panelConstants.FOOTER_HEIGHT_RATIO
-	local var13 = panelConstants.CONTENT_PADDING / panelConstants.SLIDESHOW_FRAME_WIDTH
-	local var14 = 1 - 2 * var13
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var9 (ref)
-		var10(var9 + 1)
-	end, { var9 })
+	local var5 = panelConstants.CONTENT_PADDING / panelConstants.SLIDESHOW_FRAME_WIDTH
+	local var6 = 1 - 2 * var5
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), var1 (ref)
+		var2(var1 + 1)
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: eventHandlerModule (copy), platform (ref), var9 (ref), var15 (ref)
-		eventHandlerModule.StartEvents(platform, var9, var15)
+		-- upvalues: eventHandlerModule (copy), platform (ref), var1 (ref), var7 (ref)
+		eventHandlerModule.StartEvents(platform, var1, var7)
 		
 		return function()
-			-- upvalues: eventHandlerModule (copy), platform (copy), var9 (copy)
-			eventHandlerModule.StopEvents(platform, var9)
+			-- upvalues: eventHandlerModule (copy), platform (copy), var1 (copy)
+			eventHandlerModule.StopEvents(platform, var1)
 		end
-	end, { var9 })
+	end, { var1 })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -56,8 +56,8 @@ return function(p0)
 		}, {
 			Content = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.new(var14, 0, 1, 0),
-				Position = UDim2.new(var13, 0, 0, 0)
+				Size = UDim2.new(var6, 0, 1, 0),
+				Position = UDim2.new(var5, 0, 0, 0)
 			}, {
 				ContentLayout = reactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0.05, 0),
@@ -65,8 +65,8 @@ return function(p0)
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				Title = reactModule.createElement(titleModule, { platform = platform, currentIndex = var9 }),
-				Description = reactModule.createElement(descriptionModule, { platform = platform, currentIndex = var9 }),
+				Title = reactModule.createElement(titleModule, { platform = platform, currentIndex = var1 }),
+				Description = reactModule.createElement(descriptionModule, { platform = platform, currentIndex = var1 }),
 				ImageFrame = reactModule.createElement("Frame", {
 					LayoutOrder = 3,
 					BackgroundTransparency = 1,
@@ -76,7 +76,7 @@ return function(p0)
 					Image = reactModule.createElement("ImageLabel", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 3,
-						Image = var12.image,
+						Image = var4.image,
 						Size = UDim2.new(1, 0, 1, 0),
 						ScaleType = Enum.ScaleType.Fit
 					})
@@ -91,24 +91,24 @@ return function(p0)
 		}, {
 			Footer = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.new(var14, 0, 1, 0),
-				Position = UDim2.new(var13, 0, 0, 0)
+				Size = UDim2.new(var6, 0, 1, 0),
+				Position = UDim2.new(var5, 0, 0, 0)
 			}, {
 				ContentLayout = reactModule.createElement("UIListLayout", {
-					Padding = var9 ~= #var11 and UDim.new(0.2, 0) or UDim.new(0, 0),
+					Padding = var1 ~= #var3 and UDim.new(0.2, 0) or UDim.new(0, 0),
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
 				Stepper = reactModule.createElement(stepperModule, {
 					layoutOrder = 1,
-					numberActivated = var9,
-					numberOfSteps = #var11
+					numberActivated = var1,
+					numberOfSteps = #var3
 				}, {}),
 				EndItem = reactModule.createElement(endItemModule, {
 					platform = platform,
-					currentIndex = var9,
-					increaseCurrentIndex = var15
+					currentIndex = var1,
+					increaseCurrentIndex = var7
 				})
 			})
 		})

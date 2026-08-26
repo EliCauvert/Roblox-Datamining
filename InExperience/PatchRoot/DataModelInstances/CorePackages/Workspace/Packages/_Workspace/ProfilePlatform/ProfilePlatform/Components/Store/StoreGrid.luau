@@ -15,13 +15,13 @@ local fFlagProfileStoreEnableFreeItemPriceLabelFixModule = require(profilePlatfo
 local asset = constants.RbxthumbTypes.Asset
 local bundleThumbnail = constants.RbxthumbTypes.BundleThumbnail
 
-local var7 = function(p0)
-	return p0 + 49
+local var1 = function(p1)
+	return p1 + 49
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), enumsModule (ref), bundleThumbnail (ref), asset (ref), fFlagProfileStoreEnableFreeItemPriceLabelFixModule (ref), catalogItemCard (ref), itemCardThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref), squareCollectionGridViewModule (ref), var7 (ref)
-	local var8 = useLocalization({
+	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), enumsModule (ref), bundleThumbnail (ref), asset (ref), fFlagProfileStoreEnableFreeItemPriceLabelFixModule (ref), catalogItemCard (ref), itemCardThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref), squareCollectionGridViewModule (ref), var1 (ref)
+	local var2 = useLocalization({
 		store = textKeysModule.Store,
 		free = textKeysModule.CatalogLabelFree
 	})
@@ -30,7 +30,7 @@ return function(p1)
 		layoutOrder = p1.layoutOrder,
 		items = p1.assets,
 		renderItem = reactModule.useCallback(function(p2, p3)
-			-- upvalues: enumsModule (copy), bundleThumbnail (copy), asset (copy), fFlagProfileStoreEnableFreeItemPriceLabelFixModule (copy), var8 (ref), reactModule (copy), catalogItemCard (copy), itemCardThumbnail (copy), getRbxthumbWithTypeSizeAndOptions (copy), p1 (ref)
+			-- upvalues: enumsModule (copy), bundleThumbnail (copy), asset (copy), fFlagProfileStoreEnableFreeItemPriceLabelFixModule (copy), var2 (ref), reactModule (copy), catalogItemCard (copy), itemCardThumbnail (copy), getRbxthumbWithTypeSizeAndOptions (copy), p1 (ref)
 			return reactModule.createElement(catalogItemCard, {
 				LayoutOrder = p3,
 				title = p2.name,
@@ -43,7 +43,7 @@ return function(p1)
 				end,
 				priceLineContent = if fFlagProfileStoreEnableFreeItemPriceLabelFixModule then if fFlagProfileStoreEnableFreeItemPriceLabelFixModule and p2.price and p2.price == 0 then {
 					type = enumsModule.PriceLineContentType.Text,
-					text = var8.free
+					text = var2.free
 				} else p2.price and {
 					type = enumsModule.PriceLineContentType.Price,
 					price = p2.price
@@ -54,8 +54,8 @@ return function(p1)
 				AutomaticSize = Enum.AutomaticSize.Y
 			}), "ItemCard"
 		end, { p1.openItemDetails }),
-		getItemHeight = var7,
-		title = var8.store,
+		getItemHeight = var1,
+		title = var2.store,
 		onActivateHeader = p1.navigateToCatalogSearch,
 		overrides = { numColumns = p1.numColumns or 3 }
 	})

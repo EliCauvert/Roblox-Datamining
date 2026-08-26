@@ -19,9 +19,9 @@ local dataProvider = roactModule.Component:extend("DataProvider")
 local voiceChatDevConsoleTabEnabledEngineFeature = game:GetEngineFeature("VoiceChatDevConsoleTabEnabled")
 local devConsoleStartDataOnMount = game:DefineFastFlag("DevConsoleStartDataOnMount", false)
 
-function dataProvider.init(p0)
+function dataProvider.init(p1)
 	-- upvalues: logDataModule (ref), clientMemoryDataModule (ref), serverMemoryDataModule (ref), networkDataModule (ref), serverScriptsDataModule (ref), dataStoresDataModule (ref), serverStatsDataModule (ref), actionBindingsDataModule (ref), serverJobsDataModule (ref), debugVisualizationsDataModule (ref), luauHeapDataModule (ref), voiceChatDevConsoleTabEnabledEngineFeature (ref), voiceChatDataModule (ref)
-	p0:setState({
+	p1:setState({
 		DevConsoleData = {
 			ClientLogData = logDataModule.new(true),
 			ServerLogData = logDataModule.new(false),
@@ -73,6 +73,6 @@ function dataProvider.render(p4)
 	return roactModule.createElement(dataContextModule.Provider, { value = p4.state.DevConsoleData }, roactModule.oneChild(p4.props[roactModule.Children]))
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p5, _)
-	return { isDeveloperView = p5.MainView.isDeveloperView }
+return roactRoduxModule.UNSTABLE_connect2(function(p4, _)
+	return { isDeveloperView = p4.MainView.isDeveloperView }
 end, nil)(dataProvider)

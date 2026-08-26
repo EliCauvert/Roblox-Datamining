@@ -15,37 +15,37 @@ local t_1 = {
 }
 local useStyleSheet = foundationModule.Hooks.useStyleSheet
 
-local function StyleLinkPortal(p0)
+local function StyleLinkPortal(p1)
 	-- upvalues: useStyleSheet (ref), reactRobloxModule (ref)
-	return if useStyleSheet() and p0.overlay then reactRobloxModule.createPortal(nil, p0.overlay) else nil
+	return if useStyleSheet() and p1.overlay then reactRobloxModule.createPortal(nil, p1.overlay) else nil
 end
 
 local function useCreateOverlay(p1)
 	-- upvalues: reactModule (ref)
-	local var7 = reactModule.useRef(Instance.new("Frame"))
+	local var1 = reactModule.useRef(Instance.new("Frame"))
 	
-	if var7.current.Parent ~= p1.focus then
-		var7.current.Parent = p1.focus
+	if var1.current.Parent ~= p1.focus then
+		var1.current.Parent = p1.focus
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref)
-		var7.current.Size = UDim2.fromScale(1, 1)
-		var7.current.BackgroundTransparency = 1
+		-- upvalues: var1 (ref)
+		var1.current.Size = UDim2.fromScale(1, 1)
+		var1.current.BackgroundTransparency = 1
 		
 		return function()
-			-- upvalues: var7 (copy)
-			var7.current:Destroy()
+			-- upvalues: var1 (copy)
+			var1.current:Destroy()
 		end
 	end, {})
 	
-	return var7.current
+	return var1.current
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useCreateOverlay (ref), t (ref), reactModule (ref), foundationProvider (ref), t_1 (ref), StyleLinkPortal (ref)
-	return function(p3)
-		-- upvalues: useCreateOverlay (copy), t (copy), reactModule (copy), foundationProvider (copy), t_1 (copy), p2 (ref), StyleLinkPortal (copy)
-		local var8 = useCreateOverlay(p3)
+	return function(p2)
+		-- upvalues: useCreateOverlay (copy), t (copy), reactModule (copy), foundationProvider (copy), t_1 (copy), p1 (ref), StyleLinkPortal (copy)
+		local var1 = useCreateOverlay(p2)
 		
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -59,14 +59,14 @@ return function(p2)
 				PaddingRight = UDim.new(0, 10)
 			}),
 			FoundationContext = reactModule.createElement(foundationProvider, {
-				colorMode = t[p3.theme],
-				device = t_1[p3.platform],
-				preferences = p3.settings,
-				scale = p3.settings and p3.settings.scale,
-				overlayGui = var8
+				colorMode = t[p2.theme],
+				device = t_1[p2.platform],
+				preferences = p2.settings,
+				scale = p2.settings and p2.settings.scale,
+				overlayGui = var1
 			}, {
-				Child = reactModule.createElement(p2, p3),
-				StyleLink = reactModule.createElement(StyleLinkPortal, { overlay = var8 })
+				Child = reactModule.createElement(p1, p2),
+				StyleLink = reactModule.createElement(StyleLinkPortal, { overlay = var1 })
 			})
 		})
 	end

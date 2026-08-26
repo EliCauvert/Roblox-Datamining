@@ -1,11 +1,11 @@
 ﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
-local var2 = reactModule.createContext(nil)
+local var1 = reactModule.createContext(nil)
 
 local function createVoiceSpeakingStore()
 	-- upvalues: signalsModule (ref)
-	local var5, var6 = signalsModule.createSignal({})
+	local var2, var3 = signalsModule.createSignal({})
 	local t = {}
 	local t_1 = {}
 	
@@ -22,20 +22,20 @@ local function createVoiceSpeakingStore()
 	end
 	
 	return {
-		getIsSpeaking = function(p0)
-			-- upvalues: t_1 (ref), t (ref), signalsModule (copy), var5 (ref)
-			t_1[p0] = os.clock()
+		getIsSpeaking = function(p1)
+			-- upvalues: t_1 (ref), t (ref), signalsModule (copy), var2 (ref)
+			t_1[p1] = os.clock()
 			
-			if not t[p0] then
-				t[p0] = signalsModule.createComputed(function(p1)
-					-- upvalues: var5 (copy), p0 (ref)
-					return var5(p1)[p0] == true
+			if not t[p1] then
+				t[p1] = signalsModule.createComputed(function(p2)
+					-- upvalues: var2 (copy), p1 (ref)
+					return var2(p2)[p1] == true
 				end)
 			end
-			return t[p0]
+			return t[p1]
 		end,
 		setParticipants = function(value)
-			-- upvalues: t_1 (ref), t (ref), var6 (ref)
+			-- upvalues: t_1 (ref), t (ref), var3 (ref)
 			local processTime = os.clock()
 			
 			for i, v in t_1 do
@@ -44,15 +44,15 @@ local function createVoiceSpeakingStore()
 					t_1[i] = nil
 				end
 			end
-			var6(value)
+			var3(value)
 		end
 	}
 end
 
-local function buildParticipantsMap(p2)
+local function buildParticipantsMap(p1)
 	local t = {}
 	
-	for i, v in pairs(p2) do
+	for i, v in pairs(p1) do
 		t[tostring(i)] = v.isSignalActive == true
 	end
 	return t
@@ -60,33 +60,33 @@ end
 
 return {
 	useVoiceSpeakingStore = function()
-		-- upvalues: reactModule (ref), var2 (ref), createVoiceSpeakingStore (ref), buildParticipantsMap (ref)
-		local var12 = reactModule.useContext(var2)
-		local var13 = reactModule.useRef(nil)
+		-- upvalues: reactModule (ref), var1 (ref), createVoiceSpeakingStore (ref), buildParticipantsMap (ref)
+		local var4 = reactModule.useContext(var1)
+		local var5 = reactModule.useRef(nil)
 		
-		if not var13.current then
-			var13.current = createVoiceSpeakingStore()
+		if not var5.current then
+			var5.current = createVoiceSpeakingStore()
 		end
-		local current = var13.current
+		local current = var5.current
 		reactModule.useEffect(function()
-			-- upvalues: var12 (ref), current (ref), buildParticipantsMap (copy)
-			if not var12 then return end
-			if var12.participants then
-				current.setParticipants(buildParticipantsMap(var12.participants))
+			-- upvalues: var4 (ref), current (ref), buildParticipantsMap (copy)
+			if not var4 then return end
+			if var4.participants then
+				current.setParticipants(buildParticipantsMap(var4.participants))
 			end
-			local eventConnection = var12.participantsUpdate.Event:Connect(function(p3)
+			local eventConnection = var4.participantsUpdate.Event:Connect(function(p2)
 				-- upvalues: current (copy), buildParticipantsMap (copy)
-				current.setParticipants(buildParticipantsMap(p3))
+				current.setParticipants(buildParticipantsMap(p2))
 			end)
 			
 			return function()
 				-- upvalues: eventConnection (ref)
 				eventConnection:Disconnect()
 			end
-		end, { var12, current.setParticipants })
+		end, { var4, current.setParticipants })
 		
 		return current
 	end,
 	createVoiceSpeakingStore = createVoiceSpeakingStore,
-	VoiceChatServiceManagerContext = var2
+	VoiceChatServiceManagerContext = var1
 }

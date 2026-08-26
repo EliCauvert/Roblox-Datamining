@@ -45,19 +45,19 @@ return {
 		end
 		return list
 	end,
-	buildIconTypeMatrixRows = function(p1)
+	buildIconTypeMatrixRows = function(p2)
 		-- upvalues: t (ref), matrixGridModule (ref)
 		local t_1 = {}
 		
 		for i, v in t do
 			table.insert(t_1, {
 				label = matrixGridModule.matrixInfoLabel(v.title, v.subtitle),
-				cells = p1(v)
+				cells = p2(v)
 			})
 		end
 		return t_1
 	end,
-	parseIconControl = function(p1)
-		return if p1 == "" then nil else p1
+	parseIconControl = function(p3)
+		return if p3 == "" then nil else p3
 	end
 }

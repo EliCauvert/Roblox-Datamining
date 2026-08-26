@@ -66,94 +66,94 @@ local function validateIsSkinned(p1, p2, p3, p4)
 	return false, { "Failed to retrieve mesh data to validate skinned mesh" }
 end
 
-local function validateTotalAssetTriangles(vectorA, vectorB, p1)
+local function validateTotalAssetTriangles(vectorA, vectorB, p5)
 	-- upvalues: constantsModule (ref), getEditableMeshFromContextModule (ref), analyticsModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), getFIntUGCValidateTriangleLimitToleranceModule (ref)
-	local isServer = p1.isServer
+	local isServer = p5.isServer
 	local var1 = assert(constantsModule.ASSET_RENDER_MESH_MAX_TRIANGLES[vectorB.Name])
 	local var2, var3, var4 = (function()
-		-- upvalues: vectorA (ref), getEditableMeshFromContextModule (copy), p1 (ref), analyticsModule (copy), pcallDeferredModule (copy), UGCValidationService (copy)
-		local var1 = 0
+		-- upvalues: vectorA (ref), getEditableMeshFromContextModule (copy), p5 (ref), analyticsModule (copy), pcallDeferredModule (copy), UGCValidationService (copy)
+		local var5 = 0
 		
 		for i, v in vectorA do
 			if v.instance.ClassName == "MeshPart" then
 				assert(v.fieldName == "MeshId")
-				local var2, var3 = getEditableMeshFromContextModule(v.instance, v.fieldName, p1)
+				local var6, var7 = getEditableMeshFromContextModule(v.instance, v.fieldName, p5)
 				
-				if var2 then
-					local var4, var5 = pcallDeferredModule(function()
-						-- upvalues: UGCValidationService (copy), var3 (ref)
-						return UGCValidationService:GetEditableMeshTriCount(var3)
-					end, p1)
+				if var6 then
+					local var8, var9 = pcallDeferredModule(function()
+						-- upvalues: UGCValidationService (copy), var7 (ref)
+						return UGCValidationService:GetEditableMeshTriCount(var7)
+					end, p5)
 					
-					if var4 then
-						var1 += var5
+					if var8 then
+						var5 += var9
 						continue
 					end
 					return false, string.format("Failed to execute check for triangle face information for mesh '%s'. Make sure mesh exists and try again.", v.instance.Name)
 				end
-				analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_FailedToLoadMesh, nil, p1)
+				analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_FailedToLoadMesh, nil, p5)
 				
 				return false, string.format("Failed to load mesh for '%s'. Make sure mesh exists and try again.", v.instance.Name)
 			end
 		end
-		return true, nil, var1
+		return true, nil, var5
 	end)()
 	
-	if var2 then
-		if var1 + var1 * (getFIntUGCValidateTriangleLimitToleranceModule() / 100) < var4 then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_TooManyTriangles, nil, p1)
+	if var6 then
+		if var5 + var5 * (getFIntUGCValidateTriangleLimitToleranceModule() / 100) < var8 then
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_TooManyTriangles, nil, p5)
 			
 			return false, {
-				string.format("Mesh resolution of '%d' for '%s' is higher than max supported number of triangles '%d'. You need to retopologize your model to reduce the triangle count.", var4, vectorB.Name, var1)
+				string.format("Mesh resolution of '%d' for '%s' is higher than max supported number of triangles '%d'. You need to retopologize your model to reduce the triangle count.", var8, vectorB.Name, var5)
 			}
 		end
 		return true
 	elseif isServer then
-		error(var3)
+		error(var7)
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_FailedToCalculateTriangles, nil, p1)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_FailedToCalculateTriangles, nil, p5)
 	
-	return false, { var3 }
+	return false, { var7 }
 end
 
-local function validateMeshIsAtOrigin(p1, p2, p3, p4)
+local function validateMeshIsAtOrigin(p6, p7, p8, p9)
 	-- upvalues: analyticsModule (ref)
-	if (p2 + (p3 - p2) / 2).Magnitude > 0.001 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_TooFarFromOrigin, nil, p4)
+	if (p7 + (p8 - p7) / 2).Magnitude > 0.001 then
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_TooFarFromOrigin, nil, p9)
 		
 		return false, {
-			string.format("Bounds for the mesh '%s' are not centered at the origin. The max allowed distance is '%f'", p1.fullName, 0.001)
+			string.format("Bounds for the mesh '%s' are not centered at the origin. The max allowed distance is '%f'", p6.fullName, 0.001)
 		}
 	end
 	return true
 end
 
-return function(p1, p2)
+return function(p6, p7)
 	-- upvalues: failureReasonsAccumulatorModule (ref), parseContentIdsModule (ref), constantsModule (ref), getFFlagUGCValidateMigrateMeshGeometryModule (ref), validateTotalAssetTriangles (ref), analyticsModule (ref), getEditableMeshFromContextModule (ref), getMeshMinMaxModule (ref), validateMeshIsAtOrigin (ref), floatEqualsModule (ref), getExpectedPartSizeModule (ref), validateTotalSurfaceAreaModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), getFFlagUGCValidateCoplanarTriTestBodyModule (ref), validateCoplanarIntersectionModule (ref), validateMeshVertColorsModule (ref), validateIsSkinned (ref), getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (ref), validateSkinningTransferModule (ref), validateMeshTriangleAreaModule (ref), getFFlagUGCValidateMigrateCageUVModule (ref), validateCageUVsModule (ref), validateCageUVTriangleAreaModule (ref), validateCageUVValuesModule (ref)
-	local isServer = p2.isServer
-	assert(p2.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateDescendantMeshMetrics")
-	local assetTypeEnum = p2.assetTypeEnum
-	local allowEditableInstances = p2.allowEditableInstances
-	local var1 = failureReasonsAccumulatorModule.new()
-	local var2 = parseContentIdsModule.parse(p1, constantsModule.MESH_CONTENT_ID_FIELDS, p2)
+	local isServer = p7.isServer
+	assert(p7.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateDescendantMeshMetrics")
+	local assetTypeEnum = p7.assetTypeEnum
+	local allowEditableInstances = p7.allowEditableInstances
+	local var5 = failureReasonsAccumulatorModule.new()
+	local var6 = parseContentIdsModule.parse(p6, constantsModule.MESH_CONTENT_ID_FIELDS, p7)
 	local currentTime = tick()
 	
 	if not getFFlagUGCValidateMigrateMeshGeometryModule() then
-		var1:updateReasons(validateTotalAssetTriangles(var2, assetTypeEnum, p2))
+		var5:updateReasons(validateTotalAssetTriangles(var6, assetTypeEnum, p7))
 	end
-	analyticsModule.recordScriptTime("validateTotalAssetTriangles", currentTime, p2)
+	analyticsModule.recordScriptTime("validateTotalAssetTriangles", currentTime, p7)
 	
-	for i, v in var2 do
+	for i, v in var6 do
 		local t = {
 			fullName = v.instance:GetFullName(),
 			fieldName = v.fieldName,
 			contentId = v.instance[v.fieldName],
 			context = v.instance.Name
 		}
-		local var3, var4 = getEditableMeshFromContextModule(v.instance, v.fieldName, p2)
+		local var7, var8 = getEditableMeshFromContextModule(v.instance, v.fieldName, p7)
 		
-		if var3 then
-			t.editableMesh = var4
+		if var7 then
+			t.editableMesh = var8
 			
 			if v.instance.ClassName ~= "MeshPart" then
 				if v.instance.ClassName == "WrapTarget" then
@@ -161,65 +161,65 @@ return function(p1, p2)
 					t.fullName ..= "OuterCage"
 					
 					if not getFFlagUGCValidateMigrateCageUVModule() then
-						var1:updateReasons(validateCageUVsModule(t, v.instance, p2))
+						var5:updateReasons(validateCageUVsModule(t, v.instance, p7))
 					end
 					if not getFFlagUGCValidateMigrateCageUVModule() then
-						var1:updateReasons(validateCageUVTriangleAreaModule(t, p2))
+						var5:updateReasons(validateCageUVTriangleAreaModule(t, p7))
 					end
 					if not getFFlagUGCValidateMigrateCageUVModule() then
-						var1:updateReasons(validateCageUVValuesModule(t, v.instance, p2))
+						var5:updateReasons(validateCageUVValuesModule(t, v.instance, p7))
 					end
 					if not getFFlagUGCValidateMigrateMeshGeometryModule() then
-						var1:updateReasons(validateMeshTriangleAreaModule(t, p2))
+						var5:updateReasons(validateMeshTriangleAreaModule(t, p7))
 					end
 				end
 			end
 			assert(v.fieldName == "MeshId")
-			local var5, var6, var7, var8 = getMeshMinMaxModule(t, p2)
+			local var9, var10, var11, var12 = getMeshMinMaxModule(t, p7)
 			
-			if not var5 then
-				var1:updateReasons(false, var6)
+			if not var9 then
+				var5:updateReasons(false, var10)
 			end
-			if var5 then
+			if var9 then
 				local currentTime_1 = tick()
-				var1:updateReasons(validateMeshIsAtOrigin(t, var7, var8, p2))
-				analyticsModule.recordScriptTime("validateMeshIsAtOrigin", currentTime_1, p2)
+				var5:updateReasons(validateMeshIsAtOrigin(t, var11, var12, p7))
+				analyticsModule.recordScriptTime("validateMeshIsAtOrigin", currentTime_1, p7)
 			end
-			if var7 and var8 then
-				local var9 = var8 - var7
+			if var11 and var12 then
+				local var13 = var12 - var11
 				
-				if floatEqualsModule(var9.X, 0) or floatEqualsModule(var9.Y, 0) or floatEqualsModule(var9.Z, 0) then
-					var1:updateReasons(false, {
+				if floatEqualsModule(var13.X, 0) or floatEqualsModule(var13.Y, 0) or floatEqualsModule(var13.Z, 0) then
+					var5:updateReasons(false, {
 						"Mesh size is zero for " .. t.fullName .. ". You need to rescale your mesh."
 					})
 				else
-					local var10 = getExpectedPartSizeModule(v.instance, p2) / var9
+					local var14 = getExpectedPartSizeModule(v.instance, p7) / var13
 					
 					if not getFFlagUGCValidateMigrateMeshGeometryModule() then
-						var1:updateReasons(validateTotalSurfaceAreaModule(t, var10, p2))
+						var5:updateReasons(validateTotalSurfaceAreaModule(t, var14, p7))
 					end
 					if not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() and getFFlagUGCValidateCoplanarTriTestBodyModule() then
-						var1:updateReasons(validateCoplanarIntersectionModule(t, var10, p2))
+						var5:updateReasons(validateCoplanarIntersectionModule(t, var14, p7))
 					end
 				end
 			end
 			if not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() then
-				var1:updateReasons(validateMeshVertColorsModule(t, true, p2))
+				var5:updateReasons(validateMeshVertColorsModule(t, true, p7))
 			end
 			local currentTime_1 = tick()
-			var1:updateReasons(validateIsSkinned(v.instance, isServer, allowEditableInstances, p2))
-			analyticsModule.recordScriptTime("validateIsSkinned", currentTime_1, p2)
+			var5:updateReasons(validateIsSkinned(v.instance, isServer, allowEditableInstances, p7))
+			analyticsModule.recordScriptTime("validateIsSkinned", currentTime_1, p7)
 			
 			if not getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() then
-				var1:updateReasons(validateSkinningTransferModule(v.instance, p2))
+				var5:updateReasons(validateSkinningTransferModule(v.instance, p7))
 			end
 			if not getFFlagUGCValidateMigrateMeshGeometryModule() then
-				var1:updateReasons(validateMeshTriangleAreaModule(t, p2))
+				var5:updateReasons(validateMeshTriangleAreaModule(t, p7))
 			end
 		end
 		return false, {
 			string.format("Failed to load mesh for '%s'. Make sure mesh exists and try again.", v.instance.Name)
 		}
 	end
-	return var1:getFinalResults()
+	return var5:getFinalResults()
 end

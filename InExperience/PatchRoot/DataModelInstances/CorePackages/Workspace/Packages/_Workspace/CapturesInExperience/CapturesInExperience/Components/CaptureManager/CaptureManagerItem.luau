@@ -22,51 +22,51 @@ local _ = require(parent.Types)
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), reactModule (ref), useSelector (ref), constantsModule (ref), eventNamesModule (ref), selectCaptureModule (ref), getCropSize (ref), cryoModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), fFlagUseRbxstorageInGalleryModule (ref), getContentFromObject (ref), checkbox (ref), images (ref), text (ref), getFormatTimeModule (ref)
-	local var13 = useAnalyticsModule()
-	local var14 = useDispatch()
-	local var15, var16 = reactModule.useState(Vector2.new(0, 0))
-	local var17, var18 = reactModule.useState(Vector2.new(0, 0))
-	local var19, var20 = reactModule.useState(UDim2.fromScale(1, 1))
-	local var21, var22 = reactModule.useState(false)
-	local var23 = useSelector(function(p1)
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3, var4 = reactModule.useState(Vector2.new(0, 0))
+	local var5, var6 = reactModule.useState(Vector2.new(0, 0))
+	local var7, var8 = reactModule.useState(UDim2.fromScale(1, 1))
+	local var9, var10 = reactModule.useState(false)
+	local var11 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].CaptureManager.SelectedCaptures
+		return p2[constantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: var22 (ref), var21 (ref), var13 (ref), eventNamesModule (copy), var14 (ref), selectCaptureModule (copy), p0 (ref)
-		var22(not var21)
-		var13.fireEvent(eventNamesModule.CapturesManagerItemActivated)
-		var14(selectCaptureModule(p0.capture))
-	end, { var21, p0.capture })
-	local var25 = reactModule.useCallback(function(p2)
-		-- upvalues: var16 (ref)
-		var16(p2.AbsoluteSize)
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: var10 (ref), var9 (ref), var1 (ref), eventNamesModule (copy), var2 (ref), selectCaptureModule (copy), p1 (ref)
+		var10(not var9)
+		var1.fireEvent(eventNamesModule.CapturesManagerItemActivated)
+		var2(selectCaptureModule(p1.capture))
+	end, { var9, p1.capture })
+	local var13 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref)
+		var4(p2.AbsoluteSize)
 	end, {})
-	local var26 = reactModule.useCallback(function(p3)
-		-- upvalues: var18 (ref)
-		var18(p3.Resolution)
+	local var14 = reactModule.useCallback(function(p2)
+		-- upvalues: var6 (ref)
+		var6(p2.Resolution)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), getCropSize (copy), var15 (ref), var17 (ref)
-		var20(getCropSize(var15, var17))
-	end, { var15, var17 })
+		-- upvalues: var8 (ref), getCropSize (copy), var3 (ref), var5 (ref)
+		var8(getCropSize(var3, var5))
+	end, { var3, var5 })
 	reactModule.useEffect(function()
-		-- upvalues: var22 (ref), cryoModule (copy), var23 (ref), p0 (ref)
-		var22(cryoModule.List.find(var23, p0.capture) ~= nil)
-	end, { var23, p0.capture })
+		-- upvalues: var10 (ref), cryoModule (copy), var11 (ref), p1 (ref)
+		var10(cryoModule.List.find(var11, p1.capture) ~= nil)
+	end, { var11, p1.capture })
 	
 	return reactModule.createElement("ImageButton", {
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
-		Image = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then nil elseif p0.capture.type == captureTypeModule.Screenshot then p0.capture.contentId elseif fFlagUseRbxstorageInGalleryModule then p0.capture.thumbnailKey else nil,
-		ImageContent = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then getContentFromObject(p0.capture) else nil,
-		ImageTransparency = if var21 then 0.5 else 0,
+		Image = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then nil elseif p1.capture.type == captureTypeModule.Screenshot then p1.capture.contentId elseif fFlagUseRbxstorageInGalleryModule then p1.capture.thumbnailKey else nil,
+		ImageContent = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then getContentFromObject(p1.capture) else nil,
+		ImageTransparency = if var9 then 0.5 else 0,
 		ScaleType = Enum.ScaleType.Crop,
 		Size = UDim2.fromScale(1, 1),
-		[reactModule.Change.AbsoluteSize] = if not fFlagUseRbxstorageInGalleryModule then var25 else nil,
-		[reactModule.Event.Activated] = var24
+		[reactModule.Change.AbsoluteSize] = if not fFlagUseRbxstorageInGalleryModule then var13 else nil,
+		[reactModule.Event.Activated] = var12
 	}, {
 		CheckboxFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -74,12 +74,12 @@ return function(p0)
 			Position = UDim2.new(1, -34, 0, 8),
 			Size = UDim2.fromOffset(26, 26)
 		}, {
-			Checkbox = if var21 then reactModule.createElement(checkbox, {
+			Checkbox = if var9 then reactModule.createElement(checkbox, {
 				isChecked = true,
 				isDisabled = false,
 				LayoutOrder = 1,
 				label = "",
-				onActivated = var24
+				onActivated = var12
 			}) else reactModule.createElement("ImageButton", {
 				BackgroundTransparency = 1,
 				Image = images["squircles/hollow"].Image,
@@ -87,26 +87,26 @@ return function(p0)
 				ImageRectSize = images["squircles/hollow"].ImageRectSize,
 				ImageTransparency = 0.7,
 				Size = UDim2.fromOffset(26, 26),
-				[reactModule.Event.Activated] = var24
+				[reactModule.Event.Activated] = var12
 			})
 		}),
-		TimeLength = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule and p0.capture.CaptureType == Enum.CaptureType.Video then reactModule.createElement(text, {
+		TimeLength = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule and p1.capture.CaptureType == Enum.CaptureType.Video then reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "text-title-large content-emphasis auto-xy size-full text-align-x-right text-align-y-bottom padding-x-small padding-y-xsmall",
-			Text = getFormatTimeModule(p0.capture.TimeLength)
-		}) elseif fFlagEnableCapturesGalleryRetrievalCoreScriptModule and p0.capture.CaptureType == Enum.CaptureType.Screenshot then nil elseif fFlagUseRbxstorageInGalleryModule and p0.capture.type == captureTypeModule.Video then reactModule.createElement(text, {
+			Text = getFormatTimeModule(p1.capture.TimeLength)
+		}) elseif fFlagEnableCapturesGalleryRetrievalCoreScriptModule and p1.capture.CaptureType == Enum.CaptureType.Screenshot then nil elseif fFlagUseRbxstorageInGalleryModule and p1.capture.type == captureTypeModule.Video then reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "text-title-large content-emphasis auto-xy size-full text-align-x-right text-align-y-bottom padding-x-small padding-y-xsmall",
-			Text = getFormatTimeModule(p0.capture.videoCapture.TimeLength)
+			Text = getFormatTimeModule(p1.capture.videoCapture.TimeLength)
 		}) else nil,
-		VideoPreview = if fFlagUseRbxstorageInGalleryModule or p0.capture.type ~= captureTypeModule.Video then nil else reactModule.createElement("VideoFrame", {
+		VideoPreview = if fFlagUseRbxstorageInGalleryModule or p1.capture.type ~= captureTypeModule.Video then nil else reactModule.createElement("VideoFrame", {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundTransparency = 1,
 			Playing = false,
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = var19,
-			Video = p0.capture.contentId,
-			[reactModule.Event.Loaded] = var26
+			Size = var7,
+			Video = p1.capture.contentId,
+			[reactModule.Event.Loaded] = var14
 		})
 	})
 end

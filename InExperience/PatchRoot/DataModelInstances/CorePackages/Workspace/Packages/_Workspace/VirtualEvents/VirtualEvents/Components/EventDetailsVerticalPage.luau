@@ -28,101 +28,101 @@ local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSu
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local closeSmall = images["icons/navigation/close_small"]
 
-local var14 = function() end
+local var1 = function() end
 
-local t = { onClose = var14, onJoinEvent = var14, onShare = var14 }
+local t = { onClose = var1, onJoinEvent = var1, onShare = var1 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), formFactor (ref), reactModule (ref), findFirstImageInMediaModule (ref), fetchEventThumbnailModule (ref), constantsModule (ref), useMutation (ref), requestsModule (ref), getEventTimerStatusModule (ref), useCTAPropsModule (ref), useAnimationModule (ref), withStyle (ref), utilityActionIcon (ref), imageSetLabel (ref), closeSmall (ref), loadableImage (ref), eventDetailsContainerModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var16 = cryoModule.Dictionary.join(t, p0)
-	local var17 = useRoactService(roactNetworking)
-	local var18 = useSelector(function(p1)
-		return p1.FormFactor
+	local var2 = cryoModule.Dictionary.join(t, p1)
+	local var3 = useRoactService(roactNetworking)
+	local var4 = useSelector(function(p2)
+		return p2.FormFactor
 	end) == formFactor.WIDE
-	local media = p0.virtualEvent.media
-	local var19, var20 = reactModule.useState(0)
-	local var21, var22 = reactModule.useState(0)
-	local var23, var24 = reactModule.useState(nil)
-	local var25 = if media then findFirstImageInMediaModule(media) else nil
+	local media = p1.virtualEvent.media
+	local var5, var6 = reactModule.useState(0)
+	local var7, var8 = reactModule.useState(0)
+	local var9, var10 = reactModule.useState(nil)
+	local var11 = if media then findFirstImageInMediaModule(media) else nil
 	reactModule.useEffect(function()
-		-- upvalues: fetchEventThumbnailModule (copy), var17 (ref), p0 (ref), var25 (ref), var24 (ref)
-		local var32 = true
-		fetchEventThumbnailModule(var17, p0.virtualEvent.id, var25):andThen(function(p2)
-			-- upvalues: var32 (write), var24 (copy)
-			if var32 then
-				var24(p2)
+		-- upvalues: fetchEventThumbnailModule (copy), var3 (ref), p1 (ref), var11 (ref), var10 (ref)
+		local var12 = true
+		fetchEventThumbnailModule(var3, p1.virtualEvent.id, var11):andThen(function(p2)
+			-- upvalues: var12 (write), var10 (copy)
+			if var12 then
+				var10(p2)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var32 (write)
-			var32 = false
+			-- upvalues: var12 (write)
+			var12 = false
 		end
-	end, { p0.virtualEvent.id, var25 })
-	local var26 = reactModule.useCallback(function(p3)
-		-- upvalues: constantsModule (copy), var19 (ref), var20 (ref), var21 (ref), var22 (ref)
-		local minValue = math.min(constantsModule.HORIZONTAL_ASPECT_RATIO * p3.AbsoluteSize.X, p3.AbsoluteSize.Y)
+	end, { p1.virtualEvent.id, var11 })
+	local var12 = reactModule.useCallback(function(p2)
+		-- upvalues: constantsModule (copy), var5 (ref), var6 (ref), var7 (ref), var8 (ref)
+		local minValue = math.min(constantsModule.HORIZONTAL_ASPECT_RATIO * p2.AbsoluteSize.X, p2.AbsoluteSize.Y)
 		
-		if minValue ~= var19 then
-			var20(minValue)
+		if minValue ~= var5 then
+			var6(minValue)
 		end
-		local var34 = p3.AbsoluteSize.Y - minValue + 40
+		local var13 = p2.AbsoluteSize.Y - minValue + 40
 		
-		if var34 ~= var21 then
-			var22(var34)
+		if var13 ~= var7 then
+			var8(var13)
 		end
-	end, { var19, var21 })
-	local var27 = useMutation(requestsModule.UPDATE_RSVP_STATUS, {
-		variables = { virtualEventId = p0.virtualEvent.id },
-		update = function(_, p4, p5)
+	end, { var5, var7 })
+	local var13 = useMutation(requestsModule.UPDATE_RSVP_STATUS, {
+		variables = { virtualEventId = p1.virtualEvent.id },
+		update = function(_, p2, p3)
 			-- upvalues: cryoModule (copy)
-			local virtualEvent = p5.data.virtualEventRsvp.virtualEvent
-			p4:modify({
-				id = p4:identify(virtualEvent),
+			local virtualEvent = p3.data.virtualEventRsvp.virtualEvent
+			p2:modify({
+				id = p2:identify(virtualEvent),
 				fields = {
-					rsvpCounters = function(_, p6)
+					rsvpCounters = function(_, p4)
 						-- upvalues: virtualEvent (ref), cryoModule (copy)
-						return cryoModule.Dictionary.join(p6, {
-							going = p6.going + (if virtualEvent.userRsvpStatus == "going" then 1 else -1)
+						return cryoModule.Dictionary.join(p4, {
+							going = p4.going + (if virtualEvent.userRsvpStatus == "going" then 1 else -1)
 						})
 					end
 				}
 			})
 		end
 	})
-	local var28 = reactModule.useMemo(function()
-		-- upvalues: getEventTimerStatusModule (copy), var16 (ref)
-		return getEventTimerStatusModule(var16.virtualEvent, var16.currentTime)
-	end, { var16.virtualEvent, var16.currentTime })
-	local var29 = useCTAPropsModule(var16.virtualEvent, var28, p0.notifyMeUseEmphasisVariant, {
-		onClose = var16.onClose,
-		onJoinEvent = var16.onJoinEvent,
+	local var14 = reactModule.useMemo(function()
+		-- upvalues: getEventTimerStatusModule (copy), var2 (ref)
+		return getEventTimerStatusModule(var2.virtualEvent, var2.currentTime)
+	end, { var2.virtualEvent, var2.currentTime })
+	local var15 = useCTAPropsModule(var2.virtualEvent, var14, p1.notifyMeUseEmphasisVariant, {
+		onClose = var2.onClose,
+		onJoinEvent = var2.onJoinEvent,
 		onRsvpChanged = reactModule.useCallback(function()
-			-- upvalues: var16 (ref), var27 (ref)
-			var27[1]({
+			-- upvalues: var2 (ref), var13 (ref)
+			var13[1]({
 				variables = {
-					rsvpStatus = if var16.virtualEvent.userRsvpStatus ~= "going" then "notGoing" else "going"
+					rsvpStatus = if var2.virtualEvent.userRsvpStatus ~= "going" then "notGoing" else "going"
 				}
-			}):andThen(function(p7)
-				-- upvalues: var16 (copy)
-				if var16.onRsvpChanged then
-					var16.onRsvpChanged(p7.data.virtualEventRsvp.virtualEvent.userRsvpStatus, p7.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
+			}):andThen(function(p2)
+				-- upvalues: var2 (copy)
+				if var2.onRsvpChanged then
+					var2.onRsvpChanged(p2.data.virtualEventRsvp.virtualEvent.userRsvpStatus, p2.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
 				end
 			end)
-		end, { var16.virtualEvent }),
-		onShare = var16.onShare
+		end, { var2.virtualEvent }),
+		onShare = var2.onShare
 	})
-	local var30, var31 = reactModule.useState(constantsModule.CONTAINER_WIDTH)
+	local var16, var17 = reactModule.useState(constantsModule.CONTAINER_WIDTH)
 	useAnimationModule({
 		endOffset = 0,
 		duration = 0.1,
 		easingStyle = "linear",
-		startOffset = var30,
-		setAnimationOffset = var31
+		startOffset = var16,
+		setAnimationOffset = var17
 	})
 	
-	return withStyle(function(p8)
-		-- upvalues: reactModule (copy), var18 (ref), utilityActionIcon (copy), p0 (ref), imageSetLabel (copy), closeSmall (copy), var26 (ref), loadableImage (copy), var19 (ref), var23 (ref), eventDetailsContainerModule (copy), var28 (ref), var29 (ref), var21 (ref), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy), var30 (ref), constantsModule (copy)
+	return withStyle(function(p2)
+		-- upvalues: reactModule (copy), var4 (ref), utilityActionIcon (copy), p1 (ref), imageSetLabel (copy), closeSmall (copy), var12 (ref), loadableImage (copy), var5 (ref), var9 (ref), eventDetailsContainerModule (copy), var14 (ref), var15 (ref), var7 (ref), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy), var16 (ref), constantsModule (copy)
 		return reactModule.createElement("ImageButton", {
 			ZIndex = 4,
 			Size = UDim2.new(1, 0, 1, 0),
@@ -130,7 +130,7 @@ return function(p0)
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			Active = true,
 			AutoButtonColor = false,
-			[reactModule.Event.Activated] = p0.onClose
+			[reactModule.Event.Activated] = p1.onClose
 		}, {
 			EventDetailsWindow = reactModule.createElement(focusNavigableSurfaceWrapper, {
 				isIsolated = true,
@@ -138,10 +138,10 @@ return function(p0)
 				frameProps = {
 					BorderSizePixel = 0,
 					AnchorPoint = Vector2.new(1, 0),
-					Position = UDim2.new(1, var30, 0, 0),
-					Size = if var18 then UDim2.new(0, constantsModule.CONTAINER_WIDTH, 1, 0) else UDim2.fromScale(1, 1),
-					BackgroundTransparency = p8.Theme.BackgroundDefault.Transparency,
-					BackgroundColor3 = p8.Theme.BackgroundDefault.Color
+					Position = UDim2.new(1, var16, 0, 0),
+					Size = if var4 then UDim2.new(0, constantsModule.CONTAINER_WIDTH, 1, 0) else UDim2.fromScale(1, 1),
+					BackgroundTransparency = p2.Theme.BackgroundDefault.Transparency,
+					BackgroundColor3 = p2.Theme.BackgroundDefault.Color
 				}
 			}, {
 				EventDetailsWrapper = reactModule.createElement("ScrollingFrame", {
@@ -159,22 +159,22 @@ return function(p0)
 							ZIndex = 3,
 							BackgroundTransparency = 1,
 							Size = UDim2.fromOffset(48, 48),
-							Position = if var18 then UDim2.new(1, -64, 0, 16) else UDim2.fromOffset(16, 16)
+							Position = if var4 then UDim2.new(1, -64, 0, 16) else UDim2.fromOffset(16, 16)
 						}, {
-							CloseButton = reactModule.createElement(utilityActionIcon, { ZIndex = 1, onMedia = true, onActivated = p0.onClose }),
+							CloseButton = reactModule.createElement(utilityActionIcon, { ZIndex = 1, onMedia = true, onActivated = p1.onClose }),
 							CloseIcon = reactModule.createElement(imageSetLabel, {
 								ZIndex = 2,
 								BackgroundTransparency = 1,
 								Size = UDim2.fromOffset(24, 24),
 								Image = closeSmall,
-								ImageColor3 = p8.Theme.IconEmphasis.Color,
+								ImageColor3 = p2.Theme.IconEmphasis.Color,
 								Position = UDim2.fromOffset(12, 12)
 							})
 						}),
 						MediaContainer = reactModule.createElement("Frame", {
 							BackgroundTransparency = 1,
 							Size = UDim2.fromScale(1, 1),
-							[reactModule.Change.AbsoluteSize] = var26,
+							[reactModule.Change.AbsoluteSize] = var12,
 							ZIndex = 1
 						}, {
 							Thumbnail = reactModule.createElement(loadableImage, {
@@ -182,9 +182,9 @@ return function(p0)
 								useShimmerAnimationWhileLoading = true,
 								showFailedStateWhenLoadingFailed = true,
 								Position = UDim2.fromScale(0, 0),
-								Size = UDim2.new(1, 0, 0, var19),
+								Size = UDim2.new(1, 0, 0, var5),
 								ScaleType = Enum.ScaleType.Crop,
-								Image = var23
+								Image = var9
 							})
 						}),
 						EventContainer = reactModule.createElement("Frame", {
@@ -193,12 +193,12 @@ return function(p0)
 							Size = UDim2.fromScale(1, 1)
 						}, {
 							EventDetailsContainer = reactModule.createElement(eventDetailsContainerModule, {
-								virtualEvent = p0.virtualEvent,
-								eventStatus = var28,
-								isWideMode = var18,
-								ctaProps = var29,
-								bottomHeight = var21,
-								onExperienceTileActivated = p0.onExperienceTileActivated
+								virtualEvent = p1.virtualEvent,
+								eventStatus = var14,
+								isWideMode = var4,
+								ctaProps = var15,
+								bottomHeight = var7,
+								onExperienceTileActivated = p1.onExperienceTileActivated
 							})
 						})
 					})

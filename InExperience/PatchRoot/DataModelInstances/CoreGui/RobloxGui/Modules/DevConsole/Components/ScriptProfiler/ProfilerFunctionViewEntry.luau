@@ -20,14 +20,14 @@ local cellPadding = constantsModule.ScriptProfilerFormatting.CellPadding
 local valuePadding = constantsModule.ScriptProfilerFormatting.ValuePadding
 local profilerFunctionViewEntry = roactModule.PureComponent:extend("ProfilerFunctionViewEntry")
 
-local function BorderedCellLabel(p0)
+local function BorderedCellLabel(p1)
 	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
 	return roactModule.createFragment({
-		Label = roactModule.createElement(cellLabelModule, { text = p0.text, size = p0.size, pos = p0.pos }),
+		Label = roactModule.createElement(cellLabelModule, { text = p1.text, size = p1.size, pos = p1.pos }),
 		LeftBorder = roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(UDim.new(0, lineWidth), p0.size.Y),
-			Position = UDim2.fromOffset(-valuePadding, 0) + p0.pos,
+			Size = UDim2.new(UDim.new(0, lineWidth), p1.size.Y),
+			Position = UDim2.fromOffset(-valuePadding, 0) + p1.pos,
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = lineColor
 		})
@@ -57,11 +57,11 @@ function profilerFunctionViewEntry.init(p1)
 		})
 	end
 	
-	function p1.onMouseMove(_, p4, p5)
+	function p1.onMouseMove(_, p2, p3)
 		-- upvalues: p1 (ref)
 		p1:setState({
 			showTooltip = true,
-			tooltipPos = UDim2.fromOffset(p4, p5)
+			tooltipPos = UDim2.fromOffset(p2, p3)
 		})
 	end
 	
@@ -71,13 +71,13 @@ function profilerFunctionViewEntry.init(p1)
 	end
 end
 
-function profilerFunctionViewEntry.renderValues(_, p6)
+function profilerFunctionViewEntry.renderValues(_, p1)
 	-- upvalues: valueCellWidth (ref), valuePadding (ref), entryFrameHeight (ref), roactModule (ref), BorderedCellLabel (ref)
 	local t = {}
 	local uDim2 = UDim2.new(valueCellWidth, -valuePadding, 0, entryFrameHeight)
-	local uDim2_1 = UDim2.new(1 - valueCellWidth * #p6, valuePadding, 0, 0)
+	local uDim2_1 = UDim2.new(1 - valueCellWidth * #p1, valuePadding, 0, 0)
 	
-	for i, v in ipairs(p6) do
+	for i, v in ipairs(p1) do
 		t[tostring(i)] = roactModule.createElement(BorderedCellLabel, {
 			text = tostring(v),
 			size = uDim2,
@@ -87,19 +87,19 @@ function profilerFunctionViewEntry.renderValues(_, p6)
 	return t
 end
 
-function profilerFunctionViewEntry.render(p7)
+function profilerFunctionViewEntry.render(p2)
 	-- upvalues: entryFrameHeight (ref), getNativeFlag (ref), getPluginFlag (ref), profilerUtilModule (ref), valueCellWidth (ref), roactModule (ref), tooltipModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
-	local props = p7.props
+	local props = p2.props
 	local size = props.size or UDim2.new(1, 0, 0, entryFrameHeight)
 	local layoutOrder = props.layoutOrder or 0
 	local percentageRatio = props.percentageRatio
 	local data = props.data
 	local functionId = data.Functions[props.functionId]
-	local var13 = functionId.TotalDuration / p7.props.average - (p7.props.gcOffset or 0)
-	local var14 = getNativeFlag(data, functionId)
-	local var15 = getPluginFlag(data, functionId)
+	local var1 = functionId.TotalDuration / p2.props.average - (p2.props.gcOffset or 0)
+	local var2 = getNativeFlag(data, functionId)
+	local var3 = getPluginFlag(data, functionId)
 	local list = {
-		if percentageRatio then if percentageRatio == 0 then "N/A" else string.format("%.3f%%", var13 / percentageRatio) else string.format("%.3f", var13 * 1000)
+		if percentageRatio then if percentageRatio == 0 then "N/A" else string.format("%.3f%%", var1 / percentageRatio) else string.format("%.3f", var1 * 1000)
 	}
 	local nodeName = props.nodeName
 	
@@ -112,10 +112,10 @@ function profilerFunctionViewEntry.render(p7)
 		nodeName = sourceLocationString
 		sourceLocationString = ""
 	end
-	if var15 then
+	if var3 then
 		nodeName ..= " <plugin>"
 	end
-	if var14 then
+	if var2 then
 		nodeName ..= " <native>"
 	end
 	return roactModule.createElement("Frame", {
@@ -124,7 +124,7 @@ function profilerFunctionViewEntry.render(p7)
 		LayoutOrder = layoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		tooltip = if p7.state.showTooltip then roactModule.createElement(tooltipModule, { text = sourceLocationString, pos = p7.state.tooltipPos }) else nil,
+		tooltip = if p2.state.showTooltip then roactModule.createElement(tooltipModule, { text = sourceLocationString, pos = p2.state.tooltipPos }) else nil,
 		layout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
@@ -135,18 +135,18 @@ function profilerFunctionViewEntry.render(p7)
 			isExpandable = false,
 			layoutOrder = -1,
 			size = UDim2.new(1, 0, 0, entryFrameHeight),
-			isExpanded = p7.state.expanded,
-			onButtonPress = p7.onButtonPress,
-			onMouseEnter = p7.onMouseEnter,
-			onMouseLeave = p7.onMouseLeave,
-			onMouseMove = p7.onMouseMove
+			isExpanded = p2.state.expanded,
+			onButtonPress = p2.onButtonPress,
+			onMouseEnter = p2.onMouseEnter,
+			onMouseLeave = p2.onMouseLeave,
+			onMouseMove = p2.onMouseMove
 		}, {
 			name = roactModule.createElement(cellLabelModule, {
 				text = nodeName,
 				size = UDim2.new(UDim.new(1 - valueCellWidth * #list, 0), UDim.new(1, 0)),
 				pos = UDim2.new(0, cellPadding + 0, 0, 0)
 			}),
-			values = roactModule.createFragment(p7:renderValues(list))
+			values = roactModule.createFragment(p2:renderValues(list))
 		})
 	})
 end

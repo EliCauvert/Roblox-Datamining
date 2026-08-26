@@ -3,7 +3,7 @@ local argCheckModule = require(parent.ArgCheck)
 local cryoModule = require(parent.Cryo)
 local tModule = require(parent.t)
 local mutedError = require(parent.Loggers).mutedError
-local var3 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	distance = tModule.number,
 	screenSizeX = tModule.number,
 	screenSizeY = tModule.number,
@@ -13,7 +13,7 @@ local var3 = tModule.strictInterface({
 	startPos = tModule.number,
 	scrollDuration = tModule.number
 })
-local var4 = tModule.strictInterface({
+local var2 = tModule.strictInterface({
 	distance = tModule.number,
 	screenSizeX = tModule.number,
 	screenSizeY = tModule.number,
@@ -27,29 +27,29 @@ local var4 = tModule.strictInterface({
 	gameSetTargetId = tModule.optional(tModule.number)
 })
 
-return function(p0, p1, p2, p3)
-	-- upvalues: argCheckModule (ref), var3 (ref), var4 (ref), mutedError (ref), cryoModule (ref)
-	argCheckModule.isType(p1, "string", "eventContext")
-	local var5 = "unknown"
-	local var6 = nil
+return function(p1, p2, p3, p4)
+	-- upvalues: argCheckModule (ref), var1 (ref), var2 (ref), mutedError (ref), cryoModule (ref)
+	argCheckModule.isType(p2, "string", "eventContext")
+	local var3 = "unknown"
+	local var4 = nil
 	
-	if p2 == Enum.ScrollingDirection.Y then
-		var5 = "vertical"
-		var6 = var3
-	elseif p2 == Enum.ScrollingDirection.X then
-		var5 = "horizontal"
-		var6 = var4
-	elseif p2 == Enum.ScrollingDirection.XY then
-		mutedError(`Direction {p2.Name} is an unsupported option for feedScroll event`)
+	if p3 == Enum.ScrollingDirection.Y then
+		var3 = "vertical"
+		var4 = var1
+	elseif p3 == Enum.ScrollingDirection.X then
+		var3 = "horizontal"
+		var4 = var2
+	elseif p3 == Enum.ScrollingDirection.XY then
+		mutedError(`Direction {p3.Name} is an unsupported option for feedScroll event`)
 	end
-	if var6 then
-		local var7, var8 = var6(p3)
+	if var4 then
+		local var5, var6 = var4(p4)
 		
-		if not var7 then
-			mutedError(var8)
+		if not var5 then
+			mutedError(var6)
 		end
 	else
-		mutedError(`Missing interface for unknown direction {p2.Name} to type check feedScroll event parameters`)
+		mutedError(`Missing interface for unknown direction {p3.Name} to type check feedScroll event parameters`)
 	end
-	p0:sendEventDeferred(p1, "feedScroll", cryoModule.Dictionary.join(p3, { direction = var5 }))
+	p1:sendEventDeferred(p2, "feedScroll", cryoModule.Dictionary.join(p4, { direction = var3 }))
 end

@@ -9,26 +9,26 @@ local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiE
 local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventDetailsSupport
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref)
-	return function(p2)
-		-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), p1 (ref), p0 (ref)
-		if typeof(p2) ~= "table" or not p2.map_key then
+	return function(p3)
+		-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), p2 (ref), p1 (ref)
+		if typeof(p3) ~= "table" or not p3.map_key then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
-				message = `Invalid translationRef: expected table with map_key, got {typeof(p2)}`
-			}, p1)
+				message = `Invalid translationRef: expected table with map_key, got {typeof(p3)}`
+			}, p2)
 			
 			return nil
 		end
-		local mapKey = p2.map_key
-		local var4 = p0 and p0[mapKey]
+		local mapKey = p3.map_key
+		local var1 = p1 and p1[mapKey]
 		
-		if var4 == nil then
+		if var1 == nil then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
-				message = `Could not find localized literal for mapKey: {tostring(mapKey)}, namespace: {p2.namespace}, key: {p2.key}`
-			}, p1)
+				message = `Could not find localized literal for mapKey: {tostring(mapKey)}, namespace: {p3.namespace}, key: {p3.key}`
+			}, p2)
 		end
-		return var4
+		return var1
 	end
 end
 
@@ -53,14 +53,14 @@ return function(p3)
 			return nil
 		end
 		local mapKey = p4.map_key
-		local var4 = localizedLiterals and localizedLiterals[mapKey]
+		local var1 = localizedLiterals and localizedLiterals[mapKey]
 		
-		if var4 == nil then
+		if var1 == nil then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
 				message = `Could not find localized literal for mapKey: {tostring(mapKey)}, namespace: {p4.namespace}, key: {p4.key}`
 			}, appPage)
 		end
-		return var4
+		return var1
 	end
 	
 	t.configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport or fFlagSduiChartsSortDetailGenreFilter then p3.configKey else nil

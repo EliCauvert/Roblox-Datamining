@@ -22,9 +22,9 @@ local t = {
 	}
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: paginationSizeModule (ref), inputSizeModule (ref)
-	return if p0 == paginationSizeModule.Small then inputSizeModule.XSmall else inputSizeModule.Small
+	return if p1 == paginationSizeModule.Small then inputSizeModule.XSmall else inputSizeModule.Small
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)

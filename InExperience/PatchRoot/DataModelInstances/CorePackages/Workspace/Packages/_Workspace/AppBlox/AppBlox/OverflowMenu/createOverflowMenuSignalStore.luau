@@ -6,30 +6,30 @@ return function()
 	
 	return {
 		getActiveMenuKey = var1,
-		getIsMenuOpen = function(p0)
+		getIsMenuOpen = function(p1)
 			-- upvalues: var1 (ref)
-			return var1(false) == p0
+			return var1(false) == p1
 		end,
 		openMenu = function(p1)
 			-- upvalues: var2 (ref)
 			var2(p1)
 		end,
-		closeMenu = function(p2)
+		closeMenu = function(p1)
 			-- upvalues: var1 (ref), var2 (ref)
-			if var1(false) == p2 then
+			if var1(false) == p1 then
 				var2(nil)
 			end
 		end,
-		toggleMenu = function(p3)
+		toggleMenu = function(p1)
 			-- upvalues: var1 (ref), var2 (ref)
-			if var1(false) == p3 then
-				if var1(false) == p3 then
+			if var1(false) == p1 then
+				if var1(false) == p1 then
 					var2(nil)
 					
 					return
 				end
 			else
-				var2(p3)
+				var2(p1)
 			end
 		end
 	}

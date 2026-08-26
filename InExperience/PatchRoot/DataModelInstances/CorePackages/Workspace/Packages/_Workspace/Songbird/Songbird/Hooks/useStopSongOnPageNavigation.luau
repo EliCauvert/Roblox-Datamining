@@ -5,26 +5,26 @@ local getAudioPlaybackStore = require(songbird.Parent.MediaPlayback).getAudioPla
 local useEffect = reactModule.useEffect
 local useCallback = reactModule.useCallback
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: signalsReactModule (ref), getAudioPlaybackStore (ref), useCallback (ref), useEffect (ref)
-	local var3 = signalsReactModule.useSignalState(getAudioPlaybackStore)
-	local var4 = useCallback(function()
-		-- upvalues: var3 (ref), p1 (ref)
-		for i, v in var3.getPlayingAudioStores(false) do
+	local var1 = signalsReactModule.useSignalState(getAudioPlaybackStore)
+	local var2 = useCallback(function()
+		-- upvalues: var1 (ref), p2 (ref)
+		for i, v in var1.getPlayingAudioStores(false) do
 			v.stop()
 		end
-		if p1 then
-			p1()
+		if p2 then
+			p2()
 		end
-	end, { var3, p1 })
+	end, { var1, p2 })
 	useEffect(function()
-		-- upvalues: p0 (ref), var4 (ref)
-		if not p0 then
-			var4()
+		-- upvalues: p1 (ref), var2 (ref)
+		if not p1 then
+			var2()
 		end
-	end, { p0, var4 })
+	end, { p1, var2 })
 	useEffect(function()
-		-- upvalues: var4 (ref)
-		return var4
-	end, { var4 })
+		-- upvalues: var2 (ref)
+		return var2
+	end, { var2 })
 end

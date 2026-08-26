@@ -2,9 +2,9 @@
 
 return {
 	ServiceLocator = serviceLocatorModule,
-	getService = function(p0)
+	getService = function(p1)
 		-- upvalues: serviceLocatorModule (ref)
-		return serviceLocatorModule.get(p0)
+		return serviceLocatorModule.get(p1)
 	end,
 	setupMockServices = function(value)
 		-- upvalues: serviceLocatorModule (ref)

@@ -3,9 +3,9 @@ local httpService = game:GetService("HttpService")
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	return setmetatable({ memStorageKey = p0 }, t)
+	return setmetatable({ memStorageKey = p1 }, t)
 end
 
 function t.getItem(p1)
@@ -20,24 +20,24 @@ function t.getItem(p1)
 	return if ok then status else nil
 end
 
-function t.setItem(value, p2)
+function t.setItem(value, p1)
 	-- upvalues: memStorageService (ref), httpService (ref)
 	local ok, _ = pcall(function()
-		-- upvalues: memStorageService (copy), value (ref), p2 (ref), httpService (copy)
-		memStorageService:SetItem(value.memStorageKey, if p2 and p2 ~= "" then httpService:JSONEncode(p2) else "")
+		-- upvalues: memStorageService (copy), value (ref), p1 (ref), httpService (copy)
+		memStorageService:SetItem(value.memStorageKey, if p1 and p1 ~= "" then httpService:JSONEncode(p1) else "")
 	end)
 	
 	return ok
 end
 
-function t:bindAndFire(p3)
+function t:bindAndFire(p1)
 	-- upvalues: memStorageService (ref), httpService (ref)
-	return memStorageService:BindAndFire(self.memStorageKey, function(p4)
-		-- upvalues: httpService (copy), p3 (ref)
-		local var4 = if p4 and p4 ~= "" then httpService:JSONDecode(p4) else nil
+	return memStorageService:BindAndFire(self.memStorageKey, function(p2)
+		-- upvalues: httpService (copy), p1 (ref)
+		local var1 = if p2 and p2 ~= "" then httpService:JSONDecode(p2) else nil
 		
-		if p3 then
-			p3(var4)
+		if p1 then
+			p1(var1)
 		end
 	end)
 end

@@ -12,8 +12,8 @@ local localizationProvider = localizationModule.LocalizationProvider
 
 local function UniversalShareSheetScreenGui()
 	-- upvalues: reactModule (ref), getLocalizationServiceStore (ref), signalsReactModule (ref), localization (ref), foundationModule (ref), localizationProvider (ref), universalShareSheetHostModule (ref)
-	local var8, var9 = reactModule.useState(nil)
-	local var10 = signalsReactModule.useSignalState(getLocalizationServiceStore().getRobloxLocaleId)
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = signalsReactModule.useSignalState(getLocalizationServiceStore().getRobloxLocaleId)
 	
 	return reactModule.createElement("ScreenGui", {
 		DisplayOrder = 15,
@@ -21,16 +21,16 @@ local function UniversalShareSheetScreenGui()
 		Name = "UniversalShareSheetScreenGui",
 		ResetOnSpawn = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-		ref = var9
+		ref = var2
 	}, {
 		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			LocalizationProvider = reactModule.createElement(localizationProvider, {
 				localization = reactModule.useMemo(function()
-					-- upvalues: localization (copy), var10 (ref)
-					return localization.new(var10)
-				end, { var10 })
+					-- upvalues: localization (copy), var3 (ref)
+					return localization.new(var3)
+				end, { var3 })
 			}, {
-				OverlayProvider = if var8 ~= nil then nil else reactModule.createElement(foundationModule.OverlayProvider, { gui = var8 }, {
+				OverlayProvider = if var1 ~= nil then nil else reactModule.createElement(foundationModule.OverlayProvider, { gui = var1 }, {
 					Host = reactModule.createElement(universalShareSheetHostModule)
 				})
 			})
@@ -39,14 +39,14 @@ local function UniversalShareSheetScreenGui()
 end
 
 return {
-	mount = function(p0)
+	mount = function(p1)
 		-- upvalues: reactRobloxModule (ref), reactModule (ref), UniversalShareSheetScreenGui (ref)
 		local universalShareSheetScreenGuiRoot = Instance.new("Folder")
 		universalShareSheetScreenGuiRoot.Name = "UniversalShareSheetScreenGuiRoot"
-		universalShareSheetScreenGuiRoot.Parent = p0
-		local var12 = reactRobloxModule.createRoot(universalShareSheetScreenGuiRoot)
-		var12:render(reactModule.createElement(UniversalShareSheetScreenGui))
+		universalShareSheetScreenGuiRoot.Parent = p1
+		local var1 = reactRobloxModule.createRoot(universalShareSheetScreenGuiRoot)
+		var1:render(reactModule.createElement(UniversalShareSheetScreenGui))
 		
-		return var12
+		return var1
 	end
 }

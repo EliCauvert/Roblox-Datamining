@@ -12,29 +12,29 @@ local inviteButtonModule = require(shareGame.Components.InviteButton)
 local inviteStatus = require(shareGame.Constants).InviteStatus
 local conversationEntry = roactModule.PureComponent:extend("ConversationEntry")
 
-function conversationEntry.init(p0)
+function conversationEntry.init(p1)
 	-- upvalues: eventStream (ref), rbxAnalyticsService (ref), inviteStatus (ref), playersService (ref)
-	p0.eventStream = eventStream.new(rbxAnalyticsService)
+	p1.eventStream = eventStream.new(rbxAnalyticsService)
 	
 	function p0.onInvite()
-		-- upvalues: p0 (ref), inviteStatus (copy), playersService (copy)
-		local inviteStatus_1 = p0.props.inviteStatus
+		-- upvalues: p1 (ref), inviteStatus (copy), playersService (copy)
+		local inviteStatus_1 = p1.props.inviteStatus
 		
 		if inviteStatus_1 and inviteStatus_1 ~= inviteStatus.Failed then return end
-		local analytics = p0.props.analytics
-		local users = p0.props.users
-		local inviteUser = p0.props.inviteUser
+		local analytics = p1.props.analytics
+		local users = p1.props.users
+		local inviteUser = p1.props.inviteUser
 		
 		if #users == 1 then
-			inviteUser(users[1].id):andThen(function(p1)
+			inviteUser(users[1].id):andThen(function(p2)
 				-- upvalues: users (ref), playersService (copy), analytics (ref)
-				if not p1 then return end
+				if not p2 then return end
 				local t = {}
 				
 				for i, v in pairs(users) do
 					table.insert(t, v.id)
 				end
-				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p1.conversationId, t)
+				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p2.conversationId, t)
 			end, function() end)
 		end
 	end

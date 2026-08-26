@@ -11,8 +11,8 @@ local menuButtonModule = require(parent.Components.MenuButton)
 local _ = require(parent.Types)
 local useScreenSizeModule = require(parent.Hooks.useScreenSize)
 
-local function _(p0)
-	return math.clamp(math.floor(p0 / 120), 1, 4)
+local function _(p1)
+	return math.clamp(math.floor(p1 / 120), 1, 4)
 end
 
 local function getGalleryItemSize(p1, p2)
@@ -23,70 +23,70 @@ local function getGalleryItemSize(p1, p2)
 	return Vector2.new(math.floor(minValue), math.floor(minValue * p1))
 end
 
-local _ = function(p3, p4, p5)
-	if p3 <= 0 then
+local _ = function(p1, p2, p3)
+	if p1 <= 0 then
 		return 0
 	end
-	local floored = math.floor(p3 / p5.Y)
+	local floored = math.floor(p1 / p3.Y)
 	
-	if p3 < p5.Y * floored + (floored - 1) * 4 then
+	if p1 < p3.Y * floored + (floored - 1) * 4 then
 		floored -= 1
 	end
-	return math.max(floored * math.clamp(math.floor(p4 / 120), 1, 4), 8)
+	return math.max(floored * math.clamp(math.floor(p2 / 120), 1, 4), 8)
 end
 
-return function(p6)
+return function(p1)
 	-- upvalues: reactModule (ref), useScreenSizeModule (ref), getGalleryItemSize (ref), dashModule (ref), view (ref), scrollView (ref), scrollBarVisibility (ref), gridView (ref), menuButtonModule (ref)
-	local var9, var10 = reactModule.useState(Vector2.new(0, 0))
-	local var11, var12 = reactModule.useState(0)
-	local var13 = useScreenSizeModule()
-	local var14 = reactModule.useCallback(function(p7)
-		-- upvalues: var10 (ref)
-		var10(p7.AbsoluteSize)
+	local var1, var2 = reactModule.useState(Vector2.new(0, 0))
+	local var3, var4 = reactModule.useState(0)
+	local var5 = useScreenSizeModule()
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref)
+		var2(p2.AbsoluteSize)
 	end, {})
-	local var15 = var9.X > 0 and var9.Y > 0
-	local var16 = p6.shouldShowShowMoreButton and var11 < #p6.captures
-	local clampedValue = math.clamp(var13.Y / var13.X, 0.428571428571, 1)
-	local var18 = var9.Y - 12 - 40 - 36
-	local var19 = var9.X - 12 - 8
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: getGalleryItemSize (copy), clampedValue (write), var19 (ref)
-		return getGalleryItemSize(clampedValue, var19)
-	end, { clampedValue, var19 })
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: var18 (ref), var19 (ref), var20 (ref)
-		if var18 <= 0 then
+	local var7 = var1.X > 0 and var1.Y > 0
+	local var8 = p1.shouldShowShowMoreButton and var3 < #p1.captures
+	local clampedValue = math.clamp(var5.Y / var5.X, 0.428571428571, 1)
+	local var9 = var1.Y - 12 - 40 - 36
+	local var10 = var1.X - 12 - 8
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: getGalleryItemSize (copy), clampedValue (write), var10 (ref)
+		return getGalleryItemSize(clampedValue, var10)
+	end, { clampedValue, var10 })
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: var9 (ref), var10 (ref), var11 (ref)
+		if var9 <= 0 then
 			return 0
 		end
-		local floored = math.floor(var18 / var20.Y)
+		local floored = math.floor(var9 / var11.Y)
 		
-		if var18 < var20.Y * floored + (floored - 1) * 4 then
+		if var9 < var11.Y * floored + (floored - 1) * 4 then
 			floored -= 1
 		end
-		return math.max(floored * math.clamp(math.floor(var19 / 120), 1, 4), 8)
-	end, { var18, var19, var20 })
+		return math.max(floored * math.clamp(math.floor(var10 / 120), 1, 4), 8)
+	end, { var9, var10, var11 })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var21 (ref), var12 (ref)
-		if var11 < var21 then
-			var12(var21)
+		-- upvalues: var3 (ref), var12 (ref), var4 (ref)
+		if var3 < var12 then
+			var4(var12)
 		end
-	end, { var9, var21, var11 })
+	end, { var1, var12, var3 })
 	
 	return reactModule.createElement(view, {
 		BorderSizePixel = 0,
 		tag = "bg-surface-0",
-		onAbsoluteSizeChanged = var14,
-		Position = if p6.position then p6.position else UDim2.fromOffset(0, 0),
-		Size = if p6.size then p6.size else UDim2.fromScale(1, 1)
+		onAbsoluteSizeChanged = var6,
+		Position = if p1.position then p1.position else UDim2.fromOffset(0, 0),
+		Size = if p1.size then p1.size else UDim2.fromScale(1, 1)
 	}, {
 		CaptureGridViewContainer = reactModule.createElement(view, {
 			tag = "bg-action-subtle size-full gap-xsmall col align-x-center align-y-top shrink"
 		}, {
-			Header = p6.header,
+			Header = p1.header,
 			ScrollView = reactModule.createElement(scrollView, {
 				BorderSizePixel = 0,
 				tag = "auto-y size-full-0 gap-xsmall col align-x-center align-y-top shrink padding-x-xsmall",
-				LayoutOrder = if p6.layoutOrder then p6.layoutOrder else 1,
+				LayoutOrder = if p1.layoutOrder then p1.layoutOrder else 1,
 				scroll = {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.fromScale(1, 0),
@@ -94,24 +94,24 @@ return function(p6)
 					scrollBarVisibility = scrollBarVisibility.Auto
 				}
 			}, {
-				GridView = if var15 then reactModule.createElement(gridView, {
+				GridView = if var7 then reactModule.createElement(gridView, {
 					LayoutOrder = 1,
 					itemPadding = Vector2.new(4, 4),
 					items = reactModule.useMemo(function()
-						-- upvalues: var16 (ref), p6 (ref), var11 (ref), dashModule (copy)
-						return if var16 then dashModule.slice(p6.captures, 1, math.min(#p6.captures, var11)) else p6.captures
-					end, { p6.captures, var16, var11 }),
-					itemSize = var20,
-					renderItem = p6.renderItem
+						-- upvalues: var8 (ref), p1 (ref), var3 (ref), dashModule (copy)
+						return if var8 then dashModule.slice(p1.captures, 1, math.min(#p1.captures, var3)) else p1.captures
+					end, { p1.captures, var8, var3 }),
+					itemSize = var11,
+					renderItem = p1.renderItem
 				}) else nil,
-				ShowMore = if var16 then reactModule.createElement(menuButtonModule, {
+				ShowMore = if var8 then reactModule.createElement(menuButtonModule, {
 					buttonHeight = 40,
 					LayoutOrder = 2,
 					text = "Show More",
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: var12 (ref), var11 (ref), var21 (ref)
-						var12(var11 + var21)
-					end, { var11, var21 })
+						-- upvalues: var4 (ref), var3 (ref), var12 (ref)
+						var4(var3 + var12)
+					end, { var3, var12 })
 				}) else nil
 			})
 		})

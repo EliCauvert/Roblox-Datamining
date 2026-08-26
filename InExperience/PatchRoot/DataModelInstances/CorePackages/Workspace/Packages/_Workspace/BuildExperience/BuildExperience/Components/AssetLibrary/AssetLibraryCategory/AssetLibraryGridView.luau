@@ -11,33 +11,33 @@ local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 
 return function(value)
 	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref), assetLibraryTileModule (ref), scrollView (ref), scrollBarVisibility (ref)
-	local var3, var4 = reactModule.useState(Vector2.zero)
-	local var5 = reactModule.useRef(nil)
-	local clampedValue = math.clamp(math.floor(var3.X / 120), 1, 6)
-	local floored = math.floor(math.max(0, var3.X - (clampedValue - 1) * 12) / clampedValue)
+	local var1, var2 = reactModule.useState(Vector2.zero)
+	local var3 = reactModule.useRef(nil)
+	local clampedValue = math.clamp(math.floor(var1.X / 120), 1, 6)
+	local floored = math.floor(math.max(0, var1.X - (clampedValue - 1) * 12) / clampedValue)
 	local floored_1 = math.floor(floored * 1.4)
 	local ceiled = math.ceil((if value.isLoading then clampedValue else #value.assets) / clampedValue)
 	local maxValue = math.max(0, ceiled * floored_1 + math.max(0, ceiled - 1) * 12)
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: value (ref), var5 (ref)
-		if value.hasMore and var5.current ~= #value.assets then
-			var5.current = #value.assets
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: value (ref), var3 (ref)
+		if value.hasMore and var3.current ~= #value.assets then
+			var3.current = #value.assets
 			value.onLoadMore()
 		end
 	end, { value.assets, value.hasMore, value.onLoadMore })
 	reactModule.useEffect(function()
-		-- upvalues: value (ref), var3 (ref), maxValue (ref), var11 (ref)
-		if value.hasMore and var3.Y > 0 and maxValue <= var3.Y then
-			var11()
+		-- upvalues: value (ref), var1 (ref), maxValue (ref), var4 (ref)
+		if value.hasMore and var1.Y > 0 and maxValue <= var1.Y then
+			var4()
 		end
-	end, { var3.Y, maxValue, value.hasMore, var11 })
-	local var12 = reactModule.useCallback(function(p0)
-		-- upvalues: value (ref), floored_1 (ref), var11 (ref)
+	end, { var1.Y, maxValue, value.hasMore, var4 })
+	local var5 = reactModule.useCallback(function(p1)
+		-- upvalues: value (ref), floored_1 (ref), var4 (ref)
 		if not value.hasMore or floored_1 <= 0 then return end
-		if p0.AbsoluteCanvasSize.Y - floored_1 <= p0.CanvasPosition.Y + p0.AbsoluteWindowSize.Y then
-			var11()
+		if p1.AbsoluteCanvasSize.Y - floored_1 <= p1.CanvasPosition.Y + p1.AbsoluteWindowSize.Y then
+			var4()
 		end
-	end, { floored_1, value.hasMore, var11 })
+	end, { floored_1, value.hasMore, var4 })
 	local t = {}
 	
 	if value.isLoading then
@@ -84,15 +84,15 @@ return function(value)
 		testId = "AssetLibrary.Category.Grid",
 		LayoutOrder = value.LayoutOrder,
 		onAbsoluteSizeChanged = function(value)
-			-- upvalues: var4 (ref)
-			var4(value.AbsoluteSize)
+			-- upvalues: var2 (ref)
+			var2(value.AbsoluteSize)
 		end
 	}, {
 		Scroll = reactModule.createElement(scrollView, {
 			BorderSizePixel = 0,
 			tag = "size-full",
 			testId = "AssetLibrary.Category.Grid.Scroll",
-			onCanvasPositionChanged = var12,
+			onCanvasPositionChanged = var5,
 			scrollingFrameRef = value.scrollingFrameRef,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,

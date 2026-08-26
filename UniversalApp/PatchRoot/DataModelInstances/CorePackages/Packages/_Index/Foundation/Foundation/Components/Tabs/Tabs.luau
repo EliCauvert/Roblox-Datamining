@@ -26,18 +26,18 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 	local var1 = useTokensModule()
 	local var2 = withDefaultsModule(value, t)
 	local var3, var4 = reactModule.useState(var2.defaultActiveTabId or dashModule.get(var2, { 1, "id" }))
-	local var5 = reactModule.useCallback(function(p1)
+	local var5 = reactModule.useCallback(function(p2)
 		-- upvalues: var2 (ref), var4 (ref)
 		if var2.onActivated then
-			var2.onActivated(p1)
+			var2.onActivated(p2)
 		end
-		var4(p1)
+		var4(p2)
 	end)
 	local var6 = var2.fillBehavior == fillBehaviorModule.Fill
 	local activeTabId = var2.activeTabId or var3
-	local var7 = dashModule.find(var2.tabs, function(p1)
+	local var7 = dashModule.find(var2.tabs, function(p2)
 		-- upvalues: activeTabId (ref)
-		return p1.id == activeTabId
+		return p2.id == activeTabId
 	end)
 	local var8 = reactModule.useRef(nil)
 	local var9 = nil
@@ -48,9 +48,9 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 		local var11, var12 = reactModule.useBinding(0)
 		var9 = var11
 		local var13 = var12
-		var10 = reactModule.useCallback(function(p1)
+		var10 = reactModule.useCallback(function(p2)
 			-- upvalues: var13 (write)
-			var13(p1.AbsoluteSize.X)
+			var13(p2.AbsoluteSize.X)
 		end, {})
 	end
 	local var14
@@ -69,18 +69,18 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 		end
 		return current
 	end, { var2.tabs })
-	local var1 = useAnimatedHighlightModule(activeTabId, p1 or var8, var16, var2.size, var2.fillBehavior)
-	local highlightPosition = var1.highlightPosition
-	local highlightWidth = var1.highlightWidth
-	local activeItemHeight = var1.activeItemHeight
-	local var2 = if flagsModule.FoundationFixTabsFitBorderWidth then var2.size else nil
+	local var17 = useAnimatedHighlightModule(activeTabId, p1 or var8, var16, var2.size, var2.fillBehavior)
+	local highlightPosition = var17.highlightPosition
+	local highlightWidth = var17.highlightWidth
+	local activeItemHeight = var17.activeItemHeight
+	local var18 = if flagsModule.FoundationFixTabsFitBorderWidth then var18.size else nil
 	local createElement = reactModule.createElement
-	local var3 = withCommonPropsModule(var2, {
+	local var19 = withCommonPropsModule(var18, {
 		tag = if flagsModule.FoundationUnifiedScrimScrolling then "auto-y no-clip" else "auto-y clip",
 		Size = UDim2.fromScale(1, 0),
 		sizeConstraint = if flagsModule.FoundationUnifiedScrimScrolling and not var6 then {
-			MaxSize = var9:map(function(p1)
-				return Vector2.new(p1, 1e999)
+			MaxSize = var9:map(function(p2)
+				return Vector2.new(p2, 1e999)
 			end)
 		} else nil
 	})
@@ -93,25 +93,25 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 	}
 	local t_3 = {}
 	local createElement_2 = reactModule.createElement
-	local var4 = viewModule
+	local var20 = viewModule
 	local t_4 = {
 		LayoutOrder = 1,
 		tag = "auto-y",
 		Size = UDim2.fromScale(1, 0),
-		testId = `{var2.testId}--wrapper`
+		testId = `{var18.testId}--wrapper`
 	}
 	local t_5 = {}
 	local createElement_3 = reactModule.createElement
-	local var5 = if flagsModule.FoundationUnifiedScrimScrolling then overflowScrollContainerModule else overflowScrollContainerModule_1
-	local var6 = if flagsModule.FoundationUnifiedScrimScrolling then {
+	local var21 = if flagsModule.FoundationUnifiedScrimScrolling then overflowScrollContainerModule else overflowScrollContainerModule_1
+	local var22 = if flagsModule.FoundationUnifiedScrimScrolling then {
 		LayoutOrder = 1,
-		size = var2.size,
-		scrimBottomInset = var1.Stroke.Thick,
-		testId = `{var2.testId}--scroll-container`
+		size = var18.size,
+		scrimBottomInset = var17.Stroke.Thick,
+		testId = `{var18.testId}--scroll-container`
 	} else {
 		LayoutOrder = 1,
-		size = var2.size,
-		testId = `{var2.testId}--scroll-container`
+		size = var18.size,
+		testId = `{var18.testId}--scroll-container`
 	}
 	local t_6 = {}
 	local createElement_4 = reactModule.createElement
@@ -121,75 +121,75 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 	local t_8 = { ["row flex-y-fill auto-xy"] = true }
 	
 	if flagsModule.FoundationFixTabsFitBorderWidth then
-		var14 = not var6
+		var14 = not var22
 		
 		if var14 then
 			var14 = true
 			
-			if var2 ~= inputSizeModule.Small then
-				var14 = var2 == inputSizeModule.XSmall
+			if var18 ~= inputSizeModule.Small then
+				var14 = var18 == inputSizeModule.XSmall
 				var14 = nil
 			end
 		end
 	else
-		var14 = not var6
+		var14 = not var22
 	end
 	t_8["gap-large"] = var14
 	t_7.tag = t_8
-	t_7.Size = if var6 then UDim2.fromScale(1, 0) else nil
-	t_7.testId = `{var2.testId}--list`
-	t_6.TabList = createElement_4(viewModule, t_7, dashModule.map(var2.tabs, function(p1, p2)
-		-- upvalues: reactModule (copy), tabItemModule (copy), activeTabId (ref), var5 (ref), var2 (ref), var16 (write)
+	t_7.Size = if var22 then UDim2.fromScale(1, 0) else nil
+	t_7.testId = `{var18.testId}--list`
+	t_6.TabList = createElement_4(viewModule, t_7, dashModule.map(var18.tabs, function(p2, p3)
+		-- upvalues: reactModule (copy), tabItemModule (copy), activeTabId (ref), var21 (ref), var18 (ref), var16 (write)
 		return reactModule.createElement(tabItemModule, {
-			id = p1.id,
-			text = p1.text,
-			indicator = p1.indicator,
-			key = tostring(p1.id),
-			icon = p1.icon,
-			isActive = p1.id == activeTabId,
-			onActivated = var5,
-			LayoutOrder = p2,
-			fillBehavior = var2.fillBehavior,
-			size = var2.size,
-			isDisabled = p1.isDisabled,
-			testId = `{var2.testId}--item-{p5.id}`,
-			ref = var16[p1.id]
+			id = p2.id,
+			text = p2.text,
+			indicator = p2.indicator,
+			key = tostring(p2.id),
+			icon = p2.icon,
+			isActive = p2.id == activeTabId,
+			onActivated = var21,
+			LayoutOrder = p3,
+			fillBehavior = var18.fillBehavior,
+			size = var18.size,
+			isDisabled = p2.isDisabled,
+			testId = `{var18.testId}--item-{p5.id}`,
+			ref = var16[p2.id]
 		})
 	end))
-	t_5.ScrollContainer = createElement_3(var5, var6, t_6)
+	t_5.ScrollContainer = createElement_3(var21, var22, t_6)
 	t_5.Border = reactModule.createElement(viewModule, {
 		LayoutOrder = 2,
 		AnchorPoint = Vector2.new(0, 1),
-		Size = UDim2.new(1, 0, 0, var1.Stroke.Thick),
+		Size = UDim2.new(1, 0, 0, var17.Stroke.Thick),
 		Position = UDim2.fromScale(0, 1),
-		backgroundStyle = var1.Color.Stroke.Default,
-		testId = `{var2.testId}--border`
+		backgroundStyle = var17.Color.Stroke.Default,
+		testId = `{var18.testId}--border`
 	})
-	t_3.Wrapper = createElement_2(var4, t_4, t_5)
+	t_3.Wrapper = createElement_2(var20, t_4, t_5)
 	t_3.Content = if var7 and var7.content then reactModule.createElement(viewModule, {
 		LayoutOrder = 2,
 		tag = "auto-y",
 		Size = UDim2.fromScale(1, 0),
-		testId = `{var2.testId}--content`
+		testId = `{var18.testId}--content`
 	}, var7.content) else nil
 	t_1.Tabs = createElement_1(viewModule, t_2, t_3)
 	t_1.AnimatedBorder = reactModule.createElement(viewModule, {
 		LayoutOrder = 0,
-		ZIndex = var2.ZIndex + 1,
-		Size = highlightWidth:map(function(p1)
-			-- upvalues: var1 (ref)
-			return UDim2.fromOffset(p1, var1.Stroke.Thick)
+		ZIndex = var18.ZIndex + 1,
+		Size = highlightWidth:map(function(p2)
+			-- upvalues: var17 (ref)
+			return UDim2.fromOffset(p2, var17.Stroke.Thick)
 		end),
 		AnchorPoint = if flagsModule.FoundationFixTabsBorderPosition then Vector2.new(0, 1) else nil,
-		Position = reactModule.joinBindings({ highlightPosition, activeItemHeight }):map(function(p1)
-			-- upvalues: flagsModule (copy), var1 (ref)
-			local var1 = p1[2]
+		Position = reactModule.joinBindings({ highlightPosition, activeItemHeight }):map(function(p2)
+			-- upvalues: flagsModule (copy), var17 (ref)
+			local var23 = p2[2]
 			
-			return UDim2.fromOffset(p1[1], if flagsModule.FoundationFixTabsBorderPosition then var1 else var1 - var1.Stroke.Thick)
+			return UDim2.fromOffset(p2[1], if flagsModule.FoundationFixTabsBorderPosition then var23 else var23 - var23.Stroke.Thick)
 		end),
-		backgroundStyle = var1.Color.System.Contrast,
-		testId = `{var2.testId}--animated-border`
+		backgroundStyle = var17.Color.System.Contrast,
+		testId = `{var18.testId}--animated-border`
 	})
 	
-	return createElement(viewModule, var3, t_1)
+	return createElement(viewModule, var19, t_1)
 end))

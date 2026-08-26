@@ -26,70 +26,70 @@ local fixSquadTopBannerMemo = game:DefineFastFlag("FixSquadTopBannerMemo", false
 
 return function()
 	-- upvalues: useDispatch (ref), react (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useCurrentSquadParentChannelId (ref), fFlagIntroduceTopBannerPartyStatesModule (ref), useCurrentSquadMembers (ref), fixSquadTopBannerMemo (ref), cryo (ref), encodeSquadMembersModule (ref), eventNamesModule (ref), useCanAccessPartyModule (ref), fFlagEnableSquadTopBannerWideMode (ref), squadRootViewType (ref), fFlagUseSignalsForAppTopBanner (ref), getAppTopBannerStore (ref), appTopBannerType (ref), setAppTopBanner (ref), squadViewFlags (ref)
-	local var9 = useDispatch()
-	local var10 = react.useContext(squadExternalContractContext)
-	local var11 = useCurrentSquadId()
-	local var12 = useCurrentSquadParentChannelId()
-	local var13 = if fFlagIntroduceTopBannerPartyStatesModule then useCurrentSquadMembers() else nil
+	local var1 = useDispatch()
+	local var2 = react.useContext(squadExternalContractContext)
+	local var3 = useCurrentSquadId()
+	local var4 = useCurrentSquadParentChannelId()
+	local var5 = if fFlagIntroduceTopBannerPartyStatesModule then useCurrentSquadMembers() else nil
 	local _ = nil
-	local var14 = if fixSquadTopBannerMemo then react.useMemo(function()
-		-- upvalues: fFlagIntroduceTopBannerPartyStatesModule (copy), var13 (ref), cryo (copy)
-		return if fFlagIntroduceTopBannerPartyStatesModule and var13 then cryo.List.map(var13, function(p1)
+	local var6 = if fixSquadTopBannerMemo then react.useMemo(function()
+		-- upvalues: fFlagIntroduceTopBannerPartyStatesModule (copy), var5 (ref), cryo (copy)
+		return if fFlagIntroduceTopBannerPartyStatesModule and var5 then cryo.List.map(var5, function(p1)
 			return p1.userId
 		end) else {}
 	end, {
-		if fFlagIntroduceTopBannerPartyStatesModule then var13 else nil
-	}) elseif fFlagIntroduceTopBannerPartyStatesModule and var13 then cryo.List.map(var13, function(p0)
-		return p0.userId
+		if fFlagIntroduceTopBannerPartyStatesModule then var5 else nil
+	}) elseif fFlagIntroduceTopBannerPartyStatesModule and var5 then cryo.List.map(var5, function(p1)
+		return p1.userId
 	end) else {}
-	local var15 = if fFlagIntroduceTopBannerPartyStatesModule then react.useRef(os.clock()) else nil
-	local var16 = react.useCallback(function()
-		-- upvalues: var10 (ref), var12 (ref), var9 (ref), fFlagIntroduceTopBannerPartyStatesModule (copy), encodeSquadMembersModule (copy), var13 (ref), eventNamesModule (copy), var11 (ref), var15 (ref)
-		if var10.navigateIntoSquadLobby and var12 then
-			var9(var10.navigateIntoSquadLobby({ conversationId = var12 }, true))
+	local var7 = if fFlagIntroduceTopBannerPartyStatesModule then react.useRef(os.clock()) else nil
+	local var8 = react.useCallback(function()
+		-- upvalues: var2 (ref), var4 (ref), var1 (ref), fFlagIntroduceTopBannerPartyStatesModule (copy), encodeSquadMembersModule (copy), var5 (ref), eventNamesModule (copy), var3 (ref), var7 (ref)
+		if var2.navigateIntoSquadLobby and var4 then
+			var1(var2.navigateIntoSquadLobby({ conversationId = var4 }, true))
 		end
 		if fFlagIntroduceTopBannerPartyStatesModule then
-			var10.fireSquadAnalytics(eventNamesModule.SquadTopBannerClicked, {
-				squadId = var11,
-				parentChannelId = var12,
-				squadMembers = encodeSquadMembersModule(var13),
-				timePassedSinceLastStateUpdatedInSec = os.clock() - var15.current
+			var2.fireSquadAnalytics(eventNamesModule.SquadTopBannerClicked, {
+				squadId = var3,
+				parentChannelId = var4,
+				squadMembers = encodeSquadMembersModule(var5),
+				timePassedSinceLastStateUpdatedInSec = os.clock() - var7.current
 			})
 		end
 	end, {
-		if fFlagIntroduceTopBannerPartyStatesModule then var11 else nil, var12, var9,
-		var10.navigateIntoSquadLobby,
-		if fFlagIntroduceTopBannerPartyStatesModule then var10.fireSquadAnalytics else nil,
-		if fFlagIntroduceTopBannerPartyStatesModule then var13 else nil
+		if fFlagIntroduceTopBannerPartyStatesModule then var3 else nil, var4, var1,
+		var2.navigateIntoSquadLobby,
+		if fFlagIntroduceTopBannerPartyStatesModule then var2.fireSquadAnalytics else nil,
+		if fFlagIntroduceTopBannerPartyStatesModule then var5 else nil
 	})
-	local var17 = var10.useGetConversationFromId(var12)
-	local type = var17 and var17.type
-	local participants = var17 and var17.participants
-	local var20 = useCanAccessPartyModule()
-	local var21 = var10.useSquadRootView()
+	local var9 = var2.useGetConversationFromId(var4)
+	local type = var9 and var9.type
+	local participants = var9 and var9.participants
+	local var10 = useCanAccessPartyModule()
+	local var11 = var2.useSquadRootView()
 	
 	if fFlagEnableSquadTopBannerWideMode then
-		local var23 = var10.useSquadTopBannerDisabled()
+		local var12 = var2.useSquadTopBannerDisabled()
 		react.useEffect(function()
-			-- upvalues: var11 (ref), var23 (ref), var21 (ref), squadRootViewType (copy), var20 (ref), fFlagIntroduceTopBannerPartyStatesModule (copy), var15 (ref), fFlagUseSignalsForAppTopBanner (copy), getAppTopBannerStore (copy), appTopBannerType (copy), var14 (write), type (ref), participants (ref), var16 (ref), var9 (ref), setAppTopBanner (copy)
-			if var20 and (var11 and (not var23 or var21 == squadRootViewType.None)) then
+			-- upvalues: var3 (ref), var12 (ref), var11 (ref), squadRootViewType (copy), var10 (ref), fFlagIntroduceTopBannerPartyStatesModule (copy), var7 (ref), fFlagUseSignalsForAppTopBanner (copy), getAppTopBannerStore (copy), appTopBannerType (copy), var6 (write), type (ref), participants (ref), var8 (ref), var1 (ref), setAppTopBanner (copy)
+			if var10 and (var3 and (not var12 or var11 == squadRootViewType.None)) then
 				if fFlagIntroduceTopBannerPartyStatesModule then
-					var15.current = os.clock()
+					var7.current = os.clock()
 				end
 				if fFlagUseSignalsForAppTopBanner then
 					getAppTopBannerStore(false).setAppTopBanner(true, appTopBannerType.ActiveSquad, if fFlagIntroduceTopBannerPartyStatesModule then {
-						squadMemberList = var14,
+						squadMemberList = var6,
 						parentChannelType = type,
 						parentChannelParticipants = participants
-					} else nil, var16)
+					} else nil, var8)
 					
 					return
 				end
-				var9(setAppTopBanner(true, appTopBannerType.ActiveSquad, if fFlagIntroduceTopBannerPartyStatesModule then {
-					squadMemberList = var14,
+				var1(setAppTopBanner(true, appTopBannerType.ActiveSquad, if fFlagIntroduceTopBannerPartyStatesModule then {
+					squadMemberList = var6,
 					parentChannelType = type,
 					parentChannelParticipants = participants
-				} else nil, var16))
+				} else nil, var8))
 				
 				return
 			elseif fFlagUseSignalsForAppTopBanner then
@@ -97,33 +97,33 @@ return function()
 				
 				return
 			end
-			var9(setAppTopBanner(false, appTopBannerType.None, nil))
+			var1(setAppTopBanner(false, appTopBannerType.None, nil))
 		end, {
-			var11, if fFlagIntroduceTopBannerPartyStatesModule then var14 else nil, var9,
-			var16, type, participants, var23, var21
+			var3, if fFlagIntroduceTopBannerPartyStatesModule then var6 else nil, var1,
+			var8, type, participants, var12, var11
 		})
 	else
-		local var22 = var10.useSquadViewFlags()
+		local var13 = var2.useSquadViewFlags()
 		react.useEffect(function()
-			-- upvalues: var11 (ref), var22 (ref), squadViewFlags (copy), var21 (ref), squadRootViewType (copy), var20 (ref), fFlagIntroduceTopBannerPartyStatesModule (copy), var15 (ref), fFlagUseSignalsForAppTopBanner (copy), getAppTopBannerStore (copy), appTopBannerType (copy), var14 (write), type (ref), participants (ref), var16 (ref), var9 (ref), setAppTopBanner (copy)
-			if var20 and (var11 and (if bit32.band(var22, squadViewFlags.SquadLobby) ~= 0 then var21 == squadRootViewType.None else true)) then
+			-- upvalues: var3 (ref), var13 (ref), squadViewFlags (copy), var11 (ref), squadRootViewType (copy), var10 (ref), fFlagIntroduceTopBannerPartyStatesModule (copy), var7 (ref), fFlagUseSignalsForAppTopBanner (copy), getAppTopBannerStore (copy), appTopBannerType (copy), var6 (write), type (ref), participants (ref), var8 (ref), var1 (ref), setAppTopBanner (copy)
+			if var10 and (var3 and (if bit32.band(var13, squadViewFlags.SquadLobby) ~= 0 then var11 == squadRootViewType.None else true)) then
 				if fFlagIntroduceTopBannerPartyStatesModule then
-					var15.current = os.clock()
+					var7.current = os.clock()
 				end
 				if fFlagUseSignalsForAppTopBanner then
 					getAppTopBannerStore(false).setAppTopBanner(true, appTopBannerType.ActiveSquad, if fFlagIntroduceTopBannerPartyStatesModule then {
-						squadMemberList = var14,
+						squadMemberList = var6,
 						parentChannelType = type,
 						parentChannelParticipants = participants
-					} else nil, var16)
+					} else nil, var8)
 					
 					return
 				end
-				var9(setAppTopBanner(true, appTopBannerType.ActiveSquad, if fFlagIntroduceTopBannerPartyStatesModule then {
-					squadMemberList = var14,
+				var1(setAppTopBanner(true, appTopBannerType.ActiveSquad, if fFlagIntroduceTopBannerPartyStatesModule then {
+					squadMemberList = var6,
 					parentChannelType = type,
 					parentChannelParticipants = participants
-				} else nil, var16))
+				} else nil, var8))
 				
 				return
 			elseif fFlagUseSignalsForAppTopBanner then
@@ -131,10 +131,10 @@ return function()
 				
 				return
 			end
-			var9(setAppTopBanner(false, appTopBannerType.None, nil))
+			var1(setAppTopBanner(false, appTopBannerType.None, nil))
 		end, {
-			var11, if fFlagIntroduceTopBannerPartyStatesModule then var14 else nil, var9,
-			var16, var22, type, participants, var21
+			var3, if fFlagIntroduceTopBannerPartyStatesModule then var6 else nil, var1,
+			var8, var13, type, participants, var11
 		})
 	end
 	return nil

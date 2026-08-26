@@ -21,71 +21,71 @@ local useScrollbarOffsetModule = require(genericAbuseReporting.Common.useScrollb
 local sendAnalyticsEvent = beduiAnalyticsModule.sendAnalyticsEvent
 local telemetryEventType = beduiAnalyticsModule.TelemetryEventType
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLayerCollector (ref), reactModule (ref), useScrollbarOffsetModule (ref), useOnScreenKeyboardHeightModule (ref), useLocalization (ref), useAnalyticsContextModule (ref), useSelector (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), partialPageModal (ref), view (ref), scrollView (ref), fFlagAddThumbnailSelectorReport (ref), reportFlowHandlerModule (ref)
 	local absoluteSize = useLayerCollector().absoluteSize
-	local var10, var11 = reactModule.useBinding(Vector2.new(0, 0))
-	local var12, var13 = reactModule.useState(Vector2.new(0, 0))
-	local var14, var15 = reactModule.useState(Vector2.new(0, 0))
-	local var16 = useScrollbarOffsetModule(var12, var14)
-	local var17 = useOnScreenKeyboardHeightModule()
-	local isKeyboardShowing = var17.isKeyboardShowing
-	local onScreenKeyboardHeight = var17.onScreenKeyboardHeight
-	local keyboardPositionY = var17.keyboardPositionY
-	local var18 = useLocalization({ reportTitle = "Feature.ReportAbuse.Label.Report" })
-	local var19 = useAnalyticsContextModule()
-	local isReportSubmitted = var19.isReportSubmitted
-	local var20 = useSelector(function(p1)
-		return if p1.GlobalGuiInset then p1.GlobalGuiInset.top else 0
+	local var1, var2 = reactModule.useBinding(Vector2.new(0, 0))
+	local var3, var4 = reactModule.useState(Vector2.new(0, 0))
+	local var5, var6 = reactModule.useState(Vector2.new(0, 0))
+	local var7 = useScrollbarOffsetModule(var3, var5)
+	local var8 = useOnScreenKeyboardHeightModule()
+	local isKeyboardShowing = var8.isKeyboardShowing
+	local onScreenKeyboardHeight = var8.onScreenKeyboardHeight
+	local keyboardPositionY = var8.keyboardPositionY
+	local var9 = useLocalization({ reportTitle = "Feature.ReportAbuse.Label.Report" })
+	local var10 = useAnalyticsContextModule()
+	local isReportSubmitted = var10.isReportSubmitted
+	local var11 = useSelector(function(p2)
+		return if p2.GlobalGuiInset then p2.GlobalGuiInset.top else 0
 	end)
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: isKeyboardShowing (ref), keyboardPositionY (ref), var20 (ref), absoluteSize (ref), onScreenKeyboardHeight (ref)
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: isKeyboardShowing (ref), keyboardPositionY (ref), var11 (ref), absoluteSize (ref), onScreenKeyboardHeight (ref)
 		if not isKeyboardShowing then
 			return 0
 		end
-		local var23 = absoluteSize.Y - (keyboardPositionY - var20)
+		local var13 = absoluteSize.Y - (keyboardPositionY - var11)
 		
-		return if var23 <= 0 then 0 else math.min(var23, onScreenKeyboardHeight)
+		return if var13 <= 0 then 0 else math.min(var13, onScreenKeyboardHeight)
 	end, {
 		isKeyboardShowing,
 		keyboardPositionY,
 		onScreenKeyboardHeight,
 		absoluteSize.Y,
-		var20
+		var11
 	})
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: isKeyboardShowing (ref), var21 (ref)
-		return if isKeyboardShowing then -var21 else 0
-	end, { isKeyboardShowing, var21 })
+	local var13 = reactModule.useMemo(function()
+		-- upvalues: isKeyboardShowing (ref), var12 (ref)
+		return if isKeyboardShowing then -var12 else 0
+	end, { isKeyboardShowing, var12 })
 	reactModule.useEffect(function()
-		-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), p0 (ref)
+		-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), p1 (ref)
 		sendAnalyticsEvent({
 			eventType = telemetryEventType.Rendered,
-			context = { abuseVector = p0.abuseVector }
+			context = { abuseVector = p1.abuseVector }
 		})
-	end, { sendAnalyticsEvent, p0.abuseVector })
+	end, { sendAnalyticsEvent, p1.abuseVector })
 	
 	return reactModule.createElement(partialPageModal, {
-		title = var18.reportTitle,
+		title = var9.reportTitle,
 		screenSize = Vector2.new(absoluteSize.X, absoluteSize.Y),
-		position = if isKeyboardShowing then UDim2.new(0.5, 0, 1, var22) else nil,
+		position = if isKeyboardShowing then UDim2.new(0.5, 0, 1, var13) else nil,
 		anchorPoint = if isKeyboardShowing then Vector2.new(0.5, 1) else nil,
 		onCloseClicked = reactModule.useCallback(function()
-			-- upvalues: isReportSubmitted (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var19 (ref), p0 (ref)
+			-- upvalues: isReportSubmitted (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var10 (ref), p1 (ref)
 			if not isReportSubmitted then
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Abandoned,
-					context = var19
+					context = var10
 				})
 			end
-			p0.onClose()
-		end, { isReportSubmitted, sendAnalyticsEvent, var19, p0.onClose })
+			p1.onClose()
+		end, { isReportSubmitted, sendAnalyticsEvent, var10, p1.onClose })
 	}, {
 		View = reactModule.createElement(view, { tag = "size-full-0 auto-y" }, {
 			ScrollView = reactModule.createElement(scrollView, {
-				Size = var10:map(function(p2)
-					-- upvalues: absoluteSize (ref), var21 (ref)
-					return UDim2.new(1, 0, 0, math.min(absoluteSize.Y - var21 - 100, math.ceil(p2.Y)))
+				Size = var1:map(function(p2)
+					-- upvalues: absoluteSize (ref), var12 (ref)
+					return UDim2.new(1, 0, 0, math.min(absoluteSize.Y - var12 - 100, math.ceil(p2.Y)))
 				end),
 				scroll = {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
@@ -94,27 +94,27 @@ return reactModule.memo(function(p0)
 					VerticalScrollBarInset = if fFlagAddThumbnailSelectorReport then Enum.ScrollBarInset.ScrollBar else nil
 				},
 				onAbsoluteCanvasSizeChanged = function(value)
-					-- upvalues: var13 (ref)
-					var13(value.AbsoluteCanvasSize)
+					-- upvalues: var4 (ref)
+					var4(value.AbsoluteCanvasSize)
 				end,
 				onAbsoluteWindowSizeChanged = function(value)
-					-- upvalues: var15 (ref)
-					var15(value.AbsoluteWindowSize)
+					-- upvalues: var6 (ref)
+					var6(value.AbsoluteWindowSize)
 				end
 			}, {
 				Content = reactModule.createElement(view, {
 					tag = "auto-xy padding-x-xxsmall padding-top-medium",
-					Size = if fFlagAddThumbnailSelectorReport then UDim2.new(0, 0, 0, 0) else UDim2.new(0, -var16, 0, 0),
+					Size = if fFlagAddThumbnailSelectorReport then UDim2.new(0, 0, 0, 0) else UDim2.new(0, -var7, 0, 0),
 					onAbsoluteSizeChanged = function(value)
-						-- upvalues: var11 (ref)
-						var11(value.AbsoluteSize)
+						-- upvalues: var2 (ref)
+						var2(value.AbsoluteSize)
 					end
 				}, {
 					ReportFlowHandler = reactModule.createElement(reportFlowHandlerModule, {
-						targetId = p0.targetId,
-						abuseVector = p0.abuseVector,
-						onSubmit = p0.onSubmit,
-						custom = p0.custom
+						targetId = p1.targetId,
+						abuseVector = p1.abuseVector,
+						onSubmit = p1.onSubmit,
+						custom = p1.custom
 					})
 				})
 			})

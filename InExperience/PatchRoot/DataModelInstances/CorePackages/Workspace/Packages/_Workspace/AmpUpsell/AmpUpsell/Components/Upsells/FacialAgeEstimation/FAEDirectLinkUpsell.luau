@@ -13,48 +13,48 @@ local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local authButtonClick = require(parent.AuthAnalytics).Events.authButtonClick
 
-return function(p0)
+return function(p1)
 	-- upvalues: useScreenSize (ref), useTokens (ref), useRoactService (ref), appLinking (ref), useLocalization (ref), reactModule (ref), authButtonClick (ref), partialPageModal (ref), buttonType (ref), images (ref), text (ref)
-	local webLink = p0.webLink
-	local onCancel = p0.onCancel
-	local sessionId = p0.sessionId
-	local entryPointEventCtx = p0.entryPointEventCtx
-	local var3 = useScreenSize()
-	local var4 = useTokens()
-	local var5 = useRoactService(appLinking)
-	local var6 = useLocalization({
+	local webLink = p1.webLink
+	local onCancel = p1.onCancel
+	local sessionId = p1.sessionId
+	local entryPointEventCtx = p1.entryPointEventCtx
+	local var1 = useScreenSize()
+	local var2 = useTokens()
+	local var3 = useRoactService(appLinking)
+	local var4 = useLocalization({
 		title = "Amp.FAEUpsell.Modal.ExternalLink.Title",
 		bodyText = "Amp.FAEUpsell.Modal.ExternalLink.Text",
 		startBtn = "Amp.FAEUpsell.Modal.ExternalLink.ButtonStart",
 		cancelBtn = "Amp.FAEUpsell.Modal.ExternalLink.ButtonCancel"
 	})
-	local var7 = reactModule.useCallback(function()
+	local var5 = reactModule.useCallback(function()
 		-- upvalues: authButtonClick (copy), entryPointEventCtx (ref), sessionId (ref), onCancel (ref)
 		authButtonClick(entryPointEventCtx, "cancelFaeNonNative", sessionId)
 		onCancel()
 	end, { onCancel, sessionId, entryPointEventCtx })
 	
 	return reactModule.createElement(partialPageModal, {
-		title = var6.title,
-		screenSize = var3,
-		onCloseClicked = var7,
+		title = var4.title,
+		screenSize = var1,
+		onCloseClicked = var5,
 		buttonStackProps = {
 			forcedFillDirection = Enum.FillDirection.Vertical,
 			buttons = {
 				{
 					buttonType = buttonType.Secondary,
-					props = { onActivated = var7, text = var6.cancelBtn }
+					props = { onActivated = var5, text = var4.cancelBtn }
 				},
 				{
 					buttonType = buttonType.PrimaryContextual,
 					props = {
 						icon = images["icons/navigation/externallink_medium"],
 						onActivated = reactModule.useCallback(function()
-							-- upvalues: authButtonClick (copy), entryPointEventCtx (ref), sessionId (ref), var5 (ref), webLink (ref)
+							-- upvalues: authButtonClick (copy), entryPointEventCtx (ref), sessionId (ref), var3 (ref), webLink (ref)
 							authButtonClick(entryPointEventCtx, "startFaeNonNative", sessionId)
-							var5:openURL(webLink)
-						end, { var5, webLink, sessionId, entryPointEventCtx }),
-						text = var6.startBtn
+							var3:openURL(webLink)
+						end, { var3, webLink, sessionId, entryPointEventCtx }),
+						text = var4.startBtn
 					}
 				}
 			}
@@ -72,13 +72,13 @@ return function(p0)
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
 			OuterPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, var4.Padding.XXLarge),
-				PaddingBottom = UDim.new(0, var4.Padding.XXLarge)
+				PaddingTop = UDim.new(0, var2.Padding.XXLarge),
+				PaddingBottom = UDim.new(0, var2.Padding.XXLarge)
 			}),
 			BodyText = reactModule.createElement(text, {
 				tag = "auto-y grow size-full-0 text-align-x-left text-wrap",
 				LayoutOrder = 1,
-				Text = var6.bodyText
+				Text = var4.bodyText
 			})
 		})
 	})

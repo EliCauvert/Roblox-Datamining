@@ -5,17 +5,17 @@ local dashModule = require(parent.Dash)
 local playabilityStatusModule = require(roduxGames.Enums.PlayabilityStatus)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), t (ref), dashModule (ref), playabilityStatusModule (ref)
 	return roduxModule.createReducer(t, {
-		[p0.networkingGames.GetExperiencesPlayabilityStatus.Succeeded.name] = function(p1, p2)
+		[p1.networkingGames.GetExperiencesPlayabilityStatus.Succeeded.name] = function(p2, p3)
 			-- upvalues: dashModule (copy), playabilityStatusModule (copy)
-			return dashModule.reduce(p2.responseBody, function(p3, p4)
+			return dashModule.reduce(p3.responseBody, function(p4, p5)
 				-- upvalues: dashModule (copy), playabilityStatusModule (copy)
-				return dashModule.join(p3, {
-					[p4.universeId] = playabilityStatusModule.fromRawValue(p4.playabilityStatus)
+				return dashModule.join(p4, {
+					[p5.universeId] = playabilityStatusModule.fromRawValue(p5.playabilityStatus)
 				})
-			end, p1)
+			end, p2)
 		end
 	})
 end

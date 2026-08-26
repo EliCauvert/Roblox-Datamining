@@ -21,31 +21,31 @@ local progressChecklistModule = require(script.Parent.ProgressChecklist)
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local idvWithQRCodeUpsellStrings = require(ampUpsell.Common.LocalizationStrings).idvWithQRCodeUpsellStrings
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), idvWithQRCodeUpsellStrings (ref), useStyle (ref), analyticsServiceModule (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), sendButtonClickEventModule (ref), appScreensModule (ref), styledTextLabel (ref), directionsTileModule (ref), progressChecklistModule (ref), displayQRCode (ref), ECLevels (ref), loading (ref), iconSize (ref), linkButton (ref)
-	local featureName = p0.featureName
-	local qrCodeLink = p0.qrCodeLink
-	local var10 = useLocalization(idvWithQRCodeUpsellStrings)
-	local var11 = useStyle()
-	local onClose = p0.onClose
-	local openPrivacyPolicyLink = p0.openPrivacyPolicyLink
-	local font = var11.Font.Body.Font
-	local transparency = var11.Theme.TextEmphasis.Transparency
-	local var12 = var11.Font.BaseSize * var11.Font.CaptionBody.RelativeSize
-	local var13 = if p0.analyticsService then p0.analyticsService else analyticsServiceModule.EventStream
+	local featureName = p1.featureName
+	local qrCodeLink = p1.qrCodeLink
+	local var1 = useLocalization(idvWithQRCodeUpsellStrings)
+	local var2 = useStyle()
+	local onClose = p1.onClose
+	local openPrivacyPolicyLink = p1.openPrivacyPolicyLink
+	local font = var2.Font.Body.Font
+	local transparency = var2.Theme.TextEmphasis.Transparency
+	local var3 = var2.Font.BaseSize * var2.Font.CaptionBody.RelativeSize
+	local var4 = if p1.analyticsService then p1.analyticsService else analyticsServiceModule.EventStream
 	local uDim2 = UDim2.fromOffset(153, 153)
-	local latestStepCompleted = p0.latestStepCompleted
-	local var15 = latestStepCompleted > 0
+	local latestStepCompleted = p1.latestStepCompleted
+	local var5 = latestStepCompleted > 0
 	
 	return reactModule.createElement(partialPageModal, {
 		bottomPadding = 0,
-		title = var10.title,
-		screenSize = useSelector(function(p1)
-			return p1.ScreenSize
+		title = var1.title,
+		screenSize = useSelector(function(p2)
+			return p2.ScreenSize
 		end),
 		onCloseClicked = function()
-			-- upvalues: sendButtonClickEventModule (copy), var13 (ref), appScreensModule (copy), featureName (ref), onClose (ref)
-			sendButtonClickEventModule(var13, appScreensModule.IDVWithQRCodeUpsell, featureName, "CloseModal")
+			-- upvalues: sendButtonClickEventModule (copy), var4 (ref), appScreensModule (copy), featureName (ref), onClose (ref)
+			sendButtonClickEventModule(var4, appScreensModule.IDVWithQRCodeUpsell, featureName, "CloseModal")
 			onClose()
 		end
 	}, {
@@ -67,20 +67,20 @@ return function(p0)
 			HeaderText = reactModule.createElement(styledTextLabel, {
 				lineHeight = 1,
 				layoutOrder = 0,
-				text = if var15 then var10.verifyInBrowser else var10.ageVerifyPrompt,
-				fontStyle = var11.Font.Header2,
-				colorStyle = var11.Theme.TextEmphasis,
+				text = if var5 then var1.verifyInBrowser else var1.ageVerifyPrompt,
+				fontStyle = var2.Font.Header2,
+				colorStyle = var2.Theme.TextEmphasis,
 				size = UDim2.new(1, 0, 0, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Center,
 				textYAlignment = Enum.TextYAlignment.Center,
 				automaticSize = Enum.AutomaticSize.XY
 			}),
-			DirectionsFrame = if not var15 then reactModule.createElement("Frame", {
+			DirectionsFrame = if not var5 then reactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				LayoutOrder = 1,
 				Size = UDim2.new(1, 0, 0, 144),
-				BackgroundColor3 = var11.Theme.BackgroundContrast.Color
+				BackgroundColor3 = var2.Theme.BackgroundContrast.Color
 			}, {
 				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
 				UIPadding = reactModule.createElement("UIPadding", {
@@ -100,28 +100,28 @@ return function(p0)
 					imagePath = "icons/menu/document",
 					frameHeight = 48,
 					layoutOrder = 1,
-					headerText = var10.idDirectionsHeader,
-					descriptionText = var10.idDirectionsBody
+					headerText = var1.idDirectionsHeader,
+					descriptionText = var1.idDirectionsBody
 				}),
 				PhoneDirection = reactModule.createElement(directionsTileModule, {
 					imagePath = "icons/menu/mobile",
 					frameHeight = 48,
 					layoutOrder = 2,
-					headerText = var10.phoneDirectionsHeader,
-					descriptionText = var10.phoneDirectionsBody
+					headerText = var1.phoneDirectionsHeader,
+					descriptionText = var1.phoneDirectionsBody
 				})
 			}) else nil,
-			Checklist = if var15 then reactModule.createElement(progressChecklistModule, {
+			Checklist = if var5 then reactModule.createElement(progressChecklistModule, {
 				entryHeight = 18,
 				layoutOrder = 1,
 				latestStepCompleted = latestStepCompleted
 			}) else nil,
-			BeginText = if not var15 then reactModule.createElement(styledTextLabel, {
+			BeginText = if not var5 then reactModule.createElement(styledTextLabel, {
 				lineHeight = 1,
 				layoutOrder = 2,
-				text = var10.beginText,
-				fontStyle = var11.Font.Header1,
-				colorStyle = var11.Theme.TextEmphasis,
+				text = var1.beginText,
+				fontStyle = var2.Font.Header1,
+				colorStyle = var2.Theme.TextEmphasis,
 				size = UDim2.new(1, 0, 0, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Center,
@@ -163,48 +163,48 @@ return function(p0)
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Top
 				}),
-				Disclaimer = if not var15 then reactModule.createElement("TextLabel", {
+				Disclaimer = if not var5 then reactModule.createElement("TextLabel", {
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Text = var10.disclaimer,
+					Text = var1.disclaimer,
 					Font = font,
-					TextSize = var12,
-					TextColor3 = var11.Theme.TextDefault.Color,
+					TextSize = var3,
+					TextColor3 = var2.Theme.TextDefault.Color,
 					TextTransparency = transparency,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Size = UDim2.new(1, 0, 0, 24)
 				}) else nil,
-				PrivacyPolicy = if not var15 then reactModule.createElement(linkButton, {
+				PrivacyPolicy = if not var5 then reactModule.createElement(linkButton, {
 					layoutOrder = 2,
 					fontStyle = "CaptionBody",
 					underlineAlwaysEnabled = true,
-					text = var10.privacyLinkText,
+					text = var1.privacyLinkText,
 					onActivated = function()
-						-- upvalues: sendButtonClickEventModule (copy), var13 (ref), appScreensModule (copy), featureName (ref), openPrivacyPolicyLink (ref)
-						sendButtonClickEventModule(var13, appScreensModule.IDVWithQRCodeUpsell, featureName, "OpenPrivacyPolicy")
+						-- upvalues: sendButtonClickEventModule (copy), var4 (ref), appScreensModule (copy), featureName (ref), openPrivacyPolicyLink (ref)
+						sendButtonClickEventModule(var4, appScreensModule.IDVWithQRCodeUpsell, featureName, "OpenPrivacyPolicy")
 						openPrivacyPolicyLink()
 					end
 				}) else nil,
-				HavingTroubleInfoText = if var15 then reactModule.createElement(styledTextLabel, {
+				HavingTroubleInfoText = if var5 then reactModule.createElement(styledTextLabel, {
 					lineHeight = 1,
 					layoutOrder = 1,
-					text = var10.havingTroubleInfoText,
+					text = var1.havingTroubleInfoText,
 					size = UDim2.new(1, 0, 0.5, 0),
-					fontStyle = var11.Font.CaptionBody,
-					colorStyle = var11.Theme.TextEmphasis,
+					fontStyle = var2.Font.CaptionBody,
+					colorStyle = var2.Theme.TextEmphasis,
 					textTruncate = Enum.TextTruncate.AtEnd,
 					textXAlignment = Enum.TextXAlignment.Center,
 					textYAlignment = Enum.TextYAlignment.Center
 				}) else nil,
-				DontCloseWindowDisclaimer = if var15 then reactModule.createElement(styledTextLabel, {
+				DontCloseWindowDisclaimer = if var5 then reactModule.createElement(styledTextLabel, {
 					lineHeight = 1,
 					layoutOrder = 2,
-					text = var10.dontCloseWindowDisclaimer,
-					fontStyle = var11.Font.CaptionBody,
+					text = var1.dontCloseWindowDisclaimer,
+					fontStyle = var2.Font.CaptionBody,
 					size = UDim2.new(1, 0, 0.5, 0),
-					colorStyle = var11.Theme.TextEmphasis,
+					colorStyle = var2.Theme.TextEmphasis,
 					textTruncate = Enum.TextTruncate.AtEnd,
 					textXAlignment = Enum.TextXAlignment.Center,
 					textYAlignment = Enum.TextYAlignment.Center

@@ -14,22 +14,22 @@ local getFFlagPassNavigationToContactsRevokedModule = require(parent.Flags.getFF
 local contactsRevokedAccessDialog = roact.PureComponent:extend("ContactsRevokedAccessDialog")
 contactsRevokedAccessDialog.validateProps = t.strictInterface({ navigation = t.table, screenSize = t.Vector2 })
 
-function contactsRevokedAccessDialog.render(p0)
+function contactsRevokedAccessDialog.render(p1)
 	-- upvalues: withLocalization (ref), textKeysModule (ref), withStyle (ref), constantsModule (ref), getFFlagPassNavigationToContactsRevokedModule (ref), roact (ref), interactiveAlert (ref), buttonType (ref)
 	return withLocalization({
 		titleText = textKeysModule.CONTACTS_LIST_TITLE,
 		revokedFlow = textKeysModule.CONTACTS_REVOKED_FLOW,
 		closeModalOk = textKeysModule.CLOSE_MODAL_OK
-	})(function(p1)
-		-- upvalues: withStyle (copy), p0 (ref), constantsModule (copy), getFFlagPassNavigationToContactsRevokedModule (copy), roact (copy), interactiveAlert (copy), buttonType (copy)
+	})(function(p2)
+		-- upvalues: withStyle (copy), p1 (ref), constantsModule (copy), getFFlagPassNavigationToContactsRevokedModule (copy), roact (copy), interactiveAlert (copy), buttonType (copy)
 		return withStyle(function(_)
-			-- upvalues: p0 (copy), constantsModule (copy), getFFlagPassNavigationToContactsRevokedModule (copy), roact (copy), interactiveAlert (copy), p1 (ref), buttonType (copy)
-			local props = p0.props
+			-- upvalues: p1 (copy), constantsModule (copy), getFFlagPassNavigationToContactsRevokedModule (copy), roact (copy), interactiveAlert (copy), p2 (ref), buttonType (copy)
+			local props = p1.props
 			local navigation = props.navigation
 			local CLOSE_MODAL = navigation.getParam(constantsModule.CLOSE_MODAL) or getFFlagPassNavigationToContactsRevokedModule() and navigation.pop
 			
 			return roact.createElement(interactiveAlert, {
-				title = p1.titleText,
+				title = p2.titleText,
 				screenSize = props.screenSize,
 				buttonStackInfo = {
 					buttonHeight = 48,
@@ -41,18 +41,18 @@ function contactsRevokedAccessDialog.render(p0)
 									-- upvalues: CLOSE_MODAL (ref)
 									CLOSE_MODAL()
 								end,
-								text = p1.closeModalOk
+								text = p2.closeModalOk
 							}
 						}
 					},
 					forcedFillDirection = Enum.FillDirection.Vertical
 				},
-				bodyText = p1.revokedFlow
+				bodyText = p2.revokedFlow
 			})
 		end)
 	end)
 end
 
-return roactRodux.connect(function(p2)
-	return { screenSize = p2.ScreenSize }
+return roactRodux.connect(function(p1)
+	return { screenSize = p1.ScreenSize }
 end, nil)(contactsRevokedAccessDialog)

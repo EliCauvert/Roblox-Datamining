@@ -14,15 +14,15 @@ return {
 	isEnabledForAll = function()
 		return game:GetFastFlag("InGameLargerRobuxUpsellEnabled")
 	end,
-	isUserEnrolled = function(p0)
+	isUserEnrolled = function(p1)
 		if game:GetFastFlag("InGameLargerRobuxUpsellEnabled") then
 			return true
 		elseif not game:GetFastFlag("InGameLargerRobuxUpsellEnabled") and not game:GetFastFlag("InGameLargerRobuxUpsellIXP") then
 			return false
 		end
-		p0 = p0 or {}
+		p1 = p1 or {}
 		local inGameLargerRobuxUpsellIXPLayerParamFastString = game:GetFastString("InGameLargerRobuxUpsellIXPLayerParam")
 		
-		return if p0[inGameLargerRobuxUpsellIXPLayerParamFastString] == nil then game:GetFastFlag("InGameLargerRobuxUpsellEnabled") or game:GetFastFlag("InGameLargerRobuxUpsellIXPRolledOut") else p0[inGameLargerRobuxUpsellIXPLayerParamFastString]
+		return if p1[inGameLargerRobuxUpsellIXPLayerParamFastString] == nil then game:GetFastFlag("InGameLargerRobuxUpsellEnabled") or game:GetFastFlag("InGameLargerRobuxUpsellIXPRolledOut") else p1[inGameLargerRobuxUpsellIXPLayerParamFastString]
 	end
 }

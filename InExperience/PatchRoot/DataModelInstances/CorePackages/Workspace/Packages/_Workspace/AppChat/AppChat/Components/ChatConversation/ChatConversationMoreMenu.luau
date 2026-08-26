@@ -34,104 +34,104 @@ local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationE
 local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
 local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useDispatch (ref), useTokens (ref), useLocalization (ref), useCurrentSquadId (ref), useCurrentSquadParentChannelId (ref), reactModule (ref), squadExternalContractContext (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), eventNamesModule (ref), scheduledSquadActionEnum (ref), scheduledSquadActionSourceEnum (ref), leaveSquad (ref), squadPromptType (ref), squadButtonSourceEnum (ref), squadButtonClickIntentionEnum (ref), chatConversationTelemetryEventsModule (ref), conversationActionTypeModule (ref), iconName (ref), foundationModule (ref), scheduledSquadSheetModule (ref), menu (ref), popoverSide (ref), popoverAlign (ref)
-	local var13 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
-	local var14 = useDispatch()
-	local var15 = useTokens()
-	local var16 = useLocalization({
+	local var1 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
+	local var2 = useDispatch()
+	local var3 = useTokens()
+	local var4 = useLocalization({
 		joinParty = "Feature.Squads.Label.JoinParty",
 		moreText = "CommonUI.Features.Label.More",
 		scheduleAParty = "Feature.Squads.Action.ScheduleAParty",
 		startParty = "Feature.Squads.Label.StartParty",
 		viewParty = "Feature.Squads.Label.ViewParty"
 	})
-	local var17 = useCurrentSquadId()
-	local var18 = useCurrentSquadParentChannelId()
-	local var19 = reactModule.useContext(squadExternalContractContext)
-	local var20 = if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var19.useIsChatEnabled() else true
-	local var21, var22 = reactModule.useState(false)
-	local var23, var24 = reactModule.useState(false)
-	local var25, var26 = reactModule.useState(p0.tooltipText and p0.tooltipText ~= "")
-	local var27 = reactModule.useRef(nil)
+	local var5 = useCurrentSquadId()
+	local var6 = useCurrentSquadParentChannelId()
+	local var7 = reactModule.useContext(squadExternalContractContext)
+	local var8 = if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var7.useIsChatEnabled() else true
+	local var9, var10 = reactModule.useState(false)
+	local var11, var12 = reactModule.useState(false)
+	local var13, var14 = reactModule.useState(p1.tooltipText and p1.tooltipText ~= "")
+	local var15 = reactModule.useRef(nil)
 	local _ = nil
-	local var28 = useAppFocusRoot({
+	local var16 = useAppFocusRoot({
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
-		isFocusable = var23,
+		isFocusable = var11,
 		customEventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var24 (ref)
+			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var12 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p1)
-						-- upvalues: var24 (copy)
-						p1.cancelled = true
-						var24(false)
+					handler = inputHandlersModule.onRelease(function(p2)
+						-- upvalues: var12 (copy)
+						p2.cancelled = true
+						var12(false)
 					end)
 				}
 			}
-		end, { var24 })
+		end, { var12 })
 	})
-	local var29 = reactModule.useCallback(function(p2)
-		-- upvalues: var27 (ref), var28 (ref)
-		var27.current = p2
+	local var17 = reactModule.useCallback(function(p2)
+		-- upvalues: var15 (ref), var16 (ref)
+		var15.current = p2
 		
-		if type(var28) == "function" then
-			var28(p2)
+		if type(var16) == "function" then
+			var16(p2)
 		end
-	end, { var28 })
+	end, { var16 })
 	reactModule.useEffect(function()
-		-- upvalues: var27 (ref)
-		if var27 and var27.current then
-			var27.current.SelectionBehaviorDown = Enum.SelectionBehavior.Stop
-			var27.current.SelectionBehaviorLeft = Enum.SelectionBehavior.Stop
-			var27.current.SelectionBehaviorRight = Enum.SelectionBehavior.Stop
-			var27.current.SelectionBehaviorUp = Enum.SelectionBehavior.Stop
-			var27.current.SelectionGroup = true
+		-- upvalues: var15 (ref)
+		if var15 and var15.current then
+			var15.current.SelectionBehaviorDown = Enum.SelectionBehavior.Stop
+			var15.current.SelectionBehaviorLeft = Enum.SelectionBehavior.Stop
+			var15.current.SelectionBehaviorRight = Enum.SelectionBehavior.Stop
+			var15.current.SelectionBehaviorUp = Enum.SelectionBehavior.Stop
+			var15.current.SelectionGroup = true
 		end
-	end, { var23 })
-	local var30 = reactModule.useCallback(function()
-		-- upvalues: var24 (ref)
-		var24(false)
+	end, { var11 })
+	local var18 = reactModule.useCallback(function()
+		-- upvalues: var12 (ref)
+		var12(false)
 	end, {})
-	local var31 = reactModule.useCallback(function()
-		-- upvalues: var22 (ref), var19 (ref), eventNamesModule (copy), scheduledSquadActionEnum (copy), p0 (ref), scheduledSquadActionSourceEnum (copy), var17 (ref)
-		var22(true)
-		var19.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {
+	local var19 = reactModule.useCallback(function()
+		-- upvalues: var10 (ref), var7 (ref), eventNamesModule (copy), scheduledSquadActionEnum (copy), p1 (ref), scheduledSquadActionSourceEnum (copy), var5 (ref)
+		var10(true)
+		var7.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {
 			actionType = scheduledSquadActionEnum.ScheduleParty,
-			conversationId = p0.conversationId,
+			conversationId = p1.conversationId,
 			source = scheduledSquadActionSourceEnum.ChatConversationMoreMenu,
-			squadId = var17,
-			squadLocation = var19.squadLocation
+			squadId = var5,
+			squadLocation = var7.squadLocation
 		})
 	end, {
-		var19.setSquadPrompt,
-		p0.conversationId,
-		var17,
-		var19.squadLocation,
-		var19.fireSquadAnalytics
+		var7.setSquadPrompt,
+		p1.conversationId,
+		var5,
+		var7.squadLocation,
+		var7.fireSquadAnalytics
 	})
-	local var32 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), p0 (ref), var18 (ref), var14 (ref), leaveSquad (copy), squadPromptType (copy), var19 (ref), var20 (ref), eventNamesModule (copy), squadButtonSourceEnum (copy), squadButtonClickIntentionEnum (copy)
-		if var17 and p0.conversationId ~= var18 then
-			var14(leaveSquad(squadPromptType.JoinAnotherSquad, var19.setSquadPrompt, function()
-				-- upvalues: p0 (copy)
-				p0.navigateToSquadLobby(p0.conversationId)
-			end, var19.squadLocation, var20))
+	local var20 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), p1 (ref), var6 (ref), var2 (ref), leaveSquad (copy), squadPromptType (copy), var7 (ref), var8 (ref), eventNamesModule (copy), squadButtonSourceEnum (copy), squadButtonClickIntentionEnum (copy)
+		if var5 and p1.conversationId ~= var6 then
+			var2(leaveSquad(squadPromptType.JoinAnotherSquad, var7.setSquadPrompt, function()
+				-- upvalues: p1 (copy)
+				p1.navigateToSquadLobby(p1.conversationId)
+			end, var7.squadLocation, var8))
 		else
-			p0.navigateToSquadLobby(p0.conversationId)
+			p1.navigateToSquadLobby(p1.conversationId)
 		end
-		var19.fireSquadAnalytics(eventNamesModule.EnterSquadButtonPressed, {
-			conversationId = p0.conversationId,
+		var7.fireSquadAnalytics(eventNamesModule.EnterSquadButtonPressed, {
+			conversationId = p1.conversationId,
 			squadButtonSource = squadButtonSourceEnum.ChatConversationMoreMenu,
-			squadId = var17,
-			squadLocation = var19.squadLocation,
-			userIntention = if p0.conversation and p0.conversation.hasGroupUp and p0.conversationId == var18 then squadButtonClickIntentionEnum.View elseif p0.conversation and p0.conversation.hasGroupUp then squadButtonClickIntentionEnum.Join else squadButtonClickIntentionEnum.Create
+			squadId = var5,
+			squadLocation = var7.squadLocation,
+			userIntention = if p1.conversation and p1.conversation.hasGroupUp and p1.conversationId == var6 then squadButtonClickIntentionEnum.View elseif p1.conversation and p1.conversation.hasGroupUp then squadButtonClickIntentionEnum.Join else squadButtonClickIntentionEnum.Create
 		})
 	end, {
-		p0.navigateToSquadLobby, p0.conversationId,
-		p0.conversation and p0.conversation.hasGroupUp, var17, var18, var19, var20
+		p1.navigateToSquadLobby, p1.conversationId,
+		p1.conversation and p1.conversation.hasGroupUp, var5, var6, var7, var8
 	})
-	local var33 = reactModule.useRef(nil)
+	local var21 = reactModule.useRef(nil)
 	
 	return reactModule.createElement(foundationModule.View, { tag = "auto-xy align-y-center" }, {
 		MoreMenuButton = reactModule.createElement(foundationModule.IconButton, {
@@ -139,82 +139,82 @@ return reactModule.memo(function(p0)
 			testId = "ChatConversationMoreMenuButton",
 			icon = {
 				name = foundationModule.Enums.IconName.PlusLarge,
-				variant = if var23 then foundationModule.Enums.IconVariant.Filled else foundationModule.Enums.IconVariant.Regular
+				variant = if var11 then foundationModule.Enums.IconVariant.Filled else foundationModule.Enums.IconVariant.Regular
 			},
-			variant = if var23 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Utility,
-			LayoutOrder = p0.layoutOrder,
+			variant = if var11 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Utility,
+			LayoutOrder = p1.layoutOrder,
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: var13 (ref), chatConversationTelemetryEventsModule (copy), var23 (ref), conversationActionTypeModule (copy), var24 (ref)
-				var13.emit(chatConversationTelemetryEventsModule.ConversationMoreMenuBtnClicked, {
-					action = if var23 then conversationActionTypeModule.CloseMoreMenu else conversationActionTypeModule.OpenMoreMenu
+				-- upvalues: var1 (ref), chatConversationTelemetryEventsModule (copy), var11 (ref), conversationActionTypeModule (copy), var12 (ref)
+				var1.emit(chatConversationTelemetryEventsModule.ConversationMoreMenuBtnClicked, {
+					action = if var11 then conversationActionTypeModule.CloseMoreMenu else conversationActionTypeModule.OpenMoreMenu
 				})
-				var24(not var23)
-			end, { var23, var13 }),
+				var12(not var11)
+			end, { var11, var1 }),
 			size = foundationModule.Enums.InputSize.Medium,
-			ref = var33
+			ref = var21
 		}),
 		ScheduledSquadSheet = reactModule.createElement(scheduledSquadSheetModule, {
-			conversationId = p0.conversationId,
-			isOpen = var21,
+			conversationId = p1.conversationId,
+			isOpen = var9,
 			onClose = function()
-				-- upvalues: var22 (ref)
-				var22(false)
+				-- upvalues: var10 (ref)
+				var10(false)
 			end
 		}),
 		Menu = reactModule.createElement(menu, {
-			anchorRef = var33,
+			anchorRef = var21,
 			items = reactModule.useMemo(function()
-				-- upvalues: p0 (ref), var18 (ref), var16 (ref), iconName (copy)
+				-- upvalues: p1 (ref), var6 (ref), var4 (ref), iconName (copy)
 				local t = {}
 				table.insert(t, {
 					icon = "icons/menu/groups",
 					id = "createJoinViewParty",
 					isDisabled = false,
 					isChecked = false,
-					text = if p0.conversation and p0.conversation.hasGroupUp and p0.conversationId == var18 then var16.viewParty elseif p0.conversation and p0.conversation.hasGroupUp then var16.joinParty else var16.startParty
+					text = if p1.conversation and p1.conversation.hasGroupUp and p1.conversationId == var6 then var4.viewParty elseif p1.conversation and p1.conversation.hasGroupUp then var4.joinParty else var4.startParty
 				})
 				table.insert(t, {
 					id = "scheduleParty",
 					isDisabled = false,
 					isChecked = false,
 					icon = iconName.Calendar,
-					text = var16.scheduleAParty
+					text = var4.scheduleAParty
 				})
 				
 				return t
 			end, {
-				p0.conversation and p0.conversation.hasGroupUp,
-				p0.conversationId,
-				var18
+				p1.conversation and p1.conversation.hasGroupUp,
+				p1.conversationId,
+				var6
 			}),
-			isOpen = var23,
-			onActivated = reactModule.useCallback(function(p3)
-				-- upvalues: var32 (ref), var31 (ref), var24 (ref)
-				if p3 == "createJoinViewParty" then
-					var32()
-				elseif p3 == "scheduleParty" then
-					var31()
+			isOpen = var11,
+			onActivated = reactModule.useCallback(function(p2)
+				-- upvalues: var20 (ref), var19 (ref), var12 (ref)
+				if p2 == "createJoinViewParty" then
+					var20()
+				elseif p2 == "scheduleParty" then
+					var19()
 				end
-				var24(false)
-			end, { var32, var31 }),
-			onPressedOutside = var30,
-			ref = var29,
+				var12(false)
+			end, { var20, var19 }),
+			onPressedOutside = var18,
+			ref = var17,
 			side = popoverSide.Top
 		}),
-		Tooltip = reactModule.createElement(foundationModule.Popover.Root, { isOpen = var25 }, {
-			Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { anchorRef = var33 }),
+		Tooltip = reactModule.createElement(foundationModule.Popover.Root, { isOpen = var13 }, {
+			Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { anchorRef = var21 }),
 			Content = reactModule.createElement(foundationModule.Popover.Content, {
 				hasArrow = true,
 				align = { offset = 0, position = popoverAlign.Start },
-				backgroundStyle = var15.Inverse.Surface.Surface_0,
+				backgroundStyle = var3.Inverse.Surface.Surface_0,
 				onPressedOutside = reactModule.useCallback(function()
-					-- upvalues: var26 (ref)
-					var26(false)
+					-- upvalues: var14 (ref)
+					var14(false)
 				end, {})
 			}, {
 				TooltipText = reactModule.createElement(foundationModule.Text, {
 					tag = "auto-xy text-wrap padding-small content-inverse-emphasis text-body-small",
-					Text = p0.tooltipText
+					Text = p1.tooltipText
 				})
 			})
 		})

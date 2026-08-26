@@ -25,11 +25,11 @@ publishAvatarPrompt.validateProps = tModule.strictInterface({
 	SetPromptVisibility = tModule.callback
 })
 
-function publishAvatarPrompt.init(p0)
+function publishAvatarPrompt.init(p1)
 	-- upvalues: playersService (ref), publishAssetAnalytics (ref), purchasePromptModule (ref), mutedError (ref)
 	local localPlayer = playersService.LocalPlayer
 	assert(localPlayer, "LocalPlayer must not be nil")
-	p0:setState({
+	p1:setState({
 		showingPreviewView = false,
 		isNameValid = true,
 		isDescValid = true,
@@ -40,113 +40,113 @@ function publishAvatarPrompt.init(p0)
 	})
 	
 	function p0.openPreviewView()
-		-- upvalues: publishAssetAnalytics (copy), p0 (ref)
+		-- upvalues: publishAssetAnalytics (copy), p1 (ref)
 		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Expand)
-		p0:setState({ showingPreviewView = true })
+		p1:setState({ showingPreviewView = true })
 	end
 	
 	function p0.closePreviewView()
-		-- upvalues: p0 (ref)
-		p0:setState({ showingPreviewView = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ showingPreviewView = false })
 	end
 	
 	function p0.canSubmit()
-		-- upvalues: p0 (ref)
-		return p0.state.isNameValid and (p0.state.isDescValid and (p0.props.humanoidModel ~= nil and p0.state.purchasePromptReady))
+		-- upvalues: p1 (ref)
+		return p1.state.isNameValid and (p1.state.isDescValid and (p1.props.humanoidModel ~= nil and p1.state.purchasePromptReady))
 	end
 	
 	function p0.onSubmit()
-		-- upvalues: publishAssetAnalytics (copy), p0 (ref), purchasePromptModule (copy), mutedError (copy)
+		-- upvalues: publishAssetAnalytics (copy), p1 (ref), purchasePromptModule (copy), mutedError (copy)
 		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Buy)
-		local t = { name = p0.state.name, description = p0.state.description }
+		local t = { name = p1.state.name, description = p1.state.description }
 		
 		if purchasePromptModule.initiateAvatarCreationFeePurchase then
-			purchasePromptModule.initiateAvatarCreationFeePurchase(t, p0.props.guid, p0.props.humanoidModel, p0.props.priceInRobux)
+			purchasePromptModule.initiateAvatarCreationFeePurchase(t, p1.props.guid, p1.props.humanoidModel, p1.props.priceInRobux)
 			
 			return
 		end
 		mutedError("PurchasePrompt.initiateAvatarCreationFeePurchase is not available")
 	end
 	
-	function p0.onNameUpdated(p1, p2)
-		-- upvalues: p0 (ref), publishAssetAnalytics (copy)
-		p0:setState({ name = p1, isNameValid = p2 })
+	function p0.onNameUpdated(p2, p3)
+		-- upvalues: p1 (ref), publishAssetAnalytics (copy)
+		p1:setState({ name = p2, isNameValid = p3 })
 		
-		if not p0.sentNameFieldTouched then
-			p0.sentNameFieldTouched = true
+		if not p1.sentNameFieldTouched then
+			p1.sentNameFieldTouched = true
 			publishAssetAnalytics.sendFieldTouched(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Name)
 		end
 	end
 	
-	function p0.onDescriptionUpdated(p3, p4)
-		-- upvalues: p0 (ref), publishAssetAnalytics (copy)
-		p0:setState({ description = p3, isDescValid = p4 })
+	function p0.onDescriptionUpdated(p2, p3)
+		-- upvalues: p1 (ref), publishAssetAnalytics (copy)
+		p1:setState({ description = p2, isDescValid = p3 })
 		
-		if not p0.sentDescriptionFieldTouched then
-			p0.sentDescriptionFieldTouched = true
+		if not p1.sentDescriptionFieldTouched then
+			p1.sentDescriptionFieldTouched = true
 			publishAssetAnalytics.sendFieldTouched(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Description)
 		end
 	end
 	
-	function p0.onWindowStateChanged(p5)
-		-- upvalues: p0 (ref)
-		local isShown = p5.isShown
+	function p0.onWindowStateChanged(p2)
+		-- upvalues: p1 (ref)
+		local isShown = p2.isShown
 		
-		if p5.hasCompletedPurchase and not isShown then
-			p0.props.SetPromptVisibility(false)
+		if p2.hasCompletedPurchase and not isShown then
+			p1.props.SetPromptVisibility(false)
 			
 			return
 		end
-		p0:setState({ showTopScrim = isShown })
+		p1:setState({ showTopScrim = isShown })
 		
 		if isShown then
-			p0:setState({ purchasePromptReady = false })
+			p1:setState({ purchasePromptReady = false })
 		end
 	end
 	
 	function p0.onPromptStateSetToNone()
-		-- upvalues: p0 (ref)
-		p0:setState({ purchasePromptReady = true })
+		-- upvalues: p1 (ref)
+		p1:setState({ purchasePromptReady = true })
 	end
 end
 
-function publishAvatarPrompt.didMount(p6)
+function publishAvatarPrompt.didMount(p1)
 	-- upvalues: purchasePromptModule (ref), mutedError (ref), publishAssetAnalytics (ref)
-	p6.sentNameFieldTouched = false
-	p6.sentDescriptionFieldTouched = false
+	p1.sentNameFieldTouched = false
+	p1.sentDescriptionFieldTouched = false
 	local windowStateChangedEvent = purchasePromptModule.windowStateChangedEvent
 	local promptStateSetToNoneEvent = purchasePromptModule.promptStateSetToNoneEvent
 	
 	if windowStateChangedEvent and promptStateSetToNoneEvent then
-		p6.windowStateChangedConnection = windowStateChangedEvent:Connect(p6.onWindowStateChanged)
-		p6.promptStateSetToNoneConnection = promptStateSetToNoneEvent:Connect(p6.onPromptStateSetToNone)
+		p1.windowStateChangedConnection = windowStateChangedEvent:Connect(p1.onWindowStateChanged)
+		p1.promptStateSetToNoneConnection = promptStateSetToNoneEvent:Connect(p1.onPromptStateSetToNone)
 	else
 		mutedError("PurchasePrompt.windowStateChangedEvent or PurchasePrompt.promptStateSetToNoneEvent is not available")
 	end
 	publishAssetAnalytics.sendPageLoad(publishAssetAnalytics.Section.BuyCreationPage)
 end
 
-function publishAvatarPrompt.willUnmount(p7)
+function publishAvatarPrompt.willUnmount(p1)
 	-- upvalues: mutedError (ref)
-	if p7.windowStateChangedConnection then
-		p7.windowStateChangedConnection:Disconnect()
+	if p1.windowStateChangedConnection then
+		p1.windowStateChangedConnection:Disconnect()
 	else
 		mutedError("windowStateChangedConnection was not established")
 	end
-	if p7.promptStateSetToNoneConnection then
-		p7.promptStateSetToNoneConnection:Disconnect()
+	if p1.promptStateSetToNoneConnection then
+		p1.promptStateSetToNoneConnection:Disconnect()
 		
 		return
 	end
 	mutedError("promptStateSetToNoneConnection was not established")
 end
 
-function publishAvatarPrompt.renderPromptBody(p8)
+function publishAvatarPrompt.renderPromptBody(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), uDim (ref), objectViewportModule (ref), labeledTextBoxModule (ref), robloxTranslatorModule (ref), publishInfoListModule (ref), avatarPartGridModule (ref)
-	local var16 = p8.props.humanoidModel == nil
+	local var1 = p1.props.humanoidModel == nil
 	
 	return withStyle(function(_)
-		-- upvalues: roactModule (copy), uDim (copy), objectViewportModule (copy), p8 (ref), var16 (ref), labeledTextBoxModule (copy), robloxTranslatorModule (copy), publishInfoListModule (copy), avatarPartGridModule (copy)
+		-- upvalues: roactModule (copy), uDim (copy), objectViewportModule (copy), p1 (ref), var1 (ref), labeledTextBoxModule (copy), robloxTranslatorModule (copy), publishInfoListModule (copy), avatarPartGridModule (copy)
 		return roactModule.createFragment({
 			UIListLayout = roactModule.createElement("UIListLayout", {
 				Padding = uDim,
@@ -160,9 +160,9 @@ function publishAvatarPrompt.renderPromptBody(p8)
 				fieldOfView = 30,
 				LayoutOrder = 1,
 				isHumanoidModel = true,
-				openPreviewView = p8.openPreviewView,
-				model = p8.props.humanoidModel,
-				isLoading = var16
+				openPreviewView = p1.openPreviewView,
+				model = p1.props.humanoidModel,
+				isLoading = var1
 			}),
 			DescriptionInput = roactModule.createElement(labeledTextBoxModule, {
 				LayoutOrder = 2,
@@ -170,8 +170,8 @@ function publishAvatarPrompt.renderPromptBody(p8)
 				maxLength = 1000,
 				textBoxHeight = 104,
 				labelText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Description"),
-				defaultText = p8.state.description,
-				onTextUpdated = p8.onDescriptionUpdated,
+				defaultText = p1.state.description,
+				onTextUpdated = p1.onDescriptionUpdated,
 				invalidInputText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.InvalidDescription")
 			}),
 			InfoList = roactModule.createElement(publishInfoListModule, {
@@ -180,49 +180,49 @@ function publishAvatarPrompt.renderPromptBody(p8)
 			}),
 			AvatarPartGrid = roactModule.createElement(avatarPartGridModule, {
 				LayoutOrder = 4,
-				humanoidModel = p8.props.humanoidModel,
-				name = p8.state.name,
-				screenSize = p8.props.screenSize
+				humanoidModel = p1.props.humanoidModel,
+				name = p1.state.name,
+				screenSize = p1.props.screenSize
 			})
 		})
 	end)
 end
 
-function publishAvatarPrompt.render(p9)
+function publishAvatarPrompt.render(p1)
 	-- upvalues: playersService (ref), roactModule (ref), basePublishPromptModule (ref), robloxTranslatorModule (ref)
 	assert(playersService, "Players must not be nil")
 	
 	return roactModule.createElement(basePublishPromptModule, {
 		delayInputSeconds = 3,
-		promptBody = p9:renderPromptBody(),
-		screenSize = p9.props.screenSize,
-		showingPreviewView = p9.state.showingPreviewView,
-		closePreviewView = p9.closePreviewView,
-		asset = p9.props.humanoidModel,
+		promptBody = p1:renderPromptBody(),
+		screenSize = p1.props.screenSize,
+		showingPreviewView = p1.state.showingPreviewView,
+		closePreviewView = p1.closePreviewView,
+		asset = p1.props.humanoidModel,
 		nameLabel = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.BodyName"),
-		defaultName = p9.state.name,
+		defaultName = p1.state.name,
 		titleText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.BuyCreation"),
-		onNameUpdated = p9.onNameUpdated,
-		canSubmit = p9.canSubmit,
-		onSubmit = p9.onSubmit,
-		priceInRobux = p9.props.priceInRobux,
-		showTopScrim = p9.state.showTopScrim
+		onNameUpdated = p1.onNameUpdated,
+		canSubmit = p1.canSubmit,
+		onSubmit = p1.onSubmit,
+		priceInRobux = p1.props.priceInRobux,
+		showTopScrim = p1.state.showTopScrim
 	})
 end
 
-return roactRoduxModule.connect(function(p10)
+return roactRoduxModule.connect(function(p1)
 	return {
-		humanoidModel = p10.promptRequest.promptInfo.humanoidModel,
-		guid = p10.promptRequest.promptInfo.guid,
-		scopes = p10.promptRequest.promptInfo.scopes,
-		priceInRobux = p10.promptRequest.promptInfo.priceInRobux
+		humanoidModel = p1.promptRequest.promptInfo.humanoidModel,
+		guid = p1.promptRequest.promptInfo.guid,
+		scopes = p1.promptRequest.promptInfo.scopes,
+		priceInRobux = p1.promptRequest.promptInfo.priceInRobux
 	}
-end, function(p11)
+end, function(p1)
 	-- upvalues: setPromptVisibilityModule (ref)
 	return {
 		SetPromptVisibility = function(value)
-			-- upvalues: p11 (ref), setPromptVisibilityModule (copy)
-			p11(setPromptVisibilityModule(value))
+			-- upvalues: p1 (ref), setPromptVisibilityModule (copy)
+			p1(setPromptVisibilityModule(value))
 		end
 	}
 end)(publishAvatarPrompt)

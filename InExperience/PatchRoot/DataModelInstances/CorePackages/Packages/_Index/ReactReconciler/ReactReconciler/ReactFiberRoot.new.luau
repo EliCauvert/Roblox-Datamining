@@ -24,7 +24,7 @@ local blockingRoot = reactRootTagsModule.BlockingRoot
 local concurrentRoot = reactRootTagsModule.ConcurrentRoot
 local t = {}
 
-local function FiberRootNode(p0, p1, p2)
+local function FiberRootNode(p1, p2, p3)
 	-- upvalues: noTimeout (ref), noLanePriority (ref), createLaneMap (ref), noLanes (ref), noTimestamp (ref), supportsHydration (ref), enableSchedulerTracing (ref), unstableGetThreadID (ref), set (ref), map (ref), enableSuspenseCallback (ref), reactGlobalsModule (ref), blockingRoot (ref), concurrentRoot (ref), legacyRoot (ref)
 	local t = {
 		pendingChildren = nil,
@@ -34,10 +34,10 @@ local function FiberRootNode(p0, p1, p2)
 		context = nil,
 		pendingContext = nil,
 		callbackNode = nil,
-		tag = p1,
-		containerInfo = p0,
+		tag = p2,
+		containerInfo = p1,
 		timeoutHandle = noTimeout,
-		hydrate = p2,
+		hydrate = p3,
 		callbackPriority = noLanePriority,
 		eventTimes = createLaneMap(noLanes),
 		expirationTimes = createLaneMap(noTimestamp),
@@ -63,34 +63,34 @@ local function FiberRootNode(p0, p1, p2)
 		t.hydrationCallbacks = nil
 	end
 	if reactGlobalsModule.__DEV__ then
-		if p1 == blockingRoot then
+		if p2 == blockingRoot then
 			t._debugRootType = "createBlockingRoot()"
 			
 			return t
-		elseif p1 == concurrentRoot then
+		elseif p2 == concurrentRoot then
 			t._debugRootType = "createRoot()"
 			
 			return t
-		elseif p1 == legacyRoot then
+		elseif p2 == legacyRoot then
 			t._debugRootType = "createLegacyRoot()"
 		end
 	end
 	return t
 end
 
-function t.createFiberRoot(p3, p4, p5, p6)
+function t.createFiberRoot(p1, p2, p3, p4)
 	-- upvalues: FiberRootNode (ref), enableSuspenseCallback (ref), createHostRootFiber (ref), initializeUpdateQueue (ref)
-	local var8 = FiberRootNode(p3, p4, p5)
+	local var1 = FiberRootNode(p1, p2, p3)
 	
 	if enableSuspenseCallback then
-		var8.hydrationCallbacks = p6
+		var1.hydrationCallbacks = p4
 	end
-	local var9 = createHostRootFiber(p4)
-	var8.current = var9
-	var9.stateNode = var8
-	initializeUpdateQueue(var9)
+	local var2 = createHostRootFiber(p2)
+	var1.current = var2
+	var2.stateNode = var1
+	initializeUpdateQueue(var2)
 	
-	return var8
+	return var1
 end
 
 return t

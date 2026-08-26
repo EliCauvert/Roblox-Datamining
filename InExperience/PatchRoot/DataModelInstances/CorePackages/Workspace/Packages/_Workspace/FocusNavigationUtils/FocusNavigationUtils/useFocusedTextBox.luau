@@ -1,25 +1,25 @@
 ﻿local userInputService = game:GetService("UserInputService")
 local reactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), userInputService (ref)
-	local var2, var3 = reactModule.useState(nil)
+	local var1, var2 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var3 (ref), p0 (ref), p1 (ref)
-		local textBoxFocusedConnection = userInputService.TextBoxFocused:Connect(function(p2)
-			-- upvalues: var3 (copy), p0 (copy)
-			var3(p2)
-			
-			if p0 then
-				p0(p2)
-			end
-		end)
-		local textBoxFocusReleasedConnection = userInputService.TextBoxFocusReleased:Connect(function(p3)
-			-- upvalues: var3 (copy), p1 (copy)
-			var3(nil)
+		-- upvalues: userInputService (copy), var2 (ref), p1 (ref), p2 (ref)
+		local textBoxFocusedConnection = userInputService.TextBoxFocused:Connect(function(p3)
+			-- upvalues: var2 (copy), p1 (copy)
+			var2(p3)
 			
 			if p1 then
 				p1(p3)
+			end
+		end)
+		local textBoxFocusReleasedConnection = userInputService.TextBoxFocusReleased:Connect(function(p3)
+			-- upvalues: var2 (copy), p2 (copy)
+			var2(nil)
+			
+			if p2 then
+				p2(p3)
 			end
 		end)
 		
@@ -28,7 +28,7 @@ return function(p0, p1)
 			textBoxFocusedConnection:Disconnect()
 			textBoxFocusReleasedConnection:Disconnect()
 		end
-	end, { var3 })
+	end, { var2 })
 	
-	return var2
+	return var1
 end

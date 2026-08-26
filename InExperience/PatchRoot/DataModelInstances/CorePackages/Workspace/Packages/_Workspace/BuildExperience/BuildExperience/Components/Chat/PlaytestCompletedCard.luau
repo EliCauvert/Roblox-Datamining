@@ -13,9 +13,9 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
-	local var5 = if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		description = localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_DESCRIPTION,
 		playtest = localizationStringsModule.CHAT_PLAYTEST,
 		title = localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_TITLE
@@ -23,29 +23,29 @@ return function(p0)
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-medium size-full-0 auto-y padding-medium stroke-standard stroke-emphasis radius-medium clip",
-		LayoutOrder = p0.LayoutOrder,
-		testId = p0.testId or "playtest-completed-card"
+		LayoutOrder = p1.LayoutOrder,
+		testId = p1.testId or "playtest-completed-card"
 	}, {
 		Title = reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-			Text = p0.title or (if fFlagBuildLocalization then var5.title else localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_TITLE)
+			Text = p1.title or (if fFlagBuildLocalization then var1.title else localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_TITLE)
 		}),
 		Description = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-			Text = p0.description or (if fFlagBuildLocalization then var5.description else localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_DESCRIPTION)
+			Text = p1.description or (if fFlagBuildLocalization then var1.description else localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_DESCRIPTION)
 		}),
 		Playtest = reactModule.createElement(button, {
 			LayoutOrder = 3,
 			testId = "playtest-completed-card-playtest-button",
-			text = if fFlagBuildLocalization then var5.playtest else localizationStringsModule.CHAT_PLAYTEST,
+			text = if fFlagBuildLocalization then var1.playtest else localizationStringsModule.CHAT_PLAYTEST,
 			icon = iconName.PlaySmall,
 			size = inputSize.Small,
 			variant = buttonVariant.Emphasis,
 			width = UDim.new(1, 0),
-			isLoading = p0.isLoading == true,
-			onActivated = p0.onPlaytest
+			isLoading = p1.isLoading == true,
+			onActivated = p1.onPlaytest
 		})
 	})
 end

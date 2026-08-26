@@ -7,45 +7,45 @@ local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
 local utilAndTabModule = require(components.UtilAndTab)
 local mainViewVoiceChat = roactModule.PureComponent:extend("MainViewVoiceChat")
 
-function mainViewVoiceChat.init(p0)
+function mainViewVoiceChat.init(p1)
 	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ utilTabHeight = p1 })
+	function p0.onUtilTabHeightChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ utilTabHeight = p2 })
 	end
 	
 	function p0.onStatsUpdated(p2)
-		-- upvalues: p0 (ref)
-		p0:setState({ stats = p2 })
+		-- upvalues: p1 (ref)
+		p1:setState({ stats = p2 })
 	end
 	
-	p0._statsUpdatedConnection = p0.props.VoiceChatData:Signal():Connect(p0.onStatsUpdated)
-	p0.utilRef = roactModule.createRef()
-	p0.state = { utilTabHeight = 0, stats = {} }
+	p1._statsUpdatedConnection = p1.props.VoiceChatData:Signal():Connect(p1.onStatsUpdated)
+	p1.utilRef = roactModule.createRef()
+	p1.state = { utilTabHeight = 0, stats = {} }
 end
 
-function mainViewVoiceChat.didMount(p3)
-	p3:setState({ utilTabHeight = p3.utilRef.current.Size.Y.Offset })
+function mainViewVoiceChat.didMount(p1)
+	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewVoiceChat.didUpdate(p4)
-	local size = p4.utilRef.current.Size
+function mainViewVoiceChat.didUpdate(p1)
+	local size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p4.state.utilTabHeight then
-		p4:setState({ utilTabHeight = size.Y.Offset })
+	if size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = size.Y.Offset })
 	end
 end
 
-function mainViewVoiceChat.willUnmount(p5)
-	if p5._statsUpdatedConnection then
-		p5._statsUpdatedConnection:Disconnect()
-		p5._statsUpdatedConnection = nil
+function mainViewVoiceChat.willUnmount(p1)
+	if p1._statsUpdatedConnection then
+		p1._statsUpdatedConnection:Disconnect()
+		p1._statsUpdatedConnection = nil
 	end
 end
 
-function mainViewVoiceChat.render(p6)
+function mainViewVoiceChat.render(p1)
 	-- upvalues: roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref)
-	local size = p6.props.size
+	local size = p1.props.size
 	local list = {
 		{
 			key = "rttMs",
@@ -86,14 +86,14 @@ function mainViewVoiceChat.render(p6)
 		UtilAndTab = roactModule.createElement(utilAndTabModule, {
 			layoutOrder = 1,
 			windowWidth = size.X.Offset,
-			formFactor = p6.props.formFactor,
-			tabList = p6.props.tabList,
-			refForParent = p6.utilRef
+			formFactor = p1.props.formFactor,
+			tabList = p1.props.tabList,
+			refForParent = p1.utilRef
 		}),
 		StatsContainer = roactModule.createElement("Frame", { LayoutOrder = 2, BackgroundTransparency = 1 }, {
 			UIListLayout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
 			Labels = (function()
-				-- upvalues: list (ref), roactModule (copy), p6 (ref), constantsModule (copy)
+				-- upvalues: list (ref), roactModule (copy), p1 (ref), constantsModule (copy)
 				local t = {}
 				
 				for i, v in ipairs(list) do
@@ -101,7 +101,7 @@ function mainViewVoiceChat.render(p6)
 						BackgroundTransparency = 1,
 						LayoutOrder = i,
 						Size = UDim2.fromOffset(200, 20),
-						Text = string.format(v.format, p6.state.stats[v.key] or v.defaultValue),
+						Text = string.format(v.format, p1.state.stats[v.key] or v.defaultValue),
 						TextColor3 = constantsModule.Color.Text,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})

@@ -10,38 +10,38 @@ local getMenuItemSizingsModule = require(abuseReportMenu.Utility.getMenuItemSizi
 local fFlagHideShortcutsOnReportDropdownModule = require(abuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
 local cryoModule = require(corePackagesService.Packages.Cryo)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), getMenuItemSizingsModule (ref), reactModule (ref), appFonts (ref), dropdownMenu (ref), cryoModule (ref), fFlagHideShortcutsOnReportDropdownModule (ref), reportMenuItemModule (ref)
 	local theme = useStyle().Theme
 	
 	return reactModule.createElement(reportMenuItemModule, {
-		label = p0.label,
-		layoutOrder = p0.layoutOrder,
-		rightComponent = if p0.readonlyValue ~= nil then reactModule.createElement(dropdownMenu, {
+		label = p1.label,
+		layoutOrder = p1.layoutOrder,
+		rightComponent = if p1.readonlyValue ~= nil then reactModule.createElement(dropdownMenu, {
 			errorState = false,
 			showDropShadow = true,
 			fixedListHeight = 180,
-			placeholder = p0.placeholderText,
-			onChange = p0.onSelect,
+			placeholder = p1.placeholderText,
+			onChange = p1.onSelect,
 			height = UDim.new(0, 48),
 			screenSize = Vector2.new(2400, 1800),
-			cellDatas = cryoModule.List.map(p0.selections, function(p1)
-				return { text = p1 }
+			cellDatas = cryoModule.List.map(p1.selections, function(p2)
+				return { text = p2 }
 			end),
-			onMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule then p0.onMenuOpenChange else nil
+			onMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule then p1.onMenuOpenChange else nil
 		}) else reactModule.createElement("TextLabel", {
 			TextWrapped = true,
 			BackgroundTransparency = 1,
-			Text = p0.readonlyValue,
+			Text = p1.readonlyValue,
 			Font = appFonts.default:getMedium(),
 			TextColor3 = theme.TextEmphasis.Color,
 			TextTransparency = theme.TextMuted.Transparency,
 			TextSize = getMenuItemSizingsModule().DropdownTextSize,
-			TextXAlignment = if p0.isSmallPortraitViewport then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+			TextXAlignment = if p1.isSmallPortraitViewport then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(1, 0, 0, p0.minHeight)
+			Size = UDim2.new(1, 0, 0, p1.minHeight)
 		}),
-		menuContainerWidth = p0.menuContainerWidth,
-		isSmallPortraitViewport = p0.isSmallPortraitViewport
+		menuContainerWidth = p1.menuContainerWidth,
+		isSmallPortraitViewport = p1.isSmallPortraitViewport
 	})
 end

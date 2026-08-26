@@ -7,29 +7,29 @@ local enums = foundationModule.Enums
 local constantsModule = require(avatarExperienceCommon.Constants)
 local useArrowNavScrollBehaviorModule = require(avatarExperienceCommon.Hooks.useArrowNavScrollBehavior)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useArrowNavScrollBehaviorModule (ref), reactModule (ref), constantsModule (ref), foundationModule (ref), icon (ref), enums (ref)
-	local var5 = useArrowNavScrollBehaviorModule({
-		navDirection = p0.navDirection,
-		onPressHoldInputBegan = p0.onPressHoldInputBegan,
-		onPressHoldInputEnded = p0.onPressHoldInputEnded,
-		defaultUseProps = p0.defaultUseProps
+	local var1 = useArrowNavScrollBehaviorModule({
+		navDirection = p1.navDirection,
+		onPressHoldInputBegan = p1.onPressHoldInputBegan,
+		onPressHoldInputEnded = p1.onPressHoldInputEnded,
+		defaultUseProps = p1.defaultUseProps
 	})
-	local handleInputBegan = var5.handleInputBegan
-	local handleInputEnded = var5.handleInputEnded
-	local var6 = reactModule.useCallback(function() end, {})
-	local var7 = if p0.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then "chevron-small-left" else "chevron-small-right"
-	local actionStandard = p0.tokens.Color.ActionStandard
-	local color3 = p0.tokens.Color.Surface.Surface_0.Color3
-	local transparency = p0.tokens.Color.Surface.Surface_0.Transparency
-	local size900 = p0.tokens.Size.Size_900
-	local medium = p0.tokens.Padding.Medium
+	local handleInputBegan = var1.handleInputBegan
+	local handleInputEnded = var1.handleInputEnded
+	local var2 = reactModule.useCallback(function() end, {})
+	local var3 = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then "chevron-small-left" else "chevron-small-right"
+	local actionStandard = p1.tokens.Color.ActionStandard
+	local color3 = p1.tokens.Color.Surface.Surface_0.Color3
+	local transparency = p1.tokens.Color.Surface.Surface_0.Transparency
+	local size900 = p1.tokens.Size.Size_900
+	local medium = p1.tokens.Padding.Medium
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		AnchorPoint = p0.AnchorPoint,
-		Position = p0.Position,
-		Visible = p0.Visible,
+		AnchorPoint = p1.AnchorPoint,
+		Position = p1.Position,
+		Visible = p1.Visible,
 		Size = UDim2.fromOffset(size900, size900 + medium),
 		BackgroundColor3 = color3,
 		BackgroundTransparency = transparency
@@ -37,9 +37,9 @@ return function(p0)
 		GradientFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
-			AnchorPoint = if p0.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
-			Position = if p0.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then UDim2.new(1, 0, 0.5, 0) else UDim2.new(0, 0, 0.5, 0),
-			Size = UDim2.fromOffset(p0.tokens.Size.Size_700, size900 + medium),
+			AnchorPoint = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
+			Position = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then UDim2.new(1, 0, 0.5, 0) else UDim2.new(0, 0, 0.5, 0),
+			Size = UDim2.fromOffset(p1.tokens.Size.Size_700, size900 + medium),
 			BackgroundColor3 = color3
 		}, {
 			UIGradient = reactModule.createElement("UIGradient", {
@@ -48,19 +48,19 @@ return function(p0)
 					NumberSequenceKeypoint.new(0.9, 0),
 					NumberSequenceKeypoint.new(1, 0)
 				}),
-				Rotation = if p0.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then 180 else 0
+				Rotation = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then 180 else 0
 			})
 		}),
 		InnerFrame = reactModule.createElement(foundationModule.View, {
-			AnchorPoint = if p0.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
-			Position = if p0.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then UDim2.new(0, p0.tokens.Size.Size_100, 0.5, 0) else UDim2.new(1, 0, 0.5, 0),
+			AnchorPoint = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
+			Position = if p1.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then UDim2.new(0, p1.tokens.Size.Size_100, 0.5, 0) else UDim2.new(1, 0, 0.5, 0),
 			Size = UDim2.fromOffset(size900, size900),
 			backgroundStyle = actionStandard.Background,
 			cornerRadius = UDim.new(0.5, 0),
-			onActivated = var6
+			onActivated = var2
 		}, {
 			ArrowIcon = reactModule.createElement(icon, {
-				name = var7,
+				name = var3,
 				size = enums.IconSize.Medium,
 				style = actionStandard.Foreground,
 				AnchorPoint = Vector2.new(0.5, 0.5),

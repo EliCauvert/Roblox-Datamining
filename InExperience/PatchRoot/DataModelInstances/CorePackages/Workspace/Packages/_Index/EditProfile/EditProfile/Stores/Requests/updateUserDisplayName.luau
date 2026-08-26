@@ -6,31 +6,31 @@ local promiseModule = require(parent.Promise)
 local httpService = game:GetService("HttpService")
 local url = httpModule.Url
 local enumsModule = require(editProfile.Common.Enums)
-local var6 = httpRequestModule.config({
-	requestFunction = function(p0, p1, p2)
+local var1 = httpRequestModule.config({
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: httpRequestModule (ref)
-		return httpRequestModule.requestFunctions.RequestInternal(p0, p1, p2)
+		return httpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 	end
 })
 
-return function(p3, p4)
-	-- upvalues: url (ref), var6 (ref), enumsModule (ref), httpService (ref), promiseModule (ref)
-	return var6(string.format("%s/users/%s/display-names", url.USERS_URL, p3), enumsModule.RequestMethods.PATCH, {
-		postBody = httpService:JSONEncode({ newDisplayName = p4 })
-	}):andThen(function(p6)
-		-- upvalues: p4 (ref)
-		return if p6.responseBody then p6.responseBody.displayName else p4
-	end):catch(function(p5)
+return function(p1, p2)
+	-- upvalues: url (ref), var1 (ref), enumsModule (ref), httpService (ref), promiseModule (ref)
+	return var1(string.format("%s/users/%s/display-names", url.USERS_URL, p1), enumsModule.RequestMethods.PATCH, {
+		postBody = httpService:JSONEncode({ newDisplayName = p2 })
+	}):andThen(function(p3)
+		-- upvalues: p2 (ref)
+		return if p3.responseBody then p3.responseBody.displayName else p2
+	end):catch(function(p3)
 		-- upvalues: httpService (copy), promiseModule (copy)
-		if not p5 then
-			return promiseModule.reject(p5)
+		if not p3 then
+			return promiseModule.reject(p3)
 		end
-		local t = { statusCode = p5.StatusCode, errors = {} }
+		local t = { statusCode = p3.StatusCode, errors = {} }
 		
-		if p5.Body then
+		if p3.Body then
 			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), p5 (ref)
-				return httpService:JSONDecode(p5.Body)
+				-- upvalues: httpService (copy), p3 (ref)
+				return httpService:JSONDecode(p3.Body)
 			end)
 			
 			if ok and status and status.errors then

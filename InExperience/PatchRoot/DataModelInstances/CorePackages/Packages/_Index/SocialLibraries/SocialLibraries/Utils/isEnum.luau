@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return type(p0) == "userdata" and p0.rawValue
+﻿return function(p1)
+	return type(p1) == "userdata" and p1.rawValue
 end

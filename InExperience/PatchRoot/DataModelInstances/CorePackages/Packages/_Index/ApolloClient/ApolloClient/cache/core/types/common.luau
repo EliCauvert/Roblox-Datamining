@@ -7,15 +7,15 @@ local _ = require(parent.utilities.graphql.types)
 local tbl = setmetatable({}, { __index = error })
 tbl.__index = tbl
 
-function tbl.new(p0, p1, p2, p3)
+function tbl.new(p1, p2, p3, p4)
 	-- upvalues: error (ref), tbl (ref)
-	local var2 = error.new(p0)
-	var2.message = p0
-	var2.path = p1
-	var2.query = p2
-	var2.variables = p3
+	local var1 = error.new(p1)
+	var1.message = p1
+	var1.path = p2
+	var1.query = p3
+	var1.variables = p4
 	
-	return setmetatable(var2, tbl)
+	return setmetatable(var1, tbl)
 end
 
 t.MissingFieldError = tbl

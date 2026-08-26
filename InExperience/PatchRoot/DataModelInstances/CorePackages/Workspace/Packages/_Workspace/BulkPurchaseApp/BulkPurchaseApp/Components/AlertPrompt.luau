@@ -7,24 +7,24 @@ local useCloseOnEscapeEffectModule = require(bulkPurchaseApp.Hooks.useCloseOnEsc
 local fFlagBulkPurchaseCloseOnEscapeModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseCloseOnEscape)
 local scrimModule = require(script.Parent.Scrim)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBulkPurchaseCloseOnEscapeModule (ref), useCloseOnEscapeEffectModule (ref), useScreenSize (ref), reactModule (ref), scrimModule (ref), interactiveAlert (ref)
 	if fFlagBulkPurchaseCloseOnEscapeModule then
-		useCloseOnEscapeEffectModule("BulkPurchaseCloseAlertPrompt", p0.onDismiss)
+		useCloseOnEscapeEffectModule("BulkPurchaseCloseAlertPrompt", p1.onDismiss)
 	end
 	return reactModule.createElement(scrimModule, {}, reactModule.createElement(interactiveAlert, {
-		title = p0.title,
-		bodyText = p0.bodyText,
+		title = p1.title,
+		bodyText = p1.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
-					props = { onActivated = p0.onDismiss, text = p0.dismissCTA }
+					props = { onActivated = p1.onDismiss, text = p1.dismissCTA }
 				}
 			}
 		},
 		position = UDim2.fromScale(0.5, 0.5),
 		screenSize = useScreenSize(),
-		middleContent = p0.middleContent
+		middleContent = p1.middleContent
 	}))
 end

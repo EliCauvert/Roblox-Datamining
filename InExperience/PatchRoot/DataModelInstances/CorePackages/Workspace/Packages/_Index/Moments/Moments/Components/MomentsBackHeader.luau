@@ -2,13 +2,13 @@
 local reactModule = require(moments.Parent.React)
 local momentsHeaderContainerModule = require(moments.Components.MomentsHeader.MomentsHeaderContainer)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), momentsHeaderContainerModule (ref)
 	return reactModule.createElement(momentsHeaderContainerModule, {
 		variant = "back",
 		showTopScrim = true,
-		layoutOrder = p0.layoutOrder,
-		onBack = p0.onBack,
-		onCreatePressed = p0.onCreatePressed
+		layoutOrder = p1.layoutOrder,
+		onBack = p1.onBack,
+		onCreatePressed = p1.onCreatePressed
 	})
 end

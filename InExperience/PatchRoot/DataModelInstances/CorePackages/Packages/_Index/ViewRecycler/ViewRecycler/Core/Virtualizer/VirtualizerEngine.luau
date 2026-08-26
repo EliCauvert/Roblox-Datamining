@@ -24,56 +24,56 @@ local viewportModelModule = require(viewRecycler.Core.Virtualizer.ViewportModel)
 local virtualizerSnapshotProjectionModule = require(viewRecycler.Core.Virtualizer.VirtualizerSnapshotProjection)
 local frozen = table.freeze({ firstIndex = 1, lastIndex = 0 })
 
-local function _(p0, p1)
-	return p0.firstIndex == p1.firstIndex and p0.lastIndex == p1.lastIndex
+local function _(p1, p2)
+	return p1.firstIndex == p2.firstIndex and p1.lastIndex == p2.lastIndex
 end
 
-local _ = function(p2, p3)
-	return p2.scrollOffset == p3.scrollOffset and (p2.viewportLength == p3.viewportLength and (p2.contentLength == p3.contentLength and (p2.distanceFromEnd == p3.distanceFromEnd and (p2.atStart == p3.atStart and p2.atEnd == p3.atEnd))))
+local _ = function(p1, p2)
+	return p1.scrollOffset == p2.scrollOffset and (p1.viewportLength == p2.viewportLength and (p1.contentLength == p2.contentLength and (p1.distanceFromEnd == p2.distanceFromEnd and (p1.atStart == p2.atStart and p1.atEnd == p2.atEnd))))
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: overscanPolicyModule (ref), itemRevisionTrackerModule (ref), createPinnedItemPlannerModule (ref), viewportModelModule (ref), virtualizerSnapshotProjectionModule (ref), dataPrefetchControllerModule (ref), scrollPositionControllerModule (ref), frozen (ref), virtualizerEffectTypeModule (ref), diagnosticsModule (ref), typesModule (ref), cloneFrozen (ref), dataSourceChangeTypeModule (ref), dataPrefetchModule (ref), external (ref), scrollObservationKindModule (ref), internal (ref), virtualizerQueryTypeModule (ref)
-	assert(if p4.overscan ~= nil then p4.overscanPolicy == nil else true, "VirtualizerEngine: overscan and overscanPolicy are mutually exclusive")
-	local dataSource = p4.dataSource
-	local layout = p4.layout
+	assert(if p1.overscan ~= nil then p1.overscanPolicy == nil else true, "VirtualizerEngine: overscan and overscanPolicy are mutually exclusive")
+	local dataSource = p1.dataSource
+	local layout = p1.layout
 	local t = {
-		overscan = p4.overscan,
-		overscanPolicy = p4.overscanPolicy,
-		dataPrefetch = p4.dataPrefetch,
-		contentAlignment = p4.contentAlignment,
-		endThreshold = p4.endThreshold,
+		overscan = p1.overscan,
+		overscanPolicy = p1.overscanPolicy,
+		dataPrefetch = p1.dataPrefetch,
+		contentAlignment = p1.contentAlignment,
+		endThreshold = p1.endThreshold,
 		pinnedItems = {
-			isItemStickyHeader = p4.isItemStickyHeader,
-			pinnedStartItem = p4.pinnedStartItem,
-			pinnedEndItem = p4.pinnedEndItem
+			isItemStickyHeader = p1.isItemStickyHeader,
+			pinnedStartItem = p1.pinnedStartItem,
+			pinnedEndItem = p1.pinnedEndItem
 		},
-		preserveScrollPositionOnChange = p4.preserveScrollPositionOnChange ~= false
+		preserveScrollPositionOnChange = p1.preserveScrollPositionOnChange ~= false
 	}
 	local overscanPolicy = t.overscanPolicy or overscanPolicyModule.fixed(t.overscan)
 	local preserveScrollPositionOnChange = t.preserveScrollPositionOnChange
-	local var19 = itemRevisionTrackerModule()
-	local var20 = createPinnedItemPlannerModule(dataSource, t.pinnedItems)
-	local var21 = if t.pinnedItems.isItemStickyHeader == nil then if t.pinnedItems.pinnedStartItem == nil then t.pinnedItems.pinnedEndItem ~= nil else true else true
-	local var22 = viewportModelModule({
+	local var1 = itemRevisionTrackerModule()
+	local var2 = createPinnedItemPlannerModule(dataSource, t.pinnedItems)
+	local var3 = if t.pinnedItems.isItemStickyHeader == nil then if t.pinnedItems.pinnedStartItem == nil then t.pinnedItems.pinnedEndItem ~= nil else true else true
+	local var4 = viewportModelModule({
 		getLayout = function()
 			-- upvalues: layout (write)
 			return layout
 		end,
-		contentAlignment = p4.contentAlignment,
-		contentInsetStart = p4.contentInsetStart,
-		contentInsetEnd = p4.contentInsetEnd,
-		endThreshold = p4.endThreshold
+		contentAlignment = p1.contentAlignment,
+		contentInsetStart = p1.contentInsetStart,
+		contentInsetEnd = p1.contentInsetEnd,
+		endThreshold = p1.endThreshold
 	})
-	local var23 = virtualizerSnapshotProjectionModule({
-		planner = var20,
-		itemRevisions = var19,
-		getRecyclableViewType = p4.getRecyclableViewType,
-		initialScrollState = var22.getScrollState(),
+	local var5 = virtualizerSnapshotProjectionModule({
+		planner = var2,
+		itemRevisions = var1,
+		getRecyclableViewType = p1.getRecyclableViewType,
+		initialScrollState = var4.getScrollState(),
 		initialRequiresItemMeasurement = layout.requiresItemMeasurement()
 	})
-	local var24 = dataPrefetchControllerModule(t.dataPrefetch)
-	local var25 = scrollPositionControllerModule({
+	local var6 = dataPrefetchControllerModule(t.dataPrefetch)
+	local var7 = scrollPositionControllerModule({
 		shouldPreserveUserPosition = function()
 			-- upvalues: preserveScrollPositionOnChange (write)
 			return preserveScrollPositionOnChange
@@ -82,22 +82,22 @@ return function(p4)
 			-- upvalues: dataSource (write)
 			return dataSource.getItemCount()
 		end,
-		getItemKey = function(p5)
+		getItemKey = function(p2)
 			-- upvalues: dataSource (write)
-			return dataSource.getItemKey(p5)
+			return dataSource.getItemKey(p2)
 		end,
-		getScrollOffset = var22.getScrollOffset,
-		clampScrollOffset = var22.clampScrollOffset,
-		getViewportLength = var22.getScrollAxisLength,
-		getVisibleRange = var22.getVisibleRange,
-		getItemLayout = var22.getPlacedItemLayout,
-		getScrollOffsetForItem = var22.getScrollOffsetForItem
+		getScrollOffset = var4.getScrollOffset,
+		clampScrollOffset = var4.clampScrollOffset,
+		getViewportLength = var4.getScrollAxisLength,
+		getVisibleRange = var4.getVisibleRange,
+		getItemLayout = var4.getPlacedItemLayout,
+		getScrollOffsetForItem = var4.getScrollOffsetForItem
 	})
-	local var26 = false
-	local var27 = false
-	local var28 = false
-	local var29 = frozen
-	local var30 = frozen
+	local var8 = false
+	local var9 = false
+	local var10 = false
+	local var11 = frozen
+	local var12 = frozen
 	local t_1 = {
 		identity = 1,
 		layoutGeometry = 1,
@@ -108,7 +108,7 @@ return function(p4)
 	}
 	local t_2 = {
 		dataSource = dataSource,
-		mountedRange = var30,
+		mountedRange = var12,
 		options = t.dataPrefetch
 	}
 	local t_3 = {
@@ -123,23 +123,23 @@ return function(p4)
 		contentLength = 0,
 		dataSource = dataSource,
 		layout = layout,
-		visibleRange = var29,
-		mountedRange = var30,
-		scrollState = var23.getSnapshot().scrollState,
+		visibleRange = var11,
+		mountedRange = var12,
+		scrollState = var5.getSnapshot().scrollState,
 		requiresItemMeasurement = layout.requiresItemMeasurement(),
-		hasViewportPlacements = var21,
+		hasViewportPlacements = var3,
 		revisions = t_3
 	}
-	local var35 = nil
-	local var36 = nil
+	local var13 = nil
+	local var14 = nil
 	
-	local function _(p6)
-		-- upvalues: var35 (write), t_1 (ref)
-		if var35[p6] then
+	local function _(p2)
+		-- upvalues: var13 (write), t_1 (ref)
+		if var13[p2] then
 			return
 		end
-		var35[p6] = true
-		t_1[p6] += 1
+		var13[p2] = true
+		t_1[p2] += 1
 	end
 	
 	local function dataKeys()
@@ -152,125 +152,125 @@ return function(p4)
 		return list
 	end
 	
-	local _ = function(p7, p8)
+	local _ = function(p2, p3)
 		-- upvalues: virtualizerEffectTypeModule (copy)
-		table.insert(p7, {
+		table.insert(p2, {
 			type = virtualizerEffectTypeModule.Diagnostic,
-			event = p8
+			event = p3
 		})
 	end
 	
-	local _ = function(p9, p10, p11)
-		-- upvalues: p4 (ref), diagnosticsModule (copy), virtualizerEffectTypeModule (copy)
-		if p4.diagnostics ~= nil then
-			table.insert(p9, {
+	local _ = function(p2, p3, p4)
+		-- upvalues: p1 (ref), diagnosticsModule (copy), virtualizerEffectTypeModule (copy)
+		if p1.diagnostics ~= nil then
+			table.insert(p2, {
 				type = virtualizerEffectTypeModule.Diagnostic,
 				event = {
 					kind = diagnosticsModule.EventKind.RangeChanged,
-					rangeKind = p10,
-					firstIndex = p11.firstIndex,
-					lastIndex = p11.lastIndex
+					rangeKind = p3,
+					firstIndex = p4.firstIndex,
+					lastIndex = p4.lastIndex
 				}
 			})
 		end
 	end
 	
-	local function refreshRanges(p12)
-		-- upvalues: var22 (ref), var29 (write), var30 (write), overscanPolicy (write), layout (write), var36 (write), t_1 (ref), typesModule (copy), frozen (copy), var35 (write), virtualizerEffectTypeModule (copy), cloneFrozen (copy), diagnosticsModule (copy), p4 (ref)
-		var22.refreshContentMetrics()
-		local visibleRange = var22.getVisibleRange()
-		local var48 = overscanPolicy.compute({
+	local function refreshRanges(p2)
+		-- upvalues: var4 (ref), var11 (write), var12 (write), overscanPolicy (write), layout (write), var14 (write), t_1 (ref), typesModule (copy), frozen (copy), var13 (write), virtualizerEffectTypeModule (copy), cloneFrozen (copy), diagnosticsModule (copy), p1 (ref)
+		var4.refreshContentMetrics()
+		local visibleRange = var4.getVisibleRange()
+		local var15 = overscanPolicy.compute({
 			visibleRange = visibleRange,
-			scrollOffset = var22.getScrollOffset(),
-			viewportLength = var22.getScrollAxisLength(),
-			scrollDirection = var22.getScrollDirection(),
+			scrollOffset = var4.getScrollOffset(),
+			viewportLength = var4.getScrollAxisLength(),
+			scrollDirection = var4.getScrollDirection(),
 			itemCount = layout.getItemCount()
 		})
-		assert(var48.before >= 0 and (var48.before % 1 == 0 and (var48.after >= 0 and var48.after % 1 == 0)), "VirtualizerEngine: overscan policy must return non-negative integer spans")
-		local layoutViewport, layoutViewport_1 = var22.getLayoutViewport()
-		var29 = visibleRange
+		assert(var15.before >= 0 and (var15.before % 1 == 0 and (var15.after >= 0 and var15.after % 1 == 0)), "VirtualizerEngine: overscan policy must return non-negative integer spans")
+		local layoutViewport, layoutViewport_1 = var4.getLayoutViewport()
+		var11 = visibleRange
 		
-		if not (var36 ~= nil and (var36.layoutGeometryVersion == t_1.layoutGeometry and (var36.overscanPolicyVersion == t_1.overscanPolicy and (var36.min <= layoutViewport and (layoutViewport_1 <= var36.max and (var48.before == var36.before and (var48.after == var36.after and (typesModule.isIndexRangeEmpty(visibleRange) or (var30.firstIndex <= visibleRange.firstIndex and visibleRange.lastIndex <= var30.lastIndex))))))))) then
-			var30 = if typesModule.isIndexRangeEmpty(visibleRange) then frozen else layout.expandIndexRange(visibleRange, var48.before, var48.after)
+		if not (var14 ~= nil and (var14.layoutGeometryVersion == t_1.layoutGeometry and (var14.overscanPolicyVersion == t_1.overscanPolicy and (var14.min <= layoutViewport and (layoutViewport_1 <= var14.max and (var15.before == var14.before and (var15.after == var14.after and (typesModule.isIndexRangeEmpty(visibleRange) or (var12.firstIndex <= visibleRange.firstIndex and visibleRange.lastIndex <= var12.lastIndex))))))))) then
+			var12 = if typesModule.isIndexRangeEmpty(visibleRange) then frozen else layout.expandIndexRange(visibleRange, var15.before, var15.after)
 			
-			if typesModule.isIndexRangeEmpty(var30) then
-				var36 = nil
+			if typesModule.isIndexRangeEmpty(var12) then
+				var14 = nil
 			else
-				local itemLayout = layout.getItemLayout(var30.lastIndex)
-				var36 = {
-					min = layout.getItemLayout(var30.firstIndex).startOffset,
+				local itemLayout = layout.getItemLayout(var12.lastIndex)
+				var14 = {
+					min = layout.getItemLayout(var12.firstIndex).startOffset,
 					max = itemLayout.startOffset + itemLayout.length,
 					layoutGeometryVersion = t_1.layoutGeometry,
 					overscanPolicyVersion = t_1.overscanPolicy,
-					before = var48.before,
-					after = var48.after
+					before = var15.before,
+					after = var15.after
 				}
 			end
 		end
-		local var52 = var29
-		local var53 = not (var29.firstIndex == var52.firstIndex and var29.lastIndex == var52.lastIndex)
-		local var54 = var30
-		local var55 = not (var30.firstIndex == var54.firstIndex and var30.lastIndex == var54.lastIndex)
+		local var16 = var11
+		local var17 = not (var11.firstIndex == var16.firstIndex and var11.lastIndex == var16.lastIndex)
+		local var18 = var12
+		local var19 = not (var12.firstIndex == var18.firstIndex and var12.lastIndex == var18.lastIndex)
 		
-		if var53 or var55 then
-			local var56 = var35
+		if var17 or var19 then
+			local var20 = var13
 			
-			if not var56.range then
-				var56.range = true
+			if not var20.range then
+				var20.range = true
 				t_1.range += 1
 			end
 		end
-		if var53 then
-			table.insert(p12, {
+		if var17 then
+			table.insert(p2, {
 				type = virtualizerEffectTypeModule.VisibleRangeChanged,
-				range = cloneFrozen(var29)
+				range = cloneFrozen(var11)
 			})
 			local visible = diagnosticsModule.RangeKind.Visible
-			local var57 = var29
+			local var21 = var11
 			
-			if p4.diagnostics ~= nil then
-				table.insert(p12, {
+			if p1.diagnostics ~= nil then
+				table.insert(p2, {
 					type = virtualizerEffectTypeModule.Diagnostic,
 					event = {
 						kind = diagnosticsModule.EventKind.RangeChanged,
 						rangeKind = visible,
-						firstIndex = var57.firstIndex,
-						lastIndex = var57.lastIndex
+						firstIndex = var21.firstIndex,
+						lastIndex = var21.lastIndex
 					}
 				})
 			end
 		end
-		if var55 then
-			table.insert(p12, {
+		if var19 then
+			table.insert(p2, {
 				type = virtualizerEffectTypeModule.MountedRangeChanged,
-				range = cloneFrozen(var30)
+				range = cloneFrozen(var12)
 			})
 			local rendered = diagnosticsModule.RangeKind.Rendered
-			local var58 = var30
+			local var22 = var12
 			
-			if p4.diagnostics ~= nil then
-				table.insert(p12, {
+			if p1.diagnostics ~= nil then
+				table.insert(p2, {
 					type = virtualizerEffectTypeModule.Diagnostic,
 					event = {
 						kind = diagnosticsModule.EventKind.RangeChanged,
 						rangeKind = rendered,
-						firstIndex = var58.firstIndex,
-						lastIndex = var58.lastIndex
+						firstIndex = var22.firstIndex,
+						lastIndex = var22.lastIndex
 					}
 				})
 			end
 		end
-		return var55
+		return var19
 	end
 	
-	local function updatePrefetch(p13)
-		-- upvalues: t_2 (ref), dataSource (write), var30 (write), t (write), var24 (ref), virtualizerEffectTypeModule (copy)
+	local function updatePrefetch(p2)
+		-- upvalues: t_2 (ref), dataSource (write), var12 (write), t (write), var6 (ref), virtualizerEffectTypeModule (copy)
 		t_2.dataSource = dataSource
-		t_2.mountedRange = var30
+		t_2.mountedRange = var12
 		t_2.options = t.dataPrefetch
 		
-		for i, v in var24.reconcile(t_2) do
-			table.insert(p13, {
+		for i, v in var6.reconcile(t_2) do
+			table.insert(p2, {
 				type = virtualizerEffectTypeModule.DataPrefetchRequested,
 				request = v
 			})
@@ -278,15 +278,15 @@ return function(p4)
 	end
 	
 	local function commitProjection()
-		-- upvalues: var22 (ref), var23 (ref), var35 (write), t_1 (ref), t_3 (ref), t_4 (ref), dataSource (write), layout (write), var29 (write), var30 (write), var21 (write)
-		local scrollState = var22.getScrollState()
-		local scrollState_1 = var23.getSnapshot().scrollState
+		-- upvalues: var4 (ref), var5 (ref), var13 (write), t_1 (ref), t_3 (ref), t_4 (ref), dataSource (write), layout (write), var11 (write), var12 (write), var3 (write)
+		local scrollState = var4.getScrollState()
+		local scrollState_1 = var5.getSnapshot().scrollState
 		
 		if not (scrollState_1.scrollOffset == scrollState.scrollOffset and (scrollState_1.viewportLength == scrollState.viewportLength and (scrollState_1.contentLength == scrollState.contentLength and (scrollState_1.distanceFromEnd == scrollState.distanceFromEnd and (scrollState_1.atStart == scrollState.atStart and scrollState_1.atEnd == scrollState.atEnd))))) then
-			local var60 = var35
+			local var15 = var13
 			
-			if not var60.scroll then
-				var60.scroll = true
+			if not var15.scroll then
+				var15.scroll = true
 				t_1.scroll += 1
 			end
 		end
@@ -297,472 +297,472 @@ return function(p4)
 		t_3.scroll = t_1.scroll
 		t_4.dataSource = dataSource
 		t_4.layout = layout
-		t_4.visibleRange = var29
-		t_4.mountedRange = var30
+		t_4.visibleRange = var11
+		t_4.mountedRange = var12
 		t_4.scrollState = scrollState
-		t_4.contentStartOffset = var22.contentStartOffset(false)
-		t_4.contentLength = var22.contentLength(false)
+		t_4.contentStartOffset = var4.contentStartOffset(false)
+		t_4.contentLength = var4.contentLength(false)
 		t_4.requiresItemMeasurement = layout.requiresItemMeasurement()
-		t_4.hasViewportPlacements = var21
+		t_4.hasViewportPlacements = var3
 		
-		return var23.commit(t_4)
+		return var5.commit(t_4)
 	end
 	
 	local function captureAnchorEvidence()
-		-- upvalues: typesModule (copy), var29 (write), var22 (ref), dataSource (write)
-		if typesModule.isIndexRangeEmpty(var29) then
+		-- upvalues: typesModule (copy), var11 (write), var4 (ref), dataSource (write)
+		if typesModule.isIndexRangeEmpty(var11) then
 			return nil
 		end
 		local t = {}
 		
-		for i = var29.firstIndex, var29.lastIndex do
-			local placedItemLayout = var22.getPlacedItemLayout(i)
+		for i = var11.firstIndex, var11.lastIndex do
+			local placedItemLayout = var4.getPlacedItemLayout(i)
 			table.insert(t, {
 				key = dataSource.getItemKey(i),
-				viewportCoordinate = placedItemLayout.startOffset - var22.getScrollOffset(),
+				viewportCoordinate = placedItemLayout.startOffset - var4.getScrollOffset(),
 				itemLength = placedItemLayout.length
 			})
 		end
 		return {
-			scrollOffset = var22.getScrollOffset(),
-			viewportLength = var22.getScrollAxisLength(),
+			scrollOffset = var4.getScrollOffset(),
+			viewportLength = var4.getScrollAxisLength(),
 			visibleItems = t
 		}
 	end
 	
-	local function applyCorrection(p14, p15)
-		-- upvalues: var22 (ref), virtualizerEffectTypeModule (copy), p4 (ref), diagnosticsModule (copy)
-		if p15 == nil then return end
-		local scrollOffset = var22.getScrollOffset()
-		var22.setScrollOffset(scrollOffset + p15.delta)
-		local var64 = var22.getScrollOffset() - scrollOffset
+	local function applyCorrection(p3, p4)
+		-- upvalues: var4 (ref), virtualizerEffectTypeModule (copy), p1 (ref), diagnosticsModule (copy)
+		if p4 == nil then return end
+		local scrollOffset = var4.getScrollOffset()
+		var4.setScrollOffset(scrollOffset + p4.delta)
+		local var15 = var4.getScrollOffset() - scrollOffset
 		
-		if math.abs(var64) < 1 then return end
-		table.insert(p14, {
+		if math.abs(var15) < 1 then return end
+		table.insert(p3, {
 			type = virtualizerEffectTypeModule.ScrollCorrection,
-			delta = var64
+			delta = var15
 		})
-		table.insert(p14, {
+		table.insert(p3, {
 			type = virtualizerEffectTypeModule.ScrollPositionChanged,
-			offset = var22.getScrollOffset()
+			offset = var4.getScrollOffset()
 		})
 		
-		if p4.diagnostics ~= nil then
-			table.insert(p14, {
+		if p1.diagnostics ~= nil then
+			table.insert(p3, {
 				type = virtualizerEffectTypeModule.Diagnostic,
 				event = {
 					kind = diagnosticsModule.EventKind.ScrollCorrection,
-					source = p15.source,
-					delta = var64
+					source = p4.source,
+					delta = var15
 				}
 			})
 		end
 	end
 	
 	local function resetLayout(value)
-		-- upvalues: dataKeys (ref), var19 (ref), dataSourceChangeTypeModule (copy), layout (write), var22 (ref)
+		-- upvalues: dataKeys (ref), var1 (ref), dataSourceChangeTypeModule (copy), layout (write), var4 (ref)
 		local value_1 = value or dataKeys()
-		var19.applyChange({ type = dataSourceChangeTypeModule.Reset, keys = value_1 })
+		var1.applyChange({ type = dataSourceChangeTypeModule.Reset, keys = value_1 })
 		layout.applyDataSourceChange({ type = dataSourceChangeTypeModule.Reset, keys = value_1 })
-		var22.refreshContentMetrics()
+		var4.refreshContentMetrics()
 	end
 	
-	local function applyPolicy(p16)
-		-- upvalues: dataPrefetchModule (copy), t (write), overscanPolicy (write), overscanPolicyModule (copy), var35 (write), t_1 (ref), var22 (ref), preserveScrollPositionOnChange (write), var20 (ref), var21 (write)
-		assert(if p16.overscan ~= nil then p16.overscanPolicy == nil else true, "VirtualizerEngine: overscan and overscanPolicy are mutually exclusive")
-		assert(if p16.overscan ~= nil then p16.overscan >= 0 and p16.overscan % 1 == 0 else true, "VirtualizerEngine: overscan must be a non-negative integer")
-		dataPrefetchModule.resolve(p16.dataPrefetch)
+	local function applyPolicy(p3)
+		-- upvalues: dataPrefetchModule (copy), t (write), overscanPolicy (write), overscanPolicyModule (copy), var13 (write), t_1 (ref), var4 (ref), preserveScrollPositionOnChange (write), var2 (ref), var3 (write)
+		assert(if p3.overscan ~= nil then p3.overscanPolicy == nil else true, "VirtualizerEngine: overscan and overscanPolicy are mutually exclusive")
+		assert(if p3.overscan ~= nil then p3.overscan >= 0 and p3.overscan % 1 == 0 else true, "VirtualizerEngine: overscan must be a non-negative integer")
+		dataPrefetchModule.resolve(p3.dataPrefetch)
 		
-		if t.overscan ~= p16.overscan or t.overscanPolicy ~= p16.overscanPolicy then
-			overscanPolicy = p16.overscanPolicy or overscanPolicyModule.fixed(p16.overscan)
-			local var66 = var35
+		if t.overscan ~= p3.overscan or t.overscanPolicy ~= p3.overscanPolicy then
+			overscanPolicy = p3.overscanPolicy or overscanPolicyModule.fixed(p3.overscan)
+			local var15 = var13
 			
-			if not var66.overscanPolicy then
-				var66.overscanPolicy = true
+			if not var15.overscanPolicy then
+				var15.overscanPolicy = true
 				t_1.overscanPolicy += 1
 			end
 		end
-		if t.contentAlignment ~= p16.contentAlignment and var22.setContentAlignment(p16.contentAlignment) then
-			local var67 = var35
+		if t.contentAlignment ~= p3.contentAlignment and var4.setContentAlignment(p3.contentAlignment) then
+			local var16 = var13
 			
-			if not var67.layoutGeometry then
-				var67.layoutGeometry = true
+			if not var16.layoutGeometry then
+				var16.layoutGeometry = true
 				t_1.layoutGeometry += 1
 			end
 		end
-		if t.endThreshold ~= p16.endThreshold then
-			var22.setEndThreshold(p16.endThreshold)
+		if t.endThreshold ~= p3.endThreshold then
+			var4.setEndThreshold(p3.endThreshold)
 		end
-		if preserveScrollPositionOnChange ~= p16.preserveScrollPositionOnChange then
-			preserveScrollPositionOnChange = p16.preserveScrollPositionOnChange
+		if preserveScrollPositionOnChange ~= p3.preserveScrollPositionOnChange then
+			preserveScrollPositionOnChange = p3.preserveScrollPositionOnChange
 		end
-		local contentInsets = var20.getContentInsets()
+		local contentInsets = var2.getContentInsets()
 		
-		if var20.setOptions(p16.pinnedItems) then
-			local contentInsets_1 = var20.getContentInsets()
-			var22.setContentInsets(contentInsets_1.start, contentInsets_1.finish)
-			var21 = if p16.pinnedItems.isItemStickyHeader == nil then if p16.pinnedItems.pinnedStartItem == nil then p16.pinnedItems.pinnedEndItem ~= nil else true else true
+		if var2.setOptions(p3.pinnedItems) then
+			local contentInsets_1 = var2.getContentInsets()
+			var4.setContentInsets(contentInsets_1.start, contentInsets_1.finish)
+			var3 = if p3.pinnedItems.isItemStickyHeader == nil then if p3.pinnedItems.pinnedStartItem == nil then p3.pinnedItems.pinnedEndItem ~= nil else true else true
 			
-			if not var35.placementGeometry then
-				var35.placementGeometry = true
+			if not var13.placementGeometry then
+				var13.placementGeometry = true
 				t_1.placementGeometry += 1
 			end
-			if t.pinnedItems.pinnedStartItem ~= p16.pinnedItems.pinnedStartItem or t.pinnedItems.pinnedEndItem ~= p16.pinnedItems.pinnedEndItem then
-				local var70 = var35
+			if t.pinnedItems.pinnedStartItem ~= p3.pinnedItems.pinnedStartItem or t.pinnedItems.pinnedEndItem ~= p3.pinnedItems.pinnedEndItem then
+				local var17 = var13
 				
-				if not var70.identity then
-					var70.identity = true
+				if not var17.identity then
+					var17.identity = true
 					t_1.identity += 1
 				end
 			end
 			if contentInsets.start ~= contentInsets_1.start or contentInsets.finish ~= contentInsets_1.finish then
-				local var71 = var35
+				local var18 = var13
 				
-				if not var71.layoutGeometry then
-					var71.layoutGeometry = true
+				if not var18.layoutGeometry then
+					var18.layoutGeometry = true
 					t_1.layoutGeometry += 1
 				end
 			end
 		end
-		t = p16
+		t = p3
 	end
 	
-	local function execute(p17, p18)
-		-- upvalues: external (copy), var26 (write), dataKeys (ref), resetLayout (ref), var20 (ref), dataSourceChangeTypeModule (copy), dataSource (write), var35 (write), t_1 (ref), var22 (ref), scrollObservationKindModule (copy), var25 (ref), virtualizerEffectTypeModule (copy), layout (write), var21 (write), applyPolicy (ref), internal (copy), captureAnchorEvidence (ref), diagnosticsModule (copy), var19 (ref), applyCorrection (ref), p4 (ref), var27 (write), var24 (ref)
-		local var72 = nil
+	local function execute(p3, p4)
+		-- upvalues: external (copy), var8 (write), dataKeys (ref), resetLayout (ref), var2 (ref), dataSourceChangeTypeModule (copy), dataSource (write), var13 (write), t_1 (ref), var4 (ref), scrollObservationKindModule (copy), var7 (ref), virtualizerEffectTypeModule (copy), layout (write), var3 (write), applyPolicy (ref), internal (copy), captureAnchorEvidence (ref), diagnosticsModule (copy), var1 (ref), applyCorrection (ref), p1 (ref), var9 (write), var6 (ref)
+		local var15 = nil
 		
-		if p17.type == external.Activate then
-			if var26 then
-				return var72
+		if p3.type == external.Activate then
+			if var8 then
+				return var15
 			end
-			local var73 = dataKeys()
-			var26 = true
-			resetLayout(var73)
-			var20.applyDataSourceChange({
+			local var16 = dataKeys()
+			var8 = true
+			resetLayout(var16)
+			var2.applyDataSourceChange({
 				changes = {
-					{ type = dataSourceChangeTypeModule.Reset, keys = var73 }
+					{ type = dataSourceChangeTypeModule.Reset, keys = var16 }
 				},
 				previousItemCount = dataSource.getItemCount(),
 				itemCount = dataSource.getItemCount()
 			})
-			local var74 = var35
+			local var17 = var13
 			
-			if not var74.layoutGeometry then
-				var74.layoutGeometry = true
+			if not var17.layoutGeometry then
+				var17.layoutGeometry = true
 				t_1.layoutGeometry += 1
 			end
-			local var75 = var35
+			local var18 = var13
 			
-			if var75.identity then
-				return var72
+			if var18.identity then
+				return var15
 			end
-			var75.identity = true
+			var18.identity = true
 			t_1.identity += 1
 			
-			return var72
-		elseif p17.type == external.SetScrollOffset or p17.type == external.ObserveScrollOffset then
-			local var76 = var22.setScrollOffset(if p17.type == external.SetScrollOffset then p17.offset else p17.observation.offset)
+			return var15
+		elseif p3.type == external.SetScrollOffset or p3.type == external.ObserveScrollOffset then
+			local var19 = var4.setScrollOffset(if p3.type == external.SetScrollOffset then p3.offset else p3.observation.offset)
 			
-			if p17.type == external.ObserveScrollOffset and p17.observation.kind == scrollObservationKindModule.Programmatic then
-				var25.reconcileHostOffset(var22.getScrollOffset())
+			if p3.type == external.ObserveScrollOffset and p3.observation.kind == scrollObservationKindModule.Programmatic then
+				var7.reconcileHostOffset(var4.getScrollOffset())
 				
-				return var72
-			elseif var76 then
-				var25.setViewportAnchor(var22.getScrollOffset())
+				return var15
+			elseif var19 then
+				var7.setViewportAnchor(var4.getScrollOffset())
 				
-				return var72
+				return var15
 			end
-		elseif p17.type == external.ScrollToIndex or p17.type == external.ScrollToOffset or (p17.type == external.ScrollBy or p17.type == external.RestoreScrollSnapshot) then
-			if p17.type == external.ScrollToIndex then
-				var25.setItemAnchor(p17.index, p17.alignment)
-				var72 = var22.scrollToOffset(var22.getScrollOffsetForItem(p17.index, p17.alignment))
-			elseif p17.type == external.ScrollToOffset then
-				var72 = var22.scrollToOffset(p17.offset)
-				var25.setViewportAnchor(var72)
-			elseif p17.type == external.ScrollBy then
-				var72 = var22.scrollBy(p17.delta)
-				var25.setViewportAnchor(var72)
+		elseif p3.type == external.ScrollToIndex or p3.type == external.ScrollToOffset or (p3.type == external.ScrollBy or p3.type == external.RestoreScrollSnapshot) then
+			if p3.type == external.ScrollToIndex then
+				var7.setItemAnchor(p3.index, p3.alignment)
+				var15 = var4.scrollToOffset(var4.getScrollOffsetForItem(p3.index, p3.alignment))
+			elseif p3.type == external.ScrollToOffset then
+				var15 = var4.scrollToOffset(p3.offset)
+				var7.setViewportAnchor(var15)
+			elseif p3.type == external.ScrollBy then
+				var15 = var4.scrollBy(p3.delta)
+				var7.setViewportAnchor(var15)
 			else
-				var72 = var22.scrollToOffset(var25.getSnapshotOffset(p17.snapshot))
-				var25.restoreSnapshotAnchor(p17.snapshot, var72)
+				var15 = var4.scrollToOffset(var7.getSnapshotOffset(p3.snapshot))
+				var7.restoreSnapshotAnchor(p3.snapshot, var15)
 			end
-			table.insert(p18, {
+			table.insert(p4, {
 				type = virtualizerEffectTypeModule.ScrollPositionChanged,
-				offset = var72
+				offset = var15
 			})
 			
-			return var72
-		elseif p17.type ~= external.SetViewportSize then
-			local var84, var86
-			if p17.type == external.SetPolicy then
-				applyPolicy(p17.policy)
+			return var15
+		elseif p3.type ~= external.SetViewportSize then
+			local var20, var21
+			if p3.type == external.SetPolicy then
+				applyPolicy(p3.policy)
 				
-				return var72
-			elseif p17.type == external.SetDataSource or p17.type == external.SetDataSourceAndLayout then
-				dataSource = p17.dataSource
-				var20.setDataSource(dataSource)
+				return var15
+			elseif p3.type == external.SetDataSource or p3.type == external.SetDataSourceAndLayout then
+				dataSource = p3.dataSource
+				var2.setDataSource(dataSource)
 				
-				if p17.type == external.SetDataSourceAndLayout then
-					layout = p17.layout
+				if p3.type == external.SetDataSourceAndLayout then
+					layout = p3.layout
 				end
-				var25.reset()
+				var7.reset()
 				resetLayout()
-				local var79 = var35
+				local var22 = var13
 				
-				if not var79.layoutGeometry then
-					var79.layoutGeometry = true
+				if not var22.layoutGeometry then
+					var22.layoutGeometry = true
 					t_1.layoutGeometry += 1
 				end
-				local var80 = var35
+				local var23 = var13
 				
-				if var80.identity then
-					return var72
+				if var23.identity then
+					return var15
 				end
-				var80.identity = true
+				var23.identity = true
 				t_1.identity += 1
 				
-				return var72
-			elseif p17.type == external.SetLayout then
-				layout = p17.layout
-				var25.reset()
+				return var15
+			elseif p3.type == external.SetLayout then
+				layout = p3.layout
+				var7.reset()
 				resetLayout()
-				local var81 = var35
+				local var24 = var13
 				
-				if not var81.layoutGeometry then
-					var81.layoutGeometry = true
+				if not var24.layoutGeometry then
+					var24.layoutGeometry = true
 					t_1.layoutGeometry += 1
 				end
-				local var82 = var35
+				local var25 = var13
 				
-				if var82.identity then
-					return var72
+				if var25.identity then
+					return var15
 				end
-				var82.identity = true
+				var25.identity = true
 				t_1.identity += 1
 				
-				return var72
-			elseif p17.type == internal.ApplyDataSourceChange then
-				local scrollState = var22.getScrollState()
-				var84 = false
-				applyCorrection(p18, var25.applyGeometryChange({
+				return var15
+			elseif p3.type == internal.ApplyDataSourceChange then
+				local scrollState = var4.getScrollState()
+				var20 = false
+				applyCorrection(p4, var7.applyGeometryChange({
 					source = diagnosticsModule.ScrollCorrectionSource.Data,
-					dataSourceChange = p17.changeBatch,
+					dataSourceChange = p3.changeBatch,
 					anchorEvidence = captureAnchorEvidence()
 				}, function()
-					-- upvalues: p17 (ref), var19 (copy), var84 (write), layout (copy), var20 (copy), var22 (copy)
-					for i, v in p17.changeBatch.changes do
-						var19.applyChange(v)
-						var84 = layout.applyDataSourceChange(v) or var84
+					-- upvalues: p3 (ref), var1 (copy), var20 (write), layout (copy), var2 (copy), var4 (copy)
+					for i, v in p3.changeBatch.changes do
+						var1.applyChange(v)
+						var20 = layout.applyDataSourceChange(v) or var20
 					end
-					var20.applyDataSourceChange(p17.changeBatch)
-					var22.refreshContentMetrics()
+					var2.applyDataSourceChange(p3.changeBatch)
+					var4.refreshContentMetrics()
 				end))
-				table.insert(p18, {
+				table.insert(p4, {
 					type = virtualizerEffectTypeModule.DataSourceChanged,
-					changeBatch = p17.changeBatch,
+					changeBatch = p3.changeBatch,
 					before = scrollState
 				})
-				local var85 = var35
+				local var26 = var13
 				
-				if not var85.identity then
-					var85.identity = true
+				if not var26.identity then
+					var26.identity = true
 					t_1.identity += 1
 				end
-				return var72
-			elseif p17.type == internal.SubmitLogicalMeasurements then
-				var86 = 0
-				local boundaryDropped = p17.boundaryDropped or 0
-				var84 = nil
-				local var88 = false
+				return var15
+			elseif p3.type == internal.SubmitLogicalMeasurements then
+				var21 = 0
+				local boundaryDropped = p3.boundaryDropped or 0
+				var20 = nil
+				local var27 = false
 				
-				if #p17.measurements > 0 and p4.diagnostics ~= nil then
-					table.insert(p18, {
+				if #p3.measurements > 0 and p1.diagnostics ~= nil then
+					table.insert(p4, {
 						type = virtualizerEffectTypeModule.Diagnostic,
 						event = {
 							kind = diagnosticsModule.EventKind.MeasurementsProcessingStarted,
-							submitted = #p17.measurements,
+							submitted = #p3.measurements,
 							boundaryDropped = boundaryDropped
 						}
 					})
 				end
-				applyCorrection(p18, var25.applyGeometryChange({
+				applyCorrection(p4, var7.applyGeometryChange({
 					source = diagnosticsModule.ScrollCorrectionSource.Measurement
 				}, function()
-					-- upvalues: p17 (ref), dataSource (copy), var19 (copy), layout (copy), var86 (write), boundaryDropped (write), var88 (write), var84 (write), var20 (copy), var22 (copy)
-					for i, v in p17.measurements do
+					-- upvalues: p3 (ref), dataSource (copy), var1 (copy), layout (copy), var21 (write), boundaryDropped (write), var27 (write), var20 (write), var2 (copy), var4 (copy)
+					for i, v in p3.measurements do
 						if v.itemIndex ~= nil and v.pinnedPosition == nil then
 							local itemIndex = v.itemIndex
 							
-							if itemIndex < 1 or itemIndex > dataSource.getItemCount() or (dataSource.getItemKey(itemIndex) ~= v.itemKey or var19.get(v.itemKey) ~= v.itemRevision) then
+							if itemIndex < 1 or itemIndex > dataSource.getItemCount() or (dataSource.getItemKey(itemIndex) ~= v.itemKey or var1.get(v.itemKey) ~= v.itemRevision) then
 								boundaryDropped += 1
 								continue
 							end
-							local var91 = layout.updateItemMeasurement(v)
+							local var28 = layout.updateItemMeasurement(v)
 							
-							if var91.accepted then
-								var86 += 1
+							if var28.accepted then
+								var21 += 1
 							else
 								boundaryDropped += 1
 							end
-							var88 = var88 or var91.geometryChanged
+							var27 = var27 or var28.geometryChanged
 						elseif v.itemIndex == nil and v.pinnedPosition ~= nil then
-							var84 = var20.updatePinnedMeasurement(v.pinnedPosition, v.itemKey, v.itemRevision, v.length)
+							var20 = var2.updatePinnedMeasurement(v.pinnedPosition, v.itemKey, v.itemRevision, v.length)
 							
-							if var84 == nil then
+							if var20 == nil then
 								boundaryDropped += 1
 							else
-								var86 += 1
+								var21 += 1
 							end
 						else
 							boundaryDropped += 1
 						end
 					end
-					if var84 ~= nil then
-						var22.setContentInsets(var84.start, var84.finish)
-						var88 = true
+					if var20 ~= nil then
+						var4.setContentInsets(var20.start, var20.finish)
+						var27 = true
 					end
-					var22.refreshContentMetrics()
+					var4.refreshContentMetrics()
 				end))
 				
-				if p4.diagnostics ~= nil then
-					table.insert(p18, {
+				if p1.diagnostics ~= nil then
+					table.insert(p4, {
 						type = virtualizerEffectTypeModule.Diagnostic,
 						event = {
 							kind = diagnosticsModule.EventKind.MeasurementsProcessed,
-							accepted = var86,
+							accepted = var21,
 							dropped = boundaryDropped
 						}
 					})
 				end
-				return var72
-			elseif p17.type == external.SubmitMeasurements then
+				return var15
+			elseif p3.type == external.SubmitMeasurements then
 				error("VirtualizerEngine: physical measurements belong to presentation", 0)
 				
-				return var72
-			elseif p17.type == external.ApplyScrollAnchorOffset then
-				var72 = if var25.allowsExternalPositionApplication() then var22.scrollToOffset(p17.offset) else var22.getScrollOffset()
+				return var15
+			elseif p3.type == external.ApplyScrollAnchorOffset then
+				var15 = if var7.allowsExternalPositionApplication() then var4.scrollToOffset(p3.offset) else var4.getScrollOffset()
 				
-				if var72 == var22.getScrollOffset() then
+				if var15 == var4.getScrollOffset() then
 				else
-					table.insert(p18, {
+					table.insert(p4, {
 						type = virtualizerEffectTypeModule.ScrollPositionChanged,
-						offset = var72
+						offset = var15
 					})
 					
-					return var72
+					return var15
 				end
-			elseif p17.type == external.Refresh then
-				var86 = var35
+			elseif p3.type == external.Refresh then
+				var21 = var13
 				
-				if var86.identity then
-					return var72
+				if var21.identity then
+					return var15
 				end
-				var86.identity = true
+				var21.identity = true
 				t_1.identity += 1
 				
-				return var72
-			elseif p17.type == external.Destroy then
-				var27 = true
-				var25.destroy()
-				var20.destroy()
-				var24.destroy()
+				return var15
+			elseif p3.type == external.Destroy then
+				var9 = true
+				var7.destroy()
+				var2.destroy()
+				var6.destroy()
 				
-				return var72
+				return var15
 			end
 			error("VirtualizerEngine: unknown command", 0)
-		elseif var22.setViewportSize(p17.scrollAxisLength, p17.crossAxisLength) then
-			if layout.setViewportCrossAxisLength(p17.crossAxisLength) then
-				local var77 = var35
+		elseif var4.setViewportSize(p3.scrollAxisLength, p3.crossAxisLength) then
+			if layout.setViewportCrossAxisLength(p3.crossAxisLength) then
+				local var28 = var13
 				
-				if not var77.layoutGeometry then
-					var77.layoutGeometry = true
+				if not var28.layoutGeometry then
+					var28.layoutGeometry = true
 					t_1.layoutGeometry += 1
 				end
 			end
-			if not var21 then
+			if not var3 then
 			end
-			local var78 = var35
+			local var29 = var13
 			
-			if var78.placementGeometry then
-				return var72
+			if var29.placementGeometry then
+				return var15
 			end
-			var78.placementGeometry = true
+			var29.placementGeometry = true
 			t_1.placementGeometry += 1
 			
-			return var72
+			return var15
 		end
 	end
 	
 	return {
-		dispatch = function(p19)
-			-- upvalues: var28 (write), var27 (write), external (copy), var35 (write), execute (ref), refreshRanges (ref), updatePrefetch (ref), commitProjection (ref)
-			assert(not var28, "VirtualizerEngine: cannot dispatch during a Geometry transaction")
-			assert(not var27 or p19.type == external.Destroy, "VirtualizerEngine: cannot dispatch after destruction")
-			var28 = true
-			var35 = {}
+		dispatch = function(p5)
+			-- upvalues: var10 (write), var9 (write), external (copy), var13 (write), execute (ref), refreshRanges (ref), updatePrefetch (ref), commitProjection (ref)
+			assert(not var10, "VirtualizerEngine: cannot dispatch during a Geometry transaction")
+			assert(not var9 or p5.type == external.Destroy, "VirtualizerEngine: cannot dispatch after destruction")
+			var10 = true
+			var13 = {}
 			local t = {}
-			local ok, status = pcall(execute, p19, t)
+			local ok, status = pcall(execute, p5, t)
 			
 			if not ok then
-				var35 = nil
-				var28 = false
+				var13 = nil
+				var10 = false
 				error(status, 0)
 				
 				return
 			end
 			refreshRanges(t)
 			
-			if not var27 then
+			if not var9 then
 				updatePrefetch(t)
 			end
-			local var93 = commitProjection()
-			var35 = nil
-			var28 = false
+			local var26 = commitProjection()
+			var13 = nil
+			var10 = false
 			
 			return {
-				snapshot = var93.snapshot,
-				presentation = var93.presentation,
+				snapshot = var26.snapshot,
+				presentation = var26.presentation,
 				result = status,
 				effects = t
 			}
 		end,
-		getSnapshot = var23.getSnapshot,
-		query = function(p20)
-			-- upvalues: var23 (ref), virtualizerQueryTypeModule (copy), layout (write), var22 (ref), dataSource (write)
-			local snapshot = var23.getSnapshot()
+		getSnapshot = var5.getSnapshot,
+		query = function(p5)
+			-- upvalues: var5 (ref), virtualizerQueryTypeModule (copy), layout (write), var4 (ref), dataSource (write)
+			local snapshot = var5.getSnapshot()
 			
-			if p20.type == virtualizerQueryTypeModule.GetVisibleRange then
+			if p5.type == virtualizerQueryTypeModule.GetVisibleRange then
 				return snapshot.visibleRange
-			elseif p20.type == virtualizerQueryTypeModule.GetMountedRange then
+			elseif p5.type == virtualizerQueryTypeModule.GetMountedRange then
 				return snapshot.mountedRange
-			elseif p20.type == virtualizerQueryTypeModule.GetScrollState then
+			elseif p5.type == virtualizerQueryTypeModule.GetScrollState then
 				return snapshot.scrollState
-			elseif p20.type == virtualizerQueryTypeModule.GetContentLength then
+			elseif p5.type == virtualizerQueryTypeModule.GetContentLength then
 				return snapshot.contentLength
-			elseif p20.type == virtualizerQueryTypeModule.GetContentStartOffset then
+			elseif p5.type == virtualizerQueryTypeModule.GetContentStartOffset then
 				return snapshot.contentStartOffset
-			elseif p20.type == virtualizerQueryTypeModule.RequiresItemMeasurement then
+			elseif p5.type == virtualizerQueryTypeModule.RequiresItemMeasurement then
 				return snapshot.requiresItemMeasurement
-			elseif p20.type == virtualizerQueryTypeModule.GetItemLayout then
-				return layout.getItemLayout(p20.index)
-			elseif p20.type == virtualizerQueryTypeModule.GetScrollOffsetForItem then
-				return var22.getScrollOffsetForItem(p20.index, p20.alignment)
-			elseif p20.type ~= virtualizerQueryTypeModule.CaptureScrollSnapshot then
+			elseif p5.type == virtualizerQueryTypeModule.GetItemLayout then
+				return layout.getItemLayout(p5.index)
+			elseif p5.type == virtualizerQueryTypeModule.GetScrollOffsetForItem then
+				return var4.getScrollOffsetForItem(p5.index, p5.alignment)
+			elseif p5.type ~= virtualizerQueryTypeModule.CaptureScrollSnapshot then
 				error("VirtualizerEngine: unknown query", 0)
 				
 				return
 			end
-			local var95 = if snapshot.visibleRange.firstIndex <= snapshot.visibleRange.lastIndex then snapshot.visibleRange.firstIndex else nil
+			local var26 = if snapshot.visibleRange.firstIndex <= snapshot.visibleRange.lastIndex then snapshot.visibleRange.firstIndex else nil
 			
-			return if var95 == nil then {
+			return if var26 == nil then {
 				anchorKey = nil,
 				anchorIndex = nil,
 				offsetWithinItem = 0,
 				fallbackScrollOffset = snapshot.scrollState.scrollOffset
 			} else {
-				anchorKey = dataSource.getItemKey(var95),
-				anchorIndex = var95,
-				offsetWithinItem = snapshot.scrollState.scrollOffset - snapshot.contentStartOffset - layout.getItemLayout(var95).startOffset,
+				anchorKey = dataSource.getItemKey(var26),
+				anchorIndex = var26,
+				offsetWithinItem = snapshot.scrollState.scrollOffset - snapshot.contentStartOffset - layout.getItemLayout(var26).startOffset,
 				fallbackScrollOffset = snapshot.scrollState.scrollOffset
 			}
 		end

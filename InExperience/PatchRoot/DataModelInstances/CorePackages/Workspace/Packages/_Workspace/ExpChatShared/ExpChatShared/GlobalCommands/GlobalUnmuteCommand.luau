@@ -4,9 +4,9 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/unmute", "/um" },
-	clientRun = function(_, _, p0, p1)
+	clientRun = function(_, _, p1, p2)
 		-- upvalues: playersService (ref)
-		local var1 = string.split(p0, " ")[2]
+		local var1 = string.split(p1, " ")[2]
 		local var2 = var1 ~= nil and string.sub(var1, 1, 1) == "@"
 		local var3 = if var2 then string.sub(var1, 2) else var1
 		
@@ -16,14 +16,14 @@ return {
 				metadata = "Roblox.GlobalUnmute.Error.PlayerNotFound",
 				args = { RBX_NAME = var3 or "" }
 			}
-		elseif not p1 or not p1.globalMutedUsersStore then
+		elseif not p2 or not p2.globalMutedUsersStore then
 			return {
 				key = "CoreScripts.TextChat.MessageStatus.Warning.Unknown",
 				metadata = "Roblox.GlobalUnmute.Error.ContextNotAvailable",
 				args = {}
 			}
 		elseif not var2 then
-			p1.globalMutedUsersStore.unmuteGlobalDisplayName(var3)
+			p2.globalMutedUsersStore.unmuteGlobalDisplayName(var3)
 			
 			return {
 				key = "CoreScripts.TextChat.Unmute.Success",
@@ -40,7 +40,7 @@ return {
 				args = {}
 			}
 		end
-		p1.globalMutedUsersStore.unmuteGlobalUsername(lowerText)
+		p2.globalMutedUsersStore.unmuteGlobalUsername(lowerText)
 		
 		return {
 			key = "CoreScripts.TextChat.Unmute.Success",

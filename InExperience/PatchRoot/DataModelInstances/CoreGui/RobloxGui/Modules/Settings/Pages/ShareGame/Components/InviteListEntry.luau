@@ -22,42 +22,42 @@ local getFIntThrottleInviteSendEndpointDelayModule = require(modules.Flags.GetFI
 local getFFlagLuaAppEnableOpenTypeSupport = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
 local rect = Rect.new(10, 10, 10, 10)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), inviteStatus (ref), playersService (ref), getFFlagEnableNewInviteSendEndpointModule (ref), gameInviteEvents (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), getFFlagThrottleInviteSendEndpointModule (ref), throttleFunctionCallModule (ref), getFIntThrottleInviteSendEndpointDelayModule (ref), rect (ref), themeModule (ref), reactRobloxModule (ref), singleUserThumbnailModule (ref), presenceUtilModule (ref), constants (ref), appFonts (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), inviteButtonModule (ref)
-	local user = p0.user
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), inviteStatus (copy), user (ref), playersService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), gameInviteEvents (copy), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy)
-		local inviteUser = p0.inviteUser
-		local inviteStatus_1 = p0.inviteStatus
-		local analytics = p0.analytics
+	local user = p1.user
+	local var1 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), inviteStatus (copy), user (ref), playersService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), gameInviteEvents (copy), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy)
+		local inviteUser = p1.inviteUser
+		local inviteStatus_1 = p1.inviteStatus
+		local analytics = p1.analytics
 		
 		if inviteStatus_1 and inviteStatus_1 ~= inviteStatus.Failed then return end
-		local var16 = function(p1)
+		local var2 = function(p2)
 			-- upvalues: user (copy), playersService (copy), analytics (ref)
-			if not p1 then return end
+			if not p2 then return end
 			local list = { user.id }
 			
-			if playersService.LocalPlayer and p1 then
-				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p1.conversationId, list)
+			if playersService.LocalPlayer and p2 then
+				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p2.conversationId, list)
 			end
 		end
 		
 		if not getFFlagEnableNewInviteSendEndpointModule() then
-			inviteUser(user.id):andThen(var16, function() end)
+			inviteUser(user.id):andThen(var2, function() end)
 			
 			return
 		end
-		analytics:sendEvent(p0.trigger, gameInviteEvents.SendInvite, {
+		analytics:sendEvent(p1.trigger, gameInviteEvents.SendInvite, {
 			recipient = user.id,
-			isLaunchDataProvided = if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then p0.launchData ~= nil and p0.launchData ~= "" else nil
+			isLaunchDataProvided = if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then p1.launchData ~= nil and p1.launchData ~= "" else nil
 		})
-		inviteUser(user.id, analytics, p0.trigger, p0.inviteMessageId, p0.launchData):andThen(var16, function() end)
-	end, { p0.inviteUser, p0.inviteStatus, p0.analytics, user })
+		inviteUser(user.id, analytics, p1.trigger, p1.inviteMessageId, p1.launchData):andThen(var2, function() end)
+	end, { p1.inviteUser, p1.inviteStatus, p1.analytics, user })
 	
 	if getFFlagThrottleInviteSendEndpointModule() then
-		var15 = reactModule.useCallback(throttleFunctionCallModule(getFIntThrottleInviteSendEndpointDelayModule(), var15), { var15 })
+		var1 = reactModule.useCallback(throttleFunctionCallModule(getFIntThrottleInviteSendEndpointDelayModule(), var1), { var1 })
 	end
-	if p0.visible then
+	if p1.visible then
 		return reactModule.createElement("ImageButton", {
 			Size = UDim2.new(1, 0, 0, 60),
 			ScaleType = Enum.ScaleType.Stretch,
@@ -65,8 +65,8 @@ return function(p0)
 			BackgroundColor3 = themeModule.color("PlayerRowFrame"),
 			BackgroundTransparency = themeModule.transparency("PlayerRowFrame", 1),
 			ImageTransparency = 0.85,
-			LayoutOrder = p0.layoutOrder,
-			[reactRobloxModule.Event.Activated] = if p0.isFullRowActivatable then var15 else nil
+			LayoutOrder = p1.layoutOrder,
+			[reactRobloxModule.Event.Activated] = if p1.isFullRowActivatable then var1 else nil
 		}, {
 			UICorner = reactModule.createElement("UICorner", { CornerRadius = themeModule.MenuContainerCornerRadius }),
 			Padding = reactModule.createElement("UIPadding", {
@@ -129,8 +129,8 @@ return function(p0)
 				size = UDim2.new(0, 66, 0, 36),
 				position = UDim2.new(1, 0, 0.5, 0),
 				anchorPoint = Vector2.new(1, 0.5),
-				onInvite = var15,
-				inviteStatus = p0.inviteStatus
+				onInvite = var1,
+				inviteStatus = p1.inviteStatus
 			})
 		})
 	end

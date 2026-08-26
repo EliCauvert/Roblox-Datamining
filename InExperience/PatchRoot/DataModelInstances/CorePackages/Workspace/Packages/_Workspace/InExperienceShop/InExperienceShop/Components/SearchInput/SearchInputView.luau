@@ -8,10 +8,10 @@ local t = {
 	clear = "Feature.Avatar.Action.Clear"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), reactModule (ref), foundationModule (ref)
-	local var3 = useTokens()
-	local var4 = useLocalization(t)
+	local var1 = useTokens()
+	local var2 = useLocalization(t)
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-x-xlarge radius-medium",
@@ -22,7 +22,7 @@ return function(p0)
 			icon = foundationModule.Enums.IconName.ChevronLargeLeft,
 			variant = foundationModule.Enums.ButtonVariant.Utility,
 			size = foundationModule.Enums.ButtonSize.Small,
-			onActivated = p0.onBack
+			onActivated = p1.onBack
 		}),
 		SearchField = reactModule.createElement(foundationModule.View, {
 			tag = "fill radius-medium bg-surface-200",
@@ -36,32 +36,32 @@ return function(p0)
 				Position = UDim2.new(0, 12, 0.5, 0)
 			}),
 			TextBox = reactModule.createElement("TextBox", {
-				ref = p0.textBoxRef,
+				ref = p1.textBoxRef,
 				AnchorPoint = Vector2.new(0, 0.5),
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				ClearTextOnFocus = false,
 				ClipsDescendants = true,
-				FontFace = Font.fromEnum(var3.Typography.BodyMedium.Font),
-				PlaceholderText = var4.searchPlaceholder,
-				PlaceholderColor3 = var3.Color.Content.Default.Color3,
+				FontFace = Font.fromEnum(var1.Typography.BodyMedium.Font),
+				PlaceholderText = var2.searchPlaceholder,
+				PlaceholderColor3 = var1.Color.Content.Default.Color3,
 				Position = UDim2.new(0, 40, 0.5, 0),
 				Size = UDim2.new(1, -40, 1, 0),
-				Text = p0.text,
-				TextColor3 = var3.Color.Content.Emphasis.Color3,
-				TextSize = var3.Typography.BodyMedium.FontSize,
+				Text = p1.text,
+				TextColor3 = var1.Color.Content.Emphasis.Color3,
+				TextSize = var1.Typography.BodyMedium.FontSize,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextWrapped = false,
-				[reactModule.Change.Text] = p0.onTextChanged,
-				[reactModule.Event.FocusLost] = p0.onFocusLost
+				[reactModule.Change.Text] = p1.onTextChanged,
+				[reactModule.Event.FocusLost] = p1.onFocusLost
 			})
 		}),
 		ClearButton = reactModule.createElement(foundationModule.Button, {
 			LayoutOrder = 2,
-			text = var4.clear,
+			text = var2.clear,
 			variant = foundationModule.Enums.ButtonVariant.Utility,
 			size = foundationModule.Enums.InputSize.XSmall,
-			onActivated = p0.onClear
+			onActivated = p1.onClear
 		})
 	})
 end

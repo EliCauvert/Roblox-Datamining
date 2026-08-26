@@ -12,24 +12,24 @@ local addUnifiedEventLogging = avatarExperienceAnalyticsModule.addUnifiedEventLo
 local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useLocalization (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(nil)
-	local var6 = useLocalization({
+	local var1 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(nil)
+	local var3 = useLocalization({
 		headerText = "Feature.AvatarSwitcher.Heading.RespawnToSwitch",
 		contentText = "Feature.AvatarSwitcher.Label.RespawnLater",
 		respawnText = "Feature.AvatarSwitcher.Action.Respawn",
 		respawnLaterText = "Feature.AvatarSwitcher.Action.RespawnLater"
 	})
 	reactModule.useEffect(function()
-		-- upvalues: addUnifiedEventLogging (copy), var4 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), sessionService (copy), var5 (ref)
-		addUnifiedEventLogging(var4, {
+		-- upvalues: addUnifiedEventLogging (copy), var1 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), sessionService (copy), var2 (ref)
+		addUnifiedEventLogging(var1, {
 			elementName = "CONFIRM_SWITCH_AVATAR_BUTTON",
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
 			surface = unifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER
 		}, { sessionTagName = sessionService:GetSessionTag("level2a") })
-		addUnifiedEventLogging(var5, {
+		addUnifiedEventLogging(var2, {
 			elementName = "DEFER_SWITCH_AVATAR_BUTTON",
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
 			surface = unifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER
@@ -40,26 +40,26 @@ return function(p0)
 		disablePortal = false,
 		hasBackdrop = true,
 		size = dialogSize.Small,
-		onClose = p0.onClose
+		onClose = p1.onClose
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var6.headerText }),
+		DialogTitle = reactModule.createElement(dialog.Title, { text = var3.headerText }),
 		DialogContent = reactModule.createElement(dialog.Content, nil, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var6.contentText })
+			DialogText = reactModule.createElement(dialog.Text, { Text = var3.contentText })
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			orientation = orientation.Vertical,
 			actions = {
 				{
-					text = var6.respawnText,
+					text = var3.respawnText,
 					variant = buttonVariant.Emphasis,
-					onActivated = p0.onConfirm,
-					ref = var4
+					onActivated = p1.onConfirm,
+					ref = var1
 				},
 				{
-					text = var6.respawnLaterText,
+					text = var3.respawnLaterText,
 					variant = buttonVariant.Standard,
-					onActivated = p0.onDefer,
-					ref = var5
+					onActivated = p1.onDefer,
+					ref = var2
 				}
 			}
 		})

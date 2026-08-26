@@ -14,84 +14,84 @@ local useSignalState = signalsReactModule.useSignalState
 local useSignalBinding = signalsReactModule.useSignalBinding
 local frozen = table.freeze({})
 
-return function(p0)
+return function(p1)
 	-- upvalues: useMomentMediaControllerModule (ref), reactModule (ref), signalsModule (ref), useSignalBinding (ref), useSignalState (ref), fFlagMomentsTextOverlayAfterVideoLoadedModule (ref), useHasPresentedFrameModule (ref), frozen (ref), view (ref), skeleton (ref), foundationModule (ref)
-	local var9 = useMomentMediaControllerModule(p0.momentId)
-	local getScaleType = p0.getScaleType or reactModule.useMemo(function()
+	local var1 = useMomentMediaControllerModule(p1.momentId)
+	local getScaleType = p1.getScaleType or reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		return signalsModule.createSignal(Enum.ScaleType.Crop)
 	end, {})
-	local var11 = useSignalBinding(getScaleType)
-	local var12 = reactModule.useMemo(function()
+	local var2 = useSignalBinding(getScaleType)
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
-		local var25, var26 = signalsModule.createSignal(Vector2.zero)
+		local var4, var5 = signalsModule.createSignal(Vector2.zero)
 		
-		return { get = var25, set = var26 }
+		return { get = var4, set = var5 }
 	end, {})
-	local var13 = reactModule.useCallback(function(p1)
-		-- upvalues: var12 (ref)
-		var12.set(p1.AbsoluteSize)
-	end, { var12 })
-	local var14 = p0.suppressTapToToggle == true
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref)
-		if var9 ~= nil then
-			var9.toggle()
+	local var4 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref)
+		var3.set(p2.AbsoluteSize)
+	end, { var3 })
+	local var5 = p1.suppressTapToToggle == true
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref)
+		if var1 ~= nil then
+			var1.toggle()
 		end
-	end, { var9 })
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var9 (ref)
+	end, { var1 })
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var1 (ref)
 		return signalsModule.createComputed(function(p2)
-			-- upvalues: var9 (copy)
-			return if var9 == nil then "Idle" else var9.getState(p2).readiness
+			-- upvalues: var1 (copy)
+			return if var1 == nil then "Idle" else var1.getState(p2).readiness
 		end)
-	end, { var9 })
-	local var17 = useSignalState(var16)
-	local isReady = var17 == "Ready"
-	local var19 = nil
+	end, { var1 })
+	local var8 = useSignalState(var7)
+	local isReady = var8 == "Ready"
+	local var9 = nil
 	
 	if fFlagMomentsTextOverlayAfterVideoLoadedModule then
-		local var20 = var9 ~= nil and var9.getHasVideoPreview()
-		var19 = useSignalBinding(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var20 (ref), var16 (ref)
-			return signalsModule.createComputed(function(p3)
-				-- upvalues: var20 (copy), var16 (copy)
-				return not var20 or var16(p3) == "Ready"
+		local var10 = var1 ~= nil and var1.getHasVideoPreview()
+		var9 = useSignalBinding(reactModule.useMemo(function()
+			-- upvalues: signalsModule (copy), var10 (ref), var7 (ref)
+			return signalsModule.createComputed(function(p2)
+				-- upvalues: var10 (copy), var7 (copy)
+				return not var10 or var7(p2) == "Ready"
 			end)
-		end, { var20, var16 }))
+		end, { var10, var7 }))
 	end
-	local var21 = if p0.holdPosterUntilPlaying then not useHasPresentedFrameModule(var9, p0.holdPosterUntilPlaying) else not isReady
-	local var22 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var9 (ref), frozen (copy)
-		return signalsModule.createComputed(function(p4)
-			-- upvalues: var9 (copy), frozen (copy)
-			return if var9 == nil then frozen else var9.getVisualLayers(p4)
+	local var11 = if p1.holdPosterUntilPlaying then not useHasPresentedFrameModule(var1, p1.holdPosterUntilPlaying) else not isReady
+	local var12 = useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var1 (ref), frozen (copy)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var1 (copy), frozen (copy)
+			return if var1 == nil then frozen else var1.getVisualLayers(p2)
 		end)
-	end, { var9 }))
+	end, { var1 }))
 	local cloned = table.clone(reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var22 (ref), var12 (ref), var11 (ref), getScaleType (ref), reactModule (copy), view (copy), fFlagMomentsTextOverlayAfterVideoLoadedModule (copy), var19 (write)
+		-- upvalues: var1 (ref), var12 (ref), var3 (ref), var2 (ref), getScaleType (ref), reactModule (copy), view (copy), fFlagMomentsTextOverlayAfterVideoLoadedModule (copy), var9 (write)
 		local t = {}
 		
-		if var9 ~= nil then
-			for i, v in var22 do
+		if var1 ~= nil then
+			for i, v in var12 do
 				local id = v.id
 				t[`layer_{id}`] = reactModule.createElement(view, {
 					tag = "size-full",
-					Visible = if fFlagMomentsTextOverlayAfterVideoLoadedModule and string.sub(id, 1, 5) == "text:" then var19 else nil,
+					Visible = if fFlagMomentsTextOverlayAfterVideoLoadedModule and string.sub(id, 1, 5) == "text:" then var9 else nil,
 					ZIndex = v.zIndex + 2
 				}, {
 					Surface = v.render({
-						getItemSize = var12.get,
-						getPlaybackPosition = var9.getPosition,
-						getResolution = function(p5)
-							-- upvalues: var9 (copy)
-							return var9.getState(p5).resolution
+						getItemSize = var3.get,
+						getPlaybackPosition = var1.getPosition,
+						getResolution = function(p2)
+							-- upvalues: var1 (copy)
+							return var1.getState(p2).resolution
 						end,
 						setSurface = function(value)
-							-- upvalues: var9 (copy), id (ref)
-							var9.setSurface(id, value)
+							-- upvalues: var1 (copy), id (ref)
+							var1.setSurface(id, value)
 						end,
-						scaleType = var11,
+						scaleType = var2,
 						getScaleType = getScaleType
 					})
 				})
@@ -99,35 +99,35 @@ return function(p0)
 		end
 		return t
 	end, {
-		var9, var22, var12, var11, getScaleType,
-		if fFlagMomentsTextOverlayAfterVideoLoadedModule then var19 else nil
+		var1, var12, var3, var2, getScaleType,
+		if fFlagMomentsTextOverlayAfterVideoLoadedModule then var9 else nil
 	}))
 	
-	if p0.showLoadingSkeleton == true and var17 ~= "Ready" then
+	if p1.showLoadingSkeleton == true and var8 ~= "Ready" then
 		cloned.LoadingSkeleton = reactModule.createElement(view, { tag = "size-full", ZIndex = 100 }, {
 			Shimmer = reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1) })
 		})
-	elseif p0.posterContent ~= nil then
+	elseif p1.posterContent ~= nil then
 		cloned.Poster = reactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			ZIndex = 100,
 			Size = UDim2.fromScale(1, 1),
-			ScaleType = var11,
-			ImageContent = p0.posterContent,
-			Visible = var21
+			ScaleType = var2,
+			ImageContent = p1.posterContent,
+			Visible = var11
 		}, {
-			Corner = if p0.cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p0.cornerRadius) })
+			Corner = if p1.cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) })
 		})
 	end
-	local var24 = var9 ~= nil and not var14
+	local var13 = var1 ~= nil and not var5
 	
 	return reactModule.createElement(view, {
-		tag = p0.tag or "size-full clip",
-		LayoutOrder = p0.LayoutOrder,
-		onActivated = if var24 then var15 else nil,
-		stateLayer = if var24 then {
+		tag = p1.tag or "size-full clip",
+		LayoutOrder = p1.LayoutOrder,
+		onActivated = if var13 then var6 else nil,
+		stateLayer = if var13 then {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		} else nil,
-		onAbsoluteSizeChanged = var13
+		onAbsoluteSizeChanged = var4
 	}, cloned)
 end

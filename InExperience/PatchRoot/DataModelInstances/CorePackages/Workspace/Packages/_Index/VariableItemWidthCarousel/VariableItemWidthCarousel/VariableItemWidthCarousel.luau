@@ -13,60 +13,60 @@ local useVariableItemWidthScrollHandlersModule = require(variableItemWidthCarous
 local fFlagLuaAppEnableVRCarouselScrolling = require(parent.SharedFlags).FFlagLuaAppEnableVRCarouselScrolling
 local fFlagLuaAppHideEmptyCarouselHeader = require(parent.SharedFlags).FFlagLuaAppHideEmptyCarouselHeader
 
-local function _(p0, p1, p2, p3)
+local function _(p1, p2, p3, p4)
 	-- upvalues: responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref)
-	local var5
-	if not p2 then
+	local var1
+	if not p3 then
 		return false
-	elseif p0 == responsiveModule.Input.Pointer then
-		var5 = if p1 == responsiveModule.Input.Directional then fFlagLuaAppEnableVRCarouselScrolling and p3 else true
+	elseif p1 == responsiveModule.Input.Pointer then
+		var1 = if p2 == responsiveModule.Input.Directional then fFlagLuaAppEnableVRCarouselScrolling and p4 else true
 	end
-	return var5
+	return var1
 end
 
-function VariableItemWidthCarousel(p4, p5)
+function VariableItemWidthCarousel(p1, p2)
 	-- upvalues: useDesignTokens (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), fFlagLuaAppHideEmptyCarouselHeader (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), responsiveModule (ref), reactModule (ref), useVariableItemWidthScrollHandlersModule (ref), collectionHeader (ref), carouselScrollButtons (ref)
-	local var12
-	local var6 = useDesignTokens()
-	local var7 = useLastInput()
-	local var8 = usePreferredInput()
-	local var9 = useIsSpatial()
-	local items = p4.items
-	local renderItem = p4.renderItem
-	local itemPadding = p4.itemPadding
-	local itemHeight = p4.itemHeight
-	local sideMargin = p4.sideMargin or 0
-	local calculateItemWidth = p4.calculateItemWidth
-	local scrollingFrameRef = p4.scrollingFrameRef
-	local var11 = p4.title and p4.title ~= ""
+	local var1
+	local var2 = useDesignTokens()
+	local var3 = useLastInput()
+	local var4 = usePreferredInput()
+	local var5 = useIsSpatial()
+	local items = p1.items
+	local renderItem = p1.renderItem
+	local itemPadding = p1.itemPadding
+	local itemHeight = p1.itemHeight
+	local sideMargin = p1.sideMargin or 0
+	local calculateItemWidth = p1.calculateItemWidth
+	local scrollingFrameRef = p1.scrollingFrameRef
+	local var6 = p1.title and p1.title ~= ""
 	
 	if fFlagLuaAppHideEmptyCarouselHeader then
-		var12 = var11
+		var1 = var6
 		
-		if not var12 then
-			var12 = true
+		if not var1 then
+			var1 = true
 			
-			if p4.subtitle == nil then
-				var12 = p4.tooltipInfoText ~= nil
-				var12 = nil
+			if p1.subtitle == nil then
+				var1 = p1.tooltipInfoText ~= nil
+				var1 = nil
 			end
 		end
 	else
-		var12 = true
+		var1 = true
 	end
-	local scrollButtonsEnabled = p4.scrollButtonsEnabled
+	local scrollButtonsEnabled = p1.scrollButtonsEnabled
 	
 	if scrollButtonsEnabled then
-		local var13 = if fFlagLuaAppEnableVRCarouselScrolling then var9 else nil
+		local var7 = if fFlagLuaAppEnableVRCarouselScrolling then var5 else nil
 		
-		if not (if fFlagLuaAppEnableVRCarouselScrolling then true else not var9) then
+		if not (if fFlagLuaAppEnableVRCarouselScrolling then true else not var5) then
 			scrollButtonsEnabled = false
-		elseif var7 == responsiveModule.Input.Pointer then
-			scrollButtonsEnabled = if var8 == responsiveModule.Input.Directional then fFlagLuaAppEnableVRCarouselScrolling and var13 else true
+		elseif var3 == responsiveModule.Input.Pointer then
+			scrollButtonsEnabled = if var4 == responsiveModule.Input.Directional then fFlagLuaAppEnableVRCarouselScrolling and var7 else true
 		end
 	end
-	local var24
-	local var14 = reactModule.useMemo(function()
+	local var8
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: items (ref), renderItem (ref)
 		local t = {}
 		
@@ -75,25 +75,25 @@ function VariableItemWidthCarousel(p4, p5)
 		end
 		return t
 	end, { items, renderItem })
-	local var15, var16, var17, var18, var19 = useVariableItemWidthScrollHandlersModule(items, itemPadding, calculateItemWidth, scrollingFrameRef, p4.scrollSpeed)
-	local var20 = reactModule.useCallback(function(p6)
-		-- upvalues: var19 (ref), p4 (ref)
-		var19()
+	local var10, var11, var12, var13, var14 = useVariableItemWidthScrollHandlersModule(items, itemPadding, calculateItemWidth, scrollingFrameRef, p1.scrollSpeed)
+	local var15 = reactModule.useCallback(function(p3)
+		-- upvalues: var14 (ref), p1 (ref)
+		var14()
 		
-		if p4.onCanvasPositionChanged and p6 then
-			p4.onCanvasPositionChanged(p6.CanvasPosition)
+		if p1.onCanvasPositionChanged and p3 then
+			p1.onCanvasPositionChanged(p3.CanvasPosition)
 		end
-	end, { var19, p4.onCanvasPositionChanged })
+	end, { var14, p1.onCanvasPositionChanged })
 	local createElement = reactModule.createElement
-	local var21 = "Frame"
+	local var16 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		Position = p4.Position,
-		LayoutOrder = p4.LayoutOrder,
-		ref = p5
+		Position = p1.Position,
+		LayoutOrder = p1.LayoutOrder,
+		ref = p2
 	}
 	local t_1 = {
 		UIPadding = reactModule.createElement("UIPadding", {
@@ -104,28 +104,28 @@ function VariableItemWidthCarousel(p4, p5)
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if if fFlagLuaAppHideEmptyCarouselHeader then var12 else var11 then p4.headerContentPadding or var6.Size.Size_400 else 0)
+			Padding = UDim.new(0, if if fFlagLuaAppHideEmptyCarouselHeader then var1 else var6 then p1.headerContentPadding or var2.Size.Size_400 else 0)
 		})
 	}
 	
-	if var12 then
-		var24 = reactModule.createElement
-		var24 = var24(collectionHeader, {
+	if var1 then
+		var8 = reactModule.createElement
+		var8 = var8(collectionHeader, {
 			LayoutOrder = 1,
-			title = p4.title,
-			subtitle = p4.subtitle,
-			tooltipInfoText = p4.tooltipInfoText,
-			onActivateInfoIcon = p4.onActivateInfoIcon,
-			tooltipSupportsVR = p4.tooltipSupportsVR,
-			tooltipSupportsTenFootUi = p4.tooltipSupportsTenFootUi,
-			hideButton = if #items >= 1 then p4.hideHeaderButton or not var11 else true,
-			onActivate = p4.onActivateHeader,
-			buttonText = p4.headerButtonText
+			title = p1.title,
+			subtitle = p1.subtitle,
+			tooltipInfoText = p1.tooltipInfoText,
+			onActivateInfoIcon = p1.onActivateInfoIcon,
+			tooltipSupportsVR = p1.tooltipSupportsVR,
+			tooltipSupportsTenFootUi = p1.tooltipSupportsTenFootUi,
+			hideButton = if #items >= 1 then p1.hideHeaderButton or not var6 else true,
+			onActivate = p1.onActivateHeader,
+			buttonText = p1.headerButtonText
 		})
 	else
-		var24 = nil
+		var8 = nil
 	end
-	t_1.Header = var24
+	t_1.Header = var8
 	t_1.ContentFrame = reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
@@ -143,8 +143,8 @@ function VariableItemWidthCarousel(p4, p5)
 			Size = UDim2.new(1, 0, 0, itemHeight),
 			ZIndex = 1,
 			ref = scrollingFrameRef,
-			[reactModule.Change.AbsoluteSize] = var19,
-			[reactModule.Change.CanvasPosition] = var20
+			[reactModule.Change.AbsoluteSize] = var14,
+			[reactModule.Change.CanvasPosition] = var15
 		}, {
 			reactModule.createElement(reactModule.Fragment, nil, {
 				reactModule.createElement("UIListLayout", {
@@ -154,7 +154,7 @@ function VariableItemWidthCarousel(p4, p5)
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}),
-				reactModule.createElement(reactModule.Fragment, nil, var14)
+				reactModule.createElement(reactModule.Fragment, nil, var9)
 			})
 		}),
 		ScrollButtons = if scrollButtonsEnabled then reactModule.createElement(carouselScrollButtons, {
@@ -162,15 +162,15 @@ function VariableItemWidthCarousel(p4, p5)
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.new(0.5, 0, 0, 0),
 			Size = UDim2.new(1, 2 * sideMargin, 0, itemHeight),
-			buttonOffsetFromEdge = var6.Size.Size_200,
-			handleScrollLeft = var15,
-			handleScrollRight = var16,
-			leftScrollingEnabled = var17,
-			rightScrollingEnabled = var18
+			buttonOffsetFromEdge = var2.Size.Size_200,
+			handleScrollLeft = var10,
+			handleScrollRight = var11,
+			leftScrollingEnabled = var12,
+			rightScrollingEnabled = var13
 		}) else nil
 	})
 	
-	return createElement(var21, t, t_1)
+	return createElement(var16, t, t_1)
 end
 
 return reactModule.forwardRef(VariableItemWidthCarousel)

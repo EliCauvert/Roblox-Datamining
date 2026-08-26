@@ -14,49 +14,49 @@ local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSdui
 local fFlagSduiRenderPerf = require(parent.SharedFlags).FFlagSduiRenderPerf
 local fFlagSduiUnwrapStructPropEnvelope = require(parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
 
-local function applyTokenScaling(p0, p1)
-	return p0 * (if p1 then p1.Config.UI.Scale else 1)
+local function applyTokenScaling(p1, p2)
+	return p1 * (if p2 then p2.Config.UI.Scale else 1)
 end
 
-local function resolveTokenValueToNumber(p2, p3)
+local function resolveTokenValueToNumber(p1, p2)
 	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref)
-	local var19 = string.sub(p3, 1, 1) == "-"
-	local var20 = if var19 then string.sub(p3, 2) else p3
-	local var21 = p2
-	local var22 = if fFlagSduiRenderPerf then splitDottedPathModule(var20) else string.split(var20, ".")
-	local var22Count = #var22
+	local var1 = string.sub(p2, 1, 1) == "-"
+	local var2 = if var1 then string.sub(p2, 2) else p2
+	local var3 = p1
+	local var4 = if fFlagSduiRenderPerf then splitDottedPathModule(var2) else string.split(var2, ".")
+	local var22Count = #var4
 	
-	for i, v in var22 do
-		if i ~= var22Count and typeof(var21[v]) ~= "table" then
-			error(`Token path {var20} invalid`)
+	for i, v in var4 do
+		if i ~= var22Count and typeof(var3[v]) ~= "table" then
+			error(`Token path {var2} invalid`)
 		end
-		var21 = var21[v]
+		var3 = var3[v]
 	end
-	if typeof(var21) ~= "number" then
-		error(`Token path {var20} did not resolve to a number: {p3}`)
+	if typeof(var3) ~= "number" then
+		error(`Token path {var2} did not resolve to a number: {p2}`)
 	end
-	return if var19 then var21 * -1 else var21
+	return if var1 then var3 * -1 else var3
 end
 
-local function getTokenOrNumber(p4, p5, p6, p7)
+local function getTokenOrNumber(p3, p4, p5, p6)
 	-- upvalues: getSduiTokensStoreModule (ref), resolveTokenValueToNumber (ref)
-	local var24 = tonumber(p4)
+	local var5 = tonumber(p3)
 	
-	if var24 then
-		if p6 then
-			local tokens = getSduiTokensStoreModule().getTokens(p5, p7)
+	if var5 then
+		if p5 then
+			local tokens = getSduiTokensStoreModule().getTokens(p4, p6)
 			
-			return var24 * (if tokens then tokens.Config.UI.Scale else 1)
+			return var5 * (if tokens then tokens.Config.UI.Scale else 1)
 		end
-		return var24
-	elseif typeof(p4) ~= "string" then
-		error("Expected number or token string, got " .. typeof(p4))
+		return var5
+	elseif typeof(p3) ~= "string" then
+		error("Expected number or token string, got " .. typeof(p3))
 		
 		return
 	end
 	local ok, status = pcall(function()
-		-- upvalues: resolveTokenValueToNumber (copy), getSduiTokensStoreModule (copy), p5 (ref), p7 (ref), p4 (ref)
-		return resolveTokenValueToNumber(getSduiTokensStoreModule().getTokens(p5, p7), p4)
+		-- upvalues: resolveTokenValueToNumber (copy), getSduiTokensStoreModule (copy), p4 (ref), p6 (ref), p3 (ref)
+		return resolveTokenValueToNumber(getSduiTokensStoreModule().getTokens(p4, p6), p3)
 	end)
 	
 	if ok and status then
@@ -65,14 +65,14 @@ local function getTokenOrNumber(p4, p5, p6, p7)
 	error(if typeof(status) == "string" then status else nil)
 end
 
-local var8 = if fFlagSduiPropParsersShouldHandleTokens then function(p11, p12, p13)
+local var5 = if fFlagSduiPropParsersShouldHandleTokens then function(p3, p4, p5)
 	-- upvalues: getTokenOrNumber (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p11 (ref), getTokenOrNumber (copy), p12 (ref), p13 (ref)
-		local parts = string.split(p11, ",")
+		-- upvalues: p3 (ref), getTokenOrNumber (copy), p4 (ref), p5 (ref)
+		local parts = string.split(p3, ",")
 		
 		if #parts == 4 then
-			return UDim2.new(tonumber(parts[1]) or 0, getTokenOrNumber(parts[2], p12, p13, "parseUDim2"), tonumber(parts[3]) or 0, getTokenOrNumber(parts[4], p12, p13, "parseUDim2"))
+			return UDim2.new(tonumber(parts[1]) or 0, getTokenOrNumber(parts[2], p4, p5, "parseUDim2"), tonumber(parts[3]) or 0, getTokenOrNumber(parts[4], p4, p5, "parseUDim2"))
 		end
 		error("Not enough components in string to parse UDim2")
 	end)
@@ -81,26 +81,26 @@ local var8 = if fFlagSduiPropParsersShouldHandleTokens then function(p11, p12, p
 		return status
 	end
 	error(if typeof(status) == "string" then status else nil)
-end else function(p8, p9, p10)
+end else function(p3, p4, p5)
 	-- upvalues: getSduiTokensStoreModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p8 (ref), p10 (ref), getSduiTokensStoreModule (copy), p9 (ref)
-		local parts = string.split(p8, ",")
+		-- upvalues: p3 (ref), p5 (ref), getSduiTokensStoreModule (copy), p4 (ref)
+		local parts = string.split(p3, ",")
 		
 		if #parts ~= 4 then
 			error("Not enough components in string to parse UDim2")
 			
 			return
 		end
-		local var27 = tonumber(parts[2]) or 0
-		local var28 = tonumber(parts[4]) or 0
+		local var6 = tonumber(parts[2]) or 0
+		local var7 = tonumber(parts[4]) or 0
 		
-		if p10 then
-			local parseUDim2 = getSduiTokensStoreModule().getTokens(p9, "parseUDim2")
-			var27 *= if parseUDim2 then parseUDim2.Config.UI.Scale else 1
-			var28 *= if parseUDim2 then parseUDim2.Config.UI.Scale else 1
+		if p5 then
+			local parseUDim2 = getSduiTokensStoreModule().getTokens(p4, "parseUDim2")
+			var6 *= if parseUDim2 then parseUDim2.Config.UI.Scale else 1
+			var7 *= if parseUDim2 then parseUDim2.Config.UI.Scale else 1
 		end
-		return UDim2.new(tonumber(parts[1]) or 0, var27, tonumber(parts[3]) or 0, var28)
+		return UDim2.new(tonumber(parts[1]) or 0, var6, tonumber(parts[3]) or 0, var7)
 	end)
 	
 	if ok and status then
@@ -108,14 +108,14 @@ end else function(p8, p9, p10)
 	end
 	error(if typeof(status) == "string" then status else nil)
 end
-local var9 = if fFlagSduiPropParsersShouldHandleTokens then function(p17, p18, p19)
+local var6 = if fFlagSduiPropParsersShouldHandleTokens then function(p3, p4, p5)
 	-- upvalues: getTokenOrNumber (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p17 (ref), getTokenOrNumber (copy), p18 (ref), p19 (ref)
-		local parts = string.split(p17, ",")
+		-- upvalues: p3 (ref), getTokenOrNumber (copy), p4 (ref), p5 (ref)
+		local parts = string.split(p3, ",")
 		
 		if #parts == 2 then
-			return UDim.new(tonumber(parts[1]) or 0, getTokenOrNumber(parts[2], p18, p19, "parseUDim"))
+			return UDim.new(tonumber(parts[1]) or 0, getTokenOrNumber(parts[2], p4, p5, "parseUDim"))
 		end
 		error("Not enough components in string to parse UDim")
 	end)
@@ -124,24 +124,24 @@ local var9 = if fFlagSduiPropParsersShouldHandleTokens then function(p17, p18, p
 		return status
 	end
 	error(if typeof(status) == "string" then status else nil)
-end else function(p14, p15, p16)
+end else function(p3, p4, p5)
 	-- upvalues: getSduiTokensStoreModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p14 (ref), p16 (ref), getSduiTokensStoreModule (copy), p15 (ref)
-		local parts = string.split(p14, ",")
+		-- upvalues: p3 (ref), p5 (ref), getSduiTokensStoreModule (copy), p4 (ref)
+		local parts = string.split(p3, ",")
 		
 		if #parts ~= 2 then
 			error("Not enough components in string to parse UDim")
 			
 			return
 		end
-		local var32 = tonumber(parts[2]) or 0
+		local var7 = tonumber(parts[2]) or 0
 		
-		if p16 then
-			local parseUDim2 = getSduiTokensStoreModule().getTokens(p15, "parseUDim2")
-			var32 *= if parseUDim2 then parseUDim2.Config.UI.Scale else 1
+		if p5 then
+			local parseUDim2 = getSduiTokensStoreModule().getTokens(p4, "parseUDim2")
+			var7 *= if parseUDim2 then parseUDim2.Config.UI.Scale else 1
 		end
-		return UDim.new(tonumber(parts[1]) or 0, var32)
+		return UDim.new(tonumber(parts[1]) or 0, var7)
 	end)
 	
 	if ok and status then
@@ -150,77 +150,77 @@ end else function(p14, p15, p16)
 	error(if typeof(status) == "string" then status else nil)
 end
 
-local function parseNumber(p20, p21, p22)
+local function parseNumber(p3, p4, p5)
 	-- upvalues: getSduiTokensStoreModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p20 (ref)
-		return tonumber(p20)
+		-- upvalues: p3 (ref)
+		return tonumber(p3)
 	end)
 	
 	if not ok or not status then
 		error(if typeof(status) == "string" then status else nil)
 		
 		return
-	elseif p22 then
-		local parseUDim2 = getSduiTokensStoreModule().getTokens(p21, "parseUDim2")
+	elseif p5 then
+		local parseUDim2 = getSduiTokensStoreModule().getTokens(p4, "parseUDim2")
 		
 		return status * (if parseUDim2 then parseUDim2.Config.UI.Scale else 1)
 	end
 	return status
 end
 
-local function parseUiScaledNumber(p23, p24)
+local function parseUiScaledNumber(p3, p4)
 	-- upvalues: parseNumber (ref)
-	return parseNumber(p23, p24, true)
+	return parseNumber(p3, p4, true)
 end
 
-local function parseUiScaledUDim(p25, p26)
-	-- upvalues: var9 (ref)
-	return var9(p25, p26, true)
+local function parseUiScaledUDim(p3, p4)
+	-- upvalues: var6 (ref)
+	return var6(p3, p4, true)
 end
 
-local function parseUiScaledUDim2(p27, p28)
-	-- upvalues: var8 (ref)
-	return var8(p27, p28, true)
+local function parseUiScaledUDim2(p3, p4)
+	-- upvalues: var5 (ref)
+	return var5(p3, p4, true)
 end
 
 local unwrapStruct = nil
 
-local function isStructEnvelope(p29)
-	local fields = p29.fields
+local function isStructEnvelope(p3)
+	local fields = p3.fields
 	
 	if typeof(fields) ~= "table" then
 		return false
 	end
-	for i in p29 do
+	for i in p3 do
 		if i ~= "fields" then
 			return false
 		end
 	end
-	local var36 = false
+	local var7 = false
 	
 	for i_1, v in fields do
 		if typeof(v) == "table" then
 			if typeof(v.kind) == "table" and typeof(v.kind.type) == "string" then
-				var36 = true
+				var7 = true
 			end
 		end
 		return false
 	end
-	return var36 or next(fields) == nil
+	return var7 or next(fields) == nil
 end
 
-local function parseStruct(p30)
+local function parseStruct(p4)
 	-- upvalues: fFlagSduiUnwrapStructPropEnvelope (ref), isStructEnvelope (ref), unwrapStruct (write), protoVariableMapperModule (ref), parseStruct (ref)
-	if typeof(p30) ~= "table" then
-		return p30
-	elseif fFlagSduiUnwrapStructPropEnvelope and isStructEnvelope(p30) then
-		return unwrapStruct(p30)
+	if typeof(p4) ~= "table" then
+		return p4
+	elseif fFlagSduiUnwrapStructPropEnvelope and isStructEnvelope(p4) then
+		return unwrapStruct(p4)
 	end
 	local mapPropName = protoVariableMapperModule.mapPropName
 	local t = {}
 	
-	for i, v in p30 do
+	for i, v in p4 do
 		t[if typeof(i) == "string" then mapPropName(i) else i] = if typeof(v) == "table" then parseStruct(v) else v
 	end
 	return t
@@ -228,95 +228,95 @@ end
 
 local unwrapStructValue = nil
 
-local function unwrapStructList(p31)
+local function unwrapStructList(p5)
 	-- upvalues: unwrapStructValue (write)
 	local t = {}
-	local var39 = if typeof(p31) == "table" then p31.values else nil
+	local var8 = if typeof(p5) == "table" then p5.values else nil
 	
-	if typeof(var39) ~= "table" then
+	if typeof(var8) ~= "table" then
 		return t
 	end
-	for i, v in var39 do
+	for i, v in var8 do
 		t[i] = unwrapStructValue(v)
 	end
 	return t
 end
 
-unwrapStructValue = function(p32)
+unwrapStructValue = function(p6)
 	-- upvalues: parseStruct (ref), unwrapStructList (ref)
-	if typeof(p32) ~= "table" then
-		return p32
+	if typeof(p6) ~= "table" then
+		return p6
 	end
-	local kind = p32.kind
+	local kind = p6.kind
 	
-	return if not (typeof(kind) ~= "table" or typeof(kind.type) ~= "string") then if kind.type == "null_value" then nil elseif kind.type == "struct_value" then parseStruct(kind.value) elseif kind.type == "list_value" then unwrapStructList(kind.value) else kind.value else parseStruct(p32)
+	return if not (typeof(kind) ~= "table" or typeof(kind.type) ~= "string") then if kind.type == "null_value" then nil elseif kind.type == "struct_value" then parseStruct(kind.value) elseif kind.type == "list_value" then unwrapStructList(kind.value) else kind.value else parseStruct(p6)
 end
 
-unwrapStruct = function(p33)
+unwrapStruct = function(p6)
 	-- upvalues: protoVariableMapperModule (ref), unwrapStructValue (write)
 	local mapPropName = protoVariableMapperModule.mapPropName
 	local t = {}
 	
-	for i, v in p33.fields do
+	for i, v in p6.fields do
 		t[if typeof(i) == "string" then mapPropName(i) else i] = unwrapStructValue(v)
 	end
 	return t
 end
 
 return {
-	parseUDim = var9,
-	parseUDim2 = var8,
+	parseUDim = var6,
+	parseUDim2 = var5,
 	parseNumber = parseNumber,
 	applyTokenScaling = applyTokenScaling,
 	parseUiScaledNumber = parseUiScaledNumber,
 	parseUiScaledUDim = parseUiScaledUDim,
 	parseUiScaledUDim2 = parseUiScaledUDim2,
 	parseStruct = parseStruct,
-	parseArrayOfStruct = function(p34)
+	parseArrayOfStruct = function(p7)
 		-- upvalues: parseStruct (ref)
-		if typeof(p34) ~= "table" then
-			return p34
+		if typeof(p7) ~= "table" then
+			return p7
 		end
 		local t = {}
 		
-		for i, v in p34 do
+		for i, v in p7 do
 			t[i] = parseStruct(v)
 		end
 		return t
 	end,
-	parseStringArray = function(p35)
-		return if typeof(p35) == "table" then p35.items or p35 else nil
+	parseStringArray = function(p8)
+		return if typeof(p8) == "table" then p8.items or p8 else nil
 	end,
 	parseToString = if fFlagSduiStringPropToString then function(value)
 		return if value == nil then nil else tostring(value)
 	end else nil,
-	parseColor3 = if fFlagLuaAppSduiColorPropMigration then function(p36)
-		if typeof(p36) == "Color3" then
-			return p36
-		elseif typeof(p36) == "string" then
+	parseColor3 = if fFlagLuaAppSduiColorPropMigration then function(p8)
+		if typeof(p8) == "Color3" then
+			return p8
+		elseif typeof(p8) == "string" then
 			local ok, status = pcall(function()
-				-- upvalues: p36 (ref)
-				return Color3.fromHex(p36)
+				-- upvalues: p8 (ref)
+				return Color3.fromHex(p8)
 			end)
 			
 			return if ok then status else nil
-		elseif typeof(p36) == "table" and typeof(p36.Color3) == "Color3" then
-			return p36.Color3
+		elseif typeof(p8) == "table" and typeof(p8.Color3) == "Color3" then
+			return p8.Color3
 		end
-		error(`Could not resolve Color3 from input: {p36}`)
+		error(`Could not resolve Color3 from input: {p8}`)
 	end else nil,
-	parseColorPropLegacy = if fFlagLuaAppSduiColorPropMigration then function(p37)
-		return if typeof(p37) == "string" then Color3.fromHex(p37) else p37
+	parseColorPropLegacy = if fFlagLuaAppSduiColorPropMigration then function(p8)
+		return if typeof(p8) == "string" then Color3.fromHex(p8) else p8
 	end else nil,
-	parseFocusNavActions = if fFlagSduiFocusNavActionsStructured then function(p38)
+	parseFocusNavActions = if fFlagSduiFocusNavActionsStructured then function(p8)
 		-- upvalues: inputHandlersModule (ref)
-		if typeof(p38) ~= "table" then
+		if typeof(p8) ~= "table" then
 			return nil
 		end
 		local t = {}
 		
-		if typeof(p38.keys) == "table" then
-			for i, v in p38.keys do
+		if typeof(p8.keys) == "table" then
+			for i, v in p8.keys do
 				if typeof(v) == "EnumItem" and typeof(i) == "string" then
 					t[v] = i
 				end
@@ -324,8 +324,8 @@ return {
 		end
 		local t_1 = {}
 		
-		if typeof(p38.events) == "table" then
-			for i, v in p38.events do
+		if typeof(p8.events) == "table" then
+			for i, v in p8.events do
 				if typeof(i) == "string" and typeof(v) == "function" then
 					t_1[i] = { handler = inputHandlersModule.onRelease(v) }
 				end

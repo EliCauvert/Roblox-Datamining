@@ -14,51 +14,51 @@ local fFlagParseHeadShapeFromAPIResponse = avatarExperienceFlagsModule.FFlagPars
 local fFlagHeadRefinementFacialAnimationToggle = avatarExperienceFlagsModule.FFlagHeadRefinementFacialAnimationToggle
 local _ = require(avatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: isValidAssetTypeForOutfitTypeModule (ref), constantsModule (ref), createHumanoidDescriptionAccessoryInfoModule (ref), fFlagParseHeadShapeFromAPIResponse (ref), fFlagHeadRefinementFacialAnimationToggle (ref), fFlagAXMakeupEquipping (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref), HUMANOID_DESCRIPTION_SCALE_TO_NAME (ref), setHumanoidDescriptionColorsFromBodyColor3sModule (ref)
 	local humanoidDescription = Instance.new("HumanoidDescription")
-	local equippedAssets = p0.AvatarEditor.Character.EquippedAssets
-	local avatarScales = p0.AvatarEditor.Character.AvatarScales
+	local equippedAssets = p1.AvatarEditor.Character.EquippedAssets
+	local avatarScales = p1.AvatarEditor.Character.AvatarScales
 	local staticFacialAnimation = nil
 	
 	if equippedAssets then
-		local i_1, var15
+		local i_1, var1
 		local t = {}
 		
 		for i, v in equippedAssets do
-			if isValidAssetTypeForOutfitTypeModule(i, p1) then
+			if isValidAssetTypeForOutfitTypeModule(i, p2) then
 				local t_1 = {}
-				local var11 = constantsModule.ASSET_TYPE_TO_ACCESSORY_TYPE[i]
+				local var2 = constantsModule.ASSET_TYPE_TO_ACCESSORY_TYPE[i]
 				
 				for i_1, v_1 in v do
-					if var11 then
+					if var2 then
 						table.insert(t, createHumanoidDescriptionAccessoryInfoModule(i, i_1, v_1))
 					else
 						table.insert(t_1, i_1)
 					end
 				end
-				if var11 == nil and #t_1 > 0 then
-					local var12 = constantsModule.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[i]
+				if var2 == nil and #t_1 > 0 then
+					local var3 = constantsModule.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[i]
 					local joined = table.concat(t_1, ",")
 					
-					if var12 then
-						if fFlagParseHeadShapeFromAPIResponse and constantsModule.BODY_PART_NAME_TO_ENUM[var12] then
+					if var3 then
+						if fFlagParseHeadShapeFromAPIResponse and constantsModule.BODY_PART_NAME_TO_ENUM[var3] then
 							local bodyPartDescription = Instance.new("BodyPartDescription")
 							bodyPartDescription.AssetId = t_1[1]
 							bodyPartDescription.Parent = humanoidDescription
-							bodyPartDescription.BodyPart = constantsModule.BODY_PART_NAME_TO_ENUM[var12]
+							bodyPartDescription.BodyPart = constantsModule.BODY_PART_NAME_TO_ENUM[var3]
 							
 							if i == constantsModule.ASSET_TYPE_NAME_TO_ID_STRING.DynamicHead then
 								i_1 = nil
 								
 								for i_2, v_2 in t_1 do
-									var15 = v[v_2]
+									var1 = v[v_2]
 									
-									if fFlagHeadRefinementFacialAnimationToggle and var15 and var15.staticFacialAnimation ~= nil then
-										staticFacialAnimation = var15.staticFacialAnimation
+									if fFlagHeadRefinementFacialAnimationToggle and var1 and var1.staticFacialAnimation ~= nil then
+										staticFacialAnimation = var1.staticFacialAnimation
 									end
-									if var15 and var15.headShape then
-										i_1 = if var15.headShape == "Default" then nil else var15.headShape
+									if var1 and var1.headShape then
+										i_1 = if var1.headShape == "Default" then nil else var1.headShape
 										break
 									end
 								end
@@ -67,7 +67,7 @@ return function(p0, p1)
 								end
 							end
 						else
-							humanoidDescription[var12] = joined
+							humanoidDescription[var3] = joined
 						end
 					elseif i ~= constantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and (not fFlagAXMakeupEquipping or not isMakeupAssetTypeModule(i)) then
 						mutedError(string.format("assetTypeId: %s not recognized as member of humanoidDescription", tostring(i)))
@@ -89,7 +89,7 @@ return function(p0, p1)
 			humanoidDescription[HUMANOID_DESCRIPTION_SCALE_TO_NAME[i_1]] = i
 		end
 	end
-	setHumanoidDescriptionColorsFromBodyColor3sModule(humanoidDescription, p0.AvatarEditor.Character.BodyColor3s)
+	setHumanoidDescriptionColorsFromBodyColor3sModule(humanoidDescription, p1.AvatarEditor.Character.BodyColor3s)
 	
 	return humanoidDescription
 end

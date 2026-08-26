@@ -22,16 +22,16 @@ local t_1 = {
 
 return {
 	PresenceType = t,
-	GetIcon = function(p0)
+	GetIcon = function(p1)
 		-- upvalues: t_1 (ref), reactModule (ref), imageSetLabel (ref), images (ref), iconSize (ref)
-		local var5 = t_1[p0]
+		local var1 = t_1[p1]
 		
-		if var5 then
+		if var1 then
 			return reactModule.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
-				Image = images[var5.Image],
-				ImageColor3 = var5.Color,
-				Size = var5.Size or UDim2.new(0, iconSize.Small, 0, iconSize.Small)
+				Image = images[var1.Image],
+				ImageColor3 = var1.Color,
+				Size = var1.Size or UDim2.new(0, iconSize.Small, 0, iconSize.Small)
 			})
 		end
 	end

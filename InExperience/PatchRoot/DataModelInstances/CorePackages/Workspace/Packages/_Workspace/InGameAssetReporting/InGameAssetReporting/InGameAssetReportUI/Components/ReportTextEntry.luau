@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref)
 	local var1 = useStyle()
 	local theme = var1.Theme
@@ -25,9 +25,9 @@ return function(p0)
 			Position = UDim2.new(0, 0, 0, 0),
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = theme.BackgroundDefault.Color,
-			PlaceholderText = p0.placeholderText,
+			PlaceholderText = p1.placeholderText,
 			Font = var1.Font.Body.Font,
-			Text = p0.text,
+			Text = p1.text,
 			TextSize = var1.Font.BaseSize,
 			TextColor3 = theme.TextDefault.Color,
 			TextTransparency = theme.TextDefault.Transparency,
@@ -42,10 +42,10 @@ return function(p0)
 			ClearTextOnFocus = false,
 			OverlayNativeInput = true,
 			ClipsDescendants = true,
-			[reactModule.Change.Text] = function(p1)
-				-- upvalues: p0 (ref)
-				if p0.text ~= p1.Text then
-					p0.onUpdate(p1.Text)
+			[reactModule.Change.Text] = function(p2)
+				-- upvalues: p1 (ref)
+				if p1.text ~= p2.Text then
+					p1.onUpdate(p2.Text)
 				end
 			end
 		})

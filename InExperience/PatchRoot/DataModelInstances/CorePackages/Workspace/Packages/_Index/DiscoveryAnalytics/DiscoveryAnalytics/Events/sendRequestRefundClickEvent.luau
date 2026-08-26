@@ -2,7 +2,7 @@
 local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
 local tModule = require(parent.t)
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local var2 = tModule.strictInterface({ placeId = tModule.string })
+local var1 = tModule.strictInterface({ placeId = tModule.string })
 local t = {
 	eventName = "requestRefundClick",
 	backends = { "EventIngest" },
@@ -10,19 +10,19 @@ local t = {
 	lastUpdated = { 26, 4, 24 }
 }
 
-return function(p0, p1)
-	-- upvalues: discoveryEventErrorLogger (ref), var2 (ref), telemetryService (ref), t (ref)
-	if type(p1) ~= "string" or p1 == "" then
-		discoveryEventErrorLogger.reportError("RequestRefundClickInvalidInterface", `string eventContext expected, got {type(p1)} with value {tostring(p1)}`)
+return function(p1, p2)
+	-- upvalues: discoveryEventErrorLogger (ref), var1 (ref), telemetryService (ref), t (ref)
+	if type(p2) ~= "string" or p2 == "" then
+		discoveryEventErrorLogger.reportError("RequestRefundClickInvalidInterface", `string eventContext expected, got {type(p2)} with value {tostring(p2)}`)
 	end
-	local var4, var5 = var2(p0)
+	local var2, var3 = var1(p1)
 	
-	if not var4 then
-		discoveryEventErrorLogger.reportError("RequestRefundClickInvalidInterface", var5)
+	if not var2 then
+		discoveryEventErrorLogger.reportError("RequestRefundClickInvalidInterface", var3)
 	end
 	telemetryService:LogEvent(t, {
-		eventContext = p1,
+		eventContext = p2,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p0
+		customFields = p1
 	})
 end

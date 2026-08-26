@@ -2,74 +2,74 @@
 local reactModule = require(parent.React)
 local dictionary = require(parent.llama).Dictionary
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: dictionary (ref), reactModule (ref)
-	return function(p1)
-		-- upvalues: dictionary (copy), reactModule (copy), p0 (ref)
-		local function transformedMapper(p2, p3)
-			-- upvalues: dictionary (copy), p1 (ref)
-			return dictionary.map(p1(p3), function(p4, _)
-				-- upvalues: p2 (ref)
+	return function(p2)
+		-- upvalues: dictionary (copy), reactModule (copy), p1 (ref)
+		local function transformedMapper(p3, p4)
+			-- upvalues: dictionary (copy), p2 (ref)
+			return dictionary.map(p2(p4), function(p5, _)
+				-- upvalues: p3 (ref)
 				local ok, status = pcall(function()
-					-- upvalues: p2 (copy), p4 (ref)
-					return p2:TranslateGameText(game, p4)
+					-- upvalues: p3 (copy), p5 (ref)
+					return p3:TranslateGameText(game, p5)
 				end)
 				
 				return if ok then status else ""
 			end)
 		end
 		
-		return function(p5)
-			-- upvalues: reactModule (copy), p0 (copy), dictionary (copy), transformedMapper (ref)
-			local var2 = reactModule.Component:extend("Connected-" .. tostring(p5))
+		return function(p3)
+			-- upvalues: reactModule (copy), p1 (copy), dictionary (copy), transformedMapper (ref)
+			local var1 = reactModule.Component:extend("Connected-" .. tostring(p3))
 			
-			function var2.render(p6)
-				-- upvalues: reactModule (copy), p0 (copy), p5 (ref), dictionary (copy), transformedMapper (copy)
-				return reactModule.createElement(p0.Consumer, {
-					render = function(p7)
-						-- upvalues: reactModule (copy), p5 (copy), dictionary (copy), p6 (ref), transformedMapper (copy)
-						return reactModule.createElement(p5, dictionary.join(p6.props, transformedMapper(p7, p6.props)))
+			function var2.render(p4)
+				-- upvalues: reactModule (copy), p1 (copy), p3 (ref), dictionary (copy), transformedMapper (copy)
+				return reactModule.createElement(p1.Consumer, {
+					render = function(p5)
+						-- upvalues: reactModule (copy), p3 (copy), dictionary (copy), p4 (ref), transformedMapper (copy)
+						return reactModule.createElement(p3, dictionary.join(p4.props, transformedMapper(p5, p4.props)))
 					end
 				})
 			end
 			
-			return var2
+			return var1
 		end
 	end
 end
 
-return function(p8)
+return function(p1)
 	-- upvalues: reactModule (ref), dictionary (ref)
-	local var3 = reactModule.createContext(p8)
+	local var1 = reactModule.createContext(p1)
 	
 	return {
-		Consumer = var3.Consumer,
-		Provider = var3.Provider,
-		connect = function(p9)
-			-- upvalues: dictionary (copy), reactModule (copy), var3 (ref)
-			local function transformedMapper(p10, p11)
-				-- upvalues: dictionary (copy), p9 (ref)
-				return dictionary.map(p9(p11), function(p12, _)
-					-- upvalues: p10 (ref)
+		Consumer = var1.Consumer,
+		Provider = var1.Provider,
+		connect = function(p2)
+			-- upvalues: dictionary (copy), reactModule (copy), var1 (ref)
+			local function transformedMapper(p3, p4)
+				-- upvalues: dictionary (copy), p2 (ref)
+				return dictionary.map(p2(p4), function(p5, _)
+					-- upvalues: p3 (ref)
 					local ok, status = pcall(function()
-						-- upvalues: p10 (copy), p12 (ref)
-						return p10:TranslateGameText(game, p12)
+						-- upvalues: p3 (copy), p5 (ref)
+						return p3:TranslateGameText(game, p5)
 					end)
 					
 					return if ok then status else ""
 				end)
 			end
 			
-			return function(p13)
-				-- upvalues: reactModule (copy), var3 (copy), dictionary (copy), transformedMapper (ref)
-				local var2 = reactModule.Component:extend("Connected-" .. tostring(p13))
+			return function(p3)
+				-- upvalues: reactModule (copy), var1 (copy), dictionary (copy), transformedMapper (ref)
+				local var2 = reactModule.Component:extend("Connected-" .. tostring(p3))
 				
-				function var2.render(p14)
-					-- upvalues: reactModule (copy), var3 (copy), p13 (ref), dictionary (copy), transformedMapper (copy)
-					return reactModule.createElement(var3.Consumer, {
-						render = function(p15)
-							-- upvalues: reactModule (copy), p13 (copy), dictionary (copy), p14 (ref), transformedMapper (copy)
-							return reactModule.createElement(p13, dictionary.join(p14.props, transformedMapper(p15, p14.props)))
+				function var2.render(p4)
+					-- upvalues: reactModule (copy), var1 (copy), p3 (ref), dictionary (copy), transformedMapper (copy)
+					return reactModule.createElement(var1.Consumer, {
+						render = function(p5)
+							-- upvalues: reactModule (copy), p3 (copy), dictionary (copy), p4 (ref), transformedMapper (copy)
+							return reactModule.createElement(p3, dictionary.join(p4.props, transformedMapper(p5, p4.props)))
 						end
 					})
 				end

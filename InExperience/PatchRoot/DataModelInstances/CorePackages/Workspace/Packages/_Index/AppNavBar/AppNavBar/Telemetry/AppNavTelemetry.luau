@@ -7,7 +7,7 @@ local appNavDeviceTier = game:DefineFastFlag("AppNavDeviceTier", false)
 local fFlagAppNavTelemetryLogger = require(parent_1.SharedFlags).FFlagAppNavTelemetryLogger
 local var1 = if fFlagAppNavTelemetryLogger then require(parent_1.Loggers).Logger:new("AppNavTelemetry") else nil
 local list = { "addOSInfo", "addSessionId", "addSessionInfo" }
-local var3 = if appNavDeviceTier then deviceTier.GetDeviceMemoryTier() else nil
+local var2 = if appNavDeviceTier then deviceTier.GetDeviceMemoryTier() else nil
 local t = {
 	eventName = "AppNav_SwitchTab",
 	throttlingPercentage = 10000,
@@ -48,24 +48,24 @@ local t_4 = {
 	backends = { "RobloxTelemetryCounter" },
 	lastUpdated = { 26, 3, 17 }
 }
-local var9 = nil
+local var3 = nil
 
-local function logSwitchTabStart(value, p0)
-	-- upvalues: var9 (write)
-	var9 = {
+local function logSwitchTabStart(value, p1)
+	-- upvalues: var3 (write)
+	var3 = {
 		previousPage = value,
-		nextPage = p0,
+		nextPage = p1,
 		startTime = os.clock()
 	}
 end
 
 local function reportSwitchTab(p1, p2, p3)
-	-- upvalues: telemetryService (ref), t (ref), appNavDeviceTier (ref), var3 (ref), t_1 (ref), list (ref), fFlagAppNavTelemetryLogger (ref), var1 (write)
+	-- upvalues: telemetryService (ref), t (ref), appNavDeviceTier (ref), var2 (ref), t_1 (ref), list (ref), fFlagAppNavTelemetryLogger (ref), var1 (write)
 	telemetryService:LogStat(t, {
 		customFields = {
 			previous_page = p1,
 			current_page = p2,
-			device_tier = if appNavDeviceTier then var3 else nil
+			device_tier = if appNavDeviceTier then var2 else nil
 		}
 	}, p3)
 	telemetryService:LogEvent(t_1, {
@@ -74,83 +74,83 @@ local function reportSwitchTab(p1, p2, p3)
 	})
 	
 	if fFlagAppNavTelemetryLogger then
-		var1:info("AppNav switch_tab previous={} current={} duration_ms={} device_tier={}", tostring(p1), tostring(p2), string.format("%.2f", p3), tostring(var3))
+		var1:info("AppNav switch_tab previous={} current={} duration_ms={} device_tier={}", tostring(p1), tostring(p2), string.format("%.2f", p3), tostring(var2))
 	end
 end
 
-local function logSwitchTabEnd(p4)
-	-- upvalues: var9 (write), reportSwitchTab (ref)
-	if not var9 then return end
-	if p4 == var9.nextPage then
-		local previousPage = var9.previousPage
-		local var17 = (os.clock() - var9.startTime) * 1000
-		var9 = nil
-		reportSwitchTab(previousPage, p4, var17)
+local function logSwitchTabEnd(p1)
+	-- upvalues: var3 (write), reportSwitchTab (ref)
+	if not var3 then return end
+	if p1 == var3.nextPage then
+		local previousPage = var3.previousPage
+		local var4 = (os.clock() - var3.startTime) * 1000
+		var3 = nil
+		reportSwitchTab(previousPage, p1, var4)
 		
 		return
 	end
-	var9 = nil
+	var3 = nil
 end
 
-local var13 = nil
+local var4 = nil
 
-local function logVisibilityStart(p5)
-	-- upvalues: var13 (write)
-	var13 = { nextValue = p5, startTime = os.clock() }
+local function logVisibilityStart(p1)
+	-- upvalues: var4 (write)
+	var4 = { nextValue = p1, startTime = os.clock() }
 end
 
-local function reportVisibility(p6, p7)
-	-- upvalues: telemetryService (ref), t_2 (ref), appNavDeviceTier (ref), var3 (ref), t_3 (ref), list (ref), fFlagAppNavTelemetryLogger (ref), var1 (write)
+local function reportVisibility(p1, p2)
+	-- upvalues: telemetryService (ref), t_2 (ref), appNavDeviceTier (ref), var2 (ref), t_3 (ref), list (ref), fFlagAppNavTelemetryLogger (ref), var1 (write)
 	telemetryService:LogStat(t_2, {
 		customFields = {
-			is_visible = p6,
-			device_tier = if appNavDeviceTier then var3 else nil
+			is_visible = p1,
+			device_tier = if appNavDeviceTier then var2 else nil
 		}
-	}, p7)
+	}, p2)
 	telemetryService:LogEvent(t_3, {
-		customFields = { is_visible = p6, duration = p7 },
+		customFields = { is_visible = p1, duration = p2 },
 		standardizedFields = list
 	})
 	
 	if fFlagAppNavTelemetryLogger then
-		var1:info("AppNav is_visible_changed is_visible={} duration_ms={} device_tier={}", tostring(p6), string.format("%.2f", p7), tostring(var3))
+		var1:info("AppNav is_visible_changed is_visible={} duration_ms={} device_tier={}", tostring(p1), string.format("%.2f", p2), tostring(var2))
 	end
 end
 
-local var16 = nil
+local var5 = nil
 
 return {
 	logSwitchTabStart = logSwitchTabStart,
 	logSwitchTabEnd = logSwitchTabEnd,
 	logVisibilityStart = logVisibilityStart,
-	logVisibilityEnd = function(p8)
-		-- upvalues: var13 (write), reportVisibility (ref)
-		if not var13 then return end
-		if p8 == var13.nextValue then
-			local var18 = (os.clock() - var13.startTime) * 1000
-			var13 = nil
-			reportVisibility(p8, var18)
+	logVisibilityEnd = function(p1)
+		-- upvalues: var4 (write), reportVisibility (ref)
+		if not var4 then return end
+		if p1 == var4.nextValue then
+			local var6 = (os.clock() - var4.startTime) * 1000
+			var4 = nil
+			reportVisibility(p1, var6)
 			
 			return
 		end
-		var13 = nil
+		var4 = nil
 	end,
-	logPlacement = function(p9)
-		-- upvalues: var16 (write), telemetryService (ref), t_4 (ref), fFlagAppNavTelemetryLogger (ref), var1 (write)
-		if p9 == var16 then return end
+	logPlacement = function(p1)
+		-- upvalues: var5 (write), telemetryService (ref), t_4 (ref), fFlagAppNavTelemetryLogger (ref), var1 (write)
+		if p1 == var5 then return end
 		telemetryService:LogCounter(t_4, {
-			customFields = { previous_placement = var16, current_placement = p9 }
+			customFields = { previous_placement = var5, current_placement = p1 }
 		})
 		
 		if fFlagAppNavTelemetryLogger then
-			var1:info("AppNav placement_changed previous={} current={}", tostring(var16), tostring(p9))
+			var1:info("AppNav placement_changed previous={} current={}", tostring(var5), tostring(p1))
 		end
-		var16 = p9
+		var5 = p1
 	end,
 	reset = function()
-		-- upvalues: var9 (write), var13 (write), var16 (write)
-		var9 = nil
-		var13 = nil
-		var16 = nil
+		-- upvalues: var3 (write), var4 (write), var5 (write)
+		var3 = nil
+		var4 = nil
+		var5 = nil
 	end
 }

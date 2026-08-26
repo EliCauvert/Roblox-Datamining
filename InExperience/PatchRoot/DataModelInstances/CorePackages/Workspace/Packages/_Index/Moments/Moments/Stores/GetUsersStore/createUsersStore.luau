@@ -6,66 +6,66 @@ local createComputed = signalsModule.createComputed
 
 return function()
 	-- upvalues: createSignal (ref), createComputed (ref), cryoModule (ref)
-	local var2, var3 = createSignal({})
+	local var1, var2 = createSignal({})
 	local t = {}
 	local t_1 = {}
 	
 	return {
-		getUsersByUserId = var2,
-		getUserProfile = function(p0)
-			-- upvalues: t (ref), createComputed (copy), var2 (ref), t_1 (ref)
-			if t[p0] == nil then
-				t[p0] = createComputed(function(p1)
-					-- upvalues: var2 (copy), p0 (ref), t_1 (copy)
-					return var2(p1)[p0] or t_1
+		getUsersByUserId = var1,
+		getUserProfile = function(p1)
+			-- upvalues: t (ref), createComputed (copy), var1 (ref), t_1 (ref)
+			if t[p1] == nil then
+				t[p1] = createComputed(function(p2)
+					-- upvalues: var1 (copy), p1 (ref), t_1 (copy)
+					return var1(p2)[p1] or t_1
 				end)
 			end
-			return t[p0]
+			return t[p1]
 		end,
-		updateUsername = function(p2, p3)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			local var6 = tostring(p2)
-			local var7 = var2(false)
-			var3(cryoModule.Dictionary.union(var7, {
-				[var6] = cryoModule.Dictionary.union(var7[var6] or {}, { username = p3 })
+		updateUsername = function(p1, p2)
+			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+			local var3 = tostring(p1)
+			local var4 = var1(false)
+			var2(cryoModule.Dictionary.union(var4, {
+				[var3] = cryoModule.Dictionary.union(var4[var3] or {}, { username = p2 })
 			}))
 		end,
-		updateAvatar = function(p4, p5)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			local var8 = tostring(p4)
-			local var9 = var2(false)
-			var3(cryoModule.Dictionary.union(var9, {
-				[var8] = cryoModule.Dictionary.union(var9[var8] or {}, { avatarThumbnailUri = p5 })
+		updateAvatar = function(p1, p2)
+			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+			local var3 = tostring(p1)
+			local var4 = var1(false)
+			var2(cryoModule.Dictionary.union(var4, {
+				[var3] = cryoModule.Dictionary.union(var4[var3] or {}, { avatarThumbnailUri = p2 })
 			}))
 		end,
-		updateMomentsCount = function(p6, p7)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			local var10 = tostring(p6)
-			local var11 = var2(false)
-			var3(cryoModule.Dictionary.union(var11, {
-				[var10] = cryoModule.Dictionary.union(var11[var10] or {}, { momentsCount = p7 })
+		updateMomentsCount = function(p1, p2)
+			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+			local var3 = tostring(p1)
+			local var4 = var1(false)
+			var2(cryoModule.Dictionary.union(var4, {
+				[var3] = cryoModule.Dictionary.union(var4[var3] or {}, { momentsCount = p2 })
 			}))
 		end,
-		invalidateMomentsCount = function(p8)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			local var12 = tostring(p8)
-			local var13 = var2(false)
-			local var14 = var13[var12]
+		invalidateMomentsCount = function(p1)
+			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+			local var3 = tostring(p1)
+			local var4 = var1(false)
+			local var5 = var4[var3]
 			
-			if var14 then
-				var3(cryoModule.Dictionary.union(var13, {
-					[var12] = cryoModule.Dictionary.join(var14, { momentsCount = cryoModule.None })
+			if var5 then
+				var2(cryoModule.Dictionary.union(var4, {
+					[var3] = cryoModule.Dictionary.join(var5, { momentsCount = cryoModule.None })
 				}))
 				
 				return
 			end
 		end,
-		updateUserInfo = function(p9, p10, p11)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			local var15 = tostring(p9)
-			local var16 = var2(false)
-			var3(cryoModule.Dictionary.union(var16, {
-				[var15] = cryoModule.Dictionary.union(var16[var15] or {}, { displayName = p10, hasVerifiedBadge = p11 })
+		updateUserInfo = function(p1, p2, p3)
+			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+			local var3 = tostring(p1)
+			local var4 = var1(false)
+			var2(cryoModule.Dictionary.union(var4, {
+				[var3] = cryoModule.Dictionary.union(var4[var3] or {}, { displayName = p2, hasVerifiedBadge = p3 })
 			}))
 		end
 	}

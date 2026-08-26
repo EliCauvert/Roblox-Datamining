@@ -15,71 +15,71 @@ local _ = {
 	SetClosed = "SetClosed"
 }
 
-local function RouteViewStatesReducer(p0, p1)
+local function RouteViewStatesReducer(p1, p2)
 	-- upvalues: array (ref), RouteViewStatesReducer (ref), viewStateModule (ref), object (ref)
-	local var4 = array.findIndex(p0, function(p2)
-		-- upvalues: p1 (ref)
-		return p2.descriptor.key == p1.key
+	local var1 = array.findIndex(p1, function(p3)
+		-- upvalues: p2 (ref)
+		return p3.descriptor.key == p2.key
 	end)
 	
-	if p1.type == "SetCurrent" then
-		for i, v in p1.navigationState.routes do
-			p0 = RouteViewStatesReducer(p0, {
+	if p2.type == "SetCurrent" then
+		for i, v in p2.navigationState.routes do
+			p1 = RouteViewStatesReducer(p1, {
 				type = "SetOpening",
 				key = v.key,
-				descriptor = p1.descriptors[v.key]
+				descriptor = p2.descriptors[v.key]
 			})
 		end
-		for i, v_1 in p0 do
-			if p1.descriptors[v_1.descriptor.key] == nil then
-				p0 = RouteViewStatesReducer(p0, { type = "SetClosing", key = v_1.descriptor.key })
+		for i, v_1 in p1 do
+			if p2.descriptors[v_1.descriptor.key] == nil then
+				p1 = RouteViewStatesReducer(p1, { type = "SetClosing", key = v_1.descriptor.key })
 			end
 		end
-		return p0
-	elseif p1.type == "SetOpening" then
-		if var4 == -1 then
-			p0 = table.clone(p0)
-			table.insert(p0, {
+		return p1
+	elseif p2.type == "SetOpening" then
+		if var1 == -1 then
+			p1 = table.clone(p1)
+			table.insert(p1, {
 				viewState = viewStateModule.Opening,
-				descriptor = p1.descriptor
+				descriptor = p2.descriptor
 			})
 			
-			return p0
-		elseif p0[var4].viewState == viewStateModule.Closing then
-			p0 = table.clone(p0)
-			p0[var4] = object.assign({}, p0[var4], {
+			return p1
+		elseif p1[var1].viewState == viewStateModule.Closing then
+			p1 = table.clone(p1)
+			p1[var1] = object.assign({}, p1[var1], {
 				viewState = viewStateModule.Opening,
-				descriptor = p1.descriptor
+				descriptor = p2.descriptor
 			})
 			
-			return p0
-		elseif p0[var4].descriptor == p1.descriptor then
-			return p0
+			return p1
+		elseif p1[var1].descriptor == p2.descriptor then
+			return p1
 		else
-			p0 = table.clone(p0)
-			p0[var4] = object.assign({}, p0[var4], { descriptor = p1.descriptor })
+			p1 = table.clone(p1)
+			p1[var1] = object.assign({}, p1[var1], { descriptor = p2.descriptor })
 			
-			return p0
+			return p1
 		end
-	elseif p1.type == "SetOpened" then
-		if var4 == -1 or p0[var4].viewState ~= viewStateModule.Opening then
+	elseif p2.type == "SetOpened" then
+		if var1 == -1 or p1[var1].viewState ~= viewStateModule.Opening then
 		else
-			p0 = table.clone(p0)
-			p0[var4] = object.assign({}, p0[var4], { viewState = viewStateModule.Opened })
+			p1 = table.clone(p1)
+			p1[var1] = object.assign({}, p1[var1], { viewState = viewStateModule.Opened })
 			
-			return p0
+			return p1
 		end
-	elseif p1.type == "SetClosing" then
-		if var4 == -1 or p0[var4].viewState == viewStateModule.Closing then
+	elseif p2.type == "SetClosing" then
+		if var1 == -1 or p1[var1].viewState == viewStateModule.Closing then
 		else
-			p0 = table.clone(p0)
-			p0[var4] = object.assign({}, p0[var4], { viewState = viewStateModule.Closing })
+			p1 = table.clone(p1)
+			p1[var1] = object.assign({}, p1[var1], { viewState = viewStateModule.Closing })
 			
-			return p0
+			return p1
 		end
-	elseif p1.type == "SetClosed" and var4 ~= -1 and p0[var4].viewState == viewStateModule.Closing then
-		p0 = table.clone(p0)
-		table.remove(p0, var4)
+	elseif p2.type == "SetClosed" and var1 ~= -1 and p1[var1].viewState == viewStateModule.Closing then
+		p1 = table.clone(p1)
+		table.remove(p1, var1)
 	end
 end
 
@@ -88,12 +88,12 @@ return function(p3)
 	local navigation = p3.navigation
 	local state = navigation.state
 	local descriptors = p3.descriptors
-	local var5, var6 = reactModule.useReducer(RouteViewStatesReducer, {})
+	local var2, var3 = reactModule.useReducer(RouteViewStatesReducer, {})
 	
 	if fFlagLuaAppDerivedStackAndSwitchState then
 		reactModule.useMemo(function()
-			-- upvalues: var6 (ref), state (ref), descriptors (ref)
-			var6({
+			-- upvalues: var3 (ref), state (ref), descriptors (ref)
+			var3({
 				type = "SetCurrent",
 				navigationState = state,
 				descriptors = descriptors
@@ -101,44 +101,44 @@ return function(p3)
 		end, { state, descriptors })
 	else
 		reactModule.useLayoutEffect(function()
-			-- upvalues: var6 (ref), state (ref), descriptors (ref)
-			var6({
+			-- upvalues: var3 (ref), state (ref), descriptors (ref)
+			var3({
 				type = "SetCurrent",
 				navigationState = state,
 				descriptors = descriptors
 			})
 		end, { state, descriptors })
 	end
-	local var7 = reactModule.useCallback(function(p4)
+	local var4 = reactModule.useCallback(function(p4)
 		-- upvalues: navigation (ref), stackActions (copy)
 		if navigation.state.isTransitioning then
 			navigation.dispatch(stackActions.completeTransition({ key = navigation.state.key, toChildKey = p4 }))
 		end
 	end, { navigation })
-	local var8 = reactModule.useCallback(function(p5)
-		-- upvalues: var6 (ref), var7 (ref)
-		var6({ type = "SetOpened", key = p5.descriptor.key })
-		var7(p5.descriptor.key)
-	end, { var7 })
-	local var9 = reactModule.useCallback(function(p6)
-		-- upvalues: var6 (ref)
-		var6({ type = "SetClosed", key = p6.descriptor.key })
+	local var5 = reactModule.useCallback(function(p4)
+		-- upvalues: var3 (ref), var4 (ref)
+		var3({ type = "SetOpened", key = p4.descriptor.key })
+		var4(p4.descriptor.key)
+	end, { var4 })
+	local var6 = reactModule.useCallback(function(p4)
+		-- upvalues: var3 (ref)
+		var3({ type = "SetClosed", key = p4.descriptor.key })
 	end, {})
 	
 	return reactModule.useMemo(function()
-		-- upvalues: array (copy), var5 (ref), object (copy), var8 (ref), var9 (ref)
-		return array.map(var5, function(p7)
-			-- upvalues: object (copy), var8 (copy), var9 (copy)
-			return object.assign({}, p7, {
+		-- upvalues: array (copy), var2 (ref), object (copy), var5 (ref), var6 (ref)
+		return array.map(var2, function(p4)
+			-- upvalues: object (copy), var5 (copy), var6 (copy)
+			return object.assign({}, p4, {
 				setOpened = function()
-					-- upvalues: var8 (copy), p7 (ref)
-					var8(p7)
+					-- upvalues: var5 (copy), p4 (ref)
+					var5(p4)
 				end,
 				setClosed = function()
-					-- upvalues: var9 (copy), p7 (ref)
-					var9(p7)
+					-- upvalues: var6 (copy), p4 (ref)
+					var6(p4)
 				end
 			})
 		end)
-	end, { var5, var8, var9 })
+	end, { var2, var5, var6 })
 end

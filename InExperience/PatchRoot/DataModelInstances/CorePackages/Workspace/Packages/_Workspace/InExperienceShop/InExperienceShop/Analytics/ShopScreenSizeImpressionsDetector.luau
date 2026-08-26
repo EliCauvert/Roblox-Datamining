@@ -3,39 +3,39 @@ local getShopImpressionsViewportBounds = require(script.Parent.getShopViewportBo
 local shopImpressionsDetectorModule = require(script.Parent.ShopImpressionsDetector)
 local vector2 = Vector2.new(1920, 1080)
 
-return function(p0)
+return function(p1)
 	-- upvalues: vector2 (ref), reactModule (ref), getShopImpressionsViewportBounds (ref), shopImpressionsDetectorModule (ref)
 	local currentCamera = workspace.CurrentCamera
-	local var3, var4 = reactModule.useState(if currentCamera then currentCamera.ViewportSize else vector2)
+	local var1, var2 = reactModule.useState(if currentCamera then currentCamera.ViewportSize else vector2)
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
+		-- upvalues: var2 (ref)
 		local currentCamera = workspace.CurrentCamera
 		
 		if currentCamera == nil then
 			return function() end
 		end
-		local var5 = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-			-- upvalues: var4 (copy), currentCamera (ref)
-			var4(currentCamera.ViewportSize)
+		local var3 = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+			-- upvalues: var2 (copy), currentCamera (ref)
+			var2(currentCamera.ViewportSize)
 		end)
 		
 		return function()
-			-- upvalues: var5 (ref)
-			var5:Disconnect()
+			-- upvalues: var3 (ref)
+			var3:Disconnect()
 		end
 	end, {})
 	
 	return reactModule.createElement(shopImpressionsDetectorModule, {
-		parentRef = p0.parentRef,
-		onRequestImpressionsSignal = p0.onRequestImpressionsSignal,
+		parentRef = p1.parentRef,
+		onRequestImpressionsSignal = p1.onRequestImpressionsSignal,
 		getViewPortBounds = reactModule.useCallback(function()
-			-- upvalues: p0 (ref), getShopImpressionsViewportBounds (copy), var3 (ref)
-			return getShopImpressionsViewportBounds(var3, if p0.parentRef then p0.parentRef.current else nil)
-		end, { p0.parentRef, var3 }),
-		pageFilter = p0.pageFilter,
-		collectObjectsFunc = p0.collectObjectsFunc,
-		filterImpressionFunc = p0.filterImpressionFunc,
-		onImpressionsDetected = p0.onImpressionsDetected,
-		scanDebounceSeconds = p0.scanDebounceSeconds
+			-- upvalues: p1 (ref), getShopImpressionsViewportBounds (copy), var1 (ref)
+			return getShopImpressionsViewportBounds(var1, if p1.parentRef then p1.parentRef.current else nil)
+		end, { p1.parentRef, var1 }),
+		pageFilter = p1.pageFilter,
+		collectObjectsFunc = p1.collectObjectsFunc,
+		filterImpressionFunc = p1.filterImpressionFunc,
+		onImpressionsDetected = p1.onImpressionsDetected,
+		scanDebounceSeconds = p1.scanDebounceSeconds
 	})
 end

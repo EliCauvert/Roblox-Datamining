@@ -13,83 +13,83 @@
 		local t = {}
 		
 		for i_1 = 1, select("#", ...) do
-			local var2 = select(i_1, ...)
+			local var1 = select(i_1, ...)
 			local tCount = #t
 			
-			for i = 1, #var2 do
-				t[tCount + i] = var2[i]
+			for i = 1, #var1 do
+				t[tCount + i] = var1[i]
 			end
 		end
 		return t
 	end,
-	Set = function(value, p0, p1)
+	Set = function(value, p1, p2)
 		local t = {}
 		
 		for i, v in pairs(value) do
 			t[i] = v
 		end
-		t[p0] = p1
+		t[p1] = p2
 		
 		return t
 	end,
-	Append = function(p2, ...)
+	Append = function(p3, ...)
 		local t = {}
-		local p2Count = #p2
+		local p2Count = #p3
 		
 		for i = 1, p2Count do
-			t[i] = p2[i]
+			t[i] = p3[i]
 		end
 		for i_1 = 1, select("#", ...) do
 			t[p2Count + i_1] = select(i_1, ...)
 		end
 		return t
 	end,
-	RemoveFromDictionary = function(p3, ...)
-		local var8
+	RemoveFromDictionary = function(p4, ...)
+		local var2
 		local t = {}
 		
-		for i, v in pairs(p3) do
-			var8 = false
+		for i, v in pairs(p4) do
+			var2 = false
 			
 			for i_1 = 1, select("#", ...) do
 				if i ~= select(i_1, ...) then
 					continue
 				end
-				var8 = true
+				var2 = true
 				break
 			end
-			if not var8 then
+			if not var2 then
 				t[i] = v
 			end
 		end
 		return t
 	end,
-	RemoveFromList = function(p4, p5)
+	RemoveFromList = function(p5, p6)
 		local t = {}
 		
-		for i = 1, #p4 do
-			if i ~= p5 then
-				table.insert(t, p4[i])
+		for i = 1, #p5 do
+			if i ~= p6 then
+				table.insert(t, p5[i])
 			end
 		end
 		return t
 	end,
-	RemoveRangeFromList = function(p6, p7, p8)
+	RemoveRangeFromList = function(p7, p8, p9)
 		local t = {}
 		
-		for i = 1, #p6 do
-			if i < p7 or p7 + p8 <= i then
-				table.insert(t, p6[i])
+		for i = 1, #p7 do
+			if i < p8 or p8 + p9 <= i then
+				table.insert(t, p7[i])
 			end
 		end
 		return t
 	end,
-	RemoveValueFromList = function(p9, p10)
+	RemoveValueFromList = function(p10, p11)
 		local t = {}
 		
-		for i = 1, #p9 do
-			if p9[i] ~= p10 then
-				table.insert(t, p9[i])
+		for i = 1, #p10 do
+			if p10[i] ~= p11 then
+				table.insert(t, p10[i])
 			end
 		end
 		return t

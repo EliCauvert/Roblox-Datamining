@@ -4,7 +4,7 @@ local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local modules = robloxGui:WaitForChild("Modules")
 local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local eventIngestService = game:GetService("EventIngestService")
-local var6 = require(corePackagesService.Workspace.Packages.Analytics).Analytics.new(rbxAnalyticsService)
+local var1 = require(corePackagesService.Workspace.Packages.Analytics).Analytics.new(rbxAnalyticsService)
 local eventIngest = require(corePackagesService.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest
 local roactModule = require(corePackagesService.Packages.Roact)
 local settings = script:FindFirstAncestor("Settings")
@@ -17,16 +17,16 @@ local focusNavigationUtilsModule = require(corePackagesService.Workspace.Package
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local reportConfirmationContainerModule = require(settings.Components.ReportConfirmation.ReportConfirmationContainer)
-local var13 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
-local var14 = if var13 then require(robloxGui.Modules.Chrome.Service) else nil
+local var2 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var3 = if var2 then require(robloxGui.Modules.Chrome.Service) else nil
 local fFlagEnableConsoleExpControls = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
-local var15 = nil
+local var4 = nil
 
 local _ = function()
-	-- upvalues: var15 (write), roactModule (ref)
-	if var15 ~= nil then
-		roactModule.unmount(var15)
-		var15 = nil
+	-- upvalues: var4 (write), roactModule (ref)
+	if var4 ~= nil then
+		roactModule.unmount(var4)
+		var4 = nil
 	end
 end
 
@@ -35,9 +35,9 @@ while not localPlayer do
 	playersService.ChildAdded:wait()
 	localPlayer = playersService.LocalPlayer
 end
-local var16 = reportAbuseAnalytics.new(eventIngest.new(eventIngestService), var6.Diag, reportAbuseAnalytics.MenuContexts.LegacySentPage)
-local var17 = blockingAnalyticsModule.new(localPlayer.UserId, { EventStream = rbxAnalyticsService })
-local var18 = (function()
+local var5 = reportAbuseAnalytics.new(eventIngest.new(eventIngestService), var1.Diag, reportAbuseAnalytics.MenuContexts.LegacySentPage)
+local var6 = blockingAnalyticsModule.new(localPlayer.UserId, { EventStream = rbxAnalyticsService })
+local var7 = (function()
 	-- upvalues: settingsPageFactoryModule (ref), create (ref)
 	local reportSentPageV2 = settingsPageFactoryModule:CreateNewPage()
 	reportSentPageV2.TabHeader = nil
@@ -58,30 +58,30 @@ local var18 = (function()
 	return reportSentPageV2
 end)()
 
-function var18.UpdateMenu(p0)
-	-- upvalues: var15 (write), roactModule (ref), var16 (ref), var17 (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), reportConfirmationContainerModule (ref), var13 (ref), fFlagEnableConsoleExpControls (ref), var14 (ref)
-	local reportedPlayer = p0.ReportedPlayer
+function var18.UpdateMenu(p1)
+	-- upvalues: var4 (write), roactModule (ref), var5 (ref), var6 (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), reportConfirmationContainerModule (ref), var2 (ref), fFlagEnableConsoleExpControls (ref), var3 (ref)
+	local reportedPlayer = p1.ReportedPlayer
 	
-	if var15 ~= nil then
-		roactModule.unmount(var15)
-		var15 = nil
+	if var4 ~= nil then
+		roactModule.unmount(var4)
+		var4 = nil
 	end
-	if p0.settingsShowChangedSignal then
-		p0.settingsShowChangedSignal:disconnect()
-		p0.settingsShowChangedSignal = nil
+	if p1.settingsShowChangedSignal then
+		p1.settingsShowChangedSignal:disconnect()
+		p1.settingsShowChangedSignal = nil
 	end
-	p0.settingsShowChangedSignal = p0.HubRef.SettingsShowSignal:connect(function(p1)
-		-- upvalues: p0 (ref)
-		if not p1 then
-			p0:HandleDone()
+	p1.settingsShowChangedSignal = p1.HubRef.SettingsShowSignal:connect(function(p2)
+		-- upvalues: p1 (ref)
+		if not p2 then
+			p1:HandleDone()
 		end
 	end)
 	local bindableEvent = Instance.new("BindableEvent")
-	p0.SizeChangedSignal = p0.Root:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-		-- upvalues: bindableEvent (ref), p0 (ref)
-		bindableEvent:Fire(p0.Root.AbsoluteSize)
+	p1.SizeChangedSignal = p1.Root:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+		-- upvalues: bindableEvent (ref), p1 (ref)
+		bindableEvent:Fire(p1.Root.AbsoluteSize)
 	end)
-	local var21 = roactModule.createElement(coreScriptsRootProvider, {}, {
+	local var8 = roactModule.createElement(coreScriptsRootProvider, {}, {
 		FocusRoot = roactModule.createElement(focusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
@@ -94,50 +94,50 @@ function var18.UpdateMenu(p0)
 					DisplayName = reportedPlayer.DisplayName
 				},
 				closeMenu = function()
-					-- upvalues: p0 (ref)
-					p0:HandleDone()
+					-- upvalues: p1 (ref)
+					p1:HandleDone()
 				end,
-				isVoiceReport = p0.isVoiceReport,
-				ZIndex = p0.HubRef.Shield.ZIndex + 1,
-				reportAbuseAnalytics = var16,
-				blockingAnalytics = var17,
+				isVoiceReport = p1.isVoiceReport,
+				ZIndex = p1.HubRef.Shield.ZIndex + 1,
+				reportAbuseAnalytics = var5,
+				blockingAnalytics = var6,
 				onSizeChanged = bindableEvent.Event
 			})
 		})
 	})
 	
-	if var13 and fFlagEnableConsoleExpControls then
-		var14:setHideShortcutBar("ReportSentPageV2", true)
+	if var2 and fFlagEnableConsoleExpControls then
+		var3:setHideShortcutBar("ReportSentPageV2", true)
 	end
-	var15 = roactModule.mount(var21, p0.Root, "ReportSentPageV2")
+	var4 = roactModule.mount(var8, p1.Root, "ReportSentPageV2")
 end
 
-function var18.ShowReportedPlayer(p2, p3, p4)
-	-- upvalues: var18 (ref)
-	p2.ReportedPlayer = p3
-	p2.isVoiceReport = p4
-	p2:UpdateMenu()
-	p2.HubRef:SwitchToPage(var18, true)
+function var18.ShowReportedPlayer(p1, p2, p3)
+	-- upvalues: var7 (ref)
+	p1.ReportedPlayer = p2
+	p1.isVoiceReport = p3
+	p1:UpdateMenu()
+	p1.HubRef:SwitchToPage(var7, true)
 end
 
-function var18.HandleDone(p5)
-	-- upvalues: var13 (ref), fFlagEnableConsoleExpControls (ref), var14 (ref), var15 (write), roactModule (ref)
-	if var13 and fFlagEnableConsoleExpControls then
-		var14:setHideShortcutBar("ReportSentPageV2", false)
+function var18.HandleDone(p1)
+	-- upvalues: var2 (ref), fFlagEnableConsoleExpControls (ref), var3 (ref), var4 (write), roactModule (ref)
+	if var2 and fFlagEnableConsoleExpControls then
+		var3:setHideShortcutBar("ReportSentPageV2", false)
 	end
-	if var15 ~= nil then
-		roactModule.unmount(var15)
-		var15 = nil
+	if var4 ~= nil then
+		roactModule.unmount(var4)
+		var4 = nil
 	end
-	if p5.settingsShowChangedSignal then
-		p5.settingsShowChangedSignal:disconnect()
-		p5.settingsShowChangedSignal = nil
+	if p1.settingsShowChangedSignal then
+		p1.settingsShowChangedSignal:disconnect()
+		p1.settingsShowChangedSignal = nil
 	end
-	if p5.SizeChangedSignal then
-		p5.SizeChangedSignal:disconnect()
-		p5.SizeChangedSignal = nil
+	if p1.SizeChangedSignal then
+		p1.SizeChangedSignal:disconnect()
+		p1.SizeChangedSignal = nil
 	end
-	p5.HubRef:SetVisibility(false, true)
+	p1.HubRef:SetVisibility(false, true)
 end
 
-return var18
+return var7

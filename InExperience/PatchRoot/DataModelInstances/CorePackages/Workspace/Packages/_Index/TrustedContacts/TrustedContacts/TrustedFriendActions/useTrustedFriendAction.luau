@@ -8,25 +8,25 @@ return function(value)
 	-- upvalues: fFlagTFPassQRCodeSourceModule (ref), reactModule (ref), getTFActionModule (ref)
 	local userId = value.userId
 	local tokens = value.tokens
-	local var4 = if fFlagTFPassQRCodeSourceModule then value.sentFromQrCode else nil
-	local var5, var6 = reactModule.useState({ isLoading = true, enum = nil })
+	local var1 = if fFlagTFPassQRCodeSourceModule then value.sentFromQrCode else nil
+	local var2, var3 = reactModule.useState({ isLoading = true, enum = nil })
 	reactModule.useEffect(function()
-		-- upvalues: getTFActionModule (copy), userId (ref), tokens (ref), fFlagTFPassQRCodeSourceModule (copy), var4 (ref), var6 (ref)
+		-- upvalues: getTFActionModule (copy), userId (ref), tokens (ref), fFlagTFPassQRCodeSourceModule (copy), var1 (ref), var3 (ref)
 		getTFActionModule(userId, {
 			friendRequestToken = tokens,
-			sentFromQrCode = if fFlagTFPassQRCodeSourceModule then var4 else nil
-		}):andThen(function(p0)
-			-- upvalues: var6 (copy)
-			var6({ isLoading = false, enum = p0 })
+			sentFromQrCode = if fFlagTFPassQRCodeSourceModule then var1 else nil
+		}):andThen(function(p1)
+			-- upvalues: var3 (copy)
+			var3({ isLoading = false, enum = p1 })
 		end):catch(function(_)
-			-- upvalues: var6 (copy)
-			var6({ isLoading = false, enum = nil })
+			-- upvalues: var3 (copy)
+			var3({ isLoading = false, enum = nil })
 		end)
 	end, {
 		userId,
 		tokens,
-		if fFlagTFPassQRCodeSourceModule then var4 else nil
+		if fFlagTFPassQRCodeSourceModule then var1 else nil
 	})
 	
-	return var5
+	return var2
 end

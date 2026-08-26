@@ -1,5 +1,5 @@
 ﻿return {
-	mock = function(p0)
+	mock = function(p1)
 		return {
 			assetTypeId = -1,
 			assetType = "Image",
@@ -7,7 +7,7 @@
 			videoTitle = nil,
 			approved = true,
 			altText = "Alt Text",
-			imageId = p0 or 123456789
+			imageId = p1 or 123456789
 		}
 	end
 }

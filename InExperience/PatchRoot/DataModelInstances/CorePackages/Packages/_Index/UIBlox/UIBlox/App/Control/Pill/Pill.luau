@@ -33,16 +33,16 @@ pill.defaultProps = {
 	isLoading = false
 }
 
-function pill.init(p0)
+function pill.init(p1)
 	-- upvalues: controlStateModule (ref)
-	p0.state = { controlState = controlStateModule.Initialize }
+	p1.state = { controlState = controlStateModule.Initialize }
 end
 
 function pill.render(p1)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), getIconSizeModule (ref), iconSizeModule (ref), getTextSizeModule (ref), roactModule (ref), interactableModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), skeleton (ref), radius (ref)
 	return withStyleModule(function(p2)
 		-- upvalues: p1 (ref), controlStateModule (copy), getContentStyleModule (copy), getIconSizeModule (copy), iconSizeModule (copy), getTextSizeModule (copy), roactModule (copy), interactableModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), skeleton (copy), radius (copy)
-		local var24
+		local var1
 		local font = p2.Font
 		local isSelected = p1.props.isSelected
 		local isDisabled = p1.props.isDisabled
@@ -62,20 +62,20 @@ function pill.render(p1)
 			[controlStateModule.Default] = if isSelected then "SystemPrimaryDefault" else "BackgroundUIDefault",
 			[controlStateModule.Hover] = if isSelected then "SystemPrimaryOnHover" else "BackgroundUIDefault"
 		}
-		local var17 = getContentStyleModule(t, p1.state.controlState, p2)
-		local var18 = getContentStyleModule(t_1, p1.state.controlState, p2)
-		local var19 = getContentStyleModule(t_2, p1.state.controlState, p2)
-		local var20 = getIconSizeModule(iconSizeModule.Small)
-		local var21 = font.CaptionHeader.RelativeSize * font.BaseSize
-		local x = getTextSizeModule(text, var21, font.CaptionHeader.Font, Vector2.new(10000, 10000)).X
-		local var22 = x + 24
-		local var23 = 240 - (28 + var20)
+		local var2 = getContentStyleModule(t, p1.state.controlState, p2)
+		local var3 = getContentStyleModule(t_1, p1.state.controlState, p2)
+		local var4 = getContentStyleModule(t_2, p1.state.controlState, p2)
+		local var5 = getIconSizeModule(iconSizeModule.Small)
+		local var6 = font.CaptionHeader.RelativeSize * font.BaseSize
+		local x = getTextSizeModule(text, var6, font.CaptionHeader.Font, Vector2.new(10000, 10000)).X
+		local var7 = x + 24
+		local var8 = 240 - (28 + var5)
 		
 		if not isLoading then
-			var24 = roactModule.createElement(interactableModule, {
-				Size = UDim2.new(0, var22 + 4 + var20, 0, 28),
-				BackgroundColor3 = var19.Color,
-				BackgroundTransparency = var19.Transparency,
+			var1 = roactModule.createElement(interactableModule, {
+				Size = UDim2.new(0, var7 + 4 + var5, 0, 28),
+				BackgroundColor3 = var4.Color,
+				BackgroundTransparency = var4.Transparency,
 				AutoButtonColor = false,
 				BorderSizePixel = 0,
 				LayoutOrder = 1,
@@ -95,7 +95,7 @@ function pill.render(p1)
 				Content = roactModule.createElement("Frame", {
 					ClipsDescendants = true,
 					BackgroundTransparency = 1,
-					Size = UDim2.new(0, x + 4 + var20, 1, 0)
+					Size = UDim2.new(0, x + 4 + var5, 1, 0)
 				}, {
 					UIListLayout = roactModule.createElement("UIListLayout", {
 						Padding = UDim.new(0, 4),
@@ -106,39 +106,39 @@ function pill.render(p1)
 					Icon = roactModule.createElement(imageSetComponentModule.Label, {
 						BackgroundTransparency = 1,
 						AnchorPoint = Vector2.new(0.5, 0.5),
-						Size = UDim2.fromOffset(var20, var20),
+						Size = UDim2.fromOffset(var5, var5),
 						Image = icon,
-						ImageColor3 = var17.Color,
-						ImageTransparency = var17.Transparency
+						ImageColor3 = var2.Color,
+						ImageTransparency = var2.Transparency
 					}),
 					TextArea = string.len(text) > 0 and roactModule.createElement("Frame", {
 						LayoutOrder = 2,
 						BackgroundTransparency = 1,
-						Size = UDim2.fromOffset(x, var21)
+						Size = UDim2.fromOffset(x, var6)
 					}, {
 						PillText = roactModule.createElement(genericTextLabelModule, {
 							Text = text,
 							BackgroundTransparency = 1,
 							fontStyle = font.CaptionHeader,
-							colorStyle = var18,
+							colorStyle = var3,
 							TextTruncate = Enum.TextTruncate.AtEnd,
-							Size = UDim2.fromOffset(var23, var21),
+							Size = UDim2.fromOffset(var8, var6),
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextYAlignment = Enum.TextYAlignment.Center,
 							[roactModule.Ref] = p1.PillText
 						}),
-						roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var23, 28) })
+						roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var8, 28) })
 					}),
 					UISizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(216, 28) })
 				}),
 				UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
 				UISizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(240, 28) })
 			}) or roactModule.createElement(skeleton, {
-				Size = UDim2.fromOffset(var22 + 4 + var20, 28),
+				Size = UDim2.fromOffset(var7 + 4 + var5, 28),
 				radius = radius.Circle
 			})
 		end
-		return var24
+		return var1
 	end)
 end
 

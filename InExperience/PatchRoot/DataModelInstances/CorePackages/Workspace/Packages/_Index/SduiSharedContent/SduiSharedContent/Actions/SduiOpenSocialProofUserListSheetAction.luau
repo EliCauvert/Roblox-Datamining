@@ -6,33 +6,33 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, _, p1, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), playersService (ref), gameConnectionsPlayedChipClicked (ref), appPage (ref)
-	local var2 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var2 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing action params",
 			name = sduiActionType.OpenSocialProofUserListSheet
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local userIds = var2.userIds
+	local userIds = var1.userIds
 	
 	if userIds == nil or typeof(userIds) ~= "table" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing or invalid userIds",
 			name = sduiActionType.OpenSocialProofUserListSheet
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local sheetTitle = var2.sheetTitle
-	local universeId = var2.universeId
-	local placeId = var2.placeId
-	local totalConnections = var2.totalConnections
-	local analyticsSource = var2.analyticsSource
+	local sheetTitle = var1.sheetTitle
+	local universeId = var1.universeId
+	local placeId = var1.placeId
+	local totalConnections = var1.totalConnections
+	local analyticsSource = var1.analyticsSource
 	
 	if universeId and placeId and (totalConnections and analyticsSource) then
 		local userId = playersService.LocalPlayer and playersService.LocalPlayer.UserId
@@ -46,11 +46,11 @@ return function(p0, _, p1, _)
 	local t = {}
 	
 	for i, v in userIds do
-		local var5 = tonumber(if typeof(v) == "table" then v.userId else v)
+		local var2 = tonumber(if typeof(v) == "table" then v.userId else v)
 		
-		if var5 then
-			table.insert(t, var5)
+		if var2 then
+			table.insert(t, var2)
 		end
 	end
-	p1.dependencies.getNavigation().navigate(appPage.SocialProofVerticalUserListSheet, { extraProps = { userIds = t, title = sheetTitle } })
+	p2.dependencies.getNavigation().navigate(appPage.SocialProofVerticalUserListSheet, { extraProps = { userIds = t, title = sheetTitle } })
 end

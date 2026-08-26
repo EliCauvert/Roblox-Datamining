@@ -7,7 +7,7 @@ local useSignalState = signalsReactModule.useSignalState
 
 return function()
 	-- upvalues: useSignalState (ref), getAudioPlaybackStoreModule (ref), useAudioStoreModule (ref)
-	local var4 = useSignalState(useSignalState(getAudioPlaybackStoreModule).getLastPlayedAudioStore)
+	local var1 = useSignalState(useSignalState(getAudioPlaybackStoreModule).getLastPlayedAudioStore)
 	
-	return useAudioStoreModule(if var4 then var4.assetId else nil, if var4 then var4.usePreview else nil)
+	return useAudioStoreModule(if var1 then var1.assetId else nil, if var1 then var1.usePreview else nil)
 end

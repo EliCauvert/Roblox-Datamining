@@ -43,8 +43,8 @@ playerName.TextXAlignment = Enum.TextXAlignment.Left
 playerName.Size = UDim2.new(1, 0, 0, 14)
 playerName.Parent = healthbarContainer
 
-local function _(p0)
-	return Vector3.new(p0.r, p0.g, p0.b)
+local function _(p1)
+	return Vector3.new(p1.r, p1.g, p1.b)
 end
 
 local function FindChildOfType(p1, p2)
@@ -68,114 +68,114 @@ local function HealthbarColorTransferFunction(p3)
 	elseif p3 >= 0.8 then
 		return color3_3
 	end
-	local var28 = Vector3.new(0, 0, 0)
-	local var29 = 0
+	local var1 = Vector3.new(0, 0, 0)
+	local var2 = 0
 	
 	for i, v in pairs(t) do
-		local var31 = p3 - v
+		local var3 = p3 - v
 		
-		if var31 ~= 0 then
-			local var32 = 1 / (var31 * var31)
-			var28 += var32 * i
-			var29 += var32
+		if var3 ~= 0 then
+			local var4 = 1 / (var3 * var3)
+			var1 += var4 * i
+			var2 += var4
 			continue
 		end
 		return Color3.new(i.x, i.y, i.z)
 	end
-	local var30 = var28 / var29
+	local var5 = var1 / var2
 	
-	return Color3.new(var30.x, var30.y, var30.z)
+	return Color3.new(var5.x, var5.y, var5.z)
 end
 
 local _ = function(p4)
 	-- upvalues: healthbarFill (ref), HealthbarColorTransferFunction (ref)
-	local var33 = p4.Health / p4.MaxHealth
+	local var6 = p4.Health / p4.MaxHealth
 	
-	if var33 ~= var33 then
-		var33 = 1
+	if var6 ~= var6 then
+		var6 = 1
 	end
-	healthbarFill.ImageColor3 = HealthbarColorTransferFunction(var33)
-	healthbarFill.Size = UDim2.new(var33, 0, 1, 0)
+	healthbarFill.ImageColor3 = HealthbarColorTransferFunction(var6)
+	healthbarFill.Size = UDim2.new(var6, 0, 1, 0)
 end
 
-local var16 = nil
-local var17 = nil
+local var6 = nil
+local var7 = nil
 
-local function RegisterHumanoid(p5)
-	-- upvalues: var17 (write), var16 (write), playersService (ref), RegisterHumanoid (ref), healthbarFill (ref), HealthbarColorTransferFunction (ref)
-	if var17 then
-		var17:disconnect()
-		var17 = nil
+local function RegisterHumanoid(p4)
+	-- upvalues: var7 (write), var6 (write), playersService (ref), RegisterHumanoid (ref), healthbarFill (ref), HealthbarColorTransferFunction (ref)
+	if var7 then
+		var7:disconnect()
+		var7 = nil
 	end
-	if var16 then
-		var16:disconnect()
-		var16 = nil
+	if var6 then
+		var6:disconnect()
+		var6 = nil
 	end
-	if p5 then
-		var17 = p5.AncestryChanged:connect(function(p6, p7)
-			-- upvalues: playersService (copy), p5 (ref), RegisterHumanoid (copy)
+	if p4 then
+		var7 = p4.AncestryChanged:connect(function(p5, p6)
+			-- upvalues: playersService (copy), p4 (ref), RegisterHumanoid (copy)
 			local localPlayer = playersService.LocalPlayer
 			
-			if p6 == p5 and (not localPlayer or p7 ~= localPlayer.Character) then
+			if p5 == p4 and (not localPlayer or p6 ~= localPlayer.Character) then
 				RegisterHumanoid(nil)
 			end
 		end)
-		var16 = p5.HealthChanged:connect(function()
-			-- upvalues: p5 (ref), healthbarFill (copy), HealthbarColorTransferFunction (copy)
-			local var35 = p5.Health / p5.MaxHealth
+		var6 = p4.HealthChanged:connect(function()
+			-- upvalues: p4 (ref), healthbarFill (copy), HealthbarColorTransferFunction (copy)
+			local var8 = p4.Health / p4.MaxHealth
 			
-			if var35 ~= var35 then
-				var35 = 1
+			if var8 ~= var8 then
+				var8 = 1
 			end
-			healthbarFill.ImageColor3 = HealthbarColorTransferFunction(var35)
-			healthbarFill.Size = UDim2.new(var35, 0, 1, 0)
+			healthbarFill.ImageColor3 = HealthbarColorTransferFunction(var8)
+			healthbarFill.Size = UDim2.new(var8, 0, 1, 0)
 		end)
-		local var34 = p5.Health / p5.MaxHealth
+		local var8 = p4.Health / p4.MaxHealth
 		
-		if var34 ~= var34 then
-			var34 = 1
+		if var8 ~= var8 then
+			var8 = 1
 		end
-		healthbarFill.ImageColor3 = HealthbarColorTransferFunction(var34)
-		healthbarFill.Size = UDim2.new(var34, 0, 1, 0)
+		healthbarFill.ImageColor3 = HealthbarColorTransferFunction(var8)
+		healthbarFill.Size = UDim2.new(var8, 0, 1, 0)
 	end
 end
 
-local function OnCharacterChildAdded(p8)
+local function OnCharacterChildAdded(p4)
 	-- upvalues: playersService (ref), RegisterHumanoid (ref)
 	local localPlayer = playersService.LocalPlayer
 	
-	if localPlayer and p8.Parent == localPlayer.Character and p8:IsA("Humanoid") then
-		RegisterHumanoid(p8)
+	if localPlayer and p4.Parent == localPlayer.Character and p4:IsA("Humanoid") then
+		RegisterHumanoid(p4)
 	end
 end
 
 local childAddedConnection = nil
 
-local function OnCharacterAdded(p9)
+local function OnCharacterAdded(p4)
 	-- upvalues: FindChildOfType (ref), RegisterHumanoid (ref), childAddedConnection (write), OnCharacterChildAdded (ref)
-	local var36 = FindChildOfType(p9, "Humanoid")
+	local var8 = FindChildOfType(p4, "Humanoid")
 	
-	if var36 then
-		RegisterHumanoid(var36)
+	if var8 then
+		RegisterHumanoid(var8)
 	end
 	if childAddedConnection then
 		childAddedConnection:disconnect()
 		childAddedConnection = nil
 	end
-	childAddedConnection = p9.ChildAdded:connect(OnCharacterChildAdded)
+	childAddedConnection = p4.ChildAdded:connect(OnCharacterChildAdded)
 end
 
-local _ = function(p10)
+local _ = function(p4)
 	-- upvalues: playerName (ref), OnCharacterAdded (ref), FindChildOfType (ref), RegisterHumanoid (ref), childAddedConnection (write), OnCharacterChildAdded (ref)
-	playerName.Text = p10.Name
-	p10.CharacterAdded:connect(OnCharacterAdded)
+	playerName.Text = p4.Name
+	p4.CharacterAdded:connect(OnCharacterAdded)
 	
-	if p10.Character then
-		local character = p10.Character
-		local var37 = FindChildOfType(character, "Humanoid")
+	if p4.Character then
+		local character = p4.Character
+		local var8 = FindChildOfType(character, "Humanoid")
 		
-		if var37 then
-			RegisterHumanoid(var37)
+		if var8 then
+			RegisterHumanoid(var8)
 		end
 		if childAddedConnection then
 			childAddedConnection:disconnect()
@@ -192,10 +192,10 @@ if playersService.LocalPlayer then
 	
 	if localPlayer.Character then
 		local character = localPlayer.Character
-		local var22 = FindChildOfType(character, "Humanoid")
+		local var8 = FindChildOfType(character, "Humanoid")
 		
-		if var22 then
-			RegisterHumanoid(var22)
+		if var8 then
+			RegisterHumanoid(var8)
 		end
 		childAddedConnection = character.ChildAdded:connect(OnCharacterChildAdded)
 	end
@@ -211,10 +211,10 @@ else
 		
 		if localPlayer.Character then
 			local character = localPlayer.Character
-			local var38 = FindChildOfType(character, "Humanoid")
+			local var9 = FindChildOfType(character, "Humanoid")
 			
-			if var38 then
-				RegisterHumanoid(var38)
+			if var9 then
+				RegisterHumanoid(var9)
 			end
 			if childAddedConnection then
 				childAddedConnection:disconnect()
@@ -230,13 +230,13 @@ local t_1 = {
 	VRIsExclusive = false,
 	VRClosesNonExclusive = false
 }
-local var24 = nil
-local var25 = nil
-local var26 = nil
+local var9 = nil
+local var10 = nil
+local var11 = nil
 
-local function OnVREnabled(p11)
-	-- upvalues: userInputService (ref), corePackagesService (ref), healthbarBack (ref), healthbarFill (ref), playerName (ref), starterGuiService (ref), var24 (write), var25 (write), var26 (write), healthbarContainer (ref), t_1 (ref)
-	if p11 == "VREnabled" then
+local function OnVREnabled(p4)
+	-- upvalues: userInputService (ref), corePackagesService (ref), healthbarBack (ref), healthbarFill (ref), playerName (ref), starterGuiService (ref), var9 (write), var10 (write), var11 (write), healthbarContainer (ref), t_1 (ref)
+	if p4 == "VREnabled" then
 		if userInputService.VREnabled then
 			local VRHub = require(corePackagesService.Workspace.Packages.VrCommon).VRHub
 			local panel3D = require(corePackagesService.Workspace.Packages.VrCommon).Panel3D
@@ -245,26 +245,26 @@ local function OnVREnabled(p11)
 			healthbar:SetType(panel3D.Type.Fixed, { CFrame = CFrame.new(0, 0, -5) })
 			healthbar:SetVisible(true)
 			
-			function healthbar.PreUpdate(p12, _, _, _, _)
+			function healthbar.PreUpdate(p5, _, _, _, _)
 				-- upvalues: panel3D (ref), healthbar (ref)
 				local backpack = panel3D.Get("Backpack") or panel3D.Get("Topbar3D")
 				local topbar3D = panel3D.Get("Topbar3D")
 				
 				if backpack and topbar3D then
-					p12.localCF = (backpack.localCF or CFrame.new()) * CFrame.new(math.max(topbar3D.width, backpack.width) / 2 - healthbar.width / 2 - 0.11, 0.25, 0.1)
+					p5.localCF = (backpack.localCF or CFrame.new()) * CFrame.new(math.max(topbar3D.width, backpack.width) / 2 - healthbar.width / 2 - 0.11, 0.25, 0.1)
 				end
 			end
 			
 			function healthbar.CalculateTransparency(_)
 				-- upvalues: panel3D (ref), healthbarBack (copy), healthbarFill (copy), playerName (copy)
-				local var45
+				local var12
 				local backpack = panel3D.Get("Backpack")
 				local topbar3D = panel3D.Get("Topbar3D")
 				
 				if backpack then
-					var45 = backpack:IsVisible() and (backpack:CalculateTransparency() or 1)
+					var12 = backpack:IsVisible() and (backpack:CalculateTransparency() or 1)
 				end
-				local minValue = math.min(var45, topbar3D and (topbar3D:IsVisible() and (topbar3D:CalculateTransparency() or 1)))
+				local minValue = math.min(var12, topbar3D and (topbar3D:IsVisible() and (topbar3D:CalculateTransparency() or 1)))
 				healthbarBack.ImageTransparency = minValue
 				healthbarFill.ImageTransparency = minValue
 				playerName.TextTransparency = minValue
@@ -272,76 +272,76 @@ local function OnVREnabled(p11)
 				return minValue
 			end
 			
-			local var40 = false
+			local var12 = false
 			
 			local function _()
-				-- upvalues: VRHub (ref), var40 (write)
+				-- upvalues: VRHub (ref), var12 (write)
 				for i, v in pairs(VRHub:GetOpenedModules()) do
 					if v.VRIsExclusive then
-						var40 = true
+						var12 = true
 						
 						return
 					end
 				end
-				var40 = false
+				var12 = false
 			end
 			
 			local _ = function()
-				-- upvalues: starterGuiService (copy), var40 (write)
-				return starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var40
+				-- upvalues: starterGuiService (copy), var12 (write)
+				return starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var12
 			end
 			
-			var24 = starterGuiService.CoreGuiChangedSignal:connect(function()
-				-- upvalues: healthbar (ref), starterGuiService (copy), var40 (write)
-				healthbar:SetVisible(starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var40)
+			var9 = starterGuiService.CoreGuiChangedSignal:connect(function()
+				-- upvalues: healthbar (ref), starterGuiService (copy), var12 (write)
+				healthbar:SetVisible(starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var12)
 			end)
-			var25 = VRHub.ModuleOpened.Event:connect(function(_)
-				-- upvalues: VRHub (ref), var40 (write), healthbar (ref), starterGuiService (copy)
+			var10 = VRHub.ModuleOpened.Event:connect(function(_)
+				-- upvalues: VRHub (ref), var12 (write), healthbar (ref), starterGuiService (copy)
 				for i, v in pairs(VRHub:GetOpenedModules()) do
 					if v.VRIsExclusive then
-						var40 = true
-						healthbar:SetVisible(starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var40)
+						var12 = true
+						healthbar:SetVisible(starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var12)
 						
 						return
 					end
 				end
-				var40 = false
+				var12 = false
 			end)
-			var26 = VRHub.ModuleClosed.Event:connect(function(_)
-				-- upvalues: VRHub (ref), var40 (write), healthbar (ref), starterGuiService (copy)
+			var11 = VRHub.ModuleClosed.Event:connect(function(_)
+				-- upvalues: VRHub (ref), var12 (write), healthbar (ref), starterGuiService (copy)
 				for i, v in pairs(VRHub:GetOpenedModules()) do
 					if v.VRIsExclusive then
-						var40 = true
-						healthbar:SetVisible(starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var40)
+						var12 = true
+						healthbar:SetVisible(starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var12)
 						
 						return
 					end
 				end
-				var40 = false
+				var12 = false
 			end)
 			
 			for i, v in pairs(VRHub:GetOpenedModules()) do
 				if v.VRIsExclusive then
-					var40 = true
-					healthbar:SetVisible(starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var40)
+					var12 = true
+					healthbar:SetVisible(starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var12)
 					healthbarContainer.Parent = healthbar:GetGUI()
 					VRHub:RegisterModule(t_1)
 					
 					return
 				end
 			end
-			var40 = false
-		elseif var24 then
-			var24:disconnect()
-			var24 = nil
+			var12 = false
+		elseif var9 then
+			var9:disconnect()
+			var9 = nil
 		end
-		if var25 then
-			var25:disconnect()
-			var25 = nil
+		if var10 then
+			var10:disconnect()
+			var10 = nil
 		end
-		if var26 then
-			var26:disconnect()
-			var26 = nil
+		if var11 then
+			var11:disconnect()
+			var11 = nil
 		end
 		healthbarContainer.Parent = nil
 	end

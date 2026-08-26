@@ -1,11 +1,11 @@
-﻿return function(p0, p1)
-	if not p0 or p0 == "" then
+﻿return function(p1, p2)
+	if not p1 or p1 == "" then
 		return false
 	end
-	for i, v in string.split(p0, ",") do
-		local var0 = v:match("^%s*(.-)%s*$")
+	for i, v in string.split(p1, ",") do
+		local var1 = v:match("^%s*(.-)%s*$")
 		
-		if var0 and tonumber(var0) == p1 then
+		if var1 and tonumber(var1) == p2 then
 			return true
 		end
 	end

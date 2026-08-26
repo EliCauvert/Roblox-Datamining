@@ -91,11 +91,11 @@
 			universeId = "789"
 		}
 	},
-	convertGraphQlOnlineFriendsToPresenceApiFormat = function(p0)
+	convertGraphQlOnlineFriendsToPresenceApiFormat = function(p1)
 		local t = {}
 		local t_1 = {}
 		
-		for i, v in p0 do
+		for i, v in p1 do
 			local id = v.id
 			local presence = v.presence
 			table.insert(t, {

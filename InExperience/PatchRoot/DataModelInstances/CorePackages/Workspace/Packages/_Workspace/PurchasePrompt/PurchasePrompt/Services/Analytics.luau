@@ -23,36 +23,36 @@ return {
 		local function GetPlatformString()
 			-- upvalues: userInputService (copy), getFFlagUsePlatformNameForUnknownModule (copy), httpService (copy), getFFlagEnableQuestIAPAnalyticsModule (copy), getFFlagEnableLuobuInGameUpsellModule (copy)
 			local platform = userInputService:GetPlatform()
-			local var12 = if getFFlagUsePlatformNameForUnknownModule() then tostring(platform) else "UNKNOWN"
+			local var1 = if getFFlagUsePlatformNameForUnknownModule() then tostring(platform) else "UNKNOWN"
 			
 			if platform == Enum.Platform.Windows then
-				var12 = "Windows"
+				var1 = "Windows"
 			elseif platform == Enum.Platform.OSX then
-				var12 = "OSX"
+				var1 = "OSX"
 			elseif platform == Enum.Platform.IOS then
-				var12 = "IOS"
+				var1 = "IOS"
 			elseif platform == Enum.Platform.Android then
 				local userAgent = httpService:GetUserAgent()
-				var12 = if getFFlagEnableQuestIAPAnalyticsModule() and string.find(userAgent, "OculusQuest3Store") then "Quest" elseif string.find(userAgent, "AmazonAppStore") then "Amazon" else "Android"
+				var1 = if getFFlagEnableQuestIAPAnalyticsModule() and string.find(userAgent, "OculusQuest3Store") then "Quest" elseif string.find(userAgent, "AmazonAppStore") then "Amazon" else "Android"
 			elseif platform == Enum.Platform.XBoxOne then
-				var12 = "XBoxOne"
+				var1 = "XBoxOne"
 			elseif platform == Enum.Platform.UWP then
-				var12 = "UWP"
+				var1 = "UWP"
 			elseif platform == Enum.Platform.PS4 then
-				var12 = "PlayStation"
+				var1 = "PlayStation"
 			end
 			if getFFlagEnableLuobuInGameUpsellModule() then
-				var12 += "-Luobu"
+				var1 += "-Luobu"
 			end
-			return var12
+			return var1
 		end
 		
-		local function _(p0)
+		local function _(p1)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			if runService:IsStudio() then
 				return
 			end
-			rbxAnalyticsService:ReportCounter(p0 .. GetPlatformString())
+			rbxAnalyticsService:ReportCounter(p1 .. GetPlatformString())
 		end
 		
 		function t.sendCounter(p1)
@@ -63,20 +63,20 @@ return {
 			rbxAnalyticsService:ReportCounter(p1)
 		end
 		
-		local _ = function(p2, p3)
+		local _ = function(p1, p2)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			if runService:IsStudio() then
 				return
 			end
-			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", p2, p3 or {})
+			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", p1, p2 or {})
 		end
 		
-		function t.signalEvent(value, p4)
+		function t.signalEvent(value, p1)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			if runService:IsStudio() then
 				return
 			end
-			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", value, p4 or {})
+			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", value, p1 or {})
 		end
 		
 		function t.reportRobuxUpsellStarted()
@@ -84,14 +84,14 @@ return {
 			return marketplaceService:ReportRobuxUpsellStarted()
 		end
 		
-		function t.signalPurchaseSuccess(value, p5, p6, p7)
+		function t.signalPurchaseSuccess(value, p1, p2, p3)
 			-- upvalues: marketplaceService (copy), playersService (copy)
-			if p5 == Enum.InfoType.Product then
-				marketplaceService:SignalClientPurchaseSuccess(p7.receipt, playersService.LocalPlayer.UserId, value)
+			if p1 == Enum.InfoType.Product then
+				marketplaceService:SignalClientPurchaseSuccess(p3.receipt, playersService.LocalPlayer.UserId, value)
 				
 				return
 			end
-			marketplaceService:ReportAssetSale(value, p6)
+			marketplaceService:ReportAssetSale(value, p2)
 		end
 		
 		function t.signalPremiumUpsellShownPremium()
@@ -167,12 +167,12 @@ return {
 			rbxAnalyticsService:ReportCounter("FailedBalanceCheckPostUpsell" .. GetPlatformString())
 		end
 		
-		function t.signalProductPurchaseShown(value, p8)
+		function t.signalProductPurchaseShown(value, p1)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = tostring(p8)
+				requestType = tostring(p1)
 			}
 			
 			if not runService:IsStudio() then
@@ -184,13 +184,13 @@ return {
 			rbxAnalyticsService:ReportCounter("ProductPurchaseShown" .. GetPlatformString())
 		end
 		
-		function t.signalProductPurchaseUpsellShown(value, p9, p10)
+		function t.signalProductPurchaseUpsellShown(value, p1, p2)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = tostring(p9),
-				iapProductId = p10
+				requestType = tostring(p1),
+				iapProductId = p2
 			}
 			
 			if not runService:IsStudio() then
@@ -202,12 +202,12 @@ return {
 			rbxAnalyticsService:ReportCounter("ProductPurchaseUpsellShown" .. GetPlatformString())
 		end
 		
-		function t.signalProductPurchaseConfirmed(value, p11)
+		function t.signalProductPurchaseConfirmed(value, p1)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = tostring(p11)
+				requestType = tostring(p1)
 			}
 			
 			if not runService:IsStudio() then
@@ -219,13 +219,13 @@ return {
 			rbxAnalyticsService:ReportCounter("ProductPurchaseConfirmed" .. GetPlatformString())
 		end
 		
-		function t.signalProductPurchaseUpsellConfirmed(value, p12, p13)
+		function t.signalProductPurchaseUpsellConfirmed(value, p1, p2)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = tostring(p12),
-				iapProductId = p13
+				requestType = tostring(p1),
+				iapProductId = p2
 			}
 			
 			if not runService:IsStudio() then
@@ -237,13 +237,13 @@ return {
 			rbxAnalyticsService:ReportCounter("ProductPurchaseUpsellConfirmed" .. GetPlatformString())
 		end
 		
-		function t.signalScaryModalShown(value, p14, p15)
+		function t.signalScaryModalShown(value, p1, p2)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = p14,
-				iapProductId = p15 or ""
+				requestType = p1,
+				iapProductId = p2 or ""
 			}
 			
 			if not runService:IsStudio() then
@@ -257,13 +257,13 @@ return {
 			rbxAnalyticsService:ReportCounter(text .. GetPlatformString())
 		end
 		
-		function t.signalScaryModalConfirmed(value, p16, p17)
+		function t.signalScaryModalConfirmed(value, p1, p2)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = p16,
-				iapProductId = p17 or ""
+				requestType = p1,
+				iapProductId = p2 or ""
 			}
 			
 			if not runService:IsStudio() then
@@ -277,13 +277,13 @@ return {
 			rbxAnalyticsService:ReportCounter(text .. GetPlatformString())
 		end
 		
-		function t.signalScaryModalCanceled(value, p18, p19)
+		function t.signalScaryModalCanceled(value, p1, p2)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = p18,
-				iapProductId = p19 or ""
+				requestType = p1,
+				iapProductId = p2 or ""
 			}
 			
 			if not runService:IsStudio() then
@@ -297,13 +297,13 @@ return {
 			rbxAnalyticsService:ReportCounter(text .. GetPlatformString())
 		end
 		
-		function t.signalXboxInGamePurchaseCanceled(value, p20, p21)
+		function t.signalXboxInGamePurchaseCanceled(value, p1, p2)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = p20,
-				iapProductId = p21 or ""
+				requestType = p1,
+				iapProductId = p2 or ""
 			}
 			
 			if not runService:IsStudio() then
@@ -314,13 +314,13 @@ return {
 			end
 		end
 		
-		function t.signalXboxInGamePurchaseSuccess(value, p22, p23)
+		function t.signalXboxInGamePurchaseSuccess(value, p1, p2)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = p22,
-				iapProductId = p23 or ""
+				requestType = p1,
+				iapProductId = p2 or ""
 			}
 			
 			if not runService:IsStudio() then
@@ -331,13 +331,13 @@ return {
 			end
 		end
 		
-		function t.signalXboxInGamePurchaseFailure(value, p24, p25)
+		function t.signalXboxInGamePurchaseFailure(value, p1, p2)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = p24,
-				iapProductId = p25 or ""
+				requestType = p1,
+				iapProductId = p2 or ""
 			}
 			
 			if not runService:IsStudio() then
@@ -348,12 +348,12 @@ return {
 			end
 		end
 		
-		function t.signalTwoSVSettingsErrorShown(value, p26)
+		function t.signalTwoSVSettingsErrorShown(value, p1)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = p26
+				requestType = p1
 			}
 			
 			if not runService:IsStudio() then
@@ -365,12 +365,12 @@ return {
 			rbxAnalyticsService:ReportCounter("2SVSettingsErrorShown" .. GetPlatformString())
 		end
 		
-		function t.signalTwoSVSettingsErrorConfirmed(value, p27)
+		function t.signalTwoSVSettingsErrorConfirmed(value, p1)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
 				productId = value,
-				requestType = p27
+				requestType = p1
 			}
 			
 			if not runService:IsStudio() then
@@ -420,12 +420,12 @@ return {
 			rbxAnalyticsService:ReportCounter(text .. GetPlatformString())
 		end
 		
-		function t.signalEconomicRestrictionError(value, p28)
+		function t.signalEconomicRestrictionError(value, p1)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			local t = {
 				gameID = game.GameId,
 				violationType = value,
-				timeoutMinutes = p28
+				timeoutMinutes = p1
 			}
 			
 			if runService:IsStudio() then

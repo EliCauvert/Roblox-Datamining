@@ -18,67 +18,67 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigation (ref), useLocalization (ref), reactModule (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusOnMountEffectModule (ref), view (ref), text (ref), AXPartialPageModalModule (ref), buttonVariant (ref), inputSize (ref)
-	local var8 = useNavigation()
-	local var9 = useLocalization({
+	local var1 = useNavigation()
+	local var2 = useLocalization({
 		confirmButtonText = "Feature.Avatar.Action.GotIt",
 		enhancedAvatarHeadsTitle = "Feature.Avatar.Title.EnhancedAvatarHeads",
 		enhancedAvatarHeadsMessage = "Feature.Avatar.Message.EnhancedAvatarHeads"
 	})
-	local onConfirm = p0.onConfirm or (var8.state.params or {}).onConfirm
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref)
-		var8.goBack()
-	end, { var8 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), onConfirm (ref)
-		var11()
+	local onConfirm = p1.onConfirm or (var1.state.params or {}).onConfirm
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref)
+		var1.goBack()
+	end, { var1 })
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), onConfirm (ref)
+		var3()
 		
 		if onConfirm then
 			onConfirm()
 		end
-	end, { onConfirm, var11 })
-	local var13, var14 = reactModule.useState(false)
-	local var15 = reactModule.useRef(nil)
+	end, { onConfirm, var3 })
+	local var5, var6 = reactModule.useState(false)
+	local var7 = reactModule.useRef(nil)
 	reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var12 (ref)
+		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var4 (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p1)
-					-- upvalues: var12 (copy)
-					p1.cancelled = true
-					var12()
+				handler = inputHandlersModule.onRelease(function(p2)
+					-- upvalues: var4 (copy)
+					p2.cancelled = true
+					var4()
 				end)
 			}
 		}
-	end, { var12 }), reactFocusNavigationModule.useEventMap(t, var15))
+	end, { var4 }), reactFocusNavigationModule.useEventMap(t, var7))
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref)
-		var14(true)
+		-- upvalues: var6 (ref)
+		var6(true)
 	end, {})
-	useFocusOnMountEffectModule(var15, 0.15)
+	useFocusOnMountEffectModule(var7, 0.15)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		SelectionGroup = true,
 		Size = UDim2.fromScale(1, 1),
-		ref = var15,
+		ref = var7,
 		SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 		SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 		SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 		SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 	}, {
 		Modal = reactModule.createElement(AXPartialPageModalModule, {
-			visible = var13,
-			onBackgroundPress = var12,
+			visible = var5,
+			onBackgroundPress = var4,
 			buttonStackProps = {
 				rowLayout = false,
 				buttons = {
 					{
 						props = {
-							onActivated = var12,
-							text = var9.confirmButtonText,
+							onActivated = var4,
+							text = var2.confirmButtonText,
 							variant = buttonVariant.Emphasis,
 							size = inputSize.Medium
 						}
@@ -92,12 +92,12 @@ return function(p0)
 				PromptBodyTitle = reactModule.createElement(text, {
 					tag = "auto-xy padding-bottom-small padding-top-medium text-heading-small text-wrap text-align-x-left",
 					LayoutOrder = 1,
-					Text = var9.enhancedAvatarHeadsTitle
+					Text = var2.enhancedAvatarHeadsTitle
 				}),
 				PromptBodyText = reactModule.createElement(text, {
 					tag = "auto-xy text-body-large text-wrap text-align-x-left",
 					LayoutOrder = 2,
-					Text = var9.enhancedAvatarHeadsMessage
+					Text = var2.enhancedAvatarHeadsMessage
 				})
 			})
 		})

@@ -1,6 +1,6 @@
 ﻿local useGuiStateModule = require(script.Parent.useGuiState)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useGuiStateModule (ref)
-	return useGuiStateModule(p0) == Enum.GuiState.Hover
+	return useGuiStateModule(p1) == Enum.GuiState.Hover
 end

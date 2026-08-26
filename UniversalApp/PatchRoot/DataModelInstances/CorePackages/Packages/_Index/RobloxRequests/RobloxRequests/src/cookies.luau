@@ -2,8 +2,8 @@
 local jsonModule = require(parent.src.json)
 local urlModule = require(parent.lib.url)
 
-local function _(p0)
-	return tonumber(p0) or p0
+local function _(p1)
+	return tonumber(p1) or p1
 end
 
 local function trim(p1)
@@ -35,31 +35,31 @@ end
 function t:fromSet()
 	-- upvalues: trim (ref), t (ref)
 	local t_1 = {}
-	local var8 = self:split(";")
-	local var9 = var8[1]:split("=")
-	local var10 = trim(var9[1])
-	local var11 = trim(var9[2])
+	local var1 = self:split(";")
+	local var2 = var1[1]:split("=")
+	local var3 = trim(var2[1])
+	local var4 = trim(var2[2])
 	
-	for i = 2, #var8 do
-		local var12 = var8[i]:split("=")
-		t_1[trim(var12[1]):lower()] = trim(var12[2])
+	for i = 2, #var1 do
+		local var5 = var1[i]:split("=")
+		t_1[trim(var5[1]):lower()] = trim(var5[2])
 	end
-	return t.new(var10, var11, t_1)
+	return t.new(var3, var4, t_1)
 end
 
-function t:matches(p5)
+function t:matches(p2)
 	-- upvalues: urlModule (ref)
 	if not self.domain then
 		return true
 	end
-	local var13 = urlModule.parse(p5)
+	local var6 = urlModule.parse(p2)
 	
 	if self.domain:sub(1, 1) == "." then
-		if var13.host:sub(-#self.domain, -1) ~= self.domain and var13.host ~= self.domain:sub(2) then
+		if var6.host:sub(-#self.domain, -1) ~= self.domain and var6.host ~= self.domain:sub(2) then
 			return false
 		end
 	else
-		return var13.host == self.domain and (self.path and not var13.path:sub(1, #self.path) == self.path)
+		return var6.host == self.domain and (self.path and not var6.path:sub(1, #self.path) == self.path)
 	end
 end
 
@@ -75,33 +75,33 @@ function t_1.new()
 	return tbl
 end
 
-function t_1:insert(p6, p7, p8)
+function t_1:insert(p2, p3, p4)
 	-- upvalues: t (ref)
-	self.cookies[p6] = t.new(p6, p7, p8)
+	self.cookies[p2] = t.new(p2, p3, p4)
 	
 	return self
 end
 
-function t_1:SetCookie(p9)
+function t_1:SetCookie(p2)
 	-- upvalues: t (ref)
-	local var15 = t.fromSet(p9)
-	self.cookies[var15.name] = var15
+	local var6 = t.fromSet(p2)
+	self.cookies[var6.name] = var6
 end
 
-function t_1:delete(p10)
-	self.cookies[p10] = nil
+function t_1:delete(p2)
+	self.cookies[p2] = nil
 end
 
 function t_1:string(_)
-	local var16 = ""
+	local var6 = ""
 	
 	for i, v in pairs(self.cookies) do
-		if var16 then
-			var16 ..= "; "
+		if var6 then
+			var6 ..= "; "
 		end
-		var16 ..= ("%s=%s"):format(v.name, v.value)
+		var6 ..= ("%s=%s"):format(v.name, v.value)
 	end
-	return var16
+	return var6
 end
 
 function t_1:__tostring()

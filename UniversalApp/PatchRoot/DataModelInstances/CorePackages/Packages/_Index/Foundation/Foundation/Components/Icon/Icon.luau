@@ -23,48 +23,48 @@ local t = {
 	variant = iconVariant.Regular
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextSizeOffsetModule (ref), migrateIconNameModule (ref), useIconSizeModule (ref), isBuilderIconModule (ref), migrateFontSizeModule (ref), loggerModule (ref), reactModule (ref), imageModule (ref), withCommonPropsModule (ref), textModule (ref), font (ref)
-	local var16 = withDefaultsModule(p0, t)
-	local var17 = useTokensModule()
-	local var18 = useTextSizeOffsetModule()
-	local var19 = migrateIconNameModule(var16.name)
-	local var20 = useIconSizeModule(var16.size, isBuilderIconModule(var16.name))
-	local variant = var16.variant
-	local name = var16.name
-	local var21 = if typeof(var20) == "table" then nil else var20.Y.Offset
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = useTextSizeOffsetModule()
+	local var4 = migrateIconNameModule(var1.name)
+	local var5 = useIconSizeModule(var1.size, isBuilderIconModule(var1.name))
+	local variant = var1.variant
+	local name = var1.name
+	local var6 = if typeof(var5) == "table" then nil else var5.Y.Offset
 	
-	if not isBuilderIconModule(name) and var19 then
-		if typeof(var20) == "table" then
+	if not isBuilderIconModule(name) and var4 then
+		if typeof(var5) == "table" then
 			error("Binding size isn't supported when migrating a UIBlox icon, use Builder Icons directly")
 		end
-		variant = var19.variant or variant
-		name = var19.name
-		var21 = migrateFontSizeModule(var21, var17)
+		variant = var4.variant or variant
+		name = var4.name
+		var6 = migrateFontSizeModule(var6, var2)
 	end
-	local style = var16.style or var17.Color.Content.Default
+	local style = var1.style or var2.Color.Content.Default
 	
-	if isBuilderIconModule(name) or var19 then
-		return reactModule.createElement(textModule, withCommonPropsModule(var16, {
+	if isBuilderIconModule(name) or var4 then
+		return reactModule.createElement(textModule, withCommonPropsModule(var1, {
 			textStyle = style,
 			Text = name,
-			fontStyle = { Font = font[variant], FontSize = var21 },
-			TextScaled = typeof(var20) == "table",
-			Size = var20,
-			ref = p1,
-			Rotation = var16.Rotation
+			fontStyle = { Font = font[variant], FontSize = var6 },
+			TextScaled = typeof(var5) == "table",
+			Size = var5,
+			ref = p2,
+			Rotation = var1.Rotation
 		}), {
-			UITextSizeConstraint = if var18 > 0 and var21 then reactModule.createElement("UITextSizeConstraint", { MaxTextSize = var21 }) else nil,
-			Children = reactModule.createElement(reactModule.Fragment, nil, var16.children)
+			UITextSizeConstraint = if var3 > 0 and var6 then reactModule.createElement("UITextSizeConstraint", { MaxTextSize = var6 }) else nil,
+			Children = reactModule.createElement(reactModule.Fragment, nil, var1.children)
 		})
-	elseif p0.variant ~= nil then
+	elseif p1.variant ~= nil then
 		loggerModule:warning("variant is not supported when using FoundationImages, consider using BuilderIcons")
 	end
-	return reactModule.createElement(imageModule, withCommonPropsModule(var16, {
+	return reactModule.createElement(imageModule, withCommonPropsModule(var1, {
 		imageStyle = style,
 		Image = name,
-		Size = var20,
-		ref = p1,
-		Rotation = var16.Rotation
-	}), var16.children)
+		Size = var5,
+		ref = p2,
+		Rotation = var1.Rotation
+	}), var1.children)
 end))

@@ -26,24 +26,24 @@ emptyResultsView.defaultProps = { layoutOrder = 0, pageLoadingTimeReport = nil }
 local function _(value)
 	-- upvalues: preloadAsset (ref), assets (ref)
 	preloadAsset(value)
-	local var10 = assets[value]
+	local var1 = assets[value]
 	
-	return var10.assetId, var10.size
+	return var1.assetId, var1.size
 end
 
-function emptyResultsView.render(p0)
+function emptyResultsView.render(p1)
 	-- upvalues: withStyle (ref), withLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), roact (ref), constantsModule (ref), migrateEmptyResultsViewToFoundation (ref), image (ref), fFlagFriendsEmptyStateIllustrationThemingModule (ref), imageSetLabel (ref), images (ref), appFonts (ref)
-	return withStyle(function(p1)
-		-- upvalues: withLocalization (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy), roact (copy), constantsModule (copy), p0 (ref), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), appFonts (copy)
+	return withStyle(function(p2)
+		-- upvalues: withLocalization (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy), roact (copy), constantsModule (copy), p1 (ref), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), appFonts (copy)
 		return withLocalization({
 			noResultsText = "CommonUI.Messages.Response.NoResults",
 			addFriendsBtn = if fFlagConnectionsToFriendsRename then textKeysModule.ADD_FRIENDS_BTN else textKeysModule.ADD_CONNECTIONS_BTN
-		})(function(p2)
-			-- upvalues: roact (copy), constantsModule (copy), p0 (copy), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), p1 (ref), appFonts (copy)
+		})(function(p3)
+			-- upvalues: roact (copy), constantsModule (copy), p1 (copy), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), p2 (ref), appFonts (copy)
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, -(constantsModule.TOP_BAR_HEIGHT + 45)),
-				LayoutOrder = p0.props.layoutOrder
+				LayoutOrder = p1.props.layoutOrder
 			}, {
 				IndicatorInner = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -61,15 +61,15 @@ function emptyResultsView.render(p0)
 					}),
 					Imagelabel = if migrateEmptyResultsViewToFoundation then roact.createElement(image, {
 						LayoutOrder = 1,
-						Image = p0.props.assetId,
-						imageStyle = if fFlagFriendsEmptyStateIllustrationThemingModule then p0.props.tokens.Color.Content.Emphasis else nil,
-						Size = UDim2.fromOffset(p0.props.assetSize.X, p0.props.assetSize.Y)
+						Image = p1.props.assetId,
+						imageStyle = if fFlagFriendsEmptyStateIllustrationThemingModule then p1.props.tokens.Color.Content.Emphasis else nil,
+						Size = UDim2.fromOffset(p1.props.assetSize.X, p1.props.assetSize.Y)
 					}) else roact.createElement(imageSetLabel, {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
 						Image = images["icons/status/oof_xlarge"],
-						ImageColor3 = p1.Theme.TextMuted.Color,
-						ImageTransparency = p1.Theme.TextMuted.Transparency,
+						ImageColor3 = p2.Theme.TextMuted.Color,
+						ImageTransparency = p2.Theme.TextMuted.Transparency,
 						Size = UDim2.new(0, 96, 0, 96)
 					}),
 					Textlabel = roact.createElement("TextLabel", {
@@ -78,10 +78,10 @@ function emptyResultsView.render(p0)
 						AutomaticSize = Enum.AutomaticSize.XY,
 						Font = appFonts.default:getDefault(),
 						Size = UDim2.new(0, 0, 0, 0),
-						Text = p2.noResultsText,
-						TextColor3 = p1.Theme.TextMuted.Color,
-						TextSize = p1.Font.Header2.RelativeSize * p1.Font.BaseSize,
-						TextTransparency = p1.Theme.TextMuted.Transparency
+						Text = p3.noResultsText,
+						TextColor3 = p2.Theme.TextMuted.Color,
+						TextSize = p2.Font.Header2.RelativeSize * p2.Font.BaseSize,
+						TextTransparency = p2.Theme.TextMuted.Transparency
 					})
 				})
 			})
@@ -89,12 +89,12 @@ function emptyResultsView.render(p0)
 	end)
 end
 
-return if migrateEmptyResultsViewToFoundation then function(p3)
+return if migrateEmptyResultsViewToFoundation then function(p1)
 	-- upvalues: preloadAsset (ref), assets (ref), useTokens (ref), roact (ref), emptyResultsView (ref), cryoModule (ref)
 	preloadAsset("pictograms/collaborators")
 	local collaborators = assets["pictograms/collaborators"]
 	
-	return roact.createElement(emptyResultsView, cryoModule.Dictionary.join(p3, {
+	return roact.createElement(emptyResultsView, cryoModule.Dictionary.join(p1, {
 		assetSize = collaborators.size / 3,
 		assetId = collaborators.assetId,
 		tokens = useTokens()

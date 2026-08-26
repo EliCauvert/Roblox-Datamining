@@ -4,70 +4,70 @@ local coreGuiService = game:GetService("CoreGui")
 local httpRbxApiService = game:GetService("HttpRbxApiService")
 local promiseModule = require(corePackagesService.Packages.Promise)
 local roactModule = require(corePackagesService.Packages.Roact)
-local var6 = require(coreGuiService:WaitForChild("RobloxGui").Modules.Common.httpRequest)(httpRbxApiService)
+local var1 = require(coreGuiService:WaitForChild("RobloxGui").Modules.Common.httpRequest)(httpRbxApiService)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local getGameNameAndDescription = require(corePackagesService.Workspace.Packages.GameDetailRodux).GetGameNameAndDescription
 local teleportHistoryButtonsEngineFeature = game:GetEngineFeature("TeleportHistoryButtons")
-local var9 = 0
-local var10 = 0
-local var11 = 0
+local var2 = 0
+local var3 = 0
+local var4 = 0
 
 if teleportHistoryButtonsEngineFeature then
-	local var12, var13 = teleportService:GetThirdPartyTeleportInfo(true)
-	var10 = var12
-	var11 = var13
+	local var5, var6 = teleportService:GetThirdPartyTeleportInfo(true)
+	var3 = var5
+	var4 = var6
 end
-if teleportHistoryButtonsEngineFeature and var10 > 0 then
-	var9 = var10
+if teleportHistoryButtonsEngineFeature and var3 > 0 then
+	var2 = var3
 end
-local function _(p0, p1)
-	return if p1 < #p0 then string.sub(p0, 1, p1 - 3) .. "..." else p0
+local function _(p1, p2)
+	return if p2 < #p1 then string.sub(p1, 1, p2 - 3) .. "..." else p1
 end
 
-local var14 = nil
-local var15 = promiseModule.defer(function(p2)
-	-- upvalues: var9 (write), getGameNameAndDescription (ref), var6 (ref), var14 (write)
-	if var9 > 0 then
-		getGameNameAndDescription(var6, var9):andThen(function(p3)
-			-- upvalues: var14 (copy)
-			local name = p3.Name
-			var14 = if #name > 30 then string.sub(name, 1, 27) .. "..." else name
+local var7 = nil
+local var8 = promiseModule.defer(function(p1)
+	-- upvalues: var2 (write), getGameNameAndDescription (ref), var1 (ref), var7 (write)
+	if var2 > 0 then
+		getGameNameAndDescription(var1, var2):andThen(function(p2)
+			-- upvalues: var7 (copy)
+			local name = p2.Name
+			var7 = if #name > 30 then string.sub(name, 1, 27) .. "..." else name
 		end):await()
-		p2()
+		p1()
 		
 		return
 	end
-	p2()
+	p1()
 end)
 local t = {
 	getTooltipText = function()
-		-- upvalues: var14 (write), robloxTranslatorModule (ref)
-		return if var14 == nil then robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnFallback") else robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnTo", { placeName = var14 })
+		-- upvalues: var7 (write), robloxTranslatorModule (ref)
+		return if var7 == nil then robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnFallback") else robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnTo", { placeName = var7 })
 	end
 }
 
 function t.getTooltipTextTimeout()
-	-- upvalues: var14 (write), promiseModule (ref), var15 (ref), t (ref)
-	if var14 == nil then
-		promiseModule.any({ var15, promiseModule.delay(1) }):await()
+	-- upvalues: var7 (write), promiseModule (ref), var8 (ref), t (ref)
+	if var7 == nil then
+		promiseModule.any({ var8, promiseModule.delay(1) }):await()
 	end
 	return t.getTooltipText()
 end
 
 function t.getMenuText()
-	-- upvalues: roactModule (ref), t (ref), var14 (write), var15 (ref)
-	local var17, var18 = roactModule.createBinding(t.getTooltipText())
+	-- upvalues: roactModule (ref), t (ref), var7 (write), var8 (ref)
+	local var9, var10 = roactModule.createBinding(t.getTooltipText())
 	
-	if var14 == nil then
+	if var7 == nil then
 		pcall(function()
-			-- upvalues: var15 (copy), var18 (ref), t (copy)
-			var15:andThen(function()
-				-- upvalues: var18 (copy), t (copy)
-				var18(t.getTooltipText())
+			-- upvalues: var8 (copy), var10 (ref), t (copy)
+			var8:andThen(function()
+				-- upvalues: var10 (copy), t (copy)
+				var10(t.getTooltipText())
 			end)
 		end)
 	end
-	return var17
+	return var9
 end
 
 function t.initiateFrontButtonTeleport()
@@ -78,8 +78,8 @@ function t.initiateFrontButtonTeleport()
 end
 
 function t.hasReturnUniverse()
-	-- upvalues: var9 (write)
-	return var9 > 0
+	-- upvalues: var2 (write)
+	return var2 > 0
 end
 
 return t

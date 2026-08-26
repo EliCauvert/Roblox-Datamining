@@ -8,23 +8,23 @@ local getTextHeightModule = require(script.Parent.getTextHeight)
 local _ = require(script.Parent.StyleTypes)
 local t = { width = require(script.Parent.Constants).TILE_SIZE }
 
-return function(p0)
+return function(p1)
 	-- upvalues: llama (ref), t (ref), style (ref), roact (ref), styledTextLabel (ref), getTextHeightModule (ref)
-	local var3 = llama.Dictionary.join(t, p0)
+	local var1 = llama.Dictionary.join(t, p1)
 	
-	return style.withStyle(function(p1)
-		-- upvalues: roact (copy), styledTextLabel (copy), var3 (ref), getTextHeightModule (copy)
-		local font = p1.Font
+	return style.withStyle(function(p2)
+		-- upvalues: roact (copy), styledTextLabel (copy), var1 (ref), getTextHeightModule (copy)
+		local font = p2.Font
 		
 		return roact.createElement(styledTextLabel, {
 			lineHeight = 1,
 			fluidSizing = false,
 			richText = false,
-			layoutOrder = var3.layoutOrder,
-			text = var3.name,
+			layoutOrder = var1.layoutOrder,
+			text = var1.name,
 			fontStyle = font.CaptionHeader,
-			colorStyle = p1.Theme.TextEmphasis,
-			size = UDim2.fromOffset(var3.width, getTextHeightModule(var3.name, font.CaptionHeader.Font, font.BaseSize * font.CaptionHeader.RelativeSize)),
+			colorStyle = p2.Theme.TextEmphasis,
+			size = UDim2.fromOffset(var1.width, getTextHeightModule(var1.name, font.CaptionHeader.Font, font.BaseSize * font.CaptionHeader.RelativeSize)),
 			textTruncate = Enum.TextTruncate.AtEnd,
 			textXAlignment = Enum.TextXAlignment.Left,
 			textYAlignment = Enum.TextYAlignment.Center

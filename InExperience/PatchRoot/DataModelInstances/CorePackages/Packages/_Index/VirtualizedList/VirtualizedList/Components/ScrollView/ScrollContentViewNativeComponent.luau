@@ -6,20 +6,20 @@ local reactModule = require(parent.React)
 local change = reactModule.Change
 local scrollContentViewNativeComponent = reactModule.Component:extend("ScrollContentViewNativeComponent")
 
-function scrollContentViewNativeComponent.init(p0, p1)
-	p0.props = p1
+function scrollContentViewNativeComponent.init(p1, p2)
+	p1.props = p2
 end
 
-function scrollContentViewNativeComponent.render(p2)
+function scrollContentViewNativeComponent.render(p1)
 	-- upvalues: array (ref), object (ref), change (ref), reactModule (ref)
 	return reactModule.createElement("Frame", object.assign({
 		Name = "RCTScrollContentView",
-		[change.AbsoluteSize] = p2.props.onLayout,
+		[change.AbsoluteSize] = p1.props.onLayout,
 		Size = UDim2.new(1, 0, 1, 0)
-	}, if p2.props.AutomaticSize then { AutomaticSize = p2.props.AutomaticSize } else nil, if array.isArray(p2.props.style) then array.reduce(p2.props.style, function(p3, p4)
+	}, if p1.props.AutomaticSize then { AutomaticSize = p1.props.AutomaticSize } else nil, if array.isArray(p1.props.style) then array.reduce(p1.props.style, function(p2, p3)
 		-- upvalues: object (copy)
-		return object.assign(p3, p4)
-	end, {}) else p2.props.style), p2.props.children)
+		return object.assign(p2, p3)
+	end, {}) else p1.props.style), p1.props.children)
 end
 
 return scrollContentViewNativeComponent

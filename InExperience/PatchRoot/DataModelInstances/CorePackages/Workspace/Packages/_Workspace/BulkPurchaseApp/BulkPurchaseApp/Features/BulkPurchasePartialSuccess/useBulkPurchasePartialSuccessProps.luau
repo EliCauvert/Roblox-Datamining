@@ -10,25 +10,25 @@ local getThumbnailUrlModule = require(bulkPurchaseApp.Utils.getThumbnailUrl)
 local _ = require(bulkPurchaseApp.Store.Types)
 local _ = require(script.Parent.BulkPurchasePartialSuccess)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: getThumbnailUrlModule (ref)
 	return {
-		id = p0.id,
-		image = getThumbnailUrlModule(p0.id, p0.type),
-		name = p0.name,
-		status = p1
+		id = p1.id,
+		image = getThumbnailUrlModule(p1.id, p1.type),
+		name = p1.name,
+		status = p2
 	}
 end
 
-local function selectBulkPurchasePartialSuccessState(p2)
+local function selectBulkPurchasePartialSuccessState(p1)
 	-- upvalues: getThumbnailUrlModule (ref)
 	local t = {}
 	local t_1 = {}
-	local var9 = 0
+	local var1 = 0
 	
-	if p2.itemData and p2.itemStatuses then
-		for i, v in p2.itemData do
-			local id = p2.itemStatuses[v.id]
+	if p1.itemData and p1.itemStatuses then
+		for i, v in p1.itemData do
+			local id = p1.itemStatuses[v.id]
 			local t_2 = {
 				id = v.id,
 				image = getThumbnailUrlModule(v.id, v.type),
@@ -37,7 +37,7 @@ local function selectBulkPurchasePartialSuccessState(p2)
 			}
 			
 			if id == Enum.MarketplaceItemPurchaseStatus.Success then
-				var9 += v.priceRobux
+				var1 += v.priceRobux
 				table.insert(t, t_2)
 			elseif id then
 				table.insert(t_1, t_2)
@@ -45,8 +45,8 @@ local function selectBulkPurchasePartialSuccessState(p2)
 		end
 	end
 	return {
-		robuxSpent = var9,
-		currentBalance = p2.balance or 0,
+		robuxSpent = var1,
+		currentBalance = p1.balance or 0,
 		unsuccessfulItems = t_1,
 		successfulItems = t
 	}
@@ -54,19 +54,19 @@ end
 
 return function()
 	-- upvalues: useSelector (ref), selectPurchaseResultsModule (ref), selectBulkPurchasePartialSuccessState (ref), useDispatch (ref), reactModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref)
-	local var11 = useSelector(selectPurchaseResultsModule)
-	local var12 = useSelector(selectBulkPurchasePartialSuccessState)
-	local var13 = useDispatch()
+	local var2 = useSelector(selectPurchaseResultsModule)
+	local var3 = useSelector(selectBulkPurchasePartialSuccessState)
+	local var4 = useDispatch()
 	
 	return {
 		onDismiss = reactModule.useCallback(function()
-			-- upvalues: marketplaceService (copy), var11 (ref), var13 (ref), bulkPurchaseEndedModule (copy)
-			marketplaceService:signalPromptBulkPurchaseFinished(1, var11)
-			var13(bulkPurchaseEndedModule())
-		end, { var11, var13 }),
-		successfulItems = var12.successfulItems,
-		unsuccessfulItems = var12.unsuccessfulItems,
-		robuxSpent = var12.robuxSpent,
-		currentBalance = var12.currentBalance
+			-- upvalues: marketplaceService (copy), var2 (ref), var4 (ref), bulkPurchaseEndedModule (copy)
+			marketplaceService:signalPromptBulkPurchaseFinished(1, var2)
+			var4(bulkPurchaseEndedModule())
+		end, { var2, var4 }),
+		successfulItems = var3.successfulItems,
+		unsuccessfulItems = var3.unsuccessfulItems,
+		robuxSpent = var3.robuxSpent,
+		currentBalance = var3.currentBalance
 	}
 end

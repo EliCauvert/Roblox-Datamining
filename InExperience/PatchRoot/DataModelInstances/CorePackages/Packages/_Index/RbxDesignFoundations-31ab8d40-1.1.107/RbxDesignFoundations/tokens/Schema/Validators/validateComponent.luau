@@ -1,464 +1,464 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
-		VerticalTile = p0.strictInterface({
-			Base = p0.strictInterface({
-				Container = p0.strictInterface({
-					Background = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BorderWidth = p0.number,
-					BorderColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					DropShadow = p0.strictInterface({
-						X = p0.number,
-						Y = p0.number,
-						Blur = p0.number,
-						Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+		VerticalTile = p1.strictInterface({
+			Base = p1.strictInterface({
+				Container = p1.strictInterface({
+					Background = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BorderWidth = p1.number,
+					BorderColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					DropShadow = p1.strictInterface({
+						X = p1.number,
+						Y = p1.number,
+						Blur = p1.number,
+						Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 					}),
-					BorderRadius = p0.strictInterface({
-						LeadingTop = p0.number,
-						TrailingTop = p0.number,
-						TrailingBottom = p0.number,
-						LeadingBottom = p0.number
+					BorderRadius = p1.strictInterface({
+						LeadingTop = p1.number,
+						TrailingTop = p1.number,
+						TrailingBottom = p1.number,
+						LeadingBottom = p1.number
 					})
 				}),
-				ContentTop = p0.strictInterface({
-					Spacing = p0.strictInterface({
-						Top = p0.number,
-						Trailing = p0.number,
-						Bottom = p0.number,
-						Leading = p0.number
+				ContentTop = p1.strictInterface({
+					Spacing = p1.strictInterface({
+						Top = p1.number,
+						Trailing = p1.number,
+						Bottom = p1.number,
+						Leading = p1.number
 					})
 				}),
-				ContentBottom = p0.strictInterface({
-					Spacing = p0.strictInterface({
-						Top = p0.number,
-						Trailing = p0.number,
-						Bottom = p0.number,
-						Leading = p0.number
+				ContentBottom = p1.strictInterface({
+					Spacing = p1.strictInterface({
+						Top = p1.number,
+						Trailing = p1.number,
+						Bottom = p1.number,
+						Leading = p1.number
 					})
 				})
 			})
 		}),
-		PlayerTileSmall = p0.strictInterface({
-			Base = p0.strictInterface({
-				Container = p0.strictInterface({
-					Gap = p0.number,
-					Spacing = p0.strictInterface({
-						Top = p0.number,
-						Trailing = p0.number,
-						Bottom = p0.number,
-						Leading = p0.number
+		PlayerTileSmall = p1.strictInterface({
+			Base = p1.strictInterface({
+				Container = p1.strictInterface({
+					Gap = p1.number,
+					Spacing = p1.strictInterface({
+						Top = p1.number,
+						Trailing = p1.number,
+						Bottom = p1.number,
+						Leading = p1.number
 					})
 				}),
-				Image = p0.strictInterface({
-					Size = p0.number,
-					BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BorderColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BorderRadius = p0.number,
-					BorderWidth = p0.number
+				Image = p1.strictInterface({
+					Size = p1.number,
+					BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BorderColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BorderRadius = p1.number,
+					BorderWidth = p1.number
 				}),
-				Status = p0.strictInterface({
-					Size = p0.number,
-					BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BorderColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BorderWidth = p0.number
+				Status = p1.strictInterface({
+					Size = p1.number,
+					BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BorderColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BorderWidth = p1.number
 				}),
-				Content = p0.strictInterface({
-					Gap = p0.number,
-					Typography = p0.strictInterface({
-						Font = p0.enum(Enum.Font),
-						FontSize = p0.number,
-						LineHeight = p0.number,
-						LetterSpacing = p0.number
+				Content = p1.strictInterface({
+					Gap = p1.number,
+					Typography = p1.strictInterface({
+						Font = p1.enum(Enum.Font),
+						FontSize = p1.number,
+						LineHeight = p1.number,
+						LetterSpacing = p1.number
 					}),
-					ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+					ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 				}),
-				Icon = p0.strictInterface({ Size = p0.number }),
-				Presence = p0.strictInterface({
-					ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+				Icon = p1.strictInterface({ Size = p1.number }),
+				Presence = p1.strictInterface({
+					ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 				})
 			})
 		}),
-		Facepile = p0.strictInterface({
-			Container = p0.strictInterface({ Gap = p0.number }),
-			FaceGroup = p0.strictInterface({ Gap = p0.number }),
-			Face = p0.strictInterface({
-				BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-				BorderWidth = p0.number,
-				BorderColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-				BorderRadius = p0.number,
-				Width = p0.number,
-				Height = p0.number
+		Facepile = p1.strictInterface({
+			Container = p1.strictInterface({ Gap = p1.number }),
+			FaceGroup = p1.strictInterface({ Gap = p1.number }),
+			Face = p1.strictInterface({
+				BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+				BorderWidth = p1.number,
+				BorderColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+				BorderRadius = p1.number,
+				Width = p1.number,
+				Height = p1.number
 			}),
-			Badge = p0.strictInterface({
-				BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-				BorderWidth = p0.number,
-				BorderColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-				BorderRadius = p0.number,
-				Spacing = p0.number,
-				Height = p0.number,
-				MinWidth = p0.number,
-				ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-				Typography = p0.strictInterface({
-					Font = p0.enum(Enum.Font),
-					FontSize = p0.number,
-					LineHeight = p0.number,
-					LetterSpacing = p0.number
+			Badge = p1.strictInterface({
+				BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+				BorderWidth = p1.number,
+				BorderColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+				BorderRadius = p1.number,
+				Spacing = p1.number,
+				Height = p1.number,
+				MinWidth = p1.number,
+				ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+				Typography = p1.strictInterface({
+					Font = p1.enum(Enum.Font),
+					FontSize = p1.number,
+					LineHeight = p1.number,
+					LetterSpacing = p1.number
 				})
 			}),
-			Label = p0.strictInterface({
-				ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-				Typography = p0.strictInterface({
-					Font = p0.enum(Enum.Font),
-					FontSize = p0.number,
-					LineHeight = p0.number,
-					LetterSpacing = p0.number
-				})
-			})
-		}),
-		ControllerBar = p0.strictInterface({
-			BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-			BorderRadius = p0.strictInterface({
-				LeadingTop = p0.number,
-				TrailingTop = p0.number,
-				TrailingBottom = p0.number,
-				LeadingBottom = p0.number
-			}),
-			Spacing = p0.strictInterface({
-				Top = p0.number,
-				Trailing = p0.number,
-				Bottom = p0.number,
-				Leading = p0.number
-			}),
-			Gap = p0.number
-		}),
-		ControllerBarShortcut = p0.strictInterface({
-			Container = p0.strictInterface({
-				Gap = p0.number,
-				ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-			}),
-			Icon = p0.strictInterface({ Size = p0.number }),
-			Label = p0.strictInterface({
-				Typography = p0.strictInterface({
-					Font = p0.enum(Enum.Font),
-					FontSize = p0.number,
-					LineHeight = p0.number,
-					LetterSpacing = p0.number
+			Label = p1.strictInterface({
+				ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+				Typography = p1.strictInterface({
+					Font = p1.enum(Enum.Font),
+					FontSize = p1.number,
+					LineHeight = p1.number,
+					LetterSpacing = p1.number
 				})
 			})
 		}),
-		SelectionCursor = p0.strictInterface({
-			BorderWidth = p0.number,
-			Offset = p0.number,
-			Inset = p0.number,
-			Gradient = p0.strictInterface({
-				Start = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-				End = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-			})
+		ControllerBar = p1.strictInterface({
+			BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+			BorderRadius = p1.strictInterface({
+				LeadingTop = p1.number,
+				TrailingTop = p1.number,
+				TrailingBottom = p1.number,
+				LeadingBottom = p1.number
+			}),
+			Spacing = p1.strictInterface({
+				Top = p1.number,
+				Trailing = p1.number,
+				Bottom = p1.number,
+				Leading = p1.number
+			}),
+			Gap = p1.number
 		}),
-		StateLayer = p0.strictInterface({
-			Base = p0.strictInterface({ BorderWidth = p0.number }),
-			Standard = p0.strictInterface({
-				Initialize = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Default = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Hover = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Pressed = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Selected = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				SelectedPressed = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Disabled = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				})
+		ControllerBarShortcut = p1.strictInterface({
+			Container = p1.strictInterface({
+				Gap = p1.number,
+				ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 			}),
-			Lighten = p0.strictInterface({
-				Initialize = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Default = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Hover = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Pressed = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Selected = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				SelectedPressed = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Disabled = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				})
-			}),
-			Inverse = p0.strictInterface({
-				Initialize = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Default = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Hover = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Pressed = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Selected = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				SelectedPressed = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Disabled = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				})
-			}),
-			Darken = p0.strictInterface({
-				Initialize = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Default = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Hover = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Pressed = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Selected = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				SelectedPressed = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-				}),
-				Disabled = p0.strictInterface({
-					Color = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+			Icon = p1.strictInterface({ Size = p1.number }),
+			Label = p1.strictInterface({
+				Typography = p1.strictInterface({
+					Font = p1.enum(Enum.Font),
+					FontSize = p1.number,
+					LineHeight = p1.number,
+					LetterSpacing = p1.number
 				})
 			})
 		}),
-		MenuCell = p0.strictInterface({
-			Base = p0.strictInterface({
-				Container = p0.strictInterface({
-					Height = p0.number,
-					ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BorderColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BorderRadius = p0.strictInterface({
-						TopLeading = p0.number,
-						TopTrailing = p0.number,
-						BottomTrailing = p0.number,
-						BottomLeading = p0.number
+		SelectionCursor = p1.strictInterface({
+			BorderWidth = p1.number,
+			Offset = p1.number,
+			Inset = p1.number,
+			Gradient = p1.strictInterface({
+				Start = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+				End = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+			})
+		}),
+		StateLayer = p1.strictInterface({
+			Base = p1.strictInterface({ BorderWidth = p1.number }),
+			Standard = p1.strictInterface({
+				Initialize = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Default = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Hover = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Pressed = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Selected = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				SelectedPressed = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Disabled = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				})
+			}),
+			Lighten = p1.strictInterface({
+				Initialize = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Default = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Hover = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Pressed = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Selected = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				SelectedPressed = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Disabled = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				})
+			}),
+			Inverse = p1.strictInterface({
+				Initialize = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Default = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Hover = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Pressed = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Selected = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				SelectedPressed = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Disabled = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				})
+			}),
+			Darken = p1.strictInterface({
+				Initialize = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Default = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Hover = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Pressed = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Selected = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				SelectedPressed = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				}),
+				Disabled = p1.strictInterface({
+					Color = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+				})
+			})
+		}),
+		MenuCell = p1.strictInterface({
+			Base = p1.strictInterface({
+				Container = p1.strictInterface({
+					Height = p1.number,
+					ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BorderColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BorderRadius = p1.strictInterface({
+						TopLeading = p1.number,
+						TopTrailing = p1.number,
+						BottomTrailing = p1.number,
+						BottomLeading = p1.number
 					}),
-					BorderWidth = p0.number,
-					Spacing = p0.strictInterface({
-						Top = p0.number,
-						Trailing = p0.number,
-						Bottom = p0.number,
-						Leading = p0.number
+					BorderWidth = p1.number,
+					Spacing = p1.strictInterface({
+						Top = p1.number,
+						Trailing = p1.number,
+						Bottom = p1.number,
+						Leading = p1.number
 					})
 				}),
-				IconFrame = p0.strictInterface({ Size = p0.number }),
-				TextFrame = p0.strictInterface({
-					Spacing = p0.strictInterface({
-						Top = p0.number,
-						Trailing = p0.number,
-						Bottom = p0.number,
-						Leading = p0.number
+				IconFrame = p1.strictInterface({ Size = p1.number }),
+				TextFrame = p1.strictInterface({
+					Spacing = p1.strictInterface({
+						Top = p1.number,
+						Trailing = p1.number,
+						Bottom = p1.number,
+						Leading = p1.number
 					})
 				}),
-				Text = p0.strictInterface({
-					Typography = p0.strictInterface({
-						Font = p0.enum(Enum.Font),
-						FontSize = p0.number,
-						LineHeight = p0.number,
-						LetterSpacing = p0.number
+				Text = p1.strictInterface({
+					Typography = p1.strictInterface({
+						Font = p1.enum(Enum.Font),
+						FontSize = p1.number,
+						LineHeight = p1.number,
+						LetterSpacing = p1.number
 					})
 				}),
-				CheckFrame = p0.strictInterface({ Size = p0.number })
+				CheckFrame = p1.strictInterface({ Size = p1.number })
 			}),
-			Divider = p0.strictInterface({
-				Container = p0.strictInterface({ BorderWidth = p0.number })
+			Divider = p1.strictInterface({
+				Container = p1.strictInterface({ BorderWidth = p1.number })
 			}),
-			Disabled = p0.strictInterface({
-				Container = p0.strictInterface({
-					ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+			Disabled = p1.strictInterface({
+				Container = p1.strictInterface({
+					ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 				})
 			}),
-			HasRoundBottom = p0.strictInterface({
-				Container = p0.strictInterface({
-					BorderRadius = p0.strictInterface({ BottomTrailing = p0.number, BottomLeading = p0.number })
+			HasRoundBottom = p1.strictInterface({
+				Container = p1.strictInterface({
+					BorderRadius = p1.strictInterface({ BottomTrailing = p1.number, BottomLeading = p1.number })
 				})
 			}),
-			HasRoundTop = p0.strictInterface({
-				Container = p0.strictInterface({
-					BorderRadius = p0.strictInterface({ TopLeading = p0.number, TopTrailing = p0.number })
-				})
-			})
-		}),
-		BaseMenu = p0.strictInterface({
-			BorderRadius = p0.number,
-			BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-		}),
-		StatGroup = p0.strictInterface({ Gap = p0.number }),
-		StatItem = p0.strictInterface({
-			Container = p0.strictInterface({
-				Gap = p0.number,
-				ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-			}),
-			Icon = p0.strictInterface({ Size = p0.number }),
-			Label = p0.strictInterface({
-				Typography = p0.strictInterface({
-					Font = p0.enum(Enum.Font),
-					FontSize = p0.number,
-					LineHeight = p0.number,
-					LetterSpacing = p0.number
+			HasRoundTop = p1.strictInterface({
+				Container = p1.strictInterface({
+					BorderRadius = p1.strictInterface({ TopLeading = p1.number, TopTrailing = p1.number })
 				})
 			})
 		}),
-		MediaTile = p0.strictInterface({
-			Container = p0.strictInterface({ BorderRadius = p0.number }),
-			Icon = p0.strictInterface({ Size = p0.number })
+		BaseMenu = p1.strictInterface({
+			BorderRadius = p1.number,
+			BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 		}),
-		StatWidget = p0.strictInterface({
-			Container = p0.strictInterface({
-				Gap = p0.number,
-				ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+		StatGroup = p1.strictInterface({ Gap = p1.number }),
+		StatItem = p1.strictInterface({
+			Container = p1.strictInterface({
+				Gap = p1.number,
+				ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 			}),
-			Icon = p0.strictInterface({ Size = p0.number }),
-			DataGroup = p0.strictInterface({ Gap = p0.number }),
-			Data = p0.strictInterface({
-				Typography = p0.strictInterface({
-					Font = p0.enum(Enum.Font),
-					FontSize = p0.number,
-					LineHeight = p0.number,
-					LetterSpacing = p0.number
-				})
-			}),
-			Label = p0.strictInterface({
-				Typography = p0.strictInterface({
-					Font = p0.enum(Enum.Font),
-					FontSize = p0.number,
-					LineHeight = p0.number,
-					LetterSpacing = p0.number
+			Icon = p1.strictInterface({ Size = p1.number }),
+			Label = p1.strictInterface({
+				Typography = p1.strictInterface({
+					Font = p1.enum(Enum.Font),
+					FontSize = p1.number,
+					LineHeight = p1.number,
+					LetterSpacing = p1.number
 				})
 			})
 		}),
-		RateCount = p0.strictInterface({
-			Container = p0.strictInterface({
-				Spacing = p0.number,
-				Gap = p0.number,
-				BorderRadius = p0.number,
-				BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
-			}),
-			ButtonGroup = p0.strictInterface({ Gap = p0.number })
+		MediaTile = p1.strictInterface({
+			Container = p1.strictInterface({ BorderRadius = p1.number }),
+			Icon = p1.strictInterface({ Size = p1.number })
 		}),
-		PlayerCount = p0.strictInterface({
-			Container = p0.strictInterface({
-				Spacing = p0.number,
-				BorderRadius = p0.number,
-				BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+		StatWidget = p1.strictInterface({
+			Container = p1.strictInterface({
+				Gap = p1.number,
+				ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+			}),
+			Icon = p1.strictInterface({ Size = p1.number }),
+			DataGroup = p1.strictInterface({ Gap = p1.number }),
+			Data = p1.strictInterface({
+				Typography = p1.strictInterface({
+					Font = p1.enum(Enum.Font),
+					FontSize = p1.number,
+					LineHeight = p1.number,
+					LetterSpacing = p1.number
+				})
+			}),
+			Label = p1.strictInterface({
+				Typography = p1.strictInterface({
+					Font = p1.enum(Enum.Font),
+					FontSize = p1.number,
+					LineHeight = p1.number,
+					LetterSpacing = p1.number
+				})
 			})
 		}),
-		VerticalScrollView = p0.strictInterface({
-			Base = p0.strictInterface({
-				Handle = p0.strictInterface({
-					BackgroundColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BorderRadius = p0.number
+		RateCount = p1.strictInterface({
+			Container = p1.strictInterface({
+				Spacing = p1.number,
+				Gap = p1.number,
+				BorderRadius = p1.number,
+				BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+			}),
+			ButtonGroup = p1.strictInterface({ Gap = p1.number })
+		}),
+		PlayerCount = p1.strictInterface({
+			Container = p1.strictInterface({
+				Spacing = p1.number,
+				BorderRadius = p1.number,
+				BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
+			})
+		}),
+		VerticalScrollView = p1.strictInterface({
+			Base = p1.strictInterface({
+				Handle = p1.strictInterface({
+					BackgroundColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BorderRadius = p1.number
 				}),
-				Icon = p0.strictInterface({ Size = p0.number }),
-				Track = p0.strictInterface({
-					Opacity = p0.number,
-					Spacing = p0.strictInterface({ Top = p0.number, Bottom = p0.number })
+				Icon = p1.strictInterface({ Size = p1.number }),
+				Track = p1.strictInterface({
+					Opacity = p1.number,
+					Spacing = p1.strictInterface({ Top = p1.number, Bottom = p1.number })
 				})
 			}),
-			Compact = p0.strictInterface({
-				Handle = p0.strictInterface({ Width = p0.number }),
-				Track = p0.strictInterface({ Width = p0.number })
+			Compact = p1.strictInterface({
+				Handle = p1.strictInterface({ Width = p1.number }),
+				Track = p1.strictInterface({ Width = p1.number })
 			}),
-			Wide = p0.strictInterface({
-				Handle = p0.strictInterface({ Width = p0.number }),
-				Track = p0.strictInterface({ Width = p0.number })
+			Wide = p1.strictInterface({
+				Handle = p1.strictInterface({ Width = p1.number }),
+				Track = p1.strictInterface({ Width = p1.number })
 			}),
-			Gamepad = p0.strictInterface({
-				Handle = p0.strictInterface({ Width = p0.number }),
-				Track = p0.strictInterface({ Width = p0.number })
+			Gamepad = p1.strictInterface({
+				Handle = p1.strictInterface({ Width = p1.number }),
+				Track = p1.strictInterface({ Width = p1.number })
 			})
 		}),
-		TextField = p0.strictInterface({
-			Base = p0.strictInterface({
-				Field = p0.strictInterface({
-					BorderColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					BorderRadius = p0.number,
-					Typography = p0.strictInterface({
-						Font = p0.enum(Enum.Font),
-						FontSize = p0.number,
-						LineHeight = p0.number,
-						LetterSpacing = p0.number
+		TextField = p1.strictInterface({
+			Base = p1.strictInterface({
+				Field = p1.strictInterface({
+					BorderColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					BorderRadius = p1.number,
+					Typography = p1.strictInterface({
+						Font = p1.enum(Enum.Font),
+						FontSize = p1.number,
+						LineHeight = p1.number,
+						LetterSpacing = p1.number
 					}),
-					Spacing = p0.strictInterface({ Leading = p0.number, Trailing = p0.number }),
-					Gap = p0.number,
-					Opacity = p0.number
+					Spacing = p1.strictInterface({ Leading = p1.number, Trailing = p1.number }),
+					Gap = p1.number,
+					Opacity = p1.number
 				}),
-				PlaceholderText = p0.strictInterface({
-					ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+				PlaceholderText = p1.strictInterface({
+					ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 				}),
-				FieldValue = p0.strictInterface({
-					ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+				FieldValue = p1.strictInterface({
+					ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 				}),
-				IconLeading = p0.strictInterface({
-					ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-					Size = p0.number
+				IconLeading = p1.strictInterface({
+					ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+					Size = p1.number
 				})
 			}),
-			Error = p0.strictInterface({
-				Field = p0.strictInterface({
-					BorderColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+			Error = p1.strictInterface({
+				Field = p1.strictInterface({
+					BorderColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 				})
 			}),
-			Disabled = p0.strictInterface({ Field = p0.strictInterface({ Opacity = p0.number }) })
+			Disabled = p1.strictInterface({ Field = p1.strictInterface({ Opacity = p1.number }) })
 		}),
-		InputLabel = p0.strictInterface({
-			Base = p0.strictInterface({
-				Typography = p0.strictInterface({
-					Font = p0.enum(Enum.Font),
-					FontSize = p0.number,
-					LineHeight = p0.number,
-					LetterSpacing = p0.number
+		InputLabel = p1.strictInterface({
+			Base = p1.strictInterface({
+				Typography = p1.strictInterface({
+					Font = p1.enum(Enum.Font),
+					FontSize = p1.number,
+					LineHeight = p1.number,
+					LetterSpacing = p1.number
 				}),
-				ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-				Spacing = p0.strictInterface({ Bottom = p0.number }),
-				Opacity = p0.number
+				ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+				Spacing = p1.strictInterface({ Bottom = p1.number }),
+				Opacity = p1.number
 			}),
-			Disabled = p0.strictInterface({ Opacity = p0.number })
+			Disabled = p1.strictInterface({ Opacity = p1.number })
 		}),
-		HelperText = p0.strictInterface({
-			Base = p0.strictInterface({
-				Typography = p0.strictInterface({
-					Font = p0.enum(Enum.Font),
-					FontSize = p0.number,
-					LineHeight = p0.number,
-					LetterSpacing = p0.number
+		HelperText = p1.strictInterface({
+			Base = p1.strictInterface({
+				Typography = p1.strictInterface({
+					Font = p1.enum(Enum.Font),
+					FontSize = p1.number,
+					LineHeight = p1.number,
+					LetterSpacing = p1.number
 				}),
-				ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number }),
-				Padding = p0.strictInterface({ Top = p0.number }),
-				Opacity = p0.number
+				ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number }),
+				Padding = p1.strictInterface({ Top = p1.number }),
+				Opacity = p1.number
 			}),
-			Error = p0.strictInterface({
-				ContentColor = p0.strictInterface({ Color3 = p0.Color3, Transparency = p0.number })
+			Error = p1.strictInterface({
+				ContentColor = p1.strictInterface({ Color3 = p1.Color3, Transparency = p1.number })
 			})
 		})
 	}

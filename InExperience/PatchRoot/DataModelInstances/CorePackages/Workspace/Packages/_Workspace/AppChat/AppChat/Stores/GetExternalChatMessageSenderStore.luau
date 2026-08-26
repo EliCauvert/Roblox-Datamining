@@ -4,17 +4,17 @@ local _ = require(appChat.Hooks.useExternalChatMessageSender)
 
 return signalsModule.createComputed(function()
 	-- upvalues: signalsModule (ref)
-	local var2, var3 = signalsModule.createSignal(nil)
+	local var1, var2 = signalsModule.createSignal(nil)
 	
 	return {
-		getSender = var2,
+		getSender = var1,
 		setSender = function(value)
-			-- upvalues: var3 (ref)
-			var3(value)
+			-- upvalues: var2 (ref)
+			var2(value)
 		end,
 		clearSender = function()
-			-- upvalues: var3 (ref)
-			var3(nil)
+			-- upvalues: var2 (ref)
+			var2(nil)
 		end
 	}
 end)

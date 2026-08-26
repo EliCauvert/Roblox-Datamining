@@ -4,16 +4,16 @@ local immutable = require(parent.Parent.Parent.AppCommonLib).Immutable
 local receivedUserInviteStatusModule = require(actions.ReceivedUserInviteStatus)
 local resetUserInviteStatusModule = require(actions.ResetUserInviteStatus)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: receivedUserInviteStatusModule (ref), immutable (ref), resetUserInviteStatusModule (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	if p1.type == receivedUserInviteStatusModule.name then
-		p0 = immutable.Set(p0, p1.userId, p1.inviteStatus)
+	if p2.type == receivedUserInviteStatusModule.name then
+		p1 = immutable.Set(p1, p2.userId, p2.inviteStatus)
 		
-		return p0
-	elseif p1.type == resetUserInviteStatusModule.name then
-		p0 = {}
+		return p1
+	elseif p2.type == resetUserInviteStatusModule.name then
+		p1 = {}
 	end
-	return p0
+	return p1
 end

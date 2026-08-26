@@ -4,11 +4,11 @@ local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local VRFTUXToolTipsModule = require(script.Parent.Parent.Parent.Components.Tooltips.VRFTUXToolTips)
 local renderWithCoreScriptsStyleProviderModule = require(script.Parent.Parent.Parent.Parent.Common.renderWithCoreScriptsStyleProvider)
 local t = { Name = "PerspectiveTooltipEvent" }
-local var5 = nil
+local var1 = nil
 
 function t.StartEvent()
-	-- upvalues: roactModule (ref), VRFTUXToolTipsModule (ref), renderWithCoreScriptsStyleProviderModule (ref), var5 (write), coreGuiService (ref)
-	var5 = roactModule.mount(renderWithCoreScriptsStyleProviderModule({
+	-- upvalues: roactModule (ref), VRFTUXToolTipsModule (ref), renderWithCoreScriptsStyleProviderModule (ref), var1 (write), coreGuiService (ref)
+	var1 = roactModule.mount(renderWithCoreScriptsStyleProviderModule({
 		roactModule.createElement(VRFTUXToolTipsModule, {
 			tooltipButtons = {
 				{
@@ -22,9 +22,9 @@ function t.StartEvent()
 end
 
 function t.StopEvent()
-	-- upvalues: var5 (write), roactModule (ref)
-	if var5 then
-		roactModule.unmount(var5)
+	-- upvalues: var1 (write), roactModule (ref)
+	if var1 then
+		roactModule.unmount(var1)
 	end
 end
 

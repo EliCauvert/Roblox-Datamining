@@ -44,13 +44,13 @@ local t_1 = {
 
 return function()
 	-- upvalues: useRealNamesInDisplayNamesEnabledModule (ref), realNamesInDisplayNamesIXPModule (ref), t_1 (ref), t (ref), fFlagEditProfileDisplayNameUseUnder17DescriptionModule (ref), useLocalization (ref)
-	local var7 = if realNamesInDisplayNamesIXPModule.useIsExperimentEnabled({ isExposureEnabled = true }) and useRealNamesInDisplayNamesEnabledModule() then t_1 else t
-	local var8 = var7
+	local var1 = if realNamesInDisplayNamesIXPModule.useIsExperimentEnabled({ isExposureEnabled = true }) and useRealNamesInDisplayNamesEnabledModule() then t_1 else t
+	local var2 = var1
 	
 	if fFlagEditProfileDisplayNameUseUnder17DescriptionModule then
-		var8 = table.clone(var7)
-		var8.displayNameCaption = t.displayNameCaption
-		var8.displayNameModalCaption = t.displayNameModalCaption
+		var2 = table.clone(var1)
+		var2.displayNameCaption = t.displayNameCaption
+		var2.displayNameModalCaption = t.displayNameModalCaption
 	end
-	return useLocalization(var8)
+	return useLocalization(var2)
 end

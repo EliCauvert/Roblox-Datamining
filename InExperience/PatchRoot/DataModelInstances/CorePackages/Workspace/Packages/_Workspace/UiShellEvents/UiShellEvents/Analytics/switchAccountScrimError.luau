@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	p0:sendEventDeferred(p1, "switchAccountScrimError", p2)
+﻿return function(p1, p2, p3)
+	p1:sendEventDeferred(p2, "switchAccountScrimError", p3)
 end

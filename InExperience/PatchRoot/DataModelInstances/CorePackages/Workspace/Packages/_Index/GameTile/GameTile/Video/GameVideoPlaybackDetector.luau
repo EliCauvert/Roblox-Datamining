@@ -20,49 +20,49 @@ local fFlagLuaAppEdpMediaGalleryVideoPreview = require(parent.SharedFlags).FFlag
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), fetchGamePlayabilityAndProductInfo (ref), useIsVideoEligibleModule (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), reactModule (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfigModule (ref), retrievalStatus (ref), videoEndReason (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), usePreferredInput (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref)
-	local var6 = useDispatch()
-	local var7 = useRoactService(roactNetworking)
-	local var8 = useSelector(function(p1)
-		-- upvalues: fetchGamePlayabilityAndProductInfo (copy), p0 (ref)
-		return fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p1, p0.universeId)
+	local var1 = useDispatch()
+	local var2 = useRoactService(roactNetworking)
+	local var3 = useSelector(function(p2)
+		-- upvalues: fetchGamePlayabilityAndProductInfo (copy), p1 (ref)
+		return fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p2, p1.universeId)
 	end)
-	local var9 = useIsVideoEligibleModule(p0.universeId, if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p0.hasPrevalidatedVideoGamePlayability else nil)
-	local var10, var11 = reactModule.useState(false)
-	local var12 = useCanDevicePlayVideoPreview(tileVideoBlockingConfigModule, p0.universeId, p0.pageContext)
+	local var4 = useIsVideoEligibleModule(p1.universeId, if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p1.hasPrevalidatedVideoGamePlayability else nil)
+	local var5, var6 = reactModule.useState(false)
+	local var7 = useCanDevicePlayVideoPreview(tileVideoBlockingConfigModule, p1.universeId, p1.pageContext)
 	
 	return reactModule.createElement(videoPlaybackDetector, {
-		videoKey = p0.videoKey,
-		itemIndex = p0.itemIndex,
-		itemFrameRef = p0.tileRef,
-		playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback then if fFlagLuaAppGameTileSelectionVideoPlayback then getPlaybackDetectionMethod(usePreferredInput(), p0.isHoverSupported) else nil else nil,
-		isHoverSupported = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else p0.isHoverSupported,
-		isHovered = p0.isHovered,
-		isSelected = if fFlagLuaAppGameTileSelectionVideoPlayback then p0.isSelected else nil,
-		autoplay = if fFlagLuaAppGameTileSelectionVideoPlayback then nil elseif fFlagLuaAppEdpMediaGalleryVideoPreview then p0.autoplay else nil,
-		videoPlaybackCoordinator = if p0.videoPlaybackContext then p0.videoPlaybackContext.videoPlaybackCoordinator else nil,
-		onPlaybackChange = p0.onPlaybackChange,
-		videoAnalytics = p0.videoAnalytics,
-		videoDwellTimeInSec = p0.videoDwellTimeInSec,
-		videoVisiblePercent = p0.videoVisiblePercent,
-		isVideoEligible = var9 and var10,
+		videoKey = p1.videoKey,
+		itemIndex = p1.itemIndex,
+		itemFrameRef = p1.tileRef,
+		playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback then if fFlagLuaAppGameTileSelectionVideoPlayback then getPlaybackDetectionMethod(usePreferredInput(), p1.isHoverSupported) else nil else nil,
+		isHoverSupported = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else p1.isHoverSupported,
+		isHovered = p1.isHovered,
+		isSelected = if fFlagLuaAppGameTileSelectionVideoPlayback then p1.isSelected else nil,
+		autoplay = if fFlagLuaAppGameTileSelectionVideoPlayback then nil elseif fFlagLuaAppEdpMediaGalleryVideoPreview then p1.autoplay else nil,
+		videoPlaybackCoordinator = if p1.videoPlaybackContext then p1.videoPlaybackContext.videoPlaybackCoordinator else nil,
+		onPlaybackChange = p1.onPlaybackChange,
+		videoAnalytics = p1.videoAnalytics,
+		videoDwellTimeInSec = p1.videoDwellTimeInSec,
+		videoVisiblePercent = p1.videoVisiblePercent,
+		isVideoEligible = var4 and var5,
 		onVideoIneligible = reactModule.useCallback(function(p2)
-			-- upvalues: p0 (ref), var8 (ref), retrievalStatus (copy), videoEndReason (copy)
-			if p0.videoAnalytics and var8 == retrievalStatus.Done then
-				p0.videoAnalytics.reportVideoEnd(p0.itemIndex, videoEndReason.PlayabilityCheckFailed, p2, -1)
+			-- upvalues: p1 (ref), var3 (ref), retrievalStatus (copy), videoEndReason (copy)
+			if p1.videoAnalytics and var3 == retrievalStatus.Done then
+				p1.videoAnalytics.reportVideoEnd(p1.itemIndex, videoEndReason.PlayabilityCheckFailed, p2, -1)
 			end
-		end, { p0.videoAnalytics, var8 }),
+		end, { p1.videoAnalytics, var3 }),
 		onPlaybackCandidate = reactModule.useCallback(function()
-			-- upvalues: var8 (ref), retrievalStatus (copy), fFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), p0 (ref), var6 (ref), fetchGamePlayabilityAndProductInfo (copy), var7 (ref), var11 (ref), var12 (ref)
-			if (var8 == retrievalStatus.NotStarted or var8 == retrievalStatus.Failed) and (if fFlagLuaAppUsePrevalidatedVideoGamePlayability then not p0.hasPrevalidatedVideoGamePlayability else true) then
-				var6(fetchGamePlayabilityAndProductInfo.Fetch(var7, p0.universeId))
+			-- upvalues: var3 (ref), retrievalStatus (copy), fFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), p1 (ref), var1 (ref), fetchGamePlayabilityAndProductInfo (copy), var2 (ref), var6 (ref), var7 (ref)
+			if (var3 == retrievalStatus.NotStarted or var3 == retrievalStatus.Failed) and (if fFlagLuaAppUsePrevalidatedVideoGamePlayability then not p1.hasPrevalidatedVideoGamePlayability else true) then
+				var1(fetchGamePlayabilityAndProductInfo.Fetch(var2, p1.universeId))
 			end
-			var11(var12())
+			var6(var7())
 		end, {
-			p0.universeId, var8, var6, var7, var12,
-			if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p0.hasPrevalidatedVideoGamePlayability else nil
+			p1.universeId, var3, var1, var2, var7,
+			if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p1.hasPrevalidatedVideoGamePlayability else nil
 		}),
-		viewportVideoAutoplayController = if p0.videoPlaybackContext then p0.videoPlaybackContext.viewportVideoAutoplayController else nil
+		viewportVideoAutoplayController = if p1.videoPlaybackContext then p1.videoPlaybackContext.viewportVideoAutoplayController else nil
 	})
 end

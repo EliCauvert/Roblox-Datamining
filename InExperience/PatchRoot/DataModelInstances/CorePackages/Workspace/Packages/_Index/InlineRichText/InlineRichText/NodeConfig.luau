@@ -8,7 +8,7 @@ local cryoModule = require(parent.Cryo)
 local isDescendantModule = require(inlineRichText.Utils.isDescendant)
 local reactIsModule = require(parent.ReactIs)
 local isInlineElement = require(parent.InlineLayout).Utils.isInlineElement
-local var7 = runService:IsStudio()
+local var1 = runService:IsStudio()
 local t = {
 	[nodeTypeModule.InlineCustom] = {
 		defaultParent = nodeTypeModule.Root,
@@ -26,9 +26,9 @@ local t = {
 			[nodeTypeModule.EngineTag] = true,
 			[nodeTypeModule.Plaintext] = true
 		},
-		validateRenderResult = function(p0)
+		validateRenderResult = function(p1)
 			-- upvalues: isInlineElement (ref)
-			return isInlineElement(p0)
+			return isInlineElement(p1)
 		end
 	},
 	[nodeTypeModule.EngineTag] = {
@@ -59,7 +59,7 @@ local t = {
 		end
 	}
 }
-local var9 = cryoModule.Dictionary.union(t, {
+local var2 = cryoModule.Dictionary.union(t, {
 	[nodeTypeModule.Root] = {
 		getDefault = function()
 			-- upvalues: nodeTypeModule (ref)
@@ -79,47 +79,47 @@ local var9 = cryoModule.Dictionary.union(t, {
 	}
 })
 
-local function getByType(p2)
-	-- upvalues: var9 (ref), name (ref)
-	local var13 = var9[p2]
+local function getByType(p1)
+	-- upvalues: var2 (ref), name (ref)
+	local var3 = var2[p1]
 	
-	if var13 then
-		return var13
+	if var3 then
+		return var3
 	end
-	name:error(`getByType: No config found for node type {p2}`)
+	name:error(`getByType: No config found for node type {p1}`)
 	
 	return nil
 end
 
-local function getByNode(p3)
-	-- upvalues: name (ref), var9 (ref)
-	if not p3 then
+local function getByNode(p2)
+	-- upvalues: name (ref), var2 (ref)
+	if not p2 then
 		name:error("getByNode: No node provided")
 		
 		return nil
 	end
-	local type = p3.type
-	local var14 = var9[type]
+	local type = p2.type
+	local var4 = var2[type]
 	
-	if var14 then
-		return var14
+	if var4 then
+		return var4
 	end
 	name:error(`getByType: No config found for node type {type}`)
 	
 	return nil
 end
 
-local var12 = function(p4, p5)
-	-- upvalues: isDescendantModule (ref), var9 (ref)
-	return isDescendantModule(var9, "InlineRichTextNodeConfigGraph", p4.type, p5.type)
+local var5 = function(p3, p4)
+	-- upvalues: isDescendantModule (ref), var2 (ref)
+	return isDescendantModule(var2, "InlineRichTextNodeConfigGraph", p3.type, p4.type)
 end
 
-if _G.__DEV__ or var7 then
+if _G.__DEV__ or var1 then
 	for i, v in t do
-		if not isDescendantModule(var9, "InlineRichTextNodeConfigGraph", nodeTypeModule.Root, i) then
+		if not isDescendantModule(var2, "InlineRichTextNodeConfigGraph", nodeTypeModule.Root, i) then
 			error(`NodeConfigNonRoot: Node type {i} does not descend from the root node`)
 		end
-		if isDescendantModule(var9, "InlineRichTextNodeConfigGraph", i, nodeTypeModule.Root) then
+		if isDescendantModule(var2, "InlineRichTextNodeConfigGraph", i, nodeTypeModule.Root) then
 			error(`NodeConfigNonRoot: Node type {i} descends from the root node`)
 		end
 		if v.getDefault and v.getDefault().type ~= i then
@@ -128,7 +128,7 @@ if _G.__DEV__ or var7 then
 		if not v.defaultParent then
 			error(`NodeConfigNonRoot: Node type {i} has no defaultParent`)
 		end
-		if not var9[v.defaultParent].getDefault then
+		if not var2[v.defaultParent].getDefault then
 			error(`NodeConfigNonRoot: Node type {v.defaultParent} has no getDefault function, but {i} has it as its defaultParent`)
 		end
 	end
@@ -136,5 +136,5 @@ end
 return {
 	getByType = getByType,
 	getByNode = getByNode,
-	isDescendant = var12
+	isDescendant = var5
 }

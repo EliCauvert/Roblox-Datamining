@@ -4,13 +4,13 @@ local body = require(script.Parent.Body).Body
 local tbl = setmetatable({}, { __index = body })
 tbl.__index = tbl
 
-function tbl.new(p0, p1)
+function tbl.new(p1, p2)
 	-- upvalues: body (ref), tbl (ref), headers (ref)
-	p1 = p1 or {}
-	local tbl_1 = setmetatable(body.new(p0), tbl)
-	tbl_1.status = p1.status or 200
-	tbl_1.statusText = p1.statusText or ""
-	tbl_1.headers = headers.new(p1.headers or {})
+	p2 = p2 or {}
+	local tbl_1 = setmetatable(body.new(p1), tbl)
+	tbl_1.status = p2.status or 200
+	tbl_1.statusText = p2.statusText or ""
+	tbl_1.headers = headers.new(p2.headers or {})
 	tbl_1.headers.guard = "response"
 	tbl_1.type = "text"
 	tbl_1.url = ""
@@ -22,10 +22,10 @@ end
 
 function tbl.error()
 	-- upvalues: tbl (ref)
-	local var3 = tbl.new(nil, { status = 0 })
-	var3.type = "error"
+	local var1 = tbl.new(nil, { status = 0 })
+	var1.type = "error"
 	
-	return var3
+	return var1
 end
 
 function tbl.redirect(_, _)

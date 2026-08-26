@@ -6,23 +6,23 @@ local signalModule = require(parent.Signal)
 
 local function createSignal()
 	-- upvalues: signalModule (ref)
-	local var5, var6 = signalModule.createSignal()
+	local var1, var2 = signalModule.createSignal()
 	
 	return {
 		signal = {
-			Connect = function(_, p0)
-				-- upvalues: var5 (ref)
-				local var7 = var5:subscribe(p0)
+			Connect = function(_, p1)
+				-- upvalues: var1 (ref)
+				local var3 = var1:subscribe(p1)
 				
 				return {
 					Disconnect = function()
-						-- upvalues: var7 (ref)
-						var7:unsubscribe()
+						-- upvalues: var3 (ref)
+						var3:unsubscribe()
 					end
 				}
 			end
 		},
-		fire = var6
+		fire = var2
 	}
 end
 
@@ -38,44 +38,44 @@ function t.new(p1, p2)
 	return tbl
 end
 
-function t:GetPropertyChangedSignal(p3)
-	if self._signals[p3] then
-		return self._signals[p3].signal
+function t:GetPropertyChangedSignal(p1)
+	if self._signals[p1] then
+		return self._signals[p1].signal
 	end
-	error(`{p3} is not a valid property name.`)
+	error(`{p1} is not a valid property name.`)
 end
 
-function t:SetPosition(p4)
-	if self.AbsolutePosition ~= p4 then
-		self.AbsolutePosition = p4
-		self._signals.AbsolutePosition.fire(p4)
-	end
-end
-
-function t:SetSize(p5)
-	if self.AbsoluteSize ~= p5 then
-		self.AbsoluteSize = p5
-		self._signals.AbsoluteSize.fire(p5)
+function t:SetPosition(p1)
+	if self.AbsolutePosition ~= p1 then
+		self.AbsolutePosition = p1
+		self._signals.AbsolutePosition.fire(p1)
 	end
 end
 
-function useMeasurableRef(p6, p7)
+function t:SetSize(p1)
+	if self.AbsoluteSize ~= p1 then
+		self.AbsoluteSize = p1
+		self._signals.AbsoluteSize.fire(p1)
+	end
+end
+
+function useMeasurableRef(p1, p2)
 	-- upvalues: reactModule (ref), t (ref)
-	local var9 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	
-	if var9.current == nil then
-		var9.current = t.new(p6, p7 or Vector2.one)
+	if var1.current == nil then
+		var1.current = t.new(p1, p2 or Vector2.one)
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), p6 (ref)
-		var9.current:SetPosition(p6)
-	end, { p6 })
+		-- upvalues: var1 (ref), p1 (ref)
+		var1.current:SetPosition(p1)
+	end, { p1 })
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), p7 (ref)
-		var9.current:SetSize(p7 or Vector2.one)
-	end, { p7 })
+		-- upvalues: var1 (ref), p2 (ref)
+		var1.current:SetSize(p2 or Vector2.one)
+	end, { p2 })
 	
-	return var9
+	return var1
 end
 
 return useMeasurableRef

@@ -1,10 +1,10 @@
 ﻿local ok, status = pcall(function()
 	return game:GetService("StudioService")
 end)
-local var0 = if ok then status else nil
+local var1 = if ok then status else nil
 local _ = require(script.Parent.Parent.util.Types)
 
 return function()
-	-- upvalues: var0 (ref)
-	return if var0 then { { creatorType = "User", id = var0:GetUserId() } } else {}
+	-- upvalues: var1 (ref)
+	return if var1 then { { creatorType = "User", id = var1:GetUserId() } } else {}
 end

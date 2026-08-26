@@ -7,14 +7,14 @@ local t = {
 	[constantsModule.ThemeName.Light:lower()] = require(parent.LightTheme)
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), constantsModule (ref), validateThemeModule (ref)
-	local var3 = if not (p0 == nil or #p0 <= 0) then t[p0:lower()] else nil
+	local var1 = if not (p1 == nil or #p1 <= 0) then t[p1:lower()] else nil
 	
-	if var3 == nil then
-		var3 = t[constantsModule.DefaultThemeName:lower()]
+	if var1 == nil then
+		var1 = t[constantsModule.DefaultThemeName:lower()]
 	end
-	assert(validateThemeModule(var3))
+	assert(validateThemeModule(var1))
 	
-	return var3
+	return var1
 end

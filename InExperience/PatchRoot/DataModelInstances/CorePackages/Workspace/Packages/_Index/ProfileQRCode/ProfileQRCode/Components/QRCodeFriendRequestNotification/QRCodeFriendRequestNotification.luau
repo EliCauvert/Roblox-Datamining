@@ -20,28 +20,28 @@ local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnect
 local scanqr = images["icons/menu/scanqr"]
 local close = images["icons/navigation/close"]
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), fFlagConnectionsToFriendsRename (ref), useStyle (ref), useLocalUserInfoModule (ref), useAnalyticsModule (ref), reactModule (ref), eventNamesModule (ref), imageSetLabel (ref), scanqr (ref), styledTextLabel (ref), iconButton (ref), close (ref), iconSize (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var7 = useLocalization({
+	local var1 = useLocalization({
 		notificationRequest = textKeysModule.NotificationRequestText,
 		acceptFriend = if fFlagConnectionsToFriendsRename then textKeysModule.AcceptFriend else textKeysModule.AcceptConnection
 	})
-	local var8 = useStyle()
-	local var9 = useLocalUserInfoModule(p0.userId)
-	local var10 = useAnalyticsModule()
-	local var11, var12 = reactModule.useState(false)
+	local var2 = useStyle()
+	local var3 = useLocalUserInfoModule(p1.userId)
+	local var4 = useAnalyticsModule()
+	local var5, var6 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), eventNamesModule (copy), p0 (ref)
-		var10.fireEvent(eventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p0.notificationQueueSize })
-	end, { p0.userId })
+		-- upvalues: var4 (ref), eventNamesModule (copy), p1 (ref)
+		var4.fireEvent(eventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p1.notificationQueueSize })
+	end, { p1.userId })
 	
 	return reactModule.createElement("Frame", {
 		ZIndex = 2,
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
-		BackgroundColor3 = var8.Theme.BackgroundUIDefault.Color,
-		BackgroundTransparency = var8.Theme.BackgroundUIDefault.Transparency
+		BackgroundColor3 = var2.Theme.BackgroundUIDefault.Color,
+		BackgroundTransparency = var2.Theme.BackgroundUIDefault.Transparency
 	}, {
 		UIPadding = reactModule.createElement("UIPadding", {
 			PaddingBottom = UDim.new(0, 12),
@@ -52,8 +52,8 @@ return function(p0)
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
 		UIStroke = reactModule.createElement("UIStroke", {
 			Thickness = 1,
-			Color = var8.Theme.Divider.Color,
-			Transparency = var8.Theme.Divider.Transparency
+			Color = var2.Theme.Divider.Color,
+			Transparency = var2.Theme.Divider.Transparency
 		}),
 		Layout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -82,7 +82,7 @@ return function(p0)
 					BackgroundTransparency = 1,
 					ImageTransparency = 0,
 					Image = scanqr,
-					ImageColor3 = var8.Theme.TextEmphasis.Color,
+					ImageColor3 = var2.Theme.TextEmphasis.Color,
 					Size = UDim2.new(0, 40, 0, 40)
 				})
 			}),
@@ -100,9 +100,9 @@ return function(p0)
 				Username = reactModule.createElement(styledTextLabel, {
 					layoutOrder = 1,
 					textWrapped = true,
-					text = var9.displayName,
-					fontStyle = var8.Font.Header2,
-					colorStyle = var8.Theme.TextDefault,
+					text = var3.displayName,
+					fontStyle = var2.Font.Header2,
+					colorStyle = var2.Theme.TextDefault,
 					size = UDim2.new(1, 0, 0, 20),
 					automaticSize = Enum.AutomaticSize.Y,
 					textXAlignment = Enum.TextXAlignment.Left,
@@ -118,9 +118,9 @@ return function(p0)
 					layoutOrder = 3,
 					textWrapped = true,
 					lineHeight = 1,
-					text = var7.notificationRequest,
-					fontStyle = var8.Font.Body,
-					colorStyle = var8.Theme.TextDefault,
+					text = var1.notificationRequest,
+					fontStyle = var2.Font.Body,
+					colorStyle = var2.Theme.TextDefault,
 					size = UDim2.new(1, 0, 0, 28),
 					automaticSize = Enum.AutomaticSize.Y,
 					textXAlignment = Enum.TextXAlignment.Left,
@@ -136,7 +136,7 @@ return function(p0)
 				CloseButton = reactModule.createElement(iconButton, {
 					icon = close,
 					iconSize = iconSize.Medium,
-					onActivated = p0.onClose,
+					onActivated = p1.onClose,
 					anchorPoint = Vector2.new(0.13, 0.13)
 				})
 			})
@@ -145,13 +145,13 @@ return function(p0)
 			layoutOrder = 2,
 			buttonType = buttonType.PrimarySystem,
 			standardSize = standardButtonSize.Small,
-			text = var7.acceptFriend,
-			fontStyle = var8.Font.CaptionBody,
-			isDisabled = var11,
+			text = var1.acceptFriend,
+			fontStyle = var2.Font.CaptionBody,
+			isDisabled = var5,
 			onActivated = function()
-				-- upvalues: var12 (ref), p0 (ref)
-				var12(true)
-				p0.onAccept(p0.userId)
+				-- upvalues: var6 (ref), p1 (ref)
+				var6(true)
+				p1.onAccept(p1.userId)
 			end
 		})
 	})

@@ -13,18 +13,18 @@ local t = {
 	size = iconSizeModule.Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useRotationModule (ref), useTokensModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref)
-	local var10 = withDefaultsModule(p0, t)
+	local var1 = withDefaultsModule(p1, t)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var10, { tag = "auto-xy" }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "auto-xy" }), {
 		Icon = reactModule.createElement(iconModule, {
 			name = "icons/graphic/loadingspinner",
-			size = var10.size,
+			size = var1.size,
 			style = useTokensModule().DarkMode.Content.Emphasis,
 			Rotation = useRotationModule(),
-			ref = p1,
-			testId = `{var10.testId}--icon`
+			ref = p2,
+			testId = `{var1.testId}--icon`
 		})
 	})
 end))

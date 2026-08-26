@@ -11,85 +11,85 @@ local fFlagSduiLaunchExperienceAction = require(parent.SharedFlags).FFlagSduiLau
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-return function(p0, p1, p2, p3, p4, p5, p6)
+return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: reactModule (ref), fFlagSduiLaunchExperienceAction (ref), sduiReportGamePlayIntentModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), findAnalyticsFieldInAncestors (ref), setGamePlaySession (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), gamePlayIntent (ref)
-	local eventIngest = p0.dependencies.eventIngest
-	local sessionService = p0.dependencies.sessionService
+	local eventIngest = p1.dependencies.eventIngest
+	local sessionService = p1.dependencies.sessionService
 	
-	return reactModule.useCallback(function(p7)
-		-- upvalues: fFlagSduiLaunchExperienceAction (copy), sduiReportGamePlayIntentModule (copy), p0 (ref), p1 (ref), p2 (ref), p3 (ref), p4 (write), p5 (ref), fFlagSduiExperienceDetailsSupport (copy), p6 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), findAnalyticsFieldInAncestors (copy), setGamePlaySession (copy), sessionService (ref), sponsoredGamesRecordClick (copy), calculateRowPositionFields (copy), gamePlayIntent (copy), eventIngest (ref)
+	return reactModule.useCallback(function(p8)
+		-- upvalues: fFlagSduiLaunchExperienceAction (copy), sduiReportGamePlayIntentModule (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (write), p6 (ref), fFlagSduiExperienceDetailsSupport (copy), p7 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), findAnalyticsFieldInAncestors (copy), setGamePlaySession (copy), sessionService (ref), sponsoredGamesRecordClick (copy), calculateRowPositionFields (copy), gamePlayIntent (copy), eventIngest (ref)
 		if fFlagSduiLaunchExperienceAction then
 			sduiReportGamePlayIntentModule({
-				sduiContext = p0,
-				analyticsContext = p1,
-				universeId = p2,
-				placeId = p3,
-				rootPlaceId = p4,
-				appliedFilters = p5,
-				launchData = if fFlagSduiExperienceDetailsSupport then p6 else nil,
-				actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p7 else nil
+				sduiContext = p1,
+				analyticsContext = p2,
+				universeId = p3,
+				placeId = p4,
+				rootPlaceId = p5,
+				appliedFilters = p6,
+				launchData = if fFlagSduiExperienceDetailsSupport then p7 else nil,
+				actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p8 else nil
 			})
 			
 			return
 		end
-		p4 = p4 or p3
+		p5 = p5 or p4
 		local collectionPosition = nil
 		local collectionId = nil
 		local itemsPerRow = nil
 		local startRowNumber = nil
-		local var3 = p1.getCollectionData and p1.getCollectionData() or nil
+		local var1 = p2.getCollectionData and p2.getCollectionData() or nil
 		
-		if var3 then
-			collectionPosition = var3.collectionPosition
-			collectionId = var3.collectionId
-			itemsPerRow = var3.itemsPerRow
-			startRowNumber = var3.startRowNumber
+		if var1 then
+			collectionPosition = var1.collectionPosition
+			collectionId = var1.collectionId
+			itemsPerRow = var1.itemsPerRow
+			startRowNumber = var1.startRowNumber
 		end
-		local collectionPosition_1 = collectionPosition or findAnalyticsFieldInAncestors("collectionIndex", p1)
-		local collectionId_1 = collectionId or findAnalyticsFieldInAncestors("collectionId", p1)
-		local var6 = findAnalyticsFieldInAncestors("gameSetTargetId", p1)
-		local var7 = findAnalyticsFieldInAncestors("itemPosition", p1, -1)
-		local var8 = findAnalyticsFieldInAncestors("topicDataPosition", p1, var7)
-		local var9 = findAnalyticsFieldInAncestors("heroUnitId", p1)
-		local var10 = findAnalyticsFieldInAncestors("eventContext", p1, "ExperienceTile")
-		local var11 = findAnalyticsFieldInAncestors("referralSource", p1)
-		local var12 = findAnalyticsFieldInAncestors("gamePlaySessionType", p1)
+		local collectionPosition_1 = collectionPosition or findAnalyticsFieldInAncestors("collectionIndex", p2)
+		local collectionId_1 = collectionId or findAnalyticsFieldInAncestors("collectionId", p2)
+		local var2 = findAnalyticsFieldInAncestors("gameSetTargetId", p2)
+		local var3 = findAnalyticsFieldInAncestors("itemPosition", p2, -1)
+		local var4 = findAnalyticsFieldInAncestors("topicDataPosition", p2, var3)
+		local var5 = findAnalyticsFieldInAncestors("heroUnitId", p2)
+		local var6 = findAnalyticsFieldInAncestors("eventContext", p2, "ExperienceTile")
+		local var7 = findAnalyticsFieldInAncestors("referralSource", p2)
+		local var8 = findAnalyticsFieldInAncestors("gamePlaySessionType", p2)
 		
-		if var12 then
-			setGamePlaySession(sessionService, var12, true)
+		if var8 then
+			setGamePlaySession(sessionService, var8, true)
 		end
-		local var13 = findAnalyticsFieldInAncestors("nativeAdData", p1)
+		local var9 = findAnalyticsFieldInAncestors("nativeAdData", p2)
 		
-		if var13 == nil then
-			var13 = findAnalyticsFieldInAncestors("adId", p1)
+		if var9 == nil then
+			var9 = findAnalyticsFieldInAncestors("adId", p2)
 		end
-		if var13 then
-			sponsoredGamesRecordClick(p0.dependencies.networking, tostring(var13))
+		if var9 then
+			sponsoredGamesRecordClick(p1.dependencies.networking, tostring(var9))
 		end
-		local var14 = calculateRowPositionFields(var7, itemsPerRow, startRowNumber)
-		gamePlayIntent(eventIngest, tostring(var10), {
-			placeId = tostring(p3),
-			rootPlaceId = tonumber(p4),
-			universeId = tostring(p2),
+		local var10 = calculateRowPositionFields(var3, itemsPerRow, startRowNumber)
+		gamePlayIntent(eventIngest, tostring(var6), {
+			placeId = tostring(p4),
+			rootPlaceId = tonumber(p5),
+			universeId = tostring(p3),
 			sortIndex = tostring(collectionPosition_1),
-			sortEntryIndex = if var7 then tostring(var7) else nil,
-			referralSource = var11,
+			sortEntryIndex = if var3 then tostring(var3) else nil,
+			referralSource = var7,
 			gameSetTypeId = tostring(collectionId_1),
-			gameSetTargetId = var6,
-			appliedFilters = p5,
-			topicDataPosition = var8,
-			nativeAdData = var13,
-			pageName = p0.appPage,
-			positionInRow = var14.positionInRow,
-			rowNumber = var14.rowInSort,
-			feedRowNumber = var14.rowOnPage,
-			heroUnitId = var9,
-			tileType = findAnalyticsFieldInAncestors("tileType", p1, "GameTile"),
-			launchData = if fFlagSduiExperienceDetailsSupport then p6 else nil,
-			actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p7 else nil
+			gameSetTargetId = var2,
+			appliedFilters = p6,
+			topicDataPosition = var4,
+			nativeAdData = var9,
+			pageName = p1.appPage,
+			positionInRow = var10.positionInRow,
+			rowNumber = var10.rowInSort,
+			feedRowNumber = var10.rowOnPage,
+			heroUnitId = var5,
+			tileType = findAnalyticsFieldInAncestors("tileType", p2, "GameTile"),
+			launchData = if fFlagSduiExperienceDetailsSupport then p7 else nil,
+			actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p8 else nil
 		})
 	end, {
-		eventIngest, p1, p2, p3, p4, p5,
-		if fFlagSduiExperienceDetailsSupport then p6 else nil, sessionService, p0
+		eventIngest, p2, p3, p4, p5, p6,
+		if fFlagSduiExperienceDetailsSupport then p7 else nil, sessionService, p1
 	})
 end

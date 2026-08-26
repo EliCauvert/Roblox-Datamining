@@ -17,17 +17,17 @@ toastIcon.validateProps = tModule.interface({
 })
 toastIcon.defaultProps = { BackgroundTransparency = 1 }
 
-function toastIcon.render(p0)
+function toastIcon.render(p1)
 	-- upvalues: withStyleModule (ref), cryoModule (ref), roactModule (ref), imageSetComponentModule (ref)
-	return withStyleModule(function(p1)
-		-- upvalues: p0 (ref), cryoModule (copy), roactModule (copy), imageSetComponentModule (copy)
-		local theme = p1.Theme
-		local colorStyle = p0.props.colorStyle
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), cryoModule (copy), roactModule (copy), imageSetComponentModule (copy)
+		local theme = p2.Theme
+		local colorStyle = p1.props.colorStyle
 		
 		if colorStyle == nil then
 			colorStyle = theme.IconEmphasis
 		end
-		return roactModule.createElement(imageSetComponentModule.Label, cryoModule.Dictionary.join(p0.props, {
+		return roactModule.createElement(imageSetComponentModule.Label, cryoModule.Dictionary.join(p1.props, {
 			colorStyle = cryoModule.None,
 			ImageColor3 = colorStyle.Color,
 			ImageTransparency = colorStyle.Transparency

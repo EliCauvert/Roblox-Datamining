@@ -1,16 +1,16 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
 		getAvatarHeaderIcon = function()
-			-- upvalues: p0 (ref)
-			return p0.AvatarHeaderIcon or "LuaApp/icons/ic-back"
+			-- upvalues: p1 (ref)
+			return p1.AvatarHeaderIcon or "LuaApp/icons/ic-back"
 		end,
 		getAvatarEditorShowBuyRobuxOnTopBar = function()
-			-- upvalues: p0 (ref)
-			return p0.AvatarEditorShowBuyRobuxOnTopBar or false
+			-- upvalues: p1 (ref)
+			return p1.AvatarEditorShowBuyRobuxOnTopBar or false
 		end,
 		getCustomOutfitNames = function()
-			-- upvalues: p0 (ref)
-			return p0.CustomCostumeNames == nil or p0.CustomCostumeNames
+			-- upvalues: p1 (ref)
+			return p1.CustomCostumeNames == nil or p1.CustomCostumeNames
 		end
 	}
 end

@@ -5,7 +5,7 @@ local _ = require(foundation.Components.Types)
 local useBreakpointModule = require(script.Parent.useBreakpoint)
 local useResponsiveModule = require(foundation.Providers.Responsive.useResponsive)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useBreakpointModule (ref), useResponsiveModule (ref)
-	return p1[useResponsiveModule().config.breakpoint.shortNames[useBreakpointModule(p0)]]
+	return p2[useResponsiveModule().config.breakpoint.shortNames[useBreakpointModule(p1)]]
 end

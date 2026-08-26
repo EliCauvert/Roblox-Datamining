@@ -16,14 +16,14 @@ t.INFO = "info"
 t.WARNING = "warning"
 t.ERROR = "error"
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: rbxAnalyticsService (ref), t (ref)
-	if not p0 then
-		p0 = rbxAnalyticsService
+	if not p1 then
+		p1 = rbxAnalyticsService
 	end
-	assert(p0, "Analytics impl must not be nil.")
+	assert(p1, "Analytics impl must not be nil.")
 	
-	return setmetatable({ _impl = p0 }, t)
+	return setmetatable({ _impl = p1 }, t)
 end
 
 local function stub() end
@@ -44,47 +44,47 @@ function t:setImpl(p1)
 	self._impl = p1
 end
 
-function t:_report(p2, p3, p4, p5)
-	local text = p2 .. "-" .. p3
+function t:_report(p1, p2, p3, p4)
+	local text = p1 .. "-" .. p3
 	
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUsePointsV2") then
-		self._impl:ReportInfluxSeries(text, p5, game:GetFastInt("LuaVoiceChatAnalyticsPointsThrottle"))
+		self._impl:ReportInfluxSeries(text, p4, game:GetFastInt("LuaVoiceChatAnalyticsPointsThrottle"))
 	end
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUseCounterV2") then
-		local var6 = text
+		local var1 = text
 		
-		if p4 then
-			var6 ..= "-" .. p4
+		if p3 then
+			var1 ..= "-" .. p4
 		end
-		local var7 = var6
+		local var2 = var1
 		
-		if p5 and p5.result then
-			var7 ..= "-" .. p5.result
+		if p4 and p4.result then
+			var2 ..= "-" .. p5.result
 		end
-		self._impl:ReportCounter(var7, 1)
+		self._impl:ReportCounter(var2, 1)
 	end
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUseEventsV2") then
-		self._impl:SendEventDeferred("client", p2, p3, p5)
+		self._impl:SendEventDeferred("client", p1, p2, p4)
 	end
 end
 
-function t:reportVoiceChatJoinResult(p6, p7, p8)
+function t:reportVoiceChatJoinResult(p1, p2, p3)
 	-- upvalues: t (ref)
-	self:_report("voiceChat", "defaultChannelJoinResults", p7, { success = p6, result = p7, logLevel = p8 or t.INFO })
+	self:_report("voiceChat", "defaultChannelJoinResults", p2, { success = p1, result = p2, logLevel = p3 or t.INFO })
 end
 
-function t:reportBanMessageEvent(p9)
+function t:reportBanMessageEvent(p1)
 	if game:GetFastFlag("LuaVoiceChatAnalyticsBanMessage") then
 		self._impl:ReportCounter("voiceChat-reportBanMessage" .. p9, 1)
 	end
 end
 
-function t:reportBanMessageEventV2(p10, p11, p12, p13)
+function t:reportBanMessageEventV2(p1, p2, p3, p4)
 	self:_report("voiceChat", "reportBanEvent", nil, {
-		eventType = p10,
-		banReason = p11,
-		userId = p12,
-		voiceSessionId = p13
+		eventType = p1,
+		banReason = p2,
+		userId = p3,
+		voiceSessionId = p4
 	})
 end
 
@@ -98,93 +98,93 @@ function t:reportOutOfOrderSequence()
 	self._impl:ReportCounter("voiceChat-outOfOrderSequence", 1)
 end
 
-function t:reportReceivedNudge(p14, p15, p16)
-	local var8 = DateTime.now().UnixTimestampMillis - DateTime.fromIsoDate(p14.deliveryTime).UnixTimestampMillis
+function t:reportReceivedNudge(p1, p2, p3)
+	local var1 = DateTime.now().UnixTimestampMillis - DateTime.fromIsoDate(p1.deliveryTime).UnixTimestampMillis
 	self._impl:ReportCounter("voicechat-receivednudge", 1)
-	self._impl:ReportCounter("voicechat-receivednudgeduration", var8)
+	self._impl:ReportCounter("voicechat-receivednudgeduration", var1)
 	self._impl:SendEventDeferred("client", "voiceChat", "receivedNudge", {
-		type = p14.type,
-		durationInMs = var8,
-		userId = p15,
-		voiceSessionId = p16
+		type = p1.type,
+		durationInMs = var1,
+		userId = p2,
+		voiceSessionId = p3
 	})
 end
 
-function t:reportClosedNudge(p17, p18)
+function t:reportClosedNudge(p1, p2)
 	self._impl:ReportCounter("voicechat-closednudge", 1)
-	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "CLOSED", userId = p17, voiceSessionId = p18 })
+	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "CLOSED", userId = p1, voiceSessionId = p2 })
 end
 
-function t:reportAcknowledgedNudge(p19, p20)
+function t:reportAcknowledgedNudge(p1, p2)
 	self._impl:ReportCounter("voicechat-acknowledgednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
 		closeType = "ACKNOWLEDGED",
-		userId = p19,
-		voiceSessionId = p20
+		userId = p1,
+		voiceSessionId = p2
 	})
 end
 
-function t:reportDeniedNudge(p21, p22)
+function t:reportDeniedNudge(p1, p2)
 	self._impl:ReportCounter("voicechat-deniednudge", 1)
-	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "DENIED", userId = p21, voiceSessionId = p22 })
+	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "DENIED", userId = p1, voiceSessionId = p2 })
 end
 
-function t:reportVoiceMuteIndividual(p23)
+function t:reportVoiceMuteIndividual(p1)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteIndividual", {
-		user_id = p23.userId,
-		client_session_id = p23.clientSessionId,
-		target_user_id = p23.targetUserId,
-		channel_id = p23.channelId,
-		context = p23.context,
-		muted = p23.muted
+		user_id = p1.userId,
+		client_session_id = p1.clientSessionId,
+		target_user_id = p1.targetUserId,
+		channel_id = p1.channelId,
+		context = p1.context,
+		muted = p1.muted
 	})
 end
 
-function t:reportVoiceMuteGroup(p24)
+function t:reportVoiceMuteGroup(p1)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteGroup", {
-		user_id = p24.userId,
-		client_session_id = p24.clientSessionId,
-		channel_id = p24.channelId,
-		context = p24.context,
-		group_type = p24.groupType,
-		muted = p24.muted
+		user_id = p1.userId,
+		client_session_id = p1.clientSessionId,
+		channel_id = p1.channelId,
+		context = p1.context,
+		group_type = p1.groupType,
+		muted = p1.muted
 	})
 end
 
-function t:reportVoiceMuteSelf(p25)
+function t:reportVoiceMuteSelf(p1)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteSelf", {
-		user_id = p25.userId,
-		client_session_id = p25.clientSessionId,
-		channel_id = p25.channelId,
-		context = p25.context,
-		muted = p25.muted
+		user_id = p1.userId,
+		client_session_id = p1.clientSessionId,
+		channel_id = p1.channelId,
+		context = p1.context,
+		muted = p1.muted
 	})
 end
 
-function t:reportJoinVoiceButtonEvent(p26, p27, p28, p29, p30, p31)
+function t:reportJoinVoiceButtonEvent(p1, p2, p3, p4, p5, p6)
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
-		eventType = p26,
-		universeId = p27,
-		placeId = p28,
-		playSessionId = p29,
-		buttonContext = p30,
-		buttonConsequence = p31
+		eventType = p1,
+		universeId = p2,
+		placeId = p3,
+		playSessionId = p4,
+		buttonContext = p5,
+		buttonConsequence = p6
 	})
 end
 
-function t:reportJoinVoiceButtonEventWithVoiceSessionId(p32, p33, p34, p35, p36, p37, p38)
+function t:reportJoinVoiceButtonEventWithVoiceSessionId(p1, p2, p3, p4, p5, p6, p7)
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
-		eventType = p32,
-		universeId = p33,
-		placeId = p34,
-		playSessionId = p35,
-		voiceSessionId = p36,
-		buttonContext = p37,
-		buttonConsequence = p38
+		eventType = p1,
+		universeId = p2,
+		placeId = p3,
+		playSessionId = p4,
+		voiceSessionId = p5,
+		buttonContext = p6,
+		buttonConsequence = p7
 	})
 end
 
-function t.reportJoinVoiceUpsellEvent(_, p39, p40, p41, p42, p43)
+function t.reportJoinVoiceUpsellEvent(_, p1, p2, p3, p4, p5)
 	-- upvalues: sessionService (ref), telemetryService (ref)
 	telemetryService:LogEvent({
 		description = "Event fired when user sees or interacts with Join Voice button",
@@ -195,11 +195,11 @@ function t.reportJoinVoiceUpsellEvent(_, p39, p40, p41, p42, p43)
 		lastUpdated = { 2025, 10, 30 }
 	}, {
 		customFields = {
-			user_is_age_verified = p41,
-			button_context = p42,
-			button_consequence = p43,
+			user_is_age_verified = p3,
+			button_context = p4,
+			button_consequence = p5,
 			clientTimeStamp = DateTime.now().UnixTimestampMillis,
-			playSessionId = p40,
+			playSessionId = p2,
 			sd_platform_id = sessionService:GetSessionID("level0"),
 			sd_logged_in_id = sessionService:GetSessionID("level1")
 		},
@@ -207,45 +207,45 @@ function t.reportJoinVoiceUpsellEvent(_, p39, p40, p41, p42, p43)
 	})
 end
 
-function t:reportLeaveVoiceButtonEvent(p44, p45, p46, p47, p48)
+function t:reportLeaveVoiceButtonEvent(p1, p2, p3, p4, p5)
 	self._impl:SendEventDeferred("client", "voice", "leaveVoiceButtonEvent", {
-		eventType = p44,
-		universeId = p45,
-		placeId = p46,
-		playSessionId = p47,
-		voiceSessionId = p48
+		eventType = p1,
+		universeId = p2,
+		placeId = p3,
+		playSessionId = p4,
+		voiceSessionId = p5
 	})
 end
 
-function t:reportInExpConsent(p49, p50, p51, p52, p53)
+function t:reportInExpConsent(p1, p2, p3, p4, p5)
 	self._impl:SendEventDeferred("client", "voiceChat", "inExpConsentModalEvent", {
-		eventType = p49,
-		entry = p50,
-		universeId = p51,
-		placeId = p52,
-		playSessionId = p53
+		eventType = p1,
+		entry = p2,
+		universeId = p3,
+		placeId = p4,
+		playSessionId = p5
 	})
 end
 
-function t:reportDevicePermissionsModalEvent(p54, p55, p56, p57, p58)
+function t:reportDevicePermissionsModalEvent(p1, p2, p3, p4, p5)
 	self._impl:SendEventDeferred("client", "voiceChat", "devicePermissionsModalEvent", {
-		eventType = p54,
-		universeId = p56,
-		placeId = p57,
-		playSessionId = string.sub(p58, 2, #p58 - 1),
-		voiceSessionId = p55
+		eventType = p1,
+		universeId = p3,
+		placeId = p4,
+		playSessionId = string.sub(p5, 2, #p5 - 1),
+		voiceSessionId = p2
 	})
 end
 
-function t:reportConnectDisconnectEvents(p59, p60)
-	self._impl:SendEventDeferred("client", "voiceChat", p59, p60)
+function t:reportConnectDisconnectEvents(p1, p2)
+	self._impl:SendEventDeferred("client", "voiceChat", p1, p2)
 end
 
-function t:reportVoiceEvents(p61, p62)
-	self._impl:SendEventDeferred("client", "voice", p61, p62)
+function t:reportVoiceEvents(p1, p2)
+	self._impl:SendEventDeferred("client", "voice", p1, p2)
 end
 
-function t.reportVoiceVolumeEligibility(_, p63)
+function t.reportVoiceVolumeEligibility(_, p1)
 	-- upvalues: telemetryService (ref)
 	telemetryService:LogEvent({
 		eventName = "VoiceVolumeControlsEligibility",
@@ -256,18 +256,18 @@ function t.reportVoiceVolumeEligibility(_, p63)
 		lastUpdated = { 2026, 7, 7 }
 	}, {
 		customFields = {
-			playSessionId = p63.playSessionId,
-			voiceSessionId = p63.voiceSessionId,
-			voiceChatVolume = p63.voiceChatVolume,
-			usesNewAudioApi = p63.usesNewAudioApi,
-			enablesVoiceVolumeControls = p63.enablesVoiceVolumeControls,
-			isEligible = p63.isEligible
+			playSessionId = p1.playSessionId,
+			voiceSessionId = p1.voiceSessionId,
+			voiceChatVolume = p1.voiceChatVolume,
+			usesNewAudioApi = p1.usesNewAudioApi,
+			enablesVoiceVolumeControls = p1.enablesVoiceVolumeControls,
+			isEligible = p1.isEligible
 		},
 		standardizedFields = { "addPlaceId", "addUniverseId" }
 	})
 end
 
-function t.reportVoiceVolumeImpressions(_, p64)
+function t.reportVoiceVolumeImpressions(_, p1)
 	-- upvalues: telemetryService (ref)
 	telemetryService:LogEvent({
 		eventName = "VoiceVolumeControlsImpressions",
@@ -278,11 +278,11 @@ function t.reportVoiceVolumeImpressions(_, p64)
 		lastUpdated = { 2026, 7, 7 }
 	}, {
 		customFields = {
-			playSessionId = p64.playSessionId,
-			voiceSessionId = p64.voiceSessionId,
-			sliderSeen = p64.sliderSeen,
-			voiceJoinTimestampMs = p64.voiceJoinTimestampMs,
-			sliderSeenTimestampMs = p64.sliderSeenTimestampMs
+			playSessionId = p1.playSessionId,
+			voiceSessionId = p1.voiceSessionId,
+			sliderSeen = p1.sliderSeen,
+			voiceJoinTimestampMs = p1.voiceJoinTimestampMs,
+			sliderSeenTimestampMs = p1.sliderSeenTimestampMs
 		},
 		standardizedFields = { "addPlaceId", "addUniverseId" }
 	})

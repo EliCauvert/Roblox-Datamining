@@ -5,10 +5,10 @@ local _ = require(currencyTransfers.Stores.createTransferStore)
 
 return function()
 	-- upvalues: reactModule (ref), transferContextModule (ref)
-	local var3 = reactModule.useContext(transferContextModule)
+	local var1 = reactModule.useContext(transferContextModule)
 	
-	if var3 == nil then
+	if var1 == nil then
 		error("useTransferStore must be used within a TransferContext")
 	end
-	return var3
+	return var1
 end

@@ -26,110 +26,110 @@ local t = {
 	buttonKey = if fFlagInExperienceAddPhoneViewNewCopy then "Feature.AccountSettings.Action.Verify" else "Feature.VerificationUpsell.Action.Next"
 }
 
-local function getButtonStackProps(p0, p1, p2, p3, p4)
+local function getButtonStackProps(p1, p2, p3, p4, p5)
 	-- upvalues: buttonType (ref)
 	local list = {
 		{
 			buttonType = buttonType.PrimarySystem,
-			props = { onActivated = p1, text = p0, isDisabled = p2 }
+			props = { onActivated = p2, text = p1, isDisabled = p3 }
 		}
 	}
 	
-	if p3 and p3 ~= "" then
+	if p4 and p4 ~= "" then
 		table.insert(list, 1, {
 			buttonType = buttonType.Secondary,
-			props = { isDisabled = false, onActivated = p4, text = p3 }
+			props = { isDisabled = false, onActivated = p5, text = p4 }
 		})
 	end
 	return { buttonHeight = 48, buttons = list }
 end
 
-return function(p5)
+return function(p1)
 	-- upvalues: mergePropsModule (ref), t (ref), fFlagInExperienceAddPhoneViewNewCopy (ref), useStyle (ref), fFlagRenameDeprecatedUIBloxTokens (ref), useLocalization (ref), reactModule (ref), text (ref), useExternalEvent (ref), userInputService (ref), roactModule (ref), countryCodeButtonModule (ref), getFFlagAddMorePhoneUpsellEvents (ref), textField (ref), interactiveAlert (ref), getButtonStackProps (ref), countryCodeDropdownContainer (ref)
-	local var11 = mergePropsModule(t, p5)
-	local var12 = if fFlagInExperienceAddPhoneViewNewCopy then {
+	local var1 = mergePropsModule(t, p1)
+	local var2 = if fFlagInExperienceAddPhoneViewNewCopy then {
 		phoneNumberKey = "Feature.VerificationUpsell.Label.PhoneNumber",
 		disclaimerKey = "Feature.VerificationUpsell.Description.VerificationCodeSmsFeesMayApply",
 		termsOfUseKey = "Feature.VerificationUpsell.Action.TermsOfUse",
 		privacyPolicyKey = "Feature.VerificationUpsell.Action.PrivacyPolicy",
 		subtitleKey = "Feature.AccountSettings.Description.AddPhoneNumber",
 		phonePrivacyDisclaimerKey = "Feature.AccountSettings.Description.NotShownPublicly",
-		titleKey = var11.titleKey,
-		descriptionKey = var11.descriptionKey,
-		buttonKey = var11.buttonKey,
-		legalTextKey = var11.legalTextKey
+		titleKey = var1.titleKey,
+		descriptionKey = var1.descriptionKey,
+		buttonKey = var1.buttonKey,
+		legalTextKey = var1.legalTextKey
 	} else {
 		phoneNumberKey = "Feature.VerificationUpsell.Label.PhoneNumber",
 		disclaimerKey = "Feature.VerificationUpsell.Description.VerificationCodeSmsFeesMayApply",
 		termsOfUseKey = "Feature.VerificationUpsell.Action.TermsOfUse",
 		privacyPolicyKey = "Feature.VerificationUpsell.Action.PrivacyPolicy",
-		titleKey = var11.titleKey,
-		descriptionKey = var11.descriptionKey,
-		buttonKey = var11.buttonKey,
-		legalTextKey = var11.legalTextKey
+		titleKey = var1.titleKey,
+		descriptionKey = var1.descriptionKey,
+		buttonKey = var1.buttonKey,
+		legalTextKey = var1.legalTextKey
 	}
 	
-	if var11.extraButtonKey and var11.extraButtonKey ~= "" then
-		var12.extraButtonKey = var11.extraButtonKey
+	if var1.extraButtonKey and var1.extraButtonKey ~= "" then
+		var2.extraButtonKey = var1.extraButtonKey
 	end
-	local var13 = useStyle()
-	local tokens = var13.Tokens
-	local var14 = if fFlagRenameDeprecatedUIBloxTokens then tokens.Typography.BodyLarge else tokens.Component.TextField.Base.Field.Typography
-	local font = var14.Font
-	local fontSize = var14.FontSize
-	local var15 = useLocalization(var12)
-	local baseSize = var13.Font.BaseSize
-	local relativeSize = var13.Font.CaptionHeader.RelativeSize
-	local isDisabled = var11.isDisabled
+	local var3 = useStyle()
+	local tokens = var3.Tokens
+	local var4 = if fFlagRenameDeprecatedUIBloxTokens then tokens.Typography.BodyLarge else tokens.Component.TextField.Base.Field.Typography
+	local font = var4.Font
+	local fontSize = var4.FontSize
+	local var5 = useLocalization(var2)
+	local baseSize = var3.Font.BaseSize
+	local relativeSize = var3.Font.CaptionHeader.RelativeSize
+	local isDisabled = var1.isDisabled
 	local small = tokens.Gap.Small
 	local size1200 = tokens.Size.Size_1200
-	local prefix = var11.countryCode.prefix
-	local var16, var17 = reactModule.useState(false)
+	local prefix = var1.countryCode.prefix
+	local var6, var7 = reactModule.useState(false)
 	local maxValue = math.max(text.GetTextWidth(prefix, font, fontSize) + 24, size1200)
-	local var19, var20 = reactModule.useState(300)
+	local var8, var9 = reactModule.useState(300)
 	
-	local var21 = function(p6)
-		-- upvalues: var20 (ref)
-		var20(p6.AbsoluteSize.X)
+	local var10 = function(p2)
+		-- upvalues: var9 (ref)
+		var9(p2.AbsoluteSize.X)
 	end
 	
-	local var22 = reactModule.useRef(nil)
-	local var23 = reactModule.useRef(nil)
-	local var24 = reactModule.useRef(nil)
+	local var11 = reactModule.useRef(nil)
+	local var12 = reactModule.useRef(nil)
+	local var13 = reactModule.useRef(nil)
 	local vector2 = Vector2.new(0, 0)
 	local vector2_1 = Vector2.new(0, 0)
 	local vector2_2 = Vector2.new(0, 0)
 	
-	if var22.current then
-		vector2 = var22.current.AbsolutePosition
+	if var11.current then
+		vector2 = var11.current.AbsolutePosition
 	end
-	if var23.current then
-		vector2_1 = var23.current.AbsolutePosition
+	if var12.current then
+		vector2_1 = var12.current.AbsolutePosition
 	end
-	if var24.current then
-		vector2_2 = var24.current.AbsolutePosition
+	if var13.current then
+		vector2_2 = var13.current.AbsolutePosition
 	end
-	local minValue = math.min(var11.screenSize.Y - (vector2.Y + size1200 + small - vector2_1.Y) - small, 400)
-	useExternalEvent(userInputService.InputBegan, reactModule.useCallback(function(p7)
-		-- upvalues: size1200 (ref), small (ref), vector2_2 (write), var19 (ref), minValue (write), maxValue (ref), var16 (ref), var17 (ref)
-		local var31 = size1200 + small
+	local minValue = math.min(var1.screenSize.Y - (vector2.Y + size1200 + small - vector2_1.Y) - small, 400)
+	useExternalEvent(userInputService.InputBegan, reactModule.useCallback(function(p2)
+		-- upvalues: size1200 (ref), small (ref), vector2_2 (write), var8 (ref), minValue (write), maxValue (ref), var6 (ref), var7 (ref)
+		local var14 = size1200 + small
 		
-		if var16 and not (vector2_2.X < p7.Position.X and (p7.Position.X < vector2_2.X + var19 and (vector2_2.Y + var31 < p7.Position.Y and p7.Position.Y < vector2_2.Y + var31 + minValue))) and not (vector2_2.X < p7.Position.X and (p7.Position.X < vector2_2.X + maxValue and (vector2_2.Y < p7.Position.Y and p7.Position.Y < vector2_2.Y + size1200))) then
-			var17(false)
+		if var6 and not (vector2_2.X < p2.Position.X and (p2.Position.X < vector2_2.X + var8 and (vector2_2.Y + var14 < p2.Position.Y and p2.Position.Y < vector2_2.Y + var14 + minValue))) and not (vector2_2.X < p2.Position.X and (p2.Position.X < vector2_2.X + maxValue and (vector2_2.Y < p2.Position.Y and p2.Position.Y < vector2_2.Y + size1200))) then
+			var7(false)
 		end
 	end, {
-		var16,
+		var6,
 		vector2_2,
-		var19,
+		var8,
 		maxValue,
 		size1200
 	}))
-	local var29 = var11.errorMessage and var11.errorMessage ~= ""
+	local var14 = var1.errorMessage and var1.errorMessage ~= ""
 	local frame = reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		[roactModule.Ref] = var22
+		[roactModule.Ref] = var11
 	}, {
 		ListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -153,45 +153,45 @@ return function(p5)
 				layoutOrder = 1,
 				countryPrefix = "+" .. prefix,
 				onButtonClick = function()
-					-- upvalues: var17 (ref), var16 (ref), getFFlagAddMorePhoneUpsellEvents (copy), var11 (ref)
-					var17(not var16)
+					-- upvalues: var7 (ref), var6 (ref), getFFlagAddMorePhoneUpsellEvents (copy), var1 (ref)
+					var7(not var6)
 					
 					if getFFlagAddMorePhoneUpsellEvents then
-						var11.onCountryCodeSelectorClick()
+						var1.onCountryCodeSelectorClick()
 					end
 				end,
 				size = UDim2.new(0, maxValue, 0, tokens.Size.Size_1200),
 				font = font,
 				textSize = fontSize,
-				forwardRef = var24,
-				error = var29
+				forwardRef = var13,
+				error = var14
 			}),
 			PhoneInputBox = reactModule.createElement(textField, {
 				placeholder = "",
 				required = true,
 				LayoutOrder = 2,
-				text = var11.phoneNumber,
-				onChange = function(p8)
-					-- upvalues: var11 (ref)
-					var11.onPhoneNumberTextChange({ Text = p8 })
+				text = var1.phoneNumber,
+				onChange = function(p2)
+					-- upvalues: var1 (ref)
+					var1.onPhoneNumberTextChange({ Text = p2 })
 				end,
 				width = UDim.new(1, -(maxValue + small)),
-				error = var29,
-				textInputType = if var11.usePhoneNumberTextType then Enum.TextInputType.Phone else Enum.TextInputType.Number,
-				onFocusGained = if getFFlagAddMorePhoneUpsellEvents() then var11.onPhoneInputFocus else nil
+				error = var14,
+				textInputType = if var1.usePhoneNumberTextType then Enum.TextInputType.Phone else Enum.TextInputType.Number,
+				onFocusGained = if getFFlagAddMorePhoneUpsellEvents() then var1.onPhoneInputFocus else nil
 			})
 		}),
-		ErrorText = var29 and reactModule.createElement("TextLabel", {
+		ErrorText = var14 and reactModule.createElement("TextLabel", {
 			TextTransparency = 0,
 			TextWrapped = true,
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Text = var11.errorMessage,
+			Text = var1.errorMessage,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
 			TextColor3 = tokens.Color.System.Alert.Color3,
-			Font = var13.Font.Body.Font,
-			TextSize = baseSize * var13.Font.CaptionSmall.RelativeSize,
+			Font = var3.Font.Body.Font,
+			TextSize = baseSize * var3.Font.CaptionSmall.RelativeSize,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		})
@@ -201,18 +201,18 @@ return function(p5)
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
 		BorderSizePixel = 0,
-		[roactModule.Ref] = var23
+		[roactModule.Ref] = var12
 	}, {
 		AddPhoneView = reactModule.createElement(interactiveAlert, {
-			screenSize = var11.screenSize,
-			buttonStackInfo = getButtonStackProps(var15.buttonKey, var11.onSetPhoneNumber, isDisabled, var15.extraButtonKey, var11.onExtraButtonClick),
-			position = var11.isKeyboardShowing and UDim2.new(0.5, 0, 1, -var11.keyboardHeight) or UDim2.fromScale(0.5, 0.5),
-			anchorPoint = var11.isKeyboardShowing and Vector2.new(0.5, 1) or nil,
-			title = var15.titleKey,
-			onAbsoluteSizeChanged = var21,
-			onCloseClicked = var11.onClose,
+			screenSize = var1.screenSize,
+			buttonStackInfo = getButtonStackProps(var5.buttonKey, var1.onSetPhoneNumber, isDisabled, var5.extraButtonKey, var1.onExtraButtonClick),
+			position = var1.isKeyboardShowing and UDim2.new(0.5, 0, 1, -var1.keyboardHeight) or UDim2.fromScale(0.5, 0.5),
+			anchorPoint = var1.isKeyboardShowing and Vector2.new(0.5, 1) or nil,
+			title = var5.titleKey,
+			onAbsoluteSizeChanged = var10,
+			onCloseClicked = var1.onClose,
 			middleContent = if fFlagInExperienceAddPhoneViewNewCopy then function()
-				-- upvalues: reactModule (copy), tokens (ref), var15 (ref), baseSize (ref), var13 (ref), frame (ref), relativeSize (ref)
+				-- upvalues: reactModule (copy), tokens (ref), var5 (ref), baseSize (ref), var3 (ref), frame (ref), relativeSize (ref)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -232,11 +232,11 @@ return function(p5)
 							LayoutOrder = -1,
 							BackgroundTransparency = 1,
 							TextWrapped = true,
-							Text = var15.subtitleKey,
+							Text = var5.subtitleKey,
 							TextSize = baseSize,
-							TextColor3 = var13.Theme.TextEmphasis.Color,
-							TextTransparency = var13.Theme.TextEmphasis.Transparency,
-							Font = var13.Font.Body.Font,
+							TextColor3 = var3.Theme.TextEmphasis.Color,
+							TextTransparency = var3.Theme.TextEmphasis.Transparency,
+							Font = var3.Font.Body.Font,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -246,11 +246,11 @@ return function(p5)
 							LayoutOrder = 2,
 							BackgroundTransparency = 1,
 							TextWrapped = true,
-							Text = var15.phonePrivacyDisclaimerKey,
+							Text = var5.phonePrivacyDisclaimerKey,
 							TextSize = baseSize * relativeSize,
-							TextColor3 = var13.Theme.TextEmphasis.Color,
-							TextTransparency = var13.Theme.TextEmphasis.Transparency,
-							Font = var13.Font.Body.Font,
+							TextColor3 = var3.Theme.TextEmphasis.Color,
+							TextTransparency = var3.Theme.TextEmphasis.Transparency,
+							Font = var3.Font.Body.Font,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -259,11 +259,11 @@ return function(p5)
 							LayoutOrder = 3,
 							BackgroundTransparency = 1,
 							TextWrapped = true,
-							Text = var15.disclaimerKey,
+							Text = var5.disclaimerKey,
 							TextSize = baseSize * relativeSize,
-							TextColor3 = var13.Theme.TextEmphasis.Color,
-							TextTransparency = var13.Theme.TextEmphasis.Transparency,
-							Font = var13.Font.Body.Font,
+							TextColor3 = var3.Theme.TextEmphasis.Color,
+							TextTransparency = var3.Theme.TextEmphasis.Transparency,
+							Font = var3.Font.Body.Font,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -271,7 +271,7 @@ return function(p5)
 					})
 				})
 			end else function()
-				-- upvalues: reactModule (copy), tokens (ref), frame (ref), var15 (ref), baseSize (ref), relativeSize (ref), var13 (ref)
+				-- upvalues: reactModule (copy), tokens (ref), frame (ref), var5 (ref), baseSize (ref), relativeSize (ref), var3 (ref)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -292,11 +292,11 @@ return function(p5)
 							LayoutOrder = 2,
 							BackgroundTransparency = 1,
 							TextWrapped = true,
-							Text = var15.disclaimerKey,
+							Text = var5.disclaimerKey,
 							TextSize = baseSize * relativeSize,
-							TextColor3 = var13.Theme.TextEmphasis.Color,
-							TextTransparency = var13.Theme.TextEmphasis.Transparency,
-							Font = var13.Font.Body.Font,
+							TextColor3 = var3.Theme.TextEmphasis.Color,
+							TextTransparency = var3.Theme.TextEmphasis.Transparency,
+							Font = var3.Font.Body.Font,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -310,17 +310,17 @@ return function(p5)
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(0, var19 - 24, 0, 0),
+			Size = UDim2.new(0, var8 - 24, 0, 0),
 			Position = UDim2.new(0, vector2.X - vector2_1.X, 0, vector2.Y + size1200 + small - vector2_1.Y)
 		}, {
 			CountryCodeDropdown = reactModule.createElement(countryCodeDropdownContainer, {
-				dropdownVisible = var16,
+				dropdownVisible = var6,
 				position = UDim2.new(0, 0, 0, 0),
 				maxHeight = minValue,
-				onCountryCodeSelected = function(p9)
-					-- upvalues: var11 (ref), var17 (ref)
-					var11.setCountryCode(p9)
-					var17(false)
+				onCountryCodeSelected = function(p2)
+					-- upvalues: var1 (ref), var7 (ref)
+					var1.setCountryCode(p2)
+					var7(false)
 				end
 			})
 		})

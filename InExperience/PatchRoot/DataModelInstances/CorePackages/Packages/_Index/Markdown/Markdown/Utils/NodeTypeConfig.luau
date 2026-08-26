@@ -11,9 +11,9 @@ return {
 			[nodeTypeModule.Block] = true,
 			[nodeTypeModule.TextBlock] = true
 		},
-		validateRenderResult = function(p0)
+		validateRenderResult = function(p1)
 			-- upvalues: reactIsModule (ref)
-			return p0 ~= nil and reactIsModule.isElement(p0)
+			return p1 ~= nil and reactIsModule.isElement(p1)
 		end
 	},
 	[nodeTypeModule.Block] = {
@@ -31,9 +31,9 @@ return {
 			[nodeTypeModule.InlineSpan] = true,
 			[nodeTypeModule.InlineLeaf] = true
 		},
-		validateRenderResult = function(p2)
+		validateRenderResult = function(p1)
 			-- upvalues: reactIsModule (ref), dashModule (ref)
-			return if p2 ~= nil then reactIsModule.isElement(p2) or dashModule.all(p2, reactIsModule.isElement) else true
+			return if p1 ~= nil then reactIsModule.isElement(p1) or dashModule.all(p1, reactIsModule.isElement) else true
 		end
 	},
 	[nodeTypeModule.InlineSpan] = {
@@ -41,16 +41,16 @@ return {
 			[nodeTypeModule.InlineSpan] = true,
 			[nodeTypeModule.InlineLeaf] = true
 		},
-		validateRenderResult = function(p3)
+		validateRenderResult = function(p1)
 			-- upvalues: isInlineElement (ref), dashModule (ref)
-			return if p3 ~= nil then isInlineElement(p3) or dashModule.all(p3, isInlineElement) else true
+			return if p1 ~= nil then isInlineElement(p1) or dashModule.all(p1, isInlineElement) else true
 		end
 	},
 	[nodeTypeModule.InlineLeaf] = {
 		children = {},
-		validateRenderResult = function(p4)
+		validateRenderResult = function(p1)
 			-- upvalues: isInlineElement (ref)
-			return if p4 ~= nil then isInlineElement(p4) else true
+			return if p1 ~= nil then isInlineElement(p1) else true
 		end
 	}
 }

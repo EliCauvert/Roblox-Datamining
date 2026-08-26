@@ -19,35 +19,35 @@ end
 
 local round = math.round
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: round (ref)
-	return { x = round(p0.X), y = round(p0.Y) }
+	return { x = round(p1.X), y = round(p1.Y) }
 end
 
 return function()
 	-- upvalues: captureMetadataGetAvatarsTimeoutMs (ref), avatarIdentification (ref), dashModule (ref), guiService (ref), captureMetadataMaxAvatars (ref), captureMetadataMinHitRatePercentage (ref), captureMetadataMinAvatarBoundingBoxPixels (ref), getAvatarAssetsModule (ref), round (ref)
 	local currentCamera = workspace.CurrentCamera
-	local var7 = if not currentCamera then nil else currentCamera.ViewportSize
+	local var1 = if not currentCamera then nil else currentCamera.ViewportSize
 	
-	if not var7 then
+	if not var1 then
 		return {}
 	end
-	local var8 = dashModule.values(avatarIdentification.getVisibleAvatars(true, captureMetadataGetAvatarsTimeoutMs / 1000))
+	local var2 = dashModule.values(avatarIdentification.getVisibleAvatars(true, captureMetadataGetAvatarsTimeoutMs / 1000))
 	local rawScreenScale = guiService:GetRawScreenScale()
 	
-	for i, v in var8 do
-		v.boundingBox.min = v.boundingBox.min * var7 * rawScreenScale
-		v.boundingBox.max = v.boundingBox.max * var7 * rawScreenScale
+	for i, v in var2 do
+		v.boundingBox.min = v.boundingBox.min * var1 * rawScreenScale
+		v.boundingBox.max = v.boundingBox.max * var1 * rawScreenScale
 	end
-	table.sort(var8, function(p1, p2)
+	table.sort(var2, function(p1, p2)
 		return (p2.boundingBox.max - p2.boundingBox.min).Magnitude < (p1.boundingBox.max - p1.boundingBox.min).Magnitude
 	end)
-	local var10 = 0
+	local var3 = 0
 	local t = {}
 	
-	for i_1, v_1 in var8 do
-		if captureMetadataMaxAvatars <= var10 then break end
-		var10 += 1
+	for i_1, v_1 in var2 do
+		if captureMetadataMaxAvatars <= var3 then break end
+		var3 += 1
 		
 		if v_1.hitRate >= captureMetadataMinHitRatePercentage / 100 then
 			if (v_1.boundingBox.max - v_1.boundingBox.min).Magnitude < captureMetadataMinAvatarBoundingBoxPixels then break end

@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return string.sub(p0, 1, 20) == "EconomicRestrictions"
+﻿return function(p1)
+	return string.sub(p1, 1, 20) == "EconomicRestrictions"
 end

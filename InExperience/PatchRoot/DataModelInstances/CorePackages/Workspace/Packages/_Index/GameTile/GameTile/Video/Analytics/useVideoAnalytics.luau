@@ -18,219 +18,219 @@ local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagL
 local fFlagLuaAppBroadenVideoAnalytics = require(parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
 local omniRecommendationsContentType = discoveryTypesModule.OmniRecommendationsContentType
 
-local function _(p0, p1)
-	return if p0 == nil then nil elseif p1 then p0.topicId else p0.gameSetTypeId
+local function _(p1, p2)
+	return if p1 == nil then nil elseif p2 then p1.topicId else p1.gameSetTypeId
 end
 
-local _ = function(value, p2)
+local _ = function(value, p1)
 	-- upvalues: fFlagLuaAppEnableHomepageOneByTwoTile (ref), getGameTileLayoutDataModule (ref)
 	if value and value.primaryWideVideoAssetId then
 		return value.primaryWideVideoAssetId
 	elseif fFlagLuaAppEnableHomepageOneByTwoTile and value and value.primaryVideoAssetId then
 		return value.primaryVideoAssetId
 	end
-	local var5 = getGameTileLayoutDataModule(value, p2)
+	local var1 = getGameTileLayoutDataModule(value, p1)
 	
-	return var5 and (var5.primaryMediaAsset and var5.primaryMediaAsset.wideVideoAssetId)
+	return var1 and (var1.primaryMediaAsset and var1.primaryMediaAsset.wideVideoAssetId)
 end
 
-return function(p3, p4, p5, p6, p7)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), mutedError (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), getGameTileLayoutDataModule (ref), discoveryVideoPlayEvent (ref), fFlagLuaAppBroadenVideoAnalytics (ref), omniRecommendationsContentType (ref), discoveryEventErrorLogger (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref), fFlagLuaAppHomeReduceRenders (ref)
-	local var6 = if p3 ~= nil then nil elseif p4 then p3.topicId else p3.gameSetTypeId
-	local var7 = reactModule.useCallback(function(p8, p9)
-		-- upvalues: p7 (ref), mutedError (copy), var6 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), discoveryVideoPlayEvent (copy), p5 (ref), p6 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
-		if p8 ~= nil and p7 ~= nil then
-			local var11 = p7[p8]
+	local var1 = if p1 ~= nil then nil elseif p2 then p1.topicId else p1.gameSetTypeId
+	local var2 = reactModule.useCallback(function(p6, p7)
+		-- upvalues: p5 (ref), mutedError (copy), var1 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), discoveryVideoPlayEvent (copy), p3 (ref), p4 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
+		if p6 ~= nil and p5 ~= nil then
+			local var3 = p5[p6]
 			
-			if not var11 then
+			if not var3 then
 				mutedError("reportVideoPlay requires a valid entry")
 			end
 			local wideVideoAssetId
-			local var12 = var6
+			local var4 = var1
 			
-			if var11 and var11.primaryWideVideoAssetId then
-				wideVideoAssetId = var11.primaryWideVideoAssetId
-			elseif fFlagLuaAppEnableHomepageOneByTwoTile and var11 and var11.primaryVideoAssetId then
-				wideVideoAssetId = var11.primaryVideoAssetId
+			if var3 and var3.primaryWideVideoAssetId then
+				wideVideoAssetId = var3.primaryWideVideoAssetId
+			elseif fFlagLuaAppEnableHomepageOneByTwoTile and var3 and var3.primaryVideoAssetId then
+				wideVideoAssetId = var3.primaryVideoAssetId
 			else
-				local var13 = getGameTileLayoutDataModule(var11, var12)
-				wideVideoAssetId = var13 and (var13.primaryMediaAsset and var13.primaryMediaAsset.wideVideoAssetId)
+				local var5 = getGameTileLayoutDataModule(var3, var4)
+				wideVideoAssetId = var5 and (var5.primaryMediaAsset and var5.primaryMediaAsset.wideVideoAssetId)
 			end
 			if not wideVideoAssetId then
 				mutedError("reportVideoPlay requires a valid videoAssetId")
 			end
-			discoveryVideoPlayEvent(p5, {
+			discoveryVideoPlayEvent(p3, {
 				videoAssetId = wideVideoAssetId,
-				videoPlaybackSessionId = p9 or "INVALID_SESSION_ID",
-				universeId = var11.universeId,
-				rootPlaceId = var11.placeId,
-				gameSetTypeId = var6,
-				sortPos = p6,
-				nativeAdData = if fFlagLuaAppBroadenVideoAnalytics then var11.adId else nil,
-				tileType = if fFlagLuaAppBroadenVideoAnalytics then var11.componentType else nil,
-				contentType = if fFlagLuaAppBroadenVideoAnalytics then var11.contentType else nil
+				videoPlaybackSessionId = p7 or "INVALID_SESSION_ID",
+				universeId = var3.universeId,
+				rootPlaceId = var3.placeId,
+				gameSetTypeId = var1,
+				sortPos = p4,
+				nativeAdData = if fFlagLuaAppBroadenVideoAnalytics then var3.adId else nil,
+				tileType = if fFlagLuaAppBroadenVideoAnalytics then var3.componentType else nil,
+				contentType = if fFlagLuaAppBroadenVideoAnalytics then var3.contentType else nil
 			})
 		end
-	end, { p5, p7, var6, p6 })
-	local var8 = reactModule.useCallback(function(p10, p11, p12, p13)
-		-- upvalues: p7 (ref), mutedError (copy), var6 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), omniRecommendationsContentType (copy), discoveryEventErrorLogger (copy), p5 (ref), discoveryVideoLoadEvent (copy), p6 (ref), fFlagLuaAppBroadenVideoAnalytics (copy), videoLogger (copy), videoActions (copy)
-		if p10 ~= nil and p7 ~= nil then
-			local var15 = p7[p10]
+	end, { p3, p5, var1, p4 })
+	local var3 = reactModule.useCallback(function(p6, p7, p8, p9)
+		-- upvalues: p5 (ref), mutedError (copy), var1 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), omniRecommendationsContentType (copy), discoveryEventErrorLogger (copy), p3 (ref), discoveryVideoLoadEvent (copy), p4 (ref), fFlagLuaAppBroadenVideoAnalytics (copy), videoLogger (copy), videoActions (copy)
+		if p6 ~= nil and p5 ~= nil then
+			local var4 = p5[p6]
 			
-			if not var15 then
+			if not var4 then
 				mutedError("reportVideoLoad requires a valid entry")
 			end
 			local wideVideoAssetId
-			local var16 = var6
+			local var5 = var1
 			
-			if var15 and var15.primaryWideVideoAssetId then
-				wideVideoAssetId = var15.primaryWideVideoAssetId
-			elseif fFlagLuaAppEnableHomepageOneByTwoTile and var15 and var15.primaryVideoAssetId then
-				wideVideoAssetId = var15.primaryVideoAssetId
+			if var4 and var4.primaryWideVideoAssetId then
+				wideVideoAssetId = var4.primaryWideVideoAssetId
+			elseif fFlagLuaAppEnableHomepageOneByTwoTile and var4 and var4.primaryVideoAssetId then
+				wideVideoAssetId = var4.primaryVideoAssetId
 			else
-				local var17 = getGameTileLayoutDataModule(var15, var16)
-				wideVideoAssetId = var17 and (var17.primaryMediaAsset and var17.primaryMediaAsset.wideVideoAssetId)
+				local var6 = getGameTileLayoutDataModule(var4, var5)
+				wideVideoAssetId = var6 and (var6.primaryMediaAsset and var6.primaryMediaAsset.wideVideoAssetId)
 			end
-			local var19
+			local var7
 			if not wideVideoAssetId then
 				mutedError("reportVideoLoad requires a valid videoAssetId")
 			end
 			if fFlagLuaAppEnableHomepageOneByTwoTile then
-				var19 = var15.contentType == omniRecommendationsContentType.AdLink
-				var19 = nil
+				var7 = var4.contentType == omniRecommendationsContentType.AdLink
+				var7 = nil
 			else
-				var19 = nil
+				var7 = nil
 			end
-			if not var15.universeId and not var19 then
-				discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingUniverseId", `reportVideoLoad: entry at index {p10} is missing universeId for unified "load" on page "{p5}"`, {
-					index = p10,
-					pageContext = p5,
-					gameSortId = var6,
-					placeId = var15.placeId,
+			if not var4.universeId and not var7 then
+				discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingUniverseId", `reportVideoLoad: entry at index {p6} is missing universeId for unified "load" on page "{p5}"`, {
+					index = p6,
+					pageContext = p3,
+					gameSortId = var1,
+					placeId = var4.placeId,
 					videoAssetId = wideVideoAssetId
 				})
 			end
-			discoveryVideoLoadEvent(p5, {
+			discoveryVideoLoadEvent(p3, {
 				videoAssetId = wideVideoAssetId,
-				videoPlaybackSessionId = p11 or "INVALID_SESSION_ID",
-				totalDuration = p12,
-				loadTime = p13,
-				universeId = var15.universeId,
-				rootPlaceId = var15.placeId,
-				gameSetTypeId = var6,
-				sortPos = p6,
-				nativeAdData = if fFlagLuaAppBroadenVideoAnalytics then var15.adId else nil,
-				tileType = if fFlagLuaAppBroadenVideoAnalytics then var15.componentType else nil,
-				contentType = if fFlagLuaAppBroadenVideoAnalytics then var15.contentType else nil
+				videoPlaybackSessionId = p7 or "INVALID_SESSION_ID",
+				totalDuration = p8,
+				loadTime = p9,
+				universeId = var4.universeId,
+				rootPlaceId = var4.placeId,
+				gameSetTypeId = var1,
+				sortPos = p4,
+				nativeAdData = if fFlagLuaAppBroadenVideoAnalytics then var4.adId else nil,
+				tileType = if fFlagLuaAppBroadenVideoAnalytics then var4.componentType else nil,
+				contentType = if fFlagLuaAppBroadenVideoAnalytics then var4.contentType else nil
 			})
 			
 			if fFlagLuaAppEnableHomepageOneByTwoTile then
-				if wideVideoAssetId and (var19 or var15.universeId) then
-					videoLogger.reportVideoAction(videoActions.load, p5, {
+				if wideVideoAssetId and (var7 or var4.universeId) then
+					videoLogger.reportVideoAction(videoActions.load, p3, {
 						videoAssetId = wideVideoAssetId,
-						source = if var19 then "adLink" else "universe",
-						sourceId = if var19 then tostring(var15.clickoutUrl) else tostring(var15.universeId),
-						playbackSessionId = p11 or "INVALID_SESSION_ID"
-					}, { loadTime = p13 })
+						source = if var7 then "adLink" else "universe",
+						sourceId = if var7 then tostring(var4.clickoutUrl) else tostring(var4.universeId),
+						playbackSessionId = p7 or "INVALID_SESSION_ID"
+					}, { loadTime = p9 })
 					
 					return
 				end
-			elseif var15.universeId and wideVideoAssetId then
-				videoLogger.reportVideoAction(videoActions.load, p5, {
+			elseif var4.universeId and wideVideoAssetId then
+				videoLogger.reportVideoAction(videoActions.load, p3, {
 					source = "universe",
 					videoAssetId = wideVideoAssetId,
-					sourceId = tostring(var15.universeId),
-					playbackSessionId = p11 or "INVALID_SESSION_ID"
-				}, { loadTime = p13 })
+					sourceId = tostring(var4.universeId),
+					playbackSessionId = p7 or "INVALID_SESSION_ID"
+				}, { loadTime = p9 })
 			end
 		end
-	end, { p5, p7, var6, p6 })
-	local var9 = reactModule.useCallback(function(p14, p15)
-		-- upvalues: p7 (ref), mutedError (copy), var6 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), discoveryVideoLoopEvent (copy), p5 (ref), p6 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
-		if p14 ~= nil and p7 ~= nil then
-			local var20 = p7[p14]
+	end, { p3, p5, var1, p4 })
+	local var8 = reactModule.useCallback(function(p10, p11)
+		-- upvalues: p5 (ref), mutedError (copy), var1 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), discoveryVideoLoopEvent (copy), p3 (ref), p4 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
+		if p10 ~= nil and p5 ~= nil then
+			local var9 = p5[p10]
 			
-			if not var20 then
+			if not var9 then
 				mutedError("reportVideoLoop requires a valid entry")
 			end
 			local wideVideoAssetId
-			local var21 = var6
+			local var10 = var1
 			
-			if var20 and var20.primaryWideVideoAssetId then
-				wideVideoAssetId = var20.primaryWideVideoAssetId
-			elseif fFlagLuaAppEnableHomepageOneByTwoTile and var20 and var20.primaryVideoAssetId then
-				wideVideoAssetId = var20.primaryVideoAssetId
+			if var9 and var9.primaryWideVideoAssetId then
+				wideVideoAssetId = var9.primaryWideVideoAssetId
+			elseif fFlagLuaAppEnableHomepageOneByTwoTile and var9 and var9.primaryVideoAssetId then
+				wideVideoAssetId = var9.primaryVideoAssetId
 			else
-				local var22 = getGameTileLayoutDataModule(var20, var21)
-				wideVideoAssetId = var22 and (var22.primaryMediaAsset and var22.primaryMediaAsset.wideVideoAssetId)
+				local var11 = getGameTileLayoutDataModule(var9, var10)
+				wideVideoAssetId = var11 and (var11.primaryMediaAsset and var11.primaryMediaAsset.wideVideoAssetId)
 			end
 			if not wideVideoAssetId then
 				mutedError("reportVideoLoop requires a valid videoAssetId")
 			end
-			discoveryVideoLoopEvent(p5, {
+			discoveryVideoLoopEvent(p3, {
 				videoAssetId = wideVideoAssetId,
-				videoPlaybackSessionId = p15 or "INVALID_SESSION_ID",
-				universeId = var20.universeId,
-				rootPlaceId = var20.placeId,
-				gameSetTypeId = var6,
-				sortPos = p6,
-				nativeAdData = if fFlagLuaAppBroadenVideoAnalytics then var20.adId else nil,
-				tileType = if fFlagLuaAppBroadenVideoAnalytics then var20.componentType else nil,
-				contentType = if fFlagLuaAppBroadenVideoAnalytics then var20.contentType else nil
+				videoPlaybackSessionId = p11 or "INVALID_SESSION_ID",
+				universeId = var9.universeId,
+				rootPlaceId = var9.placeId,
+				gameSetTypeId = var1,
+				sortPos = p4,
+				nativeAdData = if fFlagLuaAppBroadenVideoAnalytics then var9.adId else nil,
+				tileType = if fFlagLuaAppBroadenVideoAnalytics then var9.componentType else nil,
+				contentType = if fFlagLuaAppBroadenVideoAnalytics then var9.contentType else nil
 			})
 		end
-	end, { p5, p7, var6, p6 })
-	local var10 = reactModule.useCallback(function(p16, p17, p18, p19, p20)
-		-- upvalues: p7 (ref), mutedError (copy), var6 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), discoveryVideoEndEvent (copy), p5 (ref), p6 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
-		if p16 ~= nil and p7 ~= nil then
-			local var24 = p7[p16]
+	end, { p3, p5, var1, p4 })
+	local var9 = reactModule.useCallback(function(p10, p11, p12, p13, p14)
+		-- upvalues: p5 (ref), mutedError (copy), var1 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), discoveryVideoEndEvent (copy), p3 (ref), p4 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
+		if p10 ~= nil and p5 ~= nil then
+			local var10 = p5[p10]
 			
-			if not var24 then
+			if not var10 then
 				mutedError("reportVideoEnd requires a valid entry")
 			end
 			local wideVideoAssetId
-			local var25 = var6
+			local var11 = var1
 			
-			if var24 and var24.primaryWideVideoAssetId then
-				wideVideoAssetId = var24.primaryWideVideoAssetId
-			elseif fFlagLuaAppEnableHomepageOneByTwoTile and var24 and var24.primaryVideoAssetId then
-				wideVideoAssetId = var24.primaryVideoAssetId
+			if var10 and var10.primaryWideVideoAssetId then
+				wideVideoAssetId = var10.primaryWideVideoAssetId
+			elseif fFlagLuaAppEnableHomepageOneByTwoTile and var10 and var10.primaryVideoAssetId then
+				wideVideoAssetId = var10.primaryVideoAssetId
 			else
-				local var26 = getGameTileLayoutDataModule(var24, var25)
-				wideVideoAssetId = var26 and (var26.primaryMediaAsset and var26.primaryMediaAsset.wideVideoAssetId)
+				local var12 = getGameTileLayoutDataModule(var10, var11)
+				wideVideoAssetId = var12 and (var12.primaryMediaAsset and var12.primaryMediaAsset.wideVideoAssetId)
 			end
 			if not wideVideoAssetId then
 				mutedError("reportVideoEnd requires a valid videoAssetId")
 			end
-			discoveryVideoEndEvent(p5, {
+			discoveryVideoEndEvent(p3, {
 				videoAssetId = wideVideoAssetId,
-				videoPlaybackSessionId = p18 or "INVALID_SESSION_ID",
-				endReason = p17,
-				playbackTime = p19,
-				universeId = var24.universeId,
-				rootPlaceId = var24.placeId,
-				gameSetTypeId = var6,
-				sortPos = p6,
-				targetUniverseId = p20,
-				nativeAdData = if fFlagLuaAppBroadenVideoAnalytics then var24.adId else nil,
-				tileType = if fFlagLuaAppBroadenVideoAnalytics then var24.componentType else nil,
-				contentType = if fFlagLuaAppBroadenVideoAnalytics then var24.contentType else nil
+				videoPlaybackSessionId = p12 or "INVALID_SESSION_ID",
+				endReason = p11,
+				playbackTime = p13,
+				universeId = var10.universeId,
+				rootPlaceId = var10.placeId,
+				gameSetTypeId = var1,
+				sortPos = p4,
+				targetUniverseId = p14,
+				nativeAdData = if fFlagLuaAppBroadenVideoAnalytics then var10.adId else nil,
+				tileType = if fFlagLuaAppBroadenVideoAnalytics then var10.componentType else nil,
+				contentType = if fFlagLuaAppBroadenVideoAnalytics then var10.contentType else nil
 			})
 		end
-	end, { p5, p7, var6, p6 })
+	end, { p3, p5, var1, p4 })
 	
 	return if fFlagLuaAppHomeReduceRenders then reactModule.useMemo(function()
-		-- upvalues: var7 (ref), var8 (ref), var9 (ref), var10 (ref)
+		-- upvalues: var2 (ref), var3 (ref), var8 (ref), var9 (ref)
 		return {
-			reportVideoPlay = var7,
-			reportVideoLoad = var8,
-			reportVideoLoop = var9,
-			reportVideoEnd = var10
+			reportVideoPlay = var2,
+			reportVideoLoad = var3,
+			reportVideoLoop = var8,
+			reportVideoEnd = var9
 		}
-	end, { var7, var8, var9, var10 }) else {
-		reportVideoPlay = var7,
-		reportVideoLoad = var8,
-		reportVideoLoop = var9,
-		reportVideoEnd = var10
+	end, { var2, var3, var8, var9 }) else {
+		reportVideoPlay = var2,
+		reportVideoLoad = var3,
+		reportVideoLoop = var8,
+		reportVideoEnd = var9
 	}
 end

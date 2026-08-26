@@ -1,6 +1,6 @@
 ﻿local t = {
-	array = function(p0)
-		return { type = "array", array = p0 }
+	array = function(p1)
+		return { type = "array", array = p1 }
 	end,
 	mutableSource = function(p1)
 		return { type = "mutableSource", methods = p1 }
@@ -8,27 +8,27 @@
 	utilities = {}
 }
 
-function t.utilities.createGetSimpleCursor(p2, p3)
-	return function(p4)
-		-- upvalues: p3 (ref), p2 (ref)
-		local var1 = p3()
+function t.utilities.createGetSimpleCursor(p1, p2)
+	return function(p3)
+		-- upvalues: p2 (ref), p1 (ref)
+		local var1 = p2()
 		
-		local function getWithCursor(p5)
-			-- upvalues: var1 (ref), getWithCursor (ref), p2 (copy)
-			return if p5 < 1 or var1 < p5 then nil else {
+		local function getWithCursor(p4)
+			-- upvalues: var1 (ref), getWithCursor (ref), p1 (copy)
+			return if p4 < 1 or var1 < p4 then nil else {
 				before = function()
-					-- upvalues: getWithCursor (copy), p5 (ref)
-					return getWithCursor(p5 - 1)
+					-- upvalues: getWithCursor (copy), p4 (ref)
+					return getWithCursor(p4 - 1)
 				end,
-				value = p2(p5),
+				value = p1(p4),
 				after = function()
-					-- upvalues: getWithCursor (copy), p5 (ref)
-					return getWithCursor(p5 + 1)
+					-- upvalues: getWithCursor (copy), p4 (ref)
+					return getWithCursor(p4 + 1)
 				end
 			}
 		end
 		
-		return getWithCursor(p4)
+		return getWithCursor(p3)
 	end
 end
 

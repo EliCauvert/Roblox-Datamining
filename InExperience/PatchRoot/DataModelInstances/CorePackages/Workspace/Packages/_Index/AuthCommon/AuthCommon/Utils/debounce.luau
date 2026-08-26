@@ -1,15 +1,15 @@
-﻿return function(p0, p1)
-	local var0 = 0
+﻿return function(p1, p2)
+	local var1 = 0
 	
 	return function(...)
-		-- upvalues: var0 (write), p1 (ref), p0 (ref)
+		-- upvalues: var1 (write), p2 (ref), p1 (ref)
 		local list = { ... }
 		local var2 = time()
-		var0 = var2
-		task.delay(p1, function()
-			-- upvalues: var0 (copy), var2 (ref), p0 (copy), list (ref)
-			if var0 == var2 then
-				p0(unpack(list))
+		var1 = var2
+		task.delay(p2, function()
+			-- upvalues: var1 (copy), var2 (ref), p1 (copy), list (ref)
+			if var1 == var2 then
+				p1(unpack(list))
 			end
 		end)
 	end

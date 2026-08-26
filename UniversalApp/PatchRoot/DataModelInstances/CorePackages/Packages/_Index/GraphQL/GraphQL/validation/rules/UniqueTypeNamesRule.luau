@@ -1,23 +1,23 @@
 ﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueTypeNamesRule = function(p0)
+	UniqueTypeNamesRule = function(p1)
 		-- upvalues: graphQLError (ref)
 		local t = {}
-		local schema = p0:getSchema()
+		local schema = p1:getSchema()
 		
-		local function checkTypeName(_, p1)
-			-- upvalues: schema (ref), p0 (ref), graphQLError (copy), t (ref)
-			local value = p1.name.value
+		local function checkTypeName(_, p2)
+			-- upvalues: schema (ref), p1 (ref), graphQLError (copy), t (ref)
+			local value = p2.name.value
 			
 			if schema and schema:getType(value) then
-				p0:reportError(graphQLError.new(("Type \"%s\" already exists in the schema. It cannot also be defined in this type definition."):format(value), p1.name))
+				p1:reportError(graphQLError.new(("Type \"%s\" already exists in the schema. It cannot also be defined in this type definition."):format(value), p2.name))
 				
 				return
 			elseif t[value] then
-				p0:reportError(graphQLError.new(("There can be only one type named \"%s\"."):format(value), { t[value], p1.name }))
+				p1:reportError(graphQLError.new(("There can be only one type named \"%s\"."):format(value), { t[value], p2.name }))
 			else
-				t[value] = p1.name
+				t[value] = p2.name
 			end
 			return false
 		end

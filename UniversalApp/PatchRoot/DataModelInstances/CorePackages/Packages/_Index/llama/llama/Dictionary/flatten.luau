@@ -1,12 +1,12 @@
 ﻿local joinModule = require(script.Parent.join)
 
-local function flatten(p0)
+local function flatten(p1)
 	-- upvalues: joinModule (ref), flatten (ref)
-	local var2 = type(p0)
-	assert(var2 == "table", "expected a table for first argument, got " .. var2)
+	local var1 = type(p1)
+	assert(var1 == "table", "expected a table for first argument, got " .. var2)
 	local t = {}
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		if type(v) == "table" then
 			t = joinModule(flatten(v), t)
 		else

@@ -12,62 +12,62 @@ local createElement = reactModule.createElement
 
 return function(p1)
 	-- upvalues: reactModule (ref), createVirtualizedListControllerModule (ref), exhaustiveMatchModule (ref), runService (ref), createElement (ref), reactStateRendererModule (ref), reactBindingsRendererModule (ref)
-	local var1 = reactModule.useState(function()
+	local var2 = reactModule.useState(function()
 		-- upvalues: createVirtualizedListControllerModule (copy), p1 (ref)
 		return createVirtualizedListControllerModule(p1.dataSource, p1.dimensions, p1.direction)
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
+		-- upvalues: var2 (ref)
 		return function()
-			-- upvalues: var1 (copy)
-			return var1.destroy()
+			-- upvalues: var2 (copy)
+			return var2.destroy()
 		end
 	end, {})
-	local var2, var3 = reactModule.useBinding(var1.getCanvasSize())
-	local var4, var5 = reactModule.useBinding(Vector2.zero)
-	local var6, var7 = reactModule.useBinding(0)
+	local var3, var4 = reactModule.useBinding(var2.getCanvasSize())
+	local var5, var6 = reactModule.useBinding(Vector2.zero)
+	local var7, var8 = reactModule.useBinding(0)
 	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref)
-		return var1.bindToUpdate(function()
-			-- upvalues: var3 (copy), var1 (copy)
-			var3(var1.getCanvasSize())
+		-- upvalues: var2 (ref), var4 (ref)
+		return var2.bindToUpdate(function()
+			-- upvalues: var4 (copy), var2 (copy)
+			var4(var2.getCanvasSize())
 		end)
 	end, {})
-	local var8 = reactModule.useCallback(function(p1)
-		-- upvalues: var5 (ref), var1 (ref), p1 (ref)
-		var5(p1.AbsoluteWindowSize)
-		var1.setWindowSize(p1.AbsoluteWindowSize)
+	local var9 = reactModule.useCallback(function(p2)
+		-- upvalues: var6 (ref), var2 (ref), p2 (ref)
+		var6(p2.AbsoluteWindowSize)
+		var2.setWindowSize(p2.AbsoluteWindowSize)
 		
-		if p1.onAbsoluteWindowSizeChanged ~= nil then
-			p1.onAbsoluteWindowSizeChanged(p1.AbsoluteWindowSize)
+		if p2.onAbsoluteWindowSizeChanged ~= nil then
+			p2.onAbsoluteWindowSizeChanged(p2.AbsoluteWindowSize)
 		end
 	end, { p1.direction, p1.onAbsoluteWindowSizeChanged })
-	local var9 = reactModule.useCallback(function(p1)
-		-- upvalues: p1 (ref), exhaustiveMatchModule (copy), runService (copy), var1 (ref), var7 (ref)
-		local var1 = if p1.direction == "x" then p1.CanvasPosition.X elseif p1.direction == "y" then p1.CanvasPosition.Y else exhaustiveMatchModule(p1.direction)
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: p2 (ref), exhaustiveMatchModule (copy), runService (copy), var2 (ref), var8 (ref)
+		local var11 = if p2.direction == "x" then p2.CanvasPosition.X elseif p2.direction == "y" then p2.CanvasPosition.Y else exhaustiveMatchModule(p2.direction)
 		runService.Heartbeat:Once(function()
-			-- upvalues: var1 (copy), var1 (ref), var7 (copy), p1 (copy)
-			var1.setScrollAxis(var1)
-			var7(var1)
+			-- upvalues: var11 (copy), var11 (ref), var8 (copy), p2 (copy)
+			var11.setScrollAxis(var11)
+			var8(var11)
 			
-			if p1.onScrollAxisChanged ~= nil then
-				p1.onScrollAxisChanged(var1)
+			if p2.onScrollAxisChanged ~= nil then
+				p2.onScrollAxisChanged(var11)
 			end
 		end)
 	end, { p1.direction, p1.onScrollAxisChanged })
 	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		var1.setDataSource(p1.dataSource)
+		-- upvalues: var2 (ref), p1 (ref)
+		var2.setDataSource(p1.dataSource)
 	end, { p1.dataSource })
 	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		var1.setDimensions(p1.dimensions)
+		-- upvalues: var2 (ref), p1 (ref)
+		var2.setDimensions(p1.dimensions)
 	end, { p1.dimensions })
 	local t = {
 		Size = UDim2.fromScale(1, 1),
-		CanvasSize = var2,
-		[reactModule.Change.AbsoluteWindowSize] = var8,
-		[reactModule.Change.CanvasPosition] = var9,
+		CanvasSize = var3,
+		[reactModule.Change.AbsoluteWindowSize] = var9,
+		[reactModule.Change.CanvasPosition] = var10,
 		[reactModule.Tag] = p1.tag,
 		ref = p1.scrollingFrameRef
 	}
@@ -86,21 +86,21 @@ return function(p1)
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			ZIndex = 2,
-			Size = var4:map(function(p1)
-				return UDim2.fromOffset(p1.X, p1.Y)
+			Size = var5:map(function(p2)
+				return UDim2.fromOffset(p2.X, p2.Y)
 			end)
 		}, {
 			Renderer = if p1.renderer.type == "byState" then createElement(reactStateRendererModule, {
-				virtualizedListController = var1,
+				virtualizedListController = var2,
 				config = p1.renderer.config,
 				dimensions = p1.dimensions,
 				direction = p1.direction,
 				callback = p1.renderer.callback,
 				getKey = p1.getKey,
-				scrollAxisBinding = var6
+				scrollAxisBinding = var7
 			}) elseif p1.renderer.type == "byBinding" then createElement(reactBindingsRendererModule, {
-				virtualizedListController = var1,
-				scrollAxisBinding = var6,
+				virtualizedListController = var2,
+				scrollAxisBinding = var7,
 				dimensions = p1.dimensions,
 				direction = p1.direction,
 				callback = p1.renderer.callback,

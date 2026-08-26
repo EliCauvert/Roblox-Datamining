@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("ReactUtils").Parent.GoodSignal)
 local useEventConnectionModule = require(script.Parent.useEventConnection)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useEventConnectionModule (ref)
-	useEventConnectionModule(p0.event, p0.callback, { p0.event, p0.callback })
+	useEventConnectionModule(p1.event, p1.callback, { p1.event, p1.callback })
 end

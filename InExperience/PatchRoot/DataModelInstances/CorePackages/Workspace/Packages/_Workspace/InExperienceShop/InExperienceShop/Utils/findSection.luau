@@ -1,8 +1,8 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-return function(p0, p1)
-	for i, v in p0 do
-		if v.id == p1 then
+return function(p1, p2)
+	for i, v in p1 do
+		if v.id == p2 then
 			return v
 		end
 	end

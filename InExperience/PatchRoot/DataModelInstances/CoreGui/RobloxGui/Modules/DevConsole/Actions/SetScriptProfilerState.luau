@@ -1,10 +1,10 @@
-﻿return require(script.Parent.Parent.Action)(script.Name, function(p0, p1, p2, p3, p4, p5)
+﻿return require(script.Parent.Parent.Action)(script.Name, function(p1, p2, p3, p4, p5, p6)
 	return {
-		isClientView = p0,
-		usePercentages = p1,
-		clientSessionState = p2,
-		serverSessionState = p3,
-		isExporting = p4,
-		isShowingMobileSettings = p5
+		isClientView = p1,
+		usePercentages = p2,
+		clientSessionState = p3,
+		serverSessionState = p4,
+		isExporting = p5,
+		isShowingMobileSettings = p6
 	}
 end)

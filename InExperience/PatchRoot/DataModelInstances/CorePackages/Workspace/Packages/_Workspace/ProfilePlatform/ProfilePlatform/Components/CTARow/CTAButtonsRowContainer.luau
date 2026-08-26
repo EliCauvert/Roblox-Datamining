@@ -13,27 +13,27 @@ local loadingStagesExtensionModule = require(profilePlatform.Analytics.LoadingSt
 local useEffectOnMount = require(parent.RoactUtils).Hooks.useEffectOnMount
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p0)
+return function(p1)
 	-- upvalues: useProfileWrapperContextModule (ref), useMapJsonToButtonListModule (ref), fFlagAXEnableProfileTab (ref), useIsMeTabModule (ref), useProfileAnalyticsContextModule (ref), useEffectOnMount (ref), socialStopwatchModule (ref), eventNamesModule (ref), loadingStagesExtensionModule (ref), reactModule (ref), CTAButtonsRowModule (ref), horizontalPageMargin (ref)
-	local var10 = useMapJsonToButtonListModule(useProfileWrapperContextModule().profileId)
-	local var11 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
-	local var12 = useProfileAnalyticsContextModule()
+	local var1 = useMapJsonToButtonListModule(useProfileWrapperContextModule().profileId)
+	local var2 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
+	local var3 = useProfileAnalyticsContextModule()
 	useEffectOnMount(function()
-		-- upvalues: socialStopwatchModule (copy), var12 (ref), eventNamesModule (copy), loadingStagesExtensionModule (copy)
-		local var13 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.ProfileOpened)
-		var12.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {
+		-- upvalues: socialStopwatchModule (copy), var3 (ref), eventNamesModule (copy), loadingStagesExtensionModule (copy)
+		local var4 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.ProfileOpened)
+		var3.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {
 			isProfilePlatform = true,
-			statValue = if var13 then var13.timeElapsed else nil,
+			statValue = if var4 then var4.timeElapsed else nil,
 			status = loadingStagesExtensionModule.CTALoaded
 		})
 	end)
 	
-	return if fFlagAXEnableProfileTab and var11 then reactModule.createElement(CTAButtonsRowModule, { buttonList = var10, layoutOrder = p0.layoutOrder }) else reactModule.createElement(horizontalPageMargin, {
+	return if fFlagAXEnableProfileTab and var2 then reactModule.createElement(CTAButtonsRowModule, { buttonList = var1, layoutOrder = p1.layoutOrder }) else reactModule.createElement(horizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		size = UDim2.new(1, 0, 0, 0),
-		layoutOrder = p0.layoutOrder
+		layoutOrder = p1.layoutOrder
 	}, {
-		Content = reactModule.createElement(CTAButtonsRowModule, { layoutOrder = 1, buttonList = var10 })
+		Content = reactModule.createElement(CTAButtonsRowModule, { layoutOrder = 1, buttonList = var1 })
 	})
 end

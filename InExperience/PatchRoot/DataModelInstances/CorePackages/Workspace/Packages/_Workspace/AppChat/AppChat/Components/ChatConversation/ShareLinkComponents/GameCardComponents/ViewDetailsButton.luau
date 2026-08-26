@@ -11,19 +11,19 @@ viewDetailsButton.defaultProps = {
 	end
 }
 
-function viewDetailsButton.render(p0)
+function viewDetailsButton.render(p1)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), buttonModule (ref)
-	return UIBloxModule.Style.withStyle(function(p1)
-		-- upvalues: roactModule (copy), buttonModule (copy), p0 (ref)
+	return UIBloxModule.Style.withStyle(function(p2)
+		-- upvalues: roactModule (copy), buttonModule (copy), p1 (ref)
 		return roactModule.createElement(buttonModule, {
-			text = p0.props.text,
-			textColor = p1.Theme.SystemPrimaryContent.Color,
-			textSize = p1.Font.Body.RelativeSize * p1.Font.BaseSize,
-			font = p1.Font.Body.Font,
-			transparency = p1.Theme.SystemPrimaryDefault.Transparency,
-			color = p1.Theme.SystemPrimaryDefault.Color,
-			LayoutOrder = p0.props.LayoutOrder or 0,
-			onActivated = p0.props.onActivated
+			text = p1.props.text,
+			textColor = p2.Theme.SystemPrimaryContent.Color,
+			textSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize,
+			font = p2.Font.Body.Font,
+			transparency = p2.Theme.SystemPrimaryDefault.Transparency,
+			color = p2.Theme.SystemPrimaryDefault.Color,
+			LayoutOrder = p1.props.LayoutOrder or 0,
+			onActivated = p1.props.onActivated
 		})
 	end)
 end

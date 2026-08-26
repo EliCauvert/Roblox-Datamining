@@ -17,7 +17,7 @@ local enumScreensModule = require(friendsLanding.EnumScreens)
 local memoize = dependenciesModule.memoize
 local otter = dependenciesModule.Otter
 local fFlagMigrateFriendshipStatusesRemainingActions = require(parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
-local var5 = require(parent.DataHydration).Friends.FriendsStore.get()
+local var1 = require(parent.DataHydration).Friends.FriendsStore.get()
 local friendsLandingContextualMenu = roact.PureComponent:extend("FriendsLandingContextualMenu")
 local t = {
 	motorCallback = otter.instant,
@@ -25,82 +25,82 @@ local t = {
 	close = { targetValue = 0 }
 }
 
-function friendsLandingContextualMenu.init(p0)
-	-- upvalues: memoize (ref), enumScreensModule (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var5 (ref), images (ref)
+function friendsLandingContextualMenu.init(p1)
+	-- upvalues: memoize (ref), enumScreensModule (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), images (ref)
 	function p0.onClose()
-		-- upvalues: p0 (ref)
-		if p0.props.navigation then
-			p0.props.navigation.goBack()
+		-- upvalues: p1 (ref)
+		if p1.props.navigation then
+			p1.props.navigation.goBack()
 		end
 	end
 	
-	p0.onUnfriend = memoize(function(p1, p2)
-		-- upvalues: p0 (ref), enumScreensModule (copy)
-		p0.props.navigation.navigate(enumScreensModule.GenericToast, {
-			toastProps = { toastContent = { toastTitle = p1, iconImage = p2 } }
+	p1.onUnfriend = memoize(function(p2, p3)
+		-- upvalues: p1 (ref), enumScreensModule (copy)
+		p1.props.navigation.navigate(enumScreensModule.GenericToast, {
+			toastProps = { toastContent = { toastTitle = p2, iconImage = p3 } }
 		})
 	end)
-	p0.onActivated = memoize(function(p3, p4)
-		-- upvalues: p0 (ref), fFlagMigrateFriendshipStatusesRemainingActions (copy), var5 (copy), images (copy)
+	p1.onActivated = memoize(function(p2, p3)
+		-- upvalues: p1 (ref), fFlagMigrateFriendshipStatusesRemainingActions (copy), var1 (copy), images (copy)
 		return function()
-			-- upvalues: p0 (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var5 (copy), p3 (ref), images (copy), p4 (ref)
-			local userId = p0.props.navigation.state.params.userId
+			-- upvalues: p1 (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var1 (copy), p2 (ref), images (copy), p3 (ref)
+			local userId = p1.props.navigation.state.params.userId
 			
 			if userId ~= nil then
-				(if fFlagMigrateFriendshipStatusesRemainingActions then var5.Unfriend(userId) else p0.props.unfriendTargetUserId({
+				(if fFlagMigrateFriendshipStatusesRemainingActions then var1.Unfriend(userId) else p1.props.unfriendTargetUserId({
 					targetUserId = userId,
-					currentUserId = p0.props.localUserId
+					currentUserId = p1.props.localUserId
 				})):andThen(function()
-					-- upvalues: p0 (copy), p3 (copy), images (copy)
-					p0.onUnfriend(p3, images["icons/actions/friends/friendRemove"])
+					-- upvalues: p1 (copy), p2 (copy), images (copy)
+					p1.onUnfriend(p2, images["icons/actions/friends/friendRemove"])
 				end):catch(function()
-					-- upvalues: p0 (copy), p4 (copy)
-					p0.onUnfriend(p4)
+					-- upvalues: p1 (copy), p3 (copy)
+					p1.onUnfriend(p3)
 				end)
 			end
-			p0.onClose()
+			p1.onClose()
 		end
 	end)
 end
 
-function friendsLandingContextualMenu.render(p5)
+function friendsLandingContextualMenu.render(p1)
 	-- upvalues: withStyle (ref), withLocalization (ref), roact (ref), contextualMenu (ref), images (ref), menuDirection (ref), t (ref)
 	return withStyle(function(_)
-		-- upvalues: withLocalization (copy), roact (copy), contextualMenu (copy), images (copy), p5 (ref), menuDirection (copy), t (copy)
+		-- upvalues: withLocalization (copy), roact (copy), contextualMenu (copy), images (copy), p1 (ref), menuDirection (copy), t (copy)
 		return withLocalization({
 			unfriend = "Feature.Friends.Action.Unfriend",
 			error = "Feature.Toast.NetworkingError.SomethingIsWrong",
 			success = "Feature.Friends.Action.FriendRemoved"
-		})(function(p6)
-			-- upvalues: roact (copy), contextualMenu (copy), images (copy), p5 (copy), menuDirection (copy), t (copy)
+		})(function(p2)
+			-- upvalues: roact (copy), contextualMenu (copy), images (copy), p1 (copy), menuDirection (copy), t (copy)
 			return roact.createElement(contextualMenu, {
 				open = true,
 				closeBackgroundVisible = false,
 				buttonProps = {
 					{
 						icon = images["icons/actions/friends/friendRemove"],
-						text = p6.unfriend,
-						onActivated = p5.onActivated(p6.success, p6.error)
+						text = p2.unfriend,
+						onActivated = p1.onActivated(p2.success, p2.error)
 					}
 				},
 				menuDirection = menuDirection.Up,
 				openPositionY = UDim.new(1, -24),
-				screenSize = p5.props.screenSize,
-				onDismiss = p5.onClose,
+				screenSize = p1.props.screenSize,
+				onDismiss = p1.onClose,
 				motorOverrideOptions = t
 			})
 		end)
 	end)
 end
 
-return compose(roactRodux.connect(mapStateToPropsModule, function(p7)
+return compose(roactRodux.connect(mapStateToPropsModule, function(p1)
 	-- upvalues: friendsNetworking (ref)
 	return {
-		unfriendTargetUserId = function(p8)
-			-- upvalues: p7 (ref), friendsNetworking (copy)
-			return p7(friendsNetworking.UnfriendTargetUserId.API(p8))
+		unfriendTargetUserId = function(p2)
+			-- upvalues: p1 (ref), friendsNetworking (copy)
+			return p1(friendsNetworking.UnfriendTargetUserId.API(p2))
 		end
 	}
-end), friendsLandingContextModule.connect(function(p9, _)
-	return { screenSize = p9.screenSize }
+end), friendsLandingContextModule.connect(function(p1, _)
+	return { screenSize = p1.screenSize }
 end))(friendsLandingContextualMenu)

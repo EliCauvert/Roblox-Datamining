@@ -16,18 +16,18 @@ fitFrameVertical.defaultProps = {
 	VerticalAlignment = Enum.VerticalAlignment.Top
 }
 
-function fitFrameVertical.init(p0)
+function fitFrameVertical.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.layoutRef = roactModule.createRef()
-	p0.frameRef = roactModule.createRef()
+	p1.layoutRef = roactModule.createRef()
+	p1.frameRef = roactModule.createRef()
 	
 	function p0.onResize()
-		-- upvalues: p0 (ref)
-		local current = p0.layoutRef.current
-		local current_1 = p0.frameRef.current
+		-- upvalues: p1 (ref)
+		local current = p1.layoutRef.current
+		local current_1 = p1.frameRef.current
 		
 		if current_1 and current then
-			current_1.Size = UDim2.new(p0.props.width, UDim.new(0, current.AbsoluteContentSize.Y + p0.props.marginTop + p0.props.marginBottom))
+			current_1.Size = UDim2.new(p1.props.width, UDim.new(0, current.AbsoluteContentSize.Y + p1.props.marginTop + p1.props.marginBottom))
 			
 			return
 		end
@@ -67,12 +67,12 @@ function fitFrameVertical.render(p1)
 	}))
 end
 
-function fitFrameVertical.didMount(p2)
-	p2.onResize()
+function fitFrameVertical.didMount(p1)
+	p1.onResize()
 end
 
-function fitFrameVertical.didUpdate(p3)
-	p3.onResize()
+function fitFrameVertical.didUpdate(p1)
+	p1.onResize()
 end
 
 return fitFrameVertical

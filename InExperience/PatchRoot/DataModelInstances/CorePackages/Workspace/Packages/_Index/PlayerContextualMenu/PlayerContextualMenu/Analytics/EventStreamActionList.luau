@@ -4,8 +4,8 @@ local contexts = enums.Contexts
 local subPages = enums.SubPages
 local eventTypes = enums.EventTypes
 
-local var1 = function(p0)
-	return p0
+local var1 = function(p1)
+	return p1
 end
 
 return {

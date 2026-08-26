@@ -1,6 +1,6 @@
 ﻿local runService = game:GetService("RunService")
 local tModule = require(game:GetService("CorePackages").Packages.t)
-local var2 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	period = tModule.number,
 	threshold = tModule.number,
 	processInterval = tModule.number
@@ -8,15 +8,15 @@ local var2 = tModule.strictInterface({
 local t = {}
 t.__index = t
 
-function t.new(p0)
-	-- upvalues: var2 (ref), t (ref)
-	assert(var2(p0))
+function t.new(p1)
+	-- upvalues: var1 (ref), t (ref)
+	assert(var1(p1))
 	
 	return setmetatable({
 		_lastProcessed = 0,
-		_period = p0.period,
-		_threshold = p0.threshold,
-		_processInterval = p0.processInterval,
+		_period = p1.period,
+		_threshold = p1.threshold,
+		_processInterval = p1.processInterval,
 		_counts = {},
 		_lastOccurrences = {}
 	}, t)
@@ -33,10 +33,10 @@ function t:increment(p1, p2)
 	self._counts[p1] += 1
 end
 
-function t:isRateLimited(p3)
-	local var4 = self._counts[p3]
+function t:isRateLimited(p1)
+	local var2 = self._counts[p1]
 	
-	return var4 ~= nil and self._threshold < var4
+	return var2 ~= nil and self._threshold < var2
 end
 
 function t:startDecrementClock()
@@ -47,10 +47,10 @@ function t:startDecrementClock()
 	end)
 end
 
-function t:stepDecrementClock(p4)
-	if self._processInterval < p4 - self._lastProcessed then
+function t:stepDecrementClock(p1)
+	if self._processInterval < p1 - self._lastProcessed then
 		for i, v in pairs(self._lastOccurrences) do
-			if self._period < p4 - v then
+			if self._period < p1 - v then
 				self._counts[i] -= 1
 				
 				if self._counts[i] <= 0 then
@@ -59,7 +59,7 @@ function t:stepDecrementClock(p4)
 				end
 			end
 		end
-		self._lastProcessed = p4
+		self._lastProcessed = p1
 	end
 end
 

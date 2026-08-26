@@ -18,10 +18,10 @@ local list = { analyticsModule, publicBindablesModule }
 
 return function()
 	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), selectedRobuxPackageModule (ref), promptStateModule (ref), sendCounterModule (ref), counterModule (ref), requestTypeModule (ref), playersService (ref), marketplaceService (ref), purchaseErrorModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), publicBindablesModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), completeRequestModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1)
+	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: analyticsModule (copy), selectedRobuxPackageModule (copy), promptStateModule (copy), sendCounterModule (copy), counterModule (copy), requestTypeModule (copy), playersService (copy), marketplaceService (copy), purchaseErrorModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), publicBindablesModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), completeRequestModule (copy)
-		local var13 = p1[analyticsModule]
-		local state = p0:getState()
+		local var1 = p2[analyticsModule]
+		local state = p1:getState()
 		local requestType = state.promptRequest.requestType
 		local purchaseError = state.purchaseError
 		local id = state.promptRequest.id
@@ -30,20 +30,20 @@ return function()
 		local productId = state.productInfo and state.productInfo.productId
 		
 		if state.promptState == promptStateModule.U13PaymentModal then
-			var13.signalScaryModalCanceled(productId, "U13PaymentModal", robuxProductId)
+			var1.signalScaryModalCanceled(productId, "U13PaymentModal", robuxProductId)
 		elseif state.promptState == promptStateModule.U13MonthlyThreshold1Modal then
-			var13.signalScaryModalCanceled(productId, "U13MonthlyThreshold1Modal", robuxProductId)
+			var1.signalScaryModalCanceled(productId, "U13MonthlyThreshold1Modal", robuxProductId)
 		elseif state.promptState == promptStateModule.U13MonthlyThreshold2Modal then
-			var13.signalScaryModalCanceled(productId, "U13MonthlyThreshold2Modal", robuxProductId)
+			var1.signalScaryModalCanceled(productId, "U13MonthlyThreshold2Modal", robuxProductId)
 		elseif state.promptState == promptStateModule.ParentalConsentWarningPaymentModal13To17 then
-			var13.signalScaryModalCanceled(productId, "ParentalConsentWarningPaymentModal13To17", robuxProductId)
+			var1.signalScaryModalCanceled(productId, "ParentalConsentWarningPaymentModal13To17", robuxProductId)
 		end
 		if state.promptState == promptStateModule.PurchaseComplete then
-			p0:dispatch(sendCounterModule(counterModule.Success))
+			p1:dispatch(sendCounterModule(counterModule.Success))
 		elseif state.promptState == promptStateModule.Error then
-			p0:dispatch(sendCounterModule(counterModule.Failed))
+			p1:dispatch(sendCounterModule(counterModule.Failed))
 		else
-			p0:dispatch(sendCounterModule(counterModule.Cancelled))
+			p1:dispatch(sendCounterModule(counterModule.Cancelled))
 		end
 		if requestType == requestTypeModule.Product then
 			marketplaceService:SignalPromptProductPurchaseFinished(playersService.LocalPlayer.UserId, id, hasCompletedPurchase)
@@ -68,7 +68,7 @@ return function()
 		elseif fFlagEnableUnifiedPurchaseFlowForDevSubs and requestType == requestTypeModule.DeveloperSubscription then
 			marketplaceService:SignalPromptSubscriptionPurchaseFinished(state.promptRequest.subscriptionId, hasCompletedPurchase or purchaseError == purchaseErrorModule.AlreadySubscribed)
 		end
-		local windowStateChangedBindable = p1[publicBindablesModule].getWindowStateChangedBindable()
+		local windowStateChangedBindable = p2[publicBindablesModule].getWindowStateChangedBindable()
 		
 		if windowStateChangedBindable then
 			windowStateChangedBindable:Fire({
@@ -79,6 +79,6 @@ return function()
 		if fFlagEnableUnifiedProductPurchaseFlow and state.purchaseCallbacks.onFlowComplete then
 			state.purchaseCallbacks.onFlowComplete()
 		end
-		return p0:dispatch(completeRequestModule())
+		return p1:dispatch(completeRequestModule())
 	end)
 end

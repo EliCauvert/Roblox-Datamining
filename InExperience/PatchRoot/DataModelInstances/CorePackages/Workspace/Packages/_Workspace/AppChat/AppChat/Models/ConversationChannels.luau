@@ -9,8 +9,8 @@ local conversationModule = require(script.Parent.Conversation)
 local dateTime = require(parent.Time).DateTime
 local fFlagAppChatNilGuardMessageSortModule = require(appChat.Flags.FFlagAppChatNilGuardMessageSort)
 
-local function getMessageId(p0)
-	return p0.id
+local function getMessageId(p1)
+	return p1.id
 end
 
 local function messageSortPredicate(p1, p2)
@@ -33,21 +33,21 @@ local function messageSortPredicate(p1, p2)
 	return if unixTimestamp == unixTimestamp_1 then p2.id < p1.id else unixTimestamp < unixTimestamp_1
 end
 
-local function sendingMessageSortPredicate(p3, p4)
-	return p3.order < p4.order
+local function sendingMessageSortPredicate(p1, p2)
+	return p1.order < p2.order
 end
 
-local function _(p5, p6)
+local function _(p1, p2)
 	-- upvalues: conversationModule (ref)
-	return if p6 == "friends" then conversationModule.Type.ONE_TO_ONE_CONVERSATION elseif p5 == "group" then conversationModule.Type.MULTI_USER_CONVERSATION elseif p5 == "one_to_one" then conversationModule.Type.ONE_TO_ONE_CONVERSATION else conversationModule.Type.ONE_TO_ONE_CONVERSATION
+	return if p2 == "friends" then conversationModule.Type.ONE_TO_ONE_CONVERSATION elseif p1 == "group" then conversationModule.Type.MULTI_USER_CONVERSATION elseif p1 == "one_to_one" then conversationModule.Type.ONE_TO_ONE_CONVERSATION else conversationModule.Type.ONE_TO_ONE_CONVERSATION
 end
 
-local function getFriendId(p7)
+local function getFriendId(p1)
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	if localPlayer then
-		for i, v in p7.participant_user_ids do
+		for i, v in p1.participant_user_ids do
 			if tostring(v) ~= tostring(localPlayer.UserId) then
 				return "friends:" .. tostring(v)
 			end
@@ -123,58 +123,58 @@ function t.mockBase()
 	}
 end
 
-function t.mock(p8)
+function t.mock(p2)
 	-- upvalues: cryoModule (ref), t (ref)
-	return cryoModule.Dictionary.join(t.mockBase(), p8 or {})
+	return cryoModule.Dictionary.join(t.mockBase(), p2 or {})
 end
 
-function t.response(p9)
+function t.response(p2)
 	return {
-		source = if p9.source then p9.source else "channels",
-		type = if p9.type then p9.type else "one_to_one",
-		created_at = if p9.created_at then p9.created_at else "2021-01-01T00:00:00Z",
-		created_by = if p9.created_by then p9.created_by else 1,
-		id = if p9.id then p9.id else "1-2-3",
-		name = if p9.name then p9.name else "test",
-		participant_user_ids = if p9.participant_user_ids then p9.participant_user_ids else { 1 },
-		unread_message_count = if p9.unread_message_count then p9.unread_message_count else 0,
-		updated_at = if p9.updated_at then p9.updated_at else "2021-01-01T00:00:00Z",
-		messages = if p9.messages then p9.messages else {},
-		moderation_type = if p9.moderation_type then p9.moderation_type else "trusted_comms",
-		user_pending_status = if p9.user_pending_status then p9.user_pending_status else "not_pending",
-		participant_pending_status = if p9.participant_pending_status then p9.participant_pending_status else "not_pending",
-		success = if p9.success then p9.success else nil,
-		preview_message = if p9.preview_message then p9.preview_message else nil,
-		hasGroupUp = if p9.hasGroupUp then p9.hasGroupUp else false,
-		osa_acknowledgement_status = if p9.osa_acknowledgement_status then p9.osa_acknowledgement_status else nil,
-		user_opted_into_chat_messages = if p9.user_opted_into_chat_messages then p9.user_opted_into_chat_messages else nil
+		source = if p2.source then p2.source else "channels",
+		type = if p2.type then p2.type else "one_to_one",
+		created_at = if p2.created_at then p2.created_at else "2021-01-01T00:00:00Z",
+		created_by = if p2.created_by then p2.created_by else 1,
+		id = if p2.id then p2.id else "1-2-3",
+		name = if p2.name then p2.name else "test",
+		participant_user_ids = if p2.participant_user_ids then p2.participant_user_ids else { 1 },
+		unread_message_count = if p2.unread_message_count then p2.unread_message_count else 0,
+		updated_at = if p2.updated_at then p2.updated_at else "2021-01-01T00:00:00Z",
+		messages = if p2.messages then p2.messages else {},
+		moderation_type = if p2.moderation_type then p2.moderation_type else "trusted_comms",
+		user_pending_status = if p2.user_pending_status then p2.user_pending_status else "not_pending",
+		participant_pending_status = if p2.participant_pending_status then p2.participant_pending_status else "not_pending",
+		success = if p2.success then p2.success else nil,
+		preview_message = if p2.preview_message then p2.preview_message else nil,
+		hasGroupUp = if p2.hasGroupUp then p2.hasGroupUp else false,
+		osa_acknowledgement_status = if p2.osa_acknowledgement_status then p2.osa_acknowledgement_status else nil,
+		user_opted_into_chat_messages = if p2.user_opted_into_chat_messages then p2.user_opted_into_chat_messages else nil
 	}
 end
 
-function t.fromChannelsApi(p10)
+function t.fromChannelsApi(p2)
 	-- upvalues: t (ref), getFriendId (ref), conversationModule (ref), constantsModule (ref), dateTime (ref)
 	local t_1 = {
-		source = p10.source,
-		type = p10.type,
-		createdAt = p10.created_at,
+		source = p2.source,
+		type = p2.type,
+		createdAt = p2.created_at,
 		messages = t.getEmptyMessages(),
 		sendingMessages = t.getEmptySendingMessages(),
-		id = if p10.source == "friends" then getFriendId(p10) else tostring(p10.id),
+		id = if p2.source == "friends" then getFriendId(p2) else tostring(p2.id),
 		clientId = "",
-		initiator = tostring(p10.created_by),
-		hasUnreadMessages = p10.unread_message_count > 0
+		initiator = tostring(p2.created_by),
+		hasUnreadMessages = p2.unread_message_count > 0
 	}
-	local type = p10.type
-	t_1.conversationType = if p10.source == "friends" then conversationModule.Type.ONE_TO_ONE_CONVERSATION elseif type == "group" then conversationModule.Type.MULTI_USER_CONVERSATION elseif type == "one_to_one" then conversationModule.Type.ONE_TO_ONE_CONVERSATION else conversationModule.Type.ONE_TO_ONE_CONVERSATION
+	local type = p2.type
+	t_1.conversationType = if p2.source == "friends" then conversationModule.Type.ONE_TO_ONE_CONVERSATION elseif type == "group" then conversationModule.Type.MULTI_USER_CONVERSATION elseif type == "one_to_one" then conversationModule.Type.ONE_TO_ONE_CONVERSATION else conversationModule.Type.ONE_TO_ONE_CONVERSATION
 	t_1.usersTyping = {}
 	t_1.isUserLeaving = false
 	t_1.fetchingOlderMessages = false
-	t_1.serverState = if p10.source == "friends" then constantsModule.ServerState.NONE else constantsModule.ServerState.CREATED
+	t_1.serverState = if p2.source == "friends" then constantsModule.ServerState.NONE else constantsModule.ServerState.CREATED
 	t_1.pinnedGame = {}
-	t_1.moderationType = p10.moderation_type
-	t_1.userPendingStatus = p10.user_pending_status
-	t_1.participantPendingStatus = p10.participant_pending_status
-	local previewMessage = p10.preview_message
+	t_1.moderationType = p2.moderation_type
+	t_1.userPendingStatus = p2.user_pending_status
+	t_1.participantPendingStatus = p2.participant_pending_status
+	local previewMessage = p2.preview_message
 	
 	if previewMessage then
 		if previewMessage.is_previewable then
@@ -182,30 +182,30 @@ function t.fromChannelsApi(p10)
 		end
 		t_1.previewContent = previewMessage.content or previewMessage.preview_content
 	end
-	t_1.hasGroupUp = if p10.has_group_up then p10.has_group_up else false
-	t_1.lastUpdated = dateTime.fromIsoDate(p10.updated_at)
-	t_1.title = p10.name
+	t_1.hasGroupUp = if p2.has_group_up then p2.has_group_up else false
+	t_1.lastUpdated = dateTime.fromIsoDate(p2.updated_at)
+	t_1.title = p2.name
 	t_1.titleForViewer = ""
-	t_1.isDefaultTitle = p10.name == nil
+	t_1.isDefaultTitle = p2.name == nil
 	t_1.participants = {}
 	
-	if p10.participant_user_ids then
-		for i, v in p10.participant_user_ids do
+	if p2.participant_user_ids then
+		for i, v in p2.participant_user_ids do
 			table.insert(t_1.participants, tostring(v))
 		end
 	end
-	if p10.osa_acknowledgement_status then
-		t_1.osaAcknowledgementStatus = p10.osa_acknowledgement_status
+	if p2.osa_acknowledgement_status then
+		t_1.osaAcknowledgementStatus = p2.osa_acknowledgement_status
 	end
-	if p10.user_opted_into_chat_messages then
-		t_1.userOptedIntoChatMessages = p10.user_opted_into_chat_messages
+	if p2.user_opted_into_chat_messages then
+		t_1.userOptedIntoChatMessages = p2.user_opted_into_chat_messages
 	end
 	return t_1
 end
 
-function t.getFriendConversationId(p11)
+function t.getFriendConversationId(p3)
 	-- upvalues: getFriendId (ref)
-	return getFriendId({ participant_user_ids = p11 })
+	return getFriendId({ participant_user_ids = p3 })
 end
 
 return t

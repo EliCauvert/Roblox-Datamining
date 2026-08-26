@@ -10,13 +10,13 @@ local tileUnselectedOverlay = roactModule.PureComponent:extend("TileUnselectedOv
 local hollow = imagesModule["squircles/hollow"]
 tileUnselectedOverlay.validateProps = tModule.strictInterface({ ZIndex = tModule.optional(tModule.integer) })
 
-function tileUnselectedOverlay.render(p0)
+function tileUnselectedOverlay.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), hollow (ref), UIBloxConfigModule (ref)
-	local zIndex = p0.props.ZIndex
+	local zIndex = p1.props.ZIndex
 	
-	return withStyleModule(function(p1)
+	return withStyleModule(function(p2)
 		-- upvalues: roactModule (copy), zIndex (ref), imageSetComponentModule (copy), hollow (copy), UIBloxConfigModule (copy)
-		local tokens = p1.Tokens
+		local tokens = p2.Tokens
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

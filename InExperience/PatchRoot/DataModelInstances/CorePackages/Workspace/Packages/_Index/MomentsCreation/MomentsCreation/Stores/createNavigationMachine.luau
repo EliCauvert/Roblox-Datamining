@@ -28,44 +28,44 @@ local t = {
 	[stickerOverlay] = { [preview] = true }
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: createSignal (ref), gallery (ref), t (ref)
-	local var3, var4 = createSignal(p0 or gallery)
+	local var1, var2 = createSignal(p1 or gallery)
 	
 	return {
-		getStep = var3,
-		canNavigate = function(p1)
-			-- upvalues: var3 (ref), t (copy)
-			local var5 = var3(false)
+		getStep = var1,
+		canNavigate = function(p2)
+			-- upvalues: var1 (ref), t (copy)
+			local var3 = var1(false)
 			
-			if var5 == p1 then
+			if var3 == p2 then
 				return true
 			end
-			local var6 = t[var5]
+			local var4 = t[var3]
 			
-			return var6 ~= nil and var6[p1] == true
+			return var4 ~= nil and var4[p2] == true
 		end,
 		navigate = function(p2)
-			-- upvalues: var3 (ref), t (copy), var4 (ref)
-			local var8
-			local var7 = var3(false)
+			-- upvalues: var1 (ref), t (copy), var2 (ref)
+			local var3
+			local var4 = var1(false)
 			
-			if var7 == p2 then
-				var8 = true
+			if var4 == p2 then
+				var3 = true
 			else
-				local var9 = t[var7]
-				var8 = var9 ~= nil and var9[p2] == true
+				local var5 = t[var4]
+				var3 = var5 ~= nil and var5[p2] == true
 			end
-			if var8 then
-				var4(p2)
+			if var3 then
+				var2(p2)
 				
 				return true
 			end
 			return false
 		end,
 		reset = function(value)
-			-- upvalues: var4 (ref)
-			var4(value)
+			-- upvalues: var2 (ref)
+			var2(value)
 		end
 	}
 end

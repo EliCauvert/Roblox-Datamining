@@ -1,25 +1,25 @@
-﻿local var0 = nil
+﻿local var1 = nil
 local t = {}
 local t_1 = {
 	getSceneOverrides = function()
-		-- upvalues: var0 (write)
-		return var0
+		-- upvalues: var1 (write)
+		return var1
 	end,
 	setSceneOverrides = function(value)
-		-- upvalues: var0 (write), t (ref)
-		var0 = value
+		-- upvalues: var1 (write), t (ref)
+		var1 = value
 		
 		for i, v in t do
 			v(value)
 		end
 	end,
-	subscribe = function(p0)
+	subscribe = function(p1)
 		-- upvalues: t (ref)
-		table.insert(t, p0)
+		table.insert(t, p1)
 		
 		return function()
-			-- upvalues: t (copy), p0 (ref)
-			local index = table.find(t, p0)
+			-- upvalues: t (copy), p1 (ref)
+			local index = table.find(t, p1)
 			
 			if index then
 				table.remove(t, index)

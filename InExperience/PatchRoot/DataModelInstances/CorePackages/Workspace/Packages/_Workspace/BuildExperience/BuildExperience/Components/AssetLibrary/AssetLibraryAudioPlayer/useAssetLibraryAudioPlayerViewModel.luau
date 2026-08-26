@@ -7,62 +7,62 @@ local _ = require(script.Parent.AssetLibraryAudioPlayerView)
 
 return function(value)
 	-- upvalues: mediaPlaybackModule (ref), navigationModule (ref), signalsReactModule (ref), reactModule (ref)
-	local var4 = mediaPlaybackModule.useAudioStore(`rbxassetid://{value.assetId}`, false)
-	local var5 = navigationModule.useNavigationFocus()
-	local var6 = signalsReactModule.useSignalState(var4.getIsPlaying)
-	local var7 = signalsReactModule.useSignalState(var4.getIsLoaded)
-	local var8 = signalsReactModule.useSignalState(var4.getDuration)
-	local var9 = signalsReactModule.useSignalBinding(var4.getElapsed)
-	local var10, var11 = reactModule.useState(false)
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: mediaPlaybackModule (copy), var4 (ref)
+	local var1 = mediaPlaybackModule.useAudioStore(`rbxassetid://{value.assetId}`, false)
+	local var2 = navigationModule.useNavigationFocus()
+	local var3 = signalsReactModule.useSignalState(var1.getIsPlaying)
+	local var4 = signalsReactModule.useSignalState(var1.getIsLoaded)
+	local var5 = signalsReactModule.useSignalState(var1.getDuration)
+	local var6 = signalsReactModule.useSignalBinding(var1.getElapsed)
+	local var7, var8 = reactModule.useState(false)
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: mediaPlaybackModule (copy), var1 (ref)
 		mediaPlaybackModule.getAudioPlaybackStore(false).pauseAll()
-		var4.play()
-	end, { var4 })
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var11 (ref), var4 (ref), var7 (ref), var12 (ref)
-		if var6 then
-			var11(false)
-			var4.pause()
+		var1.play()
+	end, { var1 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var8 (ref), var1 (ref), var4 (ref), var9 (ref)
+		if var3 then
+			var8(false)
+			var1.pause()
 			
 			return
-		elseif var7 then
-			var12()
+		elseif var4 then
+			var9()
 			
 			return
 		end
-		var11(true)
-	end, { var4, var7, var6, var12 })
+		var8(true)
+	end, { var1, var4, var3, var9 })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var7 (ref), var11 (ref), var12 (ref)
-		if var10 and var7 then
-			var11(false)
-			var12()
+		-- upvalues: var7 (ref), var4 (ref), var8 (ref), var9 (ref)
+		if var7 and var4 then
+			var8(false)
+			var9()
 		end
-	end, { var7, var10, var12 })
+	end, { var4, var7, var9 })
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var11 (ref), var4 (ref)
-		if not var5 then
-			var11(false)
-			var4.stop()
+		-- upvalues: var2 (ref), var8 (ref), var1 (ref)
+		if not var2 then
+			var8(false)
+			var1.stop()
 		end
-	end, { var4.stop, var5 })
+	end, { var1.stop, var2 })
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
+		-- upvalues: var1 (ref)
 		return function()
-			-- upvalues: var4 (copy)
-			var4.stop()
+			-- upvalues: var1 (copy)
+			var1.stop()
 		end
-	end, { var4 })
+	end, { var1 })
 	
 	return {
 		title = value.title,
 		artist = value.artist,
 		thumbnail = value.thumbnail,
-		isPlaying = var6,
-		elapsed = var9,
-		duration = var8,
-		onTogglePlayback = var13,
+		isPlaying = var3,
+		elapsed = var6,
+		duration = var5,
+		onTogglePlayback = var10,
 		LayoutOrder = value.LayoutOrder
 	}
 end

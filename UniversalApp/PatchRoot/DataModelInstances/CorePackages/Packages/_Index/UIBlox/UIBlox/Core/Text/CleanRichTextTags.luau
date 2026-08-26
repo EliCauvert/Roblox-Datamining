@@ -1,19 +1,19 @@
-﻿return function(p0)
-	local var0 = ""
-	local var1 = 0
+﻿return function(p1)
+	local var1 = ""
+	local var2 = 0
 	
-	for i = 1, #p0 do
-		local substring = string.sub(p0, i, i)
+	for i = 1, #p1 do
+		local substring = string.sub(p1, i, i)
 		
 		if substring == "<" then
-			var1 += 1
+			var2 += 1
 			continue
 		end
-		if substring == ">" and var1 > 0 then
-			var1 -= 1
-		elseif var1 == 0 then
-			var0 ..= substring
+		if substring == ">" and var2 > 0 then
+			var2 -= 1
+		elseif var2 == 0 then
+			var1 ..= substring
 		end
 	end
-	return if var1 == 0 then var0 else p0
+	return if var2 == 0 then var1 else p1
 end

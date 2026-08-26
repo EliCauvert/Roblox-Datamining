@@ -13,14 +13,14 @@ local useTokens = foundationModule.Hooks.useTokens
 
 local function DividerContainer()
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), divider (ref), dividerOrientation (ref)
-	local var7 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(view, {
 		tag = "auto-xy",
 		padding = {
 			left = UDim.new(0, 10),
-			top = UDim.new(0, var7.Padding.XSmall),
-			bottom = UDim.new(0, var7.Padding.Large)
+			top = UDim.new(0, var1.Padding.XSmall),
+			bottom = UDim.new(0, var1.Padding.Large)
 		}
 	}, {
 		Divider = reactModule.createElement(divider, { orientation = dividerOrientation.Horizontal })
@@ -29,7 +29,7 @@ end
 
 return function(value)
 	-- upvalues: create (ref), settingsShowSignal (ref), reactRobloxModule (ref), reactModule (ref), inExperienceMenuReactModule (ref), DividerContainer (ref)
-	local var8 = create("Frame")({
+	local var1 = create("Frame")({
 		Name = "DividerWrapper",
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 0),
@@ -37,23 +37,23 @@ return function(value)
 		LayoutOrder = value.layoutOrder,
 		Parent = value.parent
 	})
-	local var9 = nil
-	settingsShowSignal:connect(function(p0)
-		-- upvalues: var9 (write), var8 (ref), value (ref), reactRobloxModule (copy), reactModule (copy), inExperienceMenuReactModule (copy), DividerContainer (copy)
-		if p0 then
-			var8.Parent = value.parent
-			var9 = reactRobloxModule.createRoot(var8)
-			var9:render(reactModule.createElement(inExperienceMenuReactModule, nil, {
+	local var2 = nil
+	settingsShowSignal:connect(function(p1)
+		-- upvalues: var2 (write), var1 (ref), value (ref), reactRobloxModule (copy), reactModule (copy), inExperienceMenuReactModule (copy), DividerContainer (copy)
+		if p1 then
+			var1.Parent = value.parent
+			var2 = reactRobloxModule.createRoot(var1)
+			var2:render(reactModule.createElement(inExperienceMenuReactModule, nil, {
 				DividerContainer = reactModule.createElement(DividerContainer)
 			}))
 			
 			return
-		elseif var9 then
-			var9:unmount()
-			var9 = nil
-			var8.Parent = nil
+		elseif var2 then
+			var2:unmount()
+			var2 = nil
+			var1.Parent = nil
 		end
 	end)
 	
-	return var8
+	return var1
 end

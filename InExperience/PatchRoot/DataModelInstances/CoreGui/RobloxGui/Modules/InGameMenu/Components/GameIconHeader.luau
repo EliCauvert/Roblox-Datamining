@@ -7,7 +7,7 @@ local gameIconModule = require(parent.Components.GameIcon)
 
 return roactRodux.UNSTABLE_connect2(function(p1)
 	return { gameName = p1.gameInfo.name }
-end)(function(p0)
+end)(function(p1)
 	-- upvalues: roact (ref), gameIconModule (ref), themedTextLabelModule (ref)
 	return roact.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
@@ -26,7 +26,7 @@ end)(function(p0)
 			TextWrapped = true,
 			Position = UDim2.new(0, 112, 0, 0),
 			Size = UDim2.new(1, -112, 1, 0),
-			Text = p0.gameName,
+			Text = p1.gameName,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top

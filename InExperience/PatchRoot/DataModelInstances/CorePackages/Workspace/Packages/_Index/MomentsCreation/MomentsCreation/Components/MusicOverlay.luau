@@ -33,66 +33,66 @@ local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFl
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getMusicStoreModule (ref), useState (ref), useEffect (ref), signalsModule (ref), useAudioPlaybackModule (ref), useCallback (ref), makeCreationEventFieldsModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), reactModule (ref), musicEditorModule (ref), getFFlagMomentsCreationMusicSearchStateFixModule (ref), dashModule (ref), musicPreviewItemModule (ref), text (ref), button (ref), foundationModule (ref), view (ref), icon (ref), textInput (ref), magnifyingGlass (ref), scrollView (ref), scrollBarVisibility (ref)
-	local controller = p0.controller
+	local controller = p1.controller
 	local playback = controller.preview.playback
-	local var15 = useDeviceInsets()
-	local var16 = useTokens()
-	local var17 = useCreationFlowStringsModule()
-	local var18 = getMusicStoreModule()
-	local var19, var20 = useState("")
-	local var21, var22 = useState(nil)
-	local var23, var24 = useState(false)
-	local var25, var26 = useState(playback.getTimeLength(false))
-	local var27, var28 = useState(var18.getResults(false))
-	local var29, var30 = useState(var18.getSearchStatus(false))
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = useCreationFlowStringsModule()
+	local var4 = getMusicStoreModule()
+	local var5, var6 = useState("")
+	local var7, var8 = useState(nil)
+	local var9, var10 = useState(false)
+	local var11, var12 = useState(playback.getTimeLength(false))
+	local var13, var14 = useState(var4.getResults(false))
+	local var15, var16 = useState(var4.getSearchStatus(false))
 	useEffect(function()
-		-- upvalues: signalsModule (copy), var26 (ref), playback (ref), var28 (ref), var18 (ref), var30 (ref)
-		return signalsModule.createEffect(function(p1)
-			-- upvalues: var26 (copy), playback (copy), var28 (copy), var18 (copy), var30 (copy)
-			var26(playback.getTimeLength(p1))
-			var28(var18.getResults(p1))
-			var30(var18.getSearchStatus(p1))
-		end)
-	end, { playback, var18 })
-	local var31, var32 = useState(nil)
-	useEffect(function()
-		-- upvalues: signalsModule (copy), controller (ref), var32 (ref)
+		-- upvalues: signalsModule (copy), var12 (ref), playback (ref), var14 (ref), var4 (ref), var16 (ref)
 		return signalsModule.createEffect(function(p2)
-			-- upvalues: controller (copy), var32 (copy)
+			-- upvalues: var12 (copy), playback (copy), var14 (copy), var4 (copy), var16 (copy)
+			var12(playback.getTimeLength(p2))
+			var14(var4.getResults(p2))
+			var16(var4.getSearchStatus(p2))
+		end)
+	end, { playback, var4 })
+	local var17, var18 = useState(nil)
+	useEffect(function()
+		-- upvalues: signalsModule (copy), controller (ref), var18 (ref)
+		return signalsModule.createEffect(function(p2)
+			-- upvalues: controller (copy), var18 (copy)
 			local activeSession = controller.getActiveSession(p2)
-			var32(if activeSession ~= nil then nil else activeSession.getDraft(p2))
+			var18(if activeSession ~= nil then nil else activeSession.getDraft(p2))
 		end)
 	end, { controller })
-	local var33 = useAudioPlaybackModule(var21 ~= nil, var21, { autoplay = true, looping = false })
+	local var19 = useAudioPlaybackModule(var7 ~= nil, var7, { autoplay = true, looping = false })
 	useEffect(function()
-		-- upvalues: playback (ref), var18 (ref), var25 (ref)
+		-- upvalues: playback (ref), var4 (ref), var11 (ref)
 		playback.pause()
-		var18.search("", var25)
-	end, { var25 })
+		var4.search("", var11)
+	end, { var11 })
 	useEffect(function()
-		-- upvalues: var33 (ref), var22 (ref)
-		if not var33.playback.isPlaying then
-			var22(nil)
+		-- upvalues: var19 (ref), var8 (ref)
+		if not var19.playback.isPlaying then
+			var8(nil)
 		end
-	end, { var33.playback.isPlaying })
-	local var34 = useCallback(function()
+	end, { var19.playback.isPlaying })
+	local var20 = useCallback(function()
 		-- upvalues: playback (ref), controller (ref)
 		playback.play()
 		playback.setMuted(false)
 		controller.discardActiveTool()
 	end, { controller, playback })
-	local var35 = useCallback(function(p3)
-		-- upvalues: controller (ref), var22 (ref), var24 (ref), makeCreationEventFieldsModule (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy)
+	local var21 = useCallback(function(p2)
+		-- upvalues: controller (ref), var8 (ref), var10 (ref), makeCreationEventFieldsModule (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy)
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession ~= nil then
-			activeSession.update({ startTime = 0, assetId = p3 })
+			activeSession.update({ startTime = 0, assetId = p2 })
 		end
-		var22(nil)
-		var24(true)
-		local t = { musicAssetId = tostring(p3) }
+		var8(nil)
+		var10(true)
+		local t = { musicAssetId = tostring(p2) }
 		
 		for i, v in makeCreationEventFieldsModule.makeToolFieldFromKind("music") do
 			t[i] = v
@@ -102,66 +102,66 @@ return function(p0)
 		end
 		fireAnalyticsEventModule(eventNames.EditingFlowMusicSelected, t)
 	end, { controller })
-	local var36 = useCallback(function()
-		-- upvalues: controller (ref), var24 (ref), playback (ref)
+	local var22 = useCallback(function()
+		-- upvalues: controller (ref), var10 (ref), playback (ref)
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession ~= nil then
 			activeSession.update(nil)
 		end
-		var24(false)
+		var10(false)
 		playback.pause()
 	end, { controller, playback })
-	local var37 = useCallback(function()
-		-- upvalues: var24 (ref), playback (ref), controller (ref)
-		var24(false)
+	local var23 = useCallback(function()
+		-- upvalues: var10 (ref), playback (ref), controller (ref)
+		var10(false)
 		playback.play()
 		playback.setMuted(false)
 		controller.commitActiveTool()
 	end, { controller, playback })
-	local var38 = useCallback(function(p4)
+	local var24 = useCallback(function(p3)
 		-- upvalues: controller (ref)
 		local activeSession = controller.getActiveSession(false)
-		local var49 = if activeSession ~= nil then nil else activeSession.getDraft(false)
+		local var25 = if activeSession ~= nil then nil else activeSession.getDraft(false)
 		
-		if activeSession ~= nil and var49 ~= nil then
-			activeSession.update({ assetId = var49.assetId, startTime = p4 })
+		if activeSession ~= nil and var25 ~= nil then
+			activeSession.update({ assetId = var25.assetId, startTime = p3 })
 		end
 	end, { controller })
-	local var39 = useCallback(function(p5)
-		-- upvalues: var21 (ref), var22 (ref), var33 (ref)
-		if var21 == p5 then
-			var22(nil)
+	local var25 = useCallback(function(p3)
+		-- upvalues: var7 (ref), var8 (ref), var19 (ref)
+		if var7 == p3 then
+			var8(nil)
 			
 			return
 		end
-		var22(p5)
-		var33.playback.play()
-	end, { var21 })
-	local var40 = useCallback(function()
-		-- upvalues: var21 (ref), var22 (ref), var18 (ref), var19 (ref), var25 (ref)
-		if var21 ~= nil then
-			var22(nil)
+		var8(p3)
+		var19.playback.play()
+	end, { var7 })
+	local var26 = useCallback(function()
+		-- upvalues: var7 (ref), var8 (ref), var4 (ref), var5 (ref), var11 (ref)
+		if var7 ~= nil then
+			var8(nil)
 		end
-		var18.search(var19, var25)
-	end, { var21, var19, var25 })
-	local var41 = useCallback(function()
-		-- upvalues: var18 (ref), var19 (ref), var25 (ref)
-		var18.search(var19, var25)
-	end, { var18, var19, var25 })
+		var4.search(var5, var11)
+	end, { var7, var5, var11 })
+	local var27 = useCallback(function()
+		-- upvalues: var4 (ref), var5 (ref), var11 (ref)
+		var4.search(var5, var11)
+	end, { var4, var5, var11 })
 	
-	if var23 and var31 ~= nil then
+	if var9 and var17 ~= nil then
 		return reactModule.createElement(musicEditorModule, {
 			controller = controller,
-			musicEdit = var31,
-			onBack = var36,
-			onDone = var37,
-			onStartTimeChanged = var38
+			musicEdit = var17,
+			onBack = var22,
+			onDone = var23,
+			onStartTimeChanged = var24
 		})
 	end
-	local duration = var33.timeline.duration
-	local var42 = if duration > 0 then var33.timeline.elapsed / duration else 0
-	local var43 = getFFlagMomentsCreationMusicSearchStateFixModule()
+	local duration = var19.timeline.duration
+	local var28 = if duration > 0 then var19.timeline.elapsed / duration else 0
+	local var29 = getFFlagMomentsCreationMusicSearchStateFixModule()
 	local _ = nil
 	
 	return reactModule.createElement(view, {
@@ -173,9 +173,9 @@ return function(p0)
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		},
 		padding = {
-			top = UDim.new(0, var16.Padding.Medium),
-			left = UDim.new(0, math.max(var15.left, var16.Padding.XLarge)),
-			right = UDim.new(0, math.max(var15.right, var16.Padding.XLarge))
+			top = UDim.new(0, var2.Padding.Medium),
+			left = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+			right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 		}
 	}, {
 		ModalHeaderBar = reactModule.createElement(view, {
@@ -185,19 +185,19 @@ return function(p0)
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small text-align-x-left text-align-y-top text-truncate-end content-action-emphasis",
-				Text = var17.EditingCtaMusic
+				Text = var3.EditingCtaMusic
 			}),
 			CloseButton = reactModule.createElement(view, {
 				tag = "auto-xy padding-medium radius-medium",
 				LayoutOrder = 2,
-				onActivated = var34
+				onActivated = var20
 			}, {
 				CloseIcon = reactModule.createElement(icon, {
 					name = "icons/navigation/close",
 					ZIndex = 2,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
-					style = var16.Color.ActionEmphasis.Foreground
+					style = var2.Color.ActionEmphasis.Foreground
 				})
 			})
 		}),
@@ -205,11 +205,11 @@ return function(p0)
 			label = "",
 			LayoutOrder = 2,
 			iconLeading = magnifyingGlass,
-			text = var19,
-			placeholder = var17.GeneralSearchPlaceholder,
-			onChanged = var20,
-			onReturnPressed = var40,
-			onFocusLost = var40,
+			text = var5,
+			placeholder = var3.GeneralSearchPlaceholder,
+			onChanged = var6,
+			onReturnPressed = var26,
+			onFocusLost = var26,
 			width = UDim.new(1, 0)
 		}),
 		ScrollView = reactModule.createElement(scrollView, {
@@ -220,41 +220,41 @@ return function(p0)
 				FillDirection = Enum.FillDirection.Vertical,
 				VerticalAlignment = Enum.VerticalAlignment.Top,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
-				Padding = UDim.new(0, var16.Gap.Small)
+				Padding = UDim.new(0, var2.Gap.Small)
 			},
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				scrollBarVisibility = scrollBarVisibility.None,
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
-		}, if #var27 > 0 then dashModule.map(var27, function(p6, p7)
-			-- upvalues: reactModule (copy), musicPreviewItemModule (copy), var35 (ref), var39 (ref), var21 (ref), var42 (ref)
+		}, if #var13 > 0 then dashModule.map(var13, function(p3, p4)
+			-- upvalues: reactModule (copy), musicPreviewItemModule (copy), var21 (ref), var25 (ref), var7 (ref), var28 (ref)
 			return reactModule.createElement(musicPreviewItemModule, {
-				key = p6.AssetId,
-				layoutOrder = p7,
-				musicAssetId = p6.AssetId,
-				onMusicSelected = var35,
-				togglePreviewMusic = var39,
-				progress = if var21 == p6.AssetId then var42 else nil,
-				isPreviewing = var21 == p6.AssetId
+				key = p3.AssetId,
+				layoutOrder = p4,
+				musicAssetId = p3.AssetId,
+				onMusicSelected = var21,
+				togglePreviewMusic = var25,
+				progress = if var7 == p3.AssetId then var28 else nil,
+				isPreviewing = var7 == p3.AssetId
 			})
-		end) elseif var43 and var29 == "loading" then nil elseif var43 and var29 == "error" then {
+		end) elseif var29 and var15 == "loading" then nil elseif var29 and var15 == "error" then {
 			SearchError = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "auto-y text-body-medium text-align-x-center content-action-emphasis",
-				Text = var17.MusicSearchError
+				Text = var3.MusicSearchError
 			}),
 			Retry = reactModule.createElement(button, {
 				LayoutOrder = 2,
-				onActivated = var41,
+				onActivated = var27,
 				size = foundationModule.Enums.InputSize.Small,
-				text = var17.GeneralCtaRetry,
+				text = var3.GeneralCtaRetry,
 				variant = foundationModule.Enums.ButtonVariant.Standard
 			})
 		} else {
 			NoResults = reactModule.createElement(text, {
 				tag = "text-body-medium text-align-x-center content-action-emphasis",
-				Text = var17.MusicNoResults
+				Text = var3.MusicNoResults
 			})
 		})
 	})

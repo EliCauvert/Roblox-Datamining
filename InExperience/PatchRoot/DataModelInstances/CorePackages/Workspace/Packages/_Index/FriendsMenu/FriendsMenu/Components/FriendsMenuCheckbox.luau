@@ -6,37 +6,37 @@ local checkbox = require(parent.Foundation).Checkbox
 local _ = require(friendsMenu.friendsMenuModalType)
 local selectedUsersContextModule = require(context.SelectedUsersContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), checkbox (ref)
-	local var3 = reactModule.useContext(selectedUsersContextModule)
+	local var1 = reactModule.useContext(selectedUsersContextModule)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
-		AnchorPoint = p0.anchorPoint,
-		Position = p0.position,
-		LayoutOrder = p0.layoutOrder
+		AnchorPoint = p1.anchorPoint,
+		Position = p1.position,
+		LayoutOrder = p1.layoutOrder
 	}, {
 		CheckboxAlignment = reactModule.createElement("UIListLayout", { VerticalAlignment = Enum.VerticalAlignment.Center }),
 		Button = reactModule.createElement(checkbox, {
 			label = "",
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: var3 (ref), p0 (ref)
-				if var3.isFriendSelected(p0.friend.id) then
-					var3.removeFriend(p0.friend.id)
+				-- upvalues: var1 (ref), p1 (ref)
+				if var1.isFriendSelected(p1.friend.id) then
+					var1.removeFriend(p1.friend.id)
 					
 					return
 				end
-				var3.addFriend(p0.friend.id, p0.friend.displayName)
+				var1.addFriend(p1.friend.id, p1.friend.displayName)
 			end, {
-				var3.isFriendSelected(p0.friend.id),
-				var3.removeFriend,
-				var3.addFriend,
-				p0.friend.id
+				var1.isFriendSelected(p1.friend.id),
+				var1.removeFriend,
+				var1.addFriend,
+				p1.friend.id
 			}),
-			isChecked = var3.isFriendSelected(p0.friend.id),
-			isDisabled = p0.isDisabled,
-			Selectable = p0.selectable
+			isChecked = var1.isFriendSelected(p1.friend.id),
+			isDisabled = p1.isDisabled,
+			Selectable = p1.selectable
 		})
 	})
 end

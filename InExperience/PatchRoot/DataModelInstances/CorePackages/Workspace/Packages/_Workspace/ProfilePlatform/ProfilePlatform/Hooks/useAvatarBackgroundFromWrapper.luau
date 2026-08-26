@@ -13,24 +13,24 @@ local function _(value)
 	if type(assetId) == "number" and assetId > 0 then
 		return assetId
 	elseif type(assetId) == "string" then
-		local var6 = tonumber(assetId)
+		local var1 = tonumber(assetId)
 		
-		return if var6 and var6 > 0 then var6 else nil
+		return if var1 and var1 > 0 then var1 else nil
 	end
 end
 
-local function findInnerImageId(p0)
-	if type(p0) == "table" then
-		local imageId = p0.ImageId
+local function findInnerImageId(p1)
+	if type(p1) == "table" then
+		local imageId = p1.ImageId
 		
 		if type(imageId) == "table" then
 			local value = imageId.Value
 			
 			return if type(value) == "number" and value > 0 then value else nil
-		elseif typeof(p0) ~= "Instance" then
+		elseif typeof(p1) ~= "Instance" then
 			return nil
 		end
-		for i, v in ipairs(p0:GetDescendants()) do
+		for i, v in ipairs(p1:GetDescendants()) do
 			local imageId = v:FindFirstChild("ImageId")
 			
 			if imageId ~= nil and (imageId:IsA("IntValue") or imageId:IsA("NumberValue")) then
@@ -47,54 +47,54 @@ end
 
 return function()
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), insertServiceLoadAssetModule (ref), findInnerImageId (ref)
-	local var9, assetId, var10
-	local var8 = useProfileJsonComponentModule(enumsModule.Components.ProfileBackground)
+	local var1, assetId, var2
+	local var3 = useProfileJsonComponentModule(enumsModule.Components.ProfileBackground)
 	
-	if var8 == nil then
-		var9 = nil
+	if var3 == nil then
+		var1 = nil
 	else
-		assetId = var8.assetId
+		assetId = var3.assetId
 		
 		if type(assetId) == "number" and assetId > 0 then
-			var9 = assetId
+			var1 = assetId
 		elseif type(assetId) == "string" then
-			var10 = tonumber(assetId)
-			var9 = if var10 and var10 > 0 then var10 else nil
+			var2 = tonumber(assetId)
+			var1 = if var2 and var2 > 0 then var2 else nil
 		end
 	end
 	assetId, var10 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var10 (ref), insertServiceLoadAssetModule (copy), findInnerImageId (copy)
-		if var9 == nil then
-			var10(nil)
+		-- upvalues: var1 (ref), var2 (ref), insertServiceLoadAssetModule (copy), findInnerImageId (copy)
+		if var1 == nil then
+			var2(nil)
 			
 			return nil
 		end
-		local var11 = false
+		local var4 = false
 		task.spawn(function()
-			-- upvalues: insertServiceLoadAssetModule (copy), var9 (copy), var11 (write), findInnerImageId (copy), var10 (copy)
+			-- upvalues: insertServiceLoadAssetModule (copy), var1 (copy), var4 (write), findInnerImageId (copy), var2 (copy)
 			local ok, status = pcall(function()
-				-- upvalues: insertServiceLoadAssetModule (copy), var9 (copy)
-				return insertServiceLoadAssetModule(var9)
+				-- upvalues: insertServiceLoadAssetModule (copy), var1 (copy)
+				return insertServiceLoadAssetModule(var1)
 			end)
 			
-			if not ok or var11 or status == nil then return end
-			local var12 = findInnerImageId(status)
+			if not ok or var4 or status == nil then return end
+			local var5 = findInnerImageId(status)
 			
-			if var11 then return end
-			if var12 == nil then
-				var10(nil)
+			if var4 then return end
+			if var5 == nil then
+				var2(nil)
 				
 				return
 			end
-			var10("rbxassetid://" .. tostring(var12))
+			var2("rbxassetid://" .. tostring(var5))
 		end)
 		
 		return function()
-			-- upvalues: var11 (write)
-			var11 = true
+			-- upvalues: var4 (write)
+			var4 = true
 		end
-	end, { var9, var10 })
+	end, { var1, var2 })
 	
 	return assetId
 end

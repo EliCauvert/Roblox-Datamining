@@ -13,24 +13,24 @@ function t.new()
 	return t_1
 end
 
-function t.abort(p0)
+function t.abort(p1)
 	-- upvalues: t (ref), error (ref)
-	local var2 = t.new()
-	var2.reason = p0 or error.new("Signal Aborted")
+	local var1 = t.new()
+	var1.reason = p1 or error.new("Signal Aborted")
 	
-	return var2
+	return var1
 end
 
 function t.timeout(p1)
 	-- upvalues: t (ref), error (ref)
-	local var3 = t.new()
-	var3.reason = error.new("TimeoutError")
+	local var1 = t.new()
+	var1.reason = error.new("TimeoutError")
 	task.delay(p1 / 1000, function()
-		-- upvalues: var3 (ref)
-		var3:fire()
+		-- upvalues: var1 (ref)
+		var1:fire()
 	end)
 	
-	return var3
+	return var1
 end
 
 function t:throwIfAborted()
@@ -39,8 +39,8 @@ function t:throwIfAborted()
 	end
 end
 
-function t:connect(p2)
-	return self._signal.Event:Connect(p2)
+function t:connect(p1)
+	return self._signal.Event:Connect(p1)
 end
 
 function t:fire()

@@ -9,7 +9,7 @@ local avatarSwitcherTooltipStorageKey = game:DefineFastString("AvatarSwitcherToo
 local avatarSwitcherTooltipShowDelay = game:DefineFastInt("AvatarSwitcherTooltipShowDelay", 1000)
 local avatarSwitcherTooltipDismissDelay = game:DefineFastInt("AvatarSwitcherTooltipDismissDelay", 8500)
 
-return function(p0)
+return function(p1)
 	-- upvalues: serviceModule (ref), constantsModule (ref), useMappedSignal (ref), commonFtuxTooltipModule (ref), avatarSwitcherTooltipPriority (ref), avatarSwitcherTooltipStorageKey (ref), avatarSwitcherTooltipShowDelay (ref), avatarSwitcherTooltipDismissDelay (ref)
 	local AVATAR_SWITCHER_ID = serviceModule:integrations()[constantsModule.AVATAR_SWITCHER_ID]
 	
@@ -18,7 +18,7 @@ return function(p0)
 		headerKey = "CoreScripts.FTUX.Heading.NewAvatarSwitcher",
 		bodyKey = "CoreScripts.FTUX.Label.AvatarSwitcherDescription",
 		priority = avatarSwitcherTooltipPriority,
-		isIconVisible = p0.visible,
+		isIconVisible = p1.visible,
 		localStorageKey = avatarSwitcherTooltipStorageKey,
 		showDelay = avatarSwitcherTooltipShowDelay,
 		dismissDelay = avatarSwitcherTooltipDismissDelay

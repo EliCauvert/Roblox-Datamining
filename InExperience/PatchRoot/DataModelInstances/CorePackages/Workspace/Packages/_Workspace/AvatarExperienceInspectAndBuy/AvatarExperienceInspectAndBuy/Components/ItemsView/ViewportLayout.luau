@@ -9,19 +9,19 @@ local buyActionBarLayoutModule = require(avatarExperienceInspectAndBuy.Component
 local _ = require(avatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: viewTypeModule (ref), useTokens (ref), reactModule (ref), backButtonModule (ref), foundationModule (ref), buyActionBarLayoutModule (ref)
-	local var6 = p0.view == viewTypeModule.WideLandscape
-	local var7 = useTokens()
+	local var1 = p1.view == viewTypeModule.WideLandscape
+	local var2 = useTokens()
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = p0.Size,
-		AutomaticSize = p0.AutomaticSize
+		Size = p1.Size,
+		AutomaticSize = p1.AutomaticSize
 	}, {
-		BackButton = if var6 or not p0.backButtonProps then nil else reactModule.createElement(backButtonModule, {
-			onBackButtonClick = p0.backButtonProps and p0.backButtonProps.onBackButtonClick,
-			Position = if p0.backButtonProps then p0.backButtonProps.Position else UDim2.new(0, var7.Padding.Small, 0, var7.Padding.Small)
+		BackButton = if var1 or not p1.backButtonProps then nil else reactModule.createElement(backButtonModule, {
+			onBackButtonClick = p1.backButtonProps and p1.backButtonProps.onBackButtonClick,
+			Position = if p1.backButtonProps then p1.backButtonProps.Position else UDim2.new(0, var2.Padding.Small, 0, var2.Padding.Small)
 		}),
 		InnerView = reactModule.createElement(foundationModule.View, { Size = UDim2.new(1, 0, 1, 0) }, {
 			UIListLayout = reactModule.createElement("UIListLayout", {
@@ -29,46 +29,46 @@ return function(p0)
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
-				VerticalFlex = if var6 then Enum.UIFlexAlignment.SpaceBetween else nil
+				VerticalFlex = if var1 then Enum.UIFlexAlignment.SpaceBetween else nil
 			}),
-			Thumbnail = if not p0.tryOnState.isTryOnEnabled then reactModule.createElement(foundationModule.View, {
+			Thumbnail = if not p1.tryOnState.isTryOnEnabled then reactModule.createElement(foundationModule.View, {
 				LayoutOrder = 1,
-				Size = if p0.viewportProps then p0.viewportProps.Size else UDim2.new(0, 200, 0, 200)
+				Size = if p1.viewportProps then p1.viewportProps.Size else UDim2.new(0, 200, 0, 200)
 			}, {
 				ImageLabel = reactModule.createElement("ImageLabel", {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 1, 0),
-					Image = p0.thumbnailUrl,
-					ScaleType = if p0.viewportProps then p0.viewportProps.ScaleType else Enum.ScaleType.Fit
+					Image = p1.thumbnailUrl,
+					ScaleType = if p1.viewportProps then p1.viewportProps.ScaleType else Enum.ScaleType.Fit
 				}),
-				UIFlexItem = if var6 then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,
+				UIFlexItem = if var1 then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,
 				UIAspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", {
-					AspectRatio = if p0.viewportProps then p0.viewportProps.AspectRatio else 1
+					AspectRatio = if p1.viewportProps then p1.viewportProps.AspectRatio else 1
 				}),
-				UIPadding = if p0.thumbnailPadding then reactModule.createElement("UIPadding", {
-					PaddingLeft = p0.thumbnailPadding.left,
-					PaddingRight = p0.thumbnailPadding.right,
-					PaddingTop = p0.thumbnailPadding.top,
-					PaddingBottom = p0.thumbnailPadding.bottom
+				UIPadding = if p1.thumbnailPadding then reactModule.createElement("UIPadding", {
+					PaddingLeft = p1.thumbnailPadding.left,
+					PaddingRight = p1.thumbnailPadding.right,
+					PaddingTop = p1.thumbnailPadding.top,
+					PaddingBottom = p1.thumbnailPadding.bottom
 				}) else nil
 			}) else nil,
 			ViewportContainer = reactModule.createElement(foundationModule.View, {
 				tag = "padding-top-medium",
 				LayoutOrder = 1,
-				Size = if p0.viewportProps then p0.viewportProps.Size else UDim2.new(0, 200, 0, 200),
-				Visible = p0.tryOnState.isTryOnEnabled
+				Size = if p1.viewportProps then p1.viewportProps.Size else UDim2.new(0, 200, 0, 200),
+				Visible = p1.tryOnState.isTryOnEnabled
 			}, {
-				UIFlexItem = if var6 then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,
+				UIFlexItem = if var1 then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,
 				UIAspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", {
-					AspectRatio = if p0.viewportProps then p0.viewportProps.AspectRatio else 1
+					AspectRatio = if p1.viewportProps then p1.viewportProps.AspectRatio else 1
 				}),
-				Viewport = p0.renderTryOnViewport(p0.tryOnState.tryOnItem)
+				Viewport = p1.renderTryOnViewport(p1.tryOnState.tryOnItem)
 			}),
-			BuyActionBarLayout = if var6 and p0.buyActionBarProps then reactModule.createElement(buyActionBarLayoutModule, {
+			BuyActionBarLayout = if var1 and p1.buyActionBarProps then reactModule.createElement(buyActionBarLayoutModule, {
 				enableTopBorder = true,
-				Size = UDim2.new(1, 0, 0, var7.Size.Size_1900),
-				buyActionBarProps = p0.buyActionBarProps,
-				purchaseButtonProps = p0.buyActionBarProps.purchaseButtonProps
+				Size = UDim2.new(1, 0, 0, var2.Size.Size_1900),
+				buyActionBarProps = p1.buyActionBarProps,
+				purchaseButtonProps = p1.buyActionBarProps.purchaseButtonProps
 			}) else nil
 		})
 	})

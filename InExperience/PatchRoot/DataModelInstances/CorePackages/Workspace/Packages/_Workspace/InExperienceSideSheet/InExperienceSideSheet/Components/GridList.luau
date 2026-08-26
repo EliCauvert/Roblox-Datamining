@@ -10,26 +10,26 @@ local view = foundationModule.View
 local gridItemModule = require(inExperienceSideSheet.Components.GridItem)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: signalsReactModule (ref), reactModule (ref), gridItemModule (ref), fFlagSideSheetFocusNav (ref), view (ref)
-	local var6 = signalsReactModule.useSignalState(p0.integrationsGetter)
+	local var1 = signalsReactModule.useSignalState(p1.integrationsGetter)
 	local t = {}
 	
-	for i, v in var6 do
+	for i, v in var1 do
 		t[v.id] = reactModule.createElement(gridItemModule, {
 			icon = v.component,
 			label = v.integration.label,
 			layoutOrder = i,
 			notification = v.integration.notification,
 			onActivated = v.activated,
-			disableGamepadDirections = if fFlagSideSheetFocusNav and i == #var6 then { right = true } else nil,
+			disableGamepadDirections = if fFlagSideSheetFocusNav and i == #var1 then { right = true } else nil,
 			isActivated = v.integration.isActivated,
-			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and i == 1 then p0.firstIntegrationToFocusCallback else nil
+			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and i == 1 then p1.firstIntegrationToFocusCallback else nil
 		})
 	end
 	return reactModule.createElement(view, {
 		tag = "row wrap gap-medium size-full-0 auto-y padding-y-large",
-		LayoutOrder = p0.layoutOrder,
-		ref = if fFlagSideSheetFocusNav then p0.ref else nil
+		LayoutOrder = p1.layoutOrder,
+		ref = if fFlagSideSheetFocusNav then p1.ref else nil
 	}, t)
 end)

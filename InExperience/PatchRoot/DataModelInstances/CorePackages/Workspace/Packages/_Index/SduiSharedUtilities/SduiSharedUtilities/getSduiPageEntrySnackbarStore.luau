@@ -7,51 +7,51 @@ local function createSduiPageEntrySnackbarStore()
 	return {
 		getSignal = function(value)
 			-- upvalues: t (ref), signalsModule (copy)
-			local var4 = t[value]
+			local var1 = t[value]
 			
-			if var4 then
-				return var4.get
+			if var1 then
+				return var1.get
 			end
-			local var5, var6 = signalsModule.createSignal(nil)
-			t[value] = { get = var5, set = var6 }
+			local var2, var3 = signalsModule.createSignal(nil)
+			t[value] = { get = var2, set = var3 }
 			
-			return var5
+			return var2
 		end,
-		show = function(p0, p1)
+		show = function(p1, p2)
 			-- upvalues: t (ref), signalsModule (copy)
-			local var7 = t[p0]
+			local var1 = t[p1]
 			
-			if var7 then
-				var7.set(p1)
+			if var1 then
+				var1.set(p2)
 				
 				return
 			end
-			local var8, var9 = signalsModule.createSignal(nil)
-			t[p0] = { get = var8, set = var9 }
-			var9(p1)
+			local var2, var3 = signalsModule.createSignal(nil)
+			t[p1] = { get = var2, set = var3 }
+			var3(p2)
 		end,
-		hide = function(p2)
+		hide = function(p1)
 			-- upvalues: t (ref), signalsModule (copy)
-			local var10 = t[p2]
+			local var1 = t[p1]
 			
-			if var10 then
-				var10.set(nil)
+			if var1 then
+				var1.set(nil)
 				
 				return
 			end
-			local var11, var12 = signalsModule.createSignal(nil)
-			t[p2] = { get = var11, set = var12 }
-			var12(nil)
+			local var2, var3 = signalsModule.createSignal(nil)
+			t[p1] = { get = var2, set = var3 }
+			var3(nil)
 		end
 	}
 end
 
-local var2 = nil
+local var1 = nil
 
 return function()
-	-- upvalues: var2 (write), createSduiPageEntrySnackbarStore (ref)
-	if var2 == nil then
-		var2 = createSduiPageEntrySnackbarStore()
+	-- upvalues: var1 (write), createSduiPageEntrySnackbarStore (ref)
+	if var1 == nil then
+		var1 = createSduiPageEntrySnackbarStore()
 	end
-	return var2
+	return var1
 end

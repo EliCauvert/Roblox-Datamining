@@ -5,7 +5,7 @@ local dashModule = require(parent.Dash)
 local useSaveButtonPropsModule = require(avatarExperienceSave.SaveButton.useSaveButtonProps)
 local saveButtonModule = require(avatarExperienceSave.SaveButton.SaveButton)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), saveButtonModule (ref), dashModule (ref), useSaveButtonPropsModule (ref)
-	return reactModule.createElement(saveButtonModule, dashModule.assign(p0, useSaveButtonPropsModule()))
+	return reactModule.createElement(saveButtonModule, dashModule.assign(p1, useSaveButtonPropsModule()))
 end

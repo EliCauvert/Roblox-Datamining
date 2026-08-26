@@ -6,7 +6,7 @@ local tModule = require(parent.t)
 local getScreenPositionFromGuiObjectInputModule = require(adGuiInteractivity.getScreenPositionFromGuiObjectInput)
 local immersiveBrandedAdMenuModule = require(adGuiInteractivity.ImmersiveBrandedAdMenu)
 local adsInteractivityTelemetryModule = require(adGuiInteractivity.AdsInteractivityTelemetry)
-local var7 = tModule.interface({
+local var1 = tModule.interface({
 	disclosureButton = tModule.instanceIsA("GuiButton"),
 	inputObject = tModule.instanceIsA("InputObject"),
 	advertiserName = tModule.string,
@@ -15,21 +15,21 @@ local var7 = tModule.interface({
 })
 
 return function()
-	-- upvalues: reactModule (ref), adService (ref), var7 (ref), adsInteractivityTelemetryModule (ref), getScreenPositionFromGuiObjectInputModule (ref), immersiveBrandedAdMenuModule (ref)
-	local var8, var9 = reactModule.useState(nil)
+	-- upvalues: reactModule (ref), adService (ref), var1 (ref), adsInteractivityTelemetryModule (ref), getScreenPositionFromGuiObjectInputModule (ref), immersiveBrandedAdMenuModule (ref)
+	local var2, var3 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: adService (copy), var7 (copy), adsInteractivityTelemetryModule (copy), var9 (ref), getScreenPositionFromGuiObjectInputModule (copy)
-		function adService.OnImmersiveBrandedAdDisclosureButtonActivated(p0)
-			-- upvalues: var7 (copy), adsInteractivityTelemetryModule (copy), var9 (copy), getScreenPositionFromGuiObjectInputModule (copy)
-			local var10, _ = var7(p0)
+		-- upvalues: adService (copy), var1 (copy), adsInteractivityTelemetryModule (copy), var3 (ref), getScreenPositionFromGuiObjectInputModule (copy)
+		function adService.OnImmersiveBrandedAdDisclosureButtonActivated(p1)
+			-- upvalues: var1 (copy), adsInteractivityTelemetryModule (copy), var3 (copy), getScreenPositionFromGuiObjectInputModule (copy)
+			local var4, _ = var1(p1)
 			
-			if var10 then
+			if var4 then
 				adsInteractivityTelemetryModule.logImmersiveBrandedAdButtonClickCounter("disclosure")
-				var9({
-					menuScreenPosition = getScreenPositionFromGuiObjectInputModule(p0.disclosureButton, p0.inputObject),
-					advertiserName = p0.advertiserName,
-					campaignId = p0.campaignId,
-					immersiveBrandedAdId = p0.immersiveBrandedAdId
+				var3({
+					menuScreenPosition = getScreenPositionFromGuiObjectInputModule(p1.disclosureButton, p1.inputObject),
+					advertiserName = p1.advertiserName,
+					campaignId = p1.campaignId,
+					immersiveBrandedAdId = p1.immersiveBrandedAdId
 				})
 				
 				return
@@ -42,14 +42,14 @@ return function()
 		end
 	end, {})
 	
-	return if var8 then reactModule.createElement(immersiveBrandedAdMenuModule, {
-		screenPosition = var8.menuScreenPosition,
-		advertiserName = var8.advertiserName,
-		campaignId = var8.campaignId,
-		immersiveBrandedAdId = var8.immersiveBrandedAdId,
+	return if var2 then reactModule.createElement(immersiveBrandedAdMenuModule, {
+		screenPosition = var2.menuScreenPosition,
+		advertiserName = var2.advertiserName,
+		campaignId = var2.campaignId,
+		immersiveBrandedAdId = var2.immersiveBrandedAdId,
 		onDismiss = reactModule.useCallback(function()
-			-- upvalues: var9 (ref)
-			var9(nil)
+			-- upvalues: var3 (ref)
+			var3(nil)
 		end, {})
 	}) else nil
 end

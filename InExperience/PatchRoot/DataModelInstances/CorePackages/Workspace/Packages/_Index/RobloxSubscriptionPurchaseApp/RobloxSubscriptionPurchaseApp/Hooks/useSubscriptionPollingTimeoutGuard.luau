@@ -11,17 +11,17 @@ local robloxSubscriptionPurchasePollingTimeoutSeconds = game:DefineFastInt("Robl
 
 return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), reactModule (ref), signalsReactModule (ref), promptStateModule (ref), robloxSubscriptionPurchasePollingTimeoutSeconds (ref), transitionToErrorModule (ref), errorReasonModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref)
-	local var9 = robloxSubscriptionStoreModule.get()
-	local var10 = reactModule.useRef(var9)
-	local var11 = signalsReactModule.useSignalState(var9.getPromptState)
+	local var1 = robloxSubscriptionStoreModule.get()
+	local var2 = reactModule.useRef(var1)
+	local var3 = signalsReactModule.useSignalState(var1.getPromptState)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), promptStateModule (copy), robloxSubscriptionPurchasePollingTimeoutSeconds (copy), var10 (ref), transitionToErrorModule (copy), errorReasonModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
-		if var11 == promptStateModule.SubscriptionStatusPolling then
-			local var12 = false
+		-- upvalues: var3 (ref), promptStateModule (copy), robloxSubscriptionPurchasePollingTimeoutSeconds (copy), var2 (ref), transitionToErrorModule (copy), errorReasonModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
+		if var3 == promptStateModule.SubscriptionStatusPolling then
+			local var4 = false
 			task.delay(robloxSubscriptionPurchasePollingTimeoutSeconds, function()
-				-- upvalues: var12 (write), var10 (copy), promptStateModule (copy), transitionToErrorModule (copy), errorReasonModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
-				if var12 then return end
-				local current = var10.current
+				-- upvalues: var4 (write), var2 (copy), promptStateModule (copy), transitionToErrorModule (copy), errorReasonModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
+				if var4 then return end
+				local current = var2.current
 				
 				if current.getPromptState() == promptStateModule.SubscriptionStatusPolling then
 					if current.getIsNativePurchase() then
@@ -34,12 +34,12 @@ return function()
 			end)
 			
 			return function()
-				-- upvalues: var12 (write)
-				var12 = true
+				-- upvalues: var4 (write)
+				var4 = true
 			end
 		end
 	end, {
-		var11,
-		signalsReactModule.useSignalState(var9.getIsNativePurchase)
+		var3,
+		signalsReactModule.useSignalState(var1.getIsNativePurchase)
 	})
 end

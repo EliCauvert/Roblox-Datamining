@@ -11,34 +11,34 @@ local failureReasonsAccumulatorModule = require(util.FailureReasonsAccumulator)
 local parseContentIdsModule = require(util.ParseContentIds)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 local t = {
-	validateHiddenSurfaceRemovalAsset = function(value, p0)
+	validateHiddenSurfaceRemovalAsset = function(value, p1)
 		-- upvalues: analyticsModule (ref), failureReasonsAccumulatorModule (ref), validateTagsModule (ref), validateAttributesModule (ref), validatePropertiesSensibleModule (ref)
 		if #value ~= 1 then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p0)
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p1)
 			
 			return false, { "WrapLayer HSR asset does not have exactly 1 root" }
 		end
-		local var10 = value[1]
+		local var1 = value[1]
 		
-		if not var10:IsA("HiddenSurfaceRemovalAsset") then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p0)
+		if not var1:IsA("HiddenSurfaceRemovalAsset") then
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p1)
 			
 			return false, {
 				"WrapLayer HSR asset does not have a HiddenSurfaceRemovalAsset as the root Instance"
 			}
 		end
-		local var11 = failureReasonsAccumulatorModule.new()
-		var11:updateReasons(#var10:GetDescendants() == 0, {
+		local var2 = failureReasonsAccumulatorModule.new()
+		var2:updateReasons(#var1:GetDescendants() == 0, {
 			"WrapLayer HSR asset has children under the HiddenSurfaceRemovalAsset root Instance"
 		})
-		var11:updateReasons(validateTagsModule(var10, p0))
-		var11:updateReasons(validateAttributesModule(var10, p0))
-		var11:updateReasons(validatePropertiesSensibleModule.validate(var10, p0))
+		var2:updateReasons(validateTagsModule(var1, p1))
+		var2:updateReasons(validateAttributesModule(var1, p1))
+		var2:updateReasons(validatePropertiesSensibleModule.validate(var1, p1))
 		
-		if not var11:getFinalResults() then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p0)
+		if not var2:getFinalResults() then
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p1)
 		end
-		return var11:getFinalResults()
+		return var2:getFinalResults()
 	end
 }
 local getFFlagUGCValidateHSRMeshIdsModule = require(parent.flags.getFFlagUGCValidateHSRMeshIds)
@@ -50,21 +50,21 @@ function t.validateHSRMeshIdData(p1, p2, p3)
 	elseif #p2 ~= 1 then
 		return false, { "WrapLayer HSR asset does not have exactly 1 root" }
 	end
-	local var12 = p2[1]
+	local var1 = p2[1]
 	
-	if not var12:IsA("HiddenSurfaceRemovalAsset") then
+	if not var1:IsA("HiddenSurfaceRemovalAsset") then
 		return false, {
 			"WrapLayer HSR asset does not have a HiddenSurfaceRemovalAsset as the root Instance"
 		}
 	end
-	local var13, var14 = pcallDeferredModule(function()
-		-- upvalues: UGCValidationService (copy), p1 (ref), var12 (ref)
-		return UGCValidationService:ValidateHSRMeshIds(p1, var12)
+	local var2, var3 = pcallDeferredModule(function()
+		-- upvalues: UGCValidationService (copy), p1 (ref), var1 (ref)
+		return UGCValidationService:ValidateHSRMeshIds(p1, var1)
 	end, p3)
 	
-	if not var13 then
+	if not var2 then
 		return false, { "Error occurred while validating HSR Mesh Ids" }
-	elseif var14 then
+	elseif var3 then
 		return true
 	end
 	analyticsModule.reportFailure(analyticsModule.ErrorType.validataHSR_HSRMeshIdsMismatch, nil, p3)
@@ -74,17 +74,17 @@ function t.validateHSRMeshIdData(p1, p2, p3)
 	}
 end
 
-function t.validateInstance(p4, p5)
+function t.validateInstance(p1, p2)
 	-- upvalues: analyticsModule (ref), parseContentIdsModule (ref), getFFlagUGCValidateHSRMeshIdsModule (ref), t (ref), failureReasonsAccumulatorModule (ref)
-	if not p4:IsA("WrapLayer") then
+	if not p1:IsA("WrapLayer") then
 		return true
 	end
-	local var15 = if p5.isServer then true else false
-	local HSRAssetId = p4.HSRAssetId
+	local var1 = if p2.isServer then true else false
+	local HSRAssetId = p1.HSRAssetId
 	
 	if HSRAssetId and HSRAssetId ~= "" then
 		if not parseContentIdsModule.tryGetAssetIdFromContentId(HSRAssetId) then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p5)
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p2)
 			
 			return false, { "WrapLayer HSRAssetId contains an invalid url" }
 		end
@@ -95,40 +95,40 @@ function t.validateInstance(p4, p5)
 		
 		if ok then
 			if not getFFlagUGCValidateHSRMeshIdsModule() then
-				return t.validateHiddenSurfaceRemovalAsset(status, p5)
+				return t.validateHiddenSurfaceRemovalAsset(status, p2)
 			end
-			local var16 = failureReasonsAccumulatorModule.new()
-			var16:updateReasons(t.validateHiddenSurfaceRemovalAsset(status, p5))
+			local var2 = failureReasonsAccumulatorModule.new()
+			var2:updateReasons(t.validateHiddenSurfaceRemovalAsset(status, p2))
 			
-			if var16:getFinalResults() then
-				var16:updateReasons(t.validateHSRMeshIdData(p4, status, p5))
+			if var2:getFinalResults() then
+				var2:updateReasons(t.validateHSRMeshIdData(p1, status, p2))
 			end
-			if not var16:getFinalResults() then
-				analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p5)
+			if not var2:getFinalResults() then
+				analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p2)
 			end
-			return var16:getFinalResults()
-		elseif var15 then
+			return var2:getFinalResults()
+		elseif var1 then
 			error("Failed to load WrapLayer HSR asset")
 		end
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p5)
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p2)
 		
 		return false, { "Failed to load WrapLayer HSR asset" }
-	elseif var15 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p5)
+	elseif var1 then
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p2)
 		
 		return false, { "WrapLayer HSRAssetId is required" }
 	end
 	return true
 end
 
-function t.validate(p6, p7)
+function t.validate(p1, p2)
 	-- upvalues: failureReasonsAccumulatorModule (ref), t (ref), analyticsModule (ref)
 	local currentTime = tick()
-	local var18 = failureReasonsAccumulatorModule.new()
-	var18:updateReasons(t.validateInstance(p6, p7))
-	analyticsModule.recordScriptTime(script.Name, currentTime, p7)
+	local var1 = failureReasonsAccumulatorModule.new()
+	var1:updateReasons(t.validateInstance(p1, p2))
+	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
 	
-	return var18:getFinalResults()
+	return var1:getFinalResults()
 end
 
 return t

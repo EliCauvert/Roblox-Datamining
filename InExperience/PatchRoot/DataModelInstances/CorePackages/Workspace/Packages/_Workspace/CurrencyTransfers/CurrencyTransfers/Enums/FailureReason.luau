@@ -43,16 +43,16 @@ local t_1 = {
 	[19] = t.ReceiveLimitExceeded
 }
 
-function t.fromValue(p0)
+function t.fromValue(p1)
 	-- upvalues: t_1 (ref), t (ref)
-	if p0 == nil then
+	if p1 == nil then
 		return nil
-	elseif type(p0) == "number" then
-		return t_1[p0]
-	elseif type(p0) == "string" then
+	elseif type(p1) == "number" then
+		return t_1[p1]
+	elseif type(p1) == "string" then
 		for i, v in pairs(t) do
-			if v == p0 then
-				return p0
+			if v == p1 then
+				return p1
 			end
 		end
 	end

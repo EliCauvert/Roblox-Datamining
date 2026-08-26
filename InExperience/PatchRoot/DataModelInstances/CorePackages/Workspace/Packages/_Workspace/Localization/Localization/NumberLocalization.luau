@@ -126,8 +126,8 @@ t["en-gb"] = t["en-us"]
 t["es-mx"] = t["es-es"]
 t["th-th"] = t["en-us"]
 
-local function _(p0)
-	return string.find(p0, "%.") or #p0 + 1
+local function _(p1)
+	return string.find(p1, "%.") or #p1 + 1
 end
 
 local _ = function(value)
@@ -136,113 +136,113 @@ end
 
 local _ = function(value, p1, p2)
 	-- upvalues: roundingBehaviourModule (ref)
-	local var5 = 10 ^ (p1 + (if value == 0 then 0 else -(math.floor(math.log10(math.abs(value))) + 1)))
+	local var1 = 10 ^ (p1 + (if value == 0 then 0 else -(math.floor(math.log10(math.abs(value))) + 1)))
 	
-	return (if p2 == roundingBehaviourModule.Truncate then math.modf(value * var5) else math.floor(value * var5 + 0.5)) / var5
+	return (if p2 == roundingBehaviourModule.Truncate then math.modf(value * var1) else math.floor(value * var1 + 0.5)) / var1
 end
 
-local function addGroupDelimiters(p3, p4)
-	local var6 = p3
-	local formattedText = string.format("%%1%s%%2", p4)
+local function addGroupDelimiters(p1, p2)
+	local var1 = p1
+	local formattedText = string.format("%%1%s%%2", p2)
 	repeat
-		local replaced, replaced_1 = string.gsub(var6, "^(-?%d+)(%d%d%d)", formattedText)
-		var6 = replaced
+		local replaced, replaced_1 = string.gsub(var1, "^(-?%d+)(%d%d%d)", formattedText)
+		var1 = replaced
 	until replaced_1 == 0
-	return var6
+	return var1
 end
 
-local function findDenominationEntry(a, b, p5)
+local function findDenominationEntry(a, b, p1)
 	-- upvalues: roundingBehaviourModule (ref)
-	local var10 = a[1]
+	local var1 = a[1]
 	local absValue = math.abs(b)
 	
 	for i = #a, 2, -1 do
-		local var12 = a[i]
+		local var2 = a[i]
 		
-		if (if p5 == roundingBehaviourModule.Truncate then var12[1] else var12[1] - a[i - 1][1] / 2) > absValue then
+		if (if p1 == roundingBehaviourModule.Truncate then var2[1] else var2[1] - a[i - 1][1] / 2) > absValue then
 			continue
 		end
-		var10 = var12
+		var1 = var2
 		
-		return var10
+		return var1
 	end
-	return var10
+	return var1
 end
 
 return {
-	localize = function(p6, p7)
+	localize = function(p2, p3)
 		-- upvalues: t (ref), loggerModule (ref), addGroupDelimiters (ref)
-		if p6 == 0 then
+		if p2 == 0 then
 			return "0"
 		end
-		local var13 = t[p7]
+		local var3 = t[p3]
 		
-		if not var13 then
-			var13 = t["en-us"]
-			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p7), "en-us"))
+		if not var3 then
+			var3 = t["en-us"]
+			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p3), "en-us"))
 		end
-		return if var13.groupDelimiter then addGroupDelimiters(p6, var13.groupDelimiter) else p6
+		return if var3.groupDelimiter then addGroupDelimiters(p2, var3.groupDelimiter) else p2
 	end,
-	abbreviate = function(p8, p9, p10, p11)
+	abbreviate = function(p2, p3, p4, p5)
 		-- upvalues: roundingBehaviourModule (ref), t (ref), loggerModule (ref), findDenominationEntry (ref), addGroupDelimiters (ref)
-		if p8 == 0 then
+		if p2 == 0 then
 			return "0"
-		elseif p10 == nil then
-			p10 = roundingBehaviourModule.RoundToClosest
+		elseif p4 == nil then
+			p4 = roundingBehaviourModule.RoundToClosest
 		end
 		if not game:GetFastFlag("AllowNumberLocalizationSigFigParam") then
-			p11 = 3
-		elseif p11 == nil then
-			p11 = 3
+			p5 = 3
+		elseif p5 == nil then
+			p5 = 3
 		end
-		local var14 = t[p9]
+		local var3 = t[p3]
 		
-		if not var14 then
-			var14 = t["en-us"]
-			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p9), "en-us"))
+		if not var3 then
+			var3 = t["en-us"]
+			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p3), "en-us"))
 		end
-		local var15 = findDenominationEntry(var14, p8, p10)
-		local var16 = var15[2]
-		local var17 = p8 / var15[1]
-		local var18 = 10 ^ (p11 + (if var17 == 0 then 0 else -(math.floor(math.log10(math.abs(var17))) + 1)))
-		local var19 = (if p10 == roundingBehaviourModule.Truncate then math.modf(var17 * var18) else math.floor(var17 * var18 + 0.5)) / var18
-		local var20 = tostring(if p10 == roundingBehaviourModule.Truncate then math.modf(var19 * 10) / 10 else math.floor(var19 * 10 + 0.5) / 10)
-		local var21 = string.find(var20, "%.") or #var20 + 1
-		local substring = string.sub(var20, 1, var21 - 1)
-		local substring_1 = string.sub(var20, var21 + 1, #var20)
+		local var4 = findDenominationEntry(var3, p2, p4)
+		local var5 = var4[2]
+		local var6 = p2 / var4[1]
+		local var7 = 10 ^ (p5 + (if var6 == 0 then 0 else -(math.floor(math.log10(math.abs(var6))) + 1)))
+		local var8 = (if p4 == roundingBehaviourModule.Truncate then math.modf(var6 * var7) else math.floor(var6 * var7 + 0.5)) / var7
+		local var9 = tostring(if p4 == roundingBehaviourModule.Truncate then math.modf(var8 * 10) / 10 else math.floor(var8 * 10 + 0.5) / 10)
+		local var10 = string.find(var9, "%.") or #var9 + 1
+		local substring = string.sub(var9, 1, var10 - 1)
+		local substring_1 = string.sub(var9, var10 + 1, #var9)
 		
-		if var14.groupDelimiter then
-			substring = addGroupDelimiters(substring, var14.groupDelimiter)
+		if var3.groupDelimiter then
+			substring = addGroupDelimiters(substring, var3.groupDelimiter)
 		end
 		return if #substring_1 > 0 then substring .. var14.decimalSeparator .. substring_1 .. var16 else substring .. var16
 	end,
-	localizeDecimal = function(p12, p13, p14)
+	localizeDecimal = function(p2, p3, p4)
 		-- upvalues: t (ref), loggerModule (ref), addGroupDelimiters (ref)
-		if p12 == 0 then
+		if p2 == 0 then
 			return "0"
-		elseif p14 == nil then
-			p14 = 2
+		elseif p4 == nil then
+			p4 = 2
 		end
-		local var24 = t[p13]
+		local var3 = t[p3]
 		
-		if not var24 then
-			var24 = t["en-us"]
-			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p13), "en-us"))
+		if not var3 then
+			var3 = t["en-us"]
+			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p3), "en-us"))
 		end
-		local var25 = 10 ^ p14
-		local var26 = math.floor(math.abs(p12) * var25 + 0.5) / var25
-		local var27 = if p12 < 0 and var26 ~= 0 then "-" else ""
-		local formattedText = string.format(string.format("%%.%df", p14), var26)
-		local var29 = string.find(formattedText, "%.") or #formattedText + 1
-		local substring = string.sub(formattedText, 1, var29 - 1)
-		local substring_1 = string.sub(formattedText, var29 + 1, #formattedText)
+		local var4 = 10 ^ p4
+		local var5 = math.floor(math.abs(p2) * var4 + 0.5) / var4
+		local var6 = if p2 < 0 and var5 ~= 0 then "-" else ""
+		local formattedText = string.format(string.format("%%.%df", p4), var5)
+		local var7 = string.find(formattedText, "%.") or #formattedText + 1
+		local substring = string.sub(formattedText, 1, var7 - 1)
+		local substring_1 = string.sub(formattedText, var7 + 1, #formattedText)
 		
-		if var24.groupDelimiter then
-			substring = addGroupDelimiters(substring, var24.groupDelimiter)
+		if var3.groupDelimiter then
+			substring = addGroupDelimiters(substring, var3.groupDelimiter)
 		end
 		local replaced = string.gsub(substring_1, "0+$", "")
 		
-		return if #replaced > 0 then var27 .. substring .. var24.decimalSeparator .. replaced else var27 .. substring
+		return if #replaced > 0 then var6 .. substring .. var24.decimalSeparator .. replaced else var6 .. substring
 	end,
 	logger = loggerModule
 }

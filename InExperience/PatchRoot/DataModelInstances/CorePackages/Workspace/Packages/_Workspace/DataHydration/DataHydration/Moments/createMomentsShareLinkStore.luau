@@ -6,8 +6,8 @@ local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
 local fetchShareLinkModule = require(script.Parent.Requests.fetchShareLink)
 
-local function shouldRefreshCachedShareLink(p0)
-	return p0 == nil
+local function shouldRefreshCachedShareLink(p1)
+	return p1 == nil
 end
 
 return function(p1)
@@ -16,7 +16,7 @@ return function(p1)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
-	local var10 = createDataResolverModule({
+	local var1 = createDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = createDataCacheModule(),
@@ -31,51 +31,51 @@ return function(p1)
 		end
 	})
 	
-	local function _(value, p3, p4, p5)
+	local function _(value, p2, p3, p4)
 		-- upvalues: t (write), t_1 (write), t_2 (write)
-		t[value] = p3
-		t_1[value] = p4
-		t_2[value] = p5
+		t[value] = p2
+		t_1[value] = p3
+		t_2[value] = p4
 		
 		return value
 	end
 	
 	return {
-		getCachedShareLink = function(p6)
-			-- upvalues: var10 (ref)
-			return var10.getCachedItem(p6)
+		getCachedShareLink = function(p2)
+			-- upvalues: var1 (ref)
+			return var1.getCachedItem(p2)
 		end,
-		fetchShareLink = function(p7, p8, p9, p10)
-			-- upvalues: var10 (ref), t (write), t_1 (write), t_2 (write)
-			local fetchItem = var10.fetchItem
-			t[p7] = p8
-			t_1[p7] = p9
-			t_2[p7] = p10
+		fetchShareLink = function(p2, p3, p4, p5)
+			-- upvalues: var1 (ref), t (write), t_1 (write), t_2 (write)
+			local fetchItem = var1.fetchItem
+			t[p2] = p3
+			t_1[p2] = p4
+			t_2[p2] = p5
 			
-			return fetchItem(p7)
+			return fetchItem(p2)
 		end,
-		getAndFetchShareLink = function(p11, p12, p13, p14)
-			-- upvalues: var10 (ref), t (write), t_1 (write), t_2 (write), shouldRefreshCachedShareLink (copy)
-			local getAndFetchItem = var10.getAndFetchItem
-			t[p11] = p12
-			t_1[p11] = p13
-			t_2[p11] = p14
+		getAndFetchShareLink = function(p2, p3, p4, p5)
+			-- upvalues: var1 (ref), t (write), t_1 (write), t_2 (write), shouldRefreshCachedShareLink (copy)
+			local getAndFetchItem = var1.getAndFetchItem
+			t[p2] = p3
+			t_1[p2] = p4
+			t_2[p2] = p5
 			
-			return getAndFetchItem(p11, shouldRefreshCachedShareLink)
+			return getAndFetchItem(p2, shouldRefreshCachedShareLink)
 		end,
 		clear = function()
-			-- upvalues: t (write), t_1 (write), t_2 (write), var10 (ref)
+			-- upvalues: t (write), t_1 (write), t_2 (write), var1 (ref)
 			t = {}
 			t_1 = {}
 			t_2 = {}
-			var10.clear()
+			var1.clear()
 		end,
 		dispose = function()
-			-- upvalues: t (write), t_1 (write), t_2 (write), var10 (ref)
+			-- upvalues: t (write), t_1 (write), t_2 (write), var1 (ref)
 			t = {}
 			t_1 = {}
 			t_2 = {}
-			var10.dispose()
+			var1.dispose()
 		end
 	}
 end

@@ -17,15 +17,15 @@ local t = {
 	expectedFailures = {}
 }
 
-local function runAccessoryCheck(p0, p1)
+local function runAccessoryCheck(p1, p2)
 	-- upvalues: constantsModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
 	local MAX_HAT_TRIANGLES = constantsModule.MAX_HAT_TRIANGLES
 	
-	for i, v in p1.renderMeshesData do
+	for i, v in p2.renderMeshesData do
 		local editableEditableMeshTriCount = UGCValidationService:GetEditableMeshTriCount(v.editable)
 		
 		if MAX_HAT_TRIANGLES < editableEditableMeshTriCount then
-			p0:fail(errorSourceStringsModule.Keys.MeshGeometry_TriangleCountExceeded, {
+			p1:fail(errorSourceStringsModule.Keys.MeshGeometry_TriangleCountExceeded, {
 				meshName = i,
 				triangleCount = tostring(editableEditableMeshTriCount),
 				maxTriangles = tostring(MAX_HAT_TRIANGLES)
@@ -34,34 +34,34 @@ local function runAccessoryCheck(p0, p1)
 	end
 end
 
-local function runBodyPartCheck(p2, p3)
+local function runBodyPartCheck(p3, p4)
 	-- upvalues: constantsModule (ref), UGCValidationService (ref), getFIntUGCValidateTriangleLimitToleranceModule (ref), errorSourceStringsModule (ref)
-	local name = p3.uploadEnum.assetType.Name
-	local var9 = constantsModule.ASSET_RENDER_MESH_MAX_TRIANGLES[name]
+	local name = p4.uploadEnum.assetType.Name
+	local var1 = constantsModule.ASSET_RENDER_MESH_MAX_TRIANGLES[name]
 	
-	if not var9 then return end
-	local var10 = 0
+	if not var1 then return end
+	local var2 = 0
 	
-	for i, v in p3.renderMeshesData do
-		var10 += UGCValidationService:GetEditableMeshTriCount(v.editable)
+	for i, v in p4.renderMeshesData do
+		var2 += UGCValidationService:GetEditableMeshTriCount(v.editable)
 	end
-	if var9 + var9 * (getFIntUGCValidateTriangleLimitToleranceModule() / 100) < var10 then
-		p2:fail(errorSourceStringsModule.Keys.MeshGeometry_TotalTriangleCountExceeded, {
-			triangleCount = tostring(var10),
+	if var1 + var1 * (getFIntUGCValidateTriangleLimitToleranceModule() / 100) < var2 then
+		p3:fail(errorSourceStringsModule.Keys.MeshGeometry_TotalTriangleCountExceeded, {
+			triangleCount = tostring(var2),
 			assetTypeName = name,
-			maxTriangles = tostring(var9)
+			maxTriangles = tostring(var1)
 		})
 	end
 end
 
-function t.run(p4, p5)
+function t.run(p5, p6)
 	-- upvalues: validationEnumsModule (ref), runBodyPartCheck (ref), runAccessoryCheck (ref)
-	if p5.uploadCategory == validationEnumsModule.UploadCategory.TORSO_AND_LIMBS or p5.uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD then
-		runBodyPartCheck(p4, p5)
+	if p6.uploadCategory == validationEnumsModule.UploadCategory.TORSO_AND_LIMBS or p6.uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD then
+		runBodyPartCheck(p5, p6)
 		
 		return
 	end
-	runAccessoryCheck(p4, p5)
+	runAccessoryCheck(p5, p6)
 end
 
 return t

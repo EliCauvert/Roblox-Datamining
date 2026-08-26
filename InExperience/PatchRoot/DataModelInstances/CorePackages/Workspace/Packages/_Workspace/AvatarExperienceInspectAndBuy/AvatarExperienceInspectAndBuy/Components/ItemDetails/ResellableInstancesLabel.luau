@@ -7,17 +7,17 @@ local enums = foundationModule.Enums
 local iconSize = enums.IconSize
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), enums (ref), iconSize (ref)
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-xy size-full-0",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
-		UIPadding = if p0.padding then reactModule.createElement("UIPadding", {
-			PaddingLeft = p0.padding.left,
-			PaddingRight = p0.padding.right,
-			PaddingTop = p0.padding.top,
-			PaddingBottom = p0.padding.bottom
+		UIPadding = if p1.padding then reactModule.createElement("UIPadding", {
+			PaddingLeft = p1.padding.left,
+			PaddingRight = p1.padding.right,
+			PaddingTop = p1.padding.top,
+			PaddingBottom = p1.padding.bottom
 		}) else nil,
 		Inner = reactModule.createElement(foundationModule.View, {
 			tag = "auto-y padding-medium size-full-0 row align-x-left align-y-center gap-small radius-medium",
@@ -32,7 +32,7 @@ return function(p0)
 			Text = reactModule.createElement(foundationModule.Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium content-emphasis text-truncate-end",
-				Text = p0.ownedItemsLabel
+				Text = p1.ownedItemsLabel
 			})
 		})
 	})

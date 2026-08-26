@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2, p3)
-	return math.clamp(p1 + (if p0 > 0 then 1 elseif p0 < 0 then -1 else 0) * p2, p3.Min, p3.Max)
+﻿return function(p1, p2, p3, p4)
+	return math.clamp(p2 + (if p1 > 0 then 1 elseif p1 < 0 then -1 else 0) * p3, p4.Min, p4.Max)
 end

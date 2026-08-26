@@ -11,56 +11,56 @@ local loggerModule = require(appChat.Logger)
 local useRecordModalSequenceResponseForConversationModule = require(appChat.Hooks.useRecordModalSequenceResponseForConversation)
 local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), reactModule (ref), useRecordModalSequenceResponseForConversationModule (ref), fFlagAppChatEnableDoubleOptIn (ref), appChatNetworkingModule (ref), statusCodes (ref), loggerModule (ref), setTimeout (ref), clearTimeout (ref)
-	local var6 = useDispatch()
-	local var7, var8 = reactModule.useState(false)
-	local var9 = useRecordModalSequenceResponseForConversationModule(p0.conversationId)
+	local var1 = useDispatch()
+	local var2, var3 = reactModule.useState(false)
+	local var4 = useRecordModalSequenceResponseForConversationModule(p1.conversationId)
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref)
-		var8(false)
+		-- upvalues: var3 (ref)
+		var3(false)
 	end, {
-		p0.modalSequence,
-		p0.modalId,
-		p0.conversationId,
-		if fFlagAppChatEnableDoubleOptIn then p0.modalVariant else nil
+		p1.modalSequence,
+		p1.modalId,
+		p1.conversationId,
+		if fFlagAppChatEnableDoubleOptIn then p1.modalVariant else nil
 	})
-	local modalId = p0.canRecordAction and (not var7 and (p0.actionToRecord and (p0.modalSequence and p0.modalId)))
+	local modalId = p1.canRecordAction and (not var2 and (p1.actionToRecord and (p1.modalSequence and p1.modalId)))
 	
 	if fFlagAppChatEnableDoubleOptIn then
-		modalId = p0.canRecordAction and (not var7 and (p0.actionToRecord and (p0.modalSequence and (p0.modalId or p0.modalVariant))))
+		modalId = p1.canRecordAction and (not var2 and (p1.actionToRecord and (p1.modalSequence and (p1.modalId or p1.modalVariant))))
 	end
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), var9 (ref), var6 (ref), appChatNetworkingModule (copy), statusCodes (copy), var8 (ref), loggerModule (copy)
-		local actionToRecord = p0.actionToRecord;
-		(if p0.conversationId then var9(actionToRecord, p0.modalSequence, p0.modalId, p0.modalVariant) else var6(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(actionToRecord, p0.modalSequence, p0.modalId))):andThen(function(p2)
-			-- upvalues: statusCodes (copy), var8 (copy)
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), var4 (ref), var1 (ref), appChatNetworkingModule (copy), statusCodes (copy), var3 (ref), loggerModule (copy)
+		local actionToRecord = p1.actionToRecord;
+		(if p1.conversationId then var4(actionToRecord, p1.modalSequence, p1.modalId, p1.modalVariant) else var1(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(actionToRecord, p1.modalSequence, p1.modalId))):andThen(function(p2)
+			-- upvalues: statusCodes (copy), var3 (copy)
 			if p2 and p2.responseCode == statusCodes.OK then
-				var8(true)
+				var3(true)
 			end
-		end):catch(function(p1)
-			-- upvalues: loggerModule (copy), p0 (copy)
-			loggerModule:warning(`Error in {p0.modalSequence} {p0.modalId} -> RecordModalSequenceResponse seen: {tostring(p1)}`)
+		end):catch(function(p2)
+			-- upvalues: loggerModule (copy), p1 (copy)
+			loggerModule:warning(`Error in {p1.modalSequence} {p1.modalId} -> RecordModalSequenceResponse seen: {tostring(p2)}`)
 		end)
 	end, {
-		var6, p0.actionToRecord, p0.modalId, p0.modalSequence, p0.conversationId, var9
+		var1, p1.actionToRecord, p1.modalId, p1.modalSequence, p1.conversationId, var4
 	})
 	reactModule.useEffect(function()
-		-- upvalues: modalId (write), p0 (ref), setTimeout (copy), var11 (ref), clearTimeout (copy)
-		local var12 = nil
+		-- upvalues: modalId (write), p1 (ref), setTimeout (copy), var5 (ref), clearTimeout (copy)
+		local var6 = nil
 		
 		if modalId then
-			if p0.delayMs and p0.delayMs > 0 then
-				var12 = setTimeout(var11, p0.delayMs)
+			if p1.delayMs and p1.delayMs > 0 then
+				var6 = setTimeout(var5, p1.delayMs)
 			else
-				var11()
+				var5()
 			end
 		end
 		return function()
-			-- upvalues: var12 (write), clearTimeout (copy)
-			if var12 then
-				clearTimeout(var12)
+			-- upvalues: var6 (write), clearTimeout (copy)
+			if var6 then
+				clearTimeout(var6)
 			end
 		end
-	end, { p0.delayMs, var11, modalId })
+	end, { p1.delayMs, var5, modalId })
 end

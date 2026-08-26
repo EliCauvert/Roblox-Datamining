@@ -1,15 +1,15 @@
 ﻿local bindableEventQueueModule = require(script.Parent.bindableEventQueue)
 
-return function(p0)
+return function(p1)
 	-- upvalues: bindableEventQueueModule (ref)
-	return function(p1)
-		-- upvalues: p0 (ref), bindableEventQueueModule (copy)
+	return function(p2)
+		-- upvalues: p1 (ref), bindableEventQueueModule (copy)
 		return function(...)
-			-- upvalues: p1 (ref), p0 (copy), bindableEventQueueModule (copy)
-			local var1 = p1(...)
+			-- upvalues: p2 (ref), p1 (copy), bindableEventQueueModule (copy)
+			local var1 = p2(...)
 			
-			if p0:GetAttribute("isConnected") == true then
-				p0:Fire(var1)
+			if p1:GetAttribute("isConnected") == true then
+				p1:Fire(var1)
 				
 				return
 			end

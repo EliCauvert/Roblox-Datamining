@@ -12,28 +12,28 @@ local t = {
 	style = require(appChat.SocialLibraries).Components.TestStyle
 }
 
-function SectionHeader(p0)
+function SectionHeader(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), roactFitComponents (ref)
-	local var4 = cryoModule.Dictionary.join(t, p0)
-	local style = var4.style
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local style = var1.style
 	local font = style.Font
 	
 	return reactModule.createElement(roactFitComponents.FitFrameVertical, {
 		BackgroundTransparency = 1,
-		LayoutOrder = var4.LayoutOrder,
+		LayoutOrder = var1.LayoutOrder,
 		width = UDim.new(1, 0),
 		margin = {
 			left = 12,
 			right = 0,
-			top = var4.marginTop,
-			bottom = var4.marginBottom
+			top = var1.marginTop,
+			bottom = var1.marginBottom
 		}
 	}, {
 		SectionHeader = reactModule.createElement(roactFitComponents.FitTextLabel, {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			width = roactFitComponents.FitTextLabel.Width.FitToText,
-			Text = var4.Text,
+			Text = var1.Text,
 			TextColor3 = style.Theme.TextDefault.Color,
 			TextSize = font.CaptionHeader.RelativeSize * font.BaseSize,
 			Font = font.CaptionHeader.Font,

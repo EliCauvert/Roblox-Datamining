@@ -12,13 +12,13 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXWidgetHeaderTreatEmptyTextAsNil = avatarExperienceFlagsModule.FFlagAXWidgetHeaderTreatEmptyTextAsNil
 local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
 
-local function _(p0)
-	return if p0 == nil or p0 == "" then nil else p0
+local function _(p1)
+	return if p1 == nil or p1 == "" then nil else p1
 end
 
 return function(p1)
 	-- upvalues: reactModule (ref), useDesignTokens (ref), useLocalization (ref), fFlagAXWidgetHeaderTreatEmptyTextAsNil (ref), fFlagAXCatalogItemInformationPopover (ref), iconWithTooltip (ref), tooltipOrientation (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local titleText, var8, var10
+	local titleText, var1, var2
 	local var3, var4 = reactModule.useBinding(Vector2.new())
 	local var5 = useDesignTokens()
 	local var6 = useLocalization({
@@ -37,35 +37,35 @@ return function(p1)
 			titleText = var6.title
 			var7 = if titleText == nil or titleText == "" then nil else titleText
 		end
-		var8 = var7
+		var1 = var7
 		titleText = p1.descriptionText
-		local var9 = if titleText == nil or titleText == "" then nil else titleText
+		local var8 = if titleText == nil or titleText == "" then nil else titleText
 		
-		if not var9 then
+		if not var8 then
 			titleText = var6.description
-			var9 = if titleText == nil or titleText == "" then nil else titleText
+			var8 = if titleText == nil or titleText == "" then nil else titleText
 		end
-		var10 = var9
+		var2 = var8
 	else
-		var8 = if p1.titleText then p1.titleText else var6.title
-		var10 = if p1.descriptionText then p1.descriptionText else var6.description
+		var1 = if p1.titleText then p1.titleText else var6.title
+		var2 = if p1.descriptionText then p1.descriptionText else var6.description
 	end
-	local var11 = fFlagAXCatalogItemInformationPopover and (p1.informationPopoverText ~= nil and (p1.informationPopoverText ~= "" and p1.onInformationIconActivated ~= nil))
-	titleText = if var8 then reactModule.createElement("TextLabel", {
+	local var9 = fFlagAXCatalogItemInformationPopover and (p1.informationPopoverText ~= nil and (p1.informationPopoverText ~= "" and p1.onInformationIconActivated ~= nil))
+	titleText = if var1 then reactModule.createElement("TextLabel", {
 		LayoutOrder = 1,
 		BackgroundTransparency = 1,
-		Text = var8,
+		Text = var1,
 		Font = var5.Typography.HeadingSmall.Font,
 		TextSize = var5.Typography.HeadingSmall.FontSize,
 		LineHeight = var5.Typography.HeadingSmall.LineHeight,
 		TextColor3 = var5.Color.Content.Emphasis.Color3,
 		TextTransparency = var5.Color.Content.Emphasis.Transparency,
 		TextTruncate = Enum.TextTruncate.AtEnd,
-		Size = if var11 then UDim2.fromOffset(0, 0) else UDim2.fromScale(1, 0),
-		AutomaticSize = if var11 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y,
+		Size = if var9 then UDim2.fromOffset(0, 0) else UDim2.fromScale(1, 0),
+		AutomaticSize = if var9 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left
 	}, {
-		UIFlexItem = if var11 then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
+		UIFlexItem = if var9 then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
 		UISizeConstraint = if p1.seeAllCallback then reactModule.createElement("UISizeConstraint", {
 			MinSize = var3:map(function(p2)
 				return Vector2.new(0, p2.Y)
@@ -80,12 +80,12 @@ return function(p1)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p1.LayoutOrder
 	}, {
-		TitleDescriptionFrame = if var8 or var10 then reactModule.createElement("Frame", {
+		TitleDescriptionFrame = if var1 or var2 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = if p1.seeAllCallback then var3:map(function(p3)
+			Size = if p1.seeAllCallback then var3:map(function(p2)
 				-- upvalues: var5 (ref)
-				return UDim2.new(1, 0 - (p3.X + var5.Size.Size_300), 0, 0)
+				return UDim2.new(1, 0 - (p2.X + var5.Size.Size_300), 0, 0)
 			end) else UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
@@ -94,7 +94,7 @@ return function(p1)
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, var5.Size.Size_100)
 			}),
-			Title = if var8 then if var11 then reactModule.createElement("Frame", {
+			Title = if var1 then if var9 then reactModule.createElement("Frame", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -127,10 +127,10 @@ return function(p1)
 					})
 				})
 			}) else titleText else nil,
-			Description = if var10 then reactModule.createElement("TextLabel", {
+			Description = if var2 then reactModule.createElement("TextLabel", {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
-				Text = var10,
+				Text = var2,
 				Font = var5.Typography.BodyLarge.Font,
 				TextSize = var5.Typography.BodyLarge.FontSize,
 				TextColor3 = var5.Color.Content.Default.Color3,
@@ -150,9 +150,9 @@ return function(p1)
 			standardSize = standardButtonSize.XSmall,
 			onActivated = p1.seeAllCallback,
 			buttonRef = p1.seeAllRef,
-			[reactModule.Change.AbsoluteSize] = function(p4)
+			[reactModule.Change.AbsoluteSize] = function(p2)
 				-- upvalues: var4 (ref)
-				var4(p4.AbsoluteSize)
+				var4(p2.AbsoluteSize)
 			end,
 			NextSelectionDown = p1.NextSelectionDown,
 			NextSelectionUp = p1.NextSelectionUp

@@ -12,14 +12,14 @@ t.BaseUrl = replaced
 t.AssetGameBaseUrl = replaced_1
 local getFStringAppLocationForAppPresenceModule = require(modules.Shell.Flags.GetFStringAppLocationForAppPresence)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: httpService (ref)
-	if p0 == nil or #p0 == 0 then
+	if p1 == nil or #p1 == 0 then
 		return nil
 	end
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p0 (ref)
-		return httpService:JSONDecode(p0)
+		-- upvalues: httpService (copy), p1 (ref)
+		return httpService:JSONDecode(p1)
 	end)
 	
 	return if ok then status else nil
@@ -47,11 +47,11 @@ local _ = function(p1, p2)
 	return if ok_1 then status_1 else nil
 end
 
-local _ = function(p3, p4, p5)
+local _ = function(p1, p2, p3)
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p3 (ref), p4 (ref), p5 (ref)
-		return game:HttpPostAsync(p3, p4, p5)
+		-- upvalues: p1 (ref), p2 (ref), p3 (ref)
+		return game:HttpPostAsync(p1, p2, p3)
 	end)
 	
 	if not ok then
@@ -67,11 +67,11 @@ local _ = function(p3, p4, p5)
 	return if ok_1 then status_1 else nil
 end
 
-local _ = function(p6)
+local _ = function(p1)
 	-- upvalues: httpRbxApiService (ref), httpService (ref)
 	local ok, status = pcall(function()
-		-- upvalues: httpRbxApiService (copy), p6 (ref)
-		return httpRbxApiService:GetAsync(p6)
+		-- upvalues: httpRbxApiService (copy), p1 (ref)
+		return httpRbxApiService:GetAsync(p1)
 	end)
 	
 	if not ok then
@@ -87,11 +87,11 @@ local _ = function(p6)
 	return if ok_1 then status_1 else nil
 end
 
-local _ = function(p7, p8, p9, p10)
+local _ = function(p1, p2, p3, p4)
 	-- upvalues: httpRbxApiService (ref), httpService (ref)
 	local ok, status = pcall(function()
-		-- upvalues: httpRbxApiService (copy), p7 (ref), p8 (ref), p9 (ref), p10 (ref)
-		return httpRbxApiService:PostAsync(p7, p8, p9, p10)
+		-- upvalues: httpRbxApiService (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref)
+		return httpRbxApiService:PostAsync(p1, p2, p3, p4)
 	end)
 	
 	if not ok then
@@ -107,11 +107,11 @@ local _ = function(p7, p8, p9, p10)
 	return if ok_1 then status_1 else nil
 end
 
-local _ = function(p11, p12, p13, p14)
+local _ = function(p1, p2, p3, p4)
 	-- upvalues: httpRbxApiService (ref), httpService (ref)
 	local ok, status = pcall(function()
-		-- upvalues: httpRbxApiService (copy), p11 (ref), p12 (ref), p13 (ref), p14 (ref)
-		return httpRbxApiService:PostAsyncFullUrl(p11, p12, p13, p14)
+		-- upvalues: httpRbxApiService (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref)
+		return httpRbxApiService:PostAsyncFullUrl(p1, p2, p3, p4)
 	end)
 	
 	if not ok then
@@ -127,46 +127,46 @@ local _ = function(p11, p12, p13, p14)
 	return if ok_1 then status_1 else nil
 end
 
-local _ = function(p15)
+local _ = function(p1)
 	-- upvalues: utilityModule (ref), httpService (ref)
-	local var9 = nil
-	local var10 = utilityModule.Signal()
-	httpService:RequestInternal(p15):Start(function(p16, p17)
-		-- upvalues: var9 (write), httpService (copy), var10 (ref)
-		if p16 and p17.StatusCode ~= 401 and (p17.StatusCode >= 200 and p17.StatusCode < 400) then
-			local var11
-			local body = p17.Body
+	local var1 = nil
+	local var2 = utilityModule.Signal()
+	httpService:RequestInternal(p1):Start(function(p2, p3)
+		-- upvalues: var1 (write), httpService (copy), var2 (ref)
+		if p2 and p3.StatusCode ~= 401 and (p3.StatusCode >= 200 and p3.StatusCode < 400) then
+			local var3
+			local body = p3.Body
 			
 			if body == nil or #body == 0 then
-				var11 = nil
+				var3 = nil
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
-				var11 = if not ok then nil else status
+				var3 = if not ok then nil else status
 			end
-			var9 = var11
+			var1 = var3
 		end
-		var10:fire()
+		var2:fire()
 	end)
-	var10:wait()
+	var2:wait()
 	
-	return var9
+	return var1
 end
 
-local function buildServiceUrl(p18)
+local function buildServiceUrl(p1)
 	-- upvalues: replaced (write)
 	return string.gsub(replaced, "https://www.", "https://" .. p18 .. ".")
 end
 
-local _ = function(p19)
-	return if p19 ~= nil then #p19 == 0 else true
+local _ = function(p1)
+	return if p1 ~= nil then #p1 == 0 else true
 end
 
-function t.GetCuratedSortAsync(p20, p21)
+function t.GetCuratedSortAsync(p1, p2)
 	-- upvalues: replaced (write), httpService (ref)
-	local formattedText = string.format("%sgames/set?GameSetTargetId=%d&MaxRows=%d", replaced, p20, p21)
+	local formattedText = string.format("%sgames/set?GameSetTargetId=%d&MaxRows=%d", replaced, p1, p2)
 	local ok, status = pcall(function()
 		-- upvalues: formattedText (ref)
 		return game:HttpGetAsync(formattedText)
@@ -185,11 +185,11 @@ function t.GetCuratedSortAsync(p20, p21)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetCuratedSortByUrlAsync(p22)
+function t.GetCuratedSortByUrlAsync(p1)
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p22 (ref)
-		return game:HttpGetAsync(p22)
+		-- upvalues: p1 (ref)
+		return game:HttpGetAsync(p1)
 	end)
 	
 	if not ok then
@@ -205,9 +205,9 @@ function t.GetCuratedSortByUrlAsync(p22)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetUserPlacesAsync(p23, p24, p25)
+function t.GetUserPlacesAsync(p1, p2, p3)
 	-- upvalues: replaced (write), httpService (ref)
-	local formattedText = string.format("%sgames/list-users-games-json?userid=%d&startIndex=%d&pageSize=%d", replaced, p25, p23, p24)
+	local formattedText = string.format("%sgames/list-users-games-json?userid=%d&startIndex=%d&pageSize=%d", replaced, p3, p1, p2)
 	local ok, status = pcall(function()
 		-- upvalues: formattedText (ref)
 		return game:HttpGetAsync(formattedText)
@@ -226,9 +226,9 @@ function t.GetUserPlacesAsync(p23, p24, p25)
 	return if ok_1 then status_1 else nil
 end
 
-function t.SearchGamesAsync(p26, p27, p28)
+function t.SearchGamesAsync(p1, p2, p3)
 	-- upvalues: replaced (write), httpService (ref)
-	local formattedText = string.format("%sgames/list-json?keyword=%s&StartRows=%d&MaxRows=%d&filterByDeviceType=true", replaced, httpService:UrlEncode(p28), p26, p27)
+	local formattedText = string.format("%sgames/list-json?keyword=%s&StartRows=%d&MaxRows=%d&filterByDeviceType=true", replaced, httpService:UrlEncode(p3), p1, p2)
 	local ok, status = pcall(function()
 		-- upvalues: formattedText (ref)
 		return game:HttpGetAsync(formattedText)
@@ -247,9 +247,9 @@ function t.SearchGamesAsync(p26, p27, p28)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetGamesAsync(p29)
+function t.GetGamesAsync(p1)
 	-- upvalues: replaced (write), httpService (ref)
-	local text = string.gsub(replaced, "https://www.", "https://games.") .. "v1/games?universeIds=" .. table.concat(p29, ",")
+	local text = string.gsub(replaced, "https://www.", "https://games.") .. "v1/games?universeIds=" .. table.concat(p1, ",")
 	local ok, status = pcall(function()
 		-- upvalues: text (ref)
 		return game:HttpGetAsync(text)
@@ -268,46 +268,46 @@ function t.GetGamesAsync(p29)
 	return if ok_1 then status_1 else nil
 end
 
-function t.PostExperienceGuidelines(p30)
+function t.PostExperienceGuidelines(p1)
 	-- upvalues: buildServiceUrl (ref), httpService (ref), utilityModule (ref)
 	local t = {
 		Method = "POST",
 		Url = string.format("%sexperience-guidelines-api/experience-guidelines/get-age-recommendation", buildServiceUrl("apis")),
-		Body = httpService:JSONEncode({ universeId = p30 }),
+		Body = httpService:JSONEncode({ universeId = p1 }),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
-	local var17 = nil
-	local var18 = utilityModule.Signal()
-	httpService:RequestInternal(t):Start(function(p31, p32)
-		-- upvalues: var17 (write), httpService (copy), var18 (ref)
-		if p31 and p32.StatusCode ~= 401 and (p32.StatusCode >= 200 and p32.StatusCode < 400) then
-			local var11
-			local body = p32.Body
+	local var1 = nil
+	local var2 = utilityModule.Signal()
+	httpService:RequestInternal(t):Start(function(p2, p3)
+		-- upvalues: var1 (write), httpService (copy), var2 (ref)
+		if p2 and p3.StatusCode ~= 401 and (p3.StatusCode >= 200 and p3.StatusCode < 400) then
+			local var3
+			local body = p3.Body
 			
 			if body == nil or #body == 0 then
-				var11 = nil
+				var3 = nil
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
-				var11 = if not ok then nil else status
+				var3 = if not ok then nil else status
 			end
-			var9 = var11
+			var9 = var3
 		end
-		var18:fire()
+		var2:fire()
 	end)
-	var18:wait()
+	var2:wait()
 	
-	return var17
+	return var1
 end
 
-function t.GetGameIconIdAsync(p33)
+function t.GetGameIconIdAsync(p1)
 	-- upvalues: replaced (write), httpService (ref)
-	local text = replaced .. "places/icons/json?placeId=" .. tostring(p33)
+	local text = replaced .. "places/icons/json?placeId=" .. tostring(p1)
 	local ok, status = pcall(function()
 		-- upvalues: text (ref)
 		return game:HttpGetAsync(text)
@@ -326,9 +326,9 @@ function t.GetGameIconIdAsync(p33)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetGameVotesAsync(p34)
+function t.GetGameVotesAsync(p1)
 	-- upvalues: replaced (write), httpService (ref)
-	local text = replaced .. "PlaceItem/GameDetailsVotingPanelJson?placeId=" .. tostring(p34)
+	local text = replaced .. "PlaceItem/GameDetailsVotingPanelJson?placeId=" .. tostring(p1)
 	local ok, status = pcall(function()
 		-- upvalues: text (ref)
 		return game:HttpGetAsync(text)
@@ -347,9 +347,9 @@ function t.GetGameVotesAsync(p34)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetRecommendedGamesAsync(p35)
+function t.GetRecommendedGamesAsync(p1)
 	-- upvalues: replaced (write), httpService (ref)
-	local text = replaced .. "Games/GetRecommendedGamesJson?currentPlaceId=" .. tostring(p35)
+	local text = replaced .. "Games/GetRecommendedGamesJson?currentPlaceId=" .. tostring(p1)
 	local ok, status = pcall(function()
 		-- upvalues: text (ref)
 		return game:HttpGetAsync(text)
@@ -368,9 +368,9 @@ function t.GetRecommendedGamesAsync(p35)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetGameThumbnailsAsync(p36)
+function t.GetGameThumbnailsAsync(p1)
 	-- upvalues: replaced (write), httpService (ref)
-	local text = replaced .. "thumbnail/place-thumbnails?placeId=" .. tostring(p36)
+	local text = replaced .. "thumbnail/place-thumbnails?placeId=" .. tostring(p1)
 	local ok, status = pcall(function()
 		-- upvalues: text (ref)
 		return game:HttpGetAsync(text)
@@ -389,12 +389,12 @@ function t.GetGameThumbnailsAsync(p36)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetBadgesForUniverseAsync(p37, p38)
+function t.GetBadgesForUniverseAsync(p1, p2)
 	-- upvalues: replaced (write), httpService (ref)
-	local formattedText = string.format("%sv1/universes/%d/badges?sortOrder=Asc&limit=100", string.gsub(replaced, "https://www.", "https://badges."), p37)
+	local formattedText = string.format("%sv1/universes/%d/badges?sortOrder=Asc&limit=100", string.gsub(replaced, "https://www.", "https://badges."), p1)
 	
-	if p38 then
-		formattedText = string.format(formattedText .. "&cursor=%s", p38)
+	if p2 then
+		formattedText = string.format(formattedText .. "&cursor=%s", p2)
 	end
 	local ok, status = pcall(function()
 		-- upvalues: formattedText (ref)
@@ -414,9 +414,9 @@ function t.GetBadgesForUniverseAsync(p37, p38)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetUserAwardedBadgesAsync(p39, p40)
+function t.GetUserAwardedBadgesAsync(p1, p2)
 	-- upvalues: replaced (write), httpService (ref)
-	local formattedText = string.format("%sv1/users/%d/badges/awarded-dates?badgeIds=%s", string.gsub(replaced, "https://www.", "https://badges."), p39, table.concat(p40, ","))
+	local formattedText = string.format("%sv1/users/%d/badges/awarded-dates?badgeIds=%s", string.gsub(replaced, "https://www.", "https://badges."), p1, table.concat(p2, ","))
 	local ok, status = pcall(function()
 		-- upvalues: formattedText (ref)
 		return game:HttpGetAsync(formattedText)
@@ -435,15 +435,15 @@ function t.GetUserAwardedBadgesAsync(p39, p40)
 	return if ok_1 then status_1 else nil
 end
 
-function t.PostFavoriteToggleAsync(p41)
+function t.PostFavoriteToggleAsync(p1)
 	-- upvalues: replaced (write), httpService (ref)
-	local text = replaced .. "favorite/toggle?assetID=" .. tostring(p41)
+	local text = replaced .. "favorite/toggle?assetID=" .. tostring(p1)
 	local _pcall = pcall
-	local var27 = "favoriteToggle"
-	local var28 = nil
+	local var1 = "favoriteToggle"
+	local var2 = nil
 	_pcall, var29 = _pcall(function()
-		-- upvalues: text (ref), var27 (ref), var28 (ref)
-		return game:HttpPostAsync(text, var27, var28)
+		-- upvalues: text (ref), var1 (ref), var2 (ref)
+		return game:HttpPostAsync(text, var1, var2)
 	end)
 	
 	if not _pcall then
@@ -459,15 +459,15 @@ function t.PostFavoriteToggleAsync(p41)
 	return if ok then status else nil
 end
 
-function t.PostGameVoteAsync(p42, p43)
+function t.PostGameVoteAsync(p1, p2)
 	-- upvalues: replaced (write), httpService (ref)
-	local text = replaced .. "voting/vote?assetId=" .. tostring(p42) .. "&vote=" .. tostring(p43)
+	local text = replaced .. "voting/vote?assetId=" .. tostring(p1) .. "&vote=" .. tostring(p2)
 	local _pcall = pcall
-	local var32 = "vote"
-	local var33 = nil
+	local var1 = "vote"
+	local var2 = nil
 	_pcall, var34 = _pcall(function()
-		-- upvalues: text (ref), var32 (ref), var33 (ref)
-		return game:HttpPostAsync(text, var32, var33)
+		-- upvalues: text (ref), var1 (ref), var2 (ref)
+		return game:HttpPostAsync(text, var1, var2)
 	end)
 	
 	if not _pcall then
@@ -486,7 +486,7 @@ end
 function t.RegisterAppPresence()
 	-- upvalues: buildServiceUrl (ref), getFStringAppLocationForAppPresenceModule (ref), httpService (ref)
 	local formattedText = string.format("%s/v1/presence/register-app-presence", buildServiceUrl("presence"))
-	local var36 = nil
+	local var1 = nil
 	-- [0.000s] <RUNTIME-ERROR> : Error block 0 analysis at pc 2 ('luna.MethodCall' object has no attribute 'name')
 end
 
@@ -496,30 +496,30 @@ function t.GetCrossplayEnabledStatusAsync()
 		Method = "GET",
 		Url = string.format("%suser-settings-api/v1/user-settings?requestedUserSettings=xboxCrossPlayStatusIsEnabled", buildServiceUrl("apis"))
 	}
-	local var38 = nil
-	local var39 = utilityModule.Signal()
-	httpService:RequestInternal(t):Start(function(p44, p45)
-		-- upvalues: var38 (write), httpService (copy), var39 (ref)
-		if p44 and p45.StatusCode ~= 401 and (p45.StatusCode >= 200 and p45.StatusCode < 400) then
-			local var11
-			local body = p45.Body
+	local var1 = nil
+	local var2 = utilityModule.Signal()
+	httpService:RequestInternal(t):Start(function(p1, p2)
+		-- upvalues: var1 (write), httpService (copy), var2 (ref)
+		if p1 and p2.StatusCode ~= 401 and (p2.StatusCode >= 200 and p2.StatusCode < 400) then
+			local var3
+			local body = p2.Body
 			
 			if body == nil or #body == 0 then
-				var11 = nil
+				var3 = nil
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
-				var11 = if not ok then nil else status
+				var3 = if not ok then nil else status
 			end
-			var9 = var11
+			var9 = var3
 		end
-		var39:fire()
+		var2:fire()
 	end)
-	var39:wait()
+	var2:wait()
 	
-	return var38
+	return var1
 end
 
 function t.PostCrossplayStatusAsync(vectorA)
@@ -533,30 +533,30 @@ function t.PostCrossplayStatusAsync(vectorA)
 			Accept = "application/json"
 		}
 	}
-	local var41 = nil
-	local var42 = utilityModule.Signal()
-	httpService:RequestInternal(t):Start(function(p46, p47)
-		-- upvalues: var41 (write), httpService (copy), var42 (ref)
-		if p46 and p47.StatusCode ~= 401 and (p47.StatusCode >= 200 and p47.StatusCode < 400) then
-			local var11
-			local body = p47.Body
+	local var1 = nil
+	local var2 = utilityModule.Signal()
+	httpService:RequestInternal(t):Start(function(p1, p2)
+		-- upvalues: var1 (write), httpService (copy), var2 (ref)
+		if p1 and p2.StatusCode ~= 401 and (p2.StatusCode >= 200 and p2.StatusCode < 400) then
+			local var3
+			local body = p2.Body
 			
 			if body == nil or #body == 0 then
-				var11 = nil
+				var3 = nil
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
-				var11 = if not ok then nil else status
+				var3 = if not ok then nil else status
 			end
-			var9 = var11
+			var9 = var3
 		end
-		var42:fire()
+		var2:fire()
 	end)
-	var42:wait()
+	var2:wait()
 	
-	return var41
+	return var1
 end
 
 function t.GetRecommendedUsersndsAsync()
@@ -580,14 +580,14 @@ function t.GetRecommendedUsersndsAsync()
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetUsersPresenceAsync(p48)
+function t.GetUsersPresenceAsync(p1)
 	-- upvalues: httpService (ref), buildServiceUrl (ref)
-	local var44 = httpService:JSONEncode({ userIds = p48 })
+	local var1 = httpService:JSONEncode({ userIds = p1 })
 	local formattedText = string.format("%s/v1/presence/users", buildServiceUrl("presence"))
-	local var46 = nil
+	local var2 = nil
 	local ok, status = pcall(function()
-		-- upvalues: formattedText (ref), var44 (ref), var46 (ref)
-		return game:HttpPostAsync(formattedText, var44, var46)
+		-- upvalues: formattedText (ref), var1 (ref), var2 (ref)
+		return game:HttpPostAsync(formattedText, var1, var2)
 	end)
 	
 	if not ok then
@@ -645,9 +645,9 @@ function t.GetTotalUserBalanceAsync()
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetUserOwnedPackagesAsync(p49, p50)
+function t.GetUserOwnedPackagesAsync(p1, p2)
 	-- upvalues: replaced (write), httpService (ref)
-	local text = replaced .. "users/inventory/list-json?userId=" .. tostring(p49) .. "&assetTypeId=" .. tostring(32) .. "&pageNumber=" .. tostring(p50 or 1)
+	local text = replaced .. "users/inventory/list-json?userId=" .. tostring(p1) .. "&assetTypeId=" .. tostring(32) .. "&pageNumber=" .. tostring(p2 or 1)
 	local ok, status = pcall(function()
 		-- upvalues: text (ref)
 		return game:HttpGetAsync(text)
@@ -666,9 +666,9 @@ function t.GetUserOwnedPackagesAsync(p49, p50)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetCurrentlyWearingAsync(p51)
+function t.GetCurrentlyWearingAsync(p1)
 	-- upvalues: replaced (write), httpService (ref)
-	local formattedText = string.format("%s/v1/users/%d/currently-wearing", string.gsub(replaced, "https://www.", "https://avatar."), p51)
+	local formattedText = string.format("%s/v1/users/%d/currently-wearing", string.gsub(replaced, "https://www.", "https://avatar."), p1)
 	local ok, status = pcall(function()
 		-- upvalues: formattedText (ref)
 		return game:HttpGetAsync(formattedText)
@@ -695,44 +695,44 @@ function t.SetWearingAssetsAsync(value)
 		Body = httpService:JSONEncode({ assetIds = value }),
 		Headers = { ["Content-Type"] = "application/json" }
 	}
-	local var52 = nil
-	local var53 = utilityModule.Signal()
-	httpService:RequestInternal(t):Start(function(p52, p53)
-		-- upvalues: var52 (write), httpService (copy), var53 (ref)
-		if p52 and p53.StatusCode ~= 401 and (p53.StatusCode >= 200 and p53.StatusCode < 400) then
-			local var11
-			local body = p53.Body
+	local var1 = nil
+	local var2 = utilityModule.Signal()
+	httpService:RequestInternal(t):Start(function(p1, p2)
+		-- upvalues: var1 (write), httpService (copy), var2 (ref)
+		if p1 and p2.StatusCode ~= 401 and (p2.StatusCode >= 200 and p2.StatusCode < 400) then
+			local var3
+			local body = p2.Body
 			
 			if body == nil or #body == 0 then
-				var11 = nil
+				var3 = nil
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
-				var11 = if not ok then nil else status
+				var3 = if not ok then nil else status
 			end
-			var9 = var11
+			var9 = var3
 		end
-		var53:fire()
+		var2:fire()
 	end)
-	var53:wait()
+	var2:wait()
 	
-	return var52
+	return var1
 end
 
-function t.PurchaseProductAsync(p54, p55, p56, p57)
+function t.PurchaseProductAsync(p1, p2, p3, p4)
 	-- upvalues: replaced (write), httpService (ref)
-	local formattedText = string.format("%s/v1/purchases/products/%d", string.gsub(replaced, "https://www.", "https://economy."), p54)
-	local var55 = httpService:JSONEncode({
-		expectedCurrency = p57,
-		expectedPrice = p55,
-		expectedSellerId = p56
+	local formattedText = string.format("%s/v1/purchases/products/%d", string.gsub(replaced, "https://www.", "https://economy."), p1)
+	local var1 = httpService:JSONEncode({
+		expectedCurrency = p4,
+		expectedPrice = p2,
+		expectedSellerId = p3
 	})
-	local var56 = nil
+	local var2 = nil
 	local ok, status = pcall(function()
-		-- upvalues: formattedText (ref), var55 (ref), var56 (ref)
-		return game:HttpPostAsync(formattedText, var55, var56)
+		-- upvalues: formattedText (ref), var1 (ref), var2 (ref)
+		return game:HttpPostAsync(formattedText, var1, var2)
 	end)
 	
 	if not ok then
@@ -748,9 +748,9 @@ function t.PurchaseProductAsync(p54, p55, p56, p57)
 	return if ok_1 then status_1 else nil
 end
 
-function t.MultiGetBundleDetailsAsync(p58)
+function t.MultiGetBundleDetailsAsync(p1)
 	-- upvalues: replaced (write), httpService (ref)
-	local formattedText = string.format("%sv1/bundles/details?bundleIds=%s", string.gsub(replaced, "https://www.", "https://catalog."), table.concat(p58, ","))
+	local formattedText = string.format("%sv1/bundles/details?bundleIds=%s", string.gsub(replaced, "https://www.", "https://catalog."), table.concat(p1, ","))
 	local ok, status = pcall(function()
 		-- upvalues: formattedText (ref)
 		return game:HttpGetAsync(formattedText)
@@ -769,12 +769,12 @@ function t.MultiGetBundleDetailsAsync(p58)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetUserOwnedBundlesAsync(p59, p60)
+function t.GetUserOwnedBundlesAsync(p1, p2)
 	-- upvalues: replaced (write), httpService (ref)
-	local formattedText = string.format("%sv1/users/%s/bundles?sortOrder=Asc&limit=100", string.gsub(replaced, "https://www.", "https://catalog."), tostring(p59))
+	local formattedText = string.format("%sv1/users/%s/bundles?sortOrder=Asc&limit=100", string.gsub(replaced, "https://www.", "https://catalog."), tostring(p1))
 	
-	if p60 then
-		formattedText = string.format(formattedText .. "&cursor=%s", p60)
+	if p2 then
+		formattedText = string.format(formattedText .. "&cursor=%s", p2)
 	end
 	local ok, status = pcall(function()
 		-- upvalues: formattedText (ref)
@@ -794,36 +794,36 @@ function t.GetUserOwnedBundlesAsync(p59, p60)
 	return if ok_1 then status_1 else nil
 end
 
-function t.GetAssetThumbnailBatchAsync(value, p61, p62)
+function t.GetAssetThumbnailBatchAsync(value, p1, p2)
 	-- upvalues: replaced (write), httpService (ref)
 	-- [0.000s] <RUNTIME-ERROR> : Error block 0 analysis at pc 0 ('luna.Call' object has no attribute 'name')
 end
 
-function t.ReportAbuseAsyncV2(p63, p64, p65, p66, p67, p68, p69, p70, p71)
+function t.ReportAbuseAsyncV2(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: httpService (ref), url (ref), httpRbxApiService (ref)
-	local var59 = httpService:JSONEncode({
+	local var1 = httpService:JSONEncode({
 		tags = {
-			ENTRY_POINT = { valueList = { { data = p68 } } },
-			SUBMITTER_USER_ID = { valueList = { { data = p63 } } },
-			REPORT_TARGET_USER_ID = { valueList = { { data = p65 } } },
-			REPORTED_ABUSE_CATEGORY = { valueList = { { data = p70 } } },
-			REPORTED_ABUSE_VECTOR = { valueList = { { data = p69 } } },
-			REPORTER_COMMENT = { valueList = { { data = p71 } } },
-			REPORT_TARGET_ASSET_ID = { valueList = { { data = p64 } } },
-			REPORT_TARGET_ASSET_NAME = { valueList = { { data = p66 } } },
-			REPORT_TARGET_ASSET_DESCRIPTION = { valueList = { { data = p67 } } }
+			ENTRY_POINT = { valueList = { { data = p6 } } },
+			SUBMITTER_USER_ID = { valueList = { { data = p1 } } },
+			REPORT_TARGET_USER_ID = { valueList = { { data = p3 } } },
+			REPORTED_ABUSE_CATEGORY = { valueList = { { data = p8 } } },
+			REPORTED_ABUSE_VECTOR = { valueList = { { data = p7 } } },
+			REPORTER_COMMENT = { valueList = { { data = p9 } } },
+			REPORT_TARGET_ASSET_ID = { valueList = { { data = p2 } } },
+			REPORT_TARGET_ASSET_NAME = { valueList = { { data = p4 } } },
+			REPORT_TARGET_ASSET_DESCRIPTION = { valueList = { { data = p5 } } }
 		}
 	})
 	local text = url.APIS_URL .. "abuse-reporting/v2/abuse-report"
 	
-	if not var59 then
+	if not var1 then
 		return nil
 	end
 	local default = Enum.ThrottlingPriority.Default
 	local applicationJson = Enum.HttpContentType.ApplicationJson
 	local ok, status = pcall(function()
-		-- upvalues: httpRbxApiService (copy), text (ref), var59 (ref), default (ref), applicationJson (ref)
-		return httpRbxApiService:PostAsyncFullUrl(text, var59, default, applicationJson)
+		-- upvalues: httpRbxApiService (copy), text (ref), var1 (ref), default (ref), applicationJson (ref)
+		return httpRbxApiService:PostAsyncFullUrl(text, var1, default, applicationJson)
 	end)
 	
 	if not ok then
@@ -845,120 +845,120 @@ function t.GetConsecutiveDaysLoggedInAsync()
 		Method = "GET",
 		Url = string.format("%sv1/xbox/get-login-consecutive-days", buildServiceUrl("auth"))
 	}
-	local var62 = nil
-	local var63 = utilityModule.Signal()
-	httpService:RequestInternal(t):Start(function(p72, p73)
-		-- upvalues: var62 (write), httpService (copy), var63 (ref)
-		if p72 and p73.StatusCode ~= 401 and (p73.StatusCode >= 200 and p73.StatusCode < 400) then
-			local var11
-			local body = p73.Body
+	local var1 = nil
+	local var2 = utilityModule.Signal()
+	httpService:RequestInternal(t):Start(function(p1, p2)
+		-- upvalues: var1 (write), httpService (copy), var2 (ref)
+		if p1 and p2.StatusCode ~= 401 and (p2.StatusCode >= 200 and p2.StatusCode < 400) then
+			local var3
+			local body = p2.Body
 			
 			if body == nil or #body == 0 then
-				var11 = nil
+				var3 = nil
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
-				var11 = if not ok then nil else status
+				var3 = if not ok then nil else status
 			end
-			var9 = var11
+			var9 = var3
 		end
-		var63:fire()
+		var2:fire()
 	end)
-	var63:wait()
+	var2:wait()
 	
-	return var62
+	return var1
 end
 
-function t.IsValidUsername(p74, p75)
+function t.IsValidUsername(p1, p2)
 	-- upvalues: replaced (write), httpService (ref), utilityModule (ref)
-	local var64 = if p74 ~= nil then #p74 == 0 else true
+	local var1 = if p1 ~= nil then #p1 == 0 else true
 	
-	if not var64 then
-		var64 = if p75 ~= nil then #p75 == 0 else true
+	if not var1 then
+		var1 = if p2 ~= nil then #p2 == 0 else true
 		
-		if var64 then
+		if var1 then
 			return
 		else
 			local t = {
 				Method = "GET",
-				Url = string.format("%sv2/usernames/validate?request.username=%s&request.birthday=%s", string.gsub(replaced, "https://www.", "https://auth."), httpService:UrlEncode(p74), p75)
+				Url = string.format("%sv2/usernames/validate?request.username=%s&request.birthday=%s", string.gsub(replaced, "https://www.", "https://auth."), httpService:UrlEncode(p1), p2)
 			}
-			local var66 = nil
-			local var67 = utilityModule.Signal()
-			httpService:RequestInternal(t):Start(function(p76, p77)
-				-- upvalues: var66 (write), httpService (copy), var67 (ref)
-				if p76 and p77.StatusCode ~= 401 and (p77.StatusCode >= 200 and p77.StatusCode < 400) then
-					local var11
-					local body = p77.Body
+			local var2 = nil
+			local var3 = utilityModule.Signal()
+			httpService:RequestInternal(t):Start(function(p3, p4)
+				-- upvalues: var2 (write), httpService (copy), var3 (ref)
+				if p3 and p4.StatusCode ~= 401 and (p4.StatusCode >= 200 and p4.StatusCode < 400) then
+					local var4
+					local body = p4.Body
 					
 					if body == nil or #body == 0 then
-						var11 = nil
+						var4 = nil
 					else
 						local ok, status = pcall(function()
 							-- upvalues: httpService (copy), body (ref)
 							return httpService:JSONDecode(body)
 						end)
-						var11 = if not ok then nil else status
+						var4 = if not ok then nil else status
 					end
-					var9 = var11
+					var9 = var4
 				end
-				var67:fire()
+				var3:fire()
 			end)
-			var67:wait()
+			var3:wait()
 			
-			return var66
+			return var2
 		end
 	end
 end
 
-function t.IsValidPassword(p78, p79)
+function t.IsValidPassword(p1, p2)
 	-- upvalues: replaced (write), httpService (ref), utilityModule (ref)
-	local var68 = if p78 ~= nil then #p78 == 0 else true
+	local var1 = if p1 ~= nil then #p1 == 0 else true
 	
-	if not var68 then
-		var68 = if p79 ~= nil then #p79 == 0 else true
+	if not var1 then
+		var1 = if p2 ~= nil then #p2 == 0 else true
 		
-		if var68 then
+		if var1 then
 			return
 		else
 			local t = {
 				Method = "GET",
-				Url = string.format("%sv2/passwords/validate?request.username=%s&request.password=%s", string.gsub(replaced, "https://www.", "https://auth."), httpService:UrlEncode(p78), httpService:UrlEncode(p79))
+				Url = string.format("%sv2/passwords/validate?request.username=%s&request.password=%s", string.gsub(replaced, "https://www.", "https://auth."), httpService:UrlEncode(p1), httpService:UrlEncode(p2))
 			}
-			local var70 = nil
-			local var71 = utilityModule.Signal()
-			httpService:RequestInternal(t):Start(function(p80, p81)
-				-- upvalues: var70 (write), httpService (copy), var71 (ref)
-				if p80 and p81.StatusCode ~= 401 and (p81.StatusCode >= 200 and p81.StatusCode < 400) then
-					local var11
-					local body = p81.Body
+			local var2 = nil
+			local var3 = utilityModule.Signal()
+			httpService:RequestInternal(t):Start(function(p3, p4)
+				-- upvalues: var2 (write), httpService (copy), var3 (ref)
+				if p3 and p4.StatusCode ~= 401 and (p4.StatusCode >= 200 and p4.StatusCode < 400) then
+					local var4
+					local body = p4.Body
 					
 					if body == nil or #body == 0 then
-						var11 = nil
+						var4 = nil
 					else
 						local ok, status = pcall(function()
 							-- upvalues: httpService (copy), body (ref)
 							return httpService:JSONDecode(body)
 						end)
-						var11 = if not ok then nil else status
+						var4 = if not ok then nil else status
 					end
-					var9 = var11
+					var9 = var4
 				end
-				var71:fire()
+				var3:fire()
 			end)
-			var71:wait()
+			var3:wait()
 			
-			return var70
+			return var2
 		end
 	end
 end
 
-function t.PostSponsoredGameClickAsync(p82)
+function t.PostSponsoredGameClickAsync(p1)
 	-- upvalues: buildServiceUrl (ref), httpService (ref)
 	local formattedText = string.format("%sv1/sponsored-games/click", buildServiceUrl("ads"))
-	local formattedText_1, formattedText_2 = string.format("\"%s\"", p82)
+	local formattedText_1, formattedText_2 = string.format("\"%s\"", p1)
 	local ok, status = pcall(function()
 		-- upvalues: formattedText (ref), formattedText_1 (ref), formattedText_2 (ref)
 		return game:HttpPostAsync(formattedText, formattedText_1, formattedText_2)
@@ -983,41 +983,41 @@ function t.GetUserVoteCountFromVotingApiAsync()
 		Method = "GET",
 		Url = string.format("%svoting-api/user/get-vote-count?targetType=Place", buildServiceUrl("apis"))
 	}
-	local var76 = nil
-	local var77 = utilityModule.Signal()
-	httpService:RequestInternal(t):Start(function(p83, p84)
-		-- upvalues: var76 (write), httpService (copy), var77 (ref)
-		if p83 and p84.StatusCode ~= 401 and (p84.StatusCode >= 200 and p84.StatusCode < 400) then
-			local var11
-			local body = p84.Body
+	local var1 = nil
+	local var2 = utilityModule.Signal()
+	httpService:RequestInternal(t):Start(function(p1, p2)
+		-- upvalues: var1 (write), httpService (copy), var2 (ref)
+		if p1 and p2.StatusCode ~= 401 and (p2.StatusCode >= 200 and p2.StatusCode < 400) then
+			local var3
+			local body = p2.Body
 			
 			if body == nil or #body == 0 then
-				var11 = nil
+				var3 = nil
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
-				var11 = if not ok then nil else status
+				var3 = if not ok then nil else status
 			end
-			var9 = var11
+			var9 = var3
 		end
-		var77:fire()
+		var2:fire()
 	end)
-	var77:wait()
+	var2:wait()
 	
-	return var76
+	return var1
 end
 
 function t.CreateCrossDeviceLoginCode()
 	-- upvalues: buildServiceUrl (ref), httpService (ref)
 	local formattedText = string.format("%sauth-token-service/v1/login/create", buildServiceUrl("apis"))
 	local _pcall = pcall
-	local var80 = ""
-	local var81 = nil
+	local var1 = ""
+	local var2 = nil
 	_pcall, var82 = _pcall(function()
-		-- upvalues: formattedText (ref), var80 (ref), var81 (ref)
-		return game:HttpPostAsync(formattedText, var80, var81)
+		-- upvalues: formattedText (ref), var1 (ref), var2 (ref)
+		return game:HttpPostAsync(formattedText, var1, var2)
 	end)
 	
 	if not _pcall then
@@ -1044,30 +1044,30 @@ function t.CheckCrossDeviceLoginStatus(vectorA, vectorB)
 			Accept = "application/json"
 		}
 	}
-	local var84 = nil
-	local var85 = utilityModule.Signal()
-	httpService:RequestInternal(t):Start(function(p85, p86)
-		-- upvalues: var84 (write), httpService (copy), var85 (ref)
-		if p85 and p86.StatusCode ~= 401 and (p86.StatusCode >= 200 and p86.StatusCode < 400) then
-			local var11
-			local body = p86.Body
+	local var1 = nil
+	local var2 = utilityModule.Signal()
+	httpService:RequestInternal(t):Start(function(p1, p2)
+		-- upvalues: var1 (write), httpService (copy), var2 (ref)
+		if p1 and p2.StatusCode ~= 401 and (p2.StatusCode >= 200 and p2.StatusCode < 400) then
+			local var3
+			local body = p2.Body
 			
 			if body == nil or #body == 0 then
-				var11 = nil
+				var3 = nil
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
-				var11 = if not ok then nil else status
+				var3 = if not ok then nil else status
 			end
-			var9 = var11
+			var9 = var3
 		end
-		var85:fire()
+		var2:fire()
 	end)
-	var85:wait()
+	var2:wait()
 	
-	return var84
+	return var1
 end
 
 function t.CancelCrossDeviceLogin(vectorA)
@@ -1081,30 +1081,30 @@ function t.CancelCrossDeviceLogin(vectorA)
 			Accept = "application/json"
 		}
 	}
-	local var87 = nil
-	local var88 = utilityModule.Signal()
-	httpService:RequestInternal(t):Start(function(p87, p88)
-		-- upvalues: var87 (write), httpService (copy), var88 (ref)
-		if p87 and p88.StatusCode ~= 401 and (p88.StatusCode >= 200 and p88.StatusCode < 400) then
-			local var11
-			local body = p88.Body
+	local var1 = nil
+	local var2 = utilityModule.Signal()
+	httpService:RequestInternal(t):Start(function(p1, p2)
+		-- upvalues: var1 (write), httpService (copy), var2 (ref)
+		if p1 and p2.StatusCode ~= 401 and (p2.StatusCode >= 200 and p2.StatusCode < 400) then
+			local var3
+			local body = p2.Body
 			
 			if body == nil or #body == 0 then
-				var11 = nil
+				var3 = nil
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
-				var11 = if not ok then nil else status
+				var3 = if not ok then nil else status
 			end
-			var9 = var11
+			var9 = var3
 		end
-		var88:fire()
+		var2:fire()
 	end)
-	var88:wait()
+	var2:wait()
 	
-	return var87
+	return var1
 end
 
 return t

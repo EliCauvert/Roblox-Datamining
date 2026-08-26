@@ -14,15 +14,15 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local paginationUtilsModule = require(script.Parent.Parent.paginationUtils)
 
-local function PageNumberText(p0)
+local function PageNumberText(p1)
 	-- upvalues: reactModule (ref), textModule (ref)
 	return reactModule.createElement(textModule, {
 		LayoutOrder = 1,
-		Text = tostring(p0.page),
-		textStyle = p0.textStyle,
-		tag = p0.textTag,
-		padding = p0.padding,
-		testId = `{p0.testId}--text`
+		Text = tostring(p1.page),
+		textStyle = p1.textStyle,
+		tag = p1.textTag,
+		padding = p1.padding,
+		testId = `{p1.testId}--text`
 	})
 end
 
@@ -37,30 +37,30 @@ local t_1 = {
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokensModule (ref), paginationUtilsModule (ref), paginationSizeModule (ref), chipSizeModule (ref), useChipVariantsModule (ref), chipVariantModule (ref), t_1 (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), flagsModule (ref), t (ref), colorNamespaceModule (ref), PageNumberText (ref)
-	local var17 = useTokensModule()
-	local var18 = not p1.isChecked
-	local var19 = paginationUtilsModule.needsWidePageSlot(p1.page)
-	local var20 = if p1.slotSize == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium
-	local var21 = useChipVariantsModule(var17, var20, chipVariantModule.Utility, true, false, false)
-	local var22 = useChipVariantsModule(var17, var20, chipVariantModule.Utility, false, false, false)
+	local var1 = useTokensModule()
+	local var2 = not p1.isChecked
+	local var3 = paginationUtilsModule.needsWidePageSlot(p1.page)
+	local var4 = if p1.slotSize == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium
+	local var5 = useChipVariantsModule(var1, var4, chipVariantModule.Utility, true, false, false)
+	local var6 = useChipVariantsModule(var1, var4, chipVariantModule.Utility, false, false, false)
 	local slotSize = `row align-x-center align-y-center auto-x radius-circle {t_1[p1.slotSize]}`
-	local var24 = reactModule.useCallback(function()
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.onPageActivated(p1.page)
 	end, { p1.onPageActivated, p1.page })
 	local t_2 = {
-		Selectable = var18 and p1.Selectable ~= false,
+		Selectable = var2 and p1.Selectable ~= false,
 		NextSelectionLeft = p1.NextSelectionLeft,
 		NextSelectionRight = p1.NextSelectionRight,
 		NextSelectionUp = p1.NextSelectionUp,
 		NextSelectionDown = p1.NextSelectionDown
 	}
 	
-	return if var19 then if var18 then reactModule.createElement(viewModule, withCommonPropsModule({ LayoutOrder = p1.LayoutOrder, testId = p1.testId }, {
-		backgroundStyle = var22.chip.backgroundStyle,
-		padding = var22.chip.padding,
-		cursor = paginationUtilsModule.getSlotCursor(var17),
-		onActivated = var24,
+	return if var3 then if var2 then reactModule.createElement(viewModule, withCommonPropsModule({ LayoutOrder = p1.LayoutOrder, testId = p1.testId }, {
+		backgroundStyle = var6.chip.backgroundStyle,
+		padding = var6.chip.padding,
+		cursor = paginationUtilsModule.getSlotCursor(var1),
+		onActivated = var7,
 		ref = p2,
 		selection = t_2,
 		tag = slotSize
@@ -73,41 +73,41 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}, {
 			Text = reactModule.createElement(PageNumberText, {
 				page = p1.page,
-				textStyle = var22.text.contentStyle,
-				textTag = var22.text.tag,
-				padding = var22.text.padding,
+				textStyle = var6.text.contentStyle,
+				textTag = var6.text.tag,
+				padding = var6.text.padding,
 				testId = p1.testId
 			})
 		})
 	}) else reactModule.createElement(viewModule, withCommonPropsModule({ LayoutOrder = p1.LayoutOrder, testId = p1.testId }, {
-		backgroundStyle = var21.chip.backgroundStyle,
-		padding = var21.chip.padding,
+		backgroundStyle = var5.chip.backgroundStyle,
+		padding = var5.chip.padding,
 		ref = p2,
 		selection = { Selectable = false },
 		tag = slotSize
 	}), {
 		Text = reactModule.createElement(PageNumberText, {
 			page = p1.page,
-			textStyle = var21.text.contentStyle,
-			textTag = var21.text.tag,
-			padding = var21.text.padding,
+			textStyle = var5.text.contentStyle,
+			textTag = var5.text.tag,
+			padding = var5.text.padding,
 			testId = p1.testId
 		})
 	}) else reactModule.createElement(viewModule, withCommonPropsModule({ LayoutOrder = p1.LayoutOrder, testId = p1.testId }, {
 		backgroundStyle = {
 			Transparency = 1,
-			Color3 = var17.Color.Surface.Surface_0.Color3
+			Color3 = var1.Color.Surface.Surface_0.Color3
 		},
-		cursor = if var18 then paginationUtilsModule.getSlotCursor(var17) else nil,
-		onActivated = if var18 then var24 else nil,
+		cursor = if var2 then paginationUtilsModule.getSlotCursor(var1) else nil,
+		onActivated = if var2 then var7 else nil,
 		ref = p2,
-		selection = if var18 then t_2 else { Selectable = false },
+		selection = if var2 then t_2 else { Selectable = false },
 		tag = paginationUtilsModule.getCircularSlotTag(p1.slotSize)
 	}), {
 		Text = reactModule.createElement(PageNumberText, {
 			padding = nil,
 			page = p1.page,
-			textStyle = if p1.isChecked then var21.text.contentStyle else var17.Color.Content.Default,
+			textStyle = if p1.isChecked then var5.text.contentStyle else var1.Color.Content.Default,
 			textTag = paginationUtilsModule.getPageLabelTextTag(p1.slotSize),
 			testId = p1.testId
 		})

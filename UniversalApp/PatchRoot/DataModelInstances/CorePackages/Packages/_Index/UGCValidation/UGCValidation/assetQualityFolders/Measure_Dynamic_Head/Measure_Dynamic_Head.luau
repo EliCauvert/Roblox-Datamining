@@ -23,23 +23,23 @@ local t_1 = {
 	is_sad = errorSourceStringsModule.Keys.DynamicHeadSadNotShown
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFFlagUGCValidationAddGeometryToExportsModule (ref), t_1 (ref), getFIntUGCValidationDynamicHeadMinimumQualityPercentModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref), errorSourceStringsModule (ref)
 	local _ = nil
-	local var7 = if getFFlagUGCValidationAddGeometryToExportsModule() then p1.aqsSummaryData.Measure_Dynamic_Head.Head or p1.aqsSummaryData.Measure_Dynamic_Head.Head_Geo else p1.aqsSummaryData.Measure_Dynamic_Head.Head
+	local var1 = if getFFlagUGCValidationAddGeometryToExportsModule() then p2.aqsSummaryData.Measure_Dynamic_Head.Head or p2.aqsSummaryData.Measure_Dynamic_Head.Head_Geo else p2.aqsSummaryData.Measure_Dynamic_Head.Head
 	
-	if var7 == nil then
+	if var1 == nil then
 		error("Measure_Dynamic_Head: AQS summary missing required fields")
 		
 		return
 	end
 	for i, v in t_1 do
-		if var7[i] ~= nil and tonumber(var7[i]) <= getFIntUGCValidationDynamicHeadMinimumQualityPercentModule() / 100 then
-			p0:fail(v)
+		if var1[i] ~= nil and tonumber(var1[i]) <= getFIntUGCValidationDynamicHeadMinimumQualityPercentModule() / 100 then
+			p1:fail(v)
 		end
 	end
-	if getFFlagUGCValidateAQScoreWarningsModule() and var7.score ~= nil and tonumber(var7.score) ~= 100 then
-		p0:warn(errorSourceStringsModule.Keys.AQSWarn_DynamicHead, { score = tostring(math.floor(tonumber(var7.score) or 0)) })
+	if getFFlagUGCValidateAQScoreWarningsModule() and var1.score ~= nil and tonumber(var1.score) ~= 100 then
+		p1:warn(errorSourceStringsModule.Keys.AQSWarn_DynamicHead, { score = tostring(math.floor(tonumber(var1.score) or 0)) })
 	end
 end
 

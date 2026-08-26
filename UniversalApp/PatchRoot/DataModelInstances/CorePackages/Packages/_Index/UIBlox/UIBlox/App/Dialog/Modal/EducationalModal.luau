@@ -38,12 +38,12 @@ educationalModal.validateProps = tModule.strictInterface({
 	onConfirm = tModule.callback
 })
 
-local function ContentItem(p0)
+local function ContentItem(p1)
 	-- upvalues: roactModule (ref), label (ref), getIconSizeModule (ref), iconSizeModule (ref), genericTextLabelModule (ref)
 	local vector2 = Vector2.new(16, 16)
-	local isSystemMenuIcon = p0.isSystemMenuIcon or false
-	local isSystemMenuIcon_1 = isSystemMenuIcon or p0.icon
-	local stylePalette = p0.stylePalette
+	local isSystemMenuIcon = p1.isSystemMenuIcon or false
+	local isSystemMenuIcon_1 = isSystemMenuIcon or p1.icon
+	local stylePalette = p1.stylePalette
 	local theme = stylePalette.Theme
 	local font = stylePalette.Font
 	
@@ -51,7 +51,7 @@ local function ContentItem(p0)
 		BackgroundTransparency = 1,
 		Size = isSystemMenuIcon_1 and UDim2.new(0, 253, 0, vector2.Y) or UDim2.new(1, 0, 0, vector2.Y),
 		AutomaticSize = if isSystemMenuIcon_1 then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		HorizontalLayout = roactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -79,18 +79,18 @@ local function ContentItem(p0)
 		}) or (isSystemMenuIcon_1 and roactModule.createElement(label, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Image = p0.icon,
+			Image = p1.icon,
 			Size = UDim2.fromOffset(getIconSizeModule(iconSizeModule.Medium), getIconSizeModule(iconSizeModule.Medium)),
 			ImageColor3 = theme.IconDefault.Color,
 			ImageTransparency = theme.IconDefault.Transparency
 		}) or nil),
-		Text = p0.text and roactModule.createElement(genericTextLabelModule, {
+		Text = p1.text and roactModule.createElement(genericTextLabelModule, {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 2,
 			Size = UDim2.new(1, 0, 0, vector2.Y),
 			AutomaticSize = if isSystemMenuIcon_1 then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
-			Text = p0.text,
+			Text = p1.text,
 			TextSize = font.Body.RelativeSize * font.BaseSize,
 			colorStyle = theme.TextDefault,
 			TextTransparency = theme.TextDefault.Transparency,
@@ -103,9 +103,9 @@ end
 function educationalModal.init(p1)
 	-- upvalues: roactModule (ref)
 	p1.state = { shouldNotShowAgain = false }
-	local var14, var15 = roactModule.createBinding(Vector2.new(0, 0))
-	p1.contentSize = var14
-	p1.changeContentSize = var15
+	local var1, var2 = roactModule.createBinding(Vector2.new(0, 0))
+	p1.contentSize = var1
+	p1.changeContentSize = var2
 	
 	function p1.toggleDoNotShow()
 		-- upvalues: p1 (ref)
@@ -130,14 +130,14 @@ function educationalModal.init(p1)
 	end
 end
 
-function educationalModal.render(p3)
+function educationalModal.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), ContentItem (ref), checkbox (ref), partialPageModalModule (ref), buttonTypeModule (ref), fitFrameVertical (ref)
-	local props = p3.props
+	local props = p1.props
 	local hasDoNotShow = props.hasDoNotShow
 	
-	return withStyleModule(function(p4)
-		-- upvalues: props (ref), roactModule (copy), ContentItem (copy), hasDoNotShow (ref), checkbox (copy), p3 (ref), partialPageModalModule (copy), buttonTypeModule (copy), fitFrameVertical (copy)
-		local var16 = 0
+	return withStyleModule(function(p2)
+		-- upvalues: props (ref), roactModule (copy), ContentItem (copy), hasDoNotShow (ref), checkbox (copy), p1 (ref), partialPageModalModule (copy), buttonTypeModule (copy), fitFrameVertical (copy)
+		local var1 = 0
 		local t = {}
 		
 		for i, v in ipairs(props.bodyContents) do
@@ -147,17 +147,17 @@ function educationalModal.render(p3)
 				text = v.text,
 				layoutOrder = i,
 				isSystemMenuIcon = v.isSystemMenuIcon,
-				stylePalette = p4
+				stylePalette = p2
 			}))
-			var16 += 1
+			var1 += 1
 		end
-		local theme = p4.Theme
+		local theme = p2.Theme
 		
 		if hasDoNotShow then
 			table.insert(t, roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 50),
-				LayoutOrder = var16 + 1
+				LayoutOrder = var1 + 1
 			}, {
 				UIListLayout = roactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
@@ -176,8 +176,8 @@ function educationalModal.render(p3)
 				DoNotShowCheckbox = roactModule.createElement(checkbox, {
 					LayoutOrder = 2,
 					label = props.doNotShowText,
-					onActivated = p3.toggleDoNotShow,
-					isChecked = p3.state.shouldNotShowAgain
+					onActivated = p1.toggleDoNotShow,
+					isChecked = p1.state.shouldNotShowAgain
 				})
 			}))
 		end
@@ -191,7 +191,7 @@ function educationalModal.render(p3)
 					{
 						props = {
 							isDisabled = false,
-							onActivated = if hasDoNotShow then p3.onCancel else props.onCancel,
+							onActivated = if hasDoNotShow then p1.onCancel else props.onCancel,
 							text = props.cancelText
 						}
 					},
@@ -199,13 +199,13 @@ function educationalModal.render(p3)
 						buttonType = buttonTypeModule.PrimarySystem,
 						props = {
 							isDisabled = false,
-							onActivated = if hasDoNotShow then p3.onConfirm else props.onConfirm,
+							onActivated = if hasDoNotShow then p1.onConfirm else props.onConfirm,
 							text = props.confirmText
 						}
 					}
 				}
 			},
-			onCloseClicked = if hasDoNotShow then p3.onDismiss else props.onDismiss
+			onCloseClicked = if hasDoNotShow then p1.onDismiss else props.onDismiss
 		}, {
 			BodyContents = roactModule.createElement(fitFrameVertical, {
 				BackgroundTransparency = 1,
@@ -213,9 +213,9 @@ function educationalModal.render(p3)
 				width = UDim.new(1, 0),
 				contentPadding = UDim.new(0, 28),
 				margin = { top = 36, bottom = 36 },
-				[roactModule.Change.AbsoluteSize] = function(p5)
-					-- upvalues: p3 (copy)
-					p3.changeContentSize(p5.AbsoluteSize)
+				[roactModule.Change.AbsoluteSize] = function(p3)
+					-- upvalues: p1 (copy)
+					p1.changeContentSize(p3.AbsoluteSize)
 				end
 			}, t)
 		})

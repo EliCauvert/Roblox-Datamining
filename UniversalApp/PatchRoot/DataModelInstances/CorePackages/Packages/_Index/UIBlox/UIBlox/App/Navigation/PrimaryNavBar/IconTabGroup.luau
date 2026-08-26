@@ -24,16 +24,16 @@ local t = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: object (ref), t (ref), useCursorModule (ref), horizontalContainerModule (ref), constantsModule (ref), reactModule (ref), interactableListModule (ref), cryoModule (ref), iconTabModule (ref), selectionModeModule (ref)
-	local var9 = object.assign({}, t, p0)
-	local var10 = useCursorModule(UDim.new(0.5, 0), 0)
+	local var1 = object.assign({}, t, p1)
+	local var2 = useCursorModule(UDim.new(0.5, 0), 0)
 	
 	return horizontalContainerModule({
 		showRoundedBackground = false,
 		size = UDim2.new(0, 0, 0, constantsModule.ICON_TAB_GROUP_HEIGHT),
 		automaticSize = Enum.AutomaticSize.X,
-		padding = var9.padding
+		padding = var1.padding
 	}, {
 		MainTabList = reactModule.createElement(interactableListModule, {
 			size = UDim2.new(0, 0, 1, 0),
@@ -41,32 +41,32 @@ return function(p0)
 			fillDirection = Enum.FillDirection.Horizontal,
 			horizontalAlignment = Enum.HorizontalAlignment.Left,
 			sortOrder = Enum.SortOrder.LayoutOrder,
-			itemList = var9.items,
+			itemList = var1.items,
 			itemSize = UDim2.fromScale(0, 0),
-			renderItem = function(p1, p2, p3)
-				-- upvalues: cryoModule (copy), var9 (ref), var10 (ref), reactModule (copy), iconTabModule (copy)
+			renderItem = function(p2, p3, p4)
+				-- upvalues: cryoModule (copy), var1 (ref), var2 (ref), reactModule (copy), iconTabModule (copy)
 				return reactModule.createElement(iconTabModule, {
-					item = p1,
-					selected = p3,
-					controlState = p2,
-					padding = var9.itemPadding
+					item = p2,
+					selected = p4,
+					controlState = p3,
+					padding = var1.itemPadding
 				}), {
-					LayoutOrder = cryoModule.List.find(var9.items, p1),
+					LayoutOrder = cryoModule.List.find(var1.items, p2),
 					AutomaticSize = Enum.AutomaticSize.XY,
-					SelectionImageObject = var10
+					SelectionImageObject = var2
 				}
 			end,
-			onSelectionChanged = function(p4)
-				-- upvalues: var9 (ref)
-				local var11 = var9.items[p4[1]]
+			onSelectionChanged = function(p2)
+				-- upvalues: var1 (ref)
+				local var3 = var1.items[p2[1]]
 				
-				if var11 ~= nil and var11.onActivated ~= nil then
-					var11.onActivated()
+				if var3 ~= nil and var3.onActivated ~= nil then
+					var3.onActivated()
 				end
 			end,
-			selection = var9.selection,
+			selection = var1.selection,
 			selectionMode = selectionModeModule.Single,
-			padding = var9.itemSpacing
+			padding = var1.itemSpacing
 		})
 	})
 end

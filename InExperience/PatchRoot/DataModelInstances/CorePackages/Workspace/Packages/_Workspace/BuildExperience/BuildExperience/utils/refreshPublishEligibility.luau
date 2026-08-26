@@ -5,17 +5,17 @@ local experienceQuestionnaireModule = require(parent.DataHydration.ExperienceQue
 local universeActivationModule = require(parent.DataHydration.UniverseActivation)
 local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 
-return function(p0)
+return function(p1)
 	-- upvalues: experienceGuidelinesModule (ref), universeActivationModule (ref), fFlagBuildRehydrateOnPublishModule (ref), experienceQuestionnaireModule (ref)
 	local experienceGuidelinesStore = experienceGuidelinesModule.getExperienceGuidelinesStore()
 	local universeActivationStore = universeActivationModule.getUniverseActivationStore()
 	
 	if fFlagBuildRehydrateOnPublishModule then
-		experienceGuidelinesStore.refreshDetailedGuidelines(p0):catch(function() end)
-		universeActivationStore.refreshEligibility(p0):catch(function() end)
+		experienceGuidelinesStore.refreshDetailedGuidelines(p1):catch(function() end)
+		universeActivationStore.refreshEligibility(p1):catch(function() end)
 	else
-		experienceGuidelinesStore.fetchDetailedGuidelines(p0)
-		universeActivationStore.fetchEligibility(p0)
+		experienceGuidelinesStore.fetchDetailedGuidelines(p1)
+		universeActivationStore.fetchEligibility(p1)
 	end
-	experienceQuestionnaireModule.getExperienceQuestionnaireStore().fetchEligibility(p0)
+	experienceQuestionnaireModule.getExperienceQuestionnaireStore().fetchEligibility(p1)
 end

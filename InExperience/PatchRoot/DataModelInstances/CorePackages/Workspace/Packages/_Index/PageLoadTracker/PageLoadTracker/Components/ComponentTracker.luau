@@ -9,114 +9,114 @@ local pageLoadConfigModule = require(script.Parent.Parent.PageLoadConfig)
 local visualDebugManagerModule = require(script.Parent.Parent.VisualDebugManager)
 local experienceService = require(parent.ExperienceService).ExperienceService
 
-local function usePageTracker(p0, p1)
+local function usePageTracker(p1, p2)
 	-- upvalues: reactModule (ref), createPageTrackerModule (ref), sharedFlagsModule (ref), experienceService (ref)
-	local var8 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: createPageTrackerModule (copy)
 		return createPageTrackerModule()
 	end, {})
 	
-	if p0 then
-		var8:start(p1)
+	if p1 then
+		var1:start(p2)
 	else
-		var8:stop()
+		var1:stop()
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), sharedFlagsModule (copy), experienceService (copy)
-		var8:sendMilestone("first_react_frame_rendered")
-		local var9 = if sharedFlagsModule.FFlagLuaAppPageLoadTrackerJoinExperienceFix then experienceService:RegisterForExperienceJoin(function()
-			-- upvalues: var8 (copy)
-			var8:stop()
+		-- upvalues: var1 (ref), sharedFlagsModule (copy), experienceService (copy)
+		var1:sendMilestone("first_react_frame_rendered")
+		local var2 = if sharedFlagsModule.FFlagLuaAppPageLoadTrackerJoinExperienceFix then experienceService:RegisterForExperienceJoin(function()
+			-- upvalues: var1 (copy)
+			var1:stop()
 		end) else nil
 		
 		return function()
-			-- upvalues: var8 (copy), sharedFlagsModule (copy), var9 (write)
-			var8:stop()
+			-- upvalues: var1 (copy), sharedFlagsModule (copy), var2 (write)
+			var1:stop()
 			
-			if sharedFlagsModule.FFlagLuaAppPageLoadTrackerJoinExperienceFix and var9 then
-				var9:Disconnect()
+			if sharedFlagsModule.FFlagLuaAppPageLoadTrackerJoinExperienceFix and var2 then
+				var2:Disconnect()
 			end
 		end
 	end, {})
 	
-	return var8
+	return var1
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: usePageTracker (ref), reactModule (ref), sharedFlagsModule (ref), visualDebugManagerModule (ref), useSelector (ref), pageLoadConfigModule (ref), isElementInScreenBoundsModule (ref), pageTrackerContextModule (ref)
-	local var10 = usePageTracker(p2.isActive, p2.componentName)
-	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useRef(nil)
+	local var1 = usePageTracker(p1.isActive, p1.componentName)
+	local var2 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(nil)
 	
-	if sharedFlagsModule.FFlagDebugEnablePageLoadTrackerVisualizer and var11.current == nil then
-		var11.current = visualDebugManagerModule.new()
+	if sharedFlagsModule.FFlagDebugEnablePageLoadTrackerVisualizer and var2.current == nil then
+		var2.current = visualDebugManagerModule.new()
 	end
-	local var13 = useSelector(function(p3)
+	local var4 = useSelector(function(p2)
 		-- upvalues: pageLoadConfigModule (copy)
-		return p3.ScreenSize or pageLoadConfigModule.SCREEN_BOUNDS.DEFAULT_SCREEN_SIZE
+		return p2.ScreenSize or pageLoadConfigModule.SCREEN_BOUNDS.DEFAULT_SCREEN_SIZE
 	end)
-	local var14 = useSelector(function(p4)
+	local var5 = useSelector(function(p2)
 		-- upvalues: pageLoadConfigModule (copy)
-		return if p4.TopBar then p4.TopBar.topBarHeight else pageLoadConfigModule.SCREEN_BOUNDS.DEFAULT_TOP_BAR_HEIGHT
+		return if p2.TopBar then p2.TopBar.topBarHeight else pageLoadConfigModule.SCREEN_BOUNDS.DEFAULT_TOP_BAR_HEIGHT
 	end)
 	
-	local function _(p5)
-		-- upvalues: isElementInScreenBoundsModule (copy), var13 (ref), var14 (ref), var10 (ref), sharedFlagsModule (copy), var11 (ref)
-		if not p5:IsA("GuiObject") then return end
-		if isElementInScreenBoundsModule(p5, var13, var14) then
-			var10:onComponentAdded(p5)
+	local function _(p2)
+		-- upvalues: isElementInScreenBoundsModule (copy), var4 (ref), var5 (ref), var1 (ref), sharedFlagsModule (copy), var2 (ref)
+		if not p2:IsA("GuiObject") then return end
+		if isElementInScreenBoundsModule(p2, var4, var5) then
+			var1:onComponentAdded(p2)
 			
 			if sharedFlagsModule.FFlagDebugEnablePageLoadTrackerVisualizer then
-				var11.current:highlightComponent(p5)
+				var2.current:highlightComponent(p2)
 			end
 		end
 	end
 	
 	local function setupChildTracking(value)
-		-- upvalues: sharedFlagsModule (copy), isElementInScreenBoundsModule (copy), var13 (ref), var14 (ref), var10 (ref), var11 (ref)
+		-- upvalues: sharedFlagsModule (copy), isElementInScreenBoundsModule (copy), var4 (ref), var5 (ref), var1 (ref), var2 (ref)
 		for i, v in value:GetDescendants() do
 			if sharedFlagsModule.FFlagLuaAppImproveComponentTrackingTiming then
 				task.defer(function()
-					-- upvalues: v (ref), isElementInScreenBoundsModule (copy), var13 (copy), var14 (copy), var10 (copy), sharedFlagsModule (copy), var11 (copy)
+					-- upvalues: v (ref), isElementInScreenBoundsModule (copy), var4 (copy), var5 (copy), var1 (copy), sharedFlagsModule (copy), var2 (copy)
 					if not v:IsA("GuiObject") then return end
-					if isElementInScreenBoundsModule(v, var13, var14) then
-						var10:onComponentAdded(v)
+					if isElementInScreenBoundsModule(v, var4, var5) then
+						var1:onComponentAdded(v)
 						
 						if sharedFlagsModule.FFlagDebugEnablePageLoadTrackerVisualizer then
-							var11.current:highlightComponent(v)
+							var2.current:highlightComponent(v)
 						end
 					end
 				end)
-			elseif v:IsA("GuiObject") and isElementInScreenBoundsModule(v, var13, var14) then
-				var10:onComponentAdded(v)
+			elseif v:IsA("GuiObject") and isElementInScreenBoundsModule(v, var4, var5) then
+				var1:onComponentAdded(v)
 				
 				if sharedFlagsModule.FFlagDebugEnablePageLoadTrackerVisualizer then
-					var11.current:highlightComponent(v)
+					var2.current:highlightComponent(v)
 				end
 			end
 		end
-		return value.DescendantAdded:Connect(function(p6)
-			-- upvalues: sharedFlagsModule (copy), isElementInScreenBoundsModule (copy), var13 (copy), var14 (copy), var10 (copy), var11 (copy)
+		return value.DescendantAdded:Connect(function(p2)
+			-- upvalues: sharedFlagsModule (copy), isElementInScreenBoundsModule (copy), var4 (copy), var5 (copy), var1 (copy), var2 (copy)
 			if sharedFlagsModule.FFlagLuaAppImproveComponentTrackingTiming then
 				task.defer(function()
-					-- upvalues: p6 (ref), isElementInScreenBoundsModule (copy), var13 (copy), var14 (copy), var10 (copy), sharedFlagsModule (copy), var11 (copy)
-					if not p6:IsA("GuiObject") then return end
-					if isElementInScreenBoundsModule(p6, var13, var14) then
-						var10:onComponentAdded(p6)
+					-- upvalues: p2 (ref), isElementInScreenBoundsModule (copy), var4 (copy), var5 (copy), var1 (copy), sharedFlagsModule (copy), var2 (copy)
+					if not p2:IsA("GuiObject") then return end
+					if isElementInScreenBoundsModule(p2, var4, var5) then
+						var1:onComponentAdded(p2)
 						
 						if sharedFlagsModule.FFlagDebugEnablePageLoadTrackerVisualizer then
-							var11.current:highlightComponent(p6)
+							var2.current:highlightComponent(p2)
 						end
 					end
 				end)
 				
 				return
-			elseif not p6:IsA("GuiObject") then return end
-			if isElementInScreenBoundsModule(p6, var13, var14) then
-				var10:onComponentAdded(p6)
+			elseif not p2:IsA("GuiObject") then return end
+			if isElementInScreenBoundsModule(p2, var4, var5) then
+				var1:onComponentAdded(p2)
 				
 				if sharedFlagsModule.FFlagDebugEnablePageLoadTrackerVisualizer then
-					var11.current:highlightComponent(p6)
+					var2.current:highlightComponent(p2)
 				end
 			end
 		end)
@@ -124,37 +124,37 @@ return function(p2)
 	
 	if sharedFlagsModule.FFlagDebugEnablePageLoadTrackerVisualizer then
 		reactModule.useEffect(function()
-			-- upvalues: var11 (ref)
+			-- upvalues: var2 (ref)
 			return function()
-				-- upvalues: var11 (copy)
-				var11.current:destroy()
+				-- upvalues: var2 (copy)
+				var2.current:destroy()
 			end
 		end, {})
 	end
 	reactModule.useLayoutEffect(function()
-		-- upvalues: p2 (ref), var12 (ref), setupChildTracking (ref), sharedFlagsModule (copy), var10 (ref)
-		if not p2.isActive then return end
-		local var16 = setupChildTracking(var12.current)
+		-- upvalues: p1 (ref), var3 (ref), setupChildTracking (ref), sharedFlagsModule (copy), var1 (ref)
+		if not p1.isActive then return end
+		local var6 = setupChildTracking(var3.current)
 		
 		if sharedFlagsModule.FFlagPageLoadAllowImprovedDisconnectTiming then
-			var10.onCompleteSignal:connect(function()
-				-- upvalues: var16 (ref)
-				var16:Disconnect()
+			var1.onCompleteSignal:connect(function()
+				-- upvalues: var6 (ref)
+				var6:Disconnect()
 			end)
 			
 			return
 		end
 		return function()
-			-- upvalues: var16 (ref)
-			var16:Disconnect()
+			-- upvalues: var6 (ref)
+			var6:Disconnect()
 		end
-	end, { p2.isActive })
+	end, { p1.isActive })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		ref = var12,
+		ref = var3,
 		Size = UDim2.fromScale(1, 1)
 	}, {
-		PageTrackerContext = reactModule.createElement(pageTrackerContextModule.Provider, { value = var10 }, p2.children)
+		PageTrackerContext = reactModule.createElement(pageTrackerContextModule.Provider, { value = var1 }, p1.children)
 	})
 end

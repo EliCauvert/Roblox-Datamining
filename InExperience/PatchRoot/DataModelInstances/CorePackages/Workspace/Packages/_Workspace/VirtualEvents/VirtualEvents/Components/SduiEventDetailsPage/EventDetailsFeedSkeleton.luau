@@ -10,9 +10,9 @@ local fFlagLuaAppSduiEventDetailsActionBarInFeed = require(parent.SharedFlags).F
 
 return reactModule.memo(function()
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), fFlagLuaAppSduiEventDetailsActionBarInFeed (ref), eventDetailsActionBarSkeletonModule (ref)
-	local var3 = useTokens()
-	local size1400 = var3.Size.Size_1400
-	local var4 = var3.Typography.CaptionLarge.LineHeight * var3.Typography.CaptionLarge.FontSize
+	local var1 = useTokens()
+	local size1400 = var1.Size.Size_1400
+	local var2 = var1.Typography.CaptionLarge.LineHeight * var1.Typography.CaptionLarge.FontSize
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-large size-full auto-y padding-top-medium",
@@ -30,12 +30,12 @@ return reactModule.memo(function()
 			TextColumn = reactModule.createElement(view, { tag = "col fill gap-small auto-xy", LayoutOrder = 2 }, {
 				Title = reactModule.createElement(skeleton, {
 					LayoutOrder = 1,
-					Size = UDim2.fromOffset(var3.Size.Size_2800 * 2, var4),
+					Size = UDim2.fromOffset(var1.Size.Size_2800 * 2, var2),
 					radius = radius.Small
 				}),
 				Host = reactModule.createElement(skeleton, {
 					LayoutOrder = 2,
-					Size = UDim2.fromOffset(var3.Size.Size_2800, var4),
+					Size = UDim2.fromOffset(var1.Size.Size_2800, var2),
 					radius = radius.Small
 				})
 			})
@@ -49,12 +49,12 @@ return reactModule.memo(function()
 		}, {
 			Header = reactModule.createElement(skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var3.Size.Size_2800 * 2, var3.Typography.HeadingSmall.LineHeight * var3.Typography.HeadingSmall.FontSize),
+				Size = UDim2.fromOffset(var1.Size.Size_2800 * 2, var1.Typography.HeadingSmall.LineHeight * var1.Typography.HeadingSmall.FontSize),
 				radius = radius.Small
 			}),
 			Text = reactModule.createElement(skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 0, var3.Typography.CaptionMedium.LineHeight * var3.Typography.CaptionMedium.FontSize * 3),
+				Size = UDim2.new(1, 0, 0, var1.Typography.CaptionMedium.LineHeight * var1.Typography.CaptionMedium.FontSize * 3),
 				radius = radius.Small
 			})
 		})

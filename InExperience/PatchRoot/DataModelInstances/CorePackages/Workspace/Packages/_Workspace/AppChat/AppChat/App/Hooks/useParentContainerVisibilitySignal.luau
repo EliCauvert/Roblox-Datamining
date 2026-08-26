@@ -10,19 +10,19 @@ local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 
 return function()
 	-- upvalues: reactModule (ref), parentContainerContextModule (ref), useDispatch (ref), setAppChatVisible (ref), fFlagExpChatEnableFriendsTab (ref), enteredChatFromEntryPointModule (ref)
-	local var5 = reactModule.useContext(parentContainerContextModule)
-	local visibilitySignal = var5.visibilitySignal
-	local getShouldSetAppChatVisible = var5.getShouldSetAppChatVisible
-	local entryPoint = var5.entryPoint
-	local var6 = useDispatch()
+	local var1 = reactModule.useContext(parentContainerContextModule)
+	local visibilitySignal = var1.visibilitySignal
+	local getShouldSetAppChatVisible = var1.getShouldSetAppChatVisible
+	local entryPoint = var1.entryPoint
+	local var2 = useDispatch()
 	reactModule.useEffect(function()
-		-- upvalues: visibilitySignal (ref), getShouldSetAppChatVisible (ref), setAppChatVisible (copy), fFlagExpChatEnableFriendsTab (copy), entryPoint (ref), var6 (ref), enteredChatFromEntryPointModule (copy)
+		-- upvalues: visibilitySignal (ref), getShouldSetAppChatVisible (ref), setAppChatVisible (copy), fFlagExpChatEnableFriendsTab (copy), entryPoint (ref), var2 (ref), enteredChatFromEntryPointModule (copy)
 		local _ = nil
-		local var7 = visibilitySignal:connect(function(p0, p1)
-			-- upvalues: getShouldSetAppChatVisible (copy), setAppChatVisible (copy), fFlagExpChatEnableFriendsTab (copy), entryPoint (copy), var6 (copy), enteredChatFromEntryPointModule (copy)
-			if getShouldSetAppChatVisible(p0) then
+		local var3 = visibilitySignal:connect(function(p1, p2)
+			-- upvalues: getShouldSetAppChatVisible (copy), setAppChatVisible (copy), fFlagExpChatEnableFriendsTab (copy), entryPoint (copy), var2 (copy), enteredChatFromEntryPointModule (copy)
+			if getShouldSetAppChatVisible(p1) then
 				setAppChatVisible(true)
-				var6(enteredChatFromEntryPointModule(if fFlagExpChatEnableFriendsTab then p1 or entryPoint else entryPoint))
+				var2(enteredChatFromEntryPointModule(if fFlagExpChatEnableFriendsTab then p2 or entryPoint else entryPoint))
 				
 				return
 			end
@@ -30,14 +30,14 @@ return function()
 		end)
 		
 		return function()
-			-- upvalues: var7 (write)
-			if var7 then
-				var7:disconnect()
+			-- upvalues: var3 (write)
+			if var3 then
+				var3:disconnect()
 			end
 		end
 	end, {
 		setAppChatVisible,
-		var6,
+		var2,
 		visibilitySignal,
 		getShouldSetAppChatVisible,
 		entryPoint

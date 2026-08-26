@@ -30,7 +30,7 @@ return {
 			verified = { reveal = reactModule.createBinding(1) }
 		}
 	end,
-	makeStatusPanelProps = function(p0)
+	makeStatusPanelProps = function(p1)
 		local t = {
 			status = "",
 			statusText = "",
@@ -44,19 +44,19 @@ return {
 			onShowConnectionHealth = function() end
 		}
 		
-		if p0 then
-			for i, v in p0 do
+		if p1 then
+			for i, v in p1 do
 				t[i] = v
 			end
 		end
 		return t
 	end,
-	renderWithFoundation = function(p1, p2)
+	renderWithFoundation = function(p2, p3)
 		-- upvalues: reactModule (ref), foundationModule (ref), localizationModule (ref), inExperienceLocalesModule (ref), localizationService (ref)
-		return p1(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
+		return p2(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			Localization = reactModule.createElement(localizationModule.LocalizationProvider, {
 				localization = inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
-			}, { Subject = p2 })
+			}, { Subject = p3 })
 		}))
 	end
 }

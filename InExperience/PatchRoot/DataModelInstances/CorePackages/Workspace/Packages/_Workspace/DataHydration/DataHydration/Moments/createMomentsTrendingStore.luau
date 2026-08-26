@@ -9,93 +9,93 @@ local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
 local fetchTrendingMomentsModule = require(script.Parent.Requests.fetchTrendingMoments)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: httpService (ref)
 	return httpService:JSONEncode({
-		momentsSessionId = p0,
-		hasCursor = p1 ~= nil,
-		cursor = p1 or ""
+		momentsSessionId = p1,
+		hasCursor = p2 ~= nil,
+		cursor = p2 or ""
 	})
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), httpClientModule (ref), fetchTrendingMomentsModule (ref), httpService (ref)
-	p2 = p2 or {}
+	p1 = p1 or {}
 	local t = {}
-	local var9 = createDataResolverModule({
+	local var1 = createDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = createDataCacheModule(),
-		fetchFn = function(p3, _)
-			-- upvalues: t (write), promiseModule (copy), httpClientModule (copy), fetchTrendingMomentsModule (copy), p2 (ref)
-			local var10 = t[p3]
+		fetchFn = function(p2, _)
+			-- upvalues: t (write), promiseModule (copy), httpClientModule (copy), fetchTrendingMomentsModule (copy), p1 (ref)
+			local var2 = t[p2]
 			
-			return if var10 == nil then promiseModule.reject(`Missing trending moments request params for {p3}`) else httpClientModule.asPromise(fetchTrendingMomentsModule(var10.momentsSessionId, var10.cursor, p2.network))
+			return if var2 == nil then promiseModule.reject(`Missing trending moments request params for {p2}`) else httpClientModule.asPromise(fetchTrendingMomentsModule(var2.momentsSessionId, var2.cursor, p1.network))
 		end
 	})
 	
-	local function _(value, p4)
+	local function _(value, p3)
 		-- upvalues: httpService (copy), t (write)
-		local var11 = httpService:JSONEncode({
+		local var3 = httpService:JSONEncode({
 			momentsSessionId = value,
-			hasCursor = p4 ~= nil,
-			cursor = p4 or ""
+			hasCursor = p3 ~= nil,
+			cursor = p3 or ""
 		})
-		t[var11] = { momentsSessionId = value, cursor = p4 }
+		t[var3] = { momentsSessionId = value, cursor = p3 }
 		
-		return var11
+		return var3
 	end
 	
 	return {
-		getTrending = function(p5, p6, p7)
-			-- upvalues: httpClientModule (copy), fetchTrendingMomentsModule (copy), p2 (ref)
-			return httpClientModule.asPromise(fetchTrendingMomentsModule(p5, p6, p2.network, p7))
+		getTrending = function(p3, p4, p5)
+			-- upvalues: httpClientModule (copy), fetchTrendingMomentsModule (copy), p1 (ref)
+			return httpClientModule.asPromise(fetchTrendingMomentsModule(p3, p4, p1.network, p5))
 		end,
-		getCachedTrending = function(p8, p9)
-			-- upvalues: var9 (ref), httpService (copy), t (write)
-			local getCachedItem = var9.getCachedItem
-			local var12 = httpService:JSONEncode({
-				momentsSessionId = p8,
-				hasCursor = p9 ~= nil,
-				cursor = p9 or ""
+		getCachedTrending = function(p3, p4)
+			-- upvalues: var1 (ref), httpService (copy), t (write)
+			local getCachedItem = var1.getCachedItem
+			local var3 = httpService:JSONEncode({
+				momentsSessionId = p3,
+				hasCursor = p4 ~= nil,
+				cursor = p4 or ""
 			})
-			t[var12] = { momentsSessionId = p8, cursor = p9 }
+			t[var3] = { momentsSessionId = p3, cursor = p4 }
 			
-			return getCachedItem(var12)
+			return getCachedItem(var3)
 		end,
-		fetchTrending = function(p10, p11)
-			-- upvalues: var9 (ref), httpService (copy), t (write)
-			local fetchItem = var9.fetchItem
-			local var13 = httpService:JSONEncode({
-				momentsSessionId = p10,
-				hasCursor = p11 ~= nil,
-				cursor = p11 or ""
+		fetchTrending = function(p3, p4)
+			-- upvalues: var1 (ref), httpService (copy), t (write)
+			local fetchItem = var1.fetchItem
+			local var3 = httpService:JSONEncode({
+				momentsSessionId = p3,
+				hasCursor = p4 ~= nil,
+				cursor = p4 or ""
 			})
-			t[var13] = { momentsSessionId = p10, cursor = p11 }
+			t[var3] = { momentsSessionId = p3, cursor = p4 }
 			
-			return fetchItem(var13)
+			return fetchItem(var3)
 		end,
-		getAndFetchTrending = function(p12, p13)
-			-- upvalues: var9 (ref), httpService (copy), t (write)
-			local getAndFetchItem = var9.getAndFetchItem
-			local var14 = httpService:JSONEncode({
-				momentsSessionId = p12,
-				hasCursor = p13 ~= nil,
-				cursor = p13 or ""
+		getAndFetchTrending = function(p3, p4)
+			-- upvalues: var1 (ref), httpService (copy), t (write)
+			local getAndFetchItem = var1.getAndFetchItem
+			local var3 = httpService:JSONEncode({
+				momentsSessionId = p3,
+				hasCursor = p4 ~= nil,
+				cursor = p4 or ""
 			})
-			t[var14] = { momentsSessionId = p12, cursor = p13 }
+			t[var3] = { momentsSessionId = p3, cursor = p4 }
 			
-			return getAndFetchItem(var14)
+			return getAndFetchItem(var3)
 		end,
 		clear = function()
-			-- upvalues: t (write), var9 (ref)
+			-- upvalues: t (write), var1 (ref)
 			t = {}
-			var9.clear()
+			var1.clear()
 		end,
 		dispose = function()
-			-- upvalues: t (write), var9 (ref)
+			-- upvalues: t (write), var1 (ref)
 			t = {}
-			var9.dispose()
+			var1.dispose()
 		end
 	}
 end

@@ -24,59 +24,59 @@ genericTextLabel.defaultProps = {
 	maxSize = Vector2.new(10000, 10000)
 }
 
-function genericTextLabel.render(p0)
+function genericTextLabel.render(p1)
 	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), cryoModule (ref), roactModule (ref), UIBloxConfigModule (ref)
-	local text = p0.props.Text
-	local fluidSizing = p0.props.fluidSizing
+	local text = p1.props.Text
+	local fluidSizing = p1.props.fluidSizing
 	
-	return withStyleModule(function(p1)
-		-- upvalues: p0 (ref), text (ref), getTextSizeModule (copy), cryoModule (copy), roactModule (copy), fluidSizing (ref), UIBloxConfigModule (copy)
-		local fontStyle = p0.props.fontStyle
-		local colorStyle = p0.props.colorStyle
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), text (ref), getTextSizeModule (copy), cryoModule (copy), roactModule (copy), fluidSizing (ref), UIBloxConfigModule (copy)
+		local fontStyle = p1.props.fontStyle
+		local colorStyle = p1.props.colorStyle
 		local color = colorStyle.Color or colorStyle.Color3
 		local transparency = colorStyle.Transparency
-		local richText = p0.props.RichText
-		local baseSize = p1.Font.BaseSize
-		local var12 = if fontStyle.RelativeMinSize then baseSize * fontStyle.RelativeMinSize else fontStyle.FontSize
-		local var13 = if fontStyle.RelativeSize then baseSize * fontStyle.RelativeSize else fontStyle.FontSize
+		local richText = p1.props.RichText
+		local baseSize = p2.Font.BaseSize
+		local var1 = if fontStyle.RelativeMinSize then baseSize * fontStyle.RelativeMinSize else fontStyle.FontSize
+		local var2 = if fontStyle.RelativeSize then baseSize * fontStyle.RelativeSize else fontStyle.FontSize
 		local font = fontStyle.Font
-		local size = p0.props.Size
+		local size = p1.props.Size
 		
 		if size == nil then
-			local var14 = text
+			local var3 = text
 			
-			if p0.props.TextTruncate == Enum.TextTruncate.AtEnd then
-				var14 ..= "..."
+			if p1.props.TextTruncate == Enum.TextTruncate.AtEnd then
+				var3 ..= "..."
 			end
-			local var15 = getTextSizeModule(var14, if p0.props.LineHeight then var13 * p0.props.LineHeight else var13, font, p0.props.maxSize)
-			size = UDim2.new(0, var15.X, 0, var15.Y)
+			local var4 = getTextSizeModule(var3, if p1.props.LineHeight then var2 * p1.props.LineHeight else var2, font, p1.props.maxSize)
+			size = UDim2.new(0, var4.X, 0, var4.Y)
 		end
-		local var16 = cryoModule.Dictionary.join(p0.props, {
+		local var5 = cryoModule.Dictionary.join(p1.props, {
 			[roactModule.Children] = cryoModule.None,
 			fluidSizing = cryoModule.None,
 			fontStyle = cryoModule.None,
 			openTypeFeatures = cryoModule.None,
 			colorStyle = cryoModule.None,
 			maxSize = cryoModule.None,
-			Size = if p0.props.AutomaticSize == nil or p0.props.AutomaticSize == Enum.AutomaticSize.None then size else nil,
+			Size = if p1.props.AutomaticSize == nil or p1.props.AutomaticSize == Enum.AutomaticSize.None then size else nil,
 			Text = text,
 			Font = font,
-			TextSize = p0.props.TextSize or var13,
-			AutomaticSize = p0.props.AutomaticSize or nil,
+			TextSize = p1.props.TextSize or var2,
+			AutomaticSize = p1.props.AutomaticSize or nil,
 			TextColor3 = color,
 			TextTransparency = transparency,
-			TextWrapped = p0.props.TextWrapped == nil or p0.props.TextWrapped,
+			TextWrapped = p1.props.TextWrapped == nil or p1.props.TextWrapped,
 			TextScaled = fluidSizing,
 			BackgroundTransparency = 1,
 			RichText = richText
 		})
 		
-		if UIBloxConfigModule.enableOpenTypeSupport and p0.props.openTypeFeatures then
-			var16 = cryoModule.Dictionary.join(var16, { OpenTypeFeatures = p0.props.openTypeFeatures })
+		if UIBloxConfigModule.enableOpenTypeSupport and p1.props.openTypeFeatures then
+			var5 = cryoModule.Dictionary.join(var5, { OpenTypeFeatures = p1.props.openTypeFeatures })
 		end
-		return roactModule.createElement("TextLabel", var16, cryoModule.Dictionary.join({
-			UITextSizeConstraint = fluidSizing and roactModule.createElement("UITextSizeConstraint", { MaxTextSize = var13, MinTextSize = var12 } or nil)
-		}, p0.props[roactModule.Children] or {}))
+		return roactModule.createElement("TextLabel", var5, cryoModule.Dictionary.join({
+			UITextSizeConstraint = fluidSizing and roactModule.createElement("UITextSizeConstraint", { MaxTextSize = var2, MinTextSize = var1 } or nil)
+		}, p1.props[roactModule.Children] or {}))
 	end)
 end
 

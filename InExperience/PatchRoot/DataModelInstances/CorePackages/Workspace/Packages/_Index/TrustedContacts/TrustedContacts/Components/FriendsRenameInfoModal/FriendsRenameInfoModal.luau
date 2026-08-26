@@ -20,7 +20,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local appPage = require(parent.RobloxAppEnums).AppPage
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var5 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local analyticsModule = require(script.Parent.Parent.Parent.Analytics)
 local useTCAnalytics = analyticsModule.useTCAnalytics
@@ -28,38 +28,38 @@ local eventNames = analyticsModule.EventNames
 local friendsRenameModalUnboldText = game:DefineFastFlag("FriendsRenameModalUnboldText", false)
 
 return function()
-	-- upvalues: usePreferredInput (ref), useDispatch (ref), useScreenSize (ref), useNavigation (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), responsiveModule (ref), useLocalization (ref), peekViewState (ref), useAppPolicy (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateDown (ref), text (ref), view (ref), friendsRenameModalUnboldText (ref), inputLabel (ref), inputLabelSize (ref), interactiveAlert (ref), buttonType (ref), peekView (ref)
-	local var8 = usePreferredInput()
-	local var9 = useDispatch()
-	local var10 = useScreenSize()
-	local var11 = useNavigation()
+	-- upvalues: usePreferredInput (ref), useDispatch (ref), useScreenSize (ref), useNavigation (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), responsiveModule (ref), useLocalization (ref), peekViewState (ref), useAppPolicy (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), text (ref), view (ref), friendsRenameModalUnboldText (ref), inputLabel (ref), inputLabelSize (ref), interactiveAlert (ref), buttonType (ref), peekView (ref)
+	local var2 = usePreferredInput()
+	local var3 = useDispatch()
+	local var4 = useScreenSize()
+	local var5 = useNavigation()
 	local fireAnalyticsEvent = useTCAnalytics().fireAnalyticsEvent
 	reactModule.useEffect(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy)
 		fireAnalyticsEvent(eventNames.FriendsRenameInfoModalSeen)
 	end, {})
-	local var12 = var8 ~= responsiveModule.Input.Touch
-	local var13 = useLocalization({
+	local var6 = var2 ~= responsiveModule.Input.Touch
+	local var7 = useLocalization({
 		gotIt = "Feature.Avatar.Action.GotIt",
 		learnMore = "Feature.Chat.Action.LearnMore",
 		introducingConnections = "Feature.Friends.Label.IntroducingConnections",
 		renameInfoText = "Feature.Friends.Label.RenameInfoText"
 	})
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref)
-		var11.pop()
-	end, { var11 })
-	local var15 = reactModule.useCallback(function(p0, _)
-		-- upvalues: peekViewState (copy), var11 (ref)
-		if p0 == peekViewState.Closed or p0 == peekViewState.Hidden then
-			var11.goBack()
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref)
+		var5.pop()
+	end, { var5 })
+	local var9 = reactModule.useCallback(function(p1, _)
+		-- upvalues: peekViewState (copy), var5 (ref)
+		if p1 == peekViewState.Closed or p1 == peekViewState.Hidden then
+			var5.goBack()
 		end
-	end, { var11 })
-	local var16 = useAppPolicy(function(p1)
+	end, { var5 })
+	local var10 = useAppPolicy(function(p1)
 		return p1.getWebViewSupport()
 	end)
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var5 (copy), var9 (ref), navigateDown (copy)
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var3 (ref), navigateDown (copy)
 		fireAnalyticsEvent(eventNames.FriendsRenameLearnMoreClicked)
 		local t = {
 			detail = "https://en.help.roblox.com/hc/en-us/articles/37725513985812",
@@ -68,19 +68,19 @@ return function()
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var5.down(var5.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		var9(navigateDown(t, nil))
-	end, { var9 })
-	local introducingConnections = var13.introducingConnections
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy), view (copy), var12 (ref), friendsRenameModalUnboldText (copy), text (copy), inputLabel (copy), inputLabelSize (copy), var13 (ref), var16 (ref), var17 (ref)
+		var3(navigateDown(t, nil))
+	end, { var3 })
+	local introducingConnections = var7.introducingConnections
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: reactModule (copy), view (copy), var6 (ref), friendsRenameModalUnboldText (copy), text (copy), inputLabel (copy), inputLabelSize (copy), var7 (ref), var10 (ref), var11 (ref)
 		return reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y gap-small padding-0",
-			["align-x-left"] = not var12,
-			["align-x-center"] = var12,
+			["align-x-left"] = not var6,
+			["align-x-center"] = var6,
 			LayoutOrder = 2
 		}, {
 			BodyText = reactModule.createElement(if friendsRenameModalUnboldText then text else inputLabel, {
@@ -88,29 +88,29 @@ return function()
 				RichText = true,
 				tag = if friendsRenameModalUnboldText then "auto-y size-full-0 text-wrap grow text-align-x-left" else "auto-y size-full-0 text-wrap grow",
 				size = if friendsRenameModalUnboldText then nil else inputLabelSize.Large,
-				Text = var13.renameInfoText
+				Text = var7.renameInfoText
 			}),
-			LearnMoreWebLink = var16 and reactModule.createElement(if friendsRenameModalUnboldText then text else inputLabel, {
+			LearnMoreWebLink = var10 and reactModule.createElement(if friendsRenameModalUnboldText then text else inputLabel, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = if friendsRenameModalUnboldText then "auto-y size-full-0 text-align-x-left" else "auto-y size-full-0",
-				Text = `<u>{var13.learnMore}</u>`,
+				Text = `<u>{var7.learnMore}</u>`,
 				size = if friendsRenameModalUnboldText then nil else inputLabelSize.Large,
-				onActivated = var17
+				onActivated = var11
 			})
 		})
-	end, { var17, var13, var12 })
+	end, { var11, var7, var6 })
 	
-	return if var12 then reactModule.createElement(interactiveAlert, {
+	return if var6 then reactModule.createElement(interactiveAlert, {
 		richText = true,
-		screenSize = var10,
+		screenSize = var4,
 		title = introducingConnections,
-		middleContent = var18,
+		middleContent = var12,
 		buttonStackInfo = {
 			buttons = {
 				{
 					buttonType = buttonType.Secondary,
-					props = { onActivated = var14, text = var13.gotIt }
+					props = { onActivated = var8, text = var7.gotIt }
 				}
 			}
 		}
@@ -121,7 +121,7 @@ return function()
 		showDraggerInClosedState = false,
 		thumbstickScrollEnabled = true,
 		briefViewContentHeight = UDim.new(0, 0),
-		viewStateChanged = var15
+		viewStateChanged = var9
 	}, {
 		Contents = reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y gap-small padding-xxlarge align-x-left"
@@ -134,7 +134,7 @@ return function()
 					Text = introducingConnections
 				})
 			end, { introducingConnections }),
-			TextContent = var18()
+			TextContent = var12()
 		})
 	})
 end

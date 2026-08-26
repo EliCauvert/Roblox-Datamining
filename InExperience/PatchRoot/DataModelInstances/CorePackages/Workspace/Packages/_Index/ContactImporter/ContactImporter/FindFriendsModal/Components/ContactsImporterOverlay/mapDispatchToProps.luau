@@ -9,22 +9,22 @@ local fFlagSignalsNavP3Dispatch = require(parent_1.SharedFlags).FFlagSignalsNavP
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent_1.RobloxAppNavigation).NavigationCommands else nil
 local toastRoduxModule = require(parent_1.ToastRodux)
 
-return function(p0)
+return function(p1)
 	-- upvalues: updateContactImporterModalLogic (ref), networkingUserSettings (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), toastRoduxModule (ref)
 	return {
 		hideContactImporterModal = function()
-			-- upvalues: p0 (ref), updateContactImporterModalLogic (copy)
-			return p0(updateContactImporterModalLogic({
+			-- upvalues: p1 (ref), updateContactImporterModalLogic (copy)
+			return p1(updateContactImporterModalLogic({
 				hasOSPermissions = true,
 				shouldShowContactImporterUpsellModal = false
 			}))
 		end,
 		getUserSettingsMetadata = function()
-			-- upvalues: p0 (ref), networkingUserSettings (copy)
-			return p0(networkingUserSettings.GetUserSettingsMetadata.API())
+			-- upvalues: p1 (ref), networkingUserSettings (copy)
+			return p1(networkingUserSettings.GetUserSettingsMetadata.API())
 		end,
 		openLearnMoreLink = function()
-			-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p0 (ref), navigateDown (copy)
+			-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p1 (ref), navigateDown (copy)
 			local t = {
 				detail = "https://en.help.roblox.com/hc/articles/7416652004884",
 				name = appPage.GenericWebPage,
@@ -36,11 +36,11 @@ return function(p0)
 				
 				return
 			end
-			p0(navigateDown(t, nil))
+			p1(navigateDown(t, nil))
 		end,
-		showToast = function(p1)
-			-- upvalues: p0 (ref), toastRoduxModule (copy)
-			p0(toastRoduxModule.Actions.SetCurrentToastMessage({ toastMessage = p1 }))
+		showToast = function(p2)
+			-- upvalues: p1 (ref), toastRoduxModule (copy)
+			p1(toastRoduxModule.Actions.SetCurrentToastMessage({ toastMessage = p2 }))
 		end
 	}
 end

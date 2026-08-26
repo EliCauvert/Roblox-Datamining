@@ -9,50 +9,50 @@ local iconVariant = foundationModule.Enums.IconVariant
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 
-local function useDelayedFalse(p0, p1)
+local function useDelayedFalse(p1, p2)
 	-- upvalues: reactModule (ref)
-	local var5, var6 = reactModule.useState(p0)
+	local var1, var2 = reactModule.useState(p1)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var6 (ref), p1 (ref)
-		if p0 then
-			var6(true)
+		-- upvalues: p1 (ref), var2 (ref), p2 (ref)
+		if p1 then
+			var2(true)
 			
 			return
 		end
-		local delayedThread = task.delay(p1, function()
-			-- upvalues: var6 (copy)
-			var6(false)
+		local delayedThread = task.delay(p2, function()
+			-- upvalues: var2 (copy)
+			var2(false)
 		end)
 		
 		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
-	end, { p0, p1 })
+	end, { p1, p2 })
 	
-	return var5
+	return var1
 end
 
-local function useOscillatingWidth(p2, p3, p4)
+local function useOscillatingWidth(p1, p2, p3)
 	-- upvalues: reactModule (ref)
-	local var8, var9 = reactModule.useState(p4)
+	local var1, var2 = reactModule.useState(p3)
 	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), var9 (ref), p4 (ref), p3 (ref)
-		if p2 then
+		-- upvalues: p1 (ref), var2 (ref), p3 (ref), p2 (ref)
+		if p1 then
 			local delayedThread = nil
 			
 			local function scheduleNext()
-				-- upvalues: delayedThread (write), p3 (copy), p4 (copy), var9 (copy), scheduleNext (ref)
+				-- upvalues: delayedThread (write), p2 (copy), p3 (copy), var2 (copy), scheduleNext (ref)
 				delayedThread = task.delay(0.15, function()
-					-- upvalues: p3 (copy), p4 (copy), var9 (copy), scheduleNext (copy)
-					var9(p3 + math.random() * (p4 - p3))
+					-- upvalues: p2 (copy), p3 (copy), var2 (copy), scheduleNext (copy)
+					var2(p2 + math.random() * (p3 - p2))
 					scheduleNext()
 				end)
 			end
 			
 			delayedThread = task.delay(0.15, function()
-				-- upvalues: p3 (copy), p4 (copy), var9 (copy), scheduleNext (ref)
-				var9(p3 + math.random() * (p4 - p3))
+				-- upvalues: p2 (copy), p3 (copy), var2 (copy), scheduleNext (ref)
+				var2(p2 + math.random() * (p3 - p2))
 				scheduleNext()
 			end)
 			
@@ -63,33 +63,33 @@ local function useOscillatingWidth(p2, p3, p4)
 				end
 			end
 		end
-		var9(p4)
-	end, { p2, p3, p4 })
+		var2(p3)
+	end, { p1, p2, p3 })
 	
-	return if p2 then var8 else p4
+	return if p1 then var1 else p3
 end
 
-return reactModule.memo(function(p5)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), signalsReactModule (ref), useDelayedFalse (ref), useOscillatingWidth (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref)
-	local var12 = useTokens()
-	local var13 = useDelayedFalse(signalsReactModule.useSignalState(p5.isSpeakingSignal), var12.Time.Time_1000)
+	local var1 = useTokens()
+	local var2 = useDelayedFalse(signalsReactModule.useSignalState(p1.isSpeakingSignal), var1.Time.Time_1000)
 	
-	return reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = p5.layoutOrder }, {
-		GreenFilledIconContainer = if var13 then reactModule.createElement("Frame", {
+	return reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = p1.layoutOrder }, {
+		GreenFilledIconContainer = if var2 then reactModule.createElement("Frame", {
 			ClipsDescendants = true,
 			BackgroundTransparency = 1,
 			ZIndex = 2,
-			Size = UDim2.fromScale(useOscillatingWidth(var13, 0.2, 1), 1)
+			Size = UDim2.fromScale(useOscillatingWidth(var2, 0.2, 1), 1)
 		}, {
 			GreenFilledIcon = reactModule.createElement(icon, {
 				name = iconName.Speaker,
 				variant = iconVariant.Filled,
-				style = var12.Color.System.Success
+				style = var1.Color.System.Success
 			})
 		}) else nil,
 		Icon = reactModule.createElement(icon, {
 			name = iconName.Speaker,
-			style = var12.Color.Content.Default
+			style = var1.Color.Content.Default
 		})
 	})
 end)

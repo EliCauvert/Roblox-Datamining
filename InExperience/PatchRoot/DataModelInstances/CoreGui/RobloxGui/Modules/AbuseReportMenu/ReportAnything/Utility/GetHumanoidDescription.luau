@@ -10,10 +10,10 @@ local _ = {
 	OK = "OK"
 }
 
-local var3 = function(p0)
+local var1 = function(p1)
 	local t = {}
 	
-	for i, v in ipairs(p0) do
+	for i, v in ipairs(p1) do
 		table.insert(t, {
 			AccessoryType = v.AccessoryType.Value,
 			AssetId = v.AssetId,
@@ -25,11 +25,11 @@ local var3 = function(p0)
 	return t
 end
 
-local var4 = function(p1, p2)
+local var2 = function(p2, p3)
 	local t = {}
 	
-	for i, v in ipairs(p2) do
-		local name = p1[v.Name]
+	for i, v in ipairs(p3) do
+		local name = p2[v.Name]
 		
 		if name then
 			for i_1 = 1, math.min(8, #name) do
@@ -40,10 +40,10 @@ local var4 = function(p1, p2)
 	return t
 end
 
-local var5 = function(p3)
+local var3 = function(p4)
 	local t = {}
 	
-	for i, v in p3:GetPlayingAnimationTracks() do
+	for i, v in p4:GetPlayingAnimationTracks() do
 		local match = string.match(v.Animation.AnimationId, "(%d+)$")
 		
 		if match then
@@ -55,9 +55,9 @@ local var5 = function(p3)
 end
 
 return {
-	getHumanoidDescription = function(p4)
-		-- upvalues: playersService (ref), getFFlagGetHumanoidDescriptionUpdatesModule (ref), var3 (ref), getHumanoidDescriptionUpdatesV2A (ref), var4 (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), var5 (ref)
-		local var10 = playersService:GetPlayerByUserId(p4)
+	getHumanoidDescription = function(p5)
+		-- upvalues: playersService (ref), getFFlagGetHumanoidDescriptionUpdatesModule (ref), var1 (ref), getHumanoidDescriptionUpdatesV2A (ref), var2 (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), var3 (ref)
+		local var4 = playersService:GetPlayerByUserId(p5)
 		local t = {
 			BackAccessory = "",
 			BodyTypeScale = 0,
@@ -99,10 +99,10 @@ return {
 			WidthScale = 0
 		}
 		
-		if not var10 then
+		if not var4 then
 			return t, "ERR_RA_HUMPLAYER"
 		end
-		local character = var10.Character
+		local character = var4.Character
 		
 		if not character then
 			return t, "ERR_RA_CHARACTER"
@@ -112,7 +112,7 @@ return {
 		if not humanoid then
 			return t, "ERR_RA_HUMOBJ"
 		end
-		local var13
+		local var5
 		local _ = nil
 		
 		if getFFlagGetHumanoidDescriptionUpdatesModule() then
@@ -121,91 +121,91 @@ return {
 				-- upvalues: humanoid (ref)
 				return humanoid:GetAppliedDescription()
 			end)
-			var13 = status
+			var5 = status
 			
 			if not ok then
 				return t, "ERR_RA_HUMOBJ"
-			elseif not var13 then
+			elseif not var5 then
 				return t, "ERR_RA_HUMDESC"
 			end
-			local var14 = 0
+			local var6 = 0
 			
 			if getFFlagGetHumanoidDescriptionUpdatesModule() then
-				local var15 = function(p5)
-					-- upvalues: var13 (write), t (ref)
-					if typeof(var13[p5]) == "Color3" then
-						t[p5] = { var13[p5].R, var13[p5].G, var13[p5].B }
+				local var7 = function(p6)
+					-- upvalues: var5 (write), t (ref)
+					if typeof(var5[p6]) == "Color3" then
+						t[p6] = { var5[p6].R, var5[p6].G, var5[p6].B }
 						
 						return
 					end
-					t[p5] = var13[p5]
+					t[p6] = var5[p6]
 				end
 				
 				for i, v in pairs(t) do
-					if not pcall(var15, i) then
-						var14 += 1
+					if not pcall(var7, i) then
+						var6 += 1
 					end
 				end
-				local ok, status = pcall(var13.GetAccessories, var13, false)
+				local ok, status = pcall(var5.GetAccessories, var5, false)
 				
 				if ok then
-					local ok_1, status_1 = pcall(var3, status)
+					local ok_1, status_1 = pcall(var1, status)
 					
 					if ok_1 then
 						t.AccessoryBlob = status_1
 					else
-						var14 += 1
+						var6 += 1
 					end
 				else
-					var14 += 1
+					var6 += 1
 				end
 				if getHumanoidDescriptionUpdatesV2A then
-					local ok_1, status_1 = pcall(var13.GetEmotes, var13)
+					local ok_1, status_1 = pcall(var5.GetEmotes, var5)
 					
 					if ok_1 then
 						t.Emotes = status_1
 					else
-						var14 += 1
+						var6 += 1
 					end
 				end
-				local ok_1, status_1 = pcall(var13.GetEquippedEmotes, var13)
-				local ok_2, status_2 = pcall(var13.GetEmotes, var13)
+				local ok_1, status_1 = pcall(var5.GetEquippedEmotes, var5)
+				local ok_2, status_2 = pcall(var5.GetEmotes, var5)
 				
 				if ok_1 and ok_2 then
-					local ok_3, status_3 = pcall(var4, status_2, status_1)
+					local ok_3, status_3 = pcall(var2, status_2, status_1)
 					
 					if ok_3 then
 						t.Emotes = status_3
 						
 						if getFFlagGetHumanoidDescriptionUpdatesV2E() then
-							local ok_4, status_4 = pcall(var5, humanoid)
+							local ok_4, status_4 = pcall(var3, humanoid)
 							
 							if ok_4 then
 								t.CurrentlyPlayingAnimationIds = status_4
 							else
-								var14 += 1
+								var6 += 1
 							end
 						end
 					end
 				else
-					var14 += 1
+					var6 += 1
 				end
-				t.FieldErrorCount = var14
+				t.FieldErrorCount = var6
 			else
 				pcall(function()
-					-- upvalues: t (ref), var13 (write)
+					-- upvalues: t (ref), var5 (write)
 					for i, v in pairs(t) do
-						if typeof(var13[i]) == "Color3" then
-							t[i] = { var13[i].R, var13[i].G, var13[i].B }
+						if typeof(var5[i]) == "Color3" then
+							t[i] = { var5[i].R, var5[i].G, var5[i].B }
 						else
-							t[i] = var13[i]
+							t[i] = var5[i]
 						end
 					end
 				end)
 			end
 			return t, "OK"
 		else
-			var13 = humanoid:GetAppliedDescription()
+			var5 = humanoid:GetAppliedDescription()
 		end
 	end
 }

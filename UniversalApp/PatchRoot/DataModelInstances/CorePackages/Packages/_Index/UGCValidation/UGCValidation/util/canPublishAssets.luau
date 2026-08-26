@@ -12,46 +12,46 @@ local formattedText = string.format("https://apis.%s", APIUtilModule.getBaseDoma
 local function getWhitelistIds()
 	-- upvalues: getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref)
 	local t = {}
-	local var9 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule()
+	local var1 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule()
 	
-	if #var9 == 0 then
+	if #var1 == 0 then
 		return t
 	end
-	for i in string.gmatch(var9, "([^,%s]+)") do
+	for i in string.gmatch(var1, "([^,%s]+)") do
 		t[i] = true
 	end
 	return t
 end
 
-local function createCanPublishPromise(p0, p1, p2, p3, p4)
+local function createCanPublishPromise(p1, p2, p3, p4, p5)
 	-- upvalues: promiseModule (ref), httpService (ref), constantsModule (ref)
-	return if #p1 == 0 then promiseModule.resolve() else promiseModule.new(function(p5, p6)
-		-- upvalues: httpService (copy), p1 (ref), p2 (ref), p4 (ref), p0 (ref), constantsModule (copy), p3 (ref)
+	return if #p2 == 0 then promiseModule.resolve() else promiseModule.new(function(p6, p7)
+		-- upvalues: httpService (copy), p2 (ref), p3 (ref), p5 (ref), p1 (ref), constantsModule (copy), p4 (ref)
 		httpService:RequestInternal({
 			Method = "POST",
-			Url = p0,
-			Body = httpService:JSONEncode({ assetIds = p1, restrictedEntities = p2, universeId = p4 }),
+			Url = p1,
+			Body = httpService:JSONEncode({ assetIds = p2, restrictedEntities = p3, universeId = p5 }),
 			Headers = {
-				[constantsModule.ExperienceAuthHeaderKey] = p3,
+				[constantsModule.ExperienceAuthHeaderKey] = p4,
 				[constantsModule.ContentType] = constantsModule.ApplicationJson
 			}
-		}):Start(function(p7, p8)
-			-- upvalues: p5 (ref), httpService (copy), p6 (ref)
-			if p7 and p8.StatusCode == 200 then
-				p5(httpService:JSONDecode(p8.Body))
+		}):Start(function(p8, p9)
+			-- upvalues: p6 (ref), httpService (copy), p7 (ref)
+			if p8 and p9.StatusCode == 200 then
+				p6(httpService:JSONDecode(p9.Body))
 				
 				return
 			end
-			p6()
+			p7()
 		end)
 	end)
 end
 
-return function(value, p9, p10, p11, p12)
+return function(value, p1, p2, p3, p4)
 	-- upvalues: formattedText (ref), createCanPublishPromise (ref), promiseModule (ref), getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref), getWhitelistIds (ref)
 	local UGCValidationCanPublishRequestPageSizeFastInt = game:GetFastInt("UGCValidationCanPublishRequestPageSize")
 	local UGCValidationMaxAssetSizeAllowedFastInt = game:GetFastInt("UGCValidationMaxAssetSizeAllowed")
-	local text = formattedText .. (if p12 then "packages-api/v1/rcc/canPublish" else "packages-api/v1/canPublish")
+	local text = formattedText .. (if p4 then "packages-api/v1/rcc/canPublish" else "packages-api/v1/canPublish")
 	local t = {}
 	local t_1 = {}
 	
@@ -71,31 +71,31 @@ return function(value, p9, p10, p11, p12)
 		table.insert(t_3, v_1)
 		
 		if UGCValidationCanPublishRequestPageSizeFastInt <= #t_3 then
-			table.insert(t_2, createCanPublishPromise(text, t_3, p9, p10, p11))
+			table.insert(t_2, createCanPublishPromise(text, t_3, p1, p2, p3))
 			t_3 = {}
 		end
 	end
 	if #t_3 > 0 then
-		table.insert(t_2, createCanPublishPromise(text, t_3, p9, p10, p11))
+		table.insert(t_2, createCanPublishPromise(text, t_3, p1, p2, p3))
 	end
-	local var17, var18 = promiseModule.all(t_2):await()
+	local var2, var3 = promiseModule.all(t_2):await()
 	
-	if not var17 then
+	if not var2 then
 		return { status = "loadFailed" }
 	end
-	local var19 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule() ~= ""
-	local var20 = if var19 then getWhitelistIds() else {}
+	local var4 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule() ~= ""
+	local var5 = if var4 then getWhitelistIds() else {}
 	local t_4 = {}
 	
-	for i_2, v_2 in var18 do
+	for i_2, v_2 in var3 do
 		for i_3, v_3 in v_2.result do
-			local var22 = value[i_3]
+			local var6 = value[i_3]
 			
-			if var22 then
+			if var6 then
 				table.insert(t_4, {
 					assetId = i_3,
-					allowed = if var19 and not v_3 and var20[i_3] then true else v_3,
-					entry = var22[1]
+					allowed = if var4 and not v_3 and var5[i_3] then true else v_3,
+					entry = var6[1]
 				})
 			end
 		end

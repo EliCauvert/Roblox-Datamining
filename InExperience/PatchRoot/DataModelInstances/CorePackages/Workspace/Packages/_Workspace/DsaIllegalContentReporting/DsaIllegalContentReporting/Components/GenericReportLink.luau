@@ -14,31 +14,31 @@ local improveIllegalContentReportingLinkLook = game:DefineFastFlag("ImproveIlleg
 
 function GenericReportLink()
 	-- upvalues: improveIllegalContentReportingLinkLook (ref), reactModule (ref), useLocalization (ref), getIconRichText (ref), iconName (ref), default (ref), genericReportLink (ref), controlState (ref), view (ref), text (ref)
-	local var5 = nil
-	local var6 = nil
+	local var1 = nil
+	local var2 = nil
 	
 	if improveIllegalContentReportingLinkLook then
-		local var7, var8 = reactModule.useState(false)
-		var5 = var7
-		var6 = var8
+		local var3, var4 = reactModule.useState(false)
+		var1 = var3
+		var2 = var4
 	end
-	local var9 = useLocalization({
+	local var5 = useLocalization({
 		GenericReportLinkText = "Feature.ReportAbuse.Label.GenericReportIllegalContentMessage"
 	})
-	local var10 = if improveIllegalContentReportingLinkLook then `<b>{var9.GenericReportLinkText}</b> {getIconRichText(iconName.ArrowUpRightFromSquare)}` else nil
+	local var6 = if improveIllegalContentReportingLinkLook then `<b>{var5.GenericReportLinkText}</b> {getIconRichText(iconName.ArrowUpRightFromSquare)}` else nil
 	
 	return reactModule.createElement(view, { tag = "auto-xy col gap-small" }, {
 		reactModule.createElement(text, {
 			RichText = true,
 			tag = "auto-xy radius-small padding-xsmall text-wrap text-body-small",
-			Text = if improveIllegalContentReportingLinkLook then if var5 then `<u>{var10}</u>` else var10 else `<b>{var9.GenericReportLinkText}</b>`,
+			Text = if improveIllegalContentReportingLinkLook then if var1 then `<u>{var6}</u>` else var6 else `<b>{var5.GenericReportLinkText}</b>`,
 			onActivated = reactModule.useCallback(function()
 				-- upvalues: default (copy), genericReportLink (copy)
 				default:openURL(genericReportLink)
 			end, {}),
-			onStateChanged = if improveIllegalContentReportingLinkLook then if improveIllegalContentReportingLinkLook then reactModule.useCallback(function(p0)
-				-- upvalues: var6 (write), controlState (copy)
-				var6(p0 == controlState.Hover)
+			onStateChanged = if improveIllegalContentReportingLinkLook then if improveIllegalContentReportingLinkLook then reactModule.useCallback(function(p1)
+				-- upvalues: var2 (write), controlState (copy)
+				var2(p1 == controlState.Hover)
 			end, {}) else nil else nil
 		})
 	})

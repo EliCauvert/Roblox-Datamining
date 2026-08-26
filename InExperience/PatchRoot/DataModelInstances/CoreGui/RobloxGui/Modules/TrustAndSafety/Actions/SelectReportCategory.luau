@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p0)
-	return { reportCategory = p0 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
+	return { reportCategory = p1 }
 end)

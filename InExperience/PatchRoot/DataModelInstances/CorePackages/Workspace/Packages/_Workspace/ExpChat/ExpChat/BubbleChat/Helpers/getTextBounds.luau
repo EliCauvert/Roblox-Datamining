@@ -5,7 +5,7 @@ local textService = game:GetService("TextService")
 local getAbsolutePaddingbyDimensionModule = require(expChat.BubbleChat.Helpers.getAbsolutePaddingbyDimension)
 local getFFlagExpChatAlwaysRunTCS = require(expChat.Parent.SharedFlags).getFFlagExpChatAlwaysRunTCS
 
-local var5 = function(p0, p1)
+local var1 = function(p1, p2)
 	-- upvalues: coreGuiService (ref), getAbsolutePaddingbyDimensionModule (ref)
 	local richTextSizingLabel = Instance.new("ScreenGui")
 	richTextSizingLabel.Enabled = false
@@ -15,33 +15,33 @@ local var5 = function(p0, p1)
 	textLabel.TextWrapped = true
 	textLabel.RichText = true
 	textLabel.Parent = richTextSizingLabel
-	textLabel.Text = p0
-	textLabel.TextSize = p1.TextSize
+	textLabel.Text = p1
+	textLabel.TextSize = p2.TextSize
 	
-	if p1.FontFace then
-		textLabel.FontFace = p1.FontFace
+	if p2.FontFace then
+		textLabel.FontFace = p2.FontFace
 	else
-		textLabel.Font = p1.Font
+		textLabel.Font = p2.Font
 	end
 	local vector2
-	textLabel.Size = UDim2.fromOffset(p1.MaxWidth, 10000)
+	textLabel.Size = UDim2.fromOffset(p2.MaxWidth, 10000)
 	local textBounds = textLabel.TextBounds
 	richTextSizingLabel:Destroy()
 	local _ = nil
 	
-	if p1.UIPadding then
-		vector2 = Vector2.new((getAbsolutePaddingbyDimensionModule(p1.UIPadding.PaddingLeft, textBounds.X) + getAbsolutePaddingbyDimensionModule(p1.UIPadding.PaddingRight, textBounds.X)) * 2, getAbsolutePaddingbyDimensionModule(p1.UIPadding.PaddingTop, textBounds.Y) + getAbsolutePaddingbyDimensionModule(p1.UIPadding.PaddingBottom, textBounds.Y))
+	if p2.UIPadding then
+		vector2 = Vector2.new((getAbsolutePaddingbyDimensionModule(p2.UIPadding.PaddingLeft, textBounds.X) + getAbsolutePaddingbyDimensionModule(p2.UIPadding.PaddingRight, textBounds.X)) * 2, getAbsolutePaddingbyDimensionModule(p2.UIPadding.PaddingTop, textBounds.Y) + getAbsolutePaddingbyDimensionModule(p2.UIPadding.PaddingBottom, textBounds.Y))
 	else
-		local padding = p1.Padding
+		local padding = p2.Padding
 		vector2 = Vector2.new(padding * 4, padding * 2)
 	end
 	return vector2 + textBounds
 end
 
-return function(p2, p3, p4)
-	-- upvalues: textChatService (ref), getFFlagExpChatAlwaysRunTCS (ref), var5 (ref), textService (ref)
-	if p4 == nil then
-		p4 = textChatService
+return function(p1, p2, p3)
+	-- upvalues: textChatService (ref), getFFlagExpChatAlwaysRunTCS (ref), var1 (ref), textService (ref)
+	if p3 == nil then
+		p3 = textChatService
 	end
-	return if getFFlagExpChatAlwaysRunTCS() or p4.ChatVersion == Enum.ChatVersion.TextChatService then var5(p2, p3) else textService:GetTextSize(p2, p3.TextSize, p3.Font, Vector2.new(p3.MaxWidth, 10000)) + Vector2.new(p3.Padding * 4, p3.Padding * 2)
+	return if getFFlagExpChatAlwaysRunTCS() or p3.ChatVersion == Enum.ChatVersion.TextChatService then var1(p1, p2) else textService:GetTextSize(p1, p2.TextSize, p2.Font, Vector2.new(p2.MaxWidth, 10000)) + Vector2.new(p2.Padding * 4, p2.Padding * 2)
 end

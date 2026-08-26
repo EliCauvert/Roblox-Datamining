@@ -32,120 +32,120 @@ local mobileGameJoinCardShowExperienceNameOnly = game:DefineFastFlag("MobileGame
 local fFlagMobileGameJoinCardEDPFromTitleModule = require(gameJoinCard.Flags.FFlagMobileGameJoinCardEDPFromTitle)
 local fFlagMobileGameJoinCardEDPFromThumbnailModule = require(gameJoinCard.Flags.FFlagMobileGameJoinCardEDPFromThumbnail)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), fFlagMobileGameJoinCardThumbnailModule (ref), foundationModule (ref), guiService (ref), gameJoinCardTTIModule (ref), viewProfileSourceValues (ref), fFlagMobileGameJoinCardEDPFromThumbnailModule (ref), viewEDPsourceValues (ref), fFlagMobileGameJoinCardEDPFromTitleModule (ref), fFlagJoinCardAgeCheckUpsell (ref), useJoinCardCtaLoadTimeModule (ref), ctaType (ref), useLocalization (ref), overlayProvider (ref), sheet (ref), view (ref), mobileGameJoinCardHideUserAvatar (ref), image (ref), stateLayerAffordance (ref), skeleton (ref), mobileGameJoinCardShowExperienceNameOnly (ref), text (ref), userTile (ref), layoutMode (ref), ageCheckUpsellCTAModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var14 = useTokens()
-	local var15, var16 = reactModule.useState(false)
-	local var17 = nil
-	local var18 = nil
+	local var1 = useTokens()
+	local var2, var3 = reactModule.useState(false)
+	local var4 = nil
+	local var5 = nil
 	
 	if fFlagMobileGameJoinCardThumbnailModule then
-		local var19, var20 = reactModule.useState(false)
-		var17 = var19
-		var18 = var20
+		local var6, var7 = reactModule.useState(false)
+		var4 = var6
+		var5 = var7
 	end
-	local var24
-	local var21, var22 = reactModule.useState(nil)
-	local var23 = foundationModule.Hooks.useOverlay()
+	local var8
+	local var9, var10 = reactModule.useState(nil)
+	local var11 = foundationModule.Hooks.useOverlay()
 	
-	if var23 then
-		var24 = var23.AbsoluteSize.Y < var23.AbsoluteSize.X
-		var24 = nil
+	if var11 then
+		var8 = var11.AbsoluteSize.Y < var11.AbsoluteSize.X
+		var8 = nil
 	else
-		var24 = true
+		var8 = true
 	end
-	local var25 = not (guiService.ViewportDisplaySize == Enum.DisplaySize.Small and not var24)
-	local thumbnailImageUrl = p0.thumbnailImageUrl
-	local var26 = reactModule.useCallback(function(p1)
-		-- upvalues: var16 (ref), gameJoinCardTTIModule (copy)
-		if p1 == Enum.AssetFetchStatus.Success then
-			var16(true)
+	local var12 = not (guiService.ViewportDisplaySize == Enum.DisplaySize.Small and not var8)
+	local thumbnailImageUrl = p1.thumbnailImageUrl
+	local var13 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), gameJoinCardTTIModule (copy)
+		if p2 == Enum.AssetFetchStatus.Success then
+			var3(true)
 			gameJoinCardTTIModule.trackBannerLoaded()
 		end
 	end, {})
-	local var27 = if fFlagMobileGameJoinCardThumbnailModule then reactModule.useCallback(function(p2)
-		-- upvalues: var18 (write)
+	local var14 = if fFlagMobileGameJoinCardThumbnailModule then reactModule.useCallback(function(p2)
+		-- upvalues: var5 (write)
 		if p2 == Enum.AssetFetchStatus.Success then
-			var18(true)
+			var5(true)
 		end
 	end, {}) else nil
-	local var28 = fFlagMobileGameJoinCardThumbnailModule and (thumbnailImageUrl ~= nil and not var15)
-	local var29 = if fFlagMobileGameJoinCardThumbnailModule then not var15 and not var17 else not var15
+	local var15 = fFlagMobileGameJoinCardThumbnailModule and (thumbnailImageUrl ~= nil and not var2)
+	local var16 = if fFlagMobileGameJoinCardThumbnailModule then not var2 and not var4 else not var2
 	reactModule.useEffect(function()
 		-- upvalues: gameJoinCardTTIModule (copy)
 		gameJoinCardTTIModule.trackCardMounted()
 	end, {})
-	local var30 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), viewProfileSourceValues (copy)
-		p0.onViewProfile(viewProfileSourceValues.UserTile)
-	end, { p0 })
-	local var31 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), viewProfileSourceValues (copy)
-		p0.onViewProfile(viewProfileSourceValues.ViewProfileButton)
-	end, { p0 })
-	local var32 = if fFlagMobileGameJoinCardEDPFromThumbnailModule then reactModule.useCallback(function()
-		-- upvalues: p0 (ref), viewEDPsourceValues (copy)
-		p0.onViewExperienceDetails(viewEDPsourceValues.Thumbnail)
-	end, { p0.onViewExperienceDetails }) else nil
-	local var33 = if fFlagMobileGameJoinCardEDPFromTitleModule then reactModule.useCallback(function()
-		-- upvalues: p0 (ref), viewEDPsourceValues (copy)
-		p0.onViewExperienceDetails(viewEDPsourceValues.Title)
-	end, { p0.onViewExperienceDetails }) else nil
-	local var34 = var14.Typography.TitleMedium.FontSize * var14.Typography.TitleMedium.LineHeight
-	local var35 = var34 + var14.Typography.BodyMedium.FontSize * var14.Typography.BodyMedium.LineHeight + var14.Padding.Small
-	local var36 = 88 + var35
-	local var37 = fFlagJoinCardAgeCheckUpsell and p0.ageCheckRequired == true
+	local var17 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), viewProfileSourceValues (copy)
+		p1.onViewProfile(viewProfileSourceValues.UserTile)
+	end, { p1 })
+	local var18 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), viewProfileSourceValues (copy)
+		p1.onViewProfile(viewProfileSourceValues.ViewProfileButton)
+	end, { p1 })
+	local var19 = if fFlagMobileGameJoinCardEDPFromThumbnailModule then reactModule.useCallback(function()
+		-- upvalues: p1 (ref), viewEDPsourceValues (copy)
+		p1.onViewExperienceDetails(viewEDPsourceValues.Thumbnail)
+	end, { p1.onViewExperienceDetails }) else nil
+	local var20 = if fFlagMobileGameJoinCardEDPFromTitleModule then reactModule.useCallback(function()
+		-- upvalues: p1 (ref), viewEDPsourceValues (copy)
+		p1.onViewExperienceDetails(viewEDPsourceValues.Title)
+	end, { p1.onViewExperienceDetails }) else nil
+	local var21 = var1.Typography.TitleMedium.FontSize * var1.Typography.TitleMedium.LineHeight
+	local var22 = var21 + var1.Typography.BodyMedium.FontSize * var1.Typography.BodyMedium.LineHeight + var1.Padding.Small
+	local var23 = 88 + var22
+	local var24 = fFlagJoinCardAgeCheckUpsell and p1.ageCheckRequired == true
 	
 	if fFlagJoinCardAgeCheckUpsell then
 		useJoinCardCtaLoadTimeModule({
-			isLoading = p0.isLoading,
-			ctaType = if var37 then ctaType.AgeCheckUnlock else ctaType.Join,
-			wasCached = p0.wasPlayabilityCached
+			isLoading = p1.isLoading,
+			ctaType = if var24 then ctaType.AgeCheckUnlock else ctaType.Join,
+			wasCached = p1.wasPlayabilityCached
 		})
 	end
-	local var38 = useLocalization({
+	local var25 = useLocalization({
 		join = "Feature.Profile.Action.JoinGame",
 		viewProfile = "Feature.Profile.Action.ViewProfile",
 		chat = "Feature.Profile.Action.Chat",
 		playingExperience = {
 			"Feature.Profile.Label.PlayingExperience",
-			experienceName = p0.experienceName
+			experienceName = p1.experienceName
 		},
 		userIsPlayingExperience = {
 			"Feature.Profile.Label.UserIsPlayingExperience",
-			userName = p0.playerName,
-			experienceName = p0.experienceName
+			userName = p1.playerName,
+			experienceName = p1.experienceName
 		},
 		chatWithName = {
 			"Feature.Home.PeopleList.ChatWith",
-			username = p0.playerName
+			username = p1.playerName
 		}
 	})
 	local createElement = reactModule.createElement
-	local var39 = "Frame"
+	local var26 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		ref = var22
+		ref = var10
 	}
 	local t_1 = {}
-	local var42 = var21
+	local var27 = var9
 	
-	if var42 then
-		var42 = reactModule.createElement
-		var42 = var42(overlayProvider, { gui = var21 }, {
-			SheetRoot = reactModule.createElement(sheet.Root, { preferCenterSheet = true, onClose = p0.onClose }, {
+	if var27 then
+		var27 = reactModule.createElement
+		var27 = var27(overlayProvider, { gui = var9 }, {
+			SheetRoot = reactModule.createElement(sheet.Root, { preferCenterSheet = true, onClose = p1.onClose }, {
 				Content = reactModule.createElement(sheet.Content, nil, {
-					BottomPadding = if var25 then reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, var14.Padding.Medium) }) else nil,
+					BottomPadding = if var12 then reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, var1.Padding.Medium) }) else nil,
 					Layout = reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
 						BannerImageContainer = reactModule.createElement(view, {
 							tag = "size-full-0",
 							LayoutOrder = 1,
-							Size = if mobileGameJoinCardHideUserAvatar then UDim2.new(1, 0, 0, 187 - var14.Padding.XLarge) else UDim2.new(1, 0, 0, 111)
+							Size = if mobileGameJoinCardHideUserAvatar then UDim2.new(1, 0, 0, 187 - var1.Padding.XLarge) else UDim2.new(1, 0, 0, 111)
 						}, {
 							BannerImageClipper = reactModule.createElement(view, {
 								tag = "clip",
-								Position = UDim2.new(0, -var14.Padding.XLarge, 0, -var14.Padding.XLarge),
+								Position = UDim2.new(0, -var1.Padding.XLarge, 0, -var1.Padding.XLarge),
 								Size = UDim2.new(1, 40, 0, 187)
 							}, {
 								BannerImageCanvas = reactModule.createElement("CanvasGroup", {
@@ -156,42 +156,42 @@ return function(p0)
 									Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 15) }),
 									BannerImage = reactModule.createElement(image, {
 										BackgroundTransparency = 1,
-										Image = p0.bannerImageUrl,
+										Image = p1.bannerImageUrl,
 										Size = UDim2.fromScale(1, 1),
 										ScaleType = Enum.ScaleType.Crop,
 										ZIndex = if fFlagMobileGameJoinCardThumbnailModule then 3 else 2,
-										onLoaded = var26,
-										onActivated = if fFlagMobileGameJoinCardEDPFromThumbnailModule and var15 then var32 else nil,
-										stateLayer = if fFlagMobileGameJoinCardEDPFromThumbnailModule and var15 then { affordance = stateLayerAffordance.None } else nil
+										onLoaded = var13,
+										onActivated = if fFlagMobileGameJoinCardEDPFromThumbnailModule and var2 then var19 else nil,
+										stateLayer = if fFlagMobileGameJoinCardEDPFromThumbnailModule and var2 then { affordance = stateLayerAffordance.None } else nil
 									}),
-									BannerThumbnail = if var28 then reactModule.createElement(image, {
+									BannerThumbnail = if var15 then reactModule.createElement(image, {
 										BackgroundTransparency = 1,
 										ZIndex = 2,
 										Image = thumbnailImageUrl,
 										Size = UDim2.fromScale(1, 1),
 										ScaleType = Enum.ScaleType.Crop,
-										onLoaded = var27
+										onLoaded = var14
 									}) else nil,
-									BannerSkeleton = if var29 then reactModule.createElement(skeleton, { ZIndex = 1, Size = UDim2.fromScale(1, 1) }) else nil
+									BannerSkeleton = if var16 then reactModule.createElement(skeleton, { ZIndex = 1, Size = UDim2.fromScale(1, 1) }) else nil
 								})
 							})
 						}),
-						UserTileWrapper = if p0.userId then reactModule.createElement(view, {
+						UserTileWrapper = if p1.userId then reactModule.createElement(view, {
 							ZIndex = 2,
 							LayoutOrder = 2,
-							Size = if mobileGameJoinCardShowExperienceNameOnly then UDim2.new(1, 0, 0, var34) elseif mobileGameJoinCardHideUserAvatar then UDim2.new(1, 0, 0, var35) else UDim2.new(1, 0, 0, var36)
+							Size = if mobileGameJoinCardShowExperienceNameOnly then UDim2.new(1, 0, 0, var21) elseif mobileGameJoinCardHideUserAvatar then UDim2.new(1, 0, 0, var22) else UDim2.new(1, 0, 0, var23)
 						}, {
 							Tile = if mobileGameJoinCardShowExperienceNameOnly then reactModule.createElement(view, {
 								tag = "row align-x-center align-y-center size-full",
-								onActivated = if fFlagMobileGameJoinCardEDPFromTitleModule then var33 else nil,
+								onActivated = if fFlagMobileGameJoinCardEDPFromTitleModule then var20 else nil,
 								stateLayer = if fFlagMobileGameJoinCardEDPFromTitleModule then { affordance = stateLayerAffordance.None } else nil
 							}, {
 								ExperienceText = reactModule.createElement(text, {
 									tag = "shrink auto-xy text-align-x-center content-emphasis",
 									LayoutOrder = 1,
 									RichText = true,
-									fontStyle = var14.Typography.TitleMedium,
-									Text = p0.experienceName,
+									fontStyle = var1.Typography.TitleMedium,
+									Text = p1.experienceName,
 									TextTruncate = Enum.TextTruncate.AtEnd
 								})
 							}) elseif mobileGameJoinCardHideUserAvatar then reactModule.createElement(view, { tag = "col align-x-center align-y-center size-full" }, {
@@ -199,48 +199,48 @@ return function(p0)
 									tag = "shrink auto-xy text-wrap text-align-x-center content-default",
 									LayoutOrder = 1,
 									RichText = true,
-									fontStyle = var14.Typography.BodyMedium,
-									Text = var38.userIsPlayingExperience
+									fontStyle = var1.Typography.BodyMedium,
+									Text = var25.userIsPlayingExperience
 								})
 							}) else reactModule.createElement(userTile, {
-								userId = p0.userId,
-								title = p0.playerName,
-								subtitle = var38.playingExperience,
+								userId = p1.userId,
+								title = p1.playerName,
+								subtitle = var25.playingExperience,
 								layoutMode = layoutMode.compact,
 								avatarSize = UDim2.fromOffset(88, 88),
-								backplateStyle = var14.Color.Surface.Surface_100,
-								onActivated = var30
+								backplateStyle = var1.Color.Surface.Surface_100,
+								onActivated = var17
 							})
 						}) else nil,
 						Buttons = reactModule.createElement(view, {
 							tag = "col gap-small size-full-0 auto-y",
 							LayoutOrder = 3
 						}, {
-							PrimaryButton = if var37 then reactModule.createElement(ageCheckUpsellCTAModule, {
+							PrimaryButton = if var24 then reactModule.createElement(ageCheckUpsellCTAModule, {
 								LayoutOrder = 1,
-								onUnlockPressed = p0.onAgeCheckPressed or function() end
+								onUnlockPressed = p1.onAgeCheckPressed or function() end
 							}) else reactModule.createElement(button, {
 								LayoutOrder = 1,
-								text = var38.join,
-								onActivated = p0.onJoin,
+								text = var25.join,
+								onActivated = p1.onJoin,
 								variant = buttonVariant.Emphasis,
 								inputSize = inputSize.Medium,
-								isLoading = p0.isLoading,
-								isDisabled = not p0.isInExperience,
+								isLoading = p1.isLoading,
+								isDisabled = not p1.isInExperience,
 								width = UDim.new(1, 0)
 							}),
-							ChatButton = if p0.canUsePlatformChat then reactModule.createElement(button, {
+							ChatButton = if p1.canUsePlatformChat then reactModule.createElement(button, {
 								LayoutOrder = 2,
-								text = if mobileGameJoinCardShowExperienceNameOnly then var38.chatWithName else var38.chat,
-								onActivated = p0.onChat,
+								text = if mobileGameJoinCardShowExperienceNameOnly then var25.chatWithName else var25.chat,
+								onActivated = p1.onChat,
 								variant = buttonVariant.Standard,
 								inputSize = inputSize.Medium,
 								width = UDim.new(1, 0)
 							}) else nil,
 							SecondaryButton = reactModule.createElement(button, {
 								LayoutOrder = 3,
-								text = var38.viewProfile,
-								onActivated = var31,
+								text = var25.viewProfile,
+								onActivated = var18,
 								variant = buttonVariant.Utility,
 								inputSize = inputSize.Medium,
 								width = UDim.new(1, 0)
@@ -251,7 +251,7 @@ return function(p0)
 			})
 		})
 	end
-	t_1.SheetProvider = var42
+	t_1.SheetProvider = var27
 	
-	return createElement(var39, t, t_1)
+	return createElement(var26, t, t_1)
 end

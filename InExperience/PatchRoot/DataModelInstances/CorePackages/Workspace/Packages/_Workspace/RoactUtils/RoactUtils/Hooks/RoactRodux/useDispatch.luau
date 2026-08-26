@@ -3,10 +3,10 @@ local useStoreModule = require(script.Parent.useStore)
 
 return function()
 	-- upvalues: useStoreModule (ref), reactModule (ref)
-	local var2 = useStoreModule()
+	local var1 = useStoreModule()
 	
 	return reactModule.useCallback(function(...)
-		-- upvalues: var2 (ref)
-		return var2:dispatch(...)
-	end, { var2 })
+		-- upvalues: var1 (ref)
+		return var1:dispatch(...)
+	end, { var1 })
 end

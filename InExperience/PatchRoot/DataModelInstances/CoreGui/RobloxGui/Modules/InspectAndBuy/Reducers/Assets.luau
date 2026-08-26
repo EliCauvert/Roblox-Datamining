@@ -6,42 +6,42 @@ local assetInfoModule = require(parent.Models.AssetInfo)
 local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemTypeEnum
 
 return roduxModule.createReducer({}, {
-	[require(parent.Actions.SetFavoriteAsset).name] = function(p0, p1)
+	[require(parent.Actions.SetFavoriteAsset).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref), assetInfoModule (ref)
-		p0[p1.id] = cryoModule.Dictionary.join(cryoModule.Dictionary.join({}, p0[p1.id] or {}), assetInfoModule.fromGetFavoriteForAsset(p1.id, p1.isFavorite))
+		p1[p2.id] = cryoModule.Dictionary.join(cryoModule.Dictionary.join({}, p1[p2.id] or {}), assetInfoModule.fromGetFavoriteForAsset(p2.id, p2.isFavorite))
 		
-		return p0
+		return p1
 	end,
-	[require(parent.Actions.UpdateBulkPuchaseResults).name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p2, p3)
+	[require(parent.Actions.UpdateBulkPuchaseResults).name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p1, p2)
 		-- upvalues: cryoModule (ref), assetInfoModule (ref)
-		for i, v in p3.result.Items do
+		for i, v in p2.result.Items do
 			if v.type == Enum.MarketplaceProductType.AvatarAsset then
-				local var4 = cryoModule.Dictionary.join({}, p2[v.id])
-				p2[v.id] = cryoModule.Dictionary.join(var4, assetInfoModule.fromBulkPurchaseResult(v, var4))
+				local var1 = cryoModule.Dictionary.join({}, p1[v.id])
+				p1[v.id] = cryoModule.Dictionary.join(var1, assetInfoModule.fromBulkPurchaseResult(v, var1))
 			end
 		end
-		return p2
+		return p1
 	end else nil,
-	[require(parent.Actions.SetAssets).name] = function(p4, p5)
+	[require(parent.Actions.SetAssets).name] = function(p3, p4)
 		-- upvalues: cryoModule (ref), assetInfoModule (ref)
 		local t = {}
 		
-		for i, v in ipairs(p5.assets) do
+		for i, v in ipairs(p4.assets) do
 			assert(v.assetId ~= nil, "Expected an asset id when setting an asset's information.")
-			t[v.assetId] = cryoModule.Dictionary.join(p4[v.assetId] or {}, v)
+			t[v.assetId] = cryoModule.Dictionary.join(p3[v.assetId] or {}, v)
 			
 			if t[v.assetId] then
 				t[v.assetId] = assetInfoModule.getSaleDetailsForCollectibles(t[v.assetId])
 			end
 		end
-		return cryoModule.Dictionary.join(p4, t)
+		return cryoModule.Dictionary.join(p3, t)
 	end,
-	[require(parent.Actions.SetAvatarPreviewDetails).name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p6, p7)
+	[require(parent.Actions.SetAvatarPreviewDetails).name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p5, p6)
 		-- upvalues: itemTypeEnum (ref), assetInfoModule (ref), cryoModule (ref)
-		local look = p7.avatarPreviewDetails.look
+		local look = p6.avatarPreviewDetails.look
 		
 		if not look.items then
-			return p6
+			return p5
 		end
 		local t = {}
 		
@@ -50,22 +50,22 @@ return roduxModule.createReducer({}, {
 				t[tostring(v.id)] = assetInfoModule.fromAvatarPreviewItem(v)
 			end
 		end
-		return cryoModule.Dictionary.join(p6, t)
+		return cryoModule.Dictionary.join(p5, t)
 	end else nil,
-	[require(parent.Actions.SetBundlesAssetIsPartOf).name] = function(p8, p9)
+	[require(parent.Actions.SetBundlesAssetIsPartOf).name] = function(p7, p8)
 		-- upvalues: assetInfoModule (ref), cryoModule (ref)
-		local var7 = tostring(p9.assetId)
+		local var2 = tostring(p8.assetId)
 		
-		return cryoModule.Dictionary.join(p8, {
-			[var7] = cryoModule.Dictionary.join(p8[var7] or {}, assetInfoModule.fromGetAssetBundles(var7, p9.bundleIds))
+		return cryoModule.Dictionary.join(p7, {
+			[var2] = cryoModule.Dictionary.join(p7[var2] or {}, assetInfoModule.fromGetAssetBundles(var2, p8.bundleIds))
 		})
 	end,
-	[require(parent.Actions.SetAssetFromBundleInfo).name] = function(p10, p11)
+	[require(parent.Actions.SetAssetFromBundleInfo).name] = function(p7, p8)
 		-- upvalues: assetInfoModule (ref), cryoModule (ref)
-		local var8 = tostring(p11.assetId)
+		local var2 = tostring(p8.assetId)
 		
-		return cryoModule.Dictionary.join(p10, {
-			[var8] = cryoModule.Dictionary.join(p10[var8] or {}, assetInfoModule.fromBundleInfo(var8, p11.bundleInfo))
+		return cryoModule.Dictionary.join(p7, {
+			[var2] = cryoModule.Dictionary.join(p7[var2] or {}, assetInfoModule.fromBundleInfo(var2, p8.bundleInfo))
 		})
 	end
 })

@@ -5,23 +5,23 @@ local serviceModule = require(chrome.Service)
 local viewportUtilModule = require(chrome.ChromeShared.Service.ViewportUtil)
 local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
 local fFlagCenterInExperienceShopWindow = require(corePackagesService.Workspace.Packages.InExperienceShop).FFlagCenterInExperienceShopWindow
-local var6 = false
+local var1 = false
 
 local function getCenteredShopWindowPosition()
 	-- upvalues: viewportUtilModule (ref), guiService (ref)
-	local var8 = viewportUtilModule.screenSize:get()
+	local var2 = viewportUtilModule.screenSize:get()
 	local y = guiService.TopbarInset.Max.Y
-	local var9 = var8.Y - y
-	local var10 = if var8.X >= 844 then var9 < 754 else true
+	local var3 = var2.Y - y
+	local var4 = if var2.X >= 844 then var3 < 754 else true
 	
-	return UDim2.fromOffset((var8.X - (if var10 then var8.X else math.min(844, var8.X))) / 2, y + (var9 - (if var10 then var9 else math.min(754, var9))) / 2)
+	return UDim2.fromOffset((var2.X - (if var4 then var2.X else math.min(844, var2.X))) / 2, y + (var3 - (if var4 then var3 else math.min(754, var3))) / 2)
 end
 
 local function _()
-	-- upvalues: fFlagCenterInExperienceShopWindow (ref), var6 (write), serviceModule (ref), constantsModule (ref), getCenteredShopWindowPosition (ref)
-	if fFlagCenterInExperienceShopWindow and not var6 then
+	-- upvalues: fFlagCenterInExperienceShopWindow (ref), var1 (write), serviceModule (ref), constantsModule (ref), getCenteredShopWindowPosition (ref)
+	if fFlagCenterInExperienceShopWindow and not var1 then
 		serviceModule:updateWindowPosition(constantsModule.IN_EXPERIENCE_SHOP_ID, getCenteredShopWindowPosition())
-		var6 = true
+		var1 = true
 		
 		return
 	end
@@ -36,10 +36,10 @@ return {
 		return if fFlagCenterInExperienceShopWindow then getCenteredShopWindowPosition() else nil
 	end,
 	toggleInExperienceShopWindow = function()
-		-- upvalues: serviceModule (ref), constantsModule (ref), fFlagCenterInExperienceShopWindow (ref), var6 (write), getCenteredShopWindowPosition (ref)
-		if not serviceModule:isWindowOpen(constantsModule.IN_EXPERIENCE_SHOP_ID) and fFlagCenterInExperienceShopWindow and not var6 then
+		-- upvalues: serviceModule (ref), constantsModule (ref), fFlagCenterInExperienceShopWindow (ref), var1 (write), getCenteredShopWindowPosition (ref)
+		if not serviceModule:isWindowOpen(constantsModule.IN_EXPERIENCE_SHOP_ID) and fFlagCenterInExperienceShopWindow and not var1 then
 			serviceModule:updateWindowPosition(constantsModule.IN_EXPERIENCE_SHOP_ID, getCenteredShopWindowPosition())
-			var6 = true
+			var1 = true
 		end
 		serviceModule:toggleWindow(constantsModule.IN_EXPERIENCE_SHOP_ID)
 	end

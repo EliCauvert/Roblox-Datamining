@@ -48,10 +48,10 @@ local t_4 = {
 	lastUpdated = { 2025, 2, 25 }
 }
 
-local function logProfilerData(p0)
+local function logProfilerData(p1)
 	-- upvalues: telemetryService (ref), t (ref), t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref)
-	if next(p0) == nil then return end
-	for i, v in p0 do
+	if next(p1) == nil then return end
+	for i, v in p1 do
 		telemetryService:LogStat(t, {
 			customFields = {
 				profilerId = v.profilerId,
@@ -85,27 +85,27 @@ local function logProfilerData(p0)
 	end
 end
 
-local _ = function(p1, p2)
+local _ = function(p2, p3)
 	return {
 		updateCount = 0,
 		renderDuration = 0,
 		commitDuration = 0,
 		exclusiveRenderDuration = 0,
 		exclusiveCommitDuration = 0,
-		profilerId = p1,
-		milestoneName = p2
+		profilerId = p2,
+		milestoneName = p3
 	}
 end
 
-local _ = function(p3, p4)
-	p3.updateCount += 1
-	p3.renderDuration += p4.render.duration
-	p3.commitDuration += p4.commit.duration
-	p3.exclusiveRenderDuration += p4.render.exclusiveDuration
-	p3.exclusiveCommitDuration += p4.commit.exclusiveDuration
+local _ = function(p2, p3)
+	p2.updateCount += 1
+	p2.renderDuration += p3.render.duration
+	p2.commitDuration += p3.commit.duration
+	p2.exclusiveRenderDuration += p3.render.exclusiveDuration
+	p2.exclusiveCommitDuration += p3.commit.exclusiveDuration
 end
 
-return function(p5, p6)
+return function(p2, p3)
 	-- upvalues: isReactProfilingEnabled (ref), supportTerminalMilestoneInReactProfilerLogger (ref), supportedAppLaunchMilestonesForReactProfilerLogger (ref), loggingProtocolModule (ref), appLaunchReactProfilerLoggerCollectionTimeoutSec (ref), logProfilerData (ref)
 	if not isReactProfilingEnabled then return end
 	local t = {}
@@ -118,8 +118,8 @@ return function(p5, p6)
 		for i, v in t do
 			local vCount = #v
 			local t_1Count = #t_1
-			local var23 = 1
-			local var24 = 1
+			local var1 = 1
+			local var2 = 1
 			local t_3 = nil
 			local t_4 = {
 				milestoneName = "aggregate",
@@ -137,55 +137,55 @@ return function(p5, p6)
 		return t_2
 	end
 	
-	local function _(p7)
+	local function _(p4)
 		-- upvalues: t (write)
-		local var29 = t[p7]
+		local var3 = t[p4]
 		
-		if var29 == nil then
-			var29 = {}
-			t[p7] = var29
+		if var3 == nil then
+			var3 = {}
+			t[p4] = var3
 		end
-		return var29
+		return var3
 	end
 	
-	local onRenderConnection = p5.onRender:connect(function(p8)
+	local onRenderConnection = p2.onRender:connect(function(p4)
 		-- upvalues: t (write)
-		local profilerId = p8.profilerId
-		local var30 = t[profilerId]
+		local profilerId = p4.profilerId
+		local var3 = t[profilerId]
 		
-		if var30 == nil then
-			var30 = {}
-			t[profilerId] = var30
+		if var3 == nil then
+			var3 = {}
+			t[profilerId] = var3
 		end
-		table.insert(var30, {
-			render = p8,
+		table.insert(var3, {
+			render = p4,
 			commit = {
 				duration = 0,
 				exclusiveDuration = 0,
-				profilerId = p8.profilerId,
-				commitTime = p8.commitTime
+				profilerId = p4.profilerId,
+				commitTime = p4.commitTime
 			}
 		})
 	end)
-	local onCommitConnection = p5.onCommit:connect(function(p9)
+	local onCommitConnection = p2.onCommit:connect(function(p4)
 		-- upvalues: t (write)
-		local profilerId = p9.profilerId
-		local var31 = t[profilerId]
+		local profilerId = p4.profilerId
+		local var3 = t[profilerId]
 		
-		if var31 == nil then
-			var31 = {}
-			t[profilerId] = var31
+		if var3 == nil then
+			var3 = {}
+			t[profilerId] = var3
 		end
-		local var32 = var31[#var31]
+		local var4 = var3[#var3]
 		
-		if var32 == nil or var32.render.commitTime ~= p9.commitTime then
+		if var4 == nil or var4.render.commitTime ~= p4.commitTime then
 			warn("Profiler invariants are broken")
 			
 			return
 		end
-		var32.commit = p9
+		var4.commit = p4
 	end)
-	local var17 = nil
+	local var3 = nil
 	
 	if supportTerminalMilestoneInReactProfilerLogger then
 		local t_2 = {}
@@ -193,25 +193,25 @@ return function(p5, p6)
 		for i, v in supportedAppLaunchMilestonesForReactProfilerLogger:split(",") do
 			t_2[v] = true
 		end
-		local var19 = t_2
-		var17 = loggingProtocolModule.default:setDurationLoggerListener(function(p10)
-			-- upvalues: var19 (ref), t_1 (write), p6 (ref), var17 (write)
-			if var19[p10] then
-				table.insert(t_1, { eventName = p10, eventTime = os.clock() * 1000 })
+		local var4 = t_2
+		var3 = loggingProtocolModule.default:setDurationLoggerListener(function(p4)
+			-- upvalues: var4 (ref), t_1 (write), p3 (ref), var3 (write)
+			if var4[p4] then
+				table.insert(t_1, { eventName = p4, eventTime = os.clock() * 1000 })
 			end
-			if p6 ~= nil and p10 == p6 and var17 ~= nil then
-				var17:disconnect()
-				var17 = nil
+			if p3 ~= nil and p4 == p3 and var3 ~= nil then
+				var3:disconnect()
+				var3 = nil
 			end
 		end)
 	else
-		var17 = loggingProtocolModule.default:setDurationLoggerListener(function(p11)
+		var3 = loggingProtocolModule.default:setDurationLoggerListener(function(p4)
 			-- upvalues: t_1 (write)
-			table.insert(t_1, { eventName = p11, eventTime = os.clock() * 1000 })
+			table.insert(t_1, { eventName = p4, eventTime = os.clock() * 1000 })
 		end)
 	end
 	local _ = function()
-		-- upvalues: onRenderConnection (write), onCommitConnection (write), var17 (write)
+		-- upvalues: onRenderConnection (write), onCommitConnection (write), var3 (write)
 		if onRenderConnection ~= nil then
 			onRenderConnection:disconnect()
 			onRenderConnection = nil
@@ -220,14 +220,14 @@ return function(p5, p6)
 			onCommitConnection:disconnect()
 			onCommitConnection = nil
 		end
-		if var17 ~= nil then
-			var17:disconnect()
-			var17 = nil
+		if var3 ~= nil then
+			var3:disconnect()
+			var3 = nil
 		end
 	end
 	
 	task.delay(appLaunchReactProfilerLoggerCollectionTimeoutSec, function()
-		-- upvalues: onRenderConnection (write), onCommitConnection (write), var17 (write), correlateProfilerData (ref), logProfilerData (copy)
+		-- upvalues: onRenderConnection (write), onCommitConnection (write), var3 (write), correlateProfilerData (ref), logProfilerData (copy)
 		if onRenderConnection ~= nil then
 			onRenderConnection:disconnect()
 			onRenderConnection = nil
@@ -236,9 +236,9 @@ return function(p5, p6)
 			onCommitConnection:disconnect()
 			onCommitConnection = nil
 		end
-		if var17 ~= nil then
-			var17:disconnect()
-			var17 = nil
+		if var3 ~= nil then
+			var3:disconnect()
+			var3 = nil
 		end
 		logProfilerData(correlateProfilerData())
 	end)

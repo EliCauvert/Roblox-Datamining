@@ -16,24 +16,24 @@ local fFlagEnableInspectAndBuyV2RootFlag = require(corePackagesService.Workspace
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 local avatarViewport = roactModule.PureComponent:extend("AvatarViewport")
 
-function avatarViewport.init(p0)
+function avatarViewport.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.viewportFrameRef = roactModule.createRef()
-	p0.worldModelRef = roactModule.createRef()
-	p0.connections = {}
-	p0.xRotation = 0
-	p0.yRotation = 0
-	p0.rotationDeltaX = 0
-	p0.rotationDeltaY = 0
-	p0.mouseOrTouchDown = false
-	p0.delta = 0
-	p0.keys = {}
-	p0.lastPosition = Vector3.new(0, 0, 0)
-	p0.viewportCamera = Instance.new("Camera")
-	p0.viewportCamera.CameraType = Enum.CameraType.Scriptable
-	p0.model = p0.props.model
-	p0.lastInputTime = 2
-	p0.initialHrpPosition = if p0.props.model ~= nil then p0.props.model.HumanoidRootPart.Position else nil
+	p1.viewportFrameRef = roactModule.createRef()
+	p1.worldModelRef = roactModule.createRef()
+	p1.connections = {}
+	p1.xRotation = 0
+	p1.yRotation = 0
+	p1.rotationDeltaX = 0
+	p1.rotationDeltaY = 0
+	p1.mouseOrTouchDown = false
+	p1.delta = 0
+	p1.keys = {}
+	p1.lastPosition = Vector3.new(0, 0, 0)
+	p1.viewportCamera = Instance.new("Camera")
+	p1.viewportCamera.CameraType = Enum.CameraType.Scriptable
+	p1.model = p1.props.model
+	p1.lastInputTime = 2
+	p1.initialHrpPosition = if p1.props.model ~= nil then p1.props.model.HumanoidRootPart.Position else nil
 end
 
 function avatarViewport.didMount(p1)
@@ -49,33 +49,33 @@ function avatarViewport.didMount(p1)
 	p1:setUpGamepad()
 end
 
-function avatarViewport.didUpdate(p2, p3, _)
+function avatarViewport.didUpdate(p1, p2, _)
 	-- upvalues: fFlagEnableNewAvatarViewportPropsModule (ref)
-	if p2.props.visible and p2.props.humanoidDescription ~= p3.humanoidDescription and p2.model then
-		if fFlagEnableNewAvatarViewportPropsModule and p2.props.resetCameraAndAutoRotationOnModelChange then
-			p2.xRotation = 0
-			p2.yRotation = 0
+	if p1.props.visible and p1.props.humanoidDescription ~= p2.humanoidDescription and p1.model then
+		if fFlagEnableNewAvatarViewportPropsModule and p1.props.resetCameraAndAutoRotationOnModelChange then
+			p1.xRotation = 0
+			p1.yRotation = 0
 			
-			if not p2.props.disableAutoRotation then
-				p2.lastInputTime = tick()
+			if not p1.props.disableAutoRotation then
+				p1.lastInputTime = tick()
 			end
 		end
 		coroutine.wrap(function()
-			-- upvalues: p2 (ref)
-			p2.characterModelPool:maybeUpdateCharacter(p2.props.humanoidDescription)
+			-- upvalues: p1 (ref)
+			p1.characterModelPool:maybeUpdateCharacter(p1.props.humanoidDescription)
 		end)()
 	end
-	p2.gamepadRotating = false
-	p2.viewportCamera.Parent = p2.viewportFrameRef.current
-	p2.viewportFrameRef.current.CurrentCamera = p2.viewportCamera
+	p1.gamepadRotating = false
+	p1.viewportCamera.Parent = p1.viewportFrameRef.current
+	p1.viewportFrameRef.current.CurrentCamera = p1.viewportCamera
 	
-	if p2.props.gamepadEnabled ~= p3.gamepadEnabled then
-		if p2.props.gamepadEnabled then
-			p2:setUpGamepad()
+	if p1.props.gamepadEnabled ~= p2.gamepadEnabled then
+		if p1.props.gamepadEnabled then
+			p1:setUpGamepad()
 			
 			return
 		end
-		p2:unbindActions()
+		p1:unbindActions()
 	end
 end
 
@@ -84,18 +84,18 @@ function avatarViewport.setRotation(value)
 	local model = value.model
 	
 	if model then
-		local var13
+		local var1
 		local initialHrpPosition = value.initialHrpPosition or model.HumanoidRootPart.Position
 		local _ = nil
 		
 		if fFlagEnableNewAvatarViewportPropsModule and value.props.offsetOptions then
-			var13 = if value.model:FindFirstChildOfClass("Tool") then value.props.offsetOptions.toolOffset else value.props.offsetOptions.defaultCameraOffset
+			var1 = if value.model:FindFirstChildOfClass("Tool") then value.props.offsetOptions.toolOffset else value.props.offsetOptions.defaultCameraOffset
 		else
 			local _ = nil
 			local view = value.props.views[value.props.view]
-			var13 = if value.model:FindFirstChildOfClass("Tool") then view.ToolOffset else view.DefaultCameraOffset
+			var1 = if value.model:FindFirstChildOfClass("Tool") then view.ToolOffset else view.DefaultCameraOffset
 		end
-		value.viewportCamera.CFrame = CFrame.new((CFrame.new(initialHrpPosition) * CFrame.Angles(0, -value.yRotation, 0) * CFrame.Angles(value.xRotation, 0, 0) * var13).p, initialHrpPosition)
+		value.viewportCamera.CFrame = CFrame.new((CFrame.new(initialHrpPosition) * CFrame.Angles(0, -value.yRotation, 0) * CFrame.Angles(value.xRotation, 0, 0) * var1).p, initialHrpPosition)
 		
 		if fFlagEnableNewAvatarViewportPropsModule and value.props.cameraFieldOfView then
 			value.viewportCamera.FieldOfView = value.props.cameraFieldOfView
@@ -103,38 +103,38 @@ function avatarViewport.setRotation(value)
 	end
 end
 
-function avatarViewport.render(p4)
+function avatarViewport.render(p1)
 	-- upvalues: roactModule (ref), colorsModule (ref), fFlagEnableNewAvatarViewportPropsModule (ref), userInputService (ref)
-	local setScrollingEnabled = p4.props.setScrollingEnabled
+	local setScrollingEnabled = p1.props.setScrollingEnabled
 	
 	return roactModule.createElement("ViewportFrame", {
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Position = p4.props.position,
-		Size = p4.props.size,
-		BackgroundTransparency = p4.props.backgroundTransparency,
+		Position = p1.props.position,
+		Size = p1.props.size,
+		BackgroundTransparency = p1.props.backgroundTransparency,
 		BackgroundColor3 = colorsModule.Graphite,
 		BorderSizePixel = 0,
 		Active = true,
-		Visible = p4.props.visible,
-		[roactModule.Ref] = p4.viewportFrameRef,
-		[roactModule.Event.InputBegan] = function(_, p5)
-			-- upvalues: p4 (ref), fFlagEnableNewAvatarViewportPropsModule (copy), setScrollingEnabled (ref), userInputService (copy)
-			if p5.UserInputState == Enum.UserInputState.Begin then
-				p4.mouseOrTouchDown = true
-				p4.lastPosition = p5.Position
+		Visible = p1.props.visible,
+		[roactModule.Ref] = p1.viewportFrameRef,
+		[roactModule.Event.InputBegan] = function(_, p2)
+			-- upvalues: p1 (ref), fFlagEnableNewAvatarViewportPropsModule (copy), setScrollingEnabled (ref), userInputService (copy)
+			if p2.UserInputState == Enum.UserInputState.Begin then
+				p1.mouseOrTouchDown = true
+				p1.lastPosition = p2.Position
 				
 				if not fFlagEnableNewAvatarViewportPropsModule then
 					setScrollingEnabled(false)
 				elseif setScrollingEnabled then
 					setScrollingEnabled(false)
 				end
-				local inputEndedConnection = userInputService.InputEnded:connect(function(p6, _)
-					-- upvalues: p4 (copy), fFlagEnableNewAvatarViewportPropsModule (copy), setScrollingEnabled (copy)
-					if p6.UserInputType == Enum.UserInputType.MouseButton1 or p6.UserInputType == Enum.UserInputType.Touch then
-						if p4.mouseOrTouchDown then
-							p4.mouseOrTouchDown = false
-							p4.lastInputTime = tick()
-							p4:removeConnections()
+				local inputEndedConnection = userInputService.InputEnded:connect(function(p3, _)
+					-- upvalues: p1 (copy), fFlagEnableNewAvatarViewportPropsModule (copy), setScrollingEnabled (copy)
+					if p3.UserInputType == Enum.UserInputType.MouseButton1 or p3.UserInputType == Enum.UserInputType.Touch then
+						if p1.mouseOrTouchDown then
+							p1.mouseOrTouchDown = false
+							p1.lastInputTime = tick()
+							p1:removeConnections()
 						end
 						if fFlagEnableNewAvatarViewportPropsModule then
 							if setScrollingEnabled then
@@ -147,74 +147,74 @@ function avatarViewport.render(p4)
 						end
 					end
 				end)
-				table.insert(p4.connections, userInputService.InputChanged:connect(function(p7, _)
-					-- upvalues: p4 (copy)
-					if p7.UserInputType == Enum.UserInputType.MouseMovement and p4.mouseOrTouchDown or p7.UserInputType == Enum.UserInputType.Touch then
-						local var15 = p7.Position - p4.lastPosition
-						p4.lastPosition = p7.Position
-						p4.yRotation += var15.x * 0.0065
-						p4.xRotation += var15.y * 0.0065
-						p4.lastInputTime = tick()
+				table.insert(p1.connections, userInputService.InputChanged:connect(function(p3, _)
+					-- upvalues: p1 (copy)
+					if p3.UserInputType == Enum.UserInputType.MouseMovement and p1.mouseOrTouchDown or p3.UserInputType == Enum.UserInputType.Touch then
+						local var1 = p3.Position - p1.lastPosition
+						p1.lastPosition = p3.Position
+						p1.yRotation += var1.x * 0.0065
+						p1.xRotation += var1.y * 0.0065
+						p1.lastInputTime = tick()
 					end
 				end))
-				table.insert(p4.connections, inputEndedConnection)
+				table.insert(p1.connections, inputEndedConnection)
 			end
 		end
 	}, {
-		WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p4.worldModelRef })
+		WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p1.worldModelRef })
 	})
 end
 
-function avatarViewport.handleSpin(p8)
+function avatarViewport.handleSpin(p1)
 	-- upvalues: fFlagEnableNewAvatarViewportPropsModule (ref), runService (ref)
-	local var16 = false
+	local var1 = false
 	spawn(function()
-		-- upvalues: p8 (ref), fFlagEnableNewAvatarViewportPropsModule (copy), var16 (write), runService (copy)
-		while p8.isMounted do
-			if tick() - p8.lastInputTime <= 2 or p8.mouseOrTouchDown or p8.gamepadRotating then
-				var16 = false
-			elseif not fFlagEnableNewAvatarViewportPropsModule or not p8.props.disableAutoRotation then
-				var16 = true
+		-- upvalues: p1 (ref), fFlagEnableNewAvatarViewportPropsModule (copy), var1 (write), runService (copy)
+		while p1.isMounted do
+			if tick() - p1.lastInputTime <= 2 or p1.mouseOrTouchDown or p1.gamepadRotating then
+				var1 = false
+			elseif not fFlagEnableNewAvatarViewportPropsModule or not p1.props.disableAutoRotation then
+				var1 = true
 			end
-			local function _(p9, p10)
-				p9 %= 6.28318530718
+			local function _(p2, p3)
+				p2 %= 6.28318530718
 				
-				if p9 > 3.14159265359 then
-					p9 += p10
+				if p2 > 3.14159265359 then
+					p2 += p3
 					
-					if p9 > 6.28318530718 then
+					if p2 > 6.28318530718 then
 						return 0
 					end
 				else
-					p9 -= p10
+					p2 -= p3
 					
-					return if p9 < 0 then 0 else p9
+					return if p2 < 0 then 0 else p2
 				end
 			end
 			
-			if var16 then
-				local var18
-				local var17 = p8.xRotation % 6.28318530718
+			if var1 then
+				local var2
+				local var3 = p1.xRotation % 6.28318530718
 				
-				if var17 > 3.14159265359 then
-					var17 += 0.03490658504
+				if var3 > 3.14159265359 then
+					var3 += 0.03490658504
 					
-					if var17 > 6.28318530718 then
-						var18 = 0
+					if var3 > 6.28318530718 then
+						var2 = 0
 					else
-						p8.xRotation = var18
-						p8.yRotation += 0.012217304764
+						p1.xRotation = var2
+						p1.yRotation += 0.012217304764
 					end
 				else
-					var17 -= 0.03490658504
-					var18 = if var17 < 0 then 0 else var17
+					var3 -= 0.03490658504
+					var2 = if var3 < 0 then 0 else var3
 				end
-			elseif p8.gamepadRotating then
-				p8.yRotation += p8.delta * p8.rotationDeltaY
-				p8.xRotation += p8.delta * p8.rotationDeltaX
+			elseif p1.gamepadRotating then
+				p1.yRotation += p1.delta * p1.rotationDeltaY
+				p1.xRotation += p1.delta * p1.rotationDeltaX
 			end
-			p8:setRotation()
-			p8.delta = runService.RenderStepped:wait()
+			p1:setRotation()
+			p1.delta = runService.RenderStepped:wait()
 		end
 	end)
 end
@@ -225,10 +225,10 @@ function avatarViewport.setUpGamepad(value)
 	if userInputService.GamepadEnabled then
 		local vector2 = Vector2.new(0, 0)
 		contextActionService:UnbindCoreAction("RotateModel")
-		contextActionService:BindCoreAction("RotateModel", function(_, p11, p12)
+		contextActionService:BindCoreAction("RotateModel", function(_, p2, p3)
 			-- upvalues: vector2 (write), value (ref)
-			if p11 == Enum.UserInputState.Change then
-				vector2 = p12.Position or vector2
+			if p2 == Enum.UserInputState.Change then
+				vector2 = p3.Position or vector2
 				vector2 = Vector2.new(vector2.X, vector2.Y)
 				
 				if math.abs(vector2.X) > 0.2 or math.abs(vector2.Y) > 0.2 then
@@ -250,34 +250,34 @@ function avatarViewport.unbindActions(_)
 	contextActionService:UnbindCoreAction("RotateModel")
 end
 
-function avatarViewport.removeConnections(p13)
-	for i, v in pairs(p13.connections) do
+function avatarViewport.removeConnections(p2)
+	for i, v in pairs(p2.connections) do
 		v:disconnect()
 	end
 end
 
-function avatarViewport.willUnmount(p14)
-	p14.isMounted = false
+function avatarViewport.willUnmount(p3)
+	p3.isMounted = false
 	
-	if p14.characterModelPool then
-		p14.characterModelPool:onDestroy()
+	if p3.characterModelPool then
+		p3.characterModelPool:onDestroy()
 	end
-	p14:unbindActions()
-	p14:removeConnections()
+	p3:unbindActions()
+	p3:removeConnections()
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p17, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p3, _)
 	return {
-		view = p17.view,
-		tryingOnInfo = p17.tryingOnInfo,
-		gamepadEnabled = p17.gamepadEnabled
+		view = p3.view,
+		tryingOnInfo = p3.tryingOnInfo,
+		gamepadEnabled = p3.gamepadEnabled
 	}
-end)(function(p15)
+end)(function(p3)
 	-- upvalues: roactModule (ref), inspectAndBuyContextModule (ref), cryoModule (ref), avatarViewport (ref)
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p16)
-			-- upvalues: cryoModule (copy), p15 (ref), roactModule (copy), avatarViewport (copy)
-			return roactModule.createElement(avatarViewport, cryoModule.Dictionary.join(p15, { views = p16 }))
+		render = function(p4)
+			-- upvalues: cryoModule (copy), p3 (ref), roactModule (copy), avatarViewport (copy)
+			return roactModule.createElement(avatarViewport, cryoModule.Dictionary.join(p3, { views = p4 }))
 		end
 	})
 end)

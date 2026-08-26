@@ -1,18 +1,18 @@
 ﻿local localization = require(game:GetService("CorePackages").Workspace.Packages.RobloxAppLocales).Localization
 local _ = nil
 local _ = nil
-local var0 = nil
+local var1 = nil
 local ok, status = pcall(function()
 	return game:GetService("LocalizationService").RobloxLocaleId
 end)
-local var1 = ok
-local var2 = status
+local var2 = ok
+local var3 = status
 
 return {
-	LocStringUA = function(_, p0)
-		-- upvalues: var1 (write), var0 (write), localization (ref), var2 (write)
-		var0 = if var1 and not var0 then localization.new(var2) else localization.new("en-us")
+	LocStringUA = function(_, p1)
+		-- upvalues: var2 (write), var1 (write), localization (ref), var3 (write)
+		var1 = if var2 and not var1 then localization.new(var3) else localization.new("en-us")
 		
-		return var0.localizationContext:getString(var2, p0) or p0
+		return var1.localizationContext:getString(var3, p1) or p1
 	end
 }

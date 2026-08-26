@@ -24,10 +24,10 @@ local numberSequence_3 = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: numberSequence_3 (ref), numberSequence_2 (ref), numberSequence_1 (ref), numberSequence (ref), getBuilderIconForKeycodeModule (ref), icon (ref)
 	return {
-		fade = p0.Size.Size_1000,
+		fade = p1.Size.Size_1000,
 		directionIcon = {
 			[Enum.HorizontalAlignment.Right] = {
 				[Enum.PreferredInput.Gamepad] = getBuilderIconForKeycodeModule(Enum.KeyCode.ButtonR1) or icon.ChevronSmallRight,

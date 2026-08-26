@@ -34,66 +34,66 @@ local list = {
 }
 local t = { skipFetch = true }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: list (ref), useLocalUserId (ref), useGetRecommendationsModule (ref), useFriendsListOrderedByPresence (ref), fIntFriendsCarouselInitialFetchSize (ref), prefetchFriendGameMedia (ref), usePrefetchInGameFriendsMedia (ref), fFlagFixIsConsoleCheckForSocialCarousel (ref), usePreferredInput (ref), responsiveModule (ref), fFlagEnableRecommendationsForPCGDK (ref), thirdPartyUserService (ref), fFlagSocialCarouselShareQREnabled (ref), useIsSpatial (ref), useSelector (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), getDeepValueModule (ref), constantsModule (ref), useGetFriendsCountByUserId (ref), t (ref), fIntSocialCarouselShowRecsLimit (ref), reactModule (ref), tileGroup (ref), tile (ref), cryoModule (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref)
-	local var20
-	p1 = p1 or list
-	local var17 = useLocalUserId()
-	local var18 = useGetRecommendationsModule(var17)
-	local var19 = useFriendsListOrderedByPresence({
-		userId = var17,
+	local var1
+	p2 = p2 or list
+	local var2 = useLocalUserId()
+	local var3 = useGetRecommendationsModule(var2)
+	local var4 = useFriendsListOrderedByPresence({
+		userId = var2,
 		pageSize = fIntFriendsCarouselInitialFetchSize
 	})
 	
 	if prefetchFriendGameMedia then
-		usePrefetchInGameFriendsMedia(var19.onlineFriends)
+		usePrefetchInGameFriendsMedia(var4.onlineFriends)
 	end
 	if fFlagFixIsConsoleCheckForSocialCarousel then
 		local _ = usePreferredInput() == responsiveModule.Input.Directional
-	var20 = if fFlagEnableRecommendationsForPCGDK and thirdPartyUserService then thirdPartyUserService:HaveActiveUser() else usePreferredInput() == responsiveModule.Input.Directional
-	local var21 = if fFlagSocialCarouselShareQREnabled then useIsSpatial() else false
-	local var22 = useSelector(function(p2)
-		-- upvalues: fFlagFriendsCountDataHydrationMigrationEnabled (copy), getDeepValueModule (copy), p0 (ref), constantsModule (copy), var17 (ref)
+	var1 = if fFlagEnableRecommendationsForPCGDK and thirdPartyUserService then thirdPartyUserService:HaveActiveUser() else usePreferredInput() == responsiveModule.Input.Directional
+	local var5 = if fFlagSocialCarouselShareQREnabled then useIsSpatial() else false
+	local var6 = useSelector(function(p3)
+		-- upvalues: fFlagFriendsCountDataHydrationMigrationEnabled (copy), getDeepValueModule (copy), p1 (ref), constantsModule (copy), var2 (ref)
 		return {
-			friendCount = if fFlagFriendsCountDataHydrationMigrationEnabled then nil else getDeepValueModule(p2, string.format("%s.Friends.countsByUserId.%s", p0 or constantsModule.RODUX_KEY, var17 or "")) or 0,
-			friendRequestCount = getDeepValueModule(p2, string.format("%s.Friends.requests.receivedCount", p0 or constantsModule.RODUX_KEY)) or 0
+			friendCount = if fFlagFriendsCountDataHydrationMigrationEnabled then nil else getDeepValueModule(p3, string.format("%s.Friends.countsByUserId.%s", p1 or constantsModule.RODUX_KEY, var2 or "")) or 0,
+			friendRequestCount = getDeepValueModule(p3, string.format("%s.Friends.requests.receivedCount", p1 or constantsModule.RODUX_KEY)) or 0
 		}
 	end)
-	local var23 = if fFlagFriendsCountDataHydrationMigrationEnabled then useGetFriendsCountByUserId(tostring(var17 or ""), t) or 0 else var22.friendCount
-	local var24 = var20 and var23 <= fIntSocialCarouselShowRecsLimit
-	local var25 = var23 == 0 and not var20
-	local var26 = fFlagSocialCarouselShareQREnabled and (var23 == 0 and (not var20 and not var21))
-	local var27 = reactModule.useMemo(function()
-		-- upvalues: tileGroup (copy), var19 (ref), tile (copy), var24 (ref), var18 (ref), var26 (ref), var25 (ref)
+	local var7 = if fFlagFriendsCountDataHydrationMigrationEnabled then useGetFriendsCountByUserId(tostring(var2 or ""), t) or 0 else var6.friendCount
+	local var8 = var1 and var7 <= fIntSocialCarouselShowRecsLimit
+	local var9 = var7 == 0 and not var1
+	local var10 = fFlagSocialCarouselShareQREnabled and (var7 == 0 and (not var1 and not var5))
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: tileGroup (copy), var4 (ref), tile (copy), var8 (ref), var3 (ref), var10 (ref), var9 (ref)
 		return {
 			[tileGroup.FriendsList] = {
-				{ tiles = var19.onlineFriends, tileType = tile.Friend },
-				{ tiles = var19.offlineFriends, tileType = tile.Friend }
+				{ tiles = var4.onlineFriends, tileType = tile.Friend },
+				{ tiles = var4.offlineFriends, tileType = tile.Friend }
 			},
 			[tileGroup.FriendsListWithRecommendations] = {
-				{ tiles = var19.onlineFriends, tileType = tile.Friend },
-				if var24 then { tiles = var18, tileType = tile.Recommendation } else nil,
-				{ tiles = var19.offlineFriends, tileType = tile.Friend }
+				{ tiles = var4.onlineFriends, tileType = tile.Friend },
+				if var8 then { tiles = var3, tileType = tile.Recommendation } else nil,
+				{ tiles = var4.offlineFriends, tileType = tile.Friend }
 			},
 			[tileGroup.AddFriends] = {
 				{ tileType = tile.AddFriends },
-				if var26 then { tileType = tile.ShareQR } else nil,
-				if var25 then { tileType = tile.FriendsHint } else nil
+				if var10 then { tileType = tile.ShareQR } else nil,
+				if var9 then { tileType = tile.FriendsHint } else nil
 			},
 			[tileGroup.StartSquad] = { { tileType = tile.StartSquad } }
 		}
 	end, {
-		var19.onlineFriends, var19.offlineFriends, var18, var24, var25,
-		if fFlagSocialCarouselShareQREnabled then var26 else nil
+		var4.onlineFriends, var4.offlineFriends, var3, var8, var9,
+		if fFlagSocialCarouselShareQREnabled then var10 else nil
 	})
 	
 	return {
 		tiles = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), var27 (ref), cryoModule (copy)
+			-- upvalues: p2 (ref), var11 (ref), cryoModule (copy)
 			local t = {}
 			
-			for i, v in p1 do
-				for i_1, v_1 in var27[v.tileGroup] do
+			for i, v in p2 do
+				for i_1, v_1 in var11[v.tileGroup] do
 					if v_1 then
 						if v_1.tiles then
 							for i_2, v_2 in v_1.tiles do
@@ -106,11 +106,11 @@ return function(p0, p1)
 				end
 			end
 			return t
-		end, { var27, p1 }),
-		friendCount = var23,
-		friendRequestCount = var22.friendRequestCount,
-		recommendationCount = #var18,
-		refreshFriendsList = var19.refreshFriendsData,
-		isLoading = fFlagSocialCarouselShowLoadingSkeletonModule and var19.isLoading
+		end, { var11, p2 }),
+		friendCount = var7,
+		friendRequestCount = var6.friendRequestCount,
+		recommendationCount = #var3,
+		refreshFriendsList = var4.refreshFriendsData,
+		isLoading = fFlagSocialCarouselShowLoadingSkeletonModule and var4.isLoading
 	}
 end

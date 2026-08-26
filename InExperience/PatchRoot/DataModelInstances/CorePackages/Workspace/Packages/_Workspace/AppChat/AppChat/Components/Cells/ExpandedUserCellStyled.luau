@@ -21,29 +21,29 @@ local t = {
 	style = require(appChat.SocialLibraries).Components.TestStyle
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), presenceBubbleCellModule (ref)
-	local var5 = cryoModule.Dictionary.join(t, p0)
-	local style = var5.style
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local style = var1.style
 	local theme = style.Theme
 	local font = style.Font
 	local fontSize350 = style.Tokens.FontSize.FontSize_350
-	local isTable = type(var5.avatarCirclePresenceImage) == "table"
+	local isTable = type(var1.avatarCirclePresenceImage) == "table"
 	
 	return reactModule.createElement(presenceBubbleCellModule, {
-		childWidth = var5.childWidth,
-		titleText = var5.titleText,
-		secondaryTitleText = var5.secondaryTitleText,
-		subTitleText = var5.subTitleText,
-		subTitleIcon = var5.subTitleIcon,
-		avatarCirclePresenceImage = var5.avatarCirclePresenceImage,
-		thumbnails = var5.thumbnails,
-		onActivated = var5.onActivated,
-		onCircleActivated = var5.onCircleActivated,
-		Size = var5.Size,
-		isLoading = var5.isLoading,
+		childWidth = var1.childWidth,
+		titleText = var1.titleText,
+		secondaryTitleText = var1.secondaryTitleText,
+		subTitleText = var1.subTitleText,
+		subTitleIcon = var1.subTitleIcon,
+		avatarCirclePresenceImage = var1.avatarCirclePresenceImage,
+		thumbnails = var1.thumbnails,
+		onActivated = var1.onActivated,
+		onCircleActivated = var1.onCircleActivated,
+		Size = var1.Size,
+		isLoading = var1.isLoading,
 		showNewPresenceImage = isTable,
-		pillText = var5.pillText,
+		pillText = var1.pillText,
 		BackgroundColor3 = theme.BackgroundDefault.Color,
 		BackgroundTransparency = theme.BackgroundDefault.Transparency,
 		onPressedBackgroundColor3 = theme.BackgroundOnPress.Color,
@@ -59,16 +59,16 @@ return reactModule.memo(function(p0)
 		subTitleTextColor3 = theme.TextDefault.Color,
 		subTitleTextSize = style.Tokens.FontSize.FontSize_400,
 		titleFont = font.Header2.Font,
-		titleTextTransparency = if var5.shouldMuteTitleColor or not var5.boldTitle then theme.TextDefault.Transparency else theme.TextEmphasis.Transparency,
-		titleTextColor3 = if var5.shouldMuteTitleColor or not var5.boldTitle then theme.TextDefault.Color else theme.TextEmphasis.Color,
+		titleTextTransparency = if var1.shouldMuteTitleColor or not var1.boldTitle then theme.TextDefault.Transparency else theme.TextEmphasis.Transparency,
+		titleTextColor3 = if var1.shouldMuteTitleColor or not var1.boldTitle then theme.TextDefault.Color else theme.TextEmphasis.Color,
 		titleTextSize = fontSize350,
 		secondaryTitleFont = font.Header2.Font,
 		secondaryTitleTextTransparency = theme.TextMuted.Transparency,
 		secondaryTitleTextColor3 = theme.TextMuted.Color,
 		secondaryTitleTextSize = fontSize350,
-		showDivider = var5.showDivider,
+		showDivider = var1.showDivider,
 		dividerTransparency = theme.Divider.Transparency,
 		dividerColor3 = theme.Divider.Color,
-		hideLeftAvatarPadding = var5.hideLeftAvatarPadding
-	}, var5.children or {})
+		hideLeftAvatarPadding = var1.hideLeftAvatarPadding
+	}, var1.children or {})
 end)

@@ -1,13 +1,13 @@
 ﻿local configModule = require(script:FindFirstAncestor("ExpChat").Config)
 
-return function(p0)
+return function(p1)
 	-- upvalues: configModule (ref)
 	local t = {}
 	
 	for i, v in pairs(configModule.DefaultBubbleChatMessagePropertiesInstanceSettings) do
-		t[i] = p0[i]
+		t[i] = p1[i]
 	end
-	local imageLabel = p0:FindFirstChildOfClass("ImageLabel")
+	local imageLabel = p1:FindFirstChildOfClass("ImageLabel")
 	
 	if imageLabel then
 		local t_1 = {}
@@ -17,7 +17,7 @@ return function(p0)
 		end
 		t.ImageLabel = t_1
 	end
-	local UIGradient = p0:FindFirstChildOfClass("UIGradient")
+	local UIGradient = p1:FindFirstChildOfClass("UIGradient")
 	
 	if UIGradient then
 		local t_1 = {}
@@ -27,7 +27,7 @@ return function(p0)
 		end
 		t.UIGradient = t_1
 	end
-	local UICorner = p0:FindFirstChildOfClass("UICorner")
+	local UICorner = p1:FindFirstChildOfClass("UICorner")
 	
 	if UICorner then
 		local t_1 = {}
@@ -37,7 +37,7 @@ return function(p0)
 		end
 		t.UICorner = t_1
 	end
-	local UIPadding = p0:FindFirstChildOfClass("UIPadding")
+	local UIPadding = p1:FindFirstChildOfClass("UIPadding")
 	
 	if UIPadding then
 		local t_1 = {}

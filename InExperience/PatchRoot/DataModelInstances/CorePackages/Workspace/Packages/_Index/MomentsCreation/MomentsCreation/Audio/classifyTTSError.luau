@@ -7,7 +7,7 @@ local t = {
 	Timeout = "timeout"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref)
-	return if p0 == nil then "failure" else t[p0] or "failure"
+	return if p1 == nil then "failure" else t[p1] or "failure"
 end

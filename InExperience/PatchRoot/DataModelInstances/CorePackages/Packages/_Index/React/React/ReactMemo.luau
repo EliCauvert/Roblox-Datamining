@@ -13,58 +13,58 @@ local isValidElementType = sharedModule.isValidElementType
 local getComponentName = sharedModule.getComponentName
 
 return {
-	memo = function(p0, p1)
+	memo = function(p1, p2)
 		-- upvalues: reactGlobalsModule (ref), isValidElementType (ref), object (ref), array (ref), REACT_ELEMENT_TYPE (ref), getComponentName (ref), inspect (ref), console (ref), REACT_MEMO_TYPE (ref)
-		if reactGlobalsModule.__DEV__ and not isValidElementType(p0) then
-			local var3 = ""
+		if reactGlobalsModule.__DEV__ and not isValidElementType(p1) then
+			local var1 = ""
 			
-			if p0 == nil or typeof(p0) == "table" and #object.keys(p0) == 0 then
-				var3 ..= " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports."
+			if p1 == nil or typeof(p1) == "table" and #object.keys(p1) == 0 then
+				var1 ..= " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports."
 			end
-			local var4
+			local var2
 			local _ = nil
 			
-			if p0 == nil then
-				var4 = "nil"
-			elseif array.isArray(p0) then
-				var4 = "array"
-			elseif p0 == nil or typeof(p0) ~= "table" or p0["$$typeof"] ~= REACT_ELEMENT_TYPE then
-				var4 = typeof(p0)
+			if p1 == nil then
+				var2 = "nil"
+			elseif array.isArray(p1) then
+				var2 = "array"
+			elseif p1 == nil or typeof(p1) ~= "table" or p1["$$typeof"] ~= REACT_ELEMENT_TYPE then
+				var2 = typeof(p1)
 				
-				if p0 ~= nil then
-					var3 = "\n" .. inspect(p0)
+				if p1 ~= nil then
+					var1 = "\n" .. inspect(p1)
 				end
 			else
-				var4 = string.format("<%s />", getComponentName(p0.type) or "UNKNOWN")
-				var3 = " Did you accidentally export a JSX literal or Element instead of a component?"
+				var2 = string.format("<%s />", getComponentName(p1.type) or "UNKNOWN")
+				var1 = " Did you accidentally export a JSX literal or Element instead of a component?"
 			end
-			console.error("memo: The first argument must be a component. Instead received: `%s`.%s", var4, var3)
+			console.error("memo: The first argument must be a component. Instead received: `%s`.%s", var2, var1)
 		end
 		local t = {
 			["$$typeof"] = REACT_MEMO_TYPE,
-			type = p0,
-			compare = p1 or nil
+			type = p1,
+			compare = p2 or nil
 		}
 		
 		if reactGlobalsModule.__DEV__ then
-			local var6 = nil
+			local var3 = nil
 			setmetatable(t, {
-				__index = function(p2, p3)
-					-- upvalues: var6 (write)
-					return if p3 == "displayName" then var6 else rawget(p2, p3)
+				__index = function(p3, p4)
+					-- upvalues: var3 (write)
+					return if p4 == "displayName" then var3 else rawget(p3, p4)
 				end,
-				__newindex = function(p4, p5, p6)
-					-- upvalues: var6 (write), p0 (ref)
-					if p5 == "displayName" then
-						var6 = p6
+				__newindex = function(p3, p4, p5)
+					-- upvalues: var3 (write), p1 (ref)
+					if p4 == "displayName" then
+						var3 = p5
 						
-						if typeof(p0) == "table" and p0.displayName == nil then
-							p0.displayName = var6
+						if typeof(p1) == "table" and p1.displayName == nil then
+							p1.displayName = var3
 							
 							return
 						end
 					else
-						rawset(p4, p5, p6)
+						rawset(p3, p4, p5)
 					end
 				end
 			})

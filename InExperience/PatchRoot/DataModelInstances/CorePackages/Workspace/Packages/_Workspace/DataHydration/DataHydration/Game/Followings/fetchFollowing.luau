@@ -5,16 +5,16 @@ local promiseModule = require(parent.Promise)
 local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
 local followingsUrlBuilderModule = require(script.Parent.FollowingsUrlBuilder)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getLocalPlayerUserId (ref), promiseModule (ref), followingsUrlBuilderModule (ref), httpRequestModule (ref)
-	local var4 = getLocalPlayerUserId()
+	local var1 = getLocalPlayerUserId()
 	
-	return if var4 and var4 > 0 then httpRequestModule.config({
-		requestFunction = function(p1, p2, p3)
+	return if var1 and var1 > 0 then httpRequestModule.config({
+		requestFunction = function(p2, p3, p4)
 			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
+			return httpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
 		end
-	})(followingsUrlBuilderModule.buildFollowingStatusUrl(tostring(var4), p0), "GET") else promiseModule.reject({
+	})(followingsUrlBuilderModule.buildFollowingStatusUrl(tostring(var1), p1), "GET") else promiseModule.reject({
 		ClientError = "Missing or invalid local player ID",
 		message = "Cannot fetch following status: missing or invalid local player ID"
 	})

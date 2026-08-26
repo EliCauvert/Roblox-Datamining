@@ -14,22 +14,22 @@ local SHOES_BUNDLE_TYPE_ID = constants.SHOES_BUNDLE_TYPE_ID
 local DYNAMIC_HEAD_BUNDLE_TYPE_ID = constants.DYNAMIC_HEAD_BUNDLE_TYPE_ID
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-local _ = function(p0, p1)
+local _ = function(p1, p2)
 	-- upvalues: LAYERED_CLOTHING_ORDER (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_ASSET_TYPES (ref)
 	return {
-		AssetId = tonumber(p1) or 0,
-		Order = LAYERED_CLOTHING_ORDER[p0],
-		AccessoryType = ASSET_TYPE_TO_ACCESSORY_TYPE[p0],
-		IsLayered = LAYERED_ASSET_TYPES[p0] ~= nil
+		AssetId = tonumber(p2) or 0,
+		Order = LAYERED_CLOTHING_ORDER[p1],
+		AccessoryType = ASSET_TYPE_TO_ACCESSORY_TYPE[p1],
+		IsLayered = LAYERED_ASSET_TYPES[p1] ~= nil
 	}
 end
 
-local _ = function(p2, p3)
+local _ = function(p1, p2)
 	-- upvalues: cryoModule (ref)
-	return cryoModule.List.filter(p2, function(p4)
-		-- upvalues: p3 (ref)
-		for i, v in p3 do
-			if p4.AccessoryType == v then
+	return cryoModule.List.filter(p1, function(p3)
+		-- upvalues: p2 (ref)
+		for i, v in p2 do
+			if p3.AccessoryType == v then
 				return false
 			end
 		end
@@ -37,30 +37,30 @@ local _ = function(p2, p3)
 	end)
 end
 
-local var3 = function(p5, p6)
+local var1 = function(p3, p4)
 	-- upvalues: ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref)
-	local var7
+	local var2
 	local t = {}
 	
-	for i, v in p5 do
+	for i, v in p3 do
 		local assetType = v.assetType
 		local id = v.id
 		
 		if assetType and id then
-			local var6 = ASSET_TYPE_TO_ACCESSORY_TYPE[assetType]
-			var7 = true
+			local var3 = ASSET_TYPE_TO_ACCESSORY_TYPE[assetType]
+			var2 = true
 			
-			if p6 then
-				var7 = false
+			if p4 then
+				var2 = false
 				
-				for i_1, v_1 in p6 do
-					if var6 == v_1 then
-						var7 = true
+				for i_1, v_1 in p4 do
+					if var3 == v_1 then
+						var2 = true
 						break
 					end
 				end
 			end
-			if var7 and var6 then
+			if var2 and var3 then
 				table.insert(t, {
 					AssetId = tonumber(id) or 0,
 					Order = LAYERED_CLOTHING_ORDER[assetType],
@@ -73,35 +73,35 @@ local var3 = function(p5, p6)
 	return t
 end
 
-local var4 = function(p7, p8)
+local var4 = function(p5, p6)
 	-- upvalues: cryoModule (ref)
-	local var8 = p7:GetAccessories(true)
+	local var5 = p5:GetAccessories(true)
 	local t = {}
 	
-	for i, v in p8 do
+	for i, v in p6 do
 		table.insert(t, v.AccessoryType)
 	end
-	p7:SetAccessories(cryoModule.List.join(cryoModule.List.filter(var8, function(p9)
+	p5:SetAccessories(cryoModule.List.join(cryoModule.List.filter(var5, function(p7)
 		-- upvalues: t (ref)
 		for i, v in t do
-			if p9.AccessoryType == v then
+			if p7.AccessoryType == v then
 				return false
 			end
 		end
 		return true
-	end), p8), true)
+	end), p6), true)
 end
 
-return function(p10, p11)
-	-- upvalues: itemTypeEnum (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), var4 (ref), BODY_BUNDLE_TYPE_ID (ref), var3 (ref), SHOES_BUNDLE_TYPE_ID (ref), DYNAMIC_HEAD_BUNDLE_TYPE_ID (ref)
+return function(p7, p8)
+	-- upvalues: itemTypeEnum (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), var4 (ref), BODY_BUNDLE_TYPE_ID (ref), var1 (ref), SHOES_BUNDLE_TYPE_ID (ref), DYNAMIC_HEAD_BUNDLE_TYPE_ID (ref)
 	local itemSubType
-	if p10.itemType == itemTypeEnum.Asset and (ASSET_TYPE_TO_ACCESSORY_TYPE[p10.itemSubType] or ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[p10.itemSubType]) then
-		itemSubType = p10.itemSubType
-		local itemId = p10.itemId
-		local var10 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[itemSubType]
+	if p7.itemType == itemTypeEnum.Asset and (ASSET_TYPE_TO_ACCESSORY_TYPE[p7.itemSubType] or ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[p7.itemSubType]) then
+		itemSubType = p7.itemSubType
+		local itemId = p7.itemId
+		local var6 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[itemSubType]
 		
 		if itemId and itemSubType ~= ASSET_TYPE_NAME_TO_ID_STRING.Gear and ASSET_TYPE_TO_ACCESSORY_TYPE[itemSubType] then
-			var4(p11, {
+			var4(p8, {
 				{
 					AssetId = tonumber(itemId) or 0,
 					Order = LAYERED_CLOTHING_ORDER[itemSubType],
@@ -109,48 +109,48 @@ return function(p10, p11)
 					IsLayered = LAYERED_ASSET_TYPES[itemSubType] ~= nil
 				}
 			})
-		elseif var10 and itemId then
-			p11[var10] = itemId
+		elseif var6 and itemId then
+			p8[var6] = itemId
 		end
 	end
-	if p10.itemType == itemTypeEnum.Bundle and p10.assetsInBundle and p10.itemSubType == BODY_BUNDLE_TYPE_ID then
-		itemSubType = var3(p10.assetsInBundle, { Enum.AccessoryType.Hair })
+	if p7.itemType == itemTypeEnum.Bundle and p7.assetsInBundle and p7.itemSubType == BODY_BUNDLE_TYPE_ID then
+		itemSubType = var1(p7.assetsInBundle, { Enum.AccessoryType.Hair })
 		
 		if #itemSubType > 0 then
-			var4(p11, itemSubType)
+			var4(p8, itemSubType)
 		end
-		for i, v in p10.assetsInBundle do
+		for i, v in p7.assetsInBundle do
 			local assetType = v.assetType
 			
 			if assetType then
-				local var11 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[assetType]
+				local var7 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[assetType]
 				
-				if ASSET_TYPE_TO_ACCESSORY_TYPE[assetType] ~= Enum.AccessoryType.Hair and var11 and v.id then
-					p11[var11] = v.id
+				if ASSET_TYPE_TO_ACCESSORY_TYPE[assetType] ~= Enum.AccessoryType.Hair and var7 and v.id then
+					p8[var7] = v.id
 				end
 			end
 		end
 	end
-	if p10.itemSubType == SHOES_BUNDLE_TYPE_ID and p10.assetsInBundle then
-		itemSubType = var3(p10.assetsInBundle, {
+	if p7.itemSubType == SHOES_BUNDLE_TYPE_ID and p7.assetsInBundle then
+		itemSubType = var1(p7.assetsInBundle, {
 			Enum.AccessoryType.LeftShoe,
 			Enum.AccessoryType.RightShoe
 		})
 		
 		if #itemSubType > 0 then
-			var4(p11, itemSubType)
+			var4(p8, itemSubType)
 		end
 	end
-	if p10.itemSubType == DYNAMIC_HEAD_BUNDLE_TYPE_ID and p10.assetsInBundle then
-		for i, v in p10.assetsInBundle do
+	if p7.itemSubType == DYNAMIC_HEAD_BUNDLE_TYPE_ID and p7.assetsInBundle then
+		for i, v in p7.assetsInBundle do
 			local assetType = v.assetType
 			local id = v.id
 			
 			if assetType then
-				local var12 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[assetType]
+				local var8 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[assetType]
 				
-				if var12 and id then
-					p11[var12] = id
+				if var8 and id then
+					p8[var8] = id
 				end
 			end
 		end

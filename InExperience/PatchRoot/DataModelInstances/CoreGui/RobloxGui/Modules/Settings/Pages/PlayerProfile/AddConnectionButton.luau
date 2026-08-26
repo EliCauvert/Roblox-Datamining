@@ -9,41 +9,41 @@ local button = foundationModule.Button
 local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
 local peopleServiceModule = require(corePackagesService.Workspace.Packages.PeopleService)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), peopleServiceModule (ref), playersService (ref), signalsReactModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
-	local var6 = useLocalization({
+	local var1 = useLocalization({
 		isFriend = "CommonUI.Features.Label.Connection",
 		addPerson = "CommonUI.Features.Label.Add",
 		requestSent = "CommonUI.Features.Label.Sent"
 	})
-	local var7 = reactModule.useMemo(function()
+	local var2 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("Constants")
 	end, {})
-	local var8 = reactModule.useMemo(function()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("PeopleAnalyticsManager")
 	end, {})
-	local var9 = reactModule.useMemo(function()
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("FriendStatusStore")
 	end, {})
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), playersService (copy)
-		return if p0.userId then playersService:GetPlayerByUserId(p0.userId) else nil
-	end, { p0.userId })
-	local var11 = signalsReactModule.useSignalState(var9.getIsFriendButtonDisabled(p0.userId))
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), playersService (copy)
+		return if p1.userId then playersService:GetPlayerByUserId(p1.userId) else nil
+	end, { p1.userId })
+	local var6 = signalsReactModule.useSignalState(var4.getIsFriendButtonDisabled(p1.userId))
 	
 	return reactModule.createElement(button, {
-		text = signalsReactModule.useSignalState(var9.getFriendButtonText(p0.userId, var6)),
-		variant = if var11 then buttonVariant.Subtle else buttonVariant.Emphasis,
+		text = signalsReactModule.useSignalState(var4.getFriendButtonText(p1.userId, var1)),
+		variant = if var6 then buttonVariant.Subtle else buttonVariant.Emphasis,
 		fillBehavior = fillBehavior.Fill,
-		isDisabled = var11,
-		LayoutOrder = p0.layoutOrder,
+		isDisabled = var6,
+		LayoutOrder = p1.layoutOrder,
 		onActivated = function()
-			-- upvalues: var8 (ref), var7 (ref), var9 (ref), var10 (ref)
-			var8:trackRequestFriendship(var7.ANALYTICS.ENTRY_POINT.PLAYER_PROFILE)
-			var9.sendFriendRequest(var10)
+			-- upvalues: var3 (ref), var2 (ref), var4 (ref), var5 (ref)
+			var3:trackRequestFriendship(var2.ANALYTICS.ENTRY_POINT.PLAYER_PROFILE)
+			var4.sendFriendRequest(var5)
 		end
 	})
 end)

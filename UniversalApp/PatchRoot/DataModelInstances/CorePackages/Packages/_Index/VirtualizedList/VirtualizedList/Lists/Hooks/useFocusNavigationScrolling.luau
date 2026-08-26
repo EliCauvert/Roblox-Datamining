@@ -1,21 +1,21 @@
 ﻿local reactModule = require(script.Parent.Parent.Parent.Parent.React)
 local _ = require(script.Parent.Parent.FlatList)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
-	local var1 = if p0.cellRendererKey then p0.cellRendererKey else "CellRendererView"
-	local var2 = if p0.initialIndex then p0.initialIndex else 1
-	local listRef = p0.listRef
-	local onSelectedIndexChanged = p0.onSelectedIndexChanged
-	local viewOffset = p0.viewOffset
-	local var3 = p0.animated ~= nil or p0.animated
+	local var1 = if p1.cellRendererKey then p1.cellRendererKey else "CellRendererView"
+	local var2 = if p1.initialIndex then p1.initialIndex else 1
+	local listRef = p1.listRef
+	local onSelectedIndexChanged = p1.onSelectedIndexChanged
+	local viewOffset = p1.viewOffset
+	local var3 = p1.animated ~= nil or p1.animated
 	local var4 = reactModule.useRef(var2)
-	local data = p0.data
+	local data = p1.data
 	
-	return reactModule.useCallback(function(p1, _, _, p2)
+	return reactModule.useCallback(function(p2, _, _, p3)
 		-- upvalues: var1 (ref), var4 (ref), data (ref), onSelectedIndexChanged (ref), listRef (ref), var3 (ref), viewOffset (ref)
-		if p2 and p2:IsDescendantOf(p1) then
-			local var5 = p2:FindFirstAncestor(var1)
+		if p3 and p3:IsDescendantOf(p2) then
+			local var5 = p3:FindFirstAncestor(var1)
 			
 			if not var5 or not var5.LayoutOrder then
 				return nil
@@ -39,12 +39,12 @@ return function(p0)
 		return nil
 	end, {
 		listRef, var4, var1, onSelectedIndexChanged, var3, viewOffset, data
-	}), reactModule.useCallback(function(p3)
+	}), reactModule.useCallback(function(p2)
 		-- upvalues: listRef (ref)
-		local var6 = p3.index * p3.averageItemLength
+		local var5 = p2.index * p2.averageItemLength
 		
 		if listRef and listRef.current then
-			listRef.current:scrollToOffset({ offset = var6 })
+			listRef.current:scrollToOffset({ offset = var5 })
 			
 			return
 		end

@@ -24,125 +24,125 @@ local REACT_FORWARD_REF_TYPE = reactSymbols.REACT_FORWARD_REF_TYPE
 local REACT_MEMO_TYPE = reactSymbols.REACT_MEMO_TYPE
 local REACT_LAZY_TYPE = reactSymbols.REACT_LAZY_TYPE
 local dEV = reactGlobalsModule.__DEV__
-local var4 = nil
-local var5 = nil
+local var1 = nil
+local var2 = nil
 local t = {
 	setRefreshHandler = function(value)
-		-- upvalues: dEV (ref), var4 (write)
+		-- upvalues: dEV (ref), var1 (write)
 		if dEV then
-			var4 = value
+			var1 = value
 		end
 	end,
-	resolveFunctionForHotReloading = function(p0)
-		-- upvalues: dEV (ref), var4 (write)
+	resolveFunctionForHotReloading = function(p1)
+		-- upvalues: dEV (ref), var1 (write)
 		if not dEV then
-			return p0
-		elseif var4 == nil then
-			return p0
+			return p1
+		elseif var1 == nil then
+			return p1
 		end
-		local var11 = var4(p0)
+		local var3 = var1(p1)
 		
-		return if var11 == nil then p0 else var11.current
+		return if var3 == nil then p1 else var3.current
 	end,
 	resolveClassForHotReloading = function(p1)
-		-- upvalues: dEV (ref), var4 (write)
+		-- upvalues: dEV (ref), var1 (write)
 		if not dEV then
 			return p1
-		elseif var4 == nil then
+		elseif var1 == nil then
 			return p1
 		end
-		local var12 = var4(p1)
+		local var3 = var1(p1)
 		
-		return if var12 == nil then p1 else var12.current
+		return if var3 == nil then p1 else var3.current
 	end,
-	resolveForwardRefForHotReloading = function(p2)
-		-- upvalues: dEV (ref), var4 (write), REACT_FORWARD_REF_TYPE (ref)
+	resolveForwardRefForHotReloading = function(p1)
+		-- upvalues: dEV (ref), var1 (write), REACT_FORWARD_REF_TYPE (ref)
 		if not dEV then
-			return p2
-		elseif var4 == nil then
-			return p2
+			return p1
+		elseif var1 == nil then
+			return p1
 		end
-		local var13 = var4(p2)
+		local var3 = var1(p1)
 		
-		if var13 ~= nil then
-			return var13.current
-		elseif p2 ~= nil and typeof(p2.render) == "function" then
-			local var14
-			local render = p2.render
+		if var3 ~= nil then
+			return var3.current
+		elseif p1 ~= nil and typeof(p1.render) == "function" then
+			local var4
+			local render = p1.render
 			
 			if not dEV then
-				var14 = render
-			elseif var4 == nil then
-				var14 = render
+				var4 = render
+			elseif var1 == nil then
+				var4 = render
 			else
-				local var15 = var4(render)
-				var14 = if var15 == nil then render else var15.current
+				local var5 = var1(render)
+				var4 = if var5 == nil then render else var5.current
 			end
-			if p2.render == var14 then
-				return p2
+			if p1.render == var4 then
+				return p1
 			end
 			local t = {
 				["$$typeof"] = REACT_FORWARD_REF_TYPE,
-				render = var14,
+				render = var4,
 				displayName = nil
 			}
 			
-			if p2.displayName ~= nil then
-				t.displayName = p2.displayName
+			if p1.displayName ~= nil then
+				t.displayName = p1.displayName
 			end
 			return t
 		end
 	end,
-	isCompatibleFamilyForHotReloading = function(p3, p4)
-		-- upvalues: dEV (ref), var4 (write), classComponent (ref), functionComponent (ref), REACT_LAZY_TYPE (ref), forwardRef (ref), REACT_FORWARD_REF_TYPE (ref), memoComponent (ref), simpleMemoComponent (ref), REACT_MEMO_TYPE (ref)
+	isCompatibleFamilyForHotReloading = function(p1, p2)
+		-- upvalues: dEV (ref), var1 (write), classComponent (ref), functionComponent (ref), REACT_LAZY_TYPE (ref), forwardRef (ref), REACT_FORWARD_REF_TYPE (ref), memoComponent (ref), simpleMemoComponent (ref), REACT_MEMO_TYPE (ref)
 		if not dEV then
 			return false
-		elseif var4 == nil then
+		elseif var1 == nil then
 			return false
 		end
-		local elementType = p3.elementType
-		local type = p4.type
-		local var17 = false
-		local var18 = if typeof(type) == "table" and type ~= nil then type["$$typeof"] else nil
-		local tag = p3.tag
+		local elementType = p1.elementType
+		local type = p2.type
+		local var3 = false
+		local var4 = if typeof(type) == "table" and type ~= nil then type["$$typeof"] else nil
+		local tag = p1.tag
 		
 		if tag == classComponent then
 			if typeof(type) == "function" then
-				var17 = true
+				var3 = true
 			end
 		elseif tag == functionComponent then
 			if typeof(type) == "function" then
-				var17 = true
-			elseif var18 == REACT_LAZY_TYPE then
-				var17 = true
+				var3 = true
+			elseif var4 == REACT_LAZY_TYPE then
+				var3 = true
 			end
 		elseif tag ~= forwardRef then
 			if tag ~= memoComponent and tag ~= simpleMemoComponent then
 				return false
-			elseif var18 == REACT_MEMO_TYPE then
-				var17 = true
-			elseif var18 == REACT_LAZY_TYPE then
-				var17 = true
+			elseif var4 == REACT_MEMO_TYPE then
+				var3 = true
+			elseif var4 == REACT_LAZY_TYPE then
+				var3 = true
 			end
-		elseif var18 == REACT_FORWARD_REF_TYPE then
-			var17 = true
-		elseif var18 == REACT_LAZY_TYPE then
-			var17 = true
+		elseif var4 == REACT_FORWARD_REF_TYPE then
+			var3 = true
+		elseif var4 == REACT_LAZY_TYPE then
+			var3 = true
 		end
-		if var17 then
-			tag = var4(elementType)
+		if var3 then
+			tag = var1(elementType)
 			
-			return tag == nil or tag ~= var4(type)
+			return tag == nil or tag ~= var1(type)
 		end
 	end,
-	markFailedErrorBoundaryForHotReloading = function(p5)
-		-- upvalues: dEV (ref), var4 (write), var5 (write), set (ref)
+	markFailedErrorBoundaryForHotReloading = function(p1)
+		-- upvalues: dEV (ref), var1 (write), var2 (write), set (ref)
 		if dEV then
-			if var4 == nil then return end
-			if var5 == nil then
-				var5 = set.new()
+			if var1 == nil then return end
+			if var2 == nil then
+				var2 = set.new()
 			end
-			var5:add(p5)
+			var2:add(p1)
 		end
 	end
 }
@@ -152,46 +152,46 @@ local findHostInstancesForMatchingFibersRecursively = nil
 local scheduleFibersWithFamiliesRecursively = nil
 local _ = nil
 
-function t.scheduleRefresh(p6, p7)
-	-- upvalues: dEV (ref), var4 (write), scheduleFibersWithFamiliesRecursively (write)
+function t.scheduleRefresh(p1, p2)
+	-- upvalues: dEV (ref), var1 (write), scheduleFibersWithFamiliesRecursively (write)
 	if dEV then
-		if var4 == nil then return end
-		local staleFamilies = p7.staleFamilies
-		local updatedFamilies = p7.updatedFamilies
+		if var1 == nil then return end
+		local staleFamilies = p2.staleFamilies
+		local updatedFamilies = p2.updatedFamilies
 		local unknownModule = require(script.Parent["ReactFiberWorkLoop.new"])
 		local flushSync = unknownModule.flushSync
 		unknownModule.flushPassiveEffects()
 		flushSync(function()
-			-- upvalues: scheduleFibersWithFamiliesRecursively (copy), p6 (ref), updatedFamilies (ref), staleFamilies (ref)
-			scheduleFibersWithFamiliesRecursively(p6.current, updatedFamilies, staleFamilies)
+			-- upvalues: scheduleFibersWithFamiliesRecursively (copy), p1 (ref), updatedFamilies (ref), staleFamilies (ref)
+			scheduleFibersWithFamiliesRecursively(p1.current, updatedFamilies, staleFamilies)
 		end)
 	end
 end
 
 local _ = nil
 
-function t.scheduleRoot(p8, p9)
+function t.scheduleRoot(p1, p2)
 	-- upvalues: dEV (ref)
 	if dEV then
-		if p8.context ~= require(script.Parent["ReactFiberContext.new"]).emptyContextObject then return end
+		if p1.context ~= require(script.Parent["ReactFiberContext.new"]).emptyContextObject then return end
 		local unknownModule = require(script.Parent["ReactFiberWorkLoop.new"])
 		local flushSync = unknownModule.flushSync
 		unknownModule.flushPassiveEffects()
 		flushSync(function()
-			-- upvalues: p9 (ref), p8 (ref)
-			require(script.Parent["ReactFiberReconciler.new"]).updateContainer(p9, p8, nil, nil)
+			-- upvalues: p2 (ref), p1 (ref)
+			require(script.Parent["ReactFiberReconciler.new"]).updateContainer(p2, p1, nil, nil)
 		end)
 	end
 end
 
-scheduleFibersWithFamiliesRecursively = function(p10, p11, p12)
-	-- upvalues: dEV (ref), functionComponent (ref), simpleMemoComponent (ref), classComponent (ref), forwardRef (ref), var4 (write), error (ref), var5 (write), syncLane (ref), noTimestamp (ref), scheduleFibersWithFamiliesRecursively (write)
+scheduleFibersWithFamiliesRecursively = function(p1, p2, p3)
+	-- upvalues: dEV (ref), functionComponent (ref), simpleMemoComponent (ref), classComponent (ref), forwardRef (ref), var1 (write), error (ref), var2 (write), syncLane (ref), noTimestamp (ref), scheduleFibersWithFamiliesRecursively (write)
 	if dEV then
-		local alternate = p10.alternate
-		local child = p10.child
-		local sibling = p10.sibling
-		local tag = p10.tag
-		local type = p10.type
+		local alternate = p1.alternate
+		local child = p1.child
+		local sibling = p1.sibling
+		local tag = p1.tag
+		local type = p1.type
 		local render = nil
 		
 		if tag == functionComponent or tag == simpleMemoComponent or tag == classComponent then
@@ -199,67 +199,67 @@ scheduleFibersWithFamiliesRecursively = function(p10, p11, p12)
 		elseif tag == forwardRef then
 			render = type.render
 		end
-		if var4 == nil then
+		if var1 == nil then
 			error(error.new("Expected resolveFamily to be set during hot reload."))
 		end
-		local var21 = false
-		local var22 = false
+		local var3 = false
+		local var4 = false
 		
 		if render ~= nil then
-			local var23 = var4(render)
+			local var5 = var1(render)
 			
-			if var23 ~= nil then
-				if p12:has(var23) then
-					var22 = true
-				elseif p11:has(var23) then
+			if var5 ~= nil then
+				if p3:has(var5) then
+					var4 = true
+				elseif p2:has(var5) then
 					if tag == classComponent then
-						var22 = true
+						var4 = true
 					else
-						var21 = true
+						var3 = true
 					end
 				end
 			end
 		end
-		if var5 ~= nil and (var5:has(p10) or alternate ~= nil and var5:has(alternate)) then
-			var22 = true
+		if var2 ~= nil and (var2:has(p1) or alternate ~= nil and var2:has(alternate)) then
+			var4 = true
 		end
-		if var22 then
-			p10._debugNeedsRemount = true
+		if var4 then
+			p1._debugNeedsRemount = true
 		end
-		if var22 or var21 then
-			require(script.Parent["ReactFiberWorkLoop.new"]).scheduleUpdateOnFiber(p10, syncLane, noTimestamp)
+		if var4 or var3 then
+			require(script.Parent["ReactFiberWorkLoop.new"]).scheduleUpdateOnFiber(p1, syncLane, noTimestamp)
 		end
-		if child ~= nil and not var22 then
-			scheduleFibersWithFamiliesRecursively(child, p11, p12)
+		if child ~= nil and not var4 then
+			scheduleFibersWithFamiliesRecursively(child, p2, p3)
 		end
 		if sibling ~= nil then
-			scheduleFibersWithFamiliesRecursively(sibling, p11, p12)
+			scheduleFibersWithFamiliesRecursively(sibling, p2, p3)
 		end
 	end
 end
 
 local _ = nil
 
-function t.findHostInstancesForRefresh(p13, p14)
+function t.findHostInstancesForRefresh(p1, p2)
 	-- upvalues: dEV (ref), set (ref), array (ref), findHostInstancesForMatchingFibersRecursively (write), error (ref)
 	if dEV then
-		local var24 = set.new()
-		findHostInstancesForMatchingFibersRecursively(p13.current, set.new(array.map(p14, function(p15)
-			return p15.current
-		end)), var24)
+		local var3 = set.new()
+		findHostInstancesForMatchingFibersRecursively(p1.current, set.new(array.map(p2, function(p3)
+			return p3.current
+		end)), var3)
 		
-		return var24
+		return var3
 	end
 	error(error.new("Did not expect findHostInstancesForRefresh to be called in production."))
 end
 
-findHostInstancesForMatchingFibersRecursively = function(p16, p17, p18)
+findHostInstancesForMatchingFibersRecursively = function(p1, p2, p3)
 	-- upvalues: dEV (ref), functionComponent (ref), simpleMemoComponent (ref), classComponent (ref), forwardRef (ref), findHostInstancesForFiberShallowly (write), findHostInstancesForMatchingFibersRecursively (write)
 	if dEV then
-		local child = p16.child
-		local sibling = p16.sibling
-		local tag = p16.tag
-		local type = p16.type
+		local child = p1.child
+		local sibling = p1.sibling
+		local tag = p1.tag
+		local type = p1.type
 		local render = nil
 		
 		if tag == functionComponent or tag == simpleMemoComponent or tag == classComponent then
@@ -267,74 +267,74 @@ findHostInstancesForMatchingFibersRecursively = function(p16, p17, p18)
 		elseif tag == forwardRef then
 			render = type.render
 		end
-		if not (render == nil or not p17:has(render)) and true then
-			findHostInstancesForFiberShallowly(p16, p18)
+		if not (render == nil or not p2:has(render)) and true then
+			findHostInstancesForFiberShallowly(p1, p3)
 		elseif child ~= nil then
-			findHostInstancesForMatchingFibersRecursively(child, p17, p18)
+			findHostInstancesForMatchingFibersRecursively(child, p2, p3)
 		end
 		if sibling ~= nil then
-			findHostInstancesForMatchingFibersRecursively(sibling, p17, p18)
+			findHostInstancesForMatchingFibersRecursively(sibling, p2, p3)
 		end
 	end
 end
 
-findHostInstancesForFiberShallowly = function(p19, p20)
+findHostInstancesForFiberShallowly = function(p1, p2)
 	-- upvalues: dEV (ref), findChildHostInstancesForFiberShallowly (write), hostComponent (ref), hostPortal (ref), hostRoot (ref), error (ref)
 	if dEV then
-		if findChildHostInstancesForFiberShallowly(p19, p20) then return end
-		local var25 = p19
+		if findChildHostInstancesForFiberShallowly(p1, p2) then return end
+		local var3 = p1
 		while true do
-			local tag = var25.tag
+			local tag = var3.tag
 			if tag ~= hostComponent then
 				if tag ~= hostPortal then
 					if tag ~= hostRoot then
-						if var25.return_ == nil then
+						if var3.return_ == nil then
 							error(error.new("Expected to reach root first."))
 						end
-						var25 = var25.return_
+						var3 = var3.return_
 					end
-					p20:add(var25.stateNode.containerInfo)
+					p2:add(var3.stateNode.containerInfo)
 					
 					return
 				end
-				p20:add(var25.stateNode.containerInfo)
+				p2:add(var3.stateNode.containerInfo)
 				
 				return
 			end
-			p20:add(var25.stateNode)
+			p2:add(var3.stateNode)
 			
 			return
 		end
 	end
 end
 
-findChildHostInstancesForFiberShallowly = function(p21, p22)
+findChildHostInstancesForFiberShallowly = function(p3, p4)
 	-- upvalues: dEV (ref), hostComponent (ref)
 	if dEV then
-		local var26 = p21
-		local var27 = false
+		local var4 = p3
+		local var5 = false
 		while true do
-			if var26.tag == hostComponent then
-				var27 = true
-				p22:add(var26.stateNode)
-			elseif var26.child ~= nil then
-				var26.child.return_ = var26
-				var26 = var26.child
+			if var4.tag == hostComponent then
+				var5 = true
+				p4:add(var4.stateNode)
+			elseif var4.child ~= nil then
+				var4.child.return_ = var4
+				var4 = var4.child
 				continue
 			end
-			if var26 ~= p21 then
-				while var26.sibling == nil do
-					if var26.return_ ~= nil and var26.return_ ~= p21 then
-						var26 = var26.return_
+			if var4 ~= p3 then
+				while var4.sibling == nil do
+					if var4.return_ ~= nil and var4.return_ ~= p3 then
+						var4 = var4.return_
 						continue
 					end
-					return var27
+					return var5
 				end
-				assert(var26.sibling ~= nil, "should be non-nil")
-				var26.sibling.return_ = var26.return_
-				var26 = var26.sibling
+				assert(var4.sibling ~= nil, "should be non-nil")
+				var4.sibling.return_ = var4.return_
+				var4 = var4.sibling
 			end
-			return var27
+			return var5
 		end
 	end
 	return false

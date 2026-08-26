@@ -20,89 +20,89 @@ local t = {
 	onDismissed = function(_, _) end
 }
 
-local var13 = function(p0)
+local var1 = function(p1)
 	-- upvalues: reactModule (ref), tooltipContextModule (ref), useIsTooltipTurnModule (ref), localStoreModule (ref), useLocalization (ref), userInputService (ref), t (ref), serviceModule (ref), guiService (ref), menuIconHoveredSignalModule (ref), ftuxTooltipAnchorModule (ref)
-	local var14 = reactModule.useRef(nil)
-	local var15, _ = reactModule.useState(false)
-	local var16, var17 = reactModule.useState(false)
-	local var18 = reactModule.useContext(tooltipContextModule)
-	local var19 = p0.isIconVisible and (not reactModule.useMemo(function()
-		-- upvalues: p0 (ref), localStoreModule (copy)
-		return if p0.localStorageKey then localStoreModule.getValue(p0.localStorageKey) or false else false
-	end, { p0.localStorageKey }) and not var16)
-	local id = var19 and (useIsTooltipTurnModule(p0.id) or false)
-	local var21 = useLocalization({ headerText = p0.headerKey, bodyText = p0.bodyKey })
-	local var22 = reactModule.useCallback(function(p1)
-		-- upvalues: p0 (ref), id (ref), var17 (ref), var18 (ref)
-		if p0.onDismissed then
-			p0.onDismissed(id, p1)
+	local var2 = reactModule.useRef(nil)
+	local var3, _ = reactModule.useState(false)
+	local var4, var5 = reactModule.useState(false)
+	local var6 = reactModule.useContext(tooltipContextModule)
+	local var7 = p1.isIconVisible and (not reactModule.useMemo(function()
+		-- upvalues: p1 (ref), localStoreModule (copy)
+		return if p1.localStorageKey then localStoreModule.getValue(p1.localStorageKey) or false else false
+	end, { p1.localStorageKey }) and not var4)
+	local id = var7 and (useIsTooltipTurnModule(p1.id) or false)
+	local var8 = useLocalization({ headerText = p1.headerKey, bodyText = p1.bodyKey })
+	local var9 = reactModule.useCallback(function(p2)
+		-- upvalues: p1 (ref), id (ref), var5 (ref), var6 (ref)
+		if p1.onDismissed then
+			p1.onDismissed(id, p2)
 		end
-		var17(true)
+		var5(true)
 		
-		if var18 and p0.id then
-			var18.dismissTooltip(p0.id, p1)
+		if var6 and p1.id then
+			var6.dismissTooltip(p1.id, p2)
 		end
-	end, { var17, id })
+	end, { var5, id })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var15 (ref), var16 (ref), userInputService (copy), var14 (ref), var19 (ref), var22 (ref)
-		local var23 = if p0.dismissOnOutsideInput and var15 and not var16 then userInputService.InputBegan:Connect(function(p2)
-			-- upvalues: var14 (copy), var19 (copy), var22 (copy)
-			if (p2.UserInputType == Enum.UserInputType.Touch or p2.UserInputType == Enum.UserInputType.MouseButton1) and var14.current ~= nil then
+		-- upvalues: p1 (ref), var3 (ref), var4 (ref), userInputService (copy), var2 (ref), var7 (ref), var9 (ref)
+		local var10 = if p1.dismissOnOutsideInput and var3 and not var4 then userInputService.InputBegan:Connect(function(p2)
+			-- upvalues: var2 (copy), var7 (copy), var9 (copy)
+			if (p2.UserInputType == Enum.UserInputType.Touch or p2.UserInputType == Enum.UserInputType.MouseButton1) and var2.current ~= nil then
 				local position = p2.Position
-				local absolutePosition = var14.current.AbsolutePosition
-				local absoluteSize = var14.current.AbsoluteSize
+				local absolutePosition = var2.current.AbsolutePosition
+				local absoluteSize = var2.current.AbsoluteSize
 				
-				if var19 and (absolutePosition.X > position.X or position.X > absolutePosition.X + absoluteSize.X or (absolutePosition.Y > position.Y or position.Y > absolutePosition.Y + absoluteSize.Y)) then
-					var22("outsideInput")
+				if var7 and (absolutePosition.X > position.X or position.X > absolutePosition.X + absoluteSize.X or (absolutePosition.Y > position.Y or position.Y > absolutePosition.Y + absoluteSize.Y)) then
+					var9("outsideInput")
 				end
 			end
 		end) else nil
 		
 		return function()
-			-- upvalues: var23 (write)
-			if var23 then
-				var23:Disconnect()
-				var23 = nil
+			-- upvalues: var10 (write)
+			if var10 then
+				var10:Disconnect()
+				var10 = nil
 			end
 		end
-	end, { var16, var15, var19 })
+	end, { var4, var3, var7 })
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), p0 (ref), var19 (ref), t (copy)
-		if var18 and p0.id and var19 then
-			var18.registerTooltip(p0.id, p0.priority, p0.showDelay or t.showDelay, p0.dismissDelay or t.dismissDelay)
+		-- upvalues: var6 (ref), p1 (ref), var7 (ref), t (copy)
+		if var6 and p1.id and var7 then
+			var6.registerTooltip(p1.id, p1.priority, p1.showDelay or t.showDelay, p1.dismissDelay or t.dismissDelay)
 		end
 		return function()
-			-- upvalues: var18 (copy), p0 (copy), var19 (copy)
-			if var18 and p0.id and var19 then
-				var18.unregisterTooltip(p0.id)
+			-- upvalues: var6 (copy), p1 (copy), var7 (copy)
+			if var6 and p1.id and var7 then
+				var6.unregisterTooltip(p1.id)
 			end
 		end
-	end, { var19, p0.id })
+	end, { var7, p1.id })
 	reactModule.useEffect(function()
-		-- upvalues: serviceModule (copy), var19 (ref), var22 (ref), guiService (copy), menuIconHoveredSignalModule (copy)
+		-- upvalues: serviceModule (copy), var7 (ref), var9 (ref), guiService (copy), menuIconHoveredSignalModule (copy)
 		local list = {
 			serviceModule:onIntegrationActivated():connect(function()
-				-- upvalues: var19 (copy), var22 (copy)
-				if var19 then
-					var22("unibarActivated")
+				-- upvalues: var7 (copy), var9 (copy)
+				if var7 then
+					var9("unibarActivated")
 				end
 			end),
 			serviceModule:onIntegrationHovered():connect(function()
-				-- upvalues: var19 (copy), var22 (copy)
-				if var19 then
-					var22("unibarHovered")
+				-- upvalues: var7 (copy), var9 (copy)
+				if var7 then
+					var9("unibarHovered")
 				end
 			end),
 			guiService.MenuOpened:Connect(function()
-				-- upvalues: var19 (copy), var22 (copy)
-				if var19 then
-					var22("menuOpened")
+				-- upvalues: var7 (copy), var9 (copy)
+				if var7 then
+					var9("menuOpened")
 				end
 			end),
-			menuIconHoveredSignalModule:connect(function(p3)
-				-- upvalues: var19 (copy), var22 (copy)
-				if var19 and p3 then
-					var22("menuIconHovered")
+			menuIconHoveredSignalModule:connect(function(p2)
+				-- upvalues: var7 (copy), var9 (copy)
+				if var7 and p2 then
+					var9("menuIconHovered")
 				end
 			end)
 		}
@@ -121,25 +121,25 @@ local var13 = function(p0)
 		serviceModule,
 		guiService,
 		menuIconHoveredSignalModule,
-		var19,
-		var22
+		var7,
+		var9
 	})
 	reactModule.useEffect(function()
-		-- upvalues: id (ref), p0 (ref), localStoreModule (copy)
-		if id and p0.localStorageKey then
-			localStoreModule.storeForLocalPlayer(p0.localStorageKey, true)
+		-- upvalues: id (ref), p1 (ref), localStoreModule (copy)
+		if id and p1.localStorageKey then
+			localStoreModule.storeForLocalPlayer(p1.localStorageKey, true)
 		end
-	end, { id, p0.localStorageKey })
+	end, { id, p1.localStorageKey })
 	
 	return reactModule.createElement(ftuxTooltipAnchorModule, {
-		ref = var14,
-		bodyText = var21.bodyText,
-		headerText = var21.headerText,
+		ref = var2,
+		bodyText = var8.bodyText,
+		headerText = var8.headerText,
 		shouldShowTooltip = id
 	})
 end
 
-return function(p4)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), var13 (ref)
-	return reactModule.createElement(var13, cryoModule.Dictionary.union(t, p4))
+return function(p2)
+	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), var1 (ref)
+	return reactModule.createElement(var1, cryoModule.Dictionary.union(t, p2))
 end

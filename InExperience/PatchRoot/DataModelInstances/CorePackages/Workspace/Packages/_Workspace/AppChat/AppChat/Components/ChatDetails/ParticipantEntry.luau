@@ -12,101 +12,101 @@ local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubs
 local repeated = string.rep("W", 20)
 local t = { showDivider = true }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useUserDataModule (ref), useTokens (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), reactModule (ref), text (ref), repeated (ref), foundationModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref)
-	local var8 = cryoModule.Dictionary.union(t, p0)
-	local var9 = useUserDataModule(var8.userId)
-	local var10 = useTokens()
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: text (copy), repeated (copy), var10 (ref)
-		local textBounds = text.GetTextBounds(repeated, var10.Typography.TitleLarge.Font, var10.Typography.TitleLarge.FontSize, Vector2.zero)
+	local var1 = cryoModule.Dictionary.union(t, p1)
+	local var2 = useUserDataModule(var1.userId)
+	local var3 = useTokens()
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: text (copy), repeated (copy), var3 (ref)
+		local textBounds = text.GetTextBounds(repeated, var3.Typography.TitleLarge.Font, var3.Typography.TitleLarge.FontSize, Vector2.zero)
 		
 		return UDim2.fromOffset(textBounds.X, textBounds.Y)
 	end, {
-		var10.Typography.TitleLarge.Font,
-		var10.Typography.TitleLarge.FontSize
+		var3.Typography.TitleLarge.Font,
+		var3.Typography.TitleLarge.FontSize
 	})
 	
 	return reactModule.createElement(foundationModule.View, {
 		Name = "ParticipantEntryContainer",
 		tag = {
 			["row align-y-center gap-medium size-full padding-x-medium"] = true,
-			["stroke-thin stroke-muted"] = var8.showDivider
+			["stroke-thin stroke-muted"] = var1.showDivider
 		},
-		onActivated = if var8.onActivated then reactModule.useCallback(function()
-			-- upvalues: var8 (ref)
-			if var8.onActivated then
-				var8.onActivated()
+		onActivated = if var1.onActivated then reactModule.useCallback(function()
+			-- upvalues: var1 (ref)
+			if var1.onActivated then
+				var1.onActivated()
 			end
-		end, { var8.onActivated }) else nil
+		end, { var1.onActivated }) else nil
 	}, {
 		Avatar = reactModule.createElement(foundationModule.Avatar, {
 			LayoutOrder = 1,
-			userId = var9.id,
-			userPresence = var9.presence,
+			userId = var2.id,
+			userPresence = var2.presence,
 			size = foundationModule.Enums.InputSize.Medium,
-			backgroundStyle = var10.Color.Shift.Shift_300,
+			backgroundStyle = var3.Color.Shift.Shift_300,
 			includeProfileFrame = fFlagAppChatUseProfileFrameThumbnailModule
 		}),
 		UserInfo = reactModule.createElement(foundationModule.View, { tag = "col fill auto-y clip", LayoutOrder = 2 }, {
 			UserDataSkeleton = reactModule.createElement(foundationModule.Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(var11.X, var11.Y + reactModule.useMemo(function()
-					-- upvalues: text (copy), var10 (ref)
-					local textBounds = text.GetTextBounds("Roblox Studio", var10.Typography.CaptionMedium.Font, var10.Typography.CaptionMedium.FontSize, Vector2.zero)
+				Size = UDim2.new(var4.X, var4.Y + reactModule.useMemo(function()
+					-- upvalues: text (copy), var3 (ref)
+					local textBounds = text.GetTextBounds("Roblox Studio", var3.Typography.CaptionMedium.Font, var3.Typography.CaptionMedium.FontSize, Vector2.zero)
 					
 					return UDim2.fromOffset(textBounds.X, textBounds.Y)
 				end, {
-					var10.Typography.CaptionMedium.Font,
-					var10.Typography.CaptionMedium.FontSize
+					var3.Typography.CaptionMedium.Font,
+					var3.Typography.CaptionMedium.FontSize
 				}).Y),
-				Visible = var9.isLoading
+				Visible = var2.isLoading
 			}),
-			DisplayName = if fFlagEnableBlackbirdCheck and useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck then var8.userId else nil) then reactModule.createElement(foundationModule.View, {
+			DisplayName = if fFlagEnableBlackbirdCheck and useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck then var1.userId else nil) then reactModule.createElement(foundationModule.View, {
 				tag = "row align-y-center gap-xxsmall auto-xy",
 				LayoutOrder = 1,
-				Visible = var9.isLoading:map(function(p2)
+				Visible = var2.isLoading:map(function(p2)
 					return not p2
 				end)
 			}, {
 				NameText = reactModule.createElement(foundationModule.Text, {
 					tag = "shrink auto-xy text-title-large text-truncate-end content-emphasis",
 					LayoutOrder = 1,
-					Text = var9.combinedName
+					Text = var2.combinedName
 				}),
 				SubscriptionBadge = reactModule.createElement(foundationModule.Icon, {
 					LayoutOrder = 2,
 					name = foundationModule.Enums.IconName.RobloxPlus,
 					size = foundationModule.Enums.IconSize.Small,
-					style = var10.Color.Content.Emphasis
+					style = var3.Color.Content.Emphasis
 				})
 			}) else reactModule.createElement(foundationModule.Text, {
 				tag = "auto-xy text-title-large text-truncate-end content-emphasis",
 				LayoutOrder = 1,
-				Text = var9.combinedName,
-				Visible = var9.isLoading:map(function(p1)
-					return not p1
+				Text = var2.combinedName,
+				Visible = var2.isLoading:map(function(p2)
+					return not p2
 				end)
 			}),
 			PresenceText = reactModule.createElement(foundationModule.Text, {
 				tag = "auto-xy text-caption-medium text-truncate-end content-muted",
 				LayoutOrder = 3,
-				Text = if var8.statusText then var9.presenceText:map(function(p3)
-					-- upvalues: var8 (ref)
-					return p3 .. " . " .. var8.statusText
-				end) else var9.presenceText,
-				Visible = var9.isLoading:map(function(p4)
-					return not p4
+				Text = if var1.statusText then var2.presenceText:map(function(p2)
+					-- upvalues: var1 (ref)
+					return p2 .. " . " .. var8.statusText
+				end) else var2.presenceText,
+				Visible = var2.isLoading:map(function(p2)
+					return not p2
 				end)
 			})
 		}),
-		ChildrenContainer = if var8.children then reactModule.createElement(foundationModule.View, {
+		ChildrenContainer = if var1.children then reactModule.createElement(foundationModule.View, {
 			tag = "row align-x-right align-y-center auto-y",
 			LayoutOrder = 3,
 			selection = { Selectable = false },
 			stateLayer = {
 				affordance = foundationModule.Enums.StateLayerAffordance.None
 			}
-		}, var8.children) else nil
+		}, var1.children) else nil
 	})
 end)

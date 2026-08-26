@@ -21,7 +21,7 @@ loadingAlert.validateProps = tModule.strictInterface({
 	title = tModule.string
 })
 
-function loadingAlert.init(p0)
+function loadingAlert.init(p1)
 	-- upvalues: roactModule (ref), loading (ref), iconSize (ref)
 	function p0.renderMiddleContent()
 		-- upvalues: roactModule (copy), loading (copy), iconSize (copy)

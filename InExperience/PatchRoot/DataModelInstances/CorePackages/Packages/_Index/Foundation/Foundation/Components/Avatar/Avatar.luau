@@ -24,35 +24,35 @@ local t = {
 	userPresence = require(foundation.Enums.UserPresence).None
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useAvatarVariantsModule (ref), getAvatarSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), flagsModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref), dashModule (ref), statusIndicatorModule (ref), indicatorModule (ref)
-	local var18 = withDefaultsModule(p0, t)
-	local var19 = useTokensModule()
-	local var20 = usePresentationContext()
-	local var21 = useAvatarVariantsModule(var19, var18.size, var18.userPresence, var18.backplateStyle, var20.isIconSize)
-	local var22 = getAvatarSizeModule(var19, var18.size, var20.isIconSize)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = usePresentationContext()
+	local var4 = useAvatarVariantsModule(var2, var1.size, var1.userPresence, var1.backplateStyle, var3.isIconSize)
+	local var5 = getAvatarSizeModule(var2, var1.size, var3.isIconSize)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var18, {
-		tag = var21.container.tag,
-		ref = p1,
-		backgroundStyle = var21.container.backgroundStyle,
-		stroke = var21.container.stroke,
-		Size = UDim2.fromOffset(var22, var22)
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		tag = var4.container.tag,
+		ref = p2,
+		backgroundStyle = var4.container.backgroundStyle,
+		stroke = var4.container.stroke,
+		Size = UDim2.fromOffset(var5, var5)
 	}), {
 		Image = reactModule.createElement(imageModule, {
-			Image = if flagsModule.FoundationAvatarBindableUserId then mapBindableModule(var18.userId, function(p2)
-				-- upvalues: getRbxThumbModule (copy), thumbnailTypeModule (copy), thumbnailSizeModule (copy), flagsModule (copy), var18 (ref)
-				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p2, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var18.includeProfileFrame } else nil)
-			end) else getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, var18.userId, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var18.includeProfileFrame } else nil),
-			tag = var21.avatar.tag,
-			backgroundStyle = var18.backgroundStyle,
-			testId = if flagsModule.FoundationAvatarBindableUserId then `{var18.testId}--image` else nil
+			Image = if flagsModule.FoundationAvatarBindableUserId then mapBindableModule(var1.userId, function(p3)
+				-- upvalues: getRbxThumbModule (copy), thumbnailTypeModule (copy), thumbnailSizeModule (copy), flagsModule (copy), var1 (ref)
+				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p3, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var1.includeProfileFrame } else nil)
+			end) else getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, var1.userId, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var1.includeProfileFrame } else nil),
+			tag = var4.avatar.tag,
+			backgroundStyle = var1.backgroundStyle,
+			testId = if flagsModule.FoundationAvatarBindableUserId then `{var1.testId}--image` else nil
 		}),
-		Indicator = if flagsModule.FoundationAvatarBeta then if var21.statusIndicator.isVisible then reactModule.createElement(viewModule, dashModule.join(var21.statusIndicatorBackplate, { testId = `{var18.testId}--indicator-backplate` }), reactModule.createElement(statusIndicatorModule, {
-			testId = `{var18.testId}--status-indicator`,
-			variant = var21.statusIndicator.variant,
-			shape = var21.statusIndicator.shape,
-			size = var21.statusIndicator.size
-		})) else nil elseif var21.indicator.isVisible then reactModule.createElement(viewModule, dashModule.join(var21.indicatorBackplate, { testId = `{var18.testId}--indicator` }), reactModule.createElement(indicatorModule, var21.indicator)) else nil
+		Indicator = if flagsModule.FoundationAvatarBeta then if var4.statusIndicator.isVisible then reactModule.createElement(viewModule, dashModule.join(var4.statusIndicatorBackplate, { testId = `{var1.testId}--indicator-backplate` }), reactModule.createElement(statusIndicatorModule, {
+			testId = `{var1.testId}--status-indicator`,
+			variant = var4.statusIndicator.variant,
+			shape = var4.statusIndicator.shape,
+			size = var4.statusIndicator.size
+		})) else nil elseif var4.indicator.isVisible then reactModule.createElement(viewModule, dashModule.join(var4.indicatorBackplate, { testId = `{var1.testId}--indicator` }), reactModule.createElement(indicatorModule, var21.indicator)) else nil
 	})
 end))

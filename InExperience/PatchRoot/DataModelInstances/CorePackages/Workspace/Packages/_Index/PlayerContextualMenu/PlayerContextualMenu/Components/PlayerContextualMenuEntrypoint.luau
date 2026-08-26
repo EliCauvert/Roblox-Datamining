@@ -4,11 +4,11 @@ local httpRequestContextModule = require(script.Parent.HttpRequest.HttpRequestCo
 local defaultHttpRequestInstanceModule = require(script.Parent.HttpRequest.DefaultHttpRequestInstance)
 local playerContextualMenuContainerModule = require(playerContextualMenu.Components.PlayerContextualMenuContainer)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), httpRequestContextModule (ref), defaultHttpRequestInstanceModule (ref), playerContextualMenuContainerModule (ref)
 	return reactModule.createElement(httpRequestContextModule.Provider, {
-		value = p0.httpRequest or defaultHttpRequestInstanceModule
+		value = p1.httpRequest or defaultHttpRequestInstanceModule
 	}, {
-		app = reactModule.createElement(playerContextualMenuContainerModule, p0)
+		app = reactModule.createElement(playerContextualMenuContainerModule, p1)
 	})
 end

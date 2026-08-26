@@ -1,15 +1,15 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(p0, "Cannot initialize CircularBuffer with nil")
-	assert(p0 > 0, "Cannot initialize CircularBuffer to size < 1")
+	assert(p1, "Cannot initialize CircularBuffer with nil")
+	assert(p1 > 0, "Cannot initialize CircularBuffer to size < 1")
 	local t_1 = {}
 	setmetatable(t_1, t)
 	t_1._data = {}
 	t_1._backIndex = 0
-	t_1._maxSize = p0
+	t_1._maxSize = p1
 	
 	return t_1
 end
@@ -32,29 +32,29 @@ function t:setSize(p1)
 	assert(p1 > 0, "Cannot set CircularBuffer to size < 1")
 	
 	if p1 == self._maxSize then return end
-	local var2 = self:iterator()
-	local var3 = var2:next()
+	local var1 = self:iterator()
+	local var2 = var1:next()
 	local t = {}
-	local var5 = 0
-	while var3 and var5 < p1 do
-		local var6 = var5 + 1
-		t[var6] = { entry = var3 }
+	local var3 = 0
+	while var2 and var3 < p1 do
+		local var4 = var3 + 1
+		t[var4] = { entry = var2 }
 		
-		if t[var5] then
-			t[var5]._next = t[var6]
+		if t[var3] then
+			t[var3]._next = t[var4]
 		end
-		var5 = var6
-		var3 = var2:next()
+		var3 = var4
+		var2 = var1:next()
 	end
 	self._data = t
-	self._backIndex = var5
+	self._backIndex = var3
 	self._maxSize = p1
 end
 
 function t:getFrontIndex()
-	local var7 = self._backIndex + 1
+	local var5 = self._backIndex + 1
 	
-	return if self._data[var7] then var7 else 1
+	return if self._data[var5] then var5 else 1
 end
 
 function t:front()
@@ -85,39 +85,39 @@ function t:getData()
 	return self._data
 end
 
-function t:at(p3)
-	assert(p3, "Cannot index CircularBuffer with nil")
-	local var9 = (self:getFrontIndex() + p3 - 2) % self._maxSize + 1
+function t:at(p2)
+	assert(p2, "Cannot index CircularBuffer with nil")
+	local var5 = (self:getFrontIndex() + p2 - 2) % self._maxSize + 1
 	
-	return if self._data[var9] then self._data[var9].entry else nil
+	return if self._data[var5] then self._data[var5].entry else nil
 end
 
-function t:reverseAt(p4)
-	local var10 = (self._backIndex - p4) % self._maxSize + 1
+function t:reverseAt(p2)
+	local var5 = (self._backIndex - p2) % self._maxSize + 1
 	
-	return if self._data[var10] then self._data[var10].entry else nil
+	return if self._data[var5] then self._data[var5].entry else nil
 end
 
-function t:push_back(p5)
+function t:push_back(p2)
 	local backIndex = self._backIndex
-	local var11 = self._backIndex + 1
+	local var5 = self._backIndex + 1
 	
-	if self._maxSize < var11 then
-		var11 = 1
+	if self._maxSize < var5 then
+		var5 = 1
 	end
-	local var12 = self._data[var11]
-	self._data[var11] = { entry = p5 }
+	local var6 = self._data[var5]
+	self._data[var5] = { entry = p2 }
 	
 	if backIndex > 0 then
-		self._data[backIndex]._next = self._data[var11]
+		self._data[backIndex]._next = self._data[var5]
 		
-		if var12 then
-			var12._next = nil
+		if var6 then
+			var6._next = nil
 		end
 	end
-	self._backIndex = var11
+	self._backIndex = var5
 	
-	return var12 and var12.entry
+	return var6 and var6.entry
 end
 
 return t

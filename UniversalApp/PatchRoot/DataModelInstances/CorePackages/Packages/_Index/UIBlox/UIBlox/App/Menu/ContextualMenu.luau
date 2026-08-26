@@ -63,95 +63,95 @@ contextualMenu.defaultProps = {
 	openPositionX = UDim.new(0, 0)
 }
 
-function contextualMenu.init(p0)
+function contextualMenu.init(p1)
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
-	p0.wasDismissed = false
-	local var12, var13 = roactModule.createBinding(0)
-	p0.positionPercentBinding = var12
-	p0.positionPercentBindingUpdate = var13
-	p0.motor = otterModule.createSingleMotor(0)
-	p0.motor:onStep(p0.positionPercentBindingUpdate)
-	p0.motor:onComplete(function()
-		-- upvalues: p0 (ref)
-		if p0.wasDismissed then
-			p0.wasDismissed = false
+	p1.wasDismissed = false
+	local var1, var2 = roactModule.createBinding(0)
+	p1.positionPercentBinding = var1
+	p1.positionPercentBindingUpdate = var2
+	p1.motor = otterModule.createSingleMotor(0)
+	p1.motor:onStep(p1.positionPercentBindingUpdate)
+	p1.motor:onComplete(function()
+		-- upvalues: p1 (ref)
+		if p1.wasDismissed then
+			p1.wasDismissed = false
 			
-			if p0.props.onDismiss then
-				p0.props.onDismiss()
+			if p1.props.onDismiss then
+				p1.props.onDismiss()
 			end
 		end
 	end)
-	p0.motorType = otterModule.spring
-	p0.motorOptions = t
+	p1.motorType = otterModule.spring
+	p1.motorOptions = t
 	
-	if p0.props.motorOverrideOptions then
-		p0.motorType = p0.props.motorOverrideOptions.motorCallback
-		p0.motorOptions = p0.props.motorOverrideOptions
+	if p1.props.motorOverrideOptions then
+		p1.motorType = p1.props.motorOverrideOptions.motorCallback
+		p1.motorOptions = p1.props.motorOverrideOptions
 	end
-	p0.state = {
+	p1.state = {
 		absoluteSize = Vector2.new(0, 0),
 		absolutePosition = Vector2.new(0, 0)
 	}
-	p0.visibleBinding = p0.positionPercentBinding:map(function(p1)
-		return p1 ~= 0
+	p1.visibleBinding = p1.positionPercentBinding:map(function(p2)
+		return p2 ~= 0
 	end)
 end
 
-function contextualMenu.render(p2)
+function contextualMenu.render(p1)
 	-- upvalues: withStyleModule (ref), menuDirectionModule (ref), guiService (ref), roactModule (ref), baseMenuModule (ref)
-	return withStyleModule(function(p3)
-		-- upvalues: p2 (ref), menuDirectionModule (copy), guiService (copy), roactModule (copy), baseMenuModule (copy)
-		local var14 = 0.5
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), menuDirectionModule (copy), guiService (copy), roactModule (copy), baseMenuModule (copy)
+		local var1 = 0.5
 		local uDim = UDim.new(1, -24)
 		local uDim_1 = UDim.new(0, 0)
-		local var17 = p2.state.absoluteSize.X > 640
+		local var2 = p1.state.absoluteSize.X > 640
 		
-		if var17 then
+		if var2 then
 			uDim = UDim.new(0, 300)
-			uDim_1 = p2.props.openPositionX
+			uDim_1 = p1.props.openPositionX
 			
-			if p2.props.horizontalAlignment == Enum.HorizontalAlignment.Left then
-				var14 = 0
-			elseif p2.props.horizontalAlignment == Enum.HorizontalAlignment.Right then
-				var14 = 1
+			if p1.props.horizontalAlignment == Enum.HorizontalAlignment.Left then
+				var1 = 0
+			elseif p1.props.horizontalAlignment == Enum.HorizontalAlignment.Right then
+				var1 = 1
 			end
 		end
-		local var18 = if p2.props.menuDirection == menuDirectionModule.Up then 1 else 0
-		local var19 = if not p2.props.closeBackgroundVisible then 1 else p3.Theme.Overlay.Transparency
-		uDim = p2.props.contextMenuWidthOverride or uDim
-		local anchorPointOverride = p2.props.anchorPointOverride or Vector2.new(var14, var18)
+		local var3 = if p1.props.menuDirection == menuDirectionModule.Up then 1 else 0
+		local var4 = if not p1.props.closeBackgroundVisible then 1 else p2.Theme.Overlay.Transparency
+		uDim = p1.props.contextMenuWidthOverride or uDim
+		local anchorPointOverride = p1.props.anchorPointOverride or Vector2.new(var1, var3)
 		local guiInset, _ = guiService:GetGuiInset()
-		local var22 = p2.state.absolutePosition + guiInset
+		local var5 = p1.state.absolutePosition + guiInset
 		
 		return roactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
-			Visible = p2.visibleBinding,
-			ZIndex = p2.props.zIndex,
-			[roactModule.Change.AbsoluteSize] = function(p4)
-				-- upvalues: p2 (copy)
-				p2:setState({ absoluteSize = p4.AbsoluteSize })
+			Visible = p1.visibleBinding,
+			ZIndex = p1.props.zIndex,
+			[roactModule.Change.AbsoluteSize] = function(p3)
+				-- upvalues: p1 (copy)
+				p1:setState({ absoluteSize = p3.AbsoluteSize })
 			end,
-			[roactModule.Change.AbsolutePosition] = function(p5)
-				-- upvalues: p2 (copy)
-				p2:setState({ absolutePosition = p5.AbsolutePosition })
+			[roactModule.Change.AbsolutePosition] = function(p3)
+				-- upvalues: p1 (copy)
+				p1:setState({ absolutePosition = p3.AbsolutePosition })
 			end
 		}, {
 			Background = roactModule.createElement("TextButton", {
 				ZIndex = 1,
 				Text = "",
 				BorderSizePixel = 0,
-				BackgroundColor3 = p3.Theme.Overlay.Color,
-				BackgroundTransparency = var19,
+				BackgroundColor3 = p2.Theme.Overlay.Color,
+				BackgroundTransparency = var4,
 				AutoButtonColor = false,
 				Selectable = false,
-				Position = UDim2.fromOffset(-var22.X, -var22.Y),
-				Size = UDim2.fromOffset(p2.props.screenSize.X, p2.props.screenSize.Y),
+				Position = UDim2.fromOffset(-var5.X, -var5.Y),
+				Size = UDim2.fromOffset(p1.props.screenSize.X, p1.props.screenSize.Y),
 				[roactModule.Event.Activated] = function()
-					-- upvalues: p2 (copy)
-					if not p2.wasDismissed then
-						p2.wasDismissed = true
-						p2.motor:setGoal(p2.motorType(p2.motorOptions.close.targetValue, p2.motorOptions.close.springParams))
+					-- upvalues: p1 (copy)
+					if not p1.wasDismissed then
+						p1.wasDismissed = true
+						p1.motor:setGoal(p1.motorType(p1.motorOptions.close.targetValue, p1.motorOptions.close.springParams))
 					end
 				end
 			}),
@@ -159,66 +159,66 @@ function contextualMenu.render(p2)
 				BackgroundTransparency = 1,
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1),
-				Position = UDim2.new(uDim_1.Scale, uDim_1.Offset, p2.props.openPositionY.Scale, p2.props.openPositionY.Offset)
+				Position = UDim2.new(uDim_1.Scale, uDim_1.Offset, p1.props.openPositionY.Scale, p1.props.openPositionY.Offset)
 			}, {
 				BaseMenu = roactModule.createElement(baseMenuModule, {
-					buttonProps = p2.props.buttonProps,
-					setFirstItemRef = p2.props.setFirstItemRef,
-					setFrameRef = p2.props.setFrameRef,
+					buttonProps = p1.props.buttonProps,
+					setFirstItemRef = p1.props.setFirstItemRef,
+					setFrameRef = p1.props.setFrameRef,
 					width = uDim,
-					position = p2.positionPercentBinding:map(function(p6)
-						-- upvalues: var17 (ref), p2 (copy), menuDirectionModule (copy)
-						local var23 = 0.5
+					position = p1.positionPercentBinding:map(function(p3)
+						-- upvalues: var2 (ref), p1 (copy), menuDirectionModule (copy)
+						local var6 = 0.5
 						
-						if var17 or p2.props.anchorPointOverride then
-							if p2.props.horizontalAlignment == Enum.HorizontalAlignment.Left then
-								var23 = 0
-							elseif p2.props.horizontalAlignment == Enum.HorizontalAlignment.Right then
-								var23 = 1
+						if var2 or p1.props.anchorPointOverride then
+							if p1.props.horizontalAlignment == Enum.HorizontalAlignment.Left then
+								var6 = 0
+							elseif p1.props.horizontalAlignment == Enum.HorizontalAlignment.Right then
+								var6 = 1
 							end
 						end
-						return if p2.props.menuDirection == menuDirectionModule.Down then UDim2.fromScale(var23, p6 - 1) else UDim2.fromScale(var23, 1 - p6)
+						return if p1.props.menuDirection == menuDirectionModule.Down then UDim2.fromScale(var6, p3 - 1) else UDim2.fromScale(var6, 1 - p3)
 					end),
 					anchorPoint = anchorPointOverride,
-					topElementRounded = p2.props.topElementRounded,
-					bottomElementRounded = p2.props.bottomElementRounded,
-					isElementBackgroundVisible = p2.props.isElementBackgroundVisible,
-					isElementDividerVisible = p2.props.isElementDividerVisible,
-					elementHeight = p2.props.elementHeight,
-					borderCornerRadius = p2.props.borderCornerRadius,
-					background = p2.props.background,
-					enableTokenOverride = p2.props.enableTokenOverride,
-					renderHeader = p2.props.renderHeader,
-					headerHeight = p2.props.headerHeight,
-					showDropShadow = p2.props.showDropShadow,
-					isRoactGamepadEnabled = p2.props.isRoactGamepadEnabled
+					topElementRounded = p1.props.topElementRounded,
+					bottomElementRounded = p1.props.bottomElementRounded,
+					isElementBackgroundVisible = p1.props.isElementBackgroundVisible,
+					isElementDividerVisible = p1.props.isElementDividerVisible,
+					elementHeight = p1.props.elementHeight,
+					borderCornerRadius = p1.props.borderCornerRadius,
+					background = p1.props.background,
+					enableTokenOverride = p1.props.enableTokenOverride,
+					renderHeader = p1.props.renderHeader,
+					headerHeight = p1.props.headerHeight,
+					showDropShadow = p1.props.showDropShadow,
+					isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled
 				})
 			})
 		})
 	end)
 end
 
-function contextualMenu.didMount(p7)
-	if p7.props.open then
-		p7.wasDismissed = false
-		p7.motor:setGoal(p7.motorType(p7.motorOptions.open.targetValue, p7.motorOptions.open.springParams))
+function contextualMenu.didMount(p1)
+	if p1.props.open then
+		p1.wasDismissed = false
+		p1.motor:setGoal(p1.motorType(p1.motorOptions.open.targetValue, p1.motorOptions.open.springParams))
 	end
 end
 
-function contextualMenu.didUpdate(p8, p9, _)
-	if p8.props.open ~= p9.open then
-		if p8.props.open then
-			p8.wasDismissed = false
-			p8.motor:setGoal(p8.motorType(p8.motorOptions.open.targetValue, p8.motorOptions.open.springParams))
+function contextualMenu.didUpdate(p1, p2, _)
+	if p1.props.open ~= p2.open then
+		if p1.props.open then
+			p1.wasDismissed = false
+			p1.motor:setGoal(p1.motorType(p1.motorOptions.open.targetValue, p1.motorOptions.open.springParams))
 			
 			return
 		end
-		p8.motor:setGoal(p8.motorType(p8.motorOptions.close.targetValue, p8.motorOptions.close.springParams))
+		p1.motor:setGoal(p1.motorType(p1.motorOptions.close.targetValue, p1.motorOptions.close.springParams))
 	end
 end
 
-function contextualMenu.willUnmount(p10)
-	p10.motor:destroy()
+function contextualMenu.willUnmount(p1)
+	p1.motor:destroy()
 end
 
 return contextualMenu

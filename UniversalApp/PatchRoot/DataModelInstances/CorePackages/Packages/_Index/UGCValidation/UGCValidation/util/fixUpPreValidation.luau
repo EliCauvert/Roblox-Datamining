@@ -2,17 +2,17 @@
 local getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule = require(parent.flags.getEngineFeatureEngineSplitHumanoidRigDescriptionInUpload)
 local splitHumanoidRigDescriptionForUploadModule = require(parent.util.SplitHumanoidRigDescriptionForUpload)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule (ref), splitHumanoidRigDescriptionForUploadModule (ref)
-	local var2 = p0:Clone()
+	local var1 = p1:Clone()
 	
 	if getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule() then
-		splitHumanoidRigDescriptionForUploadModule.fixUploadInstance(var2)
+		splitHumanoidRigDescriptionForUploadModule.fixUploadInstance(var1)
 	end
-	var2 = var2:GetDescendants()
-	table.insert(var2, var2)
+	var1 = var1:GetDescendants()
+	table.insert(var1, var1)
 	
-	for i, v in var2 do
+	for i, v in var1 do
 		if v.Parent == nil or not v:IsA("Motor6D") and v.Name ~= "OriginalSize" and v.Name ~= "OriginalPosition" and (not v:IsA("Weld") or v.Name ~= "AccessoryWeld") and (not getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule() or not v:IsA("Constraint") and not v:isA("NoCollisionConstraint")) then
 			if v:IsA("BasePart") then
 				v.Velocity = Vector3.new(0, 0, 0)
@@ -25,5 +25,5 @@ return function(p0)
 			v:Destroy()
 		end
 	end
-	return var2
+	return var1
 end

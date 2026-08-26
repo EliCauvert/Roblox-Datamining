@@ -8,89 +8,89 @@ local createComputed = signalsModule.createComputed
 
 return function()
 	-- upvalues: createSignal (ref), createComputed (ref), snapMathModule (ref), cryoModule (ref), signalsExperimentalModule (ref)
-	local var4, var5 = createSignal({})
-	local var6, var7 = createSignal(1)
+	local var1, var2 = createSignal({})
+	local var3, var4 = createSignal(1)
 	
 	return {
-		getItems = var4,
-		getCount = createComputed(function(p0)
-			-- upvalues: var4 (ref)
-			return #var4(p0)
+		getItems = var1,
+		getCount = createComputed(function(p1)
+			-- upvalues: var1 (ref)
+			return #var1(p1)
 		end),
-		getCurrentIndex = var6,
+		getCurrentIndex = var3,
 		getCurrentItem = createComputed(function(p1)
-			-- upvalues: var4 (ref), var6 (ref)
-			return var4(p1)[var6(p1)]
+			-- upvalues: var1 (ref), var3 (ref)
+			return var1(p1)[var3(p1)]
 		end),
-		addItems = function(p2)
-			-- upvalues: var5 (ref), cryoModule (copy), var4 (ref)
-			if #p2 == 0 then
+		addItems = function(p1)
+			-- upvalues: var2 (ref), cryoModule (copy), var1 (ref)
+			if #p1 == 0 then
 				return
 			end
-			var5(cryoModule.List.join(var4(false), p2))
+			var2(cryoModule.List.join(var1(false), p1))
 		end,
-		addItemAt = function(p3, p4)
-			-- upvalues: var4 (ref), signalsExperimentalModule (copy), var5 (ref), var6 (ref), var7 (ref), snapMathModule (copy)
-			local var8 = var4(false)
-			local var8Count = #var8
-			local clampedValue = math.clamp(p3, 1, var8Count + 1)
-			local cloned = table.clone(var8)
-			table.insert(cloned, clampedValue, p4)
+		addItemAt = function(p1, p2)
+			-- upvalues: var1 (ref), signalsExperimentalModule (copy), var2 (ref), var3 (ref), var4 (ref), snapMathModule (copy)
+			local var5 = var1(false)
+			local var8Count = #var5
+			local clampedValue = math.clamp(p1, 1, var8Count + 1)
+			local cloned = table.clone(var5)
+			table.insert(cloned, clampedValue, p2)
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var5 (copy), cloned (ref), var8Count (ref), var6 (copy), clampedValue (ref), var7 (copy), snapMathModule (copy)
-				var5(cloned)
+				-- upvalues: var2 (copy), cloned (ref), var8Count (ref), var3 (copy), clampedValue (ref), var4 (copy), snapMathModule (copy)
+				var2(cloned)
 				
 				if var8Count > 0 then
-					local var12 = var6(false)
+					local var6 = var3(false)
 					
-					if clampedValue <= var12 then
-						var7(snapMathModule.clampIndex(var12 + 1, #cloned))
+					if clampedValue <= var6 then
+						var4(snapMathModule.clampIndex(var6 + 1, #cloned))
 					end
 				end
 			end)
 		end,
-		removeItem = function(p5)
-			-- upvalues: var4 (ref), signalsExperimentalModule (copy), var5 (ref), var7 (ref), snapMathModule (copy), var6 (ref)
-			local var13 = var4(false)
+		removeItem = function(p1)
+			-- upvalues: var1 (ref), signalsExperimentalModule (copy), var2 (ref), var4 (ref), snapMathModule (copy), var3 (ref)
+			local var5 = var1(false)
 			
-			if p5 < 1 or #var13 < p5 then
+			if p1 < 1 or #var5 < p1 then
 				return
 			end
-			local cloned = table.clone(var13)
-			table.remove(cloned, p5)
+			local cloned = table.clone(var5)
+			table.remove(cloned, p1)
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var5 (copy), cloned (ref), var7 (copy), snapMathModule (copy), var6 (copy), p5 (ref)
-				var5(cloned)
-				var7(snapMathModule.reindexAfterRemoval(var6(false), p5, #cloned))
+				-- upvalues: var2 (copy), cloned (ref), var4 (copy), snapMathModule (copy), var3 (copy), p1 (ref)
+				var2(cloned)
+				var4(snapMathModule.reindexAfterRemoval(var3(false), p1, #cloned))
 			end)
 		end,
 		setItems = function(value)
-			-- upvalues: signalsExperimentalModule (copy), var5 (ref), var7 (ref), snapMathModule (copy), var6 (ref)
+			-- upvalues: signalsExperimentalModule (copy), var2 (ref), var4 (ref), snapMathModule (copy), var3 (ref)
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var5 (copy), value (ref), var7 (copy), snapMathModule (copy), var6 (copy)
-				var5(table.clone(value))
-				var7(snapMathModule.clampIndex(var6(false), #value))
+				-- upvalues: var2 (copy), value (ref), var4 (copy), snapMathModule (copy), var3 (copy)
+				var2(table.clone(value))
+				var4(snapMathModule.clampIndex(var3(false), #value))
 			end)
 		end,
 		reset = function()
-			-- upvalues: signalsExperimentalModule (copy), var5 (ref), var7 (ref)
+			-- upvalues: signalsExperimentalModule (copy), var2 (ref), var4 (ref)
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var5 (copy), var7 (copy)
-				var5({})
-				var7(1)
+				-- upvalues: var2 (copy), var4 (copy)
+				var2({})
+				var4(1)
 			end)
 		end,
 		nextItem = function()
-			-- upvalues: var6 (ref), var7 (ref), snapMathModule (copy), var4 (ref)
-			var7(snapMathModule.clampIndex(var6(false) + 1, #var4(false)))
+			-- upvalues: var3 (ref), var4 (ref), snapMathModule (copy), var1 (ref)
+			var4(snapMathModule.clampIndex(var3(false) + 1, #var1(false)))
 		end,
 		previousItem = function()
-			-- upvalues: var6 (ref), var7 (ref), snapMathModule (copy), var4 (ref)
-			var7(snapMathModule.clampIndex(var6(false) - 1, #var4(false)))
+			-- upvalues: var3 (ref), var4 (ref), snapMathModule (copy), var1 (ref)
+			var4(snapMathModule.clampIndex(var3(false) - 1, #var1(false)))
 		end,
-		goToItem = function(p6)
-			-- upvalues: var7 (ref), snapMathModule (copy), var4 (ref)
-			var7(snapMathModule.clampIndex(p6, #var4(false)))
+		goToItem = function(p1)
+			-- upvalues: var4 (ref), snapMathModule (copy), var1 (ref)
+			var4(snapMathModule.clampIndex(p1, #var1(false)))
 		end,
 		dispose = function() end
 	}

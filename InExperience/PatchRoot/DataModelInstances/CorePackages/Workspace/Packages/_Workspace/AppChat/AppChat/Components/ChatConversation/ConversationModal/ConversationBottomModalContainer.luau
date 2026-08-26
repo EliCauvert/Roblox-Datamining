@@ -18,30 +18,30 @@ local t = {
 	onHeightChanged = function(_) end
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), getDeepValue2Module (ref), modalConfigurationModule (ref), reactModule (ref), conversationBottomModal (ref), appChatFAEBannerModule (ref), fFlagTestDeviceForFAEUpsell (ref), deviceMeetsRequirementsForFAE (ref), conversationModalModule (ref), foundationModule (ref)
-	local var10 = cryoModule.Dictionary.union(t, p0)
-	local var11 = useSelector(function(p1)
-		-- upvalues: getDeepValue2Module (copy), var10 (ref), modalConfigurationModule (copy)
-		return getDeepValue2Module(p1, `ChatAppReducer.Modals.conversationBottomModals.{var10.conversationId}`) or modalConfigurationModule.default
+	local var1 = cryoModule.Dictionary.union(t, p1)
+	local var2 = useSelector(function(p2)
+		-- upvalues: getDeepValue2Module (copy), var1 (ref), modalConfigurationModule (copy)
+		return getDeepValue2Module(p2, `ChatAppReducer.Modals.conversationBottomModals.{var1.conversationId}`) or modalConfigurationModule.default
 	end)
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: var10 (ref)
-		var10.onHeightChanged(p2.AbsoluteSize.Y)
-	end, { var10.onHeightChanged })
-	local var13 = if not (var10.shouldShowChatInputBar or not var11 or (var11.modal_variant == nil or var11.modal_variant == conversationBottomModal.None)) then reactModule.createElement(appChatFAEBannerModule, {
-		modalConfiguration = var11,
-		conversationId = var10.conversationId
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref)
+		var1.onHeightChanged(p2.AbsoluteSize.Y)
+	end, { var1.onHeightChanged })
+	local var4 = if not (var1.shouldShowChatInputBar or not var2 or (var2.modal_variant == nil or var2.modal_variant == conversationBottomModal.None)) then reactModule.createElement(appChatFAEBannerModule, {
+		modalConfiguration = var2,
+		conversationId = var1.conversationId
 	}) else nil
 	
 	if fFlagTestDeviceForFAEUpsell and not deviceMeetsRequirementsForFAE() then
 		return nil
-	elseif not var13 and var10.shouldShowLegacyBottomModal then
-		var13 = reactModule.createElement(conversationModalModule, { bodyText = var10.legacyBottomModalText })
+	elseif not var4 and var1.shouldShowLegacyBottomModal then
+		var4 = reactModule.createElement(conversationModalModule, { bodyText = var1.legacyBottomModalText })
 	end
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-y size-full-0",
-		LayoutOrder = var10.layoutOrder,
-		onAbsoluteSizeChanged = var12
-	}, { ConversationBottomModal = var13 })
+		LayoutOrder = var1.layoutOrder,
+		onAbsoluteSizeChanged = var3
+	}, { ConversationBottomModal = var4 })
 end)

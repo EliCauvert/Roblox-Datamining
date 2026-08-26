@@ -8,8 +8,8 @@ local _ = require(script.Parent.AssetLibraryDetailView)
 local _ = require(script.Parent.Parent.AssetLibraryTypes)
 local useAssetLibraryStringsModule = require(script.Parent.Parent.useAssetLibraryStrings)
 
-local function _(value, p0)
-	return if value == "Model" then p0.model elseif value == "Image" then p0.image else p0.audio
+local function _(value, p1)
+	return if value == "Model" then p1.model elseif value == "Image" then p1.image else p1.audio
 end
 
 local _ = function(p1)
@@ -22,75 +22,75 @@ local _ = function(p1)
 	return if dateTime == nil then p1 else dateTime:FormatLocalTime("ll", localizationService.RobloxLocaleId)
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: localizationService (ref)
-	if p2 == nil or p2 == "" then
+	if p1 == nil or p1 == "" then
 		return nil
 	end
-	local dateTime = DateTime.fromIsoDate(p2)
+	local dateTime = DateTime.fromIsoDate(p1)
 	
-	return if dateTime == nil then p2 else dateTime:FormatLocalTime("lll", localizationService.RobloxLocaleId)
+	return if dateTime == nil then p1 else dateTime:FormatLocalTime("lll", localizationService.RobloxLocaleId)
 end
 
 return function(value)
 	-- upvalues: useAssetLibraryStringsModule (ref), creatorInventoryModule (ref), reactModule (ref), signalsModule (ref), localizationService (ref), signalsReactModule (ref)
-	local var8 = useAssetLibraryStringsModule()
+	local var1 = useAssetLibraryStringsModule()
 	local inventoryStore = value.inventoryStore or creatorInventoryModule.getCreatorInventoryStore(false)
-	local var10 = reactModule.useMemo(function()
+	local var2 = reactModule.useMemo(function()
 		-- upvalues: inventoryStore (ref), value (ref)
 		return inventoryStore.getAsset(value.universeId, value.assetId)
 	end, { inventoryStore, value.universeId, value.assetId })
-	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var10 (ref), var8 (ref), localizationService (copy)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: var10 (copy), var8 (copy), localizationService (copy)
-			local var12 = var10.data(p3)
+	local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var2 (ref), var1 (ref), localizationService (copy)
+		return signalsModule.createComputed(function(p1)
+			-- upvalues: var2 (copy), var1 (copy), localizationService (copy)
+			local var4 = var2.data(p1)
 			
-			if var12 == nil then
+			if var4 == nil then
 				return { asset = nil, status = "Failed" }
 			end
-			local var18
-			local var13 = if var12.creationContext ~= nil then nil else var12.creationContext.creator
+			local var5
+			local var6 = if var4.creationContext ~= nil then nil else var4.creationContext.creator
 			local t = { status = "Ready" }
 			local t_1 = {
-				assetId = var12.assetId,
-				displayName = var12.displayName,
-				description = var12.description,
-				assetType = var12.assetType
+				assetId = var4.assetId,
+				displayName = var4.displayName,
+				description = var4.description,
+				assetType = var4.assetType
 			}
-			local assetType = var12.assetType
-			local var16 = var8
-			t_1.displayType = if assetType == "Model" then var16.model elseif assetType == "Image" then var16.image else var16.audio
-			local createTime = var12.createTime
+			local assetType = var4.assetType
+			local var7 = var1
+			t_1.displayType = if assetType == "Model" then var7.model elseif assetType == "Image" then var7.image else var7.audio
+			local createTime = var4.createTime
 			
 			if createTime == nil or createTime == "" then
-				var18 = nil
+				var5 = nil
 			else
 				local dateTime = DateTime.fromIsoDate(createTime)
-				var18 = if dateTime == nil then createTime else dateTime:FormatLocalTime("ll", localizationService.RobloxLocaleId)
+				var5 = if dateTime == nil then createTime else dateTime:FormatLocalTime("ll", localizationService.RobloxLocaleId)
 			end
-			local var20
-			t_1.createTime = var18
-			createTime = var12.updateTime
+			local var8
+			t_1.createTime = var5
+			createTime = var4.updateTime
 			
 			if createTime == nil or createTime == "" then
-				var20 = nil
+				var8 = nil
 			else
 				local dateTime = DateTime.fromIsoDate(createTime)
-				var20 = if dateTime == nil then createTime else dateTime:FormatLocalTime("lll", localizationService.RobloxLocaleId)
+				var8 = if dateTime == nil then createTime else dateTime:FormatLocalTime("lll", localizationService.RobloxLocaleId)
 			end
-			t_1.updateTime = var20
-			t_1.creatorName = if var13 ~= nil then nil else var13.name
+			t_1.updateTime = var8
+			t_1.creatorName = if var6 ~= nil then nil else var6.name
 			t.asset = t_1
 			
 			return t
 		end)
-	end, { var10, var8 }))
+	end, { var2, var1 }))
 	
 	return {
-		asset = var11.asset,
-		status = var11.status,
-		strings = var8,
+		asset = var3.asset,
+		status = var3.status,
+		strings = var1,
 		onBack = value.onBack
 	}
 end

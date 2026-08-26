@@ -2,12 +2,12 @@
 local reactModule = require(reactUtils.Parent.React)
 local useRefToStateModule = require(reactUtils.useRefToState)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useRefToStateModule (ref), reactModule (ref)
-	local var3 = useRefToStateModule(p0)
+	local var1 = useRefToStateModule(p1)
 	
 	return reactModule.useCallback(function(...)
-		-- upvalues: var3 (ref)
-		return var3.current(...)
+		-- upvalues: var1 (ref)
+		return var1.current(...)
 	end, {})
 end

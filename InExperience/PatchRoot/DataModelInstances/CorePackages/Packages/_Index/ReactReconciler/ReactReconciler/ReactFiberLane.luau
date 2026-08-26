@@ -3,7 +3,7 @@ local reactGlobalsModule = require(parent.ReactGlobals)
 local _ = require(script.Parent.ReactInternalTypes)
 local console = require(parent.Shared).console
 local unknownModule = require(script.Parent["ReactFiberSchedulerPriorities.roblox"])
-local var2 = require(parent.SafeFlags).createGetFFlag("ReactInlineMergeLanes")()
+local var1 = require(parent.SafeFlags).createGetFFlag("ReactInlineMergeLanes")()
 local invariant = require(parent.Shared).invariant
 local immediatePriority = unknownModule.ImmediatePriority
 local userBlockingPriority = unknownModule.UserBlockingPriority
@@ -40,9 +40,9 @@ function t.getCurrentUpdateLanePriority()
 	return noLanePriority
 end
 
-function t.setCurrentUpdateLanePriority(p0)
+function t.setCurrentUpdateLanePriority(p1)
 	-- upvalues: noLanePriority (write)
-	noLanePriority = p0
+	noLanePriority = p1
 end
 
 local defaultLanePriority = t.DefaultLanePriority
@@ -161,20 +161,20 @@ local pickArbitraryLaneIndex = nil
 local getLowestPriorityLane = nil
 local getEqualOrHigherPriorityLanes = nil
 
-function t.getNextLanes(p2, p3)
+function t.getNextLanes(p1, p2)
 	-- upvalues: defaultLanePriority (write), getHighestPriorityLanes (ref), getLowestPriorityLane (write), pickArbitraryLaneIndex (write)
-	local pendingLanes = p2.pendingLanes
+	local pendingLanes = p1.pendingLanes
 	
 	if pendingLanes == 0 then
 		defaultLanePriority = 0
 		
 		return 0
 	end
-	local var16 = 0
-	local var17 = 0
-	local expiredLanes = p2.expiredLanes
-	local suspendedLanes = p2.suspendedLanes
-	local pingedLanes = p2.pingedLanes
+	local var2 = 0
+	local var3 = 0
+	local expiredLanes = p1.expiredLanes
+	local suspendedLanes = p1.suspendedLanes
+	local pingedLanes = p1.pingedLanes
 	
 	if expiredLanes == 0 then
 		local bits = bit32.band(pendingLanes, 134217727)
@@ -183,11 +183,11 @@ function t.getNextLanes(p2, p3)
 			local bits_1 = bit32.band(pendingLanes, bit32.bnot(suspendedLanes))
 			
 			if bits_1 ~= 0 then
-				var16 = getHighestPriorityLanes(bits_1)
-				var17 = defaultLanePriority
+				var2 = getHighestPriorityLanes(bits_1)
+				var3 = defaultLanePriority
 			elseif pingedLanes ~= 0 then
-				var16 = getHighestPriorityLanes(pingedLanes)
-				var17 = defaultLanePriority
+				var2 = getHighestPriorityLanes(pingedLanes)
+				var3 = defaultLanePriority
 			end
 		else
 			local bits_1 = bit32.band(bits, bit32.bnot(suspendedLanes))
@@ -196,102 +196,102 @@ function t.getNextLanes(p2, p3)
 				local bits_2 = bit32.band(bits, pingedLanes)
 				
 				if bits_2 ~= 0 then
-					var16 = getHighestPriorityLanes(bits_2)
-					var17 = defaultLanePriority
+					var2 = getHighestPriorityLanes(bits_2)
+					var3 = defaultLanePriority
 				end
 			else
-				var16 = getHighestPriorityLanes(bits_1)
-				var17 = defaultLanePriority
+				var2 = getHighestPriorityLanes(bits_1)
+				var3 = defaultLanePriority
 			end
 		end
 	else
-		var16 = expiredLanes
+		var2 = expiredLanes
 		defaultLanePriority = 15
-		var17 = 15
+		var3 = 15
 	end
-	if var16 == 0 then
+	if var2 == 0 then
 		return 0
 	end
-	var16 = bit32.band(pendingLanes, bit32.lshift(getLowestPriorityLane(var16), 1) - 1)
+	var2 = bit32.band(pendingLanes, bit32.lshift(getLowestPriorityLane(var2), 1) - 1)
 	
-	if p3 ~= 0 and p3 ~= var16 and bit32.band(p3, suspendedLanes) == 0 then
-		getHighestPriorityLanes(p3)
+	if p2 ~= 0 and p2 ~= var2 and bit32.band(p2, suspendedLanes) == 0 then
+		getHighestPriorityLanes(p2)
 		
-		if var17 <= defaultLanePriority then
-			return p3
+		if var3 <= defaultLanePriority then
+			return p2
 		end
-		defaultLanePriority = var17
+		defaultLanePriority = var3
 	end
-	local entangledLanes = p2.entangledLanes
+	local entangledLanes = p1.entangledLanes
 	
 	if entangledLanes ~= 0 then
-		local entanglements = p2.entanglements
-		local bits = bit32.band(var16, entangledLanes)
+		local entanglements = p1.entanglements
+		local bits = bit32.band(var2, entangledLanes)
 		while bits > 0 do
-			local var23 = pickArbitraryLaneIndex(bits)
-			var16 = bit32.bor(var16, entanglements[var23])
-			bits = bit32.band(bits, bit32.bnot(bit32.lshift(1, var23)))
+			local var4 = pickArbitraryLaneIndex(bits)
+			var2 = bit32.bor(var2, entanglements[var4])
+			bits = bit32.band(bits, bit32.bnot(bit32.lshift(1, var4)))
 		end
 	end
-	return var16
+	return var2
 end
 
-function t.getMostRecentEventTime(p4, p5)
+function t.getMostRecentEventTime(p3, p4)
 	-- upvalues: pickArbitraryLaneIndex (write)
-	local eventTimes = p4.eventTimes
-	local var24 = -1
-	while p5 > 0 do
-		local var25 = pickArbitraryLaneIndex(p5)
-		local shifted = bit32.lshift(1, var25)
-		local var27 = eventTimes[var25]
+	local eventTimes = p3.eventTimes
+	local var5 = -1
+	while p4 > 0 do
+		local var6 = pickArbitraryLaneIndex(p4)
+		local shifted = bit32.lshift(1, var6)
+		local var7 = eventTimes[var6]
 		
-		if var24 < var27 then
-			var24 = var27
+		if var5 < var7 then
+			var5 = var7
 		end
-		p5 = bit32.band(p5, bit32.bnot(shifted))
+		p4 = bit32.band(p4, bit32.bnot(shifted))
 	end
-	return var24
+	return var5
 end
 
-function t.computeExpirationTime(p6, p7)
+function t.computeExpirationTime(p5, p6)
 	-- upvalues: getHighestPriorityLanes (ref), defaultLanePriority (write)
-	getHighestPriorityLanes(p6)
+	getHighestPriorityLanes(p5)
 	
-	return if defaultLanePriority >= 10 then p7 + 250 elseif defaultLanePriority >= 6 then p7 + 5000 else -1
+	return if defaultLanePriority >= 10 then p6 + 250 elseif defaultLanePriority >= 6 then p6 + 5000 else -1
 end
 
-function t.markStarvedLanesAsExpired(p8, p9)
+function t.markStarvedLanesAsExpired(p5, p6)
 	-- upvalues: pickArbitraryLaneIndex (write), getHighestPriorityLanes (ref), defaultLanePriority (write)
-	local pendingLanes = p8.pendingLanes
-	local suspendedLanes = p8.suspendedLanes
-	local pingedLanes = p8.pingedLanes
-	local expirationTimes = p8.expirationTimes
-	local var28 = pendingLanes
-	while var28 > 0 do
-		local var29 = pickArbitraryLaneIndex(var28)
-		local shifted = bit32.lshift(1, var29)
-		local var31 = expirationTimes[var29]
+	local pendingLanes = p5.pendingLanes
+	local suspendedLanes = p5.suspendedLanes
+	local pingedLanes = p5.pingedLanes
+	local expirationTimes = p5.expirationTimes
+	local var8 = pendingLanes
+	while var8 > 0 do
+		local var9 = pickArbitraryLaneIndex(var8)
+		local shifted = bit32.lshift(1, var9)
+		local var10 = expirationTimes[var9]
 		
-		if var31 == -1 then
+		if var10 == -1 then
 			if bit32.band(shifted, suspendedLanes) == 0 or bit32.band(shifted, pingedLanes) ~= 0 then
 				getHighestPriorityLanes(shifted)
-				local var32 = defaultLanePriority
-				expirationTimes[var29] = if var32 >= 10 then p9 + 250 elseif var32 >= 6 then p9 + 5000 else -1
+				local var11 = defaultLanePriority
+				expirationTimes[var9] = if var11 >= 10 then p6 + 250 elseif var11 >= 6 then p6 + 5000 else -1
 			end
-		elseif var31 <= p9 then
-			p8.expiredLanes = bit32.bor(p8.expiredLanes, shifted)
+		elseif var10 <= p6 then
+			p5.expiredLanes = bit32.bor(p5.expiredLanes, shifted)
 		end
-		var28 = bit32.band(var28, bit32.bnot(shifted))
+		var8 = bit32.band(var8, bit32.bnot(shifted))
 	end
 end
 
-function t.getHighestPriorityPendingLanes(p10)
+function t.getHighestPriorityPendingLanes(p7)
 	-- upvalues: getHighestPriorityLanes (ref)
-	return getHighestPriorityLanes(p10.pendingLanes)
+	return getHighestPriorityLanes(p7.pendingLanes)
 end
 
-function t.getLanesToRetrySynchronouslyOnError(p11)
-	local bits = bit32.band(p11.pendingLanes, 3221225471)
+function t.getLanesToRetrySynchronouslyOnError(p7)
+	local bits = bit32.band(p7.pendingLanes, 3221225471)
 	
 	return if bits == 0 then if bit32.band(bits, 1073741824) == 0 then 0 else 1073741824 else bits
 end
@@ -301,237 +301,237 @@ function t.returnNextLanesPriority()
 	return defaultLanePriority
 end
 
-function t.includesNonIdleWork(p12)
-	return bit32.band(p12, 134217727) ~= 0
+function t.includesNonIdleWork(p7)
+	return bit32.band(p7, 134217727) ~= 0
 end
 
-function t.includesOnlyRetries(p13)
-	return bit32.band(p13, 62914560) == p13
+function t.includesOnlyRetries(p7)
+	return bit32.band(p7, 62914560) == p7
 end
 
-function t.includesOnlyTransitions(p14)
-	return bit32.band(p14, 4186112) == p14
+function t.includesOnlyTransitions(p7)
+	return bit32.band(p7, 4186112) == p7
 end
 
-local var8 = nil
+local var12 = nil
 
-local function findUpdateLane(p15, p16)
-	-- upvalues: var8 (write), findUpdateLane (ref), invariant (ref)
-	if p15 ~= 0 then
-		if p15 == 15 then
+local function findUpdateLane(p7, p8)
+	-- upvalues: var12 (write), findUpdateLane (ref), invariant (ref)
+	if p7 ~= 0 then
+		if p7 == 15 then
 			return 1
-		elseif p15 == 14 then
+		elseif p7 == 14 then
 			return 2
-		elseif p15 == 12 then
-			local var34 = var8(bit32.band(24, bit32.bnot(p16)))
+		elseif p7 == 12 then
+			local var13 = var12(bit32.band(24, bit32.bnot(p8)))
 			
-			return if var34 == 0 then findUpdateLane(10, p16) else var34
-		elseif p15 == 10 then
-			local var35 = var8(bit32.band(192, bit32.bnot(p16)))
+			return if var13 == 0 then findUpdateLane(10, p8) else var13
+		elseif p7 == 10 then
+			local var14 = var12(bit32.band(192, bit32.bnot(p8)))
 			
-			return if var35 == 0 then findUpdateLane(8, p16) else var35
-		elseif p15 == 8 then
-			local var36 = var8(bit32.band(3584, bit32.bnot(p16)))
+			return if var14 == 0 then findUpdateLane(8, p8) else var14
+		elseif p7 == 8 then
+			local var15 = var12(bit32.band(3584, bit32.bnot(p8)))
 			
-			if var36 == 0 then
-				var36 = var8(bit32.band(4186112, bit32.bnot(p16)))
+			if var15 == 0 then
+				var15 = var12(bit32.band(4186112, bit32.bnot(p8)))
 				
-				if var36 == 0 then
-					var36 = var8(3584)
+				if var15 == 0 then
+					var15 = var12(3584)
 				end
 			end
-			return var36
-		elseif p15 == 6 or p15 == 5 or p15 ~= 2 then
-			invariant(false, "Invalid update priority: %s. This is a bug in React.", p15)
+			return var15
+		elseif p7 == 6 or p7 == 5 or p7 ~= 2 then
+			invariant(false, "Invalid update priority: %s. This is a bug in React.", p7)
 			error("unreachable")
 			
 			return
 		end
-		local var37 = var8(bit32.band(805306368, bit32.bnot(p16)))
+		local var16 = var12(bit32.band(805306368, bit32.bnot(p8)))
 		
-		if var37 == 0 then
-			var37 = var8(805306368)
+		if var16 == 0 then
+			var16 = var12(805306368)
 		end
-		return var37
+		return var16
 	end
 end
 
 t.findUpdateLane = findUpdateLane
 
-function t.findTransitionLane(p17, p18)
-	-- upvalues: var8 (write)
-	local var38 = var8(bit32.band(4186112, bit32.bnot(p18)))
+function t.findTransitionLane(p7, p8)
+	-- upvalues: var12 (write)
+	local var13 = var12(bit32.band(4186112, bit32.bnot(p8)))
 	
-	if var38 == 0 then
-		var38 = var8(bit32.band(4186112, bit32.bnot(p17)))
+	if var13 == 0 then
+		var13 = var12(bit32.band(4186112, bit32.bnot(p7)))
 		
-		if var38 == 0 then
-			var38 = var8(4186112)
+		if var13 == 0 then
+			var13 = var12(4186112)
 		end
 	end
-	return var38
+	return var13
 end
 
-function t.findRetryLane(p19)
-	-- upvalues: var8 (write)
-	local var39 = var8(bit32.band(62914560, bit32.bnot(p19)))
+function t.findRetryLane(p7)
+	-- upvalues: var12 (write)
+	local var13 = var12(bit32.band(62914560, bit32.bnot(p7)))
 	
-	if var39 == 0 then
-		var39 = var8(62914560)
+	if var13 == 0 then
+		var13 = var12(62914560)
 	end
-	return var39
+	return var13
 end
 
-local function _(p20)
-	return bit32.band(p20, -p20)
+local function _(p7)
+	return bit32.band(p7, -p7)
 end
 
-getLowestPriorityLane = function(p21)
-	local var40 = 31 - bit32.countlz(p21)
+getLowestPriorityLane = function(p7)
+	local var13 = 31 - bit32.countlz(p7)
 	
-	return if var40 < 0 then 0 else bit32.lshift(1, var40)
+	return if var13 < 0 then 0 else bit32.lshift(1, var13)
 end
 
-getEqualOrHigherPriorityLanes = function(p22)
+getEqualOrHigherPriorityLanes = function(p7)
 	-- upvalues: getLowestPriorityLane (write)
-	return bit32.lshift(getLowestPriorityLane(p22), 1) - 1
+	return bit32.lshift(getLowestPriorityLane(p7), 1) - 1
 end
 
-function t.pickArbitraryLane(p23)
-	return bit32.band(p23, -p23)
+function t.pickArbitraryLane(p7)
+	return bit32.band(p7, -p7)
 end
 
-pickArbitraryLaneIndex = function(p24)
-	return 31 - bit32.countlz(p24)
+pickArbitraryLaneIndex = function(p7)
+	return 31 - bit32.countlz(p7)
 end
 
-function t.includesSomeLane(p25, p26)
-	return bit32.band(p25, p26) ~= 0
+function t.includesSomeLane(p7, p8)
+	return bit32.band(p7, p8) ~= 0
 end
 
-function t.isSubsetOfLanes(value, p27)
-	return bit32.band(value, p27) == p27
+function t.isSubsetOfLanes(value, p7)
+	return bit32.band(value, p7) == p7
 end
 
-t.mergeLanes = if var2 then bit32.bor else function(p28, p29)
-	return bit32.bor(p28, p29)
+t.mergeLanes = if var1 then bit32.bor else function(p7, p8)
+	return bit32.bor(p7, p8)
 end
 
-function t.removeLanes(p30, p31)
-	return bit32.band(p30, bit32.bnot(p31))
+function t.removeLanes(p7, p8)
+	return bit32.band(p7, bit32.bnot(p8))
 end
 
-function t.laneToLanes(p32)
-	return p32
+function t.laneToLanes(p7)
+	return p7
 end
 
-function t.higherPriorityLane(p33, p34)
-	return if p33 == 0 or p34 == 0 then if p33 == 0 then p34 else p33 elseif p33 < p34 then p33 else p34
+function t.higherPriorityLane(p7, p8)
+	return if p7 == 0 or p8 == 0 then if p7 == 0 then p8 else p7 elseif p7 < p8 then p7 else p8
 end
 
-function t.higherLanePriority(p35, p36)
-	return if p35 == 0 or p36 >= p35 then p36 else p35
+function t.higherLanePriority(p7, p8)
+	return if p7 == 0 or p8 >= p7 then p8 else p7
 end
 
-function t.createLaneMap(p37)
+function t.createLaneMap(p7)
 	return {
-		[0] = p37,
-		[1] = p37,
-		[2] = p37,
-		[3] = p37,
-		[4] = p37,
-		[5] = p37,
-		[6] = p37,
-		[7] = p37,
-		[8] = p37,
-		[9] = p37,
-		[10] = p37,
-		[11] = p37,
-		[12] = p37,
-		[13] = p37,
-		[14] = p37,
-		[15] = p37,
-		[16] = p37,
-		[17] = p37,
-		[18] = p37,
-		[19] = p37,
-		[20] = p37,
-		[21] = p37,
-		[22] = p37,
-		[23] = p37,
-		[24] = p37,
-		[25] = p37,
-		[26] = p37,
-		[27] = p37,
-		[28] = p37,
-		[29] = p37,
-		[30] = p37,
-		[31] = p37
+		[0] = p7,
+		[1] = p7,
+		[2] = p7,
+		[3] = p7,
+		[4] = p7,
+		[5] = p7,
+		[6] = p7,
+		[7] = p7,
+		[8] = p7,
+		[9] = p7,
+		[10] = p7,
+		[11] = p7,
+		[12] = p7,
+		[13] = p7,
+		[14] = p7,
+		[15] = p7,
+		[16] = p7,
+		[17] = p7,
+		[18] = p7,
+		[19] = p7,
+		[20] = p7,
+		[21] = p7,
+		[22] = p7,
+		[23] = p7,
+		[24] = p7,
+		[25] = p7,
+		[26] = p7,
+		[27] = p7,
+		[28] = p7,
+		[29] = p7,
+		[30] = p7,
+		[31] = p7
 	}
 end
 
-function t.markRootUpdated(p38, p39, p40)
-	p38.pendingLanes = bit32.bor(p38.pendingLanes, p39)
-	local var41 = p39 - 1
-	p38.suspendedLanes = bit32.band(p38.suspendedLanes, var41)
-	p38.pingedLanes = bit32.band(p38.pingedLanes, var41)
-	p38.eventTimes[31 - bit32.countlz(p39)] = p40
+function t.markRootUpdated(p7, p8, p9)
+	p7.pendingLanes = bit32.bor(p7.pendingLanes, p8)
+	local var13 = p8 - 1
+	p7.suspendedLanes = bit32.band(p7.suspendedLanes, var13)
+	p7.pingedLanes = bit32.band(p7.pingedLanes, var13)
+	p7.eventTimes[31 - bit32.countlz(p8)] = p9
 end
 
-function t.markRootSuspended(p41, p42)
+function t.markRootSuspended(p7, p8)
 	-- upvalues: pickArbitraryLaneIndex (write)
-	p41.suspendedLanes = bit32.bor(p41.suspendedLanes, p42)
-	p41.pingedLanes = bit32.band(p41.pingedLanes, bit32.bnot(p42))
-	local expirationTimes = p41.expirationTimes
-	local var42 = p42
-	while var42 > 0 do
-		local var43 = pickArbitraryLaneIndex(var42)
-		local shifted = bit32.lshift(1, var43)
-		expirationTimes[var43] = -1
-		var42 = bit32.band(var42, bit32.bnot(shifted))
+	p7.suspendedLanes = bit32.bor(p7.suspendedLanes, p8)
+	p7.pingedLanes = bit32.band(p7.pingedLanes, bit32.bnot(p8))
+	local expirationTimes = p7.expirationTimes
+	local var13 = p8
+	while var13 > 0 do
+		local var14 = pickArbitraryLaneIndex(var13)
+		local shifted = bit32.lshift(1, var14)
+		expirationTimes[var14] = -1
+		var13 = bit32.band(var13, bit32.bnot(shifted))
 	end
 end
 
-function t.markRootPinged(p43, p44, _)
-	p43.pingedLanes = bit32.bor(p43.pingedLanes, bit32.band(p43.suspendedLanes, p44))
+function t.markRootPinged(p9, p10, _)
+	p9.pingedLanes = bit32.bor(p9.pingedLanes, bit32.band(p9.suspendedLanes, p10))
 end
 
-function t.markRootExpired(p45, p46)
-	p45.expiredLanes = bit32.bor(p45.expiredLanes, bit32.band(p46, p45.pendingLanes))
+function t.markRootExpired(p9, p10)
+	p9.expiredLanes = bit32.bor(p9.expiredLanes, bit32.band(p10, p9.pendingLanes))
 end
 
-function t.markDiscreteUpdatesExpired(p47)
-	p47.expiredLanes = bit32.bor(p47.expiredLanes, bit32.band(24, p47.pendingLanes))
+function t.markDiscreteUpdatesExpired(p9)
+	p9.expiredLanes = bit32.bor(p9.expiredLanes, bit32.band(24, p9.pendingLanes))
 end
 
-function t.hasDiscreteLanes(p48)
-	return bit32.band(p48, 24) ~= 0
+function t.hasDiscreteLanes(p9)
+	return bit32.band(p9, 24) ~= 0
 end
 
-function t.markRootMutableRead(p49, p50)
-	p49.mutableReadLanes = bit32.bor(p49.mutableReadLanes, bit32.band(p50, p49.pendingLanes))
+function t.markRootMutableRead(p9, p10)
+	p9.mutableReadLanes = bit32.bor(p9.mutableReadLanes, bit32.band(p10, p9.pendingLanes))
 end
 
-function t.markRootFinished(p51, p52)
+function t.markRootFinished(p9, p10)
 	-- upvalues: pickArbitraryLaneIndex (write)
-	local bits = bit32.band(p51.pendingLanes, bit32.bnot(p52))
-	p51.pendingLanes = p52
-	p51.suspendedLanes = 0
-	p51.pingedLanes = 0
-	p51.expiredLanes = bit32.band(p51.expiredLanes, p52)
-	p51.mutableReadLanes = bit32.band(p51.mutableReadLanes, p52)
-	p51.entangledLanes = bit32.band(p51.entangledLanes, p52)
-	local entanglements = p51.entanglements
-	local eventTimes = p51.eventTimes
-	local expirationTimes = p51.expirationTimes
-	local var46 = bits
-	while var46 > 0 do
-		local var47 = pickArbitraryLaneIndex(var46)
-		local shifted = bit32.lshift(1, var47)
-		entanglements[var47] = 0
-		eventTimes[var47] = -1
-		expirationTimes[var47] = -1
-		var46 = bit32.band(var46, bit32.bnot(shifted))
+	local bits = bit32.band(p9.pendingLanes, bit32.bnot(p10))
+	p9.pendingLanes = p10
+	p9.suspendedLanes = 0
+	p9.pingedLanes = 0
+	p9.expiredLanes = bit32.band(p9.expiredLanes, p10)
+	p9.mutableReadLanes = bit32.band(p9.mutableReadLanes, p10)
+	p9.entangledLanes = bit32.band(p9.entangledLanes, p10)
+	local entanglements = p9.entanglements
+	local eventTimes = p9.eventTimes
+	local expirationTimes = p9.expirationTimes
+	local var15 = bits
+	while var15 > 0 do
+		local var16 = pickArbitraryLaneIndex(var15)
+		local shifted = bit32.lshift(1, var16)
+		entanglements[var16] = 0
+		eventTimes[var16] = -1
+		expirationTimes[var16] = -1
+		var15 = bit32.band(var15, bit32.bnot(shifted))
 	end
 end
 
@@ -539,42 +539,42 @@ function t.markRootEntangled(vectorA, vectorB)
 	-- upvalues: pickArbitraryLaneIndex (write)
 	vectorA.entangledLanes = bit32.bor(vectorA.entangledLanes, vectorB)
 	local entanglements = vectorA.entanglements
-	local var49 = vectorB
-	while var49 > 0 do
-		local var50 = pickArbitraryLaneIndex(var49)
-		local shifted = bit32.lshift(1, var50)
-		entanglements[var50] = bit32.bor(entanglements[var50], vectorB)
-		var49 = bit32.band(var49, bit32.bnot(shifted))
+	local var17 = vectorB
+	while var17 > 0 do
+		local var18 = pickArbitraryLaneIndex(var17)
+		local shifted = bit32.lshift(1, var18)
+		entanglements[var18] = bit32.bor(entanglements[var18], vectorB)
+		var17 = bit32.band(var17, bit32.bnot(shifted))
 	end
 end
 
-function t.getBumpedLaneForHydration(p53, p54)
+function t.getBumpedLaneForHydration(p11, p12)
 	-- upvalues: getHighestPriorityLanes (ref), defaultLanePriority (write), invariant (ref)
-	getHighestPriorityLanes(p54)
-	local var52 = nil
+	getHighestPriorityLanes(p12)
+	local var19 = nil
 	
 	if defaultLanePriority == 15 or defaultLanePriority == 14 then
-		var52 = 0
+		var19 = 0
 	elseif defaultLanePriority == 13 or defaultLanePriority == 12 then
-		var52 = 4
+		var19 = 4
 	elseif defaultLanePriority == 11 or defaultLanePriority == 10 then
-		var52 = 32
+		var19 = 32
 	elseif defaultLanePriority == 9 or defaultLanePriority == 8 then
-		var52 = 256
+		var19 = 256
 	elseif defaultLanePriority == 7 or defaultLanePriority == 6 then
-		var52 = 4096
+		var19 = 4096
 	elseif defaultLanePriority == 5 then
-		var52 = 4096
+		var19 = 4096
 	elseif defaultLanePriority == 4 then
-		var52 = 67108864
+		var19 = 67108864
 	elseif defaultLanePriority == 3 or defaultLanePriority == 2 then
-		var52 = 134217728
+		var19 = 134217728
 	elseif defaultLanePriority == 1 or defaultLanePriority == 0 then
-		var52 = 0
+		var19 = 0
 	else
-		invariant(false, "Invalid lane: %s. This is a bug in React.", tostring(var52))
+		invariant(false, "Invalid lane: %s. This is a bug in React.", tostring(var19))
 	end
-	return if bit32.band(var52, bit32.bor(p53.suspendedLanes, p54)) == 0 then var52 else 0
+	return if bit32.band(var19, bit32.bor(p11.suspendedLanes, p12)) == 0 then var19 else 0
 end
 
 return t

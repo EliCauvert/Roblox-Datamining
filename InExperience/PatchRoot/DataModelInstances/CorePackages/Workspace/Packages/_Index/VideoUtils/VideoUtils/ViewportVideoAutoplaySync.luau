@@ -6,28 +6,28 @@ local _ = require(videoUtils.ViewportVideoAutoplayController)
 local videoEndReason = require(videoUtils.Analytics.Enums).VideoEndReason
 local luaAppVideoAutoplayWinnerLineOffsetFromTopBarPx = game:DefineFastInt("LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx", 240)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useViewportBounds (ref), reactModule (ref), luaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (ref), videoEndReason (ref)
-	local var3 = useViewportBounds(p0.scrollingFrameRef)
+	local var1 = useViewportBounds(p1.scrollingFrameRef)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), luaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (copy), var3 (ref)
-		local viewportAutoplayController = p0.viewportAutoplayController
+		-- upvalues: p1 (ref), luaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (copy), var1 (ref)
+		local viewportAutoplayController = p1.viewportAutoplayController
 		
 		if viewportAutoplayController then
 			viewportAutoplayController:setWinnerLineOffsetFromTopBarPx(luaAppVideoAutoplayWinnerLineOffsetFromTopBarPx)
-			viewportAutoplayController:setFeedScopeRef(p0.scrollingFrameRef)
-			viewportAutoplayController:setViewPortBounds(var3)
+			viewportAutoplayController:setFeedScopeRef(p1.scrollingFrameRef)
+			viewportAutoplayController:setViewPortBounds(var1)
 			
 			return
 		end
 	end, {
-		p0.viewportAutoplayController,
-		p0.scrollingFrameRef,
-		var3
+		p1.viewportAutoplayController,
+		p1.scrollingFrameRef,
+		var1
 	})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), videoEndReason (copy)
-		local viewportAutoplayController = p0.viewportAutoplayController
+		-- upvalues: p1 (ref), videoEndReason (copy)
+		local viewportAutoplayController = p1.viewportAutoplayController
 		
 		if viewportAutoplayController then
 			return function()
@@ -36,7 +36,7 @@ return function(p0)
 				viewportAutoplayController:reset(videoEndReason.Unmounted)
 			end
 		end
-	end, { p0.viewportAutoplayController })
+	end, { p1.viewportAutoplayController })
 	
 	return nil
 end

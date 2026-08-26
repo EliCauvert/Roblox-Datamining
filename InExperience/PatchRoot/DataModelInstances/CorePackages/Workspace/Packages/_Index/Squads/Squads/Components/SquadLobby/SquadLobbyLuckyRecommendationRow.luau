@@ -19,21 +19,21 @@ local squadLobbyLuckyRecommendationModalModule = require(script.Parent.SquadLobb
 
 return function(_)
 	-- upvalues: useTokens (ref), react (ref), useLocalization (ref), useLocalUserId (ref), squadExternalContractContext (ref), useCurrentSquadMembers (ref), useEffectOnce (ref), eventNamesModule (ref), httpService (ref), view (ref), text (ref), icon (ref), iconSize (ref), squadLobbyLuckyRecommendationModalModule (ref)
-	local var5 = useTokens()
-	local var6, var7 = react.useState(false)
-	local var8 = useLocalization({
+	local var1 = useTokens()
+	local var2, var3 = react.useState(false)
+	local var4 = useLocalization({
 		title = "Feature.Squads.Label.LuckyRecommendationRow",
 		body = "Feature.Squads.Description.LuckyRecommendationRow"
 	})
-	local var9 = tonumber(useLocalUserId()) or 0
-	local var10 = react.useContext(squadExternalContractContext)
-	local var11 = useCurrentSquadMembers()
-	local var12 = react.useRef(var11)
-	var12.current = var11
-	local var13 = react.useRef("")
+	local var5 = tonumber(useLocalUserId()) or 0
+	local var6 = react.useContext(squadExternalContractContext)
+	local var7 = useCurrentSquadMembers()
+	local var8 = react.useRef(var7)
+	var8.current = var7
+	local var9 = react.useRef("")
 	useEffectOnce(function()
-		-- upvalues: var10 (ref), eventNamesModule (copy), var9 (ref)
-		var10.fireSquadAnalytics(eventNamesModule.LuckyRecommendationRowImpression, { localUserId = var9, clientTimestamp = os.time() })
+		-- upvalues: var6 (ref), eventNamesModule (copy), var5 (ref)
+		var6.fireSquadAnalytics(eventNamesModule.LuckyRecommendationRowImpression, { localUserId = var5, clientTimestamp = os.time() })
 	end, true)
 	
 	return react.createElement(react.Fragment, nil, {
@@ -41,35 +41,35 @@ return function(_)
 			Card = react.createElement(view, {
 				tag = "row align-y-center gap-medium size-full-0 auto-y stroke-standard stroke-position-inner stroke-default radius-medium bg-surface-0 gui-object-defaults",
 				padding = {
-					left = UDim.new(0, var5.Padding.XLarge),
-					right = UDim.new(0, var5.Padding.Medium),
-					top = UDim.new(0, var5.Padding.Large),
-					bottom = UDim.new(0, var5.Padding.Large)
+					left = UDim.new(0, var1.Padding.XLarge),
+					right = UDim.new(0, var1.Padding.Medium),
+					top = UDim.new(0, var1.Padding.Large),
+					bottom = UDim.new(0, var1.Padding.Large)
 				},
 				onActivated = react.useCallback(function()
-					-- upvalues: httpService (copy), var13 (ref), var12 (ref), var10 (ref), eventNamesModule (copy), var9 (ref), var7 (ref)
-					local var14 = httpService:GenerateGUID(false)
-					var13.current = var14
-					local current = var12.current
-					var10.fireSquadAnalytics(eventNamesModule.LuckyRecommendationInvoked, {
-						luckyRecommendationSessionId = var14,
-						localUserId = var9,
+					-- upvalues: httpService (copy), var9 (ref), var8 (ref), var6 (ref), eventNamesModule (copy), var5 (ref), var3 (ref)
+					local var10 = httpService:GenerateGUID(false)
+					var9.current = var10
+					local current = var8.current
+					var6.fireSquadAnalytics(eventNamesModule.LuckyRecommendationInvoked, {
+						luckyRecommendationSessionId = var10,
+						localUserId = var5,
 						squadMemberCount = if current then #current else 0,
 						clientTimestamp = os.time()
 					})
-					var7(true)
-				end, { var9, var10 })
+					var3(true)
+				end, { var5, var6 })
 			}, {
 				Content = react.createElement(view, { tag = "col fill gap-xsmall auto-y", LayoutOrder = 1 }, {
 					Title = react.createElement(text, {
 						tag = "size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left text-truncate-end content-emphasis",
 						LayoutOrder = 1,
-						Text = var8.title
+						Text = var4.title
 					}),
 					Body = react.createElement(text, {
 						tag = "size-full-0 auto-y text-body-medium text-no-wrap text-align-x-left text-truncate-end content-default",
 						LayoutOrder = 2,
-						Text = var8.body
+						Text = var4.body
 					})
 				}),
 				Chevron = react.createElement(icon, {
@@ -79,12 +79,12 @@ return function(_)
 				})
 			})
 		}),
-		Modal = if var6 then react.createElement(squadLobbyLuckyRecommendationModalModule, {
+		Modal = if var2 then react.createElement(squadLobbyLuckyRecommendationModalModule, {
 			onClose = react.useCallback(function()
-				-- upvalues: var7 (ref)
-				var7(false)
+				-- upvalues: var3 (ref)
+				var3(false)
 			end, {}),
-			sessionId = var13.current
+			sessionId = var9.current
 		}) else nil
 	})
 end

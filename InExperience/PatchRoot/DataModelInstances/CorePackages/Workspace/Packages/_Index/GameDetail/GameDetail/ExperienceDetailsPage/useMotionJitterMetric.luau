@@ -12,72 +12,72 @@ local t = {
 	lastUpdated = { 2026, 6, 18 }
 }
 
-local function _(p0, p1)
-	return p0[p1].Y
+local function _(p1, p2)
+	return p1[p2].Y
 end
 
-local function logMotionJitter(p2, p3, p4)
+local function logMotionJitter(p1, p2, p3)
 	-- upvalues: logger (ref), telemetryService (ref), t (ref)
 	logger:info("[useMotionJitterMetric] Logging motion jitter")
 	
-	if p4 == "settled" then
+	if p3 == "settled" then
 		telemetryService:LogStat(t, {
 			standardizedFields = { "addOSInfo" },
-			customFields = { surface = p3 }
-		}, p2.jitterPx * 100 / p2.travelPx)
+			customFields = { surface = p2 }
+		}, p1.jitterPx * 100 / p1.travelPx)
 		
 		return
 	end
 	logger:warning("[useMotionJitterMetric] Should only log motion jitter for reason: settled")
 end
 
-return function(p5, p6, p7, p8)
+return function(p1, p2, p3, p4)
 	-- upvalues: reactModule (ref), experienceDetailsMotionJitterHundredthsPercent (ref), logger (ref), logMotionJitter (ref), runService (ref)
 	reactModule.useEffect(function()
-		-- upvalues: experienceDetailsMotionJitterHundredthsPercent (copy), logger (copy), logMotionJitter (copy), p6 (ref), runService (copy), p5 (ref), p8 (ref), p7 (ref)
+		-- upvalues: experienceDetailsMotionJitterHundredthsPercent (copy), logger (copy), logMotionJitter (copy), p2 (ref), runService (copy), p1 (ref), p4 (ref), p3 (ref)
 		if experienceDetailsMotionJitterHundredthsPercent <= 0 then
 			return
 		end
-		local var6 = nil
-		local var7 = nil
+		local var1 = nil
+		local var2 = nil
 		
-		local function _(p9)
-			-- upvalues: logger (copy), var7 (write), logMotionJitter (copy), p6 (copy)
+		local function _(p5)
+			-- upvalues: logger (copy), var2 (write), logMotionJitter (copy), p2 (copy)
 			logger:info("[useMotionJitterMetric] Flushing motion metric for reason: " .. p9)
 			
-			if var7 then
-				logMotionJitter(var7, p6, p9)
-				var7 = nil
+			if var2 then
+				logMotionJitter(var2, p2, p5)
+				var2 = nil
 			end
 		end
 		
 		local renderSteppedConnection = nil
 		renderSteppedConnection = runService.RenderStepped:Connect(function()
-			-- upvalues: p5 (copy), logger (copy), var7 (write), p6 (copy), var6 (write), p8 (copy), logMotionJitter (copy), renderSteppedConnection (write), p7 (copy)
-			local current = p5.current
+			-- upvalues: p1 (copy), logger (copy), var2 (write), p2 (copy), var1 (write), p4 (copy), logMotionJitter (copy), renderSteppedConnection (write), p3 (copy)
+			local current = p1.current
 			
 			if current then
-				local y = current[p8].Y
+				local y = current[p4].Y
 				
-				if var6 == nil then
+				if var1 == nil then
 					if y >= 0 then
-						var6 = y
+						var1 = y
 					end
 					return
 				else
-					local var9 = y - var6
-					var6 = y
+					local var3 = y - var1
+					var1 = y
 					
-					if math.abs(var9) <= 0.5 then
-						if var7 then
-							var7.settledFrames += 1
+					if math.abs(var3) <= 0.5 then
+						if var2 then
+							var2.settledFrames += 1
 							
-							if var7.settledFrames >= 6 then
+							if var2.settledFrames >= 6 then
 								logger:info("[useMotionJitterMetric] Flushing motion metric for reason: settled")
 								
-								if var7 then
-									logMotionJitter(var7, p6, "settled")
-									var7 = nil
+								if var2 then
+									logMotionJitter(var2, p2, "settled")
+									var2 = nil
 								end
 								if renderSteppedConnection then
 									renderSteppedConnection:Disconnect()
@@ -86,13 +86,13 @@ return function(p5, p6, p7, p8)
 						end
 						return
 					else
-						var7 = var7 or { jitterPx = 0, travelPx = 0, settledFrames = 0 }
-						local var10 = var7
-						var10.travelPx += math.abs(var9)
-						var10.settledFrames = 0
+						var2 = var2 or { jitterPx = 0, travelPx = 0, settledFrames = 0 }
+						local var4 = var2
+						var4.travelPx += math.abs(var3)
+						var4.settledFrames = 0
 						
-						if var9 * (if p7 then 1 else -1) < -0.5 then
-							var10.jitterPx += math.abs(var9)
+						if var3 * (if p3 then 1 else -1) < -0.5 then
+							var4.jitterPx += math.abs(var3)
 						end
 						return
 					end
@@ -100,29 +100,29 @@ return function(p5, p6, p7, p8)
 			else
 				logger:info("[useMotionJitterMetric] Flushing motion metric for reason: missingContent")
 				
-				if var7 then
-					local _ = p6
+				if var2 then
+					local _ = p2
 					logger:info("[useMotionJitterMetric] Logging motion jitter")
 					logger:warning("[useMotionJitterMetric] Should only log motion jitter for reason: settled")
-					var7 = nil
+					var2 = nil
 				end
-				var6 = nil
+				var1 = nil
 			end
 		end)
 		
 		return function()
-			-- upvalues: logger (copy), var7 (write), p6 (copy), renderSteppedConnection (write)
+			-- upvalues: logger (copy), var2 (write), p2 (copy), renderSteppedConnection (write)
 			logger:info("[useMotionJitterMetric] Flushing motion metric for reason: unmount")
 			
-			if var7 then
-				local _ = p6
+			if var2 then
+				local _ = p2
 				logger:info("[useMotionJitterMetric] Logging motion jitter")
 				logger:warning("[useMotionJitterMetric] Should only log motion jitter for reason: settled")
-				var7 = nil
+				var2 = nil
 			end
 			if renderSteppedConnection then
 				renderSteppedConnection:Disconnect()
 			end
 		end
-	end, { p5, p6, p7, p8 })
+	end, { p1, p2, p3, p4 })
 end

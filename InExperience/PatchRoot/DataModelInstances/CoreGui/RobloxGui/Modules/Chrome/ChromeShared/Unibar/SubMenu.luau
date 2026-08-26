@@ -11,7 +11,7 @@ local fFlagUnibarMenuOpenSubmenu = require(script.Parent.Parent.Parent.Flags).FF
 local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local reactModule = require(corePackagesService.Packages.React)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local var9 = if fFlagEnableConsoleExpControls then require(corePackagesService.Workspace.Packages.InputUi).Gamepad.GamepadUtils else nil
+local var1 = if fFlagEnableConsoleExpControls then require(corePackagesService.Workspace.Packages.InputUi).Gamepad.GamepadUtils else nil
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local useStyle = UIBloxModule.Core.Style.useStyle
 local interactable = UIBloxModule.Core.Control.Interactable
@@ -26,9 +26,9 @@ local serviceModule = require(chromeShared.Service)
 local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
 local viewportUtilModule = require(chromeShared.Service.ViewportUtil)
 local constantsModule = require(chromeShared.Unibar.Constants)
-local var16 = if fFlagEnableConsoleExpControls then require(chromeShared.Parent.Parent.TopBar.Components.MenuIconContext) else nil
+local var2 = if fFlagEnableConsoleExpControls then require(chromeShared.Parent.Parent.TopBar.Components.MenuIconContext) else nil
 local subMenuContextModule = require(chromeShared.Unibar.SubMenuContext)
-local var18 = if fFlagEnableMenuTrailingBadge then require(chromeShared.Unibar.MenuTrailingBadge) else nil
+local var3 = if fFlagEnableMenuTrailingBadge then require(chromeShared.Unibar.MenuTrailingBadge) else nil
 local unibarStyle = chromeModule.UnibarStyle
 local userInputService = game:GetService("UserInputService")
 local useChromeMenuItemsModule = require(chromeShared.Hooks.useChromeMenuItems)
@@ -39,16 +39,16 @@ local fixChromeIntegrationLayoutBug = game:DefineFastFlag("FixChromeIntegrationL
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local inExperienceUIVRIXP = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).InExperienceUIVRIXP
-local var25 = if isInExperienceUIVREnabled then require(corePackagesService.Workspace.Packages.VrSpatialUi).UIManager else nil
+local var4 = if isInExperienceUIVREnabled then require(corePackagesService.Workspace.Packages.VrSpatialUi).UIManager else nil
 local iconHostModule = require(chromeShared.Unibar.ComponentHosts.IconHost)
 local roundedSlot = foundationModule.Enums.CursorType.RoundedSlot
 local vector2 = Vector2.new(0, 0)
 local _ = { Closed = 0, Open = 1 }
 local t = {}
-local var29 = nil
+local var5 = nil
 
-function MenuRow(p0)
-	-- upvalues: useStyle (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref), subMenuContextModule (ref), fFlagEnableConsoleExpControls (ref), var16 (ref), controlState (ref), fFlagEnableMenuTrailingBadge (ref), serviceModule (ref), guiService (ref), styledTextLabel (ref), iconHostModule (ref), var18 (ref), isInExperienceUIVREnabled (ref), inExperienceUIVRIXP (ref), var25 (write), interactable (ref), useCursor (ref), roundedSlot (ref), fixChromeIntegrationLayoutBug (ref)
+function MenuRow(p1)
+	-- upvalues: useStyle (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref), subMenuContextModule (ref), fFlagEnableConsoleExpControls (ref), var2 (ref), controlState (ref), fFlagEnableMenuTrailingBadge (ref), serviceModule (ref), guiService (ref), styledTextLabel (ref), iconHostModule (ref), var3 (ref), isInExperienceUIVREnabled (ref), inExperienceUIVRIXP (ref), var4 (write), interactable (ref), useCursor (ref), roundedSlot (ref), fixChromeIntegrationLayoutBug (ref)
 	local ICON_SIZE, SUB_MENU_ROW_HEIGHT, SUBMENU_PADDING_LEFT, SUBMENU_PADDING_RIGHT, SUBMENU_ROW_LABEL_FONT, SUBMENU_ROW_PADDING, SUBMENU_ROW_CORNER_RADIUS
 	local _ = nil
 	local theme = useStyle().Theme
@@ -62,14 +62,14 @@ function MenuRow(p0)
 	local _ = nil
 	
 	if fFlagTokenizeUnibarConstantsWithStyleProvider then
-		local var31 = unibarStyle.use()
-		ICON_SIZE = var31.ICON_SIZE
-		SUB_MENU_ROW_HEIGHT = var31.SUB_MENU_ROW_HEIGHT
-		SUBMENU_PADDING_LEFT = var31.SUBMENU_PADDING_LEFT
-		SUBMENU_PADDING_RIGHT = var31.SUBMENU_PADDING_RIGHT
-		SUBMENU_ROW_LABEL_FONT = var31.SUBMENU_ROW_LABEL_FONT
-		SUBMENU_ROW_PADDING = var31.SUBMENU_ROW_PADDING
-		SUBMENU_ROW_CORNER_RADIUS = var31.SUBMENU_ROW_CORNER_RADIUS
+		local var6 = unibarStyle.use()
+		ICON_SIZE = var6.ICON_SIZE
+		SUB_MENU_ROW_HEIGHT = var6.SUB_MENU_ROW_HEIGHT
+		SUBMENU_PADDING_LEFT = var6.SUBMENU_PADDING_LEFT
+		SUBMENU_PADDING_RIGHT = var6.SUBMENU_PADDING_RIGHT
+		SUBMENU_ROW_LABEL_FONT = var6.SUBMENU_ROW_LABEL_FONT
+		SUBMENU_ROW_PADDING = var6.SUBMENU_ROW_PADDING
+		SUBMENU_ROW_CORNER_RADIUS = var6.SUBMENU_ROW_CORNER_RADIUS
 	else
 		ICON_SIZE = constantsModule.ICON_SIZE
 		SUB_MENU_ROW_HEIGHT = constantsModule.SUB_MENU_ROW_HEIGHT
@@ -79,49 +79,49 @@ function MenuRow(p0)
 		SUBMENU_ROW_PADDING = constantsModule.SUBMENU_ROW_PADDING
 		SUBMENU_ROW_CORNER_RADIUS = constantsModule.SUBMENU_ROW_CORNER_RADIUS
 	end
-	local var32 = reactModule.useContext(subMenuContextModule)
-	local var33 = if fFlagEnableConsoleExpControls then reactModule.useContext(var16) else nil
-	local var34, var35 = reactModule.useBinding(t)
-	local var36 = reactModule.useCallback(function(_, p1)
-		-- upvalues: controlState (copy), var35 (ref), theme (ref), t (ref)
-		if p1 == controlState.Pressed then
-			var35(theme.BackgroundOnPress)
+	local var7 = reactModule.useContext(subMenuContextModule)
+	local var8 = if fFlagEnableConsoleExpControls then reactModule.useContext(var2) else nil
+	local var9, var10 = reactModule.useBinding(t)
+	local var11 = reactModule.useCallback(function(_, p2)
+		-- upvalues: controlState (copy), var10 (ref), theme (ref), t (ref)
+		if p2 == controlState.Pressed then
+			var10(theme.BackgroundOnPress)
 			
 			return
-		elseif p1 == controlState.Hover then
-			var35(theme.BackgroundOnHover)
+		elseif p2 == controlState.Hover then
+			var10(theme.BackgroundOnHover)
 			
 			return
 		end
-		var35(t)
+		var10(t)
 	end)
-	local var37 = if fFlagEnableMenuTrailingBadge then p0.integration.menuTrailingBadgeConfig else nil
-	local var38 = reactModule.useCallback(function()
-		-- upvalues: fFlagEnableConsoleExpControls (copy), serviceModule (copy), guiService (copy), p0 (ref)
+	local var12 = if fFlagEnableMenuTrailingBadge then p1.integration.menuTrailingBadgeConfig else nil
+	local var13 = reactModule.useCallback(function()
+		-- upvalues: fFlagEnableConsoleExpControls (copy), serviceModule (copy), guiService (copy), p1 (ref)
 		if fFlagEnableConsoleExpControls then
 			serviceModule:disableFocusNav()
 			guiService.SelectedCoreObject = nil
 			serviceModule:setShortcutBar(nil)
 			serviceModule:selectedItem():set(nil)
-			p0.activated()
+			p1.activated()
 			
 			return
 		end
-		p0.activated()
-	end, { p0.id })
-	local var39 = reactModule.createElement(styledTextLabel, {
+		p1.activated()
+	end, { p1.id })
+	local var14 = reactModule.createElement(styledTextLabel, {
 		lineHeight = 1,
 		fluidSizing = true,
 		richText = true,
 		size = if fFlagEnableMenuTrailingBadge then UDim2.fromScale(1, 1) else UDim2.new(1, (-ICON_SIZE) - SUBMENU_PADDING_LEFT - SUBMENU_PADDING_RIGHT, 1, 0),
 		fontStyle = SUBMENU_ROW_LABEL_FONT,
-		colorStyle = if var32 then {
+		colorStyle = if var7 then {
 			Color = theme.TextEmphasis.Color,
-			Transparency = var32:map(function(p2)
+			Transparency = var7:map(function(p2)
 				return 1 - p2
 			end)
 		} else theme.TextEmphasis,
-		text = p0.integration.label,
+		text = p1.integration.label,
 		textTruncate = Enum.TextTruncate.AtEnd,
 		textXAlignment = Enum.TextXAlignment.Left
 	})
@@ -137,56 +137,56 @@ function MenuRow(p0)
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, SUBMENU_ROW_PADDING)
 		}),
-		IconHost = reactModule.createElement(iconHostModule, { disableButtonBehaviors = true, integration = p0 }),
+		IconHost = reactModule.createElement(iconHostModule, { disableButtonBehaviors = true, integration = p1 }),
 		Label = if fFlagEnableMenuTrailingBadge then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(0, 1)
 		}, {
 			UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-			StyledTextLabel = var39
-		}) else var39,
-		TrailingBadge = if fFlagEnableMenuTrailingBadge and var37 then reactModule.createElement(var18, { integrationId = p0.integration.id, config = var37 }) else nil
+			StyledTextLabel = var14
+		}) else var14,
+		TrailingBadge = if fFlagEnableMenuTrailingBadge and var12 then reactModule.createElement(var3, { integrationId = p1.integration.id, config = var12 }) else nil
 	})
 	
 	return reactModule.createElement(interactable, {
-		Size = UDim2.new(1, 0, 0, SUB_MENU_ROW_HEIGHT * (if isInExperienceUIVREnabled and not inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then var25.getInstance():getAdditionalCameraScaleIfNeeded() else 1)),
+		Size = UDim2.new(1, 0, 0, SUB_MENU_ROW_HEIGHT * (if isInExperienceUIVREnabled and not inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then var4.getInstance():getAdditionalCameraScaleIfNeeded() else 1)),
 		BorderSizePixel = 0,
-		BackgroundTransparency = var34:map(function(p3)
-			return p3.Transparency
+		BackgroundTransparency = var9:map(function(p2)
+			return p2.Transparency
 		end),
-		BackgroundColor3 = var34:map(function(p4)
-			return p4.Color
+		BackgroundColor3 = var9:map(function(p2)
+			return p2.Color
 		end),
 		SelectionImageObject = useCursor(roundedSlot),
-		[reactModule.Event.Activated] = var38,
-		LayoutOrder = p0.order,
-		onStateChanged = var36,
-		NextSelectionLeft = if fFlagEnableConsoleExpControls then var33.menuIconRef else nil
+		[reactModule.Event.Activated] = var13,
+		LayoutOrder = p1.order,
+		onStateChanged = var11,
+		NextSelectionLeft = if fFlagEnableConsoleExpControls then var8.menuIconRef else nil
 	}, {
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, SUBMENU_ROW_CORNER_RADIUS) }),
 		RowLabel = if fixChromeIntegrationLayoutBug then reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			LayoutOrder = p0.order
+			LayoutOrder = p1.order
 		}, { createElement }) else createElement
 	})
 end
 
-function isLeft(p5)
-	return p5 == Enum.HorizontalAlignment.Left
+function isLeft(p1)
+	return p1 == Enum.HorizontalAlignment.Left
 end
 
-function SubMenu(p6)
-	-- upvalues: useStyle (ref), reactModule (ref), useObservableValueModule (ref), viewportUtilModule (ref), useTopbarInsetHeightModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), guiService (ref), serviceModule (ref), fFlagEnableConsoleExpControls (ref), userInputService (ref), var9 (ref), avatarSwitcherHamburgerExposure (ref), IXPServiceWrapper (ref), avatarSwitcherIXPLayer (ref), isInExperienceUIVREnabled (ref), inExperienceUIVRIXP (ref), var25 (write), isSpatial (ref), userGameSettingsService (ref), useMappedObservableValueModule (ref), verticalScrollView (ref), scrollBarType (ref)
+function SubMenu(p1)
+	-- upvalues: useStyle (ref), reactModule (ref), useObservableValueModule (ref), viewportUtilModule (ref), useTopbarInsetHeightModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), guiService (ref), serviceModule (ref), fFlagEnableConsoleExpControls (ref), userInputService (ref), var1 (ref), avatarSwitcherHamburgerExposure (ref), IXPServiceWrapper (ref), avatarSwitcherIXPLayer (ref), isInExperienceUIVREnabled (ref), inExperienceUIVRIXP (ref), var4 (write), isSpatial (ref), userGameSettingsService (ref), useMappedObservableValueModule (ref), verticalScrollView (ref), scrollBarType (ref)
 	local UNIBAR_LEFT_MARGIN, ICON_CELL_WIDTH, UNIBAR_END_PADDING, SUB_MENU_ROW_HEIGHT, SUBMENU_CORNER_RADIUS, SUBMENU_BOTTOM_PADDING
-	local var40 = useStyle()
+	local var6 = useStyle()
 	local _ = nil
-	local theme = var40.Theme
-	local var41 = reactModule.useRef(nil)
-	local var42 = useObservableValueModule(viewportUtilModule.screenSize)
-	local var43 = useTopbarInsetHeightModule()
+	local theme = var6.Theme
+	local var7 = reactModule.useRef(nil)
+	local var8 = useObservableValueModule(viewportUtilModule.screenSize)
+	local var9 = useTopbarInsetHeightModule()
 	local _ = nil
 	local _ = nil
 	local _ = nil
@@ -195,13 +195,13 @@ function SubMenu(p6)
 	local _ = nil
 	
 	if fFlagTokenizeUnibarConstantsWithStyleProvider then
-		local var44 = unibarStyle.use()
-		UNIBAR_LEFT_MARGIN = var44.UNIBAR_LEFT_MARGIN
-		ICON_CELL_WIDTH = var44.ICON_CELL_WIDTH
-		UNIBAR_END_PADDING = var44.UNIBAR_END_PADDING
-		SUB_MENU_ROW_HEIGHT = var44.SUB_MENU_ROW_HEIGHT
-		SUBMENU_CORNER_RADIUS = var44.SUBMENU_CORNER_RADIUS
-		SUBMENU_BOTTOM_PADDING = var44.SUBMENU_BOTTOM_PADDING
+		local var10 = unibarStyle.use()
+		UNIBAR_LEFT_MARGIN = var10.UNIBAR_LEFT_MARGIN
+		ICON_CELL_WIDTH = var10.ICON_CELL_WIDTH
+		UNIBAR_END_PADDING = var10.UNIBAR_END_PADDING
+		SUB_MENU_ROW_HEIGHT = var10.SUB_MENU_ROW_HEIGHT
+		SUBMENU_CORNER_RADIUS = var10.SUBMENU_CORNER_RADIUS
+		SUBMENU_BOTTOM_PADDING = var10.SUBMENU_BOTTOM_PADDING
 	else
 		UNIBAR_LEFT_MARGIN = constantsModule.UNIBAR_LEFT_MARGIN
 		ICON_CELL_WIDTH = constantsModule.ICON_CELL_WIDTH
@@ -210,58 +210,58 @@ function SubMenu(p6)
 		SUBMENU_CORNER_RADIUS = constantsModule.SUBMENU_CORNER_RADIUS
 		SUBMENU_BOTTOM_PADDING = constantsModule.SUBMENU_BOTTOM_PADDING
 	end
-	local var45 = SUB_MENU_ROW_HEIGHT * 0.5
+	local var11 = SUB_MENU_ROW_HEIGHT * 0.5
 	reactModule.useEffect(function()
-		-- upvalues: var41 (ref), guiService (copy), serviceModule (copy), fFlagEnableConsoleExpControls (copy), userInputService (copy), var9 (copy)
+		-- upvalues: var7 (ref), guiService (copy), serviceModule (copy), fFlagEnableConsoleExpControls (copy), userInputService (copy), var1 (copy)
 		local function _()
-			-- upvalues: var41 (copy), guiService (copy), serviceModule (copy)
-			if var41.current and var41.current:IsAncestorOf(guiService.SelectedCoreObject) then
+			-- upvalues: var7 (copy), guiService (copy), serviceModule (copy)
+			if var7.current and var7.current:IsAncestorOf(guiService.SelectedCoreObject) then
 				serviceModule:setSelectedByOffset(-1)
 			end
 		end
 		
 		local _ = function()
-			-- upvalues: var41 (copy), guiService (copy), serviceModule (copy)
-			if var41.current and var41.current:IsAncestorOf(guiService.SelectedCoreObject) then
+			-- upvalues: var7 (copy), guiService (copy), serviceModule (copy)
+			if var7.current and var7.current:IsAncestorOf(guiService.SelectedCoreObject) then
 				serviceModule:setSelectedByOffset(1)
 			end
 		end
 		
-		local var55 = if fFlagEnableConsoleExpControls then userInputService.InputChanged:Connect(function(_)
-			-- upvalues: userInputService (copy), var9 (copy), var41 (copy), guiService (copy), serviceModule (copy)
+		local var12 = if fFlagEnableConsoleExpControls then userInputService.InputChanged:Connect(function(_)
+			-- upvalues: userInputService (copy), var1 (copy), var7 (copy), guiService (copy), serviceModule (copy)
 			for i, v in userInputService:GetGamepadState(Enum.UserInputType.Gamepad1) do
 				if v.KeyCode == Enum.KeyCode.Thumbstick1 then
-					local x = var9.normalizeStickByDeadzone(Vector2.new(v.Position.X, v.Position.Y)).X
+					local x = var1.normalizeStickByDeadzone(Vector2.new(v.Position.X, v.Position.Y)).X
 					
 					if x < -0.5 then
-						if var41.current and var41.current:IsAncestorOf(guiService.SelectedCoreObject) then
+						if var7.current and var7.current:IsAncestorOf(guiService.SelectedCoreObject) then
 							serviceModule:setSelectedByOffset(-1)
 						end
-					elseif x > 0.5 and (var41.current and var41.current:IsAncestorOf(guiService.SelectedCoreObject)) then
+					elseif x > 0.5 and (var7.current and var7.current:IsAncestorOf(guiService.SelectedCoreObject)) then
 						serviceModule:setSelectedByOffset(1)
 					end
 				end
 			end
 		end) else nil
-		local inputBeganConnection = userInputService.InputBegan:Connect(function(p7)
-			-- upvalues: var41 (copy), guiService (copy), serviceModule (copy)
-			local keyCode = p7.KeyCode
+		local inputBeganConnection = userInputService.InputBegan:Connect(function(p2)
+			-- upvalues: var7 (copy), guiService (copy), serviceModule (copy)
+			local keyCode = p2.KeyCode
 			
 			if keyCode == Enum.KeyCode.Left or keyCode == Enum.KeyCode.DPadLeft then
-				if var41.current and var41.current:IsAncestorOf(guiService.SelectedCoreObject) then
+				if var7.current and var7.current:IsAncestorOf(guiService.SelectedCoreObject) then
 					serviceModule:setSelectedByOffset(-1)
 					
 					return
 				end
-			elseif (keyCode == Enum.KeyCode.Right or keyCode == Enum.KeyCode.DPadRight) and (var41.current and var41.current:IsAncestorOf(guiService.SelectedCoreObject)) then
+			elseif (keyCode == Enum.KeyCode.Right or keyCode == Enum.KeyCode.DPadRight) and (var7.current and var7.current:IsAncestorOf(guiService.SelectedCoreObject)) then
 				serviceModule:setSelectedByOffset(1)
 			end
 		end)
 		
 		return function()
-			-- upvalues: fFlagEnableConsoleExpControls (copy), var55 (write), inputBeganConnection (ref)
+			-- upvalues: fFlagEnableConsoleExpControls (copy), var12 (write), inputBeganConnection (ref)
 			if fFlagEnableConsoleExpControls then
-				var55:Disconnect()
+				var12:Disconnect()
 			end
 			inputBeganConnection:Disconnect()
 		end
@@ -273,16 +273,16 @@ function SubMenu(p6)
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(avatarSwitcherIXPLayer)
 		end, {})
 	end
-	local var46 = var43 + ICON_CELL_WIDTH
-	local var47 = if p6 and p6.items then SUB_MENU_ROW_HEIGHT * #p6.items else 0
-	local var48 = var47 * (if isInExperienceUIVREnabled and not inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then var25.getInstance():getAdditionalCameraScaleIfNeeded() else 1)
-	local var49 = if p6.panelSize then p6.panelSize.Y else var48
-	local var50 = isInExperienceUIVREnabled and isSpatial()
-	local var51 = if var50 then math.min(var48, var49) else math.min(var42.Y - var46, var47)
+	local var13 = var9 + ICON_CELL_WIDTH
+	local var14 = if p1 and p1.items then SUB_MENU_ROW_HEIGHT * #p1.items else 0
+	local var15 = var14 * (if isInExperienceUIVREnabled and not inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then var4.getInstance():getAdditionalCameraScaleIfNeeded() else 1)
+	local var16 = if p1.panelSize then p1.panelSize.Y else var15
+	local var17 = isInExperienceUIVREnabled and isSpatial()
+	local var18 = if var17 then math.min(var15, var16) else math.min(var8.Y - var13, var14)
 	
-	if not var50 and var42.Y - var46 < var47 then
-		local floored = math.floor((var42.Y - var46) / SUB_MENU_ROW_HEIGHT)
-		var51 = if SUB_MENU_ROW_HEIGHT * floored + var45 <= var42.Y - var46 then SUB_MENU_ROW_HEIGHT * floored + var45 else SUB_MENU_ROW_HEIGHT * floored - var45
+	if not var17 and var8.Y - var13 < var14 then
+		local floored = math.floor((var8.Y - var13) / SUB_MENU_ROW_HEIGHT)
+		var18 = if SUB_MENU_ROW_HEIGHT * floored + var11 <= var8.Y - var13 then SUB_MENU_ROW_HEIGHT * floored + var11 else SUB_MENU_ROW_HEIGHT * floored - var11
 	end
 	local t = {
 		UIListLayout = reactModule.createElement("UIListLayout", {
@@ -292,9 +292,9 @@ function SubMenu(p6)
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
 		UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-			MinSize = if userGameSettingsService.ReducedMotion or not p6.menuTransition then Vector2.new(0, var51) else p6.menuTransition:map(function(p8)
-				-- upvalues: var51 (write)
-				return Vector2.new(0, var51 * p8)
+			MinSize = if userGameSettingsService.ReducedMotion or not p1.menuTransition then Vector2.new(0, var18) else p1.menuTransition:map(function(p2)
+				-- upvalues: var18 (write)
+				return Vector2.new(0, var18 * p2)
 			end)
 		}),
 		BottomPadding = reactModule.createElement("Frame", {
@@ -304,22 +304,22 @@ function SubMenu(p6)
 		})
 	}
 	
-	for i, v in p6.items do
+	for i, v in p1.items do
 		t[v.id] = reactModule.createElement(MenuRow, v)
 	end
-	local var54 = var40.Theme.BackgroundUIContrast.Transparency * var40.Settings.PreferredTransparency
+	local var19 = var6.Theme.BackgroundUIContrast.Transparency * var6.Settings.PreferredTransparency
 	
 	return reactModule.createElement("Frame", {
-		Size = if var50 then UDim2.new(1, 0, 0, if var50 then math.min(var48, var49) else var48) else UDim2.new(0, ICON_CELL_WIDTH * 4 + UNIBAR_LEFT_MARGIN + UNIBAR_END_PADDING * 2, 0, 0),
-		AnchorPoint = if var50 then Vector2.new(0, 1) elseif useMappedObservableValueModule(serviceModule:orderAlignment(), isLeft) then Vector2.zero else Vector2.new(1, 0),
-		Position = if var50 then UDim2.new(0, 0, 1, 0) else UDim2.new(0, (-var43) - 2 + UNIBAR_LEFT_MARGIN, 0, 0),
+		Size = if var17 then UDim2.new(1, 0, 0, if var17 then math.min(var15, var16) else var15) else UDim2.new(0, ICON_CELL_WIDTH * 4 + UNIBAR_LEFT_MARGIN + UNIBAR_END_PADDING * 2, 0, 0),
+		AnchorPoint = if var17 then Vector2.new(0, 1) elseif useMappedObservableValueModule(serviceModule:orderAlignment(), isLeft) then Vector2.zero else Vector2.new(1, 0),
+		Position = if var17 then UDim2.new(0, 0, 1, 0) else UDim2.new(0, (-var9) - 2 + UNIBAR_LEFT_MARGIN, 0, 0),
 		BackgroundColor3 = theme.BackgroundUIContrast.Color,
-		BackgroundTransparency = if p6.menuTransition then p6.menuTransition:map(function(p9)
-			-- upvalues: var54 (ref)
-			return var54 + (1 - var54) * (1 - p9)
-		end) else var54,
-		AutomaticSize = if var50 then nil else Enum.AutomaticSize.Y,
-		ref = var41,
+		BackgroundTransparency = if p1.menuTransition then p1.menuTransition:map(function(p2)
+			-- upvalues: var19 (ref)
+			return var19 + (1 - var19) * (1 - p2)
+		end) else var19,
+		AutomaticSize = if var17 then nil else Enum.AutomaticSize.Y,
+		ref = var7,
 		SelectionGroup = if fFlagEnableConsoleExpControls then true else nil,
 		SelectionBehaviorDown = if fFlagEnableConsoleExpControls then Enum.SelectionBehavior.Stop else nil
 	}, {
@@ -327,96 +327,96 @@ function SubMenu(p6)
 		ScrollingFrame = reactModule.createElement(verticalScrollView, {
 			selectable = false,
 			size = UDim2.new(1, 0, 1, 0),
-			canvasSizeY = UDim.new(0, if var50 then var48 else var47),
+			canvasSizeY = UDim.new(0, if var17 then var15 else var14),
 			scrollBarType = scrollBarType.Compact
 		}, t)
 	})
 end
 
-return function(p10)
-	-- upvalues: reactModule (ref), useObservableValueModule (ref), serviceModule (ref), useChromeMenuItemsModule (ref), reactOtterModule (ref), t (write), var29 (write), constantsModule (ref), userInputService (ref), vector2 (write), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), fFlagUnibarMenuOpenSubmenu (ref), subMenuContextModule (ref)
+return function(p2)
+	-- upvalues: reactModule (ref), useObservableValueModule (ref), serviceModule (ref), useChromeMenuItemsModule (ref), reactOtterModule (ref), t (write), var5 (write), constantsModule (ref), userInputService (ref), vector2 (write), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), fFlagUnibarMenuOpenSubmenu (ref), subMenuContextModule (ref)
 	local t_1 = {}
-	local var58 = reactModule.useRef(nil)
-	local var59 = reactModule.useRef(nil)
-	local var60 = reactModule.useRef(nil)
-	local var61 = useObservableValueModule(serviceModule:currentSubMenu())
-	local _, var62 = reactModule.useState(0)
-	local var63 = useChromeMenuItemsModule()
+	local var20 = reactModule.useRef(nil)
+	local var21 = reactModule.useRef(nil)
+	local var22 = reactModule.useRef(nil)
+	local var23 = useObservableValueModule(serviceModule:currentSubMenu())
+	local _, var24 = reactModule.useState(0)
+	local var25 = useChromeMenuItemsModule()
 	local t_2 = {}
-	local var65, var66 = reactOtterModule.useAnimatedBinding(0, function(p11)
-		-- upvalues: var62 (ref)
-		var62(p11)
+	local var26, var27 = reactOtterModule.useAnimatedBinding(0, function(p3)
+		-- upvalues: var24 (ref)
+		var24(p3)
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: t (copy), t_2 (write), var29 (copy), var61 (ref), var62 (ref), var66 (ref), reactOtterModule (copy), constantsModule (copy), var60 (ref), userInputService (copy), vector2 (copy), var59 (ref), serviceModule (copy), var58 (ref), isInExperienceUIVREnabled (copy), isSpatial (copy), inExperienceUIVRIXP (copy)
+		-- upvalues: t (copy), t_2 (write), var5 (copy), var23 (ref), var24 (ref), var27 (ref), reactOtterModule (copy), constantsModule (copy), var22 (ref), userInputService (copy), vector2 (copy), var21 (ref), serviceModule (copy), var20 (ref), isInExperienceUIVREnabled (copy), isSpatial (copy), inExperienceUIVRIXP (copy)
 		t = t_2
-		var29 = var61
+		var5 = var23
 		
-		if var61 then
-			var62(0)
-			var66(reactOtterModule.spring(1, constantsModule.MENU_ANIMATION_SPRING))
-			var60.current = userInputService.TouchStarted:Connect(function(p12)
+		if var23 then
+			var24(0)
+			var27(reactOtterModule.spring(1, constantsModule.MENU_ANIMATION_SPRING))
+			var22.current = userInputService.TouchStarted:Connect(function(p3)
 				-- upvalues: vector2 (copy)
-				vector2 = Vector2.new(p12.Position.X, p12.Position.Y)
+				vector2 = Vector2.new(p3.Position.X, p3.Position.Y)
 			end)
-			var59.current = userInputService.TouchTap:Connect(function(p13)
+			var21.current = userInputService.TouchTap:Connect(function(p3)
 				-- upvalues: vector2 (copy), serviceModule (copy)
-				if p13[1] - vector2 ~= Vector2.zero then return end
-				local var67 = serviceModule:currentSubMenu():get()
+				if p3[1] - vector2 ~= Vector2.zero then return end
+				local var28 = serviceModule:currentSubMenu():get()
 				
-				if var67 then
-					serviceModule:toggleSubMenu(var67)
+				if var28 then
+					serviceModule:toggleSubMenu(var28)
 				end
 			end)
-			var58.current = userInputService.InputEnded:Connect(function(p14, _)
+			var20.current = userInputService.InputEnded:Connect(function(p3, _)
 				-- upvalues: isInExperienceUIVREnabled (copy), isSpatial (copy), inExperienceUIVRIXP (copy), serviceModule (copy)
 				if isInExperienceUIVREnabled and isSpatial() and not inExperienceUIVRIXP:isMovePanelToCenter() then return end
-				local var68 = serviceModule:currentSubMenu():get()
+				local var28 = serviceModule:currentSubMenu():get()
 				
-				if var68 and p14.UserInputType == Enum.UserInputType.MouseButton1 then
-					serviceModule:toggleSubMenu(var68)
+				if var28 and p3.UserInputType == Enum.UserInputType.MouseButton1 then
+					serviceModule:toggleSubMenu(var28)
 				end
 			end)
 		else
-			var62(1)
-			var66(reactOtterModule.spring(0, constantsModule.MENU_ANIMATION_SPRING))
+			var24(1)
+			var27(reactOtterModule.spring(0, constantsModule.MENU_ANIMATION_SPRING))
 		end
 		return function()
-			-- upvalues: var58 (copy), var59 (copy), var60 (copy)
-			if var58.current then
-				var58.current:Disconnect()
-				var58.current = nil
+			-- upvalues: var20 (copy), var21 (copy), var22 (copy)
+			if var20.current then
+				var20.current:Disconnect()
+				var20.current = nil
 			end
-			if var59.current then
-				var59.current:Disconnect()
-				var59.current = nil
+			if var21.current then
+				var21.current:Disconnect()
+				var21.current = nil
 			end
-			if var60.current then
-				var60.current:Disconnect()
-				var60.current = nil
+			if var22.current then
+				var22.current:Disconnect()
+				var22.current = nil
 			end
 		end
-	end, { var61 })
+	end, { var23 })
 	
-	if var61 and var63 then
-		for i, v in var63 do
-			if var61 == v.id then
+	if var23 and var25 then
+		for i, v in var25 do
+			if var23 == v.id then
 				t_2 = v.children
 				break
 			end
 		end
 	end
 	if #t_2 > 0 then
-		t_1[var61] = reactModule.createElement(SubMenu, {
+		t_1[var23] = reactModule.createElement(SubMenu, {
 			items = t_2,
-			menuTransition = var65,
-			panelSize = p10.panelSize
+			menuTransition = var26,
+			panelSize = p2.panelSize
 		})
 	elseif #t > 0 then
-		t_1[var29] = reactModule.createElement(SubMenu, {
+		t_1[var5] = reactModule.createElement(SubMenu, {
 			items = t,
-			menuTransition = var65,
-			panelSize = p10.panelSize
+			menuTransition = var26,
+			panelSize = p2.panelSize
 		})
 	end
 	return reactModule.createElement("Frame", {
@@ -424,6 +424,6 @@ return function(p10)
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = if isInExperienceUIVREnabled and isSpatial() then UDim2.new(1, 0, 1, 0) else UDim2.new(0, 0, 1, 0),
-		ref = if fFlagUnibarMenuOpenSubmenu then p10.subMenuHostRef else nil
-	}, reactModule.createElement(subMenuContextModule.Provider, { value = var65 }, t_1))
+		ref = if fFlagUnibarMenuOpenSubmenu then p2.subMenuHostRef else nil
+	}, reactModule.createElement(subMenuContextModule.Provider, { value = var26 }, t_1))
 end

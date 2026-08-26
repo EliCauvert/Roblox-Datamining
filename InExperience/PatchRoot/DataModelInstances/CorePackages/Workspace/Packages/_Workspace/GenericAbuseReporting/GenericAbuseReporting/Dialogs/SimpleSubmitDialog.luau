@@ -25,7 +25,7 @@ local scrollView = foundationModule.ScrollView
 local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local text = foundationModule.Text
 local genericReportLink = dsaIllegalContentReportingModule.GenericReportLink
-local var14 = dsaIllegalContentReportingModule.isShowGenericIllegalContentReportingLink()
+local var1 = dsaIllegalContentReportingModule.isShowGenericIllegalContentReportingLink()
 local takeItDownReportLink = dsaIllegalContentReportingModule.TakeItDownReportLink
 local getTakeItDownReportLinkVisibility = dsaIllegalContentReportingModule.getTakeItDownReportLinkVisibility
 local useAnalyticsDispatchModule = require(genericAbuseReporting.Analytics.useAnalyticsDispatch)
@@ -41,149 +41,149 @@ local function _(value)
 	return if fFlagAddAbuseReportOffsetForLandscape then if value.Y < value.X then 180 else 100 else 100
 end
 
-local _ = function(p0, p1)
-	return if p1.Y < p0.Y then 16 else 1
+local _ = function(p1, p2)
+	return if p2.Y < p1.Y then 16 else 1
 end
 
-return function(p2)
-	-- upvalues: useAnalyticsDispatchModule (ref), reactFocusNavigationModule (ref), focusNavigationUtilsModule (ref), useTokens (ref), reactModule (ref), useLayerCollector (ref), fFlagChatLineReportingFocusFixesEnabled (ref), onFormReasonSelectedModule (ref), onFormCommentUpdatedModule (ref), useLocalization (ref), useLocalizedStringsModule (ref), createNextOrder (ref), reasonDropdownModule (ref), UIListLayoutModule (ref), view (ref), text (ref), var14 (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref), partialPageModal (ref), MODAL_POSITION_OFFSETModule (ref), buttonType (ref), closeButtonIcon (ref), scrollView (ref), fFlagAddAbuseReportOffsetForLandscape (ref), scrollBarVisibility (ref), frameModule (ref), styledTextLabel (ref), commentTextFieldModule (ref)
-	local var18 = useAnalyticsDispatchModule()
-	local var19 = reactFocusNavigationModule.useFocusGuiObject()
-	local var20 = focusNavigationUtilsModule.useLastInputMode()
-	local var21 = useTokens()
-	local var22, var23 = reactModule.useState(false)
-	local var24, var25 = reactModule.useState("")
-	local var26, var27 = reactModule.useState("")
-	local var28, var29 = reactModule.useState("")
-	local var30 = reactModule.useRef(nil)
-	local var31, var32 = reactModule.useState(Vector2.zero)
-	local var33, var34 = reactModule.useState(Vector2.zero)
-	local var35, var36 = reactModule.useState(0)
-	local var37, var38 = reactModule.useState(0)
-	local var39 = reactModule.useRef(nil)
-	local var40, var41 = reactModule.useState(0)
-	local var42 = reactModule.useRef(nil)
-	local var43, var44 = reactModule.useState(0)
-	local var45, var46 = reactModule.useState(96)
-	local var47 = useLayerCollector()
-	local absoluteSize = var47.absoluteSize
+return function(p1)
+	-- upvalues: useAnalyticsDispatchModule (ref), reactFocusNavigationModule (ref), focusNavigationUtilsModule (ref), useTokens (ref), reactModule (ref), useLayerCollector (ref), fFlagChatLineReportingFocusFixesEnabled (ref), onFormReasonSelectedModule (ref), onFormCommentUpdatedModule (ref), useLocalization (ref), useLocalizedStringsModule (ref), createNextOrder (ref), reasonDropdownModule (ref), UIListLayoutModule (ref), view (ref), text (ref), var1 (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref), partialPageModal (ref), MODAL_POSITION_OFFSETModule (ref), buttonType (ref), closeButtonIcon (ref), scrollView (ref), fFlagAddAbuseReportOffsetForLandscape (ref), scrollBarVisibility (ref), frameModule (ref), styledTextLabel (ref), commentTextFieldModule (ref)
+	local var2 = useAnalyticsDispatchModule()
+	local var3 = reactFocusNavigationModule.useFocusGuiObject()
+	local var4 = focusNavigationUtilsModule.useLastInputMode()
+	local var5 = useTokens()
+	local var6, var7 = reactModule.useState(false)
+	local var8, var9 = reactModule.useState("")
+	local var10, var11 = reactModule.useState("")
+	local var12, var13 = reactModule.useState("")
+	local var14 = reactModule.useRef(nil)
+	local var15, var16 = reactModule.useState(Vector2.zero)
+	local var17, var18 = reactModule.useState(Vector2.zero)
+	local var19, var20 = reactModule.useState(0)
+	local var21, var22 = reactModule.useState(0)
+	local var23 = reactModule.useRef(nil)
+	local var24, var25 = reactModule.useState(0)
+	local var26 = reactModule.useRef(nil)
+	local var27, var28 = reactModule.useState(0)
+	local var29, var30 = reactModule.useState(96)
+	local var31 = useLayerCollector()
+	local absoluteSize = var31.absoluteSize
 	reactModule.useEffect(function()
-		-- upvalues: var46 (ref), var31 (ref), var40 (ref), var37 (ref), var35 (ref)
-		var46(math.max(96, var31.Y - (var40 - var37) - var35 - 20))
-	end, { var31.Y, var40, var37, var35 })
+		-- upvalues: var30 (ref), var15 (ref), var24 (ref), var21 (ref), var19 (ref)
+		var30(math.max(96, var15.Y - (var24 - var21) - var19 - 20))
+	end, { var15.Y, var24, var21, var19 })
 	reactModule.useEffect(function()
-		-- upvalues: var39 (ref), var36 (ref), var41 (ref)
-		if var39.current then
-			var36(var39.current.AbsoluteSize.Y)
-			var41(var39.current.AbsolutePosition.Y)
+		-- upvalues: var23 (ref), var20 (ref), var25 (ref)
+		if var23.current then
+			var20(var23.current.AbsoluteSize.Y)
+			var25(var23.current.AbsolutePosition.Y)
 		end
-	end, { var39.current, absoluteSize })
+	end, { var23.current, absoluteSize })
 	reactModule.useEffect(function()
-		-- upvalues: var30 (ref), var34 (ref), var32 (ref), fFlagChatLineReportingFocusFixesEnabled (copy), var38 (ref)
-		if not var30.current then
-			var32(Vector2.zero)
+		-- upvalues: var14 (ref), var18 (ref), var16 (ref), fFlagChatLineReportingFocusFixesEnabled (copy), var22 (ref)
+		if not var14.current then
+			var16(Vector2.zero)
 			
 			return
 		end
-		local scrollingFrame = var30.current:FindFirstChildWhichIsA("ScrollingFrame")
+		local scrollingFrame = var14.current:FindFirstChildWhichIsA("ScrollingFrame")
 		
 		if scrollingFrame then
 			scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
-				-- upvalues: var34 (copy), scrollingFrame (ref), var32 (copy)
-				var34(scrollingFrame.AbsoluteWindowSize)
-				var32(scrollingFrame.AbsoluteCanvasSize)
+				-- upvalues: var18 (copy), scrollingFrame (ref), var16 (copy)
+				var18(scrollingFrame.AbsoluteWindowSize)
+				var16(scrollingFrame.AbsoluteCanvasSize)
 			end)
 			
 			if fFlagChatLineReportingFocusFixesEnabled then
 				scrollingFrame.Selectable = false
 			end
 		end
-		var38(var30.current.AbsolutePosition.Y)
-	end, { var30.current, absoluteSize })
+		var22(var14.current.AbsolutePosition.Y)
+	end, { var14.current, absoluteSize })
 	reactModule.useEffect(function()
-		-- upvalues: var42 (ref), var44 (ref)
-		if var42.current then
-			var44(var42.current.AbsoluteContentSize.Y)
+		-- upvalues: var26 (ref), var28 (ref)
+		if var26.current then
+			var28(var26.current.AbsoluteContentSize.Y)
 		end
-	end, { var42.current })
-	local var48 = reactModule.useCallback(function()
-		-- upvalues: var24 (ref), p2 (ref), var28 (ref), var23 (ref)
-		if var24 ~= "" then
-			p2.onSubmit(var24, var28)
+	end, { var26.current })
+	local var32 = reactModule.useCallback(function()
+		-- upvalues: var8 (ref), p1 (ref), var12 (ref), var7 (ref)
+		if var8 ~= "" then
+			p1.onSubmit(var8, var12)
 			
 			return
-		elseif p2.reportCategoryDefaultKey == nil then
-			var23(true)
+		elseif p1.reportCategoryDefaultKey == nil then
+			var7(true)
 			
 			return
 		end
-		p2.onSubmit(p2.reportCategoryDefaultKey, var28)
-	end, { p2.onSubmit, var24, var28, var23 })
-	local var49 = reactModule.useCallback(function(p3)
-		-- upvalues: var25 (ref), var18 (ref), onFormReasonSelectedModule (copy), fFlagChatLineReportingFocusFixesEnabled (copy), var20 (ref), var39 (ref), var19 (ref)
-		var25(p3)
-		var18(onFormReasonSelectedModule({ reason_selection = p3 }))
+		p1.onSubmit(p1.reportCategoryDefaultKey, var12)
+	end, { p1.onSubmit, var8, var12, var7 })
+	local var33 = reactModule.useCallback(function(p2)
+		-- upvalues: var9 (ref), var2 (ref), onFormReasonSelectedModule (copy), fFlagChatLineReportingFocusFixesEnabled (copy), var4 (ref), var23 (ref), var3 (ref)
+		var9(p2)
+		var2(onFormReasonSelectedModule({ reason_selection = p2 }))
 		
-		if fFlagChatLineReportingFocusFixesEnabled and var20 == "Focus" and var39.current then
-			local spawnButton = var39.current:FindFirstChild("SpawnButton", true)
+		if fFlagChatLineReportingFocusFixesEnabled and var4 == "Focus" and var23.current then
+			local spawnButton = var23.current:FindFirstChild("SpawnButton", true)
 			
 			if spawnButton and spawnButton:IsA("GuiObject") then
-				var19(spawnButton)
+				var3(spawnButton)
 			end
 		end
-	end, if fFlagChatLineReportingFocusFixesEnabled then { var18, var19, var20 } else { var18 })
-	local var50 = reactModule.useCallback(function(p4)
-		-- upvalues: var29 (ref), var18 (ref), onFormCommentUpdatedModule (copy)
-		var29(p4)
-		var18(onFormCommentUpdatedModule({ comment_added = #p4 > 0 }))
-	end, { var18 })
-	local var51 = if p2.localizationKeys then useLocalization(p2.localizationKeys) else useLocalizedStringsModule()
-	local var52 = useLocalization({
+	end, if fFlagChatLineReportingFocusFixesEnabled then { var2, var3, var4 } else { var2 })
+	local var34 = reactModule.useCallback(function(p2)
+		-- upvalues: var13 (ref), var2 (ref), onFormCommentUpdatedModule (copy)
+		var13(p2)
+		var2(onFormCommentUpdatedModule({ comment_added = #p2 > 0 }))
+	end, { var2 })
+	local var35 = if p1.localizationKeys then useLocalization(p1.localizationKeys) else useLocalizedStringsModule()
+	local var36 = useLocalization({
 		submitDialogReasonSubheading = "Feature.ReportAbuse.Label.WhatWasWrong",
 		selectOnePrompt = "Feature.ReportAbuse.Label.PleaseSelectOne",
 		submitDialogCommentSubheading = "Feature.ReportAbuse.Label.TellUsWhatHappened",
 		submitDialogTextBoxPlaceholder = "Feature.SettingsHub.Label.ReportComment",
-		defaultKey = p2.reportCategories[1].localizationKey
+		defaultKey = p1.reportCategories[1].localizationKey
 	})
-	local var53 = createNextOrder()
+	local var37 = createNextOrder()
 	
 	return reactModule.createElement(partialPageModal, {
-		screenSize = Vector2.new(absoluteSize.X * (if p2.scaleDialog then p2.scaleDialog.X else 1), (absoluteSize.Y - var47.insets.top) * (if p2.scaleDialog then p2.scaleDialog.Y else 1)),
-		position = UDim2.new(0.5, 0, 0, var47.insets.top + MODAL_POSITION_OFFSETModule),
+		screenSize = Vector2.new(absoluteSize.X * (if p1.scaleDialog then p1.scaleDialog.X else 1), (absoluteSize.Y - var31.insets.top) * (if p1.scaleDialog then p1.scaleDialog.Y else 1)),
+		position = UDim2.new(0.5, 0, 0, var31.insets.top + MODAL_POSITION_OFFSETModule),
 		anchorPoint = Vector2.new(0.5, 0),
-		title = var51.formTitle,
-		onCloseClicked = p2.onAbandon,
+		title = var35.formTitle,
+		onCloseClicked = p1.onAbandon,
 		buttonStackProps = {
 			buttons = {
 				{
 					buttonType = buttonType.PrimaryContextual,
-					props = { onActivated = var48, text = var51.formSubmit }
+					props = { onActivated = var32, text = var35.formSubmit }
 				}
 			}
 		},
-		footerContent = if fFlagAddTakeItDownReportLinkToSurfaces then p2.footerContent or (if fFlagAddTakeItDownReportLinkToSurfaces and (var14 or getTakeItDownReportLinkVisibility()) then if fFlagAddTakeItDownReportLinkToSurfaces then reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), view (copy), var14 (copy), genericReportLink (copy), getTakeItDownReportLinkVisibility (copy), takeItDownReportLink (copy)
+		footerContent = if fFlagAddTakeItDownReportLinkToSurfaces then p1.footerContent or (if fFlagAddTakeItDownReportLinkToSurfaces and (var1 or getTakeItDownReportLinkVisibility()) then if fFlagAddTakeItDownReportLinkToSurfaces then reactModule.useMemo(function()
+			-- upvalues: reactModule (copy), view (copy), var1 (copy), genericReportLink (copy), getTakeItDownReportLinkVisibility (copy), takeItDownReportLink (copy)
 			return function()
-				-- upvalues: reactModule (copy), view (copy), var14 (copy), genericReportLink (copy), getTakeItDownReportLinkVisibility (copy), takeItDownReportLink (copy)
+				-- upvalues: reactModule (copy), view (copy), var1 (copy), genericReportLink (copy), getTakeItDownReportLinkVisibility (copy), takeItDownReportLink (copy)
 				return reactModule.createElement(view, {
 					tag = "col gap-medium size-full-0 auto-y padding-x-xlarge padding-top-small"
 				}, {
-					GenericReportLink = if var14 then reactModule.createElement(genericReportLink) else nil,
+					GenericReportLink = if var1 then reactModule.createElement(genericReportLink) else nil,
 					TakeItDownReportLink = if getTakeItDownReportLinkVisibility() then reactModule.createElement(takeItDownReportLink, { layoutOrder = 2 }) else nil
 				})
 			end
-		end, {}) else nil else nil) else p2.footerContent or (if var14 then reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), view (copy), var14 (copy), genericReportLink (copy)
+		end, {}) else nil else nil) else p1.footerContent or (if var1 then reactModule.useMemo(function()
+			-- upvalues: reactModule (copy), view (copy), var1 (copy), genericReportLink (copy)
 			return function()
-				-- upvalues: reactModule (copy), view (copy), var14 (copy), genericReportLink (copy)
+				-- upvalues: reactModule (copy), view (copy), var1 (copy), genericReportLink (copy)
 				return reactModule.createElement(view, {
 					tag = "size-full-0 auto-y col padding-x-xlarge padding-top-small"
 				}, {
-					GenericReportingLink = if var14 then reactModule.createElement(genericReportLink, { layoutOrder = 2 }) else nil
+					GenericReportingLink = if var1 then reactModule.createElement(genericReportLink, { layoutOrder = 2 }) else nil
 				})
 			end
 		end, {}) else nil),
-		closeButtonIcon = if p2.useBackButton then closeButtonIcon.Back else nil
+		closeButtonIcon = if p1.useBackButton then closeButtonIcon.Back else nil
 	}, {
 		SubmitContainer = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -191,33 +191,33 @@ return function(p2)
 			Size = UDim2.fromScale(1, 0)
 		}, {
 			SubmitReportFrame = reactModule.createElement(scrollView, {
-				Size = UDim2.new(1, 0, 0, math.min(absoluteSize.Y - var47.insets.top - (if fFlagAddAbuseReportOffsetForLandscape then if absoluteSize.Y < absoluteSize.X then 180 else 100 else 100) - (if p2.footerContent == nil and var14 then 25 else 0), var43 + 50 + 50)),
+				Size = UDim2.new(1, 0, 0, math.min(absoluteSize.Y - var31.insets.top - (if fFlagAddAbuseReportOffsetForLandscape then if absoluteSize.Y < absoluteSize.X then 180 else 100 else 100) - (if p1.footerContent == nil and var1 then 25 else 0), var27 + 50 + 50)),
 				scroll = {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.fromOffset(0, 0),
 					scrollBarVisibility = scrollBarVisibility.Always,
 					ScrollingDirection = Enum.ScrollingDirection.Y
 				},
-				ref = var30
+				ref = var14
 			}, {
 				Layout = reactModule.createElement(UIListLayoutModule, {
 					Padding = UDim.new(0, 16),
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
-					Ref = var42
+					Ref = var26
 				}),
 				Padding = reactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 16),
 					PaddingBottom = UDim.new(0, 16),
 					PaddingLeft = UDim.new(0, 1),
-					PaddingRight = UDim.new(0, if var33.Y < var31.Y then 16 else 1)
+					PaddingRight = UDim.new(0, if var17.Y < var15.Y then 16 else 1)
 				}),
-				TopCustomComponent = p2.topCustomComponent,
+				TopCustomComponent = p1.topCustomComponent,
 				ReportReasonFrame = reactModule.createElement(frameModule, {
 					ZIndex = 2,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
-					LayoutOrder = var53()
+					LayoutOrder = var37()
 				}, {
 					Layout = reactModule.createElement(UIListLayoutModule, {
 						Padding = UDim.new(0, 14),
@@ -226,23 +226,23 @@ return function(p2)
 					}),
 					ReportReasonSubheading = reactModule.createElement(styledTextLabel, {
 						text = "1. " .. var52.submitDialogReasonSubheading,
-						fontStyle = var21.Typography.TitleLarge,
-						colorStyle = var21.Color.Content.Default,
-						layoutOrder = var53(),
+						fontStyle = var5.Typography.TitleLarge,
+						colorStyle = var5.Color.Content.Default,
+						layoutOrder = var37(),
 						automaticSize = Enum.AutomaticSize.XY
 					}),
 					DropdownPosition = reactModule.createElement(frameModule, {
 						ZIndex = 2,
 						AutomaticSize = Enum.AutomaticSize.None,
 						Size = UDim2.new(1, 0, 0, 48),
-						LayoutOrder = var53(),
-						ref = var39
+						LayoutOrder = var37(),
+						ref = var23
 					}, {
-						ReportReasonPrompt = if p2.isReportCategoryReadonly then reactModule.createElement("Frame", {
+						ReportReasonPrompt = if p1.isReportCategoryReadonly then reactModule.createElement("Frame", {
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
-							LayoutOrder = var53()
+							LayoutOrder = var37()
 						}, {
 							Layout = reactModule.createElement(UIListLayoutModule, {
 								Padding = UDim.new(0, 7),
@@ -256,42 +256,42 @@ return function(p2)
 							}, {
 								Text = reactModule.createElement(text, {
 									tag = "size-full content-muted",
-									Text = var52.defaultKey,
+									Text = var36.defaultKey,
 									TextXAlignment = Enum.TextXAlignment.Left
 								})
 							})
 						}) else reactModule.createElement(reasonDropdownModule, {
 							menuItemHeight = 48,
-							options = p2.reportCategories,
+							options = p1.reportCategories,
 							screenSize = absoluteSize,
-							maxHeight = var45,
-							isDropdownError = var22,
-							setDropdownError = var23,
-							onSelectedAbuseType = var49,
-							reportCategoryDefaultKey = p2.reportCategoryDefaultKey,
-							setDescription = var27,
-							isDisabled = p2.isDisabled
+							maxHeight = var29,
+							isDropdownError = var6,
+							setDropdownError = var7,
+							onSelectedAbuseType = var33,
+							reportCategoryDefaultKey = p1.reportCategoryDefaultKey,
+							setDescription = var11,
+							isDisabled = p1.isDisabled
 						})
 					}),
-					ReportReasonSubtext = if var22 then reactModule.createElement(styledTextLabel, {
-						text = var52.selectOnePrompt,
-						fontStyle = var21.Typography.BodySmall,
-						colorStyle = var21.Color.System.Alert,
-						layoutOrder = var53(),
+					ReportReasonSubtext = if var6 then reactModule.createElement(styledTextLabel, {
+						text = var36.selectOnePrompt,
+						fontStyle = var5.Typography.BodySmall,
+						colorStyle = var5.Color.System.Alert,
+						layoutOrder = var37(),
 						automaticSize = Enum.AutomaticSize.XY
-					}) elseif var26 ~= "" then nil else reactModule.createElement(styledTextLabel, {
-						text = var26,
-						fontStyle = var21.Typography.BodySmall,
-						colorStyle = var21.Color.Content.Default,
-						layoutOrder = var53(),
+					}) elseif var10 ~= "" then nil else reactModule.createElement(styledTextLabel, {
+						text = var10,
+						fontStyle = var5.Typography.BodySmall,
+						colorStyle = var5.Color.Content.Default,
+						layoutOrder = var37(),
 						automaticSize = Enum.AutomaticSize.XY
 					}),
-					Padding = if var26 == "" and not var22 then nil else reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 10) })
+					Padding = if var10 == "" and not var6 then nil else reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 10) })
 				}),
 				ReportCommentFrame = reactModule.createElement(frameModule, {
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
-					LayoutOrder = var53()
+					LayoutOrder = var37()
 				}, {
 					Layout = reactModule.createElement(UIListLayoutModule, {
 						Padding = UDim.new(0, 14),
@@ -301,16 +301,16 @@ return function(p2)
 					Padding = reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 15) }),
 					ReportCommentSubheading = reactModule.createElement(styledTextLabel, {
 						text = "2. " .. var52.submitDialogCommentSubheading,
-						fontStyle = var21.Typography.TitleLarge,
-						colorStyle = var21.Color.Content.Default,
-						layoutOrder = var53(),
+						fontStyle = var5.Typography.TitleLarge,
+						colorStyle = var5.Color.Content.Default,
+						layoutOrder = var37(),
 						automaticSize = Enum.AutomaticSize.XY
 					}),
 					CommentTextField = reactModule.createElement(commentTextFieldModule, {
-						layoutOrder = var53(),
-						text = var28,
-						placeholderText = var52.submitDialogTextBoxPlaceholder,
-						onUpdate = var50
+						layoutOrder = var37(),
+						text = var12,
+						placeholderText = var36.submitDialogTextBoxPlaceholder,
+						onUpdate = var34
 					})
 				})
 			})

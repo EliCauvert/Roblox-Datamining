@@ -9,31 +9,31 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = localizationModule.Hooks.useLocalization
-local var4 = reactModule.memo(function(p0)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "col align-y-center align-x-left size-full-0 auto-y padding-x-small padding-y-small",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		reactModule.createElement(text, {
 			tag = "text-title-medium text-align-x-left auto-xy text-wrap",
 			key = "title-text",
 			textStyle = useTokens().Color.Extended.White.White_100,
-			Text = useLocalization({ title = p0.title }).title
+			Text = useLocalization({ title = p1.title }).title
 		})
 	})
 end)
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), var4 (ref), keyboardActionModule (ref), view (ref)
+	-- upvalues: reactModule (ref), var1 (ref), keyboardActionModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "col align-y-top align-x-center size-full gap-xxsmall",
 		testId = "KeyboardGroup",
 		LayoutOrder = p1.group.layoutOrder
 	}, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var4 (copy), p1 (ref), keyboardActionModule (copy)
+		-- upvalues: reactModule (copy), var1 (copy), p1 (ref), keyboardActionModule (copy)
 		local t = {}
-		table.insert(t, reactModule.createElement(var4, {
+		table.insert(t, reactModule.createElement(var1, {
 			LayoutOrder = 0,
 			title = p1.group.label,
 			key = "groupTitle-" .. p1.group.id

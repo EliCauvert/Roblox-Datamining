@@ -1,36 +1,36 @@
 ﻿local reactModule = require(script:FindFirstAncestor("InputUi").Parent.React)
 local playersService = game:GetService("Players")
-local var2 = nil
+local var1 = nil
 pcall(function()
-	-- upvalues: var2 (write)
-	var2 = game:GetService("ThirdPartyUserService")
+	-- upvalues: var1 (write)
+	var1 = game:GetService("ThirdPartyUserService")
 end)
 local gamepadDisconnectedModalViewModule = require(script.Parent.GamepadDisconnectedModalView)
 
 local function _()
-	-- upvalues: var2 (write), playersService (ref)
-	local var4 = if var2 then var2:GetUserPlatformName() else ""
+	-- upvalues: var1 (write), playersService (ref)
+	local var2 = if var1 then var1:GetUserPlatformName() else ""
 	
-	if var4 == "" or var4 == nil then
+	if var2 == "" or var2 == nil then
 		local localPlayer = playersService.LocalPlayer
 		
 		if localPlayer then
-			var4 = localPlayer.DisplayName or localPlayer.Name
+			var2 = localPlayer.DisplayName or localPlayer.Name
 		end
 	end
-	return var4 or ""
+	return var2 or ""
 end
 
 return function(_)
-	-- upvalues: var2 (write), playersService (ref), reactModule (ref), gamepadDisconnectedModalViewModule (ref)
-	local var5 = if var2 then var2:GetUserPlatformName() else ""
+	-- upvalues: var1 (write), playersService (ref), reactModule (ref), gamepadDisconnectedModalViewModule (ref)
+	local var2 = if var1 then var1:GetUserPlatformName() else ""
 	
-	if var5 == "" or var5 == nil then
+	if var2 == "" or var2 == nil then
 		local localPlayer = playersService.LocalPlayer
 		
 		if localPlayer then
-			var5 = localPlayer.DisplayName or localPlayer.Name
+			var2 = localPlayer.DisplayName or localPlayer.Name
 		end
 	end
-	return reactModule.createElement(gamepadDisconnectedModalViewModule, { username = var5 or "" })
+	return reactModule.createElement(gamepadDisconnectedModalViewModule, { username = var2 or "" })
 end

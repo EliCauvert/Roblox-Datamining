@@ -13,8 +13,8 @@ local t = {
 local logger = require(parent.Loggers).Logger
 logger:addSink({
 	maxLevel = logger.Levels.fromString("trace"),
-	log = function(_, p0, _)
-		print(p0)
+	log = function(_, p1, _)
+		print(p1)
 	end
 })
 loggerModule:setParent(logger)

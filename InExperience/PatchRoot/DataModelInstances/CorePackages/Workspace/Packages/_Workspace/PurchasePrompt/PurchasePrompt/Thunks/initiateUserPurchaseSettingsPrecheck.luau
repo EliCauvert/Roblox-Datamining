@@ -19,45 +19,45 @@ local mapCheckUserPurchaseSettingsFailureReasonToViolationType = IAPExperienceMo
 local economicRestrictionsViolationType = IAPExperienceModule.Enums.EconomicRestrictionsViolationType
 local list = { analyticsModule, networkModule, externalSettingsModule }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: mapCheckUserPurchaseSettingsFailureReasonToViolationType (ref), economicRestrictionsViolationType (ref)
-	return if p0 == nil then false else (if p0.isEligible ~= nil then p0.failureReason == nil else true) and not (mapCheckUserPurchaseSettingsFailureReasonToViolationType(p0.failureReason) ~= economicRestrictionsViolationType.None and p0.expirationTimeInMinutes ~= nil)
+	return if p1 == nil then false else (if p1.isEligible ~= nil then p1.failureReason == nil else true) and not (mapCheckUserPurchaseSettingsFailureReasonToViolationType(p1.failureReason) ~= economicRestrictionsViolationType.None and p1.expirationTimeInMinutes ~= nil)
 end
 
 return function()
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), analyticsModule (ref), externalSettingsModule (ref), initiatePurchasePrecheckModule (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), checkUserPurchaseSettingsModule (ref), mapCheckUserPurchaseSettingsFailureReasonToViolationType (ref), economicRestrictionsViolationType (ref), errorOccurredModule (ref), purchaseErrorModule (ref), checkUserPurchaseSettingsFailureReason (ref), setPromptStateModule (ref), promptStateModule (ref), setEconomicRestrictionErrorModule (ref)
 	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: networkModule (copy), analyticsModule (copy), externalSettingsModule (copy), initiatePurchasePrecheckModule (copy), getUpsellFlowModule (copy), upsellFlowModule (copy), checkUserPurchaseSettingsModule (copy), mapCheckUserPurchaseSettingsFailureReasonToViolationType (copy), economicRestrictionsViolationType (copy), errorOccurredModule (copy), purchaseErrorModule (copy), checkUserPurchaseSettingsFailureReason (copy), setPromptStateModule (copy), promptStateModule (copy), setEconomicRestrictionErrorModule (copy)
-		local var16 = p2[networkModule]
-		local var17 = p2[analyticsModule]
-		local var18 = p2[externalSettingsModule]
+		local var1 = p2[networkModule]
+		local var2 = p2[analyticsModule]
+		local var3 = p2[externalSettingsModule]
 		
-		return if var18.isStudio() then p1:dispatch(initiatePurchasePrecheckModule()) elseif getUpsellFlowModule(var18.getPlatform()) == upsellFlowModule.Web then p1:dispatch(initiatePurchasePrecheckModule()) else checkUserPurchaseSettingsModule(var16):andThen(function(p3)
-			-- upvalues: mapCheckUserPurchaseSettingsFailureReasonToViolationType (copy), economicRestrictionsViolationType (copy), p1 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), initiatePurchasePrecheckModule (copy), checkUserPurchaseSettingsFailureReason (copy), var17 (ref), setPromptStateModule (copy), promptStateModule (copy), setEconomicRestrictionErrorModule (copy)
-			local var19, var20
+		return if var3.isStudio() then p1:dispatch(initiatePurchasePrecheckModule()) elseif getUpsellFlowModule(var3.getPlatform()) == upsellFlowModule.Web then p1:dispatch(initiatePurchasePrecheckModule()) else checkUserPurchaseSettingsModule(var1):andThen(function(p3)
+			-- upvalues: mapCheckUserPurchaseSettingsFailureReasonToViolationType (copy), economicRestrictionsViolationType (copy), p1 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), initiatePurchasePrecheckModule (copy), checkUserPurchaseSettingsFailureReason (copy), var2 (ref), setPromptStateModule (copy), promptStateModule (copy), setEconomicRestrictionErrorModule (copy)
+			local var4, var5
 			if p3 == nil then
-				var19 = false
+				var4 = false
 			else
-				var20 = if p3.isEligible ~= nil then p3.failureReason == nil else true
-				var19 = if var20 and not (mapCheckUserPurchaseSettingsFailureReasonToViolationType(p3.failureReason) ~= economicRestrictionsViolationType.None and p3.expirationTimeInMinutes ~= nil) then false else true
+				var5 = if p3.isEligible ~= nil then p3.failureReason == nil else true
+				var4 = if var5 and not (mapCheckUserPurchaseSettingsFailureReasonToViolationType(p3.failureReason) ~= economicRestrictionsViolationType.None and p3.expirationTimeInMinutes ~= nil) then false else true
 			end
-			if var19 == false then
+			if var4 == false then
 				return p1:dispatch(errorOccurredModule(purchaseErrorModule.UnknownFailure))
 			elseif p3.isEligible == true then
 				return p1:dispatch(initiatePurchasePrecheckModule())
 			end
-			local var21 = mapCheckUserPurchaseSettingsFailureReasonToViolationType(p3.failureReason)
-			var20 = var21 ~= economicRestrictionsViolationType.None
+			local var6 = mapCheckUserPurchaseSettingsFailureReasonToViolationType(p3.failureReason)
+			var5 = var6 ~= economicRestrictionsViolationType.None
 			
 			if p3.failureReason == checkUserPurchaseSettingsFailureReason.PurchaseNotEnabled then
-				var17.signalUserSettingEligibilityModal("PurchaseNotEnabled")
+				var2.signalUserSettingEligibilityModal("PurchaseNotEnabled")
 				
 				return p1:dispatch(setPromptStateModule(promptStateModule.EnablePurchaseVPCModal))
 			elseif p3.failureReason == checkUserPurchaseSettingsFailureReason.SpendLimitExceeded then
 				return p1:dispatch(initiatePurchasePrecheckModule())
-			elseif var20 and p3.expirationTimeInMinutes ~= nil then
-				var17.signalEconomicRestrictionError(var21, p3.expirationTimeInMinutes)
-				p1:dispatch(setEconomicRestrictionErrorModule(var21, p3.expirationTimeInMinutes))
+			elseif var5 and p3.expirationTimeInMinutes ~= nil then
+				var2.signalEconomicRestrictionError(var6, p3.expirationTimeInMinutes)
+				p1:dispatch(setEconomicRestrictionErrorModule(var6, p3.expirationTimeInMinutes))
 				
 				return p1:dispatch(errorOccurredModule(purchaseErrorModule.EconomicRestriction))
 			end

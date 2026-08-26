@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Parent.HttpClient)
 
-local function getCsrfToken(p0)
-	local headers = p0.headers
+local function getCsrfToken(p1)
+	local headers = p1.headers
 	
 	if headers == nil then
 		return nil
@@ -14,49 +14,49 @@ local function getCsrfToken(p0)
 	return nil
 end
 
-local function _(p1, p2)
+local function _(p2, p3)
 	local t = {}
 	
-	if p1 then
-		for i, v in p1 do
+	if p2 then
+		for i, v in p2 do
 			t[i] = v
 		end
 	end
-	for i, v in p2 do
+	for i, v in p3 do
 		t[i] = v
 	end
 	return t
 end
 
-return function(p3)
+return function(p4)
 	-- upvalues: getCsrfToken (ref)
 	return {
-		request = function(p4, p5)
-			-- upvalues: p3 (ref), getCsrfToken (copy)
-			local var2 = false
-			local var3 = nil
-			var3 = p3.request(p4, function(p6, p7)
-				-- upvalues: var2 (write), p5 (ref), getCsrfToken (copy), p4 (ref), var3 (write), p3 (copy)
-				if var2 then return end
-				if not p6 or typeof(p7) ~= "table" then
-					p5(p6, p7)
+		request = function(p5, p6)
+			-- upvalues: p4 (ref), getCsrfToken (copy)
+			local var1 = false
+			local var2 = nil
+			var2 = p4.request(p5, function(p7, p8)
+				-- upvalues: var1 (write), p6 (ref), getCsrfToken (copy), p5 (ref), var2 (write), p4 (copy)
+				if var1 then return end
+				if not p7 or typeof(p8) ~= "table" then
+					p6(p7, p8)
 					
 					return
-				elseif p7.statusCode ~= 403 then
-					p5(true, p7)
+				elseif p8.statusCode ~= 403 then
+					p6(true, p8)
 					
 					return
 				end
-				local var4 = getCsrfToken(p7)
+				local var3 = getCsrfToken(p8)
 				
-				if var4 == nil then
-					p5(true, p7)
+				if var3 == nil then
+					p6(true, p8)
 					
 					return
 				end
-				local t = { url = p4.url, method = p4.method, body = p4.body }
-				local headers = p4.headers
-				local t_1 = { ["x-csrf-token"] = var4 }
+				local t = { url = p5.url, method = p5.method, body = p5.body }
+				local headers = p5.headers
+				local t_1 = { ["x-csrf-token"] = var3 }
 				local t_2 = {}
 				
 				if headers then
@@ -68,22 +68,22 @@ return function(p3)
 					t_2[i] = v
 				end
 				t.headers = t_2
-				var3 = p3.request(t, function(p8, p9)
-					-- upvalues: var2 (copy), p5 (copy)
-					if var2 then
+				var2 = p4.request(t, function(p9, p10)
+					-- upvalues: var1 (copy), p6 (copy)
+					if var1 then
 						return
 					end
-					p5(p8, p9)
+					p6(p9, p10)
 				end)
 			end)
 			
 			return function()
-				-- upvalues: var2 (write), var3 (write)
-				if var2 then return end
-				var2 = true
+				-- upvalues: var1 (write), var2 (write)
+				if var1 then return end
+				var1 = true
 				
-				if var3 then
-					var3()
+				if var2 then
+					var2()
 				end
 			end
 		end

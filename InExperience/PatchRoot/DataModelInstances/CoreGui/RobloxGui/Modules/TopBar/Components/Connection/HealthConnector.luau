@@ -19,8 +19,8 @@ healthConnector.validateProps = tModule.strictInterface({
 	updateHealth = tModule.callback
 })
 
-function healthConnector.init(p0)
-	p0:setState({ character = nil, humanoid = nil })
+function healthConnector.init(p1)
+	p1:setState({ character = nil, humanoid = nil })
 end
 
 function healthConnector.didMount(p1)
@@ -32,52 +32,52 @@ function healthConnector.didMount(p1)
 	})
 end
 
-function healthConnector.render(p2)
+function healthConnector.render(p1)
 	-- upvalues: roactModule (ref), eventConnectionModule (ref), localPlayer (write)
 	local t = {}
 	
-	if p2.state.humanoid then
+	if p1.state.humanoid then
 		t.HealthChangedConnection = roactModule.createElement(eventConnectionModule, {
-			event = p2.state.humanoid.HealthChanged,
+			event = p1.state.humanoid.HealthChanged,
 			callback = function(_)
-				-- upvalues: p2 (ref)
-				p2.props.updateHealth(p2.state.humanoid.Health, p2.state.humanoid.MaxHealth)
+				-- upvalues: p1 (ref)
+				p1.props.updateHealth(p1.state.humanoid.Health, p1.state.humanoid.MaxHealth)
 			end
 		})
 		t.HumanoidDiedConnection = roactModule.createElement(eventConnectionModule, {
-			event = p2.state.humanoid.Died,
+			event = p1.state.humanoid.Died,
 			callback = function()
-				-- upvalues: p2 (ref)
-				p2.props.setIsDead(true)
+				-- upvalues: p1 (ref)
+				p1.props.setIsDead(true)
 			end
 		})
-	elseif p2.state.character then
+	elseif p1.state.character then
 		t.ChildAddedConnection = roactModule.createElement(eventConnectionModule, {
-			event = p2.state.character.ChildAdded,
-			callback = function(p3)
-				-- upvalues: p2 (ref)
-				if p3:IsA("Humanoid") then
-					p2:setState({ humanoid = p3 })
+			event = p1.state.character.ChildAdded,
+			callback = function(p2)
+				-- upvalues: p1 (ref)
+				if p2:IsA("Humanoid") then
+					p1:setState({ humanoid = p2 })
 				end
 			end
 		})
 	end
 	t.CharacterAddedConnection = roactModule.createElement(eventConnectionModule, {
 		event = localPlayer.CharacterAdded,
-		callback = function(p4)
-			-- upvalues: p2 (ref), roactModule (copy)
-			p2:setState({
-				humanoid = p4:FindFirstChildOfClass("Humanoid") or roactModule.None,
-				character = p4
+		callback = function(p2)
+			-- upvalues: p1 (ref), roactModule (copy)
+			p1:setState({
+				humanoid = p2:FindFirstChildOfClass("Humanoid") or roactModule.None,
+				character = p2
 			})
-			p2.props.setIsDead(false)
+			p1.props.setIsDead(false)
 		end
 	})
 	t.CharacterRemovingConnection = roactModule.createElement(eventConnectionModule, {
 		event = localPlayer.CharacterRemoving,
 		callback = function()
-			-- upvalues: p2 (ref), roactModule (copy)
-			p2:setState({
+			-- upvalues: p1 (ref), roactModule (copy)
+			p1:setState({
 				humanoid = roactModule.None,
 				character = roactModule.None
 			})
@@ -87,32 +87,32 @@ function healthConnector.render(p2)
 	return roactModule.createFragment(t)
 end
 
-function healthConnector.didUpdate(p5, _, p6)
-	if p5.state.humanoid == nil then
-		p5.props.updateHealth(0, 0)
-	elseif p5.state.humanoid ~= p6.humanoid then
-		p5.props.setIsDead(false)
-		p5.props.updateHealth(p5.state.humanoid.Health, p5.state.humanoid.MaxHealth)
+function healthConnector.didUpdate(p1, _, p2)
+	if p1.state.humanoid == nil then
+		p1.props.updateHealth(0, 0)
+	elseif p1.state.humanoid ~= p2.humanoid then
+		p1.props.setIsDead(false)
+		p1.props.updateHealth(p1.state.humanoid.Health, p1.state.humanoid.MaxHealth)
 	end
-	if p5.state.character and p5.state.character ~= p6.character then
-		local humanoid = p5.state.character:FindFirstChildWhichIsA("Humanoid")
+	if p1.state.character and p1.state.character ~= p2.character then
+		local humanoid = p1.state.character:FindFirstChildWhichIsA("Humanoid")
 		
-		if humanoid and humanoid ~= p5.state.humanoid then
-			p5:setState({ humanoid = humanoid })
+		if humanoid and humanoid ~= p1.state.humanoid then
+			p1:setState({ humanoid = humanoid })
 		end
 	end
 end
 
-return if fFlagTopBarSignalizeHealthBar then nil else roactRoduxModule.UNSTABLE_connect2(nil, function(p7)
+return if fFlagTopBarSignalizeHealthBar then nil else roactRoduxModule.UNSTABLE_connect2(nil, function(p1)
 	-- upvalues: setIsDeadModule (ref), updateHealthModule (ref)
 	return {
 		setIsDead = function(value)
-			-- upvalues: p7 (ref), setIsDeadModule (copy)
-			return p7(setIsDeadModule(value))
+			-- upvalues: p1 (ref), setIsDeadModule (copy)
+			return p1(setIsDeadModule(value))
 		end,
-		updateHealth = function(p8, p9)
-			-- upvalues: p7 (ref), updateHealthModule (copy)
-			return p7(updateHealthModule(p8, p9))
+		updateHealth = function(p2, p3)
+			-- upvalues: p1 (ref), updateHealthModule (copy)
+			return p1(updateHealthModule(p2, p3))
 		end
 	}
 end)(healthConnector)

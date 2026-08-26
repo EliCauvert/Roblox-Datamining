@@ -18,31 +18,31 @@ local useTokens = foundationModule.Hooks.useTokens
 local captureTriggerTypeModule = require(parent.Enums.CaptureTriggerType)
 local constantsModule = require(parent.Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), useScaledValue (ref), useTokens (ref), reactModule (ref), useSelector (ref), constantsModule (ref), controlState (ref), default (ref), captureTriggerTypeModule (ref), view (ref), popover (ref), icon (ref), foundationModule (ref), popoverAlign (ref), text (ref)
-	local var6 = useLocalization({
+	local var1 = useLocalization({
 		voiceChatMutedLabel = "Feature.Captures.Label.VideoCaptureVoiceChatMutedTooltip",
 		voiceChatMutedTitle = "Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip"
 	})
-	local var7 = useScaledValue(320)
-	local var8 = useTokens()
-	local var9, var10 = reactModule.useState(false)
-	local var11 = useSelector(function(p1)
+	local var2 = useScaledValue(320)
+	local var3 = useTokens()
+	local var4, var5 = reactModule.useState(false)
+	local var6 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].IsVideoCaptureActive.triggerType
+		return p2[constantsModule.RoduxKey].IsVideoCaptureActive.triggerType
 	end)
 	
-	return if not (not default:UserVoiceEnabled() or not default:IsInitialized()) then if not (var11 ~= captureTriggerTypeModule.UserCapture and var11 ~= captureTriggerTypeModule.DeveloperCapture) then if game:GetEngineFeature("ReenableMomentsVoice") then nil else reactModule.createElement(view, {
+	return if not (not default:UserVoiceEnabled() or not default:IsInitialized()) then if not (var6 ~= captureTriggerTypeModule.UserCapture and var6 ~= captureTriggerTypeModule.DeveloperCapture) then if game:GetEngineFeature("ReenableMomentsVoice") then nil else reactModule.createElement(view, {
 		tag = "anchor-center-center clip position-center-center radius-circle size-700-700",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		onStateChanged = reactModule.useCallback(function(p2)
-			-- upvalues: controlState (copy), var10 (ref), var9 (ref)
+			-- upvalues: controlState (copy), var5 (ref), var4 (ref)
 			if p2 == controlState.Pressed then
-				var10(not var9)
+				var5(not var4)
 			end
-		end, { var9 })
+		end, { var4 })
 	}, {
-		Popover = reactModule.createElement(popover.Root, { isOpen = var9 }, {
+		Popover = reactModule.createElement(popover.Root, { isOpen = var4 }, {
 			Anchor = reactModule.createElement(popover.Anchor, {
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5)
@@ -50,29 +50,29 @@ return function(p0)
 				DeafenIcon = reactModule.createElement(icon, {
 					name = "icons/controls/headphoneDeafen_small",
 					size = foundationModule.Enums.IconSize.Small,
-					style = var8.Color.Content.Emphasis
+					style = var3.Color.Content.Emphasis
 				})
 			}),
 			Content = reactModule.createElement(popover.Content, {
 				hasArrow = false,
 				align = popoverAlign.Center,
 				onPressedOutside = reactModule.useCallback(function()
-					-- upvalues: var10 (ref)
-					var10(false)
+					-- upvalues: var5 (ref)
+					var5(false)
 				end, {}),
-				side = { offset = var8.Size.Size_500, position = p0.popoverSide }
+				side = { offset = var3.Size.Size_500, position = p1.popoverSide }
 			}, {
 				Tooltip = reactModule.createElement(view, {
 					tag = "auto-xy col gap-xsmall padding-y-small padding-x-medium",
-					sizeConstraint = { MaxSize = Vector2.new(var7, 1e999) }
+					sizeConstraint = { MaxSize = Vector2.new(var2, 1e999) }
 				}, {
 					Title = reactModule.createElement(text, {
 						tag = "size-full-0 auto-y text-truncate-end text-align-x-left text-title-small",
-						Text = var6.voiceChatMutedTitle
+						Text = var1.voiceChatMutedTitle
 					}),
 					Subtitle = reactModule.createElement(text, {
 						tag = "size-full-0 auto-y text-wrap text-align-x-left text-body-small",
-						Text = var6.voiceChatMutedLabel
+						Text = var1.voiceChatMutedLabel
 					})
 				})
 			})

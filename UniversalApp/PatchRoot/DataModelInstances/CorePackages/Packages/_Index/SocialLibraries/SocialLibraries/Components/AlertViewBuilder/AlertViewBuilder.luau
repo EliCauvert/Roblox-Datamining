@@ -28,26 +28,26 @@ alertViewBuilder.defaultProps = {
 	soakAreaColor3 = Color3.fromRGB(255, 0, 255)
 }
 
-function alertViewBuilder.init(p0)
+function alertViewBuilder.init(p1)
 	-- upvalues: roact (ref), text (ref)
-	local var7 = 0
-	p0.refs = {}
+	local var1 = 0
+	p1.refs = {}
 	
-	for i, v in pairs(p0.props.textboxes) do
-		p0.refs[i] = roact.createRef()
-		var7 += 1
+	for i, v in pairs(p1.props.textboxes) do
+		p1.refs[i] = roact.createRef()
+		var1 += 1
 	end
-	p0.state = { numTextboxes = var7 }
+	p1.state = { numTextboxes = var1 }
 	
-	function p0.calcTextboxTextHeight(p1, p2)
-		-- upvalues: text (copy), p0 (ref)
-		return if p2 and p2 ~= "" then text.GetTextHeight(p2, p1.Font.Body.Font, p1.Font.Body.RelativeSize * p1.Font.BaseSize, p0.props.childComponentWidth) else 0
+	function p0.calcTextboxTextHeight(p2, p3)
+		-- upvalues: text (copy), p1 (ref)
+		return if p3 and p3 ~= "" then text.GetTextHeight(p3, p2.Font.Body.Font, p2.Font.Body.RelativeSize * p2.Font.BaseSize, p1.props.childComponentWidth) else 0
 	end
 end
 
-function alertViewBuilder.didMount(p3)
-	if type(p3.props.onModalOpen) == "function" then
-		p3.props.onModalOpen()
+function alertViewBuilder.didMount(p2)
+	if type(p2.props.onModalOpen) == "function" then
+		p2.props.onModalOpen()
 	end
 end
 
@@ -59,31 +59,31 @@ function alertViewBuilder.reset(value)
 	end
 end
 
-function alertViewBuilder.makeButtonTable(p4)
+function alertViewBuilder.makeButtonTable(p2)
 	-- upvalues: cryo (ref)
 	local t = { buttons = {} }
 	
-	for i, v in ipairs(p4.props.buttons) do
+	for i, v in ipairs(p2.props.buttons) do
 		table.insert(t.buttons, {})
 		t.buttons[i] = cryo.Dictionary.join(v, {
 			props = cryo.Dictionary.join(v.props, {
 				layoutOrder = i,
 				onActivated = function()
-					-- upvalues: p4 (ref), v (ref)
-					p4.props.onActivated()
+					-- upvalues: p2 (ref), v (ref)
+					p2.props.onActivated()
 					local t = {}
 					
-					for i, v_1 in pairs(p4.refs) do
+					for i, v_1 in pairs(p2.refs) do
 						t[i] = if v_1.current then v_1.current.Text else ""
 					end
 					if v.props.onActivated(t) then
-						p4.props.onModalStayOpen()
+						p2.props.onModalStayOpen()
 						
 						return
 					end
-					p4:reset()
-					p4:setState({ displayingModal = false })
-					p4.props.onModalClose()
+					p2:reset()
+					p2:setState({ displayingModal = false })
+					p2.props.onModalClose()
 				end
 			})
 		})
@@ -91,17 +91,17 @@ function alertViewBuilder.makeButtonTable(p4)
 	return t
 end
 
-function alertViewBuilder.makeTextboxList(p5, p6)
+function alertViewBuilder.makeTextboxList(p3, p4)
 	-- upvalues: roact (ref), fitFrameVerticalModule (ref), alertViewTextboxModule (ref), alertViewLabelModule (ref)
 	local t = {}
-	local var11 = if p5.props.inputLengthExceeded then p6.Theme.Alert.Color else p6.Theme.TextDefault.Color
+	local var2 = if p3.props.inputLengthExceeded then p4.Theme.Alert.Color else p4.Theme.TextDefault.Color
 	
-	for i, v in pairs(p5.props.textboxes) do
-		local var18
-		local var12 = p5.calcTextboxTextHeight(p6, v.belowText)
-		local var13 = p5.calcTextboxTextHeight(p6, v.warningText)
+	for i, v in pairs(p3.props.textboxes) do
+		local var3
+		local var4 = p3.calcTextboxTextHeight(p4, v.belowText)
+		local var5 = p3.calcTextboxTextHeight(p4, v.warningText)
 		local createElement = roact.createElement
-		local var14 = fitFrameVerticalModule
+		local var6 = fitFrameVerticalModule
 		local t_1 = {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
@@ -114,47 +114,47 @@ function alertViewBuilder.makeTextboxList(p5, p6)
 				PlaceholderText = v.PlaceholderText,
 				Text = v.Text,
 				LayoutOrder = 1,
-				[roact.Ref] = p5.refs[i]
+				[roact.Ref] = p3.refs[i]
 			})
 		}
 		local text = i .. " Below Text"
 		
 		if v.belowText and v.belowText ~= "" then
-			var18 = roact.createElement(alertViewLabelModule, {
+			var3 = roact.createElement(alertViewLabelModule, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				Text = v.belowText,
 				TextXAlignment = v.belowTextAlignment or Enum.TextXAlignment.Left,
-				Size = UDim2.new(1, 0, 0, var12),
-				TextColor3 = var11
+				Size = UDim2.new(1, 0, 0, var4),
+				TextColor3 = var2
 			}) or nil
 		end
-		local var20
-		t_2[text] = var18
+		local var7
+		t_2[text] = var3
 		local text_1 = i .. " Warning Text"
 		
 		if v.warningText and v.warningText ~= "" then
-			var20 = roact.createElement(alertViewLabelModule, {
+			var7 = roact.createElement(alertViewLabelModule, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				Text = v.warningText,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Size = UDim2.new(1, 0, 0, var13),
-				TextColor3 = p6.Theme.Alert.Color
+				Size = UDim2.new(1, 0, 0, var5),
+				TextColor3 = p4.Theme.Alert.Color
 			}) or nil
 		end
-		t_2[text_1] = var20
-		t[i] = createElement(var14, t_1, t_2)
+		t_2[text_1] = var7
+		t[i] = createElement(var6, t_1, t_2)
 	end
 	return t
 end
 
-function alertViewBuilder.makeMiddleContent(p7, p8)
+function alertViewBuilder.makeMiddleContent(p5, p6)
 	-- upvalues: roact (ref), fitFrameVerticalModule (ref)
-	local var21 = p7:makeTextboxList(p8)
+	local var8 = p5:makeTextboxList(p6)
 	
-	return if p7.state.numTextboxes == 0 then nil else function()
-		-- upvalues: roact (copy), fitFrameVerticalModule (copy), var21 (ref)
+	return if p5.state.numTextboxes == 0 then nil else function()
+		-- upvalues: roact (copy), fitFrameVerticalModule (copy), var8 (ref)
 		return roact.createElement(fitFrameVerticalModule, {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
@@ -165,28 +165,28 @@ function alertViewBuilder.makeMiddleContent(p7, p8)
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				width = UDim.new(1, 0)
-			}, var21)
+			}, var8)
 		})
 	end
 end
 
-function alertViewBuilder.render(p9)
+function alertViewBuilder.render(p5)
 	-- upvalues: UIBlox (ref), roact (ref), alertViewSoakAreaModule (ref), interactiveAlert (ref)
-	assert(p9.props.displayTextbox or not p9.props.mandatoryInput)
+	assert(p5.props.displayTextbox or not p5.props.mandatoryInput)
 	
-	return UIBlox.Style.withStyle(function(p10)
-		-- upvalues: p9 (ref), roact (copy), alertViewSoakAreaModule (copy), interactiveAlert (copy)
+	return UIBlox.Style.withStyle(function(p6)
+		-- upvalues: p5 (ref), roact (copy), alertViewSoakAreaModule (copy), interactiveAlert (copy)
 		return roact.createElement(alertViewSoakAreaModule, {
-			BackgroundColor3 = p9.props.soakAreaColor3,
-			BackgroundTransparency = p9.props.soakAreaTransparency,
-			Visible = p9.state.displayingModal
+			BackgroundColor3 = p5.props.soakAreaColor3,
+			BackgroundTransparency = p5.props.soakAreaTransparency,
+			Visible = p5.state.displayingModal
 		}, {
 			alertView = roact.createElement(interactiveAlert, {
-				title = p9.props.title,
-				bodyText = if p9.props.bodyText ~= "" then p9.props.bodyText else nil,
-				middleContent = p9:makeMiddleContent(p10),
-				buttonStackInfo = p9:makeButtonTable(),
-				screenSize = p9.props.screenSize
+				title = p5.props.title,
+				bodyText = if p5.props.bodyText ~= "" then p5.props.bodyText else nil,
+				middleContent = p5:makeMiddleContent(p6),
+				buttonStackInfo = p5:makeButtonTable(),
+				screenSize = p5.props.screenSize
 			})
 		})
 	end)

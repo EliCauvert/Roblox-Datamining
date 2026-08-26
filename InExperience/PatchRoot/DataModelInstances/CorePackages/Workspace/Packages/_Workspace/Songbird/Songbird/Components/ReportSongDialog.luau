@@ -26,21 +26,21 @@ local list = {
 }
 local _ = { Audio = "audio", Image = "image" }
 
-local function buildReport(p0)
+local function buildReport(p1)
 	-- upvalues: abuseEntrypointModule (ref), abuseCategoryModule (ref), httpService (ref)
 	local t = {
 		tags = {
 			ENTRY_POINT = { valueList = { { data = abuseEntrypointModule.APP } } },
-			SUBMITTER_USER_ID = { valueList = { { data = tostring(p0.userId) } } },
+			SUBMITTER_USER_ID = { valueList = { { data = tostring(p1.userId) } } },
 			REPORTED_ABUSE_CATEGORY = {
 				valueList = {
 					{ data = abuseCategoryModule.ABUSE_CATEGORY_INAPT_CONTENT }
 				}
 			},
-			REPORTER_COMMENT = { valueList = { { data = p0.comment } } },
-			REPORT_TARGET_ASSET_ID = { valueList = { { data = p0.assetId } } },
-			REPORTED_ABUSE_VECTOR = { valueList = { { data = p0.abuseVector } } },
-			VARIANT = { valueList = { { data = p0.variant } } }
+			REPORTER_COMMENT = { valueList = { { data = p1.comment } } },
+			REPORT_TARGET_ASSET_ID = { valueList = { { data = p1.assetId } } },
+			REPORTED_ABUSE_VECTOR = { valueList = { { data = p1.abuseVector } } },
+			VARIANT = { valueList = { { data = p1.variant } } }
 		}
 	}
 	local ok, status = pcall(function()
@@ -53,8 +53,8 @@ end
 
 return reactModule.memo(function(p1)
 	-- upvalues: useLocalUserId (ref), useCallback (ref), list (ref), buildReport (ref), playersService (ref), loggerModule (ref), reactModule (ref), foundationModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), defaultTwoStepReportFlowModule (ref)
-	local var14 = useLocalUserId()
-	local var15 = useCallback(function()
+	local var1 = useLocalUserId()
+	local var2 = useCallback(function()
 		-- upvalues: p1 (ref)
 		if p1.onClose then
 			p1.onClose()
@@ -69,36 +69,36 @@ return reactModule.memo(function(p1)
 		}, {
 			AbuseReportFlow = reactModule.createElement(defaultTwoStepReportFlowModule, {
 				analyticsContext = p1.analyticsSource,
-				onCloseProps = { hasPreviousSteps = false, onAbandon = var15 },
+				onCloseProps = { hasPreviousSteps = false, onAbandon = var2 },
 				onSubmitProps = {
 					hasNextSteps = false,
 					onSubmit = useCallback(function(p2, p3)
-						-- upvalues: list (copy), p1 (ref), buildReport (copy), var14 (ref), playersService (copy), loggerModule (copy)
-						local var16 = p2 == list[1].value
-						local var17 = if var16 then p1.audio.assetId else p1.audio.thumbnailAssetId
+						-- upvalues: list (copy), p1 (ref), buildReport (copy), var1 (ref), playersService (copy), loggerModule (copy)
+						local var3 = p2 == list[1].value
+						local var4 = if var3 then p1.audio.assetId else p1.audio.thumbnailAssetId
 						
-						if var17 then
-							local var18 = buildReport({
-								userId = var14,
+						if var4 then
+							local var5 = buildReport({
+								userId = var1,
 								comment = p3,
-								assetId = var17,
-								abuseVector = if var16 then "audio" else "image",
+								assetId = var4,
+								abuseVector = if var3 then "audio" else "image",
 								variant = p1.analyticsSource
 							})
 							
-							if var18 then
+							if var5 then
 								local localPlayer = playersService.LocalPlayer
 								
 								if localPlayer then
 									local ok, status = pcall(function()
-										-- upvalues: playersService (copy), localPlayer (ref), var18 (ref)
-										playersService:ReportAbuseV3(localPlayer, var18)
+										-- upvalues: playersService (copy), localPlayer (ref), var5 (ref)
+										playersService:ReportAbuseV3(localPlayer, var5)
 									end)
 									
 									if ok then
-										loggerModule:info(`Abuse report sent for asset [{var17}] with reason [{p2}] and comment [{p3}]`)
+										loggerModule:info(`Abuse report sent for asset [{var4}] with reason [{p2}] and comment [{p3}]`)
 									else
-										loggerModule:warning(`Failed to submit abuse report for asset {var17}: {status}`)
+										loggerModule:warning(`Failed to submit abuse report for asset {var4}: {status}`)
 									end
 								end
 							end
@@ -108,10 +108,10 @@ return reactModule.memo(function(p1)
 						p1.analyticsSource,
 						p1.audio.assetId,
 						p1.audio.thumbnailAssetId,
-						var14
+						var1
 					})
 				},
-				onComplete = var15,
+				onComplete = var2,
 				reportCategories = list,
 				reportCategoryDefaultKey = list[1].value,
 				localizationKeys = { formTitle = "Feature.SongDetails.Action.ReportAudio" }

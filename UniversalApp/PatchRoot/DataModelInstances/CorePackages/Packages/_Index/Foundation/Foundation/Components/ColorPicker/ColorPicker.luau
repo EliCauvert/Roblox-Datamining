@@ -54,9 +54,9 @@ return function(p1)
 	local var16, var17 = reactModule.useBinding(var4.initialAlpha or 1)
 	local var18, var19 = reactModule.useState(var4.initialMode or colorInputModeModule.RGB)
 	local toColor3 = var5:map(colorUtilsModule.toColor3)
-	local var20 = var5:map(function(p1)
+	local var20 = var5:map(function(p2)
 		-- upvalues: colorUtilsModule (copy)
-		return not colorUtilsModule.isPartialHSV(p1)
+		return not colorUtilsModule.isPartialHSV(p2)
 	end)
 	local var21 = reactModule.useRef(false)
 	reactModule.useEffect(function()
@@ -64,51 +64,51 @@ return function(p1)
 		local initialMode = var4.initialMode
 		
 		if initialMode then
-			local var1 = false
+			local var22 = false
 			
 			for i, v in availableModes do
 				if v == initialMode then
-					var1 = true
+					var22 = true
 					break
 				end
 			end
-			if not var1 then
+			if not var22 then
 				warn(`ColorPicker: initialMode {initialMode} is not in availableModes. Using first available mode.`)
 				var19(availableModes[1])
 			end
 		end
 	end, { var4.initialMode })
-	local var2 = reactModule.useCallback(function(p1, p2)
+	local var23 = reactModule.useCallback(function(p2, p3)
 		-- upvalues: var6 (ref), var4 (ref)
-		var6(p1)
-		var4.onColorChanged(p1, p2)
+		var6(p2)
+		var4.onColorChanged(p2, p3)
 	end, { var4.onColorChanged })
-	local var3 = reactModule.useCallback(function(p1)
+	local var24 = reactModule.useCallback(function(p2)
 		-- upvalues: var17 (ref), var4 (ref)
-		var17(p1)
+		var17(p2)
 		
 		if var4.onAlphaChanged then
-			var4.onAlphaChanged(p1)
+			var4.onAlphaChanged(p2)
 		end
 	end, { var4.onAlphaChanged })
-	local var4 = reactModule.useCallback(function(p1)
-		-- upvalues: var2 (ref)
-		var2(p1.Color, p1)
-	end, { var2 })
-	local var5 = var4.onAlphaChanged ~= nil
-	local var6 = reactModule.useCallback(function(p1)
-		-- upvalues: var2 (ref)
-		var2(p1, nil)
-	end, { var2 })
-	local var7 = reactModule.useCallback(colorUtilsModule.createHSVUpdateHandler(var11, var13, var15, var6, var21), {
-		var6,
+	local var25 = reactModule.useCallback(function(p2)
+		-- upvalues: var23 (ref)
+		var23(p2.Color, p2)
+	end, { var23 })
+	local var26 = var25.onAlphaChanged ~= nil
+	local var27 = reactModule.useCallback(function(p2)
+		-- upvalues: var23 (ref)
+		var23(p2, nil)
+	end, { var23 })
+	local var28 = reactModule.useCallback(colorUtilsModule.createHSVUpdateHandler(var11, var13, var15, var27, var21), {
+		var27,
 		var11,
 		var13,
 		var15,
-		var6
+		var27
 	})
-	local var8 = reactModule.useCallback(colorUtilsModule.createColorInputChangeHandler(var6, var21, var11, var13, var15), {
-		var6,
+	local var29 = reactModule.useCallback(colorUtilsModule.createColorInputChangeHandler(var27, var21, var11, var13, var15), {
+		var27,
 		var21,
 		var11,
 		var13,
@@ -116,66 +116,66 @@ return function(p1)
 	})
 	reactModule.useEffect(function()
 		-- upvalues: toColor3 (ref), var11 (ref), var13 (ref), var15 (ref)
-		local var1, var2, var3 = toColor3:getValue():ToHSV()
-		var11(var1)
-		var13(var2)
-		var15(var3)
+		local var30, var31, var32 = toColor3:getValue():ToHSV()
+		var11(var30)
+		var13(var31)
+		var15(var32)
 	end, {})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var4, { tag = "col gap-small size-full-0 auto-y padding-small" }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var25, { tag = "col gap-small size-full-0 auto-y padding-small" }), {
 		ColorInputs = reactModule.createElement(colorInputsModule, {
 			LayoutOrder = 1,
-			color = var5,
+			color = var26,
 			alpha = var16,
-			onColorChanged = var8,
-			onAlphaChanged = if var5 then var3 else nil,
+			onColorChanged = var29,
+			onAlphaChanged = if var26 then var24 else nil,
 			mode = var18,
 			onModeChanged = var19,
 			availableModes = availableModes,
-			testId = `{var4.testId}--input`
+			testId = `{var25.testId}--input`
 		}),
 		BrickPicker = if var18 == colorInputModeModule.Brick then reactModule.createElement(brickColorPickerModule, {
 			LayoutOrder = 2,
 			selectedColor = toColor3,
-			onBrickColorChanged = var4,
-			testId = `{var4.testId}--brick-picker`
+			onBrickColorChanged = var25,
+			testId = `{var25.testId}--brick-picker`
 		}) else nil,
 		SVPickerContainer = if var18 ~= colorInputModeModule.Brick then nil else reactModule.createElement(viewModule, { LayoutOrder = 2, Size = UDim2.new(1, 0, 0, 156) }, {
 			SVPicker = reactModule.createElement(SVPickerModule, {
 				hue = var10,
 				saturation = var12,
 				value = var14,
-				onChanged = function(p1, p2)
-					-- upvalues: var7 (ref), var10 (ref)
-					var7(var10:getValue(), p1, p2)
+				onChanged = function(p2, p3)
+					-- upvalues: var28 (ref), var10 (ref)
+					var28(var10:getValue(), p2, p3)
 				end,
-				onDragStarted = var4.onDragStarted,
-				onDragEnded = var4.onDragEnded,
+				onDragStarted = var25.onDragStarted,
+				onDragEnded = var25.onDragEnded,
 				showSelectionKnob = var20:getValue(),
-				testId = `{var4.testId}--sv-picker`
+				testId = `{var25.testId}--sv-picker`
 			})
 		}),
 		HueSlider = if var18 ~= colorInputModeModule.Brick then nil else reactModule.createElement(colorSliderModule, {
 			LayoutOrder = 3,
 			sliderType = colorSliderTypeModule.Hue,
 			value = var10,
-			onValueChanged = function(p1)
-				-- upvalues: var7 (ref), var12 (ref), var14 (ref)
-				var7(p1, var12:getValue(), var14:getValue())
+			onValueChanged = function(p2)
+				-- upvalues: var28 (ref), var12 (ref), var14 (ref)
+				var28(p2, var12:getValue(), var14:getValue())
 			end,
-			onDragStarted = var4.onDragStarted,
-			onDragEnded = var4.onDragEnded,
-			testId = `{var4.testId}--hue-slider`
+			onDragStarted = var25.onDragStarted,
+			onDragEnded = var25.onDragEnded,
+			testId = `{var25.testId}--hue-slider`
 		}),
-		AlphaSlider = if var5 then reactModule.createElement(colorSliderModule, {
+		AlphaSlider = if var26 then reactModule.createElement(colorSliderModule, {
 			LayoutOrder = 4,
 			sliderType = colorSliderTypeModule.Alpha,
 			value = var16,
 			baseColor = toColor3,
-			onValueChanged = var3,
-			onDragStarted = var4.onDragStarted,
-			onDragEnded = var4.onDragEnded,
-			testId = `{var4.testId}--alpha-slider`
+			onValueChanged = var24,
+			onDragStarted = var25.onDragStarted,
+			onDragEnded = var25.onDragEnded,
+			testId = `{var25.testId}--alpha-slider`
 		}) else nil
 	})
 end

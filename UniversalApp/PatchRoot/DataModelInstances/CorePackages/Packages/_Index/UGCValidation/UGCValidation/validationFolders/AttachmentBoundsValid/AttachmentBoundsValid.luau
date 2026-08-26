@@ -62,70 +62,70 @@ local function validateInMeshSpace(p1, p2, p3, p4, p5)
 	end
 end
 
-local function checkAll(p1, p2, p3, p4)
+local function checkAll(p6, p7, p8, p9)
 	-- upvalues: r15plusUtilsModule (ref), validateInMeshSpace (ref)
-	local name = p1:FindFirstChild(p2.rigAttachmentToParent.name, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local name = p6:FindFirstChild(p7.rigAttachmentToParent.name, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	
 	if not name then return end
-	validateInMeshSpace(name, p1, p2.rigAttachmentToParent.bounds, p3, p4)
+	validateInMeshSpace(name, p6, p7.rigAttachmentToParent.bounds, p8, p9)
 	
-	for i, v in pairs(p2.otherAttachments) do
-		local var1 = p1:FindFirstChild(i, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	for i, v in pairs(p7.otherAttachments) do
+		local var11 = p6:FindFirstChild(i, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
 		
-		if var1 then
-			validateInMeshSpace(var1, p1, v.bounds, p3, p4)
+		if var11 then
+			validateInMeshSpace(var11, p6, v.bounds, p8, p9)
 		end
 	end
 end
 
-function t.run(p1, p2)
+function t.run(p10, p11)
 	-- upvalues: constantsModule (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref), checkAll (ref)
-	local rootInstance = p2.rootInstance
-	local assetType = p2.uploadEnum.assetType
-	local var1 = constantsModule.ASSET_TYPE_INFO[assetType]
+	local rootInstance = p11.rootInstance
+	local assetType = p11.uploadEnum.assetType
+	local var12 = constantsModule.ASSET_TYPE_INFO[assetType]
 	
-	if not var1 then return end
+	if not var12 then return end
 	local t = {}
 	
-	if p2.renderMeshesData then
+	if p11.renderMeshesData then
 		local descendants = rootInstance:GetDescendants()
 		table.insert(descendants, rootInstance)
 		
 		for i, v in descendants do
-			local name = p2.renderMeshesData[v.Name]
+			local name = p11.renderMeshesData[v.Name]
 			
 			if name and name.editable then
 				t[v] = { MeshId = { created = false, instance = name.editable } }
 			end
 		end
 	end
-	local var2, _, var3 = boundsCalculatorModule.calculateIndividualAssetPartsData(rootInstance, {
+	local var13, _, var14 = boundsCalculatorModule.calculateIndividualAssetPartsData(rootInstance, {
 		assetTypeEnum = assetType,
-		isServer = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+		isServer = p11.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
 		editableMeshes = t
 	})
 	
-	if not var2 then
-		p1:fail(errorSourceStringsModule.Keys.AttachmentBoundsAssetCalculationFailed, { InstancePath = rootInstance:GetFullName() })
+	if not var13 then
+		p10:fail(errorSourceStringsModule.Keys.AttachmentBoundsAssetCalculationFailed, { InstancePath = rootInstance:GetFullName() })
 		
 		return
 	elseif Enum.AssetType.DynamicHead == assetType then
-		local name = var3[rootInstance.Name]
+		local name = var14[rootInstance.Name]
 		
 		if name then
-			checkAll(rootInstance, var1.subParts.Head, name, p1)
+			checkAll(rootInstance, var12.subParts.Head, name, p10)
 			
 			return
 		end
 	else
-		for i, v in pairs(var1.subParts) do
-			local var4 = rootInstance:FindFirstChild(i)
+		for i, v in pairs(var12.subParts) do
+			local var15 = rootInstance:FindFirstChild(i)
 			
-			if var4 then
-				local var5 = var3[i]
+			if var15 then
+				local var16 = var14[i]
 				
-				if var5 then
-					checkAll(var4, v, var5, p1)
+				if var16 then
+					checkAll(var15, v, var16, p10)
 				end
 			end
 		end

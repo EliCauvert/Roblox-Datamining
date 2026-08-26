@@ -12,18 +12,18 @@ local _ = require(script.Parent.CancelUserSubscriptionErrorPrompt)
 
 return function()
 	-- upvalues: useSelector (ref), selectErrorStateModule (ref), useDispatch (ref), selectSubscriptionIdModule (ref), reactModule (ref), errorStateEnumModule (ref), marketplaceService (ref), cancelSubscriptionEndedModule (ref)
-	local var7 = useSelector(selectErrorStateModule)
-	local var8 = useDispatch()
-	local var9 = useSelector(selectSubscriptionIdModule) or ""
+	local var1 = useSelector(selectErrorStateModule)
+	local var2 = useDispatch()
+	local var3 = useSelector(selectSubscriptionIdModule) or ""
 	
 	return {
 		onDismiss = reactModule.useCallback(function()
-			-- upvalues: var7 (ref), errorStateEnumModule (copy), marketplaceService (copy), var9 (ref), var8 (ref), cancelSubscriptionEndedModule (copy)
-			if var7 == errorStateEnumModule.Expiring then
-				marketplaceService:SignalUserSubscriptionStatusChanged(var9)
+			-- upvalues: var1 (ref), errorStateEnumModule (copy), marketplaceService (copy), var3 (ref), var2 (ref), cancelSubscriptionEndedModule (copy)
+			if var1 == errorStateEnumModule.Expiring then
+				marketplaceService:SignalUserSubscriptionStatusChanged(var3)
 			end
-			var8(cancelSubscriptionEndedModule())
-		end, { var7, var8 }),
-		errorState = var7
+			var2(cancelSubscriptionEndedModule())
+		end, { var1, var2 }),
+		errorState = var1
 	}
 end

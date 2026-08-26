@@ -8,9 +8,9 @@ local function _()
 	return game:GetFastFlag("InternationalNamesEnabledForAll")
 end
 
-local function isExperimentEnabled(p0)
+local function isExperimentEnabled(p1)
 	-- upvalues: internationalNamesIXPLayer (ref), internationalNamesIXPExperimentDefinition (ref)
-	return if ((p0 or {})[internationalNamesIXPLayer] or {})[internationalNamesIXPExperimentDefinition] ~= true then game:GetFastFlag("InternationalNamesEnabledForAll") else true
+	return if ((p1 or {})[internationalNamesIXPLayer] or {})[internationalNamesIXPExperimentDefinition] ~= true then game:GetFastFlag("InternationalNamesEnabledForAll") else true
 end
 
 return {

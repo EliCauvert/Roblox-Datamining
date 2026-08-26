@@ -28,23 +28,23 @@ local function instantTransitionConfig()
 	}
 end
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), cryoModule (ref), chatDetailsNavigationOptionsModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), reactModule (ref), squadAddFriendsIconButtonModule (ref), navProps (ref), fFlagEnablePartyQuickStartButton (ref), topBarProviderModule (ref), enumScreensModule (ref), withLocalization (ref), createSystemMenuButtonModule (ref), chatConversationScreenModule (ref), autoFocusNavigationModule (ref), chatDetailsScreenModule (ref), getFFlagIsSquadEnabled (ref), squadLobbyScreenModule (ref), squadInviteFriendsScreenModule (ref), fFlagAppChatDisableAbsorbInputSelectableModule (ref), roactNavigationModule (ref), instantTransitionConfig (ref)
 	local function getChatDetailsNavigationOptions(_)
-		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p0 (ref), cryoModule (copy), chatDetailsNavigationOptionsModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy)
-		return if fFlagAppChatTopBarConfigDrivenModule() then p0 or {} else cryoModule.Dictionary.join({
+		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p1 (ref), cryoModule (copy), chatDetailsNavigationOptionsModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy)
+		return if fFlagAppChatTopBarConfigDrivenModule() then p1 or {} else cryoModule.Dictionary.join({
 			backButtonEnabled = true,
 			headerText = chatDetailsNavigationOptionsModule.getHeaderText(),
 			backButtonTestId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsTopBarActionButton("back") else nil
-		}, p0 or {})
+		}, p1 or {})
 	end
 	
-	local function getSquadLobbyNavigationOptions(p2)
-		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p0 (ref), cryoModule (copy), reactModule (copy), squadAddFriendsIconButtonModule (copy)
+	local function getSquadLobbyNavigationOptions(p3)
+		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p1 (ref), cryoModule (copy), reactModule (copy), squadAddFriendsIconButtonModule (copy)
 		if fFlagAppChatTopBarConfigDrivenModule() then
-			return p0 or {}
+			return p1 or {}
 		end
-		local navigation = p2.navigation
+		local navigation = p3.navigation
 		
 		return cryoModule.Dictionary.join({
 			backButtonEnabled = true,
@@ -52,13 +52,13 @@ return function(p0, p1)
 				-- upvalues: reactModule (copy), squadAddFriendsIconButtonModule (copy), navigation (ref)
 				return reactModule.createElement(squadAddFriendsIconButtonModule, { navigation = navigation })
 			end
-		}, p0 or {})
+		}, p1 or {})
 	end
 	
 	local function getSquadInviteFriendsNavigationOptions(p3)
-		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p0 (ref), navProps (copy), fFlagEnablePartyQuickStartButton (copy), reactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), withLocalization (copy), createSystemMenuButtonModule (copy), cryoModule (copy)
+		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p1 (ref), navProps (copy), fFlagEnablePartyQuickStartButton (copy), reactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), withLocalization (copy), createSystemMenuButtonModule (copy), cryoModule (copy)
 		if fFlagAppChatTopBarConfigDrivenModule() then
-			return p0 or {}
+			return p1 or {}
 		end
 		local t = {
 			backButtonEnabled = true,
@@ -86,7 +86,7 @@ return function(p0, p1)
 				})
 			end
 		end
-		return cryoModule.Dictionary.join(t, p0 or {})
+		return cryoModule.Dictionary.join(t, p1 or {})
 	end
 	
 	local list = {
@@ -98,7 +98,7 @@ return function(p0, p1)
 					isRoot = true,
 					lockIconEnabled = true,
 					tabBarVisible = true
-				}, p0 or {})
+				}, p1 or {})
 			}
 		},
 		{
@@ -130,6 +130,6 @@ return function(p0, p1)
 	end
 	return roactNavigationModule.createRobloxStackNavigator(list, {
 		defaultNavigationOptions = t,
-		transitionConfig = if p1 then instantTransitionConfig else nil
+		transitionConfig = if p2 then instantTransitionConfig else nil
 	})
 end

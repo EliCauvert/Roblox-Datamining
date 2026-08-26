@@ -1,6 +1,6 @@
 ﻿local isUserChatEnabledModule = require(script:FindFirstAncestor("ExpChat").isUserChatEnabled)
 
-return function(p0)
+return function(p1)
 	-- upvalues: isUserChatEnabledModule (ref)
-	return isUserChatEnabledModule(p0) or p0 == "NoOne"
+	return isUserChatEnabledModule(p1) or p1 == "NoOne"
 end

@@ -73,8 +73,8 @@ tile.validateProps = tModule.intersection(tModule.strictInterface({
 	openTypeFeatures = tModule.optional(tModule.string),
 	onThumbnailLoaded = tModule.optional(tModule.callback),
 	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
-}), function(p0)
-	if p0.bannerText and p0.footer then
+}), function(p1)
+	if p1.bannerText and p1.footer then
 		return false, "A custom footer and bannerText can't be used together"
 	end
 	return true
@@ -109,61 +109,61 @@ function tile.init(p1)
 	end
 end
 
-function tile.render(p3)
+function tile.render(p1)
 	-- upvalues: withTextSizeOffsetModule (ref), withStyleModule (ref), withSelectionCursorProviderModule (ref), imagesModule (ref), getWrappedTextWithIconModule (ref), getTextSizeModule (ref), reactModule (ref), roactGamepadModule (ref), interactableModule (ref), cursorKindModule (ref), tileThumbnailModule (ref), uDim (ref), tileNameModule (ref), styledTextLabelModule (ref), tileBannerModule (ref)
-	local footer = p3.props.footer
-	local name = p3.props.name
-	local subtitle = p3.props.subtitle
-	local hasVerifiedBadge = p3.props.hasVerifiedBadge
-	local titleTextLineCount = p3.props.titleTextLineCount
-	local innerPadding = p3.props.innerPadding
-	local titleTopPadding = p3.props.titleTopPadding
-	local subtitleTopPadding = p3.props.subtitleTopPadding
-	local footerTopPadding = p3.props.footerTopPadding
-	local onActivated = p3.props.onActivated
-	local thumbnail = p3.props.thumbnail
-	local thumbnailSize = p3.props.thumbnailSize
-	local thumbnailFrameSize = p3.props.thumbnailFrameSize
-	local thumbnailColor = p3.props.thumbnailColor
-	local thumbnailTransparency = p3.props.thumbnailTransparency
-	local bannerText = p3.props.bannerText
-	local hasRoundedCorners = p3.props.hasRoundedCorners
-	local isSelected = p3.props.isSelected
-	local multiSelect = p3.props.multiSelect
-	local isDisabled = p3.props.isDisabled
-	local titleIcon = p3.props.titleIcon
-	local thumbnailOverlayComponents = p3.props.thumbnailOverlayComponents
-	local backgroundImage = p3.props.backgroundImage
-	local useMaxTitleHeight = p3.props.useMaxTitleHeight
-	local addSubtitleSpace = p3.props.addSubtitleSpace
-	local horizontalAlignment = p3.props.horizontalAlignment
+	local footer = p1.props.footer
+	local name = p1.props.name
+	local subtitle = p1.props.subtitle
+	local hasVerifiedBadge = p1.props.hasVerifiedBadge
+	local titleTextLineCount = p1.props.titleTextLineCount
+	local innerPadding = p1.props.innerPadding
+	local titleTopPadding = p1.props.titleTopPadding
+	local subtitleTopPadding = p1.props.subtitleTopPadding
+	local footerTopPadding = p1.props.footerTopPadding
+	local onActivated = p1.props.onActivated
+	local thumbnail = p1.props.thumbnail
+	local thumbnailSize = p1.props.thumbnailSize
+	local thumbnailFrameSize = p1.props.thumbnailFrameSize
+	local thumbnailColor = p1.props.thumbnailColor
+	local thumbnailTransparency = p1.props.thumbnailTransparency
+	local bannerText = p1.props.bannerText
+	local hasRoundedCorners = p1.props.hasRoundedCorners
+	local isSelected = p1.props.isSelected
+	local multiSelect = p1.props.multiSelect
+	local isDisabled = p1.props.isDisabled
+	local titleIcon = p1.props.titleIcon
+	local thumbnailOverlayComponents = p1.props.thumbnailOverlayComponents
+	local backgroundImage = p1.props.backgroundImage
+	local useMaxTitleHeight = p1.props.useMaxTitleHeight
+	local addSubtitleSpace = p1.props.addSubtitleSpace
+	local horizontalAlignment = p1.props.horizontalAlignment
 	
-	return withTextSizeOffsetModule(function(p4)
-		-- upvalues: withStyleModule (copy), withSelectionCursorProviderModule (copy), p3 (ref), titleTextLineCount (ref), innerPadding (ref), titleTopPadding (ref), addSubtitleSpace (ref), useMaxTitleHeight (ref), name (ref), titleIcon (ref), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (ref), footer (ref), bannerText (ref), reactModule (copy), isDisabled (ref), onActivated (ref), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (ref), thumbnailFrameSize (ref), tileThumbnailModule (copy), thumbnail (ref), hasRoundedCorners (ref), uDim (copy), isSelected (ref), multiSelect (ref), thumbnailOverlayComponents (ref), thumbnailSize (ref), thumbnailColor (ref), thumbnailTransparency (ref), backgroundImage (ref), subtitleTopPadding (ref), tileNameModule (copy), hasVerifiedBadge (ref), styledTextLabelModule (copy), footerTopPadding (ref), tileBannerModule (copy)
-		return withStyleModule(function(p5)
-			-- upvalues: withSelectionCursorProviderModule (copy), p3 (copy), titleTextLineCount (copy), p4 (ref), innerPadding (copy), titleTopPadding (copy), addSubtitleSpace (copy), useMaxTitleHeight (copy), name (copy), titleIcon (copy), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (copy), footer (copy), bannerText (copy), reactModule (copy), isDisabled (copy), onActivated (copy), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (copy), thumbnailFrameSize (copy), tileThumbnailModule (copy), thumbnail (copy), hasRoundedCorners (copy), uDim (copy), isSelected (copy), multiSelect (copy), thumbnailOverlayComponents (copy), thumbnailSize (copy), thumbnailColor (copy), thumbnailTransparency (copy), backgroundImage (copy), subtitleTopPadding (copy), tileNameModule (copy), hasVerifiedBadge (copy), styledTextLabelModule (copy), footerTopPadding (copy), tileBannerModule (copy)
-			return withSelectionCursorProviderModule(function(p6)
-				-- upvalues: p5 (ref), p3 (copy), titleTextLineCount (copy), p4 (copy), innerPadding (copy), titleTopPadding (copy), addSubtitleSpace (copy), useMaxTitleHeight (copy), name (copy), titleIcon (copy), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (copy), footer (copy), bannerText (copy), reactModule (copy), isDisabled (copy), onActivated (copy), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (copy), thumbnailFrameSize (copy), tileThumbnailModule (copy), thumbnail (copy), hasRoundedCorners (copy), uDim (copy), isSelected (copy), multiSelect (copy), thumbnailOverlayComponents (copy), thumbnailSize (copy), thumbnailColor (copy), thumbnailTransparency (copy), backgroundImage (copy), subtitleTopPadding (copy), tileNameModule (copy), hasVerifiedBadge (copy), styledTextLabelModule (copy), footerTopPadding (copy), tileBannerModule (copy)
+	return withTextSizeOffsetModule(function(p2)
+		-- upvalues: withStyleModule (copy), withSelectionCursorProviderModule (copy), p1 (ref), titleTextLineCount (ref), innerPadding (ref), titleTopPadding (ref), addSubtitleSpace (ref), useMaxTitleHeight (ref), name (ref), titleIcon (ref), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (ref), footer (ref), bannerText (ref), reactModule (copy), isDisabled (ref), onActivated (ref), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (ref), thumbnailFrameSize (ref), tileThumbnailModule (copy), thumbnail (ref), hasRoundedCorners (ref), uDim (copy), isSelected (ref), multiSelect (ref), thumbnailOverlayComponents (ref), thumbnailSize (ref), thumbnailColor (ref), thumbnailTransparency (ref), backgroundImage (ref), subtitleTopPadding (ref), tileNameModule (copy), hasVerifiedBadge (ref), styledTextLabelModule (copy), footerTopPadding (ref), tileBannerModule (copy)
+		return withStyleModule(function(p3)
+			-- upvalues: withSelectionCursorProviderModule (copy), p1 (copy), titleTextLineCount (copy), p2 (ref), innerPadding (copy), titleTopPadding (copy), addSubtitleSpace (copy), useMaxTitleHeight (copy), name (copy), titleIcon (copy), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (copy), footer (copy), bannerText (copy), reactModule (copy), isDisabled (copy), onActivated (copy), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (copy), thumbnailFrameSize (copy), tileThumbnailModule (copy), thumbnail (copy), hasRoundedCorners (copy), uDim (copy), isSelected (copy), multiSelect (copy), thumbnailOverlayComponents (copy), thumbnailSize (copy), thumbnailColor (copy), thumbnailTransparency (copy), backgroundImage (copy), subtitleTopPadding (copy), tileNameModule (copy), hasVerifiedBadge (copy), styledTextLabelModule (copy), footerTopPadding (copy), tileBannerModule (copy)
+			return withSelectionCursorProviderModule(function(p4)
+				-- upvalues: p3 (ref), p1 (copy), titleTextLineCount (copy), p2 (copy), innerPadding (copy), titleTopPadding (copy), addSubtitleSpace (copy), useMaxTitleHeight (copy), name (copy), titleIcon (copy), imagesModule (copy), getWrappedTextWithIconModule (copy), getTextSizeModule (copy), subtitle (copy), footer (copy), bannerText (copy), reactModule (copy), isDisabled (copy), onActivated (copy), roactGamepadModule (copy), interactableModule (copy), cursorKindModule (copy), horizontalAlignment (copy), thumbnailFrameSize (copy), tileThumbnailModule (copy), thumbnail (copy), hasRoundedCorners (copy), uDim (copy), isSelected (copy), multiSelect (copy), thumbnailOverlayComponents (copy), thumbnailSize (copy), thumbnailColor (copy), thumbnailTransparency (copy), backgroundImage (copy), subtitleTopPadding (copy), tileNameModule (copy), hasVerifiedBadge (copy), styledTextLabelModule (copy), footerTopPadding (copy), tileBannerModule (copy)
 				local vector2
-				local font = p5.Font
-				local theme = p5.Theme
-				local tileHeight = p3.state.tileHeight
-				local tileWidth = p3.state.tileWidth
-				local titleFontStyle = p3.props.titleFontStyle or font.Header2
-				local titleRichText = p3.props.titleRichText
-				local subtitleFontStyle = p3.props.subtitleFontStyle or font.CaptionHeader
-				local var24 = if titleFontStyle.RelativeSize then font.BaseSize * titleFontStyle.RelativeSize else titleFontStyle.FontSize
-				local var25 = if subtitleFontStyle.RelativeSize then font.BaseSize * subtitleFontStyle.RelativeSize else subtitleFontStyle.FontSize
-				local _ = math.ceil(var24 * titleTextLineCount)
-				local ceiled = math.ceil((var24 + p4) * titleTextLineCount)
-				ceiled = tileHeight - tileWidth / (p3.props.thumbnailAspectRatio or 1) - innerPadding - ceiled - innerPadding - titleTopPadding
+				local font = p3.Font
+				local theme = p3.Theme
+				local tileHeight = p1.state.tileHeight
+				local tileWidth = p1.state.tileWidth
+				local titleFontStyle = p1.props.titleFontStyle or font.Header2
+				local titleRichText = p1.props.titleRichText
+				local subtitleFontStyle = p1.props.subtitleFontStyle or font.CaptionHeader
+				local var1 = if titleFontStyle.RelativeSize then font.BaseSize * titleFontStyle.RelativeSize else titleFontStyle.FontSize
+				local var2 = if subtitleFontStyle.RelativeSize then font.BaseSize * subtitleFontStyle.RelativeSize else subtitleFontStyle.FontSize
+				local _ = math.ceil(var1 * titleTextLineCount)
+				local ceiled = math.ceil((var1 + p2) * titleTextLineCount)
+				ceiled = tileHeight - tileWidth / (p1.props.thumbnailAspectRatio or 1) - innerPadding - ceiled - innerPadding - titleTopPadding
 				local _ = Vector2.new(0, 0)
-				local var27 = 0
+				local var3 = 0
 				
 				if addSubtitleSpace then
 					vector2 = Vector2.new(0, ceiled)
-					var27 = math.ceil(var25) + p4
-					ceiled -= var27
+					var3 = math.ceil(var2) + p2
+					ceiled -= var3
 				elseif useMaxTitleHeight then
 					vector2 = Vector2.new(0, ceiled)
 				else
@@ -171,26 +171,26 @@ function tile.render(p3)
 					local font_1 = titleFontStyle.Font
 					
 					if titleIcon then
-						name_1 = getWrappedTextWithIconModule(name_1, var24, font_1, titleIcon.ImageRectSize.X / imagesModule.ImagesResolutionScale, 4)
+						name_1 = getWrappedTextWithIconModule(name_1, var1, font_1, titleIcon.ImageRectSize.X / imagesModule.ImagesResolutionScale, 4)
 					end
-					local var30 = getTextSizeModule(name_1, var24, font_1, Vector2.new(tileWidth, ceiled))
-					vector2 = Vector2.new(var30.X, math.min(var30.Y, ceiled))
+					local var4 = getTextSizeModule(name_1, var1, font_1, Vector2.new(tileWidth, ceiled))
+					vector2 = Vector2.new(var4.X, math.min(var4.Y, ceiled))
 				end
 				if subtitle ~= nil and subtitle ~= "" then
-					var27 = math.ceil(var25) + p4
-					ceiled -= var27
+					var3 = math.ceil(var2) + p2
+					ceiled -= var3
 				end
 				local maxValue = math.max(0, ceiled)
-				local var32 = if footer == nil then bannerText ~= nil else true
-				local renderTileInset = p3.props.renderTileInset
-				local uDim2 = UDim2.new(1, 0, 0, vector2.Y + var27 + titleTopPadding)
+				local var5 = if footer == nil then bannerText ~= nil else true
+				local renderTileInset = p1.props.renderTileInset
+				local uDim2 = UDim2.new(1, 0, 0, vector2.Y + var3 + titleTopPadding)
 				local UIPadding = nil
 				
-				if p3.props.nameOverThumbnail then
+				if p1.props.nameOverThumbnail then
 					uDim2 = UDim2.new(0, tileWidth - 10, 0, -(vector2.Y + 20))
 					UIPadding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 10) })
 				end
-				local inputBindings = p3.props.inputBindings
+				local inputBindings = p1.props.inputBindings
 				
 				if not inputBindings then
 					local t
@@ -208,36 +208,36 @@ function tile.render(p3)
 				return reactModule.createElement(interactableModule, {
 					Size = UDim2.new(1, 0, 1, 0),
 					BackgroundTransparency = 1,
-					Selectable = p3.props.Selectable,
+					Selectable = p1.props.Selectable,
 					[reactModule.Event.Activated] = if isDisabled then nil else onActivated,
-					[reactModule.Change.AbsoluteSize] = p3.onAbsoluteSizeChange,
-					ref = p3.props.textButtonRef,
-					SelectionImageObject = if p3.props.cursor then p3.props.cursor else p6(cursorKindModule.RoundedRect)
+					[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChange,
+					ref = p1.props.textButtonRef,
+					SelectionImageObject = if p1.props.cursor then p1.props.cursor else p4(cursorKindModule.RoundedRect)
 				}, {
 					UIListLayout = reactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						Padding = UDim.new(0, innerPadding),
-						HorizontalAlignment = if not p3.props.nameOverThumbnail then horizontalAlignment else nil
+						HorizontalAlignment = if not p1.props.nameOverThumbnail then horizontalAlignment else nil
 					}),
-					Thumbnail = reactModule.createElement(if p3.props.isRoactGamepadEnabled then roactGamepadModule.Focusable.Frame else "Frame", {
+					Thumbnail = reactModule.createElement(if p1.props.isRoactGamepadEnabled then roactGamepadModule.Focusable.Frame else "Frame", {
 						Size = thumbnailFrameSize,
 						SizeConstraint = Enum.SizeConstraint.RelativeXX,
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
-						NextSelectionLeft = p3.props.NextSelectionLeft,
-						NextSelectionRight = p3.props.NextSelectionRight,
-						NextSelectionUp = p3.props.NextSelectionUp,
-						NextSelectionDown = p3.props.NextSelectionDown,
-						ref = p3.props.thumbnailRef,
-						[reactModule.Tag] = p3.props[reactModule.Tag],
-						SelectionImageObject = if p3.props.cursor then p3.props.cursor else p6(cursorKindModule.RoundedRectNoInset),
-						inputBindings = if p3.props.isRoactGamepadEnabled then inputBindings else nil
+						NextSelectionLeft = p1.props.NextSelectionLeft,
+						NextSelectionRight = p1.props.NextSelectionRight,
+						NextSelectionUp = p1.props.NextSelectionUp,
+						NextSelectionDown = p1.props.NextSelectionDown,
+						ref = p1.props.thumbnailRef,
+						[reactModule.Tag] = p1.props[reactModule.Tag],
+						SelectionImageObject = if p1.props.cursor then p1.props.cursor else p4(cursorKindModule.RoundedRectNoInset),
+						inputBindings = if p1.props.isRoactGamepadEnabled then inputBindings else nil
 					}, {
 						Image = reactModule.createElement(tileThumbnailModule, {
 							Image = thumbnail,
 							hasRoundedCorners = hasRoundedCorners,
-							cornerRadius = if p3.props.isCircular then UDim.new(0.5, 0) else uDim,
+							cornerRadius = if p1.props.isCircular then UDim.new(0.5, 0) else uDim,
 							isSelected = isSelected,
 							multiSelect = multiSelect,
 							overlayComponents = thumbnailOverlayComponents,
@@ -245,12 +245,12 @@ function tile.render(p3)
 							imageColor = thumbnailColor,
 							imageTransparency = thumbnailTransparency,
 							backgroundImage = backgroundImage,
-							scaleType = p3.props.thumbnailScaleType,
-							onThumbnailLoaded = p3.props.onThumbnailLoaded
+							scaleType = p1.props.thumbnailScaleType,
+							onThumbnailLoaded = p1.props.onThumbnailLoaded
 						}),
 						TileInset = renderTileInset and renderTileInset() or nil,
-						UIAspectRatioConstraint = if p3.props.thumbnailAspectRatio ~= nil then nil else reactModule.createElement("UIAspectRatioConstraint", {
-							AspectRatio = p3.props.thumbnailAspectRatio,
+						UIAspectRatioConstraint = if p1.props.thumbnailAspectRatio ~= nil then nil else reactModule.createElement("UIAspectRatioConstraint", {
+							AspectRatio = p1.props.thumbnailAspectRatio,
 							AspectType = Enum.AspectType.ScaleWithParentSize
 						})
 					}),
@@ -271,8 +271,8 @@ function tile.render(p3)
 							LayoutOrder = 1,
 							titleIcon = titleIcon,
 							name = name,
-							nameTextColor = p3.props.nameTextColor,
-							nameTextTransparency = p3.props.nameTextTransparency,
+							nameTextColor = p1.props.nameTextColor,
+							nameTextTransparency = p1.props.nameTextTransparency,
 							hasVerifiedBadge = hasVerifiedBadge,
 							maxHeight = ceiled,
 							maxWidth = tileWidth,
@@ -286,16 +286,16 @@ function tile.render(p3)
 							fluidSizing = false,
 							richText = false,
 							lineHeight = 1,
-							size = UDim2.new(0, 0, 0, var27),
+							size = UDim2.new(0, 0, 0, var3),
 							automaticSize = Enum.AutomaticSize.X,
 							text = subtitle,
 							colorStyle = theme.TextDefault,
 							fontStyle = subtitleFontStyle,
-							openTypeFeatures = p3.props.openTypeFeatures,
+							openTypeFeatures = p1.props.openTypeFeatures,
 							textTruncate = Enum.TextTruncate.AtEnd
 						}))
 					}),
-					FooterContainer = var32 and reactModule.createElement("Frame", {
+					FooterContainer = var5 and reactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 3,
 						Size = UDim2.new(1, 0, 0, maxValue)
@@ -310,12 +310,12 @@ function tile.render(p3)
 	end)
 end
 
-local var21 = function(p7)
+local var1 = function(p1)
 	-- upvalues: useCursorModule (ref), uDim (ref), cryoModule (ref), reactModule (ref), tile (ref)
-	return reactModule.createElement(tile, cryoModule.Dictionary.join({ cursor = useCursorModule(uDim) }, p7))
+	return reactModule.createElement(tile, cryoModule.Dictionary.join({ cursor = useCursorModule(uDim) }, p1))
 end
 
-return reactModule.forwardRef(function(p8, p9)
-	-- upvalues: reactModule (ref), var21 (ref), cryoModule (ref)
-	return reactModule.createElement(var21, cryoModule.Dictionary.join(p8, { thumbnailRef = p9 }))
+return reactModule.forwardRef(function(p1, p2)
+	-- upvalues: reactModule (ref), var1 (ref), cryoModule (ref)
+	return reactModule.createElement(var1, cryoModule.Dictionary.join(p1, { thumbnailRef = p2 }))
 end)

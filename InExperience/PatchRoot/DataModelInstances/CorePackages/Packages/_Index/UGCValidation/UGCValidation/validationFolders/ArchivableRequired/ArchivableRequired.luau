@@ -10,10 +10,10 @@ local t = {
 	fflag = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
 }
 
-local function collectAllInstances(p0)
+local function collectAllInstances(p1)
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		local t_1 = {}
 		
 		if typeof(v) == "Instance" then
@@ -32,11 +32,11 @@ local function collectAllInstances(p0)
 	return t
 end
 
-function t.run(p1, p2)
+function t.run(p2, p3)
 	-- upvalues: collectAllInstances (ref), errorSourceStringsModule (ref), constantsModule (ref)
-	for i, v in collectAllInstances(p2.entrypointInput) do
+	for i, v in collectAllInstances(p3.entrypointInput) do
 		if v.Archivable == false then
-			p1:fail(errorSourceStringsModule.Keys.PropertyValueInvalid, {
+			p2:fail(errorSourceStringsModule.Keys.PropertyValueInvalid, {
 				PropertyName = "Archivable",
 				ExpectedValue = "true",
 				InstancePath = v:GetFullName(),

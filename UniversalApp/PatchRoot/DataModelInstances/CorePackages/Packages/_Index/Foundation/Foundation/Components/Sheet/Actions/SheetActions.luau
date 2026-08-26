@@ -40,21 +40,21 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		stroke = {
 			Color = var1.Color.Stroke.Default.Color3,
 			Transparency = var1.Color.Stroke.Default.Transparency,
-			Thickness = hasActionsDivider:map(function(p1)
+			Thickness = hasActionsDivider:map(function(p3)
 				-- upvalues: var1 (ref)
-				return if p1 then var1.Stroke.Standard else 0
+				return if p3 then var1.Stroke.Standard else 0
 			end)
 		},
-		onAbsoluteSizeChanged = if var3 then function(p1)
+		onAbsoluteSizeChanged = if var3 then function(p3)
 			-- upvalues: setActionsHeight (ref), bottomPadding (ref)
-			setActionsHeight(p1.AbsoluteSize.Y - bottomPadding)
+			setActionsHeight(p3.AbsoluteSize.Y - bottomPadding)
 		end else nil,
 		testId = `{testId}--actions`,
 		Position = if var3 then reactModule.joinBindings({
 			sheetHeightAvailable = sheetHeightAvailable,
 			actionsHeight = actionsHeight
-		}):map(function(p1)
-			return UDim2.new(0, 0, 1, -math.min(p1.sheetHeightAvailable, p1.actionsHeight))
+		}):map(function(p3)
+			return UDim2.new(0, 0, 1, -math.min(p3.sheetHeightAvailable, p3.actionsHeight))
 		end) else nil,
 		ref = p2,
 		onActivated = function() end,

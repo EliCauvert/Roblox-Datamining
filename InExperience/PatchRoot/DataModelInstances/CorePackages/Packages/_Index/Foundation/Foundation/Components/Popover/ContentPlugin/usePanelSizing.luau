@@ -8,18 +8,18 @@ local reactModule = require(parent.React)
 local positioningModule = require(script.Parent.Parent.positioning)
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-local function _(value, p0, p1)
+local function _(value, p1, p2)
 	-- upvalues: reactModule (ref)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: value (ref), p0 (ref), p1 (ref)
+		-- upvalues: value (ref), p1 (ref), p2 (ref)
 		local t = {}
 		
 		if value ~= nil then
-			for i, v in p0 do
-				t[v] = value:GetPropertyChangedSignal(v):Connect(if type(p1) == "table" then function()
-					-- upvalues: p1 (copy)
-					p1.current()
-				end else p1)
+			for i, v in p1 do
+				t[v] = value:GetPropertyChangedSignal(v):Connect(if type(p2) == "table" then function()
+					-- upvalues: p2 (copy)
+					p2.current()
+				end else p2)
 			end
 		end
 		return function()
@@ -28,52 +28,52 @@ local function _(value, p0, p1)
 				v:Disconnect()
 			end
 		end
-	end, { value, p1 })
+	end, { value, p2 })
 end
 
-return function(p2, p3, p4, p5, p6)
+return function(p3, p4, p5, p6, p7)
 	-- upvalues: reactModule (ref), positioningModule (ref), SHADOW_SIZE (ref)
-	local var5, var6 = reactModule.useBinding(UDim2.new())
-	local var7, var8 = reactModule.useBinding(UDim2.new())
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useRef(function() end)
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: p4 (ref), p2 (ref), p3 (ref), p5 (ref), positioningModule (copy), SHADOW_SIZE (copy), var8 (ref), var6 (ref), p6 (ref), var9 (ref)
-		if not p4 then return end
-		local absoluteSize = p4.AbsoluteSize
-		local var13 = positioningModule.calculatePopoverBounds(if type(p2) == "table" then p2.position else p2, if type(p2) == "table" then p2.offset else 0, if type(p3) == "table" then p3.offset else 0, p5 or 0, absoluteSize) + Vector2.new(SHADOW_SIZE * 2, SHADOW_SIZE * 2)
-		var8(UDim2.fromOffset(absoluteSize.X, absoluteSize.Y))
-		var6(UDim2.fromOffset(var13.X, var13.Y))
-		local _ = p4.AbsolutePosition
+	local var1, var2 = reactModule.useBinding(UDim2.new())
+	local var3, var4 = reactModule.useBinding(UDim2.new())
+	local var5 = reactModule.useRef(nil)
+	local var6 = reactModule.useRef(function() end)
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: p5 (ref), p3 (ref), p4 (ref), p6 (ref), positioningModule (copy), SHADOW_SIZE (copy), var4 (ref), var2 (ref), p7 (ref), var5 (ref)
+		if not p5 then return end
+		local absoluteSize = p5.AbsoluteSize
+		local var8 = positioningModule.calculatePopoverBounds(if type(p3) == "table" then p3.position else p3, if type(p3) == "table" then p3.offset else 0, if type(p4) == "table" then p4.offset else 0, p6 or 0, absoluteSize) + Vector2.new(SHADOW_SIZE * 2, SHADOW_SIZE * 2)
+		var4(UDim2.fromOffset(absoluteSize.X, absoluteSize.Y))
+		var2(UDim2.fromOffset(var8.X, var8.Y))
+		local _ = p5.AbsolutePosition
 		
-		if p6 then
-			if var9.current then
-				task.cancel(var9.current)
+		if p7 then
+			if var5.current then
+				task.cancel(var5.current)
 			end
-			var9.current = task.spawn(function()
-				-- upvalues: p6 (copy), var13 (ref)
-				p6.setSizeAsync(var13)
+			var5.current = task.spawn(function()
+				-- upvalues: p7 (copy), var8 (ref)
+				p7.setSizeAsync(var8)
 			end)
 		end
 	end, {
-		p4,
-		p2,
-		p3,
 		p5,
-		p6
+		p3,
+		p4,
+		p6,
+		p7
 	})
-	var10.current = var11
+	var6.current = var7
 	local list = { "AbsoluteSize" }
 	reactModule.useLayoutEffect(function()
-		-- upvalues: p4 (ref), list (ref), var10 (ref)
+		-- upvalues: p5 (ref), list (ref), var6 (ref)
 		local t = {}
 		
-		if p4 ~= nil then
+		if p5 ~= nil then
 			for i, v in list do
-				t[v] = p4:GetPropertyChangedSignal(v):Connect(if type(var10) == "table" then function()
-					-- upvalues: var10 (copy)
-					var10.current()
-				end else var10)
+				t[v] = p5:GetPropertyChangedSignal(v):Connect(if type(var6) == "table" then function()
+					-- upvalues: var6 (copy)
+					var6.current()
+				end else var6)
 			end
 		end
 		return function()
@@ -82,20 +82,20 @@ return function(p2, p3, p4, p5, p6)
 				v:Disconnect()
 			end
 		end
-	end, { p4, var10 })
+	end, { p5, var6 })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var11 (ref)
-		var11()
-	end, { var11 })
+		-- upvalues: var7 (ref)
+		var7()
+	end, { var7 })
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref)
+		-- upvalues: var5 (ref)
 		return function()
-			-- upvalues: var9 (copy)
-			if var9.current then
-				task.cancel(var9.current)
+			-- upvalues: var5 (copy)
+			if var5.current then
+				task.cancel(var5.current)
 			end
 		end
 	end, {})
 	
-	return var5, var7
+	return var1, var3
 end

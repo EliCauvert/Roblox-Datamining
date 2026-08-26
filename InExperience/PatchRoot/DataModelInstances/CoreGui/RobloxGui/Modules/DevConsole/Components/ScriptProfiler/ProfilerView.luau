@@ -17,28 +17,28 @@ local cellPadding = constantsModule.ScriptProfilerFormatting.CellPadding
 local valuePadding = constantsModule.ScriptProfilerFormatting.ValuePadding
 local profilerView = roactModule.PureComponent:extend("ProfilerView")
 
-function profilerView.renderChildren(p0)
+function profilerView.renderChildren(p1)
 	-- upvalues: getDurations (ref), roactModule (ref), profilerViewEntryModule (ref)
-	local data = p0.props.data
+	local data = p1.props.data
 	assert(data.Version == 2)
 	
 	return roactModule.createElement(profilerViewEntryModule, {
 		layoutOrder = 0,
 		depth = 0,
 		data = data,
-		nodeId = p0.props.rootNode,
-		functionId = p0.props.rootFunc,
-		nodeName = p0.props.rootNodeName,
-		average = if p0.props.average > 0 and p0.props.sessionLength then p0.props.sessionLength / 1000 / p0.props.average else 1,
-		searchTerm = p0.props.searchTerm,
-		searchFilter = p0.props.searchFilter,
-		showPlugins = p0.props.showPlugins,
-		pluginOffsets = p0.props.pluginOffsets,
-		showGC = p0.props.showGC,
-		gcNodeOffsets = p0.props.gcNodeOffsets,
-		pluginGCOffsets = p0.props.pluginGCOffsets,
-		expandedNodes = p0.props.expandedNodes,
-		percentageRatio = if p0.props.showAsPercentages then getDurations(data, 0) / 100 else nil
+		nodeId = p1.props.rootNode,
+		functionId = p1.props.rootFunc,
+		nodeName = p1.props.rootNodeName,
+		average = if p1.props.average > 0 and p1.props.sessionLength then p1.props.sessionLength / 1000 / p1.props.average else 1,
+		searchTerm = p1.props.searchTerm,
+		searchFilter = p1.props.searchFilter,
+		showPlugins = p1.props.showPlugins,
+		pluginOffsets = p1.props.pluginOffsets,
+		showGC = p1.props.showGC,
+		gcNodeOffsets = p1.props.gcNodeOffsets,
+		pluginGCOffsets = p1.props.pluginGCOffsets,
+		expandedNodes = p1.props.expandedNodes,
+		percentageRatio = if p1.props.showAsPercentages then getDurations(data, 0) / 100 else nil
 	})
 end
 
@@ -67,7 +67,7 @@ function profilerView.render(p1)
 			LayoutOrder = layoutOrder
 		})
 	end
-	local var7 = formatSessionLength(p1.props.sessionLength)
+	local var1 = formatSessionLength(p1.props.sessionLength)
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -79,7 +79,7 @@ function profilerView.render(p1)
 			Size = UDim2.new(1, 0, 0, headerFrameHeight)
 		}, {
 			Name = roactModule.createElement(headerButtonModule, {
-				text = var7 and "Session Duration: " .. var7 or "Session Info",
+				text = var1 and "Session Duration: " .. var7 or "Session Info",
 				size = UDim2.new(1 - valueCellWidth * 2, (-valuePadding) - cellPadding, 0, headerFrameHeight),
 				pos = UDim2.new(0, cellPadding, 0, 0)
 			}),

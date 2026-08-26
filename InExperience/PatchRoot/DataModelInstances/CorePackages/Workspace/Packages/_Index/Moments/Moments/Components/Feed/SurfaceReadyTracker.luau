@@ -5,21 +5,21 @@ local useMomentMediaController = momentsCommonModule.Media.useMomentMediaControl
 local useMomentsSurfaceReadyTracking = momentsCommonModule.Performance.useMomentsSurfaceReadyTracking
 local _ = require(script.Parent.FeedTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: signalsReactModule (ref), useMomentMediaController (ref), useMomentsSurfaceReadyTracking (ref)
-	local var4
-	local var2 = signalsReactModule.useSignalState(p0.pager.getCurrentItem)
+	local var1
+	local var2 = signalsReactModule.useSignalState(p1.pager.getCurrentItem)
 	local var3 = if var2 == nil or var2.kind ~= "moment" then nil else var2.moment.momentId
 	
 	if var2 == nil or var2.kind ~= "moment" then
-		var4 = false
+		var1 = false
 	else
-		var4 = var2.moment.metadata.captureType == Enum.CaptureType.Video
-		var4 = nil
+		var1 = var2.moment.metadata.captureType == Enum.CaptureType.Video
+		var1 = nil
 	end
 	useMomentsSurfaceReadyTracking({
 		controller = if var3 then useMomentMediaController(var3 or "") else nil,
-		isVideo = var4,
+		isVideo = var1,
 		enabled = var3 ~= nil
 	})
 	

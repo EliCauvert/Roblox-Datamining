@@ -4,27 +4,27 @@ local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScop
 
 return function()
 	-- upvalues: createSessionScopedSignal (ref)
-	local var0, var1 = createSessionScopedSignal(function()
+	local var1, var2 = createSessionScopedSignal(function()
 		return nil
 	end)
 	
 	return {
-		getDraft = var0,
-		setDraft = function(p0, p1, p2)
-			-- upvalues: var1 (ref)
-			var1({ placeId = p0, title = p1, description = p2 })
+		getDraft = var1,
+		setDraft = function(p1, p2, p3)
+			-- upvalues: var2 (ref)
+			var2({ placeId = p1, title = p2, description = p3 })
 		end,
-		clearDraft = function(p3)
-			-- upvalues: var0 (ref), var1 (ref)
-			local var2 = var0()
+		clearDraft = function(p1)
+			-- upvalues: var1 (ref), var2 (ref)
+			local var3 = var1()
 			
-			if var2 ~= nil and var2.placeId == p3 then
-				var1(nil)
+			if var3 ~= nil and var3.placeId == p1 then
+				var2(nil)
 			end
 		end,
 		reset = function()
-			-- upvalues: var1 (ref)
-			var1(nil)
+			-- upvalues: var2 (ref)
+			var2(nil)
 		end
 	}
 end

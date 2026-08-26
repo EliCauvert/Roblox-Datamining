@@ -1,5 +1,5 @@
 ﻿return require(script.Localization)({
-	FormatByKey = function(_, p0)
-		return p0
+	FormatByKey = function(_, p1)
+		return p1
 	end
 })

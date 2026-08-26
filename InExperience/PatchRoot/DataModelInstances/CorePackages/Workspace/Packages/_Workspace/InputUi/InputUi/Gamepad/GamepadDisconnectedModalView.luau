@@ -10,13 +10,13 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local _ = require(script.Parent.GamepadDisconnectTokenMapper)
 local gamepadMessageKeyEngineFeature = game:GetEngineFeature("GamepadMessageKeyEngineFeature")
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDesignTokens (ref), gamepadMessageKeyEngineFeature (ref), memStorageService (ref), useLocalization (ref), userInputService (ref), reactModule (ref), imageSetLabel (ref), images (ref)
 	local gamepadDisconnectMessageKeyItem
-	local var5 = useDesignTokens()
-	local color3 = var5.Color.Content.Emphasis.Color3
-	local transparency = var5.Color.Content.Emphasis.Transparency
-	local gamepadDisconnect = var5.LuaApps.GamepadDisconnect
+	local var1 = useDesignTokens()
+	local color3 = var1.Color.Content.Emphasis.Color3
+	local transparency = var1.Color.Content.Emphasis.Transparency
+	local gamepadDisconnect = var1.LuaApps.GamepadDisconnect
 	local designWidth = gamepadDisconnect.designWidth
 	local imageWidth = gamepadDisconnect.imageWidth
 	local imageHeight = gamepadDisconnect.imageHeight
@@ -34,7 +34,7 @@ return function(p0)
 	else
 		gamepadDisconnectMessageKeyItem = "Feature.GamepadDisconnect.Label.Message"
 	end
-	local var7 = useLocalization({
+	local var2 = useLocalization({
 		title = "Feature.GamepadDisconnect.Label.Title",
 		message = gamepadDisconnectMessageKeyItem
 	})
@@ -52,8 +52,8 @@ return function(p0)
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.new(1, 0, 1, -verticalPadding * 2),
-			BackgroundTransparency = var5.Color.OverMedia.OverMedia_0.Transparency,
-			BackgroundColor3 = var5.Color.OverMedia.OverMedia_0.Color3
+			BackgroundTransparency = var1.Color.OverMedia.OverMedia_0.Transparency,
+			BackgroundColor3 = var1.Color.OverMedia.OverMedia_0.Color3
 		}, {
 			Content = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -93,7 +93,7 @@ return function(p0)
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						HorizontalAlignment = Enum.HorizontalAlignment.Left,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
-						Padding = UDim.new(0, var5.Size.Size_800)
+						Padding = UDim.new(0, var1.Size.Size_800)
 					}),
 					TitleRow = reactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
@@ -112,16 +112,16 @@ return function(p0)
 							BackgroundTransparency = 1,
 							LayoutOrder = 1,
 							Image = images["icons/menu/about_large"],
-							Size = UDim2.fromOffset(var5.Size.Size_1200, var5.Size.Size_1200)
+							Size = UDim2.fromOffset(var1.Size.Size_1200, var1.Size.Size_1200)
 						}),
 						Title = reactModule.createElement("TextLabel", {
 							BackgroundTransparency = 1,
 							LayoutOrder = 2,
-							Text = var7.title,
+							Text = var2.title,
 							TextColor3 = color3,
 							TextTransparency = transparency,
-							TextSize = var5.Typography.HeadingLarge.FontSize,
-							Font = var5.Typography.HeadingLarge.Font,
+							TextSize = var1.Typography.HeadingLarge.FontSize,
+							Font = var1.Typography.HeadingLarge.Font,
 							TextXAlignment = Enum.TextXAlignment.Left
 						})
 					}),
@@ -129,13 +129,13 @@ return function(p0)
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
 						TextWrapped = true,
-						Text = string.format(var7.message, p0.username, userInputService:GetStringForKeyCode(Enum.KeyCode.A)),
+						Text = string.format(var2.message, p1.username, userInputService:GetStringForKeyCode(Enum.KeyCode.A)),
 						AutomaticSize = Enum.AutomaticSize.XY,
 						Size = UDim2.fromOffset(0, 0),
 						TextColor3 = color3,
 						TextTransparency = transparency,
-						TextSize = var5.Typography.TitleLarge.FontSize,
-						Font = var5.Typography.TitleLarge.Font,
+						TextSize = var1.Typography.TitleLarge.FontSize,
+						Font = var1.Typography.TitleLarge.Font,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				})

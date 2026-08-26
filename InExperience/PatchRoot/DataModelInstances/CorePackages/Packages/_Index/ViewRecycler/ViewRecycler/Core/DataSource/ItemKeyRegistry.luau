@@ -1,20 +1,20 @@
-﻿local var0 = 0
+﻿local var1 = 0
 
 return {
-	create = function(p0, p1)
-		-- upvalues: var0 (write)
+	create = function(p1, p2)
+		-- upvalues: var1 (write)
 		local t = {}
-		local var2 = `{p1}: keys must be strings`
-		local var3 = `{p1}: setItem must preserve the existing key`
+		local var2 = `{p2}: keys must be strings`
+		local var3 = `{p2}: setItem must preserve the existing key`
 		
-		local function _(p2, p3)
-			-- upvalues: p0 (ref), var0 (copy), var2 (ref)
+		local function _(p3, p4)
+			-- upvalues: p1 (ref), var1 (copy), var2 (ref)
 			local var4
-			if p0 == nil then
-				var0 += 1
-				var4 = `view-recycler:{var0}`
+			if p1 == nil then
+				var1 += 1
+				var4 = `view-recycler:{var1}`
 			else
-				var4 = p0(p2, p3)
+				var4 = p1(p3, p4)
 			end
 			assert(type(var4) == "string", var2)
 			
@@ -22,89 +22,89 @@ return {
 		end
 		
 		return {
-			claim = function(p4, p5)
-				-- upvalues: p0 (ref), var0 (copy), var2 (ref), t (write), p1 (ref)
-				local var5
-				if p0 == nil then
-					var0 += 1
-					var5 = `view-recycler:{var0}`
+			claim = function(p3, p4)
+				-- upvalues: p1 (ref), var1 (copy), var2 (ref), t (write), p2 (ref)
+				local var4
+				if p1 == nil then
+					var1 += 1
+					var4 = `view-recycler:{var1}`
 				else
-					var5 = p0(p4, p5)
+					var4 = p1(p3, p4)
 				end
-				assert(type(var5) == "string", var2)
+				assert(type(var4) == "string", var2)
 				
-				if t[var5] ~= nil then
-					assert(false, `{p1}: duplicate key "{var5}"`)
+				if t[var4] ~= nil then
+					assert(false, `{p2}: duplicate key "{var5}"`)
 				end
-				t[var5] = true
+				t[var4] = true
 				
-				return var5
+				return var4
 			end,
-			assertPreserved = function(p6, p7, p8)
-				-- upvalues: p0 (ref), var0 (copy), var2 (ref), var3 (ref)
-				if p0 ~= nil then
-					local var6
-					if p0 == nil then
-						var0 += 1
-						var6 = `view-recycler:{var0}`
+			assertPreserved = function(p3, p4, p5)
+				-- upvalues: p1 (ref), var1 (copy), var2 (ref), var3 (ref)
+				if p1 ~= nil then
+					local var4
+					if p1 == nil then
+						var1 += 1
+						var4 = `view-recycler:{var1}`
 					else
-						var6 = p0(p7, p8)
+						var4 = p1(p4, p5)
 					end
-					assert(type(var6) == "string", var2)
-					assert(var6 == p6, var3)
+					assert(type(var4) == "string", var2)
+					assert(var4 == p3, var3)
 				end
 			end,
-			release = function(p9)
-				-- upvalues: t (write), p1 (ref)
-				if t[p9] == nil then
-					assert(false, `{p1}: cannot release missing key "{p9}"`)
+			release = function(p3)
+				-- upvalues: t (write), p2 (ref)
+				if t[p3] == nil then
+					assert(false, `{p2}: cannot release missing key "{p9}"`)
 				end
-				t[p9] = nil
+				t[p3] = nil
 			end,
-			replace = function(p10, p11, p12)
-				-- upvalues: p0 (ref), var0 (copy), var2 (ref), t (write), p1 (ref)
-				local var7
-				if p0 == nil then
-					var0 += 1
-					var7 = `view-recycler:{var0}`
+			replace = function(p3, p4, p5)
+				-- upvalues: p1 (ref), var1 (copy), var2 (ref), t (write), p2 (ref)
+				local var4
+				if p1 == nil then
+					var1 += 1
+					var4 = `view-recycler:{var1}`
 				else
-					var7 = p0(p11, p12)
+					var4 = p1(p4, p5)
 				end
-				assert(type(var7) == "string", var2)
+				assert(type(var4) == "string", var2)
 				
-				if t[p10] == nil then
-					assert(false, `{p1}: cannot replace missing key "{p10}"`)
+				if t[p3] == nil then
+					assert(false, `{p2}: cannot replace missing key "{p10}"`)
 				end
-				if var7 ~= p10 and t[var7] ~= nil then
-					assert(false, `{p1}: duplicate key "{var7}"`)
+				if var4 ~= p3 and t[var4] ~= nil then
+					assert(false, `{p2}: duplicate key "{var7}"`)
 				end
-				if var7 ~= p10 then
-					t[p10] = nil
-					t[var7] = true
+				if var4 ~= p3 then
+					t[p3] = nil
+					t[var4] = true
 				end
-				return var7
+				return var4
 			end,
-			rebuild = function(p13)
-				-- upvalues: p0 (ref), var0 (copy), var2 (ref), p1 (ref), t (write)
-				local list = table.create(#p13)
+			rebuild = function(p3)
+				-- upvalues: p1 (ref), var1 (copy), var2 (ref), p2 (ref), t (write)
+				local list = table.create(#p3)
 				local t_1 = {}
 				
-				for i, v in p13 do
-					local var10
-					if p0 == nil then
-						var0 += 1
-						var10 = `view-recycler:{var0}`
+				for i, v in p3 do
+					local var4
+					if p1 == nil then
+						var1 += 1
+						var4 = `view-recycler:{var1}`
 					else
-						var10 = p0(v, i)
+						var4 = p1(v, i)
 					end
-					assert(type(var10) == "string", var2)
-					local var11 = var10
+					assert(type(var4) == "string", var2)
+					local var5 = var4
 					
-					if t_1[var11] ~= nil then
-						assert(false, `{p1}: duplicate key "{var11}"`)
+					if t_1[var5] ~= nil then
+						assert(false, `{p2}: duplicate key "{var11}"`)
 					end
-					list[i] = var11
-					t_1[var11] = true
+					list[i] = var5
+					t_1[var5] = true
 				end
 				t = t_1
 				
@@ -118,16 +118,16 @@ return {
 				-- upvalues: t (write)
 				return table.clone(t)
 			end,
-			restore = function(p14)
+			restore = function(p4)
 				-- upvalues: t (write)
-				t = table.clone(p14)
+				t = table.clone(p4)
 			end
 		}
 	end,
 	generatedKey = function()
-		-- upvalues: var0 (write)
-		var0 += 1
+		-- upvalues: var1 (write)
+		var1 += 1
 		
-		return `view-recycler:{var0}`
+		return `view-recycler:{var1}`
 	end
 }

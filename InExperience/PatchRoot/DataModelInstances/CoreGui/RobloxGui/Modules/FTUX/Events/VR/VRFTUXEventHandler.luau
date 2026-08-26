@@ -13,78 +13,78 @@ local questVR = require(parent.Resources.FTUXEventTypes)[require(parent.Enums.Pl
 
 return {
 	Name = "VRFTUXEventHandler",
-	StartEvent = function(p0, p1)
+	StartEvent = function(p1, p2)
 		-- upvalues: questVR (ref), firstPersonToggleEventModule (ref), moveToGoalEventModule (ref), jumpEventModule (ref), perspectiveTooltipEventModule (ref), movementTooltipEventModule (ref), hapticFeedbackEventModule (ref), soundFeedbackEventModule (ref), hapticFeedbackTwiceEventModule (ref), leaveGameIconHighlightEventModule (ref)
-		if p0 == questVR.FirstPersonToggleEvent then
-			task.spawn(firstPersonToggleEventModule.StartEvent, p1)
+		if p1 == questVR.FirstPersonToggleEvent then
+			task.spawn(firstPersonToggleEventModule.StartEvent, p2)
 			
 			return
-		elseif p0 == questVR.MoveToGoalEvent then
-			task.spawn(moveToGoalEventModule.StartEvent, p1)
+		elseif p1 == questVR.MoveToGoalEvent then
+			task.spawn(moveToGoalEventModule.StartEvent, p2)
 			
 			return
-		elseif p0 == questVR.JumpEvent then
-			task.spawn(jumpEventModule.StartEvent, p1)
+		elseif p1 == questVR.JumpEvent then
+			task.spawn(jumpEventModule.StartEvent, p2)
 			
 			return
-		elseif p0 == questVR.PerspectiveTooltipEvent then
+		elseif p1 == questVR.PerspectiveTooltipEvent then
 			task.spawn(perspectiveTooltipEventModule.StartEvent)
 			
 			return
-		elseif p0 == questVR.MovementTooltipEvent then
+		elseif p1 == questVR.MovementTooltipEvent then
 			task.spawn(movementTooltipEventModule.StartEvent)
 			
 			return
-		elseif p0 == questVR.HapticFeedbackEvent then
+		elseif p1 == questVR.HapticFeedbackEvent then
 			task.spawn(hapticFeedbackEventModule.StartEvent)
 			
 			return
-		elseif p0 == questVR.SoundFeedbackEvent then
+		elseif p1 == questVR.SoundFeedbackEvent then
 			task.spawn(soundFeedbackEventModule.StartEvent)
 			
 			return
-		elseif p0 == questVR.HapticFeedbackTwiceEvent then
+		elseif p1 == questVR.HapticFeedbackTwiceEvent then
 			task.spawn(hapticFeedbackTwiceEventModule.StartEvent)
 			
 			return
-		elseif p0 == questVR.LeaveGameIconHighlightEvent then
+		elseif p1 == questVR.LeaveGameIconHighlightEvent then
 			task.spawn(leaveGameIconHighlightEventModule.StartEvent)
 			
 			return
 		end
-		warn("Unmapped VRFTUX event type: " .. tostring(p0))
+		warn("Unmapped VRFTUX event type: " .. tostring(p1))
 	end,
-	StopEvent = function(p2)
+	StopEvent = function(p1)
 		-- upvalues: questVR (ref), firstPersonToggleEventModule (ref), moveToGoalEventModule (ref), jumpEventModule (ref), perspectiveTooltipEventModule (ref), movementTooltipEventModule (ref), leaveGameIconHighlightEventModule (ref)
-		if p2 == questVR.FirstPersonToggleEvent then
+		if p1 == questVR.FirstPersonToggleEvent then
 			task.spawn(firstPersonToggleEventModule.StopEvent)
 			
 			return
-		elseif p2 == questVR.MoveToGoalEvent then
+		elseif p1 == questVR.MoveToGoalEvent then
 			task.spawn(moveToGoalEventModule.StopEvent)
 			
 			return
-		elseif p2 == questVR.JumpEvent then
+		elseif p1 == questVR.JumpEvent then
 			task.spawn(jumpEventModule.StopEvent)
 			
 			return
-		elseif p2 == questVR.PerspectiveTooltipEvent then
+		elseif p1 == questVR.PerspectiveTooltipEvent then
 			task.spawn(perspectiveTooltipEventModule.StopEvent)
 			
 			return
-		elseif p2 == questVR.MovementTooltipEvent then
+		elseif p1 == questVR.MovementTooltipEvent then
 			task.spawn(movementTooltipEventModule.StopEvent)
 			
 			return
-		elseif p2 == questVR.LeaveGameIconHighlightEvent then
+		elseif p1 == questVR.LeaveGameIconHighlightEvent then
 			task.spawn(leaveGameIconHighlightEventModule.StopEvent)
 			
 			return
-		elseif p2 == questVR.HapticFeedbackTwiceEvent then return end
-		if p2 == questVR.HapticFeedbackEvent then return end
-		if p2 == questVR.SoundFeedbackEvent then
+		elseif p1 == questVR.HapticFeedbackTwiceEvent then return end
+		if p1 == questVR.HapticFeedbackEvent then return end
+		if p1 == questVR.SoundFeedbackEvent then
 			return
 		end
-		warn("Unmapped VRFTUX event type: " .. tostring(p2))
+		warn("Unmapped VRFTUX event type: " .. tostring(p1))
 	end
 }

@@ -9,18 +9,18 @@ local fFlagEncodeSquadMembersUpdatedModule = require(squadsCore.Flags.FFlagEncod
 local encodeSquadMembersModule = require(squadsCore.Common.encodeSquadMembers)
 local cryoModule = require(parent.Cryo)
 local _ = require(parent.RoduxSquads)
-local var8 = if fFlagEncodeSquadMembersUpdatedModule then require(squadsCore.Common.encodeUserIds) else function(p0)
+local var1 = if fFlagEncodeSquadMembersUpdatedModule then require(squadsCore.Common.encodeUserIds) else function(p1)
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p0 (ref)
-		return httpService:JSONEncode(p0)
+		-- upvalues: httpService (copy), p1 (ref)
+		return httpService:JSONEncode(p1)
 	end)
 	
 	return if ok then status else "[]"
 end
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: squadLocationEnumModule (ref), playersService (ref), fFlagEncodeSquadMembersUpdatedModule (ref), var8 (ref), encodeSquadMembersModule (ref), cryoModule (ref), eventNamesModule (ref)
+	-- upvalues: squadLocationEnumModule (ref), playersService (ref), fFlagEncodeSquadMembersUpdatedModule (ref), var1 (ref), encodeSquadMembersModule (ref), cryoModule (ref), eventNamesModule (ref)
 	if p3 == squadLocationEnumModule.InExperience then
 		local t = {}
 		local t_1 = {}
@@ -33,28 +33,28 @@ return function(p1, p2, p3, p4, p5)
 				table.insert(t_1, v_1.UserId)
 			end
 		end
-		local var12, var13
-		local var11 = nil
+		local var2, var3
+		local var4 = nil
 		local _ = nil
 		local _ = nil
 		
 		if fFlagEncodeSquadMembersUpdatedModule then
-			var12 = var8(t_1)
-			var13 = encodeSquadMembersModule(p2)
+			var2 = var1(t_1)
+			var3 = encodeSquadMembersModule(p2)
 		else
-			var11 = cryoModule.List.map(p2, function(p6)
+			var4 = cryoModule.List.map(p2, function(p6)
 				return p6.userId
 			end)
-			var12 = var8(t_1)
-			var13 = var8(var11)
+			var2 = var1(t_1)
+			var3 = var1(var4)
 		end
 		p5(eventNamesModule.PartyCoplay, {
 			partyCoplayEvent = p4,
 			partyId = p1,
 			partyPlayersInGameInstanceCount = #t_1,
-			partyPlayersInGameInstanceUserIds = var12,
-			partyTotalSize = if fFlagEncodeSquadMembersUpdatedModule then #p2 else #var11,
-			partyTotalSizeUserIds = var13
+			partyPlayersInGameInstanceUserIds = var2,
+			partyTotalSize = if fFlagEncodeSquadMembersUpdatedModule then #p2 else #var4,
+			partyTotalSizeUserIds = var3
 		})
 	end
 end

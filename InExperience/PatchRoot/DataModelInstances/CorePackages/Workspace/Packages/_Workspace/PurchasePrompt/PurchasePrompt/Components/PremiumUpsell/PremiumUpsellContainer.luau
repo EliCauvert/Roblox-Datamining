@@ -21,49 +21,49 @@ local getFFLagUseCoreScriptsRootProviderForUpsellModalModule = require(purchaseP
 local fFlagSetMenuOnPurchasePromptModule = require(purchasePrompt.Flags.FFlagSetMenuOnPurchasePrompt)
 local name = roact.Component:extend(script.Name)
 
-function name.init(p0)
-	p0.state = { screenSize = Vector2.new(0, 0) }
+function name.init(p1)
+	p1.state = { screenSize = Vector2.new(0, 0) }
 	
-	function p0.changeScreenSize(p1)
-		-- upvalues: p0 (ref)
-		if p0.state.screenSize ~= p1.AbsoluteSize then
-			p0:setState({ screenSize = p1.AbsoluteSize })
+	function p0.changeScreenSize(p2)
+		-- upvalues: p1 (ref)
+		if p1.state.screenSize ~= p2.AbsoluteSize then
+			p1:setState({ screenSize = p2.AbsoluteSize })
 		end
 	end
 	
-	p0.savedSelectedCoreObject = nil
+	p1.savedSelectedCoreObject = nil
 	
 	function p0.endPurchase()
-		-- upvalues: p0 (ref)
-		p0:restoreSelectedObject()
-		p0.props.completeRequest()
+		-- upvalues: p1 (ref)
+		p1:restoreSelectedObject()
+		p1.props.completeRequest()
 	end
 end
 
-function name.saveSelectedObject(p2)
+function name.saveSelectedObject(p1)
 	-- upvalues: guiService (ref)
-	p2.savedSelectedCoreObject = guiService.SelectedCoreObject
+	p1.savedSelectedCoreObject = guiService.SelectedCoreObject
 	guiService.SelectedCoreObject = nil
 end
 
-function name.restoreSelectedObject(p3)
+function name.restoreSelectedObject(p1)
 	-- upvalues: coreGuiService (ref), guiService (ref)
-	if p3.savedSelectedCoreObject == nil or p3.savedSelectedCoreObject:IsDescendantOf(coreGuiService) then
-		guiService.SelectedCoreObject = p3.savedSelectedCoreObject
+	if p1.savedSelectedCoreObject == nil or p1.savedSelectedCoreObject:IsDescendantOf(coreGuiService) then
+		guiService.SelectedCoreObject = p1.savedSelectedCoreObject
 	end
 end
 
-function name.createElement(p4)
+function name.createElement(p1)
 	-- upvalues: requestTypeModule (ref), roact (ref), premiumUpsellOverlayModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
-	local props = p4.props
-	local state = p4.state
+	local props = p1.props
+	local state = p1.state
 	
 	if props.requestType == requestTypeModule.Premium then
-		p4:saveSelectedObject()
+		p1:saveSelectedObject()
 		
 		return roact.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),
-			[roact.Change.AbsoluteSize] = p4.changeScreenSize,
+			[roact.Change.AbsoluteSize] = p1.changeScreenSize,
 			BackgroundTransparency = 1
 		}, {
 			Prompt = roact.createElement(premiumUpsellOverlayModule, {
@@ -77,7 +77,7 @@ function name.createElement(p4)
 				isGamepadEnabled = props.isGamepadEnabled,
 				promptPremiumPurchase = props.promptPremiumPurchase,
 				dispatchPremiumPrecheck = props.dispatchPremiumPrecheck,
-				endPurchase = p4.endPurchase,
+				endPurchase = p1.endPurchase,
 				onAnalyticEvent = props.onAnalyticEvent
 			}),
 			ModalFix = roact.createElement("ImageButton", {
@@ -88,9 +88,9 @@ function name.createElement(p4)
 			OnCoreGuiMenuOpened = roact.createElement(externalEventConnectionModule, {
 				event = guiService.MenuOpened,
 				callback = function()
-					-- upvalues: fFlagSetMenuOnPurchasePromptModule (copy), p4 (ref), props (ref)
-					if fFlagSetMenuOnPurchasePromptModule and p4.menuOpenedBySelf then
-						p4.menuOpenedBySelf = false
+					-- upvalues: fFlagSetMenuOnPurchasePromptModule (copy), p1 (ref), props (ref)
+					if fFlagSetMenuOnPurchasePromptModule and p1.menuOpenedBySelf then
+						p1.menuOpenedBySelf = false
 						
 						return
 					end
@@ -102,52 +102,52 @@ function name.createElement(p4)
 	return nil
 end
 
-function name.render(p5)
+function name.render(p1)
 	-- upvalues: fFlagSetMenuOnPurchasePromptModule (ref), guiService (ref), getFFLagUseCoreScriptsRootProviderForUpsellModalModule (ref), roact (ref), coreScriptsRootProvider (ref), reactModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var16 = p5:createElement()
+	local var1 = p1:createElement()
 	
 	if fFlagSetMenuOnPurchasePromptModule then
-		if var16 ~= nil then
-			p5.menuOpenedBySelf = true
+		if var1 ~= nil then
+			p1.menuOpenedBySelf = true
 		end
-		guiService:SetMenuIsOpen(var16 ~= nil, "PremiumUpsellContainer")
+		guiService:SetMenuIsOpen(var1 ~= nil, "PremiumUpsellContainer")
 	end
 	return if getFFLagUseCoreScriptsRootProviderForUpsellModalModule() then roact.createElement(coreScriptsRootProvider, {}, {
 		FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
 			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
-		}, { PremiumUpsellContainer = var16 })
-	}) else var16
+		}, { PremiumUpsellContainer = var1 })
+	}) else var1
 end
 
-return connectToStoreModule(function(p6)
+return connectToStoreModule(function(p1)
 	return {
-		requestType = p6.promptRequest.requestType,
-		promptState = p6.promptState,
-		purchaseError = p6.purchaseError,
-		economicRestrictionError = p6.economicRestrictionError,
-		premiumProductInfo = p6.premiumProductInfo,
-		isGamepadEnabled = p6.gamepadEnabled
+		requestType = p1.promptRequest.requestType,
+		promptState = p1.promptState,
+		purchaseError = p1.purchaseError,
+		economicRestrictionError = p1.economicRestrictionError,
+		premiumProductInfo = p1.premiumProductInfo,
+		isGamepadEnabled = p1.gamepadEnabled
 	}
-end, function(p7)
+end, function(p1)
 	-- upvalues: launchPremiumUpsellModule (ref), completeRequestModule (ref), sendEventModule (ref), initiatePremiumPrecheckModule (ref)
 	return {
 		promptPremiumPurchase = function()
-			-- upvalues: p7 (ref), launchPremiumUpsellModule (copy)
-			return p7(launchPremiumUpsellModule())
+			-- upvalues: p1 (ref), launchPremiumUpsellModule (copy)
+			return p1(launchPremiumUpsellModule())
 		end,
 		completeRequest = function()
-			-- upvalues: p7 (ref), completeRequestModule (copy)
-			return p7(completeRequestModule())
+			-- upvalues: p1 (ref), completeRequestModule (copy)
+			return p1(completeRequestModule())
 		end,
-		onAnalyticEvent = function(p8, p9)
-			-- upvalues: p7 (ref), sendEventModule (copy)
-			return p7(sendEventModule(p8, p9))
+		onAnalyticEvent = function(p2, p3)
+			-- upvalues: p1 (ref), sendEventModule (copy)
+			return p1(sendEventModule(p2, p3))
 		end,
 		dispatchPremiumPrecheck = function()
-			-- upvalues: p7 (ref), initiatePremiumPrecheckModule (copy)
-			return p7(initiatePremiumPrecheckModule())
+			-- upvalues: p1 (ref), initiatePremiumPrecheckModule (copy)
+			return p1(initiatePremiumPrecheckModule())
 		end
 	}
 end)(name)

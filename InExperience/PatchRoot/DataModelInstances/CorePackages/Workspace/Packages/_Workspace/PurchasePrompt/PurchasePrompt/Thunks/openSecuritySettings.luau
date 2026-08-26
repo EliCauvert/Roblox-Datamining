@@ -22,22 +22,22 @@ local list = {
 
 return function(value)
 	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), externalSettingsModule (ref), platformInterfaceModule (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), hideWindowModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1)
+	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: analyticsModule (copy), externalSettingsModule (copy), platformInterfaceModule (copy), getUpsellFlowModule (copy), upsellFlowModule (copy), value (ref), hideWindowModule (copy)
-		local var9 = p1[analyticsModule]
-		local var10 = p1[externalSettingsModule]
-		local var11 = p1[platformInterfaceModule]
-		local state = p0:getState()
+		local var1 = p2[analyticsModule]
+		local var2 = p2[externalSettingsModule]
+		local var3 = p2[platformInterfaceModule]
+		local state = p1:getState()
 		
-		if getUpsellFlowModule(var10.getPlatform()) == upsellFlowModule.Web then
-			var9.signalTwoSVSettingsErrorConfirmed(state.productInfo.productId, state.requestType)
+		if getUpsellFlowModule(var2.getPlatform()) == upsellFlowModule.Web then
+			var1.signalTwoSVSettingsErrorConfirmed(state.productInfo.productId, state.requestType)
 			
 			if value then
-				var11.openSecuritySettings(value)
+				var3.openSecuritySettings(value)
 			else
-				var11.openSecuritySettings()
+				var3.openSecuritySettings()
 			end
 		end
-		p0:dispatch(hideWindowModule())
+		p1:dispatch(hideWindowModule())
 	end)
 end

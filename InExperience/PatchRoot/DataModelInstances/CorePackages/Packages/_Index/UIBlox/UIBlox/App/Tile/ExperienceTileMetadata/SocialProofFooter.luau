@@ -4,9 +4,9 @@ local reactModule = require(parent_1.Parent.Parent.React)
 local statGroupModule = require(parent_1.Indicator.StatGroup)
 local footerFrameModule = require(parent.FooterFrame)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), footerFrameModule (ref), statGroupModule (ref)
-	return reactModule.createElement(footerFrameModule, p0, {
-		Stats = reactModule.createElement(statGroupModule, { ratingText = p0.ratingText, playingText = p0.playingText })
+	return reactModule.createElement(footerFrameModule, p1, {
+		Stats = reactModule.createElement(statGroupModule, { ratingText = p1.ratingText, playingText = p1.playingText })
 	})
 end

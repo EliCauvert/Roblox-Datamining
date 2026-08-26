@@ -4,7 +4,7 @@ local parent = script.Parent
 local constantsModule = require(parent.Constants)
 local generatedTranslationsModule = require(parent.GeneratedTranslations)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: guiService (ref), constantsModule (ref), generatedTranslationsModule (ref)
 	if guiService:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME) then
 		return
@@ -14,7 +14,7 @@ local function _(p0)
 	localizationTable.Archivable = false
 	localizationTable.SourceLocaleId = "en-us"
 	localizationTable:SetEntries(generatedTranslationsModule)
-	localizationTable.Parent = p0
+	localizationTable.Parent = p1
 end
 
 if not guiService:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME) then
@@ -25,74 +25,74 @@ if not guiService:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME) then
 	localizationTable:SetEntries(generatedTranslationsModule)
 	localizationTable.Parent = guiService
 end
-local var5 = guiService.UIBloxLocalization:GetTranslator("en-us")
+local var1 = guiService.UIBloxLocalization:GetTranslator("en-us")
 local t = {}
 
 local _ = function(p1)
 	-- upvalues: t (ref), guiService (ref)
-	local var9 = t[p1]
+	local var2 = t[p1]
 	
-	if var9 then
-		return var9
+	if var2 then
+		return var2
 	end
-	local var10 = guiService.UIBloxLocalization:GetTranslator(p1)
-	t[p1] = var10
+	local var3 = guiService.UIBloxLocalization:GetTranslator(p1)
+	t[p1] = var3
 	
-	return var10
+	return var3
 end
 
 local _ = function()
 	-- upvalues: localizationService (ref), t (ref), guiService (ref)
 	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var11 = t[robloxLocaleId]
+	local var2 = t[robloxLocaleId]
 	
-	if var11 then
-		return var11
+	if var2 then
+		return var2
 	end
-	local var12 = guiService.UIBloxLocalization:GetTranslator(robloxLocaleId)
-	t[robloxLocaleId] = var12
+	local var3 = guiService.UIBloxLocalization:GetTranslator(robloxLocaleId)
+	t[robloxLocaleId] = var3
 	
-	return var12
+	return var3
 end
 
-local function formatByKeyWithFallback(p2, p3, p4)
-	-- upvalues: var5 (ref)
+local function formatByKeyWithFallback(p1, p2, p3)
+	-- upvalues: var1 (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p4 (ref), p2 (ref), p3 (ref)
-		return p4:FormatByKey(p2, p3)
+		-- upvalues: p3 (ref), p1 (ref), p2 (ref)
+		return p3:FormatByKey(p1, p2)
 	end)
 	
-	return if ok then status elseif p4.LocaleId == "zh-cjv" then "" else var5:FormatByKey(p2, p3)
+	return if ok then status elseif p3.LocaleId == "zh-cjv" then "" else var1:FormatByKey(p1, p2)
 end
 
 return {
-	FormatByKey = function(_, p5, p6)
+	FormatByKey = function(_, p1, p2)
 		-- upvalues: formatByKeyWithFallback (ref), localizationService (ref), t (ref), guiService (ref)
-		local var14
+		local var2
 		local robloxLocaleId = localizationService.RobloxLocaleId
-		local var13 = t[robloxLocaleId]
+		local var3 = t[robloxLocaleId]
 		
-		if var13 then
-			var14 = var13
+		if var3 then
+			var2 = var3
 		else
-			var13 = guiService.UIBloxLocalization:GetTranslator(robloxLocaleId)
-			t[robloxLocaleId] = var13
-			var14 = var13
+			var3 = guiService.UIBloxLocalization:GetTranslator(robloxLocaleId)
+			t[robloxLocaleId] = var3
+			var2 = var3
 		end
-		return formatByKeyWithFallback(p5, p6, var14)
+		return formatByKeyWithFallback(p1, p2, var2)
 	end,
-	FormatByKeyForLocale = function(_, p7, p8, p9)
+	FormatByKeyForLocale = function(_, p1, p2, p3)
 		-- upvalues: formatByKeyWithFallback (ref), t (ref), guiService (ref)
-		local var16
-		local var15 = t[p8]
+		local var2
+		local var3 = t[p2]
 		
-		if var15 then
-			var16 = var15
+		if var3 then
+			var2 = var3
 		else
-			var15 = guiService.UIBloxLocalization:GetTranslator(p8)
-			t[p8] = var15
-			var16 = var15
+			var3 = guiService.UIBloxLocalization:GetTranslator(p2)
+			t[p2] = var3
+			var2 = var3
 		end
-		return formatByKeyWithFallback(p7, p9, var16)
+		return formatByKeyWithFallback(p1, p3, var2)
 	end
 }

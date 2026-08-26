@@ -4,28 +4,28 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local getPlaytestLoadingStoreModule = require(buildExperience.Stores.GetPlaytestLoadingStore)
 
-local function getIsPlaytestLoadingForPlaceId(p0, p1)
+local function getIsPlaytestLoadingForPlaceId(p1, p2)
 	-- upvalues: getPlaytestLoadingStoreModule (ref)
-	return if p1 == nil then false else getPlaytestLoadingStoreModule(p0).getIsPlaytestLoadingForPlaceId(p1)(p0)
+	return if p2 == nil then false else getPlaytestLoadingStoreModule(p1).getIsPlaytestLoadingForPlaceId(p2)(p1)
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), getIsPlaytestLoadingForPlaceId (ref), signalsReactModule (ref)
-	local launchPlaytest = p2.launchPlaytest
-	local var5 = signalsReactModule.useSignalState(reactModule.useCallback(function(p4)
-		-- upvalues: getIsPlaytestLoadingForPlaceId (copy), p2 (ref)
-		return getIsPlaytestLoadingForPlaceId(p4, p2.playtestPlaceId)
-	end, { p2.playtestPlaceId }))
+	local launchPlaytest = p1.launchPlaytest
+	local var1 = signalsReactModule.useSignalState(reactModule.useCallback(function(p3)
+		-- upvalues: getIsPlaytestLoadingForPlaceId (copy), p1 (ref)
+		return getIsPlaytestLoadingForPlaceId(p3, p1.playtestPlaceId)
+	end, { p1.playtestPlaceId }))
 	
 	return {
-		onPlaytest = if p2.playtestPlaceId == nil or not launchPlaytest then nil else reactModule.useCallback(function()
-			-- upvalues: launchPlaytest (ref), var5 (ref), p3 (ref)
-			if launchPlaytest and not var5 then
-				launchPlaytest(p3)
+		onPlaytest = if p1.playtestPlaceId == nil or not launchPlaytest then nil else reactModule.useCallback(function()
+			-- upvalues: launchPlaytest (ref), var1 (ref), p2 (ref)
+			if launchPlaytest and not var1 then
+				launchPlaytest(p2)
 				
 				return
 			end
-		end, { var5, launchPlaytest, p3 }),
-		isPlaytestLoading = var5
+		end, { var1, launchPlaytest, p2 }),
+		isPlaytestLoading = var1
 	}
 end

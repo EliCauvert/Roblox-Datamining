@@ -2,10 +2,10 @@
 local createUpdateProfileCustomizationModule = require(networkRequests.createUpdateProfileCustomization)
 local createGetProfileCustomizationModule = require(networkRequests.createGetProfileCustomization)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createUpdateProfileCustomizationModule (ref), createGetProfileCustomizationModule (ref)
 	return {
-		UpdateProfileCustomization = createUpdateProfileCustomizationModule(p0),
-		GetProfileCustomization = createGetProfileCustomizationModule(p0)
+		UpdateProfileCustomization = createUpdateProfileCustomizationModule(p1),
+		GetProfileCustomization = createGetProfileCustomizationModule(p1)
 	}
 end

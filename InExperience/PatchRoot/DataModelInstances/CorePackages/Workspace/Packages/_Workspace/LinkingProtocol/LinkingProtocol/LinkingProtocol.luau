@@ -15,9 +15,9 @@ function t.new()
 	return setmetatable({ isListeningForURLs = false, urlConnection = nil }, t)
 end
 
-function t.registerURL(_, p0)
+function t.registerURL(_, p1)
 	-- upvalues: linkingService (ref)
-	linkingService:RegisterLuaUrl(p0)
+	linkingService:RegisterLuaUrl(p1)
 end
 
 function t.getUID(_)
@@ -31,15 +31,15 @@ function t.getUID(_)
 	end) else promiseModule.resolve("")
 end
 
-function t.detectURL(_, p3)
+function t.detectURL(_, p1)
 	-- upvalues: linkingService (ref)
-	linkingService:DetectUrl(p3)
+	linkingService:DetectUrl(p1)
 end
 
-function t.adConsentResolved(_, p4)
+function t.adConsentResolved(_, p1)
 	-- upvalues: getFFlagEnableAdConsentAttributionModule (ref), messageBusService (ref)
 	if getFFlagEnableAdConsentAttributionModule() then
-		messageBusService:Publish("Linking.adConsentResolved", p4)
+		messageBusService:Publish("Linking.adConsentResolved", p1)
 		
 		return
 	end
@@ -50,18 +50,18 @@ function t.getLastLuaURL(_)
 	return linkingService:GetLastLuaUrl()
 end
 
-function t:listenForLuaURLs(p5, _)
+function t:listenForLuaURLs(p1, _)
 	-- upvalues: linkingService (ref)
 	self:stopListeningForLuaURLs()
-	self.urlConnection = linkingService.OnLuaUrl:Connect(function(p6, _, p7)
-		-- upvalues: p5 (ref)
-		p5(p6, p7)
+	self.urlConnection = linkingService.OnLuaUrl:Connect(function(p2, _, p3)
+		-- upvalues: p1 (ref)
+		p1(p2, p3)
 	end)
 	self.isListeningForURLs = true
-	local var5 = linkingService:StartLuaUrlDelivery()
+	local var1 = linkingService:StartLuaUrlDelivery()
 	
-	if var5 and var5.url then
-		p5(var5.url, var5.attributionUrl)
+	if var1 and var1.url then
+		p1(var1.url, var1.attributionUrl)
 	end
 end
 
@@ -74,45 +74,45 @@ function t:stopListeningForLuaURLs()
 	end
 end
 
-function t.openURL(_, p8)
+function t.openURL(_, p1)
 	-- upvalues: promiseModule (ref), linkingService (ref)
-	return promiseModule.new(function(p9, _)
-		-- upvalues: linkingService (copy), p8 (ref)
-		p9(linkingService:OpenUrl(p8))
+	return promiseModule.new(function(p2, _)
+		-- upvalues: linkingService (copy), p1 (ref)
+		p2(linkingService:OpenUrl(p1))
 	end)
 end
 
-function t.isURLRegistered(_, p10)
+function t.isURLRegistered(_, p1)
 	-- upvalues: promiseModule (ref), linkingService (ref)
-	return promiseModule.new(function(p11, _)
-		-- upvalues: linkingService (copy), p10 (ref)
-		p11(linkingService:IsUrlRegistered(p10))
+	return promiseModule.new(function(p2, _)
+		-- upvalues: linkingService (copy), p1 (ref)
+		p2(linkingService:IsUrlRegistered(p1))
 	end)
 end
 
 function t.getAndClearLastPendingURL(_)
 	-- upvalues: promiseModule (ref), linkingService (ref)
-	return if game:GetEngineFeature("LinkingProtocolGetLastPendingUrlEnabled") then promiseModule.new(function(p12, _)
+	return if game:GetEngineFeature("LinkingProtocolGetLastPendingUrlEnabled") then promiseModule.new(function(p1, _)
 		-- upvalues: linkingService (copy)
-		p12(linkingService:GetAndClearLastPendingUrl())
+		p1(linkingService:GetAndClearLastPendingUrl())
 	end) else promiseModule.resolve({ hasPendingUrl = false })
 end
 
-function t.switchToSettingsApp(_, p13)
+function t.switchToSettingsApp(_, p1)
 	-- upvalues: getFFlagEnableToSwitchToSettingsAppWithRouteLuaModule (ref), promiseModule (ref), linkingService (ref)
-	local var6 = if getFFlagEnableToSwitchToSettingsAppWithRouteLuaModule() then p13 else nil
+	local var1 = if getFFlagEnableToSwitchToSettingsAppWithRouteLuaModule() then p1 else nil
 	
-	return promiseModule.new(function(p14, _)
-		-- upvalues: linkingService (copy), var6 (ref)
-		p14(linkingService:SwitchToSettingsApp(var6))
+	return promiseModule.new(function(p2, _)
+		-- upvalues: linkingService (copy), var1 (ref)
+		p2(linkingService:SwitchToSettingsApp(var1))
 	end)
 end
 
 function t.supportsSwitchToSettingsApp(_, _)
 	-- upvalues: promiseModule (ref), linkingService (ref)
-	return promiseModule.new(function(p15, _)
+	return promiseModule.new(function(p1, _)
 		-- upvalues: linkingService (copy)
-		p15(linkingService:SupportsSwitchToSettingsApp())
+		p1(linkingService:SupportsSwitchToSettingsApp())
 	end)
 end
 

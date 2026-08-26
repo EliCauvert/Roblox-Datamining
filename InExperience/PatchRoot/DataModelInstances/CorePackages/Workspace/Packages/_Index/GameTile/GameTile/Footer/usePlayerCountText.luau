@@ -1,8 +1,8 @@
 ﻿local useAbbreviatedNumberLocalization = require(script:FindFirstAncestor("GameTile").Parent.Localization).Hooks.useAbbreviatedNumberLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAbbreviatedNumberLocalization (ref)
-	local var0 = useAbbreviatedNumberLocalization(p0)
+	local var1 = useAbbreviatedNumberLocalization(p1)
 	
-	return if var0 == nil or p0 == -1 then "--" else var0
+	return if var1 == nil or p1 == -1 then "--" else var1
 end

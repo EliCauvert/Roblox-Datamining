@@ -4,21 +4,21 @@ local signalsReactModule = require(parent.SignalsReact)
 
 return function()
 	-- upvalues: signalsModule (ref), signalsReactModule (ref)
-	local var2, var3 = signalsModule.createSignal(false)
-	local var4, var5 = signalsModule.createSignal(nil)
+	local var1, var2 = signalsModule.createSignal(false)
+	local var3, var4 = signalsModule.createSignal(nil)
 	
 	return {
-		getIsActive = var2,
+		getIsActive = var1,
 		useIsActive = function()
-			-- upvalues: signalsReactModule (copy), var2 (ref)
-			return signalsReactModule.useSignalState(var2)
+			-- upvalues: signalsReactModule (copy), var1 (ref)
+			return signalsReactModule.useSignalState(var1)
 		end,
-		setIsActive = var3,
-		getResumeTarget = var4,
+		setIsActive = var2,
+		getResumeTarget = var3,
 		useResumeTarget = function()
-			-- upvalues: signalsReactModule (copy), var4 (ref)
-			return signalsReactModule.useSignalState(var4)
+			-- upvalues: signalsReactModule (copy), var3 (ref)
+			return signalsReactModule.useSignalState(var3)
 		end,
-		setResumeTarget = var5
+		setResumeTarget = var4
 	}
 end

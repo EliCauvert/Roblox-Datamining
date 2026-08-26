@@ -4,24 +4,24 @@ local stateLayerModeModule = require(foundation.Enums.StateLayerMode)
 local textModule = require(foundation.Components.Text)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokensModule (ref), reactModule (ref), textModule (ref), stateLayerModeModule (ref)
-	local var5 = useTokensModule()
+	local var1 = useTokensModule()
 	
 	return reactModule.createElement(textModule, {
 		tag = "auto-xy text-title-small text-align-x-center text-align-y-center",
 		textStyle = {
-			Color3 = if p0.isSelected then var5.Inverse.Content.Emphasis.Color3 elseif p0.isSelectable and p0.emphasizeText then var5.Color.Content.Emphasis.Color3 else var5.Color.Content.Muted.Color3,
-			Transparency = if p0.isSelected or p0.isSelectable and p0.emphasizeText then 0 else 0.5
+			Color3 = if p1.isSelected then var1.Inverse.Content.Emphasis.Color3 elseif p1.isSelectable and p1.emphasizeText then var1.Color.Content.Emphasis.Color3 else var1.Color.Content.Muted.Color3,
+			Transparency = if p1.isSelected or p1.isSelectable and p1.emphasizeText then 0 else 0.5
 		},
-		backgroundStyle = if p0.isSelected then var5.Color.System.Contrast elseif p0.highlight then var5.Color.ActionStandard.Background else nil,
-		LayoutOrder = p0.LayoutOrder,
-		onActivated = if p0.isSelectable then p0.onActivated else nil,
-		RichText = not p0.isSelectable,
+		backgroundStyle = if p1.isSelected then var1.Color.System.Contrast elseif p1.highlight then var1.Color.ActionStandard.Background else nil,
+		LayoutOrder = p1.LayoutOrder,
+		onActivated = if p1.isSelectable then p1.onActivated else nil,
+		RichText = not p1.isSelectable,
 		stateLayer = {
-			mode = if p0.isSelected then stateLayerModeModule.Inverse else stateLayerModeModule.Default
+			mode = if p1.isSelected then stateLayerModeModule.Inverse else stateLayerModeModule.Default
 		},
-		Text = if p0.isSelectable then p0.Text else `<s>{p0.Text}</s>`,
-		testId = p0.testId
+		Text = if p1.isSelectable then p1.Text else `<s>{p1.Text}</s>`,
+		testId = p1.testId
 	})
 end

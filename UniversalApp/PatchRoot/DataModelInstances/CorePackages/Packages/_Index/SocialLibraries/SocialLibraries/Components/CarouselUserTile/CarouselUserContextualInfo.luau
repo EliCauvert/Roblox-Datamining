@@ -15,22 +15,22 @@ local t = {
 	lineWidth = constantsModule.TILE_SIZE
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: llama (ref), t (ref), style (ref), roact (ref), iconSize (ref), imageSetLabel (ref), images (ref), styledTextLabel (ref), getTextHeightModule (ref)
-	local var4 = llama.Dictionary.join(t, p0)
-	local icon = var4.icon
-	local label = var4.label
+	local var1 = llama.Dictionary.join(t, p1)
+	local icon = var1.icon
+	local label = var1.label
 	
-	return style.withStyle(function(p1)
-		-- upvalues: label (ref), roact (copy), var4 (ref), icon (ref), iconSize (copy), imageSetLabel (copy), images (copy), styledTextLabel (copy), getTextHeightModule (copy)
-		local theme = p1.Theme
-		local font = p1.Font
+	return style.withStyle(function(p2)
+		-- upvalues: label (ref), roact (copy), var1 (ref), icon (ref), iconSize (copy), imageSetLabel (copy), images (copy), styledTextLabel (copy), getTextHeightModule (copy)
+		local theme = p2.Theme
+		local font = p2.Font
 		local font_1 = label.font or font.CaptionBody
 		local text = label.text
 		
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = var4.layoutOrder
+			LayoutOrder = var1.layoutOrder
 		}, {
 			UIListLayout = roact.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -61,7 +61,7 @@ return function(p0)
 				lineHeight = 1,
 				fluidSizing = false,
 				richText = false,
-				size = UDim2.fromOffset(if icon then var4.lineWidth - (iconSize.Small + 2) else var4.lineWidth, getTextHeightModule(text, font_1.Font, font.BaseSize * font_1.RelativeSize) * var4.maxNumberOfLines),
+				size = UDim2.fromOffset(if icon then var1.lineWidth - (iconSize.Small + 2) else var1.lineWidth, getTextHeightModule(text, font_1.Font, font.BaseSize * font_1.RelativeSize) * var1.maxNumberOfLines),
 				text = text,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Top,

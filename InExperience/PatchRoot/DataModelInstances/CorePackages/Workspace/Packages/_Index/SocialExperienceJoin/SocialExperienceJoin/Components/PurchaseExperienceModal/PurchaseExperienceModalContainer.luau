@@ -21,132 +21,132 @@ local purchaseExperienceStatusModule = require(socialExperienceJoin.Analytics.Pu
 
 return function()
 	-- upvalues: useNavigation (ref), useDispatch (ref), useNavigationProps (ref), useScreenSize (ref), reactModule (ref), initializeSocialExperienceJoinAnalyticsModule (ref), useSelector (ref), RODUX_KEY (ref), eventNamesModule (ref), purchaseExperienceStatusModule (ref), purchaseProductByIdModule (ref), constantsModule (ref), promiseModule (ref), purchaseExperienceModalModule (ref)
-	local var13 = useNavigation()
-	local var14 = useDispatch()
-	local var15 = useNavigationProps(function(p0, p1)
+	local var1 = useNavigation()
+	local var2 = useDispatch()
+	local var3 = useNavigationProps(function(p1, p2)
 		return {
-			universeId = p0,
-			userId = p1.userId,
-			openGameDetailsPeekView = p1.openGameDetailsPeekView,
-			analyticProps = p1.analyticProps
+			universeId = p1,
+			userId = p2.userId,
+			openGameDetailsPeekView = p2.openGameDetailsPeekView,
+			analyticProps = p2.analyticProps
 		}
 	end)
-	local var16 = useScreenSize()
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: initializeSocialExperienceJoinAnalyticsModule (copy), var15 (ref)
-		return initializeSocialExperienceJoinAnalyticsModule(var15.analyticProps)
-	end, { var15.analyticProps })
-	local var18 = useSelector(function(p2)
-		-- upvalues: RODUX_KEY (copy), var15 (ref)
-		return p2[RODUX_KEY].Games.productInfoByGameId[var15.universeId]
+	local var4 = useScreenSize()
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: initializeSocialExperienceJoinAnalyticsModule (copy), var3 (ref)
+		return initializeSocialExperienceJoinAnalyticsModule(var3.analyticProps)
+	end, { var3.analyticProps })
+	local var6 = useSelector(function(p1)
+		-- upvalues: RODUX_KEY (copy), var3 (ref)
+		return p1[RODUX_KEY].Games.productInfoByGameId[var3.universeId]
 	end)
-	local var19 = useSelector(function(p3)
-		-- upvalues: RODUX_KEY (copy), var15 (ref)
-		return p3[RODUX_KEY].Games.byGameId[var15.universeId]
+	local var7 = useSelector(function(p1)
+		-- upvalues: RODUX_KEY (copy), var3 (ref)
+		return p1[RODUX_KEY].Games.byGameId[var3.universeId]
 	end)
 	
 	local _ = function()
-		-- upvalues: var17 (ref), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var15 (ref)
-		var17.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
+		-- upvalues: var5 (ref), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (ref)
+		var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
 			status = purchaseExperienceStatusModule.Success,
-			universeId = var15.universeId,
-			profileUserId = var15.userId
+			universeId = var3.universeId,
+			profileUserId = var3.userId
 		})
 	end
 	
 	local _ = function(_)
-		-- upvalues: var17 (ref), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var15 (ref)
-		var17.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
+		-- upvalues: var5 (ref), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (ref)
+		var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
 			status = purchaseExperienceStatusModule.PurchaseError,
-			universeId = var15.universeId,
-			profileUserId = var15.userId
+			universeId = var3.universeId,
+			profileUserId = var3.userId
 		})
 	end
 	
 	local _ = function(_)
-		-- upvalues: var17 (ref), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var15 (ref)
-		var17.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
+		-- upvalues: var5 (ref), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (ref)
+		var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
 			status = purchaseExperienceStatusModule.NetworkError,
-			universeId = var15.universeId,
-			profileUserId = var15.userId
+			universeId = var3.universeId,
+			profileUserId = var3.userId
 		})
 	end
 	
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref)
-		var13.pop()
-	end, { var13 })
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref)
+		var1.pop()
+	end, { var1 })
 	
 	return reactModule.createElement(purchaseExperienceModalModule, {
 		cancelPurchase = reactModule.useCallback(function()
-			-- upvalues: var17 (ref), eventNamesModule (copy), var15 (ref), var20 (ref)
-			var17.fireAnalyticsEvent(eventNamesModule.CancelPurchaseExperience, {
-				universeId = var15.universeId,
-				profileUserId = var15.userId
+			-- upvalues: var5 (ref), eventNamesModule (copy), var3 (ref), var8 (ref)
+			var5.fireAnalyticsEvent(eventNamesModule.CancelPurchaseExperience, {
+				universeId = var3.universeId,
+				profileUserId = var3.userId
 			})
-			var20()
-		end, { var20, var17, var15.universeId }),
-		experienceName = var19.name,
-		price = var18.price,
+			var8()
+		end, { var8, var5, var3.universeId }),
+		experienceName = var7.name,
+		price = var6.price,
 		purchaseExperience = reactModule.useCallback(function()
-			-- upvalues: var17 (ref), eventNamesModule (copy), var15 (ref), var14 (ref), purchaseProductByIdModule (copy), var18 (ref), constantsModule (copy), promiseModule (copy), var20 (ref), purchaseExperienceStatusModule (copy)
-			var17.fireAnalyticsEvent(eventNamesModule.PurchaseExperience, {
-				universeId = var15.universeId,
-				profileUserId = var15.userId
+			-- upvalues: var5 (ref), eventNamesModule (copy), var3 (ref), var2 (ref), purchaseProductByIdModule (copy), var6 (ref), constantsModule (copy), promiseModule (copy), var8 (ref), purchaseExperienceStatusModule (copy)
+			var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperience, {
+				universeId = var3.universeId,
+				profileUserId = var3.userId
 			})
 			
 			local _ = function()
-				-- upvalues: var14 (copy), purchaseProductByIdModule (copy), var18 (copy), constantsModule (copy)
-				return var14(purchaseProductByIdModule.API(var18.productId, {
+				-- upvalues: var2 (copy), purchaseProductByIdModule (copy), var6 (copy), constantsModule (copy)
+				return var2(purchaseProductByIdModule.API(var6.productId, {
 					expectedCurrency = constantsModule.RobuxCurrency,
-					expectedPrice = var18.price,
-					expectedSellerId = var18.sellerId
+					expectedPrice = var6.price,
+					expectedSellerId = var6.sellerId
 				}))
 			end
 			
-			var14(purchaseProductByIdModule.API(var18.productId, {
+			var2(purchaseProductByIdModule.API(var6.productId, {
 				expectedCurrency = constantsModule.RobuxCurrency,
-				expectedPrice = var18.price,
-				expectedSellerId = var18.sellerId
-			})):andThen(function(p5)
+				expectedPrice = var6.price,
+				expectedSellerId = var6.sellerId
+			})):andThen(function(p1)
 				-- upvalues: promiseModule (copy)
-				local responseBody = p5.responseBody
+				local responseBody = p1.responseBody
 				
 				return if type(responseBody) == "table" then responseBody else promiseModule.reject()
-			end):andThen(function(p4)
-				-- upvalues: var20 (copy), var17 (copy), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var15 (copy)
-				var20()
+			end):andThen(function(p1)
+				-- upvalues: var8 (copy), var5 (copy), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (copy)
+				var8()
 				
-				if p4.purchased then
-					var17.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
+				if p1.purchased then
+					var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
 						status = purchaseExperienceStatusModule.Success,
-						universeId = var15.universeId,
-						profileUserId = var15.userId
+						universeId = var3.universeId,
+						profileUserId = var3.userId
 					})
 					
 					return
 				end
-				var17.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
+				var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
 					status = purchaseExperienceStatusModule.PurchaseError,
-					universeId = var15.universeId,
-					profileUserId = var15.userId
+					universeId = var3.universeId,
+					profileUserId = var3.userId
 				})
 			end):catch(function(_)
-				-- upvalues: var20 (copy), var17 (copy), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var15 (copy)
-				var20()
-				var17.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
+				-- upvalues: var8 (copy), var5 (copy), eventNamesModule (copy), purchaseExperienceStatusModule (copy), var3 (copy)
+				var8()
+				var5.fireAnalyticsEvent(eventNamesModule.PurchaseExperienceAttempt, {
 					status = purchaseExperienceStatusModule.NetworkError,
-					universeId = var15.universeId,
-					profileUserId = var15.userId
+					universeId = var3.universeId,
+					profileUserId = var3.userId
 				})
 			end)
 		end, {
-			var14,
-			var18.productId,
-			var18.price,
-			var18.sellerId,
-			var20
+			var2,
+			var6.productId,
+			var6.price,
+			var6.sellerId,
+			var8
 		}),
-		screenSize = var16
+		screenSize = var4
 	})
 end

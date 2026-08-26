@@ -4,17 +4,17 @@ local useUserExperiment = require(parent.RoactAppExperiment).useUserExperiment
 local fFlagEditProfileSetupNewExperimentFlowModule = require(script.Parent.FFlagEditProfileSetupNewExperimentFlow)
 local editProfileExperimentKey = game:DefineFastString("EditProfileExperimentKey", "can_view_edit_profile")
 
-local var2 = function(p0)
+local var1 = function(p1)
 	-- upvalues: getFStringSelfProfileView (ref), fFlagEditProfileSetupNewExperimentFlowModule (ref), editProfileExperimentKey (ref)
-	local var3 = (p0 or {})[getFStringSelfProfileView()] or {}
+	local var2 = (p1 or {})[getFStringSelfProfileView()] or {}
 	
-	return if fFlagEditProfileSetupNewExperimentFlowModule then var3[editProfileExperimentKey] == true else var3.can_view_edit_profile == true
+	return if fFlagEditProfileSetupNewExperimentFlowModule then var2[editProfileExperimentKey] == true else var2.can_view_edit_profile == true
 end
 
 return {
-	isExperimentEnabled = var2,
+	isExperimentEnabled = var1,
 	useIsExperimentEnabled = function(p1)
-		-- upvalues: useUserExperiment (ref), getFStringSelfProfileView (ref), var2 (ref)
-		return useUserExperiment({ getFStringSelfProfileView() }, var2, if p1 then p1.isExposureEnabled else nil)
+		-- upvalues: useUserExperiment (ref), getFStringSelfProfileView (ref), var1 (ref)
+		return useUserExperiment({ getFStringSelfProfileView() }, var1, if p1 then p1.isExposureEnabled else nil)
 	end
 }

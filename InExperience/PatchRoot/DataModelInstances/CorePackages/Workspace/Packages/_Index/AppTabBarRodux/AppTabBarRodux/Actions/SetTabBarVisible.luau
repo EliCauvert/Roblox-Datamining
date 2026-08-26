@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AppTabBarRodux").Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { isVisible = p0 }
+﻿return require(script:FindFirstAncestor("AppTabBarRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { isVisible = p1 }
 end)

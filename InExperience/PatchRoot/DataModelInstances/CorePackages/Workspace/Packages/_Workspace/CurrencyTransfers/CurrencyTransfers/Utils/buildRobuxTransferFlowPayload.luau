@@ -3,55 +3,55 @@ local playersService = game:GetService("Players")
 local _ = require(currencyTransfers.Stores.createTransferStore)
 local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: playersService (ref), transferDirectionModule (ref)
 	local localPlayer = playersService.LocalPlayer
-	local var3 = if localPlayer then localPlayer.UserId else 0
-	local direction = p0.getDirection(false)
-	local var5 = 0
-	local var6 = 0
+	local var1 = if localPlayer then localPlayer.UserId else 0
+	local direction = p1.getDirection(false)
+	local var2 = 0
+	local var3 = 0
 	
 	if direction == transferDirectionModule.Send then
-		var5 = var3
-		local recipient = p0.getRecipient(false)
-		var6 = if recipient then recipient.targetId else p0.getRecipientUserId(false)
+		var2 = var1
+		local recipient = p1.getRecipient(false)
+		var3 = if recipient then recipient.targetId else p1.getRecipientUserId(false)
 	elseif direction == transferDirectionModule.Receive then
-		var6 = var3
-		local sender = p0.getSender(false)
-		var5 = if sender then sender.targetId else 0
+		var3 = var1
+		local sender = p1.getSender(false)
+		var2 = if sender then sender.targetId else 0
 	end
-	local transferRequestId = p0.getTransferRequestId(false)
-	local robuxTransfer = p0.getRobuxTransfer(false)
-	local selectedAmount = p0.getSelectedAmount(false)
+	local transferRequestId = p1.getTransferRequestId(false)
+	local robuxTransfer = p1.getRobuxTransfer(false)
+	local selectedAmount = p1.getSelectedAmount(false)
 	
 	if selectedAmount == nil and robuxTransfer then
 		selectedAmount = robuxTransfer.transferAmount
 	end
-	local var12 = nil
+	local var4 = nil
 	local gameId = game.GameId
 	
 	if gameId > 0 then
-		var12 = gameId
+		var4 = gameId
 	end
-	local transferOrigination = p0.getTransferOrigination(false)
+	local transferOrigination = p1.getTransferOrigination(false)
 	local t = {
 		transfer_request_id = transferRequestId or "",
-		transfer_client_session_id = p0.getTransferClientSessionId(false),
-		event_name = p1,
-		sender_user_id = var5,
-		recipient_user_id = var6,
+		transfer_client_session_id = p1.getTransferClientSessionId(false),
+		event_name = p2,
+		sender_user_id = var2,
+		recipient_user_id = var3,
 		transfer_amount = selectedAmount,
-		transfer_prompt_state = tostring(p0.getPromptState(false)),
+		transfer_prompt_state = tostring(p1.getPromptState(false)),
 		transfer_origination = if transferOrigination then tostring(transferOrigination) else "",
 		transfer_direction = if direction then tostring(direction) else "",
 		ingest_timestamp_milliseconds = DateTime.now().UnixTimestampMillis
 	}
 	
-	if direction == transferDirectionModule.Send and p0.getBalanceReceivedFromApi(false) then
-		t.user_balance = p0.getRobuxBalanceAmount(false)
+	if direction == transferDirectionModule.Send and p1.getBalanceReceivedFromApi(false) then
+		t.user_balance = p1.getRobuxBalanceAmount(false)
 	end
-	if var12 ~= nil then
-		t.universe_id = var12
+	if var4 ~= nil then
+		t.universe_id = var4
 	end
 	return t
 end

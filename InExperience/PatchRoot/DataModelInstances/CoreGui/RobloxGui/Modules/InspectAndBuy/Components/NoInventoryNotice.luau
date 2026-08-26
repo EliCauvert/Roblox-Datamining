@@ -7,12 +7,12 @@ local colorsModule = require(parent.Colors)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local noInventoryNotice = roactModule.PureComponent:extend("NoInventoryNotice")
 
-function noInventoryNotice.render(p0)
+function noInventoryNotice.render(p1)
 	-- upvalues: roactModule (ref), colorsModule (ref), appFonts (ref), robloxTranslatorModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		Visible = next(p0.props.assets) == nil and p0.props.isLoaded
+		Visible = next(p1.props.assets) == nil and p1.props.isLoaded
 	}, {
 		UIListLayout = roactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, 15),
@@ -39,7 +39,7 @@ function noInventoryNotice.render(p0)
 			TextWrapped = true,
 			Size = UDim2.new(0.8, 0, 0.3, 0),
 			Font = appFonts.default:getDefault(),
-			Text = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Description.NoInventoryNotice", p0.props.locale),
+			Text = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Description.NoInventoryNotice", p1.props.locale),
 			TextColor3 = colorsModule.White,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Top

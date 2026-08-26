@@ -5,9 +5,9 @@ function renderStep.render(_)
 	return nil
 end
 
-function renderStep.didMount(p0)
+function renderStep.didMount(p1)
 	-- upvalues: runService (ref)
-	runService:BindToRenderStep(p0.props.name, p0.props.priority, p0.props.callback)
+	runService:BindToRenderStep(p1.props.name, p1.props.priority, p1.props.callback)
 end
 
 function renderStep.didUpdate(p1, p2)
@@ -18,9 +18,9 @@ function renderStep.didUpdate(p1, p2)
 	end
 end
 
-function renderStep.willUnmount(p3)
+function renderStep.willUnmount(p1)
 	-- upvalues: runService (ref)
-	runService:UnbindFromRenderStep(p3.props.name)
+	runService:UnbindFromRenderStep(p1.props.name)
 end
 
 return renderStep

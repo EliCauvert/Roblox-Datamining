@@ -2,16 +2,16 @@
 local composeFocusBehaviorsModule = require(script.composeFocusBehaviors)
 
 local function mostRecentDescendantBehavior()
-	local var2 = nil
+	local var1 = nil
 	
 	return {
-		onDescendantFocusChanged = function(p0)
-			-- upvalues: var2 (write)
-			var2 = p0 or var2
+		onDescendantFocusChanged = function(p1)
+			-- upvalues: var1 (write)
+			var1 = p1 or var1
 		end,
 		getTargets = function()
-			-- upvalues: var2 (write)
-			return if var2 then { var2 } else {}
+			-- upvalues: var1 (write)
+			return if var1 then { var1 } else {}
 		end
 	}
 end
@@ -26,12 +26,12 @@ return {
 		}
 	end,
 	mostRecent = mostRecentDescendantBehavior,
-	mostRecentOrDefault = function(p2)
+	mostRecentOrDefault = function(p1)
 		-- upvalues: composeFocusBehaviorsModule (ref), mostRecentDescendantBehavior (ref)
 		return composeFocusBehaviorsModule(mostRecentDescendantBehavior(), {
 			getTargets = function()
-				-- upvalues: p2 (ref)
-				return if p2 then { p2 } else {}
+				-- upvalues: p1 (ref)
+				return if p1 then { p1 } else {}
 			end
 		})
 	end,

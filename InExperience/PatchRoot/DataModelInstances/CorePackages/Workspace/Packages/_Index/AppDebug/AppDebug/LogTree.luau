@@ -8,60 +8,60 @@ local root = lumberyakModule.Logger.new(nil, "root")
 local currentTime = tick()
 local t = { ["*"] = root }
 root:setContext({
-	tostring = function(p0)
+	tostring = function(p1)
 		-- upvalues: dashModule (ref)
-		if typeof(p0) == "string" then
-			return p0
+		if typeof(p1) == "string" then
+			return p1
 		end
-		local var9 = getmetatable(p0)
+		local var1 = getmetatable(p1)
 		
-		return if var9 and var9.__tostring then tostring(p0) else dashModule.pretty(p0)
+		return if var1 and var1.__tostring then tostring(p1) else dashModule.pretty(p1)
 	end
 })
 
 local function _(p1, p2)
 	-- upvalues: lumberyakModule (ref), t (ref)
-	local var10 = lumberyakModule.Logger.new(p1, p2)
-	t[p2] = var10
+	local var1 = lumberyakModule.Logger.new(p1, p2)
+	t[p2] = var1
 	
-	return var10
+	return var1
 end
 
-local function createLoggerTree(p3)
+local function createLoggerTree(p1)
 	-- upvalues: root (ref), t (ref), lumberyakModule (ref)
-	local var11 = p3:split(".")
-	local var12 = ""
-	local var13 = root
+	local var1 = p1:split(".")
+	local var2 = ""
+	local var3 = root
 	
-	for i, v in var11 do
+	for i, v in var1 do
 		if v == "" then
 			error("Invalid log tag: " .. p3)
 		end
-		var12 = if i == 1 then v else var12 .. "." .. v
-		local var14 = t[var12]
+		var2 = if i == 1 then v else var2 .. "." .. v
+		local var4 = t[var2]
 		
-		if not var14 then
-			local var15 = var12
-			local var16 = lumberyakModule.Logger.new(var13, var15)
-			t[var15] = var16
-			var14 = var16
+		if not var4 then
+			local var5 = var2
+			local var6 = lumberyakModule.Logger.new(var3, var5)
+			t[var5] = var6
+			var4 = var6
 		end
-		var13 = var14
+		var3 = var4
 	end
-	return var13
+	return var3
 end
 
-local function logger(p4)
+local function logger(p2)
 	-- upvalues: t (ref), createLoggerTree (ref)
-	return t[p4] or createLoggerTree(p4)
+	return t[p2] or createLoggerTree(p2)
 end
 
 local _ = function(value)
 	-- upvalues: dashModule (ref), levels (ref)
-	local var17 = value:split(":")
+	local var7 = value:split(":")
 	
-	if #var17 == 2 then
-		local unpacked, unpacked_1 = table.unpack(var17)
+	if #var7 == 2 then
+		local unpacked, unpacked_1 = table.unpack(var7)
 		
 		return dashModule.trim(unpacked), levels.fromString(unpacked_1)
 	end
@@ -70,28 +70,28 @@ local _ = function(value)
 	return nil, nil
 end
 
-local _ = function(p5)
+local _ = function(p2)
 	-- upvalues: dashModule (ref)
-	return dashModule.filter(dashModule.splitOn(p5, "%s+"), function(p6)
-		return #p6 > 0
+	return dashModule.filter(dashModule.splitOn(p2, "%s+"), function(p3)
+		return #p3 > 0
 	end)
 end
 
 return {
 	logger = logger,
-	formatLog = function(p7, p8, p9)
+	formatLog = function(p2, p3, p4)
 		-- upvalues: currentTime (ref)
-		local formattedText = string.format("%s [%s] %s", p8.level:sub(1, 1), p8.loggerName, p7)
+		local formattedText = string.format("%s [%s] %s", p3.level:sub(1, 1), p3.loggerName, p2)
 		
-		if p9 then
+		if p4 then
 			formattedText = string.format("[%0.3f] %s", tick() - currentTime, formattedText)
 		end
 		return formattedText
 	end,
-	logToConsole = function(_, p10, p11)
+	logToConsole = function(_, p2, p3)
 		-- upvalues: levels (ref)
-		local level = p11.level
-		local formattedText = string.format("%s [%s] %s", p11.level:sub(1, 1), p11.loggerName, p10)
+		local level = p3.level
+		local formattedText = string.format("%s [%s] %s", p3.level:sub(1, 1), p3.loggerName, p2)
 		
 		if level == levels.Error or level == levels.Warning then
 			warn(formattedText)
@@ -100,28 +100,28 @@ return {
 		end
 		print(formattedText)
 	end,
-	setLogTags = function(value, p12)
+	setLogTags = function(value, p2)
 		-- upvalues: sharedSinkModule (ref), dashModule (ref), levels (ref), t (ref), createLoggerTree (ref)
-		local var22 = sharedSinkModule.new(p12)
+		local var7 = sharedSinkModule.new(p2)
 		
-		for i, v in dashModule.filter(dashModule.splitOn(value, "%s+"), function(p13)
-			return #p13 > 0
+		for i, v in dashModule.filter(dashModule.splitOn(value, "%s+"), function(p3)
+			return #p3 > 0
 		end) do
-			local var24, var25
-			local var23 = v:split(":")
+			local var8, var9
+			local var10 = v:split(":")
 			
-			if #var23 == 2 then
-				local unpacked, unpacked_1 = table.unpack(var23)
-				var24 = dashModule.trim(unpacked)
-				var25 = levels.fromString(unpacked_1)
+			if #var10 == 2 then
+				local unpacked, unpacked_1 = table.unpack(var10)
+				var8 = dashModule.trim(unpacked)
+				var9 = levels.fromString(unpacked_1)
 			else
 				warn("Invalid LogTree value: " .. v)
-				var24 = nil
-				var25 = nil
+				var8 = nil
+				var9 = nil
 			end
-			if var24 ~= nil then
-				local var28 = tostring(var24);
-				(t[var28] or createLoggerTree(var28)):addSink(var22:newSink(var25))
+			if var8 ~= nil then
+				local var11 = tostring(var8);
+				(t[var11] or createLoggerTree(var11)):addSink(var7:newSink(var9))
 			end
 		end
 	end

@@ -5,29 +5,29 @@ local _ = require(sduiCoreSystem.SduiBuilderTypes)
 
 local function createSduiServiceDependenciesStore()
 	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref)
-	local var5 = nil
+	local var1 = nil
 	
 	return {
-		getDependencies = function(p0)
-			-- upvalues: var5 (write), sduiLoggerModule (copy), sduiErrorsModule (copy)
-			if var5 == nil then
-				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.GetNilDependencies, { message = "Getting dependencies before they were set" }, p0)
+		getDependencies = function(p1)
+			-- upvalues: var1 (write), sduiLoggerModule (copy), sduiErrorsModule (copy)
+			if var1 == nil then
+				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.GetNilDependencies, { message = "Getting dependencies before they were set" }, p1)
 			end
-			return var5
+			return var1
 		end,
 		setDependencies = function(value)
-			-- upvalues: var5 (write)
-			var5 = value
+			-- upvalues: var1 (write)
+			var1 = value
 		end
 	}
 end
 
-local var4 = nil
+local var1 = nil
 
 return function()
-	-- upvalues: var4 (write), createSduiServiceDependenciesStore (ref)
-	if var4 == nil then
-		var4 = createSduiServiceDependenciesStore()
+	-- upvalues: var1 (write), createSduiServiceDependenciesStore (ref)
+	if var1 == nil then
+		var1 = createSduiServiceDependenciesStore()
 	end
-	return var4
+	return var1
 end

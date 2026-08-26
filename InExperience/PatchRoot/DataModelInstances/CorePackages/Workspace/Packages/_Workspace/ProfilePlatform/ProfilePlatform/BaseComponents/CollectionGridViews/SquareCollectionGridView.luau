@@ -13,80 +13,80 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local profileCollectionGridConfigModule = require(script.Parent.ProfileCollectionGridConfig)
 local fFlagProfilePlatformEnableImpressions = require(parent.SharedFlags).FFlagProfilePlatformEnableImpressions
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), fFlagProfilePlatformEnableImpressions (ref), useProfileAnalyticsContextModule (ref), useCollectionImpressionsSignal (ref), profileCollectionGridConfigModule (ref), useDynamicSizeMarginModule (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), collectionGrid (ref), screenSizeImpressionsTracker (ref), appPage (ref)
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = if fFlagProfilePlatformEnableImpressions then reactModule.useRef(nil) else nil
-	local var9 = if fFlagProfilePlatformEnableImpressions then useProfileAnalyticsContextModule() else nil
-	local var10 = nil
-	local var11 = nil
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = if fFlagProfilePlatformEnableImpressions then reactModule.useRef(nil) else nil
+	local var4 = if fFlagProfilePlatformEnableImpressions then useProfileAnalyticsContextModule() else nil
+	local var5 = nil
+	local var6 = nil
 	
 	if fFlagProfilePlatformEnableImpressions then
-		local var12, var13 = useCollectionImpressionsSignal(var9.scrollViewPositionChangedSignal)
-		var10 = var12
-		var11 = var13
+		local var7, var8 = useCollectionImpressionsSignal(var4.scrollViewPositionChangedSignal)
+		var5 = var7
+		var6 = var8
 	end
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var6 (ref), fFlagProfilePlatformEnableImpressions (copy), var8 (ref)
-		if p0.setForwardRef then
-			p0.setForwardRef(var6)
+		-- upvalues: p1 (ref), var1 (ref), fFlagProfilePlatformEnableImpressions (copy), var3 (ref)
+		if p1.setForwardRef then
+			p1.setForwardRef(var1)
 		end
 		if fFlagProfilePlatformEnableImpressions then
-			var8.current = var6
+			var3.current = var1
 		end
-	end, { var6 })
-	local maxNumRows = p0.maxNumRows or profileCollectionGridConfigModule.Constants.DEFAULT_MAX_NUM_ROWS
+	end, { var1 })
+	local maxNumRows = p1.maxNumRows or profileCollectionGridConfigModule.Constants.DEFAULT_MAX_NUM_ROWS
 	local t = { sideMargin = 0 }
-	local var16, var17 = useDynamicSizeMarginModule()
-	local var18 = useCollectionLayoutParams(collectionItemSize.Small, var6, false, t)
+	local var9, var10 = useDynamicSizeMarginModule()
+	local var11 = useCollectionLayoutParams(collectionItemSize.Small, var1, false, t)
 	
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
-		LayoutOrder = p0.layoutOrder,
-		[reactModule.Change.AbsoluteSize] = var17
+		LayoutOrder = p1.layoutOrder,
+		[reactModule.Change.AbsoluteSize] = var10
 	}, {
 		CollectionGrid = reactModule.createElement(collectionGrid, {
-			columnGap = var18.columnGap,
-			containerRef = var7,
-			getItemHeight = p0.getItemHeight,
-			headerButtonText = p0.headerButtonText,
-			hideHeaderButton = p0.hideHeaderButton,
-			items = p0.items,
-			LayoutOrder = p0.layoutOrder,
+			columnGap = var11.columnGap,
+			containerRef = var2,
+			getItemHeight = p1.getItemHeight,
+			headerButtonText = p1.headerButtonText,
+			hideHeaderButton = p1.hideHeaderButton,
+			items = p1.items,
+			LayoutOrder = p1.layoutOrder,
 			maxNumRows = maxNumRows,
-			numColumns = if p0.overrides then p0.overrides.numColumns else var18.numColumns,
-			onActivateHeader = p0.onActivateHeader,
-			onActivateInfoIcon = p0.onActivateInfoIcon,
-			onContainerSizeChanged = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then reactModule.useCallback(function(p1)
-				-- upvalues: p0 (ref), var11 (write)
-				if p0.onContainerSizeChanged then
-					p0.onContainerSizeChanged(p1)
+			numColumns = if p1.overrides then p1.overrides.numColumns else var11.numColumns,
+			onActivateHeader = p1.onActivateHeader,
+			onActivateInfoIcon = p1.onActivateInfoIcon,
+			onContainerSizeChanged = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then reactModule.useCallback(function(p2)
+				-- upvalues: p1 (ref), var6 (write)
+				if p1.onContainerSizeChanged then
+					p1.onContainerSizeChanged(p2)
 				end
-				var11()
-			end, { p0.onContainerSizeChanged, var11 }) else nil else p0.onContainerSizeChanged,
+				var6()
+			end, { p1.onContainerSizeChanged, var6 }) else nil else p1.onContainerSizeChanged,
 			onViewableItemsChanged = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then reactModule.useCallback(function(p2, p3)
-				-- upvalues: p0 (ref), var11 (write)
-				if p0.onViewableItemsChanged then
-					p0.onViewableItemsChanged(p2, p3)
+				-- upvalues: p1 (ref), var6 (write)
+				if p1.onViewableItemsChanged then
+					p1.onViewableItemsChanged(p2, p3)
 				end
-				var11()
-			end, { p0.onViewableItemsChanged, var11 }) else nil else p0.onViewableItemsChanged,
-			verticalScrollingFrameRef = p0.verticalScrollingFrameRef,
-			renderItem = p0.renderItem,
-			sideMargin = var16,
-			subtitle = p0.subtitle,
-			title = p0.title,
-			tooltipInfoText = p0.tooltipInfoText,
-			verticalPadding = var18.verticalPadding
+				var6()
+			end, { p1.onViewableItemsChanged, var6 }) else nil else p1.onViewableItemsChanged,
+			verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
+			renderItem = p1.renderItem,
+			sideMargin = var9,
+			subtitle = p1.subtitle,
+			title = p1.title,
+			tooltipInfoText = p1.tooltipInfoText,
+			verticalPadding = var11.verticalPadding
 		}),
-		ScreenSizeImpressionsTracker = if fFlagProfilePlatformEnableImpressions and p0.impressionsTag and p0.sendImpressions then reactModule.createElement(screenSizeImpressionsTracker, {
+		ScreenSizeImpressionsTracker = if fFlagProfilePlatformEnableImpressions and p1.impressionsTag and p1.sendImpressions then reactModule.createElement(screenSizeImpressionsTracker, {
 			pageContext = appPage.ProfilePlatform,
-			parentRef = var8,
-			impressionsTag = p0.impressionsTag,
-			scrollViewPositionChangedSignal = var10,
-			sendImpressions = p0.sendImpressions
+			parentRef = var3,
+			impressionsTag = p1.impressionsTag,
+			scrollViewPositionChangedSignal = var5,
+			sendImpressions = p1.sendImpressions
 		}) else nil
 	})
 end

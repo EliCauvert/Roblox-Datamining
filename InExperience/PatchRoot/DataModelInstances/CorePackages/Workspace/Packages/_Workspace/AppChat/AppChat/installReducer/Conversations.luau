@@ -54,161 +54,161 @@ local t = {
 	} else nil
 }
 
-local function markConversationAndMessagesAsRead(p0, p1)
+local function markConversationAndMessagesAsRead(p1, p2)
 	-- upvalues: immutable (ref)
-	local var40 = p0[p1]
+	local var1 = p1[p2]
 	
-	if var40 then
-		assert(var40, "FFlagLuauTinyControlFlowAnalysis")
-		local hasUnreadMessages = immutable.Set(immutable.Set(var40, "messages", var40.messages:Map(function(p2)
+	if var1 then
+		assert(var1, "FFlagLuauTinyControlFlowAnalysis")
+		local hasUnreadMessages = immutable.Set(immutable.Set(var1, "messages", var1.messages:Map(function(p3)
 			-- upvalues: immutable (copy)
-			return if p2.read then p2 else immutable.Set(p2, "read", true)
+			return if p3.read then p3 else immutable.Set(p3, "read", true)
 		end)), "hasUnreadMessages", false)
 		
-		return immutable.Set(p0, hasUnreadMessages.id, hasUnreadMessages)
+		return immutable.Set(p1, hasUnreadMessages.id, hasUnreadMessages)
 	end
 	warn("Conversation " .. p1 .. " not found in ReadConversation reducer")
 	
-	return p0
+	return p1
 end
 
-local function addMessagesToConversation(p3, p4, p5)
+local function addMessagesToConversation(p1, p2, p3)
 	-- upvalues: immutable (ref), orderedMap (ref)
-	local var42 = p3[p4]
+	local var1 = p1[p2]
 	
-	if not var42 then
-		return p3
+	if not var1 then
+		return p1
 	end
-	local var43 = nil
-	local previewMessageId = var42.previewMessageId
-	local var44 = 0
+	local var2 = nil
+	local previewMessageId = var1.previewMessageId
+	local var3 = 0
 	
-	if previewMessageId and var42.messages then
-		local var45 = var42.messages:Get(previewMessageId)
+	if previewMessageId and var1.messages then
+		local var4 = var1.messages:Get(previewMessageId)
 		
-		if var45 then
-			var44 = var45.sent:GetUnixTimestamp()
+		if var4 then
+			var3 = var4.sent:GetUnixTimestamp()
 		end
 	end
 	local id
-	for i = 1, #p5.messages do
-		local var46 = p5.messages[i]
-		id = var42.messages:Get(var46.id)
+	for i = 1, #p3.messages do
+		local var5 = p3.messages[i]
+		id = var1.messages:Get(var5.id)
 		
 		if not id then
-			if var46.isPreviewable and var44 < var46.sent:GetUnixTimestamp() then
-				previewMessageId = var46.id
-				var44 = var46.sent:GetUnixTimestamp()
+			if var5.isPreviewable and var3 < var5.sent:GetUnixTimestamp() then
+				previewMessageId = var5.id
+				var3 = var5.sent:GetUnixTimestamp()
 			end
-			var43 = var46
+			var2 = var5
 		end
-		if var43 then
-			var43.previousMessageId = id.id
+		if var2 then
+			var2.previousMessageId = id.id
 		end
-		if var46.previousMessageId == nil and id.previousMessageId ~= nil then
-			var46.previousMessageId = id.previousMessageId
+		if var5.previousMessageId == nil and id.previousMessageId ~= nil then
+			var5.previousMessageId = id.previousMessageId
 		end
-		var46.read = var46.read or id.read
+		var5.read = var5.read or id.read
 	end
-	var42 = immutable.JoinDictionaries(var42, { previewMessageId = previewMessageId })
-	local var48 = orderedMap.Insert(var42.messages, unpack(p5.messages))
+	var1 = immutable.JoinDictionaries(var1, { previewMessageId = previewMessageId })
+	local var6 = orderedMap.Insert(var1.messages, unpack(p3.messages))
 	
-	if p5.exclusiveStartMessageId and #p5.messages > 0 and var48:Get(p5.exclusiveStartMessageId) then
-		var48 = var48:Insert(immutable.Set(var48:Get(p5.exclusiveStartMessageId), "previousMessageId", p5.messages[1].id))
+	if p3.exclusiveStartMessageId and #p3.messages > 0 and var6:Get(p3.exclusiveStartMessageId) then
+		var6 = var6:Insert(immutable.Set(var6:Get(p3.exclusiveStartMessageId), "previousMessageId", p3.messages[1].id))
 	end
-	local var49 = previewMessageId and (var48 and var48:Get(previewMessageId))
-	local lastUpdated = var42.lastUpdated
+	local var7 = previewMessageId and (var6 and var6:Get(previewMessageId))
+	local lastUpdated = var1.lastUpdated
 	
-	if var49 then
-		lastUpdated = if (lastUpdated and lastUpdated:GetUnixTimestamp() or 0) < var49.sent:GetUnixTimestamp() then var49.sent else var42.lastUpdated
+	if var7 then
+		lastUpdated = if (lastUpdated and lastUpdated:GetUnixTimestamp() or 0) < var7.sent:GetUnixTimestamp() then var7.sent else var1.lastUpdated
 	end
-	id = immutable.Set(immutable.JoinDictionaries(var42, {
-		messages = var48,
+	id = immutable.Set(immutable.JoinDictionaries(var1, {
+		messages = var6,
 		lastUpdated = lastUpdated,
-		hasUnreadMessages = p5.shouldMarkConversationUnread or var42.hasUnreadMessages,
-		nextCursor = p5.nextCursor,
-		previousCursor = p5.previousCursor
+		hasUnreadMessages = p3.shouldMarkConversationUnread or var1.hasUnreadMessages,
+		nextCursor = p3.nextCursor,
+		previousCursor = p3.previousCursor
 	}), "usersTyping", {})
 	
-	return immutable.Set(p3, id.id, id)
+	return immutable.Set(p1, id.id, id)
 end
 
-local function updateMessageContentToDisplay(p6, p7, p8, p9)
+local function updateMessageContentToDisplay(p4, p5, p6, p7)
 	-- upvalues: immutable (ref)
-	local var50 = p6[p7]
+	local var8 = p4[p5]
 	
-	if var50 then
-		local var51 = var50.messages:Get(p8)
+	if var8 then
+		local var9 = var8.messages:Get(p6)
 		
-		if var51 then
-			local messages = immutable.Set(var50, "messages", var50.messages:Insert(immutable.Set(var51, "contentToDisplay", p9)))
+		if var9 then
+			local messages = immutable.Set(var8, "messages", var8.messages:Insert(immutable.Set(var9, "contentToDisplay", p7)))
 			
-			return immutable.Set(p6, messages.id, messages)
+			return immutable.Set(p4, messages.id, messages)
 		end
 	end
-	return p6
+	return p4
 end
 
-local function _(p10, p11)
+local function _(p4, p5)
 	-- upvalues: functional (ref), messageModelModule (ref)
-	if p11 then
-		local var53 = nil
+	if p5 then
+		local var8 = nil
 		
-		return functional.MapReverse(p11, function(p12)
-			-- upvalues: messageModelModule (copy), p10 (ref), var53 (write)
-			local var54 = messageModelModule.fromWeb(p12, p10, var53)
-			var53 = var54.id
+		return functional.MapReverse(p5, function(p6)
+			-- upvalues: messageModelModule (copy), p4 (ref), var8 (write)
+			local var9 = messageModelModule.fromWeb(p6, p4, var8)
+			var8 = var9.id
 			
-			return var54
+			return var9
 		end)
 	end
 	return {}
 end
 
-local function messagesFromResponseOfChannelsApi(p13, p14)
+local function messagesFromResponseOfChannelsApi(p4, p5)
 	-- upvalues: messageModelModule (ref)
-	if not p14 then
+	if not p5 then
 		return {}
 	end
 	local id = nil
 	local t = {}
 	
-	for i = #p14, 1, -1 do
-		local var56 = messageModelModule.fromChannelsApi(p14[i], p13, id)
+	for i = #p5, 1, -1 do
+		local var8 = messageModelModule.fromChannelsApi(p5[i], p4, id)
 		
-		if var56 then
-			table.insert(t, var56)
-			id = var56.id
+		if var8 then
+			table.insert(t, var8)
+			id = var8.id
 		end
 	end
 	return t
 end
 
-local _ = function(p15)
-	return p15.messages or {}
+local _ = function(p6)
+	return p6.messages or {}
 end
 
-local _ = function(p16)
+local _ = function(p6)
 	-- upvalues: playersService (ref)
-	return if if p16 then p16[#p16] else nil then true else false
+	return if if p6 then p6[#p6] else nil then true else false
 end
 
-local function getShouldMarkConversationUnread(p17, p18)
+local function getShouldMarkConversationUnread(p6, p7)
 	-- upvalues: playersService (ref)
-	if not p17 or not p17.messages or not p18 then
+	if not p6 or not p6.messages or not p7 then
 		return false
 	end
-	local var57 = p17.messages.values[p17.messages.keys[#p17.messages.keys]]
-	local var58 = var57 and (var57.sent and (var57.sent:GetUnixTimestamp() or 0))
+	local var9 = p6.messages.values[p6.messages.keys[#p6.messages.keys]]
+	local var10 = var9 and (var9.sent and (var9.sent:GetUnixTimestamp() or 0))
 	
-	for i = #p18, 1, -1 do
-		local var59 = p18[i]
+	for i = #p7, 1, -1 do
+		local var11 = p7[i]
 		
-		if not var59 then
+		if not var11 then
 			continue
 		end
-		if var59.sent:GetUnixTimestamp() > var58 then
-			if var59.senderTargetId == tostring(playersService.LocalPlayer.UserId) or not var59.isBadgeable then
+		if var11.sent:GetUnixTimestamp() > var10 then
+			if var11.senderTargetId == tostring(playersService.LocalPlayer.UserId) or not var11.isBadgeable then
 				continue
 			end
 			return true
@@ -219,477 +219,477 @@ local function getShouldMarkConversationUnread(p17, p18)
 end
 
 return roduxModule.createReducer({}, {
-	[receivedConversationModule.name] = function(p19, p20)
+	[receivedConversationModule.name] = function(p8, p9)
 		-- upvalues: updateConversationReducerModule (ref)
-		return updateConversationReducerModule(p19, p20.conversation)
+		return updateConversationReducerModule(p8, p9.conversation)
 	end,
-	[networkingChatModule.StartGroupConversation.Succeeded.name] = function(p21, p22)
+	[networkingChatModule.StartGroupConversation.Succeeded.name] = function(p8, p9)
 		-- upvalues: conversationModule (ref), updateConversationReducerModule (ref)
-		return updateConversationReducerModule(p21, conversationModule.fromWeb(p22.responseBody.conversation))
+		return updateConversationReducerModule(p8, conversationModule.fromWeb(p9.responseBody.conversation))
 	end,
-	[networkingChatModule.StartOneToOneConversation.Succeeded.name] = function(p23, p24)
+	[networkingChatModule.StartOneToOneConversation.Succeeded.name] = function(p8, p9)
 		-- upvalues: conversationModule (ref), updateConversationReducerModule (ref)
-		return updateConversationReducerModule(p23, conversationModule.fromWeb(p24.responseBody.conversation))
+		return updateConversationReducerModule(p8, conversationModule.fromWeb(p9.responseBody.conversation))
 	end,
-	[appChatNetworkingModule.rodux.CreateConversation.Succeeded.name] = function(p25, p26)
+	[appChatNetworkingModule.rodux.CreateConversation.Succeeded.name] = function(p8, p9)
 		-- upvalues: conversationChannelsModule (ref), updateConversationReducerModule (ref)
-		local responseBody = p26.responseBody
+		local responseBody = p9.responseBody
 		
 		if responseBody and responseBody.conversations and (responseBody.conversations[1] and responseBody.conversations[1].status == "success") then
-			p25 = updateConversationReducerModule(p25, conversationChannelsModule.fromChannelsApi(responseBody.conversations[1]))
+			p8 = updateConversationReducerModule(p8, conversationChannelsModule.fromChannelsApi(responseBody.conversations[1]))
 		end
-		return p25
+		return p8
 	end,
-	[appChatNetworkingModule.rodux.DuplicateConversation.Succeeded.name] = function(p27, p28)
+	[appChatNetworkingModule.rodux.DuplicateConversation.Succeeded.name] = function(p8, p9)
 		-- upvalues: conversationChannelsModule (ref), addConversationModule (ref)
-		local responseBody = p28.responseBody
+		local responseBody = p9.responseBody
 		
 		if responseBody and responseBody.conversations and responseBody.conversations[1] then
-			p27 = addConversationModule(p27, conversationChannelsModule.fromChannelsApi(responseBody.conversations[1]))
+			p8 = addConversationModule(p8, conversationChannelsModule.fromChannelsApi(responseBody.conversations[1]))
 		end
-		return p27
+		return p8
 	end,
-	[receivedMessages.name] = function(p29, p30)
+	[receivedMessages.name] = function(p8, p9)
 		-- upvalues: addMessagesToConversation (ref)
-		return addMessagesToConversation(p29, p30.conversationId, p30)
+		return addMessagesToConversation(p8, p9.conversationId, p9)
 	end,
-	[sendingMessage.name] = function(p31, p32)
+	[sendingMessage.name] = function(p8, p9)
 		-- upvalues: orderedMap (ref), immutable (ref)
-		local conversationId = p31[p32.conversationId]
+		local conversationId = p8[p9.conversationId]
 		
 		if conversationId then
-			local sendingMessages = immutable.Set(conversationId, "sendingMessages", orderedMap.Insert(conversationId.sendingMessages, p32.message))
-			p31 = immutable.Set(p31, sendingMessages.id, sendingMessages)
+			local sendingMessages = immutable.Set(conversationId, "sendingMessages", orderedMap.Insert(conversationId.sendingMessages, p9.message))
+			p8 = immutable.Set(p8, sendingMessages.id, sendingMessages)
 		end
-		return p31
+		return p8
 	end,
-	[sentMessage.name] = function(p33, p34)
+	[sentMessage.name] = function(p8, p9)
 		-- upvalues: orderedMap (ref), immutable (ref)
-		local conversationId = p33[p34.conversationId]
+		local conversationId = p8[p9.conversationId]
 		
 		if conversationId then
-			local sendingMessages = immutable.Set(conversationId, "sendingMessages", orderedMap.Delete(conversationId.sendingMessages, p34.messageId))
-			p33 = immutable.Set(p33, sendingMessages.id, sendingMessages)
+			local sendingMessages = immutable.Set(conversationId, "sendingMessages", orderedMap.Delete(conversationId.sendingMessages, p9.messageId))
+			p8 = immutable.Set(p8, sendingMessages.id, sendingMessages)
 		end
-		return p33
+		return p8
 	end,
-	[renamedGroupConversationModule.name] = function(p35, p36)
+	[renamedGroupConversationModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local conversationId = p36.conversationId
-		local var62 = p35[conversationId]
+		local conversationId = p9.conversationId
+		local var12 = p8[conversationId]
 		
-		if var62 then
-			p35 = immutable.Set(p35, conversationId, immutable.JoinDictionaries(var62, {
-				lastUpdated = p36.lastUpdated,
-				title = p36.title,
-				isDefaultTitle = p36.isDefaultTitle
+		if var12 then
+			p8 = immutable.Set(p8, conversationId, immutable.JoinDictionaries(var12, {
+				lastUpdated = p9.lastUpdated,
+				title = p9.title,
+				isDefaultTitle = p9.isDefaultTitle
 			}))
 		end
-		return p35
+		return p8
 	end,
-	[hasUnreadMessagesModule.name] = function(p37, p38)
+	[hasUnreadMessagesModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local id = p38.conversation and p37[p38.conversation.id]
+		local id = p9.conversation and p8[p9.conversation.id]
 		
 		if id then
-			p37 = immutable.Set(p37, p38.conversation.id, immutable.Set(id, "hasUnreadMessages", true))
+			p8 = immutable.Set(p8, p9.conversation.id, immutable.Set(id, "hasUnreadMessages", true))
 		end
-		return p37
+		return p8
 	end,
-	[changedParticipantsModule.name] = function(p39, p40)
+	[changedParticipantsModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local conversationId = p40.conversationId
-		local participants = p40.participants
-		local var64 = p39[conversationId]
+		local conversationId = p9.conversationId
+		local participants = p9.participants
+		local var12 = p8[conversationId]
 		
-		if var64 then
-			p39 = immutable.Set(p39, conversationId, immutable.JoinDictionaries(var64, {
+		if var12 then
+			p8 = immutable.Set(p8, conversationId, immutable.JoinDictionaries(var12, {
 				participants = participants,
-				lastUpdated = p40.lastUpdated,
-				title = p40.title
+				lastUpdated = p9.lastUpdated,
+				title = p9.title
 			}))
 		end
-		return p39
+		return p8
 	end,
-	[removedConversationModule.name] = function(p41, p42)
+	[removedConversationModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		return immutable.Set(p41, p42.conversationId, nil)
+		return immutable.Set(p8, p9.conversationId, nil)
 	end,
-	[setUserTypingModule.name] = function(p43, p44)
+	[setUserTypingModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local conversationId = p43[p44.conversationId]
+		local conversationId = p8[p9.conversationId]
 		
 		if conversationId then
-			local usersTyping = immutable.Set(conversationId, "usersTyping", immutable.Set(conversationId.usersTyping, p44.userId, p44.value))
-			p43 = immutable.Set(p43, usersTyping.id, usersTyping)
+			local usersTyping = immutable.Set(conversationId, "usersTyping", immutable.Set(conversationId.usersTyping, p9.userId, p9.value))
+			p8 = immutable.Set(p8, usersTyping.id, usersTyping)
 		end
-		return p43
+		return p8
 	end,
-	[fetchingOlderMessagesModule.name] = function(p45, p46)
+	[fetchingOlderMessagesModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local conversationId = p45[p46.conversationId]
+		local conversationId = p8[p9.conversationId]
 		
 		if conversationId then
-			local fetchingOlderMessages = immutable.Set(conversationId, "fetchingOlderMessages", p46.fetchingOlderMessages)
-			p45 = immutable.Set(p45, fetchingOlderMessages.id, fetchingOlderMessages)
+			local fetchingOlderMessages = immutable.Set(conversationId, "fetchingOlderMessages", p9.fetchingOlderMessages)
+			p8 = immutable.Set(p8, fetchingOlderMessages.id, fetchingOlderMessages)
 		end
-		return p45
+		return p8
 	end,
-	[fetchedOldestMessageModule.name] = function(p47, p48)
+	[fetchedOldestMessageModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local conversationId = p47[p48.conversationId]
+		local conversationId = p8[p9.conversationId]
 		
 		if conversationId then
-			local fetchedOldestMessage = immutable.Set(conversationId, "fetchedOldestMessage", p48.fetchedOldestMessage)
+			local fetchedOldestMessage = immutable.Set(conversationId, "fetchedOldestMessage", p9.fetchedOldestMessage)
 			
-			return immutable.Set(p47, fetchedOldestMessage.id, fetchedOldestMessage)
+			return immutable.Set(p8, fetchedOldestMessage.id, fetchedOldestMessage)
 		end
-		return p47
+		return p8
 	end,
-	[readConversationModule.name] = function(p49, p50)
+	[readConversationModule.name] = function(p8, p9)
 		-- upvalues: markConversationAndMessagesAsRead (ref)
-		return markConversationAndMessagesAsRead(p49, p50.conversationId)
+		return markConversationAndMessagesAsRead(p8, p9.conversationId)
 	end,
-	[messageModerated.name] = function(p51, p52)
+	[messageModerated.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local conversationId = p51[p52.conversationId]
+		local conversationId = p8[p9.conversationId]
 		
 		if conversationId then
-			local messageId = conversationId.sendingMessages:Get(p52.messageId)
+			local messageId = conversationId.sendingMessages:Get(p9.messageId)
 			
 			if messageId then
 				local sendingMessages = immutable.Set(conversationId, "sendingMessages", conversationId.sendingMessages:Insert(immutable.Set(messageId, "moderated", true)))
-				p51 = immutable.Set(p51, sendingMessages.id, sendingMessages)
+				p8 = immutable.Set(p8, sendingMessages.id, sendingMessages)
 			end
 		end
-		return p51
+		return p8
 	end,
-	[messageFailedToSend.name] = function(p53, p54)
+	[messageFailedToSend.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local conversationId = p53[p54.conversationId]
+		local conversationId = p8[p9.conversationId]
 		
 		if conversationId then
-			local messageId = conversationId.sendingMessages:Get(p54.messageId)
+			local messageId = conversationId.sendingMessages:Get(p9.messageId)
 			
 			if messageId then
 				local sendingMessages = immutable.Set(conversationId, "sendingMessages", conversationId.sendingMessages:Insert(immutable.Set(messageId, "failed", true)))
-				p53 = immutable.Set(p53, sendingMessages.id, sendingMessages)
+				p8 = immutable.Set(p8, sendingMessages.id, sendingMessages)
 			end
 		end
-		return p53
+		return p8
 	end,
-	[setConversationLoadingStatusModule.name] = function(p55, p56)
+	[setConversationLoadingStatusModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local conversationId = p55[p56.conversationId]
+		local conversationId = p8[p9.conversationId]
 		
 		if conversationId then
-			local initialLoadingStatus = immutable.Set(conversationId, "initialLoadingStatus", p56.value)
+			local initialLoadingStatus = immutable.Set(conversationId, "initialLoadingStatus", p9.value)
 			
-			return immutable.Set(p55, initialLoadingStatus.id, initialLoadingStatus)
+			return immutable.Set(p8, initialLoadingStatus.id, initialLoadingStatus)
 		end
-		return p55
+		return p8
 	end,
-	[setUserLeavingConversationModule.name] = function(p57, p58)
+	[setUserLeavingConversationModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local id = p57[p58.id]
+		local id = p8[p9.id]
 		
 		if id then
-			local isUserLeaving = immutable.Set(id, "isUserLeaving", p58.isLeaving)
-			p57 = immutable.Set(p57, isUserLeaving.id, isUserLeaving)
+			local isUserLeaving = immutable.Set(id, "isUserLeaving", p9.isLeaving)
+			p8 = immutable.Set(p8, isUserLeaving.id, isUserLeaving)
 		end
-		return p57
+		return p8
 	end,
-	[setPinnedGameForConversationModule.name] = function(p59, p60)
+	[setPinnedGameForConversationModule.name] = function(p8, p9)
 		-- upvalues: immutable (ref)
-		local conversationId = p60.conversationId
-		local var74 = p59[conversationId]
+		local conversationId = p9.conversationId
+		local var12 = p8[conversationId]
 		
-		if var74 then
-			p59 = immutable.Set(p59, conversationId, immutable.JoinDictionaries(var74, {
+		if var12 then
+			p8 = immutable.Set(p8, conversationId, immutable.JoinDictionaries(var12, {
 				pinnedGame = {
-					rootPlaceId = p60.rootPlaceId,
-					universeId = p60.universeId
+					rootPlaceId = p9.rootPlaceId,
+					universeId = p9.universeId
 				}
 			}))
 		end
-		return p59
+		return p8
 	end,
-	[networkingChatModule.GetUserConversations.Succeeded.name] = function(p61, p62)
+	[networkingChatModule.GetUserConversations.Succeeded.name] = function(p8, p9)
 		-- upvalues: conversationModule (ref), updateConversationReducerModule (ref)
-		for i, v in ipairs(p62.responseBody) do
-			p61 = updateConversationReducerModule(p61, conversationModule.fromWeb(v))
+		for i, v in ipairs(p9.responseBody) do
+			p8 = updateConversationReducerModule(p8, conversationModule.fromWeb(v))
 		end
-		return p61
+		return p8
 	end,
-	[appChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = function(p63, p64)
+	[appChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = function(p10, p11)
 		-- upvalues: conversationChannelsModule (ref), updateConversationReducerModule (ref), luauPolyfillModule (ref), messageModelModule (ref), addMessagesToConversation (ref)
-		local responseBody = p64.responseBody
+		local responseBody = p11.responseBody
 		
 		if responseBody and responseBody.conversations then
 			for i, v in responseBody.conversations do
-				local var75 = conversationChannelsModule.fromChannelsApi(v)
-				p63 = updateConversationReducerModule(p63, var75)
+				local var12 = conversationChannelsModule.fromChannelsApi(v)
+				p10 = updateConversationReducerModule(p10, var12)
 				local messages = v.messages or {}
 				
 				if messages and #messages > 0 then
-					p63 = addMessagesToConversation(p63, var75.id, {
-						messages = luauPolyfillModule.Array.map(messages, function(p65)
-							-- upvalues: messageModelModule (copy), var75 (ref)
-							return messageModelModule.fromChannelsApi(p65, var75.id)
+					p10 = addMessagesToConversation(p10, var12.id, {
+						messages = luauPolyfillModule.Array.map(messages, function(p12)
+							-- upvalues: messageModelModule (copy), var12 (ref)
+							return messageModelModule.fromChannelsApi(p12, var12.id)
 						end)
 					})
 				end
 			end
 		end
-		return p63
+		return p10
 	end,
-	[networkingChatModule.GetConversations.Succeeded.name] = function(p66, p67)
+	[networkingChatModule.GetConversations.Succeeded.name] = function(p12, p13)
 		-- upvalues: conversationModule (ref), updateConversationReducerModule (ref)
-		for i, v in ipairs(p67.responseBody) do
-			p66 = updateConversationReducerModule(p66, conversationModule.fromWeb(v))
+		for i, v in ipairs(p13.responseBody) do
+			p12 = updateConversationReducerModule(p12, conversationModule.fromWeb(v))
 		end
-		return p66
+		return p12
 	end,
-	[appChatNetworkingModule.rodux.GetOlderMessages.Succeeded.name] = function(p68, p69)
+	[appChatNetworkingModule.rodux.GetOlderMessages.Succeeded.name] = function(p14, p15)
 		-- upvalues: messagesFromResponseOfChannelsApi (ref), addMessagesToConversation (ref), immutable (ref)
-		local conversationId = p69.queryArgs.conversation_id
-		local responseBody = p69.responseBody
+		local conversationId = p15.queryArgs.conversation_id
+		local responseBody = p15.responseBody
 		local _ = {}
-		local var77 = p68[conversationId]
+		local var13 = p14[conversationId]
 		
-		if not var77 then
-			return p68
+		if not var13 then
+			return p14
 		end
-		assert(var77, "FFlagLuauTinyControlFlowAnalysis")
-		local previousCursor = var77.previousCursor or nil
-		local nextCursor = var77.nextCursor or nil
+		assert(var13, "FFlagLuauTinyControlFlowAnalysis")
+		local previousCursor = var13.previousCursor or nil
+		local nextCursor = var13.nextCursor or nil
 		
 		if not responseBody then
-			return p68
+			return p14
 		end
-		local var80 = messagesFromResponseOfChannelsApi(conversationId, responseBody.messages)
-		local var81 = if responseBody.next_cursor == "" then nil else responseBody.next_cursor
+		local var14 = messagesFromResponseOfChannelsApi(conversationId, responseBody.messages)
+		local var15 = if responseBody.next_cursor == "" then nil else responseBody.next_cursor
 		
-		if var81 then
-			nextCursor = var81
+		if var15 then
+			nextCursor = var15
 		end
 		if previousCursor == nil then
 			previousCursor = if responseBody.previous_cursor == "" then nil else responseBody.previous_cursor
 		end
-		p68 = addMessagesToConversation(p68, conversationId, {
-			messages = var80,
+		p14 = addMessagesToConversation(p14, conversationId, {
+			messages = var14,
 			nextCursor = nextCursor,
 			previousCursor = previousCursor
 		})
 		
-		if not var81 then
-			local var82 = p68[conversationId]
+		if not var15 then
+			local var16 = p14[conversationId]
 			
-			if var82 then
-				local fetchedOldestMessage = immutable.Set(var82, "fetchedOldestMessage", true)
-				p68 = immutable.Set(p68, fetchedOldestMessage.id, fetchedOldestMessage)
+			if var16 then
+				local fetchedOldestMessage = immutable.Set(var16, "fetchedOldestMessage", true)
+				p14 = immutable.Set(p14, fetchedOldestMessage.id, fetchedOldestMessage)
 			end
 		end
-		return p68
+		return p14
 	end,
-	[appChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p70, p71)
+	[appChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p14, p15)
 		-- upvalues: messagesFromResponseOfChannelsApi (ref), getShouldMarkConversationUnread (ref), addMessagesToConversation (ref)
-		local conversationId = p71.queryArgs.conversation_id
-		local responseBody = p71.responseBody
-		local var84 = p70[conversationId]
+		local conversationId = p15.queryArgs.conversation_id
+		local responseBody = p15.responseBody
+		local var13 = p14[conversationId]
 		
-		if not var84 then
-			return p70
+		if not var13 then
+			return p14
 		end
-		assert(var84, "FFlagLuauTinyControlFlowAnalysis")
-		local previousCursor = var84.previousCursor or nil
-		local nextCursor = var84.nextCursor or nil
+		assert(var13, "FFlagLuauTinyControlFlowAnalysis")
+		local previousCursor = var13.previousCursor or nil
+		local nextCursor = var13.nextCursor or nil
 		
 		if not responseBody then
-			return p70
+			return p14
 		end
-		local var87 = messagesFromResponseOfChannelsApi(conversationId, responseBody.messages)
+		local var14 = messagesFromResponseOfChannelsApi(conversationId, responseBody.messages)
 		
 		if nextCursor == nil then
 			nextCursor = if responseBody.next_cursor == "" then nil else responseBody.next_cursor
 		end
-		local var88 = if responseBody.previous_cursor == "" then nil else responseBody.previous_cursor
+		local var15 = if responseBody.previous_cursor == "" then nil else responseBody.previous_cursor
 		
-		if var88 then
-			previousCursor = var88
+		if var15 then
+			previousCursor = var15
 		end
-		return addMessagesToConversation(p70, conversationId, {
-			messages = var87,
+		return addMessagesToConversation(p14, conversationId, {
+			messages = var14,
 			nextCursor = nextCursor,
 			previousCursor = previousCursor,
-			shouldMarkConversationUnread = getShouldMarkConversationUnread(var84, var87)
+			shouldMarkConversationUnread = getShouldMarkConversationUnread(var13, var14)
 		})
 	end,
-	[networkingChatModule.GetMessages.Succeeded.name] = function(p72, p73)
+	[networkingChatModule.GetMessages.Succeeded.name] = function(p14, p15)
 		-- upvalues: functional (ref), messageModelModule (ref), playersService (ref), addMessagesToConversation (ref), immutable (ref)
 		local t, pageSize
-		local conversationId = p73.queryArgs.conversationId
-		local responseBody = p73.responseBody
+		local conversationId = p15.queryArgs.conversationId
+		local responseBody = p15.responseBody
 		
 		if responseBody then
 			pageSize = nil
-			t = functional.MapReverse(responseBody, function(p74)
+			t = functional.MapReverse(responseBody, function(p16)
 				-- upvalues: messageModelModule (copy), conversationId (ref), pageSize (write)
-				local var54 = messageModelModule.fromWeb(p74, conversationId, pageSize)
-				var53 = var54.id
+				local var13 = messageModelModule.fromWeb(p16, conversationId, pageSize)
+				var53 = var13.id
 				
-				return var54
+				return var13
 			end)
 		else
 			t = {}
 		end
-		p72 = addMessagesToConversation(p72, conversationId, {
+		p14 = addMessagesToConversation(p14, conversationId, {
 			messages = t,
 			shouldMarkConversationUnread = not (if if t then t[#t] else nil then true else false)
 		})
-		pageSize = p73.queryArgs.pageSize
+		pageSize = p15.queryArgs.pageSize
 		
 		if pageSize and #t < pageSize then
-			local var90 = p72[conversationId]
+			local var13 = p14[conversationId]
 			
-			if not var90 then
-				return p72
+			if not var13 then
+				return p14
 			end
-			assert(var90, "FFlagLuauTinyControlFlowAnalysis")
-			local var91 = p72[conversationId]
+			assert(var13, "FFlagLuauTinyControlFlowAnalysis")
+			local var14 = p14[conversationId]
 			
-			if var91 then
-				local fetchedOldestMessage = immutable.Set(var91, "fetchedOldestMessage", true)
-				p72 = immutable.Set(p72, fetchedOldestMessage.id, fetchedOldestMessage)
+			if var14 then
+				local fetchedOldestMessage = immutable.Set(var14, "fetchedOldestMessage", true)
+				p14 = immutable.Set(p14, fetchedOldestMessage.id, fetchedOldestMessage)
 			end
 		end
-		return p72
+		return p14
 	end,
-	[networkingChatModule.GetLatestMessages.Succeeded.name] = function(p75, p76)
+	[networkingChatModule.GetLatestMessages.Succeeded.name] = function(p14, p15)
 		-- upvalues: functional (ref), messageModelModule (ref), addMessagesToConversation (ref)
-		for i, v in ipairs(p76.responseBody) do
+		for i, v in ipairs(p15.responseBody) do
 			local t
-			local var93 = tostring(v.conversationId)
+			local var13 = tostring(v.conversationId)
 			local chatMessages = v.chatMessages
 			
 			if chatMessages then
-				local var95 = nil
-				t = functional.MapReverse(chatMessages, function(p77)
-					-- upvalues: messageModelModule (copy), var93 (ref), var95 (write)
-					local var54 = messageModelModule.fromWeb(p77, var93, var95)
-					var53 = var54.id
+				local var14 = nil
+				t = functional.MapReverse(chatMessages, function(p16)
+					-- upvalues: messageModelModule (copy), var13 (ref), var14 (write)
+					local var15 = messageModelModule.fromWeb(p16, var13, var14)
+					var53 = var15.id
 					
-					return var54
+					return var15
 				end)
 			else
 				t = {}
 			end
-			p75 = addMessagesToConversation(p75, var93, { messages = t })
+			p14 = addMessagesToConversation(p14, var13, { messages = t })
 		end
-		return p75
+		return p14
 	end,
-	[appChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = function(p78, p79)
+	[appChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = function(p16, p17)
 		-- upvalues: conversationChannelsModule (ref), updateConversationReducerModule (ref), luauPolyfillModule (ref), messageModelModule (ref), addMessagesToConversation (ref)
-		local var96 = p79.responseBody.conversations[1]
+		local var15 = p17.responseBody.conversations[1]
 		
-		if not var96 then
-			return p78
+		if not var15 then
+			return p16
 		end
-		local var97 = conversationChannelsModule.fromChannelsApi(var96)
-		p78 = updateConversationReducerModule(p78, var97)
-		local messages = var96.messages or {}
+		local var16 = conversationChannelsModule.fromChannelsApi(var15)
+		p16 = updateConversationReducerModule(p16, var16)
+		local messages = var15.messages or {}
 		
 		if messages and #messages > 0 then
-			p78 = addMessagesToConversation(p78, var97.id, {
-				messages = luauPolyfillModule.Array.map(messages, function(p80)
-					-- upvalues: messageModelModule (copy), var97 (ref)
-					return messageModelModule.fromChannelsApi(p80, var97.id)
+			p16 = addMessagesToConversation(p16, var16.id, {
+				messages = luauPolyfillModule.Array.map(messages, function(p18)
+					-- upvalues: messageModelModule (copy), var16 (ref)
+					return messageModelModule.fromChannelsApi(p18, var16.id)
 				end)
 			})
 		end
-		return p78
+		return p16
 	end,
-	[appChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = function(p81, p82)
+	[appChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = function(p16, p17)
 		-- upvalues: conversationChannelsModule (ref), updateConversationReducerModule (ref), luauPolyfillModule (ref), messageModelModule (ref), addMessagesToConversation (ref)
-		local responseBody = p82.responseBody
+		local responseBody = p17.responseBody
 		
 		if not responseBody or not responseBody.conversations then
-			return p81
+			return p16
 		end
 		for i, v in responseBody.conversations do
-			local var99 = conversationChannelsModule.fromChannelsApi(v)
-			p81 = updateConversationReducerModule(p81, var99)
+			local var15 = conversationChannelsModule.fromChannelsApi(v)
+			p16 = updateConversationReducerModule(p16, var15)
 			local messages = v.messages or {}
 			
 			if messages and #messages > 0 then
-				p81 = addMessagesToConversation(p81, var99.id, {
-					messages = luauPolyfillModule.Array.map(messages, function(p83)
-						-- upvalues: messageModelModule (copy), var99 (ref)
-						return messageModelModule.fromChannelsApi(p83, var99.id)
+				p16 = addMessagesToConversation(p16, var15.id, {
+					messages = luauPolyfillModule.Array.map(messages, function(p18)
+						-- upvalues: messageModelModule (copy), var15 (ref)
+						return messageModelModule.fromChannelsApi(p18, var15.id)
 					end)
 				})
 			end
 		end
-		return p81
+		return p16
 	end,
-	[appChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p84, p85)
+	[appChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p18, p19)
 		-- upvalues: markConversationAndMessagesAsRead (ref)
-		return markConversationAndMessagesAsRead(p84, p85.postBody.conversation_ids[1])
+		return markConversationAndMessagesAsRead(p18, p19.postBody.conversation_ids[1])
 	end,
-	[networkingChatModule.MarkAsRead.Succeeded.name] = function(p86, p87)
+	[networkingChatModule.MarkAsRead.Succeeded.name] = function(p18, p19)
 		-- upvalues: markConversationAndMessagesAsRead (ref)
-		return markConversationAndMessagesAsRead(p86, p87.postBody.conversationId)
+		return markConversationAndMessagesAsRead(p18, p19.postBody.conversationId)
 	end,
-	[appChatNetworkingModule.rodux.TranslateUserMessage.Succeeded.name] = if getFFlagAppChatEnableManualTranslationModule() then function(p88, p89)
+	[appChatNetworkingModule.rodux.TranslateUserMessage.Succeeded.name] = if getFFlagAppChatEnableManualTranslationModule() then function(p18, p19)
 		-- upvalues: updateMessageContentToDisplay (ref)
-		return if p89.postBody.conversation_id and p89.postBody.message_id then updateMessageContentToDisplay(p88, p89.postBody.conversation_id, p89.postBody.message_id, p89.responseBody.content_to_display) else p88
+		return if p19.postBody.conversation_id and p19.postBody.message_id then updateMessageContentToDisplay(p18, p19.postBody.conversation_id, p19.postBody.message_id, p19.responseBody.content_to_display) else p18
 	end else nil,
 	[receivedChannelsMigrationConflictModule.name] = function(_, _)
 		return {}
 	end,
-	[friendConversationCreatedModule.name] = function(p90, p91)
+	[friendConversationCreatedModule.name] = function(p18, p19)
 		-- upvalues: immutable (ref)
-		return if p90[p91.oldFriendConversationId] then immutable.Set(p90, p91.oldFriendConversationId, nil) else p90
+		return if p18[p19.oldFriendConversationId] then immutable.Set(p18, p19.oldFriendConversationId, nil) else p18
 	end,
-	[friendshipDestroyedModule.name] = function(p92, p93)
+	[friendshipDestroyedModule.name] = function(p18, p19)
 		-- upvalues: conversationChannelsModule (ref), immutable (ref)
-		local var101 = if p93.userId1 ~= "localUserId" then if p93.userId2 ~= "localUserId" then nil else p93.userId2 else p93.userId1
+		local var16 = if p19.userId1 ~= "localUserId" then if p19.userId2 ~= "localUserId" then nil else p19.userId2 else p19.userId1
 		
-		if not var101 then
-			return p92
+		if not var16 then
+			return p18
 		end
-		assert(var101, "FFlagLuauTinyControlFlowAnalysis")
-		local friendConversationId = conversationChannelsModule.getFriendConversationId({ var101 })
+		assert(var16, "FFlagLuauTinyControlFlowAnalysis")
+		local friendConversationId = conversationChannelsModule.getFriendConversationId({ var16 })
 		
-		return if p92[friendConversationId] then immutable.Set(p92, friendConversationId, nil) else p92
+		return if p18[friendConversationId] then immutable.Set(p18, friendConversationId, nil) else p18
 	end,
-	[networkingBlockingModule.BlockUserById.Succeeded.name] = if getFFlagAppChatPCMFixBlocking() then function(p94, p95)
+	[networkingBlockingModule.BlockUserById.Succeeded.name] = if getFFlagAppChatPCMFixBlocking() then function(p18, p19)
 		-- upvalues: getOneToOneConversationIdFromFriendIdModule (ref), immutable (ref), conversationChannelsModule (ref)
-		local var103 = tostring(p95.namedIds.users)
+		local var16 = tostring(p19.namedIds.users)
 		
-		if not var103 then
-			return p94
+		if not var16 then
+			return p18
 		end
-		local var104 = getOneToOneConversationIdFromFriendIdModule(p94, var103)
-		local var105 = p94
+		local var17 = getOneToOneConversationIdFromFriendIdModule(p18, var16)
+		local var18 = p18
 		
-		if var104 and p94[var104] then
-			var105 = immutable.Set(var105, var104, nil)
+		if var17 and p18[var17] then
+			var18 = immutable.Set(var18, var17, nil)
 		end
-		local friendConversationId = conversationChannelsModule.getFriendConversationId({ var103 })
+		local friendConversationId = conversationChannelsModule.getFriendConversationId({ var16 })
 		
-		if friendConversationId and p94[friendConversationId] then
-			var105 = immutable.Set(p94, friendConversationId, nil)
+		if friendConversationId and p18[friendConversationId] then
+			var18 = immutable.Set(p18, friendConversationId, nil)
 		end
-		return var105
+		return var18
 	end else nil,
-	[reloadedMessagesForConversationsModule.name] = function(p96, p97)
+	[reloadedMessagesForConversationsModule.name] = function(p18, p19)
 		-- upvalues: cryoModule (ref), conversationChannelsModule (ref)
-		local var107 = p96
+		local var16 = p18
 		
-		for i, v in p97.conversationIds do
-			var107 = cryoModule.Dictionary.join(var107, {
-				[v] = cryoModule.Dictionary.join(var107[v], {
+		for i, v in p19.conversationIds do
+			var16 = cryoModule.Dictionary.join(var16, {
+				[v] = cryoModule.Dictionary.join(var16[v], {
 					fetchedOldestMessage = false,
 					messages = conversationChannelsModule.getEmptyMessages(),
 					sendingMessages = conversationChannelsModule.getEmptySendingMessages(),
@@ -698,30 +698,30 @@ return roduxModule.createReducer({}, {
 				})
 			})
 		end
-		return var107
+		return var16
 	end,
-	[conversationModerationTypeChangedModule.name] = if fFlagAppChatEnableDoubleOptIn then function(p98, p99)
+	[conversationModerationTypeChangedModule.name] = if fFlagAppChatEnableDoubleOptIn then function(p20, p21)
 		-- upvalues: immutable (ref)
-		local conversationId = p99.conversationId
-		local var108 = p98[conversationId]
+		local conversationId = p21.conversationId
+		local var17 = p20[conversationId]
 		
-		return if var108 then immutable.Set(p98, conversationId, immutable.Set(var108, "moderationType", p99.moderationType)) else p98
+		return if var17 then immutable.Set(p20, conversationId, immutable.Set(var17, "moderationType", p21.moderationType)) else p20
 	end else nil,
-	[appChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p100, p101)
+	[appChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p20, p21)
 		-- upvalues: constantsModule (ref), t (ref), conversationChannelsModule (ref), immutable (ref)
-		local postBody = p101.postBody
+		local postBody = p21.postBody
 		
 		if postBody.action_type ~= constantsModule.ModalAction.Accept then
-			return p100
+			return p20
 		end
 		local modalVariant = t[postBody.modal_variant]
 		
 		if not modalVariant then
-			return p100
+			return p20
 		end
 		local conversationId = postBody.conversation_id or conversationChannelsModule.getFriendConversationId({ postBody.friend_id })
-		local var110 = conversationId and p100[conversationId]
+		local var17 = conversationId and p20[conversationId]
 		
-		return if var110 then immutable.Set(p100, conversationId, immutable.Set(var110, modalVariant.field, modalVariant.value)) else p100
+		return if var17 then immutable.Set(p20, conversationId, immutable.Set(var17, modalVariant.field, modalVariant.value)) else p20
 	end
 })

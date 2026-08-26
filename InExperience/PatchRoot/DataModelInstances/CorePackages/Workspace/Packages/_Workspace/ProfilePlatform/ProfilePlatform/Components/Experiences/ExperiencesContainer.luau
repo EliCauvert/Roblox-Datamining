@@ -16,56 +16,56 @@ local myRoduxNetworkingImplModule = require(profilePlatform.Networking.myRoduxNe
 local fFlagEnableCommunityProfileLoadingSkeletonsModule = require(profilePlatform.Flags.FFlagEnableCommunityProfileLoadingSkeletons)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), fFlagEnableCommunityProfileLoadingSkeletonsModule (ref), t (ref), cryoModule (ref), useDispatch (ref), networkingGamesModule (ref), fetchGameVotes (ref), myRoduxNetworkingImplModule (ref), useSelector (ref), getDeepValue (ref), experiencesSkeletonModule (ref), experiencesModule (ref)
-	local var12 = useProfileJsonComponentModule(enumsModule.Components.Experiences)
-	local var13, var14 = reactModule.useState(if fFlagEnableCommunityProfileLoadingSkeletonsModule then true else false)
-	local experiences = var12.experiences or t
-	local var16 = reactModule.useMemo(function()
+	local var1 = useProfileJsonComponentModule(enumsModule.Components.Experiences)
+	local var2, var3 = reactModule.useState(if fFlagEnableCommunityProfileLoadingSkeletonsModule then true else false)
+	local experiences = var1.experiences or t
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), experiences (ref)
-		return cryoModule.List.map(experiences, function(p1, _)
-			return tostring(p1.universeId)
+		return cryoModule.List.map(experiences, function(p2, _)
+			return tostring(p2.universeId)
 		end)
 	end, { experiences })
-	local var17 = useDispatch()
+	local var5 = useDispatch()
 	reactModule.useEffect(function()
-		-- upvalues: cryoModule (copy), var16 (ref), var17 (ref), networkingGamesModule (copy), fFlagEnableCommunityProfileLoadingSkeletonsModule (copy), var14 (ref), fetchGameVotes (copy), myRoduxNetworkingImplModule (copy)
-		if cryoModule.isEmpty(var16) then
+		-- upvalues: cryoModule (copy), var4 (ref), var5 (ref), networkingGamesModule (copy), fFlagEnableCommunityProfileLoadingSkeletonsModule (copy), var3 (ref), fetchGameVotes (copy), myRoduxNetworkingImplModule (copy)
+		if cryoModule.isEmpty(var4) then
 			if fFlagEnableCommunityProfileLoadingSkeletonsModule then
-				var14(false)
+				var3(false)
 			end
 			return
 		else
-			var17(networkingGamesModule.GetExperiencesDetails.API(var16)):catch(function(_) end):finally(function()
-				-- upvalues: fFlagEnableCommunityProfileLoadingSkeletonsModule (copy), var14 (copy)
+			var5(networkingGamesModule.GetExperiencesDetails.API(var4)):catch(function(_) end):finally(function()
+				-- upvalues: fFlagEnableCommunityProfileLoadingSkeletonsModule (copy), var3 (copy)
 				if fFlagEnableCommunityProfileLoadingSkeletonsModule then
-					var14(false)
+					var3(false)
 				end
 			end)
 			
-			for i, v in var16 do
-				var17(fetchGameVotes.Fetch(myRoduxNetworkingImplModule, v)):catch(function(_) end)
+			for i, v in var4 do
+				var5(fetchGameVotes.Fetch(myRoduxNetworkingImplModule, v)):catch(function(_) end)
 			end
 		end
-	end, { var16 })
-	local var18 = useSelector(function(p2)
+	end, { var4 })
+	local var6 = useSelector(function(p2)
 		-- upvalues: getDeepValue (copy), t (copy)
 		return getDeepValue(p2, "ProfilePlatform.Games.byGameId") or t
 	end)
-	local var19 = reactModule.useMemo(function()
-		-- upvalues: var16 (ref), var18 (ref)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), var6 (ref)
 		local t = {}
 		
-		for i, v in var16 do
-			if var18[v] then
-				table.insert(t, var18[v])
+		for i, v in var4 do
+			if var6[v] then
+				table.insert(t, var6[v])
 			end
 		end
 		return t
-	end, { var16, var18 })
+	end, { var4, var6 })
 	
-	return if fFlagEnableCommunityProfileLoadingSkeletonsModule and var13 then reactModule.createElement(experiencesSkeletonModule, {
-		layoutOrder = p0.layoutOrder,
+	return if fFlagEnableCommunityProfileLoadingSkeletonsModule and var2 then reactModule.createElement(experiencesSkeletonModule, {
+		layoutOrder = p1.layoutOrder,
 		numSkeletons = #experiences
-	}) elseif #var19 == 0 then nil else reactModule.createElement(experiencesModule, { layoutOrder = p0.layoutOrder, experienceDetails = var19 })
+	}) elseif #var7 == 0 then nil else reactModule.createElement(experiencesModule, { layoutOrder = p1.layoutOrder, experienceDetails = var7 })
 end

@@ -16,58 +16,58 @@ local t = {
 	isDisabled = false,
 	layout = { SortOrder = Enum.SortOrder.LayoutOrder }
 }
-local var11 = false
+local var1 = false
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), flagsModule (ref), reactModule (ref), var11 (write), loggerModule (ref), withGuiObjectPropsModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
-	local var16
-	local var12 = withDefaultsModule(p0, t)
-	local var13 = useStyleTagsModule(useDefaultTagsModule(var12.tag, if var12.backgroundStyle ~= nil then "gui-object-defaults" else "gui-object-defaults x-default-transparency"))
-	local var14 = if var12.onStateChanged == nil then if var12.onActivated == nil then var12.onSecondaryActivated ~= nil else true else true
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
+	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), flagsModule (ref), reactModule (ref), var1 (write), loggerModule (ref), withGuiObjectPropsModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
+	local var2
+	local var3 = withDefaultsModule(p1, t)
+	local var4 = useStyleTagsModule(useDefaultTagsModule(var3.tag, if var3.backgroundStyle ~= nil then "gui-object-defaults" else "gui-object-defaults x-default-transparency"))
+	local var5 = if var3.onStateChanged == nil then if var3.onActivated == nil then var3.onSecondaryActivated ~= nil else true else true
 	local _ = nil
-	local var15 = if flagsModule.FoundationViewMemoizationChanges then var12.GroupTransparency ~= nil and (if type(var12.GroupTransparency) ~= "table" then var12.GroupTransparency > 0 else true) else reactModule.useMemo(function()
-		-- upvalues: var12 (ref)
-		return if var12.GroupTransparency == nil then false else type(var12.GroupTransparency) == "table" or var12.GroupTransparency > 0
-	end, { var12.GroupTransparency })
+	local var6 = if flagsModule.FoundationViewMemoizationChanges then var3.GroupTransparency ~= nil and (if type(var3.GroupTransparency) ~= "table" then var3.GroupTransparency > 0 else true) else reactModule.useMemo(function()
+		-- upvalues: var3 (ref)
+		return if var3.GroupTransparency == nil then false else type(var3.GroupTransparency) == "table" or var3.GroupTransparency > 0
+	end, { var3.GroupTransparency })
 	local _ = nil
 	
 	if flagsModule.FoundationViewMemoizationChanges then
-		var16 = if var15 then "CanvasGroup" elseif var14 then "ImageButton" else "Frame"
+		var2 = if var6 then "CanvasGroup" elseif var5 then "ImageButton" else "Frame"
 		
-		if var15 and var14 and (not var12.isDisabled and not var11) then
-			var11 = true
+		if var6 and var5 and (not var3.isDisabled and not var1) then
+			var1 = true
 			loggerModule:warning("Some state changes are not supported with GroupTransparency")
 		end
 	else
-		var16 = reactModule.useMemo(function()
-			-- upvalues: var15 (write), var14 (ref), var12 (ref), loggerModule (copy)
-			if var15 then
-				if var14 and not var12.isDisabled then
+		var2 = reactModule.useMemo(function()
+			-- upvalues: var6 (write), var5 (ref), var3 (ref), loggerModule (copy)
+			if var6 then
+				if var5 and not var3.isDisabled then
 					loggerModule:warning("Some state changes are not supported with GroupTransparency")
 				end
 				return "CanvasGroup"
 			else
-				return if var14 then "ImageButton" else "Frame"
+				return if var5 then "ImageButton" else "Frame"
 			end
-		end, { var15, var14 })
+		end, { var6, var5 })
 	end
-	local var17 = withGuiObjectPropsModule(var12, {
-		AutoButtonColor = if var16 == "ImageButton" then false else nil,
-		GroupTransparency = if var15 then var12.GroupTransparency else nil,
-		ref = p1,
-		[reactModule.Tag] = var13
+	local var7 = withGuiObjectPropsModule(var3, {
+		AutoButtonColor = if var2 == "ImageButton" then false else nil,
+		GroupTransparency = if var6 then var3.GroupTransparency else nil,
+		ref = p2,
+		[reactModule.Tag] = var4
 	})
-	local var18 = var16
+	local var8 = var2
 	
-	if var14 then
-		var18 = interactableModule
-		var17.component = var16
-		var17.onActivated = var12.onActivated
-		var17.onSecondaryActivated = var12.onSecondaryActivated
-		var17.onStateChanged = var12.onStateChanged
-		var17.stateLayer = var12.stateLayer
-		var17.isDisabled = var12.isDisabled
-		var17.cursor = var12.cursor
+	if var5 then
+		var8 = interactableModule
+		var7.component = var2
+		var7.onActivated = var3.onActivated
+		var7.onSecondaryActivated = var3.onSecondaryActivated
+		var7.onStateChanged = var3.onStateChanged
+		var7.stateLayer = var3.stateLayer
+		var7.isDisabled = var3.isDisabled
+		var7.cursor = var3.cursor
 	end
-	return reactModule.createElement(var18, var17, guiObjectChildrenModule(var12))
+	return reactModule.createElement(var8, var7, guiObjectChildrenModule(var3))
 end))

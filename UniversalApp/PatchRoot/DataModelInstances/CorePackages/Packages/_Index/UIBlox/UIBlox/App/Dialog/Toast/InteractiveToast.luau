@@ -45,43 +45,43 @@ interactiveToast.defaultProps = {
 	size = UDim2.new(1, 0, 1, 0)
 }
 
-function interactiveToast.render(p0)
+function interactiveToast.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), circle21 (ref), rect (ref), springAnimatedItemModule (ref), t (ref), toastFrameModule (ref)
-	return withStyleModule(function(p1)
-		-- upvalues: roactModule (copy), imageSetComponentModule (copy), p0 (ref), circle21 (copy), rect (copy), springAnimatedItemModule (copy), t (copy), toastFrameModule (copy)
-		local theme = p1.Theme
+	return withStyleModule(function(p2)
+		-- upvalues: roactModule (copy), imageSetComponentModule (copy), p1 (ref), circle21 (copy), rect (copy), springAnimatedItemModule (copy), t (copy), toastFrameModule (copy)
+		local theme = p2.Theme
 		
 		return roactModule.createElement(imageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			AnchorPoint = p0.props.anchorPoint,
+			AnchorPoint = p1.props.anchorPoint,
 			Image = circle21,
 			ImageColor3 = theme.BackgroundUIDefault.Color,
 			ImageTransparency = theme.BackgroundUIDefault.Transparency,
-			LayoutOrder = p0.props.layoutOrder,
-			Position = p0.props.position,
+			LayoutOrder = p1.props.layoutOrder,
+			Position = p1.props.position,
 			ScaleType = Enum.ScaleType.Slice,
-			Size = p0.props.size,
+			Size = p1.props.size,
 			SliceCenter = rect
 		}, {
 			Scaler = roactModule.createElement(springAnimatedItemModule.AnimatedUIScale, {
 				springOptions = t,
 				animatedValues = {
-					scale = if p0.props.pressed then p0.props.pressedScale else 1
+					scale = if p1.props.pressed then p1.props.pressedScale else 1
 				},
-				mapValuesToProps = function(p2)
-					return { Scale = p2.scale }
+				mapValuesToProps = function(p3)
+					return { Scale = p3.scale }
 				end
 			}),
 			ToastFrame = roactModule.createElement(toastFrameModule, {
-				buttonProps = p0.props.buttonProps,
-				iconProps = p0.props.iconProps,
-				iconChildren = p0.props.iconChildren,
-				isCompact = p0.props.isCompact,
-				padding = p0.props.padding,
-				subtitleTextProps = p0.props.subtitleTextProps,
-				textFrameSize = p0.props.textFrameSize,
-				titleTextProps = p0.props.titleTextProps
+				buttonProps = p1.props.buttonProps,
+				iconProps = p1.props.iconProps,
+				iconChildren = p1.props.iconChildren,
+				isCompact = p1.props.isCompact,
+				padding = p1.props.padding,
+				subtitleTextProps = p1.props.subtitleTextProps,
+				textFrameSize = p1.props.textFrameSize,
+				titleTextProps = p1.props.titleTextProps
 			})
 		})
 	end)

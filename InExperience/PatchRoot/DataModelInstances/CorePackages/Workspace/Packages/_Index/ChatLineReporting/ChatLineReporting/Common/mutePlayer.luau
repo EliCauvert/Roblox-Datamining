@@ -11,101 +11,101 @@ local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesSt
 local fFlagChatLineReportingGlobalMuteEnabled = sharedFlagsModule.FFlagChatLineReportingGlobalMuteEnabled
 local expChatMuteByUserIdBeforeUsernameCheck = game:DefineFastFlag("ExpChatMuteByUserIdBeforeUsernameCheck", false)
 
-function mutePlayer(p0, p1, p2)
+function mutePlayer(p1, p2, p3)
 	-- upvalues: fFlagExpChatUseChatMuteStore (ref), expChatMuteByUserIdBeforeUsernameCheck (ref), constantsModule (ref), chatMuteModule (ref), fFlagChatLineReportingGlobalMuteEnabled (ref), expChatSharedModule (ref), fFlagExpChatUseMessagesStore (ref), userMuted (ref), RBXMuteCommand (ref)
 	if fFlagExpChatUseChatMuteStore then
-		if p0.username == "" and (not expChatMuteByUserIdBeforeUsernameCheck or not tonumber(p0.userId)) then
+		if p1.username == "" and (not expChatMuteByUserIdBeforeUsernameCheck or not tonumber(p1.userId)) then
 			return {
 				metadata = "Roblox.Mute.Error.PlayerNotFound",
 				key = constantsModule.ErrorDoesNotExistKey,
-				args = { RBX_NAME = p0.displayName }
+				args = { RBX_NAME = p1.displayName }
 			}
-		elseif tonumber(p0.userId) == p1.UserId then
+		elseif tonumber(p1.userId) == p2.UserId then
 			return {
 				metadata = "Roblox.Mute.Error.CannotMuteSelf",
 				key = constantsModule.ErrorSelfMuteKey,
-				args = { RBX_NAME = p0.displayName }
+				args = { RBX_NAME = p1.displayName }
 			}
-		elseif tonumber(p0.userId) then
-			chatMuteModule.mutePlayer({ userId = p0.userId })
+		elseif tonumber(p1.userId) then
+			chatMuteModule.mutePlayer({ userId = p1.userId })
 			
 			return {
 				key = constantsModule.SuccessfulMuteKey,
-				args = { RBX_NAME = p0.displayName },
-				metadata = if fFlagChatLineReportingGlobalMuteEnabled and p2 then "Roblox.GlobalMute.Info.Success" else "Roblox.Mute.Info.Success"
+				args = { RBX_NAME = p1.displayName },
+				metadata = if fFlagChatLineReportingGlobalMuteEnabled and p3 then "Roblox.GlobalMute.Info.Success" else "Roblox.Mute.Info.Success"
 			}
 		end
-		local var6 = chatMuteModule.resolveMuteTarget(p0.displayName, tostring(p1.UserId))
+		local var1 = chatMuteModule.resolveMuteTarget(p1.displayName, tostring(p2.UserId))
 		
-		if var6.playerInfo then
-			chatMuteModule.mutePlayer(var6.playerInfo)
+		if var1.playerInfo then
+			chatMuteModule.mutePlayer(var1.playerInfo)
 		end
 		return {
-			key = var6.key,
-			args = var6.args,
-			metadata = if var6.playerInfo then "Roblox.Mute.Info.Success" else "Roblox.Mute.Error.Unknown"
+			key = var1.key,
+			args = var1.args,
+			metadata = if var1.playerInfo then "Roblox.Mute.Info.Success" else "Roblox.Mute.Error.Unknown"
 		}
 	else
 		local context = expChatSharedModule.context
 		local t = nil
 		
-		if fFlagChatLineReportingGlobalMuteEnabled and p2 then
-			if not tonumber(p0.userId) then
+		if fFlagChatLineReportingGlobalMuteEnabled and p3 then
+			if not tonumber(p1.userId) then
 				return t
 			end
 			if context.globalMutedUsersStore then
-				context.globalMutedUsersStore.muteGlobalUserId(p0.userId)
+				context.globalMutedUsersStore.muteGlobalUserId(p1.userId)
 				
 				return {
 					metadata = "Roblox.GlobalMute.Info.Success",
 					key = constantsModule.SuccessfulMuteKey,
-					args = { RBX_NAME = p0.displayName }
+					args = { RBX_NAME = p1.displayName }
 				}
 			end
 			t = {
 				key = "CoreScripts.TextChat.MessageStatus.Warning.Unknown",
 				metadata = "Roblox.GlobalMute.Error.ContextNotAvailable",
-				args = { RBX_NAME = p0.displayName }
+				args = { RBX_NAME = p1.displayName }
 			}
 			
 			return t
-		elseif p0.username == "" then
+		elseif p1.username == "" then
 			t = {
 				metadata = "Roblox.Mute.Error.PlayerNotFound",
 				key = constantsModule.ErrorDoesNotExistKey,
-				args = { RBX_NAME = p0.displayName }
+				args = { RBX_NAME = p1.displayName }
 			}
 			
 			return t
-		elseif tonumber(p0.userId) == p1.UserId then
+		elseif tonumber(p1.userId) == p2.UserId then
 			t = {
 				metadata = "Roblox.Mute.Error.CannotMuteSelf",
 				key = constantsModule.ErrorSelfMuteKey,
-				args = { RBX_NAME = p0.displayName }
+				args = { RBX_NAME = p1.displayName }
 			}
 			
 			return t
-		elseif not tonumber(p0.userId) then
-			return RBXMuteCommand.clientRun(context.store, p1.UserId, "/mute " .. p0.displayName, context)
+		elseif not tonumber(p1.userId) then
+			return RBXMuteCommand.clientRun(context.store, p2.UserId, "/mute " .. p0.displayName, context)
 		elseif not context.store then
 		end
 		if fFlagExpChatUseMessagesStore then
 			if context and context.messagesStore then
-				context.messagesStore.muteUser(p0.userId)
+				context.messagesStore.muteUser(p1.userId)
 				
 				return t
 			end
 			return {
 				key = "CoreScripts.TextChat.MessageStatus.Warning.Unknown",
 				metadata = "Roblox.Mute.Error.ContextNotAvailable",
-				args = { RBX_NAME = p0.displayName }
+				args = { RBX_NAME = p1.displayName }
 			}
 		else
-			context.store:dispatch(userMuted(p0.userId))
+			context.store:dispatch(userMuted(p1.userId))
 			t = {
 				metadata = "Roblox.Mute.Info.Success",
 				key = constantsModule.SuccessfulMuteKey,
-				args = { RBX_NAME = p0.displayName }
+				args = { RBX_NAME = p1.displayName }
 			}
 			
 			return t

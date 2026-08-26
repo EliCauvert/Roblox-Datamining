@@ -23,64 +23,64 @@ local useShareMomentModule = require(moments.Share.useShareMoment)
 local paperAirplane = builderIconsModule.Icon.PaperAirplane
 local arrowThickToRight = builderIconsModule.Icon.ArrowThickToRight
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), useShareMomentModule (ref), useSignalBinding (ref), useSignalState (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), fFlagMomentsFixFeedShareArrowIconModule (ref), arrowThickToRight (ref), paperAirplane (ref), contextualMenuModule (ref), view (ref)
-	local var15 = reactUtilsModule.createNextOrder()
-	local var16 = momentContextModule.useMoment()
-	local store = var16.store
+	local var1 = reactUtilsModule.createNextOrder()
+	local var2 = momentContextModule.useMoment()
+	local store = var2.store
 	local isAd = store.getData(false).kind == "ad"
-	local var18 = useShareMomentModule(p0.moment)
-	local animationRatio = var16.animationRatio
-	local var19 = useSignalBinding(store.getShareCount)
-	local var20 = useSignalState(store.getIsModerated)
-	local var21 = if p0.moment == nil or p0.moment.recommendationMetadata == nil then nil else p0.moment.recommendationMetadata.feedItemId
-	local var22 = var20 or (fFlagMomentsPassFeedItemIdToBackendApis and (if var21 ~= nil then var21 == "" else true))
-	local var23 = useConfigurationModule("feed_mute_enabled", false)
-	local var24 = useConfigurationModule("feed_mute_button_analytics_enabled", false)
-	local var25 = getMomentsPreferencesStoreModule(false)
-	local var26 = useSignalState(useMomentsSession().getHideDetails)
-	local var27 = useSignalState(var25.getFeedGlobalMute)
-	local var28 = reactModule.useMemo(function()
-		-- upvalues: var27 (ref), var25 (ref)
-		return { isMuted = var27, toggle = var25.toggleFeedGlobalMute }
-	end, { var27, var25.toggleFeedGlobalMute })
+	local var3 = useShareMomentModule(p1.moment)
+	local animationRatio = var2.animationRatio
+	local var4 = useSignalBinding(store.getShareCount)
+	local var5 = useSignalState(store.getIsModerated)
+	local var6 = if p1.moment == nil or p1.moment.recommendationMetadata == nil then nil else p1.moment.recommendationMetadata.feedItemId
+	local var7 = var5 or (fFlagMomentsPassFeedItemIdToBackendApis and (if var6 ~= nil then var6 == "" else true))
+	local var8 = useConfigurationModule("feed_mute_enabled", false)
+	local var9 = useConfigurationModule("feed_mute_button_analytics_enabled", false)
+	local var10 = getMomentsPreferencesStoreModule(false)
+	local var11 = useSignalState(useMomentsSession().getHideDetails)
+	local var12 = useSignalState(var10.getFeedGlobalMute)
+	local var13 = reactModule.useMemo(function()
+		-- upvalues: var12 (ref), var10 (ref)
+		return { isMuted = var12, toggle = var10.toggleFeedGlobalMute }
+	end, { var12, var10.toggleFeedGlobalMute })
 	local t = {}
 	
-	if not var26 then
+	if not var11 then
 		if not isAd then
 			t.React = reactModule.createElement(reactionButtonModule, {
 				animationRatio = animationRatio,
-				isDisabled = var20,
-				LayoutOrder = var15()
+				isDisabled = var5,
+				LayoutOrder = var1()
 			})
 		end
 		t.Share = reactModule.createElement(railItemModule, {
-			LayoutOrder = var15(),
+			LayoutOrder = var1(),
 			slot = if fFlagMomentsFixFeedShareArrowIconModule then arrowThickToRight else paperAirplane,
-			count = var19,
+			count = var4,
 			animationRatio = animationRatio,
-			isDisabled = var22,
-			onActivated = var18.onShareActivated
+			isDisabled = var7,
+			onActivated = var3.onShareActivated
 		})
 		t.Music = reactModule.createElement(require(script.Parent.MusicButton), {
-			LayoutOrder = var15(),
-			moment = p0.moment,
+			LayoutOrder = var1(),
+			moment = p1.moment,
 			animationRatio = animationRatio,
-			isDisabled = var20
+			isDisabled = var5
 		})
 	end
-	if p0.moment ~= nil then
+	if p1.moment ~= nil then
 		t.ContextualMenu = reactModule.createElement(contextualMenuModule, {
-			isFeedMuteEnabled = var23,
-			isFeedMuteButtonAnalyticsEnabled = var24,
-			isDisabled = var20,
-			layoutOrder = var15(),
-			moment = p0.moment,
-			playbackVolume = var28
+			isFeedMuteEnabled = var8,
+			isFeedMuteButtonAnalyticsEnabled = var9,
+			isDisabled = var5,
+			layoutOrder = var1(),
+			moment = p1.moment,
+			playbackVolume = var13
 		})
 	end
 	return reactModule.createElement(view, {
 		tag = "col size-1200-0 auto-y",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, t)
 end)

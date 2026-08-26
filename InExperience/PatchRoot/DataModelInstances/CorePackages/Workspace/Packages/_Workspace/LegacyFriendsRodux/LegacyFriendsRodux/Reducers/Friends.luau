@@ -6,37 +6,37 @@ local fetchUserFriendsStarted = require(legacyFriendsRodux.Actions).FetchUserFri
 local fetchUserFriendsFailed = require(legacyFriendsRodux.Actions).FetchUserFriendsFailed
 local fetchUserFriendsCompleted = require(legacyFriendsRodux.Actions).FetchUserFriendsCompleted
 
-local function setFieldPerUser(value, p0, p1, p2)
+local function setFieldPerUser(value, p1, p2, p3)
 	-- upvalues: immutable (ref)
 	return immutable.JoinDictionaries(value, {
-		[p0] = immutable.JoinDictionaries(value[p0] or {}, { [p1] = p2 })
+		[p1] = immutable.JoinDictionaries(value[p1] or {}, { [p2] = p3 })
 	})
 end
 
-local function _(value, p3, p4)
+local function _(value, p1, p2)
 	-- upvalues: setFieldPerUser (ref)
-	return setFieldPerUser(value, "retrievalStatus", p3, p4)
+	return setFieldPerUser(value, "retrievalStatus", p1, p2)
 end
 
-local _ = function(value, p5, p6)
+local _ = function(value, p1, p2)
 	-- upvalues: setFieldPerUser (ref)
-	return setFieldPerUser(value, "retrievalFailureResponse", p5, p6)
+	return setFieldPerUser(value, "retrievalFailureResponse", p1, p2)
 end
 
-return function(p7, p8)
+return function(p1, p2)
 	-- upvalues: fetchUserFriendsStarted (ref), retrievalStatus (ref), setFieldPerUser (ref), fetchUserFriendsFailed (ref), fetchUserFriendsCompleted (ref)
-	p7 = p7 or { retrievalStatus = {}, retrievalFailureResponse = {} }
+	p1 = p1 or { retrievalStatus = {}, retrievalFailureResponse = {} }
 	
-	if p8.type == fetchUserFriendsStarted.name then
-		p7 = setFieldPerUser(p7, "retrievalStatus", p8.userId, retrievalStatus.Fetching)
+	if p2.type == fetchUserFriendsStarted.name then
+		p1 = setFieldPerUser(p1, "retrievalStatus", p2.userId, retrievalStatus.Fetching)
 		
-		return p7
-	elseif p8.type == fetchUserFriendsFailed.name then
-		p7 = setFieldPerUser(setFieldPerUser(p7, "retrievalStatus", p8.userId, retrievalStatus.Failed), "retrievalFailureResponse", p8.userId, p8.response)
+		return p1
+	elseif p2.type == fetchUserFriendsFailed.name then
+		p1 = setFieldPerUser(setFieldPerUser(p1, "retrievalStatus", p2.userId, retrievalStatus.Failed), "retrievalFailureResponse", p2.userId, p2.response)
 		
-		return p7
-	elseif p8.type == fetchUserFriendsCompleted.name then
-		p7 = setFieldPerUser(p7, "retrievalStatus", p8.userId, retrievalStatus.Done)
+		return p1
+	elseif p2.type == fetchUserFriendsCompleted.name then
+		p1 = setFieldPerUser(p1, "retrievalStatus", p2.userId, retrievalStatus.Done)
 	end
-	return p7
+	return p1
 end

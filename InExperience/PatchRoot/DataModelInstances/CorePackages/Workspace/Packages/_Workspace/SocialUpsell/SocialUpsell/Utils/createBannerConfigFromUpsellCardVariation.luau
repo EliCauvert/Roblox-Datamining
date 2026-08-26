@@ -15,9 +15,9 @@ local t = {
 }
 local t_1 = { Fae = socialUpsellTypeModule.FacialAgeEstimation }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref)
-	return if p0.action and p0.action.type then t[p0.action.type] else nil
+	return if p1.action and p1.action.type then t[p1.action.type] else nil
 end
 
 return function(p1, p2)
@@ -39,13 +39,13 @@ return function(p1, p2)
 	end
 	if upsellCardV2Config.buttons then
 		for i, v in upsellCardV2Config.buttons do
-			local var10 = if v.action and v.action.type then t[v.action.type] else nil
+			local var1 = if v.action and v.action.type then t[v.action.type] else nil
 			
-			if var10 then
+			if var1 then
 				table.insert(t_3, {
 					text = v.text,
-					action = var10,
-					variantOverride = if fFlagAgeBasedUXHomepageVerificationBannerGreyButton and p2 and var10 == constantsModule.UPSELL_BUTTON_ACTION.Primary then p2.primaryButtonVariantOverride else nil
+					action = var1,
+					variantOverride = if fFlagAgeBasedUXHomepageVerificationBannerGreyButton and p2 and var1 == constantsModule.UPSELL_BUTTON_ACTION.Primary then p2.primaryButtonVariantOverride else nil
 				})
 			end
 		end

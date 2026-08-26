@@ -12,38 +12,38 @@ return {
 		-- upvalues: appChatTTITrackerModule (ref)
 		appChatTTITrackerModule.setSharedContext(value)
 	end,
-	isActive = function(p0, p1)
+	isActive = function(p1, p2)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref), appChatIntervalTrackerModule (ref)
-		return if appChatPerfEventInfoModule.isTTIEvent(p0) then appChatTTITrackerModule.isActive(p0, p1 or {}) else appChatIntervalTrackerModule.isActive(p0)
+		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.isActive(p1, p2 or {}) else appChatIntervalTrackerModule.isActive(p1)
 	end,
-	start = function(p2, p3)
+	start = function(p1, p2)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref), appChatIntervalTrackerModule (ref)
-		p3 = p3 or {}
+		p2 = p2 or {}
 		
-		return if appChatPerfEventInfoModule.isTTIEvent(p2) then appChatTTITrackerModule.start(p2, p3) else appChatIntervalTrackerModule.start(p2, p3)
+		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.start(p1, p2) else appChatIntervalTrackerModule.start(p1, p2)
 	end,
-	finish = function(p4, p5)
+	finish = function(p1, p2)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref), appChatIntervalTrackerModule (ref)
-		return if appChatPerfEventInfoModule.isTTIEvent(p4) then appChatTTITrackerModule.finish(p4, p5 or {}) else appChatIntervalTrackerModule.finish(p4)
+		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.finish(p1, p2 or {}) else appChatIntervalTrackerModule.finish(p1)
 	end,
-	getEventName = function(p6)
+	getEventName = function(p1)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref)
-		return if appChatPerfEventInfoModule.isTTIEvent(p6) then appChatTTITrackerModule.getEventName(p6) else nil
+		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.getEventName(p1) else nil
 	end,
-	trackMilestone = function(p7, p8, p9)
+	trackMilestone = function(p1, p2, p3)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref)
-		return if appChatPerfEventInfoModule.isTTIEvent(p7) then appChatTTITrackerModule.trackMilestone(p7, p8, p9 or {}) else false
+		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.trackMilestone(p1, p2, p3 or {}) else false
 	end,
-	trackSubphase = function(p10, p11, p12, p13)
+	trackSubphase = function(p1, p2, p3, p4)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref)
-		return if appChatPerfEventInfoModule.isTTIEvent(p10) then appChatTTITrackerModule.trackSubphase(p10, p11, p12, p13 or {}) else false
+		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.trackSubphase(p1, p2, p3, p4 or {}) else false
 	end,
-	trackRequest = function(p14, p15, p16, p17)
+	trackRequest = function(p1, p2, p3, p4)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref)
-		return if appChatPerfEventInfoModule.isTTIEvent(p14) then appChatTTITrackerModule.trackRequest(p14, p15, p16, p17 or {}) else false
+		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.trackRequest(p1, p2, p3, p4 or {}) else false
 	end,
-	cancel = function(p18, p19)
+	cancel = function(p1, p2)
 		-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref), appChatIntervalTrackerModule (ref)
-		return if appChatPerfEventInfoModule.isTTIEvent(p18) then appChatTTITrackerModule.cancel(p18, p19 or {}) else appChatIntervalTrackerModule.cancel(p18)
+		return if appChatPerfEventInfoModule.isTTIEvent(p1) then appChatTTITrackerModule.cancel(p1, p2 or {}) else appChatIntervalTrackerModule.cancel(p1)
 	end
 }

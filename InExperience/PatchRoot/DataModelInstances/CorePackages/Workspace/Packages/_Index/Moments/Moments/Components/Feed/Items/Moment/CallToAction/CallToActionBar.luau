@@ -29,104 +29,104 @@ local t = {
 }
 local char = utf8.char(57344)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), t (ref), useTokens (ref), momentContextModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsAndroidTvEnabledModule (ref), useIsTvRemoteDevice (ref), useExperienceDetailsModule (ref), useScaledValue (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), getRbxThumb (ref), foundationModule (ref), char (ref), reactModule (ref), imageWithSkeletonModule (ref), radius (ref), view (ref), text (ref), skeleton (ref), getExperienceDetailsSheetStoreModule (ref), button (ref), joinButtonModule (ref)
-	local var16 = useLocalization(t)
-	local var17 = useTokens()
+	local var1 = useLocalization(t)
+	local var2 = useTokens()
 	local store = momentContextModule.useMoment().store
 	local data = store.getData(false)
 	local isAd = data.kind == "ad"
-	local var20 = if data.kind == "ad" then data.advertiser else nil
-	local var21 = if data.kind == "experience" then data.placeId else 0
-	local var22 = if data.kind == "experience" then data.universeId else 0
-	local var23 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
-	local var24 = useSignalState(store.getIsModerated)
-	local var25 = getFFlagMomentsAndroidTvEnabledModule()
-	local var26 = useIsTvRemoteDevice()
-	local var27 = useExperienceDetailsModule(if isAd then nil else var22)
-	local var28 = useScaledValue(160)
-	local var29 = if fFlagMomentsFixRecommendationImpressionLifecycleModule then feedContextModule.useFeedOptional() else nil
-	local var30 = if isAd then if var20 then var20.iconImage else nil elseif var22 ~= 0 then getRbxThumb(foundationModule.Enums.ThumbnailType.Asset, var21) else getRbxThumb(foundationModule.Enums.ThumbnailType.GameIcon, var22)
+	local var3 = if data.kind == "ad" then data.advertiser else nil
+	local var4 = if data.kind == "experience" then data.placeId else 0
+	local var5 = if data.kind == "experience" then data.universeId else 0
+	local var6 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
+	local var7 = useSignalState(store.getIsModerated)
+	local var8 = getFFlagMomentsAndroidTvEnabledModule()
+	local var9 = useIsTvRemoteDevice()
+	local var10 = useExperienceDetailsModule(if isAd then nil else var5)
+	local var11 = useScaledValue(160)
+	local var12 = if fFlagMomentsFixRecommendationImpressionLifecycleModule then feedContextModule.useFeedOptional() else nil
+	local var13 = if isAd then if var3 then var3.iconImage else nil elseif var5 ~= 0 then getRbxThumb(foundationModule.Enums.ThumbnailType.Asset, var4) else getRbxThumb(foundationModule.Enums.ThumbnailType.GameIcon, var5)
 	
-	if not isAd and var21 == 0 then
+	if not isAd and var4 == 0 then
 		return nil
 	end
-	local var31 = if isAd then if var20 then var20.title else nil else var27.name
-	local var32 = if isAd then if var20 then var20.subtitle else nil else var27.creatorName
-	local var33 = if isAd and var20 then var20.ctaText else var16.join
-	local var34 = if var32 and (if isAd then var20 ~= nil and var20.isVerified else var27.isCreatorVerified == true) then `{var32} {char}` else var32
-	local size1000 = var17.Size.Size_1000
+	local var14 = if isAd then if var3 then var3.title else nil else var10.name
+	local var15 = if isAd then if var3 then var3.subtitle else nil else var10.creatorName
+	local var16 = if isAd and var3 then var3.ctaText else var1.join
+	local var17 = if var15 and (if isAd then var3 ~= nil and var3.isVerified else var10.isCreatorVerified == true) then `{var15} {char}` else var15
+	local size1000 = var2.Size.Size_1000
 	local createElement = reactModule.createElement
 	createElement = createElement(view, {
 		LayoutOrder = 1,
 		tag = "row align-x-left align-y-center grow gap-medium auto-y",
 		testId = "moments-experience-row",
-		onActivated = if isAd or var24 then nil else function()
-			-- upvalues: getExperienceDetailsSheetStoreModule (copy), var21 (ref), var22 (ref), data (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var29 (write)
+		onActivated = if isAd or var7 then nil else function()
+			-- upvalues: getExperienceDetailsSheetStoreModule (copy), var4 (ref), var5 (ref), data (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var12 (write)
 			getExperienceDetailsSheetStoreModule(false).open({
-				placeId = var21,
-				universeId = var22,
+				placeId = var4,
+				universeId = var5,
 				itemId = data.feedItemId,
 				feedItemId = data.feedItemId,
 				tracingId = data.feedSessionId,
-				onBeforeJoin = if fFlagMomentsFixRecommendationImpressionLifecycleModule and var29 ~= nil then var29.flushView else nil
+				onBeforeJoin = if fFlagMomentsFixRecommendationImpressionLifecycleModule and var12 ~= nil then var12.flushView else nil
 			})
 		end,
-		stateLayer = if isAd or var24 then nil else {
+		stateLayer = if isAd or var7 then nil else {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		},
-		selection = if var25 and var26 then { Selectable = false } else nil
+		selection = if var8 and var9 then { Selectable = false } else nil
 	}, {
 		Thumbnail = reactModule.createElement(imageWithSkeletonModule, {
 			LayoutOrder = 1,
-			Image = var30,
+			Image = var13,
 			Size = UDim2.fromOffset(size1000, size1000),
 			radius = radius.Medium,
-			backgroundStyle = var17.Color.Shift.Shift_300
+			backgroundStyle = var2.Color.Shift.Shift_300
 		}),
 		Metadata = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "col align-x-left align-y-center grow gap-xsmall auto-y"
 		}, {
-			Title = if var31 then reactModule.createElement(text, {
+			Title = if var14 then reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-medium text-align-x-left text-align-y-top text-truncate-end content-emphasis",
-				Text = var31
+				Text = var14
 			}) else reactModule.createElement(skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var28, var17.Size.Size_400)
+				Size = UDim2.fromOffset(var11, var2.Size.Size_400)
 			}),
-			Subtitle = if var34 then reactModule.createElement(text, {
+			Subtitle = if var17 then reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium text-align-x-left text-align-y-center text-truncate-end content-default",
-				Text = var34
+				Text = var17
 			}) else nil
 		})
 	})
 	
 	return reactModule.createElement(view, {
 		tag = "row align-x-left align-y-center gap-medium size-full-0 auto-y",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		MediaAndMetadata = createElement,
-		CtaButton = if var25 and var26 then nil elseif isAd then reactModule.createElement(button, {
+		CtaButton = if var8 and var9 then nil elseif isAd then reactModule.createElement(button, {
 			LayoutOrder = 2,
-			isDisabled = var23 or var24,
+			isDisabled = var6 or var7,
 			onActivated = function() end,
 			size = foundationModule.Enums.InputSize.Medium,
-			text = var33,
+			text = var16,
 			variant = foundationModule.Enums.ButtonVariant.Emphasis
 		}) else reactModule.createElement(joinButtonModule, {
 			LayoutOrder = 2,
 			context = {
-				placeId = var21,
-				universeId = var22,
+				placeId = var4,
+				universeId = var5,
 				itemId = data.feedItemId,
 				feedItemId = data.feedItemId,
 				tracingId = data.feedSessionId
 			},
-			text = var33,
-			isDisabled = var24
+			text = var16,
+			isDisabled = var7
 		})
 	})
 end)

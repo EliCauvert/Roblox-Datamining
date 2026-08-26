@@ -22,11 +22,11 @@ blockPlayerItem.validateProps = tModule.strictInterface({
 })
 blockPlayerItem.defaultProps = { isDisabled = false, isCheckBoxSelected = false }
 
-function blockPlayerItem.init(p0)
+function blockPlayerItem.init(p1)
 	function p0.onClicked()
-		-- upvalues: p0 (ref)
-		if p0.props.onCheckBoxActivated and not p0.props.isDisabled then
-			p0.props.onCheckBoxActivated(not p0.props.isCheckBoxSelected)
+		-- upvalues: p1 (ref)
+		if p1.props.onCheckBoxActivated and not p1.props.isDisabled then
+			p1.props.onCheckBoxActivated(not p1.props.isCheckBoxSelected)
 		end
 	end
 end

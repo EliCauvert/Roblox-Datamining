@@ -3,29 +3,29 @@ local _ = require(parent.util.Types)
 local analyticsModule = require(parent.Analytics)
 local getMeshMinMaxModule = require(parent.util.getMeshMinMax)
 
-local function formatError(p0, p1, p2)
-	local function _(p3)
-		return p3.fullName .. "." .. p3.fieldName
+local function formatError(p1, p2, p3)
+	local function _(p4)
+		return p4.fullName .. "." .. p3.fieldName
 	end
 	
-	return string.format("%s is more than max difference %.2f in size compared to the other mesh %s. You need to edit the model to adjust its size", p0.fullName .. "." .. p0.fieldName, p2, p1.fullName .. "." .. p1.fieldName)
+	return string.format("%s is more than max difference %.2f in size compared to the other mesh %s. You need to edit the model to adjust its size", p1.fullName .. "." .. p0.fieldName, p3, p2.fullName .. "." .. p1.fieldName)
 end
 
-return function(p4, p5, p6, p7)
+return function(p1, p2, p3, p4)
 	-- upvalues: getMeshMinMaxModule (ref), analyticsModule (ref), formatError (ref)
-	local var3, var4, var5, var6 = getMeshMinMaxModule(p4, p7)
+	local var1, var2, var3, var4 = getMeshMinMaxModule(p1, p4)
 	
-	if not var3 then
-		return var3, var4
+	if not var1 then
+		return var1, var2
 	end
-	local var7, var8, var9, var10 = getMeshMinMaxModule(p5, p7)
+	local var5, var6, var7, var8 = getMeshMinMaxModule(p2, p4)
 	
-	if not var7 then
-		return var7, var8
-	elseif p6 < (var5 - var9).Magnitude or p6 < (var6 - var10).Magnitude then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshComparison, nil, p7)
+	if not var5 then
+		return var5, var6
+	elseif p3 < (var3 - var7).Magnitude or p3 < (var4 - var8).Magnitude then
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshComparison, nil, p4)
 		
-		return false, { formatError(p4, p5, p6) }
+		return false, { formatError(p1, p2, p3) }
 	end
 	return true
 end

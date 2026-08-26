@@ -12,20 +12,20 @@ local useSignalState = signalsReactModule.useSignalState
 
 local function noop() end
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: getMomentsPreferencesStoreModule (ref), useSignalState (ref), momentContextModule (ref), reactModule (ref), view (ref), textInput (ref), noop (ref), inputSize (ref)
-	local var7 = momentContextModule.useMoment()
+	local var1 = momentContextModule.useMoment()
 	
 	return if useSignalState(getMomentsPreferencesStoreModule(false).getDebugModeEnabled) then reactModule.createElement(view, {
 		tag = "col align-x-left gap-small size-full-0 auto-y",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		DebugMomentId = reactModule.createElement(textInput, {
 			label = "momentId",
 			LayoutOrder = 1,
 			onChanged = noop,
 			size = inputSize.Medium,
-			text = var7.momentId,
+			text = var1.momentId,
 			width = UDim.new(1, 0)
 		}),
 		DebugFeedItemId = reactModule.createElement(textInput, {
@@ -33,7 +33,7 @@ return reactModule.memo(function(p0)
 			LayoutOrder = 2,
 			onChanged = noop,
 			size = inputSize.Medium,
-			text = var7.store.getData(false).feedItemId or "",
+			text = var1.store.getData(false).feedItemId or "",
 			width = UDim.new(1, 0)
 		})
 	}) else nil

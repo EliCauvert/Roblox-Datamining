@@ -11,90 +11,90 @@ local ok, status = pcall(function()
 end)
 local status_1 = ok and status
 
-local function LoadLocalScript(p0, p1, p2)
+local function LoadLocalScript(p1, p2, p3)
 	-- upvalues: chatWindowInstallerCheckClassName (ref), serverUtilModule (ref)
-	local var10 = p0:WaitForChild(p1)
+	local var1 = p1:WaitForChild(p2)
 	
-	if chatWindowInstallerCheckClassName and var10.ClassName ~= "ModuleScript" then
-		return var10:Clone()
+	if chatWindowInstallerCheckClassName and var1.ClassName ~= "ModuleScript" then
+		return var1:Clone()
 	end
 	local localScript = Instance.new("LocalScript")
-	localScript.Name = p1
+	localScript.Name = p2
 	
 	if serverUtilModule.getFFlagServerCoreScriptSourceCode() then
-		localScript.Source = serverUtilModule.getSourceForServerScript(var10)
+		localScript.Source = serverUtilModule.getSourceForServerScript(var1)
 	else
-		localScript.Source = var10.Source
+		localScript.Source = var1.Source
 	end
-	localScript.Parent = p2
+	localScript.Parent = p3
 	
 	return localScript
 end
 
-local function LoadModule(p3, p4, p5)
+local function LoadModule(p1, p2, p3)
 	-- upvalues: chatWindowInstallerCheckClassName (ref), serverUtilModule (ref)
-	local var12 = p3:WaitForChild(p4)
+	local var1 = p1:WaitForChild(p2)
 	
-	if chatWindowInstallerCheckClassName and var12.ClassName ~= "ModuleScript" then
-		return var12:Clone()
+	if chatWindowInstallerCheckClassName and var1.ClassName ~= "ModuleScript" then
+		return var1:Clone()
 	end
 	local moduleScript = Instance.new("ModuleScript")
-	moduleScript.Name = p4
+	moduleScript.Name = p2
 	
 	if serverUtilModule.getFFlagServerCoreScriptSourceCode() then
-		moduleScript.Source = serverUtilModule.getSourceForServerScript(var12)
+		moduleScript.Source = serverUtilModule.getSourceForServerScript(var1)
 	else
-		moduleScript.Source = var12.Source
+		moduleScript.Source = var1.Source
 	end
-	moduleScript.Parent = p5
+	moduleScript.Parent = p3
 	
 	return moduleScript
 end
 
-local function _(p6, p7, p8)
-	local var14 = p6:FindFirstChild(p7)
+local function _(p1, p2, p3)
+	local var1 = p1:FindFirstChild(p2)
 	
-	return if var14 and var14:IsA("BoolValue") then var14.Value else p8
+	return if var1 and var1:IsA("BoolValue") then var1.Value else p3
 end
 
 return function()
 	-- upvalues: chatService (ref), LoadLocalScript (ref), LoadModule (ref), status_1 (write), starterPlayerScripts (ref), playersService (ref), sendChatAnalyticsModule (ref)
 	local t = {}
-	local var16 = true
+	local var1 = true
 	local chatScript = chatService:FindFirstChild("ChatScript")
 	
 	if chatScript then
 		t.ChatScript = "True"
 	else
-		var16 = false
+		var1 = false
 		chatScript = LoadLocalScript(script.Parent, "ChatScript", chatService)
-		local var18 = LoadModule(script.Parent, "ChatMain", chatScript)
-		LoadModule(script.Parent, "ChannelsBar", var18)
-		LoadModule(script.Parent, "ChatBar", var18)
-		LoadModule(script.Parent, "ChatChannel", var18)
-		LoadModule(script.Parent, "MessageLogDisplay", var18)
-		LoadModule(script.Parent, "ChatWindow", var18)
-		LoadModule(script.Parent, "MessageLabelCreator", var18)
-		LoadModule(script.Parent, "CommandProcessor", var18)
-		LoadModule(script.Parent, "ChannelsTab", var18)
-		LoadModule(script.Parent.Parent.Parent.Common, "ObjectPool", var18)
-		LoadModule(script.Parent, "MessageSender", var18)
-		LoadModule(script.Parent, "CurveUtil", var18)
+		local var2 = LoadModule(script.Parent, "ChatMain", chatScript)
+		LoadModule(script.Parent, "ChannelsBar", var2)
+		LoadModule(script.Parent, "ChatBar", var2)
+		LoadModule(script.Parent, "ChatChannel", var2)
+		LoadModule(script.Parent, "MessageLogDisplay", var2)
+		LoadModule(script.Parent, "ChatWindow", var2)
+		LoadModule(script.Parent, "MessageLabelCreator", var2)
+		LoadModule(script.Parent, "CommandProcessor", var2)
+		LoadModule(script.Parent, "ChannelsTab", var2)
+		LoadModule(script.Parent.Parent.Parent.Common, "ObjectPool", var2)
+		LoadModule(script.Parent, "MessageSender", var2)
+		LoadModule(script.Parent, "CurveUtil", var2)
 		
 		if status_1 then
 			local chatTranslationEnabled = Instance.new("BoolValue")
 			chatTranslationEnabled.Name = "ChatTranslationEnabled"
 			chatTranslationEnabled.Value = false
-			chatTranslationEnabled.Parent = var18
+			chatTranslationEnabled.Parent = var2
 		end
 	end
-	local var20 = true
+	local var3 = true
 	local bubbleChat = chatService:FindFirstChild("BubbleChat")
 	
 	if bubbleChat then
 		t.BubbleChat = "True"
 	else
-		var20 = false
+		var3 = false
 		bubbleChat = LoadLocalScript(script.Parent.BubbleChat, "BubbleChat", chatService)
 	end
 	local clientChatModules_1 = chatService:FindFirstChild("ClientChatModules")
@@ -174,37 +174,37 @@ return function()
 		end
 	end
 	if not starterPlayerScripts:FindFirstChild("ChatScript") then
-		local var30 = chatScript:Clone()
-		var30.Parent = starterPlayerScripts
-		var30.Archivable = false
+		local var4 = chatScript:Clone()
+		var4.Parent = starterPlayerScripts
+		var4.Archivable = false
 		
 		for i_2, v in pairs(playersService:GetPlayers()) do
 			if v:FindFirstChildOfClass("PlayerGui") then
-				local var31 = LoadLocalScript(script.Parent, "ChatInstallVerifier", v.PlayerGui)
+				local var5 = LoadLocalScript(script.Parent, "ChatInstallVerifier", v.PlayerGui)
 				local scriptToVerify = Instance.new("StringValue")
 				scriptToVerify.Name = "ScriptToVerify"
 				scriptToVerify.Value = "ChatScript"
-				scriptToVerify.Parent = var31
+				scriptToVerify.Parent = var5
 			end
 		end
 	end
-	chatScript.Archivable = var16
+	chatScript.Archivable = var1
 	
 	if not starterPlayerScripts:FindFirstChild("BubbleChat") then
-		local var33 = bubbleChat:Clone()
-		var33.Parent = starterPlayerScripts
-		var33.Archivable = false
+		local var6 = bubbleChat:Clone()
+		var6.Parent = starterPlayerScripts
+		var6.Archivable = false
 		
 		for i_2, v in pairs(playersService:GetPlayers()) do
 			if v:FindFirstChildOfClass("PlayerGui") then
-				local var34 = LoadLocalScript(script.Parent, "ChatInstallVerifier", v.PlayerGui)
+				local var7 = LoadLocalScript(script.Parent, "ChatInstallVerifier", v.PlayerGui)
 				local scriptToVerify_1 = Instance.new("StringValue")
 				scriptToVerify_1.Name = "ScriptToVerify"
 				scriptToVerify_1.Value = "BubbleChat"
-				scriptToVerify_1.Parent = var34
+				scriptToVerify_1.Parent = var7
 			end
 		end
 	end
-	bubbleChat.Archivable = var20
+	bubbleChat.Archivable = var3
 	sendChatAnalyticsModule("LoadClientDefaultChatForkedModules", t)
 end

@@ -18,21 +18,21 @@ local fullscreenTitleBarModule = require(script.Parent.FullscreenTitleBar)
 local fFlagLuaMenuPerfImprovementsModule = require(parent.Flags.FFlagLuaMenuPerfImprovements)
 local constantsModule = require(parent.Resources.Constants)
 
-return roactRodux.connect(function(p2, _)
-	return { isMenuOpen = p2.isMenuOpen }
+return roactRodux.connect(function(p1, _)
+	return { isMenuOpen = p1.isMenuOpen }
 end, nil)(inGameMenuPolicyModule.connect(function(p1, _)
 	return {
 		enableFullscreenTitleBar = p1.enableFullscreenTitleBar(),
 		isEducationalPopupEnabled = p1.enableEducationalPopup()
 	}
-end)(function(p0)
+end)(function(p1)
 	-- upvalues: roact (ref), fullscreenTitleBarModule (ref), constantsModule (ref), fFlagLuaMenuPerfImprovementsModule (ref), viewportOverlayModule (ref), sideNavigationModule (ref), leaveGameDialogModule (ref), pageContainerModule (ref), respawnDialogModule (ref), reportDialogModule (ref), reportSentDialogModule (ref), controlLayoutSetterModule (ref), connectionModule (ref), educationalPopupModule (ref), menuIconTooltipModule (ref)
-	local var16 = if p0.enableFullscreenTitleBar then roact.createElement(fullscreenTitleBarModule, {
+	local var1 = if p1.enableFullscreenTitleBar then roact.createElement(fullscreenTitleBarModule, {
 		displayOrder = constantsModule.DisplayOrder.FullscreenTitleBar
 	}) else nil
 	
 	return if fFlagLuaMenuPerfImprovementsModule then roact.createFragment({
-		Content = p0.isMenuOpen and roact.createFragment({
+		Content = p1.isMenuOpen and roact.createFragment({
 			Overlay = roact.createElement(viewportOverlayModule),
 			SideNavigation = roact.createElement(sideNavigationModule),
 			LeaveGameDialog = roact.createElement(leaveGameDialogModule),
@@ -43,9 +43,9 @@ end)(function(p0)
 			ControlLayoutSetter = roact.createElement(controlLayoutSetterModule)
 		}) or nil,
 		Connection = roact.createElement(connectionModule),
-		EducationalPopup = p0.isEducationalPopupEnabled and roact.createElement(educationalPopupModule) or nil,
-		MenuIconTooltip = p0.isEducationalPopupEnabled and roact.createElement(menuIconTooltipModule) or nil,
-		FullscreenTitleBar = var16
+		EducationalPopup = p1.isEducationalPopupEnabled and roact.createElement(educationalPopupModule) or nil,
+		MenuIconTooltip = p1.isEducationalPopupEnabled and roact.createElement(menuIconTooltipModule) or nil,
+		FullscreenTitleBar = var1
 	}) else roact.createFragment({
 		Overlay = roact.createElement(viewportOverlayModule),
 		SideNavigation = roact.createElement(sideNavigationModule),
@@ -56,8 +56,8 @@ end)(function(p0)
 		ReportSentDialog = roact.createElement(reportSentDialogModule),
 		ControlLayoutSetter = roact.createElement(controlLayoutSetterModule),
 		Connection = roact.createElement(connectionModule),
-		EducationalPopup = p0.isEducationalPopupEnabled and roact.createElement(educationalPopupModule) or nil,
-		MenuIconTooltip = p0.isEducationalPopupEnabled and roact.createElement(menuIconTooltipModule) or nil,
-		FullscreenTitleBar = var16
+		EducationalPopup = p1.isEducationalPopupEnabled and roact.createElement(educationalPopupModule) or nil,
+		MenuIconTooltip = p1.isEducationalPopupEnabled and roact.createElement(menuIconTooltipModule) or nil,
+		FullscreenTitleBar = var1
 	})
 end))

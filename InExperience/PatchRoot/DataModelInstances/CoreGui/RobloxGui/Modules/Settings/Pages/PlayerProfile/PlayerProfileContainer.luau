@@ -18,14 +18,14 @@ local profileTypes = enumsModule.ProfileTypes
 local profileWrapperContextModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.ProfileWrapperContext)
 local playerProfileModule = require(script.Parent.PlayerProfile)
 
-local function createStore(p0)
+local function createStore(p1)
 	-- upvalues: roduxModule (ref), constantsModule (ref), installReducerModule (ref)
-	return roduxModule.Store.new(roduxModule.combineReducers({ [constantsModule.RODUX_KEY] = installReducerModule() }), p0 or {}, { roduxModule.thunkMiddleware })
+	return roduxModule.Store.new(roduxModule.combineReducers({ [constantsModule.RODUX_KEY] = installReducerModule() }), p1 or {}, { roduxModule.thunkMiddleware })
 end
 
 return function(p1)
 	-- upvalues: reactModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), chatPolicies (ref), avatarPolicies (ref), sharePolicies (ref), shareTargetGamePolicies (ref), profileWrapperContextModule (ref), profileTypes (ref), enumsModule (ref), coreScriptsRootProvider (ref), roactRoduxModule (ref), createStore (ref), responsiveModule (ref), view (ref), playerProfileModule (ref)
-	local var11 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	
 	return reactModule.createElement(roactAppPolicy.Provider, {
 		policy = {
@@ -61,8 +61,8 @@ return function(p1)
 		}, {
 			CoreScriptsRootProvider = reactModule.createElement(coreScriptsRootProvider, {}, {
 				RoduxStore = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
-					ResponsiveProvider = reactModule.createElement(responsiveModule.ContainerRef.Provider, { value = var11 }, {
-						PlayerProfileContainer = reactModule.createElement(view, { tag = "size-full", ref = var11 }, {
+					ResponsiveProvider = reactModule.createElement(responsiveModule.ContainerRef.Provider, { value = var1 }, {
+						PlayerProfileContainer = reactModule.createElement(view, { tag = "size-full", ref = var1 }, {
 							PlayerProfile = reactModule.createElement(playerProfileModule, { userId = p1.userId, closePage = p1.closePage })
 						})
 					})

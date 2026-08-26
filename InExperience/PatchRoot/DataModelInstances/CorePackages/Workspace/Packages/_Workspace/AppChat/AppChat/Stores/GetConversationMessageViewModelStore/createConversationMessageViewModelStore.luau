@@ -9,9 +9,9 @@ local messageStatus = enumsModule.MessageStatus
 local messageType = enumsModule.MessageType
 local messageVisibility = enumsModule.MessageVisibility
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: messageType (ref)
-	return if p0 == nil then false else p0.type == messageType.User
+	return if p1 == nil then false else p1.type == messageType.User
 end
 
 local _ = function(value)
@@ -27,89 +27,89 @@ local _ = function(p1, p2)
 	if p1 == nil or p2 == nil then
 		return false
 	end
-	local var6
+	local var1
 	local createdAt = p1.created_at
 	
 	if createdAt == nil then
-		var6 = nil
+		var1 = nil
 	else
 		local dateTime = DateTime.fromIsoDate(createdAt)
-		var6 = if dateTime then dateTime.UnixTimestamp else nil
+		var1 = if dateTime then dateTime.UnixTimestamp else nil
 	end
-	local var8
+	local var2
 	local createdAt_1 = p2.created_at
 	
 	if createdAt_1 == nil then
-		var8 = nil
+		var2 = nil
 	else
 		local dateTime = DateTime.fromIsoDate(createdAt_1)
-		var8 = if dateTime then dateTime.UnixTimestamp else nil
+		var2 = if dateTime then dateTime.UnixTimestamp else nil
 	end
-	return if var6 == nil or var8 == nil then false else math.abs(var6 - var8) > 300
+	return if var1 == nil or var2 == nil then false else math.abs(var1 - var2) > 300
 end
 
-local _ = function(p3)
+local _ = function(p1)
 	-- upvalues: messageStatus (ref)
-	return p3 ~= nil and p3.status == messageStatus.Moderated
+	return p1 ~= nil and p1.status == messageStatus.Moderated
 end
 
-local _ = function(p4)
+local _ = function(p1)
 	-- upvalues: messageVisibility (ref)
-	return p4 ~= nil and p4.visibility == messageVisibility.Hidden
+	return p1 ~= nil and p1.visibility == messageVisibility.Hidden
 end
 
-local _ = function(p5)
-	return p5 ~= nil and p5.replies_to ~= nil
+local _ = function(p1)
+	return p1 ~= nil and p1.replies_to ~= nil
 end
 
-local function canGroupWithAdjacent(p6, p7)
+local function canGroupWithAdjacent(p1, p2)
 	-- upvalues: messageType (ref), messageVisibility (ref), messageStatus (ref)
-	local var10 = false
+	local var1 = false
 	
-	if p7 ~= nil then
-		var10 = if p7 == nil then false else p7.type == messageType.User
+	if p2 ~= nil then
+		var1 = if p2 == nil then false else p2.type == messageType.User
 		
-		if var10 then
-			var10 = false
+		if var1 then
+			var1 = false
 			
-			if p7.sender_user_id == p6.sender_user_id then
-				var10 = not (p6 ~= nil and p6.visibility == messageVisibility.Hidden)
+			if p2.sender_user_id == p1.sender_user_id then
+				var1 = not (p1 ~= nil and p1.visibility == messageVisibility.Hidden)
 				
-				if var10 then
-					var10 = not (p7 ~= nil and p7.visibility == messageVisibility.Hidden)
+				if var1 then
+					var1 = not (p2 ~= nil and p2.visibility == messageVisibility.Hidden)
 					
-					if var10 then
-						var10 = not (p6 ~= nil and p6.status == messageStatus.Moderated)
+					if var1 then
+						var1 = not (p1 ~= nil and p1.status == messageStatus.Moderated)
 						
-						if var10 then
-							var10 = not (p7 ~= nil and p7.status == messageStatus.Moderated)
+						if var1 then
+							var1 = not (p2 ~= nil and p2.status == messageStatus.Moderated)
 							
-							if var10 then
-								local var15
-								if p7 == nil or p6 == nil then
-									var15 = false
+							if var1 then
+								local var2
+								if p2 == nil or p1 == nil then
+									var2 = false
 								else
-									local var11
-									local createdAt = p7.created_at
+									local var3
+									local createdAt = p2.created_at
 									
 									if createdAt == nil then
-										var11 = nil
+										var3 = nil
 									else
 										local dateTime = DateTime.fromIsoDate(createdAt)
-										var11 = if dateTime then dateTime.UnixTimestamp else nil
+										var3 = if dateTime then dateTime.UnixTimestamp else nil
 									end
-									local var13
-									local createdAt_1 = p6.created_at
+									local var4
+									local createdAt_1 = p1.created_at
 									
 									if createdAt_1 == nil then
-										var13 = nil
+										var4 = nil
 									else
 										local dateTime = DateTime.fromIsoDate(createdAt_1)
-										var13 = if dateTime then dateTime.UnixTimestamp else nil
+										var4 = if dateTime then dateTime.UnixTimestamp else nil
 									end
-									var15 = if var11 == nil or var13 == nil then false else math.abs(var11 - var13) > 300
+									var2 = if var3 == nil or var4 == nil then false else math.abs(var3 - var4) > 300
 								end
-								var10 = not var15
+								var1 = not var2
 							end
 						end
 					end
@@ -117,73 +117,73 @@ local function canGroupWithAdjacent(p6, p7)
 			end
 		end
 	end
-	return var10
+	return var1
 end
 
-local function computeGroupedVariant(p8, p9, p10)
+local function computeGroupedVariant(p1, p2, p3)
 	-- upvalues: messageType (ref), canGroupWithAdjacent (ref), groupedMessageVariant (ref)
-	if not (if p8 == nil then false else p8.type == messageType.User) then
+	if not (if p1 == nil then false else p1.type == messageType.User) then
 		return nil
 	end
-	local var16 = canGroupWithAdjacent(p8, p9)
+	local var1 = canGroupWithAdjacent(p1, p2)
 	
-	if var16 then
-		var16 = not (p9 ~= nil and p9.replies_to ~= nil)
+	if var1 then
+		var1 = not (p2 ~= nil and p2.replies_to ~= nil)
 	end
-	local var17 = canGroupWithAdjacent(p8, p10)
+	local var2 = canGroupWithAdjacent(p1, p3)
 	
-	if var17 then
-		var17 = not (p8 ~= nil and p8.replies_to ~= nil)
+	if var2 then
+		var2 = not (p1 ~= nil and p1.replies_to ~= nil)
 	end
-	return if not (not var16 and not var17) then if not (not var16 and var17) then if var16 and not var17 then groupedMessageVariant.First else groupedMessageVariant.Middle else groupedMessageVariant.Last else groupedMessageVariant.Single
+	return if not (not var1 and not var2) then if not (not var1 and var2) then if var1 and not var2 then groupedMessageVariant.First else groupedMessageVariant.Middle else groupedMessageVariant.Last else groupedMessageVariant.Single
 end
 
-return function(p11, p12)
+return function(p1, p2)
 	-- upvalues: signalsModule (ref), messageType (ref), groupedMessageVariant (ref), computeGroupedVariant (ref)
 	local t = {}
 	
 	return {
-		conversationMessageStore = p11,
-		conversationMessageListStore = p12,
-		getGroupedVariant = function(p13, p14)
-			-- upvalues: t (ref), signalsModule (copy), p11 (ref), messageType (copy), p12 (ref), groupedMessageVariant (copy), computeGroupedVariant (copy)
-			local var19 = t[p14]
+		conversationMessageStore = p1,
+		conversationMessageListStore = p2,
+		getGroupedVariant = function(p3, p4)
+			-- upvalues: t (ref), signalsModule (copy), p1 (ref), messageType (copy), p2 (ref), groupedMessageVariant (copy), computeGroupedVariant (copy)
+			local var1 = t[p4]
 			
-			if var19 then
-				local var20 = var19[p13]
+			if var1 then
+				local var2 = var1[p3]
 				
-				if var20 == nil then
-					local var21 = signalsModule.createComputed(function(p15)
-						-- upvalues: p11 (copy), p13 (ref), messageType (copy), p12 (copy), p14 (ref), groupedMessageVariant (copy), computeGroupedVariant (copy)
-						local var22 = p11.messages(p15)
-						local var23 = var22[p13]
+				if var2 == nil then
+					local var3 = signalsModule.createComputed(function(p5)
+						-- upvalues: p1 (copy), p3 (ref), messageType (copy), p2 (copy), p4 (ref), groupedMessageVariant (copy), computeGroupedVariant (copy)
+						local var4 = p1.messages(p5)
+						local var5 = var4[p3]
 						
-						if var23 == nil then
+						if var5 == nil then
 							return nil
-						elseif not (if var23 == nil then false else var23.type == messageType.User) then
+						elseif not (if var5 == nil then false else var5.type == messageType.User) then
 							return nil
-						elseif p12.getIndex(p14, p13, p15) == nil then
+						elseif p2.getIndex(p4, p3, p5) == nil then
 							return groupedMessageVariant.Single
 						end
-						local prevId = p12.getPrevId(p14, p13, p15)
-						local nextId = p12.getNextId(p14, p13, p15)
+						local prevId = p2.getPrevId(p4, p3, p5)
+						local nextId = p2.getNextId(p4, p3, p5)
 						
-						return computeGroupedVariant(var23, if prevId ~= nil then nil else var22[prevId], if nextId ~= nil then nil else var22[nextId])
+						return computeGroupedVariant(var5, if prevId ~= nil then nil else var4[prevId], if nextId ~= nil then nil else var4[nextId])
 					end)
-					var19[p13] = var21
+					var1[p3] = var3
 					
-					return var21
+					return var3
 				else
-					return var20
+					return var2
 				end
 			else
-				var19 = {}
-				t[p14] = var19
+				var1 = {}
+				t[p4] = var1
 			end
 		end,
-		evictConversation = function(p16)
+		evictConversation = function(p3)
 			-- upvalues: t (ref)
-			t[p16] = nil
+			t[p3] = nil
 		end
 	}
 end

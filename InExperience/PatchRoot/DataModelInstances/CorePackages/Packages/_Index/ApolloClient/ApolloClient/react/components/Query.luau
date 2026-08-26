@@ -7,11 +7,11 @@ local _ = require(parent.core)
 local _ = require(script.Parent.types)
 local useQuery = require(script.Parent.Parent.hooks).useQuery
 
-function t.Query(p0)
+function t.Query(p1)
 	-- upvalues: object (ref), useQuery (ref), boolean (ref)
-	local var2 = useQuery(p0.query, object.assign({}, p0, { children = object.None, query = object.None }))
+	local var1 = useQuery(p1.query, object.assign({}, p1, { children = object.None, query = object.None }))
 	
-	return if boolean.toJSBoolean(var2) then p0.children(var2) else nil
+	return if boolean.toJSBoolean(var1) then p1.children(var1) else nil
 end
 
 return t

@@ -118,7 +118,7 @@ local function GamepadImageArea()
 	})
 end
 
-local function Body(p0)
+local function Body(p1)
 	-- upvalues: useDesignTokens (ref), userInputService (ref), t (ref), useLocalization (ref), reactModule (ref), GamepadImageArea (ref), button (ref), buttonType (ref)
 	local menuNavigationPrompt = useDesignTokens().LuaApps.MenuNavigationPrompt
 	local typography = menuNavigationPrompt.Typography
@@ -126,7 +126,7 @@ local function Body(p0)
 	local size = menuNavigationPrompt.Size
 	local space = menuNavigationPrompt.Space
 	local _ = t[userInputService:GetStringForKeyCode(Enum.KeyCode.ButtonSelect)] or "CoreScripts.InGameMenu.Label.ViewButton"
-	local var10 = useLocalization({
+	local var1 = useLocalization({
 		OkText = "CoreScripts.InGameMenu.Ok",
 		Description = "CoreScripts.InGameMenu.EducationalPopup.UINavigation.Description"
 	})
@@ -154,7 +154,7 @@ local function Body(p0)
 			LayoutOrder = 100,
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Text = var10.Description,
+			Text = var1.Description,
 			Font = typography.caption.Font,
 			TextSize = typography.caption.FontSize,
 			TextColor3 = color.textColor.Color3,
@@ -168,9 +168,9 @@ local function Body(p0)
 			layoutOrder = 200,
 			buttonType = buttonType.PrimarySystem,
 			size = UDim2.new(1, 0, 0, size.buttonHeight),
-			text = var10.OkText,
-			onActivated = p0.onDismissed,
-			icon = if p0.selectButtonDismissesGamepadNavigationDialog then userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonSelect) else nil
+			text = var1.OkText,
+			onActivated = p1.onDismissed,
+			icon = if p1.selectButtonDismissesGamepadNavigationDialog then userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonSelect) else nil
 		})
 	})
 end

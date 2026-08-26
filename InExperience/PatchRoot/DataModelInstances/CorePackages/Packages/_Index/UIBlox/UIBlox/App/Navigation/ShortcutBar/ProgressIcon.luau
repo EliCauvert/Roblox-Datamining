@@ -8,14 +8,14 @@ local imagesModule = require(parent_2.UIBlox.App.ImageSet.Images)
 local _ = require(parent.ImageSet.ImagesTypes)
 local _ = require(parent_1.App.Style.StyleTypes)
 
-local function renderHalfCircle(p0, p1)
+local function renderHalfCircle(p1, p2)
 	-- upvalues: reactModule (ref), imageSetComponentModule (ref)
-	local layoutOrder = p0.layoutOrder
-	local isLeft = p0.isLeft
-	local rotation = p0.rotation
-	local progressImage = p0.progressImage
-	local iconDefault = p1.Theme.IconDefault
-	local divider = p1.Theme.Divider
+	local layoutOrder = p1.layoutOrder
+	local isLeft = p1.isLeft
+	local rotation = p1.rotation
+	local progressImage = p1.progressImage
+	local iconDefault = p2.Theme.IconDefault
+	local divider = p2.Theme.Divider
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -49,13 +49,13 @@ local function renderHalfCircle(p0, p1)
 	})
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: imagesModule (ref), useStyleModule (ref), reactModule (ref), renderHalfCircle (ref), imageSetComponentModule (ref)
-	local progress = p2.progress
-	local isHolding = p2.isHolding
-	local var5 = if isHolding then p2.iconHolding else p2.icon
-	local var6 = if isHolding then imagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_RadialFill"] else imagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_RadialFill"]
-	local var7 = useStyleModule()
+	local progress = p1.progress
+	local isHolding = p1.isHolding
+	local var1 = if isHolding then p1.iconHolding else p1.icon
+	local var2 = if isHolding then imagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_RadialFill"] else imagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_RadialFill"]
+	local var3 = useStyleModule()
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -76,24 +76,24 @@ return function(p2)
 			Left = renderHalfCircle({
 				layoutOrder = 1,
 				isLeft = true,
-				progressImage = var6,
+				progressImage = var2,
 				rotation = reactModule.useMemo(function()
 					-- upvalues: progress (ref)
-					return progress:map(function(p3)
-						return math.clamp((p3 or 0) * 314 + 23, 180, 337)
+					return progress:map(function(p2)
+						return math.clamp((p2 or 0) * 314 + 23, 180, 337)
 					end)
 				end, { progress })
-			}, var7),
+			}, var3),
 			Right = renderHalfCircle({
 				layoutOrder = 2,
-				progressImage = var6,
+				progressImage = var2,
 				rotation = reactModule.useMemo(function()
 					-- upvalues: progress (ref)
-					return progress:map(function(p4)
-						return math.clamp((p4 or 0) * 314 + 23, 23, 180)
+					return progress:map(function(p2)
+						return math.clamp((p2 or 0) * 314 + 23, 23, 180)
 					end)
 				end, { progress })
-			}, var7)
+			}, var3)
 		}),
 		Icon = reactModule.createElement(imageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
@@ -101,12 +101,12 @@ return function(p2)
 			Size = UDim2.fromScale(1, 1),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Image = var5,
-			ImageColor3 = var7.Theme.IconEmphasis.Color,
+			Image = var1,
+			ImageColor3 = var3.Theme.IconEmphasis.Color,
 			ImageTransparency = reactModule.useMemo(function()
 				-- upvalues: progress (ref)
-				return progress:map(function(p5)
-					return if p5 then math.clamp(0.8 - p5 * 0.8, 0, 0.8) else 0
+				return progress:map(function(p2)
+					return if p2 then math.clamp(0.8 - p2 * 0.8, 0, 0.8) else 0
 				end)
 			end, { progress })
 		}),
@@ -118,7 +118,7 @@ return function(p2)
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.fromScale(0.5, 0),
 			Image = if isHolding then imagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_Arrow"] else imagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_Arrow"],
-			ImageColor3 = var7.Theme.IconEmphasis.Color
+			ImageColor3 = var3.Theme.IconEmphasis.Color
 		})
 	})
 end

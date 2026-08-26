@@ -4,31 +4,31 @@ local foundationModule = require(parent.Foundation)
 local snackbar = foundationModule.Snackbar
 local enums = foundationModule.Enums
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), snackbar (ref), enums (ref)
-	local var2, var3 = reactModule.useState(true)
-	local var4 = reactModule.useRef(nil)
+	local var1, var2 = reactModule.useState(true)
+	local var3 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var3 (ref)
-		if var4.current then
-			task.cancel(var4.current)
+		-- upvalues: var3 (ref), var2 (ref)
+		if var3.current then
+			task.cancel(var3.current)
 		end
-		var4.current = task.delay(5, function()
-			-- upvalues: var3 (copy)
-			var3(false)
+		var3.current = task.delay(5, function()
+			-- upvalues: var2 (copy)
+			var2(false)
 		end)
 		
 		return function()
-			-- upvalues: var4 (copy)
-			if var4.current then
-				task.cancel(var4.current)
-				var4.current = nil
+			-- upvalues: var3 (copy)
+			if var3.current then
+				task.cancel(var3.current)
+				var3.current = nil
 			end
 		end
 	end, {})
 	
-	return if var2 then reactModule.createElement(snackbar, {
-		title = p0.text,
+	return if var1 then reactModule.createElement(snackbar, {
+		title = p1.text,
 		icon = {
 			name = enums.IconName.CircleCheck,
 			variant = enums.IconVariant.Filled

@@ -10,11 +10,11 @@ local musicThumbnailIconSize = momentsCommonModule.Enums.MusicThumbnailIconSize
 local useMusicInfoModule = require(moments.Hooks.useMusicInfo)
 local musicModalModule = require(moments.Components.MusicModal)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useMusicInfoModule (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref), musicModalModule (ref)
-	local moment = p0.moment
-	local var6, var7 = reactModule.useState(false)
-	local var8 = useMusicInfoModule(reactModule.useMemo(function()
+	local moment = p1.moment
+	local var1, var2 = reactModule.useState(false)
+	local var3 = useMusicInfoModule(reactModule.useMemo(function()
 		-- upvalues: moment (ref)
 		if moment == nil then
 			return nil
@@ -29,33 +29,33 @@ return reactModule.memo(function(p0)
 		return if music == nil then nil else music.assetId
 	end, { moment }))
 	
-	return if var8 == nil then nil else reactModule.createElement(reactModule.Fragment, nil, {
+	return if var3 == nil then nil else reactModule.createElement(reactModule.Fragment, nil, {
 		Button = reactModule.createElement("CanvasGroup", {
 			BackgroundTransparency = 1,
-			GroupTransparency = p0.animationRatio,
-			LayoutOrder = p0.LayoutOrder,
+			GroupTransparency = p1.animationRatio,
+			LayoutOrder = p1.LayoutOrder,
 			Size = UDim2.fromOffset(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
 			Inner = reactModule.createElement(view, {
 				tag = "align-x-center align-y-center size-1200-1200 radius-medium",
-				isDisabled = p0.isDisabled,
+				isDisabled = p1.isDisabled,
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var7 (ref)
-					var7(true)
+					-- upvalues: var2 (ref)
+					var2(true)
 				end, {})
 			}, {
 				MusicThumbnail = reactModule.createElement(musicThumbnailIcon, {
-					assetId = var8.AssetId,
+					assetId = var3.AssetId,
 					size = musicThumbnailIconSize.Small
 				})
 			})
 		}),
-		Modal = if var6 then reactModule.createElement(musicModalModule, {
-			musicInfo = var8,
+		Modal = if var1 then reactModule.createElement(musicModalModule, {
+			musicInfo = var3,
 			onClose = reactModule.useCallback(function()
-				-- upvalues: var7 (ref)
-				var7(false)
+				-- upvalues: var2 (ref)
+				var2(false)
 			end, {})
 		}) else nil
 	})

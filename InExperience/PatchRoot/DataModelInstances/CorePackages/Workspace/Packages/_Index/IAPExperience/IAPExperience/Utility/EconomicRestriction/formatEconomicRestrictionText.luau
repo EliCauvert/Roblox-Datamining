@@ -5,10 +5,10 @@ local economicRestrictionsPromptShownCounter = require(IAPExperience.Generic.Eve
 local loggerModule = require(IAPExperience.Utility.logger)
 local getAppContextModule = require(IAPExperience.Utility.getAppContext)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: default (ref), economicRestrictionsPromptShownCounter (ref), getAppContextModule (ref), loggerModule (ref), getEconomicRestrictionLocalizedLabelModule (ref)
-	local timeoutMinutes = p1.timeoutMinutes or (p1.expirationTimeInMinutes or p1.ExpirationTimeInMinutes)
-	local violationType = p1.violationType or (p1.failureReason or p1.FailureReason)
+	local timeoutMinutes = p2.timeoutMinutes or (p2.expirationTimeInMinutes or p2.ExpirationTimeInMinutes)
+	local violationType = p2.violationType or (p2.failureReason or p2.FailureReason)
 	default:logRobloxTelemetryCounter(economicRestrictionsPromptShownCounter, 1, {
 		violationType = tostring(violationType),
 		appContext = getAppContextModule()
@@ -21,10 +21,10 @@ return function(p0, p1, p2)
 			violationType = violationType
 		})
 		
-		return p0.unknownText
+		return p1.unknownText
 	end
-	local var6 = getEconomicRestrictionLocalizedLabelModule(p0, violationType)
+	local var1 = getEconomicRestrictionLocalizedLabelModule(p1, violationType)
 	local ceiled = math.ceil(timeoutMinutes / 60)
 	
-	return if ceiled >= 24 then (if p2 then p0.economicRestrictionBaseTextDaysGeneral else p0.economicRestrictionBaseTextDays):gsub("{day}", tostring(math.ceil(ceiled / 24))):gsub("{violation}", var6) else (if p2 then p0.economicRestrictionBaseTextHoursGeneral else p0.economicRestrictionBaseTextHours):gsub("{hour}", tostring(ceiled)):gsub("{violation}", var6)
+	return if ceiled >= 24 then (if p3 then p1.economicRestrictionBaseTextDaysGeneral else p1.economicRestrictionBaseTextDays):gsub("{day}", tostring(math.ceil(ceiled / 24))):gsub("{violation}", var1) else (if p3 then p1.economicRestrictionBaseTextHoursGeneral else p1.economicRestrictionBaseTextHours):gsub("{hour}", tostring(ceiled)):gsub("{violation}", var1)
 end

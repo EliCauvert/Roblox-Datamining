@@ -32,14 +32,14 @@ t.DiagStats = {
 }
 t.BASE_CONTEXT = "friendsLanding"
 
-function t.new(p0, p1, p2)
+function t.new(p1, p2, p3)
 	-- upvalues: t (ref)
-	assert(p1, "FriendsLanding must be passed the ID of the local user")
+	assert(p2, "FriendsLanding must be passed the ID of the local user")
 	local t_1 = {
-		_diagImpl = p0.Diag,
-		_eventStreamImpl = p0.EventStream,
-		localUserId = p1,
-		_getLoadingTimeInfo = p2,
+		_diagImpl = p1.Diag,
+		_eventStreamImpl = p1.EventStream,
+		localUserId = p2,
+		_getLoadingTimeInfo = p3,
 		_reportedPagePerformanceOnce = {}
 	}
 	setmetatable(t_1, t)
@@ -47,47 +47,47 @@ function t.new(p0, p1, p2)
 	return t_1
 end
 
-function t:navigate(p3)
+function t:navigate(p1)
 	-- upvalues: loggerModule (ref), t (ref)
-	loggerModule:info("navigate to {}", p3)
-	local var10 = t.Navigation[p3]
+	loggerModule:info("navigate to {}", p1)
+	local var1 = t.Navigation[p1]
 	
-	if var10 then
-		self._diagImpl:reportCounter(var10, 1)
+	if var1 then
+		self._diagImpl:reportCounter(var1, 1)
 		
 		return
 	end
-	loggerModule:error("Error from navigate: Invalid destination '{}'", p3)
+	loggerModule:error("Error from navigate: Invalid destination '{}'", p1)
 end
 
-function t:buttonClick(p4, p5)
+function t:buttonClick(p1, p2)
 	-- upvalues: buttonClickEventsModule (ref), loggerModule (ref), llama (ref), showMoreSectionTypeEnumModule (ref), t (ref)
-	assert(buttonClickEventsModule.isEnumValue(p4), "invalid button name used")
-	loggerModule:info("eventName: buttonClick btn: {}{}", p4, self:_toStringAdditionalArgs(p5))
-	local var11 = llama.Dictionary.join(p5 or {}, {
-		btn = p4:rawValue(),
+	assert(buttonClickEventsModule.isEnumValue(p1), "invalid button name used")
+	loggerModule:info("eventName: buttonClick btn: {}{}", p1, self:_toStringAdditionalArgs(p2))
+	local var1 = llama.Dictionary.join(p2 or {}, {
+		btn = p1:rawValue(),
 		uid = self.localUserId,
 		contextOverride = llama.None
 	})
-	self._eventStreamImpl:setRBXEventStream(if p5 and p5.contextOverride then p5.contextOverride else self.BASE_CONTEXT, "buttonClick", var11)
-	var11 = nil
+	self._eventStreamImpl:setRBXEventStream(if p2 and p2.contextOverride then p2.contextOverride else self.BASE_CONTEXT, "buttonClick", var1)
+	var1 = nil
 	
-	if p4 == buttonClickEventsModule.LoadMoreUsers then
-		if var11.sectionType == showMoreSectionTypeEnumModule.FriendRequests then
-			var11 = t.DiagCounters.ShowMoreButtonPressedFriendRequests
-		elseif var11.sectionType == showMoreSectionTypeEnumModule.Friends then
-			var11 = t.DiagCounters.ShowMoreButtonPressedFriends
+	if p1 == buttonClickEventsModule.LoadMoreUsers then
+		if var1.sectionType == showMoreSectionTypeEnumModule.FriendRequests then
+			var1 = t.DiagCounters.ShowMoreButtonPressedFriendRequests
+		elseif var1.sectionType == showMoreSectionTypeEnumModule.Friends then
+			var1 = t.DiagCounters.ShowMoreButtonPressedFriends
 		end
 	end
-	if var11 then
-		self._diagImpl:reportCounter(var11, 1)
+	if var1 then
+		self._diagImpl:reportCounter(var1, 1)
 	end
 end
 
-function t._toStringAdditionalArgs(_, p6)
+function t._toStringAdditionalArgs(_, p1)
 	-- upvalues: tutils (ref)
-	if p6 then
-		local replaced, _ = string.gsub(" args: " .. tutils.toString(p6), "%s+", " ")
+	if p1 then
+		local replaced, _ = string.gsub(" args: " .. tutils.toString(p1), "%s+", " ")
 		
 		return replaced
 	end
@@ -100,79 +100,79 @@ function t:pageLoaded()
 	self._diagImpl:reportCounter(t.DiagCounters.UserLoadedPage, 1)
 end
 
-function t:pageLoadedWithArgs(p7, p8)
-	self._eventStreamImpl:setRBXEventStream(p7 or self.BASE_CONTEXT, "luaPageLoad", p8)
+function t:pageLoadedWithArgs(p1, p2)
+	self._eventStreamImpl:setRBXEventStream(p1 or self.BASE_CONTEXT, "luaPageLoad", p2)
 end
 
-function t:_pagePerformanceReport(p9, p10, p11)
+function t:_pagePerformanceReport(p1, p2, p3)
 	-- upvalues: navigatedFromPagesEnumModule (ref), loggerModule (ref)
-	p11 = p11 or os.clock()
-	local var14 = self._getLoadingTimeInfo and self._getLoadingTimeInfo() or {}
-	local startPage = var14.startPage
-	local startTime = var14.startTime
+	p3 = p3 or os.clock()
+	local var1 = self._getLoadingTimeInfo and self._getLoadingTimeInfo() or {}
+	local startPage = var1.startPage
+	local startTime = var1.startTime
 	
 	if navigatedFromPagesEnumModule.fromRawValue(startPage) and type(startTime) == "number" then
-		local var15 = (p11 - startTime) * 1000
-		local var16 = navigatedFromPagesEnumModule[startPage].rawValue()
-		local text = p9 .. "_" .. var16
+		local var2 = (p3 - startTime) * 1000
+		local var3 = navigatedFromPagesEnumModule[startPage].rawValue()
+		local text = p1 .. "_" .. var16
 		local t = {
-			startPage = var16,
-			loadingTime = var15,
+			startPage = var3,
+			loadingTime = var2,
 			uid = self.localUserId
 		}
 		loggerModule:info("pageLoaded in " .. var15 .. "ms")
-		self._diagImpl:reportStats(text, var15)
-		self._eventStreamImpl:setRBXEventStream(self.BASE_CONTEXT, p10, t)
+		self._diagImpl:reportStats(text, var2)
+		self._eventStreamImpl:setRBXEventStream(self.BASE_CONTEXT, p2, t)
 		
 		return
 	end
 	loggerModule:warning("Cannot report loading time: incorrect startPage or startTime")
 end
 
-function t:_reportPagePerformanceOnceCheck(p12)
-	if self._reportedPagePerformanceOnce[p12] then
+function t:_reportPagePerformanceOnceCheck(p1)
+	if self._reportedPagePerformanceOnce[p1] then
 		return true
 	end
-	self._reportedPagePerformanceOnce[p12] = true
+	self._reportedPagePerformanceOnce[p1] = true
 	
 	return false
 end
 
-function t:pageMountingTimeReport(p13)
+function t:pageMountingTimeReport(p1)
 	-- upvalues: t (ref)
 	if self:_reportPagePerformanceOnceCheck("pageMountingTime") then
 		return
 	end
-	self:_pagePerformanceReport(t.DiagStats.MountingPageTime, "pageMountingTime", p13)
+	self:_pagePerformanceReport(t.DiagStats.MountingPageTime, "pageMountingTime", p1)
 end
 
-function t:pageLoadingTimeReport(p14)
+function t:pageLoadingTimeReport(p1)
 	-- upvalues: t (ref)
 	if self:_reportPagePerformanceOnceCheck("pageLoadingTime") then
 		return
 	end
-	self:_pagePerformanceReport(t.DiagStats.LoadingPageTime, "pageLoadingTime", p14)
+	self:_pagePerformanceReport(t.DiagStats.LoadingPageTime, "pageLoadingTime", p1)
 end
 
-function t:reportAddFriendsEntrypoint(p15, p16)
+function t:reportAddFriendsEntrypoint(p1, p2)
 	-- upvalues: t (ref), appPage (ref)
-	assert(t.Navigation[p15] ~= nil, "invalid screen")
+	assert(t.Navigation[p1] ~= nil, "invalid screen")
 	
-	if p15 == appPage.Home then
+	if p1 == appPage.Home then
 		self._eventStreamImpl:setRBXEventStream("addUniversalFriends", "buttonClick", {
 			btn = "LegacyAddFriendsButton",
 			absolutePosition = 1,
-			showContactImporterModal = if p16 then p16.showContactImporterModal else nil
+			showContactImporterModal = if p2 then p2.showContactImporterModal else nil
 		})
 	end
-	self._diagImpl:reportCounter(t.Navigation[p15], 1)
+	self._diagImpl:reportCounter(t.Navigation[p1], 1)
 end
 
-function t:impressionEvent(p17, p18)
+function t:impressionEvent(p1, p2)
 	-- upvalues: impressionEventsModule (ref)
-	assert(impressionEventsModule.isEnumValue(p17), "invalid impression name used")
-	self._eventStreamImpl:setRBXEventStream("addUniversalFriends", p17:rawValue(), p18)
-	self._diagImpl:reportCounter(p17:rawValue(), 1)
+	assert(impressionEventsModule.isEnumValue(p1), "invalid impression name used")
+	self._eventStreamImpl:setRBXEventStream("addUniversalFriends", p1:rawValue(), p2)
+	self._diagImpl:reportCounter(p1:rawValue(), 1)
 end
 
 return t

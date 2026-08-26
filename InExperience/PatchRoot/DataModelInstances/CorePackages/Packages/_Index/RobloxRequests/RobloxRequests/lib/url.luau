@@ -52,74 +52,74 @@ local t_1 = {
 	[";"] = true
 }
 
-local function _(p0, p1)
-	local var5 = p0
+local function _(p1, p2)
+	local var1 = p1
 	
-	if not p1 then
-		var5 = var5:gsub("+", " ")
+	if not p2 then
+		var1 = var1:gsub("+", " ")
 	end
-	return var5:gsub("%%(%x%x)", function(p2)
-		return string.char(tonumber(p2, 16))
+	return var1:gsub("%%(%x%x)", function(p3)
+		return string.char(tonumber(p3, 16))
 	end)
 end
 
-local _ = function(p3)
-	return p3:gsub("([^A-Za-z0-9%_%.%-%~])", function(p4)
-		return string.upper(string.format("%%%02x", string.byte(p4)))
+local _ = function(p1)
+	return p1:gsub("([^A-Za-z0-9%_%.%-%~])", function(p2)
+		return string.upper(string.format("%%%02x", string.byte(p2)))
 	end)
 end
 
-local _ = function(p5)
-	return p5:gsub("([^A-Za-z0-9%_%.%-%~])", function(p6)
-		return string.upper(string.format("%%%02x", string.byte(p6)))
+local _ = function(p1)
+	return p1:gsub("([^A-Za-z0-9%_%.%-%~])", function(p2)
+		return string.upper(string.format("%%%02x", string.byte(p2)))
 	end):gsub("%%20", "+")
 end
 
-local function encodeSegment(p7)
+local function encodeSegment(p1)
 	-- upvalues: t_1 (ref)
-	return p7:gsub("([^a-zA-Z0-9])", function(p8)
+	return p1:gsub("([^a-zA-Z0-9])", function(p2)
 		-- upvalues: t_1 (copy)
-		return if t_1[p8] then p8 else p8:gsub("([^A-Za-z0-9%_%.%-%~])", function(p9)
-			return string.upper(string.format("%%%02x", string.byte(p9)))
+		return if t_1[p2] then p2 else p2:gsub("([^A-Za-z0-9%_%.%-%~])", function(p3)
+			return string.upper(string.format("%%%02x", string.byte(p3)))
 		end)
 	end)
 end
 
-local function concat(p10, p11)
-	return p10 .. p11:build()
+local function concat(p1, p2)
+	return p1 .. p11:build()
 end
 
-function t.build(p12)
+function t.build(p1)
 	-- upvalues: encodeSegment (ref), t (ref)
-	local var6 = ""
+	local var1 = ""
 	
-	if p12.path then
-		local path = p12.path
-		path:gsub("([^/]+)", function(p13)
+	if p1.path then
+		local path = p1.path
+		path:gsub("([^/]+)", function(p2)
 			-- upvalues: encodeSegment (copy)
-			return encodeSegment(p13)
+			return encodeSegment(p2)
 		end)
-		var6 ..= tostring(path)
+		var1 ..= tostring(path)
 	end
-	if p12.query then
-		local var7 = tostring(p12.query)
+	if p1.query then
+		local var2 = tostring(p1.query)
 		
-		if var7 ~= "" then
-			var6 ..= "?" .. var7
+		if var2 ~= "" then
+			var1 ..= "?" .. var7
 		end
 	end
-	if p12.host then
-		local host = p12.host
+	if p1.host then
+		local host = p1.host
 		
-		if p12.port and p12.scheme and t.services[p12.scheme] ~= p12.port then
+		if p1.port and p1.scheme and t.services[p1.scheme] ~= p1.port then
 			host ..= ":" .. p12.port
 		end
 		local text = nil
 		
-		if p12.user and p12.user ~= "" then
-			text = p12.user
+		if p1.user and p1.user ~= "" then
+			text = p1.user
 			
-			if p12.password then
+			if p1.password then
 				text ..= ":" .. p12.password
 			end
 		end
@@ -127,16 +127,16 @@ function t.build(p12)
 			host = text .. "@" .. host
 		end
 		if host then
-			var6 = if var6 ~= "" then "//" .. host else "//" .. host .. "/" .. var6:gsub("^/+", "")
+			var1 = if var1 ~= "" then "//" .. host else "//" .. host .. "/" .. var6:gsub("^/+", "")
 		end
 	end
-	if p12.scheme then
-		var6 = p12.scheme .. ":" .. var6
+	if p1.scheme then
+		var1 = p1.scheme .. ":" .. var6
 	end
-	if p12.fragment then
-		var6 ..= "#" .. p12.fragment
+	if p1.fragment then
+		var1 ..= "#" .. p12.fragment
 	end
-	return var6
+	return var1
 end
 
 function t.buildQuery(_, _, _)
@@ -159,83 +159,83 @@ Traceback:
 	runtime : [lunaux]:1320 function match_weird_patterns
 end
 
-function t.setQuery(value, p14)
+function t.setQuery(value, p1)
 	-- upvalues: t (ref)
-	local var9 = p14
+	local var1 = p1
 	
-	if type(var9) == "table" then
-		var9 = t.buildQuery(var9)
+	if type(var1) == "table" then
+		var1 = t.buildQuery(var1)
 	end
-	value.query = t.parseQuery(var9)
+	value.query = t.parseQuery(var1)
 	
-	return var9
+	return var1
 end
 
-function t.setAuthority(value, p15)
-	value.authority = p15
+function t.setAuthority(value, p1)
+	value.authority = p1
 	value.port = nil
 	value.host = nil
 	value.userinfo = nil
 	value.user = nil
 	value.password = nil
-	local var10 = p15:gsub("^([^@]*)@", function(p18)
+	local var1 = p1:gsub("^([^@]*)@", function(p2)
 		-- upvalues: value (ref)
-		value.userinfo = p18
+		value.userinfo = p2
 		
 		return ""
-	end):gsub("^%[[^%]]+%]", function(p17)
+	end):gsub("^%[[^%]]+%]", function(p2)
 		-- upvalues: value (ref)
-		value.host = p17
+		value.host = p2
 		
 		return ""
-	end):gsub(":([^:]*)$", function(p16)
+	end):gsub(":([^:]*)$", function(p2)
 		-- upvalues: value (ref)
-		value.port = tonumber(p16)
+		value.port = tonumber(p2)
 		
 		return ""
 	end)
 	
-	if var10 ~= "" and not value.host then
-		value.host = var10:lower()
+	if var1 ~= "" and not value.host then
+		value.host = var1:lower()
 	end
 	if value.userinfo then
-		value.user = value.userinfo:gsub(":([^:]*)$", function(p19)
+		value.user = value.userinfo:gsub(":([^:]*)$", function(p2)
 			-- upvalues: value (ref)
-			value.password = p19
+			value.password = p2
 			
 			return ""
 		end)
 	end
-	return var10
+	return var1
 end
 
-function t.parse(p20)
+function t.parse(p1)
 	-- upvalues: t (ref), concat (ref)
 	local t_1 = {}
 	t.setAuthority(t_1, "")
 	t.setQuery(t_1, "")
-	t_1.path = tostring(p20 or ""):gsub("#(.*)$", function(p25)
+	t_1.path = tostring(p1 or ""):gsub("#(.*)$", function(p2)
 		-- upvalues: t_1 (ref)
-		t_1.fragment = p25
+		t_1.fragment = p2
 		
 		return ""
-	end):gsub("^([%w][%w%+%-%.]*)%:", function(p24)
+	end):gsub("^([%w][%w%+%-%.]*)%:", function(p2)
 		-- upvalues: t_1 (ref)
-		t_1.scheme = p24:lower()
+		t_1.scheme = p2:lower()
 		
 		return ""
-	end):gsub("%?(.*)", function(p23)
+	end):gsub("%?(.*)", function(p2)
 		-- upvalues: t (copy), t_1 (ref)
-		t.setQuery(t_1, p23)
+		t.setQuery(t_1, p2)
 		
 		return ""
-	end):gsub("^//([^/]*)", function(p22)
+	end):gsub("^//([^/]*)", function(p2)
 		-- upvalues: t (copy), t_1 (ref)
-		t.setAuthority(t_1, p22)
+		t.setAuthority(t_1, p2)
 		
 		return ""
-	end):gsub("%%(%x%x)", function(p21)
-		return string.char(tonumber(p21, 16))
+	end):gsub("%%(%x%x)", function(p2)
+		return string.char(tonumber(p2, 16))
 	end)
 	setmetatable(t_1, { __index = t, __concat = concat, __tostring = t.build })
 	
@@ -248,116 +248,116 @@ function t.removeDotSegments(vectorA)
 	if string.len(vectorA) == 0 then
 		return ""
 	end
-	local var13 = false
-	local var14 = false
+	local var1 = false
+	local var2 = false
 	
 	if string.sub(vectorA, 1, 1) == "/" then
-		var13 = true
+		var1 = true
 	end
-	if (string.len(vectorA) > 1 or var13 == false) and string.sub(vectorA, -1) == "/" then
-		var14 = true
+	if (string.len(vectorA) > 1 or var1 == false) and string.sub(vectorA, -1) == "/" then
+		var2 = true
 	end
-	vectorA:gsub("[^/]+", function(p26)
+	vectorA:gsub("[^/]+", function(p1)
 		-- upvalues: t (ref)
-		table.insert(t, p26)
+		table.insert(t, p1)
 	end)
 	local t_1 = {}
-	local var16 = 0
+	local var3 = 0
 	
 	for i, v in ipairs(t) do
 		if v == ".." then
-			if var16 > 0 then
-				var16 -= 1
+			if var3 > 0 then
+				var3 -= 1
 			end
 		elseif v ~= "." then
-			var16 += 1
-			t_1[var16] = v
+			var3 += 1
+			t_1[var3] = v
 		end
 	end
 	local _ = ""
-	local var17 = if #t_1 > 0 and var16 > 0 then table.concat(t_1, "/", 1, var16) else ""
+	local var4 = if #t_1 > 0 and var3 > 0 then table.concat(t_1, "/", 1, var3) else ""
 	
-	if var13 then
-		var17 = "/" .. var17
+	if var1 then
+		var4 = "/" .. var17
 	end
-	if var14 then
-		var17 ..= "/"
+	if var2 then
+		var4 ..= "/"
 	end
-	return var17
+	return var4
 end
 
-local function absolutePath(value, p27)
-	if string.sub(p27, 1, 1) == "/" then
-		return "/" .. string.gsub(p27, "^[%./]+", "")
+local function absolutePath(value, p1)
+	if string.sub(p1, 1, 1) == "/" then
+		return "/" .. string.gsub(p1, "^[%./]+", "")
 	end
-	local var18 = value
+	local var5 = value
 	
-	if p27 ~= "" then
-		var18 = "/" .. var18:gsub("[^/]*$", "")
+	if p1 ~= "" then
+		var5 = "/" .. var18:gsub("[^/]*$", "")
 	end
-	var18 = string.gsub((var18 .. p27):gsub("([^/]*%./)", function(p28)
-		return if p28 == "./" then "" else p28
+	var5 = string.gsub((var5 .. p27):gsub("([^/]*%./)", function(p2)
+		return if p2 == "./" then "" else p2
 	end), "/%.$", "/")
-	local var19 = nil
-	while var19 ~= var18 do
-		var19 = var18
-		var18 = string.gsub(var19, "([^/]*/%.%./)", function(p29)
-			return if p29 == "../../" then p29 else ""
+	local var6 = nil
+	while var6 ~= var5 do
+		var6 = var5
+		var5 = string.gsub(var6, "([^/]*/%.%./)", function(p2)
+			return if p2 == "../../" then p2 else ""
 		end)
 	end
-	var18 = string.gsub(var18, "([^/]*/%.%.?)$", function(p30)
-		return if p30 == "../.." then p30 else ""
+	var5 = string.gsub(var5, "([^/]*/%.%.?)$", function(p2)
+		return if p2 == "../.." then p2 else ""
 	end)
-	local var20 = nil
-	while var20 ~= var18 do
-		var20 = var18
-		var18 = string.gsub(var20, "^/?%.%./", "")
+	local var7 = nil
+	while var7 ~= var5 do
+		var7 = var5
+		var5 = string.gsub(var7, "^/?%.%./", "")
 	end
 	return "/" .. var18
 end
 
-function t.resolve(p31, p32)
+function t.resolve(p2, p3)
 	-- upvalues: t (ref), absolutePath (ref)
-	if type(p31) == "string" then
-		p31 = t.parse(p31)
+	if type(p2) == "string" then
+		p2 = t.parse(p2)
 	end
-	if type(p32) == "string" then
-		p32 = t.parse(p32)
+	if type(p3) == "string" then
+		p3 = t.parse(p3)
 	end
-	if p32.scheme then
-		return p32
+	if p3.scheme then
+		return p3
 	end
-	p32.scheme = p31.scheme
+	p3.scheme = p2.scheme
 	
-	if not p32.authority or p32.authority == "" then
-		p32:setAuthority(p31.authority)
+	if not p3.authority or p3.authority == "" then
+		p3:setAuthority(p2.authority)
 		
-		if p32.path and p32.path ~= "" then
-			p32.path = absolutePath(p31.path, p32.path)
+		if p3.path and p3.path ~= "" then
+			p3.path = absolutePath(p2.path, p3.path)
 		else
-			p32.path = p31.path
-			local query = p32.query
+			p3.path = p2.path
+			local query = p3.query
 			
 			if query and next(query) then
-				return p32
+				return p3
 			else
-				p32.query = p31.query
+				p3.query = p2.query
 				
-				return p32
+				return p3
 			end
 		end
 	end
 end
 
-function t.normalize(p33)
+function t.normalize(p2)
 	-- upvalues: t (ref), absolutePath (ref)
-	if type(p33) == "string" then
-		p33 = t.parse(p33)
+	if type(p2) == "string" then
+		p2 = t.parse(p2)
 	end
-	if p33.path then
-		p33.path = string.gsub(absolutePath(p33.path, ""), "//+", "/")
+	if p2.path then
+		p2.path = string.gsub(absolutePath(p2.path, ""), "//+", "/")
 	end
-	return p33
+	return p2
 end
 
 return t

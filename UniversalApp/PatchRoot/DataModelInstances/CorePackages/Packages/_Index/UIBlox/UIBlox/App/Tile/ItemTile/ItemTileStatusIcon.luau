@@ -9,28 +9,28 @@ local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent
 local itemTileEnumsModule = require(parent.Enum.ItemTileEnums)
 local getIconSizeModule = require(parent_1.App.ImageSet.getIconSize)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: itemTileEnumsModule (ref)
-	return if p0 == itemTileEnumsModule.StatusStyle.PendingIcon then "icons/status/pending_small" elseif p0 == itemTileEnumsModule.StatusStyle.AlertIcon then "icons/actions/info_small" else nil
+	return if p1 == itemTileEnumsModule.StatusStyle.PendingIcon then "icons/status/pending_small" elseif p1 == itemTileEnumsModule.StatusStyle.AlertIcon then "icons/actions/info_small" else nil
 end
 
 return function(p1)
 	-- upvalues: useStyleModule (ref), itemTileEnumsModule (ref), getIconSizeModule (ref), iconSizeModule (ref), UIBloxConfigModule (ref), reactModule (ref), imageSetComponentModule (ref), imagesModule (ref)
 	local tokens = useStyleModule().Tokens
 	local statusStyle = p1.statusStyle
-	local var8 = if statusStyle == itemTileEnumsModule.StatusStyle.PendingIcon then "icons/status/pending_small" elseif statusStyle == itemTileEnumsModule.StatusStyle.AlertIcon then "icons/actions/info_small" else nil
+	local var1 = if statusStyle == itemTileEnumsModule.StatusStyle.PendingIcon then "icons/status/pending_small" elseif statusStyle == itemTileEnumsModule.StatusStyle.AlertIcon then "icons/actions/info_small" else nil
 	
-	if var8 then
-		local var9 = getIconSizeModule(iconSizeModule.Small)
-		local var10 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Icon.Emphasis
+	if var1 then
+		local var2 = getIconSizeModule(iconSizeModule.Small)
+		local var3 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Icon.Emphasis
 		
 		return reactModule.createElement(imageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
 			Position = UDim2.fromOffset(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100),
-			Size = UDim2.fromOffset(var9, var9),
-			Image = imagesModule[var8],
-			ImageColor3 = var10.Color3,
-			ImageTransparency = var10.Transparency
+			Size = UDim2.fromOffset(var2, var2),
+			Image = imagesModule[var1],
+			ImageColor3 = var3.Color3,
+			ImageTransparency = var3.Transparency
 		})
 	end
 	return nil

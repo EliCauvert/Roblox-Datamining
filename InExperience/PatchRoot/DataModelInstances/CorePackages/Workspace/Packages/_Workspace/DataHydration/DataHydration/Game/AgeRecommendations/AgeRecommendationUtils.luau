@@ -17,12 +17,12 @@ if require(parent.SharedFlags).FFlagLuaAppAddIgrsImages then
 	end
 end
 return {
-	getIgrsImage = function(p0)
+	getIgrsImage = function(p1)
 		-- upvalues: t (ref), discoveryEventErrorLogger (ref)
-		if t[p0] then
-			return t[p0]
+		if t[p1] then
+			return t[p1]
 		end
-		discoveryEventErrorLogger.reportError("getIgrsImage", `Invalid IGRS rating: {p0}`)
+		discoveryEventErrorLogger.reportError("getIgrsImage", `Invalid IGRS rating: {p1}`)
 		
 		return nil
 	end

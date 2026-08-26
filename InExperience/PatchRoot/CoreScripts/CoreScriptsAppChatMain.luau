@@ -5,9 +5,9 @@ local chatEntryPointNames = require(corePackagesService.Workspace.Packages.Socia
 local apolloClientModule = require(coreGuiService.RobloxGui.Modules.ApolloClient)
 local getFFlagFixSettingshubImportOrderModule = require(robloxGui.Modules.Flags.GetFFlagFixSettingshubImportOrder)
 local fFlagRemoveLoadingTimeoutModule = require(robloxGui.Modules.Flags.FFlagRemoveLoadingTimeout)
-local var6 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
 
-if getFFlagFixSettingshubImportOrderModule() and (not fFlagRemoveLoadingTimeoutModule or not var6) then
+if getFFlagFixSettingshubImportOrderModule() and (not fFlagRemoveLoadingTimeoutModule or not var1) then
 	coreGuiService:WaitForChild("TopBarApp", if fFlagRemoveLoadingTimeoutModule then 1e999 else nil)
 end
 local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
@@ -20,7 +20,7 @@ local playerListManagerModule = require(robloxGui.Modules.PlayerList.PlayerListM
 local constantsModule = require(robloxGui.Modules.TopBar.Constants)
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
-local var16 = if sharedFlagsModule.FFlagExpChatEnableFriendsTab and var6 then require(robloxGui.Modules.Chrome.Integrations.ExpChat.ChatChromeIntegration) else nil
+local var2 = if sharedFlagsModule.FFlagExpChatEnableFriendsTab and var1 then require(robloxGui.Modules.Chrome.Integrations.ExpChat.ChatChromeIntegration) else nil
 local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
 local openConversationModule = require(corePackagesService.Workspace.Packages.FriendsChat.openConversation)
 local promiseModule = require(corePackagesService.Packages.Promise)
@@ -31,9 +31,9 @@ if SSUIMetaLuaEngineFeature then
 	pcall(function()
 		-- upvalues: inExperienceAppChatModalModule (ref)
 		local safetyService = game:GetService("SafetyService")
-		inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p0)
+		inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p1)
 			-- upvalues: safetyService (ref)
-			if p0 then
+			if p1 then
 				safetyService:ReportPartyChatWindowOpen()
 				
 				return
@@ -42,7 +42,7 @@ if SSUIMetaLuaEngineFeature then
 		end)
 	end)
 end
-local var21 = if var16 then var16.chatOpenCapability else nil
+local var3 = if var2 then var2.chatOpenCapability else nil
 renderCoreScriptInExperienceAppChatModule(apolloClientModule, {
 	getParentContainer = function()
 		-- upvalues: inExperienceAppChatModalModule (ref)
@@ -77,16 +77,16 @@ renderCoreScriptInExperienceAppChatModule(apolloClientModule, {
 			inExperienceAppChatModalModule:setCurrentSquadId(p1)
 		end
 	end,
-	openFriendsChatConversation = if var21 then parentContainerModule.createOpenFriendsChatConversation({
-		isChatAvailable = var21.isAvailable,
+	openFriendsChatConversation = if var3 then parentContainerModule.createOpenFriendsChatConversation({
+		isChatAvailable = var3.isAvailable,
 		openConversation = openConversationModule,
 		requestSelectFriendsTab = expChatModule.requestSelectFriendsTab,
-		ensureOpenChat = var21.ensureOpenChat
+		ensureOpenChat = var3.ensureOpenChat
 	}) else function(_)
 		-- upvalues: promiseModule (ref)
 		return promiseModule.resolve(false)
 	end
-}, function(p2)
+}, function(p1)
 	-- upvalues: inExperienceAppChatModalModule (ref)
-	inExperienceAppChatModalModule:setUnreadCount(p2)
+	inExperienceAppChatModalModule:setUnreadCount(p1)
 end)

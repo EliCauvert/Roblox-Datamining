@@ -6,24 +6,24 @@ local setTabBarVisibleFromChat = require(parent.AppTabBarRodux).Thunks.SetTabBar
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local trustedFriendsModalEntry = trustedContactsModule.TrustedFriendsModalEntry
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), reactModule (ref), setTabBarVisibleFromChat (ref), trustedFriendsModalEntry (ref), cryoModule (ref)
-	local navigation = p0.navigation
+	local navigation = p1.navigation
 	local props = navigation.getParam("props")
-	local var4 = useDispatch()
-	local var5 = reactModule.useCallback(function()
+	local var1 = useDispatch()
+	local var2 = reactModule.useCallback(function()
 		-- upvalues: navigation (ref)
 		navigation.pop()
 	end, { navigation })
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), setTabBarVisibleFromChat (copy)
-		var4(setTabBarVisibleFromChat(false))
+		-- upvalues: var1 (ref), setTabBarVisibleFromChat (copy)
+		var1(setTabBarVisibleFromChat(false))
 		
 		return function()
-			-- upvalues: var4 (copy), setTabBarVisibleFromChat (copy)
-			var4(setTabBarVisibleFromChat(true))
+			-- upvalues: var1 (copy), setTabBarVisibleFromChat (copy)
+			var1(setTabBarVisibleFromChat(true))
 		end
-	end, { var4 })
+	end, { var1 })
 	
-	return reactModule.createElement(trustedFriendsModalEntry, cryoModule.Dictionary.join(props, { onClosed = var5 }))
+	return reactModule.createElement(trustedFriendsModalEntry, cryoModule.Dictionary.join(props, { onClosed = var2 }))
 end

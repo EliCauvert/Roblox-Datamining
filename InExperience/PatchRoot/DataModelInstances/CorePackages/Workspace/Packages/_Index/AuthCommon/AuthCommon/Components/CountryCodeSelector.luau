@@ -14,8 +14,8 @@ local apiFetchCountryCodesModule = require(authCommon.Thunks.ApiFetchCountryCode
 local countryCodeSelectorButtonModule = require(authCommon.Components.CountryCodeSelectorButton)
 local countryCodeSelector = roactModule.PureComponent:extend("CountryCodeSelector")
 
-function countryCodeSelector.init(p0)
-	p0.props.fetchCountryCodes(p0.props.networking):catch(function() end)
+function countryCodeSelector.init(p1)
+	p1.props.fetchCountryCodes(p1.props.networking):catch(function() end)
 end
 
 function countryCodeSelector.render(p1)
@@ -30,23 +30,23 @@ function countryCodeSelector.render(p1)
 	})
 end
 
-countryCodeSelector = roactRoduxModule.connect(if fFlagUseSignalsForCountryCodeList then nil else function(p2)
-	return { countryCodeList = p2.CountryCodeList }
-end, function(p3)
+countryCodeSelector = roactRoduxModule.connect(if fFlagUseSignalsForCountryCodeList then nil else function(p1)
+	return { countryCodeList = p1.CountryCodeList }
+end, function(p1)
 	-- upvalues: apiFetchCountryCodesModule (ref)
 	return {
-		fetchCountryCodes = function(p4)
-			-- upvalues: p3 (ref), apiFetchCountryCodesModule (copy)
-			return p3(apiFetchCountryCodesModule.Fetch(p4))
+		fetchCountryCodes = function(p2)
+			-- upvalues: p1 (ref), apiFetchCountryCodesModule (copy)
+			return p1(apiFetchCountryCodesModule.Fetch(p2))
 		end
 	}
 end)(countryCodeSelector)
 
 if fFlagUseSignalsForCountryCodeList then
-	local var10 = countryCodeSelector
-	countryCodeSelector = reactModule.memo(function(p5)
-		-- upvalues: useSignalState (ref), getCountryCodeListStoreModule (ref), roactModule (ref), var10 (ref), cryoModule (ref)
-		return roactModule.createElement(var10, cryoModule.Dictionary.union(p5, {
+	local var1 = countryCodeSelector
+	countryCodeSelector = reactModule.memo(function(p1)
+		-- upvalues: useSignalState (ref), getCountryCodeListStoreModule (ref), roactModule (ref), var1 (ref), cryoModule (ref)
+		return roactModule.createElement(var1, cryoModule.Dictionary.union(p1, {
 			countryCodeList = useSignalState(getCountryCodeListStoreModule(false).getCountryCodeList)
 		}))
 	end)

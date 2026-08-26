@@ -30,28 +30,28 @@ local t = {
 	isVerified = false
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: llama (ref), t (ref), useStyle (ref), useTokens (ref), useLocalization (ref), react (ref), view (ref), stateLayerAffordance (ref), playerTile (ref), fixFriendsLandingTileGamepadSelection (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), skeleton (ref), text (ref), verifiedBadgesModule (ref), fFlagEnableBlackbirdCheck (ref), foundationModule (ref), enums (ref), playerContext (ref)
-	local var6 = llama.Dictionary.join(t, p0 or {})
-	local var7 = useStyle()
-	local var8 = useTokens()
-	local var9 = useLocalization({
+	local var1 = llama.Dictionary.join(t, p1 or {})
+	local var2 = useStyle()
+	local var3 = useTokens()
+	local var4 = useLocalization({
 		trustedText = "Feature.Friends.TrustedConnection.Label.Trusted"
 	})
 	local icon = nil
 	local iconColor = nil
 	local iconTransparency = nil
-	local textDefault = var7.Theme.TextDefault
+	local textDefault = var2.Theme.TextDefault
 	
-	if var6.relevancyInfo then
-		iconColor = var6.relevancyInfo.iconColor
-		icon = var6.relevancyInfo.icon
-		iconTransparency = var6.relevancyInfo.iconTransparency
+	if var1.relevancyInfo then
+		iconColor = var1.relevancyInfo.iconColor
+		icon = var1.relevancyInfo.icon
+		iconTransparency = var1.relevancyInfo.iconTransparency
 	end
 	local createElement = react.createElement
 	local t_1 = {
 		tag = "col auto-xy size-0-0 gap-small",
-		onActivated = var6.openPlayerProfile,
+		onActivated = var1.openPlayerProfile,
 		stateLayer = { affordance = stateLayerAffordance.None }
 	}
 	local t_2 = {
@@ -63,10 +63,10 @@ return function(p0)
 				title = "",
 				subtitle = "",
 				tileSize = UDim2.fromScale(1, 1),
-				thumbnail = var6.user.thumbnail,
-				onActivated = var6.openPlayerProfile,
-				forwardedRef = var6.playerTileRef,
-				buttons = var6.buttons,
+				thumbnail = var1.user.thumbnail,
+				onActivated = var1.openPlayerProfile,
+				forwardedRef = var1.playerTileRef,
+				buttons = var1.buttons,
 				Selectable = if fixFriendsLandingTileGamepadSelection then false else true,
 				openTypeFeatures = if getFFlagLuaAppEnableOpenTypeSupport() then openTypeSupport:getUserNameStylisticAlternative() else nil
 			})
@@ -81,11 +81,11 @@ return function(p0)
 	local createElement_2 = react.createElement
 	local t_5 = { tag = "auto-y size-full-0" }
 	local t_6 = {
-		LoadingSkeleton = if not var6.title then react.createElement(skeleton, {
-			Size = UDim2.new(1, 0, 0, var8.Typography.TitleLarge.FontSize)
+		LoadingSkeleton = if not var1.title then react.createElement(skeleton, {
+			Size = UDim2.new(1, 0, 0, var3.Typography.TitleLarge.FontSize)
 		}) else nil
 	}
-	local title = var6.title
+	local title = var1.title
 	
 	if title then
 		title = react.createElement
@@ -97,41 +97,41 @@ return function(p0)
 				tag = "text-truncate-end text-align-x-left auto-xy shrink content-default",
 				LayoutOrder = 1,
 				RichText = true,
-				fontStyle = var8.Typography.TitleLarge,
-				Text = var6.title
+				fontStyle = var3.Typography.TitleLarge,
+				Text = var1.title
 			}),
-			VerifiedBadge = var6.isVerified and react.createElement(text, {
+			VerifiedBadge = var1.isVerified and react.createElement(text, {
 				tag = "auto-xy content-default",
 				LayoutOrder = 2,
 				RichText = true,
-				fontStyle = var8.Typography.TitleLarge,
+				fontStyle = var3.Typography.TitleLarge,
 				Text = verifiedBadgesModule.emoji.verified
 			}),
-			SubscriptionBadge = if fFlagEnableBlackbirdCheck and var6.isRobloxSubscriber == true then react.createElement(foundationModule.Icon, {
+			SubscriptionBadge = if fFlagEnableBlackbirdCheck and var1.isRobloxSubscriber == true then react.createElement(foundationModule.Icon, {
 				LayoutOrder = 3,
 				name = enums.IconName.RobloxPlus,
 				size = enums.IconSize.Small,
-				style = var8.Color.Content.Emphasis
+				style = var3.Color.Content.Emphasis
 			}) else nil
 		})
 	end
 	t_6.Title = title
 	t_4.Title = createElement_2(view, t_5, t_6)
 	t_4.Subtitle = react.createElement(view, { tag = "row auto-y size-full-0", LayoutOrder = 2 }, {
-		LoadingSkeleton = if var6.subtitle and var6.subtitle ~= "@" then nil else react.createElement(skeleton, {
-			Size = UDim2.new(0.4, 0, 0, var8.Typography.BodySmall.FontSize)
+		LoadingSkeleton = if var1.subtitle and var1.subtitle ~= "@" then nil else react.createElement(skeleton, {
+			Size = UDim2.new(0.4, 0, 0, var3.Typography.BodySmall.FontSize)
 		}),
-		SubtitleText = var6.subtitle and (var6.subtitle ~= "@" and react.createElement(text, {
+		SubtitleText = var1.subtitle and (var1.subtitle ~= "@" and react.createElement(text, {
 			tag = "text-truncate-end auto-xy text-align-x-left shrink content-default",
 			LayoutOrder = 1,
 			RichText = true,
-			fontStyle = var8.Typography.BodySmall,
-			Text = var6.subtitle
+			fontStyle = var3.Typography.BodySmall,
+			Text = var1.subtitle
 		})),
-		TCTextLabel = var6.isTrustedConnection and (var6.subtitle and (var6.subtitle ~= "@" and react.createElement(text, {
+		TCTextLabel = var1.isTrustedConnection and (var1.subtitle and (var1.subtitle ~= "@" and react.createElement(text, {
 			tag = "content-default auto-xy text-align-x-left",
 			LayoutOrder = 2,
-			fontStyle = var8.Typography.BodySmall,
+			fontStyle = var3.Typography.BodySmall,
 			Text = " \226\128\162 " .. var9.trustedText
 		})))
 	})
@@ -139,16 +139,16 @@ return function(p0)
 		tag = "size-full-0 row auto-y gap-xsmall align-x-left align-y-center",
 		LayoutOrder = 3
 	}, {
-		ContextualPresence = var6.relevancyInfo and (var6.relevancyInfo.text and react.createElement(playerContext, {
+		ContextualPresence = var1.relevancyInfo and (var1.relevancyInfo.text and react.createElement(playerContext, {
 			layoutOrder = 2,
-			fontStyle = var7.Font.CaptionBody,
+			fontStyle = var2.Font.CaptionBody,
 			icon = icon,
 			iconColor = iconColor,
 			iconSize = UDim2.fromOffset(12, 12),
 			iconTransparency = iconTransparency,
-			text = if var6.relevancyInfo then var6.relevancyInfo.text else nil,
+			text = if var1.relevancyInfo then var1.relevancyInfo.text else nil,
 			textColorStyle = textDefault,
-			onActivated = var6.openPlayerProfile,
+			onActivated = var1.openPlayerProfile,
 			Selectable = if fixFriendsLandingTileGamepadSelection then false else nil
 		}))
 	})

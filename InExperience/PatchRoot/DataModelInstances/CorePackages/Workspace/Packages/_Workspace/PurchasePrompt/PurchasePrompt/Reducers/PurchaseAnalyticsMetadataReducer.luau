@@ -9,19 +9,19 @@ local fFlagPassShopPurchaseSurfaceToBuyModal = sharedFlagsModule.FFlagPassShopPu
 local t = {}
 
 return rodux.createReducer(t, {
-	[setPurchaseAnalyticsMetadataModule.name] = function(_, p0)
+	[setPurchaseAnalyticsMetadataModule.name] = function(_, p1)
 		-- upvalues: fFlagUnifiedPurchaseGamepassAddProductUniverseId (ref)
 		return {
-			purchaseFlowUUID = p0.purchaseAnalyticsMetadata.purchaseFlowUUID,
-			surface = p0.purchaseAnalyticsMetadata.surface,
-			productId = p0.purchaseAnalyticsMetadata.productId,
-			productType = p0.purchaseAnalyticsMetadata.productType,
-			productTargetId = p0.purchaseAnalyticsMetadata.productTargetId,
-			saleLocationUniverseId = p0.purchaseAnalyticsMetadata.saleLocationUniverseId,
-			productUniverseId = if fFlagUnifiedPurchaseGamepassAddProductUniverseId then p0.purchaseAnalyticsMetadata.productUniverseId else nil,
-			price = p0.purchaseAnalyticsMetadata.price,
-			userRobuxBalance = p0.purchaseAnalyticsMetadata.userRobuxBalance,
-			eventMetadata = p0.purchaseAnalyticsMetadata.eventMetadata
+			purchaseFlowUUID = p1.purchaseAnalyticsMetadata.purchaseFlowUUID,
+			surface = p1.purchaseAnalyticsMetadata.surface,
+			productId = p1.purchaseAnalyticsMetadata.productId,
+			productType = p1.purchaseAnalyticsMetadata.productType,
+			productTargetId = p1.purchaseAnalyticsMetadata.productTargetId,
+			saleLocationUniverseId = p1.purchaseAnalyticsMetadata.saleLocationUniverseId,
+			productUniverseId = if fFlagUnifiedPurchaseGamepassAddProductUniverseId then p1.purchaseAnalyticsMetadata.productUniverseId else nil,
+			price = p1.purchaseAnalyticsMetadata.price,
+			userRobuxBalance = p1.purchaseAnalyticsMetadata.userRobuxBalance,
+			eventMetadata = p1.purchaseAnalyticsMetadata.eventMetadata
 		}
 	end,
 	[completeRequestModule.name] = function(p1, _)

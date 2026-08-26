@@ -4,15 +4,15 @@ local abuseReportAnalyticsContextModule = require(genericAbuseReporting.Bedui.Pr
 local _ = require(genericAbuseReporting.Enums.AbuseVector)
 local _ = require(genericAbuseReporting.Bedui.Utils.BeduiAnalytics)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), abuseReportAnalyticsContextModule (ref)
-	local var3, var4 = reactModule.useState(false)
+	local var1, var2 = reactModule.useState(false)
 	
 	return reactModule.createElement(abuseReportAnalyticsContextModule.Provider, {
 		value = {
-			abuseVector = p0.abuseVector,
-			isReportSubmitted = var3,
-			setIsReportSubmitted = var4
+			abuseVector = p1.abuseVector,
+			isReportSubmitted = var1,
+			setIsReportSubmitted = var2
 		}
-	}, p0.children)
+	}, p1.children)
 end

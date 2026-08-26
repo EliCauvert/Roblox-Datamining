@@ -4,13 +4,13 @@
 	"RightLeg", "RunAnimation", "Shirt", "SwimAnimation", "Torso", "WalkAnimation"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: list (ref)
 	local v_1
 	local t = {}
 	
 	for i, v in ipairs(list) do
-		v_1 = p0[v]
+		v_1 = p1[v]
 		
 		if typeof(v_1) == "number" and v_1 > 0 then
 			table.insert(t, v_1)
@@ -20,17 +20,17 @@ return function(p0)
 			end
 		end
 	end
-	for i_1, v_1 in ipairs(p0:GetAccessories(true)) do
+	for i_1, v_1 in ipairs(p1:GetAccessories(true)) do
 		table.insert(t, v_1.AssetId)
 	end
-	for v_1, v_2 in p0:GetChildren() do
+	for v_1, v_2 in p1:GetChildren() do
 		if v_2:IsA("MakeupDescription") and v_2.AssetId > 0 then
 			table.insert(t, v_2.AssetId)
 		end
 	end
-	local emotes = p0:GetEmotes()
+	local emotes = p1:GetEmotes()
 	
-	for i_3, v_3 in ipairs(p0:GetEquippedEmotes()) do
+	for i_3, v_3 in ipairs(p1:GetEquippedEmotes()) do
 		local name = emotes[v_3.Name]
 		
 		if name then

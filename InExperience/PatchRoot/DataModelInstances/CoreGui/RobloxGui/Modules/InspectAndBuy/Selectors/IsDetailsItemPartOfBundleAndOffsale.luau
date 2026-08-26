@@ -1,10 +1,10 @@
-﻿return function(p0)
-	local assetId = p0.detailsInformation.assetId
+﻿return function(p1)
+	local assetId = p1.detailsInformation.assetId
 	
 	if assetId == nil then
 		return nil
 	end
-	local var0 = p0.assets[assetId]
+	local var1 = p1.assets[assetId]
 	
-	return var0 and var0.parentBundleId ~= nil
+	return var1 and var1.parentBundleId ~= nil
 end

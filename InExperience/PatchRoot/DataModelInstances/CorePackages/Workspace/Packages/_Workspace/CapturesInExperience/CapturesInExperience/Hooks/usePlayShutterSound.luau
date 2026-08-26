@@ -8,9 +8,9 @@ local fFlagCapturesUpdateUsePlayShutterSoundTestingModule = require(parent.Flags
 return function()
 	-- upvalues: fFlagCapturesUpdateUsePlayShutterSoundTestingModule (ref), dashModule (ref), reactModule (ref), robloxGui (ref)
 	if fFlagCapturesUpdateUsePlayShutterSoundTestingModule or not _G.__TEST_SUITE_PACKAGE__ and not _G.__TESTEZ_RUNNING_TEST__ then
-		local var4 = reactModule.useRef(nil)
+		local var1 = reactModule.useRef(nil)
 		reactModule.useEffect(function()
-			-- upvalues: fFlagCapturesUpdateUsePlayShutterSoundTestingModule (copy), robloxGui (copy), var4 (ref)
+			-- upvalues: fFlagCapturesUpdateUsePlayShutterSoundTestingModule (copy), robloxGui (copy), var1 (ref)
 			local sound = Instance.new("Sound")
 			sound.Name = if fFlagCapturesUpdateUsePlayShutterSoundTestingModule then "ShutterSound" else "ShutterSound"
 			sound.Parent = robloxGui
@@ -19,22 +19,22 @@ return function()
 			if not fFlagCapturesUpdateUsePlayShutterSoundTestingModule then
 				sound.SoundId = "rbxassetid://10066921516"
 			end
-			var4.current = sound
+			var1.current = sound
 			
 			if fFlagCapturesUpdateUsePlayShutterSoundTestingModule and not _G.__TEST_SUITE_PACKAGE__ and not _G.__TESTEZ_RUNNING_TEST__ then
 				sound.SoundId = "rbxassetid://10066921516"
 			end
 			return function()
-				-- upvalues: var4 (copy), sound (ref)
-				var4.current = nil
+				-- upvalues: var1 (copy), sound (ref)
+				var1.current = nil
 				sound:Destroy()
 			end
 		end, {})
 		
 		return reactModule.useCallback(function()
-			-- upvalues: var4 (ref)
-			if var4.current then
-				var4.current:Play()
+			-- upvalues: var1 (ref)
+			if var1.current then
+				var1.current:Play()
 			end
 		end, {})
 	end

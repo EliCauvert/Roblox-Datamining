@@ -9,23 +9,23 @@ local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.Sdu
 local sduiClientBindingParsersModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
 local fFlagSduiStringPropToString = require(parent.SharedFlags).FFlagSduiStringPropToString
 
-local function buildStringProp(p0, p1, p2, p3, p4, p5, p6)
+local function buildStringProp(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: fFlagSduiStringPropToString (ref), sduiClientBindingParsersModule (ref), propResultCategory (ref), sduiPropUtilsModule (ref), buildDefaultPropModule (ref), buildStringProp (ref)
-	p6 = p6 or (if fFlagSduiStringPropToString then sduiClientBindingParsersModule.parseToString else nil)
+	p7 = p7 or (if fFlagSduiStringPropToString then sduiClientBindingParsersModule.parseToString else nil)
 	
-	if p0 == "translation" then
-		local var6 = p4.resolveLocalizedLiteral(p1)
+	if p1 == "translation" then
+		local var1 = p5.resolveLocalizedLiteral(p2)
 		
-		if var6 then
-			return if p6 then p6(var6) else var6, propResultCategory.Literal
+		if var1 then
+			return if p7 then p7(var1) else var1, propResultCategory.Literal
 		end
 		return nil, propResultCategory.Failed
-	elseif p0 == "format" then
-		return sduiPropUtilsModule.generateFormatStringPropValue(p1, p2, p4, p3, p6), propResultCategory.PropSignal
+	elseif p1 == "format" then
+		return sduiPropUtilsModule.generateFormatStringPropValue(p2, p3, p5, p4, p7), propResultCategory.PropSignal
 	end
-	local var7, var8 = buildDefaultPropModule(p0, p1, p2, p3, p4, p5, p6, buildStringProp)
+	local var2, var3 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, p7, buildStringProp)
 	
-	return var7, var8
+	return var2, var3
 end
 
 return buildStringProp

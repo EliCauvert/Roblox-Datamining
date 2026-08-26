@@ -3,10 +3,10 @@ local promiseModule = require(inExperienceShop.Parent.Promise)
 local fFlagEnableShopDebugLoggingModule = require(inExperienceShop.Flags.FFlagEnableShopDebugLogging)
 
 return {
-	log = function(p0)
+	log = function(p1)
 		-- upvalues: fFlagEnableShopDebugLoggingModule (ref)
 		if fFlagEnableShopDebugLoggingModule then
-			print("[ShopDebug]", p0)
+			print("[ShopDebug]", p1)
 		end
 	end,
 	logLazy = function(p1)
@@ -19,43 +19,43 @@ return {
 		-- upvalues: fFlagEnableShopDebugLoggingModule (ref)
 		return if fFlagEnableShopDebugLoggingModule then os.clock() else nil
 	end,
-	logElapsed = function(p2, p3)
+	logElapsed = function(p1, p2)
 		-- upvalues: fFlagEnableShopDebugLoggingModule (ref)
-		if fFlagEnableShopDebugLoggingModule and p3 ~= nil then
-			print("[ShopDebug]", p2, string.format("(%.3fs)", os.clock() - p3))
+		if fFlagEnableShopDebugLoggingModule and p2 ~= nil then
+			print("[ShopDebug]", p1, string.format("(%.3fs)", os.clock() - p2))
 		end
 	end,
-	logElapsedLazy = function(p4, p5)
+	logElapsedLazy = function(p1, p2)
 		-- upvalues: fFlagEnableShopDebugLoggingModule (ref)
-		if fFlagEnableShopDebugLoggingModule and p5 ~= nil then
-			print("[ShopDebug]", p4(), string.format("(%.3fs)", os.clock() - p5))
+		if fFlagEnableShopDebugLoggingModule and p2 ~= nil then
+			print("[ShopDebug]", p1(), string.format("(%.3fs)", os.clock() - p2))
 		end
 	end,
-	tracePromise = function(p6, p7)
+	tracePromise = function(p1, p2)
 		-- upvalues: fFlagEnableShopDebugLoggingModule (ref), promiseModule (ref)
 		if not fFlagEnableShopDebugLoggingModule then
-			return p6
+			return p1
 		end
-		local var3 = p6
+		local var1 = p1
 		
-		if p7.onSuccess then
-			local onSuccess = p7.onSuccess
-			var3 = var3:andThen(function(p8)
+		if p2.onSuccess then
+			local onSuccess = p2.onSuccess
+			var1 = var1:andThen(function(p3)
 				-- upvalues: onSuccess (ref)
-				onSuccess(p8)
+				onSuccess(p3)
 				
-				return p8
+				return p3
 			end)
 		end
-		if p7.onError then
-			local onError = p7.onError
-			var3 = var3:catch(function(p9)
+		if p2.onError then
+			local onError = p2.onError
+			var1 = var1:catch(function(p3)
 				-- upvalues: onError (ref), promiseModule (copy)
-				onError(p9)
+				onError(p3)
 				
-				return promiseModule.reject(p9)
+				return promiseModule.reject(p3)
 			end)
 		end
-		return var3
+		return var1
 	end
 }

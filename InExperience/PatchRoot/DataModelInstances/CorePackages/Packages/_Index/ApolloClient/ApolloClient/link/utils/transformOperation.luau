@@ -3,13 +3,13 @@ local boolean = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).Boolean
 local _ = require(script.Parent.Parent.core.types)
 local getOperationName = require(script.Parent.Parent.Parent.utilities).getOperationName
 
-function t.transformOperation(p0)
+function t.transformOperation(p1)
 	-- upvalues: boolean (ref), getOperationName (ref)
 	local t = {
-		variables = if boolean.toJSBoolean(p0.variables) then p0.variables else {},
-		extensions = if boolean.toJSBoolean(p0.extensions) then p0.extensions else {},
-		operationName = p0.operationName,
-		query = p0.query
+		variables = if boolean.toJSBoolean(p1.variables) then p1.variables else {},
+		extensions = if boolean.toJSBoolean(p1.extensions) then p1.extensions else {},
+		operationName = p1.operationName,
+		query = p1.query
 	}
 	
 	if not boolean.toJSBoolean(t.operationName) then

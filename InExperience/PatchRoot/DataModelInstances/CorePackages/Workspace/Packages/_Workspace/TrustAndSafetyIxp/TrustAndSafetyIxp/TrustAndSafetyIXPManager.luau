@@ -8,7 +8,7 @@ local name = require(parent.CoreScriptsInitializer).CoreLogger:new(script.Name)
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: IXPServiceWrapper (ref), t (ref)
 	local t_1 = {
 		_initialized = false,
@@ -16,7 +16,7 @@ function t.new(p0)
 		_optionalScreenshotEnabled = false,
 		_reportAnythingExperienceEnabled = false,
 		_reportAnythingAvatarEnabled = false,
-		_ixpServiceWrapper = p0 or IXPServiceWrapper,
+		_ixpServiceWrapper = p1 or IXPServiceWrapper,
 		_callbacks = {}
 	}
 	setmetatable(t_1, t)
@@ -60,12 +60,12 @@ function t:initialize()
 		task.spawn(function()
 			-- upvalues: self (ref), getFStringReportAnythingAnnotationIXPLayerName (copy), name (copy), invokeCallbacks (ref)
 			self._ixpServiceWrapper:WaitForInitialization()
-			local var6 = self._ixpServiceWrapper:GetLayerData(getFStringReportAnythingAnnotationIXPLayerName())
+			local var1 = self._ixpServiceWrapper:GetLayerData(getFStringReportAnythingAnnotationIXPLayerName())
 			
-			if var6 then
-				self._optionalScreenshotEnabled = var6.OptionalScreenshotEnabled or false
-				self._reportAnythingExperienceEnabled = var6.OptionalScreenshotExperience or false
-				self._reportAnythingAvatarEnabled = var6.OptionalScreenshotAvatar or false
+			if var1 then
+				self._optionalScreenshotEnabled = var1.OptionalScreenshotEnabled or false
+				self._reportAnythingExperienceEnabled = var1.OptionalScreenshotExperience or false
+				self._reportAnythingAvatarEnabled = var1.OptionalScreenshotAvatar or false
 			end
 			name:debug("RA Optional Screenshot enabled (Avatar and/or Experience) or Select In Scene enabled? Both Avatar and Exp: {}, Exp: {}, Avatar: {}, Select in Scene: {}. Invoking {} callbacks.", self._optionalScreenshotEnabled, self._reportAnythingExperienceEnabled, self._reportAnythingAvatarEnabled, self._selectInSceneEnabled, #self._callbacks)
 			self._ixpInitialized = true

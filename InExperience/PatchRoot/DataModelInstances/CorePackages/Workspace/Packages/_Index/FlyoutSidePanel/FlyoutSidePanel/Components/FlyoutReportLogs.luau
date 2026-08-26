@@ -10,9 +10,9 @@ local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestSer
 local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
 local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(p0)
+return function(p1)
 	-- upvalues: useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), foundationModule (ref), buttonVariant (ref), buttonSize (ref)
-	local var4 = useRoactService(appEventIngestService)
+	local var1 = useRoactService(appEventIngestService)
 	
 	return reactModule.createElement(foundationModule.Button, {
 		isDisabled = false,
@@ -20,17 +20,17 @@ return function(p0)
 			text = if fFlagCTAChangeMorePageFlyoutButtonText then "CommonUI.Features.Label.ReportLogsSentenceCase" else "CommonUI.Features.Label.ReportLogs"
 		}).text,
 		variant = buttonVariant.Standard,
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		size = buttonSize.Large,
 		width = UDim.new(1, 0),
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: p0 (ref), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy), var4 (ref)
-			p0.closeDrawer()
+			-- upvalues: p1 (ref), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy), var1 (ref)
+			p1.closeDrawer()
 			
-			if p0.openReportLogConfirmation then
-				p0.openReportLogConfirmation()
+			if p1.openReportLogConfirmation then
+				p1.openReportLogConfirmation()
 			end
-			flyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(var4, flyoutContentSettingsModule.ItemType.ReportLogs)
-		end, { p0.openReportLogConfirmation, p0.closeDrawer, var4 })
+			flyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(var1, flyoutContentSettingsModule.ItemType.ReportLogs)
+		end, { p1.openReportLogConfirmation, p1.closeDrawer, var1 })
 	})
 end

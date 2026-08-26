@@ -13,29 +13,29 @@ local emojiModule_1 = require(emoji.Enum.Emoji)
 local genericTextLabelModule = require(parent.Core.Text.GenericTextLabel.GenericTextLabel)
 local t = { fluidSizing = false, maxSize = Vector2.new(10000, 10000) }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), emojiModule_1 (ref), getTextSizeModule (ref), reactModule (ref), genericTextLabelModule (ref), emojiModule (ref)
-	local var8 = cryoModule.Dictionary.join(t, p0)
-	local var9 = emojiModule_1.isEnumValue(var8.emoji)
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = emojiModule_1.isEnumValue(var1.emoji)
 	local baseSize = useStyleModule().Font.BaseSize
-	local colorStyle = var8.colorStyle
-	local fontStyle = var8.fontStyle
+	local colorStyle = var1.colorStyle
+	local fontStyle = var1.fontStyle
 	local font = fontStyle.Font
-	local var10 = if fontStyle.RelativeSize then baseSize * fontStyle.RelativeSize else fontStyle.FontSize
-	local maxSize = var8.maxSize
-	local var11 = getTextSizeModule(var8.Text, var10, font, maxSize)
+	local var3 = if fontStyle.RelativeSize then baseSize * fontStyle.RelativeSize else fontStyle.FontSize
+	local maxSize = var1.maxSize
+	local var4 = getTextSizeModule(var1.Text, var3, font, maxSize)
 	
-	return reactModule.createElement(genericTextLabelModule, cryoModule.Dictionary.join(var8, {
+	return reactModule.createElement(genericTextLabelModule, cryoModule.Dictionary.join(var1, {
 		emoji = cryoModule.None,
 		emojiOnActivated = cryoModule.None,
 		colorStyle = colorStyle,
-		Size = UDim2.fromOffset(math.min(var11.X, maxSize.X - var10), var11.Y)
+		Size = UDim2.fromOffset(math.min(var4.X, maxSize.X - var3), var4.Y)
 	}), {
-		Emoji = var9 and reactModule.createElement(emojiModule, {
-			emoji = var8.emoji,
-			onActivated = var8.emojiOnActivated,
+		Emoji = var2 and reactModule.createElement(emojiModule, {
+			emoji = var1.emoji,
+			onActivated = var1.emojiOnActivated,
 			textFont = font,
-			textSize = var10,
+			textSize = var3,
 			Position = UDim2.fromScale(1, 0)
 		})
 	})

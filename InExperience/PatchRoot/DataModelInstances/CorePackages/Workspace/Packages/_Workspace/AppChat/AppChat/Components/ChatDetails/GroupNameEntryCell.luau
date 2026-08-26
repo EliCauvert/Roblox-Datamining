@@ -18,33 +18,33 @@ local t = {
 	paddingBottom = 12
 }
 
-function GroupNameEntryCell(p0)
+function GroupNameEntryCell(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), iconWithTextCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
-	local var7 = cryoModule.Dictionary.join(t, p0)
-	local var8 = if var7.isDisabled then var7.style.Tokens.Size.Size_300 else 0
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = if var1.isDisabled then var1.style.Tokens.Size.Size_300 else 0
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = var7.LayoutOrder,
+		LayoutOrder = var1.LayoutOrder,
 		Size = UDim2.fromScale(1, 0)
 	}, {
 		padding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var8),
-			PaddingBottom = UDim.new(0, var7.paddingBottom)
+			PaddingLeft = UDim.new(0, var2),
+			PaddingBottom = UDim.new(0, var1.paddingBottom)
 		})
 	}, {
 		IconWithText = reactModule.createElement(iconWithTextCellModule, {
 			showDivider = false,
 			LayoutOrder = 1,
-			primaryIcon = if var7.isDisabled then nil else var7.iconImage,
-			Text = var7.groupNameText,
-			iconCellWidth = var7.iconCellWidth,
-			isDisabled = var7.isDisabled,
-			onActivated = var7.onActivated,
-			Size = UDim2.new(1, -var8, 0, var7.cellHeight),
-			style = var7.style,
-			testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsListActionButton(var7.groupNameText) else nil
+			primaryIcon = if var1.isDisabled then nil else var1.iconImage,
+			Text = var1.groupNameText,
+			iconCellWidth = var1.iconCellWidth,
+			isDisabled = var1.isDisabled,
+			onActivated = var1.onActivated,
+			Size = UDim2.new(1, -var2, 0, var1.cellHeight),
+			style = var1.style,
+			testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsListActionButton(var1.groupNameText) else nil
 		})
 	})
 end

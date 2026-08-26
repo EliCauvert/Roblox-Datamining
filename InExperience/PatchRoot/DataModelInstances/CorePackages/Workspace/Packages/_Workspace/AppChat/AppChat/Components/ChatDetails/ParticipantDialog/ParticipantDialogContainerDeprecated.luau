@@ -42,96 +42,96 @@ local t = {
 }
 local t_1 = { skipFetch = true }
 
-function ParticipantDialogContainerDeprecated(p0)
+function ParticipantDialogContainerDeprecated(p1)
 	-- upvalues: cryoModule (ref), t (ref), useAppPolicyModule (ref), fFlagEnableChatDetailsOpenChatModule (ref), useSelector (ref), conversationModule (ref), useDispatch (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), t_1 (ref), reactModule (ref), networkingFriendsModule (ref), useLocalization (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerContextualMenuWrapperModule (ref), focusNavigableSurfaceWrapper (ref), participantDialogDeprecatedModule (ref)
-	local var16 = cryoModule.Dictionary.join(t, p0)
-	local var17 = useAppPolicyModule(function(p1)
-		return p1.getChatViewProfileOption()
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = useAppPolicyModule(function(p2)
+		return p2.getChatViewProfileOption()
 	end)
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var18 = false
+	local var3 = false
 	
 	if fFlagEnableChatDetailsOpenChatModule then
-		local var21
-		local var19 = useSelector(function(p2)
-			-- upvalues: var16 (ref), conversationModule (copy)
+		local var4
+		local var5 = useSelector(function(p2)
+			-- upvalues: var1 (ref), conversationModule (copy)
 			local conversations = p2.ChatAppReducer and p2.ChatAppReducer.Conversations
-			local conversationId = conversations and conversations[var16.conversationId]
+			local conversationId = conversations and conversations[var1.conversationId]
 			
 			return conversationId and conversationId.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
 		end)
-		local var20 = useDispatch()
+		local var6 = useDispatch()
 		
 		if fFlagAppChatMigrateFriendshipStatusesModule then
-			local _ = useGetFriendshipStatus(var16.participantId, if var19 then nil else t_1) == Enum.FriendStatus.Friend
+			local _ = useGetFriendshipStatus(var1.participantId, if var5 then nil else t_1) == Enum.FriendStatus.Friend
 		else
-			var21 = useSelector(function(p3)
-				-- upvalues: var16 (ref)
-				local friends = p3.ChatAppReducer and p3.ChatAppReducer.Friends
+			var4 = useSelector(function(p2)
+				-- upvalues: var1 (ref)
+				local friends = p2.ChatAppReducer and p2.ChatAppReducer.Friends
 				local friendshipStatus = friends and friends.friendshipStatus
 				
-				return friendshipStatus and friendshipStatus[var16.participantId] == Enum.FriendStatus.Friend
+				return friendshipStatus and friendshipStatus[var1.participantId] == Enum.FriendStatus.Friend
 			end)
 			reactModule.useEffect(function()
-				-- upvalues: var19 (write), var20 (write), networkingFriendsModule (copy), var16 (ref)
-				if var19 then
-					var20(networkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = var16.participantId }))
+				-- upvalues: var5 (write), var6 (write), networkingFriendsModule (copy), var1 (ref)
+				if var5 then
+					var6(networkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = var1.participantId }))
 				end
-			end, { var16.participantId, var20, var19 })
+			end, { var1.participantId, var6, var5 })
 		end
-		var18 = if var19 and var21 then true else false
+		var3 = if var5 and var4 then true else false
 	end
-	local var22 = useLocalization({
-		viewProfileText = var16.viewProfileText,
-		chatText = if fFlagEnableChatDetailsOpenChatModule then var16.chatText else nil,
-		reportUserText = var16.reportUserText,
-		removeFromGroupText = var16.removeFromGroupText,
-		cancelText = var16.cancelText
+	local var7 = useLocalization({
+		viewProfileText = var1.viewProfileText,
+		chatText = if fFlagEnableChatDetailsOpenChatModule then var1.chatText else nil,
+		reportUserText = var1.reportUserText,
+		removeFromGroupText = var1.removeFromGroupText,
+		cancelText = var1.cancelText
 	})
-	local var23 = reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var16 (ref)
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var1 (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p4)
-					-- upvalues: var16 (copy)
-					var16.onDismiss()
-					p4:cancel()
+				handler = inputHandlersModule.onRelease(function(p2)
+					-- upvalues: var1 (copy)
+					var1.onDismiss()
+					p2:cancel()
 				end)
 			}
 		}
-	end, { var16.onDismiss })
+	end, { var1.onDismiss })
 	
 	return if useIsExternalNavigationAvailableModule({ enumScreensModule.ViewUserProfile })[enumScreensModule.ViewUserProfile] then reactModule.createElement(focusNavigableSurfaceWrapper, {
 		isAutoFocusRoot = true,
 		isFocusable = true,
 		isIsolated = true,
-		customEventHandlers = var23,
+		customEventHandlers = var8,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
 	}, {
-		reactModule.createElement(participantDialogDeprecatedModule, cryoModule.Dictionary.join(var16, var22, {
-			showViewProfileButton = var17,
-			showChatButton = var18,
-			isWideMode = var16.isWideMode
+		reactModule.createElement(participantDialogDeprecatedModule, cryoModule.Dictionary.join(var1, var7, {
+			showViewProfileButton = var2,
+			showChatButton = var3,
+			isWideMode = var1.isWideMode
 		}))
 	}) else reactModule.createElement(appFocusRoot, {
 		isAutoFocusRoot = true,
 		isFocusable = true,
 		isIsolated = true,
 		shouldRestoreFocus = false,
-		customEventHandlers = var23,
+		customEventHandlers = var8,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
 	}, {
 		reactModule.createElement(playerContextualMenuWrapperModule, {
-			conversationId = var16.conversationId,
-			participantId = var16.participantId,
-			onDismiss = var16.onDismiss,
-			openRemoveUserDialog = var16.openRemoveUserDialog,
-			removeFromGroupText = var22.removeFromGroupText,
-			openReportUser = var16.openReportUser,
-			showRemoveUserButton = var16.showRemoveUserButton,
-			openBlockingModal = var16.openBlockingModal
+			conversationId = var1.conversationId,
+			participantId = var1.participantId,
+			onDismiss = var1.onDismiss,
+			openRemoveUserDialog = var1.openRemoveUserDialog,
+			removeFromGroupText = var7.removeFromGroupText,
+			openReportUser = var1.openReportUser,
+			showRemoveUserButton = var1.showRemoveUserButton,
+			openBlockingModal = var1.openBlockingModal
 		})
 	})
 end

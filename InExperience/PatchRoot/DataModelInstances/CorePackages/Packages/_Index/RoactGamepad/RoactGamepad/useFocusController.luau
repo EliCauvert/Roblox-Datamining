@@ -3,7 +3,7 @@ local focusContextModule = require(script.Parent.FocusContext)
 
 return function()
 	-- upvalues: reactModule (ref), focusContextModule (ref)
-	local var2 = reactModule.useContext(focusContextModule)
+	local var1 = reactModule.useContext(focusContextModule)
 	
-	return if var2 then var2.focusNode.focusController else nil
+	return if var1 then var1.focusNode.focusController else nil
 end

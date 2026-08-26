@@ -1,12 +1,12 @@
 ﻿local argCheckModule = require(script:FindFirstAncestor("CollectionViews").Parent.ArgCheck)
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: argCheckModule (ref)
-	if p0 < 2 then
+	if p1 < 2 then
 		return 0
 	end
-	argCheckModule.assert(p0 >= 2)
-	local var1 = p0 * p2 + (p0 - 1) * p1 + p3 * 2
+	argCheckModule.assert(p1 >= 2)
+	local var1 = p1 * p3 + (p1 - 1) * p2 + p4 * 2
 	
-	return if var1 > 0 then p1 / var1 else 0
+	return if var1 > 0 then p2 / var1 else 0
 end

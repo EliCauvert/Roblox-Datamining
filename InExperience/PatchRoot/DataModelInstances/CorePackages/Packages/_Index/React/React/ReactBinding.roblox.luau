@@ -8,44 +8,44 @@ local bindingImpl = luauPolyfillModule.Symbol("BindingImpl")
 local t = {}
 local t_1 = {
 	__index = {
-		getValue = function(p0)
+		getValue = function(p1)
 			-- upvalues: t (ref)
-			return t.getValue(p0)
+			return t.getValue(p1)
 		end,
 		map = function(p1, p2)
 			-- upvalues: t (ref)
 			return t.map(p1, p2)
 		end
 	},
-	__tostring = function(p3)
-		return string.format("RoactBinding(%s)", tostring(p3:getValue()))
+	__tostring = function(p1)
+		return string.format("RoactBinding(%s)", tostring(p1:getValue()))
 	end
 }
 
-function t.update(p4, p5)
+function t.update(p1, p2)
 	-- upvalues: bindingImpl (ref)
-	return p4[bindingImpl].update(p5)
+	return p1[bindingImpl].update(p2)
 end
 
-function t.subscribe(p6, p7)
+function t.subscribe(p1, p2)
 	-- upvalues: bindingImpl (ref)
-	return p6[bindingImpl].subscribe(p7)
+	return p1[bindingImpl].subscribe(p2)
 end
 
-function t.getValue(p8)
+function t.getValue(p1)
 	-- upvalues: bindingImpl (ref)
-	return p8[bindingImpl]:getValue()
+	return p1[bindingImpl]:getValue()
 end
 
-function t.create(p9)
+function t.create(p1)
 	-- upvalues: unknownModule (ref), reactGlobalsModule (ref), reactSymbols (ref), bindingImpl (ref), t_1 (ref)
-	local var6, var7 = unknownModule()
-	local t = { value = p9, subscribe = var6 }
+	local var1, var2 = unknownModule()
+	local t = { value = p1, subscribe = var1 }
 	
-	function t.update(p10)
-		-- upvalues: t (ref), var7 (ref)
-		t.value = p10
-		var7(p10)
+	function t.update(p2)
+		-- upvalues: t (ref), var2 (ref)
+		t.value = p2
+		var2(p2)
 	end
 	
 	function t.getValue()
@@ -60,40 +60,40 @@ function t.create(p9)
 	}, t_1), t.update
 end
 
-function t.map(p11, p12)
+function t.map(p1, p2)
 	-- upvalues: reactGlobalsModule (ref), reactSymbols (ref), t (ref), bindingImpl (ref), t_1 (ref)
 	if reactGlobalsModule.__DEV__ then
-		assert(typeof(p11) == "table" and p11["$$typeof"] == reactSymbols.REACT_BINDING_TYPE, "Expected `self` to be a binding")
-		assert(typeof(p12) == "function", "Expected arg #1 to be a function")
+		assert(typeof(p1) == "table" and p1["$$typeof"] == reactSymbols.REACT_BINDING_TYPE, "Expected `self` to be a binding")
+		assert(typeof(p2) == "function", "Expected arg #1 to be a function")
 	end
 	return setmetatable({
 		["$$typeof"] = reactSymbols.REACT_BINDING_TYPE,
 		[bindingImpl] = {
-			subscribe = function(p13)
-				-- upvalues: t (copy), p11 (ref), p12 (ref)
-				return t.subscribe(p11, function(p14)
-					-- upvalues: p13 (ref), p12 (copy)
-					p13(p12(p14))
+			subscribe = function(p3)
+				-- upvalues: t (copy), p1 (ref), p2 (ref)
+				return t.subscribe(p1, function(p4)
+					-- upvalues: p3 (ref), p2 (copy)
+					p3(p2(p4))
 				end)
 			end,
 			update = function(_)
 				error("Bindings created by Binding:map(fn) cannot be updated directly", 2)
 			end,
 			getValue = function()
-				-- upvalues: p12 (ref), p11 (ref)
-				return p12(p11:getValue())
+				-- upvalues: p2 (ref), p1 (ref)
+				return p2(p1:getValue())
 			end
 		},
 		_source = if reactGlobalsModule.__DEV__ then debug.traceback("Mapped binding created at:", 3) else nil
 	}, t_1)
 end
 
-function t.join(p15)
+function t.join(p1)
 	-- upvalues: reactGlobalsModule (ref), reactSymbols (ref), t (ref), bindingImpl (ref), t_1 (ref)
 	if reactGlobalsModule.__DEV__ then
-		assert(typeof(p15) == "table", "Expected arg #1 to be of type table")
+		assert(typeof(p1) == "table", "Expected arg #1 to be of type table")
 		
-		for i, v in p15 do
+		for i, v in p1 do
 			if typeof(v) ~= "table" or v["$$typeof"] ~= reactSymbols.REACT_BINDING_TYPE then
 				error(("Expected arg #1 to contain only bindings, but key %q had a non-binding value"):format(tostring(i)), 2)
 			end
@@ -102,23 +102,23 @@ function t.join(p15)
 	local t_2 = {}
 	
 	local function getValue()
-		-- upvalues: p15 (ref)
+		-- upvalues: p1 (ref)
 		local t = {}
 		
-		for i, v in pairs(p15) do
+		for i, v in pairs(p1) do
 			t[i] = v:getValue()
 		end
 		return t
 	end
 	
-	function t_2.subscribe(p16)
-		-- upvalues: p15 (ref), t (copy), getValue (ref)
+	function t_2.subscribe(p2)
+		-- upvalues: p1 (ref), t (copy), getValue (ref)
 		local t_1 = {}
 		
-		for i, v in p15 do
+		for i, v in p1 do
 			t_1[i] = t.subscribe(v, function(_)
-				-- upvalues: p16 (ref), getValue (copy)
-				p16(getValue())
+				-- upvalues: p2 (ref), getValue (copy)
+				p2(getValue())
 			end)
 		end
 		return function()

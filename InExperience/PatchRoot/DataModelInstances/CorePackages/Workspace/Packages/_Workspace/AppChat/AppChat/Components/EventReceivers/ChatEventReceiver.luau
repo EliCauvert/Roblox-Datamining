@@ -14,7 +14,7 @@ local useMemo = reactModule.useMemo
 local useRef = reactModule.useRef
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local formFactor = require(parent.FormFactor).Enums.FormFactor
-local var7 = require(appChat.Logger):new("AppChat.Realtime")
+local var1 = require(appChat.Logger):new("AppChat.Realtime")
 local conversationModule = require(appChat.Models.Conversation)
 local conversationChannelsModule = require(appChat.Models.ConversationChannels)
 local changedParticipantsModule = require(appChat.Conversations.Actions.ChangedParticipants)
@@ -50,87 +50,87 @@ local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEn
 local fFlagRemoveUnusedConnectionStateRoduxSlice = require(parent.SharedFlags).FFlagRemoveUnusedConnectionStateRoduxSlice
 local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
 
-local function chunkAndLogString(p0)
-	-- upvalues: var7 (ref)
+local function chunkAndLogString(p1)
+	-- upvalues: var1 (ref)
 	local t = {}
 	
-	for i = 1, #p0, 800 do
-		table.insert(t, p0:sub(i, i + 800 - 1))
+	for i = 1, #p1, 800 do
+		table.insert(t, p1:sub(i, i + 800 - 1))
 	end
 	for i_1, v in t do
-		var7:debug(v)
+		var1:debug(v)
 	end
 end
 
 local t = { handlesAppShellNotifications = true }
 
-function ChatEventReceiver(p1)
-	-- upvalues: useEffect (ref), var7 (ref), useSelector (ref), useCallback (ref), cryoModule (ref), useLocalUserId (ref), useIsChatEnabledModule (ref), useIsGroupChatEnabledModule (ref), useIsInExperienceModule (ref), useDispatch (ref), changedParticipantsModule (ref), fetchChatMetadataModule (ref), fetchLatestConversationDetailsModule (ref), getAllFriendsAsyncModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), getAllUserPresencesModule (ref), getNewMessages (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), roduxAliasesModule (ref), receivedUserTypingModule (ref), paginateAndRefreshConversationsModule (ref), removedConversationModule (ref), renamedGroupConversationModule (ref), setConnectionStateModule (ref), t (ref), useRef (ref), useLocalization (ref), roactNavigationModule (ref), enumScreensModule (ref), formFactor (ref), friendshipDestroyedModule (ref), conversationModule (ref), fFlagRemoveUnusedConnectionStateRoduxSlice (ref), communicationChannelsTypesModule (ref), conversationChannelsModule (ref), friendConversationCreatedModule (ref), useMemo (ref), getFFlagDebugUnfilteredThreads (ref), chunkAndLogString (ref), multiGetConversationDetailsModule (ref), appChatNetworkingModule (ref), fFlagAppChatEnableDoubleOptIn (ref), refreshConversationUnfilteredThreadsDetailsModule (ref), useChatTrustedConnectionsEventsModule (ref)
+function ChatEventReceiver(p2)
+	-- upvalues: useEffect (ref), var1 (ref), useSelector (ref), useCallback (ref), cryoModule (ref), useLocalUserId (ref), useIsChatEnabledModule (ref), useIsGroupChatEnabledModule (ref), useIsInExperienceModule (ref), useDispatch (ref), changedParticipantsModule (ref), fetchChatMetadataModule (ref), fetchLatestConversationDetailsModule (ref), getAllFriendsAsyncModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), getAllUserPresencesModule (ref), getNewMessages (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), roduxAliasesModule (ref), receivedUserTypingModule (ref), paginateAndRefreshConversationsModule (ref), removedConversationModule (ref), renamedGroupConversationModule (ref), setConnectionStateModule (ref), t (ref), useRef (ref), useLocalization (ref), roactNavigationModule (ref), enumScreensModule (ref), formFactor (ref), friendshipDestroyedModule (ref), conversationModule (ref), fFlagRemoveUnusedConnectionStateRoduxSlice (ref), communicationChannelsTypesModule (ref), conversationChannelsModule (ref), friendConversationCreatedModule (ref), useMemo (ref), getFFlagDebugUnfilteredThreads (ref), chunkAndLogString (ref), multiGetConversationDetailsModule (ref), appChatNetworkingModule (ref), fFlagAppChatEnableDoubleOptIn (ref), refreshConversationUnfilteredThreadsDetailsModule (ref), useChatTrustedConnectionsEventsModule (ref)
 	useEffect(function()
-		-- upvalues: var7 (copy)
-		var7:info("ChatEventReceiver mounted")
+		-- upvalues: var1 (copy)
+		var1:info("ChatEventReceiver mounted")
 		
 		return function()
-			-- upvalues: var7 (copy)
-			var7:info("ChatEventReceiver unmounted")
+			-- upvalues: var1 (copy)
+			var1:info("ChatEventReceiver unmounted")
 		end
 	end, {})
-	local var38 = useSelector(useCallback(function(p2)
-		return p2.ChatAppReducer.AppLoaded
+	local var2 = useSelector(useCallback(function(p3)
+		return p3.ChatAppReducer.AppLoaded
 	end, {}))
-	local var39 = useSelector(useCallback(function(p3)
+	local var3 = useSelector(useCallback(function(p3)
 		return p3.ChatAppReducer.Conversations
 	end, {}))
-	local var40 = useSelector(useCallback(function(p4)
-		return p4.FormFactor
+	local var4 = useSelector(useCallback(function(p3)
+		return p3.FormFactor
 	end, {}))
-	local var41 = useSelector(useCallback(function(p5)
-		return p5.Users
+	local var5 = useSelector(useCallback(function(p3)
+		return p3.Users
 	end, {}))
-	local var42 = cryoModule.isEmpty(var39)
-	local var43 = useLocalUserId()
-	local var44 = useIsChatEnabledModule()
-	local var45 = useIsGroupChatEnabledModule()
-	local var46 = useIsInExperienceModule()
-	local var47 = useDispatch()
+	local var6 = cryoModule.isEmpty(var3)
+	local var7 = useLocalUserId()
+	local var8 = useIsChatEnabledModule()
+	local var9 = useIsGroupChatEnabledModule()
+	local var10 = useIsInExperienceModule()
+	local var11 = useDispatch()
 	
-	local var48 = function(p6, p7, p8, p9)
-		-- upvalues: var47 (ref), changedParticipantsModule (copy)
-		var47(changedParticipantsModule(p6, p7, p8, p9))
+	local var12 = function(p3, p4, p5, p6)
+		-- upvalues: var11 (ref), changedParticipantsModule (copy)
+		var11(changedParticipantsModule(p3, p4, p5, p6))
 	end
 	
-	local var49 = function()
-		-- upvalues: var47 (ref), fetchChatMetadataModule (copy)
-		return var47(fetchChatMetadataModule())
+	local var13 = function()
+		-- upvalues: var11 (ref), fetchChatMetadataModule (copy)
+		return var11(fetchChatMetadataModule())
 	end
 	
-	local var50 = function(p10)
-		-- upvalues: var47 (ref), fetchLatestConversationDetailsModule (copy)
-		return var47(fetchLatestConversationDetailsModule(p10))
+	local var14 = function(p3)
+		-- upvalues: var11 (ref), fetchLatestConversationDetailsModule (copy)
+		return var11(fetchLatestConversationDetailsModule(p3))
 	end
 	
-	local var51 = function()
-		-- upvalues: var47 (ref), getAllFriendsAsyncModule (copy)
-		var47(getAllFriendsAsyncModule())
+	local var15 = function()
+		-- upvalues: var11 (ref), getAllFriendsAsyncModule (copy)
+		var11(getAllFriendsAsyncModule())
 	end
 	
-	local var52 = if not fFlagAppChatPresenceStoreMigrationModule then function()
-		-- upvalues: var47 (ref), getAllUserPresencesModule (copy)
+	local var16 = if not fFlagAppChatPresenceStoreMigrationModule then function()
+		-- upvalues: var11 (ref), getAllUserPresencesModule (copy)
 		spawn(function()
-			-- upvalues: var47 (copy), getAllUserPresencesModule (copy)
-			var47(getAllUserPresencesModule())
+			-- upvalues: var11 (copy), getAllUserPresencesModule (copy)
+			var11(getAllUserPresencesModule())
 		end)
 	end else nil
 	
-	local var53 = function(p11, p12, p13)
-		-- upvalues: var47 (ref), getNewMessages (copy)
-		return var47(getNewMessages(p11, p12, p13))
+	local var17 = function(p3, p4, p5)
+		-- upvalues: var11 (ref), getNewMessages (copy)
+		return var11(getNewMessages(p3, p4, p5))
 	end
 	
-	local function restartMessageReceiveTracking(p14)
+	local function restartMessageReceiveTracking(p3)
 		-- upvalues: fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy)
 		if not fFlagAppChatPerfTrackingModule then return end
-		local t = { conversationId = tostring(p14) }
+		local t = { conversationId = tostring(p3) }
 		
 		if fFlagAppChatMessageTTIMilestonesModule then
 			appChatPerfTrackerModule.cancel(appChatPerfTrackerModule.Events.MessageReceiveTTI, t)
@@ -142,83 +142,83 @@ function ChatEventReceiver(p1)
 		appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageReceiveToRender, t)
 	end
 	
-	local _ = function(p15, p16)
-		-- upvalues: var47 (ref), roduxAliasesModule (copy)
-		var47(roduxAliasesModule.Actions.AliasUpdated(p15, p16))
+	local _ = function(p3, p4)
+		-- upvalues: var11 (ref), roduxAliasesModule (copy)
+		var11(roduxAliasesModule.Actions.AliasUpdated(p3, p4))
 	end
 	
-	local var55 = function(p17, p18)
-		-- upvalues: var47 (ref), receivedUserTypingModule (copy)
-		var47(receivedUserTypingModule(p17, p18))
+	local var18 = function(p3, p4)
+		-- upvalues: var11 (ref), receivedUserTypingModule (copy)
+		var11(receivedUserTypingModule(p3, p4))
 	end
 	
-	local var56 = function()
-		-- upvalues: var47 (ref), paginateAndRefreshConversationsModule (copy)
-		var47(paginateAndRefreshConversationsModule())
+	local var19 = function()
+		-- upvalues: var11 (ref), paginateAndRefreshConversationsModule (copy)
+		var11(paginateAndRefreshConversationsModule())
 	end
 	
-	local var57 = function(p19)
-		-- upvalues: var47 (ref), removedConversationModule (copy)
-		var47(removedConversationModule(p19))
+	local var20 = function(p3)
+		-- upvalues: var11 (ref), removedConversationModule (copy)
+		var11(removedConversationModule(p3))
 	end
 	
-	local var58 = function(p20, p21, p22, p23)
-		-- upvalues: var47 (ref), renamedGroupConversationModule (copy)
-		var47(renamedGroupConversationModule(p20, p21, p22, p23))
+	local var21 = function(p3, p4, p5, p6)
+		-- upvalues: var11 (ref), renamedGroupConversationModule (copy)
+		var11(renamedGroupConversationModule(p3, p4, p5, p6))
 	end
 	
-	local _ = function(p24)
-		-- upvalues: var47 (ref), setConnectionStateModule (copy)
-		var47(setConnectionStateModule(p24))
+	local _ = function(p3)
+		-- upvalues: var11 (ref), setConnectionStateModule (copy)
+		var11(setConnectionStateModule(p3))
 	end
 	
-	local var59 = cryoModule.Dictionary.join(t, p1)
-	local robloxEventReceiver = var59.robloxEventReceiver
-	local var60 = useRef({})
-	local var61 = useRef(Enum.ConnectionState.Connected)
-	local var62 = useLocalization({
+	local var22 = cryoModule.Dictionary.join(t, p2)
+	local robloxEventReceiver = var22.robloxEventReceiver
+	local var23 = useRef({})
+	local var24 = useRef(Enum.ConnectionState.Connected)
+	local var25 = useLocalization({
 		networkErrorText = "Feature.Toast.NetworkingError.SomethingIsWrong",
 		removedFromConversationToastTitle = "Feature.Chat.Message.RemovedFromConversation"
 	})
-	local networkErrorText = var62.networkErrorText
-	local removedFromConversationToastTitle = var62.removedFromConversationToastTitle
-	local var63 = useCallback(function(p25, p26)
-		-- upvalues: var60 (ref)
-		assert(var60.current, "table")
-		var60.current[p25] = p26
-	end, { var60.current })
-	local var64 = useCallback(function()
-		-- upvalues: var59 (ref), roactNavigationModule (copy), enumScreensModule (copy), networkErrorText (ref)
-		if var59.rnBypassActionSignal then
-			var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+	local networkErrorText = var25.networkErrorText
+	local removedFromConversationToastTitle = var25.removedFromConversationToastTitle
+	local var26 = useCallback(function(p3, p4)
+		-- upvalues: var23 (ref)
+		assert(var23.current, "table")
+		var23.current[p3] = p4
+	end, { var23.current })
+	local var27 = useCallback(function()
+		-- upvalues: var22 (ref), roactNavigationModule (copy), enumScreensModule (copy), networkErrorText (ref)
+		if var22.rnBypassActionSignal then
+			var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
 				routeName = enumScreensModule.RoactChatToast,
 				params = {
 					toastProps = { toastContent = { toastTitle = networkErrorText } }
 				}
 			}))
 		end
-	end, { var59.rnBypassActionSignal, networkErrorText })
+	end, { var22.rnBypassActionSignal, networkErrorText })
 	useEffect(function()
-		-- upvalues: robloxEventReceiver (ref), var63 (ref), var7 (copy), var47 (ref), removedConversationModule (copy), var59 (ref), roactNavigationModule (copy), var40 (ref), formFactor (copy), enumScreensModule (copy), removedFromConversationToastTitle (ref), fetchLatestConversationDetailsModule (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var42 (ref), fFlagAppChatPerfTrackingModule (copy), restartMessageReceiveTracking (ref), getNewMessages (copy), receivedUserTypingModule (copy)
-		local chatNotifications = robloxEventReceiver:observeEvent("ChatNotifications", function(p27, p28, _)
-			-- upvalues: var63 (copy), var7 (copy), var47 (copy), removedConversationModule (copy), var59 (copy), roactNavigationModule (copy), var40 (copy), formFactor (copy), enumScreensModule (copy), removedFromConversationToastTitle (copy), fetchLatestConversationDetailsModule (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var42 (copy), fFlagAppChatPerfTrackingModule (copy), restartMessageReceiveTracking (copy), getNewMessages (copy), receivedUserTypingModule (copy)
-			local var72
-			var63("ChatNotifications", p27.SequenceNumber)
-			local type = p27.Type or p28
-			var7:info("Received chat notification: {}", type)
-			local conversationId = p27.ConversationId and tostring(p27.ConversationId) or ""
+		-- upvalues: robloxEventReceiver (ref), var26 (ref), var1 (copy), var11 (ref), removedConversationModule (copy), var22 (ref), roactNavigationModule (copy), var4 (ref), formFactor (copy), enumScreensModule (copy), removedFromConversationToastTitle (ref), fetchLatestConversationDetailsModule (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var6 (ref), fFlagAppChatPerfTrackingModule (copy), restartMessageReceiveTracking (ref), getNewMessages (copy), receivedUserTypingModule (copy)
+		local chatNotifications = robloxEventReceiver:observeEvent("ChatNotifications", function(p3, p4, _)
+			-- upvalues: var26 (copy), var1 (copy), var11 (copy), removedConversationModule (copy), var22 (copy), roactNavigationModule (copy), var4 (copy), formFactor (copy), enumScreensModule (copy), removedFromConversationToastTitle (copy), fetchLatestConversationDetailsModule (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var6 (copy), fFlagAppChatPerfTrackingModule (copy), restartMessageReceiveTracking (copy), getNewMessages (copy), receivedUserTypingModule (copy)
+			local var28
+			var26("ChatNotifications", p3.SequenceNumber)
+			local type = p3.Type or p4
+			var1:info("Received chat notification: {}", type)
+			local conversationId = p3.ConversationId and tostring(p3.ConversationId) or ""
 			
 			if type == "RemovedFromConversation" or type == "ConversationRemoved" then
-				var47(removedConversationModule(conversationId))
-				local activeConversationId = var59.activeConversationId
+				var11(removedConversationModule(conversationId))
+				local activeConversationId = var22.activeConversationId
 				
-				if activeConversationId ~= nil and tostring(activeConversationId) == conversationId and var59.rnBypassActionSignal then
-					var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
-						routeName = if var40 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
+				if activeConversationId ~= nil and tostring(activeConversationId) == conversationId and var22.rnBypassActionSignal then
+					var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+						routeName = if var4 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
 					}))
 				end
 				if type == "RemovedFromConversation" then
-					var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+					var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
 						routeName = enumScreensModule.RoactChatToast,
 						params = {
 							toastProps = {
@@ -231,53 +231,53 @@ function ChatEventReceiver(p1)
 				end
 			elseif type == "ConversationTitleChanged" or type == "ParticipantAdded" or type == "ParticipantLeft" then
 				task.spawn(function()
-					-- upvalues: conversationId (ref), var47 (copy), fetchLatestConversationDetailsModule (copy), type (ref), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var7 (copy)
-					var47(fetchLatestConversationDetailsModule(conversationId)):andThen(function(p30)
-						-- upvalues: type (copy), conversationId (copy), var47 (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy)
-						local title = p30.title
-						local lastUpdated = p30.lastUpdated
+					-- upvalues: conversationId (ref), var11 (copy), fetchLatestConversationDetailsModule (copy), type (ref), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var1 (copy)
+					var11(fetchLatestConversationDetailsModule(conversationId)):andThen(function(p5)
+						-- upvalues: type (copy), conversationId (copy), var11 (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy)
+						local title = p5.title
+						local lastUpdated = p5.lastUpdated
 						
 						if type == "ConversationTitleChanged" then
-							var47(renamedGroupConversationModule(conversationId, title, p30.isDefaultTitle, lastUpdated))
+							var11(renamedGroupConversationModule(conversationId, title, p5.isDefaultTitle, lastUpdated))
 							
 							return
 						end
-						var47(changedParticipantsModule(conversationId, p30.participants, title, lastUpdated))
-					end):catch(function(p29)
-						-- upvalues: var7 (copy), type (copy)
-						var7:warning(`NetworkingChat failure in RobloxEventReceiver->{type}, Status: {tostring(p29)}`)
+						var11(changedParticipantsModule(conversationId, p5.participants, title, lastUpdated))
+					end):catch(function(p5)
+						-- upvalues: var1 (copy), type (copy)
+						var1:warning(`NetworkingChat failure in RobloxEventReceiver->{type}, Status: {tostring(p5)}`)
 					end)
 				end)
 				
 				return
 			elseif type == "AddedToConversation" or type == "NewConversation" then
-				if var42 then
-					var7:debug(`Received {type} event while loading conversation data`)
+				if var6 then
+					var1:debug(`Received {type} event while loading conversation data`)
 					
 					return
 				end
 				task.spawn(function()
-					-- upvalues: conversationId (ref), var47 (copy), fetchLatestConversationDetailsModule (copy), var7 (copy), type (ref)
-					var47(fetchLatestConversationDetailsModule(conversationId)):catch(function(p31)
-						-- upvalues: var7 (copy), type (copy)
-						var7:warning(`NetworkingChat failure in RobloxEventReceiver->{type}, Status: {tostring(p31)}`)
+					-- upvalues: conversationId (ref), var11 (copy), fetchLatestConversationDetailsModule (copy), var1 (copy), type (ref)
+					var11(fetchLatestConversationDetailsModule(conversationId)):catch(function(p5)
+						-- upvalues: var1 (copy), type (copy)
+						var1:warning(`NetworkingChat failure in RobloxEventReceiver->{type}, Status: {tostring(p5)}`)
 					end)
 				end)
 				
 				return
 			elseif type == "NewMessage" then
-				if fFlagAppChatPerfTrackingModule and var59.activeConversationId and tostring(var59.activeConversationId) == conversationId then
+				if fFlagAppChatPerfTrackingModule and var22.activeConversationId and tostring(var22.activeConversationId) == conversationId then
 					restartMessageReceiveTracking(conversationId)
 				end
-				var72 = var47(getNewMessages(conversationId, false, tick()))
+				var28 = var11(getNewMessages(conversationId, false, tick()))
 				
 				return
 			elseif type == "NewMessageBySelf" then
-				var72 = var47(getNewMessages(conversationId, true, tick()))
+				var28 = var11(getNewMessages(conversationId, true, tick()))
 				
 				return
 			elseif type == "ParticipantTyping" then
-				var47(receivedUserTypingModule(conversationId, tostring(p27.UserId)))
+				var11(receivedUserTypingModule(conversationId, tostring(p3.UserId)))
 			end
 		end)
 		
@@ -288,34 +288,34 @@ function ChatEventReceiver(p1)
 			end
 		end
 	end, {
-		var47, var63, var59.activeConversationId, var59.rnBypassActionSignal, var42,
-		var40, var41
+		var11, var26, var22.activeConversationId, var22.rnBypassActionSignal, var6,
+		var4, var5
 	})
 	useEffect(function()
-		-- upvalues: var44 (ref), var59 (ref), var7 (copy), roactNavigationModule (copy), var40 (ref), formFactor (copy), enumScreensModule (copy)
-		if not var44 and var59.activeConversationId and var59.rnBypassActionSignal then
-			var7:debug("Chat is disabled for our user, navigating away from active conversation")
-			var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
-				routeName = if var40 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
+		-- upvalues: var8 (ref), var22 (ref), var1 (copy), roactNavigationModule (copy), var4 (ref), formFactor (copy), enumScreensModule (copy)
+		if not var8 and var22.activeConversationId and var22.rnBypassActionSignal then
+			var1:debug("Chat is disabled for our user, navigating away from active conversation")
+			var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+				routeName = if var4 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
 			}))
 		end
-	end, { var44 })
-	local var65 = if var59.activeConversationId then var39[var59.activeConversationId] else nil
+	end, { var8 })
+	local var28 = if var22.activeConversationId then var3[var22.activeConversationId] else nil
 	useEffect(function()
-		-- upvalues: var45 (ref), var65 (ref), var59 (ref), var7 (copy), roactNavigationModule (copy), var40 (ref), formFactor (copy), enumScreensModule (copy)
-		if not var45 and var65 and (var59.rnBypassActionSignal and var65.type == "group") then
-			var7:debug("Group chats are disabled and we are navigated to a group chat. Navigating to ChatLanding")
-			var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
-				routeName = if var40 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
+		-- upvalues: var9 (ref), var28 (ref), var22 (ref), var1 (copy), roactNavigationModule (copy), var4 (ref), formFactor (copy), enumScreensModule (copy)
+		if not var9 and var28 and (var22.rnBypassActionSignal and var28.type == "group") then
+			var1:debug("Group chats are disabled and we are navigated to a group chat. Navigating to ChatLanding")
+			var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+				routeName = if var4 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
 			}))
 		end
-	end, { var45, var65 })
+	end, { var9, var28 })
 	useEffect(function()
-		-- upvalues: robloxEventReceiver (ref), var47 (ref), roduxAliasesModule (copy)
-		local userTagChangeNotification = robloxEventReceiver:observeEvent("UserTagChangeNotification", function(p32, _)
-			-- upvalues: var47 (copy), roduxAliasesModule (copy)
-			if p32.Type == "UserTagUpdate" then
-				var47(roduxAliasesModule.Actions.AliasUpdated(tostring(p32.UserId), p32.NewAlias))
+		-- upvalues: robloxEventReceiver (ref), var11 (ref), roduxAliasesModule (copy)
+		local userTagChangeNotification = robloxEventReceiver:observeEvent("UserTagChangeNotification", function(p3, _)
+			-- upvalues: var11 (copy), roduxAliasesModule (copy)
+			if p3.Type == "UserTagUpdate" then
+				var11(roduxAliasesModule.Actions.AliasUpdated(tostring(p3.UserId), p3.NewAlias))
 			end
 		end)
 		
@@ -325,41 +325,41 @@ function ChatEventReceiver(p1)
 				userTagChangeNotification:disconnect()
 			end
 		end
-	end, { var47 })
+	end, { var11 })
 	useEffect(function()
-		-- upvalues: robloxEventReceiver (ref), var7 (copy), var47 (ref), paginateAndRefreshConversationsModule (copy), var43 (ref), friendshipDestroyedModule (copy), var65 (ref), conversationModule (copy), cryoModule (copy), var40 (ref), formFactor (copy), enumScreensModule (copy), var59 (ref), roactNavigationModule (copy)
-		local friendshipNotifications = robloxEventReceiver:observeEvent("FriendshipNotifications", function(p33, _)
-			-- upvalues: var7 (copy), var47 (copy), paginateAndRefreshConversationsModule (copy), var43 (copy), friendshipDestroyedModule (copy), var65 (copy), conversationModule (copy), cryoModule (copy), var40 (copy), formFactor (copy), enumScreensModule (copy), var59 (copy), roactNavigationModule (copy)
-			local type = p33.Type
-			var7:info("Received friendship notification: {}", type)
+		-- upvalues: robloxEventReceiver (ref), var1 (copy), var11 (ref), paginateAndRefreshConversationsModule (copy), var7 (ref), friendshipDestroyedModule (copy), var28 (ref), conversationModule (copy), cryoModule (copy), var4 (ref), formFactor (copy), enumScreensModule (copy), var22 (ref), roactNavigationModule (copy)
+		local friendshipNotifications = robloxEventReceiver:observeEvent("FriendshipNotifications", function(p3, _)
+			-- upvalues: var1 (copy), var11 (copy), paginateAndRefreshConversationsModule (copy), var7 (copy), friendshipDestroyedModule (copy), var28 (copy), conversationModule (copy), cryoModule (copy), var4 (copy), formFactor (copy), enumScreensModule (copy), var22 (copy), roactNavigationModule (copy)
+			local type = p3.Type
+			var1:info("Received friendship notification: {}", type)
 			
 			if type == "FriendshipCreated" then
-				var47(paginateAndRefreshConversationsModule())
+				var11(paginateAndRefreshConversationsModule())
 				
 				return
 			elseif type == "FriendshipDestroyed" then
-				local var75 = nil
+				local var29 = nil
 				
-				if p33.EventArgs then
-					local var76 = tostring(p33.EventArgs.UserId1)
-					local var77 = tostring(p33.EventArgs.UserId2)
+				if p3.EventArgs then
+					local var30 = tostring(p3.EventArgs.UserId1)
+					local var31 = tostring(p3.EventArgs.UserId2)
 					
-					if var76 == var43 then
-						var76 = "localUserId"
-						var75 = var77
+					if var30 == var7 then
+						var30 = "localUserId"
+						var29 = var31
 					end
-					if var77 == var43 then
-						var77 = "localUserId"
-						var75 = var76
+					if var31 == var7 then
+						var31 = "localUserId"
+						var29 = var30
 					end
-					var47(friendshipDestroyedModule({ userId1 = var76, userId2 = var77 }))
+					var11(friendshipDestroyedModule({ userId1 = var30, userId2 = var31 }))
 				end
-				if var65 and var65.source == "friends" and (var65.conversationType == conversationModule.Type.ONE_TO_ONE_CONVERSATION and cryoModule.List.findWhere(var65.participants, function(p34)
-					-- upvalues: var75 (write)
-					return p34 == var75
+				if var28 and var28.source == "friends" and (var28.conversationType == conversationModule.Type.ONE_TO_ONE_CONVERSATION and cryoModule.List.findWhere(var28.participants, function(p4)
+					-- upvalues: var29 (write)
+					return p4 == var29
 				end)) then
-					var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
-						routeName = if var40 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
+					var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+						routeName = if var4 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
 					}))
 				end
 			end
@@ -372,36 +372,36 @@ function ChatEventReceiver(p1)
 			end
 		end
 	end, {
-		var47, var56, var43, var40, var65, var59.rnBypassActionSignal
+		var11, var19, var7, var4, var28, var22.rnBypassActionSignal
 	})
 	useEffect(function()
-		-- upvalues: robloxEventReceiver (ref), var7 (copy), var47 (ref), removedConversationModule (copy), fetchLatestConversationDetailsModule (copy), var59 (ref), roactNavigationModule (copy), enumScreensModule (copy)
-		local chatMigration = robloxEventReceiver:observeEvent("ChatMigration", function(p35, _)
-			-- upvalues: var7 (copy), var47 (copy), removedConversationModule (copy), fetchLatestConversationDetailsModule (copy), var59 (copy), roactNavigationModule (copy), enumScreensModule (copy)
-			local type = p35.Type
-			var7:info("Received chat migration notification: {}", type)
+		-- upvalues: robloxEventReceiver (ref), var1 (copy), var11 (ref), removedConversationModule (copy), fetchLatestConversationDetailsModule (copy), var22 (ref), roactNavigationModule (copy), enumScreensModule (copy)
+		local chatMigration = robloxEventReceiver:observeEvent("ChatMigration", function(p3, _)
+			-- upvalues: var1 (copy), var11 (copy), removedConversationModule (copy), fetchLatestConversationDetailsModule (copy), var22 (copy), roactNavigationModule (copy), enumScreensModule (copy)
+			local type = p3.Type
+			var1:info("Received chat migration notification: {}", type)
 			local channelId = nil
 			local conversationId = nil
 			
 			if type == "ConversationBackfilled" then
-				channelId = p35.ConversationId
-				conversationId = p35.ChannelId
+				channelId = p3.ConversationId
+				conversationId = p3.ChannelId
 			elseif type == "ConversationReset" then
-				channelId = p35.ChannelId
-				conversationId = p35.ConversationId
+				channelId = p3.ChannelId
+				conversationId = p3.ConversationId
 			else
-				var7:warning(`ChatEventReceiver: unknown notification {type}`)
+				var1:warning(`ChatEventReceiver: unknown notification {type}`)
 				
 				return
 			end
-			var47(removedConversationModule(channelId))
-			var47(fetchLatestConversationDetailsModule(conversationId)):catch(function(p36)
-				-- upvalues: var7 (copy), type (ref)
-				var7:warning(`NetworkingChat failure in RobloxEventReceiver->{type}, Status: {tostring(p36)}`)
+			var11(removedConversationModule(channelId))
+			var11(fetchLatestConversationDetailsModule(conversationId)):catch(function(p4)
+				-- upvalues: var1 (copy), type (ref)
+				var1:warning(`NetworkingChat failure in RobloxEventReceiver->{type}, Status: {tostring(p4)}`)
 			end)
 			
-			if var59.activeConversationId and channelId and (tostring(var59.activeConversationId) == channelId and var59.rnBypassActionSignal) then
-				var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+			if var22.activeConversationId and channelId and (tostring(var22.activeConversationId) == channelId and var22.rnBypassActionSignal) then
+				var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
 					routeName = enumScreensModule.ChatConversation,
 					params = { conversationId = conversationId }
 				}))
@@ -415,57 +415,57 @@ function ChatEventReceiver(p1)
 			end
 		end
 	end, {
-		var47,
-		var59.activeConversationId,
-		var59.rnBypassActionSignal,
-		var50
+		var11,
+		var22.activeConversationId,
+		var22.rnBypassActionSignal,
+		var14
 	})
-	local var66 = useCallback(function()
-		-- upvalues: var38 (ref), var47 (ref), fetchChatMetadataModule (copy), var7 (copy), paginateAndRefreshConversationsModule (copy), getAllFriendsAsyncModule (copy), fFlagAppChatPresenceStoreMigrationModule (copy), var52 (ref)
-		if var38 then
-			var47(fetchChatMetadataModule()):andThen(function(p37)
-				-- upvalues: var7 (copy), var47 (copy), paginateAndRefreshConversationsModule (copy), getAllFriendsAsyncModule (copy), fFlagAppChatPresenceStoreMigrationModule (copy), var52 (copy)
-				if p37 then
-					var7:trace("Chat is enabled for our user, refreshing conversations")
-					var47(paginateAndRefreshConversationsModule())
+	local var29 = useCallback(function()
+		-- upvalues: var2 (ref), var11 (ref), fetchChatMetadataModule (copy), var1 (copy), paginateAndRefreshConversationsModule (copy), getAllFriendsAsyncModule (copy), fFlagAppChatPresenceStoreMigrationModule (copy), var16 (ref)
+		if var2 then
+			var11(fetchChatMetadataModule()):andThen(function(p3)
+				-- upvalues: var1 (copy), var11 (copy), paginateAndRefreshConversationsModule (copy), getAllFriendsAsyncModule (copy), fFlagAppChatPresenceStoreMigrationModule (copy), var16 (copy)
+				if p3 then
+					var1:trace("Chat is enabled for our user, refreshing conversations")
+					var11(paginateAndRefreshConversationsModule())
 					task.spawn(function()
-						-- upvalues: var47 (copy), getAllFriendsAsyncModule (copy)
-						var47(getAllFriendsAsyncModule())
+						-- upvalues: var11 (copy), getAllFriendsAsyncModule (copy)
+						var11(getAllFriendsAsyncModule())
 					end)
 					
 					if fFlagAppChatPresenceStoreMigrationModule then
 						return
 					else
-						var52()
+						var16()
 						
 						return
 					end
 				else
-					var7:trace("Chat is disabled for our user, no need to refresh conversations")
+					var1:trace("Chat is disabled for our user, no need to refresh conversations")
 				end
 			end)
 		end
 	end, {
-		var38,
-		var56,
-		var51,
-		var52,
-		var49
+		var2,
+		var19,
+		var15,
+		var16,
+		var13
 	})
 	useEffect(function()
-		-- upvalues: robloxEventReceiver (ref), var7 (copy), fFlagRemoveUnusedConnectionStateRoduxSlice (copy), var47 (ref), setConnectionStateModule (copy), var61 (ref), var60 (ref), var38 (ref), var66 (ref)
-		local signalR = robloxEventReceiver:observeEvent("signalR", function(p38, _, p39)
-			-- upvalues: var7 (copy), fFlagRemoveUnusedConnectionStateRoduxSlice (copy), var47 (copy), setConnectionStateModule (copy), var61 (copy), var60 (copy), var38 (copy), var66 (copy)
-			var7:info("SignalR connection state transitioned to {}", tostring(p38))
+		-- upvalues: robloxEventReceiver (ref), var1 (copy), fFlagRemoveUnusedConnectionStateRoduxSlice (copy), var11 (ref), setConnectionStateModule (copy), var24 (ref), var23 (ref), var2 (ref), var29 (ref)
+		local signalR = robloxEventReceiver:observeEvent("signalR", function(p3, _, p4)
+			-- upvalues: var1 (copy), fFlagRemoveUnusedConnectionStateRoduxSlice (copy), var11 (copy), setConnectionStateModule (copy), var24 (copy), var23 (copy), var2 (copy), var29 (copy)
+			var1:info("SignalR connection state transitioned to {}", tostring(p3))
 			
 			if not fFlagRemoveUnusedConnectionStateRoduxSlice then
-				var47(setConnectionStateModule(p38))
+				var11(setConnectionStateModule(p3))
 			end
-			var61.current = p38
+			var24.current = p3
 			
-			if p38 == Enum.ConnectionState.Connected and p39 and (var60.current == nil or var60.current.ChatNotifications ~= p39.ChatNotifications or var60.current.CommunicationChannels ~= p39.CommunicationChannels) then
-				var7:trace("We missed some messages while we were disconnected. The chat app was previously {}", if var38 then "loaded" else "unloaded")
-				var66()
+			if p3 == Enum.ConnectionState.Connected and p4 and (var23.current == nil or var23.current.ChatNotifications ~= p4.ChatNotifications or var23.current.CommunicationChannels ~= p4.CommunicationChannels) then
+				var1:trace("We missed some messages while we were disconnected. The chat app was previously {}", if var2 then "loaded" else "unloaded")
+				var29()
 			end
 		end)
 		
@@ -476,35 +476,35 @@ function ChatEventReceiver(p1)
 			end
 		end
 	end, {
-		var47,
-		var61,
-		var60,
-		var64,
-		var38
+		var11,
+		var24,
+		var23,
+		var27,
+		var2
 	})
 	useEffect(function()
-		-- upvalues: robloxEventReceiver (ref), communicationChannelsTypesModule (copy), var7 (copy), var63 (ref), var47 (ref), removedConversationModule (copy), var59 (ref), var40 (ref), formFactor (copy), enumScreensModule (copy), roactNavigationModule (copy), var43 (ref), removedFromConversationToastTitle (ref), fetchLatestConversationDetailsModule (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var42 (ref), conversationChannelsModule (copy), friendConversationCreatedModule (copy), fFlagAppChatPerfTrackingModule (copy), restartMessageReceiveTracking (ref), getNewMessages (copy), receivedUserTypingModule (copy)
-		local communicationChannels = robloxEventReceiver:observeEvent("CommunicationChannels", function(p40, _)
-			-- upvalues: communicationChannelsTypesModule (copy), var7 (copy), var63 (copy), var47 (copy), removedConversationModule (copy), var59 (copy), var40 (copy), formFactor (copy), enumScreensModule (copy), roactNavigationModule (copy), var43 (copy), removedFromConversationToastTitle (copy), fetchLatestConversationDetailsModule (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var42 (copy), conversationChannelsModule (copy), friendConversationCreatedModule (copy), fFlagAppChatPerfTrackingModule (copy), restartMessageReceiveTracking (copy), getNewMessages (copy), receivedUserTypingModule (copy)
-			if p40.ChannelVertical ~= "PlatformChat" then return end
-			if not table.find(communicationChannelsTypesModule.ChannelTypeAllowlist, p40.ChannelType) then return end
-			var7:info("Received channels notification: {}", p40.Type)
-			var63("CommunicationChannels", p40.SequenceNumber)
-			local channelId = p40.ChannelId
+		-- upvalues: robloxEventReceiver (ref), communicationChannelsTypesModule (copy), var1 (copy), var26 (ref), var11 (ref), removedConversationModule (copy), var22 (ref), var4 (ref), formFactor (copy), enumScreensModule (copy), roactNavigationModule (copy), var7 (ref), removedFromConversationToastTitle (ref), fetchLatestConversationDetailsModule (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var6 (ref), conversationChannelsModule (copy), friendConversationCreatedModule (copy), fFlagAppChatPerfTrackingModule (copy), restartMessageReceiveTracking (ref), getNewMessages (copy), receivedUserTypingModule (copy)
+		local communicationChannels = robloxEventReceiver:observeEvent("CommunicationChannels", function(p3, _)
+			-- upvalues: communicationChannelsTypesModule (copy), var1 (copy), var26 (copy), var11 (copy), removedConversationModule (copy), var22 (copy), var4 (copy), formFactor (copy), enumScreensModule (copy), roactNavigationModule (copy), var7 (copy), removedFromConversationToastTitle (copy), fetchLatestConversationDetailsModule (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var6 (copy), conversationChannelsModule (copy), friendConversationCreatedModule (copy), fFlagAppChatPerfTrackingModule (copy), restartMessageReceiveTracking (copy), getNewMessages (copy), receivedUserTypingModule (copy)
+			if p3.ChannelVertical ~= "PlatformChat" then return end
+			if not table.find(communicationChannelsTypesModule.ChannelTypeAllowlist, p3.ChannelType) then return end
+			var1:info("Received channels notification: {}", p3.Type)
+			var26("CommunicationChannels", p3.SequenceNumber)
+			local channelId = p3.ChannelId
 			
-			if p40.Type == "ChannelDeleted" or p40.Type == "RemovedFromChannel" or p40.Type == "ChannelArchived" then
-				var47(removedConversationModule(channelId))
-				local activeConversationId = var59.activeConversationId
+			if p3.Type == "ChannelDeleted" or p3.Type == "RemovedFromChannel" or p3.Type == "ChannelArchived" then
+				var11(removedConversationModule(channelId))
+				local activeConversationId = var22.activeConversationId
 				
-				if activeConversationId ~= nil and tostring(activeConversationId) == p40.ChannelId and var59.rnBypassActionSignal then
-					var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
-						routeName = if var40 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
+				if activeConversationId ~= nil and tostring(activeConversationId) == p3.ChannelId and var22.rnBypassActionSignal then
+					var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+						routeName = if var4 == formFactor.WIDE then enumScreensModule.EmptyConversation else enumScreensModule.ChatLanding
 					}))
 				end
-				if p40.Actor.Id == tostring(var43) then
+				if p3.Actor.Id == tostring(var7) then
 					return
 				else
-					var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+					var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
 						routeName = enumScreensModule.RoactChatToast,
 						params = {
 							toastProps = {
@@ -515,78 +515,78 @@ function ChatEventReceiver(p1)
 					
 					return
 				end
-			elseif p40.Type == "ChannelUpdated" or p40.Type == "ParticipantsAdded" or p40.Type == "ParticipantsRemoved" then
+			elseif p3.Type == "ChannelUpdated" or p3.Type == "ParticipantsAdded" or p3.Type == "ParticipantsRemoved" then
 				task.spawn(function()
-					-- upvalues: channelId (ref), var47 (copy), fetchLatestConversationDetailsModule (copy), p40 (ref), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var7 (copy)
-					var47(fetchLatestConversationDetailsModule(channelId)):andThen(function(p42)
-						-- upvalues: p40 (copy), channelId (copy), var47 (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy)
-						local title = p42.title
-						local lastUpdated = p42.lastUpdated
+					-- upvalues: channelId (ref), var11 (copy), fetchLatestConversationDetailsModule (copy), p3 (ref), renamedGroupConversationModule (copy), changedParticipantsModule (copy), var1 (copy)
+					var11(fetchLatestConversationDetailsModule(channelId)):andThen(function(p4)
+						-- upvalues: p3 (copy), channelId (copy), var11 (copy), renamedGroupConversationModule (copy), changedParticipantsModule (copy)
+						local title = p4.title
+						local lastUpdated = p4.lastUpdated
 						
-						if p40.Type == "ChannelUpdated" then
-							var47(renamedGroupConversationModule(channelId, title, p42.isDefaultTitle, lastUpdated))
+						if p3.Type == "ChannelUpdated" then
+							var11(renamedGroupConversationModule(channelId, title, p4.isDefaultTitle, lastUpdated))
 							
 							return
 						end
-						var47(changedParticipantsModule(channelId, p42.participants, title, lastUpdated))
-					end):catch(function(p41)
-						-- upvalues: var7 (copy), p40 (copy)
-						var7:warning(`Failure in RobloxEventReceiver->{p40.Type}, Status: {tostring(p41)}`)
+						var11(changedParticipantsModule(channelId, p4.participants, title, lastUpdated))
+					end):catch(function(p4)
+						-- upvalues: var1 (copy), p3 (copy)
+						var1:warning(`Failure in RobloxEventReceiver->{p3.Type}, Status: {tostring(p4)}`)
 					end)
 				end)
 				
 				return
-			elseif p40.Type == "AddedToChannel" or p40.Type == "ChannelCreated" or p40.Type == "ChannelMarkedRead" or (p40.Type == "ChannelMetadataUpdated" and channelId ~= nil or p40.Type == "ChannelUnarchived") then
-				if var42 then
-					var7:debug("Received {} event while loading conversation data", p40.Type)
+			elseif p3.Type == "AddedToChannel" or p3.Type == "ChannelCreated" or p3.Type == "ChannelMarkedRead" or (p3.Type == "ChannelMetadataUpdated" and channelId ~= nil or p3.Type == "ChannelUnarchived") then
+				if var6 then
+					var1:debug("Received {} event while loading conversation data", p3.Type)
 					
 					return
 				end
 				task.spawn(function()
-					-- upvalues: channelId (ref), var47 (copy), fetchLatestConversationDetailsModule (copy), p40 (ref), conversationChannelsModule (copy), friendConversationCreatedModule (copy), var59 (copy), roactNavigationModule (copy), enumScreensModule (copy), var7 (copy)
-					var47(fetchLatestConversationDetailsModule(channelId)):andThen(function(p44)
-						-- upvalues: p40 (copy), conversationChannelsModule (copy), var47 (copy), friendConversationCreatedModule (copy), var59 (copy), roactNavigationModule (copy), enumScreensModule (copy)
-						if (p40.Type == "ChannelCreated" or p40.Type == "ChannelUnarchived") and p44.type == "one_to_one" then
-							local friendConversationId = conversationChannelsModule.getFriendConversationId(p44.participants)
+					-- upvalues: channelId (ref), var11 (copy), fetchLatestConversationDetailsModule (copy), p3 (ref), conversationChannelsModule (copy), friendConversationCreatedModule (copy), var22 (copy), roactNavigationModule (copy), enumScreensModule (copy), var1 (copy)
+					var11(fetchLatestConversationDetailsModule(channelId)):andThen(function(p4)
+						-- upvalues: p3 (copy), conversationChannelsModule (copy), var11 (copy), friendConversationCreatedModule (copy), var22 (copy), roactNavigationModule (copy), enumScreensModule (copy)
+						if (p3.Type == "ChannelCreated" or p3.Type == "ChannelUnarchived") and p4.type == "one_to_one" then
+							local friendConversationId = conversationChannelsModule.getFriendConversationId(p4.participants)
 							
 							if friendConversationId then
-								var47(friendConversationCreatedModule({
-									newConversationId = p44.id,
+								var11(friendConversationCreatedModule({
+									newConversationId = p4.id,
 									oldFriendConversationId = friendConversationId
 								}))
 								
-								if var59.activeConversationId == friendConversationId then
-									var59.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
+								if var22.activeConversationId == friendConversationId then
+									var22.rnBypassActionSignal:fire(roactNavigationModule.Actions.navigate({
 										routeName = enumScreensModule.ChatConversation,
-										params = { conversationId = p44.id }
+										params = { conversationId = p4.id }
 									}))
 								end
 							end
 						end
-					end):catch(function(p43)
-						-- upvalues: var7 (copy), p40 (copy)
-						var7:warning("Failure in RobloxEventReceiver->{}, Status: {}", p40.Type, tostring(p43))
+					end):catch(function(p4)
+						-- upvalues: var1 (copy), p3 (copy)
+						var1:warning("Failure in RobloxEventReceiver->{}, Status: {}", p3.Type, tostring(p4))
 					end)
 				end)
 				
 				return
-			elseif p40.Type == "MessageCreated" or p40.Type == "SystemMessageCreated" then
-				local var82
+			elseif p3.Type == "MessageCreated" or p3.Type == "SystemMessageCreated" then
+				local var30
 				if not fFlagAppChatPerfTrackingModule then
-					var82 = var47(getNewMessages(channelId, p40.Actor.Id == tostring(var43), tick()))
+					var30 = var11(getNewMessages(channelId, p3.Actor.Id == tostring(var7), tick()))
 					
 					return
 				end
-				local var81 = p40.Actor.Id == tostring(var43)
+				local var31 = p3.Actor.Id == tostring(var7)
 				
-				if not var81 and var59.activeConversationId and tostring(var59.activeConversationId) == channelId then
+				if not var31 and var22.activeConversationId and tostring(var22.activeConversationId) == channelId then
 					restartMessageReceiveTracking(channelId)
 				end
-				var82 = var47(getNewMessages(channelId, var81, tick()))
+				var30 = var11(getNewMessages(channelId, var31, tick()))
 				
 				return
-			elseif p40.Type == "ParticipantTyping" and p40.IsTyping then
-				var47(receivedUserTypingModule(channelId, p40.Actor.Id))
+			elseif p3.Type == "ParticipantTyping" and p3.IsTyping then
+				var11(receivedUserTypingModule(channelId, p3.Actor.Id))
 			end
 		end)
 		
@@ -597,69 +597,69 @@ function ChatEventReceiver(p1)
 			end
 		end
 	end, {
-		var43, robloxEventReceiver, var63, var57, var59.activeConversationId,
-		var59.rnBypassActionSignal, removedFromConversationToastTitle, var50, var58,
-		var48, var42, var53, var55, var66
+		var7, robloxEventReceiver, var26, var20, var22.activeConversationId,
+		var22.rnBypassActionSignal, removedFromConversationToastTitle, var14, var21,
+		var12, var6, var17, var18, var29
 	})
-	local var67 = useMemo(function()
-		-- upvalues: var39 (ref), cryoModule (copy)
-		return if var39 then cryoModule.List.filterMap(cryoModule.Dictionary.values(var39), function(p45)
-			return if p45 and p45.id and p45.source ~= "friends" then p45.id else nil
+	local var30 = useMemo(function()
+		-- upvalues: var3 (ref), cryoModule (copy)
+		return if var3 then cryoModule.List.filterMap(cryoModule.Dictionary.values(var3), function(p3)
+			return if p3 and p3.id and p3.source ~= "friends" then p3.id else nil
 		end) else {}
-	end, { var39 })
+	end, { var3 })
 	useEffect(function()
-		-- upvalues: robloxEventReceiver (ref), var7 (copy), getFFlagDebugUnfilteredThreads (copy), chunkAndLogString (copy), cryoModule (copy), var67 (ref), var47 (ref), multiGetConversationDetailsModule (copy), var59 (ref), appChatNetworkingModule (copy), fFlagAppChatEnableDoubleOptIn (copy), refreshConversationUnfilteredThreadsDetailsModule (copy), var46 (ref)
-		local chatModerationTypeEligibility = robloxEventReceiver:observeEvent("ChatModerationTypeEligibility", function(p46, _)
-			-- upvalues: var7 (copy), getFFlagDebugUnfilteredThreads (copy), chunkAndLogString (copy), cryoModule (copy), var67 (copy), var47 (copy), multiGetConversationDetailsModule (copy), var59 (copy), appChatNetworkingModule (copy), fFlagAppChatEnableDoubleOptIn (copy), refreshConversationUnfilteredThreadsDetailsModule (copy), var46 (copy)
-			var7:debug("Received ChatModerationTypeEligibility notification")
-			local channelsInspected = p46.channels_inspected
+		-- upvalues: robloxEventReceiver (ref), var1 (copy), getFFlagDebugUnfilteredThreads (copy), chunkAndLogString (copy), cryoModule (copy), var30 (ref), var11 (ref), multiGetConversationDetailsModule (copy), var22 (ref), appChatNetworkingModule (copy), fFlagAppChatEnableDoubleOptIn (copy), refreshConversationUnfilteredThreadsDetailsModule (copy), var10 (ref)
+		local chatModerationTypeEligibility = robloxEventReceiver:observeEvent("ChatModerationTypeEligibility", function(p3, _)
+			-- upvalues: var1 (copy), getFFlagDebugUnfilteredThreads (copy), chunkAndLogString (copy), cryoModule (copy), var30 (copy), var11 (copy), multiGetConversationDetailsModule (copy), var22 (copy), appChatNetworkingModule (copy), fFlagAppChatEnableDoubleOptIn (copy), refreshConversationUnfilteredThreadsDetailsModule (copy), var10 (copy)
+			var1:debug("Received ChatModerationTypeEligibility notification")
+			local channelsInspected = p3.channels_inspected
 			
 			if not channelsInspected or #channelsInspected == 0 then return end
 			if getFFlagDebugUnfilteredThreads() then
-				local var85 = ""
+				local var31 = ""
 				
 				for i, v in channelsInspected do
-					var85 = `{var85}, {v}`
+					var31 = `{var31}, {v}`
 				end
-				chunkAndLogString(`RTN CONVERSATIONS INSPECTED{var85}`)
+				chunkAndLogString(`RTN CONVERSATIONS INSPECTED{var31}`)
 			end
-			local var86 = cryoModule.List.filter(channelsInspected, function(p47)
-				-- upvalues: var67 (copy)
-				return table.find(var67, p47)
+			local var32 = cryoModule.List.filter(channelsInspected, function(p4)
+				-- upvalues: var30 (copy)
+				return table.find(var30, p4)
 			end)
 			
-			if #var86 == 0 then
-				var7:debug("No filtered existing conversation IDs found in ChatModerationTypeEligibility notification")
+			if #var32 == 0 then
+				var1:debug("No filtered existing conversation IDs found in ChatModerationTypeEligibility notification")
 				
 				return
 			elseif getFFlagDebugUnfilteredThreads() then
-				local var87 = ""
+				local var33 = ""
 				
-				for i, v in var86 do
-					var87 = `{var87}, {v}`
+				for i, v in var32 do
+					var33 = `{var33}, {v}`
 				end
-				chunkAndLogString(`RTN FILTERED CONVERSATIONS{var87}`)
+				chunkAndLogString(`RTN FILTERED CONVERSATIONS{var33}`)
 			end
-			var47(multiGetConversationDetailsModule(var86)):catch(function(p48)
-				-- upvalues: var7 (copy)
-				var7:warning("NetworkingChat failure in " .. "ChatEventReceiver->ChatModerationTypeEligibility->MultiGetConversationDetails, Status: " .. tostring(p48))
+			var11(multiGetConversationDetailsModule(var32)):catch(function(p4)
+				-- upvalues: var1 (copy)
+				var1:warning("NetworkingChat failure in " .. "ChatEventReceiver->ChatModerationTypeEligibility->MultiGetConversationDetails, Status: " .. tostring(p4))
 			end)
 			
-			if not var59.activeConversationId then return end
-			if table.find(channelsInspected, var59.activeConversationId) then
-				var47(appChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ var59.activeConversationId })):catch(function(p49)
-					-- upvalues: var7 (copy)
-					var7:warning("NetworkingChat failure in " .. "ChatEventReceiver->ChatModerationTypeEligibility->GetConversationsParticipantsMetadata, Status: " .. tostring(p49))
+			if not var22.activeConversationId then return end
+			if table.find(channelsInspected, var22.activeConversationId) then
+				var11(appChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ var22.activeConversationId })):catch(function(p4)
+					-- upvalues: var1 (copy)
+					var1:warning("NetworkingChat failure in " .. "ChatEventReceiver->ChatModerationTypeEligibility->GetConversationsParticipantsMetadata, Status: " .. tostring(p4))
 				end)
 				
 				if fFlagAppChatEnableDoubleOptIn then
-					var47(refreshConversationUnfilteredThreadsDetailsModule(var59.activeConversationId, var46))
+					var11(refreshConversationUnfilteredThreadsDetailsModule(var22.activeConversationId, var10))
 					
 					return
 				end
-				var47(appChatNetworkingModule.rodux.GetConversationTopModal.API(var59.activeConversationId, var46)):catch(function(p50)
-					-- upvalues: var7 (copy)
-					var7:warning("NetworkingChat failure in " .. "ChatEventReceiver->ChatModerationTypeEligibility->GetConversationTopModal, Status: " .. tostring(p50))
+				var11(appChatNetworkingModule.rodux.GetConversationTopModal.API(var22.activeConversationId, var10)):catch(function(p4)
+					-- upvalues: var1 (copy)
+					var1:warning("NetworkingChat failure in " .. "ChatEventReceiver->ChatModerationTypeEligibility->GetConversationTopModal, Status: " .. tostring(p4))
 				end)
 			end
 		end)
@@ -670,15 +670,15 @@ function ChatEventReceiver(p1)
 				chatModerationTypeEligibility:disconnect()
 			end
 		end
-	end, { var47, var59.activeConversationId, var67 })
+	end, { var11, var22.activeConversationId, var30 })
 	useEffect(function()
-		-- upvalues: robloxEventReceiver (ref), var7 (copy), var47 (ref), appChatNetworkingModule (copy), var46 (ref)
+		-- upvalues: robloxEventReceiver (ref), var1 (copy), var11 (ref), appChatNetworkingModule (copy), var10 (ref)
 		local eligibilityStatusChanged = robloxEventReceiver:observeEvent("EligibilityStatusChanged", function(_, _)
-			-- upvalues: var7 (copy), var47 (copy), appChatNetworkingModule (copy), var46 (copy)
-			var7:info("Received EligibilityStatusChanged notification")
-			var47(appChatNetworkingModule.rodux.GetChatLandingModal.API(var46)):catch(function(p51)
-				-- upvalues: var7 (copy)
-				var7:warning("Error in GetChatLandingModal request. Error: {}", tostring(p51))
+			-- upvalues: var1 (copy), var11 (copy), appChatNetworkingModule (copy), var10 (copy)
+			var1:info("Received EligibilityStatusChanged notification")
+			var11(appChatNetworkingModule.rodux.GetChatLandingModal.API(var10)):catch(function(p4)
+				-- upvalues: var1 (copy)
+				var1:warning("Error in GetChatLandingModal request. Error: {}", tostring(p4))
 			end)
 		end)
 		
@@ -688,8 +688,8 @@ function ChatEventReceiver(p1)
 				eligibilityStatusChanged:disconnect()
 			end
 		end
-	end, { var47 })
-	useChatTrustedConnectionsEventsModule({ activeConversationId = var59.activeConversationId })
+	end, { var11 })
+	useChatTrustedConnectionsEventsModule({ activeConversationId = var22.activeConversationId })
 	
 	return {}
 end

@@ -27,7 +27,7 @@ local t_1 = {
 	[Enum.UserInputType.Touch] = t.Touch,
 	[Enum.UserInputType.None] = t.Pointer
 }
-local var4 = signal.new()
+local var1 = signal.new()
 local t_2 = { preferred = nil, last = nil }
 local t_3 = {
 	[Enum.Platform.XBoxOne] = true,
@@ -43,16 +43,16 @@ local t_4 = {
 	[Enum.Platform.IOS] = true,
 	[Enum.Platform.Android] = true
 }
-local var8 = if fFlagLuaAppResponsiveEnginePreferredInput then {
+local var2 = if fFlagLuaAppResponsiveEnginePreferredInput then {
 	[Enum.PreferredInput.Gamepad] = t.Directional,
 	[Enum.PreferredInput.Touch] = t.Touch,
 	[Enum.PreferredInput.KeyboardAndMouse] = t.Pointer
 } else nil
 
 function getPreferredInput()
-	-- upvalues: fFlagLuaAppResponsiveEnginePreferredInput (ref), userInputService (ref), var8 (ref), t (ref), appCommonLibModule (ref), t_3 (ref), t_4 (ref)
+	-- upvalues: fFlagLuaAppResponsiveEnginePreferredInput (ref), userInputService (ref), var2 (ref), t (ref), appCommonLibModule (ref), t_3 (ref), t_4 (ref)
 	if fFlagLuaAppResponsiveEnginePreferredInput then
-		return var8[userInputService.PreferredInput or Enum.PreferredInput.KeyboardAndMouse] or t.Pointer
+		return var2[userInputService.PreferredInput or Enum.PreferredInput.KeyboardAndMouse] or t.Pointer
 	end
 	local platform = userInputService:GetPlatform()
 	
@@ -60,26 +60,26 @@ function getPreferredInput()
 end
 
 function updatePreferredInput()
-	-- upvalues: t_2 (ref), var4 (ref)
-	local var10 = getPreferredInput()
+	-- upvalues: t_2 (ref), var1 (ref)
+	local var3 = getPreferredInput()
 	
-	if var10 ~= t_2.preferred then
-		t_2.preferred = var10
+	if var3 ~= t_2.preferred then
+		t_2.preferred = var3
 		
 		if t_2.last == nil then
 			t_2.last = t_2.preferred
 		end
-		var4:fire()
+		var1:fire()
 	end
 end
 
 function updateLastInput()
-	-- upvalues: t_1 (ref), userInputService (ref), t_2 (ref), var4 (ref)
-	local var11 = t_1[userInputService:GetLastInputType()]
+	-- upvalues: t_1 (ref), userInputService (ref), t_2 (ref), var1 (ref)
+	local var3 = t_1[userInputService:GetLastInputType()]
 	
-	if var11 and var11 ~= t_2.last then
-		t_2.last = var11
-		var4:fire()
+	if var3 and var3 ~= t_2.last then
+		t_2.last = var3
+		var1:fire()
 	end
 end
 
@@ -113,9 +113,9 @@ return {
 		{ Key = t.Pointer, lastInput = t.Pointer },
 		{ Key = t.Touch, lastInput = t.Touch }
 	},
-	connect = function(p0)
-		-- upvalues: var4 (ref)
-		return var4:connect(p0)
+	connect = function(p1)
+		-- upvalues: var1 (ref)
+		return var1:connect(p1)
 	end,
 	preferred = function()
 		-- upvalues: t_2 (ref)

@@ -13,71 +13,71 @@ local fetchBadgeDetailsPage = require(parent.Badges).fetchBadgeDetailsPage
 local getIsBadgeDetailsSheetOpen = require(parent.Badges).BadgeDetailsSheetState.getIsBadgeDetailsSheetOpen
 local fFlagCloseBadgeSheetOnAbuseReport = require(parent.SharedFlags).FFlagCloseBadgeSheetOnAbuseReport
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var3 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0, _, p1, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagCloseBadgeSheetOnAbuseReport (ref), getIsBadgeDetailsSheetOpen (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateBack (ref), openDynamicAbuseReportModule (ref), closeCentralOverlay (ref), sduiLoadTimer (ref), fetchBadgeDetailsPage (ref), appPage (ref), navigateDown (ref)
-	local var4 = if p0 then p0.actionParams else nil
+return function(p1, _, p2, _)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagCloseBadgeSheetOnAbuseReport (ref), getIsBadgeDetailsSheetOpen (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), openDynamicAbuseReportModule (ref), closeCentralOverlay (ref), sduiLoadTimer (ref), fetchBadgeDetailsPage (ref), appPage (ref), navigateDown (ref)
+	local var2 = if p1 then p1.actionParams else nil
 	
-	if var4 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var2 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing action params",
 			name = sduiActionType.OpenAbuseReport
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	assert(var4, "actionParams must exist")
+	assert(var2, "actionParams must exist")
 	
-	if var4.targetId == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var2.targetId == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: targetId",
 			name = sduiActionType.OpenAbuseReport
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
-	elseif var4.abuseVector == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	elseif var2.abuseVector == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: abuseVector",
 			name = sduiActionType.OpenAbuseReport
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local targetId = var4.targetId
-	local abuseVector = var4.abuseVector
-	local assetTypeName = var4.assetTypeName
-	local universeId = var4.universeId
-	local dispatch = p1.dependencies.dispatch
-	local var5 = fFlagCloseBadgeSheetOnAbuseReport and (p1.appPage == "BadgeDetails" and getIsBadgeDetailsSheetOpen())
+	local targetId = var2.targetId
+	local abuseVector = var2.abuseVector
+	local assetTypeName = var2.assetTypeName
+	local universeId = var2.universeId
+	local dispatch = p2.dependencies.dispatch
+	local var3 = fFlagCloseBadgeSheetOnAbuseReport and (p2.appPage == "BadgeDetails" and getIsBadgeDetailsSheetOpen())
 	
-	if var5 then
+	if var3 then
 		if fFlagSignalsNavP3Dispatch then
-			var3.back()
+			var1.back()
 		else
 			dispatch(navigateBack())
 		end
 	end
-	local var6 = if var5 then targetId else nil
+	local var4 = if var3 then targetId else nil
 	dispatch(openDynamicAbuseReportModule({
 		abuseVector = abuseVector,
 		targetId = targetId,
 		custom = { assetTypeName = assetTypeName, universeId = universeId },
 		onClose = function()
-			-- upvalues: dispatch (ref), closeCentralOverlay (copy), var6 (ref), sduiLoadTimer (copy), fetchBadgeDetailsPage (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var3 (copy), navigateDown (copy)
+			-- upvalues: dispatch (ref), closeCentralOverlay (copy), var4 (ref), sduiLoadTimer (copy), fetchBadgeDetailsPage (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
 			dispatch(closeCentralOverlay())
 			
-			if var6 then
+			if var4 then
 				local badgeDetails = sduiLoadTimer.createLoadTimer("BadgeDetails")
 				badgeDetails.start("navigate")
-				fetchBadgeDetailsPage(var6, badgeDetails)
+				fetchBadgeDetailsPage(var4, badgeDetails)
 				local t = {
 					name = appPage.BadgeDetails,
-					extraProps = { badgeId = var6, pageTimer = badgeDetails }
+					extraProps = { badgeId = var4, pageTimer = badgeDetails }
 				}
 				
 				if fFlagSignalsNavP3Dispatch then
-					var3.down(var3.fromLegacyPage(t))
+					var1.down(var1.fromLegacyPage(t))
 					
 					return
 				end

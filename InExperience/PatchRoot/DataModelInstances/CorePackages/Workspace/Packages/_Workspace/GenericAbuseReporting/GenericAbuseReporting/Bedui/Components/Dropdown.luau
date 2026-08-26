@@ -10,18 +10,18 @@ local componentSubtextModule = require(genericAbuseReporting.Bedui.Components.Co
 local dropdownWithPopoverModule = require(genericAbuseReporting.Common.DropdownWithPopover)
 local useFormDataModule = require(genericAbuseReporting.Bedui.Provider.useFormData)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useFormDataModule (ref), reactModule (ref), cryoModule (ref), view (ref), text (ref), dropdownWithPopoverModule (ref), componentSubtextModule (ref)
 	local updateForm = useFormDataModule().updateForm
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col gap-small",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Prompt = reactModule.createElement(text, {
 			tag = "auto-xy",
 			LayoutOrder = 0,
-			Text = p0.component.dropdown.prompt
+			Text = p1.component.dropdown.prompt
 		}),
 		DropdownMenuContainer = reactModule.createElement(view, {
 			tag = "size-full-0 auto-y col gap-small",
@@ -30,24 +30,24 @@ return reactModule.memo(function(p0)
 		}, {
 			DropdownWithPopover = reactModule.createElement(dropdownWithPopoverModule, {
 				layoutOrder = 1,
-				placeholder = p0.component.dropdown.placeholder,
-				onChange = reactModule.useCallback(function(p1)
-					-- upvalues: updateForm (ref), p0 (ref)
-					updateForm(p0.component.formDataKey, p1)
-				end, { p0.component.formDataKey }),
+				placeholder = p1.component.dropdown.placeholder,
+				onChange = reactModule.useCallback(function(p2)
+					-- upvalues: updateForm (ref), p1 (ref)
+					updateForm(p1.component.formDataKey, p2)
+				end, { p1.component.formDataKey }),
 				cellDatas = reactModule.useMemo(function()
-					-- upvalues: cryoModule (copy), p0 (ref)
-					return cryoModule.List.map(p0.component.dropdown.items, function(p2)
+					-- upvalues: cryoModule (copy), p1 (ref)
+					return cryoModule.List.map(p1.component.dropdown.items, function(p2)
 						return { text = p2.label or "", value = p2.formDataValue }
 					end)
-				end, { p0.component.dropdown.items }),
-				errorState = p0.isErrorState
+				end, { p1.component.dropdown.items }),
+				errorState = p1.isErrorState
 			}),
 			ComponentSubtext = reactModule.createElement(componentSubtextModule, {
 				layoutOrder = 2,
-				isErrorState = p0.isErrorState,
-				isOptional = p0.component.isOptional,
-				requirementMessage = p0.component.requirementMessage
+				isErrorState = p1.isErrorState,
+				isOptional = p1.component.isOptional,
+				requirementMessage = p1.component.requirementMessage
 			})
 		})
 	})

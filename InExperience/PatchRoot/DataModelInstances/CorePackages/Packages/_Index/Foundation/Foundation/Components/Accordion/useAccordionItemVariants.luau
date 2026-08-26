@@ -7,7 +7,7 @@ local _ = require(foundation.Components.Types)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 local iconSizeModule = require(foundation.Enums.IconSize)
 
-local var6 = function(p0)
+local var1 = function(p1)
 	-- upvalues: stateLayerAffordanceModule (ref), inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
@@ -17,7 +17,7 @@ local var6 = function(p0)
 			},
 			header = { tag = "row flex-x-between align-y-center" },
 			content = { tag = "size-full-0 auto-y padding-top-xsmall" },
-			icon = { style = p0.Color.Content.Emphasis },
+			icon = { style = p1.Color.Content.Emphasis },
 			text = {
 				tag = "grow auto-y text-align-x-left text-truncate-end content-emphasis"
 			}
@@ -60,8 +60,8 @@ local var6 = function(p0)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), var6 (ref), composeStyleVariantModule (ref)
-	local accordionItem = variantsContextModule.useVariants("AccordionItem", var6, p1)
+	-- upvalues: variantsContextModule (ref), var1 (ref), composeStyleVariantModule (ref)
+	local accordionItem = variantsContextModule.useVariants("AccordionItem", var1, p1)
 	
 	return composeStyleVariantModule(accordionItem.common, accordionItem.sizes[p2], accordionItem.isContained[p3])
 end

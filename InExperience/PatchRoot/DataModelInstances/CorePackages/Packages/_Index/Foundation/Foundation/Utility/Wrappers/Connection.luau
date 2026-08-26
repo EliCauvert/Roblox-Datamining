@@ -1,5 +1,5 @@
 ﻿return {
-	Disconnect = function(p0)
-		return p0:Disconnect()
+	Disconnect = function(p1)
+		return p1:Disconnect()
 	end
 }

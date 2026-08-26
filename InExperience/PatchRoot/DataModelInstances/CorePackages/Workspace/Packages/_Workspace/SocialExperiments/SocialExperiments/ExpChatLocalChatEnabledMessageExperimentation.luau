@@ -10,9 +10,9 @@ return {
 		if expChatLocalChatEnabledMessageForcedKey ~= "" then
 			return expChatLocalChatEnabledMessageForcedKey
 		end
-		local var4 = experimentCacheManager.default:getLayerVariables(expChatLocalChatEnabledMessageExperimentLayer)
+		local var1 = experimentCacheManager.default:getLayerVariables(expChatLocalChatEnabledMessageExperimentLayer)
 		
-		return if var4 and var4[expChatLocalChatEnabledMessageVariable] ~= nil then var4[expChatLocalChatEnabledMessageVariable] else nil
+		return if var1 and var1[expChatLocalChatEnabledMessageVariable] ~= nil then var1[expChatLocalChatEnabledMessageVariable] else nil
 	end,
 	logExposure = function()
 		-- upvalues: enableExpChatLocalChatEnabledMessageExperimentation2 (ref), experimentCacheManager (ref), expChatLocalChatEnabledMessageExperimentLayer (ref)

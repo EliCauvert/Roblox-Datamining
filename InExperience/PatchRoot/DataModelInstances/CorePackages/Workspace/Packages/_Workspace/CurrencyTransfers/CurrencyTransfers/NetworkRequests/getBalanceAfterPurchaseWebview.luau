@@ -2,20 +2,20 @@
 local promiseModule = require(currencyTransfers.Parent.Promise)
 local getBalanceRequestModule = require(currencyTransfers.NetworkRequests.getBalanceRequest)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getBalanceRequestModule (ref), promiseModule (ref)
-	local var3 = if p0 and p0.refetchDelaySeconds ~= nil then p0.refetchDelaySeconds else 0.45
+	local var1 = if p1 and p1.refetchDelaySeconds ~= nil then p1.refetchDelaySeconds else 0.45
 	
-	return getBalanceRequestModule(nil, p1):andThen(function(p2)
-		-- upvalues: var3 (ref), promiseModule (copy), getBalanceRequestModule (copy), p1 (ref)
-		return if var3 <= 0 then p2 else promiseModule.delay(var3):andThen(function()
-			-- upvalues: getBalanceRequestModule (copy), p1 (copy), p2 (ref)
-			return getBalanceRequestModule(nil, p1):andThen(function(p3)
-				-- upvalues: p2 (copy)
-				return math.max(p2, p3)
+	return getBalanceRequestModule(nil, p2):andThen(function(p3)
+		-- upvalues: var1 (ref), promiseModule (copy), getBalanceRequestModule (copy), p2 (ref)
+		return if var1 <= 0 then p3 else promiseModule.delay(var1):andThen(function()
+			-- upvalues: getBalanceRequestModule (copy), p2 (copy), p3 (ref)
+			return getBalanceRequestModule(nil, p2):andThen(function(p4)
+				-- upvalues: p3 (copy)
+				return math.max(p3, p4)
 			end):catch(function()
-				-- upvalues: p2 (copy)
-				return p2
+				-- upvalues: p3 (copy)
+				return p3
 			end)
 		end)
 	end)

@@ -7,56 +7,56 @@ local onFormLoadedModule = require(genericAbuseReporting.Analytics.Actions.OnFor
 local useAnalyticsSubmitDispatchModule = require(genericAbuseReporting.Analytics.useAnalyticsSubmitDispatch)
 local useAnalyticsDispatchModule = require(genericAbuseReporting.Analytics.useAnalyticsDispatch)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAnalyticsSubmitDispatchModule (ref), useAnalyticsDispatchModule (ref), defaultLocalizationKeysModule (ref), reactModule (ref), onFormLoadedModule (ref), frameModule (ref), simpleSubmitDialogModule (ref)
-	local var8 = useAnalyticsSubmitDispatchModule()
-	local var9 = useAnalyticsDispatchModule()
-	local hasPreviousSteps = p0.onCloseProps and p0.onCloseProps.hasPreviousSteps
+	local var1 = useAnalyticsSubmitDispatchModule()
+	local var2 = useAnalyticsDispatchModule()
+	local hasPreviousSteps = p1.onCloseProps and p1.onCloseProps.hasPreviousSteps
 	
-	if p0.localizationKeys then
-		p0.localizationKeys.formTitle = p0.localizationKeys.formTitle or defaultLocalizationKeysModule.formTitle
-		p0.localizationKeys.formSubmit = p0.localizationKeys.formSubmit or defaultLocalizationKeysModule.formSubmit
+	if p1.localizationKeys then
+		p1.localizationKeys.formTitle = p1.localizationKeys.formTitle or defaultLocalizationKeysModule.formTitle
+		p1.localizationKeys.formSubmit = p1.localizationKeys.formSubmit or defaultLocalizationKeysModule.formSubmit
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), onFormLoadedModule (copy), p0 (ref)
-		var9(onFormLoadedModule({
-			context = p0.analyticsContext,
+		-- upvalues: var2 (ref), onFormLoadedModule (copy), p1 (ref)
+		var2(onFormLoadedModule({
+			context = p1.analyticsContext,
 			place_id = game.PlaceId,
 			accumulated_time_ms = workspace:GetServerTimeNow() * 1000
 		}))
-	end, { var9, p0.analyticsContext })
+	end, { var2, p1.analyticsContext })
 	
 	return reactModule.createElement(frameModule, { Size = UDim2.fromScale(1, 1) }, {
 		submitDialog = reactModule.createElement(simpleSubmitDialogModule, {
-			topCustomComponent = p0.topCustomComponent,
-			footerContent = p0.footerContent,
-			localizationKeys = p0.localizationKeys,
-			reportCategories = p0.reportCategories,
-			reportCategoryDefaultKey = p0.reportCategoryDefaultKey,
-			onSubmit = reactModule.useCallback(function(p1, p2)
-				-- upvalues: p0 (ref), var8 (ref)
-				if (if p0.onSubmitProps.hasNextSteps then p0.onSubmitProps.onProceedToNextStep(p1, p2) else p0.onSubmitProps.onSubmit(p1, p2)) and not p0.onSubmitProps.hasNextSteps then
-					var8("Submit")
+			topCustomComponent = p1.topCustomComponent,
+			footerContent = p1.footerContent,
+			localizationKeys = p1.localizationKeys,
+			reportCategories = p1.reportCategories,
+			reportCategoryDefaultKey = p1.reportCategoryDefaultKey,
+			onSubmit = reactModule.useCallback(function(p2, p3)
+				-- upvalues: p1 (ref), var1 (ref)
+				if (if p1.onSubmitProps.hasNextSteps then p1.onSubmitProps.onProceedToNextStep(p2, p3) else p1.onSubmitProps.onSubmit(p2, p3)) and not p1.onSubmitProps.hasNextSteps then
+					var1("Submit")
 				end
-			end, { var8, p0.onSubmitProps }),
+			end, { var1, p1.onSubmitProps }),
 			onAbandon = reactModule.useCallback(function()
-				-- upvalues: p0 (ref), var8 (ref)
-				if not p0.onCloseProps then
-					var8("Abandon")
+				-- upvalues: p1 (ref), var1 (ref)
+				if not p1.onCloseProps then
+					var1("Abandon")
 					
 					return
-				elseif p0.onCloseProps.hasPreviousSteps then
-					p0.onCloseProps.onBackToPreviousStep()
+				elseif p1.onCloseProps.hasPreviousSteps then
+					p1.onCloseProps.onBackToPreviousStep()
 					
 					return
 				end
-				p0.onCloseProps.onAbandon()
-				var8("Abandon")
-			end, { var8, p0.onCloseProps }),
-			isDisabled = p0.isDisabled,
-			isReportCategoryReadonly = p0.isReportCategoryReadonly,
+				p1.onCloseProps.onAbandon()
+				var1("Abandon")
+			end, { var1, p1.onCloseProps }),
+			isDisabled = p1.isDisabled,
+			isReportCategoryReadonly = p1.isReportCategoryReadonly,
 			useBackButton = hasPreviousSteps,
-			scaleDialog = p0.scaleDialog
+			scaleDialog = p1.scaleDialog
 		})
 	})
 end

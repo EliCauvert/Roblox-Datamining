@@ -10,9 +10,9 @@ local createUpdateMyRsvpStatusModule = require(networkingVirtualEvents.requests.
 local createGetVirtualEventRsvpCountsModule = require(networkingVirtualEvents.requests.createGetVirtualEventRsvpCounts)
 local _ = require(networkingVirtualEvents.types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createCreateVirtualEventModule (ref), createUpdateVirtualEventModule (ref), createDeleteVirtualEventModule (ref), createGetVirtualEventModule (ref), createGetMyVirtualEventsModule (ref), createGetActiveVirtualEventsModule (ref), createGetVirtualEventRsvpsModule (ref), createUpdateMyRsvpStatusModule (ref), createGetVirtualEventRsvpCountsModule (ref), networkingVirtualEvents (ref)
-	local roduxNetworking = p0.roduxNetworking
+	local roduxNetworking = p1.roduxNetworking
 	
 	return {
 		CreateVirtualEvent = createCreateVirtualEventModule(roduxNetworking),

@@ -22,320 +22,320 @@ local getClosestItemToCenterModule = require(parent.Utils.getClosestItemToCenter
 local fFlagUseMediaPlayerInCarousel = require(parent_1.SharedFlags).FFlagUseMediaPlayerInCarousel
 local t = { dampingRatio = 1, frequency = 4 }
 
-local function _(p0, p1, p2)
-	return math.abs(p0 - p1) < p2
+local function _(p1, p2, p3)
+	return math.abs(p1 - p2) < p3
 end
 
-local function createController(p3, p4, p5)
+local function createController(p1, p2, p3)
 	-- upvalues: otterModule (ref), t (ref), userGameSettingsService (ref), getClosestItemToCenterModule (ref), runService (ref)
-	local var15 = nil
-	local var16 = false
-	local var17 = nil
-	local var18 = false
-	local var19 = 0
-	local var20 = false
+	local var1 = nil
+	local var2 = false
+	local var3 = nil
+	local var4 = false
+	local var5 = 0
+	local var6 = false
 	
 	local function getWasTouched()
-		-- upvalues: var20 (write)
-		return var20
+		-- upvalues: var6 (write)
+		return var6
 	end
 	
 	local function resetTouchState()
-		-- upvalues: var16 (write), var20 (write)
-		var16 = false
-		var20 = false
+		-- upvalues: var2 (write), var6 (write)
+		var2 = false
+		var6 = false
 	end
 	
 	local function getIsNavigationLocked()
-		-- upvalues: var18 (write)
-		return var18
+		-- upvalues: var4 (write)
+		return var4
 	end
 	
 	local function setIsNavigationLocked(value)
-		-- upvalues: var16 (write), var20 (write), var18 (write)
+		-- upvalues: var2 (write), var6 (write), var4 (write)
 		if value == true then
-			var16 = false
-			var20 = false
+			var2 = false
+			var6 = false
 		end
-		var18 = value
+		var4 = value
 	end
 	
-	local function resetMotor(value, p6, p7)
-		-- upvalues: var17 (write), otterModule (copy), var16 (write), var19 (write), p3 (ref)
-		if var17 then
-			var17:destroy()
-			var17 = nil
+	local function resetMotor(value, p4, p5)
+		-- upvalues: var3 (write), otterModule (copy), var2 (write), var5 (write), p1 (ref)
+		if var3 then
+			var3:destroy()
+			var3 = nil
 		end
-		local var28 = otterModule.createSingleMotor(value)
-		var17 = var28
-		var28:onStep(function(p8)
-			-- upvalues: var17 (copy), var28 (ref), var16 (copy), var19 (copy), p6 (ref), value (ref), p3 (copy)
-			if var17 ~= var28 then
-				var28:destroy()
+		local var7 = otterModule.createSingleMotor(value)
+		var3 = var7
+		var7:onStep(function(p6)
+			-- upvalues: var3 (copy), var7 (ref), var2 (copy), var5 (copy), p4 (ref), value (ref), p1 (copy)
+			if var3 ~= var7 then
+				var7:destroy()
 				
 				return
-			elseif var16 then
-				var28:destroy()
-				var17 = nil
+			elseif var2 then
+				var7:destroy()
+				var3 = nil
 				
 				return
 			end
-			local var29 = if math.abs(p8 - var19) < 0.5 then var19 else p8
+			local var8 = if math.abs(p6 - var5) < 0.5 then var5 else p6
 			
-			if p6 and p6(value, var29) then return end
-			if p3.current then
-				p3.current.CanvasPosition = Vector2.new(var29, 0)
+			if p4 and p4(value, var8) then return end
+			if p1.current then
+				p1.current.CanvasPosition = Vector2.new(var8, 0)
 			end
 		end)
 		
-		if p7 then
-			var28:onComplete(p7)
+		if p5 then
+			var7:onComplete(p5)
 		end
-		var28:start()
+		var7:start()
 	end
 	
-	local function setGoal(value, p9, p10)
-		-- upvalues: var17 (write), var19 (write), otterModule (copy), t (copy)
-		if not var17 then return end
-		assert(var17 ~= nil, "setGoal called before resetMotor")
-		var19 = value.X * (p9 - 1)
+	local function setGoal(value, p4, p5)
+		-- upvalues: var3 (write), var5 (write), otterModule (copy), t (copy)
+		if not var3 then return end
+		assert(var3 ~= nil, "setGoal called before resetMotor")
+		var5 = value.X * (p4 - 1)
 		
-		if p10 then
-			var17:setGoal(otterModule.instant(var19))
+		if p5 then
+			var3:setGoal(otterModule.instant(var5))
 			
 			return
 		end
-		var17:setGoal(otterModule.spring(var19, t))
+		var3:setGoal(otterModule.spring(var5, t))
 	end
 	
 	local t_1 = {
-		carouselRef = p3,
+		carouselRef = p1,
 		getWasTouched = getWasTouched,
 		getIsNavigationLocked = getIsNavigationLocked,
-		handleDeleteTransition = function(p11, p12, p13, p14, p15, p16)
-			-- upvalues: p3 (ref), p4 (ref), var16 (write), var20 (write), var18 (write), resetMotor (ref), setGoal (ref), userGameSettingsService (copy), otterModule (copy), var17 (write), var19 (write)
-			local current = p3.current
-			local current_1 = p4.current
+		handleDeleteTransition = function(p4, p5, p6, p7, p8, p9)
+			-- upvalues: p1 (ref), p2 (ref), var2 (write), var6 (write), var4 (write), resetMotor (ref), setGoal (ref), userGameSettingsService (copy), otterModule (copy), var3 (write), var5 (write)
+			local current = p1.current
+			local current_1 = p2.current
 			
 			if not current or not current_1 then return end
-			local var34
+			local var7
 			assert(current ~= nil, "carousel should exist")
 			assert(current_1 ~= nil, "selectedItem should exist")
 			local scrollingEnabled = current.ScrollingEnabled
 			current.ScrollingEnabled = false
-			var16 = false
-			var20 = false
-			var18 = true
+			var2 = false
+			var6 = false
+			var4 = true
 			
 			local function handleDeleteNextImageMovement()
-				-- upvalues: p13 (ref), current_1 (ref), p14 (ref), resetMotor (copy), current (ref), p16 (ref), p11 (ref), var18 (copy), scrollingEnabled (ref), setGoal (copy), p15 (ref), userGameSettingsService (copy)
-				resetMotor(current.CanvasPosition.X, function(p17, p18)
-					-- upvalues: p13 (copy), current_1 (copy), p14 (copy)
-					current_1.Size = UDim2.fromOffset(math.round(p13.X - math.abs(p17 - p18)), p13.Y)
+				-- upvalues: p6 (ref), current_1 (ref), p7 (ref), resetMotor (copy), current (ref), p9 (ref), p4 (ref), var4 (copy), scrollingEnabled (ref), setGoal (copy), p8 (ref), userGameSettingsService (copy)
+				resetMotor(current.CanvasPosition.X, function(p10, p11)
+					-- upvalues: p6 (copy), current_1 (copy), p7 (copy)
+					current_1.Size = UDim2.fromOffset(math.round(p6.X - math.abs(p10 - p11)), p6.Y)
 					
-					return p14 == 1
+					return p7 == 1
 				end, function()
-					-- upvalues: p16 (copy), current_1 (copy), p11 (copy), var18 (copy), current (copy), scrollingEnabled (copy)
-					p16()
+					-- upvalues: p9 (copy), current_1 (copy), p4 (copy), var4 (copy), current (copy), scrollingEnabled (copy)
+					p9()
 					current_1.Visible = false
-					p11(1)
-					var18 = false
+					p4(1)
+					var4 = false
 					current.ScrollingEnabled = scrollingEnabled
 				end)
-				setGoal(p13, p14 - 1, p15 or userGameSettingsService.ReducedMotion)
+				setGoal(p6, p7 - 1, p8 or userGameSettingsService.ReducedMotion)
 			end
 			
 			local function handleDeleteImagesFadeIn()
-				-- upvalues: p12 (ref), p14 (ref), resetMotor (copy), current (ref), p16 (ref), current_1 (ref), otterModule (copy), p11 (ref), var18 (copy), scrollingEnabled (ref), p13 (ref), var17 (copy), var19 (copy)
-				if not p12 then return end
-				assert(p12 ~= nil, "setPostDeletionItemBinding should exist")
+				-- upvalues: p5 (ref), p7 (ref), resetMotor (copy), current (ref), p9 (ref), current_1 (ref), otterModule (copy), p4 (ref), var4 (copy), scrollingEnabled (ref), p6 (ref), var3 (copy), var5 (copy)
+				if not p5 then return end
+				assert(p5 ~= nil, "setPostDeletionItemBinding should exist")
 				resetMotor(current.CanvasPosition.X, function(_, _)
-					-- upvalues: p14 (copy)
-					return p14 == 1
+					-- upvalues: p7 (copy)
+					return p7 == 1
 				end, function()
-					-- upvalues: p16 (copy), current_1 (copy), otterModule (copy), p11 (copy), p12 (copy), var18 (copy), current (copy), scrollingEnabled (copy)
-					p16()
+					-- upvalues: p9 (copy), current_1 (copy), otterModule (copy), p4 (copy), p5 (copy), var4 (copy), current (copy), scrollingEnabled (copy)
+					p9()
 					current_1.Visible = false
-					local var36 = otterModule.createSingleMotor(0)
-					var36:onStep(function(p19)
-						-- upvalues: p11 (copy), p12 (copy)
-						p11(p19)
-						p12(1)
+					local var8 = otterModule.createSingleMotor(0)
+					var8:onStep(function(p10)
+						-- upvalues: p4 (copy), p5 (copy)
+						p4(p10)
+						p5(1)
 					end)
-					var36:onComplete(function()
-						-- upvalues: var18 (copy), current (copy), scrollingEnabled (copy)
-						var18 = false
+					var8:onComplete(function()
+						-- upvalues: var4 (copy), current (copy), scrollingEnabled (copy)
+						var4 = false
 						current.ScrollingEnabled = scrollingEnabled
 					end)
-					var36:setGoal(otterModule.spring(1, { frequency = 2 }))
+					var8:setGoal(otterModule.spring(1, { frequency = 2 }))
 				end)
-				local var35 = p14 - 1
+				local var8 = p7 - 1
 				
-				if var17 then
-					assert(var17 ~= nil, "setGoal called before resetMotor")
-					var19 = p13.X * (var35 - 1)
-					var17:setGoal(otterModule.instant(var19))
+				if var3 then
+					assert(var3 ~= nil, "setGoal called before resetMotor")
+					var5 = p6.X * (var8 - 1)
+					var3:setGoal(otterModule.instant(var5))
 					
 					return
 				end
 			end
 			
 			local function handleDeleteNextImageFadeOut()
-				-- upvalues: p12 (ref), otterModule (copy), handleDeleteImagesFadeIn (ref)
-				if p12 then
-					assert(p12 ~= nil, "setPostDeletionItemBinding should exist")
-					local var37 = otterModule.createSingleMotor(1)
-					var37:onStep(p12)
-					var37:onComplete(handleDeleteImagesFadeIn)
-					var37:setGoal(otterModule.spring(0, { frequency = 6 }))
+				-- upvalues: p5 (ref), otterModule (copy), handleDeleteImagesFadeIn (ref)
+				if p5 then
+					assert(p5 ~= nil, "setPostDeletionItemBinding should exist")
+					local var8 = otterModule.createSingleMotor(1)
+					var8:onStep(p5)
+					var8:onComplete(handleDeleteImagesFadeIn)
+					var8:setGoal(otterModule.spring(0, { frequency = 6 }))
 					
 					return
 				end
 			end
 			
-			local var33 = otterModule.createSingleMotor(1)
-			var33:onStep(p11)
+			local var8 = otterModule.createSingleMotor(1)
+			var8:onStep(p4)
 			local _ = nil
 			
 			if userGameSettingsService.ReducedMotion then
-				var34 = 6
-				var33:onComplete(handleDeleteNextImageFadeOut)
+				var7 = 6
+				var8:onComplete(handleDeleteNextImageFadeOut)
 			else
-				var34 = 4
-				var33:onComplete(handleDeleteNextImageMovement)
+				var7 = 4
+				var8:onComplete(handleDeleteNextImageMovement)
 			end
-			var33:setGoal(otterModule.spring(0, { frequency = var34 }))
+			var8:setGoal(otterModule.spring(0, { frequency = var7 }))
 		end,
-		handleInertialMove = function(p20, p21)
-			-- upvalues: p3 (ref), var16 (write), getClosestItemToCenterModule (copy), var17 (write), otterModule (copy), var19 (write), t (copy), var15 (write), runService (copy), p5 (ref)
+		handleInertialMove = function(p4, p5)
+			-- upvalues: p1 (ref), var2 (write), getClosestItemToCenterModule (copy), var3 (write), otterModule (copy), var5 (write), t (copy), var1 (write), runService (copy), p3 (ref)
 			local _ = nil
-			local current = p3.current
+			local current = p1.current
 			
-			if var16 or not current then return end
+			if var2 or not current then return end
 			assert(current ~= nil, "carousel should not be nil")
-			local var38 = -current:GetSampledInertialVelocity().X
+			local var7 = -current:GetSampledInertialVelocity().X
 			current:ClearInertialScrolling()
-			local var39, var40 = getClosestItemToCenterModule(p20, current)
+			local var8, var9 = getClosestItemToCenterModule(p4, current)
 			
-			if math.abs(var38) < 60 and var39 == p21 then
-				if var40 > 0.5 then
+			if math.abs(var7) < 60 and var8 == p5 then
+				if var9 > 0.5 then
 					local x = current.CanvasPosition.X
 					
-					if var17 then
-						var17:destroy()
-						var17 = nil
+					if var3 then
+						var3:destroy()
+						var3 = nil
 					end
-					local var41 = otterModule.createSingleMotor(x)
-					var17 = var41
-					local var42 = nil
-					var41:onStep(function(p22)
-						-- upvalues: var17 (copy), var41 (ref), var16 (copy), var19 (copy), var42 (ref), x (ref), p3 (copy)
-						if var17 ~= var41 then
-							var41:destroy()
+					local var10 = otterModule.createSingleMotor(x)
+					var3 = var10
+					local var11 = nil
+					var10:onStep(function(p6)
+						-- upvalues: var3 (copy), var10 (ref), var2 (copy), var5 (copy), var11 (ref), x (ref), p1 (copy)
+						if var3 ~= var10 then
+							var10:destroy()
 							
 							return
-						elseif var16 then
-							var41:destroy()
-							var17 = nil
+						elseif var2 then
+							var10:destroy()
+							var3 = nil
 							
 							return
 						end
-						local var29 = if math.abs(p22 - var19) < 0.5 then var19 else p22
+						local var12 = if math.abs(p6 - var5) < 0.5 then var5 else p6
 						
-						if var42 and var42(x, var29) then return end
-						if p3.current then
-							p3.current.CanvasPosition = Vector2.new(var29, 0)
+						if var11 and var11(x, var12) then return end
+						if p1.current then
+							p1.current.CanvasPosition = Vector2.new(var12, 0)
 						end
 					end)
-					var41:start()
+					var10:start()
 					
-					if var17 then
-						assert(var17 ~= nil, "setGoal called before resetMotor")
-						var19 = p20.X * (p21 - 1)
-						var17:setGoal(otterModule.spring(var19, t))
+					if var3 then
+						assert(var3 ~= nil, "setGoal called before resetMotor")
+						var5 = p4.X * (p5 - 1)
+						var3:setGoal(otterModule.spring(var5, t))
 					end
 				end
 				return
-			elseif var15 then
-				var15:Disconnect()
-				var15 = nil
+			elseif var1 then
+				var1:Disconnect()
+				var1 = nil
 			end
-			var15 = runService.RenderStepped:Connect(function(p23)
-				-- upvalues: p3 (copy), var16 (copy), var15 (copy), getClosestItemToCenterModule (copy), p20 (ref), var38 (write), p21 (ref), var17 (copy), otterModule (copy), var19 (copy), t (copy), p5 (copy)
-				local current = p3.current
+			var1 = runService.RenderStepped:Connect(function(p6)
+				-- upvalues: p1 (copy), var2 (copy), var1 (copy), getClosestItemToCenterModule (copy), p4 (ref), var7 (write), p5 (ref), var3 (copy), otterModule (copy), var5 (copy), t (copy), p3 (copy)
+				local current = p1.current
 				
-				if not current or var16 then
-					assert(var15 ~= nil, "handleInertialMoveConn should exist")
-					var15:Disconnect()
-					var15 = nil
+				if not current or var2 then
+					assert(var1 ~= nil, "handleInertialMoveConn should exist")
+					var1:Disconnect()
+					var1 = nil
 					
 					return
 				end
 				assert(current ~= nil, "carousel should not be nil")
-				local var43, var44 = getClosestItemToCenterModule(p20, current)
+				local var12, var13 = getClosestItemToCenterModule(p4, current)
 				
-				if math.abs(var38) >= 60 then
-					current.CanvasPosition += Vector2.new(var38 * p23, 0)
-					var38 *= (if math.abs(var38) < 120 then 0.7 else math.max(var44 / (p20.X / 2) * 1.25, 0.85) * 0.95) ^ (p23 / 0.016666666667)
+				if math.abs(var7) >= 60 then
+					current.CanvasPosition += Vector2.new(var7 * p6, 0)
+					var7 *= (if math.abs(var7) < 120 then 0.7 else math.max(var13 / (p4.X / 2) * 1.25, 0.85) * 0.95) ^ (p6 / 0.016666666667)
 					
 					return
 				end
-				assert(var15 ~= nil, "handleInertialMoveConn should exist")
-				var15:Disconnect()
-				var15 = nil
+				assert(var1 ~= nil, "handleInertialMoveConn should exist")
+				var1:Disconnect()
+				var1 = nil
 				
-				if var43 ~= p21 then
-					p5(var43)
+				if var12 ~= p5 then
+					p3(var12)
 					
 					return
 				end
 				local x = current.CanvasPosition.X
 				
-				if var17 then
-					var17:destroy()
-					var17 = nil
+				if var3 then
+					var3:destroy()
+					var3 = nil
 				end
-				local var45 = otterModule.createSingleMotor(x)
-				var17 = var45
-				local var46 = nil
-				var45:onStep(function(p24)
-					-- upvalues: var17 (copy), var45 (ref), var16 (copy), var19 (copy), var46 (ref), x (ref), p3 (copy)
-					if var17 ~= var45 then
-						var45:destroy()
+				local var14 = otterModule.createSingleMotor(x)
+				var3 = var14
+				local var15 = nil
+				var14:onStep(function(p7)
+					-- upvalues: var3 (copy), var14 (ref), var2 (copy), var5 (copy), var15 (ref), x (ref), p1 (copy)
+					if var3 ~= var14 then
+						var14:destroy()
 						
 						return
-					elseif var16 then
-						var45:destroy()
-						var17 = nil
+					elseif var2 then
+						var14:destroy()
+						var3 = nil
 						
 						return
 					end
-					local var29 = if math.abs(p24 - var19) < 0.5 then var19 else p24
+					local var16 = if math.abs(p7 - var5) < 0.5 then var5 else p7
 					
-					if var46 and var46(x, var29) then return end
-					if p3.current then
-						p3.current.CanvasPosition = Vector2.new(var29, 0)
+					if var15 and var15(x, var16) then return end
+					if p1.current then
+						p1.current.CanvasPosition = Vector2.new(var16, 0)
 					end
 				end)
-				var45:start()
-				local var47 = p20
-				local var48 = p21
+				var14:start()
+				local var16 = p4
+				local var17 = p5
 				
-				if var17 then
-					assert(var17 ~= nil, "setGoal called before resetMotor")
-					var19 = var47.X * (var48 - 1)
-					var17:setGoal(otterModule.spring(var19, t))
+				if var3 then
+					assert(var3 ~= nil, "setGoal called before resetMotor")
+					var5 = var16.X * (var17 - 1)
+					var3:setGoal(otterModule.spring(var5, t))
 					
 					return
 				end
 			end)
 		end,
-		onInputBegan = function(_, p25)
-			-- upvalues: var18 (write), var16 (write), var20 (write)
-			if var18 then return end
-			if p25.UserInputType == Enum.UserInputType.Touch then
-				var16 = true
-				var20 = true
+		onInputBegan = function(_, p4)
+			-- upvalues: var4 (write), var2 (write), var6 (write)
+			if var4 then return end
+			if p4.UserInputType == Enum.UserInputType.Touch then
+				var2 = true
+				var6 = true
 			end
 		end,
 		resetMotor = resetMotor,
@@ -348,108 +348,108 @@ local function createController(p3, p4, p5)
 	return t_1
 end
 
-return function(p26, p27, p28)
+return function(p1, p2, p3)
 	-- upvalues: useAnalyticsModule (ref), useBinding (ref), reactModule (ref), useIsHovered (ref), useIsTouchDown (ref), useLastInput (ref), createController (ref), userGameSettingsService (ref), useEffectOnce (ref), getClosestItemToCenterModule (ref), useEventConnection (ref), userInputService (ref), contextActionService (ref), eventNamesModule (ref), fFlagUseMediaPlayerInCarousel (ref)
-	local var49 = useAnalyticsModule()
-	local var50, var51 = useBinding(1)
-	local var52, var53 = useBinding(1)
-	local var54 = reactModule.useRef(nil)
-	local var55, var56, var57 = useIsHovered()
-	local var58 = useIsTouchDown()
-	local var59 = reactModule.useRef(nil)
-	local var60 = useLastInput()
-	local var61 = reactModule.useRef(nil)
+	local var1 = useAnalyticsModule()
+	local var2, var3 = useBinding(1)
+	local var4, var5 = useBinding(1)
+	local var6 = reactModule.useRef(nil)
+	local var7, var8, var9 = useIsHovered()
+	local var10 = useIsTouchDown()
+	local var11 = reactModule.useRef(nil)
+	local var12 = useLastInput()
+	local var13 = reactModule.useRef(nil)
 	
-	if var61.current == nil then
-		var61.current = createController(var54, var59, p28)
+	if var13.current == nil then
+		var13.current = createController(var6, var11, p3)
 	end
-	local current = var61.current
+	local current = var13.current
 	assert(current ~= nil, "carouselController should exist")
 	reactModule.useEffect(function()
-		-- upvalues: var54 (ref), userGameSettingsService (copy), current (ref), p26 (ref), p27 (ref)
-		local current_1 = var54.current
+		-- upvalues: var6 (ref), userGameSettingsService (copy), current (ref), p1 (ref), p2 (ref)
+		local current_1 = var6.current
 		
 		if current_1 then
 			assert(current_1 ~= nil, "carousel should exist")
 			local reducedMotion = userGameSettingsService.ReducedMotion
 			current.resetMotor(current_1.CanvasPosition.X)
-			current.setGoal(p26, p27, reducedMotion)
+			current.setGoal(p1, p2, reducedMotion)
 			
 			return
 		end
-	end, { p27 })
+	end, { p2 })
 	useEffectOnce(function()
-		-- upvalues: current (ref), p26 (ref), p27 (ref)
-		current.setGoal(p26, p27, true)
-	end, p27 ~= nil)
+		-- upvalues: current (ref), p1 (ref), p2 (ref)
+		current.setGoal(p1, p2, true)
+	end, p2 ~= nil)
 	reactModule.useEffect(function()
-		-- upvalues: current (ref), p26 (ref), p27 (ref)
-		current.setGoal(p26, p27, true)
-	end, { p26 })
+		-- upvalues: current (ref), p1 (ref), p2 (ref)
+		current.setGoal(p1, p2, true)
+	end, { p1 })
 	reactModule.useEffect(function()
-		-- upvalues: var58 (ref), current (ref), p26 (ref), p27 (ref)
-		if not var58 and current.getWasTouched() then
+		-- upvalues: var10 (ref), current (ref), p1 (ref), p2 (ref)
+		if not var10 and current.getWasTouched() then
 			current.resetTouchState()
-			current.handleInertialMove(p26, p27)
+			current.handleInertialMove(p1, p2)
 		end
-	end, { var58 })
-	useEventConnection(userInputService.PointerAction, reactModule.useCallback(function(p29)
-		-- upvalues: var54 (ref), current (ref), getClosestItemToCenterModule (copy), p26 (ref), var55 (ref), p28 (ref)
-		local current_1 = var54.current
+	end, { var10 })
+	useEventConnection(userInputService.PointerAction, reactModule.useCallback(function(p4)
+		-- upvalues: var6 (ref), current (ref), getClosestItemToCenterModule (copy), p1 (ref), var7 (ref), p3 (ref)
+		local current_1 = var6.current
 		
 		if not current_1 then return end
 		assert(current_1 ~= nil, "carousel should exist")
 		
 		if current.getIsNavigationLocked() then return end
-		local var62 = getClosestItemToCenterModule(p26, current_1)
+		local var14 = getClosestItemToCenterModule(p1, current_1)
 		
-		if var55 and p29 > 0 then
-			p28(var62 - 1)
+		if var7 and p4 > 0 then
+			p3(var14 - 1)
 			
 			return
-		elseif var55 and p29 < 0 then
-			p28(var62 + 1)
+		elseif var7 and p4 < 0 then
+			p3(var14 + 1)
 		end
-	end, { var55, p26 }))
-	useEventConnection(userInputService.TouchSwipe, reactModule.useCallback(function(p30)
-		-- upvalues: userGameSettingsService (copy), var54 (ref), current (ref), getClosestItemToCenterModule (copy), p26 (ref), p28 (ref)
+	end, { var7, p1 }))
+	useEventConnection(userInputService.TouchSwipe, reactModule.useCallback(function(p4)
+		-- upvalues: userGameSettingsService (copy), var6 (ref), current (ref), getClosestItemToCenterModule (copy), p1 (ref), p3 (ref)
 		if not userGameSettingsService.ReducedMotion then return end
-		local current_1 = var54.current
+		local current_1 = var6.current
 		
 		if not current_1 then return end
 		assert(current_1 ~= nil, "carousel should exist")
 		
 		if current.getIsNavigationLocked() then return end
-		local var63 = getClosestItemToCenterModule(p26, current_1)
+		local var14 = getClosestItemToCenterModule(p1, current_1)
 		
-		if p30 == Enum.SwipeDirection.Left then
-			p28(var63 + 1)
+		if p4 == Enum.SwipeDirection.Left then
+			p3(var14 + 1)
 			
 			return
-		elseif p30 == Enum.SwipeDirection.Right then
-			p28(var63 - 1)
+		elseif p4 == Enum.SwipeDirection.Right then
+			p3(var14 - 1)
 		end
 	end, {}))
 	reactModule.useEffect(function()
-		-- upvalues: contextActionService (copy), var54 (ref), current (ref), var49 (ref), eventNamesModule (copy), getClosestItemToCenterModule (copy), p26 (ref), p28 (ref)
-		contextActionService:BindCoreAction("CapturesCarouselNavigateShortcutAction", function(_, p31, p32)
-			-- upvalues: var54 (copy), current (copy), var49 (copy), eventNamesModule (copy), getClosestItemToCenterModule (copy), p26 (copy), p28 (copy)
-			local current_1 = var54.current
+		-- upvalues: contextActionService (copy), var6 (ref), current (ref), var1 (ref), eventNamesModule (copy), getClosestItemToCenterModule (copy), p1 (ref), p3 (ref)
+		contextActionService:BindCoreAction("CapturesCarouselNavigateShortcutAction", function(_, p4, p5)
+			-- upvalues: var6 (copy), current (copy), var1 (copy), eventNamesModule (copy), getClosestItemToCenterModule (copy), p1 (copy), p3 (copy)
+			local current_1 = var6.current
 			
 			if not current_1 then return end
 			assert(current_1 ~= nil, "carousel should exist")
 			
 			if current.getIsNavigationLocked() then return end
-			if p31 == Enum.UserInputState.End then
-				var49.fireEvent(eventNamesModule.CapturesCarouselNavigatedByKeyboard)
-				local var64 = getClosestItemToCenterModule(p26, current_1)
+			if p4 == Enum.UserInputState.End then
+				var1.fireEvent(eventNamesModule.CapturesCarouselNavigatedByKeyboard)
+				local var14 = getClosestItemToCenterModule(p1, current_1)
 				
-				if p32.KeyCode == Enum.KeyCode.Left then
-					p28(var64 - 1)
+				if p5.KeyCode == Enum.KeyCode.Left then
+					p3(var14 - 1)
 					
 					return
-				elseif p32.KeyCode == Enum.KeyCode.Right then
-					p28(var64 + 1)
+				elseif p5.KeyCode == Enum.KeyCode.Right then
+					p3(var14 + 1)
 				end
 			end
 		end, false, Enum.KeyCode.Left, Enum.KeyCode.Right)
@@ -461,32 +461,32 @@ return function(p26, p27, p28)
 	end, {})
 	
 	return {
-		carouselInputBegan = reactModule.useCallback(function(p33, p34)
-			-- upvalues: current (ref), userGameSettingsService (copy), var56 (ref)
+		carouselInputBegan = reactModule.useCallback(function(p4, p5)
+			-- upvalues: current (ref), userGameSettingsService (copy), var8 (ref)
 			if current.getIsNavigationLocked() then return end
 			if userGameSettingsService.ReducedMotion then
-				var56(p33, p34)
+				var8(p4, p5)
 				
 				return
 			end
-			current.onInputBegan(p33, p34)
-			var56(p33, p34)
-		end, { current.onInputBegan, var56 }),
-		carouselInputEnded = reactModule.useCallback(function(p35, p36)
-			-- upvalues: fFlagUseMediaPlayerInCarousel (copy), var60 (ref), current (ref), var57 (ref)
-			if fFlagUseMediaPlayerInCarousel and var60 == "Touch" and not current.getWasTouched() then
-				current.onInputBegan(p35, p36)
+			current.onInputBegan(p4, p5)
+			var8(p4, p5)
+		end, { current.onInputBegan, var8 }),
+		carouselInputEnded = reactModule.useCallback(function(p4, p5)
+			-- upvalues: fFlagUseMediaPlayerInCarousel (copy), var12 (ref), current (ref), var9 (ref)
+			if fFlagUseMediaPlayerInCarousel and var12 == "Touch" and not current.getWasTouched() then
+				current.onInputBegan(p4, p5)
 			end
-			var57(p35, p36)
-		end, { var57 }),
-		carouselRef = var54,
-		deleteSelectedItem = reactModule.useCallback(function(p37)
-			-- upvalues: current (ref), var51 (ref), var53 (ref), p26 (ref), p27 (ref)
-			current.handleDeleteTransition(var51, var53, p26, p27, false, p37)
-		end, { p26, p27, var51 }),
-		postDeletionItemBinding = var52,
-		selectedItemFadeOutBinding = var50,
-		selectedItemRef = var59,
+			var9(p4, p5)
+		end, { var9 }),
+		carouselRef = var6,
+		deleteSelectedItem = reactModule.useCallback(function(p4)
+			-- upvalues: current (ref), var3 (ref), var5 (ref), p1 (ref), p2 (ref)
+			current.handleDeleteTransition(var3, var5, p1, p2, false, p4)
+		end, { p1, p2, var3 }),
+		postDeletionItemBinding = var4,
+		selectedItemFadeOutBinding = var2,
+		selectedItemRef = var11,
 		setIsNavigationLocked = current.setIsNavigationLocked
 	}
 end

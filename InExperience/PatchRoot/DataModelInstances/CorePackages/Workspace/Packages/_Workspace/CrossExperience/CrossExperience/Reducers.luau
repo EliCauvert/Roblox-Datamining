@@ -2,16 +2,16 @@
 local participantsModule = require(script.Participants)
 local experienceModule = require(script.Experience)
 
-return function(p0)
+return function(p1)
 	-- upvalues: rodux (ref), participantsModule (ref), experienceModule (ref)
 	local participants = nil
 	local experience = nil
 	
-	if p0 and p0.Participants then
-		participants = p0.Participants
+	if p1 and p1.Participants then
+		participants = p1.Participants
 	end
-	if p0 and p0.Experience then
-		experience = p0.Experience
+	if p1 and p1.Experience then
+		experience = p1.Experience
 	end
 	return rodux.combineReducers({
 		Participants = participantsModule(participants),

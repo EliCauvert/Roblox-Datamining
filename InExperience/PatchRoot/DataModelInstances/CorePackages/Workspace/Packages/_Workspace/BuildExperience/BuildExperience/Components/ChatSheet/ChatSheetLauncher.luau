@@ -9,7 +9,7 @@ local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local chatActionsRowModule = require(buildExperience.Components.Chat.ChatActionsRow)
 local textAreaModule = require(buildExperience.FoundationFork.TextArea)
-local var8 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then require(script.Parent.useHardwareInsets) else require(buildExperience.FoundationFork.Sheet.useHardwareInsets)
+local var1 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then require(script.Parent.useHardwareInsets) else require(buildExperience.FoundationFork.Sheet.useHardwareInsets)
 local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
@@ -18,16 +18,16 @@ local useTokens = foundationModule.Hooks.useTokens
 
 local function noop() end
 
-return function(p0)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useOverlay (ref), var8 (ref), reactModule (ref), view (ref), textAreaModule (ref), noop (ref), inputSize (ref), chatActionsRowModule (ref), stateLayerAffordance (ref), reactRobloxModule (ref)
-	local var10 = if fFlagBuildLocalization then useLocalization({
+return function(p1)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useOverlay (ref), var1 (ref), reactModule (ref), view (ref), textAreaModule (ref), noop (ref), inputSize (ref), chatActionsRowModule (ref), stateLayerAffordance (ref), reactRobloxModule (ref)
+	local var2 = if fFlagBuildLocalization then useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
 	}) else nil
-	local var11 = useTokens()
-	local var12 = useOverlay()
-	local bottom = var8(var12).bottom
-	local small = var11.Margin.Small
-	local var13 = reactModule.createElement(view, {
+	local var3 = useTokens()
+	local var4 = useOverlay()
+	local bottom = var1(var4).bottom
+	local small = var3.Margin.Small
+	local var5 = reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
 		AnchorPoint = Vector2.new(0, 1),
 		Position = UDim2.fromScale(0, 1),
@@ -59,7 +59,7 @@ return function(p0)
 				isDisabled = true,
 				testId = "--chat-sheet-launcher-composer",
 				onChanged = noop,
-				placeholder = p0.placeholder or (if fFlagBuildLocalization then var10.composerPlaceholder else localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER),
+				placeholder = p1.placeholder or (if fFlagBuildLocalization then var2.composerPlaceholder else localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER),
 				width = UDim.new(1, 0),
 				size = inputSize.Large,
 				trailingElement = reactModule.createElement(view, { tag = "auto-xy padding-x-xsmall padding-y-small" }, {
@@ -77,12 +77,12 @@ return function(p0)
 			ZIndex = 2,
 			Position = UDim2.fromScale(0, 0),
 			Size = UDim2.fromScale(1, 1),
-			onActivated = p0.onActivated,
-			testId = p0.testId or "chat-sheet-launcher",
+			onActivated = p1.onActivated,
+			testId = p1.testId or "chat-sheet-launcher",
 			selection = { Selectable = false },
 			stateLayer = { affordance = stateLayerAffordance.None }
 		})
 	})
 	
-	return if var12 == nil then var13 else reactRobloxModule.createPortal(var13, var12)
+	return if var4 == nil then var5 else reactRobloxModule.createPortal(var5, var4)
 end

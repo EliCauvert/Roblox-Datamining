@@ -11,38 +11,38 @@ local getCharacterStoreModule = require(expChat.Stores.GetCharacterStore)
 local _ = require(expChat.Stores.GetCharacterStore.createCharacterStore)
 local getVoiceStoreModule = require(expChat.Stores.GetVoiceStore)
 local _ = require(expChat.Stores.GetVoiceStore.createVoiceStore)
-local var6 = if getFFlagUseCharacterStore() then getCharacterStoreModule(false) else nil
-local var7 = if getFFlagExpChatUseVoiceParticipantsStore() then getVoiceStoreModule(false) else nil
+local var1 = if getFFlagUseCharacterStore() then getCharacterStoreModule(false) else nil
+local var2 = if getFFlagExpChatUseVoiceParticipantsStore() then getVoiceStoreModule(false) else nil
 
 return function(value)
-	-- upvalues: getFFlagUseCharacterStore (ref), var6 (ref), useSignalState (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), var7 (ref), fFlagExpChatUseMessagesStore (ref), expChatSharedModule (ref), reactModule (ref)
-	return function(p0)
-		-- upvalues: getFFlagUseCharacterStore (copy), var6 (copy), useSignalState (copy), getFFlagExpChatUseVoiceParticipantsStore (copy), var7 (copy), fFlagExpChatUseMessagesStore (copy), expChatSharedModule (copy), reactModule (copy), value (ref)
+	-- upvalues: getFFlagUseCharacterStore (ref), var1 (ref), useSignalState (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), var2 (ref), fFlagExpChatUseMessagesStore (ref), expChatSharedModule (ref), reactModule (ref)
+	return function(p1)
+		-- upvalues: getFFlagUseCharacterStore (copy), var1 (copy), useSignalState (copy), getFFlagExpChatUseVoiceParticipantsStore (copy), var2 (copy), fFlagExpChatUseMessagesStore (copy), expChatSharedModule (copy), reactModule (copy), value (ref)
 		local _ = nil
-		local var8 = if getFFlagUseCharacterStore() and var6 then useSignalState(var6.getCharacters) else nil
+		local var3 = if getFFlagUseCharacterStore() and var1 then useSignalState(var1.getCharacters) else nil
 		local _ = nil
-		local var9 = if getFFlagExpChatUseVoiceParticipantsStore() and var7 then useSignalState(var7.getVoiceParticipants) else nil
+		local var4 = if getFFlagExpChatUseVoiceParticipantsStore() and var2 then useSignalState(var2.getVoiceParticipants) else nil
 		local _ = nil
-		local var10 = nil
+		local var5 = nil
 		
 		if fFlagExpChatUseMessagesStore then
 			local context = expChatSharedModule.context
 			local messagesStore = context and context.messagesStore
 			
 			if messagesStore then
-				var10 = useSignalState(messagesStore.getMockUserIdToPartOrModel)
+				var5 = useSignalState(messagesStore.getMockUserIdToPartOrModel)
 			end
 		end
-		local cloned = table.clone(p0)
+		local cloned = table.clone(p1)
 		
 		if getFFlagUseCharacterStore() then
-			cloned.characters = var8
+			cloned.characters = var3
 		end
 		if getFFlagExpChatUseVoiceParticipantsStore() then
-			cloned.voiceParticipants = var9
+			cloned.voiceParticipants = var4
 		end
-		if fFlagExpChatUseMessagesStore and var10 then
-			cloned.mockUserIdToPartOrModel = var10
+		if fFlagExpChatUseMessagesStore and var5 then
+			cloned.mockUserIdToPartOrModel = var5
 		end
 		return reactModule.createElement(value, cloned)
 	end

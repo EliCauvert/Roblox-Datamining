@@ -1,11 +1,11 @@
-﻿return function(p0)
-	return function(p1, p2)
-		-- upvalues: p0 (ref)
-		local var0, var1 = p0(p1)
+﻿return function(p1)
+	return function(p2, p3)
+		-- upvalues: p1 (ref)
+		local var1, var2 = p1(p2)
 		
-		if var0 == false then
-			return var0, var1 .. ". Issue with: " .. p2
+		if var1 == false then
+			return var1, var2 .. ". Issue with: " .. p2
 		end
-		return var0
+		return var1
 	end
 end

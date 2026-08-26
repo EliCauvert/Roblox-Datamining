@@ -5,34 +5,34 @@ local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemet
 
 return function()
 	-- upvalues: signalsModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetTelemetryModule (ref)
-	local var4, var5 = signalsModule.createSignal(nil)
+	local var1, var2 = signalsModule.createSignal(nil)
 	
-	local function hide(p0)
-		-- upvalues: var4 (ref), var5 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
-		local var7 = var4(false)
+	local function hide(p1)
+		-- upvalues: var1 (ref), var2 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
+		local var3 = var1(false)
 		
-		if var7 == nil then return end
-		var5(nil)
+		if var3 == nil then return end
+		var2(nil)
 		
 		if fFlagShareSheetTelemetryRefactorModule then
 			shareSheetTelemetryModule.logLifecycle({
-				context = var7.context,
-				telemetryId = var7.telemetryId or "",
+				context = var3.context,
+				telemetryId = var3.telemetryId or "",
 				lifecycleType = shareSheetTelemetryModule.LifecycleType.Close,
-				closeReason = p0 or shareSheetTelemetryModule.CloseReason.Programmatic
+				closeReason = p1 or shareSheetTelemetryModule.CloseReason.Programmatic
 			})
 		end
-		if var7.onHidden then
-			var7.onHidden()
+		if var3.onHidden then
+			var3.onHidden()
 		end
 	end
 	
 	return {
-		getRequest = var4,
+		getRequest = var1,
 		show = function(p1)
-			-- upvalues: hide (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy), var5 (ref)
+			-- upvalues: hide (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy), var2 (ref)
 			hide(if fFlagShareSheetTelemetryRefactorModule then shareSheetTelemetryModule.CloseReason.Replaced else nil)
-			var5(table.clone(p1))
+			var2(table.clone(p1))
 			
 			if fFlagShareSheetTelemetryRefactorModule then
 				shareSheetTelemetryModule.logLifecycle({

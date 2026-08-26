@@ -30,8 +30,8 @@ return reactModule.createContext({
 	fetchParentChannelDetails = function(_, _)
 		return nil
 	end,
-	fireSquadAnalytics = function(p0, p1)
-		return p0, p1
+	fireSquadAnalytics = function(p1, p2)
+		return p1, p2
 	end,
 	inviteToParentChannel = function(_, _, _)
 		return nil

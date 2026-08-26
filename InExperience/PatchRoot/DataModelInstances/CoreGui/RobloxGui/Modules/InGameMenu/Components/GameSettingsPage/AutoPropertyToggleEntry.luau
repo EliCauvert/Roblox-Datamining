@@ -26,44 +26,44 @@ autoPropertyToggleEntry.defaultProps = {
 	subtextKey = ""
 }
 
-function autoPropertyToggleEntry.init(p0, p1)
+function autoPropertyToggleEntry.init(p1, p2)
 	-- upvalues: sendAnalyticsModule (ref), constantsModule (ref)
-	local valueKey = p1.instance[p1.valueKey]
-	p0.changeEvent = p1.instance:GetPropertyChangedSignal(p1.valueKey)
-	p0:setState({ checked = not p1.lockedToOff and valueKey == p1.onValue })
+	local valueKey = p2.instance[p2.valueKey]
+	p1.changeEvent = p2.instance:GetPropertyChangedSignal(p2.valueKey)
+	p1:setState({ checked = not p2.lockedToOff and valueKey == p2.onValue })
 	
 	function p0.onExternalChange()
-		-- upvalues: p1 (ref), p0 (ref)
-		p0:setState({ checked = p1.instance[p1.valueKey] == p1.onValue })
+		-- upvalues: p2 (ref), p1 (ref)
+		p1:setState({ checked = p2.instance[p2.valueKey] == p2.onValue })
 	end
 	
 	function p0.onToggled()
-		-- upvalues: p0 (ref), p1 (ref), sendAnalyticsModule (copy), constantsModule (copy)
-		if p0.props.lockedToOff then return end
-		if p1.instance[p1.valueKey] == p1.onValue then
-			p1.instance[p1.valueKey] = p1.offValue
+		-- upvalues: p1 (ref), p2 (ref), sendAnalyticsModule (copy), constantsModule (copy)
+		if p1.props.lockedToOff then return end
+		if p2.instance[p2.valueKey] == p2.onValue then
+			p2.instance[p2.valueKey] = p2.offValue
 		else
-			p1.instance[p1.valueKey] = p1.onValue
+			p2.instance[p2.valueKey] = p2.onValue
 		end
 		sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, nil, {}, true)
 	end
 end
 
-function autoPropertyToggleEntry.render(p2)
+function autoPropertyToggleEntry.render(p1)
 	-- upvalues: roact (ref), toggleEntryModule (ref), externalEventConnectionModule (ref)
-	local props = p2.props
+	local props = p1.props
 	
 	return roact.createFragment({
 		Toggle = roact.createElement(toggleEntryModule, {
-			checked = p2.state.checked,
+			checked = p1.state.checked,
 			lockedToOff = props.lockedToOff,
 			labelKey = props.labelKey,
 			LayoutOrder = props.LayoutOrder,
-			onToggled = p2.onToggled,
+			onToggled = p1.onToggled,
 			subtextEnabled = props.subtextEnabled,
 			subtextKey = props.subtextKey
 		}),
-		Listener = roact.createElement(externalEventConnectionModule, { event = p2.changeEvent, callback = p2.onExternalChange })
+		Listener = roact.createElement(externalEventConnectionModule, { event = p1.changeEvent, callback = p1.onExternalChange })
 	})
 end
 

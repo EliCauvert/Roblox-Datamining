@@ -3,12 +3,12 @@ local reactModule = require(genericAbuseReporting.Parent.React)
 local localizationKeysContextModule = require(genericAbuseReporting.LocalizationKeys.LocalizationKeysContext)
 local defaultLocalizationKeysModule = require(genericAbuseReporting.LocalizationKeys.DefaultLocalizationKeys)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), defaultLocalizationKeysModule (ref), localizationKeysContextModule (ref)
 	return reactModule.createElement(localizationKeysContextModule.Provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: p0 (ref), defaultLocalizationKeysModule (copy)
-			local localizationKeys = p0.localizationKeys
+			-- upvalues: p1 (ref), defaultLocalizationKeysModule (copy)
+			local localizationKeys = p1.localizationKeys
 			
 			return {
 				formTitle = if localizationKeys then localizationKeys.formTitle else defaultLocalizationKeysModule.formTitle,
@@ -20,6 +20,6 @@ return function(p0)
 				failedDescription = if localizationKeys then localizationKeys.failedDescription else defaultLocalizationKeysModule.failedDescription,
 				failedClose = if localizationKeys then localizationKeys.failedClose else defaultLocalizationKeysModule.failedClose
 			}
-		end, { p0.localizationKeys })
-	}, p0.children)
+		end, { p1.localizationKeys })
+	}, p1.children)
 end

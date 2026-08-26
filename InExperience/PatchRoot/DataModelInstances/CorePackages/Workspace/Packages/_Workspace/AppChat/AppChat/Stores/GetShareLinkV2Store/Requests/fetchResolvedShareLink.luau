@@ -4,11 +4,11 @@ local httpClientModule = require(parent.HttpClient)
 local _ = require(parent.ShareLinksNetworking)
 local text = httpModule.Url.APIS_URL .. "deeplinks/v2/resolve"
 
-local function decodeResolvedShareLink(p0)
-	if type(p0) ~= "table" or type(p0.linkType) ~= "string" or (type(p0.targetId) ~= "string" or type(p0.customData) ~= "string") or type(p0.status) ~= "string" then
+local function decodeResolvedShareLink(p1)
+	if type(p1) ~= "table" or type(p1.linkType) ~= "string" or (type(p1.targetId) ~= "string" or type(p1.customData) ~= "string") or type(p1.status) ~= "string" then
 		error("Malformed deeplinks/v2/resolve response")
 	end
-	return p0
+	return p1
 end
 
 return function(p1, p2)

@@ -5,16 +5,16 @@ local array = luauPolyfillModule.Array
 local object = luauPolyfillModule.Object
 local httpService = game:GetService("HttpService")
 local t = {
-	makeReference = function(p0)
-		return { __ref = tostring(p0) }
+	makeReference = function(p1)
+		return { __ref = tostring(p1) }
 	end,
 	isReference = function(p1)
 		return type(p1) == "table" and type(p1.__ref) == "string"
 	end
 }
-local var3 = nil
+local var1 = nil
 local stringify = nil
-local var5 = nil
+local var2 = nil
 local _ = require(script.Parent.types)
 local _ = require(parent_1.GraphQL)
 local invariantError = require(parent.jsutils.invariant).InvariantError
@@ -22,199 +22,199 @@ local isNonNullObject = require(script.Parent.Parent.common.objects).isNonNullOb
 local objectKeysForEachModule = require(parent.luaUtils.objectKeysForEach)
 local getFragmentFromSelection = require(script.Parent.fragments).getFragmentFromSelection
 
-function t.isDocumentNode(p2)
+function t.isDocumentNode(p1)
 	-- upvalues: isNonNullObject (ref), array (ref)
-	return isNonNullObject(p2) and (p2.kind == "Document" and array.isArray(p2.definitions))
+	return isNonNullObject(p1) and (p1.kind == "Document" and array.isArray(p1.definitions))
 end
 
-local function _(p3)
-	return p3.kind == "StringValue"
+local function _(p1)
+	return p1.kind == "StringValue"
 end
 
-local _ = function(p4)
-	return p4.kind == "BooleanValue"
+local _ = function(p1)
+	return p1.kind == "BooleanValue"
 end
 
-local _ = function(p5)
-	return p5.kind == "IntValue"
+local _ = function(p1)
+	return p1.kind == "IntValue"
 end
 
-local _ = function(p6)
-	return p6.kind == "FloatValue"
+local _ = function(p1)
+	return p1.kind == "FloatValue"
 end
 
-local _ = function(p7)
-	return p7.kind == "Variable"
+local _ = function(p1)
+	return p1.kind == "Variable"
 end
 
-local _ = function(p8)
-	return p8.kind == "ObjectValue"
+local _ = function(p1)
+	return p1.kind == "ObjectValue"
 end
 
-local _ = function(p9)
-	return p9.kind == "ListValue"
+local _ = function(p1)
+	return p1.kind == "ListValue"
 end
 
-local _ = function(p10)
-	return p10.kind == "EnumValue"
+local _ = function(p1)
+	return p1.kind == "EnumValue"
 end
 
-local _ = function(p11)
-	return p11.kind == "NullValue"
+local _ = function(p1)
+	return p1.kind == "NullValue"
 end
 
-local function valueToObjectRepresentation(p12, p13, p14, p15)
+local function valueToObjectRepresentation(p1, p2, p3, p4)
 	-- upvalues: array (ref), valueToObjectRepresentation (ref), invariantError (ref)
-	if p14.kind == "IntValue" or p14.kind == "FloatValue" then
-		p12[p13.value] = tonumber(p14.value)
+	if p3.kind == "IntValue" or p3.kind == "FloatValue" then
+		p1[p2.value] = tonumber(p3.value)
 		
 		return
-	elseif p14.kind == "BooleanValue" or p14.kind == "StringValue" then
-		p12[p13.value] = p14.value
+	elseif p3.kind == "BooleanValue" or p3.kind == "StringValue" then
+		p1[p2.value] = p3.value
 		
 		return
-	elseif p14.kind == "ObjectValue" then
+	elseif p3.kind == "ObjectValue" then
 		local t = {}
-		array.map(p14.fields, function(p16)
-			-- upvalues: valueToObjectRepresentation (copy), t (ref), p15 (ref)
-			valueToObjectRepresentation(t, p16.name, p16.value, p15)
+		array.map(p3.fields, function(p5)
+			-- upvalues: valueToObjectRepresentation (copy), t (ref), p4 (ref)
+			valueToObjectRepresentation(t, p5.name, p5.value, p4)
 			
 			return nil
 		end)
-		p12[p13.value] = t
+		p1[p2.value] = t
 		
 		return
-	elseif p14.kind == "Variable" then
-		p12[p13.value] = (p15 or {})[p14.name.value]
+	elseif p3.kind == "Variable" then
+		p1[p2.value] = (p4 or {})[p3.name.value]
 		
 		return
-	elseif p14.kind == "ListValue" then
-		p12[p13.value] = array.map(p14.values, function(p17)
-			-- upvalues: valueToObjectRepresentation (copy), p13 (ref), p15 (ref)
+	elseif p3.kind == "ListValue" then
+		p1[p2.value] = array.map(p3.values, function(p5)
+			-- upvalues: valueToObjectRepresentation (copy), p2 (ref), p4 (ref)
 			local t = {}
-			valueToObjectRepresentation(t, p13, p17, p15)
+			valueToObjectRepresentation(t, p2, p5, p4)
 			
-			return t[p13.value]
+			return t[p2.value]
 		end)
 		
 		return
-	elseif p14.kind == "EnumValue" then
-		p12[p13.value] = p14.value
+	elseif p3.kind == "EnumValue" then
+		p1[p2.value] = p3.value
 		
 		return
-	elseif p14.kind == "NullValue" then
-		p12[p13.value] = nil
+	elseif p3.kind == "NullValue" then
+		p1[p2.value] = nil
 		
 		return
 	end
-	error(invariantError.new(tostring(("The inline argument \"%s\" of kind \"%s\""):format(p13.value, p14.kind)) .. "is not supported. Use variables instead of inline arguments to " .. "overcome this limitation."))
+	error(invariantError.new(tostring(("The inline argument \"%s\" of kind \"%s\""):format(p2.value, p3.kind)) .. "is not supported. Use variables instead of inline arguments to " .. "overcome this limitation."))
 end
 
 t.valueToObjectRepresentation = valueToObjectRepresentation
 
-function t.storeKeyNameFromField(p18, p19)
-	-- upvalues: array (ref), valueToObjectRepresentation (ref), var3 (write)
+function t.storeKeyNameFromField(p1, p2)
+	-- upvalues: array (ref), valueToObjectRepresentation (ref), var1 (write)
 	local t = nil
 	
-	if p18.directives then
+	if p1.directives then
 		t = {}
-		array.forEach(p18.directives, function(p20)
-			-- upvalues: t (write), array (copy), valueToObjectRepresentation (copy), p19 (ref)
-			t[p20.name.value] = {}
+		array.forEach(p1.directives, function(p3)
+			-- upvalues: t (write), array (copy), valueToObjectRepresentation (copy), p2 (ref)
+			t[p3.name.value] = {}
 			
-			if p20.arguments then
-				array.forEach(p20.arguments, function(p21)
-					-- upvalues: valueToObjectRepresentation (copy), t (copy), p20 (ref), p19 (copy)
-					valueToObjectRepresentation(t[p20.name.value], p21.name, p21.value, p19)
+			if p3.arguments then
+				array.forEach(p3.arguments, function(p4)
+					-- upvalues: valueToObjectRepresentation (copy), t (copy), p3 (ref), p2 (copy)
+					valueToObjectRepresentation(t[p3.name.value], p4.name, p4.value, p2)
 				end)
 			end
 		end)
 	end
 	local t_1 = nil
 	
-	if p18.arguments and #p18.arguments > 0 then
+	if p1.arguments and #p1.arguments > 0 then
 		t_1 = {}
-		array.forEach(p18.arguments, function(p22)
-			-- upvalues: valueToObjectRepresentation (copy), t_1 (write), p19 (ref)
-			valueToObjectRepresentation(t_1, p22.name, p22.value, p19)
+		array.forEach(p1.arguments, function(p3)
+			-- upvalues: valueToObjectRepresentation (copy), t_1 (write), p2 (ref)
+			valueToObjectRepresentation(t_1, p3.name, p3.value, p2)
 		end)
 	end
-	return var3(p18.name.value, t_1, t)
+	return var1(p1.name.value, t_1, t)
 end
 
 local list = {
 	"connection", "include", "skip", "client", "rest", "export"
 }
 t.getStoreKeyName = object.assign(setmetatable({}, {
-	__call = function(_, p23, p24, p25)
+	__call = function(_, p1, p2, p3)
 		-- upvalues: array (ref), stringify (write), objectKeysForEachModule (ref), list (ref)
-		if p24 and p25 and (p25.connection and p25.connection.key) then
-			if p25.connection.filter and #p25.connection.filter > 0 then
-				local var14 = if p25.connection.filter then p25.connection.filter else {}
-				array.sort(var14, nil)
+		if p2 and p3 and (p3.connection and p3.connection.key) then
+			if p3.connection.filter and #p3.connection.filter > 0 then
+				local var3 = if p3.connection.filter then p3.connection.filter else {}
+				array.sort(var3, nil)
 				local t = {}
-				array.forEach(var14, function(p26)
-					-- upvalues: t (ref), p24 (ref)
-					t[p26] = p24[p26]
+				array.forEach(var3, function(p4)
+					-- upvalues: t (ref), p2 (ref)
+					t[p4] = p2[p4]
 				end)
 				
-				return ("%s(%s)"):format(p25.connection.key, stringify(t))
+				return ("%s(%s)"):format(p3.connection.key, stringify(t))
 			end
-			return p25.connection.key
+			return p3.connection.key
 		else
-			local var16 = p23
+			local var4 = p1
 			
-			if p24 then
-				var16 ..= ("(%s)"):format(stringify(p24))
+			if p2 then
+				var4 ..= ("(%s)"):format(stringify(p2))
 			end
-			if p25 then
-				objectKeysForEachModule(p25, function(p27)
-					-- upvalues: array (copy), list (copy), p25 (ref), var16 (write), stringify (copy)
-					if array.indexOf(list, p27) ~= -1 then return end
-					if p25[p27] and next(p25[p27]) ~= nil then
-						var16 ..= ("@%s(%s)"):format(p27, stringify(p25[p27]))
+			if p3 then
+				objectKeysForEachModule(p3, function(p4)
+					-- upvalues: array (copy), list (copy), p3 (ref), var4 (write), stringify (copy)
+					if array.indexOf(list, p4) ~= -1 then return end
+					if p3[p4] and next(p3[p4]) ~= nil then
+						var4 ..= ("@%s(%s)"):format(p4, stringify(p3[p4]))
 						
 						return
 					end
-					var16 ..= ("@%s"):format(p27)
+					var4 ..= ("@%s"):format(p4)
 				end)
 			end
-			return var16
+			return var4
 		end
 	end
 }), {
-	setStringify = function(_, p28)
+	setStringify = function(_, p1)
 		-- upvalues: stringify (write)
-		stringify = p28
+		stringify = p1
 		
 		return stringify
 	end
 })
 
-stringify = function(p29)
+stringify = function(p1)
 	-- upvalues: isNonNullObject (ref), httpService (ref), array (ref), object (ref), stringify (write)
-	if not isNonNullObject(p29) then
-		return httpService:JSONEncode(p29)
+	if not isNonNullObject(p1) then
+		return httpService:JSONEncode(p1)
 	end
-	local var17 = array.map(array.sort(object.keys(p29), nil), function(p30)
-		-- upvalues: stringify (copy), p29 (ref)
-		return { p30, stringify(p29[p30]) }
+	local var3 = array.map(array.sort(object.keys(p1), nil), function(p2)
+		-- upvalues: stringify (copy), p1 (ref)
+		return { p2, stringify(p1[p2]) }
 	end)
 	
-	return if array.isArray(p29) then ("[%s]"):format(array.join(array.map(var17, function(p32)
-		return p32[2]
-	end), ",")) else ("{%s}"):format(array.join(array.map(var17, function(p31)
-		return ("\"%s\":%s"):format(p31[1], p31[2])
+	return if array.isArray(p1) then ("[%s]"):format(array.join(array.map(var3, function(p2)
+		return p2[2]
+	end), ",")) else ("{%s}"):format(array.join(array.map(var3, function(p2)
+		return ("\"%s\":%s"):format(p2[1], p2[2])
 	end), ","))
 end
 
-function t.argumentsObjectFromField(p33, p34)
+function t.argumentsObjectFromField(p1, p2)
 	-- upvalues: array (ref), valueToObjectRepresentation (ref)
-	if p33.arguments and #p33.arguments > 0 then
+	if p1.arguments and #p1.arguments > 0 then
 		local t = {}
-		array.forEach(p33.arguments, function(p35)
-			-- upvalues: valueToObjectRepresentation (copy), t (ref), p34 (ref)
-			valueToObjectRepresentation(t, p35.name, p35.value, p34)
+		array.forEach(p1.arguments, function(p3)
+			-- upvalues: valueToObjectRepresentation (copy), t (ref), p2 (ref)
+			valueToObjectRepresentation(t, p3.name, p3.value, p2)
 		end)
 		
 		return t
@@ -222,25 +222,25 @@ function t.argumentsObjectFromField(p33, p34)
 	return nil
 end
 
-function t.resultKeyNameFromField(p36)
-	return if p36.alias then p36.alias.value else p36.name.value
+function t.resultKeyNameFromField(p1)
+	return if p1.alias then p1.alias.value else p1.name.value
 end
 
-local function getTypenameFromResult(p37, p38, p39)
-	-- upvalues: var5 (write), getTypenameFromResult (ref), getFragmentFromSelection (ref)
-	if typeof(p37.__typename) == "string" then
-		return p37.__typename
+local function getTypenameFromResult(p1, p2, p3)
+	-- upvalues: var2 (write), getTypenameFromResult (ref), getFragmentFromSelection (ref)
+	if typeof(p1.__typename) == "string" then
+		return p1.__typename
 	end
-	for i, v in ipairs(p38.selections) do
-		if var5(v) then
+	for i, v in ipairs(p2.selections) do
+		if var2(v) then
 			if v.name.value == "__typename" then
-				return p37[if v.alias then v.alias.value else v.name.value]
+				return p1[if v.alias then v.alias.value else v.name.value]
 			end
 		else
-			local var19 = getTypenameFromResult(p37, getFragmentFromSelection(v, p39).selectionSet, p39)
+			local var3 = getTypenameFromResult(p1, getFragmentFromSelection(v, p3).selectionSet, p3)
 			
-			if typeof(var19) == "string" then
-				return var19
+			if typeof(var3) == "string" then
+				return var3
 			end
 		end
 	end
@@ -249,12 +249,12 @@ end
 
 t.getTypenameFromResult = getTypenameFromResult
 
-function t.isField(p40)
-	return p40.kind == "Field"
+function t.isField(p4)
+	return p4.kind == "Field"
 end
 
-function t.isInlineFragment(p41)
-	return p41.kind == "InlineFragment"
+function t.isInlineFragment(p4)
+	return p4.kind == "InlineFragment"
 end
 
 return t

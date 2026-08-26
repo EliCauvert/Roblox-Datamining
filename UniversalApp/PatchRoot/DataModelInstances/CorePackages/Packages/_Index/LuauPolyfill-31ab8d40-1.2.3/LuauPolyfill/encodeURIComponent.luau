@@ -2,25 +2,25 @@
 local charCodeAt = require(script.Parent.Parent.String).charCodeAt
 local errorModule = require(script.Parent.Error)
 
-return function(p0)
+return function(p1)
 	-- upvalues: charCodeAt (ref), errorModule (ref), httpService (ref)
-	local charCount = utf8.len(p0)
+	local charCount = utf8.len(p1)
 	
 	if charCount == 0 or charCount == nil then
 		return ""
 	end
-	local var3 = charCodeAt(p0, 1)
+	local var1 = charCodeAt(p1, 1)
 	
 	if charCount == 1 then
-		if var3 == 55296 then
+		if var1 == 55296 then
 			error(errorModule.new("URI malformed"))
 		end
-		if var3 == 57343 then
+		if var1 == 57343 then
 			error(errorModule.new("URI malformed"))
 		end
 	end
-	if var3 >= 56320 and var3 < 57343 then
+	if var1 >= 56320 and var1 < 57343 then
 		error(errorModule.new("URI malformed"))
 	end
-	return httpService:UrlEncode(p0):gsub("%%2D", "-"):gsub("%%5F", "_"):gsub("%%2E", "."):gsub("%%21", "!"):gsub("%%7E", "~"):gsub("%%2A", "*"):gsub("%%27", "'"):gsub("%%28", "("):gsub("%%29", ")")
+	return httpService:UrlEncode(p1):gsub("%%2D", "-"):gsub("%%5F", "_"):gsub("%%2E", "."):gsub("%%21", "!"):gsub("%%7E", "~"):gsub("%%2A", "*"):gsub("%%27", "'"):gsub("%%28", "("):gsub("%%29", ")")
 end

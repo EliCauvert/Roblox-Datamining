@@ -4,16 +4,16 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local getFriendsChatSettingsStoreModule = require(parent.AppChat.GetFriendsChatSettingsStore)
 local fFlagExpChatFriendsTabUsePolicy = sharedFlagsModule.FFlagExpChatFriendsTabUsePolicy
 local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
-local var3 = if fFlagExpChatFriendsTabUsePolicy then require(parent.UniversalAppPolicy).GetAppPolicyStore else nil
+local var1 = if fFlagExpChatFriendsTabUsePolicy then require(parent.UniversalAppPolicy).GetAppPolicyStore else nil
 
 return function()
-	-- upvalues: getFriendsChatSettingsStoreModule (ref), signalsModule (ref), fFlagExpChatFriendsTabUsePolicy (ref), var3 (write), fFlagExpChatCanShowFriendsTab (ref)
-	local var4 = getFriendsChatSettingsStoreModule(false)
+	-- upvalues: getFriendsChatSettingsStoreModule (ref), signalsModule (ref), fFlagExpChatFriendsTabUsePolicy (ref), var1 (write), fFlagExpChatCanShowFriendsTab (ref)
+	local var2 = getFriendsChatSettingsStoreModule(false)
 	
 	return {
-		getIsFriendsTabVisible = signalsModule.createComputed(function(p0)
-			-- upvalues: fFlagExpChatFriendsTabUsePolicy (copy), var3 (copy), fFlagExpChatCanShowFriendsTab (copy), var4 (ref)
-			return fFlagExpChatCanShowFriendsTab and ((not fFlagExpChatFriendsTabUsePolicy or var3(false).getAppPolicy(p0).getCanSeeFriendsTab()) and (var4.getChatEnabled(p0) and var4.getChatUserMessagesEnabled(p0) ~= false))
+		getIsFriendsTabVisible = signalsModule.createComputed(function(p1)
+			-- upvalues: fFlagExpChatFriendsTabUsePolicy (copy), var1 (copy), fFlagExpChatCanShowFriendsTab (copy), var2 (ref)
+			return fFlagExpChatCanShowFriendsTab and ((not fFlagExpChatFriendsTabUsePolicy or var1(false).getAppPolicy(p1).getCanSeeFriendsTab()) and (var2.getChatEnabled(p1) and var2.getChatUserMessagesEnabled(p1) ~= false))
 		end)
 	}
 end

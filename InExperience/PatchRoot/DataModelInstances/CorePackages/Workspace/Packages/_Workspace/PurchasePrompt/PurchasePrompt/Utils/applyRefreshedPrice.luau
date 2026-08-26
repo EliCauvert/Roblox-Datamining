@@ -2,14 +2,14 @@
 local refreshExpectedPriceModule = require(purchasePrompt.Actions.RefreshExpectedPrice)
 local setProductPayloadModule = require(purchasePrompt.Actions.SetProductPayload)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: refreshExpectedPriceModule (ref), setProductPayloadModule (ref)
-	p0:dispatch(refreshExpectedPriceModule(p1))
-	local productPayload = p0:getState().productPayload
+	p1:dispatch(refreshExpectedPriceModule(p2))
+	local productPayload = p1:getState().productPayload
 	
 	if productPayload then
 		local cloned = table.clone(productPayload)
-		cloned.expectedPrice = p1
-		p0:dispatch(setProductPayloadModule(cloned))
+		cloned.expectedPrice = p2
+		p1:dispatch(setProductPayloadModule(cloned))
 	end
 end

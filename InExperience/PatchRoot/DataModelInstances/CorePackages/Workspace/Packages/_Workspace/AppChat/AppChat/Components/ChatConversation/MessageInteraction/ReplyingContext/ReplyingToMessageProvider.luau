@@ -2,11 +2,11 @@
 local replyingToMessageContextModule = require(script.Parent.ReplyingToMessageContext)
 local replyingToMessageDispatchContextModule = require(script.Parent.ReplyingToMessageDispatchContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), replyingToMessageContextModule (ref), replyingToMessageDispatchContextModule (ref)
-	local var3, var4 = reactModule.useState(nil)
+	local var1, var2 = reactModule.useState(nil)
 	
-	return reactModule.createElement(replyingToMessageContextModule.Provider, { value = var3 }, {
-		ReplyingToMessageDispatch = reactModule.createElement(replyingToMessageDispatchContextModule.Provider, { value = var4 }, p0.children)
+	return reactModule.createElement(replyingToMessageContextModule.Provider, { value = var1 }, {
+		ReplyingToMessageDispatch = reactModule.createElement(replyingToMessageDispatchContextModule.Provider, { value = var2 }, p1.children)
 	})
 end

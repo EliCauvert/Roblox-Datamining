@@ -7,11 +7,11 @@ local getSafeAreaSize = inputUiModule.getSafeAreaSize
 local useNavBarSize = require(parent.AppNavBar).useNavBarSize
 local constantsModule = require(profilePlatform.Common.Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), useNavBarSize (ref), constantsModule (ref)
-	local var3 = getSafeAreaSize(useScreenSize(), useSelector(function(p1)
-		return p1.GlobalGuiInset
+	local var1 = getSafeAreaSize(useScreenSize(), useSelector(function(p2)
+		return p2.GlobalGuiInset
 	end))
 	
-	return if p0 then math.max(constantsModule.MINIMUN_CONTAINER_WIDTH, math.floor((var3.X.Offset - useNavBarSize()) / 3)) else math.min(var3.X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)
+	return if p1 then math.max(constantsModule.MINIMUN_CONTAINER_WIDTH, math.floor((var1.X.Offset - useNavBarSize()) / 3)) else math.min(var1.X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)
 end

@@ -1,11 +1,11 @@
 ﻿local userInputService = game:GetService("UserInputService")
 local t = {
-	getInstance = function(p0)
-		if not p0._initialized then
-			p0:initialize()
-			p0._initialized = true
+	getInstance = function(p1)
+		if not p1._initialized then
+			p1:initialize()
+			p1._initialized = true
 		end
-		return p0
+		return p1
 	end,
 	initialize = function(p1)
 		-- upvalues: userInputService (ref)
@@ -23,8 +23,8 @@ local t = {
 			end
 		end)
 	end,
-	isKeyboardJustOff = function(p2)
-		return p2._isKeyboardJustOff
+	isKeyboardJustOff = function(p1)
+		return p1._isKeyboardJustOff
 	end
 }
 

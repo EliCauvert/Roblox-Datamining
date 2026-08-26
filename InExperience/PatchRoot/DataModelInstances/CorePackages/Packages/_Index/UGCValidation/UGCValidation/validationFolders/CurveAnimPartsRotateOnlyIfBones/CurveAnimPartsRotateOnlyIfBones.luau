@@ -34,41 +34,41 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFFlagUGCValidateAnimPartsRotationOnlyModule (ref), validationEnumsModule (ref), UGCValidateBodyPartTranslationMaxDistanceHundredths (ref), curveAnimBoneHierarchyUtilsModule (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateAnimTranslationThresholdModule (ref), curveAnimTranslationUtilsModule (ref), errorSourceStringsModule (ref)
-	local var13
-	local var11 = getFFlagUGCValidateAnimPartsRotationOnlyModule() and p1.uploadCategory == validationEnumsModule.UploadCategory.ANIMATION
-	local var12 = UGCValidateBodyPartTranslationMaxDistanceHundredths / 100
+	local var1
+	local var2 = getFFlagUGCValidateAnimPartsRotationOnlyModule() and p2.uploadCategory == validationEnumsModule.UploadCategory.ANIMATION
+	local var3 = UGCValidateBodyPartTranslationMaxDistanceHundredths / 100
 	
-	for i, v in p1.curveAnimations do
+	for i, v in p2.curveAnimations do
 		local v_1
-		if not var11 then
-			var13 = false
+		if not var2 then
+			var1 = false
 			
 			for i_1, v_1 in v:GetDescendants() do
 				if v_1:IsA("Folder") and curveAnimBoneHierarchyUtilsModule.isBoneFolderName(v_1.Name) then
-					var13 = true
+					var1 = true
 					break
 				end
 			end
-			if var13 then
+			if var1 then
 				for i_2, i_1 in v:GetDescendants() do
 					if i_1:IsA("Folder") and curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(i_1.Name) then
 						if getFFlagUGCValidateAnimTranslationThresholdModule() then
-							v_1, var14 = curveAnimTranslationUtilsModule.translationExceedsThreshold(i_1, var12)
+							v_1, var14 = curveAnimTranslationUtilsModule.translationExceedsThreshold(i_1, var3)
 							
 							if v_1 then
-								p0:fail(errorSourceStringsModule.Keys.CurveAnim_BodyPartTranslationExceedsThreshold, {
+								p1:fail(errorSourceStringsModule.Keys.CurveAnim_BodyPartTranslationExceedsThreshold, {
 									bodyPartName = i_1.Name,
 									distance = string.format("%.3f", var14),
-									maxDistance = string.format("%.3f", var12)
+									maxDistance = string.format("%.3f", var3)
 								})
 							end
 						elseif curveAnimTranslationUtilsModule.positionHasKeyframes(i_1) then
-							if var11 then
-								p0:fail(errorSourceStringsModule.Keys.CurveAnim_BodyPartHasPosition, { bodyPartName = i_1.Name })
+							if var2 then
+								p1:fail(errorSourceStringsModule.Keys.CurveAnim_BodyPartHasPosition, { bodyPartName = i_1.Name })
 							else
-								p0:fail(errorSourceStringsModule.Keys.CurveAnim_BodyPartWithBoneHasPosition, { bodyPartName = i_1.Name })
+								p1:fail(errorSourceStringsModule.Keys.CurveAnim_BodyPartWithBoneHasPosition, { bodyPartName = i_1.Name })
 							end
 						end
 					end

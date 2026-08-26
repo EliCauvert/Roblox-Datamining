@@ -1,47 +1,47 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
 		Typography = {
 			Title = {
 				LineHeight = 1.032,
 				LetterSpacing = -0.01,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 35.28 * p0
+				FontSize = 35.28 * p1
 			},
 			Header = {
 				LineHeight = 0.952,
 				LetterSpacing = -0.01,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 25.2 * p0
+				FontSize = 25.2 * p1
 			},
 			Subheader = {
 				LineHeight = 1.111,
 				LetterSpacing = 0,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 20.16 * p0
+				FontSize = 20.16 * p1
 			},
 			Body = {
 				LineHeight = 1.111,
 				LetterSpacing = 0,
 				Font = Enum.Font.BuilderSans,
-				FontSize = 20.16 * p0
+				FontSize = 20.16 * p1
 			},
 			CaptionHeader = {
 				LineHeight = 1.032,
 				LetterSpacing = 0.01,
 				Font = Enum.Font.BuilderSansMedium,
-				FontSize = 15.12 * p0
+				FontSize = 15.12 * p1
 			},
 			CaptionBody = {
 				LineHeight = 1.032,
 				LetterSpacing = 0,
 				Font = Enum.Font.BuilderSans,
-				FontSize = 15.12 * p0
+				FontSize = 15.12 * p1
 			},
 			Footer = {
 				LineHeight = 1.111,
 				LetterSpacing = 0.01,
 				Font = Enum.Font.BuilderSansMedium,
-				FontSize = 12.6 * p0
+				FontSize = 12.6 * p1
 			}
 		},
 		Color = {
@@ -204,22 +204,22 @@
 		Radius = {
 			None = 0,
 			Circle = 9999,
-			Small = 4 * p0,
-			Medium = 8 * p0,
-			Large = 12 * p0,
-			XLarge = 16 * p0
+			Small = 4 * p1,
+			Medium = 8 * p1,
+			Large = 12 * p1,
+			XLarge = 16 * p1
 		},
 		Icon = {
 			Size = {
-				Small = 16 * p0,
-				Medium = 36 * p0,
-				Large = 48 * p0,
-				XLarge = 96 * p0,
-				XxLarge = 192 * p0
+				Small = 16 * p1,
+				Medium = 36 * p1,
+				Large = 48 * p1,
+				XLarge = 96 * p1,
+				XxLarge = 192 * p1
 			}
 		},
-		Stroke = { Input = 1 * p0, Focus = 2 * p0 },
-		Offset = { Focus = { Inset = 0, Standard = 6 * p0 } },
+		Stroke = { Input = 1 * p1, Focus = 2 * p1 },
+		Offset = { Focus = { Inset = 0, Standard = 6 * p1 } },
 		Opacity = {
 			State = {
 				Lighten = { Hover = 0.88, Pressed = 0.8 },

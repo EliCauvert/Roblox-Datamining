@@ -4,23 +4,23 @@ local cryoModule = require(parent.Cryo)
 local sduiTextModule = require(script.Parent.SduiText)
 local useRevealTextModule = require(script.Parent.useRevealText)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useRevealTextModule (ref), reactModule (ref), cryoModule (ref), sduiTextModule (ref)
-	local var4 = useRevealTextModule({
-		delimiter = p0.delimiter,
-		removeDelimiter = p0.removeDelimiter,
-		revealInterval = p0.revealInterval,
-		richText = p0.richText,
-		text = p0.text
+	local var1 = useRevealTextModule({
+		delimiter = p1.delimiter,
+		removeDelimiter = p1.removeDelimiter,
+		revealInterval = p1.revealInterval,
+		richText = p1.richText,
+		text = p1.text
 	})
 	
 	return reactModule.createElement(sduiTextModule, reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p0 (ref), var4 (ref)
-		return cryoModule.Dictionary.join(p0, {
+		-- upvalues: cryoModule (copy), p1 (ref), var1 (ref)
+		return cryoModule.Dictionary.join(p1, {
 			delimiter = cryoModule.None,
 			removeDelimiter = cryoModule.None,
 			revealInterval = cryoModule.None,
-			text = var4
+			text = var1
 		})
-	end, { p0, var4 }))
+	end, { p1, var1 }))
 end

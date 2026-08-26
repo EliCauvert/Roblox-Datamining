@@ -28,8 +28,8 @@ gridView.validateProps = tModule.strictInterface({
 	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
 })
 
-function gridView.itemsAreVisible(p0)
-	return p0.state.isInDataModel and (p0.state.containerWidth ~= 0 and p0.props.itemSize.X ~= 0)
+function gridView.itemsAreVisible(p1)
+	return p1.state.isInDataModel and (p1.state.containerWidth ~= 0 and p1.props.itemSize.X ~= 0)
 end
 
 gridView.defaultProps = {
@@ -61,147 +61,147 @@ function gridView.init(p1)
 	end
 end
 
-function gridView.render(p4)
+function gridView.render(p1)
 	-- upvalues: roactModule (ref), roactGamepadModule (ref), UIBloxConfigModule (ref)
-	local items = p4.props.items
+	local items = p1.props.items
 	local itemsCount = #items
-	local itemSize = p4.props.itemSize
-	local itemPadding = p4.props.itemPadding
-	local maxHeight = p4.props.maxHeight
-	local containerWidth = p4.state.containerWidth
-	local containerYPosition = p4.state.containerYPosition
-	local defaultChildIndex = p4.props.defaultChildIndex
-	local onNumItemsPerRowChanged = p4.props.onNumItemsPerRowChanged
-	local var8 = 1
-	local var9 = itemsCount
+	local itemSize = p1.props.itemSize
+	local itemPadding = p1.props.itemPadding
+	local maxHeight = p1.props.maxHeight
+	local containerWidth = p1.state.containerWidth
+	local containerYPosition = p1.state.containerYPosition
+	local defaultChildIndex = p1.props.defaultChildIndex
+	local onNumItemsPerRowChanged = p1.props.onNumItemsPerRowChanged
+	local var1 = 1
+	local var2 = itemsCount
 	local t = {}
-	local var11 = 0
-	local var12 = 0
+	local var3 = 0
+	local var4 = 0
 	local _ = nil
 	local _ = nil
 	local floored = math.floor((containerWidth + itemPadding.X) / math.max(1, itemSize.X + itemPadding.X))
 	local floored_1 = math.floor((maxHeight + itemPadding.Y) / math.max(1, itemSize.Y + itemPadding.Y))
 	
-	if floored ~= p4.currentItemsPerRow then
-		p4.currentItemsPerRow = floored
+	if floored ~= p1.currentItemsPerRow then
+		p1.currentItemsPerRow = floored
 		
 		if onNumItemsPerRowChanged then
 			onNumItemsPerRowChanged(floored)
 		end
 	end
 	local minValue = math.min(floored_1, math.ceil(itemsCount / floored))
-	local var16 = minValue * itemSize.Y + math.max(minValue - 1, 0) * itemPadding.Y
+	local var5 = minValue * itemSize.Y + math.max(minValue - 1, 0) * itemPadding.Y
 	
-	if p4.props.windowHeight ~= nil then
+	if p1.props.windowHeight ~= nil then
 		local floored_2 = math.floor((containerYPosition + itemPadding.Y) / (itemSize.Y + itemPadding.Y))
-		var8 = math.max(1, floored_2 * floored + 1)
-		var9 = math.min(itemsCount, (math.min(minValue, floored_2 + (math.floor((p4.props.windowHeight + itemPadding.Y) / (itemSize.Y + itemPadding.Y)) + 2)) + 1) * floored)
-		var12 = floored_2 * itemSize.Y + floored_2 * itemPadding.Y
+		var1 = math.max(1, floored_2 * floored + 1)
+		var2 = math.min(itemsCount, (math.min(minValue, floored_2 + (math.floor((p1.props.windowHeight + itemPadding.Y) / (itemSize.Y + itemPadding.Y)) + 2)) + 1) * floored)
+		var4 = floored_2 * itemSize.Y + floored_2 * itemPadding.Y
 	end
 	local function _(a, b)
-		-- upvalues: floored (write), var8 (write), var9 (write), p4 (ref)
-		local var21 = 1 + ((a - 1) * floored + (b - 1))
+		-- upvalues: floored (write), var1 (write), var2 (write), p1 (ref)
+		local var6 = 1 + ((a - 1) * floored + (b - 1))
 		
-		return (var8 <= var21 and var21 <= var9) and ((a > 0 and (b > 0 and b <= floored)) and (p4.focusableRefs[var21] or nil))
+		return (var1 <= var6 and var6 <= var2) and ((a > 0 and (b > 0 and b <= floored)) and (p1.focusableRefs[var6] or nil))
 	end
 	
-	local function renderItem(p5)
-		-- upvalues: floored (write), p4 (ref), roactModule (copy), roactGamepadModule (copy), var11 (write), var12 (write), itemSize (ref), var8 (write), var9 (write), items (ref), UIBloxConfigModule (copy)
-		local var22 = math.floor((p5 - 1) / floored) + 1
-		local var23 = 1 + (p5 - 1) % floored
-		local var24 = p4:itemsAreVisible()
+	local function renderItem(p2)
+		-- upvalues: floored (write), p1 (ref), roactModule (copy), roactGamepadModule (copy), var3 (write), var4 (write), itemSize (ref), var1 (write), var2 (write), items (ref), UIBloxConfigModule (copy)
+		local var6 = math.floor((p2 - 1) / floored) + 1
+		local var7 = 1 + (p2 - 1) % floored
+		local var8 = p1:itemsAreVisible()
 		
-		if not p4.props.isRoactGamepadEnabled then
-			p4.focusableRefs[p5] = p4.focusableRefs[p5] or roactModule.createRef()
+		if not p1.props.isRoactGamepadEnabled then
+			p1.focusableRefs[p2] = p1.focusableRefs[p2] or roactModule.createRef()
 		end
 		local createElement = roactModule.createElement
-		local var25 = if p4.props.isRoactGamepadEnabled then roactGamepadModule.Focusable.Frame else "Frame"
+		local var9 = if p1.props.isRoactGamepadEnabled then roactGamepadModule.Focusable.Frame else "Frame"
 		local t = {
 			BackgroundTransparency = 1,
-			Position = UDim2.new(0, var11, 0, var12),
+			Position = UDim2.new(0, var3, 0, var4),
 			Size = UDim2.new(0, itemSize.X, 0, itemSize.Y)
 		}
-		local var27 = var23 - 1
-		local var28 = 1 + ((var22 - 1) * floored + (var27 - 1))
-		t.NextSelectionLeft = (var8 <= var28 and var28 <= var9) and ((var22 > 0 and (var27 > 0 and var27 <= floored)) and (p4.focusableRefs[var28] or nil))
-		local var29 = var23 + 1
-		local var30 = 1 + ((var22 - 1) * floored + (var29 - 1))
-		t.NextSelectionRight = (var8 <= var30 and var30 <= var9) and ((var22 > 0 and (var29 > 0 and var29 <= floored)) and (p4.focusableRefs[var30] or nil))
-		local var31 = var22 - 1
-		local var32 = 1 + ((var31 - 1) * floored + (var23 - 1))
-		t.NextSelectionUp = (var8 <= var32 and var32 <= var9) and ((var31 > 0 and (var23 > 0 and var23 <= floored)) and (p4.focusableRefs[var32] or nil))
-		local var33 = var22 + 1
-		local var34 = 1 + ((var33 - 1) * floored + (var23 - 1))
-		t.NextSelectionDown = (var8 <= var34 and var34 <= var9) and ((var33 > 0 and (var23 > 0 and var23 <= floored)) and (p4.focusableRefs[var34] or nil))
-		t[roactModule.Ref] = p4.focusableRefs[p5]
-		t.onFocusGained = if p4.props.isRoactGamepadEnabled then p4.props.onFocusGained else nil
+		local var10 = var7 - 1
+		local var11 = 1 + ((var6 - 1) * floored + (var10 - 1))
+		t.NextSelectionLeft = (var1 <= var11 and var11 <= var2) and ((var6 > 0 and (var10 > 0 and var10 <= floored)) and (p1.focusableRefs[var11] or nil))
+		local var12 = var7 + 1
+		local var13 = 1 + ((var6 - 1) * floored + (var12 - 1))
+		t.NextSelectionRight = (var1 <= var13 and var13 <= var2) and ((var6 > 0 and (var12 > 0 and var12 <= floored)) and (p1.focusableRefs[var13] or nil))
+		local var14 = var6 - 1
+		local var15 = 1 + ((var14 - 1) * floored + (var7 - 1))
+		t.NextSelectionUp = (var1 <= var15 and var15 <= var2) and ((var14 > 0 and (var7 > 0 and var7 <= floored)) and (p1.focusableRefs[var15] or nil))
+		local var16 = var6 + 1
+		local var17 = 1 + ((var16 - 1) * floored + (var7 - 1))
+		t.NextSelectionDown = (var1 <= var17 and var17 <= var2) and ((var16 > 0 and (var7 > 0 and var7 <= floored)) and (p1.focusableRefs[var17] or nil))
+		t[roactModule.Ref] = p1.focusableRefs[p2]
+		t.onFocusGained = if p1.props.isRoactGamepadEnabled then p1.props.onFocusGained else nil
 		
-		return createElement(var25, t, {
-			Content = var24 and p4.props.renderItem(items[p5], p5, if UIBloxConfigModule.passRowAndColumnDataToItemInGridView then { row = var22, column = var23 } else nil)
+		return createElement(var9, t, {
+			Content = var8 and p1.props.renderItem(items[p2], p2, if UIBloxConfigModule.passRowAndColumnDataToItemInGridView then { row = var6, column = var7 } else nil)
 		})
 	end
 	
-	if var16 < maxHeight then
-		local var19 = false
-		local var20 = defaultChildIndex and defaultChildIndex <= itemsCount
+	if var5 < maxHeight then
+		local var6 = false
+		local var7 = defaultChildIndex and defaultChildIndex <= itemsCount
 		
-		for i = var8, var9 do
+		for i = var1, var2 do
 			if i == defaultChildIndex then
-				var19 = true
+				var6 = true
 			end
 			t[tostring(i)] = renderItem(i)
-			var11 = math.floor(var11 + itemSize.X + itemPadding.X)
+			var3 = math.floor(var3 + itemSize.X + itemPadding.X)
 			
-			if containerWidth < var11 + itemSize.X and i < var9 then
-				var11 = 0
-				var12 = var12 + itemPadding.Y + itemSize.Y
+			if containerWidth < var3 + itemSize.X and i < var2 then
+				var3 = 0
+				var4 = var4 + itemPadding.Y + itemSize.Y
 			end
 		end
-		if var20 and not var19 then
-			var11 = (defaultChildIndex - 1) % floored * (itemSize.X + itemPadding.X)
-			var12 = math.floor((defaultChildIndex - 1) / floored) * (itemPadding.Y + itemSize.Y)
+		if var7 and not var6 then
+			var3 = (defaultChildIndex - 1) % floored * (itemSize.X + itemPadding.X)
+			var4 = math.floor((defaultChildIndex - 1) / floored) * (itemPadding.Y + itemSize.Y)
 			t[tostring(defaultChildIndex)] = renderItem(defaultChildIndex)
 		end
 	end
-	return roactModule.createElement(if p4.props.isRoactGamepadEnabled then roactGamepadModule.Focusable.Frame else "Frame", {
+	return roactModule.createElement(if p1.props.isRoactGamepadEnabled then roactGamepadModule.Focusable.Frame else "Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = p4.props.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, var16),
-		[roactModule.Change.AbsolutePosition] = if p4.props.windowHeight ~= nil then function(p6)
-			-- upvalues: p4 (ref)
-			if p4.isMounted then
-				p4:setState({ containerYPosition = -math.min(0, p6.AbsolutePosition.Y) })
+		LayoutOrder = p1.props.LayoutOrder,
+		Size = UDim2.new(1, 0, 0, var5),
+		[roactModule.Change.AbsolutePosition] = if p1.props.windowHeight ~= nil then function(p2)
+			-- upvalues: p1 (ref)
+			if p1.isMounted then
+				p1:setState({ containerYPosition = -math.min(0, p2.AbsolutePosition.Y) })
 			end
 		end else nil,
-		[roactModule.Change.AbsoluteSize] = function(p7)
-			-- upvalues: p4 (ref)
-			if p4.isMounted then
-				if p4.state.isInDataModel then
-					p4:setState({ containerWidth = p7.AbsoluteSize.X })
+		[roactModule.Change.AbsoluteSize] = function(p2)
+			-- upvalues: p1 (ref)
+			if p1.isMounted then
+				if p1.state.isInDataModel then
+					p1:setState({ containerWidth = p2.AbsoluteSize.X })
 				end
-				if p4.props.onWidthChanged ~= nil then
-					p4.props.onWidthChanged(p7.AbsoluteSize.X)
+				if p1.props.onWidthChanged ~= nil then
+					p1.props.onWidthChanged(p2.AbsoluteSize.X)
 				end
 			end
 		end,
-		[roactModule.Event.AncestryChanged] = p4.onAncestryChanged,
-		[roactModule.Ref] = p4.props.frameRef or p4.frameRef,
-		NextSelectionLeft = p4.props.NextSelectionLeft,
-		NextSelectionRight = p4.props.NextSelectionRight,
-		NextSelectionUp = p4.props.NextSelectionUp,
-		NextSelectionDown = p4.props.NextSelectionDown,
-		defaultChild = if p4.props.isRoactGamepadEnabled and defaultChildIndex then p4.focusableRefs[defaultChildIndex] else nil,
-		restorePreviousChildFocus = if p4.props.isRoactGamepadEnabled then p4.props.restorePreviousChildFocus else nil
+		[roactModule.Event.AncestryChanged] = p1.onAncestryChanged,
+		[roactModule.Ref] = p1.props.frameRef or p1.frameRef,
+		NextSelectionLeft = p1.props.NextSelectionLeft,
+		NextSelectionRight = p1.props.NextSelectionRight,
+		NextSelectionUp = p1.props.NextSelectionUp,
+		NextSelectionDown = p1.props.NextSelectionDown,
+		defaultChild = if p1.props.isRoactGamepadEnabled and defaultChildIndex then p1.focusableRefs[defaultChildIndex] else nil,
+		restorePreviousChildFocus = if p1.props.isRoactGamepadEnabled then p1.props.restorePreviousChildFocus else nil
 	}, t)
 end
 
-function gridView.didMount(p8)
-	p8.isMounted = true
-	local frameRef = p8.props.frameRef or p8.frameRef
+function gridView.didMount(p2)
+	p2.isMounted = true
+	local frameRef = p2.props.frameRef or p2.frameRef
 	
 	if frameRef:getValue() and frameRef:getValue().AbsoluteSize.X ~= 0 then
 		if frameRef:getValue():IsDescendantOf(game) then
-			p8:setState(function(_)
+			p2:setState(function(_)
 				-- upvalues: frameRef (ref)
 				return if frameRef:getValue() then {
 					isInDataModel = true,
@@ -209,22 +209,22 @@ function gridView.didMount(p8)
 				} else nil
 			end)
 		end
-		if p8.props.onWidthChanged ~= nil then
+		if p2.props.onWidthChanged ~= nil then
 			delay(0, function()
-				-- upvalues: frameRef (ref), p8 (ref)
+				-- upvalues: frameRef (ref), p2 (ref)
 				if frameRef:getValue() then
-					p8.props.onWidthChanged(frameRef:getValue().AbsoluteSize.X)
+					p2.props.onWidthChanged(frameRef:getValue().AbsoluteSize.X)
 				end
 			end)
 		end
 	end
 end
 
-function gridView.willUnmount(p9)
-	p9.isMounted = false
+function gridView.willUnmount(p2)
+	p2.isMounted = false
 end
 
-return roactModule.forwardRef(function(p10, p11)
+return roactModule.forwardRef(function(p2, p3)
 	-- upvalues: roactModule (ref), gridView (ref), cryoModule (ref)
-	return roactModule.createElement(gridView, cryoModule.Dictionary.join(p10, { frameRef = p11 }))
+	return roactModule.createElement(gridView, cryoModule.Dictionary.join(p2, { frameRef = p3 }))
 end)

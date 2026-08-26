@@ -8,14 +8,14 @@ local fetchContactImporterParamsModule = require(parent.Networking.FetchContactI
 local permissionsProtocol = dependenciesModule.PermissionsProtocol
 local useContactImporterConfigurationModule = require(script.Parent.useContactImporterConfiguration)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSelector (ref), useDispatch (ref), fetchContactImporterParamsModule (ref), permissionsProtocol (ref), appStorageService (ref), useContactImporterConfigurationModule (ref), useEffectOnce (ref)
-	local var3 = useSelector(function(p1)
-		return p1.LocalUserId
+	local var1 = useSelector(function(p2)
+		return p2.LocalUserId
 	end)
-	local var4 = useDispatch()
+	local var2 = useDispatch()
 	useEffectOnce(function()
-		-- upvalues: var4 (ref), fetchContactImporterParamsModule (copy), var3 (ref), permissionsProtocol (copy), appStorageService (copy)
-		var4(fetchContactImporterParamsModule(var3, permissionsProtocol.default, appStorageService))
-	end, if useContactImporterConfigurationModule(p0).shouldFetchContactImporterData then var3 and (var3 ~= "" and var3 ~= "0") else useContactImporterConfigurationModule(p0).shouldFetchContactImporterData)
+		-- upvalues: var2 (ref), fetchContactImporterParamsModule (copy), var1 (ref), permissionsProtocol (copy), appStorageService (copy)
+		var2(fetchContactImporterParamsModule(var1, permissionsProtocol.default, appStorageService))
+	end, if useContactImporterConfigurationModule(p1).shouldFetchContactImporterData then var1 and (var1 ~= "" and var1 ~= "0") else useContactImporterConfigurationModule(p1).shouldFetchContactImporterData)
 end

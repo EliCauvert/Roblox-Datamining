@@ -23,8 +23,8 @@ return function()
 	inExperienceOverlay.ScreenInsets = Enum.ScreenInsets.None
 	inExperienceOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
 	inExperienceOverlay.Parent = coreGuiService
-	local var9 = reactRobloxModule.createRoot(inExperienceOverlay)
-	var9:render(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
+	local var1 = reactRobloxModule.createRoot(inExperienceOverlay)
+	var1:render(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 		LocalizationProvider = reactModule.createElement(localizationModule.LocalizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {
@@ -39,5 +39,5 @@ return function()
 		})
 	}))
 	
-	return var9
+	return var1
 end

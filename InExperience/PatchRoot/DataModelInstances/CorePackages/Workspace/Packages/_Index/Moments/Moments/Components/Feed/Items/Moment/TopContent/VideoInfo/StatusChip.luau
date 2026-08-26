@@ -19,15 +19,15 @@ local t = {
 
 local function noop() end
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), t (ref), momentContextModule (ref), reactModule (ref), view (ref), chip (ref), chipSize (ref), chipVariant (ref), builderIconsModule (ref), noop (ref), badge (ref), badgeVariant (ref), badgeSize (ref), badgeShape (ref)
-	local var7 = useLocalization(t)
+	local var1 = useLocalization(t)
 	local data = momentContextModule.useMoment().store.getData(false)
 	
 	if data.kind == "ad" then
 		return reactModule.createElement(view, {
 			tag = "row align-x-left auto-xy",
-			LayoutOrder = p0.LayoutOrder
+			LayoutOrder = p1.LayoutOrder
 		}, {
 			Chip = reactModule.createElement(chip, {
 				text = "Ad",
@@ -43,11 +43,11 @@ return reactModule.memo(function(p0)
 	elseif not data.isSponsored then
 		return nil
 	end
-	local partnerContent = var7.partnerContent
+	local partnerContent = var1.partnerContent
 	
 	return reactModule.createElement(view, {
 		tag = "row align-x-left auto-xy",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Badge = reactModule.createElement(badge, {
 			text = if partnerContent == nil or partnerContent == "" then "Roblox Partner Content" else partnerContent,

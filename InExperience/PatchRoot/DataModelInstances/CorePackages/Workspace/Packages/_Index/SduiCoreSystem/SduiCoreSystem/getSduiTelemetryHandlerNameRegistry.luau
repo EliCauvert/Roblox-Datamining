@@ -4,24 +4,24 @@ local function createSduiTelemetryHandlerNameRegistry()
 	local t = {}
 	
 	return {
-		getTelemetryHandler = function(p0)
+		getTelemetryHandler = function(p1)
 			-- upvalues: t (ref)
-			local var3 = t[p0]
+			local var1 = t[p1]
 			
-			if var3 == nil then
+			if var1 == nil then
 				return nil
-			elseif not var3.handler and var3.lazyHandler then
-				var3.handler = var3.lazyHandler()
+			elseif not var1.handler and var1.lazyHandler then
+				var1.handler = var1.lazyHandler()
 			end
-			return var3.handler
+			return var1.handler
 		end,
 		registerTelemetryHandler = function(p1, p2)
 			-- upvalues: t (ref)
 			t[p1] = p2
 		end,
-		registerTelemetryHandlers = function(p3)
+		registerTelemetryHandlers = function(p1)
 			-- upvalues: t (ref)
-			for i, v in p3 do
+			for i, v in p1 do
 				t[i] = v
 			end
 		end,

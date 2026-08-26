@@ -15,14 +15,14 @@ local editProfileHeaderBarModule = require(editProfile.BaseComponents.EditProfil
 local textKeysModule = require(editProfile.Common.TextKeys)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p0)
+return function(p1)
 	-- upvalues: useProfileCardWidth (ref), fFlagAXEnableProfileTab (ref), textKeysModule (ref), useLocalization (ref), reactModule (ref), view (ref), editProfileHeaderBarModule (ref), userTileModule (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), editComponentRowModule (ref)
-	local var7 = useProfileCardWidth()
-	local var8 = fFlagAXEnableProfileTab and p0.fullBleed == true
-	local var9 = useLocalization({
+	local var1 = useProfileCardWidth()
+	local var2 = fFlagAXEnableProfileTab and p1.fullBleed == true
+	local var3 = useLocalization({
 		TopBarTitle = textKeysModule.Title,
 		UsernameLabel = textKeysModule.Username,
-		DisplayNameLabel = if p0.isPolicyEnabled then textKeysModule.AgedUpDisplayName else textKeysModule.DisplayName,
+		DisplayNameLabel = if p1.isPolicyEnabled then textKeysModule.AgedUpDisplayName else textKeysModule.DisplayName,
 		BioLabel = textKeysModule.About,
 		BioPlaceholder = textKeysModule.AboutPlaceholder
 	})
@@ -30,12 +30,12 @@ return function(p0)
 	return reactModule.createElement(view, {
 		tag = if fFlagAXEnableProfileTab then {
 			["col items-start bg-surface-0"] = true,
-			["position-top-right anchor-top-right"] = not var8,
-			["size-full-full"] = var8
+			["position-top-right anchor-top-right"] = not var2,
+			["size-full-full"] = var2
 		} else "col items-start position-top-right anchor-top-right bg-surface-0",
-		Size = if var8 then nil else UDim2.new(0, var7, 1, 0)
+		Size = if var2 then nil else UDim2.new(0, var1, 1, 0)
 	}, {
-		TopBar = reactModule.createElement(editProfileHeaderBarModule, { onClose = p0.onClose, headerText = var9.TopBarTitle }),
+		TopBar = reactModule.createElement(editProfileHeaderBarModule, { onClose = p1.onClose, headerText = var3.TopBarTitle }),
 		EditableComponents = reactModule.createElement(view, {
 			tag = "col padding-xlarge gap-xxlarge size-full-0 auto-y"
 		}, {
@@ -45,9 +45,9 @@ return function(p0)
 				}, {
 					AvatarHeadshot = reactModule.createElement(view, { tag = "size-full-full" }, {
 						UserTile = reactModule.createElement(userTileModule.UserTile, {
-							userId = p0.userId,
+							userId = p1.userId,
 							layoutMode = userTileModule.LayoutMode.compact,
-							onActivated = p0.settingButtonOnActivated.avatar
+							onActivated = p1.settingButtonOnActivated.avatar
 						})
 					}),
 					EditAvatarIconButton = reactModule.createElement(view, {
@@ -57,7 +57,7 @@ return function(p0)
 							isCircular = true,
 							icon = iconName.PhotoCamera,
 							size = iconSize.Small,
-							onActivated = p0.settingButtonOnActivated.avatar,
+							onActivated = p1.settingButtonOnActivated.avatar,
 							variant = buttonVariant.Standard
 						})
 					})
@@ -69,25 +69,25 @@ return function(p0)
 			}, {
 				EditDisplayNameRow = reactModule.createElement(editComponentRowModule, {
 					layoutOrder = 1,
-					label = var9.DisplayNameLabel,
-					currentValue = p0.displayName,
-					onActivated = if p0.areNamesLoading then function() end else p0.settingButtonOnActivated.displayName,
-					shouldShimmer = p0.areNamesLoading,
-					forwardRef = p0.firstItemRef
+					label = var3.DisplayNameLabel,
+					currentValue = p1.displayName,
+					onActivated = if p1.areNamesLoading then function() end else p1.settingButtonOnActivated.displayName,
+					shouldShimmer = p1.areNamesLoading,
+					forwardRef = p1.firstItemRef
 				}),
 				UsernameEditRow = reactModule.createElement(editComponentRowModule, {
 					layoutOrder = 2,
-					label = var9.UsernameLabel,
-					currentValue = p0.username,
-					onActivated = p0.settingButtonOnActivated.username,
-					shouldShimmer = p0.areNamesLoading
+					label = var3.UsernameLabel,
+					currentValue = p1.username,
+					onActivated = p1.settingButtonOnActivated.username,
+					shouldShimmer = p1.areNamesLoading
 				}),
 				BioEditRow = reactModule.createElement(editComponentRowModule, {
 					layoutOrder = 3,
-					label = var9.BioLabel,
-					currentValue = if p0.bioText == "" or p0.bioText == nil then var9.BioPlaceholder else p0.bioText,
-					onActivated = p0.settingButtonOnActivated.bio,
-					shouldShimmer = p0.isBioLoading
+					label = var3.BioLabel,
+					currentValue = if p1.bioText == "" or p1.bioText == nil then var3.BioPlaceholder else p1.bioText,
+					onActivated = p1.settingButtonOnActivated.bio,
+					shouldShimmer = p1.isBioLoading
 				})
 			})
 		})

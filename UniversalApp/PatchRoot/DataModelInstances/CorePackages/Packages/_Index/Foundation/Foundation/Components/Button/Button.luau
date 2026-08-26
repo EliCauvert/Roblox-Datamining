@@ -41,9 +41,9 @@ local function onProgressChange(p1)
 end
 
 local function _(p1, p2)
-	return p2:map(function(p1)
-		-- upvalues: p1 (ref)
-		return if p1 == nil then p1 else p1 + (1 - p1) * p1
+	return p2:map(function(p3)
+		-- upvalues: p3 (ref)
+		return if p3 == nil then p3 else p3 + (1 - p3) * p3
 	end)
 end
 
@@ -121,11 +121,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}
 	end, { var9, var11.container.radius })
 	local var18 = var2.text and var2.text ~= ""
-	local var19 = reactModule.useCallback(function(p1)
+	local var19 = reactModule.useCallback(function(p3)
 		-- upvalues: t (copy), var2 (ref), var18 (ref)
 		local variant = t[var2.variant]
 		
-		return if var18 and variant and table.find(variant.controlState, p1) then variant.format:format(var2.text) else var2.text
+		return if var18 and variant and table.find(variant.controlState, p3) then variant.format:format(var2.text) else var2.text
 	end, { var2.text, var2.variant, var18 })
 	local createElement = reactModule.createElement
 	local t_2 = {
@@ -135,12 +135,12 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	
 	if var11.container.style then
 		local transparency = var11.container.style.Transparency
-		var1 = var13.transparency:map(function(p1)
+		var1 = var13.transparency:map(function(p3)
 			-- upvalues: transparency (ref)
-			return if transparency == nil then p1 else transparency + (1 - transparency) * p1
-		end):map(function(p1)
+			return if transparency == nil then p3 else transparency + (1 - transparency) * p3
+		end):map(function(p3)
 			-- upvalues: var11 (ref)
-			return { Color3 = var11.container.style.Color3, Transparency = p1 }
+			return { Color3 = var11.container.style.Color3, Transparency = p3 }
 		end)
 	else
 		var1 = nil
@@ -154,9 +154,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	if var11.container.stroke then
 		t_3 = { Color = var11.container.stroke.Color }
 		local transparency = var11.container.stroke.Transparency
-		t_3.Transparency = var13.transparency:map(function(p1)
+		t_3.Transparency = var13.transparency:map(function(p3)
 			-- upvalues: transparency (ref)
-			return if transparency == nil then p1 else transparency + (1 - transparency) * p1
+			return if transparency == nil then p3 else transparency + (1 - transparency) * p3
 		end)
 	else
 		t_3 = nil
@@ -183,9 +183,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			PresenceWrapper = reactModule.createElement(animatePresence, {}, {
 				Spinner = reactModule.createElement(spinnerModule, {
 					Size = var11.icon.size - (if flagsModule.FoundationUsePath2DSpinner then UDim2.fromOffset(var9.Padding.XSmall, var9.Padding.XSmall) else UDim2.fromOffset(0, 0)),
-					style = var13.transparency:map(function(p1)
+					style = var13.transparency:map(function(p3)
 						-- upvalues: var11 (ref)
-						return { Color3 = var11.content.style.Color3, Transparency = p1 }
+						return { Color3 = var11.content.style.Color3, Transparency = p3 }
 					end),
 					testId = `{var2.testId}--spinner`
 				})
@@ -211,11 +211,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			Text = var3:map(var19),
 			RichText = t[var2.variant] == nil,
 			tag = var11.text.tag,
-			textStyle = reactModule.joinBindings({ var13.transparency, var15.textTransparency }):map(function(p1)
+			textStyle = reactModule.joinBindings({ var13.transparency, var15.textTransparency }):map(function(p3)
 				-- upvalues: var11 (ref)
 				return {
 					Color3 = var11.content.style.Color3,
-					Transparency = p1[2] + p1[1]
+					Transparency = p3[2] + p3[1]
 				}
 			end),
 			testId = `{var2.testId}--text`

@@ -9,30 +9,30 @@ local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 
 return function()
 	-- upvalues: useDispatch (ref), useLocalization (ref), reactModule (ref), commerceService (ref), toastType (ref), setCurrentToastMessage (ref)
-	local var3 = useDispatch()
-	local var4 = useLocalization({
+	local var1 = useDispatch()
+	local var2 = useLocalization({
 		granted = "CoreScripts.CommercePurchasePrompt.SuccessToast.Granted",
 		pending = "CoreScripts.CommercePurchasePrompt.SuccessToast.GrantPending"
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), commerceService (copy), toastType (copy), var4 (ref), setCurrentToastMessage (copy)
-		local var5 = if var3 then commerceService.BenefitStatusReceived:Connect(function(p0)
-			-- upvalues: toastType (copy), var4 (copy), var3 (copy), setCurrentToastMessage (copy)
-			var3(setCurrentToastMessage(if p0 then {
+		-- upvalues: var1 (ref), commerceService (copy), toastType (copy), var2 (ref), setCurrentToastMessage (copy)
+		local var3 = if var1 then commerceService.BenefitStatusReceived:Connect(function(p1)
+			-- upvalues: toastType (copy), var2 (copy), var1 (copy), setCurrentToastMessage (copy)
+			var1(setCurrentToastMessage(if p1 then {
 				toastType = toastType.SuccessConfirmation,
-				toastTitle = var4.granted
+				toastTitle = var2.granted
 			} else {
 				toastType = toastType.NetworkingError,
-				toastTitle = var4.pending
+				toastTitle = var2.pending
 			}))
 		end) else nil
 		
 		return function()
-			-- upvalues: var5 (write)
-			if var5 then
-				var5:Disconnect()
-				var5 = nil
+			-- upvalues: var3 (write)
+			if var3 then
+				var3:Disconnect()
+				var3 = nil
 			end
 		end
-	end, { var3, var4 })
+	end, { var1, var2 })
 end

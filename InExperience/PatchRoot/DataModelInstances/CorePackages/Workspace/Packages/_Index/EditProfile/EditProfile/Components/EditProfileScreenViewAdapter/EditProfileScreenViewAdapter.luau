@@ -12,49 +12,49 @@ local editProfileScreenModule = require(editProfile.BaseComponents.EditProfileSc
 local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p0)
+return function(p1)
 	-- upvalues: useEditProfileScreenConfigModule (ref), getDisplayStore (ref), useTokens (ref), reactModule (ref), fFlagAXEnableProfileTab (ref), cryoModule (ref), editProfileScreenModule (ref), editProfileModalModule (ref), focusNavigatorWrapperModule (ref)
-	local var8 = useEditProfileScreenConfigModule(p0.navigation.state.params.screen)
-	local var9 = getDisplayStore(false)
-	local var10 = useTokens()
-	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useRef(false)
+	local var1 = useEditProfileScreenConfigModule(p1.navigation.state.params.screen)
+	local var2 = getDisplayStore(false)
+	local var3 = useTokens()
+	local var4 = reactModule.useRef(nil)
+	local var5 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var12 (ref)
-		if var11.current and var11.current.focus and not var12.current then
-			var12.current = true
-			var11.current.focus()
+		-- upvalues: var4 (ref), var5 (ref)
+		if var4.current and var4.current.focus and not var5.current then
+			var5.current = true
+			var4.current.focus()
 		end
-	end, { var11.current })
-	local var13 = fFlagAXEnableProfileTab and p0.navigation.state.params.fullBleed == true
-	local var14 = cryoModule.Dictionary.join(var8, {
+	end, { var4.current })
+	local var6 = fFlagAXEnableProfileTab and p1.navigation.state.params.fullBleed == true
+	local var7 = cryoModule.Dictionary.join(var1, {
 		component = reactModule.useMemo(function()
-			-- upvalues: var8 (ref), var11 (ref), reactModule (copy)
+			-- upvalues: var1 (ref), var4 (ref), reactModule (copy)
 			local t = {
-				registerSaveHandler = var8.registerSaveHandler,
-				textBoxRef = var11
+				registerSaveHandler = var1.registerSaveHandler,
+				textBoxRef = var4
 			}
 			
-			if var8.updateErrorState then
-				t.updateErrorState = var8.updateErrorState
+			if var1.updateErrorState then
+				t.updateErrorState = var1.updateErrorState
 			end
-			return reactModule.createElement(var8.component, t)
-		end, { var8.component, var8.registerSaveHandler, var11 }),
-		isDisabled = var8.hasError == true,
-		fullBleed = var13
+			return reactModule.createElement(var1.component, t)
+		end, { var1.component, var1.registerSaveHandler, var4 }),
+		isDisabled = var1.hasError == true,
+		fullBleed = var6
 	})
-	local var15 = var9.getDisplaySize(false) == Enum.DisplaySize.Small
+	local var8 = var2.getDisplaySize(false) == Enum.DisplaySize.Small
 	local _ = nil
-	local var16 = if var15 or var13 then reactModule.createElement(editProfileScreenModule, var14) else reactModule.createElement(editProfileModalModule, var14)
+	local var9 = if var8 or var6 then reactModule.createElement(editProfileScreenModule, var7) else reactModule.createElement(editProfileModalModule, var7)
 	
-	return if var13 then focusNavigatorWrapperModule({ onClose = var8.onClose }, { Content = var16 }) else focusNavigatorWrapperModule({ onClose = var8.onClose }, {
+	return if var6 then focusNavigatorWrapperModule({ onClose = var1.onClose }, { Content = var9 }) else focusNavigatorWrapperModule({ onClose = var1.onClose }, {
 		reactModule.createElement("ImageButton", {
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = var10.Color.Common.Scrim.Transparency,
-			BackgroundColor3 = var10.Color.Common.Scrim.Color3,
+			BackgroundTransparency = var3.Color.Common.Scrim.Transparency,
+			BackgroundColor3 = var3.Color.Common.Scrim.Color3,
 			Active = true,
 			AutoButtonColor = false,
-			[reactModule.Event.Activated] = if not var15 then var8.onClose else nil
-		}, { Content = var16 })
+			[reactModule.Event.Activated] = if not var8 then var1.onClose else nil
+		}, { Content = var9 })
 	})
 end

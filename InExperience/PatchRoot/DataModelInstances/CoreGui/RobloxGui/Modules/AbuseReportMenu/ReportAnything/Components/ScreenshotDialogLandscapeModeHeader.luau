@@ -10,20 +10,20 @@ local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local images = UIBloxModule.App.ImageSet.Images
 local withStyle = UIBloxModule.Style.withStyle
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: withStyle (ref), reactModule (ref)
 	return function()
-		-- upvalues: withStyle (copy), reactModule (copy), p0 (ref)
-		return withStyle(function(p1)
-			-- upvalues: reactModule (copy), p0 (copy)
-			local theme = p1.Theme
+		-- upvalues: withStyle (copy), reactModule (copy), p1 (ref)
+		return withStyle(function(p2)
+			-- upvalues: reactModule (copy), p1 (copy)
+			local theme = p2.Theme
 			
 			return reactModule.createElement("TextLabel", {
 				TextSize = 20,
 				TextWrapped = true,
 				BackgroundTransparency = 1,
-				Text = p0,
-				Font = p1.Font.Header2.Font,
+				Text = p1,
+				Font = p2.Font.Header2.Font,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,
@@ -34,12 +34,12 @@ local function _(p0)
 	end
 end
 
-local _ = function(p2, p3, p4, p5, p6)
+local _ = function(p1, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
-	p5 = p5 or p6
+	p4 = p4 or p5
 	
 	return function()
-		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p2 (ref), p5 (ref), p6 (ref), p3 (ref), p5 (ref), p4 (ref)
+		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p1 (ref), p4 (ref), p5 (ref), p2 (ref), p4 (ref), p3 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 120, 1, 0)
@@ -54,30 +54,30 @@ local _ = function(p2, p3, p4, p5, p6)
 				layoutOrder = 1,
 				iconSize = iconSize.Medium,
 				icon = images["icons/navigation/pushBack"],
-				onActivated = p2
+				onActivated = p1
 			}),
-			UndoButton = p5 and reactModule.createElement(iconButton, {
+			UndoButton = p4 and reactModule.createElement(iconButton, {
 				layoutOrder = 2,
 				iconSize = iconSize.Medium,
 				icon = images["icons/actions/edit/undo"],
-				isDisabled = not p6,
-				onActivated = p3
+				isDisabled = not p5,
+				onActivated = p2
 			}),
-			RedoButton = p5 and reactModule.createElement(iconButton, {
+			RedoButton = p4 and reactModule.createElement(iconButton, {
 				layoutOrder = 3,
 				iconSize = iconSize.Medium,
 				icon = images["icons/actions/edit/redo"],
-				isDisabled = not p5,
-				onActivated = p4
+				isDisabled = not p4,
+				onActivated = p3
 			})
 		})
 	end
 end
 
-local _ = function(p7, p8)
+local _ = function(p1, p2)
 	-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref), robloxTranslatorModule (ref)
 	return function()
-		-- upvalues: reactModule (copy), buttonStack (copy), buttonType (copy), p7 (ref), p8 (ref), robloxTranslatorModule (copy)
+		-- upvalues: reactModule (copy), buttonStack (copy), buttonType (copy), p1 (ref), p2 (ref), robloxTranslatorModule (copy)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 144, 1, 0)
@@ -93,8 +93,8 @@ local _ = function(p7, p8)
 						buttonType = buttonType.PrimarySystem,
 						props = {
 							onActivated = function()
-								-- upvalues: p7 (copy), p8 (copy)
-								p7(p8)
+								-- upvalues: p1 (copy), p2 (copy)
+								p1(p2)
 							end,
 							text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Next")
 						}
@@ -105,10 +105,10 @@ local _ = function(p7, p8)
 	end
 end
 
-return function(p9)
+return function(p1)
 	-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), buttonStack (ref), buttonType (ref), robloxTranslatorModule (ref), withStyle (ref)
 	local createElement = reactModule.createElement
-	local var5 = "Frame"
+	local var1 = "Frame"
 	local t = {
 		BackgroundTransparency = 0,
 		LayoutOrder = 1,
@@ -119,11 +119,11 @@ return function(p9)
 	local t_1 = {}
 	local createElement_1 = reactModule.createElement
 	local t_2 = { backgroundTransparency = 1, barHeight = 48 }
-	local backAction = p9.backAction
-	local undoAnnotationPoints = p9.undoAnnotationPoints
-	local redoAnnotationPoints = p9.redoAnnotationPoints
-	local isRedoEnabled = p9.isRedoEnabled
-	local isUndoEnabled = p9.isUndoEnabled
+	local backAction = p1.backAction
+	local undoAnnotationPoints = p1.undoAnnotationPoints
+	local redoAnnotationPoints = p1.redoAnnotationPoints
+	local isRedoEnabled = p1.isRedoEnabled
+	local isUndoEnabled = p1.isUndoEnabled
 	local isRedoEnabled_1 = isRedoEnabled or isUndoEnabled
 	
 	function t_2.renderLeft()
@@ -161,8 +161,8 @@ return function(p9)
 		})
 	end
 	
-	local finishAnnotationAction = p9.finishAnnotationAction
-	local annotationPoints = p9.annotationPoints
+	local finishAnnotationAction = p1.finishAnnotationAction
+	local annotationPoints = p1.annotationPoints
 	
 	function t_2.renderRight()
 		-- upvalues: reactModule (copy), buttonStack (copy), buttonType (copy), finishAnnotationAction (ref), annotationPoints (ref), robloxTranslatorModule (copy)
@@ -192,20 +192,20 @@ return function(p9)
 		})
 	end
 	
-	local titleText = p9.titleText
+	local titleText = p1.titleText
 	
 	function t_2.renderCenter()
 		-- upvalues: withStyle (copy), reactModule (copy), titleText (ref)
-		return withStyle(function(p10)
+		return withStyle(function(p2)
 			-- upvalues: reactModule (copy), titleText (copy)
-			local theme = p10.Theme
+			local theme = p2.Theme
 			
 			return reactModule.createElement("TextLabel", {
 				TextSize = 20,
 				TextWrapped = true,
 				BackgroundTransparency = 1,
 				Text = titleText,
-				Font = p10.Font.Header2.Font,
+				Font = p2.Font.Header2.Font,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,
@@ -217,5 +217,5 @@ return function(p9)
 	
 	t_1.Bar = createElement_1(headerBar, t_2)
 	
-	return createElement(var5, t, t_1)
+	return createElement(var1, t, t_1)
 end

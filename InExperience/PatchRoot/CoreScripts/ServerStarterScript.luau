@@ -65,9 +65,9 @@ end
 function getServerVersion.getServerVersion()
 	-- upvalues: runService (ref)
 	local robloxVersion = runService:GetRobloxVersion()
-	local var16 = if robloxVersion == "?" then "DEBUG_SERVER" elseif runService:IsStudio() then "ROBLOX Studio" else robloxVersion
+	local var1 = if robloxVersion == "?" then "DEBUG_SERVER" elseif runService:IsStudio() then "ROBLOX Studio" else robloxVersion
 	
-	return if runService:IsStudio() then var16 else string.format("%s (%.6s)", var16, runService.ClientGitHash)
+	return if runService:IsStudio() then var1 else string.format("%s (%.6s)", var1, runService.ClientGitHash)
 end
 
 if getFFlagDisplayServerChannel() then

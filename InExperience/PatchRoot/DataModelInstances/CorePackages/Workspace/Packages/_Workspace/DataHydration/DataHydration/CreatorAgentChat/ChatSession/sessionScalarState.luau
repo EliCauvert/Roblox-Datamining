@@ -1,9 +1,9 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
 
 return {
-	createSessionScalarState = function(p0)
+	createSessionScalarState = function(p1)
 		-- upvalues: signalsModule (ref)
-		local var1, var2 = signalsModule.createSignal(p0)
+		local var1, var2 = signalsModule.createSignal(p1)
 		local var3, var4 = signalsModule.createSignal(false)
 		local var5, var6 = signalsModule.createSignal(nil)
 		local var7, var8 = signalsModule.createSignal(false)
@@ -39,13 +39,13 @@ return {
 				-- upvalues: var14 (ref)
 				var14(value)
 			end,
-			noteHistorySequenceId = function(p1)
+			noteHistorySequenceId = function(p2)
 				-- upvalues: var13 (ref), var14 (ref)
-				if p1 == nil then return end
-				local var16 = var13(false)
+				if p2 == nil then return end
+				local var15 = var13(false)
 				
-				if var16 == nil or var16 < p1 then
-					var14(p1)
+				if var15 == nil or var15 < p2 then
+					var14(p2)
 				end
 			end
 		}

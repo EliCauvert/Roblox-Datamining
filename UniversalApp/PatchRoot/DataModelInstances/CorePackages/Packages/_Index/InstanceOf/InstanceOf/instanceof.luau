@@ -1,32 +1,32 @@
 ﻿local dEV = _G.__DEV__
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: dEV (ref)
 	if dEV then
-		assert(typeof(p1) == "table", "Received a non-table as the second argument for instanceof")
+		assert(typeof(p2) == "table", "Received a non-table as the second argument for instanceof")
 	end
-	if typeof(p0) ~= "table" then
+	if typeof(p1) ~= "table" then
 		return false
 	end
 	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), p0 (write)
-		return p1.new ~= nil and p0.new == p1.new
+		-- upvalues: p2 (ref), p1 (write)
+		return p2.new ~= nil and p1.new == p2.new
 	end)
 	
 	if ok and status then
 		return true
 	end
-	local t = { [p0] = true }
-	while p0 and typeof(p0) == "table" do
-		p0 = getmetatable(p0)
+	local t = { [p1] = true }
+	while p1 and typeof(p1) == "table" do
+		p1 = getmetatable(p1)
 		
-		if typeof(p0) == "table" then
-			p0 = p0.__index
+		if typeof(p1) == "table" then
+			p1 = p1.__index
 			
-			if p0 ~= p1 then
-				if typeof(p0) ~= "table" then continue end
-				if not t[p0] then
-					t[p0] = true
+			if p1 ~= p2 then
+				if typeof(p1) ~= "table" then continue end
+				if not t[p1] then
+					t[p1] = true
 					continue
 				end
 				return false

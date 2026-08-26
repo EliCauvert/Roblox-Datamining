@@ -24,68 +24,68 @@ local discoverabilityOverlayModule = require(script.Parent.DiscoverabilityOverla
 local appPage = require(parent_1.RobloxAppEnums).AppPage
 local navigateDown = require(parent_1.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent_1.SharedFlags).FFlagSignalsNavP3Dispatch
-local var6 = if fFlagSignalsNavP3Dispatch then require(parent_1.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent_1.RobloxAppNavigation).NavigationCommands else nil
 local toastRoduxModule = require(parent_1.ToastRodux)
 local t = {
-	checkOrRequestPermissions = function(p0)
+	checkOrRequestPermissions = function(p1)
 		-- upvalues: permissionsProtocol (ref)
-		return permissionsProtocol.default:checkOrRequestPermissions(p0)
+		return permissionsProtocol.default:checkOrRequestPermissions(p1)
 	end
 }
 
 return function(p1)
-	-- upvalues: dash (ref), t (ref), getDeepValue (ref), constantsModule (ref), useDispatch (ref), useAnalyticsModule (ref), useSelector (ref), react (ref), eventNamesModule (ref), toastRoduxModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var6 (ref), navigateDown (ref), textKeysModule (ref), updateContactImporterModalLogic (ref), updateIsDiscoverabilityUnset (ref), networkingUserSettings (ref), permissionsProtocol (ref), updateOptedInUsers (ref), appStorageService (ref), enumScreens (ref), promise (ref), discoverabilityOverlayModule (ref)
-	local var9 = dash.join(t, p1 or {})
+	-- upvalues: dash (ref), t (ref), getDeepValue (ref), constantsModule (ref), useDispatch (ref), useAnalyticsModule (ref), useSelector (ref), react (ref), eventNamesModule (ref), toastRoduxModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), textKeysModule (ref), updateContactImporterModalLogic (ref), updateIsDiscoverabilityUnset (ref), networkingUserSettings (ref), permissionsProtocol (ref), updateOptedInUsers (ref), appStorageService (ref), enumScreens (ref), promise (ref), discoverabilityOverlayModule (ref)
+	local var2 = dash.join(t, p1 or {})
 	
 	local _ = function(p2)
-		-- upvalues: var9 (ref), getDeepValue (copy)
-		return if var9.navigation then var9.navigation.getParam(p2) else getDeepValue(var9, p2)
+		-- upvalues: var2 (ref), getDeepValue (copy)
+		return if var2.navigation then var2.navigation.getParam(p2) else getDeepValue(var2, p2)
 	end
 	
 	local iSSTANDALONEDISCOVERABILITYMODAL = constantsModule.IS_STANDALONE_DISCOVERABILITY_MODAL
-	local var10 = if var9.navigation then var9.navigation.getParam(iSSTANDALONEDISCOVERABILITYMODAL) else getDeepValue(var9, iSSTANDALONEDISCOVERABILITYMODAL)
-	local var11 = useDispatch()
-	local var12 = useAnalyticsModule()
-	local var13 = useSelector(function(p3)
-		return p3.ScreenSize
+	local var3 = if var2.navigation then var2.navigation.getParam(iSSTANDALONEDISCOVERABILITYMODAL) else getDeepValue(var2, iSSTANDALONEDISCOVERABILITYMODAL)
+	local var4 = useDispatch()
+	local var5 = useAnalyticsModule()
+	local var6 = useSelector(function(p2)
+		return p2.ScreenSize
 	end)
-	local var14 = useSelector(function(p4)
-		return p4.LocalUserId
+	local var7 = useSelector(function(p2)
+		return p2.LocalUserId
 	end)
-	local var15 = react.useCallback(function()
-		-- upvalues: var9 (ref)
-		if var9.navigation then
-			var9.navigation.pop()
+	local var8 = react.useCallback(function()
+		-- upvalues: var2 (ref)
+		if var2.navigation then
+			var2.navigation.pop()
 			
 			return
-		elseif var9.onClose then
-			var9.onClose()
+		elseif var2.onClose then
+			var2.onClose()
 		end
-	end, { var9 })
-	local var16 = useSelector(function(p5)
+	end, { var2 })
+	local var9 = useSelector(function(p2)
 		-- upvalues: getDeepValue (copy)
-		return getDeepValue(p5, "DiscoverabilityModal.UserPermissions.userSettingsMetadata")
+		return getDeepValue(p2, "DiscoverabilityModal.UserPermissions.userSettingsMetadata")
 	end)
 	react.useEffect(function()
-		-- upvalues: var16 (ref), constantsModule (copy), var12 (ref), eventNamesModule (copy)
-		var12.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalLoad, {
-			version = if var16.prefillDiscoverabilitySetting then constantsModule.NON_GDPR_VERSION_CHECKBOX else constantsModule.GDPR_VERSION,
+		-- upvalues: var9 (ref), constantsModule (copy), var5 (ref), eventNamesModule (copy)
+		var5.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalLoad, {
+			version = if var9.prefillDiscoverabilitySetting then constantsModule.NON_GDPR_VERSION_CHECKBOX else constantsModule.GDPR_VERSION,
 			wordingVersion = constantsModule.WORDING_VERSION_1
 		})
 	end, {})
-	local var17 = react.useCallback(function(p6)
-		-- upvalues: var11 (ref), toastRoduxModule (copy)
-		var11(toastRoduxModule.Actions.SetCurrentToastMessage({ toastMessage = p6 }))
-	end, { var11 })
+	local var10 = react.useCallback(function(p2)
+		-- upvalues: var4 (ref), toastRoduxModule (copy)
+		var4(toastRoduxModule.Actions.SetCurrentToastMessage({ toastMessage = p2 }))
+	end, { var4 })
 	
-	local var18 = function(p7)
-		-- upvalues: var12 (ref), eventNamesModule (copy), var15 (ref)
-		var12.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalClose, { selected = p7 })
-		var15()
+	local var11 = function(p2)
+		-- upvalues: var5 (ref), eventNamesModule (copy), var8 (ref)
+		var5.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalClose, { selected = p2 })
+		var8()
 	end
 	
-	local var19 = function()
-		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var6 (copy), var11 (ref), navigateDown (copy)
+	local var12 = function()
+		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var4 (ref), navigateDown (copy)
 		local t = {
 			detail = "https://en.help.roblox.com/hc/articles/7416652004884",
 			name = appPage.GenericWebPage,
@@ -93,83 +93,83 @@ return function(p1)
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var6.down(var6.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		var11(navigateDown(t, nil))
+		var4(navigateDown(t, nil))
 	end
 	
-	local var20 = function(_)
-		-- upvalues: var17 (ref), textKeysModule (copy)
-		var17(textKeysModule.CI_FAILED)
+	local var13 = function(_)
+		-- upvalues: var10 (ref), textKeysModule (copy)
+		var10(textKeysModule.CI_FAILED)
 	end
 	
 	local _ = function()
-		-- upvalues: var11 (ref), updateContactImporterModalLogic (copy)
-		return var11(updateContactImporterModalLogic({
+		-- upvalues: var4 (ref), updateContactImporterModalLogic (copy)
+		return var4(updateContactImporterModalLogic({
 			hasOSPermissions = true,
 			shouldShowContactImporterUpsellModal = false
 		}))
 	end
 	
 	local _ = function()
-		-- upvalues: var11 (ref), updateIsDiscoverabilityUnset (copy)
-		return var11(updateIsDiscoverabilityUnset({ isDiscoverabilityUnset = false }))
+		-- upvalues: var4 (ref), updateIsDiscoverabilityUnset (copy)
+		return var4(updateIsDiscoverabilityUnset({ isDiscoverabilityUnset = false }))
 	end
 	
-	local _ = function(p8)
-		-- upvalues: var11 (ref), networkingUserSettings (copy)
-		return var11(networkingUserSettings.UpdateUserSettings.API({ phoneNumberDiscoverability = p8 }))
+	local _ = function(p2)
+		-- upvalues: var4 (ref), networkingUserSettings (copy)
+		return var4(networkingUserSettings.UpdateUserSettings.API({ phoneNumberDiscoverability = p2 }))
 	end
 	
 	return react.createElement(discoverabilityOverlayModule, {
-		screenSize = var13,
-		onCloseClicked = var18,
-		onLearnMoreClick = var19,
-		onActivated = function(p9)
-			-- upvalues: var12 (ref), eventNamesModule (copy), var10 (ref), var11 (ref), networkingUserSettings (copy), updateIsDiscoverabilityUnset (copy), constantsModule (copy), var9 (ref), getDeepValue (copy), var15 (ref), var17 (ref), textKeysModule (copy), permissionsProtocol (copy), updateOptedInUsers (copy), appStorageService (copy), var14 (ref), updateContactImporterModalLogic (copy), enumScreens (copy), var13 (ref), promise (copy), var20 (ref)
-			var12.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalContinue, { selected = p9 })
+		screenSize = var6,
+		onCloseClicked = var11,
+		onLearnMoreClick = var12,
+		onActivated = function(p2)
+			-- upvalues: var5 (ref), eventNamesModule (copy), var3 (ref), var4 (ref), networkingUserSettings (copy), updateIsDiscoverabilityUnset (copy), constantsModule (copy), var2 (ref), getDeepValue (copy), var8 (ref), var10 (ref), textKeysModule (copy), permissionsProtocol (copy), updateOptedInUsers (copy), appStorageService (copy), var7 (ref), updateContactImporterModalLogic (copy), enumScreens (copy), var6 (ref), promise (copy), var13 (ref)
+			var5.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalContinue, { selected = p2 })
 			
-			if var10 then
-				var11(networkingUserSettings.UpdateUserSettings.API({ phoneNumberDiscoverability = p9 })):andThen(function()
-					-- upvalues: var11 (copy), updateIsDiscoverabilityUnset (copy), constantsModule (copy), var9 (copy), getDeepValue (copy), var15 (copy), var17 (copy), textKeysModule (copy)
-					local _ = var11(updateIsDiscoverabilityUnset({ isDiscoverabilityUnset = false }))
+			if var3 then
+				var4(networkingUserSettings.UpdateUserSettings.API({ phoneNumberDiscoverability = p2 })):andThen(function()
+					-- upvalues: var4 (copy), updateIsDiscoverabilityUnset (copy), constantsModule (copy), var2 (copy), getDeepValue (copy), var8 (copy), var10 (copy), textKeysModule (copy)
+					local _ = var4(updateIsDiscoverabilityUnset({ isDiscoverabilityUnset = false }))
 					local NAVIGATE_ON_ACTIVATED = constantsModule.NAVIGATE_ON_ACTIVATED
-					local var22 = if var9.navigation then var9.navigation.getParam(NAVIGATE_ON_ACTIVATED) else getDeepValue(var9, NAVIGATE_ON_ACTIVATED)
-					var15()
-					var22()
-					var17(textKeysModule.SETTING_SAVED)
+					local var14 = if var2.navigation then var2.navigation.getParam(NAVIGATE_ON_ACTIVATED) else getDeepValue(var2, NAVIGATE_ON_ACTIVATED)
+					var8()
+					var14()
+					var10(textKeysModule.SETTING_SAVED)
 				end)
 				
 				return
 			end
-			var9.checkOrRequestPermissions({ permissionsProtocol.Permissions.CONTACTS_ACCESS }):andThen(function(p10)
-				-- upvalues: permissionsProtocol (copy), updateOptedInUsers (copy), appStorageService (copy), var14 (copy), var11 (copy), updateContactImporterModalLogic (copy), p9 (ref), networkingUserSettings (copy), updateIsDiscoverabilityUnset (copy), var9 (copy), enumScreens (copy), constantsModule (copy), var13 (copy), promise (copy)
-				if p10 == permissionsProtocol.Status.AUTHORIZED then
-					updateOptedInUsers:addUserToLocalStorage(appStorageService, var14)
-					local _ = var11(updateContactImporterModalLogic({
+			var2.checkOrRequestPermissions({ permissionsProtocol.Permissions.CONTACTS_ACCESS }):andThen(function(p3)
+				-- upvalues: permissionsProtocol (copy), updateOptedInUsers (copy), appStorageService (copy), var7 (copy), var4 (copy), updateContactImporterModalLogic (copy), p2 (ref), networkingUserSettings (copy), updateIsDiscoverabilityUnset (copy), var2 (copy), enumScreens (copy), constantsModule (copy), var6 (copy), promise (copy)
+				if p3 == permissionsProtocol.Status.AUTHORIZED then
+					updateOptedInUsers:addUserToLocalStorage(appStorageService, var7)
+					local _ = var4(updateContactImporterModalLogic({
 						hasOSPermissions = true,
 						shouldShowContactImporterUpsellModal = false
 					}))
-					var11(networkingUserSettings.UpdateUserSettings.API({ phoneNumberDiscoverability = p9 })):andThen(function()
-						-- upvalues: var11 (copy), updateIsDiscoverabilityUnset (copy), var9 (copy), enumScreens (copy), constantsModule (copy)
-						local _ = var11(updateIsDiscoverabilityUnset({ isDiscoverabilityUnset = false }))
-						var9.navigation.replace(enumScreens.ContactsList, {
+					var4(networkingUserSettings.UpdateUserSettings.API({ phoneNumberDiscoverability = p2 })):andThen(function()
+						-- upvalues: var4 (copy), updateIsDiscoverabilityUnset (copy), var2 (copy), enumScreens (copy), constantsModule (copy)
+						local _ = var4(updateIsDiscoverabilityUnset({ isDiscoverabilityUnset = false }))
+						var2.navigation.replace(enumScreens.ContactsList, {
 							[constantsModule.IS_PHONE_VERIFIED] = true,
-							entryPoint = var9.navigation.getParam("entryPoint")
+							entryPoint = var2.navigation.getParam("entryPoint")
 						})
 					end)
 					
 					return
-				elseif p10 == permissionsProtocol.Status.DENIED then
-					var11(networkingUserSettings.UpdateUserSettings.API({ phoneNumberDiscoverability = p9 })):andThen(function()
-						-- upvalues: var9 (copy), enumScreens (copy), var13 (copy)
-						var9.navigation.replace(enumScreens.ContactsRevokedAccessDialog, {
-							screenSize = var13,
+				elseif p3 == permissionsProtocol.Status.DENIED then
+					var4(networkingUserSettings.UpdateUserSettings.API({ phoneNumberDiscoverability = p2 })):andThen(function()
+						-- upvalues: var2 (copy), enumScreens (copy), var6 (copy)
+						var2.navigation.replace(enumScreens.ContactsRevokedAccessDialog, {
+							screenSize = var6,
 							closeModal = function()
-								-- upvalues: var9 (copy)
-								var9.navigation.pop()
+								-- upvalues: var2 (copy)
+								var2.navigation.pop()
 							end
 						})
 					end)
@@ -177,9 +177,9 @@ return function(p1)
 					return
 				end
 				return promise.reject()
-			end):catch(var20)
+			end):catch(var13)
 		end,
-		prefillDiscoverabilitySetting = var16.prefillDiscoverabilitySetting,
-		analytics = var12
+		prefillDiscoverabilitySetting = var9.prefillDiscoverabilitySetting,
+		analytics = var5
 	})
 end

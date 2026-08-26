@@ -7,16 +7,16 @@ local assetInfoModule = require(profilePlatform.Common.AssetInfo)
 local enumsModule = require(profilePlatform.Common.Enums)
 
 return roduxModule.createReducer({}, {
-	[networkingCatalogModule.GetItemAndBundleDetails.Succeeded.name] = function(p0, p1)
+	[networkingCatalogModule.GetItemAndBundleDetails.Succeeded.name] = function(p1, p2)
 		-- upvalues: enumsModule (ref), assetInfoModule (ref), cryoModule (ref)
 		local t = {}
 		
-		for i, v in p1.responseBody.data do
+		for i, v in p2.responseBody.data do
 			if v.itemType == enumsModule.ItemTypes.Asset then
-				local var7 = assetInfoModule.fromAsset(v)
-				t[var7.id] = var7
+				local var1 = assetInfoModule.fromAsset(v)
+				t[var1.id] = var1
 			end
 		end
-		return cryoModule.Dictionary.union(p0, t)
+		return cryoModule.Dictionary.union(p1, t)
 	end
 })

@@ -4,73 +4,73 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
-		is_favorited = if p0 == nil or p0.is_favorited == nil then false else p0.is_favorited
+		is_favorited = if p1 == nil or p1.is_favorited == nil then false else p1.is_favorited
 	}, t_1)
 end
 
 function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var5 = 0
+	local var1 = 0
 	
 	if self.is_favorited then
-		local var6, var7 = protoModule.writeTag(buff, var5, 1, protoModule.wireTypes.varint)
-		var6, var7 = protoModule.writeVarInt(var6, var7, if self.is_favorited then 1 else 0)
-		buff = var6
-		var5 = var7
+		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.varint)
+		var2, var7 = protoModule.writeVarInt(var2, var3, if self.is_favorited then 1 else 0)
+		buff = var2
+		var1 = var3
 	end
-	local buff_1 = buffer.create(var5)
-	buffer.copy(buff_1, 0, buff, 0, var5)
+	local buff_1 = buffer.create(var1)
+	buffer.copy(buff_1, 0, buff, 0, var1)
 	
 	return buff_1
 end
 
 function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
-	local var9 = t_1.new()
-	local var10 = 0
-	while var10 < buffer.len(p1) do
+	local var1 = t_1.new()
+	local var2 = 0
+	while var2 < buffer.len(p1) do
 		local _ = nil
 		local _ = nil
-		local var11, var12, var13 = protoModule.readTag(p1, var10)
-		local var14 = var11
-		local var15 = var12
-		var10 = var13
+		local var3, var4, var5 = protoModule.readTag(p1, var2)
+		local var6 = var3
+		local var7 = var4
+		var2 = var5
 		
-		if var15 == protoModule.wireTypes.varint then
-			if var14 == 1 then
+		if var7 == protoModule.wireTypes.varint then
+			if var6 == 1 then
 				local _ = nil
-				local var16, var17 = protoModule.readVarInt(p1, var10)
-				var10 = var17
-				var9.is_favorited = var16 ~= 0
+				local var8, var9 = protoModule.readVarInt(p1, var2)
+				var2 = var9
+				var1.is_favorited = var8 ~= 0
 			else
 				local _ = nil
-				local var18, var19 = protoModule.readVarInt(p1, var10)
-				local _ = var18
-				var10 = var19
+				local var10, var11 = protoModule.readVarInt(p1, var2)
+				local _ = var10
+				var2 = var11
 			end
-		elseif var15 == protoModule.wireTypes.lengthDelimited then
+		elseif var7 == protoModule.wireTypes.lengthDelimited then
 			local _ = nil
-			local var20, var21 = protoModule.readVarInt(p1, var10)
-			var10 = var21 + var20
-		elseif var15 == protoModule.wireTypes.i32 then
+			local var12, var13 = protoModule.readVarInt(p1, var2)
+			var2 = var13 + var12
+		elseif var7 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var22, var23 = protoModule.readFixed32(p1, var10)
-			local _ = var22
-			var10 = var23
-		elseif var15 == protoModule.wireTypes.i64 then
+			local var14, var15 = protoModule.readFixed32(p1, var2)
+			local _ = var14
+			var2 = var15
+		elseif var7 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var24, var25 = protoModule.readFixed64(p1, var10)
-			local _ = var24
-			var10 = var25
+			local var16, var17 = protoModule.readFixed64(p1, var2)
+			local _ = var16
+			var2 = var17
 		else
 			error("Unsupported wire type: " .. var15)
 		end
 	end
-	return var9
+	return var1
 end
 
 function t_1:jsonEncode()
@@ -84,15 +84,15 @@ end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
-	local var27 = t_1.new()
+	local var18 = t_1.new()
 	
 	if self.is_favorited ~= nil then
-		var27.is_favorited = self.is_favorited
+		var18.is_favorited = self.is_favorited
 	end
 	if self.isFavorited ~= nil then
-		var27.is_favorited = self.isFavorited
+		var18.is_favorited = self.isFavorited
 	end
-	return var27
+	return var18
 end
 
 t_1.descriptor = {

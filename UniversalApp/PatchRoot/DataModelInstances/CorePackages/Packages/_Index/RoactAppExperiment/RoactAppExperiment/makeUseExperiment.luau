@@ -3,35 +3,35 @@ local reactModule = require(roactAppExperiment.Parent.React)
 local usePreviousModule = require(script.Parent.usePrevious)
 local useIXPServiceModule = require(roactAppExperiment.useIXPService)
 
-local function _(p0)
-	local var4 = ""
+local function _(p1)
+	local var1 = ""
 	
-	for i, v in ipairs(p0) do
+	for i, v in ipairs(p1) do
 		if i > 1 then
-			var4 ..= ","
+			var1 ..= ","
 		end
-		var4 ..= v
+		var1 ..= v
 	end
-	return var4
+	return var1
 end
 
-return function(p1, p2, p3, p4, p5)
+return function(p2, p3, p4, p5, p6)
 	-- upvalues: useIXPServiceModule (ref), reactModule (ref), usePreviousModule (ref)
-	return function(p6, p7, p8)
-		-- upvalues: useIXPServiceModule (copy), p3 (ref), p2 (ref), reactModule (copy), p1 (ref), usePreviousModule (copy), p5 (ref), p4 (ref)
-		if p8 == nil then
-			p8 = true
+	return function(p7, p8, p9)
+		-- upvalues: useIXPServiceModule (copy), p4 (ref), p3 (ref), reactModule (copy), p2 (ref), usePreviousModule (copy), p6 (ref), p5 (ref)
+		if p9 == nil then
+			p9 = true
 		end
-		local var5 = useIXPServiceModule()
-		assert(type(p6) == "table", "useExperiment expects layerNames to be a list of layers")
-		assert(type(p7) == "function", "useExperiment expects mapLayers to be a function")
+		local var2 = useIXPServiceModule()
+		assert(type(p7) == "table", "useExperiment expects layerNames to be a list of layers")
+		assert(type(p8) == "function", "useExperiment expects mapLayers to be a function")
 		
 		local function getNewLayerToVariables()
-			-- upvalues: p6 (ref), var5 (ref), p3 (copy)
+			-- upvalues: p7 (ref), var2 (ref), p4 (copy)
 			local t = {}
 			
-			for i, v in ipairs(p6) do
-				t[v] = var5[p3](var5, v)
+			for i, v in ipairs(p7) do
+				t[v] = var2[p4](var2, v)
 				
 				if t[v] and not next(t[v]) then
 					t[v] = nil
@@ -41,79 +41,79 @@ return function(p1, p2, p3, p4, p5)
 		end
 		
 		local function getLoadingStatus()
-			-- upvalues: var5 (ref), p2 (copy)
-			return var5[p2](var5)
+			-- upvalues: var2 (ref), p3 (copy)
+			return var2[p3](var2)
 		end
 		
-		local var8, var9 = reactModule.useState(getNewLayerToVariables)
-		local var10, var11 = reactModule.useState(getLoadingStatus)
-		local var12 = ""
+		local var3, var4 = reactModule.useState(getNewLayerToVariables)
+		local var5, var6 = reactModule.useState(getLoadingStatus)
+		local var7 = ""
 		
-		for i, v in ipairs(p6) do
+		for i, v in ipairs(p7) do
 			if i > 1 then
-				var12 ..= ","
+				var7 ..= ","
 			end
-			var12 ..= v
+			var7 ..= v
 		end
 		reactModule.useEffect(function()
-			-- upvalues: var5 (ref), p2 (copy), getNewLayerToVariables (ref), var9 (ref), var11 (ref), p1 (copy)
-			if var5 == nil then
+			-- upvalues: var2 (ref), p3 (copy), getNewLayerToVariables (ref), var4 (ref), var6 (ref), p2 (copy)
+			if var2 == nil then
 				return function() end
 			end
 			local function _()
-				-- upvalues: var5 (copy), p2 (copy), getNewLayerToVariables (copy), var9 (copy), var11 (copy)
-				local var18 = var5[p2](var5)
-				local var19 = getNewLayerToVariables()
-				var9(function(p9)
-					-- upvalues: var19 (ref)
-					return if not next(var19) == not next(p9) then p9 else var19
+				-- upvalues: var2 (copy), p3 (copy), getNewLayerToVariables (copy), var4 (copy), var6 (copy)
+				local var8 = var2[p3](var2)
+				local var9 = getNewLayerToVariables()
+				var4(function(p10)
+					-- upvalues: var9 (ref)
+					return if not next(var9) == not next(p10) then p10 else var9
 				end)
-				var11(var18)
+				var6(var8)
 			end
 			
-			local var15 = var5[p1]:Connect(function(_)
-				-- upvalues: var5 (copy), p2 (copy), getNewLayerToVariables (copy), var9 (copy), var11 (copy)
-				local var20 = var5[p2](var5)
-				local var21 = getNewLayerToVariables()
-				var9(function(p10)
-					-- upvalues: var21 (ref)
-					return if not next(var21) == not next(p10) then p10 else var21
+			local var8 = var2[p2]:Connect(function(_)
+				-- upvalues: var2 (copy), p3 (copy), getNewLayerToVariables (copy), var4 (copy), var6 (copy)
+				local var9 = var2[p3](var2)
+				local var10 = getNewLayerToVariables()
+				var4(function(p10)
+					-- upvalues: var10 (ref)
+					return if not next(var10) == not next(p10) then p10 else var10
 				end)
-				var11(var20)
+				var6(var9)
 			end)
-			local var16 = var5[p2](var5)
-			local var17 = getNewLayerToVariables()
-			var9(function(p11)
-				-- upvalues: var17 (ref)
-				return if not next(var17) == not next(p11) then p11 else var17
+			local var9 = var2[p3](var2)
+			local var10 = getNewLayerToVariables()
+			var4(function(p10)
+				-- upvalues: var10 (ref)
+				return if not next(var10) == not next(p10) then p10 else var10
 			end)
-			var11(var16)
+			var6(var9)
 			
 			return function()
-				-- upvalues: var15 (ref)
-				if var15 ~= nil then
-					var15:Disconnect()
+				-- upvalues: var8 (ref)
+				if var8 ~= nil then
+					var8:Disconnect()
 				end
 			end
-		end, { var5, var12 })
-		local var13 = usePreviousModule(var10) or Enum.IXPLoadingStatus.None
+		end, { var2, var7 })
+		local var8 = usePreviousModule(var5) or Enum.IXPLoadingStatus.None
 		reactModule.useEffect(function()
-			-- upvalues: p8 (write), var5 (ref), var10 (ref), var13 (ref), p6 (ref), p5 (copy), p4 (copy)
-			if p8 and var5 ~= nil and (var10 == Enum.IXPLoadingStatus.Initialized and var13 ~= Enum.IXPLoadingStatus.Initialized) then
-				for i, v in ipairs(p6) do
-					if var5[p5](var5, v) == Enum.IXPLoadingStatus.Initialized then
-						var5[p4](var5, v)
+			-- upvalues: p9 (write), var2 (ref), var5 (ref), var8 (ref), p7 (ref), p6 (copy), p5 (copy)
+			if p9 and var2 ~= nil and (var5 == Enum.IXPLoadingStatus.Initialized and var8 ~= Enum.IXPLoadingStatus.Initialized) then
+				for i, v in ipairs(p7) do
+					if var2[p6](var2, v) == Enum.IXPLoadingStatus.Initialized then
+						var2[p5](var2, v)
 					end
 				end
 			end
 		end, {
+			var2,
+			var7,
+			p9,
 			var5,
-			var12,
-			p8,
-			var10,
-			var13
+			var8
 		})
 		
-		return p7(var8)
+		return p8(var3)
 	end
 end

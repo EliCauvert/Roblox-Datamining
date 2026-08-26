@@ -1,8 +1,8 @@
-﻿return function(p0, p1)
+﻿return function(p1, p2)
 	local t = {}
 	
-	for i, v in p0 do
-		local var1 = if p1 then p1[v] else nil
+	for i, v in p1 do
+		local var1 = if p2 then p2[v] else nil
 		
 		if var1 == 0 then
 			table.insert(t, `{v} (must be empty)`)

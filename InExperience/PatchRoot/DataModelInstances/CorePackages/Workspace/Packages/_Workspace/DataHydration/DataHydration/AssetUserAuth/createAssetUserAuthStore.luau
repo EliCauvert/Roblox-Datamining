@@ -16,131 +16,131 @@ return function(value)
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), fetchAssetUserAuthModule (ref), promiseModule (ref), ALWAYS_REFRESH (ref)
 	local value_1 = value or {}
 	local t = { network = value_1.network, baseUrl = value_1.baseUrl }
-	local var8 = createDataCacheModule()
-	local var9 = createDataResolverModule({
+	local var1 = createDataCacheModule()
+	local var2 = createDataResolverModule({
 		supportsMultiGet = false,
-		cache = var8,
-		fetchFn = function(p0, _)
+		cache = var1,
+		fetchFn = function(p1, _)
 			-- upvalues: fetchAssetUserAuthModule (copy), t (ref)
-			return fetchAssetUserAuthModule.fetchOperation(p0, t)
+			return fetchAssetUserAuthModule.fetchOperation(p1, t)
 		end
 	})
 	
 	local function seedAndReturn(p1)
-		-- upvalues: var8 (ref)
+		-- upvalues: var1 (ref)
 		local path = p1.path
 		
 		if typeof(path) == "string" and #path > 0 then
-			var8.updateItem(string.match(path, "operations/(.+)$") or path, p1)
+			var1.updateItem(string.match(path, "operations/(.+)$") or path, p1)
 		end
 		return p1
 	end
 	
 	return {
-		patchAssetIcon = function(value, p2)
-			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), var8 (ref)
-			return fetchAssetUserAuthModule.patchAssetIcon(value, p2, t):andThen(function(p3)
-				-- upvalues: var8 (copy)
-				local path = p3.path
+		patchAssetIcon = function(value, p1)
+			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), var1 (ref)
+			return fetchAssetUserAuthModule.patchAssetIcon(value, p1, t):andThen(function(p2)
+				-- upvalues: var1 (copy)
+				local path = p2.path
 				
 				if typeof(path) == "string" and #path > 0 then
-					var8.updateItem(string.match(path, "operations/(.+)$") or path, p3)
+					var1.updateItem(string.match(path, "operations/(.+)$") or path, p2)
 				end
-				return p3
+				return p2
 			end)
 		end,
-		updateIcon = function(p4, p5)
+		updateIcon = function(p1, p2)
 			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), seedAndReturn (ref)
-			return fetchAssetUserAuthModule.updateIcon(p4, p5, t):andThen(seedAndReturn)
+			return fetchAssetUserAuthModule.updateIcon(p1, p2, t):andThen(seedAndReturn)
 		end,
-		getPreviews = function(p6)
+		getPreviews = function(p1)
 			-- upvalues: fetchAssetUserAuthModule (copy), t (ref)
-			return fetchAssetUserAuthModule.getPreviews(p6, t)
+			return fetchAssetUserAuthModule.getPreviews(p1, t)
 		end,
-		updatePreviews = function(p7, p8)
+		updatePreviews = function(p1, p2)
 			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), seedAndReturn (ref)
-			return fetchAssetUserAuthModule.updatePreviews(p7, p8, t):andThen(seedAndReturn)
+			return fetchAssetUserAuthModule.updatePreviews(p1, p2, t):andThen(seedAndReturn)
 		end,
-		createImageAsset = function(value, p9, p10)
+		createImageAsset = function(value, p1, p2)
 			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), seedAndReturn (ref)
-			return fetchAssetUserAuthModule.createImageAsset(value, p9, p10, t):andThen(seedAndReturn)
+			return fetchAssetUserAuthModule.createImageAsset(value, p1, p2, t):andThen(seedAndReturn)
 		end,
-		pollUntilDone = function(p11)
-			-- upvalues: promiseModule (copy), fetchAssetUserAuthModule (copy), t (ref), var8 (ref)
-			local var11
+		pollUntilDone = function(p1)
+			-- upvalues: promiseModule (copy), fetchAssetUserAuthModule (copy), t (ref), var1 (ref)
+			local var3
 			local _ = nil
 			
-			if typeof(p11) == "string" then
-				var11 = p11
+			if typeof(p1) == "string" then
+				var3 = p1
 			else
-				local path = p11.path or ""
-				var11 = string.match(path, "operations/(.+)$") or (p11.operationId or path)
+				local path = p1.path or ""
+				var3 = string.match(path, "operations/(.+)$") or (p1.operationId or path)
 			end
-			return promiseModule.new(function(p12, p13)
-				-- upvalues: var11 (write), fetchAssetUserAuthModule (copy), t (copy), var8 (copy)
-				local var13 = 0
-				local var14 = 0
+			return promiseModule.new(function(p2, p3)
+				-- upvalues: var3 (write), fetchAssetUserAuthModule (copy), t (copy), var1 (copy)
+				local var4 = 0
+				local var5 = 0
 				
 				local function poll()
-					-- upvalues: var13 (write), var11 (copy), fetchAssetUserAuthModule (copy), t (copy), var8 (copy), var14 (write), p13 (ref), p12 (ref), poll (ref)
-					var13 += 1
-					fetchAssetUserAuthModule.fetchOperation(var11, t):andThen(function(p16)
-						-- upvalues: var8 (copy), var11 (ref)
-						var8.updateItem(var11, p16)
+					-- upvalues: var4 (write), var3 (copy), fetchAssetUserAuthModule (copy), t (copy), var1 (copy), var5 (write), p3 (ref), p2 (ref), poll (ref)
+					var4 += 1
+					fetchAssetUserAuthModule.fetchOperation(var3, t):andThen(function(p4)
+						-- upvalues: var1 (copy), var3 (ref)
+						var1.updateItem(var3, p4)
 						
-						return p16
-					end):andThen(function(p15)
-						-- upvalues: var14 (copy), p13 (copy), p12 (copy), var13 (copy), var11 (copy), poll (copy)
-						var14 = 0
+						return p4
+					end):andThen(function(p4)
+						-- upvalues: var5 (copy), p3 (copy), p2 (copy), var4 (copy), var3 (copy), poll (copy)
+						var5 = 0
 						
-						if p15.done then
-							if p15.error then
-								p13(p15.error.message or "Operation failed")
+						if p4.done then
+							if p4.error then
+								p3(p4.error.message or "Operation failed")
 								
 								return
 							end
-							p12({ status = "done", operation = p15 })
+							p2({ status = "done", operation = p4 })
 							
 							return
-						elseif var13 >= 30 then
-							p12({ status = "timed_out", operationId = var11 })
+						elseif var4 >= 30 then
+							p2({ status = "timed_out", operationId = var3 })
 							
 							return
 						end
 						task.delay(2, poll)
-					end):catch(function(p14)
-						-- upvalues: var14 (copy), poll (copy), p13 (copy)
-						var14 += 1
+					end):catch(function(p4)
+						-- upvalues: var5 (copy), poll (copy), p3 (copy)
+						var5 += 1
 						
-						if var14 <= 3 then
-							task.delay(math.pow(2, var14 - 1) * 2, poll)
+						if var5 <= 3 then
+							task.delay(math.pow(2, var5 - 1) * 2, poll)
 							
 							return
 						end
-						p13(p14)
+						p3(p4)
 					end)
 				end
 				
 				poll()
 			end)
 		end,
-		getOperation = var9.getCachedItem,
-		fetchOperation = var9.fetchItem,
-		getAndFetchOperation = function(p17)
-			-- upvalues: var9 (ref), ALWAYS_REFRESH (copy)
-			return var9.getAndFetchItem(p17, ALWAYS_REFRESH)
+		getOperation = var2.getCachedItem,
+		fetchOperation = var2.fetchItem,
+		getAndFetchOperation = function(p1)
+			-- upvalues: var2 (ref), ALWAYS_REFRESH (copy)
+			return var2.getAndFetchItem(p1, ALWAYS_REFRESH)
 		end,
-		refreshOperation = function(p18)
-			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), var8 (ref)
-			return fetchAssetUserAuthModule.fetchOperation(p18, t):andThen(function(p19)
-				-- upvalues: var8 (copy), p18 (ref)
-				var8.updateItem(p18, p19)
+		refreshOperation = function(p1)
+			-- upvalues: fetchAssetUserAuthModule (copy), t (ref), var1 (ref)
+			return fetchAssetUserAuthModule.fetchOperation(p1, t):andThen(function(p2)
+				-- upvalues: var1 (copy), p1 (ref)
+				var1.updateItem(p1, p2)
 				
-				return p19
+				return p2
 			end)
 		end,
-		updateOperation = var8.updateItem,
-		clear = var9.clear,
-		dispose = var9.dispose
+		updateOperation = var1.updateItem,
+		clear = var2.clear,
+		dispose = var2.dispose
 	}
 end

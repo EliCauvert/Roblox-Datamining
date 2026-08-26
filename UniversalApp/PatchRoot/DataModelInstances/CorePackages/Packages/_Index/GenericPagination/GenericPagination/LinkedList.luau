@@ -1,9 +1,9 @@
 ﻿local t = {}
 t.__index = t
 
-function t.createNode(p0)
+function t.createNode(p1)
 	-- upvalues: t (ref)
-	local t_1 = { previous = nil, next = nil, value = p0 }
+	local t_1 = { previous = nil, next = nil, value = p1 }
 	setmetatable(t_1, t)
 	
 	return t_1
@@ -22,15 +22,15 @@ function t.CreateNext(p1, p2)
 	return t_1
 end
 
-function t.CreatePrevious(p3, p4)
+function t.CreatePrevious(p1, p2)
 	-- upvalues: t (ref)
-	local t_1 = { previous = p3.previous, next = p3, value = p4 or {} }
+	local t_1 = { previous = p1.previous, next = p1, value = p2 or {} }
 	
-	if p3.previous then
-		p3.previous.next = t_1
+	if p1.previous then
+		p1.previous.next = t_1
 	end
 	setmetatable(t_1, t)
-	p3.previous = t_1
+	p1.previous = t_1
 	
 	return t_1
 end

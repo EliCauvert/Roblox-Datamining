@@ -39,8 +39,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				Gradient = reactModule.createElement("UIGradient", {
 					Transparency = numberSequence,
 					Color = colorSequence,
-					Rotation = var1.progress:map(function(p1)
-						return math.clamp(p1 * 360, 180, 360)
+					Rotation = var1.progress:map(function(p3)
+						return math.clamp(p3 * 360, 180, 360)
 					end)
 				})
 			})
@@ -59,8 +59,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				Gradient = reactModule.createElement("UIGradient", {
 					Transparency = numberSequence,
 					Color = colorSequence,
-					Rotation = var1.progress:map(function(p1)
-						return math.clamp(p1 * 360, 0, 180)
+					Rotation = var1.progress:map(function(p3)
+						return math.clamp(p3 * 360, 0, 180)
 					end)
 				})
 			})

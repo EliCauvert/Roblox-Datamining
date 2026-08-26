@@ -13,25 +13,25 @@ local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreG
 local fFlagTopBarSignalizeKeepOutAreas = coreGuiCommonModule.Flags.FFlagTopBarSignalizeKeepOutAreas
 local fFlagTopBarRefactor = require(corePackagesService.Workspace.Packages.InExperienceTopBar).Flags.FFlagTopBarRefactor
 
-local function MenuIconWrapper(p0)
+local function MenuIconWrapper(p1)
 	-- upvalues: fFlagTopBarSignalizeKeepOutAreas (ref), coreGuiCommonModule (ref), useSelector (ref), fFlagTopBarRefactor (ref), reactModule (ref), menuIconModule_1 (ref), menuIconModule (ref)
-	return if fFlagTopBarRefactor then reactModule.createElement(menuIconModule_1, { showBadgeOver12 = p0.showBadgeOver12 }) else reactModule.createElement(menuIconModule, {
-		layout = p0.layout,
-		iconScale = if useSelector(function(p1)
-			return if p1 and p1.displayOptions then p1.displayOptions.menuOpen else false
+	return if fFlagTopBarRefactor then reactModule.createElement(menuIconModule_1, { showBadgeOver12 = p1.showBadgeOver12 }) else reactModule.createElement(menuIconModule, {
+		layout = p1.layout,
+		iconScale = if useSelector(function(p2)
+			return if p2 and p2.displayOptions then p2.displayOptions.menuOpen else false
 		end) then 1.5 else 1,
-		showBadgeOver12 = p0.showBadgeOver12,
+		showBadgeOver12 = p1.showBadgeOver12,
 		onAreaChanged = if fFlagTopBarSignalizeKeepOutAreas then (if fFlagTopBarSignalizeKeepOutAreas then coreGuiCommonModule.Stores.GetKeepOutAreasStore(false) else nil).setKeepOutArea else nil
 	})
 end
 
-return reactModule.memo(function(p2)
+return reactModule.memo(function(p1)
 	-- upvalues: panel3DInSpatialUI (ref), reactModule (ref), panelType (ref), fFlagTopBarRefactor (ref), foundationModule (ref), MenuIconWrapper (ref), unibarModule (ref)
 	return if panel3DInSpatialUI then reactModule.createElement(panel3DInSpatialUI, {
 		requireCanvasGroup = true,
 		panelType = panelType.BottomBar,
 		renderFunction = function()
-			-- upvalues: reactModule (copy), fFlagTopBarRefactor (copy), foundationModule (copy), MenuIconWrapper (copy), p2 (ref), unibarModule (copy)
+			-- upvalues: reactModule (copy), fFlagTopBarRefactor (copy), foundationModule (copy), MenuIconWrapper (copy), p1 (ref), unibarModule (copy)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -53,14 +53,14 @@ return reactModule.memo(function(p2)
 						DominantAxis = Enum.DominantAxis.Height
 					}
 				}, {
-					MenuIcon = reactModule.createElement(MenuIconWrapper, { layout = 1, showBadgeOver12 = p2.showBadgeOver12 })
+					MenuIcon = reactModule.createElement(MenuIconWrapper, { layout = 1, showBadgeOver12 = p1.showBadgeOver12 })
 				}) else reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Size = UDim2.new(0, 0, 1, 0),
 					AutomaticSize = Enum.AutomaticSize.X
 				}, {
-					MenuIcon = reactModule.createElement(MenuIconWrapper, { layout = 1, showBadgeOver12 = p2.showBadgeOver12 })
+					MenuIcon = reactModule.createElement(MenuIconWrapper, { layout = 1, showBadgeOver12 = p1.showBadgeOver12 })
 				}),
 				UnibarFrame = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

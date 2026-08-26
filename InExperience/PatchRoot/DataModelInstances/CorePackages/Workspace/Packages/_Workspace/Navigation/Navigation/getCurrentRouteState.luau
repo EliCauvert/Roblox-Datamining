@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.types)
 local getCurrentNavigationStateModule = require(script.Parent.getCurrentNavigationState)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getCurrentNavigationStateModule (ref)
-	return if p0 then if p0.state then getCurrentNavigationStateModule(p0.state) else nil else nil
+	return if p1 then if p1.state then getCurrentNavigationStateModule(p1.state) else nil else nil
 end

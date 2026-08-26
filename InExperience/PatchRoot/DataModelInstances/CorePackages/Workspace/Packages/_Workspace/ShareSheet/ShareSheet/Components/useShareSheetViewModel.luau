@@ -15,55 +15,55 @@ local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemet
 local _ = require(script.Parent.ShareSheetView)
 local useShareSheetSelectionModule = require(script.Parent.useShareSheetSelection)
 
-local function _(p0)
-	local titleForViewer = p0.titleForViewer
+local function _(p1)
+	local titleForViewer = p1.titleForViewer
 	
-	return if titleForViewer and titleForViewer ~= "" then titleForViewer else p0.title or ""
+	return if titleForViewer and titleForViewer ~= "" then titleForViewer else p1.title or ""
 end
 
 local _ = function(vectorA, vectorB)
-	local var11 = vectorB - 1
+	local var1 = vectorB - 1
 	
-	return if var11 <= 0 then vectorA elseif var11 == 1 then `{vectorA} + 1 other` else `{vectorA} + {var11} others`
+	return if var1 <= 0 then vectorA elseif var1 == 1 then `{vectorA} + 1 other` else `{vectorA} + {var1} others`
 end
 
 return function(p1)
 	-- upvalues: signalsReactModule (ref), getExternalChatMessageSenderStoreModule (ref), useConversationList (ref), useShareSheetSelectionModule (ref), useExternalChatConversationEligibilityModule (ref), shareSheetConstantsModule (ref), reactModule (ref), useLocalization (ref), fetchConversationListPageToSignalsModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetTelemetryModule (ref), getAppFeaturePolicies (ref)
-	local var24
-	local var12 = signalsReactModule.useSignalState(getExternalChatMessageSenderStoreModule().getSender)
-	local var13 = var12 ~= nil
-	local var14 = useConversationList(var13)
-	local var15 = useShareSheetSelectionModule()
-	local listStatus = var14.listStatus
-	local var16 = #var14.items > 0
-	local var17 = var13 and (not var16 and (listStatus.error == nil and (if listStatus.isFetchingConversations ~= true then listStatus.hasFetchedInitialPage ~= true else true)))
-	local var18 = useExternalChatConversationEligibilityModule({
-		conversations = var14.items,
-		isActive = p1.isOpen == true and ((var12 ~= nil and var12.isAvailable) and var16),
-		isGroupChatEnabled = if var12 then var12.isGroupChatEnabled else false,
+	local var1
+	local var2 = signalsReactModule.useSignalState(getExternalChatMessageSenderStoreModule().getSender)
+	local var3 = var2 ~= nil
+	local var4 = useConversationList(var3)
+	local var5 = useShareSheetSelectionModule()
+	local listStatus = var4.listStatus
+	local var6 = #var4.items > 0
+	local var7 = var3 and (not var6 and (listStatus.error == nil and (if listStatus.isFetchingConversations ~= true then listStatus.hasFetchedInitialPage ~= true else true)))
+	local var8 = useExternalChatConversationEligibilityModule({
+		conversations = var4.items,
+		isActive = p1.isOpen == true and ((var2 ~= nil and var2.isAvailable) and var6),
+		isGroupChatEnabled = if var2 then var2.isGroupChatEnabled else false,
 		maxConversationCount = shareSheetConstantsModule.FIntShareSheetMaxConversations
 	})
-	local var19, var20 = reactModule.useState(false)
-	local var21 = reactModule.useRef(false)
-	local var22 = useLocalization({
+	local var9, var10 = reactModule.useState(false)
+	local var11 = reactModule.useRef(false)
+	local var12 = useLocalization({
 		send = "CommonUI.Features.Action.Send",
 		share = "Feature.SocialShare.Action.Share"
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), fetchConversationListPageToSignalsModule (copy)
-		if var13 then
+		-- upvalues: var3 (ref), fetchConversationListPageToSignalsModule (copy)
+		if var3 then
 			fetchConversationListPageToSignalsModule()
 		end
-	end, { var13 })
-	local var23 = if fFlagShareSheetTelemetryRefactorModule then reactModule.useCallback(function()
+	end, { var3 })
+	local var13 = if fFlagShareSheetTelemetryRefactorModule then reactModule.useCallback(function()
 		-- upvalues: p1 (ref), shareSheetTelemetryModule (copy)
 		p1.onCloseWithReason(shareSheetTelemetryModule.CloseReason.UserDismissed)
 	end, { p1.onCloseWithReason }) else p1.onClose
 	local _ = nil
-	local onConversationActivated = var15.onConversationActivated
+	local onConversationActivated = var5.onConversationActivated
 	
 	if fFlagShareSheetTelemetryRefactorModule then
-		var24 = reactModule.useCallback(function()
+		var1 = reactModule.useCallback(function()
 			-- upvalues: shareSheetTelemetryModule (copy), p1 (ref)
 			shareSheetTelemetryModule.logInteraction({
 				context = p1.context,
@@ -72,38 +72,38 @@ return function(p1)
 			})
 		end, { p1.context, p1.telemetryId })
 		onConversationActivated = reactModule.useCallback(function(p2)
-			-- upvalues: var15 (ref), shareSheetTelemetryModule (copy), p1 (ref)
+			-- upvalues: var5 (ref), shareSheetTelemetryModule (copy), p1 (ref)
 			shareSheetTelemetryModule.logInteraction({
 				context = p1.context,
 				telemetryId = p1.telemetryId or "",
-				interactionType = if var15.selectedConversationIds[p2] then "conversationDeselected" else "conversationSelected",
+				interactionType = if var5.selectedConversationIds[p2] then "conversationDeselected" else "conversationSelected",
 				requestedConversationId = p2
 			})
-			var15.onConversationActivated(p2)
+			var5.onConversationActivated(p2)
 		end, {
 			p1.context,
 			p1.telemetryId,
-			var15.onConversationActivated,
-			var15.selectedConversationIds
+			var5.onConversationActivated,
+			var5.selectedConversationIds
 		})
 	else
-		var24 = nil
+		var1 = nil
 	end
 	return {
 		canShareLink = getAppFeaturePolicies().getEligibleForExternalContentSharing(),
-		conversationEligibility = var18,
+		conversationEligibility = var8,
 		context = p1.context,
 		isOpen = p1.isOpen == true,
-		isSending = var19,
-		isSocialRowLoading = var12 ~= nil and (var12.isAvailable and var17),
+		isSending = var9,
+		isSocialRowLoading = var2 ~= nil and (var2.isAvailable and var7),
 		messagePlaceholder = p1.messagePlaceholder or "Share a message",
-		onComposerFocused = var24,
+		onComposerFocused = var1,
 		onConversationActivated = onConversationActivated,
-		onClose = var23,
-		onSendActivated = reactModule.useCallback(function(p3)
-			-- upvalues: var21 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy), p1 (ref), var12 (ref), var14 (ref), var15 (ref), var20 (ref)
-			if var21.current then return end
-			if fFlagShareSheetTelemetryRefactorModule and string.find(p3, "%S") ~= nil then
+		onClose = var13,
+		onSendActivated = reactModule.useCallback(function(p2)
+			-- upvalues: var11 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy), p1 (ref), var2 (ref), var4 (ref), var5 (ref), var10 (ref)
+			if var11.current then return end
+			if fFlagShareSheetTelemetryRefactorModule and string.find(p2, "%S") ~= nil then
 				shareSheetTelemetryModule.logInteraction({
 					context = p1.context,
 					telemetryId = p1.telemetryId or "",
@@ -112,58 +112,58 @@ return function(p1)
 			end
 			local t = {}
 			
-			if var12 ~= nil then
-				for i, v in var14.items do
-					if var15.selectedConversationIds[v.id] and var12.canSendToConversation(v) then
+			if var2 ~= nil then
+				for i, v in var4.items do
+					if var5.selectedConversationIds[v.id] and var2.canSendToConversation(v) then
 						table.insert(t, v)
 					end
 				end
 			end
-			var15.onSendActivated()
+			var5.onSendActivated()
 			
-			if var12 == nil or #t == 0 then return end
-			var21.current = true
-			var20(true)
-			local var26 = false
-			local var27 = false
-			local var28 = false
+			if var2 == nil or #t == 0 then return end
+			var11.current = true
+			var10(true)
+			local var14 = false
+			local var15 = false
+			local var16 = false
 			local t_1 = {}
-			local var30 = if p3 == "" then p1.url else `{p1.url} {p3}`
+			local var17 = if p2 == "" then p1.url else `{p1.url} {p2}`
 			
 			local function finishSending()
-				-- upvalues: var21 (copy), var20 (copy), var27 (write), var28 (write), p1 (copy), var12 (copy), t (ref), t_1 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
-				var21.current = false
-				var20(false)
+				-- upvalues: var11 (copy), var10 (copy), var15 (write), var16 (write), p1 (copy), var2 (copy), t (ref), t_1 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
+				var11.current = false
+				var10(false)
 				
-				if not var27 and not var28 then return end
+				if not var15 and not var16 then return end
 				if p1.onShareSendResultSnackbar then
-					local var37
-					local navigateToChat = var12.navigateToChat
-					local var35 = if #t == 1 and #t_1 == 1 then t_1[1].conversationId else nil
+					local var18
+					local navigateToChat = var2.navigateToChat
+					local var19 = if #t == 1 and #t_1 == 1 then t_1[1].conversationId else nil
 					local onShareSendResultSnackbar = p1.onShareSendResultSnackbar
 					local t_2 = {
-						action = if var28 and navigateToChat then {
+						action = if var16 and navigateToChat then {
 							text = "View",
 							onActivated = function()
-								-- upvalues: navigateToChat (ref), var35 (ref)
-								navigateToChat(var35)
+								-- upvalues: navigateToChat (ref), var19 (ref)
+								navigateToChat(var19)
 							end
 						} else nil
 					}
 					
-					if not var28 then
-						var37 = if #t == 1 then "Message can't be sent" else "Messages can't be sent"
+					if not var16 then
+						var18 = if #t == 1 then "Message can't be sent" else "Messages can't be sent"
 					elseif p1.formatSuccessSnackbarText then
-						local var38 = p1.formatSuccessSnackbarText(t_1)
-						local var39 = #t_1 - 1
-						var37 = if var39 <= 0 then var38 elseif var39 == 1 then `{var38} + 1 other` else `{var38} + {var39} others`
+						local var20 = p1.formatSuccessSnackbarText(t_1)
+						local var21 = #t_1 - 1
+						var18 = if var21 <= 0 then var20 elseif var21 == 1 then `{var20} + 1 other` else `{var20} + {var21} others`
 					else
-						var37 = if #t == 1 then "Message was sent" else "Messages were sent"
+						var18 = if #t == 1 then "Message was sent" else "Messages were sent"
 					end
-					t_2.title = var37
+					t_2.title = var18
 					onShareSendResultSnackbar(t_2)
 				end
-				if var28 then
+				if var16 then
 					if fFlagShareSheetTelemetryRefactorModule then
 						p1.onCloseWithReason(shareSheetTelemetryModule.CloseReason.SendSuccess)
 						
@@ -178,55 +178,55 @@ return function(p1)
 				end
 			end
 			
-			local function send(p4)
-				-- upvalues: var12 (copy), var30 (ref), var28 (write), t_1 (ref), var27 (write), var26 (write)
-				return var12.sendToConversation(p4, var30):catch(function()
+			local function send(p3)
+				-- upvalues: var2 (copy), var17 (ref), var16 (write), t_1 (ref), var15 (write), var14 (write)
+				return var2.sendToConversation(p3, var17):catch(function()
 					return { status = "failure" }
-				end):andThen(function(p5)
-					-- upvalues: var28 (copy), t_1 (copy), p4 (ref), var27 (copy), var26 (copy)
-					if p5.status == "success" and p5.conversationId then
-						var28 = true
-						local var40 = t_1
-						local t = { conversationId = p5.conversationId }
-						local var42 = p4
-						local titleForViewer = var42.titleForViewer
-						t.displayName = if titleForViewer and titleForViewer ~= "" then titleForViewer else var42.title or ""
-						table.insert(var40, t)
+				end):andThen(function(p4)
+					-- upvalues: var16 (copy), t_1 (copy), p3 (ref), var15 (copy), var14 (copy)
+					if p4.status == "success" and p4.conversationId then
+						var16 = true
+						local var18 = t_1
+						local t = { conversationId = p4.conversationId }
+						local var19 = p3
+						local titleForViewer = var19.titleForViewer
+						t.displayName = if titleForViewer and titleForViewer ~= "" then titleForViewer else var19.title or ""
+						table.insert(var18, t)
 						
 						return
-					elseif p5.status == "failure" then
-						var27 = true
+					elseif p4.status == "failure" then
+						var15 = true
 						
 						return
-					elseif p5.status == "declined" then
-						var26 = true
+					elseif p4.status == "declined" then
+						var14 = true
 					end
 				end)
 			end
 			
-			local var33 = send(t[1])
+			local var18 = send(t[1])
 			
 			for i = 2, #t do
-				local var34 = t[i]
-				var33 = var33:andThen(function()
-					-- upvalues: var26 (write), send (ref), var34 (ref)
-					if var26 then
+				local var19 = t[i]
+				var18 = var18:andThen(function()
+					-- upvalues: var14 (write), send (ref), var19 (ref)
+					if var14 then
 						return
 					end
-					return send(var34)
+					return send(var19)
 				end)
 			end
-			var33:andThen(finishSending)
+			var18:andThen(finishSending)
 		end, {
-			var14.items, var12, p1.context, p1.formatSuccessSnackbarText, p1.onClose,
+			var4.items, var2, p1.context, p1.formatSuccessSnackbarText, p1.onClose,
 			p1.onCloseWithReason, p1.onShareSendResultSnackbar, p1.telemetryId, p1.url,
-			var15.onSendActivated, var15.selectedConversationIds
+			var5.onSendActivated, var5.selectedConversationIds
 		}),
-		selectedConversationIds = var15.selectedConversationIds,
-		sendLabel = var22.send,
-		shareLabel = var22.share,
+		selectedConversationIds = var5.selectedConversationIds,
+		sendLabel = var12.send,
+		shareLabel = var12.share,
 		telemetryId = p1.telemetryId,
-		shouldShowSocialRow = var12 ~= nil and (var12.isAvailable and (var16 or var17)),
+		shouldShowSocialRow = var2 ~= nil and (var2.isAvailable and (var6 or var7)),
 		url = p1.url
 	}
 end

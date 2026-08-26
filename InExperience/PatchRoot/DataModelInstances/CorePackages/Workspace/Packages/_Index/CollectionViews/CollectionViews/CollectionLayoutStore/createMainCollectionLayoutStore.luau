@@ -8,19 +8,19 @@ local createCollectionLayoutStoreModule = require(script.Parent.createCollection
 return function()
 	-- upvalues: displayModule (ref), signalsModule (ref), createCollectionLayoutStoreModule (ref)
 	local displayStore = displayModule.GetDisplayStore(false)
-	local var5, var6 = signalsModule.createSignal(nil)
-	local var7 = createCollectionLayoutStoreModule(signalsModule.createComputed(function(p0)
-		-- upvalues: var5 (ref), displayStore (ref)
-		local var8 = var5(p0)
+	local var1, var2 = signalsModule.createSignal(nil)
+	local var3 = createCollectionLayoutStoreModule(signalsModule.createComputed(function(p1)
+		-- upvalues: var1 (ref), displayStore (ref)
+		local var4 = var1(p1)
 		
-		return var8 or displayStore.getViewportSize(p0).X
+		return var4 or displayStore.getViewportSize(p1).X
 	end))
 	
 	return {
-		getContainerWidth = var7.getContainerWidth,
-		getDesignSpaceContainerWidth = var7.getDesignSpaceContainerWidth,
-		getItemsPerRow = var7.getItemsPerRow,
-		getNumItemsForAllCategories = var7.getNumItemsForAllCategories,
-		setDefaultContentRegionWidth = var6
+		getContainerWidth = var3.getContainerWidth,
+		getDesignSpaceContainerWidth = var3.getDesignSpaceContainerWidth,
+		getItemsPerRow = var3.getItemsPerRow,
+		getNumItemsForAllCategories = var3.getNumItemsForAllCategories,
+		setDefaultContentRegionWidth = var2
 	}
 end

@@ -16,9 +16,9 @@ local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuil
 local mediaSelectorModule = require(script.Parent.MediaSelector)
 local _ = require(script.Parent.types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), mediaSelectorModule (ref)
-	local var7 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	
 	return reactModule.createElement(view, { tag = "col size-full bg-surface-0" }, {
 		Header = reactModule.createElement(view, {
@@ -33,14 +33,14 @@ return function(p0)
 				isCircular = true,
 				icon = if fFlagBuildDesktopReadinessModule then iconName.ChevronLargeLeft else iconName.ArrowLargeLeft,
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var7 (ref), p0 (ref)
-					if var7.current then
-						var7.current()
+					-- upvalues: var1 (ref), p1 (ref)
+					if var1.current then
+						var1.current()
 						
 						return
 					end
-					p0.onClose()
-				end, { p0.onClose }),
+					p1.onClose()
+				end, { p1.onClose }),
 				size = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium,
 				variant = buttonVariant.Utility
 			}),
@@ -58,9 +58,9 @@ return function(p0)
 			}
 		}, {
 			MediaSelector = reactModule.createElement(mediaSelectorModule, {
-				universeId = p0.universeId,
-				onBack = p0.onClose,
-				backHandlerRef = var7
+				universeId = p1.universeId,
+				onBack = p1.onClose,
+				backHandlerRef = var1
 			})
 		})
 	})

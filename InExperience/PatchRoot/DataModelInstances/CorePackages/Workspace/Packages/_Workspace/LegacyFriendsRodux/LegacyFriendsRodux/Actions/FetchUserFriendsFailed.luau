@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("LegacyFriendsRodux").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1)
-	return { userId = p0, response = p1 }
+﻿return require(script:FindFirstAncestor("LegacyFriendsRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
+	return { userId = p1, response = p2 }
 end)

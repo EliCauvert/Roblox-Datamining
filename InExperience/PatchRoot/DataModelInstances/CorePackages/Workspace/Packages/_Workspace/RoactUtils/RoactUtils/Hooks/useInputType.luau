@@ -4,28 +4,28 @@ local reactModule = require(parent.React)
 local useExternalEventModule = require(script.Parent.useExternalEvent)
 local getInputGroup = require(parent.InputType).getInputGroup
 
-return function(p0)
+return function(p1)
 	-- upvalues: userInputService (ref), getInputGroup (ref), reactModule (ref), useExternalEventModule (ref)
-	p0 = p0 or userInputService
+	p1 = p1 or userInputService
 	
 	local function getLastInputType()
-		-- upvalues: p0 (ref), getInputGroup (copy)
-		return getInputGroup(p0:GetLastInputType())
+		-- upvalues: p1 (ref), getInputGroup (copy)
+		return getInputGroup(p1:GetLastInputType())
 	end
 	
-	local var5, var6 = reactModule.useState(getLastInputType)
-	useExternalEventModule(p0.LastInputTypeChanged, reactModule.useCallback(function(p1)
-		-- upvalues: getInputGroup (copy), var6 (ref)
-		local var7 = getInputGroup(p1)
+	local var1, var2 = reactModule.useState(getLastInputType)
+	useExternalEventModule(p1.LastInputTypeChanged, reactModule.useCallback(function(p2)
+		-- upvalues: getInputGroup (copy), var2 (ref)
+		local var3 = getInputGroup(p2)
 		
-		if var7 ~= nil then
-			var6(var7)
+		if var3 ~= nil then
+			var2(var3)
 		end
 	end))
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), getLastInputType (ref)
-		var6(getLastInputType())
+		-- upvalues: var2 (ref), getLastInputType (ref)
+		var2(getLastInputType())
 	end, {})
 	
-	return var5
+	return var1
 end

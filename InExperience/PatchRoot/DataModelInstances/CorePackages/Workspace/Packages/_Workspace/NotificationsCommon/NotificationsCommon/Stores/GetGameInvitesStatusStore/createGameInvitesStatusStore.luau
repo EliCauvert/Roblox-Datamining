@@ -4,24 +4,24 @@ local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScop
 
 return function()
 	-- upvalues: createSessionScopedSignal (ref)
-	local var0, var1 = createSessionScopedSignal({})
+	local var1, var2 = createSessionScopedSignal({})
 	
 	return {
-		getGameInvitesStatus = var0,
-		receivedUserInviteStatus = function(p0, p1)
-			-- upvalues: var1 (ref)
-			local var2 = tostring(p0)
-			var1(function(p2)
-				-- upvalues: var2 (ref), p1 (ref)
-				local cloned = table.clone(p2)
-				cloned[var2] = p1
+		getGameInvitesStatus = var1,
+		receivedUserInviteStatus = function(p1, p2)
+			-- upvalues: var2 (ref)
+			local var3 = tostring(p1)
+			var2(function(p3)
+				-- upvalues: var3 (ref), p2 (ref)
+				local cloned = table.clone(p3)
+				cloned[var3] = p2
 				
 				return cloned
 			end)
 		end,
 		reset = function()
-			-- upvalues: var1 (ref)
-			var1({})
+			-- upvalues: var2 (ref)
+			var2({})
 		end
 	}
 end

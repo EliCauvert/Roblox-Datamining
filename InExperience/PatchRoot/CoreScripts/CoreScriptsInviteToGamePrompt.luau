@@ -7,7 +7,7 @@ local modules = coreGuiService:WaitForChild("RobloxGui").Modules
 local settings = modules.Settings
 local shareGame = settings.Pages.ShareGame
 local getFFlagFixSettingshubImportOrderModule = require(modules.Flags.GetFFlagFixSettingshubImportOrder)
-local var6 = if not getFFlagFixSettingshubImportOrderModule() then require(settings.SettingsHub) else nil
+local var1 = if not getFFlagFixSettingshubImportOrderModule() then require(settings.SettingsHub) else nil
 local getFFlagEnableNewInviteMenuCustomizationModule = require(modules.Flags.GetFFlagEnableNewInviteMenuCustomization)
 local getFFlagEnableInvitePromptLoadingStateModule = require(modules.Flags.GetFFlagEnableInvitePromptLoadingState)
 local getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule = require(modules.Flags.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification)
@@ -36,32 +36,32 @@ local modalPrompt = require(shareGame.InviteToGamePrompt).new(coreGuiService):wi
 local apiGetCanSendAndCanCustomizeInvitesModule = require(shareGame.Thunks.ApiGetCanSendAndCanCustomizeInvites)
 local getCustomizedInvitePromptParamsModule = require(shareGame.getCustomizedInvitePromptParams)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: socialService (ref)
 	local ok, status = pcall(function()
-		-- upvalues: socialService (copy), p0 (ref)
-		return socialService:CanSendGameInviteAsync(p0)
+		-- upvalues: socialService (copy), p1 (ref)
+		return socialService:CanSendGameInviteAsync(p1)
 	end)
 	
 	return ok and status
 end
 
 socialService.PromptInviteRequested:Connect(function(p1, p2)
-	-- upvalues: getFStringGameInviteMenuLayer (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), luaEnableGameInviteModalInvitePromptV2 (ref), IXPServiceWrapper (ref), gameInviteInviteExperimentVariant (write), playersService (ref), getFFlagFixSettingshubImportOrderModule (ref), var6 (write), settings (ref), socialService (ref), gameInviteModalManager (write), getCustomizedInvitePromptTrigger (write), gameInviteConstants (write), gameInviteAnalyticsManager (write), getFFlagEnableNewInviteMenuCustomizationModule (ref), getFFlagEnableInvitePromptLoadingStateModule (ref), modalPrompt (ref), getCustomizedInvitePromptParamsModule (ref), apiGetCanSendAndCanCustomizeInvitesModule (ref)
-	local var15 = false
-	local var16 = getFStringGameInviteMenuLayer()
+	-- upvalues: getFStringGameInviteMenuLayer (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), luaEnableGameInviteModalInvitePromptV2 (ref), IXPServiceWrapper (ref), gameInviteInviteExperimentVariant (write), playersService (ref), getFFlagFixSettingshubImportOrderModule (ref), var1 (write), settings (ref), socialService (ref), gameInviteModalManager (write), getCustomizedInvitePromptTrigger (write), gameInviteConstants (write), gameInviteAnalyticsManager (write), getFFlagEnableNewInviteMenuCustomizationModule (ref), getFFlagEnableInvitePromptLoadingStateModule (ref), modalPrompt (ref), getCustomizedInvitePromptParamsModule (ref), apiGetCanSendAndCanCustomizeInvitesModule (ref)
+	local var2 = false
+	local var3 = getFStringGameInviteMenuLayer()
 	
 	if getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule() and luaEnableGameInviteModalInvitePromptV2 then
-		local var17 = IXPServiceWrapper:GetLayerData(var16)
-		IXPServiceWrapper:LogUserLayerExposure(var16)
-		var15 = (var17 and (if var17.inExperienceGameInviteUXRefresh2023 ~= gameInviteInviteExperimentVariant.UxRefresh then var17.inExperienceGameInviteUXRefresh2023 == gameInviteInviteExperimentVariant.InviteLimit else true)) == true
+		local var4 = IXPServiceWrapper:GetLayerData(var3)
+		IXPServiceWrapper:LogUserLayerExposure(var3)
+		var2 = (var4 and (if var4.inExperienceGameInviteUXRefresh2023 ~= gameInviteInviteExperimentVariant.UxRefresh then var4.inExperienceGameInviteUXRefresh2023 == gameInviteInviteExperimentVariant.InviteLimit else true)) == true
 	end
-	if var15 then
+	if var2 then
 		if p1 ~= playersService.LocalPlayer then return end
 		if getFFlagFixSettingshubImportOrderModule() then
-			var6 = require(settings.SettingsHub)
+			var1 = require(settings.SettingsHub)
 		end
-		if var6:GetVisibility() then
+		if var1:GetVisibility() then
 			if playersService and playersService.LocalPlayer then
 				socialService:InvokeGameInvitePromptClosed(playersService.LocalPlayer, {})
 			end
@@ -70,28 +70,28 @@ socialService.PromptInviteRequested:Connect(function(p1, p2)
 			p2 = p2 or nil
 			
 			if gameInviteModalManager then
-				local var19 = getCustomizedInvitePromptTrigger(p2)
+				local var5 = getCustomizedInvitePromptTrigger(p2)
 				
-				if var19 == gameInviteConstants.Triggers.DeveloperMultiple then
+				if var5 == gameInviteConstants.Triggers.DeveloperMultiple then
 					gameInviteAnalyticsManager:withButtonName(gameInviteAnalyticsManager.ButtonName.ModalPrompt)
 					gameInviteAnalyticsManager:inputShareGameEntryPoint()
-					gameInviteModalManager:openModal({ trigger = var19 }, p2)
+					gameInviteModalManager:openModal({ trigger = var5 }, p2)
 					
 					return
 				elseif getFFlagEnableNewInviteMenuCustomizationModule() then
 					if p1 ~= playersService.LocalPlayer then return end
-					local var20 = getFFlagEnableInvitePromptLoadingStateModule()
+					local var6 = getFFlagEnableInvitePromptLoadingStateModule()
 					
-					if var20 then
+					if var6 then
 						modalPrompt:show({ isLoading = true })
 					end
-					local var21 = getCustomizedInvitePromptParamsModule(p2 or nil, apiGetCanSendAndCanCustomizeInvitesModule)
+					local var7 = getCustomizedInvitePromptParamsModule(p2 or nil, apiGetCanSendAndCanCustomizeInvitesModule)
 					
-					if var21 then
-						modalPrompt:show(var21)
+					if var7 then
+						modalPrompt:show(var7)
 						
 						return
-					elseif var20 then
+					elseif var6 then
 						modalPrompt:hide()
 						
 						return

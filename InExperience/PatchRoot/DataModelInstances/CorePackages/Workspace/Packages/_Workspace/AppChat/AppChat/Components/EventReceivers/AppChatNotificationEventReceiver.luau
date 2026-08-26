@@ -14,96 +14,96 @@ local useChatIsVisibleModule = require(appChat.Hooks.useChatIsVisible)
 local inExperienceAppChatModalModule = require(appChat.App.InExperienceAppChatModal)
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local fFlagAppChatUnreadMessageCountStoreModule = require(appChat.Flags.FFlagAppChatUnreadMessageCountStore)
-local var11 = if fFlagAppChatUnreadMessageCountStoreModule then require(appChat.Stores.GetUnreadMessageCountStore) else nil
+local var1 = if fFlagAppChatUnreadMessageCountStoreModule then require(appChat.Stores.GetUnreadMessageCountStore) else nil
 local name = require(appChat.Logger):new(script.Name)
 
-return reactModule.memo(function(p0)
-	-- upvalues: useAnalyticsModule (ref), useUnreadMessagesDispatchModule (ref), useDispatch (ref), fFlagAppChatUnreadMessageCountStoreModule (ref), useSignalState (ref), var11 (ref), useSelector (ref), useChatIsVisibleModule (ref), reactModule (ref), inExperienceAppChatModalModule (ref), fFlagExpChatEnableFriendsTab (ref), name (ref), appChatNetworkingModule (ref), eventNamesModule (ref), useRealtimePlatformChatModule (ref), realtimeDeliveryModule (ref)
-	local var13 = useAnalyticsModule()
-	local var14 = useUnreadMessagesDispatchModule()
-	local var15 = useDispatch()
-	local var16 = if fFlagAppChatUnreadMessageCountStoreModule then useSignalState(var11(false).getUnreadMessageCount) else useSelector(function(p1)
-		return p1.ChatAppReducer.unreadMessageCount
+return reactModule.memo(function(p1)
+	-- upvalues: useAnalyticsModule (ref), useUnreadMessagesDispatchModule (ref), useDispatch (ref), fFlagAppChatUnreadMessageCountStoreModule (ref), useSignalState (ref), var1 (ref), useSelector (ref), useChatIsVisibleModule (ref), reactModule (ref), inExperienceAppChatModalModule (ref), fFlagExpChatEnableFriendsTab (ref), name (ref), appChatNetworkingModule (ref), eventNamesModule (ref), useRealtimePlatformChatModule (ref), realtimeDeliveryModule (ref)
+	local var2 = useAnalyticsModule()
+	local var3 = useUnreadMessagesDispatchModule()
+	local var4 = useDispatch()
+	local var5 = if fFlagAppChatUnreadMessageCountStoreModule then useSignalState(var1(false).getUnreadMessageCount) else useSelector(function(p2)
+		return p2.ChatAppReducer.unreadMessageCount
 	end)
-	local var17 = useChatIsVisibleModule()
-	local var18, var19 = reactModule.useState(function()
+	local var6 = useChatIsVisibleModule()
+	local var7, var8 = reactModule.useState(function()
 		-- upvalues: inExperienceAppChatModalModule (copy)
 		return inExperienceAppChatModalModule:getVisible()
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: inExperienceAppChatModalModule (copy), var19 (ref)
-		local eventConnection = inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(var19)
-		var19(inExperienceAppChatModalModule:getVisible())
+		-- upvalues: inExperienceAppChatModalModule (copy), var8 (ref)
+		local eventConnection = inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(var8)
+		var8(inExperienceAppChatModalModule:getVisible())
 		
 		return function()
 			-- upvalues: eventConnection (ref)
 			eventConnection:Disconnect()
 		end
 	end, {})
-	local var20 = if fFlagExpChatEnableFriendsTab and p0.isInExperience then var18 else var17
+	local var9 = if fFlagExpChatEnableFriendsTab and p1.isInExperience then var7 else var6
 	reactModule.useEffect(function()
-		-- upvalues: name (copy), var15 (ref), appChatNetworkingModule (copy), fFlagExpChatEnableFriendsTab (copy), p0 (ref), inExperienceAppChatModalModule (copy), var13 (ref), eventNamesModule (copy)
+		-- upvalues: name (copy), var4 (ref), appChatNetworkingModule (copy), fFlagExpChatEnableFriendsTab (copy), p1 (ref), inExperienceAppChatModalModule (copy), var2 (ref), eventNamesModule (copy)
 		name:debug("Fetching conversation metadata to get unread count")
-		var15(appChatNetworkingModule.rodux.GetConversationMetadata.API()):andThen(function(p3)
-			-- upvalues: name (copy), fFlagExpChatEnableFriendsTab (copy), p0 (copy), inExperienceAppChatModalModule (copy), var13 (copy), eventNamesModule (copy)
-			local globalUnreadMessageCount = p3.responseBody.global_unread_message_count
+		var4(appChatNetworkingModule.rodux.GetConversationMetadata.API()):andThen(function(p2)
+			-- upvalues: name (copy), fFlagExpChatEnableFriendsTab (copy), p1 (copy), inExperienceAppChatModalModule (copy), var2 (copy), eventNamesModule (copy)
+			local globalUnreadMessageCount = p2.responseBody.global_unread_message_count
 			name:info("Initial unread message count: {}", globalUnreadMessageCount)
 			
-			if fFlagExpChatEnableFriendsTab and p0.isInExperience then
+			if fFlagExpChatEnableFriendsTab and p1.isInExperience then
 				inExperienceAppChatModalModule:markInitialUnreadCountReceived(globalUnreadMessageCount or 0)
 			end
-			var13.fireAnalyticsEvent(eventNamesModule.preloadSocialTabDataEvent, { unreadConversationCount = globalUnreadMessageCount })
+			var2.fireAnalyticsEvent(eventNamesModule.preloadSocialTabDataEvent, { unreadConversationCount = globalUnreadMessageCount })
 		end):catch(function(p2)
-			-- upvalues: name (copy), var13 (copy), eventNamesModule (copy)
+			-- upvalues: name (copy), var2 (copy), eventNamesModule (copy)
 			name:error("Failure in GetConversationMetadata. Error: {}", tostring(p2))
-			var13.fireAnalyticsEvent(eventNamesModule.preloadSocialTabDataFailedEvent, {})
+			var2.fireAnalyticsEvent(eventNamesModule.preloadSocialTabDataFailedEvent, {})
 		end)
-	end, { var15, var13 })
+	end, { var4, var2 })
 	reactModule.useEffect(function()
-		-- upvalues: name (copy), var16 (ref), var14 (ref)
-		name:info("Dispatching unread messsage count as {}", var16)
-		var14(var16)
-	end, { var14, var16 })
-	useRealtimePlatformChatModule(function(p4)
-		-- upvalues: name (copy), var20 (ref), var15 (ref), appChatNetworkingModule (copy)
-		if if p4.Type ~= "ChannelMetadataUpdated" then p4.Type == "ChannelMarkedRead" else true then
-			name:info("Received event {}, fetching conversation metadata to get unread count", p4.Type)
+		-- upvalues: name (copy), var5 (ref), var3 (ref)
+		name:info("Dispatching unread messsage count as {}", var5)
+		var3(var5)
+	end, { var3, var5 })
+	useRealtimePlatformChatModule(function(p2)
+		-- upvalues: name (copy), var9 (ref), var4 (ref), appChatNetworkingModule (copy)
+		if if p2.Type ~= "ChannelMetadataUpdated" then p2.Type == "ChannelMarkedRead" else true then
+			name:info("Received event {}, fetching conversation metadata to get unread count", p2.Type)
 			
-			if var20 then
+			if var9 then
 				name:info("Chat tab is visible during realtime event, calling clear endpoint")
-				var15(appChatNetworkingModule.rodux.ClearGlobalUnreadCount.API()):catch(function(p5)
+				var4(appChatNetworkingModule.rodux.ClearGlobalUnreadCount.API()):catch(function(p3)
 					-- upvalues: name (copy)
-					name:error("Failure in ClearGlobalUnreadCount. Error: {}", tostring(p5))
+					name:error("Failure in ClearGlobalUnreadCount. Error: {}", tostring(p3))
 				end)
 				
 				return
 			end
-			var15(appChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(p6)
+			var4(appChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(p3)
 				-- upvalues: name (copy)
-				name:error("Failure in GetConversationMetadata. Error: {}", tostring(p6))
+				name:error("Failure in GetConversationMetadata. Error: {}", tostring(p3))
 			end)
 		end
-	end, { var15, var20 })
-	realtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(p7, p8)
-		-- upvalues: name (copy), var20 (ref), var15 (ref), appChatNetworkingModule (copy)
-		if p7 == Enum.ConnectionState.Connected and p8 then
+	end, { var4, var9 })
+	realtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(p2, p3)
+		-- upvalues: name (copy), var9 (ref), var4 (ref), appChatNetworkingModule (copy)
+		if p2 == Enum.ConnectionState.Connected and p3 then
 			name:info("Connection re-established, fetching conversation metadata to get unread count")
 			
-			if var20 then
+			if var9 then
 				name:info("Chat tab is visible during connection recovery, calling clear endpoint")
-				var15(appChatNetworkingModule.rodux.ClearGlobalUnreadCount.API()):catch(function(p9)
+				var4(appChatNetworkingModule.rodux.ClearGlobalUnreadCount.API()):catch(function(p4)
 					-- upvalues: name (copy)
-					name:error("Failure in ClearGlobalUnreadCount. Error: {}", tostring(p9))
+					name:error("Failure in ClearGlobalUnreadCount. Error: {}", tostring(p4))
 				end)
 				
 				return
 			end
-			var15(appChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(p10)
+			var4(appChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(p4)
 				-- upvalues: name (copy)
-				name:error("Failure in GetConversationMetadata. Error: {}", tostring(p10))
+				name:error("Failure in GetConversationMetadata. Error: {}", tostring(p4))
 			end)
 		end
-	end, { var15, var20 })
+	end, { var4, var9 })
 	
 	return nil
 end)

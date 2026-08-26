@@ -1,12 +1,12 @@
 ﻿local _ = require(script:FindFirstAncestor("RoduxSquads").Persists.PersistStorage.PersistStorage)
 
-return function(p0)
-	local storage = p0.storage
+return function(p1)
+	local storage = p1.storage
 	
 	return if storage then {
-		update = function(p1)
+		update = function(p2)
 			-- upvalues: storage (ref)
-			return storage:setItem(p1)
+			return storage:setItem(p2)
 		end,
 		get = function()
 			-- upvalues: storage (ref)

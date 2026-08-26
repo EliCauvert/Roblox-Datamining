@@ -14,49 +14,49 @@ local calculatePurchaseStatusForItem = itemDetailsUtilsModule.calculatePurchaseS
 local getPriceInRobux = itemDetailsUtilsModule.getPriceInRobux
 local formatNumberModule = require(avatarExperienceInspectAndBuy.Utils.formatNumber)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useConvertedItemDataModule (ref), getPriceStatusModule (ref), useItemStatusLocalizationModule (ref), reactModule (ref), foundationModule (ref), priceStatusModule (ref), isCollectible (ref), calculatePurchaseStatusForItem (ref), formatNumberModule (ref), getPriceInRobux (ref)
-	local var9 = useConvertedItemDataModule(p0.selectedItem)
-	local var10 = getPriceStatusModule(var9)
-	local var11 = useItemStatusLocalizationModule(var9)
+	local var1 = useConvertedItemDataModule(p1.selectedItem)
+	local var2 = getPriceStatusModule(var1)
+	local var3 = useItemStatusLocalizationModule(var1)
 	
-	return if p0.selectedItem then {
+	return if p1.selectedItem then {
 		purchaseButtonProps = reactModule.useMemo(function()
-			-- upvalues: var10 (ref), priceStatusModule (copy), var11 (ref), foundationModule (copy), var9 (ref), isCollectible (copy), calculatePurchaseStatusForItem (copy), p0 (ref)
-			local var12 = if var10 ~= priceStatusModule.Free then if var10 ~= priceStatusModule.PurchaseFromRoblox then var10 == priceStatusModule.PurchaseFromResale else true else true
+			-- upvalues: var2 (ref), priceStatusModule (copy), var3 (ref), foundationModule (copy), var1 (ref), isCollectible (copy), calculatePurchaseStatusForItem (copy), p1 (ref)
+			local var4 = if var2 ~= priceStatusModule.Free then if var2 ~= priceStatusModule.PurchaseFromRoblox then var2 == priceStatusModule.PurchaseFromResale else true else true
 			
 			return {
-				purchaseButtonText = var11[var10],
-				isDisabled = not var12,
-				variant = if not var12 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
+				purchaseButtonText = var3[var2],
+				isDisabled = not var4,
+				variant = if not var4 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
 				onPurchase = function()
-					-- upvalues: var9 (copy), isCollectible (copy), calculatePurchaseStatusForItem (copy), var10 (copy), p0 (copy)
-					if var9 then
-						local var13 = calculatePurchaseStatusForItem(var9, var10)
-						p0.onPromptPurchase(var9.id, var9.itemType, var13.collectibleItemId, var13.collectibleLowestAvailableResaleProductId, var13.collectibleLowestAvailableResaleItemInstanceId, var13.collectibleLowestResalePrice, isCollectible(var9))
+					-- upvalues: var1 (copy), isCollectible (copy), calculatePurchaseStatusForItem (copy), var2 (copy), p1 (copy)
+					if var1 then
+						local var5 = calculatePurchaseStatusForItem(var1, var2)
+						p1.onPromptPurchase(var1.id, var1.itemType, var5.collectibleItemId, var5.collectibleLowestAvailableResaleProductId, var5.collectibleLowestAvailableResaleItemInstanceId, var5.collectibleLowestResalePrice, isCollectible(var1))
 					end
 				end
 			}
-		end, { p0, var10, var9 }),
+		end, { p1, var2, var1 }),
 		priceLabel = {
-			leftLabel = p0.localizedStrings.total or "",
-			priceInRobux = formatNumberModule(getPriceInRobux(var9, var10))
+			leftLabel = p1.localizedStrings.total or "",
+			priceInRobux = formatNumberModule(getPriceInRobux(var1, var2))
 		},
-		priceStatus = var10
+		priceStatus = var2
 	} else {
 		purchaseButtonProps = reactModule.useMemo(function()
-			-- upvalues: p0 (ref), foundationModule (copy)
+			-- upvalues: p1 (ref), foundationModule (copy)
 			return {
 				showRobuxIcon = false,
-				purchaseButtonText = p0.purchaseButtonText,
-				onPurchase = p0.onBulkPurchase,
-				isDisabled = p0.isDisabled,
+				purchaseButtonText = p1.purchaseButtonText,
+				onPurchase = p1.onBulkPurchase,
+				isDisabled = p1.isDisabled,
 				variant = foundationModule.Enums.ButtonVariant.Emphasis
 			}
-		end, { p0 }),
+		end, { p1 }),
 		priceLabel = {
-			leftLabel = p0.localizedStrings.totalItems or "",
-			priceInRobux = p0.formattedTotalPrice
+			leftLabel = p1.localizedStrings.totalItems or "",
+			priceInRobux = p1.formattedTotalPrice
 		}
 	}
 end

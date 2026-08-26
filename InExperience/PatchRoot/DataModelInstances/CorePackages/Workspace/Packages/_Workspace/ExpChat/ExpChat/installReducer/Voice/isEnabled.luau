@@ -1,7 +1,7 @@
 ﻿local expChat = script:FindFirstAncestor("ExpChat")
 
 return require(expChat.Parent.Rodux).createReducer(false, {
-	[require(expChat.Actions.VoiceEnabledChanged).name] = function(_, p0)
-		return p0.enabled
+	[require(expChat.Actions.VoiceEnabledChanged).name] = function(_, p1)
+		return p1.enabled
 	end
 })

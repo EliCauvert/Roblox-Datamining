@@ -11,14 +11,14 @@ local _ = require(script.Parent.CancelUserSubscriptionSuccessPrompt)
 
 return function()
 	-- upvalues: useDispatch (ref), useSelector (ref), selectSubscriptionIdModule (ref), reactModule (ref), marketplaceService (ref), cancelSubscriptionEndedModule (ref)
-	local var5 = useDispatch()
-	local var6 = useSelector(selectSubscriptionIdModule) or ""
+	local var1 = useDispatch()
+	local var2 = useSelector(selectSubscriptionIdModule) or ""
 	
 	return {
 		onDismissed = reactModule.useCallback(function()
-			-- upvalues: marketplaceService (copy), var6 (ref), var5 (ref), cancelSubscriptionEndedModule (copy)
-			marketplaceService:SignalUserSubscriptionStatusChanged(var6)
-			var5(cancelSubscriptionEndedModule())
-		end, { var5 })
+			-- upvalues: marketplaceService (copy), var2 (ref), var1 (ref), cancelSubscriptionEndedModule (copy)
+			marketplaceService:SignalUserSubscriptionStatusChanged(var2)
+			var1(cancelSubscriptionEndedModule())
+		end, { var1 })
 	}
 end

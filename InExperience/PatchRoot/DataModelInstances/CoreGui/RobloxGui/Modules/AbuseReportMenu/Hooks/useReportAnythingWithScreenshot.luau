@@ -6,38 +6,38 @@ local useCaptureScreenshotModule = require(abuseReportMenu.Hooks.useCaptureScree
 local reportAnythingReducerModule = require(abuseReportMenu.Reducers.reportAnythingReducer)
 local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: tnSIXPWrapperModule (ref), reactModule (ref), reportAnythingReducerModule (ref), constantsModule (ref), useCaptureScreenshotModule (ref), useHideForScreenshotModule (ref)
-	local var11
+	local var1
 	local reportAnythingAvatarEnabled = tnSIXPWrapperModule.getReportAnythingAvatarEnabled()
 	local reportAnythingExperienceEnabled = tnSIXPWrapperModule.getReportAnythingExperienceEnabled()
-	local var9, var10 = reactModule.useReducer(reportAnythingReducerModule, constantsModule.ReportAnythingInitialState)
+	local var2, var3 = reactModule.useReducer(reportAnythingReducerModule, constantsModule.ReportAnythingInitialState)
 	
 	if not reportAnythingAvatarEnabled then
-		var11 = reportAnythingExperienceEnabled and var9.screenshotContentId == ""
+		var1 = reportAnythingExperienceEnabled and var2.screenshotContentId == ""
 	end
-	useHideForScreenshotModule(var11, p0, p1, p2, useCaptureScreenshotModule(reactModule.useCallback(function(p4)
-		-- upvalues: var10 (ref), constantsModule (copy)
-		var10({
+	useHideForScreenshotModule(var1, p1, p2, p3, useCaptureScreenshotModule(reactModule.useCallback(function(p5)
+		-- upvalues: var3 (ref), constantsModule (copy)
+		var3({
 			type = constantsModule.ReportAnythingActions.SetScreenshotContentId,
-			screenshotContentId = p4
+			screenshotContentId = p5
 		})
 	end), reactModule.useCallback(function(p5)
-		-- upvalues: var10 (ref), constantsModule (copy)
-		var10({
+		-- upvalues: var3 (ref), constantsModule (copy)
+		var3({
 			type = constantsModule.ReportAnythingActions.SetScreenshotId,
 			screenshotId = p5
 		})
-	end), reactModule.useCallback(function(p6)
-		-- upvalues: var10 (ref), constantsModule (copy)
-		var10({
+	end), reactModule.useCallback(function(p5)
+		-- upvalues: var3 (ref), constantsModule (copy)
+		var3({
 			type = constantsModule.ReportAnythingActions.SetIdentificationResults,
-			identificationResults = p6
+			identificationResults = p5
 		})
 	end)), function()
-		-- upvalues: p3 (ref), var9 (ref), var10 (ref)
-		p3(var9, var10)
+		-- upvalues: p4 (ref), var2 (ref), var3 (ref)
+		p4(var2, var3)
 	end)
 	
-	return var9, var10
+	return var2, var3
 end

@@ -46,22 +46,22 @@ return function(p1)
 		LayoutOrder = p1.LayoutOrder or 1,
 		Position = p1.Position,
 		Size = size
-	}, dashModule.assign(map(items, function(p1, p2)
+	}, dashModule.assign(map(items, function(p2, p3)
 		-- upvalues: itemIndentation (ref), listStyle (ref), t (copy), reactModule (copy), text (copy), uDim2 (ref), textTruncate (ref), textWrapped (ref), view (copy), image (copy)
-		local var1
+		local var2
 		local _ = nil
-		local var2 = itemIndentation
-		local var3 = listStyle.MarkerImage or t.MarkerImage
+		local var3 = itemIndentation
+		local var4 = listStyle.MarkerImage or t.MarkerImage
 		local UIPadding = nil
 		local prefix = nil
 		
-		if type(p1) == "string" then
-			var1 = reactModule.createElement(text, {
+		if type(p2) == "string" then
+			var2 = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
 				Font = listStyle.Font or t.Font,
 				Size = uDim2,
-				Text = p1,
+				Text = p2,
 				TextColor = listStyle.TextColor or t.TextColor,
 				TextSize = listStyle.TextSize or t.TextSize,
 				TextTruncate = textTruncate,
@@ -69,17 +69,17 @@ return function(p1)
 				Padding = listStyle.Padding or t.Padding,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})
-		elseif typeof(p1) == "table" and p1.Text then
-			prefix = p1.Prefix
+		elseif typeof(p2) == "table" and p2.Text then
+			prefix = p2.Prefix
 			local subItemStyle = listStyle.SubItemStyle
 			local uDim2_1 = UDim2.new(1, -subItemStyle.ItemOffset or t.SubItemStyle.ItemOffset, 0, 0)
-			var2 = subItemStyle.ItemIndentation or var2
-			var3 = subItemStyle.MarkerStyle or var3
+			var3 = subItemStyle.ItemIndentation or var3
+			var4 = subItemStyle.MarkerStyle or var4
 			
-			if var2 then
-				UIPadding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var2) })
+			if var3 then
+				UIPadding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var3) })
 			end
-			var1 = reactModule.createElement(text, {
+			var2 = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
 				Size = uDim2_1,
@@ -88,22 +88,22 @@ return function(p1)
 					Font = listStyle.Font or t.Font,
 					FontSize = listStyle.TextSize or t.TextSize
 				},
-				Text = p1.Text,
+				Text = p2.Text,
 				TextWrapped = textWrapped,
 				TextTruncate = textTruncate,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})
-		elseif typeof(p1) == "table" and p1.Item then
-			prefix = p1.Prefix
-			var1 = reactModule.createElement(view, { tag = "auto-y", LayoutOrder = 2, Size = uDim2 }, { ContentElement = p1.Item })
+		elseif typeof(p2) == "table" and p2.Item then
+			prefix = p2.Prefix
+			var2 = reactModule.createElement(view, { tag = "auto-y", LayoutOrder = 2, Size = uDim2 }, { ContentElement = p2.Item })
 		else
-			var1 = reactModule.createElement(view, { tag = "auto-y", LayoutOrder = 2, Size = uDim2 }, { ContentElement = p1 })
+			var2 = reactModule.createElement(view, { tag = "auto-y", LayoutOrder = 2, Size = uDim2 }, { ContentElement = p2 })
 		end
 		return reactModule.createElement(view, {
 			testId = "--markdown--bullet-list-item",
 			tag = "gap-xsmall auto-xy row align-x-left align-y-top",
-			key = tostring(p2),
-			LayoutOrder = p2
+			key = tostring(p3),
+			LayoutOrder = p3
 		}, {
 			Marker = reactModule.createElement(view, {
 				LayoutOrder = 1,
@@ -121,12 +121,12 @@ return function(p1)
 				}) else reactModule.createElement(image, {
 					tag = "position-center-left anchor-center-left",
 					LayoutOrder = 1,
-					Image = var3,
+					Image = var4,
 					imageStyle = { Color3 = listStyle.TextColor or t.TextColor },
 					Size = UDim2.fromOffset(listStyle.MarkerSize or t.MarkerSize, listStyle.MarkerSize or t.MarkerSize)
 				})
 			}),
-			Content = var1,
+			Content = var2,
 			Padding = UIPadding
 		})
 	end), p1.children or {}))

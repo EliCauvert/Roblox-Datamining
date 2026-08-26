@@ -2,10 +2,10 @@
 local avatarRootNavigationActionModule = require(avatarExperienceNavigation.Enums.AvatarRootNavigationAction)
 local _ = require(avatarExperienceNavigation.Enums.CustomGetStateForAction)
 
-return function(p0)
+return function(p1)
 	-- upvalues: avatarRootNavigationActionModule (ref)
 	return {
 		type = avatarRootNavigationActionModule.DeregisterCustomGetStateForAction,
-		handlerId = p0
+		handlerId = p1
 	}
 end

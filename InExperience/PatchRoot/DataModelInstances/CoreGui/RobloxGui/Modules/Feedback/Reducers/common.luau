@@ -8,22 +8,22 @@ return require(corePackagesService.Packages.Rodux).createReducer({
 	showOnboardingModal = true,
 	sourceLanguageName = ""
 }, {
-	[require(parent.Actions.IncrementFeedbackSubmissionAttempts).name] = function(p0, p1)
+	[require(parent.Actions.IncrementFeedbackSubmissionAttempts).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, {
-			numFeedbackSubmissionAttempts = p1.numFeedbackSubmissionAttempts
+		return cryoModule.Dictionary.join(p1, {
+			numFeedbackSubmissionAttempts = p2.numFeedbackSubmissionAttempts
 		})
 	end,
-	[require(parent.Actions.ShowHelpModal).name] = function(p2, p3)
+	[require(parent.Actions.ShowHelpModal).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p2, { showHelpModal = p3.helpModalVisible })
+		return cryoModule.Dictionary.join(p1, { showHelpModal = p2.helpModalVisible })
 	end,
-	[require(parent.Actions.ShowOnboardingModal).name] = function(p4, p5)
+	[require(parent.Actions.ShowOnboardingModal).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p4, { showOnboardingModal = p5.onboardingModalVisible })
+		return cryoModule.Dictionary.join(p1, { showOnboardingModal = p2.onboardingModalVisible })
 	end,
-	[require(parent.Actions.SetSourceLanguageName).name] = function(p6, p7)
+	[require(parent.Actions.SetSourceLanguageName).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p6, { sourceLanguageName = p7.sourceLanguageName })
+		return cryoModule.Dictionary.join(p1, { sourceLanguageName = p2.sourceLanguageName })
 	end
 })

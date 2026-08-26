@@ -39,9 +39,9 @@ return {
 		var4 = true
 		bindableEvent:Fire()
 	end,
-	IsSubjectToChinaPolicies = function(p0)
+	IsSubjectToChinaPolicies = function(p1)
 		-- upvalues: var1 (write)
-		p0:InitAsync()
+		p1:InitAsync()
 		
 		return var1
 	end,

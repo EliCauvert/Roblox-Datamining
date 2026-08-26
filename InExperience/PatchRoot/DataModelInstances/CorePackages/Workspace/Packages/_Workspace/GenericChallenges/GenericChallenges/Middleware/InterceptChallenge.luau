@@ -5,17 +5,17 @@ local parent = genericChallenges.Parent
 local promiseModule = require(parent.Promise)
 local _ = require(parent.LuauPolyfill)
 
-return function(p0)
+return function(p1)
 	-- upvalues: promiseModule (ref), renderChallengeModule (ref)
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: renderChallengeModule (copy), p0 (ref)
+	return promiseModule.new(function(p2, p3)
+		-- upvalues: renderChallengeModule (copy), p1 (ref)
 		renderChallengeModule({
-			title = p0.title,
-			rawResponseHeaders = p0.rawResponseHeaders,
-			retryRequestCallback = p0.retryRequestCallback,
-			challengeErrorCallback = p0.challengeErrorCallback,
-			resolve = p1,
-			reject = p2
+			title = p1.title,
+			rawResponseHeaders = p1.rawResponseHeaders,
+			retryRequestCallback = p1.retryRequestCallback,
+			challengeErrorCallback = p1.challengeErrorCallback,
+			resolve = p2,
+			reject = p3
 		})
 	end)
 end

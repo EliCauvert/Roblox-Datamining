@@ -21,12 +21,12 @@ local t = {
 }
 local t_1 = {}
 local t_2 = {}
-local var12 = httpService:GenerateGUID(true)
-starterGuiService:RegisterSetCore("VRLaserPointerMode", function(p0)
+local var1 = httpService:GenerateGUID(true)
+starterGuiService:RegisterSetCore("VRLaserPointerMode", function(p1)
 	-- upvalues: t (ref), laserPointerModule (ref)
 	if not t.LaserPointer then return end
-	if p0 and tostring(p0) then
-		t.LaserPointer:setMode(laserPointerModule.Mode[tostring(p0)] or laserPointerModule.Mode.Disabled)
+	if p1 and tostring(p1) then
+		t.LaserPointer:setMode(laserPointerModule.Mode[tostring(p1)] or laserPointerModule.Mode.Disabled)
 		
 		return
 	end
@@ -58,9 +58,9 @@ local function enableControllerModels(p1)
 	end
 end
 
-starterGuiService:RegisterSetCore("VREnableControllerModels", function(p2)
+starterGuiService:RegisterSetCore("VREnableControllerModels", function(p1)
 	-- upvalues: VRService (ref)
-	if p2 then
+	if p1 then
 		VRService.ControllerModels = Enum.VRControllerModelMode.Transparent
 		
 		return
@@ -76,20 +76,20 @@ local currentTime = tick()
 local function onRenderSteppedLast()
 	-- upvalues: currentTime (write), t (ref)
 	local currentTime_1 = tick()
-	local var22 = currentTime_1 - currentTime
+	local var2 = currentTime_1 - currentTime
 	currentTime = currentTime_1
 	
 	if t.LaserPointer then
-		t.LaserPointer:update(var22)
+		t.LaserPointer:update(var2)
 	end
 	if t.LeftControllerModel then
-		t.LeftControllerModel:update(var22)
+		t.LeftControllerModel:update(var2)
 	end
 	if t.RightControllerModel then
-		t.RightControllerModel:update(var22)
+		t.RightControllerModel:update(var2)
 	end
 	if t.SafetyBubble then
-		t.SafetyBubble:update(var22)
+		t.SafetyBubble:update(var2)
 	end
 end
 
@@ -106,21 +106,21 @@ local function onCameraCFrameChanged()
 	end
 end
 
-local var17 = nil
+local var2 = nil
 workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-	-- upvalues: var17 (write), onCameraCFrameChanged (ref)
-	if var17 then
-		var17:disconnect()
+	-- upvalues: var2 (write), onCameraCFrameChanged (ref)
+	if var2 then
+		var2:disconnect()
 	end
 	if workspace.CurrentCamera then
-		var17 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
+		var2 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
 	end
 end)
 if workspace.CurrentCamera then
-	var17 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
+	var2 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
 end
 local function onVREnabledChanged()
-	-- upvalues: VRService (ref), userInputService (ref), t (ref), laserPointerModule (ref), enableControllerModels (ref), runService (ref), var12 (ref), onRenderSteppedLast (ref), safetyBubbleModule (ref), contextActionService (ref)
+	-- upvalues: VRService (ref), userInputService (ref), t (ref), laserPointerModule (ref), enableControllerModels (ref), runService (ref), var1 (ref), onRenderSteppedLast (ref), safetyBubbleModule (ref), contextActionService (ref)
 	if VRService.VREnabled then
 		userInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
@@ -136,7 +136,7 @@ local function onVREnabledChanged()
 			end
 		end
 		enableControllerModels(VRService.ControllerModels == Enum.VRControllerModelMode.Transparent)
-		runService:BindToRenderStep(var12, Enum.RenderPriority.Last.Value, onRenderSteppedLast)
+		runService:BindToRenderStep(var1, Enum.RenderPriority.Last.Value, onRenderSteppedLast)
 		
 		if t.LaserPointer then
 			t.LaserPointer:setForcePointer(true)
@@ -149,7 +149,7 @@ local function onVREnabledChanged()
 	elseif t.LaserPointer then
 		t.LaserPointer:setMode(laserPointerModule.Mode.Disabled)
 	end
-	runService:UnbindFromRenderStep(var12)
+	runService:UnbindFromRenderStep(var1)
 end
 
 local function onVRSessionStateChanged()
@@ -181,13 +181,13 @@ local function onVRSessionStateChanged()
 	end
 end
 
-local function onVRPropertyChanged(p3)
+local function onVRPropertyChanged(p1)
 	-- upvalues: onVREnabledChanged (ref), onVRSessionStateChanged (ref)
-	if p3 == "VREnabled" then
+	if p1 == "VREnabled" then
 		onVREnabledChanged()
 		
 		return
-	elseif p3 == "VRSessionState" then
+	elseif p1 == "VRSessionState" then
 		onVRSessionStateChanged()
 	end
 end
@@ -195,19 +195,19 @@ end
 onVREnabledChanged()
 VRService.Changed:connect(onVRPropertyChanged)
 
-function t.RegisterModule(_, p4)
+function t.RegisterModule(_, p1)
 	-- upvalues: t_1 (ref)
-	t_1[p4.ModuleName] = p4
+	t_1[p1.ModuleName] = p1
 end
 
-function t.GetModule(_, p5)
+function t.GetModule(_, p1)
 	-- upvalues: t_1 (ref)
-	return t_1[p5]
+	return t_1[p1]
 end
 
-function t.IsModuleOpened(_, p6)
+function t.IsModuleOpened(_, p1)
 	-- upvalues: t_2 (ref)
-	return t_2[p6] ~= nil
+	return t_2[p1] ~= nil
 end
 
 function t.GetOpenedModules(_)
@@ -222,27 +222,27 @@ end
 
 t.ModuleOpened = create("BindableEvent")({ Name = "VRModuleOpened" })
 
-function t.FireModuleOpened(_, p7)
+function t.FireModuleOpened(_, p1)
 	-- upvalues: t_1 (ref), t_2 (ref), t (ref)
-	if not t_1[p7] then
+	if not t_1[p1] then
 		error("Tried to open module that is not registered: " .. p7)
 	end
-	if t_2[p7] ~= t_1[p7] then
-		t_2[p7] = t_1[p7]
-		t.ModuleOpened:Fire(p7)
+	if t_2[p1] ~= t_1[p1] then
+		t_2[p1] = t_1[p1]
+		t.ModuleOpened:Fire(p1)
 	end
 end
 
 t.ModuleClosed = create("BindableEvent")({ Name = "VRModuleClosed" })
 
-function t.FireModuleClosed(_, p8)
+function t.FireModuleClosed(_, p1)
 	-- upvalues: t_1 (ref), t_2 (ref), t (ref)
-	if not t_1[p8] then
+	if not t_1[p1] then
 		error("Tried to close module that is not registered: " .. p8)
 	end
-	if t_2[p8] ~= nil then
-		t_2[p8] = nil
-		t.ModuleClosed:Fire(p8)
+	if t_2[p1] ~= nil then
+		t_2[p1] = nil
+		t.ModuleClosed:Fire(p1)
 	end
 end
 
@@ -259,10 +259,10 @@ end
 t.ShowHighlightedLeaveGameIcon = false
 t.ShowHighlightedLeaveGameIconToggled = create("BindableEvent")({ Name = "ShowHighlightedLeaveGameIconToggled" })
 
-function t.SetShowHighlightedLeaveGameIconToggled(_, p9)
+function t.SetShowHighlightedLeaveGameIconToggled(_, p1)
 	-- upvalues: t (ref)
-	if t.ShowHighlightedLeaveGameIcon ~= p9 then
-		t.ShowHighlightedLeaveGameIcon = p9
+	if t.ShowHighlightedLeaveGameIcon ~= p1 then
+		t.ShowHighlightedLeaveGameIcon = p1
 		t.ShowHighlightedLeaveGameIconToggled:Fire()
 	end
 end
@@ -272,18 +272,18 @@ t.ShowMoreMenu = false
 t.ShowTopBarChanged = create("BindableEvent")({ Name = "ShowTopBarChanged" })
 t.ShowMoreMenuChanged = create("BindableEvent")({ Name = "ShowMoreMenuChanged" })
 
-function t.SetShowTopBar(_, p10)
+function t.SetShowTopBar(_, p1)
 	-- upvalues: t (ref)
-	if t.ShowTopBar ~= p10 then
-		t.ShowTopBar = p10
+	if t.ShowTopBar ~= p1 then
+		t.ShowTopBar = p1
 		t.ShowTopBarChanged:Fire()
 	end
 end
 
-function t.SetShowMoreMenu(_, p11)
+function t.SetShowMoreMenu(_, p1)
 	-- upvalues: t (ref)
-	if t.ShowMoreMenu ~= p11 then
-		t.ShowMoreMenu = p11
+	if t.ShowMoreMenu ~= p1 then
+		t.ShowMoreMenu = p1
 		t.ShowMoreMenuChanged:Fire()
 	end
 end
@@ -295,19 +295,19 @@ function t.ToggleSafetyBubble(_)
 	end
 end
 
-function t.GetControllerModel(_, p12)
+function t.GetControllerModel(_, p1)
 	-- upvalues: t (ref)
-	return if p12 == Enum.UserCFrame.LeftHand then t.LeftControllerModel elseif p12 == Enum.UserCFrame.RightHand then t.RightControllerModel else nil
+	return if p1 == Enum.UserCFrame.LeftHand then t.LeftControllerModel elseif p1 == Enum.UserCFrame.RightHand then t.RightControllerModel else nil
 end
 
-function t.GetControllerButtonPosition(_, p13)
+function t.GetControllerButtonPosition(_, p1)
 	-- upvalues: t (ref)
-	return t.LeftControllerModel and t.LeftControllerModel:getButtonPosition(p13), t.RightControllerModel and t.RightControllerModel:getButtonPosition(p13)
+	return t.LeftControllerModel and t.LeftControllerModel:getButtonPosition(p1), t.RightControllerModel and t.RightControllerModel:getButtonPosition(p1)
 end
 
-splashScreenManager.addStatusChangeListener(function(p14)
+splashScreenManager.addStatusChangeListener(function(p1)
 	-- upvalues: t (ref), onVREnabledChanged (ref)
-	t.isFPSAtTarget = p14
+	t.isFPSAtTarget = p1
 	onVREnabledChanged()
 end)
 

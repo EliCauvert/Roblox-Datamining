@@ -8,16 +8,16 @@ local sduiChip = require(parent.SduiSharedContent).SduiChip
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useExperienceDetailsShareModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useExperienceDetailsShare)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), signalsReactModule (ref), game (ref), useExperienceDetailsShareModule (ref), reactModule (ref), sduiChip (ref), foundationModule (ref)
-	local layoutOrder = p0.layoutOrder
-	local universeId = p0.universeId
-	local var5 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
+	local layoutOrder = p1.layoutOrder
+	local universeId = p1.universeId
+	local var1 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
 	
 	return reactModule.createElement(sduiChip, {
 		text = useLocalization({ share = "Feature.SocialShare.Action.Share" }).share,
 		leadingIconName = foundationModule.Enums.IconName.ArrowThickToRight,
-		onActivated = useExperienceDetailsShareModule(universeId, if var5 then var5.rootPlaceId else nil, "ExperienceDetailsShareChip"),
+		onActivated = useExperienceDetailsShareModule(universeId, if var1 then var1.rootPlaceId else nil, "ExperienceDetailsShareChip"),
 		layoutOrder = layoutOrder
 	})
 end)

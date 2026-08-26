@@ -3,28 +3,28 @@ local reactModule = require(foundation.Parent.React)
 local iconSizeModule = require(foundation.Enums.IconSize)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useTokensModule (ref), reactModule (ref), iconSizeModule (ref)
-	local var4 = useTokensModule()
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), iconSizeModule (copy), var4 (ref)
-		return if p1 then {
-			[iconSizeModule.XSmall] = var4.Size.Size_150,
-			[iconSizeModule.Small] = var4.Size.Size_200,
-			[iconSizeModule.Medium] = var4.Size.Size_250,
-			[iconSizeModule.Large] = var4.Size.Size_350
+	local var1 = useTokensModule()
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: p2 (ref), iconSizeModule (copy), var1 (ref)
+		return if p2 then {
+			[iconSizeModule.XSmall] = var1.Size.Size_150,
+			[iconSizeModule.Small] = var1.Size.Size_200,
+			[iconSizeModule.Medium] = var1.Size.Size_250,
+			[iconSizeModule.Large] = var1.Size.Size_350
 		} else {
-			[iconSizeModule.XSmall] = var4.Size.Size_50,
-			[iconSizeModule.Small] = var4.Size.Size_50,
-			[iconSizeModule.Medium] = var4.Size.Size_100,
-			[iconSizeModule.Large] = var4.Size.Size_150,
-			[iconSizeModule.XLarge] = var4.Size.Size_200,
-			[iconSizeModule.XXLarge] = var4.Size.Size_250
+			[iconSizeModule.XSmall] = var1.Size.Size_50,
+			[iconSizeModule.Small] = var1.Size.Size_50,
+			[iconSizeModule.Medium] = var1.Size.Size_100,
+			[iconSizeModule.Large] = var1.Size.Size_150,
+			[iconSizeModule.XLarge] = var1.Size.Size_200,
+			[iconSizeModule.XXLarge] = var1.Size.Size_250
 		}
-	end, { var4, p1 })[p0]
+	end, { var1, p2 })[p1]
 	
-	if var5 == nil then
+	if var2 == nil then
 		error("Invalid icon button size: " .. p0)
 	end
-	return var5
+	return var2
 end

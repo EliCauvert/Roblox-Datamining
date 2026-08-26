@@ -4,21 +4,21 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
 
-return if require(appChat.Flags.FFlagAppChatTopBarSignalsStore) then function(p0)
+return if require(appChat.Flags.FFlagAppChatTopBarSignalsStore) then function(p1)
 	-- upvalues: getTopBarStoreModule (ref), signalsReactModule (ref), reactModule (ref)
-	local screenName = p0.screenName
-	local render = p0.render
-	local var4 = getTopBarStoreModule(false)
-	local var5 = signalsReactModule.useSignalState(var4.getScreenTopBar(screenName))
+	local screenName = p1.screenName
+	local render = p1.render
+	local var1 = getTopBarStoreModule(false)
+	local var2 = signalsReactModule.useSignalState(var1.getScreenTopBar(screenName))
 	
 	return render(reactModule.useMemo(function()
-		-- upvalues: screenName (ref), var5 (ref), var4 (ref)
+		-- upvalues: screenName (ref), var2 (ref), var1 (ref)
 		return {
-			getScreenTopBar = function(p1)
-				-- upvalues: screenName (copy), var5 (copy), var4 (copy)
-				return if p1 == screenName then var5 else var4.getScreenTopBar(p1)(false)
+			getScreenTopBar = function(p2)
+				-- upvalues: screenName (copy), var2 (copy), var1 (copy)
+				return if p2 == screenName then var2 else var1.getScreenTopBar(p2)(false)
 			end,
-			setScreenTopBar = var4.setScreenTopBar
+			setScreenTopBar = var1.setScreenTopBar
 		}
-	end, { screenName, var5 }))
+	end, { screenName, var2 }))
 end else require(appChat.TopBarContext).Consumer

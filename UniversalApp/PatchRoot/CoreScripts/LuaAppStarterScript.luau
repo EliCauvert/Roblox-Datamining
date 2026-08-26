@@ -39,33 +39,33 @@ end
 local _ = function(p1)
 	local t = {}
 	
-	local function resolveChunk(p1)
-		-- upvalues: t (ref), p1 (ref), resolveChunk (ref)
-		local var1 = t[p1]
+	local function resolveChunk(p2)
+		-- upvalues: t (ref), p2 (ref), resolveChunk (ref)
+		local var1 = t[p2]
 		
 		if var1 then
 			return var1
 		end
-		local mount = p1(p1).mount
+		local mount = p2(p2).mount
 		local freeze = table.freeze
 		local t_1 = { resolveChunk = resolveChunk }
 		local t_2 = {}
 		
-		function t_1.loadModule(p1, p2)
+		function t_1.loadModule(p3, p4)
 			-- upvalues: t_2 (ref)
-			local var1 = t_2[p1]
+			local var2 = t_2[p3]
 			
-			if var1 == nil then
-				local var2 = p2()
-				t_2[p1] = { c = var2 }
+			if var2 == nil then
+				local var3 = p4()
+				t_2[p3] = { c = var3 }
 				
-				return var2
+				return var3
 			end
-			return var1.c
+			return var2.c
 		end
 		
 		mount = mount(freeze(t_1))
-		t[p1] = mount
+		t[p2] = mount
 		
 		return mount
 	end
@@ -91,17 +91,17 @@ local function resolveChunk(p1)
 	local t_1 = { resolveChunk = resolveChunk }
 	local t_2 = {}
 	
-	function t_1.loadModule(p1, p2)
+	function t_1.loadModule(p2, p3)
 		-- upvalues: t_2 (ref)
-		local var1 = t_2[p1]
+		local var2 = t_2[p2]
 		
-		if var1 == nil then
-			local var2 = p2()
-			t_2[p1] = { c = var2 }
+		if var2 == nil then
+			local var3 = p3()
+			t_2[p2] = { c = var3 }
 			
-			return var2
+			return var3
 		end
-		return var1.c
+		return var2.c
 	end
 	
 	mount = mount(freeze(t_1))

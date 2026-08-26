@@ -8,82 +8,82 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local useTokens = foundationModule.Hooks.useTokens
 local getSduiServiceDependenciesStore = sduiCoreSystemModule.getSduiServiceDependenciesStore
 
-local function _(p0, p1, p2, p3, p4)
-	local var4 = p4 - p3
+local function _(p1, p2, p3, p4, p5)
+	local var1 = p5 - p4
 	
-	if var4 <= 0 then
+	if var1 <= 0 then
 		return 0
 	end
-	local var5 = p0 - p1 - (p2 - 1) * p3 - p4
+	local var2 = p1 - p2 - (p3 - 1) * p4 - p5
 	
-	return if var5 <= 0 then 0 else math.clamp(p2 * var4 / var5, 0, 0.5)
+	return if var2 <= 0 then 0 else math.clamp(p3 * var1 / var2, 0, 0.5)
 end
 
-return function(p5)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), calculateItemWidth (ref), signalsModule (ref), appPage (ref), getSduiServiceDependenciesStore (ref)
-	local var6 = useTokens()
-	local medium = var6.Gap.Medium
-	local size1500 = var6.Size.Size_1500
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p5 (ref), medium (ref), size1500 (ref)
-		local containerWidth = p5.containerWidth
-		local sideMargin = p5.sideMargin
-		local var12 = size1500 - medium
+	local var1 = useTokens()
+	local medium = var1.Gap.Medium
+	local size1500 = var1.Size.Size_1500
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), medium (ref), size1500 (ref)
+		local containerWidth = p1.containerWidth
+		local sideMargin = p1.sideMargin
+		local var3 = size1500 - medium
 		
-		if var12 <= 0 then
+		if var3 <= 0 then
 			return 0
 		end
-		local var13 = containerWidth - sideMargin - medium * 0 - size1500
+		local var4 = containerWidth - sideMargin - medium * 0 - size1500
 		
-		return if var13 <= 0 then 0 else math.clamp(var12 * 1 / var13, 0, 0.5)
-	end, { p5.containerWidth, p5.sideMargin, medium, size1500 })
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: calculateItemWidth (copy), medium (ref), p5 (ref), var7 (ref)
-		return calculateItemWidth(1, medium, p5.sideMargin, p5.containerWidth, var7)
-	end, { medium, p5.sideMargin, p5.containerWidth, var7 })
-	local var9, var10 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var7 (ref), medium (ref), p5 (ref), var8 (ref)
+		return if var4 <= 0 then 0 else math.clamp(var3 * 1 / var4, 0, 0.5)
+	end, { p1.containerWidth, p1.sideMargin, medium, size1500 })
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: calculateItemWidth (copy), medium (ref), p1 (ref), var2 (ref)
+		return calculateItemWidth(1, medium, p1.sideMargin, p1.containerWidth, var2)
+	end, { medium, p1.sideMargin, p1.containerWidth, var2 })
+	local var4, var5 = reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var2 (ref), medium (ref), p1 (ref), var3 (ref)
 		return signalsModule.createSignal({
 			numColumns = 1,
 			verticalPadding = 0,
-			fractionalItemAmount = var7,
+			fractionalItemAmount = var2,
 			columnGap = medium,
-			sideMargin = p5.sideMargin,
-			itemWidth = var8
+			sideMargin = p1.sideMargin,
+			itemWidth = var3
 		})
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var7 (ref), medium (ref), p5 (ref), var8 (ref)
-		var10({
+		-- upvalues: var5 (ref), var2 (ref), medium (ref), p1 (ref), var3 (ref)
+		var5({
 			numColumns = 1,
 			verticalPadding = 0,
-			fractionalItemAmount = var7,
+			fractionalItemAmount = var2,
 			columnGap = medium,
-			sideMargin = p5.sideMargin,
-			itemWidth = var8
+			sideMargin = p1.sideMargin,
+			itemWidth = var3
 		})
 	end, {
-		var7,
+		var2,
 		medium,
-		p5.sideMargin,
-		var8,
-		var10
+		p1.sideMargin,
+		var3,
+		var5
 	})
-	local var11 = reactModule.useCallback(function(_)
-		-- upvalues: signalsModule (copy), var9 (ref)
-		return signalsModule.createComputed(function(p6)
-			-- upvalues: var9 (copy)
-			return var9(p6)
+	local var6 = reactModule.useCallback(function(_)
+		-- upvalues: signalsModule (copy), var4 (ref)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var4 (copy)
+			return var4(p2)
 		end)
-	end, { var9 })
+	end, { var4 })
 	local profilePlatform = appPage.ProfilePlatform
 	
 	return reactModule.useMemo(function()
-		-- upvalues: getSduiServiceDependenciesStore (copy), profilePlatform (ref), var11 (ref)
+		-- upvalues: getSduiServiceDependenciesStore (copy), profilePlatform (ref), var6 (ref)
 		return {
 			dependencies = getSduiServiceDependenciesStore().getDependencies(profilePlatform),
 			appPage = profilePlatform,
-			getPageLayoutConfig = var11
+			getPageLayoutConfig = var6
 		}
-	end, { profilePlatform, var11 })
+	end, { profilePlatform, var6 })
 end

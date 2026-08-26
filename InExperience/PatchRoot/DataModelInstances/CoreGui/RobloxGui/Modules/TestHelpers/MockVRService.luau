@@ -1,11 +1,11 @@
 ﻿local t = {}
 t.__index = t
 
-function t:GetPropertyChangedSignal(p0)
-	if p0 == "VRDeviceAvailable" then
+function t:GetPropertyChangedSignal(p1)
+	if p1 == "VRDeviceAvailable" then
 		return self._vrDeviceAvailableChanged.Event
 	end
-	error(("%s is not a valid property name"):format(tostring(p0)))
+	error(("%s is not a valid property name"):format(tostring(p1)))
 end
 
 function t:toggleHeadsetConnectionState()

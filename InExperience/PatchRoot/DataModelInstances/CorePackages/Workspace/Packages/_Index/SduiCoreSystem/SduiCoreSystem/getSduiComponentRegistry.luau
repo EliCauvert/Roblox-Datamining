@@ -7,51 +7,51 @@ local function createSduiComponentRegistry()
 	local t = {}
 	
 	return {
-		getComponent = function(p0)
+		getComponent = function(p1)
 			-- upvalues: t (ref)
-			local var5
-			local var4 = t[p0]
+			local var1
+			local var2 = t[p1]
 			
-			if var4 then
-				if not var4.component and var4.getLazyComponent then
-					var4.component = var4.getLazyComponent()
+			if var2 then
+				if not var2.component and var2.getLazyComponent then
+					var2.component = var2.getLazyComponent()
 				end
-				var5 = var4
+				var1 = var2
 			else
-				var5 = nil
+				var1 = nil
 			end
-			return if var5 then var5.component else nil
+			return if var1 then var1.component else nil
 		end,
 		getComponentDefinition = function(p1)
 			-- upvalues: t (ref)
-			local var6 = t[p1]
+			local var1 = t[p1]
 			
-			if not var6 then
+			if not var1 then
 				return nil
-			elseif not var6.component and var6.getLazyComponent then
-				var6.component = var6.getLazyComponent()
+			elseif not var1.component and var1.getLazyComponent then
+				var1.component = var1.getLazyComponent()
 			end
-			return var6
+			return var1
 		end,
-		registerComponentDefinition = function(p2, p3)
+		registerComponentDefinition = function(p1, p2)
 			-- upvalues: t (ref)
-			t[p2] = p3
+			t[p1] = p2
 		end,
-		registerComponentDefinitions = function(p4)
+		registerComponentDefinitions = function(p1)
 			-- upvalues: t (ref)
-			for i, v in p4 do
+			for i, v in p1 do
 				t[i] = v
 			end
 		end
 	}
 end
 
-local var2 = nil
+local var1 = nil
 
 return function()
-	-- upvalues: var2 (write), createSduiComponentRegistry (ref)
-	if var2 == nil then
-		var2 = createSduiComponentRegistry()
+	-- upvalues: var1 (write), createSduiComponentRegistry (ref)
+	if var1 == nil then
+		var1 = createSduiComponentRegistry()
 	end
-	return var2
+	return var1
 end

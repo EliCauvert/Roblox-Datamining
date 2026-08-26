@@ -10,27 +10,27 @@ local statusIndicator = foundationModule.StatusIndicator
 local view = foundationModule.View
 local useNotificationCountModule = require(inExperienceSideSheet.Hooks.useNotificationCount)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useNotificationCountModule (ref), reactModule (ref), view (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref)
-	local var4 = useTokens()
-	local var5, var6 = useNotificationCountModule(p0.notification)
+	local var1 = useTokens()
+	local var2, var3 = useNotificationCountModule(p1.notification)
 	
 	return reactModule.createElement(view, {
 		tag = {
 			["size-1000"] = true,
-			["position-center-center anchor-center-center"] = p0.centerPosition
+			["position-center-center anchor-center-center"] = p1.centerPosition
 		}
 	}, {
 		IconContainer = reactModule.createElement(view, {
 			tag = "size-full align-x-center align-y-center",
 			ZIndex = 1
-		}, { Icon = reactModule.createElement(p0.icon) }),
-		NotificationBadge = if var5 then reactModule.createElement(statusIndicator, {
+		}, { Icon = reactModule.createElement(p1.icon) }),
+		NotificationBadge = if var2 then reactModule.createElement(statusIndicator, {
 			ZIndex = 2,
-			value = var6,
+			value = var3,
 			variant = if flags.FoundationStatusIndicatorVariantExperiment then statusIndicatorVariant.Contrast_Experiment else statusIndicatorVariant.Emphasis,
 			AnchorPoint = Vector2.new(0, 0),
-			Position = UDim2.new(0, var4.Gap.XXLarge, 0, var4.Gap.Small)
+			Position = UDim2.new(0, var1.Gap.XXLarge, 0, var1.Gap.Small)
 		}) else nil
 	})
 end

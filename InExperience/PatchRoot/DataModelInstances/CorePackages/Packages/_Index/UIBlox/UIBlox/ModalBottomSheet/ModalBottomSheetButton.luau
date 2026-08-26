@@ -8,10 +8,10 @@ local roundedFrameModule = require(parent.UIBlox.App.Menu.RoundedFrame)
 local modalBottomSheetButton = roactModule.PureComponent:extend("ModalBottomSheetButton")
 local imageRectSize = imagesModule["component_assets/circle_17"].ImageRectSize
 local imageRectOffset = imagesModule["component_assets/circle_17"].ImageRectOffset
-local var7 = 8 * imagesModule.ImagesResolutionScale
-local var8 = 8 * imagesModule.ImagesResolutionScale
-local rect = Rect.new(var7, var8, imageRectSize.x - var7, imageRectSize.y - var8)
-local var10 = 8 * imagesModule.ImagesResolutionScale
+local var1 = 8 * imagesModule.ImagesResolutionScale
+local var2 = 8 * imagesModule.ImagesResolutionScale
+local rect = Rect.new(var1, var2, imageRectSize.x - var1, imageRectSize.y - var2)
+local var3 = 8 * imagesModule.ImagesResolutionScale
 modalBottomSheetButton.validateProps = tModule.strictInterface({
 	icon = tModule.optional(tModule.union(tModule.table, tModule.string)),
 	text = tModule.optional(tModule.string),
@@ -32,17 +32,17 @@ modalBottomSheetButton.defaultProps = {
 	onActivated = function() end
 }
 
-function modalBottomSheetButton.init(p0)
+function modalBottomSheetButton.init(p1)
 	-- upvalues: roactModule (ref)
-	local var11, var12 = roactModule.createBinding(false)
-	p0.pressed = var11
-	p0.updatePressed = var12
-	p0.ref = roactModule.createRef()
+	local var4, var5 = roactModule.createBinding(false)
+	p1.pressed = var4
+	p1.updatePressed = var5
+	p1.ref = roactModule.createRef()
 	
-	function p0.onColorChange(p1)
-		-- upvalues: p0 (ref)
-		if p0.ref.current then
-			p0.ref.current.ImageColor3 = p1
+	function p0.onColorChange(p2)
+		-- upvalues: p1 (ref)
+		if p1.ref.current then
+			p1.ref.current.ImageColor3 = p2
 			
 			return
 		end
@@ -52,65 +52,65 @@ function modalBottomSheetButton.init(p0)
 		return if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true
 	end
 	
-	function p0.onInputEnd(p3)
-		return if p3.UserInputType ~= Enum.UserInputType.MouseButton1 then p3.UserInputType == Enum.UserInputType.Touch else true
+	function p0.onInputEnd(p2)
+		return if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true
 	end
 end
 
-function modalBottomSheetButton.render(p4)
-	-- upvalues: imageRectSize (ref), imageRectOffset (ref), rect (ref), withStyleModule (ref), roactModule (ref), imagesModule (ref), imageSetComponentModule (ref), roundedFrameModule (ref), var10 (ref)
-	local vector2, var16
-	local hasRoundTop = p4.props.hasRoundTop
-	local hasRoundBottom = p4.props.hasRoundBottom
+function modalBottomSheetButton.render(p1)
+	-- upvalues: imageRectSize (ref), imageRectOffset (ref), rect (ref), withStyleModule (ref), roactModule (ref), imagesModule (ref), imageSetComponentModule (ref), roundedFrameModule (ref), var3 (ref)
+	local vector2, var4
+	local hasRoundTop = p1.props.hasRoundTop
+	local hasRoundBottom = p1.props.hasRoundBottom
 	local _ = nil
 	local _ = nil
 	local rect_1 = nil
 	local x = imageRectSize.X
-	local var14 = x / 2
+	local var5 = x / 2
 	
 	if hasRoundTop and hasRoundBottom then
 		vector2 = imageRectSize
-		var16 = imageRectOffset
+		var4 = imageRectOffset
 		rect_1 = rect
 	elseif hasRoundTop then
-		vector2 = Vector2.new(x, var14)
-		var16 = imageRectOffset
-		rect_1 = Rect.new(var14 - 1, var14 - 1, var14 + 1, var14)
+		vector2 = Vector2.new(x, var5)
+		var4 = imageRectOffset
+		rect_1 = Rect.new(var5 - 1, var5 - 1, var5 + 1, var5)
 	elseif hasRoundBottom then
-		vector2 = Vector2.new(x, var14)
-		var16 = imageRectOffset + Vector2.new(0, var14)
-		rect_1 = Rect.new(var14 - 1, 0, var14 + 1, 1)
+		vector2 = Vector2.new(x, var5)
+		var4 = imageRectOffset + Vector2.new(0, var5)
+		rect_1 = Rect.new(var5 - 1, 0, var5 + 1, 1)
 	else
 		vector2 = Vector2.new(1, 1)
-		var16 = imageRectOffset + Vector2.new(var14, var14)
+		var4 = imageRectOffset + Vector2.new(var5, var5)
 	end
-	local elementHeight = p4.props.elementHeight
-	local var17 = if p4.props.isFixed then UDim2.new(0, 300, 0, elementHeight) else UDim2.new(1, -32, 0, elementHeight)
-	local var18 = if p4.props.showImage or p4.props.renderRightElement then 12 else 24
-	local var19 = var18
-	local var20 = elementHeight * 0.8
+	local elementHeight = p1.props.elementHeight
+	local var6 = if p1.props.isFixed then UDim2.new(0, 300, 0, elementHeight) else UDim2.new(1, -32, 0, elementHeight)
+	local var7 = if p1.props.showImage or p1.props.renderRightElement then 12 else 24
+	local var8 = var7
+	local var9 = elementHeight * 0.8
 	
-	if p4.props.showImage then
-		var19 = var19 + var20 + var18
+	if p1.props.showImage then
+		var8 = var8 + var9 + var7
 	end
-	if p4.props.renderRightElement then
-		var19 = var19 + var20 + var18
+	if p1.props.renderRightElement then
+		var8 = var8 + var9 + var7
 	end
-	return withStyleModule(function(p5)
-		-- upvalues: p4 (ref), roactModule (copy), rect_1 (write), imagesModule (copy), vector2 (write), var16 (write), var18 (write), imageSetComponentModule (copy), var20 (ref), var19 (write), hasRoundBottom (ref), var17 (write), roundedFrameModule (copy), hasRoundTop (ref), var10 (copy)
-		local theme = p5.Theme
-		local font = p5.Font
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), roactModule (copy), rect_1 (write), imagesModule (copy), vector2 (write), var4 (write), var7 (write), imageSetComponentModule (copy), var9 (ref), var8 (write), hasRoundBottom (ref), var6 (write), roundedFrameModule (copy), hasRoundTop (ref), var3 (copy)
+		local theme = p2.Theme
+		local font = p2.Font
 		local _ = nil
 		local _ = nil
 		local _ = nil
 		local _ = nil
-		local var21 = p4.pressed:map(function(p6)
+		local var10 = p1.pressed:map(function(p3)
 			-- upvalues: theme (ref)
-			return if p6 then theme.BackgroundOnPress.Color else theme.BackgroundUIDefault.Color
+			return if p3 then theme.BackgroundOnPress.Color else theme.BackgroundUIDefault.Color
 		end)
-		local var22 = p4.pressed:map(function(p7)
+		local var11 = p1.pressed:map(function(p3)
 			-- upvalues: theme (ref)
-			return if p7 then theme.BackgroundOnPress.Transparency else theme.BackgroundUIDefault.Transparency
+			return if p3 then theme.BackgroundOnPress.Transparency else theme.BackgroundUIDefault.Transparency
 		end)
 		local color = theme.TextEmphasis.Color
 		local transparency = theme.TextEmphasis.Transparency
@@ -118,14 +118,14 @@ function modalBottomSheetButton.render(p4)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			LayoutOrder = p4.props.LayoutOrder,
-			Size = var17
+			LayoutOrder = p1.props.LayoutOrder,
+			Size = var6
 		}, {
 			Background = roactModule.createElement(roundedFrameModule, {
 				zIndex = -1,
 				background = theme.BackgroundUIDefault,
-				topCornerRadius = if hasRoundTop then UDim.new(0, var10) else nil,
-				bottomCornerRadius = if hasRoundBottom then UDim.new(0, var10) else nil
+				topCornerRadius = if hasRoundTop then UDim.new(0, var3) else nil,
+				bottomCornerRadius = if hasRoundBottom then UDim.new(0, var3) else nil
 			}),
 			Button = roactModule.createElement("ImageButton", {
 				AutoButtonColor = false,
@@ -134,24 +134,24 @@ function modalBottomSheetButton.render(p4)
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = rect_1,
 				Image = imagesModule["component_assets/circle_17"].Image,
-				ImageColor3 = var21,
+				ImageColor3 = var10,
 				ImageRectSize = vector2,
-				ImageRectOffset = var16,
-				ImageTransparency = var22,
+				ImageRectOffset = var4,
+				ImageTransparency = var11,
 				Size = UDim2.fromScale(1, 1),
-				LayoutOrder = p4.props.LayoutOrder,
-				[roactModule.Ref] = p4.ref,
-				[roactModule.Event.Activated] = p4.props.onActivatedAndDismissed,
-				[roactModule.Event.InputBegan] = function(_, p8)
-					-- upvalues: p4 (copy)
-					if p4.onInputBegan(p8) then
-						p4.updatePressed(true)
+				LayoutOrder = p1.props.LayoutOrder,
+				[roactModule.Ref] = p1.ref,
+				[roactModule.Event.Activated] = p1.props.onActivatedAndDismissed,
+				[roactModule.Event.InputBegan] = function(_, p3)
+					-- upvalues: p1 (copy)
+					if p1.onInputBegan(p3) then
+						p1.updatePressed(true)
 					end
 				end,
-				[roactModule.Event.InputEnded] = function(_, p9)
-					-- upvalues: p4 (copy)
-					if p4.onInputEnd(p9) then
-						p4.updatePressed(false)
+				[roactModule.Event.InputEnded] = function(_, p3)
+					-- upvalues: p1 (copy)
+					if p1.onInputEnd(p3) then
+						p1.updatePressed(false)
 					end
 				end
 			}, {
@@ -159,38 +159,38 @@ function modalBottomSheetButton.render(p4)
 					horizontalLayout = roactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Horizontal,
 						SortOrder = Enum.SortOrder.LayoutOrder,
-						Padding = UDim.new(0, var18)
+						Padding = UDim.new(0, var7)
 					}),
 					padding = roactModule.createElement("UIPadding", {
-						PaddingLeft = UDim.new(0, var18),
+						PaddingLeft = UDim.new(0, var7),
 						PaddingTop = UDim.new(0.1, 0),
 						PaddingBottom = UDim.new(0.1, 0)
 					}),
-					icon = p4.props.showImage and roactModule.createElement(imageSetComponentModule.Label, {
+					icon = p1.props.showImage and roactModule.createElement(imageSetComponentModule.Label, {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
-						Image = p4.props.icon,
+						Image = p1.props.icon,
 						ImageColor3 = color,
 						ImageTransparency = transparency,
-						Size = UDim2.new(0, var20, 0, var20)
+						Size = UDim2.new(0, var9, 0, var9)
 					}) or nil,
 					textLabel = roactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
 						TextXAlignment = Enum.TextXAlignment.Left,
-						Size = UDim2.new(1, -var19, 1, 0),
-						Text = p4.props.text,
+						Size = UDim2.new(1, -var8, 1, 0),
+						Text = p1.props.text,
 						TextTransparency = transparency,
 						Font = font.Header2.Font,
 						TextColor3 = color,
 						TextSize = font.Header2.RelativeSize * font.BaseSize,
 						TextTruncate = Enum.TextTruncate.AtEnd
 					}),
-					rightContainer = p4.props.renderRightElement and roactModule.createElement("Frame", {
+					rightContainer = p1.props.renderRightElement and roactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 3,
-						Size = UDim2.new(0, var20, 0, var20)
-					}, { hint = p4.props.renderRightElement() })
+						Size = UDim2.new(0, var9, 0, var9)
+					}, { hint = p1.props.renderRightElement() })
 				}),
 				bottomBorder = not hasRoundBottom and roactModule.createElement("Frame", {
 					LayoutOrder = 0,

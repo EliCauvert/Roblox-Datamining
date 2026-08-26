@@ -6,37 +6,37 @@ local function _()
 	return {}
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useIdFallback (ref), presenceContextModule (ref)
-	if not p0.children or typeof(p0.children) == "string" then
+	if not p1.children or typeof(p1.children) == "string" then
 		error("PresenceChild: children must be a React.Element")
 	end
-	if not p0.children.type then
+	if not p1.children.type then
 		error("PresenceChild: children must be a React.Element")
 	end
-	if p0.onExitComplete and typeof(p0.onExitComplete) ~= "function" and not p0.onExitComplete._isMockFunction then
+	if p1.onExitComplete and typeof(p1.onExitComplete) ~= "function" and not p1.onExitComplete._isMockFunction then
 		error("PresenceChild: onExitComplete must be a function")
 	end
-	local children = p0.children
-	local isPresent = p0.isPresent
-	local onExitComplete = p0.onExitComplete
+	local children = p1.children
+	local isPresent = p1.isPresent
+	local onExitComplete = p1.onExitComplete
 	local current = reactModule.useRef({}).current
 	local t = {
-		id = p0.presenceId or useIdFallback(),
+		id = p1.presenceId or useIdFallback(),
 		isPresent = isPresent ~= false,
-		passThroughData = p0.passThroughData,
-		onExitComplete = function(p1)
+		passThroughData = p1.passThroughData,
+		onExitComplete = function(p2)
 			-- upvalues: current (ref), onExitComplete (ref)
-			current[p1] = true
-			local var3 = true
+			current[p2] = true
+			local var1 = true
 			
 			for i, v in pairs(current) do
 				if not v then
-					var3 = false
+					var1 = false
 					break
 				end
 			end
-			if var3 and onExitComplete then
+			if var1 and onExitComplete then
 				onExitComplete()
 			end
 		end

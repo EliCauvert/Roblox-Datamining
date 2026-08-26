@@ -10,23 +10,23 @@ return {
 			-- upvalues: generatedTypesModule (ref)
 			return generatedTypesModule.ShareLinkType.ExperienceDetails
 		end,
-		linkId = function(p0)
-			return p0.linkId
+		linkId = function(p1)
+			return p1.linkId
 		end,
 		shortUrl = function(p1)
 			return p1.shortUrl
 		end,
-		universeId = function(_, _, _, p2)
-			return p2.variableValues.universeId
+		universeId = function(_, _, _, p1)
+			return p1.variableValues.universeId
 		end
 	},
 	Query = {
-		experienceDetailsLinkByUniverseId = function(_, p3, p4, _)
+		experienceDetailsLinkByUniverseId = function(_, p1, p2, _)
 			-- upvalues: shareLinkConnectorModule (ref), cryoModule (ref), generatedTypesModule (ref)
 			return shareLinkConnectorModule.fetchShareLink(cryoModule.Dictionary.join({
 				linkType = generatedTypesModule.ShareLinkType.ExperienceDetails,
-				data = p3
-			}), p4.fetchImpl)
+				data = p1
+			}), p2.fetchImpl)
 		end
 	}
 }

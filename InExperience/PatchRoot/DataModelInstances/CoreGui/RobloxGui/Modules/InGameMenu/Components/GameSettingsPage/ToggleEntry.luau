@@ -22,8 +22,8 @@ toggleEntry.validateProps = t.strictInterface({
 	NextSelectionUp = t.optional(t.union(t.Instance, t.table))
 })
 
-function toggleEntry.init(p0)
-	p0.state = { isSelectable = true }
+function toggleEntry.init(p1)
+	p1.state = { isSelectable = true }
 end
 
 function toggleEntry.render(p1)

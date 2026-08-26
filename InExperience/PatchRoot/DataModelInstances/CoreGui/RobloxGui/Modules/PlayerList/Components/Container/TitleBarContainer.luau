@@ -7,23 +7,23 @@ local useLeaderboardStore = require(corePackagesService.Workspace.Packages.Playe
 local titleBarViewModule = require(parent.Components.PresentationCommon.TitleBarView)
 local fFlagPlayerListFixLeaderstatsStacking = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLeaderboardStore (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), reactModule (ref), titleBarViewModule (ref)
 	local gameStatsList = useLeaderboardStore().getGameStatsList()
 	
 	return reactModule.createElement(titleBarViewModule, {
 		gameStats = gameStatsList,
 		gameStatsCount = if fFlagPlayerListFixLeaderstatsStacking then nil elseif fFlagPlayerListFixLeaderstatsStacking then nil else signalsReactModule.useSignalState(gameStatsList.getCount),
-		size = p0.size,
-		entrySizeX = p0.entrySizeX,
-		layoutOrder = p0.layoutOrder,
-		contentsVisible = p0.contentsVisible,
-		isSmallTouchDevice = p0.isSmallTouchDevice,
-		showDivider = p0.showDivider,
-		showBackground = p0.showBackground,
-		backgroundTransparency = p0.backgroundTransparency,
-		useCustomTextColor = p0.useCustomTextColor,
-		customTextColor = p0.customTextColor,
-		headerPaddingLeft = p0.headerPaddingLeft
+		size = p1.size,
+		entrySizeX = p1.entrySizeX,
+		layoutOrder = p1.layoutOrder,
+		contentsVisible = p1.contentsVisible,
+		isSmallTouchDevice = p1.isSmallTouchDevice,
+		showDivider = p1.showDivider,
+		showBackground = p1.showBackground,
+		backgroundTransparency = p1.backgroundTransparency,
+		useCustomTextColor = p1.useCustomTextColor,
+		customTextColor = p1.customTextColor,
+		headerPaddingLeft = p1.headerPaddingLeft
 	})
 end)

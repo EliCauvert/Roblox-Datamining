@@ -4,15 +4,15 @@ local foundationModule = require(parent.Foundation)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local collaborators = require(parent.FoundationCloudAssets).Assets["pictograms/collaborators"]
 
-function EmptyState(p0)
+function EmptyState(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), foundationModule (ref), collaborators (ref)
-	local var2 = useLocalization({
+	local var1 = useLocalization({
 		noAvatars = "Feature.AvatarSwitcher.Message.NoAvatars",
 		addAvatars = "Feature.AvatarSwitcher.Message.AddAvatars"
 	})
 	
 	return reactModule.createElement(foundationModule.View, { tag = "size-full" }, {
-		Header = p0.headerSlot,
+		Header = p1.headerSlot,
 		Content = reactModule.createElement(foundationModule.View, {
 			tag = "auto-xy position-center-center anchor-center-center col align-x-center"
 		}, {
@@ -24,12 +24,12 @@ function EmptyState(p0)
 			Text = reactModule.createElement(foundationModule.Text, {
 				tag = "auto-xy text-title-large padding-bottom-small",
 				LayoutOrder = 2,
-				Text = var2.noAvatars
+				Text = var1.noAvatars
 			}),
 			SubText = reactModule.createElement(foundationModule.Text, {
 				tag = "auto-xy text-body-medium",
 				LayoutOrder = 3,
-				Text = var2.addAvatars
+				Text = var1.addAvatars
 			})
 		})
 	})

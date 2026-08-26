@@ -12,20 +12,20 @@ local t = {
 	upsellType = socialUpsellTypeModule.Unknown
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), cryoModule (ref), t (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), socialUpsellTypeModule (ref), FAEUpsellOverlayModule (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), t (copy), p0 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), socialUpsellTypeModule (copy), reactModule (copy), FAEUpsellOverlayModule (copy)
-		local var7 = nil
-		local var8 = cryoModule.Dictionary.union(t, p0.data or {})
-		var8.containerRef = p0.containerRef
+		-- upvalues: cryoModule (copy), t (copy), p1 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), socialUpsellTypeModule (copy), reactModule (copy), FAEUpsellOverlayModule (copy)
+		local var1 = nil
+		local var2 = cryoModule.Dictionary.union(t, p1.data or {})
+		var2.containerRef = p1.containerRef
 		
 		if not fFlagEnableAEGIS2CommsFAEUpsell then
-			var8.isInExperience = false
+			var2.isInExperience = false
 		end
-		if p0.upsellType == socialUpsellTypeModule.FacialAgeEstimation then
-			var7 = reactModule.createElement(FAEUpsellOverlayModule, var8)
+		if p1.upsellType == socialUpsellTypeModule.FacialAgeEstimation then
+			var1 = reactModule.createElement(FAEUpsellOverlayModule, var2)
 		end
-		return var7
-	end, { p0.upsellType, p0.data })
+		return var1
+	end, { p1.upsellType, p1.data })
 end

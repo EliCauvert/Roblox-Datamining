@@ -35,9 +35,9 @@ local t_1 = {
 	CH = true
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t_1 (ref)
-	return p0 == nil or t_1[string.upper(p0)] == true
+	return p1 == nil or t_1[string.upper(p1)] == true
 end
 
 local _ = function(p1, p2)
@@ -48,13 +48,13 @@ local _ = function(p1, p2)
 	}
 end
 
-function t.computeDecision(p3, p4)
+function t.computeDecision(p1, p2)
 	-- upvalues: t_1 (ref)
-	return if p3 == nil then { applySharingFilter = true, dmaConsent = nil } else {
-		applySharingFilter = not p3,
+	return if p1 == nil then { applySharingFilter = true, dmaConsent = nil } else {
+		applySharingFilter = not p1,
 		dmaConsent = {
-			isSubjectToGdpr = p4 == nil or t_1[string.upper(p4)] == true,
-			consented = p3
+			isSubjectToGdpr = p2 == nil or t_1[string.upper(p2)] == true,
+			consented = p1
 		}
 	}
 end
@@ -63,16 +63,16 @@ local _ = function(_, _)
 	return true
 end
 
-local _ = function(p5)
-	return p5 == nil
+local _ = function(p1)
+	return p1 == nil
 end
 
-function t.resolveAndPublish(p6, _, p7, p8)
+function t.resolveAndPublish(p1, _, p2, p3)
 	-- upvalues: t (ref)
-	if p7 == nil then
+	if p2 == nil then
 		return
 	end
-	p6:adConsentResolved(t.computeDecision(p7, p8))
+	p1:adConsentResolved(t.computeDecision(p2, p3))
 end
 
 return t

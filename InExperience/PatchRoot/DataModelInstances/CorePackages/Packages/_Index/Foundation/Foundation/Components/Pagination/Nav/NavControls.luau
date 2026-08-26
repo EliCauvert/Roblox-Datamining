@@ -18,38 +18,38 @@ local t = {
 }
 local t_1 = { start = "left-nav", ["end"] = "right-nav" }
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: paginationDirectionModule (ref)
-	return if p0 == paginationDirectionModule.First or p0 == paginationDirectionModule.Last then p1.hasFirstLastButtons else true
+	return if p1 == paginationDirectionModule.First or p1 == paginationDirectionModule.Last then p2.hasFirstLastButtons else true
 end
 
-local _ = function(p2, p3)
+local _ = function(p1, p2)
 	-- upvalues: paginationDirectionModule (ref)
-	return if p2 == paginationDirectionModule.First then p3.isFirstDisabled elseif p2 == paginationDirectionModule.Backward then p3.isBackDisabled elseif p2 == paginationDirectionModule.Forward then p3.isForwardDisabled else p3.isLastDisabled
+	return if p1 == paginationDirectionModule.First then p2.isFirstDisabled elseif p1 == paginationDirectionModule.Backward then p2.isBackDisabled elseif p1 == paginationDirectionModule.Forward then p2.isForwardDisabled else p2.isLastDisabled
 end
 
-return reactModule.memo(function(p4)
+return reactModule.memo(function(p1)
 	-- upvalues: t (ref), paginationDirectionModule (ref), paginationSlotsUtilsModule (ref), reactModule (ref), navButtonModule (ref), viewModule (ref), t_1 (ref)
-	local side = t[p4.side]
+	local side = t[p1.side]
 	local t_2 = {}
-	local var9 = 0
+	local var1 = 0
 	
 	for i = 1, #side do
-		local var10 = side[i]
-		local var11 = if var10 == paginationDirectionModule.First or var10 == paginationDirectionModule.Last then p4.hasFirstLastButtons else true
+		local var2 = side[i]
+		local var3 = if var2 == paginationDirectionModule.First or var2 == paginationDirectionModule.Last then p1.hasFirstLastButtons else true
 		
-		if var11 then
-			var9 += 1
-			var11 = paginationSlotsUtilsModule.NAV_SLOT_IDS[var10]
-			local slotBindings = p4.selection.getSlotBindings(var11)
-			t_2[var10] = reactModule.createElement(navButtonModule, {
-				baseTestId = p4.testId,
-				slotSize = p4.size,
-				direction = var10,
-				isDisabled = if var10 == paginationDirectionModule.First then p4.isFirstDisabled elseif var10 == paginationDirectionModule.Backward then p4.isBackDisabled elseif var10 == paginationDirectionModule.Forward then p4.isForwardDisabled else p4.isLastDisabled,
-				LayoutOrder = var9,
-				onDirectionActivated = p4.onDirectionActivated,
-				ref = p4.selection.getSlotRef(var11),
+		if var3 then
+			var1 += 1
+			var3 = paginationSlotsUtilsModule.NAV_SLOT_IDS[var2]
+			local slotBindings = p1.selection.getSlotBindings(var3)
+			t_2[var2] = reactModule.createElement(navButtonModule, {
+				baseTestId = p1.testId,
+				slotSize = p1.size,
+				direction = var2,
+				isDisabled = if var2 == paginationDirectionModule.First then p1.isFirstDisabled elseif var2 == paginationDirectionModule.Backward then p1.isBackDisabled elseif var2 == paginationDirectionModule.Forward then p1.isForwardDisabled else p1.isLastDisabled,
+				LayoutOrder = var1,
+				onDirectionActivated = p1.onDirectionActivated,
+				ref = p1.selection.getSlotRef(var3),
 				Selectable = slotBindings.Selectable,
 				NextSelectionLeft = slotBindings.NextSelectionLeft,
 				NextSelectionRight = slotBindings.NextSelectionRight,
@@ -60,7 +60,7 @@ return reactModule.memo(function(p4)
 	end
 	return reactModule.createElement(viewModule, {
 		tag = "row gap-xsmall auto-xy",
-		LayoutOrder = p4.LayoutOrder,
-		testId = `{p4.testId}--{t_1[p4.side]}`
+		LayoutOrder = p1.LayoutOrder,
+		testId = `{p1.testId}--{t_1[p4.side]}`
 	}, t_2)
 end)

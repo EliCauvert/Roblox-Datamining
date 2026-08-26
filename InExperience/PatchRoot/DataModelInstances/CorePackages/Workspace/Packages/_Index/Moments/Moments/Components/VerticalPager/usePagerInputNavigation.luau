@@ -14,42 +14,42 @@ local PREVIOUS_EVENT = pagerNavigationModule.PREVIOUS_EVENT
 local NEXT_EVENT = pagerNavigationModule.NEXT_EVENT
 local KEYBOARD_KEY_EVENTS = pagerNavigationModule.KEYBOARD_KEY_EVENTS
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useDescendantHasFocus (ref), useAutoFocus (ref), useLastInputMode (ref), pagerNavigationModule (ref), PREVIOUS_EVENT (ref), inputHandlersModule (ref), NEXT_EVENT (ref), reactFocusNavigationModule (ref), userInputService (ref), constantsModule (ref), KEYBOARD_KEY_EVENTS (ref)
-	local active = p0.active
-	local keyboardNavigation = p0.keyboardNavigation
-	local var7 = reactModule.useRef(p0.goNext)
-	var7.current = p0.goNext
-	local var8 = reactModule.useRef(p0.goPrevious)
-	var8.current = p0.goPrevious
-	local var9, var10 = reactModule.useState(nil)
-	local var11 = useDescendantHasFocus(var9)
-	local var12 = useAutoFocus({ var9 }, 0.1)
-	local var13 = active and (var9 ~= nil and (not var11 and useLastInputMode() == "Focus"))
+	local active = p1.active
+	local keyboardNavigation = p1.keyboardNavigation
+	local var1 = reactModule.useRef(p1.goNext)
+	var1.current = p1.goNext
+	local var2 = reactModule.useRef(p1.goPrevious)
+	var2.current = p1.goPrevious
+	local var3, var4 = reactModule.useState(nil)
+	local var5 = useDescendantHasFocus(var3)
+	local var6 = useAutoFocus({ var3 }, 0.1)
+	local var7 = active and (var3 ~= nil and (not var5 and useLastInputMode() == "Focus"))
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var12 (ref)
-		local var15 = if var13 then var12() else nil
+		-- upvalues: var7 (ref), var6 (ref)
+		local var8 = if var7 then var6() else nil
 		
 		return function()
-			-- upvalues: var15 (write)
-			if var15 then
-				var15.cancel()
+			-- upvalues: var8 (write)
+			if var8 then
+				var8.cancel()
 			end
 		end
-	end, { var13, var12 })
-	local var14 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: PREVIOUS_EVENT (copy), inputHandlersModule (copy), var8 (ref), NEXT_EVENT (copy), var7 (ref)
+	end, { var7, var6 })
+	local var8 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
+		-- upvalues: PREVIOUS_EVENT (copy), inputHandlersModule (copy), var2 (ref), NEXT_EVENT (copy), var1 (ref)
 		return {
 			[PREVIOUS_EVENT] = {
 				handler = inputHandlersModule.onRelease(function()
-					-- upvalues: var8 (copy)
-					var8.current()
+					-- upvalues: var2 (copy)
+					var2.current()
 				end)
 			},
 			[NEXT_EVENT] = {
 				handler = inputHandlersModule.onRelease(function()
-					-- upvalues: var7 (copy)
-					var7.current()
+					-- upvalues: var1 (copy)
+					var1.current()
 				end)
 			}
 		}
@@ -58,26 +58,26 @@ return function(p0)
 		return pagerNavigationModule.buildEventMap(active, keyboardNavigation)
 	end, { active, keyboardNavigation })))
 	reactModule.useEffect(function()
-		-- upvalues: active (ref), var11 (ref), userInputService (copy), pagerNavigationModule (copy), constantsModule (copy), var8 (ref), var7 (ref)
-		if active and var11 then
-			local var16 = 0
-			local inputChangedConnection = userInputService.InputChanged:Connect(function(p1)
-				-- upvalues: pagerNavigationModule (copy), constantsModule (copy), var16 (write), var8 (copy), var7 (copy)
-				if p1.KeyCode ~= Enum.KeyCode.Thumbstick1 then return end
-				local var18 = pagerNavigationModule.thumbstickDirection(p1.Position.Y, constantsModule.THUMBSTICK_THRESHOLD)
+		-- upvalues: active (ref), var5 (ref), userInputService (copy), pagerNavigationModule (copy), constantsModule (copy), var2 (ref), var1 (ref)
+		if active and var5 then
+			local var9 = 0
+			local inputChangedConnection = userInputService.InputChanged:Connect(function(p2)
+				-- upvalues: pagerNavigationModule (copy), constantsModule (copy), var9 (write), var2 (copy), var1 (copy)
+				if p2.KeyCode ~= Enum.KeyCode.Thumbstick1 then return end
+				local var10 = pagerNavigationModule.thumbstickDirection(p2.Position.Y, constantsModule.THUMBSTICK_THRESHOLD)
 				
-				if var18 == nil then return end
+				if var10 == nil then return end
 				local processTime = os.clock()
 				
-				if processTime - var16 < constantsModule.THUMBSTICK_COOLDOWN_SECONDS then return end
-				var16 = processTime
+				if processTime - var9 < constantsModule.THUMBSTICK_COOLDOWN_SECONDS then return end
+				var9 = processTime
 				
-				if var18 == "previous" then
-					var8.current()
+				if var10 == "previous" then
+					var2.current()
 					
 					return
 				end
-				var7.current()
+				var1.current()
 			end)
 			
 			return function()
@@ -85,21 +85,21 @@ return function(p0)
 				inputChangedConnection:Disconnect()
 			end
 		end
-	end, { active, var11 })
+	end, { active, var5 })
 	reactModule.useEffect(function()
-		-- upvalues: active (ref), keyboardNavigation (ref), userInputService (copy), KEYBOARD_KEY_EVENTS (copy), PREVIOUS_EVENT (copy), var8 (ref), NEXT_EVENT (copy), var7 (ref)
+		-- upvalues: active (ref), keyboardNavigation (ref), userInputService (copy), KEYBOARD_KEY_EVENTS (copy), PREVIOUS_EVENT (copy), var2 (ref), NEXT_EVENT (copy), var1 (ref)
 		if active and keyboardNavigation == "global" then
 			local inputBeganConnection = userInputService.InputBegan:Connect(function(p2, p3)
-				-- upvalues: KEYBOARD_KEY_EVENTS (copy), PREVIOUS_EVENT (copy), var8 (copy), NEXT_EVENT (copy), var7 (copy)
+				-- upvalues: KEYBOARD_KEY_EVENTS (copy), PREVIOUS_EVENT (copy), var2 (copy), NEXT_EVENT (copy), var1 (copy)
 				if p3 then return end
 				local keyCode = KEYBOARD_KEY_EVENTS[p2.KeyCode]
 				
 				if keyCode == PREVIOUS_EVENT then
-					var8.current()
+					var2.current()
 					
 					return
 				elseif keyCode == NEXT_EVENT then
-					var7.current()
+					var1.current()
 				end
 			end)
 			
@@ -110,9 +110,9 @@ return function(p0)
 		end
 	end, { active, keyboardNavigation })
 	
-	return reactModule.useCallback(function(p4)
-		-- upvalues: var14 (ref), var10 (ref)
-		var14(p4)
-		var10(p4)
-	end, { var14 })
+	return reactModule.useCallback(function(p2)
+		-- upvalues: var8 (ref), var4 (ref)
+		var8(p2)
+		var4(p2)
+	end, { var8 })
 end

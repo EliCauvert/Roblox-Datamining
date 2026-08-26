@@ -7,9 +7,9 @@ local useStyle = require(parent.UIBlox).Core.Style.useStyle
 
 return function()
 	-- upvalues: useStyle (ref), useLocalization (ref), constantsModule (ref), reactModule (ref)
-	local var3 = useStyle()
-	local font = var3.Font
-	local var4 = useLocalization({ emptyText = constantsModule.Text.EmptyKey })
+	local var1 = useStyle()
+	local font = var1.Font
+	local var2 = useLocalization({ emptyText = constantsModule.Text.EmptyKey })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -27,10 +27,10 @@ return function()
 		reactModule.createElement("TextLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
-			Text = var4 and var4.emptyText,
+			Text = var2 and var2.emptyText,
 			Font = font.Header1.Font,
 			TextSize = font.BaseSize,
-			TextColor3 = var3.Theme.TextDefault.Color,
+			TextColor3 = var1.Theme.TextDefault.Color,
 			Size = UDim2.new(1, 0, 0, constantsModule.EmptyNotifications.LabelHeight)
 		})
 	})

@@ -10,25 +10,25 @@ local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperi
 local bundleInfoModule = require(parent.Models.BundleInfo)
 
 return roduxModule.createReducer({}, {
-	[setFavoriteBundleModule.name] = function(p0, p1)
+	[setFavoriteBundleModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref), bundleInfoModule (ref)
-		p0[p1.id] = cryoModule.Dictionary.join(cryoModule.Dictionary.join({}, p0[p1.id] or {}), bundleInfoModule.fromGetFavoriteForAsset(p1.id, p1.isFavorite))
+		p1[p2.id] = cryoModule.Dictionary.join(cryoModule.Dictionary.join({}, p1[p2.id] or {}), bundleInfoModule.fromGetFavoriteForAsset(p2.id, p2.isFavorite))
 		
-		return p0
+		return p1
 	end,
-	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p2, p3)
+	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p1, p2)
 		-- upvalues: cryoModule (ref), bundleInfoModule (ref)
-		for i, v in p3.result.Items do
+		for i, v in p2.result.Items do
 			if v.type == Enum.MarketplaceProductType.AvatarBundle then
-				local var8 = cryoModule.Dictionary.join({}, p2[v.id])
-				p2[v.id] = cryoModule.Dictionary.join(var8, bundleInfoModule.fromBulkPurchaseResult(v, var8))
+				local var1 = cryoModule.Dictionary.join({}, p1[v.id])
+				p1[v.id] = cryoModule.Dictionary.join(var1, bundleInfoModule.fromBulkPurchaseResult(v, var1))
 			end
 		end
-		return p2
+		return p1
 	end else nil,
-	[setAvatarPreviewDetailsModule.name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p4, p5)
+	[setAvatarPreviewDetailsModule.name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p3, p4)
 		-- upvalues: itemTypeEnum (ref), bundleInfoModule (ref), cryoModule (ref)
-		local look = p5.avatarPreviewDetails.look
+		local look = p4.avatarPreviewDetails.look
 		local t = {}
 		
 		if look.items then
@@ -38,16 +38,16 @@ return roduxModule.createReducer({}, {
 				end
 			end
 		end
-		return cryoModule.Dictionary.join(p4, t)
+		return cryoModule.Dictionary.join(p3, t)
 	end else nil,
-	[setBundlesModule.name] = function(p6, p7)
+	[setBundlesModule.name] = function(p5, p6)
 		-- upvalues: cryoModule (ref), bundleInfoModule (ref)
 		local t_1
 		local t = {}
 		
-		for i, v in ipairs(p7.bundles) do
+		for i, v in ipairs(p6.bundles) do
 			assert(v.bundleId ~= nil, "Expected a bundle id when setting a bundle's information.")
-			local bundleId = p6[v.bundleId] or {}
+			local bundleId = p5[v.bundleId] or {}
 			
 			if not v.assetsInBundle then
 				t[v.bundleId] = cryoModule.Dictionary.join(bundleId, v)
@@ -68,6 +68,6 @@ return roduxModule.createReducer({}, {
 			end
 			v.assetsInBundle = t_1
 		end
-		return cryoModule.Dictionary.join(p6, t)
+		return cryoModule.Dictionary.join(p5, t)
 	end
 })

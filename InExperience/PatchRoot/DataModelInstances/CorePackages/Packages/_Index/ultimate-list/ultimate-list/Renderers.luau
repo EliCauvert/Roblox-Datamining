@@ -1,10 +1,10 @@
 ﻿local _ = require(script:FindFirstAncestor("ultimate-list").Parent.React)
 
 return {
-	byState = function(p0, p1)
-		return { type = "byState", callback = p0, config = p1 or {} }
+	byState = function(p1, p2)
+		return { type = "byState", callback = p1, config = p2 or {} }
 	end,
-	byBinding = function(p2)
-		return { type = "byBinding", callback = p2 }
+	byBinding = function(p1)
+		return { type = "byBinding", callback = p1 }
 	end
 }

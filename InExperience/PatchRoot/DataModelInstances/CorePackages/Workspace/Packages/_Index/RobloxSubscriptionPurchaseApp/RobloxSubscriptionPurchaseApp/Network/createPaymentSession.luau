@@ -14,15 +14,15 @@ local fFlagSubscriptionUpsellCounterWithErrorReasonModule = require(robloxSubscr
 local httpService = game:GetService("HttpService")
 local text = url.APIS_URL .. "payments-gateway/v1/payment-sessions"
 
-return function(p0)
+return function(p1)
 	-- upvalues: surfaceContextModule (ref), surfaceNameModule (ref), httpRequestModule (ref), text (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), fFlagSubscriptionUpsellCounterWithErrorReasonModule (ref), logRobloxSubscriptionUpsellTelemetryEventModule (ref), httpService (ref), promiseModule (ref)
-	p0 = p0 or {
+	p1 = p1 or {
 		context = surfaceContextModule.Unspecified,
 		surfaceName = surfaceNameModule.Unspecified,
 		metadata = {}
 	}
-	local t = { entryPoint = p0.surfaceName }
-	local universeId = p0.metadata.universeId
+	local t = { entryPoint = p1.surfaceName }
+	local universeId = p1.metadata.universeId
 	
 	if universeId ~= nil then
 		t.universeId = universeId
@@ -32,13 +32,13 @@ return function(p0)
 		local id = paymentSession and paymentSession.id
 		
 		return if type(id) == "string" then id else ""
-	end):catch(function(p1)
+	end):catch(function(p2)
 		-- upvalues: logRobloxSubscriptionUpsellCounterModule (copy), robloxSubscriptionUpsellTelemetryModule (copy), fFlagSubscriptionUpsellCounterWithErrorReasonModule (copy), logRobloxSubscriptionUpsellTelemetryEventModule (copy), httpService (copy), promiseModule (copy)
 		logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionCreatePaymentSessionFailedCounter)
 		
 		if fFlagSubscriptionUpsellCounterWithErrorReasonModule then
 			logRobloxSubscriptionUpsellTelemetryEventModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionCreatePaymentSessionFailedEvent, {
-				errorReason = if type(p1) == "table" then httpService:JSONEncode(p1) else tostring(p1)
+				errorReason = if type(p2) == "table" then httpService:JSONEncode(p2) else tostring(p2)
 			})
 		end
 		return promiseModule.resolve("")

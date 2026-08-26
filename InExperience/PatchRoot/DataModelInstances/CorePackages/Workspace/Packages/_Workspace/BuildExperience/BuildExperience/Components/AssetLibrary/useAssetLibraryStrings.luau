@@ -21,14 +21,14 @@ local t = {
 
 return function()
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref)
-	local var2 = useLocalization(t)
-	local var3 = reactModule.useRef(var2)
+	local var1 = useLocalization(t)
+	local var2 = reactModule.useRef(var1)
 	
-	for i, v in var2 do
-		if var3.current[i] ~= v then
-			var3.current = var2
+	for i, v in var1 do
+		if var2.current[i] ~= v then
+			var2.current = var1
 			break
 		end
 	end
-	return var3.current
+	return var2.current
 end

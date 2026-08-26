@@ -71,13 +71,13 @@ local function CreateGuiObjects()
 	textButton.TextColor3 = Color3.new(1, 1, 1)
 	textButton.TextStrokeTransparency = 0.75
 	textButton.Parent = backgroundFrame
-	local var13 = textButton:Clone()
-	local var14 = textButton:Clone()
-	var13.Parent = unselectedFrame
-	var14.Parent = selectedFrame
-	var13.Font = Enum.Font.SourceSans
-	var13.Active = false
-	var14.Active = false
+	local var1 = textButton:Clone()
+	local var2 = textButton:Clone()
+	var1.Parent = unselectedFrame
+	var2.Parent = selectedFrame
+	var1.Font = Enum.Font.SourceSans
+	var1.Active = false
+	var2.Active = false
 	local frame_4 = Instance.new("Frame")
 	frame_4.Selectable = false
 	frame_4.Size = UDim2.new(0, 18, 0, 18)
@@ -102,22 +102,22 @@ local function CreateGuiObjects()
 	textLabel.Text = ""
 	textLabel.Parent = imageLabel_2
 	
-	return frame, textButton, var13, var14, imageLabel_2, unselectedFrame, selectedFrame
+	return frame, textButton, var1, var2, imageLabel_2, unselectedFrame, selectedFrame
 end
 
-function t_1.Destroy(p0)
-	p0.GuiObject:Destroy()
+function t_1.Destroy(p1)
+	p1.GuiObject:Destroy()
 end
 
 function t_1.UpdateMessagePostedInChannel(p1, p2)
 	if p1.Active and p2 ~= true then
 		return
 	end
-	local var18 = p1.UnreadMessageCount + 1
-	p1.UnreadMessageCount = var18
+	local var1 = p1.UnreadMessageCount + 1
+	p1.UnreadMessageCount = var1
 	local newMessageIcon = p1.NewMessageIcon
 	newMessageIcon.Visible = true
-	newMessageIcon.TextLabel.Text = var18 < 100 and tostring(var18) or "!"
+	newMessageIcon.TextLabel.Text = var1 < 100 and tostring(var1) or "!"
 	local _ = newMessageIcon.Position + UDim2.new(0, 0, -0.1, 0)
 	local out = Enum.EasingDirection.Out
 	local quad = Enum.EasingStyle.Quad
@@ -125,12 +125,12 @@ function t_1.UpdateMessagePostedInChannel(p1, p2)
 	newMessageIcon:TweenPosition(UDim2.new(0, 0, 0, 0), out, quad, 0.15, true)
 end
 
-function t_1.SetActive(value, p3)
-	value.Active = p3
-	value.UnselectedFrame.Visible = not p3
-	value.SelectedFrame.Visible = p3
+function t_1.SetActive(value, p1)
+	value.Active = p1
+	value.UnselectedFrame.Visible = not p1
+	value.SelectedFrame.Visible = p1
 	
-	if p3 then
+	if p1 then
 		value.UnreadMessageCount = 0
 		value.NewMessageIcon.Visible = false
 		value.NameTag.Font = Enum.Font.SourceSansBold
@@ -140,101 +140,101 @@ function t_1.SetActive(value, p3)
 	value.NameTag.Font = Enum.Font.SourceSans
 end
 
-function t_1.SetTextSize(value, p4)
-	value.NameTag.TextSize = p4
+function t_1.SetTextSize(value, p1)
+	value.NameTag.TextSize = p1
 end
 
-function t_1.FadeOutBackground(value, p5)
+function t_1.FadeOutBackground(value, p1)
 	-- upvalues: curveUtilModule (ref)
 	value.AnimParams.Background_TargetTransparency = 1
-	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p5)
+	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p1)
 end
 
-function t_1.FadeInBackground(value, p6)
+function t_1.FadeInBackground(value, p1)
 	-- upvalues: curveUtilModule (ref)
 	value.AnimParams.Background_TargetTransparency = 0.6
-	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p6)
+	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p1)
 end
 
-function t_1.FadeOutText(p7, p8)
+function t_1.FadeOutText(p1, p2)
 	-- upvalues: curveUtilModule (ref)
-	p7.AnimParams.Text_TargetTransparency = 1
-	p7.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p8)
-	p7.AnimParams.TextStroke_TargetTransparency = 1
-	p7.AnimParams.TextStroke_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p8)
+	p1.AnimParams.Text_TargetTransparency = 1
+	p1.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p2)
+	p1.AnimParams.TextStroke_TargetTransparency = 1
+	p1.AnimParams.TextStroke_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p2)
 end
 
-function t_1.FadeInText(p9, p10)
+function t_1.FadeInText(p1, p2)
 	-- upvalues: curveUtilModule (ref)
-	p9.AnimParams.Text_TargetTransparency = 0
-	p9.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p10)
-	p9.AnimParams.TextStroke_TargetTransparency = 0.75
-	p9.AnimParams.TextStroke_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p10)
+	p1.AnimParams.Text_TargetTransparency = 0
+	p1.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p2)
+	p1.AnimParams.TextStroke_TargetTransparency = 0.75
+	p1.AnimParams.TextStroke_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p2)
 end
 
-function t_1.AnimGuiObjects(p11)
-	p11.UnselectedFrame.BackgroundTransparency = p11.AnimParams.Background_CurrentTransparency
-	p11.SelectedFrame.BackgroundImage.BackgroundTransparency = p11.AnimParams.Background_CurrentTransparency
-	p11.SelectedFrame.BlueBarLeft.ImageTransparency = p11.AnimParams.Background_CurrentTransparency
-	p11.SelectedFrame.BlueBarRight.ImageTransparency = p11.AnimParams.Background_CurrentTransparency
-	p11.NameTagNonSelect.TextTransparency = p11.AnimParams.Background_CurrentTransparency
-	p11.NameTagNonSelect.TextStrokeTransparency = p11.AnimParams.Background_CurrentTransparency
-	p11.NameTag.TextTransparency = p11.AnimParams.Text_CurrentTransparency
-	p11.NewMessageIcon.ImageTransparency = p11.AnimParams.Text_CurrentTransparency
-	p11.WhiteTextNewMessageNotification.TextTransparency = p11.AnimParams.Text_CurrentTransparency
-	p11.NameTagSelect.TextTransparency = p11.AnimParams.Text_CurrentTransparency
-	p11.NameTag.TextStrokeTransparency = p11.AnimParams.TextStroke_CurrentTransparency
-	p11.WhiteTextNewMessageNotification.TextStrokeTransparency = p11.AnimParams.TextStroke_CurrentTransparency
-	p11.NameTagSelect.TextStrokeTransparency = p11.AnimParams.TextStroke_CurrentTransparency
+function t_1.AnimGuiObjects(p1)
+	p1.UnselectedFrame.BackgroundTransparency = p1.AnimParams.Background_CurrentTransparency
+	p1.SelectedFrame.BackgroundImage.BackgroundTransparency = p1.AnimParams.Background_CurrentTransparency
+	p1.SelectedFrame.BlueBarLeft.ImageTransparency = p1.AnimParams.Background_CurrentTransparency
+	p1.SelectedFrame.BlueBarRight.ImageTransparency = p1.AnimParams.Background_CurrentTransparency
+	p1.NameTagNonSelect.TextTransparency = p1.AnimParams.Background_CurrentTransparency
+	p1.NameTagNonSelect.TextStrokeTransparency = p1.AnimParams.Background_CurrentTransparency
+	p1.NameTag.TextTransparency = p1.AnimParams.Text_CurrentTransparency
+	p1.NewMessageIcon.ImageTransparency = p1.AnimParams.Text_CurrentTransparency
+	p1.WhiteTextNewMessageNotification.TextTransparency = p1.AnimParams.Text_CurrentTransparency
+	p1.NameTagSelect.TextTransparency = p1.AnimParams.Text_CurrentTransparency
+	p1.NameTag.TextStrokeTransparency = p1.AnimParams.TextStroke_CurrentTransparency
+	p1.WhiteTextNewMessageNotification.TextStrokeTransparency = p1.AnimParams.TextStroke_CurrentTransparency
+	p1.NameTagSelect.TextStrokeTransparency = p1.AnimParams.TextStroke_CurrentTransparency
 end
 
-function t_1.InitializeAnimParams(p12)
+function t_1.InitializeAnimParams(p1)
 	-- upvalues: curveUtilModule (ref)
-	p12.AnimParams.Text_TargetTransparency = 0
-	p12.AnimParams.Text_CurrentTransparency = 0
-	p12.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(0)
-	p12.AnimParams.TextStroke_TargetTransparency = 0.75
-	p12.AnimParams.TextStroke_CurrentTransparency = 0.75
-	p12.AnimParams.TextStroke_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(0)
-	p12.AnimParams.Background_TargetTransparency = 0.6
-	p12.AnimParams.Background_CurrentTransparency = 0.6
-	p12.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(0)
+	p1.AnimParams.Text_TargetTransparency = 0
+	p1.AnimParams.Text_CurrentTransparency = 0
+	p1.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(0)
+	p1.AnimParams.TextStroke_TargetTransparency = 0.75
+	p1.AnimParams.TextStroke_CurrentTransparency = 0.75
+	p1.AnimParams.TextStroke_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(0)
+	p1.AnimParams.Background_TargetTransparency = 0.6
+	p1.AnimParams.Background_CurrentTransparency = 0.6
+	p1.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(0)
 end
 
-function t_1.Update(p13, p14)
+function t_1.Update(p1, p2)
 	-- upvalues: curveUtilModule (ref)
-	p13.AnimParams.Background_CurrentTransparency = curveUtilModule:Expt(p13.AnimParams.Background_CurrentTransparency, p13.AnimParams.Background_TargetTransparency, p13.AnimParams.Background_NormalizedExptValue, p14)
-	p13.AnimParams.Text_CurrentTransparency = curveUtilModule:Expt(p13.AnimParams.Text_CurrentTransparency, p13.AnimParams.Text_TargetTransparency, p13.AnimParams.Text_NormalizedExptValue, p14)
-	p13.AnimParams.TextStroke_CurrentTransparency = curveUtilModule:Expt(p13.AnimParams.TextStroke_CurrentTransparency, p13.AnimParams.TextStroke_TargetTransparency, p13.AnimParams.TextStroke_NormalizedExptValue, p14)
-	p13:AnimGuiObjects()
+	p1.AnimParams.Background_CurrentTransparency = curveUtilModule:Expt(p1.AnimParams.Background_CurrentTransparency, p1.AnimParams.Background_TargetTransparency, p1.AnimParams.Background_NormalizedExptValue, p2)
+	p1.AnimParams.Text_CurrentTransparency = curveUtilModule:Expt(p1.AnimParams.Text_CurrentTransparency, p1.AnimParams.Text_TargetTransparency, p1.AnimParams.Text_NormalizedExptValue, p2)
+	p1.AnimParams.TextStroke_CurrentTransparency = curveUtilModule:Expt(p1.AnimParams.TextStroke_CurrentTransparency, p1.AnimParams.TextStroke_TargetTransparency, p1.AnimParams.TextStroke_NormalizedExptValue, p2)
+	p1:AnimGuiObjects()
 end
 
-function t.new(p15)
+function t.new(p1)
 	-- upvalues: t_1 (ref), CreateGuiObjects (ref), chatSettingsModule (ref)
 	local tbl = setmetatable({}, t_1)
-	local var20, var21, var22, var23, var24, var25, var26 = CreateGuiObjects()
-	tbl.GuiObject = var20
-	tbl.NameTag = var21
-	tbl.NameTagNonSelect = var22
-	tbl.NameTagSelect = var23
-	tbl.NewMessageIcon = var24
-	tbl.UnselectedFrame = var25
-	tbl.SelectedFrame = var26
-	tbl.BlueBarLeft = var26.BlueBarLeft
-	tbl.BlueBarRight = var26.BlueBarRight
-	tbl.BackgroundImage = var26.BackgroundImage
+	local var1, var2, var3, var4, var5, var6, var7 = CreateGuiObjects()
+	tbl.GuiObject = var1
+	tbl.NameTag = var2
+	tbl.NameTagNonSelect = var3
+	tbl.NameTagSelect = var4
+	tbl.NewMessageIcon = var5
+	tbl.UnselectedFrame = var6
+	tbl.SelectedFrame = var7
+	tbl.BlueBarLeft = var7.BlueBarLeft
+	tbl.BlueBarRight = var7.BlueBarRight
+	tbl.BackgroundImage = var7.BackgroundImage
 	tbl.WhiteTextNewMessageNotification = tbl.NewMessageIcon.TextLabel
-	tbl.ChannelName = p15
+	tbl.ChannelName = p1
 	tbl.UnreadMessageCount = 0
 	tbl.Active = false
 	tbl.GuiObject.Name = "Frame_" .. tbl.ChannelName
 	
-	if chatSettingsModule.MaxChannelNameLength < string.len(p15) then
-		p15 = string.sub(p15, 1, chatSettingsModule.MaxChannelNameLength - 3) .. "..."
+	if chatSettingsModule.MaxChannelNameLength < string.len(p1) then
+		p1 = string.sub(p1, 1, chatSettingsModule.MaxChannelNameLength - 3) .. "..."
 	end
 	tbl.NameTag.Text = ""
-	tbl.NameTagNonSelect.Text = p15
-	tbl.NameTagSelect.Text = p15
+	tbl.NameTagNonSelect.Text = p1
+	tbl.NameTagSelect.Text = p1
 	tbl.AnimParams = {}
 	tbl:InitializeAnimParams()
 	tbl:AnimGuiObjects()

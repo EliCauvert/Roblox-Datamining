@@ -9,43 +9,43 @@ local promptStyleModule = require(serverTriggeredModals.SduiV2.PromptStyle)
 local usePromptEntriesModule = require(serverTriggeredModals.SduiV2.usePromptEntries)
 local useModalSignalStoreModule = require(serverTriggeredModals.SignalStores.useModalSignalStore)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useModalSignalStoreModule (ref), reactModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), sduiFeatureEntryPoint (ref)
-	local surfaceConfig = p0.surfaceConfig
-	local hasShownKey = p0.hasShownKey
-	local var7 = useModalSignalStoreModule()
-	local var8, var9 = reactModule.useState(false)
+	local surfaceConfig = p1.surfaceConfig
+	local hasShownKey = p1.hasShownKey
+	local var1 = useModalSignalStoreModule()
+	local var2, var3 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var7 (ref), hasShownKey (ref), var9 (ref)
-		if not var8 and var7.tryClaimPrimaryHandler(hasShownKey) then
-			var9(true)
+		-- upvalues: var2 (ref), var1 (ref), hasShownKey (ref), var3 (ref)
+		if not var2 and var1.tryClaimPrimaryHandler(hasShownKey) then
+			var3(true)
 		end
 		return function()
-			-- upvalues: var8 (copy), var7 (copy), hasShownKey (copy)
-			if var8 then
-				var7.releasePrimaryHandler(hasShownKey)
+			-- upvalues: var2 (copy), var1 (copy), hasShownKey (copy)
+			if var2 then
+				var1.releasePrimaryHandler(hasShownKey)
 			end
 		end
-	end, { var8, hasShownKey, var7 })
-	local var10 = usePromptEntriesModule(surfaceConfig.configKey, promptStyleModule.Coachmark)
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var10 (ref)
-		if not var8 then
+	end, { var2, hasShownKey, var1 })
+	local var4 = usePromptEntriesModule(surfaceConfig.configKey, promptStyleModule.Coachmark)
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var4 (ref)
+		if not var2 then
 			return ""
 		end
 		local t = {}
 		
-		for i, v in var10 do
+		for i, v in var4 do
 			if v.identifier and v.title and v.config then
 				table.insert(t, `{v.identifier}:{v.title}`)
 			end
 		end
 		return table.concat(t, "|")
-	end, { var8, var10 })
+	end, { var2, var4 })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var10 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
-		if var11 == "" then return end
-		for i, v in var10 do
+		-- upvalues: var5 (ref), var4 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
+		if var5 == "" then return end
+		for i, v in var4 do
 			if v.identifier and v.title and v.config then
 				reportPromptImpressionModule(v.title, v.identifier):catch(function()
 					-- upvalues: loggerModule (copy)
@@ -54,14 +54,14 @@ return reactModule.memo(function(p0)
 				sendModalImpressionEvent(v.identifier, v.title)
 			end
 		end
-	end, { var11 })
+	end, { var5 })
 	
-	if not var8 then
+	if not var2 then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in var10 do
+	for i, v in var4 do
 		if v.config ~= nil and v.identifier ~= nil and v.title ~= nil then
 			t[v.identifier] = reactModule.createElement(sduiFeatureEntryPoint, {
 				shouldDisplayLoading = false,

@@ -1,17 +1,17 @@
-﻿local var0 = 1
+﻿local var1 = 1
 local tbl = setmetatable({}, { __mode = "k" })
 
-return function(p0)
-	-- upvalues: tbl (ref), var0 (write)
-	if p0 == nil then
+return function(p1)
+	-- upvalues: tbl (ref), var1 (write)
+	if p1 == nil then
 		return 0
 	end
-	local var2 = tbl[p0]
+	local var2 = tbl[p1]
 	
 	if not var2 then
-		var2 = var0
-		var0 += 1
-		tbl[p0] = var2
+		var2 = var1
+		var1 += 1
+		tbl[p1] = var2
 	end
 	return var2
 end

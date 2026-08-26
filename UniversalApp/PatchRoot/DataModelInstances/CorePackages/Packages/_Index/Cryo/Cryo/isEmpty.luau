@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return next(p0) == nil
+﻿return function(p1)
+	return next(p1) == nil
 end

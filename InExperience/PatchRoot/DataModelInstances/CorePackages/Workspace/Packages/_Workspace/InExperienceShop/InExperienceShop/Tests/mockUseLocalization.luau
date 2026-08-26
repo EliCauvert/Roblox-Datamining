@@ -6,10 +6,10 @@ return function()
 	jest.mock(parent.Localization, function()
 		return {
 			Hooks = {
-				useLocalization = function(p0)
+				useLocalization = function(p1)
 					local t = {}
 					
-					for i, v in p0 do
+					for i, v in p1 do
 						if typeof(v) == "table" then
 							t[i] = v[1]
 						else
@@ -20,8 +20,8 @@ return function()
 				end
 			},
 			NumberLocalization = {
-				localize = function(p1, _)
-					return p1
+				localize = function(p2, _)
+					return p2
 				end
 			}
 		}

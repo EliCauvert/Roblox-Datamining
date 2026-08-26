@@ -27,7 +27,7 @@ local _ = script.Parent.Parent.Parent
 local flashingDotModule = require(script.Parent.FlashingDot)
 local flashingDotV2Module = require(script.Parent.FlashingDotV2)
 local getFFlagFlashingDotUseAsyncInitModule = require(coreGuiService.RobloxGui.Modules.Flags.GetFFlagFlashingDotUseAsyncInit)
-local var15 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
 local isNewTiltIconEnabledModule = require(coreGuiService.RobloxGui.Modules.isNewTiltIconEnabled)
 local constantsModule = require(script.Parent.Parent.Parent.Constants)
 local iconButton = roactModule.PureComponent:extend("IconButton")
@@ -44,128 +44,128 @@ iconButton.validateProps = tModule.strictInterface({
 	backgroundColor3 = tModule.optional(tModule.Color3),
 	backgroundCornerRadius = tModule.optional(tModule.UDim),
 	forwardRef = tModule.optional(tModule.any),
-	onSelectionChanged = if var15 and fFlagEnableConsoleExpControls then tModule.optional(tModule.callback) else nil,
-	nextSelectionRightRef = if var15 and fFlagEnableConsoleExpControls then tModule.optional(tModule.any) else nil,
+	onSelectionChanged = if var1 and fFlagEnableConsoleExpControls then tModule.optional(tModule.callback) else nil,
+	nextSelectionRightRef = if var1 and fFlagEnableConsoleExpControls then tModule.optional(tModule.any) else nil,
 	modal = if fFlagAddUILessMode and fIntAddUILessModeVariant == 2 then tModule.optional(tModule.boolean) else nil,
 	[roactModule.Change.AbsoluteSize] = tModule.optional(tModule.callback),
 	[roactModule.Change.AbsolutePosition] = tModule.optional(tModule.callback)
 })
 
-function AnimatedScaleIcon(p0)
+function AnimatedScaleIcon(p1)
 	-- upvalues: reactOtterModule (ref), reactModule (ref), roactModule (ref), imageSetLabel (ref)
-	local var19, var20 = reactOtterModule.useAnimatedBinding(p0.iconSize)
+	local var2, var3 = reactOtterModule.useAnimatedBinding(p1.iconSize)
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), reactOtterModule (copy), p0 (ref)
-		var20(reactOtterModule.spring(p0.iconSize, { dampingRatio = 1, frequency = 2.857142857143 }))
+		-- upvalues: var3 (ref), reactOtterModule (copy), p1 (ref)
+		var3(reactOtterModule.spring(p1.iconSize, { dampingRatio = 1, frequency = 2.857142857143 }))
 		
 		return function() end
-	end, { p0.iconSize })
+	end, { p1.iconSize })
 	
 	return roactModule.createElement(imageSetLabel, {
 		BackgroundTransparency = 1,
 		ZIndex = 1,
-		Size = var19:map(function(p1)
-			return UDim2.fromOffset(p1, p1)
+		Size = var2:map(function(p2)
+			return UDim2.fromOffset(p2, p2)
 		end),
 		Position = UDim2.fromScale(0.5, 0.5),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Image = p0.icon,
-		ImageColor3 = p0.style.Theme.IconEmphasis.Color,
-		ImageTransparency = p0.style.Theme.IconEmphasis.Transparency
+		Image = p1.icon,
+		ImageColor3 = p1.style.Theme.IconEmphasis.Color,
+		ImageTransparency = p1.style.Theme.IconEmphasis.Transparency
 	})
 end
 
-function iconButton.init(p2)
+function iconButton.init(p1)
 	-- upvalues: controlState (ref), signalsModule (ref), displayModule (ref)
-	p2:setState({ controlState = controlState.Default })
+	p1:setState({ controlState = controlState.Default })
 	
-	function p2.controlStateUpdated(p3, p4)
-		-- upvalues: p2 (ref), controlState (copy)
-		if p2.props.onHover and p4 == controlState.Hover then
-			p2.props.onHover()
-		elseif p2.props.onHoverEnd and p3 == controlState.Hover and p4 ~= controlState.Hover then
-			p2.props.onHoverEnd()
+	function p2.controlStateUpdated(p2, p3)
+		-- upvalues: p1 (ref), controlState (copy)
+		if p1.props.onHover and p3 == controlState.Hover then
+			p1.props.onHover()
+		elseif p1.props.onHoverEnd and p2 == controlState.Hover and p3 ~= controlState.Hover then
+			p1.props.onHoverEnd()
 		end
-		p2:setState({ controlState = p4 })
+		p1:setState({ controlState = p3 })
 	end
 	
-	p2.disposeUiScaleEffect = signalsModule.createEffect(function(p5)
-		-- upvalues: displayModule (copy), p2 (ref)
-		p2:setState({
-			UiScale = displayModule.GetDisplayStore(p5).getUIScale(p5)
+	p1.disposeUiScaleEffect = signalsModule.createEffect(function(p2)
+		-- upvalues: displayModule (copy), p1 (ref)
+		p1:setState({
+			UiScale = displayModule.GetDisplayStore(p2).getUIScale(p2)
 		})
 	end)
 end
 
-function iconButton.render(p6)
-	-- upvalues: var15 (ref), withCursor (ref), withSelectionCursorProvider (ref)
-	return if var15 then withCursor(function(p8)
-		-- upvalues: p6 (ref)
-		return p6:renderWithCursor(p8)
-	end) else withSelectionCursorProvider(function(p7)
-		-- upvalues: p6 (ref)
-		return p6:renderWithCursor(p7)
+function iconButton.render(p1)
+	-- upvalues: var1 (ref), withCursor (ref), withSelectionCursorProvider (ref)
+	return if var1 then withCursor(function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderWithCursor(p2)
+	end) else withSelectionCursorProvider(function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderWithCursor(p2)
 	end)
 end
 
-function iconButton.renderWithCursor(p9, p10)
-	-- upvalues: isNewTiltIconEnabledModule (ref), constantsModule (ref), withStyle (ref), controlState (ref), roactModule (ref), interactable (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), skinToneCircle (ref), var15 (ref), fFlagEnableConsoleExpControls (ref), imageSetLabel (ref), getFFlagFlashingDotUseAsyncInitModule (ref), flashingDotV2Module (ref), flashingDotModule (ref), circle17 (ref)
-	local backgroundColor3 = not isNewTiltIconEnabledModule() and p9.props.backgroundColor3
-	local var22 = constantsModule.TopBarButtonHeight * p9.state.UiScale
+function iconButton.renderWithCursor(p1, p2)
+	-- upvalues: isNewTiltIconEnabledModule (ref), constantsModule (ref), withStyle (ref), controlState (ref), roactModule (ref), interactable (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), skinToneCircle (ref), var1 (ref), fFlagEnableConsoleExpControls (ref), imageSetLabel (ref), getFFlagFlashingDotUseAsyncInitModule (ref), flashingDotV2Module (ref), flashingDotModule (ref), circle17 (ref)
+	local backgroundColor3 = not isNewTiltIconEnabledModule() and p1.props.backgroundColor3
+	local var2 = constantsModule.TopBarButtonHeight * p1.state.UiScale
 	
-	return withStyle(function(p11)
-		-- upvalues: p9 (ref), controlState (copy), roactModule (copy), interactable (copy), fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), isNewTiltIconEnabledModule (copy), var22 (ref), p10 (ref), skinToneCircle (copy), var15 (copy), fFlagEnableConsoleExpControls (copy), backgroundColor3 (ref), imageSetLabel (copy), getFFlagFlashingDotUseAsyncInitModule (copy), flashingDotV2Module (copy), flashingDotModule (copy), circle17 (copy)
+	return withStyle(function(p3)
+		-- upvalues: p1 (ref), controlState (copy), roactModule (copy), interactable (copy), fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), isNewTiltIconEnabledModule (copy), var2 (ref), p2 (ref), skinToneCircle (copy), var1 (copy), fFlagEnableConsoleExpControls (copy), backgroundColor3 (ref), imageSetLabel (copy), getFFlagFlashingDotUseAsyncInitModule (copy), flashingDotV2Module (copy), flashingDotModule (copy), circle17 (copy)
 		local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
 		
-		if p9.state.controlState == controlState.Pressed then
-			t = p11.Theme.BackgroundOnPress
-		elseif p9.state.controlState == controlState.Hover then
-			t = p11.Theme.BackgroundOnHover
+		if p1.state.controlState == controlState.Pressed then
+			t = p3.Theme.BackgroundOnPress
+		elseif p1.state.controlState == controlState.Hover then
+			t = p3.Theme.BackgroundOnHover
 		end
 		return roactModule.createElement(interactable, {
-			onStateChanged = p9.controlStateUpdated,
+			onStateChanged = p1.controlStateUpdated,
 			ZIndex = 1,
-			Modal = if fFlagAddUILessMode and fIntAddUILessModeVariant == 2 then p9.props.modal else nil,
-			BackgroundTransparency = if isNewTiltIconEnabledModule() then p11.Theme.BackgroundUIContrast.Transparency * p11.Settings.PreferredTransparency else 1,
+			Modal = if fFlagAddUILessMode and fIntAddUILessModeVariant == 2 then p1.props.modal else nil,
+			BackgroundTransparency = if isNewTiltIconEnabledModule() then p3.Theme.BackgroundUIContrast.Transparency * p3.Settings.PreferredTransparency else 1,
 			Position = UDim2.fromScale(0, if isNewTiltIconEnabledModule() then 0.5 else 1),
 			AnchorPoint = Vector2.new(0, if isNewTiltIconEnabledModule() then 0.5 else 1),
-			Size = UDim2.fromOffset(var22, var22),
+			Size = UDim2.fromOffset(var2, var2),
 			Image = if not isNewTiltIconEnabledModule() then "rbxasset://textures/ui/TopBar/iconBase.png" else nil,
-			BackgroundColor3 = p11.Theme.BackgroundUIContrast.Color,
-			SelectionImageObject = if isNewTiltIconEnabledModule() then p10.getCursor(skinToneCircle) else nil,
-			NextSelectionRight = if var15 and fFlagEnableConsoleExpControls then p9.props.nextSelectionRightRef else nil,
-			[roactModule.Event.Activated] = p9.props.onActivated,
-			[roactModule.Event.SelectionChanged] = if var15 and fFlagEnableConsoleExpControls then p9.props.onSelectionChanged else nil,
-			[roactModule.Ref] = p9.props.forwardRef
+			BackgroundColor3 = p3.Theme.BackgroundUIContrast.Color,
+			SelectionImageObject = if isNewTiltIconEnabledModule() then p2.getCursor(skinToneCircle) else nil,
+			NextSelectionRight = if var1 and fFlagEnableConsoleExpControls then p1.props.nextSelectionRightRef else nil,
+			[roactModule.Event.Activated] = p1.props.onActivated,
+			[roactModule.Event.SelectionChanged] = if var1 and fFlagEnableConsoleExpControls then p1.props.onSelectionChanged else nil,
+			[roactModule.Ref] = p1.props.forwardRef
 		}, {
 			UICorner = isNewTiltIconEnabledModule() and roactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }) or nil,
 			BackgroundFrame = if backgroundColor3 then roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				ZIndex = 0,
-				Size = p9.props.iconSize,
+				Size = p1.props.iconSize,
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				BackgroundTransparency = p9.props.backgroundTransparency,
-				BackgroundColor3 = p9.props.backgroundColor3
+				BackgroundTransparency = p1.props.backgroundTransparency,
+				BackgroundColor3 = p1.props.backgroundColor3
 			}, {
-				UICorner = if p9.props.backgroundCornerRadius then roactModule.createElement("UICorner", { CornerRadius = p9.props.backgroundCornerRadius }) else nil
+				UICorner = if p1.props.backgroundCornerRadius then roactModule.createElement("UICorner", { CornerRadius = p1.props.backgroundCornerRadius }) else nil
 			}) else nil,
-			Icon = not p9.props.useIconScaleAnimation and roactModule.createElement(imageSetLabel, {
+			Icon = not p1.props.useIconScaleAnimation and roactModule.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				ZIndex = 1,
-				Size = if typeof(p9.props.iconSize) ~= "number" then UDim2.fromOffset(p9.props.iconSize, p9.props.iconSize) else p9.props.iconSize,
+				Size = if typeof(p1.props.iconSize) ~= "number" then UDim2.fromOffset(p1.props.iconSize, p1.props.iconSize) else p1.props.iconSize,
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				Image = p9.props.icon,
-				ImageColor3 = p11.Theme.IconEmphasis.Color,
-				ImageTransparency = p11.Theme.IconEmphasis.Transparency
+				Image = p1.props.icon,
+				ImageColor3 = p3.Theme.IconEmphasis.Color,
+				ImageTransparency = p3.Theme.IconEmphasis.Transparency
 			}),
-			ScalingIcon = p9.props.useIconScaleAnimation and roactModule.createElement(AnimatedScaleIcon, {
-				icon = p9.props.icon,
-				iconSize = p9.props.iconSize,
-				style = p11
+			ScalingIcon = p1.props.useIconScaleAnimation and roactModule.createElement(AnimatedScaleIcon, {
+				icon = p1.props.icon,
+				iconSize = p1.props.iconSize,
+				style = p3
 			}),
-			FlashingDot = if p9.props.enableFlashingDot then roactModule.createElement(if getFFlagFlashingDotUseAsyncInitModule() then flashingDotV2Module else flashingDotModule) else nil,
+			FlashingDot = if p1.props.enableFlashingDot then roactModule.createElement(if getFFlagFlashingDotUseAsyncInitModule() then flashingDotV2Module else flashingDotModule) else nil,
 			StateOverlayRound = isNewTiltIconEnabledModule() and roactModule.createElement("Frame", {
 				ZIndex = 2,
 				BackgroundTransparency = t.Transparency,
@@ -188,13 +188,13 @@ function iconButton.renderWithCursor(p9, p10)
 	end)
 end
 
-function iconButton.willUnmount(p12)
-	if p12.disposeUiScaleEffect then
-		p12.disposeUiScaleEffect()
+function iconButton.willUnmount(p1)
+	if p1.disposeUiScaleEffect then
+		p1.disposeUiScaleEffect()
 	end
 end
 
-return roactModule.forwardRef(function(p13, p14)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), iconButton (ref), cryoModule (ref)
-	return roactModule.createElement(iconButton, cryoModule.Dictionary.join(p13, { forwardRef = p14 }))
+	return roactModule.createElement(iconButton, cryoModule.Dictionary.join(p1, { forwardRef = p2 }))
 end)

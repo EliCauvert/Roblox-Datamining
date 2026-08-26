@@ -22,18 +22,18 @@ local function setupCharacterModels(value)
 	return humanoidDescription, humanoidDescription_1
 end
 
-function t.new(p0, p1, p2, p3)
+function t.new(p1, p2, p3, p4)
 	-- upvalues: t (ref), setupCharacterModels (ref), robloxReplicatedStorageService (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
-	t_1.mockApplyDescription = p3
-	local var12, var13 = setupCharacterModels(p1)
-	t_1.r6 = var12
-	t_1.r15current = var13
-	t_1.r15offScreen = var13:Clone()
+	t_1.mockApplyDescription = p4
+	local var1, var2 = setupCharacterModels(p2)
+	t_1.r6 = var1
+	t_1.r15current = var2
+	t_1.r15offScreen = var2:Clone()
 	t_1.r15offScreen.Parent = robloxReplicatedStorageService
-	t_1.avatarType = p2
-	t_1.worldModelRef = p0
+	t_1.avatarType = p3
+	t_1.worldModelRef = p1
 	t_1.inProgressPromise = nil
 	t_1.waitingPromise = nil
 	t_1.r6Promise = nil
@@ -42,14 +42,14 @@ function t.new(p0, p1, p2, p3)
 	return t_1
 end
 
-function t:setupAnimations(p4, p5)
-	p4.Parent = self.r6
-	p5.Parent = self.r15current
-	p5.Archivable = true
-	local var14 = p5:Clone()
-	var14.Parent = self.r15offScreen
-	var14.Archivable = false
-	p5.Archivable = false
+function t:setupAnimations(p1, p2)
+	p1.Parent = self.r6
+	p2.Parent = self.r15current
+	p2.Archivable = true
+	local var1 = p2:Clone()
+	var1.Parent = self.r15offScreen
+	var1.Archivable = false
+	p2.Archivable = false
 end
 
 function t:getCurrentCharacter()
@@ -60,27 +60,27 @@ function t:isR15()
 	return self.avatarType == Enum.HumanoidRigType.R15
 end
 
-function t.syncRotation(_, p6, p7)
-	local _, _, _, var15, var16, var17, var18, var19, var20, var21, var22, var23 = p6.HumanoidRootPart.CFrame:components()
-	local p = p7.HumanoidRootPart.CFrame.p
-	p7.HumanoidRootPart.CFrame = CFrame.new(p.X, p.Y, p.Z, var15, var16, var17, var18, var19, var20, var21, var22, var23)
+function t.syncRotation(_, p1, p2)
+	local _, _, _, var1, var2, var3, var4, var5, var6, var7, var8, var9 = p1.HumanoidRootPart.CFrame:components()
+	local p = p2.HumanoidRootPart.CFrame.p
+	p2.HumanoidRootPart.CFrame = CFrame.new(p.X, p.Y, p.Z, var1, var2, var3, var4, var5, var6, var7, var8, var9)
 end
 
-local function hasLayeredAccessoryUpdates(p8, p9)
-	local var24 = p8:GetAccessories(false)
-	local var25 = p9:GetAccessories(false)
+local function hasLayeredAccessoryUpdates(p1, p2)
+	local var1 = p1:GetAccessories(false)
+	local var2 = p2:GetAccessories(false)
 	
-	if #var25 == 0 then
+	if #var2 == 0 then
 		return false
-	elseif #var24 ~= #var25 then
+	elseif #var1 ~= #var2 then
 		return true
 	end
 	local t = {}
 	
-	for i, v in ipairs(var24) do
+	for i, v in ipairs(var1) do
 		t[v.AssetId] = true
 	end
-	for i, v_1 in ipairs(var25) do
+	for i, v_1 in ipairs(var2) do
 		if not t[v_1.AssetId] then
 			return true
 		end
@@ -88,60 +88,60 @@ local function hasLayeredAccessoryUpdates(p8, p9)
 	return false
 end
 
-local function _(p10)
-	return p10:FindFirstChildWhichIsA("WrapLayer", true) ~= nil
+local function _(p3)
+	return p3:FindFirstChildWhichIsA("WrapLayer", true) ~= nil
 end
 
-function t._doUpdateR6(p11, p12)
+function t._doUpdateR6(p3, p4)
 	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p13, _)
-		-- upvalues: p11 (ref), p12 (ref)
-		p11.r6.Parent = p11.worldModelRef:getValue()
+	return promiseModule.new(function(p5, _)
+		-- upvalues: p3 (ref), p4 (ref)
+		p3.r6.Parent = p3.worldModelRef:getValue()
 		
-		if p11.mockApplyDescription then
-			p11.mockApplyDescription(p11.r6, p12)
+		if p3.mockApplyDescription then
+			p3.mockApplyDescription(p3.r6, p4)
 		else
-			p11.r6.Humanoid:ApplyDescriptionAsync(p12)
+			p3.r6.Humanoid:ApplyDescriptionAsync(p4)
 		end
-		p13(p11:getCurrentCharacter())
+		p5(p3:getCurrentCharacter())
 	end)
 end
 
-function t._doSimpleUpdateR15(p14, p15)
+function t._doSimpleUpdateR15(p3, p4)
 	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p16, _)
-		-- upvalues: p14 (ref), p15 (ref)
-		p14.r15current.Parent = p14.worldModelRef:getValue()
+	return promiseModule.new(function(p5, _)
+		-- upvalues: p3 (ref), p4 (ref)
+		p3.r15current.Parent = p3.worldModelRef:getValue()
 		
-		if p14.mockApplyDescription then
-			p14.mockApplyDescription(p14.r15current, p15)
+		if p3.mockApplyDescription then
+			p3.mockApplyDescription(p3.r15current, p4)
 		else
-			p14.r15current.Humanoid:ApplyDescriptionAsync(p15)
+			p3.r15current.Humanoid:ApplyDescriptionAsync(p4)
 		end
-		p16(p14.r15current)
+		p5(p3.r15current)
 	end)
 end
 
-function t._updateOffscreenR15(p17, p18)
+function t._updateOffscreenR15(p3, p4)
 	-- upvalues: promiseModule (ref), cFrame (ref)
-	return promiseModule.new(function(p19, _)
-		-- upvalues: p17 (ref), cFrame (copy), p18 (ref)
-		p17.r15offScreen.HumanoidRootPart.CFrame = cFrame
-		p17.r15offScreen.Parent = p17.worldModelRef:getValue()
+	return promiseModule.new(function(p5, _)
+		-- upvalues: p3 (ref), cFrame (copy), p4 (ref)
+		p3.r15offScreen.HumanoidRootPart.CFrame = cFrame
+		p3.r15offScreen.Parent = p3.worldModelRef:getValue()
 		
-		if p17.mockApplyDescription then
-			p17.mockApplyDescription(p17.r15offScreen, p18)
+		if p3.mockApplyDescription then
+			p3.mockApplyDescription(p3.r15offScreen, p4)
 		else
-			p17.r15offScreen.Humanoid:ApplyDescriptionAsync(p18)
+			p3.r15offScreen.Humanoid:ApplyDescriptionAsync(p4)
 		end
-		p19(p17.r15offScreen)
+		p5(p3.r15offScreen)
 	end)
 end
 
-local function waitForClusterCompositionFinished(p20)
+local function waitForClusterCompositionFinished(p3)
 	-- upvalues: promiseModule (ref), inspectAndBuyClusterCompositionTimeoutMs (ref)
-	return if p20:FindFirstChildWhichIsA("WrapLayer", true) ~= nil then promiseModule.race({
-		promiseModule.fromEvent(p20.Humanoid.ClusterCompositionFinished),
+	return if p3:FindFirstChildWhichIsA("WrapLayer", true) ~= nil then promiseModule.race({
+		promiseModule.fromEvent(p3.Humanoid.ClusterCompositionFinished),
 		promiseModule.delay(inspectAndBuyClusterCompositionTimeoutMs * 0.001)
 	}):andThen(function()
 		return true
@@ -160,32 +160,32 @@ function t:_completeUpdate()
 	return self.r15current
 end
 
-function t:_doUpdateR15(p21)
+function t:_doUpdateR15(p3)
 	-- upvalues: hasLayeredAccessoryUpdates (ref), waitForClusterCompositionFinished (ref)
-	if hasLayeredAccessoryUpdates(self.r15current.Humanoid:GetAppliedDescription(), p21) then
-		self.inProgressPromise = self:_updateOffscreenR15(p21):andThen(waitForClusterCompositionFinished):andThen(function()
+	if hasLayeredAccessoryUpdates(self.r15current.Humanoid:GetAppliedDescription(), p3) then
+		self.inProgressPromise = self:_updateOffscreenR15(p3):andThen(waitForClusterCompositionFinished):andThen(function()
 			-- upvalues: self (ref)
 			return self:_completeUpdate()
 		end)
 		
 		return self.inProgressPromise
 	end
-	return self:_doSimpleUpdateR15(p21)
+	return self:_doSimpleUpdateR15(p3)
 end
 
-function t:maybeUpdateCharacter(p22)
+function t:maybeUpdateCharacter(p3)
 	-- upvalues: promiseModule (ref)
 	if self.avatarType == Enum.HumanoidRigType.R6 then
-		self.r6Promise = self:_doUpdateR6(p22)
+		self.r6Promise = self:_doUpdateR6(p3)
 		
 		return self.r6Promise
 	elseif not self.inProgressPromise or self.inProgressPromise:getStatus() ~= promiseModule.Status.Started then
-		return self:_doUpdateR15(p22)
+		return self:_doUpdateR15(p3)
 	end
 	local waitingPromise = self.waitingPromise
 	self.waitingPromise = self.inProgressPromise:andThen(function()
-		-- upvalues: self (ref), p22 (ref)
-		return self:_doUpdateR15(p22)
+		-- upvalues: self (ref), p3 (ref)
+		return self:_doUpdateR15(p3)
 	end)
 	
 	if waitingPromise then
@@ -194,18 +194,18 @@ function t:maybeUpdateCharacter(p22)
 	return self.waitingPromise
 end
 
-function t:switchAvatarType(p23)
+function t:switchAvatarType(p3)
 	-- upvalues: robloxReplicatedStorageService (ref)
-	if p23 == self.avatarType then
+	if p3 == self.avatarType then
 		return self:getCurrentCharacter()
 	end
 	local r6, r15current
 	self:_cancelPromises()
-	self.avatarType = p23
+	self.avatarType = p3
 	local _ = nil
 	local _ = nil
 	
-	if p23 == Enum.HumanoidRigType.R6 then
+	if p3 == Enum.HumanoidRigType.R6 then
 		r6 = self.r6
 		r15current = self.r15current
 	else
@@ -221,9 +221,9 @@ end
 
 function t.start(_) end
 
-local _ = function(p24)
-	if p24 then
-		p24:cancel()
+local _ = function(p3)
+	if p3 then
+		p3:cancel()
 	end
 end
 

@@ -6,20 +6,20 @@ local getIconRichText = foundationModule.Utility.getIconRichText
 local iconName = foundationModule.Enums.IconName
 local text = foundationModule.Text
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), getIconRichText (ref), iconName (ref), controlState (ref), text (ref)
-	local var2, var3 = reactModule.useState(false)
-	local var4 = getIconRichText(iconName.ArrowUpRightFromSquare)
+	local var1, var2 = reactModule.useState(false)
+	local var3 = getIconRichText(iconName.ArrowUpRightFromSquare)
 	
 	return reactModule.createElement(text, {
 		RichText = true,
-		Text = if var2 then `<u>{p0.text}</u> {var4}` else `{p0.text} {var4}`,
-		onActivated = p0.onActivated,
-		onStateChanged = reactModule.useCallback(function(p1)
-			-- upvalues: var3 (ref), controlState (copy)
-			var3(p1 == controlState.Hover)
+		Text = if var1 then `<u>{p1.text}</u> {var3}` else `{p1.text} {var3}`,
+		onActivated = p1.onActivated,
+		onStateChanged = reactModule.useCallback(function(p2)
+			-- upvalues: var2 (ref), controlState (copy)
+			var2(p2 == controlState.Hover)
 		end, {}),
-		tag = p0.tag or "auto-xy text-body-medium text-wrap text-align-x-left radius-small content-emphasis",
-		LayoutOrder = p0.layoutOrder
+		tag = p1.tag or "auto-xy text-body-medium text-wrap text-align-x-left radius-small content-emphasis",
+		LayoutOrder = p1.layoutOrder
 	})
 end)

@@ -29,22 +29,22 @@ saveTile.defaultProps = {
 	thumbnailSize = UDim2.new(0, 36, 0, 36)
 }
 
-function saveTile.render(p0)
+function saveTile.render(p1)
 	-- upvalues: roactModule (ref), tileModule (ref)
 	return roactModule.createElement(tileModule, {
-		hasRoundedCorners = p0.props.hasRoundedCorners,
+		hasRoundedCorners = p1.props.hasRoundedCorners,
 		name = "",
-		onActivated = p0.props.onActivated,
-		isDisabled = p0.props.isDisabled,
-		thumbnail = p0.props.thumbnail,
-		thumbnailSize = p0.props.thumbnailSize,
-		thumbnailTransparency = p0.props.thumbnailTransparency,
-		isRoactGamepadEnabled = p0.props.isRoactGamepadEnabled,
-		NextSelectionLeft = p0.props.NextSelectionLeft,
-		NextSelectionRight = p0.props.NextSelectionRight,
-		NextSelectionUp = p0.props.NextSelectionUp,
-		NextSelectionDown = p0.props.NextSelectionDown,
-		[roactModule.Ref] = p0.props.thumbnailRef
+		onActivated = p1.props.onActivated,
+		isDisabled = p1.props.isDisabled,
+		thumbnail = p1.props.thumbnail,
+		thumbnailSize = p1.props.thumbnailSize,
+		thumbnailTransparency = p1.props.thumbnailTransparency,
+		isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled,
+		NextSelectionLeft = p1.props.NextSelectionLeft,
+		NextSelectionRight = p1.props.NextSelectionRight,
+		NextSelectionUp = p1.props.NextSelectionUp,
+		NextSelectionDown = p1.props.NextSelectionDown,
+		[roactModule.Ref] = p1.props.thumbnailRef
 	})
 end
 

@@ -6,13 +6,13 @@ if require(parent.SharedFlags).GetFFlagMigrateRoactUtilsToReactUtils() then
 end
 local reactModule = require(parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
-	local var2 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p0 (ref)
-		var2.current = p0
+		-- upvalues: var1 (ref), p1 (ref)
+		var1.current = p1
 	end)
 	
-	return var2.current
+	return var1.current
 end

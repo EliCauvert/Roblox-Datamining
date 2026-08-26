@@ -3,12 +3,12 @@ local _ = script.Parent
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.SendMessage(p0, p1, p2)
-	p0.SayMessageRequest:FireServer(p1, p2)
+function t_1.SendMessage(p1, p2, p3)
+	p1.SayMessageRequest:FireServer(p2, p3)
 end
 
-function t_1.RegisterSayMessageFunction(p3, p4)
-	p3.SayMessageRequest = p4
+function t_1.RegisterSayMessageFunction(p1, p2)
+	p1.SayMessageRequest = p2
 end
 
 function t.new()

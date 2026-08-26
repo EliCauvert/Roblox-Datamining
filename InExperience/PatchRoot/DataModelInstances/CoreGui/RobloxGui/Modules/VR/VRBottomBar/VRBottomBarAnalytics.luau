@@ -3,7 +3,7 @@ local telemetryService = game:GetService("TelemetryService")
 local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
 
 return {
-	sendEventToTelemetryV2 = function(p0)
+	sendEventToTelemetryV2 = function(p1)
 		-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
 		local t = {
 			eventName = "coreui_vr_bottom_bar_action",
@@ -15,9 +15,9 @@ return {
 		}
 		local list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
 		local t_1 = {
-			integration_id = p0.integrationId,
-			is_toggle_on = tostring(p0.isToggleOn),
-			source = p0.source
+			integration_id = p1.integrationId,
+			is_toggle_on = tostring(p1.isToggleOn),
+			source = p1.source
 		}
 		
 		if telemetryServicePlaySessionInfoEnabledEngineFeature then

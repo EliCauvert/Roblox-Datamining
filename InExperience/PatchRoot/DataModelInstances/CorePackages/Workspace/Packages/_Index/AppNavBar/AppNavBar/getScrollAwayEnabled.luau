@@ -11,12 +11,12 @@ local function _()
 	return if fFlagAppIaScrollAway then if fFlagAppIaScrollAwayGuac and not universalAppPolicyModule.getAppFeaturePolicies().getAppIaScrollAwayEnabled() then false else enableFlyoutWithScrollAway2 and flyoutSidePanelIXP.isScrollAwayEnabled() else false
 end
 
-local var3 = nil
+local var1 = nil
 
 return function()
-	-- upvalues: var3 (write), fFlagAppIaScrollAway (ref), fFlagAppIaScrollAwayGuac (ref), universalAppPolicyModule (ref), enableFlyoutWithScrollAway2 (ref), flyoutSidePanelIXP (ref)
-	if var3 == nil then
-		var3 = not fFlagAppIaScrollAway and (if fFlagAppIaScrollAwayGuac and not universalAppPolicyModule.getAppFeaturePolicies().getAppIaScrollAwayEnabled() then false elseif enableFlyoutWithScrollAway2 and flyoutSidePanelIXP.isScrollAwayEnabled() then true else false)
+	-- upvalues: var1 (write), fFlagAppIaScrollAway (ref), fFlagAppIaScrollAwayGuac (ref), universalAppPolicyModule (ref), enableFlyoutWithScrollAway2 (ref), flyoutSidePanelIXP (ref)
+	if var1 == nil then
+		var1 = not fFlagAppIaScrollAway and (if fFlagAppIaScrollAwayGuac and not universalAppPolicyModule.getAppFeaturePolicies().getAppIaScrollAwayEnabled() then false elseif enableFlyoutWithScrollAway2 and flyoutSidePanelIXP.isScrollAwayEnabled() then true else false)
 	end
-	return var3
+	return var1
 end

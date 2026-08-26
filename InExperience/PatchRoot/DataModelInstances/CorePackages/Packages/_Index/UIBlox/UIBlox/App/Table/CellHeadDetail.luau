@@ -19,11 +19,11 @@ cellHeadDetail.validateProps = tModule.strictInterface({
 	openTypeFeatures = tModule.optional(tModule.string)
 })
 
-function cellHeadDetail.render(p0)
+function cellHeadDetail.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), genericTextLabelModule (ref)
-	return withStyleModule(function(p1)
-		-- upvalues: p0 (ref), roactModule (copy), genericTextLabelModule (copy)
-		local subLabelText = p0.props.subLabelText
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), roactModule (copy), genericTextLabelModule (copy)
+		local subLabelText = p1.props.subLabelText
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -38,9 +38,9 @@ function cellHeadDetail.render(p0)
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Text = p0.props.labelText,
-				colorStyle = p0.props.labelTextColor or p1.Theme.TextEmphasis,
-				fontStyle = p0.props.labelTextFont or p1.Font.Header2,
+				Text = p1.props.labelText,
+				colorStyle = p1.props.labelTextColor or p2.Theme.TextEmphasis,
+				fontStyle = p1.props.labelTextFont or p2.Font.Header2,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
 			SubLabel = subLabelText and roactModule.createElement(genericTextLabelModule, {
@@ -48,9 +48,9 @@ function cellHeadDetail.render(p0)
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY,
 				Text = subLabelText,
-				colorStyle = p0.props.subLabelTextColor or p1.Theme.TextDefault,
-				fontStyle = p0.props.subLabelTextFont or p1.Font.CaptionBody,
-				openTypeFeatures = p0.props.openTypeFeatures,
+				colorStyle = p1.props.subLabelTextColor or p2.Theme.TextDefault,
+				fontStyle = p1.props.subLabelTextFont or p2.Font.CaptionBody,
+				openTypeFeatures = p1.props.openTypeFeatures,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}) or nil
 		})

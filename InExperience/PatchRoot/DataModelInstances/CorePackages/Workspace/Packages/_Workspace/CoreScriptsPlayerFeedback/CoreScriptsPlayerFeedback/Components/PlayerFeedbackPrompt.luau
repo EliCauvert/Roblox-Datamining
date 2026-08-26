@@ -18,19 +18,19 @@ local telemetryService = game:GetService("TelemetryService")
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local circle21 = images["component_assets/circle_21"]
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useScreenSize (ref), useStyle (ref), useLastInputMethod (ref), reactModule (ref), useLocalization (ref), guiService (ref), constantsModule (ref), mouseIconOverrideService (ref), telemetryService (ref), useEscapeDismissModule (ref), contextActionService (ref), imageSetLabel (ref), circle21 (ref), buttonType (ref), interactiveAlert (ref)
-	local var8 = useScreenSize()
-	local var9 = useStyle()
-	local var10 = useLastInputMethod()
-	local var11, var12 = reactModule.useState(false)
+	local var1 = useScreenSize()
+	local var2 = useStyle()
+	local var3 = useLastInputMethod()
+	local var4, var5 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var10 (ref), var12 (ref)
-		if not var11 and (var10 == "Keyboard" or var10 == "Gamepad") then
-			var12(true)
+		-- upvalues: var4 (ref), var3 (ref), var5 (ref)
+		if not var4 and (var3 == "Keyboard" or var3 == "Gamepad") then
+			var5(true)
 		end
-	end, { var11, var10 })
-	local var13 = useLocalization({
+	end, { var4, var3 })
+	local var6 = useLocalization({
 		Title = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Title",
 		Submit = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Submit",
 		Submitting = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Submitting",
@@ -38,13 +38,13 @@ return reactModule.memo(function(p0)
 		Intro = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Intro",
 		Footer = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Footer"
 	})
-	local var14, var15 = reactModule.useState("")
-	local var16, var17 = reactModule.useState(false)
-	local var18 = reactModule.useRef(nil)
+	local var7, var8 = reactModule.useState("")
+	local var9, var10 = reactModule.useState(false)
+	local var11 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var18 (ref), guiService (copy)
-		if not var11 then return end
-		local current = var18.current
+		-- upvalues: var4 (ref), var11 (ref), guiService (copy)
+		if not var4 then return end
+		local current = var11.current
 		
 		if current then
 			pcall(function()
@@ -52,7 +52,7 @@ return reactModule.memo(function(p0)
 				guiService:Select(current)
 			end)
 		end
-	end, { var11 })
+	end, { var4 })
 	local MIN_FEEDBACK_LENGTH = constantsModule.MIN_FEEDBACK_LENGTH
 	local MAX_FEEDBACK_LENGTH = constantsModule.MAX_FEEDBACK_LENGTH
 	local DELAYED_INPUT_ANIM_SEC = constantsModule.DELAYED_INPUT_ANIM_SEC
@@ -65,13 +65,13 @@ return reactModule.memo(function(p0)
 			mouseIconOverrideService.pop("PlayerFeedbackPromptOverride")
 		end
 	end, {})
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var14 (ref), MIN_FEEDBACK_LENGTH (ref), MAX_FEEDBACK_LENGTH (ref), var17 (ref), telemetryService (copy), p0 (ref)
-		if #var14 < MIN_FEEDBACK_LENGTH then return end
-		if MAX_FEEDBACK_LENGTH < #var14 then
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), MIN_FEEDBACK_LENGTH (ref), MAX_FEEDBACK_LENGTH (ref), var10 (ref), telemetryService (copy), p1 (ref)
+		if #var7 < MIN_FEEDBACK_LENGTH then return end
+		if MAX_FEEDBACK_LENGTH < #var7 then
 			return
 		end
-		var17(true)
+		var10(true)
 		pcall(function()
 			-- upvalues: telemetryService (copy)
 			telemetryService:LogCounter({
@@ -80,17 +80,17 @@ return reactModule.memo(function(p0)
 			}, { customFields = {} }, 1)
 		end)
 		pcall(function()
-			-- upvalues: var14 (copy)
+			-- upvalues: var7 (copy)
 			local socialService = game:GetService("SocialService")
 			
 			if socialService.SignalFeedbackSubmissionCompleted then
-				socialService:SignalFeedbackSubmissionCompleted(var14)
+				socialService:SignalFeedbackSubmissionCompleted(var7)
 			end
 		end)
-		p0.closePrompt()
-	end, { var14 })
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: telemetryService (copy), p0 (ref)
+		p1.closePrompt()
+	end, { var7 })
+	local var13 = reactModule.useCallback(function()
+		-- upvalues: telemetryService (copy), p1 (ref)
 		pcall(function()
 			-- upvalues: telemetryService (copy)
 			telemetryService:LogCounter({
@@ -105,16 +105,16 @@ return reactModule.memo(function(p0)
 				socialService:SignalFeedbackSubmissionPermissionDenied()
 			end
 		end)
-		p0.closePrompt()
+		p1.closePrompt()
 	end, {})
-	useEscapeDismissModule("FeedbackPromptCancel", var20)
+	useEscapeDismissModule("FeedbackPromptCancel", var13)
 	reactModule.useEffect(function()
-		-- upvalues: contextActionService (copy), guiService (copy), var19 (ref)
-		contextActionService:BindCoreActionAtPriority("FeedbackPromptDisableGameControls", function(_, _, p1)
-			return if p1 and p1.KeyCode == Enum.KeyCode.Escape then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
+		-- upvalues: contextActionService (copy), guiService (copy), var12 (ref)
+		contextActionService:BindCoreActionAtPriority("FeedbackPromptDisableGameControls", function(_, _, p2)
+			return if p2 and p2.KeyCode == Enum.KeyCode.Escape then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
 		end, false, Enum.ContextActionPriority.Low.Value, Enum.PlayerActions.CharacterForward, Enum.PlayerActions.CharacterBackward, Enum.PlayerActions.CharacterLeft, Enum.PlayerActions.CharacterRight, Enum.PlayerActions.CharacterJump)
 		contextActionService:BindCoreAction("FeedbackPromptSubmit", function(_, p2)
-			-- upvalues: guiService (copy), var19 (copy)
+			-- upvalues: guiService (copy), var12 (copy)
 			if p2 ~= Enum.UserInputState.Begin then
 				return Enum.ContextActionResult.Pass
 			end
@@ -123,7 +123,7 @@ return reactModule.memo(function(p0)
 			if selectedCoreObject and selectedCoreObject:IsA("TextBox") then
 				return Enum.ContextActionResult.Pass
 			end
-			var19()
+			var12()
 			
 			return Enum.ContextActionResult.Sink
 		end, false, Enum.KeyCode.ButtonA, Enum.KeyCode.Return)
@@ -133,12 +133,12 @@ return reactModule.memo(function(p0)
 			contextActionService:UnbindCoreAction("FeedbackPromptDisableGameControls")
 			contextActionService:UnbindCoreAction("FeedbackPromptSubmit")
 		end
-	end, { var19, var20 })
+	end, { var12, var13 })
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), guiService (copy)
+		-- upvalues: var11 (ref), guiService (copy)
 		local function trySelect()
-			-- upvalues: var18 (copy), guiService (copy)
-			local current = var18.current
+			-- upvalues: var11 (copy), guiService (copy)
+			local current = var11.current
 			
 			if current then
 				pcall(function()
@@ -153,12 +153,12 @@ return reactModule.memo(function(p0)
 		task.delay(0.15, trySelect)
 		task.delay(0.2, trySelect)
 		task.delay(0.25, trySelect)
-		local var27 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
-			-- upvalues: guiService (copy), var18 (copy)
+		local var14 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
+			-- upvalues: guiService (copy), var11 (copy)
 			local selectedCoreObject = guiService.SelectedCoreObject
 			
 			if selectedCoreObject == nil or selectedCoreObject and not selectedCoreObject.Parent then
-				local current = var18.current
+				local current = var11.current
 				
 				if current then
 					pcall(function()
@@ -170,54 +170,54 @@ return reactModule.memo(function(p0)
 		end)
 		
 		return function()
-			-- upvalues: var27 (ref)
-			var27:Disconnect()
+			-- upvalues: var14 (ref)
+			var14:Disconnect()
 		end
 	end, {})
-	local title = var13.Title
-	local var21 = if var16 then var13.Submitting else var13.Submit
-	local placeholder = var13.Placeholder
-	local var22 = MIN_FEEDBACK_LENGTH <= #var14 and #var14 <= MAX_FEEDBACK_LENGTH
-	local var23 = reactModule.useCallback(function(p3)
-		-- upvalues: var15 (ref)
-		var15(p3.Text)
+	local title = var6.Title
+	local var14 = if var9 then var6.Submitting else var6.Submit
+	local placeholder = var6.Placeholder
+	local var15 = MIN_FEEDBACK_LENGTH <= #var7 and #var7 <= MAX_FEEDBACK_LENGTH
+	local var16 = reactModule.useCallback(function(p2)
+		-- upvalues: var8 (ref)
+		var8(p2.Text)
 	end, {})
-	local footer = var13.Footer
+	local footer = var6.Footer
 	
 	return reactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = true,
 		title = title,
-		onCloseClicked = var20,
+		onCloseClicked = var13,
 		buttonStackInfo = reactModule.useMemo(function()
-			-- upvalues: buttonType (copy), var19 (ref), var21 (ref), p0 (ref), DELAYED_INPUT_ANIM_SEC (ref), var22 (ref), var16 (ref)
+			-- upvalues: buttonType (copy), var12 (ref), var14 (ref), p1 (ref), DELAYED_INPUT_ANIM_SEC (ref), var15 (ref), var9 (ref)
 			return {
 				buttons = {
 					{
 						buttonType = buttonType.PrimaryContextual,
 						props = {
-							onActivated = var19,
-							text = var21,
-							isDelayedInput = p0.enableInputDelayed,
-							enableInputDelayed = p0.enableInputDelayed,
+							onActivated = var12,
+							text = var14,
+							isDelayedInput = p1.enableInputDelayed,
+							enableInputDelayed = p1.enableInputDelayed,
 							delayInputSeconds = DELAYED_INPUT_ANIM_SEC,
-							isDisabled = not var22,
-							isLoading = var16
+							isDisabled = not var15,
+							isLoading = var9
 						}
 					}
 				}
 			}
 		end, {
-			var19,
-			var21,
-			p0.enableInputDelayed,
-			var22,
-			var16
+			var12,
+			var14,
+			p1.enableInputDelayed,
+			var15,
+			var9
 		}),
 		middleContent = reactModule.useCallback(function()
-			-- upvalues: var9 (ref), var8 (ref), constantsModule (copy), reactModule (copy), var13 (ref), imageSetLabel (copy), circle21 (copy), var14 (ref), placeholder (ref), var18 (ref), var23 (ref)
-			local body = var9.Font.Body
-			local floored = math.floor(body.RelativeSize * var9.Font.BaseSize)
-			local maxValue = math.max(constantsModule.MIN_TEXTBOX_HEIGHT, math.min(constantsModule.MAX_TEXTBOX_HEIGHT, math.clamp(var8.Y - 320, constantsModule.MIN_TEXTBOX_HEIGHT, constantsModule.MAX_TEXTBOX_HEIGHT)))
+			-- upvalues: var2 (ref), var1 (ref), constantsModule (copy), reactModule (copy), var6 (ref), imageSetLabel (copy), circle21 (copy), var7 (ref), placeholder (ref), var11 (ref), var16 (ref)
+			local body = var2.Font.Body
+			local floored = math.floor(body.RelativeSize * var2.Font.BaseSize)
+			local maxValue = math.max(constantsModule.MIN_TEXTBOX_HEIGHT, math.min(constantsModule.MAX_TEXTBOX_HEIGHT, math.clamp(var1.Y - 320, constantsModule.MIN_TEXTBOX_HEIGHT, constantsModule.MAX_TEXTBOX_HEIGHT)))
 			
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -235,11 +235,11 @@ return reactModule.memo(function(p0)
 					TextWrapped = true,
 					LayoutOrder = 0,
 					Selectable = false,
-					Text = var13.Intro,
+					Text = var6.Intro,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					TextColor3 = var9.Theme.TextEmphasis.Color,
-					TextTransparency = var9.Theme.TextEmphasis.Transparency,
+					TextColor3 = var2.Theme.TextEmphasis.Color,
+					TextTransparency = var2.Theme.TextEmphasis.Transparency,
 					Font = body.Font,
 					TextSize = floored,
 					Size = UDim2.new(1, 0, 0, 0),
@@ -256,8 +256,8 @@ return reactModule.memo(function(p0)
 						Selectable = false,
 						Size = UDim2.new(1, 0, 1, 0),
 						Image = circle21,
-						ImageTransparency = var9.Theme.UIMuted.Transparency,
-						ImageColor3 = var9.Theme.UIMuted.Color,
+						ImageTransparency = var2.Theme.UIMuted.Transparency,
+						ImageColor3 = var2.Theme.UIMuted.Color,
 						ScaleType = Enum.ScaleType.Slice,
 						SliceCenter = Rect.new(8, 8, 9, 9)
 					}, {
@@ -270,37 +270,37 @@ return reactModule.memo(function(p0)
 						TextBox = reactModule.createElement("TextBox", {
 							Size = UDim2.new(1, 0, 1, 0),
 							BackgroundTransparency = 1,
-							Text = var14,
+							Text = var7,
 							PlaceholderText = placeholder,
 							TextWrapped = true,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextYAlignment = Enum.TextYAlignment.Top,
-							TextColor3 = var9.Theme.TextEmphasis.Color,
-							TextTransparency = var9.Theme.TextEmphasis.Transparency,
-							PlaceholderColor3 = var9.Theme.TextMuted.Color,
+							TextColor3 = var2.Theme.TextEmphasis.Color,
+							TextTransparency = var2.Theme.TextEmphasis.Transparency,
+							PlaceholderColor3 = var2.Theme.TextMuted.Color,
 							Font = body.Font,
 							TextSize = floored,
 							ClearTextOnFocus = false,
 							MultiLine = true,
 							OverlayNativeInput = true,
-							ref = var18,
-							[reactModule.Change.Text] = var23,
+							ref = var11,
+							[reactModule.Change.Text] = var16,
 							[reactModule.Tag] = "data-testid=feedbackTextBox"
 						})
 					})
 				})
 			})
-		end, { var9, var14, var23 }),
+		end, { var2, var7, var16 }),
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = var8,
-		defaultChildRef = if var11 then var18 else nil,
-		isRoactGamepadEnabled = var11,
+		screenSize = var1,
+		defaultChildRef = if var4 then var11 else nil,
+		isRoactGamepadEnabled = var4,
 		footerContent = reactModule.useCallback(function()
-			-- upvalues: footer (ref), reactModule (copy), var9 (ref)
-			local var30 = footer
+			-- upvalues: footer (ref), reactModule (copy), var2 (ref)
+			local var17 = footer
 			
-			if type(var30) == "string" and string.find(var30, "Roblox Terms of Use", 1, true) then
-				var30 = string.gsub(var30, "Roblox Terms of Use", "<u>Roblox Terms of Use</u>", 1)
+			if type(var17) == "string" and string.find(var17, "Roblox Terms of Use", 1, true) then
+				var17 = string.gsub(var17, "Roblox Terms of Use", "<u>Roblox Terms of Use</u>", 1)
 			end
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -314,17 +314,17 @@ return reactModule.memo(function(p0)
 					TextWrapped = true,
 					LayoutOrder = 1,
 					Selectable = false,
-					Text = var30,
+					Text = var17,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					TextSize = math.floor(var9.Font.CaptionHeader.RelativeSize * var9.Font.BaseSize),
-					Font = var9.Font.CaptionHeader.Font,
-					TextColor3 = var9.Theme.TextMuted.Color,
-					TextTransparency = var9.Theme.TextMuted.Transparency,
+					TextSize = math.floor(var2.Font.CaptionHeader.RelativeSize * var2.Font.BaseSize),
+					Font = var2.Font.CaptionHeader.Font,
+					TextColor3 = var2.Theme.TextMuted.Color,
+					TextTransparency = var2.Theme.TextMuted.Transparency,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				})
 			})
-		end, { var9, footer })
+		end, { var2, footer })
 	})
 end)

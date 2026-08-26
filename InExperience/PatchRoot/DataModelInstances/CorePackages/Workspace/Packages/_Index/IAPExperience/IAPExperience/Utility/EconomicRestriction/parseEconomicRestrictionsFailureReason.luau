@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if p0 then p0.FailureReason or (p0.failureReason or p0.violationType) else nil
+﻿return function(p1)
+	return if p1 then p1.FailureReason or (p1.failureReason or p1.violationType) else nil
 end

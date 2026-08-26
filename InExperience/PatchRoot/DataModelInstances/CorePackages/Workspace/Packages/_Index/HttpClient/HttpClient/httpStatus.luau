@@ -1,5 +1,5 @@
 ﻿return {
-	isSuccess = function(p0)
-		return p0 == 304 or (p0 >= 200 and p0 < 300)
+	isSuccess = function(p1)
+		return p1 == 304 or (p1 >= 200 and p1 < 300)
 	end
 }

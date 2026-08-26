@@ -6,12 +6,12 @@ local fFlagLuaAppVideoAutoplayFeedElection = require(parent.SharedFlags).FFlagLu
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2)
+function t.new(p1, p2, p3)
 	-- upvalues: videoPlaybackCoordinatorModule (ref), viewportVideoAutoplayControllerModule (ref), fFlagLuaAppVideoAutoplayFeedElection (ref), t (ref)
-	local var4 = videoPlaybackCoordinatorModule.new()
+	local var1 = videoPlaybackCoordinatorModule.new()
 	local t_1 = {
-		videoPlaybackCoordinator = var4,
-		viewportVideoAutoplayController = if p0 then viewportVideoAutoplayControllerModule.new(var4, if fFlagLuaAppVideoAutoplayFeedElection then p1 else nil, if fFlagLuaAppVideoAutoplayFeedElection then p2 else nil) else nil
+		videoPlaybackCoordinator = var1,
+		viewportVideoAutoplayController = if p1 then viewportVideoAutoplayControllerModule.new(var1, if fFlagLuaAppVideoAutoplayFeedElection then p2 else nil, if fFlagLuaAppVideoAutoplayFeedElection then p3 else nil) else nil
 	}
 	setmetatable(t_1, t)
 	

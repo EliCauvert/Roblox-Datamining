@@ -6,60 +6,60 @@ local optionallyLogModule = require(script.Parent.optionallyLog)
 local composeModule = require(script.Parent.Parent.Parent.RoduxTools.compose)
 local isEnumModule = require(script.Parent.Parent.Parent.Utils.isEnum)
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: llama (ref), isEnumModule (ref)
-	return llama.Dictionary.map(p0 or {}, function(p1)
+	return llama.Dictionary.map(p1 or {}, function(p2)
 		-- upvalues: isEnumModule (copy)
-		return if isEnumModule(p1) then p1.rawValue() else p1
+		return if isEnumModule(p2) then p2.rawValue() else p2
 	end)
 end
 
-local var5 = function(p2, p3)
+local var1 = function(p1, p2)
 	-- upvalues: llama (ref)
-	return if p2 and p3 then llama.Dictionary.map(p2, function(p4, p5)
-		-- upvalues: p3 (ref), llama (copy)
-		local var7 = p3[p5]
+	return if p1 and p2 then llama.Dictionary.map(p1, function(p3, p4)
+		-- upvalues: p2 (ref), llama (copy)
+		local var2 = p2[p4]
 		
-		return if var7 then if type(var7) == "function" then var7(p4) else p4 else llama.None
+		return if var2 then if type(var2) == "function" then var2(p3) else p3 else llama.None
 	end) else {}
 end
 
-local var6 = function(p6)
+local var2 = function(p1)
 	-- upvalues: toStringAdditionalArgsModule (ref)
-	return string.format("context: (%s), eventName: (%s), additionalInfo: (%s)", p6.context, p6.eventType, toStringAdditionalArgsModule(p6.additionalInfo))
+	return string.format("context: (%s), eventName: (%s), additionalInfo: (%s)", p1.context, p1.eventType, toStringAdditionalArgsModule(p1.additionalInfo))
 end
 
-local _ = function(p7)
-	return function(p8)
-		-- upvalues: p7 (ref)
-		p7:setRBXEventStream(p8.context, p8.eventType, p8.additionalInfo)
+local _ = function(p1)
+	return function(p2)
+		-- upvalues: p1 (ref)
+		p1:setRBXEventStream(p2.context, p2.eventType, p2.additionalInfo)
 		
-		return p8
+		return p2
 	end
 end
 
-return function(p9)
-	-- upvalues: getEventInfoModule (ref), composeModule (ref), optionallyLogModule (ref), var6 (ref), llama (ref), isEnumModule (ref), var5 (ref)
-	local var8 = getEventInfoModule(p9.eventList)
+return function(p1)
+	-- upvalues: getEventInfoModule (ref), composeModule (ref), optionallyLogModule (ref), var2 (ref), llama (ref), isEnumModule (ref), var1 (ref)
+	local var3 = getEventInfoModule(p1.eventList)
 	
-	return function(p10, p11)
-		-- upvalues: var8 (ref), composeModule (copy), optionallyLogModule (copy), p9 (ref), var6 (copy), llama (copy), isEnumModule (copy), var5 (copy)
-		local var9 = var8(p10)
-		local eventStreamImpl = p9.eventStreamImpl
-		composeModule(optionallyLogModule(p9.loggerImpl, var6), function(p13)
+	return function(p2, p3)
+		-- upvalues: var3 (ref), composeModule (copy), optionallyLogModule (copy), p1 (ref), var2 (copy), llama (copy), isEnumModule (copy), var1 (copy)
+		local var4 = var3(p2)
+		local eventStreamImpl = p1.eventStreamImpl
+		composeModule(optionallyLogModule(p1.loggerImpl, var2), function(p4)
 			-- upvalues: eventStreamImpl (ref)
-			eventStreamImpl:setRBXEventStream(p13.context, p13.eventType, p13.additionalInfo)
+			eventStreamImpl:setRBXEventStream(p4.context, p4.eventType, p4.additionalInfo)
 			
-			return p13
+			return p4
 		end)({
-			context = var9.context.rawValue(),
-			eventType = var9.eventType.rawValue(),
-			additionalInfo = llama.Dictionary.join(p9.infoForAllEvents or {}, llama.Dictionary.map(var9.additionalInfo or {}, function(p12)
+			context = var4.context.rawValue(),
+			eventType = var4.eventType.rawValue(),
+			additionalInfo = llama.Dictionary.join(p1.infoForAllEvents or {}, llama.Dictionary.map(var4.additionalInfo or {}, function(p4)
 				-- upvalues: isEnumModule (copy)
-				return if isEnumModule(p12) then p12.rawValue() else p12
-			end), var5(p11, var9.formatRulesForAdditionalInfo))
+				return if isEnumModule(p4) then p4.rawValue() else p4
+			end), var1(p3, var4.formatRulesForAdditionalInfo))
 		})
 		
-		return p10, p11
+		return p2, p3
 	end
 end

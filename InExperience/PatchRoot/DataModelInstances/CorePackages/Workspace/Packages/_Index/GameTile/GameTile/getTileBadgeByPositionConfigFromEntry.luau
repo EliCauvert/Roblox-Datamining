@@ -1,14 +1,14 @@
 ﻿local _ = require(script:FindFirstAncestor("GameTile").GameTileTypes)
 
-return function(p0)
-	return if p0.badgePosition and p0.badgeAnalyticsId and p0.badgeType and (p0.badgeText or p0.badgeIcon) then {
-		[p0.badgePosition] = {
+return function(p1)
+	return if p1.badgePosition and p1.badgeAnalyticsId and p1.badgeType and (p1.badgeText or p1.badgeIcon) then {
+		[p1.badgePosition] = {
 			{
-				analyticsId = p0.badgeAnalyticsId,
-				tileBadgeType = p0.badgeType,
-				text = p0.badgeText,
-				icons = if p0.badgeIcon then { p0.badgeIcon } else nil,
-				tileBadgeComponentType = p0.badgeComponentType
+				analyticsId = p1.badgeAnalyticsId,
+				tileBadgeType = p1.badgeType,
+				text = p1.badgeText,
+				icons = if p1.badgeIcon then { p1.badgeIcon } else nil,
+				tileBadgeComponentType = p1.badgeComponentType
 			}
 		}
 	} else nil

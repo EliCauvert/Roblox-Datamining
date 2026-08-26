@@ -6,8 +6,8 @@ local _ = require(script.Parent.Parent.RoduxSquadsTypes)
 return function()
 	-- upvalues: roduxModule (ref), currentExperienceInviteStatusUpdated (ref)
 	return roduxModule.createReducer(false, {
-		[currentExperienceInviteStatusUpdated.name] = function(_, p0)
-			return p0.payload.isExperienceInvitePending
+		[currentExperienceInviteStatusUpdated.name] = function(_, p1)
+			return p1.payload.isExperienceInvitePending
 		end
 	})
 end

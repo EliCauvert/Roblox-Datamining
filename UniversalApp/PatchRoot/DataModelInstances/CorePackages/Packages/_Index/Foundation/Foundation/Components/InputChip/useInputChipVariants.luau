@@ -5,7 +5,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: inputSizeModule (ref)
 	return {
 		common = {
@@ -14,7 +14,7 @@ local function variantsFactory(p0)
 			},
 			text = {
 				tag = "shrink size-0-full auto-x text-truncate-end",
-				contentStyle = p0.Color.ActionStandard.Foreground
+				contentStyle = p1.Color.ActionStandard.Foreground
 			},
 			close = { tag = "auto-xy" }
 		},
@@ -24,44 +24,44 @@ local function variantsFactory(p0)
 				text = {
 					tag = "text-caption-small",
 					padding = {
-						left = UDim.new(0, p0.Size.Size_150),
-						right = UDim.new(0, p0.Padding.XSmall)
+						left = UDim.new(0, p1.Size.Size_150),
+						right = UDim.new(0, p1.Padding.XSmall)
 					}
 				},
-				close = { padding = { right = UDim.new(0, p0.Size.Size_150) } }
+				close = { padding = { right = UDim.new(0, p1.Size.Size_150) } }
 			},
 			[inputSizeModule.Small] = {
 				container = { tag = "size-0-500" },
 				text = {
 					tag = "text-label-small",
 					padding = {
-						left = UDim.new(0, p0.Padding.Small),
-						right = UDim.new(0, p0.Size.Size_150)
+						left = UDim.new(0, p1.Padding.Small),
+						right = UDim.new(0, p1.Size.Size_150)
 					}
 				},
-				close = { padding = { right = UDim.new(0, p0.Padding.Small) } }
+				close = { padding = { right = UDim.new(0, p1.Padding.Small) } }
 			},
 			[inputSizeModule.Medium] = {
 				container = { tag = "size-0-600" },
 				text = {
 					tag = "text-label-small",
 					padding = {
-						left = UDim.new(0, p0.Padding.Small),
-						right = UDim.new(0, p0.Size.Size_150)
+						left = UDim.new(0, p1.Padding.Small),
+						right = UDim.new(0, p1.Size.Size_150)
 					}
 				},
-				close = { padding = { right = UDim.new(0, p0.Padding.Small) } }
+				close = { padding = { right = UDim.new(0, p1.Padding.Small) } }
 			},
 			[inputSizeModule.Large] = {
 				container = { tag = "size-0-800" },
 				text = {
 					tag = "text-label-medium",
 					padding = {
-						left = UDim.new(0, p0.Padding.Medium),
-						right = UDim.new(0, p0.Padding.Small)
+						left = UDim.new(0, p1.Padding.Medium),
+						right = UDim.new(0, p1.Padding.Small)
 					}
 				},
-				close = { padding = { right = UDim.new(0, p0.Padding.Medium) } }
+				close = { padding = { right = UDim.new(0, p1.Padding.Medium) } }
 			}
 		}
 	}

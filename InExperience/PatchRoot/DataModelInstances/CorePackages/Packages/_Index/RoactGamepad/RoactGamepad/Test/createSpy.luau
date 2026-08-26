@@ -1,16 +1,16 @@
-﻿return function(p0)
+﻿return function(p1)
 	local t = { callCount = 0, valuesLength = 0, values = {} }
 	
 	function t.value(...)
-		-- upvalues: t (ref), p0 (ref)
+		-- upvalues: t (ref), p1 (ref)
 		t.callCount += 1
 		t.values = { ... }
 		t.valuesLength = select("#", ...)
 		
-		if p0 == nil then
+		if p1 == nil then
 			return
 		end
-		return p0(...)
+		return p1(...)
 	end
 	
 	function t.assertCalledWith(_, ...)
@@ -39,8 +39,8 @@
 	end
 	
 	setmetatable(t, {
-		__index = function(_, p1)
-			error(("%q is not a valid member of spy"):format(p1))
+		__index = function(_, p2)
+			error(("%q is not a valid member of spy"):format(p2))
 		end
 	})
 	

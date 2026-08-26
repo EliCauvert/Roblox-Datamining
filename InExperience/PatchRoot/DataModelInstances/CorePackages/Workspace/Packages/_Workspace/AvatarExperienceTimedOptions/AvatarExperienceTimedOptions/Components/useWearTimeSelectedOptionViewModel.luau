@@ -9,8 +9,8 @@ local useTokens = foundationModule.Hooks.useTokens
 local _ = require(parent.AvatarExperienceCommon)
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 
-local function _(p0)
-	for i, v in p0 do
+local function _(p1)
+	for i, v in p1 do
 		if v.days == 0 then
 			return v.price
 		end
@@ -18,115 +18,115 @@ local function _(p0)
 	return 0
 end
 
-return function(p1)
+return function(p2)
 	-- upvalues: useTokens (ref), reactModule (ref), localization (ref), localizationService (ref), fFlagAXDurablesForMIS (ref), useLocalization (ref)
-	local var14
-	local var4 = useTokens()
-	local var5 = reactModule.useMemo(function()
+	local var1
+	local var2 = useTokens()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: localization (copy), localizationService (copy)
 		return localization.new(localizationService.RobloxLocaleId)
 	end, {})
-	local var6, var7 = reactModule.useState(nil)
+	local var4, var5 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagAXDurablesForMIS (copy), p1 (ref), var7 (ref)
-		if fFlagAXDurablesForMIS and p1.selectedTimedOptionIndexInReducer ~= nil then
-			var7(p1.selectedTimedOptionIndexInReducer)
+		-- upvalues: fFlagAXDurablesForMIS (copy), p2 (ref), var5 (ref)
+		if fFlagAXDurablesForMIS and p2.selectedTimedOptionIndexInReducer ~= nil then
+			var5(p2.selectedTimedOptionIndexInReducer)
 			
 			return
 		end
-		for i, v in p1.options do
+		for i, v in p2.options do
 			if v.selected then
-				var7(i)
+				var5(i)
 				
 				return
 			end
 		end
 	end, {
-		p1.options,
-		if fFlagAXDurablesForMIS then p1.selectedTimedOptionIndexInReducer else nil
+		p2.options,
+		if fFlagAXDurablesForMIS then p2.selectedTimedOptionIndexInReducer else nil
 	})
-	local var8 = if var6 then p1.options[var6] else nil
-	local var9 = if var8 then var8.days else 0
-	local var10 = useLocalization({
+	local var6 = if var4 then p2.options[var4] else nil
+	local var7 = if var6 then var6.days else 0
+	local var8 = useLocalization({
 		infinite = "Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite",
-		xDay = { "Feature.Durables.BottomBar.RentalDuration", num = var9 },
+		xDay = { "Feature.Durables.BottomBar.RentalDuration", num = var7 },
 		xDays = {
 			"Feature.Durables.BottomBar.RentalDurationPlural",
-			num = var9
+			num = var7
 		},
 		xDayList = {
 			"Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay",
-			num = var9
+			num = var7
 		},
 		xDaysList = {
 			"Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays",
-			num = var9
+			num = var7
 		}
 	})
-	local var11, var12 = reactModule.useState(false)
-	local var13 = reactModule.useRef(nil)
+	local var9, var10 = reactModule.useState(false)
+	local var11 = reactModule.useRef(nil)
 	
-	if var8 then
-		var14 = var8.price
+	if var6 then
+		var1 = var6.price
 	else
-		for i, v in p1.options do
+		for i, v in p2.options do
 			if v.days == 0 then
-				var14 = v.price
+				var1 = v.price
 			end
 		end
-		var14 = 0
+		var1 = 0
 	end
 	local infinite, infinite_1
 	local _ = nil
 	local _ = nil
 	
-	if var9 == 0 then
-		infinite = var10.infinite
-		infinite_1 = var10.infinite
-	elseif var9 == 1 then
-		infinite = var10.xDay
-		infinite_1 = var10.xDayList
+	if var7 == 0 then
+		infinite = var8.infinite
+		infinite_1 = var8.infinite
+	elseif var7 == 1 then
+		infinite = var8.xDay
+		infinite_1 = var8.xDayList
 	else
-		infinite = var10.xDays
-		infinite_1 = var10.xDaysList
+		infinite = var8.xDays
+		infinite_1 = var8.xDaysList
 	end
 	return {
-		tokens = var4,
-		localization = var5,
-		selectedIndex = var6,
-		setSelectedIndex = var7,
-		selectedOption = var8,
-		days = var9,
-		localizedText = var10,
-		isOpen = var11,
-		setIsOpen = var12,
-		anchorRef = var13,
-		price = var14,
+		tokens = var2,
+		localization = var3,
+		selectedIndex = var4,
+		setSelectedIndex = var5,
+		selectedOption = var6,
+		days = var7,
+		localizedText = var8,
+		isOpen = var9,
+		setIsOpen = var10,
+		anchorRef = var11,
+		price = var1,
 		subLabelText = infinite,
 		listLabelText = infinite_1,
-		handleOptionActivated = reactModule.useCallback(function(p2)
-			-- upvalues: var7 (ref), p1 (ref), var12 (ref)
-			var7(p2)
+		handleOptionActivated = reactModule.useCallback(function(p3)
+			-- upvalues: var5 (ref), p2 (ref), var10 (ref)
+			var5(p3)
 			
-			if p1.onOptionActivated then
-				p1.onOptionActivated(p2)
+			if p2.onOptionActivated then
+				p2.onOptionActivated(p3)
 			end
-			var12(false)
-		end, { p1.onOptionActivated }),
+			var10(false)
+		end, { p2.onOptionActivated }),
 		updatedOptions = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), var6 (ref)
+			-- upvalues: p2 (ref), var4 (ref)
 			local t = {}
 			
-			for i, v in p1.options do
+			for i, v in p2.options do
 				t[i] = {
 					days = v.days,
 					price = v.price,
-					selected = i == var6,
+					selected = i == var4,
 					discountInformation = v.discountInformation
 				}
 			end
 			return t
-		end, { p1.options, var6 }),
-		disableOptionSelection = p1.disableOptionSelection
+		end, { p2.options, var4 }),
+		disableOptionSelection = p2.disableOptionSelection
 	}
 end

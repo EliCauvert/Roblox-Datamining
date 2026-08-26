@@ -8,18 +8,18 @@ local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpCha
 
 return signalsModule.createComputed(function()
 	-- upvalues: createChatTooltipStoreModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), promptsApiModule (ref), fFlagExpChatPresetChatEnabled (ref)
-	local var4 = createChatTooltipStoreModule()
+	local var1 = createChatTooltipStoreModule()
 	
 	if fFlagExpChatUseUnifiedTooltipStore then
-		promptsApiModule.fetchAllTooltipEligibility(function(p0)
-			-- upvalues: var4 (ref), fFlagExpChatPresetChatEnabled (copy)
-			local customPrompts = p0.customPrompts
-			var4.setIsEligible("GlobalChatTooltip", customPrompts.GlobalChatTooltip ~= nil)
+		promptsApiModule.fetchAllTooltipEligibility(function(p1)
+			-- upvalues: var1 (ref), fFlagExpChatPresetChatEnabled (copy)
+			local customPrompts = p1.customPrompts
+			var1.setIsEligible("GlobalChatTooltip", customPrompts.GlobalChatTooltip ~= nil)
 			
 			if fFlagExpChatPresetChatEnabled then
-				var4.setIsEligible("PresetChatTooltip", customPrompts.PresetChatTooltip ~= nil)
+				var1.setIsEligible("PresetChatTooltip", customPrompts.PresetChatTooltip ~= nil)
 			end
 		end)
 	end
-	return var4
+	return var1
 end)

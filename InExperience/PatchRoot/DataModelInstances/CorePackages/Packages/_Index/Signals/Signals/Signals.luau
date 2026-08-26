@@ -9,233 +9,233 @@ local function _(value)
 	return setmetatable(value, frozen)
 end
 
-local function defaultEquals(p0, p1)
-	return p0 == p1
+local function defaultEquals(p1, p2)
+	return p1 == p2
 end
 
-local function handleError(p2, ...)
-	if not p2 then
+local function handleError(p1, ...)
+	if not p1 then
 		error(...)
 	end
 end
 
-local function handleScopeValidation(p3, p4, ...)
+local function handleScopeValidation(p1, p2, ...)
 	-- upvalues: handleError (ref)
-	p3()
-	handleError(p4, ...)
+	p1()
+	handleError(p2, ...)
 	
 	return ...
 end
 
-local var6 = if _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__ then function(p5, p6)
+local var1 = if _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__ then function(p3, p4)
 	-- upvalues: handleScopeValidation (ref), callUserSpaceModule (ref)
-	local var7 = true
+	local var2 = true
 	
 	return handleScopeValidation(function()
-		-- upvalues: var7 (write)
-		var7 = false
-	end, pcall(callUserSpaceModule, p5, function(p7)
-		-- upvalues: var7 (write), p6 (ref)
-		if not var7 then
+		-- upvalues: var2 (write)
+		var2 = false
+	end, pcall(callUserSpaceModule, p3, function(p5)
+		-- upvalues: var2 (write), p4 (ref)
+		if not var2 then
 			error("attempted to use scope beyond scope's lifetime")
 		end
-		return p6(p7)
+		return p4(p5)
 	end))
 end else callUserSpaceModule
 
 return {
-	createSignal = function(value, p8)
+	createSignal = function(value, p3)
 		-- upvalues: defaultEquals (ref), callUserSpaceModule (ref), frozen (ref), flush (ref)
-		local var8 = false
-		local var9 = 0
-		local var10 = nil
-		local var11 = nil
-		local var12 = if p8 ~= nil then defaultEquals else p8
+		local var2 = false
+		local var3 = 0
+		local var4 = nil
+		local var5 = nil
+		local var6 = if p3 ~= nil then defaultEquals else p3
 		
 		local function ensureInitialized()
-			-- upvalues: var8 (write), var10 (write), value (ref), callUserSpaceModule (copy), var9 (write), var11 (write), frozen (copy)
-			if not var8 then
-				var8 = true
-				var10 = if typeof(value) == "function" then callUserSpaceModule(value) else value
-				var9 = os.clock()
-				var11 = setmetatable({}, frozen)
+			-- upvalues: var2 (write), var4 (write), value (ref), callUserSpaceModule (copy), var3 (write), var5 (write), frozen (copy)
+			if not var2 then
+				var2 = true
+				var4 = if typeof(value) == "function" then callUserSpaceModule(value) else value
+				var3 = os.clock()
+				var5 = setmetatable({}, frozen)
 			end
 		end
 		
-		local function source(p9, p10)
-			-- upvalues: var11 (write), var9 (write)
-			if p9 == nil then
-				return var9
-			elseif p10 then
-				var11[p9] = nil
+		local function source(p4, p5)
+			-- upvalues: var5 (write), var3 (write)
+			if p4 == nil then
+				return var3
+			elseif p5 then
+				var5[p4] = nil
 			else
-				var11[p9] = true
+				var5[p4] = true
 			end
 			return 0
 		end
 		
-		local function _(p11)
-			-- upvalues: source (ref), var11 (write)
-			if p11 then
-				var11[p11(source)] = true
+		local function _(p4)
+			-- upvalues: source (ref), var5 (write)
+			if p4 then
+				var5[p4(source)] = true
 			end
 		end
 		
 		local _ = function()
-			-- upvalues: var11 (write)
-			for i in var11 do
+			-- upvalues: var5 (write)
+			for i in var5 do
 				i()
 			end
-			table.clear(var11)
+			table.clear(var5)
 		end
 		
-		return function(p12)
-			-- upvalues: ensureInitialized (ref), source (ref), var11 (write), var10 (write)
+		return function(p4)
+			-- upvalues: ensureInitialized (ref), source (ref), var5 (write), var4 (write)
 			ensureInitialized()
 			
-			if p12 then
-				var11[p12(source)] = true
+			if p4 then
+				var5[p4(source)] = true
 			end
-			return var10
+			return var4
 		end, function(value)
-			-- upvalues: ensureInitialized (ref), callUserSpaceModule (copy), var10 (write), var12 (ref), var9 (write), var11 (write), flush (copy)
+			-- upvalues: ensureInitialized (ref), callUserSpaceModule (copy), var4 (write), var6 (ref), var3 (write), var5 (write), flush (copy)
 			ensureInitialized()
-			local var15 = if typeof(value) == "function" then callUserSpaceModule(value, var10) else value
+			local var7 = if typeof(value) == "function" then callUserSpaceModule(value, var4) else value
 			
-			if not callUserSpaceModule(var12, var10, var15) then
-				var10 = var15
-				var9 = os.clock()
+			if not callUserSpaceModule(var6, var4, var7) then
+				var4 = var7
+				var3 = os.clock()
 				
-				for i in var11 do
+				for i in var5 do
 					i()
 				end
-				table.clear(var11)
+				table.clear(var5)
 				flush()
 			end
 		end
 	end,
-	createComputed = function(p13, p14)
-		-- upvalues: defaultEquals (ref), frozen (ref), var6 (ref), callUserSpaceModule (ref)
-		local var16 = false
-		local var17 = false
-		local var18 = 0
-		local var19 = 0
-		local var20 = nil
-		local var21 = nil
-		local var22 = nil
-		local var23 = if p14 ~= nil then defaultEquals else p14
+	createComputed = function(p4, p5)
+		-- upvalues: defaultEquals (ref), frozen (ref), var1 (ref), callUserSpaceModule (ref)
+		local var7 = false
+		local var8 = false
+		local var9 = 0
+		local var10 = 0
+		local var11 = nil
+		local var12 = nil
+		local var13 = nil
+		local var14 = if p5 ~= nil then defaultEquals else p5
 		
 		local function _()
-			-- upvalues: var22 (write)
-			for i in var22 do
+			-- upvalues: var13 (write)
+			for i in var13 do
 				i()
 			end
-			table.clear(var22)
+			table.clear(var13)
 		end
 		
 		local function observer()
-			-- upvalues: var17 (write), var22 (write)
-			if not var17 then
-				var17 = true
+			-- upvalues: var8 (write), var13 (write)
+			if not var8 then
+				var8 = true
 				
-				for i in var22 do
+				for i in var13 do
 					i()
 				end
-				table.clear(var22)
+				table.clear(var13)
 			end
 		end
 		
-		local function scope(p15)
-			-- upvalues: var21 (write), observer (ref)
-			var21[p15] = true
+		local function scope(p6)
+			-- upvalues: var12 (write), observer (ref)
+			var12[p6] = true
 			
 			return observer
 		end
 		
 		local function ensureInitialized()
-			-- upvalues: var16 (write), var22 (write), frozen (copy), var21 (write), var20 (write), var6 (copy), p13 (ref), scope (ref), var19 (write), var18 (write)
-			if not var16 then
-				var16 = true
-				var22 = setmetatable({}, frozen)
-				var21 = {}
-				var20 = var6(p13, scope)
-				var19 = os.clock()
-				var18 = var19
+			-- upvalues: var7 (write), var13 (write), frozen (copy), var12 (write), var11 (write), var1 (copy), p4 (ref), scope (ref), var10 (write), var9 (write)
+			if not var7 then
+				var7 = true
+				var13 = setmetatable({}, frozen)
+				var12 = {}
+				var11 = var1(p4, scope)
+				var10 = os.clock()
+				var9 = var10
 			end
 		end
 		
 		local _ = function()
-			-- upvalues: var21 (write), observer (ref)
-			for i in var21 do
+			-- upvalues: var12 (write), observer (ref)
+			for i in var12 do
 				i(observer, true)
 			end
-			table.clear(var21)
+			table.clear(var12)
 		end
 		
 		local function flushNotifications()
-			-- upvalues: var17 (write), var21 (write), var19 (write), observer (ref), var6 (copy), p13 (ref), scope (ref), callUserSpaceModule (copy), var23 (ref), var20 (write), var18 (write)
-			if var17 then
-				var17 = false
+			-- upvalues: var8 (write), var12 (write), var10 (write), observer (ref), var1 (copy), p4 (ref), scope (ref), callUserSpaceModule (copy), var14 (ref), var11 (write), var9 (write)
+			if var8 then
+				var8 = false
 				
-				for i in var21 do
-					if var19 < i() then
-						for i_2 in var21 do
+				for i in var12 do
+					if var10 < i() then
+						for i_2 in var12 do
 							i_2(observer, true)
 						end
-						table.clear(var21)
-						local var29 = var6(p13, scope)
-						var19 = os.clock()
+						table.clear(var12)
+						local var15 = var1(p4, scope)
+						var10 = os.clock()
 						
-						if not callUserSpaceModule(var23, var20, var29) then
-							var20 = var29
-							var18 = var19
+						if not callUserSpaceModule(var14, var11, var15) then
+							var11 = var15
+							var9 = var10
 						end
 						return
 					end
 				end
-				for i in var21 do
+				for i in var12 do
 					i(observer)
 				end
 			end
 		end
 		
-		local function source(p16, p17)
-			-- upvalues: var22 (write), flushNotifications (ref), var18 (write)
-			if p16 == nil then
+		local function source(p6, p7)
+			-- upvalues: var13 (write), flushNotifications (ref), var9 (write)
+			if p6 == nil then
 				flushNotifications()
 				
-				return var18
-			elseif p17 then
-				var22[p16] = nil
+				return var9
+			elseif p7 then
+				var13[p6] = nil
 			else
-				var22[p16] = true
+				var13[p6] = true
 			end
 			return 0
 		end
 		
-		local _ = function(p18)
-			-- upvalues: source (ref), var22 (write)
-			if p18 then
-				var22[p18(source)] = true
+		local _ = function(p6)
+			-- upvalues: source (ref), var13 (write)
+			if p6 then
+				var13[p6(source)] = true
 			end
 		end
 		
-		return function(p19)
-			-- upvalues: ensureInitialized (ref), flushNotifications (ref), source (ref), var22 (write), var20 (write)
+		return function(p6)
+			-- upvalues: ensureInitialized (ref), flushNotifications (ref), source (ref), var13 (write), var11 (write)
 			ensureInitialized()
 			flushNotifications()
 			
-			if p19 then
-				var22[p19(source)] = true
+			if p6 then
+				var13[p6(source)] = true
 			end
-			return var20
+			return var11
 		end
 	end,
-	createEffect = function(p20)
-		-- upvalues: var6 (ref), schedule (ref)
-		local var30 = false
-		local var31 = false
-		local var32 = 0
+	createEffect = function(p6)
+		-- upvalues: var1 (ref), schedule (ref)
+		local var16 = false
+		local var17 = false
+		local var18 = 0
 		local t = {}
 		local observer = nil
 		
@@ -248,8 +248,8 @@ return {
 		end
 		
 		local function dispose()
-			-- upvalues: var31 (write), t (ref), observer (write)
-			var31 = true
+			-- upvalues: var17 (write), t (ref), observer (write)
+			var17 = true
 			
 			for i in t do
 				i(observer, true)
@@ -257,26 +257,26 @@ return {
 			table.clear(t)
 		end
 		
-		local function scope(p21)
+		local function scope(p7)
 			-- upvalues: t (ref), observer (write)
-			t[p21] = true
+			t[p7] = true
 			
 			return observer
 		end
 		
 		local function processNotification()
-			-- upvalues: var31 (write), var30 (write), t (ref), var32 (write), observer (write), var6 (copy), p20 (ref), scope (ref)
-			if not var31 then
-				var30 = false
+			-- upvalues: var17 (write), var16 (write), t (ref), var18 (write), observer (write), var1 (copy), p6 (ref), scope (ref)
+			if not var17 then
+				var16 = false
 				
 				for i in t do
-					if var32 < i() then
+					if var18 < i() then
 						for i_2 in t do
 							i_2(observer, true)
 						end
 						table.clear(t)
-						var6(p20, scope)
-						var32 = os.clock()
+						var1(p6, scope)
+						var18 = os.clock()
 						
 						return
 					end
@@ -288,15 +288,15 @@ return {
 		end
 		
 		observer = function()
-			-- upvalues: var31 (write), var30 (write), schedule (copy), processNotification (ref)
-			if not var31 and not var30 then
-				var30 = true
+			-- upvalues: var17 (write), var16 (write), schedule (copy), processNotification (ref)
+			if not var17 and not var16 then
+				var16 = true
 				schedule(processNotification)
 			end
 		end
 		
-		var6(p20, scope)
-		var32 = os.clock()
+		var1(p6, scope)
+		var18 = os.clock()
 		
 		return dispose
 	end

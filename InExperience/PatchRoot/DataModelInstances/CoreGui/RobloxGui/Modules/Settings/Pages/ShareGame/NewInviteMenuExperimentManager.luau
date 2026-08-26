@@ -7,13 +7,13 @@ local getFFlagInviteListRerank = require(corePackagesService.Workspace.Packages.
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: IXPServiceWrapper (ref), getFFlagInviteListRerank (ref), t (ref)
 	local t_1 = {
 		_styleEnabled = false,
 		_customizationEnabled = false,
 		_newSendEndpointEnabled = false,
-		_ixpServiceWrapper = p0 or IXPServiceWrapper,
+		_ixpServiceWrapper = p1 or IXPServiceWrapper,
 		_inviteListSortOrder = if getFFlagInviteListRerank() then 0 else nil
 	}
 	setmetatable(t_1, t)
@@ -44,13 +44,13 @@ function t.initialize(p1)
 		task.spawn(function()
 			-- upvalues: p1 (ref), getFStringInExperienceNotificationsLayerModule (copy), getFFlagInviteListRerank (copy)
 			p1._ixpServiceWrapper:WaitForInitialization()
-			local var5 = p1._ixpServiceWrapper:GetLayerData(getFStringInExperienceNotificationsLayerModule())
+			local var1 = p1._ixpServiceWrapper:GetLayerData(getFStringInExperienceNotificationsLayerModule())
 			
-			if var5 then
-				p1._styleEnabled = var5.NewInviteMenuStyleEnabled or false
-				p1._customizationEnabled = var5.NewInviteMenuCustomizationEnabled or false
-				p1._newSendEndpointEnabled = var5.NewInviteMenuEndpointEnabled or false
-				p1._inviteListSortOrder = if getFFlagInviteListRerank() then var5.invite_list_sort_order or 0 else nil
+			if var1 then
+				p1._styleEnabled = var1.NewInviteMenuStyleEnabled or false
+				p1._customizationEnabled = var1.NewInviteMenuCustomizationEnabled or false
+				p1._newSendEndpointEnabled = var1.NewInviteMenuEndpointEnabled or false
+				p1._inviteListSortOrder = if getFFlagInviteListRerank() then var1.invite_list_sort_order or 0 else nil
 			end
 		end)
 		

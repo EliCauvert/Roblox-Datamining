@@ -1,5 +1,5 @@
 ﻿return {
-	new = function(p0, p1, p2)
-		return { Playing = p0, Reversing = p1, Loading = p2 }
+	new = function(p1, p2, p3)
+		return { Playing = p1, Reversing = p2, Loading = p3 }
 	end
 }

@@ -19,8 +19,8 @@ if not localPlayer then
 	playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
 	localPlayer = playersService.LocalPlayer
 end
-local var7 = nil
-local var8 = nil
+local var1 = nil
+local var2 = nil
 local currentCamera = workspaceService.CurrentCamera
 workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 	-- upvalues: workspaceService (ref), currentCamera (write)
@@ -30,8 +30,8 @@ workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 		currentCamera = currentCamera_1
 	end
 end)
-local var9 = nil
-local var10 = nil
+local var3 = nil
+local var4 = nil
 local t = nil
 local _ = nil
 local ok, status = pcall(function()
@@ -107,86 +107,86 @@ local t_5 = { [Enum.KeyCode.R] = true, [Enum.KeyCode.T] = true }
 local t_6 = { [Enum.KeyCode.G] = true }
 local t_7 = { [Enum.KeyCode.X] = true }
 local t_8 = { [Enum.KeyCode.L] = true }
-local var33 = Vector2.new(0.75, 1) * 8
-local var34 = 1.5
-local var35 = 1
-local var36 = 4
-local var37 = 1
+local var5 = Vector2.new(0.75, 1) * 8
+local var6 = 1.5
+local var7 = 1
+local var8 = 4
+local var9 = 1
 local t_9 = {}
-local var39 = 0
+local var10 = 0
 local t_10 = {}
-local var41 = nil
-local var42 = nil
-local var43 = nil
-local var44 = nil
-local var45 = nil
-local var46 = false
-local var47 = 20
-local var48 = 0
+local var11 = nil
+local var12 = nil
+local var13 = nil
+local var14 = nil
+local var15 = nil
+local var16 = false
+local var17 = 20
+local var18 = 0
 local t_11 = {}
-local var50 = 1
-local var51 = nil
-local var52 = false
-local var53 = false
+local var19 = 1
+local var20 = nil
+local var21 = false
+local var22 = false
 local t_12 = {}
 t_12.__index = t_12
 
-function t_12.new(p0, p1)
+function t_12.new(p1, p2)
 	-- upvalues: t_12 (ref)
 	local tbl = setmetatable({}, t_12)
-	tbl.f = p0
-	tbl.p = p1
-	tbl.v = p1 * 0
+	tbl.f = p1
+	tbl.p = p2
+	tbl.v = p2 * 0
 	
 	return tbl
 end
 
-function t_12:Update(p2, p3)
+function t_12:Update(p1, p2)
 	-- upvalues: exp (ref)
-	local var89 = self.f * 2 * 3.14159265359
+	local var23 = self.f * 2 * 3.14159265359
 	local v = self.v
-	local var90 = p3 - self.p
-	local var91 = exp(-var89 * p2)
-	local var92 = p3 + (v * p2 - var90 * (var89 * p2 + 1)) * var91
-	local var93 = (var89 * p2 * (var90 * var89 - v) + v) * var91
-	self.p = var92
-	self.v = var93
+	local var24 = p2 - self.p
+	local var25 = exp(-var23 * p1)
+	local var26 = p2 + (v * p1 - var24 * (var23 * p1 + 1)) * var25
+	local var27 = (var23 * p1 * (var24 * var23 - v) + v) * var25
+	self.p = var26
+	self.v = var27
 	
-	return var92
+	return var26
 end
 
-function t_12:SetFreq(p4)
-	self.f = p4
+function t_12:SetFreq(p1)
+	self.f = p1
 end
 
-function t_12:Reset(p5)
-	self.p = p5
-	self.v = p5 * 0
+function t_12:Reset(p1)
+	self.p = p1
+	self.v = p1 * 0
 end
 
 local vector3 = Vector3.new()
-local var56 = if status_6_1 then Vector3.new() else Vector2.new()
-local var57 = 0
-local var58 = t_12.new(var34, Vector3.new())
-local var59 = t_12.new(var35, Vector2.new())
-local var60 = t_12.new(var36, 0)
-local var61 = t_12.new(var37, 0)
+local var23 = if status_6_1 then Vector3.new() else Vector2.new()
+local var24 = 0
+local var25 = t_12.new(var6, Vector3.new())
+local var26 = t_12.new(var7, Vector2.new())
+local var27 = t_12.new(var8, 0)
+local var28 = t_12.new(var9, 0)
 local t_13 = {}
 local _ = nil
 
-local function _(p6)
+local function _(p1)
 	-- upvalues: exp (ref)
-	return (exp(2 * p6) - 1) / 6.389056098931
+	return (exp(2 * p1) - 1) / 6.389056098931
 end
 
-local _ = function(p7)
+local _ = function(p1)
 	-- upvalues: exp (ref)
-	return (exp(2 * ((p7 - 0.15) / 0.85)) - 1) / 6.389056098931
+	return (exp(2 * ((p1 - 0.15) / 0.85)) - 1) / 6.389056098931
 end
 
-local function thumbstickCurve(p8)
+local function thumbstickCurve(p1)
 	-- upvalues: sign (ref), abs (ref), exp (ref), clamp (ref)
-	return sign(p8) * clamp((exp(2 * ((abs(p8) - 0.15) / 0.85)) - 1) / 6.389056098931, 0, 1)
+	return sign(p1) * clamp((exp(2 * ((abs(p1) - 0.15) / 0.85)) - 1) / 6.389056098931, 0, 1)
 end
 
 local t_14 = {
@@ -245,104 +245,104 @@ local t_15 = {
 	L = 0
 }
 local t_16 = { MouseWheel = 0, Delta = Vector2.new() }
-local var67 = Vector2.new(1, 1) * 0.049087385212
-local var68 = var67 / 60
-local var69 = Vector2.new(1, 1) * 0.392699081699
+local var29 = Vector2.new(1, 1) * 0.049087385212
+local var30 = var29 / 60
+local var31 = Vector2.new(1, 1) * 0.392699081699
 local t_17 = {
 	FarIntensity = { ADJ = 0.1, MIN = 0, MAX = 1 },
 	NearIntensity = { ADJ = 0.1, MIN = 0, MAX = 1 },
 	FocusDistance = { ADJ = 20, MIN = 0, MAX = 200 },
 	FocusRadius = { ADJ = 5, MIN = 0, MAX = 50 }
 }
-local var71 = 1
-local var72 = 1
-local var73 = 1
+local var32 = 1
+local var33 = 1
+local var34 = 1
 
-function t_13.Vel(p9)
-	-- upvalues: status_5_1 (write), var71 (write), t_15 (ref), t_14 (ref), clamp (ref), thumbstickCurve (write), userInputService (ref)
-	var71 = if status_5_1 then clamp(var71 + p9 * (t_15.Up - t_15.Down + t_14.DPadUp - t_14.DPadDown) * 0.75, 0.01, 4) else clamp(var71 + p9 * (t_15.Up - t_15.Down) * 0.75, 0.01, 4)
+function t_13.Vel(p1)
+	-- upvalues: status_5_1 (write), var32 (write), t_15 (ref), t_14 (ref), clamp (ref), thumbstickCurve (write), userInputService (ref)
+	var32 = if status_5_1 then clamp(var32 + p1 * (t_15.Up - t_15.Down + t_14.DPadUp - t_14.DPadDown) * 0.75, 0.01, 4) else clamp(var32 + p1 * (t_15.Up - t_15.Down) * 0.75, 0.01, 4)
 	
-	return (Vector3.new(thumbstickCurve(t_14.Thumbstick1.X), thumbstickCurve(t_14.ButtonR2) - thumbstickCurve(t_14.ButtonL2), thumbstickCurve(-t_14.Thumbstick1.Y)) * Vector3.new(1, 1, 1) + Vector3.new(t_15.D - t_15.A + t_15.K - t_15.H, t_15.E - t_15.Q + t_15.I - t_15.Y, t_15.S - t_15.W + t_15.J - t_15.U) * Vector3.new(1, 1, 1)) * (var71 * (if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) or userInputService:IsKeyDown(Enum.KeyCode.RightShift) then 0.25 else 1))
+	return (Vector3.new(thumbstickCurve(t_14.Thumbstick1.X), thumbstickCurve(t_14.ButtonR2) - thumbstickCurve(t_14.ButtonL2), thumbstickCurve(-t_14.Thumbstick1.Y)) * Vector3.new(1, 1, 1) + Vector3.new(t_15.D - t_15.A + t_15.K - t_15.H, t_15.E - t_15.Q + t_15.I - t_15.Y, t_15.S - t_15.W + t_15.J - t_15.U) * Vector3.new(1, 1, 1)) * (var32 * (if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) or userInputService:IsKeyDown(Enum.KeyCode.RightShift) then 0.25 else 1))
 end
 
-function t_13.Pan(p10)
-	-- upvalues: thumbstickCurve (write), t_14 (ref), var69 (ref), t_16 (ref), var67 (ref), status_3_1 (write), var68 (ref)
-	local var94 = Vector2.new(thumbstickCurve(t_14.Thumbstick2.Y), thumbstickCurve(-t_14.Thumbstick2.X)) * var69
-	local var95 = if status_3_1 and p10 > 0 then t_16.Delta / p10 * var68 else t_16.Delta * var67
+function t_13.Pan(p1)
+	-- upvalues: thumbstickCurve (write), t_14 (ref), var31 (ref), t_16 (ref), var29 (ref), status_3_1 (write), var30 (ref)
+	local var35 = Vector2.new(thumbstickCurve(t_14.Thumbstick2.Y), thumbstickCurve(-t_14.Thumbstick2.X)) * var31
+	local var36 = if status_3_1 and p1 > 0 then t_16.Delta / p1 * var30 else t_16.Delta * var29
 	t_16.Delta = Vector2.new()
 	
-	return var94 + var95
+	return var35 + var36
 end
 
-function t_13.Fov(p11)
-	-- upvalues: status_5_1 (write), var73 (write), t_15 (ref), t_14 (ref), clamp (ref), t_16 (ref), status_3_1 (write)
+function t_13.Fov(p1)
+	-- upvalues: status_5_1 (write), var34 (write), t_15 (ref), t_14 (ref), clamp (ref), t_16 (ref), status_3_1 (write)
 	if status_5_1 then
-		var73 = clamp(var73 + p11 * (t_15.Right - t_15.Left + t_14.DPadRight - t_14.DPadLeft) * 0.75, 0.01, 4)
+		var34 = clamp(var34 + p1 * (t_15.Right - t_15.Left + t_14.DPadRight - t_14.DPadLeft) * 0.75, 0.01, 4)
 	end
-	local var96 = (t_14.ButtonX - t_14.ButtonY) * 0.25
-	local var97 = if status_3_1 and p11 > 0 then t_16.MouseWheel / p11 * 0.016666666667 else t_16.MouseWheel * 1
+	local var35 = (t_14.ButtonX - t_14.ButtonY) * 0.25
+	local var36 = if status_3_1 and p1 > 0 then t_16.MouseWheel / p1 * 0.016666666667 else t_16.MouseWheel * 1
 	t_16.MouseWheel = 0
 	
-	return if status_5_1 then (var96 + var97) * var73 else var96 + var97
+	return if status_5_1 then (var35 + var36) * var34 else var35 + var36
 end
 
-function t_13.Roll(p12)
-	-- upvalues: var72 (write), t_15 (ref), clamp (ref), t_14 (ref)
-	var72 = clamp(var72 + p12 * (t_15.Period - t_15.Comma) * 0.75, 0.01, 4)
+function t_13.Roll(p1)
+	-- upvalues: var33 (write), t_15 (ref), clamp (ref), t_14 (ref)
+	var33 = clamp(var33 + p1 * (t_15.Period - t_15.Comma) * 0.75, 0.01, 4)
 	
-	return ((t_14.ButtonR1 - t_14.ButtonL1) * 1 + (t_15.C - t_15.Z) * 1) * var72
+	return ((t_14.ButtonR1 - t_14.ButtonL1) * 1 + (t_15.C - t_15.Z) * 1) * var33
 end
 
-function t_13.SpringControl(p13)
-	-- upvalues: status_9_1 (write), userInputService (ref), var34 (write), t_15 (ref), clamp (ref), var58 (ref), var35 (write), var59 (ref), var36 (write), var60 (ref), var37 (write), var61 (ref)
+function t_13.SpringControl(p1)
+	-- upvalues: status_9_1 (write), userInputService (ref), var6 (write), t_15 (ref), clamp (ref), var25 (ref), var7 (write), var26 (ref), var8 (write), var27 (ref), var9 (write), var28 (ref)
 	if status_9_1 then
 		if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) or userInputService:IsKeyDown(Enum.KeyCode.RightShift) or (userInputService:IsKeyDown(Enum.KeyCode.LeftControl) or userInputService:IsKeyDown(Enum.KeyCode.RightControl)) then
 			return
 		end
 	end
-	var34 = clamp(var34 + p13 * (t_15.RightBracket - t_15.LeftBracket) * 0.75, 0.01, 10)
-	var58:SetFreq(var34)
-	var35 = clamp(var35 + p13 * (t_15.Quote - t_15.Semicolon) * 0.75, 0.01, 10)
-	var59:SetFreq(var35)
-	var36 = clamp(var36 + p13 * (t_15.B - t_15.V) * 0.75, 0.01, 10)
-	var60:SetFreq(var36)
-	var37 = clamp(var37 + p13 * (t_15.M - t_15.N) * 0.75, 0.01, 10)
-	var61:SetFreq(var37)
+	var6 = clamp(var6 + p1 * (t_15.RightBracket - t_15.LeftBracket) * 0.75, 0.01, 10)
+	var25:SetFreq(var6)
+	var7 = clamp(var7 + p1 * (t_15.Quote - t_15.Semicolon) * 0.75, 0.01, 10)
+	var26:SetFreq(var7)
+	var8 = clamp(var8 + p1 * (t_15.B - t_15.V) * 0.75, 0.01, 10)
+	var27:SetFreq(var8)
+	var9 = clamp(var9 + p1 * (t_15.M - t_15.N) * 0.75, 0.01, 10)
+	var28:SetFreq(var9)
 end
 
-function t_13.DoF(p14)
-	-- upvalues: userInputService (ref), var9 (write), t_15 (ref), t_17 (ref), clamp (ref)
+function t_13.DoF(p1)
+	-- upvalues: userInputService (ref), var3 (write), t_15 (ref), t_17 (ref), clamp (ref)
 	local leftControl = userInputService:IsKeyDown(Enum.KeyCode.LeftControl) or userInputService:IsKeyDown(Enum.KeyCode.RightControl)
 	
 	if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) or userInputService:IsKeyDown(Enum.KeyCode.RightShift) then
-		var9.FarIntensity = clamp(var9.FarIntensity + p14 * (t_15.RightBracket - t_15.LeftBracket) * t_17.FarIntensity.ADJ, t_17.FarIntensity.MIN, t_17.FarIntensity.MAX)
-		var9.InFocusRadius = clamp(var9.InFocusRadius + p14 * (t_15.Equals - t_15.Minus) * t_17.FocusRadius.ADJ, t_17.FocusRadius.MIN, t_17.FocusRadius.MAX)
+		var3.FarIntensity = clamp(var3.FarIntensity + p1 * (t_15.RightBracket - t_15.LeftBracket) * t_17.FarIntensity.ADJ, t_17.FarIntensity.MIN, t_17.FarIntensity.MAX)
+		var3.InFocusRadius = clamp(var3.InFocusRadius + p1 * (t_15.Equals - t_15.Minus) * t_17.FocusRadius.ADJ, t_17.FocusRadius.MIN, t_17.FocusRadius.MAX)
 		
 		return
 	elseif leftControl then
-		var9.NearIntensity = clamp(var9.NearIntensity + p14 * (t_15.RightBracket - t_15.LeftBracket) * t_17.NearIntensity.ADJ, t_17.NearIntensity.MIN, t_17.NearIntensity.MAX)
+		var3.NearIntensity = clamp(var3.NearIntensity + p1 * (t_15.RightBracket - t_15.LeftBracket) * t_17.NearIntensity.ADJ, t_17.NearIntensity.MIN, t_17.NearIntensity.MAX)
 		
 		return
 	end
-	var9.FocusDistance = clamp(var9.FocusDistance + p14 * (t_15.Equals - t_15.Minus) * t_17.FocusDistance.ADJ, t_17.FocusDistance.MIN, t_17.FocusDistance.MAX)
+	var3.FocusDistance = clamp(var3.FocusDistance + p1 * (t_15.Equals - t_15.Minus) * t_17.FocusDistance.ADJ, t_17.FocusDistance.MIN, t_17.FocusDistance.MAX)
 end
 
-local _ = function(value, p15)
+local _ = function(value, p1)
 	for i, v in pairs(value) do
-		if p15[i.Name] then
-			p15[i.Name] = 0
+		if p1[i.Name] then
+			p1[i.Name] = 0
 		end
 	end
 end
 
 local function handleDoubleTapReset(value)
-	-- upvalues: t_9 (ref), var39 (write), var56 (write), var61 (ref), status_9_1 (write), t_2 (ref), t_14 (ref), t_1 (ref), t_15 (ref)
+	-- upvalues: t_9 (ref), var10 (write), var23 (write), var28 (ref), status_9_1 (write), t_2 (ref), t_14 (ref), t_1 (ref), t_15 (ref)
 	local processTime = os.clock()
-	local var100 = t_9[value]
+	local var35 = t_9[value]
 	
-	if var100 and (if var100 then processTime - var100 else -1) <= 0.25 and processTime - var39 >= 0.1 then
-		var56 = Vector3.new(var56.x, var56.y, 0)
-		var61:Reset(0)
+	if var35 and (if var35 then processTime - var35 else -1) <= 0.25 and processTime - var10 >= 0.1 then
+		var23 = Vector3.new(var23.x, var23.y, 0)
+		var28:Reset(0)
 		
 		if status_9_1 then
 			for i, v in pairs(t_2) do
@@ -350,11 +350,11 @@ local function handleDoubleTapReset(value)
 					t_14[i.Name] = 0
 				end
 			end
-			local var101 = t_15
+			local var36 = t_15
 			
 			for i_1, v in pairs(t_1) do
-				if var101[i_1.Name] then
-					var101[i_1.Name] = 0
+				if var36[i_1.Name] then
+					var36[i_1.Name] = 0
 				end
 			end
 		else
@@ -363,58 +363,58 @@ local function handleDoubleTapReset(value)
 			t_15.C = 0
 			t_15.Z = 0
 		end
-		var39 = processTime
+		var10 = processTime
 	end
 	t_9[value] = processTime
 end
 
-local function findPlayerLockRootPart(p16)
-	-- upvalues: t_11 (write), var50 (write), var46 (write)
+local function findPlayerLockRootPart(p2)
+	-- upvalues: t_11 (write), var19 (write), var16 (write)
 	if not t_11 or #t_11 < 1 then
 		return nil
 	end
 	for _ = 1, #t_11 do
-		var50 = (var50 - 1 + p16) % #t_11 + 1
-		local var102 = t_11[var50]
-		local character = var102 and var102.Character
+		var19 = (var19 - 1 + p2) % #t_11 + 1
+		local var37 = t_11[var19]
+		local character = var37 and var37.Character
 		
 		if character then
 			local humanoid = character:FindFirstChildOfClass("Humanoid")
 			
 			if not humanoid or not humanoid.RootPart then
-				if p16 == 0 then
-					p16 = 1
+				if p2 == 0 then
+					p2 = 1
 				end
 			end
 			return humanoid.RootPart
 		end
 	end
-	var46 = false
+	var16 = false
 	
 	return nil
 end
 
-local function Keypress(_, p17, p18)
-	-- upvalues: t_15 (ref), status_6_1 (write), t_1 (ref), handleDoubleTapReset (ref), status_9_1 (write), t_3 (ref), var9 (write), t_10 (write), currentCamera (write), lightingService (ref), var42 (write), var43 (write), status_10_1 (write), t_4 (ref), var46 (write), var47 (write), status_11_1 (write), var48 (write), var51 (write), findPlayerLockRootPart (ref), t_5 (ref), t_11 (write), status_12_1 (write), t_6 (ref), var8 (write), t_7 (ref), var52 (write), t (write), t_8 (ref), var53 (write), starterGuiService (ref)
-	t_15[p18.KeyCode.Name] = if p17 == Enum.UserInputState.Begin then 1 else 0
+local function Keypress(_, p3, p4)
+	-- upvalues: t_15 (ref), status_6_1 (write), t_1 (ref), handleDoubleTapReset (ref), status_9_1 (write), t_3 (ref), var3 (write), t_10 (write), currentCamera (write), lightingService (ref), var12 (write), var13 (write), status_10_1 (write), t_4 (ref), var16 (write), var17 (write), status_11_1 (write), var18 (write), var20 (write), findPlayerLockRootPart (ref), t_5 (ref), t_11 (write), status_12_1 (write), t_6 (ref), var2 (write), t_7 (ref), var21 (write), t (write), t_8 (ref), var22 (write), starterGuiService (ref)
+	t_15[p4.KeyCode.Name] = if p3 == Enum.UserInputState.Begin then 1 else 0
 	
-	if status_6_1 and t_1[p18.KeyCode] and p18.UserInputState == Enum.UserInputState.Begin then
-		handleDoubleTapReset(p18.KeyCode)
+	if status_6_1 and t_1[p4.KeyCode] and p4.UserInputState == Enum.UserInputState.Begin then
+		handleDoubleTapReset(p4.KeyCode)
 	end
-	if status_9_1 and t_3[p18.KeyCode] and p18.UserInputState == Enum.UserInputState.Begin then
-		if var9.Enabled then
+	if status_9_1 and t_3[p4.KeyCode] and p4.UserInputState == Enum.UserInputState.Begin then
+		if var3.Enabled then
 			for i, v in ipairs(t_10) do
 				if v.Parent then
 					v.Enabled = true
 				end
 			end
-			if var42 then
-				var42:Disconnect()
-				var42 = nil
+			if var12 then
+				var12:Disconnect()
+				var12 = nil
 			end
-			if var43 then
-				var43:Disconnect()
-				var43 = nil
+			if var13 then
+				var13:Disconnect()
+				var13 = nil
 			end
 			t_10 = {}
 		else
@@ -432,102 +432,102 @@ local function Keypress(_, p17, p18)
 					v_1.Enabled = false
 				end
 			end
-			var42 = currentCamera.ChildAdded:Connect(function(p19)
+			var12 = currentCamera.ChildAdded:Connect(function(p5)
 				-- upvalues: t_10 (copy)
-				if p19:IsA("DepthOfFieldEffect") and p19.Enabled then
-					t_10[#t_10 + 1] = p19
-					p19.Enabled = false
+				if p5:IsA("DepthOfFieldEffect") and p5.Enabled then
+					t_10[#t_10 + 1] = p5
+					p5.Enabled = false
 				end
 			end)
-			var43 = lightingService.ChildAdded:Connect(function(p20)
+			var13 = lightingService.ChildAdded:Connect(function(p5)
 				-- upvalues: t_10 (copy)
-				if p20:IsA("DepthOfFieldEffect") and p20.Enabled then
-					t_10[#t_10 + 1] = p20
-					p20.Enabled = false
+				if p5:IsA("DepthOfFieldEffect") and p5.Enabled then
+					t_10[#t_10 + 1] = p5
+					p5.Enabled = false
 				end
 			end)
 		end
-		var9.Enabled = not var9.Enabled
-		local var105 = t_15
+		var3.Enabled = not var3.Enabled
+		local var38 = t_15
 		
 		for i_2, v in pairs(t_3) do
-			if var105[i_2.Name] then
-				var105[i_2.Name] = 0
+			if var38[i_2.Name] then
+				var38[i_2.Name] = 0
 			end
 		end
 	end
 	if status_10_1 then
-		if t_4[p18.KeyCode] and p18.UserInputState == Enum.UserInputState.Begin then
-			var46 = not var46
+		if t_4[p4.KeyCode] and p4.UserInputState == Enum.UserInputState.Begin then
+			var16 = not var16
 			
-			if var46 then
-				var47 = 20
+			if var16 then
+				var17 = 20
 				
 				if status_11_1 then
-					var48 = 0
+					var18 = 0
 				end
-				var51 = findPlayerLockRootPart(0)
+				var20 = findPlayerLockRootPart(0)
 			end
-			local var106 = t_15
+			local var39 = t_15
 			
 			for i_2, v in pairs(t_4) do
-				if var106[i_2.Name] then
-					var106[i_2.Name] = 0
+				if var39[i_2.Name] then
+					var39[i_2.Name] = 0
 				end
 			end
 		end
-		if t_5[p18.KeyCode] and p18.UserInputState == Enum.UserInputState.Begin then
-			if var46 and #t_11 > 0 then
-				var51 = findPlayerLockRootPart(t_15.T - t_15.R)
+		if t_5[p4.KeyCode] and p4.UserInputState == Enum.UserInputState.Begin then
+			if var16 and #t_11 > 0 then
+				var20 = findPlayerLockRootPart(t_15.T - t_15.R)
 			end
-			local var107 = t_15
+			local var40 = t_15
 			
 			for i_2, v in pairs(t_5) do
-				if var107[i_2.Name] then
-					var107[i_2.Name] = 0
+				if var40[i_2.Name] then
+					var40[i_2.Name] = 0
 				end
 			end
 		end
 	end
 	if status_12_1 then
-		if t_6[p18.keyCode] and p18.UserInputState == Enum.UserInputState.Begin then
-			if var8 and var8.Parent then
-				var8.Enabled = not var8.Enabled
+		if t_6[p4.keyCode] and p4.UserInputState == Enum.UserInputState.Begin then
+			if var2 and var2.Parent then
+				var2.Enabled = not var2.Enabled
 			end
-			local var108 = t_15
+			local var41 = t_15
 			
 			for i_2, v in pairs(t_6) do
-				if var108[i_2.Name] then
-					var108[i_2.Name] = 0
+				if var41[i_2.Name] then
+					var41[i_2.Name] = 0
 				end
 			end
 		end
-		if t_7[p18.keyCode] and p18.UserInputState == Enum.UserInputState.Begin then
-			var52 = not var52
+		if t_7[p4.keyCode] and p4.UserInputState == Enum.UserInputState.Begin then
+			var21 = not var21
 			
 			if t then
 				for i_2, v_3 in pairs(t.getScreenGuis()) do
-					if v_3.Parent and v_3 ~= var8 then
-						v_3.Enabled = var52
+					if v_3.Parent and v_3 ~= var2 then
+						v_3.Enabled = var21
 					end
 				end
 			end
-			local var109 = t_15
+			local var42 = t_15
 			
 			for i_2, v in pairs(t_7) do
-				if var109[i_2.Name] then
-					var109[i_2.Name] = 0
+				if var42[i_2.Name] then
+					var42[i_2.Name] = 0
 				end
 			end
 		end
-		if t_8[p18.keyCode] and p18.UserInputState == Enum.UserInputState.Begin then
-			var53 = not var53
-			starterGuiService:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, var53)
-			local var110 = t_15
+		if t_8[p4.keyCode] and p4.UserInputState == Enum.UserInputState.Begin then
+			var22 = not var22
+			starterGuiService:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, var22)
+			local var43 = t_15
 			
 			for i_2, v in pairs(t_8) do
-				if var110[i_2.Name] then
-					var110[i_2.Name] = 0
+				if var43[i_2.Name] then
+					var43[i_2.Name] = 0
 				end
 			end
 		end
@@ -535,48 +535,48 @@ local function Keypress(_, p17, p18)
 	return Enum.ContextActionResult.Sink
 end
 
-local function GpButton(_, p21, p22)
+local function GpButton(_, p5, p6)
 	-- upvalues: t_14 (ref), status_6_1 (write), t_2 (ref), handleDoubleTapReset (ref)
-	t_14[p22.KeyCode.Name] = if p21 == Enum.UserInputState.Begin then 1 else 0
+	t_14[p6.KeyCode.Name] = if p5 == Enum.UserInputState.Begin then 1 else 0
 	
-	if status_6_1 and t_2[p22.KeyCode] and p22.UserInputState == Enum.UserInputState.Begin then
-		handleDoubleTapReset(p22.KeyCode)
+	if status_6_1 and t_2[p6.KeyCode] and p6.UserInputState == Enum.UserInputState.Begin then
+		handleDoubleTapReset(p6.KeyCode)
 	end
 	return Enum.ContextActionResult.Sink
 end
 
-local function MousePan(_, _, p23)
+local function MousePan(_, _, p5)
 	-- upvalues: t_16 (ref)
-	local delta = p23.Delta
+	local delta = p5.Delta
 	t_16.Delta = Vector2.new(-delta.y, -delta.x)
 	
 	return Enum.ContextActionResult.Sink
 end
 
-local function Thumb(_, _, p24)
+local function Thumb(_, _, p5)
 	-- upvalues: t_14 (ref)
-	t_14[p24.KeyCode.Name] = p24.Position
+	t_14[p5.KeyCode.Name] = p5.Position
 	
 	return Enum.ContextActionResult.Sink
 end
 
-local function Trigger(_, _, p25)
+local function Trigger(_, _, p5)
 	-- upvalues: t_14 (ref)
-	t_14[p25.KeyCode.Name] = p25.Position.z
+	t_14[p5.KeyCode.Name] = p5.Position.z
 	
 	return Enum.ContextActionResult.Sink
 end
 
-local function MouseWheel(_, _, p26)
+local function MouseWheel(_, _, p5)
 	-- upvalues: t_16 (ref)
-	t_16[p26.UserInputType.Name] = -p26.Position.z
+	t_16[p5.UserInputType.Name] = -p5.Position.z
 	
 	return Enum.ContextActionResult.Sink
 end
 
-local _ = function(p27)
-	for i, v in pairs(p27) do
-		p27[i] = v * 0
+local _ = function(p5)
+	for i, v in pairs(p5) do
+		p5[i] = v * 0
 	end
 end
 
@@ -619,15 +619,15 @@ function t_13.StartCapture()
 end
 
 function t_13.StopCapture()
-	-- upvalues: status_12_1 (write), var71 (write), status_5_1 (write), var73 (write), status_6_1 (write), var72 (write), t_14 (ref), t_15 (ref), t_16 (ref), contextActionService (ref), status_7_1 (write), status_9_1 (write), status_10_1 (write)
+	-- upvalues: status_12_1 (write), var32 (write), status_5_1 (write), var34 (write), status_6_1 (write), var33 (write), t_14 (ref), t_15 (ref), t_16 (ref), contextActionService (ref), status_7_1 (write), status_9_1 (write), status_10_1 (write)
 	if not status_12_1 then
-		var71 = 1
+		var32 = 1
 		
 		if status_5_1 then
-			var73 = 1
+			var34 = 1
 		end
 		if status_6_1 then
-			var72 = 1
+			var33 = 1
 		end
 	end
 	for i, v in pairs(t_14) do
@@ -675,82 +675,82 @@ function t_13.StopCapture()
 end
 
 function t_13.getNavSpeed()
-	-- upvalues: var71 (write)
-	return var71
+	-- upvalues: var32 (write)
+	return var32
 end
 
 function t_13.getFovSpeed()
-	-- upvalues: var73 (write)
-	return var73
+	-- upvalues: var34 (write)
+	return var34
 end
 
 function t_13.getRollSpeed()
-	-- upvalues: var72 (write)
-	return var72
+	-- upvalues: var33 (write)
+	return var33
 end
 
-thumbstickCurve = function(p28)
-	-- upvalues: status_7_1 (write), t_13 (ref), status_9_1 (write), var9 (write), var58 (ref), var59 (ref), var60 (ref), status_6_1 (write), var61 (ref), var57 (write), rad (ref), tan (ref), sqrt (ref), clamp (ref), var33 (ref), var56 (write), vector3 (write), status_10_1 (write), var46 (write), var51 (write), var47 (write), var48 (write), status_12_1 (write), var10 (write), var8 (write), var34 (write), var35 (write), var36 (write), var37 (write), status_5_1 (write), t_11 (write), var50 (write), currentCamera (write)
+thumbstickCurve = function(p6)
+	-- upvalues: status_7_1 (write), t_13 (ref), status_9_1 (write), var3 (write), var25 (ref), var26 (ref), var27 (ref), status_6_1 (write), var28 (ref), var24 (write), rad (ref), tan (ref), sqrt (ref), clamp (ref), var5 (ref), var23 (write), vector3 (write), status_10_1 (write), var16 (write), var20 (write), var17 (write), var18 (write), status_12_1 (write), var4 (write), var2 (write), var6 (write), var7 (write), var8 (write), var9 (write), status_5_1 (write), t_11 (write), var19 (write), currentCamera (write)
 	if status_7_1 then
-		t_13.SpringControl(p28)
+		t_13.SpringControl(p6)
 	end
-	if status_9_1 and var9 and var9.Parent then
-		t_13.DoF(p28)
+	if status_9_1 and var3 and var3.Parent then
+		t_13.DoF(p6)
 	end
-	local var116
-	local var111 = var58:Update(p28, t_13.Vel(p28))
-	local var112 = var59:Update(p28, t_13.Pan(p28))
-	local var113 = var60:Update(p28, t_13.Fov(p28))
-	local var114 = if status_6_1 then var61:Update(p28, t_13.Roll(p28)) else nil
-	local var115 = sqrt(0.70020753821 / tan(rad(var57 / 2)))
-	var57 = clamp(var57 + var113 * 300 * (p28 / var115), 1, 120)
+	local var44
+	local var45 = var25:Update(p6, t_13.Vel(p6))
+	local var46 = var26:Update(p6, t_13.Pan(p6))
+	local var47 = var27:Update(p6, t_13.Fov(p6))
+	local var48 = if status_6_1 then var28:Update(p6, t_13.Roll(p6)) else nil
+	local var49 = sqrt(0.70020753821 / tan(rad(var24 / 2)))
+	var24 = clamp(var24 + var47 * 300 * (p6 / var49), 1, 120)
 	local _ = nil
 	
 	if status_6_1 then
-		local var117 = var112 * var33 * (p28 / var115)
-		var56 += Vector3.new(var117.X, var117.Y, var114 * -1.570796326795 * (p28 / var115))
-		var56 = if status_7_1 then Vector3.new(var56.x % 6.28318530718, var56.y % 6.28318530718, var56.z % 6.28318530718) else Vector3.new(clamp(var56.x, -1.570796326795, 1.570796326795), var56.y % 6.28318530718, var56.z)
-		var116 = CFrame.new(vector3) * CFrame.fromOrientation(var56.x, var56.y, var56.z) * CFrame.new(var111 * Vector3.new(64, 64, 64) * p28)
+		local var50 = var46 * var5 * (p6 / var49)
+		var23 += Vector3.new(var50.X, var50.Y, var48 * -1.570796326795 * (p6 / var49))
+		var23 = if status_7_1 then Vector3.new(var23.x % 6.28318530718, var23.y % 6.28318530718, var23.z % 6.28318530718) else Vector3.new(clamp(var23.x, -1.570796326795, 1.570796326795), var23.y % 6.28318530718, var23.z)
+		var44 = CFrame.new(vector3) * CFrame.fromOrientation(var23.x, var23.y, var23.z) * CFrame.new(var45 * Vector3.new(64, 64, 64) * p6)
 	else
-		var56 += var112 * var33 * (p28 / var115)
-		var56 = Vector2.new(clamp(var56.x, -1.570796326795, 1.570796326795), var56.y % 6.28318530718)
-		var116 = CFrame.new(vector3) * CFrame.fromOrientation(var56.x, var56.y, 0) * CFrame.new(var111 * Vector3.new(64, 64, 64) * p28)
+		var23 += var46 * var5 * (p6 / var49)
+		var23 = Vector2.new(clamp(var23.x, -1.570796326795, 1.570796326795), var23.y % 6.28318530718)
+		var44 = CFrame.new(vector3) * CFrame.fromOrientation(var23.x, var23.y, 0) * CFrame.new(var45 * Vector3.new(64, 64, 64) * p6)
 	end
-	if status_10_1 and var46 and var51 then
-		var47 = clamp(var47 + var111.Z * 64 * p28, 5, 50)
-		var48 = clamp(var48 + var111.Y * 64 * p28, -10, 10)
-		var116 = CFrame.new(var51.Position + Vector3.new(0, var48, 0)) * (if status_6_1 then CFrame.fromOrientation(var56.x, var56.y, var56.z) else CFrame.fromOrientation(var56.x, var56.y, 0)) * CFrame.new(0, 0, var47)
+	if status_10_1 and var16 and var20 then
+		var17 = clamp(var17 + var45.Z * 64 * p6, 5, 50)
+		var18 = clamp(var18 + var45.Y * 64 * p6, -10, 10)
+		var44 = CFrame.new(var20.Position + Vector3.new(0, var18, 0)) * (if status_6_1 then CFrame.fromOrientation(var23.x, var23.y, var23.z) else CFrame.fromOrientation(var23.x, var23.y, 0)) * CFrame.new(0, 0, var17)
 	end
-	if status_12_1 and var10 and (var10.Parent and var8) and (var8.Parent and var8.Enabled) then
-		local var118 = ""
+	if status_12_1 and var4 and (var4.Parent and var2) and (var2.Parent and var2.Enabled) then
+		local var51 = ""
 		
-		if p28 > 0 then
-			local var119 = (var116.p - vector3) / p28
-			var118 ..= string.format("Velocity: (%.1f, %.1f, %.1f)\n", var119.X, var119.Y, var119.Z)
+		if p6 > 0 then
+			local var52 = (var44.p - vector3) / p6
+			var51 ..= string.format("Velocity: (%.1f, %.1f, %.1f)\n", var52.X, var52.Y, var52.Z)
 		end
-		var118 ..= string.format("FOV: %.1f\n", var57)
+		var51 ..= string.format("FOV: %.1f\n", var24)
 		
 		if status_6_1 then
-			var118 ..= string.format("Tilt: %.1f\194\176\n", math.deg(var56.z))
+			var51 ..= string.format("Tilt: %.1f\194\176\n", math.deg(var23.z))
 		end
 		if status_7_1 then
-			var118 = (((var118 .. string.format("Stiffness (Vel): %.1f\n", var34)) .. string.format("Stiffness (Pan): %.1f\n", var35)) .. string.format("Stiffness (FOV): %.1f\n", var36)) .. string.format("Stiffness (Roll): %.1f\n", var37)
+			var51 = (((var51 .. string.format("Stiffness (Vel): %.1f\n", var6)) .. string.format("Stiffness (Pan): %.1f\n", var7)) .. string.format("Stiffness (FOV): %.1f\n", var8)) .. string.format("Stiffness (Roll): %.1f\n", var9)
 		end
 		if status_5_1 then
-			var118 = ((var118 .. string.format("Movement Speed: %.1f\n", t_13.getNavSpeed())) .. string.format("Zoom Speed: %.1f\n", t_13.getFovSpeed())) .. string.format("Tilt Speed: %.1f\n", t_13.getRollSpeed())
+			var51 = ((var51 .. string.format("Movement Speed: %.1f\n", t_13.getNavSpeed())) .. string.format("Zoom Speed: %.1f\n", t_13.getFovSpeed())) .. string.format("Tilt Speed: %.1f\n", t_13.getRollSpeed())
 		end
 		if status_9_1 then
-			var118 = if var9 and var9.Parent and var9.Enabled then ((((var118 .. string.format("Custom Depth Of Field: On\n")) .. string.format("Custom Depth Of Field Near Intensity: %.1f\n", var9.NearIntensity)) .. string.format("Custom Depth Of Field Far Intensity: %.1f\n", var9.FarIntensity)) .. string.format("Custom Depth Of Field Focus Distance: %.1f\n", var9.FocusDistance)) .. string.format("Custom Depth Of Field Focus Radius: %.1f\n", var9.InFocusRadius) else var118 .. string.format("Custom Depth Of Field: Off\n")
+			var51 = if var3 and var3.Parent and var3.Enabled then ((((var51 .. string.format("Custom Depth Of Field: On\n")) .. string.format("Custom Depth Of Field Near Intensity: %.1f\n", var3.NearIntensity)) .. string.format("Custom Depth Of Field Far Intensity: %.1f\n", var3.FarIntensity)) .. string.format("Custom Depth Of Field Focus Distance: %.1f\n", var3.FocusDistance)) .. string.format("Custom Depth Of Field Focus Radius: %.1f\n", var3.InFocusRadius) else var51 .. string.format("Custom Depth Of Field: Off\n")
 		end
 		if status_10_1 then
-			var118 = if var46 and #t_11 > 0 then var118 .. string.format("Player Lock: %s\n", t_11[var50].Name) else var118 .. string.format("Player Lock: Off\n")
+			var51 = if var16 and #t_11 > 0 then var51 .. string.format("Player Lock: %s\n", t_11[var19].Name) else var51 .. string.format("Player Lock: Off\n")
 		end
-		var10.Text = var118
+		var4.Text = var51
 	end
-	vector3 = var116.p
-	currentCamera.CFrame = var116
-	currentCamera.Focus = var116
-	currentCamera.FieldOfView = var57
+	vector3 = var44.p
+	currentCamera.CFrame = var44
+	currentCamera.Focus = var44
+	currentCamera.FieldOfView = var24
 end
 
 local _ = function()
@@ -763,28 +763,28 @@ local removePlayerFromList = nil
 local initializePlayerList = nil
 local StartFreecam = nil
 local StopFreecam = nil
-local var86 = nil
+local var44 = nil
 local ToggleFreecam = nil
-var71 = {}
-var72 = {
+var32 = {}
+var33 = {
 	Backpack = true,
 	Chat = true,
 	Health = true,
 	PlayerList = true
 }
-var73 = {
+var34 = {
 	BadgesNotificationsActive = true,
 	PointsNotificationsActive = true
 }
 
 function t.Push()
-	-- upvalues: var72 (ref), starterGuiService (ref), var73 (ref), localPlayer (write), var71 (write), status_4_1 (write), var41 (write), status_12_1 (write), var52 (write), ToggleFreecam (write), currentCamera (write), StartFreecam (write), var86 (write), StopFreecam (write), initializePlayerList (write), userInputService (ref), status_1 (write), playersService (ref), gameSettings (ref), removePlayerFromList (write)
-	for i in pairs(var72) do
-		var72[i] = starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType[i])
+	-- upvalues: var33 (ref), starterGuiService (ref), var34 (ref), localPlayer (write), var32 (write), status_4_1 (write), var11 (write), status_12_1 (write), var21 (write), ToggleFreecam (write), currentCamera (write), StartFreecam (write), var44 (write), StopFreecam (write), initializePlayerList (write), userInputService (ref), status_1 (write), playersService (ref), gameSettings (ref), removePlayerFromList (write)
+	for i in pairs(var33) do
+		var33[i] = starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType[i])
 		starterGuiService:SetCoreGuiEnabled(Enum.CoreGuiType[i], false)
 	end
-	for i_1 in pairs(var73) do
-		var73[i_1] = starterGuiService:GetCore(i_1)
+	for i_1 in pairs(var34) do
+		var34[i_1] = starterGuiService:GetCore(i_1)
 		starterGuiService:SetCore(i_1, false)
 	end
 	local playerGui = localPlayer:FindFirstChildOfClass("PlayerGui")
@@ -792,22 +792,22 @@ function t.Push()
 	if playerGui then
 		for i_2, v in pairs(playerGui:GetChildren()) do
 			if v:IsA("ScreenGui") and v.Enabled then
-				var71[#var71 + 1] = v
+				var32[#var32 + 1] = v
 				v.Enabled = false
 			end
 		end
 		if status_4_1 then
-			var41 = playerGui.ChildAdded:Connect(function(p29)
-				-- upvalues: var71 (copy), status_12_1 (copy), var52 (copy)
-				if p29:IsA("ScreenGui") and p29.Enabled then
-					var71[#var71 + 1] = p29
+			var11 = playerGui.ChildAdded:Connect(function(p6)
+				-- upvalues: var32 (copy), status_12_1 (copy), var21 (copy)
+				if p6:IsA("ScreenGui") and p6.Enabled then
+					var32[#var32 + 1] = p6
 					
 					if status_12_1 then
-						p29.Enabled = var52
+						p6.Enabled = var21
 						
 						return
 					end
-					p29.Enabled = false
+					p6.Enabled = false
 				end
 			end)
 		end
@@ -816,7 +816,7 @@ function t.Push()
 	currentCamera.FieldOfView = 70
 	StartFreecam = currentCamera.CameraType
 	currentCamera.CameraType = Enum.CameraType.Custom
-	var86 = currentCamera.CFrame
+	var44 = currentCamera.CFrame
 	StopFreecam = currentCamera.Focus
 	initializePlayerList = userInputService.MouseIconEnabled
 	userInputService.MouseIconEnabled = false
@@ -825,16 +825,16 @@ function t.Push()
 end
 
 function t.Pop()
-	-- upvalues: var72 (ref), starterGuiService (ref), var73 (ref), var71 (write), status_12_1 (write), var8 (write), status_4_1 (write), var41 (write), currentCamera (write), ToggleFreecam (write), StartFreecam (write), var86 (write), StopFreecam (write), userInputService (ref), initializePlayerList (write), removePlayerFromList (write)
-	for i, v in pairs(var72) do
+	-- upvalues: var33 (ref), starterGuiService (ref), var34 (ref), var32 (write), status_12_1 (write), var2 (write), status_4_1 (write), var11 (write), currentCamera (write), ToggleFreecam (write), StartFreecam (write), var44 (write), StopFreecam (write), userInputService (ref), initializePlayerList (write), removePlayerFromList (write)
+	for i, v in pairs(var33) do
 		starterGuiService:SetCoreGuiEnabled(Enum.CoreGuiType[i], v)
 	end
-	for i_1, v_1 in pairs(var73) do
+	for i_1, v_1 in pairs(var34) do
 		starterGuiService:SetCore(i_1, v_1)
 	end
-	for i_2, v_2 in pairs(var71) do
+	for i_2, v_2 in pairs(var32) do
 		if status_12_1 then
-			if v_2.Parent and v_2 ~= var8 then
+			if v_2.Parent and v_2 ~= var2 then
 				v_2.Enabled = true
 			end
 		elseif v_2.Parent then
@@ -842,18 +842,18 @@ function t.Pop()
 		end
 	end
 	if status_4_1 then
-		if var41 then
-			var41:Disconnect()
-			var41 = nil
+		if var11 then
+			var11:Disconnect()
+			var11 = nil
 		end
-		var71 = {}
+		var32 = {}
 	end
 	currentCamera.FieldOfView = ToggleFreecam
 	ToggleFreecam = nil
 	currentCamera.CameraType = StartFreecam
 	StartFreecam = nil
-	currentCamera.CFrame = var86
-	var86 = nil
+	currentCamera.CFrame = var44
+	var44 = nil
 	currentCamera.Focus = StopFreecam
 	StopFreecam = nil
 	userInputService.MouseIconEnabled = initializePlayerList
@@ -863,25 +863,25 @@ function t.Pop()
 end
 
 function t.getScreenGuis()
-	-- upvalues: var71 (write)
-	return var71
+	-- upvalues: var32 (write)
+	return var32
 end
 
-removePlayerFromList = function(p30)
-	-- upvalues: t_11 (write), var50 (write), var46 (write)
+removePlayerFromList = function(p6)
+	-- upvalues: t_11 (write), var19 (write), var16 (write)
 	for i, v in ipairs(t_11) do
-		if v == p30 then
+		if v == p6 then
 			table.remove(t_11, i)
 			
-			if var50 == i and var46 then
-				var46 = false
-				var50 = 1
+			if var19 == i and var16 then
+				var16 = false
+				var19 = 1
 			end
-			if i < var50 then
-				var50 -= 1
+			if i < var19 then
+				var19 -= 1
 			end
-			if #t_11 >= var50 and var50 >= 1 then break end
-			var50 = 1
+			if #t_11 >= var19 and var19 >= 1 then break end
+			var19 = 1
 			
 			return
 		end
@@ -889,24 +889,24 @@ removePlayerFromList = function(p30)
 end
 
 initializePlayerList = function()
-	-- upvalues: t_11 (write), playersService (ref), localPlayer (write), var50 (write), var44 (write), var45 (write), removePlayerFromList (ref)
+	-- upvalues: t_11 (write), playersService (ref), localPlayer (write), var19 (write), var14 (write), var15 (write), removePlayerFromList (ref)
 	t_11 = playersService:GetPlayers()
 	
 	for i, v in ipairs(t_11) do
 		if v == localPlayer then
-			var50 = i
+			var19 = i
 			break
 		end
 	end
-	var44 = playersService.PlayerAdded:Connect(function(p31)
+	var14 = playersService.PlayerAdded:Connect(function(p7)
 		-- upvalues: t_11 (copy)
-		table.insert(t_11, p31)
+		table.insert(t_11, p7)
 	end)
-	var45 = playersService.PlayerRemoving:Connect(removePlayerFromList)
+	var15 = playersService.PlayerRemoving:Connect(removePlayerFromList)
 end
 
 StartFreecam = function()
-	-- upvalues: status_10_1 (write), initializePlayerList (ref), status_8_1 (write), status_2_1 (write), currentCamera (write), status_6_1 (write), var56 (write), vector3 (write), var57 (write), var58 (ref), var59 (ref), var60 (ref), var61 (ref), status_12_1 (write), status_7_1 (write), var34 (write), var35 (write), var36 (write), var37 (write), var7 (write), localPlayer (write), var8 (write), var10 (write), t (write), status_9_1 (write), var9 (write), runService (ref), thumbstickCurve (ref), t_13 (ref)
+	-- upvalues: status_10_1 (write), initializePlayerList (ref), status_8_1 (write), status_2_1 (write), currentCamera (write), status_6_1 (write), var23 (write), vector3 (write), var24 (write), var25 (ref), var26 (ref), var27 (ref), var28 (ref), status_12_1 (write), status_7_1 (write), var6 (write), var7 (write), var8 (write), var9 (write), var1 (write), localPlayer (write), var2 (write), var4 (write), t (write), status_9_1 (write), var3 (write), runService (ref), thumbstickCurve (ref), t_13 (ref)
 	if status_10_1 then
 		initializePlayerList()
 	end
@@ -914,167 +914,167 @@ StartFreecam = function()
 		script:SetAttribute("FreecamEnabled", true)
 	end
 	local cFrame = currentCamera.CFrame
-	var56 = if status_6_1 then Vector3.new(cFrame:toEulerAnglesYXZ()) else Vector2.new(cFrame:toEulerAnglesYXZ())
+	var23 = if status_6_1 then Vector3.new(cFrame:toEulerAnglesYXZ()) else Vector2.new(cFrame:toEulerAnglesYXZ())
 	vector3 = cFrame.p
-	var57 = currentCamera.FieldOfView
-	var58:Reset(Vector3.new())
-	var59:Reset(Vector2.new())
-	var60:Reset(0)
+	var24 = currentCamera.FieldOfView
+	var25:Reset(Vector3.new())
+	var26:Reset(Vector2.new())
+	var27:Reset(0)
 	
 	if status_6_1 then
-		var61:Reset(0)
+		var28:Reset(0)
 	end
 	if not status_12_1 and status_7_1 then
-		var34 = 1.5
-		var35 = 1
-		var36 = 4
-		var37 = 1
+		var6 = 1.5
+		var7 = 1
+		var8 = 4
+		var9 = 1
 	end
 	if status_12_1 then
-		var7 = localPlayer:WaitForChild("PlayerGui")
-		var8 = var7:WaitForChild("Freecam")
+		var1 = localPlayer:WaitForChild("PlayerGui")
+		var2 = var1:WaitForChild("Freecam")
 		
-		if not var10 or not var10.Parent then
-			var10 = Instance.new("TextLabel")
-			var10.Name = "FreecamCustomGui"
-			var10.TextColor3 = Color3.new(1, 1, 1)
-			var10.Font = Enum.Font.SourceSansBold
-			var10.TextSize = 20
-			var10.TextStrokeTransparency = 0
-			var10.BackgroundTransparency = 1
-			var10.TextWrapped = true
-			var10.TextXAlignment = Enum.TextXAlignment.Right
-			var10.AutomaticSize = Enum.AutomaticSize.Y
-			var10.AnchorPoint = Vector2.new(1, 1)
-			var10.Position = UDim2.new(1, -10, 1, -10)
-			var10.Size = UDim2.new(0, 400, 0, 0)
-			var10.Parent = var8
+		if not var4 or not var4.Parent then
+			var4 = Instance.new("TextLabel")
+			var4.Name = "FreecamCustomGui"
+			var4.TextColor3 = Color3.new(1, 1, 1)
+			var4.Font = Enum.Font.SourceSansBold
+			var4.TextSize = 20
+			var4.TextStrokeTransparency = 0
+			var4.BackgroundTransparency = 1
+			var4.TextWrapped = true
+			var4.TextXAlignment = Enum.TextXAlignment.Right
+			var4.AutomaticSize = Enum.AutomaticSize.Y
+			var4.AnchorPoint = Vector2.new(1, 1)
+			var4.Position = UDim2.new(1, -10, 1, -10)
+			var4.Size = UDim2.new(0, 400, 0, 0)
+			var4.Parent = var2
 		end
 	end
 	t.Push()
 	
-	if status_9_1 and (not var9 or not var9.Parent) then
-		var9 = Instance.new("DepthOfFieldEffect")
-		var9.Enabled = false
-		var9.Name = "FreecamDepthOfField"
-		var9.Parent = currentCamera
+	if status_9_1 and (not var3 or not var3.Parent) then
+		var3 = Instance.new("DepthOfFieldEffect")
+		var3.Enabled = false
+		var3.Name = "FreecamDepthOfField"
+		var3.Parent = currentCamera
 	end
 	runService:BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, thumbstickCurve)
 	t_13.StartCapture()
 end
 
 StopFreecam = function()
-	-- upvalues: status_8_1 (write), status_2_1 (write), status_10_1 (write), var44 (write), var45 (write), var46 (write), var50 (write), t_11 (write), status_9_1 (write), var9 (write), t_10 (write), var42 (write), var43 (write), status_12_1 (write), var8 (write), var52 (write), var53 (write), t_13 (ref), runService (ref), t (write)
+	-- upvalues: status_8_1 (write), status_2_1 (write), status_10_1 (write), var14 (write), var15 (write), var16 (write), var19 (write), t_11 (write), status_9_1 (write), var3 (write), t_10 (write), var12 (write), var13 (write), status_12_1 (write), var2 (write), var21 (write), var22 (write), t_13 (ref), runService (ref), t (write)
 	if not status_8_1 and status_2_1 then
 		script:SetAttribute("FreecamEnabled", false)
 	end
 	if status_10_1 then
-		if var44 then
-			var44:Disconnect()
-			var44 = nil
+		if var14 then
+			var14:Disconnect()
+			var14 = nil
 		end
-		if var45 then
-			var45:Disconnect()
-			var45 = nil
+		if var15 then
+			var15:Disconnect()
+			var15 = nil
 		end
-		var46 = false
-		var50 = 1
+		var16 = false
+		var19 = 1
 		t_11 = {}
 	end
-	if status_9_1 and var9 and var9.Parent then
-		if var9.Enabled then
+	if status_9_1 and var3 and var3.Parent then
+		if var3.Enabled then
 			for i, v in ipairs(t_10) do
 				if v.Parent then
 					v.Enabled = true
 				end
 			end
-			if var42 then
-				var42:Disconnect()
-				var42 = nil
+			if var12 then
+				var12:Disconnect()
+				var12 = nil
 			end
-			if var43 then
-				var43:Disconnect()
-				var43 = nil
+			if var13 then
+				var13:Disconnect()
+				var13 = nil
 			end
 			t_10 = {}
 		end
-		var9.Enabled = false
+		var3.Enabled = false
 	end
 	if status_12_1 then
-		if var8 and var8.Parent then
-			var8.Enabled = false
+		if var2 and var2.Parent then
+			var2.Enabled = false
 		end
-		var52 = false
-		var53 = false
+		var21 = false
+		var22 = false
 	end
 	t_13.StopCapture()
 	runService:UnbindFromRenderStep("Freecam")
 	t.Pop()
 end
 
-var86 = false
+var44 = false
 
 ToggleFreecam = function()
-	-- upvalues: var86 (write), StopFreecam (ref), StartFreecam (ref), status_8_1 (write)
-	if var86 then
+	-- upvalues: var44 (write), StopFreecam (ref), StartFreecam (ref), status_8_1 (write)
+	if var44 then
 		StopFreecam()
 	else
 		StartFreecam()
 	end
-	var86 = not var86
+	var44 = not var44
 	
 	if status_8_1 then
-		script:SetAttribute("FreecamEnabled", var86)
+		script:SetAttribute("FreecamEnabled", var44)
 	end
 end
 
-var71 = function(p32)
-	-- upvalues: userInputService (ref), var86 (write), StopFreecam (ref), StartFreecam (ref), status_8_1 (write)
-	for i = 1, #p32 - 1 do
-		if userInputService:IsKeyDown(p32[i]) then
+var32 = function(p7)
+	-- upvalues: userInputService (ref), var44 (write), StopFreecam (ref), StartFreecam (ref), status_8_1 (write)
+	for i = 1, #p7 - 1 do
+		if userInputService:IsKeyDown(p7[i]) then
 			continue
 		end
 		return
 	end
-	if var86 then
+	if var44 then
 		StopFreecam()
 	else
 		StartFreecam()
 	end
-	var86 = not var86
+	var44 = not var44
 	
 	if status_8_1 then
-		script:SetAttribute("FreecamEnabled", var86)
+		script:SetAttribute("FreecamEnabled", var44)
 	end
 end
 
-contextActionService:BindActionAtPriority("FreecamToggle", function(_, p33, p34)
-	-- upvalues: list (ref), var71 (ref)
-	if p33 == Enum.UserInputState.Begin and p34.KeyCode == list[#list] then
-		var71(list)
+contextActionService:BindActionAtPriority("FreecamToggle", function(_, p8, p9)
+	-- upvalues: list (ref), var32 (ref)
+	if p8 == Enum.UserInputState.Begin and p9.KeyCode == list[#list] then
+		var32(list)
 	end
 	return Enum.ContextActionResult.Pass
 end, false, value, list[#list])
 
 if status_8_1 or status_2_1 then
-	script:SetAttribute("FreecamEnabled", var86)
+	script:SetAttribute("FreecamEnabled", var44)
 	script:GetAttributeChangedSignal("FreecamEnabled"):Connect(function()
-		-- upvalues: var86 (write), StartFreecam (ref), StopFreecam (ref)
+		-- upvalues: var44 (write), StartFreecam (ref), StopFreecam (ref)
 		local freecamEnabledAttribute = script:GetAttribute("FreecamEnabled")
 		
 		if typeof(freecamEnabledAttribute) ~= "boolean" then
-			script:SetAttribute("FreecamEnabled", var86)
+			script:SetAttribute("FreecamEnabled", var44)
 			
 			return
-		elseif freecamEnabledAttribute ~= var86 then
+		elseif freecamEnabledAttribute ~= var44 then
 			if freecamEnabledAttribute then
 				StartFreecam()
-				var86 = true
+				var44 = true
 				
 				return
 			end
 			StopFreecam()
-			var86 = false
+			var44 = false
 		end
 	end)
 end

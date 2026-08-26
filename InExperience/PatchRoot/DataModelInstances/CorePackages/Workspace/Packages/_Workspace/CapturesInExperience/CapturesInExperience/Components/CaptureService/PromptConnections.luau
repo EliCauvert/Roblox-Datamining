@@ -14,52 +14,52 @@ local captureTypeModule = require(parent.Enums.CaptureType)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local fFlagCapturesEnableDownloadPromptForU13Module = require(parent.Flags.FFlagCapturesEnableDownloadPromptForU13)
 
-return capturesPolicyModule.connect(function(p8)
-	return { enableShareCaptureCTA = p8.enableShareCaptureCTA() }
-end)(function(p0)
+return capturesPolicyModule.connect(function(p1)
+	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
+end)(function(p1)
 	-- upvalues: useDispatch (ref), reactModule (ref), promptTriggeredModule (ref), promptTypeModule (ref), useEventConnection (ref), captureServiceModule (ref), fFlagCapturesEnableDownloadPromptForU13Module (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
-	local var10 = useDispatch()
-	useEventConnection(captureServiceModule.OpenSaveCapturesPrompt, reactModule.useCallback(function(p1, p2)
-		-- upvalues: var10 (ref), promptTriggeredModule (copy), promptTypeModule (copy)
-		var10(promptTriggeredModule(p1, promptTypeModule.SaveCaptures, { contents = p2 }))
+	local var1 = useDispatch()
+	useEventConnection(captureServiceModule.OpenSaveCapturesPrompt, reactModule.useCallback(function(p2, p3)
+		-- upvalues: var1 (ref), promptTriggeredModule (copy), promptTypeModule (copy)
+		var1(promptTriggeredModule(p2, promptTypeModule.SaveCaptures, { contents = p3 }))
 	end, {}))
-	useEventConnection(captureServiceModule.OpenShareCapturePrompt, reactModule.useCallback(function(p3, p4, p5)
-		-- upvalues: fFlagCapturesEnableDownloadPromptForU13Module (copy), p0 (ref), var10 (ref), promptTriggeredModule (copy), promptTypeModule (copy), captureServiceModule (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy)
+	useEventConnection(captureServiceModule.OpenShareCapturePrompt, reactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: fFlagCapturesEnableDownloadPromptForU13Module (copy), p1 (ref), var1 (ref), promptTriggeredModule (copy), promptTypeModule (copy), captureServiceModule (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy)
 		local t = {
-			content = p4,
-			isU13LocalSavePrompt = fFlagCapturesEnableDownloadPromptForU13Module and not p0.enableShareCaptureCTA,
-			launchData = p5
+			content = p3,
+			isU13LocalSavePrompt = fFlagCapturesEnableDownloadPromptForU13Module and not p1.enableShareCaptureCTA,
+			launchData = p4
 		}
 		local captureSavedInternalConnection = nil
 		
-		if fFlagCapturesEnableDownloadPromptForU13Module or p0.enableShareCaptureCTA then
-			var10(promptTriggeredModule(p3, promptTypeModule.ShareCapture, t))
+		if fFlagCapturesEnableDownloadPromptForU13Module or p1.enableShareCaptureCTA then
+			var1(promptTriggeredModule(p2, promptTypeModule.ShareCapture, t))
 		else
-			captureSavedInternalConnection = captureServiceModule.CaptureSavedInternal:Connect(function(p6)
-				-- upvalues: p4 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), captureSavedInternalConnection (write), captureServiceModule (copy), var10 (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy)
-				if p4.Object ~= nil then
+			captureSavedInternalConnection = captureServiceModule.CaptureSavedInternal:Connect(function(p5)
+				-- upvalues: p3 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), captureSavedInternalConnection (write), captureServiceModule (copy), var1 (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy)
+				if p3.Object ~= nil then
 					if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-						if p6.CaptureTime ~= p4.Object.CaptureTime then return end
-					elseif p6.type == captureTypeModule.Video and p6.videoCapture.CaptureTime ~= p4.Object.CaptureTime then return end
+						if p5.CaptureTime ~= p3.Object.CaptureTime then return end
+					elseif p5.type == captureTypeModule.Video and p5.videoCapture.CaptureTime ~= p3.Object.CaptureTime then return end
 				end
-				local var14 = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then p6 elseif p6.type == captureTypeModule.Video then p6.videoCapture else p6.filePath
+				local var2 = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then p5 elseif p5.type == captureTypeModule.Video then p5.videoCapture else p5.filePath
 				
 				if captureSavedInternalConnection then
 					captureSavedInternalConnection:Disconnect()
 				end
-				captureServiceModule:SaveCapturesToExternalStorageAsync({ var14 })
-				var10(toastTriggeredModule(capturesToastTypeModule.CaptureSavedToDevice, { captureInfo = var14 }))
+				captureServiceModule:SaveCapturesToExternalStorageAsync({ var2 })
+				var1(toastTriggeredModule(capturesToastTypeModule.CaptureSavedToDevice, { captureInfo = var2 }))
 			end)
-			captureServiceModule:GetCaptureFilePathAsync(p4)
+			captureServiceModule:GetCaptureFilePathAsync(p3)
 		end
-	end, { p0.enableShareCaptureCTA }))
-	local var11 = reactModule.useCallback(function(p7, _)
-		-- upvalues: var10 (ref), promptTriggeredModule (copy), promptTypeModule (copy)
-		var10(promptTriggeredModule(p7, promptTypeModule.CapturePermissions, {}))
+	end, { p1.enableShareCaptureCTA }))
+	local var2 = reactModule.useCallback(function(p2, _)
+		-- upvalues: var1 (ref), promptTriggeredModule (copy), promptTypeModule (copy)
+		var1(promptTriggeredModule(p2, promptTypeModule.CapturePermissions, {}))
 	end, {})
 	
 	if game:GetEngineFeature("CaptureServiceGalleryPermissionPrompt") then
-		useEventConnection(captureServiceModule.OpenCapturePermissionsPrompt, var11)
+		useEventConnection(captureServiceModule.OpenCapturePermissionsPrompt, var2)
 	end
 	return reactModule.createElement(reactModule.Fragment, {}, {})
 end)

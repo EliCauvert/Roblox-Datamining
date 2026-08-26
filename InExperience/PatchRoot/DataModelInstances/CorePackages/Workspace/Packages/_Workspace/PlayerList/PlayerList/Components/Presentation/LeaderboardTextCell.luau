@@ -4,16 +4,16 @@ local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
 local text = foundationModule.Text
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "clip",
-		Size = UDim2.fromOffset(p0.width, p0.rowHeight),
-		LayoutOrder = p0.layoutOrder
+		Size = UDim2.fromOffset(p1.width, p1.rowHeight),
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Text = reactModule.createElement(text, {
-			Text = p0.text,
-			tag = p0.textTag or "size-full text-body-small text-align-x-left content-default"
+			Text = p1.text,
+			tag = p1.textTag or "size-full text-body-small text-align-x-left content-default"
 		})
 	})
 end)

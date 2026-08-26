@@ -2,7 +2,7 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal(false)
+	local var1, var2 = createSignal(false)
 	
-	return { getInspectAndBuyOpen = var0, setInspectAndBuyOpen = var1 }
+	return { getInspectAndBuyOpen = var1, setInspectAndBuyOpen = var2 }
 end

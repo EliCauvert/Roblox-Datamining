@@ -10,18 +10,18 @@ local fFlagAXSduiCatalogScrollImpressions = require(parent.AvatarExperienceFlags
 local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local useSignalState = require(parent.SignalsReact).useSignalState
-local var6 = if fFlagSignalsNavP3gAvatarExperience then require(parent.NavigationRodux).GetLegacyNavigationStore else nil
+local var1 = if fFlagSignalsNavP3gAvatarExperience then require(parent.NavigationRodux).GetLegacyNavigationStore else nil
 local avatarExperienceImpressionsDetector = roactModule.PureComponent:extend("AvatarExperienceImpressionsDetector")
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: fFlagUseNavigationSelectors (ref), selectors (ref)
 	if fFlagUseNavigationSelectors then
-		return selectors.selectCurrentPageName(p0)
+		return selectors.selectCurrentPageName(p1)
 	end
-	local history = p0.Navigation.history
-	local var9 = history[#history]
+	local history = p1.Navigation.history
+	local var2 = history[#history]
 	
-	return var9[#var9].name
+	return var2[#var2].name
 end
 
 avatarExperienceImpressionsDetector.validateProps = tModule.strictInterface({
@@ -45,158 +45,158 @@ function avatarExperienceImpressionsDetector.init(p1)
 	p1.nextImpressionTick = nil
 end
 
-function avatarExperienceImpressionsDetector._isInstanceVisible(p2, p3)
+function avatarExperienceImpressionsDetector._isInstanceVisible(p1, p2)
 	-- upvalues: argCheckModule (ref), fFlagAXSduiCatalogScrollImpressions (ref)
-	if not p3 then
+	if not p2 then
 		return false
 	end
-	local viewPortBounds = p2.props.viewPortBounds
+	local viewPortBounds = p1.props.viewPortBounds
 	argCheckModule.assert(viewPortBounds ~= nil)
 	
 	if not viewPortBounds then
 		return false
 	end
 	local _ = nil
-	local var10 = viewPortBounds.max - viewPortBounds.min
-	argCheckModule.assert(var10.X > 0)
-	argCheckModule.assert(var10.Y > 0)
-	local var11 = var10 * p2.props.viewFillPercent
-	argCheckModule.assert(var11.X > 0 and var11.Y > 0)
+	local var2 = viewPortBounds.max - viewPortBounds.min
+	argCheckModule.assert(var2.X > 0)
+	argCheckModule.assert(var2.Y > 0)
+	local var3 = var2 * p1.props.viewFillPercent
+	argCheckModule.assert(var3.X > 0 and var3.Y > 0)
 	
-	if var11.X <= 0 or var11.Y <= 0 then
+	if var3.X <= 0 or var3.Y <= 0 then
 		return false
-	elseif fFlagAXSduiCatalogScrollImpressions and (p3.AbsoluteSize.X <= 0 or p3.AbsoluteSize.Y <= 0) then
+	elseif fFlagAXSduiCatalogScrollImpressions and (p2.AbsoluteSize.X <= 0 or p2.AbsoluteSize.Y <= 0) then
 		return false
 	end
-	local absolutePosition = p3.AbsolutePosition
-	local var12 = absolutePosition + p3.AbsoluteSize / 2
-	local var13 = absolutePosition + p3.AbsoluteSize
-	local var14 = viewPortBounds.min.X < var12.X and var12.X < viewPortBounds.max.X
-	local var15 = viewPortBounds.min.Y < var12.Y and var12.Y < viewPortBounds.max.Y
+	local absolutePosition = p2.AbsolutePosition
+	local var4 = absolutePosition + p2.AbsoluteSize / 2
+	local var5 = absolutePosition + p2.AbsoluteSize
+	local var6 = viewPortBounds.min.X < var4.X and var4.X < viewPortBounds.max.X
+	local var7 = viewPortBounds.min.Y < var4.Y and var4.Y < viewPortBounds.max.Y
 	
-	if var14 and var15 then
+	if var6 and var7 then
 		return true
 	end
-	local var16 = var13:Min(viewPortBounds.max) - absolutePosition:Max(viewPortBounds.min)
-	local var17 = var11.X <= var16.X
+	local var8 = var5:Min(viewPortBounds.max) - absolutePosition:Max(viewPortBounds.min)
+	local var9 = var3.X <= var8.X
 	
-	if var15 and var17 then
+	if var7 and var9 then
 		return true
 	end
-	local var18 = var11.Y <= var16.Y
+	local var10 = var3.Y <= var8.Y
 	
-	return if var14 and var18 then true else var17 and var18
+	return if var6 and var10 then true else var9 and var10
 end
 
-function avatarExperienceImpressionsDetector._defaultObjectCollector(p4)
-	return p4:GetChildren()
+function avatarExperienceImpressionsDetector._defaultObjectCollector(p1)
+	return p1:GetChildren()
 end
 
-function avatarExperienceImpressionsDetector._calculateImpressions(p5)
+function avatarExperienceImpressionsDetector._calculateImpressions(p1)
 	-- upvalues: argCheckModule (ref)
-	if not p5.isMounted then return end
-	if p5.props.pageFilter then
-		if not p5.props.pageFilter(p5.props.currentPage) then return end
-	elseif p5.props.appPage ~= p5.props.currentPage then return end
-	local current = p5.props.parentRef and p5.props.parentRef.current
+	if not p1.isMounted then return end
+	if p1.props.pageFilter then
+		if not p1.props.pageFilter(p1.props.currentPage) then return end
+	elseif p1.props.appPage ~= p1.props.currentPage then return end
+	local current = p1.props.parentRef and p1.props.parentRef.current
 	
-	if not current or not p5:_isInstanceVisible(current) then return end
-	p5.lastImpressionTick = tick()
+	if not current or not p1:_isInstanceVisible(current) then return end
+	p1.lastImpressionTick = tick()
 	local t = {}
-	local var21 = (p5.props.collectObjectsFunc or p5._defaultObjectCollector)(current)
+	local var2 = (p1.props.collectObjectsFunc or p1._defaultObjectCollector)(current)
 	
-	if var21 then
-		for i, v in var21 do
-			if v:IsA("GuiObject") and p5:_isInstanceVisible(v) and (p5.props.filterImpressionFunc == nil or p5.props.filterImpressionFunc(v)) then
+	if var2 then
+		for i, v in var2 do
+			if v:IsA("GuiObject") and p1:_isInstanceVisible(v) and (p1.props.filterImpressionFunc == nil or p1.props.filterImpressionFunc(v)) then
 				table.insert(t, v)
 			end
 		end
 	end
 	if #t > 0 then
-		argCheckModule.assert(p5.props.onImpressionsDetected ~= nil)
-		p5.props.onImpressionsDetected(t)
+		argCheckModule.assert(p1.props.onImpressionsDetected ~= nil)
+		p1.props.onImpressionsDetected(t)
 	end
 end
 
-function avatarExperienceImpressionsDetector._requestImpressions(p6)
+function avatarExperienceImpressionsDetector._requestImpressions(p2)
 	-- upvalues: argCheckModule (ref)
-	if not p6.isMounted then return end
-	if p6.nextImpressionTick ~= nil then return end
-	if not p6.props.parentRef or not p6.props.parentRef.current then return end
-	local var22 = 0
+	if not p2.isMounted then return end
+	if p2.nextImpressionTick ~= nil then return end
+	if not p2.props.parentRef or not p2.props.parentRef.current then return end
+	local var3 = 0
 	
-	if p6.lastImpressionTick ~= nil then
-		p6.nextImpressionTick = p6.lastImpressionTick + p6.props.scanDebounceSeconds
-		var22 = p6.nextImpressionTick - tick()
+	if p2.lastImpressionTick ~= nil then
+		p2.nextImpressionTick = p2.lastImpressionTick + p2.props.scanDebounceSeconds
+		var3 = p2.nextImpressionTick - tick()
 	end
-	if var22 > 0 then
-		task.delay(var22, function()
-			-- upvalues: argCheckModule (copy), p6 (ref)
-			argCheckModule.assert(p6.nextImpressionTick ~= nil and p6.nextImpressionTick < tick())
-			p6.nextImpressionTick = nil
-			p6:_calculateImpressions()
+	if var3 > 0 then
+		task.delay(var3, function()
+			-- upvalues: argCheckModule (copy), p2 (ref)
+			argCheckModule.assert(p2.nextImpressionTick ~= nil and p2.nextImpressionTick < tick())
+			p2.nextImpressionTick = nil
+			p2:_calculateImpressions()
 		end)
 		
 		return
 	end
-	p6.nextImpressionTick = nil
-	p6:_calculateImpressions()
+	p2.nextImpressionTick = nil
+	p2:_calculateImpressions()
 end
 
 function avatarExperienceImpressionsDetector.render(_)
 	return nil
 end
 
-function avatarExperienceImpressionsDetector.didMount(p7)
-	p7.isMounted = true
-	p7:_requestImpressions()
+function avatarExperienceImpressionsDetector.didMount(p2)
+	p2.isMounted = true
+	p2:_requestImpressions()
 	
-	if p7.props.onRequestImpressionsSignal then
-		p7.onRequestImpressionsConnection = p7.props.onRequestImpressionsSignal:connect(function()
-			-- upvalues: p7 (ref)
-			p7:_requestImpressions()
+	if p2.props.onRequestImpressionsSignal then
+		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function()
+			-- upvalues: p2 (ref)
+			p2:_requestImpressions()
 		end)
 	end
 end
 
-function avatarExperienceImpressionsDetector.willUnmount(p8)
-	p8.isMounted = false
+function avatarExperienceImpressionsDetector.willUnmount(p2)
+	p2.isMounted = false
 	
-	if p8.onRequestImpressionsConnection ~= nil then
-		p8.onRequestImpressionsConnection:disconnect()
-		p8.onRequestImpressionsConnection = nil
+	if p2.onRequestImpressionsConnection ~= nil then
+		p2.onRequestImpressionsConnection:disconnect()
+		p2.onRequestImpressionsConnection = nil
 	end
 end
 
-function avatarExperienceImpressionsDetector.didUpdate(p9, _, _)
-	p9:_requestImpressions()
+function avatarExperienceImpressionsDetector.didUpdate(p2, _, _)
+	p2:_requestImpressions()
 end
 
 if fFlagSignalsNavP3gAvatarExperience then
-	local var8 = avatarExperienceImpressionsDetector
+	local var3 = avatarExperienceImpressionsDetector
 	
-	avatarExperienceImpressionsDetector = function(p10)
-		-- upvalues: var6 (ref), useSignalState (ref), reactModule (ref), var8 (ref), cryoModule (ref)
-		return reactModule.createElement(var8, cryoModule.Dictionary.union(p10, {
-			currentPage = useSignalState(var6(false).getCurrentPageName)
+	avatarExperienceImpressionsDetector = function(p2)
+		-- upvalues: var1 (ref), useSignalState (ref), reactModule (ref), var3 (ref), cryoModule (ref)
+		return reactModule.createElement(var3, cryoModule.Dictionary.union(p2, {
+			currentPage = useSignalState(var1(false).getCurrentPageName)
 		}))
 	end
 	
 	return avatarExperienceImpressionsDetector
 end
-return roactRoduxModule.connect(function(p11, _)
+return roactRoduxModule.connect(function(p2, _)
 	-- upvalues: fFlagUseNavigationSelectors (ref), selectors (ref)
-	local var24
+	local var4
 	local t = {}
 	
 	if fFlagUseNavigationSelectors then
-		var24 = selectors.selectCurrentPageName(p11)
+		var4 = selectors.selectCurrentPageName(p2)
 	else
-		local history = p11.Navigation.history
-		local var25 = history[#history]
-		var24 = var25[#var25].name
+		local history = p2.Navigation.history
+		local var5 = history[#history]
+		var4 = var5[#var5].name
 	end
-	t.currentPage = var24
+	t.currentPage = var4
 	
 	return t
 end)(avatarExperienceImpressionsDetector)

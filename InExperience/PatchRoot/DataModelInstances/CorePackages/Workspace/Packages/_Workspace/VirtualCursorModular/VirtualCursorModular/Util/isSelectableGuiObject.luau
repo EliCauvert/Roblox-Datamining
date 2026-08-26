@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return not (not p0:IsA("GuiButton") and not p0:IsA("TextBox")) and (not (not p0.Active or not p0.Selectable) and (p0.AbsoluteSize.X == 0 or p0.AbsoluteSize.Y == 0))
+﻿return function(p1)
+	return not (not p1:IsA("GuiButton") and not p1:IsA("TextBox")) and (not (not p1.Active or not p1.Selectable) and (p1.AbsoluteSize.X == 0 or p1.AbsoluteSize.Y == 0))
 end

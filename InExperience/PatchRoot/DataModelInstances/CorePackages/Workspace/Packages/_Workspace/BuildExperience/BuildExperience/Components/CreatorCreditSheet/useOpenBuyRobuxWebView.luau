@@ -15,39 +15,39 @@ local function _()
 	return `{u122}upgrades/robux?ctx={if fFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`
 end
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), reactModule (ref), appLifecycleObserverService (ref), contentProviderService (ref), fFlagBuildExperienceBuyRobuxContextModule (ref)
-	local var7 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 		title = localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_TITLE
 	}) else nil).title else localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_TITLE
-	local var8 = useOpenWebView()
-	local var9 = reactModule.useRef(false)
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref), p0 (ref)
-		if not var9.current then return end
-		var9.current = false
+	local var2 = useOpenWebView()
+	local var3 = reactModule.useRef(false)
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), p1 (ref)
+		if not var3.current then return end
+		var3.current = false
 		
-		if p0 then
-			p0()
+		if p1 then
+			p1()
 		end
-	end, { p0 })
+	end, { p1 })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), p1 (ref), appLifecycleObserverService (copy), var10 (ref), var9 (ref)
-		if p0 == nil then
+		-- upvalues: p1 (ref), p2 (ref), appLifecycleObserverService (copy), var4 (ref), var3 (ref)
+		if p1 == nil then
 			return function() end
 		end
-		local onUnhideConnection = (p1 or appLifecycleObserverService).OnUnhide:Connect(var10)
+		local onUnhideConnection = (p2 or appLifecycleObserverService).OnUnhide:Connect(var4)
 		
 		return function()
-			-- upvalues: var9 (copy), onUnhideConnection (ref)
-			var9.current = false
+			-- upvalues: var3 (copy), onUnhideConnection (ref)
+			var3.current = false
 			onUnhideConnection:Disconnect()
 		end
-	end, { p1, var10, p0 })
+	end, { p2, var4, p1 })
 	
 	return reactModule.useCallback(function()
-		-- upvalues: var9 (ref), p0 (ref), var8 (ref), contentProviderService (copy), fFlagBuildExperienceBuyRobuxContextModule (copy), var7 (ref), var10 (ref)
-		var9.current = p0 ~= nil
-		var8(`{u212}upgrades/robux?ctx={if fFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`, var7, if p0 ~= nil then nil else var10)
-	end, { var10, p0, var8, var7 })
+		-- upvalues: var3 (ref), p1 (ref), var2 (ref), contentProviderService (copy), fFlagBuildExperienceBuyRobuxContextModule (copy), var1 (ref), var4 (ref)
+		var3.current = p1 ~= nil
+		var2(`{u212}upgrades/robux?ctx={if fFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`, var1, if p1 ~= nil then nil else var4)
+	end, { var4, p1, var2, var1 })
 end

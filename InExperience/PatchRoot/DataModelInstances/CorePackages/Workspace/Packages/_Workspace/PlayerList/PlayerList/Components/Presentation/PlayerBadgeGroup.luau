@@ -5,13 +5,13 @@ local view = require(parent_1.Foundation).View
 local playerBadgeModule = require(parent.Components.Presentation.PlayerBadge)
 local playerVerifiedBadgeModule = require(parent.Components.Presentation.PlayerVerifiedBadge)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), playerBadgeModule (ref), playerVerifiedBadgeModule (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-xsmall auto-xy",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
-		Badge = reactModule.createElement(playerBadgeModule, { layoutOrder = 1, player = p0.player }),
-		VerifiedBadge = reactModule.createElement(playerVerifiedBadgeModule, { layoutOrder = 2, player = p0.player })
+		Badge = reactModule.createElement(playerBadgeModule, { layoutOrder = 1, player = p1.player }),
+		VerifiedBadge = reactModule.createElement(playerVerifiedBadgeModule, { layoutOrder = 2, player = p1.player })
 	})
 end)

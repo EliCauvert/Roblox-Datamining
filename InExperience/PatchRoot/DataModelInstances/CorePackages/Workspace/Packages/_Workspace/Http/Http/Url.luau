@@ -7,80 +7,80 @@ local function parseBaseUrlInformation()
 	if baseUrl:sub(#baseUrl) ~= "/" then
 		baseUrl ..= "/"
 	end
-	local _, var51 = baseUrl:find("://")
-	local var52, var53 = baseUrl:find("%.", var51 + 1)
+	local _, var1 = baseUrl:find("://")
+	local var2, var3 = baseUrl:find("%.", var1 + 1)
 	
-	return baseUrl, baseUrl:sub(var51 + 1, var52 - 1), baseUrl:sub(var53 + 1)
+	return baseUrl, baseUrl:sub(var1 + 1, var2 - 1), baseUrl:sub(var3 + 1)
 end
 
 local function preventTableModification(_, _, _)
 	error("Attempt to modify read-only table")
 end
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: preventTableModification (ref)
 	return setmetatable({}, {
 		__metatable = false,
-		__index = p0,
+		__index = p1,
 		__newindex = preventTableModification
 	})
 end
 
-local var3, var4, var5 = parseBaseUrlInformation()
-local formattedText = string.format("https://api.%s", var5)
-local formattedText_1 = string.format("https://apis.%s", var5)
-local formattedText_2 = string.format("https://auth.%s", var5)
-local formattedText_3 = string.format("https://accountsettings.%s", var5)
-local formattedText_4 = string.format("https://avatar.%s", var5)
-local formattedText_5 = string.format("https://catalog.%s", var5)
-local formattedText_6 = string.format("https://create.%s", var5)
-local formattedText_7 = string.format("https://inventory.%s", var5)
-local formattedText_8 = string.format("https://chat.%sv2", var5)
-local formattedText_9 = string.format("https://friends.%sv1", var5)
-local formattedText_10 = string.format("https://users.%sv1", var5)
-local formattedText_11 = string.format("https://assetgame.%s", var5)
-local formattedText_12 = string.format("https://games.%s", var5)
-local formattedText_13 = string.format("https://groups.%s", var5)
-local formattedText_14 = string.format("https://notifications.%s", var5)
-local formattedText_15 = string.format("https://presence.%sv1", var5)
-local formattedText_16 = string.format("https://realtime.%s", var5)
-local formattedText_17 = string.format("https://web.%s", var5)
-local formattedText_18 = string.format("https://www.%s", var5)
-local formattedText_19 = string.format("https://ads.%s", var5)
-local formattedText_20 = string.format("https://adconfiguration.%s", var5)
-local formattedText_21 = string.format("https://followings.%s", var5)
-local formattedText_22 = string.format("https://economy.%s", var5)
-local formattedText_23 = string.format("https://thumbnails.%s", var5)
-local formattedText_24 = string.format("https://thumbnailsdelivery.%s", var5)
-local formattedText_25 = string.format("https://accountsettings.%s", var5)
-local formattedText_26 = string.format("https://premiumfeatures.%s", var5)
-local formattedText_27 = string.format("https://locale.%s", var5)
-local formattedText_28 = string.format("https://badges.%s", var5)
-local formattedText_29 = string.format("https://metrics.%sv1", var5)
-local formattedText_30 = string.format("https://apis.rcs.%s", var5)
-local formattedText_31 = string.format("https://discussions.%s", var5)
-local formattedText_32 = string.format("https://contacts.%s", var5)
-local formattedText_33 = string.format("https://search.%s", var5)
-local formattedText_34 = string.format("https://static.%s", var5)
-local formattedText_35 = string.format("https://gamesearchuitreatments.api.%s", var5)
-local formattedText_36 = string.format("https://gameinternationalization.%s", var5)
-local formattedText_37 = string.format("https://economycreatorstats.%s", var5)
-local formattedText_38 = string.format("https://usermoderation.%s", var5)
-local replaced = string.gsub(var3, "http://", "https://")
-local formattedText_39 = string.format("https://voice.%s", var5)
-local formattedText_40 = string.format("https://translations.%s", var5)
-local formattedText_41 = string.format("https://twostepverification.%s", var5)
-local formattedText_42 = string.format("https://privatemessages.%sv1", var5)
-local var50 = formattedText_34
+local var1, var2, var3 = parseBaseUrlInformation()
+local formattedText = string.format("https://api.%s", var3)
+local formattedText_1 = string.format("https://apis.%s", var3)
+local formattedText_2 = string.format("https://auth.%s", var3)
+local formattedText_3 = string.format("https://accountsettings.%s", var3)
+local formattedText_4 = string.format("https://avatar.%s", var3)
+local formattedText_5 = string.format("https://catalog.%s", var3)
+local formattedText_6 = string.format("https://create.%s", var3)
+local formattedText_7 = string.format("https://inventory.%s", var3)
+local formattedText_8 = string.format("https://chat.%sv2", var3)
+local formattedText_9 = string.format("https://friends.%sv1", var3)
+local formattedText_10 = string.format("https://users.%sv1", var3)
+local formattedText_11 = string.format("https://assetgame.%s", var3)
+local formattedText_12 = string.format("https://games.%s", var3)
+local formattedText_13 = string.format("https://groups.%s", var3)
+local formattedText_14 = string.format("https://notifications.%s", var3)
+local formattedText_15 = string.format("https://presence.%sv1", var3)
+local formattedText_16 = string.format("https://realtime.%s", var3)
+local formattedText_17 = string.format("https://web.%s", var3)
+local formattedText_18 = string.format("https://www.%s", var3)
+local formattedText_19 = string.format("https://ads.%s", var3)
+local formattedText_20 = string.format("https://adconfiguration.%s", var3)
+local formattedText_21 = string.format("https://followings.%s", var3)
+local formattedText_22 = string.format("https://economy.%s", var3)
+local formattedText_23 = string.format("https://thumbnails.%s", var3)
+local formattedText_24 = string.format("https://thumbnailsdelivery.%s", var3)
+local formattedText_25 = string.format("https://accountsettings.%s", var3)
+local formattedText_26 = string.format("https://premiumfeatures.%s", var3)
+local formattedText_27 = string.format("https://locale.%s", var3)
+local formattedText_28 = string.format("https://badges.%s", var3)
+local formattedText_29 = string.format("https://metrics.%sv1", var3)
+local formattedText_30 = string.format("https://apis.rcs.%s", var3)
+local formattedText_31 = string.format("https://discussions.%s", var3)
+local formattedText_32 = string.format("https://contacts.%s", var3)
+local formattedText_33 = string.format("https://search.%s", var3)
+local formattedText_34 = string.format("https://static.%s", var3)
+local formattedText_35 = string.format("https://gamesearchuitreatments.api.%s", var3)
+local formattedText_36 = string.format("https://gameinternationalization.%s", var3)
+local formattedText_37 = string.format("https://economycreatorstats.%s", var3)
+local formattedText_38 = string.format("https://usermoderation.%s", var3)
+local replaced = string.gsub(var1, "http://", "https://")
+local formattedText_39 = string.format("https://voice.%s", var3)
+local formattedText_40 = string.format("https://translations.%s", var3)
+local formattedText_41 = string.format("https://twostepverification.%s", var3)
+local formattedText_42 = string.format("https://privatemessages.%sv1", var3)
+local var4 = formattedText_34
 
-if var5 == "roblox.com/" then
-	var50 = string.gsub(var50, var5, "rbxcdn.com/")
+if var3 == "roblox.com/" then
+	var4 = string.gsub(var4, var3, "rbxcdn.com/")
 end
 return setmetatable({}, {
 	__metatable = false,
 	__index = {
-		DOMAIN = var5,
-		PREFIX = var4,
+		DOMAIN = var3,
+		PREFIX = var2,
 		BASE_URL = replaced,
 		BASE_URL_SECURE = replaced,
 		API_URL = formattedText,
@@ -120,7 +120,7 @@ return setmetatable({}, {
 		DISCUSSIONS_URL = formattedText_31,
 		CONTACTS_URL = formattedText_32,
 		STATIC_URL = formattedText_34,
-		STATIC_CDN_URL = var50,
+		STATIC_CDN_URL = var4,
 		BLOG_URL = "https://blog.roblox.com/",
 		CORP_URL = "https://corp.roblox.com/",
 		STORE_URL = "https://www.amazon.com/roblox",
@@ -133,22 +133,22 @@ return setmetatable({}, {
 		getUserProfileUrl = function(p1, p2)
 			return string.format("%susers/%s/profile", p1.BASE_URL, p2)
 		end,
-		getUserFriendsUrl = function(p3, p4)
-			return string.format("%susers/%s/friends", p3.BASE_URL, p4)
+		getUserFriendsUrl = function(p1, p2)
+			return string.format("%susers/%s/friends", p1.BASE_URL, p2)
 		end,
-		getUserInventoryUrl = function(p5, p6)
-			return string.format("%susers/%s/inventory", p5.BASE_URL, p6)
+		getUserInventoryUrl = function(p1, p2)
+			return string.format("%susers/%s/inventory", p1.BASE_URL, p2)
 		end,
-		getPlaceDefaultThumbnailUrl = function(p7, p8, p9, p10)
-			return string.format("%sThumbs/Asset.ashx?width=%d&height=%d&assetId=%s&ignorePlaceMediaItems=true", p7.BASE_URL, p9, p10, tostring(p8))
+		getPlaceDefaultThumbnailUrl = function(p1, p2, p3, p4)
+			return string.format("%sThumbs/Asset.ashx?width=%d&height=%d&assetId=%s&ignorePlaceMediaItems=true", p1.BASE_URL, p3, p4, tostring(p2))
 		end,
-		isVanitySite = function(p11)
-			return p11.PREFIX ~= "www"
+		isVanitySite = function(p1)
+			return p1.PREFIX ~= "www"
 		end,
-		makeQueryString = function(_, p12)
+		makeQueryString = function(_, p1)
 			local t = {}
 			
-			for i, v in pairs(p12) do
+			for i, v in pairs(p1) do
 				if v ~= nil then
 					if type(v) ~= "table" then
 						table.insert(t, i .. "=" .. tostring(v))
@@ -161,8 +161,8 @@ return setmetatable({}, {
 			end
 			return table.concat(t, "&")
 		end,
-		stripHttpsAndTrailingSlash = function(p13)
-			return string.gsub(string.gsub(p13, "^https://", ""), "/*$", "")
+		stripHttpsAndTrailingSlash = function(p2)
+			return string.gsub(string.gsub(p2, "^https://", ""), "/*$", "")
 		end
 	},
 	__newindex = preventTableModification

@@ -12,17 +12,17 @@ local addUnifiedEventLogging = avatarExperienceAnalyticsModule.addUnifiedEventLo
 local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useLocalization (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
-	local var4 = reactModule.useRef(nil)
-	local var5 = useLocalization({
+	local var1 = reactModule.useRef(nil)
+	local var2 = useLocalization({
 		headerText = "Feature.AvatarSwitcher.Heading.RespawnToSwitch",
 		contentText = "Feature.AvatarSwitcher.Message.RespawnNotAllowed",
 		continueText = "Feature.AvatarSwitcher.Action.OK"
 	})
 	reactModule.useEffect(function()
-		-- upvalues: addUnifiedEventLogging (copy), var4 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), sessionService (copy)
-		addUnifiedEventLogging(var4, {
+		-- upvalues: addUnifiedEventLogging (copy), var1 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), sessionService (copy)
+		addUnifiedEventLogging(var1, {
 			elementName = "DEFER_SWITCH_AVATAR_RESPAWN_DISABLED_BUTTON",
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
 			surface = unifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER
@@ -33,20 +33,20 @@ return function(p0)
 		disablePortal = false,
 		hasBackdrop = true,
 		size = dialogSize.Small,
-		onClose = p0.onClose
+		onClose = p1.onClose
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var5.headerText }),
+		DialogTitle = reactModule.createElement(dialog.Title, { text = var2.headerText }),
 		DialogContent = reactModule.createElement(dialog.Content, nil, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var5.contentText })
+			DialogText = reactModule.createElement(dialog.Text, { Text = var2.contentText })
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			orientation = orientation.Vertical,
 			actions = {
 				{
-					text = var5.continueText,
+					text = var2.continueText,
 					variant = buttonVariant.Emphasis,
-					onActivated = p0.onDefer,
-					ref = var4
+					onActivated = p1.onDefer,
+					ref = var1
 				}
 			}
 		})

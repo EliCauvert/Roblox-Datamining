@@ -14,93 +14,93 @@ local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local experienceDetailsNoticeType = require(parent.DiscoveryTypes).ExperienceDetailsNoticeType
 
-local var3 = function(p0, p1, p2)
+local var1 = function(p1, p2, p3)
 	-- upvalues: playabilityStatusEnum (ref), getAppFeaturePolicies (ref), launchErrorLocalizationKeys (ref)
-	if not p1 then
+	if not p2 then
 		return nil
-	elseif p0 == nil or (p1.playabilityStatus == playabilityStatusEnum.PurchaseRequired or p1.playabilityStatus == playabilityStatusEnum.FiatPurchaseRequired) and (p2 == nil or p2.isForSale == false) then
+	elseif p1 == nil or (p2.playabilityStatus == playabilityStatusEnum.PurchaseRequired or p2.playabilityStatus == playabilityStatusEnum.FiatPurchaseRequired) and (p3 == nil or p3.isForSale == false) then
 		return "Feature.ExperienceDetails.UnplayableError.UnplayableOther"
-	elseif p1.playabilityStatus == playabilityStatusEnum.DeviceRestricted then
-		local var4 = getAppFeaturePolicies().getPlatformDisplayName() or ""
+	elseif p2.playabilityStatus == playabilityStatusEnum.DeviceRestricted then
+		local var2 = getAppFeaturePolicies().getPlatformDisplayName() or ""
 		
-		if var4 == "" then
-			return launchErrorLocalizationKeys[p1.playabilityStatus]
+		if var2 == "" then
+			return launchErrorLocalizationKeys[p2.playabilityStatus]
 		else
-			return "Feature.ExperienceDetails.UnplayableError.DeviceRestrictedCustom", { device = var4 }
+			return "Feature.ExperienceDetails.UnplayableError.DeviceRestrictedCustom", { device = var2 }
 		end
 	end
 end
 
-local _ = function(p3, p4, p5)
-	-- upvalues: var3 (ref)
-	local var5, var6 = var3(p3, p4, p5)
+local _ = function(p1, p2, p3)
+	-- upvalues: var1 (ref)
+	local var2, var3 = var1(p1, p2, p3)
 	
-	if var5 == nil then
+	if var2 == nil then
 		return nil
-	elseif var6 then
-		local cloned = table.clone(var6)
-		cloned[1] = var5
+	elseif var3 then
+		local cloned = table.clone(var3)
+		cloned[1] = var2
 		
 		return cloned
 	end
-	return var5
+	return var2
 end
 
-return function(p6, p7, p8)
-	-- upvalues: useAppPolicy (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), useLocalization (ref), playButtonStatesModule (ref), var3 (ref), experienceDetailsNoticeType (ref)
-	local var8 = useAppPolicy(function(p9)
+return function(p1, p2, p3)
+	-- upvalues: useAppPolicy (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), useLocalization (ref), playButtonStatesModule (ref), var1 (ref), experienceDetailsNoticeType (ref)
+	local var2 = useAppPolicy(function(p4)
 		return {
-			experienceDetailsNoticeType = p9.getExperienceDetailsNoticeType()
+			experienceDetailsNoticeType = p4.getExperienceDetailsNoticeType()
 		}
 	end)
-	local var9 = useSelector(function(p10)
-		-- upvalues: p6 (ref)
-		return p10.PlayabilityStatus and (p10.PlayabilityStatus[p6] and (p10.PlayabilityStatus[p6].unplayableDisplayText or nil))
+	local var3 = useSelector(function(p4)
+		-- upvalues: p1 (ref)
+		return p4.PlayabilityStatus and (p4.PlayabilityStatus[p1] and (p4.PlayabilityStatus[p1].unplayableDisplayText or nil))
 	end)
-	local var10 = useSelector(function(p11)
-		-- upvalues: p6 (ref)
-		return p11.GameDetails[p6]
+	local var4 = useSelector(function(p4)
+		-- upvalues: p1 (ref)
+		return p4.GameDetails[p1]
 	end)
-	local var11 = nil
-	local var12 = nil
+	local var5 = nil
+	local var6 = nil
 	
 	if fFlagMigrateGameInfoToStore then
-		var12 = gameHydrationReactModule.useGameInfo(p6)
+		var6 = gameHydrationReactModule.useGameInfo(p1)
 	else
-		var11 = useGameInfosSelector(p6)
+		var5 = useGameInfosSelector(p1)
 	end
 	local rootPlaceId
-	if var10 then
-		rootPlaceId = var10.rootPlaceId
+	if var4 then
+		rootPlaceId = var4.rootPlaceId
 		
 		if not rootPlaceId then
-			rootPlaceId = if fFlagMigrateGameInfoToStore then var12 and var12.rootPlaceId else var11 and var11.placeId
+			rootPlaceId = if fFlagMigrateGameInfoToStore then var6 and var6.rootPlaceId else var5 and var5.placeId
 			rootPlaceId = rootPlaceId or nil
 		end
-		local var17
-		local var13 = useGameProductInfoSelector(p6)
+		local var7
+		local var8 = useGameProductInfoSelector(p1)
 		local t = {
 			agreeToNotice = "Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice"
 		}
 		
-		if p7 == playButtonStatesModule.UnplayableOther then
-			local var15, var16 = var3(rootPlaceId, p8, var13)
+		if p2 == playButtonStatesModule.UnplayableOther then
+			local var9, var10 = var1(rootPlaceId, p3, var8)
 			
-			if var15 == nil then
-				var17 = nil
-			elseif var16 then
-				local cloned = table.clone(var16)
-				cloned[1] = var15
-				var17 = cloned
+			if var9 == nil then
+				var7 = nil
+			elseif var10 then
+				local cloned = table.clone(var10)
+				cloned[1] = var9
+				var7 = cloned
 			else
-				var17 = var15
+				var7 = var9
 			end
 		else
-			var17 = nil
+			var7 = nil
 		end
-		t.unplayableOtherFallback = var17
-		local var19 = useLocalization(t)
+		t.unplayableOtherFallback = var7
+		local var11 = useLocalization(t)
 		
-		return if (p7 == playButtonStatesModule.Playable or p7 == playButtonStatesModule.PlayableWithParty or p7 == playButtonStatesModule.WaitingForParty) and var8.experienceDetailsNoticeType == experienceDetailsNoticeType.InExperiencePurchase then var19.agreeToNotice elseif var9 and var9 ~= "" then var9 elseif p7 == playButtonStatesModule.UnplayableOther then var19.unplayableOtherFallback else nil
+		return if (p2 == playButtonStatesModule.Playable or p2 == playButtonStatesModule.PlayableWithParty or p2 == playButtonStatesModule.WaitingForParty) and var2.experienceDetailsNoticeType == experienceDetailsNoticeType.InExperiencePurchase then var11.agreeToNotice elseif var3 and var3 ~= "" then var3 elseif p2 == playButtonStatesModule.UnplayableOther then var11.unplayableOtherFallback else nil
 	end
 end

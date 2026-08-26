@@ -8,80 +8,80 @@ local usePreferredInput = responsiveModule.usePreferredInput
 local input = responsiveModule.Input
 local useDescendantHasFocusModule = require(script.Parent.useDescendantHasFocus)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useFocusGuiObject (ref), reactModule (ref), usePreferredInput (ref), input (ref), useIsSpatial (ref), coreGuiService (ref), useDescendantHasFocusModule (ref)
-	local var4 = p1 == nil or p1
-	local var5 = useFocusGuiObject()
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: p0 (ref), var7 (ref)
-		if p0 then
-			if type(p0) == "function" then
-				p0(p2)
-			elseif type(p0) == "table" then
-				p0.current = p2
+	local var1 = p2 == nil or p2
+	local var2 = useFocusGuiObject()
+	local var3, var4 = reactModule.useState(nil)
+	local var5 = reactModule.useCallback(function(p3)
+		-- upvalues: p1 (ref), var4 (ref)
+		if p1 then
+			if type(p1) == "function" then
+				p1(p3)
+			elseif type(p1) == "table" then
+				p1.current = p3
 			end
 		end
-		if p2 == nil then
-			var7(nil)
+		if p3 == nil then
+			var4(nil)
 			
 			return
-		elseif p2:IsA("GuiObject") then
-			var7(p2)
+		elseif p3:IsA("GuiObject") then
+			var4(p3)
 			
 			return
 		end
 		warn("useFocusOnMount: ref is not a GuiObject")
-	end, { p0 })
-	local var9 = usePreferredInput() == input.Directional
-	local var10 = useIsSpatial()
-	local var11 = reactModule.useCallback(function(p3)
-		-- upvalues: coreGuiService (copy), var9 (ref), var10 (ref), var5 (ref)
+	end, { p1 })
+	local var6 = usePreferredInput() == input.Directional
+	local var7 = useIsSpatial()
+	local var8 = reactModule.useCallback(function(p3)
+		-- upvalues: coreGuiService (copy), var6 (ref), var7 (ref), var2 (ref)
 		if not p3:IsDescendantOf(coreGuiService) then return end
-		if var9 and not var10 then
-			var5(p3)
+		if var6 and not var7 then
+			var2(p3)
 		end
-	end, { var9, var10, var5 })
-	local var12 = reactModule.useRef(false)
-	local var13 = reactModule.useRef(false)
-	local var14 = useDescendantHasFocusModule(var6)
-	local var15 = reactModule.useRef(nil)
+	end, { var6, var7, var2 })
+	local var9 = reactModule.useRef(false)
+	local var10 = reactModule.useRef(false)
+	local var11 = useDescendantHasFocusModule(var3)
+	local var12 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var12 (ref), var13 (ref), var11 (ref), var4 (ref), var14 (ref), var15 (ref)
-		if not var6 then
-			var12.current = false
-			var13.current = false
+		-- upvalues: var3 (ref), var9 (ref), var10 (ref), var8 (ref), var1 (ref), var11 (ref), var12 (ref)
+		if not var3 then
+			var9.current = false
+			var10.current = false
 			
 			return
-		elseif not var12.current then
-			var11(var6)
-			var12.current = true
+		elseif not var9.current then
+			var8(var3)
+			var9.current = true
 		end
-		if var4 and not var13.current and var14 then
-			var13.current = true
+		if var1 and not var10.current and var11 then
+			var10.current = true
 		end
-		local var16 = if var4 and not var13.current then var6.DescendantAdded:Connect(function(p4)
-			-- upvalues: var15 (copy), var11 (copy), var6 (copy)
-			if not var15.current and p4:IsA("GuiObject") and p4.Selectable then
-				var15.current = task.delay(0.1, function()
-					-- upvalues: var11 (copy), var6 (copy), var15 (copy)
-					var11(var6)
-					var15.current = nil
+		local var13 = if var1 and not var10.current then var3.DescendantAdded:Connect(function(p3)
+			-- upvalues: var12 (copy), var8 (copy), var3 (copy)
+			if not var12.current and p3:IsA("GuiObject") and p3.Selectable then
+				var12.current = task.delay(0.1, function()
+					-- upvalues: var8 (copy), var3 (copy), var12 (copy)
+					var8(var3)
+					var12.current = nil
 				end)
 			end
 		end) else nil
 		
 		return function()
-			-- upvalues: var16 (ref), var15 (copy)
-			if var16 then
-				var16:Disconnect()
+			-- upvalues: var13 (ref), var12 (copy)
+			if var13 then
+				var13:Disconnect()
 			end
-			if var15.current then
-				task.cancel(var15.current)
-				var15.current = nil
+			if var12.current then
+				task.cancel(var12.current)
+				var12.current = nil
 			end
 		end
-	end, { var6, var4, var11, var14 })
+	end, { var3, var1, var8, var11 })
 	
-	return var8
+	return var5
 end

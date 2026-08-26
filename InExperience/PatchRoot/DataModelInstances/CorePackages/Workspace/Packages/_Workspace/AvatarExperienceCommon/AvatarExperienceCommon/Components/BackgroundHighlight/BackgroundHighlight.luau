@@ -14,7 +14,7 @@ local numberSequence_1 = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function Gradient(p0)
+local function Gradient(p1)
 	-- upvalues: useTokens (ref), reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -22,7 +22,7 @@ local function Gradient(p0)
 		BackgroundColor3 = useTokens().Color.Surface.Surface_0.Color3,
 		Size = UDim2.fromScale(1, 1)
 	}, {
-		UIGradient = reactModule.createElement("UIGradient", { Rotation = p0.Rotation, Transparency = p0.Transparency })
+		UIGradient = reactModule.createElement("UIGradient", { Rotation = p1.Rotation, Transparency = p1.Transparency })
 	})
 end
 

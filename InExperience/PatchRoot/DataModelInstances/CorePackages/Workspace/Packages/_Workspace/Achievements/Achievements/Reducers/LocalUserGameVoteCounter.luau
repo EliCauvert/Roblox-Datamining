@@ -5,11 +5,11 @@ local var1 = require(parent.Rodux).createReducer({
 	lastUniverseId = -1,
 	gameVoteStatus = {}
 }, {
-	SetUserGameVotes = function(value, p0)
+	SetUserGameVotes = function(value, p1)
 		-- upvalues: cryoModule (ref)
-		local universeId = p0.universeId
-		local userVote = p0.userVote
-		local canVote = p0.canVote
+		local universeId = p1.universeId
+		local userVote = p1.userVote
+		local canVote = p1.canVote
 		local gameVoteStatus = value.gameVoteStatus
 		local voteCountSinceAppStart = value.voteCountSinceAppStart
 		local lastUniverseId = value.lastUniverseId

@@ -18,20 +18,20 @@ local fFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(robloxSubsc
 local fFlagEnableStudioMockPurchaseRobloxSubscriptionModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnableStudioMockPurchaseRobloxSubscription)
 local fStringBlackbirdWebviewHeaderName = game:DefineFastString("FStringBlackbirdWebviewHeaderName", "Black bird")
 
-local function _(p0)
-	return if p0 == Enum.Platform.IOS then "AppleAppStore" elseif p0 == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
+local function _(p1)
+	return if p1 == Enum.Platform.IOS then "AppleAppStore" elseif p1 == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
 end
 
 function performRobloxSubscriptionPurchase()
 	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagEnableStudioMockPurchaseRobloxSubscriptionModule (ref), runService (ref), marketplaceService (ref), completeRobloxSubscriptionUpsellFlowModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), userInputService (ref), promptStateModule (ref), webViewServiceWrapperModule (ref), getSubscriptionPurchaseUrlModule (ref), fStringBlackbirdWebviewHeaderName (ref), constantsModule (ref), transitionToErrorModule (ref), errorReasonModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref)
-	local var18 = robloxSubscriptionStoreModule.get()
-	local robloxSubscriptionProductId = var18.getRobloxSubscriptionProductId()
-	local paymentSessionId = var18.getPaymentSessionId()
+	local var1 = robloxSubscriptionStoreModule.get()
+	local robloxSubscriptionProductId = var1.getRobloxSubscriptionProductId()
+	local paymentSessionId = var1.getPaymentSessionId()
 	
 	if robloxSubscriptionProductId == nil then return end
 	if fFlagEnableStudioMockPurchaseRobloxSubscriptionModule and runService:IsStudio() then
 		marketplaceService:SignalMockPurchaseRobloxSubscription()
-		var18.setDidTryPurchasing(true)
+		var1.setDidTryPurchasing(true)
 		completeRobloxSubscriptionUpsellFlowModule()
 		
 		return
@@ -41,30 +41,30 @@ function performRobloxSubscriptionPurchase()
 	local platform = userInputService:GetPlatform()
 	
 	if if platform ~= Enum.Platform.Windows then if platform ~= Enum.Platform.OSX then platform == Enum.Platform.Linux else true else true then
-		var18.setIsNativePurchase(false)
-		var18.setPromptState(promptStateModule.SubscriptionPurchaseUIReady)
+		var1.setIsNativePurchase(false)
+		var1.setPromptState(promptStateModule.SubscriptionPurchaseUIReady)
 		webViewServiceWrapperModule.new({
 			url = getSubscriptionPurchaseUrlModule(robloxSubscriptionProductId, paymentSessionId),
 			title = fStringBlackbirdWebviewHeaderName,
 			closeCallback = function()
-				-- upvalues: var18 (ref), completeRobloxSubscriptionUpsellFlowModule (copy)
-				var18.setDidTryPurchasing(true)
+				-- upvalues: var1 (ref), completeRobloxSubscriptionUpsellFlowModule (copy)
+				var1.setDidTryPurchasing(true)
 				completeRobloxSubscriptionUpsellFlowModule()
 			end,
 			onOpenCallback = function()
-				-- upvalues: var18 (ref), promptStateModule (copy)
-				var18.setPromptState(promptStateModule.SubscriptionPurchaseInProgress)
+				-- upvalues: var1 (ref), promptStateModule (copy)
+				var1.setPromptState(promptStateModule.SubscriptionPurchaseInProgress)
 			end
 		}):open()
 		
 		return
 	end
-	var18.setPromptState(promptStateModule.SubscriptionPurchaseInProgress)
-	local var22 = if platform == Enum.Platform.IOS then "AppleAppStore" elseif platform == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
-	var18.setIsNativePurchase(true)
+	var1.setPromptState(promptStateModule.SubscriptionPurchaseInProgress)
+	local var2 = if platform == Enum.Platform.IOS then "AppleAppStore" elseif platform == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
+	var1.setIsNativePurchase(true)
 	local ok, _ = pcall(function()
-		-- upvalues: marketplaceService (copy), constantsModule (copy), robloxSubscriptionProductId (ref), var22 (ref), paymentSessionId (ref)
-		marketplaceService:PerformSubscriptionPurchaseV3Async(constantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE, robloxSubscriptionProductId, var22, paymentSessionId)
+		-- upvalues: marketplaceService (copy), constantsModule (copy), robloxSubscriptionProductId (ref), var2 (ref), paymentSessionId (ref)
+		marketplaceService:PerformSubscriptionPurchaseV3Async(constantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE, robloxSubscriptionProductId, var2, paymentSessionId)
 	end)
 	
 	if not ok then

@@ -11,16 +11,16 @@ local t = {
 	include_messages = true
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: default (ref), object (ref), t (ref), httpService (ref), getFFlagEnableSocialCards (ref), CHAT_PLATFORM_BASE_URLModule (ref)
-	local var4 = object.assign({}, t, p2 or {})
+	local var1 = object.assign({}, t, p3 or {})
 	
-	return (p0 or default)(`{CHAT_PLATFORM_BASE_URLModule}/v1/get-conversations`, "POST", {
+	return (p1 or default)(`{CHAT_PLATFORM_BASE_URLModule}/v1/get-conversations`, "POST", {
 		postBody = httpService:JSONEncode({
-			ids = { p1 },
-			include_participants = var4.include_participants,
-			include_user_data = var4.include_user_data,
-			include_messages = var4.include_messages,
+			ids = { p2 },
+			include_participants = var1.include_participants,
+			include_user_data = var1.include_user_data,
+			include_messages = var1.include_messages,
 			include_cards = if getFFlagEnableSocialCards() then true else false
 		})
 	})

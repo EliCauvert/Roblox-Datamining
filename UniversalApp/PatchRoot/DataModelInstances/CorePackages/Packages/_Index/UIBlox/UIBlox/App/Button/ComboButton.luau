@@ -51,22 +51,22 @@ function comboButton.init(p1)
 		overflowControlState = controlStateModule.Initialize
 	})
 	
-	function p0.onButtonStateChanged(_, p1)
-		-- upvalues: p1 (ref)
-		p1:setState({ buttonControlState = p1 })
+	function p0.onButtonStateChanged(_, p2)
+		-- upvalues: p2 (ref)
+		p2:setState({ buttonControlState = p2 })
 	end
 	
-	function p0.onOverflowStateChanged(_, p1)
-		-- upvalues: p1 (ref)
-		p1:setState({ overflowControlState = p1 })
+	function p0.onOverflowStateChanged(_, p2)
+		-- upvalues: p2 (ref)
+		p2:setState({ overflowControlState = p2 })
 	end
 end
 
 function comboButton.render(p1)
 	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p1)
-		-- upvalues: p1 (ref)
-		return p1:renderWithProviders(p1, nil, nil)
+	return withStyleModule(function(p2)
+		-- upvalues: p2 (ref)
+		return p2:renderWithProviders(p2, nil, nil)
 	end)
 end
 

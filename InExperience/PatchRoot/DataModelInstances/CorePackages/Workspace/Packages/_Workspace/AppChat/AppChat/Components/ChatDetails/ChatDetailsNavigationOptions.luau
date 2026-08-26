@@ -13,9 +13,9 @@ local t = {
 			raw = if getFFlagIsSquadEnabled() then "Feature.Chat.Label.Details" else "Feature.Chat.Label.ChatDetails"
 		}
 	end,
-	getIsRooted = function(p0)
+	getIsRooted = function(p1)
 		-- upvalues: getFFlagAppChatEnableRootedNavigationModule (ref)
-		return getFFlagAppChatEnableRootedNavigationModule() and (p0 and (p0.getParam and (p0.getParam("isRooted", false) or false)))
+		return getFFlagAppChatEnableRootedNavigationModule() and (p1 and (p1.getParam and (p1.getParam("isRooted", false) or false)))
 	end
 }
 
@@ -36,12 +36,12 @@ function t.getNavigationOptions(p1, p2)
 	return cryoModule.Dictionary.join(t_1, p2 or {})
 end
 
-function t.getTopBarConfig(p3)
+function t.getTopBarConfig(p1)
 	-- upvalues: t (ref), getFFlagAppChatEnableRootedNavigationModule (ref), cryoModule (ref)
 	local t_1 = { backButtonEnabled = true, headerText = t.getHeaderText() }
 	
 	if getFFlagAppChatEnableRootedNavigationModule() then
-		t_1 = cryoModule.Dictionary.join(t_1, { isRoot = t.getIsRooted(p3) })
+		t_1 = cryoModule.Dictionary.join(t_1, { isRoot = t.getIsRooted(p1) })
 	end
 	return t_1
 end

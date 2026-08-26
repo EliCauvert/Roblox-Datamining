@@ -8,13 +8,13 @@ return function(vectorA, vectorB)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local isServer = vectorB.isServer
-	local var4, var5 = pcallDeferredModule(function()
+	local var1, var2 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), vectorA (ref)
 		return UGCValidationService:ValidateEditableMeshCageUVTriangleArea(vectorA.editableMesh)
 	end, vectorB)
 	
-	if var4 then
-		if var5 then
+	if var1 then
+		if var2 then
 			analyticsModule.recordScriptTime(script.Name, currentTime, vectorB)
 			
 			return true

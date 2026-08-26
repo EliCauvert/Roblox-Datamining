@@ -8,31 +8,31 @@ local friendsChatRealtimeSubscriberModule = require(script.Parent.FriendsChatRea
 local friendsTabUnreadBridgeModule = require(script.Parent.FriendsTabUnreadBridge)
 local friendsChatTabNameModule = require(script.Parent.Parent.FriendsChatTabName)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFriendsChatRealtimeStoreModule (ref), signalsReactModule (ref), getFriendsChatNavigationStoreModule (ref), reactModule (ref), friendsChatTabNameModule (ref), friendsSurfaceVisibility (ref), friendsTabUnreadBridgeModule (ref), friendsChatRealtimeSubscriberModule (ref)
-	local var7 = signalsReactModule.useSignalState(getFriendsChatRealtimeStoreModule(false).getHasEnteredFriendsTab)
-	local var8 = signalsReactModule.useSignalState(getFriendsChatNavigationStoreModule(false).getSelectedConversationId)
+	local var1 = signalsReactModule.useSignalState(getFriendsChatRealtimeStoreModule(false).getHasEnteredFriendsTab)
+	local var2 = signalsReactModule.useSignalState(getFriendsChatNavigationStoreModule(false).getSelectedConversationId)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), friendsChatTabNameModule (copy), var8 (ref), friendsSurfaceVisibility (copy)
-		local var9 = if p0.isChatWindowVisible and p0.selectedTabName == friendsChatTabNameModule then var8 else nil
-		friendsSurfaceVisibility.setVisibleConversationId(var9)
+		-- upvalues: p1 (ref), friendsChatTabNameModule (copy), var2 (ref), friendsSurfaceVisibility (copy)
+		local var3 = if p1.isChatWindowVisible and p1.selectedTabName == friendsChatTabNameModule then var2 else nil
+		friendsSurfaceVisibility.setVisibleConversationId(var3)
 		
 		return function()
-			-- upvalues: friendsSurfaceVisibility (copy), var9 (ref)
-			if friendsSurfaceVisibility.getVisibleConversationId(false) == var9 then
+			-- upvalues: friendsSurfaceVisibility (copy), var3 (ref)
+			if friendsSurfaceVisibility.getVisibleConversationId(false) == var3 then
 				friendsSurfaceVisibility.setVisibleConversationId(nil)
 			end
 		end
-	end, { p0.isChatWindowVisible, p0.selectedTabName, var8 })
+	end, { p1.isChatWindowVisible, p1.selectedTabName, var2 })
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		unreadBridge = reactModule.createElement(friendsTabUnreadBridgeModule, {
-			setTabUnread = p0.setTabUnread,
-			selectedTabName = p0.selectedTabName,
-			isChatWindowVisible = p0.isChatWindowVisible
+			setTabUnread = p1.setTabUnread,
+			selectedTabName = p1.selectedTabName,
+			isChatWindowVisible = p1.isChatWindowVisible
 		}),
-		subscriber = if var7 then reactModule.createElement(friendsChatRealtimeSubscriberModule, {
-			onActiveConversationMessageReceived = p0.onActiveConversationMessageReceived
+		subscriber = if var1 then reactModule.createElement(friendsChatRealtimeSubscriberModule, {
+			onActiveConversationMessageReceived = p1.onActiveConversationMessageReceived
 		}) else nil
 	})
 end

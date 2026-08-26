@@ -22,18 +22,18 @@ function t.markClosed()
 	var4 = nil
 end
 
-function t.updateMetadata(p0, p1, p2, p3)
+function t.updateMetadata(p1, p2, p3, p4)
 	-- upvalues: var4 (write)
-	var4 = { url = p0, title = p1, isVisible = p2, hasBackButton = p3 }
+	var4 = { url = p1, title = p2, isVisible = p3, hasBackButton = p4 }
 end
 
-function t.markOpen(p4, p5, p6, p7)
+function t.markOpen(p1, p2, p3, p4)
 	-- upvalues: var3 (write), var2 (write), defaultClock (write), t (ref)
 	if not var3 or var2 == nil then
 		var2 = defaultClock()
 	end
 	var3 = true
-	t.updateMetadata(p4, p5, p6, p7)
+	t.updateMetadata(p1, p2, p3, p4)
 end
 
 function t.isOpen()
@@ -51,14 +51,14 @@ function t.getOpenDuration()
 	return if var2 == nil then -1 else defaultClock() - var2
 end
 
-function t.wasClosedWithin(p8)
+function t.wasClosedWithin(p1)
 	-- upvalues: var1 (write), defaultClock (write)
-	return if var1 == nil then false else defaultClock() - var1 <= p8
+	return if var1 == nil then false else defaultClock() - var1 <= p1
 end
 
-function t.isOpenNoLongerThan(p9, p10)
+function t.isOpenNoLongerThan(p1, p2)
 	-- upvalues: var3 (write), var2 (write), defaultClock (write)
-	return if p9 then if var2 == nil or var3 and p10 <= defaultClock() - var2 then false else var3 else var3
+	return if p1 then if var2 == nil or var3 and p2 <= defaultClock() - var2 then false else var3 else var3
 end
 
 function t.getWebViewMetadata()

@@ -3,20 +3,20 @@ local setRespawnBehaviorModule = require(script.Parent.Parent.Actions.SetRespawn
 
 return function(value)
 	-- upvalues: starterGuiService (ref), setRespawnBehaviorModule (ref)
-	starterGuiService:RegisterSetCore("ResetButtonCallback", function(p0)
+	starterGuiService:RegisterSetCore("ResetButtonCallback", function(p1)
 		-- upvalues: value (ref), setRespawnBehaviorModule (copy)
-		local var2 = true
-		local var3 = nil
+		local var1 = true
+		local var2 = nil
 		
-		if typeof(p0) == "boolean" then
-			var2 = p0
-			var3 = nil
-		elseif typeof(p0) == "Instance" and p0:IsA("BindableEvent") then
-			var2 = true
-			var3 = p0
+		if typeof(p1) == "boolean" then
+			var1 = p1
+			var2 = nil
+		elseif typeof(p1) == "Instance" and p1:IsA("BindableEvent") then
+			var1 = true
+			var2 = p1
 		else
 			error("ResetButtonCallback must be set to a BindableEvent or a boolean", 0)
 		end
-		value:dispatch(setRespawnBehaviorModule(var2, var3))
+		value:dispatch(setRespawnBehaviorModule(var1, var2))
 	end)
 end

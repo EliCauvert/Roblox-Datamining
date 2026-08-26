@@ -70,17 +70,17 @@
 	LayerCollector = { "Enabled", "ResetOnSpawn", "ZIndexBehavior" }
 }
 
-local function getProperty(p0, p1)
+local function getProperty(p1, p2)
 	local ok, status = pcall(function()
-		-- upvalues: p0 (ref), p1 (ref)
-		return p0[p1]
+		-- upvalues: p1 (ref), p2 (ref)
+		return p1[p2]
 	end)
 	
 	if not ok or status == nil then
 		return nil
 	end
-	local function _(p2)
-		return if p2 == 1e999 then "inf" elseif p2 == -1e999 then "-inf" else p2
+	local function _(p3)
+		return if p3 == 1e999 then "inf" elseif p3 == -1e999 then "-inf" else p3
 	end
 	
 	if typeof(status) == "Vector2" then
@@ -93,7 +93,7 @@ local function getProperty(p0, p1)
 	elseif typeof(status) == "Vector3" then
 		local t = {}
 		local x = status.X
-		local var4 = if x == 1e999 then "inf" elseif x == -1e999 then "-inf" else x
+		local var1 = if x == 1e999 then "inf" elseif x == -1e999 then "-inf" else x
 		local y = status.Y
 		local z = status.Z
 		-- Unknown statement at pc 5: <SetList>
@@ -104,9 +104,9 @@ local function getProperty(p0, p1)
 	elseif typeof(status) == "UDim2" then
 		local t = {}
 		local scale = status.X.Scale
-		local var6 = if scale == 1e999 then "inf" elseif scale == -1e999 then "-inf" else scale
+		local var2 = if scale == 1e999 then "inf" elseif scale == -1e999 then "-inf" else scale
 		local offset = status.X.Offset
-		local var7 = if offset == 1e999 then "inf" elseif offset == -1e999 then "-inf" else offset
+		local var3 = if offset == 1e999 then "inf" elseif offset == -1e999 then "-inf" else offset
 		local scale_1 = status.Y.Scale
 		local offset_1 = status.Y.Offset
 		-- Unknown statement at pc 7: <SetList>
@@ -115,9 +115,9 @@ local function getProperty(p0, p1)
 	elseif typeof(status) == "Rect" then
 		local t = {}
 		local x = status.Min.X
-		local var9 = if x == 1e999 then "inf" elseif x == -1e999 then "-inf" else x
+		local var4 = if x == 1e999 then "inf" elseif x == -1e999 then "-inf" else x
 		local y = status.Min.Y
-		local var10 = if y == 1e999 then "inf" elseif y == -1e999 then "-inf" else y
+		local var5 = if y == 1e999 then "inf" elseif y == -1e999 then "-inf" else y
 		local x_1 = status.Max.X
 		local y_1 = status.Max.Y
 		-- Unknown statement at pc 7: <SetList>
@@ -127,27 +127,27 @@ local function getProperty(p0, p1)
 	return if typeof(status) == "number" or typeof(status) == "boolean" then status else tostring(status)
 end
 
-return function(p3, p4)
+return function(p1, p2)
 	-- upvalues: t (ref), getProperty (ref)
-	if not p3 then
+	if not p1 then
 		return {}
 	end
-	local t_1 = { ClassName = p3.ClassName, Name = p3.Name }
+	local t_1 = { ClassName = p1.ClassName, Name = p1.Name }
 	
 	for i, v in t do
-		if p3:IsA(i) then
+		if p1:IsA(i) then
 			for i_1, v_1 in v do
-				if p4 == nil or table.find(p4, v_1) then
-					local var12 = getProperty(p3, v_1)
+				if p2 == nil or table.find(p2, v_1) then
+					local var1 = getProperty(p1, v_1)
 					
-					if var12 ~= nil then
-						t_1[v_1] = var12
+					if var1 ~= nil then
+						t_1[v_1] = var1
 					end
 				end
 			end
 		end
 	end
-	for i_1, v_1 in p3:GetTags() do
+	for i_1, v_1 in p1:GetTags() do
 		if string.sub(v_1, 1, 12) == "data-testid=" then
 			t_1.TestId = string.sub(v_1, 13)
 		end

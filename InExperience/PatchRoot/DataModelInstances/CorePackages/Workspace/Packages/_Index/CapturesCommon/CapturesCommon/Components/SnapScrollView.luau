@@ -11,75 +11,75 @@ local useEffect = reactModule.useEffect
 local useSnapScrollControllerModule = require(parent.Hooks.useSnapScrollController)
 local useState = reactModule.useState
 
-return function(p0)
+return function(p1)
 	-- upvalues: useState (ref), useSnapScrollControllerModule (ref), useCallback (ref), useEffect (ref), reactModule (ref), cryoModule (ref), view (ref)
-	local var4, var5 = useState(Vector2.new(0, 0))
-	local var6 = p0.active ~= nil or p0.active
-	local initialIndex = p0.initialIndex or 1
-	local itemAbsoluteSize = p0.itemAbsoluteSize or var4
-	local windowSize = p0.windowSize or 3
-	local var10, var11, var12, var13, var14 = useSnapScrollControllerModule(var6, initialIndex, itemAbsoluteSize, #p0.contents)
-	local var15 = useCallback(function(p1)
-		-- upvalues: var5 (ref)
-		var5(p1.AbsoluteSize)
+	local var1, var2 = useState(Vector2.new(0, 0))
+	local var3 = p1.active ~= nil or p1.active
+	local initialIndex = p1.initialIndex or 1
+	local itemAbsoluteSize = p1.itemAbsoluteSize or var1
+	local windowSize = p1.windowSize or 3
+	local var4, var5, var6, var7, var8 = useSnapScrollControllerModule(var3, initialIndex, itemAbsoluteSize, #p1.contents)
+	local var9 = useCallback(function(p2)
+		-- upvalues: var2 (ref)
+		var2(p2.AbsoluteSize)
 	end, {})
 	useEffect(function()
-		-- upvalues: p0 (ref), var10 (ref)
-		if p0.onIndexChanged then
-			p0.onIndexChanged(var10)
+		-- upvalues: p1 (ref), var4 (ref)
+		if p1.onIndexChanged then
+			p1.onIndexChanged(var4)
 		end
-	end, { var10, p0.onIndexChanged })
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p0 (ref), var10 (ref), windowSize (ref), reactModule (copy), view (copy), itemAbsoluteSize (ref)
-		return cryoModule.List.map(p0.contents, function(p2, p3)
-			-- upvalues: var10 (copy), windowSize (copy), reactModule (copy), view (copy), itemAbsoluteSize (copy), p0 (copy)
-			return if p3 < var10 - windowSize or var10 + windowSize < p3 then reactModule.createElement(view, {
+	end, { var4, p1.onIndexChanged })
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: cryoModule (copy), p1 (ref), var4 (ref), windowSize (ref), reactModule (copy), view (copy), itemAbsoluteSize (ref)
+		return cryoModule.List.map(p1.contents, function(p2, p3)
+			-- upvalues: var4 (copy), windowSize (copy), reactModule (copy), view (copy), itemAbsoluteSize (copy), p1 (copy)
+			return if p3 < var4 - windowSize or var4 + windowSize < p3 then reactModule.createElement(view, {
 				tag = "anchor-top-center bg-action-subtle position-top-center",
 				key = `PLACEHOLDER-{p3}`,
 				LayoutOrder = p3,
 				Size = UDim2.fromOffset(itemAbsoluteSize.X, itemAbsoluteSize.Y)
-			}) else p0.renderContent(p2, p3)
+			}) else p1.renderContent(p2, p3)
 		end)
 	end, {
-		var10,
+		var4,
 		itemAbsoluteSize,
-		p0.contents,
-		p0.renderContent,
+		p1.contents,
+		p1.renderContent,
 		windowSize
 	})
 	useEffect(function()
-		-- upvalues: p0 (ref), var13 (ref)
-		if p0.scrollToIndexSignal then
-			local scrollToIndexSignalConnection = p0.scrollToIndexSignal:connect(var13)
+		-- upvalues: p1 (ref), var7 (ref)
+		if p1.scrollToIndexSignal then
+			local scrollToIndexSignalConnection = p1.scrollToIndexSignal:connect(var7)
 			
 			return function()
 				-- upvalues: scrollToIndexSignalConnection (ref)
 				scrollToIndexSignalConnection:disconnect()
 			end
 		end
-	end, { p0.scrollToIndexSignal, var13 })
+	end, { p1.scrollToIndexSignal, var7 })
 	useEffect(function()
-		-- upvalues: p0 (ref), var14 (ref)
-		if p0.triggerNavigationSignal then
-			local triggerNavigationSignalConnection = p0.triggerNavigationSignal:connect(var14)
+		-- upvalues: p1 (ref), var8 (ref)
+		if p1.triggerNavigationSignal then
+			local triggerNavigationSignalConnection = p1.triggerNavigationSignal:connect(var8)
 			
 			return function()
 				-- upvalues: triggerNavigationSignalConnection (ref)
 				triggerNavigationSignalConnection:disconnect()
 			end
 		end
-	end, { p0.triggerNavigationSignal, var14 })
+	end, { p1.triggerNavigationSignal, var8 })
 	
 	return reactModule.createElement(view, {
 		tag = "anchor-top-center bg-action-subtle position-top-center size-full",
-		onAbsoluteSizeChanged = var15,
-		ref = var11
+		onAbsoluteSizeChanged = var9,
+		ref = var5
 	}, {
 		MotionView = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = "align-x-center anchor-top-center bg-action-subtle col no-clip position-top-center",
-			ref = var12,
-			Size = UDim2.fromScale(1, #p0.contents)
-		}, var16)
+			ref = var6,
+			Size = UDim2.fromScale(1, #p1.contents)
+		}, var10)
 	})
 end

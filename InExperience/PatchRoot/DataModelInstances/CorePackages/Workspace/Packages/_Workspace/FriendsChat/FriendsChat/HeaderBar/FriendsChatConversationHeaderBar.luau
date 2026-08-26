@@ -14,31 +14,31 @@ local buttonSize = foundationModule.Enums.ButtonSize
 local useTokens = foundationModule.Hooks.useTokens
 local name = expChatSharedModule.Logger:new(script.Name)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useChatWindowSettingsModule (ref), reactModule (ref), useInterpolatedClientSettingsModule (ref), name (ref), resolveFadeModule (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref), friendsChatFacePileModule (ref)
-	local var8 = useTokens()
-	local var9 = useChatWindowSettingsModule()
-	local chatWindowSettings = p0.chatWindowSettings
-	local var10 = useInterpolatedClientSettingsModule(chatWindowSettings or reactModule.useMemo(function()
-		-- upvalues: var9 (ref)
+	local var1 = useTokens()
+	local var2 = useChatWindowSettingsModule()
+	local chatWindowSettings = p1.chatWindowSettings
+	local var3 = useInterpolatedClientSettingsModule(chatWindowSettings or reactModule.useMemo(function()
+		-- upvalues: var2 (ref)
 		return {
-			BackgroundColor3 = var9.ChatWindowBackgroundColor3,
-			BackgroundTransparency = var9.ChatWindowBackgroundTransparency
+			BackgroundColor3 = var2.ChatWindowBackgroundColor3,
+			BackgroundTransparency = var2.ChatWindowBackgroundTransparency
 		}
-	end, { var9 }))
-	local var11 = if chatWindowSettings then chatWindowSettings.FontFace else nil
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: var11 (ref), var8 (ref)
-		if var11 == nil then
+	end, { var2 }))
+	local var4 = if chatWindowSettings then chatWindowSettings.FontFace else nil
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), var1 (ref)
+		if var4 == nil then
 			return nil
 		end
-		local cloned = table.clone(var8.Typography.TitleMedium)
-		cloned.Font = if typeof(var11) == "Font" then Font.new(var11.Family, Enum.FontWeight.Bold, var11.Style) else var11
+		local cloned = table.clone(var1.Typography.TitleMedium)
+		cloned.Font = if typeof(var4) == "Font" then Font.new(var4.Family, Enum.FontWeight.Bold, var4.Style) else var4
 		
 		return { title = cloned }
-	end, { var8, var11 })
-	local onBack = p0.onBack
-	local var13 = reactModule.useCallback(function()
+	end, { var1, var4 })
+	local onBack = p1.onBack
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: name (copy), onBack (ref)
 		name:info("Back button activated")
 		
@@ -46,40 +46,40 @@ return function(p0)
 			onBack()
 		end
 	end, { onBack })
-	local var14 = reactModule.useRef(nil)
+	local var7 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), p0 (ref)
-		local current = var14.current
+		-- upvalues: var7 (ref), p1 (ref)
+		local current = var7.current
 		
-		if current and p0.onAbsoluteSizeChanged then
-			p0.onAbsoluteSizeChanged(current)
+		if current and p1.onAbsoluteSizeChanged then
+			p1.onAbsoluteSizeChanged(current)
 		end
-	end, { p0.onAbsoluteSizeChanged })
+	end, { p1.onAbsoluteSizeChanged })
 	
 	return reactModule.createElement("Frame", {
 		Name = "FriendsChatConversationHeaderBar",
-		BackgroundColor3 = var10.BackgroundColor3 or var8.Color.Surface.Surface_0.Color3,
-		BackgroundTransparency = if p0.suppressBackground then 1 else resolveFadeModule(var10.BackgroundTransparency, p0.transparencyValue),
-		Active = p0.interactable == nil or p0.interactable,
+		BackgroundColor3 = var3.BackgroundColor3 or var1.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = if p1.suppressBackground then 1 else resolveFadeModule(var3.BackgroundTransparency, p1.transparencyValue),
+		Active = p1.interactable == nil or p1.interactable,
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
-		LayoutOrder = p0.layoutOrder,
-		ZIndex = p0.zIndex,
-		[reactModule.Change.AbsoluteSize] = p0.onAbsoluteSizeChanged,
-		[reactModule.Event.MouseEnter] = p0.onHovered,
-		[reactModule.Event.MouseLeave] = p0.onUnhovered,
-		ref = var14
+		LayoutOrder = p1.layoutOrder,
+		ZIndex = p1.zIndex,
+		[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged,
+		[reactModule.Event.MouseEnter] = p1.onHovered,
+		[reactModule.Event.MouseLeave] = p1.onUnhovered,
+		ref = var7
 	}, {
 		Content = reactModule.createElement("CanvasGroup", {
 			Name = "FriendsChatConversationHeaderContent",
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			GroupTransparency = resolveFadeModule(0, p0.transparencyValue),
+			GroupTransparency = resolveFadeModule(0, p1.transparencyValue),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0),
-			Interactable = p0.interactable,
-			ZIndex = p0.zIndex
+			Interactable = p1.interactable,
+			ZIndex = p1.zIndex
 		}, {
 			Row = reactModule.createElement(view, {
 				tag = "row align-y-center gap-small size-full-0 auto-y padding-x-small padding-y-small"
@@ -90,16 +90,16 @@ return function(p0)
 					icon = iconName.ChevronLargeLeft,
 					variant = buttonVariant.Utility,
 					size = buttonSize.XSmall,
-					onActivated = var13
+					onActivated = var6
 				}),
 				FacePileContainer = reactModule.createElement(view, { tag = "fill size-0-800", LayoutOrder = 2 }, {
 					FacePile = reactModule.createElement(friendsChatFacePileModule, {
-						participantUserIds = p0.participantUserIds,
-						localUserId = p0.localUserId,
-						titleText = p0.titleText,
-						titleStyle = if var12 then var12.title else nil,
-						onActivated = p0.onActivated,
-						selectable = if p0.onActivated ~= nil then nil else true
+						participantUserIds = p1.participantUserIds,
+						localUserId = p1.localUserId,
+						titleText = p1.titleText,
+						titleStyle = if var5 then var5.title else nil,
+						onActivated = p1.onActivated,
+						selectable = if p1.onActivated ~= nil then nil else true
 					})
 				})
 			})

@@ -7,7 +7,7 @@ local startupMessageModule = require(script.Parent.StartupMessage)
 
 return reactModule.memo(function()
 	-- upvalues: useStartupMessagePropsModule (ref), reactRobloxModule (ref), reactModule (ref), startupMessageModule (ref), coreGuiService (ref)
-	local var5 = useStartupMessagePropsModule()
+	local var1 = useStartupMessagePropsModule()
 	
 	return reactRobloxModule.createPortal({
 		reactModule.createElement("ScreenGui", {
@@ -17,7 +17,7 @@ return reactModule.memo(function()
 			DisplayOrder = 100,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
-			StartupMessage = var5.displayStartupMessage and reactModule.createElement(startupMessageModule, var5)
+			StartupMessage = var1.displayStartupMessage and reactModule.createElement(startupMessageModule, var1)
 		})
 	}, coreGuiService)
 end)

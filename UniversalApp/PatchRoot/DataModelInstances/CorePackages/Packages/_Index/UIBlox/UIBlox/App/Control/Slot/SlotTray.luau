@@ -13,7 +13,7 @@ local useStyleModule = require(core.Style.useStyle)
 local cursorKindModule = require(parent.SelectionImage.CursorKind)
 local useSelectionCursorModule = require(parent.SelectionImage.useSelectionCursor)
 local t = { dampingRatio = 1, frequency = 10 }
-local var10 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	slots = tModule.array(tModule.strictInterface({
 		displayText = tModule.optional(tModule.string),
 		thumbnail = tModule.optional(tModule.string),
@@ -36,20 +36,20 @@ local var10 = tModule.strictInterface({
 	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
 })
 
-local function useScrollingFrameMotor(p0, p1)
+local function useScrollingFrameMotor(p1, p2)
 	-- upvalues: reactModule (ref), otterModule (ref)
-	local var12 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(nil)
 	
-	if var12.current == nil then
-		var12.current = otterModule.createSingleMotor(p1 or 0)
+	if var2.current == nil then
+		var2.current = otterModule.createSingleMotor(p2 or 0)
 	end
-	local current = var12.current
+	local current = var2.current
 	reactModule.useEffect(function()
-		-- upvalues: current (ref), p0 (ref)
-		current:onStep(function(p2)
-			-- upvalues: p0 (copy)
-			if p0.current ~= nil then
-				p0.current.CanvasPosition = Vector2.new(p2, 0)
+		-- upvalues: current (ref), p1 (ref)
+		current:onStep(function(p3)
+			-- upvalues: p1 (copy)
+			if p1.current ~= nil then
+				p1.current.CanvasPosition = Vector2.new(p3, 0)
 			end
 		end)
 		
@@ -62,84 +62,84 @@ local function useScrollingFrameMotor(p0, p1)
 	return current
 end
 
-return function(p3)
-	-- upvalues: reactModule (ref), roactGamepadModule (ref), useScrollingFrameMotor (ref), otterModule (ref), t (ref), useStyleModule (ref), useSelectionCursorModule (ref), cursorKindModule (ref), var10 (ref), cryoModule (ref), focusable (ref), tileSlotModule (ref)
-	local var13 = p3.isRoactGamepadEnabled ~= nil or p3.isRoactGamepadEnabled
-	local var14 = if var13 then roactGamepadModule.useRefCache() else reactModule.useRef({}).current
-	local var15 = if p3.scrollingFrameRef then p3.scrollingFrameRef else reactModule.useRef(nil)
-	local width = p3.width or 360
-	local var17 = useScrollingFrameMotor(var15, 0)
-	local var18, var19 = reactModule.useState(p3.defaultSelectedSlotIndex or 1)
+return function(p1)
+	-- upvalues: reactModule (ref), roactGamepadModule (ref), useScrollingFrameMotor (ref), otterModule (ref), t (ref), useStyleModule (ref), useSelectionCursorModule (ref), cursorKindModule (ref), var1 (ref), cryoModule (ref), focusable (ref), tileSlotModule (ref)
+	local var2 = p1.isRoactGamepadEnabled ~= nil or p1.isRoactGamepadEnabled
+	local var3 = if var2 then roactGamepadModule.useRefCache() else reactModule.useRef({}).current
+	local var4 = if p1.scrollingFrameRef then p1.scrollingFrameRef else reactModule.useRef(nil)
+	local width = p1.width or 360
+	local var5 = useScrollingFrameMotor(var4, 0)
+	local var6, var7 = reactModule.useState(p1.defaultSelectedSlotIndex or 1)
 	reactModule.useEffect(function()
-		-- upvalues: var15 (write), var18 (ref), var14 (ref), width (ref), var17 (ref), otterModule (copy), t (copy)
-		local current = var15.current
+		-- upvalues: var4 (write), var6 (ref), var3 (ref), width (ref), var5 (ref), otterModule (copy), t (copy)
+		local current = var4.current
 		
-		if var18 == 0 or not current then return end
-		local current_1 = var14[var18] and var14[var18].current
+		if var6 == 0 or not current then return end
+		local current_1 = var3[var6] and var3[var6].current
 		
 		if not current_1 then return end
 		local x = current.CanvasPosition.X
 		local x_1 = current.AbsolutePosition.X
 		local x_2 = current_1.AbsolutePosition.X
-		local var26 = x + (x_2 + 48 + 24 - (x_1 + width))
-		local var27 = x + (x_2 - 24 - x_1)
+		local var8 = x + (x_2 + 48 + 24 - (x_1 + width))
+		local var9 = x + (x_2 - 24 - x_1)
 		
-		if x < var26 then
-			var17:setGoal(otterModule.spring(var26, t))
+		if x < var8 then
+			var5:setGoal(otterModule.spring(var8, t))
 			
 			return
-		elseif var27 < x then
-			var17:setGoal(otterModule.spring(var27, t))
+		elseif var9 < x then
+			var5:setGoal(otterModule.spring(var9, t))
 		end
 	end, {
-		var18,
+		var6,
 		width,
-		var14,
-		var15,
-		var17
+		var3,
+		var4,
+		var5
 	})
-	local var20 = reactModule.useCallback(function(p4)
-		-- upvalues: var19 (ref), p3 (ref)
-		var19(p4)
-		p3.onChange(p4)
-	end, { p3.onChange })
-	local var21 = #p3.slots * 48 + (#p3.slots - 1) * 12 + 48
-	local var22 = useStyleModule()
-	local var23 = useSelectionCursorModule(cursorKindModule.RoundedSlot)
-	assert(var10(p3))
-	local theme = var22.Theme
-	local var24 = cryoModule.List.map(p3.slots, function(p5, p6)
-		-- upvalues: var13 (ref), var14 (ref), reactModule (copy), focusable (copy), p3 (ref), var20 (ref), var23 (ref), tileSlotModule (copy), var18 (ref)
-		if not var13 then
-			var14[p6] = var14[p6] or reactModule.createRef()
+	local var8 = reactModule.useCallback(function(p2)
+		-- upvalues: var7 (ref), p1 (ref)
+		var7(p2)
+		p1.onChange(p2)
+	end, { p1.onChange })
+	local var9 = #p1.slots * 48 + (#p1.slots - 1) * 12 + 48
+	local var10 = useStyleModule()
+	local var11 = useSelectionCursorModule(cursorKindModule.RoundedSlot)
+	assert(var1(p1))
+	local theme = var10.Theme
+	local var12 = cryoModule.List.map(p1.slots, function(p2, p3)
+		-- upvalues: var2 (ref), var3 (ref), reactModule (copy), focusable (copy), p1 (ref), var8 (ref), var11 (ref), tileSlotModule (copy), var6 (ref)
+		if not var2 then
+			var3[p3] = var3[p3] or reactModule.createRef()
 		end
-		return reactModule.createElement(if var13 then focusable.Frame else "Frame", {
+		return reactModule.createElement(if var2 then focusable.Frame else "Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 2,
-			key = "Slot" .. tostring(p6),
-			LayoutOrder = p6,
+			key = "Slot" .. tostring(p3),
+			LayoutOrder = p3,
 			Size = UDim2.fromOffset(48, 48),
-			ref = var14[p6],
-			NextSelectionRight = if p6 < #p3.slots then var14[p6 + 1] else nil,
-			NextSelectionLeft = if p6 > 1 then var14[p6 - 1] else nil,
-			onFocusGained = if var13 then function()
-				-- upvalues: var20 (copy), p6 (ref)
-				var20(p6)
+			ref = var3[p3],
+			NextSelectionRight = if p3 < #p1.slots then var3[p3 + 1] else nil,
+			NextSelectionLeft = if p3 > 1 then var3[p3 - 1] else nil,
+			onFocusGained = if var2 then function()
+				-- upvalues: var8 (copy), p3 (ref)
+				var8(p3)
 			end else nil,
-			SelectionImageObject = var23
+			SelectionImageObject = var11
 		}, {
 			Slot = reactModule.createElement(tileSlotModule, {
-				isSelected = var18 == p6,
-				displayText = p5.displayText,
-				thumbnail = p5.thumbnail,
-				isLoading = p5.isLoading,
-				isDisabled = p5.isDisabled,
-				index = p6,
-				onActivated = var20
+				isSelected = var6 == p3,
+				displayText = p2.displayText,
+				thumbnail = p2.thumbnail,
+				isLoading = p2.isLoading,
+				isDisabled = p2.isDisabled,
+				index = p3,
+				onActivated = var8
 			})
 		})
 	end)
-	table.insert(var24, reactModule.createElement("UIListLayout", {
+	table.insert(var12, reactModule.createElement("UIListLayout", {
 		key = "Layout",
 		VerticalAlignment = Enum.VerticalAlignment.Center,
 		FillDirection = Enum.FillDirection.Horizontal,
@@ -148,9 +148,9 @@ return function(p3)
 		Padding = UDim.new(0, 12)
 	}))
 	
-	return reactModule.createElement(if var13 then focusable.ScrollingFrame else "ScrollingFrame", {
+	return reactModule.createElement(if var2 then focusable.ScrollingFrame else "ScrollingFrame", {
 		Size = UDim2.fromOffset(width, 72),
-		CanvasSize = UDim2.new(0, var21, 0, 72),
+		CanvasSize = UDim2.new(0, var9, 0, 72),
 		BackgroundTransparency = 1,
 		ScrollBarImageColor3 = theme.PlaceHolder.Color,
 		ScrollBarImageTransparency = theme.PlaceHolder.Transparency,
@@ -159,22 +159,22 @@ return function(p3)
 		ClipsDescendants = true,
 		ElasticBehavior = Enum.ElasticBehavior.Always,
 		ScrollingDirection = Enum.ScrollingDirection.X,
-		ref = var15,
-		[reactModule.Event.InputBegan] = p3.onInputBegan,
-		[reactModule.Event.InputEnded] = p3.onInputEnded,
-		onFocusChanged = if var13 then p3.onFocusChanged else nil,
-		inputBindings = if var13 then p3.inputBindings else nil,
-		NextSelectionDown = p3.NextSelectionDown,
-		NextSelectionUp = p3.NextSelectionUp,
-		NextSelectionLeft = p3.NextSelectionLeft,
-		NextSelectionRight = p3.NextSelectionRight,
-		defaultChild = if var13 then var14[1] else nil,
-		restorePreviousChildFocus = if var13 then true else nil
+		ref = var4,
+		[reactModule.Event.InputBegan] = p1.onInputBegan,
+		[reactModule.Event.InputEnded] = p1.onInputEnded,
+		onFocusChanged = if var2 then p1.onFocusChanged else nil,
+		inputBindings = if var2 then p1.inputBindings else nil,
+		NextSelectionDown = p1.NextSelectionDown,
+		NextSelectionUp = p1.NextSelectionUp,
+		NextSelectionLeft = p1.NextSelectionLeft,
+		NextSelectionRight = p1.NextSelectionRight,
+		defaultChild = if var2 then var3[1] else nil,
+		restorePreviousChildFocus = if var2 then true else nil
 	}, {
 		SlotContainer = reactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = if p3.darken then theme.Overlay.Color else theme.PlaceHolder.Color,
-			BackgroundTransparency = if p3.darken then theme.Overlay.Transparency else theme.PlaceHolder.Transparency
-		}, var24)
+			BackgroundColor3 = if p1.darken then theme.Overlay.Color else theme.PlaceHolder.Color,
+			BackgroundTransparency = if p1.darken then theme.Overlay.Transparency else theme.PlaceHolder.Transparency
+		}, var12)
 	})
 end

@@ -8,7 +8,7 @@ local marketplaceService = game:GetService("MarketplaceService")
 
 return function()
 	-- upvalues: promiseModule (ref), marketplaceService (ref), constantsModule (ref), getRobloxSubscriptionProductsModelModule (ref)
-	return promiseModule.new(function(p0, p1)
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: marketplaceService (copy), constantsModule (copy), getRobloxSubscriptionProductsModelModule (copy)
 		local ok, status = pcall(function()
 			-- upvalues: marketplaceService (copy), constantsModule (copy)
@@ -16,10 +16,10 @@ return function()
 		end)
 		
 		if ok then
-			p0(getRobloxSubscriptionProductsModelModule.format(status or {}))
+			p1(getRobloxSubscriptionProductsModelModule.format(status or {}))
 			
 			return
 		end
-		p1(tostring(status))
+		p2(tostring(status))
 	end)
 end

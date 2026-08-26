@@ -1,27 +1,27 @@
 ﻿local chatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: chatBubbleEnumModule (ref)
-	if p0 == chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE then
+	if p1 == chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE then
 		return {
-			topLeft = p2,
-			topRight = p2,
-			bottomLeft = p2,
-			bottomRight = p2
+			topLeft = p3,
+			topRight = p3,
+			bottomLeft = p3,
+			bottomRight = p3
 		}
 	end
-	local var1 = if p0 == chatBubbleEnumModule.BUBBLE_VARIANTS.TOP then p2 else 0
-	local var2 = if p0 == chatBubbleEnumModule.BUBBLE_VARIANTS.BOTTOM then p2 else 0
+	local var1 = if p1 == chatBubbleEnumModule.BUBBLE_VARIANTS.TOP then p3 else 0
+	local var2 = if p1 == chatBubbleEnumModule.BUBBLE_VARIANTS.BOTTOM then p3 else 0
 	
-	return if p1 then {
+	return if p2 then {
 		topLeft = var1,
-		topRight = p2,
+		topRight = p3,
 		bottomLeft = var2,
-		bottomRight = p2
+		bottomRight = p3
 	} else {
-		topLeft = p2,
+		topLeft = p3,
 		topRight = var1,
-		bottomLeft = p2,
+		bottomLeft = p3,
 		bottomRight = var2
 	}
 end

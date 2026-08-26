@@ -11,59 +11,59 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.checkIfAnimateNeeded(p0, p1)
-	return p1 ~= p0._currentGoal
+function t_1.checkIfAnimateNeeded(p1, p2)
+	return p2 ~= p1._currentGoal
 end
 
-function t_1.hideAndBlockAnimationUntilLookBackAgain(p2)
-	p2._ignoreAnimateShow = true
-	p2:animateHideIfNeeded(true)
+function t_1.hideAndBlockAnimationUntilLookBackAgain(p1)
+	p1._ignoreAnimateShow = true
+	p1:animateHideIfNeeded(true)
 end
 
-function t_1.animateHideIfNeeded(p3, p4)
+function t_1.animateHideIfNeeded(p1, p2)
 	-- upvalues: var1 (ref), t (ref)
-	if not p4 then
-		p3._ignoreAnimateShow = false
+	if not p2 then
+		p1._ignoreAnimateShow = false
 	end
-	if p3:checkIfAnimateNeeded(1) and (not p3._pendingHideAnimation or p3._pendingHideAnimation == var1) then
-		p3._currentGoal = 1
-		p3:animateToGoal(p3._currentGoal, t.Slower)
+	if p1:checkIfAnimateNeeded(1) and (not p1._pendingHideAnimation or p1._pendingHideAnimation == var1) then
+		p1._currentGoal = 1
+		p1:animateToGoal(p1._currentGoal, t.Slower)
 		
 		return
 	end
 end
 
-function t_1.animateShowIfNeeded(p5)
+function t_1.animateShowIfNeeded(p1)
 	-- upvalues: t (ref), var1 (ref)
-	if p5:checkIfAnimateNeeded(0) and not p5._ignoreAnimateShow then
-		p5:cancelPendingTaskIfNeeded()
-		p5._currentGoal = 0
-		p5:animateToGoal(p5._currentGoal, t.Default)
+	if p1:checkIfAnimateNeeded(0) and not p1._ignoreAnimateShow then
+		p1:cancelPendingTaskIfNeeded()
+		p1._currentGoal = 0
+		p1:animateToGoal(p1._currentGoal, t.Default)
 		local pendingHideAnimation = nil
 		
 		function p5._pendingHideAnimation()
-			-- upvalues: p5 (ref), pendingHideAnimation (write), var1 (copy), t (copy)
-			if p5._pendingHideAnimation == pendingHideAnimation then
-				p5._pendingHideAnimation = var1
-				p5:animateToGoal(1, t.Slower)
+			-- upvalues: p1 (ref), pendingHideAnimation (write), var1 (copy), t (copy)
+			if p1._pendingHideAnimation == pendingHideAnimation then
+				p1._pendingHideAnimation = var1
+				p1:animateToGoal(1, t.Slower)
 			end
 		end
 		
-		pendingHideAnimation = p5._pendingHideAnimation
-		task.delay(3, p5._pendingHideAnimation)
+		pendingHideAnimation = p1._pendingHideAnimation
+		task.delay(3, p1._pendingHideAnimation)
 		
 		return
 	end
 end
 
-function t_1.animateToGoal(p6, p7, p8)
+function t_1.animateToGoal(p1, p2, p3)
 	-- upvalues: otterModule (ref)
-	p6._fadeTransparencyMotor:stop()
-	p6._fadeTransparencyMotor:setGoal(otterModule.spring(p7, p8))
+	p1._fadeTransparencyMotor:stop()
+	p1._fadeTransparencyMotor:setGoal(otterModule.spring(p2, p3))
 end
 
-function t_1.isTargetVisible(p9)
-	return p9._targetInstance.GroupTransparency == 0
+function t_1.isTargetVisible(p1)
+	return p1._targetInstance.GroupTransparency == 0
 end
 
 function t_1.reset(value)
@@ -75,38 +75,38 @@ function t_1.reset(value)
 	value._visibilityObservable:set(true)
 end
 
-function t_1.cancelPendingTaskIfNeeded(p10)
+function t_1.cancelPendingTaskIfNeeded(p1)
 	-- upvalues: var1 (ref)
-	p10._pendingHideAnimation = var1
+	p1._pendingHideAnimation = var1
 end
 
-function t_1.create(p11, p12)
+function t_1.create(p1, p2)
 	-- upvalues: otterModule (ref), var1 (ref), t_1 (ref)
-	local var4 = nil
+	local var2 = nil
 	
-	for i, v in ipairs(p11:GetDescendants()) do
+	for i, v in ipairs(p1:GetDescendants()) do
 		if v.Name == "AnimatablePanelManagedContent" then
-			var4 = v
+			var2 = v
 			break
 		end
 	end
-	if var4 == nil then
+	if var2 == nil then
 		return nil
 	end
-	p12:set(var4.GroupTransparency == 0)
-	local var5 = otterModule.createSingleMotor(0)
-	var5:onStep(function(p13)
-		-- upvalues: var4 (write), p12 (ref)
-		var4.GroupTransparency = p13
-		p12:set(var4.GroupTransparency == 0)
+	p2:set(var2.GroupTransparency == 0)
+	local var3 = otterModule.createSingleMotor(0)
+	var3:onStep(function(p3)
+		-- upvalues: var2 (write), p2 (ref)
+		var2.GroupTransparency = p3
+		p2:set(var2.GroupTransparency == 0)
 	end)
 	local t = {
 		_currentGoal = -1,
 		_ignoreAnimateShow = false,
-		_targetInstance = var4,
-		_fadeTransparencyMotor = var5,
+		_targetInstance = var2,
+		_fadeTransparencyMotor = var3,
 		_pendingHideAnimation = var1,
-		_visibilityObservable = p12
+		_visibilityObservable = p2
 	}
 	setmetatable(t, t_1)
 	

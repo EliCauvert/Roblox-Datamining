@@ -22,26 +22,26 @@ carouselHeader.validateProps = tModule.strictInterface({
 })
 carouselHeader.defaultProps = { headerText = "", carouselMargin = 0 }
 
-function carouselHeader.render(p0)
+function carouselHeader.render(p1)
 	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), getIconSizeModule (ref), iconSizeModule (ref), roactModule (ref), interactableModule (ref), genericTextLabelModule (ref), imageSetComponentModule (ref), pushRightSmall (ref)
-	local headerText = p0.props.headerText
-	local onSeeAll = p0.props.onSeeAll
-	local layoutOrder = p0.props.layoutOrder
-	local carouselMargin = p0.props.carouselMargin
+	local headerText = p1.props.headerText
+	local onSeeAll = p1.props.onSeeAll
+	local layoutOrder = p1.props.layoutOrder
+	local carouselMargin = p1.props.carouselMargin
 	
-	return withStyleModule(function(p1)
+	return withStyleModule(function(p2)
 		-- upvalues: getTextSizeModule (copy), headerText (ref), getIconSizeModule (copy), iconSizeModule (copy), roactModule (copy), layoutOrder (ref), interactableModule (copy), carouselMargin (ref), onSeeAll (ref), genericTextLabelModule (copy), imageSetComponentModule (copy), pushRightSmall (copy)
-		local header1 = p1.Font.Header1
-		local var11 = getTextSizeModule(headerText, header1.RelativeSize * p1.Font.BaseSize, header1.Font, Vector2.new(10000, 10000))
+		local header1 = p2.Font.Header1
+		local var1 = getTextSizeModule(headerText, header1.RelativeSize * p2.Font.BaseSize, header1.Font, Vector2.new(10000, 10000))
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, var11.Y),
+			Size = UDim2.new(1, 0, 0, var1.Y),
 			LayoutOrder = layoutOrder
 		}, {
 			CarouselHeaderButton = roactModule.createElement(interactableModule, {
 				Position = UDim2.fromOffset(carouselMargin, 0),
-				Size = UDim2.fromOffset(var11.X + 4 + getIconSizeModule(iconSizeModule.Small), var11.Y),
+				Size = UDim2.fromOffset(var1.X + 4 + getIconSizeModule(iconSizeModule.Small), var1.Y),
 				AutoButtonColor = false,
 				BackgroundTransparency = 1,
 				[roactModule.Event.Activated] = onSeeAll,
@@ -60,15 +60,15 @@ function carouselHeader.render(p0)
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,
 					fontStyle = header1,
-					colorStyle = p1.Theme.TextEmphasis
+					colorStyle = p2.Theme.TextEmphasis
 				}),
 				SeeAllArrow = onSeeAll and roactModule.createElement(imageSetComponentModule.Label, {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					Size = UDim2.fromOffset(getIconSizeModule(iconSizeModule.Small), getIconSizeModule(iconSizeModule.Small)),
 					Image = pushRightSmall,
-					ImageColor3 = p1.Theme.TextEmphasis.Color,
-					ImageTransparency = p1.Theme.TextEmphasis.Transparency
+					ImageColor3 = p2.Theme.TextEmphasis.Color,
+					ImageTransparency = p2.Theme.TextEmphasis.Transparency
 				}) or nil
 			})
 		})

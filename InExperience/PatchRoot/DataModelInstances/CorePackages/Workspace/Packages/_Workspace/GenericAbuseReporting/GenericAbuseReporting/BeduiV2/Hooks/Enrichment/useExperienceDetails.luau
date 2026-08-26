@@ -2,7 +2,7 @@
 local dataHydrationModule = require(parent.DataHydration)
 local signalsReactModule = require(parent.SignalsReact)
 
-return function(p0)
+return function(p1)
 	-- upvalues: signalsReactModule (ref), dataHydrationModule (ref)
-	return signalsReactModule.useSignalState(dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(p0).data)
+	return signalsReactModule.useSignalState(dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(p1).data)
 end

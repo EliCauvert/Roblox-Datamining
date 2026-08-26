@@ -9,9 +9,9 @@ local t = {
 local _ = require(parent.GraphQL)
 local mergeDeep = require(parent.Utils).mergeDeep
 
-function t.mergeExtensions(p0)
+function t.mergeExtensions(p1)
 	-- upvalues: mergeDeep (ref)
-	return mergeDeep(p0)
+	return mergeDeep(p1)
 end
 
 local function applyExtensionObject(p1, p2)
@@ -31,38 +31,38 @@ function t.applyExtensions(p3, p4)
 	applyExtensionObject(p3, p4.schemaExtensions)
 	
 	for i, v in object.entries(if boolean.toJSBoolean(p4.types) then p4.types else {}) do
-		local var3 = v[2]
-		local var4 = p3:getType(v[1])
+		local var1 = v[2]
+		local var2 = p3:getType(v[1])
 		
-		if boolean.toJSBoolean(var4) then
-			applyExtensionObject(var4, var3.extensions)
+		if boolean.toJSBoolean(var2) then
+			applyExtensionObject(var2, var1.extensions)
 			
-			if var3.type == "object" or var3.type == "interface" then
-				for i_1, v_1 in object.entries(var3.fields) do
-					local var9 = v_1[2]
-					local var10 = var4:getFields():get(v_1[1])
+			if var1.type == "object" or var1.type == "interface" then
+				for i_1, v_1 in object.entries(var1.fields) do
+					local var3 = v_1[2]
+					local var4 = var2:getFields():get(v_1[1])
 					
-					if boolean.toJSBoolean(var10) then
-						applyExtensionObject(var10, var9.extensions)
+					if boolean.toJSBoolean(var4) then
+						applyExtensionObject(var4, var3.extensions)
 						
-						for i_3, v_4 in object.entries(var9.arguments) do
+						for i_3, v_4 in object.entries(var3.arguments) do
 							local unpacked, unpacked_1 = table.unpack(v_4, 1, 2)
-							applyExtensionObject(array.find(var10.args, function(p5)
+							applyExtensionObject(array.find(var4.args, function(p5)
 								-- upvalues: unpacked (ref)
 								return p5.name == unpacked
 							end), unpacked_1)
 						end
 					end
 				end
-			elseif var3.type == "input" then
-				for i_1, v_1 in object.entries(var3.fields) do
+			elseif var1.type == "input" then
+				for i_1, v_1 in object.entries(var1.fields) do
 					local unpacked, unpacked_1 = table.unpack(v_1, 1, 2)
-					applyExtensionObject(var4:getFields():get(unpacked), unpacked_1.extensions)
+					applyExtensionObject(var2:getFields():get(unpacked), unpacked_1.extensions)
 				end
-			elseif var3.type == "enum" then
-				for i_1, v_1 in object.entries(var3.values) do
+			elseif var1.type == "enum" then
+				for i_1, v_1 in object.entries(var1.values) do
 					local unpacked, unpacked_1 = table.unpack(v_1, 1, 2)
-					applyExtensionObject(var4:getValue(unpacked), unpacked_1)
+					applyExtensionObject(var2:getValue(unpacked), unpacked_1)
 				end
 			end
 		end

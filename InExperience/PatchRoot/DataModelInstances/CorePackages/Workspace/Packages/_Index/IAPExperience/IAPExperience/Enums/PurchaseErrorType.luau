@@ -31,7 +31,7 @@ local t = {
 	ExceedParentalSpendLimit = "ExceedParentalSpendLimit",
 	EconomicRestriction = "EconomicRestriction"
 }
-local var2 = require(parent_1.enumerate)(script.Name, t)
-addRawValueMethodToEnumModule(var2, t)
+local var1 = require(parent_1.enumerate)(script.Name, t)
+addRawValueMethodToEnumModule(var1, t)
 
-return var2
+return var1

@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
 	local pSLineFrame = {}
 	setmetatable(pSLineFrame, t)
@@ -12,7 +12,7 @@ function t.new(p0)
 	pSLineFrame._lineFrame = Instance.new("Frame")
 	pSLineFrame._lineFrame.Name = "PS_LineFrame"
 	pSLineFrame._lineFrame.BackgroundTransparency = 1
-	pSLineFrame._showExtras = p0
+	pSLineFrame._showExtras = p1
 	pSLineFrame._values = {}
 	pSLineFrame._bars = {}
 	pSLineFrame._average = 0
@@ -35,33 +35,33 @@ function t:SetZIndex(p1)
 	end
 end
 
-function t:PlaceInParent(p2, p3, p4)
-	self._barFrame.Position = p4
-	self._barFrame.Size = p3
-	self._barFrame.Parent = p2
-	self._lineFrame.Position = p4
-	self._lineFrame.Size = p3
-	self._lineFrame.Parent = p2
+function t:PlaceInParent(p1, p2, p3)
+	self._barFrame.Position = p3
+	self._barFrame.Size = p2
+	self._barFrame.Parent = p1
+	self._lineFrame.Position = p3
+	self._lineFrame.Size = p2
+	self._lineFrame.Parent = p1
 end
 
 function t:SetAxisMax(b)
 	self._axisMax = b
 end
 
-function t:SetValues(p5)
-	self._values = p5
+function t:SetValues(p1)
+	self._values = p1
 end
 
-function t:SetAverage(p6)
-	self._average = p6
+function t:SetAverage(p1)
+	self._average = p1
 end
 
-function t:SetTarget(p7)
-	self._target = p7
+function t:SetTarget(p1)
+	self._target = p1
 	self:_moveGraphTarget()
 end
 
-function t:_updateBarCount(p8)
+function t:_updateBarCount(p1)
 	local t = {}
 	local barsCount = #self._bars
 	
@@ -72,7 +72,7 @@ function t:_updateBarCount(p8)
 			self._bars[i].Destroy()
 		end
 	end
-	for i_1 = barsCount + 1, p8 do
+	for i_1 = barsCount + 1, p1 do
 		table.insert(t, self:_makeNthBar(i_1))
 	end
 	self._bars = t
@@ -139,9 +139,9 @@ function t:_moveGraphAverage()
 	self._averageLine.Position = UDim2.new(0, 0, (self._axisMax - math.min(self._average, self._axisMax)) / self._axisMax, -statsUtilsModule.GraphAverageLineTotalThickness / 2)
 end
 
-function t:_makeNthBar(p9)
+function t:_makeNthBar(p2)
 	local frame = Instance.new("Frame")
-	frame.Name = string.format("Bar_%d", p9 - 1)
+	frame.Name = string.format("Bar_%d", p2 - 1)
 	frame.Parent = self._barFrame
 	frame.ZIndex = self._barFrame.ZIndex
 	frame.BorderSizePixel = 0
@@ -149,13 +149,13 @@ function t:_makeNthBar(p9)
 	return frame
 end
 
-function t:_updateBar(p10, p11, p12)
+function t:_updateBar(p2, p3, p4)
 	-- upvalues: statsUtilsModule (ref)
-	local var9 = self._bars[p10]
-	local maxValue = math.max(0, math.min(p11, self._axisMax))
-	var9.Position = UDim2.new((p10 - 1) / p12, 0, (self._axisMax - maxValue) / self._axisMax, 0)
-	var9.Size = UDim2.new(1 / p12, 0, maxValue / self._axisMax, 0)
-	var9.BackgroundColor3 = statsUtilsModule.GetColorForValue(p11, self._target)
+	local var1 = self._bars[p2]
+	local maxValue = math.max(0, math.min(p3, self._axisMax))
+	var1.Position = UDim2.new((p2 - 1) / p4, 0, (self._axisMax - maxValue) / self._axisMax, 0)
+	var1.Size = UDim2.new(1 / p4, 0, maxValue / self._axisMax, 0)
+	var1.BackgroundColor3 = statsUtilsModule.GetColorForValue(p3, self._target)
 end
 
 return t

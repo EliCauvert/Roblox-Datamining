@@ -9,7 +9,7 @@ local tModule = require(parent.t)
 local flaggedMutedError = require(parent.Loggers).flaggedMutedError
 local _ = require(playerFeedback.Types)
 
-local function _(p0)
+local function _(p1)
 	return "luaapp.asset-review-api.channels" .. p0
 end
 
@@ -28,7 +28,7 @@ local _ = function(p1, p2)
 end
 
 local t_1 = {}
-local var7 = tModule.interface({
+local var1 = tModule.interface({
 	capabilities = tModule.interface({
 		can_submit_review = tModule.boolean,
 		can_submit_category_options = tModule.boolean,
@@ -54,27 +54,27 @@ local var7 = tModule.interface({
 })
 
 function t_1.Get(p3, _, p4, p5)
-	-- upvalues: performFetch (ref), gameGetPlayerFeedbackMetadataModule (ref), feedbackChannelModule (ref), var7 (ref), flaggedMutedError (ref), promiseModule (ref), t (ref)
+	-- upvalues: performFetch (ref), gameGetPlayerFeedbackMetadataModule (ref), feedbackChannelModule (ref), var1 (ref), flaggedMutedError (ref), promiseModule (ref), t (ref)
 	return performFetch.Single("luaapp.asset-review-api.channels" .. p4, function(_)
-		-- upvalues: gameGetPlayerFeedbackMetadataModule (copy), p3 (ref), feedbackChannelModule (copy), p4 (ref), var7 (copy), flaggedMutedError (copy), promiseModule (copy), t (copy), p5 (ref)
+		-- upvalues: gameGetPlayerFeedbackMetadataModule (copy), p3 (ref), feedbackChannelModule (copy), p4 (ref), var1 (copy), flaggedMutedError (copy), promiseModule (copy), t (copy), p5 (ref)
 		return gameGetPlayerFeedbackMetadataModule(p3, feedbackChannelModule.ExperienceDiscoveryPage, p4):andThen(function(p6)
-			-- upvalues: var7 (copy), flaggedMutedError (copy), promiseModule (copy), t (copy), p5 (copy), p4 (copy)
+			-- upvalues: var1 (copy), flaggedMutedError (copy), promiseModule (copy), t (copy), p5 (copy), p4 (copy)
 			local responseBody = p6 and p6.responseBody
-			local var9, var10 = var7(responseBody)
+			local var2, var3 = var1(responseBody)
 			
-			if not var9 then
-				flaggedMutedError("PlayerFeedbackMetadata", var10)
+			if not var2 then
+				flaggedMutedError("PlayerFeedbackMetadata", var3)
 				
 				return promiseModule.reject({ HttpError = Enum.HttpError.OK })
 			end
-			local var12
-			local var11 = t[p5]
+			local var4
+			local var5 = t[p5]
 			
 			for i, v in ipairs(responseBody.categories) do
-				if v.type == var11 then
-					var12 = v
-					if var12 == nil then
-						flaggedMutedError("PlayerFeedbackMetadata", string.format("Invalid category from player feedback metadata response: %s", var11))
+				if v.type == var5 then
+					var4 = v
+					if var4 == nil then
+						flaggedMutedError("PlayerFeedbackMetadata", string.format("Invalid category from player feedback metadata response: %s", var5))
 						
 						return promiseModule.reject({ HttpError = Enum.HttpError.OK })
 					end
@@ -82,14 +82,14 @@ function t_1.Get(p3, _, p4, p5)
 						rootPlaceId = p4,
 						canSubmitReview = responseBody.capabilities.can_submit_review,
 						canSubmitComment = responseBody.capabilities.can_submit_comment,
-						categoryType = var11,
-						category = var12,
+						categoryType = var5,
+						category = var4,
 						comment = responseBody.comment,
 						metadata = responseBody.metadata
 					})
 				end
 			end
-			var12 = nil
+			var4 = nil
 		end, function(p7)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.reject(p7)
@@ -97,9 +97,9 @@ function t_1.Get(p3, _, p4, p5)
 	end)
 end
 
-function t_1.GetFetchingStatus(p8, p9)
+function t_1.GetFetchingStatus(p6, p7)
 	-- upvalues: performFetch (ref)
-	return performFetch.GetStatus(p8, "luaapp.asset-review-api.channels" .. p9)
+	return performFetch.GetStatus(p6, "luaapp.asset-review-api.channels" .. p9)
 end
 
 return t_1

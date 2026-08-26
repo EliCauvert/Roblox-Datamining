@@ -31,120 +31,120 @@ searchBar.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function searchBar.init(p0)
+function searchBar.init(p1)
 	-- upvalues: roact (ref)
-	p0.textboxRef = roact.createRef()
+	p1.textboxRef = roact.createRef()
 	
-	function p0.onAbsoluteSizeChanged(p1)
-		-- upvalues: p0 (ref)
-		local var6 = false
+	function p0.onAbsoluteSizeChanged(p2)
+		-- upvalues: p1 (ref)
+		local var1 = false
 		
-		if p0.width ~= p1.AbsoluteSize.X then
-			p0.width = p1.AbsoluteSize.X
-			var6 = true
+		if p1.width ~= p2.AbsoluteSize.X then
+			p1.width = p2.AbsoluteSize.X
+			var1 = true
 		end
-		if p0.height ~= p1.AbsoluteSize.Y then
-			p0.height = p1.AbsoluteSize.Y
-			var6 = true
+		if p1.height ~= p2.AbsoluteSize.Y then
+			p1.height = p2.AbsoluteSize.Y
+			var1 = true
 		end
-		if var6 then
-			p0:setState({ width = p0.width - 2, height = p0.height - 2 })
+		if var1 then
+			p1:setState({ width = p1.width - 2, height = p1.height - 2 })
 		end
 	end
 	
 	function p0.searchTextChanged(p2)
-		-- upvalues: p0 (ref)
-		if p0.props.onTextChanged then
-			p0.props.onTextChanged(p2.Text)
+		-- upvalues: p1 (ref)
+		if p1.props.onTextChanged then
+			p1.props.onTextChanged(p2.Text)
 		end
 	end
 	
 	function p0.searchBoxFocused(_)
-		-- upvalues: p0 (ref)
-		if p0.props.onFocused then
-			p0.props.onFocused()
+		-- upvalues: p1 (ref)
+		if p1.props.onFocused then
+			p1.props.onFocused()
 		end
 	end
 	
 	function p0.searchCancel()
-		-- upvalues: p0 (ref)
-		if p0.props.onCancelled then
-			p0.props.onCancelled()
+		-- upvalues: p1 (ref)
+		if p1.props.onCancelled then
+			p1.props.onCancelled()
 		end
 	end
 	
 	function p0.onFocusLost()
-		-- upvalues: p0 (ref)
-		if p0.props.onFocusLost then
-			p0.props.onFocusLost()
+		-- upvalues: p1 (ref)
+		if p1.props.onFocusLost then
+			p1.props.onFocusLost()
 		end
 	end
 	
 	function p0.onTextboxTouchTap()
-		-- upvalues: p0 (ref)
-		if p0.props.onTextboxTouchTap then
-			p0.props.onTextboxTouchTap()
+		-- upvalues: p1 (ref)
+		if p1.props.onTextboxTouchTap then
+			p1.props.onTextboxTouchTap()
 		end
 	end
 end
 
-function searchBar.willUpdate(p3, p4)
-	if p3.props.autoCaptureFocus and p3.props.visible == false and p4.visible then
-		p3:focus()
+function searchBar.willUpdate(p1, p2)
+	if p1.props.autoCaptureFocus and p1.props.visible == false and p2.visible then
+		p1:focus()
 	end
 end
 
-function searchBar.didMount(p5)
-	if p5.props.autoCaptureFocus and p5.props.visible then
-		p5:focus()
+function searchBar.didMount(p1)
+	if p1.props.autoCaptureFocus and p1.props.visible then
+		p1:focus()
 	end
 end
 
-function searchBar.focus(p6)
-	if p6.textboxRef then
-		p6.textboxRef.current:CaptureFocus()
+function searchBar.focus(p1)
+	if p1.textboxRef then
+		p1.textboxRef.current:CaptureFocus()
 	end
 end
 
-function searchBar.render(p7)
+function searchBar.render(p1)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), withLocalizationModule (ref), roact (ref), userInputService (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), icon (ref), iconSize (ref), imageSetLabel (ref), images (ref)
-	return withFoundationOrUIBloxStyle(function(p8)
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				TextEmphasis = {
-					Color = p8.Color.Content.Emphasis.Color3,
-					Transparency = p8.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				TextDefault = {
-					Color = p8.Color.Content.Default.Color3,
-					Transparency = p8.Color.Content.Default.Transparency
+					Color = p2.Color.Content.Default.Color3,
+					Transparency = p2.Color.Content.Default.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				Body = {
-					Font = p8.Typography.BodyLarge.Font,
-					RelativeSize = p8.Typography.BodyLarge.FontSize
+					Font = p2.Typography.BodyLarge.Font,
+					RelativeSize = p2.Typography.BodyLarge.FontSize
 				}
 			}
 		}
-	end, function(p9)
-		-- upvalues: withLocalizationModule (copy), p7 (ref), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy)
+	end, function(p2)
+		-- upvalues: withLocalizationModule (copy), p1 (ref), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy)
 		return withLocalizationModule({
 			search = "CoreScripts.InGameMenu.InviteFriends.Search",
 			cancel = "CoreScripts.InGameMenu.Cancel"
-		})(function(p10)
-			-- upvalues: p9 (ref), p7 (copy), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy)
-			local body = p9.Font.Body
-			local body_1 = p9.Font.Body
+		})(function(p3)
+			-- upvalues: p2 (ref), p1 (copy), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy)
+			local body = p2.Font.Body
+			local body_1 = p2.Font.Body
 			
 			return roact.createElement("CanvasGroup", {
 				BackgroundTransparency = 1,
 				GroupTransparency = 0.5,
-				Size = p7.props.size,
-				ZIndex = p7.props.zIndex,
-				Visible = p7.props.visible,
-				[roact.Ref] = p7.props.forwardRef or roact.createRef()
+				Size = p1.props.size,
+				ZIndex = p1.props.zIndex,
+				Visible = p1.props.visible,
+				[roact.Ref] = p1.props.forwardRef or roact.createRef()
 			}, {
 				SearchPanelLayout = roact.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
@@ -157,12 +157,12 @@ function searchBar.render(p7)
 					Size = UDim2.new(1, -66, 0, 38),
 					BackgroundColor3 = Color3.new(136, 136, 136),
 					BackgroundTransparency = 0.8,
-					[roact.Change.AbsoluteSize] = p7.onAbsoluteSizeChanged
+					[roact.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged
 				}, {
 					BorderRadius = roact.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
 					SearchContainer = roact.createElement("Frame", {
 						BackgroundTransparency = 0,
-						Size = UDim2.fromOffset(p7.state.width, p7.state.height),
+						Size = UDim2.fromOffset(p1.state.width, p1.state.height),
 						BackgroundColor3 = Color3.new(0, 0, 0),
 						Position = UDim2.fromOffset(1, 1)
 					}, {
@@ -193,20 +193,20 @@ function searchBar.render(p7)
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, -28, 0, 20),
 							Font = body_1.Font,
-							Text = p7.props.text or "",
+							Text = p1.props.text or "",
 							TextInputType = if userInputService:GetPlatform() == Enum.Platform.Android then Enum.TextInputType.PasswordShown else Enum.TextInputType.NoSuggestions,
-							TextSize = p9.Font.BaseSize * body_1.RelativeSize,
-							TextColor3 = p9.Theme.TextEmphasis.Color,
+							TextSize = p2.Font.BaseSize * body_1.RelativeSize,
+							TextColor3 = p2.Theme.TextEmphasis.Color,
 							TextXAlignment = Enum.TextXAlignment.Left,
-							PlaceholderText = p10.search,
-							PlaceholderColor3 = p9.Theme.TextDefault.Color,
+							PlaceholderText = p3.search,
+							PlaceholderColor3 = p2.Theme.TextDefault.Color,
 							ClearTextOnFocus = false,
 							ClipsDescendants = true,
-							[roact.Change.Text] = p7.searchTextChanged,
-							[roact.Event.Focused] = p7.searchBoxFocused,
-							[roact.Event.FocusLost] = p7.onFocusLost,
-							[roact.Ref] = p7.textboxRef,
-							[roact.Event.TouchTap] = p7.onTextboxTouchTap
+							[roact.Change.Text] = p1.searchTextChanged,
+							[roact.Event.Focused] = p1.searchBoxFocused,
+							[roact.Event.FocusLost] = p1.onFocusLost,
+							[roact.Ref] = p1.textboxRef,
+							[roact.Event.TouchTap] = p1.onTextboxTouchTap
 						})
 					})
 				}),
@@ -215,17 +215,17 @@ function searchBar.render(p7)
 					BackgroundTransparency = 1,
 					Size = UDim2.fromOffset(57, 20),
 					Font = body.Font,
-					TextSize = p9.Font.BaseSize * body.RelativeSize,
-					Text = p10.cancel,
-					TextColor3 = p9.Theme.TextEmphasis.Color,
-					[roact.Event.Activated] = p7.searchCancel
+					TextSize = p2.Font.BaseSize * body.RelativeSize,
+					Text = p3.cancel,
+					TextColor3 = p2.Theme.TextEmphasis.Color,
+					[roact.Event.Activated] = p1.searchCancel
 				})
 			})
 		end)
 	end)
 end
 
-return roact.forwardRef(function(p11, p12)
+return roact.forwardRef(function(p1, p2)
 	-- upvalues: roact (ref), searchBar (ref), cryo (ref)
-	return roact.createElement(searchBar, cryo.Dictionary.join(p11, { forwardRef = p12 }))
+	return roact.createElement(searchBar, cryo.Dictionary.join(p1, { forwardRef = p2 }))
 end)

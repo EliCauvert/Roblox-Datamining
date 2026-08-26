@@ -7,7 +7,7 @@ local t = {
 	ItemTrade = "ItemTrade",
 	PasswordReset = "PasswordReset"
 }
-local var3 = require(genericChallenges.Parent.enumerate)(script.Name, t)
-addRawValueMethodToEnumModule(var3, t)
+local var1 = require(genericChallenges.Parent.enumerate)(script.Name, t)
+addRawValueMethodToEnumModule(var1, t)
 
-return var3
+return var1

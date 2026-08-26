@@ -139,47 +139,47 @@ local function collectTokens(p1, p2, p3, p4)
 	return t
 end
 
-local function collectTokensWithSubcategories(p1, p2, p3, p4)
+local function collectTokensWithSubcategories(p5, p6, p7, p8)
 	-- upvalues: collectTokens (ref)
 	local t = {}
 	
-	for i, v in p1 do
-		local var1
-		local var2 = if p3 then `{p3}.{i}` else i
+	for i, v in p5 do
+		local var2
+		local var3 = if p7 then `{p7}.{i}` else i
 		
 		if type(v) ~= "table" then
-			local var3 = if p3 then p3:split(".")[1] else "Default"
+			local var4 = if p7 then p7:split(".")[1] else "Default"
 			
-			if not t[var3] then
-				t[var3] = {}
+			if not t[var4] then
+				t[var4] = {}
 			end
-			table.insert(t[var3], { key = i, value = v, category = p2, fullPath = var2 })
+			table.insert(t[var4], { key = i, value = v, category = p6, fullPath = var3 })
 		end
-		if p4 then
-			var1 = type(v) == "table" and (v.Color3 ~= nil and (typeof(v.Color3) == "Color3" and (v.Transparency ~= nil and typeof(v.Transparency) == "number")))
+		if p8 then
+			var2 = type(v) == "table" and (v.Color3 ~= nil and (typeof(v.Color3) == "Color3" and (v.Transparency ~= nil and typeof(v.Transparency) == "number")))
 			
-			if var1 then
-				var1 = if p3 then p3:split(".")[1] else "Default"
+			if var2 then
+				var2 = if p7 then p7:split(".")[1] else "Default"
 				
-				if not t[var1] then
-					t[var1] = {}
+				if not t[var2] then
+					t[var2] = {}
 				end
-				table.insert(t[var1], { key = i, value = v, category = p2, fullPath = var2 })
-			elseif p3 then
-				var1 = collectTokens(v, p2, var2, p4)
-				local var4 = p3:split(".")[1]
+				table.insert(t[var2], { key = i, value = v, category = p6, fullPath = var3 })
+			elseif p7 then
+				var2 = collectTokens(v, p6, var3, p8)
+				local var5 = p7:split(".")[1]
 				
-				if not t[var4] then
-					t[var4] = {}
+				if not t[var5] then
+					t[var5] = {}
 				end
-				for i_1, v_1 in var1 do
-					table.insert(t[var4], v_1)
+				for i_1, v_1 in var2 do
+					table.insert(t[var5], v_1)
 				end
 			else
-				var1 = collectTokens(v, p2, i, p4)
+				var2 = collectTokens(v, p6, i, p8)
 				
-				if #var1 > 0 then
-					t[i] = var1
+				if #var2 > 0 then
+					t[i] = var2
 				end
 			end
 		end
@@ -187,19 +187,19 @@ local function collectTokensWithSubcategories(p1, p2, p3, p4)
 	return t
 end
 
-local function hasSubcategories(p1)
-	local var1
-	for i, v in p1 do
+local function hasSubcategories(p9)
+	local var6
+	for i, v in p9 do
 		if type(v) == "table" then
-			var1 = false
+			var6 = false
 			
 			for i_1, v_1 in v do
 				if type(v_1) == "table" or typeof(v_1) == "Color3" or typeof(v_1) == "number" then
-					var1 = true
+					var6 = true
 					break
 				end
 			end
-			if var1 then
+			if var6 then
 				return true
 			end
 		end
@@ -207,14 +207,14 @@ local function hasSubcategories(p1)
 	return false
 end
 
-local function sortTokens(p1, p2, p3)
-	if p1:find("(%u%a+)_(%d+)%.?(%u?%w*)") and p2:find("(%u%a+)_(%d+)%.?(%u?%w*)") then
-		local var1, var2, var3 = p1:match("(%u%a+)_(%d+)%.?(%u?%w*)")
-		local var4, var5, var6 = p2:match("(%u%a+)_(%d+)%.?(%u?%w*)")
+local function sortTokens(p10, p11, p12)
+	if p10:find("(%u%a+)_(%d+)%.?(%u?%w*)") and p11:find("(%u%a+)_(%d+)%.?(%u?%w*)") then
+		local var7, var8, var9 = p10:match("(%u%a+)_(%d+)%.?(%u?%w*)")
+		local var10, var11, var12 = p11:match("(%u%a+)_(%d+)%.?(%u?%w*)")
 		
-		return if var1 == var4 then if var2 == var5 then var3 < var6 else tonumber(var2) < tonumber(var5) else p1 < p2
+		return if var7 == var10 then if var8 == var11 then var9 < var12 else tonumber(var8) < tonumber(var11) else p10 < p11
 	end
-	return if p3 then tonumber(p1:match("| (%-?[%d.]+) |$")) < tonumber(p2:match("| (%-?[%d.]+) |$")) else p1 < p2
+	return if p12 then tonumber(p10:match("| (%-?[%d.]+) |$")) < tonumber(p11:match("| (%-?[%d.]+) |$")) else p10 < p11
 end
 
 local list = {
@@ -223,33 +223,33 @@ local list = {
 	"LightMode", "Config"
 }
 
-local function getTokenValue(p1, p2)
-	local var1 = p1
+local function getTokenValue(p10, p11)
+	local var7 = p10
 	
-	for i, v in string.split(p2, ".") do
-		if var1 ~= nil and type(var1) == "table" then
-			var1 = var1[v]
+	for i, v in string.split(p11, ".") do
+		if var7 ~= nil and type(var7) == "table" then
+			var7 = var7[v]
 			continue
 		end
 		return nil
 	end
-	return var1
+	return var7
 end
 
-local function tokenOverrideValuesCompatible(p1, p2)
+local function tokenOverrideValuesCompatible(p12, p13)
 	-- upvalues: tokenOverrideValuesCompatible (ref)
-	if p1 == nil or p2 == nil then
+	if p12 == nil or p13 == nil then
 		return false
-	elseif type(p1) ~= "table" or type(p2) ~= "table" then
-		return typeof(p1) == typeof(p2)
+	elseif type(p12) ~= "table" or type(p13) ~= "table" then
+		return typeof(p12) == typeof(p13)
 	end
-	for i, v in p1 do
-		if not tokenOverrideValuesCompatible(v, p2[i]) then
+	for i, v in p12 do
+		if not tokenOverrideValuesCompatible(v, p13[i]) then
 			return false
 		end
 	end
-	for i in p2 do
-		if p1[i] == nil then
+	for i in p13 do
+		if p12[i] == nil then
 			return false
 		end
 	end
@@ -267,68 +267,68 @@ return {
 	sortTokens = sortTokens,
 	orderedTokenCategories = list,
 	getTokenValue = getTokenValue,
-	setTokenValue = function(value, p1, p2)
-		local parts = string.split(p1, ".")
-		local var1 = value
+	setTokenValue = function(value, p14, p15)
+		local parts = string.split(p14, ".")
+		local var8 = value
 		
 		for i = 1, #parts - 1 do
-			local var2 = parts[i]
+			local var9 = parts[i]
 			
-			if var1[var2] ~= nil then
-				var1 = var1[var2]
+			if var8[var9] ~= nil then
+				var8 = var8[var9]
 				continue
 			end
 			return
 		end
-		local var3 = parts[#parts]
+		local var10 = parts[#parts]
 		
-		if var1 and var3 then
-			var1[var3] = p2
+		if var8 and var10 then
+			var8[var10] = p15
 		end
 	end,
-	resolveTokenOverride = function(p1, p2, p3)
+	resolveTokenOverride = function(p16, p17, p18)
 		-- upvalues: getTokenValue (ref), loggerModule (ref), tokenOverrideValuesCompatible (ref)
-		local var1
-		if type(p3) == "string" then
-			local var2 = getTokenValue(p1, p3)
+		local var11
+		if type(p18) == "string" then
+			local var12 = getTokenValue(p16, p18)
 			
-			if var2 == nil then
+			if var12 == nil then
 				loggerModule:warning(`Token override skipped: unknown source token path "{p27}"`)
-				var1 = nil
+				var11 = nil
 			else
-				var1 = var2
+				var11 = var12
 			end
 		else
-			var1 = p3
+			var11 = p18
 		end
-		if var1 == nil then
+		if var11 == nil then
 			return nil
 		end
-		local var3 = getTokenValue(p1, p2)
+		local var13 = getTokenValue(p16, p17)
 		
-		if var3 == nil then
+		if var13 == nil then
 			loggerModule:warning(`Token override skipped: unknown target token path "{p26}"`)
 			
 			return nil
-		elseif tokenOverrideValuesCompatible(var3, var1) then
-			return var1
+		elseif tokenOverrideValuesCompatible(var13, var11) then
+			return var11
 		end
 		loggerModule:warning(`Token override skipped: type or shape mismatch for "{p26}"`)
 		
 		return nil
 	end,
-	_resolveTokenOverrideSource = function(p1, p2)
+	_resolveTokenOverrideSource = function(p19, p20)
 		-- upvalues: getTokenValue (ref), loggerModule (ref)
-		if type(p2) ~= "string" then
-			return p2
+		if type(p20) ~= "string" then
+			return p20
 		end
-		local var1 = getTokenValue(p1, p2)
+		local var14 = getTokenValue(p19, p20)
 		
-		if var1 == nil then
+		if var14 == nil then
 			loggerModule:warning(`Token override skipped: unknown source token path "{p29}"`)
 			
 			return nil
 		end
-		return var1
+		return var14
 	end
 }

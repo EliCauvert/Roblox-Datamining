@@ -7,18 +7,18 @@ local t = {}
 local valueFromASTUntyped = require(parent.GraphQL).valueFromASTUntyped
 local _ = require(script.Parent.types)
 
-function t.getFieldsWithDirectives(p0, p1)
+function t.getFieldsWithDirectives(p1, p2)
 	-- upvalues: boolean (ref), array (ref), object (ref), valueFromASTUntyped (ref)
-	local var2 = if p1 ~= nil then {} else p1
+	local var1 = if p2 ~= nil then {} else p2
 	local t = {}
 	local list = { "ObjectTypeDefinition", "ObjectTypeExtension" }
 	
-	if boolean.toJSBoolean(var2.includeInputTypes) then
+	if boolean.toJSBoolean(var1.includeInputTypes) then
 		list = array.concat({}, list, { "InputObjectTypeDefinition", "InputObjectTypeExtension" })
 	end
-	for i, v in array.filter(p0.definitions, function(p2)
+	for i, v in array.filter(p1.definitions, function(p3)
 		-- upvalues: array (copy), list (write)
-		return array.includes(list, p2.kind)
+		return array.includes(list, p3.kind)
 	end) do
 		local value = v.name.value
 		

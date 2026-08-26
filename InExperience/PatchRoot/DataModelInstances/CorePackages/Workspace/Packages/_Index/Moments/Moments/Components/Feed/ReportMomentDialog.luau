@@ -20,80 +20,80 @@ local t = {
 	ipReportSubmittedTitle = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref), view (ref), text (ref), radioGroup (ref)
-	local var4 = useLocalization(t)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(false)
+	local var1 = useLocalization(t)
+	local var2, var3 = reactModule.useState(false)
+	local var4, var5 = reactModule.useState(false)
 	local safety, safety_1 = reactModule.useState("Safety")
-	local var11, var12 = reactModule.useState("------")
+	local var6, var7 = reactModule.useState("------")
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), safety_1 (ref), var6 (ref), var8 (ref), var12 (ref)
-		if p0.isOpen then
+		-- upvalues: p1 (ref), safety_1 (ref), var3 (ref), var5 (ref), var7 (ref)
+		if p1.isOpen then
 			safety_1("Safety")
-			var6(false)
-			var8(false)
-			var12("------")
+			var3(false)
+			var5(false)
+			var7("------")
 		end
-	end, { p0.isOpen })
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), safety (ref), var8 (ref), p0 (ref), var12 (ref), var6 (ref)
-		if var7 then return end
+	end, { p1.isOpen })
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref), safety (ref), var5 (ref), p1 (ref), var7 (ref), var3 (ref)
+		if var4 then return end
 		local isIntellectualProperty = safety == "IntellectualProperty"
-		var8(true)
+		var5(true)
 		
 		if not isIntellectualProperty then
-			var8(false)
-			p0.onClose()
+			var5(false)
+			p1.onClose()
 		end
 		task.spawn(function()
-			-- upvalues: p0 (copy), safety (ref), isIntellectualProperty (ref), var12 (copy), var6 (copy), var8 (copy)
-			local var17 = p0.onSubmitReport(safety, isIntellectualProperty)
+			-- upvalues: p1 (copy), safety (ref), isIntellectualProperty (ref), var7 (copy), var3 (copy), var5 (copy)
+			local var9 = p1.onSubmitReport(safety, isIntellectualProperty)
 			
 			if isIntellectualProperty then
-				var12(if var17 and var17 ~= "" then var17 else "------")
-				var6(true)
-				var8(false)
+				var7(if var9 and var9 ~= "" then var9 else "------")
+				var3(true)
+				var5(false)
 			end
 		end)
-	end, { var7, safety, p0.onClose, p0.onSubmitReport })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), p0 (ref)
-		if var7 then
+	end, { var4, safety, p1.onClose, p1.onSubmitReport })
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref), p1 (ref)
+		if var4 then
 			return
 		end
-		p0.onClose()
-	end, { var7, p0.onClose })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), p0 (ref)
-		var6(false)
-		p0.onClose()
-	end, { p0.onClose })
+		p1.onClose()
+	end, { var4, p1.onClose })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), p1 (ref)
+		var3(false)
+		p1.onClose()
+	end, { p1.onClose })
 	
-	return if var5 then reactModule.createElement(dialog.Root, {
+	return if var2 then reactModule.createElement(dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
-		onClose = var15,
+		onClose = var10,
 		size = foundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var4.ipReportSubmittedTitle }),
+		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.ipReportSubmittedTitle }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			ReportCodeContent = reactModule.createElement(view, { tag = "col align-x-center gap-small size-full-0 auto-y" }, {
 				ReportCodeLabel = reactModule.createElement(text, {
 					tag = "auto-xy text-title-medium text-align-x-center content-default",
 					LayoutOrder = 1,
-					Text = var4.ipReportCodeLabel
+					Text = var1.ipReportCodeLabel
 				}),
 				ReportCode = reactModule.createElement(text, {
 					tag = "auto-xy text-heading-medium text-align-x-center content-emphasis",
 					LayoutOrder = 2,
-					Text = var11
+					Text = var6
 				}),
 				ReportSubmittedBody = reactModule.createElement(text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
 					RichText = true,
 					LayoutOrder = 3,
-					Text = var4.ipReportSubmittedBody
+					Text = var1.ipReportSubmittedBody
 				})
 			})
 		}),
@@ -101,25 +101,25 @@ return function(p0)
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var4.ipReportSubmittedClose,
+					text = var1.ipReportSubmittedClose,
 					variant = foundationModule.Enums.ButtonVariant.Emphasis,
-					onActivated = var15
+					onActivated = var10
 				}
 			}
 		})
-	}) elseif p0.isOpen then reactModule.createElement(dialog.Root, {
+	}) elseif p1.isOpen then reactModule.createElement(dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
-		onClose = var14,
+		onClose = var9,
 		size = foundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var4.reportDialogTitle }),
+		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.reportDialogTitle }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			ReportReasons = reactModule.createElement(radioGroup.Root, { value = safety, onValueChanged = safety_1 }, {
-				BreaksRules = reactModule.createElement(radioGroup.Item, { value = "Safety", label = var4.reportReasonBreaksRules }),
+				BreaksRules = reactModule.createElement(radioGroup.Item, { value = "Safety", label = var1.reportReasonBreaksRules }),
 				IntellectualProperty = reactModule.createElement(radioGroup.Item, {
 					value = "IntellectualProperty",
-					label = var4.reportReasonIntellectualProperty
+					label = var1.reportReasonIntellectualProperty
 				})
 			})
 		}),
@@ -127,16 +127,16 @@ return function(p0)
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = if safety == "IntellectualProperty" then var4["continue"] else var4.report,
+					text = if safety == "IntellectualProperty" then var1["continue"] else var1.report,
 					variant = foundationModule.Enums.ButtonVariant.Emphasis,
-					onActivated = var13,
-					isDisabled = var7
+					onActivated = var8,
+					isDisabled = var4
 				},
 				{
-					text = var4.cancel,
+					text = var1.cancel,
 					variant = foundationModule.Enums.ButtonVariant.Standard,
-					onActivated = var14,
-					isDisabled = var7
+					onActivated = var9,
+					isDisabled = var4
 				}
 			}
 		})

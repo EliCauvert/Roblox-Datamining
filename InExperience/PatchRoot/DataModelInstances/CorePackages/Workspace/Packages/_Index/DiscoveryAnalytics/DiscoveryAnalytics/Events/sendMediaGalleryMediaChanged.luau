@@ -1,15 +1,15 @@
 ﻿local playersService = game:GetService("Players")
 
-return function(p0, p1, p2, p3, p4, p5, p6)
+return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
-	p0:setRBXEventStream(p1, "mediaGalleryMediaChanged", {
+	p1:setRBXEventStream(p2, "mediaGalleryMediaChanged", {
 		uid = if localPlayer then tostring(localPlayer.UserId) else "",
-		placeId = p6,
-		universeId = p3,
-		imageAssetId = p2.imageId,
-		videoAssetId = p2.videoId,
-		isYouTubeVideo = p5,
-		autoAdvance = p4
+		placeId = p7,
+		universeId = p4,
+		imageAssetId = p3.imageId,
+		videoAssetId = p3.videoId,
+		isYouTubeVideo = p6,
+		autoAdvance = p5
 	})
 end

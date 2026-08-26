@@ -1,9 +1,9 @@
-﻿return function(p0)
-	if not p0 then
+﻿return function(p1)
+	if not p1 then
 		return false
 	end
-	local eligibleOffers = p0.EligibleOffers
-	local var0 = eligibleOffers and eligibleOffers[1]
+	local eligibleOffers = p1.EligibleOffers
+	local var1 = eligibleOffers and eligibleOffers[1]
 	
-	return var0 ~= nil and var0.OfferType == "FreeTrial"
+	return var1 ~= nil and var1.OfferType == "FreeTrial"
 end

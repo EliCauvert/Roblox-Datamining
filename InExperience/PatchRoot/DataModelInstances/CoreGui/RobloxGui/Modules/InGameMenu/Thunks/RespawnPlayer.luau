@@ -6,9 +6,9 @@ local setRespawningModule = require(parent.Actions.SetRespawning)
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 local constantsModule = require(parent.Resources.Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: avatarEditorService (ref), playersService (ref), setRespawningModule (ref), closeMenuModule (ref), sendAnalyticsModule (ref), constantsModule (ref)
-	local state = p0:getState()
+	local state = p1:getState()
 	
 	if state.respawn.enabled then
 		avatarEditorService:BustAvatarFetchCache()
@@ -27,7 +27,7 @@ return function(p0)
 			end
 		end
 	end
-	p0:dispatch(setRespawningModule(false))
-	p0:dispatch(closeMenuModule)
+	p1:dispatch(setRespawningModule(false))
+	p1:dispatch(closeMenuModule)
 	sendAnalyticsModule(constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsRespawnCharacterName, { confirmed = constantsModule.AnalyticsConfirmedName })
 end

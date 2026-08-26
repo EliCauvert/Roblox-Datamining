@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	return if p0 and p0 ~= "" then string.find(string.lower(p1), string.lower(p0), 1, true) ~= nil else true
+﻿return function(p1, p2)
+	return if p1 and p1 ~= "" then string.find(string.lower(p2), string.lower(p1), 1, true) ~= nil else true
 end

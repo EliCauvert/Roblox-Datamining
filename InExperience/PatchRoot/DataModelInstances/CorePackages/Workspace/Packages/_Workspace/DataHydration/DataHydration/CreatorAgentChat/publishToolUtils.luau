@@ -19,8 +19,8 @@ local t_1 = {
 	studio_save_and_publish = true
 }
 
-local function _(p0)
-	return string.lower(string.gsub(p0, "[_%-%s]", ""))
+local function _(p1)
+	return string.lower(string.gsub(p1, "[_%-%s]", ""))
 end
 
 local _ = function(p1)
@@ -30,33 +30,33 @@ local _ = function(p1)
 	return if t[lowerText] then true else string.find(lowerText, "publishplace", 1, true) ~= nil
 end
 
-i = function(p2)
+i = function(p1)
 	-- upvalues: t (ref)
-	local var11 = false
+	local var1 = false
 	
-	if typeof(p2) == "string" then
-		var11 = false
+	if typeof(p1) == "string" then
+		var1 = false
 		
-		if p2 ~= "" then
-			local lowerText = string.lower(string.gsub(p2, "[_%-%s]", ""))
+		if p1 ~= "" then
+			local lowerText = string.lower(string.gsub(p1, "[_%-%s]", ""))
 			
 			if t[lowerText] then
 				return true
 			end
-			var11 = string.find(lowerText, "publishplace", 1, true) ~= nil
+			var1 = string.find(lowerText, "publishplace", 1, true) ~= nil
 		end
 	end
-	return var11
+	return var1
 end
 
-local _ = function(p3)
+local _ = function(p1)
 	-- upvalues: t_1 (ref)
-	return typeof(p3) == "string" and t_1[string.lower(p3)] == true
+	return typeof(p1) == "string" and t_1[string.lower(p1)] == true
 end
 
-local function toolCallMatchesPublishPlace(p4)
+local function toolCallMatchesPublishPlace(p1)
 	-- upvalues: t (ref)
-	local kind = p4.kind
+	local kind = p1.kind
 	local rawInput = false
 	
 	if typeof(kind) == "string" then
@@ -68,7 +68,7 @@ local function toolCallMatchesPublishPlace(p4)
 		end
 	end
 	if not rawInput then
-		local title = p4.title
+		local title = p1.title
 		rawInput = false
 		
 		if typeof(title) == "string" then
@@ -82,7 +82,7 @@ local function toolCallMatchesPublishPlace(p4)
 		if rawInput then
 			return true
 		end
-		rawInput = p4.rawInput
+		rawInput = p1.rawInput
 		
 		if typeof(rawInput) ~= "table" then
 			return false
@@ -94,18 +94,18 @@ local function toolCallMatchesPublishPlace(p4)
 			"command",
 			"toolName"
 		} do
-			local var15 = rawInput[v]
-			local var16 = false
+			local var1 = rawInput[v]
+			local var2 = false
 			
-			if typeof(var15) == "string" then
-				var16 = false
+			if typeof(var1) == "string" then
+				var2 = false
 				
-				if var15 ~= "" then
-					local lowerText = string.lower(string.gsub(var15, "[_%-%s]", ""))
-					var16 = if t[lowerText] then true else string.find(lowerText, "publishplace", 1, true) ~= nil
+				if var1 ~= "" then
+					local lowerText = string.lower(string.gsub(var1, "[_%-%s]", ""))
+					var2 = if t[lowerText] then true else string.find(lowerText, "publishplace", 1, true) ~= nil
 				end
 			end
-			if var16 then
+			if var2 then
 				return true
 			end
 		end
@@ -113,17 +113,17 @@ local function toolCallMatchesPublishPlace(p4)
 	end
 end
 
-local function isSaveAndPublishToolCall(p5)
+local function isSaveAndPublishToolCall(p2)
 	-- upvalues: t_1 (ref)
-	local title = p5.title
+	local title = p2.title
 	
 	if not (typeof(title) ~= "string" and t_1[string.lower(title)] == true) then
-		title = p5.kind
+		title = p2.kind
 		
 		if typeof(title) ~= "string" and t_1[string.lower(title)] == true then
 			return true
 		end
-		local rawInput = p5.rawInput
+		local rawInput = p2.rawInput
 		
 		if typeof(rawInput) ~= "table" then
 			return false
@@ -135,9 +135,9 @@ local function isSaveAndPublishToolCall(p5)
 			"command",
 			"toolName"
 		} do
-			local var18 = rawInput[v]
+			local var3 = rawInput[v]
 			
-			if typeof(var18) ~= "string" and t_1[string.lower(var18)] == true then
+			if typeof(var3) ~= "string" and t_1[string.lower(var3)] == true then
 				return true
 			end
 		end
@@ -145,9 +145,9 @@ local function isSaveAndPublishToolCall(p5)
 	end
 end
 
-local function includesPublishPlaceTool(p6)
+local function includesPublishPlaceTool(p3)
 	-- upvalues: toolCallMatchesPublishPlace (ref)
-	for i, v in p6.toolCalls do
+	for i, v in p3.toolCalls do
 		if v.status ~= "failed" and toolCallMatchesPublishPlace(v) then
 			return true
 		end
@@ -155,8 +155,8 @@ local function includesPublishPlaceTool(p6)
 	return false
 end
 
-local _ = function(p7)
-	local match = string.match(p7, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
+local _ = function(p4)
+	local match = string.match(p4, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
 	
 	return if match == nil then nil else tonumber(match)
 end
@@ -168,20 +168,20 @@ local _ = function(value)
 	return if not (not ok or typeof(status) ~= "table") then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
 end
 
-local function getToolCallPublishedVersionNumber(p8)
+local function getToolCallPublishedVersionNumber(p4)
 	-- upvalues: httpService (ref), fFlagCreatorAgentChatParseDirectPublishVersion (ref)
-	local content = p8.content
+	local content = p4.content
 	
 	if typeof(content) ~= "table" then
 		return nil
 	end
 	for i, v in content do
-		local var20 = if typeof(v.content) == "table" then v.content.text else v.text
+		local var4 = if typeof(v.content) == "table" then v.content.text else v.text
 		
-		if typeof(var20) == "string" then
-			local ok, status = pcall(httpService.JSONDecode, httpService, var20)
-			local var21 = if not ok or typeof(status) ~= "table" then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
-			ok = if var21 ~= nil then if fFlagCreatorAgentChatParseDirectPublishVersion then var20 else nil else var21.text
+		if typeof(var4) == "string" then
+			local ok, status = pcall(httpService.JSONDecode, httpService, var4)
+			local var5 = if not ok or typeof(status) ~= "table" then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
+			ok = if var5 ~= nil then if fFlagCreatorAgentChatParseDirectPublishVersion then var4 else nil else var5.text
 			
 			if ok ~= nil then
 				local match = string.match(ok, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
@@ -200,22 +200,22 @@ return {
 	PUBLISH_PLACE_TOOL_IDENTIFIERS = list,
 	includesPublishPlaceTool = includesPublishPlaceTool,
 	toolCallMatchesPublishPlace = toolCallMatchesPublishPlace,
-	getLatestSuccessfulResult = function(p9)
+	getLatestSuccessfulResult = function(p5)
 		-- upvalues: isSaveAndPublishToolCall (ref), getToolCallPublishedVersionNumber (ref), fFlagCreatorAgentChatParseDirectPublishVersion (ref), debugModule (ref)
-		if p9 == nil then
+		if p5 == nil then
 			return nil
 		end
 		local t = nil
 		
-		for i, v in p9.toolCalls do
+		for i, v in p5.toolCalls do
 			if v.status == "completed" and isSaveAndPublishToolCall(v) then
-				local var24 = getToolCallPublishedVersionNumber(v)
+				local var6 = getToolCallPublishedVersionNumber(v)
 				
-				if var24 ~= nil then
+				if var6 ~= nil then
 					t = {
 						toolCallId = i,
-						publishedVersionNumber = var24,
-						rollbackTargetVersionNumber = if var24 > 1 then var24 - 1 else nil
+						publishedVersionNumber = var6,
+						rollbackTargetVersionNumber = if var6 > 1 then var6 - 1 else nil
 					}
 				elseif fFlagCreatorAgentChatParseDirectPublishVersion then
 					debugModule.log("warn", "completed save_and_publish result is not parseable", {

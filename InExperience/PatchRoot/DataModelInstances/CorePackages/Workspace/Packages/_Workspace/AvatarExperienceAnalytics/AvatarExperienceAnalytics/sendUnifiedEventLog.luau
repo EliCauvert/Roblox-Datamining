@@ -8,13 +8,13 @@ local fFlagAXSendUnifiedEventLogWithInstance = avatarExperienceFlagsModule.FFlag
 local fFlagAXDebugPanelImpressed = avatarExperienceFlagsModule.FFlagAXDebugPanelImpressed
 local AXSendUnifiedEventsInStudio = game:DefineFastFlag("AXSendUnifiedEventsInStudio", false)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: fFlagAXDebugPanelImpressed (ref), debugPanelModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref), unifiedEventLogConstantsModule (ref), isRunningInStudio (ref), AXSendUnifiedEventsInStudio (ref), analyticsServiceModule (ref)
 	if fFlagAXDebugPanelImpressed then
 		debugPanelModule.AnalyticsFeed.notify({
 			feedId = "ax.marketplaceLogging",
-			fields = p0,
-			instance = if fFlagAXSendUnifiedEventLogWithInstance then p1 else nil,
+			fields = p1,
+			instance = if fFlagAXSendUnifiedEventLogWithInstance then p2 else nil,
 			eventName = unifiedEventLogConstantsModule.EVENT_NAME,
 			ctx = unifiedEventLogConstantsModule.EVENT_NAME
 		})
@@ -22,5 +22,5 @@ return function(p0, p1)
 	if isRunningInStudio() and not AXSendUnifiedEventsInStudio then
 		return
 	end
-	analyticsServiceModule.EventStream:sendTelemetryEvent(unifiedEventLogConstantsModule.EVENT_NAME, unifiedEventLogConstantsModule.EVENT_NAME, p0)
+	analyticsServiceModule.EventStream:sendTelemetryEvent(unifiedEventLogConstantsModule.EVENT_NAME, unifiedEventLogConstantsModule.EVENT_NAME, p1)
 end

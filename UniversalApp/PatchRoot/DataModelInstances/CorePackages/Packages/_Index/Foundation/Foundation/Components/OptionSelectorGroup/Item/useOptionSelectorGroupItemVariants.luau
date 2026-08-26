@@ -10,15 +10,15 @@ local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(foundation.Components.Types)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function legacyVariantsFactory(p0)
+local function legacyVariantsFactory(p1)
 	-- upvalues: flagsModule (ref), inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
 			container = {
 				tag = "col wrap align-x-left align-y-center gap-xsmall radius-medium",
-				radius = p0.Radius.Medium
+				radius = p1.Radius.Medium
 			},
-			content = p0.Color.Content.Default,
+			content = p1.Color.Content.Default,
 			itemInner = if flagsModule.FoundationOptionSelectorGroupFixes then nil else { tag = "col gap-xsmall size-full-0 auto-y" },
 			header = { tag = "row align-y-center gap-small size-full-0 auto-y" },
 			label = { tag = "fill auto-xy" },
@@ -151,24 +151,24 @@ local function groupSizeVariantsFactory(p1)
 	}
 end
 
-local function variantsFactory(p2)
+local function variantsFactory(p1)
 	-- upvalues: legacyVariantsFactory (ref), groupSizeVariantsFactory (ref)
 	return {
-		legacy = legacyVariantsFactory(p2),
-		groupSize = groupSizeVariantsFactory(p2)
+		legacy = legacyVariantsFactory(p1),
+		groupSize = groupSizeVariantsFactory(p1)
 	}
 end
 
-return function(p3, p4, p5, p6, p7)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), orientationModule (ref), fillBehaviorModule (ref), composeStyleVariantModule (ref)
-	local optionSelectorGroupItem = variantsContextModule.useVariants("OptionSelectorGroupItem", variantsFactory, p3)
+	local optionSelectorGroupItem = variantsContextModule.useVariants("OptionSelectorGroupItem", variantsFactory, p1)
 	
 	if flagsModule.FoundationOptionSelectorGroupBeta then
 		local groupSize = optionSelectorGroupItem.groupSize
 		
-		return composeStyleVariantModule(groupSize.common, groupSize.sizes[p4], if p5 == orientationModule.Horizontal then groupSize.layouts.Inline elseif p5 == orientationModule.Vertical and p6 == fillBehaviorModule.Fit then groupSize.layouts.StackedFit else groupSize.layouts.StackedFill, groupSize.selection[p7 == true])
+		return composeStyleVariantModule(groupSize.common, groupSize.sizes[p2], if p3 == orientationModule.Horizontal then groupSize.layouts.Inline elseif p3 == orientationModule.Vertical and p4 == fillBehaviorModule.Fit then groupSize.layouts.StackedFit else groupSize.layouts.StackedFill, groupSize.selection[p5 == true])
 	end
 	local legacy = optionSelectorGroupItem.legacy
 	
-	return if flagsModule.FoundationOptionSelectorGroupFixes then composeStyleVariantModule(legacy.common, legacy.sizes[p4], if p5 == orientationModule.Horizontal then legacy.layouts.Inline elseif p5 == orientationModule.Vertical and p6 == fillBehaviorModule.Fit then legacy.layouts.StackedFit else legacy.layouts.StackedFill) else composeStyleVariantModule(legacy.common, legacy.sizes[p4])
+	return if flagsModule.FoundationOptionSelectorGroupFixes then composeStyleVariantModule(legacy.common, legacy.sizes[p2], if p3 == orientationModule.Horizontal then legacy.layouts.Inline elseif p3 == orientationModule.Vertical and p4 == fillBehaviorModule.Fit then legacy.layouts.StackedFit else legacy.layouts.StackedFill) else composeStyleVariantModule(legacy.common, legacy.sizes[p2])
 end

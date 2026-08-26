@@ -25,31 +25,31 @@ local function getSplitPoint(p1, p2)
 	return -1, -1
 end
 
-local function _(p1, p2, p3, p4, p5, p6)
-	local var1 = nil
+local function _(p3, p4, p5, p6, p7, p8)
+	local var2 = nil
 	local _ = nil
 	
-	if p5 then
-		return var1, p3
-	elseif p3.canForceSplit and p6 then
-		local var2, var3 = p3:split(p4, true)
+	if p7 then
+		return var2, p5
+	elseif p5.canForceSplit and p8 then
+		local var3, var4 = p5:split(p6, true)
 		
-		return var2, var3
+		return var3, var4
 	end
-	var1 = p1
+	var2 = p3
 	
-	return var1, p2
+	return var2, p4
 end
 
-function t.new(p1, p2, p3, p4)
+function t.new(p3, p4, p5, p6)
 	-- upvalues: t (ref), isInlineElementModule (ref), hardBreakElementModule (ref)
 	local tbl = setmetatable({}, t)
-	tbl.WrapperElement = p1
-	tbl.wrapperElementProps = p2
+	tbl.WrapperElement = p3
+	tbl.wrapperElementProps = p4
 	tbl.Elements = {}
-	tbl.startingIndex = p4 or 1
+	tbl.startingIndex = p6 or 1
 	
-	for i, v in p3 do
+	for i, v in p5 do
 		if isInlineElementModule(v) and v ~= hardBreakElementModule then
 			table.insert(tbl.Elements, v)
 		else
@@ -66,77 +66,77 @@ end
 
 function t:getWidth()
 	-- upvalues: dashModule (ref)
-	return dashModule.sum(dashModule.map(self.Elements, function(p1)
-		return p1:getWidth()
+	return dashModule.sum(dashModule.map(self.Elements, function(p7)
+		return p7:getWidth()
 	end))
 end
 
-function t:_splitChildAtIndex(p1, p2)
-	local var1, var2 = self.Elements[p1]:split(p2, false)
+function t:_splitChildAtIndex(p7, p8)
+	local var2, var3 = self.Elements[p7]:split(p8, false)
 	
-	return var1, var2, var1:getWidth() <= p2
+	return var2, var3, var2:getWidth() <= p8
 end
 
-function t:split(p1, p2)
+function t:split(p7, p8)
 	-- upvalues: getSplitPoint (ref), t (ref)
 	local t_1 = {}
 	local t_2 = {}
-	local var1, var2 = getSplitPoint(self.Elements, p1)
+	local var2, var3 = getSplitPoint(self.Elements, p7)
 	
-	if var1 == -1 then
+	if var2 == -1 then
 		return self, nil
 	end
-	local var3 = var1 + 1
-	local var4, var5, var6 = self:_splitChildAtIndex(var1, var2)
+	local var4 = var2 + 1
+	local var5, var6, var7 = self:_splitChildAtIndex(var2, var3)
 	
-	if not var6 then
-		local var7
-		local var8 = var4
+	if not var7 then
+		local var8
 		local var9 = var5
-		local var10 = self.Elements[var1]
-		local var11 = var1 > 1
-		local var12 = nil
+		local var10 = var6
+		local var11 = self.Elements[var2]
+		local var12 = var2 > 1
+		local var13 = nil
 		local _ = nil
 		
-		if var11 then
-			var7 = var10
-		elseif var10.canForceSplit and p2 then
-			local var13, var14 = var10:split(var2, true)
-			var12 = var13
-			var7 = var14
+		if var12 then
+			var8 = var11
+		elseif var11.canForceSplit and p8 then
+			local var14, var15 = var11:split(var3, true)
+			var13 = var14
+			var8 = var15
 		else
-			var12 = var8
-			var7 = var9
+			var13 = var9
+			var8 = var10
 		end
-		var4 = var12
-		var5 = var7
+		var5 = var13
+		var6 = var8
 	end
-	if var1 > 1 then
-		table.move(self.Elements, 1, var1 - 1, 1, t_1)
-	end
-	if var4 then
-		table.insert(t_1, var4)
-		var3 -= 1
+	if var2 > 1 then
+		table.move(self.Elements, 1, var2 - 1, 1, t_1)
 	end
 	if var5 then
-		table.insert(t_2, var5)
+		table.insert(t_1, var5)
+		var4 -= 1
 	end
-	if var1 < #self.Elements then
-		table.move(self.Elements, var1 + 1, #self.Elements, #t_2 + 1, t_2)
+	if var6 then
+		table.insert(t_2, var6)
 	end
-	local var15 = t.new(self.WrapperElement, self.wrapperElementProps, t_1, self.startingIndex)
+	if var2 < #self.Elements then
+		table.move(self.Elements, var2 + 1, #self.Elements, #t_2 + 1, t_2)
+	end
+	local var16 = t.new(self.WrapperElement, self.wrapperElementProps, t_1, self.startingIndex)
 	
 	if #t_2 > 0 then
-		return var15, t.new(self.WrapperElement, self.wrapperElementProps, t_2, var3)
+		return var16, t.new(self.WrapperElement, self.wrapperElementProps, t_2, var4)
 	end
-	return var15, nil
+	return var16, nil
 end
 
-function t:render(p1, p2)
+function t:render(p7, p8)
 	-- upvalues: dashModule (ref), reactModule (ref)
-	return reactModule.createElement(self.WrapperElement, dashModule.join(self.wrapperElementProps, { id = p1, LayoutOrder = p2 }), dashModule.map(self.Elements, function(p1, p2)
-		-- upvalues: p1 (ref), self (ref)
-		return p1:render(`{p1}-{self.startingIndex + p2 - 1}`, p2)
+	return reactModule.createElement(self.WrapperElement, dashModule.join(self.wrapperElementProps, { id = p7, LayoutOrder = p8 }), dashModule.map(self.Elements, function(p9, p10)
+		-- upvalues: p9 (ref), self (ref)
+		return p9:render(`{p9}-{self.startingIndex + p10 - 1}`, p10)
 	end))
 end
 

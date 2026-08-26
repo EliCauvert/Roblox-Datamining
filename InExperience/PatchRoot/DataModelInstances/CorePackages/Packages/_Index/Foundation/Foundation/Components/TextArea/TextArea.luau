@@ -18,46 +18,46 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), internalTextInputModule (ref)
-	local var11 = withDefaultsModule(p0, t)
-	local var12 = useTokensModule()
-	local var13 = useTextInputVariantsModule(var12, var11.size, var11.variant)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = useTextInputVariantsModule(var2, var1.size, var1.variant)
 	
-	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var11, {
-		width = if var11.width then var11.width else nil,
-		label = var11.label,
-		size = getInputTextSizeModule(var11.size),
-		hint = var11.hint,
-		hasError = var11.hasError,
-		isDisabled = var11.isDisabled,
-		isRequired = var11.isRequired,
-		input = function(p2)
-			-- upvalues: reactModule (copy), internalTextInputModule (copy), var11 (ref), var13 (ref), var12 (ref)
+	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var1, {
+		width = if var1.width then var1.width else nil,
+		label = var1.label,
+		size = getInputTextSizeModule(var1.size),
+		hint = var1.hint,
+		hasError = var1.hasError,
+		isDisabled = var1.isDisabled,
+		isRequired = var1.isRequired,
+		input = function(p3)
+			-- upvalues: reactModule (copy), internalTextInputModule (copy), var1 (ref), var3 (ref), var2 (ref)
 			return reactModule.createElement(internalTextInputModule, {
 				LayoutOrder = 2,
-				inputRef = var11.inputRef,
-				size = var11.size,
-				variant = var11.variant,
-				numLines = var11.numLines,
-				focusBehavior = var11.focusBehavior,
-				onFocus = var11.onFocusGained,
-				onFocusLost = var11.onFocusLost,
-				onChanged = var11.onChanged,
-				text = var11.text,
-				hasError = var11.hasError,
-				isDisabled = var11.isDisabled,
-				hasClearButton = var11.hasClearButton,
-				placeholder = var11.placeholder,
+				inputRef = var1.inputRef,
+				size = var1.size,
+				variant = var1.variant,
+				numLines = var1.numLines,
+				focusBehavior = var1.focusBehavior,
+				onFocus = var1.onFocusGained,
+				onFocusLost = var1.onFocusLost,
+				onChanged = var1.onChanged,
+				text = var1.text,
+				hasError = var1.hasError,
+				isDisabled = var1.isDisabled,
+				hasClearButton = var1.hasClearButton,
+				placeholder = var1.placeholder,
 				horizontalPadding = {
-					left = var13.container.horizontalPadding,
-					right = var13.container.horizontalPadding - UDim.new(0, var12.Size.Size_150)
+					left = var3.container.horizontalPadding,
+					right = var3.container.horizontalPadding - UDim.new(0, var2.Size.Size_150)
 				},
-				ref = p2,
-				testId = `{var11.testId}--input`
+				ref = p3,
+				testId = `{var1.testId}--input`
 			})
 		end,
-		textBoxRef = var11.textBoxRef,
-		ref = p1
+		textBoxRef = var1.textBoxRef,
+		ref = p2
 	}))
 end))

@@ -30,11 +30,11 @@ local enableBlackbirdUpsellOnFlyoutMenu = game:DefineFastFlag("EnableBlackbirdUp
 local fFlagEnableFlyoutMenuRobuxCardRefactor = sharedFlagsModule.FFlagEnableFlyoutMenuRobuxCardRefactor
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 local fFlagEnableFlyoutOnNavRail = sharedFlagsModule.FFlagEnableFlyoutOnNavRail
-local var17 = if fFlagEnableBlackbirdCheck then require(script.Parent.Parent.Hooks.useHasRobloxSubscription) else nil
-local var18 = if fFlagEnableBlackbird and fFlagEnableBlackbirdOnFlyoutMenu and enableBlackbirdUpsellOnFlyoutMenu then require(script.Parent.BlackbirdUpsellBanner) else nil
+local var1 = if fFlagEnableBlackbirdCheck then require(script.Parent.Parent.Hooks.useHasRobloxSubscription) else nil
+local var2 = if fFlagEnableBlackbird and fFlagEnableBlackbirdOnFlyoutMenu and enableBlackbirdUpsellOnFlyoutMenu then require(script.Parent.BlackbirdUpsellBanner) else nil
 
-local function selectStatusBarHeight(p0)
-	return p0.TopBar.statusBarHeight or 0
+local function selectStatusBarHeight(p1)
+	return p1.TopBar.statusBarHeight or 0
 end
 
 local function selectGlobalGuiInset(value)
@@ -42,130 +42,130 @@ local function selectGlobalGuiInset(value)
 end
 
 return reactModule.memo(function(p1, _)
-	-- upvalues: useTokens (ref), useLocalRobuxBalance (ref), useSelector (ref), selectStatusBarHeight (ref), selectGlobalGuiInset (ref), fFlagEnableFlyoutOnNavRail (ref), useScreenSize (ref), constantsModule (ref), useAppPolicy (ref), fFlagEnableBlackbirdCheck (ref), var17 (ref), var18 (ref), useFlyoutNavigationItemsModule (ref), createNextOrder (ref), useSetDrawerVisible (ref), fFlagFlyoutTradesEntryExposureLoggingModule (ref), useFlyoutTradesEntryExposureLoggingModule (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutProfileCardModule (ref), fFlagEnableFlyoutMenuRobuxCardRefactor (ref), robuxPillModule (ref), foundationModule (ref), divider (ref), flyoutNavigationListModule (ref), flyoutSwitchAccountButtonModule (ref), flyoutQuickSigninButtonModule (ref), flyoutReportLogsModule (ref), termsPrivacyFooterModule (ref), useDismissFlyoutOnPartyTopBannerModule (ref), drawerContainer (ref)
-	local var21 = useTokens()
-	local var22 = useLocalRobuxBalance()
-	local var23 = useSelector(selectGlobalGuiInset)
-	local var24 = var23.top + useSelector(selectStatusBarHeight)
-	local bottom = var23.bottom
-	local var25 = if fFlagEnableFlyoutOnNavRail then nil else var23.left
-	local var26 = useScreenSize()
-	local var27 = if var26.X - constantsModule.FLYOUT_SIDE_PADDING < constantsModule.FLYOUT_SIDE_PANEL_WIDTH then var26.X - constantsModule.FLYOUT_SIDE_PADDING else constantsModule.FLYOUT_SIDE_PANEL_WIDTH
-	local var28 = if fFlagEnableBlackbirdCheck then var17() else false
-	local var29 = not useAppPolicy(function(p2)
+	-- upvalues: useTokens (ref), useLocalRobuxBalance (ref), useSelector (ref), selectStatusBarHeight (ref), selectGlobalGuiInset (ref), fFlagEnableFlyoutOnNavRail (ref), useScreenSize (ref), constantsModule (ref), useAppPolicy (ref), fFlagEnableBlackbirdCheck (ref), var1 (ref), var2 (ref), useFlyoutNavigationItemsModule (ref), createNextOrder (ref), useSetDrawerVisible (ref), fFlagFlyoutTradesEntryExposureLoggingModule (ref), useFlyoutTradesEntryExposureLoggingModule (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutProfileCardModule (ref), fFlagEnableFlyoutMenuRobuxCardRefactor (ref), robuxPillModule (ref), foundationModule (ref), divider (ref), flyoutNavigationListModule (ref), flyoutSwitchAccountButtonModule (ref), flyoutQuickSigninButtonModule (ref), flyoutReportLogsModule (ref), termsPrivacyFooterModule (ref), useDismissFlyoutOnPartyTopBannerModule (ref), drawerContainer (ref)
+	local var3 = useTokens()
+	local var4 = useLocalRobuxBalance()
+	local var5 = useSelector(selectGlobalGuiInset)
+	local var6 = var5.top + useSelector(selectStatusBarHeight)
+	local bottom = var5.bottom
+	local var7 = if fFlagEnableFlyoutOnNavRail then nil else var5.left
+	local var8 = useScreenSize()
+	local var9 = if var8.X - constantsModule.FLYOUT_SIDE_PADDING < constantsModule.FLYOUT_SIDE_PANEL_WIDTH then var8.X - constantsModule.FLYOUT_SIDE_PADDING else constantsModule.FLYOUT_SIDE_PANEL_WIDTH
+	local var10 = if fFlagEnableBlackbirdCheck then var1() else false
+	local var11 = not useAppPolicy(function(p2)
 		return p2.getDisableBlackbirdEntrypoints() or false
-	end) and (var18 ~= nil and not var28)
-	local var30 = var22 and var22 >= 0
-	local var30_1 = var30 or var29
-	local var32 = useFlyoutNavigationItemsModule()
-	local var33 = createNextOrder()
-	local var34 = useSetDrawerVisible()
+	end) and (var2 ~= nil and not var10)
+	local var12 = var4 and var4 >= 0
+	local var13 = var12 or var11
+	local var14 = useFlyoutNavigationItemsModule()
+	local var15 = createNextOrder()
+	local var16 = useSetDrawerVisible()
 	
 	if fFlagFlyoutTradesEntryExposureLoggingModule then
 		useFlyoutTradesEntryExposureLoggingModule()
 	end
-	local var39
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: var34 (ref)
-		var34(false)
-	end, { var34 })
-	local var36 = reactModule.useCallback(function(p3)
+	local var17
+	local var18 = reactModule.useCallback(function()
+		-- upvalues: var16 (ref)
+		var16(false)
+	end, { var16 })
+	local var19 = reactModule.useCallback(function(p2)
 		-- upvalues: flyoutAnalyticsModule (copy)
-		flyoutAnalyticsModule.onFlyoutSidePanelClosed(p3)
+		flyoutAnalyticsModule.onFlyoutSidePanelClosed(p2)
 	end, {})
 	local createElement = reactModule.createElement
 	local fragment = reactModule.Fragment
-	local var37 = nil
+	local var20 = nil
 	local t = {
 		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var21.Padding.XLarge),
-			PaddingBottom = UDim.new(0, var21.Padding.XLarge),
-			PaddingLeft = UDim.new(0, var21.Padding.XLarge),
-			PaddingRight = UDim.new(0, var21.Padding.XLarge)
+			PaddingTop = UDim.new(0, var3.Padding.XLarge),
+			PaddingBottom = UDim.new(0, var3.Padding.XLarge),
+			PaddingLeft = UDim.new(0, var3.Padding.XLarge),
+			PaddingRight = UDim.new(0, var3.Padding.XLarge)
 		}),
 		UIListLayout = reactModule.createElement("UIListLayout", {
-			Padding = UDim.new(0, var21.Gap.Large),
+			Padding = UDim.new(0, var3.Gap.Large),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top
 		}),
 		ProfileCard = reactModule.createElement(flyoutProfileCardModule, {
-			layoutOrder = var33(),
+			layoutOrder = var15(),
 			localUserModel = p1.localUserModel,
-			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var28 else nil,
+			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var10 else nil,
 			onProfileActivated = p1.onProfileActivated,
-			closeDrawer = var35
+			closeDrawer = var18
 		}),
-		RobuxPill = if fFlagEnableFlyoutMenuRobuxCardRefactor or not var30 then nil else reactModule.createElement(robuxPillModule, {
-			layoutOrder = var33(),
+		RobuxPill = if fFlagEnableFlyoutMenuRobuxCardRefactor or not var12 then nil else reactModule.createElement(robuxPillModule, {
+			layoutOrder = var15(),
 			openPurchaseRobuxPage = p1.openPurchaseRobuxPage,
-			robuxBalance = var22,
-			closeDrawer = var35
+			robuxBalance = var4,
+			closeDrawer = var18
 		})
 	}
 	
-	if fFlagEnableFlyoutMenuRobuxCardRefactor and var30_1 then
-		var39 = reactModule.createElement
-		var39 = var39(foundationModule.View, {
+	if fFlagEnableFlyoutMenuRobuxCardRefactor and var13 then
+		var17 = reactModule.createElement
+		var17 = var17(foundationModule.View, {
 			tag = "col size-full-0 auto-y",
-			LayoutOrder = var33(),
+			LayoutOrder = var15(),
 			stroke = {
-				Color = var21.Color.Stroke.Default.Color3,
-				Transparency = var21.Color.Stroke.Default.Transparency,
-				Thickness = var21.Stroke.Standard
+				Color = var3.Color.Stroke.Default.Color3,
+				Transparency = var3.Color.Stroke.Default.Transparency,
+				Thickness = var3.Stroke.Standard
 			},
-			cornerRadius = UDim.new(0, var21.Radius.Medium)
+			cornerRadius = UDim.new(0, var3.Radius.Medium)
 		}, {
-			RobuxPill = if var30 then reactModule.createElement(robuxPillModule, {
+			RobuxPill = if var12 then reactModule.createElement(robuxPillModule, {
 				layoutOrder = 1,
 				openPurchaseRobuxPage = p1.openPurchaseRobuxPage,
-				robuxBalance = var22,
-				closeDrawer = var35
+				robuxBalance = var4,
+				closeDrawer = var18
 			}) else nil,
-			UpsellDivider = if var30 and var29 then reactModule.createElement(divider, { LayoutOrder = 2 }) else nil,
-			BlackbirdUpsellBanner = if var29 then reactModule.createElement(var18, { layoutOrder = 3, closeDrawer = var35 }) else nil
+			UpsellDivider = if var12 and var11 then reactModule.createElement(divider, { LayoutOrder = 2 }) else nil,
+			BlackbirdUpsellBanner = if var11 then reactModule.createElement(var2, { layoutOrder = 3, closeDrawer = var18 }) else nil
 		})
 	else
-		var39 = nil
+		var17 = nil
 	end
-	t.RobuxCard = var39
+	t.RobuxCard = var17
 	t.MyLibrary = reactModule.createElement(flyoutNavigationListModule, {
-		layoutOrder = var33(),
-		navigationItems = var32.myLibraryItems,
-		closeDrawer = var35,
+		layoutOrder = var15(),
+		navigationItems = var14.myLibraryItems,
+		closeDrawer = var18,
 		buildCreatorWebNavUrl = p1.buildCreatorWebNavUrl
 	})
-	t.Divider = reactModule.createElement(divider, { LayoutOrder = var33() })
+	t.Divider = reactModule.createElement(divider, { LayoutOrder = var15() })
 	t.AdditionalNavigation = reactModule.createElement(flyoutNavigationListModule, {
-		layoutOrder = var33(),
-		navigationItems = var32.additionalNavigationItems,
-		closeDrawer = var35,
+		layoutOrder = var15(),
+		navigationItems = var14.additionalNavigationItems,
+		closeDrawer = var18,
 		buildCreatorWebNavUrl = p1.buildCreatorWebNavUrl
 	})
 	t.SwitchAccountButton = if p1.onSwitchAccountActivated then reactModule.createElement(flyoutSwitchAccountButtonModule, {
-		layoutOrder = var33(),
+		layoutOrder = var15(),
 		onSwitchAccountActivated = p1.onSwitchAccountActivated,
-		closeDrawer = var35
+		closeDrawer = var18
 	}) else nil
-	t.QuickSigninButton = reactModule.createElement(flyoutQuickSigninButtonModule, { layoutOrder = var33(), closeDrawer = var35 })
-	t.LogOut = p1.renderLogOut(var33())
+	t.QuickSigninButton = reactModule.createElement(flyoutQuickSigninButtonModule, { layoutOrder = var15(), closeDrawer = var18 })
+	t.LogOut = p1.renderLogOut(var15())
 	t.ReportLogs = if p1.openReportLogConfirmation then reactModule.createElement(flyoutReportLogsModule, {
-		layoutOrder = var33(),
+		layoutOrder = var15(),
 		openReportLogConfirmation = p1.openReportLogConfirmation,
-		closeDrawer = var35
+		closeDrawer = var18
 	}) else nil
-	t.TermsPrivacyFooter = reactModule.createElement(termsPrivacyFooterModule, { layoutOrder = var33(), closeDrawer = var35 })
-	createElement = createElement(fragment, var37, t)
+	t.TermsPrivacyFooter = reactModule.createElement(termsPrivacyFooterModule, { layoutOrder = var15(), closeDrawer = var18 })
+	createElement = createElement(fragment, var20, t)
 	useDismissFlyoutOnPartyTopBannerModule()
 	
 	return reactModule.createElement(drawerContainer, {
 		displayOrder = p1.displayOrder,
-		menuWidth = var27,
+		menuWidth = var9,
 		children = createElement,
-		leftOffset = var25,
-		topOffset = var24,
+		leftOffset = var7,
+		topOffset = var6,
 		bottomOffset = bottom,
-		backgroundStyle = var21.Color.Surface.Surface_0,
-		onDrawerClosedAnalytics = var36
+		backgroundStyle = var3.Color.Surface.Surface_0,
+		onDrawerClosedAnalytics = var19
 	})
 end)

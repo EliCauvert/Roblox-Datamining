@@ -26,87 +26,87 @@ local eventNames = momentsCommonModule.Analytics.EventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), reactModule (ref), cryoModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), useCallback (ref), captureItemModule (ref), view (ref), text (ref), chip (ref), foundationModule (ref), image (ref), videoCamera (ref), scrollingGridView (ref), constantsModule (ref), button (ref), inputSize (ref), buttonVariant (ref)
-	local var11 = useDeviceInsets()
-	local var12 = useTokens()
-	local var13 = useCreationFlowStringsModule()
-	local var14, var15 = reactModule.useState(nil)
-	local var16 = reactModule.useRef(false)
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var14 (ref), p0 (ref), cryoModule (copy)
-		return if var14 then cryoModule.List.filter(p0.captures, function(p1)
-			-- upvalues: var14 (copy)
-			return p1.CaptureType == var14
-		end) else p0.captures
-	end, { p0.captures, var14 })
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = useCreationFlowStringsModule()
+	local var4, var5 = reactModule.useState(nil)
+	local var6 = reactModule.useRef(false)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), p1 (ref), cryoModule (copy)
+		return if var4 then cryoModule.List.filter(p1.captures, function(p2)
+			-- upvalues: var4 (copy)
+			return p2.CaptureType == var4
+		end) else p1.captures
+	end, { p1.captures, var4 })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var16 (ref), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
-		if #p0.captures == 0 and var16.current == false then
-			var16.current = true
+		-- upvalues: p1 (ref), var6 (ref), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
+		if #p1.captures == 0 and var6.current == false then
+			var6.current = true
 			fireAnalyticsEventModule(eventNames.EditingFlowGalleryNoCapturesAvailable, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 		end
-	end, { p0.captures })
-	local var18 = useCallback(function(p2)
-		-- upvalues: p0 (ref)
-		p0.onCaptureSelected(p2)
-	end, { p0.onCaptureSelected })
+	end, { p1.captures })
+	local var8 = useCallback(function(p2)
+		-- upvalues: p1 (ref)
+		p1.onCaptureSelected(p2)
+	end, { p1.onCaptureSelected })
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-bottom shrink gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		padding = {
-			top = UDim.new(0, var12.Padding.Large),
-			bottom = UDim.new(0, math.max(var11.bottom, var12.Padding.Large))
+			top = UDim.new(0, var2.Padding.Large),
+			bottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Large))
 		}
 	}, {
 		FilterButtons = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = "row gap-small position-top-center anchor-top-center size-full-0 auto-y",
 			padding = {
-				left = UDim.new(0, math.max(var11.left, var12.Padding.XLarge)),
-				right = UDim.new(0, math.max(var11.right, var12.Padding.XLarge))
+				left = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+				right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 			}
 		}, {
 			AllChip = reactModule.createElement(chip, {
 				LayoutOrder = 1,
-				isChecked = var14 == nil,
+				isChecked = var4 == nil,
 				onActivated = useCallback(function()
-					-- upvalues: var15 (ref)
-					var15(nil)
+					-- upvalues: var5 (ref)
+					var5(nil)
 				end, {}),
 				size = foundationModule.Enums.ChipSize.Small,
-				text = var13.GeneralAllChipLabel
+				text = var3.GeneralAllChipLabel
 			}),
 			PhotosChip = reactModule.createElement(chip, {
 				LayoutOrder = 2,
-				isChecked = var14 == Enum.CaptureType.Screenshot,
+				isChecked = var4 == Enum.CaptureType.Screenshot,
 				leading = image,
 				onActivated = useCallback(function()
-					-- upvalues: var15 (ref)
-					var15(Enum.CaptureType.Screenshot)
+					-- upvalues: var5 (ref)
+					var5(Enum.CaptureType.Screenshot)
 				end, {}),
 				size = foundationModule.Enums.ChipSize.Small,
-				text = var13.GeneralPhotosChipLabel
+				text = var3.GeneralPhotosChipLabel
 			}),
 			VideosChip = reactModule.createElement(chip, {
 				LayoutOrder = 3,
-				isChecked = var14 == Enum.CaptureType.Video,
+				isChecked = var4 == Enum.CaptureType.Video,
 				leading = videoCamera,
 				onActivated = useCallback(function()
-					-- upvalues: var15 (ref)
-					var15(Enum.CaptureType.Video)
+					-- upvalues: var5 (ref)
+					var5(Enum.CaptureType.Video)
 				end, {}),
 				size = foundationModule.Enums.ChipSize.Small,
-				text = var13.GeneralVideosChipLabel
+				text = var3.GeneralVideosChipLabel
 			})
 		}),
 		CaptureGrid = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "row shrink gap-small position-top-center anchor-top-center size-full-full",
 			padding = {
-				left = UDim.new(0, var11.left),
-				right = UDim.new(0, var11.right)
+				left = UDim.new(0, var1.left),
+				right = UDim.new(0, var1.right)
 			}
 		}, {
 			CaptureGrid = reactModule.createElement(scrollingGridView, {
@@ -118,42 +118,42 @@ return function(p0)
 					minItemsPerPage = 6,
 					minItemWidth = 100
 				},
-				items = var17,
+				items = var7,
 				onShowMoreCallback = useCallback(function()
-					-- upvalues: p0 (ref)
-					if p0.onShowMore then
-						p0.onShowMore()
+					-- upvalues: p1 (ref)
+					if p1.onShowMore then
+						p1.onShowMore()
 					end
-				end, { p0.onShowMore }),
-				padding = { bottom = UDim.new(0, var12.Padding.Large) },
+				end, { p1.onShowMore }),
+				padding = { bottom = UDim.new(0, var2.Padding.Large) },
 				renderEmptyState = useCallback(function()
-					-- upvalues: reactModule (copy), view (copy), text (copy), var13 (ref)
+					-- upvalues: reactModule (copy), view (copy), text (copy), var3 (ref)
 					return reactModule.createElement(view, { tag = "shrink size-full-full" }, {
 						EmptyState = reactModule.createElement(text, {
 							tag = "position-top-center anchor-top-center auto-xy padding-large text-body-medium text-align-x-center text-align-y-center content-action-emphasis",
-							Text = var13.GeneralEmptyStateText
+							Text = var3.GeneralEmptyStateText
 						})
 					})
-				end, { var13 }),
-				renderItem = useCallback(function(p3, _)
-					-- upvalues: reactModule (copy), captureItemModule (copy), var18 (ref), p0 (ref)
+				end, { var3 }),
+				renderItem = useCallback(function(p2, _)
+					-- upvalues: reactModule (copy), captureItemModule (copy), var8 (ref), p1 (ref)
 					return reactModule.createElement(captureItemModule, {
 						zIndex = 1,
-						capture = p3,
-						onActivated = var18,
-						selected = p0.selectedCapture == p3
+						capture = p2,
+						onActivated = var8,
+						selected = p1.selectedCapture == p2
 					})
-				end, { p0.selectedCapture, var18 }),
-				shouldShowShowMoreButton = p0.hasMoreCaptures == true,
-				showMoreButtonText = var13.GeneralCtaShowMore
+				end, { p1.selectedCapture, var8 }),
+				shouldShowShowMoreButton = p1.hasMoreCaptures == true,
+				showMoreButtonText = var3.GeneralCtaShowMore
 			})
 		}),
 		ButtonContainer = reactModule.createElement(view, {
 			LayoutOrder = 3,
 			tag = "align-x-center size-full-0 auto-y",
 			padding = {
-				left = UDim.new(0, math.max(var11.left, var12.Padding.XLarge)),
-				right = UDim.new(0, math.max(var11.right, var12.Padding.XLarge))
+				left = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+				right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 			}
 		}, {
 			ButtonConstraint = reactModule.createElement(view, {
@@ -163,10 +163,10 @@ return function(p0)
 				NextButton = reactModule.createElement(button, {
 					LayoutOrder = 1,
 					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-					isDisabled = not p0.selectedCapture,
-					onActivated = p0.onNextCallback,
+					isDisabled = not p1.selectedCapture,
+					onActivated = p1.onNextCallback,
 					size = inputSize.Medium,
-					text = var13.PublishingCtaContinue,
+					text = var3.PublishingCtaContinue,
 					variant = buttonVariant.Emphasis
 				})
 			})

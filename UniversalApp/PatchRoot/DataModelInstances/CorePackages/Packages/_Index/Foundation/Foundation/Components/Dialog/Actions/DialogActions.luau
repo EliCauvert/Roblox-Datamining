@@ -24,12 +24,12 @@ return function(p1)
 	local var3 = useDialogModule()
 	local var4 = reactModule.useMemo(function()
 		-- upvalues: var1 (ref), reactModule (copy), dashModule (copy), buttonModule (copy), fillBehaviorModule (copy)
-		return if var1.actions then reactModule.createElement(reactModule.Fragment, nil, dashModule.map(var1.actions, function(p1, p2)
+		return if var1.actions then reactModule.createElement(reactModule.Fragment, nil, dashModule.map(var1.actions, function(p2, p3)
 			-- upvalues: reactModule (copy), buttonModule (copy), dashModule (copy), fillBehaviorModule (copy)
-			return reactModule.createElement(buttonModule, dashModule.join(p1, {
-				key = `{p2}-{p1.text}`,
-				Name = p1.text,
-				LayoutOrder = p2,
+			return reactModule.createElement(buttonModule, dashModule.join(p2, {
+				key = `{p3}-{p2.text}`,
+				Name = p2.text,
+				LayoutOrder = p3,
 				fillBehavior = fillBehaviorModule.Fill
 			}))
 		end)) else nil

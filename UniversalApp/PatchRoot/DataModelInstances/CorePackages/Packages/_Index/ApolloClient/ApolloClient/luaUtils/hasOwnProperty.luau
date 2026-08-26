@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	return p0[p1] ~= nil
+﻿return function(p1, p2)
+	return p1[p2] ~= nil
 end

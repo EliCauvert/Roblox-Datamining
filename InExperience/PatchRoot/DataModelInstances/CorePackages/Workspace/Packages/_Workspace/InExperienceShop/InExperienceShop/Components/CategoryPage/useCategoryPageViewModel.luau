@@ -10,15 +10,15 @@ local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop
 local fFlagPassShopPurchaseSurfaceToBuyModal = require(parent.SharedFlags).FFlagPassShopPurchaseSurfaceToBuyModal
 local _ = require(inExperienceShop.Types)
 local findSectionModule = require(inExperienceShop.Utils.findSection)
-local var6 = if fFlagPassShopPurchaseSurfaceToBuyModal then require(inExperienceShop.Analytics.Constants).ShopPageType else nil
+local var1 = if fFlagPassShopPurchaseSurfaceToBuyModal then require(inExperienceShop.Analytics.Constants).ShopPageType else nil
 local _ = require(script.Parent.CategoryPageView)
 local t = {}
 
-local function _(p0)
+local function _(p1)
 	return {
 		ShrinkRatio = 1,
 		FlexMode = Enum.UIFlexMode.Custom,
-		GrowRatio = p0,
+		GrowRatio = p1,
 		ItemLineAlignment = Enum.ItemLineAlignment.Stretch
 	}
 end
@@ -36,24 +36,24 @@ local _ = function(p1, p2, p3)
 	return if p3 == nil or p3.rowWidth <= 0 then nil elseif p3.isFeaturedDoubleWidthRobux(p1, p2) and p3.featuredRobuxWidth ~= nil then p3.featuredRobuxWidth else p3.shopWidth
 end
 
-local _ = function(p4)
+local _ = function(p1)
 	-- upvalues: computeRobuxPackageMediaHeightScale (ref)
-	return if p4 == nil or p4.shopWidth <= 0 then nil else computeRobuxPackageMediaHeightScale(p4.shopWidth, p4.gap)
+	return if p1 == nil or p1.shopWidth <= 0 then nil else computeRobuxPackageMediaHeightScale(p1.shopWidth, p1.gap)
 end
 
-local function tileWrapperProps(p5, p6)
-	return if p5 == nil or p5 <= 0 then {
+local function tileWrapperProps(p1, p2)
+	return if p1 == nil or p1 <= 0 then {
 		tag = "size-full-0 auto-y",
 		Size = UDim2.fromOffset(0, 0),
 		flexItem = {
 			ShrinkRatio = 1,
 			FlexMode = Enum.UIFlexMode.Custom,
-			GrowRatio = p6,
+			GrowRatio = p2,
 			ItemLineAlignment = Enum.ItemLineAlignment.Stretch
 		}
 	} else {
 		tag = "size-full-0 auto-y",
-		Size = UDim2.fromOffset(p5, 0),
+		Size = UDim2.fromOffset(p1, 0),
 		flexItem = {
 			GrowRatio = 0,
 			ShrinkRatio = 0,
@@ -63,159 +63,159 @@ local function tileWrapperProps(p5, p6)
 	}
 end
 
-local _ = function(p7)
+local _ = function(p1)
 	return {
-		id = p7.id,
-		name = tostring(p7.robuxAmount),
-		thumbnail = p7.robuxImage
+		id = p1.id,
+		name = tostring(p1.robuxAmount),
+		thumbnail = p1.robuxImage
 	}
 end
 
-local _ = function(p8, p9, p10)
+local _ = function(p1, p2, p3)
 	return {
-		categoryId = p10,
-		gridPositionRow = if p9 then p9.gridPositionRow else nil,
-		gridPositionColumn = p8
+		categoryId = p3,
+		gridPositionRow = if p2 then p2.gridPositionRow else nil,
+		gridPositionColumn = p1
 	}
 end
 
-return function(p11)
-	-- upvalues: reactModule (ref), findSectionModule (ref), t (ref), tileWrapperProps (ref), view (ref), robuxPackageTileContainerModule (ref), computeRobuxPackageMediaHeightScale (ref), shopItemTileModule (ref), var6 (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref)
+return function(p1)
+	-- upvalues: reactModule (ref), findSectionModule (ref), t (ref), tileWrapperProps (ref), view (ref), robuxPackageTileContainerModule (ref), computeRobuxPackageMediaHeightScale (ref), shopItemTileModule (ref), var1 (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref)
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: findSectionModule (copy), p1 (ref)
+		return findSectionModule(p1.sections, p1.sectionId)
+	end, { p1.sections, p1.sectionId })
+	local var3 = if var2 ~= nil then t else var2.items
+	local var4 = if var2 ~= nil then nil else var2.robuxPackages
+	local var5 = if var2 ~= nil then nil else var2.featuredRobuxPackage
+	local var6 = if var2 ~= nil then nil else var2.paymentSessionId
+	local var7 = var4 ~= nil and #var4 > 0
+	local var8 = var5 ~= nil
+	local onItemActivated = p1.onItemActivated
 	local var9 = reactModule.useMemo(function()
-		-- upvalues: findSectionModule (copy), p11 (ref)
-		return findSectionModule(p11.sections, p11.sectionId)
-	end, { p11.sections, p11.sectionId })
-	local var10 = if var9 ~= nil then t else var9.items
-	local var11 = if var9 ~= nil then nil else var9.robuxPackages
-	local var12 = if var9 ~= nil then nil else var9.featuredRobuxPackage
-	local var13 = if var9 ~= nil then nil else var9.paymentSessionId
-	local var14 = var11 ~= nil and #var11 > 0
-	local var15 = var12 ~= nil
-	local onItemActivated = p11.onItemActivated
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: var14 (ref), var11 (ref), var12 (ref), var10 (ref)
-		if var14 then
-			local var19 = var11
-			local list = table.create(#var19)
+		-- upvalues: var7 (ref), var4 (ref), var5 (ref), var3 (ref)
+		if var7 then
+			local var10 = var4
+			local list = table.create(#var10)
 			
-			for i = 1, #var19 do
-				local var21 = var19[i]
+			for i = 1, #var10 do
+				local var11 = var10[i]
 				list[i] = {
-					id = var21.id,
-					name = tostring(var21.robuxAmount),
-					thumbnail = var21.robuxImage
+					id = var11.id,
+					name = tostring(var11.robuxAmount),
+					thumbnail = var11.robuxImage
 				}
 			end
 			return list
-		elseif var12 == nil then
-			return var10
+		elseif var5 == nil then
+			return var3
 		end
-		local list = table.create(#var10 + 1)
+		local list = table.create(#var3 + 1)
 		list[1] = {
-			id = var12.id,
-			name = tostring(var12.robuxAmount),
-			thumbnail = var12.robuxImage
+			id = var5.id,
+			name = tostring(var5.robuxAmount),
+			thumbnail = var5.robuxImage
 		}
 		
-		for i_1 = 1, #var10 do
-			list[i_1 + 1] = var10[i_1]
+		for i_1 = 1, #var3 do
+			list[i_1 + 1] = var3[i_1]
 		end
 		return list
-	end, { var10, var11, var12, var14 })
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var14 (ref), var11 (ref), var12 (ref)
-		if var14 then
+	end, { var3, var4, var5, var7 })
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: var7 (ref), var4 (ref), var5 (ref)
+		if var7 then
 			local t = {}
 			
-			for i, v in var11 do
+			for i, v in var4 do
 				t[v.id] = v
 			end
 			return t
-		elseif var12 == nil then
+		elseif var5 == nil then
 			return nil
 		end
-		local var24 = var12
+		local var13 = var5
 		
-		return { [var24.id] = var24 }
-	end, { var11, var12, var14 })
-	local var18 = reactModule.useCallback(function(p12, p13, p14)
-		-- upvalues: p11 (ref), var17 (ref), var14 (ref), var15 (ref), tileWrapperProps (copy), reactModule (copy), view (copy), robuxPackageTileContainerModule (copy), var13 (ref), onItemActivated (ref), computeRobuxPackageMediaHeightScale (copy), shopItemTileModule (copy), onItemActivated (ref), var6 (copy)
+		return { [var13.id] = var13 }
+	end, { var4, var5, var7 })
+	local var14 = reactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: p1 (ref), var12 (ref), var7 (ref), var8 (ref), tileWrapperProps (copy), reactModule (copy), view (copy), robuxPackageTileContainerModule (copy), var6 (ref), onItemActivated (ref), computeRobuxPackageMediaHeightScale (copy), shopItemTileModule (copy), onItemActivated (ref), var1 (copy)
 		local t = {
-			categoryId = p11.sectionId,
-			gridPositionRow = if p14 then p14.gridPositionRow else nil,
-			gridPositionColumn = p13
+			categoryId = p1.sectionId,
+			gridPositionRow = if p4 then p4.gridPositionRow else nil,
+			gridPositionColumn = p3
 		}
-		local var26 = if var17 ~= nil then nil else var17[p12.id]
+		local var15 = if var12 ~= nil then nil else var12[p2.id]
 		
-		if var26 == nil then
-			local var28 = tileWrapperProps(if p14 == nil or p14.rowWidth <= 0 then nil elseif p14.isFeaturedDoubleWidthRobux(p12, p13) and p14.featuredRobuxWidth ~= nil then p14.featuredRobuxWidth else p14.shopWidth, 1)
+		if var15 == nil then
+			local var16 = tileWrapperProps(if p4 == nil or p4.rowWidth <= 0 then nil elseif p4.isFeaturedDoubleWidthRobux(p2, p3) and p4.featuredRobuxWidth ~= nil then p4.featuredRobuxWidth else p4.shopWidth, 1)
 			
 			return reactModule.createElement(view, {
-				tag = var28.tag,
-				Size = var28.Size,
-				flexItem = var28.flexItem,
-				LayoutOrder = p13
+				tag = var16.tag,
+				Size = var16.Size,
+				flexItem = var16.flexItem,
+				LayoutOrder = p3
 			}, {
 				Tile = reactModule.createElement(shopItemTileModule, {
-					itemId = p12.id,
-					itemType = p12.itemType,
-					name = p12.name,
-					thumbnail = p12.thumbnail,
-					price = p12.price,
-					userBasePriceInRobux = p12.userBasePriceInRobux,
-					universeId = p12.universeId,
+					itemId = p2.id,
+					itemType = p2.itemType,
+					name = p2.name,
+					thumbnail = p2.thumbnail,
+					price = p2.price,
+					userBasePriceInRobux = p2.userBasePriceInRobux,
+					universeId = p2.universeId,
 					categoryId = t.categoryId,
 					gridPositionRow = t.gridPositionRow,
 					gridPositionColumn = t.gridPositionColumn,
 					onItemActivated = onItemActivated,
-					shopPageType = if var6 then var6.Category else nil
+					shopPageType = if var1 then var1.Category else nil
 				})
 			})
 		end
-		local var27 = tileWrapperProps(if p14 == nil or p14.rowWidth <= 0 then nil elseif p14.isFeaturedDoubleWidthRobux(p12, p13) and p14.featuredRobuxWidth ~= nil then p14.featuredRobuxWidth else p14.shopWidth, if var14 or var15 and p13 == 1 then 2 else 1)
+		local var17 = tileWrapperProps(if p4 == nil or p4.rowWidth <= 0 then nil elseif p4.isFeaturedDoubleWidthRobux(p2, p3) and p4.featuredRobuxWidth ~= nil then p4.featuredRobuxWidth else p4.shopWidth, if var7 or var8 and p3 == 1 then 2 else 1)
 		
 		return reactModule.createElement(view, {
-			tag = var27.tag,
-			Size = var27.Size,
-			flexItem = var27.flexItem,
-			LayoutOrder = p13
+			tag = var17.tag,
+			Size = var17.Size,
+			flexItem = var17.flexItem,
+			LayoutOrder = p3
 		}, {
 			Tile = reactModule.createElement(robuxPackageTileContainerModule, {
-				pkg = var26,
-				paymentSessionId = var13,
+				pkg = var15,
+				paymentSessionId = var6,
 				onBonusItemActivated = onItemActivated,
-				mediaHeightScale = if p14 == nil or p14.shopWidth <= 0 then nil else computeRobuxPackageMediaHeightScale(p14.shopWidth, p14.gap),
+				mediaHeightScale = if p4 == nil or p4.shopWidth <= 0 then nil else computeRobuxPackageMediaHeightScale(p4.shopWidth, p4.gap),
 				categoryId = t.categoryId,
 				gridPositionRow = t.gridPositionRow,
 				gridPositionColumn = t.gridPositionColumn
 			})
 		})
 	end, {
-		var17, onItemActivated, onItemActivated, var14, var15, var13, p11.sectionId
+		var12, onItemActivated, onItemActivated, var7, var8, var6, p1.sectionId
 	})
 	
 	return {
-		items = var16,
-		itemsPerRow = p11.itemsPerRow,
-		sectionId = p11.sectionId,
+		items = var9,
+		itemsPerRow = p1.itemsPerRow,
+		sectionId = p1.sectionId,
 		onItemActivated = onItemActivated,
-		renderTile = if fFlagEnableInExperienceShopUnifiedLoggingModule then var18 elseif var17 ~= nil then nil else var18,
+		renderTile = if fFlagEnableInExperienceShopUnifiedLoggingModule then var14 elseif var12 ~= nil then nil else var14,
 		isFeaturedDoubleWidthRobux = reactModule.useMemo(function()
-			-- upvalues: var14 (ref), var15 (ref), var12 (ref)
-			if var14 then
+			-- upvalues: var7 (ref), var8 (ref), var5 (ref)
+			if var7 then
 				return function(_, _)
 					return true
 				end
-			elseif var15 then
-				local id = var12.id
+			elseif var8 then
+				local id = var5.id
 				
-				return function(p15, p16)
+				return function(p2, p3)
 					-- upvalues: id (ref)
-					return p16 == 1 and p15.id == id
+					return p3 == 1 and p2.id == id
 				end
 			end
 			return nil
-		end, { var14, var15, var12 }),
-		LayoutOrder = p11.LayoutOrder
+		end, { var7, var8, var5 }),
+		LayoutOrder = p1.LayoutOrder
 	}
 end

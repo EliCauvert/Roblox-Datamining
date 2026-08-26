@@ -2,64 +2,64 @@
 local _ = require(appChat.Models.ConversationChannels)
 local conversationModule = require(appChat.Models.Conversation)
 
-local function _(value, p0, p1)
-	if value[p0] == p1 then
+local function _(value, p1, p2)
+	if value[p1] == p2 then
 		return value
 	end
 	local cloned = table.clone(value)
-	cloned[p0] = p1
+	cloned[p1] = p2
 	
 	return cloned
 end
 
-local function updateConversationMessages(p2, p3, p4)
+local function updateConversationMessages(p1, p2, p3)
 	local t = {}
 	
-	for i, v in p2[p4]:CreateIterator() do
-		if not p3[p4]:Get(i) then
+	for i, v in p1[p3]:CreateIterator() do
+		if not p2[p3]:Get(i) then
 			table.insert(t, v)
 		end
 	end
 	if #t > 0 then
-		p3[p4] = p3[p4]:Insert(table.unpack(t))
+		p2[p3] = p2[p3]:Insert(table.unpack(t))
 	end
 end
 
-local _ = function(p5, p6, p7)
-	if p6[p7] == nil then
-		p6[p7] = p5[p7]
+local _ = function(p4, p5, p6)
+	if p5[p6] == nil then
+		p5[p6] = p4[p6]
 	end
 end
 
-return function(p8, p9)
+return function(p4, p5)
 	-- upvalues: conversationModule (ref), updateConversationMessages (ref)
-	if p9.conversationType == conversationModule.Type.ONE_TO_ONE_CONVERSATION then
-		local var5 = conversationModule.IdForFakeOneOnOne(p9.participants)
+	if p5.conversationType == conversationModule.Type.ONE_TO_ONE_CONVERSATION then
+		local var1 = conversationModule.IdForFakeOneOnOne(p5.participants)
 		
-		if p8[var5] ~= nil and p8[var5] ~= p9 then
-			local var6 = p8
+		if p4[var1] ~= nil and p4[var1] ~= p5 then
+			local var2 = p4
 			
-			if var6[var5] == nil then
-				p8 = var6
+			if var2[var1] == nil then
+				p4 = var2
 			else
-				local cloned = table.clone(var6)
-				cloned[var5] = nil
-				p8 = cloned
+				local cloned = table.clone(var2)
+				cloned[var1] = nil
+				p4 = cloned
 			end
 		end
 	end
-	local var8
-	local id = p9.id
+	local var3
+	local id = p5.id
 	
-	if p8[id] == p9 then
-		var8 = p8
+	if p4[id] == p5 then
+		var3 = p4
 	else
-		local cloned = table.clone(p8)
-		cloned[id] = p9
-		var8 = cloned
+		local cloned = table.clone(p4)
+		cloned[id] = p5
+		var3 = cloned
 	end
-	local id_1 = p8[p9.id]
-	local id_2 = var8[p9.id]
+	local id_1 = p4[p5.id]
+	local id_2 = var3[p5.id]
 	
 	if id_2 and id_1 then
 		updateConversationMessages(id_1, id_2, "messages")
@@ -75,5 +75,5 @@ return function(p8, p9)
 			id_2.fetchedOldestMessage = id_1.fetchedOldestMessage
 		end
 	end
-	return var8
+	return var3
 end

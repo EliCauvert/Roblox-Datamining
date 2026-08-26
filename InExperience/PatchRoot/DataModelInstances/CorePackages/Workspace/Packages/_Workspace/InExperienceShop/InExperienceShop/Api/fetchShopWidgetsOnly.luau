@@ -7,8 +7,8 @@ local buildShopDataFromWidgetsModule = require(script.Parent.buildShopDataFromWi
 
 return function()
 	-- upvalues: httpService (ref), fetchShopItemIdsModule (ref), buildShopDataFromWidgetsModule (ref)
-	return fetchShopItemIdsModule(httpService:GenerateGUID(false)):andThen(function(p0)
+	return fetchShopItemIdsModule(httpService:GenerateGUID(false)):andThen(function(p1)
 		-- upvalues: buildShopDataFromWidgetsModule (copy)
-		return buildShopDataFromWidgetsModule(p0, nil)
+		return buildShopDataFromWidgetsModule(p1, nil)
 	end)
 end

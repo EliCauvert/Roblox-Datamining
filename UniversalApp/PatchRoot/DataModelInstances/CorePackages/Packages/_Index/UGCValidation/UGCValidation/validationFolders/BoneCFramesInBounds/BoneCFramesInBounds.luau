@@ -18,30 +18,30 @@ local t = {
 	fflag = r15plusUtilsModule.checkFlagEnabledForAllowHrd
 }
 local UGCValidationBoneCFrameBoundsMultiplierHundredths = game:DefineFastInt("UGCValidationBoneCFrameBoundsMultiplierHundredths", 110)
-local var8 = game:DefineFastInt("UGCValidationMinimumJointDistanceHundredths", 5) / 100
+local var1 = game:DefineFastInt("UGCValidationMinimumJointDistanceHundredths", 5) / 100
 
-function t.run(p0, p1)
-	-- upvalues: UGCValidationBoneCFrameBoundsMultiplierHundredths (ref), getAllInstancesIsAModule (ref), vector3UtilsModule (ref), errorSourceStringsModule (ref), cFrameUtilsModule (ref), var8 (ref)
-	local var9 = UGCValidationBoneCFrameBoundsMultiplierHundredths / 100
+function t.run(p1, p2)
+	-- upvalues: UGCValidationBoneCFrameBoundsMultiplierHundredths (ref), getAllInstancesIsAModule (ref), vector3UtilsModule (ref), errorSourceStringsModule (ref), cFrameUtilsModule (ref), var1 (ref)
+	local var2 = UGCValidationBoneCFrameBoundsMultiplierHundredths / 100
 	
-	for i, v in getAllInstancesIsAModule(p1.rootInstance, "MeshPart") do
-		local name = p1.renderMeshesData[v.Name]
+	for i, v in getAllInstancesIsAModule(p2.rootInstance, "MeshPart") do
+		local name = p2.renderMeshesData[v.Name]
 		
 		if name then
-			local var10 = name.originalSize * name.scale * var9 / 2
-			local var11 = v.CFrame:Inverse()
+			local var3 = name.originalSize * name.scale * var2 / 2
+			local var4 = v.CFrame:Inverse()
 			
 			for i_1, v_1 in getAllInstancesIsAModule(v, "Bone") do
-				p0:setReportingInstance(v_1)
+				p1:setReportingInstance(v_1)
 				
-				if not vector3UtilsModule.isInRange((var11 * v_1.WorldCFrame).Position, -var10, var10) then
-					p0:fail(errorSourceStringsModule.Keys.HrdBone_OutOfBounds, { bonePath = v_1:GetFullName(), partName = v.Name })
+				if not vector3UtilsModule.isInRange((var4 * v_1.WorldCFrame).Position, -var3, var3) then
+					p1:fail(errorSourceStringsModule.Keys.HrdBone_OutOfBounds, { bonePath = v_1:GetFullName(), partName = v.Name })
 				end
 				if not cFrameUtilsModule.fuzzyEq(v_1.Transform, CFrame.identity) then
-					p0:fail(errorSourceStringsModule.Keys.HrdBone_TransformNotIdentity, { bonePath = v_1:GetFullName() })
+					p1:fail(errorSourceStringsModule.Keys.HrdBone_TransformNotIdentity, { bonePath = v_1:GetFullName() })
 				end
-				if v_1.Parent:IsA("Bone") and v_1.Position.Magnitude < var8 then
-					p0:fail(errorSourceStringsModule.Keys.HrdBone_TooCloseToParent, { bonePath = v_1:GetFullName() })
+				if v_1.Parent:IsA("Bone") and v_1.Position.Magnitude < var1 then
+					p1:fail(errorSourceStringsModule.Keys.HrdBone_TooCloseToParent, { bonePath = v_1:GetFullName() })
 				end
 			end
 		end

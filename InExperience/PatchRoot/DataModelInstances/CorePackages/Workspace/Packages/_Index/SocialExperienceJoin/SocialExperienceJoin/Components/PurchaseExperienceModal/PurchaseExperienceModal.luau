@@ -7,43 +7,43 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local textKeysModule = require(socialExperienceJoin.Common.TextKeys)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var4 = useLocalization({
+	local var1 = useLocalization({
 		titleText = textKeysModule.PurchaseExperienceModalTitle,
 		bodyText = {
 			textKeysModule.PurchaseExperienceModalBody,
-			gameName = p0.experienceName,
-			X = p0.price
+			gameName = p1.experienceName,
+			X = p1.price
 		},
 		confirmButtonText = textKeysModule.Unlock,
 		cancelButtonText = textKeysModule.Cancel,
 		successToastTitle = textKeysModule.SuccessPurchaseToastTitle,
 		successToastMessage = {
 			textKeysModule.SuccessPurchaseToastMessage,
-			gameName = p0.experienceName,
-			price = p0.price
+			gameName = p1.experienceName,
+			price = p1.price
 		}
 	})
 	
 	return reactModule.createElement(interactiveAlert, {
-		screenSize = p0.screenSize,
-		title = var4.titleText,
-		bodyText = var4.bodyText,
+		screenSize = p1.screenSize,
+		title = var1.titleText,
+		bodyText = var1.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
 					buttonType = nil,
 					props = {
-						text = var4.cancelButtonText,
-						onActivated = p0.cancelPurchase
+						text = var1.cancelButtonText,
+						onActivated = p1.cancelPurchase
 					}
 				},
 				{
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						text = var4.confirmButtonText,
-						onActivated = p0.purchaseExperience
+						text = var1.confirmButtonText,
+						onActivated = p1.purchaseExperience
 					}
 				}
 			}

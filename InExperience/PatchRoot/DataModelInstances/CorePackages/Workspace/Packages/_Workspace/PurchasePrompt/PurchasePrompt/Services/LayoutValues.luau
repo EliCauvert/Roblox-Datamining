@@ -2,8 +2,8 @@
 local createSignalModule = require(parent.Misc.createSignal)
 local strictModule = require(parent.strict)
 
-local function _(p0, p1)
-	return { Path = "rbxasset://textures/" .. p0, SliceCenter = p1 }
+local function _(p1, p2)
+	return { Path = "rbxasset://textures/" .. p0, SliceCenter = p2 }
 end
 
 local t = {
@@ -12,121 +12,121 @@ local t = {
 	end
 }
 
-function t.new(p2)
+function t.new(p1)
 	-- upvalues: t (ref), createSignalModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, { __index = t })
 	t_1.signal = createSignalModule()
-	t_1.layout = t_1:generate(p2)
+	t_1.layout = t_1:generate(p1)
 	
 	return t_1
 end
 
-function t.update(p3, p4)
-	p3.layout = p3:generate(p4)
-	p3.signal:fire(p3.layout)
+function t.update(p1, p2)
+	p1.layout = p1:generate(p2)
+	p1.signal:fire(p1.layout)
 end
 
-function t.generate(_, p5)
+function t.generate(_, p1)
 	-- upvalues: strictModule (ref)
-	local var4 = if p5 then 3 else 1
-	local var5 = 44 * var4
-	local var6 = 30 * var4
-	local var7 = 6 * var4
-	local var8 = 16 * var4
-	local var9 = 18 * var4
-	local var10 = 210 * var4
-	local var11 = 106 * var4
-	local var12 = 96 * var4
-	local var13 = 20 * var4
-	local var14 = 25 * var4
-	local var15 = 2 * var4
-	local var16 = 64 * var4
-	local var17 = 64 * var4
-	local var18 = 3 * var4
-	local var19 = 2 * var4
-	local var20 = var16 + 2 * var15
-	local var21 = var17 + 2 * var15
-	local var22 = var20 + 2 * var14
-	local var23 = var21 + 2 * var14
+	local var1 = if p1 then 3 else 1
+	local var2 = 44 * var1
+	local var3 = 30 * var1
+	local var4 = 6 * var1
+	local var5 = 16 * var1
+	local var6 = 18 * var1
+	local var7 = 210 * var1
+	local var8 = 106 * var1
+	local var9 = 96 * var1
+	local var10 = 20 * var1
+	local var11 = 25 * var1
+	local var12 = 2 * var1
+	local var13 = 64 * var1
+	local var14 = 64 * var1
+	local var15 = 3 * var1
+	local var16 = 2 * var1
+	local var17 = var13 + 2 * var12
+	local var18 = var14 + 2 * var12
+	local var19 = var17 + 2 * var11
+	local var20 = var18 + 2 * var11
 	
 	return strictModule({
 		Size = strictModule({
-			AdditionalDetailsLabel = UDim2.new(1, 0, 0, var6),
-			ItemPreview = UDim2.new(0, var16, 0, var17),
-			ItemPreviewWhiteFrame = UDim2.new(0, var20, 0, var21),
-			ItemPreviewContainerFrame = UDim2.new(0, var22, 0, var23),
-			HorizontalPadding = var14,
-			ProductDescription = UDim2.new(0, var10, 0, var11),
-			ProductDescriptionPaddingTop = var9,
-			RobuxIconContainerFrame = UDim2.new(0, var8 + var7, 0, var8 + 2 * var7),
-			RobuxIcon = UDim2.new(0, var8, 0, var8),
-			PriceTextLabel = UDim2.new(0, var10 - (var8 + var7), 0, var8),
-			PurchasingAnimation = UDim2.new(0, var12, 0, var13),
-			ButtonIconPadding = var18,
-			ButtonIconYOffset = var19,
-			ButtonHeight = var5,
-			Dialog = UDim2.new(0, var22 + var10, 0, math.max(var23, var11) + var6 + var5)
+			AdditionalDetailsLabel = UDim2.new(1, 0, 0, var3),
+			ItemPreview = UDim2.new(0, var13, 0, var14),
+			ItemPreviewWhiteFrame = UDim2.new(0, var17, 0, var18),
+			ItemPreviewContainerFrame = UDim2.new(0, var19, 0, var20),
+			HorizontalPadding = var11,
+			ProductDescription = UDim2.new(0, var7, 0, var8),
+			ProductDescriptionPaddingTop = var6,
+			RobuxIconContainerFrame = UDim2.new(0, var5 + var4, 0, var5 + 2 * var4),
+			RobuxIcon = UDim2.new(0, var5, 0, var5),
+			PriceTextLabel = UDim2.new(0, var7 - (var5 + var4), 0, var5),
+			PurchasingAnimation = UDim2.new(0, var9, 0, var10),
+			ButtonIconPadding = var15,
+			ButtonIconYOffset = var16,
+			ButtonHeight = var2,
+			Dialog = UDim2.new(0, var19 + var7, 0, math.max(var20, var8) + var3 + var2)
 		}, "LayoutValues.Size"),
 		TextSize = strictModule({
-			Default = 18 * var4,
-			ProductDescription = 18 * var4,
-			Button = 24 * var4,
-			AdditionalDetails = 14 * var4,
-			Purchasing = 36 * var4
+			Default = 18 * var1,
+			ProductDescription = 18 * var1,
+			Button = 24 * var1,
+			AdditionalDetails = 14 * var1,
+			Purchasing = 36 * var1
 		}, "LayoutValues.TextSize"),
 		TextColor = strictModule({ PriceLabel = Color3.new(1, 1, 1) }, "LayoutValues.TextColor"),
 		Image = strictModule({
-			PromptBackground = if p5 then {
+			PromptBackground = if p1 then {
 				Path = "rbxasset://textures/ui/PurchasePrompt/PurchasePromptBG@2x.png",
 				SliceCenter = Rect.new(17, 17, 19, 19)
 			} else {
 				Path = "rbxasset://textures/ui/PurchasePrompt/PurchasePromptBG.png",
 				SliceCenter = Rect.new(8, 9, 10, 10)
 			},
-			InProgressBackground = if p5 then {
+			InProgressBackground = if p1 then {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LoadingBG@2x.png",
 				SliceCenter = Rect.new(17, 17, 19, 19)
 			} else {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LoadingBG.png",
 				SliceCenter = Rect.new(9, 9, 11, 11)
 			},
-			ButtonUpLeft = if p5 then {
+			ButtonUpLeft = if p1 then {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LeftButton@2x.png",
 				SliceCenter = Rect.new(18, 5, 20, 7)
 			} else {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LeftButton.png",
 				SliceCenter = Rect.new(8, 3, 10, 4)
 			},
-			ButtonDownLeft = if p5 then {
+			ButtonDownLeft = if p1 then {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LeftButtonDown@2x.png",
 				SliceCenter = Rect.new(18, 5, 20, 7)
 			} else {
 				Path = "rbxasset://textures/ui/PurchasePrompt/LeftButtonDown.png",
 				SliceCenter = Rect.new(8, 3, 10, 4)
 			},
-			ButtonUpRight = if p5 then {
+			ButtonUpRight = if p1 then {
 				Path = "rbxasset://textures/ui/PurchasePrompt/RightButton@2x.png",
 				SliceCenter = Rect.new(3, 5, 5, 7)
 			} else {
 				Path = "rbxasset://textures/ui/PurchasePrompt/RightButton.png",
 				SliceCenter = Rect.new(2, 3, 3, 4)
 			},
-			ButtonDownRight = if p5 then {
+			ButtonDownRight = if p1 then {
 				Path = "rbxasset://textures/ui/PurchasePrompt/RightButtonDown@2x.png",
 				SliceCenter = Rect.new(3, 5, 5, 7)
 			} else {
 				Path = "rbxasset://textures/ui/PurchasePrompt/RightButtonDown.png",
 				SliceCenter = Rect.new(2, 3, 3, 4)
 			},
-			ButtonUp = if p5 then {
+			ButtonUp = if p1 then {
 				Path = "rbxasset://textures/ui/PurchasePrompt/SingleButton@2x.png",
 				SliceCenter = Rect.new(18, 5, 20, 7)
 			} else {
 				Path = "rbxasset://textures/ui/PurchasePrompt/SingleButton.png",
 				SliceCenter = Rect.new(8, 3, 10, 4)
 			},
-			ButtonDown = if p5 then {
+			ButtonDown = if p1 then {
 				Path = "rbxasset://textures/ui/PurchasePrompt/SingleButtonDown@2x.png",
 				SliceCenter = Rect.new(18, 5, 20, 7)
 			} else {
@@ -137,28 +137,28 @@ function t.generate(_, p5)
 				Path = "rbxasset://textures/ui/PurchasePrompt/Premium.png",
 				SliceCenter = nil
 			},
-			RobuxIcon = if p5 then {
+			RobuxIcon = if p1 then {
 				Path = "rbxasset://textures/ui/common/robux_small@2x.png",
 				SliceCenter = nil
 			} else {
 				Path = "rbxasset://textures/ui/common/robux_small.png",
 				SliceCenter = nil
 			},
-			ErrorIcon = if p5 then {
+			ErrorIcon = if p1 then {
 				Path = "rbxasset://textures/ui/ErrorIcon.png",
 				SliceCenter = nil
 			} else {
 				Path = "rbxasset://textures/ui/ErrorIcon.png",
 				SliceCenter = nil
 			},
-			ButtonA = if p5 then {
+			ButtonA = if p1 then {
 				Path = "rbxasset://textures/ui/Settings/Help/AButtonDark@2x.png",
 				SliceCenter = nil
 			} else {
 				Path = "rbxasset://textures/ui/Settings/Help/AButtonDark.png",
 				SliceCenter = nil
 			},
-			ButtonB = if p5 then {
+			ButtonB = if p1 then {
 				Path = "rbxasset://textures/ui/Settings/Help/BButtonDark@2x.png",
 				SliceCenter = nil
 			} else {

@@ -1,6 +1,6 @@
-﻿return function(p0)
-	return function(p1, p2)
-		-- upvalues: p0 (ref)
-		p0.diagImpl:reportStats(p0.eventList[p1].name, p2.loadingTime)
+﻿return function(p1)
+	return function(p2, p3)
+		-- upvalues: p1 (ref)
+		p1.diagImpl:reportStats(p1.eventList[p2].name, p3.loadingTime)
 	end
 end

@@ -15,13 +15,13 @@ gameCell.validateProps = tModule.strictInterface({
 	onActivated = tModule.optional(tModule.callback)
 })
 
-function gameCell.renderWithSelectionCursor(p0, _)
+function gameCell.renderWithSelectionCursor(p1, _)
 	-- upvalues: withLocalizationModule (ref), roactModule (ref), cell (ref), gameIconModule (ref), themedTextLabelModule (ref)
-	local props = p0.props
+	local props = p1.props
 	
 	return withLocalizationModule({
 		labelText = "CoreScripts.InGameMenu.Report.ReportExperience"
-	})(function(p1)
+	})(function(p2)
 		-- upvalues: roactModule (copy), cell (copy), props (ref), gameIconModule (copy), themedTextLabelModule (copy)
 		return roactModule.createElement(cell, {
 			onActivated = props.onActivated,
@@ -44,7 +44,7 @@ function gameCell.renderWithSelectionCursor(p0, _)
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0, 0.5),
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Text = p1.labelText,
+					Text = p2.labelText,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Position = UDim2.new(0, 54, 0.5, 0)
 				})
@@ -59,11 +59,11 @@ function gameCell.renderWithSelectionCursor(p0, _)
 	end)
 end
 
-function gameCell.render(p2)
+function gameCell.render(p1)
 	-- upvalues: withSelectionCursorProvider (ref)
-	return withSelectionCursorProvider(function(p3)
-		-- upvalues: p2 (ref)
-		return p2:renderWithSelectionCursor(p3)
+	return withSelectionCursorProvider(function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 

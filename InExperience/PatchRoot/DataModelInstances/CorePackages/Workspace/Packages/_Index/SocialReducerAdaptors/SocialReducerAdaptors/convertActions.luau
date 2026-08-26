@@ -1,16 +1,16 @@
 ﻿local llama = require(script:FindFirstAncestor("SocialReducerAdaptors").dependencies).llama
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: llama (ref)
-	return function(p3, p4)
-		-- upvalues: p2 (ref), p1 (ref), llama (copy), p0 (ref)
-		p3 = p3 or p2
-		local list = { p4 }
-		local type = p1[p4.type]
+	return function(p4, p5)
+		-- upvalues: p3 (ref), p2 (ref), llama (copy), p1 (ref)
+		p4 = p4 or p3
+		local list = { p5 }
+		local type = p2[p5.type]
 		
 		if type then
-			list = type(p4)
+			list = type(p5)
 		end
-		return llama.List.reduce(list, p0, p3)
+		return llama.List.reduce(list, p1, p4)
 	end
 end

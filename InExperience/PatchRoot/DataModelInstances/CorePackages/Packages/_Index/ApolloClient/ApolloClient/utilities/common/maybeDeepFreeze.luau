@@ -6,24 +6,24 @@ local array = luauPolyfillModule.Array
 require(script.Parent.Parent.globals)
 local isNonNullObject = require(script.Parent.objects).isNonNullObject
 
-local function deepFreeze(p0)
+local function deepFreeze(p1)
 	-- upvalues: set (ref), isNonNullObject (ref), object (ref), array (ref)
-	local var3 = set.new({ p0 })
+	local var1 = set.new({ p1 })
 	
-	for i, v in var3 do
+	for i, v in var1 do
 		if isNonNullObject(v) then
 			if not table.isfrozen(v) then
 				object.freeze(v)
 			end
-			array.forEach(object.keys(v), function(p1)
-				-- upvalues: isNonNullObject (copy), v (ref), var3 (ref)
-				if isNonNullObject(v[p1]) then
-					var3:add(v[p1])
+			array.forEach(object.keys(v), function(p2)
+				-- upvalues: isNonNullObject (copy), v (ref), var1 (ref)
+				if isNonNullObject(v[p2]) then
+					var1:add(v[p2])
 				end
 			end)
 		end
 	end
-	return p0
+	return p1
 end
 
 function t.maybeDeepFreeze(p2)

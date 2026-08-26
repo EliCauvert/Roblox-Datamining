@@ -57,7 +57,7 @@ return function(p1)
 			var11(var8.current:GetSamplesAtTimesAsync(t))
 		end)
 	end, { p1.selectedCapture })
-	local var1 = useTrimDragControllerModule(true, useCallback(function()
+	local var12 = useTrimDragControllerModule(true, useCallback(function()
 		-- upvalues: var4 (ref), p1 (ref), var5 (ref), var7 (ref)
 		if var4.current then
 			p1.playbackController.playback.play()
@@ -68,42 +68,42 @@ return function(p1)
 		var4.current = false
 		var5.current = false
 		var7(nil)
-	end, {}), useCallback(function(p1)
-		-- upvalues: var4 (ref), p1 (ref), var5 (ref), var7 (ref)
-		var4.current = p1.playbackController.playback.isPlaying
-		var5.current = p1.playbackController.volume.isMuted
-		p1.playbackController.volume.mute()
-		p1.playbackController.playback.pause()
-		var7(p1)
+	end, {}), useCallback(function(p2)
+		-- upvalues: var4 (ref), p2 (ref), var5 (ref), var7 (ref)
+		var4.current = p2.playbackController.playback.isPlaying
+		var5.current = p2.playbackController.volume.isMuted
+		p2.playbackController.volume.mute()
+		p2.playbackController.playback.pause()
+		var7(p2)
 	end, {
 		p1.playbackController.playback.isPlaying,
 		p1.playbackController.volume.isMuted
-	}), useCallback(function(p1, p2)
-		-- upvalues: p1 (ref)
-		p1.onTrimUpdate({
-			startTime = math.clamp(p1 or (if p1.trimEdit then p1.trimEdit.startTime else 0), 0, p1.playbackController.timeline.timeLength),
-			endTime = math.clamp(p2 or (if p1.trimEdit then p1.trimEdit.endTime else p1.playbackController.timeline.timeLength), 0, p1.playbackController.timeline.timeLength)
+	}), useCallback(function(p2, p3)
+		-- upvalues: p2 (ref)
+		p2.onTrimUpdate({
+			startTime = math.clamp(p2 or (if p2.trimEdit then p2.trimEdit.startTime else 0), 0, p2.playbackController.timeline.timeLength),
+			endTime = math.clamp(p3 or (if p2.trimEdit then p2.trimEdit.endTime else p2.playbackController.timeline.timeLength), 0, p2.playbackController.timeline.timeLength)
 		})
-		p1.playbackController.timeline.seek(0)
+		p2.playbackController.timeline.seek(0)
 	end, {
 		p1.onTrimUpdate,
 		p1.trimEdit,
 		p1.playbackController.timeline.timeLength
-	}), useCallback(function(p1)
-		-- upvalues: p1 (ref)
-		p1.playbackController.timeline.seek(p1 * p1.playbackController.timeline.duration)
+	}), useCallback(function(p2)
+		-- upvalues: p2 (ref)
+		p2.playbackController.timeline.seek(p2 * p2.playbackController.timeline.duration)
 	end, {
 		p1.playbackController.timeline.seek,
 		p1.playbackController.timeline.duration
 	}), p1.trimEdit, p1.playbackController.timeline.timeLength)
-	local dragContainerRef = var1.dragContainerRef
-	local leftHandleRef = var1.leftHandleRef
-	local rightHandleRef = var1.rightHandleRef
-	local scrubberDisplayRef = var1.scrubberDisplayRef
-	local scrubberRef = var1.scrubberRef
-	local segmentRef = var1.segmentRef
-	local leftHandlePosition = var1.leftHandlePosition
-	local rightHandlePosition = var1.rightHandlePosition
+	local dragContainerRef = var12.dragContainerRef
+	local leftHandleRef = var12.leftHandleRef
+	local rightHandleRef = var12.rightHandleRef
+	local scrubberDisplayRef = var12.scrubberDisplayRef
+	local scrubberRef = var12.scrubberRef
+	local segmentRef = var12.segmentRef
+	local leftHandlePosition = var12.leftHandlePosition
+	local rightHandlePosition = var12.rightHandlePosition
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-center auto-y align-y-bottom anchor-bottom-center col gap-large position-bottom-center size-full-0",
@@ -111,9 +111,9 @@ return function(p1)
 	}, {
 		Padding = reactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, var2.Padding.Small),
-			PaddingBottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Small)),
-			PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
-			PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
+			PaddingBottom = UDim.new(0, math.max(var12.bottom, var2.Padding.Small)),
+			PaddingLeft = UDim.new(0, math.max(var12.left, var2.Padding.XLarge)),
+			PaddingRight = UDim.new(0, math.max(var12.right, var2.Padding.XLarge))
 		}),
 		Nav = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -165,30 +165,30 @@ return function(p1)
 					}),
 					LeftHandle = reactModule.createElement(dragHandleModule, {
 						anchorPoint = Vector2.new(1, 0.5),
-						position = leftHandlePosition:map(function(p1)
-							return UDim2.fromScale(p1, 0.5)
+						position = leftHandlePosition:map(function(p2)
+							return UDim2.fromScale(p2, 0.5)
 						end),
 						dragDetectorRef = leftHandleRef
 					}),
 					RightHandle = reactModule.createElement(dragHandleModule, {
 						isFlipped = true,
 						anchorPoint = Vector2.new(0, 0.5),
-						position = rightHandlePosition:map(function(p1)
-							return UDim2.fromScale(p1, 0.5)
+						position = rightHandlePosition:map(function(p2)
+							return UDim2.fromScale(p2, 0.5)
 						end),
 						dragDetectorRef = rightHandleRef
 					}),
 					Outline = reactModule.createElement(view, {
 						tag = "anchor-center-left",
 						ZIndex = 2,
-						Position = leftHandlePosition:map(function(p1)
-							return UDim2.fromScale(p1, 0.5)
+						Position = leftHandlePosition:map(function(p2)
+							return UDim2.fromScale(p2, 0.5)
 						end),
 						Size = reactModule.joinBindings({
 							leftHandlePosition = leftHandlePosition,
 							rightHandlePosition = rightHandlePosition
-						}):map(function(p1)
-							return UDim2.fromScale(p1.rightHandlePosition - p1.leftHandlePosition, 1)
+						}):map(function(p2)
+							return UDim2.fromScale(p2.rightHandlePosition - p2.leftHandlePosition, 1)
 						end)
 					}, {
 						OutlineStroke = reactModule.createElement("UIStroke", {
@@ -218,16 +218,16 @@ return function(p1)
 						tag = "anchor-center-left position-center-left",
 						ZIndex = 0,
 						backgroundStyle = var2.Color.Extended.Black.Black_50,
-						Size = leftHandlePosition:map(function(p1)
-							return UDim2.fromScale(p1, 1)
+						Size = leftHandlePosition:map(function(p2)
+							return UDim2.fromScale(p2, 1)
 						end)
 					}),
 					ShadowBlockRight = reactModule.createElement(view, {
 						tag = "anchor-center-right position-center-right",
 						ZIndex = 0,
 						backgroundStyle = var2.Color.Extended.Black.Black_50,
-						Size = rightHandlePosition:map(function(p1)
-							return UDim2.fromScale(1 - p1, 1)
+						Size = rightHandlePosition:map(function(p2)
+							return UDim2.fromScale(1 - p2, 1)
 						end)
 					})
 				})

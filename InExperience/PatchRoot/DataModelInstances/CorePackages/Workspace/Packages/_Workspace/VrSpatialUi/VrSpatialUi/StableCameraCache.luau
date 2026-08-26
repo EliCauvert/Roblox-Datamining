@@ -1,5 +1,5 @@
 ﻿local VRUtil = require(script:FindFirstAncestor("VrSpatialUi").Parent.VrCommon).VRUtil
-local var0 = game:DefineFastInt("SpatialUIHeadLookDotNoMovementThreshold", 990) / 1000
+local var1 = game:DefineFastInt("SpatialUIHeadLookDotNoMovementThreshold", 990) / 1000
 local t = {}
 t.__index = t
 
@@ -8,7 +8,7 @@ function t:getCurrentStableCameraCFrame()
 end
 
 function t:updateAndCheckCameraMoved()
-	-- upvalues: VRUtil (ref), var0 (ref)
+	-- upvalues: VRUtil (ref), var1 (ref)
 	local userCFrameWorldSpace = VRUtil.GetUserCFrameWorldSpace(Enum.UserCFrame.Head)
 	
 	if not self.lastUserHeadCFrame then
@@ -16,7 +16,7 @@ function t:updateAndCheckCameraMoved()
 		self.lastCameraCFrame = workspace.CurrentCamera.CFrame
 		
 		return true
-	elseif workspace.CurrentCamera.CameraType == Enum.CameraType.Scriptable and not (self.lastUserHeadCFrame.LookVector:Dot(userCFrameWorldSpace.LookVector) < var0) then
+	elseif workspace.CurrentCamera.CameraType == Enum.CameraType.Scriptable and not (self.lastUserHeadCFrame.LookVector:Dot(userCFrameWorldSpace.LookVector) < var1) then
 		return false
 	end
 	self.lastUserHeadCFrame = userCFrameWorldSpace

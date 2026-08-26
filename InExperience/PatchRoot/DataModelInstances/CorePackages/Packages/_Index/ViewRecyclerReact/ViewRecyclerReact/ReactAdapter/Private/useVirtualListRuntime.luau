@@ -9,14 +9,14 @@ local signalsModule = require(viewRecyclerReact.Parent.Signals)
 local useCompositionPlacementModule = require(script.Parent.useCompositionPlacement)
 local scrollListHostRuntime = viewRecyclerRobloxModule.Internal.ScrollListHostRuntime
 
-local function _(value, p0)
+local function _(value, p1)
 	if value == nil then return end
 	if type(value) == "function" then
-		value(p0)
+		value(p1)
 		
 		return
 	end
-	value.current = p0
+	value.current = p1
 end
 
 local _ = function(p1)
@@ -27,185 +27,185 @@ local _ = function(p1)
 	}
 end
 
-local function listHostConfiguration(p2)
+local function listHostConfiguration(p1)
 	return {
-		axis = p2.axis,
-		dataSource = p2.dataSource,
-		layout = p2.layout,
-		initialScrollAlignment = p2.initialScrollAlignment,
-		autoScrollOnChange = p2.autoScrollOnChange,
-		startReachedThreshold = p2.startReachedThreshold,
-		onStartReached = p2.onStartReached,
-		onEndReached = p2.onEndReached,
-		onViewportChanged = p2.onViewportChanged,
-		onScrollOffsetChanged = p2.onScrollOffsetChanged,
-		onContentLengthChanged = p2.onContentLengthChanged,
-		onVisibleRangeChanged = p2.onVisibleRangeChanged,
-		onMountedRangeChanged = p2.onMountedRangeChanged,
-		onDataPrefetchRequested = p2.onDataPrefetchRequested
+		axis = p1.axis,
+		dataSource = p1.dataSource,
+		layout = p1.layout,
+		initialScrollAlignment = p1.initialScrollAlignment,
+		autoScrollOnChange = p1.autoScrollOnChange,
+		startReachedThreshold = p1.startReachedThreshold,
+		onStartReached = p1.onStartReached,
+		onEndReached = p1.onEndReached,
+		onViewportChanged = p1.onViewportChanged,
+		onScrollOffsetChanged = p1.onScrollOffsetChanged,
+		onContentLengthChanged = p1.onContentLengthChanged,
+		onVisibleRangeChanged = p1.onVisibleRangeChanged,
+		onMountedRangeChanged = p1.onMountedRangeChanged,
+		onDataPrefetchRequested = p1.onDataPrefetchRequested
 	}
 end
 
-local _ = function(p3, p4)
+local _ = function(p1, p2)
 	return {
-		scrollingFrame = p3.current,
-		viewportOverlay = p4.current
+		scrollingFrame = p1.current,
+		viewportOverlay = p2.current
 	}
 end
 
-local function corePolicy(p5)
+local function corePolicy(p1)
 	local t = {
-		overscan = p5.overscan,
-		overscanPolicy = p5.overscanPolicy,
-		dataPrefetch = p5.dataPrefetch,
-		contentAlignment = p5.contentAlignment,
-		endThreshold = p5.endReachedThreshold
+		overscan = p1.overscan,
+		overscanPolicy = p1.overscanPolicy,
+		dataPrefetch = p1.dataPrefetch,
+		contentAlignment = p1.contentAlignment,
+		endThreshold = p1.endReachedThreshold
 	}
-	local t_1 = { isItemStickyHeader = p5.isItemStickyHeader }
-	local pinnedStartItem = p5.pinnedStartItem
+	local t_1 = { isItemStickyHeader = p1.isItemStickyHeader }
+	local pinnedStartItem = p1.pinnedStartItem
 	t_1.pinnedStartItem = if pinnedStartItem == nil then nil else {
 		key = pinnedStartItem.key,
 		value = pinnedStartItem.value,
 		itemViewType = pinnedStartItem.itemType
 	}
-	local pinnedEndItem = p5.pinnedEndItem
+	local pinnedEndItem = p1.pinnedEndItem
 	t_1.pinnedEndItem = if pinnedEndItem == nil then nil else {
 		key = pinnedEndItem.key,
 		value = pinnedEndItem.value,
 		itemViewType = pinnedEndItem.itemType
 	}
 	t.pinnedItems = t_1
-	t.preserveScrollPositionOnChange = p5.preserveScrollPositionOnChange ~= false
+	t.preserveScrollPositionOnChange = p1.preserveScrollPositionOnChange ~= false
 	
 	return t
 end
 
-local _ = function(p6, p7)
+local _ = function(p1, p2)
 	-- upvalues: listHostConfiguration (ref), corePolicy (ref)
 	return {
-		hostConfiguration = listHostConfiguration(p6),
-		hostTarget = p7,
-		corePolicy = corePolicy(p6)
+		hostConfiguration = listHostConfiguration(p1),
+		hostTarget = p2,
+		corePolicy = corePolicy(p1)
 	}
 end
 
-return function(p8)
+return function(p1)
 	-- upvalues: reactModule (ref), recyclingScopeContextModule (ref), recyclingViewportContextModule (ref), signalsModule (ref), useCompositionPlacementModule (ref), scrollListHostRuntime (ref), listHostConfiguration (ref), corePolicy (ref), recyclableViewRegistryModule (ref), viewRecyclerModule (ref)
-	local var13 = reactModule.useRef(p8)
-	var13.current = p8
-	local var14 = reactModule.useContext(recyclingScopeContextModule)
-	assert(var14 ~= nil, "VirtualListRenderer requires a RecyclingScope")
-	local var15 = reactModule.useContext(recyclingViewportContextModule)
-	local var16 = reactModule.useState(function()
+	local var1 = reactModule.useRef(p1)
+	var1.current = p1
+	local var2 = reactModule.useContext(recyclingScopeContextModule)
+	assert(var2 ~= nil, "VirtualListRenderer requires a RecyclingScope")
+	local var3 = reactModule.useContext(recyclingViewportContextModule)
+	local var4 = reactModule.useState(function()
 		-- upvalues: signalsModule (copy)
-		local var27, var28 = signalsModule.createSignal(false)
+		local var5, var6 = signalsModule.createSignal(false)
 		
-		return { active = var27, setActive = var28 }
+		return { active = var5, setActive = var6 }
 	end)
-	local var17 = reactModule.useRef(nil)
-	local var18 = reactModule.useRef(nil)
-	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useState(function()
-		-- upvalues: var14 (ref)
-		return var14.runtime.getRecyclingScope(var14.listOptions)
+	local var5 = reactModule.useRef(nil)
+	local var6 = reactModule.useRef(nil)
+	local var7 = reactModule.useRef(nil)
+	local var8 = reactModule.useState(function()
+		-- upvalues: var2 (ref)
+		return var2.runtime.getRecyclingScope(var2.listOptions)
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), var14 (ref)
-		var20.setMaxPoolSize(var14.listOptions.maxPoolSize)
-	end, { var20, var14.listOptions.maxPoolSize })
-	local var21 = useCompositionPlacementModule(var14.runtime, var14.listOptions.maxPoolSize, var14.listOptions.diagnostics)
-	local var22 = reactModule.useRef({
-		axis = p8.axis,
-		layout = p8.layout,
-		compositionPlacementManager = var21.manager
+		-- upvalues: var8 (ref), var2 (ref)
+		var8.setMaxPoolSize(var2.listOptions.maxPoolSize)
+	end, { var8, var2.listOptions.maxPoolSize })
+	local var9 = useCompositionPlacementModule(var2.runtime, var2.listOptions.maxPoolSize, var2.listOptions.diagnostics)
+	local var10 = reactModule.useRef({
+		axis = p1.axis,
+		layout = p1.layout,
+		compositionPlacementManager = var9.manager
 	})
-	var22.current = {
-		axis = p8.axis,
-		layout = p8.layout,
-		compositionPlacementManager = var21.manager
+	var10.current = {
+		axis = p1.axis,
+		layout = p1.layout,
+		compositionPlacementManager = var9.manager
 	}
-	local var23 = reactModule.useCallback(function(p9)
-		-- upvalues: var22 (ref)
-		local current = var22.current
-		p9.setStructuralPlacement(current.axis, current.layout.requiresItemMeasurement())
-		p9.setCompositionPlacementManager(current.compositionPlacementManager)
+	local var11 = reactModule.useCallback(function(p2)
+		-- upvalues: var10 (ref)
+		local current = var10.current
+		p2.setStructuralPlacement(current.axis, current.layout.requiresItemMeasurement())
+		p2.setCompositionPlacementManager(current.compositionPlacementManager)
 	end, {})
-	local var24 = reactModule.useCallback(function(p10, p11)
-		-- upvalues: var23 (ref)
-		if p11 ~= nil then
-			var23(p10)
+	local var12 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var11 (ref)
+		if p3 ~= nil then
+			var11(p2)
 		end
-	end, { var23 })
-	local var25 = reactModule.useState(function()
-		-- upvalues: scrollListHostRuntime (copy), listHostConfiguration (copy), var13 (ref), var18 (ref), var19 (ref), corePolicy (copy), var20 (ref), recyclableViewRegistryModule (copy), p8 (ref), var15 (ref), var16 (ref), var24 (ref)
+	end, { var11 })
+	local var13 = reactModule.useState(function()
+		-- upvalues: scrollListHostRuntime (copy), listHostConfiguration (copy), var1 (ref), var6 (ref), var7 (ref), corePolicy (copy), var8 (ref), recyclableViewRegistryModule (copy), p1 (ref), var3 (ref), var4 (ref), var12 (ref)
 		return scrollListHostRuntime.newForRecyclableViewRecords({
-			initialHostConfiguration = listHostConfiguration(var13.current),
+			initialHostConfiguration = listHostConfiguration(var1.current),
 			initialHostTarget = {
-				scrollingFrame = var18.current,
-				viewportOverlay = var19.current
+				scrollingFrame = var6.current,
+				viewportOverlay = var7.current
 			},
-			initialCorePolicy = corePolicy(var13.current),
+			initialCorePolicy = corePolicy(var1.current),
 			core = {
-				recyclingScope = var20,
-				getItemViewType = function(p12, p13)
-					-- upvalues: var13 (copy), recyclableViewRegistryModule (copy)
-					local itemType = var13.current.itemType
+				recyclingScope = var8,
+				getItemViewType = function(p2, p3)
+					-- upvalues: var1 (copy), recyclableViewRegistryModule (copy)
+					local itemType = var1.current.itemType
 					assert(recyclableViewRegistryModule.isRegistered(itemType) or type(itemType) == "function", "VirtualList: `itemType` must be a Recyclable view type or selector")
-					local var29 = if recyclableViewRegistryModule.isRegistered(itemType) then itemType else itemType(p12, p13)
-					assert(recyclableViewRegistryModule.isRegistered(var29), "VirtualList: `itemType` selector must return a Recyclable view type")
+					local var14 = if recyclableViewRegistryModule.isRegistered(itemType) then itemType else itemType(p2, p3)
+					assert(recyclableViewRegistryModule.isRegistered(var14), "VirtualList: `itemType` selector must return a Recyclable view type")
 					
-					return var29
+					return var14
 				end,
-				diagnostics = p8.diagnostics,
-				active = if var15 == nil then nil else var16.active
+				diagnostics = p1.diagnostics,
+				active = if var3 == nil then nil else var4.active
 			},
-			prepareItemViewAssignment = var24,
-			onItemViewAssignmentChanged = function(value, p14)
-				-- upvalues: var13 (copy)
-				if p14 == nil then
+			prepareItemViewAssignment = var12,
+			onItemViewAssignmentChanged = function(value, p2)
+				-- upvalues: var1 (copy)
+				if p2 == nil then
 					value.setCompositionPlacementManager(nil)
 				end
-				local instrumentation = var13.current._instrumentation
+				local instrumentation = var1.current._instrumentation
 				
 				if instrumentation ~= nil and instrumentation.assignmentChanged ~= nil then
-					instrumentation.assignmentChanged(value, p14)
+					instrumentation.assignmentChanged(value, p2)
 				end
 			end,
-			onItemViewPresentationChanged = function(p15, p16)
-				-- upvalues: var13 (copy)
-				local instrumentation = var13.current._instrumentation
+			onItemViewPresentationChanged = function(p2, p3)
+				-- upvalues: var1 (copy)
+				local instrumentation = var1.current._instrumentation
 				
 				if instrumentation ~= nil and instrumentation.presentationChanged ~= nil then
-					instrumentation.presentationChanged(p15, p16)
+					instrumentation.presentationChanged(p2, p3)
 				end
 			end
 		})
 	end)
-	local var26 = reactModule.useState(function()
-		-- upvalues: var13 (ref), var18 (ref), var19 (ref), var25 (ref), listHostConfiguration (copy), corePolicy (copy)
-		local current = var13.current
+	local var14 = reactModule.useState(function()
+		-- upvalues: var1 (ref), var6 (ref), var7 (ref), var13 (ref), listHostConfiguration (copy), corePolicy (copy)
+		local current = var1.current
 		local t = {
-			scrollingFrame = var18.current,
-			viewportOverlay = var19.current
+			scrollingFrame = var6.current,
+			viewportOverlay = var7.current
 		}
 		
 		return {
-			synchronize = function(p17)
-				-- upvalues: current (write), var25 (copy), t (write), listHostConfiguration (copy), corePolicy (copy)
-				current = p17
-				var25.update({
-					hostConfiguration = listHostConfiguration(p17),
+			synchronize = function(p2)
+				-- upvalues: current (write), var13 (copy), t (write), listHostConfiguration (copy), corePolicy (copy)
+				current = p2
+				var13.update({
+					hostConfiguration = listHostConfiguration(p2),
 					hostTarget = t,
-					corePolicy = corePolicy(p17)
+					corePolicy = corePolicy(p2)
 				})
 			end,
 			refreshHost = function()
-				-- upvalues: t (write), var18 (copy), var19 (copy), var25 (copy), current (write), listHostConfiguration (copy), corePolicy (copy)
+				-- upvalues: t (write), var6 (copy), var7 (copy), var13 (copy), current (write), listHostConfiguration (copy), corePolicy (copy)
 				t = {
-					scrollingFrame = var18.current,
-					viewportOverlay = var19.current
+					scrollingFrame = var6.current,
+					viewportOverlay = var7.current
 				}
-				var25.update({
+				var13.update({
 					hostConfiguration = listHostConfiguration(current),
 					hostTarget = t,
 					corePolicy = corePolicy(current)
@@ -214,130 +214,130 @@ return function(p8)
 		}
 	end)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var25 (ref)
-		return var25.connect()
-	end, { var25 })
+		-- upvalues: var13 (ref)
+		return var13.connect()
+	end, { var13 })
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref)
-		return var14.registerConsumer()
-	end, { var14 })
+		-- upvalues: var2 (ref)
+		return var2.registerConsumer()
+	end, { var2 })
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref)
+		-- upvalues: var5 (ref)
 		return function()
-			-- upvalues: var17 (copy)
-			local current = var17.current
+			-- upvalues: var5 (copy)
+			local current = var5.current
 			
 			if current ~= nil then
-				var17.current = nil
+				var5.current = nil
 				current()
 			end
 		end
 	end, {})
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var25 (ref), viewRecyclerModule (copy), var23 (ref)
-		for i, v in var25.query({
+		-- upvalues: var13 (ref), viewRecyclerModule (copy), var11 (ref)
+		for i, v in var13.query({
 			type = viewRecyclerModule.VirtualizerQueryType.GetItemViews
 		}) do
-			var23(v)
+			var11(v)
 		end
 	end, {
-		var21.manager,
-		var23,
-		p8.axis,
-		p8.layout,
-		var25
+		var9.manager,
+		var11,
+		p1.axis,
+		p1.layout,
+		var13
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var25 (ref), viewRecyclerModule (copy), var25 (ref)
-		var25.dispatch({
+		-- upvalues: var13 (ref), viewRecyclerModule (copy), var13 (ref)
+		var13.dispatch({
 			type = viewRecyclerModule.VirtualizerCommandType.Activate
 		})
 		
 		return function()
-			-- upvalues: var25 (copy)
-			var25.destroy()
+			-- upvalues: var13 (copy)
+			var13.destroy()
 		end
-	end, { var25, var25 })
+	end, { var13, var13 })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var26 (ref), p8 (ref)
-		var26.synchronize(p8)
+		-- upvalues: var14 (ref), p1 (ref)
+		var14.synchronize(p1)
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: p8 (ref), var25 (ref)
-		local onVisibleRangeChanged = p8.onVisibleRangeChanged
+		-- upvalues: p1 (ref), var13 (ref)
+		local onVisibleRangeChanged = p1.onVisibleRangeChanged
 		
 		if onVisibleRangeChanged == nil then
 			return
 		end
-		onVisibleRangeChanged(var25.getSnapshot().visibleRange)
-	end, { var25, p8.onVisibleRangeChanged })
+		onVisibleRangeChanged(var13.getSnapshot().visibleRange)
+	end, { var13, p1.onVisibleRangeChanged })
 	reactModule.useEffect(function()
-		-- upvalues: p8 (ref), var25 (ref)
-		local onMountedRangeChanged = p8.onMountedRangeChanged
+		-- upvalues: p1 (ref), var13 (ref)
+		local onMountedRangeChanged = p1.onMountedRangeChanged
 		
 		if onMountedRangeChanged == nil then
 			return
 		end
-		onMountedRangeChanged(var25.getSnapshot().mountedRange)
-	end, { var25, p8.onMountedRangeChanged })
+		onMountedRangeChanged(var13.getSnapshot().mountedRange)
+	end, { var13, p1.onMountedRangeChanged })
 	reactModule.useEffect(function()
-		-- upvalues: p8 (ref)
-		if p8.onDataPrefetchRequested == nil then
+		-- upvalues: p1 (ref)
+		if p1.onDataPrefetchRequested == nil then
 			return
 		end
-	end, { var25, p8.onDataPrefetchRequested })
+	end, { var13, p1.onDataPrefetchRequested })
 	reactModule.useEffect(function()
-		-- upvalues: var25 (ref), viewRecyclerModule (copy)
-		var25.dispatch({ type = viewRecyclerModule.VirtualizerCommandType.Refresh })
-	end, { var25, p8.itemType })
+		-- upvalues: var13 (ref), viewRecyclerModule (copy)
+		var13.dispatch({ type = viewRecyclerModule.VirtualizerCommandType.Refresh })
+	end, { var13, p1.itemType })
 	reactModule.useEffect(function()
-		-- upvalues: var25 (ref), var25 (ref), viewRecyclerModule (copy), p8 (ref)
+		-- upvalues: var13 (ref), var13 (ref), viewRecyclerModule (copy), p1 (ref)
 		local t = {
-			scrollToIndex = function(p18, p19)
-				-- upvalues: var25 (copy), var25 (copy), viewRecyclerModule (copy)
-				if var25.isHostReady() then
-					var25.dispatch({
+			scrollToIndex = function(p2, p3)
+				-- upvalues: var13 (copy), var13 (copy), viewRecyclerModule (copy)
+				if var13.isHostReady() then
+					var13.dispatch({
 						type = viewRecyclerModule.VirtualizerCommandType.ScrollToIndex,
-						index = p18,
-						alignment = p19 and p19.alignment
+						index = p2,
+						alignment = p3 and p3.alignment
 					})
 				end
 			end,
 			scrollToOffset = function(value)
-				-- upvalues: var25 (copy), viewRecyclerModule (copy)
-				return var25.dispatch({
+				-- upvalues: var13 (copy), viewRecyclerModule (copy)
+				return var13.dispatch({
 					type = viewRecyclerModule.VirtualizerCommandType.ScrollToOffset,
 					offset = value
 				}).result
 			end,
-			scrollBy = function(p20)
-				-- upvalues: var25 (copy), viewRecyclerModule (copy)
-				return var25.dispatch({
+			scrollBy = function(p2)
+				-- upvalues: var13 (copy), viewRecyclerModule (copy)
+				return var13.dispatch({
 					type = viewRecyclerModule.VirtualizerCommandType.ScrollBy,
-					delta = p20
+					delta = p2
 				}).result
 			end,
 			getScrollState = function()
-				-- upvalues: var25 (copy), viewRecyclerModule (copy)
-				return var25.query({
+				-- upvalues: var13 (copy), viewRecyclerModule (copy)
+				return var13.query({
 					type = viewRecyclerModule.VirtualizerQueryType.GetScrollState
 				})
 			end,
 			captureScrollSnapshot = function()
-				-- upvalues: var25 (copy), viewRecyclerModule (copy)
-				return var25.query({
+				-- upvalues: var13 (copy), viewRecyclerModule (copy)
+				return var13.query({
 					type = viewRecyclerModule.VirtualizerQueryType.CaptureScrollSnapshot
 				})
 			end,
-			restoreScrollSnapshot = function(p21)
-				-- upvalues: var25 (copy), viewRecyclerModule (copy)
-				return var25.dispatch({
+			restoreScrollSnapshot = function(p2)
+				-- upvalues: var13 (copy), viewRecyclerModule (copy)
+				return var13.dispatch({
 					type = viewRecyclerModule.VirtualizerCommandType.RestoreScrollSnapshot,
-					snapshot = p21
+					snapshot = p2
 				}).result
 			end
 		}
-		local listRef = p8.listRef
+		local listRef = p1.listRef
 		
 		if listRef ~= nil then
 			if type(listRef) == "function" then
@@ -347,8 +347,8 @@ return function(p8)
 			end
 		end
 		return function()
-			-- upvalues: p8 (copy)
-			local listRef = p8.listRef
+			-- upvalues: p1 (copy)
+			local listRef = p1.listRef
 			
 			if listRef == nil then return end
 			if type(listRef) == "function" then
@@ -358,11 +358,11 @@ return function(p8)
 			end
 			listRef.current = nil
 		end
-	end, { p8.listRef, var25.isHostReady, var25 })
+	end, { p1.listRef, var13.isHostReady, var13 })
 	reactModule.useEffect(function()
-		-- upvalues: p8 (ref), var18 (ref)
-		local scrollingFrameRef = p8.scrollingFrameRef
-		local current = var18.current
+		-- upvalues: p1 (ref), var6 (ref)
+		local scrollingFrameRef = p1.scrollingFrameRef
+		local current = var6.current
 		
 		if scrollingFrameRef ~= nil then
 			if type(scrollingFrameRef) == "function" then
@@ -372,8 +372,8 @@ return function(p8)
 			end
 		end
 		return function()
-			-- upvalues: p8 (copy)
-			local scrollingFrameRef = p8.scrollingFrameRef
+			-- upvalues: p1 (copy)
+			local scrollingFrameRef = p1.scrollingFrameRef
 			
 			if scrollingFrameRef == nil then return end
 			if type(scrollingFrameRef) == "function" then
@@ -383,30 +383,30 @@ return function(p8)
 			end
 			scrollingFrameRef.current = nil
 		end
-	end, { p8.scrollingFrameRef, var18 })
+	end, { p1.scrollingFrameRef, var6 })
 	
 	return {
-		axis = p8.axis,
-		onScrollingFrameChanged = reactModule.useCallback(function(p22)
-			-- upvalues: var17 (ref), var15 (ref), var16 (ref), var26 (ref)
-			local current = var17.current
+		axis = p1.axis,
+		onScrollingFrameChanged = reactModule.useCallback(function(p2)
+			-- upvalues: var5 (ref), var3 (ref), var4 (ref), var14 (ref)
+			local current = var5.current
 			
 			if current ~= nil then
-				var17.current = nil
+				var5.current = nil
 				current()
 			end
-			if p22 ~= nil and var15 ~= nil then
-				var17.current = var15.register(p22, var16.setActive)
+			if p2 ~= nil and var3 ~= nil then
+				var5.current = var3.register(p2, var4.setActive)
 			end
-			var26.refreshHost()
-		end, { var16, var26.refreshHost, var15 }),
+			var14.refreshHost()
+		end, { var4, var14.refreshHost, var3 }),
 		onViewportOverlayChanged = reactModule.useCallback(function(_)
-			-- upvalues: var26 (ref)
-			var26.refreshHost()
-		end, { var26.refreshHost }),
-		internalRef = var18,
-		viewportOverlayRef = var19,
-		scrollingFrameProps = p8.scrollingFrameProps,
-		tag = p8.tag
+			-- upvalues: var14 (ref)
+			var14.refreshHost()
+		end, { var14.refreshHost }),
+		internalRef = var6,
+		viewportOverlayRef = var7,
+		scrollingFrameProps = p1.scrollingFrameProps,
+		tag = p1.tag
 	}
 end

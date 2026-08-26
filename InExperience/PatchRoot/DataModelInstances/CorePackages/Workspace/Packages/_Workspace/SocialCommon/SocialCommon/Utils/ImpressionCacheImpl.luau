@@ -3,13 +3,13 @@ local playersService = game:GetService("Players")
 local httpService = game:GetService("HttpService")
 local cryoModule = require(script:FindFirstAncestor("SocialCommon").Parent.Cryo)
 
-return function(p0)
+return function(p1)
 	-- upvalues: playersService (ref), appStorageService (ref), httpService (ref), cryoModule (ref)
-	local isKeyAvailableInEngine = p0.isKeyAvailableInEngine
-	local dismissedValue = p0.dismissedValue
-	local appStorageKey = p0.appStorageKey
-	local playersService_1 = p0.PlayersService or playersService
-	local appStorageService_1 = p0.AppStorageService or appStorageService
+	local isKeyAvailableInEngine = p1.isKeyAvailableInEngine
+	local dismissedValue = p1.dismissedValue
+	local appStorageKey = p1.appStorageKey
+	local playersService_1 = p1.PlayersService or playersService
+	local appStorageService_1 = p1.AppStorageService or appStorageService
 	
 	local function _()
 		-- upvalues: playersService_1 (ref)
@@ -18,11 +18,11 @@ return function(p0)
 		return if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
 	end
 	
-	local _ = function(p1)
+	local _ = function(p2)
 		-- upvalues: httpService (copy), appStorageService_1 (ref), appStorageKey (ref)
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p1 (ref)
-			return httpService:JSONEncode(p1)
+			-- upvalues: httpService (copy), p2 (ref)
+			return httpService:JSONEncode(p2)
 		end)
 		
 		if ok then
@@ -33,10 +33,10 @@ return function(p0)
 	
 	local _ = function()
 		-- upvalues: appStorageService_1 (ref), appStorageKey (ref), httpService (copy)
-		local var7 = appStorageService_1:GetItem(appStorageKey) or ""
+		local var1 = appStorageService_1:GetItem(appStorageKey) or ""
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), var7 (ref)
-			return httpService:JSONDecode(var7)
+			-- upvalues: httpService (copy), var1 (ref)
+			return httpService:JSONDecode(var1)
 		end)
 		
 		return if ok and type(status) == "table" then status else nil
@@ -44,15 +44,15 @@ return function(p0)
 	
 	local function setImpressionCountPerUser(value, p2)
 		-- upvalues: appStorageService_1 (ref), appStorageKey (ref), httpService (copy), cryoModule (copy)
-		local var8 = appStorageService_1:GetItem(appStorageKey) or ""
+		local var1 = appStorageService_1:GetItem(appStorageKey) or ""
 		local ok_1, status = pcall(function()
-			-- upvalues: httpService (copy), var8 (ref)
-			return httpService:JSONDecode(var8)
+			-- upvalues: httpService (copy), var1 (ref)
+			return httpService:JSONDecode(var1)
 		end)
-		local var9 = cryoModule.Dictionary.join((if ok_1 and type(status) == "table" then status else nil) or {}, { [value] = p2 })
+		local var2 = cryoModule.Dictionary.join((if ok_1 and type(status) == "table" then status else nil) or {}, { [value] = p2 })
 		ok_1, status_1 = pcall(function()
-			-- upvalues: httpService (copy), var9 (ref)
-			return httpService:JSONEncode(var9)
+			-- upvalues: httpService (copy), var2 (ref)
+			return httpService:JSONEncode(var2)
 		end)
 		
 		if ok_1 then
@@ -61,25 +61,25 @@ return function(p0)
 		end
 	end
 	
-	local _ = function(p3)
+	local _ = function(p2)
 		-- upvalues: appStorageService_1 (ref), appStorageKey (ref), httpService (copy)
-		local var10 = appStorageService_1:GetItem(appStorageKey) or ""
+		local var1 = appStorageService_1:GetItem(appStorageKey) or ""
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), var10 (ref)
-			return httpService:JSONDecode(var10)
+			-- upvalues: httpService (copy), var1 (ref)
+			return httpService:JSONDecode(var1)
 		end)
-		local var11 = if ok and type(status) == "table" then status else nil
+		local var2 = if ok and type(status) == "table" then status else nil
 		
-		return var11 and (var11[p3] and (tonumber(var11[p3]) or 0))
+		return var2 and (var2[p2] and (tonumber(var2[p2]) or 0))
 	end
 	
 	local _ = function(value)
 		-- upvalues: playersService_1 (ref), isKeyAvailableInEngine (ref), setImpressionCountPerUser (ref)
 		local localPlayer = playersService_1.LocalPlayer
-		local var12 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
+		local var1 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
 		
-		if isKeyAvailableInEngine and var12 then
-			setImpressionCountPerUser(var12, value)
+		if isKeyAvailableInEngine and var1 then
+			setImpressionCountPerUser(var1, value)
 		end
 	end
 	
@@ -87,61 +87,61 @@ return function(p0)
 		getValue = function()
 			-- upvalues: playersService_1 (ref), isKeyAvailableInEngine (ref), appStorageService_1 (ref), appStorageKey (ref), httpService (copy), dismissedValue (ref)
 			local localPlayer = playersService_1.LocalPlayer
-			local var13 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
+			local var1 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
 			
-			if not isKeyAvailableInEngine or not var13 then
+			if not isKeyAvailableInEngine or not var1 then
 				return dismissedValue
 			end
-			local var14 = appStorageService_1:GetItem(appStorageKey) or ""
+			local var2 = appStorageService_1:GetItem(appStorageKey) or ""
 			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), var14 (ref)
-				return httpService:JSONDecode(var14)
+				-- upvalues: httpService (copy), var2 (ref)
+				return httpService:JSONDecode(var2)
 			end)
-			local var15 = if ok and type(status) == "table" then status else nil
+			local var3 = if ok and type(status) == "table" then status else nil
 			
-			return var15 and (var15[var13] and (tonumber(var15[var13]) or 0))
+			return var3 and (var3[var1] and (tonumber(var3[var1]) or 0))
 		end,
 		incrementValue = function()
 			-- upvalues: playersService_1 (ref), isKeyAvailableInEngine (ref), appStorageService_1 (ref), appStorageKey (ref), httpService (copy), dismissedValue (ref), setImpressionCountPerUser (ref)
-			local var17
+			local var1
 			local localPlayer = playersService_1.LocalPlayer
-			local var16 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
+			local var2 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
 			
-			if isKeyAvailableInEngine and var16 then
-				local var20
-				local var18 = appStorageService_1:GetItem(appStorageKey) or ""
+			if isKeyAvailableInEngine and var2 then
+				local var3
+				local var4 = appStorageService_1:GetItem(appStorageKey) or ""
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), var18 (ref)
-					return httpService:JSONDecode(var18)
+					-- upvalues: httpService (copy), var4 (ref)
+					return httpService:JSONDecode(var4)
 				end)
-				local var19 = if ok and type(status) == "table" then status else nil
+				local var5 = if ok and type(status) == "table" then status else nil
 				
-				if var19 and var19[var16] then
-					var20 = tonumber(var19[var16])
+				if var5 and var5[var2] then
+					var3 = tonumber(var5[var2])
 					
-					if not var20 then
-						var20 = 0
+					if not var3 then
+						var3 = 0
 					end
-					var17 = var20
+					var1 = var3
 				end
 			else
-				var17 = dismissedValue
+				var1 = dismissedValue
 			end
-			local var21 = var17 + 1
-			var16 = playersService_1.LocalPlayer
-			local var22 = if var16 and var16.UserId and var16.UserId > 0 then tostring(var16.UserId) else nil
+			local var6 = var1 + 1
+			var2 = playersService_1.LocalPlayer
+			local var7 = if var2 and var2.UserId and var2.UserId > 0 then tostring(var2.UserId) else nil
 			
-			if isKeyAvailableInEngine and var22 then
-				setImpressionCountPerUser(var22, var21)
+			if isKeyAvailableInEngine and var7 then
+				setImpressionCountPerUser(var7, var6)
 			end
 		end,
 		dismissValue = function()
 			-- upvalues: dismissedValue (ref), playersService_1 (ref), isKeyAvailableInEngine (ref), setImpressionCountPerUser (ref)
 			local localPlayer = playersService_1.LocalPlayer
-			local var23 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
+			local var1 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
 			
-			if isKeyAvailableInEngine and var23 then
-				setImpressionCountPerUser(var23, dismissedValue)
+			if isKeyAvailableInEngine and var1 then
+				setImpressionCountPerUser(var1, dismissedValue)
 			end
 		end
 	}

@@ -1,10 +1,10 @@
 ﻿local notificationsUpsellConstantsModule = require(script.Parent.Parent.NotificationsUpsellConstants)
 
 return {
-	getPushUpsellPromptedCount = function(p0, p1)
+	getPushUpsellPromptedCount = function(p1, p2)
 		local ok, status = pcall(function()
-			-- upvalues: p0 (ref), p1 (ref)
-			return p0:GetItem(p1)
+			-- upvalues: p1 (ref), p2 (ref)
+			return p1:GetItem(p2)
 		end)
 		
 		if not ok then
@@ -14,19 +14,19 @@ return {
 		
 		return if var1 == nil then 0 else var1
 	end,
-	getPushSysUpsellPromptTimestamp = function(p2)
+	getPushSysUpsellPromptTimestamp = function(p1)
 		-- upvalues: notificationsUpsellConstantsModule (ref)
 		local ok, status = pcall(function()
-			-- upvalues: p2 (ref), notificationsUpsellConstantsModule (copy)
-			return p2:GetItem(notificationsUpsellConstantsModule.LocalStorageKeys.SysPromptShownTimestamp)
+			-- upvalues: p1 (ref), notificationsUpsellConstantsModule (copy)
+			return p1:GetItem(notificationsUpsellConstantsModule.LocalStorageKeys.SysPromptShownTimestamp)
 		end)
 		
 		if not ok then
 			return -1
 		end
-		local var2 = tonumber(status)
+		local var1 = tonumber(status)
 		
-		return if var2 == nil then 0 else var2
+		return if var1 == nil then 0 else var1
 	end,
 	getPushEduUpsellResponseTimestamp = function(value)
 		-- upvalues: notificationsUpsellConstantsModule (ref)
@@ -38,46 +38,46 @@ return {
 		if not ok then
 			return -1
 		end
-		local var3 = tonumber(status)
+		local var1 = tonumber(status)
 		
-		return if var3 == nil then 0 else var3
+		return if var1 == nil then 0 else var1
 	end,
-	incrementPushUpsellPromptedCount = function(p3, p4)
+	incrementPushUpsellPromptedCount = function(p1, p2)
 		local ok, status = pcall(function()
-			-- upvalues: p3 (ref), p4 (ref)
-			return p3:GetItem(p4)
+			-- upvalues: p1 (ref), p2 (ref)
+			return p1:GetItem(p2)
 		end)
 		
 		if ok then
-			local var4 = tonumber(status) or 0
+			local var1 = tonumber(status) or 0
 			pcall(function()
-				-- upvalues: p3 (ref), p4 (ref), var4 (ref)
-				p3:SetItem(p4, tostring(var4 + 1))
-				p3:Flush()
+				-- upvalues: p1 (ref), p2 (ref), var1 (ref)
+				p1:SetItem(p2, tostring(var1 + 1))
+				p1:Flush()
 			end)
 		end
 	end,
-	setPushSysUpsellPromptTimestamp = function(value, p5)
+	setPushSysUpsellPromptTimestamp = function(value, p1)
 		-- upvalues: notificationsUpsellConstantsModule (ref)
 		pcall(function()
-			-- upvalues: value (ref), notificationsUpsellConstantsModule (copy), p5 (ref)
-			value:SetItem(notificationsUpsellConstantsModule.LocalStorageKeys.SysPromptShownTimestamp, tostring(p5))
+			-- upvalues: value (ref), notificationsUpsellConstantsModule (copy), p1 (ref)
+			value:SetItem(notificationsUpsellConstantsModule.LocalStorageKeys.SysPromptShownTimestamp, tostring(p1))
 			value:Flush()
 		end)
 	end,
-	setPushEduUpsellResponseTimestamp = function(value, p6)
+	setPushEduUpsellResponseTimestamp = function(value, p1)
 		-- upvalues: notificationsUpsellConstantsModule (ref)
 		pcall(function()
-			-- upvalues: value (ref), notificationsUpsellConstantsModule (copy), p6 (ref)
-			value:SetItem(notificationsUpsellConstantsModule.LocalStorageKeys.EduPromptResponseTimestamp, tostring(p6))
+			-- upvalues: value (ref), notificationsUpsellConstantsModule (copy), p1 (ref)
+			value:SetItem(notificationsUpsellConstantsModule.LocalStorageKeys.EduPromptResponseTimestamp, tostring(p1))
 			value:Flush()
 		end)
 	end,
-	setPushEduUpsellResponse = function(value, p7)
+	setPushEduUpsellResponse = function(value, p1)
 		-- upvalues: notificationsUpsellConstantsModule (ref)
 		pcall(function()
-			-- upvalues: value (ref), notificationsUpsellConstantsModule (copy), p7 (ref)
-			value:SetItem(notificationsUpsellConstantsModule.LocalStorageKeys.EduPromptResponse, p7)
+			-- upvalues: value (ref), notificationsUpsellConstantsModule (copy), p1 (ref)
+			value:SetItem(notificationsUpsellConstantsModule.LocalStorageKeys.EduPromptResponse, p1)
 			value:Flush()
 		end)
 	end

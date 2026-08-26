@@ -9,37 +9,37 @@ local getShopGlobalIconStoreModule = require(inExperienceShop.Stores.GetShopGlob
 return function()
 	-- upvalues: fFlagEnableExperienceShopGlobalIconModule (ref), getShopGlobalIconStoreModule (ref), fFlagExperienceShopGlobalIconSkipCoreGuiCheckModule (ref), starterGuiService (ref), signalsModule (ref), getInExperienceShopStoreModule (ref)
 	if fFlagEnableExperienceShopGlobalIconModule then
-		local var7 = getShopGlobalIconStoreModule(false)
-		local var8 = if fFlagExperienceShopGlobalIconSkipCoreGuiCheckModule then true else starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.ExperienceShop)
-		local var9 = false
+		local var1 = getShopGlobalIconStoreModule(false)
+		local var2 = if fFlagExperienceShopGlobalIconSkipCoreGuiCheckModule then true else starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.ExperienceShop)
+		local var3 = false
 		
 		local function _()
-			-- upvalues: var7 (ref), var8 (write), var9 (write)
-			var7.setEnabled(var8 and var9)
+			-- upvalues: var1 (ref), var2 (write), var3 (write)
+			var1.setEnabled(var2 and var3)
 		end
 		
-		local var10 = if fFlagExperienceShopGlobalIconSkipCoreGuiCheckModule then nil else starterGuiService.CoreGuiChangedSignal:Connect(function(p0, p1)
-			-- upvalues: var8 (write), var7 (ref), var9 (write)
-			if p0 == Enum.CoreGuiType.ExperienceShop or p0 == Enum.CoreGuiType.All then
-				var8 = p1
-				var7.setEnabled(var8 and var9)
+		local var4 = if fFlagExperienceShopGlobalIconSkipCoreGuiCheckModule then nil else starterGuiService.CoreGuiChangedSignal:Connect(function(p1, p2)
+			-- upvalues: var2 (write), var1 (ref), var3 (write)
+			if p1 == Enum.CoreGuiType.ExperienceShop or p1 == Enum.CoreGuiType.All then
+				var2 = p2
+				var1.setEnabled(var2 and var3)
 			end
 		end)
-		local var11 = nil
-		var11 = signalsModule.createEffect(function(p2)
-			-- upvalues: getInExperienceShopStoreModule (copy), var9 (write), var7 (ref), var8 (write), var11 (write)
-			local var12 = getInExperienceShopStoreModule(false)
+		local var5 = nil
+		var5 = signalsModule.createEffect(function(p1)
+			-- upvalues: getInExperienceShopStoreModule (copy), var3 (write), var1 (ref), var2 (write), var5 (write)
+			local var6 = getInExperienceShopStoreModule(false)
 			
-			if var12.getLoading(p2) then return end
-			if var12.getGlobalIconBackendEnabled(p2) then
-				var9 = true
-				var7.setEnabled(var8 and var9)
-				var7.setStatusIndicatorEnabled(var12.getGlobalIconHasNewOffers(p2))
+			if var6.getLoading(p1) then return end
+			if var6.getGlobalIconBackendEnabled(p1) then
+				var3 = true
+				var1.setEnabled(var2 and var3)
+				var1.setStatusIndicatorEnabled(var6.getGlobalIconHasNewOffers(p1))
 				task.defer(function()
-					-- upvalues: var11 (copy)
-					if var11 then
-						var11()
-						var11 = nil
+					-- upvalues: var5 (copy)
+					if var5 then
+						var5()
+						var5 = nil
 					end
 				end)
 				
@@ -48,13 +48,13 @@ return function()
 		end)
 		
 		return function()
-			-- upvalues: fFlagExperienceShopGlobalIconSkipCoreGuiCheckModule (copy), var10 (ref), var11 (write)
-			if not fFlagExperienceShopGlobalIconSkipCoreGuiCheckModule and var10 then
-				var10:Disconnect()
+			-- upvalues: fFlagExperienceShopGlobalIconSkipCoreGuiCheckModule (copy), var4 (ref), var5 (write)
+			if not fFlagExperienceShopGlobalIconSkipCoreGuiCheckModule and var4 then
+				var4:Disconnect()
 			end
-			if var11 then
-				var11()
-				var11 = nil
+			if var5 then
+				var5()
+				var5 = nil
 			end
 		end
 	end

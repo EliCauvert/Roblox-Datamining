@@ -4,8 +4,8 @@ local selectConversationsModule = require(appChat.Components.ChatLanding.Convers
 
 return function()
 	-- upvalues: useSelector (ref), selectConversationsModule (ref)
-	return useSelector(function(p0)
+	return useSelector(function(p1)
 		-- upvalues: selectConversationsModule (copy)
-		return selectConversationsModule(p0)
+		return selectConversationsModule(p1)
 	end)
 end

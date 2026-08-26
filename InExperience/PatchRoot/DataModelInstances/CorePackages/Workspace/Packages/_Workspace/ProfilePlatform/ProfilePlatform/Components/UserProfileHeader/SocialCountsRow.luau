@@ -2,12 +2,12 @@
 local reactModule = require(parent.React)
 local horizontalPageMargin = require(parent.UIBlox).App.Container.HorizontalPageMargin
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), horizontalPageMargin (ref)
 	return reactModule.createElement(horizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
-		layoutOrder = p0.layoutOrder,
-		size = p0.size
-	}, p0.children)
+		layoutOrder = p1.layoutOrder,
+		size = p1.size
+	}, p1.children)
 end

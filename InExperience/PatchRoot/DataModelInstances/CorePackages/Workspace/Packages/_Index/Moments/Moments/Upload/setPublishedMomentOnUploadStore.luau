@@ -1,13 +1,13 @@
 ﻿local refreshOwnMomentsAfterPublishModule = require(script.Parent.refreshOwnMomentsAfterPublish)
 
-return function(value, p0, p1)
+return function(value, p1, p2)
 	-- upvalues: refreshOwnMomentsAfterPublishModule (ref)
-	local var1 = refreshOwnMomentsAfterPublishModule(value, p1)
+	local var1 = refreshOwnMomentsAfterPublishModule(value, p2)
 	
 	if var1 == nil then
-		p0.setSuccess(value)
+		p1.setSuccess(value)
 		
 		return
 	end
-	p0.setSuccess(var1)
+	p1.setSuccess(var1)
 end

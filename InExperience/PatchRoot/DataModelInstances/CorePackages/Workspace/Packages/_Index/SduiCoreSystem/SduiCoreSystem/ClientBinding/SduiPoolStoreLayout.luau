@@ -5,16 +5,16 @@ local tutilsModule = require(parent.tutils)
 local _ = require(sduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
 local frozen = table.freeze({})
 
-local function getSpanConfigAt(p0, p1)
-	local var4 = p0[p1]
+local function getSpanConfigAt(p1, p2)
+	local var1 = p1[p2]
 	
-	if var4 == nil then
+	if var1 == nil then
 		return nil
 	end
-	local colSpan = var4.colSpan or 1
-	local rowSpan = var4.rowSpan or 1
-	local alignmentType = var4.alignmentType
-	local minRowPadding = var4.minRowPadding or 0
+	local colSpan = var1.colSpan or 1
+	local rowSpan = var1.rowSpan or 1
+	local alignmentType = var1.alignmentType
+	local minRowPadding = var1.minRowPadding or 0
 	
 	return if colSpan == 1 and rowSpan == 1 and (alignmentType == nil and minRowPadding == 0) then nil else {
 		colSpan = colSpan,
@@ -27,60 +27,60 @@ end
 return {
 	EMPTY_CELLS = frozen,
 	getSpanConfigAt = getSpanConfigAt,
-	makePoolGetSpanConfig = function(p2)
+	makePoolGetSpanConfig = function(p1)
 		-- upvalues: getSpanConfigAt (ref)
-		return function(_, p3)
-			-- upvalues: getSpanConfigAt (copy), p2 (ref)
-			return getSpanConfigAt(p2, p3)
+		return function(_, p2)
+			-- upvalues: getSpanConfigAt (copy), p1 (ref)
+			return getSpanConfigAt(p1, p2)
 		end
 	end,
-	layoutToCells = function(p4, p5, p6, p7)
+	layoutToCells = function(p1, p2, p3, p4)
 		-- upvalues: frozen (ref), getSpanConfigAt (ref)
-		if p4 == nil then
+		if p1 == nil then
 			return frozen, 0
 		end
-		local var8 = 0
+		local var1 = 0
 		
-		for i in p4 do
-			if var8 < i then
-				var8 = i
+		for i in p1 do
+			if var1 < i then
+				var1 = i
 			end
 		end
-		if var8 == 0 then
+		if var1 == 0 then
 			return frozen, 0
 		end
 		local t = {}
 		
-		for i_2 = 1, var8 do
-			local var10 = p4[i_2] or {}
+		for i_2 = 1, var1 do
+			local var2 = p1[i_2] or {}
 			
-			for i_1 = 1, p5 do
-				local var11 = var10[i_1]
+			for i_1 = 1, p2 do
+				local var3 = var2[i_1]
 				
-				if var11 == nil or var11 <= 0 then
+				if var3 == nil or var3 <= 0 then
 					table.insert(t, {})
 				else
 					table.insert(t, {
-						item = p6[var11],
-						realIndex = var11,
-						spanOverride = if p7 ~= nil then nil else getSpanConfigAt(p7, var11)
+						item = p3[var3],
+						realIndex = var3,
+						spanOverride = if p4 ~= nil then nil else getSpanConfigAt(p4, var3)
 					})
 				end
 			end
 		end
-		return t, var8
+		return t, var1
 	end,
-	cellsEqual = function(p8, p9)
+	cellsEqual = function(p5, p6)
 		-- upvalues: tutilsModule (ref)
-		if p8 == p9 then
+		if p5 == p6 then
 			return true
-		elseif p8 == nil or p9 == nil then
+		elseif p5 == nil or p6 == nil then
 			return false
-		elseif #p8 ~= #p9 then
+		elseif #p5 ~= #p6 then
 			return false
 		end
-		for i, v in p8 do
-			if not tutilsModule.shallowEqual(v, p9[i]) then
+		for i, v in p5 do
+			if not tutilsModule.shallowEqual(v, p6[i]) then
 				return false
 			end
 		end

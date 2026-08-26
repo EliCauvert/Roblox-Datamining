@@ -8,7 +8,7 @@ local feedbackAlert = foundationModule.FeedbackAlert
 local view = foundationModule.View
 local telemetryEventType = require(genericAbuseReporting.BeduiV2.Analytics.analyticsService).TelemetryEventType
 local useAbuseReportAnalytics = require(genericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
-local var4 = motionModule.createState({
+local var1 = motionModule.createState({
 	groupTransparency = 1,
 	sizeY = 0,
 	position = UDim2.new(0, 0, -0.5, 0)
@@ -22,91 +22,91 @@ local t = {
 	success = alertSeverity.Success
 }
 
-return reactModule.memo(function(p0)
-	-- upvalues: motionModule (ref), var4 (ref), reactModule (ref), useAbuseReportAnalytics (ref), t (ref), telemetryEventType (ref), view (ref), feedbackAlert (ref), alertSeverity (ref)
-	local var6 = motionModule.usePresence()
-	local var7, var8 = motionModule.useMotion(var4)
-	local var9 = reactModule.useRef(0)
-	local var10 = reactModule.useRef(var6.isPresent)
+return reactModule.memo(function(p1)
+	-- upvalues: motionModule (ref), var1 (ref), reactModule (ref), useAbuseReportAnalytics (ref), t (ref), telemetryEventType (ref), view (ref), feedbackAlert (ref), alertSeverity (ref)
+	local var2 = motionModule.usePresence()
+	local var3, var4 = motionModule.useMotion(var1)
+	local var5 = reactModule.useRef(0)
+	local var6 = reactModule.useRef(var2.isPresent)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	reactModule.useEffect(function()
-		-- upvalues: t (copy), p0 (ref), sendEvent (ref), telemetryEventType (copy)
-		if not t[p0.severity] then
+		-- upvalues: t (copy), p1 (ref), sendEvent (ref), telemetryEventType (copy)
+		if not t[p1.severity] then
 			sendEvent({
 				sub_event_type = telemetryEventType.Error,
 				error_detail = {
-					error_message = "feedback missing correct severity, received type: " .. tostring(p0.severity)
+					error_message = "feedback missing correct severity, received type: " .. tostring(p1.severity)
 				}
 			})
 		end
-	end, { p0.severity, sendEvent })
+	end, { p1.severity, sendEvent })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var6 (ref)
-		var10.current = var6.isPresent
-	end, { var6.isPresent })
+		-- upvalues: var6 (ref), var2 (ref)
+		var6.current = var2.isPresent
+	end, { var2.isPresent })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var9 (ref), var8 (ref), p0 (ref)
-		if var6.isPresent then
-			if var9.current > 0 then
-				var8({
+		-- upvalues: var2 (ref), var5 (ref), var4 (ref), p1 (ref)
+		if var2.isPresent then
+			if var5.current > 0 then
+				var4({
 					groupTransparency = 0,
 					position = UDim2.new(0, 0, 0, 1),
-					sizeY = var9.current + 2 + (p0.bottomMargin or 0)
+					sizeY = var5.current + 2 + (p1.bottomMargin or 0)
 				})
 				
 				return
 			end
 		else
-			var8({
+			var4({
 				groupTransparency = 1,
 				sizeY = 0,
 				position = UDim2.new(0, 0, -0.5, 0)
 			}, {
-				onAnimationComplete = function(p1)
-					-- upvalues: var6 (copy)
-					if p1 == true then
-						var6.onExitComplete()
+				onAnimationComplete = function(p2)
+					-- upvalues: var2 (copy)
+					if p2 == true then
+						var2.onExitComplete()
 					end
 				end
 			})
 		end
 	end, {
-		var6.isPresent,
-		var8,
-		var6.onExitComplete,
-		p0.bottomMargin
+		var2.isPresent,
+		var4,
+		var2.onExitComplete,
+		p1.bottomMargin
 	})
-	local maxWidth = p0.maxWidth
+	local maxWidth = p1.maxWidth
 	
 	return reactModule.createElement(view, {
 		ClipsDescendants = true,
-		Size = var7.sizeY:map(function(p2)
+		Size = var3.sizeY:map(function(p2)
 			-- upvalues: maxWidth (ref)
 			return if maxWidth == nil then UDim2.new(1, 0, 0, p2) else UDim2.new(0, maxWidth, 0, p2)
 		end),
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Content = reactModule.createElement("CanvasGroup", {
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundTransparency = 1,
-			GroupTransparency = var7.groupTransparency,
-			Position = var7.position,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p3)
-				-- upvalues: var9 (ref), var10 (ref), var8 (ref), p0 (ref)
-				local y = p3.AbsoluteSize.Y
+			GroupTransparency = var3.groupTransparency,
+			Position = var3.position,
+			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
+				-- upvalues: var5 (ref), var6 (ref), var4 (ref), p1 (ref)
+				local y = p2.AbsoluteSize.Y
 				
-				if y <= 0 or y == var9.current then return end
-				var9.current = y
+				if y <= 0 or y == var5.current then return end
+				var5.current = y
 				
-				if var10.current then
-					var8({
+				if var6.current then
+					var4({
 						groupTransparency = 0,
 						position = UDim2.new(0, 0, 0, 1),
-						sizeY = y + 2 + (p0.bottomMargin or 0)
+						sizeY = y + 2 + (p1.bottomMargin or 0)
 					})
 				end
-			end, { var8, p0.bottomMargin })
+			end, { var4, p1.bottomMargin })
 		}, {
 			Padding = reactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 1),
@@ -115,10 +115,10 @@ return reactModule.memo(function(p0)
 				PaddingRight = UDim.new(0, 1)
 			}),
 			Alert = reactModule.createElement(feedbackAlert, {
-				severity = t[p0.severity] or alertSeverity.Info,
-				title = p0.title,
-				subtitle = p0.subtitle,
-				onClose = p0.onClose
+				severity = t[p1.severity] or alertSeverity.Info,
+				title = p1.title,
+				subtitle = p1.subtitle,
+				onClose = p1.onClose
 			})
 		})
 	})

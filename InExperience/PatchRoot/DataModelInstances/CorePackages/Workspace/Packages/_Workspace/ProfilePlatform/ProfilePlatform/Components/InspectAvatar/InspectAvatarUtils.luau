@@ -25,9 +25,9 @@ for i, v in Enum.AvatarAssetType:GetEnumItems() do
 		t_1[v.Value] = true
 	end
 end
-local function getPriceStatusForProfile(p0)
+local function getPriceStatusForProfile(p1)
 	-- upvalues: getPriceStatusInShop (ref)
-	return getPriceStatusInShop(p0)
+	return getPriceStatusInShop(p1)
 end
 
 local function isWearableAssetType(value)
@@ -52,10 +52,10 @@ local function collectBundleComponentIds(p1, p2)
 	local t = {}
 	
 	for i, v in p1 do
-		local var16 = p2[v]
+		local var1 = p2[v]
 		
-		if var16 and var16.assetsInBundle then
-			for i_1, v_1 in var16.assetsInBundle do
+		if var1 and var1.assetsInBundle then
+			for i_1, v_1 in var1.assetsInBundle do
 				t[tostring(v_1.id)] = true
 			end
 		end
@@ -68,32 +68,32 @@ local function isPurchasableStatus(p3)
 	return if p3 ~= priceStatus.Free then if p3 ~= priceStatus.PurchaseFromRoblox then p3 == priceStatus.PurchaseFromResale else true else true
 end
 
-local function isItemPurchasable(p4)
+local function isItemPurchasable(p3)
 	-- upvalues: getPriceStatusInShop (ref), priceStatus (ref)
-	if p4.isOwned then
+	if p3.isOwned then
 		return false
 	end
-	local var17 = getPriceStatusInShop(p4)
+	local var2 = getPriceStatusInShop(p3)
 	
-	return (if var17 ~= priceStatus.Free then if var17 ~= priceStatus.PurchaseFromRoblox then var17 == priceStatus.PurchaseFromResale else true else true) and p4.collectibleProductId ~= nil
+	return (if var2 ~= priceStatus.Free then if var2 ~= priceStatus.PurchaseFromRoblox then var2 == priceStatus.PurchaseFromResale else true else true) and p3.collectibleProductId ~= nil
 end
 
-local function getEffectivePrice(p5)
+local function getEffectivePrice(p3)
 	-- upvalues: getPriceStatusInShop (ref), priceStatus (ref)
-	return if getPriceStatusInShop(p5) == priceStatus.PurchaseFromResale then if p5.collectibleItemDetails then p5.collectibleItemDetails.lowestResalePrice or 0 else 0 else p5.priceInRobux or 0
+	return if getPriceStatusInShop(p3) == priceStatus.PurchaseFromResale then if p3.collectibleItemDetails then p3.collectibleItemDetails.lowestResalePrice or 0 else 0 else p3.priceInRobux or 0
 end
 
-local function _(p6)
+local function _(p3)
 	-- upvalues: salesLocationType (ref)
-	return if p6.saleLocationType == salesLocationType.ShopOnly then salesLocationType.ShopAndAllExperiences else p6.saleLocationType
+	return if p3.saleLocationType == salesLocationType.ShopOnly then salesLocationType.ShopAndAllExperiences else p3.saleLocationType
 end
 
-local _ = function(p7, p8, p9)
-	return if p8 and p8.quantityOwned ~= nil then p8.quantityOwned > 0 elseif p9 == nil then p7.owned == true else p9
+local _ = function(p3, p4, p5)
+	return if p4 and p4.quantityOwned ~= nil then p4.quantityOwned > 0 elseif p5 == nil then p3.owned == true else p5
 end
 
-local _ = function(p10)
-	local itemRestrictions = p10.itemRestrictions
+local _ = function(p3)
+	local itemRestrictions = p3.itemRestrictions
 	
 	if not itemRestrictions or #itemRestrictions == 0 then
 		return nil
@@ -106,33 +106,33 @@ local _ = function(p10)
 	return t
 end
 
-local function buildCollectibleItemDetails(p11, p12, p13)
-	return if p11.hasResellers or (p11.unitsAvailableForConsumption or (p11.totalQuantity or (p11.lowestResalePrice or p12 and p12.quantityOwned))) then {
-		hasResellers = p11.hasResellers,
-		unitsAvailableForConsumption = p11.unitsAvailableForConsumption,
-		totalQuantity = p11.totalQuantity,
-		lowestResalePrice = p11.lowestResalePrice,
-		resellableCount = if p12 then p12.quantityOwned else nil,
-		collectibleLowestAvailableResaleProductId = p13
+local function buildCollectibleItemDetails(p4, p5, p6)
+	return if p4.hasResellers or (p4.unitsAvailableForConsumption or (p4.totalQuantity or (p4.lowestResalePrice or p5 and p5.quantityOwned))) then {
+		hasResellers = p4.hasResellers,
+		unitsAvailableForConsumption = p4.unitsAvailableForConsumption,
+		totalQuantity = p4.totalQuantity,
+		lowestResalePrice = p4.lowestResalePrice,
+		resellableCount = if p5 then p5.quantityOwned else nil,
+		collectibleLowestAvailableResaleProductId = p6
 	} else nil
 end
 
-local function buildAssetsInBundle(value, p14)
-	local var19 = nil
+local function buildAssetsInBundle(value, p4)
+	local var2 = nil
 	
-	if p14 and p14.assetsInBundle then
+	if p4 and p4.assetsInBundle then
 		local t = {}
 		
-		for i, v in p14.assetsInBundle do
+		for i, v in p4.assetsInBundle do
 			table.insert(t, {
 				id = tostring(v.id),
 				assetType = tostring(v.assetType),
 				isIncluded = v.isIncluded
 			})
 		end
-		var19 = t
+		var2 = t
 		
-		return var19
+		return var2
 	elseif value.bundledItems then
 		local t = {}
 		
@@ -142,32 +142,32 @@ local function buildAssetsInBundle(value, p14)
 			end
 		end
 		if #t > 0 then
-			var19 = t
+			var2 = t
 		end
 	end
-	return var19
+	return var2
 end
 
-local function computeBundleParts(p15, p16, p17)
+local function computeBundleParts(p5, p6, p7)
 	-- upvalues: t_1 (ref)
-	local var22 = 0
+	local var3 = 0
 	local t = {}
 	
-	if p16 and p16.assetsInBundle then
-		for i, v in p16.assetsInBundle do
-			if p17[tostring(v.id)] then
-				var22 += 1
+	if p6 and p6.assetsInBundle then
+		for i, v in p6.assetsInBundle do
+			if p7[tostring(v.id)] then
+				var3 += 1
 				
 				if t_1[v.assetType] == true then
 					table.insert(t, v.id)
 				end
 			end
 		end
-		return var22, t
-	elseif p15.bundledItems then
-		for i, v in p15.bundledItems do
+		return var3, t
+	elseif p5.bundledItems then
+		for i, v in p5.bundledItems do
 			if v.type == "Asset" then
-				var22 += 1
+				var3 += 1
 				
 				if v.assetType and t_1[v.assetType] == true then
 					table.insert(t, v.id)
@@ -175,49 +175,49 @@ local function computeBundleParts(p15, p16, p17)
 			end
 		end
 	end
-	return var22, t
+	return var3, t
 end
 
-local _ = function(p18)
-	return if p18.taxonomy and #p18.taxonomy > 0 then p18.taxonomy[1].taxonomyName else nil
+local _ = function(p8)
+	return if p8.taxonomy and #p8.taxonomy > 0 then p8.taxonomy[1].taxonomyName else nil
 end
 
 return {
 	isWearableAssetType = isWearableAssetType,
 	expandBundleToAssetIds = expandBundleToAssetIds,
 	collectBundleComponentIds = collectBundleComponentIds,
-	buildItemData = function(p19, p20, p21, p22, p23, p24)
+	buildItemData = function(p8, p9, p10, p11, p12, p13)
 		-- upvalues: computeBundleParts (ref), salesLocationType (ref), buildCollectibleItemDetails (ref), buildAssetsInBundle (ref)
-		local var28
-		local assetType = p19.assetType or p19.bundleType
-		local var25, var26 = computeBundleParts(p19, p20, p21)
+		local var4
+		local assetType = p8.assetType or p8.bundleType
+		local var5, var6 = computeBundleParts(p8, p9, p10)
 		local t = {
-			id = tostring(p19.id),
-			name = p19.name,
-			itemType = p19.itemType or "Asset",
+			id = tostring(p8.id),
+			name = p8.name,
+			itemType = p8.itemType or "Asset",
 			itemSubType = if assetType then tostring(assetType) else nil,
-			priceInRobux = p19.price,
+			priceInRobux = p8.price,
 			creator = {
-				creatorId = tostring(p19.creatorTargetId or ""),
-				creatorName = p19.creatorName,
-				creatorHasVerifiedBadge = p19.creatorHasVerifiedBadge
+				creatorId = tostring(p8.creatorTargetId or ""),
+				creatorName = p8.creatorName,
+				creatorHasVerifiedBadge = p8.creatorHasVerifiedBadge
 			},
-			saleLocationType = if p19.saleLocationType == salesLocationType.ShopOnly then salesLocationType.ShopAndAllExperiences else p19.saleLocationType,
-			isOffSale = p19.isOffSale
+			saleLocationType = if p8.saleLocationType == salesLocationType.ShopOnly then salesLocationType.ShopAndAllExperiences else p8.saleLocationType,
+			isOffSale = p8.isOffSale
 		}
 		
-		if p20 and p20.quantityOwned ~= nil then
-			var28 = p20.quantityOwned > 0
-			var28 = nil
+		if p9 and p9.quantityOwned ~= nil then
+			var4 = p9.quantityOwned > 0
+			var4 = nil
 		else
-			var28 = if p23 ~= nil then p19.owned == true else p23
+			var4 = if p12 ~= nil then p8.owned == true else p12
 		end
-		local var29
-		t.isOwned = var28
-		t.noPriceStatus = if p20 then p20.noPriceStatus else nil
-		t.catalogPriceStatus = p19.priceStatus
-		t.collectibleItemId = p19.collectibleItemId
-		local itemRestrictions = p19.itemRestrictions
+		local var7
+		t.isOwned = var4
+		t.noPriceStatus = if p9 then p9.noPriceStatus else nil
+		t.catalogPriceStatus = p8.priceStatus
+		t.collectibleItemId = p8.collectibleItemId
+		local itemRestrictions = p8.itemRestrictions
 		
 		if itemRestrictions and #itemRestrictions ~= 0 then
 			local t_1 = {}
@@ -225,43 +225,43 @@ return {
 			for i, v in itemRestrictions do
 				t_1[v] = true
 			end
-			var29 = t_1
+			var7 = t_1
 		else
-			var29 = nil
+			var7 = nil
 		end
-		t.itemRestrictions = var29
-		t.collectibleItemDetails = buildCollectibleItemDetails(p19, p20, p24)
-		t.assetsInBundle = buildAssetsInBundle(p19, p20)
-		t.collectibleProductId = if p20 then p20.collectibleProductId else p22
-		t.bundlePartsCount = var25
-		t.bundleAssetIds = var26
-		t.taxonomyName = if p19.taxonomy and #p19.taxonomy > 0 then p19.taxonomy[1].taxonomyName else nil
+		t.itemRestrictions = var7
+		t.collectibleItemDetails = buildCollectibleItemDetails(p8, p9, p13)
+		t.assetsInBundle = buildAssetsInBundle(p8, p9)
+		t.collectibleProductId = if p9 then p9.collectibleProductId else p11
+		t.bundlePartsCount = var5
+		t.bundleAssetIds = var6
+		t.taxonomyName = if p8.taxonomy and #p8.taxonomy > 0 then p8.taxonomy[1].taxonomyName else nil
 		
 		return t
 	end,
 	isPurchasableStatus = isPurchasableStatus,
 	isItemPurchasable = isItemPurchasable,
 	getEffectivePrice = getEffectivePrice,
-	sortDisplayItems = function(p25)
+	sortDisplayItems = function(p14)
 		-- upvalues: getPriceStatusInShop (ref), priceStatus (ref)
-		table.sort(p25, function(p26, p27)
+		table.sort(p14, function(p15, p16)
 			-- upvalues: getPriceStatusInShop (copy), priceStatus (copy)
-			local function _(p28)
+			local function _(p17)
 				-- upvalues: getPriceStatusInShop (copy), priceStatus (copy)
-				local var34 = getPriceStatusInShop(p28)
+				local var8 = getPriceStatusInShop(p17)
 				
-				return if if var34 ~= priceStatus.Free then if var34 ~= priceStatus.PurchaseFromRoblox then var34 == priceStatus.PurchaseFromResale else true else true then 0 elseif var34 == priceStatus.Owned or var34 == priceStatus.QuantityLimitReached then 1 else 2
+				return if if var8 ~= priceStatus.Free then if var8 ~= priceStatus.PurchaseFromRoblox then var8 == priceStatus.PurchaseFromResale else true else true then 0 elseif var8 == priceStatus.Owned or var8 == priceStatus.QuantityLimitReached then 1 else 2
 			end
 			
-			local var31 = getPriceStatusInShop(p26)
-			local var32 = if if var31 ~= priceStatus.Free then if var31 ~= priceStatus.PurchaseFromRoblox then var31 == priceStatus.PurchaseFromResale else true else true then 0 elseif var31 == priceStatus.Owned or var31 == priceStatus.QuantityLimitReached then 1 else 2
-			local var33 = getPriceStatusInShop(p27)
-			var31 = if if var33 ~= priceStatus.Free then if var33 ~= priceStatus.PurchaseFromRoblox then var33 == priceStatus.PurchaseFromResale else true else true then 0 elseif var33 == priceStatus.Owned or var33 == priceStatus.QuantityLimitReached then 1 else 2
+			local var8 = getPriceStatusInShop(p15)
+			local var9 = if if var8 ~= priceStatus.Free then if var8 ~= priceStatus.PurchaseFromRoblox then var8 == priceStatus.PurchaseFromResale else true else true then 0 elseif var8 == priceStatus.Owned or var8 == priceStatus.QuantityLimitReached then 1 else 2
+			local var10 = getPriceStatusInShop(p16)
+			var8 = if if var10 ~= priceStatus.Free then if var10 ~= priceStatus.PurchaseFromRoblox then var10 == priceStatus.PurchaseFromResale else true else true then 0 elseif var10 == priceStatus.Owned or var10 == priceStatus.QuantityLimitReached then 1 else 2
 			
-			return var32 < var31
+			return var9 < var8
 		end)
 		
-		return p25
+		return p14
 	end,
 	getPriceStatus = getPriceStatusForProfile,
 	PriceStatusEnum = priceStatus

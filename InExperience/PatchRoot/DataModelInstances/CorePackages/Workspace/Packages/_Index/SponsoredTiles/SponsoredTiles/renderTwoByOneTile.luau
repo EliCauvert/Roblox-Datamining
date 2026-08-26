@@ -8,57 +8,57 @@ local getTileBadgeByPositionConfigFromEntry = gameTileModule.getTileBadgeByPosit
 local resolveWideAssetId = gameTileModule.resolveWideAssetId
 local _ = require(parent.VideoUtils)
 local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
-local var4 = reactModule.memo(function(p0)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), getTileBadgeByPositionConfigFromEntry (ref), twoByOneGameTileModule (ref), fFlagMigrateGameInfoToStore (ref), resolveWideAssetId (ref)
-	local var5 = -((p0.maxItemIndex or 0) + 1)
+	local var2 = -((p1.maxItemIndex or 0) + 1)
 	
 	return reactModule.createElement(twoByOneGameTileModule, {
-		size = p0.item.sizeOverride,
-		layoutOrder = p0.index,
-		zIndex = if p0.zIndex then p0.zIndex + var5 else var5,
-		universeId = p0.item.universeId,
-		placeId = p0.item.placeId,
-		topicId = p0.topicId,
-		logoImageAssetId = p0.item.logoAssetId,
-		logoAspectRatio = p0.item.logoAspectRatio,
-		headline = p0.item.headline,
-		subtitle = p0.item.subtitle,
-		ctaText = p0.item.ctaText,
-		tileVariant = p0.item.tileVariant,
-		badgeOverride = getTileBadgeByPositionConfigFromEntry(p0.item),
-		payerName = p0.item.payerName,
-		adId = p0.item.adId,
-		isSponsored = p0.item.isSponsored,
-		sponsoredUserCohort = p0.sponsoredUserCohort,
-		appPage = p0.appPage,
-		setGameHidden = p0.setGameHidden,
-		isHidden = p0.isHidden,
-		hoverKey = `TwoByOneTile_{p0.impressionsTag or ""}_{p0.index or "0"}_{p0.item.universeId}`,
-		impressionsTag = p0.impressionsTag,
-		index = p0.index,
-		reportGameDetailOpened = p0.reportGameDetailOpened,
-		reportExperienceLaunched = p0.reportExperienceLaunched,
-		enableSponsoredFeedback = p0.enableSponsoredFeedback,
-		enableReportAd = p0.enableReportAd,
-		enableExplicitFeedback = p0.enableExplicitFeedback,
-		placeIdOverride = p0.item.placeIdOverride,
-		launchDataOverride = p0.item.launchDataOverride,
+		size = p1.item.sizeOverride,
+		layoutOrder = p1.index,
+		zIndex = if p1.zIndex then p1.zIndex + var2 else var2,
+		universeId = p1.item.universeId,
+		placeId = p1.item.placeId,
+		topicId = p1.topicId,
+		logoImageAssetId = p1.item.logoAssetId,
+		logoAspectRatio = p1.item.logoAspectRatio,
+		headline = p1.item.headline,
+		subtitle = p1.item.subtitle,
+		ctaText = p1.item.ctaText,
+		tileVariant = p1.item.tileVariant,
+		badgeOverride = getTileBadgeByPositionConfigFromEntry(p1.item),
+		payerName = p1.item.payerName,
+		adId = p1.item.adId,
+		isSponsored = p1.item.isSponsored,
+		sponsoredUserCohort = p1.sponsoredUserCohort,
+		appPage = p1.appPage,
+		setGameHidden = p1.setGameHidden,
+		isHidden = p1.isHidden,
+		hoverKey = `TwoByOneTile_{p1.impressionsTag or ""}_{p1.index or "0"}_{p1.item.universeId}`,
+		impressionsTag = p1.impressionsTag,
+		index = p1.index,
+		reportGameDetailOpened = p1.reportGameDetailOpened,
+		reportExperienceLaunched = p1.reportExperienceLaunched,
+		enableSponsoredFeedback = p1.enableSponsoredFeedback,
+		enableReportAd = p1.enableReportAd,
+		enableExplicitFeedback = p1.enableExplicitFeedback,
+		placeIdOverride = p1.item.placeIdOverride,
+		launchDataOverride = p1.item.launchDataOverride,
 		onSelectionGained = reactModule.useCallback(function()
-			-- upvalues: p0 (ref)
-			if p0.onSelectionGained then
-				p0.onSelectionGained(p0.item, p0.index, p0.item.universeId)
+			-- upvalues: p1 (ref)
+			if p1.onSelectionGained then
+				p1.onSelectionGained(p1.item, p1.index, p1.item.universeId)
 			end
-		end, { p0.onSelectionGained, p0.item, p0.index }),
-		onSelectionLost = p0.onSelectionLost,
-		primaryWideImageAssetId = if fFlagMigrateGameInfoToStore then nil else p0.item.primaryWideImageAssetId,
-		wideAssetId = if fFlagMigrateGameInfoToStore then resolveWideAssetId(p0.item.primaryWideImageAssetId, p0.item, p0.topicId) else nil,
-		ageRatingLabel = if fFlagMigrateGameInfoToStore then p0.item.ageRecommendationDisplayName else nil,
-		videoPlaybackContext = p0.videoPlaybackContext,
-		SelectionOrder = p0.SelectionOrder
+		end, { p1.onSelectionGained, p1.item, p1.index }),
+		onSelectionLost = p1.onSelectionLost,
+		primaryWideImageAssetId = if fFlagMigrateGameInfoToStore then nil else p1.item.primaryWideImageAssetId,
+		wideAssetId = if fFlagMigrateGameInfoToStore then resolveWideAssetId(p1.item.primaryWideImageAssetId, p1.item, p1.topicId) else nil,
+		ageRatingLabel = if fFlagMigrateGameInfoToStore then p1.item.ageRecommendationDisplayName else nil,
+		videoPlaybackContext = p1.videoPlaybackContext,
+		SelectionOrder = p1.SelectionOrder
 	})
 end)
 
 return function(p1)
-	-- upvalues: reactModule (ref), var4 (ref), gameCollectionItemTypes (ref)
-	return reactModule.createElement(var4, p1), gameCollectionItemTypes.GameCollectionItemType.TwoByOneTile
+	-- upvalues: reactModule (ref), var1 (ref), gameCollectionItemTypes (ref)
+	return reactModule.createElement(var1, p1), gameCollectionItemTypes.GameCollectionItemType.TwoByOneTile
 end

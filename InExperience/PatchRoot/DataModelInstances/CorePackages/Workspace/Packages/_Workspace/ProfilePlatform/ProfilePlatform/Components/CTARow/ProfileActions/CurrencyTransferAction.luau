@@ -10,23 +10,23 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.CurrencyTransfer] = if sharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer then function(p0)
+	[enumsModule.ProfileActions.CurrencyTransfer] = if sharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer then function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), transferDirection (ref), transferOrigination (ref)
 		return {
-			text = p0.localized[enumsModule.ProfileActions.CurrencyTransfer],
+			text = p1.localized[enumsModule.ProfileActions.CurrencyTransfer],
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p0 (ref), enumsModule (copy), eventNamesModule (copy), transferDirection (copy), transferOrigination (copy)
-					if p0.buttonSurface == enumsModule.ButtonSurface.ContextualMenu then
-						p0.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonCurrencyTransfer, { buttonSurface = p0.buttonSurface })
+					-- upvalues: p1 (ref), enumsModule (copy), eventNamesModule (copy), transferDirection (copy), transferOrigination (copy)
+					if p1.buttonSurface == enumsModule.ButtonSurface.ContextualMenu then
+						p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonCurrencyTransfer, { buttonSurface = p1.buttonSurface })
 					else
-						p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonCurrencyTransfer, { buttonSurface = p0.buttonSurface })
+						p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonCurrencyTransfer, { buttonSurface = p1.buttonSurface })
 					end
-					local navigateToTransfer = p0.navigateTo and p0.navigateTo.navigateToTransfer
+					local navigateToTransfer = p1.navigateTo and p1.navigateTo.navigateToTransfer
 					
 					if navigateToTransfer then
 						navigateToTransfer({
-							recipientUserId = p0.profileId,
+							recipientUserId = p1.profileId,
 							direction = transferDirection.Send,
 							transferOrigination = transferOrigination.Profile
 						})

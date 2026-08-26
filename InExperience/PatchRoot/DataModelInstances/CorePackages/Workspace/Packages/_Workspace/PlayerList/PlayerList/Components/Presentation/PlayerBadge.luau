@@ -9,11 +9,11 @@ local layoutValuesContextModule = require(parent.Common.LayoutValuesContext)
 local playerListIconModule = require(parent.Common.PlayerListIcon)
 local playerRelationshipStoreModule = require(parent.Common.PlayerRelationshipStore)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), layoutValuesContextModule (ref), useTokens (ref), signalsReactModule (ref), playerIconInfoStore (ref), playerRelationshipStoreModule (ref), getPlayerBadgeIconModule (ref), playerListIconModule (ref)
 	return reactModule.createElement(playerListIconModule, {
-		icon = getPlayerBadgeIconModule(reactModule.useContext(layoutValuesContextModule), p0.player, signalsReactModule.useSignalState(playerIconInfoStore.getPlayerIconInfoReactive(p0.player.UserId)), signalsReactModule.useSignalState(playerRelationshipStoreModule.getPlayerRelationshipReactive(p0.player.UserId))),
+		icon = getPlayerBadgeIconModule(reactModule.useContext(layoutValuesContextModule), p1.player, signalsReactModule.useSignalState(playerIconInfoStore.getPlayerIconInfoReactive(p1.player.UserId)), signalsReactModule.useSignalState(playerRelationshipStoreModule.getPlayerRelationshipReactive(p1.player.UserId))),
 		size = useTokens().Size.Size_400,
-		layoutOrder = p0.layoutOrder
+		layoutOrder = p1.layoutOrder
 	})
 end)

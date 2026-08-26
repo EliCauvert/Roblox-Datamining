@@ -4,24 +4,24 @@ local getUserAppLaunchInfoModule = require(authCommon.Http.Requests.GetUserAppLa
 local promiseModule = require(authCommon.Parent.Promise)
 local appStorageService = game:GetService("AppStorageService")
 
-return function(p0)
+return function(p1)
 	-- upvalues: promiseModule (ref), getUserAppLaunchInfoModule (ref), appStorageUtilitiesModule (ref), appStorageService (ref)
-	local _, var5 = promiseModule.new(function(p1)
-		-- upvalues: getUserAppLaunchInfoModule (copy), p0 (ref), appStorageUtilitiesModule (copy), appStorageService (copy)
-		getUserAppLaunchInfoModule(p0):andThen(function(p2)
-			-- upvalues: appStorageUtilitiesModule (copy), appStorageService (copy), p1 (ref)
-			if p2 and p2.responseBody then
-				local name = p2.responseBody.name
-				appStorageUtilitiesModule.setIncompleteSignupUserId(tostring(p2.responseBody.id))
+	local _, var1 = promiseModule.new(function(p2)
+		-- upvalues: getUserAppLaunchInfoModule (copy), p1 (ref), appStorageUtilitiesModule (copy), appStorageService (copy)
+		getUserAppLaunchInfoModule(p1):andThen(function(p3)
+			-- upvalues: appStorageUtilitiesModule (copy), appStorageService (copy), p2 (ref)
+			if p3 and p3.responseBody then
+				local name = p3.responseBody.name
+				appStorageUtilitiesModule.setIncompleteSignupUserId(tostring(p3.responseBody.id))
 				appStorageUtilitiesModule.setIncompleteSignupUsername(name)
 				appStorageService:Flush()
 			end
-			p1(true)
+			p2(true)
 		end):catch(function(_)
-			-- upvalues: p1 (ref)
-			p1(false)
+			-- upvalues: p2 (ref)
+			p2(false)
 		end)
 	end):await()
 	
-	return var5
+	return var1
 end

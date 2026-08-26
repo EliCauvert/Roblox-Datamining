@@ -11,16 +11,16 @@ local _ = require(parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
 local _ = require(parent.Enums.BadgeType)
 local _ = require(parent.Enums.VirtualItemBadgeType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref)
-	local var4 = useLocalization({
+	local var1 = useLocalization({
 		MoreRobux = "IAPExperience.RobuxUpsell.Text.MoreRobux",
 		Bonus = "IAPExperience.RobuxUpsell.Text.Bonus"
 	})
 	
 	return reactModule.createElement(view, {
 		tag = "flex-x-between\tflex-y-fill size-full-1700 radius-medium padding-x-large padding-y-medium row bg-surface-300 stroke-emphasis stroke-standard",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		LeftSide = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -29,12 +29,12 @@ return function(p0)
 			BonusLabel = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-label-small content-default",
-				Text = var4.MoreRobux
+				Text = var1.MoreRobux
 			}),
 			RobuxAmount = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-title-large content-emphasis text-align-x-left",
-				Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.robuxAmount) .. " + " .. formatNumberModule(localizationService.RobloxLocaleId, p0.bonusAmount) .. " " .. var4.Bonus
+				Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.robuxAmount) .. " + " .. formatNumberModule(localizationService.RobloxLocaleId, p1.bonusAmount) .. " " .. var4.Bonus
 			})
 		}),
 		RightSide = reactModule.createElement(view, {
@@ -43,7 +43,7 @@ return function(p0)
 		}, {
 			RobuxPrice = reactModule.createElement(text, {
 				tag = "auto-xy text-title-large content-emphasis text-align-x-right",
-				Text = p0.priceString or ""
+				Text = p1.priceString or ""
 			})
 		})
 	})

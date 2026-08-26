@@ -4,21 +4,21 @@ local socialLuaAnalyticsModule = require(parent_1.SocialLuaAnalytics)
 local luaSocialLibrariesDepsModule = require(parent_1.LuaSocialLibrariesDeps)
 local httpRequest = luaSocialLibrariesDepsModule.httpRequest
 local friendsCarousel = require(parent_1.Loggers).Logger:new("FriendsCarousel")
-local var3 = friendsCarousel:new("FriendsCarousel Networking")
+local var1 = friendsCarousel:new("FriendsCarousel Networking")
 local getFFlagMigrateSocialNetworking = require(parent_1.SharedFlags).getFFlagMigrateSocialNetworking
 local RODUX_KEY = require(parent.Common.Constants).RODUX_KEY
-local var4 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
+local var2 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = RODUX_KEY .. ".NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2)
-			-- upvalues: var3 (ref), getFFlagMigrateSocialNetworking (ref), httpRequest (ref)
-			var3:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
+		requestFunction = function(p1, p2, p3)
+			-- upvalues: var1 (ref), getFFlagMigrateSocialNetworking (ref), httpRequest (ref)
+			var1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 			
-			return if getFFlagMigrateSocialNetworking() then httpRequest.requestFunctions.RequestInternal(p0, p1, p2) else httpRequest.requestFunctions.HttpRbxApi(p0, p1, p2)
+			return if getFFlagMigrateSocialNetworking() then httpRequest.requestFunctions.RequestInternal(p1, p2, p3) else httpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
-		postRequestFunction = function(p3, p4)
-			-- upvalues: var3 (ref)
-			var3:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s ]", p4.requestMethod, p4.url, p3.StatusCode))
+		postRequestFunction = function(p1, p2)
+			-- upvalues: var1 (ref)
+			var1:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s ]", p2.requestMethod, p2.url, p1.StatusCode))
 		end,
 		maxRetryCount = game:DefineFastInt("FriendsCarouselHttpRetryCount", 3)
 	})
@@ -39,9 +39,9 @@ return {
 	llama = luaSocialLibrariesDepsModule.llama,
 	SocialLibraries = luaSocialLibrariesDepsModule.SocialLibraries.config({}),
 	SocialCommon = require(parent_1.SocialCommon),
-	RoduxNetworking = var4,
-	NetworkingFriends = require(parent_1.FriendsNetworking).config({ roduxNetworking = var4 }),
-	NetworkingAliases = luaSocialLibrariesDepsModule.NetworkingAliases.config({ roduxNetworking = var4 }),
+	RoduxNetworking = var2,
+	NetworkingFriends = require(parent_1.FriendsNetworking).config({ roduxNetworking = var2 }),
+	NetworkingAliases = luaSocialLibrariesDepsModule.NetworkingAliases.config({ roduxNetworking = var2 }),
 	RoduxFriends = require(parent_1.FriendsRodux).config({ keyPath = RODUX_KEY .. ".Friends" }),
 	RoduxAnalytics = socialLuaAnalyticsModule.Analytics.RoduxAnalytics.config({ keyPath = RODUX_KEY .. ".Analytics" }),
 	convertActions = require(parent_1.SocialReducerAdaptors).convertActions,

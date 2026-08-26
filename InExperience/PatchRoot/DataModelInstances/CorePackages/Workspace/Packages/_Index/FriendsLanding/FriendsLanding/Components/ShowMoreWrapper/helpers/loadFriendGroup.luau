@@ -2,21 +2,21 @@
 local t = dependenciesModule.t
 local llama = dependenciesModule.llama
 local friendsPerLoadGroupModule = require(script.Parent.friendsPerLoadGroup)
-local var2 = t.interface({
+local var1 = t.interface({
 	visibleRows = t.number,
 	itemSize = t.number,
 	filter = t.string
 })
-local var3 = t.interface({ width = t.number, filterFriendCounts = t.table })
+local var2 = t.interface({ width = t.number, filterFriendCounts = t.table })
 
-return function(p0, p1)
-	-- upvalues: var3 (ref), var2 (ref), friendsPerLoadGroupModule (ref), llama (ref)
-	assert(var3(p0))
+return function(p1, p2)
+	-- upvalues: var2 (ref), var1 (ref), friendsPerLoadGroupModule (ref), llama (ref)
 	assert(var2(p1))
+	assert(var1(p2))
 	
 	return {
-		filterFriendCounts = llama.Dictionary.join(p0.filterFriendCounts, {
-			[p1.filter] = p0.filterFriendCounts[p1.filter] + friendsPerLoadGroupModule(p0, p1)
+		filterFriendCounts = llama.Dictionary.join(p1.filterFriendCounts, {
+			[p2.filter] = p1.filterFriendCounts[p2.filter] + friendsPerLoadGroupModule(p1, p2)
 		})
 	}
 end

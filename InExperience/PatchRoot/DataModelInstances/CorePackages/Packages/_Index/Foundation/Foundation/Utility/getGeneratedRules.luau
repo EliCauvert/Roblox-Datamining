@@ -188,32 +188,32 @@ local t_1 = {
 	}
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: themeNameModule (ref), t (ref), flagsModule (ref), t_1 (ref), colorModeModule (ref), deviceModule (ref)
-	p0 = p0 or themeNameModule.Default
-	local var8 = nil
+	p1 = p1 or themeNameModule.Default
+	local var1 = nil
 	local _ = nil
 	local _ = nil
-	local var9 = t.Common()
+	local var2 = t.Common()
 	
 	if flagsModule.FoundationThemeName then
-		var8 = (t_1[p0] or t_1[themeNameModule.Default])[p1]()
-	elseif p1 == colorModeModule.Dark then
-		var8 = t.Dark()
-	elseif p1 == colorModeModule.Light then
-		var8 = t.Light()
+		var1 = (t_1[p1] or t_1[themeNameModule.Default])[p2]()
+	elseif p2 == colorModeModule.Dark then
+		var1 = t.Dark()
+	elseif p2 == colorModeModule.Light then
+		var1 = t.Light()
 	end
-	local var10 = if p2 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then t.Console() else t.Desktop()
+	local var3 = if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then t.Console() else t.Desktop()
 	
-	if not var8 or not var10 or not var9 then
+	if not var1 or not var3 or not var2 then
 		return {}
 	end
-	local cloned = table.clone(var10)
+	local cloned = table.clone(var3)
 	
-	for i, v in var9 do
+	for i, v in var2 do
 		cloned[i] = v
 	end
-	for i_1, v_1 in var8 do
+	for i_1, v_1 in var1 do
 		cloned[i_1] = v_1
 	end
 	return cloned

@@ -8,13 +8,13 @@ local foundationModule = require(corePackagesService.Packages.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
 local menuButtonsModule = require(script.Parent.MenuButtons)
 
-return function(p0)
+return function(p1)
 	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationProvider (ref), foundationModule (ref), menuButtonsModule (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-			MenuButtons = reactModule.createElement(menuButtonsModule, p0)
+			MenuButtons = reactModule.createElement(menuButtonsModule, p1)
 		})
 	})
 end

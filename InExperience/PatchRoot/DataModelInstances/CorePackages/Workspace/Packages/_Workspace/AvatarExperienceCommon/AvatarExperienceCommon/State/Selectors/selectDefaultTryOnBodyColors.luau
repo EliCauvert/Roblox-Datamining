@@ -1,9 +1,9 @@
 ﻿local constantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: constantsModule (ref)
-	local outfitTryOn = p0.AvatarExperience.AvatarScene.OutfitTryOn
-	local outfitInfos = p0.AvatarExperience.AvatarEditor.OutfitInfos
+	local outfitTryOn = p1.AvatarExperience.AvatarScene.OutfitTryOn
+	local outfitInfos = p1.AvatarExperience.AvatarEditor.OutfitInfos
 	local outfitIdMap = outfitTryOn.OutfitIdMap
 	
 	for i, v in outfitTryOn.TryOnItems do

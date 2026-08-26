@@ -17,29 +17,29 @@ end
 
 return function()
 	-- upvalues: reactModule (ref), getGuiInset (ref), isPluginSecurityModule (ref), signal (ref), guiService (ref), instance (ref), userInputService (ref), connection (ref)
-	local var7, var8 = reactModule.useState(function()
+	local var1, var2 = reactModule.useState(function()
 		-- upvalues: getGuiInset (copy)
 		return getGuiInset()
 	end)
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), getGuiInset (copy)
-		var8(getGuiInset())
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), getGuiInset (copy)
+		var2(getGuiInset())
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: isPluginSecurityModule (copy), signal (copy), guiService (copy), var9 (ref), instance (copy), userInputService (copy), connection (copy)
-		local var10 = if isPluginSecurityModule() then {
-			signal.Connect(guiService.SafeZoneOffsetsChanged, var9),
-			signal.Connect(instance.GetPropertyChangedSignal(userInputService, "BottomBarSize"), var9),
-			signal.Connect(instance.GetPropertyChangedSignal(userInputService, "RightBarSize"), var9)
+		-- upvalues: isPluginSecurityModule (copy), signal (copy), guiService (copy), var3 (ref), instance (copy), userInputService (copy), connection (copy)
+		local var4 = if isPluginSecurityModule() then {
+			signal.Connect(guiService.SafeZoneOffsetsChanged, var3),
+			signal.Connect(instance.GetPropertyChangedSignal(userInputService, "BottomBarSize"), var3),
+			signal.Connect(instance.GetPropertyChangedSignal(userInputService, "RightBarSize"), var3)
 		} else {}
 		
 		return function()
-			-- upvalues: var10 (write), connection (copy)
-			for i, v in var10 do
+			-- upvalues: var4 (write), connection (copy)
+			for i, v in var4 do
 				connection.Disconnect(v)
 			end
 		end
 	end, {})
 	
-	return var7
+	return var1
 end

@@ -15,79 +15,79 @@ local useTokens = foundationModule.Hooks.useTokens
 local queuePositionEnabledEngineFeature = game:GetEngineFeature("QueuePositionEnabled")
 local fFlagEnableLuaAppsFollowUserId = game:GetEngineFeature("ExperienceServiceFollowUserIdEnabled") and require(parent.SharedFlags).FFlagEnableLuaAppsFollowUserId
 
-local function getStoreJoinState(p0)
+local function getStoreJoinState(p1)
 	-- upvalues: getLoadingScreenStoreModule (ref)
-	local var14 = getLoadingScreenStoreModule(p0)
+	local var1 = getLoadingScreenStoreModule(p1)
 	
-	return if p0 and var14 and var14.getJoinState then var14.getJoinState(p0) else ""
+	return if p1 and var1 and var1.getJoinState then var1.getJoinState(p1) else ""
 end
 
 local function getStoreServerStatusText(p1)
 	-- upvalues: getLoadingScreenStoreModule (ref)
-	local var15 = getLoadingScreenStoreModule(p1)
+	local var1 = getLoadingScreenStoreModule(p1)
 	
-	return if p1 and var15 and var15.getServerStatusText then var15.getServerStatusText(p1) else ""
+	return if p1 and var1 and var1.getServerStatusText then var1.getServerStatusText(p1) else ""
 end
 
-return reactModule.memo(function(p2)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), guiService (ref), signalsReactModule (ref), getStoreJoinState (ref), getStoreServerStatusText (ref), placeLauncherStateModule (ref), loadingScreenTelemetryModule (ref), fFlagEnableLuaAppsFollowUserId (ref), experienceService (ref), queuePositionEnabledEngineFeature (ref), foundationModule (ref), coreGuiService (ref)
-	local var16 = useTokens()
-	local var17 = useLocalization({
+	local var1 = useTokens()
+	local var2 = useLocalization({
 		queuedDescription = "InGame.ConnectionError.Description.FriendsServerIsFullWaitingToJoin",
 		dontWantToWait = "InGame.ConnectionError.Description.DontWantToWait",
 		joinNewServer = "InGame.ConnectionError.Action.JoinNewServer"
 	})
-	local var18 = reactModule.useRef(0)
-	local var19 = reactModule.useRef(1e999)
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var18 (ref), var19 (ref), guiService (copy)
-		if var18.current == 0 then
-			var18.current = 1
-			var19.current = tick()
+	local var3 = reactModule.useRef(0)
+	local var4 = reactModule.useRef(1e999)
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var4 (ref), guiService (copy)
+		if var3.current == 0 then
+			var3.current = 1
+			var4.current = tick()
 			
 			return
-		elseif tick() - var19.current <= 0.5 then
+		elseif tick() - var4.current <= 0.5 then
 			guiService:ShowStatsBasedOnInputString("ConnectionHealth")
 		end
-		var18.current = 0
-		var19.current = 1e999
+		var3.current = 0
+		var4.current = 1e999
 	end, {})
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: p2 (ref), var20 (ref)
-		if not p2.isSubjectToChinaPolicies then
-			var20()
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), var5 (ref)
+		if not p1.isSubjectToChinaPolicies then
+			var5()
 		end
-	end, { p2.isSubjectToChinaPolicies, var20 })
-	local var22 = signalsReactModule.useSignalState(getStoreJoinState)
-	local var23 = signalsReactModule.useSignalBinding(getStoreServerStatusText)
-	local var24 = reactModule.useRef(nil)
+	end, { p1.isSubjectToChinaPolicies, var5 })
+	local var7 = signalsReactModule.useSignalState(getStoreJoinState)
+	local var8 = signalsReactModule.useSignalBinding(getStoreServerStatusText)
+	local var9 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var22 (ref), placeLauncherStateModule (copy), var24 (ref)
-		if var22 == placeLauncherStateModule.Queued then
-			var24.current = os.clock()
+		-- upvalues: var7 (ref), placeLauncherStateModule (copy), var9 (ref)
+		if var7 == placeLauncherStateModule.Queued then
+			var9.current = os.clock()
 		end
-	end, { var22 })
+	end, { var7 })
 	
 	return reactModule.createElement(foundationModule.View, {
 		AutoLocalize = true,
 		tag = "col align-x-center align-y-bottom gap-xxlarge",
-		AnchorPoint = p2.anchorPoint,
-		Position = p2.position,
-		Size = p2.size
+		AnchorPoint = p1.anchorPoint,
+		Position = p1.position,
+		Size = p1.size
 	}, {
 		ServerStatusContainer = reactModule.createElement(foundationModule.View, {
 			AutoLocalize = true,
 			LayoutOrder = 1,
 			tag = "col align-x-center align-y-bottom gap-xsmall auto-xy",
-			onActivated = var21,
+			onActivated = var6,
 			stateLayer = {
 				affordance = foundationModule.Enums.StateLayerAffordance.None
 			}
 		}, {
-			QueuedDescriptionText = if var22 == placeLauncherStateModule.Queued and fFlagEnableLuaAppsFollowUserId and experienceService:GetFollowUserId() > 0 then reactModule.createElement(foundationModule.Text, {
+			QueuedDescriptionText = if var7 == placeLauncherStateModule.Queued and fFlagEnableLuaAppsFollowUserId and experienceService:GetFollowUserId() > 0 then reactModule.createElement(foundationModule.Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-title-medium content-system-contrast",
-				Text = var17.queuedDescription
+				Text = var2.queuedDescription
 			}) else nil,
 			ServerStatusText = reactModule.createElement("TextLabel", {
 				AutoLocalize = true,
@@ -99,39 +99,39 @@ return reactModule.memo(function(p2)
 				ZIndex = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0),
-				Font = var16.Typography.TitleMedium.Font,
-				TextSize = var16.Typography.TitleMedium.FontSize,
-				TextColor3 = var16.Color.System.Contrast.Color3,
-				Text = var23,
+				Font = var1.Typography.TitleMedium.Font,
+				TextSize = var1.Typography.TitleMedium.FontSize,
+				TextColor3 = var1.Color.System.Contrast.Color3,
+				Text = var8,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				RootLocalizationTable = coreGuiService:FindFirstChild("CoreScriptLocalization")
 			})
 		}),
-		ActionContainer = if var22 == placeLauncherStateModule.Queued then reactModule.createElement(foundationModule.View, {
+		ActionContainer = if var7 == placeLauncherStateModule.Queued then reactModule.createElement(foundationModule.View, {
 			LayoutOrder = 2,
 			tag = "col align-x-center align-y-bottom gap-xsmall auto-xy"
 		}, {
 			ActionButtonDescriptionText = reactModule.createElement(foundationModule.Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-body-medium content-system-contrast",
-				Text = var17.dontWantToWait
+				Text = var2.dontWantToWait
 			}),
 			ActionButton = reactModule.createElement(foundationModule.Button, {
 				LayoutOrder = 2,
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var24 (ref), loadingScreenTelemetryModule (copy), fFlagEnableLuaAppsFollowUserId (copy), experienceService (copy), p2 (ref), queuePositionEnabledEngineFeature (copy)
+					-- upvalues: var9 (ref), loadingScreenTelemetryModule (copy), fFlagEnableLuaAppsFollowUserId (copy), experienceService (copy), p1 (ref), queuePositionEnabledEngineFeature (copy)
 					loadingScreenTelemetryModule.logQueuedStateButtonClick({
 						buttonName = "JoinNewServer",
 						joinTargetUserId = if fFlagEnableLuaAppsFollowUserId then experienceService:GetFollowUserId() else nil,
-						placeId = p2.placeId,
+						placeId = p1.placeId,
 						positionInQueue = if queuePositionEnabledEngineFeature then experienceService:GetQueuePosition() else nil,
-						timeElapsedMs = if var24.current then math.floor((os.clock() - var24.current) * 1000) else nil,
-						universeId = p2.universeId
+						timeElapsedMs = if var9.current then math.floor((os.clock() - var9.current) * 1000) else nil,
+						universeId = p1.universeId
 					})
-					experienceService:LaunchExperience({ placeId = p2.placeId })
-				end, { p2.placeId, p2.universeId }),
-				text = var17.joinNewServer
+					experienceService:LaunchExperience({ placeId = p1.placeId })
+				end, { p1.placeId, p1.universeId }),
+				text = var2.joinNewServer
 			})
 		}) else nil
 	})

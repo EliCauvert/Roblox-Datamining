@@ -7,7 +7,7 @@ local focusNavigationUtilsModule = require(corePackagesService.Workspace.Package
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 
-function screenshotFlowStepHandlerContainer.render(p0)
+function screenshotFlowStepHandlerContainer.render(p1)
 	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), screenshotFlowStepHandlerModule (ref)
 	return reactModule.createElement(coreScriptsRootProvider, {}, {
 		FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
@@ -15,7 +15,7 @@ function screenshotFlowStepHandlerContainer.render(p0)
 			isAutoFocusRoot = true,
 			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
 		}, {
-			ScreenshotFlowStepHandlerContainer = reactModule.createElement(screenshotFlowStepHandlerModule, p0.props)
+			ScreenshotFlowStepHandlerContainer = reactModule.createElement(screenshotFlowStepHandlerModule, p1.props)
 		})
 	})
 end

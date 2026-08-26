@@ -7,80 +7,80 @@ local buildRowDisplayModule = require(script.Parent.Parent.Message.MessageDispla
 local friendsChatOsaAcknowledgementModule = require(script.Parent.FriendsChatOsaAcknowledgement)
 local userProfileStore = userProfilesModule.Stores.UserProfileStore
 
-local function getProfileDisplayName(p0, p1)
-	if p0 == nil then
+local function getProfileDisplayName(p1, p2)
+	if p1 == nil then
 		return nil, false
-	elseif p0.status == "failed" then
+	elseif p1.status == "failed" then
 		return nil, true
 	end
-	local var8 = if p0.data then p0.data[1] else nil
-	local var9 = if var8 then var8.names else nil
+	local var1 = if p1.data then p1.data[1] else nil
+	local var2 = if var1 then var1.names else nil
 	
-	if var9 == nil then
+	if var2 == nil then
 		return nil, false
 	end
-	local var10 = if var9.getCombinedName then var9.getCombinedName(p1) else nil
+	local var3 = if var2.getCombinedName then var2.getCombinedName(p2) else nil
 	
-	if var10 ~= nil and var10 ~= "" then
-		return var10, false
+	if var3 ~= nil and var3 ~= "" then
+		return var3, false
 	end
-	local var11 = if var9.getDisplayName then var9.getDisplayName(p1) else nil
+	local var4 = if var2.getDisplayName then var2.getDisplayName(p2) else nil
 	
-	if var11 == nil or var11 == "" then
-		return if var9.getUsername then var9.getUsername(p1) else nil, false
+	if var4 == nil or var4 == "" then
+		return if var2.getUsername then var2.getUsername(p2) else nil, false
 	end
-	return var11, false
+	return var4, false
 end
 
-local function buildDisplay(p2, p3, p4, p5)
+local function buildDisplay(p1, p2, p3, p4)
 	-- upvalues: universalAppPolicyModule (ref), buildRowDisplayModule (ref)
 	local canSeeChatTerminology = universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology()
-	p3 = p3 or p2 == nil
+	p2 = p2 or p1 == nil
 	
 	return buildRowDisplayModule({
 		kind = "systemMessage",
 		variant = "default",
-		body = `{p4(if canSeeChatTerminology then if p3 then "Feature.Chat.Heading.SafeChattingWithThisUser" else {
+		body = `{p3(if canSeeChatTerminology then if p2 then "Feature.Chat.Heading.SafeChattingWithThisUser" else {
 			"Feature.Chat.Heading.SafeChattingWithUsername",
-			displayName = p2
-		} elseif p3 then "Feature.Chat.Heading.FirstInteractionWithThisPerson" else {
+			displayName = p1
+		} elseif p2 then "Feature.Chat.Heading.FirstInteractionWithThisPerson" else {
 			"Feature.Chat.Heading.FirstInteractionWith",
-			displayName = p2
-		})}\n{p4(if canSeeChatTerminology then "Feature.Chat.Description.InlineContextCardDescription" else "Feature.Chat.Description.OSAContextCardDescription")}`
-	}, {}, { systemTextSize = p5 })
+			displayName = p1
+		})}\n{p3(if canSeeChatTerminology then "Feature.Chat.Description.InlineContextCardDescription" else "Feature.Chat.Description.OSAContextCardDescription")}`
+	}, {}, { systemTextSize = p4 })
 end
 
-return function(p6)
+return function(p1)
 	-- upvalues: reactModule (ref), friendsChatOsaAcknowledgementModule (ref), userProfileStore (ref), getProfileDisplayName (ref), buildDisplay (ref), friendsChatTextMessageModule (ref)
-	local var14 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	friendsChatOsaAcknowledgementModule.useAcknowledgement({
-		conversationId = p6.conversationId,
-		userId = p6.userId,
-		guiObjectRef = var14
+		conversationId = p1.conversationId,
+		userId = p1.userId,
+		guiObjectRef = var1
 	})
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: userProfileStore (copy), p6 (ref)
-		return userProfileStore.get().fetchNamesByUserIds({ p6.userId })
-	end, { p6.userId })
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: userProfileStore (copy), p1 (ref)
+		return userProfileStore.get().fetchNamesByUserIds({ p1.userId })
+	end, { p1.userId })
 	
 	return reactModule.createElement(friendsChatTextMessageModule, {
 		getDisplayId = reactModule.useCallback(function()
-			-- upvalues: p6 (ref)
-			return `osa-system-message-{p6.conversationId}`
-		end, { p6.conversationId }),
-		getDisplayFromId = reactModule.useCallback(function(_, p7, p8)
-			-- upvalues: getProfileDisplayName (copy), var15 (ref), buildDisplay (copy), p6 (ref)
-			local var16, var17 = getProfileDisplayName(var15(p7), p7)
+			-- upvalues: p1 (ref)
+			return `osa-system-message-{p1.conversationId}`
+		end, { p1.conversationId }),
+		getDisplayFromId = reactModule.useCallback(function(_, p2, p3)
+			-- upvalues: getProfileDisplayName (copy), var2 (ref), buildDisplay (copy), p1 (ref)
+			local var3, var4 = getProfileDisplayName(var2(p2), p2)
 			
-			return buildDisplay(var16, var17, if p8 and p8.localize then p8.localize else p6.localize, if p8 then p8.systemTextSize else nil)
-		end, { var15, p6.localize }),
+			return buildDisplay(var3, var4, if p3 and p3.localize then p3.localize else p1.localize, if p3 then p3.systemTextSize else nil)
+		end, { var2, p1.localize }),
 		getLayoutOrder = reactModule.useCallback(function()
 			return 0
 		end, {}),
-		chatWindowSettings = p6.chatWindowSettings,
-		textTransparency = p6.textTransparency,
-		isSpatialUIEnabled = p6.isSpatialUIEnabled,
-		localize = p6.localize,
-		guiObjectRef = var14
+		chatWindowSettings = p1.chatWindowSettings,
+		textTransparency = p1.textTransparency,
+		isSpatialUIEnabled = p1.isSpatialUIEnabled,
+		localize = p1.localize,
+		guiObjectRef = var1
 	})
 end

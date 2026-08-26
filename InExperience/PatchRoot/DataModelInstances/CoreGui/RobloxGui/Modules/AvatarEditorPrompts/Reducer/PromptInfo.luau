@@ -15,12 +15,12 @@ return roduxModule.createReducer({
 	queue = {},
 	infoQueue = {}
 }, {
-	[require(parent.Actions.CloseOpenPrompt).name] = function(p0, _)
+	[require(parent.Actions.CloseOpenPrompt).name] = function(p1, _)
 		-- upvalues: cryoModule (ref)
-		return if cryoModule.isEmpty(p0.queue) then { queue = p0.queue, infoQueue = p0.infoQueue } else cryoModule.Dictionary.join(p0.infoQueue[1], {
-			promptType = p0.queue[1],
-			queue = cryoModule.List.removeIndex(p0.queue, 1),
-			infoQueue = cryoModule.List.removeIndex(p0.infoQueue, 1)
+		return if cryoModule.isEmpty(p1.queue) then { queue = p1.queue, infoQueue = p1.infoQueue } else cryoModule.Dictionary.join(p1.infoQueue[1], {
+			promptType = p1.queue[1],
+			queue = cryoModule.List.removeIndex(p1.queue, 1),
+			infoQueue = cryoModule.List.removeIndex(p1.infoQueue, 1)
 		})
 	end,
 	[require(parent.Actions.OpenPrompt).name] = function(p1, p2)
@@ -30,8 +30,8 @@ return roduxModule.createReducer({
 			infoQueue = cryoModule.List.join(p1.infoQueue, { p2.promptInfo })
 		})
 	end,
-	[require(parent.Actions.CreateOutfitConfirmed).name] = function(p3, _)
+	[require(parent.Actions.CreateOutfitConfirmed).name] = function(p1, _)
 		-- upvalues: cryoModule (ref), promptTypeModule (ref)
-		return cryoModule.Dictionary.join(p3, { promptType = promptTypeModule.EnterOutfitName })
+		return cryoModule.Dictionary.join(p1, { promptType = promptTypeModule.EnterOutfitName })
 	end
 })

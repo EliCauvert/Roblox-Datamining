@@ -8,31 +8,31 @@ local friendCountLabelModule = require(script.Parent.FriendCountLabel)
 local memberEntryModule = require(script.Parent.MemberEntry)
 local getSelectedUsersStoreModule = require(appChat.Stores.GetSelectedUsersStore)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), getSelectedUsersStoreModule (ref), useSignalState (ref), memberEntryModule (ref), foundationModule (ref), friendCountLabelModule (ref)
-	local var6 = useStyle()
-	local var7 = reactModule.useRef(nil)
-	local var8 = useSignalState(getSelectedUsersStoreModule(false).getMaxSize())
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), reactModule (copy), memberEntryModule (copy), var6 (ref)
+	local var1 = useStyle()
+	local var2 = reactModule.useRef(nil)
+	local var3 = useSignalState(getSelectedUsersStoreModule(false).getMaxSize())
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), reactModule (copy), memberEntryModule (copy), var1 (ref)
 		local t = {}
 		
-		for i = 1, var8 do
-			t[`user-{i}`] = reactModule.createElement(memberEntryModule, { index = i, style = var6 })
+		for i = 1, var3 do
+			t[`user-{i}`] = reactModule.createElement(memberEntryModule, { index = i, style = var1 })
 		end
 		return t
-	end, { var8 })
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref)
-		if var7.current then
-			var7.current.ScrollBarThickness = 0
-			var7.current.Selectable = false
+		-- upvalues: var2 (ref)
+		if var2.current then
+			var2.current.ScrollBarThickness = 0
+			var2.current.Selectable = false
 		end
-	end, { var7 })
+	end, { var2 })
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "row size-full-0 auto-y flex-y-fill padding-x-small gap-medium",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		FriendCountContainer = reactModule.createElement(foundationModule.View, { tag = "auto-xy padding-y-small", LayoutOrder = 1 }, {
 			FriendCount = reactModule.createElement(friendCountLabelModule)
@@ -45,9 +45,9 @@ return reactModule.memo(function(p0)
 				ScrollingDirection = Enum.ScrollingDirection.X,
 				AutomaticCanvasSize = Enum.AutomaticSize.XY
 			},
-			scrollingFrameRef = var7
+			scrollingFrameRef = var2
 		}, reactModule.createElement(foundationModule.View, {
 			tag = "row size-full padding-x-xsmall gap-medium align-y-center"
-		}, var9))
+		}, var4))
 	})
 end)

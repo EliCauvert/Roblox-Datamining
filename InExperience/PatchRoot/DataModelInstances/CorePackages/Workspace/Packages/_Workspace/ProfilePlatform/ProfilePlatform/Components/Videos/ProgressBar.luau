@@ -5,17 +5,17 @@ local buttonSize = foundationModule.Enums.ButtonSize
 local iconButton = foundationModule.IconButton
 local view = foundationModule.View
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), iconButton (ref), buttonSize (ref)
-	local var2 = if p0.timeLength > 0 then p0.timePosition / p0.timeLength else 0
-	local var3 = reactModule.useRef(nil)
-	local var4, var5 = reactModule.useState(0)
+	local var1 = if p1.timeLength > 0 then p1.timePosition / p1.timeLength else 0
+	local var2 = reactModule.useRef(nil)
+	local var3, var4 = reactModule.useState(0)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var5 (ref)
-		if var3 and var3.current then
-			local inputBeganConnection = var3.current.InputBegan:Connect(function(p1)
-				-- upvalues: var5 (copy)
-				var5(p1.Position.X)
+		-- upvalues: var2 (ref), var4 (ref)
+		if var2 and var2.current then
+			local inputBeganConnection = var2.current.InputBegan:Connect(function(p2)
+				-- upvalues: var4 (copy)
+				var4(p2.Position.X)
 			end)
 			
 			return function()
@@ -28,8 +28,8 @@ return function(p0)
 	return reactModule.createElement(view, {
 		tag = {
 			["align-x-center align-y-center col size-full-1400"] = true,
-			["padding-medium"] = p0.isFullScreen,
-			["padding-x-medium"] = not p0.isFullScreen
+			["padding-medium"] = p1.isFullScreen,
+			["padding-x-medium"] = not p1.isFullScreen
 		}
 	}, {
 		ProgressBarContainer = reactModule.createElement(view, {
@@ -37,18 +37,18 @@ return function(p0)
 			tag = "radius-small size-full-200",
 			backgroundStyle = { Transparency = 0.7, Color3 = Color3.fromHex("#D5D7DD") },
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: var3 (ref), p0 (ref), var4 (ref)
-				if var3 and var3.current then
-					p0.onProgressBarActivated((var4 - var3.current.AbsolutePosition.X) / var3.current.AbsoluteSize.X)
+				-- upvalues: var2 (ref), p1 (ref), var3 (ref)
+				if var2 and var2.current then
+					p1.onProgressBarActivated((var3 - var2.current.AbsolutePosition.X) / var2.current.AbsoluteSize.X)
 					
 					return
 				end
-			end, { var4, p0.onProgressBarActivated }),
-			ref = var3
+			end, { var3, p1.onProgressBarActivated }),
+			ref = var2
 		}, {
 			Progress = reactModule.createElement(view, {
 				tag = "radius-small bg-action-sub-emphasis",
-				Size = UDim2.fromScale(var2, 1)
+				Size = UDim2.fromScale(var1, 1)
 			})
 		}),
 		CTAContainer = reactModule.createElement(view, {
@@ -59,15 +59,15 @@ return function(p0)
 			PlayButton = reactModule.createElement(iconButton, {
 				isDisabled = false,
 				LayoutOrder = 1,
-				icon = if p0.isPlaying then "icons/controls/media-pause-medium" else "icons/controls/media-play-medium",
-				onActivated = p0.onPlayButtonActivated,
+				icon = if p1.isPlaying then "icons/controls/media-pause-medium" else "icons/controls/media-play-medium",
+				onActivated = p1.onPlayButtonActivated,
 				size = buttonSize.Medium
 			}),
 			MuteButton = reactModule.createElement(iconButton, {
 				isDisabled = false,
 				LayoutOrder = 3,
-				icon = if p0.isMuted then "icons/controls/speakerMute" else "icons/controls/speaker",
-				onActivated = p0.onMuteButtonActivated,
+				icon = if p1.isMuted then "icons/controls/speakerMute" else "icons/controls/speaker",
+				onActivated = p1.onMuteButtonActivated,
 				size = buttonSize.Medium
 			})
 		})

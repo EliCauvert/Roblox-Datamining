@@ -9,28 +9,28 @@ local fFlagLuaAppUseAppHttpStore = require(parent.SharedFlags).FFlagLuaAppUseApp
 local internalHttpStoreModule = require(parent.InternalHttpStore)
 local GROUPS_URL = httpModule.Url.GROUPS_URL
 local t = {
-	GetUserGroupsWithRoles = function(p0)
+	GetUserGroupsWithRoles = function(p1)
 		-- upvalues: GROUPS_URL (ref), internalHttpStoreModule (ref), fFlagLuaAppUseAppHttpStore (ref), httpStoreModule (ref), signalsModule (ref), httpService (ref)
-		local var8, var9 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch("GetUserGroupsWithRoles_" .. p0, {
+		local var1, var2 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch("GetUserGroupsWithRoles_" .. p0, {
 			Method = "GET",
-			Url = string.format("%sv1/users/%s/groups/roles?includeLocked=true", GROUPS_URL, p0)
+			Url = string.format("%sv1/users/%s/groups/roles?includeLocked=true", GROUPS_URL, p1)
 		})
 		
-		return signalsModule.createComputed(function(p1)
-			-- upvalues: var8 (ref), httpService (copy)
-			local var10 = var8(p1)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var1 (ref), httpService (copy)
+			local var3 = var1(p2)
 			
-			if var10.status == "Success" then
-				local ok, status = pcall(httpService.JSONDecode, httpService, var10.response.Body)
+			if var3.status == "Success" then
+				local ok, status = pcall(httpService.JSONDecode, httpService, var3.response.Body)
 				
 				return {
 					status = if ok then "Success" else "Failed",
 					data = if ok then status else nil,
 					error = if not ok then "JSON parse error" else nil,
-					statusCode = var10.response.StatusCode
+					statusCode = var3.response.StatusCode
 				}
-			elseif var10.status == "Failed" then
-				local response = var10.response
+			elseif var3.status == "Failed" then
+				local response = var3.response
 				
 				return {
 					status = "Failed",
@@ -45,30 +45,30 @@ local t = {
 				error = nil,
 				statusCode = nil
 			}
-		end), var9
+		end), var2
 	end,
-	GetPrimaryGroupRole = function(p2)
+	GetPrimaryGroupRole = function(p1)
 		-- upvalues: GROUPS_URL (ref), internalHttpStoreModule (ref), fFlagLuaAppUseAppHttpStore (ref), httpStoreModule (ref), signalsModule (ref), httpService (ref)
-		local var11, var12 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch("GetPrimaryGroupRole_" .. p2, {
+		local var1, var2 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch("GetPrimaryGroupRole_" .. p2, {
 			Method = "GET",
-			Url = string.format("%sv1/users/%s/groups/primary/role", GROUPS_URL, p2)
+			Url = string.format("%sv1/users/%s/groups/primary/role", GROUPS_URL, p1)
 		})
 		
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: var11 (ref), httpService (copy)
-			local var10 = var11(p3)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var1 (ref), httpService (copy)
+			local var3 = var1(p2)
 			
-			if var10.status == "Success" then
-				local ok, status = pcall(httpService.JSONDecode, httpService, var10.response.Body)
+			if var3.status == "Success" then
+				local ok, status = pcall(httpService.JSONDecode, httpService, var3.response.Body)
 				
 				return {
 					status = if ok then "Success" else "Failed",
 					data = if ok then status else nil,
 					error = if not ok then "JSON parse error" else nil,
-					statusCode = var10.response.StatusCode
+					statusCode = var3.response.StatusCode
 				}
-			elseif var10.status == "Failed" then
-				local response = var10.response
+			elseif var3.status == "Failed" then
+				local response = var3.response
 				
 				return {
 					status = "Failed",
@@ -83,34 +83,34 @@ local t = {
 				error = nil,
 				statusCode = nil
 			}
-		end), var12
+		end), var2
 	end,
-	GetGroupPolicies = function(p4)
+	GetGroupPolicies = function(p1)
 		-- upvalues: GROUPS_URL (ref), httpService (ref), internalHttpStoreModule (ref), fFlagLuaAppUseAppHttpStore (ref), httpStoreModule (ref), signalsModule (ref)
-		local cloned = table.clone(p4)
+		local cloned = table.clone(p1)
 		table.sort(cloned)
-		local var14, var15 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch("GetGroupPolicies_" .. table.concat(cloned, "_"), {
+		local var1, var2 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch("GetGroupPolicies_" .. table.concat(cloned, "_"), {
 			Method = "POST",
 			Url = string.format("%sv1/groups/policies", GROUPS_URL),
-			Body = httpService:JSONEncode({ groupIds = p4 }),
+			Body = httpService:JSONEncode({ groupIds = p1 }),
 			Headers = { ["Content-Type"] = "application/json" }
 		})
 		
-		return signalsModule.createComputed(function(p5)
-			-- upvalues: var14 (ref), httpService (copy)
-			local var10 = var14(p5)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var1 (ref), httpService (copy)
+			local var3 = var1(p2)
 			
-			if var10.status == "Success" then
-				local ok, status = pcall(httpService.JSONDecode, httpService, var10.response.Body)
+			if var3.status == "Success" then
+				local ok, status = pcall(httpService.JSONDecode, httpService, var3.response.Body)
 				
 				return {
 					status = if ok then "Success" else "Failed",
 					data = if ok then status else nil,
 					error = if not ok then "JSON parse error" else nil,
-					statusCode = var10.response.StatusCode
+					statusCode = var3.response.StatusCode
 				}
-			elseif var10.status == "Failed" then
-				local response = var10.response
+			elseif var3.status == "Failed" then
+				local response = var3.response
 				
 				return {
 					status = "Failed",
@@ -125,7 +125,7 @@ local t = {
 				error = nil,
 				statusCode = nil
 			}
-		end), var15
+		end), var2
 	end,
 	GetGroupsMetadata = function()
 		-- upvalues: GROUPS_URL (ref), internalHttpStoreModule (ref), fFlagLuaAppUseAppHttpStore (ref), httpStoreModule (ref), signalsModule (ref), httpService (ref)
@@ -134,21 +134,21 @@ local t = {
 			Url = string.format("%sv1/groups/metadata", GROUPS_URL)
 		})
 		
-		return signalsModule.createComputed(function(p6)
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: getGroupsMetadata (ref), httpService (copy)
-			local var10 = getGroupsMetadata(p6)
+			local var1 = getGroupsMetadata(p1)
 			
-			if var10.status == "Success" then
-				local ok, status = pcall(httpService.JSONDecode, httpService, var10.response.Body)
+			if var1.status == "Success" then
+				local ok, status = pcall(httpService.JSONDecode, httpService, var1.response.Body)
 				
 				return {
 					status = if ok then "Success" else "Failed",
 					data = if ok then status else nil,
 					error = if not ok then "JSON parse error" else nil,
-					statusCode = var10.response.StatusCode
+					statusCode = var1.response.StatusCode
 				}
-			elseif var10.status == "Failed" then
-				local response = var10.response
+			elseif var1.status == "Failed" then
+				local response = var1.response
 				
 				return {
 					status = "Failed",
@@ -165,28 +165,28 @@ local t = {
 			}
 		end), getGroupsMetadata_1
 	end,
-	GetGroupRoles = function(p7)
+	GetGroupRoles = function(p1)
 		-- upvalues: GROUPS_URL (ref), internalHttpStoreModule (ref), fFlagLuaAppUseAppHttpStore (ref), httpStoreModule (ref), signalsModule (ref), httpService (ref)
-		local var18, var19 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch("GetGroupRoles_" .. p7, {
+		local var1, var2 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch("GetGroupRoles_" .. p7, {
 			Method = "GET",
-			Url = string.format("%sv1/groups/%s/roles", GROUPS_URL, p7)
+			Url = string.format("%sv1/groups/%s/roles", GROUPS_URL, p1)
 		})
 		
-		return signalsModule.createComputed(function(p8)
-			-- upvalues: var18 (ref), httpService (copy)
-			local var10 = var18(p8)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var1 (ref), httpService (copy)
+			local var3 = var1(p2)
 			
-			if var10.status == "Success" then
-				local ok, status = pcall(httpService.JSONDecode, httpService, var10.response.Body)
+			if var3.status == "Success" then
+				local ok, status = pcall(httpService.JSONDecode, httpService, var3.response.Body)
 				
 				return {
 					status = if ok then "Success" else "Failed",
 					data = if ok then status else nil,
 					error = if not ok then "JSON parse error" else nil,
-					statusCode = var10.response.StatusCode
+					statusCode = var3.response.StatusCode
 				}
-			elseif var10.status == "Failed" then
-				local response = var10.response
+			elseif var3.status == "Failed" then
+				local response = var3.response
 				
 				return {
 					status = "Failed",
@@ -201,27 +201,27 @@ local t = {
 				error = nil,
 				statusCode = nil
 			}
-		end), var19
+		end), var2
 	end
 }
 
-local function _(p9)
+local function _(p1)
 	-- upvalues: signalsModule (ref), httpService (ref)
-	return signalsModule.createComputed(function(p10)
-		-- upvalues: p9 (ref), httpService (copy)
-		local var10 = p9(p10)
+	return signalsModule.createComputed(function(p2)
+		-- upvalues: p1 (ref), httpService (copy)
+		local var1 = p1(p2)
 		
-		if var10.status == "Success" then
-			local ok, status = pcall(httpService.JSONDecode, httpService, var10.response.Body)
+		if var1.status == "Success" then
+			local ok, status = pcall(httpService.JSONDecode, httpService, var1.response.Body)
 			
 			return {
 				status = if ok then "Success" else "Failed",
 				data = if ok then status else nil,
 				error = if not ok then "JSON parse error" else nil,
-				statusCode = var10.response.StatusCode
+				statusCode = var1.response.StatusCode
 			}
-		elseif var10.status == "Failed" then
-			local response = var10.response
+		elseif var1.status == "Failed" then
+			local response = var1.response
 			
 			return {
 				status = "Failed",
@@ -239,25 +239,25 @@ local function _(p9)
 	end)
 end
 
-local function fetchGet(p11, p12)
+local function fetchGet(p1, p2)
 	-- upvalues: internalHttpStoreModule (ref), fFlagLuaAppUseAppHttpStore (ref), httpStoreModule (ref), signalsModule (ref), httpService (ref)
-	local var20, var21 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch(p11, { Method = "GET", Url = p12 })
+	local var1, var2 = (if fFlagLuaAppUseAppHttpStore then httpStoreModule.Instance.get() else internalHttpStoreModule.GetHttpStore()).fetch(p1, { Method = "GET", Url = p2 })
 	
-	return signalsModule.createComputed(function(p13)
-		-- upvalues: var20 (ref), httpService (copy)
-		local var10 = var20(p13)
+	return signalsModule.createComputed(function(p3)
+		-- upvalues: var1 (ref), httpService (copy)
+		local var3 = var1(p3)
 		
-		if var10.status == "Success" then
-			local ok, status = pcall(httpService.JSONDecode, httpService, var10.response.Body)
+		if var3.status == "Success" then
+			local ok, status = pcall(httpService.JSONDecode, httpService, var3.response.Body)
 			
 			return {
 				status = if ok then "Success" else "Failed",
 				data = if ok then status else nil,
 				error = if not ok then "JSON parse error" else nil,
-				statusCode = var10.response.StatusCode
+				statusCode = var3.response.StatusCode
 			}
-		elseif var10.status == "Failed" then
-			local response = var10.response
+		elseif var3.status == "Failed" then
+			local response = var3.response
 			
 			return {
 				status = "Failed",
@@ -272,29 +272,29 @@ local function fetchGet(p11, p12)
 			error = nil,
 			statusCode = nil
 		}
-	end), var21
+	end), var2
 end
 
-function t.GetGroupMembers(p14, p15, p16)
+function t.GetGroupMembers(p1, p2, p3)
 	-- upvalues: GROUPS_URL (ref), httpService (ref), fetchGet (ref)
-	p16 = p16 or 100
-	local text = "GetGroupMembers_" .. p14 .. "_" .. (p15 or "") .. "_" .. tostring(p16)
-	local formattedText = string.format("%sv2/groups/%s/users?sortOrder=Asc&limit=%d", GROUPS_URL, p14, p16)
+	p3 = p3 or 100
+	local text = "GetGroupMembers_" .. p14 .. "_" .. (p2 or "") .. "_" .. tostring(p3)
+	local formattedText = string.format("%sv2/groups/%s/users?sortOrder=Asc&limit=%d", GROUPS_URL, p1, p3)
 	
-	if p15 then
-		formattedText ..= "&cursor=" .. httpService:UrlEncode(p15)
+	if p2 then
+		formattedText ..= "&cursor=" .. httpService:UrlEncode(p2)
 	end
 	return fetchGet(text, formattedText)
 end
 
-function t.GetGroupRoleMembers(p17, p18, p19, p20)
+function t.GetGroupRoleMembers(p1, p2, p3, p4)
 	-- upvalues: GROUPS_URL (ref), httpService (ref), fetchGet (ref)
-	p20 = p20 or 100
-	local text = "GetGroupRoleMembers_" .. p17 .. "_" .. tostring(p18) .. "_" .. (p19 or "") .. "_" .. tostring(p20)
-	local formattedText = string.format("%sv2/groups/%s/users?roleSetId=%d&sortOrder=Asc&limit=%d", GROUPS_URL, p17, p18, p20)
+	p4 = p4 or 100
+	local text = "GetGroupRoleMembers_" .. p17 .. "_" .. tostring(p2) .. "_" .. (p3 or "") .. "_" .. tostring(p4)
+	local formattedText = string.format("%sv2/groups/%s/users?roleSetId=%d&sortOrder=Asc&limit=%d", GROUPS_URL, p1, p2, p4)
 	
-	if p19 then
-		formattedText ..= "&cursor=" .. httpService:UrlEncode(p19)
+	if p3 then
+		formattedText ..= "&cursor=" .. httpService:UrlEncode(p3)
 	end
 	return fetchGet(text, formattedText)
 end

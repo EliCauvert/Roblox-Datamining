@@ -17,8 +17,8 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p0)
-				return { isGroupConversation = p0.isGroupConversation }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { isGroupConversation = p1.isGroupConversation }
 			end),
 			namedCounterConfigurationAndFormat("AppChat.ChatDetails.Rendered", function(p1)
 				return { isGroupConversation = p1.isGroupConversation }
@@ -111,11 +111,11 @@ return {
 		description = "",
 		lastUpdated = { 2026, 4, 30 },
 		backendsList = {
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p2)
-				return { modalVariantOverride = p2.modalVariantOverride }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { modalVariantOverride = p1.modalVariantOverride }
 			end),
-			namedCounterConfigurationAndFormat("AppChat.Dialog.ParticipantDetails.Button.AddTrustedConnection", function(p3)
-				return { modalVariantOverride = p3.modalVariantOverride }
+			namedCounterConfigurationAndFormat("AppChat.Dialog.ParticipantDetails.Button.AddTrustedConnection", function(p1)
+				return { modalVariantOverride = p1.modalVariantOverride }
 			end)
 		}
 	}),

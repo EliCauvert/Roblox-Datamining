@@ -1,41 +1,41 @@
 ﻿local AXSetAngularVelocityIsOptional = game:DefineFastFlag("AXSetAngularVelocityIsOptional", false)
 local t = {
-	normalizeStickByDeadzone = function(p0, p1)
-		local magnitude = p0.Magnitude
-		p1 = p1 or 0.2
+	normalizeStickByDeadzone = function(p1, p2)
+		local magnitude = p1.Magnitude
+		p2 = p2 or 0.2
 		
-		return if magnitude < p1 then Vector2.new(0, 0) else (magnitude - p1) / (1 - p1) * p0.Unit
+		return if magnitude < p2 then Vector2.new(0, 0) else (magnitude - p2) / (1 - p2) * p1.Unit
 	end
 }
 
-function t.rotateAndZoom(p2, p3, p4, p5, p6)
+function t.rotateAndZoom(p1, p2, p3, p4, p5)
 	-- upvalues: t (ref), AXSetAngularVelocityIsOptional (ref)
-	local var3 = t.normalizeStickByDeadzone(Vector2.new(p2.Position.X, p2.Position.Y))
+	local var1 = t.normalizeStickByDeadzone(Vector2.new(p1.Position.X, p1.Position.Y))
 	
-	if var3 == Vector2.new(0, 0) then return end
+	if var1 == Vector2.new(0, 0) then return end
 	if not AXSetAngularVelocityIsOptional then
-		p4(0)
-	elseif p4 then
-		p4(0)
+		p3(0)
+	elseif p3 then
+		p3(0)
 	end
-	if p5 and math.abs(var3.X) > 0.5 then
-		p5(p3 * var3.X * 2.094395102393)
+	if p4 and math.abs(var1.X) > 0.5 then
+		p4(p2 * var1.X * 2.094395102393)
 	end
-	if p6 and math.abs(var3.Y) > 0.5 then
-		p6(p3 * -var3.Y * 10)
+	if p5 and math.abs(var1.Y) > 0.5 then
+		p5(p2 * -var1.Y * 10)
 	end
 end
 
-function t.mapPositionToDirection(p7)
+function t.mapPositionToDirection(p1)
 	-- upvalues: t (ref)
-	local var4 = t.normalizeStickByDeadzone(p7)
-	local x = var4.X
-	local y = var4.Y
+	local var1 = t.normalizeStickByDeadzone(p1)
+	local x = var1.X
+	local y = var1.Y
 	
 	if x * x + y * y > 0.25 then
-		local var5 = math.atan2(y, x)
+		local var2 = math.atan2(y, x)
 		
-		return if var5 > -2.356194490192 and var5 <= -0.785398163397 then Enum.KeyCode.Down elseif var5 > -0.785398163397 and var5 <= 0.785398163397 then Enum.KeyCode.Right elseif var5 > 0.785398163397 and var5 <= 2.356194490192 then Enum.KeyCode.Up elseif var5 > 2.356194490192 or var5 <= -2.356194490192 then Enum.KeyCode.Left else nil
+		return if var2 > -2.356194490192 and var2 <= -0.785398163397 then Enum.KeyCode.Down elseif var2 > -0.785398163397 and var2 <= 0.785398163397 then Enum.KeyCode.Right elseif var2 > 0.785398163397 and var2 <= 2.356194490192 then Enum.KeyCode.Up elseif var2 > 2.356194490192 or var2 <= -2.356194490192 then Enum.KeyCode.Left else nil
 	end
 end
 

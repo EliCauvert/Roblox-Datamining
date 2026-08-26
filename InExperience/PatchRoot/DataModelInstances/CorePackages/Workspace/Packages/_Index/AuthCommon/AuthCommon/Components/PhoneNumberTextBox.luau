@@ -11,76 +11,76 @@ local countryCodeSelectorModule = require(authCommon.Components.CountryCodeSelec
 local phoneNumberTextBox = roactModule.Component:extend("PhoneNumberTextBox")
 phoneNumberTextBox.defaultProps = { CountryCodeSize = 70, InnerPadding = 12 }
 
-function phoneNumberTextBox.init(p0)
-	p0:setState({
+function phoneNumberTextBox.init(p1)
+	p1:setState({
 		CountryCodeHover = false,
 		CountryCodeSearchVisible = false
 	})
 	
 	function p0.CountryCodeMouseEnter()
-		-- upvalues: p0 (ref)
-		p0:setState({ CountryCodeHover = true })
+		-- upvalues: p1 (ref)
+		p1:setState({ CountryCodeHover = true })
 	end
 	
 	function p0.CountryCodeMouseLeave()
-		-- upvalues: p0 (ref)
-		p0:setState({ CountryCodeHover = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ CountryCodeHover = false })
 	end
 	
 	function p0.OpenCountryCode()
-		-- upvalues: p0 (ref)
-		p0:setState({ CountryCodeSearchVisible = true })
+		-- upvalues: p1 (ref)
+		p1:setState({ CountryCodeSearchVisible = true })
 		
-		if p0.props.phoneCountryCodeSelectorCallback then
-			p0.props.phoneCountryCodeSelectorCallback(true)
+		if p1.props.phoneCountryCodeSelectorCallback then
+			p1.props.phoneCountryCodeSelectorCallback(true)
 		end
 	end
 	
 	function p0.CloseCountryCode()
-		-- upvalues: p0 (ref)
-		p0:setState({ CountryCodeSearchVisible = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ CountryCodeSearchVisible = false })
 		
-		if p0.props.phoneCountryCodeSelectorCallback then
-			p0.props.phoneCountryCodeSelectorCallback(false)
+		if p1.props.phoneCountryCodeSelectorCallback then
+			p1.props.phoneCountryCodeSelectorCallback(false)
 		end
 	end
 	
-	function p0.SelectCountryCode(p1)
-		-- upvalues: p0 (ref)
-		if p0.props.SetCountryCode then
-			p0.props.SetCountryCode(p1)
+	function p0.SelectCountryCode(p2)
+		-- upvalues: p1 (ref)
+		if p1.props.SetCountryCode then
+			p1.props.SetCountryCode(p2)
 		end
-		p0.CloseCountryCode()
+		p1.CloseCountryCode()
 	end
 end
 
-function phoneNumberTextBox.render(p2)
+function phoneNumberTextBox.render(p1)
 	-- upvalues: withStyle (ref), text (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), coreGuiService (ref), countryCodeSelectorModule (ref)
-	return withStyle(function(p3)
-		-- upvalues: p2 (ref), text (copy), roactModule (copy), imageSetLabel (copy), getImageData (copy), coreGuiService (copy), countryCodeSelectorModule (copy)
-		local color = p2.props.Color
-		local color_1 = p3.Theme.BackgroundMuted.Color
-		local transparency = p2.props.Transparency
-		local font = p3.Font.Body.Font
-		local var6 = p3.Font.BaseSize * p3.Font.Body.RelativeSize
-		local color_2 = p3.Theme.TextDefault.Color
-		local transparency_1 = p3.Theme.TextDefault.Transparency
-		local color_3 = p3.Theme.UIDefault.Color
-		local _ = p2.props.PlaceholderText or ""
-		local text_1 = p2.props.Text or ""
-		local textInputTypeOverride = p2.props.TextInputTypeOverride or Enum.TextInputType.Phone
+	return withStyle(function(p2)
+		-- upvalues: p1 (ref), text (copy), roactModule (copy), imageSetLabel (copy), getImageData (copy), coreGuiService (copy), countryCodeSelectorModule (copy)
+		local color = p1.props.Color
+		local color_1 = p2.Theme.BackgroundMuted.Color
+		local transparency = p1.props.Transparency
+		local font = p2.Font.Body.Font
+		local var1 = p2.Font.BaseSize * p2.Font.Body.RelativeSize
+		local color_2 = p2.Theme.TextDefault.Color
+		local transparency_1 = p2.Theme.TextDefault.Transparency
+		local color_3 = p2.Theme.UIDefault.Color
+		local _ = p1.props.PlaceholderText or ""
+		local text_1 = p1.props.Text or ""
+		local textInputTypeOverride = p1.props.TextInputTypeOverride or Enum.TextInputType.Phone
 		local text_2 = " +" .. p2.props.CountryCode.prefix
-		local maxValue = math.max(text.GetTextWidth(text_2, font, var6) + p2.props.InnerPadding * 2, p2.props.CountryCodeSize)
+		local maxValue = math.max(text.GetTextWidth(text_2, font, var1) + p1.props.InnerPadding * 2, p1.props.CountryCodeSize)
 		
 		return roactModule.createElement("TextButton", {
-			Size = p2.props.Size,
-			Position = p2.props.Position,
-			AnchorPoint = p2.props.AnchorPoint,
-			LayoutOrder = p2.props.LayoutOrder,
+			Size = p1.props.Size,
+			Position = p1.props.Position,
+			AnchorPoint = p1.props.AnchorPoint,
+			LayoutOrder = p1.props.LayoutOrder,
 			BackgroundTransparency = 1,
 			Text = "",
-			[roactModule.Event.MouseEnter] = p2.props.onMouseEnter,
-			[roactModule.Event.MouseLeave] = p2.props.onMouseLeave
+			[roactModule.Event.MouseEnter] = p1.props.onMouseEnter,
+			[roactModule.Event.MouseLeave] = p1.props.onMouseLeave
 		}, {
 			InputWrapper = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -102,20 +102,20 @@ function phoneNumberTextBox.render(p2)
 				InputField = roactModule.createElement("TextBox", {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
-					Size = UDim2.new(1, -p2.props.InnerPadding * 2, 1, 0),
-					Position = UDim2.new(0, p2.props.InnerPadding, 0, 0),
+					Size = UDim2.new(1, -p1.props.InnerPadding * 2, 1, 0),
+					Position = UDim2.new(0, p1.props.InnerPadding, 0, 0),
 					PlaceholderColor3 = color_3,
-					PlaceholderText = p2.props.PlaceholderText,
+					PlaceholderText = p1.props.PlaceholderText,
 					Text = text_1,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextColor3 = color_2,
-					TextSize = var6,
+					TextSize = var1,
 					TextInputType = textInputTypeOverride,
 					Font = font,
 					ClearTextOnFocus = false,
-					[roactModule.Event.Focused] = p2.props.onFocused,
-					[roactModule.Event.FocusLost] = p2.props.onFocusLost,
-					[roactModule.Change.Text] = p2.props.onChangeText
+					[roactModule.Event.Focused] = p1.props.onFocused,
+					[roactModule.Event.FocusLost] = p1.props.onFocusLost,
+					[roactModule.Change.Text] = p1.props.onChangeText
 				})
 			}),
 			CountryCodeButton = roactModule.createElement("TextButton", {
@@ -124,16 +124,16 @@ function phoneNumberTextBox.render(p2)
 				Text = "",
 				BackgroundTransparency = 1,
 				ClipsDescendants = true,
-				[roactModule.Event.MouseEnter] = p2.CountryCodeMouseEnter,
-				[roactModule.Event.MouseLeave] = p2.CountryCodeMouseLeave,
-				[roactModule.Event.Activated] = p2.OpenCountryCode
+				[roactModule.Event.MouseEnter] = p1.CountryCodeMouseEnter,
+				[roactModule.Event.MouseLeave] = p1.CountryCodeMouseLeave,
+				[roactModule.Event.Activated] = p1.OpenCountryCode
 			}, {
 				Background = roactModule.createElement(imageSetLabel, {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 18, 1, 0),
 					Image = getImageData("LuaApp/buttons/buttonFill") or "LuaApp/buttons/buttonFill",
-					ImageColor3 = if p2.state.CountryCodeHover then color_1 else color,
+					ImageColor3 = if p1.state.CountryCodeHover then color_1 else color,
 					ImageTransparency = transparency,
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(8, 8, 9, 9)
@@ -142,11 +142,11 @@ function phoneNumberTextBox.render(p2)
 					ZIndex = 2,
 					BackgroundTransparency = 1,
 					RichText = true,
-					Size = UDim2.new(1, -p2.props.InnerPadding, 1, 0),
+					Size = UDim2.new(1, -p1.props.InnerPadding, 1, 0),
 					TextXAlignment = Enum.TextXAlignment.Right,
 					Font = font,
 					Text = "<u>" .. text_2 .. "</u>",
-					TextSize = var6,
+					TextSize = var1,
 					TextColor3 = color_2,
 					TextTransparency = transparency_1
 				})
@@ -166,9 +166,9 @@ function phoneNumberTextBox.render(p2)
 					ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 				}, {
 					CountryCodeSelector = roactModule.createElement(countryCodeSelectorModule, {
-						WidgetVisible = p2.state.CountryCodeSearchVisible,
-						CloseCallback = p2.CloseCountryCode,
-						SelectionCallback = p2.SelectCountryCode
+						WidgetVisible = p1.state.CountryCodeSearchVisible,
+						CloseCallback = p1.CloseCountryCode,
+						SelectionCallback = p1.SelectCountryCode
 					})
 				})
 			})

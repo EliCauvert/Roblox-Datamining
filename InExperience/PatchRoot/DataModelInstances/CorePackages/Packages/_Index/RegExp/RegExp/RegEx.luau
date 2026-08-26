@@ -3,51 +3,51 @@ local tbl = setmetatable({}, { __mode = "k" })
 local t = {}
 local t_1 = {}
 local t_2 = {}
-local var4 = nil
+local var1 = nil
 
-local function to_str_arr(p0, p1)
-	if p1 then
-		p0 = string.sub(p0, utf8.offset(p0, p1))
+local function to_str_arr(p1, p2)
+	if p2 then
+		p1 = string.sub(p1, utf8.offset(p1, p2))
 	end
-	local charCount = utf8.len(p0)
+	local charCount = utf8.len(p1)
 	
 	if charCount <= 1999 then
-		return { n = charCount, s = p0, utf8.codepoint(p0, 1, #p0) }
+		return { n = charCount, s = p1, utf8.codepoint(p1, 1, #p1) }
 	end
 	local ceiled = math.ceil(charCount / 1999)
 	local list = table.create(charCount)
-	local var58 = 1
+	local var2 = 1
 	
 	for i = 1, ceiled do
-		local packed = table.pack(utf8.codepoint(p0, utf8.offset(p0, i * 1999 - 1998), utf8.offset(p0, i * 1999 - (if i == ceiled then 1998 - ((charCount - 1) % 1999 + 1) else -1)) - 1))
-		table.move(packed, 1, packed.n, var58, list)
-		var58 += packed.n
+		local packed = table.pack(utf8.codepoint(p1, utf8.offset(p1, i * 1999 - 1998), utf8.offset(p1, i * 1999 - (if i == ceiled then 1998 - ((charCount - 1) % 1999 + 1) else -1)) - 1))
+		table.move(packed, 1, packed.n, var2, list)
+		var2 += packed.n
 	end
-	list.s = p0
+	list.s = p1
 	list.n = charCount
 	
 	return list
 end
 
-local function from_str_arr(p2)
-	local n = p2.n or #p2
+local function from_str_arr(p3)
+	local n = p3.n or #p3
 	
 	if n <= 7997 then
-		return utf8.char(table.unpack(p2))
+		return utf8.char(table.unpack(p3))
 	end
 	local ceiled = math.ceil(n / 7997)
 	local list = table.create(ceiled)
 	
 	for i = 1, ceiled do
-		list[i] = utf8.char(table.unpack(p2, i * 7997 - 7996, i * 7997 - (if i == ceiled then 7997 - ((n - 1) % 7997 + 1) else 0)))
+		list[i] = utf8.char(table.unpack(p3, i * 7997 - 7996, i * 7997 - (if i == ceiled then 7997 - ((n - 1) % 7997 + 1) else 0)))
 	end
 	return table.concat(list)
 end
 
-local function _(p3, p4, p5)
-	local byteOffset = utf8.offset(p3, p5)
+local function _(p4, p5, p6)
+	local byteOffset = utf8.offset(p4, p6)
 	
-	return string.sub(p3, utf8.offset(p3, p4), byteOffset and byteOffset - 1)
+	return string.sub(p4, utf8.offset(p4, p5), byteOffset and byteOffset - 1)
 end
 
 local t_3 = {
@@ -185,61 +185,61 @@ local list_1 = { 46 }
 local list_2 = { 94 }
 local list_3 = { 124 }
 
-local _ = function(p6, p7, p8)
+local _ = function(p4, p5, p6)
 	-- upvalues: tbl (ref), t (ref)
-	return if p6 == "Match" then function(...)
-		-- upvalues: tbl (copy), p7 (ref), p8 (ref)
+	return if p4 == "Match" then function(...)
+		-- upvalues: tbl (copy), p5 (ref), p6 (ref)
 		if select("#", ...) < 1 then
 			error("missing argument #1 (Match expected)", 2)
 		end
-		local var72, var73 = ...
+		local var3, var4 = ...
 		
-		if tbl[var72] and tbl[var72].name == "Match" then
-			var72 = tbl[var72]
+		if tbl[var3] and tbl[var3].name == "Match" then
+			var3 = tbl[var3]
 		else
-			error(string.format("invalid argument #1 to %q (Match expected, got %s)", p7, typeof(var72)), 2)
+			error(string.format("invalid argument #1 to %q (Match expected, got %s)", p5, typeof(var3)), 2)
 		end
-		if (p7 == "group" or p7 == "span") and var73 == nil then
+		if (p5 == "group" or p5 == "span") and var73 == nil then
 			var73 = 0
 		end
-		return p8(var72, var73)
+		return p6(var72, var73)
 	end else function(...)
 		-- upvalues: tbl (copy), p7 (ref), t (copy), p8 (ref)
-		local var64 = select("#", ...)
+		local var3 = select("#", ...)
 		
-		if var64 < 1 then
+		if var3 < 1 then
 			error("missing argument #1 (RegEx expected)", 2)
-		elseif var64 < 2 then
+		elseif var3 < 2 then
 			error("missing argument #2 (string expected)", 2)
 		end
-		local var65, var66, var67, var68, var69, var70 = ...
+		local var4, var5, var6, var7, var8, var9 = ...
 		
-		if not tbl[var65] or tbl[var65].name ~= "RegEx" then
-			if type(var65) ~= "string" and type(var65) ~= "number" then
-				error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", p7, typeof(var65)), 2)
+		if not tbl[var4] or tbl[var4].name ~= "RegEx" then
+			if type(var4) ~= "string" and type(var4) ~= "number" then
+				error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", p7, typeof(var4)), 2)
 			end
-			var65 = t.fromstring(var65)
+			var4 = t.fromstring(var4)
 		elseif p7 == "sub" then
-			if type(var67) == "number" then
-				var67 ..= ""
-			elseif type(var67) ~= "string" then
-				error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var67)), 2)
+			if type(var6) == "number" then
+				var6 ..= ""
+			elseif type(var6) ~= "string" then
+				error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var6)), 2)
 			end
-		elseif type(var66) == "number" then
-			var66 ..= ""
-		elseif type(var66) ~= "string" then
-			error(string.format("invalid argument #2 to %q (string expected, got %s)", p7, typeof(var66)), 2)
+		elseif type(var5) == "number" then
+			var5 ..= ""
+		elseif type(var5) ~= "string" then
+			error(string.format("invalid argument #2 to %q (string expected, got %s)", p7, typeof(var5)), 2)
 		end
 		if p7 ~= "sub" and p7 ~= "split" then
-			local var71 = typeof(var67)
+			local var3 = typeof(var67)
 			
-			if var71 ~= "nil" then
+			if var3 ~= "nil" then
 				var67 = tonumber(var67)
 				
 				if var67 then
 					var67 = if var67 < 0 then #var66 + math.floor(var67 + 0.5) + 1 else math.max(math.floor(var67 + 0.5), 1)
 				else
-					error(string.format("invalid argument #3 to %q (number expected, got %s)", p7, var71), 2)
+					error(string.format("invalid argument #3 to %q (number expected, got %s)", p7, var3), 2)
 				end
 			end
 		end
@@ -254,101 +254,101 @@ local _ = function(p6, p7, p8)
 	end
 end
 
-local function match_tostr(p9)
+local function match_tostr(p3)
 	-- upvalues: tbl (ref)
-	local spans = tbl[p9].spans
-	local var74 = spans[0][1]
-	local var75 = spans[0][2]
+	local spans = tbl[p3].spans
+	local var3 = spans[0][1]
+	local var4 = spans[0][2]
 	
-	if var75 <= var74 then
-		return string.format("Match (%d..%d, empty)", var74, var75 - 1)
+	if var4 <= var3 then
+		return string.format("Match (%d..%d, empty)", var3, var4 - 1)
 	end
 	local format = string.format
-	local var76 = "Match (%d..%d): %s"
-	local var77 = var75 - 1
+	local var5 = "Match (%d..%d): %s"
+	local var6 = var4 - 1
 	local input = spans.input
-	local byteOffset = utf8.offset(input, var75)
+	local byteOffset = utf8.offset(input, var4)
 	
-	return format(var76, var74, var77, string.sub(input, utf8.offset(input, var74), byteOffset and byteOffset - 1))
+	return format(var5, var3, var6, string.sub(input, utf8.offset(input, var3), byteOffset and byteOffset - 1))
 end
 
-local function new_match(p10, p11, p12, p13)
-	-- upvalues: var4 (write), t_2 (write), match_tostr (ref), tbl (ref)
-	p10.source = p12
-	p10.input = p13
-	local var79 = newproxy(true)
-	local var80 = getmetatable(var79)
-	var80.__metatable = var4
-	var80.__index = setmetatable(p10, t_2)
-	var80.__tostring = match_tostr
-	tbl[var79] = { name = "Match", spans = p10, group_id = p11 }
+local function new_match(p3, p4, p5, p6)
+	-- upvalues: var1 (write), t_2 (write), match_tostr (ref), tbl (ref)
+	p3.source = p5
+	p3.input = p6
+	local var3 = newproxy(true)
+	local var4 = getmetatable(var3)
+	var4.__metatable = var1
+	var4.__index = setmetatable(p3, t_2)
+	var4.__tostring = match_tostr
+	tbl[var3] = { name = "Match", spans = p3, group_id = p4 }
 	
-	return var79
+	return var3
 end
 
-local var18 = function(p14, p15)
-	local var81 = p14.spans[if type(p15) == "number" then p15 else p14.group_id[p15]]
+local var3 = function(p3, p4)
+	local var4 = p3.spans[if type(p4) == "number" then p4 else p3.group_id[p4]]
 	
-	if var81 then
-		local input = p14.spans.input
-		local byteOffset = utf8.offset(input, var81[2])
+	if var4 then
+		local input = p3.spans.input
+		local byteOffset = utf8.offset(input, var4[2])
 		
-		return string.sub(input, utf8.offset(input, var81[1]), byteOffset and byteOffset - 1)
+		return string.sub(input, utf8.offset(input, var4[1]), byteOffset and byteOffset - 1)
 	end
 	return nil
 end
 
-local var19 = "group"
+local var5 = "group"
 
 function t_2.group(...)
-	-- upvalues: tbl (ref), var19 (ref), var18 (ref)
+	-- upvalues: tbl (ref), var5 (ref), var3 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
 	end
-	local var72, var73 = ...
+	local var6, var7 = ...
 	
-	if tbl[var72] and tbl[var72].name == "Match" then
-		var72 = tbl[var72]
+	if tbl[var6] and tbl[var6].name == "Match" then
+		var6 = tbl[var6]
 	else
-		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var19, typeof(var72)), 2)
+		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var5, typeof(var6)), 2)
 	end
-	if (var19 == "group" or var19 == "span") and var73 == nil then
+	if (var5 == "group" or var5 == "span") and var73 == nil then
 		var73 = 0
 	end
-	return var18(var72, var73)
+	return var3(var72, var73)
 end
 
-local var20 = function(p16, p17)
-	local var83 = p16.spans[if type(p17) == "number" then p17 else p16.group_id[p17]]
+local var4 = function(p3, p4)
+	local var5 = p3.spans[if type(p4) == "number" then p4 else p3.group_id[p4]]
 	
-	if var83 then
-		return var83[1], var83[2] - 1
+	if var5 then
+		return var5[1], var5[2] - 1
 	end
 	return nil
 end
 
-local var21 = "span"
+local var6 = "span"
 
 function t_2.span(...)
-	-- upvalues: tbl (ref), var21 (ref), var20 (ref)
+	-- upvalues: tbl (ref), var6 (ref), var4 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
 	end
-	local var72, var73 = ...
+	local var7, var8 = ...
 	
-	if tbl[var72] and tbl[var72].name == "Match" then
-		var72 = tbl[var72]
+	if tbl[var7] and tbl[var7].name == "Match" then
+		var7 = tbl[var7]
 	else
-		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var21, typeof(var72)), 2)
+		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var6, typeof(var7)), 2)
 	end
-	if (var21 == "group" or var21 == "span") and var73 == nil then
+	if (var6 == "group" or var6 == "span") and var73 == nil then
 		var73 = 0
 	end
-	return var20(var72, var73)
+	return var4(var72, var73)
 end
 
-local var22 = function(p18)
-	local spans = p18.spans
+local var5 = function(p3)
+	local spans = p3.spans
 	
 	if spans.n <= 0 then
 		local input = spans.input
@@ -359,42 +359,42 @@ local var22 = function(p18)
 	local list = table.create(spans.n)
 	
 	for i = 0, spans.n do
-		local var85 = spans[i]
+		local var6 = spans[i]
 		
-		if var85 then
+		if var6 then
 			local input = spans.input
-			local byteOffset = utf8.offset(input, var85[2])
-			list[i] = string.sub(input, utf8.offset(input, var85[1]), byteOffset and byteOffset - 1)
+			local byteOffset = utf8.offset(input, var6[2])
+			list[i] = string.sub(input, utf8.offset(input, var6[1]), byteOffset and byteOffset - 1)
 		end
 	end
 	return table.unpack(list, 1, spans.n)
 end
 
-local var23 = "groups"
+local var7 = "groups"
 
 function t_2.groups(...)
-	-- upvalues: tbl (ref), var23 (ref), var22 (ref)
+	-- upvalues: tbl (ref), var7 (ref), var5 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
 	end
-	local var72, var73 = ...
+	local var8, var9 = ...
 	
-	if tbl[var72] and tbl[var72].name == "Match" then
-		var72 = tbl[var72]
+	if tbl[var8] and tbl[var8].name == "Match" then
+		var8 = tbl[var8]
 	else
-		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var23, typeof(var72)), 2)
+		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var7, typeof(var8)), 2)
 	end
-	if (var23 == "group" or var23 == "span") and var73 == nil then
+	if (var7 == "group" or var7 == "span") and var73 == nil then
 		var73 = 0
 	end
-	return var22(var72, var73)
+	return var5(var72, var73)
 end
 
-local var24 = function(p19)
-	local spans = p19.spans
+local var6 = function(p3)
+	local spans = p3.spans
 	local t = {}
 	
-	for i, v in pairs(p19.group_id) do
+	for i, v in pairs(p3.group_id) do
 		v = spans[v]
 		
 		if v then
@@ -406,37 +406,37 @@ local var24 = function(p19)
 	return t
 end
 
-local var25 = "groupdict"
+local var7 = "groupdict"
 
 function t_2.groupdict(...)
-	-- upvalues: tbl (ref), var25 (ref), var24 (ref)
+	-- upvalues: tbl (ref), var7 (ref), var6 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
 	end
-	local var72, var73 = ...
+	local var8, var9 = ...
 	
-	if tbl[var72] and tbl[var72].name == "Match" then
-		var72 = tbl[var72]
+	if tbl[var8] and tbl[var8].name == "Match" then
+		var8 = tbl[var8]
 	else
-		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var25, typeof(var72)), 2)
+		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var7, typeof(var8)), 2)
 	end
-	if (var25 == "group" or var25 == "span") and var73 == nil then
+	if (var7 == "group" or var7 == "span") and var73 == nil then
 		var73 = 0
 	end
-	return var24(var72, var73)
+	return var6(var72, var73)
 end
 
-local var26 = function(p20)
-	local spans = p20.spans
+local var7 = function(p3)
+	local spans = p3.spans
 	local list = table.create(spans.n)
 	
 	for i = 0, spans.n do
-		local var91 = spans[i]
+		local var8 = spans[i]
 		
-		if var91 then
+		if var8 then
 			local input = spans.input
-			local byteOffset = utf8.offset(input, var91[2])
-			list[i] = string.sub(input, utf8.offset(input, var91[1]), byteOffset and byteOffset - 1)
+			local byteOffset = utf8.offset(input, var8[2])
+			list[i] = string.sub(input, utf8.offset(input, var8[1]), byteOffset and byteOffset - 1)
 		end
 	end
 	list.n = spans.n
@@ -444,24 +444,24 @@ local var26 = function(p20)
 	return list
 end
 
-local var27 = "groupdict"
+local var9 = "groupdict"
 
 function t_2.grouparr(...)
-	-- upvalues: tbl (ref), var27 (ref), var26 (ref)
+	-- upvalues: tbl (ref), var9 (ref), var7 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
 	end
-	local var72, var73 = ...
+	local var10, var11 = ...
 	
-	if tbl[var72] and tbl[var72].name == "Match" then
-		var72 = tbl[var72]
+	if tbl[var10] and tbl[var10].name == "Match" then
+		var10 = tbl[var10]
 	else
-		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var27, typeof(var72)), 2)
+		error(string.format("invalid argument #1 to %q (Match expected, got %s)", var9, typeof(var10)), 2)
 	end
-	if (var27 == "group" or var27 == "span") and var73 == nil then
+	if (var9 == "group" or var9 == "span") and var73 == nil then
 		var73 = 0
 	end
-	return var26(var72, var73)
+	return var7(var72, var73)
 end
 
 local t_8 = {
@@ -473,484 +473,484 @@ local t_8 = {
 	NUL = 5
 }
 
-local function is_newline(p21, p22, p23)
-	local newline = p23.newline
-	local var93 = p21[p22]
+local function is_newline(p3, p4, p5)
+	local newline = p5.newline
+	local var8 = p3[p4]
 	
-	return if newline == 0 then var93 == 13 elseif newline == 2 then var93 == 10 and p21[p22 - 1] == 32 elseif newline == 3 then if var93 ~= 10 then var93 == 13 else true elseif newline == 4 then if var93 ~= 10 then if var93 ~= 11 then if var93 ~= 12 then if var93 ~= 13 then if var93 ~= 133 then if var93 ~= 8232 then var93 == 8233 else true else true else true else true else true else true elseif newline == 5 then var93 == 0 else var93 == 10
+	return if newline == 0 then var8 == 13 elseif newline == 2 then var8 == 10 and p3[p4 - 1] == 32 elseif newline == 3 then if var8 ~= 10 then var8 == 13 else true elseif newline == 4 then if var8 ~= 10 then if var8 ~= 11 then if var8 ~= 12 then if var8 ~= 13 then if var8 ~= 133 then if var8 ~= 8232 then var8 == 8233 else true else true else true else true else true else true elseif newline == 5 then var8 == 0 else var8 == 10
 end
 
-local function tkn_char_match(p24, p25, p26, p27, p28)
+local function tkn_char_match(p3, p4, p5, p6, p7)
 	-- upvalues: tkn_char_match (ref), t_7 (ref), is_newline (ref)
 	local v
-	local var94 = p25[p26]
+	local var8 = p4[p5]
 	
-	if not var94 then
+	if not var8 then
 		return false
-	elseif p27.ignoreCase and var94 >= 97 and var94 <= 122 then
-		var94 -= 32
+	elseif p6.ignoreCase and var8 >= 97 and var8 <= 122 then
+		var8 -= 32
 	end
-	if type(p24) == "number" then
-		return p24 == var94
-	elseif p24[1] == "charset" then
-		for i, v in ipairs(p24[3]) do
-			if tkn_char_match(v, p25, p26, p27, p28) then
-				return not p24[2]
+	if type(p3) == "number" then
+		return p3 == var8
+	elseif p3[1] == "charset" then
+		for i, v in ipairs(p3[3]) do
+			if tkn_char_match(v, p4, p5, p6, p7) then
+				return not p3[2]
 			end
 		end
-		return p24[2]
-	elseif p24[1] == "range" then
-		return p24[2] <= var94 or p27.ignoreCase and (var94 >= 65 and (var94 <= 90 and (p24[2] <= var94 + 32 and var94 + 32 <= p24[3])))
-	elseif p24[1] == "class" then
-		local var95 = p24[2]
-		local var96 = p24[3]
-		local var97 = false
+		return p3[2]
+	elseif p3[1] == "range" then
+		return p3[2] <= var8 or p6.ignoreCase and (var8 >= 65 and (var8 <= 90 and (p3[2] <= var8 + 32 and var8 + 32 <= p3[3])))
+	elseif p3[1] == "class" then
+		local var9 = p3[2]
+		local var10 = p3[3]
+		local var11 = false
 		
-		if var95 == "xdigit" then
-			var97 = var94 >= 48 or (var94 >= 65 or (var94 >= 97 and var94 <= 102))
-		elseif var95 == "ascii" then
-			local _ = var94 <= 127
-		elseif var95 == "vertical_tab" then
-			local var98
-			if var94 >= 10 then
-				var98 = true
+		if var9 == "xdigit" then
+			var11 = var8 >= 48 or (var8 >= 65 or (var8 >= 97 and var8 <= 102))
+		elseif var9 == "ascii" then
+			local _ = var8 <= 127
+		elseif var9 == "vertical_tab" then
+			local var12
+			if var8 >= 10 then
+				var12 = true
 				
-				if var94 > 13 then
-					var98 = if var94 ~= 8232 then var94 == 8233 else true
+				if var8 > 13 then
+					var12 = if var8 ~= 8232 then var8 == 8233 else true
 				end
-				var97 = var98
+				var11 = var12
 			end
-		elseif p27.unicode then
-			local var99 = (false)[var94] or "Cn"
-			v = var99:sub(1, 1)
+		elseif p6.unicode then
+			local var13 = (false)[var8] or "Cn"
+			v = var13:sub(1, 1)
 			
-			if var95 == "alnum" then
-				var97 = if v ~= "L" then if var99 ~= "Nl" then var99 == "Nd" else true else true
-			elseif var95 == "alpha" then
-				var97 = if v ~= "L" then var99 == "Nl" else true
-			elseif var95 == "blank" then
-				var97 = if var99 ~= "Zs" then var94 == 9 else true
-			elseif var95 == "cntrl" then
-				local _ = var99 == "Cc"
-			elseif var95 == "digit" then
-				local _ = var99 == "Nd"
-			elseif var95 == "graph" then
-				var97 = v ~= "P" and v ~= "C"
-			elseif var95 == "lower" then
-				local _ = var99 == "Ll"
-			elseif var95 == "print" then
+			if var9 == "alnum" then
+				var11 = if v ~= "L" then if var13 ~= "Nl" then var13 == "Nd" else true else true
+			elseif var9 == "alpha" then
+				var11 = if v ~= "L" then var13 == "Nl" else true
+			elseif var9 == "blank" then
+				var11 = if var13 ~= "Zs" then var8 == 9 else true
+			elseif var9 == "cntrl" then
+				local _ = var13 == "Cc"
+			elseif var9 == "digit" then
+				local _ = var13 == "Nd"
+			elseif var9 == "graph" then
+				var11 = v ~= "P" and v ~= "C"
+			elseif var9 == "lower" then
+				local _ = var13 == "Ll"
+			elseif var9 == "print" then
 				local _ = v ~= "C"
-			elseif var95 == "punct" then
+			elseif var9 == "punct" then
 				local _ = v == "P"
-			elseif var95 == "space" then
-				var97 = if v ~= "Z" then var94 >= 9 and var94 <= 13 else true
-			elseif var95 == "upper" then
-				local _ = var99 == "Lu"
-			elseif var95 == "word" then
-				var97 = if v ~= "L" then if var99 ~= "Nl" then if var99 ~= "Nd" then var99 == "Pc" else true else true else true
+			elseif var9 == "space" then
+				var11 = if v ~= "Z" then var8 >= 9 and var8 <= 13 else true
+			elseif var9 == "upper" then
+				local _ = var13 == "Lu"
+			elseif var9 == "word" then
+				var11 = if v ~= "L" then if var13 ~= "Nl" then if var13 ~= "Nd" then var13 == "Pc" else true else true else true
 			end
-		elseif var95 == "alnum" then
-			var97 = var94 >= 48 or (var94 >= 65 or (var94 >= 97 and var94 <= 122))
-		elseif var95 == "alpha" then
-			var97 = var94 >= 65 or (var94 >= 97 and var94 <= 122)
-		elseif var95 == "blank" then
-			var97 = if var94 ~= 9 then var94 == 32 else true
-		elseif var95 == "cntrl" then
-			var97 = if var94 > 31 then var94 == 127 else true
-		elseif var95 == "digit" then
-			var97 = var94 >= 48 and var94 <= 57
-		elseif var95 == "graph" then
-			var97 = var94 >= 33 and var94 <= 126
-		elseif var95 == "lower" then
-			var97 = var94 >= 97 and var94 <= 122
-		elseif var95 == "print" then
-			var97 = var94 >= 32 and var94 <= 126
-		elseif var95 == "punct" then
-			var97 = t_7[var94]
-		elseif var95 == "space" then
-			var97 = var94 >= 9 or var94 == 32
-		elseif var95 == "upper" then
-			var97 = var94 >= 65 and var94 <= 90
-		elseif var95 == "word" then
-			var97 = var94 >= 48 or (var94 >= 65 or (var94 >= 97 or var94 == 95))
+		elseif var9 == "alnum" then
+			var11 = var8 >= 48 or (var8 >= 65 or (var8 >= 97 and var8 <= 122))
+		elseif var9 == "alpha" then
+			var11 = var8 >= 65 or (var8 >= 97 and var8 <= 122)
+		elseif var9 == "blank" then
+			var11 = if var8 ~= 9 then var8 == 32 else true
+		elseif var9 == "cntrl" then
+			var11 = if var8 > 31 then var8 == 127 else true
+		elseif var9 == "digit" then
+			var11 = var8 >= 48 and var8 <= 57
+		elseif var9 == "graph" then
+			var11 = var8 >= 33 and var8 <= 126
+		elseif var9 == "lower" then
+			var11 = var8 >= 97 and var8 <= 122
+		elseif var9 == "print" then
+			var11 = var8 >= 32 and var8 <= 126
+		elseif var9 == "punct" then
+			var11 = t_7[var8]
+		elseif var9 == "space" then
+			var11 = var8 >= 9 or var8 == 32
+		elseif var9 == "upper" then
+			var11 = var8 >= 65 and var8 <= 90
+		elseif var9 == "word" then
+			var11 = var8 >= 48 or (var8 >= 65 or (var8 >= 97 or var8 == 95))
 		end
-		return if var96 then not var97 else var97
-	elseif p24[1] == "category" then
-		local var100 = (false)[var94] or "Cn"
-		local var101 = p24[3]
-		local var101Count = #var101
+		return if var10 then not var11 else var11
+	elseif p3[1] == "category" then
+		local var14 = (false)[var8] or "Cn"
+		local var15 = p3[3]
+		local var101Count = #var15
 		
 		if var101Count == 3 then
-			local var103 = false
+			local var16 = false
 			
-			if var101 == "Xan" or var101 == "Xwd" then
-				v = var100:find("^[LN]") or (var101 == "Xwd" and var94 == 95)
-				var103 = v
-			elseif var101 == "Xps" or var101 == "Xsp" then
-				v = if var100:sub(1, 1) ~= "Z" then var94 >= 9 and var94 <= 13 else true
-				var103 = v
-			elseif var101 == "Xuc" then
-				var103 = tkn_char_match(false, p25, p26, p27, p28)
+			if var15 == "Xan" or var15 == "Xwd" then
+				v = var14:find("^[LN]") or (var15 == "Xwd" and var8 == 95)
+				var16 = v
+			elseif var15 == "Xps" or var15 == "Xsp" then
+				v = if var14:sub(1, 1) ~= "Z" then var8 >= 9 and var8 <= 13 else true
+				var16 = v
+			elseif var15 == "Xuc" then
+				var16 = tkn_char_match(false, p4, p5, p6, p7)
 			end
-			return if p24[2] then not var103 else var103
+			return if p3[2] then not var16 else var16
 		else
-			return if var100:sub(1, var101Count) == var101 then not p24[2] else p24[2]
+			return if var14:sub(1, var101Count) == var15 then not p3[2] else p3[2]
 		end
 	else
-		return if p24[1] == 46 then p27.dotAll or not is_newline(p25, p26, p28) elseif p24[1] == 78 then not is_newline(p25, p26, p28) else p24[1] == 82 and (if p28.newline_seq == 0 then if var94 ~= 10 then var94 == 13 else true elseif var94 ~= 10 then if var94 ~= 11 then if var94 ~= 12 then if var94 ~= 13 then if var94 ~= 133 then if var94 ~= 8232 then var94 == 8233 else true else true else true else true else true else true)
+		return if p3[1] == 46 then p6.dotAll or not is_newline(p4, p5, p7) elseif p3[1] == 78 then not is_newline(p4, p5, p7) else p3[1] == 82 and (if p7.newline_seq == 0 then if var8 ~= 10 then var8 == 13 else true elseif var8 ~= 10 then if var8 ~= 11 then if var8 ~= 12 then if var8 ~= 13 then if var8 ~= 133 then if var8 ~= 8232 then var8 == 8233 else true else true else true else true else true else true)
 	end
 end
 
-local function find_alternation(p29, p30, p31)
+local function find_alternation(p8, p9, p10)
 	-- upvalues: list_3 (ref)
 	while true do
-		local var104 = p29[p30]
-		local isTable = type(var104) == "table"
-		if var104 ~= list_3 then
-			if isTable and var104[1] == 40 then
-				if p31 then
-					p31 += var104.count
+		local var17 = p8[p9]
+		local isTable = type(var17) == "table"
+		if var17 ~= list_3 then
+			if isTable and var17[1] == 40 then
+				if p10 then
+					p10 += var17.count
 				end
-				p30 = var104[3]
-				p30 += 1
+				p9 = var17[3]
+				p9 += 1
 			end
-			if isTable and var104[1] == "quantifier" and (type(var104[5]) == "table" and var104[5][1] == 40) then
-				if p31 then
-					p31 += var104[5].count
+			if isTable and var17[1] == "quantifier" and (type(var17[5]) == "table" and var17[5][1] == 40) then
+				if p10 then
+					p10 += var17[5].count
 				end
-				p30 = var104[5][3]
-			elseif var104 and (not isTable or var104[1] ~= 41) then
-				if p31 then
-					p31 = if isTable and var104[1] == "quantifier" then p31 + var104[3] else p31 + 1
+				p9 = var17[5][3]
+			elseif var17 and (not isTable or var17[1] ~= 41) then
+				if p10 then
+					p10 = if isTable and var17[1] == "quantifier" then p10 + var17[3] else p10 + 1
 				end
 			end
-			return nil, p31
+			return nil, p10
 		end
-		return p30, p31
+		return p9, p10
 	end
 end
 
-local function re_rawfind(p32, p33, p34, p35, p36, p37)
+local function re_rawfind(p11, p12, p13, p14, p15, p16)
 	-- upvalues: find_alternation (ref), tkn_char_match (ref), is_newline (ref)
-	local var110, var111, var112, var113, isTable, var115, v, i, substring, v_1
-	local var106 = 0
-	local var107 = p34
-	local var108 = p34
+	local var18, var19, var20, var21, isTable, var22, v, i, substring, v_1
+	local var23 = 0
+	local var24 = p13
+	local var25 = p13
 	local t = {}
-	while var106 do
-		if var106 == 0 then
-			var106 += 1
-			var110 = find_alternation(p32, var106)
+	while var23 do
+		if var23 == 0 then
+			var23 += 1
+			var18 = find_alternation(p11, var23)
 			
-			if var110 then
-				table.insert(t, 1, { "alternation", var110, var107 })
+			if var18 then
+				table.insert(t, 1, { "alternation", var18, var24 })
 			end
 		else
-			var110 = p32[var106]
-			var111 = type(var110) == "table" and var110[1]
+			var18 = p11[var23]
+			var19 = type(var18) == "table" and var18[1]
 			
-			if not var110 then break end
-			if var110 == "ACCEPT" then
-				var112 = true
-				var113 = var106
+			if not var18 then break end
+			if var18 == "ACCEPT" then
+				var20 = true
+				var21 = var23
 				repeat
-					var113 += 1
-					isTable = type(p32[var113]) == "table"
-					var115 = p32[var113]
-					if isTable and (var115[1] == 40 or var115[1] == "quantifier" and type(var115[5]) == "table" and var115[5][1] == 40) then
-						var113 = if var115[1] == "quantifier" then var115[5][3] else var115[3]
-					elseif isTable and var115[1] == 41 and (var115[4] == 33 or var115[4] == 61) then
-						var112 = false
-						var106 = var113
+					var21 += 1
+					isTable = type(p11[var21]) == "table"
+					var22 = p11[var21]
+					if isTable and (var22[1] == 40 or var22[1] == "quantifier" and type(var22[5]) == "table" and var22[5][1] == 40) then
+						var21 = if var22[1] == "quantifier" then var22[5][3] else var22[3]
+					elseif isTable and var22[1] == 41 and (var22[4] == 33 or var22[4] == 61) then
+						var20 = false
+						var23 = var21
 						break
-					elseif var112 then break end
-				until not var115
-			elseif var110 == "PRUNE" or var110 == "SKIP" then
-				table.insert(t, 1, { var110, var107 })
-				var106 += 1
-			elseif var111 == 40 then
+					elseif var20 then break end
+				until not var22
+			elseif var18 == "PRUNE" or var18 == "SKIP" then
+				table.insert(t, 1, { var18, var24 })
+				var23 += 1
+			elseif var19 == 40 then
 				table.insert(t, 1, {
-					"group", var106, var107, nil, var110[2], var110[3], var110[4]
+					"group", var23, var24, nil, var18[2], var18[3], var18[4]
 				})
-				var106 += 1
-				isTable = var106
+				var23 += 1
+				isTable = var23
 				
-				if var110[4] ~= 33 then
-					var115 = var110[4] == 61 and (var110[5] and 0)
+				if var18[4] ~= 33 then
+					var22 = var18[4] == 61 and (var18[5] and 0)
 				end
-				var112, var113 = find_alternation(p32, isTable, var115)
+				var20, var113 = find_alternation(p11, isTable, var22)
 				
-				if var112 then
-					table.insert(t, 1, { "alternation", var112, var107 })
+				if var20 then
+					table.insert(t, 1, { "alternation", var20, var24 })
 				end
-				if var113 then
-					var107 -= var113
+				if var21 then
+					var24 -= var21
 				end
-			elseif var111 == 41 and var110[4] ~= 33 then
-				if var110[4] == 33 or var110[4] == 61 then
+			elseif var19 == 41 and var18[4] ~= 33 then
+				if var18[4] == 33 or var18[4] == 61 then
 					while true do
-						var112 = nil
-						var113 = table.remove(t, 1)
-						if var113[1] ~= "group" or var113[2] ~= var110[3] then
-							if var113[1] == "matchStart" and var110[4] == 61 then
-								var112 = var113
+						var20 = nil
+						var21 = table.remove(t, 1)
+						if var21[1] ~= "group" or var21[2] ~= var18[3] then
+							if var21[1] == "matchStart" and var18[4] == 61 then
+								var20 = var21
 							end
 						end
-						if var110[4] ~= 33 and var110[4] ~= 61 or var110[5] then break end
-						var107 = var113[3]
+						if var18[4] ~= 33 and var18[4] ~= 61 or var18[5] then break end
+						var24 = var21[3]
 						break
 					end
-				elseif var110[4] == 62 then
+				elseif var18[4] == 62 then
 					repeat
-						var112 = table.remove(t, 1)
-					until not (var112 and (var112[1] ~= "group" or var112[2] ~= var110[3]))
+						var20 = table.remove(t, 1)
+					until not (var20 and (var20[1] ~= "group" or var20[2] ~= var18[3]))
 				else
-					for var115, i in ipairs(t) do
-						if i[1] == "group" and i[2] == var110[3] then
+					for var22, i in ipairs(t) do
+						if i[1] == "group" and i[2] == var18[3] then
 							if i.jmp then
-								var106 = i.jmp
+								var23 = i.jmp
 							end
-							i[4] = var107
+							i[4] = var24
 							
 							if i[7] ~= "quantifier" or i[10] + 1 >= i[9] then break end
-							if p32[var110[3]][4] ~= "lazy" or i[10] + 1 < i[8] then
-								var106 = var110[3]
+							if p11[var18[3]][4] ~= "lazy" or i[10] + 1 < i[8] then
+								var23 = var18[3]
 							end
-							v = p32[var110[3]]
+							v = p11[var18[3]]
 							table.insert(t, 1, {
-								"group", i[2], var107, nil, v[5][2], v[5][3], "quantifier", v[2], v[3],
+								"group", i[2], var24, nil, v[5][2], v[5][3], "quantifier", v[2], v[3],
 								i[10] + 1, i[11], v[4]
 							})
 							
 							if not i[11] then break end
-							table.insert(t, 1, { "alternation", i[11], var107 })
+							table.insert(t, 1, { "alternation", i[11], var24 })
 							break
 						end
 					end
 				end
-				var106 += 1
+				var23 += 1
 				continue
-			elseif var111 == 75 then
-				table.insert(t, 1, { "matchStart", var107 })
-				var106 += 1
-			elseif var111 == 124 then
-				var112 = var106
+			elseif var19 == 75 then
+				table.insert(t, 1, { "matchStart", var24 })
+				var23 += 1
+			elseif var19 == 124 then
+				var20 = var23
 				repeat
-					var112 += 1
-					var113 = type(p32[var112]) == "table"
-					isTable = p32[var112]
-					if var113 and (isTable[1] == 40 or isTable[1] == "quantifier" and type(isTable[5]) == "table" and isTable[5][1] == 40) then
-						var112 = if isTable[1] == "quantifier" then isTable[5][3] else isTable[3]
+					var20 += 1
+					var21 = type(p11[var20]) == "table"
+					isTable = p11[var20]
+					if var21 and (isTable[1] == 40 or isTable[1] == "quantifier" and type(isTable[5]) == "table" and isTable[5][1] == 40) then
+						var20 = if isTable[1] == "quantifier" then isTable[5][3] else isTable[3]
 					end
-				until not (var113 and isTable[1] == 41 or not isTable)
-				if p32[var112] then
+				until not (var21 and isTable[1] == 41 or not isTable)
+				if p11[var20] then
 					for i, v in ipairs(t) do
-						if v[1] == "group" and v[6] == var112 then
-							var106 = v[6]
+						if v[1] == "group" and v[6] == var20 then
+							var23 = v[6]
 							continue
 						end
 					end
 				else
-					var106 = var112
+					var23 = var20
 				end
-			elseif var111 == "recurmatch" then
+			elseif var19 == "recurmatch" then
 				table.insert(t, 1, {
 					"group",
-					var110[3],
-					var107,
+					var18[3],
+					var24,
 					nil,
 					nil,
-					p32[var110[3]][3],
+					p11[var18[3]][3],
 					nil,
-					jmp = var106
+					jmp = var23
 				})
-				var106 = var110[3] + 1
-				var112, var113 = find_alternation(p32, var106)
+				var23 = var18[3] + 1
+				var20, var113 = find_alternation(p11, var23)
 				
-				if var112 then
-					table.insert(t, 1, { "alternation", var112, var107 })
+				if var20 then
+					table.insert(t, 1, { "alternation", var20, var24 })
 				end
 			else
-				local var117, i_1
-				var112 = nil
+				local var26, i_1
+				var20 = nil
 				
-				if var110 == "FAIL" then
-					var112 = false
-				elseif var111 == 41 then
+				if var18 == "FAIL" then
+					var20 = false
+				elseif var19 == 41 then
 					repeat
-						var113 = table.remove(t, 1)
-					until not (var113[1] == "group" and var113[2] == var110[3])
-				elseif var111 == "quantifier" then
-					if type(var110[5]) == "table" and var110[5][1] == 40 then
-						var113 = find_alternation(p32, var106 + 1)
+						var21 = table.remove(t, 1)
+					until not (var21[1] == "group" and var21[2] == var18[3])
+				elseif var19 == "quantifier" then
+					if type(var18[5]) == "table" and var18[5][1] == 40 then
+						var21 = find_alternation(p11, var23 + 1)
 						
-						if var113 then
-							table.insert(t, 1, { "alternation", var113, var107 })
+						if var21 then
+							table.insert(t, 1, { "alternation", var21, var24 })
 						end
-						table.insert(t, if var113 then 2 else 1, {
-							"group", var106, var107, nil, var110[5][2], var110[5][3], "quantifier",
-							var110[2], var110[3], 0, var113, var110[4]
+						table.insert(t, if var21 then 2 else 1, {
+							"group", var23, var24, nil, var18[5][2], var18[5][3], "quantifier",
+							var18[2], var18[3], 0, var21, var18[4]
 						})
 						
-						if var110[4] == "lazy" and var110[2] == 0 then
-							var106 = var110[5][3]
+						if var18[4] == "lazy" and var18[2] == 0 then
+							var23 = var18[5][3]
 						end
-						var112 = true
+						var20 = true
 					else
-						var113 = nil
+						var21 = nil
 						isTable = nil
-						var115 = 1
-						i = type(var110[5]) == "table" and var110[5][1] == "backref"
+						var22 = 1
+						i = type(var18[5]) == "table" and var18[5][1] == "backref"
 						
 						if i then
-							var115 = 0
-							v = var110[5][2]
+							var22 = 0
+							v = var18[5][2]
 							
 							for i_1, v_1 in ipairs(t) do
 								if v_1[1] == "group" and v_1[5] == v then
-									var113 = v_1[3]
+									var21 = v_1[3]
 									isTable = v_1[4]
-									var115 = isTable - var113
+									var22 = isTable - var21
 									break
 								end
 							end
 						end
-						v = var107 + var110[2] * var115
-						local var116 = 0
-						while var116 < var110[3] do
+						v = var24 + var18[2] * var22
+						local var27 = 0
+						while var27 < var18[3] do
 							if i then
-								if not var113 or not isTable then break end
-								var117 = var107
-								i_1 = p33.s
+								if not var21 or not isTable then break end
+								var26 = var24
+								i_1 = p12.s
 								local byteOffset = utf8.offset(i_1, isTable)
-								substring = string.sub(i_1, utf8.offset(i_1, var113), byteOffset and byteOffset - 1)
-								v_1 = p33.s
-								local byteOffset_1 = utf8.offset(v_1, var107 + var115)
+								substring = string.sub(i_1, utf8.offset(i_1, var21), byteOffset and byteOffset - 1)
+								v_1 = p12.s
+								local byteOffset_1 = utf8.offset(v_1, var24 + var22)
 								
-								if substring ~= string.sub(v_1, utf8.offset(v_1, var117), byteOffset_1 and byteOffset_1 - 1) then break end
-								var107 += var115
-								var116 += 1
-							elseif tkn_char_match(var110[5], p33, var107, p35, p36) then
+								if substring ~= string.sub(v_1, utf8.offset(v_1, var26), byteOffset_1 and byteOffset_1 - 1) then break end
+								var24 += var22
+								var27 += 1
+							elseif tkn_char_match(var18[5], p12, var24, p14, p15) then
 								continue
 							else
 								break
 							end
 						end
-						var112 = var110[2] <= var116
+						var20 = var18[2] <= var27
 						
-						if var112 and var110[4] ~= "possessive" then
-							if var110[4] == "lazy" then
-								var117 = var107
-								var107 = v
-								v = var117
+						if var20 and var18[4] ~= "possessive" then
+							if var18[4] == "lazy" then
+								var26 = var24
+								var24 = v
+								v = var26
 							end
 							table.insert(t, 1, {
 								"quantifier",
-								var106,
-								var107,
-								math.min(v, p33.n + 1),
-								(if var110[4] == "lazy" then 1 else -1) * var115
+								var23,
+								var24,
+								math.min(v, p12.n + 1),
+								(if var18[4] == "lazy" then 1 else -1) * var22
 							})
 						end
 					end
-				elseif var111 == "backref" then
-					var113 = nil
+				elseif var19 == "backref" then
+					var21 = nil
 					isTable = nil
-					var115 = var110[2]
+					var22 = var18[2]
 					
-					for var117, substring in ipairs(t) do
-						if substring[1] == "group" and substring[5] == var115 then
-							var113 = substring[3]
+					for var26, substring in ipairs(t) do
+						if substring[1] == "group" and substring[5] == var22 then
+							var21 = substring[3]
 							isTable = substring[4]
 							break
 						end
 					end
-					if var113 and isTable then
-						i = var107
-						var107 += isTable - var113
-						local s = p33.s
+					if var21 and isTable then
+						i = var24
+						var24 += isTable - var21
+						local s = p12.s
 						i_1 = utf8.offset(s, isTable)
-						v = string.sub(s, utf8.offset(s, var113), i_1 and i_1 - 1)
-						var117 = p33.s
-						substring = utf8.offset(var117, var107)
-						var112 = v == string.sub(var117, utf8.offset(var117, i), substring and substring - 1)
-						var112 = nil
+						v = string.sub(s, utf8.offset(s, var21), i_1 and i_1 - 1)
+						var26 = p12.s
+						substring = utf8.offset(var26, var24)
+						var20 = v == string.sub(var26, utf8.offset(var26, i), substring and substring - 1)
+						var20 = nil
 					end
 				else
-					var113 = p33[var107]
+					var21 = p12[var24]
 					
-					if var111 == 36 or var111 == 90 or var111 == 122 then
+					if var19 == 36 or var19 == 90 or var19 == 122 then
 						isTable = true
 						
-						if var107 ~= p33.n + 1 then
-							if var111 == 36 and p35.multiline then
-								isTable = is_newline(p33, var107 + 1, p36)
+						if var24 ~= p12.n + 1 then
+							if var19 == 36 and p14.multiline then
+								isTable = is_newline(p12, var24 + 1, p15)
 								
 								if not isTable then
-									isTable = var111 == 90 and (var107 == p33.n and is_newline(p33, var107, p36))
+									isTable = var19 == 90 and (var24 == p12.n and is_newline(p12, var24, p15))
 								end
 							end
 						end
-						var112 = isTable
-					elseif var111 == 94 or var111 == 65 or var111 == 71 then
+						var20 = isTable
+					elseif var19 == 94 or var19 == 65 or var19 == 71 then
 						isTable = true
 						
-						if var107 ~= 1 then
-							if var111 == 94 and p35.multiline then
-								isTable = is_newline(p33, var107 - 1, p36)
+						if var24 ~= 1 then
+							if var19 == 94 and p14.multiline then
+								isTable = is_newline(p12, var24 - 1, p15)
 								
 								if not isTable then
-									isTable = var111 == 71 and var107 == p34
+									isTable = var19 == 71 and var24 == p13
 								end
 							end
 						end
-						var112 = isTable
-					elseif var111 == 66 or var111 == 98 then
-						isTable = if var107 ~= 1 then p35.multiline and is_newline(p33, var107 - 1, p36) else true
-						var115 = if var107 ~= p33.n + 1 then p35.multiline and is_newline(p33, var107, p36) else true
-						i = if tkn_char_match(var110[2], p33[var107 - 1], p35) then 0 else tkn_char_match(var110[2], var113, p35) and 1
+						var20 = isTable
+					elseif var19 == 66 or var19 == 98 then
+						isTable = if var24 ~= 1 then p14.multiline and is_newline(p12, var24 - 1, p15) else true
+						var22 = if var24 ~= p12.n + 1 then p14.multiline and is_newline(p12, var24, p15) else true
+						i = if tkn_char_match(var18[2], p12[var24 - 1], p14) then 0 else tkn_char_match(var18[2], var21, p14) and 1
 						
 						if i == 0 then
-							v = var115 or not tkn_char_match(var110[2], var113, p35)
-							var112 = v
+							v = var22 or not tkn_char_match(var18[2], var21, p14)
+							var20 = v
 						elseif i then
-							v = isTable or not tkn_char_match(var110[2], p33[var107 - 1], p35)
-							var112 = v
+							v = isTable or not tkn_char_match(var18[2], p12[var24 - 1], p14)
+							var20 = v
 						end
-						if var111 == 66 then
-							var112 = not var112
+						if var19 == 66 then
+							var20 = not var20
 						end
 					else
-						var112 = tkn_char_match(var110, p33, var107, p35, p36)
-						var107 += 1
+						var20 = tkn_char_match(var18, p12, var24, p14, p15)
+						var24 += 1
 					end
 				end
-				if not var112 then
+				if not var20 then
 					while true do
-						var113 = t[1] and t[1][1]
+						var21 = t[1] and t[1][1]
 						isTable = t[1]
-						if var113 and var113 ~= "PRUNE" and var113 ~= "SKIP" then
-							if var113 ~= "alternation" then
-								if var113 ~= "group" then
-									if var113 ~= "quantifier" or math.sign(isTable[4] - isTable[3]) ~= math.sign(isTable[5]) then
+						if var21 and var21 ~= "PRUNE" and var21 ~= "SKIP" then
+							if var21 ~= "alternation" then
+								if var21 ~= "group" then
+									if var21 ~= "quantifier" or math.sign(isTable[4] - isTable[3]) ~= math.sign(isTable[5]) then
 										table.remove(t, 1)
 										continue
 									end
 									isTable[3] += isTable[5]
-									var106 = isTable[2]
-									var107 = isTable[3]
+									var23 = isTable[2]
+									var24 = isTable[3]
 									break
 								elseif isTable[7] ~= "quantifier" then
 									if isTable[7] ~= 33 then
 										continue
 									end
 									table.remove(t, 1)
-									var106 = isTable[6]
-									var107 = isTable[3]
+									var23 = isTable[6]
+									var24 = isTable[3]
 									break
 								elseif isTable[12] == "greedy" and isTable[8] <= isTable[10] or isTable[12] == "lazy" and isTable[10] < isTable[9] and not isTable[13] then
-									var106 = if isTable[12] == "greedy" then isTable[6] else isTable[2]
-									var107 = isTable[3]
+									var23 = if isTable[12] == "greedy" then isTable[6] else isTable[2]
+									var24 = isTable[3]
 									
 									if isTable[12] == "greedy" then
 										table.remove(t, 1)
@@ -963,99 +963,228 @@ local function re_rawfind(p32, p33, p34, p35, p36, p37)
 									end
 								end
 							end
-							var106 = isTable[2]
-							var107 = isTable[3]
-							var115, i = find_alternation(p32, var106 + 1)
+							var23 = isTable[2]
+							var24 = isTable[3]
+							var22, i = find_alternation(p11, var23 + 1)
 							
-							if var115 then
-								isTable[2] = var115
+							if var22 then
+								isTable[2] = var22
 							else
 								table.remove(t, 1)
 							end
 							if not i then break end
-							var107 -= i
+							var24 -= i
 							break
 						end
-						if var113 then
+						if var21 then
 							table.clear(t)
 						end
-						if p33.n >= var108 then
-							var108 = if var113 == "SKIP" then isTable[2] else var108 + 1
-							var106 = 0
-							var107 = var108
+						if p12.n >= var25 then
+							var25 = if var21 == "SKIP" then isTable[2] else var25 + 1
+							var23 = 0
+							var24 = var25
 							break
 						end
-						return if p37 then false else nil
+						return if p16 then false else nil
 					end
 				end
-				var106 += 1
+				var23 += 1
 			end
 		end
 	end
-	if p37 then
+	if p16 then
 		return true
 	end
-	var110 = false
-	var111 = table.create(p32.group_n)
-	isTable = p32.group_n
-	var111[0] = { var108, var107 }
-	var111.n = isTable
+	var18 = false
+	var19 = table.create(p11.group_n)
+	isTable = p11.group_n
+	var19[0] = { var25, var24 }
+	var19.n = isTable
 	
-	for var115, i in ipairs(t) do
-		if i[1] == "matchStart" and not var110 then
-			var110 = true
-			var111[0][1] = i[2]
-		elseif i[1] == "group" and i[5] and not var111[i[5]] then
-			var111[i[5]] = { i[3], i[4] }
+	for var22, i in ipairs(t) do
+		if i[1] == "matchStart" and not var18 then
+			var18 = true
+			var19[0][1] = i[2]
+		elseif i[1] == "group" and i[5] and not var19[i[5]] then
+			var19[i[5]] = { i[3], i[4] }
 		end
 	end
-	return var111
+	return var19
 end
 
-local var33 = function(p38, p39, p40)
+local var28 = function(p17, p18, p19)
 	-- upvalues: re_rawfind (ref), to_str_arr (ref)
-	return re_rawfind(p38.token, to_str_arr(p39, p40), 1, p38.flags, p38.verb_flags, true)
+	return re_rawfind(p17.token, to_str_arr(p18, p19), 1, p17.flags, p17.verb_flags, true)
 end
 
-local var34 = "test"
+local var29 = "test"
 
 function t_1.test(...)
-	-- upvalues: tbl (ref), var34 (ref), t (ref), var33 (ref)
-	local var64 = select("#", ...)
+	-- upvalues: tbl (ref), var29 (ref), t (ref), var28 (ref)
+	local var30 = select("#", ...)
 	
-	if var64 < 1 then
+	if var30 < 1 then
 		error("missing argument #1 (RegEx expected)", 2)
-	elseif var64 < 2 then
+	elseif var30 < 2 then
 		error("missing argument #2 (string expected)", 2)
 	end
-	local var65, var66, var67, var68, var69, var70 = ...
+	local var31, var32, var33, var34, var35, var36 = ...
 	
-	if not tbl[var65] or tbl[var65].name ~= "RegEx" then
-		if type(var65) ~= "string" and type(var65) ~= "number" then
-			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var34, typeof(var65)), 2)
+	if not tbl[var31] or tbl[var31].name ~= "RegEx" then
+		if type(var31) ~= "string" and type(var31) ~= "number" then
+			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var29, typeof(var31)), 2)
 		end
-		var65 = t.fromstring(var65)
-	elseif var34 == "sub" then
-		if type(var67) == "number" then
-			var67 ..= ""
-		elseif type(var67) ~= "string" then
-			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var67)), 2)
+		var31 = t.fromstring(var31)
+	elseif var29 == "sub" then
+		if type(var33) == "number" then
+			var33 ..= ""
+		elseif type(var33) ~= "string" then
+			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var33)), 2)
 		end
-	elseif type(var66) == "number" then
-		var66 ..= ""
-	elseif type(var66) ~= "string" then
-		error(string.format("invalid argument #2 to %q (string expected, got %s)", var34, typeof(var66)), 2)
+	elseif type(var32) == "number" then
+		var32 ..= ""
+	elseif type(var32) ~= "string" then
+		error(string.format("invalid argument #2 to %q (string expected, got %s)", var29, typeof(var32)), 2)
 	end
-	if var34 ~= "sub" and var34 ~= "split" then
-		local var71 = typeof(var67)
+	if var29 ~= "sub" and var29 ~= "split" then
+		local var30 = typeof(var67)
 		
-		if var71 ~= "nil" then
+		if var30 ~= "nil" then
 			var67 = tonumber(var67)
 			
 			if var67 then
 				var67 = if var67 < 0 then #var66 + math.floor(var67 + 0.5) + 1 else math.max(math.floor(var67 + 0.5), 1)
 			else
-				error(string.format("invalid argument #3 to %q (number expected, got %s)", var34, var71), 2)
+				error(string.format("invalid argument #3 to %q (number expected, got %s)", var29, var30), 2)
+			end
+		end
+	end
+	var65 = tbl[var65]
+	
+	if var29 == "match" or var29 == "matchiter" then
+		var68 = ...
+	elseif var29 == "sub" then
+		var70 = ...
+	end
+	return var28(var65, var66, var67, var68, var69, var70)
+end
+
+local var31 = function(p17, p18, p19, p20)
+	-- upvalues: re_rawfind (ref), to_str_arr (ref), new_match (ref)
+	local var32 = re_rawfind(p17.token, to_str_arr(p18, p19), 1, p17.flags, p17.verb_flags, false)
+	
+	return if var32 then new_match(var32, p17.group_id, p20, p18) else nil
+end
+
+local var32 = "match"
+
+function t_1.match(...)
+	-- upvalues: tbl (ref), var32 (ref), t (ref), var31 (ref)
+	local var33 = select("#", ...)
+	
+	if var33 < 1 then
+		error("missing argument #1 (RegEx expected)", 2)
+	elseif var33 < 2 then
+		error("missing argument #2 (string expected)", 2)
+	end
+	local var34, var35, var36, var37, var38, var39 = ...
+	
+	if not tbl[var34] or tbl[var34].name ~= "RegEx" then
+		if type(var34) ~= "string" and type(var34) ~= "number" then
+			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var32, typeof(var34)), 2)
+		end
+		var34 = t.fromstring(var34)
+	elseif var32 == "sub" then
+		if type(var36) == "number" then
+			var36 ..= ""
+		elseif type(var36) ~= "string" then
+			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var36)), 2)
+		end
+	elseif type(var35) == "number" then
+		var35 ..= ""
+	elseif type(var35) ~= "string" then
+		error(string.format("invalid argument #2 to %q (string expected, got %s)", var32, typeof(var35)), 2)
+	end
+	if var32 ~= "sub" and var32 ~= "split" then
+		local var30 = typeof(var67)
+		
+		if var30 ~= "nil" then
+			var67 = tonumber(var67)
+			
+			if var67 then
+				var67 = if var67 < 0 then #var66 + math.floor(var67 + 0.5) + 1 else math.max(math.floor(var67 + 0.5), 1)
+			else
+				error(string.format("invalid argument #3 to %q (number expected, got %s)", var32, var30), 2)
+			end
+		end
+	end
+	var65 = tbl[var65]
+	
+	if var32 == "match" or var32 == "matchiter" then
+		var68 = ...
+	elseif var32 == "sub" then
+		var70 = ...
+	end
+	return var31(var65, var66, var67, var68, var69, var70)
+end
+
+local var33 = function(p17, p18, p19, p20)
+	-- upvalues: to_str_arr (ref), re_rawfind (ref), new_match (ref)
+	p18 = to_str_arr(p18, p19)
+	local var34 = 1
+	
+	return function()
+		-- upvalues: var34 (write), p18 (write), re_rawfind (copy), p17 (ref), new_match (copy), p20 (ref)
+		local var35 = var34 <= p18.n + 1 and re_rawfind(p17.token, p18, var34, p17.flags, p17.verb_flags, false)
+		
+		if var35 then
+			var34 = var35[0][2] + (if var35[0][2] <= var35[0][1] then 1 else 0)
+			
+			return new_match(var35, p17.group_id, p20, p18.s)
+		end
+		return nil
+	end
+end
+
+local var34 = "matchall"
+
+function t_1.matchall(...)
+	-- upvalues: tbl (ref), var34 (ref), t (ref), var33 (ref)
+	local var35 = select("#", ...)
+	
+	if var35 < 1 then
+		error("missing argument #1 (RegEx expected)", 2)
+	elseif var35 < 2 then
+		error("missing argument #2 (string expected)", 2)
+	end
+	local var36, var37, var38, var39, var40, var41 = ...
+	
+	if not tbl[var36] or tbl[var36].name ~= "RegEx" then
+		if type(var36) ~= "string" and type(var36) ~= "number" then
+			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var34, typeof(var36)), 2)
+		end
+		var36 = t.fromstring(var36)
+	elseif var34 == "sub" then
+		if type(var38) == "number" then
+			var38 ..= ""
+		elseif type(var38) ~= "string" then
+			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var38)), 2)
+		end
+	elseif type(var37) == "number" then
+		var37 ..= ""
+	elseif type(var37) ~= "string" then
+		error(string.format("invalid argument #2 to %q (string expected, got %s)", var34, typeof(var37)), 2)
+	end
+	if var34 ~= "sub" and var34 ~= "split" then
+		local var30 = typeof(var67)
+		
+		if var30 ~= "nil" then
+			var67 = tonumber(var67)
+			
+			if var67 then
+				var67 = if var67 < 0 then #var66 + math.floor(var67 + 0.5) + 1 else math.max(math.floor(var67 + 0.5), 1)
+			else
+				error(string.format("invalid argument #3 to %q (number expected, got %s)", var34, var30), 2)
 			end
 		end
 	end
@@ -1069,577 +1198,448 @@ function t_1.test(...)
 	return var33(var65, var66, var67, var68, var69, var70)
 end
 
-local var35 = function(p41, p42, p43, p44)
-	-- upvalues: re_rawfind (ref), to_str_arr (ref), new_match (ref)
-	local var121 = re_rawfind(p41.token, to_str_arr(p42, p43), 1, p41.flags, p41.verb_flags, false)
-	
-	return if var121 then new_match(var121, p41.group_id, p44, p42) else nil
-end
-
-local var36 = "match"
-
-function t_1.match(...)
-	-- upvalues: tbl (ref), var36 (ref), t (ref), var35 (ref)
-	local var64 = select("#", ...)
-	
-	if var64 < 1 then
-		error("missing argument #1 (RegEx expected)", 2)
-	elseif var64 < 2 then
-		error("missing argument #2 (string expected)", 2)
-	end
-	local var65, var66, var67, var68, var69, var70 = ...
-	
-	if not tbl[var65] or tbl[var65].name ~= "RegEx" then
-		if type(var65) ~= "string" and type(var65) ~= "number" then
-			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var36, typeof(var65)), 2)
-		end
-		var65 = t.fromstring(var65)
-	elseif var36 == "sub" then
-		if type(var67) == "number" then
-			var67 ..= ""
-		elseif type(var67) ~= "string" then
-			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var67)), 2)
-		end
-	elseif type(var66) == "number" then
-		var66 ..= ""
-	elseif type(var66) ~= "string" then
-		error(string.format("invalid argument #2 to %q (string expected, got %s)", var36, typeof(var66)), 2)
-	end
-	if var36 ~= "sub" and var36 ~= "split" then
-		local var71 = typeof(var67)
-		
-		if var71 ~= "nil" then
-			var67 = tonumber(var67)
-			
-			if var67 then
-				var67 = if var67 < 0 then #var66 + math.floor(var67 + 0.5) + 1 else math.max(math.floor(var67 + 0.5), 1)
-			else
-				error(string.format("invalid argument #3 to %q (number expected, got %s)", var36, var71), 2)
-			end
-		end
-	end
-	var65 = tbl[var65]
-	
-	if var36 == "match" or var36 == "matchiter" then
-		var68 = ...
-	elseif var36 == "sub" then
-		var70 = ...
-	end
-	return var35(var65, var66, var67, var68, var69, var70)
-end
-
-local var37 = function(p45, p46, p47, p48)
-	-- upvalues: to_str_arr (ref), re_rawfind (ref), new_match (ref)
-	p46 = to_str_arr(p46, p47)
-	local var122 = 1
-	
-	return function()
-		-- upvalues: var122 (write), p46 (write), re_rawfind (copy), p45 (ref), new_match (copy), p48 (ref)
-		local var123 = var122 <= p46.n + 1 and re_rawfind(p45.token, p46, var122, p45.flags, p45.verb_flags, false)
-		
-		if var123 then
-			var122 = var123[0][2] + (if var123[0][2] <= var123[0][1] then 1 else 0)
-			
-			return new_match(var123, p45.group_id, p48, p46.s)
-		end
-		return nil
-	end
-end
-
-local var38 = "matchall"
-
-function t_1.matchall(...)
-	-- upvalues: tbl (ref), var38 (ref), t (ref), var37 (ref)
-	local var64 = select("#", ...)
-	
-	if var64 < 1 then
-		error("missing argument #1 (RegEx expected)", 2)
-	elseif var64 < 2 then
-		error("missing argument #2 (string expected)", 2)
-	end
-	local var65, var66, var67, var68, var69, var70 = ...
-	
-	if not tbl[var65] or tbl[var65].name ~= "RegEx" then
-		if type(var65) ~= "string" and type(var65) ~= "number" then
-			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var38, typeof(var65)), 2)
-		end
-		var65 = t.fromstring(var65)
-	elseif var38 == "sub" then
-		if type(var67) == "number" then
-			var67 ..= ""
-		elseif type(var67) ~= "string" then
-			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var67)), 2)
-		end
-	elseif type(var66) == "number" then
-		var66 ..= ""
-	elseif type(var66) ~= "string" then
-		error(string.format("invalid argument #2 to %q (string expected, got %s)", var38, typeof(var66)), 2)
-	end
-	if var38 ~= "sub" and var38 ~= "split" then
-		local var71 = typeof(var67)
-		
-		if var71 ~= "nil" then
-			var67 = tonumber(var67)
-			
-			if var67 then
-				var67 = if var67 < 0 then #var66 + math.floor(var67 + 0.5) + 1 else math.max(math.floor(var67 + 0.5), 1)
-			else
-				error(string.format("invalid argument #3 to %q (number expected, got %s)", var38, var71), 2)
-			end
-		end
-	end
-	var65 = tbl[var65]
-	
-	if var38 == "match" or var38 == "matchiter" then
-		var68 = ...
-	elseif var38 == "sub" then
-		var70 = ...
-	end
-	return var37(var65, var66, var67, var68, var69, var70)
-end
-
-local function insert_tokenized_sub(p49, p50, p51, p52)
+local function insert_tokenized_sub(p17, p18, p19, p20)
 	-- upvalues: insert_tokenized_sub (ref)
-	for i, v in ipairs(p52) do
+	for i, v in ipairs(p20) do
 		if type(v) == "table" then
 			if v[1] ~= "condition" then
-				table.move(v, 1, #v, #p49 + 1, p49)
-			elseif p51[v[2]] then
+				table.move(v, 1, #v, #p17 + 1, p17)
+			elseif p19[v[2]] then
 				if v[3] then
-					insert_tokenized_sub(p49, p50, p51, v[3])
+					insert_tokenized_sub(p17, p18, p19, v[3])
 				else
-					table.move(p50, p51[v[2]][1], p51[v[2]][2] - 1, #p49 + 1, p49)
+					table.move(p18, p19[v[2]][1], p19[v[2]][2] - 1, #p17 + 1, p17)
 				end
 			elseif v[4] then
-				insert_tokenized_sub(p49, p50, p51, v[4])
+				insert_tokenized_sub(p17, p18, p19, v[4])
 			end
-		elseif p51[v] then
-			table.move(p50, p51[v][1], p51[v][2] - 1, #p49 + 1, p49)
+		elseif p19[v] then
+			table.move(p18, p19[v][1], p19[v][2] - 1, #p17 + 1, p17)
 		end
 	end
-	p49.n = #p49
+	p17.n = #p17
 	
-	return p49
+	return p17
 end
 
-local var40 = function(p53, p54, p55, p56, p57, p58)
+local var35 = function(p21, p22, p23, p24, p25, p26)
 	-- upvalues: to_str_arr (ref), t_5 (ref), re_rawfind (ref), insert_tokenized_sub (ref), new_match (ref), from_str_arr (ref)
-	if p57 ~= nil and type(p57) ~= "number" and type(p57) ~= "string" then
-		error(string.format("invalid argument #5 to 'sub' (string expected, got %s)", typeof(p57)), 3)
+	if p25 ~= nil and type(p25) ~= "number" and type(p25) ~= "string" then
+		error(string.format("invalid argument #5 to 'sub' (string expected, got %s)", typeof(p25)), 3)
 	end
 	local t = { l = false, o = false, u = false }
 	
-	for i in string.gmatch(p57 or "", utf8.charpattern) do
+	for i in string.gmatch(p25 or "", utf8.charpattern) do
 		if t[i] ~= false then
 			error("invalid regular expression substitution flag " .. i, 3)
 		end
 		t[i] = true
 	end
-	local var125 = type(p54)
+	local var36 = type(p22)
 	
-	if var125 == "number" then
-		p54 ..= ""
-	elseif var125 ~= "string" and var125 ~= "function" and (not t.o or var125 ~= "table") then
-		error(string.format("invalid argument #2 to 'sub' (string/function%s expected, got %s)", if t.o then "/table" else "", typeof(p54)), 3)
+	if var36 == "number" then
+		p22 ..= ""
+	elseif var36 ~= "string" and var36 ~= "function" and (not t.o or var36 ~= "table") then
+		error(string.format("invalid argument #2 to 'sub' (string/function%s expected, got %s)", if t.o then "/table" else "", typeof(p22)), 3)
 	end
-	if tonumber(p56) then
-		p56 = tonumber(p56)
+	if tonumber(p24) then
+		p24 = tonumber(p24)
 		
-		if p56 <= -1 or p56 ~= p56 then
-			p56 = 1e999
+		if p24 <= -1 or p24 ~= p24 then
+			p24 = 1e999
 		end
-	elseif p56 == nil then
-		p56 = 1e999
+	elseif p24 == nil then
+		p24 = 1e999
 	else
-		error(string.format("invalid argument #4 to 'sub' (number expected, got %s)", typeof(p56)), 3)
+		error(string.format("invalid argument #4 to 'sub' (number expected, got %s)", typeof(p24)), 3)
 	end
-	if p56 < 1 then
-		return p55, 0
+	if p24 < 1 then
+		return p23, 0
 	end
-	local list, var130, var131, var132, var136
-	local var126 = 0
+	local list, var37, var38, var39, var40
+	local var41 = 0
 	
-	if var125 == "string" then
-		p54 = to_str_arr(p54)
+	if var36 == "string" then
+		p22 = to_str_arr(p22)
 		
 		if not t.l then
-			local var127 = 0
+			local var42 = 0
 			list = table.create(3)
-			local groupN = p53.token.group_n
+			local groupN = p21.token.group_n
 			local t_1 = {}
-			while var127 < p54.n do
-				var130 = var127
+			while var42 < p22.n do
+				var37 = var42
 				repeat
-					var130 += 1
-				until not (p54[var130] and (p54[var130] ~= 36 and p54[var130] ~= 92) and (p54[var130] ~= 58 and p54[var130] ~= 125 or not t_1[1]))
+					var37 += 1
+				until not (p22[var37] and (p22[var37] ~= 36 and p22[var37] ~= 92) and (p22[var37] ~= 58 and p22[var37] ~= 125 or not t_1[1]))
 				local i_1
-				var126 += var130 - var127 - 1
+				var41 += var37 - var42 - 1
 				
-				if var130 - var127 > 1 then
-					table.insert(list, table.move(p54, var127 + 1, var130 - 1, 1, table.create(var130 - var127 - 1)))
+				if var37 - var42 > 1 then
+					table.insert(list, table.move(p22, var42 + 1, var37 - 1, 1, table.create(var37 - var42 - 1)))
 				end
-				if p54[var130] == 58 then
-					var131 = t_1[1]
+				if p22[var37] == 58 then
+					var38 = t_1[1]
 					
-					if var131[2] then
+					if var38[2] then
 						error("malformed substitution pattern", 3)
 					end
-					var131[2] = table.move(list, var131[3], #list, 1, table.create(#list + 1 - var131[3]))
+					var38[2] = table.move(list, var38[3], #list, 1, table.create(#list + 1 - var38[3]))
 					
-					for i_1 = #list, var131[3], -1 do
+					for i_1 = #list, var38[3], -1 do
 						list[i_1] = nil
 					end
-				elseif p54[var130] == 125 then
+				elseif p22[var37] == 125 then
 					local i_2
-					var131 = table.remove(t_1, 1)
-					var132 = table.move(list, var131[3], #list, 1, table.create(#list + 1 - var131[3]))
+					var38 = table.remove(t_1, 1)
+					var39 = table.move(list, var38[3], #list, 1, table.create(#list + 1 - var38[3]))
 					
-					for i_2 = #list, var131[3], -1 do
+					for i_2 = #list, var38[3], -1 do
 						list[i_2] = nil
 					end
 					i_2 = {}
-					local var133 = "condition"
-					local var134 = var131[1]
+					local var43 = "condition"
+					local var44 = var38[1]
 					local _ = false
-					local var135 = var131[2]
-					local _ = var135 == true and ((if var135 == true then var131[2] else nil) or var132)
+					local var45 = var38[2]
+					local _ = var45 == true and ((if var45 == true then var38[2] else nil) or var39)
 					-- Unknown statement at pc 6: <SetList>
 					table.insert(list, i_2)
-				elseif p54[var130] then
-					var130 += 1
-					var131 = p54[var130]
+				elseif p22[var37] then
+					var37 += 1
+					var38 = p22[var37]
 					
-					if not var131 then
-						if p54[var130 - 1] == 92 then
+					if not var38 then
+						if p22[var37 - 1] == 92 then
 							error("replacement string must not end with a trailing backslash", 3)
 						end
-						var132 = list[#list]
+						var39 = list[#list]
 						
-						if type(var132) == "table" then
-							table.insert(var132, p54[var130 - 1])
+						if type(var39) == "table" then
+							table.insert(var39, p22[var37 - 1])
 						else
-							table.insert(list, { p54[var130 - 1] })
+							table.insert(list, { p22[var37 - 1] })
 						end
-					elseif var131 == 92 and p54[var130 - 1] == 36 then
-						var132 = list[#list]
+					elseif var38 == 92 and p22[var37 - 1] == 36 then
+						var39 = list[#list]
 						
-						if type(var132) == "table" then
-							table.insert(var132, 36)
+						if type(var39) == "table" then
+							table.insert(var39, 36)
 						else
 							table.insert(list, { 36 })
 						end
-						var130 -= 1
-						var126 += 1
-					elseif var131 == 48 then
+						var37 -= 1
+						var41 += 1
+					elseif var38 == 48 then
 						table.insert(list, 0)
-					elseif var131 > 48 and var131 <= 57 then
-						var132 = var130
-						var136 = var131 - 48
-						while p54[var130 + 1] and (p54[var130 + 1] >= 48 and p54[var130 + 1] <= 57) do
-							var136 ..= p54[var130 + 1] - 48
-							var130 += 1
+					elseif var38 > 48 and var38 <= 57 then
+						var39 = var37
+						var40 = var38 - 48
+						while p22[var37 + 1] and (p22[var37 + 1] >= 48 and p22[var37 + 1] <= 57) do
+							var40 ..= p22[var37 + 1] - 48
+							var37 += 1
 						end
-						var136 = tonumber(var136)
+						var40 = tonumber(var40)
 						
-						if not t.u and groupN < var136 then
+						if not t.u and groupN < var40 then
 							error("reference to non-existent subpattern", 3)
 						end
-						table.insert(list, var136)
-					elseif var131 == 123 and p54[var130 - 1] == 36 then
-						var130 += 1
-						var132 = var130
-						while p54[var130] and (p54[var130] >= 48 and p54[var130] <= 57 or p54[var130] >= 65 and p54[var130] <= 90 or (p54[var130] >= 97 and p54[var130] <= 122 or p54[var130] == 95)) do
-							var130 += 1
+						table.insert(list, var40)
+					elseif var38 == 123 and p22[var37 - 1] == 36 then
+						var37 += 1
+						var39 = var37
+						while p22[var37] and (p22[var37] >= 48 and p22[var37] <= 57 or p22[var37] >= 65 and p22[var37] <= 90 or (p22[var37] >= 97 and p22[var37] <= 122 or p22[var37] == 95)) do
+							var37 += 1
 						end
-						if (p54[var130] == 125 or p54[var130] == 58 and (p54[var130 + 1] == 43 or p54[var130 + 1] == 45)) and var130 ~= var132 then
-							i_1 = p54.s
-							local byteOffset = utf8.offset(i_1, var130)
-							byteOffset = string.sub(i_1, utf8.offset(i_1, var132), byteOffset and byteOffset - 1)
+						if (p22[var37] == 125 or p22[var37] == 58 and (p22[var37 + 1] == 43 or p22[var37 + 1] == 45)) and var37 ~= var39 then
+							i_1 = p22.s
+							local byteOffset = utf8.offset(i_1, var37)
+							byteOffset = string.sub(i_1, utf8.offset(i_1, var39), byteOffset and byteOffset - 1)
 							
-							if p54[var132] >= 48 and p54[var132] <= 57 then
-								var136 = tonumber(byteOffset)
+							if p22[var39] >= 48 and p22[var39] <= 57 then
+								var40 = tonumber(byteOffset)
 								
-								if not t.u and groupN < var136 then
+								if not t.u and groupN < var40 then
 									error("reference to non-existent subpattern", 3)
 								end
 							else
-								var136 = p53.group_id[byteOffset]
+								var40 = p21.group_id[byteOffset]
 								
-								if not t.u and (not var136 or groupN < var136) then
+								if not t.u and (not var40 or groupN < var40) then
 									error("reference to non-existent subpattern", 3)
 								end
 							end
-							if p54[var130] == 58 then
-								var130 += 1
-								table.insert(t_1, { var136, p54[var130] == 45, #list + 1 })
+							if p22[var37] == 58 then
+								var37 += 1
+								table.insert(t_1, { var40, p22[var37] == 45, #list + 1 })
 							else
-								table.insert(list, var136)
+								table.insert(list, var40)
 							end
 						else
 							error("malformed substitution pattern", 3)
 						end
 					else
-						var132 = nil
+						var39 = nil
 						
-						if p54[var130 - 1] ~= 36 then
-							var132 = t_5[p54[var130]]
+						if p22[var37 - 1] ~= 36 then
+							var39 = t_5[p22[var37]]
 							
-							if type(var132) ~= "number" then
-								var132 = nil
+							if type(var39) ~= "number" then
+								var39 = nil
 							end
-						elseif var131 ~= 36 then
-							var136 = list[#list]
+						elseif var38 ~= 36 then
+							var40 = list[#list]
 							
-							if type(var136) == "table" then
-								table.insert(var136, 36)
+							if type(var40) == "table" then
+								table.insert(var40, 36)
 							else
 								table.insert(list, { 36 })
 							end
 						end
-						var136 = list[#list]
+						var40 = list[#list]
 						
-						if type(var136) == "table" then
-							table.insert(var136, var132 or p54[var130])
+						if type(var40) == "table" then
+							table.insert(var40, var39 or p22[var37])
 						else
-							table.insert(list, { var132 or p54[var130] })
+							table.insert(list, { var39 or p22[var37] })
 						end
-						var126 += 1
+						var41 += 1
 					end
 				end
-				var127 = var130
+				var42 = var37
 			end
 			if t_1[1] then
 				error("malformed substitution pattern", 3)
 			end
 			if list[2] or type(list[1]) ~= "table" or list[1][1] == "condition" then
-				p54 = list
-				var125 = "subst_string"
+				p22 = list
+				var36 = "subst_string"
 			else
-				var130 = list[1]
-				p54.n = #list[1]
-				p54 = var130
+				var37 = list[1]
+				p22.n = #list[1]
+				p22 = var37
 			end
 		end
 	end
-	local var138 = to_str_arr(p55)
-	var138 = 0
+	local var46 = to_str_arr(p23)
+	var46 = 0
 	list = 1
-	local var139 = 0
+	local var47 = 0
 	repeat
-		if list > var138.n + var138 + 1 then break end
-		local var140 = re_rawfind(p53.token, var138, list, p53.flags, p53.verb_flags, false)
+		if list > var46.n + var46 + 1 then break end
+		local var48 = re_rawfind(p21.token, var46, list, p21.flags, p21.verb_flags, false)
 		
-		if not var140 then break end
+		if not var48 then break end
 		local byteOffset
-		var130 = nil
+		var37 = nil
 		
-		if var125 == "string" then
-			var130 = p54
-		elseif var125 == "subst_string" then
-			var130 = insert_tokenized_sub(table.create(var126), var138, var140, p54)
+		if var36 == "string" then
+			var37 = p22
+		elseif var36 == "subst_string" then
+			var37 = insert_tokenized_sub(table.create(var41), var46, var48, p22)
 		else
-			var131 = nil
-			var132 = nil
+			var38 = nil
+			var39 = nil
 			
-			if var125 == "table" then
-				var136 = var138.s
-				byteOffset = utf8.offset(var136, var140[0][2])
-				var131 = string.sub(var136, utf8.offset(var136, var140[0][1]), byteOffset and byteOffset - 1)
-				var132 = p54[var131]
+			if var36 == "table" then
+				var40 = var46.s
+				byteOffset = utf8.offset(var40, var48[0][2])
+				var38 = string.sub(var40, utf8.offset(var40, var48[0][1]), byteOffset and byteOffset - 1)
+				var39 = p22[var38]
 			else
-				var131 = new_match(var140, p53.group_id, p58, var138.s)
-				var132 = p54(var131)
+				var38 = new_match(var48, p21.group_id, p26, var46.s)
+				var39 = p22(var38)
 			end
-			if var132 == var131 or t.o and not var132 then
-				var136 = var140[0][2] - var140[0][1]
-				var130 = table.move(var138, var140[0][1], var140[0][2] - 1, 1, table.create(var136))
-				var130.n = var136
-			elseif type(var132) == "string" then
-				var130 = to_str_arr(var132)
-			elseif type(var132) == "number" then
-				var130 = to_str_arr(var132 .. "")
+			if var39 == var38 or t.o and not var39 then
+				var40 = var48[0][2] - var48[0][1]
+				var37 = table.move(var46, var48[0][1], var48[0][2] - 1, 1, table.create(var40))
+				var37.n = var40
+			elseif type(var39) == "string" then
+				var37 = to_str_arr(var39)
+			elseif type(var39) == "number" then
+				var37 = to_str_arr(var39 .. "")
 			elseif t.o then
-				error(string.format("invalid replacement value (a %s)", type(var132)), 3)
+				error(string.format("invalid replacement value (a %s)", type(var39)), 3)
 			else
-				var130 = { n = 0 }
+				var37 = { n = 0 }
 			end
 		end
-		var131 = var140[0][2] - var140[0][1]
-		var132 = math.min(var130.n, var131)
+		var38 = var48[0][2] - var48[0][1]
+		var39 = math.min(var37.n, var38)
 		
-		for byteOffset = 0, var132 - 1 do
-			var138[var140[0][1] + byteOffset] = var130[byteOffset + 1]
+		for byteOffset = 0, var39 - 1 do
+			var46[var48[0][1] + byteOffset] = var37[byteOffset + 1]
 		end
-		var136 = var140[0][1] + var132
-		list = var140[0][2]
+		var40 = var48[0][1] + var39
+		list = var48[0][2]
 		
-		if var130.n < var131 then
-			for _ = 1, var131 - var130.n do
-				table.remove(var138, var136)
-				var138 -= 1
+		if var37.n < var38 then
+			for _ = 1, var38 - var37.n do
+				table.remove(var46, var40)
+				var46 -= 1
 				list -= 1
 			end
-		elseif var131 < var130.n then
-			for i_3 = 1, var130.n - var131 do
-				table.insert(var138, var136 + i_3 - 1, var130[var132 + i_3])
-				var138 += 1
+		elseif var38 < var37.n then
+			for i_3 = 1, var37.n - var38 do
+				table.insert(var46, var40 + i_3 - 1, var37[var39 + i_3])
+				var46 += 1
 				list += 1
 			end
 		end
-		if var131 <= 0 then
+		if var38 <= 0 then
 			list += 1
 		end
-		var139 += 1
-	until p56 < var139 + 1
-	return from_str_arr(var138), var139
+		var47 += 1
+	until p24 < var47 + 1
+	return from_str_arr(var46), var47
 end
 
-local var41 = "sub"
+local var49 = "sub"
 
 function t_1.sub(...)
-	-- upvalues: tbl (ref), var41 (ref), t (ref), var40 (ref)
-	local var64 = select("#", ...)
+	-- upvalues: tbl (ref), var49 (ref), t (ref), var35 (ref)
+	local var50 = select("#", ...)
 	
-	if var64 < 1 then
+	if var50 < 1 then
 		error("missing argument #1 (RegEx expected)", 2)
-	elseif var64 < 2 then
+	elseif var50 < 2 then
 		error("missing argument #2 (string expected)", 2)
 	end
-	local var65, var66, var67, var68, var69, var70 = ...
+	local var51, var52, var53, var54, var55, var56 = ...
 	
-	if not tbl[var65] or tbl[var65].name ~= "RegEx" then
-		if type(var65) ~= "string" and type(var65) ~= "number" then
-			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var41, typeof(var65)), 2)
+	if not tbl[var51] or tbl[var51].name ~= "RegEx" then
+		if type(var51) ~= "string" and type(var51) ~= "number" then
+			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var49, typeof(var51)), 2)
 		end
-		var65 = t.fromstring(var65)
-	elseif var41 == "sub" then
-		if type(var67) == "number" then
-			var67 ..= ""
-		elseif type(var67) ~= "string" then
-			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var67)), 2)
+		var51 = t.fromstring(var51)
+	elseif var49 == "sub" then
+		if type(var53) == "number" then
+			var53 ..= ""
+		elseif type(var53) ~= "string" then
+			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var53)), 2)
 		end
-	elseif type(var66) == "number" then
-		var66 ..= ""
-	elseif type(var66) ~= "string" then
-		error(string.format("invalid argument #2 to %q (string expected, got %s)", var41, typeof(var66)), 2)
+	elseif type(var52) == "number" then
+		var52 ..= ""
+	elseif type(var52) ~= "string" then
+		error(string.format("invalid argument #2 to %q (string expected, got %s)", var49, typeof(var52)), 2)
 	end
-	if var41 ~= "sub" and var41 ~= "split" then
-		local var71 = typeof(var67)
+	if var49 ~= "sub" and var49 ~= "split" then
+		local var50 = typeof(var67)
 		
-		if var71 ~= "nil" then
+		if var50 ~= "nil" then
 			var67 = tonumber(var67)
 			
 			if var67 then
 				var67 = if var67 < 0 then #var66 + math.floor(var67 + 0.5) + 1 else math.max(math.floor(var67 + 0.5), 1)
 			else
-				error(string.format("invalid argument #3 to %q (number expected, got %s)", var41, var71), 2)
+				error(string.format("invalid argument #3 to %q (number expected, got %s)", var49, var50), 2)
 			end
 		end
 	end
 	var65 = tbl[var65]
 	
-	if var41 == "match" or var41 == "matchiter" then
+	if var49 == "match" or var49 == "matchiter" then
 		var68 = ...
-	elseif var41 == "sub" then
+	elseif var49 == "sub" then
 		var70 = ...
 	end
-	return var40(var65, var66, var67, var68, var69, var70)
+	return var35(var65, var66, var67, var68, var69, var70)
 end
 
-local var42 = function(p59, p60, p61)
+local var51 = function(p27, p28, p29)
 	-- upvalues: to_str_arr (ref), re_rawfind (ref)
-	if tonumber(p61) then
-		p61 = tonumber(p61)
+	if tonumber(p29) then
+		p29 = tonumber(p29)
 		
-		if p61 <= -1 or p61 ~= p61 then
-			p61 = 1e999
+		if p29 <= -1 or p29 ~= p29 then
+			p29 = 1e999
 		end
-	elseif p61 == nil then
-		p61 = 1e999
+	elseif p29 == nil then
+		p29 = 1e999
 	else
-		error(string.format("invalid argument #3 to 'split' (number expected, got %s)", typeof(p61)), 3)
+		error(string.format("invalid argument #3 to 'split' (number expected, got %s)", typeof(p29)), 3)
 	end
-	local var142 = to_str_arr(p60)
-	var142 = 1
-	local var143 = 0
+	local var52 = to_str_arr(p28)
+	var52 = 1
+	local var53 = 0
 	local t = {}
-	local var145 = 0
-	while var142 <= var142.n + 1 do
-		var143 += 1
-		local var146 = var143 <= p61 and re_rawfind(p59.token, var142, var142, p59.flags, p59.verb_flags, false)
+	local var54 = 0
+	while var52 <= var52.n + 1 do
+		var53 += 1
+		local var55 = var53 <= p29 and re_rawfind(p27.token, var52, var52, p27.flags, p27.verb_flags, false)
 		
-		if not var146 then break end
-		local s = var142.s
-		local byteOffset = utf8.offset(s, var146[0][1])
-		table.insert(t, string.sub(s, utf8.offset(s, var142 - var145), byteOffset and byteOffset - 1))
-		var145 = if var146[0][2] <= var146[0][1] then 1 else 0
-		var142 = var146[0][2] + var145
+		if not var55 then break end
+		local s = var52.s
+		local byteOffset = utf8.offset(s, var55[0][1])
+		table.insert(t, string.sub(s, utf8.offset(s, var52 - var54), byteOffset and byteOffset - 1))
+		var54 = if var55[0][2] <= var55[0][1] then 1 else 0
+		var52 = var55[0][2] + var54
 	end
-	table.insert(t, string.sub(var142.s, utf8.offset(var142.s, var142 - var145)))
+	table.insert(t, string.sub(var52.s, utf8.offset(var52.s, var52 - var54)))
 	
 	return t
 end
 
-local var43 = "split"
+local var56 = "split"
 
 function t_1.split(...)
-	-- upvalues: tbl (ref), var43 (ref), t (ref), var42 (ref)
-	local var64 = select("#", ...)
+	-- upvalues: tbl (ref), var56 (ref), t (ref), var51 (ref)
+	local var57 = select("#", ...)
 	
-	if var64 < 1 then
+	if var57 < 1 then
 		error("missing argument #1 (RegEx expected)", 2)
-	elseif var64 < 2 then
+	elseif var57 < 2 then
 		error("missing argument #2 (string expected)", 2)
 	end
-	local var65, var66, var67, var68, var69, var70 = ...
+	local var58, var59, var60, var61, var62, var63 = ...
 	
-	if not tbl[var65] or tbl[var65].name ~= "RegEx" then
-		if type(var65) ~= "string" and type(var65) ~= "number" then
-			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var43, typeof(var65)), 2)
+	if not tbl[var58] or tbl[var58].name ~= "RegEx" then
+		if type(var58) ~= "string" and type(var58) ~= "number" then
+			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", var56, typeof(var58)), 2)
 		end
-		var65 = t.fromstring(var65)
-	elseif var43 == "sub" then
-		if type(var67) == "number" then
-			var67 ..= ""
-		elseif type(var67) ~= "string" then
-			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var67)), 2)
+		var58 = t.fromstring(var58)
+	elseif var56 == "sub" then
+		if type(var60) == "number" then
+			var60 ..= ""
+		elseif type(var60) ~= "string" then
+			error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", typeof(var60)), 2)
 		end
-	elseif type(var66) == "number" then
-		var66 ..= ""
-	elseif type(var66) ~= "string" then
-		error(string.format("invalid argument #2 to %q (string expected, got %s)", var43, typeof(var66)), 2)
+	elseif type(var59) == "number" then
+		var59 ..= ""
+	elseif type(var59) ~= "string" then
+		error(string.format("invalid argument #2 to %q (string expected, got %s)", var56, typeof(var59)), 2)
 	end
-	if var43 ~= "sub" and var43 ~= "split" then
-		local var71 = typeof(var67)
+	if var56 ~= "sub" and var56 ~= "split" then
+		local var57 = typeof(var67)
 		
-		if var71 ~= "nil" then
+		if var57 ~= "nil" then
 			var67 = tonumber(var67)
 			
 			if var67 then
 				var67 = if var67 < 0 then #var66 + math.floor(var67 + 0.5) + 1 else math.max(math.floor(var67 + 0.5), 1)
 			else
-				error(string.format("invalid argument #3 to %q (number expected, got %s)", var43, var71), 2)
+				error(string.format("invalid argument #3 to %q (number expected, got %s)", var56, var57), 2)
 			end
 		end
 	end
 	var65 = tbl[var65]
 	
-	if var43 == "match" or var43 == "matchiter" then
+	if var56 == "match" or var56 == "matchiter" then
 		var68 = ...
-	elseif var43 == "sub" then
+	elseif var56 == "sub" then
 		var70 = ...
 	end
-	return var42(var65, var66, var67, var68, var69, var70)
+	return var51(var65, var66, var67, var68, var69, var70)
 end
 
-local _ = function(p62, p63)
+local _ = function(p30, p31)
 	-- upvalues: t_1 (write), tbl (ref)
-	return t_1[p63] or tbl[p62].flags[p63]
+	return t_1[p31] or tbl[p30].flags[p31]
 end
 
-local function re_tostr(p64)
+local function re_tostr(p30)
 	-- upvalues: tbl (ref)
-	return tbl[p64].pattern_repr .. tbl[p64].flag_repr
+	return tbl[p30].pattern_repr .. tbl[p30].flag_repr
 end
 
 local t_9 = {
@@ -1650,123 +1650,123 @@ local t_9 = {
 	[124] = true
 }
 
-local function tokenize_ptn(p65, p66)
+local function tokenize_ptn(p30, p31)
 	-- upvalues: t_8 (ref), t_9 (ref), list_3 (ref), list_1 (ref), t_5 (ref), t_4 (ref), t_6 (ref), list_2 (ref), list (ref)
-	if p66.unicode then
+	if p31.unicode then
 		return "options.unicodeData cannot be turned off while having unicode flag"
 	end
-	local var148 = 1
-	local n = p65.n
-	local var149 = 0
+	local var58 = 1
+	local n = p30.n
+	local var59 = 0
 	local t = {}
 	local t_1 = {}
 	local t_2 = { newline = 1, newline_seq = 1, not_empty = 0 }
-	local var153, byteOffset, v
-	while var148 <= n do
-		local var154, var155, s, substring, s_1, byteOffset_1, i
-		var153 = p65[var148]
+	local var60, byteOffset, v
+	while var58 <= n do
+		local var61, var62, s, substring, s_1, byteOffset_1, i
+		var60 = p30[var58]
 		
-		if var153 ~= 40 then
-			if var153 ~= 41 then
-				if var153 == 46 then
+		if var60 ~= 40 then
+			if var60 ~= 41 then
+				if var60 == 46 then
 					table.insert(t, list_1)
-				elseif var153 ~= 91 then
-					if var153 == 92 then
-						var148 += 1
-						var154 = p65[var148]
+				elseif var60 ~= 91 then
+					if var60 == 92 then
+						var58 += 1
+						var61 = p30[var58]
 						
-						if var154 then
-							if var154 >= 48 and var154 <= 57 then
-								var155 = var148
-								while p65[var148 + 1] and (p65[var148 + 1] >= 48 and p65[var148 + 1] <= 57) do
-									var148 += 1
+						if var61 then
+							if var61 >= 48 and var61 <= 57 then
+								var62 = var58
+								while p30[var58 + 1] and (p30[var58 + 1] >= 48 and p30[var58 + 1] <= 57) do
+									var58 += 1
 								end
-								byteOffset = p65.s
-								byteOffset_1 = utf8.offset(byteOffset, var148 + 1)
-								substring = tonumber(string.sub(byteOffset, utf8.offset(byteOffset, var155), byteOffset_1 and byteOffset_1 - 1))
+								byteOffset = p30.s
+								byteOffset_1 = utf8.offset(byteOffset, var58 + 1)
+								substring = tonumber(string.sub(byteOffset, utf8.offset(byteOffset, var62), byteOffset_1 and byteOffset_1 - 1))
 								
-								if var149 < substring and var148 ~= var155 then
-									var148 = var155
+								if var59 < substring and var58 ~= var62 then
+									var58 = var62
 									s = nil
 									byteOffset = nil
 									s_1 = nil
 									
-									if p65[var148] <= 55 then
-										s = p65[var148] - 48
-										var148 += 1
+									if p30[var58] <= 55 then
+										s = p30[var58] - 48
+										var58 += 1
 										
-										if p65[var148] and p65[var148] >= 48 and p65[var148] <= 55 then
-											byteOffset = p65[var148] - 48
-											var148 += 1
+										if p30[var58] and p30[var58] >= 48 and p30[var58] <= 55 then
+											byteOffset = p30[var58] - 48
+											var58 += 1
 											
-											if p65[var148] and p65[var148] >= 48 and p65[var148] <= 55 then
-												s_1 = p65[var148] - 48
+											if p30[var58] and p30[var58] >= 48 and p30[var58] <= 55 then
+												s_1 = p30[var58] - 48
 											else
-												var148 -= 1
+												var58 -= 1
 											end
 										else
-											var148 -= 1
+											var58 -= 1
 										end
 									end
 									if s and byteOffset then
-										v = if s_1 then 64 * s + 8 * byteOffset + s_1 else 8 * s + byteOffset or (s or p65[var155])
+										v = if s_1 then 64 * s + 8 * byteOffset + s_1 else 8 * s + byteOffset or (s or p30[var62])
 									end
 									table.insert(t, v)
 								else
 									table.insert(t, { "backref", substring })
 								end
-							elseif var154 ~= 69 then
-								if var154 == 81 then
-									var155 = var148 + 1
+							elseif var61 ~= 69 then
+								if var61 == 81 then
+									var62 = var58 + 1
 									repeat
-										var148 = table.find(p65, 92, var148 + 1)
-									until not (var148 and p65[var148 + 1] ~= 69)
-									table.move(p65, var155, if var148 then var148 - 1 else #p65, #t + 1, t)
+										var58 = table.find(p30, 92, var58 + 1)
+									until not (var58 and p30[var58 + 1] ~= 69)
+									table.move(p30, var62, if var58 then var58 - 1 else #p30, #t + 1, t)
 									
-									if not var148 then break end
-									var148 += 1
-								elseif var154 ~= 78 then
-									if var154 ~= 80 and var154 ~= 112 then
-										if var154 == 103 and (p65[var148 + 1] == 123 or p65[var148 + 1] >= 48 and p65[var148 + 1] <= 57) then
-											var155 = false
-											var148 += 1
+									if not var58 then break end
+									var58 += 1
+								elseif var61 ~= 78 then
+									if var61 ~= 80 and var61 ~= 112 then
+										if var61 == 103 and (p30[var58 + 1] == 123 or p30[var58 + 1] >= 48 and p30[var58 + 1] <= 57) then
+											var62 = false
+											var58 += 1
 											
-											if p65[var148] == 123 then
-												var148 += 1
-												var155 = true
-											elseif p65[var148] >= 48 and p65[var148] <= 57 then
-												substring = var148
-												while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) do
-													var148 += 1
+											if p30[var58] == 123 then
+												var58 += 1
+												var62 = true
+											elseif p30[var58] >= 48 and p30[var58] <= 57 then
+												substring = var58
+												while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) do
+													var58 += 1
 												end
-												if not var155 or p65[var148] == 125 then
-													s_1 = p65.s
-													i = utf8.offset(s_1, var148 + (if var155 then 0 else 1))
+												if not var62 or p30[var58] == 125 then
+													s_1 = p30.s
+													i = utf8.offset(s_1, var58 + (if var62 then 0 else 1))
 													table.insert(t, {
 														"backref",
 														tonumber(string.sub(s_1, utf8.offset(s_1, substring), i and i - 1))
 													})
 													
-													if not var155 then
-														var148 -= 1
+													if not var62 then
+														var58 -= 1
 													end
 												end
 												return "malformed reference code"
 											end
 											return "malformed reference code"
-										elseif var154 == 111 then
-											var148 += 1
+										elseif var61 == 111 then
+											var58 += 1
 											
-											if p65[var148 + 1] == 123 then
-												var148 += 1
-												var155 = var148
-												while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 55) do
-													var148 += 1
+											if p30[var58 + 1] == 123 then
+												var58 += 1
+												var62 = var58
+												while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 55) do
+													var58 += 1
 												end
-												if p65[var148] == 125 and var148 ~= var155 then
-													byteOffset = p65.s
-													byteOffset_1 = utf8.offset(byteOffset, var148)
-													substring = tonumber(string.sub(byteOffset, utf8.offset(byteOffset, var155), byteOffset_1 and byteOffset_1 - 1), 8)
+												if p30[var58] == 125 and var58 ~= var62 then
+													byteOffset = p30.s
+													byteOffset_1 = utf8.offset(byteOffset, var58)
+													substring = tonumber(string.sub(byteOffset, utf8.offset(byteOffset, var62), byteOffset_1 and byteOffset_1 - 1), 8)
 													
 													if substring <= 65535 then
 														table.insert(t, substring)
@@ -1776,61 +1776,61 @@ local function tokenize_ptn(p65, p66)
 												return "malformed octal code"
 											end
 											return "malformed octal code"
-										elseif var154 == 120 then
-											var155 = nil
+										elseif var61 == 120 then
+											var62 = nil
 											substring = nil
-											var148 += 1
+											var58 += 1
 											
-											if p65[var148] == 123 then
-												var148 += 1
-												s = var148
-												while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) do
-													var148 += 1
+											if p30[var58] == 123 then
+												var58 += 1
+												s = var58
+												while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) do
+													var58 += 1
 												end
-												if p65[var148] == 125 and var148 ~= s then
-													if var148 - s <= 4 then
-														v = p65.s
-														local byteOffset_2 = utf8.offset(v, var148)
+												if p30[var58] == 125 and var58 ~= s then
+													if var58 - s <= 4 then
+														v = p30.s
+														local byteOffset_2 = utf8.offset(v, var58)
 														table.insert(t, tonumber(string.sub(v, utf8.offset(v, s), byteOffset_2 and byteOffset_2 - 1), 16))
 													end
 													return "character offset too large"
 												end
 												return "malformed hexadecimal code"
-											elseif p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) then
-												s = p65[var148]
-												byteOffset = if p65[var148] >= 65 and p65[var148] <= 90 then 55 elseif p65[var148] >= 97 and p65[var148] <= 122 then 87 else 48
-												var155 = s - byteOffset
-												var148 += 1
+											elseif p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) then
+												s = p30[var58]
+												byteOffset = if p30[var58] >= 65 and p30[var58] <= 90 then 55 elseif p30[var58] >= 97 and p30[var58] <= 122 then 87 else 48
+												var62 = s - byteOffset
+												var58 += 1
 												
-												if p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) then
-													s = p65[var148]
-													byteOffset = if p65[var148] >= 65 and p65[var148] <= 90 then 55 elseif p65[var148] >= 97 and p65[var148] <= 122 then 87 else 48
+												if p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) then
+													s = p30[var58]
+													byteOffset = if p30[var58] >= 65 and p30[var58] <= 90 then 55 elseif p30[var58] >= 97 and p30[var58] <= 122 then 87 else 48
 													substring = s - byteOffset
 												else
-													var148 -= 1
+													var58 -= 1
 												end
 											else
-												var148 -= 1
+												var58 -= 1
 											end
-											if var155 then
-												s_1 = if substring then 16 * var155 + substring else var155 or 0
+											if var62 then
+												s_1 = if substring then 16 * var62 + substring else var62 or 0
 											end
 											table.insert(t, s_1)
 										else
-											table.insert(t, t_6[var154] or t_5[var154] or var154)
+											table.insert(t, t_6[var61] or t_5[var61] or var61)
 										end
 									end
 									return "options.unicodeData cannot be turned off when using \\p"
-								elseif p65[var148 + 1] == 123 and p65[var148 + 2] == 85 and (p65[var148 + 3] == 43 and p66.unicode) then
-									var148 += 4
-									var155 = var148
-									while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) do
-										var148 += 1
+								elseif p30[var58 + 1] == 123 and p30[var58 + 2] == 85 and (p30[var58 + 3] == 43 and p31.unicode) then
+									var58 += 4
+									var62 = var58
+									while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) do
+										var58 += 1
 									end
-									if p65[var148] == 125 and var148 ~= var155 then
-										byteOffset = p65.s
-										byteOffset_1 = utf8.offset(byteOffset, var148)
-										table.insert(t, tonumber(string.sub(byteOffset, utf8.offset(byteOffset, var155), byteOffset_1 and byteOffset_1 - 1)))
+									if p30[var58] == 125 and var58 ~= var62 then
+										byteOffset = p30.s
+										byteOffset_1 = utf8.offset(byteOffset, var58)
+										table.insert(t, tonumber(string.sub(byteOffset, utf8.offset(byteOffset, var62), byteOffset_1 and byteOffset_1 - 1)))
 									end
 									return "malformed Unicode code point"
 								else
@@ -1839,59 +1839,59 @@ local function tokenize_ptn(p65, p66)
 							end
 						end
 						return "pattern may not end with a trailing backslash"
-					elseif var153 == 42 or var153 == 43 or (var153 == 63 or var153 == 123) then
-						var154 = nil
-						var155 = nil
+					elseif var60 == 42 or var60 == 43 or (var60 == 63 or var60 == 123) then
+						var61 = nil
+						var62 = nil
 						
-						if var153 == 123 then
-							substring = var148 + 1
+						if var60 == 123 then
+							substring = var58 + 1
 							s = nil
-							while p65[var148 + 1] and (p65[var148 + 1] >= 48 and p65[var148 + 1] <= 57 or p65[var148 + 1] == 44 and not s and var148 + 1 ~= substring) do
-								var148 += 1
+							while p30[var58 + 1] and (p30[var58 + 1] >= 48 and p30[var58 + 1] <= 57 or p30[var58 + 1] == 44 and not s and var58 + 1 ~= substring) do
+								var58 += 1
 								
-								if p65[var148] == 44 then
-									s = var148
+								if p30[var58] == 44 then
+									s = var58
 								end
 							end
-							if p65[var148 + 1] == 125 then
-								var148 += 1
+							if p30[var58 + 1] == 125 then
+								var58 += 1
 								
 								if s then
-									byteOffset_1 = p65.s
+									byteOffset_1 = p30.s
 									i = utf8.offset(byteOffset_1, s)
-									var154 = tonumber(string.sub(byteOffset_1, utf8.offset(byteOffset_1, substring), i and i - 1))
+									var61 = tonumber(string.sub(byteOffset_1, utf8.offset(byteOffset_1, substring), i and i - 1))
 									
-									if s + 1 == var148 then
+									if s + 1 == var58 then
 										byteOffset = 1e999
 									else
-										byteOffset_1 = p65.s
-										v = utf8.offset(byteOffset_1, var148)
+										byteOffset_1 = p30.s
+										v = utf8.offset(byteOffset_1, var58)
 										byteOffset = tonumber(string.sub(byteOffset_1, utf8.offset(byteOffset_1, s + 1), v and v - 1))
 									end
-									var155 = byteOffset
+									var62 = byteOffset
 									
-									if var155 >= var154 then
-										if var154 then
-											substring = if p66.ungreedy then "lazy" else "greedy"
+									if var62 >= var61 then
+										if var61 then
+											substring = if p31.ungreedy then "lazy" else "greedy"
 											
-											if p65[var148 + 1] == 43 or p65[var148 + 1] == 63 then
-												var148 += 1
-												substring = if p65[var148] == 43 then "possessive" elseif p66.ungreedy then "greedy" else "lazy"
+											if p30[var58 + 1] == 43 or p30[var58 + 1] == 63 then
+												var58 += 1
+												substring = if p30[var58] == 43 then "possessive" elseif p31.ungreedy then "greedy" else "lazy"
 											end
 											s = #t
 											byteOffset = t[s]
 											
 											if byteOffset and (type(byteOffset) ~= "table" or byteOffset[1] ~= "quantifier" and byteOffset[1] ~= 40 and not t_6[byteOffset[1]]) and (byteOffset ~= list_3 and type(byteOffset) ~= "string") then
-												if var155 == 0 then
+												if var62 == 0 then
 													table.remove(t)
-												elseif var154 ~= 1 or var155 ~= 1 then
+												elseif var61 ~= 1 or var62 ~= 1 then
 													if type(byteOffset) == "table" and byteOffset[1] == 41 then
 														s = byteOffset[3]
 													end
 													t[s] = {
 														"quantifier",
-														var154,
-														var155,
+														var61,
+														var62,
 														substring,
 														t[s]
 													}
@@ -1902,80 +1902,80 @@ local function tokenize_ptn(p65, p66)
 									end
 									return "numbers out of order in {} quantifier"
 								else
-									byteOffset_1 = p65.s
-									i = utf8.offset(byteOffset_1, var148)
-									var154 = tonumber(string.sub(byteOffset_1, utf8.offset(byteOffset_1, substring), i and i - 1))
-									var155 = var154
+									byteOffset_1 = p30.s
+									i = utf8.offset(byteOffset_1, var58)
+									var61 = tonumber(string.sub(byteOffset_1, utf8.offset(byteOffset_1, substring), i and i - 1))
+									var62 = var61
 								end
 							else
-								table.move(p65, substring - 1, var148, #t + 1, t)
+								table.move(p30, substring - 1, var58, #t + 1, t)
 							end
 						else
-							var154 = if var153 == 43 then 1 else 0
-							var155 = if var153 == 63 then 1 else 1e999
+							var61 = if var60 == 43 then 1 else 0
+							var62 = if var60 == 63 then 1 else 1e999
 						end
-					elseif var153 == 124 then
+					elseif var60 == 124 then
 						table.insert(t, list_3)
-						var154 = #t
+						var61 = #t
 						repeat
-							var154 -= 1
-							var155 = t[var154]
-							substring = type(t[var154]) == "table"
-							if substring and var155[1] == 41 then
-								var154 = t[var154][3]
-							elseif substring and var155[1] == 40 then
-								if var155[4] ~= 124 then break end
-								var149 = var155[5]
+							var61 -= 1
+							var62 = t[var61]
+							substring = type(t[var61]) == "table"
+							if substring and var62[1] == 41 then
+								var61 = t[var61][3]
+							elseif substring and var62[1] == 40 then
+								if var62[4] ~= 124 then break end
+								var59 = var62[5]
 								break
-						until not var155
-					elseif var153 == 36 or var153 == 94 then
-						table.insert(t, if var153 == 94 then list_2 else list)
-					elseif p66.ignoreCase and var153 >= 97 and var153 <= 122 then
-						table.insert(t, var153 - 32)
-					elseif not p66.extended or (var153 < 9 or var153 > 13) and (var153 ~= 32 and var153 ~= 35) then
-						table.insert(t, var153)
-					elseif var153 == 35 then
+						until not var62
+					elseif var60 == 36 or var60 == 94 then
+						table.insert(t, if var60 == 94 then list_2 else list)
+					elseif p31.ignoreCase and var60 >= 97 and var60 <= 122 then
+						table.insert(t, var60 - 32)
+					elseif not p31.extended or (var60 < 9 or var60 > 13) and (var60 ~= 32 and var60 ~= 35) then
+						table.insert(t, var60)
+					elseif var60 == 35 then
 						repeat
-							var148 += 1
-						until not (p65[var148] and p65[var148] ~= 10 and p65[var148] ~= 13)
+							var58 += 1
+						until not (p30[var58] and p30[var58] ~= 10 and p30[var58] ~= 13)
 					end
 				end
-				var154 = false
-				var155 = nil
-				var148 += 1
-				substring = var148
+				var61 = false
+				var62 = nil
+				var58 += 1
+				substring = var58
 				
-				if p65[var148] == 94 then
-					var154 = true
-					var148 += 1
-				elseif p65[var148] == 46 or p65[var148] == 58 or p65[var148] == 61 then
-					var155 = p65[var148]
+				if p30[var58] == 94 then
+					var61 = true
+					var58 += 1
+				elseif p30[var58] == 46 or p30[var58] == 58 or p30[var58] == 61 then
+					var62 = p30[var58]
 				end
 				s = nil
 				
-				if p65[var148] == 91 or p65[var148] == 92 then
+				if p30[var58] == 91 or p30[var58] == 92 then
 					s = {}
 				else
-					s = { p65[var148] }
-					var148 += 1
+					s = { p30[var58] }
+					var58 += 1
 				end
-				while p65[var148] ~= 93 do
-					if p65[var148] then
-						if p65[var148] == 45 and s[1] and type(s[1]) == "number" then
-							if p65[var148 + 1] == 93 then
+				while p30[var58] ~= 93 do
+					if p30[var58] then
+						if p30[var58] == 45 and s[1] and type(s[1]) == "number" then
+							if p30[var58 + 1] == 93 then
 								table.insert(s, 1, 45)
 							else
-								var148 += 1
-								byteOffset = p65[var148]
+								var58 += 1
+								byteOffset = p30[var58]
 								
 								if byteOffset == 91 then
-									if p65[var148 + 1] == 46 or p65[var148 + 1] == 58 or p65[var148 + 1] == 61 then
-										s_1 = var148 + 2
+									if p30[var58 + 1] == 46 or p30[var58 + 1] == 58 or p30[var58 + 1] == 61 then
+										s_1 = var58 + 2
 										repeat
-											s_1 = table.find(p65, 93, s_1)
-										until not (s_1 and p65[s_1 - 1] == 92)
+											s_1 = table.find(p30, 93, s_1)
+										until not (s_1 and p30[s_1 - 1] == 92)
 										if s_1 then
-											if p65[s_1 - 1] ~= p65[var148 + 1] or s_1 - 1 == var148 + 1 then
+											if p30[s_1 - 1] ~= p30[var58 + 1] or s_1 - 1 == var58 + 1 then
 												if s[1] <= 91 then
 													s[1] = { "range", s[1], byteOffset }
 													continue
@@ -1987,28 +1987,28 @@ local function tokenize_ptn(p65, p66)
 										return "unterminated character class"
 									end
 								elseif byteOffset == 92 then
-									var148 += 1
+									var58 += 1
 									
-									if p65[var148] == 120 then
+									if p30[var58] == 120 then
 										s_1 = nil
 										byteOffset_1 = nil
-										var148 += 1
+										var58 += 1
 										
-										if p65[var148] and p65[var148] >= 48 and p65[var148] <= 57 or (p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) then
-											i = p65[var148]
-											v = if p65[var148] >= 65 and p65[var148] <= 90 then 55 elseif p65[var148] >= 97 and p65[var148] <= 122 then 87 else 48
+										if p30[var58] and p30[var58] >= 48 and p30[var58] <= 57 or (p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) then
+											i = p30[var58]
+											v = if p30[var58] >= 65 and p30[var58] <= 90 then 55 elseif p30[var58] >= 97 and p30[var58] <= 122 then 87 else 48
 											s_1 = i - v
-											var148 += 1
+											var58 += 1
 											
-											if p65[var148] and p65[var148] >= 48 and p65[var148] <= 57 or (p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) then
-												i = p65[var148]
-												v = if p65[var148] >= 65 and p65[var148] <= 90 then 55 elseif p65[var148] >= 97 and p65[var148] <= 122 then 87 else 48
+											if p30[var58] and p30[var58] >= 48 and p30[var58] <= 57 or (p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) then
+												i = p30[var58]
+												v = if p30[var58] >= 65 and p30[var58] <= 90 then 55 elseif p30[var58] >= 97 and p30[var58] <= 122 then 87 else 48
 												byteOffset_1 = i - v
 											else
-												var148 -= 1
+												var58 -= 1
 											end
 										else
-											var148 -= 1
+											var58 -= 1
 										end
 										if s_1 then
 											if byteOffset_1 then
@@ -2024,23 +2024,23 @@ local function tokenize_ptn(p65, p66)
 												byteOffset = i
 											end
 										end
-									elseif p65[var148] >= 48 and p65[var148] <= 55 then
-										s_1 = p65[var148] - 48
+									elseif p30[var58] >= 48 and p30[var58] <= 55 then
+										s_1 = p30[var58] - 48
 										byteOffset_1 = nil
 										i = nil
-										var148 += 1
+										var58 += 1
 										
-										if p65[var148] and p65[var148] >= 48 and p65[var148] <= 55 then
-											byteOffset_1 = p65[var148] - 48
-											var148 += 1
+										if p30[var58] and p30[var58] >= 48 and p30[var58] <= 55 then
+											byteOffset_1 = p30[var58] - 48
+											var58 += 1
 											
-											if p65[var148] and p65[var148] >= 48 and p65[var148] <= 55 then
-												i = p65[var148] - 48
+											if p30[var58] and p30[var58] >= 48 and p30[var58] <= 55 then
+												i = p30[var58] - 48
 											else
-												var148 -= 1
+												var58 -= 1
 											end
 										else
-											var148 -= 1
+											var58 -= 1
 										end
 										if byteOffset_1 then
 											if i then
@@ -2057,7 +2057,7 @@ local function tokenize_ptn(p65, p66)
 											end
 										end
 									else
-										byteOffset = t_5[p65[var148]] or p65[var148]
+										byteOffset = t_5[p30[var58]] or p30[var58]
 										
 										if type(byteOffset) == "number" then
 										end
@@ -2067,24 +2067,24 @@ local function tokenize_ptn(p65, p66)
 								end
 								return "invalid range in character class"
 							end
-						elseif p65[var148] == 91 then
-							if p65[var148 + 1] == 46 or p65[var148 + 1] == 58 or p65[var148 + 1] == 61 then
-								byteOffset = var148 + 2
+						elseif p30[var58] == 91 then
+							if p30[var58 + 1] == 46 or p30[var58 + 1] == 58 or p30[var58 + 1] == 61 then
+								byteOffset = var58 + 2
 								repeat
-									byteOffset = table.find(p65, 93, byteOffset)
-								until not (byteOffset and p65[byteOffset - 1] == 92)
+									byteOffset = table.find(p30, 93, byteOffset)
+								until not (byteOffset and p30[byteOffset - 1] == 92)
 								if byteOffset then
-									if p65[byteOffset - 1] == p65[var148 + 1] and byteOffset - 1 ~= var148 + 1 then
-										if p65[byteOffset - 1] ~= 46 and p65[byteOffset - 1] ~= 61 then
-											if p65[byteOffset - 1] == 58 then
-												s_1 = p65[var148 + 3] == 94
-												i = p65.s
+									if p30[byteOffset - 1] == p30[var58 + 1] and byteOffset - 1 ~= var58 + 1 then
+										if p30[byteOffset - 1] ~= 46 and p30[byteOffset - 1] ~= 61 then
+											if p30[byteOffset - 1] == 58 then
+												s_1 = p30[var58 + 3] == 94
+												i = p30.s
 												local byteOffset_2 = utf8.offset(i, byteOffset - 1)
-												byteOffset_1 = string.sub(i, utf8.offset(i, var148 + (if s_1 then 3 else 2)), byteOffset_2 and byteOffset_2 - 1)
+												byteOffset_1 = string.sub(i, utf8.offset(i, var58 + (if s_1 then 3 else 2)), byteOffset_2 and byteOffset_2 - 1)
 												
 												if t_4[byteOffset_1] then
 													table.insert(s, 1, { "class", byteOffset_1, s_1 })
-													var148 = byteOffset
+													var58 = byteOffset
 													continue
 												end
 												return "unknown POSIX class name"
@@ -2099,120 +2099,120 @@ local function tokenize_ptn(p65, p66)
 							else
 								table.insert(s, 1, 91)
 							end
-						elseif p65[var148] == 92 then
-							var148 += 1
+						elseif p30[var58] == 92 then
+							var58 += 1
 							
-							if p65[var148] == 120 then
+							if p30[var58] == 120 then
 								byteOffset = nil
 								s_1 = nil
-								var148 += 1
+								var58 += 1
 								
-								if p65[var148] == 123 then
-									var148 += 1
-									byteOffset_1 = var148
-									while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) do
-										var148 += 1
+								if p30[var58] == 123 then
+									var58 += 1
+									byteOffset_1 = var58
+									while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) do
+										var58 += 1
 									end
-									if p65[var148] == 125 and var148 ~= byteOffset_1 then
-										if var148 - byteOffset_1 <= 4 then
-											local var160 = 1
-											local s_2 = p65.s
-											local byteOffset_2 = utf8.offset(s_2, var148)
-											table.insert(s, var160, tonumber(string.sub(s_2, utf8.offset(s_2, byteOffset_1), byteOffset_2 and byteOffset_2 - 1), 16))
+									if p30[var58] == 125 and var58 ~= byteOffset_1 then
+										if var58 - byteOffset_1 <= 4 then
+											local var63 = 1
+											local s_2 = p30.s
+											local byteOffset_2 = utf8.offset(s_2, var58)
+											table.insert(s, var63, tonumber(string.sub(s_2, utf8.offset(s_2, byteOffset_1), byteOffset_2 and byteOffset_2 - 1), 16))
 											continue
 										end
 										return "character offset too large"
 									end
 									return "malformed hexadecimal character"
-								elseif p65[var148] and p65[var148] >= 48 and p65[var148] <= 57 or (p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) then
-									byteOffset_1 = p65[var148]
-									i = if p65[var148] >= 65 and p65[var148] <= 90 then 55 elseif p65[var148] >= 97 and p65[var148] <= 122 then 87 else 48
+								elseif p30[var58] and p30[var58] >= 48 and p30[var58] <= 57 or (p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) then
+									byteOffset_1 = p30[var58]
+									i = if p30[var58] >= 65 and p30[var58] <= 90 then 55 elseif p30[var58] >= 97 and p30[var58] <= 122 then 87 else 48
 									byteOffset = byteOffset_1 - i
-									var148 += 1
+									var58 += 1
 									
-									if p65[var148] and p65[var148] >= 48 and p65[var148] <= 57 or (p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) then
-										byteOffset_1 = p65[var148]
-										i = if p65[var148] >= 65 and p65[var148] <= 90 then 55 elseif p65[var148] >= 97 and p65[var148] <= 122 then 87 else 48
+									if p30[var58] and p30[var58] >= 48 and p30[var58] <= 57 or (p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) then
+										byteOffset_1 = p30[var58]
+										i = if p30[var58] >= 65 and p30[var58] <= 90 then 55 elseif p30[var58] >= 97 and p30[var58] <= 122 then 87 else 48
 										s_1 = byteOffset_1 - i
 									else
-										var148 -= 1
+										var58 -= 1
 									end
 								else
-									var148 -= 1
+									var58 -= 1
 								end
-								local var162
+								local var64
 								v = 1
 								
 								if byteOffset then
-									var162 = if s_1 then 16 * byteOffset + s_1 else byteOffset or 0
+									var64 = if s_1 then 16 * byteOffset + s_1 else byteOffset or 0
 								end
-								table.insert(s, v, var162)
-							elseif p65[var148] >= 48 and p65[var148] <= 55 then
-								byteOffset = p65[var148] - 48
+								table.insert(s, v, var64)
+							elseif p30[var58] >= 48 and p30[var58] <= 55 then
+								byteOffset = p30[var58] - 48
 								s_1 = nil
 								byteOffset_1 = nil
-								var148 += 1
+								var58 += 1
 								
-								if p65[var148] and p65[var148] >= 48 and p65[var148] <= 55 then
-									s_1 = p65[var148] - 48
-									var148 += 1
+								if p30[var58] and p30[var58] >= 48 and p30[var58] <= 55 then
+									s_1 = p30[var58] - 48
+									var58 += 1
 									
-									if p65[var148] and p65[var148] >= 48 and p65[var148] <= 55 then
-										byteOffset_1 = p65[var148] - 48
+									if p30[var58] and p30[var58] >= 48 and p30[var58] <= 55 then
+										byteOffset_1 = p30[var58] - 48
 									else
-										var148 -= 1
+										var58 -= 1
 									end
 								else
-									var148 -= 1
+									var58 -= 1
 								end
-								local var166
-								local var165 = 1
+								local var65
+								local var66 = 1
 								
 								if s_1 then
-									var166 = if byteOffset_1 then 64 * byteOffset + 8 * s_1 + byteOffset_1 else 8 * byteOffset + s_1 or byteOffset
+									var65 = if byteOffset_1 then 64 * byteOffset + 8 * s_1 + byteOffset_1 else 8 * byteOffset + s_1 or byteOffset
 								end
-								table.insert(s, var165, var166)
-							elseif p65[var148] == 69 then
-								var148 += 1
+								table.insert(s, var66, var65)
+							elseif p30[var58] == 69 then
+								var58 += 1
 								continue
-							elseif p65[var148] == 81 then
-								byteOffset = var148 + 1
+							elseif p30[var58] == 81 then
+								byteOffset = var58 + 1
 								repeat
-									var148 = table.find(p65, 92, var148 + 1)
-								until not (var148 and p65[var148 + 1] ~= 69)
-								table.move(p65, byteOffset, if var148 then var148 - 1 else #p65, #t + 1, t)
+									var58 = table.find(p30, 92, var58 + 1)
+								until not (var58 and p30[var58 + 1] ~= 69)
+								table.move(p30, byteOffset, if var58 then var58 - 1 else #p30, #t + 1, t)
 								
-								if not var148 then break end
-								var148 += 1
-							elseif p65[var148] == 78 then
-								if p65[var148 + 1] == 123 and p65[var148 + 2] == 85 and (p65[var148 + 3] == 43 and p66.unicode) then
-									var148 += 4
-									byteOffset = var148
-									while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 70 or p65[var148] >= 97 and p65[var148] <= 102) do
-										var148 += 1
+								if not var58 then break end
+								var58 += 1
+							elseif p30[var58] == 78 then
+								if p30[var58 + 1] == 123 and p30[var58 + 2] == 85 and (p30[var58 + 3] == 43 and p31.unicode) then
+									var58 += 4
+									byteOffset = var58
+									while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 70 or p30[var58] >= 97 and p30[var58] <= 102) do
+										var58 += 1
 									end
-									if p65[var148] == 125 and var148 ~= byteOffset then
-										i = p65.s
-										local byteOffset_2 = utf8.offset(i, var148)
+									if p30[var58] == 125 and var58 ~= byteOffset then
+										i = p30.s
+										local byteOffset_2 = utf8.offset(i, var58)
 										table.insert(s, 1, tonumber(string.sub(i, utf8.offset(i, byteOffset), byteOffset_2 and byteOffset_2 - 1)))
 										continue
 									end
 									return "malformed Unicode code point"
 								end
 								return "invalid escape sequence"
-							elseif p65[var148] ~= 80 and p65[var148] ~= 112 then
-								if p65[var148] == 111 then
-									var148 += 1
+							elseif p30[var58] ~= 80 and p30[var58] ~= 112 then
+								if p30[var58] == 111 then
+									var58 += 1
 									
-									if p65[var148] == 123 then
-										var148 += 1
-										byteOffset = var148
-										while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 55) do
-											var148 += 1
+									if p30[var58] == 123 then
+										var58 += 1
+										byteOffset = var58
+										while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 55) do
+											var58 += 1
 										end
-										if p65[var148] == 125 and var148 ~= byteOffset then
-											i = p65.s
-											local byteOffset_2 = utf8.offset(i, var148)
+										if p30[var58] == 125 and var58 ~= byteOffset then
+											i = p30.s
+											local byteOffset_2 = utf8.offset(i, var58)
 											s_1 = tonumber(string.sub(i, utf8.offset(i, byteOffset), byteOffset_2 and byteOffset_2 - 1), 8)
 											
 											if s_1 <= 65535 then
@@ -2225,39 +2225,39 @@ local function tokenize_ptn(p65, p66)
 									end
 									return "malformed octal code"
 								else
-									byteOffset = t_5[p65[var148]]
-									table.insert(s, 1, if type(byteOffset) == "string" then { "class", byteOffset, false } else byteOffset or p65[var148])
+									byteOffset = t_5[p30[var58]]
+									table.insert(s, 1, if type(byteOffset) == "string" then { "class", byteOffset, false } else byteOffset or p30[var58])
 								end
 							end
 							return "options.unicodeData cannot be turned off when using \\p"
-						elseif p66.ignoreCase and p65[var148] >= 97 and p65[var148] <= 122 then
-							table.insert(s, 1, p65[var148] - 32)
+						elseif p31.ignoreCase and p30[var58] >= 97 and p30[var58] <= 122 then
+							table.insert(s, 1, p30[var58] - 32)
 						else
-							table.insert(s, 1, p65[var148])
+							table.insert(s, 1, p30[var58])
 						end
 					end
 					return "unterminated character class"
 				end
-				if p65[var148 - 1] ~= var155 or var148 - 1 == substring then
-					if s[2] or var154 then
-						table.insert(t, { "charset", var154, s })
+				if p30[var58 - 1] ~= var62 or var58 - 1 == substring then
+					if s[2] or var61 then
+						table.insert(t, { "charset", var61, s })
 					else
 						table.insert(t, s[1])
 					end
 				end
-				return if var155 == 58 then "POSIX named classes are only support within a character set" else "POSIX collating elements aren't supported"
-				var148 += 1
+				return if var62 == 58 then "POSIX named classes are only support within a character set" else "POSIX collating elements aren't supported"
+				var58 += 1
 				continue
 			end
-			var154 = #t + 1
-			var155 = -1
+			var61 = #t + 1
+			var62 = -1
 			substring = 0
 			s = 0
 			byteOffset = 0
 			repeat
-				var154 -= 1
-				s_1 = t[var154]
-				byteOffset_1 = type(t[var154]) == "table"
+				var61 -= 1
+				s_1 = t[var61]
+				byteOffset_1 = type(t[var61]) == "table"
 				if byteOffset_1 and s_1[1] == 40 then
 					byteOffset += 1
 					
@@ -2266,20 +2266,20 @@ local function tokenize_ptn(p65, p66)
 					end
 					if not s_1[3] then
 						if s_1[4] == 124 then
-							var149 = s_1[5] + math.max(s, byteOffset)
+							var59 = s_1[5] + math.max(s, byteOffset)
 						end
-						if substring == var155 or var155 == -1 then
-							var155 = substring
+						if substring == var62 or var62 == -1 then
+							var62 = substring
 							break
 						end
-						var155 = nil
+						var62 = nil
 						break
 				elseif s_1 == list_3 then
-					if substring == var155 or var155 == -1 then
-						var155 = substring
+					if substring == var62 or var62 == -1 then
+						var62 = substring
 						substring = 0
 					else
-						var155 = nil
+						var62 = nil
 						substring = nil
 					end
 					s = math.max(s, byteOffset)
@@ -2287,20 +2287,20 @@ local function tokenize_ptn(p65, p66)
 				elseif substring then
 					substring = if byteOffset_1 and s_1[1] == "quantifier" then if s_1[2] == s_1[3] then substring + s_1[2] else nil else substring + 1
 				end
-			until var154 < 1
-			if var154 >= 1 then
-				s_1 = t[var154]
+			until var61 < 1
+			if var61 >= 1 then
+				s_1 = t[var61]
 				byteOffset_1 = #t + 1
 				i = {
 					41,
 					s_1[2],
-					var154,
+					var61,
 					s_1[4],
 					s_1[5],
-					count = var155
+					count = var62
 				}
 				
-				if s_1[4] ~= 33 and s_1[4] ~= 61 or (not s_1[5] or var155) then
+				if s_1[4] ~= 33 and s_1[4] ~= 61 or (not s_1[5] or var62) then
 					s_1[3] = byteOffset_1
 					table.insert(t, i)
 				end
@@ -2308,21 +2308,21 @@ local function tokenize_ptn(p65, p66)
 			end
 			return "unmatched ) in regular expression"
 		end
-		var154 = nil
+		var61 = nil
 		
-		if p65[var148 + 1] == 42 then
-			var148 += 2
-			var155 = var148
-			while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 90 or (p65[var148] >= 97 and p65[var148] <= 122 or (p65[var148] == 95 or p65[var148] == 58))) do
-				var148 += 1
+		if p30[var58 + 1] == 42 then
+			var58 += 2
+			var62 = var58
+			while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 90 or (p30[var58] >= 97 and p30[var58] <= 122 or (p30[var58] == 95 or p30[var58] == 58))) do
+				var58 += 1
 			end
-			if p65[var148] == 41 or p65[var148 - 1] == 58 then
-				s = p65.s
-				byteOffset = utf8.offset(s, var148)
-				substring = string.sub(s, utf8.offset(s, var155), byteOffset and byteOffset - 1)
+			if p30[var58] == 41 or p30[var58 - 1] == 58 then
+				s = p30.s
+				byteOffset = utf8.offset(s, var58)
+				substring = string.sub(s, utf8.offset(s, var62), byteOffset and byteOffset - 1)
 				
 				if substring == "positive_lookahead:" or substring == "negative_lookhead:" or (substring == "positive_lookbehind:" or substring == "negative_lookbehind:") or substring:find("^[pn]l[ab]:$") then
-					var154 = {
+					var61 = {
 						40,
 						nil,
 						nil,
@@ -2330,7 +2330,7 @@ local function tokenize_ptn(p65, p66)
 						substring:find("b", 3, true) and 1
 					}
 				elseif substring == "atomic:" then
-					var154 = {
+					var61 = {
 						40,
 						nil,
 						nil,
@@ -2338,7 +2338,7 @@ local function tokenize_ptn(p65, p66)
 						nil
 					}
 				elseif substring == "ACCEPT" or substring == "FAIL" or (substring == "F" or substring == "PRUNE") or substring == "SKIP" then
-					var154 = if substring == "F" then "FAIL" else substring
+					var61 = if substring == "F" then "FAIL" else substring
 				elseif t_8[substring] then
 					t_2.newline = substring
 				elseif substring == "BSR_ANYCRLF" or substring == "BSR_UNICODE" then
@@ -2348,116 +2348,116 @@ local function tokenize_ptn(p65, p66)
 				end
 				return "unknown or malformed verb"
 				if not t[1] then
-					if var154 then
-						table.insert(t, var154)
+					if var61 then
+						table.insert(t, var61)
 					end
 				end
 				return "this verb must be placed at the beginning of the regex"
 			end
 			return "quantifier doesn't follow a repeatable pattern"
-		elseif p65[var148 + 1] == 63 then
-			var148 += 2
+		elseif p30[var58 + 1] == 63 then
+			var58 += 2
 			
-			if p65[var148] == 35 then
-				var155 = table.find(p65, 41, var148)
+			if p30[var58] == 35 then
+				var62 = table.find(p30, 41, var58)
 				
-				if var155 then
-					var148 = var155 + 1
+				if var62 then
+					var58 = var62 + 1
 					continue
 				end
 				return "unterminated parenthetical"
-			elseif p65[var148] then
-				var154 = {
+			elseif p30[var58] then
+				var61 = {
 					40,
 					nil,
 					nil,
-					p65[var148],
+					p30[var58],
 					nil
 				}
 				
-				if p65[var148] == 48 and p65[var148 + 1] == 41 then
-					var155 = "recurmatch"
+				if p30[var58] == 48 and p30[var58 + 1] == 41 then
+					var62 = "recurmatch"
 					substring = 0
 					s = 0
 					byteOffset = nil
-					var154[1] = var155
-					var154[2] = substring
-					var154[3] = s
-					var154[5] = byteOffset
-				elseif p65[var148] > 48 and p65[var148] <= 57 then
-					var155 = var148
-					var148 += 1
-					while p65[var148] >= 48 and p65[var148] <= 48 do
-						var148 += 1
+					var61[1] = var62
+					var61[2] = substring
+					var61[3] = s
+					var61[5] = byteOffset
+				elseif p30[var58] > 48 and p30[var58] <= 57 then
+					var62 = var58
+					var58 += 1
+					while p30[var58] >= 48 and p30[var58] <= 48 do
+						var58 += 1
 					end
-					if p65[var148] == 41 then
+					if p30[var58] == 41 then
 						substring = "recurmatch"
-						s_1 = p65.s
-						byteOffset_1 = utf8.offset(s_1, var148)
-						s = tonumber(string.sub(s_1, utf8.offset(s_1, var155), byteOffset_1 and byteOffset_1 - 1))
+						s_1 = p30.s
+						byteOffset_1 = utf8.offset(s_1, var58)
+						s = tonumber(string.sub(s_1, utf8.offset(s_1, var62), byteOffset_1 and byteOffset_1 - 1))
 						byteOffset = nil
-						var154[1] = substring
-						var154[2] = s
-						var154[4] = byteOffset
+						var61[1] = substring
+						var61[2] = s
+						var61[4] = byteOffset
 					end
 					return "invalid group structure"
-				elseif p65[var148] == 60 and p65[var148 + 1] == 33 or p65[var148 + 1] == 61 then
-					var148 += 1
+				elseif p30[var58] == 60 and p30[var58 + 1] == 33 or p30[var58 + 1] == 61 then
+					var58 += 1
 					substring = 1
-					var154[4] = p65[var148]
-					var154[5] = substring
-				elseif p65[var148] == 124 then
-					var154[5] = var149
-				elseif p65[var148] == 80 or p65[var148] == 60 or p65[var148] == 39 then
-					if p65[var148] == 80 then
-						var148 += 1
+					var61[4] = p30[var58]
+					var61[5] = substring
+				elseif p30[var58] == 124 then
+					var61[5] = var59
+				elseif p30[var58] == 80 or p30[var58] == 60 or p30[var58] == 39 then
+					if p30[var58] == 80 then
+						var58 += 1
 					end
-					if p65[var148] == 61 then
-						var155 = var148 + 1
-						while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 90 or (p65[var148] >= 97 and p65[var148] <= 122 or p65[var148] == 95)) do
-							var148 += 1
+					if p30[var58] == 61 then
+						var62 = var58 + 1
+						while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 90 or (p30[var58] >= 97 and p30[var58] <= 122 or p30[var58] == 95)) do
+							var58 += 1
 						end
-						if p65[var148] then
-							if p65[var148] == 41 and var148 ~= var155 then
+						if p30[var58] then
+							if p30[var58] == 41 and var58 ~= var62 then
 								substring = {}
 								s = "backref"
-								s_1 = p65.s
-								byteOffset_1 = utf8.offset(s_1, var148)
+								s_1 = p30.s
+								byteOffset_1 = utf8.offset(s_1, var58)
 								-- Unknown statement at pc 4: <SetList>
-								var154 = substring
+								var61 = substring
 							end
 							return "invalid group structure"
 						end
 						return "unterminated parenthetical"
-					elseif p65[var148] == 60 or p65[var148 - 1] ~= 80 and p65[var148] == 39 then
-						var155 = if p65[var148] == 39 then 39 else 62
-						substring = var148 + 1
-						var148 += 1
+					elseif p30[var58] == 60 or p30[var58 - 1] ~= 80 and p30[var58] == 39 then
+						var62 = if p30[var58] == 39 then 39 else 62
+						substring = var58 + 1
+						var58 += 1
 						
-						if p65[var148] ~= 41 then
-							if p65[var148] < 48 or p65[var148] > 57 then
-								if p65[var148] >= 65 and p65[var148] <= 90 or p65[var148] >= 97 and p65[var148] <= 122 or p65[var148] == 95 then
-									var148 += 1
-									while p65[var148] and (p65[var148] >= 48 and p65[var148] <= 57 or p65[var148] >= 65 and p65[var148] <= 90 or (p65[var148] >= 97 and p65[var148] <= 122 or p65[var148] == 95)) do
-										var148 += 1
+						if p30[var58] ~= 41 then
+							if p30[var58] < 48 or p30[var58] > 57 then
+								if p30[var58] >= 65 and p30[var58] <= 90 or p30[var58] >= 97 and p30[var58] <= 122 or p30[var58] == 95 then
+									var58 += 1
+									while p30[var58] and (p30[var58] >= 48 and p30[var58] <= 57 or p30[var58] >= 65 and p30[var58] <= 90 or (p30[var58] >= 97 and p30[var58] <= 122 or p30[var58] == 95)) do
+										var58 += 1
 									end
-									if p65[var148] then
-										if p65[var148] == var155 then
-											byteOffset = p65.s
-											byteOffset_1 = utf8.offset(byteOffset, var148)
+									if p30[var58] then
+										if p30[var58] == var62 then
+											byteOffset = p30.s
+											byteOffset_1 = utf8.offset(byteOffset, var58)
 											s = string.sub(byteOffset, utf8.offset(byteOffset, substring), byteOffset_1 and byteOffset_1 - 1)
-											var149 += 1
+											var59 += 1
 											
-											if (t_1[s] or var149) == var149 then
+											if (t_1[s] or var59) == var59 then
 												for i, v in pairs(t_1) do
-													if s ~= i and var149 == v then
+													if s ~= i and var59 == v then
 														return "different names for subpatterns of the same number aren't permitted"
 													end
 												end
-												t_1[s] = var149
+												t_1[s] = var59
 												byteOffset = nil
-												var154[2] = var149
-												var154[4] = byteOffset
+												var61[2] = var59
+												var61[4] = byteOffset
 											end
 											return "subpattern name already exists"
 										end
@@ -2472,22 +2472,22 @@ local function tokenize_ptn(p65, p66)
 						return "missing character in subpattern"
 					end
 					return "invalid group structure"
-				elseif t_9[p65[var148]] then
+				elseif t_9[p30[var58]] then
 				end
 				return "invalid group structure"
 			end
 			return "unterminated parenthetical"
 		else
-			var149 += 1
-			var154 = { 40, var149, nil, nil }
+			var59 += 1
+			var61 = { 40, var59, nil, nil }
 		end
 	end
-	var153 = 0
+	var60 = 0
 	
 	for s, byteOffset in ipairs(t) do
 		if type(byteOffset) ~= "table" or byteOffset[1] ~= 40 and (byteOffset[1] ~= "quantifier" or type(byteOffset[5]) ~= "table" or byteOffset[5][1] ~= 40) then
 			if type(byteOffset) == "table" and (byteOffset[1] == "backref" or byteOffset[1] == "recurmatch") then
-				if t_1[byteOffset[2]] or type(byteOffset[2]) == "number" and var149 >= byteOffset[2] then
+				if t_1[byteOffset[2]] or type(byteOffset[2]) == "number" and var59 >= byteOffset[2] then
 					if byteOffset[1] == "recurmatch" and byteOffset[2] ~= 0 then
 						for v, v_2 in ipairs(t) do
 							if type(v_2) == "table" and v_2[1] == 40 and v_2[2] == byteOffset[2] then
@@ -2507,12 +2507,12 @@ local function tokenize_ptn(p65, p66)
 		end
 		if byteOffset[3] then
 			if byteOffset[2] then
-				var153 = math.max(var153, byteOffset[2])
+				var60 = math.max(var60, byteOffset[2])
 			end
 		end
 		return "unterminated parenthetical"
 	end
-	t.group_n = var153
+	t.group_n = var60
 	
 	return t, t_1, t_2
 end
@@ -2520,87 +2520,87 @@ end
 if not tonumber(256) then
 	error(string.format("expected number for options.cacheSize, got %s", "number"), 2)
 end
-local var47 = tonumber(256)
+local var67 = tonumber(256)
 local list_4 = nil
 local list_5 = nil
 
-if var47 then
-	if var47 < 0 or var47 ~= var47 then
+if var67 then
+	if var67 < 0 or var67 ~= var67 then
 		error("cache size cannot be a negative number or a NaN", 2)
-	elseif var47 == 1e999 then
+	elseif var67 == 1e999 then
 		list_4 = { nil }
 		list_5 = { nil }
-	elseif var47 >= 4294967296 then
+	elseif var67 >= 4294967296 then
 		error("cache size too large", 2)
 	else
 		list_4 = table.create(256)
 		list_5 = table.create(256)
 	end
 end
-if var47 then
+if var67 then
 	function t.pruge()
 		-- upvalues: list_5 (write), list_4 (write)
 		table.clear(list_5)
 		table.clear(list_4)
 	end
 end
-local function new_re(p67, p68, p69, p70)
-	-- upvalues: var47 (ref), list_4 (write), list_5 (write), tokenize_ptn (ref), tbl (ref), t_1 (write), re_tostr (ref), var4 (write)
-	local var173, var174, var175
+local function new_re(p32, p33, p34, p35)
+	-- upvalues: var67 (ref), list_4 (write), list_5 (write), tokenize_ptn (ref), tbl (ref), t_1 (write), re_tostr (ref), var1 (write)
+	local var68, var69, var70
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var168 = var47 and string.format("%s|%s", p67.s, p69)
-	local var169 = var47 and list_4[table.find(list_5, var168)]
+	local var71 = var67 and string.format("%s|%s", p32.s, p34)
+	local var72 = var67 and list_4[table.find(list_5, var71)]
 	
-	if var169 then
-		local unpacked, unpacked_1, unpacked_2 = table.unpack(var169, 1, 3)
-		var173 = unpacked
-		var174 = unpacked_1
-		var175 = unpacked_2
+	if var72 then
+		local unpacked, unpacked_1, unpacked_2 = table.unpack(var72, 1, 3)
+		var68 = unpacked
+		var69 = unpacked_1
+		var70 = unpacked_2
 	else
-		local var170, var171, var172 = tokenize_ptn(p67, p68)
-		var173 = var170
-		var174 = var171
-		var175 = var172
+		local var73, var74, var75 = tokenize_ptn(p32, p33)
+		var68 = var73
+		var69 = var74
+		var70 = var75
 		
-		if type(var173) == "string" then
-			error(var173, 2)
+		if type(var68) == "string" then
+			error(var68, 2)
 		end
-		if var47 and var173[1] then
-			table.insert(list_5, 1, var168)
-			table.insert(list_4, 1, { var173, var174, var175 })
+		if var67 and var68[1] then
+			table.insert(list_5, 1, var71)
+			table.insert(list_4, 1, { var68, var69, var70 })
 			
-			if var47 ~= 1e999 then
-				table.remove(list_5, var47 + 1)
-				table.remove(list_4, var47 + 1)
+			if var67 ~= 1e999 then
+				table.remove(list_5, var67 + 1)
+				table.remove(list_4, var67 + 1)
 			end
 		end
 	end
-	local var179 = newproxy(true)
-	tbl[var179] = {
+	local var76 = newproxy(true)
+	tbl[var76] = {
 		name = "RegEx",
-		flags = p68,
-		flag_repr = p69,
-		pattern_repr = p70,
-		token = var173,
-		group_id = var174,
-		verb_flags = var175
+		flags = p33,
+		flag_repr = p34,
+		pattern_repr = p35,
+		token = var68,
+		group_id = var69,
+		verb_flags = var70
 	}
-	local var180 = getmetatable(var179)
-	var180.__index = setmetatable(p68, t_1)
-	var180.__tostring = re_tostr
-	var180.__metatable = var4
+	local var77 = getmetatable(var76)
+	var77.__index = setmetatable(p33, t_1)
+	var77.__tostring = re_tostr
+	var77.__metatable = var1
 	
-	return var179
+	return var76
 end
 
-local function escape_fslash(p71)
-	return (if #p71 % 2 == 0 then "\\" else "") .. p71 .. "."
+local function escape_fslash(p32)
+	return (if #p32 % 2 == 0 then "\\" else "") .. p71 .. "."
 end
 
-local function sort_flag_chr(p72, p73)
-	return p72:lower() < p73:lower()
+local function sort_flag_chr(p32, p33)
+	return p32:lower() < p33:lower()
 end
 
 function t.new(...)
@@ -2608,12 +2608,12 @@ function t.new(...)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
 	end
-	local var181, var182 = ...
+	local var68, var69 = ...
 	
-	if type(var181) == "number" then
-		var181 ..= ""
-	elseif type(var181) ~= "string" then
-		error(string.format("invalid argument #1 (string expected, got %s)", typeof(var181)), 2)
+	if type(var68) == "number" then
+		var68 ..= ""
+	elseif type(var68) ~= "string" then
+		error(string.format("invalid argument #1 (string expected, got %s)", typeof(var68)), 2)
 	end
 	if type(var182) ~= "string" and type(var182) ~= "number" and var182 ~= nil then
 		error(string.format("invalid argument #2 (string expected, got %s)", typeof(var182)), 2)
@@ -2646,33 +2646,33 @@ function t.fromstring(...)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
 	end
-	local var185 = ...
+	local var68 = ...
 	
-	if type(var185) == "number" then
-		var185 ..= ""
-	elseif type(var185) ~= "string" then
-		error(string.format("invalid argument #1 (string expected, got %s)", typeof(var185), 2))
+	if type(var68) == "number" then
+		var68 ..= ""
+	elseif type(var68) ~= "string" then
+		error(string.format("invalid argument #1 (string expected, got %s)", typeof(var68), 2))
 	end
-	local var186 = to_str_arr(var185)
-	local var187 = var186[1]
+	local var68 = to_str_arr(var185)
+	local var69 = var68[1]
 	
-	if not var187 then
+	if not var69 then
 		error("empty regex", 2)
-	elseif var187 == 92 or var187 >= 48 and var187 <= 57 or (var187 >= 65 and var187 <= 90 or var187 >= 97 and var187 <= 122) then
+	elseif var69 == 92 or var69 >= 48 and var69 <= 57 or (var69 >= 65 and var69 <= 90 or var69 >= 97 and var69 <= 122) then
 		error("delimiter must not be alphanumeric or a backslash", 2)
 	end
-	local var188 = 1
-	local var189
+	local var70 = 1
+	local var71
 	repeat
-		var188 = table.find(var186, var187, var188 + 1)
-		if not var188 then
-			error(string.format("no ending delimiter ('%s') found", utf8.char(var187)), 2)
+		var70 = table.find(var68, var69, var70 + 1)
+		if not var70 then
+			error(string.format("no ending delimiter ('%s') found", utf8.char(var69)), 2)
 		end
-		var189 = 1
-		while var186[var188 - var189] == 92 do
-			var189 += 1
+		var71 = 1
+		while var68[var70 - var71] == 92 do
+			var71 += 1
 		end
-	until var189 % 2 == 1
+	until var71 % 2 == 1
 	local t = {
 		anchored = false,
 		caseless = false,
@@ -2683,9 +2683,9 @@ function t.fromstring(...)
 		extended = false
 	}
 	local t_1 = {}
-	while var188 < var186.n do
-		local char = utf8.char(table.remove(var186))
-		var186.n -= 1
+	while var70 < var68.n do
+		local char = utf8.char(table.remove(var68))
+		var68.n -= 1
 		
 		if t[t_3[char]] ~= false then
 			error("invalid regular expression flag " .. char, 3)
@@ -2695,12 +2695,12 @@ function t.fromstring(...)
 	end
 	table.sort(t_1, sort_flag_chr)
 	local joined = table.concat(t_1)
-	table.remove(var186, 1)
-	table.remove(var186)
-	var186.n -= 2
-	var186.s = string.sub(var186.s, 2, 1 + var186.n)
+	table.remove(var68, 1)
+	table.remove(var68)
+	var68.n -= 2
+	var68.s = string.sub(var68.s, 2, 1 + var68.n)
 	
-	return new_re(var186, t, joined, string.sub(var185, 1, 2 + var186.n))
+	return new_re(var68, t, joined, string.sub(var185, 1, 2 + var68.n))
 end
 
 local t_10 = {
@@ -2716,12 +2716,12 @@ function t.escape(...)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
 	end
-	local var194, var195, var196 = ...
+	local var72, var73, var74 = ...
 	
-	if type(var194) == "number" then
-		var194 ..= ""
-	elseif type(var194) ~= "string" then
-		error(string.format("invalid argument #1 to 'escape' (string expected, got %s)", typeof(var194)), 2)
+	if type(var72) == "number" then
+		var72 ..= ""
+	elseif type(var72) ~= "string" then
+		error(string.format("invalid argument #1 to 'escape' (string expected, got %s)", typeof(var72)), 2)
 	end
 	if var196 == nil then
 		var196 = ""
@@ -2748,8 +2748,8 @@ for i, v in pairs(t_1) do
 	t[i] = v
 end
 t_1 = { __index = t_1 }
-var4 = t.fromstring("/The\\s*metatable\\s*is\\s*(?:locked|inaccessible)(?#Nice try :])/i")
-getmetatable(var4).__metatable = var4
+var1 = t.fromstring("/The\\s*metatable\\s*is\\s*(?:locked|inaccessible)(?#Nice try :])/i")
+getmetatable(var1).__metatable = var1
 
 local function readonly_table()
 	error("Attempt to modify a readonly table", 2)
@@ -2757,12 +2757,12 @@ end
 
 t.Match = setmetatable({}, {
 	__index = t_2,
-	__metatable = var4,
+	__metatable = var1,
 	__newindex = readonly_table
 })
 
 return setmetatable({}, {
 	__index = t,
-	__metatable = var4,
+	__metatable = var1,
 	__newindex = readonly_table
 })

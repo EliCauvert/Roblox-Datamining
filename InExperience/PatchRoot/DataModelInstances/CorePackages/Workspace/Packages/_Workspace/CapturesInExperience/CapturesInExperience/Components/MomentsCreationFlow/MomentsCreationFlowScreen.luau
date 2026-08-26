@@ -48,46 +48,46 @@ local t = {
 
 return function()
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), t (ref), useSelector (ref), constantsModule (ref), reactModule (ref), momentsCreationFlowClosedModule (ref), createMomentModule (ref), dashModule (ref), cryoModule (ref), creationFlowContextProvider (ref), creationFlowScreen (ref)
-	local var11 = useAnalyticsModule()
-	local var12 = useDispatch()
-	local var13 = useLocalization(t)
-	local var14 = useSelector(function(p0)
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3 = useLocalization(t)
+	local var4 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
-		return p0[constantsModule.RoduxKey].MomentsCreationFlow.IsOpen
+		return p1[constantsModule.RoduxKey].MomentsCreationFlow.IsOpen
 	end)
-	local var15 = useSelector(function(p1)
+	local var5 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].MomentsCreationFlow.Capture
 	end)
-	local var16 = useSelector(function(p2)
+	local var6 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].MomentsCreationFlow.SessionId
+		return p1[constantsModule.RoduxKey].MomentsCreationFlow.SessionId
 	end)
 	
-	return if var14 and var15 then reactModule.createElement(creationFlowContextProvider, {
-		captures = { var15 },
+	return if var4 and var5 then reactModule.createElement(creationFlowContextProvider, {
+		captures = { var5 },
 		exitCreationFlow = reactModule.useCallback(function()
-			-- upvalues: var12 (ref), momentsCreationFlowClosedModule (copy)
-			var12(momentsCreationFlowClosedModule())
-		end, { var12 }),
+			-- upvalues: var2 (ref), momentsCreationFlowClosedModule (copy)
+			var2(momentsCreationFlowClosedModule())
+		end, { var2 }),
 		value = {
 			capturesPagesIsFinished = function()
 				return true
 			end,
-			createMoment = reactModule.useCallback(function(p3, p4, p5)
-				-- upvalues: var12 (ref), createMomentModule (copy)
-				var12(createMomentModule(p3, p4, p5))
-			end, { var12 }),
+			createMoment = reactModule.useCallback(function(p1, p2, p3)
+				-- upvalues: var2 (ref), createMomentModule (copy)
+				var2(createMomentModule(p1, p2, p3))
+			end, { var2 }),
 			fetchAdditionalCaptures = dashModule.noop,
 			fetchInitialCaptures = dashModule.noop,
-			fireEvent = function(p6, p7)
-				-- upvalues: var11 (ref), cryoModule (copy), var16 (ref)
-				var11.fireEvent("XExp" .. p6, cryoModule.Dictionary.join(p7 or {}, { creationSessionId = var16 }))
+			fireEvent = function(p1, p2)
+				-- upvalues: var1 (ref), cryoModule (copy), var6 (ref)
+				var1.fireEvent("XExp" .. p6, cryoModule.Dictionary.join(p2 or {}, { creationSessionId = var6 }))
 			end,
-			getLocalization = reactModule.useCallback(function(p8)
-				-- upvalues: var13 (ref)
-				return var13[p8] or nil
-			end, { var13 }),
+			getLocalization = reactModule.useCallback(function(p1)
+				-- upvalues: var3 (ref)
+				return var3[p1] or nil
+			end, { var3 }),
 			getUserConfiguration = dashModule.noop,
 			isTextFiltered = function()
 				return false

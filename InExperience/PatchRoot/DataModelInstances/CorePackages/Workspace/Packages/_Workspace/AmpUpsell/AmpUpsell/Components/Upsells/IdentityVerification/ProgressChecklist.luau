@@ -5,9 +5,9 @@ local progressTileModule = require(script.Parent.ProgressTile)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local IDVStep = require(ampUpsell.Common.Enums).IDVStep
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), IDVStep (ref), reactModule (ref), progressTileModule (ref)
-	local var3 = useLocalization({
+	local var1 = useLocalization({
 		connectedMobile = "Verification.Identity.Label.ConnectingToMobile",
 		verifyingYou = "Verification.Identity.Label.VerifyingYou",
 		waitingForResults = "Verification.Identity.Label.VerificationWaitingForResults",
@@ -16,8 +16,8 @@ return function(p0)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, p0.entryHeight * 4),
-		LayoutOrder = p0.layoutOrder
+		Size = UDim2.new(1, 0, 0, p1.entryHeight * 4),
+		LayoutOrder = p1.layoutOrder
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -27,27 +27,27 @@ return function(p0)
 		}),
 		MobileCheck = reactModule.createElement(progressTileModule, {
 			layoutOrder = 1,
-			frameHeight = p0.entryHeight,
-			finished = IDVStep.ConnectedMobile <= p0.latestStepCompleted,
-			progressText = var3.connectedMobile
+			frameHeight = p1.entryHeight,
+			finished = IDVStep.ConnectedMobile <= p1.latestStepCompleted,
+			progressText = var1.connectedMobile
 		}),
 		VerifiedCheck = reactModule.createElement(progressTileModule, {
 			layoutOrder = 2,
-			frameHeight = p0.entryHeight,
-			finished = IDVStep.Verified <= p0.latestStepCompleted,
-			progressText = var3.verifyingYou
+			frameHeight = p1.entryHeight,
+			finished = IDVStep.Verified <= p1.latestStepCompleted,
+			progressText = var1.verifyingYou
 		}),
 		GotResultsCheck = reactModule.createElement(progressTileModule, {
 			layoutOrder = 3,
-			frameHeight = p0.entryHeight,
-			finished = IDVStep.GotResults <= p0.latestStepCompleted,
-			progressText = var3.waitingForResults
+			frameHeight = p1.entryHeight,
+			finished = IDVStep.GotResults <= p1.latestStepCompleted,
+			progressText = var1.waitingForResults
 		}),
 		UpdateProfileCheck = reactModule.createElement(progressTileModule, {
 			layoutOrder = 4,
-			frameHeight = p0.entryHeight,
-			finished = IDVStep.UpdatedRobloxProfile <= p0.latestStepCompleted,
-			progressText = var3.updatingRbxProfile
+			frameHeight = p1.entryHeight,
+			finished = IDVStep.UpdatedRobloxProfile <= p1.latestStepCompleted,
+			progressText = var1.updatingRbxProfile
 		})
 	})
 end

@@ -1,35 +1,35 @@
 ﻿local deepEqualModule = require(script.Parent.Parent.luaUtils.deepEqual)
 local deepContainsModule = require(script.Parent.Parent.luaUtils.deepContains)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: deepContainsModule (ref), deepEqualModule (ref)
-	if #p0 ~= #p1 then
+	if #p1 ~= #p2 then
 		return {
 			pass = false,
-			message = ("Expected array length %s / got length %s"):format(tostring(#p0), tostring(#p1))
+			message = ("Expected array length %s / got length %s"):format(tostring(#p1), tostring(#p2))
 		}
 	end
-	for i = 1, #p0 do
-		local var2, var4
+	for i = 1, #p1 do
+		local var1, var2
 		local _ = nil
 		local _ = nil
 		
-		if p2 then
-			var2, var3 = deepContainsModule(p0[i], p1[i])
-			var4 = var3
+		if p3 then
+			var1, var3 = deepContainsModule(p1[i], p2[i])
+			var2 = var3
 			
-			if var2 then
+			if var1 then
 				continue
 			end
 			return {
 				pass = false,
-				message = var4:gsub("{1}", ("{1}[%s]"):format(tostring(i))):gsub("{2}", ("{2}[%s]"):format(tostring(i)))
+				message = var2:gsub("{1}", ("{1}[%s]"):format(tostring(i))):gsub("{2}", ("{2}[%s]"):format(tostring(i)))
 			}
 		else
-			var2, var5 = deepEqualModule(p0[i], p1[i])
-			var4 = var5
+			var1, var5 = deepEqualModule(p1[i], p2[i])
+			var2 = var5
 			
-			if var2 then
+			if var1 then
 				continue
 			end
 		end

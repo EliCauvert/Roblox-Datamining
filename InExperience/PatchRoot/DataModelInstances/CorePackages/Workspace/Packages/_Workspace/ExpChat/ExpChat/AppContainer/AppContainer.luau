@@ -62,7 +62,7 @@ function shouldShowChatTranslationFTUX()
 	return true
 end
 
-local var14 = shouldShowChatTranslationFTUX()
+local var1 = shouldShowChatTranslationFTUX()
 local chatTranslationFTUXModule = require(script.Parent.Parent.ChatTranslationFTUX)
 local appContainer = roactModule.PureComponent:extend("AppContainer")
 appContainer.defaultProps = {
@@ -77,22 +77,22 @@ appContainer.defaultProps = {
 	textChatService = textChatService,
 	chat = game:GetService("Chat")
 }
-local var17 = nil
+local var2 = nil
 
-function appContainer.init(p0)
-	p0:setState({
+function appContainer.init(p1)
+	p1:setState({
 		showTranslationButton = false,
 		isTextChatServiceEnabled = false
 	})
 end
 
 function appContainer.willUnmount(_)
-	-- upvalues: var17 (write)
-	var17:Disconnect()
+	-- upvalues: var2 (write)
+	var2:Disconnect()
 end
 
 function appContainer.didMount(p1)
-	-- upvalues: textChatService (ref), var17 (write), getFFlagExpChatAlwaysRunTCS (ref)
+	-- upvalues: textChatService (ref), var2 (write), getFFlagExpChatAlwaysRunTCS (ref)
 	p1.migrationConnection = p1.props.chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function()
 		-- upvalues: p1 (ref)
 		if p1.props.chat.IsAutoMigrated then
@@ -137,8 +137,8 @@ function appContainer.didMount(p1)
 		end
 	end
 	
-	if not var17 then
-		var17 = textChatService.Changed:Connect(onTextChatServicePropertyChanged)
+	if not var2 then
+		var2 = textChatService.Changed:Connect(onTextChatServicePropertyChanged)
 	end
 	p1:setState({
 		showTranslationButton = getChatTranslationEnabled() and getChatTranslationToggleEnabled(),
@@ -146,52 +146,52 @@ function appContainer.didMount(p1)
 	})
 end
 
-function appContainer.render(p3)
-	-- upvalues: roactModule (ref), bubbleChatModule (ref), clientSettingsModule (ref), appLayoutModule (ref), fFlagExpChatUseMessagesStore (ref), isChatRegionLockedModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref), getFFlagChatTranslationShowFTUXModule (ref), var14 (ref), chatTranslationFTUXModule (ref)
-	local isTextChatServiceEnabled = p3.state.isTextChatServiceEnabled
-	local var20 = roactModule.createElement(bubbleChatModule, {
-		getIconVoiceIndicator = p3.props.getIconVoiceIndicator,
-		onClickedVoiceIndicator = p3.props.onClickedVoiceIndicator,
-		onClickedCameraIndicator = p3.props.onClickedCameraIndicator,
-		selfViewListenerChanged = p3.props.selfViewListenerChanged,
-		getPermissions = p3.props.getPermissions,
-		displayCameraDeniedToast = p3.props.displayCameraDeniedToast,
-		isCamEnabledForUserAndPlace = p3.props.isCamEnabledForUserAndPlace,
-		isCameraOnlyUser = p3.props.isCameraOnlyUser,
+function appContainer.render(p1)
+	-- upvalues: roactModule (ref), bubbleChatModule (ref), clientSettingsModule (ref), appLayoutModule (ref), fFlagExpChatUseMessagesStore (ref), isChatRegionLockedModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref), getFFlagChatTranslationShowFTUXModule (ref), var1 (ref), chatTranslationFTUXModule (ref)
+	local isTextChatServiceEnabled = p1.state.isTextChatServiceEnabled
+	local var3 = roactModule.createElement(bubbleChatModule, {
+		getIconVoiceIndicator = p1.props.getIconVoiceIndicator,
+		onClickedVoiceIndicator = p1.props.onClickedVoiceIndicator,
+		onClickedCameraIndicator = p1.props.onClickedCameraIndicator,
+		selfViewListenerChanged = p1.props.selfViewListenerChanged,
+		getPermissions = p1.props.getPermissions,
+		displayCameraDeniedToast = p1.props.displayCameraDeniedToast,
+		isCamEnabledForUserAndPlace = p1.props.isCamEnabledForUserAndPlace,
+		isCameraOnlyUser = p1.props.isCameraOnlyUser,
 		isTextChatServiceOn = isTextChatServiceEnabled,
-		isVoiceServiceInitialized = p3.props.isVoiceServiceInitialized
+		isVoiceServiceInitialized = p1.props.isVoiceServiceInitialized
 	})
 	
-	return if isTextChatServiceEnabled then roactModule.createElement(clientSettingsModule.Provider, { value = p3.props.clientSettings }, {
+	return if isTextChatServiceEnabled then roactModule.createElement(clientSettingsModule.Provider, { value = p1.props.clientSettings }, {
 		app = roactModule.createFragment({
 			appLayout = roactModule.createElement(appLayoutModule, {
-				canLocalUserChat = if fFlagExpChatUseMessagesStore then nil else p3.props.canLocalUserChat,
-				isChatInputBarVisible = not isChatRegionLockedModule() and p3.props.isChatInputBarVisible,
-				isChatWindowVisible = p3.props.isChatWindowVisible,
-				isChannelBarVisible = p3.props.isChannelBarVisible,
-				chatTopBarVisibility = p3.props.chatTopBarVisibility,
-				mutedUserIds = p3.props.mutedUserIds,
-				onSendChat = p3.props.onSendChat,
-				onSendGlobalChat = p3.props.onSendGlobalChat,
-				timer = p3.props.timer,
-				textTimer = p3.props.textTimer,
-				activateWhisperMode = p3.props.activateWhisperMode,
-				resetTargetChannel = p3.props.resetTargetChannel,
-				isTextBoxFocused = p3.props.isTextBoxFocused,
-				onHovered = p3.props.onHovered,
-				onUnhovered = p3.props.onUnhovered,
-				chatLayoutAlignment = p3.props.chatLayoutAlignment,
-				chatWindowSettings = p3.props.chatWindowSettings,
-				clientSettings = p3.props.clientSettings,
-				selectedTabType = p3.props.selectedTabType,
-				showTranslationButton = p3.state.showTranslationButton,
-				isSpatialUIEnabled = p3.props.isSpatialUIEnabled,
-				targetTextChannel = if fFlagExpChatPresetChatEnabled or fFlagExpChatNewInputBarModule then p3.props.targetTextChannel else nil
+				canLocalUserChat = if fFlagExpChatUseMessagesStore then nil else p1.props.canLocalUserChat,
+				isChatInputBarVisible = not isChatRegionLockedModule() and p1.props.isChatInputBarVisible,
+				isChatWindowVisible = p1.props.isChatWindowVisible,
+				isChannelBarVisible = p1.props.isChannelBarVisible,
+				chatTopBarVisibility = p1.props.chatTopBarVisibility,
+				mutedUserIds = p1.props.mutedUserIds,
+				onSendChat = p1.props.onSendChat,
+				onSendGlobalChat = p1.props.onSendGlobalChat,
+				timer = p1.props.timer,
+				textTimer = p1.props.textTimer,
+				activateWhisperMode = p1.props.activateWhisperMode,
+				resetTargetChannel = p1.props.resetTargetChannel,
+				isTextBoxFocused = p1.props.isTextBoxFocused,
+				onHovered = p1.props.onHovered,
+				onUnhovered = p1.props.onUnhovered,
+				chatLayoutAlignment = p1.props.chatLayoutAlignment,
+				chatWindowSettings = p1.props.chatWindowSettings,
+				clientSettings = p1.props.clientSettings,
+				selectedTabType = p1.props.selectedTabType,
+				showTranslationButton = p1.state.showTranslationButton,
+				isSpatialUIEnabled = p1.props.isSpatialUIEnabled,
+				targetTextChannel = if fFlagExpChatPresetChatEnabled or fFlagExpChatNewInputBarModule then p1.props.targetTextChannel else nil
 			}),
-			bubbleChat = var20,
-			ChatTranslationFTUX = if getFFlagChatTranslationShowFTUXModule() and var14 and (getChatTranslationEnabled() and getChatWindowEnabled()) then roactModule.createElement(chatTranslationFTUXModule, {}) else nil
+			bubbleChat = var3,
+			ChatTranslationFTUX = if getFFlagChatTranslationShowFTUXModule() and var1 and (getChatTranslationEnabled() and getChatWindowEnabled()) then roactModule.createElement(chatTranslationFTUXModule, {}) else nil
 		})
-	}) else roactModule.createElement(clientSettingsModule.Provider, { value = p3.props.clientSettings }, { bubbleChat = var20 })
+	}) else roactModule.createElement(clientSettingsModule.Provider, { value = p1.props.clientSettings }, { bubbleChat = var3 })
 end
 
 return roactRoduxModule.connect(mapStateToPropsModule, mapDispatchToPropsModule)(appContainer)

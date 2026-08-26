@@ -1,11 +1,11 @@
 ﻿return {
-	isPointInsideBounds = function(p0, p1, p2)
-		return p1.X <= p0.X and (p0.X <= p1.X + p2.X and (p1.Y <= p0.Y and p0.Y <= p1.Y + p2.Y))
+	isPointInsideBounds = function(p1, p2, p3)
+		return p2.X <= p1.X and (p1.X <= p2.X + p3.X and (p2.Y <= p1.Y and p1.Y <= p2.Y + p3.Y))
 	end,
-	getInputPosition = function(p3)
-		return Vector2.new(p3.Position.X, p3.Position.Y)
+	getInputPosition = function(p1)
+		return Vector2.new(p1.Position.X, p1.Position.Y)
 	end,
-	isPressInput = function(p4)
-		return if p4.UserInputType ~= Enum.UserInputType.MouseButton1 then p4.UserInputType == Enum.UserInputType.Touch else true
+	isPressInput = function(p1)
+		return if p1.UserInputType ~= Enum.UserInputType.MouseButton1 then p1.UserInputType == Enum.UserInputType.Touch else true
 	end
 }

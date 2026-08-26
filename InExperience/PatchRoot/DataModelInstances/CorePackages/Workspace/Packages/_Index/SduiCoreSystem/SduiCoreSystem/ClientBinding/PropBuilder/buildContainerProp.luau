@@ -5,10 +5,10 @@ local buildTablePropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.bu
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local propResultCategory = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 
-local function _(p0)
-	local p0Count = #p0
+local function _(p1)
+	local p0Count = #p1
 	
-	return p0Count > 0 and next(p0, p0Count) == nil
+	return p0Count > 0 and next(p1, p0Count) == nil
 end
 
 return function(_, p1, p2, p3, p4, p5)

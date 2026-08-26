@@ -38,11 +38,11 @@ chatMessageContainer.defaultProps = {
 	end
 }
 
-function chatMessageContainer.init(p0)
+function chatMessageContainer.init(p1)
 	function p0.onAvatarActivated()
-		-- upvalues: p0 (ref)
-		if p0.props.viewProfileOnAvatarPressed then
-			p0.props.openViewProfile(p0.props.senderUserId)
+		-- upvalues: p1 (ref)
+		if p1.props.viewProfileOnAvatarPressed then
+			p1.props.openViewProfile(p1.props.senderUserId)
 		end
 	end
 end
@@ -52,9 +52,9 @@ function chatMessageContainer.render(p1)
 	return withStyle(function(p2)
 		-- upvalues: p1 (ref), roactModule (copy), roactFitComponents (copy), systemMessageModule (copy), avatarCircle (copy), noticeTextModule (copy)
 		local imageLabel
-		local var6 = if not p1.props.showDateTime then (if p1.props.isNewSender then 10 else 2) + p1.props.messageTypePaddingOffset else 0
-		local var7 = if p1.props.displayName == "" then p1.props.unknownUserText else p1.props.displayName
-		local var8 = if p1.props.isIncoming then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Right
+		local var1 = if not p1.props.showDateTime then (if p1.props.isNewSender then 10 else 2) + p1.props.messageTypePaddingOffset else 0
+		local var2 = if p1.props.displayName == "" then p1.props.unknownUserText else p1.props.displayName
+		local var3 = if p1.props.isIncoming then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Right
 		local moderated = p1.props.moderated or p1.props.filteredForReceivers
 		local createElement = roactModule.createElement
 		local fitFrameVertical = roactFitComponents.FitFrameVertical
@@ -62,7 +62,7 @@ function chatMessageContainer.render(p1)
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			FillDirection = Enum.FillDirection.Vertical,
-			HorizontalAlignment = var8,
+			HorizontalAlignment = var3,
 			width = UDim.new(1, 0)
 		}
 		local t_1 = {
@@ -79,11 +79,11 @@ function chatMessageContainer.render(p1)
 			BorderSizePixel = 0,
 			LayoutOrder = 2,
 			FillDirection = Enum.FillDirection.Horizontal,
-			HorizontalAlignment = var8,
+			HorizontalAlignment = var3,
 			margin = {
 				right = 0,
 				bottom = 0,
-				top = var6,
+				top = var1,
 				left = if p1.props.thumbnail then 8 else 44
 			},
 			width = UDim.new(1, 0)
@@ -109,7 +109,7 @@ function chatMessageContainer.render(p1)
 			BorderSizePixel = 0,
 			LayoutOrder = 2,
 			FillDirection = Enum.FillDirection.Vertical,
-			HorizontalAlignment = var8,
+			HorizontalAlignment = var3,
 			margin = {
 				top = 0,
 				right = 0,
@@ -131,7 +131,7 @@ function chatMessageContainer.render(p1)
 					Font = p2.Font.Footer.Font,
 					maximumWidth = p1.props.messageMaxWidth - 6,
 					Size = UDim2.new(1, 0, 1, 0),
-					Text = var7,
+					Text = var2,
 					TextColor3 = p2.Theme.TextDefault.Color,
 					TextSize = p2.Font.BaseSize * p2.Font.Footer.RelativeSize,
 					TextTransparency = p2.Theme.TextDefault.Transparency,
@@ -148,7 +148,7 @@ function chatMessageContainer.render(p1)
 			BorderSizePixel = 0,
 			LayoutOrder = 2,
 			FillDirection = Enum.FillDirection.Horizontal,
-			HorizontalAlignment = var8,
+			HorizontalAlignment = var3,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			contentPadding = UDim.new(0, 10),
 			width = UDim.new(1, if p1.props.isIncoming then -44 else 0)
@@ -173,7 +173,7 @@ function chatMessageContainer.render(p1)
 		t_1.Notice = moderated and roactModule.createElement(noticeTextModule, {
 			LayoutOrder = 3,
 			Font = p1.props.Font,
-			HorizontalAlignment = var8,
+			HorizontalAlignment = var3,
 			Text = if p1.props.moderated then p1.props.messageModeratedNoticeText else p1.props.messageDefaultNoticeText,
 			TextColor3 = if p1.props.moderated then p2.Theme.Alert.Color else p2.Theme.UIDefault.Color,
 			TextTransparency = if p1.props.moderated then p2.Theme.Alert.Transparency else p2.Theme.UIDefault.Transparency,

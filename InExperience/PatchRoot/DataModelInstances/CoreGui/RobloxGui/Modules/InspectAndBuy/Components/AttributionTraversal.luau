@@ -14,32 +14,32 @@ local useScreenSizeModule = require(coreGuiService.RobloxGui.Modules.Common.Hook
 local experienceService = require(corePackagesService.Workspace.Packages.ExperienceService).ExperienceService
 local closeOverlayModule = require(script.Parent.Parent.Actions.CloseOverlay)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), useScreenSizeModule (ref), useStyle (ref), reactModule (ref), closeOverlayModule (ref), experienceService (ref), useSelector (ref), interactiveAlert (ref), robloxTranslatorModule (ref), imageSetLabel (ref), styledTextLabel (ref), buttonType (ref)
-	local var7 = useDispatch()
-	local var8 = useScreenSizeModule()
-	local var9 = useStyle()
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), closeOverlayModule (copy)
-		var7(closeOverlayModule())
-	end, { var7 })
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), experienceService (copy), var7 (ref), closeOverlayModule (copy)
-		experienceService:LaunchExperience({ placeId = p0.rootPlaceId })
-		var7(closeOverlayModule())
-	end, { var7, p0.rootPlaceId })
-	local var12 = useSelector(function(p1)
-		return p1.locale
+	local var1 = useDispatch()
+	local var2 = useScreenSizeModule()
+	local var3 = useStyle()
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), closeOverlayModule (copy)
+		var1(closeOverlayModule())
+	end, { var1 })
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), experienceService (copy), var1 (ref), closeOverlayModule (copy)
+		experienceService:LaunchExperience({ placeId = p1.rootPlaceId })
+		var1(closeOverlayModule())
+	end, { var1, p1.rootPlaceId })
+	local var6 = useSelector(function(p2)
+		return p2.locale
 	end)
-	local theme = var9.Theme
-	local font = var9.Font
-	local name = p0.name or ""
+	local theme = var3.Theme
+	local font = var3.Font
+	local name = p1.name or ""
 	
 	return reactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = false,
-		title = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Attribution.GoToExperience", var12),
+		title = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Attribution.GoToExperience", var6),
 		middleContent = function()
-			-- upvalues: reactModule (copy), var9 (ref), theme (ref), imageSetLabel (copy), p0 (ref), styledTextLabel (copy), robloxTranslatorModule (copy), var12 (ref), name (ref), font (ref)
+			-- upvalues: reactModule (copy), var3 (ref), theme (ref), imageSetLabel (copy), p1 (ref), styledTextLabel (copy), robloxTranslatorModule (copy), var6 (ref), name (ref), font (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -50,7 +50,7 @@ return function(p0)
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, var9.Tokens.Size.Size_300)
+					Padding = UDim.new(0, var3.Tokens.Size.Size_300)
 				}),
 				ExperienceThumbnailFrame = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -65,16 +65,16 @@ return function(p0)
 						BackgroundTransparency = 1,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5),
-						Image = string.format("rbxthumb://type=GameIcon&id=%s&w=%d&h=%d", tostring(p0.universeId), 150, 150),
+						Image = string.format("rbxthumb://type=GameIcon&id=%s&w=%d&h=%d", tostring(p1.universeId), 150, 150),
 						Size = UDim2.fromScale(1, 1)
 					}, {
-						RoundCorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var9.Tokens.Radius.Medium) })
+						RoundCorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var3.Tokens.Radius.Medium) })
 					})
 				}),
 				BodyText = reactModule.createElement(styledTextLabel, {
 					layoutOrder = 2,
 					lineHeight = 1,
-					text = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Attribution.GoToDescription", var12, { EXPERIENCE_NAME = name }),
+					text = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Attribution.GoToDescription", var6, { EXPERIENCE_NAME = name }),
 					fontStyle = font.Body,
 					colorStyle = theme.TextDefault,
 					automaticSize = Enum.AutomaticSize.Y,
@@ -89,8 +89,8 @@ return function(p0)
 					isDefaultChild = true,
 					props = {
 						layoutOrder = 0,
-						onActivated = var10,
-						text = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Action.Cancel", var12)
+						onActivated = var4,
+						text = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Action.Cancel", var6)
 					}
 				},
 				{
@@ -98,12 +98,12 @@ return function(p0)
 					buttonType = buttonType.PrimaryContextual,
 					props = {
 						layoutOrder = 2,
-						onActivated = var11,
-						text = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Action.Go", var12)
+						onActivated = var5,
+						text = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Action.Go", var6)
 					}
 				}
 			}
 		},
-		screenSize = var8
+		screenSize = var2
 	})
 end

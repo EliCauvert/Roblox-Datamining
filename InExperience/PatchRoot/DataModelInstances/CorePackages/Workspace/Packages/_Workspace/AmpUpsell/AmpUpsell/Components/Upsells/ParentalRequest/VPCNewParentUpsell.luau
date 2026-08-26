@@ -21,26 +21,26 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local text = foundationModule.Text
 local uDim2 = UDim2.new(1, 0, 0, 0)
 
-local function selectScreenSize(p0)
-	return p0.ScreenSize
+local function selectScreenSize(p1)
+	return p1.ScreenSize
 end
 
 return function(p1)
 	-- upvalues: useSelector (ref), selectScreenSize (ref), useOnScreenKeyboardHeightModule (ref), getShouldUseFoundationUIVPCUpsellModule (ref), useStyle (ref), useLocalization (ref), cryoModule (ref), getFFlagEnableVPCUpsellFoundationDialogHardeningModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), uDim2 (ref), text (ref), textField (ref), linkButton (ref), buttonVariant (ref), styledTextLabel (ref), interactiveAlert (ref), buttonType (ref)
 	local onCollectEmailAndSendRequest = p1.onCollectEmailAndSendRequest
 	local onCancel = p1.onCancel
-	local var10 = useSelector(selectScreenSize)
+	local var1 = useSelector(selectScreenSize)
 	local onTextChange = p1.onTextChange
 	local canSendRequest = p1.canSendRequest
 	local textInput = p1.textInput
 	local errorText = p1.errorText
 	local openPrivacyPolicyLink = p1.openPrivacyPolicyLink
 	local isChildSubjectToParentalControls = p1.isChildSubjectToParentalControls
-	local var11 = useOnScreenKeyboardHeightModule()
-	local var12 = if p1.disablePortal then p1.disablePortal else false
-	local var13 = getShouldUseFoundationUIVPCUpsellModule(if p1.isInExperienceEntry then p1.isInExperienceEntry else false)
-	local var14 = useStyle()
-	local var15 = useLocalization(cryoModule.Dictionary.join(p1.messageStrings, {
+	local var2 = useOnScreenKeyboardHeightModule()
+	local var3 = if p1.disablePortal then p1.disablePortal else false
+	local var4 = getShouldUseFoundationUIVPCUpsellModule(if p1.isInExperienceEntry then p1.isInExperienceEntry else false)
+	local var5 = useStyle()
+	local var6 = useLocalization(cryoModule.Dictionary.join(p1.messageStrings, {
 		directionsTextSubjectToParentalControls = {
 			"Feature.Parents.Description.EnterParentEmailV4",
 			lineBreak = "\n\n"
@@ -55,16 +55,16 @@ return function(p1)
 			linkEnd = ""
 		}
 	}))
-	local titleText = var15.titleText
-	local buttonText = var15.buttonText
-	local var16 = if isChildSubjectToParentalControls then if var13 then string.format("%s\n\n%s\n", var15.childInstructions, var15.parentInstructionsPC) else string.format("%s\n", var15.directionsTextSubjectToParentalControls) elseif var13 then string.format("%s\n\n%s\n", var15.childInstructions, var15.parentInstructionsNoPC) else string.format("%s\n", var15.directionsTextNotSubjectToParentalControls)
-	local textFieldHeaderText = var15.textFieldHeaderText
+	local titleText = var6.titleText
+	local buttonText = var6.buttonText
+	local var7 = if isChildSubjectToParentalControls then if var4 then string.format("%s\n\n%s\n", var6.childInstructions, var6.parentInstructionsPC) else string.format("%s\n", var6.directionsTextSubjectToParentalControls) elseif var4 then string.format("%s\n\n%s\n", var6.childInstructions, var6.parentInstructionsNoPC) else string.format("%s\n", var6.directionsTextNotSubjectToParentalControls)
+	local textFieldHeaderText = var6.textFieldHeaderText
 	
-	return if var13 then if getFFlagEnableVPCUpsellFoundationDialogHardeningModule() then reactModule.createElement(dialog.Root, {
+	return if var4 then if getFFlagEnableVPCUpsellFoundationDialogHardeningModule() then reactModule.createElement(dialog.Root, {
 		hasBackdrop = true,
 		size = dialogSize.Large,
 		onClose = onCancel,
-		disablePortal = var12
+		disablePortal = var3
 	}, {
 		DialogTitle = reactModule.createElement(dialog.Title, { text = titleText }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
@@ -79,7 +79,7 @@ return function(p1)
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Top
 				}),
-				HeaderText = reactModule.createElement(dialog.Text, { LayoutOrder = 1, Text = var16 }),
+				HeaderText = reactModule.createElement(dialog.Text, { LayoutOrder = 1, Text = var7 }),
 				TextboxFrame = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
@@ -102,7 +102,7 @@ return function(p1)
 						required = true,
 						layoutOrder = 1,
 						text = textInput,
-						placeholder = var15.emailPlaceholder,
+						placeholder = var6.emailPlaceholder,
 						hint = errorText,
 						error = not (errorText == ""),
 						onChange = onTextChange,
@@ -124,13 +124,13 @@ return function(p1)
 					Disclaimer = reactModule.createElement(text, {
 						tag = "size-full-0 auto-y text-caption-medium text-wrap text-align-x-left",
 						LayoutOrder = 1,
-						Text = var15.privacyPolicyFooter
+						Text = var6.privacyPolicyFooter
 					}),
 					PrivacyPolicy = reactModule.createElement(linkButton, {
 						layoutOrder = 2,
 						fontStyle = "Footer",
 						underlineAlwaysEnabled = false,
-						text = var15.privacyLinkText,
+						text = var6.privacyLinkText,
 						onActivated = openPrivacyPolicyLink
 					})
 				})
@@ -153,7 +153,7 @@ return function(p1)
 	}) else reactModule.createElement(dialog.Root, {
 		size = dialogSize.Large,
 		onClose = onCancel,
-		disablePortal = var12
+		disablePortal = var3
 	}, {
 		DialogTitle = reactModule.createElement(dialog.Title, { text = titleText }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
@@ -171,9 +171,9 @@ return function(p1)
 					textWrapped = true,
 					layoutOrder = 1,
 					lineHeight = 1,
-					text = var16,
-					fontStyle = var14.Font.CaptionHeader,
-					colorStyle = var14.Theme.TextDefault,
+					text = var7,
+					fontStyle = var5.Font.CaptionHeader,
+					colorStyle = var5.Theme.TextDefault,
 					textXAlignment = Enum.TextXAlignment.Left,
 					textYAlignment = Enum.TextYAlignment.Top,
 					automaticSize = Enum.AutomaticSize.XY
@@ -194,15 +194,15 @@ return function(p1)
 						textWrapped = true,
 						layoutOrder = 0,
 						text = textFieldHeaderText,
-						fontStyle = var14.Font.Header2,
-						colorStyle = var14.Theme.TextDefault,
+						fontStyle = var5.Font.Header2,
+						colorStyle = var5.Theme.TextDefault,
 						automaticSize = Enum.AutomaticSize.XY
 					}),
 					TextField = reactModule.createElement(textField, {
 						required = true,
 						layoutOrder = 1,
 						text = textInput,
-						placeholder = var15.emailPlaceholder,
+						placeholder = var6.emailPlaceholder,
 						hint = errorText,
 						error = not (errorText == ""),
 						onChange = onTextChange,
@@ -224,9 +224,9 @@ return function(p1)
 						textWrapped = true,
 						layoutOrder = 1,
 						lineHeight = 1,
-						text = var15.privacyPolicyFooter,
-						fontStyle = var14.Font.Footer,
-						colorStyle = var14.Theme.TextDefault,
+						text = var6.privacyPolicyFooter,
+						fontStyle = var5.Font.Footer,
+						colorStyle = var5.Theme.TextDefault,
 						textXAlignment = Enum.TextXAlignment.Left,
 						automaticSize = Enum.AutomaticSize.XY
 					}),
@@ -234,7 +234,7 @@ return function(p1)
 						layoutOrder = 2,
 						fontStyle = "Footer",
 						underlineAlwaysEnabled = false,
-						text = var15.privacyLinkText,
+						text = var6.privacyLinkText,
 						onActivated = openPrivacyPolicyLink
 					})
 				})
@@ -257,9 +257,9 @@ return function(p1)
 	}) else reactModule.createElement(interactiveAlert, {
 		bottomPadding = 0,
 		title = titleText,
-		screenSize = var10,
-		position = var11 > 0 and UDim2.new(0.5, 0, 1, -var11 * 0.8) or UDim2.fromScale(0.5, 0.5),
-		anchorPoint = var11 > 0 and Vector2.new(0.5, 1) or nil,
+		screenSize = var1,
+		position = var2 > 0 and UDim2.new(0.5, 0, 1, -var2 * 0.8) or UDim2.fromScale(0.5, 0.5),
+		anchorPoint = var2 > 0 and Vector2.new(0.5, 1) or nil,
 		buttonStackInfo = {
 			buttons = {
 				{
@@ -277,7 +277,7 @@ return function(p1)
 		},
 		onCloseClicked = onCancel,
 		middleContent = function()
-			-- upvalues: reactModule (copy), styledTextLabel (copy), var16 (write), var14 (ref), textFieldHeaderText (ref), textField (copy), textInput (ref), var15 (ref), errorText (ref), onTextChange (ref), linkButton (copy), openPrivacyPolicyLink (ref)
+			-- upvalues: reactModule (copy), styledTextLabel (copy), var7 (write), var5 (ref), textFieldHeaderText (ref), textField (copy), textInput (ref), var6 (ref), errorText (ref), onTextChange (ref), linkButton (copy), openPrivacyPolicyLink (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY
@@ -291,9 +291,9 @@ return function(p1)
 				HeaderText = reactModule.createElement(styledTextLabel, {
 					textWrapped = true,
 					layoutOrder = 1,
-					text = var16,
-					fontStyle = var14.Font.CaptionHeader,
-					colorStyle = var14.Theme.TextDefault,
+					text = var7,
+					fontStyle = var5.Font.CaptionHeader,
+					colorStyle = var5.Theme.TextDefault,
 					textXAlignment = Enum.TextXAlignment.Left,
 					textYAlignment = Enum.TextYAlignment.Top,
 					automaticSize = Enum.AutomaticSize.XY
@@ -314,15 +314,15 @@ return function(p1)
 						textWrapped = true,
 						layoutOrder = 0,
 						text = textFieldHeaderText,
-						fontStyle = var14.Font.Header2,
-						colorStyle = var14.Theme.TextDefault,
+						fontStyle = var5.Font.Header2,
+						colorStyle = var5.Theme.TextDefault,
 						automaticSize = Enum.AutomaticSize.XY
 					}),
 					TextField = reactModule.createElement(textField, {
 						required = true,
 						layoutOrder = 1,
 						text = textInput,
-						placeholder = var15.emailPlaceholder,
+						placeholder = var6.emailPlaceholder,
 						hint = errorText,
 						error = not (errorText == ""),
 						onChange = onTextChange,
@@ -343,9 +343,9 @@ return function(p1)
 					Disclaimer = reactModule.createElement(styledTextLabel, {
 						textWrapped = true,
 						layoutOrder = 1,
-						text = var15.privacyPolicyFooter,
-						fontStyle = var14.Font.Footer,
-						colorStyle = var14.Theme.TextDefault,
+						text = var6.privacyPolicyFooter,
+						fontStyle = var5.Font.Footer,
+						colorStyle = var5.Theme.TextDefault,
 						textXAlignment = Enum.TextXAlignment.Left,
 						automaticSize = Enum.AutomaticSize.XY
 					}),
@@ -353,7 +353,7 @@ return function(p1)
 						layoutOrder = 2,
 						fontStyle = "Footer",
 						underlineAlwaysEnabled = false,
-						text = var15.privacyLinkText,
+						text = var6.privacyLinkText,
 						onActivated = openPrivacyPolicyLink
 					})
 				})

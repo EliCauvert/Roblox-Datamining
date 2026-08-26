@@ -1,11 +1,11 @@
 ﻿local versionModule = require(script.Parent.Version)
 
 return {
-	parse_dsn = function(p0)
-		if not p0 or p0 == "" then
+	parse_dsn = function(p1)
+		if not p1 or p1 == "" then
 			return nil, "DSN is required"
 		end
-		local var1, var2, var3 = p0:match("^(https?)://([^@]+)@(.+)$")
+		local var1, var2, var3 = p1:match("^(https?)://([^@]+)@(.+)$")
 		
 		if not var1 or not var2 or not var3 then
 			return nil, "Invalid DSN format"
@@ -41,11 +41,11 @@ return {
 	build_ingest_url = function(p1)
 		return `https://{p1.host}/api/{p1.project_id}/store/`
 	end,
-	build_envelope_url = function(p2)
-		return `https://{p2.host}/api/{p2.project_id}/envelope/`
+	build_envelope_url = function(p1)
+		return `https://{p1.host}/api/{p1.project_id}/envelope/`
 	end,
-	build_auth_header = function(p3)
+	build_auth_header = function(p1)
 		-- upvalues: versionModule (ref)
-		return `Sentry sentry_version={versionModule.SENTRY_VERSION}, sentry_key={p3.public_key}, sentry_client=sentry-lua/{versionModule.SDK_VERSION}`
+		return `Sentry sentry_version={versionModule.SENTRY_VERSION}, sentry_key={p1.public_key}, sentry_client=sentry-lua/{versionModule.SDK_VERSION}`
 	end
 }

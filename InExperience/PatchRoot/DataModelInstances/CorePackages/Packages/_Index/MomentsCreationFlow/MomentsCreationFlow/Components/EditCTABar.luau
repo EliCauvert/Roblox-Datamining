@@ -20,41 +20,41 @@ local creationFlowStateModule = require(momentsCreationFlow.Enums.CreationFlowSt
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 local eventNamesModule = require(momentsCreationFlow.Analytics.EventNames)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), useDispatch (ref), creationFlowStateUpdatedModule (ref), creationFlowStateModule (ref), eventNamesModule (ref), view (ref), gradientBackdrop (ref), icon (ref), threeBarsVerticalTrianglesHorizontal (ref), foundationModule (ref), text (ref), creationFlowLocalizationModule (ref), musicNote (ref), textUppercaseALowercaseA (ref)
-	local var10 = useDeviceInsets()
-	local var11 = useTokens()
-	local var12 = reactModule.useContext(creationFlowContextModule)
-	local var13 = useDispatch()
-	local var14, var15 = reactModule.useBinding(UDim2.fromScale(1, 0))
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = reactModule.useContext(creationFlowContextModule)
+	local var4 = useDispatch()
+	local var5, var6 = reactModule.useBinding(UDim2.fromScale(1, 0))
 	
 	return reactModule.createElement(view, {
 		tag = "auto-x anchor-center-right position-center-right size-0-full",
-		ZIndex = p0.zIndex
+		ZIndex = p1.zIndex
 	}, {
 		GradientBackdrop = reactModule.createElement(gradientBackdrop, {
 			rotation = 180,
-			color3 = var11.Color.Common.Scrim.Color3,
-			size = var14
+			color3 = var2.Color.Common.Scrim.Color3,
+			size = var5
 		}),
 		EditCTABar = reactModule.createElement(view, {
 			tag = "align-x-right align-y-center anchor-center-right auto-x col gap-small position-center-right size-0-full",
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
-				-- upvalues: var15 (ref)
-				var15(UDim2.new(0, 1.5 * p1.AbsoluteSize.X, 1, 0))
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
+				-- upvalues: var6 (ref)
+				var6(UDim2.new(0, 1.5 * p2.AbsoluteSize.X, 1, 0))
 			end, {})
 		}, {
 			Padding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var11.Padding.Large),
-				PaddingRight = UDim.new(0, var10.right + var11.Padding.Large)
+				PaddingLeft = UDim.new(0, var2.Padding.Large),
+				PaddingRight = UDim.new(0, var1.right + var2.Padding.Large)
 			}),
-			TrimCTAButton = if p0.captureType == Enum.CaptureType.Video then reactModule.createElement(view, {
+			TrimCTAButton = if p1.captureType == Enum.CaptureType.Video then reactModule.createElement(view, {
 				LayoutOrder = 1,
 				tag = "align-x-right align-y-center auto-xy row gap-medium padding-xsmall radius-medium",
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var13 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var12 (ref), eventNamesModule (copy)
-					var13(creationFlowStateUpdatedModule(creationFlowStateModule.Trimming))
-					var12.fireEvent(eventNamesModule.EditingFlowTrimButtonPressed)
+					-- upvalues: var4 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var3 (ref), eventNamesModule (copy)
+					var4(creationFlowStateUpdatedModule(creationFlowStateModule.Trimming))
+					var3.fireEvent(eventNamesModule.EditingFlowTrimButtonPressed)
 				end)
 			}, {
 				Icon = reactModule.createElement(icon, {
@@ -62,19 +62,19 @@ return function(p0)
 					name = threeBarsVerticalTrianglesHorizontal,
 					size = foundationModule.Enums.IconSize.Large
 				}),
-				Text = if p0.showText then reactModule.createElement(text, {
+				Text = if p1.showText then reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "auto-xy text-label-medium content-emphasis",
-					Text = var12.getLocalization(creationFlowLocalizationModule.EditingCtaTrimming)
+					Text = var3.getLocalization(creationFlowLocalizationModule.EditingCtaTrimming)
 				}) else nil
 			}) else nil,
-			MusicCTAButton = if p0.captureType == Enum.CaptureType.Video or p0.captureType == Enum.CaptureType.Screenshot then reactModule.createElement(view, {
+			MusicCTAButton = if p1.captureType == Enum.CaptureType.Video or p1.captureType == Enum.CaptureType.Screenshot then reactModule.createElement(view, {
 				LayoutOrder = 2,
 				tag = "align-x-right align-y-center auto-xy row gap-medium padding-xsmall radius-medium",
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var13 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var12 (ref), eventNamesModule (copy)
-					var13(creationFlowStateUpdatedModule(creationFlowStateModule.Music))
-					var12.fireEvent(eventNamesModule.EditingFlowMusicButtonPressed)
+					-- upvalues: var4 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var3 (ref), eventNamesModule (copy)
+					var4(creationFlowStateUpdatedModule(creationFlowStateModule.Music))
+					var3.fireEvent(eventNamesModule.EditingFlowMusicButtonPressed)
 				end)
 			}, {
 				Icon = reactModule.createElement(icon, {
@@ -82,19 +82,19 @@ return function(p0)
 					name = musicNote,
 					size = foundationModule.Enums.IconSize.Large
 				}),
-				Text = if p0.showText then reactModule.createElement(text, {
+				Text = if p1.showText then reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "auto-xy text-label-medium content-emphasis",
-					Text = var12.getLocalization(creationFlowLocalizationModule.EditingCtaMusic)
+					Text = var3.getLocalization(creationFlowLocalizationModule.EditingCtaMusic)
 				}) else nil
 			}) else nil,
-			TextOverlayCTAButton = if p0.captureType == Enum.CaptureType.Video then reactModule.createElement(view, {
+			TextOverlayCTAButton = if p1.captureType == Enum.CaptureType.Video then reactModule.createElement(view, {
 				LayoutOrder = 3,
 				tag = "align-x-right align-y-center auto-xy row gap-medium padding-xsmall radius-medium",
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var13 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var12 (ref), eventNamesModule (copy)
-					var13(creationFlowStateUpdatedModule(creationFlowStateModule.TextOverlay))
-					var12.fireEvent(eventNamesModule.EditingFlowTextOverlayButtonPressed)
+					-- upvalues: var4 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var3 (ref), eventNamesModule (copy)
+					var4(creationFlowStateUpdatedModule(creationFlowStateModule.TextOverlay))
+					var3.fireEvent(eventNamesModule.EditingFlowTextOverlayButtonPressed)
 				end)
 			}, {
 				Icon = reactModule.createElement(icon, {
@@ -102,10 +102,10 @@ return function(p0)
 					name = textUppercaseALowercaseA,
 					size = foundationModule.Enums.IconSize.Large
 				}),
-				Text = if p0.showText then reactModule.createElement(text, {
+				Text = if p1.showText then reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "auto-xy text-label-medium content-emphasis",
-					Text = var12.getLocalization(creationFlowLocalizationModule.EditingCtaTextOverlay)
+					Text = var3.getLocalization(creationFlowLocalizationModule.EditingCtaTextOverlay)
 				}) else nil
 			}) else nil
 		})

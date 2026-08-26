@@ -67,17 +67,17 @@ function t:loadFont(p1)
 	return cryoModule.Dictionary.join(self:mapLegacyFont(t, 16), t)
 end
 
-function t.mapLegacyFont(_, p1, _)
+function t.mapLegacyFont(_, p2, _)
 	return {
-		Title = p1.HeadingLarge,
-		Header1 = p1.HeadingSmall,
-		Header2 = p1.TitleLarge,
-		SubHeader1 = p1.TitleLarge,
-		Body = p1.BodyLarge,
-		CaptionHeader = p1.CaptionLarge,
-		CaptionSubHeader = p1.CaptionLarge,
-		CaptionBody = p1.BodySmall,
-		Footer = p1.CaptionSmall
+		Title = p2.HeadingLarge,
+		Header1 = p2.HeadingSmall,
+		Header2 = p2.TitleLarge,
+		SubHeader1 = p2.TitleLarge,
+		Body = p2.BodyLarge,
+		CaptionHeader = p2.CaptionLarge,
+		CaptionSubHeader = p2.CaptionLarge,
+		CaptionBody = p2.BodySmall,
+		Footer = p2.CaptionSmall
 	}
 end
 

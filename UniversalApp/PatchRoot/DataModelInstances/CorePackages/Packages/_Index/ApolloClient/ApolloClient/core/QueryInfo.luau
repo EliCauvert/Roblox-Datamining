@@ -25,74 +25,74 @@ local isNetworkRequestInFlight = networkStatusModule.isNetworkRequestInFlight
 local _ = require(script.Parent.Parent.errors)
 local t_1 = { FORBID = 0, OVERWRITE = 1, MERGE = 2 }
 t.CacheWriteBehavior = t_1
-local var6 = if canUseWeakMap then weakMap.new() else map.new(nil)
+local var1 = if canUseWeakMap then weakMap.new() else map.new(nil)
 
-local function _(p0, p1)
-	-- upvalues: var6 (ref)
-	local var9 = p0[p1]
+local function _(p1, p2)
+	-- upvalues: var1 (ref)
+	local var2 = p1[p2]
 	
-	if typeof(var9) == "function" then
-		p0[p1] = function(...)
-			-- upvalues: var6 (copy), p0 (ref), var9 (ref)
-			var6:set(p0, (var6:get(p0) + 1) % 1000000000000000)
+	if typeof(var2) == "function" then
+		p1[p2] = function(...)
+			-- upvalues: var1 (copy), p1 (ref), var2 (ref)
+			var1:set(p1, (var1:get(p1) + 1) % 1000000000000000)
 			
-			return var9(...)
+			return var2(...)
 		end
 	end
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: boolean (ref), clearTimeout (ref)
-	if boolean.toJSBoolean(p2.notifyTimeout) then
-		clearTimeout(p2.notifyTimeout)
-		p2.notifyTimeout = nil
+	if boolean.toJSBoolean(p1.notifyTimeout) then
+		clearTimeout(p1.notifyTimeout)
+		p1.notifyTimeout = nil
 	end
 end
 
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p3)
-	-- upvalues: set (ref), var6 (ref), t_2 (ref)
+function t_2.new(p1)
+	-- upvalues: set (ref), var1 (ref), t_2 (ref)
 	local t = {
 		listeners = set.new(),
 		document = nil,
 		lastRequestId = 1,
 		subscriptions = set.new(),
 		stopped = false,
-		cache = p3,
+		cache = p1,
 		dirty = false,
 		observableQuery = nil
 	}
 	
-	if not var6:has(p3) then
-		var6:set(p3, 0)
-		local evict = p3.evict
+	if not var1:has(p1) then
+		var1:set(p1, 0)
+		local evict = p1.evict
 		
 		if typeof(evict) == "function" then
 			function p3.evict(...)
-				-- upvalues: var6 (copy), p3 (ref), evict (ref)
-				var6:set(p3, (var6:get(p3) + 1) % 1000000000000000)
+				-- upvalues: var1 (copy), p1 (ref), evict (ref)
+				var1:set(p1, (var1:get(p1) + 1) % 1000000000000000)
 				
 				return evict(...)
 			end
 		end
-		local modify = p3.modify
+		local modify = p1.modify
 		
 		if typeof(modify) == "function" then
 			function p3.modify(...)
-				-- upvalues: var6 (copy), p3 (ref), modify (ref)
-				var6:set(p3, (var6:get(p3) + 1) % 1000000000000000)
+				-- upvalues: var1 (copy), p1 (ref), modify (ref)
+				var1:set(p1, (var1:get(p1) + 1) % 1000000000000000)
 				
 				return modify(...)
 			end
 		end
-		local reset = p3.reset
+		local reset = p1.reset
 		
 		if typeof(reset) == "function" then
 			function p3.reset(...)
-				-- upvalues: var6 (copy), p3 (ref), reset (ref)
-				var6:set(p3, (var6:get(p3) + 1) % 1000000000000000)
+				-- upvalues: var1 (copy), p1 (ref), reset (ref)
+				var1:set(p1, (var1:get(p1) + 1) % 1000000000000000)
 				
 				return reset(...)
 			end
@@ -101,26 +101,26 @@ function t_2.new(p3)
 	return setmetatable(t, t_2)
 end
 
-function t_2:init(p4)
+function t_2:init(p1)
 	-- upvalues: boolean (ref), networkStatus (ref), equalModule (ref), object (ref)
-	local var11 = if boolean.toJSBoolean(self.variables) and self.networkStatus ~= networkStatus.loading and not equalModule(self.variables, p4.variables) then networkStatus.setVariables elseif boolean.toJSBoolean(p4.networkStatus) then p4.networkStatus else networkStatus.loading
+	local var2 = if boolean.toJSBoolean(self.variables) and self.networkStatus ~= networkStatus.loading and not equalModule(self.variables, p1.variables) then networkStatus.setVariables elseif boolean.toJSBoolean(p1.networkStatus) then p1.networkStatus else networkStatus.loading
 	
-	if not equalModule(p4.variables, self.variables) then
+	if not equalModule(p1.variables, self.variables) then
 		self.lastDiff = nil
 	end
 	object.assign(self, {
-		document = p4.document,
-		variables = p4.variables,
+		document = p1.document,
+		variables = p1.variables,
 		networkError = object.None,
 		graphQLErrors = if boolean.toJSBoolean(self.graphQLErrors) then self.graphQLErrors else {},
-		networkStatus = var11
+		networkStatus = var2
 	})
 	
-	if boolean.toJSBoolean(p4.observableQuery) then
-		self:setObservableQuery(p4.observableQuery)
+	if boolean.toJSBoolean(p1.observableQuery) then
+		self:setObservableQuery(p1.observableQuery)
 	end
-	if boolean.toJSBoolean(p4.lastRequestId) then
-		self.lastRequestId = p4.lastRequestId
+	if boolean.toJSBoolean(p1.lastRequestId) then
+		self.lastRequestId = p1.lastRequestId
 	end
 	return self
 end
@@ -135,41 +135,41 @@ function t_2:reset()
 	self.dirty = false
 end
 
-function t_2:getDiff(p5)
+function t_2:getDiff(p1)
 	-- upvalues: boolean (ref), equalModule (ref)
-	if p5 == nil then
-		p5 = self.variables
+	if p1 == nil then
+		p1 = self.variables
 	end
-	local var12 = self:getDiffOptions(p5)
+	local var2 = self:getDiffOptions(p1)
 	
-	if boolean.toJSBoolean(self.lastDiff) and equalModule(var12, self.lastDiff.options) then
+	if boolean.toJSBoolean(self.lastDiff) and equalModule(var2, self.lastDiff.options) then
 		return self.lastDiff.diff
 	end
-	self.variables = p5
+	self.variables = p1
 	self:updateWatch(self.variables)
 	local observableQuery = self.observableQuery
 	
 	if boolean.toJSBoolean(observableQuery) and observableQuery.options.fetchPolicy == "no-cache" then
 		return { complete = false }
 	end
-	local var13 = self.cache:diff(var12)
-	self:updateLastDiff(var13, var12)
+	local var3 = self.cache:diff(var2)
+	self:updateLastDiff(var3, var2)
 	
-	return var13
+	return var3
 end
 
-function t_2:updateLastDiff(p6, p7)
+function t_2:updateLastDiff(p1, p2)
 	-- upvalues: boolean (ref)
-	self.lastDiff = boolean.toJSBoolean(p6) and ({
-		diff = p6,
-		options = if boolean.toJSBoolean(p7) then p7 else self:getDiffOptions()
+	self.lastDiff = boolean.toJSBoolean(p1) and ({
+		diff = p1,
+		options = if boolean.toJSBoolean(p2) then p2 else self:getDiffOptions()
 	} or nil)
 end
 
-function t_2:getDiffOptions(p8)
+function t_2:getDiffOptions(p1)
 	-- upvalues: boolean (ref)
-	if p8 == nil then
-		p8 = self.variables
+	if p1 == nil then
+		p1 = self.variables
 	end
 	local observableQuery = self.observableQuery
 	
@@ -177,19 +177,19 @@ function t_2:getDiffOptions(p8)
 		returnPartialData = true,
 		optimistic = true,
 		query = self.document,
-		variables = p8,
+		variables = p1,
 		canonizeResults = not boolean.toJSBoolean(observableQuery) or observableQuery.options.canonizeResults ~= false
 	}
 end
 
-function t_2:setDiff(p9)
+function t_2:setDiff(p1)
 	-- upvalues: boolean (ref), equalModule (ref), setTimeout (ref)
-	local var14 = if boolean.toJSBoolean(self.lastDiff) then self.lastDiff.diff else self.lastDiff
-	self:updateLastDiff(p9)
+	local var2 = if boolean.toJSBoolean(self.lastDiff) then self.lastDiff.diff else self.lastDiff
+	self:updateLastDiff(p1)
 	local _ = nil
 	local _ = nil
 	
-	if not self.dirty and not equalModule(if boolean.toJSBoolean(var14) then var14.result else var14, if boolean.toJSBoolean(p9) then p9.result else p9) then
+	if not self.dirty and not equalModule(if boolean.toJSBoolean(var2) then var2.result else var2, if boolean.toJSBoolean(p1) then p1.result else p1) then
 		self.dirty = true
 		
 		if not boolean.toJSBoolean(self.notifyTimeout) then
@@ -201,25 +201,25 @@ function t_2:setDiff(p9)
 	end
 end
 
-function t_2:setObservableQuery(p10)
+function t_2:setObservableQuery(p1)
 	-- upvalues: boolean (ref)
-	if p10 == self.observableQuery then return end
+	if p1 == self.observableQuery then return end
 	if boolean.toJSBoolean(self.oqListener) then
 		self.listeners:delete(self.oqListener)
 	end
-	self.observableQuery = p10
+	self.observableQuery = p1
 	
-	if boolean.toJSBoolean(p10) and p10 ~= nil then
-		p10.queryInfo = self
+	if boolean.toJSBoolean(p1) and p1 ~= nil then
+		p1.queryInfo = self
 		
 		function self.oqListener()
-			-- upvalues: boolean (copy), self (ref), p10 (ref)
+			-- upvalues: boolean (copy), self (ref), p1 (ref)
 			if boolean.toJSBoolean(self:getDiff().fromOptimisticTransaction) then
-				p10:observe()
+				p1:observe()
 				
 				return
 			end
-			p10:reobserve()
+			p1:reobserve()
 		end
 		
 		self.listeners:add(self.oqListener)
@@ -236,9 +236,9 @@ function t_2:notify()
 		self.notifyTimeout = nil
 	end
 	if self:shouldNotify() then
-		self.listeners:forEach(function(p11)
+		self.listeners:forEach(function(p1)
 			-- upvalues: self (ref)
-			return p11(self)
+			return p1(self)
 		end)
 	end
 	self.dirty = false
@@ -262,8 +262,8 @@ function t_2:stop()
 		self:reset()
 		self:cancel()
 		self.cancel = t_2.cancel
-		self.subscriptions:forEach(function(p12)
-			return p12:unsubscribe()
+		self.subscriptions:forEach(function(p1)
+			return p1:unsubscribe()
 		end)
 		local observableQuery = self.observableQuery
 		
@@ -275,25 +275,25 @@ end
 
 function t_2.cancel(_) end
 
-function t_2:updateWatch(p13)
+function t_2:updateWatch(p1)
 	-- upvalues: boolean (ref), object (ref), equalModule (ref)
-	if p13 == nil then
-		p13 = self.variables
+	if p1 == nil then
+		p1 = self.variables
 	end
 	local observableQuery = self.observableQuery
 	
 	if boolean.toJSBoolean(observableQuery) and observableQuery.options.fetchPolicy == "no-cache" then return end
-	local var15 = object.assign({}, self:getDiffOptions(p13), {
+	local var2 = object.assign({}, self:getDiffOptions(p1), {
 		watcher = self,
-		callback = function(_, p14)
+		callback = function(_, p2)
 			-- upvalues: self (ref)
-			return self:setDiff(p14)
+			return self:setDiff(p2)
 		end
 	})
 	
-	if not boolean.toJSBoolean(self.lastWatch) or not equalModule(object.assign({}, var15, { callback = object.None }), object.assign({}, self.lastWatch, { callback = object.None })) then
+	if not boolean.toJSBoolean(self.lastWatch) or not equalModule(object.assign({}, var2, { callback = object.None }), object.assign({}, self.lastWatch, { callback = object.None })) then
 		self:cancel()
-		self.lastWatch = var15
+		self.lastWatch = var2
 		self.cancel = self.cache:watch(self.lastWatch)
 	end
 end
@@ -302,59 +302,59 @@ function t_2:resetLastWrite()
 	self.lastWrite = nil
 end
 
-function t_2:shouldWrite(p15, p16)
-	-- upvalues: boolean (ref), var6 (ref), equalModule (ref)
+function t_2:shouldWrite(p1, p2)
+	-- upvalues: boolean (ref), var1 (ref), equalModule (ref)
 	local lastWrite = self.lastWrite
 	
-	return not (boolean.toJSBoolean(lastWrite) and (lastWrite.dmCount == var6:get(self.cache) and (equalModule(p16, lastWrite.variables) and equalModule(p15.data, lastWrite.result.data))))
+	return not (boolean.toJSBoolean(lastWrite) and (lastWrite.dmCount == var1:get(self.cache) and (equalModule(p2, lastWrite.variables) and equalModule(p1.data, lastWrite.result.data))))
 end
 
-local var8 = nil
+local var2 = nil
 
-function t_2:markResult(p17, p18, p19)
-	-- upvalues: isNonEmptyArray (ref), t_1 (ref), var8 (write), var6 (ref), boolean (ref)
-	if isNonEmptyArray(p17.errors) then
-		self.graphQLErrors = p17.errors
+function t_2:markResult(p1, p2, p3)
+	-- upvalues: isNonEmptyArray (ref), t_1 (ref), var2 (write), var1 (ref), boolean (ref)
+	if isNonEmptyArray(p1.errors) then
+		self.graphQLErrors = p1.errors
 	else
 		self.graphQLErrors = {}
 	end
 	self:reset()
 	
-	if p18.fetchPolicy == "no-cache" then
-		self:updateLastDiff({ complete = true, result = p17.data }, self:getDiffOptions(p18.variables))
+	if p2.fetchPolicy == "no-cache" then
+		self:updateLastDiff({ complete = true, result = p1.data }, self:getDiffOptions(p2.variables))
 		
 		return
-	elseif p19 ~= t_1.FORBID then
-		if var8(p17, p18.errorPolicy) then
-			self.cache:performTransaction(function(p20)
-				-- upvalues: self (ref), p17 (ref), p18 (ref), p19 (ref), t_1 (copy), var6 (copy), boolean (copy)
-				if self:shouldWrite(p17, p18.variables) then
-					p20:writeQuery({
+	elseif p3 ~= t_1.FORBID then
+		if var2(p1, p2.errorPolicy) then
+			self.cache:performTransaction(function(p4)
+				-- upvalues: self (ref), p1 (ref), p2 (ref), p3 (ref), t_1 (copy), var1 (copy), boolean (copy)
+				if self:shouldWrite(p1, p2.variables) then
+					p4:writeQuery({
 						query = self.document,
-						data = p17.data,
-						variables = p18.variables,
-						overwrite = p19 == t_1.OVERWRITE
+						data = p1.data,
+						variables = p2.variables,
+						overwrite = p3 == t_1.OVERWRITE
 					})
 					self.lastWrite = {
-						result = p17,
-						variables = p18.variables,
-						dmCount = var6:get(self.cache)
+						result = p1,
+						variables = p2.variables,
+						dmCount = var1:get(self.cache)
 					}
 				elseif boolean.toJSBoolean(self.lastDiff) and boolean.toJSBoolean(self.lastDiff.diff.complete) then
-					p17.data = self.lastDiff.diff.result
+					p1.data = self.lastDiff.diff.result
 					
 					return
 				end
-				local variablesDiffOptions = self:getDiffOptions(p18.variables)
-				local var17 = p20:diff(variablesDiffOptions)
+				local variablesDiffOptions = self:getDiffOptions(p2.variables)
+				local var3 = p4:diff(variablesDiffOptions)
 				
 				if not self.stopped then
-					self:updateWatch(p18.variables)
+					self:updateWatch(p2.variables)
 				end
-				self:updateLastDiff(var17, variablesDiffOptions)
+				self:updateLastDiff(var3, variablesDiffOptions)
 				
-				if boolean.toJSBoolean(var17.complete) then
-					p17.data = var17.result
+				if boolean.toJSBoolean(var3.complete) then
+					p1.data = var3.result
 				end
 			end)
 			
@@ -372,34 +372,34 @@ function t_2:markReady()
 	return self.networkStatus
 end
 
-function t_2:markError(p21)
+function t_2:markError(p1)
 	-- upvalues: networkStatus (ref), boolean (ref)
 	self.networkStatus = networkStatus.error
 	self.lastWrite = nil
 	self:reset()
 	
-	if boolean.toJSBoolean(p21.graphQLErrors) then
-		self.graphQLErrors = p21.graphQLErrors
+	if boolean.toJSBoolean(p1.graphQLErrors) then
+		self.graphQLErrors = p1.graphQLErrors
 	end
-	if boolean.toJSBoolean(p21.networkError) then
-		self.networkError = p21.networkError
+	if boolean.toJSBoolean(p1.networkError) then
+		self.networkError = p1.networkError
 	end
-	return p21
+	return p1
 end
 
 t.QueryInfo = t_2
 
-function t.shouldWriteResult(p22, p23)
+function t.shouldWriteResult(p1, p2)
 	-- upvalues: graphQLResultHasError (ref), boolean (ref)
-	if p23 == nil then
-		p23 = "none"
+	if p2 == nil then
+		p2 = "none"
 	end
-	local var18 = not graphQLResultHasError(p22)
+	local var3 = not graphQLResultHasError(p1)
 	
-	if not var18 and (if p23 ~= "ignore" then p23 == "all" else true) and boolean.toJSBoolean(p22.data) then
-		var18 = true
+	if not var3 and (if p2 ~= "ignore" then p2 == "all" else true) and boolean.toJSBoolean(p1.data) then
+		var3 = true
 	end
-	return var18
+	return var3
 end
 
 return t

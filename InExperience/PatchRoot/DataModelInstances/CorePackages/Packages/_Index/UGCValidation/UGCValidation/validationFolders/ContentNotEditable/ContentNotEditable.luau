@@ -12,11 +12,11 @@ return {
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateBackendContentNotEditable),
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: validationEnumsModule (ref), constantsModule (ref), errorSourceStringsModule (ref)
-		if p1.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then return end
-		local descendants = p1.rootInstance:GetDescendants()
-		table.insert(descendants, p1.rootInstance)
+		if p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then return end
+		local descendants = p2.rootInstance:GetDescendants()
+		table.insert(descendants, p2.rootInstance)
 		
 		for i, v in descendants do
 			local className = constantsModule.CONTENT_TYPED_PROPERTIES_BY_CLASS[v.ClassName]
@@ -24,7 +24,7 @@ return {
 			if className then
 				for i_1, v_1 in className do
 					if v[v_1].Object ~= nil then
-						p0:fail(errorSourceStringsModule.Keys.ContentNotEditable, { InstanceFullName = v:GetFullName(), FieldName = v_1 })
+						p1:fail(errorSourceStringsModule.Keys.ContentNotEditable, { InstanceFullName = v:GetFullName(), FieldName = v_1 })
 					end
 				end
 			end

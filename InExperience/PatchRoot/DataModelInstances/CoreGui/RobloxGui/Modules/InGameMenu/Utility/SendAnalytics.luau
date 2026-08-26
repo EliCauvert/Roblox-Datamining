@@ -4,10 +4,10 @@ local constantsModule = require(script.Parent.Parent.Resources.Constants)
 local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local inputTypeMap = constantsModule.InputTypeMap
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: rbxAnalyticsService (ref), userInputService (ref), constantsModule (ref), inputTypeMap (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref)
-	if p4 == nil then
-		p4 = rbxAnalyticsService
+	if p5 == nil then
+		p5 = rbxAnalyticsService
 	end
 	local function reportSettingsForAnalytics()
 		-- upvalues: userInputService (copy)
@@ -44,17 +44,17 @@ return function(p0, p1, p2, p3, p4)
 		return t
 	end
 	
-	if p3 == true then
-		p2 = reportSettingsForAnalytics()
-		p1 = constantsModule.AnalyticsSettingsChangeName
-		p0 = constantsModule.AnalyticsInGameMenuName
+	if p4 == true then
+		p3 = reportSettingsForAnalytics()
+		p2 = constantsModule.AnalyticsSettingsChangeName
+		p1 = constantsModule.AnalyticsInGameMenuName
 	end
-	p2 = p2 or {}
-	p2.universeid = tostring(game.GameId)
-	p2.inputDevice = tostring(inputTypeMap[userInputService:GetLastInputType()] or userInputService:GetLastInputType())
+	p3 = p3 or {}
+	p3.universeid = tostring(game.GameId)
+	p3.inputDevice = tostring(inputTypeMap[userInputService:GetLastInputType()] or userInputService:GetLastInputType())
 	
-	if p2.playsessionid == nil and rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
-		p2.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+	if p3.playsessionid == nil and rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
+		p3.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	p4:SetRBXEventStream(constantsModule.AnalyticsTargetName, p0, p1, p2)
+	p5:SetRBXEventStream(constantsModule.AnalyticsTargetName, p1, p2, p3)
 end

@@ -22,94 +22,94 @@ local useIsComponentInputEndedModule = require(peopleReactView.Hooks.useIsCompon
 local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local fFlagAddIEMProfilePage = require(parent.SharedFlags).FFlagAddIEMProfilePage
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useGetPeopleServiceModule (ref), fFlagAddIEMProfilePage (ref), personButtonConfigsModule (ref), useInExperienceCombinedNameModule (ref), signalsReactModule (ref), iconName (ref), iconVariant (ref), useIsComponentInputEndedModule (ref), controlState (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), guiService (ref), view (ref), stateLayerAffordance (ref), text (ref), formatUsername (ref), iconButton (ref), buttonVariant (ref), inputSize (ref)
-	local var11 = reactModule.useRef(nil)
-	local var12 = useGetPeopleServiceModule("FriendStatusStore")
-	local var13 = useGetPeopleServiceModule("Constants")
-	local var14 = if fFlagAddIEMProfilePage then useGetPeopleServiceModule("PeopleAnalyticsManager") else nil
-	local var15 = if fFlagAddIEMProfilePage then useGetPeopleServiceModule("SettingsHubService") else nil
-	local var16 = personButtonConfigsModule(p0.person.UserId)
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var16 (ref), var13 (ref)
-		return var16[var13.PERSON_BUTTONS.ADD_FRIEND]
-	end, { var16 })
-	local var18 = useInExperienceCombinedNameModule(p0.person.UserId, p0.person.DisplayName)
-	local var19 = signalsReactModule.useSignalState(var12.getFriendStatus(p0.person.UserId))
-	local var20 = signalsReactModule.useSignalState(var12.getIsFriendButtonGrayedOut(p0.person.UserId))
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: var19 (ref), iconName (copy), iconVariant (copy), var20 (ref)
-		return if var19 then {
+	local var1 = reactModule.useRef(nil)
+	local var2 = useGetPeopleServiceModule("FriendStatusStore")
+	local var3 = useGetPeopleServiceModule("Constants")
+	local var4 = if fFlagAddIEMProfilePage then useGetPeopleServiceModule("PeopleAnalyticsManager") else nil
+	local var5 = if fFlagAddIEMProfilePage then useGetPeopleServiceModule("SettingsHubService") else nil
+	local var6 = personButtonConfigsModule(p1.person.UserId)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var6 (ref), var3 (ref)
+		return var6[var3.PERSON_BUTTONS.ADD_FRIEND]
+	end, { var6 })
+	local var8 = useInExperienceCombinedNameModule(p1.person.UserId, p1.person.DisplayName)
+	local var9 = signalsReactModule.useSignalState(var2.getFriendStatus(p1.person.UserId))
+	local var10 = signalsReactModule.useSignalState(var2.getIsFriendButtonGrayedOut(p1.person.UserId))
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: var9 (ref), iconName (copy), iconVariant (copy), var10 (ref)
+		return if var9 then {
 			name = iconName.PersonCheck,
 			variant = iconVariant.Filled
-		} elseif var20 then { name = iconName.Clock, variant = iconVariant.Filled } else {
+		} elseif var10 then { name = iconName.Clock, variant = iconVariant.Filled } else {
 			name = iconName.PersonPlus,
 			variant = iconVariant.Regular
 		}
-	end, { var19, var20 })
-	local var22 = useIsComponentInputEndedModule(var11)
-	local var23 = signalsReactModule.useSignalState(var12.getIsFriendButtonDisabled(p0.person.UserId))
-	local var24, var25 = reactModule.useState(false)
+	end, { var9, var10 })
+	local var12 = useIsComponentInputEndedModule(var1)
+	local var13 = signalsReactModule.useSignalState(var2.getIsFriendButtonDisabled(p1.person.UserId))
+	local var14, var15 = reactModule.useState(false)
 	
 	return reactModule.createElement(view, {
 		tag = "row size-full-1400 align-y-center padding-x-small radius-medium",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		stateLayer = {
-			affordance = if var24 or var22 then stateLayerAffordance.None else stateLayerAffordance.Background
+			affordance = if var14 or var12 then stateLayerAffordance.None else stateLayerAffordance.Background
 		},
 		onActivated = if fFlagAddIEMProfilePage then if fFlagAddIEMProfilePage then reactModule.useCallback(function()
-			-- upvalues: var15 (ref), p0 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), var14 (ref), guiService (copy)
-			local var26 = var15.hubRef()
+			-- upvalues: var5 (ref), p1 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), var4 (ref), guiService (copy)
+			local var16 = var5.hubRef()
 			
-			if var26 then
-				var26:SwitchToReactPage(var26.PlayerProfilePage, {
-					userId = p0.person.UserId,
+			if var16 then
+				var16:SwitchToReactPage(var16.PlayerProfilePage, {
+					userId = p1.person.UserId,
 					inspectAvatar = function()
-						-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), var14 (copy), guiService (copy), p0 (copy), var26 (ref)
-						var14:trackInspectButton(game.GameId, if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else nil, "player_profile")
-						guiService:InspectPlayerFromUserIdWithCtx(p0.person.UserId, "playerProfile")
-						var26:SetVisibility(false)
+						-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), var4 (copy), guiService (copy), p1 (copy), var16 (ref)
+						var4:trackInspectButton(game.GameId, if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else nil, "player_profile")
+						guiService:InspectPlayerFromUserIdWithCtx(p1.person.UserId, "playerProfile")
+						var16:SetVisibility(false)
 					end,
 					closePage = function()
-						-- upvalues: var26 (ref)
-						var26:CloseReactPage()
+						-- upvalues: var16 (ref)
+						var16:CloseReactPage()
 					end
 				})
 			end
 		end, {}) else nil else nil,
-		ref = var11
+		ref = var1
 	}, {
 		NameContainer = reactModule.createElement(view, { tag = "col fill auto-y", LayoutOrder = 1 }, {
 			Name = reactModule.createElement(text, {
 				tag = "size-full-0 auto-y content-emphasis text-title-medium text-align-x-left text-truncate-end padding-right-small",
 				LayoutOrder = 1,
-				Text = var18
+				Text = var8
 			}),
 			Handle = reactModule.createElement(text, {
 				tag = "size-full-0 auto-y content-default text-body-medium text-align-x-left text-truncate-end padding-right-small",
 				LayoutOrder = 2,
-				Text = formatUsername(p0.person.Name)
+				Text = formatUsername(p1.person.Name)
 			})
 		}),
 		ConnectButtonBackground = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			stateLayer = { affordance = stateLayerAffordance.None },
-			onStateChanged = reactModule.useCallback(function(p1)
-				-- upvalues: var25 (ref), controlState (copy)
-				var25(if p1 ~= controlState.Hover then p1 == controlState.Pressed else true)
+			onStateChanged = reactModule.useCallback(function(p2)
+				-- upvalues: var15 (ref), controlState (copy)
+				var15(if p2 ~= controlState.Hover then p2 == controlState.Pressed else true)
 			end, {})
 		}, {
 			ConnectButton = reactModule.createElement(iconButton, {
-				icon = var21,
-				variant = if var23 then buttonVariant.Utility else buttonVariant.Standard,
+				icon = var11,
+				variant = if var13 then buttonVariant.Utility else buttonVariant.Standard,
 				size = inputSize.Medium,
-				isDisabled = var23,
-				Visible = var17.shouldShow(),
+				isDisabled = var13,
+				Visible = var7.shouldShow(),
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var17 (ref), var13 (ref)
-					var17.onActivated(var13.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
-				end, { var17.onActivated })
+					-- upvalues: var7 (ref), var3 (ref)
+					var7.onActivated(var3.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
+				end, { var7.onActivated })
 			})
 		})
 	})

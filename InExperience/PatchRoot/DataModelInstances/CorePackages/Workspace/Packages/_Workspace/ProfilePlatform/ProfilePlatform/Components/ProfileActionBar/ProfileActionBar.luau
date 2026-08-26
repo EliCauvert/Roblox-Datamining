@@ -26,13 +26,13 @@ local fFlagProfilePlatformEnableTransferTooltipModule = require(profilePlatform.
 local _ = require(profilePlatform.Types.UpsellTooltipProps)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagEnableProfilePlatformDisabledReasonTextModule (ref), useTokens (ref), fFlagAXEnableProfileTab (ref), useIsMeTabModule (ref), buttonVariant (ref), reactModule (ref), useDisabledReasonTextModule (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), actionMenuButtonModule (ref), button (ref), fillBehavior (ref), inputSize (ref), fFlagPortEnableCommunityVerificationModalModule (ref), fFlagEnableCommunityVerificationModalModule (ref), iconButton (ref), iconSize (ref), fFlagProfilePlatformEnableTransferTooltipModule (ref), profileMoreButtonModule (ref), plusMoreMenuTooltipModule (ref), view (ref), text (ref), horizontalPageMargin (ref)
-	local var14 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useTokens() else nil
-	local var15 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
-	local profileActions = p0.profileActions
+	local var1 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useTokens() else nil
+	local var2 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
+	local profileActions = p1.profileActions
 	local standard = buttonVariant.Standard
-	local var16 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useDisabledReasonTextModule(if fFlagEnableProfilePlatformDisabledReasonTextModule then reactModule.useMemo(function()
+	local var3 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useDisabledReasonTextModule(if fFlagEnableProfilePlatformDisabledReasonTextModule then reactModule.useMemo(function()
 		-- upvalues: profileActions (ref)
 		if profileActions.primary then
 			for i, v in ipairs(profileActions.primary) do
@@ -52,7 +52,7 @@ return function(p0)
 			tag = "size-full-0 auto-y row align-y-center gap-small",
 			LayoutOrder = 0
 		}, reactModule.useMemo(function()
-			-- upvalues: profileActions (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (copy), reactModule (copy), actionMenuButtonModule (copy), p0 (ref), standard (ref), buttonVariant (copy), button (copy), fillBehavior (copy), inputSize (copy), fFlagPortEnableCommunityVerificationModalModule (copy), fFlagEnableCommunityVerificationModalModule (copy), iconButton (copy), iconSize (copy), fFlagProfilePlatformEnableTransferTooltipModule (copy), profileMoreButtonModule (copy), plusMoreMenuTooltipModule (copy)
+			-- upvalues: profileActions (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (copy), reactModule (copy), actionMenuButtonModule (copy), p1 (ref), standard (ref), buttonVariant (copy), button (copy), fillBehavior (copy), inputSize (copy), fFlagPortEnableCommunityVerificationModalModule (copy), fFlagEnableCommunityVerificationModalModule (copy), iconButton (copy), iconSize (copy), fFlagProfilePlatformEnableTransferTooltipModule (copy), profileMoreButtonModule (copy), plusMoreMenuTooltipModule (copy)
 			local t = {}
 			
 			if profileActions.primary then
@@ -62,7 +62,7 @@ return function(p0)
 							text = v.text,
 							variant = v.variant,
 							menuItems = v.menuItems,
-							buttonRef = if i == 1 then p0.primaryButtonRef else nil,
+							buttonRef = if i == 1 then p1.primaryButtonRef else nil,
 							onMenuOpened = v.onActivated,
 							LayoutOrder = i
 						})
@@ -77,7 +77,7 @@ return function(p0)
 						width = UDim.new(1, 0),
 						fillBehavior = fillBehavior.Fill,
 						size = inputSize.Medium,
-						ref = if i == 1 then p0.primaryButtonRef else nil,
+						ref = if i == 1 then p1.primaryButtonRef else nil,
 						icon = if fFlagPortEnableCommunityVerificationModalModule and fFlagEnableCommunityVerificationModalModule then v.icon else nil,
 						LayoutOrder = i
 					})
@@ -95,27 +95,27 @@ return function(p0)
 					})
 				end
 			end
-			if p0.openContextualMenu then
-				local var19 = #(profileActions.primary or {}) + #(profileActions.secondary or {}) + 1
-				local upsellTooltipProps = p0.upsellTooltipProps
+			if p1.openContextualMenu then
+				local var4 = #(profileActions.primary or {}) + #(profileActions.secondary or {}) + 1
+				local upsellTooltipProps = p1.upsellTooltipProps
 				
-				if fFlagProfilePlatformEnableTransferTooltipModule and p0.showPlusMoreMenuTooltip and (upsellTooltipProps and upsellTooltipProps.plusMoreMenuTooltipBody) and upsellTooltipProps.plusMoreMenuTooltipBody ~= "" then
-					t[var19] = reactModule.createElement("Frame", {
+				if fFlagProfilePlatformEnableTransferTooltipModule and p1.showPlusMoreMenuTooltip and (upsellTooltipProps and upsellTooltipProps.plusMoreMenuTooltipBody) and upsellTooltipProps.plusMoreMenuTooltipBody ~= "" then
+					t[var4] = reactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						ClipsDescendants = false,
 						ZIndex = 10,
 						Size = UDim2.fromOffset(40, 40),
-						LayoutOrder = var19
+						LayoutOrder = var4
 					}, {
 						Button = reactModule.createElement(profileMoreButtonModule, {
 							layoutOrder = 1,
-							onActivated = p0.openContextualMenu,
-							isSelected = p0.isContextualMenuOpen,
-							buttonRef = p0.moreButtonRef
+							onActivated = p1.openContextualMenu,
+							isSelected = p1.isContextualMenuOpen,
+							buttonRef = p1.moreButtonRef
 						}),
 						PlusMoreMenuTooltip = reactModule.createElement(plusMoreMenuTooltipModule, {
-							anchorRef = p0.moreButtonRef,
-							isOpen = p0.showPlusMoreMenuTooltip == true,
+							anchorRef = p1.moreButtonRef,
+							isOpen = p1.showPlusMoreMenuTooltip == true,
 							text = upsellTooltipProps.plusMoreMenuTooltipBody,
 							title = upsellTooltipProps.plusMoreMenuTooltipTitle,
 							onClose = upsellTooltipProps.onPlusMoreMenuTooltipClose,
@@ -125,33 +125,33 @@ return function(p0)
 					
 					return t
 				end
-				t[var19] = reactModule.createElement(profileMoreButtonModule, {
-					layoutOrder = var19,
-					onActivated = p0.openContextualMenu,
-					isSelected = p0.isContextualMenuOpen,
-					buttonRef = p0.moreButtonRef
+				t[var4] = reactModule.createElement(profileMoreButtonModule, {
+					layoutOrder = var4,
+					onActivated = p1.openContextualMenu,
+					isSelected = p1.isContextualMenuOpen,
+					buttonRef = p1.moreButtonRef
 				})
 			end
 			return t
 		end, {
-			profileActions.primary, profileActions.secondary, p0.openContextualMenu,
-			p0.isContextualMenuOpen, p0.showPlusMoreMenuTooltip, p0.upsellTooltipProps,
-			p0.moreButtonRef
+			profileActions.primary, profileActions.secondary, p1.openContextualMenu,
+			p1.isContextualMenuOpen, p1.showPlusMoreMenuTooltip, p1.upsellTooltipProps,
+			p1.moreButtonRef
 		})),
-		DisabledReasonText = if fFlagEnableProfilePlatformDisabledReasonTextModule and var16 and var14 then reactModule.createElement(text, {
+		DisabledReasonText = if fFlagEnableProfilePlatformDisabledReasonTextModule and var3 and var1 then reactModule.createElement(text, {
 			LayoutOrder = 1,
 			TextWrapped = true,
 			tag = "text-align-y-bottom text-align-x-left auto-y size-full-0",
-			Text = var16,
-			fontStyle = var14.Typography.CaptionMedium,
-			colorStyle = var14.Color.Content.Emphasis
+			Text = var3,
+			fontStyle = var1.Typography.CaptionMedium,
+			colorStyle = var1.Color.Content.Emphasis
 		}) else nil
 	}
 	
-	return if fFlagAXEnableProfileTab and var15 then reactModule.createElement(view, { tag = "auto-y size-full-0", LayoutOrder = p0.layoutOrder }, t) else reactModule.createElement(horizontalPageMargin, {
+	return if fFlagAXEnableProfileTab and var2 then reactModule.createElement(view, { tag = "auto-y size-full-0", LayoutOrder = p1.layoutOrder }, t) else reactModule.createElement(horizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		size = UDim2.fromScale(1, 0),
-		layoutOrder = p0.layoutOrder
+		layoutOrder = p1.layoutOrder
 	}, t)
 end

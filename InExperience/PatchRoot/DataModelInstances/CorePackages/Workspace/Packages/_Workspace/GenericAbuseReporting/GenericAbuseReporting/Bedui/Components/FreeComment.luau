@@ -10,20 +10,20 @@ local componentSubtextModule = require(genericAbuseReporting.Bedui.Components.Co
 local commentTextFieldModule = require(genericAbuseReporting.Common.CommentTextField)
 local useFormDataModule = require(genericAbuseReporting.Bedui.Provider.useFormData)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), useFormDataModule (ref), view (ref), text (ref), commentTextFieldModule (ref), componentSubtextModule (ref)
-	local var6 = useTokens()
-	local var7, var8 = reactModule.useState("")
+	local var1 = useTokens()
+	local var2, var3 = reactModule.useState("")
 	local updateForm = useFormDataModule().updateForm
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col gap-small",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Prompt = reactModule.createElement(text, {
 			tag = "auto-xy",
 			LayoutOrder = 0,
-			Text = p0.component.freeComment.prompt
+			Text = p1.component.freeComment.prompt
 		}),
 		FreeCommentContainer = reactModule.createElement(view, {
 			tag = "size-full-0 auto-y col align-x-left stroke-thick stroke-default radius-medium",
@@ -31,22 +31,22 @@ return reactModule.memo(function(p0)
 		}, {
 			FreeComment = reactModule.createElement(commentTextFieldModule, {
 				layoutOrder = 1,
-				text = var7,
-				placeholderText = p0.component.freeComment.placeholder,
-				backgroundColor3 = var6.Color.Shift.Shift_100.Color3,
-				backgroundTransparency = var6.Color.Shift.Shift_100.Transparency,
-				onUpdate = reactModule.useCallback(function(p1)
-					-- upvalues: var8 (ref), updateForm (ref), p0 (ref)
-					var8(p1)
-					updateForm(p0.component.formDataKey, p1)
-				end, { updateForm, p0.component.formDataKey })
+				text = var2,
+				placeholderText = p1.component.freeComment.placeholder,
+				backgroundColor3 = var1.Color.Shift.Shift_100.Color3,
+				backgroundTransparency = var1.Color.Shift.Shift_100.Transparency,
+				onUpdate = reactModule.useCallback(function(p2)
+					-- upvalues: var3 (ref), updateForm (ref), p1 (ref)
+					var3(p2)
+					updateForm(p1.component.formDataKey, p2)
+				end, { updateForm, p1.component.formDataKey })
 			})
 		}),
 		ComponentSubtext = reactModule.createElement(componentSubtextModule, {
 			layoutOrder = 2,
-			isErrorState = p0.isErrorState,
-			isOptional = p0.component.isOptional,
-			requirementMessage = p0.component.requirementMessage
+			isErrorState = p1.isErrorState,
+			isOptional = p1.component.isOptional,
+			requirementMessage = p1.component.requirementMessage
 		})
 	})
 end)

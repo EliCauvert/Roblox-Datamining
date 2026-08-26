@@ -1,48 +1,48 @@
 ﻿local kind = require(script.Parent.kinds).Kind
-local var0 = nil
-local _ = nil
-local _ = nil
-local _ = nil
 local var1 = nil
+local _ = nil
+local _ = nil
+local _ = nil
 local var2 = nil
 local var3 = nil
 local var4 = nil
+local var5 = nil
 
 return {
-	isDefinitionNode = function(p0)
-		-- upvalues: var0 (write), var1 (write), var3 (write)
-		return var0(p0) or (var1(p0) or var3(p0))
+	isDefinitionNode = function(p1)
+		-- upvalues: var1 (write), var2 (write), var4 (write)
+		return var1(p1) or (var2(p1) or var4(p1))
 	end,
 	isExecutableDefinitionNode = function(p1)
 		-- upvalues: kind (ref)
 		return if p1.kind ~= kind.OPERATION_DEFINITION then p1.kind == kind.FRAGMENT_DEFINITION else true
 	end,
-	isSelectionNode = function(p2)
+	isSelectionNode = function(p1)
 		-- upvalues: kind (ref)
-		return if p2.kind ~= kind.FIELD then if p2.kind ~= kind.FRAGMENT_SPREAD then p2.kind == kind.INLINE_FRAGMENT else true else true
+		return if p1.kind ~= kind.FIELD then if p1.kind ~= kind.FRAGMENT_SPREAD then p1.kind == kind.INLINE_FRAGMENT else true else true
 	end,
-	isValueNode = function(p3)
+	isValueNode = function(p1)
 		-- upvalues: kind (ref)
-		return if p3.kind ~= kind.VARIABLE then if p3.kind ~= kind.INT then if p3.kind ~= kind.FLOAT then if p3.kind ~= kind.STRING then if p3.kind ~= kind.BOOLEAN then if p3.kind ~= kind.NULL then if p3.kind ~= kind.ENUM then if p3.kind ~= kind.LIST then p3.kind == kind.OBJECT else true else true else true else true else true else true else true else true
+		return if p1.kind ~= kind.VARIABLE then if p1.kind ~= kind.INT then if p1.kind ~= kind.FLOAT then if p1.kind ~= kind.STRING then if p1.kind ~= kind.BOOLEAN then if p1.kind ~= kind.NULL then if p1.kind ~= kind.ENUM then if p1.kind ~= kind.LIST then p1.kind == kind.OBJECT else true else true else true else true else true else true else true else true
 	end,
-	isTypeNode = function(p4)
+	isTypeNode = function(p1)
 		-- upvalues: kind (ref)
-		return if p4.kind ~= kind.NAMED_TYPE then if p4.kind ~= kind.LIST_TYPE then p4.kind == kind.NON_NULL_TYPE else true else true
+		return if p1.kind ~= kind.NAMED_TYPE then if p1.kind ~= kind.LIST_TYPE then p1.kind == kind.NON_NULL_TYPE else true else true
 	end,
-	isTypeSystemDefinitionNode = function(p5)
-		-- upvalues: kind (ref), var2 (write)
-		return if p5.kind ~= kind.SCHEMA_DEFINITION then var2(p5) or p5.kind == kind.DIRECTIVE_DEFINITION else true
+	isTypeSystemDefinitionNode = function(p1)
+		-- upvalues: kind (ref), var3 (write)
+		return if p1.kind ~= kind.SCHEMA_DEFINITION then var3(p1) or p1.kind == kind.DIRECTIVE_DEFINITION else true
 	end,
-	isTypeDefinitionNode = function(p6)
+	isTypeDefinitionNode = function(p1)
 		-- upvalues: kind (ref)
-		return if p6.kind ~= kind.SCALAR_TYPE_DEFINITION then if p6.kind ~= kind.OBJECT_TYPE_DEFINITION then if p6.kind ~= kind.INTERFACE_TYPE_DEFINITION then if p6.kind ~= kind.UNION_TYPE_DEFINITION then if p6.kind ~= kind.ENUM_TYPE_DEFINITION then p6.kind == kind.INPUT_OBJECT_TYPE_DEFINITION else true else true else true else true else true
+		return if p1.kind ~= kind.SCALAR_TYPE_DEFINITION then if p1.kind ~= kind.OBJECT_TYPE_DEFINITION then if p1.kind ~= kind.INTERFACE_TYPE_DEFINITION then if p1.kind ~= kind.UNION_TYPE_DEFINITION then if p1.kind ~= kind.ENUM_TYPE_DEFINITION then p1.kind == kind.INPUT_OBJECT_TYPE_DEFINITION else true else true else true else true else true
 	end,
-	isTypeSystemExtensionNode = function(p7)
-		-- upvalues: kind (ref), var4 (write)
-		return if p7.kind ~= kind.SCHEMA_EXTENSION then var4(p7) else true
+	isTypeSystemExtensionNode = function(p1)
+		-- upvalues: kind (ref), var5 (write)
+		return if p1.kind ~= kind.SCHEMA_EXTENSION then var5(p1) else true
 	end,
-	isTypeExtensionNode = function(p8)
+	isTypeExtensionNode = function(p1)
 		-- upvalues: kind (ref)
-		return if p8.kind ~= kind.SCALAR_TYPE_EXTENSION then if p8.kind ~= kind.OBJECT_TYPE_EXTENSION then if p8.kind ~= kind.INTERFACE_TYPE_EXTENSION then if p8.kind ~= kind.UNION_TYPE_EXTENSION then if p8.kind ~= kind.ENUM_TYPE_EXTENSION then p8.kind == kind.INPUT_OBJECT_TYPE_EXTENSION else true else true else true else true else true
+		return if p1.kind ~= kind.SCALAR_TYPE_EXTENSION then if p1.kind ~= kind.OBJECT_TYPE_EXTENSION then if p1.kind ~= kind.INTERFACE_TYPE_EXTENSION then if p1.kind ~= kind.UNION_TYPE_EXTENSION then if p1.kind ~= kind.ENUM_TYPE_EXTENSION then p1.kind == kind.INPUT_OBJECT_TYPE_EXTENSION else true else true else true else true else true
 	end
 }

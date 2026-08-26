@@ -10,32 +10,32 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
 local robux = images["icons/common/robux"]
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), useLocalization (ref), textKeysModule (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), reactModule (ref), imageSetLabel (ref), robux (ref)
-	local var5 = useStyle()
-	local font = var5.Font
-	local theme = var5.Theme
-	local var6 = font.BaseSize * font.SubHeader1.RelativeSize
-	local vector2 = Vector2.new(var6, var6)
-	local var8 = useLocalization({
+	local var1 = useStyle()
+	local font = var1.Font
+	local theme = var1.Theme
+	local var2 = font.BaseSize * font.SubHeader1.RelativeSize
+	local vector2 = Vector2.new(var2, var2)
+	local var3 = useLocalization({
 		freeText = textKeysModule.CatalogLabelFree,
 		offSaleText = textKeysModule.CatalogLabelOffSale
 	})
-	local var9 = nil
-	local var10 = false
+	local var4 = nil
+	local var5 = false
 	
-	if p0.isOffSale then
-		if fFlagProfilePlatformFixResaleLimitedPriceModule and p0.lowestResalePrice and p0.lowestResalePrice > 0 then
-			var9 = tostring(p0.lowestResalePrice)
-			var10 = true
+	if p1.isOffSale then
+		if fFlagProfilePlatformFixResaleLimitedPriceModule and p1.lowestResalePrice and p1.lowestResalePrice > 0 then
+			var4 = tostring(p1.lowestResalePrice)
+			var5 = true
 		else
-			var9 = var8.offSaleText
+			var4 = var3.offSaleText
 		end
-	elseif p0.price == 0 then
-		var9 = var8.freeText
-	elseif p0.price then
-		var9 = tostring(p0.price)
-		var10 = true
+	elseif p1.price == 0 then
+		var4 = var3.freeText
+	elseif p1.price then
+		var4 = tostring(p1.price)
+		var5 = true
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -48,7 +48,7 @@ return function(p0)
 			FillDirection = Enum.FillDirection.Horizontal,
 			Padding = UDim.new(0, 4)
 		}),
-		Icon = if var10 then reactModule.createElement(imageSetLabel, {
+		Icon = if var5 then reactModule.createElement(imageSetLabel, {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			Image = robux,
@@ -59,12 +59,12 @@ return function(p0)
 		Text = reactModule.createElement("TextLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, if var10 then -(vector2.X + 4) else 0, 1, 0),
+			Size = UDim2.new(1, if var5 then -(vector2.X + 4) else 0, 1, 0),
 			Font = font.SubHeader1.Font,
 			TextColor3 = theme.SecondaryContent.Color,
 			TextTransparency = theme.SecondaryContent.Transparency,
-			TextSize = var6,
-			Text = var9,
+			TextSize = var2,
+			Text = var4,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center
 		})

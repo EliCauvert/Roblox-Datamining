@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if string.sub(p0, 1, 7) ~= "Enabled" then p0 == "AllUsers" else true
+﻿return function(p1)
+	return if string.sub(p1, 1, 7) ~= "Enabled" then p1 == "AllUsers" else true
 end

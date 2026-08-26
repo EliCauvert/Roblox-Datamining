@@ -2,38 +2,38 @@
 local reactModule = require(reactSceneUnderstanding.Parent.React)
 local _ = require(reactSceneUnderstanding.Parent.SceneUnderstanding)
 local useState = reactModule.useState
-local var2 = reactModule.createContext(nil)
+local var1 = reactModule.createContext(nil)
 
 return {
-	Provider = function(p0)
-		-- upvalues: useState (ref), reactModule (ref), var2 (ref)
-		local var3, var4 = useState({})
-		local var5, var6 = useState({})
-		local var7, var8 = useState({})
-		local var9, var10 = useState({})
+	Provider = function(p1)
+		-- upvalues: useState (ref), reactModule (ref), var1 (ref)
+		local var2, var3 = useState({})
+		local var4, var5 = useState({})
+		local var6, var7 = useState({})
+		local var8, var9 = useState({})
 		
-		return reactModule.createElement(var2.Provider, {
+		return reactModule.createElement(var1.Provider, {
 			value = {
-				rangeQueryOptions = p0.rangeQueryOptions,
-				viewportQueryOptions = p0.viewportQueryOptions,
-				dataModelTraversalOptions = p0.dataModelTraversalOptions,
-				sourceAssets = var3,
-				setSourceAssets = var4,
-				assetsInView = var5,
-				setAssetsInView = var6,
-				assetsInRange = var7,
-				setAssetsInRange = var8,
-				audibleSounds = var9,
-				setAudibleSounds = var10
+				rangeQueryOptions = p1.rangeQueryOptions,
+				viewportQueryOptions = p1.viewportQueryOptions,
+				dataModelTraversalOptions = p1.dataModelTraversalOptions,
+				sourceAssets = var2,
+				setSourceAssets = var3,
+				assetsInView = var4,
+				setAssetsInView = var5,
+				assetsInRange = var6,
+				setAssetsInRange = var7,
+				audibleSounds = var8,
+				setAudibleSounds = var9
 			}
-		}, p0.children)
+		}, p1.children)
 	end,
 	use = function()
-		-- upvalues: reactModule (ref), var2 (ref)
-		local var11 = reactModule.useContext(var2)
+		-- upvalues: reactModule (ref), var1 (ref)
+		local var2 = reactModule.useContext(var1)
 		
-		if var11 then
-			return var11
+		if var2 then
+			return var2
 		end
 		error("attempt to use SceneAnalysisContext with no provider. Add `ReactSceneUnderstanding.SceneAnalysisProvider` to the React tree and try again")
 	end

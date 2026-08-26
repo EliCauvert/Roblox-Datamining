@@ -55,7 +55,7 @@ return {
 		local scrubberControlBar = scrubberTimeLabel.ScrubberControlBar
 		
 		if scrubberControlBar then
-			local var2 = function(p1)
+			local var1 = function(p1)
 				-- upvalues: scrubberTimeLabel (ref), scrubberControlBar (ref), secondsToTimeStrModule (copy)
 				local scrubberTimeLabel_1 = scrubberTimeLabel.ScrubberTimeLabel
 				
@@ -66,10 +66,10 @@ return {
 				end
 				scrubberTimeLabel_1.Position = UDim2.new(0, p1 - scrubberControlBar.AbsolutePosition.X, 0, 0)
 				local x = scrubberControlBar.AbsolutePosition.X
-				local var3 = (p1 - x) / (x + scrubberControlBar.AbsoluteSize.X - x)
-				scrubberTimeLabel.ScrubberTimeLabel.Text = secondsToTimeStrModule.convertSecondsToTimeStr(var3 * scrubberTimeLabel.overallLengthSeconds)
+				local var2 = (p1 - x) / (x + scrubberControlBar.AbsoluteSize.X - x)
+				scrubberTimeLabel.ScrubberTimeLabel.Text = secondsToTimeStrModule.convertSecondsToTimeStr(var2 * scrubberTimeLabel.overallLengthSeconds)
 				
-				if var3 > 0.75 then
+				if var2 > 0.75 then
 					scrubberTimeLabel.ScrubberTimeLabel.AnchorPoint = Vector2.new(1, 1)
 					
 					return
@@ -77,14 +77,14 @@ return {
 				scrubberTimeLabel.ScrubberTimeLabel.AnchorPoint = Vector2.new(0.5, 1)
 			end
 			
-			scrubberControlBar.MouseEnter:Connect(function(p2)
-				-- upvalues: scrubberTimeLabel (ref), var2 (ref)
+			scrubberControlBar.MouseEnter:Connect(function(p1)
+				-- upvalues: scrubberTimeLabel (ref), var1 (ref)
 				scrubberTimeLabel.ScrubberTimeLabel.Visible = true
-				var2(p2)
+				var1(p1)
 			end)
-			scrubberControlBar.MouseMoved:Connect(function(p3)
-				-- upvalues: var2 (ref)
-				var2(p3)
+			scrubberControlBar.MouseMoved:Connect(function(p1)
+				-- upvalues: var1 (ref)
+				var1(p1)
 			end)
 			scrubberControlBar.MouseLeave:Connect(function()
 				-- upvalues: scrubberTimeLabel (ref)

@@ -1,52 +1,52 @@
 ﻿local assignModule = require(script.Parent.assign)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: assignModule (ref)
-	local var1 = assignModule({ leading = true, trailing = true }, p2)
-	local maxValue = math.max(0, p1)
+	local var1 = assignModule({ leading = true, trailing = true }, p3)
+	local maxValue = math.max(0, p2)
 	local leading = var1.leading
 	local trailing = var1.trailing
-	local var3 = -1e999
-	local var4 = nil
+	local var2 = -1e999
+	local var3 = nil
 	local t = {}
 	
 	local function _()
-		-- upvalues: var4 (write)
-		if var4 then
-			task.cancel(var4)
-			var4 = nil
+		-- upvalues: var3 (write)
+		if var3 then
+			task.cancel(var3)
+			var3 = nil
 		end
 	end
 	
 	local function invoke()
-		-- upvalues: var3 (write), var4 (write), p0 (ref), t (write)
-		var3 = os.clock()
-		var4 = nil
-		p0(table.unpack(t))
+		-- upvalues: var2 (write), var3 (write), p1 (ref), t (write)
+		var2 = os.clock()
+		var3 = nil
+		p1(table.unpack(t))
 	end
 	
 	return function(...)
-		-- upvalues: t (write), var3 (write), leading (ref), maxValue (ref), var4 (write), p0 (ref), trailing (ref), invoke (ref)
+		-- upvalues: t (write), var2 (write), leading (ref), maxValue (ref), var3 (write), p1 (ref), trailing (ref), invoke (ref)
 		local processTime = os.clock()
 		t = { ... }
 		
-		if leading and maxValue <= processTime - var3 then
-			if var4 then
-				task.cancel(var4)
-				var4 = nil
+		if leading and maxValue <= processTime - var2 then
+			if var3 then
+				task.cancel(var3)
+				var3 = nil
 			end
-			var3 = os.clock()
-			var4 = nil
-			p0(table.unpack(t))
+			var2 = os.clock()
+			var3 = nil
+			p1(table.unpack(t))
 			
 			return
-		elseif trailing and not var4 then
-			local var8 = maxValue - (processTime - (if var3 == -1e999 then processTime else var3))
+		elseif trailing and not var3 then
+			local var4 = maxValue - (processTime - (if var2 == -1e999 then processTime else var2))
 			
-			if var8 < 0 then
-				var8 = 0
+			if var4 < 0 then
+				var4 = 0
 			end
-			var4 = task.delay(var8, invoke)
+			var3 = task.delay(var4, invoke)
 		end
 	end
 end

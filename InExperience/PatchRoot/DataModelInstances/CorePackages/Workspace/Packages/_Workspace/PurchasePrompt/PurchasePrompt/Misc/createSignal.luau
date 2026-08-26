@@ -1,16 +1,16 @@
-﻿local function _(p0, p1, p2)
+﻿local function _(p1, p2, p3)
 	local _ = {}
-	local cloned = table.clone(p0)
-	cloned[p1] = p2
+	local cloned = table.clone(p1)
+	cloned[p2] = p3
 	
 	return cloned
 end
 
-local _ = function(p3, p4)
+local _ = function(p1, p2)
 	local t = {}
 	
-	for i, v in pairs(p3) do
-		if i ~= p4 then
+	for i, v in pairs(p1) do
+		if i ~= p2 then
 			t[i] = v
 		end
 	end
@@ -21,23 +21,23 @@ return function()
 	local t = {}
 	
 	return {
-		subscribe = function(_, p5)
+		subscribe = function(_, p3)
 			-- upvalues: t (write)
-			assert(typeof(p5) == "function", "Can only subscribe to signals with a function.")
-			local t_1 = { disconnected = false, callback = p5 }
+			assert(typeof(p3) == "function", "Can only subscribe to signals with a function.")
+			local t_1 = { disconnected = false, callback = p3 }
 			local _ = {}
 			local cloned = table.clone(t)
-			cloned[p5] = t_1
+			cloned[p3] = t_1
 			t = cloned
 			
 			return function()
-				-- upvalues: t_1 (ref), t (copy), p5 (ref)
+				-- upvalues: t_1 (ref), t (copy), p3 (ref)
 				assert(not t_1.disconnected, "Listeners can only be disconnected once.")
 				t_1.disconnected = true
 				local t_2 = {}
 				
 				for i, v in pairs(t) do
-					if i ~= p5 then
+					if i ~= p3 then
 						t_2[i] = v
 					end
 				end

@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if typeof(p0) == "table" and p0.errorMessage then `HTTP {tostring(p0.responseCode)}: {p0.errorMessage}` else tostring(p0)
+﻿return function(p1)
+	return if typeof(p1) == "table" and p1.errorMessage then `HTTP {tostring(p1.responseCode)}: {p1.errorMessage}` else tostring(p1)
 end

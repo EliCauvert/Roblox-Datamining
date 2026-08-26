@@ -5,27 +5,27 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXAddTransparencyToItemCardHeader = avatarExperienceFlagsModule.FFlagAXAddTransparencyToItemCardHeader
 local fFlagAXCatalogItemCardDarkerBackground = avatarExperienceFlagsModule.FFlagAXCatalogItemCardDarkerBackground
 
-local function ItemCardHeader(p0)
+local function ItemCardHeader(p1)
 	-- upvalues: useDesignTokens (ref), fFlagAXCatalogItemCardDarkerBackground (ref), reactModule (ref), fFlagAXAddTransparencyToItemCardHeader (ref)
-	local var3 = useDesignTokens()
-	local var4 = if fFlagAXCatalogItemCardDarkerBackground then var3.Color.Shift.Shift_100 else var3.Color.Common.Shimmer
+	local var1 = useDesignTokens()
+	local var2 = if fFlagAXCatalogItemCardDarkerBackground then var1.Color.Shift.Shift_100 else var1.Color.Common.Shimmer
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = if p0.Size then p0.Size else UDim2.fromScale(1, 1),
-		BackgroundColor3 = var4.Color3,
-		BackgroundTransparency = if fFlagAXAddTransparencyToItemCardHeader then p0.BackgroundTransparency or var4.Transparency else var4.Transparency,
-		LayoutOrder = p0.LayoutOrder,
-		ZIndex = p0.ZIndex
+		Size = if p1.Size then p1.Size else UDim2.fromScale(1, 1),
+		BackgroundColor3 = var2.Color3,
+		BackgroundTransparency = if fFlagAXAddTransparencyToItemCardHeader then p1.BackgroundTransparency or var2.Transparency else var2.Transparency,
+		LayoutOrder = p1.LayoutOrder,
+		ZIndex = p1.ZIndex
 	}, {
-		CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var3.Radius.Medium) }),
-		AspectRatio = if not p0.Size then reactModule.createElement("UIAspectRatioConstraint", {
-			AspectRatio = p0.aspectRatio or 1,
+		CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Medium) }),
+		AspectRatio = if not p1.Size then reactModule.createElement("UIAspectRatioConstraint", {
+			AspectRatio = p1.aspectRatio or 1,
 			AspectType = Enum.AspectType.FitWithinMaxSize,
 			DominantAxis = Enum.DominantAxis.Width
 		}) else nil,
-		ItemCardHeaderChildren = reactModule.createElement(reactModule.Fragment, nil, p0.children),
-		ItemCardHeaderOverlaySlot = p0.overlaySlot
+		ItemCardHeaderChildren = reactModule.createElement(reactModule.Fragment, nil, p1.children),
+		ItemCardHeaderOverlaySlot = p1.overlaySlot
 	})
 end
 

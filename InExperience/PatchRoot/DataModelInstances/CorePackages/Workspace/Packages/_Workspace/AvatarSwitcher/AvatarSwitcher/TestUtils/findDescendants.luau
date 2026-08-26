@@ -1,17 +1,17 @@
 ﻿return {
-	findFirstDescendant = function(p0, p1, p2)
-		for i, v in p0:GetDescendants() do
-			if v:IsA(p1) and (p2 == nil or p2(v)) then
+	findFirstDescendant = function(p1, p2, p3)
+		for i, v in p1:GetDescendants() do
+			if v:IsA(p2) and (p3 == nil or p3(v)) then
 				return v
 			end
 		end
 		return nil
 	end,
-	findAllDescendants = function(p3, p4)
+	findAllDescendants = function(p4, p5)
 		local t = {}
 		
-		for i, v in p3:GetDescendants() do
-			if v:IsA(p4) then
+		for i, v in p4:GetDescendants() do
+			if v:IsA(p5) then
 				table.insert(t, v)
 			end
 		end

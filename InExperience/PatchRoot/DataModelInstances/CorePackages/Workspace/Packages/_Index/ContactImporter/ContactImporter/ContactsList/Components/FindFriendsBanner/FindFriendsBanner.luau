@@ -14,24 +14,24 @@ local styledTextLabel = UIBlox.App.Text.StyledTextLabel
 local textKeysModule = require(contactImporter.Common.TextKeys)
 local contactsLarge = images["icons/graphic/contacts_large"]
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), useStyle (ref), react (ref), imageSetLabel (ref), iconSize (ref), contactsLarge (ref), styledTextLabel (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local openAmpUpsell = p0.openAmpUpsell
-	local var3 = not p0.showMatchedContacts
-	local var4 = if var3 then 122 else 0
-	local isUserInGreenFindFriendsButtonExperiment = p0.isUserInGreenFindFriendsButtonExperiment
-	local var5 = useLocalization({
+	local openAmpUpsell = p1.openAmpUpsell
+	local var1 = not p1.showMatchedContacts
+	local var2 = if var1 then 122 else 0
+	local isUserInGreenFindFriendsButtonExperiment = p1.isUserInGreenFindFriendsButtonExperiment
+	local var3 = useLocalization({
 		findFriendsButton = textKeysModule.CONTACTS_FIND_FRIENDS_BUTTON,
 		findFriendsDescription = textKeysModule.CONTACTS_FIND_FRIENDS_DESCRIPTION,
 		findFriendsDescriptionPV = textKeysModule.CONTACTS_FIND_FRIENDS_DESCRIPTION_PV
 	})
-	local var6 = useStyle()
+	local var4 = useStyle()
 	
 	return react.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 48),
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		UIListLayout = react.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -47,12 +47,12 @@ return function(p0)
 			Size = UDim2.new(0, iconSize.Large, 0, iconSize.Large),
 			ScaleType = Enum.ScaleType.Fit,
 			Image = contactsLarge,
-			ImageTransparency = var6.Theme.SystemPrimaryDefault.Transparency
+			ImageTransparency = var4.Theme.SystemPrimaryDefault.Transparency
 		}),
 		TextFrame = react.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(1, -(var4 + 48 + 12), 0, 48)
+			Size = UDim2.new(1, -(var2 + 48 + 12), 0, 48)
 		}, {
 			textLayout = react.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -60,16 +60,16 @@ return function(p0)
 			}),
 			Description = react.createElement(styledTextLabel, {
 				lineHeight = 1,
-				text = if var3 then var5.findFriendsDescription else var5.findFriendsDescriptionPV,
-				fontStyle = var6.Font.CaptionBody,
-				colorStyle = var6.Theme.TextDefault,
+				text = if var1 then var3.findFriendsDescription else var3.findFriendsDescriptionPV,
+				fontStyle = var4.Font.CaptionBody,
+				colorStyle = var4.Theme.TextDefault,
 				size = UDim2.new(1, 0, 1, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Center
 			})
 		}),
-		ButtonFrame = if var3 then react.createElement("Frame", {
+		ButtonFrame = if var1 then react.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
 			Size = UDim2.new(0, 110, 0, 48),
@@ -83,7 +83,7 @@ return function(p0)
 				fitContent = false,
 				buttonType = if isUserInGreenFindFriendsButtonExperiment then buttonType.PrimaryContextual else buttonType.PrimarySystem,
 				standardSize = standardButtonSize.XSmall,
-				text = var5.findFriendsButton,
+				text = var3.findFriendsButton,
 				onActivated = openAmpUpsell
 			})
 		}) else nil

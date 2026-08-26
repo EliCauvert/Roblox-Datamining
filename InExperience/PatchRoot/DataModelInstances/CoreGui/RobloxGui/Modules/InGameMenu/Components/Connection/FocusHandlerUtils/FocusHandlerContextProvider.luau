@@ -3,9 +3,9 @@ local roact = require(game:GetService("CorePackages").Packages.InGameMenuDepende
 local focusHandlerContextModule = require(script.Parent.FocusHandlerContext)
 local focusHandlerContextProvider = roact.PureComponent:extend("FocusHandlerContextProvider")
 
-function focusHandlerContextProvider.init(p0)
-	p0.state = { candidateHandlerId = nil, currentHandlerId = nil }
-	p0.previousSelections = {}
+function focusHandlerContextProvider.init(p1)
+	p1.state = { candidateHandlerId = nil, currentHandlerId = nil }
+	p1.previousSelections = {}
 end
 
 function focusHandlerContextProvider.requestFocusForHandlerId(p1, p2)
@@ -15,48 +15,48 @@ function focusHandlerContextProvider.requestFocusForHandlerId(p1, p2)
 	end)
 end
 
-function focusHandlerContextProvider.blurCurrentFocusHandler(p4, p5, p6)
+function focusHandlerContextProvider.blurCurrentFocusHandler(p1, p2, p3)
 	-- upvalues: guiService (ref), roact (ref)
-	p4:setState(function(p7)
-		-- upvalues: p5 (ref), p6 (ref), guiService (copy), p4 (ref), roact (copy)
-		if p7.currentHandlerId ~= p5 then
+	p1:setState(function(p4)
+		-- upvalues: p2 (ref), p3 (ref), guiService (copy), p1 (ref), roact (copy)
+		if p4.currentHandlerId ~= p2 then
 			return nil
 		end
-		p4.previousSelections[p5] = if not p6 then guiService.SelectedCoreObject else nil
+		p1.previousSelections[p2] = if not p3 then guiService.SelectedCoreObject else nil
 		local _ = nil
 		
-		return if p7.candidateHandlerId == nil then { currentHandlerId = roact.None } else {
-			currentHandlerId = p7.candidateHandlerId,
+		return if p4.candidateHandlerId == nil then { currentHandlerId = roact.None } else {
+			currentHandlerId = p4.candidateHandlerId,
 			candidateHandlerId = roact.None
 		}
 	end)
 end
 
-function focusHandlerContextProvider.forgetLastSelectionForHandlerId(p8, p9)
-	p8.previousSelections[p9] = nil
+function focusHandlerContextProvider.forgetLastSelectionForHandlerId(p1, p2)
+	p1.previousSelections[p2] = nil
 end
 
-function focusHandlerContextProvider.render(p10)
+function focusHandlerContextProvider.render(p1)
 	-- upvalues: roact (ref), focusHandlerContextModule (ref)
 	return roact.createElement(focusHandlerContextModule.Provider, {
 		value = {
-			currentHandlerId = p10.state.currentHandlerId,
-			candidateHandlerId = p10.state.candidateHandlerId,
-			previousSelections = p10.previousSelections,
-			requestFocusForHandlerId = function(p11)
-				-- upvalues: p10 (ref)
-				p10:requestFocusForHandlerId(p11)
+			currentHandlerId = p1.state.currentHandlerId,
+			candidateHandlerId = p1.state.candidateHandlerId,
+			previousSelections = p1.previousSelections,
+			requestFocusForHandlerId = function(p2)
+				-- upvalues: p1 (ref)
+				p1:requestFocusForHandlerId(p2)
 			end,
-			forgetLastSelectionForHandlerId = function(p12)
-				-- upvalues: p10 (ref)
-				p10:forgetLastSelectionForHandlerId(p12)
+			forgetLastSelectionForHandlerId = function(p2)
+				-- upvalues: p1 (ref)
+				p1:forgetLastSelectionForHandlerId(p2)
 			end,
-			blurCurrentFocusHandler = function(p13, p14)
-				-- upvalues: p10 (ref)
-				p10:blurCurrentFocusHandler(p13, p14)
+			blurCurrentFocusHandler = function(p2, p3)
+				-- upvalues: p1 (ref)
+				p1:blurCurrentFocusHandler(p2, p3)
 			end
 		}
-	}, p10.props[roact.Children])
+	}, p1.props[roact.Children])
 end
 
 return focusHandlerContextProvider

@@ -44,65 +44,65 @@ function FriendsLandingContainer(_)
 		end
 		IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.ConnectionsHubExposureLayer)
 	end, {})
-	local var12 = useLocalUserId()
-	local var13 = if fFlagFriendsCountDataHydrationMigrationEnabled then useGetFriendsCountByUserId(if var12 then tostring(var12) else nil, t) or 0 else useSelector(function(p0)
-		-- upvalues: getDeepValue (copy), var12 (ref)
-		return getDeepValue(p0, `FriendsLanding.Friends.countsByUserId.{var12}`)
+	local var1 = useLocalUserId()
+	local var2 = if fFlagFriendsCountDataHydrationMigrationEnabled then useGetFriendsCountByUserId(if var1 then tostring(var1) else nil, t) or 0 else useSelector(function(p1)
+		-- upvalues: getDeepValue (copy), var1 (ref)
+		return getDeepValue(p1, `FriendsLanding.Friends.countsByUserId.{var1}`)
 	end)
-	local var14 = useAppPolicy(function(p1)
+	local var3 = useAppPolicy(function(p1)
 		return p1.getShowDisplayName()
 	end)
-	local var15 = reactModule.useContext(friendsLandingContextModule.Context)
-	local var16 = useFriendsListOrderedByPresence({ userId = var12, pageSize = friendsLandingPageSize })
-	local var17 = if fFlagConnectionManagementChips then useDecoratedTrustedConnections(var16.onlineFriends) else nil
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var16 (ref), var15 (ref), filterStatesModule (copy), cryoModule (copy), fFlagConnectionManagementChips (copy), var17 (write), presenceType_1 (copy)
+	local var4 = reactModule.useContext(friendsLandingContextModule.Context)
+	local var5 = useFriendsListOrderedByPresence({ userId = var1, pageSize = friendsLandingPageSize })
+	local var6 = if fFlagConnectionManagementChips then useDecoratedTrustedConnections(var5.onlineFriends) else nil
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref), var4 (ref), filterStatesModule (copy), cryoModule (copy), fFlagConnectionManagementChips (copy), var6 (write), presenceType_1 (copy)
 		local t = {}
 		
-		if var16.onlineFriends and var16.offlineFriends then
-			if var15.filter == filterStatesModule.All then
-				return cryoModule.List.join(var16.onlineFriends, var16.offlineFriends)
-			elseif var15.filter == filterStatesModule.Offline then
-				return var16.offlineFriends
-			elseif var15.filter == filterStatesModule.Online then
-				return var16.onlineFriends
-			elseif fFlagConnectionManagementChips and var15.filter == filterStatesModule.Trusted then
-				return var17 or {}
+		if var5.onlineFriends and var5.offlineFriends then
+			if var4.filter == filterStatesModule.All then
+				return cryoModule.List.join(var5.onlineFriends, var5.offlineFriends)
+			elseif var4.filter == filterStatesModule.Offline then
+				return var5.offlineFriends
+			elseif var4.filter == filterStatesModule.Online then
+				return var5.onlineFriends
+			elseif fFlagConnectionManagementChips and var4.filter == filterStatesModule.Trusted then
+				return var6 or {}
 			end
-			t = cryoModule.List.filter(var16.onlineFriends, function(p2)
+			t = cryoModule.List.filter(var5.onlineFriends, function(p1)
 				-- upvalues: presenceType_1 (copy)
-				return p2.presence and p2.presence.userPresenceType == presenceType_1.InGame
+				return p1.presence and p1.presence.userPresenceType == presenceType_1.InGame
 			end)
 		end
 		return t
 	end, if fFlagConnectionManagementChips then {
-		var15.filter,
-		var16.onlineFriends,
-		var16.offlineFriends,
-		var17
-	} else { var15.filter, var16.onlineFriends, var16.offlineFriends })
-	local var19 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var18 (ref), getRbxthumbWithTypeSizeAndOptions (copy), userLibConstants (copy), t_1 (copy), presenceType (copy)
-		return cryoModule.List.map(var18, function(p3, _)
+		var4.filter,
+		var5.onlineFriends,
+		var5.offlineFriends,
+		var6
+	} else { var4.filter, var5.onlineFriends, var5.offlineFriends })
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: cryoModule (copy), var7 (ref), getRbxthumbWithTypeSizeAndOptions (copy), userLibConstants (copy), t_1 (copy), presenceType (copy)
+		return cryoModule.List.map(var7, function(p1, _)
 			-- upvalues: getRbxthumbWithTypeSizeAndOptions (copy), userLibConstants (copy), t_1 (copy), presenceType (copy)
 			return {
 				username = "",
-				id = p3.id,
-				thumbnail = getRbxthumbWithTypeSizeAndOptions(p3.id, userLibConstants.RbxthumbTypes.Avatar, 352),
-				userPresenceType = if p3.presence then t_1[p3.presence.userPresenceType] else presenceType.Offline,
-				universeId = if p3.presence then p3.presence.universeId else nil,
-				lastLocation = if p3.presence then p3.presence.lastLocation else nil
+				id = p1.id,
+				thumbnail = getRbxthumbWithTypeSizeAndOptions(p1.id, userLibConstants.RbxthumbTypes.Avatar, 352),
+				userPresenceType = if p1.presence then t_1[p1.presence.userPresenceType] else presenceType.Offline,
+				universeId = if p1.presence then p1.presence.universeId else nil,
+				lastLocation = if p1.presence then p1.presence.lastLocation else nil
 			}
 		end)
-	end, { var18 })
+	end, { var7 })
 	
 	return reactModule.createElement(friendsLandingPageModule, {
-		totalFriendCount = var13,
-		friends = if fFlagConnectionManagementChips then var19 or {} else var19,
-		fetchMoreFriends = if var16 and not var16.isEndOfList then var16.fetchMoreFriends else nil,
-		refreshFriends = var16.refreshFriendsData,
-		enableDisplayNamePolicy = var14,
-		localUserId = var12
+		totalFriendCount = var2,
+		friends = if fFlagConnectionManagementChips then var8 or {} else var8,
+		fetchMoreFriends = if var5 and not var5.isEndOfList then var5.fetchMoreFriends else nil,
+		refreshFriends = var5.refreshFriendsData,
+		enableDisplayNamePolicy = var3,
+		localUserId = var1
 	})
 end
 

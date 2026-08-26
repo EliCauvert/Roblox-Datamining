@@ -27,30 +27,30 @@ local t_1 = {
 	description = "Feature.Moments.Label.FeedEndBody"
 }
 
-local function _(p0, p1)
-	return if p0 == nil or p0 == "" then p1 else p0
+local function _(p1, p2)
+	return if p1 == nil or p1 == "" then p2 else p1
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), useLocalization (ref), t_1 (ref), t (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref), button (ref), fillBehavior (ref), inputSize (ref), buttonVariant (ref)
-	local var8 = useTokens()
-	local var9 = useFormFactor() == formFactor.Wide
-	local var10 = p2.showLoadMore ~= false
-	local var11 = useLocalization(if fFlagMomentsNonInfiniteScrollEndStateFixesModule and not var10 then t_1 else t)
-	local title = var11.title
-	local var12 = if title == nil or title == "" then "You're all caught up for now" else title
-	local description = var11.description
+	local var1 = useTokens()
+	local var2 = useFormFactor() == formFactor.Wide
+	local var3 = p1.showLoadMore ~= false
+	local var4 = useLocalization(if fFlagMomentsNonInfiniteScrollEndStateFixesModule and not var3 then t_1 else t)
+	local title = var4.title
+	local var5 = if title == nil or title == "" then "You're all caught up for now" else title
+	local description = var4.description
 	title = if description == nil or description == "" then "You've reached a stopping point in Moments. Tap below to keep watching." else description
-	local loadMore = var11.loadMore
+	local loadMore = var4.loadMore
 	description = if loadMore == nil or loadMore == "" then "Load more" else loadMore
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-center gap-xxlarge size-full clip bg-surface-0",
-		LayoutOrder = p2.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Content = reactModule.createElement(view, {
 			tag = "col align-x-center gap-xxlarge size-full-0 auto-y",
-			sizeConstraint = { MaxSize = if var9 then Vector2.new(420, 1e999) else nil }
+			sizeConstraint = { MaxSize = if var2 then Vector2.new(420, 1e999) else nil }
 		}, {
 			TextBlock = reactModule.createElement(view, {
 				LayoutOrder = 1,
@@ -80,14 +80,14 @@ return function(p2)
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
 							size = iconSize.Large,
-							style = var8.Color.Content.Emphasis
+							style = var1.Color.Content.Emphasis
 						})
 					})
 				}),
 				Title = reactModule.createElement(text, {
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-center content-emphasis",
-					Text = var12
+					Text = var5
 				}),
 				Description = reactModule.createElement(text, {
 					LayoutOrder = 3,
@@ -95,7 +95,7 @@ return function(p2)
 					Text = title
 				})
 			}),
-			ButtonGroup = if var10 then reactModule.createElement(view, {
+			ButtonGroup = if var3 then reactModule.createElement(view, {
 				LayoutOrder = 2,
 				tag = "col align-x-center gap-small auto-y",
 				Size = UDim2.fromOffset(200, 0)
@@ -104,7 +104,7 @@ return function(p2)
 					LayoutOrder = 1,
 					testId = "moments-end-state-load-more",
 					fillBehavior = fillBehavior.Fill,
-					onActivated = p2.onLoadMore,
+					onActivated = p1.onLoadMore,
 					size = inputSize.Medium,
 					text = description,
 					variant = buttonVariant.Emphasis,

@@ -1,10 +1,10 @@
-﻿return function(p0, p1)
-	local var0 = 0
+﻿return function(p1, p2)
+	local var1 = 0
 	
-	for i, v in pairs(p0:GetChildren()) do
-		if not p1 or v:IsA(p1) then
-			var0 += 1
+	for i, v in pairs(p1:GetChildren()) do
+		if not p2 or v:IsA(p2) then
+			var1 += 1
 		end
 	end
-	return var0
+	return var1
 end

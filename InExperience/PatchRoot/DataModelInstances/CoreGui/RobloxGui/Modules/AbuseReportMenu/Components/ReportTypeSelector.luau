@@ -12,14 +12,14 @@ local textButton = UIBloxModule.App.Button.TextButton
 local iconButton = UIBloxModule.App.Button.IconButton
 local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), getMenuItemDimensionsModule (ref), getMenuItemSizingsModule (ref), constantsModule (ref), reactModule (ref), appFonts (ref), iconButton (ref), iconSize (ref), images (ref), textButton (ref)
 	local size200 = useStyle().Tokens.Size.Size_200
-	local var7 = getMenuItemDimensionsModule(p0.menuWidth)
-	local var8 = getMenuItemSizingsModule()
+	local var1 = getMenuItemDimensionsModule(p1.menuWidth)
+	local var2 = getMenuItemSizingsModule()
 	local menuItemHeightTight = constantsModule.MenuItemHeightTight
-	local maxValue = math.max(p0.menuWidth - constantsModule.MenuItemDynamicWidthOffset, var7.LeftWidth + var7.RightWidth)
-	local isSmallPortraitViewport = p0.isSmallPortraitViewport
+	local maxValue = math.max(p1.menuWidth - constantsModule.MenuItemDynamicWidthOffset, var1.LeftWidth + var1.RightWidth)
+	local isSmallPortraitViewport = p1.isSmallPortraitViewport
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -37,23 +37,23 @@ return function(p0)
 			TextTransparency = 0,
 			TextWrapped = true,
 			BackgroundTransparency = 1,
-			Text = p0.label,
+			Text = p1.label,
 			Font = appFonts.default:getMedium(),
 			TextColor3 = Color3.new(1, 1, 1),
-			TextSize = var7.TextSize,
+			TextSize = var1.TextSize,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Size = if isSmallPortraitViewport then UDim2.fromOffset(maxValue, 0) else UDim2.new(0, var7.LeftWidth, 0, constantsModule.MenuItemHeight)
+			Size = if isSmallPortraitViewport then UDim2.fromOffset(maxValue, 0) else UDim2.new(0, var1.LeftWidth, 0, constantsModule.MenuItemHeight)
 		}),
 		MiddleWidthHolder = if isSmallPortraitViewport then nil else reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(0, math.max(0, p0.menuWidth - var7.LeftWidth - var7.RightWidth - 100), 0, constantsModule.MenuItemHeight)
+			Size = UDim2.new(0, math.max(0, p1.menuWidth - var1.LeftWidth - var1.RightWidth - 100), 0, constantsModule.MenuItemHeight)
 		}),
 		Container = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
-			Size = if isSmallPortraitViewport then UDim2.fromOffset(maxValue, menuItemHeightTight) else UDim2.new(0, var7.RightWidth, 1, 0)
+			Size = if isSmallPortraitViewport then UDim2.fromOffset(maxValue, menuItemHeightTight) else UDim2.new(0, var1.RightWidth, 1, 0)
 		}, {
 			Layout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -61,35 +61,35 @@ return function(p0)
 				HorizontalAlignment = if isSmallPortraitViewport then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			LeftChevron = if p0.isSelectionDisabled then nil else reactModule.createElement(iconButton, {
+			LeftChevron = if p1.isSelectionDisabled then nil else reactModule.createElement(iconButton, {
 				layoutOrder = 1,
 				size = UDim2.fromOffset(32, 32),
 				iconSize = iconSize.Medium,
 				icon = images["icons/actions/cycleLeft"],
-				onActivated = p0.onClickLeft
+				onActivated = p1.onClickLeft
 			}),
 			ButtonContainer = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Size = UDim2.new(0, var7.RightWidth - 64, 0, 0)
+				Size = UDim2.new(0, var1.RightWidth - 64, 0, 0)
 			}, {
 				ToggleButton = reactModule.createElement(textButton, {
 					layoutOrder = 2,
 					size = UDim2.new(1, 0, 1, 0),
-					text = p0.abuseType,
-					onActivated = p0.onClickRight,
-					isDisabled = p0.isSelectionDisabled,
-					fontStyle = var8.FontStyle,
-					verticalPadding = var8.ButtonInsideVerticalPadding
+					text = p1.abuseType,
+					onActivated = p1.onClickRight,
+					isDisabled = p1.isSelectionDisabled,
+					fontStyle = var2.FontStyle,
+					verticalPadding = var2.ButtonInsideVerticalPadding
 				})
 			}),
-			RightChevron = if p0.isSelectionDisabled then nil else reactModule.createElement(iconButton, {
+			RightChevron = if p1.isSelectionDisabled then nil else reactModule.createElement(iconButton, {
 				layoutOrder = 3,
 				size = UDim2.fromOffset(32, 32),
 				iconSize = iconSize.Medium,
 				icon = images["icons/actions/cycleRight"],
-				onActivated = p0.onClickRight
+				onActivated = p1.onClickRight
 			})
 		})
 	})

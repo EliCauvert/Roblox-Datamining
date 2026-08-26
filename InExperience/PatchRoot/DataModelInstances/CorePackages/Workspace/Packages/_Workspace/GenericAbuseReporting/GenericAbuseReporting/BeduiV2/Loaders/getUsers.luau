@@ -8,16 +8,16 @@ local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuse
 local recentlyLeftSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Signals.recentlyLeftSignals)
 local accessoryType = foundationModule.Enums.AccessoryType
 
-local function appendRecentlyLeftItems(p0, p1, p2)
+local function appendRecentlyLeftItems(p1, p2, p3)
 	-- upvalues: accessoryType (ref)
-	local cloned = table.clone(p2)
-	table.sort(cloned, function(p3, p4)
-		return p3.username:lower() < p4.username:lower()
+	local cloned = table.clone(p3)
+	table.sort(cloned, function(p4, p5)
+		return p4.username:lower() < p5.username:lower()
 	end)
 	
 	for i, v in ipairs(cloned) do
-		if not p1[tostring(v.userId)] then
-			table.insert(p0, {
+		if not p2[tostring(v.userId)] then
+			table.insert(p1, {
 				leading = { type = accessoryType.Avatar, userId = v.userId },
 				id = tostring(v.userId),
 				label = v.displayName,
@@ -26,18 +26,18 @@ local function appendRecentlyLeftItems(p0, p1, p2)
 			})
 		end
 	end
-	return p0
+	return p1
 end
 
 return function()
 	-- upvalues: promiseModule (ref), playersService (ref), localPlayer (ref), fFlagAbuseReportInExpPlayerListV3 (ref), accessoryType (ref), appendRecentlyLeftItems (ref), recentlyLeftSignalsModule (ref)
-	return promiseModule.new(function(p5, p6)
+	return promiseModule.new(function(p4, p5)
 		-- upvalues: playersService (copy), localPlayer (copy), fFlagAbuseReportInExpPlayerListV3 (copy), accessoryType (copy), appendRecentlyLeftItems (copy), recentlyLeftSignalsModule (copy)
 		local ok, status = pcall(function()
 			-- upvalues: playersService (copy), localPlayer (copy), fFlagAbuseReportInExpPlayerListV3 (copy), accessoryType (copy), appendRecentlyLeftItems (copy), recentlyLeftSignalsModule (copy)
 			local players = playersService:GetPlayers()
-			table.sort(players, function(p7, p8)
-				return p7.Name:lower() < p8.Name:lower()
+			table.sort(players, function(p6, p7)
+				return p6.Name:lower() < p7.Name:lower()
 			end)
 			local t = {}
 			local t_1 = {}
@@ -63,10 +63,10 @@ return function()
 		end)
 		
 		if ok then
-			p5(status)
+			p4(status)
 			
 			return
 		end
-		p6(status)
+		p5(status)
 	end)
 end

@@ -19,9 +19,9 @@ resultModal.validateProps = tModule.strictInterface({
 	closeResultModal = tModule.callback
 })
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: getInputGroup (ref), inputTypeModule (ref)
-	return getInputGroup(p0) == inputTypeModule.InputTypeConstants.Gamepad
+	return getInputGroup(p1) == inputTypeModule.InputTypeConstants.Gamepad
 end
 
 function resultModal.init(p1)
@@ -31,30 +31,30 @@ function resultModal.init(p1)
 	})
 end
 
-function resultModal.getLocalizedStringForResultPrompt(_, p2)
+function resultModal.getLocalizedStringForResultPrompt(_, p1)
 	-- upvalues: robloxTranslatorModule (ref)
-	return if p2 == Enum.PromptPublishAssetResult.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessMessage") elseif p2 == Enum.PromptPublishAssetResult.UploadFailed then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailed") elseif p2 == Enum.PromptPublishAssetResult.NoUserInput then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.NoUserInput") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.UndefinedError", { RESULT_TYPE = tostring(p2) })
+	return if p1 == Enum.PromptPublishAssetResult.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessMessage") elseif p1 == Enum.PromptPublishAssetResult.UploadFailed then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailed") elseif p1 == Enum.PromptPublishAssetResult.NoUserInput then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.NoUserInput") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.UndefinedError", { RESULT_TYPE = tostring(p1) })
 end
 
-function resultModal.getLocalizedTitleForResultPrompt(_, p3)
+function resultModal.getLocalizedTitleForResultPrompt(_, p1)
 	-- upvalues: robloxTranslatorModule (ref)
-	return if p3 == Enum.PromptPublishAssetResult.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessTitle") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailedTitle")
+	return if p1 == Enum.PromptPublishAssetResult.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessTitle") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailedTitle")
 end
 
-function resultModal.render(p4)
+function resultModal.render(p1)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), buttonType (ref), getFFlagValidateDescriptionModule (ref), robloxTranslatorModule (ref), xboxA (ref)
 	return roactModule.createElement(interactiveAlert, {
-		title = p4:getLocalizedTitleForResultPrompt(p4.props.resultModalType),
-		bodyText = p4:getLocalizedStringForResultPrompt(p4.props.resultModalType),
-		screenSize = p4.props.screenSize,
+		title = p1:getLocalizedTitleForResultPrompt(p1.props.resultModalType),
+		bodyText = p1:getLocalizedStringForResultPrompt(p1.props.resultModalType),
+		screenSize = p1.props.screenSize,
 		buttonStackInfo = {
 			buttons = {
 				{
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = p4.props.closeResultModal,
+						onActivated = p1.props.closeResultModal,
 						text = if getFFlagValidateDescriptionModule() then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.ResultModalOk") else robloxTranslatorModule:FormatByKey("InGame.CommonUI.Button.Ok"),
-						inputIcon = if p4.state.isGamepad then xboxA else nil
+						inputIcon = if p1.state.isGamepad then xboxA else nil
 					}
 				}
 			}
@@ -62,14 +62,14 @@ function resultModal.render(p4)
 	})
 end
 
-return roactRoduxModule.connect(function(p5)
-	return { resultModalType = p5.promptRequest.resultModalType }
-end, function(p6)
+return roactRoduxModule.connect(function(p1)
+	return { resultModalType = p1.promptRequest.resultModalType }
+end, function(p1)
 	-- upvalues: closeResultModalModule (ref)
 	return {
 		closeResultModal = function()
-			-- upvalues: p6 (ref), closeResultModalModule (copy)
-			return p6(closeResultModalModule)
+			-- upvalues: p1 (ref), closeResultModalModule (copy)
+			return p1(closeResultModalModule)
 		end
 	}
 end)(resultModal)

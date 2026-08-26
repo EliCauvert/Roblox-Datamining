@@ -2,22 +2,22 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal("")
-	local var2, var3 = createSignal(nil)
-	local var4, var5 = createSignal(nil)
-	local var6, var7 = createSignal(nil)
-	local var8, var9 = createSignal(nil)
+	local var1, var2 = createSignal("")
+	local var3, var4 = createSignal(nil)
+	local var5, var6 = createSignal(nil)
+	local var7, var8 = createSignal(nil)
+	local var9, var10 = createSignal(nil)
 	
 	return {
-		getDescription = var0,
-		setDescription = var1,
-		getGeneratedDescription = var2,
-		setGeneratedDescription = var3,
-		getGenerationToken = var4,
-		setGenerationToken = var5,
-		getGeneratedTextFeedback = var6,
-		setGeneratedTextFeedback = var7,
-		getGeneratedSummary = var8,
-		setGeneratedSummary = var9
+		getDescription = var1,
+		setDescription = var2,
+		getGeneratedDescription = var3,
+		setGeneratedDescription = var4,
+		getGenerationToken = var5,
+		setGenerationToken = var6,
+		getGeneratedTextFeedback = var7,
+		setGeneratedTextFeedback = var8,
+		getGeneratedSummary = var9,
+		setGeneratedSummary = var10
 	}
 end

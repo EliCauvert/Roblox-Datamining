@@ -1,16 +1,16 @@
 ﻿local roactRodux = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps).RoactRodux
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: roactRodux (ref)
-	return function(p2)
-		-- upvalues: roactRodux (copy), p0 (ref), p1 (ref)
-		local var0 = roactRodux.UNSTABLE_connect2(p0, p1)(p2)
+	return function(p3)
+		-- upvalues: roactRodux (copy), p1 (ref), p2 (ref)
+		local var1 = roactRodux.UNSTABLE_connect2(p1, p2)(p3)
 		
 		function var0.getUnconnected()
-			-- upvalues: p2 (ref)
-			return p2
+			-- upvalues: p3 (ref)
+			return p3
 		end
 		
-		return var0
+		return var1
 	end
 end

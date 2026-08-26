@@ -6,9 +6,9 @@ return function()
 	-- upvalues: createSignal (ref), createComputed (ref)
 	local var1, var2 = createSignal(1)
 	local var3, var4 = createSignal(var1(false))
-	local var5 = createComputed(function(p0)
+	local var5 = createComputed(function(p1)
 		-- upvalues: var1 (ref)
-		return var1(p0) <= 0
+		return var1(p1) <= 0
 	end)
 	
 	return {

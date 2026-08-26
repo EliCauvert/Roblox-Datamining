@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetHasPermissionToVoiceChat", function(p0)
-	return { hasPermissionToVoiceChat = p0 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetHasPermissionToVoiceChat", function(p1)
+	return { hasPermissionToVoiceChat = p1 }
 end)

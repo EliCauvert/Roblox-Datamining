@@ -5,19 +5,19 @@ local view = require(parent.Foundation).View
 local sharedFlagsModule = require(parent.SharedFlags)
 local itemDetailsViewModule = require(script.Parent.ItemDetailsView)
 local useItemDetailsViewModelModule = require(script.Parent.useItemDetailsViewModel)
-local var5 = if sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop then require(inExperienceShop.Components.ShopAbuseReportOverlay) else nil
+local var1 = if sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop then require(inExperienceShop.Components.ShopAbuseReportOverlay) else nil
 
-return function(p0)
-	-- upvalues: useItemDetailsViewModelModule (ref), reactModule (ref), view (ref), itemDetailsViewModule (ref), var5 (ref)
-	local var6 = useItemDetailsViewModelModule(p0)
-	local reportSession = var6.reportSession
+return function(p1)
+	-- upvalues: useItemDetailsViewModelModule (ref), reactModule (ref), view (ref), itemDetailsViewModule (ref), var1 (ref)
+	local var2 = useItemDetailsViewModelModule(p1)
+	local reportSession = var2.reportSession
 	
 	return reactModule.createElement(view, { tag = "size-full" }, {
-		Details = reactModule.createElement(itemDetailsViewModule, var6),
-		ReportOverlay = if reportSession and var6.onReportClose and var5 then reactModule.createElement(var5, {
+		Details = reactModule.createElement(itemDetailsViewModule, var2),
+		ReportOverlay = if reportSession and var2.onReportClose and var1 then reactModule.createElement(var1, {
 			abuseVector = reportSession.abuseVector,
 			targetId = reportSession.targetId,
-			onClose = var6.onReportClose
+			onClose = var2.onReportClose
 		}) else nil
 	})
 end

@@ -12,10 +12,10 @@ return require(purchasePrompt.connectToStore)(nil, function(p1)
 			p1(retryAfterUpsellModule())
 		end
 	}
-end)(function(p0)
+end)(function(p1)
 	-- upvalues: roact (ref), externalEventConnectionModule (ref), guiService (ref)
 	return roact.createElement(externalEventConnectionModule, {
 		event = guiService.BrowserWindowClosed,
-		callback = p0.onBrowserWindowClosed
+		callback = p1.onBrowserWindowClosed
 	})
 end)

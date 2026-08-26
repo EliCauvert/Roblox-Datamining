@@ -1,7 +1,7 @@
 ﻿local getFStringPlaybackGuidModule = require(script.Parent.Parent.Flags.GetFStringPlaybackGuid)
 
 return {
-	create = function(p0, p1)
+	create = function(p1, p2)
 		-- upvalues: getFStringPlaybackGuidModule (ref)
 		local replaySelector = Instance.new("Frame")
 		replaySelector.Name = "ReplaySelector"
@@ -10,7 +10,7 @@ return {
 		replaySelector.AnchorPoint = Vector2.new(0.5, 0.5)
 		replaySelector.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 		replaySelector.BorderSizePixel = 0
-		replaySelector.Parent = p0.screenGui
+		replaySelector.Parent = p1.screenGui
 		local UICorner = Instance.new("UICorner")
 		UICorner.CornerRadius = UDim.new(0, 8)
 		UICorner.Parent = replaySelector
@@ -60,7 +60,7 @@ return {
 		openReplaySelectorButton.Font = Enum.Font.SourceSansBold
 		openReplaySelectorButton.TextSize = 14
 		openReplaySelectorButton.Visible = false
-		openReplaySelectorButton.Parent = p0.screenGui
+		openReplaySelectorButton.Parent = p1.screenGui
 		local UICorner_2 = Instance.new("UICorner")
 		UICorner_2.CornerRadius = UDim.new(0, 4)
 		UICorner_2.Parent = openReplaySelectorButton
@@ -89,18 +89,18 @@ return {
 		UICorner_3.CornerRadius = UDim.new(0, 4)
 		UICorner_3.Parent = submitButton
 		submitButton.MouseButton1Click:Connect(function()
-			-- upvalues: p1 (ref), guidInput (ref)
-			if p1 then
-				p1(guidInput.Text)
+			-- upvalues: p2 (ref), guidInput (ref)
+			if p2 then
+				p2(guidInput.Text)
 			end
 		end)
 		
 		return {
 			Container = replaySelector,
-			SetVisible = function(_, p2)
+			SetVisible = function(_, p3)
 				-- upvalues: replaySelector (ref), openReplaySelectorButton (ref)
-				replaySelector.Visible = p2
-				openReplaySelectorButton.Visible = not p2
+				replaySelector.Visible = p3
+				openReplaySelectorButton.Visible = not p3
 			end
 		}
 	end

@@ -1,25 +1,25 @@
 ﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
 local useAXAnimateScrollFrameModule = require(script.Parent.useAXAnimateScrollFrame)
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: reactModule (ref), useAXAnimateScrollFrameModule (ref)
-	local var2 = reactModule.useRef(nil)
-	useAXAnimateScrollFrameModule(var2)
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), p1 (ref)
-		var2.current = p2
+	local var1 = reactModule.useRef(nil)
+	useAXAnimateScrollFrameModule(var1)
+	local var2 = reactModule.useCallback(function(p3)
+		-- upvalues: var1 (ref), p2 (ref)
+		var1.current = p3
 		
-		if typeof(p1) == "table" then
-			p1.current = p2
+		if typeof(p2) == "table" then
+			p2.current = p3
 			
 			return
-		elseif typeof(p1) == "function" then
-			p1(p2)
+		elseif typeof(p2) == "function" then
+			p2(p3)
 		end
-	end, { p1 })
-	local cloned = table.clone(p0)
+	end, { p2 })
+	local cloned = table.clone(p1)
 	cloned.children = nil
-	cloned.ref = var3
+	cloned.ref = var2
 	
-	return reactModule.createElement("ScrollingFrame", cloned, p0.children)
+	return reactModule.createElement("ScrollingFrame", cloned, p1.children)
 end)

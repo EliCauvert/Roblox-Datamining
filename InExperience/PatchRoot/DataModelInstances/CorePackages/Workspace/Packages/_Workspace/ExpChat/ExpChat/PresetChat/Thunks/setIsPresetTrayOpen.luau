@@ -4,7 +4,7 @@ local expChatSharedModule = require(expChat.Parent.ExpChatShared)
 local constantsModule = require(expChat.PresetChat.Constants)
 local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
 
-local function buildPresetTrayItems(value, p0)
+local function buildPresetTrayItems(value, p1)
 	local t = {}
 	
 	for i, v in value do
@@ -16,7 +16,7 @@ local function buildPresetTrayItems(value, p0)
 					category = name,
 					preset_id = v_2.presetId,
 					index = i_2 - 1,
-					click = p0[v_2.presetId] or 0
+					click = p1[v_2.presetId] or 0
 				})
 			end
 		end
@@ -24,12 +24,12 @@ local function buildPresetTrayItems(value, p0)
 	return t
 end
 
-return function(value, p1)
+return function(value, p2)
 	-- upvalues: expChatSharedModule (ref), constantsModule (ref), httpService (ref), buildPresetTrayItems (ref)
-	if p1 == value.getIsTrayOpen(false) then return end
-	value.setIsTrayOpen(p1)
+	if p2 == value.getIsTrayOpen(false) then return end
+	value.setIsTrayOpen(p2)
 	
-	if p1 then
+	if p2 then
 		expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
 			event_type = constantsModule.Analytics.EventTypes.Show,
 			component = constantsModule.Analytics.Components.PresetTray

@@ -7,9 +7,9 @@ function applicationId()
 		return nil
 	end
 	local appInstallationIdItem = appStorageService:GetItem("AppInstallationId")
-	local var12 = typeof(appInstallationIdItem)
+	local var1 = typeof(appInstallationIdItem)
 	
-	return if var12 == "number" then tonumber(appInstallationIdItem) or nil elseif var12 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -string.len(tostring(1000)))) else nil
+	return if var1 == "number" then tonumber(appInstallationIdItem) or nil elseif var1 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -string.len(tostring(1000)))) else nil
 end
 
 local var1 = reactPerfTrackerKibana
@@ -18,10 +18,10 @@ if var1 <= 0 then
 	return nil
 end
 local randomValue = math.random(0, 1000)
-local var3 = applicationId()
+local var2 = applicationId()
 
-if var3 ~= nil then
-	randomValue = (var3 + 327) % 1000
+if var2 ~= nil then
+	randomValue = (var2 + 327) % 1000
 end
 if randomValue >= var1 then
 	var1 = 0
@@ -71,42 +71,42 @@ if var1 > 0 then
 				end
 			end
 		end)
-		reactRobloxModule.robloxReactProfiling.startTimerSampling(function(p0)
+		reactRobloxModule.robloxReactProfiling.startTimerSampling(function(p1)
 			-- upvalues: self (ref)
-			local id = p0.id
-			local var14 = (p0.endTime - p0.startTime) * 1000
+			local id = p1.id
+			local var3 = (p1.endTime - p1.startTime) * 1000
 			
 			if not self.componentTotalTime[id] then
 				self.componentTotalTime[id] = 0
 				self.componentMaxTime[id] = 0
 				self.componentCount[id] = 0
 			end
-			self.componentTotalTime[id] += var14
+			self.componentTotalTime[id] += var3
 			self.componentCount[id] += 1
 			self.sampleCount += 1
-			self.totalTime += var14
-			self.componentMaxTime[id] = math.max(self.componentMaxTime[id], var14)
+			self.totalTime += var3
+			self.componentMaxTime[id] = math.max(self.componentMaxTime[id], var3)
 			
-			if self.nextSendTime <= p0.startTime then
+			if self.nextSendTime <= p1.startTime then
 				if self.nextSendTime > 0 then
 					self:sendEvents()
 				end
 				self.previousSendTime = self.nextSendTime
 				
 				if self.previousSendTime == 0 then
-					self.previousSendTime = p0.startTime
+					self.previousSendTime = p1.startTime
 				end
-				self.nextSendTime = p0.startTime + 30
+				self.nextSendTime = p1.startTime + 30
 			end
 		end)
 	end
 	
 	function t_1:genEvents()
 		-- upvalues: rbxAnalyticsService (ref)
-		local var15 = 0
+		local var3 = 0
 		
 		for i, v in self.componentCount do
-			var15 += 1
+			var3 += 1
 			table.insert(self.outgoingEvents, {
 				sessionid = if rbxAnalyticsService then rbxAnalyticsService:GetSessionId() else "",
 				component = i,
@@ -122,7 +122,7 @@ if var1 > 0 then
 			summary_sessionid = if rbxAnalyticsService then rbxAnalyticsService:GetSessionId() else "",
 			summary_total_time_ms = self.totalTime,
 			summary_sample_time_s = self.nextSendTime - self.previousSendTime,
-			summary_num_components = var15,
+			summary_num_components = var3,
 			summary_sample_count = self.sampleCount
 		})
 	end

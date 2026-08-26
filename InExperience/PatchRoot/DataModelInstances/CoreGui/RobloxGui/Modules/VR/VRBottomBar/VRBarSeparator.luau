@@ -19,33 +19,33 @@ local _ = t.strictInterface({
 	forwardRef = t.optional(t.table)
 })
 
-local function renderWithSelectionCursor(p0, p1)
+local function renderWithSelectionCursor(p1, p2)
 	-- upvalues: roact (ref), imageSetButton (ref), cursorKind (ref)
 	return roact.createElement(imageSetButton, {
 		Visible = true,
-		AnchorPoint = p0.AnchorPoint,
+		AnchorPoint = p1.AnchorPoint,
 		BackgroundTransparency = 1,
 		Image = "rbxasset://textures/ui/MenuBar/divider.png",
 		Position = UDim2.new(0, 1, 0, 1),
 		Size = UDim2.new(0, 28, 0, 36),
-		LayoutOrder = p0.layoutOrder,
-		SelectionImageObject = p1(cursorKind.RoundedRect),
+		LayoutOrder = p1.layoutOrder,
+		SelectionImageObject = p2(cursorKind.RoundedRect),
 		[roact.Event.Activated] = function() end,
-		[roact.Event.SelectionGained] = p0.onSelectionGained,
-		[roact.Event.SelectionLost] = p0.onSelectionLost,
-		[roact.Ref] = p0.forwardRef
+		[roact.Event.SelectionGained] = p1.onSelectionGained,
+		[roact.Event.SelectionLost] = p1.onSelectionLost,
+		[roact.Ref] = p1.forwardRef
 	})
 end
 
-local function VRBarSeparator(p2)
+local function VRBarSeparator(p1)
 	-- upvalues: withSelectionCursorProvider (ref), renderWithSelectionCursor (ref)
-	return withSelectionCursorProvider(function(p3)
-		-- upvalues: renderWithSelectionCursor (copy), p2 (ref)
-		return renderWithSelectionCursor(p2, p3)
+	return withSelectionCursorProvider(function(p2)
+		-- upvalues: renderWithSelectionCursor (copy), p1 (ref)
+		return renderWithSelectionCursor(p1, p2)
 	end)
 end
 
-return roact.forwardRef(function(p4, p5)
+return roact.forwardRef(function(p1, p2)
 	-- upvalues: roact (ref), VRBarSeparator (ref), cryo (ref)
-	return roact.createElement(VRBarSeparator, cryo.Dictionary.join(p4, { forwardRef = p5 }))
+	return roact.createElement(VRBarSeparator, cryo.Dictionary.join(p1, { forwardRef = p2 }))
 end)

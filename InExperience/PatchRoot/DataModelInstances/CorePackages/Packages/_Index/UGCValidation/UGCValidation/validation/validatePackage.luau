@@ -6,28 +6,28 @@ local validateAssetCreatorModule = require(parent.validation.validateAssetCreato
 local parseContentIdsModule = require(parent.util.ParseContentIds)
 local _ = require(parent.util.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: validateSingleInstanceModule (ref), parseContentIdsModule (ref), constantsModule (ref), analyticsModule (ref), validateAssetCreatorModule (ref)
-	assert(p0.instances ~= nil, "instances required in validationContext for validatePackage")
-	local instances = p0.instances
-	local restrictedUserIds = p0.restrictedUserIds
-	local var5, var6 = validateSingleInstanceModule(instances, p0)
+	assert(p1.instances ~= nil, "instances required in validationContext for validatePackage")
+	local instances = p1.instances
+	local restrictedUserIds = p1.restrictedUserIds
+	local var1, var2 = validateSingleInstanceModule(instances, p1)
 	
-	if not var5 then
-		return var5, var6
+	if not var1 then
+		return var1, var2
 	end
-	local var7 = instances[1]
+	local var3 = instances[1]
 	local t = {}
 	local t_1 = {}
 	
 	if not restrictedUserIds or #restrictedUserIds == 0 then
 		return true
-	elseif parseContentIdsModule.parseWithErrorCheck(t, t_1, var7, constantsModule.PACKAGE_CONTENT_ID_FIELDS, nil, p0) then
-		return validateAssetCreatorModule(t_1, p0)
+	elseif parseContentIdsModule.parseWithErrorCheck(t, t_1, var3, constantsModule.PACKAGE_CONTENT_ID_FIELDS, nil, p1) then
+		return validateAssetCreatorModule(t_1, p1)
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validatePackage_FailedToParse, nil, p0)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validatePackage_FailedToParse, nil, p1)
 	
 	return false, {
-		string.format("Failed to parse package data for model '%s'. Make sure the packageId is valid and try again.", var7:GetFullName())
+		string.format("Failed to parse package data for model '%s'. Make sure the packageId is valid and try again.", var3:GetFullName())
 	}
 end

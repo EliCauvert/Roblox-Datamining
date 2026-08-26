@@ -28,8 +28,8 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local convertPresenceEnumModule = require(profilePlatform.Utils.convertPresenceEnum)
 local fFlagProfilePlatformImproveGameDetailsAnalytics = require(parent.SharedFlags).FFlagProfilePlatformImproveGameDetailsAnalytics
 local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
-local var13 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
-local var14 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
+local var1 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local var2 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
 local t = {
 	lastLocation = "",
 	universeId = "",
@@ -44,81 +44,81 @@ local t_2 = {
 	[enumsModule.PresenceTypes.InStudio] = images["icons/logo/studiologo_small"]
 }
 
-return function(p0)
-	-- upvalues: useDispatch (ref), useNavigation (ref), useStyle (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), reactModule (ref), useProfileWrapperContextModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var14 (ref), var13 (ref), t_1 (ref), t (ref), convertPresenceEnumModule (ref), eventNamesModule (ref), networkingPresenceModule (ref), useSelector (ref), presenceModule (ref), presenceType (ref), appPage (ref), openGameDetails (ref), useLocalization (ref), enumsModule (ref), textKeysModule (ref), t_2 (ref), getIconSize (ref), iconSize (ref), playerContext (ref)
-	local var26
-	local var18 = useDispatch()
-	local var19 = useNavigation()
-	local var20 = useStyle()
-	local var21 = useProfileAnalyticsContextModule()
-	local var22 = if fFlagProfilePlatformImproveGameDetailsAnalytics then useRoactService(roactAnalyticsCommonGameEvents) else nil
-	local var23 = reactModule.useRef(false)
-	local var24 = reactModule.useRef(false)
+return function(p1)
+	-- upvalues: useDispatch (ref), useNavigation (ref), useStyle (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), reactModule (ref), useProfileWrapperContextModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var2 (ref), var1 (ref), t_1 (ref), t (ref), convertPresenceEnumModule (ref), eventNamesModule (ref), networkingPresenceModule (ref), useSelector (ref), presenceModule (ref), presenceType (ref), appPage (ref), openGameDetails (ref), useLocalization (ref), enumsModule (ref), textKeysModule (ref), t_2 (ref), getIconSize (ref), iconSize (ref), playerContext (ref)
+	local var3
+	local var4 = useDispatch()
+	local var5 = useNavigation()
+	local var6 = useStyle()
+	local var7 = useProfileAnalyticsContextModule()
+	local var8 = if fFlagProfilePlatformImproveGameDetailsAnalytics then useRoactService(roactAnalyticsCommonGameEvents) else nil
+	local var9 = reactModule.useRef(false)
+	local var10 = reactModule.useRef(false)
 	local profileId = useProfileWrapperContextModule().profileId
 	local _ = nil
 	
 	if fFlagProfilePlatformPresenceStoreMigrationModule then
 		useEffectOnMount(function()
-			-- upvalues: var14 (copy), profileId (ref)
-			var14.RefreshPresenceByUserId(tostring(profileId))
+			-- upvalues: var2 (copy), profileId (ref)
+			var2.RefreshPresenceByUserId(tostring(profileId))
 		end)
-		local var27, var28 = var13(profileId, t_1)
-		var26 = var27 or (p0.presenceInfoOverride or t)
+		local var11, var12 = var1(profileId, t_1)
+		var3 = var11 or (p1.presenceInfoOverride or t)
 		reactModule.useEffect(function()
-			-- upvalues: var24 (ref), var28 (ref), convertPresenceEnumModule (copy), var26 (write), var21 (ref), eventNamesModule (copy)
-			if var24.current then return end
-			if var28 == "Ready" or var28 == "Failed" then
-				var24.current = true
-				var21.fireAnalyticsEvent(eventNamesModule.ProfilePresenceLoaded, {
-					presenceType = convertPresenceEnumModule(var26.userPresenceType, if var26.universeId then tonumber(var26.universeId) else nil),
-					universeId = var26.universeId
+			-- upvalues: var10 (ref), var12 (ref), convertPresenceEnumModule (copy), var3 (write), var7 (ref), eventNamesModule (copy)
+			if var10.current then return end
+			if var12 == "Ready" or var12 == "Failed" then
+				var10.current = true
+				var7.fireAnalyticsEvent(eventNamesModule.ProfilePresenceLoaded, {
+					presenceType = convertPresenceEnumModule(var3.userPresenceType, if var3.universeId then tonumber(var3.universeId) else nil),
+					universeId = var3.universeId
 				})
 				
 				return
 			end
-		end, { var26, var28, var21 })
+		end, { var3, var12, var7 })
 	else
 		useEffectOnMount(function()
-			-- upvalues: var18 (ref), networkingPresenceModule (copy), profileId (ref), var23 (ref)
-			var18(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):andThen(function()
-				-- upvalues: var23 (copy)
-				var23.current = true
+			-- upvalues: var4 (ref), networkingPresenceModule (copy), profileId (ref), var9 (ref)
+			var4(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):andThen(function()
+				-- upvalues: var9 (copy)
+				var9.current = true
 			end):catch(function(_) end)
 		end)
-		local var25 = useSelector(function(p1)
+		local var13 = useSelector(function(p2)
 			-- upvalues: presenceModule (copy), profileId (ref), presenceType (copy)
-			return presenceModule.Selectors.getUserPresenceByUserId(p1, profileId) or {
+			return presenceModule.Selectors.getUserPresenceByUserId(p2, profileId) or {
 				lastLocation = "",
 				userPresenceType = presenceType.Offline
 			}
 		end)
-		var26 = if not var23.current then p0.presenceInfoOverride or var25 else var25
+		var3 = if not var9.current then p1.presenceInfoOverride or var13 else var13
 		reactModule.useEffect(function()
-			-- upvalues: var23 (ref), var24 (ref), convertPresenceEnumModule (copy), var26 (write), var21 (ref), eventNamesModule (copy)
-			if var23.current and not var24.current then
-				var24.current = true
-				var21.fireAnalyticsEvent(eventNamesModule.ProfilePresenceLoaded, {
-					presenceType = convertPresenceEnumModule(var26.userPresenceType, var26.universeId),
-					universeId = var26.universeId
+			-- upvalues: var9 (ref), var10 (ref), convertPresenceEnumModule (copy), var3 (write), var7 (ref), eventNamesModule (copy)
+			if var9.current and not var10.current then
+				var10.current = true
+				var7.fireAnalyticsEvent(eventNamesModule.ProfilePresenceLoaded, {
+					presenceType = convertPresenceEnumModule(var3.userPresenceType, var3.universeId),
+					universeId = var3.universeId
 				})
 				
 				return
 			end
-		end, { var26 })
+		end, { var3 })
 	end
-	local var29 = convertPresenceEnumModule(var26.userPresenceType, if fFlagProfilePlatformPresenceStoreMigrationModule then if var26.universeId then tonumber(var26.universeId) else nil else var26.universeId)
-	local lastLocation = var26.lastLocation
-	local universeId = var26.universeId
-	local var30 = reactModule.useCallback(function()
-		-- upvalues: var21 (ref), eventNamesModule (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), var22 (ref), var26 (write), appPage (copy), profileId (ref), var18 (ref), openGameDetails (copy), universeId (ref), var19 (ref)
-		var21.fireAnalyticsEvent(eventNamesModule.GameDetailsButton)
+	local var14 = convertPresenceEnumModule(var3.userPresenceType, if fFlagProfilePlatformPresenceStoreMigrationModule then if var3.universeId then tonumber(var3.universeId) else nil else var3.universeId)
+	local lastLocation = var3.lastLocation
+	local universeId = var3.universeId
+	local var15 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), eventNamesModule (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), var8 (ref), var3 (write), appPage (copy), profileId (ref), var4 (ref), openGameDetails (copy), universeId (ref), var5 (ref)
+		var7.fireAnalyticsEvent(eventNamesModule.GameDetailsButton)
 		
 		if fFlagProfilePlatformImproveGameDetailsAnalytics then
-			var22.reportOpenGameDetailFromProfileContext(var26.placeId, var26.universeId, appPage.ProfilePlatform, profileId, "ProfilePlatformContextualPresence")
+			var8.reportOpenGameDetailFromProfileContext(var3.placeId, var3.universeId, appPage.ProfilePlatform, profileId, "ProfilePlatformContextualPresence")
 		end
-		var18(openGameDetails(universeId, var19, { mountAsFullView = true, showBackButton = true }))
-	end, { universeId, var19, var21 })
-	local var31 = useLocalization({
+		var4(openGameDetails(universeId, var5, { mountAsFullView = true, showBackButton = true }))
+	end, { universeId, var5, var7 })
+	local var16 = useLocalization({
 		[enumsModule.PresenceTypes.Online] = textKeysModule.Online,
 		[enumsModule.PresenceTypes.Offline] = textKeysModule.Offline,
 		[enumsModule.PresenceTypes.InStudio] = textKeysModule.InStudio
@@ -128,50 +128,50 @@ return function(p0)
 	local transparency = nil
 	local offline_1 = nil
 	local textMuted = nil
-	local var32 = nil
-	local var33 = nil
+	local var17 = nil
+	local var18 = nil
 	
-	if var26 then
-		if var29 == enumsModule.PresenceTypes.Online then
+	if var3 then
+		if var14 == enumsModule.PresenceTypes.Online then
 			offline = t_2[enumsModule.PresenceTypes.Online]
-			color = var20.Theme.OnlineStatus.Color
-			transparency = var20.Theme.OnlineStatus.Transparency
-			offline_1 = var31.Online
-			textMuted = var20.Theme.TextMuted
-			var32 = 12
-		elseif var29 == enumsModule.PresenceTypes.InGame then
+			color = var6.Theme.OnlineStatus.Color
+			transparency = var6.Theme.OnlineStatus.Transparency
+			offline_1 = var16.Online
+			textMuted = var6.Theme.TextMuted
+			var17 = 12
+		elseif var14 == enumsModule.PresenceTypes.InGame then
 			offline = t_2[enumsModule.PresenceTypes.InGame]
-			color = var20.Theme.IconEmphasis.Color
-			transparency = var20.Theme.IconEmphasis.Transparency
+			color = var6.Theme.IconEmphasis.Color
+			transparency = var6.Theme.IconEmphasis.Transparency
 			offline_1 = lastLocation
-			textMuted = var20.Theme.TextEmphasis
-			var32 = getIconSize(iconSize.Small)
-			var33 = var30
-		elseif var29 == enumsModule.PresenceTypes.InStudio then
+			textMuted = var6.Theme.TextEmphasis
+			var17 = getIconSize(iconSize.Small)
+			var18 = var15
+		elseif var14 == enumsModule.PresenceTypes.InStudio then
 			offline = t_2[enumsModule.PresenceTypes.InStudio]
-			color = var20.Theme.TextDefault.Color
-			transparency = var20.Theme.TextDefault.Transparency
-			offline_1 = var31.InStudio
-			textMuted = var20.Theme.TextMuted
-			var32 = getIconSize(iconSize.Small)
+			color = var6.Theme.TextDefault.Color
+			transparency = var6.Theme.TextDefault.Transparency
+			offline_1 = var16.InStudio
+			textMuted = var6.Theme.TextMuted
+			var17 = getIconSize(iconSize.Small)
 		else
 			offline = t_2[enumsModule.PresenceTypes.Offline]
-			color = var20.Theme.OfflineStatus.Color
-			transparency = var20.Theme.OfflineStatus.Transparency
-			var32 = 12
-			offline_1 = var31.Offline
-			textMuted = var20.Theme.TextMuted
+			color = var6.Theme.OfflineStatus.Color
+			transparency = var6.Theme.OfflineStatus.Transparency
+			var17 = 12
+			offline_1 = var16.Offline
+			textMuted = var6.Theme.TextMuted
 		end
 	end
 	return reactModule.createElement(playerContext, {
 		layoutOrder = 2,
-		fontStyle = var20.Font.CaptionBody,
+		fontStyle = var6.Font.CaptionBody,
 		icon = offline,
 		iconColor = color,
-		iconSize = UDim2.fromOffset(var32, var32),
+		iconSize = UDim2.fromOffset(var17, var17),
 		iconTransparency = transparency,
 		text = offline_1,
 		textColorStyle = textMuted,
-		onActivated = var33
+		onActivated = var18
 	})
 end

@@ -21,12 +21,12 @@ local localization = require(corePackagesService.Workspace.Packages.InExperience
 local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
 local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
 local foundationModule = require(corePackagesService.Packages.Foundation)
-local var16 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
-local var17 = if var16 then require(robloxGui.Modules.Chrome.Service) else nil
-local var18 = if var16 then require(robloxGui.Modules.Chrome.ChromeShared.Unibar.Constants) else nil
+local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var2 = if var1 then require(robloxGui.Modules.Chrome.Service) else nil
+local var3 = if var1 then require(robloxGui.Modules.Chrome.ChromeShared.Unibar.Constants) else nil
 local _ = nil
 robloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local var19 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
+local var4 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local fFlagChromeShortcutRemoveLeaveOnRespawnPage = sharedFlagsModule.FFlagChromeShortcutRemoveLeaveOnRespawnPage
@@ -35,7 +35,7 @@ local fFlagRefactorMenuConfirmationButtonsModule = require(robloxGui.Modules.Set
 local fFlagConfirmationButtonsUseGreyButtonsModule = require(robloxGui.Modules.Settings.Flags.FFlagConfirmationButtonsUseGreyButtons)
 local fFlagRenameRespawnConfirmationPage = sharedFlagsModule.FFlagRenameRespawnConfirmationPage
 local constantsModule = require(robloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
-local var25 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+local var5 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 local foundationProvider = foundationModule.FoundationProvider
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
@@ -44,38 +44,38 @@ local text = foundationModule.Text
 local view = foundationModule.View
 
 local function ResetCharacterButtonsContainer(value)
-	-- upvalues: reactModule (ref), useLastInput (ref), useFocusGuiObject (ref), useLocalization (ref), constantsModule (ref), fFlagRenameRespawnConfirmationPage (ref), input (ref), utilityModule (ref), view (ref), var19 (ref), text (ref), button (ref), inputSize (ref), fFlagConfirmationButtonsUseGreyButtonsModule (ref), buttonVariant (ref)
-	local var30 = reactModule.useRef(nil)
-	local var31 = useLastInput()
-	local var32 = useFocusGuiObject()
-	local var33 = useLocalization({
+	-- upvalues: reactModule (ref), useLastInput (ref), useFocusGuiObject (ref), useLocalization (ref), constantsModule (ref), fFlagRenameRespawnConfirmationPage (ref), input (ref), utilityModule (ref), view (ref), var4 (ref), text (ref), button (ref), inputSize (ref), fFlagConfirmationButtonsUseGreyButtonsModule (ref), buttonVariant (ref)
+	local var6 = reactModule.useRef(nil)
+	local var7 = useLastInput()
+	local var8 = useFocusGuiObject()
+	local var9 = useLocalization({
 		ConfirmResetCharacter = constantsModule.ConfirmResetCharacterLocalizedKey,
 		ResetCharacter = if fFlagRenameRespawnConfirmationPage then constantsModule.RespawnLocalizedKey else constantsModule.ResetCharacterLocalizedKey,
 		DontResetCharacter = constantsModule.DontResetCharacterLocalizedKey
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var31 (ref), input (copy), var32 (ref), var30 (ref)
-		if var31 == input.Touch then
-			var32(nil)
+		-- upvalues: var7 (ref), input (copy), var8 (ref), var6 (ref)
+		if var7 == input.Touch then
+			var8(nil)
 			
 			return
 		end
-		var32(var30.current)
-	end, { var31, var32 })
+		var8(var6.current)
+	end, { var7, var8 })
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col",
-		Position = UDim2.new(0, 0, 0, if var19 then 100 else 0)
+		Position = UDim2.new(0, 0, 0, if var4 then 100 else 0)
 	}, {
 		ResetCharacterText = reactModule.createElement(text, {
 			LayoutOrder = 1,
-			Text = var33.ConfirmResetCharacter,
+			Text = var9.ConfirmResetCharacter,
 			Size = UDim2.new(1, 0, 0, if utilityModule:IsSmallTouchScreen() then 100 else 200),
 			tag = {
 				["text-wrap"] = true,
-				["text-heading-medium"] = not utilityModule:IsSmallTouchScreen() and not var19,
+				["text-heading-medium"] = not utilityModule:IsSmallTouchScreen() and not var4,
 				["text-heading-small"] = utilityModule:IsSmallTouchScreen(),
-				["text-heading-large"] = var19
+				["text-heading-large"] = var4
 			}
 		}),
 		ButtonsContainer = reactModule.createElement(view, {
@@ -84,19 +84,19 @@ local function ResetCharacterButtonsContainer(value)
 		}, {
 			ResetCharacterButton = reactModule.createElement(button, {
 				LayoutOrder = 1,
-				text = var33.ResetCharacter,
+				text = var9.ResetCharacter,
 				size = inputSize.Large,
 				variant = if fFlagConfirmationButtonsUseGreyButtonsModule then buttonVariant.Standard else buttonVariant.SoftEmphasis,
-				width = UDim.new(0, if var19 then 300 else 200),
-				ref = var30,
+				width = UDim.new(0, if var4 then 300 else 200),
+				ref = var6,
 				onActivated = value.onResetFunction
 			}),
 			DontResetCharacterButton = reactModule.createElement(button, {
 				LayoutOrder = 2,
-				text = var33.DontResetCharacter,
+				text = var9.DontResetCharacter,
 				size = inputSize.Large,
 				variant = buttonVariant.Subtle,
-				width = UDim.new(0, if var19 then 300 else 200),
+				width = UDim.new(0, if var4 then 300 else 200),
 				onActivated = reactModule.useCallback(function()
 					-- upvalues: value (ref), utilityModule (copy)
 					value.dontResetCharFromButton(utilityModule:IsUsingGamepad())
@@ -107,23 +107,23 @@ local function ResetCharacterButtonsContainer(value)
 end
 
 local function ResetCharacterContainer(value)
-	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationProvider (ref), foundationModule (ref), reactFocusNavigationModule (ref), var25 (ref), ResetCharacterButtonsContainer (ref)
+	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationProvider (ref), foundationModule (ref), reactFocusNavigationModule (ref), var5 (ref), ResetCharacterButtonsContainer (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-			FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var25 }, {
+			FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var5 }, {
 				ResetCharacterButtonsContainer = reactModule.createElement(ResetCharacterButtonsContainer, value)
 			})
 		})
 	})
 end
 
-local var28 = (function()
-	-- upvalues: robloxGui (ref), rbxAnalyticsService (ref), constantsModule (ref), fFlagRefactorMenuConfirmationButtonsModule (ref), create (ref), fFlagRenameRespawnConfirmationPage (ref), themeModule (ref), var19 (ref), utilityModule (ref), playersService (ref), fFlagRespawnActionChromeShortcutTelemetryModule (ref), cryoModule (ref), avatarEditorService (ref), fFlagEnableConsoleExpControls (ref), reactRobloxModule (ref), reactModule (ref), ResetCharacterContainer (ref)
+local var6 = (function()
+	-- upvalues: robloxGui (ref), rbxAnalyticsService (ref), constantsModule (ref), fFlagRefactorMenuConfirmationButtonsModule (ref), create (ref), fFlagRenameRespawnConfirmationPage (ref), themeModule (ref), var4 (ref), utilityModule (ref), playersService (ref), fFlagRespawnActionChromeShortcutTelemetryModule (ref), cryoModule (ref), avatarEditorService (ref), fFlagEnableConsoleExpControls (ref), reactRobloxModule (ref), reactModule (ref), ResetCharacterContainer (ref)
 	local resetCharacter = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
-	function resetCharacter.DontResetCharFunc(p0)
+	function resetCharacter.DontResetCharFunc(p1)
 		-- upvalues: rbxAnalyticsService (copy), constantsModule (copy), resetCharacter (ref)
 		rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsRespawnCharacterName, {
 			confirmed = constantsModule.AnalyticsCancelledName,
@@ -131,7 +131,7 @@ local var28 = (function()
 		})
 		
 		if resetCharacter.HubRef then
-			resetCharacter.HubRef:PopMenu(p0, true)
+			resetCharacter.HubRef:PopMenu(p1, true)
 		end
 	end
 	
@@ -142,19 +142,19 @@ local var28 = (function()
 		end
 	end
 	
-	function resetCharacter.DontResetCharFromButton(p3)
+	function resetCharacter.DontResetCharFromButton(p1)
 		-- upvalues: resetCharacter (ref)
-		resetCharacter.DontResetCharFunc(p3)
+		resetCharacter.DontResetCharFunc(p1)
 	end
 	
 	resetCharacter.TabHeader = nil
 	resetCharacter.Page.Name = "ResetCharacter"
 	resetCharacter.ShouldShowBottomBar = false
 	resetCharacter.ShouldShowHubBar = false
-	local var35 = nil
+	local var7 = nil
 	
 	if not fFlagRefactorMenuConfirmationButtonsModule then
-		local var36 = create("TextLabel")({
+		local var8 = create("TextLabel")({
 			Name = "ResetCharacterText",
 			BackgroundTransparency = 1,
 			TextWrapped = true,
@@ -165,34 +165,34 @@ local var28 = (function()
 			TextColor3 = Color3.new(1, 1, 1),
 			Size = UDim2.new(1, 0, 0, 200),
 			Parent = resetCharacter.Page,
-			Position = var19 and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
+			Position = var4 and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
 		})
-		var35 = create("Frame")({
+		var7 = create("Frame")({
 			Name = "ResetButtonContainer",
 			BackgroundTransparency = 1,
-			Parent = var36,
+			Parent = var8,
 			Size = UDim2.new(1, 0, 0, 400),
 			Position = UDim2.new(0, 0, 1, 0)
 		})
 		local _ = create("UIGridLayout")({
 			Name = "ResetButtonsLayout",
-			CellSize = var19 and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
+			CellSize = var4 and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
 			CellPadding = UDim2.new(0, 20, 0, 20),
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
-			Parent = var35
+			Parent = var7
 		})
 		
 		if utilityModule:IsSmallTouchScreen() then
-			var36.FontSize = Enum.FontSize.Size24
-			var36.Size = UDim2.new(1, 0, 0, 100)
-		elseif var19 then
-			var36.FontSize = Enum.FontSize.Size48
+			var8.FontSize = Enum.FontSize.Size24
+			var8.Size = UDim2.new(1, 0, 0, 100)
+		elseif var4 then
+			var8.FontSize = Enum.FontSize.Size48
 		end
 	end
-	local var37 = function(p4)
+	local var9 = function(p1)
 		-- upvalues: playersService (copy), constantsModule (copy), fFlagRespawnActionChromeShortcutTelemetryModule (copy), cryoModule (copy), rbxAnalyticsService (copy)
 		local localPlayer = playersService.LocalPlayer
 		
@@ -212,8 +212,8 @@ local var28 = (function()
 			universeid = tostring(game.GameId)
 		}
 		
-		if fFlagRespawnActionChromeShortcutTelemetryModule and p4 and (type(p4) == "table" and p4.resetTelemetryFields) then
-			t = cryoModule.Dictionary.join(t, p4.resetTelemetryFields)
+		if fFlagRespawnActionChromeShortcutTelemetryModule and p1 and (type(p1) == "table" and p1.resetTelemetryFields) then
+			t = cryoModule.Dictionary.join(t, p1.resetTelemetryFields)
 		end
 		rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsRespawnCharacterName, t)
 		rbxAnalyticsService:ReportCounter("InGameMenu-ResetCharacter")
@@ -221,12 +221,12 @@ local var28 = (function()
 	
 	resetCharacter.ResetBindable = true
 	
-	local var38 = function(p5)
-		-- upvalues: avatarEditorService (copy), resetCharacter (ref), var37 (ref)
+	local var10 = function(p1)
+		-- upvalues: avatarEditorService (copy), resetCharacter (ref), var9 (ref)
 		avatarEditorService:BustAvatarFetchCache()
 		
 		if resetCharacter.ResetBindable == true then
-			var37(p5)
+			var9(p1)
 		elseif resetCharacter.ResetBindable then
 			resetCharacter.ResetBindable:Fire()
 		end
@@ -236,23 +236,23 @@ local var28 = (function()
 	end
 	
 	if fFlagEnableConsoleExpControls then
-		resetCharacter.ResetFunction = var38
+		resetCharacter.ResetFunction = var10
 	end
 	if not fFlagRefactorMenuConfirmationButtonsModule then
-		resetCharacter.ResetCharacterButton = utilityModule:MakeStyledButton("ResetCharacter", if fFlagRenameRespawnConfirmationPage then "Respawn" else "Reset", nil, var38)
+		resetCharacter.ResetCharacterButton = utilityModule:MakeStyledButton("ResetCharacter", if fFlagRenameRespawnConfirmationPage then "Respawn" else "Reset", nil, var10)
 		resetCharacter.ResetCharacterButton.NextSelectionRight = nil
-		resetCharacter.ResetCharacterButton.Parent = var35
+		resetCharacter.ResetCharacterButton.Parent = var7
 		local dontResetCharacter = utilityModule:MakeStyledButton("DontResetCharacter", if fFlagRenameRespawnConfirmationPage then "Don't Respawn" else "Don't Reset", nil, resetCharacter.DontResetCharFromButton)
 		dontResetCharacter.NextSelectionLeft = nil
-		dontResetCharacter.Parent = var35
+		dontResetCharacter.Parent = var7
 		resetCharacter.Page.Size = UDim2.new(1, 0, 0, dontResetCharacter.AbsolutePosition.Y + dontResetCharacter.AbsoluteSize.Y)
 	end
 	if fFlagRefactorMenuConfirmationButtonsModule then
 		function resetCharacter.RenderPage()
-			-- upvalues: resetCharacter (ref), reactRobloxModule (copy), reactModule (copy), ResetCharacterContainer (copy), var38 (ref)
+			-- upvalues: resetCharacter (ref), reactRobloxModule (copy), reactModule (copy), ResetCharacterContainer (copy), var10 (ref)
 			resetCharacter.PageRoot = reactRobloxModule.createRoot(resetCharacter.Page)
 			resetCharacter.PageRoot:render(reactModule.createElement(ResetCharacterContainer, {
-				onResetFunction = var38,
+				onResetFunction = var10,
 				dontResetCharFromButton = resetCharacter.DontResetCharFromButton
 			}))
 		end
@@ -268,47 +268,47 @@ local var28 = (function()
 	end
 	return resetCharacter
 end)()
-local var29 = false
-var28.Displayed.Event:connect(function()
-	-- upvalues: var29 (write), fFlagRefactorMenuConfirmationButtonsModule (ref), var28 (write), guiService (ref), fFlagEnableConsoleExpControls (ref), var16 (ref), fFlagChromeShortcutRemoveLeaveOnRespawnPage (ref), var17 (ref), var18 (ref), contextActionService (ref)
-	var29 = true
+local var7 = false
+var6.Displayed.Event:connect(function()
+	-- upvalues: var7 (write), fFlagRefactorMenuConfirmationButtonsModule (ref), var6 (write), guiService (ref), fFlagEnableConsoleExpControls (ref), var1 (ref), fFlagChromeShortcutRemoveLeaveOnRespawnPage (ref), var2 (ref), var3 (ref), contextActionService (ref)
+	var7 = true
 	
 	if fFlagRefactorMenuConfirmationButtonsModule then
-		var28.RenderPage()
+		var6.RenderPage()
 	end
 	if not fFlagRefactorMenuConfirmationButtonsModule then
-		guiService.SelectedCoreObject = var28.ResetCharacterButton
+		guiService.SelectedCoreObject = var6.ResetCharacterButton
 	end
 	if fFlagEnableConsoleExpControls then
-		if not var16 then return end
+		if not var1 then return end
 		if fFlagChromeShortcutRemoveLeaveOnRespawnPage then
-			var17:setShortcutBar(var18.TILTMENU_RESPAWN_DIALOG_SHORTCUTBAR_ID)
+			var2:setShortcutBar(var3.TILTMENU_RESPAWN_DIALOG_SHORTCUTBAR_ID)
 			
 			return
 		end
-		var17:setShortcutBar(var18.TILTMENU_DIALOG_SHORTCUTBAR_ID)
+		var2:setShortcutBar(var3.TILTMENU_DIALOG_SHORTCUTBAR_ID)
 		
 		return
 	else
-		contextActionService:BindCoreAction("ResetCharacterAction", var28.DontResetCharFromHotkey, false, Enum.KeyCode.ButtonB)
+		contextActionService:BindCoreAction("ResetCharacterAction", var6.DontResetCharFromHotkey, false, Enum.KeyCode.ButtonB)
 	end
 end)
-var28.Hidden.Event:connect(function()
-	-- upvalues: var29 (write), fFlagRefactorMenuConfirmationButtonsModule (ref), var28 (write), contextActionService (ref)
-	var29 = false
+var6.Hidden.Event:connect(function()
+	-- upvalues: var7 (write), fFlagRefactorMenuConfirmationButtonsModule (ref), var6 (write), contextActionService (ref)
+	var7 = false
 	
 	if fFlagRefactorMenuConfirmationButtonsModule then
-		var28.UnmountPage()
+		var6.UnmountPage()
 	end
 	contextActionService:UnbindCoreAction("ResetCharacterAction")
 end)
 
-function var28.SetResetCallback(_, p6)
-	-- upvalues: var29 (write), var28 (write)
-	if p6 == false and var29 then
-		var28.HubRef:PopMenu(nil, true)
+function var28.SetResetCallback(_, p1)
+	-- upvalues: var7 (write), var6 (write)
+	if p1 == false and var7 then
+		var6.HubRef:PopMenu(nil, true)
 	end
-	var28.ResetBindable = p6
+	var6.ResetBindable = p1
 end
 
-return var28
+return var6

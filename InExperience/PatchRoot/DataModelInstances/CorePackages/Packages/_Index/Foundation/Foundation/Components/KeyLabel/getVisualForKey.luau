@@ -1,13 +1,13 @@
 ﻿local userInputService = require(script:FindFirstAncestor("Foundation").Utility.Wrappers).Services.UserInputService
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), userInputService (ref)
-	if t[p0] then
-		return t[p0]
+	if t[p1] then
+		return t[p1]
 	end
 	local _ = nil
-	local var1 = userInputService:GetImageForKeyCode(p0)
+	local var1 = userInputService:GetImageForKeyCode(p1)
 	
 	if var1 and var1 ~= "" then
 		return {
@@ -19,9 +19,9 @@ return function(p0)
 	local t_1 = {
 		keyVisualType = "String",
 		size = UDim2.fromScale(0.8, 0.8),
-		key = userInputService:GetStringForKeyCode(p0) or ""
+		key = userInputService:GetStringForKeyCode(p1) or ""
 	}
-	t[p0] = t_1
+	t[p1] = t_1
 	
 	return t_1
 end

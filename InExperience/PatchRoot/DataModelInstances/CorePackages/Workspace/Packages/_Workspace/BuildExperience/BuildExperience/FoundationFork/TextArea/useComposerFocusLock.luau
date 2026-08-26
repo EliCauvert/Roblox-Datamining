@@ -1,14 +1,14 @@
 ﻿local reactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p0 (ref)
-		for i, v in p1 do
+		-- upvalues: p2 (ref), p1 (ref)
+		for i, v in p2 do
 			local current = v.current
 			
 			if current ~= nil then
-				if p0 then
+				if p1 then
 					current.TextEditable = false
 					current.Active = false
 					current:ReleaseFocus()
@@ -18,5 +18,5 @@ return function(p0, p1)
 				end
 			end
 		end
-	end, { p0 })
+	end, { p1 })
 end

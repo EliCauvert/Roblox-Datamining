@@ -111,66 +111,66 @@ button.defaultProps = {
 	buttonType = buttonTypeModule.PrimarySystem
 }
 
-function button.render(p0)
+function button.render(p1)
 	-- upvalues: withSelectionCursorProviderModule (ref), reactModule (ref), roactGamepadModule (ref), genericButtonModule (ref), cursorKindModule (ref), t_4 (ref), t_2 (ref), t_3 (ref), t (ref), t_1 (ref)
-	return withSelectionCursorProviderModule(function(p1)
-		-- upvalues: p0 (ref), reactModule (copy), roactGamepadModule (copy), genericButtonModule (copy), cursorKindModule (copy), t_4 (copy), t_2 (copy), t_3 (copy), t (copy), t_1 (copy)
-		return reactModule.createElement(if p0.props.isRoactGamepadEnabled then roactGamepadModule.Focusable[genericButtonModule] else genericButtonModule, {
-			[reactModule.Tag] = p0.props[reactModule.Tag],
-			Size = p0.props.size,
-			standardSize = p0.props.standardSize,
-			maxWidth = p0.props.maxWidth,
-			fitContent = p0.props.fitContent,
-			AnchorPoint = p0.props.anchorPoint,
-			Position = p0.props.position,
-			LayoutOrder = p0.props.layoutOrder,
-			SelectionImageObject = if p0.props.cursor then p0.props.cursor else p1(cursorKindModule.RoundedRectNoInset),
-			icon = p0.props.icon,
-			text = p0.props.text,
-			inputIcon = p0.props.inputIcon,
-			fontStyle = p0.props.fontStyle,
-			isDisabled = p0.props.isDisabled,
-			isLoading = p0.props.isLoading,
-			isHoverBackgroundEnabled = t_4[p0.props.buttonType],
-			isDelayedInput = p0.props.isDelayedInput,
-			enableInputDelayed = p0.props.enableInputDelayed,
-			delayInputSeconds = p0.props.delayInputSeconds,
-			onActivated = p0.props.onActivated,
-			onStateChanged = p0.props.onStateChanged,
-			userInteractionEnabled = p0.props.userInteractionEnabled,
-			buttonImage = t_2[p0.props.buttonType],
-			delayedInputImage = t_3[p0.props.buttonType],
-			buttonStateColorMap = t[p0.props.buttonType],
-			contentStateColorMap = t_1[p0.props.buttonType],
-			buttonTextOverride = p0.props.buttonTextOverride,
-			Selectable = p0.props.Selectable,
-			NextSelectionUp = p0.props.NextSelectionUp,
-			NextSelectionDown = p0.props.NextSelectionDown,
-			NextSelectionLeft = p0.props.NextSelectionLeft,
-			NextSelectionRight = p0.props.NextSelectionRight,
-			ref = p0.props.buttonRef,
-			feedbackType = p0.props.feedbackType,
-			[reactModule.Change.AbsoluteSize] = p0.props[reactModule.Change.AbsoluteSize],
-			[reactModule.Change.AbsolutePosition] = p0.props[reactModule.Change.AbsolutePosition]
+	return withSelectionCursorProviderModule(function(p2)
+		-- upvalues: p1 (ref), reactModule (copy), roactGamepadModule (copy), genericButtonModule (copy), cursorKindModule (copy), t_4 (copy), t_2 (copy), t_3 (copy), t (copy), t_1 (copy)
+		return reactModule.createElement(if p1.props.isRoactGamepadEnabled then roactGamepadModule.Focusable[genericButtonModule] else genericButtonModule, {
+			[reactModule.Tag] = p1.props[reactModule.Tag],
+			Size = p1.props.size,
+			standardSize = p1.props.standardSize,
+			maxWidth = p1.props.maxWidth,
+			fitContent = p1.props.fitContent,
+			AnchorPoint = p1.props.anchorPoint,
+			Position = p1.props.position,
+			LayoutOrder = p1.props.layoutOrder,
+			SelectionImageObject = if p1.props.cursor then p1.props.cursor else p2(cursorKindModule.RoundedRectNoInset),
+			icon = p1.props.icon,
+			text = p1.props.text,
+			inputIcon = p1.props.inputIcon,
+			fontStyle = p1.props.fontStyle,
+			isDisabled = p1.props.isDisabled,
+			isLoading = p1.props.isLoading,
+			isHoverBackgroundEnabled = t_4[p1.props.buttonType],
+			isDelayedInput = p1.props.isDelayedInput,
+			enableInputDelayed = p1.props.enableInputDelayed,
+			delayInputSeconds = p1.props.delayInputSeconds,
+			onActivated = p1.props.onActivated,
+			onStateChanged = p1.props.onStateChanged,
+			userInteractionEnabled = p1.props.userInteractionEnabled,
+			buttonImage = t_2[p1.props.buttonType],
+			delayedInputImage = t_3[p1.props.buttonType],
+			buttonStateColorMap = t[p1.props.buttonType],
+			contentStateColorMap = t_1[p1.props.buttonType],
+			buttonTextOverride = p1.props.buttonTextOverride,
+			Selectable = p1.props.Selectable,
+			NextSelectionUp = p1.props.NextSelectionUp,
+			NextSelectionDown = p1.props.NextSelectionDown,
+			NextSelectionLeft = p1.props.NextSelectionLeft,
+			NextSelectionRight = p1.props.NextSelectionRight,
+			ref = p1.props.buttonRef,
+			feedbackType = p1.props.feedbackType,
+			[reactModule.Change.AbsoluteSize] = p1.props[reactModule.Change.AbsoluteSize],
+			[reactModule.Change.AbsolutePosition] = p1.props[reactModule.Change.AbsolutePosition]
 		})
 	end)
 end
 
-local var26 = function(p2)
+local var1 = function(p1)
 	-- upvalues: useCursorModule (ref), uDim (ref), cryoModule (ref), reactModule (ref), button (ref)
-	return reactModule.createElement(button, cryoModule.Dictionary.join({ cursor = useCursorModule(uDim) }, p2))
+	return reactModule.createElement(button, cryoModule.Dictionary.join({ cursor = useCursorModule(uDim) }, p1))
 end
 
-local var27 = reactModule.forwardRef(function(p3, p4)
-	-- upvalues: UIBloxConfigModule (ref), foundationModule (ref), cryoModule (ref), button (ref), foundationButtonUtilsModule (ref), reactModule (ref), roactGamepadModule (ref), var26 (ref)
-	if not UIBloxConfigModule.useFoundationButton or p3.DO_NOT_USE_useUIBloxButton then
-		return reactModule.createElement(var26, cryoModule.Dictionary.join(p3, { buttonRef = p3.buttonRef or p4 }))
+local var2 = reactModule.forwardRef(function(p1, p2)
+	-- upvalues: UIBloxConfigModule (ref), foundationModule (ref), cryoModule (ref), button (ref), foundationButtonUtilsModule (ref), reactModule (ref), roactGamepadModule (ref), var1 (ref)
+	if not UIBloxConfigModule.useFoundationButton or p1.DO_NOT_USE_useUIBloxButton then
+		return reactModule.createElement(var1, cryoModule.Dictionary.join(p1, { buttonRef = p1.buttonRef or p2 }))
 	end
-	local var28 = foundationModule.Hooks.useTokens()
-	local var29 = cryoModule.Dictionary.join(button.defaultProps, p3)
-	local isRoactGamepadEnabled = var29.isRoactGamepadEnabled
-	local maxWidth = foundationButtonUtilsModule.getMaxWidth(var29.standardSize, var29.maxWidth)
-	local buttonRef = p3.buttonRef or (p4 or reactModule.useRef(nil))
+	local var3 = foundationModule.Hooks.useTokens()
+	local var4 = cryoModule.Dictionary.join(button.defaultProps, p1)
+	local isRoactGamepadEnabled = var4.isRoactGamepadEnabled
+	local maxWidth = foundationButtonUtilsModule.getMaxWidth(var4.standardSize, var4.maxWidth)
+	local buttonRef = p1.buttonRef or (p2 or reactModule.useRef(nil))
 	reactModule.useLayoutEffect(function()
 		-- upvalues: maxWidth (ref), buttonRef (ref)
 		local UISizeConstraint = nil
@@ -190,27 +190,27 @@ local var27 = reactModule.forwardRef(function(p3, p4)
 	end, { maxWidth, buttonRef })
 	
 	return reactModule.createElement(if isRoactGamepadEnabled then roactGamepadModule.Focusable[foundationModule.Button] else foundationModule.Button, {
-		variant = foundationButtonUtilsModule.buttonMapping[var29.buttonType],
-		size = foundationButtonUtilsModule.getSizeMapping(var29.standardSize, var29.size, var28),
-		width = foundationButtonUtilsModule.getWidth(var29.standardSize, var29.size, var29.fitContent),
-		icon = foundationButtonUtilsModule.findIcon(var29.icon),
-		text = var29.text,
-		isLoading = var29.isLoading,
-		isDisabled = var29.isDisabled or (if var29.userInteractionEnabled ~= false then var29.isDelayedInput and not var29.enableInputDelayed else true),
-		inputDelay = if var29.isDelayedInput and var29.enableInputDelayed then var29.delayInputSeconds or 3 else nil,
-		onActivated = var29.onActivated,
-		testId = foundationButtonUtilsModule.getTestId(var29[reactModule.Tag]),
+		variant = foundationButtonUtilsModule.buttonMapping[var4.buttonType],
+		size = foundationButtonUtilsModule.getSizeMapping(var4.standardSize, var4.size, var3),
+		width = foundationButtonUtilsModule.getWidth(var4.standardSize, var4.size, var4.fitContent),
+		icon = foundationButtonUtilsModule.findIcon(var4.icon),
+		text = var4.text,
+		isLoading = var4.isLoading,
+		isDisabled = var4.isDisabled or (if var4.userInteractionEnabled ~= false then var4.isDelayedInput and not var4.enableInputDelayed else true),
+		inputDelay = if var4.isDelayedInput and var4.enableInputDelayed then var4.delayInputSeconds or 3 else nil,
+		onActivated = var4.onActivated,
+		testId = foundationButtonUtilsModule.getTestId(var4[reactModule.Tag]),
 		ref = buttonRef,
-		AnchorPoint = var29.anchorPoint,
-		Position = var29.position,
-		LayoutOrder = var29.layoutOrder,
-		Selectable = var29.Selectable,
-		NextSelectionUp = var29.NextSelectionUp,
-		NextSelectionDown = var29.NextSelectionDown,
-		NextSelectionLeft = var29.NextSelectionLeft,
-		NextSelectionRight = var29.NextSelectionRight
+		AnchorPoint = var4.anchorPoint,
+		Position = var4.position,
+		LayoutOrder = var4.layoutOrder,
+		Selectable = var4.Selectable,
+		NextSelectionUp = var4.NextSelectionUp,
+		NextSelectionDown = var4.NextSelectionDown,
+		NextSelectionLeft = var4.NextSelectionLeft,
+		NextSelectionRight = var4.NextSelectionRight
 	})
 end)
-var27.validateProps = button.validateProps
+var2.validateProps = button.validateProps
 
-return var27
+return var2

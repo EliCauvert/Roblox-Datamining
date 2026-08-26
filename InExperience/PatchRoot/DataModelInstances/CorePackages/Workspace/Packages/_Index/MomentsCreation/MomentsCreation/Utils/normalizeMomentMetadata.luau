@@ -1,13 +1,13 @@
-﻿local function normalizeValue(p0)
+﻿local function normalizeValue(p1)
 	-- upvalues: normalizeValue (ref)
-	if typeof(p0) == "EnumItem" then
-		return p0.Name
-	elseif typeof(p0) ~= "table" then
-		return p0
+	if typeof(p1) == "EnumItem" then
+		return p1.Name
+	elseif typeof(p1) ~= "table" then
+		return p1
 	end
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		t[i] = normalizeValue(v)
 	end
 	return t

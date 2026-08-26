@@ -16,25 +16,25 @@ local t_1 = {
 }
 local t_2 = { Transparency = 1 }
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), t (ref), fFlagAXCategoryMenuVisualFixes (ref), getFixedTabHeightModule (ref), t_1 (ref), text (ref), t_2 (ref)
-	local var7 = useTokens()
-	local padding = p0.padding or Vector2.new(var7.Padding.Small, var7.Padding.Medium)
+	local var1 = useTokens()
+	local padding = p1.padding or Vector2.new(var1.Padding.Small, var1.Padding.Medium)
 	
 	return reactModule.createElement(view, {
-		ref = p1,
-		onActivated = p0.onActivated,
+		ref = p2,
+		onActivated = p1.onActivated,
 		backgroundStyle = t,
 		padding = if fFlagAXCategoryMenuVisualFixes then Vector2.new(padding.X, 0) else padding,
-		Size = if fFlagAXCategoryMenuVisualFixes then UDim2.fromOffset(0, getFixedTabHeightModule(var7)) else UDim2.fromScale(0, 0),
+		Size = if fFlagAXCategoryMenuVisualFixes then UDim2.fromOffset(0, getFixedTabHeightModule(var1)) else UDim2.fromScale(0, 0),
 		AutomaticSize = if fFlagAXCategoryMenuVisualFixes then Enum.AutomaticSize.X else Enum.AutomaticSize.XY,
 		layout = if fFlagAXCategoryMenuVisualFixes then t_1 else nil,
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Text = reactModule.createElement(text, {
-			Text = p0.text,
-			textStyle = if p0.isActive then p0.activeTextStyle or var7.Color.Content.Emphasis else p0.textStyle or var7.Color.Content.Muted,
-			fontStyle = p0.fontStyle or var7.Typography.TitleLarge,
+			Text = p1.text,
+			textStyle = if p1.isActive then p1.activeTextStyle or var1.Color.Content.Emphasis else p1.textStyle or var1.Color.Content.Muted,
+			fontStyle = p1.fontStyle or var1.Typography.TitleLarge,
 			Size = UDim2.fromScale(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
 			backgroundStyle = t_2

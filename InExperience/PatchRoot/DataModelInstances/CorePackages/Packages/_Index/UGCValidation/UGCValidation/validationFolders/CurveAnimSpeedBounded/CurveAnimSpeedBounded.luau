@@ -23,34 +23,34 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), getFStringUGCValidationMaxAnimationDeltasModule (ref), getFFlagUGCValidateFixCurveAnimFrameTimeErrorMessageModule (ref), errorSourceStringsModule (ref)
-	local animFrames = p1.curveAnimComputedFrames.animFrames
-	local var7 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
-	local var8 = var7 / 0.033333333333
-	local var9 = getFStringUGCValidationMaxAnimationDeltasModule.asNumber() * var8
-	local var10 = if getFFlagUGCValidateFixCurveAnimFrameTimeErrorMessageModule() then getFStringUGCValidationMaxAnimationDeltasModule.asNumber() * 30 else nil
+	local animFrames = p2.curveAnimComputedFrames.animFrames
+	local var1 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
+	local var2 = var1 / 0.033333333333
+	local var3 = getFStringUGCValidationMaxAnimationDeltasModule.asNumber() * var2
+	local var4 = if getFFlagUGCValidateFixCurveAnimFrameTimeErrorMessageModule() then getFStringUGCValidationMaxAnimationDeltasModule.asNumber() * 30 else nil
 	local t = {}
 	
 	for i, v in animFrames do
 		for i_1, v_1 in v do
-			local var12 = t[i_1]
+			local var5 = t[i_1]
 			
-			if var12 then
-				local magnitude = (v_1.Position - var12.Position).Magnitude
+			if var5 then
+				local magnitude = (v_1.Position - var5.Position).Magnitude
 				
-				if var9 < magnitude then
+				if var3 < magnitude then
 					if getFFlagUGCValidateFixCurveAnimFrameTimeErrorMessageModule() then
-						p0:fail(errorSourceStringsModule.Keys.CurveAnim_SpeedTooFast, {
-							time = string.format("%.2f", (i - 1) * var7),
+						p1:fail(errorSourceStringsModule.Keys.CurveAnim_SpeedTooFast, {
+							time = string.format("%.2f", (i - 1) * var1),
 							bodyPart = i_1,
-							speed = string.format("%.2f", magnitude / var8 * 30),
-							maxSpeed = string.format("%.2f", var10)
+							speed = string.format("%.2f", magnitude / var2 * 30),
+							maxSpeed = string.format("%.2f", var4)
 						})
 						
 						return
 					end
-					p0:fail(errorSourceStringsModule.Keys.CurveAnim_SpeedTooFastLegacy, {
+					p1:fail(errorSourceStringsModule.Keys.CurveAnim_SpeedTooFastLegacy, {
 						bodyPart = i_1,
 						maxMovement = getFStringUGCValidationMaxAnimationDeltasModule.asString()
 					})

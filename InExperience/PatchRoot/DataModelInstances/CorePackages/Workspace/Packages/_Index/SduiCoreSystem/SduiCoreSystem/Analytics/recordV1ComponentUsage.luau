@@ -1,77 +1,77 @@
 ﻿local sduiUsageRecorderModule = require(script:FindFirstAncestor("SduiCoreSystem").Analytics.SduiUsageRecorder)
 
-local function recordV1ComponentUsage(p0, p1)
+local function recordV1ComponentUsage(p1, p2)
 	-- upvalues: sduiUsageRecorderModule (ref), recordV1ComponentUsage (ref)
-	if not p1 then return end
-	local var2 = sduiUsageRecorderModule.isTypeSamplingEnabled()
-	local var3 = sduiUsageRecorderModule.isParamSamplingEnabled()
+	if not p2 then return end
+	local var1 = sduiUsageRecorderModule.isTypeSamplingEnabled()
+	local var2 = sduiUsageRecorderModule.isParamSamplingEnabled()
 	
-	if not var2 and not var3 then return end
-	local componentType = p1.componentType
+	if not var1 and not var2 then return end
+	local componentType = p2.componentType
 	
 	if typeof(componentType) ~= "string" then return end
-	if var2 then
-		sduiUsageRecorderModule.recordComponentType(p0, "v1", componentType)
+	if var1 then
+		sduiUsageRecorderModule.recordComponentType(p1, "v1", componentType)
 	end
 	local recordActionConfig = nil
 	
-	local function visitValueForActions(p2)
+	local function visitValueForActions(p3)
 		-- upvalues: recordActionConfig (write), visitValueForActions (ref)
-		if typeof(p2) ~= "table" then return end
-		if typeof(p2.actionType) == "string" then
-			recordActionConfig(p2)
+		if typeof(p3) ~= "table" then return end
+		if typeof(p3.actionType) == "string" then
+			recordActionConfig(p3)
 			
 			return
 		end
-		for i, v in p2 do
+		for i, v in p3 do
 			if typeof(v) == "table" then
 				visitValueForActions(v)
 			end
 		end
 	end
 	
-	recordActionConfig = function(p3)
-		-- upvalues: var2 (ref), sduiUsageRecorderModule (copy), p0 (ref), var3 (ref), visitValueForActions (ref)
-		local actionType = p3.actionType
+	recordActionConfig = function(p4)
+		-- upvalues: var1 (ref), sduiUsageRecorderModule (copy), p1 (ref), var2 (ref), visitValueForActions (ref)
+		local actionType = p4.actionType
 		
 		if typeof(actionType) ~= "string" then return end
-		if var2 then
-			sduiUsageRecorderModule.recordActionType(p0, "v1", actionType)
+		if var1 then
+			sduiUsageRecorderModule.recordActionType(p1, "v1", actionType)
 		end
-		local actionParams = p3.actionParams
+		local actionParams = p4.actionParams
 		
 		if typeof(actionParams) ~= "table" then return end
 		for i, v in actionParams do
-			if typeof(i) == "string" and var3 then
-				sduiUsageRecorderModule.recordActionParam(p0, "v1", actionType, i)
+			if typeof(i) == "string" and var2 then
+				sduiUsageRecorderModule.recordActionParam(p1, "v1", actionType, i)
 			end
 			visitValueForActions(v)
 		end
 	end
 	
-	local function walkProps(p4)
-		-- upvalues: var3 (ref), sduiUsageRecorderModule (copy), p0 (ref), componentType (ref), visitValueForActions (ref)
-		if typeof(p4) ~= "table" then return end
-		for i, v in p4 do
-			if typeof(i) == "string" and var3 then
-				sduiUsageRecorderModule.recordProp(p0, "v1", componentType, i)
+	local function walkProps(p5)
+		-- upvalues: var2 (ref), sduiUsageRecorderModule (copy), p1 (ref), componentType (ref), visitValueForActions (ref)
+		if typeof(p5) ~= "table" then return end
+		for i, v in p5 do
+			if typeof(i) == "string" and var2 then
+				sduiUsageRecorderModule.recordProp(p1, "v1", componentType, i)
 			end
 			visitValueForActions(v)
 		end
 	end
 	
-	walkProps(p1.props)
+	walkProps(p2.props)
 	
-	if typeof(p1.conditionalProps) == "table" then
-		for i, v in p1.conditionalProps do
+	if typeof(p2.conditionalProps) == "table" then
+		for i, v in p2.conditionalProps do
 			if typeof(v) == "table" then
 				walkProps(v.propOverrides)
 			end
 		end
 	end
-	if typeof(p1.children) == "table" then
-		for i, v in p1.children do
-			recordV1ComponentUsage(p0, v)
+	if typeof(p2.children) == "table" then
+		for i, v in p2.children do
+			recordV1ComponentUsage(p1, v)
 		end
 	end
 end

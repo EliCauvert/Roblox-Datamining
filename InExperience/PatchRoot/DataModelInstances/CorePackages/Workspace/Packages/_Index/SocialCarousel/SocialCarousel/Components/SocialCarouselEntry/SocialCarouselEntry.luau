@@ -20,55 +20,55 @@ local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocia
 local fFlagEnableDesktopGameJoinCard = require(parent.SharedFlags).FFlagEnableDesktopGameJoinCard
 local carouselModule = require(socialCarousel.Components.Carousel)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), fFlagEnableDesktopGameJoinCard (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagLuaAppAddSortDataToSocialCarouselClicks (ref), fFlagLuaAppUserSeenCollectionUnifiedFields (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref)
-	local var10 = useRoactService(roactAnalytics)
-	local var11 = useRoactService(appEventIngestService)
-	local var12 = useSocialCarouselLoadTimerModule(useSocialCarouselAnalyticsModule().reportLoadingEvent)
-	local var13 = reactModule.useRef(os.clock())
-	local var14 = useSocialCarouselListModule(p0.roduxKey, p0.customTileList)
-	local var15 = nil
-	local var16 = nil
+	local var1 = useRoactService(roactAnalytics)
+	local var2 = useRoactService(appEventIngestService)
+	local var3 = useSocialCarouselLoadTimerModule(useSocialCarouselAnalyticsModule().reportLoadingEvent)
+	local var4 = reactModule.useRef(os.clock())
+	local var5 = useSocialCarouselListModule(p1.roduxKey, p1.customTileList)
+	local var6 = nil
+	local var7 = nil
 	
 	if fFlagEnableDesktopGameJoinCard then
-		local var17, var18 = reactModule.useState(nil)
-		var15 = var17
-		var16 = var18
+		local var8, var9 = reactModule.useState(nil)
+		var6 = var8
+		var7 = var9
 	end
-	local var19 = useSocialCarouselUnifiedLoggingModule(var10, var11, p0.unifiedLogging, var14, var13)
-	local var20 = useThrottledCallback(function()
-		-- upvalues: var14 (ref)
-		var14.refreshFriendsList()
+	local var10 = useSocialCarouselUnifiedLoggingModule(var1, var2, p1.unifiedLogging, var5, var4)
+	local var11 = useThrottledCallback(function()
+		-- upvalues: var5 (ref)
+		var5.refreshFriendsList()
 	end, friendCarouselRefreshThrottleInterval)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var20 (ref)
-		if p0.refreshSignal then
-			p0.refreshSignal:connect(var20)
+		-- upvalues: p1 (ref), var11 (ref)
+		if p1.refreshSignal then
+			p1.refreshSignal:connect(var11)
 			
 			return
 		end
-	end, { p0.refreshSignal })
+	end, { p1.refreshSignal })
 	
 	return reactModule.createElement(socialCarouselContextModule.Provider, {
 		value = {
-			eventIngest = var11,
-			appAnalytics = var10,
-			hideCarouselHeader = p0.hideCarouselHeader,
-			openGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var15 else nil,
-			setOpenGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var16 else nil,
-			unifiedLogging = var19,
-			sortAnalyticsData = if fFlagLuaAppAddSortDataToSocialCarouselClicks or fFlagLuaAppUserSeenCollectionUnifiedFields then p0.sortAnalyticsData else nil,
-			friendRequestCount = var14.friendRequestCount,
-			recommendationCount = var14.recommendationCount,
-			friendCount = var14.friendCount,
-			tiles = var14.tiles,
-			isLoading = var14.isLoading,
-			onSuccessfulRender = var12.onSuccessfulRender,
-			selectionOrderBase = p0.selectionOrderBase,
-			source = p0.source,
-			navigateToQRCodePage = if fFlagSocialCarouselShareQREnabled then p0.navigateToQRCodePage else nil
+			eventIngest = var2,
+			appAnalytics = var1,
+			hideCarouselHeader = p1.hideCarouselHeader,
+			openGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var6 else nil,
+			setOpenGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var7 else nil,
+			unifiedLogging = var10,
+			sortAnalyticsData = if fFlagLuaAppAddSortDataToSocialCarouselClicks or fFlagLuaAppUserSeenCollectionUnifiedFields then p1.sortAnalyticsData else nil,
+			friendRequestCount = var5.friendRequestCount,
+			recommendationCount = var5.recommendationCount,
+			friendCount = var5.friendCount,
+			tiles = var5.tiles,
+			isLoading = var5.isLoading,
+			onSuccessfulRender = var3.onSuccessfulRender,
+			selectionOrderBase = p1.selectionOrderBase,
+			source = p1.source,
+			navigateToQRCodePage = if fFlagSocialCarouselShareQREnabled then p1.navigateToQRCodePage else nil
 		}
 	}, {
-		Carousel = reactModule.createElement(carouselModule, { appCompositionEnabled = p0.appCompositionEnabled })
+		Carousel = reactModule.createElement(carouselModule, { appCompositionEnabled = p1.appCompositionEnabled })
 	})
 end

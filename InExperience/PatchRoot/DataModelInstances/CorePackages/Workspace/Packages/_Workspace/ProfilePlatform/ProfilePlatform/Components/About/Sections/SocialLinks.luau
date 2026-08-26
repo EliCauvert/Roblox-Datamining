@@ -24,24 +24,24 @@ local list = {
 	"guilded"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), list (ref), reactModule (ref), button (ref), t (ref), inputSize (ref), buttonVariant (ref), view (ref), text (ref)
-	local var6 = useLocalization({
+	local var1 = useLocalization({
 		socialLinks = textKeysModule.SocialLinks,
 		noSocialLink = textKeysModule.NoSocialLink
 	})
 	local t_1 = {}
 	
-	if p0.socialLinks then
+	if p1.socialLinks then
 		for i, v in ipairs(list) do
-			local var8 = p0.socialLinks[v]
+			local var2 = p1.socialLinks[v]
 			
-			if var8 and var8.target then
+			if var2 and var2.target then
 				t_1[v] = reactModule.createElement(button, {
 					Selectable = false,
 					tag = "auto-y size-full-0 padding-left-small padding-right-small no-hover",
 					LayoutOrder = i,
-					text = var8.target,
+					text = var2.target,
 					icon = t[v],
 					size = inputSize.Small,
 					variant = buttonVariant.Utility,
@@ -52,20 +52,20 @@ return function(p0)
 	end
 	return reactModule.createElement(view, {
 		tag = "col size-full-0 auto-y gap-small align-x-left",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		SocialLinksTitle = reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "auto-y size-full-0 text-align-x-left text-heading-small",
-			Text = var6.socialLinks
+			Text = var1.socialLinks
 		}),
-		LinksContainer = if p0.socialLinks then reactModule.createElement(view, {
+		LinksContainer = if p1.socialLinks then reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "row wrap size-full-0 auto-xy gap-small align-x-left"
 		}, t_1) else reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "auto-y size-full-0 text-align-x-left text-body-medium",
-			Text = var6.noSocialLink
+			Text = var1.noSocialLink
 		})
 	})
 end

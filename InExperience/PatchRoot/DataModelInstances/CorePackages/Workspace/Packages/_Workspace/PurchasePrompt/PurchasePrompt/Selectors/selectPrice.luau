@@ -7,18 +7,18 @@ local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags
 local fFlagAXFixMISUpsellDiscountSummary = sharedFlagsModule.FFlagAXFixMISUpsellDiscountSummary
 local selectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagFixResaleDisplayPriceModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectCartPricingOverrideModule (ref), fFlagAXFixMISUpsellDiscountSummary (ref)
-	local productInfo = p0.productInfo
+	local productInfo = p1.productInfo
 	local price = productInfo.price or 0
 	local basePrice = productInfo.basePrice or price
 	local priceDiscountDetails = productInfo.priceDiscountDetails or {}
 	
-	if fFlagFixResaleDisplayPriceModule and p0.promptRequest then
-		local collectibleItemInstanceId = p0.promptRequest.collectibleItemInstanceId
+	if fFlagFixResaleDisplayPriceModule and p1.promptRequest then
+		local collectibleItemInstanceId = p1.promptRequest.collectibleItemInstanceId
 		
 		if collectibleItemInstanceId and collectibleItemInstanceId ~= "" then
-			local expectedPrice = p0.promptRequest.expectedPrice
+			local expectedPrice = p1.promptRequest.expectedPrice
 			
 			if expectedPrice ~= nil then
 				price = expectedPrice
@@ -27,13 +27,13 @@ return function(p0)
 		end
 	end
 	if fFlagPurchasePromptCartPricingEnabledModule then
-		local var8 = selectCartPricingOverrideModule(p0)
+		local var1 = selectCartPricingOverrideModule(p1)
 		
-		if var8 ~= nil then
-			price = var8.priceInRobux
+		if var1 ~= nil then
+			price = var1.priceInRobux
 			
-			if var8.basePriceInRobux ~= nil then
-				basePrice = var8.basePriceInRobux
+			if var1.basePriceInRobux ~= nil then
+				basePrice = var1.basePriceInRobux
 			end
 		end
 	end

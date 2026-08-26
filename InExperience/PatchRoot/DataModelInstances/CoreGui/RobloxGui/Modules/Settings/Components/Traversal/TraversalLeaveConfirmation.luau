@@ -19,60 +19,60 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local getInputModeStore = responsiveModule.GetInputModeStore
 local input = responsiveModule.Input
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useLocalization (ref), signalsReactModule (ref), getGameInfoStore (ref), signalsModule (ref), userInputService (ref), getInputModeStore (ref), input (ref), constants (ref), contextActionService (ref), guiService (ref), view (ref), teleportLeaveConfirmation (ref)
 	local name
-	local var12 = reactModule.useRef(nil)
-	local var13 = useLocalization({
+	local var1 = reactModule.useRef(nil)
+	local var2 = useLocalization({
 		previous = "CoreScripts.TopBar.Traversal.BackButtonDefault"
 	})
-	local var14 = signalsReactModule.useSignalState(getGameInfoStore(false).getAndFetchGameInfo(tostring(p0.universeId)).data)
+	local var3 = signalsReactModule.useSignalState(getGameInfoStore(false).getAndFetchGameInfo(tostring(p1.universeId)).data)
 	local _ = nil
-	local var15 = nil
+	local var4 = nil
 	
-	if typeof(var14) == "table" then
-		name = var14.name
-		var15 = tonumber(var14.rootPlaceId)
+	if typeof(var3) == "table" then
+		name = var3.name
+		var4 = tonumber(var3.rootPlaceId)
 	else
-		name = var13.previous
+		name = var2.previous
 	end
-	local var16 = reactModule.useCallback(function(_, p1)
-		-- upvalues: p0 (ref)
-		if p1 == Enum.UserInputState.End then
-			p0.onCancel()
+	local var5 = reactModule.useCallback(function(_, p2)
+		-- upvalues: p1 (ref)
+		if p2 == Enum.UserInputState.End then
+			p1.onCancel()
 			
 			return Enum.ContextActionResult.Sink
 		end
 		return Enum.ContextActionResult.Pass
-	end, { p0.onCancel })
+	end, { p1.onCancel })
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), userInputService (copy), getInputModeStore (copy), input (copy), var15 (write), constants (copy), contextActionService (copy), var16 (ref), guiService (copy), var12 (ref)
-		local var17 = signalsModule.createEffect(function(p2)
-			-- upvalues: userInputService (copy), getInputModeStore (copy), input (copy), var15 (copy), constants (copy), contextActionService (copy), var16 (copy), guiService (copy), var12 (copy)
+		-- upvalues: signalsModule (copy), userInputService (copy), getInputModeStore (copy), input (copy), var4 (write), constants (copy), contextActionService (copy), var5 (ref), guiService (copy), var1 (ref)
+		local var6 = signalsModule.createEffect(function(p2)
+			-- upvalues: userInputService (copy), getInputModeStore (copy), input (copy), var4 (copy), constants (copy), contextActionService (copy), var5 (copy), guiService (copy), var1 (copy)
 			local lastInputType = getInputModeStore(p2).getLastInputType(p2)
-			local var19 = if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true
+			local var7 = if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true
 			
-			if var15 ~= nil and constants.NO_PLACE_ID < var15 then
-				if var19 then
+			if var4 ~= nil and constants.NO_PLACE_ID < var4 then
+				if var7 then
 					contextActionService:BindCoreAction("FREEZE_CONTROLLER", function() end, false, Enum.UserInputType.Gamepad1)
-					contextActionService:BindCoreAction("EXIT_DIALOG", var16, false, Enum.KeyCode.ButtonB)
-					guiService.SelectedCoreObject = var12.current
+					contextActionService:BindCoreAction("EXIT_DIALOG", var5, false, Enum.KeyCode.ButtonB)
+					guiService.SelectedCoreObject = var1.current
 					
 					return
 				end
-			elseif var19 then
+			elseif var7 then
 				contextActionService:UnbindCoreAction("FREEZE_CONTROLLER")
 				contextActionService:UnbindCoreAction("EXIT_DIALOG")
 			end
 		end)
 		
 		return function()
-			-- upvalues: var17 (ref)
-			var17()
+			-- upvalues: var6 (ref)
+			var6()
 		end
-	end, { var15 })
+	end, { var4 })
 	
-	return p0.isDialogOpen and (var15 and reactModule.createElement("ScreenGui", {
+	return p1.isDialogOpen and (var4 and reactModule.createElement("ScreenGui", {
 		DisplayOrder = 10,
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -87,12 +87,12 @@ return reactModule.memo(function(p0)
 			}
 		}, {
 			Dialog = reactModule.createElement(teleportLeaveConfirmation, {
-				onCancel = p0.onCancel,
-				onClose = p0.onClose,
-				placeId = var15,
+				onCancel = p1.onCancel,
+				onClose = p1.onClose,
+				placeId = var4,
 				teleportName = name,
-				source = p0.source,
-				ref = var12
+				source = p1.source,
+				ref = var1
 			})
 		})
 	}))

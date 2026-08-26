@@ -5,8 +5,8 @@ local thunkModule = require(parent.Thunk)
 
 return function()
 	-- upvalues: thunkModule (ref), setWindowStateModule (ref), windowStateModule (ref)
-	return thunkModule.new(script.Name, {}, function(p0, _)
+	return thunkModule.new(script.Name, {}, function(p1, _)
 		-- upvalues: setWindowStateModule (copy), windowStateModule (copy)
-		return p0:dispatch(setWindowStateModule(windowStateModule.Hidden))
+		return p1:dispatch(setWindowStateModule(windowStateModule.Hidden))
 	end)
 end

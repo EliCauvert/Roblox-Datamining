@@ -1,8 +1,8 @@
 ﻿local getUserPresenceByUserIdModule = require(script.getUserPresenceByUserId)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getUserPresenceByUserIdModule (ref)
 	return {
-		getUserPresenceByUserId = getUserPresenceByUserIdModule(p0)
+		getUserPresenceByUserId = getUserPresenceByUserIdModule(p1)
 	}
 end

@@ -32,17 +32,17 @@ local t_1 = {
 	}
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: isBuilderIconModule (ref), images (ref), resolutionScale (ref), iconSizeModule (ref), dashModule (ref), t (ref), t_1 (ref)
-	if not p0 or isBuilderIconModule(p0) then
+	if not p1 or isBuilderIconModule(p1) then
 		return nil, 1
 	end
-	local var8 = images[p0]
+	local var1 = images[p1]
 	
-	if not var8 then
+	if not var1 then
 		return nil, 1
 	end
-	local vector2 = Vector2.new(var8.ImageRectSize.X / resolutionScale, var8.ImageRectSize.Y / resolutionScale)
+	local vector2 = Vector2.new(var1.ImageRectSize.X / resolutionScale, var1.ImageRectSize.Y / resolutionScale)
 	local medium = iconSizeModule.Medium
 	
 	if dashModule.includes(t[iconSizeModule.Small], vector2) then
@@ -52,5 +52,5 @@ return function(p0, p1)
 	elseif dashModule.includes(t[iconSizeModule.Large], vector2) then
 		medium = iconSizeModule.Large
 	end
-	return vector2, t_1[medium][p1]
+	return vector2, t_1[medium][p2]
 end

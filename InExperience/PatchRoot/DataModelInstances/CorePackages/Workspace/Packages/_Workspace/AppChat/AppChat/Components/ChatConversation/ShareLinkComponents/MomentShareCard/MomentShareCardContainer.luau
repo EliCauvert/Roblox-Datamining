@@ -2,7 +2,7 @@
 local momentShareCardViewModule = require(script.Parent.MomentShareCardView)
 local useMomentShareCardViewModelModule = require(script.Parent.useMomentShareCardViewModel)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useMomentShareCardViewModelModule (ref), reactModule (ref), momentShareCardViewModule (ref)
-	return reactModule.createElement(momentShareCardViewModule, useMomentShareCardViewModelModule(p0))
+	return reactModule.createElement(momentShareCardViewModule, useMomentShareCardViewModelModule(p1))
 end

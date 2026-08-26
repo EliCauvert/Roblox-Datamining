@@ -23,13 +23,13 @@ local t_1 = {
 
 return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), useNativePurchaseFinishedListenerModule (ref), useRobloxSubscriptionChangedListenerModule (ref), useSubscriptionPollingTimeoutGuardModule (ref), blackbirdSheetContentModule (ref), errorSheetContentModule (ref), t (ref), t_1 (ref), reactModule (ref), sheet (ref), completeRobloxSubscriptionUpsellFlowModule (ref), dialogSize (ref)
-	local var14 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getPromptState)
+	local var1 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getPromptState)
 	useNativePurchaseFinishedListenerModule()
 	useRobloxSubscriptionChangedListenerModule()
 	useSubscriptionPollingTimeoutGuardModule()
-	local var15 = if t[var14] == true then errorSheetContentModule() else blackbirdSheetContentModule()
+	local var2 = if t[var1] == true then errorSheetContentModule() else blackbirdSheetContentModule()
 	
-	return t_1[var14] == true and reactModule.createElement(sheet.Root, {
+	return t_1[var1] == true and reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
 		onClose = function()
 			-- upvalues: completeRobloxSubscriptionUpsellFlowModule (copy)
@@ -37,8 +37,8 @@ return function()
 		end,
 		size = dialogSize.Medium
 	}, {
-		Header = var15.Header,
-		Content = var15.Content,
-		Actions = var15.Actions
+		Header = var2.Header,
+		Content = var2.Content,
+		Actions = var2.Actions
 	}) or nil
 end

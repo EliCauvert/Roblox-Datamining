@@ -6,20 +6,20 @@ return function()
 	local t = {}
 	
 	return {
-		getFor = function(p0)
+		getFor = function(p1)
 			-- upvalues: t (ref), signalsModule (copy)
-			local var2 = t[p0]
+			local var1 = t[p1]
 			
-			if var2 == nil then
-				local var3 = signalsModule.createComputed(function(p1)
-					-- upvalues: p0 (ref)
-					return p0(p1) or {}
+			if var1 == nil then
+				local var2 = signalsModule.createComputed(function(p2)
+					-- upvalues: p1 (ref)
+					return p1(p2) or {}
 				end)
-				t[p0] = var3
+				t[p1] = var2
 				
-				return var3
+				return var2
 			end
-			return var2
+			return var1
 		end,
 		clear = function()
 			-- upvalues: t (ref)

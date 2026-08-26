@@ -1,15 +1,15 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2, p3, p4)
+function t.new(p1, p2, p3, p4, p5)
 	-- upvalues: t (ref)
 	local t_1 = {
 		_browserTrackerLoadingStatus = Enum.IXPLoadingStatus.Initialized,
-		_userLoadingStatus = if p2 then Enum.IXPLoadingStatus.Initialized else Enum.IXPLoadingStatus.None,
-		_userId = p4 or 0,
-		_browserTrackerLayerData = p0,
-		_userLayerData = p1,
-		_initializeDelay = p3 or 0.1,
+		_userLoadingStatus = if p3 then Enum.IXPLoadingStatus.Initialized else Enum.IXPLoadingStatus.None,
+		_userId = p5 or 0,
+		_browserTrackerLayerData = p1,
+		_userLayerData = p2,
+		_initializeDelay = p4 or 0.1,
 		_exposureEventsFired = {},
 		_browserTrackerBindableEvent = Instance.new("BindableEvent")
 	}
@@ -21,40 +21,40 @@ function t.new(p0, p1, p2, p3, p4)
 	return t_1
 end
 
-function t:_SetBrowserTrackerIXPLoadingStatus(p5)
-	if self._browserTrackerLoadingStatus ~= p5 then
-		self._browserTrackerLoadingStatus = p5
-		self._browserTrackerBindableEvent:Fire(p5)
+function t:_SetBrowserTrackerIXPLoadingStatus(p1)
+	if self._browserTrackerLoadingStatus ~= p1 then
+		self._browserTrackerLoadingStatus = p1
+		self._browserTrackerBindableEvent:Fire(p1)
 	end
 end
 
-function t:_SetUserIXPLoadingStatus(p6, p7)
-	if self._userLoadingStatus ~= p6 or self._userId ~= p7 then
-		self._userLoadingStatus = p6
-		self._userId = p7
+function t:_SetUserIXPLoadingStatus(p1, p2)
+	if self._userLoadingStatus ~= p1 or self._userId ~= p2 then
+		self._userLoadingStatus = p1
+		self._userId = p2
 		self._userBindableEvent:Fire(self._userLoadingStatus, self._userId)
 	end
 end
 
 function t.RegisterUserLayers(_, _) end
 
-function t:InitializeUserLayers(p8)
-	if self._userLoadingStatus ~= Enum.IXPLoadingStatus.Initialized or self._userId ~= 0 and p8 ~= self._userId then
-		self:_SetUserIXPLoadingStatus(Enum.IXPLoadingStatus.Pending, p8)
+function t:InitializeUserLayers(p1)
+	if self._userLoadingStatus ~= Enum.IXPLoadingStatus.Initialized or self._userId ~= 0 and p1 ~= self._userId then
+		self:_SetUserIXPLoadingStatus(Enum.IXPLoadingStatus.Pending, p1)
 		spawn(function()
-			-- upvalues: self (ref), p8 (ref)
+			-- upvalues: self (ref), p1 (ref)
 			wait(self._initializeDelay)
-			self:_SetUserIXPLoadingStatus(Enum.IXPLoadingStatus.Initialized, p8)
+			self:_SetUserIXPLoadingStatus(Enum.IXPLoadingStatus.Initialized, p1)
 		end)
 	end
 end
 
-function t:GetBrowserTrackerLayerVariables(p9)
-	return if self._browserTrackerLoadingStatus == Enum.IXPLoadingStatus.Initialized then self._browserTrackerLayerData[p9] else {}
+function t:GetBrowserTrackerLayerVariables(p1)
+	return if self._browserTrackerLoadingStatus == Enum.IXPLoadingStatus.Initialized then self._browserTrackerLayerData[p1] else {}
 end
 
-function t:GetUserLayerVariables(p10)
-	return if self._userLoadingStatus == Enum.IXPLoadingStatus.Initialized then self._userLayerData[p10] else {}
+function t:GetUserLayerVariables(p1)
+	return if self._userLoadingStatus == Enum.IXPLoadingStatus.Initialized then self._userLayerData[p1] else {}
 end
 
 function t:ClearUserLayers()
@@ -79,12 +79,12 @@ function t:GetUserStatusForLayer(_)
 	return self._userLoadingStatus
 end
 
-function t:LogUserLayerExposure(p11)
-	table.insert(self._exposureEventsFired, p11)
+function t:LogUserLayerExposure(p1)
+	table.insert(self._exposureEventsFired, p1)
 end
 
-function t:LogBrowserTrackerLayerExposure(p12)
-	table.insert(self._exposureEventsFired, p12)
+function t:LogBrowserTrackerLayerExposure(p1)
+	table.insert(self._exposureEventsFired, p1)
 end
 
 return t

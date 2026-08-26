@@ -8,13 +8,13 @@ local fFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule = require(soci
 
 return function()
 	-- upvalues: fFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule (ref), roactAppExperimentModule (ref), fStringNewFriendRequestsBadgeLayer (ref), useSelector (ref), getDeepValueModule (ref)
-	local var4 = useSelector(function(p0)
+	local var1 = useSelector(function(p1)
 		-- upvalues: getDeepValueModule (copy)
-		return getDeepValueModule(p0, "FriendsCarousel.Friends.requests.newFriendRequestsCount") or 0
+		return getDeepValueModule(p1, "FriendsCarousel.Friends.requests.newFriendRequestsCount") or 0
 	end)
 	
 	return if (if fFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule then true else roactAppExperimentModule.useUserExperiment({ fStringNewFriendRequestsBadgeLayer }, function(p1)
 		-- upvalues: fStringNewFriendRequestsBadgeLayer (copy)
 		return (p1[fStringNewFriendRequestsBadgeLayer] or {}).showNewFriendRequestsBadge
-	end)) and var4 > 0 then tostring(var4) else nil
+	end)) and var1 > 0 then tostring(var1) else nil
 end

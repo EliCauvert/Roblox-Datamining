@@ -6,122 +6,122 @@ local getChildRouterModule = require(script.Parent.getChildRouter)
 local getNavigationActionCreatorsModule = require(script.Parent.routers.getNavigationActionCreators)
 local getChildrenNavigationCacheModule = require(script.Parent.getChildrenNavigationCache)
 
-local function _(p0)
-	return function(p1, p2)
-		-- upvalues: p0 (ref)
-		local params = p0.params
+local function _(p1)
+	return function(p2, p3)
+		-- upvalues: p1 (ref)
+		local params = p1.params
 		
-		return if params and params[p1] ~= nil then params[p1] else p2
+		return if params and params[p2] ~= nil then params[p2] else p3
 	end
 end
 
-local function getChildNavigation(p3, p4, p5)
+local function getChildNavigation(p1, p2, p3)
 	-- upvalues: getChildrenNavigationCacheModule (ref), array (ref), getChildRouterModule (ref), object (ref), getNavigationActionCreatorsModule (ref), getChildNavigation (ref), getEventManagerModule (ref)
-	local var6 = getChildrenNavigationCacheModule(p3)
-	local var7 = array.findIndex(p3.state.routes, function(p6)
-		-- upvalues: p4 (ref)
-		return p6.key == p4
+	local var1 = getChildrenNavigationCacheModule(p1)
+	local var2 = array.findIndex(p1.state.routes, function(p4)
+		-- upvalues: p2 (ref)
+		return p4.key == p2
 	end)
 	
-	if var7 < 1 then
+	if var2 < 1 then
 		return nil
 	end
-	local var8 = p3.state.routes[var7]
-	local var9 = var6[p4]
+	local var3 = p1.state.routes[var2]
+	local var4 = var1[p2]
 	
-	if var9 and var9.state == var8 then
-		return var9
+	if var4 and var4.state == var3 then
+		return var4
 	end
-	local var10 = getChildRouterModule(p3.router, var8.routeName)
-	local var11 = object.assign(if p3.actions then table.clone(p3.actions) else {}, p3.router.getActionCreators(var8, p3.state.key) or {}, var10 and var10.getActionCreators(if var8.routes and type(var8.index) == "number" then var8.routes[var8.index] else nil, var8.key) or {} or {}, getNavigationActionCreatorsModule(var8) or {})
+	local var5 = getChildRouterModule(p1.router, var3.routeName)
+	local var6 = object.assign(if p1.actions then table.clone(p1.actions) else {}, p1.router.getActionCreators(var3, p1.state.key) or {}, var5 and var5.getActionCreators(if var3.routes and type(var3.index) == "number" then var3.routes[var3.index] else nil, var3.key) or {} or {}, getNavigationActionCreatorsModule(var3) or {})
 	local t = {}
 	
-	for i, v in var11 do
+	for i, v in var6 do
 		t[i] = function(...)
-			-- upvalues: v (ref), p3 (ref)
-			return p3.dispatch(v(...))
+			-- upvalues: v (ref), p1 (ref)
+			return p1.dispatch(v(...))
 		end
 	end
-	local var15
-	local var13 = true
-	local var14 = p5()
+	local var7
+	local var8 = true
+	local var9 = p3()
 	
-	if var14 then
-		var13 = array.indexOf(var14.state.routes, var8) == 1
+	if var9 then
+		var8 = array.indexOf(var9.state.routes, var3) == 1
 	end
-	if var9 and var9.isFirstRouteInParent() == var13 then
-		var15 = nil
-		var15 = object.assign(table.clone(var9), t, {
-			state = var8,
-			router = var10,
-			actions = var11,
-			getParam = function(p7, p8)
-				-- upvalues: var8 (ref)
-				local params = var8.params
+	if var4 and var4.isFirstRouteInParent() == var8 then
+		var7 = nil
+		var7 = object.assign(table.clone(var4), t, {
+			state = var3,
+			router = var5,
+			actions = var6,
+			getParam = function(p4, p5)
+				-- upvalues: var3 (ref)
+				local params = var3.params
 				
-				return if params and params[p7] ~= nil then params[p7] else p8
+				return if params and params[p4] ~= nil then params[p4] else p5
 			end,
-			getChildNavigation = function(p9)
-				-- upvalues: getChildNavigation (copy), var15 (write), p5 (ref), p4 (ref)
-				return getChildNavigation(var15, p9, function()
-					-- upvalues: p5 (copy), p4 (copy)
-					local var17 = p5()
+			getChildNavigation = function(p4)
+				-- upvalues: getChildNavigation (copy), var7 (write), p3 (ref), p2 (ref)
+				return getChildNavigation(var7, p4, function()
+					-- upvalues: p3 (copy), p2 (copy)
+					local var10 = p3()
 					
-					return if var17 then var17.getChildNavigation(p4) else nil
+					return if var10 then var10.getChildNavigation(p2) else nil
 				end)
 			end
 		})
-		var6[p4] = var15
+		var1[p2] = var7
 		
-		return var15
+		return var7
 	end
-	var15 = getEventManagerModule(p4)
-	local var16 = nil
-	var16 = object.assign(table.clone(t), {
-		state = var8,
-		router = var10,
-		actions = var11,
-		getParam = function(p10, p11)
-			-- upvalues: var8 (ref)
-			local params = var8.params
+	var7 = getEventManagerModule(p2)
+	local var10 = nil
+	var10 = object.assign(table.clone(t), {
+		state = var3,
+		router = var5,
+		actions = var6,
+		getParam = function(p4, p5)
+			-- upvalues: var3 (ref)
+			local params = var3.params
 			
-			return if params and params[p10] ~= nil then params[p10] else p11
+			return if params and params[p4] ~= nil then params[p4] else p5
 		end,
-		getChildNavigation = function(p12)
-			-- upvalues: getChildNavigation (copy), var16 (write), p5 (ref), p4 (ref)
-			return getChildNavigation(var16, p12, function()
-				-- upvalues: p5 (copy), p4 (copy)
-				local var18 = p5()
+		getChildNavigation = function(p4)
+			-- upvalues: getChildNavigation (copy), var10 (write), p3 (ref), p2 (ref)
+			return getChildNavigation(var10, p4, function()
+				-- upvalues: p3 (copy), p2 (copy)
+				local var11 = p3()
 				
-				return if var18 then var18.getChildNavigation(p4) else nil
+				return if var11 then var11.getChildNavigation(p2) else nil
 			end)
 		end,
 		isFocused = function()
-			-- upvalues: p5 (ref), p4 (ref)
-			local var19 = p5()
+			-- upvalues: p3 (ref), p2 (ref)
+			local var11 = p3()
 			
-			if not var19 then
+			if not var11 then
 				return false
-			elseif not var19.isFocused() then
+			elseif not var11.isFocused() then
 				return false
 			end
-			local state = var19.state
+			local state = var11.state
 			
-			return state.routes[state.index].key == p4
+			return state.routes[state.index].key == p2
 		end,
 		isFirstRouteInParent = function()
-			-- upvalues: var13 (write)
-			return var13
+			-- upvalues: var8 (write)
+			return var8
 		end,
-		dispatch = p3.dispatch,
-		getScreenProps = p3.getScreenProps,
-		_dangerouslyGetParent = p5,
-		addListener = var15.addListener,
-		emit = var15.emit
+		dispatch = p1.dispatch,
+		getScreenProps = p1.getScreenProps,
+		_dangerouslyGetParent = p3,
+		addListener = var7.addListener,
+		emit = var7.emit
 	})
-	var6[p4] = var16
+	var1[p2] = var10
 	
-	return var16
+	return var10
 end
 
 return getChildNavigation

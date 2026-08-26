@@ -1,8 +1,8 @@
 ﻿local reduceModule = require(script.Parent.reduce)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reduceModule (ref)
-	return reduceModule(p0, function(p1, p2)
-		return p1 + p2
+	return reduceModule(p1, function(p2, p3)
+		return p2 + p3
 	end, 0)
 end

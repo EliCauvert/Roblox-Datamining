@@ -10,22 +10,22 @@ local t = {
 	affordance = foundationModule.Enums.StateLayerAffordance.None
 }
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: imageSetComponentModule (ref), t (ref), reactModule (ref), controlStateModule (ref), foundationModule (ref)
-	local cloned = table.clone(p0)
+	local cloned = table.clone(p1)
 	cloned.isDisabled = cloned.isDisabled or cloned.userInteractionEnabled == false
 	cloned.userInteractionEnabled = nil
-	cloned.ref = p1
+	cloned.ref = p2
 	cloned.component = cloned.component or imageSetComponentModule.Button
 	cloned.stateLayer = t
-	local var6 = reactModule.useRef(controlStateModule.Initialize)
+	local var1 = reactModule.useRef(controlStateModule.Initialize)
 	
-	if p0.onStateChanged then
-		function cloned.onStateChanged(p2)
-			-- upvalues: controlStateModule (copy), p0 (ref), var6 (ref)
-			local var7 = controlStateModule[p2]
-			p0.onStateChanged(var6.current, var7)
-			var6.current = var7
+	if p1.onStateChanged then
+		function cloned.onStateChanged(p3)
+			-- upvalues: controlStateModule (copy), p1 (ref), var1 (ref)
+			local var2 = controlStateModule[p3]
+			p1.onStateChanged(var1.current, var2)
+			var1.current = var2
 		end
 	end
 	return reactModule.createElement(foundationModule.UNSTABLE.Interactable, cloned)

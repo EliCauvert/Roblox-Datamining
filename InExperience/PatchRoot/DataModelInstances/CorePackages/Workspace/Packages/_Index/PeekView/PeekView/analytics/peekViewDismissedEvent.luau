@@ -17,13 +17,13 @@ return {
 		swipe = "swipe",
 		handleTap = "handleTap"
 	},
-	logEvent = function(p0, p1, p2)
+	logEvent = function(p1, p2, p3)
 		-- upvalues: var1 (ref), mutedError (ref)
-		local var2, var3 = var1(p2)
+		local var2, var3 = var1(p3)
 		
 		if not var2 then
 			mutedError(var3)
 		end
-		p0:sendEventDeferred(p1, "uiPeekViewDismissed", p2)
+		p1:sendEventDeferred(p2, "uiPeekViewDismissed", p3)
 	end
 }

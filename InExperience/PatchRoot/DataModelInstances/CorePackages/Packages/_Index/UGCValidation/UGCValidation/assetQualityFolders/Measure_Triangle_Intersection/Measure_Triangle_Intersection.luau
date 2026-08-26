@@ -12,31 +12,31 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: errorSourceStringsModule (ref), UGCValidationTriangleIntersectionMaxPercent (ref)
-		local measureTriangleIntersection = p1.aqsSummaryData.Measure_Triangle_Intersection
+		local measureTriangleIntersection = p2.aqsSummaryData.Measure_Triangle_Intersection
 		
 		if measureTriangleIntersection == nil then
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Triangle_Intersection" })
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Triangle_Intersection" })
 			
 			return
 		end
-		local var3 = UGCValidationTriangleIntersectionMaxPercent / 100
+		local var1 = UGCValidationTriangleIntersectionMaxPercent / 100
 		
 		for i, v in measureTriangleIntersection do
 			if i ~= "measurement_score" then
 				if v ~= nil and v.intersecting_tri_face_percent ~= nil then
 					local intersectingTriFacePercent = tonumber(v.intersecting_tri_face_percent) or 0
 					
-					if var3 < intersectingTriFacePercent then
-						p0:warn(errorSourceStringsModule.Keys.AQSWarn_TriangleIntersection, {
+					if var1 < intersectingTriFacePercent then
+						p1:warn(errorSourceStringsModule.Keys.AQSWarn_TriangleIntersection, {
 							partName = i,
 							intersecting_tri_face_percent = string.format("%.2f", intersectingTriFacePercent * 100),
 							threshold = tostring(UGCValidationTriangleIntersectionMaxPercent)
 						})
 					end
 				end
-				p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Triangle_Intersection" })
+				p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Triangle_Intersection" })
 				
 				return
 			end

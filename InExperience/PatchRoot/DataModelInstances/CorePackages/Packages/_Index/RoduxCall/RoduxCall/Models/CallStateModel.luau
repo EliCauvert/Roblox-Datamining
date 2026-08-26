@@ -3,13 +3,13 @@ local status = require(roduxCall.Enums).Status
 local tModule = require(roduxCall.Parent.t)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -31,20 +31,20 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: t (ref)
 	return t.new({
-		status = p2.status,
-		callerId = p2.callerId,
-		calleeId = p2.calleeId,
-		placeId = p2.placeId,
-		reservedServerAccessCode = p2.reservedServerAccessCode,
-		callId = p2.callId,
-		callerCombinedName = p2.callerCombinedName,
-		calleeCombinedName = p2.calleeCombinedName,
-		instanceId = p2.instanceId,
-		createdUtc = p2.createdUtc,
-		activeUtc = p2.activeUtc
+		status = p1.status,
+		callerId = p1.callerId,
+		calleeId = p1.calleeId,
+		placeId = p1.placeId,
+		reservedServerAccessCode = p1.reservedServerAccessCode,
+		callId = p1.callId,
+		callerCombinedName = p1.callerCombinedName,
+		calleeCombinedName = p1.calleeCombinedName,
+		instanceId = p1.instanceId,
+		createdUtc = p1.createdUtc,
+		activeUtc = p1.activeUtc
 	})
 end
 

@@ -1,3 +1,3 @@
-﻿local var0, var1 = require(script:FindFirstAncestor("MomentsCommon").Parent.Signals).createSignal(false)
+﻿local var1, var2 = require(script:FindFirstAncestor("MomentsCommon").Parent.Signals).createSignal(false)
 
-return { getSuspended = var0, setSuspended = var1 }
+return { getSuspended = var1, setSuspended = var2 }

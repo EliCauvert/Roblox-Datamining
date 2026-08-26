@@ -24,37 +24,37 @@ local t = {
 		GetModerationDetailFailed = "EVENT_GET_MODERATION_DETAIL_FAILED"
 	}
 }
-local var3 = if localPlayer then localPlayer.UserId else 0
+local var2 = if localPlayer then localPlayer.UserId else 0
 
-local var4 = function(p0, p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: var3 (write), t (ref), cryoModule (ref)
+local var3 = function(p1, p2, p3, p4, p5, p6, p7, p8)
+	-- upvalues: var2 (write), t (ref), cryoModule (ref)
 	local unixTimestampMillis = DateTime.now().UnixTimestampMillis
 	local t_1 = {
-		user_id = var3,
+		user_id = var2,
 		timestamp_milliseconds = unixTimestampMillis,
-		event_type = p0,
-		intervention_type = p1,
-		event_id = p3,
-		evidence = p4,
-		timeout_duration_seconds = p5,
-		acknowledgeable = p7
+		event_type = p1,
+		intervention_type = p2,
+		event_id = p4,
+		evidence = p5,
+		timeout_duration_seconds = p6,
+		acknowledgeable = p8
 	}
 	
-	if p0 == t.EventTypes.CtaClicked or p0 == t.EventTypes.AppealClicked or (p0 == t.EventTypes.NudgeToastDismissed or p0 == t.EventTypes.ChatAttemptToastDismissed) then
+	if p1 == t.EventTypes.CtaClicked or p1 == t.EventTypes.AppealClicked or (p1 == t.EventTypes.NudgeToastDismissed or p1 == t.EventTypes.ChatAttemptToastDismissed) then
 		t_1 = cryoModule.Dictionary.join({
-			time_to_interact_seconds = (unixTimestampMillis - p2) / 1000
+			time_to_interact_seconds = (unixTimestampMillis - p3) / 1000
 		}, t_1)
 	end
-	if p0 == t.EventTypes.GetModerationDetailFailed then
-		t_1 = cryoModule.Dictionary.join({ error = p6 }, t_1)
+	if p1 == t.EventTypes.GetModerationDetailFailed then
+		t_1 = cryoModule.Dictionary.join({ error = p7 }, t_1)
 	end
 	return t_1
 end
 
 return {
-	sendAnalyticsEvent = function(p8, p9, p10, p11, p12, p13, p14, p15)
-		-- upvalues: var1 (ref), t (ref), var4 (ref)
-		var1:sendEventDeferred(t.EventContext, t.EventName, var4(p8, p9, p10, p11, p12, p13, p14, p15))
+	sendAnalyticsEvent = function(p1, p2, p3, p4, p5, p6, p7, p8)
+		-- upvalues: var1 (ref), t (ref), var3 (ref)
+		var1:sendEventDeferred(t.EventContext, t.EventName, var3(p1, p2, p3, p4, p5, p6, p7, p8))
 	end,
 	Constants = t
 }

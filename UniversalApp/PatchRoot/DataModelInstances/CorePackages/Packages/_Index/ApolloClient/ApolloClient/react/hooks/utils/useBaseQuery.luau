@@ -20,76 +20,76 @@ local getApolloContext = require(script.Parent.Parent.Parent.context).getApolloC
 local useAfterFastRefresh = require(script.Parent.useAfterFastRefresh).useAfterFastRefresh
 local t_1 = { __value = "nil placeholder" }
 
-function t.useBaseQuery(p0, p1, p2)
+function t.useBaseQuery(p1, p2, p3)
 	-- upvalues: useContext (ref), getApolloContext (ref), useReducer (ref), boolean (ref), object (ref), useRef (ref), queryData (ref), promiseModule (ref), useDeepMemo (ref), useAfterFastRefresh (ref), useEffect (ref), t_1 (ref)
-	if p2 == nil then
-		p2 = false
+	if p3 == nil then
+		p3 = false
 	end
-	local var5 = useContext(getApolloContext())
-	local var6, var7 = useReducer(function(p3)
-		return p3 + 1
+	local var1 = useContext(getApolloContext())
+	local var2, var3 = useReducer(function(p4)
+		return p4 + 1
 	end, 0)
-	local var8 = boolean.toJSBoolean(p1) and object.assign({}, p1, { query = p0 }) or { query = p0 }
-	local var9 = useRef(nil)
+	local var4 = boolean.toJSBoolean(p2) and object.assign({}, p2, { query = p1 }) or { query = p1 }
+	local var5 = useRef(nil)
 	local current = nil
-	current = var9.current or (function()
-		-- upvalues: var9 (ref), queryData (copy), var8 (ref), var5 (ref), boolean (copy), current (write), promiseModule (copy), var7 (ref)
-		var9.current = queryData.new({
-			options = var8,
-			context = var5,
+	current = var5.current or (function()
+		-- upvalues: var5 (ref), queryData (copy), var4 (ref), var1 (ref), boolean (copy), current (write), promiseModule (copy), var3 (ref)
+		var5.current = queryData.new({
+			options = var4,
+			context = var1,
 			onNewData = function(_)
-				-- upvalues: boolean (copy), current (copy), promiseModule (copy), var9 (copy), var7 (copy)
+				-- upvalues: boolean (copy), current (copy), promiseModule (copy), var5 (copy), var3 (copy)
 				if boolean.toJSBoolean(current:ssrInitiated()) then
-					var7(nil)
+					var3(nil)
 					
 					return
 				end
 				promiseModule.delay(0):andThen(function()
-					-- upvalues: var9 (copy), var7 (copy)
-					if var9.current == nil or not var9.current.isMounted then
+					-- upvalues: var5 (copy), var3 (copy)
+					if var5.current == nil or not var5.current.isMounted then
 						return
 					end
-					return var7(nil)
+					return var3(nil)
 				end)
 			end
 		})
 		
-		return var9.current
+		return var5.current
 	end)()
-	current:setOptions(var8)
-	current.context = var5
-	local var11 = useDeepMemo(function()
-		-- upvalues: p2 (write), current (write)
-		return if p2 then current:executeLazy() else current:execute()
+	current:setOptions(var4)
+	current.context = var1
+	local var6 = useDeepMemo(function()
+		-- upvalues: p3 (write), current (write)
+		return if p3 then current:executeLazy() else current:execute()
 	end, {
-		options = object.assign({}, var8, { onError = object.None, onCompleted = object.None }),
-		context = var5,
-		tick = var6
+		options = object.assign({}, var4, { onError = object.None, onCompleted = object.None }),
+		context = var1,
+		tick = var2
 	})
-	local var12 = if p2 then var11[2] else var11
+	local var7 = if p3 then var6[2] else var6
 	
 	if _G.__DEV__ then
-		useAfterFastRefresh(var7)
+		useAfterFastRefresh(var3)
 	end
 	useEffect(function()
-		-- upvalues: current (write), var9 (ref)
+		-- upvalues: current (write), var5 (ref)
 		return function()
-			-- upvalues: current (copy), var9 (copy)
+			-- upvalues: current (copy), var5 (copy)
 			current:cleanup()
-			var9.current = nil
+			var5.current = nil
 		end
 	end, {})
 	useEffect(function()
-		-- upvalues: current (write), p2 (write)
-		return current:afterExecute({ lazy = p2 })
+		-- upvalues: current (write), p3 (write)
+		return current:afterExecute({ lazy = p3 })
 	end, {
-		if var12.loading ~= nil then var12.loading else t_1,
-		if var12.networkStatus ~= nil then var12.networkStatus else t_1,
-		if var12.error ~= nil then var12.error else t_1,
-		if var12.data ~= nil then var12.data else t_1
+		if var7.loading ~= nil then var7.loading else t_1,
+		if var7.networkStatus ~= nil then var7.networkStatus else t_1,
+		if var7.error ~= nil then var7.error else t_1,
+		if var7.data ~= nil then var7.data else t_1
 	})
 	
-	return var11
+	return var6
 end
 
 return t

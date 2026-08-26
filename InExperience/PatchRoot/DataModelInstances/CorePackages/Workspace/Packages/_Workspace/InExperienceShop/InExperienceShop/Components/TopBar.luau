@@ -21,16 +21,16 @@ local t = {
 	report = "Feature.Catalog.Action.Report"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), REPORT_MENU_ITEM_ID (ref), REPORT_ICON (ref), reactModule (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), iconButton (ref), OVERFLOW_ICON (ref), buttonVariant (ref), view (ref), iconName (ref), text (ref)
-	local var5 = useLocalization(t)
+	local var1 = useLocalization(t)
 	local t_1 = {}
 	
-	if p0.isReportingEnabled then
+	if p1.isReportingEnabled then
 		table.insert(t_1, {
 			id = REPORT_MENU_ITEM_ID,
 			icon = REPORT_ICON,
-			text = var5.report
+			text = var1.report
 		})
 	end
 	return reactModule.createElement(view, {
@@ -46,29 +46,29 @@ return function(p0)
 					icon = iconName.X,
 					size = inputSize.Medium,
 					variant = buttonVariant.Utility,
-					onActivated = p0.onClose
+					onActivated = p1.onClose
 				})
 			}),
 			Title = reactModule.createElement(text, {
 				tag = "size-0-1000 auto-x text-heading-small text-align-y-center content-emphasis",
 				LayoutOrder = 2,
-				Text = var5.title
+				Text = var1.title
 			})
 		}),
 		Trailing = reactModule.createElement(view, {
 			tag = "row align-y-center gap-small auto-xy",
 			LayoutOrder = 2
 		}, {
-			Overflow = if p0.isReportingEnabled then reactModule.createElement(menu, {
+			Overflow = if p1.isReportingEnabled then reactModule.createElement(menu, {
 				LayoutOrder = 1,
 				testId = "TopBar_OverflowMenu",
-				isOpen = p0.isOverflowMenuOpen,
+				isOpen = p1.isOverflowMenuOpen,
 				items = t_1,
 				size = inputSize.Medium,
 				side = popoverSide.Top,
 				align = popoverAlign.End,
-				onPressedOutside = p0.onOverflowMenuClosed,
-				onActivated = p0.onMenuItemActivated
+				onPressedOutside = p1.onOverflowMenuClosed,
+				onActivated = p1.onMenuItemActivated
 			}, {
 				Trigger = reactModule.createElement(iconButton, {
 					isCircular = false,
@@ -76,7 +76,7 @@ return function(p0)
 					icon = OVERFLOW_ICON,
 					size = inputSize.Medium,
 					variant = buttonVariant.Utility,
-					onActivated = p0.onOverflowActivated
+					onActivated = p1.onOverflowActivated
 				})
 			}) else nil,
 			SearchButton = reactModule.createElement(iconButton, {
@@ -86,7 +86,7 @@ return function(p0)
 				icon = iconName.MagnifyingGlass,
 				size = inputSize.Medium,
 				variant = buttonVariant.Utility,
-				onActivated = p0.onSearchOpen
+				onActivated = p1.onSearchOpen
 			})
 		})
 	})

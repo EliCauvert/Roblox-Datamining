@@ -32,61 +32,61 @@ local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFl
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), useMemo (ref), signalsModule (ref), constantsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), makeDefaultStickerOverlayEditModule (ref), makeCreationEventFieldsModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), useFormFactor (ref), formFactor (ref), reactionType (ref), reactionAssets (ref), reactModule (ref), stickerPickerItemModule (ref), view (ref), slider (ref), knob (ref), foundationModule (ref), button (ref), scrollView (ref)
-	local controller = p0.controller
-	local var13 = useDeviceInsets()
-	local var14 = useTokens()
-	local var15 = useCreationFlowStringsModule()
-	local var16 = useSignalState(useMemo(function()
+	local controller = p1.controller
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = useCreationFlowStringsModule()
+	local var4 = useSignalState(useMemo(function()
 		-- upvalues: signalsModule (copy), controller (ref), constantsModule (copy)
-		return signalsModule.createComputed(function(p1)
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: controller (copy), constantsModule (copy)
-			local activeSession = controller.getActiveSession(p1)
-			local var23 = if activeSession ~= nil then nil else activeSession.getDraft(p1)
-			local var24 = var23 and var23[1]
+			local activeSession = controller.getActiveSession(p2)
+			local var5 = if activeSession ~= nil then nil else activeSession.getDraft(p2)
+			local var6 = var5 and var5[1]
 			
-			return if var24 == nil then constantsModule.StickerOverlay.DefaultStickerSize else var24.stickerSize
+			return if var6 == nil then constantsModule.StickerOverlay.DefaultStickerSize else var6.stickerSize
 		end)
 	end, { controller }))
-	local var17 = useCallback(function(p2)
+	local var5 = useCallback(function(p2)
 		-- upvalues: controller (ref), dashModule (copy)
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession == nil then return end
 		local draft = activeSession.getDraft(false)
-		local var27 = draft and draft[1]
+		local var6 = draft and draft[1]
 		
-		if var27 == nil then
+		if var6 == nil then
 			return
 		end
-		activeSession.update({ dashModule.joinDeep(var27, { stickerSize = p2 }) })
+		activeSession.update({ dashModule.joinDeep(var6, { stickerSize = p2 }) })
 	end, { controller })
-	local var18 = useCallback(function()
+	local var6 = useCallback(function()
 		-- upvalues: controller (ref)
 		controller.discardActiveTool()
 	end, { controller })
-	local var19 = useCallback(function()
+	local var7 = useCallback(function()
 		-- upvalues: controller (ref)
 		controller.commitActiveTool()
 	end, { controller })
-	local var20 = useCallback(function(p3)
+	local var8 = useCallback(function(p2)
 		-- upvalues: controller (ref), dashModule (copy), makeDefaultStickerOverlayEditModule (copy), makeCreationEventFieldsModule (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy)
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession == nil then return end
 		local draft = activeSession.getDraft(false)
-		local var30 = draft and draft[1]
+		local var9 = draft and draft[1]
 		
-		if var30 ~= nil and var30.stickerURI == p3 then
-			activeSession.update({ dashModule.join(var30, { stickerURI = dashModule.None }) })
+		if var9 ~= nil and var9.stickerURI == p2 then
+			activeSession.update({ dashModule.join(var9, { stickerURI = dashModule.None }) })
 			
 			return
 		end
 		activeSession.update({
-			dashModule.join(var30 or makeDefaultStickerOverlayEditModule(), { stickerURI = p3 })
+			dashModule.join(var9 or makeDefaultStickerOverlayEditModule(), { stickerURI = p2 })
 		})
-		local t = { stickerURI = p3 }
+		local t = { stickerURI = p2 }
 		
 		for i, v in makeCreationEventFieldsModule.makeToolFieldFromKind("sticker") do
 			t[i] = v
@@ -96,26 +96,26 @@ return function(p0)
 		end
 		fireAnalyticsEventModule(eventNames.EditingFlowStickerSelected, t)
 	end, { controller })
-	local var21 = useFormFactor() == formFactor.Wide
+	local var10 = useFormFactor() == formFactor.Wide
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-bottom gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		padding = {
-			top = UDim.new(0, var14.Padding.Small),
-			bottom = UDim.new(0, math.max(var13.bottom, var14.Padding.Small)),
-			left = UDim.new(0, math.max(var13.left, var14.Padding.XLarge)),
-			right = UDim.new(0, math.max(var13.right, var14.Padding.XLarge))
+			top = UDim.new(0, var2.Padding.Small),
+			bottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Small)),
+			left = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+			right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 		}
 	}, {
 		StickerSizeSlider = reactModule.createElement(slider, {
 			LayoutOrder = 1,
 			knob = reactModule.createElement(knob, { size = foundationModule.Enums.InputSize.Large }),
 			knobVisibility = foundationModule.Enums.Visibility.Always,
-			onValueChanged = var17,
+			onValueChanged = var5,
 			size = foundationModule.Enums.InputSize.XSmall,
 			range = NumberRange.new(constantsModule.StickerOverlay.MinStickerSize, constantsModule.StickerOverlay.MaxStickerSize),
-			value = math.clamp(var16 or constantsModule.StickerOverlay.DefaultStickerSize, constantsModule.StickerOverlay.MinStickerSize, constantsModule.StickerOverlay.MaxStickerSize),
+			value = math.clamp(var4 or constantsModule.StickerOverlay.DefaultStickerSize, constantsModule.StickerOverlay.MinStickerSize, constantsModule.StickerOverlay.MaxStickerSize),
 			variant = foundationModule.Enums.SliderVariant.Standard
 		}),
 		Nav = reactModule.createElement(view, {
@@ -125,54 +125,54 @@ return function(p0)
 			BackButton = reactModule.createElement(button, {
 				LayoutOrder = 1,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var15.GeneralCtaBack,
+				text = var3.GeneralCtaBack,
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = var18,
+				onActivated = var6,
 				size = foundationModule.Enums.InputSize.Medium
 			}),
 			StickerRow = reactModule.createElement(scrollView, {
 				LayoutOrder = 2,
 				flexItem = { FlexMode = Enum.UIFlexMode.Fill },
-				Size = UDim2.fromOffset(0, var14.Size.Size_1000),
+				Size = UDim2.fromOffset(0, var2.Size.Size_1000),
 				layout = {
 					FillDirection = Enum.FillDirection.Horizontal,
-					HorizontalAlignment = if var21 then Enum.HorizontalAlignment.Center else Enum.HorizontalAlignment.Left,
+					HorizontalAlignment = if var10 then Enum.HorizontalAlignment.Center else Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
-					Padding = UDim.new(0, var14.Padding.Small),
+					Padding = UDim.new(0, var2.Padding.Small),
 					SortOrder = Enum.SortOrder.LayoutOrder
 				},
 				scroll = {
 					ScrollingDirection = Enum.ScrollingDirection.X,
 					AutomaticCanvasSize = Enum.AutomaticSize.X,
 					CanvasSize = UDim2.fromOffset(0, 0),
-					scrollBarVisibility = if var21 then foundationModule.Enums.Visibility.None else foundationModule.Enums.Visibility.Auto
+					scrollBarVisibility = if var10 then foundationModule.Enums.Visibility.None else foundationModule.Enums.Visibility.Auto
 				}
 			}, useMemo(function()
-				-- upvalues: reactionType (copy), reactionAssets (copy), reactModule (copy), stickerPickerItemModule (copy), var20 (ref)
+				-- upvalues: reactionType (copy), reactionAssets (copy), reactModule (copy), stickerPickerItemModule (copy), var8 (ref)
 				local t = {}
-				local var33 = 0
+				local var11 = 0
 				
 				for i, v in reactionType do
 					local stickerImageUri = reactionAssets.getStickerImageUri(v)
 					
 					if stickerImageUri ~= nil then
-						var33 += 1
+						var11 += 1
 						table.insert(t, reactModule.createElement(stickerPickerItemModule, {
 							key = v,
-							layoutOrder = var33,
+							layoutOrder = var11,
 							stickerURI = stickerImageUri,
-							onStickerSelected = var20
+							onStickerSelected = var8
 						}))
 					end
 				end
 				return t
-			end, { var20 })),
+			end, { var8 })),
 			DoneButton = reactModule.createElement(button, {
 				LayoutOrder = 3,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var15.GeneralCtaDone,
+				text = var3.GeneralCtaDone,
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = var19,
+				onActivated = var7,
 				size = foundationModule.Enums.InputSize.Medium
 			})
 		})

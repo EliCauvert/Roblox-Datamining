@@ -20,7 +20,7 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local getFFlagReportAnythingLocalizationEnabledModule = require(parent.Flags.GetFFlagReportAnythingLocalizationEnabled)
 local dividerModule = require(dependenciesModule.Divider)
 
-local function PortraitModeFooter(p0)
+local function PortraitModeFooter(p1)
 	-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), robloxTranslatorModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
@@ -51,8 +51,8 @@ local function PortraitModeFooter(p0)
 						buttonType = buttonType.PrimarySystem,
 						props = {
 							onActivated = function()
-								-- upvalues: p0 (ref)
-								p0.reportAction(p0.annotationPoints)
+								-- upvalues: p1 (ref)
+								p1.reportAction(p1.annotationPoints)
 							end,
 							text = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Next") else "Next"
 						}
@@ -74,7 +74,7 @@ return function(p1)
 	local theme = useStyle().Theme
 	local instance = virtualKeyboardMonitorModule.getInstance()
 	
-	local var17 = function()
+	local var1 = function()
 		-- upvalues: instance (ref), p1 (ref)
 		warn("OverlayActivated")
 		
@@ -85,69 +85,69 @@ return function(p1)
 		end
 	end
 	
-	local var18, var19 = reactModule.useState(cryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
-	local var20, var21 = reactModule.useState({})
+	local var2, var3 = reactModule.useState(cryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
+	local var4, var5 = reactModule.useState({})
 	
 	local function _()
-		-- upvalues: var18 (ref), var19 (ref)
+		-- upvalues: var2 (ref), var3 (ref)
 		local t = {}
 		
-		for i, v in pairs(var18) do
+		for i, v in pairs(var2) do
 			t[i] = v
 		end
-		var19(t)
+		var3(t)
 	end
 	
-	local var22 = function(_)
-		-- upvalues: p1 (ref), var18 (ref), var19 (ref), var21 (ref)
+	local var6 = function(_)
+		-- upvalues: p1 (ref), var2 (ref), var3 (ref), var5 (ref)
 		if p1.reportAnythingAnalytics then
 			p1.reportAnythingAnalytics.incrementAnnotationPlace()
 		end
 		local t = {}
 		
-		for i, v in pairs(var18) do
+		for i, v in pairs(var2) do
 			t[i] = v
 		end
-		var19(t)
-		var21({})
+		var3(t)
+		var5({})
 	end
 	
-	local var23 = function()
-		-- upvalues: var18 (ref), p1 (ref), var20 (ref), var19 (ref)
-		if #var18 > 0 then
+	local var7 = function()
+		-- upvalues: var2 (ref), p1 (ref), var4 (ref), var3 (ref)
+		if #var2 > 0 then
 			if p1.reportAnythingAnalytics then
 				p1.reportAnythingAnalytics.incrementAnnotationUndo()
 			end
-			table.insert(var20, 1, var18[#var18])
-			table.remove(var18, #var18)
+			table.insert(var4, 1, var2[#var2])
+			table.remove(var2, #var2)
 			local t = {}
 			
-			for i, v in pairs(var18) do
+			for i, v in pairs(var2) do
 				t[i] = v
 			end
-			var19(t)
+			var3(t)
 		end
 	end
 	
-	local var24 = function()
-		-- upvalues: var20 (ref), p1 (ref), var18 (ref), var19 (ref)
-		if #var20 > 0 then
+	local var8 = function()
+		-- upvalues: var4 (ref), p1 (ref), var2 (ref), var3 (ref)
+		if #var4 > 0 then
 			if p1.reportAnythingAnalytics then
 				p1.reportAnythingAnalytics.incrementAnnotationRedo()
 			end
-			table.insert(var18, var20[1])
-			table.remove(var20, 1)
+			table.insert(var2, var4[1])
+			table.remove(var4, 1)
 			local t = {}
 			
-			for i, v in pairs(var18) do
+			for i, v in pairs(var2) do
 				t[i] = v
 			end
-			var19(t)
+			var3(t)
 		end
 	end
 	
-	local var25 = #var18 > 0
-	local var26 = #var20 > 0
+	local var9 = #var2 > 0
+	local var10 = #var4 > 0
 	
 	return reactModule.createElement("TextButton", {
 		AutoButtonColor = false,
@@ -159,7 +159,7 @@ return function(p1)
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		ZIndex = 10,
 		Text = "",
-		[reactModule.Event.Activated] = var17
+		[reactModule.Event.Activated] = var1
 	}, {
 		ScreenshotDialog = reactModule.createElement(imageSetButton, {
 			Active = true,
@@ -183,20 +183,20 @@ return function(p1)
 				Header = if p1.isSmallPortraitMode then reactModule.createElement(screenshotDialogPortraitModeHeaderModule, {
 					titleText = p1.titleText,
 					backAction = p1.backAction,
-					undoAnnotationPoints = var23,
-					redoAnnotationPoints = var24,
-					isRedoEnabled = var26,
-					isUndoEnabled = var25,
-					annotationPoints = var18
+					undoAnnotationPoints = var7,
+					redoAnnotationPoints = var8,
+					isRedoEnabled = var10,
+					isUndoEnabled = var9,
+					annotationPoints = var2
 				}) else reactModule.createElement(screenshotDialogLandscapeModeHeaderModule, {
 					titleText = p1.titleText,
 					backAction = p1.backAction,
 					reportAction = p1.reportAction,
-					undoAnnotationPoints = var23,
-					redoAnnotationPoints = var24,
-					isRedoEnabled = var26,
-					isUndoEnabled = var25,
-					annotationPoints = var18
+					undoAnnotationPoints = var7,
+					redoAnnotationPoints = var8,
+					isRedoEnabled = var10,
+					isUndoEnabled = var9,
+					annotationPoints = var2
 				}),
 				Divider = reactModule.createElement(dividerModule, { LayoutOrder = 2 }),
 				ScreenshotAnnotation = reactModule.createElement("Frame", {
@@ -236,8 +236,8 @@ return function(p1)
 							}),
 							Highlighter = reactModule.createElement(screenshotHighlighterModule, {
 								ZIndex = 3,
-								annotationPoints = var18,
-								handleAnnotationPoints = var22,
+								annotationPoints = var2,
+								handleAnnotationPoints = var6,
 								setAnnotationCircleRadius = abuseReportBuilderModule.setAnnotationCircleRadius,
 								setAspectRatioDimensions = abuseReportBuilderModule.setAspectRatioDimensions
 							}, {})
@@ -245,7 +245,7 @@ return function(p1)
 					})
 				})
 			}),
-			Footer = if p1.isSmallPortraitMode then reactModule.createElement(PortraitModeFooter, { reportAction = p1.reportAction, annotationPoints = var18 }) else nil
+			Footer = if p1.isSmallPortraitMode then reactModule.createElement(PortraitModeFooter, { reportAction = p1.reportAction, annotationPoints = var2 }) else nil
 		})
 	})
 end

@@ -5,15 +5,15 @@ local getFIntContactImporterUploadContactsMaxModule = require(contactImporter.Fl
 local getFIntContactImporterUploadContactsMinModule = require(contactImporter.Flags.getFIntContactImporterUploadContactsMin)
 local deviceContact = dependenciesModule.RoduxContacts.Models.DeviceContact
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFIntContactImporterUploadContactsMaxModule (ref), getFIntContactImporterUploadContactsMinModule (ref), deviceContact (ref), constantsModule (ref)
 	local t = {}
-	local var6 = getFIntContactImporterUploadContactsMaxModule()
-	local var7 = getFIntContactImporterUploadContactsMinModule()
+	local var1 = getFIntContactImporterUploadContactsMaxModule()
+	local var2 = getFIntContactImporterUploadContactsMinModule()
 	
-	for i, v in pairs(p0.contacts) do
+	for i, v in pairs(p1.contacts) do
 		for i_1, v_1 in pairs(v.phonenumber) do
-			if var6 <= #t then break end
+			if var1 <= #t then break end
 			table.insert(t, {
 				idAssignedByFE = deviceContact.generateId(v),
 				fields = {
@@ -35,20 +35,20 @@ return function(p0)
 	end
 	local tCount = #t
 	
-	return if var7 <= tCount then {
-		countryCode = p0.countryCode,
+	return if var2 <= tCount then {
+		countryCode = p1.countryCode,
 		contacts = t,
 		contactsCount = tCount,
-		source = p0.source
-	} elseif tCount < var7 then {
-		countryCode = p0.countryCode,
+		source = p1.source
+	} elseif tCount < var2 then {
+		countryCode = p1.countryCode,
 		contacts = {},
 		contactsCount = tCount,
-		source = p0.source
+		source = p1.source
 	} else {
-		countryCode = p0.countryCode,
+		countryCode = p1.countryCode,
 		contacts = t,
 		contactsCount = tCount,
-		source = p0.source
+		source = p1.source
 	}
 end

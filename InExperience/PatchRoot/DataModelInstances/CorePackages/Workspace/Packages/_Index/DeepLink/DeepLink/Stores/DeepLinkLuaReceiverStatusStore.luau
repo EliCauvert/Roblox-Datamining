@@ -4,21 +4,21 @@ local deepLinkLuaPostAuthReceiverStatusModule = require(deepLink.Enums.DeepLinkL
 
 return signalsModule.createComputed(function()
 	-- upvalues: signalsModule (ref), deepLinkLuaPostAuthReceiverStatusModule (ref)
-	local var3, var4 = signalsModule.createSignal(nil)
-	local var5, var6 = signalsModule.createSignal(deepLinkLuaPostAuthReceiverStatusModule.Disconnected)
+	local var1, var2 = signalsModule.createSignal(nil)
+	local var3, var4 = signalsModule.createSignal(deepLinkLuaPostAuthReceiverStatusModule.Disconnected)
 	
 	return {
-		setDeepLinkLuaPostAuthReceiverStatus = function(value, p0)
-			-- upvalues: deepLinkLuaPostAuthReceiverStatusModule (copy), var4 (ref), var6 (ref)
+		setDeepLinkLuaPostAuthReceiverStatus = function(value, p1)
+			-- upvalues: deepLinkLuaPostAuthReceiverStatusModule (copy), var2 (ref), var4 (ref)
 			if value ~= deepLinkLuaPostAuthReceiverStatusModule.Ready then
-				var4(nil)
-			elseif p0 then
-				var4(p0)
+				var2(nil)
+			elseif p1 then
+				var2(p1)
 			end
-			var6(value)
+			var4(value)
 		end,
-		getDeepLinkLuaPostAuthReceiverStatus = var5,
-		setLastDetectedPostAuthUrl = var4,
-		getLastDetectedPostAuthUrl = var3
+		getDeepLinkLuaPostAuthReceiverStatus = var3,
+		setLastDetectedPostAuthUrl = var2,
+		getLastDetectedPostAuthUrl = var1
 	}
 end)

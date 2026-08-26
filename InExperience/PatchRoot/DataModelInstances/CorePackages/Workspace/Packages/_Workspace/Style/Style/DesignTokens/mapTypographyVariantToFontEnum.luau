@@ -5,7 +5,7 @@
 	Book = Enum.Font.Gotham
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref)
-	return if p0.Font then p0.Font elseif p0.FontWeight then t[p0.FontWeight] or t.Book else t.Book
+	return if p1.Font then p1.Font elseif p1.FontWeight then t[p1.FontWeight] or t.Book else t.Book
 end

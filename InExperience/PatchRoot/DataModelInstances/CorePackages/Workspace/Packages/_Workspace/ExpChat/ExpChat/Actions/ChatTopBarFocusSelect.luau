@@ -1,3 +1,3 @@
-﻿return require(script.Parent.ActionCreator)(script.Name, function(p0, p1)
-	return { onSelectionLost = p0, keybinds = p1 }
+﻿return require(script.Parent.ActionCreator)(script.Name, function(p1, p2)
+	return { onSelectionLost = p1, keybinds = p2 }
 end)

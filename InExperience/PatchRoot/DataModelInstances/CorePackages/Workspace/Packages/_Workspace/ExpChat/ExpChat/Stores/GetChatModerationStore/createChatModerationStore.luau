@@ -8,73 +8,73 @@ local enableChatModerationModeLoggingRefactor = game:DefineFastFlag("EnableModer
 
 return function()
 	-- upvalues: createSignal (ref), getChatStatusStoreModule (ref), enableChatModerationModeLoggingRefactor (ref), chatService (ref), robloxReplicatedStorageService (ref), createComputed (ref)
-	local var5, var6 = createSignal(false)
-	local var7, var8 = createSignal(false)
-	local var9 = getChatStatusStoreModule(false)
-	local var10 = nil
+	local var1, var2 = createSignal(false)
+	local var3, var4 = createSignal(false)
+	local var5 = getChatStatusStoreModule(false)
+	local var6 = nil
 	
 	local function setIsSettingEnabled(value)
-		-- upvalues: enableChatModerationModeLoggingRefactor (copy), chatService (copy), var10 (write)
+		-- upvalues: enableChatModerationModeLoggingRefactor (copy), chatService (copy), var6 (write)
 		if enableChatModerationModeLoggingRefactor then
 			chatService:RequestModerationModeEnabled(value)
 			
 			return
-		elseif var10 then
-			var10:FireServer(value)
+		elseif var6 then
+			var6:FireServer(value)
 		end
 	end
 	
 	local function initialize()
-		-- upvalues: enableChatModerationModeLoggingRefactor (copy), chatService (copy), var10 (write)
+		-- upvalues: enableChatModerationModeLoggingRefactor (copy), chatService (copy), var6 (write)
 		if enableChatModerationModeLoggingRefactor then
 			chatService:RequestModerationModeEnabled(false)
 			
 			return
-		elseif var10 then
-			var10:FireServer(false)
+		elseif var6 then
+			var6:FireServer(false)
 		end
 	end
 	
-	local var13 = nil
+	local var7 = nil
 	
 	if enableChatModerationModeLoggingRefactor then
-		var13 = chatService:GetPropertyChangedSignal("ModerationMode"):Connect(function()
-			-- upvalues: var6 (ref), chatService (copy), var8 (ref)
-			var6(chatService.ModerationMode ~= "Unsupported")
-			var8(chatService.ModerationMode == "Enabled")
+		var7 = chatService:GetPropertyChangedSignal("ModerationMode"):Connect(function()
+			-- upvalues: var2 (ref), chatService (copy), var4 (ref)
+			var2(chatService.ModerationMode ~= "Unsupported")
+			var4(chatService.ModerationMode == "Enabled")
 		end)
-		var6(chatService.ModerationMode ~= "Unsupported")
-		var8(chatService.ModerationMode == "Enabled")
+		var2(chatService.ModerationMode ~= "Unsupported")
+		var4(chatService.ModerationMode == "Enabled")
 	else
 		coroutine.wrap(function()
-			-- upvalues: var10 (write), robloxReplicatedStorageService (copy), var6 (ref), var8 (ref)
-			var10 = robloxReplicatedStorageService:WaitForChild("ModerateChatSettingUpdated", 10)
+			-- upvalues: var6 (write), robloxReplicatedStorageService (copy), var2 (ref), var4 (ref)
+			var6 = robloxReplicatedStorageService:WaitForChild("ModerateChatSettingUpdated", 10)
 			
-			if var10 then
-				var10.OnClientEvent:Connect(function(p0)
-					-- upvalues: var6 (copy), var8 (copy)
-					var6(true)
-					var8(p0)
+			if var6 then
+				var6.OnClientEvent:Connect(function(p1)
+					-- upvalues: var2 (copy), var4 (copy)
+					var2(true)
+					var4(p1)
 				end)
 			end
 		end)()
 	end
 	return {
 		getIsSettingVisible = createComputed(function(p1)
-			-- upvalues: var5 (ref), var9 (ref)
-			return var5(p1) and var9.getChatStatus(p1) == "Enabled"
+			-- upvalues: var1 (ref), var5 (ref)
+			return var1(p1) and var5.getChatStatus(p1) == "Enabled"
 		end),
-		getIsSettingEnabled = createComputed(function(p2)
-			-- upvalues: var7 (ref), var9 (ref)
-			return var7(p2) and var9.getChatStatus(p2) == "Enabled"
+		getIsSettingEnabled = createComputed(function(p1)
+			-- upvalues: var3 (ref), var5 (ref)
+			return var3(p1) and var5.getChatStatus(p1) == "Enabled"
 		end),
 		setIsSettingEnabled = setIsSettingEnabled,
 		initialize = initialize,
 		cleanup = function()
-			-- upvalues: var13 (write)
-			if var13 then
-				var13:Disconnect()
-				var13 = nil
+			-- upvalues: var7 (write)
+			if var7 then
+				var7:Disconnect()
+				var7 = nil
 			end
 		end
 	}

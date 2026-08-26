@@ -27,11 +27,11 @@ local useHistoryItems = traversal.useHistoryItems
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagAddTraversalHistoryReactMenuButtonsModule = require(parent.Flags.FFlagAddTraversalHistoryReactMenuButtons)
 
-local function historyToMenuItems(p0)
+local function historyToMenuItems(p1)
 	-- upvalues: getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref)
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		table.insert(t, {
 			universeId = v.universeId,
 			text = v.name,
@@ -41,127 +41,127 @@ local function historyToMenuItems(p0)
 	return t
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, _)
+return reactModule.memo(reactModule.forwardRef(function(p2, _)
 	-- upvalues: reactModule (ref), fFlagAddTraversalHistoryReactMenuButtonsModule (ref), useHistoryItems (ref), historyToMenuItems (ref), constants (ref), useTokens (ref), signalsReactModule (ref), reactPageSignalModule (ref), settingsShowSignal (ref), guiService (ref), userInputService (ref), getInputModeStore (ref), input (ref), utilityModule (ref), enumReactPageModule (ref), default (ref), view (ref), historyMenu (ref), traversalLeaveConfirmationModule (ref)
-	local var16 = if fFlagAddTraversalHistoryReactMenuButtonsModule and p1.anchorRef then p1.anchorRef else reactModule.useRef(p1.anchorParent)
-	local var17 = useHistoryItems()
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: historyToMenuItems (copy), var17 (ref)
-		return historyToMenuItems(var17)
-	end, { var17 })
-	local var19 = if p1.idleButtonStateIsDown ~= nil then constants.DEFAULT_CHEVRON_BUTTON_STATE else p1.idleButtonStateIsDown
-	local var20, var21 = reactModule.useBinding(Enum.SelectionBehavior.Stop)
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var19 (ref), var20 (ref)
+	local var1 = if fFlagAddTraversalHistoryReactMenuButtonsModule and p2.anchorRef then p2.anchorRef else reactModule.useRef(p2.anchorParent)
+	local var2 = useHistoryItems()
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: historyToMenuItems (copy), var2 (ref)
+		return historyToMenuItems(var2)
+	end, { var2 })
+	local var4 = if p2.idleButtonStateIsDown ~= nil then constants.DEFAULT_CHEVRON_BUTTON_STATE else p2.idleButtonStateIsDown
+	local var5, var6 = reactModule.useBinding(Enum.SelectionBehavior.Stop)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), var5 (ref)
 		return {
-			SelectionBehaviorUp = if var19 then var20 else Enum.SelectionBehavior.Stop,
-			SelectionBehaviorDown = if not var19 then var20 else Enum.SelectionBehavior.Stop
+			SelectionBehaviorUp = if var4 then var5 else Enum.SelectionBehavior.Stop,
+			SelectionBehaviorDown = if not var4 then var5 else Enum.SelectionBehavior.Stop
 		}
-	end, { var19 })
-	local var23 = useTokens()
-	local var24, var25 = reactModule.useState(constants.NO_UNIVERSE_ID)
-	local var26 = signalsReactModule.useSignalState(reactPageSignalModule)
-	local var27 = reactModule.useCallback(function(p2)
-		-- upvalues: settingsShowSignal (copy), fFlagAddTraversalHistoryReactMenuButtonsModule (copy), p1 (ref), guiService (copy)
+	end, { var4 })
+	local var8 = useTokens()
+	local var9, var10 = reactModule.useState(constants.NO_UNIVERSE_ID)
+	local var11 = signalsReactModule.useSignalState(reactPageSignalModule)
+	local var12 = reactModule.useCallback(function(p3)
+		-- upvalues: settingsShowSignal (copy), fFlagAddTraversalHistoryReactMenuButtonsModule (copy), p2 (ref), guiService (copy)
 		return {
-			onSettingsVisible = settingsShowSignal:connect(function(p3)
-				-- upvalues: p2 (ref)
-				if not p3 then
-					p2()
+			onSettingsVisible = settingsShowSignal:connect(function(p4)
+				-- upvalues: p3 (ref)
+				if not p4 then
+					p3()
 				end
 			end),
-			onPageChanged = if fFlagAddTraversalHistoryReactMenuButtonsModule and not p1.currentPageChangeSignal then nil else p1.currentPageChangeSignal:connect(function()
-				-- upvalues: p2 (ref)
-				p2()
+			onPageChanged = if fFlagAddTraversalHistoryReactMenuButtonsModule and not p2.currentPageChangeSignal then nil else p2.currentPageChangeSignal:connect(function()
+				-- upvalues: p3 (ref)
+				p3()
 			end),
 			onNativeClose = guiService.NativeClose:Connect(function()
-				-- upvalues: p2 (ref)
-				p2()
+				-- upvalues: p3 (ref)
+				p3()
 			end)
 		}
 	end, {
-		p1.currentPageChangeSignal,
+		p2.currentPageChangeSignal,
 		settingsShowSignal,
 		guiService.NativeClose
 	})
-	local var28 = reactModule.useCallback(function(p4)
-		-- upvalues: var25 (ref), var21 (ref)
-		var25(p4)
-		var21(Enum.SelectionBehavior.Stop)
-	end, { var25 })
-	local var29 = reactModule.useCallback(function()
-		-- upvalues: var25 (ref), constants (copy), userInputService (copy), getInputModeStore (copy), input (copy), var16 (write), guiService (copy)
-		var25(constants.NO_UNIVERSE_ID)
+	local var13 = reactModule.useCallback(function(p3)
+		-- upvalues: var10 (ref), var6 (ref)
+		var10(p3)
+		var6(Enum.SelectionBehavior.Stop)
+	end, { var10 })
+	local var14 = reactModule.useCallback(function()
+		-- upvalues: var10 (ref), constants (copy), userInputService (copy), getInputModeStore (copy), input (copy), var1 (write), guiService (copy)
+		var10(constants.NO_UNIVERSE_ID)
 		local lastInputType = getInputModeStore().getLastInputType()
 		
-		if (if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true) and var16.current then
-			guiService.SelectedCoreObject = var16.current
+		if (if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true) and var1.current then
+			guiService.SelectedCoreObject = var1.current
 		end
 	end, {})
-	local var30 = reactModule.useCallback(function(p5)
-		-- upvalues: var21 (ref)
-		if p5 then
-			var21(Enum.SelectionBehavior.Escape)
+	local var15 = reactModule.useCallback(function(p3)
+		-- upvalues: var6 (ref)
+		if p3 then
+			var6(Enum.SelectionBehavior.Escape)
 			
 			return
 		end
-		var21(Enum.SelectionBehavior.Stop)
+		var6(Enum.SelectionBehavior.Stop)
 	end, {})
-	local var31 = reactModule.useMemo(function()
-		-- upvalues: fFlagAddTraversalHistoryReactMenuButtonsModule (copy), p1 (ref), var23 (ref)
-		return if fFlagAddTraversalHistoryReactMenuButtonsModule and p1.isDarkOnDarkMode then var23.Color.Surface.Surface_0 else {
+	local var16 = reactModule.useMemo(function()
+		-- upvalues: fFlagAddTraversalHistoryReactMenuButtonsModule (copy), p2 (ref), var8 (ref)
+		return if fFlagAddTraversalHistoryReactMenuButtonsModule and p2.isDarkOnDarkMode then var8.Color.Surface.Surface_0 else {
 			Transparency = 0.33,
-			Color3 = var23.Color.Stroke.Default.Color3
+			Color3 = var8.Color.Stroke.Default.Color3
 		}
 	end, {})
-	local var32 = utilityModule:IsSmallTouchScreen()
-	local var33 = reactModule.useMemo(function()
-		-- upvalues: var32 (ref)
+	local var17 = utilityModule:IsSmallTouchScreen()
+	local var18 = reactModule.useMemo(function()
+		-- upvalues: var17 (ref)
 		return {
-			["padding-small"] = var32,
-			["padding-medium"] = not var32
+			["padding-small"] = var17,
+			["padding-medium"] = not var17
 		}
-	end, { var32 })
-	local var34 = reactModule.useCallback(function()
-		-- upvalues: var26 (ref), enumReactPageModule (copy), var21 (ref)
-		var26.setCurrentReactPage(enumReactPageModule.TraversalHistory)
-		var21(Enum.SelectionBehavior.Stop)
-	end, { var26 })
-	local var35 = reactModule.useMemo(function()
+	end, { var17 })
+	local var19 = reactModule.useCallback(function()
+		-- upvalues: var11 (ref), enumReactPageModule (copy), var6 (ref)
+		var11.setCurrentReactPage(enumReactPageModule.TraversalHistory)
+		var6(Enum.SelectionBehavior.Stop)
+	end, { var11 })
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: default (copy)
 		return #default:getUniverseHistory() > 0
 	end, {})
 	
-	if var35 then
-		var35 = reactModule.createElement
-		var35 = var35(view, {
+	if var20 then
+		var20 = reactModule.createElement
+		var20 = var20(view, {
 			tag = "auto-xy row align-y-center size-0-full",
-			selectionGroup = var22,
-			ref = if fFlagAddTraversalHistoryReactMenuButtonsModule and not p1.anchorRef and not p1.anchorParent then var16 else nil
+			selectionGroup = var7,
+			ref = if fFlagAddTraversalHistoryReactMenuButtonsModule and not p2.anchorRef and not p2.anchorParent then var1 else nil
 		}, {
 			DividerLeft = reactModule.createElement(view, {
-				Size = UDim2.new(0, var23.Stroke.Thick, 1, 0),
-				backgroundStyle = var31
+				Size = UDim2.new(0, var8.Stroke.Thick, 1, 0),
+				backgroundStyle = var16
 			}),
 			HistoryMenu = reactModule.createElement(historyMenu, {
-				historyButtonTags = var33,
-				historyItems = var18,
-				onHistorySelected = var34,
-				onMenuItemSelected = var28,
-				onMenuToggled = var30,
-				closeMenuConn = var27,
-				menuSide = p1.menuSide,
-				ref = var16
+				historyButtonTags = var18,
+				historyItems = var3,
+				onHistorySelected = var19,
+				onMenuItemSelected = var13,
+				onMenuToggled = var15,
+				closeMenuConn = var12,
+				menuSide = p2.menuSide,
+				ref = var1
 			})
 		}, {
 			Dialog = reactModule.createElement(traversalLeaveConfirmationModule, {
 				source = "history_dropdown",
-				isDialogOpen = constants.NO_UNIVERSE_ID < var24,
-				onCancel = var29,
-				onClose = var29,
-				universeId = var24
+				isDialogOpen = constants.NO_UNIVERSE_ID < var9,
+				onCancel = var14,
+				onClose = var14,
+				universeId = var9
 			})
 		})
 	end
-	return var35
+	return var20
 end))

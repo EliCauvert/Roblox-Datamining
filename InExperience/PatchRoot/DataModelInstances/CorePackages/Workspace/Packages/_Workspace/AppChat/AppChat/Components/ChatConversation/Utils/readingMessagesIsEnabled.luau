@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if p0 then p0.getScreenProps("isVisible", false) or not p0.getScreenProps("wideMode", false) else false
+﻿return function(p1)
+	return if p1 then p1.getScreenProps("isVisible", false) or not p1.getScreenProps("wideMode", false) else false
 end

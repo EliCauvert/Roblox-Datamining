@@ -5,10 +5,10 @@ local foundationProvider = foundationModule.FoundationProvider
 local theme = foundationModule.Enums.Theme
 local device = foundationModule.Enums.Device
 
-return function(p0)
+return function(p1)
 	-- upvalues: theme (ref), reactModule (ref), foundationProvider (ref), device (ref)
-	return function(p1)
-		-- upvalues: theme (copy), reactModule (copy), foundationProvider (copy), device (copy), p0 (ref)
+	return function(p2)
+		-- upvalues: theme (copy), reactModule (copy), foundationProvider (copy), device (copy), p1 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -21,10 +21,10 @@ return function(p0)
 				PaddingRight = UDim.new(0, 10)
 			}),
 			FoundationContext = reactModule.createElement(foundationProvider, {
-				theme = theme[p1.theme],
-				device = device[p1.platform],
-				preferences = p1.settings
-			}, { Child = reactModule.createElement(p0, p1) })
+				theme = theme[p2.theme],
+				device = device[p2.platform],
+				preferences = p2.settings
+			}, { Child = reactModule.createElement(p1, p2) })
 		})
 	end
 end

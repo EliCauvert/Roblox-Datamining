@@ -2,44 +2,44 @@
 local runService = game:GetService("RunService")
 local reactModule = require(script:FindFirstAncestor("InterventionShared").Parent.React)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), localizationService (ref), runService (ref)
-	local var3, var4 = reactModule.useBinding(p1 or "")
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), localizationService (copy), var4 (ref), p1 (ref)
-		if p0 == nil then
-			var4(p1 or "")
+	local var1, var2 = reactModule.useBinding(p2 or "")
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), localizationService (copy), var2 (ref), p2 (ref)
+		if p1 == nil then
+			var2(p2 or "")
 			
 			return 0
 		end
 		local _ = nil
-		local maxValue = math.max(p0 - DateTime.now().UnixTimestamp, 0)
-		var4(if maxValue >= 3600 then DateTime.fromUnixTimestamp(maxValue):FormatUniversalTime("h:mm:ss", localizationService.RobloxLocaleId) else DateTime.fromUnixTimestamp(maxValue):FormatUniversalTime("m:ss", localizationService.RobloxLocaleId))
+		local maxValue = math.max(p1 - DateTime.now().UnixTimestamp, 0)
+		var2(if maxValue >= 3600 then DateTime.fromUnixTimestamp(maxValue):FormatUniversalTime("h:mm:ss", localizationService.RobloxLocaleId) else DateTime.fromUnixTimestamp(maxValue):FormatUniversalTime("m:ss", localizationService.RobloxLocaleId))
 		
 		return maxValue
-	end, { p1, p0 })
+	end, { p2, p1 })
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref)
-		var5()
-	end, { var5 })
+		-- upvalues: var3 (ref)
+		var3()
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), runService (copy), var5 (ref)
+		-- upvalues: p1 (ref), runService (copy), var3 (ref)
 		local heartbeatConnection = nil
 		
-		if p0 ~= nil then
-			local var8 = p0 - DateTime.now().UnixTimestamp
+		if p1 ~= nil then
+			local var4 = p1 - DateTime.now().UnixTimestamp
 			
-			if var8 > 0 then
-				local var9 = 0
+			if var4 > 0 then
+				local var5 = 0
 				heartbeatConnection = runService.Heartbeat:Connect(function()
-					-- upvalues: var9 (write), var8 (write), var5 (copy), heartbeatConnection (write)
+					-- upvalues: var5 (write), var4 (write), var3 (copy), heartbeatConnection (write)
 					local processTime = os.clock()
 					
-					if processTime - var9 < 1 then return end
-					var9 = processTime
-					var8 = var5()
+					if processTime - var5 < 1 then return end
+					var5 = processTime
+					var4 = var3()
 					
-					if var8 <= 0 and heartbeatConnection then
+					if var4 <= 0 and heartbeatConnection then
 						heartbeatConnection:Disconnect()
 						heartbeatConnection = nil
 					end
@@ -53,7 +53,7 @@ return function(p0, p1)
 				heartbeatConnection = nil
 			end
 		end
-	end, { p0, var5 })
+	end, { p1, var3 })
 	
-	return var3
+	return var1
 end

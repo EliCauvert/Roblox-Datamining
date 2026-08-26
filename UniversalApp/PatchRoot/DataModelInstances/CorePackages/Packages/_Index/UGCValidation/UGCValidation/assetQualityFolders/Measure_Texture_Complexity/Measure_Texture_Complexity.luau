@@ -11,12 +11,12 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQTextureQuality),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: errorSourceStringsModule (ref)
-		local measureTextureComplexity = p1.aqsSummaryData.Measure_Texture_Complexity
+		local measureTextureComplexity = p2.aqsSummaryData.Measure_Texture_Complexity
 		
 		if measureTextureComplexity == nil then
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Complexity" })
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Complexity" })
 			
 			return
 		end
@@ -24,13 +24,13 @@ return {
 			if i ~= "measurement_score" then
 				if v ~= nil and v.score ~= nil then
 					if tonumber(v.score) ~= 100 then
-						p0:warn(errorSourceStringsModule.Keys.AQSWarn_TextureComplexity, {
+						p1:warn(errorSourceStringsModule.Keys.AQSWarn_TextureComplexity, {
 							textureName = i,
 							score = tostring(math.floor(tonumber(v.score) or 0))
 						})
 					end
 				end
-				p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Complexity" })
+				p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Complexity" })
 				
 				return
 			end

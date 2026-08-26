@@ -1,7 +1,7 @@
 ﻿local fFlagChatModeratedMaskRandomLength = require(script:FindFirstAncestor("FriendsChat").Parent.SharedFlags).FFlagChatModeratedMaskRandomLength
 
-local function isPartySystemMessage(p0)
-	local cards = p0.cards
+local function isPartySystemMessage(p1)
+	local cards = p1.cards
 	
 	if type(cards) ~= "table" then
 		return false
@@ -22,41 +22,41 @@ local function isPartySystemMessage(p0)
 	return false
 end
 
-local function _(p1)
-	local cards = p1.cards
+local function _(p2)
+	local cards = p2.cards
 	local var1 = if type(cards) == "table" then cards[1] else nil
 	
-	return if type(var1) == "table" and type(var1.alt_text) == "string" and var1.alt_text ~= "" then var1.alt_text else p1.content or ""
+	return if type(var1) == "table" and type(var1.alt_text) == "string" and var1.alt_text ~= "" then var1.alt_text else p2.content or ""
 end
 
 local _ = function(p2)
 	-- upvalues: isPartySystemMessage (ref)
 	local t = { kind = "systemMessage" }
 	local cards = p2.cards
-	local var3 = if type(cards) == "table" then cards[1] else nil
-	t.body = if type(var3) == "table" and type(var3.alt_text) == "string" and var3.alt_text ~= "" then var3.alt_text else p2.content or ""
+	local var1 = if type(cards) == "table" then cards[1] else nil
+	t.body = if type(var1) == "table" and type(var1.alt_text) == "string" and var1.alt_text ~= "" then var1.alt_text else p2.content or ""
 	t.variant = if isPartySystemMessage(p2) then "party" else "default"
 	
 	return t
 end
 
-return function(p3)
+return function(p2)
 	-- upvalues: isPartySystemMessage (ref), fFlagChatModeratedMaskRandomLength (ref)
-	local var6
-	if p3.type == "system" or p3.sender_user_id == nil then
+	local var1
+	if p2.type == "system" or p2.sender_user_id == nil then
 		local t = {}
 		local t_1 = { kind = "systemMessage" }
-		local cards = p3.cards
-		var6 = if type(cards) == "table" then cards[1] else nil
-		t_1.body = if type(var6) == "table" and type(var6.alt_text) == "string" and var6.alt_text ~= "" then var6.alt_text else p3.content or ""
-		t_1.variant = if isPartySystemMessage(p3) then "party" else "default"
+		local cards = p2.cards
+		var1 = if type(cards) == "table" then cards[1] else nil
+		t_1.body = if type(var1) == "table" and type(var1.alt_text) == "string" and var1.alt_text ~= "" then var1.alt_text else p2.content or ""
+		t_1.variant = if isPartySystemMessage(p2) then "party" else "default"
 		-- Unknown statement at pc 6: <SetList>
 		
 		return t
 	end
-	local senderUserId = p3.sender_user_id
+	local senderUserId = p2.sender_user_id
 	local t = {}
-	local repliesTo = p3.replies_to
+	local repliesTo = p2.replies_to
 	
 	if type(repliesTo) == "table" and repliesTo.sender_user_id ~= nil then
 		table.insert(t, {
@@ -65,21 +65,21 @@ return function(p3)
 			repliedToUserId = repliesTo.sender_user_id
 		})
 	end
-	local status = p3.status
-	var6 = if status ~= "Moderated" then status == "Failed" else true
+	local status = p2.status
+	var1 = if status ~= "Moderated" then status == "Failed" else true
 	
-	if p3.visibility == "hidden" then
+	if p2.visibility == "hidden" then
 		table.insert(t, { kind = "hiddenUser", senderUserId = senderUserId })
 	else
 		table.insert(t, {
 			kind = "userText",
 			senderUserId = senderUserId,
-			body = p3.content or "",
-			moderated = var6,
-			messageId = if fFlagChatModeratedMaskRandomLength then p3.id else nil
+			body = p2.content or "",
+			moderated = var1,
+			messageId = if fFlagChatModeratedMaskRandomLength then p2.id else nil
 		})
 	end
-	if var6 then
+	if var1 then
 		table.insert(t, { kind = "moderationNotice" })
 	end
 	return t

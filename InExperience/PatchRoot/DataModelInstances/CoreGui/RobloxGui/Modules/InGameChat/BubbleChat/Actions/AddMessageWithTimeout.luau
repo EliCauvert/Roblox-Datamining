@@ -7,26 +7,26 @@ local removeMessageModule = require(script.Parent.RemoveMessage)
 local getSettingsForMessageModule = require(script.Parent.Parent.Helpers.getSettingsForMessage)
 local bubbleChatAddMessageRolloutPercent = game:DefineFastInt("BubbleChatAddMessageRolloutPercent", 100)
 
-return function(p0)
+return function(p1)
 	-- upvalues: maybeAssertModule (ref), typesModule (ref), addMessageModule (ref), getSettingsForMessageModule (ref), removeMessageModule (ref), rbxAnalyticsService (ref), bubbleChatAddMessageRolloutPercent (ref)
-	maybeAssertModule(typesModule.IMessage(p0))
+	maybeAssertModule(typesModule.IMessage(p1))
 	
-	return function(p1)
-		-- upvalues: addMessageModule (copy), p0 (ref), getSettingsForMessageModule (copy), removeMessageModule (copy), rbxAnalyticsService (copy), bubbleChatAddMessageRolloutPercent (copy)
-		p1:dispatch(addMessageModule(p0))
-		local var7 = getSettingsForMessageModule(p1:getState().chatSettings, p0)
-		local userId = p1:getState().userMessages[p0.userId]
-		local messages = p1:getState().messages
+	return function(p2)
+		-- upvalues: addMessageModule (copy), p1 (ref), getSettingsForMessageModule (copy), removeMessageModule (copy), rbxAnalyticsService (copy), bubbleChatAddMessageRolloutPercent (copy)
+		p2:dispatch(addMessageModule(p1))
+		local var1 = getSettingsForMessageModule(p2:getState().chatSettings, p1)
+		local userId = p2:getState().userMessages[p1.userId]
+		local messages = p2:getState().messages
 		
-		for i = 1, #userId - var7.MaxBubbles do
-			p1:dispatch(removeMessageModule(messages[userId[i]]))
+		for i = 1, #userId - var1.MaxBubbles do
+			p2:dispatch(removeMessageModule(messages[userId[i]]))
 		end
 		rbxAnalyticsService:ReportCounter("RoactBubbleChat-MessagesSent")
 		
 		if math.random(1, 100) <= bubbleChatAddMessageRolloutPercent then
-			rbxAnalyticsService:SendEventDeferred("client", "bubbleChatMetric", "messageAdded", { placeId = game.PlaceId, senderUserId = p0.userId })
+			rbxAnalyticsService:SendEventDeferred("client", "bubbleChatMetric", "messageAdded", { placeId = game.PlaceId, senderUserId = p1.userId })
 		end
-		wait(var7.BubbleDuration)
-		p1:dispatch(removeMessageModule(p0))
+		wait(var1.BubbleDuration)
+		p2:dispatch(removeMessageModule(p1))
 	end
 end

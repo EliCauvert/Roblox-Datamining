@@ -3,53 +3,53 @@ local _ = require(parent.DiscoveryTypes)
 local reportWarning = require(parent.DiscoveryAnalytics).Points.reportWarning
 local loggingProtocolModule = require(parent.LoggingProtocol)
 
-local function removeFromAvailableCells(p0, p1, p2)
-	for i = 1, #p0 do
-		local var6 = p0[i]
+local function removeFromAvailableCells(p1, p2, p3)
+	for i = 1, #p1 do
+		local var1 = p1[i]
 		
-		if var6.X ~= p1 or var6.Y ~= p2 then
+		if var1.X ~= p2 or var1.Y ~= p3 then
 			continue
 		end
-		table.remove(p0, i)
+		table.remove(p1, i)
 		
 		return
 	end
 end
 
-local function _(p3, p4, p5, p6, p7, p8, p9)
+local function _(p4, p5, p6, p7, p8, p9, p10)
 	-- upvalues: removeFromAvailableCells (ref)
-	p3[p5] = p3[p5] or {}
-	p3[p5][p4] = p6
-	local maxValue = math.max(p7, p5)
-	local maxValue_1 = math.max(p8, p4)
+	p4[p6] = p4[p6] or {}
+	p4[p6][p5] = p7
+	local maxValue = math.max(p8, p6)
+	local maxValue_1 = math.max(p9, p5)
 	
-	if p9 then
-		removeFromAvailableCells(p9, p4, p5)
+	if p10 then
+		removeFromAvailableCells(p10, p5, p6)
 	end
 	return maxValue, maxValue_1
 end
 
-local _ = function(p10, p11, p12)
-	return if p10[p12] then p10[p12][p11] ~= nil else false
+local _ = function(p4, p5, p6)
+	return if p4[p6] then p4[p6][p5] ~= nil else false
 end
 
-local function canInsertItem(p13, p14, p15, p16, p17, p18)
-	if p18 < p14 + p16 - 1 then
+local function canInsertItem(p4, p5, p6, p7, p8, p9)
+	if p9 < p5 + p7 - 1 then
 		return false
 	end
-	for i_1 = 0, p17 - 1 do
-		for i = 0, p16 - 1 do
-			local var11
-			local var9 = p14 + i
-			local var10 = p15 + i_1
+	for i_1 = 0, p8 - 1 do
+		for i = 0, p7 - 1 do
+			local var2
+			local var3 = p5 + i
+			local var4 = p6 + i_1
 			
-			if p13[var10] then
-				var11 = p13[var10][var9] ~= nil
-				var11 = nil
+			if p4[var4] then
+				var2 = p4[var4][var3] ~= nil
+				var2 = nil
 			else
-				var11 = false
+				var2 = false
 			end
-			if not var11 then
+			if not var2 then
 				continue
 			end
 			return false
@@ -58,33 +58,33 @@ local function canInsertItem(p13, p14, p15, p16, p17, p18)
 	return true
 end
 
-local function markItemCells(p19, p20, p21, p22, p23, p24, p25, p26, p27)
+local function markItemCells(p10, p11, p12, p13, p14, p15, p16, p17, p18)
 	-- upvalues: removeFromAvailableCells (ref)
-	p19[p21] = p19[p21] or {}
-	p19[p21][p20] = p22
-	local maxValue = math.max(p25, p21)
-	local maxValue_1 = math.max(p26, p20)
+	p10[p12] = p10[p12] or {}
+	p10[p12][p11] = p13
+	local maxValue = math.max(p16, p12)
+	local maxValue_1 = math.max(p17, p11)
 	
-	if p27 then
-		removeFromAvailableCells(p27, p20, p21)
+	if p18 then
+		removeFromAvailableCells(p18, p11, p12)
 	end
 	var14 = maxValue
 	var15 = maxValue_1
 	
-	for i_1 = 0, p24 - 1 do
-		for i = 0, p23 - 1 do
+	for i_1 = 0, p15 - 1 do
+		for i = 0, p14 - 1 do
 			if i == 0 and i_1 == 0 then
 				continue
 			end
-			local var16 = p20 + i
-			local var17 = p21 + i_1
-			p19[var17] = p19[var17] or {}
-			p19[var17][var16] = -1
-			local maxValue_2 = math.max(var14, var17)
-			local maxValue_3 = math.max(var15, var16)
+			local var5 = p11 + i
+			local var6 = p12 + i_1
+			p10[var6] = p10[var6] or {}
+			p10[var6][var5] = -1
+			local maxValue_2 = math.max(var14, var6)
+			local maxValue_3 = math.max(var15, var5)
 			
-			if p27 then
-				removeFromAvailableCells(p27, var16, var17)
+			if p18 then
+				removeFromAvailableCells(p18, var5, var6)
 			end
 			var14 = maxValue_2
 			var15 = maxValue_3
@@ -93,138 +93,138 @@ local function markItemCells(p19, p20, p21, p22, p23, p24, p25, p26, p27)
 	return var14, var15
 end
 
-local function findPinnedInsertionPointAndMarkOccupiedItem(p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38)
+local function findPinnedInsertionPointAndMarkOccupiedItem(p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29)
 	-- upvalues: reportWarning (ref), loggingProtocolModule (ref), canInsertItem (ref), markItemCells (ref)
-	p37 = p37 or 1
+	p28 = p28 or 1
 	
-	if p32 < p30 then
-		reportWarning(loggingProtocolModule.default, "InvalidGrid", `Item {p29} has colSpan {p30} greater than itemsPerRow {p32}`)
+	if p23 < p21 then
+		reportWarning(loggingProtocolModule.default, "InvalidGrid", `Item {p20} has colSpan {p21} greater than itemsPerRow {p23}`)
 		
-		return p33, p34, nil
-	elseif p36 < 1 or p32 < p36 + p30 - 1 then
-		reportWarning(loggingProtocolModule.default, "InvalidGrid", `Item {p29} cannot be pinned at column {p36} with colSpan {p30} in grid with {p32} columns`)
+		return p24, p25, nil
+	elseif p27 < 1 or p23 < p27 + p21 - 1 then
+		reportWarning(loggingProtocolModule.default, "InvalidGrid", `Item {p20} cannot be pinned at column {p27} with colSpan {p21} in grid with {p23} columns`)
 		
-		return p33, p34, nil
+		return p24, p25, nil
 	end
-	while p37 <= p38 do
-		if p35.lastRow < p37 then
-			local lastRow = p35.lastRow
-			p35.lastRow = p37
+	while p28 <= p29 do
+		if p26.lastRow < p28 then
+			local lastRow = p26.lastRow
+			p26.lastRow = p28
 			
-			for i = lastRow * p32 + 1, p37 * p32 do
-				table.insert(p35.availableCells, Vector2.new((i - 1) % p32 + 1, math.floor((i - 1) / p32) + 1))
+			for i = lastRow * p23 + 1, p28 * p23 do
+				table.insert(p26.availableCells, Vector2.new((i - 1) % p23 + 1, math.floor((i - 1) / p23) + 1))
 			end
 		end
-		if not canInsertItem(p28, p36, p37, p30, p31, p32) then
-			p37 += 1
+		if not canInsertItem(p19, p27, p28, p21, p22, p23) then
+			p28 += 1
 			continue
 		end
-		local var21, var22 = markItemCells(p28, p36, p37, p29, p30, p31, p33, p34, p35.availableCells)
-		p33 = var21
-		p34 = var22
+		local var7, var8 = markItemCells(p19, p27, p28, p20, p21, p22, p24, p25, p26.availableCells)
+		p24 = var7
+		p25 = var8
 		
-		return p33, p34, p37
+		return p24, p25, p28
 	end
-	reportWarning(loggingProtocolModule.default, "InvalidGrid", `Item {p29} at column {p36} with colSpan {p30} could not be placed within allowed rows`)
+	reportWarning(loggingProtocolModule.default, "InvalidGrid", `Item {p20} at column {p27} with colSpan {p21} could not be placed within allowed rows`)
 	
-	return p33, p34, nil
+	return p24, p25, nil
 end
 
-local function findInsertionPointAndMarkOccupiedItem(p39, p40, p41, p42, p43, p44, p45, p46)
+local function findInsertionPointAndMarkOccupiedItem(p30, p31, p32, p33, p34, p35, p36, p37)
 	-- upvalues: reportWarning (ref), loggingProtocolModule (ref), canInsertItem (ref), markItemCells (ref)
-	if p43 < p41 then
-		reportWarning(loggingProtocolModule.default, "InvalidGrid", `Item {p40} has colSpan {p41} greater than itemsPerRow {p43}`)
+	if p34 < p32 then
+		reportWarning(loggingProtocolModule.default, "InvalidGrid", `Item {p31} has colSpan {p32} greater than itemsPerRow {p34}`)
 		
-		return p44, p45
-	elseif p46.lastRow < p44 + 1 then
-		local lastRow = p46.lastRow
-		local var23 = p44 + 1
-		p46.lastRow = var23
+		return p35, p36
+	elseif p37.lastRow < p35 + 1 then
+		local lastRow = p37.lastRow
+		local var9 = p35 + 1
+		p37.lastRow = var9
 		
-		for i = lastRow * p43 + 1, var23 * p43 do
-			table.insert(p46.availableCells, Vector2.new((i - 1) % p43 + 1, math.floor((i - 1) / p43) + 1))
+		for i = lastRow * p34 + 1, var9 * p34 do
+			table.insert(p37.availableCells, Vector2.new((i - 1) % p34 + 1, math.floor((i - 1) / p34) + 1))
 		end
 	end
-	local var24 = 1
-	while var24 <= #p46.availableCells do
-		local var25 = p46.availableCells[var24]
-		local x = var25.X
-		local y = var25.Y
+	local var10 = 1
+	while var10 <= #p37.availableCells do
+		local var11 = p37.availableCells[var10]
+		local x = var11.X
+		local y = var11.Y
 		
-		if not canInsertItem(p39, x, y, p41, p42, p43) then
-			var24 += 1
+		if not canInsertItem(p30, x, y, p32, p33, p34) then
+			var10 += 1
 			continue
 		end
-		local var26, var27 = markItemCells(p39, x, y, p40, p41, p42, p44, p45, p46.availableCells)
-		p44 = var26
-		p45 = var27
+		local var12, var13 = markItemCells(p30, x, y, p31, p32, p33, p35, p36, p37.availableCells)
+		p35 = var12
+		p36 = var13
 		
-		return p44, p45
+		return p35, p36
 	end
-	return p44, p45
+	return p35, p36
 end
 
-return function(p47, p48, p49)
+return function(p38, p39, p40)
 	-- upvalues: findPinnedInsertionPointAndMarkOccupiedItem (ref), findInsertionPointAndMarkOccupiedItem (ref)
-	if not p48 or p48 <= 0 then
+	if not p39 or p39 <= 0 then
 		return { totalRows = 0, totalCols = 0, layout = {} }
 	end
 	local t = {}
-	local var29 = 0
-	local var30 = 0
+	local var14 = 0
+	local var15 = 0
 	local t_1 = { lastRow = 0, availableCells = {} }
-	local var32 = false
-	local var33 = 1
-	local var34 = 0
+	local var16 = false
+	local var17 = 1
+	local var18 = 0
 	
-	for i = 1, p47 do
-		local var35 = p49 and p49[i]
-		var34 += (if var35 then var35.colSpan else 1) * (if var35 then var35.rowSpan else 1)
+	for i = 1, p38 do
+		local var19 = p40 and p40[i]
+		var18 += (if var19 then var19.colSpan else 1) * (if var19 then var19.rowSpan else 1)
 	end
-	local ceiled = math.ceil(var34 / p48)
-	local var37 = if var34 % p48 == 0 then ceiled else math.max(1, ceiled - 1)
+	local ceiled = math.ceil(var18 / p39)
+	local var20 = if var18 % p39 == 0 then ceiled else math.max(1, ceiled - 1)
 	
-	for i_1 = 1, p47 do
-		local colSpan = p49 and (p49[i_1] and (p49[i_1].colSpan or 1))
-		local rowSpan = p49 and (p49[i_1] and (p49[i_1].rowSpan or 1))
-		local alignmentType = p49 and (p49[i_1] and (p49[i_1].alignmentType or nil))
-		local minRowPadding = p49 and (p49[i_1] and (p49[i_1].minRowPadding or 0))
+	for i_1 = 1, p38 do
+		local colSpan = p40 and (p40[i_1] and (p40[i_1].colSpan or 1))
+		local rowSpan = p40 and (p40[i_1] and (p40[i_1].rowSpan or 1))
+		local alignmentType = p40 and (p40[i_1] and (p40[i_1].alignmentType or nil))
+		local minRowPadding = p40 and (p40[i_1] and (p40[i_1].minRowPadding or 0))
 		
 		if colSpan ~= 1 or rowSpan ~= 1 or alignmentType then
-			var32 = true
+			var16 = true
 		end
-		if not var32 then
-			local var52 = (i_1 - 1) % p48 + 1
-			local var53 = math.floor((i_1 - 1) / p48) + 1
-			t[var53] = t[var53] or {}
-			t[var53][var52] = i_1
-			var29 = math.max(var29, var53)
-			var30 = math.max(var30, var52)
+		if not var16 then
+			local var21 = (i_1 - 1) % p39 + 1
+			local var22 = math.floor((i_1 - 1) / p39) + 1
+			t[var22] = t[var22] or {}
+			t[var22][var21] = i_1
+			var14 = math.max(var14, var22)
+			var15 = math.max(var15, var21)
 		elseif alignmentType == "RightPin" then
 			local _ = nil
-			local var42, var43, var44 = findPinnedInsertionPointAndMarkOccupiedItem(t, i_1, colSpan, rowSpan, p48, var29, var30, t_1, p48 - colSpan + 1, var33, var37)
-			var29 = var42
-			var30 = var43
-			local var45 = var44
+			local var23, var24, var25 = findPinnedInsertionPointAndMarkOccupiedItem(t, i_1, colSpan, rowSpan, p39, var14, var15, t_1, p39 - colSpan + 1, var17, var20)
+			var14 = var23
+			var15 = var24
+			local var26 = var25
 			
-			if var45 and minRowPadding and minRowPadding > 0 then
-				var33 = var45 + minRowPadding
+			if var26 and minRowPadding and minRowPadding > 0 then
+				var17 = var26 + minRowPadding
 			end
 		elseif alignmentType == "LeftPin" then
 			local _ = nil
-			local var46, var47, var48 = findPinnedInsertionPointAndMarkOccupiedItem(t, i_1, colSpan, rowSpan, p48, var29, var30, t_1, 1, var33, ceiled)
-			var29 = var46
-			var30 = var47
-			local var49 = var48
+			local var27, var28, var29 = findPinnedInsertionPointAndMarkOccupiedItem(t, i_1, colSpan, rowSpan, p39, var14, var15, t_1, 1, var17, ceiled)
+			var14 = var27
+			var15 = var28
+			local var30 = var29
 			
-			if var49 and minRowPadding and minRowPadding > 0 then
-				var33 = var49 + minRowPadding
+			if var30 and minRowPadding and minRowPadding > 0 then
+				var17 = var30 + minRowPadding
 			end
 		else
-			local var50, var51 = findInsertionPointAndMarkOccupiedItem(t, i_1, colSpan, rowSpan, p48, var29, var30, t_1)
-			var29 = var50
-			var30 = var51
+			local var31, var32 = findInsertionPointAndMarkOccupiedItem(t, i_1, colSpan, rowSpan, p39, var14, var15, t_1)
+			var14 = var31
+			var15 = var32
 		end
 	end
-	return { layout = t, totalRows = var29, totalCols = var30 }
+	return { layout = t, totalRows = var14, totalCols = var15 }
 end

@@ -1,6 +1,6 @@
 ﻿local conversationModule = require(script:FindFirstAncestor("AppChat").Models.Conversation)
 
-return function(p0)
+return function(p1)
 	-- upvalues: conversationModule (ref)
-	return if p0 then p0.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION and p0.osaAcknowledgementStatus == conversationModule.OsaAcknowledgementStatus.Unacknowledged else false
+	return if p1 then p1.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION and p1.osaAcknowledgementStatus == conversationModule.OsaAcknowledgementStatus.Unacknowledged else false
 end

@@ -8,46 +8,46 @@ return function()
 		isInsideMaximizeDistance = false
 	}
 	
-	local function _(p0)
-		return tostring(p0)
+	local function _(p1)
+		return tostring(p1)
 	end
 	
 	return {
 		getUserProximityState = function(p1)
 			-- upvalues: t (ref), createSignal (copy), t_1 (ref)
-			local var2 = tostring(p1)
+			local var1 = tostring(p1)
 			
-			if not t[var2] then
-				local var3, var4 = createSignal(t_1)
-				t[var2] = { getter = var3, setter = var4 }
+			if not t[var1] then
+				local var2, var3 = createSignal(t_1)
+				t[var1] = { getter = var2, setter = var3 }
 			end
-			return t[var2].getter
+			return t[var1].getter
 		end,
-		updateProximity = function(p2, p3, p4)
+		updateProximity = function(p1, p2, p3)
 			-- upvalues: t (ref), createSignal (copy), t_1 (ref)
-			local var5 = tostring(p2)
+			local var1 = tostring(p1)
 			
-			if not t[var5] then
-				local var6 = tostring(p2)
+			if not t[var1] then
+				local var2 = tostring(p1)
 				
-				if not t[var6] then
-					local var7, var8 = createSignal(t_1)
-					t[var6] = { getter = var7, setter = var8 }
+				if not t[var2] then
+					local var3, var4 = createSignal(t_1)
+					t[var2] = { getter = var3, setter = var4 }
 				end
-				local _ = t[var6].getter
+				local _ = t[var2].getter
 			end
-			t[var5].setter({
-				isInsideRenderDistance = p3,
-				isInsideMaximizeDistance = p4
+			t[var1].setter({
+				isInsideRenderDistance = p2,
+				isInsideMaximizeDistance = p3
 			})
 		end,
-		removeUser = function(p5)
+		removeUser = function(p1)
 			-- upvalues: t (ref), t_1 (ref)
-			local var9 = tostring(p5)
+			local var1 = tostring(p1)
 			
-			if t[var9] then
-				t[var9].setter(t_1)
-				t[var9] = nil
+			if t[var1] then
+				t[var1].setter(t_1)
+				t[var1] = nil
 			end
 		end
 	}

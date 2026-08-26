@@ -1,7 +1,7 @@
-﻿local var0 = newproxy(true)
+﻿local var1 = newproxy(true)
 
-getmetatable(var0).__tostring = function()
+getmetatable(var1).__tostring = function()
 	return "Object.None"
 end
 
-return var0
+return var1

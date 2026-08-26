@@ -10,12 +10,12 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local authButtonClick = require(parent.AuthAnalytics).Events.authButtonClick
 
-return function(p0)
+return function(p1)
 	-- upvalues: useScreenSize (ref), useLocalization (ref), reactModule (ref), authButtonClick (ref), loading (ref), iconSize (ref), interactiveAlert (ref), buttonType (ref)
-	local onCancel = p0.onCancel
-	local sessionId = p0.sessionId
-	local entryPointEventCtx = p0.entryPointEventCtx
-	local var3 = useLocalization({
+	local onCancel = p1.onCancel
+	local sessionId = p1.sessionId
+	local entryPointEventCtx = p1.entryPointEventCtx
+	local var1 = useLocalization({
 		title = "Amp.FAEUpsell.Modal.Loading.Title",
 		bodyText = "Amp.FAEUpsell.Modal.Loading.Text",
 		cancelBtn = "Amp.FAEUpsell.Modal.Loading.ButtonCancel"
@@ -23,8 +23,8 @@ return function(p0)
 	
 	return reactModule.createElement(interactiveAlert, {
 		screenSize = useScreenSize(),
-		title = var3.title,
-		bodyText = var3.bodyText,
+		title = var1.title,
+		bodyText = var1.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
@@ -35,7 +35,7 @@ return function(p0)
 							authButtonClick(entryPointEventCtx, "faeLoadingCancel", sessionId)
 							onCancel()
 						end, { onCancel, sessionId, entryPointEventCtx }),
-						text = var3.cancelBtn
+						text = var1.cancelBtn
 					}
 				}
 			}

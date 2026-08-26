@@ -9,15 +9,15 @@ local useGetTFActionsEnumLegacyModule = require(script.Parent.useGetTFActionsEnu
 local fFlagTrustedFriendsLinkVPCModule = require(trustedContacts.Flags.FFlagTrustedFriendsLinkVPC)
 local fFlagTFWithActionsCheck = require(parent.SharedFlags).FFlagTFWithActionsCheck
 
-return function(p0, _, p1, p2)
+return function(p1, _, p2, p3)
 	-- upvalues: fFlagTFWithActionsCheck (ref), useGetTFActionsEnumLegacyModule (ref), useGetTFActionsCallbacksModule (ref), useLocalization (ref), reactModule (ref), TFActionsEnumModule (ref), foundationModule (ref), fFlagTrustedFriendsLinkVPCModule (ref)
-	local var7 = if fFlagTFWithActionsCheck then p1 else useGetTFActionsEnumLegacyModule(p0, {
-		modalVariant = p1,
-		tokens = p2.tokens,
-		isShareLinkSender = p2.isShareLinkSender
+	local var1 = if fFlagTFWithActionsCheck then p2 else useGetTFActionsEnumLegacyModule(p1, {
+		modalVariant = p2,
+		tokens = p3.tokens,
+		isShareLinkSender = p3.isShareLinkSender
 	})
-	local var8 = useGetTFActionsCallbacksModule(p0, p2)
-	local var9 = useLocalization({
+	local var2 = useGetTFActionsCallbacksModule(p1, p3)
+	local var3 = useLocalization({
 		cancel = "CommonUI.Controls.Action.Cancel",
 		add = "Feature.Friends.Action.Add",
 		addViaLink = "Feature.Friends.Button.AddViaLink",
@@ -25,13 +25,13 @@ return function(p0, _, p1, p2)
 		accept = "CommonUI.Controls.Action.Accept"
 	})
 	
-	return if var7 then reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var8 (ref), TFActionsEnumModule (copy), fFlagTFWithActionsCheck (copy), foundationModule (copy), fFlagTrustedFriendsLinkVPCModule (copy)
+	return if var1 then reactModule.useMemo(function()
+		-- upvalues: var3 (ref), var2 (ref), TFActionsEnumModule (copy), fFlagTFWithActionsCheck (copy), foundationModule (copy), fFlagTrustedFriendsLinkVPCModule (copy)
 		local t = {
 			icon = nil,
 			isLoading = false,
-			text = var9.cancel,
-			onActivated = var8.onCancelButtonPress
+			text = var3.cancel,
+			onActivated = var2.onCancelButtonPress
 		}
 		
 		return {
@@ -42,63 +42,63 @@ return function(p0, _, p1, p2)
 				},
 				t
 			},
-			[TFActionsEnumModule.RemoveTrustedConnection] = { { text = var9.ok, onActivated = var8.onOkButtonPress } },
+			[TFActionsEnumModule.RemoveTrustedConnection] = { { text = var3.ok, onActivated = var2.onOkButtonPress } },
 			[TFActionsEnumModule.AddTrustedConnectionViaLink] = {
 				{
-					text = var9.addViaLink,
-					onActivated = var8.onAddViaLinkButtonPress
+					text = var3.addViaLink,
+					onActivated = var2.onAddViaLinkButtonPress
 				},
 				t
 			},
 			[TFActionsEnumModule.AddTrustedFriendDoubleOptin] = {
 				{
-					text = var9.add,
-					onActivated = var8.onSendTrustedConnectionRequest
+					text = var3.add,
+					onActivated = var2.onSendTrustedConnectionRequest
 				},
 				t
 			},
 			[TFActionsEnumModule.AddTrustedFriendWithVpc] = {
 				{
-					text = var9.add,
+					text = var3.add,
 					icon = foundationModule.Enums.IconName.LockClosed,
-					onActivated = var8.onOpenVPCProloguePress
+					onActivated = var2.onOpenVPCProloguePress
 				},
 				t
 			},
 			[TFActionsEnumModule.AcceptTrustedFriendWithVpcRecipient] = {
 				{
-					text = var9.accept,
+					text = var3.accept,
 					icon = foundationModule.Enums.IconName.LockClosed,
-					onActivated = var8.onOpenVPCProloguePress
+					onActivated = var2.onOpenVPCProloguePress
 				},
 				t
 			},
 			[TFActionsEnumModule.AcceptTrustedFriendViaLink] = {
 				{
-					text = var9.accept,
-					onActivated = var8.onAddTrustedFriendFromLink
+					text = var3.accept,
+					onActivated = var2.onAddTrustedFriendFromLink
 				},
 				t
 			},
 			[TFActionsEnumModule.AcceptTrustedFriend] = {
 				{
-					text = var9.accept,
-					onActivated = var8.onAcceptRequestReceived
+					text = var3.accept,
+					onActivated = var2.onAcceptRequestReceived
 				},
 				t
 			},
 			[TFActionsEnumModule.AcceptTrustedFriendViaLinkWithVpcRecipient] = if fFlagTrustedFriendsLinkVPCModule then {
 				{
-					text = var9.accept,
+					text = var3.accept,
 					icon = foundationModule.Enums.IconName.LockClosed,
-					onActivated = var8.onAddTrustedFriendFromLinkWithVPC
+					onActivated = var2.onAddTrustedFriendFromLinkWithVPC
 				},
 				t
 			} else nil,
 			[TFActionsEnumModule.AcceptTrustedFriendInvalid] = {
 				{
 					isDisabled = true,
-					text = var9.accept,
+					text = var3.accept,
 					onActivated = function() end
 				},
 				t
@@ -106,7 +106,7 @@ return function(p0, _, p1, p2)
 			[TFActionsEnumModule.PendingTrustedConnection] = {
 				{
 					isDisabled = true,
-					text = var9.add,
+					text = var3.add,
 					onActivated = function() end
 				},
 				t
@@ -114,11 +114,11 @@ return function(p0, _, p1, p2)
 			[TFActionsEnumModule.PendingIncomingTrustedConnection] = {
 				{
 					isDisabled = true,
-					text = var9.accept,
+					text = var3.accept,
 					onActivated = function() end
 				},
 				t
 			}
 		}
-	end, { var7, var9, var8 })[var7] else nil
+	end, { var1, var3, var2 })[var1] else nil
 end

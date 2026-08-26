@@ -12,9 +12,9 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local _ = require(onPlatformSurveys.Components.surveyPhaseSlots)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), text (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref), button (ref), fillBehavior (ref)
-	local slots = p0.slots
+	local slots = p1.slots
 	local primaryAction = slots.primaryAction
 	
 	return reactModule.createElement(view, {
@@ -35,7 +35,7 @@ return reactModule.memo(function(p0)
 				icon = iconName.X,
 				variant = buttonVariant.Utility,
 				size = buttonSize.Small,
-				onActivated = p0.onDismiss
+				onActivated = p1.onDismiss
 			})
 		}),
 		Body = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, slots.body),

@@ -5,24 +5,24 @@ local parent = script.Parent.Parent.Parent
 local globalConfigModule = require(parent.GlobalConfig)
 local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
 local withLocalizationModule = require(parent.Localization.withLocalization)
-local var4 = t.strictInterface({ title = t.string, LayoutOrder = t.integer })
+local var1 = t.strictInterface({ title = t.string, LayoutOrder = t.integer })
 
-return function(p0)
-	-- upvalues: globalConfigModule (ref), var4 (ref), withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
+return function(p1)
+	-- upvalues: globalConfigModule (ref), var1 (ref), withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
 	if globalConfigModule.propValidation then
-		assert(var4(p0))
+		assert(var1(p1))
 	end
-	return withLocalizationModule({ title = p0.title })(function(p1)
-		-- upvalues: roact (copy), p0 (ref), themedTextLabelModule (copy)
+	return withLocalizationModule({ title = p1.title })(function(p2)
+		-- upvalues: roact (copy), p1 (ref), themedTextLabelModule (copy)
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 45),
-			LayoutOrder = p0.LayoutOrder
+			LayoutOrder = p1.LayoutOrder
 		}, {
 			HeaderText = roact.createElement(themedTextLabelModule, {
 				fontKey = "CaptionHeader",
 				themeKey = "TextMuted",
-				Text = p1.title,
+				Text = p2.title,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Position = UDim2.new(0, 0, 0, 20),
 				Size = UDim2.new(1, 0, 0, 17)

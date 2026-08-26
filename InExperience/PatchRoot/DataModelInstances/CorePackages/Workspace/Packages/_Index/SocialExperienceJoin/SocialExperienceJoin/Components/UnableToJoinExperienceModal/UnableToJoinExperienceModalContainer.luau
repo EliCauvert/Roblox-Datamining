@@ -12,57 +12,57 @@ local useNavigationProps = robloxAppNavigationModule.useNavigationProps
 local useScreenSize = robloxAppHooksModule.useScreenSize
 local unableToJoinExperienceModalModule = require(script.Parent.UnableToJoinExperienceModal)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigation (ref), useNavigationProps (ref), reactModule (ref), initializeSocialExperienceJoinAnalyticsModule (ref), useScreenSize (ref), userProfilesModule (ref), eventNamesModule (ref), unableToJoinExperienceModalModule (ref)
-	local var9 = useNavigation()
-	local var10 = useNavigationProps(function(p1, p2)
+	local var1 = useNavigation()
+	local var2 = useNavigationProps(function(p2, p3)
 		return {
-			universeId = p1,
-			userId = p2.userId,
-			openGameDetailsPeekViewClosed = p2.openGameDetailsPeekViewClosed,
-			analyticProps = p2.analyticProps
+			universeId = p2,
+			userId = p3.userId,
+			openGameDetailsPeekViewClosed = p3.openGameDetailsPeekViewClosed,
+			analyticProps = p3.analyticProps
 		}
 	end)
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: initializeSocialExperienceJoinAnalyticsModule (copy), var10 (ref)
-		return initializeSocialExperienceJoinAnalyticsModule(var10.analyticProps)
-	end, { var10.analyticProps })
-	local var12 = useScreenSize()
-	local var13 = userProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = { var10.userId },
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: initializeSocialExperienceJoinAnalyticsModule (copy), var2 (ref)
+		return initializeSocialExperienceJoinAnalyticsModule(var2.analyticProps)
+	end, { var2.analyticProps })
+	local var4 = useScreenSize()
+	local var5 = userProfilesModule.Hooks.useUserProfilesFetch({
+		userIds = { var2.userId },
 		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds
 	})
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref)
-		var9.pop()
-	end, { var9 })
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref)
+		var1.pop()
+	end, { var1 })
 	
 	return reactModule.createElement(unableToJoinExperienceModalModule, {
 		cancel = reactModule.useCallback(function()
-			-- upvalues: var11 (ref), eventNamesModule (copy), var10 (ref), var14 (ref)
-			var11.fireAnalyticsEvent(eventNamesModule.UnableToJoinCancel, {
-				universeId = var10.universeId,
-				profileUserId = var10.userId
+			-- upvalues: var3 (ref), eventNamesModule (copy), var2 (ref), var6 (ref)
+			var3.fireAnalyticsEvent(eventNamesModule.UnableToJoinCancel, {
+				universeId = var2.universeId,
+				profileUserId = var2.userId
 			})
-			var14()
-		end, { var14 }),
+			var6()
+		end, { var6 }),
 		openGameDetailsPeekView = reactModule.useCallback(function()
-			-- upvalues: var11 (ref), eventNamesModule (copy), var10 (ref), var14 (ref), p0 (ref)
-			var11.fireAnalyticsEvent(eventNamesModule.UnableToJoinViewDetails, {
-				universeId = var10.universeId,
-				profileUserId = var10.userId
+			-- upvalues: var3 (ref), eventNamesModule (copy), var2 (ref), var6 (ref), p1 (ref)
+			var3.fireAnalyticsEvent(eventNamesModule.UnableToJoinViewDetails, {
+				universeId = var2.universeId,
+				profileUserId = var2.userId
 			})
-			var14()
-			p0.openGameDetailsPeekView(var10.universeId, {
+			var6()
+			p1.openGameDetailsPeekView(var2.universeId, {
 				mountAsFullView = true,
 				showBackButton = true,
-				onPeekViewClosed = var10.openGameDetailsPeekViewClosed
+				onPeekViewClosed = var2.openGameDetailsPeekViewClosed
 			})
 		end, {
-			var9, var10.universeId, var10.userId, var10.openGameDetailsPeekViewClosed,
-			p0.openGameDetailsPeekView, var14
+			var1, var2.universeId, var2.userId, var2.openGameDetailsPeekViewClosed,
+			p1.openGameDetailsPeekView, var6
 		}),
-		screenSize = var12,
-		userPrimaryName = if var13.data then userProfilesModule.Selectors.getCombinedNameFromId(var13.data, var10.userId) else ""
+		screenSize = var4,
+		userPrimaryName = if var5.data then userProfilesModule.Selectors.getCombinedNameFromId(var5.data, var2.userId) else ""
 	})
 end

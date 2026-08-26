@@ -8,27 +8,27 @@ local constantsModule = require(purchasePrompt.Misc.Constants)
 local marketplaceService = game:GetService("MarketplaceService")
 local browserService = game:GetService("BrowserService")
 local httpService = game:GetService("HttpService")
-local var9 = nil
+local var1 = nil
 pcall(function()
-	-- upvalues: var9 (write)
-	var9 = game:GetService("PlatformService")
+	-- upvalues: var1 (write)
+	var1 = game:GetService("PlatformService")
 end)
 local getFStringVNGWebshopUrl = require(parent.SharedFlags).GetFStringVNGWebshopUrl
 local urlBuilder = require(parent.PurchasePromptDeps).UrlBuilder.UrlBuilder
 local replaced = string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www.")
 local t = {}
 
-local function addContextToUrl(p0, p1)
-	for i, v in p1 do
+local function addContextToUrl(p1, p2)
+	for i, v in p2 do
 		if v then
-			p0 = if p0:find("?") then p0 .. ("&%s=%s"):format(i, v) else p0 .. ("?%s=%s"):format(i, v)
+			p1 = if p1:find("?") then p1 .. ("&%s=%s"):format(i, v) else p1 .. ("?%s=%s"):format(i, v)
 		end
 	end
-	return p0
+	return p1
 end
 
 function t.new()
-	-- upvalues: marketplaceService (ref), replaced (ref), guiService (ref), addContextToUrl (ref), purchaseFlowModule (ref), base64Module (ref), urlBuilder (ref), httpService (ref), constantsModule (ref), browserService (ref), var9 (write), getFStringVNGWebshopUrl (ref)
+	-- upvalues: marketplaceService (ref), replaced (ref), guiService (ref), addContextToUrl (ref), purchaseFlowModule (ref), base64Module (ref), urlBuilder (ref), httpService (ref), constantsModule (ref), browserService (ref), var1 (write), getFStringVNGWebshopUrl (ref)
 	local t = {}
 	setmetatable(t, {
 		__tostring = function()
@@ -41,9 +41,9 @@ function t.new()
 		marketplaceService:SignalMockPurchasePremium()
 	end
 	
-	function t.startPremiumUpsell(p2)
+	function t.startPremiumUpsell(p3)
 		-- upvalues: replaced (copy), guiService (copy)
-		guiService:OpenBrowserWindow(("%supgrades/paymentmethods?ap=%d"):format(replaced, p2))
+		guiService:OpenBrowserWindow(("%supgrades/paymentmethods?ap=%d"):format(replaced, p3))
 	end
 	
 	function t.startPremiumUpsellWithContext(p3, p4)
@@ -51,19 +51,19 @@ function t.new()
 		guiService:OpenBrowserWindow(addContextToUrl(("%supgrades/paymentmethods?ap=%d"):format(replaced, p4), p3))
 	end
 	
-	function t.startRobuxUpsellWebByFlow(p5, p6)
+	function t.startRobuxUpsellWebByFlow(p3, p4)
 		-- upvalues: purchaseFlowModule (copy), guiService (copy), replaced (copy)
-		if p5 == purchaseFlowModule.RobuxUpsellV2 or p5 == purchaseFlowModule.LargeRobuxUpsell then
-			guiService:OpenBrowserWindow(("%supgrades/paymentmethods?ap=%s"):format(replaced, p6))
+		if p3 == purchaseFlowModule.RobuxUpsellV2 or p3 == purchaseFlowModule.LargeRobuxUpsell then
+			guiService:OpenBrowserWindow(("%supgrades/paymentmethods?ap=%s"):format(replaced, p4))
 			
 			return
 		end
-		guiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx?product_id=%s"):format(replaced, p6))
+		guiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx?product_id=%s"):format(replaced, p4))
 	end
 	
-	function t.startRobuxUpsellWebByFlowWithContext(p7, p8, p9)
+	function t.startRobuxUpsellWebByFlowWithContext(p3, p4, p5)
 		-- upvalues: purchaseFlowModule (copy), replaced (copy), addContextToUrl (copy), guiService (copy)
-		guiService:OpenBrowserWindow(addContextToUrl(if if p8 ~= purchaseFlowModule.RobuxUpsellV2 then p8 == purchaseFlowModule.LargeRobuxUpsell else true then ("%supgrades/paymentmethods?ap=%s"):format(replaced, p9) else ("%sUpgrades/Robux.aspx?product_id=%s"):format(replaced, p9), p7))
+		guiService:OpenBrowserWindow(addContextToUrl(if if p4 ~= purchaseFlowModule.RobuxUpsellV2 then p4 == purchaseFlowModule.LargeRobuxUpsell else true then ("%supgrades/paymentmethods?ap=%s"):format(replaced, p5) else ("%sUpgrades/Robux.aspx?product_id=%s"):format(replaced, p5), p3))
 	end
 	
 	function t.openSecuritySettings(value)
@@ -94,42 +94,42 @@ function t.new()
 		guiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx"):format(replaced))
 	end
 	
-	function t.openRobuxStoreWithContext(p10, p11)
+	function t.openRobuxStoreWithContext(p3, p4)
 		-- upvalues: replaced (copy), addContextToUrl (copy), guiService (copy)
-		local var14 = ("%sUpgrades/Robux.aspx"):format(replaced)
+		local var2 = ("%sUpgrades/Robux.aspx"):format(replaced)
 		
-		if p11 then
-			var14 ..= ("?product_id=%s"):format(p11)
+		if p4 then
+			var2 ..= ("?product_id=%s"):format(p4)
 		end
-		guiService:OpenBrowserWindow(addContextToUrl(var14, p10))
+		guiService:OpenBrowserWindow(addContextToUrl(var2, p3))
 	end
 	
-	function t.openPaymentsPageWithContext(p12, p13)
+	function t.openPaymentsPageWithContext(p3, p4)
 		-- upvalues: replaced (copy), addContextToUrl (copy), guiService (copy)
-		guiService:OpenBrowserWindow(addContextToUrl(("%supgrades/paymentmethods?ap=%s"):format(replaced, p13), p12))
+		guiService:OpenBrowserWindow(addContextToUrl(("%supgrades/paymentmethods?ap=%s"):format(replaced, p4), p3))
 	end
 	
-	function t.promptNativePurchaseWithLocalPlayer(p14)
+	function t.promptNativePurchaseWithLocalPlayer(p3)
 		-- upvalues: marketplaceService (copy)
-		return marketplaceService:PromptNativePurchaseWithLocalPlayer(p14)
+		return marketplaceService:PromptNativePurchaseWithLocalPlayer(p3)
 	end
 	
-	function t.promptNativePurchase(p15, p16)
+	function t.promptNativePurchase(p3, p4)
 		-- upvalues: marketplaceService (copy)
-		return marketplaceService:PromptNativePurchase(p15, p16)
+		return marketplaceService:PromptNativePurchase(p3, p4)
 	end
 	
-	function t.beginPlatformStorePurchase(p17)
-		-- upvalues: var9 (copy)
-		return var9:BeginPlatformStorePurchase(p17)
+	function t.beginPlatformStorePurchase(p3)
+		-- upvalues: var1 (copy)
+		return var1:BeginPlatformStorePurchase(p3)
 	end
 	
-	function t.openVngStore(p18)
+	function t.openVngStore(p3)
 		-- upvalues: getFStringVNGWebshopUrl (copy), guiService (copy)
-		if not p18 or p18 == "" then
-			p18 = getFStringVNGWebshopUrl()
+		if not p3 or p3 == "" then
+			p3 = getFStringVNGWebshopUrl()
 		end
-		guiService:OpenBrowserWindow(p18)
+		guiService:OpenBrowserWindow(p3)
 	end
 	
 	return t

@@ -25,52 +25,52 @@ local t_2 = {
 	springOptions = { frequency = 4, damping = 1 }
 }
 
-local function selectCurrentMessage(p0)
-	return p0.currentToastMessages[1]
+local function selectCurrentMessage(p1)
+	return p1.currentToastMessages[1]
 end
 
 return function(p1)
 	-- upvalues: cryoModule (ref), t_2 (ref), useDispatch (ref), useSelector (ref), selectCurrentMessage (ref), useStyle (ref), reactModule (ref), toastRoduxModule (ref), toastType (ref), t_1 (ref), toast (ref)
-	local var9 = cryoModule.Dictionary.join(t_2, p1)
-	local var10 = useDispatch()
-	local var11 = useSelector(selectCurrentMessage)
+	local var1 = cryoModule.Dictionary.join(t_2, p1)
+	local var2 = useDispatch()
+	local var3 = useSelector(selectCurrentMessage)
 	local tokens = useStyle().Tokens
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), toastRoduxModule (copy)
-		var10(toastRoduxModule.Actions.RemoveCurrentToastMessage())
-	end, { var10 })
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), toastRoduxModule (copy)
+		var2(toastRoduxModule.Actions.RemoveCurrentToastMessage())
+	end, { var2 })
 	
-	local var13 = function()
-		-- upvalues: var11 (ref), var12 (ref)
-		if var11 then
-			var12()
+	local var5 = function()
+		-- upvalues: var3 (ref), var4 (ref)
+		if var3 then
+			var4()
 		end
 	end
 	
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var12 (ref)
-		if var11 and (not next(var11) or not var11.toastTitle) then
-			var12()
+		-- upvalues: var3 (ref), var4 (ref)
+		if var3 and (not next(var3) or not var3.toastTitle) then
+			var4()
 		end
-	end, { var11, var12 })
+	end, { var3, var4 })
 	
-	if var11 == nil then
+	if var3 == nil then
 		return nil
 	end
-	local toastType_1 = var11.toastType
+	local toastType_1 = var3.toastType
 	
 	return reactModule.createElement(toast, {
 		show = true,
-		duration = var9.duration,
+		duration = var1.duration,
 		position = UDim2.new(0.5, 0, 0, tokens.Size.Size_500),
-		springOptions = var9.springOptions,
+		springOptions = var1.springOptions,
 		toastContent = {
 			iconImage = if toastType_1 ~= nil then nil else t_1[toastType_1],
-			onActivated = if toastType_1 == toastType.QuickLaunchError then var13 else nil,
-			onDismissed = var12,
-			sequenceNumber = var11.sequenceNumber,
-			toastSubtitle = var11.toastSubtitle,
-			toastTitle = var11.toastTitle
+			onActivated = if toastType_1 == toastType.QuickLaunchError then var5 else nil,
+			onDismissed = var4,
+			sequenceNumber = var3.sequenceNumber,
+			toastSubtitle = var3.toastSubtitle,
+			toastTitle = var3.toastTitle
 		}
 	})
 end

@@ -2,36 +2,36 @@
 local llama = require(appChat.Parent.LuaSocialLibrariesDeps).llama
 local roduxAliasesModule = require(appChat.Http.RoduxAliases)
 
-local function convertToNewAliasUpdatedActions(p0)
+local function convertToNewAliasUpdatedActions(p1)
 	-- upvalues: roduxAliasesModule (ref)
 	local t = {}
 	
-	for i, v in ipairs(p0) do
+	for i, v in ipairs(p1) do
 		table.insert(t, roduxAliasesModule.Actions.AliasUpdated(tostring(v.targetUserId), v.targetUserTag))
 	end
 	return t
 end
 
 local t = {
-	GetAliases_Success = function(p1)
+	GetAliases_Success = function(p2)
 		-- upvalues: convertToNewAliasUpdatedActions (ref)
-		return convertToNewAliasUpdatedActions(p1.responseBody)
+		return convertToNewAliasUpdatedActions(p2.responseBody)
 	end,
 	ReceivedAliases = function(p2)
 		-- upvalues: convertToNewAliasUpdatedActions (ref)
 		return convertToNewAliasUpdatedActions(p2.aliases)
 	end
 }
-local var4 = roduxAliasesModule.installReducer()
+local var1 = roduxAliasesModule.installReducer()
 
-return function(p3, p4)
-	-- upvalues: t (ref), llama (ref), var4 (ref)
-	p3 = p3 or { byUserId = { ShowUserAlias = true } }
-	local list = { p4 }
-	local type = t[p4.type]
+return function(p2, p3)
+	-- upvalues: t (ref), llama (ref), var1 (ref)
+	p2 = p2 or { byUserId = { ShowUserAlias = true } }
+	local list = { p3 }
+	local type = t[p3.type]
 	
 	if type then
-		list = type(p4)
+		list = type(p3)
 	end
-	return llama.List.reduce(list, var4, p3)
+	return llama.List.reduce(list, var1, p2)
 end

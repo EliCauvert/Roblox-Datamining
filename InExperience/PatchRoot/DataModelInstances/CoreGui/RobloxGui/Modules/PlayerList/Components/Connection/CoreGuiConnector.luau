@@ -10,9 +10,9 @@ local setPlayerIsBlockedModule = require(parent.Actions.SetPlayerIsBlocked)
 local eventConnectionModule = require(script.Parent.EventConnection)
 local coreGuiConnector = roactModule.PureComponent:extend("CoreGuiConnector")
 
-function coreGuiConnector.didMount(p0)
+function coreGuiConnector.didMount(p1)
 	-- upvalues: userGameSettingsService (ref)
-	p0.props.setPerformanceStatsVisible(userGameSettingsService.PerformanceStatsVisible)
+	p1.props.setPerformanceStatsVisible(userGameSettingsService.PerformanceStatsVisible)
 end
 
 function coreGuiConnector.render(p1)
@@ -27,28 +27,28 @@ function coreGuiConnector.render(p1)
 		}),
 		BlockedStatusChangedConnection = roactModule.createElement(eventConnectionModule, {
 			event = blockedStatusChangedEvent,
-			callback = function(p3, p4)
+			callback = function(p2, p3)
 				-- upvalues: playersService (copy), p1 (ref)
-				local var10 = playersService:GetPlayerByUserId(p3)
+				local var1 = playersService:GetPlayerByUserId(p2)
 				
-				if var10 then
-					p1.props.setPlayerIsBlocked(var10, p4)
+				if var1 then
+					p1.props.setPlayerIsBlocked(var1, p3)
 				end
 			end
 		})
 	})
 end
 
-return roactRoduxModule.connect(nil, function(p5)
+return roactRoduxModule.connect(nil, function(p1)
 	-- upvalues: setPerformanceStatsVisibleModule (ref), setPlayerIsBlockedModule (ref)
 	return {
 		setPerformanceStatsVisible = function(value)
-			-- upvalues: p5 (ref), setPerformanceStatsVisibleModule (copy)
-			return p5(setPerformanceStatsVisibleModule(value))
+			-- upvalues: p1 (ref), setPerformanceStatsVisibleModule (copy)
+			return p1(setPerformanceStatsVisibleModule(value))
 		end,
-		setPlayerIsBlocked = function(value, p6)
-			-- upvalues: p5 (ref), setPlayerIsBlockedModule (copy)
-			return p5(setPlayerIsBlockedModule(value, p6))
+		setPlayerIsBlocked = function(value, p2)
+			-- upvalues: p1 (ref), setPlayerIsBlockedModule (copy)
+			return p1(setPlayerIsBlockedModule(value, p2))
 		end
 	}
 end)(coreGuiConnector)

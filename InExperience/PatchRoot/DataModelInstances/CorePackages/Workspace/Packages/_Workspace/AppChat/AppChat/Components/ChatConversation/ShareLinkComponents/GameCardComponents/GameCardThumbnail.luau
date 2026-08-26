@@ -16,30 +16,30 @@ local list = {
 	NumberSequenceKeypoint.new(1, 0)
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), fFlagAppChatNativeFoundationCornerRadiiModule (ref), reactModule (ref), image (ref), getGameCardThumbnailCornerRadiiModule (ref), roundedVariantModule (ref), list (ref)
-	local var9 = cryoModule.Dictionary.union(t, p0)
+	local var1 = cryoModule.Dictionary.union(t, p1)
 	local size500 = useTokens().Size.Size_500
 	
 	if fFlagAppChatNativeFoundationCornerRadiiModule then
 		return reactModule.createElement(image, {
 			ZIndex = 0,
 			Size = UDim2.new(1, 0, 1, 0),
-			Image = var9.gameThumbnail,
-			LayoutOrder = var9.LayoutOrder,
+			Image = var1.gameThumbnail,
+			LayoutOrder = var1.LayoutOrder,
 			aspectRatio = {
-				AspectRatio = var9.aspectRatio,
+				AspectRatio = var1.aspectRatio,
 				AspectType = Enum.AspectType.ScaleWithParentSize,
 				DominantAxis = Enum.DominantAxis.Width
 			},
-			cornerRadius = getGameCardThumbnailCornerRadiiModule(var9.roundedVariant, size500),
-			onActivated = var9.onActivated,
-			Visible = var9.Visible
+			cornerRadius = getGameCardThumbnailCornerRadiiModule(var1.roundedVariant, size500),
+			onActivated = var1.onActivated,
+			Visible = var1.Visible
 		})
 	end
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var9 (ref), roundedVariantModule (copy)
-		local degrees = math.deg(math.atan(var9.aspectRatio))
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), roundedVariantModule (copy)
+		local degrees = math.deg(math.atan(var1.aspectRatio))
 		
 		return {
 			[roundedVariantModule.Top] = 90,
@@ -51,34 +51,34 @@ return reactModule.memo(function(p0)
 			[roundedVariantModule.BottomLeft] = degrees + 180,
 			[roundedVariantModule.BottomRight] = 360 - degrees
 		}
-	end, { var9.aspectRatio })
+	end, { var1.aspectRatio })
 	
 	return reactModule.createElement(image, {
 		ZIndex = 0,
 		Size = UDim2.new(1, 0, 1, 0),
-		Image = var9.gameThumbnail,
-		LayoutOrder = var9.LayoutOrder,
+		Image = var1.gameThumbnail,
+		LayoutOrder = var1.LayoutOrder,
 		aspectRatio = {
-			AspectRatio = var9.aspectRatio,
+			AspectRatio = var1.aspectRatio,
 			AspectType = Enum.AspectType.ScaleWithParentSize,
 			DominantAxis = Enum.DominantAxis.Width
 		},
 		cornerRadius = UDim.new(0, size500),
-		onActivated = var9.onActivated,
-		Visible = var9.Visible
+		onActivated = var1.onActivated,
+		Visible = var1.Visible
 	}, {
 		OverlayImage = reactModule.createElement(image, {
 			tag = "size-full",
-			Image = var9.gameThumbnail,
-			Visible = var9.Visible
+			Image = var1.gameThumbnail,
+			Visible = var1.Visible
 		}, {
 			TransparencyGradient = reactModule.useMemo(function()
-				-- upvalues: reactModule (copy), var9 (ref), var10 (ref), list (copy)
+				-- upvalues: reactModule (copy), var1 (ref), var2 (ref), list (copy)
 				return reactModule.createElement("UIGradient", {
-					Rotation = if var9.roundedVariant then var10[var9.roundedVariant] else 0,
+					Rotation = if var1.roundedVariant then var2[var1.roundedVariant] else 0,
 					Transparency = NumberSequence.new(list)
 				})
-			end, { var9.roundedVariant, var10 })
+			end, { var1.roundedVariant, var2 })
 		})
 	})
 end)

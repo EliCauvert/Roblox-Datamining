@@ -23,7 +23,7 @@ leaveGamePrompt.validateProps = t.strictInterface({
 	onConfirm = t.optional(t.callback)
 })
 
-function leaveGamePrompt.init(p0)
+function leaveGamePrompt.init(p1)
 	-- upvalues: sendAnalyticsModule (ref), constantsModule (ref), runService (ref), getDefaultQualityLevel (ref)
 	function p0.leaveGameConfirm()
 		-- upvalues: sendAnalyticsModule (copy), constantsModule (copy), runService (copy), getDefaultQualityLevel (copy)
@@ -56,18 +56,18 @@ function leaveGamePrompt.render(p1)
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(function(p3, _)
+return roactRodux.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: constantsModule (ref)
 	return {
-		canGamepadCaptureFocus = p3.menuPage == constantsModule.LeaveGamePromptPageKey and (p3.displayOptions.inputType == constantsModule.InputType.Gamepad and (not p3.respawn.dialogOpen and p3.currentZone == 1)),
-		canKeyboardCaptureFocus = p3.menuPage == constantsModule.LeaveGamePromptPageKey and (p3.displayOptions.inputType == constantsModule.InputType.MouseAndKeyboard and not p3.respawn.dialogOpen)
+		canGamepadCaptureFocus = p1.menuPage == constantsModule.LeaveGamePromptPageKey and (p1.displayOptions.inputType == constantsModule.InputType.Gamepad and (not p1.respawn.dialogOpen and p1.currentZone == 1)),
+		canKeyboardCaptureFocus = p1.menuPage == constantsModule.LeaveGamePromptPageKey and (p1.displayOptions.inputType == constantsModule.InputType.MouseAndKeyboard and not p1.respawn.dialogOpen)
 	}
-end, function(p4)
+end, function(p1)
 	-- upvalues: closeMenuModule (ref), sendAnalyticsModule (ref), constantsModule (ref)
 	return {
 		closeMenu = function()
-			-- upvalues: p4 (ref), closeMenuModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
-			p4(closeMenuModule)
+			-- upvalues: p1 (ref), closeMenuModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
+			p1(closeMenuModule)
 			sendAnalyticsModule(constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsLeaveGameName, { confirmed = constantsModule.AnalyticsCancelledName })
 		end
 	}

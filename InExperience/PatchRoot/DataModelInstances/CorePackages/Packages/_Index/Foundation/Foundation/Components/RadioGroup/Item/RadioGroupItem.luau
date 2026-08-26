@@ -20,37 +20,37 @@ local t = {
 	placement = inputPlacementModule.Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: flagsModule (ref), useInputGroupDefaultsModule (ref), t (ref), withDefaultsModule (ref), useRadioGroupModule (ref), useTokensModule (ref), reactModule (ref), useRadioGroupItemVariantsModule (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), viewModule (ref)
-	local var15 = if flagsModule.FoundationInputGroup then useInputGroupDefaultsModule(p0, t) else withDefaultsModule(p0, t)
-	local isDisabled = var15.isDisabled
-	local var16 = useRadioGroupModule()
-	local var17 = var16.value == var15.value
-	local label = var15.label or var15.value
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref), var15 (ref)
-		var16.onValueChanged(var15.value)
-	end, { isDisabled, var15.value, var16.onValueChanged })
-	local var20 = useRadioGroupItemVariantsModule(useTokensModule(), var15.size)
-	var15.testId = `{var16.testId}--item-{var15.value}`
+	local var1 = if flagsModule.FoundationInputGroup then useInputGroupDefaultsModule(p1, t) else withDefaultsModule(p1, t)
+	local isDisabled = var1.isDisabled
+	local var2 = useRadioGroupModule()
+	local var3 = var2.value == var1.value
+	local label = var1.label or var1.value
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), var1 (ref)
+		var2.onValueChanged(var1.value)
+	end, { isDisabled, var1.value, var2.onValueChanged })
+	local var5 = useRadioGroupItemVariantsModule(useTokensModule(), var1.size)
+	var1.testId = `{var2.testId}--item-{var15.value}`
 	
-	return reactModule.createElement(internalInputModule, withCommonPropsModule(var15, {
-		isChecked = var17,
+	return reactModule.createElement(internalInputModule, withCommonPropsModule(var1, {
+		isChecked = var3,
 		isDisabled = isDisabled,
-		onActivated = var19,
+		onActivated = var4,
 		label = {
 			text = label,
-			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var15.placement],
-			hint = if flagsModule.FoundationRadioBeta then var15.hint else nil
+			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var1.placement],
+			hint = if flagsModule.FoundationRadioBeta then var1.hint else nil
 		},
-		customVariantProps = var20.input,
-		size = var15.size,
-		Selectable = var16.Selectable,
-		ref = p1
+		customVariantProps = var5.input,
+		size = var1.size,
+		Selectable = var2.Selectable,
+		ref = p2
 	}), {
-		Center = if var17 then reactModule.createElement(viewModule, {
-			tag = var20.checkmark.tag,
-			backgroundStyle = var20.checkmark.style
+		Center = if var3 then reactModule.createElement(viewModule, {
+			tag = var5.checkmark.tag,
+			backgroundStyle = var5.checkmark.style
 		}) else nil
 	})
 end))

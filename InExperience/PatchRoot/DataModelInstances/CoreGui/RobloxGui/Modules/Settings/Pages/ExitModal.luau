@@ -17,7 +17,7 @@ local getFFlagGateEducationalPopupVisibilityViaGUAC = require(sharedFlags).GetFF
 local inExperienceCapabilities = require(corePackagesService.Workspace.Packages.InExperienceCapabilities).InExperienceCapabilities
 local fFlagEnableSideSheet = require(sharedFlags).FFlagEnableSideSheet
 local fFlagSurvBloxEventTypeEnabled = require(sharedFlags).FFlagSurvBloxEventTypeEnabled
-local var8 = if fFlagEnableSideSheet then require(corePackagesService.Workspace.Packages.InExperienceSideSheet).toggleSideSheet else nil
+local var1 = if fFlagEnableSideSheet then require(corePackagesService.Workspace.Packages.InExperienceSideSheet).toggleSideSheet else nil
 local notificationTypeList = guiService:GetNotificationTypeList()
 local roactModule = require(corePackagesService.Packages.Roact)
 local linkingProtocol = require(corePackagesService.Workspace.Packages.LinkingProtocol).LinkingProtocol
@@ -32,17 +32,17 @@ local UIBlox = require(corePackagesService.Packages.InGameMenuDependencies).UIBl
 local images = UIBlox.App.ImageSet.Images
 local educationalModal = UIBlox.App.Dialog.Modal.EducationalModal
 local renderWithCoreScriptsStyleProviderModule = require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider)
-local var16 = nil
+local var2 = nil
 local constantsModule = require(robloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
 local getFIntEducationalPopupDisplayMaxCountModule = require(robloxGui.Modules.Flags.GetFIntEducationalPopupDisplayMaxCount)
-var16 = (function()
-	-- upvalues: robloxGui (ref), guiService (ref), sendAnalyticsModule (ref), runService (ref), getDefaultQualityLevel (ref), notificationTypeList (ref), linkingProtocol (ref), var16 (write), userLocalStoreModule (ref), getFIntEducationalPopupDisplayMaxCountModule (ref), localization (ref), localizationService (ref), roactModule (ref), educationalModal (ref), images (ref), coreGuiService (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), playersService (ref), messageBus (ref), constantsModule (ref), renderWithCoreScriptsStyleProviderModule (ref)
+var2 = (function()
+	-- upvalues: robloxGui (ref), guiService (ref), sendAnalyticsModule (ref), runService (ref), getDefaultQualityLevel (ref), notificationTypeList (ref), linkingProtocol (ref), var2 (write), userLocalStoreModule (ref), getFIntEducationalPopupDisplayMaxCountModule (ref), localization (ref), localizationService (ref), roactModule (ref), educationalModal (ref), images (ref), coreGuiService (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), playersService (ref), messageBus (ref), constantsModule (ref), renderWithCoreScriptsStyleProviderModule (ref)
 	local exitModalPage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
-	function exitModalPage.LeaveAppFunc(p0)
+	function exitModalPage.LeaveAppFunc(p1)
 		-- upvalues: guiService (copy), sendAnalyticsModule (copy), runService (copy), getDefaultQualityLevel (copy), notificationTypeList (copy)
 		guiService.SelectedCoreObject = nil
-		sendAnalyticsModule("educational_popup", "educational_close_app", { source = if p0 then "Native" else "Button" })
+		sendAnalyticsModule("educational_popup", "educational_close_app", { source = if p1 then "Native" else "Button" })
 		runService.RenderStepped:wait()
 		runService.RenderStepped:wait()
 		settings().Rendering.QualityLevel = getDefaultQualityLevel()
@@ -60,46 +60,46 @@ var16 = (function()
 		settings().Rendering.QualityLevel = getDefaultQualityLevel()
 	end
 	
-	function exitModalPage.LeaveGameFromHotkey(_, p2, p3)
+	function exitModalPage.LeaveGameFromHotkey(_, p1, p2)
 		-- upvalues: exitModalPage (ref)
-		if p2 == Enum.UserInputState.Begin then
-			exitModalPage.LeaveGameFunc(if p3.UserInputType ~= Enum.UserInputType.Gamepad1 then if p3.UserInputType ~= Enum.UserInputType.Gamepad2 then if p3.UserInputType ~= Enum.UserInputType.Gamepad3 then p3.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
+		if p1 == Enum.UserInputState.Begin then
+			exitModalPage.LeaveGameFunc(if p2.UserInputType ~= Enum.UserInputType.Gamepad1 then if p2.UserInputType ~= Enum.UserInputType.Gamepad2 then if p2.UserInputType ~= Enum.UserInputType.Gamepad3 then p2.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
 		end
 	end
 	
-	function exitModalPage.DontLeaveFunc(p4)
-		-- upvalues: var16 (copy), exitModalPage (ref)
-		var16.dismissedFrom = if p4 then "Gamepad" else "Button"
+	function exitModalPage.DontLeaveFunc(p1)
+		-- upvalues: var2 (copy), exitModalPage (ref)
+		var2.dismissedFrom = if p1 then "Gamepad" else "Button"
 		
 		if exitModalPage.HubRef then
-			exitModalPage.HubRef:PopMenu(p4, true)
+			exitModalPage.HubRef:PopMenu(p1, true)
 		end
 	end
 	
-	function exitModalPage.DontLeaveFromHotkey(_, p5, p6)
+	function exitModalPage.DontLeaveFromHotkey(_, p1, p2)
 		-- upvalues: exitModalPage (ref)
-		if p5 == Enum.UserInputState.Begin then
-			exitModalPage.DontLeaveFunc(if p6.UserInputType ~= Enum.UserInputType.Gamepad1 then if p6.UserInputType ~= Enum.UserInputType.Gamepad2 then if p6.UserInputType ~= Enum.UserInputType.Gamepad3 then p6.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
+		if p1 == Enum.UserInputState.Begin then
+			exitModalPage.DontLeaveFunc(if p2.UserInputType ~= Enum.UserInputType.Gamepad1 then if p2.UserInputType ~= Enum.UserInputType.Gamepad2 then if p2.UserInputType ~= Enum.UserInputType.Gamepad3 then p2.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
 		end
 	end
 	
 	function exitModalPage.DontShowAgain()
 		-- upvalues: userLocalStoreModule (copy)
-		local var25 = userLocalStoreModule.new()
-		var25:SetItem("NativeCloseLuaPromptDisplayCount", tostring(1e999))
-		var25:Flush()
+		local var3 = userLocalStoreModule.new()
+		var3:SetItem("NativeCloseLuaPromptDisplayCount", tostring(1e999))
+		var3:Flush()
 	end
 	
 	function exitModalPage.ShouldShow()
 		-- upvalues: userLocalStoreModule (copy), getFIntEducationalPopupDisplayMaxCountModule (copy)
-		local var26 = userLocalStoreModule.new()
-		local var27 = tonumber(var26:GetItem("NativeCloseLuaPromptDisplayCount"))
+		local var3 = userLocalStoreModule.new()
+		local var4 = tonumber(var3:GetItem("NativeCloseLuaPromptDisplayCount"))
 		
-		if getFIntEducationalPopupDisplayMaxCountModule() < var27 then
+		if getFIntEducationalPopupDisplayMaxCountModule() < var4 then
 			return false
 		end
-		var26:SetItem("NativeCloseLuaPromptDisplayCount", tostring(var27 + 1))
-		var26:Flush()
+		var3:SetItem("NativeCloseLuaPromptDisplayCount", tostring(var4 + 1))
+		var3:Flush()
 		
 		return true
 	end
@@ -110,19 +110,19 @@ var16 = (function()
 	exitModalPage.ShouldShowHubBar = false
 	exitModalPage.IsPageClipped = false
 	exitModalPage.Page.Size = UDim2.new(1, 0, 0, 1)
-	local var20 = localization.new(localizationService.RobloxLocaleId)
+	local var3 = localization.new(localizationService.RobloxLocaleId)
 	
 	local function ExitModal()
-		-- upvalues: var20 (ref), localizationService (copy), roactModule (copy), educationalModal (copy), images (copy), coreGuiService (copy), exitModalPage (ref), fFlagSurvBloxEventTypeEnabled (copy), surveyEventPublisherModule (copy), webViewEventTypeModule (copy), playersService (copy), messageBus (copy), constantsModule (copy), renderWithCoreScriptsStyleProviderModule (copy)
-		var20:SetLocale(localizationService.RobloxLocaleId)
+		-- upvalues: var3 (ref), localizationService (copy), roactModule (copy), educationalModal (copy), images (copy), coreGuiService (copy), exitModalPage (ref), fFlagSurvBloxEventTypeEnabled (copy), surveyEventPublisherModule (copy), webViewEventTypeModule (copy), playersService (copy), messageBus (copy), constantsModule (copy), renderWithCoreScriptsStyleProviderModule (copy)
+		var3:SetLocale(localizationService.RobloxLocaleId)
 		local t = {
-			title = var20:Format("CoreScripts.InGameMenu.ExitModal.Title"),
-			subtitle = var20:Format("CoreScripts.InGameMenu.ExitModal.Subtitle"),
-			bodyTextOpenMenu = var20:Format("CoreScripts.InGameMenu.ExitModal.BodyTextOpenMenu"),
-			bodyTextClickHome = var20:Format("CoreScripts.InGameMenu.ExitModal.BodyTextClickHome"),
-			optionDontShow = var20:Format("CoreScripts.InGameMenu.ExitModal.OptionDontShow"),
-			actionExit = var20:Format("CoreScripts.InGameMenu.ExitModal.ActionExit"),
-			actionHome = var20:Format("CoreScripts.InGameMenu.ExitModal.ActionHome")
+			title = var3:Format("CoreScripts.InGameMenu.ExitModal.Title"),
+			subtitle = var3:Format("CoreScripts.InGameMenu.ExitModal.Subtitle"),
+			bodyTextOpenMenu = var3:Format("CoreScripts.InGameMenu.ExitModal.BodyTextOpenMenu"),
+			bodyTextClickHome = var3:Format("CoreScripts.InGameMenu.ExitModal.BodyTextClickHome"),
+			optionDontShow = var3:Format("CoreScripts.InGameMenu.ExitModal.OptionDontShow"),
+			actionExit = var3:Format("CoreScripts.InGameMenu.ExitModal.ActionExit"),
+			actionHome = var3:Format("CoreScripts.InGameMenu.ExitModal.ActionHome")
 		}
 		
 		return renderWithCoreScriptsStyleProviderModule({
@@ -148,16 +148,16 @@ var16 = (function()
 					-- upvalues: exitModalPage (copy)
 					exitModalPage.DontLeaveFunc(false)
 				end,
-				onCancel = function(p7)
+				onCancel = function(p1)
 					-- upvalues: exitModalPage (copy)
-					if p7 then
+					if p1 then
 						exitModalPage.DontShowAgain()
 					end
 					exitModalPage.LeaveAppFunc(false)
 				end,
-				onConfirm = function(p8)
+				onConfirm = function(p1)
 					-- upvalues: exitModalPage (copy), fFlagSurvBloxEventTypeEnabled (copy), surveyEventPublisherModule (copy), webViewEventTypeModule (copy), playersService (copy), messageBus (copy), constantsModule (copy)
-					if p8 then
+					if p1 then
 						exitModalPage.DontShowAgain()
 					end
 					exitModalPage.LeaveGameFunc(false)
@@ -178,46 +178,46 @@ var16 = (function()
 	end
 	
 	local exitModal = roactModule.mount(ExitModal(), exitModalPage.Page, "ExitModal")
-	local var23 = false
+	local var4 = false
 	
-	local var24 = function()
-		-- upvalues: var23 (write), exitModal (write), roactModule (copy), ExitModal (ref)
-		if not var23 then
-			var23 = true
+	local var5 = function()
+		-- upvalues: var4 (write), exitModal (write), roactModule (copy), ExitModal (ref)
+		if not var4 then
+			var4 = true
 			task.delay(1, function()
-				-- upvalues: var23 (copy), exitModal (copy), roactModule (copy), ExitModal (copy)
-				var23 = false
+				-- upvalues: var4 (copy), exitModal (copy), roactModule (copy), ExitModal (copy)
+				var4 = false
 				exitModal = roactModule.update(exitModal, ExitModal())
 			end)
 		end
 	end
 	
-	localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(var24)
-	coreGuiService.RobloxGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(var24)
+	localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(var5)
+	coreGuiService.RobloxGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(var5)
 	
 	return exitModalPage
 end)()
-var16.Displayed.Event:connect(function()
-	-- upvalues: var16 (write), getFFlagGateEducationalPopupVisibilityViaGUAC (ref), inExperienceCapabilities (ref), contextActionService (ref), fFlagEnableSideSheet (ref), var8 (write)
-	if not var16.ShouldShow() or getFFlagGateEducationalPopupVisibilityViaGUAC() and not inExperienceCapabilities.canViewEducationalPopup then
-		var16.LeaveAppFunc(true)
+var2.Displayed.Event:connect(function()
+	-- upvalues: var2 (write), getFFlagGateEducationalPopupVisibilityViaGUAC (ref), inExperienceCapabilities (ref), contextActionService (ref), fFlagEnableSideSheet (ref), var1 (write)
+	if not var2.ShouldShow() or getFFlagGateEducationalPopupVisibilityViaGUAC() and not inExperienceCapabilities.canViewEducationalPopup then
+		var2.LeaveAppFunc(true)
 	end
-	var16.dismissedFrom = "Menu"
-	contextActionService:BindCoreAction("LeaveGameAction", var16.LeaveGameFromHotkey, false, Enum.KeyCode.ButtonA)
-	contextActionService:BindCoreAction("DontLeaveAction", var16.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
+	var2.dismissedFrom = "Menu"
+	contextActionService:BindCoreAction("LeaveGameAction", var2.LeaveGameFromHotkey, false, Enum.KeyCode.ButtonA)
+	contextActionService:BindCoreAction("DontLeaveAction", var2.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
 	
 	if fFlagEnableSideSheet then
-		var8(false)
+		var1(false)
 	end
 end)
-var16.Hidden.Event:connect(function()
-	-- upvalues: var16 (write), sendAnalyticsModule (ref), contextActionService (ref)
-	if var16.dismissedFrom then
-		sendAnalyticsModule("educational_popup", "educational_dismiss_prompt", { source = var16.dismissedFrom })
-		var16.dismissedFrom = nil
+var2.Hidden.Event:connect(function()
+	-- upvalues: var2 (write), sendAnalyticsModule (ref), contextActionService (ref)
+	if var2.dismissedFrom then
+		sendAnalyticsModule("educational_popup", "educational_dismiss_prompt", { source = var2.dismissedFrom })
+		var2.dismissedFrom = nil
 	end
 	contextActionService:UnbindCoreAction("LeaveGameAction")
 	contextActionService:UnbindCoreAction("DontLeaveAction")
 end)
 
-return var16
+return var2

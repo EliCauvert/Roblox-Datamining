@@ -2,25 +2,25 @@
 local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useTokens (ref), reactModule (ref)
-	p1 = p1 or useTokens().Time.Time_300
-	local var2, var3 = reactModule.useState(true)
+	p2 = p2 or useTokens().Time.Time_300
+	local var1, var2 = reactModule.useState(true)
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref)
-		local var4 = false
-		task.delay(p1, function()
-			-- upvalues: var4 (write), var3 (copy)
-			if not var4 then
-				var3(false)
+		-- upvalues: p2 (ref), var2 (ref)
+		local var3 = false
+		task.delay(p2, function()
+			-- upvalues: var3 (write), var2 (copy)
+			if not var3 then
+				var2(false)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var4 (write)
-			var4 = true
+			-- upvalues: var3 (write)
+			var3 = true
 		end
-	end, { p1 })
+	end, { p2 })
 	
-	return p0 or var2
+	return p1 or var1
 end

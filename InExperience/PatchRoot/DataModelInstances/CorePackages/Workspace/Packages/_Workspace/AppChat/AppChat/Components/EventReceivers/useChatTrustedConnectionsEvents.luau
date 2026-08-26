@@ -16,42 +16,42 @@ local conversationModerationTypeChangedModule = require(appChat.Conversations.Ac
 local cryoModule = require(parent.Cryo)
 local name = require(appChat.Logger):new(script.Name)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), useSelector (ref), useGetConversationFromIdModule (ref), useIsInExperienceModule (ref), useLocalUserId (ref), reactModule (ref), conversationChannelsModule (ref), refreshConversationUnfilteredThreadsDetailsModule (ref), cryoModule (ref), conversationModerationTypeChangedModule (ref), reloadMessagesForConversationsModule (ref), realtimeDeliveryModule (ref), trustedConnections (ref), name (ref)
-	local var11 = useDispatch()
-	local var12 = useSelector(function(p1)
-		return p1.ChatAppReducer.Conversations
+	local var1 = useDispatch()
+	local var2 = useSelector(function(p2)
+		return p2.ChatAppReducer.Conversations
 	end)
-	local var13 = useGetConversationFromIdModule(p0.activeConversationId)
-	local var14 = useIsInExperienceModule()
-	local var15 = useLocalUserId()
-	local var16 = reactModule.useCallback(function(p2)
-		-- upvalues: var13 (ref), conversationChannelsModule (copy), var11 (ref), refreshConversationUnfilteredThreadsDetailsModule (copy), var14 (ref)
-		if var13 and var13.participants and (var13.type == conversationChannelsModule.Type.OneToOne and p2) then
-			for i, v in var13.participants do
+	local var3 = useGetConversationFromIdModule(p1.activeConversationId)
+	local var4 = useIsInExperienceModule()
+	local var5 = useLocalUserId()
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), conversationChannelsModule (copy), var1 (ref), refreshConversationUnfilteredThreadsDetailsModule (copy), var4 (ref)
+		if var3 and var3.participants and (var3.type == conversationChannelsModule.Type.OneToOne and p2) then
+			for i, v in var3.participants do
 				if v == p2 then
-					var11(refreshConversationUnfilteredThreadsDetailsModule(var13.id, var14))
+					var1(refreshConversationUnfilteredThreadsDetailsModule(var3.id, var4))
 					
 					return
 				end
 			end
 		end
-	end, { var11, var13, var14 })
-	local var17 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var12 (ref), conversationChannelsModule (copy), cryoModule (copy), var11 (ref), conversationModerationTypeChangedModule (copy)
-		for i, v in var12 do
+	end, { var1, var3, var4 })
+	local var7 = reactModule.useCallback(function(p3, p4)
+		-- upvalues: var2 (ref), conversationChannelsModule (copy), cryoModule (copy), var1 (ref), conversationModerationTypeChangedModule (copy)
+		for i, v in var2 do
 			if v.type == conversationChannelsModule.Type.OneToOne and v.participants and (v.source == conversationChannelsModule.Source.Friends and cryoModule.List.find(v.participants, p3)) then
-				var11(conversationModerationTypeChangedModule(v.id, p4))
+				var1(conversationModerationTypeChangedModule(v.id, p4))
 				
 				return
 			end
 		end
-	end, { var11, var12 })
-	local var18 = reactModule.useCallback(function(p5)
-		-- upvalues: var12 (ref), cryoModule (copy), var11 (ref), reloadMessagesForConversationsModule (copy)
+	end, { var1, var2 })
+	local var8 = reactModule.useCallback(function(p5)
+		-- upvalues: var2 (ref), cryoModule (copy), var1 (ref), reloadMessagesForConversationsModule (copy)
 		local t = {}
 		
-		for i, v in var12 do
+		for i, v in var2 do
 			if v.participants and cryoModule.List.find(v.participants, p5) then
 				table.insert(t, v.id)
 			end
@@ -59,37 +59,37 @@ return function(p0)
 		if #t == 0 then
 			return
 		end
-		var11(reloadMessagesForConversationsModule(t))
-	end, { var11, var12 })
+		var1(reloadMessagesForConversationsModule(t))
+	end, { var1, var2 })
 	realtimeDeliveryModule.useRealtimeNamespace(trustedConnections.Namespace, function(p6)
-		-- upvalues: name (copy), trustedConnections (copy), var15 (ref), var16 (ref), var17 (ref), conversationChannelsModule (copy), var18 (ref)
+		-- upvalues: name (copy), trustedConnections (copy), var5 (ref), var6 (ref), var7 (ref), conversationChannelsModule (copy), var8 (ref)
 		name:debug("Received Realtime Event " .. trustedConnections.Namespace .. " -> Actor: " .. tostring(p6.Actor) .. ", Target: " .. tostring(p6.Target) .. ", EventType: " .. tostring(p6.EventType))
-		local var20 = tostring(p6.Actor)
-		local var21 = tostring(p6.Target)
+		local var9 = tostring(p6.Actor)
+		local var10 = tostring(p6.Target)
 		local eventType = p6.EventType
 		
 		if eventType == trustedConnections.EventTypes.TrustedConnectionCreated or eventType == trustedConnections.EventTypes.TrustedConnectionDeleted then
-			local var22 = if var20 == var15 then var21 else var20
+			local var11 = if var9 == var5 then var10 else var9
 			
 			if eventType == trustedConnections.EventTypes.TrustedConnectionCreated then
-				var16(var22)
-				var17(var22, conversationChannelsModule.ModerationType.TrustedComms)
+				var6(var11)
+				var7(var11, conversationChannelsModule.ModerationType.TrustedComms)
 			else
-				var17(var22, conversationChannelsModule.ModerationType.Moderated)
+				var7(var11, conversationChannelsModule.ModerationType.Moderated)
 			end
-			var18(var22)
+			var8(var11)
 			
 			return
 		elseif eventType == trustedConnections.EventTypes.TrustedConnectionRequestSent then
-			if var20 == var15 then
+			if var9 == var5 then
 				return
 			else
-				var16(var20)
+				var6(var9)
 				
 				return
 			end
 		else
 			name:debug("EventType: " .. tostring(eventType) .. " is not suppoprted.")
 		end
-	end, { var15, var16, var17, var18 })
+	end, { var5, var6, var7, var8 })
 end

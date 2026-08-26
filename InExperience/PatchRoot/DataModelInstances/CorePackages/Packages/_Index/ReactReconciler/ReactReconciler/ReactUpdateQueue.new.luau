@@ -10,22 +10,22 @@ local noLane = reactFiberLaneModule.NoLane
 local noLanes = reactFiberLaneModule.NoLanes
 local isSubsetOfLanes = reactFiberLaneModule.isSubsetOfLanes
 local mergeLanes = reactFiberLaneModule.mergeLanes
-local var2 = nil
+local var1 = nil
 
 local function _()
-	-- upvalues: var2 (write)
-	if not var2 then
-		var2 = require(script.Parent["ReactFiberNewContext.new"])
+	-- upvalues: var1 (write)
+	if not var1 then
+		var1 = require(script.Parent["ReactFiberNewContext.new"])
 	end
-	var2.enterDisallowedContextReadInDEV()
+	var1.enterDisallowedContextReadInDEV()
 end
 
 local _ = function()
-	-- upvalues: var2 (write)
-	if not var2 then
-		var2 = require(script.Parent["ReactFiberNewContext.new"])
+	-- upvalues: var1 (write)
+	if not var1 then
+		var1 = require(script.Parent["ReactFiberNewContext.new"])
 	end
-	var2.exitDisallowedContextReadInDEV()
+	var1.exitDisallowedContextReadInDEV()
 end
 
 local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
@@ -45,21 +45,21 @@ local t = {
 	ForceUpdate = 2,
 	CaptureUpdate = 3
 }
-local var5 = false
-local var6 = nil
-local var7 = nil
+local var2 = false
+local var3 = nil
+local var4 = nil
 
 if dEV then
-	var6 = false
-	var7 = nil
+	var3 = false
+	var4 = nil
 	
 	function t.resetCurrentlyProcessingQueue()
-		-- upvalues: var7 (write)
-		var7 = nil
+		-- upvalues: var4 (write)
+		var4 = nil
 	end
 end
 local list = table.create(210)
-local var9 = 210
+local var5 = 210
 
 for i = 1, 210 do
 	list[i] = {
@@ -71,12 +71,12 @@ for i = 1, 210 do
 		next = nil
 	}
 end
-function t.initializeUpdateQueue(p0)
-	p0.updateQueue = {
+function t.initializeUpdateQueue(p1)
+	p1.updateQueue = {
 		firstBaseUpdate = nil,
 		lastBaseUpdate = nil,
 		effects = nil,
-		baseState = p0.memoizedState,
+		baseState = p1.memoizedState,
 		shared = { pending = nil }
 	}
 end
@@ -89,226 +89,226 @@ function t.cloneUpdateQueue(p1, p2)
 	end
 end
 
-function t.createUpdate(p3, p4, p5, p6)
-	-- upvalues: var9 (write), list (ref)
-	if var9 > 0 then
-		local var11 = list[var9]
-		list[var9] = nil
-		var9 -= 1
-		var11.eventTime = p3
-		var11.lane = p4
-		var11.tag = 0
-		var11.payload = p5
-		var11.callback = p6
+function t.createUpdate(p1, p2, p3, p4)
+	-- upvalues: var5 (write), list (ref)
+	if var5 > 0 then
+		local var6 = list[var5]
+		list[var5] = nil
+		var5 -= 1
+		var6.eventTime = p1
+		var6.lane = p2
+		var6.tag = 0
+		var6.payload = p3
+		var6.callback = p4
 		
-		return var11
+		return var6
 	end
 	return {
 		tag = 0,
 		next = nil,
-		eventTime = p3,
-		lane = p4,
-		payload = p5,
-		callback = p6
+		eventTime = p1,
+		lane = p2,
+		payload = p3,
+		callback = p4
 	}
 end
 
-function t.enqueueUpdate(p7, p8)
-	-- upvalues: dEV (ref), var7 (write), var6 (write), console (ref)
-	local updateQueue = p7.updateQueue
+function t.enqueueUpdate(p1, p2)
+	-- upvalues: dEV (ref), var4 (write), var3 (write), console (ref)
+	local updateQueue = p1.updateQueue
 	
 	if updateQueue == nil then return end
 	local shared = updateQueue.shared
 	local pending = shared.pending
 	
 	if pending == nil then
-		p8.next = p8
+		p2.next = p2
 	else
-		p8.next = pending.next
-		pending.next = p8
+		p2.next = pending.next
+		pending.next = p2
 	end
-	shared.pending = p8
+	shared.pending = p2
 	
-	if dEV and var7 == shared and not var6 then
+	if dEV and var4 == shared and not var3 then
 		console.error("An update (setState, replaceState, or forceUpdate) was scheduled from inside an update function. Update functions should be pure, with zero side-effects. Consider using componentDidUpdate or a callback.")
-		var6 = true
+		var3 = true
 	end
 end
 
-function t.enqueueCapturedUpdate(p9, p10)
-	local updateQueue = p9.updateQueue
-	local alternate = p9.alternate
+function t.enqueueCapturedUpdate(p1, p2)
+	local updateQueue = p1.updateQueue
+	local alternate = p1.alternate
 	
 	if alternate ~= nil then
 		local updateQueue_1 = alternate.updateQueue
 		
 		if updateQueue == updateQueue_1 then
-			local var12 = nil
-			local var13 = nil
+			local var6 = nil
+			local var7 = nil
 			local firstBaseUpdate = updateQueue.firstBaseUpdate
 			
 			if firstBaseUpdate == nil then
-				var13 = p10
-				var12 = p10
+				var7 = p2
+				var6 = p2
 			else
-				local var14 = firstBaseUpdate
+				local var8 = firstBaseUpdate
 				repeat
 					local t = {
 						next = nil,
-						eventTime = var14.eventTime,
-						lane = var14.lane,
-						tag = var14.tag,
-						payload = var14.payload,
-						callback = var14.callback
+						eventTime = var8.eventTime,
+						lane = var8.lane,
+						tag = var8.tag,
+						payload = var8.payload,
+						callback = var8.callback
 					}
-					if var13 == nil then
-						var13 = t
-						var12 = t
+					if var7 == nil then
+						var7 = t
+						var6 = t
 					else
-						var13.next = t
-						var13 = t
+						var7.next = t
+						var7 = t
 					end
-					var14 = var14.next
-				until var14 == nil
-				if var13 == nil then
-					var13 = p10
-					var12 = p10
+					var8 = var8.next
+				until var8 == nil
+				if var7 == nil then
+					var7 = p2
+					var6 = p2
 				else
-					var13.next = p10
-					var13 = p10
+					var7.next = p2
+					var7 = p2
 				end
 			end
 			updateQueue = {
 				baseState = updateQueue_1.baseState,
-				firstBaseUpdate = var12,
-				lastBaseUpdate = var13,
+				firstBaseUpdate = var6,
+				lastBaseUpdate = var7,
 				shared = updateQueue_1.shared,
 				effects = updateQueue_1.effects
 			}
-			p9.updateQueue = updateQueue
+			p1.updateQueue = updateQueue
 			
 			return
 		else
 			local lastBaseUpdate = updateQueue.lastBaseUpdate
 			
 			if lastBaseUpdate == nil then
-				updateQueue.firstBaseUpdate = p10
+				updateQueue.firstBaseUpdate = p2
 			else
-				lastBaseUpdate.next = p10
+				lastBaseUpdate.next = p2
 			end
-			updateQueue.lastBaseUpdate = p10
+			updateQueue.lastBaseUpdate = p2
 		end
 	end
 end
 
-local function getStateFromUpdate(p11, _, p12, p13, p14, _)
-	-- upvalues: dEV (ref), var2 (write), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), yOLO (ref), describeError (ref), reenableLogs (ref), shouldCapture (ref), didCapture (ref), object (ref), var5 (write)
-	local tag = p12.tag
+local function getStateFromUpdate(p1, _, p2, p3, p4, _)
+	-- upvalues: dEV (ref), var1 (write), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), yOLO (ref), describeError (ref), reenableLogs (ref), shouldCapture (ref), didCapture (ref), object (ref), var2 (write)
+	local tag = p2.tag
 	
 	if tag == 1 then
-		local payload = p12.payload
+		local payload = p2.payload
 		
 		if type(payload) == "function" then
 			if dEV then
-				if not var2 then
-					var2 = require(script.Parent["ReactFiberNewContext.new"])
+				if not var1 then
+					var1 = require(script.Parent["ReactFiberNewContext.new"])
 				end
-				var2.enterDisallowedContextReadInDEV()
+				var1.enterDisallowedContextReadInDEV()
 			end
-			local var16 = payload(p13, p14)
+			local var6 = payload(p3, p4)
 			
 			if dEV then
-				if debugRenderPhaseSideEffectsForStrictMode and bit32.band(p11.mode, strictMode) ~= 0 then
-					local var18
+				if debugRenderPhaseSideEffectsForStrictMode and bit32.band(p1.mode, strictMode) ~= 0 then
+					local var7
 					disableLogs()
 					local _ = nil
-					local var17 = nil
+					local var8 = nil
 					
 					if yOLO then
-						var18 = true
-						payload(p13, p14)
+						var7 = true
+						payload(p3, p4)
 					else
-						local ok, status = xpcall(payload, describeError, p13, p14)
-						var18 = ok
-						var17 = status
+						local ok, status = xpcall(payload, describeError, p3, p4)
+						var7 = ok
+						var8 = status
 					end
 					reenableLogs()
 					
-					if not var18 then
-						error(var17)
+					if not var7 then
+						error(var8)
 					end
 				end
-				if not var2 then
-					var2 = require(script.Parent["ReactFiberNewContext.new"])
+				if not var1 then
+					var1 = require(script.Parent["ReactFiberNewContext.new"])
 				end
-				var2.exitDisallowedContextReadInDEV()
+				var1.exitDisallowedContextReadInDEV()
 			end
-			return var16
+			return var6
 		else
 			return payload
 		end
 	elseif tag == 3 or tag == 0 then
 		if tag == 3 then
-			p11.flags = bit32.bor(bit32.band(p11.flags, bit32.bnot(shouldCapture)), didCapture)
+			p1.flags = bit32.bor(bit32.band(p1.flags, bit32.bnot(shouldCapture)), didCapture)
 		end
-		local var19
-		local payload = p12.payload
+		local var9
+		local payload = p2.payload
 		local _ = nil
 		
 		if type(payload) == "function" then
 			if dEV then
-				if not var2 then
-					var2 = require(script.Parent["ReactFiberNewContext.new"])
+				if not var1 then
+					var1 = require(script.Parent["ReactFiberNewContext.new"])
 				end
-				var2.enterDisallowedContextReadInDEV()
+				var1.enterDisallowedContextReadInDEV()
 			end
-			var19 = payload(p13, p14)
+			var9 = payload(p3, p4)
 			
 			if dEV then
-				if debugRenderPhaseSideEffectsForStrictMode and bit32.band(p11.mode, strictMode) ~= 0 then
-					local var21
+				if debugRenderPhaseSideEffectsForStrictMode and bit32.band(p1.mode, strictMode) ~= 0 then
+					local var10
 					disableLogs()
 					local _ = nil
-					local var20 = nil
+					local var11 = nil
 					
 					if yOLO then
-						var21 = true
-						payload(p13, p14)
+						var10 = true
+						payload(p3, p4)
 					else
-						local ok, status = xpcall(payload, describeError, p13, p14)
-						var21 = ok
-						var20 = status
+						local ok, status = xpcall(payload, describeError, p3, p4)
+						var10 = ok
+						var11 = status
 					end
 					reenableLogs()
 					
-					if not var21 then
-						error(var20)
+					if not var10 then
+						error(var11)
 					end
 				end
-				var2 = var2 or require(script.Parent["ReactFiberNewContext.new"])
-				var2.exitDisallowedContextReadInDEV()
+				var1 = var1 or require(script.Parent["ReactFiberNewContext.new"])
+				var1.exitDisallowedContextReadInDEV()
 			end
 		else
-			var19 = payload
+			var9 = payload
 		end
-		return if var19 == nil then p13 else object.assign({}, p13, var19)
+		return if var9 == nil then p3 else object.assign({}, p3, var9)
 	elseif tag == 2 then
-		var5 = true
+		var2 = true
 		
-		return p13
+		return p3
 	end
-	return p13
+	return p3
 end
 
 t.getStateFromUpdate = getStateFromUpdate
 
-function t.processUpdateQueue(p15, p16, p17, p18)
-	-- upvalues: var5 (write), dEV (ref), var7 (write), noLanes (ref), isSubsetOfLanes (ref), mergeLanes (ref), noLane (ref), getStateFromUpdate (ref), callback (ref), markSkippedUpdateLanes (ref)
-	local updateQueue = p15.updateQueue
-	var5 = false
+function t.processUpdateQueue(p1, p2, p3, p4)
+	-- upvalues: var2 (write), dEV (ref), var4 (write), noLanes (ref), isSubsetOfLanes (ref), mergeLanes (ref), noLane (ref), getStateFromUpdate (ref), callback (ref), markSkippedUpdateLanes (ref)
+	local updateQueue = p1.updateQueue
+	var2 = false
 	
 	if dEV then
-		var7 = updateQueue.shared
+		var4 = updateQueue.shared
 	end
 	local firstBaseUpdate = updateQueue.firstBaseUpdate
 	local lastBaseUpdate = updateQueue.lastBaseUpdate
@@ -316,135 +316,135 @@ function t.processUpdateQueue(p15, p16, p17, p18)
 	
 	if pending ~= nil then
 		updateQueue.shared.pending = nil
-		local var22 = pending
-		local next = var22.next
-		var22.next = nil
+		local var6 = pending
+		local next = var6.next
+		var6.next = nil
 		
 		if lastBaseUpdate == nil then
 			firstBaseUpdate = next
 		else
 			lastBaseUpdate.next = next
 		end
-		local var23 = var22
-		local alternate = p15.alternate
+		local var7 = var6
+		local alternate = p1.alternate
 		
 		if alternate ~= nil then
 			local updateQueue_1 = alternate.updateQueue
 			local lastBaseUpdate_1 = updateQueue_1.lastBaseUpdate
 			
-			if lastBaseUpdate_1 ~= var23 then
+			if lastBaseUpdate_1 ~= var7 then
 				if lastBaseUpdate_1 == nil then
 					updateQueue_1.firstBaseUpdate = next
 				else
 					lastBaseUpdate_1.next = next
 				end
-				updateQueue_1.lastBaseUpdate = var22
+				updateQueue_1.lastBaseUpdate = var6
 			end
 		end
 	end
 	if firstBaseUpdate ~= nil then
 		local baseState = updateQueue.baseState
-		local var24 = noLanes
-		local var25 = nil
-		local var26 = nil
-		local var27 = nil
-		local var28 = firstBaseUpdate
+		local var8 = noLanes
+		local var9 = nil
+		local var10 = nil
+		local var11 = nil
+		local var12 = firstBaseUpdate
 		while true do
-			local lane = var28.lane
-			local eventTime = var28.eventTime
-			if isSubsetOfLanes(p18, lane) then
-				if var27 ~= nil then
+			local lane = var12.lane
+			local eventTime = var12.eventTime
+			if isSubsetOfLanes(p4, lane) then
+				if var11 ~= nil then
 					local t = {
 						next = nil,
 						eventTime = eventTime,
 						lane = noLane,
-						tag = var28.tag,
-						payload = var28.payload,
-						callback = var28.callback
+						tag = var12.tag,
+						payload = var12.payload,
+						callback = var12.callback
 					}
-					var27.next = t
-					var27 = t
+					var11.next = t
+					var11 = t
 				end
-				baseState = getStateFromUpdate(p15, updateQueue, var28, baseState, p16, p17)
+				baseState = getStateFromUpdate(p1, updateQueue, var12, baseState, p2, p3)
 				
-				if var28.callback ~= nil and var28.lane ~= noLane then
-					p15.flags = bit32.bor(p15.flags, callback)
+				if var12.callback ~= nil and var12.lane ~= noLane then
+					p1.flags = bit32.bor(p1.flags, callback)
 					local effects = updateQueue.effects
 					
 					if effects == nil then
-						updateQueue.effects = { var28 }
+						updateQueue.effects = { var12 }
 					else
-						table.insert(effects, var28)
+						table.insert(effects, var12)
 					end
 				end
-				var28 = var28.next
+				var12 = var12.next
 				
-				if var28 ~= nil then continue end
+				if var12 ~= nil then continue end
 				local pending_1 = updateQueue.shared.pending
 				
 				if pending_1 == nil then break end
-				local var31 = pending_1
-				local next = var31.next
-				var31.next = nil
-				var28 = next
-				updateQueue.lastBaseUpdate = var31
+				local var13 = pending_1
+				local next = var13.next
+				var13.next = nil
+				var12 = next
+				updateQueue.lastBaseUpdate = var13
 				updateQueue.shared.pending = nil
 			end
 			local t = {
 				next = nil,
 				eventTime = eventTime,
 				lane = lane,
-				tag = var28.tag,
-				payload = var28.payload,
-				callback = var28.callback
+				tag = var12.tag,
+				payload = var12.payload,
+				callback = var12.callback
 			}
 			
-			if var27 == nil then
-				var26 = t
-				var27 = t
-				var25 = baseState
+			if var11 == nil then
+				var10 = t
+				var11 = t
+				var9 = baseState
 			else
-				var27.next = t
-				var27 = t
+				var11.next = t
+				var11 = t
 			end
-			var24 = mergeLanes(var24, lane)
+			var8 = mergeLanes(var8, lane)
 		end
-		if var27 == nil then
-			var25 = baseState
+		if var11 == nil then
+			var9 = baseState
 		end
-		updateQueue.baseState = var25
-		updateQueue.firstBaseUpdate = var26
-		updateQueue.lastBaseUpdate = var27
-		markSkippedUpdateLanes(var24)
-		p15.lanes = var24
-		p15.memoizedState = baseState
+		updateQueue.baseState = var9
+		updateQueue.firstBaseUpdate = var10
+		updateQueue.lastBaseUpdate = var11
+		markSkippedUpdateLanes(var8)
+		p1.lanes = var8
+		p1.memoizedState = baseState
 	end
 	if dEV then
-		var7 = nil
+		var4 = nil
 	end
 end
 
-local _ = function(p19, p20)
-	if type(p19) ~= "function" then
-		error(string.format("Invalid argument passed as callback. Expected a function. Instead received: %s", tostring(p19)))
+local _ = function(p5, p6)
+	if type(p5) ~= "function" then
+		error(string.format("Invalid argument passed as callback. Expected a function. Instead received: %s", tostring(p5)))
 	end
-	p19(p20)
+	p5(p6)
 end
 
 function t.resetHasForceUpdateBeforeProcessing()
-	-- upvalues: var5 (write)
-	var5 = false
+	-- upvalues: var2 (write)
+	var2 = false
 end
 
 function t.checkHasForceUpdateAfterProcessing()
-	-- upvalues: var5 (write)
-	return var5
+	-- upvalues: var2 (write)
+	return var2
 end
 
-function t.commitUpdateQueue(_, p21, p22)
-	-- upvalues: list (ref), var9 (write)
-	local effects = p21.effects
-	p21.effects = nil
+function t.commitUpdateQueue(_, p5, p6)
+	-- upvalues: list (ref), var5 (write)
+	local effects = p5.effects
+	p5.effects = nil
 	
 	if effects ~= nil then
 		for i, v in effects do
@@ -454,11 +454,11 @@ function t.commitUpdateQueue(_, p21, p22)
 				if type(callback) ~= "function" then
 					error(string.format("Invalid argument passed as callback. Expected a function. Instead received: %s", tostring(callback)))
 				end
-				callback(p22)
+				callback(p6)
 			end
 			table.clear(v)
 			table.insert(list, v)
-			var9 += 1
+			var5 += 1
 		end
 	end
 end

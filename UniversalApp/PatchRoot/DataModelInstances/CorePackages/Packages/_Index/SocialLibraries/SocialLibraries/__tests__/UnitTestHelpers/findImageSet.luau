@@ -1,12 +1,12 @@
 ﻿local UIBlox = require(script:FindFirstAncestor("SocialLibraries").dependencies).UIBlox
 
-return function(p0)
+return function(p1)
 	-- upvalues: UIBlox (ref)
-	local var0 = UIBlox.App.ImageSet.Images[p0]
+	local var1 = UIBlox.App.ImageSet.Images[p1]
 	
 	return {
-		Image = var0.Image,
-		ImageRectSize = var0.ImageRectSize,
-		ImageRectOffset = var0.ImageRectOffset
+		Image = var1.Image,
+		ImageRectSize = var1.ImageRectSize,
+		ImageRectOffset = var1.ImageRectOffset
 	}
 end

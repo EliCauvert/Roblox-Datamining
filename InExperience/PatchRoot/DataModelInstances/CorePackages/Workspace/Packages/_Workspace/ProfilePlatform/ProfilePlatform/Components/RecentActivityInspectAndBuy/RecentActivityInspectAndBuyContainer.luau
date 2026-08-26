@@ -7,13 +7,13 @@ local t = {}
 
 return function()
 	-- upvalues: useNavigation (ref), reactModule (ref), t (ref), useRecentActivityInspectAndBuyViewModelModule (ref), recentActivityInspectAndBuyViewModule (ref)
-	local var4 = useNavigation()
+	local var1 = useNavigation()
 	
 	return reactModule.createElement(recentActivityInspectAndBuyViewModule, useRecentActivityInspectAndBuyViewModelModule({
-		assetIds = var4.getParam("assetIds") or t,
+		assetIds = var1.getParam("assetIds") or t,
 		onClose = reactModule.useCallback(function()
-			-- upvalues: var4 (ref)
-			var4.goBack()
-		end, { var4 })
+			-- upvalues: var1 (ref)
+			var1.goBack()
+		end, { var1 })
 	}))
 end

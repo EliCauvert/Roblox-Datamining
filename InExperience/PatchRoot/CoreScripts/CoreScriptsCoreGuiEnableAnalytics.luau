@@ -11,22 +11,22 @@ function t.new()
 		playSessionStart = os.clock()
 	}
 	
-	function t_1.sendCoreGuiAnalytic(p0, p1)
+	function t_1.sendCoreGuiAnalytic(p1, p2)
 		-- upvalues: t_1 (ref), rbxAnalyticsService (copy)
 		local _ = nil
 		t_1.evenStream:sendEventDeferred("core_gui_type", "core_gui_type", {
 			placeid = tostring(game.PlaceId),
 			universeid = tostring(game.GameId),
-			type = tostring(p0.Name),
-			enabled = tostring(p1),
+			type = tostring(p1.Name),
+			enabled = tostring(p2),
 			sessionid = rbxAnalyticsService:GetSessionId(),
 			playSessionDurationMs = tostring(math.round((os.clock() - t_1.playSessionStart) * 1000))
 		})
 	end
 	
-	t_1.signalConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p2, p3)
+	t_1.signalConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p1, p2)
 		-- upvalues: t_1 (ref)
-		t_1.sendCoreGuiAnalytic(p2, p3)
+		t_1.sendCoreGuiAnalytic(p1, p2)
 	end)
 	setmetatable(t_1, t)
 	

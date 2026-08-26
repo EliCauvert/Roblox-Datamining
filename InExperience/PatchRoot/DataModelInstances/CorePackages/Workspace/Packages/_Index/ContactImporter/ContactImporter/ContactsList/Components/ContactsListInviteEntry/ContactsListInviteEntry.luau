@@ -16,22 +16,22 @@ local getFFlagContactsListEntryUpdatedTruncationFixModule = require(contactImpor
 local sendInviteLinkModule = require(script.Parent.sendInviteLink)
 local t = { smsProtocol = SMSProtocol.default }
 
-function ContactsListInviteEntry(p0)
+function ContactsListInviteEntry(p1)
 	-- upvalues: dash (ref), t (ref), useLocalization (ref), textKeysModule (ref), useStyle (ref), sendInviteLinkModule (ref), SMSProtocol (ref), react (ref), roact (ref), getFFlagContactsListEntryUpdatedTruncationFixModule (ref), styledTextLabel (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var6 = dash.join(t, p0)
-	local var7 = useLocalization({ invite = textKeysModule.INVITE_BUTTON_TEXT })
-	local var8 = useStyle()
-	local var9 = sendInviteLinkModule({
-		address = var6.phoneNumber,
-		deviceContactId = var6.deviceContactId,
+	local var1 = dash.join(t, p1)
+	local var2 = useLocalization({ invite = textKeysModule.INVITE_BUTTON_TEXT })
+	local var3 = useStyle()
+	local var4 = sendInviteLinkModule({
+		address = var1.phoneNumber,
+		deviceContactId = var1.deviceContactId,
 		smsProtocol = SMSProtocol.default
 	})
-	local var10, var11 = react.useState(0)
+	local var5, var6 = react.useState(0)
 	
 	return roact.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Name = var6.deviceContactId,
+		Name = var1.deviceContactId,
 		Size = UDim2.new(1, 0, 0, 72)
 	}, {
 		entryContent = roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
@@ -44,35 +44,35 @@ function ContactsListInviteEntry(p0)
 				fluidSizing = false,
 				richText = false,
 				textWrapped = false,
-				size = UDim2.new(1, var10, 0, 20),
-				colorStyle = var8.Theme.TextEmphasis,
-				fontStyle = var8.Font.Header2,
-				text = var6.contactName,
+				size = UDim2.new(1, var5, 0, 20),
+				colorStyle = var3.Theme.TextEmphasis,
+				fontStyle = var3.Font.Header2,
+				text = var1.contactName,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Bottom,
 				textTruncate = Enum.TextTruncate.AtEnd
 			}) else roact.createElement(styledTextLabel, {
 				lineHeight = 1,
 				automaticSize = Enum.AutomaticSize.Y,
-				colorStyle = var8.Theme.TextEmphasis,
-				fontStyle = var8.Font.Header2,
-				text = var6.contactName,
+				colorStyle = var3.Theme.TextEmphasis,
+				fontStyle = var3.Font.Header2,
+				text = var1.contactName,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Bottom
 			}),
-			sendInviteButton = if not var6.hasSentRequest then roact.createElement(button, {
+			sendInviteButton = if not var1.hasSentRequest then roact.createElement(button, {
 				buttonType = buttonType.PrimarySystem,
 				position = UDim2.new(1, -1, 0.5, 0),
 				anchorPoint = Vector2.new(1, 0.5),
 				standardSize = standardButtonSize.XSmall,
 				fitContent = true,
-				text = var7.invite,
-				isDisabled = var9.isLoading,
-				onActivated = var9.sendInvite,
+				text = var2.invite,
+				isDisabled = var4.isLoading,
+				onActivated = var4.sendInvite,
 				[react.Change.AbsoluteSize] = function(p2)
-					-- upvalues: getFFlagContactsListEntryUpdatedTruncationFixModule (copy), var11 (ref)
+					-- upvalues: getFFlagContactsListEntryUpdatedTruncationFixModule (copy), var6 (ref)
 					if getFFlagContactsListEntryUpdatedTruncationFixModule() then
-						var11(0 - (p2.AbsoluteSize.X + 10))
+						var6(0 - (p2.AbsoluteSize.X + 10))
 					end
 				end
 			}) else roact.createElement(button, {
@@ -81,22 +81,22 @@ function ContactsListInviteEntry(p0)
 				anchorPoint = Vector2.new(1, 0.5),
 				standardSize = standardButtonSize.XSmall,
 				isDisabled = true,
-				text = var7.invite,
+				text = var2.invite,
 				onActivated = dash.noop,
-				[react.Change.AbsoluteSize] = function(p1)
-					-- upvalues: getFFlagContactsListEntryUpdatedTruncationFixModule (copy), var11 (ref)
+				[react.Change.AbsoluteSize] = function(p2)
+					-- upvalues: getFFlagContactsListEntryUpdatedTruncationFixModule (copy), var6 (ref)
 					if getFFlagContactsListEntryUpdatedTruncationFixModule() then
-						var11(0 - (p1.AbsoluteSize.X + 10))
+						var6(0 - (p2.AbsoluteSize.X + 10))
 					end
 				end
 			})
 		}),
-		divider = if var6.hasDivider then roact.createElement("Frame", {
+		divider = if var1.hasDivider then roact.createElement("Frame", {
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
-			BackgroundColor3 = var8.Theme.Divider.Color,
-			BackgroundTransparency = var8.Theme.Divider.Transparency
+			BackgroundColor3 = var3.Theme.Divider.Color,
+			BackgroundTransparency = var3.Theme.Divider.Transparency
 		}) else nil
 	})
 end

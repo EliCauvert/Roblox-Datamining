@@ -5,24 +5,24 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local navigateDown = navigationRoduxModule.Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var2 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
 return function()
-	-- upvalues: useDispatch (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var2 (ref), navigateDown (ref)
-	local var3 = useDispatch()
+	-- upvalues: useDispatch (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	local var2 = useDispatch()
 	
-	return reactModule.useCallback(function(p0)
-		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var2 (copy), var3 (ref), navigateDown (copy)
+	return reactModule.useCallback(function(p1)
+		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.SocialToast,
-			extraProps = { toastContent = p0 }
+			extraProps = { toastContent = p1 }
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var2.down(var2.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		var3(navigateDown(t, nil))
+		var2(navigateDown(t, nil))
 	end, {})
 end

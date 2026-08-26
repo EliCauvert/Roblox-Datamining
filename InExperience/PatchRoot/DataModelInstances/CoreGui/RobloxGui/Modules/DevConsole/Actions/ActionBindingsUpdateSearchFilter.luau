@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)("ActionBindingsUpdateSearchFilter", function(p0)
-	return { searchTerm = p0 }
+﻿return require(script.Parent.Parent.Action)("ActionBindingsUpdateSearchFilter", function(p1)
+	return { searchTerm = p1 }
 end)

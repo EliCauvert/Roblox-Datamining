@@ -10,27 +10,27 @@ local constantsModule = require(parent.Constants)
 local eventNamesModule = require(parent.Analytics.EventNames)
 local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useAnalyticsModule (ref), useSelector (ref), constantsModule (ref), useEffectOnce (ref), eventNamesModule (ref), captureConfigCTAsModule (ref), capturesGalleryModule (ref)
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.closeSettingsMenu()
+	local var1 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		p1.closeSettingsMenu()
 	end, {})
-	local var8 = useAnalyticsModule()
-	local var9, var10 = reactModule.useState(0)
-	local var11 = useSelector(function(p1)
+	local var2 = useAnalyticsModule()
+	local var3, var4 = reactModule.useState(0)
+	local var5 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].IsMenuOpen
+		return p2[constantsModule.RoduxKey].IsMenuOpen
 	end)
 	useEffectOnce(function()
-		-- upvalues: var8 (ref), eventNamesModule (copy)
-		var8.fireEvent(eventNamesModule.CapturesPageOpenedInGameMenu)
-	end, var11)
+		-- upvalues: var2 (ref), eventNamesModule (copy)
+		var2.fireEvent(eventNamesModule.CapturesPageOpenedInGameMenu)
+	end, var5)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		Visible = var11
+		Visible = var5
 	}, {
 		Layout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -41,12 +41,12 @@ return function(p0)
 		}),
 		CaptureConfigCTAs = reactModule.createElement(captureConfigCTAsModule, {
 			LayoutOrder = 1,
-			closeSettingsMenu = var7,
+			closeSettingsMenu = var1,
 			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-				-- upvalues: var10 (ref)
-				var10(p2.Y)
+				-- upvalues: var4 (ref)
+				var4(p2.Y)
 			end, {})
 		}),
-		CapturesGallery = reactModule.createElement(capturesGalleryModule, { LayoutOrder = 2, Size = UDim2.new(1, 0, 1, (-var9) - 12) })
+		CapturesGallery = reactModule.createElement(capturesGalleryModule, { LayoutOrder = 2, Size = UDim2.new(1, 0, 1, (-var3) - 12) })
 	})
 end

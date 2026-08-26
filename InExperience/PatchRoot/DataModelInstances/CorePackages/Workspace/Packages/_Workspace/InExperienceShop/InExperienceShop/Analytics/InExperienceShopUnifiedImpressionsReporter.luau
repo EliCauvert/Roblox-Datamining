@@ -7,13 +7,13 @@ local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.U
 local constantsModule = require(script.Parent.Constants)
 local inExperienceShopUnifiedEventFilterModule = require(script.Parent.InExperienceShopUnifiedEventFilter)
 
-return function(p0)
+return function(p1)
 	-- upvalues: constantsModule (ref), unifiedLoggingSurface (ref), fFlagAllowCustomUnifiedEventFilter (ref), inExperienceShopUnifiedEventFilterModule (ref), sendUnifiedEventLogForInstance (ref), unifiedEventLogEnums (ref)
-	return function(p1)
-		-- upvalues: p0 (ref), constantsModule (copy), unifiedLoggingSurface (copy), fFlagAllowCustomUnifiedEventFilter (copy), inExperienceShopUnifiedEventFilterModule (copy), sendUnifiedEventLogForInstance (copy), unifiedEventLogEnums (copy)
-		sendUnifiedEventLogForInstance(p1.visibleInstance, {
+	return function(p2)
+		-- upvalues: p1 (ref), constantsModule (copy), unifiedLoggingSurface (copy), fFlagAllowCustomUnifiedEventFilter (copy), inExperienceShopUnifiedEventFilterModule (copy), sendUnifiedEventLogForInstance (copy), unifiedEventLogEnums (copy)
+		sendUnifiedEventLogForInstance(p2.visibleInstance, {
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.ITEM_IMPRESSION,
-			surface = if p0 == constantsModule.ShopPageType.Home then unifiedLoggingSurface.IN_EXPERIENCE_SHOP_HOME elseif p0 == constantsModule.ShopPageType.Search then unifiedLoggingSurface.IN_EXPERIENCE_SHOP_SEARCH else unifiedLoggingSurface.IN_EXPERIENCE_SHOP_DETAILS
+			surface = if p1 == constantsModule.ShopPageType.Home then unifiedLoggingSurface.IN_EXPERIENCE_SHOP_HOME elseif p1 == constantsModule.ShopPageType.Search then unifiedLoggingSurface.IN_EXPERIENCE_SHOP_SEARCH else unifiedLoggingSurface.IN_EXPERIENCE_SHOP_DETAILS
 		}, {
 			includeScreenSize = true,
 			includeElementSizeAndPosition = true,

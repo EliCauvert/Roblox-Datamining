@@ -9,26 +9,26 @@ local buildSlotsModule = require(avatarExperienceSlotBasedEditor.Utils.buildSlot
 local _ = require(avatarExperienceSlotBasedEditor.Types)
 local fFlagAXSlotsDesktopRedesign = require(parent.AvatarExperienceFlags).FFlagAXSlotsDesktopRedesign
 
-return function(p0)
+return function(p1)
 	-- upvalues: createSelectorSignal (ref), deviceOrientationMode (ref), fFlagAXSlotsDesktopRedesign (ref), categoriesModule (ref), signalsModule (ref), buildSlotsModule (ref), constantsModule (ref)
-	local var5 = createSelectorSignal(p0, function(p1)
+	local var1 = createSelectorSignal(p1, function(p2)
 		-- upvalues: deviceOrientationMode (copy)
-		return p1.DeviceOrientation == deviceOrientationMode.Portrait
+		return p2.DeviceOrientation == deviceOrientationMode.Portrait
 	end)
-	local var6, var7 = signalsModule.createSignal(if fFlagAXSlotsDesktopRedesign then if var5(false) then categoriesModule.Avatars else categoriesModule.All elseif var5(false) then categoriesModule.Avatars else categoriesModule.Body)
-	local var8, var9 = signalsModule.createSignal(1)
-	local var10 = createSelectorSignal(p0, function(p2)
+	local var2, var3 = signalsModule.createSignal(if fFlagAXSlotsDesktopRedesign then if var1(false) then categoriesModule.Avatars else categoriesModule.All elseif var1(false) then categoriesModule.Avatars else categoriesModule.Body)
+	local var4, var5 = signalsModule.createSignal(1)
+	local var6 = createSelectorSignal(p1, function(p2)
 		return p2.AvatarExperience.AvatarEditor.Character.EquippedAssets or {}
 	end)
 	
 	return {
-		getSlotCategory = var6,
-		setSlotCategory = var7,
-		getSlotIndex = var8,
-		setSlotIndex = var9,
-		getSlots = signalsModule.createComputed(function(p3)
-			-- upvalues: buildSlotsModule (copy), constantsModule (copy), var6 (ref), var10 (ref)
-			return buildSlotsModule(constantsModule.SlotEditorCategories[var6(p3)].slots, var10(p3))
+		getSlotCategory = var2,
+		setSlotCategory = var3,
+		getSlotIndex = var4,
+		setSlotIndex = var5,
+		getSlots = signalsModule.createComputed(function(p2)
+			-- upvalues: buildSlotsModule (copy), constantsModule (copy), var2 (ref), var6 (ref)
+			return buildSlotsModule(constantsModule.SlotEditorCategories[var2(p2)].slots, var6(p2))
 		end)
 	}
 end

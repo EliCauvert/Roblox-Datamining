@@ -4,100 +4,100 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
-		user_vote = if p0 == nil or p0.user_vote == nil then nil else p0.user_vote,
-		can_vote = if p0 == nil or p0.can_vote == nil then false else p0.can_vote,
-		reason_for_not_voteable = if p0 == nil or p0.reason_for_not_voteable == nil then "" else p0.reason_for_not_voteable
+		user_vote = if p1 == nil or p1.user_vote == nil then nil else p1.user_vote,
+		can_vote = if p1 == nil or p1.can_vote == nil then false else p1.can_vote,
+		reason_for_not_voteable = if p1 == nil or p1.reason_for_not_voteable == nil then "" else p1.reason_for_not_voteable
 	}, t_1)
 end
 
 function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var5 = 0
+	local var1 = 0
 	
 	if self.user_vote ~= nil then
-		local var6, var7 = protoModule.writeTag(buff, var5, 1, protoModule.wireTypes.varint)
-		var6, var7 = protoModule.writeVarInt(var6, var7, if self.user_vote then 1 else 0)
-		buff = var6
-		var5 = var7
+		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.varint)
+		var2, var7 = protoModule.writeVarInt(var2, var3, if self.user_vote then 1 else 0)
+		buff = var2
+		var1 = var3
 	end
 	if self.can_vote then
-		local var8, var9 = protoModule.writeTag(buff, var5, 2, protoModule.wireTypes.varint)
-		var8, var9 = protoModule.writeVarInt(var8, var9, if self.can_vote then 1 else 0)
-		buff = var8
-		var5 = var9
+		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.varint)
+		var4, var9 = protoModule.writeVarInt(var4, var5, if self.can_vote then 1 else 0)
+		buff = var4
+		var1 = var5
 	end
 	if self.reason_for_not_voteable ~= nil and self.reason_for_not_voteable ~= "" then
-		local var10, var11 = protoModule.writeTag(buff, var5, 3, protoModule.wireTypes.lengthDelimited)
-		var10, var11 = protoModule.writeString(var10, var11, self.reason_for_not_voteable)
-		buff = var10
-		var5 = var11
+		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
+		var6, var11 = protoModule.writeString(var6, var7, self.reason_for_not_voteable)
+		buff = var6
+		var1 = var7
 	end
-	local buff_1 = buffer.create(var5)
-	buffer.copy(buff_1, 0, buff, 0, var5)
+	local buff_1 = buffer.create(var1)
+	buffer.copy(buff_1, 0, buff, 0, var1)
 	
 	return buff_1
 end
 
 function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
-	local var13 = t_1.new()
-	local var14 = 0
-	while var14 < buffer.len(p1) do
+	local var1 = t_1.new()
+	local var2 = 0
+	while var2 < buffer.len(p1) do
 		local _ = nil
-		local var15 = nil
-		local var16, var17, var18 = protoModule.readTag(p1, var14)
-		local var19 = var16
-		var15 = var17
-		var14 = var18
+		local var3 = nil
+		local var4, var5, var6 = protoModule.readTag(p1, var2)
+		local var7 = var4
+		var3 = var5
+		var2 = var6
 		
-		if var15 == protoModule.wireTypes.varint then
-			if var19 == 1 then
+		if var3 == protoModule.wireTypes.varint then
+			if var7 == 1 then
 				local _ = nil
-				local var20, var21 = protoModule.readVarInt(p1, var14)
-				var14 = var21
-				var13.user_vote = var20 ~= 0
-			elseif var19 == 2 then
+				local var8, var9 = protoModule.readVarInt(p1, var2)
+				var2 = var9
+				var1.user_vote = var8 ~= 0
+			elseif var7 == 2 then
 				local _ = nil
-				local var22, var23 = protoModule.readVarInt(p1, var14)
-				var14 = var23
-				var13.can_vote = var22 ~= 0
+				local var10, var11 = protoModule.readVarInt(p1, var2)
+				var2 = var11
+				var1.can_vote = var10 ~= 0
 			else
 				local _ = nil
-				local var24, var25 = protoModule.readVarInt(p1, var14)
-				local _ = var24
-				var14 = var25
+				local var12, var13 = protoModule.readVarInt(p1, var2)
+				local _ = var12
+				var2 = var13
 			end
 		end
-		if var15 == protoModule.wireTypes.lengthDelimited then
-			if var19 == 3 then
+		if var3 == protoModule.wireTypes.lengthDelimited then
+			if var7 == 3 then
 				local _ = nil
-				local var26, var27 = protoModule.readBuffer(p1, var14)
-				var14 = var27
-				var13.reason_for_not_voteable = buffer.tostring(var26)
+				local var14, var15 = protoModule.readBuffer(p1, var2)
+				var2 = var15
+				var1.reason_for_not_voteable = buffer.tostring(var14)
 			else
 				local _ = nil
-				local var28, var29 = protoModule.readVarInt(p1, var14)
-				var14 = var29 + var28
+				local var16, var17 = protoModule.readVarInt(p1, var2)
+				var2 = var17 + var16
 			end
-		elseif var15 == protoModule.wireTypes.i32 then
+		elseif var3 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var30, var31 = protoModule.readFixed32(p1, var14)
-			local _ = var30
-			var14 = var31
-		elseif var15 == protoModule.wireTypes.i64 then
+			local var18, var19 = protoModule.readFixed32(p1, var2)
+			local _ = var18
+			var2 = var19
+		elseif var3 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var32, var33 = protoModule.readFixed64(p1, var14)
-			local _ = var32
-			var14 = var33
+			local var20, var21 = protoModule.readFixed64(p1, var2)
+			local _ = var20
+			var2 = var21
 		else
 			error("Unsupported wire type: " .. var15)
 		end
 	end
-	return var13
+	return var1
 end
 
 function t_1:jsonEncode()
@@ -117,27 +117,27 @@ end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
-	local var35 = t_1.new()
+	local var22 = t_1.new()
 	
 	if self.user_vote ~= nil then
-		var35.user_vote = self.user_vote
+		var22.user_vote = self.user_vote
 	end
 	if self.userVote ~= nil then
-		var35.user_vote = self.userVote
+		var22.user_vote = self.userVote
 	end
 	if self.can_vote ~= nil then
-		var35.can_vote = self.can_vote
+		var22.can_vote = self.can_vote
 	end
 	if self.canVote ~= nil then
-		var35.can_vote = self.canVote
+		var22.can_vote = self.canVote
 	end
 	if self.reason_for_not_voteable ~= nil then
-		var35.reason_for_not_voteable = self.reason_for_not_voteable
+		var22.reason_for_not_voteable = self.reason_for_not_voteable
 	end
 	if self.reasonForNotVoteable ~= nil then
-		var35.reason_for_not_voteable = self.reasonForNotVoteable
+		var22.reason_for_not_voteable = self.reasonForNotVoteable
 	end
-	return var35
+	return var22
 end
 
 t_1.descriptor = {

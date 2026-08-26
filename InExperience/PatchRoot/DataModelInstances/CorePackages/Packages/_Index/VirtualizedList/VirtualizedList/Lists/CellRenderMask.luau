@@ -7,18 +7,18 @@ local invariantModule = require(parent.jsUtils.invariant)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref), invariantModule (ref)
 	local tbl = setmetatable({}, t_1)
-	invariantModule(p0 >= 0, "CellRenderMask must contain a non-negative number os cells")
-	tbl._numCells = p0
+	invariantModule(p1 >= 0, "CellRenderMask must contain a non-negative number os cells")
+	tbl._numCells = p1
 	
-	if p0 == 0 then
+	if p1 == 0 then
 		tbl._regions = {}
 		
 		return tbl
 	end
-	tbl._regions = { { first = 0, isSpacer = true, last = p0 - 1 } }
+	tbl._regions = { { first = 0, isSpacer = true, last = p1 - 1 } }
 	
 	return tbl
 end
@@ -36,59 +36,59 @@ function t_1:addCells(p1)
 	if first_1 == last_1 and not first.isSpacer then return end
 	local t = {}
 	local t_1 = {}
-	local var11 = object.assign({}, p1, { isSpacer = false })
+	local var1 = object.assign({}, p1, { isSpacer = false })
 	
-	if first.first < var11.first then
+	if first.first < var1.first then
 		if first.isSpacer then
 			table.insert(t, {
 				isSpacer = true,
 				first = first.first,
-				last = var11.first - 1
+				last = var1.first - 1
 			})
 		else
-			var11.first = first.first
+			var1.first = first.first
 		end
 	end
-	if var11.last < last.last then
+	if var1.last < last.last then
 		if last.isSpacer then
 			table.insert(t_1, {
 				isSpacer = true,
-				first = var11.last + 1,
+				first = var1.last + 1,
 				last = last.last
 			})
 		else
-			var11.last = last.last
+			var1.last = last.last
 		end
 	end
-	array.splice(self._regions, first_1, last_1 - first_1 + 1, table.unpack(array.concat(t, { var11 }, t_1)))
+	array.splice(self._regions, first_1, last_1 - first_1 + 1, table.unpack(array.concat(t, { var1 }, t_1)))
 end
 
-function t_1:equals(p2)
+function t_1:equals(p1)
 	-- upvalues: array (ref)
-	return self._numCells == p2._numCells and (#self._regions == #p2._regions and array.every(self._regions, function(p3, p4)
-		-- upvalues: p2 (ref)
-		return p3.first == p2._regions[p4].first and (p3.last == p2._regions[p4].last and p3.isSpacer == p2._regions[p4].isSpacer)
+	return self._numCells == p1._numCells and (#self._regions == #p1._regions and array.every(self._regions, function(p2, p3)
+		-- upvalues: p1 (ref)
+		return p2.first == p1._regions[p3].first and (p2.last == p1._regions[p3].last and p2.isSpacer == p1._regions[p3].isSpacer)
 	end))
 end
 
-function t_1:_findRegion(p5)
+function t_1:_findRegion(p1)
 	-- upvalues: invariantModule (ref)
-	local var12 = 1
+	local var1 = 1
 	local regionsCount = #self._regions
-	while var12 <= regionsCount do
-		local floored = math.floor((var12 + regionsCount) / 2)
-		local var15 = self._regions[floored]
+	while var1 <= regionsCount do
+		local floored = math.floor((var1 + regionsCount) / 2)
+		local var2 = self._regions[floored]
 		
-		if var15.first > p5 or p5 > var15.last then
-			if p5 < var15.first then
+		if var2.first > p1 or p1 > var2.last then
+			if p1 < var2.first then
 				regionsCount = floored - 1
-			elseif var15.last < p5 then
-				var12 = floored + 1
+			elseif var2.last < p1 then
+				var1 = floored + 1
 			end
 		end
-		return var15, floored
+		return var2, floored
 	end
-	invariantModule(false, string.format("A region was not found containing cellIdx %s", tostring(p5)))
+	invariantModule(false, string.format("A region was not found containing cellIdx %s", tostring(p1)))
 	
 	return nil, nil
 end

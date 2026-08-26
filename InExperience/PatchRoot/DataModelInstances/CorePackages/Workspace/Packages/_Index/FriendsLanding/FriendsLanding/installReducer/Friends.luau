@@ -7,7 +7,7 @@ local t = {
 	requests = { receivedCount = 0 }
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: convertActionsModule (ref), roduxFriends (ref), friendsActionAdaptorModule (ref), t (ref)
-	return convertActionsModule(roduxFriends.installReducer(), friendsActionAdaptorModule(p0), t)
+	return convertActionsModule(roduxFriends.installReducer(), friendsActionAdaptorModule(p1), t)
 end

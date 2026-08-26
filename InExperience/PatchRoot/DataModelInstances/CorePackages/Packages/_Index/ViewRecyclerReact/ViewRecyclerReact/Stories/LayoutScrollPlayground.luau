@@ -167,34 +167,34 @@ local t_2 = {
 	}
 }
 
-local function resolveControls(p0)
+local function resolveControls(p1)
 	-- upvalues: storyControlsModule (ref), frozen_1 (ref), t_2 (ref), unknownModule (ref)
-	local var23 = storyControlsModule.merge(frozen_1, p0)
-	var23 = if t_2[var23.scenario] ~= nil then frozen_1.scenario else var23.scenario
-	local var24 = storyControlsModule.positiveInteger(var23.itemCount, frozen_1.itemCount)
-	local var25 = if var23.axis == "horizontal" then "horizontal" else "vertical"
-	local var26 = storyControlsModule.resolveAxis(var25, unknownModule)
-	local lowerText = string.lower(tostring(var23.alignment))
+	local var1 = storyControlsModule.merge(frozen_1, p1)
+	var1 = if t_2[var1.scenario] ~= nil then frozen_1.scenario else var1.scenario
+	local var2 = storyControlsModule.positiveInteger(var1.itemCount, frozen_1.itemCount)
+	local var3 = if var1.axis == "horizontal" then "horizontal" else "vertical"
+	local var4 = storyControlsModule.resolveAxis(var3, unknownModule)
+	local lowerText = string.lower(tostring(var1.alignment))
 	
 	if lowerText ~= "start" and lowerText ~= "end" then
 		lowerText = "center"
 	end
 	return {
-		scenario = var23,
-		itemCount = var24,
-		overscan = storyControlsModule.nonNegativeNumber(var23.overscan, frozen_1.overscan),
-		axis = var26,
-		axisName = var25,
-		jumpTarget = math.clamp(storyControlsModule.positiveInteger(var23.jumpTarget, frozen_1.jumpTarget), 1, var24),
+		scenario = var1,
+		itemCount = var2,
+		overscan = storyControlsModule.nonNegativeNumber(var1.overscan, frozen_1.overscan),
+		axis = var4,
+		axisName = var3,
+		jumpTarget = math.clamp(storyControlsModule.positiveInteger(var1.jumpTarget, frozen_1.jumpTarget), 1, var2),
 		alignment = storyControlsModule.resolveAlignment(lowerText, unknownModule),
 		alignmentName = lowerText,
-		diagnostics = var23.diagnostics ~= false,
-		itemLength = storyControlsModule.positiveInteger(var23.itemLength, frozen_1.itemLength),
-		spacing = storyControlsModule.nonNegativeNumber(var23.spacing, frozen_1.spacing),
-		shortLength = storyControlsModule.positiveInteger(var23.shortLength, frozen_1.shortLength),
-		longLength = storyControlsModule.positiveInteger(var23.longLength, frozen_1.longLength),
-		measuredEstimate = storyControlsModule.positiveInteger(var23.measuredEstimate, frozen_1.measuredEstimate),
-		presentationMode = storyControlsModule.resolvePresentationMode(var23.presentationMode, unknownModule)
+		diagnostics = var1.diagnostics ~= false,
+		itemLength = storyControlsModule.positiveInteger(var1.itemLength, frozen_1.itemLength),
+		spacing = storyControlsModule.nonNegativeNumber(var1.spacing, frozen_1.spacing),
+		shortLength = storyControlsModule.positiveInteger(var1.shortLength, frozen_1.shortLength),
+		longLength = storyControlsModule.positiveInteger(var1.longLength, frozen_1.longLength),
+		measuredEstimate = storyControlsModule.positiveInteger(var1.measuredEstimate, frozen_1.measuredEstimate),
+		presentationMode = storyControlsModule.resolvePresentationMode(var1.presentationMode, unknownModule)
 	}
 end
 
@@ -211,16 +211,16 @@ end
 local function createLayout(p1)
 	-- upvalues: frozen (ref), unknownModule (ref)
 	if p1.scenario == frozen.KnownVariable then
-		local var29 = p1.shortLength + p1.longLength + 2 * p1.spacing
+		local var1 = p1.shortLength + p1.longLength + 2 * p1.spacing
 		
 		return unknownModule.Layout.create({
 			getItemLayout = function(p2)
-				-- upvalues: var29 (ref), p1 (ref)
-				local var30 = p2 % 2 == 1
+				-- upvalues: var1 (ref), p1 (ref)
+				local var2 = p2 % 2 == 1
 				
 				return {
-					startOffset = (p2 - 1) // 2 * var29 + (if var30 then 0 else p1.shortLength + p1.spacing),
-					length = if var30 then p1.shortLength else p1.longLength
+					startOffset = (p2 - 1) // 2 * var1 + (if var2 then 0 else p1.shortLength + p1.spacing),
+					length = if var2 then p1.shortLength else p1.longLength
 				}
 			end
 		})
@@ -228,28 +228,28 @@ local function createLayout(p1)
 	return if p1.scenario == frozen.Measured then unknownModule.Layout.measured({ estimatedItemLength = p1.measuredEstimate }) else unknownModule.Layout.uniform({ itemLength = p1.itemLength, spacing = p1.spacing })
 end
 
-local function createItems(p3, p4, p5, p6, p7)
+local function createItems(p1, p2, p3, p4, p5)
 	-- upvalues: frozen (ref), rowFixturesModule (ref)
-	return if p3 == frozen.KnownVariable then rowFixturesModule.buildKnownVariableRows(p4, p5, p6) elseif p3 == frozen.Measured then rowFixturesModule.buildMeasuredRows(p4, p7) elseif p3 == frozen.Fixed then rowFixturesModule.buildLogRows(p4) else rowFixturesModule.buildSimpleRows(p4)
+	return if p1 == frozen.KnownVariable then rowFixturesModule.buildKnownVariableRows(p2, p3, p4) elseif p1 == frozen.Measured then rowFixturesModule.buildMeasuredRows(p2, p5) elseif p1 == frozen.Fixed then rowFixturesModule.buildLogRows(p2) else rowFixturesModule.buildSimpleRows(p2)
 end
 
 local function LayoutScrollPlayground(value)
 	-- upvalues: resolveControls (ref), reactModule (ref), useManagedLayoutModule (ref), createLayout (ref), createItems (ref), recyclingStatsModule (ref), frozen (ref), t_2 (ref), createElement (ref), storyShellModule (ref), jumpControlsModule (ref), unknownModule (ref), rowFixturesModule (ref)
-	local var31 = resolveControls(value.controls)
-	local var32, var33 = reactModule.useState(0)
-	local var34 = useManagedLayoutModule(reactModule, function()
-		-- upvalues: createLayout (copy), var31 (ref)
-		return createLayout(var31)
+	local var1 = resolveControls(value.controls)
+	local var2, var3 = reactModule.useState(0)
+	local var4 = useManagedLayoutModule(reactModule, function()
+		-- upvalues: createLayout (copy), var1 (ref)
+		return createLayout(var1)
 	end, {
-		var31.itemLength, var31.longLength, var31.measuredEstimate, var31.scenario,
-		var31.shortLength, var31.spacing, var32
+		var1.itemLength, var1.longLength, var1.measuredEstimate, var1.scenario,
+		var1.shortLength, var1.spacing, var2
 	})
-	local scenario = var31.scenario
-	local itemCount = var31.itemCount
-	local shortLength = var31.shortLength
-	local longLength = var31.longLength
-	local spacing = var31.spacing
-	local var35 = reactModule.useMemo(function()
+	local scenario = var1.scenario
+	local itemCount = var1.itemCount
+	local shortLength = var1.shortLength
+	local longLength = var1.longLength
+	local spacing = var1.spacing
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: createItems (copy), scenario (ref), itemCount (ref), shortLength (ref), longLength (ref), spacing (ref)
 		return createItems(scenario, itemCount, shortLength, longLength, spacing)
 	end, {
@@ -259,77 +259,77 @@ local function LayoutScrollPlayground(value)
 		shortLength,
 		spacing
 	})
-	local var36, var37 = recyclingStatsModule.useStats()
-	local var38 = reactModule.useRef(nil)
-	local var39 = reactModule.useRef(0)
-	local var40 = reactModule.useRef(0)
-	local var41 = reactModule.useRef("")
-	local var42 = reactModule.useRef(var31)
-	var42.current = var31
-	var41.current = recyclingStatsModule.format(var36)
-	local var43, var44 = reactModule.useBinding("")
-	local var45 = reactModule.useCallback(function()
-		-- upvalues: var42 (ref), frozen (copy), var39 (ref), var44 (ref), var41 (ref), var40 (ref)
-		local current = var42.current
-		local var49 = ""
+	local var6, var7 = recyclingStatsModule.useStats()
+	local var8 = reactModule.useRef(nil)
+	local var9 = reactModule.useRef(0)
+	local var10 = reactModule.useRef(0)
+	local var11 = reactModule.useRef("")
+	local var12 = reactModule.useRef(var1)
+	var12.current = var1
+	var11.current = recyclingStatsModule.format(var6)
+	local var13, var14 = reactModule.useBinding("")
+	local var15 = reactModule.useCallback(function()
+		-- upvalues: var12 (ref), frozen (copy), var9 (ref), var14 (ref), var11 (ref), var10 (ref)
+		local current = var12.current
+		local var16 = ""
 		
 		if current.scenario == frozen.Fixed then
-			local var50 = current.itemLength + current.spacing
-			local clampedValue = math.clamp(math.floor(var39.current / var50) + 1, 1, current.itemCount)
-			var49 = `   Visible: {clampedValue}\226\128\147{math.min(current.itemCount, clampedValue + math.ceil(500 / var50))} / {current.itemCount}   Range: {math.round(current.itemCount * var50 - current.spacing)}px`
+			local var17 = current.itemLength + current.spacing
+			local clampedValue = math.clamp(math.floor(var9.current / var17) + 1, 1, current.itemCount)
+			var16 = `   Visible: {clampedValue}\226\128\147{math.min(current.itemCount, clampedValue + math.ceil(500 / var17))} / {current.itemCount}   Range: {math.round(current.itemCount * var17 - current.spacing)}px`
 		end
-		var44(`{var41.current}   Offset: {math.round(var39.current)}px{var49}   Diagnostics: {var40.current}`)
-	end, { var44 })
-	local var46 = reactModule.useCallback(function(p8)
-		-- upvalues: var39 (ref), var45 (ref)
-		var39.current = p8
-		var45()
-	end, { var45 })
-	local var47 = reactModule.useCallback(function(_)
-		-- upvalues: var40 (ref), var45 (ref)
-		var40.current += 1
-		var45()
-	end, { var45 })
-	reactModule.useEffect(var45, { var36, var45 })
-	local details = value.details or t_2[var31.scenario]
+		var14(`{var11.current}   Offset: {math.round(var9.current)}px{var16}   Diagnostics: {var10.current}`)
+	end, { var14 })
+	local var16 = reactModule.useCallback(function(p1)
+		-- upvalues: var9 (ref), var15 (ref)
+		var9.current = p1
+		var15()
+	end, { var15 })
+	local var17 = reactModule.useCallback(function(_)
+		-- upvalues: var10 (ref), var15 (ref)
+		var10.current += 1
+		var15()
+	end, { var15 })
+	reactModule.useEffect(var15, { var6, var15 })
+	local details = value.details or t_2[var1.scenario]
 	
-	return createElement(recyclingStatsModule.Provider, { actions = var37 }, {
+	return createElement(recyclingStatsModule.Provider, { actions = var7 }, {
 		Shell = createElement(storyShellModule.Component, {
 			acceptanceCriteria = details.acceptanceCriteria,
 			instructions = details.instructions,
 			itemUpdate = details.itemUpdate,
 			size = UDim2.fromOffset(760, 700),
-			status = var43,
+			status = var13,
 			title = `Layout & Scroll Playground \226\128\148 {details.title}`,
 			toolbar = createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 				Jumps = createElement(jumpControlsModule, {
-					alignment = var31.alignment,
-					itemCount = var31.itemCount,
-					listRef = var38,
-					target = var31.jumpTarget
+					alignment = var1.alignment,
+					itemCount = var1.itemCount,
+					listRef = var8,
+					target = var1.jumpTarget
 				}),
-				ResetEstimate = if var31.scenario == frozen.Measured then createElement("TextButton", {
+				ResetEstimate = if var1.scenario == frozen.Measured then createElement("TextButton", {
 					Position = UDim2.fromOffset(424, 6),
 					Size = UDim2.fromOffset(132, 30),
 					Text = "Reset estimate",
 					[reactModule.Event.Activated] = function()
-						-- upvalues: var33 (ref)
-						var33(function(p9)
-							return p9 + 1
+						-- upvalues: var3 (ref)
+						var3(function(p1)
+							return p1 + 1
 						end)
 					end
 				}) else nil
 			})
 		}, {
 			List = createElement(unknownModule.VirtualList, {
-				axis = var31.axis,
-				data = { items = var35, getItemKey = rowFixturesModule.getItemKey },
-				diagnostics = if var31.diagnostics then var47 else nil,
-				itemType = if var31.scenario == frozen.Measured then if var31.presentationMode == "ReadyOnAssignment" then rowFixturesModule.ImmediateMeasuredRow else rowFixturesModule.MeasuredRow elseif var31.presentationMode == "ReadyOnAssignment" then rowFixturesModule.ImmediateSimpleRow else rowFixturesModule.SimpleRow,
-				layout = var34,
-				listRef = var38,
-				onScrollOffsetChanged = var46,
-				overscan = var31.overscan
+				axis = var1.axis,
+				data = { items = var5, getItemKey = rowFixturesModule.getItemKey },
+				diagnostics = if var1.diagnostics then var17 else nil,
+				itemType = if var1.scenario == frozen.Measured then if var1.presentationMode == "ReadyOnAssignment" then rowFixturesModule.ImmediateMeasuredRow else rowFixturesModule.MeasuredRow elseif var1.presentationMode == "ReadyOnAssignment" then rowFixturesModule.ImmediateSimpleRow else rowFixturesModule.SimpleRow,
+				layout = var4,
+				listRef = var8,
+				onScrollOffsetChanged = var16,
+				overscan = var1.overscan
 			})
 		})
 	})
@@ -346,22 +346,22 @@ return {
 	scenarioDetails = t_2,
 	createPreset = function(value)
 		-- upvalues: t_1 (ref), createElement (ref), LayoutScrollPlayground (ref), mergeControls (ref), reactModule (ref)
-		local var52 = t_1[value]
-		assert(var52 ~= nil, `Unknown LayoutScrollPlayground preset {value}`)
+		local var1 = t_1[value]
+		assert(var1 ~= nil, `Unknown LayoutScrollPlayground preset {value}`)
 		
 		return {
-			name = var52.name,
-			summary = var52.summary,
+			name = var1.name,
+			summary = var1.summary,
 			roact = reactModule,
 			story = function(value)
-				-- upvalues: createElement (copy), LayoutScrollPlayground (copy), mergeControls (copy), var52 (ref)
+				-- upvalues: createElement (copy), LayoutScrollPlayground (copy), mergeControls (copy), var1 (ref)
 				return createElement(LayoutScrollPlayground, {
-					controls = mergeControls(var52.values, value and value.controls),
-					details = var52.details
+					controls = mergeControls(var1.values, value and value.controls),
+					details = var1.details
 				})
 			end,
-			controls = var52.controls,
-			presetControls = var52.values
+			controls = var1.controls,
+			presetControls = var1.values
 		}
 	end
 }

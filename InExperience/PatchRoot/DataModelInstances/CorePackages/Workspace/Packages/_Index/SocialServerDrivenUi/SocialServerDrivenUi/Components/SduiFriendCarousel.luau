@@ -17,20 +17,20 @@ local fIntLuaAppFriendsSortHeaderMaxHiddenPosition = sharedFlagsModule.FIntLuaAp
 local SORT_INDEX_SELECTION_ORDER_MULTIPLIER = discoveryTypesModule.Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
 local SORT_SELECTION_ORDER_BASE = discoveryTypesModule.Constants.SORT_SELECTION_ORDER_BASE
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: fIntLuaAppFriendsSortHeaderMaxHiddenPosition (ref), fFlagFlyoutHideFriendsHeader (ref), fFlagEnableFlyoutFriendsHeaderFix (ref), flyoutSidePanelIXP (ref)
-	if fIntLuaAppFriendsSortHeaderMaxHiddenPosition < p0 then
+	if fIntLuaAppFriendsSortHeaderMaxHiddenPosition < p1 then
 		return false
 	end
-	local var6 = fFlagFlyoutHideFriendsHeader
+	local var1 = fFlagFlyoutHideFriendsHeader
 	
-	if var6 then
+	if var1 then
 		if fFlagEnableFlyoutFriendsHeaderFix then
 			return flyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp()
 		end
-		var6 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
+		var1 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
 	end
-	return var6
+	return var1
 end
 
 return function(p1)

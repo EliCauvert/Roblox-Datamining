@@ -27,9 +27,9 @@ require(parent.ListenPlaybackStatusUpdated).setupListener(t)
 require(parent.CreateSpectatorCamera).createSpectatorCamera(t)
 
 if game:GetEngineFeature("DmctPlaybackClientApp") then
-	require(parent.ReplaySelector).create(t, function(p0)
+	require(parent.ReplaySelector).create(t, function(p1)
 		-- upvalues: loadSlicesModule (ref), t (ref)
-		loadSlicesModule.loadGUID(t, p0)
+		loadSlicesModule.loadGUID(t, p1)
 	end)
 end
 return t

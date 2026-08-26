@@ -1,5 +1,5 @@
-﻿local function _(p0)
-	local textChannels = p0.TextChannels
+﻿local function _(p1)
+	local textChannels = p1.TextChannels
 	
 	if textChannels == nil then
 		return nil
@@ -10,31 +10,31 @@
 		return targetTextChannel.Name
 	end
 	local selectedChannelName = textChannels.selectedChannelName
-	local channelTabs = p0.ChannelTabs
+	local channelTabs = p1.ChannelTabs
 	
 	return if not (selectedChannelName ~= nil and channelTabs ~= nil and channelTabs.allChannelTabs[selectedChannelName] ~= nil) then if channelTabs == nil then selectedChannelName else channelTabs.selectedTabName or "RBXGeneral" else selectedChannelName
 end
 
 local _ = function(p1, p2)
-	local var0 = nil
+	local var1 = nil
 	
 	if p2 == nil then
 		if p1.TextChannel == nil then
 			return nil
 		end
-		var0 = p1.TextChannel.Name
+		var1 = p1.TextChannel.Name
 	else
-		var0 = p2
+		var1 = p2
 	end
-	if var0 == "RBXSystem" then
-		var0 = "RBXGeneral"
+	if var1 == "RBXSystem" then
+		var1 = "RBXGeneral"
 	end
-	return var0
+	return var1
 end
 
-return function(p3, p4, p5)
+return function(p1, p2, p3)
 	local var1, targetTextChannel
-	local textChannels = p3.TextChannels
+	local textChannels = p1.TextChannels
 	
 	if textChannels == nil then
 		var1 = nil
@@ -43,7 +43,7 @@ return function(p3, p4, p5)
 		
 		if targetTextChannel == nil or targetTextChannel.Name == nil then
 			local selectedChannelName = textChannels.selectedChannelName
-			local channelTabs = p3.ChannelTabs
+			local channelTabs = p1.ChannelTabs
 			var1 = if selectedChannelName == nil or channelTabs == nil or channelTabs.allChannelTabs[selectedChannelName] == nil then channelTabs == nil and ((if channelTabs == nil then channelTabs.selectedTabName else nil) or "RBXGeneral") else selectedChannelName
 		else
 			var1 = targetTextChannel.Name
@@ -52,15 +52,15 @@ return function(p3, p4, p5)
 	local var2
 	targetTextChannel = nil
 	
-	if p5 == nil then
-		if p4.TextChannel == nil then
+	if p3 == nil then
+		if p2.TextChannel == nil then
 			var2 = nil
 		else
-			targetTextChannel = p4.TextChannel.Name
+			targetTextChannel = p2.TextChannel.Name
 		end
 		return var1 == nil or var2 == nil or var2 == var1
 	else
-		targetTextChannel = p5
+		targetTextChannel = p3
 	end
 	if targetTextChannel == "RBXSystem" then
 		targetTextChannel = "RBXGeneral"

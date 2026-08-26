@@ -22,8 +22,8 @@ local t = {
 return function()
 	-- upvalues: getActionBindingsStoreModule (ref), signalsModule (ref), fFlagDebugEnablePioneerUX (ref), constantsModule (ref), enumsModule (ref), getInputModeStore (ref), input (ref), userInputService (ref), t (ref)
 	local sessionActionBindings = getActionBindingsStoreModule().sessionActionBindings
-	local var8, var9 = signalsModule.createSignal(nil)
-	local var10, var11 = signalsModule.createSignal(nil)
+	local var1, var2 = signalsModule.createSignal(nil)
+	local var3, var4 = signalsModule.createSignal(nil)
 	local list = {
 		{
 			name = "LeaveButton",
@@ -31,8 +31,8 @@ return function()
 			isEmphasis = true,
 			label = if fFlagDebugEnablePioneerUX then constantsModule.LocalizationKeys.LogoutButton else "CoreScripts.InGameMenu.LeaveGame",
 			gamepadKeyCode = Enum.KeyCode.ButtonX,
-			getShortcutIcon = var8,
-			setShortcutIcon = var9,
+			getShortcutIcon = var1,
+			setShortcutIcon = var2,
 			getOnActivated = sessionActionBindings[enumsModule.ActionBinding.Leave].getOnActivated,
 			getIsEnabled = sessionActionBindings[enumsModule.ActionBinding.Leave].getIsEnabled
 		},
@@ -42,19 +42,19 @@ return function()
 			keyboardIcon = "icons/controls/keys/key_r",
 			isEmphasis = false,
 			gamepadKeyCode = Enum.KeyCode.ButtonY,
-			getShortcutIcon = var10,
-			setShortcutIcon = var11,
+			getShortcutIcon = var3,
+			setShortcutIcon = var4,
 			getOnActivated = sessionActionBindings[enumsModule.ActionBinding.Respawn].getOnActivated,
 			getIsEnabled = sessionActionBindings[enumsModule.ActionBinding.Respawn].getIsEnabled
 		}
 	}
-	local var13 = nil
-	local var14 = signalsModule.createEffect(function(p0)
-		-- upvalues: getInputModeStore (copy), var13 (write), input (copy), list (ref), userInputService (copy), t (copy)
-		local lastInputType = getInputModeStore(p0).getLastInputType(p0)
+	local var5 = nil
+	local var6 = signalsModule.createEffect(function(p1)
+		-- upvalues: getInputModeStore (copy), var5 (write), input (copy), list (ref), userInputService (copy), t (copy)
+		local lastInputType = getInputModeStore(p1).getLastInputType(p1)
 		
-		if var13 then
-			var13:Disconnect()
+		if var5 then
+			var5:Disconnect()
 		end
 		if lastInputType == input.Directional then
 			local function setGamepadIcons()
@@ -64,7 +64,7 @@ return function()
 				end
 			end
 			
-			var13 = userInputService.GamepadConnected:Connect(function(_)
+			var5 = userInputService.GamepadConnected:Connect(function(_)
 				-- upvalues: setGamepadIcons (ref)
 				setGamepadIcons()
 			end)
@@ -86,12 +86,12 @@ return function()
 	return {
 		sessionActionButtonConfigs = list,
 		cleanUp = function()
-			-- upvalues: var13 (write), var14 (ref)
-			if var13 then
-				var13:Disconnect()
+			-- upvalues: var5 (write), var6 (ref)
+			if var5 then
+				var5:Disconnect()
 			end
-			if var14 then
-				var14()
+			if var6 then
+				var6()
 			end
 		end
 	}

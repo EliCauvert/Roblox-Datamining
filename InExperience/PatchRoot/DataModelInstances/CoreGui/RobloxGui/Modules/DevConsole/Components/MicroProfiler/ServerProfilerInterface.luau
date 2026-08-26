@@ -18,11 +18,11 @@ local selectedBlue = constantsModule.Color.SelectedBlue
 local unselectedGray_1 = constantsModule.Color.UnselectedGray
 local serverProfilerInteraface = roactModule.Component:extend("ServerProfilerInteraface")
 
-function serverProfilerInteraface.init(p0)
+function serverProfilerInteraface.init(p1)
 	-- upvalues: gameSettings (ref), getClientReplicatorModule (ref)
-	function p0.onUtilTabHeightChanged(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ utilTabHeight = p1 })
+	function p0.onUtilTabHeightChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ utilTabHeight = p2 })
 	end
 	
 	function p0.onFocusLostFrameRate(p2, _, _)
@@ -31,49 +31,49 @@ function serverProfilerInteraface.init(p0)
 		p2.Text = gameSettings.RCCProfilerRecordFrameRate
 	end
 	
-	function p0.onFocusLostTimeFrame(p3, _, _)
+	function p0.onFocusLostTimeFrame(p2, _, _)
 		-- upvalues: gameSettings (copy)
-		gameSettings.RCCProfilerRecordTimeFrame = p3.Text
-		p3.Text = gameSettings.RCCProfilerRecordTimeFrame
+		gameSettings.RCCProfilerRecordTimeFrame = p2.Text
+		p2.Text = gameSettings.RCCProfilerRecordTimeFrame
 	end
 	
 	function p0.requestRCCProfilerData(_)
-		-- upvalues: getClientReplicatorModule (copy), gameSettings (copy), p0 (ref)
-		local var9 = getClientReplicatorModule()
+		-- upvalues: getClientReplicatorModule (copy), gameSettings (copy), p1 (ref)
+		local var1 = getClientReplicatorModule()
 		
-		if var9 then
-			var9:RequestRCCProfilerData(gameSettings.RCCProfilerRecordFrameRate, gameSettings.RCCProfilerRecordTimeFrame)
-			p0.props.dispatchSetRCCProfilerState(true)
+		if var1 then
+			var1:RequestRCCProfilerData(gameSettings.RCCProfilerRecordFrameRate, gameSettings.RCCProfilerRecordTimeFrame)
+			p1.props.dispatchSetRCCProfilerState(true)
 		end
 	end
 	
-	function p0.changeProfilerState(p4)
-		-- upvalues: gameSettings (copy), p0 (ref)
+	function p0.changeProfilerState(p2)
+		-- upvalues: gameSettings (copy), p1 (ref)
 		return function()
-			-- upvalues: gameSettings (copy), p4 (ref), p0 (copy)
-			gameSettings.OnScreenProfilerEnabled = p4
-			p0:setState({ clientProfilerEnabled = p4 })
+			-- upvalues: gameSettings (copy), p2 (ref), p1 (copy)
+			gameSettings.OnScreenProfilerEnabled = p2
+			p1:setState({ clientProfilerEnabled = p2 })
 		end
 	end
 	
-	p0.state = {
+	p1.state = {
 		frameRate = gameSettings.RCCProfilerRecordFrameRate,
 		timeFrame = gameSettings.RCCProfilerRecordTimeFrame
 	}
 end
 
-function serverProfilerInteraface.render(p5)
+function serverProfilerInteraface.render(p1)
 	-- upvalues: buttonWidth (ref), roactModule (ref), fFlagDevConsoleMicroProfilerImproveWordingModule (ref), mainWindowHeader (ref), buttonTextSize (ref), constantsModule (ref), unselectedGray_1 (ref), mainWindow (ref), devConsoleMicroProfilerFixAutoTextClear (ref), unselectedGray (ref), selectedBlue (ref)
-	local _ = p5.props.size
-	local _ = p5.props.formFactor
-	local _ = p5.props.tabList
-	local waitingForRecording = p5.props.waitingForRecording
-	local lastFileOutputLocation = p5.props.lastFileOutputLocation
-	local _ = p5.state.utilTabHeight
-	local frameRate = p5.state.frameRate
-	local timeFrame = p5.state.timeFrame
-	local _ = p5.state.clientProfilerEnabled
-	local var10 = not waitingForRecording and #lastFileOutputLocation > 0
+	local _ = p1.props.size
+	local _ = p1.props.formFactor
+	local _ = p1.props.tabList
+	local waitingForRecording = p1.props.waitingForRecording
+	local lastFileOutputLocation = p1.props.lastFileOutputLocation
+	local _ = p1.state.utilTabHeight
+	local frameRate = p1.state.frameRate
+	local timeFrame = p1.state.timeFrame
+	local _ = p1.state.clientProfilerEnabled
+	local var1 = not waitingForRecording and #lastFileOutputLocation > 0
 	local uDim2 = UDim2.new(0.8, -buttonWidth, 0, 30)
 	local _ = UDim2.new(0.6, buttonWidth, 0, 0)
 	
@@ -122,7 +122,7 @@ function serverProfilerInteraface.render(p5)
 			BackgroundColor3 = unselectedGray_1,
 			BackgroundTransparency = 0,
 			ClearTextOnFocus = if devConsoleMicroProfilerFixAutoTextClear then false else true,
-			[roactModule.Event.FocusLost] = p5.onFocusLostFrameRate
+			[roactModule.Event.FocusLost] = p1.onFocusLostFrameRate
 		}),
 		LabelTimeFrame = roactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
@@ -147,7 +147,7 @@ function serverProfilerInteraface.render(p5)
 			BackgroundColor3 = unselectedGray_1,
 			BackgroundTransparency = 0,
 			ClearTextOnFocus = if devConsoleMicroProfilerFixAutoTextClear then false else true,
-			[roactModule.Event.FocusLost] = p5.onFocusLostTimeFrame
+			[roactModule.Event.FocusLost] = p1.onFocusLostTimeFrame
 		}, {
 			GetDumpButton = roactModule.createElement("TextButton", {
 				Size = UDim2.new(0, buttonWidth * 0.7, 0, 30),
@@ -162,10 +162,10 @@ function serverProfilerInteraface.render(p5)
 				BackgroundTransparency = if waitingForRecording then 0.3 else 0,
 				AutoButtonColor = not waitingForRecording,
 				Active = not waitingForRecording,
-				[roactModule.Event.Activated] = p5.requestRCCProfilerData
+				[roactModule.Event.Activated] = p1.requestRCCProfilerData
 			})
 		}),
-		OutputPath = var10 and roactModule.createElement("TextLabel", {
+		OutputPath = var1 and roactModule.createElement("TextLabel", {
 			Size = UDim2.new(1, 0, 0, 30),
 			Position = UDim2.new(0, 0, 0, 97.5),
 			Text = lastFileOutputLocation,
@@ -178,17 +178,17 @@ function serverProfilerInteraface.render(p5)
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p6, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
-		waitingForRecording = p6.MicroProfiler.waitingForRecording,
-		lastFileOutputLocation = p6.MicroProfiler.lastFileOutputLocation
+		waitingForRecording = p1.MicroProfiler.waitingForRecording,
+		lastFileOutputLocation = p1.MicroProfiler.lastFileOutputLocation
 	}
-end, function(p7)
+end, function(p1)
 	-- upvalues: setRCCProfilerStateModule (ref)
 	return {
-		dispatchSetRCCProfilerState = function(value, p8)
-			-- upvalues: p7 (ref), setRCCProfilerStateModule (copy)
-			p7(setRCCProfilerStateModule(value, p8))
+		dispatchSetRCCProfilerState = function(value, p2)
+			-- upvalues: p1 (ref), setRCCProfilerStateModule (copy)
+			p1(setRCCProfilerStateModule(value, p2))
 		end
 	}
 end)(serverProfilerInteraface)

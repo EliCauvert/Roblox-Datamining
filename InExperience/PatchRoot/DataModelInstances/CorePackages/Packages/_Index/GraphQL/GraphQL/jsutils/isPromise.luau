@@ -1,8 +1,8 @@
 ﻿local promiseModule = require(script.Parent.Parent.Parent.Promise)
 
 return {
-	isPromise = function(p0)
+	isPromise = function(p1)
 		-- upvalues: promiseModule (ref)
-		return promiseModule.is(p0)
+		return promiseModule.is(p1)
 	end
 }

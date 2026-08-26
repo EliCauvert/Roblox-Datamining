@@ -21,53 +21,53 @@ local t_1 = {
 	dismiss = constants.UPSELL_BUTTON_ACTION.Dismiss
 }
 
-local function getCountdownLabelItem(p0)
+local function getCountdownLabelItem(p1)
 	-- upvalues: getDeepValue (ref), cryoModule (ref), appChatNetworkingModule (ref), constants (ref)
 	local t = nil
-	local var8 = getDeepValue(p0, "modal_layout.header.additional_content")
+	local var1 = getDeepValue(p1, "modal_layout.header.additional_content")
 	
-	if var8 then
-		local var9 = cryoModule.List.findWhere(var8, function(p1)
+	if var1 then
+		local var2 = cryoModule.List.findWhere(var1, function(p2)
 			-- upvalues: appChatNetworkingModule (copy)
-			return p1.type == appChatNetworkingModule.Constants.ModalContentType.Countdown
+			return p2.type == appChatNetworkingModule.Constants.ModalContentType.Countdown
 		end)
 		
-		if var9 and var8[var9].text then
+		if var2 and var1[var2].text then
 			t = {
 				type = constants.UPSELL_LABEL_ITEM_TYPE_COUNTDOWN,
-				text = var8[var9].text
+				text = var1[var2].text
 			}
 		end
 	end
 	return t
 end
 
-local function _(p2)
+local function _(p1)
 	-- upvalues: t_1 (ref)
-	return if p2.action and p2.action.type then t_1[p2.action.type] else nil
+	return if p1.action and p1.action.type then t_1[p1.action.type] else nil
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: t (ref), socialUpsellType (ref), getDeepValue (ref), getCountdownLabelItem (ref), cryoModule (ref), t_1 (ref), createCommonSocialUpsellBannerConfig (ref)
-	local modalVariant = t[p3.modal_variant] or socialUpsellType.Unknown
+	local modalVariant = t[p1.modal_variant] or socialUpsellType.Unknown
 	local t_2 = {}
-	local var12 = getDeepValue(p3, "modal_layout.buttons")
-	local var13 = getCountdownLabelItem(p3)
+	local var1 = getDeepValue(p1, "modal_layout.buttons")
+	local var2 = getCountdownLabelItem(p1)
 	
-	if var13 then
-		table.insert(t_2, var13)
+	if var2 then
+		table.insert(t_2, var2)
 	end
 	return createCommonSocialUpsellBannerConfig({
 		type = modalVariant,
-		title = getDeepValue(p3, "modal_layout.header.text"),
-		body = getDeepValue(p3, "modal_layout.body.text"),
-		isDismissable = getDeepValue(p3, "modal_layout.dismissible"),
+		title = getDeepValue(p1, "modal_layout.header.text"),
+		body = getDeepValue(p1, "modal_layout.body.text"),
+		isDismissable = getDeepValue(p1, "modal_layout.dismissible"),
 		labelItems = t_2,
-		buttons = cryoModule.List.filterMap(var12, function(p4)
+		buttons = cryoModule.List.filterMap(var1, function(p2)
 			-- upvalues: t_1 (copy)
-			local var14 = if p4.action and p4.action.type then t_1[p4.action.type] else nil
+			local var3 = if p2.action and p2.action.type then t_1[p2.action.type] else nil
 			
-			return if var14 and p4.text then { text = p4.text, action = var14 } else nil
+			return if var3 and p2.text then { text = p2.text, action = var3 } else nil
 		end)
 	})
 end

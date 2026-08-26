@@ -2,7 +2,7 @@
 local roduxPerfTrackerModule = require(appLaunchTracker.RoduxPerfTracker)
 local discoveryAppLaunchEventsModule = require(appLaunchTracker.DiscoveryAppLaunchEvents)
 local _ = require(appLaunchTracker.AppLaunchTrackerTypes)
-local var3 = math.random(10000) <= require(appLaunchTracker.Flags).FIntAppLaunchTrackerEnableHundredthsPercent
+local var1 = math.random(10000) <= require(appLaunchTracker.Flags).FIntAppLaunchTrackerEnableHundredthsPercent
 local luaAppShouldTrackTopThunks = game:DefineFastFlag("LuaAppShouldTrackTopThunks", false)
 local luaAppLaunchTrackerTimeoutSec = game:DefineFastInt("LuaAppLaunchTrackerTimeoutSec", 60)
 local luaAppLaunchTrackerMilestones = game:DefineFastString("LuaAppLaunchTrackerMilestones", "lua_app_starter_script_requires_begin,lua_app_starter_script_requires_end,startup_page_did_mount,fetch_homepage_data_begin,home_page_container_init,fetch_homepage_data_end,home_page_interactive_legacy,home_page_interactive")
@@ -10,17 +10,17 @@ local t = {}
 t.__index = t
 
 function t.isEnabled()
-	-- upvalues: var3 (write)
-	return var3
+	-- upvalues: var1 (write)
+	return var1
 end
 
 function t.disable()
-	-- upvalues: var3 (write)
-	var3 = false
+	-- upvalues: var1 (write)
+	var1 = false
 end
 
-function t.new(p0)
-	-- upvalues: luaAppLaunchTrackerMilestones (ref), discoveryAppLaunchEventsModule (ref), roduxPerfTrackerModule (ref), luaAppShouldTrackTopThunks (ref), t (ref), luaAppLaunchTrackerTimeoutSec (ref), var3 (write)
+function t.new(p1)
+	-- upvalues: luaAppLaunchTrackerMilestones (ref), discoveryAppLaunchEventsModule (ref), roduxPerfTrackerModule (ref), luaAppShouldTrackTopThunks (ref), t (ref), luaAppLaunchTrackerTimeoutSec (ref), var1 (write)
 	local ok, status = pcall(function()
 		-- upvalues: luaAppLaunchTrackerMilestones (copy)
 		local t = {}
@@ -32,7 +32,7 @@ function t.new(p0)
 	end)
 	
 	if not ok then
-		discoveryAppLaunchEventsModule.reportError(p0, "Failed to parse FStringLuaAppLaunchTrackerMilestones")
+		discoveryAppLaunchEventsModule.reportError(p1, "Failed to parse FStringLuaAppLaunchTrackerMilestones")
 	end
 	local tbl = setmetatable({
 		numTileRenders = 0,
@@ -43,15 +43,15 @@ function t.new(p0)
 		previousMilestone = "",
 		previousMilestoneTime = 0,
 		roduxTracker = roduxPerfTrackerModule.new(true, luaAppShouldTrackTopThunks, true),
-		loggingProtocol = p0,
+		loggingProtocol = p1,
 		supportedMilestones = if ok then status else {}
 	}, t)
 	
 	if luaAppLaunchTrackerTimeoutSec > 0 then
 		task.delay(luaAppLaunchTrackerTimeoutSec, function()
-			-- upvalues: var3 (copy), discoveryAppLaunchEventsModule (copy), p0 (ref), tbl (ref), t (copy)
-			if var3 then
-				discoveryAppLaunchEventsModule.reportError(p0, `Timeout after previousMilestone: {tbl.previousMilestone}`)
+			-- upvalues: var1 (copy), discoveryAppLaunchEventsModule (copy), p1 (ref), tbl (ref), t (copy)
+			if var1 then
+				discoveryAppLaunchEventsModule.reportError(p1, `Timeout after previousMilestone: {tbl.previousMilestone}`)
 				tbl.roduxTracker:stopTracking()
 				t.disable()
 			end
@@ -72,29 +72,29 @@ function t:trackFeedRender()
 	self.numFeedRenders += 1
 end
 
-function t:trackNumFeedItems(p1)
-	self.numFeedItems = p1
+function t:trackNumFeedItems(p2)
+	self.numFeedItems = p2
 end
 
 function t:trackSduiDuration(p2)
 	self.totalSduiDuration += p2
 end
 
-function t:onMilestoneChanged(p3)
-	-- upvalues: var3 (write), discoveryAppLaunchEventsModule (ref)
-	if not var3 then return end
-	if not self.supportedMilestones[p3] then return end
+function t:onMilestoneChanged(p2)
+	-- upvalues: var1 (write), discoveryAppLaunchEventsModule (ref)
+	if not var1 then return end
+	if not self.supportedMilestones[p2] then return end
 	local processTime = os.clock()
 	
 	if self.previousMilestoneTime > 0 then
-		discoveryAppLaunchEventsModule.reportStatsforMilestone(self.loggingProtocol, p3, self.previousMilestone, (processTime - self.previousMilestoneTime) * 1000, self.roduxTracker:getStats(), self.numTilesInit, self.numTileRenders, self.numFeedItems, self.numFeedRenders, self.totalSduiDuration)
+		discoveryAppLaunchEventsModule.reportStatsforMilestone(self.loggingProtocol, p2, self.previousMilestone, (processTime - self.previousMilestoneTime) * 1000, self.roduxTracker:getStats(), self.numTilesInit, self.numTileRenders, self.numFeedItems, self.numFeedRenders, self.totalSduiDuration)
 	end
 	self.roduxTracker:clear()
 	self.numFeedRenders = 0
 	self.numTilesInit = 0
 	self.numTileRenders = 0
 	self.totalSduiDuration = 0
-	self.previousMilestone = p3
+	self.previousMilestone = p2
 	self.previousMilestoneTime = processTime
 end
 

@@ -14,10 +14,10 @@ local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBui
 local _ = require(script.Parent.PrivateInvitesPickerView)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), friendsStore (ref), searchFriendsAsyncModule (ref), useUserPickerModule (ref)
 	local PRIVATE_INVITES_ADD_PLAYTESTER, PRIVATE_INVITES_ADD_PLAYTESTERS, PRIVATE_INVITES_ALL_FRIENDS_ADDED, PRIVATE_INVITES_FRIENDS_LOAD_ERROR, PRIVATE_INVITES_NO_FRIENDS, PRIVATE_INVITES_SEARCH_PLACEHOLDER
-	local var8 = if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		addPlaytester = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTER,
 		addPlaytesters = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTERS,
 		allFriendsAdded = localizationStringsModule.PRIVATE_INVITES_ALL_FRIENDS_ADDED,
@@ -33,12 +33,12 @@ return function(p0)
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		PRIVATE_INVITES_ADD_PLAYTESTER = var8.addPlaytester
-		PRIVATE_INVITES_ADD_PLAYTESTERS = var8.addPlaytesters
-		PRIVATE_INVITES_ALL_FRIENDS_ADDED = var8.allFriendsAdded
-		PRIVATE_INVITES_FRIENDS_LOAD_ERROR = var8.friendsLoadError
-		PRIVATE_INVITES_NO_FRIENDS = var8.noFriends
-		PRIVATE_INVITES_SEARCH_PLACEHOLDER = var8.searchPlaceholder
+		PRIVATE_INVITES_ADD_PLAYTESTER = var1.addPlaytester
+		PRIVATE_INVITES_ADD_PLAYTESTERS = var1.addPlaytesters
+		PRIVATE_INVITES_ALL_FRIENDS_ADDED = var1.allFriendsAdded
+		PRIVATE_INVITES_FRIENDS_LOAD_ERROR = var1.friendsLoadError
+		PRIVATE_INVITES_NO_FRIENDS = var1.noFriends
+		PRIVATE_INVITES_SEARCH_PLACEHOLDER = var1.searchPlaceholder
 	else
 		PRIVATE_INVITES_ADD_PLAYTESTER = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTER
 		PRIVATE_INVITES_ADD_PLAYTESTERS = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTERS
@@ -47,149 +47,149 @@ return function(p0)
 		PRIVATE_INVITES_NO_FRIENDS = localizationStringsModule.PRIVATE_INVITES_NO_FRIENDS
 		PRIVATE_INVITES_SEARCH_PLACEHOLDER = localizationStringsModule.PRIVATE_INVITES_SEARCH_PLACEHOLDER
 	end
-	local universeId = p0.universeId
-	local onInvitesSent = p0.onInvitesSent
-	local var9 = reactModule.useRef(false)
+	local universeId = p1.universeId
+	local onInvitesSent = p1.onInvitesSent
+	local var2 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), sendBuildExperienceEventModule (copy), universeId (ref)
-		if var9.current then
+		-- upvalues: var2 (ref), sendBuildExperienceEventModule (copy), universeId (ref)
+		if var2.current then
 			return
 		end
-		var9.current = true
+		var2.current = true
 		sendBuildExperienceEventModule("PLAYTEST_PICKER_IMPRESSION", { universeId = universeId })
 	end, { universeId })
-	local var10 = getPrivatePlaytestersStore(false)
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var10 (ref), universeId (ref)
-		return var10.getAndFetchInvitedPlayers(universeId)
-	end, { var10, universeId })
-	local var12 = signalsReactModule.useSignalState(var11.players)
-	local var13 = if signalsReactModule.useSignalState(var11.status) == "Ready" then math.max(0, var10.MAX_INVITES - #var12) else 0
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: var12 (ref)
+	local var3 = getPrivatePlaytestersStore(false)
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), universeId (ref)
+		return var3.getAndFetchInvitedPlayers(universeId)
+	end, { var3, universeId })
+	local var5 = signalsReactModule.useSignalState(var4.players)
+	local var6 = if signalsReactModule.useSignalState(var4.status) == "Ready" then math.max(0, var3.MAX_INVITES - #var5) else 0
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref)
 		local t = {}
 		
-		for i, v in var12 do
+		for i, v in var5 do
 			t[v] = true
 		end
 		return t
-	end, { var12 })
-	local var15 = reactModule.useMemo(function()
+	end, { var5 })
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: friendsStore (copy)
 		return friendsStore.get()
 	end, {})
-	local var16 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var15 (ref)
-		return var15.GetAllFriends()
-	end, { var15 }))
-	local var17 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var15 (ref)
-		return var15.GetAllFriendsStatus()
-	end, { var15 }))
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var16 (ref)
+	local var9 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: var8 (ref)
+		return var8.GetAllFriends()
+	end, { var8 }))
+	local var10 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: var8 (ref)
+		return var8.GetAllFriendsStatus()
+	end, { var8 }))
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: var9 (ref)
 		local t = {}
 		
-		if var16 ~= nil then
-			for i, v in var16.friends do
-				local var32 = tonumber(v.id)
+		if var9 ~= nil then
+			for i, v in var9.friends do
+				local var12 = tonumber(v.id)
 				
-				if var32 ~= nil then
-					table.insert(t, var32)
+				if var12 ~= nil then
+					table.insert(t, var12)
 				end
 			end
 		end
 		return t
-	end, { var16 })
-	local isNotReady = var17 == "NotReady"
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref)
-		var15.FetchMoreFriends()
-	end, { var15 })
-	local var21 = reactModule.useCallback(function(p1, p2)
+	end, { var9 })
+	local isNotReady = var10 == "NotReady"
+	local var13 = reactModule.useCallback(function()
+		-- upvalues: var8 (ref)
+		var8.FetchMoreFriends()
+	end, { var8 })
+	local var14 = reactModule.useCallback(function(p2, p3)
 		-- upvalues: searchFriendsAsyncModule (copy)
-		return searchFriendsAsyncModule(p1, p2, 20)
+		return searchFriendsAsyncModule(p2, p3, 20)
 	end, {})
-	local var22 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var10 (ref), universeId (ref), sendBuildExperienceEventModule (copy), onInvitesSent (ref)
-		return var10.sendInvites(universeId, p3, p4):andThen(function()
-			-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy), p3 (ref), onInvitesSent (copy)
-			sendBuildExperienceEventModule("PLAYTESTERS_ADDED", { universeId = universeId }, { count = tostring(#p3) })
+	local var15 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var3 (ref), universeId (ref), sendBuildExperienceEventModule (copy), onInvitesSent (ref)
+		return var3.sendInvites(universeId, p2, p3):andThen(function()
+			-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy), p2 (ref), onInvitesSent (copy)
+			sendBuildExperienceEventModule("PLAYTESTERS_ADDED", { universeId = universeId }, { count = tostring(#p2) })
 			onInvitesSent()
-		end):catch(function(p5)
-			-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy), p3 (ref)
-			sendBuildExperienceEventModule("PLAYTESTERS_ADD_FAILED", { universeId = universeId }, { count = tostring(#p3) })
-			error(p5)
+		end):catch(function(p4)
+			-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy), p2 (ref)
+			sendBuildExperienceEventModule("PLAYTESTERS_ADD_FAILED", { universeId = universeId }, { count = tostring(#p2) })
+			error(p4)
 		end)
-	end, { var10, universeId, onInvitesSent })
-	local var23 = useUserPickerModule(reactModule.useMemo(function()
-		-- upvalues: var18 (ref), isNotReady (ref), var20 (ref), var21 (ref), var22 (ref), var13 (ref), var14 (ref)
+	end, { var3, universeId, onInvitesSent })
+	local var16 = useUserPickerModule(reactModule.useMemo(function()
+		-- upvalues: var11 (ref), isNotReady (ref), var13 (ref), var14 (ref), var15 (ref), var6 (ref), var7 (ref)
 		return {
-			browseIds = var18,
+			browseIds = var11,
 			browseIsLoading = isNotReady,
-			loadMoreBrowse = var20,
-			onSearch = var21,
-			onSubmit = var22,
-			selectionLimit = var13,
-			excludeUserIds = var14
+			loadMoreBrowse = var13,
+			onSearch = var14,
+			onSubmit = var15,
+			selectionLimit = var6,
+			excludeUserIds = var7
 		}
 	end, {
-		var18, isNotReady, var20, var21, var22, var13, var14
+		var11, isNotReady, var13, var14, var15, var6, var7
 	}))
-	local var24, var25 = reactModule.useState(true)
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: var25 (ref)
-		var25(false)
+	local var17, var18 = reactModule.useState(true)
+	local var19 = reactModule.useCallback(function()
+		-- upvalues: var18 (ref)
+		var18(false)
 	end, {})
-	local var27, var28 = reactModule.useState(nil)
-	local var29 = reactModule.useCallback(function(p6)
-		-- upvalues: var28 (ref)
-		var28(p6)
+	local var20, var21 = reactModule.useState(nil)
+	local var22 = reactModule.useCallback(function(p2)
+		-- upvalues: var21 (ref)
+		var21(p2)
 	end, {})
-	local loadMore = var23.loadMore
+	local loadMore = var16.loadMore
 	reactModule.useEffect(function()
-		-- upvalues: var27 (ref), loadMore (ref)
-		if var27 == nil then return end
+		-- upvalues: var20 (ref), loadMore (ref)
+		if var20 == nil then return end
 		local function maybeLoadMore()
-			-- upvalues: var27 (ref), loadMore (copy)
-			if var27.AbsoluteCanvasSize.Y > 0 and var27.AbsoluteCanvasSize.Y - (var27.CanvasPosition.Y + var27.AbsoluteWindowSize.Y) <= 240 then
+			-- upvalues: var20 (ref), loadMore (copy)
+			if var20.AbsoluteCanvasSize.Y > 0 and var20.AbsoluteCanvasSize.Y - (var20.CanvasPosition.Y + var20.AbsoluteWindowSize.Y) <= 240 then
 				loadMore()
 			end
 		end
 		
-		local var34 = var27:GetPropertyChangedSignal("CanvasPosition"):Connect(maybeLoadMore)
-		local var35 = var27:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(maybeLoadMore)
-		local var36 = var27:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(maybeLoadMore)
+		local var23 = var20:GetPropertyChangedSignal("CanvasPosition"):Connect(maybeLoadMore)
+		local var24 = var20:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(maybeLoadMore)
+		local var25 = var20:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(maybeLoadMore)
 		
-		if var27.AbsoluteCanvasSize.Y > 0 and var27.AbsoluteCanvasSize.Y - (var27.CanvasPosition.Y + var27.AbsoluteWindowSize.Y) <= 240 then
+		if var20.AbsoluteCanvasSize.Y > 0 and var20.AbsoluteCanvasSize.Y - (var20.CanvasPosition.Y + var20.AbsoluteWindowSize.Y) <= 240 then
 			loadMore()
 		end
 		return function()
-			-- upvalues: var34 (ref), var35 (ref), var36 (ref)
-			var34:Disconnect()
-			var35:Disconnect()
-			var36:Disconnect()
+			-- upvalues: var23 (ref), var24 (ref), var25 (ref)
+			var23:Disconnect()
+			var24:Disconnect()
+			var25:Disconnect()
 		end
-	end, { var27, loadMore })
+	end, { var20, loadMore })
 	
 	return {
-		isOpen = var24,
-		onClose = p0.onClose,
-		onRequestClose = var26,
-		scrollingFrameRef = var29,
-		searchText = var23.searchText,
-		setSearchText = var23.setSearchText,
+		isOpen = var17,
+		onClose = p1.onClose,
+		onRequestClose = var19,
+		scrollingFrameRef = var22,
+		searchText = var16.searchText,
+		setSearchText = var16.setSearchText,
 		searchPlaceholder = PRIVATE_INVITES_SEARCH_PLACEHOLDER,
-		userIds = var23.userIds,
-		isLoading = var23.isLoading,
-		emptyText = if var17 == "Failed" then PRIVATE_INVITES_FRIENDS_LOAD_ERROR elseif #var18 > 0 then PRIVATE_INVITES_ALL_FRIENDS_ADDED else PRIVATE_INVITES_NO_FRIENDS,
-		isSelected = var23.isSelected,
-		canSelect = var23.canSelect,
-		toggleSelected = var23.toggleSelected,
-		hasSelection = var23.hasSelection,
-		submit = var23.submit,
-		isSubmitting = var23.isSubmitting,
-		sendButtonText = if var23.selectedCount > 1 then PRIVATE_INVITES_ADD_PLAYTESTERS else PRIVATE_INVITES_ADD_PLAYTESTER,
-		testId = p0.testId
+		userIds = var16.userIds,
+		isLoading = var16.isLoading,
+		emptyText = if var10 == "Failed" then PRIVATE_INVITES_FRIENDS_LOAD_ERROR elseif #var11 > 0 then PRIVATE_INVITES_ALL_FRIENDS_ADDED else PRIVATE_INVITES_NO_FRIENDS,
+		isSelected = var16.isSelected,
+		canSelect = var16.canSelect,
+		toggleSelected = var16.toggleSelected,
+		hasSelection = var16.hasSelection,
+		submit = var16.submit,
+		isSubmitting = var16.isSubmitting,
+		sendButtonText = if var16.selectedCount > 1 then PRIVATE_INVITES_ADD_PLAYTESTERS else PRIVATE_INVITES_ADD_PLAYTESTER,
+		testId = p1.testId
 	}
 end

@@ -11,12 +11,12 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: errorSourceStringsModule (ref)
-		local measureMeshWatertight = p1.aqsSummaryData.Measure_Mesh_Watertight
+		local measureMeshWatertight = p2.aqsSummaryData.Measure_Mesh_Watertight
 		
 		if measureMeshWatertight == nil then
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Mesh_Watertight" })
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Mesh_Watertight" })
 			
 			return
 		end
@@ -26,13 +26,13 @@ return {
 			if i ~= "measurement_score" then
 				if v ~= nil and v.boundary_edges_percent ~= nil then
 					if not t[i] and (tonumber(v.boundary_edges_percent) or 0) > 0 then
-						p0:warn(errorSourceStringsModule.Keys.AQSWarn_MeshNotWatertight, {
+						p1:warn(errorSourceStringsModule.Keys.AQSWarn_MeshNotWatertight, {
 							partName = i,
 							boundary_edges_percent = string.format("%.2f", (tonumber(v.boundary_edges_percent) or 0) * 100)
 						})
 					end
 				end
-				p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Mesh_Watertight" })
+				p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Mesh_Watertight" })
 				
 				return
 			end

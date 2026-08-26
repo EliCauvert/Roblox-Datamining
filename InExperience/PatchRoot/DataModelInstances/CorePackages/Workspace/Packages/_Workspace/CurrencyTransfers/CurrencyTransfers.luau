@@ -10,8 +10,8 @@
 	},
 	GetFFlagCurrencyTransferUseRoactNetworking = require(script.Flags.GetFFlagCurrencyTransferUseRoactNetworking),
 	IncomingTransferHomepagePromptDismiss = {
-		createCallbacks = function(p0)
-			return require(script.Utils.IncomingTransferHomepagePromptDismiss).createCallbacks(p0)
+		createCallbacks = function(p1)
+			return require(script.Utils.IncomingTransferHomepagePromptDismiss).createCallbacks(p1)
 		end
 	},
 	getSduiEconomyRegister = function()

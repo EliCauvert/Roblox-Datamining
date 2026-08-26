@@ -1,38 +1,38 @@
-﻿local var0 = newproxy(false)
+﻿local var1 = newproxy(false)
 
-return function(p0)
-	-- upvalues: var0 (ref)
+return function(p1)
+	-- upvalues: var1 (ref)
 	return {
-		setInterval = function(value, p1, ...)
-			-- upvalues: var0 (copy), p0 (ref)
+		setInterval = function(value, p2, ...)
+			-- upvalues: var1 (copy), p1 (ref)
 			local list = { ... }
-			local t = { [var0] = 1 }
+			local t = { [var1] = 1 }
 			
-			if p1 == nil then
-				p1 = 0
+			if p2 == nil then
+				p2 = 0
 			end
-			local var3 = p1 / 1000
+			local var2 = p2 / 1000
 			local _ = nil
 			
-			local var4 = function()
-				-- upvalues: p0 (copy), var3 (ref), t (ref), var0 (copy), value (ref), list (ref), var4 (write)
-				p0(var3, function()
-					-- upvalues: t (copy), var0 (copy), value (copy), list (copy), var4 (copy)
-					if t[var0] == 1 then
+			local var3 = function()
+				-- upvalues: p1 (copy), var2 (ref), t (ref), var1 (copy), value (ref), list (ref), var3 (write)
+				p1(var2, function()
+					-- upvalues: t (copy), var1 (copy), value (copy), list (copy), var3 (copy)
+					if t[var1] == 1 then
 						value(unpack(list))
-						var4()
+						var3()
 					end
 				end)
 			end
 			
-			var4()
+			var3()
 			
 			return t
 		end,
 		clearInterval = function(p2)
-			-- upvalues: var0 (copy)
-			if p2[var0] == 1 then
-				p2[var0] = 3
+			-- upvalues: var1 (copy)
+			if p2[var1] == 1 then
+				p2[var1] = 3
 			end
 		end
 	}

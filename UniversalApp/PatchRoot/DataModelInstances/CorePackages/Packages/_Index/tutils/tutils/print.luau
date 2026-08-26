@@ -1,51 +1,51 @@
-﻿return function(p0)
-	local function _(p1)
-		return if type(p1) == "string" then string.format("%s", p1) else string.format("[%s]", tostring(p1))
+﻿return function(p1)
+	local function _(p2)
+		return if type(p2) == "string" then string.format("%s", p2) else string.format("[%s]", tostring(p2))
 	end
 	
 	local function makeValueString(p2)
-		local var2 = type(p2)
+		local var1 = type(p2)
 		
-		return if var2 == "string" then string.format("%q", p2) elseif var2 == "function" or var2 == "table" then string.format("<%s>", tostring(p2)) else string.format("%s", tostring(p2))
+		return if var1 == "string" then string.format("%q", p2) elseif var1 == "function" or var1 == "table" then string.format("<%s>", tostring(p2)) else string.format("%s", tostring(p2))
 	end
 	
-	local function printKeypair(p3, p4, p5, p6)
-		-- upvalues: makeValueString (ref), p0 (ref)
-		p0(string.format("%s%s = %s,%s", p5, if type(p3) == "string" then string.format("%s", p3) else string.format("[%s]", tostring(p3)), makeValueString(p4), p6 and string.format(" -- %s", p6) or ""))
+	local function printKeypair(p2, p3, p4, p5)
+		-- upvalues: makeValueString (ref), p1 (ref)
+		p1(string.format("%s%s = %s,%s", p4, if type(p2) == "string" then string.format("%s", p2) else string.format("[%s]", tostring(p2)), makeValueString(p3), p5 and string.format(" -- %s", p5) or ""))
 	end
 	
-	return function(p7, p8)
-		-- upvalues: p0 (ref), makeValueString (ref), printKeypair (ref)
-		p8 = p8 or "  "
+	return function(p2, p3)
+		-- upvalues: p1 (ref), makeValueString (ref), printKeypair (ref)
+		p3 = p3 or "  "
 		
-		if type(p7) ~= "table" then
+		if type(p2) ~= "table" then
 			error("tutils.Print must be passed a table", 2)
 		end
 		local t = {}
 		
-		local function recurse(p9, p10, p11)
-			-- upvalues: t (ref), p8 (write), p0 (copy), makeValueString (copy), printKeypair (copy), recurse (ref)
-			t[p9] = true
-			local repeated = string.rep(p8, p11)
-			local repeated_1 = string.rep(p8, p11 + 1)
+		local function recurse(p4, p5, p6)
+			-- upvalues: t (ref), p3 (write), p1 (copy), makeValueString (copy), printKeypair (copy), recurse (ref)
+			t[p4] = true
+			local repeated = string.rep(p3, p6)
+			local repeated_1 = string.rep(p3, p6 + 1)
 			
-			if p10 then
-				p0(string.format("%s%s = %s {", repeated, if type(p10) == "string" then string.format("%s", p10) else string.format("[%s]", tostring(p10)), makeValueString(p9)))
+			if p5 then
+				p1(string.format("%s%s = %s {", repeated, if type(p5) == "string" then string.format("%s", p5) else string.format("[%s]", tostring(p5)), makeValueString(p4)))
 			else
-				p0(string.format("%s%s {", repeated, makeValueString(p9)))
+				p1(string.format("%s%s {", repeated, makeValueString(p4)))
 			end
-			for i, v in pairs(p9) do
+			for i, v in pairs(p4) do
 				if type(v) ~= "table" then
-					p0(string.format("%s%s = %s,%s", repeated_1, if type(i) == "string" then string.format("%s", i) else string.format("[%s]", tostring(i)), makeValueString(v), ""))
+					p1(string.format("%s%s = %s,%s", repeated_1, if type(i) == "string" then string.format("%s", i) else string.format("[%s]", tostring(i)), makeValueString(v), ""))
 				elseif t[v] then
 					printKeypair(i, v, repeated_1, "Possible cycle")
 				else
-					recurse(v, i, p11 + 1)
+					recurse(v, i, p6 + 1)
 				end
 			end
-			p0(string.format("%s}%s", repeated, if p11 > 0 then "," else ""))
+			p1(string.format("%s}%s", repeated, if p6 > 0 then "," else ""))
 		end
 		
-		recurse(p7, nil, 0)
+		recurse(p2, nil, 0)
 	end
 end

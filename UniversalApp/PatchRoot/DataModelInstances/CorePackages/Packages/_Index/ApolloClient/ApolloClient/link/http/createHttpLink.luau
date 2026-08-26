@@ -19,19 +19,19 @@ local createSignalIfSupported = require(script.Parent.createSignalIfSupported).c
 local rewriteURIForGET = require(script.Parent.rewriteURIForGET).rewriteURIForGET
 local fromError = require(script.Parent.Parent.utils).fromError
 
-function t.createHttpLink(p0)
+function t.createHttpLink(p1)
 	-- upvalues: object (ref), checkFetcher (ref), boolean (ref), apolloLink (ref), selectURI (ref), selectHttpOptionsAndBody (ref), fallbackHttpConfig (ref), set (ref), visit (ref), createSignalIfSupported (ref), array (ref), rewriteURIForGET (ref), fromError (ref), serializeFetchParameter (ref), observable (ref), parseAndCheckHttpResponse (ref)
-	local var3 = p0
+	local var1 = p1
 	
-	if var3 == nil then
-		var3 = {}
+	if var1 == nil then
+		var1 = {}
 	end
-	local var4 = if var3.uri ~= nil then var3.uri else "/graphql"
-	local fetch = var3.fetch
-	local includeExtensions = var3.includeExtensions
-	local useGETForQueries = var3.useGETForQueries
-	local var5 = var3.includeUnusedVariables ~= nil and var3.includeUnusedVariables
-	local var6 = object.assign({}, var3, {
+	local var2 = if var1.uri ~= nil then var1.uri else "/graphql"
+	local fetch = var1.fetch
+	local includeExtensions = var1.includeExtensions
+	local useGETForQueries = var1.useGETForQueries
+	local var3 = var1.includeUnusedVariables ~= nil and var1.includeUnusedVariables
+	local var4 = object.assign({}, var1, {
 		uri = object.None,
 		fetch = object.None,
 		includeExtensions = object.None,
@@ -45,15 +45,15 @@ function t.createHttpLink(p0)
 	end
 	local t = {
 		http = { includeExtensions = includeExtensions },
-		options = var6.fetchOptions,
-		credentials = var6.credentials,
-		headers = var6.headers
+		options = var4.fetchOptions,
+		credentials = var4.credentials,
+		headers = var4.headers
 	}
 	
-	return apolloLink.new(function(_, p1)
-		-- upvalues: selectURI (copy), var4 (ref), boolean (copy), object (copy), selectHttpOptionsAndBody (copy), fallbackHttpConfig (copy), t (ref), var5 (ref), set (copy), visit (copy), createSignalIfSupported (copy), useGETForQueries (ref), array (copy), rewriteURIForGET (copy), fromError (copy), serializeFetchParameter (copy), observable (copy), fetch (write), parseAndCheckHttpResponse (copy)
-		local var8 = selectURI(p1, var4)
-		local context = p1:getContext()
+	return apolloLink.new(function(_, p2)
+		-- upvalues: selectURI (copy), var2 (ref), boolean (copy), object (copy), selectHttpOptionsAndBody (copy), fallbackHttpConfig (copy), t (ref), var3 (ref), set (copy), visit (copy), createSignalIfSupported (copy), useGETForQueries (ref), array (copy), rewriteURIForGET (copy), fromError (copy), serializeFetchParameter (copy), observable (copy), fetch (write), parseAndCheckHttpResponse (copy)
+		local var5 = selectURI(p2, var2)
+		local context = p2:getContext()
 		local t_1 = {}
 		
 		if boolean.toJSBoolean(context.clientAwareness) then
@@ -67,54 +67,54 @@ function t.createHttpLink(p0)
 				t_1["apollographql-client-version"] = version
 			end
 		end
-		local var11 = selectHttpOptionsAndBody(p1, fallbackHttpConfig, t, {
+		local var6 = selectHttpOptionsAndBody(p2, fallbackHttpConfig, t, {
 			http = context.http,
 			options = context.fetchOptions,
 			credentials = context.credentials,
 			headers = object.assign({}, t_1, context.headers)
 		})
-		local options = var11.options
-		local body = var11.body
+		local options = var6.options
+		local body = var6.body
 		
-		if body.variables ~= nil and not var5 then
-			local var12 = set.new(object.keys(body.variables))
-			visit(p1.query, {
-				Variable = function(_, p2, _, p3)
-					-- upvalues: boolean (copy), var12 (ref)
-					if boolean.toJSBoolean(p3) and p3.kind ~= "VariableDefinition" then
-						var12:delete(p2.name.value)
+		if body.variables ~= nil and not var3 then
+			local var7 = set.new(object.keys(body.variables))
+			visit(p2.query, {
+				Variable = function(_, p3, _, p4)
+					-- upvalues: boolean (copy), var7 (ref)
+					if boolean.toJSBoolean(p4) and p4.kind ~= "VariableDefinition" then
+						var7:delete(p3.name.value)
 					end
 				end
 			})
 			
-			if boolean.toJSBoolean(var12.size) then
+			if boolean.toJSBoolean(var7.size) then
 				body.variables = object.assign({}, body.variables)
-				var12:forEach(function(p4)
+				var7:forEach(function(p3)
 					-- upvalues: body (ref)
-					body.variables[p4] = nil
+					body.variables[p3] = nil
 				end)
 			end
 		end
 		local controller = nil
 		
 		if not boolean.toJSBoolean(options.signal) then
-			local var13 = createSignalIfSupported()
-			local signal = var13.signal
-			controller = var13.controller
+			local var8 = createSignalIfSupported()
+			local signal = var8.signal
+			controller = var8.controller
 			
 			if boolean.toJSBoolean(controller) then
 				options.signal = signal
 			end
 		end
-		if boolean.toJSBoolean(useGETForQueries) and not array.some(p1.query.definitions, function(p5)
-			return p5.kind == "OperationDefinition" and p5.operation == "mutation"
+		if boolean.toJSBoolean(useGETForQueries) and not array.some(p2.query.definitions, function(p3)
+			return p3.kind == "OperationDefinition" and p3.operation == "mutation"
 		end) then
 			options.method = "GET"
 		end
 		if options.method == "GET" then
-			local var14 = rewriteURIForGET(var8, body)
-			local newURI = var14.newURI
-			local parseError = var14.parseError
+			local var9 = rewriteURIForGET(var5, body)
+			local newURI = var9.newURI
+			local parseError = var9.parseError
 			
 			if boolean.toJSBoolean(parseError) then
 				return fromError(parseError)
@@ -125,26 +125,26 @@ function t.createHttpLink(p0)
 				options.body = serializeFetchParameter(body, "Payload")
 			end)
 			
-			return if ok then observable.new(function(p6)
-				-- upvalues: fetch (copy), var8 (write), options (ref), p1 (ref), parseAndCheckHttpResponse (copy), boolean (copy), controller (write)
-				fetch(var8, options):andThen(function(p9)
-					-- upvalues: p1 (copy)
-					p1:setContext({ response = p9 })
+			return if ok then observable.new(function(p3)
+				-- upvalues: fetch (copy), var5 (write), options (ref), p2 (ref), parseAndCheckHttpResponse (copy), boolean (copy), controller (write)
+				fetch(var5, options):andThen(function(p4)
+					-- upvalues: p2 (copy)
+					p2:setContext({ response = p4 })
 					
-					return p9
-				end):andThen(parseAndCheckHttpResponse(p1)):andThen(function(p8)
-					-- upvalues: p6 (ref)
-					p6:next(p8)
-					p6:complete()
+					return p4
+				end):andThen(parseAndCheckHttpResponse(p2)):andThen(function(p4)
+					-- upvalues: p3 (ref)
+					p3:next(p4)
+					p3:complete()
 					
-					return p8
-				end):catch(function(p7)
-					-- upvalues: boolean (copy), p6 (ref)
-					if p7.name == "AbortError" then return end
-					if boolean.toJSBoolean(p7.result) and boolean.toJSBoolean(p7.result.errors) and boolean.toJSBoolean(p7.result.data) then
-						p6:next(p7.result)
+					return p4
+				end):catch(function(p4)
+					-- upvalues: boolean (copy), p3 (ref)
+					if p4.name == "AbortError" then return end
+					if boolean.toJSBoolean(p4.result) and boolean.toJSBoolean(p4.result.errors) and boolean.toJSBoolean(p4.result.data) then
+						p3:next(p4.result)
 					end
-					p6:error(p7)
+					p3:error(p4)
 				end)
 				
 				return function()
@@ -155,7 +155,7 @@ function t.createHttpLink(p0)
 				end
 			end) else fromError(status)
 		end
-		var8 = newURI
+		var5 = newURI
 	end)
 end
 

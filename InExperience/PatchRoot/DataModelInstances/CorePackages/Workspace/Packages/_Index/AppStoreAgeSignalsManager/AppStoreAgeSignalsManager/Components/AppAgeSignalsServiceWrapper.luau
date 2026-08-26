@@ -33,21 +33,21 @@ return {
 	end,
 	getAppAgeSignalsAsync = function()
 		-- upvalues: promiseModule (ref)
-		return promiseModule.new(function(p0, p1)
+		return promiseModule.new(function(p1, p2)
 			local ok, status = pcall(function()
 				return game:GetService("AppAgeSignalsService"):GetAppAgeSignalsAsync()
 			end)
 			
 			if not ok then
-				p1(status)
+				p2(status)
 				
 				return
 			elseif status.Error and status.Error ~= "" then
-				p1(status.Error)
+				p2(status.Error)
 				
 				return
 			end
-			p0(status.PlatformPayload)
+			p1(status.PlatformPayload)
 		end)
 	end
 }

@@ -3,14 +3,14 @@ local experimentCacheManager = require(parent.ExperimentCacheManager).Experiment
 local luaAppGameTileMigrationExpLayer = game:DefineFastString("LuaAppGameTileMigrationExpLayer", "PlayerApp.HomePage.UX.TileLayer")
 local fFlagLuaAppUnifyPlayButtonTileIxp = require(parent.SharedFlags).FFlagLuaAppUnifyPlayButtonTileIxp
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: luaAppGameTileMigrationExpLayer (ref), experimentCacheManager (ref)
 	local var1 = experimentCacheManager.default:getLayerVariables(luaAppGameTileMigrationExpLayer, true)
 	
-	if var1 and var1[p0] ~= nil then
+	if var1 and var1[p1] ~= nil then
 		experimentCacheManager.default:sendCustomExposureLog(luaAppGameTileMigrationExpLayer)
 		
-		return var1[p0]
+		return var1[p1]
 	end
 	return false
 end
@@ -18,23 +18,23 @@ end
 return {
 	getIsTileMigrationEnabled = function()
 		-- upvalues: luaAppGameTileMigrationExpLayer (ref), experimentCacheManager (ref)
-		local var2 = experimentCacheManager.default:getLayerVariables(luaAppGameTileMigrationExpLayer, true)
+		local var1 = experimentCacheManager.default:getLayerVariables(luaAppGameTileMigrationExpLayer, true)
 		
-		if var2 and var2.IsTileMigrationEnabled ~= nil then
+		if var1 and var1.IsTileMigrationEnabled ~= nil then
 			experimentCacheManager.default:sendCustomExposureLog(luaAppGameTileMigrationExpLayer)
 			
-			return var2.IsTileMigrationEnabled
+			return var1.IsTileMigrationEnabled
 		end
 		return false
 	end,
 	getIsPlayButtonMigrationEnabled = if fFlagLuaAppUnifyPlayButtonTileIxp then if fFlagLuaAppUnifyPlayButtonTileIxp then function()
 		-- upvalues: luaAppGameTileMigrationExpLayer (ref), experimentCacheManager (ref)
-		local var3 = experimentCacheManager.default:getLayerVariables(luaAppGameTileMigrationExpLayer, true)
+		local var1 = experimentCacheManager.default:getLayerVariables(luaAppGameTileMigrationExpLayer, true)
 		
-		if var3 and var3.IsPlayButtonMigrationEnabled ~= nil then
+		if var1 and var1.IsPlayButtonMigrationEnabled ~= nil then
 			experimentCacheManager.default:sendCustomExposureLog(luaAppGameTileMigrationExpLayer)
 			
-			return var3.IsPlayButtonMigrationEnabled
+			return var1.IsPlayButtonMigrationEnabled
 		end
 		return false
 	end else nil else nil

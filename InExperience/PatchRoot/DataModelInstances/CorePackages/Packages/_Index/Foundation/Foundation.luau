@@ -83,7 +83,7 @@ local coachmarkModule = require(script.Components.Coachmark)
 local educationalTooltipModule = require(script.Components.EducationalTooltip)
 local chipModule = require(script.Components.Chip)
 local _ = require(script.Components.AlertActions)
-local var79 = strictModule({
+local var1 = strictModule({
 	Accordion = accordionModule,
 	Avatar = avatarModule,
 	AvatarGroup = avatarGroupModule,
@@ -274,9 +274,9 @@ local var79 = strictModule({
 
 if _G.__FOUNDATION_TRACK_USAGE__ then
 	local usageTrackerModule = require(script.Parent.UsageTracker)
-	var79 = usageTrackerModule.trackMemberAccess("Foundation", var79, usageTrackerModule.isReactComponent)
+	var1 = usageTrackerModule.trackMemberAccess("Foundation", var1, usageTrackerModule.isReactComponent)
 end
 if _G.__FOUNDATION_TRACE_LOG__ then
 	require(script.Utility.Logger):enableTraceLog()
 end
-return var79
+return var1

@@ -21,22 +21,22 @@ sliderTextInput.validateProps = tModule.strictInterface({
 })
 sliderTextInput.defaultProps = { disabled = false }
 
-function sliderTextInput.init(p0)
+function sliderTextInput.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.textBoxRef = roactModule.createRef()
+	p1.textBoxRef = roactModule.createRef()
 end
 
 function sliderTextInput.render(p1)
 	-- upvalues: withStyleModule (ref), divideTransparencyModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), eventConnection (ref), userInputService (ref)
 	return withStyleModule(function(p2)
 		-- upvalues: p1 (ref), divideTransparencyModule (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), eventConnection (copy), userInputService (copy)
-		local var8 = if p1.props.disabled then 2 else 1
+		local var1 = if p1.props.disabled then 2 else 1
 		
 		return roactModule.createElement(imageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
 			Image = imagesModule["component_assets/circle_16"],
 			ImageColor3 = p2.Theme.BackgroundUIContrast.Color,
-			ImageTransparency = divideTransparencyModule(p2.Theme.BackgroundUIContrast.Transparency, var8),
+			ImageTransparency = divideTransparencyModule(p2.Theme.BackgroundUIContrast.Transparency, var1),
 			Position = p1.props.position,
 			AnchorPoint = p1.props.anchorPoint,
 			ScaleType = Enum.ScaleType.Slice,
@@ -48,7 +48,7 @@ function sliderTextInput.render(p1)
 				BackgroundTransparency = 1,
 				Image = imagesModule["component_assets/circle_17_stroke_1"],
 				ImageColor3 = p2.Theme.Divider.Color,
-				ImageTransparency = divideTransparencyModule(p2.Theme.Divider.Transparency, var8),
+				ImageTransparency = divideTransparencyModule(p2.Theme.Divider.Transparency, var1),
 				ScaleType = Enum.ScaleType.Slice,
 				Size = UDim2.fromScale(1, 1),
 				SliceCenter = Rect.new(8, 8, 8, 8)
@@ -60,7 +60,7 @@ function sliderTextInput.render(p1)
 				Font = p2.Font.Body.Font,
 				TextSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize,
 				TextColor3 = p2.Theme.TextDefault.Color,
-				TextTransparency = divideTransparencyModule(p2.Theme.TextDefault.Transparency, var8),
+				TextTransparency = divideTransparencyModule(p2.Theme.TextDefault.Transparency, var1),
 				Size = UDim2.fromScale(1, 1),
 				Text = tostring(p1.props.value),
 				TextScaled = true,
@@ -69,16 +69,16 @@ function sliderTextInput.render(p1)
 				[roactModule.Event.Focused] = if p1.props.disabled then function(p3)
 					p3:ReleaseFocus()
 				end else nil,
-				[roactModule.Event.FocusLost] = function(p4, _)
+				[roactModule.Event.FocusLost] = function(p3, _)
 					-- upvalues: p1 (copy)
-					local var9 = tonumber(p4.Text)
+					local var2 = tonumber(p3.Text)
 					
-					if var9 == nil then
-						p4.Text = tostring(p1.props.value)
+					if var2 == nil then
+						p3.Text = tostring(p1.props.value)
 						
 						return
 					end
-					p1.props.onValueChanged(math.clamp(math.floor(var9 / p1.props.stepInterval + 0.5) * p1.props.stepInterval, p1.props.min, p1.props.max))
+					p1.props.onValueChanged(math.clamp(math.floor(var2 / p1.props.stepInterval + 0.5) * p1.props.stepInterval, p1.props.min, p1.props.max))
 				end
 			}, {
 				TextSizeConstraint = roactModule.createElement("UITextSizeConstraint", {
@@ -88,22 +88,22 @@ function sliderTextInput.render(p1)
 			}),
 			UserInputConnection = not p1.props.disabled and roactModule.createElement(eventConnection, {
 				event = userInputService.InputBegan,
-				callback = function(p5, _)
+				callback = function(p3, _)
 					-- upvalues: userInputService (copy), p1 (copy)
-					if p5.UserInputType ~= Enum.UserInputType.Keyboard then return end
+					if p3.UserInputType ~= Enum.UserInputType.Keyboard then return end
 					if userInputService:GetFocusedTextBox() ~= p1.textBoxRef.current then return end
-					local var10 = 0
+					local var2 = 0
 					
-					if p5.KeyCode == Enum.KeyCode.Up then
-						var10 = 1
-					elseif p5.KeyCode == Enum.KeyCode.Down then
-						var10 = -1
+					if p3.KeyCode == Enum.KeyCode.Up then
+						var2 = 1
+					elseif p3.KeyCode == Enum.KeyCode.Down then
+						var2 = -1
 					end
 					if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) or userInputService:IsKeyDown(Enum.KeyCode.RightShift) then
-						var10 *= 10
+						var2 *= 10
 					end
-					if var10 ~= 0 then
-						local clampedValue = math.clamp(math.floor((p1.props.value + p1.props.stepInterval * var10) / p1.props.stepInterval + 0.5) * p1.props.stepInterval, p1.props.min, p1.props.max)
+					if var2 ~= 0 then
+						local clampedValue = math.clamp(math.floor((p1.props.value + p1.props.stepInterval * var2) / p1.props.stepInterval + 0.5) * p1.props.stepInterval, p1.props.min, p1.props.max)
 						
 						if clampedValue ~= p1.props.value then
 							p1.props.onValueChanged(clampedValue)
@@ -115,10 +115,10 @@ function sliderTextInput.render(p1)
 	end)
 end
 
-function sliderTextInput.didMount(p6)
+function sliderTextInput.didMount(p1)
 	pcall(function()
-		-- upvalues: p6 (ref)
-		p6.textBoxRef.current.TextInputType = Enum.TextInputType.Number
+		-- upvalues: p1 (ref)
+		p1.textBoxRef.current.TextInputType = Enum.TextInputType.Number
 	end)
 end
 

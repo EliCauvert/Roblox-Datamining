@@ -6,14 +6,14 @@ local createMakePrimaryGroupModule = require(networkRequests.createMakePrimaryGr
 local createRemovePrimaryGroupModule = require(networkRequests.createRemovePrimaryGroup)
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: createJoinGroupModule (ref), createCancelJoinGroupRequestModule (ref), createLeaveGroupModule (ref), createMakePrimaryGroupModule (ref), createRemovePrimaryGroupModule (ref)
 		return {
-			JoinGroup = createJoinGroupModule(p0),
-			CancelJoinGroupRequest = createCancelJoinGroupRequestModule(p0),
-			LeaveGroup = createLeaveGroupModule(p0),
-			MakePrimaryGroup = createMakePrimaryGroupModule(p0),
-			RemovePrimaryGroup = createRemovePrimaryGroupModule(p0)
+			JoinGroup = createJoinGroupModule(p1),
+			CancelJoinGroupRequest = createCancelJoinGroupRequestModule(p1),
+			LeaveGroup = createLeaveGroupModule(p1),
+			MakePrimaryGroup = createMakePrimaryGroupModule(p1),
+			RemovePrimaryGroup = createRemovePrimaryGroupModule(p1)
 		}
 	end,
 	["jest.config"] = script["jest.config"]

@@ -41,70 +41,70 @@ local fFlagSquadAppChatRTNFix = sharedFlagsModule.FFlagSquadAppChatRTNFix
 local fFlagAppChatInExpSelectChatMembersMobileHeightModule = require(appChat.Flags.FFlagAppChatInExpSelectChatMembersMobileHeight)
 local t = {}
 
-function AppChatEntryPointUA(p0)
+function AppChatEntryPointUA(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useDispatch (ref), useEarlyIsFocused (ref), fFlagAppChatInExpSelectChatMembersMobileHeightModule (ref), useAppChatIsWideModeModule (ref), useIsWideMode (ref), useNavigation (ref), useAppPolicy (ref), useState (ref), useExternalNavigationByScreenModule (ref), useRoactService (ref), appNotificationService (ref), useMemo (ref), signal (ref), useCallback (ref), setTabBarVisibleFromChat (ref), useSelector (ref), fFlagAppChatRemoveToggleChatPaused (ref), useEffect (ref), toggleChatPausedModule (ref), reactModule (ref), fullscreenPageWithSafeArea (ref), appChatEntryPointModule (ref), containerModule (ref), chatEventReceiverModule (ref), fFlagSquadAppChatRTNFix (ref), squadAppChatEventReceiver (ref)
-	local var22 = cryoModule.Dictionary.join(t, p0)
-	local var23 = useStyle()
-	local var24 = useDispatch()
-	local var25 = useEarlyIsFocused()
-	local var26 = if fFlagAppChatInExpSelectChatMembersMobileHeightModule then useAppChatIsWideModeModule(false) else useIsWideMode()
-	local var27 = useNavigation()
-	local var28 = useAppPolicy(function(p1)
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = useStyle()
+	local var3 = useDispatch()
+	local var4 = useEarlyIsFocused()
+	local var5 = if fFlagAppChatInExpSelectChatMembersMobileHeightModule then useAppChatIsWideModeModule(false) else useIsWideMode()
+	local var6 = useNavigation()
+	local var7 = useAppPolicy(function(p2)
 		return {
-			shouldSystemBarUsuallyBePresent = p1.getShouldSystemBarUsuallyBePresent()
+			shouldSystemBarUsuallyBePresent = p2.getShouldSystemBarUsuallyBePresent()
 		}
 	end)
-	local var29, var30 = useState(0)
-	local var31, var32 = useExternalNavigationByScreenModule()
-	local var33 = useRoactService(appNotificationService)
-	local var34 = useMemo(function()
+	local var8, var9 = useState(0)
+	local var10, var11 = useExternalNavigationByScreenModule()
+	local var12 = useRoactService(appNotificationService)
+	local var13 = useMemo(function()
 		-- upvalues: signal (copy)
 		return signal.new()
 	end)
-	local var35 = useMemo(function()
-		-- upvalues: var22 (ref), var33 (ref)
-		return var22.RobloxEventReceiver.new(var33)
+	local var14 = useMemo(function()
+		-- upvalues: var1 (ref), var12 (ref)
+		return var1.RobloxEventReceiver.new(var12)
 	end)
-	local var36 = useCallback(function(p2)
-		-- upvalues: var24 (ref), setTabBarVisibleFromChat (copy), var28 (ref)
-		var24(setTabBarVisibleFromChat(p2 or var28.shouldSystemBarUsuallyBePresent))
-	end, { var24, var28.shouldSystemBarUsuallyBePresent })
-	local var37 = useMemo(function()
+	local var15 = useCallback(function(p2)
+		-- upvalues: var3 (ref), setTabBarVisibleFromChat (copy), var7 (ref)
+		var3(setTabBarVisibleFromChat(p2 or var7.shouldSystemBarUsuallyBePresent))
+	end, { var3, var7.shouldSystemBarUsuallyBePresent })
+	local var16 = useMemo(function()
 		return {}
 	end)
-	local var38 = useSelector(function(p3)
-		return p3.NotificationBadgeCounts.TopBarNotificationIcon
+	local var17 = useSelector(function(p2)
+		return p2.NotificationBadgeCounts.TopBarNotificationIcon
 	end)
 	
 	if not fFlagAppChatRemoveToggleChatPaused then
 		useEffect(function()
-			-- upvalues: var24 (ref), toggleChatPausedModule (copy), var25 (ref)
-			var24(toggleChatPausedModule(not var25))
-		end, { var25, var24 })
+			-- upvalues: var3 (ref), toggleChatPausedModule (copy), var4 (ref)
+			var3(toggleChatPausedModule(not var4))
+		end, { var4, var3 })
 	end
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		FullscreenPageWithSafeArea = reactModule.createElement(fullscreenPageWithSafeArea, {
 			includeStatusBar = true,
-			BackgroundColor3 = var23.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = var23.Theme.BackgroundDefault.Transparency
+			BackgroundColor3 = var2.Theme.BackgroundDefault.Color,
+			BackgroundTransparency = var2.Theme.BackgroundDefault.Transparency
 		}, {
 			AppChatEntryPoint = reactModule.createElement(appChatEntryPointModule, {
-				setActiveConversationId = var30,
-				updateExternalNavigationForScreen = var32,
-				navigateToLuaAppPages = var37,
-				rnBypassActionSignal = var34,
-				notificationCount = var38,
-				setTabBarVisible = var36,
-				isVisible = var25,
-				wideMode = var26,
-				navigation = var27
+				setActiveConversationId = var9,
+				updateExternalNavigationForScreen = var11,
+				navigateToLuaAppPages = var16,
+				rnBypassActionSignal = var13,
+				notificationCount = var17,
+				setTabBarVisible = var15,
+				isVisible = var4,
+				wideMode = var5,
+				navigation = var6
 			})
 		}),
-		ExternalNavigationHandler = reactModule.createElement(containerModule, { navigationByScreen = var31 }),
+		ExternalNavigationHandler = reactModule.createElement(containerModule, { navigationByScreen = var10 }),
 		ChatEventReceiver = reactModule.createElement(chatEventReceiverModule, {
-			robloxEventReceiver = var35,
-			rnBypassActionSignal = var34,
-			activeConversationId = tostring(var29)
+			robloxEventReceiver = var14,
+			rnBypassActionSignal = var13,
+			activeConversationId = tostring(var8)
 		}),
 		SquadAppChatEventReceiver = if fFlagSquadAppChatRTNFix then reactModule.createElement(squadAppChatEventReceiver) else nil
 	})

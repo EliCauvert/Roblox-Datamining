@@ -7,11 +7,11 @@ local _ = require(corePackagesService.Packages.UIBlox).App.ImageSet.Images
 local watermarkComponent = roactModule.PureComponent:extend("WatermarkComponent")
 local policyService = game:GetService("PolicyService")
 
-function watermarkComponent.init(p0)
+function watermarkComponent.init(p1)
 	-- upvalues: runService (ref), policyService (ref)
 	local function UpdateWatermarkVisibility()
-		-- upvalues: p0 (ref), runService (copy), policyService (copy)
-		p0:setState({
+		-- upvalues: p1 (ref), runService (copy), policyService (copy)
+		p1:setState({
 			watermarkVisible = not runService:IsStudio() and (policyService.IsLuobuServer == Enum.TriStateBoolean.True and policyService.LuobuWhitelisted == Enum.TriStateBoolean.False)
 		})
 	end
@@ -24,49 +24,49 @@ function watermarkComponent.init(p0)
 		-- upvalues: UpdateWatermarkVisibility (ref)
 		UpdateWatermarkVisibility()
 	end)
-	p0:setState({
+	p1:setState({
 		watermarkVisible = false,
 		absoluteSize = Vector2.new(0, 0)
 	})
 	
-	function p0.onAbsoluteSizeChange(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ absoluteSize = p1.AbsoluteSize })
+	function p0.onAbsoluteSizeChange(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ absoluteSize = p2.AbsoluteSize })
 	end
 	
 	UpdateWatermarkVisibility()
 end
 
-function watermarkComponent.render(p2)
+function watermarkComponent.render(p1)
 	-- upvalues: roactModule (ref)
 	local function _()
-		-- upvalues: p2 (ref)
-		return p2.state.absoluteSize.X * 0.968147640378 + p2.state.absoluteSize.Y * 0.250380004054
+		-- upvalues: p1 (ref)
+		return p1.state.absoluteSize.X * 0.968147640378 + p1.state.absoluteSize.Y * 0.250380004054
 	end
 	
 	local _ = function()
-		-- upvalues: p2 (ref)
-		return p2.state.absoluteSize.Y * 0.968147640378 + p2.state.absoluteSize.X * 0.250380004054
+		-- upvalues: p1 (ref)
+		return p1.state.absoluteSize.Y * 0.968147640378 + p1.state.absoluteSize.X * 0.250380004054
 	end
 	
-	return p2.state.watermarkVisible and roactModule.createElement("ScreenGui", {
+	return p1.state.watermarkVisible and roactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		AutoLocalize = false,
 		DisplayOrder = 10,
-		[roactModule.Change.AbsoluteSize] = p2.onAbsoluteSizeChange
+		[roactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChange
 	}, {
 		FullScreenFrame = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Rotation = 14.5,
-			Size = UDim2.new(0, p2.state.absoluteSize.X * 0.968147640378 + p2.state.absoluteSize.Y * 0.250380004054, 0, p2.state.absoluteSize.Y * 0.968147640378 + p2.state.absoluteSize.X * 0.250380004054),
-			Position = UDim2.new(0, (p2.state.absoluteSize.X - (p2.state.absoluteSize.X * 0.968147640378 + p2.state.absoluteSize.Y * 0.250380004054)) * 0.5, 0, (p2.state.absoluteSize.Y - (p2.state.absoluteSize.Y * 0.968147640378 + p2.state.absoluteSize.X * 0.250380004054)) * 0.5)
+			Size = UDim2.new(0, p1.state.absoluteSize.X * 0.968147640378 + p1.state.absoluteSize.Y * 0.250380004054, 0, p1.state.absoluteSize.Y * 0.968147640378 + p1.state.absoluteSize.X * 0.250380004054),
+			Position = UDim2.new(0, (p1.state.absoluteSize.X - (p1.state.absoluteSize.X * 0.968147640378 + p1.state.absoluteSize.Y * 0.250380004054)) * 0.5, 0, (p1.state.absoluteSize.Y - (p1.state.absoluteSize.Y * 0.968147640378 + p1.state.absoluteSize.X * 0.250380004054)) * 0.5)
 		}, (function()
-			-- upvalues: p2 (ref), roactModule (copy)
-			local ceiled = math.ceil((p2.state.absoluteSize.X * 0.968147640378 + p2.state.absoluteSize.Y * 0.250380004054) / 450)
+			-- upvalues: p1 (ref), roactModule (copy)
+			local ceiled = math.ceil((p1.state.absoluteSize.X * 0.968147640378 + p1.state.absoluteSize.Y * 0.250380004054) / 450)
 			local t = {}
 			
-			for i_1 = 0, math.ceil((p2.state.absoluteSize.Y * 0.968147640378 + p2.state.absoluteSize.X * 0.250380004054) / 450) - 1 do
+			for i_1 = 0, math.ceil((p1.state.absoluteSize.Y * 0.968147640378 + p1.state.absoluteSize.X * 0.250380004054) / 450) - 1 do
 				for i = 0, ceiled - 1 do
 					table.insert(t, roactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,

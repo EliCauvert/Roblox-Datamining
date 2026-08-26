@@ -14,49 +14,49 @@ local getDeviceBottomInsetModule = require(parent.Common.getDeviceBottomInset)
 local useViewportSizeModule = require(parent.Hooks.useViewportSize)
 local fFlagPlayerListTwoTabsModule = require(parent.Flags.FFlagPlayerListTwoTabs)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: useViewportSizeModule (ref), useTokens (ref), reactModule (ref), layoutValuesContextModule (ref), signalsReactModule (ref), panelContentHeightStoreModule (ref), constantsModule (ref), useScaledValue (ref), getDeviceBottomInsetModule (ref), computeMobilePanelSizeModule (ref), fFlagPlayerListTwoTabsModule (ref), computeDesktopPanelHeightModule (ref)
-	local var25, var27
-	local var11 = useViewportSizeModule()
-	local var12 = useTokens()
-	local scale = var12.Config.UI.Scale
+	local var1, var2
+	local var3 = useViewportSizeModule()
+	local var4 = useTokens()
+	local scale = var4.Config.UI.Scale
 	local topBarOffset = reactModule.useContext(layoutValuesContextModule).TopBarOffset or 0
-	local var14 = signalsReactModule.useSignalState(panelContentHeightStoreModule.getBodyContentHeight)
-	local var15 = constantsModule.HEADER_HEIGHT * scale
-	local var16 = constantsModule.COLUMN_HEADER_HEIGHT * scale
-	local var17 = constantsModule.PLATFORM_ROW_HEIGHT * scale
-	local var18 = constantsModule.ROW_PITCH * scale
-	local var19 = constantsModule.STAT_COLUMN_WIDTH * scale
-	local var20 = constantsModule.PEOPLE_MIN_WIDTH * scale
-	local size200 = var12.Size.Size_200
-	local var21 = useScaledValue(constantsModule.PANEL_SIZE_MIN_CAP)
-	local var22 = useScaledValue(constantsModule.PANEL_SIZE_MAX_CAP)
-	local var23 = if p0 then constantsModule.MOBILE_MAX_STAT_COLUMNS else constantsModule.DESKTOP_MAX_STAT_COLUMNS
-	local var24 = var20 + math.min(p1, var23) * var19
+	local var5 = signalsReactModule.useSignalState(panelContentHeightStoreModule.getBodyContentHeight)
+	local var6 = constantsModule.HEADER_HEIGHT * scale
+	local var7 = constantsModule.COLUMN_HEADER_HEIGHT * scale
+	local var8 = constantsModule.PLATFORM_ROW_HEIGHT * scale
+	local var9 = constantsModule.ROW_PITCH * scale
+	local var10 = constantsModule.STAT_COLUMN_WIDTH * scale
+	local var11 = constantsModule.PEOPLE_MIN_WIDTH * scale
+	local size200 = var4.Size.Size_200
+	local var12 = useScaledValue(constantsModule.PANEL_SIZE_MIN_CAP)
+	local var13 = useScaledValue(constantsModule.PANEL_SIZE_MAX_CAP)
+	local var14 = if p1 then constantsModule.MOBILE_MAX_STAT_COLUMNS else constantsModule.DESKTOP_MAX_STAT_COLUMNS
+	local var15 = var11 + math.min(p2, var14) * var10
 	local _ = nil
 	local _ = nil
 	
-	if p0 then
+	if p1 then
 		local maxValue = math.max(constantsModule.MOBILE_EDGE_GAP, constantsModule.MOBILE_EDGE_GAP * scale)
-		local var29 = computeMobilePanelSizeModule(var11, var21, var22, topBarOffset + maxValue + getDeviceBottomInsetModule() + maxValue)
-		var25 = var29.X
-		var27 = var29.Y
+		local var16 = computeMobilePanelSizeModule(var3, var12, var13, topBarOffset + maxValue + getDeviceBottomInsetModule() + maxValue)
+		var1 = var16.X
+		var2 = var16.Y
 	else
-		var25 = if p2 then 320 * scale else 2 * size200 + var24
-		local var26 = var15 + constantsModule.PANEL_HEADER_DIVIDER_HEIGHT * scale
+		var1 = if p3 then 320 * scale else 2 * size200 + var15
+		local var17 = var6 + constantsModule.PANEL_HEADER_DIVIDER_HEIGHT * scale
 		
-		if fFlagPlayerListTwoTabsModule and p2 then
-			var26 += constantsModule.PANEL_TABS_HEIGHT * scale
+		if fFlagPlayerListTwoTabsModule and p3 then
+			var17 += constantsModule.PANEL_TABS_HEIGHT * scale
 		end
-		var27 = computeDesktopPanelHeightModule(var11.Y, var26 + var14, var26 + var16 + constantsModule.DESKTOP_MIN_VISIBLE_ROWS * var18)
+		var2 = computeDesktopPanelHeightModule(var3.Y, var17 + var5, var17 + var7 + constantsModule.DESKTOP_MIN_VISIBLE_ROWS * var9)
 	end
 	return {
-		panelWidth = var25,
-		panelHeight = var27,
-		headerHeight = var15,
-		columnHeaderHeight = var16,
-		rowHeight = var17,
-		statWidth = var19,
-		maxStatColumns = var23
+		panelWidth = var1,
+		panelHeight = var2,
+		headerHeight = var6,
+		columnHeaderHeight = var7,
+		rowHeight = var8,
+		statWidth = var10,
+		maxStatColumns = var14
 	}
 end

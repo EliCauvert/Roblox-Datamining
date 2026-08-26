@@ -113,29 +113,29 @@ return reactModule.memo(function(p1)
 						if var1.shortcut == nil then
 							return nil
 						end
-						local var1 = ""
+						local var6 = ""
 						
-						for i, v in var1.shortcut do
-							local var2 = userInputService:GetStringForKeyCode(v)
+						for i, v in var6.shortcut do
+							local var7 = userInputService:GetStringForKeyCode(v)
 							
-							if var2 == nil or var2 == "" then
-								var2 = v.Name
+							if var7 == nil or var7 == "" then
+								var7 = v.Name
 							end
 							if i > 1 then
-								var1 ..= " + "
+								var6 ..= " + "
 							end
-							var1 ..= var2
+							var6 ..= var7
 						end
-						return var1
-					end, { var1.shortcut }),
-					testId = `{var1.testId}--shortcut`
+						return var6
+					end, { var6.shortcut }),
+					testId = `{var6.testId}--shortcut`
 				}) else nil
 			}),
-			Text = if var1.text and var1.text ~= "" then reactModule.createElement(textModule, {
+			Text = if var6.text and var6.text ~= "" then reactModule.createElement(textModule, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-small text-wrap text-align-x-left content-inverse-default",
-				Text = var1.text,
-				testId = `{var1.testId}--text`
+				Text = var6.text,
+				testId = `{var6.testId}--text`
 			}) else nil
 		}))
 	})

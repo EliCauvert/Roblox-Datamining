@@ -26,7 +26,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagCollectionViewMathChanges = sharedFlagsModule.FFlagCollectionViewMathChanges
 local fFlagLuaAppEnableVRCarouselScrolling = sharedFlagsModule.FFlagLuaAppEnableVRCarouselScrolling
 local fFlagLuaAppFixCarouselPeekInControl = sharedFlagsModule.FFlagLuaAppFixCarouselPeekInControl
-local var17 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	testId = tModule.optional(tModule.string),
 	Position = tModule.optional(tModule.UDim2),
 	LayoutOrder = tModule.optional(tModule.number),
@@ -75,27 +75,27 @@ local t = {
 	sideMargin = 0
 }
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: fFlagLuaAppEnableVRCarouselScrolling (ref)
-	return if p0 == nil then if fFlagLuaAppEnableVRCarouselScrolling then true else not p1 else p0
+	return if p1 == nil then if fFlagLuaAppEnableVRCarouselScrolling then true else not p2 else p1
 end
 
-local _ = function(p2, _, p3, p4, p5)
+local _ = function(p1, _, p2, p3, p4)
 	-- upvalues: responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref)
-	if not p3 then
+	if not p2 then
 		return false
-	elseif p4 == nil then
+	elseif p3 == nil then
 		local _ = true
 		local pointer = responsiveModule.Input.Pointer
-		local _ = p2 == pointer and ((if p2 == pointer then fFlagLuaAppEnableVRCarouselScrolling else nil) and p5)
+		local _ = p1 == pointer and ((if p1 == pointer then fFlagLuaAppEnableVRCarouselScrolling else nil) and p4)
 		
 		return u438
 	end
-	return p4
+	return p3
 end
 
 return reactModule.memo(function(_)
-	-- upvalues: validateProps (ref), var17 (ref), cryoModule (ref), t (ref), useCollectionLayoutModule (ref), fFlagLuaAppFixCarouselPeekInControl (ref), argCheckModule (ref), reactModule (ref), fFlagCollectionViewMathChanges (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), useCollectionSizeBindingsModule (ref), calculateCarouselSpacingMetricsModule (ref), useScrollButtonHandlersModule (ref), useCarouselScrollingBindingModule (ref), useDesignTokens (ref), scrollingRowOfCollectionItemsModule (ref), collectionBackgroundMuralModule (ref), maybeForceDarkThemeModule (ref), collectionHeaderModule (ref), compositionTags (ref), carouselScrollButtonsModule (ref)
+	-- upvalues: validateProps (ref), var1 (ref), cryoModule (ref), t (ref), useCollectionLayoutModule (ref), fFlagLuaAppFixCarouselPeekInControl (ref), argCheckModule (ref), reactModule (ref), fFlagCollectionViewMathChanges (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), useCollectionSizeBindingsModule (ref), calculateCarouselSpacingMetricsModule (ref), useScrollButtonHandlersModule (ref), useCarouselScrollingBindingModule (ref), useDesignTokens (ref), scrollingRowOfCollectionItemsModule (ref), collectionBackgroundMuralModule (ref), maybeForceDarkThemeModule (ref), collectionHeaderModule (ref), compositionTags (ref), carouselScrollButtonsModule (ref)
 -- FATAL: Failed to generate AST for `CollectionCarousel` function:
 runtime : [KeyError] :11990: 104
 Traceback:

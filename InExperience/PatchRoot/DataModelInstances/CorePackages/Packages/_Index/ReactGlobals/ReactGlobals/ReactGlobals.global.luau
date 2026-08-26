@@ -1,8 +1,8 @@
 ﻿if require(script.Parent.Parent.SafeFlags).createGetFFlag("ReactIsolatedGlobalsEnabled")() then
-	local function _(p0, p1)
-		local var1 = _G[p0]
+	local function _(p1, p2)
+		local var1 = _G[p1]
 		
-		return if var1 == nil then p1 else var1
+		return if var1 == nil then p2 else var1
 	end
 	
 	local t = {}

@@ -23,24 +23,24 @@ local t_1 = {
 	reportAbuse = "Feature.ReportAbuse.Action.EnterChatLineReporting"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t_1 (ref), currentCamera (ref), constantsModule (ref), reactModule (ref), contextualMenu (ref), images (ref), fFlagChatLineReportingFocusFixesEnabled (ref), guiService (ref), chatLineReportRootModule (ref), getFFlagMemoizeChatReportingMenu (ref), menuDirection (ref), t (ref)
-	local var10 = useLocalization(t_1)
-	local var11 = if currentCamera then currentCamera.ViewportSize else Vector2.new(constantsModule.ViewportSize, constantsModule.ViewportSize)
-	local var12 = reactModule.useRef(nil)
+	local var1 = useLocalization(t_1)
+	local var2 = if currentCamera then currentCamera.ViewportSize else Vector2.new(constantsModule.ViewportSize, constantsModule.ViewportSize)
+	local var3 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), var11 (ref), constantsModule (copy)
-		if var12.current and var11.X < var12.current.AbsolutePosition.X + var12.current.AbsoluteSize.X then
-			var12.current.AnchorPoint = Vector2.new(1, 0)
-			var12.current.Position = UDim2.new(1, constantsModule.FramePositionXOffsetLeft, 0, constantsModule.FramePositionYOffset)
+		-- upvalues: var3 (ref), var2 (ref), constantsModule (copy)
+		if var3.current and var2.X < var3.current.AbsolutePosition.X + var3.current.AbsoluteSize.X then
+			var3.current.AnchorPoint = Vector2.new(1, 0)
+			var3.current.Position = UDim2.new(1, constantsModule.FramePositionXOffsetLeft, 0, constantsModule.FramePositionYOffset)
 		end
-	end, { var12, var11 })
+	end, { var3, var2 })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(constantsModule.FrameSizeXScale, constantsModule.FrameSizeXOffset, 1, 0),
 		Position = UDim2.new(1, constantsModule.FramePositionXOffset, 0, constantsModule.FramePositionYOffset),
-		ref = var12
+		ref = var3
 	}, {
 		ContextualMenu = reactModule.createElement(contextualMenu, {
 			closeBackgroundVisible = false,
@@ -48,20 +48,20 @@ return function(p0)
 			buttonProps = {
 				{
 					icon = images["icons/actions/feedback"],
-					text = var10.reportAbuse,
+					text = var1.reportAbuse,
 					onActivated = function()
-						-- upvalues: fFlagChatLineReportingFocusFixesEnabled (copy), guiService (copy), chatLineReportRootModule (copy), getFFlagMemoizeChatReportingMenu (copy), p0 (ref)
+						-- upvalues: fFlagChatLineReportingFocusFixesEnabled (copy), guiService (copy), chatLineReportRootModule (copy), getFFlagMemoizeChatReportingMenu (copy), p1 (ref)
 						if fFlagChatLineReportingFocusFixesEnabled and guiService.MenuIsOpen then
 							local menuClosedConnection = nil
 							menuClosedConnection = guiService.MenuClosed:Connect(function()
-								-- upvalues: chatLineReportRootModule (copy), getFFlagMemoizeChatReportingMenu (copy), p0 (copy), menuClosedConnection (write)
-								chatLineReportRootModule.initialize(if getFFlagMemoizeChatReportingMenu() then p0.getMessages() else p0.messages)
+								-- upvalues: chatLineReportRootModule (copy), getFFlagMemoizeChatReportingMenu (copy), p1 (copy), menuClosedConnection (write)
+								chatLineReportRootModule.initialize(if getFFlagMemoizeChatReportingMenu() then p1.getMessages() else p1.messages)
 								menuClosedConnection:Disconnect()
 							end)
 						else
-							chatLineReportRootModule.initialize(if getFFlagMemoizeChatReportingMenu() then p0.getMessages() else p0.messages)
+							chatLineReportRootModule.initialize(if getFFlagMemoizeChatReportingMenu() then p1.getMessages() else p1.messages)
 						end
-						p0.setContextMenuOpen(false)
+						p1.setContextMenuOpen(false)
 					end
 				}
 			},
@@ -73,13 +73,13 @@ return function(p0)
 			borderCornerRadius = constantsModule.ContextualMenuBorderRadius,
 			motorOverrideOptions = t,
 			background = {
-				Transparency = p0.backgroundTransparency,
-				Color = p0.backgroundColor3
+				Transparency = p1.backgroundTransparency,
+				Color = p1.backgroundColor3
 			},
-			screenSize = var11,
+			screenSize = var2,
 			onDismiss = function()
-				-- upvalues: p0 (ref)
-				p0.setContextMenuOpen(false)
+				-- upvalues: p1 (ref)
+				p1.setContextMenuOpen(false)
 			end
 		})
 	})

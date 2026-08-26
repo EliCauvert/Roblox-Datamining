@@ -7,28 +7,28 @@ local reparentableHost = require(viewRecyclerReact.Parent.ViewRecyclerRoblox).Re
 local record = viewRecyclerModule.Adapter._Private.Record
 local frozen = table.freeze({ "key", "generation" })
 
-local function _(p0, p1)
-	return `{#p0}:{p0}:{p1}`
+local function _(p1, p2)
+	return `{#p1}:{p1}:{p2}`
 end
 
 return {
-	new = function(p2, p3)
+	new = function(p1, p2)
 		-- upvalues: reparentableHost (ref), record (ref), frozen (ref)
 		local t = {}
 		local tbl = setmetatable({}, { __mode = "k" })
-		local var5 = 1
+		local var1 = 1
 		local t_1 = {}
 		local t_2 = {}
-		local var8 = false
-		local var9 = false
-		local var10 = nil
+		local var2 = false
+		local var3 = false
+		local var4 = nil
 		local tbl_1 = setmetatable({}, { __mode = "k" })
 		
-		local function getPortState(p4)
+		local function getPortState(p3)
 			-- upvalues: tbl_1 (ref), t (ref), reparentableHost (copy), record (copy), frozen (copy)
-			local var14 = tbl_1[p4]
+			local var5 = tbl_1[p3]
 			
-			if var14 == nil then
+			if var5 == nil then
 				local _ = nil
 				local t_1 = {
 					pendingAssignment = nil,
@@ -37,58 +37,58 @@ return {
 					currentPlaceholder = nil,
 					currentAutomaticSize = nil,
 					port = nil,
-					record = p4
+					record = p3
 				}
 				t_1.port = {
-					apply = function(p5)
-						-- upvalues: t_1 (write), t (copy), p4 (ref), reparentableHost (copy), record (copy), frozen (copy)
-						if p5 == nil then
+					apply = function(p4)
+						-- upvalues: t_1 (write), t (copy), p3 (ref), reparentableHost (copy), record (copy), frozen (copy)
+						if p4 == nil then
 							t_1.pendingAssignment = nil
 							t_1.pendingPlacementId = nil
 							local currentPlacementId = t_1.currentPlacementId
 							t_1.currentPlacementId = nil
 							t_1.currentPlaceholder = nil
 							t_1.currentAutomaticSize = nil
-							local var16 = if currentPlacementId == nil then nil else t[currentPlacementId]
+							local var6 = if currentPlacementId == nil then nil else t[currentPlacementId]
 							
-							if var16 ~= nil and var16.record == p4 then
-								var16.record = nil
+							if var6 ~= nil and var6.record == p3 then
+								var6.record = nil
 							end
-							local var17 = p4.portalFrame(false)
+							local var7 = p3.portalFrame(false)
 							
-							if var17 ~= nil then
-								reparentableHost.detach(var17)
-								var17.AnchorPoint = Vector2.zero
-								var17.Position = UDim2.new()
-								var17.Size = UDim2.new()
-								var17.AutomaticSize = Enum.AutomaticSize.None
+							if var7 ~= nil then
+								reparentableHost.detach(var7)
+								var7.AnchorPoint = Vector2.zero
+								var7.Position = UDim2.new()
+								var7.Size = UDim2.new()
+								var7.AutomaticSize = Enum.AutomaticSize.None
 							end
 							return
 						else
-							local pendingAssignment = t_1.pendingAssignment or p4.signal(false)
+							local pendingAssignment = t_1.pendingAssignment or p3.signal(false)
 							local pendingPlacementId = t_1.pendingPlacementId or t_1.currentPlacementId
 							assert(pendingAssignment ~= nil, "CompositionPlacementManager: placement attach or update requires an Assignment")
 							assert(pendingPlacementId ~= nil, "CompositionPlacementManager: placement requires a destination")
 							
-							if p5.assignment == nil or not record.containsEqual(p5.assignment, pendingAssignment, frozen) then return end
+							if p4.assignment == nil or not record.containsEqual(p4.assignment, pendingAssignment, frozen) then return end
 							t_1.pendingAssignment = nil
 							t_1.pendingPlacementId = nil
 							local currentPlacementId = t_1.currentPlacementId
 							
 							if currentPlacementId ~= nil and currentPlacementId ~= pendingPlacementId then
-								local var20 = t[currentPlacementId]
+								local var8 = t[currentPlacementId]
 								
-								if var20 ~= nil and var20.record == p4 then
-									var20.record = nil
+								if var8 ~= nil and var8.record == p3 then
+									var8.record = nil
 								end
 							end
 							t_1.currentPlacementId = pendingPlacementId
-							local var21 = t[pendingPlacementId]
+							local var9 = t[pendingPlacementId]
 							
-							if var21 ~= nil then
-								var21.record = p4
+							if var9 ~= nil then
+								var9.record = p3
 							end
-							local host = p5.host
+							local host = p4.host
 							assert(host ~= nil, "CompositionPlacementManager: cannot place a destroyed Recyclable view")
 							local value = pendingAssignment.value
 							
@@ -97,68 +97,68 @@ return {
 								t_1.currentPlaceholder = value.placeholder
 								t_1.currentAutomaticSize = value.automaticSize
 							end
-							host.Visible = p5.visible
+							host.Visible = p4.visible
 						end
 					end
 				}
-				tbl_1[p4] = t_1
+				tbl_1[p3] = t_1
 				
 				return t_1
 			end
-			return var14
+			return var5
 		end
 		
-		local function _(p6, p7)
+		local function _(p3, p4)
 			-- upvalues: getPortState (ref)
-			if p7 == nil then
-				p6.bindPlacement(nil, nil)
+			if p4 == nil then
+				p3.bindPlacement(nil, nil)
 				
 				return
 			end
-			local var22 = getPortState(p6)
-			var22.pendingAssignment = p7
-			var22.pendingPlacementId = p7.adapterData.placementId
-			p6.bindPlacement("composition", var22.port)
+			local var5 = getPortState(p3)
+			var5.pendingAssignment = p4
+			var5.pendingPlacementId = p4.adapterData.placementId
+			p3.bindPlacement("composition", var5.port)
 		end
 		
-		local _ = function(p8)
-			-- upvalues: t_2 (ref), var8 (write), var9 (write), p3 (ref)
-			t_2[p8] = true
+		local _ = function(p3)
+			-- upvalues: t_2 (ref), var2 (write), var3 (write), p2 (ref)
+			t_2[p3] = true
 			
-			if var8 or var9 then
+			if var2 or var3 then
 				return
 			end
-			var8 = true
-			p3()
+			var2 = true
+			p2()
 		end
 		
 		local function ensureReconciler()
-			-- upvalues: var10 (write), p2 (ref), getPortState (ref)
-			if var10 == nil then
+			-- upvalues: var4 (write), p1 (ref), getPortState (ref)
+			if var4 == nil then
 				local t = {}
 				local t_1 = {}
-				local var25 = 1
+				local var5 = 1
 				
-				local function assignmentFor(value, p9)
-					-- upvalues: var25 (write)
-					local var28 = p9
+				local function assignmentFor(value, p3)
+					-- upvalues: var5 (write)
+					local var6 = p3
 					
-					if var28 == nil then
-						var28 = var25
-						var25 += 1
+					if var6 == nil then
+						var6 = var5
+						var5 += 1
 					end
 					return {
 						key = value.key,
 						index = value.index,
 						value = value.value,
-						generation = var28,
+						generation = var6,
 						adapterData = { placementId = value.placementId }
 					}
 				end
 				
 				local t_2 = {
-					update = function(p10)
-						-- upvalues: t (write), assignmentFor (ref), p2 (copy), t_1 (ref), getPortState (copy)
+					update = function(p3)
+						-- upvalues: t (write), assignmentFor (ref), p1 (copy), t_1 (ref), getPortState (copy)
 						local t_2 = {}
 						
 						for i, v in t do
@@ -170,7 +170,7 @@ return {
 						local t_6 = {}
 						local t_7 = {}
 						
-						for i_1, v_1 in p10 do
+						for i_1, v_1 in p3 do
 							assert(t_3[v_1.key] == nil, `CompositionPlacementManager: duplicate key "{v_1.key}"`)
 							t_3[v_1.key] = true
 							local key = t_2[v_1.key]
@@ -194,18 +194,18 @@ return {
 								table.insert(t_4, { record = v_2.record, leaseToken = v_2.leaseToken })
 							end
 						end
-						local var35 = p2.exchange(t_1, t_4, t_5)
-						local var36 = 1
+						local var6 = p1.exchange(t_1, t_4, t_5)
+						local var7 = 1
 						local t_8 = {}
 						
 						for i_3, v_3 in t_6 do
 							if v_3.record == nil then
-								local var39 = var35.acquired[var36]
-								var36 += 1
-								v_3.record = var39.record
-								v_3.leaseToken = var39.leaseToken
+								local var8 = var6.acquired[var7]
+								var7 += 1
+								v_3.record = var8.record
+								v_3.leaseToken = var8.leaseToken
 								v_3.assignment = assignmentFor(v_3.desired)
-								table.insert(t_7, { record = var39.record, assignment = v_3.assignment })
+								table.insert(t_7, { record = var8.record, assignment = v_3.assignment })
 							end
 							t_8[v_3.record] = true
 						end
@@ -223,10 +223,10 @@ return {
 							if assignment == nil then
 								record.bindPlacement(nil, nil)
 							else
-								local var38 = getPortState(record)
-								var38.pendingAssignment = assignment
-								var38.pendingPlacementId = assignment.adapterData.placementId
-								record.bindPlacement("composition", var38.port)
+								local var9 = getPortState(record)
+								var9.pendingAssignment = assignment
+								var9.pendingPlacementId = assignment.adapterData.placementId
+								record.bindPlacement("composition", var9.port)
 							end
 						end
 						for i_3, v_6 in t_7 do
@@ -243,149 +243,149 @@ return {
 						return t_1
 					end
 				}
-				var10 = t_2
+				var4 = t_2
 				
 				return t_2
 			end
-			return var10
+			return var4
 		end
 		
 		return {
-			register = function(p11, p12, p13, p14, p15)
-				-- upvalues: var9 (write), tbl (ref), var5 (write), t (ref), t_2 (ref), var8 (write), p3 (ref), getPortState (ref), t_1 (ref)
-				assert(not var9, "CompositionPlacementManager: cannot register after destroy")
-				local var41 = tbl[p12]
+			register = function(p4, p5, p6, p7, p8)
+				-- upvalues: var3 (write), tbl (ref), var1 (write), t (ref), t_2 (ref), var2 (write), p2 (ref), getPortState (ref), t_1 (ref)
+				assert(not var3, "CompositionPlacementManager: cannot register after destroy")
+				local var10 = tbl[p5]
 				
-				if var41 == nil then
-					var41 = var5
-					var5 += 1
-					tbl[p12] = var41
+				if var10 == nil then
+					var10 = var1
+					var1 += 1
+					tbl[p5] = var10
 				end
-				assert(t[var41] == nil, "CompositionPlacementManager: placement is already registered")
-				t[var41] = {
+				assert(t[var10] == nil, "CompositionPlacementManager: placement is already registered")
+				t[var10] = {
 					record = nil,
-					viewType = p11,
-					parentSignal = p13,
-					props = p14,
-					placeholder = p15
+					viewType = p4,
+					parentSignal = p6,
+					props = p7,
+					placeholder = p8
 				}
-				t_2[var41] = true
+				t_2[var10] = true
 				
-				if not var8 and not var9 then
-					var8 = true
-					p3()
+				if not var2 and not var3 then
+					var2 = true
+					p2()
 				end
-				local var42 = true
+				local var11 = true
 				
 				return {
 					setPlaceholder = function(value)
-						-- upvalues: var42 (write), var9 (copy), t (copy), var41 (write), getPortState (copy), t_2 (copy), var8 (copy), p3 (copy)
-						if not var42 or var9 then return end
-						local var43 = t[var41]
+						-- upvalues: var11 (write), var3 (copy), t (copy), var10 (write), getPortState (copy), t_2 (copy), var2 (copy), p2 (copy)
+						if not var11 or var3 then return end
+						local var12 = t[var10]
 						
-						if var43 == nil then return end
-						local placeholder = var43.placeholder
+						if var12 == nil then return end
+						local placeholder = var12.placeholder
 						
 						if placeholder == value then return end
-						if placeholder ~= nil and var43.record ~= nil then
-							getPortState(var43.record).port.apply(nil)
+						if placeholder ~= nil and var12.record ~= nil then
+							getPortState(var12.record).port.apply(nil)
 						end
-						var43.placeholder = value
-						t_2[var41] = true
+						var12.placeholder = value
+						t_2[var10] = true
 						
-						if not var8 then
-							if var9 then return end
-							var8 = true
-							p3()
+						if not var2 then
+							if var3 then return end
+							var2 = true
+							p2()
 						end
 					end,
 					setProps = function(value)
-						-- upvalues: var42 (write), var9 (copy), t (copy), var41 (write), t_2 (copy), var8 (copy), p3 (copy)
-						if not var42 or var9 then return end
-						local var44 = t[var41]
+						-- upvalues: var11 (write), var3 (copy), t (copy), var10 (write), t_2 (copy), var2 (copy), p2 (copy)
+						if not var11 or var3 then return end
+						local var12 = t[var10]
 						
-						if var44 == nil then return end
-						var44.props = value
-						t_2[var41] = true
+						if var12 == nil then return end
+						var12.props = value
+						t_2[var10] = true
 						
-						if not var8 then
-							if var9 then return end
-							var8 = true
-							p3()
+						if not var2 then
+							if var3 then return end
+							var2 = true
+							p2()
 						end
 					end,
 					unregister = function()
-						-- upvalues: var42 (write), var9 (copy), t (copy), var41 (write), getPortState (copy), t_1 (copy), t_2 (copy), var8 (copy), p3 (copy)
-						if not var42 then return end
-						var42 = false
+						-- upvalues: var11 (write), var3 (copy), t (copy), var10 (write), getPortState (copy), t_1 (copy), t_2 (copy), var2 (copy), p2 (copy)
+						if not var11 then return end
+						var11 = false
 						
-						if var9 then return end
-						local var45 = t[var41]
+						if var3 then return end
+						local var12 = t[var10]
 						
-						if var45 == nil then return end
-						if var45.record ~= nil then
-							getPortState(var45.record).port.apply(nil)
+						if var12 == nil then return end
+						if var12.record ~= nil then
+							getPortState(var12.record).port.apply(nil)
 						end
-						t[var41] = nil
-						t_1[var41] = nil
-						t_2[var41] = true
+						t[var10] = nil
+						t_1[var10] = nil
+						t_2[var10] = true
 						
-						if not var8 then
-							if var9 then return end
-							var8 = true
-							p3()
+						if not var2 then
+							if var3 then return end
+							var2 = true
+							p2()
 						end
 					end
 				}
 			end,
 			flush = function()
-				-- upvalues: var8 (write), var9 (write), t (ref), t_1 (ref), t_2 (ref), var10 (write), ensureReconciler (ref)
-				if not var8 or var9 then return end
-				var8 = false
+				-- upvalues: var2 (write), var3 (write), t (ref), t_1 (ref), t_2 (ref), var4 (write), ensureReconciler (ref)
+				if not var2 or var3 then return end
+				var2 = false
 				local t_3 = {}
 				
 				for i, v in t do
-					local var47 = t_1[i]
+					local var10 = t_1[i]
 					
-					if t_2[i] or var47 == nil then
-						local var48 = v.parentSignal(false)
+					if t_2[i] or var10 == nil then
+						local var11 = v.parentSignal(false)
 						local placeholder = v.placeholder
-						var47 = nil
+						var10 = nil
 						
-						if var48 ~= nil and placeholder ~= nil then
+						if var11 ~= nil and placeholder ~= nil then
 							local t_4 = {}
-							local key = var48.key
+							local key = var11.key
 							t_4.key = `{#key}:{key}:{i}`
 							t_4.viewType = v.viewType
-							t_4.index = var48.index
+							t_4.index = var11.index
 							t_4.placementId = i
 							t_4.value = {
 								props = v.props,
 								placeholder = placeholder,
 								automaticSize = Enum.AutomaticSize.XY
 							}
-							var47 = t_4
+							var10 = t_4
 						end
-						t_1[i] = var47
+						t_1[i] = var10
 					end
-					if var47 ~= nil then
-						table.insert(t_3, var47)
+					if var10 ~= nil then
+						table.insert(t_3, var10)
 					end
 				end
 				table.clear(t_2)
 				
-				if #t_3 > 0 or var10 ~= nil then
+				if #t_3 > 0 or var4 ~= nil then
 					ensureReconciler().update(t_3)
 				end
 			end,
 			destroy = function()
-				-- upvalues: var9 (write), var8 (write), var10 (write), t (ref), t_1 (ref), t_2 (ref), tbl_1 (ref)
-				if var9 then return end
-				var9 = true
-				var8 = false
+				-- upvalues: var3 (write), var2 (write), var4 (write), t (ref), t_1 (ref), t_2 (ref), tbl_1 (ref)
+				if var3 then return end
+				var3 = true
+				var2 = false
 				
-				if var10 ~= nil then
-					var10.update({})
+				if var4 ~= nil then
+					var4.update({})
 				end
 				table.clear(t)
 				table.clear(t_1)

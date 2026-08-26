@@ -2,7 +2,7 @@
 
 return function()
 	-- upvalues: useSelector (ref)
-	return useSelector(function(p0)
-		return p0.Squad and (p0.Squad.Squad and p0.Squad.Squad.currentSquad)
+	return useSelector(function(p1)
+		return p1.Squad and (p1.Squad.Squad and p1.Squad.Squad.currentSquad)
 	end)
 end

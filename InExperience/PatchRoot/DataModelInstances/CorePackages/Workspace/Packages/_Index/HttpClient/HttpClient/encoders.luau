@@ -2,9 +2,9 @@
 local _ = require(script.Parent.types)
 
 return {
-	encodeJson = function(p0)
+	encodeJson = function(p1)
 		-- upvalues: httpService (ref)
-		return httpService:JSONEncode(p0), "application/json"
+		return httpService:JSONEncode(p1), "application/json"
 	end,
 	encodeRaw = function(p1)
 		return function(p2)

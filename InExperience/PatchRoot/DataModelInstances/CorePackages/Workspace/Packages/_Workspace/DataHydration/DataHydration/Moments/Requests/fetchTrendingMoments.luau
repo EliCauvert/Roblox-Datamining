@@ -10,7 +10,7 @@ local convertApiMomentsToMomentItemsModule = require(dataHydration.Moments.Util.
 local extractReactionsByMomentIdModule = require(dataHydration.Moments.Util.extractReactionsByMomentId)
 local extractShareInfoByMomentIdModule = require(dataHydration.Moments.Util.extractShareInfoByMomentId)
 local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
-local var10 = httpClientModule.createMockNetwork({
+local var1 = httpClientModule.createMockNetwork({
 	fallback = function()
 		-- upvalues: httpService (ref)
 		return {
@@ -20,33 +20,33 @@ local var10 = httpClientModule.createMockNetwork({
 	end
 })
 
-return function(p0, p1, p2, p3)
-	-- upvalues: constructApiUrlModule (ref), httpModule (ref), httpService (ref), fFlagArgusUseMockFeedItemsModule (ref), httpClientModule (ref), var10 (ref), mockTrendingMomentsModule (ref), convertApiMomentsToMomentItemsModule (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref)
-	local var11, var12 = constructApiUrlModule("content-captures-api/v2/moments/get-moment-recommendations")
-	local var13 = fFlagArgusUseMockFeedItemsModule()
+return function(p1, p2, p3, p4)
+	-- upvalues: constructApiUrlModule (ref), httpModule (ref), httpService (ref), fFlagArgusUseMockFeedItemsModule (ref), httpClientModule (ref), var1 (ref), mockTrendingMomentsModule (ref), convertApiMomentsToMomentItemsModule (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref)
+	local var2, var3 = constructApiUrlModule("content-captures-api/v2/moments/get-moment-recommendations")
+	local var4 = fFlagArgusUseMockFeedItemsModule()
 	
 	return httpClientModule.fetch({
 		method = "GET",
 		analyticsKey = "moments.get-moment-recommendations",
-		url = `{var11}?{httpModule.Url:makeQueryString({
-			momentsSessionId = p0,
-			paginationContext = p1,
-			signals = if p3 then httpService:JSONEncode(p3) else nil
+		url = `{var2}?{httpModule.Url:makeQueryString({
+			momentsSessionId = p1,
+			paginationContext = p2,
+			signals = if p4 then httpService:JSONEncode(p4) else nil
 		})}`,
-		headers = var12,
-		network = if var13 then var10 else p2,
-		decode = function(p4)
-			-- upvalues: var13 (ref), mockTrendingMomentsModule (copy), convertApiMomentsToMomentItemsModule (copy), p1 (ref), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy)
-			return if var13 then {
+		headers = var3,
+		network = if var4 then var1 else p3,
+		decode = function(p5)
+			-- upvalues: var4 (ref), mockTrendingMomentsModule (copy), convertApiMomentsToMomentItemsModule (copy), p2 (ref), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy)
+			return if var4 then {
 				nextCursor = nil,
 				moments = mockTrendingMomentsModule,
 				reactionsByMomentId = {},
 				shareInfoByMomentId = {}
 			} else {
-				moments = convertApiMomentsToMomentItemsModule(p4.items),
-				nextCursor = p4.paginationContext or p1,
-				reactionsByMomentId = extractReactionsByMomentIdModule(p4.items),
-				shareInfoByMomentId = extractShareInfoByMomentIdModule(p4.items)
+				moments = convertApiMomentsToMomentItemsModule(p5.items),
+				nextCursor = p5.paginationContext or p2,
+				reactionsByMomentId = extractReactionsByMomentIdModule(p5.items),
+				shareInfoByMomentId = extractShareInfoByMomentIdModule(p5.items)
 			}
 		end
 	})

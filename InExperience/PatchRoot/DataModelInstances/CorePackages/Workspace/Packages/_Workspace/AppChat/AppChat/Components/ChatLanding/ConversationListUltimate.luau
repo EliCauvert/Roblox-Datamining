@@ -37,7 +37,7 @@ local appChatPerfChatLandingPaginationOnEndReachedUnits = game:DefineFastInt("Ap
 local appChatConversationListScrollBarIdleHideMs = game:DefineFastInt("AppChatConversationListScrollBarIdleHideMs", 1500)
 local partyPageCarouselExperimentation = require(parent.SocialExperiments).PartyPageCarouselExperimentation
 local name = require(script.Parent.Logger):new(script.Name)
-local var25 = appChatConversationListScrollBarIdleHideMs / 1000
+local var1 = appChatConversationListScrollBarIdleHideMs / 1000
 local t = {
 	dampingRatio = 1,
 	frequency = 2,
@@ -47,140 +47,140 @@ local t = {
 
 local function noop() end
 
-local function _(p0)
-	return p0.isPartyQuickStartEnabled
+local function _(p1)
+	return p1.isPartyQuickStartEnabled
 end
 
 local _ = function(p1)
 	return p1.canAccessParty == true
 end
 
-local function getConversationRowListItems(p2)
+local function getConversationRowListItems(p1)
 	local t = {}
 	
-	for i, v in p2 do
+	for i, v in p1 do
 		t[i] = { id = tostring(v.id) }
 	end
 	return t
 end
 
-local _ = function(p3)
-	return if p3 and p3[1] then p3[1].id else nil
+local _ = function(p2)
+	return if p2 and p2[1] then p2[1].id else nil
 end
 
-local _ = function(p4)
-	return if p4 and p4[#p4] then p4[#p4].id else nil
+local _ = function(p2)
+	return if p2 and p2[#p2] then p2[#p2].id else nil
 end
 
-local _ = function(p5)
-	return `{#p5}:{tostring(if p5 and p5[1] then p5[1].id else nil)}:{tostring(if p5 and p5[#p5] then p5[#p5].id else nil)}`
+local _ = function(p2)
+	return `{#p2}:{tostring(if p2 and p2[1] then p2[1].id else nil)}:{tostring(if p2 and p2[#p2] then p2[#p2].id else nil)}`
 end
 
-local function getKey(p6)
-	return tostring(p6.id)
+local function getKey(p2)
+	return tostring(p2.id)
 end
 
-local function MeasuredChatLandingModal(p7)
+local function MeasuredChatLandingModal(p2)
 	-- upvalues: reactModule (ref), chatLandingModalContainerModule (ref)
-	local var32 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var32 (ref), p7 (ref)
-		local current = var32.current
+		-- upvalues: var2 (ref), p2 (ref)
+		local current = var2.current
 		
 		if current ~= nil then
-			p7.onHeightChanged(p7.itemId, current.AbsoluteSize.Y)
+			p2.onHeightChanged(p2.itemId, current.AbsoluteSize.Y)
 		end
-	end, { p7.itemId, p7.onHeightChanged })
+	end, { p2.itemId, p2.onHeightChanged })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		ref = var32,
-		[reactModule.Change.AbsoluteSize] = function(p8)
-			-- upvalues: p7 (ref)
-			p7.onHeightChanged(p7.itemId, p8.AbsoluteSize.Y)
+		ref = var2,
+		[reactModule.Change.AbsoluteSize] = function(p3)
+			-- upvalues: p2 (ref)
+			p2.onHeightChanged(p2.itemId, p3.AbsoluteSize.Y)
 		end
 	}, {
 		ChatLandingModal = reactModule.createElement(chatLandingModalContainerModule, {})
 	})
 end
 
-return reactModule.memo(function(p9)
-	-- upvalues: noop (ref), reactModule (ref), signal (ref), fFlagFriendsChatConversationListShowScrollBar (ref), reactOtterModule (ref), useTokens (ref), cryoModule (ref), appChatPerfExperimentation (ref), partyPageCarouselExperimentation (ref), squadQuickStartExperimentation (ref), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (ref), IXPService (ref), fStringAppChatRemoveConversationListDividerIxpLayerModule (ref), focusNavigationService (ref), coreGui (ref), fFlagAppChatPerfTrackingModule (ref), createScrollIntervalTrackerModule (ref), appChatPerfTrackerModule (ref), appPage (ref), constants (ref), enums (ref), getConversationRowListItems (ref), fFlagAppIaScrollAway (ref), appChatChatLandingInitialFetchLimit (ref), appChatChatLandingInitialFetchMinimumConversations (ref), name (ref), var25 (ref), t (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (ref), MeasuredChatLandingModal (ref), conversationGroupsEntryContainerModule (ref), partyQuickStartContainerModule (ref), socialCarouselModule (ref), view (ref), conversationRowModule (ref), ultimateListModule (ref), getKey (ref), appChatPerfChatLandingPaginationOnStartReachedUnits (ref)
-	local entryHeight = p9.entryHeight or 64
-	local itemList = p9.itemList or {}
-	local size = p9.Size or UDim2.fromScale(1, 1)
-	local layoutOrder = p9.LayoutOrder or 1
-	local onScrollUpdate = p9.onScrollUpdate or noop
-	local navigateToConversationFromUserId = p9.navigateToConversationFromUserId or noop
-	local navigateToQuickStartSquadInviteFriends = p9.navigateToQuickStartSquadInviteFriends or noop
-	local navigateToSquadLobby = p9.navigateToSquadLobby or noop
-	local fireConversationImpressionEvent = p9.fireConversationImpressionEvent or noop
-	local fireConversationClickedEvent = p9.fireConversationClickedEvent or noop
-	local var43 = p9.showHeaderEntries ~= false
-	local rowProps = p9.rowProps or {}
-	local var45 = reactModule.useMemo(function()
+return reactModule.memo(function(p2)
+	-- upvalues: noop (ref), reactModule (ref), signal (ref), fFlagFriendsChatConversationListShowScrollBar (ref), reactOtterModule (ref), useTokens (ref), cryoModule (ref), appChatPerfExperimentation (ref), partyPageCarouselExperimentation (ref), squadQuickStartExperimentation (ref), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (ref), IXPService (ref), fStringAppChatRemoveConversationListDividerIxpLayerModule (ref), focusNavigationService (ref), coreGui (ref), fFlagAppChatPerfTrackingModule (ref), createScrollIntervalTrackerModule (ref), appChatPerfTrackerModule (ref), appPage (ref), constants (ref), enums (ref), getConversationRowListItems (ref), fFlagAppIaScrollAway (ref), appChatChatLandingInitialFetchLimit (ref), appChatChatLandingInitialFetchMinimumConversations (ref), name (ref), var1 (ref), t (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (ref), MeasuredChatLandingModal (ref), conversationGroupsEntryContainerModule (ref), partyQuickStartContainerModule (ref), socialCarouselModule (ref), view (ref), conversationRowModule (ref), ultimateListModule (ref), getKey (ref), appChatPerfChatLandingPaginationOnStartReachedUnits (ref)
+	local entryHeight = p2.entryHeight or 64
+	local itemList = p2.itemList or {}
+	local size = p2.Size or UDim2.fromScale(1, 1)
+	local layoutOrder = p2.LayoutOrder or 1
+	local onScrollUpdate = p2.onScrollUpdate or noop
+	local navigateToConversationFromUserId = p2.navigateToConversationFromUserId or noop
+	local navigateToQuickStartSquadInviteFriends = p2.navigateToQuickStartSquadInviteFriends or noop
+	local navigateToSquadLobby = p2.navigateToSquadLobby or noop
+	local fireConversationImpressionEvent = p2.fireConversationImpressionEvent or noop
+	local fireConversationClickedEvent = p2.fireConversationClickedEvent or noop
+	local var2 = p2.showHeaderEntries ~= false
+	local rowProps = p2.rowProps or {}
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: signal (copy)
 		return signal.new()
 	end, {})
-	local var46 = reactModule.useRef(nil)
-	local var47 = reactModule.useRef(nil)
-	local var48 = nil
-	local var49 = nil
-	local var50 = nil
+	local var4 = reactModule.useRef(nil)
+	local var5 = reactModule.useRef(nil)
+	local var6 = nil
+	local var7 = nil
+	local var8 = nil
 	
 	if fFlagFriendsChatConversationListShowScrollBar then
-		var48 = reactModule.useRef(nil)
-		local var51, var52 = reactOtterModule.useAnimatedBinding(1)
-		var49 = var51
-		var50 = var52
+		var6 = reactModule.useRef(nil)
+		local var9, var10 = reactOtterModule.useAnimatedBinding(1)
+		var7 = var9
+		var8 = var10
 	end
-	local var53 = reactModule.useRef(nil)
-	local var54 = reactModule.useRef(0)
-	local var55 = reactModule.useMemo(function()
+	local var11 = reactModule.useRef(nil)
+	local var12 = reactModule.useRef(0)
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: itemList (ref)
 		return `{#itemList}:{tostring(if itemList and itemList[1] then itemList[1].id else nil)}:{tostring(if itemList and itemList[#itemList] then itemList[#itemList].id else nil)}`
 	end, { itemList })
-	local var56 = reactModule.useRef(nil)
-	local var57 = reactModule.useRef(false)
-	local var58, var59 = reactModule.useState(Vector2.new(0, 0))
-	local var60, var61 = reactModule.useState(nil)
-	local var62 = useTokens()
-	local var63, var64 = reactModule.useState({})
-	local var65 = reactModule.useCallback(function(p10, p11)
-		-- upvalues: var64 (ref), cryoModule (copy)
-		if p11 < 0 then
+	local var14 = reactModule.useRef(nil)
+	local var15 = reactModule.useRef(false)
+	local var16, var17 = reactModule.useState(Vector2.new(0, 0))
+	local var18, var19 = reactModule.useState(nil)
+	local var20 = useTokens()
+	local var21, var22 = reactModule.useState({})
+	local var23 = reactModule.useCallback(function(p3, p4)
+		-- upvalues: var22 (ref), cryoModule (copy)
+		if p4 < 0 then
 			return
 		end
-		var64(function(p12)
-			-- upvalues: p10 (ref), p11 (ref), cryoModule (copy)
-			return if p12[p10] == p11 then p12 else cryoModule.Dictionary.join(p12, { [p10] = p11 })
+		var22(function(p5)
+			-- upvalues: p3 (ref), p4 (ref), cryoModule (copy)
+			return if p5[p3] == p4 then p5 else cryoModule.Dictionary.join(p5, { [p3] = p4 })
 		end)
 	end, {})
-	local var66 = p9.loadNext ~= nil and (not p9.isLoadingNext and not p9.oldestConversationIsFetched)
+	local var24 = p2.loadNext ~= nil and (not p2.isLoadingNext and not p2.oldestConversationIsFetched)
 	reactModule.useEffect(function()
-		-- upvalues: var57 (ref), p9 (ref), var56 (ref)
-		if var57.current and not p9.isLoadingNext then
-			var56.current = nil
+		-- upvalues: var15 (ref), p2 (ref), var14 (ref)
+		if var15.current and not p2.isLoadingNext then
+			var14.current = nil
 		end
-		var57.current = p9.isLoadingNext == true
-	end, { p9.isLoadingNext })
-	local var67 = reactModule.useCallback(function()
-		-- upvalues: var66 (ref), var56 (ref), var55 (ref), p9 (ref)
-		if var66 and var56.current ~= var55 then
-			var56.current = var55
-			p9.loadNext()
+		var15.current = p2.isLoadingNext == true
+	end, { p2.isLoadingNext })
+	local var25 = reactModule.useCallback(function()
+		-- upvalues: var24 (ref), var14 (ref), var13 (ref), p2 (ref)
+		if var24 and var14.current ~= var13 then
+			var14.current = var13
+			p2.loadNext()
 			
 			return true
 		end
 		return false
-	end, { var66, var55, p9.loadNext })
+	end, { var24, var13, p2.loadNext })
 	reactModule.useEffect(function()
-		-- upvalues: appChatPerfExperimentation (copy), p9 (ref), partyPageCarouselExperimentation (copy), squadQuickStartExperimentation (copy), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), fStringAppChatRemoveConversationListDividerIxpLayerModule (copy)
+		-- upvalues: appChatPerfExperimentation (copy), p2 (ref), partyPageCarouselExperimentation (copy), squadQuickStartExperimentation (copy), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), fStringAppChatRemoveConversationListDividerIxpLayerModule (copy)
 		appChatPerfExperimentation.logExposure()
 		
-		if p9.shouldLogHeaderEntryExposures ~= false then
+		if p2.shouldLogHeaderEntryExposures ~= false then
 			partyPageCarouselExperimentation.logExposure()
 			
 			if squadQuickStartExperimentation.isLogExposureEnabled then
@@ -193,51 +193,51 @@ return reactModule.memo(function(p9)
 	end, {})
 	reactModule.useEffect(function()
 		-- upvalues: focusNavigationService (copy), coreGui (copy)
-		local var81 = focusNavigationService.new(coreGui)
+		local var26 = focusNavigationService.new(coreGui)
 		
 		return function()
-			-- upvalues: var81 (ref)
-			var81:teardown()
+			-- upvalues: var26 (ref)
+			var26:teardown()
 		end
 	end, {})
-	local var68 = p9.canAccessParty == true
+	local var26 = p2.canAccessParty == true
 	reactModule.useEffect(function()
-		-- upvalues: var60 (ref), fFlagAppChatPerfTrackingModule (copy), var46 (ref), createScrollIntervalTrackerModule (copy), appChatPerfTrackerModule (copy)
-		if var60 == nil then
+		-- upvalues: var18 (ref), fFlagAppChatPerfTrackingModule (copy), var4 (ref), createScrollIntervalTrackerModule (copy), appChatPerfTrackerModule (copy)
+		if var18 == nil then
 			return nil
 		end
-		var60.Selectable = false
+		var18.Selectable = false
 		
 		if fFlagAppChatPerfTrackingModule then
-			var46.current = createScrollIntervalTrackerModule(appChatPerfTrackerModule.Events.ScrollConversationList, var60)
+			var4.current = createScrollIntervalTrackerModule(appChatPerfTrackerModule.Events.ScrollConversationList, var18)
 			
 			return function()
-				-- upvalues: var46 (copy)
-				if var46.current then
-					var46.current.cleanup()
-					var46.current = nil
+				-- upvalues: var4 (copy)
+				if var4.current then
+					var4.current.cleanup()
+					var4.current = nil
 				end
 			end
 		end
 		return nil
-	end, { var60 })
-	local isPartyQuickStartEnabled = p9.isPartyQuickStartEnabled
-	local var69 = reactModule.useMemo(function()
-		-- upvalues: appPage (copy), p9 (ref), constants (copy), var45 (ref)
+	end, { var18 })
+	local isPartyQuickStartEnabled = p2.isPartyQuickStartEnabled
+	local var27 = reactModule.useMemo(function()
+		-- upvalues: appPage (copy), p2 (ref), constants (copy), var3 (ref)
 		return {
 			sortId = 0,
 			sortIndex = 1,
 			appPage = appPage.Chat,
-			impressionTag = if p9.isInExperience then constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else constants.ANALYTICS.SRC.PARTY_PAGE_UA,
-			scrollViewPositionChangedSignal = var45
+			impressionTag = if p2.isInExperience then constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else constants.ANALYTICS.SRC.PARTY_PAGE_UA,
+			scrollViewPositionChangedSignal = var3
 		}
-	end, { p9.isInExperience, var45 })
-	local var70 = reactModule.useCallback(function(p13)
+	end, { p2.isInExperience, var3 })
+	local var28 = reactModule.useCallback(function(p3)
 		-- upvalues: navigateToConversationFromUserId (ref)
-		navigateToConversationFromUserId(p13.id)
+		navigateToConversationFromUserId(p3.id)
 	end, { navigateToConversationFromUserId })
-	local var71 = reactModule.useMemo(function()
-		-- upvalues: enums (copy), navigateToQuickStartSquadInviteFriends (ref), var70 (ref)
+	local var29 = reactModule.useMemo(function()
+		-- upvalues: enums (copy), navigateToQuickStartSquadInviteFriends (ref), var28 (ref)
 		return {
 			{
 				tileGroup = enums.TileGroup.StartSquad,
@@ -245,225 +245,225 @@ return reactModule.memo(function(p9)
 			},
 			{
 				tileGroup = enums.TileGroup.FriendsList,
-				onActivated = var70
+				onActivated = var28
 			}
 		}
-	end, { navigateToQuickStartSquadInviteFriends, var70 })
-	local var72 = reactModule.useMemo(function()
-		-- upvalues: getConversationRowListItems (copy), itemList (ref), p9 (ref), var43 (ref), cryoModule (copy), partyPageCarouselExperimentation (copy), isPartyQuickStartEnabled (ref), fFlagAppIaScrollAway (copy)
-		local var82 = getConversationRowListItems(itemList)
-		local var83 = var43 and (if p9.filterText ~= "" then p9.filterText == nil else true)
+	end, { navigateToQuickStartSquadInviteFriends, var28 })
+	local var30 = reactModule.useMemo(function()
+		-- upvalues: getConversationRowListItems (copy), itemList (ref), p2 (ref), var2 (ref), cryoModule (copy), partyPageCarouselExperimentation (copy), isPartyQuickStartEnabled (ref), fFlagAppIaScrollAway (copy)
+		local var31 = getConversationRowListItems(itemList)
+		local var32 = var2 and (if p2.filterText ~= "" then p2.filterText == nil else true)
 		
-		if var83 and p9.showGroupsLink then
-			var82 = cryoModule.List.join({
+		if var32 and p2.showGroupsLink then
+			var31 = cryoModule.List.join({
 				{
 					id = "ConversationGroupsEntryContainer",
 					isGroupLink = true
 				}
-			}, var82)
+			}, var31)
 		end
-		if var83 and not partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and isPartyQuickStartEnabled then
-			var82 = cryoModule.List.join({
+		if var32 and not partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and isPartyQuickStartEnabled then
+			var31 = cryoModule.List.join({
 				{ id = "PartyQuickStartContainer", isQuickStartLink = true }
-			}, var82)
+			}, var31)
 		end
-		if var83 then
-			if isPartyQuickStartEnabled and partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and (p9.isWideMode or not p9.isInExperience) then
-				var82 = cryoModule.List.join({ { id = "SocialCarousel", isSocialCarousel = true } }, var82)
+		if var32 then
+			if isPartyQuickStartEnabled and partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and (p2.isWideMode or not p2.isInExperience) then
+				var31 = cryoModule.List.join({ { id = "SocialCarousel", isSocialCarousel = true } }, var31)
 			end
-			var82 = cryoModule.List.join({
+			var31 = cryoModule.List.join({
 				{ id = "UnfilteredThreadsFtux", isChatLandingModal = true }
-			}, var82)
+			}, var31)
 		end
-		if fFlagAppIaScrollAway and (p9.canvasTopPadding or 0) > 0 then
-			var82 = cryoModule.List.join({
+		if fFlagAppIaScrollAway and (p2.canvasTopPadding or 0) > 0 then
+			var31 = cryoModule.List.join({
 				{
 					id = "CanvasTopPadding",
 					isCanvasTopPadding = true,
-					height = p9.canvasTopPadding
+					height = p2.canvasTopPadding
 				}
-			}, var82)
+			}, var31)
 		end
-		return var82
+		return var31
 	end, {
-		itemList, p9.filterText, p9.showGroupsLink, p9.isWideMode, p9.isInExperience,
-		p9.canvasTopPadding, var43, isPartyQuickStartEnabled
+		itemList, p2.filterText, p2.showGroupsLink, p2.isWideMode, p2.isInExperience,
+		p2.canvasTopPadding, var2, isPartyQuickStartEnabled
 	})
-	local var73 = reactModule.useMemo(function()
-		-- upvalues: var72 (ref), var63 (ref), fFlagAppIaScrollAway (copy), entryHeight (ref), cryoModule (copy)
+	local var31 = reactModule.useMemo(function()
+		-- upvalues: var30 (ref), var21 (ref), fFlagAppIaScrollAway (copy), entryHeight (ref), cryoModule (copy)
 		local t = {}
-		local var85 = 0
+		local var32 = 0
 		
-		for i, v in var72 do
-			local var86 = if v.isChatLandingModal then var63[v.id] or 200 elseif fFlagAppIaScrollAway and v.isCanvasTopPadding then v.height else entryHeight
-			t[i] = cryoModule.Dictionary.join(v, { height = var86, yOffset = var85 })
-			var85 += var86
+		for i, v in var30 do
+			local var33 = if v.isChatLandingModal then var21[v.id] or 200 elseif fFlagAppIaScrollAway and v.isCanvasTopPadding then v.height else entryHeight
+			t[i] = cryoModule.Dictionary.join(v, { height = var33, yOffset = var32 })
+			var32 += var33
 		end
-		return { items = t, contentHeight = var85 }
-	end, { var72, entryHeight, var63 })
+		return { items = t, contentHeight = var32 }
+	end, { var30, entryHeight, var21 })
 	reactModule.useEffect(function()
-		-- upvalues: var66 (ref), var54 (ref), appChatChatLandingInitialFetchLimit (copy), itemList (ref), appChatChatLandingInitialFetchMinimumConversations (copy), var67 (ref), name (copy)
-		if var66 and var54.current < appChatChatLandingInitialFetchLimit and #itemList < appChatChatLandingInitialFetchMinimumConversations then
-			local var87 = var54.current + 1
+		-- upvalues: var24 (ref), var12 (ref), appChatChatLandingInitialFetchLimit (copy), itemList (ref), appChatChatLandingInitialFetchMinimumConversations (copy), var25 (ref), name (copy)
+		if var24 and var12.current < appChatChatLandingInitialFetchLimit and #itemList < appChatChatLandingInitialFetchMinimumConversations then
+			local var34 = var12.current + 1
 			
-			if var67() then
-				var54.current = var87
-				name:info("Loading more conversations because the list (count: {} out of {}) is not enough (attempt {} out of {})", #itemList, appChatChatLandingInitialFetchMinimumConversations, var54.current, appChatChatLandingInitialFetchLimit)
+			if var25() then
+				var12.current = var34
+				name:info("Loading more conversations because the list (count: {} out of {}) is not enough (attempt {} out of {})", #itemList, appChatChatLandingInitialFetchMinimumConversations, var12.current, appChatChatLandingInitialFetchLimit)
 			end
 		end
-	end, { itemList, var66, var67 })
+	end, { itemList, var24, var25 })
 	reactModule.useEffect(function()
-		-- upvalues: var66 (ref), var73 (ref), var58 (ref), var67 (ref), name (copy)
-		if var66 and var73.contentHeight > 0 and (var58.Y > 0 and var73.contentHeight <= var58.Y) and var67() then
+		-- upvalues: var24 (ref), var31 (ref), var16 (ref), var25 (ref), name (copy)
+		if var24 and var31.contentHeight > 0 and (var16.Y > 0 and var31.contentHeight <= var16.Y) and var25() then
 			name:info("Not enough UltimateList content to fill the view, loading more conversations")
 		end
-	end, { var73.contentHeight, var58.Y, var66, var67 })
-	local var74 = reactModule.useCallback(function()
-		-- upvalues: var67 (ref), name (copy)
-		if var67() then
+	end, { var31.contentHeight, var16.Y, var24, var25 })
+	local var34 = reactModule.useCallback(function()
+		-- upvalues: var25 (ref), name (copy)
+		if var25() then
 			name:debug("UltimateList onEndReached - Loading more conversations")
 		end
-	end, { var67 })
-	local var75 = reactModule.useCallback(function()
-		-- upvalues: p9 (ref), name (copy)
-		if p9.loadPrevious and not p9.isLoadingPrevious then
+	end, { var25 })
+	local var35 = reactModule.useCallback(function()
+		-- upvalues: p2 (ref), name (copy)
+		if p2.loadPrevious and not p2.isLoadingPrevious then
 			name:debug("UltimateList onStartReached - Loading previous conversations")
-			p9.loadPrevious()
+			p2.loadPrevious()
 		end
-	end, { p9.loadPrevious, p9.isLoadingPrevious })
-	local var76 = reactModule.useCallback(function(p14)
-		-- upvalues: var59 (ref)
-		var59(p14)
+	end, { p2.loadPrevious, p2.isLoadingPrevious })
+	local var36 = reactModule.useCallback(function(p3)
+		-- upvalues: var17 (ref)
+		var17(p3)
 	end, {})
-	local var77 = nil
+	local var37 = nil
 	
 	if fFlagFriendsChatConversationListShowScrollBar then
-		var77 = reactModule.useCallback(function()
-			-- upvalues: var48 (write), var50 (write), reactOtterModule (copy), var25 (copy), t (copy)
-			if var48.current ~= nil then
-				pcall(task.cancel, var48.current)
-				var48.current = nil
+		var37 = reactModule.useCallback(function()
+			-- upvalues: var6 (write), var8 (write), reactOtterModule (copy), var1 (copy), t (copy)
+			if var6.current ~= nil then
+				pcall(task.cancel, var6.current)
+				var6.current = nil
 			end
-			var50(reactOtterModule.instant(0))
-			var48.current = task.delay(var25, function()
-				-- upvalues: var48 (copy), var50 (copy), reactOtterModule (copy), t (copy)
-				var48.current = nil
-				var50(reactOtterModule.spring(1, t))
+			var8(reactOtterModule.instant(0))
+			var6.current = task.delay(var1, function()
+				-- upvalues: var6 (copy), var8 (copy), reactOtterModule (copy), t (copy)
+				var6.current = nil
+				var8(reactOtterModule.spring(1, t))
 			end)
-		end, { var50 })
+		end, { var8 })
 		reactModule.useEffect(function()
-			-- upvalues: var48 (write)
+			-- upvalues: var6 (write)
 			return function()
-				-- upvalues: var48 (copy)
-				if var48.current ~= nil then
-					pcall(task.cancel, var48.current)
-					var48.current = nil
+				-- upvalues: var6 (copy)
+				if var6.current ~= nil then
+					pcall(task.cancel, var6.current)
+					var6.current = nil
 				end
 			end
 		end, {})
 	end
-	local var78 = reactModule.useCallback(function(p15)
-		-- upvalues: fFlagAppChatPerfTrackingModule (copy), var46 (ref), fFlagFriendsChatConversationListShowScrollBar (copy), p9 (ref), var77 (write), var45 (ref), entryHeight (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (copy), var73 (ref), var58 (ref), var67 (ref), onScrollUpdate (ref)
-		if fFlagAppChatPerfTrackingModule and var46.current then
-			var46.current.onScrollTick()
+	local var38 = reactModule.useCallback(function(p3)
+		-- upvalues: fFlagAppChatPerfTrackingModule (copy), var4 (ref), fFlagFriendsChatConversationListShowScrollBar (copy), p2 (ref), var37 (write), var3 (ref), entryHeight (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (copy), var31 (ref), var16 (ref), var25 (ref), onScrollUpdate (ref)
+		if fFlagAppChatPerfTrackingModule and var4.current then
+			var4.current.onScrollTick()
 		end
-		if fFlagFriendsChatConversationListShowScrollBar and p9.showScrollbarOnScroll then
-			var77()
+		if fFlagFriendsChatConversationListShowScrollBar and p2.showScrollbarOnScroll then
+			var37()
 		end
-		var45:fire()
+		var3:fire()
 		
-		if var73.contentHeight - var58.Y - p15 <= entryHeight * appChatPerfChatLandingPaginationOnEndReachedUnits then
-			var67()
+		if var31.contentHeight - var16.Y - p3 <= entryHeight * appChatPerfChatLandingPaginationOnEndReachedUnits then
+			var25()
 		end
-		onScrollUpdate({ CanvasPosition = Vector2.new(0, p15) })
+		onScrollUpdate({ CanvasPosition = Vector2.new(0, p3) })
 	end, {
-		var45, onScrollUpdate, entryHeight, var73.contentHeight, var58.Y, var67,
-		if fFlagFriendsChatConversationListShowScrollBar then p9.showScrollbarOnScroll else nil,
-		if fFlagFriendsChatConversationListShowScrollBar then var77 else nil
+		var3, onScrollUpdate, entryHeight, var31.contentHeight, var16.Y, var25,
+		if fFlagFriendsChatConversationListShowScrollBar then p2.showScrollbarOnScroll else nil,
+		if fFlagFriendsChatConversationListShowScrollBar then var37 else nil
 	})
-	local var79 = reactModule.useCallback(function(p16)
-		-- upvalues: var47 (ref), var61 (ref)
-		var47.current = p16
-		var61(p16)
+	local var39 = reactModule.useCallback(function(p3)
+		-- upvalues: var5 (ref), var19 (ref)
+		var5.current = p3
+		var19(p3)
 	end, {})
-	local var80 = if itemList and itemList[1] then itemList[1].id else nil
+	local var40 = if itemList and itemList[1] then itemList[1].id else nil
 	reactModule.useEffect(function()
-		-- upvalues: var47 (ref), var80 (ref), var53 (ref)
-		local current = var47.current
+		-- upvalues: var5 (ref), var40 (ref), var11 (ref)
+		local current = var5.current
 		
-		if current ~= nil and var80 ~= nil and (var53.current ~= nil and var53.current ~= var80) and current.CanvasPosition.Y <= 33 then
+		if current ~= nil and var40 ~= nil and (var11.current ~= nil and var11.current ~= var40) and current.CanvasPosition.Y <= 33 then
 			current.CanvasPosition = Vector2.new(0, 0)
 		end
-		var53.current = var80
-	end, { var80 })
+		var11.current = var40
+	end, { var40 })
 	
-	return if #var72 == 0 then reactModule.createElement(view, {
+	return if #var30 == 0 then reactModule.createElement(view, {
 		BorderSizePixel = 0,
 		Size = size,
-		backgroundStyle = var62.Color.None,
+		backgroundStyle = var20.Color.None,
 		LayoutOrder = layoutOrder
 	}) else reactModule.createElement(view, {
 		BorderSizePixel = 0,
 		Size = size,
-		backgroundStyle = var62.Color.None,
+		backgroundStyle = var20.Color.None,
 		LayoutOrder = layoutOrder
 	}, {
 		scroller = reactModule.createElement(ultimateListModule.Components.ScrollingFrame, {
 			direction = "y",
-			dataSource = ultimateListModule.DataSources.array(if var58.X > 0 or var58.Y > 0 then var73.items else {}),
-			dimensions = ultimateListModule.Dimensions.getter(function(p17)
+			dataSource = ultimateListModule.DataSources.array(if var16.X > 0 or var16.Y > 0 then var31.items else {}),
+			dimensions = ultimateListModule.Dimensions.getter(function(p3)
 				return {
-					size = UDim2.new(1, 0, 0, p17.height),
-					position = UDim2.fromOffset(0, p17.yOffset)
+					size = UDim2.new(1, 0, 0, p3.height),
+					position = UDim2.fromOffset(0, p3.yOffset)
 				}
 			end),
-			renderer = ultimateListModule.Renderers.byState(reactModule.useCallback(function(p18)
-				-- upvalues: reactModule (copy), MeasuredChatLandingModal (copy), var65 (ref), conversationGroupsEntryContainerModule (copy), entryHeight (ref), isPartyQuickStartEnabled (ref), partyQuickStartContainerModule (copy), partyPageCarouselExperimentation (copy), socialCarouselModule (copy), var71 (ref), p9 (ref), constants (copy), var69 (ref), fFlagAppIaScrollAway (copy), view (copy), var62 (ref), conversationRowModule (copy), var68 (ref), navigateToSquadLobby (ref), fireConversationImpressionEvent (ref), fireConversationClickedEvent (ref), rowProps (ref)
-				return if p18.isChatLandingModal then reactModule.createElement(MeasuredChatLandingModal, { itemId = p18.id, onHeightChanged = var65 }) elseif p18.isGroupLink then reactModule.createElement(conversationGroupsEntryContainerModule, { entryHeight = entryHeight }) elseif isPartyQuickStartEnabled and p18.isQuickStartLink then reactModule.createElement(partyQuickStartContainerModule, { entryHeight = entryHeight }) elseif partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and p18.isSocialCarousel then reactModule.createElement(socialCarouselModule.Entry, {
+			renderer = ultimateListModule.Renderers.byState(reactModule.useCallback(function(p3)
+				-- upvalues: reactModule (copy), MeasuredChatLandingModal (copy), var23 (ref), conversationGroupsEntryContainerModule (copy), entryHeight (ref), isPartyQuickStartEnabled (ref), partyQuickStartContainerModule (copy), partyPageCarouselExperimentation (copy), socialCarouselModule (copy), var29 (ref), p2 (ref), constants (copy), var27 (ref), fFlagAppIaScrollAway (copy), view (copy), var20 (ref), conversationRowModule (copy), var26 (ref), navigateToSquadLobby (ref), fireConversationImpressionEvent (ref), fireConversationClickedEvent (ref), rowProps (ref)
+				return if p3.isChatLandingModal then reactModule.createElement(MeasuredChatLandingModal, { itemId = p3.id, onHeightChanged = var23 }) elseif p3.isGroupLink then reactModule.createElement(conversationGroupsEntryContainerModule, { entryHeight = entryHeight }) elseif isPartyQuickStartEnabled and p3.isQuickStartLink then reactModule.createElement(partyQuickStartContainerModule, { entryHeight = entryHeight }) elseif partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and p3.isSocialCarousel then reactModule.createElement(socialCarouselModule.Entry, {
 					roduxKey = "ChatAppReducer",
 					hideCarouselHeader = true,
-					customTileList = var71,
-					source = if p9.isInExperience then constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else constants.ANALYTICS.SRC.PARTY_PAGE_UA,
-					unifiedLogging = var69
-				}) elseif fFlagAppIaScrollAway and p18.isCanvasTopPadding then reactModule.createElement(view, {
+					customTileList = var29,
+					source = if p2.isInExperience then constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else constants.ANALYTICS.SRC.PARTY_PAGE_UA,
+					unifiedLogging = var27
+				}) elseif fFlagAppIaScrollAway and p3.isCanvasTopPadding then reactModule.createElement(view, {
 					BorderSizePixel = 0,
-					Size = UDim2.new(1, 0, 0, p18.height),
-					backgroundStyle = var62.Color.None
+					Size = UDim2.new(1, 0, 0, p3.height),
+					backgroundStyle = var20.Color.None
 				}) else reactModule.createElement(conversationRowModule, {
 					entryHeight = entryHeight,
-					conversationId = p18.id,
-					isSquadEnabled = var68,
-					isWideMode = p9.isWideMode,
-					onActivated = p9.onActivated,
+					conversationId = p3.id,
+					isSquadEnabled = var26,
+					isWideMode = p2.isWideMode,
+					onActivated = p2.onActivated,
 					onSquadJoinButtonActivated = navigateToSquadLobby,
-					key = "ConversationEntry" .. tostring(p18.id),
+					key = "ConversationEntry" .. tostring(p3.id),
 					fireImpressionEvent = fireConversationImpressionEvent,
 					fireClickEvent = fireConversationClickedEvent,
 					showBackground = rowProps.showBackground,
-					localUserId = p9.localUserId,
-					debugCellValue = if p9.isDebugEnabled then tostring(p18.id) else nil
+					localUserId = p2.localUserId,
+					debugCellValue = if p2.isDebugEnabled then tostring(p3.id) else nil
 				})
 			end, {
-				entryHeight, var68, isPartyQuickStartEnabled, var71, p9.isInExperience, var69,
-				p9.onActivated, navigateToSquadLobby, fireConversationImpressionEvent,
-				fireConversationClickedEvent, rowProps, p9.isDebugEnabled, p9.localUserId,
-				p9.isWideMode, var65, var62
+				entryHeight, var26, isPartyQuickStartEnabled, var29, p2.isInExperience, var27,
+				p2.onActivated, navigateToSquadLobby, fireConversationImpressionEvent,
+				fireConversationClickedEvent, rowProps, p2.isDebugEnabled, p2.localUserId,
+				p2.isWideMode, var23, var20
 			})),
 			getKey = getKey,
-			scrollingFrameRef = var79,
-			onAbsoluteWindowSizeChanged = var76,
-			onScrollAxisChanged = var78,
-			onStartReached = var75,
-			onEndReached = var74,
+			scrollingFrameRef = var39,
+			onAbsoluteWindowSizeChanged = var36,
+			onScrollAxisChanged = var38,
+			onStartReached = var35,
+			onEndReached = var34,
 			onStartReachedThreshold = entryHeight * appChatPerfChatLandingPaginationOnStartReachedUnits,
 			onEndReachedThreshold = entryHeight * appChatPerfChatLandingPaginationOnEndReachedUnits,
 			native = {
 				Name = "RCTScrollView",
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				ScrollBarThickness = if fFlagFriendsChatConversationListShowScrollBar and p9.showScrollbarOnScroll then p9.scrollbarThickness or 8 else 0,
-				ScrollBarImageColor3 = if fFlagFriendsChatConversationListShowScrollBar and p9.showScrollbarOnScroll then var62.Color.Content.Emphasis.Color3 else nil,
-				ScrollBarImageTransparency = if fFlagFriendsChatConversationListShowScrollBar and p9.showScrollbarOnScroll then var49 else nil
+				ScrollBarThickness = if fFlagFriendsChatConversationListShowScrollBar and p2.showScrollbarOnScroll then p2.scrollbarThickness or 8 else 0,
+				ScrollBarImageColor3 = if fFlagFriendsChatConversationListShowScrollBar and p2.showScrollbarOnScroll then var20.Color.Content.Emphasis.Color3 else nil,
+				ScrollBarImageTransparency = if fFlagFriendsChatConversationListShowScrollBar and p2.showScrollbarOnScroll then var7 else nil
 			}
 		})
 	})

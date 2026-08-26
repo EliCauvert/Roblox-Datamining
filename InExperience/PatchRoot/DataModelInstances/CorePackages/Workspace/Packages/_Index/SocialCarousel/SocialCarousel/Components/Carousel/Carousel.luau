@@ -31,85 +31,85 @@ local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppComp
 local fFlagLuaAppFriendsSortHeaderByPosition = sharedFlagsModule.FFlagLuaAppFriendsSortHeaderByPosition
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagLuaAppCompositionAlways (ref), fixCarouselTileSizeScaling (ref), useTokens (ref), useSocialCarouselContextModule (ref), useTilesSeenCollectionModule (ref), reactModule (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule (ref), useLocalization (ref), usePageSideMargin (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), useCollectionLayout (ref), fFlagSocialCarouselFixColdStartJitterModule (ref), robloxAppHooksModule (ref), useColdStartLayoutReadyModule (ref), tileComponentsModule (ref), socialCarouselFixLoadingSkeletonSizing (ref), tile (ref), t (ref), collectionCarousel (ref), fFlagLuaAppFriendsSortHeaderByPosition (ref), fFlagFlyoutHideFriendsHeaderModule (ref), fFlagEnableFlyoutFriendsHeaderFix (ref), flyoutSidePanelIXP (ref)
-	local var29
-	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p0.appCompositionEnabled
-	local var19 = if fixCarouselTileSizeScaling then useTokens() else nil
-	local var20 = useSocialCarouselContextModule()
-	local var21 = useTilesSeenCollectionModule()
-	local var22, var23 = reactModule.useState(nil)
-	local var24 = reactModule.useRef(nil)
-	local var25 = reactModule.useRef({ startIndex = 1, endIndex = 1 })
-	local var26 = reactModule.useRef(false)
-	local var27 = reactModule.useRef(nil)
-	local var28 = reactModule.useRef(nil)
+	local var1
+	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p1.appCompositionEnabled
+	local var2 = if fixCarouselTileSizeScaling then useTokens() else nil
+	local var3 = useSocialCarouselContextModule()
+	local var4 = useTilesSeenCollectionModule()
+	local var5, var6 = reactModule.useState(nil)
+	local var7 = reactModule.useRef(nil)
+	local var8 = reactModule.useRef({ startIndex = 1, endIndex = 1 })
+	local var9 = reactModule.useRef(false)
+	local var10 = reactModule.useRef(nil)
+	local var11 = reactModule.useRef(nil)
 	
 	if fFlagSocialCarouselShowLoadingSkeletonModule then
-		var29 = not var20.isLoading
+		var1 = not var3.isLoading
 		
-		if var29 then
-			var29 = var20.friendCount > 0
-			var29 = nil
+		if var1 then
+			var1 = var3.friendCount > 0
+			var1 = nil
 		end
 	else
-		var29 = var20.friendCount > 0
+		var1 = var3.friendCount > 0
 	end
-	local var30 = useLocalization({
-		friendsLabel = if not fFlagConnectionsToFriendsRename then if not var29 then constantsModule.LOCALIZATION.CONNECTIONS_LABEL else {
+	local var12 = useLocalization({
+		friendsLabel = if not fFlagConnectionsToFriendsRename then if not var1 then constantsModule.LOCALIZATION.CONNECTIONS_LABEL else {
 			constantsModule.LOCALIZATION.CONNECTIONS_LABEL_WITH_COUNT,
-			connectionCount = var20.friendCount
-		} elseif not var29 then constantsModule.LOCALIZATION.FRIENDS_LABEL else {
+			connectionCount = var3.friendCount
+		} elseif not var1 then constantsModule.LOCALIZATION.FRIENDS_LABEL else {
 			constantsModule.LOCALIZATION.FRIENDS_LABEL_WITH_COUNT,
-			friendCount = var20.friendCount
+			friendCount = var3.friendCount
 		}
 	})
-	local var31 = useCollectionLayoutParams(collectionItemSize.XSmall, var22, true, {
-		sideMargin = if fFlagLuaAppCompositionAlways_1 then nil elseif not fFlagLuaAppCompositionAlways then usePageSideMargin(var22) else nil
+	local var13 = useCollectionLayoutParams(collectionItemSize.XSmall, var5, true, {
+		sideMargin = if fFlagLuaAppCompositionAlways_1 then nil elseif not fFlagLuaAppCompositionAlways then usePageSideMargin(var5) else nil
 	})
-	local var32 = if fFlagLuaAppCompositionAlways_1 then useCollectionLayout(collectionItemSize.XSmall).itemsPerRow else var31.numColumns
-	local var33 = false
-	local var34 = nil
+	local var14 = if fFlagLuaAppCompositionAlways_1 then useCollectionLayout(collectionItemSize.XSmall).itemsPerRow else var13.numColumns
+	local var15 = false
+	local var16 = nil
 	
 	if fFlagSocialCarouselFixColdStartJitterModule then
-		local var35, var36 = reactModule.useState(Vector2.zero)
-		var33 = useColdStartLayoutReadyModule(robloxAppHooksModule.useDeviceOrientation() ~= nil, robloxAppHooksModule.useScreenSize(), var35.X, var32)
-		var34 = reactModule.useCallback(function(p1)
-			-- upvalues: var36 (ref)
-			var36(p1)
+		local var17, var18 = reactModule.useState(Vector2.zero)
+		var15 = useColdStartLayoutReadyModule(robloxAppHooksModule.useDeviceOrientation() ~= nil, robloxAppHooksModule.useScreenSize(), var17.X, var14)
+		var16 = reactModule.useCallback(function(p2)
+			-- upvalues: var18 (ref)
+			var18(p2)
 		end, {})
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var32 (ref), var27 (ref), var26 (ref), var28 (ref)
-		if var32 ~= var27.current then
-			var27.current = var32
-			var26.current = false
+		-- upvalues: var14 (ref), var10 (ref), var9 (ref), var11 (ref)
+		if var14 ~= var10.current then
+			var10.current = var14
+			var9.current = false
 			
-			if var28.current then
-				pcall(task.cancel, var28.current)
+			if var11.current then
+				pcall(task.cancel, var11.current)
 			end
-			var28.current = task.delay(0.2, function()
-				-- upvalues: var26 (copy), var28 (copy)
-				var26.current = true
-				var28.current = nil
+			var11.current = task.delay(0.2, function()
+				-- upvalues: var9 (copy), var11 (copy)
+				var9.current = true
+				var11.current = nil
 			end)
 		end
-	end, { var32 })
+	end, { var14 })
 	reactModule.useEffect(function()
-		-- upvalues: var28 (ref)
+		-- upvalues: var11 (ref)
 		return function()
-			-- upvalues: var28 (copy)
-			if var28.current then
-				pcall(task.cancel, var28.current)
+			-- upvalues: var11 (copy)
+			if var11.current then
+				pcall(task.cancel, var11.current)
 			end
 		end
 	end, {})
-	local var37 = reactModule.useCallback(function(p2)
-		-- upvalues: fixCarouselTileSizeScaling (copy), constantsModule (copy), var19 (ref)
-		return p2 + (if fixCarouselTileSizeScaling then constantsModule.TILE_TEXT_HEIGHT * var19.Config.UI.Scale else constantsModule.TILE_TEXT_HEIGHT)
+	local var19 = reactModule.useCallback(function(p2)
+		-- upvalues: fixCarouselTileSizeScaling (copy), constantsModule (copy), var2 (ref)
+		return p2 + (if fixCarouselTileSizeScaling then constantsModule.TILE_TEXT_HEIGHT * var2.Config.UI.Scale else constantsModule.TILE_TEXT_HEIGHT)
 	end, {})
-	local selectionOrderBase = var20.selectionOrderBase
-	local isLoading = fFlagSocialCarouselShowLoadingSkeletonModule and var20.isLoading
+	local selectionOrderBase = var3.selectionOrderBase
+	local isLoading = fFlagSocialCarouselShowLoadingSkeletonModule and var3.isLoading
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		UIPadding = reactModule.createElement("UIPadding", {
@@ -118,67 +118,67 @@ return function(p0)
 		}),
 		CollectionCarousel = reactModule.createElement(collectionCarousel, {
 			LayoutOrder = 1,
-			containerRef = var23,
-			scrollingFrameRef = var24,
-			onContainerSizeChanged = if fFlagSocialCarouselFixColdStartJitterModule then var34 else nil,
-			title = var30.friendsLabel,
-			items = if fFlagSocialCarouselFixColdStartJitterModule and not var33 then t elseif isLoading then reactModule.useMemo(function()
-				-- upvalues: fFlagSocialCarouselShowLoadingSkeletonModule (copy), var32 (ref), socialCarouselFixLoadingSkeletonSizing (copy), tile (copy)
+			containerRef = var6,
+			scrollingFrameRef = var7,
+			onContainerSizeChanged = if fFlagSocialCarouselFixColdStartJitterModule then var16 else nil,
+			title = var12.friendsLabel,
+			items = if fFlagSocialCarouselFixColdStartJitterModule and not var15 then t elseif isLoading then reactModule.useMemo(function()
+				-- upvalues: fFlagSocialCarouselShowLoadingSkeletonModule (copy), var14 (ref), socialCarouselFixLoadingSkeletonSizing (copy), tile (copy)
 				local t = {}
 				
 				if not fFlagSocialCarouselShowLoadingSkeletonModule then
 					return t
 				end
-				for i = 1, (var32 or 5) + (if socialCarouselFixLoadingSkeletonSizing then 1 else 0) do
+				for i = 1, (var14 or 5) + (if socialCarouselFixLoadingSkeletonSizing then 1 else 0) do
 					t[i] = { id = "skeleton_" .. i, tileType = tile.Skeleton }
 				end
 				return t
-			end, { var32 }) else var20.tiles,
-			renderItem = reactModule.useCallback(function(p3, p4, p5)
-				-- upvalues: selectionOrderBase (ref), tileComponentsModule (copy), p0 (ref)
-				return tileComponentsModule[p3.tileType](p3, p4, p5, if selectionOrderBase then selectionOrderBase + p4 else nil, function(p6, p7)
-					-- upvalues: p0 (copy), p3 (ref)
-					if p0.onTileContentChanged then
-						p0.onTileContentChanged(p6, p7, p3)
+			end, { var14 }) else var3.tiles,
+			renderItem = reactModule.useCallback(function(p2, p3, p4)
+				-- upvalues: selectionOrderBase (ref), tileComponentsModule (copy), p1 (ref)
+				return tileComponentsModule[p2.tileType](p2, p3, p4, if selectionOrderBase then selectionOrderBase + p3 else nil, function(p5, p6)
+					-- upvalues: p1 (copy), p2 (ref)
+					if p1.onTileContentChanged then
+						p1.onTileContentChanged(p5, p6, p2)
 					end
-				end), p3.tileType
-			end, { selectionOrderBase, p0.onTileContentChanged }),
-			getItemHeight = var37,
+				end), p2.tileType
+			end, { selectionOrderBase, p1.onTileContentChanged }),
+			getItemHeight = var19,
 			collectionItemSize = if fFlagLuaAppCompositionAlways_1 then collectionItemSize.XSmall else nil,
-			numColumns = if fFlagLuaAppCompositionAlways_1 then nil else var31.numColumns,
-			fractionalItemAmount = if fFlagLuaAppCompositionAlways_1 then nil else var31.fractionalItemAmount,
-			columnGap = if fFlagLuaAppCompositionAlways_1 then nil else var31.columnGap,
-			sideMargin = if fFlagLuaAppCompositionAlways_1 then nil else var31.sideMargin,
-			maxItemsToShow = var31.maxTilesToShow,
-			thresholdFromEnd = var31.loadMoreThreshold,
-			onViewableItemsChanged = if isLoading or fFlagSocialCarouselFixColdStartJitterModule and not var33 then nil else reactModule.useCallback(function(p8, p9)
-				-- upvalues: var20 (ref), var22 (ref), var24 (ref), var26 (ref), var32 (ref), var25 (ref), var21 (ref)
-				if var20.unifiedLogging then
-					var20.unifiedLogging.onCollectionViewabilityChanged(p8, p9)
+			numColumns = if fFlagLuaAppCompositionAlways_1 then nil else var13.numColumns,
+			fractionalItemAmount = if fFlagLuaAppCompositionAlways_1 then nil else var13.fractionalItemAmount,
+			columnGap = if fFlagLuaAppCompositionAlways_1 then nil else var13.columnGap,
+			sideMargin = if fFlagLuaAppCompositionAlways_1 then nil else var13.sideMargin,
+			maxItemsToShow = var13.maxTilesToShow,
+			thresholdFromEnd = var13.loadMoreThreshold,
+			onViewableItemsChanged = if isLoading or fFlagSocialCarouselFixColdStartJitterModule and not var15 then nil else reactModule.useCallback(function(p2, p3)
+				-- upvalues: var3 (ref), var5 (ref), var7 (ref), var9 (ref), var14 (ref), var8 (ref), var4 (ref)
+				if var3.unifiedLogging then
+					var3.unifiedLogging.onCollectionViewabilityChanged(p2, p3)
 				end
-				if var20.tiles and var22 and (var24.current and var26.current) then
-					local absoluteSize = var22.AbsoluteSize
-					local var40 = absoluteSize.X / var32
-					local x = var24.current.CanvasPosition.X
-					local maxValue = math.max(1, math.floor(x / var40) + 1)
-					local minValue = math.min(#var20.tiles, math.ceil((x + absoluteSize.X) / var40))
-					var25.current = { startIndex = maxValue, endIndex = minValue }
+				if var3.tiles and var5 and (var7.current and var9.current) then
+					local absoluteSize = var5.AbsoluteSize
+					local var20 = absoluteSize.X / var14
+					local x = var7.current.CanvasPosition.X
+					local maxValue = math.max(1, math.floor(x / var20) + 1)
+					local minValue = math.min(#var3.tiles, math.ceil((x + absoluteSize.X) / var20))
+					var8.current = { startIndex = maxValue, endIndex = minValue }
 					
 					for i = maxValue, minValue do
-						local var43 = var20.tiles[i]
+						local var21 = var3.tiles[i]
 						
-						if var43 and var43.id then
-							var21.addTileToCollection(var43.id, i, var43)
+						if var21 and var21.id then
+							var4.addTileToCollection(var21.id, i, var21)
 						end
 					end
 				end
 			end, {
-				p0.onViewableItemsChanged, var20.tiles, var22, var24, var32, var21
+				p1.onViewableItemsChanged, var3.tiles, var5, var7, var14, var4
 			}),
-			onChangeCanvasPosition = if var20.unifiedLogging and not isLoading and (not fFlagSocialCarouselFixColdStartJitterModule or var33) then var20.unifiedLogging.onCollectionViewabilityChanged else nil,
-			onActivateHeader = p0.onActivateHeader,
-			headerComponent = if fFlagLuaAppFriendsSortHeaderByPosition then if var20.hideCarouselHeader then reactModule.createElement(reactModule.Fragment, nil, {}) else nil elseif var20.hideCarouselHeader or fFlagFlyoutHideFriendsHeaderModule and (if fFlagEnableFlyoutFriendsHeaderFix then flyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp() else flyoutSidePanelIXP.isFlyoutSidePanelEnabled()) then reactModule.createElement(reactModule.Fragment, nil, {}) else nil
+			onChangeCanvasPosition = if var3.unifiedLogging and not isLoading and (not fFlagSocialCarouselFixColdStartJitterModule or var15) then var3.unifiedLogging.onCollectionViewabilityChanged else nil,
+			onActivateHeader = p1.onActivateHeader,
+			headerComponent = if fFlagLuaAppFriendsSortHeaderByPosition then if var3.hideCarouselHeader then reactModule.createElement(reactModule.Fragment, nil, {}) else nil elseif var3.hideCarouselHeader or fFlagFlyoutHideFriendsHeaderModule and (if fFlagEnableFlyoutFriendsHeaderFix then flyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp() else flyoutSidePanelIXP.isFlyoutSidePanelEnabled()) then reactModule.createElement(reactModule.Fragment, nil, {}) else nil
 		}),
-		ScreenSizeImpressionsTracker = if var20.unifiedLogging and (not fFlagSocialCarouselFixColdStartJitterModule or var33) then var20.unifiedLogging.renderImpressionsTrackerComponent(var24) else nil
+		ScreenSizeImpressionsTracker = if var3.unifiedLogging and (not fFlagSocialCarouselFixColdStartJitterModule or var15) then var3.unifiedLogging.renderImpressionsTrackerComponent(var7) else nil
 	})
 end

@@ -14,16 +14,16 @@ local t_1 = {
 	getLuaHeap = function()
 		-- upvalues: garbageCollectorModule (ref), memoryTrackerModule (ref)
 		garbageCollectorModule.collect()
-		local var8 = memoryTrackerModule()
+		local var1 = memoryTrackerModule()
 		
-		return if var8 then var8.getLuaHeapOnly() else { luaHeapMb = "-1" }
+		return if var1 then var1.getLuaHeapOnly() else { luaHeapMb = "-1" }
 	end,
 	getSnapshot = function()
 		-- upvalues: garbageCollectorModule (ref), memoryTrackerModule (ref)
 		garbageCollectorModule.collect()
-		local var9 = memoryTrackerModule()
+		local var1 = memoryTrackerModule()
 		
-		return if var9 then var9.getSnapshot() else { luaHeapMb = "-1" }
+		return if var1 then var1.getSnapshot() else { luaHeapMb = "-1" }
 	end,
 	forceGC = function()
 		-- upvalues: garbageCollectorModule (ref)
@@ -33,25 +33,25 @@ local t_1 = {
 	end
 }
 
-local function handleRequest(p0)
+local function handleRequest(p1)
 	-- upvalues: t_1 (ref)
 	local t = {
 		result = nil,
 		error = nil,
-		id = p0.id,
-		jsonrpc = p0.jsonrpc
+		id = p1.id,
+		jsonrpc = p1.jsonrpc
 	}
-	local method = t_1[p0.method]
+	local method = t_1[p1.method]
 	
 	if method == nil then
 		t.error = {
-			message = string.format("Unknown method \"%s\"", tostring(p0.method))
+			message = string.format("Unknown method \"%s\"", tostring(p1.method))
 		}
 		
 		return t
 	end
-	local ok, status = xpcall(method, function(p1)
-		return debug.traceback(p1)
+	local ok, status = xpcall(method, function(p2)
+		return debug.traceback(p2)
 	end)
 	
 	if ok then
@@ -64,14 +64,14 @@ local function handleRequest(p0)
 	return t
 end
 
-local function tryConnect(p2)
+local function tryConnect(p1)
 	-- upvalues: memoryShellHost (ref), httpService (ref), handleRequest (ref)
-	if not p2._WebSocketService then
+	if not p1._WebSocketService then
 		return false
-	elseif p2._connected then
+	elseif p1._connected then
 		return true
 	end
-	local var11 = nil
+	local var1 = nil
 	
 	return false
 end
@@ -102,7 +102,7 @@ end
 
 function t:start()
 	if not self._WebSocketService then
-		local var12 = nil
+		local var1 = nil
 		
 		return
 	end

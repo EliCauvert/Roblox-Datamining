@@ -6,13 +6,13 @@ local _ = require(buildExperience.Chat.chatTypes)
 local publishExperienceTitleModule = require(script.Parent.PublishExperienceTitle)
 local view = foundationModule.View
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), publishExperienceTitleModule (ref)
-	local testId = p0.testId or "publish-latest-preview-card"
+	local testId = p1.testId or "publish-latest-preview-card"
 	
 	return reactModule.createElement(view, {
 		tag = "col size-full-0 auto-y padding-top-xxsmall",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		testId = testId
 	}, {
 		Card = reactModule.createElement(view, {
@@ -25,8 +25,8 @@ return function(p0)
 			}, {
 				Title = reactModule.createElement(publishExperienceTitleModule, {
 					layoutOrder = 1,
-					target = p0.target,
-					isCreatorVerified = p0.isCreatorVerified,
+					target = p1.target,
+					isCreatorVerified = p1.isCreatorVerified,
 					testId = `{testId}-title`
 				})
 			})

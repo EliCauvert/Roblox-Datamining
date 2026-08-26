@@ -30,12 +30,12 @@ function t:Start()
 	end
 end
 
-local var6 = t.new()
+local var1 = t.new()
 
 function t:DismissNotification()
-	-- upvalues: var6 (ref), shouldSaveScreenshotToAlbumModule (ref), roactModule (ref), captureNotificationModule (ref)
+	-- upvalues: var1 (ref), shouldSaveScreenshotToAlbumModule (ref), roactModule (ref), captureNotificationModule (ref)
 	if not self.init then
-		var6:Start()
+		var1:Start()
 		
 		return
 	elseif shouldSaveScreenshotToAlbumModule() then
@@ -55,9 +55,9 @@ function t:DismissNotification()
 end
 
 function t:ShowPermissionToast()
-	-- upvalues: var6 (ref)
+	-- upvalues: var1 (ref)
 	if not self.init then
-		var6:Start()
+		var1:Start()
 	end
 	self.permissionEvent:Fire()
 end
@@ -67,4 +67,4 @@ function t:Capture()
 	self.captureEvent:Fire()
 end
 
-return var6
+return var1

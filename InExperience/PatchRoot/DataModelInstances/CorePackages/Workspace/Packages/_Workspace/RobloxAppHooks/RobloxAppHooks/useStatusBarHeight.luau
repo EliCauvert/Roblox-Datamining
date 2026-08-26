@@ -2,7 +2,7 @@
 
 return function()
 	-- upvalues: useSelector (ref)
-	return useSelector(function(p0)
-		return if p0.TopBar then if p0.TopBar.statusBarHeight then p0.TopBar.statusBarHeight else 0 else 0
+	return useSelector(function(p1)
+		return if p1.TopBar then if p1.TopBar.statusBarHeight then p1.TopBar.statusBarHeight else 0 else 0
 	end)
 end

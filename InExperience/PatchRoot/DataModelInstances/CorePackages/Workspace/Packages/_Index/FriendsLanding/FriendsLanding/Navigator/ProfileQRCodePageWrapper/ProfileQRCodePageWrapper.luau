@@ -6,12 +6,12 @@ local profileQRCode = dependenciesModule.ProfileQRCode
 local contexts = dependenciesModule.SocialLuaAnalytics.Analytics.Enums.Contexts
 local friendsLandingContextModule = require(friendsLanding.FriendsLandingContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: friendsLandingContextModule (ref), roact (ref), profileQRCode (ref), llama (ref), contexts (ref)
-	return roact.createElement(profileQRCode.ProfileQRCodeEntryPoint, llama.Dictionary.join(p0, {
+	return roact.createElement(profileQRCode.ProfileQRCodeEntryPoint, llama.Dictionary.join(p1, {
 		onClose = function()
-			-- upvalues: p0 (ref)
-			p0.navigation.goBack()
+			-- upvalues: p1 (ref)
+			p1.navigation.goBack()
 		end,
 		source = contexts.AddFriends,
 		robloxEventReceiver = friendsLandingContextModule.useContext().robloxEventReceiver

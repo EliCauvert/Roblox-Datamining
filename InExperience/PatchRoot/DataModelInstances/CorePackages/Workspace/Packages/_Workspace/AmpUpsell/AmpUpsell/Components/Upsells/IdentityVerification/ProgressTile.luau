@@ -9,15 +9,15 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local images = UIBloxModule.App.ImageSet.Images
 local useStyle = UIBloxModule.Core.Style.useStyle
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), imageSetLabel (ref), images (ref), loading (ref), iconSize (ref), styledTextLabel (ref)
-	local frameHeight = p0.frameHeight
-	local var3 = useStyle()
+	local frameHeight = p1.frameHeight
+	local var1 = useStyle()
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, frameHeight),
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -26,14 +26,14 @@ return function(p0)
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, 12)
 		}),
-		StatusIcon = if p0.finished then reactModule.createElement(imageSetLabel, {
+		StatusIcon = if p1.finished then reactModule.createElement(imageSetLabel, {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, frameHeight, 0, frameHeight),
 			ScaleType = Enum.ScaleType.Fit,
 			Image = images["icons/status/success"],
-			ImageTransparency = var3.Theme.SystemPrimaryDefault.Transparency,
-			ImageColor3 = var3.Theme.IconEmphasis.Color
+			ImageTransparency = var1.Theme.SystemPrimaryDefault.Transparency,
+			ImageColor3 = var1.Theme.IconEmphasis.Color
 		}) else reactModule.createElement(loading, { size = iconSize.Small }),
 		TextFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -42,9 +42,9 @@ return function(p0)
 		}, {
 			ProgressText = reactModule.createElement(styledTextLabel, {
 				lineHeight = 1,
-				text = p0.progressText,
-				fontStyle = var3.Font.CaptionBody,
-				colorStyle = var3.Theme.TextDefault,
+				text = p1.progressText,
+				fontStyle = var1.Font.CaptionBody,
+				colorStyle = var1.Theme.TextDefault,
 				size = UDim2.new(1, 0, 1, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Left,

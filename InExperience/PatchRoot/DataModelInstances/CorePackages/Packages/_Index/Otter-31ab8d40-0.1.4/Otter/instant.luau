@@ -1,5 +1,5 @@
-﻿local function step(p0, _, _)
-	return { complete = true, value = p0.__targetValue }
+﻿local function step(p1, _, _)
+	return { complete = true, value = p1.__targetValue }
 end
 
 return function(p1)

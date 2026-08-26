@@ -14,11 +14,11 @@ local t = {
 
 return function()
 	-- upvalues: useDeviceTypeModule (ref), t (ref), uiMode (ref), reactModule (ref)
-	local var4 = useDeviceTypeModule()
-	local var5 = t[var4] or uiMode.Unknown
+	local var1 = useDeviceTypeModule()
+	local var2 = t[var1] or uiMode.Unknown
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var5 (ref)
-		return { deviceType = var4, uiMode = var5 }
-	end, { var4, var5 })
+		-- upvalues: var1 (ref), var2 (ref)
+		return { deviceType = var1, uiMode = var2 }
+	end, { var1, var2 })
 end

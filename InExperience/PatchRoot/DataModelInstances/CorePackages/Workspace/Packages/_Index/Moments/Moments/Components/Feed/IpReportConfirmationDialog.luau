@@ -13,34 +13,34 @@ local t = {
 	ipReportSubmittedTitle = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref), view (ref), text (ref)
-	local var4 = useLocalization(t)
+	local var1 = useLocalization(t)
 	
 	return reactModule.createElement(dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
-		onClose = p0.onClose,
+		onClose = p1.onClose,
 		size = foundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var4.ipReportSubmittedTitle }),
+		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.ipReportSubmittedTitle }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			ReportCodeContent = reactModule.createElement(view, { tag = "col align-x-center gap-small size-full-0 auto-y" }, {
 				ReportCodeLabel = reactModule.createElement(text, {
 					tag = "auto-xy text-title-medium text-align-x-center content-default",
 					LayoutOrder = 1,
-					Text = var4.ipReportCodeLabel
+					Text = var1.ipReportCodeLabel
 				}),
 				ReportCode = reactModule.createElement(text, {
 					tag = "auto-xy text-heading-medium text-align-x-center content-emphasis",
 					LayoutOrder = 2,
-					Text = p0.reportCode
+					Text = p1.reportCode
 				}),
 				ReportSubmittedBody = reactModule.createElement(text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
 					RichText = true,
 					LayoutOrder = 3,
-					Text = var4.ipReportSubmittedBody
+					Text = var1.ipReportSubmittedBody
 				})
 			})
 		}),
@@ -48,9 +48,9 @@ return function(p0)
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var4.ipReportSubmittedClose,
+					text = var1.ipReportSubmittedClose,
 					variant = foundationModule.Enums.ButtonVariant.Emphasis,
-					onActivated = p0.onClose
+					onActivated = p1.onClose
 				}
 			}
 		})

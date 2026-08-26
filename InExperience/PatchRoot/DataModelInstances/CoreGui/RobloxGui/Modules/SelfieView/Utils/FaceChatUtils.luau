@@ -5,16 +5,16 @@ local corePackagesService = game:GetService("CorePackages")
 local default = require(corePackagesService.Workspace.Packages.PermissionsProtocol).PermissionsProtocol.default
 local getFFlagAvatarChatServiceEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagAvatarChatServiceEnabled
 local disableCameraOnSelfieViewForLowspecDevices = game:DefineFastFlag("DisableCameraOnSelfieViewForLowspecDevices", false)
-local var5 = if disableCameraOnSelfieViewForLowspecDevices then require(robloxGui.Modules.Settings.isCamEnabledForUserAndPlace) else function()
+local var1 = if disableCameraOnSelfieViewForLowspecDevices then require(robloxGui.Modules.Settings.isCamEnabledForUserAndPlace) else function()
 	return true
 end
 local faceAnimatorService = game:GetService("FaceAnimatorService")
-local var7 = nil
+local var2 = nil
 
-local var8 = function()
-	-- upvalues: var7 (write), getFFlagAvatarChatServiceEnabled (ref), avatarChatService (ref), disableCameraOnSelfieViewForLowspecDevices (ref), var5 (write)
-	if var7 ~= nil then
-		return var7
+local var3 = function()
+	-- upvalues: var2 (write), getFFlagAvatarChatServiceEnabled (ref), avatarChatService (ref), disableCameraOnSelfieViewForLowspecDevices (ref), var1 (write)
+	if var2 ~= nil then
+		return var2
 	elseif not getFFlagAvatarChatServiceEnabled() or _G.__TESTEZ_RUNNING_TEST__ then
 		return {
 			placeCamEnabled = false,
@@ -48,10 +48,10 @@ local var8 = function()
 		userCamEligible = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.UserVideoEligible)
 	}
 	
-	if disableCameraOnSelfieViewForLowspecDevices and t.placeCamEnabled and (t.userCamEligible and t.userCamEnabled) and not var5() then
+	if disableCameraOnSelfieViewForLowspecDevices and t.placeCamEnabled and (t.userCamEligible and t.userCamEnabled) and not var1() then
 		t.userCamEnabled = false
 	end
-	var7 = t
+	var2 = t
 	
 	return t
 end
@@ -62,13 +62,13 @@ local function getTrackerMode()
 end
 
 return {
-	getPermissions = var8,
+	getPermissions = var3,
 	toggleVideoAnimation = function()
-		-- upvalues: faceAnimatorService (ref), disableCameraOnSelfieViewForLowspecDevices (ref), var8 (ref), getCamMicPermissionsModule (ref), default (ref)
+		-- upvalues: faceAnimatorService (ref), disableCameraOnSelfieViewForLowspecDevices (ref), var3 (ref), getCamMicPermissionsModule (ref), default (ref)
 		getCamMicPermissionsModule(function()
-			-- upvalues: faceAnimatorService (copy), disableCameraOnSelfieViewForLowspecDevices (copy), var8 (copy)
+			-- upvalues: faceAnimatorService (copy), disableCameraOnSelfieViewForLowspecDevices (copy), var3 (copy)
 			if not faceAnimatorService or not faceAnimatorService:IsStarted() then return end
-			if not disableCameraOnSelfieViewForLowspecDevices or var8().userCamEnabled then
+			if not disableCameraOnSelfieViewForLowspecDevices or var3().userCamEnabled then
 				faceAnimatorService.VideoAnimationEnabled = not faceAnimatorService.VideoAnimationEnabled
 			end
 		end, { default.Permissions.CAMERA_ACCESS })
@@ -76,8 +76,8 @@ return {
 	getTrackerMode = getTrackerMode,
 	isCameraOn = function()
 		-- upvalues: getTrackerMode (ref)
-		local var11 = getTrackerMode()
+		local var4 = getTrackerMode()
 		
-		return if var11 ~= Enum.TrackerMode.AudioVideo then var11 == Enum.TrackerMode.Video else true
+		return if var4 ~= Enum.TrackerMode.AudioVideo then var4 == Enum.TrackerMode.Video else true
 	end
 }

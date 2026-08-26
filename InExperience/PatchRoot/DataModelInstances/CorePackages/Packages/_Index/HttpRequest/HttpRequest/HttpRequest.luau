@@ -11,68 +11,68 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0, p1, p2, p3)
+function t_1.new(p1, p2, p3, p4)
 	-- upvalues: cryoModule (ref), httpSessionModule (ref), t_1 (ref)
-	p0 = p0 or {}
-	p0 = {
+	p1 = p1 or {}
+	p1 = {
 		resolve = nil,
 		reject = nil,
 		retryCount = 0,
 		httpRequest = nil,
 		canceled = false,
-		requestFunction = p0.requestFunction,
-		postRequestFunction = p0.postRequestFunction,
-		url = p1,
-		requestMethod = p2,
-		options = cryoModule.Dictionary.join(p0.defaultOptions or {}, p3 or {}),
-		waitImpl = p0.waitImpl or delay,
-		maxRetryCount = p0.maxRetryCount or 4,
-		maxWaitTime = p0.maxWaitTime or 16,
+		requestFunction = p1.requestFunction,
+		postRequestFunction = p1.postRequestFunction,
+		url = p2,
+		requestMethod = p3,
+		options = cryoModule.Dictionary.join(p1.defaultOptions or {}, p4 or {}),
+		waitImpl = p1.waitImpl or delay,
+		maxRetryCount = p1.maxRetryCount or 4,
+		maxWaitTime = p1.maxWaitTime or 16,
 		session = httpSessionModule.currentSession()
 	}
-	setmetatable(p0, t_1)
+	setmetatable(p1, t_1)
 	
-	return p0
+	return p1
 end
 
-function t_1:start(p4, p5)
-	self.resolve = p4
-	self.reject = p5
+function t_1:start(p1, p2)
+	self.resolve = p1
+	self.reject = p2
 	self:makeRequest()
 end
 
-function t_1:processResponse(p6)
+function t_1:processResponse(p1)
 	-- upvalues: httpService (ref), httpResponseModule (ref)
-	local ok, status = pcall(httpService.JSONDecode, httpService, p6.Body)
+	local ok, status = pcall(httpService.JSONDecode, httpService, p1.Body)
 	
 	if not ok then
 		self.reject(httpResponseModule.error(Enum.HttpError.OK))
 		
 		return
 	elseif self.postRequestFunction then
-		pcall(self.postRequestFunction, p6, {
+		pcall(self.postRequestFunction, p1, {
 			url = self.url,
 			requestMethod = self.requestMethod,
 			options = self.options,
 			retryCount = self.retryCount
 		})
 	end
-	self.resolve(httpResponseModule.success(p6.StatusCode, status))
+	self.resolve(httpResponseModule.success(p1.StatusCode, status))
 end
 
-function t_1:retry(p7, p8)
+function t_1:retry(p1, p2)
 	self.retryCount += 1
 	
 	if self.maxRetryCount < self.retryCount then
-		self.reject(p7)
+		self.reject(p1)
 		
 		return
 	end
-	self:wait(p8 or math.pow(2, self.retryCount))
+	self:wait(p2 or math.pow(2, self.retryCount))
 end
 
-function t_1:wait(p9)
-	self.waitImpl(p9, function()
+function t_1:wait(p1)
+	self.waitImpl(p1, function()
 		-- upvalues: self (ref)
 		self:makeRequest()
 	end)
@@ -84,38 +84,38 @@ function t_1:makeRequest()
 		return
 	end
 	self.httpRequest = self.requestFunction(self.url, self.requestMethod, self.options)
-	self.httpRequest:Start(function(p10, p11)
+	self.httpRequest:Start(function(p1, p2)
 		-- upvalues: self (ref), httpSessionModule (copy), t (copy), statusCodeModule (copy), httpResponseModule (copy)
 		if self.session ~= httpSessionModule.currentSession() then
 			warn("Http request aborted", self.url)
 			
 			return
-		elseif p10 then
-			if p11.StatusCode >= 200 and p11.StatusCode < 400 then
-				self:processResponse(p11)
+		elseif p1 then
+			if p2.StatusCode >= 200 and p2.StatusCode < 400 then
+				self:processResponse(p2)
 				
 				return
-			elseif t[p11.StatusCode] then
-				self:retry(p11)
+			elseif t[p2.StatusCode] then
+				self:retry(p2)
 				
 				return
-			elseif p11.StatusCode ~= statusCodeModule.TOO_MANY_REQUESTS or not p11.Headers["Retry-After"] then
-				self.reject(p11)
+			elseif p2.StatusCode ~= statusCodeModule.TOO_MANY_REQUESTS or not p2.Headers["Retry-After"] then
+				self.reject(p2)
 				
 				return
 			end
-			local var8 = tonumber(p11.Headers["Retry-After"])
+			local var1 = tonumber(p2.Headers["Retry-After"])
 			
-			if var8 == nil or var8 > self.maxWaitTime then
-				self.reject(p11)
+			if var1 == nil or var1 > self.maxWaitTime then
+				self.reject(p2)
 				
 				return
 			end
-			self:retry(p11, var8)
+			self:retry(p2, var1)
 			
 			return
 		elseif not self.canceled then
-			self:retry(httpResponseModule.error(p11.HttpError))
+			self:retry(httpResponseModule.error(p2.HttpError))
 		end
 	end)
 end

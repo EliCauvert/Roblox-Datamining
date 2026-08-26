@@ -13,11 +13,11 @@ local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.
 
 return function(value)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), enumsModule (ref), constants (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), reactModule (ref), catalogItemCard (ref), itemCardThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref)
-	local var6 = useLocalization({
+	local var1 = useLocalization({
 		free = textKeysModule.CatalogLabelFree,
 		offSale = textKeysModule.CatalogLabelOffSale
 	})
-	local var7 = if value.itemType == enumsModule.ItemTypes.Bundle then constants.RbxthumbTypes.BundleThumbnail else constants.RbxthumbTypes.Asset
+	local var2 = if value.itemType == enumsModule.ItemTypes.Bundle then constants.RbxthumbTypes.BundleThumbnail else constants.RbxthumbTypes.Asset
 	local t = nil
 	
 	if value.isOffSale then
@@ -26,12 +26,12 @@ return function(value)
 			price = value.lowestResalePrice
 		} else {
 			type = enumsModule.PriceLineContentType.Text,
-			text = var6.offSale
+			text = var1.offSale
 		}
 	elseif value.price == 0 then
 		t = {
 			type = enumsModule.PriceLineContentType.Text,
-			text = var6.free
+			text = var1.free
 		}
 	elseif value.price then
 		t = {
@@ -43,7 +43,7 @@ return function(value)
 		Selectable = true,
 		title = value.name,
 		presentationSlot = reactModule.createElement(itemCardThumbnail, {
-			url = getRbxthumbWithTypeSizeAndOptions(value.assetId, var7, 150)
+			url = getRbxthumbWithTypeSizeAndOptions(value.assetId, var2, 150)
 		}),
 		onActivated = value.onActivated,
 		priceLineContent = t,

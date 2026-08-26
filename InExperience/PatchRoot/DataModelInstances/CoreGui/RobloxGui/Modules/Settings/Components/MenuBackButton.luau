@@ -11,7 +11,7 @@ local externalEventConnection = require(corePackagesService.Workspace.Packages.R
 local utilityModule = require(robloxGui.Modules.Settings.Utility)
 local backButtonControllerModule = require(robloxGui.Modules.Settings.BackButtonController)
 local menuBackButton = roactModule.PureComponent:extend("MenuBackButton")
-local var9 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
+local var1 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
 local themeModule = require(robloxGui.Modules.Settings.Theme)
 menuBackButton.validateProps = tModule.strictInterface({
 	HubBar = tModule.instanceOf("ImageLabel"),
@@ -23,28 +23,28 @@ menuBackButton.defaultProps = {
 	backEnabled = backButtonControllerModule.hasReturnUniverse()
 }
 
-function menuBackButton.init(p0)
+function menuBackButton.init(p1)
 	-- upvalues: backButtonControllerModule (ref), roactModule (ref)
-	p0:setState({ text = backButtonControllerModule.getMenuText() })
-	local var11, var12 = roactModule.createBinding(nil)
-	p0.sizeBinding = var11
-	p0.updateSizeBinding = var12
-	local var13, var14 = roactModule.createBinding(nil)
-	p0.sizeConstraintBinding = var13
-	p0.updateSizeConstraintBinding = var14
-	local var15, var16 = roactModule.createBinding(nil)
-	p0.visibleBinding = var15
-	p0.updateVisibleBinding = var16
-	local var17, var18 = roactModule.createBinding(nil)
-	p0.buttonHeightBinding = var17
-	p0.updateButtonHeightBinding = var18
-	local var19, var20 = roactModule.createBinding(nil)
-	p0.textSizeBinding = var19
-	p0.updateTextSizeBinding = var20
-	local var21, var22 = roactModule.createBinding(nil)
-	p0.textSizeConstraintBinding = var21
-	p0.updateTextSizeConstraintBinding = var22
-	p0.textLabelRef = roactModule.createRef()
+	p1:setState({ text = backButtonControllerModule.getMenuText() })
+	local var2, var3 = roactModule.createBinding(nil)
+	p1.sizeBinding = var2
+	p1.updateSizeBinding = var3
+	local var4, var5 = roactModule.createBinding(nil)
+	p1.sizeConstraintBinding = var4
+	p1.updateSizeConstraintBinding = var5
+	local var6, var7 = roactModule.createBinding(nil)
+	p1.visibleBinding = var6
+	p1.updateVisibleBinding = var7
+	local var8, var9 = roactModule.createBinding(nil)
+	p1.buttonHeightBinding = var8
+	p1.updateButtonHeightBinding = var9
+	local var10, var11 = roactModule.createBinding(nil)
+	p1.textSizeBinding = var10
+	p1.updateTextSizeBinding = var11
+	local var12, var13 = roactModule.createBinding(nil)
+	p1.textSizeConstraintBinding = var12
+	p1.updateTextSizeConstraintBinding = var13
+	p1.textLabelRef = roactModule.createRef()
 end
 
 function menuBackButton.didMount(p1)
@@ -53,77 +53,77 @@ function menuBackButton.didMount(p1)
 	p1:updateViewport()
 end
 
-function menuBackButton.didUpdate(p2, p3)
-	if p2.props.HubBar ~= p3.HubBar then
-		p2.updateSizeBinding(p2.props.HubBar.Size)
-		p2.updateVisibleBinding(p2.props.HubBar.Visible)
+function menuBackButton.didUpdate(p1, p2)
+	if p1.props.HubBar ~= p2.HubBar then
+		p1.updateSizeBinding(p1.props.HubBar.Size)
+		p1.updateVisibleBinding(p1.props.HubBar.Visible)
 	end
 end
 
-function menuBackButton.updateViewport(p4)
-	-- upvalues: themeModule (ref), utilityModule (ref), var9 (ref)
-	local var23 = themeModule.textSize(24)
+function menuBackButton.updateViewport(p1)
+	-- upvalues: themeModule (ref), utilityModule (ref), var1 (ref)
+	local var2 = themeModule.textSize(24)
 	
 	if utilityModule:IsSmallTouchScreen() then
-		var23 = themeModule.textSize(18)
-	elseif var9 then
-		var23 = themeModule.textSize(36)
+		var2 = themeModule.textSize(18)
+	elseif var1 then
+		var2 = themeModule.textSize(36)
 	end
-	p4.updateTextSizeConstraintBinding(var23)
-	local var24 = utilityModule:IsPortrait()
-	local var25 = if var9 then 120 else themeModule.LargeButtonHeight
+	p1.updateTextSizeConstraintBinding(var2)
+	local var3 = utilityModule:IsPortrait()
+	local var4 = if var1 then 120 else themeModule.LargeButtonHeight
 	
-	if var24 or utilityModule:IsSmallTouchScreen() then
-		var25 = themeModule.ButtonHeight
-		var23 = var24 and themeModule.textSize(16) or themeModule.textSize(24)
+	if var3 or utilityModule:IsSmallTouchScreen() then
+		var4 = themeModule.ButtonHeight
+		var2 = var3 and themeModule.textSize(16) or themeModule.textSize(24)
 	end
-	p4.updateTextSizeBinding(var23)
-	p4.updateButtonHeightBinding(var25)
+	p1.updateTextSizeBinding(var2)
+	p1.updateButtonHeightBinding(var4)
 	
-	if p4.textLabelRef:getValue() and p4.props.BackBarRef:getValue() then
-		p4.updateSizeConstraintBinding(Vector2.new(p4.props.BackBarRef:getValue().AbsoluteSize.X - (p4.textLabelRef:getValue().AbsolutePosition.X - p4.props.BackBarRef:getValue().AbsolutePosition.X), 1e999))
+	if p1.textLabelRef:getValue() and p1.props.BackBarRef:getValue() then
+		p1.updateSizeConstraintBinding(Vector2.new(p1.props.BackBarRef:getValue().AbsoluteSize.X - (p1.textLabelRef:getValue().AbsolutePosition.X - p1.props.BackBarRef:getValue().AbsolutePosition.X), 1e999))
 	end
 end
 
-function menuBackButton.render(p5)
+function menuBackButton.render(p1)
 	-- upvalues: roactModule (ref), externalEventConnection (ref), themeModule (ref), backButtonControllerModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), foundationModule (ref), imageSetLabel (ref), images (ref)
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(0, 0),
 		Position = UDim2.new(0, 0, 0, 0),
-		LayoutOrder = p5.props.LayoutOrder,
-		Visible = roactModule.joinBindings({ p5.state.text, p5.visibleBinding }):map(function(p6)
-			-- upvalues: p5 (ref)
-			return p5.props.backEnabled and (p6[1] ~= nil and p6[2])
+		LayoutOrder = p1.props.LayoutOrder,
+		Visible = roactModule.joinBindings({ p1.state.text, p1.visibleBinding }):map(function(p2)
+			-- upvalues: p1 (ref)
+			return p1.props.backEnabled and (p2[1] ~= nil and p2[2])
 		end),
-		Size = roactModule.joinBindings({ p5.sizeBinding, p5.buttonHeightBinding }):map(function(p7)
-			local var26 = p7[1]
-			local var27 = p7[2]
+		Size = roactModule.joinBindings({ p1.sizeBinding, p1.buttonHeightBinding }):map(function(p2)
+			local var2 = p2[1]
+			local var3 = p2[2]
 			
-			return if var26 and var27 then UDim2.new(UDim.new(var26.X.Scale * 0.5, var26.X.Offset * 0.5), UDim.new(0, var27 + 6)) else UDim2.new()
+			return if var2 and var3 then UDim2.new(UDim.new(var2.X.Scale * 0.5, var2.X.Offset * 0.5), UDim.new(0, var3 + 6)) else UDim2.new()
 		end),
-		[roactModule.Ref] = p5.props.BackBarRef
+		[roactModule.Ref] = p1.props.BackBarRef
 	}, {
 		SizeConnection = roactModule.createElement(externalEventConnection, {
-			event = p5.props.HubBar:GetPropertyChangedSignal("Size"),
+			event = p1.props.HubBar:GetPropertyChangedSignal("Size"),
 			callback = function()
-				-- upvalues: p5 (ref)
-				p5.updateSizeBinding(p5.props.HubBar.Size)
+				-- upvalues: p1 (ref)
+				p1.updateSizeBinding(p1.props.HubBar.Size)
 			end
 		}),
 		VisibleConnection = roactModule.createElement(externalEventConnection, {
-			event = p5.props.HubBar:GetPropertyChangedSignal("Visible"),
+			event = p1.props.HubBar:GetPropertyChangedSignal("Visible"),
 			callback = function()
-				-- upvalues: p5 (ref)
-				p5.updateVisibleBinding(p5.props.HubBar.Visible)
+				-- upvalues: p1 (ref)
+				p1.updateVisibleBinding(p1.props.HubBar.Visible)
 			end
 		}),
 		ViewportSizeChangedConnection = roactModule.createElement(externalEventConnection, {
 			event = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"),
 			callback = function()
-				-- upvalues: p5 (ref)
-				p5:updateViewport()
+				-- upvalues: p1 (ref)
+				p1:updateViewport()
 			end
 		}),
 		UIPadding = roactModule.createElement("UIPadding", {
@@ -136,21 +136,21 @@ function menuBackButton.render(p5)
 			BackgroundColor3 = themeModule.color("DefaultButton"),
 			BackgroundTransparency = themeModule.transparency("DefaultButton", 1),
 			Position = UDim2.new(0, 0, 0, 0),
-			Size = p5.buttonHeightBinding:map(function(p8)
-				return if p8 then UDim2.new(0, 0, 0, p8) else UDim2.new()
+			Size = p1.buttonHeightBinding:map(function(p2)
+				return if p2 then UDim2.new(0, 0, 0, p2) else UDim2.new()
 			end),
 			AutomaticSize = Enum.AutomaticSize.X,
 			ScaleType = Enum.ScaleType.Stretch,
 			SliceCenter = Rect.new(8, 6, 46, 44),
-			[roactModule.Event.MouseEnter] = function(p9)
+			[roactModule.Event.MouseEnter] = function(p2)
 				-- upvalues: themeModule (copy)
-				p9.BackgroundColor3 = themeModule.color("DefaultButtonHover")
-				p9.BackgroundTransparency = themeModule.transparency("DefaultButtonHover")
+				p2.BackgroundColor3 = themeModule.color("DefaultButtonHover")
+				p2.BackgroundTransparency = themeModule.transparency("DefaultButtonHover")
 			end,
-			[roactModule.Event.MouseLeave] = function(p10)
+			[roactModule.Event.MouseLeave] = function(p2)
 				-- upvalues: themeModule (copy)
-				p10.BackgroundColor3 = themeModule.color("DefaultButton")
-				p10.BackgroundTransparency = themeModule.transparency("DefaultButton")
+				p2.BackgroundColor3 = themeModule.color("DefaultButton")
+				p2.BackgroundTransparency = themeModule.transparency("DefaultButton")
 			end,
 			[roactModule.Event.Activated] = function(_)
 				-- upvalues: backButtonControllerModule (copy)
@@ -190,7 +190,7 @@ function menuBackButton.render(p5)
 					UIAspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {})
 				}),
 				TextLabel = roactModule.createElement("TextLabel", {
-					Text = p5.state.text,
+					Text = p1.state.text,
 					Size = UDim2.new(0, 0, 1, 0),
 					AutomaticSize = Enum.AutomaticSize.X,
 					BorderSizePixel = 0,
@@ -199,14 +199,14 @@ function menuBackButton.render(p5)
 					TextColor3 = Color3.fromRGB(255, 255, 255),
 					TextYAlignment = Enum.TextYAlignment.Center,
 					Font = themeModule.font(Enum.Font.SourceSansBold, "Bold"),
-					TextSize = p5.textSizeBinding,
+					TextSize = p1.textSizeBinding,
 					TextScaled = true,
 					TextWrapped = true,
 					LayoutOrder = 2,
-					[roactModule.Ref] = p5.textLabelRef
+					[roactModule.Ref] = p1.textLabelRef
 				}, {
-					UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = p5.textSizeConstraintBinding }),
-					UISizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = p5.sizeConstraintBinding })
+					UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = p1.textSizeConstraintBinding }),
+					UISizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = p1.sizeConstraintBinding })
 				})
 			})
 		})

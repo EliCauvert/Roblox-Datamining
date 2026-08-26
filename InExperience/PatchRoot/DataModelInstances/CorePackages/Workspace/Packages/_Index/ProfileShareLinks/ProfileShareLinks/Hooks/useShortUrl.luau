@@ -5,8 +5,8 @@ local getDeepValueModule = require(profileShareLinks.Common.getDeepValue)
 
 return function()
 	-- upvalues: useSelector (ref), getDeepValueModule (ref), constantsModule (ref)
-	return useSelector(function(p0)
+	return useSelector(function(p1)
 		-- upvalues: getDeepValueModule (copy), constantsModule (copy)
-		return getDeepValueModule(p0, `{constantsModule.RODUX_KEY}.ProfileShareLinks.shortUrl`)
+		return getDeepValueModule(p1, `{constantsModule.RODUX_KEY}.ProfileShareLinks.shortUrl`)
 	end)
 end

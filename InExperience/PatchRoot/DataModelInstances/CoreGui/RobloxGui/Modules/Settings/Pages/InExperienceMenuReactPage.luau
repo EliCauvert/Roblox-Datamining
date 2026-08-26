@@ -8,32 +8,32 @@ local portalWithFoundationStylelinkModule = require(parent.Components.PortalWith
 local reactPageSignalModule = require(parent.ReactPageSignal)
 local traversalHistoryPage = require(parent.Components.Traversal).TraversalHistoryPage
 
-return reactModule.memo(reactModule.forwardRef(function(p0, _)
+return reactModule.memo(reactModule.forwardRef(function(p1, _)
 	-- upvalues: reactPageSignalModule (ref), signalsReactModule (ref), enumReactPageModule (ref), reactModule (ref), traversalHistoryPage (ref), settingsShowSignal (ref), portalWithFoundationStylelinkModule (ref)
-	local var6 = signalsReactModule.useSignalState(reactPageSignalModule(false).currentReactPage)
-	local var7 = if var6 == enumReactPageModule.TraversalHistory then reactModule.createElement(traversalHistoryPage) else nil
+	local var1 = signalsReactModule.useSignalState(reactPageSignalModule(false).currentReactPage)
+	local var2 = if var1 == enumReactPageModule.TraversalHistory then reactModule.createElement(traversalHistoryPage) else nil
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), p0 (ref)
-		if var6 then
-			p0.onMount()
+		-- upvalues: var1 (ref), p1 (ref)
+		if var1 then
+			p1.onMount()
 			
-			return p0.onUnmount
+			return p1.onUnmount
 		end
-	end, { var6 })
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: settingsShowSignal (copy), p0 (ref)
-		local var8 = settingsShowSignal:connect(function(p1)
-			-- upvalues: p0 (copy)
-			if not p1 then
-				p0.onUnmount()
+		-- upvalues: settingsShowSignal (copy), p1 (ref)
+		local var3 = settingsShowSignal:connect(function(p2)
+			-- upvalues: p1 (copy)
+			if not p2 then
+				p1.onUnmount()
 			end
 		end)
 		
 		return function()
-			-- upvalues: var8 (ref)
-			var8:Disconnect()
+			-- upvalues: var3 (ref)
+			var3:Disconnect()
 		end
 	end, {})
 	
-	return reactModule.createElement(portalWithFoundationStylelinkModule, { parent = p0.mountTo }, { Page = var7 })
+	return reactModule.createElement(portalWithFoundationStylelinkModule, { parent = p1.mountTo }, { Page = var2 })
 end))

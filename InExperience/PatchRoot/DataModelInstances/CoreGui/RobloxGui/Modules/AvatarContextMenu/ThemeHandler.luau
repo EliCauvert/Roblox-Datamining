@@ -36,26 +36,26 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1:UpdateTheme(p0)
+function t_1:UpdateTheme(p1)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
 	for i, v in pairs(t) do
-		if typeof(p0[i]) == typeof(v) then
-			t_1[i] = p0[i]
-		elseif p0[i] == nil then
+		if typeof(p1[i]) == typeof(v) then
+			t_1[i] = p1[i]
+		elseif p1[i] == nil then
 			t_1[i] = v
 		else
-			error(string.format("AvatarContextMenuTheme wrong type for key %s: %s. Expected type %s", i, typeof(p0[i]), typeof(v)), 2)
+			error(string.format("AvatarContextMenuTheme wrong type for key %s: %s. Expected type %s", i, typeof(p1[i]), typeof(v)), 2)
 		end
 	end
 	self.Theme = t_1
 end
 
-function t_1.RegisterCoreMethods(p1)
+function t_1.RegisterCoreMethods(p2)
 	-- upvalues: t (ref), starterGuiService (ref)
 	starterGuiService:RegisterSetCore("AvatarContextMenuTheme", function(value)
-		-- upvalues: t (copy), p1 (ref)
+		-- upvalues: t (copy), p2 (ref)
 		if type(value) ~= "table" then
 			error("AvatarContextMenuTheme argument must be a table")
 			
@@ -66,7 +66,7 @@ function t_1.RegisterCoreMethods(p1)
 				error(string.format("AvatarContextMenuTheme got invalid key: %s", i))
 			end
 		end
-		p1:UpdateTheme(value)
+		p2:UpdateTheme(value)
 	end)
 end
 

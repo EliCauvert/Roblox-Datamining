@@ -1,4 +1,4 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
 		VerticalTile = {
 			Base = {
@@ -7,19 +7,19 @@
 						Transparency = 0,
 						Color3 = Color3.new(0.22353, 0.23137, 0.23922)
 					},
-					BorderWidth = 1 * p0,
+					BorderWidth = 1 * p1,
 					BorderColor = { Transparency = 0.8, Color3 = Color3.new(1, 1, 1) },
 					DropShadow = {
 						X = 0,
-						Y = 4 * p0,
-						Blur = 8 * p0,
+						Y = 4 * p1,
+						Blur = 8 * p1,
 						Color = { Transparency = 0.5, Color3 = Color3.new(0, 0, 0) }
 					},
 					BorderRadius = {
-						LeadingTop = 8 * p0,
-						TrailingTop = 8 * p0,
-						TrailingBottom = 8 * p0,
-						LeadingBottom = 8 * p0
+						LeadingTop = 8 * p1,
+						TrailingTop = 8 * p1,
+						TrailingBottom = 8 * p1,
+						LeadingBottom = 8 * p1
 					}
 				},
 				ContentTop = {
@@ -27,10 +27,10 @@
 				},
 				ContentBottom = {
 					Spacing = {
-						Top = 8 * p0,
-						Trailing = 8 * p0,
-						Bottom = 8 * p0,
-						Leading = 8 * p0
+						Top = 8 * p1,
+						Trailing = 8 * p1,
+						Bottom = 8 * p1,
+						Leading = 8 * p1
 					}
 				}
 			}
@@ -38,26 +38,26 @@
 		PlayerTileSmall = {
 			Base = {
 				Container = {
-					Gap = 8 * p0,
+					Gap = 8 * p1,
 					Spacing = {
-						Top = 8 * p0,
-						Trailing = 8 * p0,
-						Bottom = 8 * p0,
-						Leading = 8 * p0
+						Top = 8 * p1,
+						Trailing = 8 * p1,
+						Bottom = 8 * p1,
+						Leading = 8 * p1
 					}
 				},
 				Image = {
 					BorderRadius = 9999,
-					Size = 96 * p0,
+					Size = 96 * p1,
 					BackgroundColor = {
 						Transparency = 0,
 						Color3 = Color3.new(0.22353, 0.23137, 0.23922)
 					},
 					BorderColor = { Transparency = 0.8, Color3 = Color3.new(1, 1, 1) },
-					BorderWidth = 3 * p0
+					BorderWidth = 3 * p1
 				},
 				Status = {
-					Size = 16 * p0,
+					Size = 16 * p1,
 					BackgroundColor = {
 						Transparency = 0,
 						Color3 = Color3.new(0, 0.70588, 0.42745)
@@ -66,19 +66,19 @@
 						Transparency = 0,
 						Color3 = Color3.new(0.13725, 0.1451, 0.15294)
 					},
-					BorderWidth = 2.5 * p0
+					BorderWidth = 2.5 * p1
 				},
 				Content = {
-					Gap = 2 * p0,
+					Gap = 2 * p1,
 					Typography = {
 						LineHeight = 1.15,
 						LetterSpacing = 0,
 						Font = Enum.Font.GothamMedium,
-						FontSize = 12 * p0
+						FontSize = 12 * p1
 					},
 					ContentColor = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 				},
-				Icon = { Size = 16 * p0 },
+				Icon = { Size = 16 * p1 },
 				Presence = {
 					ContentColor = {
 						Transparency = 0,
@@ -88,21 +88,21 @@
 			}
 		},
 		Facepile = {
-			Container = { Gap = 4 * p0 },
-			FaceGroup = { Gap = -6 * p0 },
+			Container = { Gap = 4 * p1 },
+			FaceGroup = { Gap = -6 * p1 },
 			Face = {
 				BorderRadius = 9999,
 				BackgroundColor = {
 					Transparency = 0,
 					Color3 = Color3.new(0.74118, 0.7451, 0.7451)
 				},
-				BorderWidth = 2 * p0,
+				BorderWidth = 2 * p1,
 				BorderColor = {
 					Transparency = 0,
 					Color3 = Color3.new(0.22353, 0.23137, 0.23922)
 				},
-				Width = 16 * p0,
-				Height = 16 * p0
+				Width = 16 * p1,
+				Height = 16 * p1
 			},
 			Badge = {
 				BorderRadius = 9999,
@@ -110,20 +110,20 @@
 					Transparency = 0,
 					Color3 = Color3.new(0, 0.70588, 0.42745)
 				},
-				BorderWidth = 2 * p0,
+				BorderWidth = 2 * p1,
 				BorderColor = {
 					Transparency = 0,
 					Color3 = Color3.new(0.22353, 0.23137, 0.23922)
 				},
-				Spacing = 4 * p0,
-				Height = 16 * p0,
-				MinWidth = 16 * p0,
+				Spacing = 4 * p1,
+				Height = 16 * p1,
+				MinWidth = 16 * p1,
 				ContentColor = { Transparency = 0, Color3 = Color3.new(1, 1, 1) },
 				Typography = {
 					LineHeight = 1.2,
 					LetterSpacing = 0,
 					Font = Enum.Font.GothamMedium,
-					FontSize = 10 * p0
+					FontSize = 10 * p1
 				}
 			},
 			Label = {
@@ -132,7 +132,7 @@
 					LineHeight = 1.15,
 					LetterSpacing = 0,
 					Font = Enum.Font.Gotham,
-					FontSize = 12 * p0
+					FontSize = 12 * p1
 				}
 			}
 		},
@@ -148,32 +148,32 @@
 				LeadingBottom = 9999
 			},
 			Spacing = {
-				Top = 8 * p0,
-				Trailing = 12 * p0,
-				Bottom = 8 * p0,
-				Leading = 12 * p0
+				Top = 8 * p1,
+				Trailing = 12 * p1,
+				Bottom = 8 * p1,
+				Leading = 12 * p1
 			},
-			Gap = 16 * p0
+			Gap = 16 * p1
 		},
 		ControllerBarShortcut = {
 			Container = {
-				Gap = 4 * p0,
+				Gap = 4 * p1,
 				ContentColor = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 			},
-			Icon = { Size = 36 * p0 },
+			Icon = { Size = 36 * p1 },
 			Label = {
 				Typography = {
 					LineHeight = 1.15,
 					LetterSpacing = 0,
 					Font = Enum.Font.GothamMedium,
-					FontSize = 12 * p0
+					FontSize = 12 * p1
 				}
 			}
 		},
 		SelectionCursor = {
 			Inset = 0,
-			BorderWidth = 2 * p0,
-			Offset = 6 * p0,
+			BorderWidth = 2 * p1,
+			Offset = 6 * p1,
 			Gradient = {
 				Start = { Transparency = 0, Color3 = Color3.new(1, 1, 1) },
 				End = {
@@ -183,7 +183,7 @@
 			}
 		},
 		StateLayer = {
-			Base = { BorderWidth = 1 * p0 },
+			Base = { BorderWidth = 1 * p1 },
 			Standard = {
 				Initialize = {
 					Color = { Transparency = 1, Color3 = Color3.new(0, 0, 0) }
@@ -281,7 +281,7 @@
 			Base = {
 				Container = {
 					BorderWidth = 0,
-					Height = 56 * p0,
+					Height = 56 * p1,
 					ContentColor = { Transparency = 0, Color3 = Color3.new(1, 1, 1) },
 					BackgroundColor = {
 						Transparency = 0,
@@ -297,17 +297,17 @@
 					Spacing = {
 						Top = 0,
 						Bottom = 0,
-						Trailing = 12 * p0,
-						Leading = 12 * p0
+						Trailing = 12 * p1,
+						Leading = 12 * p1
 					}
 				},
-				IconFrame = { Size = 32 * p0 },
+				IconFrame = { Size = 32 * p1 },
 				TextFrame = {
 					Spacing = {
 						Top = 0,
 						Bottom = 0,
-						Trailing = 12 * p0,
-						Leading = 12 * p0
+						Trailing = 12 * p1,
+						Leading = 12 * p1
 					}
 				},
 				Text = {
@@ -315,12 +315,12 @@
 						LineHeight = 1.25,
 						LetterSpacing = 0,
 						Font = Enum.Font.GothamMedium,
-						FontSize = 16 * p0
+						FontSize = 16 * p1
 					}
 				},
-				CheckFrame = { Size = 32 * p0 }
+				CheckFrame = { Size = 32 * p1 }
 			},
-			Divider = { Container = { BorderWidth = 1 * p0 } },
+			Divider = { Container = { BorderWidth = 1 * p1 } },
 			Disabled = {
 				Container = {
 					ContentColor = { Transparency = 0.5, Color3 = Color3.new(1, 1, 1) }
@@ -328,55 +328,55 @@
 			},
 			HasRoundBottom = {
 				Container = {
-					BorderRadius = { BottomTrailing = 8 * p0, BottomLeading = 8 * p0 }
+					BorderRadius = { BottomTrailing = 8 * p1, BottomLeading = 8 * p1 }
 				}
 			},
 			HasRoundTop = {
 				Container = {
-					BorderRadius = { TopLeading = 8 * p0, TopTrailing = 8 * p0 }
+					BorderRadius = { TopLeading = 8 * p1, TopTrailing = 8 * p1 }
 				}
 			}
 		},
 		BaseMenu = {
-			BorderRadius = 8 * p0,
+			BorderRadius = 8 * p1,
 			BackgroundColor = {
 				Transparency = 0,
 				Color3 = Color3.new(0.22353, 0.23137, 0.23922)
 			}
 		},
-		StatGroup = { Gap = 8 * p0 },
+		StatGroup = { Gap = 8 * p1 },
 		StatItem = {
 			Container = {
-				Gap = 2 * p0,
+				Gap = 2 * p1,
 				ContentColor = { Transparency = 0.3, Color3 = Color3.new(1, 1, 1) }
 			},
-			Icon = { Size = 16 * p0 },
+			Icon = { Size = 16 * p1 },
 			Label = {
 				Typography = {
 					LineHeight = 1.15,
 					LetterSpacing = 0,
 					Font = Enum.Font.Gotham,
-					FontSize = 12 * p0
+					FontSize = 12 * p1
 				}
 			}
 		},
 		MediaTile = {
-			Container = { BorderRadius = 8 * p0 },
-			Icon = { Size = 36 * p0 }
+			Container = { BorderRadius = 8 * p1 },
+			Icon = { Size = 36 * p1 }
 		},
 		StatWidget = {
 			Container = {
-				Gap = 8 * p0,
+				Gap = 8 * p1,
 				ContentColor = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 			},
-			Icon = { Size = 48 * p0 },
+			Icon = { Size = 48 * p1 },
 			DataGroup = { Gap = 0 },
 			Data = {
 				Typography = {
 					LineHeight = 1.2,
 					LetterSpacing = 0,
 					Font = Enum.Font.GothamBlack,
-					FontSize = 34 * p0
+					FontSize = 34 * p1
 				}
 			},
 			Label = {
@@ -384,23 +384,23 @@
 					LineHeight = 1.25,
 					LetterSpacing = 0,
 					Font = Enum.Font.GothamMedium,
-					FontSize = 16 * p0
+					FontSize = 16 * p1
 				}
 			}
 		},
 		RateCount = {
 			Container = {
-				Spacing = 8 * p0,
-				Gap = 8 * p0,
-				BorderRadius = 8 * p0,
+				Spacing = 8 * p1,
+				Gap = 8 * p1,
+				BorderRadius = 8 * p1,
 				BackgroundColor = { Transparency = 0.7, Color3 = Color3.new(1, 1, 1) }
 			},
-			ButtonGroup = { Gap = 8 * p0 }
+			ButtonGroup = { Gap = 8 * p1 }
 		},
 		PlayerCount = {
 			Container = {
 				BorderRadius = 0,
-				Spacing = 8 * p0,
+				Spacing = 8 * p1,
 				BackgroundColor = { Transparency = 1, Color3 = Color3.new(0, 0, 0) }
 			}
 		},
@@ -411,14 +411,14 @@
 					BackgroundColor = { Transparency = 0.7, Color3 = Color3.new(1, 1, 1) },
 					ContentColor = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 				},
-				Icon = { Size = 36 * p0 },
-				Track = { Opacity = 0, Spacing = { Top = 4 * p0, Bottom = 4 * p0 } }
+				Icon = { Size = 36 * p1 },
+				Track = { Opacity = 0, Spacing = { Top = 4 * p1, Bottom = 4 * p1 } }
 			},
-			Compact = { Handle = { Width = 2 * p0 }, Track = { Width = 12 * p0 } },
-			Wide = { Handle = { Width = 8 * p0 }, Track = { Width = 16 * p0 } },
+			Compact = { Handle = { Width = 2 * p1 }, Track = { Width = 12 * p1 } },
+			Wide = { Handle = { Width = 8 * p1 }, Track = { Width = 16 * p1 } },
 			Gamepad = {
-				Handle = { Width = 16 * p0 },
-				Track = { Width = 16 * p0 }
+				Handle = { Width = 16 * p1 },
+				Track = { Width = 16 * p1 }
 			}
 		},
 		TextField = {
@@ -426,15 +426,15 @@
 				Field = {
 					Opacity = 1,
 					BorderColor = { Transparency = 0.8, Color3 = Color3.new(1, 1, 1) },
-					BorderRadius = 8 * p0,
+					BorderRadius = 8 * p1,
 					Typography = {
 						LineHeight = 1.25,
 						LetterSpacing = 0,
 						Font = Enum.Font.Gotham,
-						FontSize = 16 * p0
+						FontSize = 16 * p1
 					},
-					Spacing = { Leading = 12 * p0, Trailing = 12 * p0 },
-					Gap = 8 * p0
+					Spacing = { Leading = 12 * p1, Trailing = 12 * p1 },
+					Gap = 8 * p1
 				},
 				PlaceholderText = {
 					ContentColor = { Transparency = 0.3, Color3 = Color3.new(1, 1, 1) }
@@ -444,7 +444,7 @@
 				},
 				IconLeading = {
 					ContentColor = { Transparency = 0.3, Color3 = Color3.new(1, 1, 1) },
-					Size = 16 * p0
+					Size = 16 * p1
 				}
 			},
 			Error = {
@@ -464,13 +464,13 @@
 					LineHeight = 1.15,
 					LetterSpacing = 0,
 					Font = Enum.Font.Gotham,
-					FontSize = 12 * p0
+					FontSize = 12 * p1
 				},
 				ContentColor = {
 					Transparency = 0,
 					Color3 = Color3.new(0.74118, 0.7451, 0.7451)
 				},
-				Spacing = { Bottom = 4 * p0 }
+				Spacing = { Bottom = 4 * p1 }
 			},
 			Disabled = { Opacity = 0.32 }
 		},
@@ -481,13 +481,13 @@
 					LineHeight = 1.2,
 					LetterSpacing = 0,
 					Font = Enum.Font.GothamMedium,
-					FontSize = 10 * p0
+					FontSize = 10 * p1
 				},
 				ContentColor = {
 					Transparency = 0,
 					Color3 = Color3.new(0.74118, 0.7451, 0.7451)
 				},
-				Padding = { Top = 4 * p0 }
+				Padding = { Top = 4 * p1 }
 			},
 			Error = {
 				ContentColor = {

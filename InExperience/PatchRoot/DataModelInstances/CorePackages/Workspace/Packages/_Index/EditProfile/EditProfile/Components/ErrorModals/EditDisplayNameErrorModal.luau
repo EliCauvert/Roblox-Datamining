@@ -11,40 +11,40 @@ local fFlagEditProfileFixFocusNavigationModule = require(editProfile.Flags.FFlag
 local useDisplayNameTextModule = require(editProfile.Hooks.useDisplayNameText)
 local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useScreenSize (ref), useDisplayNameTextModule (ref), useLocalization (ref), textKeysModule (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var7 = useScreenSize()
-	local var8 = useDisplayNameTextModule()
-	local var9 = useLocalization({ OK = textKeysModule.OK })
+	local var1 = useScreenSize()
+	local var2 = useDisplayNameTextModule()
+	local var3 = useLocalization({ OK = textKeysModule.OK })
 	
 	local function onClose()
-		-- upvalues: p0 (ref)
-		p0.navigation.goBack()
+		-- upvalues: p1 (ref)
+		p1.navigation.goBack()
 	end
 	
 	return if fFlagEditProfileFixFocusNavigationModule then focusNavigatorWrapperModule({ onClose = onClose }, {
 		reactModule.createElement(interactiveAlert, {
-			screenSize = var7,
-			title = var8.displayNameEditMessage,
-			bodyText = var8.displayNameCoolDownMessage,
+			screenSize = var1,
+			title = var2.displayNameEditMessage,
+			bodyText = var2.displayNameCoolDownMessage,
 			buttonStackInfo = {
 				buttons = {
 					{
 						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = onClose, text = var9.OK }
+						props = { onActivated = onClose, text = var3.OK }
 					}
 				}
 			}
 		})
 	}) else reactModule.createElement(interactiveAlert, {
-		screenSize = var7,
-		title = var8.displayNameEditMessage,
-		bodyText = var8.displayNameCoolDownMessage,
+		screenSize = var1,
+		title = var2.displayNameEditMessage,
+		bodyText = var2.displayNameCoolDownMessage,
 		buttonStackInfo = {
 			buttons = {
 				{
 					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = onClose, text = var9.OK }
+					props = { onActivated = onClose, text = var3.OK }
 				}
 			}
 		}

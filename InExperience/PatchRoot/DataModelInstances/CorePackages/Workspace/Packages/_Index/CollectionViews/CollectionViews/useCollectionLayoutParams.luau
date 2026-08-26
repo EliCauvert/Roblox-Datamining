@@ -12,99 +12,99 @@ local _ = require(collectionViews.CollectionViewTypes)
 local fFlagLuaAppLayoutParamsInContext = require(parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
 local luaAppUseDisplayStoreForCollectionLayoutParams = game:DefineFastFlag("LuaAppUseDisplayStoreForCollectionLayoutParams", false)
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: useStore (ref), luaAppUseDisplayStoreForCollectionLayoutParams (ref), displayModule (ref), collectionLayoutCalculatorsModule (ref), fFlagLuaAppLayoutParamsInContext (ref), useTokens (ref), useDesignTokens (ref), usePreferredInput (ref), reactModule (ref), calculateItemWidthModule (ref)
-	local var6 = useStore()
-	local var7 = if luaAppUseDisplayStoreForCollectionLayoutParams then displayModule.GetDisplayStore(false).getViewportSize(false) or Vector2.new(0, 0) else var6:getState().ScreenSize or Vector2.new(0, 0)
-	p4 = p4 or collectionLayoutCalculatorsModule
-	local var9 = if p3 then p3.sideMargin else nil
-	local var10 = if p3 then p3.columnGap else nil
-	local var11 = if p3 then p3.numColumns else nil
-	local var12 = if p3 then p3.fractionalItemAmount else nil
-	local var13 = if p3 then p3.loadMoreThreshold else nil
-	local var14 = if p3 then p3.verticalPadding else nil
-	local var15 = if fFlagLuaAppLayoutParamsInContext then useTokens() else useDesignTokens()
-	local var16 = usePreferredInput()
-	local var14_1 = var14 or p4.calculateVerticalPadding(var15, p0)
-	local var18 = p4.calculateMaxTilesToShow(var16)
-	local var19 = reactModule.useRef(nil)
+	local var1 = useStore()
+	local var2 = if luaAppUseDisplayStoreForCollectionLayoutParams then displayModule.GetDisplayStore(false).getViewportSize(false) or Vector2.new(0, 0) else var1:getState().ScreenSize or Vector2.new(0, 0)
+	p5 = p5 or collectionLayoutCalculatorsModule
+	local var3 = if p4 then p4.sideMargin else nil
+	local var4 = if p4 then p4.columnGap else nil
+	local var5 = if p4 then p4.numColumns else nil
+	local var6 = if p4 then p4.fractionalItemAmount else nil
+	local var7 = if p4 then p4.loadMoreThreshold else nil
+	local var8 = if p4 then p4.verticalPadding else nil
+	local var9 = if fFlagLuaAppLayoutParamsInContext then useTokens() else useDesignTokens()
+	local var10 = usePreferredInput()
+	local var11 = var8 or p5.calculateVerticalPadding(var9, p1)
+	local var12 = p5.calculateMaxTilesToShow(var10)
+	local var13 = reactModule.useRef(nil)
 	
-	if var19.current == nil then
-		var19.current = p5 or var7
+	if var13.current == nil then
+		var13.current = p6 or var2
 	end
-	local x = var19.current.X
+	local x = var13.current.X
+	local var14, var15 = reactModule.useState(function()
+		-- upvalues: var3 (ref), p5 (ref), x (ref), var9 (ref), var2 (ref)
+		return var3 or p5.calculateSideMargin(x, var9, var2.X)
+	end)
+	local var16, var17 = reactModule.useState(function()
+		-- upvalues: var4 (ref), p5 (ref), x (ref), var9 (ref), var2 (ref)
+		return var4 or p5.calculateColumnGap(x, var9, var2.X)
+	end)
+	local var18, var19 = reactModule.useState(function()
+		-- upvalues: var6 (ref), p5 (ref), p1 (ref), var10 (ref)
+		return var6 or p5.calculateFractionalItemAmount(p1, var10)
+	end)
 	local var20, var21 = reactModule.useState(function()
-		-- upvalues: var9 (ref), p4 (ref), x (ref), var15 (ref), var7 (ref)
-		return var9 or p4.calculateSideMargin(x, var15, var7.X)
+		-- upvalues: var5 (ref), p5 (ref), x (ref), var14 (ref), var16 (ref), p1 (ref), var9 (ref)
+		return var5 or p5.calculateNumColumns(x, var14, var16, p1, var9)
 	end)
 	local var22, var23 = reactModule.useState(function()
-		-- upvalues: var10 (ref), p4 (ref), x (ref), var15 (ref), var7 (ref)
-		return var10 or p4.calculateColumnGap(x, var15, var7.X)
+		-- upvalues: var7 (ref), p5 (ref), x (ref)
+		return var7 or p5.calculateLoadMoreThreshold(x)
 	end)
 	local var24, var25 = reactModule.useState(function()
-		-- upvalues: var12 (ref), p4 (ref), p0 (ref), var16 (ref)
-		return var12 or p4.calculateFractionalItemAmount(p0, var16)
+		-- upvalues: p3 (ref), calculateItemWidthModule (copy), var20 (ref), var16 (ref), var14 (ref), x (ref), var18 (ref)
+		return if p3 then calculateItemWidthModule(var20, var16, var14, x, var18) else 1
 	end)
-	local var26, var27 = reactModule.useState(function()
-		-- upvalues: var11 (ref), p4 (ref), x (ref), var20 (ref), var22 (ref), p0 (ref), var15 (ref)
-		return var11 or p4.calculateNumColumns(x, var20, var22, p0, var15)
-	end)
-	local var28, var29 = reactModule.useState(function()
-		-- upvalues: var13 (ref), p4 (ref), x (ref)
-		return var13 or p4.calculateLoadMoreThreshold(x)
-	end)
-	local var30, var31 = reactModule.useState(function()
-		-- upvalues: p2 (ref), calculateItemWidthModule (copy), var26 (ref), var22 (ref), var20 (ref), x (ref), var24 (ref)
-		return if p2 then calculateItemWidthModule(var26, var22, var20, x, var24) else 1
-	end)
-	local var32 = reactModule.useCallback(function(p6)
-		-- upvalues: luaAppUseDisplayStoreForCollectionLayoutParams (copy), displayModule (copy), var6 (ref), var9 (ref), p4 (ref), var15 (ref), var21 (ref), var10 (ref), var23 (ref), var11 (ref), p0 (ref), var27 (ref), var12 (ref), var16 (ref), var25 (ref), var13 (ref), var29 (ref), var19 (ref), p2 (ref), calculateItemWidthModule (copy), var31 (ref)
-		local x = p6.X
-		local var33 = if luaAppUseDisplayStoreForCollectionLayoutParams then displayModule.GetDisplayStore(false).getViewportSize(false) and displayModule.GetDisplayStore(false).getViewportSize(false).X or 0 else var6:getState().ScreenSize and var6:getState().ScreenSize.X or 0
-		local var9_1 = var9 or p4.calculateSideMargin(x, var15, var33)
-		var21(var9_1)
-		local var10_1 = var10 or p4.calculateColumnGap(x, var15, var33)
-		var23(var10_1)
-		local var11_1 = var11 or p4.calculateNumColumns(x, var9_1, var10_1, p0, var15)
-		var27(var11_1)
-		local var12_1 = var12 or p4.calculateFractionalItemAmount(p0, var16)
-		var25(var12_1)
-		var29(var13 or p4.calculateLoadMoreThreshold(x))
-		var19.current = p6
+	local var26 = reactModule.useCallback(function(p7)
+		-- upvalues: luaAppUseDisplayStoreForCollectionLayoutParams (copy), displayModule (copy), var1 (ref), var3 (ref), p5 (ref), var9 (ref), var15 (ref), var4 (ref), var17 (ref), var5 (ref), p1 (ref), var21 (ref), var6 (ref), var10 (ref), var19 (ref), var7 (ref), var23 (ref), var13 (ref), p3 (ref), calculateItemWidthModule (copy), var25 (ref)
+		local x = p7.X
+		local var27 = if luaAppUseDisplayStoreForCollectionLayoutParams then displayModule.GetDisplayStore(false).getViewportSize(false) and displayModule.GetDisplayStore(false).getViewportSize(false).X or 0 else var1:getState().ScreenSize and var1:getState().ScreenSize.X or 0
+		local var28 = var3 or p5.calculateSideMargin(x, var9, var27)
+		var15(var28)
+		local var29 = var4 or p5.calculateColumnGap(x, var9, var27)
+		var17(var29)
+		local var30 = var5 or p5.calculateNumColumns(x, var28, var29, p1, var9)
+		var21(var30)
+		local var31 = var6 or p5.calculateFractionalItemAmount(p1, var10)
+		var19(var31)
+		var23(var7 or p5.calculateLoadMoreThreshold(x))
+		var13.current = p7
 		
-		if p2 then
-			var31(calculateItemWidthModule(var11_1, var10_1, var9_1, x, var12_1))
+		if p3 then
+			var25(calculateItemWidthModule(var30, var29, var28, x, var31))
 		end
 	end, {
-		p0, p2, var10, var9, var11, var12, var13, var15, var6
+		p1, p3, var4, var3, var5, var6, var7, var9, var1
 	})
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var32 (ref)
-		local var38 = nil
+		-- upvalues: p2 (ref), var26 (ref)
+		local var27 = nil
 		
-		if p1 then
-			var32(p1.AbsoluteSize)
-			var38 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var32 (copy), p1 (copy)
-				var32(p1.AbsoluteSize)
+		if p2 then
+			var26(p2.AbsoluteSize)
+			var27 = p2:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+				-- upvalues: var26 (copy), p2 (copy)
+				var26(p2.AbsoluteSize)
 			end)
 		end
 		return function()
-			-- upvalues: var38 (write)
-			if var38 then
-				var38:Disconnect()
+			-- upvalues: var27 (write)
+			if var27 then
+				var27:Disconnect()
 			end
 		end
-	end, { var32, p1 })
+	end, { var26, p2 })
 	
 	return {
-		numColumns = var26,
-		fractionalItemAmount = var24,
-		columnGap = var22,
-		sideMargin = var20,
-		verticalPadding = var14_1,
-		maxTilesToShow = var18,
-		itemWidth = var30,
-		loadMoreThreshold = var28
+		numColumns = var20,
+		fractionalItemAmount = var18,
+		columnGap = var16,
+		sideMargin = var14,
+		verticalPadding = var11,
+		maxTilesToShow = var12,
+		itemWidth = var24,
+		loadMoreThreshold = var22
 	}
 end

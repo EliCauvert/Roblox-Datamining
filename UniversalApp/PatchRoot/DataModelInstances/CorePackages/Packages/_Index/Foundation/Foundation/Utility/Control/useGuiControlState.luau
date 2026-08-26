@@ -12,48 +12,48 @@ local t = {
 	[Enum.GuiState.NonInteractable] = controlStateModule.Disabled
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), controlStateModule (ref), t (ref), useForwardRef (ref)
-	local var4 = reactModule.useRef(false)
-	local var5 = reactModule.useRef(controlStateModule.Initialize)
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: var5 (ref), var4 (ref), controlStateModule (copy), p1 (ref)
-		local current = var5.current
+	local var1 = reactModule.useRef(false)
+	local var2 = reactModule.useRef(controlStateModule.Initialize)
+	local var3 = reactModule.useCallback(function(p3)
+		-- upvalues: var2 (ref), var1 (ref), controlStateModule (copy), p2 (ref)
+		local current = var2.current
 		
-		if var4.current then
-			if p2 == controlStateModule.Default or p2 == controlStateModule.Hover then
-				p2 = controlStateModule.Selected
-			elseif p2 == controlStateModule.Pressed then
-				p2 = controlStateModule.SelectedPressed
+		if var1.current then
+			if p3 == controlStateModule.Default or p3 == controlStateModule.Hover then
+				p3 = controlStateModule.Selected
+			elseif p3 == controlStateModule.Pressed then
+				p3 = controlStateModule.SelectedPressed
 			end
 		end
-		if current == p2 then return end
-		var5.current = p2
+		if current == p3 then return end
+		var2.current = p3
 		
-		if p1 ~= nil then
-			p1(p2)
+		if p2 ~= nil then
+			p2(p3)
 		end
-	end, { p1 })
+	end, { p2 })
 	
-	return useForwardRef(p0, reactModule.useCallback(function(p3)
-		-- upvalues: var6 (ref), t (copy), var4 (ref), var5 (ref)
+	return useForwardRef(p1, reactModule.useCallback(function(p3)
+		-- upvalues: var3 (ref), t (copy), var1 (ref), var2 (ref)
 		local t_1 = {}
 		
 		if p3 then
-			var6(t[p3.GuiState])
+			var3(t[p3.GuiState])
 			table.insert(t_1, p3:GetPropertyChangedSignal("GuiState"):Connect(function()
-				-- upvalues: t (copy), p3 (ref), var6 (copy)
-				var6(t[p3.GuiState])
+				-- upvalues: t (copy), p3 (ref), var3 (copy)
+				var3(t[p3.GuiState])
 			end))
 			table.insert(t_1, p3.SelectionGained:Connect(function()
-				-- upvalues: var4 (copy), var6 (copy), var5 (copy)
-				var4.current = true
-				var6(var5.current)
+				-- upvalues: var1 (copy), var3 (copy), var2 (copy)
+				var1.current = true
+				var3(var2.current)
 			end))
 			table.insert(t_1, p3.SelectionLost:Connect(function()
-				-- upvalues: var4 (copy), var6 (copy), var5 (copy)
-				var4.current = false
-				var6(var5.current)
+				-- upvalues: var1 (copy), var3 (copy), var2 (copy)
+				var1.current = false
+				var3(var2.current)
 			end))
 		end
 		return function()
@@ -62,5 +62,5 @@ return function(p0, p1)
 				v:Disconnect()
 			end
 		end
-	end, { var6 }))
+	end, { var3 }))
 end

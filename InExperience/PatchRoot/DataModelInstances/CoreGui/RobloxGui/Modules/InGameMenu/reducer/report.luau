@@ -9,28 +9,28 @@ return rodux.createReducer({
 	userId = nil,
 	userName = nil
 }, {
-	[require(parent.Actions.OpenReportDialog).name] = function(p0, p1)
+	[require(parent.Actions.OpenReportDialog).name] = function(p1, p2)
 		return {
 			dialogOpen = true,
-			reportSentOpen = p0.reportSentOpen,
-			userId = p1.userId,
-			userName = p1.userName
+			reportSentOpen = p1.reportSentOpen,
+			userId = p2.userId,
+			userName = p2.userName
 		}
 	end,
-	[require(parent.Actions.SetCurrentPage).name] = function(p2, _)
+	[require(parent.Actions.SetCurrentPage).name] = function(p1, _)
 		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p2, { dialogOpen = false })
+		return cryo.Dictionary.join(p1, { dialogOpen = false })
 	end,
-	[require(parent.Actions.CloseReportDialog).name] = function(p3, _)
+	[require(parent.Actions.CloseReportDialog).name] = function(p1, _)
 		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p3, { dialogOpen = false })
+		return cryo.Dictionary.join(p1, { dialogOpen = false })
 	end,
-	[require(parent.Actions.OpenReportSentDialog).name] = function(p4, _)
+	[require(parent.Actions.OpenReportSentDialog).name] = function(p1, _)
 		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p4, { reportSentOpen = true })
+		return cryo.Dictionary.join(p1, { reportSentOpen = true })
 	end,
-	[require(parent.Actions.CloseReportSentDialog).name] = function(p5, _)
+	[require(parent.Actions.CloseReportSentDialog).name] = function(p1, _)
 		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p5, { reportSentOpen = false })
+		return cryo.Dictionary.join(p1, { reportSentOpen = false })
 	end
 })

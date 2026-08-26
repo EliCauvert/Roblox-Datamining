@@ -1,6 +1,6 @@
 ﻿local tbl = setmetatable({}, {
-	__index = function(_, p0)
-		error(("Invalid TimeUnit \"%s\""):format(tostring(p0)), 2)
+	__index = function(_, p1)
+		error(("Invalid TimeUnit \"%s\""):format(tostring(p1)), 2)
 	end
 })
 tbl.Seconds = "Seconds"

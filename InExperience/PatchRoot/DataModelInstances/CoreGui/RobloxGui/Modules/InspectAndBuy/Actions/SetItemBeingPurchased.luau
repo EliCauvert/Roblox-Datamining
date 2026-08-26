@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p0, p1)
-	return { itemId = p0, itemType = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1, p2)
+	return { itemId = p1, itemType = p2 }
 end)

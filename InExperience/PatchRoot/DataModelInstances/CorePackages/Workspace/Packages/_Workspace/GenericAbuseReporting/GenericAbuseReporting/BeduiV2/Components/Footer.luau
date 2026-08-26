@@ -13,16 +13,16 @@ local fFlagAbuseReportDensifyResolvedArraysModule = require(genericAbuseReportin
 local fFlagAbuseReportLinkOpenedAnalytics = sharedFlagsModule.FFlagAbuseReportLinkOpenedAnalytics
 local linkOpenedSource = analyticsServiceModule.LinkOpenedSource
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useDefaultTags (ref), fFlagAbuseReportDensifyResolvedArraysModule (ref), reactModule (ref), textWithTranslationModule (ref), fFlagAbuseReportLinkOpenedAnalytics (ref), linkOpenedSource (ref), view (ref)
-	local var7 = useDefaultTags(p0.additionalTag, "col gap-small size-full-0 auto-y")
+	local var1 = useDefaultTags(p1.additionalTag, "col gap-small size-full-0 auto-y")
 	
-	if not p0.footerItems or fFlagAbuseReportDensifyResolvedArraysModule and #p0.footerItems == 0 then
+	if not p1.footerItems or fFlagAbuseReportDensifyResolvedArraysModule and #p1.footerItems == 0 then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in ipairs(p0.footerItems) do
+	for i, v in ipairs(p1.footerItems) do
 		table.insert(t, reactModule.createElement(textWithTranslationModule, {
 			tag = "auto-xy text-body-small",
 			input = v.label,
@@ -33,8 +33,8 @@ return reactModule.memo(function(p0)
 		}))
 	end
 	return reactModule.createElement(view, {
-		padding = p0.padding,
-		tag = var7,
-		LayoutOrder = p0.layoutOrder
+		padding = p1.padding,
+		tag = var1,
+		LayoutOrder = p1.layoutOrder
 	}, t)
 end)

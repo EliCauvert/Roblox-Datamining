@@ -11,19 +11,19 @@ local defaultCardPadding = constantsModule.Padding.DefaultCardPadding
 local defaultContentPadding = constantsModule.DefaultContentPadding
 local defaultCardCornerRadius = constantsModule.DefaultCardCornerRadius
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNotificationCardDataModule (ref), constantsModule (ref), defaultCardPadding (ref), useStyle (ref), react (ref), defaultCardCornerRadius (ref), defaultContentPadding (ref), notificationContentFrameModule (ref)
-	local var4 = useNotificationCardDataModule()
-	local cardSize = var4.cardSize
-	local var5 = if cardSize and cardSize.cardPadding then cardSize.cardPadding else defaultCardPadding
+	local var1 = useNotificationCardDataModule()
+	local cardSize = var1.cardSize
+	local var2 = if cardSize and cardSize.cardPadding then cardSize.cardPadding else defaultCardPadding
 	
 	return react.createElement("Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 0, 0),
 		BackgroundColor3 = useStyle().Theme.BackgroundUIDefault.Color,
-		BackgroundTransparency = if var4.cardTransparency then var4.cardTransparency else constantsModule.CardTransparency.Default,
+		BackgroundTransparency = if var1.cardTransparency then var1.cardTransparency else constantsModule.CardTransparency.Default,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		UICorner = react.createElement("UICorner", { CornerRadius = defaultCardCornerRadius }),
 		UIListLayout = react.createElement("UIListLayout", {
@@ -33,10 +33,10 @@ return function(p0)
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
 		UIPadding = react.createElement("UIPadding", {
-			PaddingBottom = UDim.new(0, var5),
-			PaddingLeft = UDim.new(0, var5),
-			PaddingRight = UDim.new(0, var5),
-			PaddingTop = UDim.new(0, var5)
+			PaddingBottom = UDim.new(0, var2),
+			PaddingLeft = UDim.new(0, var2),
+			PaddingRight = UDim.new(0, var2),
+			PaddingTop = UDim.new(0, var2)
 		}),
 		NotificationContentFrame = react.createElement(notificationContentFrameModule)
 	})

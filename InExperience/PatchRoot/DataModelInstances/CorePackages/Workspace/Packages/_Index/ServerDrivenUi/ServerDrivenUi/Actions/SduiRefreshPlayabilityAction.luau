@@ -5,31 +5,31 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 
-return function(p0, _, p1)
+return function(p1, _, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), gamePlayButtonModule (ref), fetchGamePlayabilityAndProductInfo (ref)
-	local var2 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var2 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.RefreshPlayability
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var2.universeId
+	local universeId = var1.universeId
 	
 	if universeId == nil then return end
 	if gamePlayButtonModule.Flags.GetFFlagLuaAppFetchPlayabilityKillSwitch() then return end
-	local networking = p1.dependencies.networking
+	local networking = p2.dependencies.networking
 	
 	if networking == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.GetNilDependencies, {
+		p2.dependencies.logger.reportError(sduiErrorType.GetNilDependencies, {
 			message = "RefreshPlayability requires networking dependency",
 			name = sduiActionType.RefreshPlayability
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	p1.dependencies.dispatch(fetchGamePlayabilityAndProductInfo.Fetch(networking, universeId))
+	p2.dependencies.dispatch(fetchGamePlayabilityAndProductInfo.Fetch(networking, universeId))
 end

@@ -13,18 +13,18 @@ local analyticsModule = require(editProfile.Analytics)
 local eventNames = analyticsModule.EventNames
 local useAnalytics = analyticsModule.useAnalytics
 
-return roactNavigationModule.withNavigation(function(p0)
+return roactNavigationModule.withNavigation(function(p1)
 	-- upvalues: useLocalUserId (ref), userProfilesModule (ref), useLocalization (ref), textKeysModule (ref), useAnalytics (ref), javascriptHybrid (ref), eventNames (ref), reactModule (ref), urlBuilder (ref), httpService (ref)
-	local var7 = userProfilesModule.Hooks.useUserProfilesFetch({
+	local var1 = userProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { useLocalUserId() },
 		query = userProfilesModule.Queries.userProfilesAllNamesByUserIds
 	})
-	local var8 = useLocalization({ updated = textKeysModule.UsernameUpdated })
-	local var9 = useAnalytics()
+	local var2 = useLocalization({ updated = textKeysModule.UsernameUpdated })
+	local var3 = useAnalytics()
 	
-	local function _(p1)
+	local function _(p2)
 		-- upvalues: javascriptHybrid (copy)
-		return if p1.moduleID == javascriptHybrid.Module.Navigation and p1.functionName == javascriptHybrid.Function.navigateToFeature and (p1.params and p1.params.params) then p1.params.params.feature else nil
+		return if p2.moduleID == javascriptHybrid.Module.Navigation and p2.functionName == javascriptHybrid.Function.navigateToFeature and (p2.params and p2.params.params) then p2.params.params.feature else nil
 	end
 	
 	local _ = function(p2)
@@ -32,40 +32,40 @@ return roactNavigationModule.withNavigation(function(p0)
 		return (if p2.moduleID == javascriptHybrid.Module.Navigation and p2.functionName == javascriptHybrid.Function.navigateToFeature and (p2.params and p2.params.params) then p2.params.params.feature else nil) == javascriptHybrid.Feature.CloseUpdateUsernameModal
 	end
 	
-	local _ = function(p3)
+	local _ = function(p2)
 		-- upvalues: javascriptHybrid (copy)
-		return (if p3.moduleID == javascriptHybrid.Module.Navigation and p3.functionName == javascriptHybrid.Function.navigateToFeature and (p3.params and p3.params.params) then p3.params.params.feature else nil) == javascriptHybrid.Feature.UpdateUsernameModalSuccess
+		return (if p2.moduleID == javascriptHybrid.Module.Navigation and p2.functionName == javascriptHybrid.Function.navigateToFeature and (p2.params and p2.params.params) then p2.params.params.feature else nil) == javascriptHybrid.Feature.UpdateUsernameModalSuccess
 	end
 	
 	local _ = function()
-		-- upvalues: var7 (ref), var9 (ref), eventNames (copy)
-		var7.refetch()
-		var9.fireAnalyticsEvent(eventNames.UsernameSaved)
+		-- upvalues: var1 (ref), var3 (ref), eventNames (copy)
+		var1.refetch()
+		var3.fireAnalyticsEvent(eventNames.UsernameSaved)
 	end
 	
-	return reactModule.createElement(p0.BrowserWrapperComponent, {
+	return reactModule.createElement(p1.BrowserWrapperComponent, {
 		isVisible = true,
 		webViewVisible = true,
 		modal = false,
 		isGenericWebview = true,
 		url = urlBuilder.static.settings.account() .. "?changeusername",
-		javaScriptCallback = function(p4)
-			-- upvalues: httpService (copy), javascriptHybrid (copy), var7 (ref), var9 (ref), eventNames (copy), p0 (ref), var8 (ref)
-			local var10 = httpService:JSONDecode(p4)
+		javaScriptCallback = function(p2)
+			-- upvalues: httpService (copy), javascriptHybrid (copy), var1 (ref), var3 (ref), eventNames (copy), p1 (ref), var2 (ref)
+			local var4 = httpService:JSONDecode(p2)
 			
-			if (if var10.moduleID == javascriptHybrid.Module.Navigation and var10.functionName == javascriptHybrid.Function.navigateToFeature and (var10.params and var10.params.params) then var10.params.params.feature else nil) == javascriptHybrid.Feature.UpdateUsernameModalSuccess then
-				var7.refetch()
-				var9.fireAnalyticsEvent(eventNames.UsernameSaved)
+			if (if var4.moduleID == javascriptHybrid.Module.Navigation and var4.functionName == javascriptHybrid.Function.navigateToFeature and (var4.params and var4.params.params) then var4.params.params.feature else nil) == javascriptHybrid.Feature.UpdateUsernameModalSuccess then
+				var1.refetch()
+				var3.fireAnalyticsEvent(eventNames.UsernameSaved)
 				
-				if p0.onUsernameChanged then
-					p0.onUsernameChanged()
+				if p1.onUsernameChanged then
+					p1.onUsernameChanged()
 				end
-				p0.navigation.goBack()
-				p0.showToast(var8.updated)
+				p1.navigation.goBack()
+				p1.showToast(var2.updated)
 				
 				return
-			elseif (if var10.moduleID == javascriptHybrid.Module.Navigation and var10.functionName == javascriptHybrid.Function.navigateToFeature and (var10.params and var10.params.params) then var10.params.params.feature else nil) == javascriptHybrid.Feature.CloseUpdateUsernameModal then
-				p0.navigation.goBack()
+			elseif (if var4.moduleID == javascriptHybrid.Module.Navigation and var4.functionName == javascriptHybrid.Function.navigateToFeature and (var4.params and var4.params.params) then var4.params.params.feature else nil) == javascriptHybrid.Feature.CloseUpdateUsernameModal then
+				p1.navigation.goBack()
 			end
 		end
 	})

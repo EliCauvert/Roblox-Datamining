@@ -5,18 +5,18 @@ local getOutputWiresModule = require(sceneUnderstanding.wiring.getOutputWires)
 local _ = require(sceneUnderstanding.wiring.types)
 local toWirableInstanceModule = require(sceneUnderstanding.wiring.toWirableInstance)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: safelyAccessPropertyModule (ref)
-	if not p0.IsPlaying then
+	if not p1.IsPlaying then
 		return 0
 	end
-	local var7 = safelyAccessPropertyModule(p0, "RollOffGain", 0)
-	local var8 = if p0.SoundGroup then p0.SoundGroup.Volume else 1
+	local var1 = safelyAccessPropertyModule(p1, "RollOffGain", 0)
+	local var2 = if p1.SoundGroup then p1.SoundGroup.Volume else 1
 	
-	if var7 < 1 then
-		var7 /= 10
+	if var1 < 1 then
+		var1 /= 10
 	end
-	return var8 * p0.Volume * var7
+	return var2 * p1.Volume * var1
 end
 
 local function getOutputsOf(p1)
@@ -27,74 +27,74 @@ local function getOutputsOf(p1)
 	local t = {}
 	
 	for i, v in getOutputWiresModule(p1) do
-		local var10 = toWirableInstanceModule(v.TargetInstance)
+		local var1 = toWirableInstanceModule(v.TargetInstance)
 		
-		if var10 then
-			table.insert(t, var10)
+		if var1 then
+			table.insert(t, var1)
 		end
 	end
 	return t
 end
 
 local _ = function(p2)
-	local var11 = 0
+	local var2 = 0
 	
 	for i, v in p2:GetInteractingListeners() do
-		var11 += v:GetAudibilityFor(p2)
+		var2 += v:GetAudibilityFor(p2)
 	end
-	return var11
+	return var2
 end
 
 local function getAudibilityOf(p3, p4)
 	-- upvalues: getOutputsOf (ref), getAudibilityOf (ref)
-	local var12 = p4 or {}
+	local var3 = p4 or {}
 	
-	if var12[p3] then
+	if var3[p3] then
 		return 0
 	end
-	var12[p3] = true
-	local var13 = 1
+	var3[p3] = true
+	local var4 = 1
 	
 	if typeof(p3) == "Instance" then
 		if p3:IsA("AudioPlayer") or p3:IsA("AudioFader") then
-			var13 = p3.Volume
+			var4 = p3.Volume
 		elseif p3:IsA("AudioEmitter") then
-			local var14 = 0
+			local var5 = 0
 			
 			for i, v in p3:GetInteractingListeners() do
-				var14 += v:GetAudibilityFor(p3)
+				var5 += v:GetAudibilityFor(p3)
 			end
-			var13 = var14
+			var4 = var5
 		elseif p3:IsA("AudioDeviceOutput") then
 			return 1
 		end
 	end
-	local var15 = 0
+	local var6 = 0
 	
 	for i, v in getOutputsOf(p3) do
-		var15 += var13 * getAudibilityOf(v, var12)
+		var6 += var4 * getAudibilityOf(v, var3)
 	end
-	return var15
+	return var6
 end
 
 return function(p5)
 	-- upvalues: safelyAccessPropertyModule (ref), userGameSettingsService (ref), getAudibilityOf (ref)
-	local var17
-	local var16 = safelyAccessPropertyModule(userGameSettingsService, "MasterVolume", 0)
+	local var7
+	local var8 = safelyAccessPropertyModule(userGameSettingsService, "MasterVolume", 0)
 	local _ = 0
 	
 	if not p5:IsA("Sound") then
-		var17 = getAudibilityOf(p5)
+		var7 = getAudibilityOf(p5)
 	elseif p5.IsPlaying then
-		local var18 = safelyAccessPropertyModule(p5, "RollOffGain", 0)
-		local var19 = if p5.SoundGroup then p5.SoundGroup.Volume else 1
+		local var9 = safelyAccessPropertyModule(p5, "RollOffGain", 0)
+		local var10 = if p5.SoundGroup then p5.SoundGroup.Volume else 1
 		
-		if var18 < 1 then
-			var18 /= 10
+		if var9 < 1 then
+			var9 /= 10
 		end
-		var17 = var19 * p5.Volume * var18
+		var7 = var10 * p5.Volume * var9
 	else
-		var17 = 0
+		var7 = 0
 	end
-	return var16 * var17
+	return var8 * var7
 end

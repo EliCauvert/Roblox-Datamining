@@ -17,7 +17,7 @@ local enableConsoleAutoFocusForUEN1 = game:DefineFastFlag("EnableConsoleAutoFocu
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local httpRequestModule = require(parent.HttpRequest)
-local var9 = httpRequestModule.config({
+local var1 = httpRequestModule.config({
 	requestFunction = httpRequestModule.requestFunctions.HttpRbxApi,
 	maxRetryCount = if fFlagLuaAppDefaultHttpRetry then game:DefineFastInt("NotificationsUpsellModalHttpRetryCount", 4) else nil
 })
@@ -26,9 +26,9 @@ local sendEventDeferred = require(parent.NotificationsCommon).sendEventDeferred
 local modalEventConstantsModule = require(script.Parent.Parent.Analytics.ModalEventConstants)
 local richTextEscapeModule = require(script.Parent.Parent.Util.RichTextEscape)
 
-return function(p0)
-	-- upvalues: useLocalization (ref), useCallback (ref), sendEventDeferred (ref), modalEventConstantsModule (ref), playersService (ref), followingsPostFollowModule (ref), var9 (ref), notificationModalsManagerModule (ref), images (ref), useState (ref), useRef (ref), enableConsoleAutoFocusForUEN1 (ref), useEffect (ref), userInputService (ref), guiService (ref), reactModule (ref), reactRobloxModule (ref), interactiveAlert (ref), richTextEscapeModule (ref), buttonType (ref)
-	local var13 = useLocalization({
+return function(p1)
+	-- upvalues: useLocalization (ref), useCallback (ref), sendEventDeferred (ref), modalEventConstantsModule (ref), playersService (ref), followingsPostFollowModule (ref), var1 (ref), notificationModalsManagerModule (ref), images (ref), useState (ref), useRef (ref), enableConsoleAutoFocusForUEN1 (ref), useEffect (ref), userInputService (ref), guiService (ref), reactModule (ref), reactRobloxModule (ref), interactiveAlert (ref), richTextEscapeModule (ref), buttonType (ref)
+	local var2 = useLocalization({
 		Cancel = "CommonUI.Controls.Action.Cancel",
 		Yes = "CommonUI.Controls.Action.Yes",
 		Heading = "Feature.Notifications.Heading.TurnOnNotifications",
@@ -38,67 +38,67 @@ return function(p0)
 		NotificationsEnabled = "Feature.Notifications.Response.NotificationsEnabled",
 		SomethingWentWrong = "Feature.Call.Error.Description.Generic"
 	})
-	local var14 = useCallback(function()
-		-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (ref)
+	local var3 = useCallback(function()
+		-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p1 (ref)
 		sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 			[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
 			[modalEventConstantsModule.Button] = modalEventConstantsModule.Cancel,
-			[modalEventConstantsModule.UniverseId] = p0.ExperienceId
+			[modalEventConstantsModule.UniverseId] = p1.ExperienceId
 		})
-		p0.CloseModal()
-	end, { p0.CloseModal, p0.ExperienceId })
-	local var15 = useCallback(function()
-		-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (ref), playersService (copy), followingsPostFollowModule (copy), var9 (copy), notificationModalsManagerModule (copy), images (copy), var13 (ref)
+		p1.CloseModal()
+	end, { p1.CloseModal, p1.ExperienceId })
+	local var4 = useCallback(function()
+		-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p1 (ref), playersService (copy), followingsPostFollowModule (copy), var1 (copy), notificationModalsManagerModule (copy), images (copy), var2 (ref)
 		sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 			[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
 			[modalEventConstantsModule.Button] = modalEventConstantsModule.Confirm,
-			[modalEventConstantsModule.UniverseId] = p0.ExperienceId
+			[modalEventConstantsModule.UniverseId] = p1.ExperienceId
 		})
 		local localPlayer = playersService and playersService.LocalPlayer
 		
-		if p0.ExperienceId ~= "0" and localPlayer then
+		if p1.ExperienceId ~= "0" and localPlayer then
 			sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 				[modalEventConstantsModule.ActionType] = modalEventConstantsModule.BackendRequested,
-				[modalEventConstantsModule.UniverseId] = p0.ExperienceId
+				[modalEventConstantsModule.UniverseId] = p1.ExperienceId
 			})
-			followingsPostFollowModule(var9, tostring(localPlayer.UserId), tostring(p0.ExperienceId)):andThen(function()
-				-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (copy), notificationModalsManagerModule (copy), images (copy), var13 (copy)
+			followingsPostFollowModule(var1, tostring(localPlayer.UserId), tostring(p1.ExperienceId)):andThen(function()
+				-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p1 (copy), notificationModalsManagerModule (copy), images (copy), var2 (copy)
 				sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 					[modalEventConstantsModule.ActionType] = modalEventConstantsModule.BackendSuccess,
-					[modalEventConstantsModule.UniverseId] = p0.ExperienceId
+					[modalEventConstantsModule.UniverseId] = p1.ExperienceId
 				})
 				notificationModalsManagerModule.SetUIBloxToast({
 					iconImage = images["icons/common/notificationOn"],
-					toastTitle = if p0.ExperienceName then var13.NotificationsEnabledForExperience:gsub("{experienceName}", p0.ExperienceName) else var13.NotificationsEnabled
+					toastTitle = if p1.ExperienceName then var2.NotificationsEnabledForExperience:gsub("{experienceName}", p1.ExperienceName) else var2.NotificationsEnabled
 				})
 			end, function()
-				-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (copy), notificationModalsManagerModule (copy), images (copy), var13 (copy)
+				-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p1 (copy), notificationModalsManagerModule (copy), images (copy), var2 (copy)
 				sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 					[modalEventConstantsModule.ActionType] = modalEventConstantsModule.BackendFailed,
-					[modalEventConstantsModule.UniverseId] = p0.ExperienceId
+					[modalEventConstantsModule.UniverseId] = p1.ExperienceId
 				})
 				notificationModalsManagerModule.SetUIBloxToast({
 					iconImage = images["icons/status/alert"],
-					toastTitle = var13.SomethingWentWrong
+					toastTitle = var2.SomethingWentWrong
 				})
 			end)
 		end
-		p0.CloseModal()
-	end, { p0.CloseModal, p0.ExperienceId, var13 })
-	local var16, var17 = useState(Vector2.new(800, 600))
-	local var18 = useCallback(function(p1)
-		-- upvalues: var17 (ref)
-		var17(p1.AbsoluteSize)
-	end, { var17 })
-	local var19 = useRef(nil)
+		p1.CloseModal()
+	end, { p1.CloseModal, p1.ExperienceId, var2 })
+	local var5, var6 = useState(Vector2.new(800, 600))
+	local var7 = useCallback(function(p2)
+		-- upvalues: var6 (ref)
+		var6(p2.AbsoluteSize)
+	end, { var6 })
+	local var8 = useRef(nil)
 	
 	if enableConsoleAutoFocusForUEN1 then
 		useEffect(function()
-			-- upvalues: userInputService (copy), var19 (ref), guiService (copy)
+			-- upvalues: userInputService (copy), var8 (ref), guiService (copy)
 			if userInputService.GamepadEnabled then
 				task.delay(0.3, function()
-					-- upvalues: var19 (copy), guiService (copy)
-					local buttons = var19.current and var19.current:FindFirstChild("Buttons", true)
+					-- upvalues: var8 (copy), guiService (copy)
+					local buttons = var8.current and var8.current:FindFirstChild("Buttons", true)
 					local _2 = buttons and buttons:FindFirstChild("2")
 					
 					if _2 then
@@ -114,11 +114,11 @@ return function(p0)
 		end, {})
 	else
 		useEffect(function()
-			-- upvalues: userInputService (copy), var19 (ref), guiService (copy)
+			-- upvalues: userInputService (copy), var8 (ref), guiService (copy)
 			if userInputService.GamepadEnabled then
 				task.delay(0.3, function()
-					-- upvalues: var19 (copy), guiService (copy)
-					local buttons = var19.current and var19.current:FindFirstChild("Buttons", true)
+					-- upvalues: var8 (copy), guiService (copy)
+					local buttons = var8.current and var8.current:FindFirstChild("Buttons", true)
 					local _2 = buttons and buttons:FindFirstChild("2")
 					
 					if _2 then
@@ -131,24 +131,24 @@ return function(p0)
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
-		ref = var19,
-		[reactRobloxModule.Change.AbsoluteSize] = var18
+		ref = var8,
+		[reactRobloxModule.Change.AbsoluteSize] = var7
 	}, {
 		ConfirmationPrompt = reactModule.createElement(interactiveAlert, {
 			richText = true,
-			screenSize = var16,
-			title = var13.Heading,
-			bodyText = if p0.ExperienceName then string.gsub(var13.ReceiveUpdatesForExperience, "{experienceName}", "\n<b>" .. richTextEscapeModule(p0.ExperienceName) .. "</b>") else var13.ReceiveUpdates,
+			screenSize = var5,
+			title = var2.Heading,
+			bodyText = if p1.ExperienceName then string.gsub(var2.ReceiveUpdatesForExperience, "{experienceName}", "\n<b>" .. richTextEscapeModule(p1.ExperienceName) .. "</b>") else var2.ReceiveUpdates,
 			buttonStackInfo = {
 				buttons = {
 					{
 						isDefaultChild = true,
-						props = { onActivated = var14, text = var13.Cancel }
+						props = { onActivated = var3, text = var2.Cancel }
 					},
 					{
 						isDefaultChild = false,
 						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = var15, text = var13.Yes }
+						props = { onActivated = var4, text = var2.Yes }
 					}
 				}
 			}

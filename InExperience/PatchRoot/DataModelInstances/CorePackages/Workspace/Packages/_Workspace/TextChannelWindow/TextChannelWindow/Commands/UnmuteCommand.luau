@@ -2,9 +2,9 @@
 
 return {
 	aliases = { "/unmute", "/um" },
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: chatMuteModule (ref)
-		local var1 = chatMuteModule.resolveUnmuteTarget(string.split(p0, " ")[2], p1)
+		local var1 = chatMuteModule.resolveUnmuteTarget(string.split(p1, " ")[2], p2)
 		
 		if var1.playerInfo then
 			chatMuteModule.unmutePlayer(var1.playerInfo)

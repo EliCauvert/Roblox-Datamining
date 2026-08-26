@@ -15,22 +15,22 @@ local t = {
 	lineWidth = constantsModule.TILE_SIZE
 }
 
-function CarouselUserContextualInfo(p0)
+function CarouselUserContextualInfo(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTextSizeOffset (ref), iconSize (ref), reactModule (ref), text (ref), imageSetLabel (ref), images (ref), styledTextLabel (ref)
-	local var5 = cryoModule.Dictionary.join(t, p0)
-	local icon = var5.icon
-	local label = var5.label
-	local var6 = useStyle()
-	local var7 = useTextSizeOffset()
-	local theme = var6.Theme
-	local font = var6.Font
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local icon = var1.icon
+	local label = var1.label
+	local var2 = useStyle()
+	local var3 = useTextSizeOffset()
+	local theme = var2.Theme
+	local font = var2.Font
 	local font_1 = label.font or font.CaptionBody
 	local text_1 = label.text
-	local var9 = if icon then var5.lineWidth - (iconSize.Small + 2) else var5.lineWidth
+	local var4 = if icon then var1.lineWidth - (iconSize.Small + 2) else var1.lineWidth
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = var5.layoutOrder,
+		LayoutOrder = var1.layoutOrder,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
@@ -63,12 +63,12 @@ function CarouselUserContextualInfo(p0)
 			lineHeight = 1,
 			fluidSizing = false,
 			richText = false,
-			size = UDim2.fromOffset(var9, reactModule.useMemo(function()
-				-- upvalues: font (ref), font_1 (ref), var7 (ref), var5 (ref), text (copy), text_1 (ref), var9 (ref)
-				return math.min((font.BaseSize * font_1.RelativeSize + var7) * var5.maxNumberOfLines, text.GetTextHeight(text_1 or "", font_1.Font, font.BaseSize * font_1.RelativeSize, var9))
+			size = UDim2.fromOffset(var4, reactModule.useMemo(function()
+				-- upvalues: font (ref), font_1 (ref), var3 (ref), var1 (ref), text (copy), text_1 (ref), var4 (ref)
+				return math.min((font.BaseSize * font_1.RelativeSize + var3) * var1.maxNumberOfLines, text.GetTextHeight(text_1 or "", font_1.Font, font.BaseSize * font_1.RelativeSize, var4))
 			end, {
-				font_1.Font, font.BaseSize, font_1.RelativeSize, var5.maxNumberOfLines, text_1,
-				var7, var9
+				font_1.Font, font.BaseSize, font_1.RelativeSize, var1.maxNumberOfLines, text_1,
+				var3, var4
 			})),
 			text = text_1,
 			textXAlignment = Enum.TextXAlignment.Left,

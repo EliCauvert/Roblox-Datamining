@@ -1,13 +1,13 @@
-﻿return function(p0)
-	if p0 == nil then
+﻿return function(p1)
+	if p1 == nil then
 		return {}, ""
 	end
 	local t = {}
 	
-	return t, string.gsub(p0, "<a%s+href=\"([^\"]+)\">([^<]*)</a>", function(p1, p2)
+	return t, string.gsub(p1, "<a%s+href=\"([^\"]+)\">([^<]*)</a>", function(p2, p3)
 		-- upvalues: t (ref)
-		table.insert(t, p1)
+		table.insert(t, p2)
 		
-		return `<u><b>{p2}</b></u>`
+		return `<u><b>{p3}</b></u>`
 	end)
 end

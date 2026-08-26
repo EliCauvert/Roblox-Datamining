@@ -11,51 +11,51 @@ return roduxModule.createReducer({
 	lastReadMessages = 0,
 	unreadMessages = 0
 }, {
-	[require(actions.UpdateUnreadMessagesBadge).name] = function(p0, p1)
-		return if p0.visible then {
+	[require(actions.UpdateUnreadMessagesBadge).name] = function(p1, p2)
+		return if p1.visible then {
 			visible = true,
 			lastReadMessages = 0,
 			unreadMessages = 0,
-			canChat = p0.canChat
+			canChat = p1.canChat
 		} else {
 			visible = false,
 			lastReadMessages = 0,
-			canChat = p0.canChat,
-			unreadMessages = p1.messages
+			canChat = p1.canChat,
+			unreadMessages = p2.messages
 		}
 	end,
-	[require(actions.UpdateChatMessages).name] = function(p2, p3)
+	[require(actions.UpdateChatMessages).name] = function(p1, p2)
+		return if p1.visible then {
+			visible = true,
+			unreadMessages = 0,
+			canChat = p1.canChat,
+			lastReadMessages = p2.messages
+		} else {
+			visible = false,
+			canChat = p1.canChat,
+			lastReadMessages = p1.lastReadMessages,
+			unreadMessages = p2.messages - p1.lastReadMessages
+		}
+	end,
+	[require(actions.UpdateChatVisible).name] = function(p1, p2)
 		return if p2.visible then {
 			visible = true,
 			unreadMessages = 0,
-			canChat = p2.canChat,
-			lastReadMessages = p3.messages
+			canChat = p1.canChat,
+			lastReadMessages = p1.lastReadMessages + p1.unreadMessages
 		} else {
 			visible = false,
-			canChat = p2.canChat,
-			lastReadMessages = p2.lastReadMessages,
-			unreadMessages = p3.messages - p2.lastReadMessages
+			canChat = p1.canChat,
+			lastReadMessages = p1.lastReadMessages,
+			unreadMessages = p1.unreadMessages
 		}
 	end,
-	[require(actions.UpdateChatVisible).name] = function(p4, p5)
-		return if p5.visible then {
-			visible = true,
-			unreadMessages = 0,
-			canChat = p4.canChat,
-			lastReadMessages = p4.lastReadMessages + p4.unreadMessages
-		} else {
-			visible = false,
-			canChat = p4.canChat,
-			lastReadMessages = p4.lastReadMessages,
-			unreadMessages = p4.unreadMessages
-		}
-	end,
-	[require(actions.SetCanChat).name] = function(p6, p7)
+	[require(actions.SetCanChat).name] = function(p1, p2)
 		return {
-			canChat = p7.canChat,
-			visible = p6.visible,
-			lastReadMessages = p6.lastReadMessages,
-			unreadMessages = p6.unreadMessages
+			canChat = p2.canChat,
+			visible = p1.visible,
+			lastReadMessages = p1.lastReadMessages,
+			unreadMessages = p1.unreadMessages
 		}
 	end
 })

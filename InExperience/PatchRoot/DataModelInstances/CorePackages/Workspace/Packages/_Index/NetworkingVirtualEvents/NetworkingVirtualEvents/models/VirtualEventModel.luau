@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("NetworkingVirtualEvents").types)
 
 return {
-	mock = function(p0)
+	mock = function(p1)
 		local currentDateTime = DateTime.now()
 		
 		return {
@@ -11,7 +11,7 @@ return {
 			placeId = 123456789,
 			eventStatus = "active",
 			userRsvpStatus = "none",
-			id = p0,
+			id = p1,
 			host = {
 				hostType = "user",
 				hostId = 1,

@@ -5,13 +5,13 @@ local _ = require(script.Parent.GameSubscriptionStoreTypes)
 
 return function()
 	-- upvalues: createDataCacheModule (ref)
-	local var2 = createDataCacheModule()
+	local var1 = createDataCacheModule()
 	
 	return {
-		getGameSubscriptionInfo = var2.getItem,
-		updateGameSubscriptionInfo = var2.updateItem,
-		updateGameSubscriptionInfos = var2.updateItems,
-		clear = var2.clear,
-		dispose = var2.dispose
+		getGameSubscriptionInfo = var1.getItem,
+		updateGameSubscriptionInfo = var1.updateItem,
+		updateGameSubscriptionInfos = var1.updateItems,
+		clear = var1.clear,
+		dispose = var1.dispose
 	}
 end

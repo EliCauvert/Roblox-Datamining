@@ -4,39 +4,39 @@ local view = require(parent.Foundation).View
 local getSduiComponentWrapper = require(parent.SduiCoreSystem).getSduiComponentWrapper
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: getSduiComponentWrapper (ref), reactModule (ref), view (ref), fFlagSduiExperienceDetailsSupport (ref)
-	if p0.items == nil or #p0.items == 0 then
+	if p1.items == nil or #p1.items == 0 then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p0.items do
+	for i, v in p1.items do
 		t["item_" .. tostring(i)] = reactModule.createElement(getSduiComponentWrapper(v), {
 			componentConfig = v,
-			sduiContext = p0.sduiContext,
+			sduiContext = p1.sduiContext,
 			extraLocalProps = { layoutOrder = i }
 		})
 	end
-	return if p0.footer == nil then reactModule.createElement(view, {
-		tag = p0.rowTag or "row size-full-0 auto-y gap-small",
-		size = p0.size,
-		anchorPoint = p0.anchorPoint,
-		position = p0.position,
-		LayoutOrder = p0.layoutOrder,
-		testId = p0.testId
+	return if p1.footer == nil then reactModule.createElement(view, {
+		tag = p1.rowTag or "row size-full-0 auto-y gap-small",
+		size = p1.size,
+		anchorPoint = p1.anchorPoint,
+		position = p1.position,
+		LayoutOrder = p1.layoutOrder,
+		testId = p1.testId
 	}, t) else reactModule.createElement(view, {
-		tag = p0.wrapperTag or "col size-full-0 auto-y gap-small",
-		size = p0.size,
-		anchorPoint = p0.anchorPoint,
-		position = p0.position,
-		LayoutOrder = p0.layoutOrder,
-		testId = p0.testId
+		tag = p1.wrapperTag or "col size-full-0 auto-y gap-small",
+		size = p1.size,
+		anchorPoint = p1.anchorPoint,
+		position = p1.position,
+		LayoutOrder = p1.layoutOrder,
+		testId = p1.testId
 	}, {
 		ItemsRow = reactModule.createElement(view, {
 			layoutOrder = 1,
-			tag = p0.rowTag or "row size-full-0 auto-y gap-small"
+			tag = p1.rowTag or "row size-full-0 auto-y gap-small"
 		}, t),
-		Footer = if fFlagSduiExperienceDetailsSupport then p0.footer else reactModule.createElement(view, { tag = "size-full-0 auto-y", layoutOrder = 2 }, p0.footer)
+		Footer = if fFlagSduiExperienceDetailsSupport then p1.footer else reactModule.createElement(view, { tag = "size-full-0 auto-y", layoutOrder = 2 }, p1.footer)
 	})
 end)

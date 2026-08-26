@@ -2,9 +2,9 @@
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local constants = userLibModule.Utils.Constants
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: constants (ref)
-	return if p0 == "AvatarBundle" then constants.RbxthumbTypes.BundleThumbnail else constants.RbxthumbTypes.Asset
+	return if p1 == "AvatarBundle" then constants.RbxthumbTypes.BundleThumbnail else constants.RbxthumbTypes.Asset
 end
 
 return function(p1, p2)

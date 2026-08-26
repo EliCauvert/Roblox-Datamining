@@ -9,7 +9,7 @@ local inExperienceShopTooltipStorageKey = game:DefineFastString("InExperienceSho
 local inExperienceShopTooltipShowDelay = game:DefineFastInt("InExperienceShopTooltipShowDelay", 1000)
 local inExperienceShopTooltipDismissDelay = game:DefineFastInt("InExperienceShopTooltipDismissDelay", 7000)
 
-return function(p0)
+return function(p1)
 	-- upvalues: serviceModule (ref), constantsModule (ref), useMappedSignal (ref), commonFtuxTooltipModule (ref), inExperienceShopTooltipPriority (ref), inExperienceShopTooltipStorageKey (ref), inExperienceShopTooltipShowDelay (ref), inExperienceShopTooltipDismissDelay (ref)
 	local iNEXPERIENCESHOPID = serviceModule:integrations()[constantsModule.IN_EXPERIENCE_SHOP_ID]
 	
@@ -18,7 +18,7 @@ return function(p0)
 		headerKey = "CoreScripts.FTUX.Heading.InExperienceShop",
 		bodyKey = "CoreScripts.FTUX.Label.InExperienceShopDescription",
 		priority = inExperienceShopTooltipPriority,
-		isIconVisible = p0.visible,
+		isIconVisible = p1.visible,
 		localStorageKey = inExperienceShopTooltipStorageKey,
 		showDelay = inExperienceShopTooltipShowDelay,
 		dismissDelay = inExperienceShopTooltipDismissDelay

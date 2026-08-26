@@ -5,8 +5,8 @@ local messageBus = require(parent.MessageBus).MessageBus
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local getFFlagMomentsPauseAudioThroughTeleportModule = require(moments.Flags.GetFFlagMomentsPauseAudioThroughTeleport)
 
-local function gameLeaveMessageValidator(p0)
-	return typeof(p0) == "table"
+local function gameLeaveMessageValidator(p1)
+	return typeof(p1) == "table"
 end
 
 return function()
@@ -14,16 +14,16 @@ return function()
 	reactModule.useEffect(function()
 		-- upvalues: getFFlagMomentsPauseAudioThroughTeleportModule (copy), messageBus (copy), gameLeaveMessageValidator (copy), getMomentsPreferencesStoreModule (copy)
 		if getFFlagMomentsPauseAudioThroughTeleportModule() then
-			local var5 = messageBus.Subscriber.new()
+			local var1 = messageBus.Subscriber.new()
 			local game = messageBus.getMessageId("Game", "onGameLeave")
-			var5:subscribe({ mid = game, validateParams = gameLeaveMessageValidator }, function(_)
+			var1:subscribe({ mid = game, validateParams = gameLeaveMessageValidator }, function(_)
 				-- upvalues: getMomentsPreferencesStoreModule (copy)
 				getMomentsPreferencesStoreModule(false).setTeleporting(false)
 			end)
 			
 			return function()
-				-- upvalues: var5 (ref), game (ref)
-				var5:unsubscribeWithMsgId(game)
+				-- upvalues: var1 (ref), game (ref)
+				var1:unsubscribeWithMsgId(game)
 			end
 		end
 	end, {})

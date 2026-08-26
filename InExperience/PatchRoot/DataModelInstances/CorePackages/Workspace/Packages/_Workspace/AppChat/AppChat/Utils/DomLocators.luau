@@ -1,6 +1,6 @@
 ﻿local t = {
-	sanitizeSegment = function(p0)
-		return (if p0 == nil then "" else tostring(p0)):gsub("%s+", "_"):gsub("[^%w_]", "")
+	sanitizeSegment = function(p1)
+		return (if p1 == nil then "" else tostring(p1)):gsub("%s+", "_"):gsub("[^%w_]", "")
 	end
 }
 
@@ -8,28 +8,28 @@ local function _(p1)
 	return if p1 == nil then "" else tostring(p1)
 end
 
-function t.build(p2)
+function t.build(p1)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
-	for i, v in p2 do
-		local var2 = t.sanitizeSegment(v)
+	for i, v in p1 do
+		local var1 = t.sanitizeSegment(v)
 		
-		if var2 ~= "" then
-			table.insert(t_1, var2)
+		if var1 ~= "" then
+			table.insert(t_1, var1)
 		end
 	end
 	return table.concat(t_1, "-")
 end
 
-function t.chatLandingTopBarIconButton(p3)
+function t.chatLandingTopBarIconButton(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"chatLanding",
 		"topBar",
 		"button",
-		p3
+		p2
 	})
 end
 
@@ -38,126 +38,126 @@ function t.appChatLoadingOverlayBackButton()
 	return t.build({ "chat", "loadingOverlay", "button", "back" })
 end
 
-function t.chatLandingConversationListHeader(p4)
+function t.chatLandingConversationListHeader(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"chatLanding",
 		"conversationList",
 		"conversationListHeader",
-		p4
+		p2
 	})
 end
 
-function t.chatLandingConversationEntry(p5)
+function t.chatLandingConversationEntry(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"chatLanding",
 		"conversationList",
 		"conversationEntry",
-		p5
+		p2
 	})
 end
 
-function t.chatLandingConversationEntrySquadButton(p6)
+function t.chatLandingConversationEntrySquadButton(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat", "chatLanding", "conversationList", "conversationEntry", "button",
-		`squad_{p6}`
+		`squad_{p2}`
 	})
 end
 
-function t.chatDetailsTopBarActionButton(p7)
+function t.chatDetailsTopBarActionButton(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"chatDetails",
 		"topBar",
 		"button",
-		p7
+		p2
 	})
 end
 
-function t.chatDetailsListActionButton(p8)
+function t.chatDetailsListActionButton(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"chatDetails",
 		"detailsList",
 		"button",
-		p8
+		p2
 	})
 end
 
-function t.chatDetailsParticipantMoreButton(p9)
+function t.chatDetailsParticipantMoreButton(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat", "chatDetails", "detailsList", "participantList", "participantEntry",
-		"button", `{p9}_moreDetails`
+		"button", `{p2}_moreDetails`
 	})
 end
 
-function t.chatConversationTopBarButton(p10)
+function t.chatConversationTopBarButton(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"chatConversation",
 		"topBar",
 		"button",
-		p10
+		p2
 	})
 end
 
-function t.chatConversationSystemMessageCard(p11)
+function t.chatConversationSystemMessageCard(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"chatConversation",
 		"messageList",
 		"systemMessageCard",
-		if type(p11) == "table" then table.concat(p11, "_") else p11
+		if type(p2) == "table" then table.concat(p2, "_") else p2
 	})
 end
 
-function t.chatConversationSystemMessage(p12)
+function t.chatConversationSystemMessage(p2)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"chatConversation",
 		"messageList",
 		"systemMessageText",
-		p12
+		p2
 	})
 end
 
-function t.selectChatMembersUserCellWithCheckbox(p13, p14)
+function t.selectChatMembersUserCellWithCheckbox(p2, p3)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat", "selectChatMembers", "friendsList", "userCellWithCheckbox", "checkbox",
-		`{p13}_{if p14 then "checked" else "unchecked"}`
+		`{p2}_{if p3 then "checked" else "unchecked"}`
 	})
 end
 
-function t.selectChatMembersSearchInput(p15)
+function t.selectChatMembersSearchInput(p4)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"selectChatMembers",
 		"searchBar",
 		"textInput",
-		p15
+		p4
 	})
 end
 
-function t.selectChatMembersTopBarActionButton(p16)
+function t.selectChatMembersTopBarActionButton(p4)
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
 		"selectChatMembers",
 		"topBar",
 		"button",
-		p16
+		p4
 	})
 end
 

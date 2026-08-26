@@ -2,18 +2,18 @@
 local roactNavigationModule = require(appChat.Parent.RoactNavigation)
 local enumScreensModule = require(appChat.EnumScreens)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: enumScreensModule (ref), roactNavigationModule (ref)
-	p0.navigate(enumScreensModule.ChatLanding, nil, roactNavigationModule.StackActions.reset({
+	p1.navigate(enumScreensModule.ChatLanding, nil, roactNavigationModule.StackActions.reset({
 		index = 2,
 		actions = {
 			roactNavigationModule.Actions.navigate({
 				routeName = enumScreensModule.ChatConversation,
-				params = { conversationId = p1 }
+				params = { conversationId = p2 }
 			}),
 			roactNavigationModule.Actions.navigate({
 				routeName = enumScreensModule.SquadLobby,
-				params = { conversationId = p1, extraParams = p2 }
+				params = { conversationId = p2, extraParams = p3 }
 			})
 		}
 	}))

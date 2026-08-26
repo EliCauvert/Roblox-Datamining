@@ -13,26 +13,26 @@ local inExperienceAppChatModalModule = require(appChat.App.InExperienceAppChatMo
 local squadCoordinationExperienceJoinExperimentation = socialExperimentsModule.SquadCoordinationExperienceJoinExperimentation
 
 return makeSquadContract(cryoModule.Dictionary.union(require(script.Parent.SquadContract), {
-	setSquadPrompt = function(p0, p1)
+	setSquadPrompt = function(p1, p2)
 		-- upvalues: setSquadPrompt (ref)
-		p0:dispatch(setSquadPrompt(p1))
+		p1:dispatch(setSquadPrompt(p2))
 	end,
 	closeSquadPrompt = closeSquadPrompt,
 	useSquadRootView = function()
 		-- upvalues: reactModule (ref), squadCoordinationExperienceJoinExperimentation (ref), inExperienceAppChatModalModule (ref), squadRootViewType (ref)
 		local useState = reactModule.useState
-		local var7 = if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled and inExperienceAppChatModalModule.default:getVisible() then squadRootViewType.InExperienceAppChatModal else squadRootViewType.None
-		useState, var7 = useState(var7)
+		local var1 = if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled and inExperienceAppChatModalModule.default:getVisible() then squadRootViewType.InExperienceAppChatModal else squadRootViewType.None
+		useState, var7 = useState(var1)
 		reactModule.useEffect(function()
-			-- upvalues: inExperienceAppChatModalModule (copy), var7 (ref), squadRootViewType (copy)
-			local eventConnection = inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p2)
-				-- upvalues: var7 (copy), squadRootViewType (copy)
-				if p2 then
-					var7(squadRootViewType.InExperienceAppChatModal)
+			-- upvalues: inExperienceAppChatModalModule (copy), var1 (ref), squadRootViewType (copy)
+			local eventConnection = inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p1)
+				-- upvalues: var1 (copy), squadRootViewType (copy)
+				if p1 then
+					var1(squadRootViewType.InExperienceAppChatModal)
 					
 					return
 				end
-				var7(squadRootViewType.None)
+				var1(squadRootViewType.None)
 			end)
 			
 			return function()

@@ -34,11 +34,11 @@ return function(p1)
 			FontSize = var6.icon.size.Y.Offset
 		},
 		Size = var6.icon.size,
-		textStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p1)
+		textStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p2)
 			-- upvalues: var6 (ref)
 			return {
 				Color3 = var6.content.style.Color3,
-				Transparency = p1[2] + p1[1]
+				Transparency = p2[2] + p2[1]
 			}
 		end),
 		testId = `{p1.testId}--icon`
@@ -48,11 +48,11 @@ return function(p1)
 		tag = "position-center-center anchor-center-center",
 		Image = p1.icon,
 		Size = if var3 then UDim2.fromOffset(var3.X, var3.Y) else var6.icon.size,
-		imageStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p1)
+		imageStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p2)
 			-- upvalues: var6 (ref)
 			return {
 				Color3 = var6.content.style.Color3,
-				Transparency = p1[2] + p1[1]
+				Transparency = p2[2] + p2[1]
 			}
 		end),
 		scale = var4,

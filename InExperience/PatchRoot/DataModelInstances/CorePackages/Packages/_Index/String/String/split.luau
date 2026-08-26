@@ -5,53 +5,53 @@ local parent_1 = parent.Parent
 local _ = require(parent_1.ES7Types)
 local MAX_SAFE_INTEGER = require(parent_1.Number).MAX_SAFE_INTEGER
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: MAX_SAFE_INTEGER (ref), findOrModule (ref), sliceModule (ref)
-	if p1 == nil then
-		return { p0 }
-	elseif p2 == 0 then
+	if p2 == nil then
+		return { p1 }
+	elseif p3 == 0 then
 		return {}
 	end
 	local list
-	local var2 = if p2 == nil or p2 < 0 then MAX_SAFE_INTEGER else p2
+	local var1 = if p3 == nil or p3 < 0 then MAX_SAFE_INTEGER else p3
 	local _ = nil
 	
-	if typeof(p1) == "string" then
-		if p1 == "" then
+	if typeof(p2) == "string" then
+		if p2 == "" then
 			local t = {}
 			
-			for i in p0:gmatch(".") do
+			for i in p1:gmatch(".") do
 				table.insert(t, i)
 			end
 			return t
 		else
-			list = { p1 }
+			list = { p2 }
 		end
 	else
-		list = p1
+		list = p2
 	end
-	local var5 = 1
+	local var2 = 1
 	local t = {}
-	local var7 = nil
-	local charCount, charCount_1 = utf8.len(p0)
-	assert(charCount ~= nil, ("string `%s` has an invalid byte at position %s"):format(p0, tostring(charCount_1)))
+	local var3 = nil
+	local charCount, charCount_1 = utf8.len(p1)
+	assert(charCount ~= nil, ("string `%s` has an invalid byte at position %s"):format(p1, tostring(charCount_1)))
 	repeat
-		local var10 = findOrModule(p0, list, var5)
-		if var10 == nil then
-			table.insert(t, sliceModule(p0, var5, nil))
+		local var4 = findOrModule(p1, list, var2)
+		if var4 == nil then
+			table.insert(t, sliceModule(p1, var2, nil))
 		else
-			table.insert(t, sliceModule(p0, var5, var10.index))
-			var5 = var10.index + utf8.len(var10.match)
+			table.insert(t, sliceModule(p1, var2, var4.index))
+			var2 = var4.index + utf8.len(var4.match)
 		end
-		if var10 ~= nil then
-			var7 = var10
+		if var4 ~= nil then
+			var3 = var4
 		end
-	until var10 == nil or charCount < var5 or var2 <= #t
-	if var7 ~= nil then
-		local charCount_2, charCount_3 = utf8.len(var7.match)
-		assert(charCount_2 ~= nil, ("string `%s` has an invalid byte at position %s"):format(var7.match, tostring(charCount_3)))
+	until var4 == nil or charCount < var2 or var1 <= #t
+	if var3 ~= nil then
+		local charCount_2, charCount_3 = utf8.len(var3.match)
+		assert(charCount_2 ~= nil, ("string `%s` has an invalid byte at position %s"):format(var3.match, tostring(charCount_3)))
 		
-		if var7.index + charCount_2 == charCount + 1 then
+		if var3.index + charCount_2 == charCount + 1 then
 			table.insert(t, "")
 		end
 	end

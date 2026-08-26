@@ -37,8 +37,8 @@ return function(p1)
 		tag = var4.content.tag
 	}), {
 		ScrollPadding = reactModule.createElement("UIPadding", {
-			PaddingRight = var2:map(function(p1)
-				return UDim.new(0, p1)
+			PaddingRight = var2:map(function(p2)
+				return UDim.new(0, p2)
 			end)
 		}),
 		ScrollContent = reactModule.createElement(reactModule.Fragment, nil, p1.children)

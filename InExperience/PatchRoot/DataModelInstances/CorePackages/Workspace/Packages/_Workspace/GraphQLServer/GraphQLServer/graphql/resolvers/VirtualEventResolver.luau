@@ -14,9 +14,9 @@ local _ = require(graphQLServer.graphql.generatedTypes)
 
 return {
 	VirtualEventMutations = {
-		neverShowNotificationModalAgain = function(_, _, p0)
+		neverShowNotificationModalAgain = function(_, _, p1)
 			-- upvalues: neverShowNotificationModalAgain (ref)
-			return neverShowNotificationModalAgain(p0.fetchImpl)
+			return neverShowNotificationModalAgain(p1.fetchImpl)
 		end,
 		enablePushNotifications = function(_, _, p1)
 			-- upvalues: enablePushNotifications (ref)
@@ -24,40 +24,40 @@ return {
 		end
 	},
 	VirtualEvent = {
-		experienceDetails = function(p2, _, p3)
+		experienceDetails = function(p1, _, p2)
 			-- upvalues: findExperienceDetailsByUniverseId (ref)
-			return findExperienceDetailsByUniverseId(tostring(p2.universeId), p3.fetchImpl)
+			return findExperienceDetailsByUniverseId(tostring(p1.universeId), p2.fetchImpl)
 		end,
-		media = function(p4, _, p5)
+		media = function(p1, _, p2)
 			-- upvalues: findExperienceMediaByUniverseId (ref)
-			return findExperienceMediaByUniverseId(tostring(p4.universeId), p5.fetchImpl)
+			return findExperienceMediaByUniverseId(tostring(p1.universeId), p2.fetchImpl)
 		end,
-		rsvpCounters = function(p6, _, p7)
+		rsvpCounters = function(p1, _, p2)
 			-- upvalues: findRsvpCountersByVirtualEventId (ref)
-			return findRsvpCountersByVirtualEventId(p6.id, p7.fetchImpl)
+			return findRsvpCountersByVirtualEventId(p1.id, p2.fetchImpl)
 		end,
-		rsvps = function(p8, _, p9)
+		rsvps = function(p1, _, p2)
 			-- upvalues: findRsvpsByVirtualEventId (ref)
-			return findRsvpsByVirtualEventId(p8.id, p9.fetchImpl)
+			return findRsvpsByVirtualEventId(p1.id, p2.fetchImpl)
 		end
 	},
 	Mutation = {
 		virtualEvents = function()
 			return {}
 		end,
-		virtualEventRsvp = function(_, p10, p11)
+		virtualEventRsvp = function(_, p1, p2)
 			-- upvalues: updateRsvpStatus (ref)
-			return updateRsvpStatus(p10.id, p10.rsvpStatus, p11.fetchImpl)
+			return updateRsvpStatus(p1.id, p1.rsvpStatus, p2.fetchImpl)
 		end
 	},
 	Query = {
-		virtualEvent = function(_, p12, p13)
+		virtualEvent = function(_, p1, p2)
 			-- upvalues: findVirtualEventById (ref)
-			return findVirtualEventById(p12.id, p13.fetchImpl)
+			return findVirtualEventById(p1.id, p2.fetchImpl)
 		end,
-		virtualEventsByUniverseId = function(_, p14, p15)
+		virtualEventsByUniverseId = function(_, p1, p2)
 			-- upvalues: findVirtualEventsByUniverseId (ref)
-			return findVirtualEventsByUniverseId(p14.universeId, p14.options, p15.fetchImpl)
+			return findVirtualEventsByUniverseId(p1.universeId, p1.options, p2.fetchImpl)
 		end
 	}
 }

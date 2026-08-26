@@ -2,8 +2,8 @@
 
 return function()
 	-- upvalues: networkingUserSettings (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: networkingUserSettings (copy)
-		p0:dispatch(networkingUserSettings.GetUserSettingsMetadata.API())
+		p1:dispatch(networkingUserSettings.GetUserSettingsMetadata.API())
 	end
 end

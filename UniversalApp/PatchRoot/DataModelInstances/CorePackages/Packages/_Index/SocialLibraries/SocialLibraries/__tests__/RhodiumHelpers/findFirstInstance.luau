@@ -1,17 +1,17 @@
-﻿local function _(p0, p1)
+﻿local function _(p1, p2)
 	local ok, status = pcall(function()
-		-- upvalues: p0 (ref), p1 (ref)
-		return p0[p1]
+		-- upvalues: p1 (ref), p2 (ref)
+		return p1[p2]
 	end)
 	
 	return if ok == true then status else nil
 end
 
-local function propertyMatch(p2, p3)
-	for i, v in pairs(p3) do
+local function propertyMatch(p1, p2)
+	for i, v in pairs(p2) do
 		local ok, status = pcall(function()
-			-- upvalues: p2 (ref), i (ref)
-			return p2[i]
+			-- upvalues: p1 (ref), i (ref)
+			return p1[i]
 		end)
 		
 		if (if ok == true then status else nil) ~= v then
@@ -21,10 +21,10 @@ local function propertyMatch(p2, p3)
 	return true
 end
 
-return function(p4, p5)
+return function(p3, p4)
 	-- upvalues: propertyMatch (ref)
-	for i, v in ipairs(p4:GetDescendants()) do
-		if propertyMatch(v, p5) then
+	for i, v in ipairs(p3:GetDescendants()) do
+		if propertyMatch(v, p4) then
 			return v
 		end
 	end

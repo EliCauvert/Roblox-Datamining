@@ -12,11 +12,11 @@ local fFlagBulkPurchaseEnablePurchaseOptionsModule = require(bulkPurchaseApp.Fla
 local convertToDiscountInformationOrNilModule = require(bulkPurchaseApp.Utils.convertToDiscountInformationOrNil)
 local _ = require(bulkPurchaseApp.Store.Types)
 
-local function transformItemDataToBulkPurchaseItemData(p0)
+local function transformItemDataToBulkPurchaseItemData(p1)
 	-- upvalues: purchasableStateEnumModule (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref)
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		table.insert(t, {
 			id = v.id,
 			name = v.name,
@@ -36,26 +36,26 @@ end
 
 return function()
 	-- upvalues: useDispatch (ref), useNetwork (ref), reactModule (ref), marketplaceService (ref), playersService (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), bulkPurchaseApp (ref), initiateBulkPurchaseFlowModule (ref), transformItemDataToBulkPurchaseItemData (ref), convertToDiscountInformationOrNilModule (ref)
-	local var10 = useDispatch()
-	local var11 = useNetwork()
+	local var1 = useDispatch()
+	local var2 = useNetwork()
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var11 (ref), marketplaceService (copy), playersService (copy), fFlagBulkPurchaseEnablePurchaseOptionsModule (copy), bulkPurchaseApp (copy), initiateBulkPurchaseFlowModule (copy), transformItemDataToBulkPurchaseItemData (copy), convertToDiscountInformationOrNilModule (copy)
-		local var12 = if var10 and var11 then marketplaceService.PromptBulkPurchaseRequestedV2:Connect(function(p1, p2, p3, p4, p5, p6, p7)
-			-- upvalues: playersService (copy), fFlagBulkPurchaseEnablePurchaseOptionsModule (copy), bulkPurchaseApp (copy), var10 (copy), initiateBulkPurchaseFlowModule (copy), var11 (copy), transformItemDataToBulkPurchaseItemData (copy), convertToDiscountInformationOrNilModule (copy)
-			if p1 == playersService.LocalPlayer then
+		-- upvalues: var1 (ref), var2 (ref), marketplaceService (copy), playersService (copy), fFlagBulkPurchaseEnablePurchaseOptionsModule (copy), bulkPurchaseApp (copy), initiateBulkPurchaseFlowModule (copy), transformItemDataToBulkPurchaseItemData (copy), convertToDiscountInformationOrNilModule (copy)
+		local var3 = if var1 and var2 then marketplaceService.PromptBulkPurchaseRequestedV2:Connect(function(p2, p3, p4, p5, p6, p7, p8)
+			-- upvalues: playersService (copy), fFlagBulkPurchaseEnablePurchaseOptionsModule (copy), bulkPurchaseApp (copy), var1 (copy), initiateBulkPurchaseFlowModule (copy), var2 (copy), transformItemDataToBulkPurchaseItemData (copy), convertToDiscountInformationOrNilModule (copy)
+			if p2 == playersService.LocalPlayer then
 				if fFlagBulkPurchaseEnablePurchaseOptionsModule and require(bulkPurchaseApp.Flags.FFlagBulkPurchaseReportsMissingPurchaseOptions) then
-					require(bulkPurchaseApp.Utils.reportBulkPurchaseRequestIssues)(p2)
+					require(bulkPurchaseApp.Utils.reportBulkPurchaseRequestIssues)(p3)
 				end
-				var10(initiateBulkPurchaseFlowModule(var11, transformItemDataToBulkPurchaseItemData(p2), p3, p4, p5, p6, convertToDiscountInformationOrNilModule(p7)))
+				var1(initiateBulkPurchaseFlowModule(var2, transformItemDataToBulkPurchaseItemData(p3), p4, p5, p6, p7, convertToDiscountInformationOrNilModule(p8)))
 			end
 		end) else nil
 		
 		return function()
-			-- upvalues: var12 (write)
-			if var12 then
-				var12:Disconnect()
-				var12 = nil
+			-- upvalues: var3 (write)
+			if var3 then
+				var3:Disconnect()
+				var3 = nil
 			end
 		end
-	end, { var10, var11 })
+	end, { var1, var2 })
 end

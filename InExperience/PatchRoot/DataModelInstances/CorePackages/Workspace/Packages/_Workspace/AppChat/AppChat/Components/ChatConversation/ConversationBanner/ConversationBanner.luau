@@ -13,26 +13,26 @@ local t = {
 	onDismissed = function() end
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useChatPagePaddingModule (ref), reactModule (ref), foundationModule (ref)
-	local var6 = cryoModule.Dictionary.union(t, p0)
+	local var1 = cryoModule.Dictionary.union(t, p1)
 	local medium = useTokens().Padding.Medium
-	local var7 = useChatPagePaddingModule()
+	local var2 = useChatPagePaddingModule()
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "row gap-medium align-y-center size-full-0 auto-y bg-shift-200",
 		padding = {
-			left = UDim.new(0, var7.left),
-			right = UDim.new(0, var7.right),
+			left = UDim.new(0, var2.left),
+			right = UDim.new(0, var2.right),
 			top = UDim.new(0, medium),
 			bottom = UDim.new(0, medium)
 		},
-		LayoutOrder = var6.layoutOrder
+		LayoutOrder = var1.layoutOrder
 	}, {
 		BodyText = reactModule.createElement(foundationModule.Text, {
 			tag = "text-title-medium text-align-x-left text-truncate-end content-emphasis auto-y fill",
 			LayoutOrder = 1,
-			Text = var6.bodyText
+			Text = var1.bodyText
 		}),
 		ActionContainer = reactModule.createElement(foundationModule.View, {
 			LayoutOrder = 2,
@@ -40,14 +40,14 @@ return reactModule.memo(function(p0)
 		}, {
 			ActionButton = reactModule.createElement(foundationModule.Button, {
 				LayoutOrder = 1,
-				text = var6.actionText,
-				onActivated = var6.onActivated,
+				text = var1.actionText,
+				onActivated = var1.onActivated,
 				size = foundationModule.Enums.InputSize.Small
 			}),
 			CloseButton = reactModule.createElement(foundationModule.View, {
 				LayoutOrder = 2,
 				tag = "auto-xy x-default-transparent radius-small padding-xsmall",
-				onActivated = var6.onDismissed
+				onActivated = var1.onDismissed
 			}, {
 				Icon = reactModule.createElement(foundationModule.Icon, {
 					size = foundationModule.Enums.IconSize.Large,

@@ -8,63 +8,63 @@ local _ = require(parent_1.LeaderboardStore)
 local teamEntryViewModule = require(parent.Components.Presentation.TeamEntryView)
 local entryViewModule = require(parent.Components.Presentation.EntryView)
 local _ = require(parent.Common.computeStatColumns)
-local var5 = signalsModule.createSignal({})
-local var6 = signalsModule.createSignal(0)
+local var1 = signalsModule.createSignal({})
+local var2 = signalsModule.createSignal(0)
 
-return reactModule.memo(function(p0)
-	-- upvalues: signalsReactModule (ref), var5 (ref), var6 (ref), reactModule (ref), teamEntryViewModule (ref), entryViewModule (ref), view (ref)
-	local teamEntry = p0.teamEntry
+return reactModule.memo(function(p1)
+	-- upvalues: signalsReactModule (ref), var1 (ref), var2 (ref), reactModule (ref), teamEntryViewModule (ref), entryViewModule (ref), view (ref)
+	local teamEntry = p1.teamEntry
 	local players = teamEntry.players
-	local var7 = signalsReactModule.useSignalState(if players then players.getAllData else var5)
-	local var8 = signalsReactModule.useSignalState(if players then players.getCount else var6)
-	local var9 = signalsReactModule.useSignalBinding(teamEntry.order)
-	local var10 = not (p0.isNeutral and (not p0.hasNonNeutralTeams or var8 == 0))
+	local var3 = signalsReactModule.useSignalState(if players then players.getAllData else var1)
+	local var4 = signalsReactModule.useSignalState(if players then players.getCount else var2)
+	local var5 = signalsReactModule.useSignalBinding(teamEntry.order)
+	local var6 = not (p1.isNeutral and (not p1.hasNonNeutralTeams or var4 == 0))
 	
-	if p0.isNeutral and var8 == 0 then
+	if p1.isNeutral and var4 == 0 then
 		return nil
 	end
 	local t = {}
 	
-	if var10 then
+	if var6 then
 		t.TeamHeader = reactModule.createElement(teamEntryViewModule, {
 			name = teamEntry.name,
 			color = teamEntry.color,
 			order = teamEntry.order,
 			teamStats = teamEntry.stats,
-			statColumns = p0.statColumns,
-			statWidth = p0.statWidth,
-			rowHeight = p0.columnHeaderHeight
+			statColumns = p1.statColumns,
+			statWidth = p1.statWidth,
+			rowHeight = p1.columnHeaderHeight
 		})
 	end
 	if players then
 		local createElement
-		local var12 = teamEntry.order(false)
+		local var7 = teamEntry.order(false)
 		local userId = nil
-		local var13 = 1e999
+		local var8 = 1e999
 		
-		for i in pairs(var7) do
-			local playerEntry = p0.leaderboardStore.getPlayerEntry(i, false)
+		for i in pairs(var3) do
+			local playerEntry = p1.leaderboardStore.getPlayerEntry(i, false)
 			createElement = if playerEntry then playerEntry.order(false) else 0
 			
-			if createElement < var13 or (createElement == var13 and (userId ~= nil and i.UserId < userId)) then
-				var13 = createElement
+			if createElement < var8 or (createElement == var8 and (userId ~= nil and i.UserId < userId)) then
+				var8 = createElement
 				userId = i.UserId
 			end
 		end
-		for i_1 in pairs(var7) do
+		for i_1 in pairs(var3) do
 			createElement = reactModule.createElement
 			t[`Player_{i_1.UserId}`] = createElement(entryViewModule, {
 				player = i_1,
-				leaderboardStore = p0.leaderboardStore,
-				statColumns = p0.statColumns,
-				statWidth = p0.statWidth,
-				teamOrder = var12,
-				onActivated = p0.onActivated,
-				rowHeight = p0.rowHeight,
-				isCurrentUser = p0.localPlayer ~= nil and i_1 == p0.localPlayer,
-				rowRefForward = if i_1.UserId == userId then p0.firstRowRefForward else nil
+				leaderboardStore = p1.leaderboardStore,
+				statColumns = p1.statColumns,
+				statWidth = p1.statWidth,
+				teamOrder = var7,
+				onActivated = p1.onActivated,
+				rowHeight = p1.rowHeight,
+				isCurrentUser = p1.localPlayer ~= nil and i_1 == p1.localPlayer,
+				rowRefForward = if i_1.UserId == userId then p1.firstRowRefForward else nil
 			})
 		end
 	end
-	return reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = var9 }, t)
+	return reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = var5 }, t)
 end)

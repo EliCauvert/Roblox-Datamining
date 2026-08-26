@@ -23,8 +23,8 @@ local saveCapturesPromptFinishedModule = require(parent.Thunks.SaveCapturesPromp
 local _ = require(parent.Types)
 local fFlagCapturePermissionsPromptFreeMouseModule = require(parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
 
-local _ = function(p0)
-	return typeof(p0) == "Content" and (p0.Object ~= nil and p0.Object:IsA("VideoCapture"))
+local _ = function(p1)
+	return typeof(p1) == "Content" and (p1.Object ~= nil and p1.Object:IsA("VideoCapture"))
 end
 
 local _ = function(p1)
@@ -38,23 +38,23 @@ end
 
 return function(p2)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useScreenSize (ref), reactModule (ref), useLocalization (ref), usePinInputStateWhileOpenModule (ref), fFlagCapturePermissionsPromptFreeMouseModule (ref), eventNamesModule (ref), useEffectOnce (ref), saveCapturesPromptFinishedModule (ref), buttonType (ref), view (ref), capturePromptItemModule (ref), text (ref), icon (ref), interactiveAlert (ref)
-	local var25, var24
-	local var12 = useAnalyticsModule()
-	local var13 = useDispatch()
-	local var14 = useScreenSize()
-	local var15, var16 = reactModule.useState(Vector2.new(0, 0))
-	local var17, var18 = reactModule.useState(Vector2.new(0, 0))
-	local var19, var20 = reactModule.useState(1)
-	local var21, var22 = reactModule.useState({})
+	local var1, var2
+	local var3 = useAnalyticsModule()
+	local var4 = useDispatch()
+	local var5 = useScreenSize()
+	local var6, var7 = reactModule.useState(Vector2.new(0, 0))
+	local var8, var9 = reactModule.useState(Vector2.new(0, 0))
+	local var10, var11 = reactModule.useState(1)
+	local var12, var13 = reactModule.useState({})
 	local contents = p2.promptData.contents
-	local var23 = p2.enableInputDelayed ~= nil or p2.enableInputDelayed
+	local var14 = p2.enableInputDelayed ~= nil or p2.enableInputDelayed
 	
 	for i, v in contents do
-		var25 = typeof(v) == "Content" and (v.Object ~= nil and v.Object:IsA("VideoCapture"))
+		var1 = typeof(v) == "Content" and (v.Object ~= nil and v.Object:IsA("VideoCapture"))
 		
-		if var25 then
-			var24 = true
-			local var26 = useLocalization({
+		if var1 then
+			var2 = true
+			local var15 = useLocalization({
 				bodyText = "Feature.Captures.Body.SaveCapturesPrompt",
 				no = "Feature.Captures.Action.NoThanks",
 				title = "Feature.Captures.Title.SaveCapturesPrompt",
@@ -62,138 +62,138 @@ return function(p2)
 			})
 			usePinInputStateWhileOpenModule(fFlagCapturePermissionsPromptFreeMouseModule)
 			reactModule.useEffect(function()
-				-- upvalues: var12 (ref), eventNamesModule (copy)
-				var12.fireEvent(eventNamesModule.SaveCapturesPromptViewed)
+				-- upvalues: var3 (ref), eventNamesModule (copy)
+				var3.fireEvent(eventNamesModule.SaveCapturesPromptViewed)
 			end, {})
 			reactModule.useEffect(function()
-				-- upvalues: var24 (ref), var12 (ref), eventNamesModule (copy)
-				if var24 then
-					var12.fireEvent(eventNamesModule.SaveCapturesPromptVideoPrompted)
+				-- upvalues: var2 (ref), var3 (ref), eventNamesModule (copy)
+				if var2 then
+					var3.fireEvent(eventNamesModule.SaveCapturesPromptVideoPrompted)
 				end
-			end, { var24 })
+			end, { var2 })
 			useEffectOnce(function()
-				-- upvalues: contents (ref), var22 (ref)
+				-- upvalues: contents (ref), var13 (ref)
 				local t = {}
 				
 				for i, v in contents do
 					t[i] = true
 				end
-				var22(t)
+				var13(t)
 			end, { contents })
-			local var27 = reactModule.useCallback(function(p3)
-				-- upvalues: var22 (ref), var19 (ref)
-				var22(function(p4)
-					-- upvalues: var19 (copy), p3 (ref)
+			local var16 = reactModule.useCallback(function(p3)
+				-- upvalues: var13 (ref), var10 (ref)
+				var13(function(p4)
+					-- upvalues: var10 (copy), p3 (ref)
 					local cloned = table.clone(p4)
-					cloned[var19] = p3
+					cloned[var10] = p3
 					
 					return cloned
 				end)
-			end, { var19 })
-			local var28 = reactModule.useCallback(function(p5)
-				-- upvalues: var16 (ref)
-				var16(p5.AbsoluteSize)
-			end, { var16 })
-			local var29 = reactModule.useCallback(function(p6)
-				-- upvalues: var18 (ref)
-				var18(p6.AbsoluteSize)
-			end, { var18 })
-			local var30 = reactModule.useCallback(function()
-				-- upvalues: var21 (ref), contents (ref), var12 (ref), eventNamesModule (copy), var13 (ref), saveCapturesPromptFinishedModule (copy), p2 (ref)
-				local var35 = 0
-				local var36 = 0
-				local var37 = false
+			end, { var10 })
+			local var17 = reactModule.useCallback(function(p3)
+				-- upvalues: var7 (ref)
+				var7(p3.AbsoluteSize)
+			end, { var7 })
+			local var18 = reactModule.useCallback(function(p3)
+				-- upvalues: var9 (ref)
+				var9(p3.AbsoluteSize)
+			end, { var9 })
+			local var19 = reactModule.useCallback(function()
+				-- upvalues: var12 (ref), contents (ref), var3 (ref), eventNamesModule (copy), var4 (ref), saveCapturesPromptFinishedModule (copy), p2 (ref)
+				local var20 = 0
+				local var21 = 0
+				local var22 = false
 				local t = {}
 				
-				for i, v in var21 do
+				for i, v in var12 do
 					t[contents[i]] = v
 					
 					if v then
-						var35 += 1
-						local var39 = contents[i]
+						var20 += 1
+						local var23 = contents[i]
 						
-						if typeof(var39) == "Content" and (var39.Object ~= nil and var39.Object:IsA("VideoCapture")) then
-							var37 = true
+						if typeof(var23) == "Content" and (var23.Object ~= nil and var23.Object:IsA("VideoCapture")) then
+							var22 = true
 						end
 					end
-					var36 += 1
+					var21 += 1
 				end
-				if var37 then
-					var12.fireEvent(eventNamesModule.SaveCapturesPromptVideoAccepted)
+				if var22 then
+					var3.fireEvent(eventNamesModule.SaveCapturesPromptVideoAccepted)
 				end
-				var12.fireEvent(eventNamesModule.SaveCapturesPromptAccepted, { savedCaptures = var35, totalCaptures = var36 })
-				var13(saveCapturesPromptFinishedModule(p2.promptId, t))
-			end, { p2.promptData, p2.promptId, var21 })
-			var25 = reactModule.useCallback(function()
-				-- upvalues: p2 (ref), var12 (ref), eventNamesModule (copy), var13 (ref), saveCapturesPromptFinishedModule (copy)
-				local var40
+				var3.fireEvent(eventNamesModule.SaveCapturesPromptAccepted, { savedCaptures = var20, totalCaptures = var21 })
+				var4(saveCapturesPromptFinishedModule(p2.promptId, t))
+			end, { p2.promptData, p2.promptId, var12 })
+			var1 = reactModule.useCallback(function()
+				-- upvalues: p2 (ref), var3 (ref), eventNamesModule (copy), var4 (ref), saveCapturesPromptFinishedModule (copy)
+				local var24
 				for i, v in p2.promptData.contents do
 					if typeof(v) == "Content" and (v.Object ~= nil and v.Object:IsA("VideoCapture")) then
-						var40 = true
-						if var40 then
-							var12.fireEvent(eventNamesModule.SaveCapturesPromptVideoRejected)
+						var24 = true
+						if var24 then
+							var3.fireEvent(eventNamesModule.SaveCapturesPromptVideoRejected)
 						end
-						var12.fireEvent(eventNamesModule.SaveCapturesPromptRejected)
+						var3.fireEvent(eventNamesModule.SaveCapturesPromptRejected)
 						local t = {}
 						
 						for i, v_1 in p2.promptData.contents do
 							t[v_1] = false
 						end
-						var13(saveCapturesPromptFinishedModule(p2.promptId, t))
+						var4(saveCapturesPromptFinishedModule(p2.promptId, t))
 						
 						return
 					end
 				end
-				var40 = false
+				var24 = false
 			end, { p2.promptData, p2.promptId })
-			local var31 = reactModule.useCallback(function()
-				-- upvalues: var20 (ref), var19 (ref)
-				var20(math.max(1, var19 - 1))
-			end, { var19 })
-			local var32 = reactModule.useCallback(function()
-				-- upvalues: var20 (ref), contents (ref), var19 (ref)
-				var20(math.min(#contents, var19 + 1))
-			end, { contents, var19 })
+			local var25 = reactModule.useCallback(function()
+				-- upvalues: var11 (ref), var10 (ref)
+				var11(math.max(1, var10 - 1))
+			end, { var10 })
+			local var26 = reactModule.useCallback(function()
+				-- upvalues: var11 (ref), contents (ref), var10 (ref)
+				var11(math.min(#contents, var10 + 1))
+			end, { contents, var10 })
 			
 			return reactModule.createElement(interactiveAlert, {
 				isMiddleContentFocusable = false,
-				bodyText = var26.bodyText,
+				bodyText = var15.bodyText,
 				buttonStackInfo = reactModule.useMemo(function()
-					-- upvalues: var25 (ref), var26 (ref), buttonType (copy), var23 (ref), var30 (ref)
+					-- upvalues: var1 (ref), var15 (ref), buttonType (copy), var14 (ref), var19 (ref)
 					return {
 						buttons = {
 							{
 								isDefaultChild = true,
-								props = { onActivated = var25, text = var26.no }
+								props = { onActivated = var1, text = var15.no }
 							},
 							{
 								isDefaultChild = false,
 								buttonType = buttonType.PrimarySystem,
 								props = {
 									delayInputSeconds = 2,
-									enableInputDelayed = var23,
-									isDelayedInput = var23,
-									onActivated = var30,
-									text = var26.yes
+									enableInputDelayed = var14,
+									isDelayedInput = var14,
+									onActivated = var19,
+									text = var15.yes
 								}
 							}
 						}
 					}
-				end, { var26, var30, var25 }),
+				end, { var15, var19, var1 }),
 				middleContent = reactModule.useCallback(function()
-					-- upvalues: var15 (ref), var17 (ref), var14 (ref), reactModule (copy), view (copy), var29 (ref), capturePromptItemModule (copy), contents (ref), var19 (ref), var21 (ref), var27 (ref), text (copy), var31 (ref), icon (copy), var32 (ref)
+					-- upvalues: var6 (ref), var8 (ref), var5 (ref), reactModule (copy), view (copy), var18 (ref), capturePromptItemModule (copy), contents (ref), var10 (ref), var12 (ref), var16 (ref), text (copy), var25 (ref), icon (copy), var26 (ref)
 					return reactModule.createElement(view, {
 						Size = UDim2.new(1, 0, 0, 200),
 						sizeConstraint = {
-							MaxSize = Vector2.new(1e999, var14.Y - 80 - (var15.Y - var17.Y))
+							MaxSize = Vector2.new(1e999, var5.Y - 80 - (var6.Y - var8.Y))
 						},
-						onAbsoluteSizeChanged = var29
+						onAbsoluteSizeChanged = var18
 					}, {
 						CapturePromptItem = reactModule.createElement(capturePromptItemModule, {
-							content = contents[var19],
-							isSelected = var21[var19],
+							content = contents[var10],
+							isSelected = var12[var10],
 							showCheckbox = #contents > 1,
-							updateSelected = var27
+							updateSelected = var16
 						}),
 						Overlay = reactModule.createElement(view, {
 							LayoutOrder = 2,
@@ -206,32 +206,32 @@ return function(p2)
 							}, {
 								Count = reactModule.createElement(text, {
 									tag = "auto-xy content-emphasis text-body-small",
-									Text = `{var19}/{#contents}`
+									Text = `{var10}/{#contents}`
 								})
 							}),
-							PrevCaptureButton = if var19 > 1 then reactModule.createElement(view, {
+							PrevCaptureButton = if var10 > 1 then reactModule.createElement(view, {
 								tag = "bg-over-media-0 anchor-center-left auto-xy clip position-center-left radius-circle",
-								onActivated = var31
+								onActivated = var25
 							}, {
 								CycleLeftIcon = reactModule.createElement(icon, { name = "icons/actions/cycleLeft" })
 							}) else nil,
-							NextCaptureButton = if var19 < #contents then reactModule.createElement(view, {
+							NextCaptureButton = if var10 < #contents then reactModule.createElement(view, {
 								tag = "bg-over-media-0 anchor-center-right auto-xy clip position-center-right radius-circle",
-								onActivated = var32
+								onActivated = var26
 							}, {}, {
 								CycleRightIcon = reactModule.createElement(icon, { name = "icons/actions/cycleRight" })
 							}) else nil
 						})
 					})
 				end, {
-					var15, contents, var17, var19, var29, var32, var31, var14, var21, var27
+					var6, contents, var8, var10, var18, var26, var25, var5, var12, var16
 				}),
-				onAbsoluteSizeChanged = var28,
+				onAbsoluteSizeChanged = var17,
 				position = UDim2.fromScale(0.5, 0.5),
-				screenSize = var14,
-				title = var26.title
+				screenSize = var5,
+				title = var15.title
 			})
 		end
 	end
-	var24 = false
+	var2 = false
 end

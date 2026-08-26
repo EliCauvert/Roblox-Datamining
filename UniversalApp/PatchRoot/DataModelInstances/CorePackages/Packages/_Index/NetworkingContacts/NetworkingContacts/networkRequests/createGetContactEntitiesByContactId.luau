@@ -2,10 +2,10 @@
 local API_URLModule = require(parent.API_URL)
 local _ = require(parent.Types.networkRequestsTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.POST({ Name = "GetContactEntitiesByContactId" }, function(p1, p2)
+	return p1.roduxNetworking.POST({ Name = "GetContactEntitiesByContactId" }, function(p2, p3)
 		-- upvalues: API_URLModule (copy)
-		return p1(API_URLModule):path("contacts-api"):path("v1"):path("contacts"):path("entities"):body({ userContactIds = p2 })
+		return p2(API_URLModule):path("contacts-api"):path("v1"):path("contacts"):path("entities"):body({ userContactIds = p3 })
 	end)
 end

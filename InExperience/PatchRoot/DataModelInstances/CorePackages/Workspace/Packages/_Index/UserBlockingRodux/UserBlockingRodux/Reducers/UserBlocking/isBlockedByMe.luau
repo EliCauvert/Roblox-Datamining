@@ -2,22 +2,22 @@
 local roduxModule = require(parent.Rodux)
 local cryoModule = require(parent.Cryo)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), cryoModule (ref)
-	local userBlockingNetworking = p0.userBlockingNetworking
+	local userBlockingNetworking = p1.userBlockingNetworking
 	
 	return roduxModule.createReducer({}, {
-		[userBlockingNetworking.BlockUserById.Succeeded.name] = function(p1, p2)
+		[userBlockingNetworking.BlockUserById.Succeeded.name] = function(p2, p3)
 			-- upvalues: cryoModule (copy)
-			return cryoModule.Dictionary.join(p1, { [tostring(p2.namedIds.users)] = true })
+			return cryoModule.Dictionary.join(p2, { [tostring(p3.namedIds.users)] = true })
 		end,
-		[userBlockingNetworking.UnblockUserById.Succeeded.name] = function(p3, p4)
+		[userBlockingNetworking.UnblockUserById.Succeeded.name] = function(p2, p3)
 			-- upvalues: cryoModule (copy)
-			return cryoModule.Dictionary.join(p3, { [tostring(p4.namedIds.users)] = false })
+			return cryoModule.Dictionary.join(p2, { [tostring(p3.namedIds.users)] = false })
 		end,
-		[userBlockingNetworking.IsBlockedById.Succeeded.name] = function(p5, p6)
+		[userBlockingNetworking.IsBlockedById.Succeeded.name] = function(p2, p3)
 			-- upvalues: cryoModule (copy)
-			return cryoModule.Dictionary.join(p5, { [tostring(p6.namedIds.users)] = p6.responseBody or false })
+			return cryoModule.Dictionary.join(p2, { [tostring(p3.namedIds.users)] = p3.responseBody or false })
 		end
 	})
 end

@@ -7,15 +7,15 @@ local conversationOverlayContainerModule = require(script.Parent.ConversationOve
 
 return function(_)
 	-- upvalues: useNavigation (ref), reactModule (ref), enumScreensModule (ref), conversationOverlayContainerModule (ref)
-	local var4 = useNavigation()
+	local var1 = useNavigation()
 	
 	return reactModule.createElement(conversationOverlayContainerModule, {
-		conversationId = var4 and var4.getParam("conversationId", nil),
+		conversationId = var1 and var1.getParam("conversationId", nil),
 		dismissModal = reactModule.useCallback(function()
-			-- upvalues: var4 (ref), enumScreensModule (copy)
-			if var4 and var4.state.routeName == enumScreensModule.ConversationOverlay then
-				var4.goBack(var4.state.key)
+			-- upvalues: var1 (ref), enumScreensModule (copy)
+			if var1 and var1.state.routeName == enumScreensModule.ConversationOverlay then
+				var1.goBack(var1.state.key)
 			end
-		end, { var4 })
+		end, { var1 })
 	})
 end

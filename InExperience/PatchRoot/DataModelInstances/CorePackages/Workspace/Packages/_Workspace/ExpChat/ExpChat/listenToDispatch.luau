@@ -1,6 +1,6 @@
-﻿return function(p0)
-	return function(p1)
-		-- upvalues: p0 (ref)
-		p0.Event:Connect(p1)
+﻿return function(p1)
+	return function(p2)
+		-- upvalues: p1 (ref)
+		p1.Event:Connect(p2)
 	end
 end

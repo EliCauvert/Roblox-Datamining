@@ -1,10 +1,10 @@
 ﻿local dispatchBindableEventModule = require(script.Parent.DispatchBindableEvent)
 
-return function(p0)
+return function(p1)
 	-- upvalues: dispatchBindableEventModule (ref)
-	dispatchBindableEventModule.Event:Connect(function(p1)
-		-- upvalues: p0 (ref)
-		p0:dispatch(p1)
+	dispatchBindableEventModule.Event:Connect(function(p2)
+		-- upvalues: p1 (ref)
+		p1:dispatch(p2)
 	end)
 	dispatchBindableEventModule:SetAttribute("isConnected", true)
 	

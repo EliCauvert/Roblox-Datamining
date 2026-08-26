@@ -18,25 +18,25 @@ local CTARowModule = require(profilePlatform.Components.CTARow)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableFontStylisticAlternativesOnSocialScreens = sharedFlagsModule.FFlagEnableFontStylisticAlternativesOnSocialScreens
 local fFlagEnableSocialTabsPage = sharedFlagsModule.FFlagEnableSocialTabsPage
-local var11 = if require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor) then CTARowModule else profileActionBarModule
+local var1 = if require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor) then CTARowModule else profileActionBarModule
 
-return function(p0)
-	-- upvalues: useTokens (ref), useProfileWrapperContextModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), constantsModule (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), var11 (ref), horizontalPageMargin (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref)
-	local var12 = useTokens()
+return function(p1)
+	-- upvalues: useTokens (ref), useProfileWrapperContextModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), constantsModule (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), var1 (ref), horizontalPageMargin (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref)
+	local var2 = useTokens()
 	local profileId = useProfileWrapperContextModule().profileId
-	local var13 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
+	local var3 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
 	local userProfileHeader = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader) or {}
 	local names = userProfileHeader.names or {}
 	local username = names.username or ""
-	local var17 = if var13 then 128 else constantsModule.AVATAR_HEADSHOT_HEIGHT
+	local var4 = if var3 then 128 else constantsModule.AVATAR_HEADSHOT_HEIGHT
 	
 	return reactModule.createElement(view, {
 		tag = {
 			["col size-full-0 auto-y"] = true,
-			["gap-xxlarge"] = var13,
-			["gap-large"] = not var13
+			["gap-xxlarge"] = var3,
+			["gap-large"] = not var3
 		},
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		HeaderBlock = reactModule.createElement(horizontalPageMargin, {
 			backgroundTransparency = 1,
@@ -46,14 +46,14 @@ return function(p0)
 		}, {
 			Row = reactModule.createElement(view, {
 				tag = {
-					["row align-y-center gap-medium size-full-0 auto-y"] = var13,
-					["col gap-medium size-full-0 auto-y"] = not var13
+					["row align-y-center gap-medium size-full-0 auto-y"] = var3,
+					["col gap-medium size-full-0 auto-y"] = not var3
 				}
 			}, {
 				Identity = reactModule.createElement(view, {
 					LayoutOrder = 1,
-					tag = { grow = var13, ["size-full-0"] = not var13 },
-					Size = if var13 then UDim2.fromOffset(0, var17) else UDim2.new(1, 0, 0, var17)
+					tag = { grow = var3, ["size-full-0"] = not var3 },
+					Size = if var3 then UDim2.fromOffset(0, var4) else UDim2.new(1, 0, 0, var4)
 				}, {
 					UserTile = reactModule.createElement(userTile, {
 						userPresenceType = nil,
@@ -64,18 +64,18 @@ return function(p0)
 						isVerified = userProfileHeader.isVerified,
 						isRobloxAdmin = userProfileHeader.isRobloxAdmin,
 						layoutMode = layoutMode.wide,
-						titleStyle = if var13 then var12.Typography.HeadingLarge else var12.Typography.HeadingSmall,
-						subtitleStyle = if var13 then var12.Typography.BodyLarge else var12.Typography.BodyMedium
+						titleStyle = if var3 then var2.Typography.HeadingLarge else var2.Typography.HeadingSmall,
+						subtitleStyle = if var3 then var2.Typography.BodyLarge else var2.Typography.BodyMedium
 					})
 				}),
 				Actions = reactModule.createElement(view, {
 					LayoutOrder = 2,
 					tag = {
-						["grow auto-y"] = var13,
-						["size-full-0 auto-y"] = not var13
+						["grow auto-y"] = var3,
+						["size-full-0 auto-y"] = not var3
 					}
 				}, {
-					Actions = reactModule.createElement(var11, { layoutOrder = 1 })
+					Actions = reactModule.createElement(var1, { layoutOrder = 1 })
 				})
 			})
 		}),

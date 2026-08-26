@@ -4,8 +4,8 @@ local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverl
 
 return function()
 	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy)
-		p0:dispatch(setCentralOverlay(centralOverlayType.LoginPasswordResetPrompt, {}))
+		p1:dispatch(setCentralOverlay(centralOverlayType.LoginPasswordResetPrompt, {}))
 	end
 end

@@ -18,12 +18,12 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: statusCodesModule (ref), httpService (ref)
-	if p0.StatusCode == statusCodesModule.NO_CONTENT then
+	if p1.StatusCode == statusCodesModule.NO_CONTENT then
 		return true, nil
 	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, p0.Body)
+	local ok, status = pcall(httpService.JSONDecode, httpService, p1.Body)
 	
 	return ok, status
 end
@@ -61,80 +61,80 @@ function t_1.new(p1, p2, p3, p4)
 	return t
 end
 
-function t_1:start(p5, p6)
-	self.resolve = p5
-	self.reject = p6
+function t_1:start(p1, p2)
+	self.resolve = p1
+	self.reject = p2
 	self:makeRequest()
 end
 
-function t_1:processResponse(p7)
+function t_1:processResponse(p1)
 	-- upvalues: luaAppHttpSupportNoContent (ref), statusCodesModule (ref), httpService (ref), networkProfilerModule (ref), greenlistedEndpointsForLoggingModule (ref)
-	local var15, var16
+	local var1, var2
 	local _ = nil
 	local _ = nil
 	
 	if luaAppHttpSupportNoContent then
-		local var13, var14
-		if p7.StatusCode == statusCodesModule.NO_CONTENT then
-			var13 = true
-			var14 = nil
+		local var3, var4
+		if p1.StatusCode == statusCodesModule.NO_CONTENT then
+			var3 = true
+			var4 = nil
 		else
-			local ok, status = pcall(httpService.JSONDecode, httpService, p7.Body)
-			var13 = ok
-			var14 = status
+			local ok, status = pcall(httpService.JSONDecode, httpService, p1.Body)
+			var3 = ok
+			var4 = status
 		end
-		var15 = var13
-		var16 = var14
+		var1 = var3
+		var2 = var4
 	else
-		local ok, status = pcall(httpService.JSONDecode, httpService, p7.Body)
-		var15 = ok
-		var16 = status
+		local ok, status = pcall(httpService.JSONDecode, httpService, p1.Body)
+		var1 = ok
+		var2 = status
 	end
-	if not var15 then
+	if not var1 then
 		self.reject({ isJSONValid = false, HttpError = Enum.HttpError.OK })
 		
 		return
 	end
 	networkProfilerModule:track({
-		queued = p7.Stats.DurationInQueue,
-		nameLookup = p7.Stats.DurationNameLookup,
-		connect = p7.Stats.DurationConnect,
-		sslHandshake = p7.Stats.DurationSSLHandshake,
-		makeRequest = p7.Stats.DurationMakeRequest,
-		receiveResponse = p7.Stats.DurationReceiveResponse
+		queued = p1.Stats.DurationInQueue,
+		nameLookup = p1.Stats.DurationNameLookup,
+		connect = p1.Stats.DurationConnect,
+		sslHandshake = p1.Stats.DurationSSLHandshake,
+		makeRequest = p1.Stats.DurationMakeRequest,
+		receiveResponse = p1.Stats.DurationReceiveResponse
 	})
 	self.resolve({
-		responseCode = p7.StatusCode,
+		responseCode = p1.StatusCode,
 		requestUrl = self.internalOptions.Url,
-		responseTimeMs = p7.Stats.RoundTripTime * 1000,
+		responseTimeMs = p1.Stats.RoundTripTime * 1000,
 		isJSONValid = true,
-		var16,
-		responseBody = var16,
-		responseStats = p7.Stats,
-		responseSize = if p7.Body and typeof(p7.Body) == "string" then #p7.Body else 0
+		var2,
+		responseBody = var2,
+		responseStats = p1.Stats,
+		responseSize = if p1.Body and typeof(p1.Body) == "string" then #p1.Body else 0
 	})
-	greenlistedEndpointsForLoggingModule.sendStatusCodeCounter(self.internalOptions.Url, p7.StatusCode)
+	greenlistedEndpointsForLoggingModule.sendStatusCodeCounter(self.internalOptions.Url, p1.StatusCode)
 end
 
-function t_1:retry(p8, p9)
-	local var17 = if p8.Stats and p8.Stats.WasRequestRetried then false else true
+function t_1:retry(p1, p2)
+	local var1 = if p1.Stats and p1.Stats.WasRequestRetried then false else true
 	
-	if var17 then
+	if var1 then
 		self.retryCount += 1
 		
 		if self.maxRetryCount < self.retryCount then
-			var17 = false
+			var1 = false
 		end
 	end
-	if not var17 then
-		self.reject(p8)
+	if not var1 then
+		self.reject(p1)
 		
 		return
 	elseif self.internalOptions.Headers == nil then
 		self.internalOptions.Headers = {}
 	end
 	self.internalOptions.Headers["X-Retry-Attempt"] = tostring(self.retryCount)
-	delay(p9 or math.pow(2, self.retryCount), function()
+	delay(p2 or math.pow(2, self.retryCount), function()
 		-- upvalues: self (ref)
 		self:makeRequest()
 	end)
@@ -146,44 +146,44 @@ function t_1:makeRequest()
 		return
 	end
 	self.httpRequest = self.httpService:RequestInternal(self.internalOptions)
-	self.httpRequest:Start(function(p10, p11)
+	self.httpRequest:Start(function(p1, p2)
 		-- upvalues: self (ref), httpCancellerModule (copy), t (copy), enableRetryOnPrefetch401 (copy), statusCodesModule (copy), greenlistedEndpointsForLoggingModule (copy)
 		if self.session ~= httpCancellerModule.currentSession() then
 			warn("Http request aborted", self.internalOptions.Url)
 			
 			return
-		elseif p10 then
-			if p11.StatusCode >= 200 and p11.StatusCode < 400 then
-				self:processResponse(p11)
+		elseif p1 then
+			if p2.StatusCode >= 200 and p2.StatusCode < 400 then
+				self:processResponse(p2)
 				
 				return
-			elseif t[p11.StatusCode] then
-				self:retry(p11)
+			elseif t[p2.StatusCode] then
+				self:retry(p2)
 				
 				return
-			elseif enableRetryOnPrefetch401 and p11.IsPrefetch and p11.StatusCode == statusCodesModule.UNAUTHORIZED then
-				self:retry(p11)
+			elseif enableRetryOnPrefetch401 and p2.IsPrefetch and p2.StatusCode == statusCodesModule.UNAUTHORIZED then
+				self:retry(p2)
 				
 				return
-			elseif p11.StatusCode ~= statusCodesModule.TOO_MANY_REQUESTS or not p11.Headers["Retry-After"] then
-				greenlistedEndpointsForLoggingModule.sendStatusCodeCounter(self.internalOptions.Url, p11.StatusCode)
-				self.reject(p11)
+			elseif p2.StatusCode ~= statusCodesModule.TOO_MANY_REQUESTS or not p2.Headers["Retry-After"] then
+				greenlistedEndpointsForLoggingModule.sendStatusCodeCounter(self.internalOptions.Url, p2.StatusCode)
+				self.reject(p2)
 				
 				return
 			end
-			local var18 = tonumber(p11.Headers["Retry-After"])
+			local var1 = tonumber(p2.Headers["Retry-After"])
 			
-			if var18 == nil or var18 > 16 then
-				greenlistedEndpointsForLoggingModule.sendStatusCodeCounter(self.internalOptions.Url, p11.StatusCode)
-				self.reject(p11)
+			if var1 == nil or var1 > 16 then
+				greenlistedEndpointsForLoggingModule.sendStatusCodeCounter(self.internalOptions.Url, p2.StatusCode)
+				self.reject(p2)
 				
 				return
 			end
-			self:retry(p11, var18)
+			self:retry(p2, var1)
 			
 			return
 		elseif not self.canceled then
-			self:retry({ HttpError = p11.HttpError })
+			self:retry({ HttpError = p2.HttpError })
 		end
 	end)
 end
@@ -197,21 +197,21 @@ function t_1:cancel()
 	end
 end
 
-return function(p12)
+return function(p1)
 	-- upvalues: httpService (ref), t_1 (ref), promiseModule (ref)
-	if not p12 then
-		p12 = httpService
+	if not p1 then
+		p1 = httpService
 	end
-	return function(p13, p14, p15)
-		-- upvalues: t_1 (copy), p12 (write), promiseModule (copy)
-		local var19 = t_1.new(p12, p13, p14, p15)
+	return function(p2, p3, p4)
+		-- upvalues: t_1 (copy), p1 (write), promiseModule (copy)
+		local var1 = t_1.new(p1, p2, p3, p4)
 		
-		return promiseModule.new(function(p16, p17)
-			-- upvalues: var19 (ref)
-			var19:start(p16, p17)
+		return promiseModule.new(function(p5, p6)
+			-- upvalues: var1 (ref)
+			var1:start(p5, p6)
 		end), function()
-			-- upvalues: var19 (ref)
-			var19:cancel()
+			-- upvalues: var1 (ref)
+			var1:cancel()
 		end
 	end
 end

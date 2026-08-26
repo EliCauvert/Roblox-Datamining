@@ -6,44 +6,44 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, _, p1)
+return function(p1, _, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiLoadTimer (ref), getSduiApiStore (ref)
-	local var2 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var2 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.RefreshFromApi
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	assert(var2, "actionParams must exist")
-	local configKey = var2.configKey
+	assert(var1, "actionParams must exist")
+	local configKey = var1.configKey
 	
 	if typeof(configKey) ~= "string" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "configKey",
 			name = sduiActionType.RefreshFromApi,
 			message = `Invalid or missing configKey: {configKey}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local surfaceKey = var2.surfaceKey
+	local surfaceKey = var1.surfaceKey
 	
 	if typeof(surfaceKey) == "string" then
-		local var3 = sduiLoadTimer.createLoadTimer(surfaceKey)
-		var3.start("refresh")
+		local var2 = sduiLoadTimer.createLoadTimer(surfaceKey)
+		var2.start("refresh")
 		
-		return getSduiApiStore().refreshFromApi({ configKey = configKey, loadTimer = var3 }):finally(function()
-			-- upvalues: var3 (ref)
-			var3.logRefreshComplete()
+		return getSduiApiStore().refreshFromApi({ configKey = configKey, loadTimer = var2 }):finally(function()
+			-- upvalues: var2 (ref)
+			var2.logRefreshComplete()
 		end)
 	end
-	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		propName = "surfaceKey",
 		name = sduiActionType.RefreshFromApi,
 		message = `Invalid or missing surfaceKey: {surfaceKey}`
-	}, p1.appPage)
+	}, p2.appPage)
 end

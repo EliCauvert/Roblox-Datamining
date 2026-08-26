@@ -1,14 +1,14 @@
-﻿return function(p0, p1, p2, p3, p4)
-	local var0 = p2
+﻿return function(p1, p2, p3, p4, p5)
+	local var1 = p3
 	
-	if p1 then
-		var0 = p1 .. var0
+	if p2 then
+		var1 = p2 .. var0
 	end
 	return {
 		purchase_event_type = "ViewShown",
-		purchase_flow_uuid = p0,
-		purchase_flow = var0,
-		view_name = p3,
-		event_metadata = p4
+		purchase_flow_uuid = p1,
+		purchase_flow = var1,
+		view_name = p4,
+		event_metadata = p5
 	}
 end

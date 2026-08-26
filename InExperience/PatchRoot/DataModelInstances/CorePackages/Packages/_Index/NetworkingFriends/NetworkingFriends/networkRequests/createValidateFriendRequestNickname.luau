@@ -1,10 +1,10 @@
 ﻿local FRIENDS_URLModule = require(script.Parent.Parent.FRIENDS_URL)
 local _ = require(script.Parent.Parent.networkingFriendsTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: FRIENDS_URLModule (ref)
-	return p0.roduxNetworking.POST({ Name = "ValidateFriendRequestNickname" }, function(p1, p2)
+	return p1.roduxNetworking.POST({ Name = "ValidateFriendRequestNickname" }, function(p2, p3)
 		-- upvalues: FRIENDS_URLModule (copy)
-		return p1(FRIENDS_URLModule, { currentUserId = p2.currentUserId }):path("v1"):path("my"):path("friends"):path("validate-nickname"):body({ senderNickname = p2.senderNickname })
+		return p2(FRIENDS_URLModule, { currentUserId = p3.currentUserId }):path("v1"):path("my"):path("friends"):path("validate-nickname"):body({ senderNickname = p3.senderNickname })
 	end)
 end

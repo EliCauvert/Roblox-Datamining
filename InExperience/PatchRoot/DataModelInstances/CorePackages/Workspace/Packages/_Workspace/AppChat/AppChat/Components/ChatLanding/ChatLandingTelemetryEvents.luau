@@ -15,10 +15,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p0)
+			namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p1)
 				return {
-					isChatEnabled = p0.isChatEnabled,
-					isChatLoading = p0.isChatLoading
+					isChatEnabled = p1.isChatEnabled,
+					isChatLoading = p1.isChatLoading
 				}
 			end),
 			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
@@ -34,16 +34,16 @@ return {
 		description = "",
 		lastUpdated = { 2026, 2, 9 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p2)
+			namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p1)
 				return {
-					isChatEnabled = p2.isChatEnabled,
-					isChatLoading = p2.isChatLoading
+					isChatEnabled = p1.isChatEnabled,
+					isChatLoading = p1.isChatLoading
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p3)
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
-					isChatEnabled = p3.isChatEnabled,
-					isChatLoading = p3.isChatLoading
+					isChatEnabled = p1.isChatEnabled,
+					isChatLoading = p1.isChatLoading
 				}
 			end)
 		}
@@ -53,11 +53,11 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Rendered", function(p4)
-				return { isChatEnabled = p4.isChatEnabled }
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Rendered", function(p1)
+				return { isChatEnabled = p1.isChatEnabled }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p5)
-				return { isChatEnabled = p5.isChatEnabled }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { isChatEnabled = p1.isChatEnabled }
 			end)
 		}
 	}),
@@ -66,11 +66,11 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.EmptyState.Rendered", function(p6)
-				return { emptyStateType = p6.emptyStateType }
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.EmptyState.Rendered", function(p1)
+				return { emptyStateType = p1.emptyStateType }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p7)
-				return { emptyStateType = p7.emptyStateType }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { emptyStateType = p1.emptyStateType }
 			end)
 		}
 	}),
@@ -115,11 +115,11 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Snooze", function(p8)
-				return { isChatNotificationsMuted = p8.isChatNotificationsMuted }
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Snooze", function(p1)
+				return { isChatNotificationsMuted = p1.isChatNotificationsMuted }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p9)
-				return { isChatNotificationsMuted = p9.isChatNotificationsMuted }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { isChatNotificationsMuted = p1.isChatNotificationsMuted }
 			end)
 		}
 	}),
@@ -128,26 +128,26 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.ConversationCell.Rendered", function(p10)
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.ConversationCell.Rendered", function(p1)
 				return {
-					isFiltered = p10.isFiltered,
-					hasUnreadMessages = p10.hasUnreadMessages,
-					selectedConversationModerationType = p10.selectedConversationModerationType,
-					selectedConversationUserPendingStatus = p10.selectedConversationUserPendingStatus,
-					osaAcknowledgementStatus = p10.osaAcknowledgementStatus
+					isFiltered = p1.isFiltered,
+					hasUnreadMessages = p1.hasUnreadMessages,
+					selectedConversationModerationType = p1.selectedConversationModerationType,
+					selectedConversationUserPendingStatus = p1.selectedConversationUserPendingStatus,
+					osaAcknowledgementStatus = p1.osaAcknowledgementStatus
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p11)
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
-					isFiltered = p11.isFiltered,
-					conversationListCount = p11.conversationListCount,
-					selectedConversationId = p11.selectedConversationId,
-					selectedIndex = p11.selectedIndex,
-					hasUnreadMessages = p11.hasUnreadMessages,
-					selectedConversationModerationType = p11.selectedConversationModerationType,
-					selectedConversationUserPendingStatus = p11.selectedConversationUserPendingStatus,
-					participantUserIds = p11.participantUserIds,
-					osaAcknowledgementStatus = p11.osaAcknowledgementStatus
+					isFiltered = p1.isFiltered,
+					conversationListCount = p1.conversationListCount,
+					selectedConversationId = p1.selectedConversationId,
+					selectedIndex = p1.selectedIndex,
+					hasUnreadMessages = p1.hasUnreadMessages,
+					selectedConversationModerationType = p1.selectedConversationModerationType,
+					selectedConversationUserPendingStatus = p1.selectedConversationUserPendingStatus,
+					participantUserIds = p1.participantUserIds,
+					osaAcknowledgementStatus = p1.osaAcknowledgementStatus
 				}
 			end)
 		}
@@ -167,27 +167,27 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Conversation", function(p12)
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Conversation", function(p1)
 				return {
-					isFiltered = p12.isFiltered,
-					hasUnreadMessages = p12.hasUnreadMessages,
-					selectedConversationModerationType = p12.selectedConversationModerationType,
-					selectedConversationUserPendingStatus = p12.selectedConversationUserPendingStatus,
-					osaAcknowledgementStatus = p12.osaAcknowledgementStatus
+					isFiltered = p1.isFiltered,
+					hasUnreadMessages = p1.hasUnreadMessages,
+					selectedConversationModerationType = p1.selectedConversationModerationType,
+					selectedConversationUserPendingStatus = p1.selectedConversationUserPendingStatus,
+					osaAcknowledgementStatus = p1.osaAcknowledgementStatus
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p13)
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
-					isFiltered = p13.isFiltered,
-					conversationListCount = p13.conversationListCount,
-					selectedConversationId = p13.selectedConversationId,
-					selectedIndex = p13.selectedIndex,
-					hasUnreadMessages = p13.hasUnreadMessages,
-					selectedConversationModerationType = p13.selectedConversationModerationType,
-					selectedConversationUserPendingStatus = p13.selectedConversationUserPendingStatus,
-					participantUserIds = p13.participantUserIds,
-					osaAcknowledgementStatus = p13.osaAcknowledgementStatus,
-					osaImpressionId = p13.osaImpressionId
+					isFiltered = p1.isFiltered,
+					conversationListCount = p1.conversationListCount,
+					selectedConversationId = p1.selectedConversationId,
+					selectedIndex = p1.selectedIndex,
+					hasUnreadMessages = p1.hasUnreadMessages,
+					selectedConversationModerationType = p1.selectedConversationModerationType,
+					selectedConversationUserPendingStatus = p1.selectedConversationUserPendingStatus,
+					participantUserIds = p1.participantUserIds,
+					osaAcknowledgementStatus = p1.osaAcknowledgementStatus,
+					osaImpressionId = p1.osaImpressionId
 				}
 			end)
 		}

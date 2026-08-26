@@ -1,9 +1,9 @@
 ﻿local loggerModule = require(script.Parent.Parent.Parent.Logger)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	local t_1 = { maxLevel = p0 }
+	local t_1 = { maxLevel = p1 }
 	setmetatable(t_1, t)
 	
 	return t_1

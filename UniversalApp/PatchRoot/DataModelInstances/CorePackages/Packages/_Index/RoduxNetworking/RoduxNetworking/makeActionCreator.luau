@@ -1,28 +1,28 @@
 ﻿local actionModule = require(script.Parent.Action)
 
-return function(p0)
+return function(p1)
 	-- upvalues: actionModule (ref)
-	local var1 = if type(p0) == "string" then p0 else p0.Name
+	local var1 = if type(p1) == "string" then p1 else p1.Name
 	
 	return {
-		Succeeded = actionModule(var1 .. "_Succeeded", function(p1, p2, p3, p4, p5)
+		Succeeded = actionModule(var1 .. "_Succeeded", function(p2, p3, p4, p5, p6)
 			return {
-				ids = p1,
-				responseBody = p2,
-				namedIds = p3,
-				postBody = if p4 then p4.postBody else nil,
-				queryArgs = p4 and p4.queryArgs,
-				additionalData = p5
+				ids = p2,
+				responseBody = p3,
+				namedIds = p4,
+				postBody = if p5 then p5.postBody else nil,
+				queryArgs = p5 and p5.queryArgs,
+				additionalData = p6
 			}
 		end),
-		Failed = actionModule(var1 .. "_Failed", function(p6, p7, p8, p9, p10)
+		Failed = actionModule(var1 .. "_Failed", function(p2, p3, p4, p5, p6)
 			return {
-				ids = p6,
-				error = p7,
-				namedIds = p8,
-				postBody = if p9 then p9.postBody else nil,
-				queryArgs = if p9 then p9.queryArgs else nil,
-				additionalData = p10
+				ids = p2,
+				error = p3,
+				namedIds = p4,
+				postBody = if p5 then p5.postBody else nil,
+				queryArgs = if p5 then p5.queryArgs else nil,
+				additionalData = p6
 			}
 		end)
 	}

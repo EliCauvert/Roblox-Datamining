@@ -1,18 +1,18 @@
-﻿return function(p0, p1, p2)
-	if p0 == nil then
-		return p2
+﻿return function(p1, p2, p3)
+	if p1 == nil then
+		return p3
 	end
-	local var0 = p0
+	local var1 = p1
 	
-	for i, v in p1 do
-		if type(var0) == "table" then
-			var0 = var0[v]
+	for i, v in p2 do
+		if type(var1) == "table" then
+			var1 = var1[v]
 			
-			if var0 == nil then
-				return p2
+			if var1 == nil then
+				return p3
 			end
 		end
-		return p2
+		return p3
 	end
-	return var0
+	return var1
 end

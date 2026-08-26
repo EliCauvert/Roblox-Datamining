@@ -16,8 +16,8 @@ local function _(value)
 	return math.max(0, ceiled)
 end
 
-local _ = function(p0)
-	return math.max(0, p0 - 2)
+local _ = function(p1)
+	return math.max(0, p1 - 2)
 end
 
 local _ = function()
@@ -46,20 +46,20 @@ return {
 		end
 		return `<font weight='600' size="{math.max(0, ceiled)}" family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>{foundationModule.Enums.IconName.Nebula}</font>{fStringExpChatSummaryPrefixTextModule}`
 	end,
-	wrapInSummaryMutedStyle = function(p2, p3, p4)
+	wrapInSummaryMutedStyle = function(p1, p2, p3)
 		-- upvalues: fFlagExpChatPolishSummaryMessageUIModule (ref), UIBloxModule (ref), textChatService (ref), configModule (ref)
 		if not fFlagExpChatPolishSummaryMessageUIModule then
-			return `<font color='#{p3 or "BCBEC8"}' size="{configModule.ChatWindowTextSize - 2}">{p2}</font>`
+			return `<font color='#{p3 or "BCBEC8"}' size="{configModule.ChatWindowTextSize - 2}">{p1}</font>`
 		end
 		local maxValue
-		local var12 = UIBloxModule.App.Style.Colors.LightGrey:ToHex()
+		local var1 = UIBloxModule.App.Style.Colors.LightGrey:ToHex()
 		
-		if p4 then
-			maxValue = math.max(0, p4 - 2)
+		if p3 then
+			maxValue = math.max(0, p3 - 2)
 		else
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			maxValue = if chatWindowConfiguration then math.max(0, chatWindowConfiguration.TextSize - 2) else math.max(0, configModule.ChatWindowTextSize - 2)
 		end
-		return `<font color='#{var12}' weight='600' size="{maxValue}">{p2}</font>`
+		return `<font color='#{var12}' weight='600' size="{maxValue}">{p1}</font>`
 	end
 }

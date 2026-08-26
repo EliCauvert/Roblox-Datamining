@@ -24,211 +24,211 @@ local t = {
 	fullBleedOverlapOffset = 180
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), withDefaults (ref), t (ref), compositionTags (ref), reactModule (ref), responsiveModule (ref), fFlagDetailsPageLayoutSeedContainerSize (ref), useNavBarSize (ref), useNavBarPlacement (ref), displayModule (ref), appNavBarModule (ref), detailsPageLayoutUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref), fFlagSduiExperienceDetailsSupport (ref)
-	local var9 = useDeviceInsets()
-	local var10 = useTokens()
-	local var11 = withDefaults(p0, t)
-	local compositionLayoutTag = var11.compositionLayoutTag or compositionTags.Layout.Detail
-	local fullBleedAspectRatio = var11.fullBleedAspectRatio
-	local var13 = if fullBleedAspectRatio == nil or fullBleedAspectRatio <= 0 then 1.777777777778 else fullBleedAspectRatio
-	local var14 = var11.fullBleedContent ~= nil and not var11.isFullscreen
-	local var15, var16 = reactModule.useBinding(false)
-	local var17, var18 = reactModule.useBinding(false)
-	local var19, var20 = reactModule.useBinding(0)
-	local scale = var10.Config.UI.Scale
-	local var21 = var11.fullBleedOverlapOffset * scale
-	local var22 = if var11.gradientTopBleedOffset then var11.gradientTopBleedOffset * scale else var10.Size.Size_2000
-	local var23 = (if responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small) then var10.Size.Size_1000 + var10.Padding.Large + var10.Padding.Medium else var10.Size.Size_2000) + var9.top
-	local var24, var25 = reactModule.useState(nil)
-	local var26 = var24 ~= nil
-	local var27, var28 = reactModule.useState(nil)
-	local var29, var30 = reactModule.useState(false)
-	local var31 = not var14 or (var29 or var26)
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = withDefaults(p1, t)
+	local compositionLayoutTag = var3.compositionLayoutTag or compositionTags.Layout.Detail
+	local fullBleedAspectRatio = var3.fullBleedAspectRatio
+	local var4 = if fullBleedAspectRatio == nil or fullBleedAspectRatio <= 0 then 1.777777777778 else fullBleedAspectRatio
+	local var5 = var3.fullBleedContent ~= nil and not var3.isFullscreen
+	local var6, var7 = reactModule.useBinding(false)
+	local var8, var9 = reactModule.useBinding(false)
+	local var10, var11 = reactModule.useBinding(0)
+	local scale = var2.Config.UI.Scale
+	local var12 = var3.fullBleedOverlapOffset * scale
+	local var13 = if var3.gradientTopBleedOffset then var3.gradientTopBleedOffset * scale else var2.Size.Size_2000
+	local var14 = (if responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small) then var2.Size.Size_1000 + var2.Padding.Large + var2.Padding.Medium else var2.Size.Size_2000) + var1.top
+	local var15, var16 = reactModule.useState(nil)
+	local var17 = var15 ~= nil
+	local var18, var19 = reactModule.useState(nil)
+	local var20, var21 = reactModule.useState(false)
+	local var22 = not var5 or (var20 or var17)
 	local containerSize = nil
-	local var32 = 0
+	local var23 = 0
 	
 	if fFlagDetailsPageLayoutSeedContainerSize then
-		local var33 = useNavBarSize()
-		local var34 = useNavBarPlacement()
-		local var35 = reactModule.useMemo(function()
-			-- upvalues: displayModule (copy), var34 (ref), appNavBarModule (copy), var33 (ref), var14 (ref), detailsPageLayoutUtilsModule (copy), var13 (ref), var23 (ref), var21 (ref), p0 (ref)
+		local var24 = useNavBarSize()
+		local var25 = useNavBarPlacement()
+		local var26 = reactModule.useMemo(function()
+			-- upvalues: displayModule (copy), var25 (ref), appNavBarModule (copy), var24 (ref), var5 (ref), detailsPageLayoutUtilsModule (copy), var4 (ref), var14 (ref), var12 (ref), p1 (ref)
 			local viewportSize = displayModule.GetDisplayStore(false).getViewportSize(false)
-			local vector2 = Vector2.new(if var34 == appNavBarModule.Placement.Left then math.max(0, viewportSize.X - var33) else viewportSize.X, viewportSize.Y)
+			local vector2 = Vector2.new(if var25 == appNavBarModule.Placement.Left then math.max(0, viewportSize.X - var24) else viewportSize.X, viewportSize.Y)
 			
 			return {
 				containerSize = vector2,
-				initialScrollY = if var14 then detailsPageLayoutUtilsModule.computeInitialScrollYForSize(vector2, {
-					fullBleedAspectRatio = var13,
-					headerBarHeight = var23,
-					fullBleedOverlapOffset = var21,
-					hasFullBleed = var14,
-					bannerBottomVisiblePercent = p0.bannerBottomVisiblePercent
+				initialScrollY = if var5 then detailsPageLayoutUtilsModule.computeInitialScrollYForSize(vector2, {
+					fullBleedAspectRatio = var4,
+					headerBarHeight = var14,
+					fullBleedOverlapOffset = var12,
+					hasFullBleed = var5,
+					bannerBottomVisiblePercent = p1.bannerBottomVisiblePercent
 				}) else 0
 			}
 		end, {})
-		containerSize = var35.containerSize
-		var32 = var35.initialScrollY
+		containerSize = var26.containerSize
+		var23 = var26.initialScrollY
 	end
-	local var36, var37 = reactModule.useBinding(if fFlagDetailsPageLayoutSeedContainerSize then containerSize else Vector2.new(0, 0))
-	local var38, var39 = reactModule.useBinding(if fFlagDetailsPageLayoutSeedContainerSize then var32 else 0)
-	local var40, var41 = reactModule.useBinding(0)
-	local var42, var43 = reactModule.useState(if fFlagDetailsPageLayoutSeedContainerSize then var32 else 0)
-	local var44, var45 = reactModule.useState(if fFlagDetailsPageLayoutSeedContainerSize then true else false)
-	local var46 = reactModule.useRef(if fFlagDetailsPageLayoutSeedContainerSize then var14 else false)
-	local var47 = var36:map(function(p2)
-		return p2.Y
+	local var27, var28 = reactModule.useBinding(if fFlagDetailsPageLayoutSeedContainerSize then containerSize else Vector2.new(0, 0))
+	local var29, var30 = reactModule.useBinding(if fFlagDetailsPageLayoutSeedContainerSize then var23 else 0)
+	local var31, var32 = reactModule.useBinding(0)
+	local var33, var34 = reactModule.useState(if fFlagDetailsPageLayoutSeedContainerSize then var23 else 0)
+	local var35, var36 = reactModule.useState(if fFlagDetailsPageLayoutSeedContainerSize then true else false)
+	local var37 = reactModule.useRef(if fFlagDetailsPageLayoutSeedContainerSize then var5 else false)
+	local var38 = var27:map(function(p3)
+		return p3.Y
 	end)
-	local var48 = var36:map(function(p3)
-		-- upvalues: var13 (ref)
-		return UDim2.new(0, p3.X, 0, p3.X / var13)
+	local var39 = var27:map(function(p3)
+		-- upvalues: var4 (ref)
+		return UDim2.new(0, p3.X, 0, p3.X / var4)
 	end)
-	local var49 = var36:map(function(p4)
-		-- upvalues: var14 (ref), detailsPageLayoutUtilsModule (copy), var13 (ref), var23 (ref)
-		return if var14 then detailsPageLayoutUtilsModule.computeContentTopOffset(p4.X, var13, var23) else 0
+	local var40 = var27:map(function(p3)
+		-- upvalues: var5 (ref), detailsPageLayoutUtilsModule (copy), var4 (ref), var14 (ref)
+		return if var5 then detailsPageLayoutUtilsModule.computeContentTopOffset(p3.X, var4, var14) else 0
 	end)
-	local var50 = reactModule.joinBindings({ var49, var38 }):map(function(p5)
-		-- upvalues: var23 (ref)
-		return UDim2.new(0.5, 0, 0, math.max(0, p5[1] + var23 - p5[2]) / 2)
+	local var41 = reactModule.joinBindings({ var40, var29 }):map(function(p3)
+		-- upvalues: var14 (ref)
+		return UDim2.new(0.5, 0, 0, math.max(0, p3[1] + var14 - p3[2]) / 2)
 	end)
-	local var51 = reactModule.joinBindings({ var38, var49, var40 }):map(function(p6)
-		-- upvalues: detailsPageLayoutUtilsModule (copy), var23 (ref), var21 (ref)
-		local var58 = p6[1]
-		local var59 = p6[2]
-		local var60 = p6[3]
+	local var42 = reactModule.joinBindings({ var29, var40, var31 }):map(function(p3)
+		-- upvalues: detailsPageLayoutUtilsModule (copy), var14 (ref), var12 (ref)
+		local var43 = p3[1]
+		local var44 = p3[2]
+		local var45 = p3[3]
 		
-		if var59 == 0 then
-			return math.clamp(var58 / detailsPageLayoutUtilsModule.getNoBannerFadeParams(var23), 0, 1)
+		if var44 == 0 then
+			return math.clamp(var43 / detailsPageLayoutUtilsModule.getNoBannerFadeParams(var14), 0, 1)
 		end
-		local headerFadeParams, headerFadeParams_1 = detailsPageLayoutUtilsModule.getHeaderFadeParams(var59, var60, var21)
+		local headerFadeParams, headerFadeParams_1 = detailsPageLayoutUtilsModule.getHeaderFadeParams(var44, var45, var12)
 		
-		return math.clamp((var58 - headerFadeParams) / headerFadeParams_1, 0, 1)
+		return math.clamp((var43 - headerFadeParams) / headerFadeParams_1, 0, 1)
 	end)
-	local var52 = reactModule.useCallback(function(p7)
-		-- upvalues: var37 (ref), var45 (ref), var14 (ref), var46 (ref), fFlagDetailsPageLayoutSeedContainerSize (copy), detailsPageLayoutUtilsModule (copy), var13 (ref), var23 (ref), var21 (ref), p0 (ref), fFlagLuaAppClampBannerPaddingToViewport (copy), var43 (ref), var39 (ref)
-		local absoluteSize = p7.AbsoluteSize
-		var37(absoluteSize)
+	local var43 = reactModule.useCallback(function(p3)
+		-- upvalues: var28 (ref), var36 (ref), var5 (ref), var37 (ref), fFlagDetailsPageLayoutSeedContainerSize (copy), detailsPageLayoutUtilsModule (copy), var4 (ref), var14 (ref), var12 (ref), p1 (ref), fFlagLuaAppClampBannerPaddingToViewport (copy), var34 (ref), var30 (ref)
+		local absoluteSize = p3.AbsoluteSize
+		var28(absoluteSize)
 		
 		if absoluteSize.X > 0 and absoluteSize.Y > 0 then
-			var45(true)
+			var36(true)
 			
-			if var14 and not var46.current then
-				local var63
-				var46.current = true
+			if var5 and not var37.current then
+				local var44
+				var37.current = true
 				local _ = nil
 				
 				if fFlagDetailsPageLayoutSeedContainerSize then
-					var63 = detailsPageLayoutUtilsModule.computeInitialScrollYForSize(absoluteSize, {
-						fullBleedAspectRatio = var13,
-						headerBarHeight = var23,
-						fullBleedOverlapOffset = var21,
-						hasFullBleed = var14,
-						bannerBottomVisiblePercent = p0.bannerBottomVisiblePercent
+					var44 = detailsPageLayoutUtilsModule.computeInitialScrollYForSize(absoluteSize, {
+						fullBleedAspectRatio = var4,
+						headerBarHeight = var14,
+						fullBleedOverlapOffset = var12,
+						hasFullBleed = var5,
+						bannerBottomVisiblePercent = p1.bannerBottomVisiblePercent
 					})
 				else
-					local var64 = absoluteSize.X / var13
-					var63 = if p0.bannerBottomVisiblePercent ~= nil then detailsPageLayoutUtilsModule.computeInitialScrollY(absoluteSize.X, var13, var23, var21) else math.max(0, math.floor(var64 - p0.bannerBottomVisiblePercent * var64))
-					local var65 = detailsPageLayoutUtilsModule.computeCanvasPaddingTop(detailsPageLayoutUtilsModule.computeContentTopOffset(absoluteSize.X, var13, var23), var14, var21, var23)
+					local var45 = absoluteSize.X / var4
+					var44 = if p1.bannerBottomVisiblePercent ~= nil then detailsPageLayoutUtilsModule.computeInitialScrollY(absoluteSize.X, var4, var14, var12) else math.max(0, math.floor(var45 - p1.bannerBottomVisiblePercent * var45))
+					local var46 = detailsPageLayoutUtilsModule.computeCanvasPaddingTop(detailsPageLayoutUtilsModule.computeContentTopOffset(absoluteSize.X, var4, var14), var5, var12, var14)
 					
 					if fFlagLuaAppClampBannerPaddingToViewport then
-						var65 = math.min(var65, absoluteSize.Y * 0.75)
+						var46 = math.min(var46, absoluteSize.Y * 0.75)
 					end
-					var63 = math.min(var63, math.max(0, var65 - var23))
+					var44 = math.min(var44, math.max(0, var46 - var14))
 				end
-				var43(var63)
-				var39(var63)
+				var34(var44)
+				var30(var44)
 			end
 		end
 	end, {
-		var14, var13, var23, var21, p0.bannerBottomVisiblePercent,
+		var5, var4, var14, var12, p1.bannerBottomVisiblePercent,
 		if fFlagDetailsPageLayoutSeedContainerSize then containerSize else nil
 	})
-	local var53 = reactModule.useRef(0)
-	local var54 = reactModule.useCallback(function(p8)
-		-- upvalues: var53 (ref), var41 (ref)
-		if math.abs(p8 - var53.current) > 0.5 then
-			var53.current = p8
-			var41(p8)
+	local var44 = reactModule.useRef(0)
+	local var45 = reactModule.useCallback(function(p3)
+		-- upvalues: var44 (ref), var32 (ref)
+		if math.abs(p3 - var44.current) > 0.5 then
+			var44.current = p3
+			var32(p3)
 		end
 	end, {})
-	local var55 = reactModule.useCallback(function(p9)
-		-- upvalues: var39 (ref), var14 (ref), var49 (ref), var40 (ref), detailsPageLayoutUtilsModule (copy), var21 (ref), var30 (ref)
-		local y = p9.CanvasPosition.Y
-		var39(y)
+	local var46 = reactModule.useCallback(function(p3)
+		-- upvalues: var30 (ref), var5 (ref), var40 (ref), var31 (ref), detailsPageLayoutUtilsModule (copy), var12 (ref), var21 (ref)
+		local y = p3.CanvasPosition.Y
+		var30(y)
 		
-		if var14 then
-			local value = var49:getValue()
-			local headerFadeParams, headerFadeParams_1 = detailsPageLayoutUtilsModule.getHeaderFadeParams(value, var40:getValue(), var21)
-			var30(detailsPageLayoutUtilsModule.shouldShowStickyBar(y, value, headerFadeParams, headerFadeParams_1))
+		if var5 then
+			local value = var40:getValue()
+			local headerFadeParams, headerFadeParams_1 = detailsPageLayoutUtilsModule.getHeaderFadeParams(value, var31:getValue(), var12)
+			var21(detailsPageLayoutUtilsModule.shouldShowStickyBar(y, value, headerFadeParams, headerFadeParams_1))
 		end
-	end, { var14, var21 })
+	end, { var5, var12 })
 	
 	return reactModule.createElement(detailsPageLayoutContextModule.Provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: var14 (ref), var15 (ref), var16 (ref), var17 (ref), var18 (ref), var11 (ref), var23 (ref), var19 (ref), var20 (ref), var55 (ref), var49 (ref), var21 (ref), var22 (ref), var42 (ref), var44 (ref), var47 (ref), var51 (ref), var31 (ref), var54 (ref), var26 (ref), var25 (ref), var27 (ref), var28 (ref)
+			-- upvalues: var5 (ref), var6 (ref), var7 (ref), var8 (ref), var9 (ref), var3 (ref), var14 (ref), var10 (ref), var11 (ref), var46 (ref), var40 (ref), var12 (ref), var13 (ref), var33 (ref), var35 (ref), var38 (ref), var42 (ref), var22 (ref), var45 (ref), var17 (ref), var16 (ref), var18 (ref), var19 (ref)
 			return {
-				hasFullBleed = var14,
-				hasHeader = var15,
-				setHasHeader = var16,
-				hasActions = var17,
-				setHasActions = var18,
-				isFullscreen = var11.isFullscreen,
-				headerBarHeight = var23,
-				actionBarHeight = var19,
-				setActionBarHeight = var20,
-				onCanvasPositionChanged = var55,
-				contentTopOffset = var49,
-				fullBleedOverlapOffset = var21,
-				gradientTopBleedOffset = var22,
-				initialScrollY = var42,
-				hasValidContainerSize = var44,
-				containerHeight = var47,
-				headerOpacity = var51,
-				stickyHeaderActive = var31,
-				onClose = var11.onClose,
-				testId = var11.testId,
-				onCanvasSizeChanged = var54,
-				isFullscreenOverlay = var26,
-				setFullscreenContent = var25,
-				onExitFullscreenOverlay = var27,
-				setOnExitFullscreenOverlay = var28
+				hasFullBleed = var5,
+				hasHeader = var6,
+				setHasHeader = var7,
+				hasActions = var8,
+				setHasActions = var9,
+				isFullscreen = var3.isFullscreen,
+				headerBarHeight = var14,
+				actionBarHeight = var10,
+				setActionBarHeight = var11,
+				onCanvasPositionChanged = var46,
+				contentTopOffset = var40,
+				fullBleedOverlapOffset = var12,
+				gradientTopBleedOffset = var13,
+				initialScrollY = var33,
+				hasValidContainerSize = var35,
+				containerHeight = var38,
+				headerOpacity = var42,
+				stickyHeaderActive = var22,
+				onClose = var3.onClose,
+				testId = var3.testId,
+				onCanvasSizeChanged = var45,
+				isFullscreenOverlay = var17,
+				setFullscreenContent = var16,
+				onExitFullscreenOverlay = var18,
+				setOnExitFullscreenOverlay = var19
 			}
 		end, {
-			var14, var11.isFullscreen, var23, var21, var22, var42, var44, var31,
-			var11.onClose, var11.testId, var47, var51, var55, var54, var26, var27
+			var5, var3.isFullscreen, var14, var12, var13, var33, var35, var22,
+			var3.onClose, var3.testId, var38, var42, var46, var45, var17, var18
 		})
 	}, reactModule.createElement(view, {
 		tag = `size-full clip bg-surface-0 {compositionLayoutTag}`,
 		stateLayer = { affordance = stateLayerAffordance.None },
-		onAbsoluteSizeChanged = var52,
-		ref = p1,
-		selectionGroup = var11.selectionGroup,
-		testId = `{var11.testId}--root`
+		onAbsoluteSizeChanged = var43,
+		ref = p2,
+		selectionGroup = var3.selectionGroup,
+		testId = `{var3.testId}--root`
 	}, {
-		FullBleed = if var14 then reactModule.createElement(view, {
+		FullBleed = if var5 then reactModule.createElement(view, {
 			tag = "position-top-center anchor-top-center size-full clip",
 			ZIndex = 0,
-			testId = `{var11.testId}--fullbleed`
+			testId = `{var3.testId}--fullbleed`
 		}, {
 			ParallaxFrame = reactModule.createElement(view, {
 				tag = "anchor-center-center clip",
-				Position = var50,
-				Size = var48
-			}, var11.fullBleedContent)
+				Position = var41,
+				Size = var39
+			}, var3.fullBleedContent)
 		}) else nil,
-		Children = reactModule.createElement(reactModule.Fragment, nil, var11.children),
-		FullscreenOverlay = if var26 then reactModule.createElement(view, {
+		Children = reactModule.createElement(reactModule.Fragment, nil, var3.children),
+		FullscreenOverlay = if var17 then reactModule.createElement(view, {
 			ZIndex = 10,
 			tag = "clip",
-			Size = if fFlagSduiExperienceDetailsSupport then var15:map(function(p10)
-				-- upvalues: var23 (ref)
-				return if p10 then UDim2.new(1, 0, 1, -var23) else UDim2.fromScale(1, 1)
-			end) else UDim2.new(1, 0, 1, -var23),
-			Position = if fFlagSduiExperienceDetailsSupport then var15:map(function(p11)
-				-- upvalues: var23 (ref)
-				return if p11 then UDim2.fromOffset(0, var23) else UDim2.fromOffset(0, 0)
-			end) else UDim2.fromOffset(0, var23),
-			testId = `{var11.testId}--fullscreen-overlay`
-		}, var24) else nil
+			Size = if fFlagSduiExperienceDetailsSupport then var6:map(function(p3)
+				-- upvalues: var14 (ref)
+				return if p3 then UDim2.new(1, 0, 1, -var14) else UDim2.fromScale(1, 1)
+			end) else UDim2.new(1, 0, 1, -var14),
+			Position = if fFlagSduiExperienceDetailsSupport then var6:map(function(p3)
+				-- upvalues: var14 (ref)
+				return if p3 then UDim2.fromOffset(0, var14) else UDim2.fromOffset(0, 0)
+			end) else UDim2.fromOffset(0, var14),
+			testId = `{var3.testId}--fullscreen-overlay`
+		}, var15) else nil
 	}))
 end))

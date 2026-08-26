@@ -4,14 +4,14 @@ local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScop
 
 return function()
 	-- upvalues: createSessionScopedSignal (ref)
-	local var0, var1 = createSessionScopedSignal(false)
+	local var1, var2 = createSessionScopedSignal(false)
 	
 	return {
-		getIsLocalUserUnder13 = var0,
-		setIsLocalUserUnder13 = var1,
+		getIsLocalUserUnder13 = var1,
+		setIsLocalUserUnder13 = var2,
 		reset = function()
-			-- upvalues: var1 (ref)
-			var1(false)
+			-- upvalues: var2 (ref)
+			var2(false)
 		end
 	}
 end

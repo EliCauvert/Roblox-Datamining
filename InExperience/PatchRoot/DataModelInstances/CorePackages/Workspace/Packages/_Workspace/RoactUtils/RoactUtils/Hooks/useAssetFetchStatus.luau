@@ -3,24 +3,24 @@ local reactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
 
 return function(value)
 	-- upvalues: reactModule (ref), contentProviderService (ref)
-	local var2, var3 = reactModule.useState(Enum.AssetFetchStatus.None)
+	local var1, var2 = reactModule.useState(Enum.AssetFetchStatus.None)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), value (ref), contentProviderService (copy)
-		var3(Enum.AssetFetchStatus.None)
+		-- upvalues: var2 (ref), value (ref), contentProviderService (copy)
+		var2(Enum.AssetFetchStatus.None)
 		
 		if value and value ~= "" then
-			local var4 = contentProviderService:GetAssetFetchStatusChangedSignal(value):Connect(function(p0)
-				-- upvalues: var3 (copy)
-				var3(p0)
+			local var3 = contentProviderService:GetAssetFetchStatusChangedSignal(value):Connect(function(p1)
+				-- upvalues: var2 (copy)
+				var2(p1)
 			end)
-			var3(contentProviderService:GetAssetFetchStatus(value))
+			var2(contentProviderService:GetAssetFetchStatus(value))
 			
 			return function()
-				-- upvalues: var4 (ref)
-				var4:Disconnect()
+				-- upvalues: var3 (ref)
+				var3:Disconnect()
 			end
 		end
 	end, { value })
 	
-	return var2
+	return var1
 end

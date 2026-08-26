@@ -9,8 +9,8 @@ end)
 
 if t == nil then
 	t = {
-		Get = function(_, _, p0)
-			return p0
+		Get = function(_, _, p1)
+			return p1
 		end
 	}
 end
@@ -46,23 +46,23 @@ local function _(p1)
 	return if string.sub(p1, 1, 3) == "/e " then string.sub(p1, 4) elseif string.sub(p1, 1, 7) == "/emote " then string.sub(p1, 8) else nil
 end
 
-local _ = function(p2, p3)
+local _ = function(p1, p2)
 	-- upvalues: t (write), t_2 (ref), color (ref), utilModule (ref)
-	utilModule:SendSystemMessageToSelf(t:Get(p3, t_2[p3]), p2, { ChatColor = color })
+	utilModule:SendSystemMessageToSelf(t:Get(p2, t_2[p2]), p1, { ChatColor = color })
 end
 
 return {
 	[utilModule.KEY_COMMAND_PROCESSOR_TYPE] = utilModule.COMPLETED_MESSAGE_PROCESSOR,
-	[utilModule.KEY_PROCESSOR_FUNCTION] = function(p4, p5, _)
+	[utilModule.KEY_PROCESSOR_FUNCTION] = function(p1, p2, _)
 		-- upvalues: t_1 (ref), localPlayer (ref), t (write), t_2 (ref), color (ref), utilModule (ref)
-		local var7 = if string.sub(p4, 1, 3) == "/e " then string.sub(p4, 4) elseif string.sub(p4, 1, 7) == "/emote " then string.sub(p4, 8) else nil
+		local var1 = if string.sub(p1, 1, 3) == "/e " then string.sub(p1, 4) elseif string.sub(p1, 1, 7) == "/emote " then string.sub(p1, 8) else nil
 		
-		if not var7 then
+		if not var1 then
 			return false
-		elseif t_1[var7] then
+		elseif t_1[var1] then
 			return true
 		end
-		local currentChannel = p5:GetCurrentChannel()
+		local currentChannel = p2:GetCurrentChannel()
 		
 		if not currentChannel then
 			return true
@@ -108,23 +108,23 @@ return {
 		for i, v in pairs(humanoidDescription:GetEmotes()) do
 			t_3[string.lower(i)] = i
 		end
-		local var13 = tonumber(var7)
+		local var2 = tonumber(var1)
 		
-		if var13 then
+		if var2 then
 			for i_1, v_1 in pairs(humanoidDescription:GetEquippedEmotes()) do
-				if v_1.Slot == var13 then
-					var7 = v_1.Name
+				if v_1.Slot == var2 then
+					var1 = v_1.Name
 				end
 			end
 		end
-		var7 = t_3[string.lower(var7)]
+		var1 = t_3[string.lower(var1)]
 		
-		if var7 then
+		if var1 then
 			spawn(function()
-				-- upvalues: humanoid (ref), var7 (write), currentChannel (ref), t (copy), t_2 (copy), color (copy), utilModule (copy)
+				-- upvalues: humanoid (ref), var1 (write), currentChannel (ref), t (copy), t_2 (copy), color (copy), utilModule (copy)
 				local ok, status = pcall(function()
-					-- upvalues: humanoid (copy), var7 (copy)
-					return humanoid:PlayEmote(var7)
+					-- upvalues: humanoid (copy), var1 (copy)
+					return humanoid:PlayEmote(var1)
 				end)
 				
 				if not ok then

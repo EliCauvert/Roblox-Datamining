@@ -6,20 +6,20 @@ local constantsModule = require(parent.Resources.Constants)
 local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
 local list = { constantsModule.ReportDialogKey }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: constantsModule (ref), list (ref), guiService (ref), setMenuOpenModule (ref), setCurrentPageModule (ref), sendAnalyticsModule (ref)
-	return function(p2)
-		-- upvalues: p1 (write), constantsModule (copy), list (copy), guiService (copy), setMenuOpenModule (copy), setCurrentPageModule (copy), sendAnalyticsModule (copy), p0 (ref)
-		if not p1 then
-			p1 = constantsModule.defaultPageKey
+	return function(p3)
+		-- upvalues: p2 (write), constantsModule (copy), list (copy), guiService (copy), setMenuOpenModule (copy), setCurrentPageModule (copy), sendAnalyticsModule (copy), p1 (ref)
+		if not p2 then
+			p2 = constantsModule.defaultPageKey
 		end
-		if not table.find(list, p1) then
-			if p1 ~= constantsModule.InitalPageKey then
+		if not table.find(list, p2) then
+			if p2 ~= constantsModule.InitalPageKey then
 				guiService:SetMenuIsOpen(true, "InGameMenu")
 			end
-			p2:dispatch(setMenuOpenModule(true))
-			p2:dispatch(setCurrentPageModule(p1))
+			p3:dispatch(setMenuOpenModule(true))
+			p3:dispatch(setCurrentPageModule(p2))
 		end
-		sendAnalyticsModule(constantsModule.AnalyticsMenuOpenName, constantsModule.AnalyticsMenuActionName, { source = p0 })
+		sendAnalyticsModule(constantsModule.AnalyticsMenuOpenName, constantsModule.AnalyticsMenuActionName, { source = p1 })
 	end
 end

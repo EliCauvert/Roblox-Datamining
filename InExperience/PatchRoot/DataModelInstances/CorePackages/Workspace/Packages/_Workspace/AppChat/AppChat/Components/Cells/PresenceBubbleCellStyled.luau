@@ -26,31 +26,31 @@ local t = {
 	showDivider = not require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), cryoModule (ref), t (ref), reactModule (ref), presenceBubbleCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref)
-	local var7 = useTokens()
-	local var8 = cryoModule.Dictionary.join(t, p0)
-	local style = var8.style
+	local var1 = useTokens()
+	local var2 = cryoModule.Dictionary.join(t, p1)
+	local style = var2.style
 	local theme = style.Theme
 	local font = style.Font
-	local isTable = type(var8.avatarCirclePresenceImage) == "table"
+	local isTable = type(var2.avatarCirclePresenceImage) == "table"
 	
 	return reactModule.createElement(presenceBubbleCellModule, {
-		childWidth = var8.childWidth,
-		titleText = var8.titleText,
-		secondaryTitleText = var8.secondaryTitleText,
-		subTitleText = var8.subTitleText,
-		subTitleTimestamp = var8.subTitleTimestamp,
-		subTitleIcon = var8.subTitleIcon,
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then var8.testId else nil,
-		avatarCirclePresenceImage = var8.avatarCirclePresenceImage,
-		thumbnails = var8.thumbnails,
-		onActivated = var8.onActivated,
-		onCircleActivated = var8.onCircleActivated,
-		Size = var8.Size,
-		isLoading = var8.isLoading,
+		childWidth = var2.childWidth,
+		titleText = var2.titleText,
+		secondaryTitleText = var2.secondaryTitleText,
+		subTitleText = var2.subTitleText,
+		subTitleTimestamp = var2.subTitleTimestamp,
+		subTitleIcon = var2.subTitleIcon,
+		testId = if fFlagDebugAppChatEnableDomLocatorsModule then var2.testId else nil,
+		avatarCirclePresenceImage = var2.avatarCirclePresenceImage,
+		thumbnails = var2.thumbnails,
+		onActivated = var2.onActivated,
+		onCircleActivated = var2.onCircleActivated,
+		Size = var2.Size,
+		isLoading = var2.isLoading,
 		showNewPresenceImage = isTable,
-		conversationId = var8.conversationId,
+		conversationId = var2.conversationId,
 		BackgroundColor3 = theme.BackgroundDefault.Color,
 		BackgroundTransparency = style.Tokens.Color.None.Transparency,
 		onPressedBackgroundColor3 = theme.BackgroundOnPress.Color,
@@ -66,21 +66,21 @@ return reactModule.memo(function(p0)
 		subTitleIconColor3 = style.Theme.IconDefault.Color,
 		subTitleIconTransparency = style.Theme.IconDefault.Transparency,
 		titleFont = font.Header2.Font,
-		titleTextTransparency = if not var8.boldTitle then theme.TextDefault.Transparency else theme.TextEmphasis.Transparency,
-		titleTextColor3 = if not var8.boldTitle then theme.TextDefault.Color else theme.TextEmphasis.Color,
+		titleTextTransparency = if not var2.boldTitle then theme.TextDefault.Transparency else theme.TextEmphasis.Transparency,
+		titleTextColor3 = if not var2.boldTitle then theme.TextDefault.Color else theme.TextEmphasis.Color,
 		titleTextSize = font.Header2.RelativeSize * font.BaseSize,
 		secondaryTitleFont = font.Header2.Font,
 		secondaryTitleTextTransparency = theme.TextMuted.Transparency,
 		secondaryTitleTextColor3 = theme.TextMuted.Color,
 		secondaryTitleTextSize = font.Header2.RelativeSize * font.BaseSize,
-		showDivider = var8.showDivider,
+		showDivider = var2.showDivider,
 		dividerTransparency = theme.Divider.Transparency,
 		dividerColor3 = theme.Divider.Color,
-		avatarCircleSize = var7.Size.Size_1000,
-		avatarCircleCellWidth = var7.Size.Size_1200,
-		hideLeftAvatarPadding = var8.hideLeftAvatarPadding,
-		paddingLeft = var8.paddingLeft,
-		paddingRight = var8.paddingRight,
-		isRobloxSubscriber = var8.isRobloxSubscriber
-	}, var8.children or {})
+		avatarCircleSize = var1.Size.Size_1000,
+		avatarCircleCellWidth = var1.Size.Size_1200,
+		hideLeftAvatarPadding = var2.hideLeftAvatarPadding,
+		paddingLeft = var2.paddingLeft,
+		paddingRight = var2.paddingRight,
+		isRobloxSubscriber = var2.isRobloxSubscriber
+	}, var2.children or {})
 end)

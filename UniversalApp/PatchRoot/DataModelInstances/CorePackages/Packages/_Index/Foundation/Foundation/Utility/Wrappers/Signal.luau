@@ -1,5 +1,5 @@
 ﻿return {
-	Connect = function(p0, p1)
-		return p0:Connect(p1)
+	Connect = function(p1, p2)
+		return p1:Connect(p2)
 	end
 }

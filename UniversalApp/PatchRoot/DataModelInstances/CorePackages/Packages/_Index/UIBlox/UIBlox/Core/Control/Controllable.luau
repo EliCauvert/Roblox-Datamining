@@ -8,24 +8,24 @@ local controlStateModule = require(parent.Enum.ControlState)
 local stateTableModule = require(parent_1.StateTable.StateTable)
 local controllable = roactModule.PureComponent:extend("Controllable")
 
-function controllable.init(p0)
+function controllable.init(p1)
 	-- upvalues: controlStateModule (ref), stateTableModule (ref)
-	p0.isMounted = false
+	p1.isMounted = false
 	local initialize = controlStateModule.Initialize
-	p0.state = { currentState = initialize }
-	local formattedText = string.format("Controllable(%s)", tostring(p0))
+	p1.state = { currentState = initialize }
+	local formattedText = string.format("Controllable(%s)", tostring(p1))
 	
-	function p0.setDisabled(p1)
-		-- upvalues: p0 (ref)
-		if p1 then
-			p0.stateTable.events.Disable()
+	function p0.setDisabled(p2)
+		-- upvalues: p1 (ref)
+		if p2 then
+			p1.stateTable.events.Disable()
 			
 			return
 		end
-		p0.stateTable.events.Enable()
+		p1.stateTable.events.Enable()
 	end
 	
-	p0.stateTable = stateTableModule.new(formattedText, initialize, {}, {
+	p1.stateTable = stateTableModule.new(formattedText, initialize, {}, {
 		[controlStateModule.Initialize] = {
 			Enable = { nextState = controlStateModule.Default },
 			Disable = { nextState = controlStateModule.Disabled }
@@ -60,12 +60,12 @@ function controllable.init(p0)
 		},
 		[controlStateModule.Disabled] = { Enable = { nextState = controlStateModule.Default } }
 	})
-	p0.stateTable:onStateChange(function(p2, p3)
-		-- upvalues: p0 (ref)
-		p0:setState({ currentState = p3 })
+	p1.stateTable:onStateChange(function(p2, p3)
+		-- upvalues: p1 (ref)
+		p1:setState({ currentState = p3 })
 		
-		if p0.props.onStateChanged then
-			p0.props.onStateChanged(p2, p3)
+		if p1.props.onStateChanged then
+			p1.props.onStateChanged(p2, p3)
 		end
 	end)
 end
@@ -82,12 +82,12 @@ controllable.validateProps = tModule.strictInterface({
 })
 controllable.defaultProps = { userInteractionEnabled = true, isDisabled = false }
 
-function controllable.render(p4)
+function controllable.render(p1)
 	-- upvalues: controlStateModule (ref), cryoModule (ref), roactModule (ref)
-	local controlComponent = p4.props.controlComponent
-	local userInteractionEnabled = p4.props.userInteractionEnabled
+	local controlComponent = p1.props.controlComponent
+	local userInteractionEnabled = p1.props.userInteractionEnabled
 	
-	if p4.state.currentState == controlStateModule.Initialize then
+	if p1.state.currentState == controlStateModule.Initialize then
 		return nil
 	end
 	local selectable = controlComponent.props and controlComponent.props.Selectable
@@ -95,74 +95,74 @@ function controllable.render(p4)
 	if selectable == nil then
 		selectable = true
 	end
-	return roactModule.createElement(controlComponent.component, cryoModule.Dictionary.join(p4.props, controlComponent.props or {}, {
+	return roactModule.createElement(controlComponent.component, cryoModule.Dictionary.join(p1.props, controlComponent.props or {}, {
 		Selectable = selectable,
-		Active = not p4.props.isDisabled,
+		Active = not p1.props.isDisabled,
 		[roactModule.Event.MouseEnter] = function(...)
-			-- upvalues: userInteractionEnabled (ref), p4 (ref), controlComponent (ref), roactModule (copy)
+			-- upvalues: userInteractionEnabled (ref), p1 (ref), controlComponent (ref), roactModule (copy)
 			if not userInteractionEnabled then
 				return nil
 			end
-			p4.stateTable.events.StartHover()
+			p1.stateTable.events.StartHover()
 			
 			return if controlComponent.props[roactModule.Event.MouseEnter] == nil then nil else controlComponent.props[roactModule.Event.MouseEnter](...)
 		end,
 		[roactModule.Event.MouseLeave] = function(...)
-			-- upvalues: userInteractionEnabled (ref), p4 (ref), controlComponent (ref), roactModule (copy)
+			-- upvalues: userInteractionEnabled (ref), p1 (ref), controlComponent (ref), roactModule (copy)
 			if not userInteractionEnabled then
 				return nil
 			end
-			p4.stateTable.events.EndHover()
+			p1.stateTable.events.EndHover()
 			
 			return if controlComponent.props[roactModule.Event.MouseLeave] == nil then nil else controlComponent.props[roactModule.Event.MouseLeave](...)
 		end,
 		[roactModule.Event.InputBegan] = function(...)
-			-- upvalues: userInteractionEnabled (ref), p4 (ref), controlComponent (ref), roactModule (copy)
+			-- upvalues: userInteractionEnabled (ref), p1 (ref), controlComponent (ref), roactModule (copy)
 			if not userInteractionEnabled then
 				return nil
 			end
-			local var8 = select(2, ...)
+			local var1 = select(2, ...)
 			
-			if var8.UserInputType == Enum.UserInputType.MouseButton1 or var8.UserInputType == Enum.UserInputType.Touch or var8.KeyCode == Enum.KeyCode.ButtonA then
-				p4.stateTable.events.OnPressed()
+			if var1.UserInputType == Enum.UserInputType.MouseButton1 or var1.UserInputType == Enum.UserInputType.Touch or var1.KeyCode == Enum.KeyCode.ButtonA then
+				p1.stateTable.events.OnPressed()
 			end
 			return if controlComponent.props[roactModule.Event.InputBegan] == nil then nil else controlComponent.props[roactModule.Event.InputBegan](...)
 		end,
 		[roactModule.Event.InputEnded] = function(...)
-			-- upvalues: userInteractionEnabled (ref), p4 (ref), controlComponent (ref), roactModule (copy)
+			-- upvalues: userInteractionEnabled (ref), p1 (ref), controlComponent (ref), roactModule (copy)
 			if not userInteractionEnabled then
 				return nil
 			end
-			local var9 = select(2, ...)
+			local var1 = select(2, ...)
 			
-			if var9.UserInputType == Enum.UserInputType.MouseButton1 then
-				p4.stateTable.events.OnReleasedHover()
-			elseif var9.UserInputType == Enum.UserInputType.Touch or var9.KeyCode == Enum.KeyCode.ButtonA or var9.UserInputType == Enum.UserInputType.MouseMovement then
-				p4.stateTable.events.OnReleased()
+			if var1.UserInputType == Enum.UserInputType.MouseButton1 then
+				p1.stateTable.events.OnReleasedHover()
+			elseif var1.UserInputType == Enum.UserInputType.Touch or var1.KeyCode == Enum.KeyCode.ButtonA or var1.UserInputType == Enum.UserInputType.MouseMovement then
+				p1.stateTable.events.OnReleased()
 			end
 			return if controlComponent.props[roactModule.Event.InputEnded] == nil then nil else controlComponent.props[roactModule.Event.InputEnded](...)
 		end,
 		[roactModule.Event.SelectionGained] = function(...)
-			-- upvalues: userInteractionEnabled (ref), p4 (ref), controlComponent (ref), roactModule (copy)
+			-- upvalues: userInteractionEnabled (ref), p1 (ref), controlComponent (ref), roactModule (copy)
 			if not userInteractionEnabled then
 				return nil
 			end
-			p4.stateTable.events.OnSelectionGained()
+			p1.stateTable.events.OnSelectionGained()
 			
 			return if controlComponent.props[roactModule.Event.SelectionGained] == nil then nil else controlComponent.props[roactModule.Event.SelectionGained](...)
 		end,
 		[roactModule.Event.SelectionLost] = function(...)
-			-- upvalues: userInteractionEnabled (ref), p4 (ref), controlComponent (ref), roactModule (copy)
+			-- upvalues: userInteractionEnabled (ref), p1 (ref), controlComponent (ref), roactModule (copy)
 			if not userInteractionEnabled then
 				return nil
 			end
-			p4.stateTable.events.OnSelectionLost()
+			p1.stateTable.events.OnSelectionLost()
 			
 			return if controlComponent.props[roactModule.Event.SelectionLost] == nil then nil else controlComponent.props[roactModule.Event.SelectionLost](...)
 		end,
 		[roactModule.Event.Activated] = function(...)
-			-- upvalues: userInteractionEnabled (ref), controlComponent (ref), roactModule (copy), p4 (ref), controlStateModule (copy)
-			return if userInteractionEnabled then if controlComponent.props[roactModule.Event.Activated] and p4.state.currentState ~= controlStateModule.Disabled and p4.isMounted then controlComponent.props[roactModule.Event.Activated](...) else nil else nil
+			-- upvalues: userInteractionEnabled (ref), controlComponent (ref), roactModule (copy), p1 (ref), controlStateModule (copy)
+			return if userInteractionEnabled then if controlComponent.props[roactModule.Event.Activated] and p1.state.currentState ~= controlStateModule.Disabled and p1.isMounted then controlComponent.props[roactModule.Event.Activated](...) else nil else nil
 		end,
 		[roactModule.Ref] = controlComponent.props.forwardedRef,
 		forwardedRef = cryoModule.None,
@@ -174,19 +174,19 @@ function controllable.render(p4)
 	}), controlComponent.children)
 end
 
-function controllable.didMount(p5)
-	p5.isMounted = true
-	p5.setDisabled(p5.props.isDisabled)
+function controllable.didMount(p1)
+	p1.isMounted = true
+	p1.setDisabled(p1.props.isDisabled)
 end
 
-function controllable.didUpdate(p6, p7)
-	if p6.props.isDisabled ~= p7.isDisabled then
-		p6.setDisabled(p6.props.isDisabled)
+function controllable.didUpdate(p1, p2)
+	if p1.props.isDisabled ~= p2.isDisabled then
+		p1.setDisabled(p1.props.isDisabled)
 	end
 end
 
-function controllable.willUnmount(p8)
-	p8.isMounted = false
+function controllable.willUnmount(p1)
+	p1.isMounted = false
 end
 
 return controllable

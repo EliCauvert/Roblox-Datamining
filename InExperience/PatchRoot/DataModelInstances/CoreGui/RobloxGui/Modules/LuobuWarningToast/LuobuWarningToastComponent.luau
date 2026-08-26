@@ -9,27 +9,27 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local contentProviderService = game:GetService("ContentProvider")
 local renderWithCoreScriptsStyleProviderModule = require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider)
 local luobuWarningToastComponent = roactModule.PureComponent:extend("LuobuWarningToastComponent")
-local var9 = robloxTranslatorModule:FormatByKey("InGame.CommonUI.Message.LuobuGameJoinWarning")
+local var1 = robloxTranslatorModule:FormatByKey("InGame.CommonUI.Message.LuobuGameJoinWarning")
 
-function luobuWarningToastComponent.init(p0)
-	-- upvalues: images (ref), contentProviderService (ref), var9 (ref)
-	p0.state = { isLoaded = false }
+function luobuWarningToastComponent.init(p1)
+	-- upvalues: images (ref), contentProviderService (ref), var1 (ref)
+	p1.state = { isLoaded = false }
 	task.spawn(function()
-		-- upvalues: images (copy), contentProviderService (copy), p0 (ref)
+		-- upvalues: images (copy), contentProviderService (copy), p1 (ref)
 		local image = images["icons/status/alert"].Image
 		pcall(function()
 			-- upvalues: contentProviderService (copy), image (ref)
 			contentProviderService:PreloadAsync({ image })
 		end)
-		p0:setState({ isLoaded = true })
+		p1:setState({ isLoaded = true })
 	end)
 	
 	function p0.getToastContent()
-		-- upvalues: images (copy), var9 (copy)
+		-- upvalues: images (copy), var1 (copy)
 		return {
 			iconImage = images["icons/status/alert"],
 			iconColorStyle = { Transparency = 0, Color = Color3.new(1, 1, 1) },
-			toastTitle = var9
+			toastTitle = var1
 		}
 	end
 end

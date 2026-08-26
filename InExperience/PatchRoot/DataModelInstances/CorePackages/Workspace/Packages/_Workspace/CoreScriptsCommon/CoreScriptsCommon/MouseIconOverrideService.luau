@@ -3,10 +3,10 @@ local t = {}
 
 local function _()
 	-- upvalues: t (ref), userInputService (ref)
-	local var2 = t[#t]
+	local var1 = t[#t]
 	
-	if var2 then
-		userInputService.OverrideMouseIconBehavior = var2[2]
+	if var1 then
+		userInputService.OverrideMouseIconBehavior = var1[2]
 		
 		return
 	end
@@ -14,46 +14,46 @@ local function _()
 end
 
 return {
-	push = function(p0, p1)
+	push = function(p1, p2)
 		-- upvalues: t (ref), userInputService (ref)
-		assert(if type(p0) ~= "userdata" then type(p0) == "string" else true, "key")
-		assert(typeof(p1) == "EnumItem", "behavior")
-		assert(p1.EnumType == Enum.OverrideMouseIconBehavior, "behavior.EnumType")
+		assert(if type(p1) ~= "userdata" then type(p1) == "string" else true, "key")
+		assert(typeof(p2) == "EnumItem", "behavior")
+		assert(p2.EnumType == Enum.OverrideMouseIconBehavior, "behavior.EnumType")
 		
 		for i, v in ipairs(t) do
-			if v[1] == p0 then
+			if v[1] == p1 then
 				table.remove(t, i)
 				break
 			end
 		end
-		table.insert(t, { p0, p1 })
-		local var3 = t[#t]
+		table.insert(t, { p1, p2 })
+		local var1 = t[#t]
 		
-		if var3 then
-			userInputService.OverrideMouseIconBehavior = var3[2]
+		if var1 then
+			userInputService.OverrideMouseIconBehavior = var1[2]
 			
 			return
 		end
 		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.None
 	end,
-	pop = function(p2)
+	pop = function(p3)
 		-- upvalues: t (ref), userInputService (ref)
-		assert(if type(p2) ~= "userdata" then type(p2) == "string" else true, "key")
-		local var4 = nil
+		assert(if type(p3) ~= "userdata" then type(p3) == "string" else true, "key")
+		local var2 = nil
 		
 		for i, v in ipairs(t) do
-			if v[1] == p2 then
-				var4 = i
+			if v[1] == p3 then
+				var2 = i
 				break
 			end
 		end
-		if var4 then
-			table.remove(t, var4)
+		if var2 then
+			table.remove(t, var2)
 		end
-		local var5 = t[#t]
+		local var3 = t[#t]
 		
-		if var5 then
-			userInputService.OverrideMouseIconBehavior = var5[2]
+		if var3 then
+			userInputService.OverrideMouseIconBehavior = var3[2]
 			
 			return
 		end

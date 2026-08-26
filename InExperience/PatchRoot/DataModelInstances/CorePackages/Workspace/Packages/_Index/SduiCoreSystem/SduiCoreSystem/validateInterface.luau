@@ -1,9 +1,9 @@
 ﻿local tModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.t)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: tModule (ref)
-	if p2 == nil then
-		p2 = true
+	if p3 == nil then
+		p3 = true
 	end
-	return (if p2 then tModule.interface(p1) else tModule.strictInterface(p1))(p0)
+	return (if p3 then tModule.interface(p2) else tModule.strictInterface(p2))(p1)
 end

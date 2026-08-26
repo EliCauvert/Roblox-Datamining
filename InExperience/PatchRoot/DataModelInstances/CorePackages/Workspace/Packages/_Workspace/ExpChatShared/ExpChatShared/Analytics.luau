@@ -3,54 +3,54 @@ local telemetryService = game:GetService("TelemetryService")
 local textChatService = game:GetService("TextChatService")
 local expChatShared = script:FindFirstAncestor("ExpChatShared")
 local dictionary = require(expChatShared.Parent.llama).Dictionary
-local var4 = require(expChatShared.Logger):new("ExpChat/" .. script.Name)
+local var1 = require(expChatShared.Logger):new("ExpChat/" .. script.Name)
 local t = {}
-local var6 = rbxAnalyticsService
+local var2 = rbxAnalyticsService
 
-local function withDefaultArgs(p0)
+local function withDefaultArgs(p1)
 	-- upvalues: dictionary (ref)
-	return dictionary.join(p0, {
+	return dictionary.join(p1, {
 		gameId = tostring(game.GameId),
 		placeId = tostring(game.PlaceId)
 	})
 end
 
 local function setRbxEventStream(value, p1, p2, p3)
-	-- upvalues: var6 (write), var4 (ref), withDefaultArgs (ref)
-	if var6 then
-		var4:debug("Event: {}", p2)
-		var6:SetRBXEventStream(value, p1, p2, withDefaultArgs(p3 or {}))
+	-- upvalues: var2 (write), var1 (ref), withDefaultArgs (ref)
+	if var2 then
+		var1:debug("Event: {}", p2)
+		var2:SetRBXEventStream(value, p1, p2, withDefaultArgs(p3 or {}))
 	end
 end
 
-local function sendEventDeferred(p4, p5, p6, p7)
-	-- upvalues: var6 (write), var4 (ref), withDefaultArgs (ref)
-	if var6 then
-		var4:debug("SendEventDeferred: {}", p6)
-		var6:SendEventDeferred(p4, p5, p6, withDefaultArgs(p7 or {}))
+local function sendEventDeferred(p1, p2, p3, p4)
+	-- upvalues: var2 (write), var1 (ref), withDefaultArgs (ref)
+	if var2 then
+		var1:debug("SendEventDeferred: {}", p3)
+		var2:SendEventDeferred(p1, p2, p3, withDefaultArgs(p4 or {}))
 	end
 end
 
-function t.with(p8)
-	-- upvalues: var6 (write), rbxAnalyticsService (ref)
-	var6 = p8 or rbxAnalyticsService
+function t.with(p1)
+	-- upvalues: var2 (write), rbxAnalyticsService (ref)
+	var2 = p1 or rbxAnalyticsService
 end
 
-function t.FireRccAnalyticsWithEventName(p9, p10)
+function t.FireRccAnalyticsWithEventName(p1, p2)
 	-- upvalues: setRbxEventStream (ref)
-	setRbxEventStream("rcc", "experienceChat", p9, p10)
+	setRbxEventStream("rcc", "experienceChat", p1, p2)
 end
 
-function t.FireClientAnalyticsWithEventName(p11, p12)
+function t.FireClientAnalyticsWithEventName(p1, p2)
 	-- upvalues: setRbxEventStream (ref)
-	setRbxEventStream("client", "experienceChat", p11, p12)
+	setRbxEventStream("client", "experienceChat", p1, p2)
 end
 
-function t.reportCounter(p13, p14)
-	-- upvalues: var6 (write), var4 (ref)
-	if var6 then
-		var4:debug("Counter: {}", p13)
-		var6:ReportCounter(p13, p14 or 1)
+function t.reportCounter(p1, p2)
+	-- upvalues: var2 (write), var1 (ref)
+	if var2 then
+		var1:debug("Counter: {}", p1)
+		var2:ReportCounter(p1, p2 or 1)
 	end
 end
 
@@ -62,21 +62,21 @@ t.ExpChatChatEnabledUserCountFetchConfig = {
 	lastUpdated = { 2026, 7, 22 }
 }
 
-function t.reportChatEnabledUserCountFetchResult(p15)
+function t.reportChatEnabledUserCountFetchResult(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogCounter(t.ExpChatChatEnabledUserCountFetchConfig, {
-		customFields = { result = if p15 then "success" else "failure" }
+		customFields = { result = if p1 then "success" else "failure" }
 	}, 1)
 end
 
-function t.FireRccAnalyticsDeferred(p16, p17)
+function t.FireRccAnalyticsDeferred(p1, p2)
 	-- upvalues: sendEventDeferred (ref)
-	sendEventDeferred("RCC", "experienceChat", p16, p17)
+	sendEventDeferred("RCC", "experienceChat", p1, p2)
 end
 
-function t.TelemetryLogEvent(_, p18, p19, p20)
+function t.TelemetryLogEvent(_, p1, p2, p3)
 	-- upvalues: telemetryService (ref)
-	telemetryService:LogEvent(p18, { customFields = p19, standardizedFields = p20 })
+	telemetryService:LogEvent(p1, { customFields = p2, standardizedFields = p3 })
 end
 
 t.DefaultStandardizedFields = {
@@ -86,10 +86,10 @@ t.DefaultStandardizedFields = {
 	"addPlaceId"
 }
 
-function t.reportTextChatCommandClientSent(p21, p22)
+function t.reportTextChatCommandClientSent(p1, p2)
 	-- upvalues: textChatService (ref)
-	textChatService:SendTextChatCommandClientSent(p22)
-	p21.FireClientAnalyticsWithEventName("CommandSent", { commandName = p22 })
+	textChatService:SendTextChatCommandClientSent(p2)
+	p1.FireClientAnalyticsWithEventName("CommandSent", { commandName = p2 })
 end
 
 t.RewriteDropdownToggledConfig = {

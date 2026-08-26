@@ -77,60 +77,60 @@ local function validateInstancesFromSchema(p1, p2, p3, p4)
 	end
 end
 
-local function validateNoInstancesOutsideSchema(p1, p2, p3)
+local function validateNoInstancesOutsideSchema(p5, p6, p7)
 	-- upvalues: errorSourceStringsModule (ref)
 	local t = {}
 	
-	for i, v in pairs(p1:GetDescendants()) do
-		if p2[v] == nil then
+	for i, v in pairs(p5:GetDescendants()) do
+		if p6[v] == nil then
 			table.insert(t, v:GetFullName())
 		end
 	end
 	if #t > 0 then
-		p3:fail(errorSourceStringsModule.Keys.AssetSchemaUnexpectedItems, { UnexpectedDescendantPaths = table.concat(t, ", ") }, p1)
+		p7:fail(errorSourceStringsModule.Keys.AssetSchemaUnexpectedItems, { UnexpectedDescendantPaths = table.concat(t, ", ") }, p5)
 	end
 end
 
-function t.run(p1, p2)
+function t.run(p8, p9)
 	-- upvalues: errorSourceStringsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), createExpectedSchemaModule (ref), validateInstancesFromSchema (ref), validateNoInstancesOutsideSchema (ref)
-	local rootInstance = p2.rootInstance
-	local uploadCategory = p2.uploadCategory
-	local uploadEnum = p2.uploadEnum
+	local rootInstance = p9.rootInstance
+	local uploadCategory = p9.uploadCategory
+	local uploadEnum = p9.uploadEnum
 	
 	if rootInstance == nil then
-		p1:fail(errorSourceStringsModule.Keys.SelectionCountNotOne)
+		p8:fail(errorSourceStringsModule.Keys.SelectionCountNotOne)
 		
 		return
 	end
 	local _ = nil
-	local var1 = if not uploadEnum.bundleType then if not getFFlagUGCValidationAnimationPackSupportModule() or uploadEnum.bundleType ~= Enum.BundleType.Animations then if getFFlagUGCValidationAnimationPackDisableModelStructureModule() or not getFFlagUGCValidationAnimationPackFolderStructureModule() then createExpectedSchemaModule.generateAnimationPackBundleSchema(nil) else createExpectedSchemaModule.generateAnimationPackBundleSchema(rootInstance) else createExpectedSchemaModule.generateBundleSchema(p2.entrypointInput) else createExpectedSchemaModule.generateAssetSchema(uploadCategory, uploadEnum.assetType, rootInstance)
+	local var3 = if not uploadEnum.bundleType then if not getFFlagUGCValidationAnimationPackSupportModule() or uploadEnum.bundleType ~= Enum.BundleType.Animations then if getFFlagUGCValidationAnimationPackDisableModelStructureModule() or not getFFlagUGCValidationAnimationPackFolderStructureModule() then createExpectedSchemaModule.generateAnimationPackBundleSchema(nil) else createExpectedSchemaModule.generateAnimationPackBundleSchema(rootInstance) else createExpectedSchemaModule.generateBundleSchema(p9.entrypointInput) else createExpectedSchemaModule.generateAssetSchema(uploadCategory, uploadEnum.assetType, rootInstance)
 	local t = {}
 	
-	if var1.ClassName ~= rootInstance.ClassName then
-		p1:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootClass, {
+	if var3.ClassName ~= rootInstance.ClassName then
+		p8:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootClass, {
 			RootClass = rootInstance.ClassName,
-			ExpectedClass = var1.ClassName
+			ExpectedClass = var3.ClassName
 		})
 		
 		return
-	elseif var1.Name ~= nil then
-		local var2
-		local name = var1.Name
+	elseif var3.Name ~= nil then
+		local var4
+		local name = var3.Name
 		local name_1 = rootInstance.Name
 		
 		if type(name) == "table" then
-			var2 = table.find(name, name_1) ~= nil
-			var2 = nil
+			var4 = table.find(name, name_1) ~= nil
+			var4 = nil
 		else
-			var2 = name == name_1
+			var4 = name == name_1
 		end
-		if var2 then
-			validateInstancesFromSchema(rootInstance, var1, t, p1)
-			validateNoInstancesOutsideSchema(rootInstance, t, p1)
+		if var4 then
+			validateInstancesFromSchema(rootInstance, var3, t, p8)
+			validateNoInstancesOutsideSchema(rootInstance, t, p8)
 			
 			return
 		else
-			p1:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootName, { RootName = rootInstance.Name, ExpectedName = var1.Name })
+			p8:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootName, { RootName = rootInstance.Name, ExpectedName = var3.Name })
 		end
 	end
 end

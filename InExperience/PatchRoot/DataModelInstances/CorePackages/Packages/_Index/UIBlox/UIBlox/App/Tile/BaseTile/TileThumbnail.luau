@@ -33,24 +33,24 @@ tileThumbnail.defaultProps = {
 	scaleType = Enum.ScaleType.Stretch
 }
 
-function tileThumbnail.render(p0)
+function tileThumbnail.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), loadableImageModule (ref), tileSelectionOverlayModule (ref), tileUnselectedOverlayModule (ref)
-	local hasRoundedCorners = p0.props.hasRoundedCorners
-	local image = p0.props.Image
-	local imageSize = p0.props.imageSize
-	local imageColor = p0.props.imageColor
-	local imageTransparency = p0.props.imageTransparency
-	local isSelected = p0.props.isSelected
-	local multiSelect = p0.props.multiSelect
-	local overlayComponents = p0.props.overlayComponents
-	local backgroundImage = p0.props.backgroundImage
-	local cornerRadius = p0.props.cornerRadius
-	local scaleType = p0.props.scaleType
+	local hasRoundedCorners = p1.props.hasRoundedCorners
+	local image = p1.props.Image
+	local imageSize = p1.props.imageSize
+	local imageColor = p1.props.imageColor
+	local imageTransparency = p1.props.imageTransparency
+	local isSelected = p1.props.isSelected
+	local multiSelect = p1.props.multiSelect
+	local overlayComponents = p1.props.overlayComponents
+	local backgroundImage = p1.props.backgroundImage
+	local cornerRadius = p1.props.cornerRadius
+	local scaleType = p1.props.scaleType
 	local isTable = typeof(image) == "table"
 	
-	return withStyleModule(function(p1)
-		-- upvalues: p0 (ref), roactModule (copy), imageSetComponentModule (copy), backgroundImage (ref), isTable (ref), image (ref), imageColor (ref), imageTransparency (ref), imageSize (ref), scaleType (ref), hasRoundedCorners (ref), cornerRadius (ref), loadableImageModule (copy), overlayComponents (ref), isSelected (ref), tileSelectionOverlayModule (copy), multiSelect (ref), tileUnselectedOverlayModule (copy)
-		local theme = p1.Theme
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), roactModule (copy), imageSetComponentModule (copy), backgroundImage (ref), isTable (ref), image (ref), imageColor (ref), imageTransparency (ref), imageSize (ref), scaleType (ref), hasRoundedCorners (ref), cornerRadius (ref), loadableImageModule (copy), overlayComponents (ref), isSelected (ref), tileSelectionOverlayModule (copy), multiSelect (ref), tileUnselectedOverlayModule (copy)
+		local theme = p2.Theme
 		
 		return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 			ImageContainer = roactModule.createElement("Frame", {
@@ -65,7 +65,7 @@ function tileThumbnail.render(p0)
 					BorderSizePixel = 0,
 					ZIndex = 0,
 					Image = backgroundImage,
-					ImageColor3 = if p0.props.hasSurfaceOverrides then theme.BackgroundUIDefault.Color:Lerp(theme.PlayerBackgroundDefault.Color, theme.Overlay.Transparency) else nil,
+					ImageColor3 = if p1.props.hasSurfaceOverrides then theme.BackgroundUIDefault.Color:Lerp(theme.PlayerBackgroundDefault.Color, theme.Overlay.Transparency) else nil,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
 					Size = UDim2.fromScale(1, 1)
@@ -92,7 +92,7 @@ function tileThumbnail.render(p0)
 						Size = imageSize,
 						cornerRadius = if hasRoundedCorners then cornerRadius else nil,
 						ScaleType = scaleType,
-						onLoaded = p0.props.onThumbnailLoaded
+						onLoaded = p1.props.onThumbnailLoaded
 					}),
 					UICorner = hasRoundedCorners and roactModule.createElement("UICorner", { CornerRadius = cornerRadius }) or nil
 				}),
@@ -112,11 +112,11 @@ function tileThumbnail.render(p0)
 	end)
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useStyleMetadataModule (ref), roactModule (ref), tileThumbnail (ref), cryoModule (ref)
-	local var11 = useStyleMetadataModule()
+	local var1 = useStyleMetadataModule()
 	
-	return roactModule.createElement(tileThumbnail, cryoModule.Dictionary.join(p2, {
-		hasSurfaceOverrides = if var11 then var11.HasSurfaceOverrides else false
+	return roactModule.createElement(tileThumbnail, cryoModule.Dictionary.join(p1, {
+		hasSurfaceOverrides = if var1 then var1.HasSurfaceOverrides else false
 	}))
 end

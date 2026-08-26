@@ -8,16 +8,16 @@ local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJs
 local useProfileScrollContextModule = require(profilePlatform.Contexts.ProfileScrollContext.useProfileScrollContext)
 local coverPhotoModule = require(profilePlatform.Components.CoverPhoto.CoverPhoto)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useProfileFormFactorModule (ref), useProfileScrollContextModule (ref), constants (ref), reactModule (ref), coverPhotoModule (ref)
 	local coverPhoto = useProfileJsonComponentModule(enumsModule.Components.CoverPhoto) or {}
-	local var8 = useProfileScrollContextModule()
+	local var1 = useProfileScrollContextModule()
 	
 	return if coverPhoto.coverPhotoId == nil then nil else reactModule.createElement(coverPhotoModule, {
-		layoutOrder = p0.layoutOrder,
+		layoutOrder = p1.layoutOrder,
 		coverPhotoThumbnail = string.format("rbxthumb://type=%s&id=%s&w=%d&h=%d", constants.RbxthumbTypes.Asset, coverPhoto.coverPhotoId, 1440, 456),
 		profileFormFactorInfo = useProfileFormFactorModule(),
-		parallaxOffset = var8.scrollY / 2,
-		peekViewOpenPercent = var8.peekViewOpenPercent
+		parallaxOffset = var1.scrollY / 2,
+		peekViewOpenPercent = var1.peekViewOpenPercent
 	})
 end

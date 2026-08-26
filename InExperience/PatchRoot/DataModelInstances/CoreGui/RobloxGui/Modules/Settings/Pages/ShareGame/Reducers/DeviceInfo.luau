@@ -6,24 +6,24 @@ local setDeviceLayoutModule = require(shareGame.Actions.SetDeviceLayout)
 local setDeviceOrientation = require(corePackagesService.Workspace.Packages.DeviceOrientationRodux).Actions.SetDeviceOrientation
 local setIsSmallTouchScreenModule = require(shareGame.Actions.SetIsSmallTouchScreen)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: constantsModule (ref), setDeviceOrientation (ref), immutable (ref), setDeviceLayoutModule (ref), setIsSmallTouchScreenModule (ref)
-	p0 = p0 or {
+	p1 = p1 or {
 		IsSmallTouchScreen = false,
 		DeviceLayout = constantsModule.DeviceLayout.DESKTOP,
 		DeviceOrientation = constantsModule.DeviceOrientation.INVALID
 	}
 	
-	if p1.type == setDeviceOrientation.name then
-		p0 = immutable.Set(p0, "DeviceOrientation", p1.deviceOrientation)
+	if p2.type == setDeviceOrientation.name then
+		p1 = immutable.Set(p1, "DeviceOrientation", p2.deviceOrientation)
 		
-		return p0
-	elseif p1.type == setDeviceLayoutModule.name then
-		p0 = immutable.Set(p0, "DeviceLayout", p1.deviceLayout)
+		return p1
+	elseif p2.type == setDeviceLayoutModule.name then
+		p1 = immutable.Set(p1, "DeviceLayout", p2.deviceLayout)
 		
-		return p0
-	elseif p1.type == setIsSmallTouchScreenModule.name then
-		p0 = immutable.Set(p0, "IsSmallTouchScreen", p1.isSmallTouchScreen)
+		return p1
+	elseif p2.type == setIsSmallTouchScreenModule.name then
+		p1 = immutable.Set(p1, "IsSmallTouchScreen", p2.isSmallTouchScreen)
 	end
-	return p0
+	return p1
 end

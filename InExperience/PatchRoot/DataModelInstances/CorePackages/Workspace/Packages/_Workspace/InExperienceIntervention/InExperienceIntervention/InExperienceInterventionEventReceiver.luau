@@ -20,16 +20,16 @@ local fFlagUFRImprovementsModule = require(parent.InterventionShared.FFlagUFRImp
 local fFlagUniversalFeatureRestrictionReceivers = require(parent.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local fFlagTemporaryAvatarKickWarningDialogModule = require(parent.InterventionShared.FFlagTemporaryAvatarKickWarningDialog)
 
-function InExperienceInterventionEventReceiver(p0)
+function InExperienceInterventionEventReceiver(p1)
 	-- upvalues: reactModule (ref), notificationService (ref), constants (ref), httpService (ref), interventionTreatmentConfigListModule (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), chatService (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), featureRestrictionManagerService (ref), getModerationDetail (ref), inExperienceInterventionAnalyticsModule (ref), fFlagUFRImprovementsModule (ref), determineUFRInterventionType (ref), interventionTypes (ref), chatInputBoxDisabledPressedSignal (ref), fFlagUniversalFeatureRestrictionReceivers (ref), featureRestrictionDisplaySignalModule (ref), interventionAnalytics (ref), featureRestrictionDisplayDirectSignalModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: notificationService (copy), constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p0 (ref), fFlagTemporaryAvatarKickWarningDialogModule (copy), chatService (copy), getFFlagGameJoinTimeoutChatAttemptEnabled (copy), featureRestrictionManagerService (copy), getModerationDetail (copy), inExperienceInterventionAnalyticsModule (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), chatInputBoxDisabledPressedSignal (copy), fFlagUniversalFeatureRestrictionReceivers (copy), featureRestrictionDisplaySignalModule (copy), interventionAnalytics (copy), featureRestrictionDisplayDirectSignalModule (copy)
-		local robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(function(p1)
-			-- upvalues: constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p0 (copy), fFlagTemporaryAvatarKickWarningDialogModule (copy)
-			if p1.namespace == constants.FEATURE_INTERV_SIGNAL_NAMESPACE then
+		-- upvalues: notificationService (copy), constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p1 (ref), fFlagTemporaryAvatarKickWarningDialogModule (copy), chatService (copy), getFFlagGameJoinTimeoutChatAttemptEnabled (copy), featureRestrictionManagerService (copy), getModerationDetail (copy), inExperienceInterventionAnalyticsModule (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), chatInputBoxDisabledPressedSignal (copy), fFlagUniversalFeatureRestrictionReceivers (copy), featureRestrictionDisplaySignalModule (copy), interventionAnalytics (copy), featureRestrictionDisplayDirectSignalModule (copy)
+		local robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(function(p2)
+			-- upvalues: constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p1 (copy), fFlagTemporaryAvatarKickWarningDialogModule (copy)
+			if p2.namespace == constants.FEATURE_INTERV_SIGNAL_NAMESPACE then
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p1 (ref)
-					return httpService:JSONDecode(p1.detail)
+					-- upvalues: httpService (copy), p2 (ref)
+					return httpService:JSONDecode(p2.detail)
 				end)
 				
 				if not ok then return end
@@ -38,21 +38,21 @@ function InExperienceInterventionEventReceiver(p0)
 						v.onTriggerEventReceived(status)
 					end
 					if v.shouldTriggerVisualTreatment(status) then
-						v.onTriggerVisualTreatment(p0.uiStateDispatch, status)
+						v.onTriggerVisualTreatment(p1.uiStateDispatch, status)
 					end
 					if v.shouldTriggerBehavioralTreatment(status) then
 						v.onTriggerBehavioralTreatment(status)
 					end
 				end
 				return
-			elseif fFlagTemporaryAvatarKickWarningDialogModule and p1.namespace == constants.AVATAR_VIOLATION_SIGNAL_NAMESPACE then
+			elseif fFlagTemporaryAvatarKickWarningDialogModule and p2.namespace == constants.AVATAR_VIOLATION_SIGNAL_NAMESPACE then
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p1 (ref)
-					return httpService:JSONDecode(p1.detail)
+					-- upvalues: httpService (copy), p2 (ref)
+					return httpService:JSONDecode(p2.detail)
 				end)
 				
 				if not ok then return end
-				p0.uiStateDispatch({
+				p1.uiStateDispatch({
 					isShown = true,
 					type = constants.UIStateActions.ToggleNotificationDialog,
 					treatmentType = constants.TreatmentType.TemporaryAvatarKickWarning,
@@ -66,93 +66,93 @@ function InExperienceInterventionEventReceiver(p0)
 				})
 			end
 		end)
-		local timeoutChatAttemptConnection = chatService.TimeoutChatAttempt:Connect(function(_, p2)
-			-- upvalues: p0 (copy), constants (copy)
-			p0.uiStateDispatch({
+		local timeoutChatAttemptConnection = chatService.TimeoutChatAttempt:Connect(function(_, p3)
+			-- upvalues: p1 (copy), constants (copy)
+			p1.uiStateDispatch({
 				isShown = true,
 				type = constants.UIStateActions.ToggleNotificationDialog,
 				treatmentType = constants.TreatmentType.ChatTimeoutChatAttempt,
-				endTime = p2
+				endTime = p3
 			})
 		end)
-		local var14 = if getFFlagGameJoinTimeoutChatAttemptEnabled() then featureRestrictionManagerService.TimeoutChatAttempt:Connect(function(_, p3)
-			-- upvalues: p0 (copy), constants (copy)
-			p0.uiStateDispatch({
+		local var1 = if getFFlagGameJoinTimeoutChatAttemptEnabled() then featureRestrictionManagerService.TimeoutChatAttempt:Connect(function(_, p3)
+			-- upvalues: p1 (copy), constants (copy)
+			p1.uiStateDispatch({
 				isShown = true,
 				type = constants.UIStateActions.ToggleNotificationDialog,
 				treatmentType = constants.TreatmentType.ChatTimeoutGameJoin,
 				endTime = p3
 			})
 		end) else nil
-		local featureTimeoutAttemptConnection = featureRestrictionManagerService.FeatureTimeoutAttempt:Connect(function(_, p4, p5, p6)
-			-- upvalues: p0 (copy), constants (copy)
-			if p6 == Enum.FeatureRestrictionAbuseVector.ExperienceChat then
-				p0.uiStateDispatch({
+		local featureTimeoutAttemptConnection = featureRestrictionManagerService.FeatureTimeoutAttempt:Connect(function(_, p3, p4, p5)
+			-- upvalues: p1 (copy), constants (copy)
+			if p5 == Enum.FeatureRestrictionAbuseVector.ExperienceChat then
+				p1.uiStateDispatch({
 					isShown = true,
 					type = constants.UIStateActions.ToggleNotificationDialog,
 					treatmentType = constants.TreatmentType.ChatTimeoutChatAttempt,
-					endTime = p4 + p5
+					endTime = p3 + p4
 				})
 			end
 		end)
-		local showFeatureInterventionDetailsConnection = featureRestrictionManagerService.ShowFeatureInterventionDetails:Connect(function(p7)
-			-- upvalues: getModerationDetail (copy), constants (copy), inExperienceInterventionAnalyticsModule (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), p0 (copy)
-			if p7 == Enum.FeatureRestrictionAbuseVector.ExperienceChat then
-				local var21 = nil
-				getModerationDetail({ abuseVector = constants.AbuseVectorType.ExperienceChat }):andThen(function(p9)
-					-- upvalues: var21 (write)
-					var21 = p9
-				end):catch(function(p8)
+		local showFeatureInterventionDetailsConnection = featureRestrictionManagerService.ShowFeatureInterventionDetails:Connect(function(p3)
+			-- upvalues: getModerationDetail (copy), constants (copy), inExperienceInterventionAnalyticsModule (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), p1 (copy)
+			if p3 == Enum.FeatureRestrictionAbuseVector.ExperienceChat then
+				local var2 = nil
+				getModerationDetail({ abuseVector = constants.AbuseVectorType.ExperienceChat }):andThen(function(p4)
+					-- upvalues: var2 (write)
+					var2 = p4
+				end):catch(function(p4)
 					-- upvalues: inExperienceInterventionAnalyticsModule (copy)
-					inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.GetModerationDetailFailed, nil, DateTime.now().UnixTimestampMillis, nil, nil, nil, p8.error)
+					inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.GetModerationDetailFailed, nil, DateTime.now().UnixTimestampMillis, nil, nil, nil, p4.error)
 				end):await()
 				
 				return
 			end
 		end)
-		local featureTimeoutRestoredConnection = featureRestrictionManagerService.FeatureTimeoutRestored:Connect(function(p10)
-			print("FeatureTimeoutRestored - Abuse Vector: ", p10)
+		local featureTimeoutRestoredConnection = featureRestrictionManagerService.FeatureTimeoutRestored:Connect(function(p3)
+			print("FeatureTimeoutRestored - Abuse Vector: ", p3)
 		end)
-		local var18 = chatInputBoxDisabledPressedSignal:connect(function(p11)
-			-- upvalues: p0 (copy), constants (copy)
-			p0.uiStateDispatch({
+		local var2 = chatInputBoxDisabledPressedSignal:connect(function(p3)
+			-- upvalues: p1 (copy), constants (copy)
+			p1.uiStateDispatch({
 				isShown = true,
 				detail = {
-					decisionEventId = p11.decisionEventId,
-					timeoutDurationSeconds = p11.duration
+					decisionEventId = p3.decisionEventId,
+					timeoutDurationSeconds = p3.duration
 				},
 				type = constants.UIStateActions.ToggleNotificationDialog,
 				treatmentType = constants.TreatmentType.PartyChatTimeoutDialog,
-				endTime = p11.endTimestamp
+				endTime = p3.endTimestamp
 			})
 		end)
-		local var19 = if fFlagUniversalFeatureRestrictionReceivers then featureRestrictionDisplaySignalModule:connect(function(p12)
-			-- upvalues: getModerationDetail (copy), interventionAnalytics (copy), constants (copy), p0 (copy)
-			local abuseVector = p12.abuseVector
-			local options = p12.options
-			local var23 = nil
-			getModerationDetail({ abuseVector = abuseVector }):andThen(function(p14)
-				-- upvalues: var23 (write)
-				var23 = p14
-			end):catch(function(p13)
+		local var3 = if fFlagUniversalFeatureRestrictionReceivers then featureRestrictionDisplaySignalModule:connect(function(p3)
+			-- upvalues: getModerationDetail (copy), interventionAnalytics (copy), constants (copy), p1 (copy)
+			local abuseVector = p3.abuseVector
+			local options = p3.options
+			local var4 = nil
+			getModerationDetail({ abuseVector = abuseVector }):andThen(function(p4)
+				-- upvalues: var4 (write)
+				var4 = p4
+			end):catch(function(p4)
 				-- upvalues: interventionAnalytics (copy), constants (copy), abuseVector (ref)
 				interventionAnalytics.sendAnalyticsEvent(interventionAnalytics.TelemetryConfigs.GetModerationDetailFailed, {
 					eventType = interventionAnalytics.Constants.EventTypes.GetModerationDetailFailed,
 					placement = constants.InterventionPlacementType.InExperience,
 					renderedTimestamp = DateTime.now().UnixTimestampMillis,
-					error = p13.error,
+					error = p4.error,
 					abuseVector = abuseVector
 				})
 			end):await()
 		end) else nil
-		local var20 = if fFlagUniversalFeatureRestrictionReceivers then featureRestrictionDisplayDirectSignalModule:connect(function(p15)
-			-- upvalues: p0 (copy), constants (copy)
-			local abuseVector = p15.abuseVector
-			local moderationDetail = p15.moderationDetail
-			local options = p15.options
+		local var4 = if fFlagUniversalFeatureRestrictionReceivers then featureRestrictionDisplayDirectSignalModule:connect(function(p3)
+			-- upvalues: p1 (copy), constants (copy)
+			local abuseVector = p3.abuseVector
+			local moderationDetail = p3.moderationDetail
+			local options = p3.options
 			
 			if moderationDetail then
-				p0.uiStateDispatch({
+				p1.uiStateDispatch({
 					isShown = true,
 					type = constants.UIStateActions.ToggleNotificationDialog,
 					treatmentType = constants.TreatmentType.UniversalFeatureRestriction,
@@ -168,25 +168,25 @@ function InExperienceInterventionEventReceiver(p0)
 		end) else nil
 		
 		return function()
-			-- upvalues: robloxEventReceivedConnection (ref), timeoutChatAttemptConnection (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (copy), var14 (write), featureTimeoutAttemptConnection (ref), showFeatureInterventionDetailsConnection (ref), featureTimeoutRestoredConnection (ref), var18 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var19 (write), var20 (write)
+			-- upvalues: robloxEventReceivedConnection (ref), timeoutChatAttemptConnection (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (copy), var1 (write), featureTimeoutAttemptConnection (ref), showFeatureInterventionDetailsConnection (ref), featureTimeoutRestoredConnection (ref), var2 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var3 (write), var4 (write)
 			robloxEventReceivedConnection:Disconnect()
 			timeoutChatAttemptConnection:Disconnect()
 			
 			if getFFlagGameJoinTimeoutChatAttemptEnabled() then
-				var14:Disconnect()
+				var1:Disconnect()
 			end
 			featureTimeoutAttemptConnection:Disconnect()
 			showFeatureInterventionDetailsConnection:Disconnect()
 			featureTimeoutRestoredConnection:Disconnect()
 			
-			if var18 then
-				var18:disconnect()
+			if var2 then
+				var2:disconnect()
 			end
-			if fFlagUniversalFeatureRestrictionReceivers and var19 then
-				var19:disconnect()
+			if fFlagUniversalFeatureRestrictionReceivers and var3 then
+				var3:disconnect()
 			end
-			if fFlagUniversalFeatureRestrictionReceivers and var20 then
-				var20:disconnect()
+			if fFlagUniversalFeatureRestrictionReceivers and var4 then
+				var4:disconnect()
 			end
 		end
 	end, {})

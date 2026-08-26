@@ -3,12 +3,12 @@
 return {
 	init = function()
 		-- upvalues: cryoModule (ref)
-		local function generate(p0)
+		local function generate(p1)
 			return {
 				presenceImage = "",
 				alias = "(alias)",
-				id = p0,
-				title = string.format("default dog chat no. %d", p0),
+				id = p1,
+				title = string.format("default dog chat no. %d", p1),
 				thumbnails = { "rbxassetid://2610133241" },
 				messages = {
 					keys = { "messageId" },
@@ -36,9 +36,9 @@ return {
 				-- upvalues: cryoModule (copy), generate (ref)
 				return cryoModule.List.join(p1, { generate(p1[#p1].id + 1) })
 			end,
-			loadPrevious = function(p2)
+			loadPrevious = function(p1)
 				-- upvalues: cryoModule (copy), generate (ref)
-				return cryoModule.List.join({ generate(p2[1].id - 1) }, p2)
+				return cryoModule.List.join({ generate(p1[1].id - 1) }, p1)
 			end
 		}
 	end

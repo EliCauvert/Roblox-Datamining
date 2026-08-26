@@ -1,14 +1,14 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
-local var2 = if fFlagBuildDesktopReadinessModule then require(parent.AppComposition) else nil
+local var1 = if fFlagBuildDesktopReadinessModule then require(parent.AppComposition) else nil
 local promiseModule = require(parent.Promise)
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local var8 = if fFlagBuildDesktopReadinessModule then var2.useCompositionLayout else nil
+local var2 = if fFlagBuildDesktopReadinessModule then var1.useCompositionLayout else nil
 local scrollView = foundationModule.ScrollView
 local view = foundationModule.View
 local signalsReactModule = require(parent.SignalsReact)
@@ -30,113 +30,113 @@ local fFlagMediaSelectorErrorLoggingModule = require(buildExperience.Flags.FFlag
 local formatErrorModule = require(buildExperience.utils.formatError)
 local snackbar = foundationModule.Snackbar
 
-return function(p0)
-	-- upvalues: fFlagBuildDesktopReadinessModule (ref), var8 (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), fFlagMediaSelectorErrorLoggingModule (ref), getGameMediaForUniverseModule (ref), reactModule (ref), universeConfigurationModule (ref), signalsReactModule (ref), useTokens (ref), createGalleryCaptureSourceModule (ref), useMediaUpdaterModule (ref), getGameMediaStore (ref), formatErrorModule (ref), uploadCaptureAsyncModule (ref), getThumbnailUrlAsyncModule (ref), promiseModule (ref), createImageAssetAsyncModule (ref), captureSelectionViewModule (ref), filmstripSlotModule (ref), view (ref), snackbar (ref), mediaPreviewModule (ref), scrollView (ref), foundationModule (ref)
+return function(p1)
+	-- upvalues: fFlagBuildDesktopReadinessModule (ref), var2 (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), fFlagMediaSelectorErrorLoggingModule (ref), getGameMediaForUniverseModule (ref), reactModule (ref), universeConfigurationModule (ref), signalsReactModule (ref), useTokens (ref), createGalleryCaptureSourceModule (ref), useMediaUpdaterModule (ref), getGameMediaStore (ref), formatErrorModule (ref), uploadCaptureAsyncModule (ref), getThumbnailUrlAsyncModule (ref), promiseModule (ref), createImageAssetAsyncModule (ref), captureSelectionViewModule (ref), filmstripSlotModule (ref), view (ref), snackbar (ref), mediaPreviewModule (ref), scrollView (ref), foundationModule (ref)
 	local MEDIA_SELECTION_CAPTURE_LIBRARY, MEDIA_SELECTION_DELETE
-	local var22 = if fFlagBuildDesktopReadinessModule then var8() else nil
-	local var23 = if fFlagBuildLocalization then useLocalization({
+	local var3 = if fFlagBuildDesktopReadinessModule then var2() else nil
+	local var4 = if fFlagBuildLocalization then useLocalization({
 		captureLibrary = localizationStringsModule.MEDIA_SELECTION_CAPTURE_LIBRARY,
 		delete = localizationStringsModule.MEDIA_SELECTION_DELETE
 	}) else nil
-	local var24 = if fFlagMediaSelectorErrorLoggingModule then useLocalization({ mediaError = "Feature.Moments.Label.Error" }) else nil
+	local var5 = if fFlagMediaSelectorErrorLoggingModule then useLocalization({ mediaError = "Feature.Moments.Label.Error" }) else nil
 	local _ = nil
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		MEDIA_SELECTION_CAPTURE_LIBRARY = var23.captureLibrary
-		MEDIA_SELECTION_DELETE = var23.delete
+		MEDIA_SELECTION_CAPTURE_LIBRARY = var4.captureLibrary
+		MEDIA_SELECTION_DELETE = var4.delete
 	else
 		MEDIA_SELECTION_CAPTURE_LIBRARY = localizationStringsModule.MEDIA_SELECTION_CAPTURE_LIBRARY
 		MEDIA_SELECTION_DELETE = localizationStringsModule.MEDIA_SELECTION_DELETE
 	end
-	local var25 = getGameMediaForUniverseModule(p0.universeId)
-	local var26 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: universeConfigurationModule (copy), p0 (ref)
-		return universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p0.universeId)
-	end, { p0.universeId }).data)
-	local var27 = if var26 then tostring(var26.rootPlaceId) else nil
-	local var28 = useTokens()
-	local var29, var30 = reactModule.useState(var25.icon)
-	local var31, var32 = reactModule.useState(var25.thumbnails)
-	local var33, var34 = reactModule.useState({ kind = "icon" })
-	local var35, var36 = reactModule.useState(false)
-	local var37, var38 = reactModule.useState(nil)
+	local var6 = getGameMediaForUniverseModule(p1.universeId)
+	local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: universeConfigurationModule (copy), p1 (ref)
+		return universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId)
+	end, { p1.universeId }).data)
+	local var8 = if var7 then tostring(var7.rootPlaceId) else nil
+	local var9 = useTokens()
+	local var10, var11 = reactModule.useState(var6.icon)
+	local var12, var13 = reactModule.useState(var6.thumbnails)
+	local var14, var15 = reactModule.useState({ kind = "icon" })
+	local var16, var17 = reactModule.useState(false)
+	local var18, var19 = reactModule.useState(nil)
 	local editor, editor_1 = reactModule.useState("editor")
-	local var41, var42 = reactModule.useState(nil)
-	local var43, var44 = reactModule.useState({})
-	local var45, var46 = reactModule.useState("")
-	local var47 = reactModule.useRef(0)
-	local var48 = reactModule.useRef(false)
-	local var49 = reactModule.useRef(#var25.thumbnails + 1)
-	local var50 = reactModule.useRef(nil)
+	local var20, var21 = reactModule.useState(nil)
+	local var22, var23 = reactModule.useState({})
+	local var24, var25 = reactModule.useState("")
+	local var26 = reactModule.useRef(0)
+	local var27 = reactModule.useRef(false)
+	local var28 = reactModule.useRef(#var6.thumbnails + 1)
+	local var29 = reactModule.useRef(nil)
 	
-	if var50.current == nil then
-		var50.current = createGalleryCaptureSourceModule(nil, nil, { Enum.CaptureType.Screenshot })
+	if var29.current == nil then
+		var29.current = createGalleryCaptureSourceModule(nil, nil, { Enum.CaptureType.Screenshot })
 	end
-	local var51 = reactModule.useRef(var31)
-	var51.current = var31
-	reactModule.useRef(var29).current = var29
-	local var52 = useMediaUpdaterModule()
+	local var30 = reactModule.useRef(var12)
+	var30.current = var12
+	reactModule.useRef(var10).current = var10
+	local var31 = useMediaUpdaterModule()
 	reactModule.useEffect(function()
-		-- upvalues: var47 (ref), var32 (ref), var25 (ref)
-		if var47.current == 0 then
-			var32(var25.thumbnails)
+		-- upvalues: var26 (ref), var13 (ref), var6 (ref)
+		if var26.current == 0 then
+			var13(var6.thumbnails)
 			
 			return
 		end
-	end, { var25.thumbnails })
+	end, { var6.thumbnails })
 	reactModule.useEffect(function()
-		-- upvalues: var47 (ref), var30 (ref), var25 (ref)
-		if var47.current == 0 then
-			var30(var25.icon)
+		-- upvalues: var26 (ref), var11 (ref), var6 (ref)
+		if var26.current == 0 then
+			var11(var6.icon)
 		end
-	end, { var25.icon })
-	local var53 = reactModule.useMemo(function()
-		-- upvalues: var31 (ref)
+	end, { var6.icon })
+	local var32 = reactModule.useMemo(function()
+		-- upvalues: var12 (ref)
 		local t = {}
 		
-		for i, v in var31 do
+		for i, v in var12 do
 			table.insert(t, v)
 		end
 		return t
-	end, { var31 })
-	local var54 = var27 ~= nil
-	local var55 = #var53 < 10 and var54
-	local var56 = if var53[1] then var53[1].id else nil
-	local var57 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var44 (ref)
-		var44(function(p3)
-			-- upvalues: p1 (ref), p2 (ref)
-			local cloned = table.clone(p3)
-			cloned[p1] = if p2 then true else nil
+	end, { var12 })
+	local var33 = var8 ~= nil
+	local var34 = #var32 < 10 and var33
+	local var35 = if var32[1] then var32[1].id else nil
+	local var36 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var23 (ref)
+		var23(function(p4)
+			-- upvalues: p2 (ref), p3 (ref)
+			local cloned = table.clone(p4)
+			cloned[p2] = if p3 then true else nil
 			
 			return cloned
 		end)
 	end, {})
-	local var58 = reactModule.useCallback(function()
-		-- upvalues: var47 (ref)
-		var47.current += 1
+	local var37 = reactModule.useCallback(function()
+		-- upvalues: var26 (ref)
+		var26.current += 1
 	end, {})
-	local var59 = reactModule.useCallback(function()
-		-- upvalues: var47 (ref)
-		var47.current = math.max(0, var47.current - 1)
+	local var38 = reactModule.useCallback(function()
+		-- upvalues: var26 (ref)
+		var26.current = math.max(0, var26.current - 1)
 	end, {})
-	local var60 = reactModule.useCallback(function()
-		-- upvalues: var46 (ref)
-		var46("")
+	local var39 = reactModule.useCallback(function()
+		-- upvalues: var25 (ref)
+		var25("")
 	end, {})
-	local var61 = reactModule.useCallback(function(p4)
-		-- upvalues: var54 (ref), MEDIA_SELECTION_CAPTURE_LIBRARY (write), var56 (ref), MEDIA_SELECTION_DELETE (write)
+	local var40 = reactModule.useCallback(function(p2)
+		-- upvalues: var33 (ref), MEDIA_SELECTION_CAPTURE_LIBRARY (write), var35 (ref), MEDIA_SELECTION_DELETE (write)
 		local t = {}
 		
-		if var54 then
+		if var33 then
 			table.insert(t, {
 				id = "capture_library",
 				icon = "icons/common/image",
 				text = MEDIA_SELECTION_CAPTURE_LIBRARY
 			})
 		end
-		if p4 ~= "icon" and p4 ~= var56 and p4 ~= "empty" then
+		if p2 ~= "icon" and p2 ~= var35 and p2 ~= "empty" then
 			table.insert(t, {
 				id = "delete",
 				icon = "icons/common/trash",
@@ -145,171 +145,171 @@ return function(p0)
 		end
 		return { { items = t } }
 	end, {
-		var54,
+		var33,
 		MEDIA_SELECTION_CAPTURE_LIBRARY,
 		MEDIA_SELECTION_DELETE,
-		var56
+		var35
 	})
-	local var62 = reactModule.useCallback(function(p5)
-		-- upvalues: var43 (ref), var48 (ref), var38 (ref), var36 (ref)
-		if var43[p5] or var48.current and p5 ~= "icon" and p5 ~= "empty" then
+	local var41 = reactModule.useCallback(function(p2)
+		-- upvalues: var22 (ref), var27 (ref), var19 (ref), var17 (ref)
+		if var22[p2] or var27.current and p2 ~= "icon" and p2 ~= "empty" then
 			return
 		end
-		var38(p5)
-		var36(true)
-	end, { var43 })
-	local var63 = reactModule.useCallback(function(p6)
-		-- upvalues: var36 (ref), var48 (ref), var37 (ref), var54 (ref), var42 (ref), editor_1 (ref), var27 (ref), var43 (ref), var31 (ref), var58 (ref), var57 (ref), var32 (ref), var33 (ref), var34 (ref), var52 (ref), getGameMediaStore (copy), p0 (ref), fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var46 (ref), var24 (ref), var59 (ref)
-		var36(false)
+		var19(p2)
+		var17(true)
+	end, { var22 })
+	local var42 = reactModule.useCallback(function(p2)
+		-- upvalues: var17 (ref), var27 (ref), var18 (ref), var33 (ref), var21 (ref), editor_1 (ref), var8 (ref), var22 (ref), var12 (ref), var37 (ref), var36 (ref), var13 (ref), var14 (ref), var15 (ref), var31 (ref), getGameMediaStore (copy), p1 (ref), fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var25 (ref), var5 (ref), var38 (ref)
+		var17(false)
 		
-		if var48.current and var37 ~= "icon" and var37 ~= "empty" then return end
-		if p6 == "capture_library" and var54 then
-			var42(var37)
+		if var27.current and var18 ~= "icon" and var18 ~= "empty" then return end
+		if p2 == "capture_library" and var33 then
+			var21(var18)
 			editor_1("captureSelection")
 			
 			return
-		elseif p6 == "delete" then
-			local var82 = var37
+		elseif p2 == "delete" then
+			local var43 = var18
 			
-			if var82 == nil or var27 == nil or var43[var82] then return end
-			local var83 = nil
-			local var84 = nil
+			if var43 == nil or var8 == nil or var22[var43] then return end
+			local var44 = nil
+			local var45 = nil
 			
-			for i, v in var31 do
-				if v.id == var82 then
-					var83 = i
-					var84 = v
+			for i, v in var12 do
+				if v.id == var43 then
+					var44 = i
+					var45 = v
 					break
 				end
 			end
-			if var83 == nil or var84 == nil then return end
-			local var85 = var84
+			if var44 == nil or var45 == nil then return end
+			local var46 = var45
 			
-			if not var85.assetResourceName then return end
-			local assetResourceName = var85.assetResourceName
-			var48.current = true
-			var58()
-			var57(var82, true)
-			var32(function(p7)
-				-- upvalues: var82 (ref)
+			if not var46.assetResourceName then return end
+			local assetResourceName = var46.assetResourceName
+			var27.current = true
+			var37()
+			var36(var43, true)
+			var13(function(p3)
+				-- upvalues: var43 (ref)
 				local t = {}
 				
-				for i, v in p7 do
-					if v.id ~= var82 then
+				for i, v in p3 do
+					if v.id ~= var43 then
 						table.insert(t, v)
 					end
 				end
 				return t
 			end)
 			
-			if var33.kind == "thumbnail" and var33.id == var82 then
-				var34({ kind = "icon" })
+			if var14.kind == "thumbnail" and var14.id == var43 then
+				var15({ kind = "icon" })
 			end
-			var52.removePreview(var27, assetResourceName):andThen(function()
-				-- upvalues: getGameMediaStore (copy), p0 (copy)
-				getGameMediaStore().fetchGameMedia(tostring(p0.universeId))
-			end):catch(function(p8)
-				-- upvalues: fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var46 (copy), var24 (copy), var32 (copy), var82 (ref), var83 (write), var85 (ref)
+			var31.removePreview(var8, assetResourceName):andThen(function()
+				-- upvalues: getGameMediaStore (copy), p1 (copy)
+				getGameMediaStore().fetchGameMedia(tostring(p1.universeId))
+			end):catch(function(p4)
+				-- upvalues: fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var25 (copy), var5 (copy), var13 (copy), var43 (ref), var44 (write), var46 (ref)
 				if fFlagMediaSelectorErrorLoggingModule then
-					warn(`[BuildExperience] MediaSelector delete failed: {formatErrorModule(p8)}`)
-					var46(var24.mediaError)
+					warn(`[BuildExperience] MediaSelector delete failed: {formatErrorModule(p4)}`)
+					var25(var5.mediaError)
 				end
-				var32(function(p9)
-					-- upvalues: var82 (copy), var83 (copy), var85 (copy)
-					for i, v in p9 do
-						if v.id == var82 then
-							return p9
+				var13(function(p5)
+					-- upvalues: var43 (copy), var44 (copy), var46 (copy)
+					for i, v in p5 do
+						if v.id == var43 then
+							return p5
 						end
 					end
-					local cloned = table.clone(p9)
-					table.insert(cloned, math.min(var83, #cloned + 1), var85)
+					local cloned = table.clone(p5)
+					table.insert(cloned, math.min(var44, #cloned + 1), var46)
 					
 					return cloned
 				end)
 			end):finally(function()
-				-- upvalues: var48 (copy), var57 (copy), var82 (ref), var59 (copy)
-				var48.current = false
-				var57(var82, false)
-				var59()
+				-- upvalues: var27 (copy), var36 (copy), var43 (ref), var38 (copy)
+				var27.current = false
+				var36(var43, false)
+				var38()
 			end)
 		end
 	end, {
-		var37, var33, var31, var52, var27, var54, var43, var58, var59, var57, var24,
-		p0.universeId
+		var18, var14, var12, var31, var8, var33, var22, var37, var38, var36, var5,
+		p1.universeId
 	})
-	local var64 = reactModule.useCallback(function()
-		-- upvalues: var36 (ref)
-		var36(false)
+	local var47 = reactModule.useCallback(function()
+		-- upvalues: var17 (ref)
+		var17(false)
 	end, {})
-	local var65 = reactModule.useCallback(function()
-		-- upvalues: var34 (ref)
-		var34({ kind = "icon" })
+	local var48 = reactModule.useCallback(function()
+		-- upvalues: var15 (ref)
+		var15({ kind = "icon" })
 	end, {})
-	local var66 = reactModule.useCallback(function(p10)
-		-- upvalues: var34 (ref)
-		var34({ kind = "thumbnail", id = p10 })
+	local var49 = reactModule.useCallback(function(p3)
+		-- upvalues: var15 (ref)
+		var15({ kind = "thumbnail", id = p3 })
 	end, {})
-	local var67 = reactModule.useCallback(function()
-		-- upvalues: var62 (ref)
-		var62("icon")
-	end, { var62 })
-	local var68 = reactModule.useCallback(function()
-		-- upvalues: var62 (ref)
-		var62("empty")
-	end, { var62 })
-	local var69 = reactModule.useCallback(function(p11)
-		-- upvalues: var62 (ref)
-		var62(p11)
-	end, { var62 })
-	local var70 = reactModule.useCallback(function(p12)
-		-- upvalues: var41 (ref), var27 (ref), var43 (ref), editor_1 (ref), var42 (ref), var51 (ref), var49 (ref), var58 (ref), var57 (ref), var34 (ref), var32 (ref), uploadCaptureAsyncModule (copy), getThumbnailUrlAsyncModule (copy), promiseModule (copy), var26 (ref), createImageAssetAsyncModule (copy), var52 (ref), var30 (ref), getGameMediaStore (copy), p0 (ref), fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var46 (ref), var24 (ref), var59 (ref)
-		if var41 == nil or var27 == nil or var43[var41] then return end
+	local var50 = reactModule.useCallback(function()
+		-- upvalues: var41 (ref)
+		var41("icon")
+	end, { var41 })
+	local var51 = reactModule.useCallback(function()
+		-- upvalues: var41 (ref)
+		var41("empty")
+	end, { var41 })
+	local var52 = reactModule.useCallback(function(p3)
+		-- upvalues: var41 (ref)
+		var41(p3)
+	end, { var41 })
+	local var53 = reactModule.useCallback(function(p3)
+		-- upvalues: var20 (ref), var8 (ref), var22 (ref), editor_1 (ref), var21 (ref), var30 (ref), var28 (ref), var37 (ref), var36 (ref), var15 (ref), var13 (ref), uploadCaptureAsyncModule (copy), getThumbnailUrlAsyncModule (copy), promiseModule (copy), var7 (ref), createImageAssetAsyncModule (copy), var31 (ref), var11 (ref), getGameMediaStore (copy), p1 (ref), fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var25 (ref), var5 (ref), var38 (ref)
+		if var20 == nil or var8 == nil or var22[var20] then return end
 		editor_1("editor")
-		var42(nil)
-		local var88 = nil
-		local var89 = nil
+		var21(nil)
+		local var54 = nil
+		local var55 = nil
 		
-		if var41 ~= "icon" and var41 ~= "empty" then
-			for i, v in var51.current do
-				if v.id == var41 then
-					var88 = i
-					var89 = v
+		if var20 ~= "icon" and var20 ~= "empty" then
+			for i, v in var30.current do
+				if v.id == var20 then
+					var54 = i
+					var55 = v
 					break
 				end
 			end
-			if var88 == nil or var89 == nil then return end
-			if not var89.assetResourceName then return end
+			if var54 == nil or var55 == nil then return end
+			if not var55.assetResourceName then return end
 		end
 		local current
 		local _ = nil
 		
-		if var41 == "empty" then
-			current = `thumbnail_pending_{var49.current}`
-			var49.current += 1
+		if var20 == "empty" then
+			current = `thumbnail_pending_{var28.current}`
+			var28.current += 1
 		else
-			current = var41
+			current = var20
 		end
-		var58()
-		var57(current, true)
+		var37()
+		var36(current, true)
 		
-		if var41 == "icon" then
-			var34({ kind = "icon" })
-		elseif var41 == "empty" then
-			var32(function(p13)
+		if var20 == "icon" then
+			var15({ kind = "icon" })
+		elseif var20 == "empty" then
+			var13(function(p4)
 				-- upvalues: current (write)
-				local cloned = table.clone(p13)
+				local cloned = table.clone(p4)
 				table.insert(cloned, { mediaType = "image", assetSource = nil, id = current })
 				
 				return cloned
 			end)
-			var34({ kind = "thumbnail", id = current })
+			var15({ kind = "thumbnail", id = current })
 		else
-			var32(function(p14)
-				-- upvalues: var41 (ref)
-				local cloned = table.clone(p14)
+			var13(function(p4)
+				-- upvalues: var20 (ref)
+				local cloned = table.clone(p4)
 				
 				for i, v in cloned do
-					if v.id == var41 then
+					if v.id == var20 then
 						cloned[i] = { mediaType = "image", assetSource = nil, id = v.id }
 						
 						return cloned
@@ -318,53 +318,53 @@ return function(p0)
 				return cloned
 			end)
 		end
-		local var91 = uploadCaptureAsyncModule(p12):andThen(function(p17)
+		local var56 = uploadCaptureAsyncModule(p3):andThen(function(p4)
 			-- upvalues: getThumbnailUrlAsyncModule (copy)
-			return getThumbnailUrlAsyncModule(p17.assetId)
-		end):andThen(function(p15)
-			-- upvalues: promiseModule (copy), var26 (copy), createImageAssetAsyncModule (copy), var41 (ref)
-			if typeof(p15) == "table" and p15.status == "in_review" then
+			return getThumbnailUrlAsyncModule(p4.assetId)
+		end):andThen(function(p4)
+			-- upvalues: promiseModule (copy), var7 (copy), createImageAssetAsyncModule (copy), var20 (ref)
+			if typeof(p4) == "table" and p4.status == "in_review" then
 				return promiseModule.reject({
 					code = "IN_REVIEW",
 					message = "Capture is under moderation review"
 				})
 			end
-			local imageUrl = p15.imageUrl
+			local imageUrl = p4.imageUrl
 			
-			return createImageAssetAsyncModule(imageUrl, nil, var41 == "icon", if var26 then {
-				creatorType = var26.creatorType,
-				creatorTargetId = var26.creatorTargetId
-			} else nil):andThen(function(p16)
+			return createImageAssetAsyncModule(imageUrl, nil, var20 == "icon", if var7 then {
+				creatorType = var7.creatorType,
+				creatorTargetId = var7.creatorTargetId
+			} else nil):andThen(function(p5)
 				-- upvalues: imageUrl (ref)
 				return {
-					imageAssetId = tostring(p16.assetId),
+					imageAssetId = tostring(p5.assetId),
 					displayUrl = imageUrl
 				}
 			end)
 		end)
-		local var92 = var91:andThen(function(p18)
-			return p18.imageAssetId
+		local var57 = var56:andThen(function(p4)
+			return p4.imageAssetId
 		end)
-		;(if var41 == "icon" then var52.setIcon(var27, var92) elseif var41 == "empty" then var52.addPreview(var27, var92) else var52.replacePreview(var27, var92, var89.assetResourceName)):andThen(function()
-			-- upvalues: var91 (ref)
-			return var91
-		end):andThen(function(p23)
-			-- upvalues: var41 (ref), var30 (copy), var32 (copy), current (write), var34 (copy), getGameMediaStore (copy), p0 (copy)
-			if var41 == "icon" then
-				var30(p23.displayUrl)
+		;(if var20 == "icon" then var31.setIcon(var8, var57) elseif var20 == "empty" then var31.addPreview(var8, var57) else var31.replacePreview(var8, var57, var55.assetResourceName)):andThen(function()
+			-- upvalues: var56 (ref)
+			return var56
+		end):andThen(function(p4)
+			-- upvalues: var20 (ref), var11 (copy), var13 (copy), current (write), var15 (copy), getGameMediaStore (copy), p1 (copy)
+			if var20 == "icon" then
+				var11(p4.displayUrl)
 			else
-				local imageAssetId = p23.imageAssetId
-				var32(function(p24)
-					-- upvalues: current (copy), imageAssetId (ref), p23 (ref)
-					local cloned = table.clone(p24)
+				local imageAssetId = p4.imageAssetId
+				var13(function(p5)
+					-- upvalues: current (copy), imageAssetId (ref), p4 (ref)
+					local cloned = table.clone(p5)
 					
 					for i, v in cloned do
 						if v.id == current then
 							cloned[i] = {
 								mediaType = "image",
 								id = imageAssetId,
-								assetSource = p23.displayUrl,
-								assetResourceName = `assets/{p23.imageAssetId}`
+								assetSource = p4.displayUrl,
+								assetResourceName = `assets/{p4.imageAssetId}`
 							}
 							
 							return cloned
@@ -372,45 +372,45 @@ return function(p0)
 					end
 					return cloned
 				end)
-				var34(function(p25)
+				var15(function(p6)
 					-- upvalues: current (copy), imageAssetId (ref)
-					return if p25.kind == "thumbnail" and p25.id == current then { kind = "thumbnail", id = imageAssetId } else p25
+					return if p6.kind == "thumbnail" and p6.id == current then { kind = "thumbnail", id = imageAssetId } else p6
 				end)
 			end
-			getGameMediaStore().fetchGameMedia(tostring(p0.universeId))
-		end):catch(function(p19)
-			-- upvalues: fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var46 (copy), var24 (copy), var41 (ref), var32 (copy), current (write), var34 (copy), var89 (write)
+			getGameMediaStore().fetchGameMedia(tostring(p1.universeId))
+		end):catch(function(p5)
+			-- upvalues: fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var25 (copy), var5 (copy), var20 (ref), var13 (copy), current (write), var15 (copy), var55 (write)
 			if fFlagMediaSelectorErrorLoggingModule then
-				warn(`[BuildExperience] MediaSelector upload failed: {formatErrorModule(p19)}`)
-				var46(var24.mediaError)
+				warn(`[BuildExperience] MediaSelector upload failed: {formatErrorModule(p5)}`)
+				var25(var5.mediaError)
 			end
-			if var41 == "icon" then return end
-			if var41 == "empty" then
-				var32(function(p20)
+			if var20 == "icon" then return end
+			if var20 == "empty" then
+				var13(function(p6)
 					-- upvalues: current (copy)
 					local t = {}
 					
-					for i, v in p20 do
+					for i, v in p6 do
 						if v.id ~= current then
 							table.insert(t, v)
 						end
 					end
 					return t
 				end)
-				var34(function(p21)
+				var15(function(p7)
 					-- upvalues: current (copy)
-					return if p21.kind == "thumbnail" and p21.id == current then { kind = "icon" } else p21
+					return if p7.kind == "thumbnail" and p7.id == current then { kind = "icon" } else p7
 				end)
 				
 				return
 			end
-			var32(function(p22)
-				-- upvalues: current (copy), var89 (ref)
-				local cloned = table.clone(p22)
+			var13(function(p6)
+				-- upvalues: current (copy), var55 (ref)
+				local cloned = table.clone(p6)
 				
 				for i, v in cloned do
 					if v.id == current then
-						cloned[i] = var89
+						cloned[i] = var55
 						
 						return cloned
 					end
@@ -418,24 +418,24 @@ return function(p0)
 				return cloned
 			end)
 		end):finally(function()
-			-- upvalues: var57 (copy), current (write), var59 (copy)
-			var57(current, false)
-			var59()
+			-- upvalues: var36 (copy), current (write), var38 (copy)
+			var36(current, false)
+			var38()
 		end)
 	end, {
-		var41, var52, var27, var26, var43, var58, var59, var57, var24, p0.universeId
+		var20, var31, var8, var7, var22, var37, var38, var36, var5, p1.universeId
 	})
-	local var71 = reactModule.useCallback(function()
-		-- upvalues: editor_1 (ref), var42 (ref)
+	local var58 = reactModule.useCallback(function()
+		-- upvalues: editor_1 (ref), var21 (ref)
 		editor_1("editor")
-		var42(nil)
+		var21(nil)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), editor (ref), var71 (ref)
-		local backHandlerRef = p0.backHandlerRef
+		-- upvalues: p1 (ref), editor (ref), var58 (ref)
+		local backHandlerRef = p1.backHandlerRef
 		
 		if backHandlerRef then
-			backHandlerRef.current = if editor == "captureSelection" then var71 else nil
+			backHandlerRef.current = if editor == "captureSelection" then var58 else nil
 		end
 		return function()
 			-- upvalues: backHandlerRef (ref)
@@ -443,107 +443,107 @@ return function(p0)
 				backHandlerRef.current = nil
 			end
 		end
-	end, { editor, var71, p0.backHandlerRef })
-	local var72 = reactModule.useMemo(function()
-		-- upvalues: var37 (ref), var61 (ref)
-		return if var37 then var61(var37) else { { items = {} } }
-	end, { var37, var61 })
+	end, { editor, var58, p1.backHandlerRef })
+	local var59 = reactModule.useMemo(function()
+		-- upvalues: var18 (ref), var40 (ref)
+		return if var18 then var40(var18) else { { items = {} } }
+	end, { var18, var40 })
 	
 	if editor == "captureSelection" then
 		return reactModule.createElement(captureSelectionViewModule, {
-			captureSource = var50.current,
-			onCaptureConfirmed = var70
+			captureSource = var29.current,
+			onCaptureConfirmed = var53
 		})
 	end
 	local mediaType = nil
 	local assetSource = nil
-	local var73 = false
+	local var60 = false
 	local id = false
 	
-	if var33.kind == "icon" then
-		var73 = true
-		assetSource = var29
+	if var14.kind == "icon" then
+		var60 = true
+		assetSource = var10
 		mediaType = "image"
-		id = var43.icon or false
-	elseif var33.kind == "thumbnail" then
-		for i, v in var53 do
-			if v.id == var33.id then
+		id = var22.icon or false
+	elseif var14.kind == "thumbnail" then
+		for i, v in var32 do
+			if v.id == var14.id then
 				mediaType = v.mediaType
 				assetSource = v.assetSource
-				id = var43[v.id] or false
+				id = var22[v.id] or false
 				break
 			end
 		end
 	end
 	local t = {}
-	local var76 = var35 and var37 == "icon"
+	local var61 = var16 and var18 == "icon"
 	t.IconSlot = reactModule.createElement(filmstripSlotModule, {
 		aspectRatio = "square",
 		mediaType = "image",
 		isFilled = true,
 		LayoutOrder = 1,
-		assetSource = var29,
-		isSelected = var33.kind == "icon",
-		isLoading = var43.icon or false,
-		isMenuOpen = var76,
-		menuItems = if var76 then var72 else nil,
-		onMenuActivated = var63,
-		onMenuClose = var64,
-		onSelect = var65,
-		onEditPressed = if var54 then var67 else nil
+		assetSource = var10,
+		isSelected = var14.kind == "icon",
+		isLoading = var22.icon or false,
+		isMenuOpen = var61,
+		menuItems = if var61 then var59 else nil,
+		onMenuActivated = var42,
+		onMenuClose = var47,
+		onSelect = var48,
+		onEditPressed = if var33 then var50 else nil
 	})
 	
-	for i, v in var53 do
+	for i, v in var32 do
 		local id_1 = v.id
-		local var78 = var35 and var37 == id_1
+		local var62 = var16 and var18 == id_1
 		t[id_1] = reactModule.createElement(filmstripSlotModule, {
 			aspectRatio = "wide",
 			isFilled = true,
 			mediaType = v.mediaType,
 			assetSource = v.assetSource,
-			isSelected = var33.kind == "thumbnail" and var33.id == id_1,
-			isLoading = var43[id_1] or false,
-			isMenuOpen = var78,
-			menuItems = if var78 then var72 else nil,
-			onMenuActivated = var63,
-			onMenuClose = var64,
+			isSelected = var14.kind == "thumbnail" and var14.id == id_1,
+			isLoading = var22[id_1] or false,
+			isMenuOpen = var62,
+			menuItems = if var62 then var59 else nil,
+			onMenuActivated = var42,
+			onMenuClose = var47,
 			onSelect = function()
-				-- upvalues: var66 (ref), id_1 (ref)
-				var66(id_1)
+				-- upvalues: var49 (ref), id_1 (ref)
+				var49(id_1)
 			end,
-			onEditPressed = if var54 or id_1 ~= var56 then function()
-				-- upvalues: var69 (ref), id_1 (ref)
-				var69(id_1)
+			onEditPressed = if var33 or id_1 ~= var35 then function()
+				-- upvalues: var52 (ref), id_1 (ref)
+				var52(id_1)
 			end else nil,
 			LayoutOrder = i + 1
 		})
 	end
-	if var55 then
-		local var77 = var35 and var37 == "empty"
+	if var34 then
+		local var63 = var16 and var18 == "empty"
 		t.EmptySlot = reactModule.createElement(filmstripSlotModule, {
 			aspectRatio = "wide",
 			mediaType = nil,
 			assetSource = nil,
 			isFilled = false,
 			isSelected = false,
-			isMenuOpen = var77,
-			menuItems = if var77 then var72 else nil,
-			onMenuActivated = var63,
-			onMenuClose = var64,
-			onSelect = var68,
-			onEmptySlotPressed = var68,
-			LayoutOrder = #var53 + 2
+			isMenuOpen = var63,
+			menuItems = if var63 then var59 else nil,
+			onMenuActivated = var42,
+			onMenuClose = var47,
+			onSelect = var51,
+			onEmptySlotPressed = var51,
+			LayoutOrder = #var32 + 2
 		})
 	end
 	return reactModule.createElement(view, { tag = "col gap-xlarge size-full" }, {
-		ErrorSnackbar = if fFlagMediaSelectorErrorLoggingModule and var45 ~= "" then reactModule.createElement(view, {
+		ErrorSnackbar = if fFlagMediaSelectorErrorLoggingModule and var24 ~= "" then reactModule.createElement(view, {
 			tag = "row align-x-center size-full-0 auto-y padding-x-large",
 			LayoutOrder = 0
 		}, {
 			Snackbar = reactModule.createElement(snackbar, {
 				testId = "MediaSelector.error-snackbar",
-				title = var45,
-				onClose = var60
+				title = var24,
+				onClose = var39
 			})
 		}) else nil,
 		Preview = reactModule.createElement(view, {
@@ -558,7 +558,7 @@ return function(p0)
 			PreviewContent = reactModule.createElement(mediaPreviewModule, {
 				mediaType = mediaType,
 				assetSource = assetSource,
-				isIcon = var73,
+				isIcon = var60,
 				isLoading = id
 			})
 		}),
@@ -567,14 +567,14 @@ return function(p0)
 			LayoutOrder = 2,
 			testId = "MediaSelector.Filmstrip",
 			padding = {
-				top = UDim.new(0, var28.Padding.XXLarge),
-				bottom = UDim.new(0, var28.Padding.XXLarge),
-				left = UDim.new(0, var22.margin),
-				right = UDim.new(0, var22.margin)
+				top = UDim.new(0, var9.Padding.XXLarge),
+				bottom = UDim.new(0, var9.Padding.XXLarge),
+				left = UDim.new(0, var3.margin),
+				right = UDim.new(0, var3.margin)
 			},
 			layout = {
 				FillDirection = Enum.FillDirection.Horizontal,
-				Padding = UDim.new(0, var28.Gap.Medium)
+				Padding = UDim.new(0, var9.Gap.Medium)
 			},
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.X,
@@ -585,7 +585,7 @@ return function(p0)
 		}, t) else reactModule.createElement(scrollView, {
 			LayoutOrder = 2,
 			testId = "MediaSelector.Filmstrip",
-			Size = UDim2.new(1, 0, 0, var28.Size.Size_2400 + 2 * var28.Padding.Medium),
+			Size = UDim2.new(1, 0, 0, var9.Size.Size_2400 + 2 * var9.Padding.Medium),
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.X,
 				CanvasSize = UDim2.new(0, 0, 1, 0),

@@ -8,27 +8,27 @@ local logging = require(parent.AppCommonLib).Logging
 
 return {
 	KeyMapper = "luaapp.voicechatoptinstatus",
-	Fetch = function(p0)
+	Fetch = function(p1)
 		-- upvalues: performFetch (ref), getVoiceChatOptInStatusModule (ref), setVoiceChatOptInStatusModule (ref), promiseModule (ref), logging (ref)
-		return performFetch.Single("luaapp.voicechatoptinstatus", function(p1)
-			-- upvalues: getVoiceChatOptInStatusModule (copy), p0 (ref), setVoiceChatOptInStatusModule (copy), promiseModule (copy), logging (copy)
-			return getVoiceChatOptInStatusModule(p0):andThen(function(p2)
-				-- upvalues: p1 (ref), setVoiceChatOptInStatusModule (copy), promiseModule (copy), logging (copy)
-				local responseBody = p2.responseBody
+		return performFetch.Single("luaapp.voicechatoptinstatus", function(p2)
+			-- upvalues: getVoiceChatOptInStatusModule (copy), p1 (ref), setVoiceChatOptInStatusModule (copy), promiseModule (copy), logging (copy)
+			return getVoiceChatOptInStatusModule(p1):andThen(function(p3)
+				-- upvalues: p2 (ref), setVoiceChatOptInStatusModule (copy), promiseModule (copy), logging (copy)
+				local responseBody = p3.responseBody
 				
 				if responseBody == nil or responseBody.isUserOptIn == nil then
 					logging.warn("Response from GetVoiceChatOptInStatus is malformed!")
 					
 					return promiseModule.reject({ HttpError = Enum.HttpError.OK })
 				end
-				p1:dispatch(setVoiceChatOptInStatusModule(responseBody.isUserOptIn))
+				p2:dispatch(setVoiceChatOptInStatusModule(responseBody.isUserOptIn))
 				
-				return promiseModule.resolve(p2)
+				return promiseModule.resolve(p3)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p3)
+	GetFetchingStatus = function(p1)
 		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p3, "luaapp.voicechatoptinstatus")
+		return performFetch.GetStatus(p1, "luaapp.voicechatoptinstatus")
 	end
 }

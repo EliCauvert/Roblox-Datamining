@@ -2,20 +2,20 @@
 local httpModule = require(networkingVirtualEvents.Parent.Http)
 local _ = require(networkingVirtualEvents.types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: httpModule (ref)
-	return p0.POST(script.Name, function(p1, p2, p3)
+	return p1.POST(script.Name, function(p2, p3, p4)
 		-- upvalues: httpModule (copy)
-		local eventTime = p3.eventTime
+		local eventTime = p4.eventTime
 		
-		return p1(httpModule.Url.APIS_URL):path("virtual-events"):path("v1"):path("virtual-events"):id(p2):body({
-			title = p3.title,
-			description = p3.description,
+		return p2(httpModule.Url.APIS_URL):path("virtual-events"):path("v1"):path("virtual-events"):id(p3):body({
+			title = p4.title,
+			description = p4.description,
 			eventTime = if eventTime then {
 				startTime = eventTime.startTime:ToIsoDate(),
 				endTime = eventTime.endTime:ToIsoDate()
 			} else nil,
-			universeId = p3.universeId
+			universeId = p4.universeId
 		})
 	end)
 end

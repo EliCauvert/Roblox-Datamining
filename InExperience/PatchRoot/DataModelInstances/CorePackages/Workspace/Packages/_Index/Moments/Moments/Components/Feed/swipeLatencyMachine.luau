@@ -1,34 +1,34 @@
 ﻿local _ = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
 
-return function(p0)
-	local now = p0.now
-	local var0 = nil
-	local var1 = 0
+return function(p1)
+	local now = p1.now
+	local var1 = nil
+	local var2 = 0
 	
 	local function _()
-		-- upvalues: var0 (write), p0 (ref)
-		if var0 == nil then return end
-		local settledAt = var0.settledAt
-		local frameAt = var0.frameAt
+		-- upvalues: var1 (write), p1 (ref)
+		if var1 == nil then return end
+		local settledAt = var1.settledAt
+		local frameAt = var1.frameAt
 		
 		if settledAt == nil or frameAt == nil then
 			return
 		end
-		var0 = nil
-		p0.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var0.committedAt), var0.dimensions)
+		var1 = nil
+		p1.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var1.committedAt), var1.dimensions)
 	end
 	
-	local schedule = p0.schedule or task.delay
+	local schedule = p1.schedule or task.delay
 	
-	local _ = function(p1)
-		-- upvalues: p0 (ref), schedule (ref), var1 (write), var0 (write)
-		if p0.capMs <= 0 then
+	local _ = function(p2)
+		-- upvalues: p1 (ref), schedule (ref), var2 (write), var1 (write)
+		if p1.capMs <= 0 then
 			return
 		end
-		schedule(p0.capMs / 1000, function()
-			-- upvalues: p1 (ref), var1 (copy), var0 (copy)
-			if p1 == var1 then
-				var0 = nil
+		schedule(p1.capMs / 1000, function()
+			-- upvalues: p2 (ref), var2 (copy), var1 (copy)
+			if p2 == var2 then
+				var1 = nil
 				
 				return
 			end
@@ -37,28 +37,28 @@ return function(p0)
 	
 	return {
 		start = function(p2, p3, p4)
-			-- upvalues: var1 (write), now (ref), var0 (write), p0 (ref), schedule (ref)
-			var1 += 1
+			-- upvalues: var2 (write), now (ref), var1 (write), p1 (ref), schedule (ref)
+			var2 += 1
 			local var3 = now()
-			var0 = {
+			var1 = {
 				committedAt = var3,
 				settledAt = if p2 then var3 else nil,
 				frameAt = if p3 then var3 else nil,
 				dimensions = p4
 			}
-			local var4 = var1
+			local var4 = var2
 			
-			if p0.capMs > 0 then
-				schedule(p0.capMs / 1000, function()
-					-- upvalues: var4 (ref), var1 (copy), var0 (copy)
-					if var4 == var1 then
-						var0 = nil
+			if p1.capMs > 0 then
+				schedule(p1.capMs / 1000, function()
+					-- upvalues: var4 (ref), var2 (copy), var1 (copy)
+					if var4 == var2 then
+						var1 = nil
 						
 						return
 					end
 				end)
 			end
-			local var5 = var0
+			local var5 = var1
 			
 			if var5 == nil then return end
 			local settledAt = var5.settledAt
@@ -66,27 +66,27 @@ return function(p0)
 			
 			if settledAt ~= nil then
 				if frameAt == nil then return end
-				var0 = nil
-				p0.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var5.committedAt), var5.dimensions)
+				var1 = nil
+				p1.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var5.committedAt), var5.dimensions)
 			end
 		end,
-		update = function(p5, p6)
-			-- upvalues: var0 (write), now (ref), p0 (ref)
-			if var0 == nil then return end
-			if var0.settledAt == nil and p5 then
-				var0.settledAt = now()
+		update = function(p2, p3)
+			-- upvalues: var1 (write), now (ref), p1 (ref)
+			if var1 == nil then return end
+			if var1.settledAt == nil and p2 then
+				var1.settledAt = now()
 			end
-			if var0.frameAt == nil and p6 then
-				var0.frameAt = now()
+			if var1.frameAt == nil and p3 then
+				var1.frameAt = now()
 			end
-			if var0 == nil then return end
-			local settledAt = var0.settledAt
-			local frameAt = var0.frameAt
+			if var1 == nil then return end
+			local settledAt = var1.settledAt
+			local frameAt = var1.frameAt
 			
 			if settledAt ~= nil then
 				if frameAt == nil then return end
-				var0 = nil
-				p0.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var0.committedAt), var0.dimensions)
+				var1 = nil
+				p1.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var1.committedAt), var1.dimensions)
 			end
 		end
 	}

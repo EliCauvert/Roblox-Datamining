@@ -10,56 +10,56 @@ local t = {
 	variant = require(script.Parent.MessageFtuxTooltipVariant).None
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useMessageFtuxTooltipModule (ref), reactModule (ref), text (ref), enums (ref)
-	local var5 = cryoModule.Dictionary.union(t, p0)
-	local var6 = foundationModule.Hooks.useTokens()
-	local var7 = useMessageFtuxTooltipModule(var5.variant)
-	local var8, var9 = reactModule.useState(false)
-	local var10, var11 = reactModule.useState(false)
+	local var1 = cryoModule.Dictionary.union(t, p1)
+	local var2 = foundationModule.Hooks.useTokens()
+	local var3 = useMessageFtuxTooltipModule(var1.variant)
+	local var4, var5 = reactModule.useState(false)
+	local var6, var7 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), text (copy), var7 (ref), var9 (ref), var5 (ref), var11 (ref)
-		local var15
-		local titleSmall = var6.Typography.TitleSmall
-		local var14 = text.GetTextWidth(var7.text, titleSmall.Font, titleSmall.FontSize) + var6.Padding.Small * 2
+		-- upvalues: var2 (ref), text (copy), var3 (ref), var5 (ref), var1 (ref), var7 (ref)
+		local var8
+		local titleSmall = var2.Typography.TitleSmall
+		local var9 = text.GetTextWidth(var3.text, titleSmall.Font, titleSmall.FontSize) + var2.Padding.Small * 2
 		
-		if var5.messageRef.current then
-			var15 = var5.messageRef.current.AbsoluteSize.X < var14
-			var15 = nil
+		if var1.messageRef.current then
+			var8 = var1.messageRef.current.AbsoluteSize.X < var9
+			var8 = nil
 		else
-			var15 = false
+			var8 = false
 		end
-		var9(var15)
-		var11(true)
-	end, { var7.text, var6 })
-	local var12, var13 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var5 (ref), enums (copy), var6 (ref)
-		local var16 = if var8 then if var5.isReversed then enums.PopoverAlign.Start else enums.PopoverAlign.End elseif var5.isReversed then enums.PopoverAlign.End else enums.PopoverAlign.Start
+		var5(var8)
+		var7(true)
+	end, { var3.text, var2 })
+	local var8, var9 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), var1 (ref), enums (copy), var2 (ref)
+		local var10 = if var4 then if var1.isReversed then enums.PopoverAlign.Start else enums.PopoverAlign.End elseif var1.isReversed then enums.PopoverAlign.End else enums.PopoverAlign.Start
 		
-		if var8 then
-			return var16, 0
-		elseif var5.isReversed then
-			return var16, var6.Padding.Medium
+		if var4 then
+			return var10, 0
+		elseif var1.isReversed then
+			return var10, var2.Padding.Medium
 		end
-		return var16, -var6.Padding.Medium
-	end, { var8, var5.isReversed, var6 })
+		return var10, -var2.Padding.Medium
+	end, { var4, var1.isReversed, var2 })
 	
-	return if var7.isDismissed then nil else reactModule.createElement(foundationModule.Popover.Root, { isOpen = var10 }, {
-		Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { anchorRef = var5.messageRef }),
+	return if var3.isDismissed then nil else reactModule.createElement(foundationModule.Popover.Root, { isOpen = var6 }, {
+		Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { anchorRef = var1.messageRef }),
 		Content = reactModule.createElement(foundationModule.Popover.Content, {
 			hasArrow = true,
 			side = {
 				position = foundationModule.Enums.PopoverSide.Bottom,
-				offset = -var6.Padding.Small
+				offset = -var2.Padding.Small
 			},
-			align = { position = var12, offset = var13 },
+			align = { position = var8, offset = var9 },
 			radius = foundationModule.Enums.Radius.Small,
-			backgroundStyle = var6.Color.Content.Emphasis,
-			onPressedOutside = var7.handleDismiss
+			backgroundStyle = var2.Color.Content.Emphasis,
+			onPressedOutside = var3.handleDismiss
 		}, {
 			TooltipText = reactModule.createElement(foundationModule.Text, {
 				tag = "auto-xy text-title-small padding-x-small padding-y-xsmall content-inverse-emphasis",
-				Text = var7.text
+				Text = var3.text
 			})
 		})
 	})

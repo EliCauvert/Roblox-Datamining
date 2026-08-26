@@ -1,19 +1,19 @@
 ﻿local circularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
 local signalModule = require(script.Parent.Parent.Parent.Signal)
 local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).ServerJobsFormatting.ChartHeaderNames
-local var2 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
+local var1 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1)
-		return p0.name < p1.name
+	[chartHeaderNames[1]] = function(p1, p2)
+		return p1.name < p2.name
 	end,
-	[chartHeaderNames[2]] = function(p2, p3)
-		return p2.dataStats.dataSet:back().data[1] < p3.dataStats.dataSet:back().data[1]
+	[chartHeaderNames[2]] = function(p1, p2)
+		return p1.dataStats.dataSet:back().data[1] < p2.dataStats.dataSet:back().data[1]
 	end,
-	[chartHeaderNames[3]] = function(p4, p5)
-		return p4.dataStats.dataSet:back().data[2] < p5.dataStats.dataSet:back().data[2]
+	[chartHeaderNames[3]] = function(p1, p2)
+		return p1.dataStats.dataSet:back().data[2] < p2.dataStats.dataSet:back().data[2]
 	end,
-	[chartHeaderNames[4]] = function(p6, p7)
-		return p6.dataStats.dataSet:back().data[3] < p7.dataStats.dataSet:back().data[3]
+	[chartHeaderNames[4]] = function(p1, p2)
+		return p1.dataStats.dataSet:back().data[3] < p2.dataStats.dataSet:back().data[3]
 	end
 }
 local minOfTableModule = require(script.Parent.Parent.Parent.Util.minOfTable)
@@ -36,15 +36,15 @@ function t_1.new()
 	return t
 end
 
-function t_1:setSortType(p8)
+function t_1:setSortType(p1)
 	-- upvalues: t (ref)
-	if t[p8] then
-		self._sortType = p8
+	if t[p1] then
+		self._sortType = p1
 		table.sort(self._sortedJobsData, t[self._sortType])
 		
 		return
 	end
-	error(string.format("attempted to pass invalid sortType: %s", tostring(p8)), 2)
+	error(string.format("attempted to pass invalid sortType: %s", tostring(p1)), 2)
 end
 
 function t_1:getSortType()
@@ -59,15 +59,15 @@ function t_1:getCurrentData()
 	return self._sortedJobsData
 end
 
-function t_1:updateServerJobsData(p9)
-	-- upvalues: circularBufferModule (ref), var2 (ref), maxOfTableModule (ref), minOfTableModule (ref)
+function t_1:updateServerJobsData(p1)
+	-- upvalues: circularBufferModule (ref), var1 (ref), maxOfTableModule (ref), minOfTableModule (ref)
 	self._lastUpdate = os.time()
 	
-	for i, v in pairs(p9) do
+	for i, v in pairs(p1) do
 		if not self._serverJobsData[i] then
-			local var9 = circularBufferModule.new(var2)
-			var9:push_back({ data = v, time = self._lastUpdate })
-			self._serverJobsData[i] = { max = v, min = v, dataSet = var9 }
+			local var2 = circularBufferModule.new(var1)
+			var2:push_back({ data = v, time = self._lastUpdate })
+			self._serverJobsData[i] = { max = v, min = v, dataSet = var2 }
 			table.insert(self._sortedJobsData, { name = i, dataStats = self._serverJobsData[i] })
 			continue
 		end
@@ -81,28 +81,28 @@ function t_1:updateServerJobsData(p9)
 		for v_1, v_2 in pairs(self._serverJobsData[i].min) do
 			t_1[v_1] = v_2
 		end
-		local var12 = self._serverJobsData[i].dataSet:push_back({ data = v, time = self._lastUpdate })
+		local var3 = self._serverJobsData[i].dataSet:push_back({ data = v, time = self._lastUpdate })
 		
-		if var12 then
-			for i_3, v_3 in pairs(var12.data) do
+		if var3 then
+			for i_3, v_3 in pairs(var3.data) do
 				if t[i_3] == v_3 then
-					local var15 = self._serverJobsData[i].dataSet:iterator()
-					local var16 = var15:next()
+					local var4 = self._serverJobsData[i].dataSet:iterator()
+					local var5 = var4:next()
 					t[i_3] = t_1[i_3]
-					while var16 do
-						t[i_3] = if var16.data[i_3] < t[i_3] then t[i_3] else var16.data[i_3]
-						var16 = var15:next()
+					while var5 do
+						t[i_3] = if var5.data[i_3] < t[i_3] then t[i_3] else var5.data[i_3]
+						var5 = var4:next()
 					end
 				end
 			end
-			for i_3, v_3 in pairs(var12.data) do
+			for i_3, v_3 in pairs(var3.data) do
 				if t_1[i_3] == v_3 then
-					local var13 = self._serverJobsData[i].dataSet:iterator()
-					local var14 = var13:next()
+					local var6 = self._serverJobsData[i].dataSet:iterator()
+					local var7 = var6:next()
 					t_1[i_3] = t[i_3]
-					while var14 do
-						t_1[i_3] = if t_1[i_3] < var14.data[i_3] then t_1[i_3] else var14.data[i_3]
-						var14 = var13:next()
+					while var7 do
+						t_1[i_3] = if t_1[i_3] < var7.data[i_3] then t_1[i_3] else var7.data[i_3]
+						var7 = var6:next()
 					end
 				end
 			end
@@ -118,19 +118,19 @@ end
 
 function t_1:start()
 	-- upvalues: getClientReplicatorModule (ref)
-	local var17 = getClientReplicatorModule()
+	local var8 = getClientReplicatorModule()
 	
-	if var17 and not self._statsListenerConnection then
-		self._statsListenerConnection = var17.StatsReceived:connect(function(p10)
+	if var8 and not self._statsListenerConnection then
+		self._statsListenerConnection = var8.StatsReceived:connect(function(p2)
 			-- upvalues: self (ref)
-			local jobs = p10.Jobs
+			local jobs = p2.Jobs
 			
 			if jobs then
 				self:updateServerJobsData(jobs)
 				self._serverJobsUpdated:Fire(self._sortedJobsData)
 			end
 		end)
-		var17:RequestServerStats(true)
+		var8:RequestServerStats(true)
 		self._isRunning = true
 	end
 end

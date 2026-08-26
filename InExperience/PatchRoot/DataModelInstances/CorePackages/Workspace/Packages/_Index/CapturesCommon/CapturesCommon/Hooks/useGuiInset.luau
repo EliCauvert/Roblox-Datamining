@@ -27,7 +27,7 @@ return function()
 		top = guiInset.Y
 	})
 	
-	local var8 = function()
+	local var1 = function()
 		-- upvalues: var7 (ref), guiService (copy)
 		local guiInset, guiInset_1 = guiService:GetGuiInset()
 		var7({
@@ -38,9 +38,9 @@ return function()
 		})
 	end
 	
-	useEventConnection(guiService.SafeZoneOffsetsChanged, var8)
-	useEventConnection(userInputService:GetPropertyChangedSignal("BottomBarSize"), var8)
-	useEventConnection(userInputService:GetPropertyChangedSignal("RightBarSize"), var8)
+	useEventConnection(guiService.SafeZoneOffsetsChanged, var1)
+	useEventConnection(userInputService:GetPropertyChangedSignal("BottomBarSize"), var1)
+	useEventConnection(userInputService:GetPropertyChangedSignal("RightBarSize"), var1)
 	
 	return useState
 end

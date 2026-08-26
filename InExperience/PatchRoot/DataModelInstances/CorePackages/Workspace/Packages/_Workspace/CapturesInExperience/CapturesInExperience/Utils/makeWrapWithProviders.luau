@@ -13,24 +13,24 @@ local capturesPolicyModule = require(parent.App.CapturesPolicy)
 local constantsModule = require(parent.Constants)
 local _ = require(parent.Types)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), roactModule (ref), roactRoduxModule (ref), capturesPolicyModule (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), localization (ref), capturesContextModule (ref), foundationProvider (ref), foundationModule (ref), constantsModule (ref)
-	local var7 = function(p2, p3)
+	local var1 = function(p3, p4)
 		-- upvalues: reactModule (copy)
-		return if p2 then reactModule.createElement("Folder", { Name = p2 }, p3) else p3
+		return if p3 then reactModule.createElement("Folder", { Name = p3 }, p4) else p4
 	end
 	
-	return function(p4, p5, p6, p7)
-		-- upvalues: roactModule (copy), reactModule (copy), roactRoduxModule (copy), p0 (ref), capturesPolicyModule (copy), styleProviderWithDefaultTheme (copy), localizationProvider (copy), localization (copy), p1 (ref), capturesContextModule (copy), var7 (ref), foundationProvider (copy), foundationModule (copy), constantsModule (copy)
-		return roactModule.mount(reactModule.createElement(roactRoduxModule.StoreProvider, { store = p0 }, {
+	return function(p3, p4, p5, p6)
+		-- upvalues: roactModule (copy), reactModule (copy), roactRoduxModule (copy), p1 (ref), capturesPolicyModule (copy), styleProviderWithDefaultTheme (copy), localizationProvider (copy), localization (copy), p2 (ref), capturesContextModule (copy), var1 (ref), foundationProvider (copy), foundationModule (copy), constantsModule (copy)
+		return roactModule.mount(reactModule.createElement(roactRoduxModule.StoreProvider, { store = p1 }, {
 			PolicyProvider = roactModule.createElement(capturesPolicyModule.Provider, { policy = { capturesPolicyModule.Mapper } }, {
 				StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true }, {
 					LocalizationProvider = roactModule.createElement(localizationProvider, {
-						localization = localization.new(p1.LocalizationService.RobloxLocaleId)
+						localization = localization.new(p2.LocalizationService.RobloxLocaleId)
 					}, {
-						ContextProvider = roactModule.createElement(capturesContextModule.Provider, { value = p5 }, {
-							Portal = roactModule.createElement(roactModule.Portal, { target = p4 }, var7(p7, {
-								FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, { p6 })
+						ContextProvider = roactModule.createElement(capturesContextModule.Provider, { value = p4 }, {
+							Portal = roactModule.createElement(roactModule.Portal, { target = p3 }, var1(p6, {
+								FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, { p5 })
 							}))
 						})
 					})

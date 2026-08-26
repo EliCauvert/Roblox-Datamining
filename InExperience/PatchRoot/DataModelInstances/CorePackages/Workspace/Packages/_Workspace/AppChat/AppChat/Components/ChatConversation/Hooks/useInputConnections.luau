@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(false)
 	local var2 = reactModule.useRef(nil)
@@ -17,22 +17,22 @@ return function(p0)
 		end
 		var1.current = false
 	end, {})
-	local var5 = reactModule.useCallback(function(p1)
-		-- upvalues: var1 (ref), var2 (ref), p0 (ref), var3 (ref), var4 (ref)
-		if p1 and not var1.current then
-			var2.current = p0.userInputService.InputBegan:Connect(p0.onInputBegan)
-			var3.current = p0.userInputService.InputEnded:Connect(p0.onInputEnded)
+	local var5 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref), var2 (ref), p1 (ref), var3 (ref), var4 (ref)
+		if p2 and not var1.current then
+			var2.current = p1.userInputService.InputBegan:Connect(p1.onInputBegan)
+			var3.current = p1.userInputService.InputEnded:Connect(p1.onInputEnded)
 			var1.current = true
 			
 			return
-		elseif not p1 and var1.current then
+		elseif not p2 and var1.current then
 			var4()
 			
-			if p0.onFocusLost then
-				p0.onFocusLost()
+			if p1.onFocusLost then
+				p1.onFocusLost()
 			end
 		end
-	end, { p0.onInputBegan, p0.onInputEnded, var4, p0.onFocusLost })
+	end, { p1.onInputBegan, p1.onInputEnded, var4, p1.onFocusLost })
 	reactModule.useEffect(function()
 		-- upvalues: var1 (ref), var4 (ref)
 		return function()

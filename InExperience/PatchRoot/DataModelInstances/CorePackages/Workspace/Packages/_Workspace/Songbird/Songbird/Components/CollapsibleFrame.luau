@@ -11,32 +11,32 @@ local useAnimatedBinding = reactOtterModule.useAnimatedBinding
 local t = { stiffness = 300, damping = 30, mass = 1 }
 local _ = { isCollapsed = false }
 
-return function(p0)
+return function(p1)
 	-- upvalues: usePrevious (ref), useBinding (ref), useAnimatedBinding (ref), useCallback (ref), useEffect (ref), reactOtterModule (ref), t (ref), reactModule (ref), foundationModule (ref)
-	local var6 = usePrevious(p0.isCollapsed)
-	local var7, var8 = useBinding(Vector2.new(1e999, 1e999))
-	local var9, var10 = useAnimatedBinding(if p0.isCollapsed then 0 else 1)
-	local var11 = useCallback(function(p1)
-		-- upvalues: var8 (ref)
-		var8(p1.AbsoluteCanvasSize)
+	local var1 = usePrevious(p1.isCollapsed)
+	local var2, var3 = useBinding(Vector2.new(1e999, 1e999))
+	local var4, var5 = useAnimatedBinding(if p1.isCollapsed then 0 else 1)
+	local var6 = useCallback(function(p2)
+		-- upvalues: var3 (ref)
+		var3(p2.AbsoluteCanvasSize)
 	end, {})
 	useEffect(function()
-		-- upvalues: var6 (ref), p0 (ref), var10 (ref), reactOtterModule (copy), t (copy)
-		if var6 ~= nil then
-			if not p0.isCollapsed and var6 then
-				var10(reactOtterModule.spring(1, t))
+		-- upvalues: var1 (ref), p1 (ref), var5 (ref), reactOtterModule (copy), t (copy)
+		if var1 ~= nil then
+			if not p1.isCollapsed and var1 then
+				var5(reactOtterModule.spring(1, t))
 				
 				return
-			elseif p0.isCollapsed and not var6 then
-				var10(reactOtterModule.spring(0, t))
+			elseif p1.isCollapsed and not var1 then
+				var5(reactOtterModule.spring(0, t))
 			end
 		end
-	end, { p0.isCollapsed, var6 })
+	end, { p1.isCollapsed, var1 })
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "size-full clip",
 		sizeConstraint = {
-			MaxSize = reactModule.joinBindings({ maxSize = var7, alpha = var9 }):map(function(p2)
+			MaxSize = reactModule.joinBindings({ maxSize = var2, alpha = var4 }):map(function(p2)
 				return Vector2.new(1e999, math.max(p2.maxSize.Y * p2.alpha, 0))
 			end)
 		}
@@ -52,9 +52,9 @@ return function(p0)
 			HorizontalScrollBarInset = Enum.ScrollBarInset.None,
 			ScrollBarImageTransparency = 1,
 			Selectable = false,
-			[reactModule.Change.AbsoluteCanvasSize] = var11
+			[reactModule.Change.AbsoluteCanvasSize] = var6
 		}, {
-			Container = reactModule.createElement(foundationModule.View, { tag = "auto-y size-full-0" }, p0.children)
+			Container = reactModule.createElement(foundationModule.View, { tag = "auto-y size-full-0" }, p1.children)
 		})
 	})
 end

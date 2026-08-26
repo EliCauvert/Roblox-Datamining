@@ -43,314 +43,314 @@ local getFieldMapper = nil
 local getTypeMapper = nil
 local getArgumentMapper = nil
 local getNewType = nil
-local var16 = nil
+local var1 = nil
 
-function t.mapSchema(p0, p1)
+function t.mapSchema(p1, p2)
 	-- upvalues: mapArguments (write), mapFields (write), mapTypes (write), mapDefaultValues (write), mapEnumValues (write), serializeInputValue (ref), isLeafType (ref), parseInputValue (ref), boolean (ref), mapDirectives (write), rewireTypes (ref), graphQLSchema (ref), object (ref), getObjectTypeFromTypeMap (ref)
-	local var19 = if p1 ~= nil then {} else p1
-	local var20 = mapArguments(mapFields(mapTypes(mapDefaultValues(mapEnumValues(mapTypes(mapDefaultValues(p0:getTypeMap(), p0, serializeInputValue), p0, var19, function(p2)
+	local var2 = if p2 ~= nil then {} else p2
+	local var3 = mapArguments(mapFields(mapTypes(mapDefaultValues(mapEnumValues(mapTypes(mapDefaultValues(p1:getTypeMap(), p1, serializeInputValue), p1, var2, function(p3)
 		-- upvalues: isLeafType (copy)
-		return isLeafType(p2)
-	end), p0, var19), p0, parseInputValue), p0, var19, function(p3)
+		return isLeafType(p3)
+	end), p1, var2), p1, parseInputValue), p1, var2, function(p3)
 		-- upvalues: boolean (copy), isLeafType (copy)
 		return not boolean.toJSBoolean(isLeafType(p3))
-	end), p0, var19), p0, var19)
-	local var21 = rewireTypes(var20, mapDirectives(p0:getDirectives(), p0, var19))
-	local typeMap = var21.typeMap
+	end), p1, var2), p1, var2)
+	local var4 = rewireTypes(var3, mapDirectives(p1:getDirectives(), p1, var2))
+	local typeMap = var4.typeMap
 	
-	return graphQLSchema.new(object.assign({}, p0:toConfig(), {
-		query = getObjectTypeFromTypeMap(typeMap, getObjectTypeFromTypeMap(var20, p0:getQueryType())) or object.None,
-		mutation = getObjectTypeFromTypeMap(typeMap, getObjectTypeFromTypeMap(var20, p0:getMutationType())) or object.None,
-		subscription = getObjectTypeFromTypeMap(typeMap, getObjectTypeFromTypeMap(var20, p0:getSubscriptionType())) or object.None,
+	return graphQLSchema.new(object.assign({}, p1:toConfig(), {
+		query = getObjectTypeFromTypeMap(typeMap, getObjectTypeFromTypeMap(var3, p1:getQueryType())) or object.None,
+		mutation = getObjectTypeFromTypeMap(typeMap, getObjectTypeFromTypeMap(var3, p1:getMutationType())) or object.None,
+		subscription = getObjectTypeFromTypeMap(typeMap, getObjectTypeFromTypeMap(var3, p1:getSubscriptionType())) or object.None,
 		types = typeMap:values() or object.None,
-		directives = var21.directives or object.None
+		directives = var4.directives or object.None
 	}))
 end
 
-mapTypes = function(p4, p5, p6, p7)
+mapTypes = function(p1, p2, p3, p4)
 	-- upvalues: map (ref), string (ref), object (ref), getTypeMapper (write)
-	local var22 = if p7 ~= nil then function()
+	local var2 = if p4 ~= nil then function()
 		return true
-	end else p7
-	local var23 = map.new()
+	end else p4
+	local var3 = map.new()
 	
-	for i, v in p4 do
+	for i, v in p1 do
 		local unpacked = table.unpack(v)
 		
 		if not string.startsWith(unpacked, "__") then
-			local var25 = p4:get(unpacked)
+			local var4 = p1:get(unpacked)
 			
-			if var25 == nil or var25 == object.None or not var22(var25) then
-				var23:set(unpacked, var25)
+			if var4 == nil or var4 == object.None or not var2(var4) then
+				var3:set(unpacked, var4)
 			else
-				local var26 = getTypeMapper(p5, p6, unpacked)
+				local var5 = getTypeMapper(p2, p3, unpacked)
 				
-				if var26 == nil or var26 == object.None then
-					var23:set(unpacked, var25)
+				if var5 == nil or var5 == object.None then
+					var3:set(unpacked, var4)
 				else
-					local var27 = var26(var25, p5)
+					local var6 = var5(var4, p2)
 					
-					if var27 == nil then
-						var23:set(unpacked, var25)
+					if var6 == nil then
+						var3:set(unpacked, var4)
 					else
-						var23:set(unpacked, var27)
+						var3:set(unpacked, var6)
 					end
 				end
 			end
 		end
 	end
-	return var23
+	return var3
 end
 
-mapEnumValues = function(p8, p9, p10)
-	-- upvalues: getEnumValueMapper (write), boolean (ref), mapTypes (write), mapperKind (ref), map (ref), array (ref), object (ref), var16 (write), graphQLEnumType (ref), isEnumType (ref)
-	local var28 = getEnumValueMapper(p10)
+mapEnumValues = function(p5, p6, p7)
+	-- upvalues: getEnumValueMapper (write), boolean (ref), mapTypes (write), mapperKind (ref), map (ref), array (ref), object (ref), var1 (write), graphQLEnumType (ref), isEnumType (ref)
+	local var7 = getEnumValueMapper(p7)
 	
-	return if boolean.toJSBoolean(var28) then mapTypes(p8, p9, {
-		[tostring(mapperKind.ENUM_TYPE)] = function(p11)
-			-- upvalues: map (copy), var28 (ref), p9 (ref), boolean (copy), array (copy), object (copy), var16 (copy), graphQLEnumType (copy)
-			local var29 = p11:toConfig()
-			local values = var29.values
-			local var30 = map.new()
+	return if boolean.toJSBoolean(var7) then mapTypes(p5, p6, {
+		[tostring(mapperKind.ENUM_TYPE)] = function(p8)
+			-- upvalues: map (copy), var7 (ref), p6 (ref), boolean (copy), array (copy), object (copy), var1 (copy), graphQLEnumType (copy)
+			local var8 = p8:toConfig()
+			local values = var8.values
+			local var9 = map.new()
 			
 			for i, v in values do
 				local unpacked = table.unpack(v)
-				local var32 = values:get(unpacked)
-				local var33 = var28(var32, p11.name, p9, unpacked)
+				local var10 = values:get(unpacked)
+				local var11 = var7(var10, p8.name, p6, unpacked)
 				
-				if var33 == nil then
-					var30:set(unpacked, var32)
-				elseif boolean.toJSBoolean(array.isArray(var33)) then
-					local unpacked_1, unpacked_2 = table.unpack(var33, 1, 2)
-					var30:set(unpacked_1, if unpacked_2 == nil then var32 else unpacked_2)
-				elseif var33 ~= object.None then
-					var30:set(unpacked, var33)
+				if var11 == nil then
+					var9:set(unpacked, var10)
+				elseif boolean.toJSBoolean(array.isArray(var11)) then
+					local unpacked_1, unpacked_2 = table.unpack(var11, 1, 2)
+					var9:set(unpacked_1, if unpacked_2 == nil then var10 else unpacked_2)
+				elseif var11 ~= object.None then
+					var9:set(unpacked, var11)
 				end
 			end
-			return var16(graphQLEnumType.new(object.assign({}, var29, { values = var30 })))
+			return var1(graphQLEnumType.new(object.assign({}, var8, { values = var9 })))
 		end
-	}, function(p12)
+	}, function(p9)
 		-- upvalues: isEnumType (copy)
-		return isEnumType(p12)
-	end) else p8
+		return isEnumType(p9)
+	end) else p5
 end
 
-mapDefaultValues = function(p13, p14, p15)
+mapDefaultValues = function(p8, p9, p10)
 	-- upvalues: mapArguments (write), mapperKind (ref), getNewType (write), object (ref), mapFields (write)
-	local var36 = mapArguments(p13, p14, {
-		[mapperKind.ARGUMENT] = function(p16)
-			-- upvalues: getNewType (copy), p13 (ref), object (copy), p15 (ref)
-			if p16.defaultValue == nil then
-				return p16
+	local var8 = mapArguments(p8, p9, {
+		[mapperKind.ARGUMENT] = function(p11)
+			-- upvalues: getNewType (copy), p8 (ref), object (copy), p10 (ref)
+			if p11.defaultValue == nil then
+				return p11
 			end
-			local var37 = getNewType(p13, p16.type)
+			local var9 = getNewType(p8, p11.type)
 			
-			return if var37 == nil then nil else object.assign({}, p16, { defaultValue = p15(var37, p16.defaultValue) })
+			return if var9 == nil then nil else object.assign({}, p11, { defaultValue = p10(var9, p11.defaultValue) })
 		end
 	})
 	
-	return mapFields(var36, p14, {
-		[mapperKind.INPUT_OBJECT_FIELD] = function(p17)
-			-- upvalues: getNewType (copy), var36 (ref), object (copy), p15 (ref)
-			if p17.defaultValue == nil then
-				return p17
+	return mapFields(var8, p9, {
+		[mapperKind.INPUT_OBJECT_FIELD] = function(p11)
+			-- upvalues: getNewType (copy), var8 (ref), object (copy), p10 (ref)
+			if p11.defaultValue == nil then
+				return p11
 			end
-			local var38 = getNewType(var36, p17.type)
+			local var9 = getNewType(var8, p11.type)
 			
-			return if var38 == nil then nil else object.assign({}, p17, { defaultValue = p15(var38, p17.defaultValue) })
+			return if var9 == nil then nil else object.assign({}, p11, { defaultValue = p10(var9, p11.defaultValue) })
 		end
 	})
 end
 
-getNewType = function(p18, p19)
+getNewType = function(p8, p9)
 	-- upvalues: boolean (ref), isListType (ref), getNewType (write), graphQLList (ref), isNonNullType (ref), graphQLNonNull (ref), isNamedType (ref)
-	if boolean.toJSBoolean(isListType(p19)) then
-		local var39 = getNewType(p18, p19.ofType)
+	if boolean.toJSBoolean(isListType(p9)) then
+		local var8 = getNewType(p8, p9.ofType)
 		
-		return if var39 == nil then nil else graphQLList.new(var39)
-	elseif boolean.toJSBoolean(isNonNullType(p19)) then
-		local var40 = getNewType(p18, p19.ofType)
+		return if var8 == nil then nil else graphQLList.new(var8)
+	elseif boolean.toJSBoolean(isNonNullType(p9)) then
+		local var9 = getNewType(p8, p9.ofType)
 		
-		return if var40 == nil then nil else graphQLNonNull.new(var40)
-	elseif not boolean.toJSBoolean(isNamedType(p19)) then
+		return if var9 == nil then nil else graphQLNonNull.new(var9)
+	elseif not boolean.toJSBoolean(isNamedType(p9)) then
 		return nil
 	end
-	local name = p18:get(p19.name)
+	local name = p8:get(p9.name)
 	
 	return if name == nil then nil else name
 end
 
-mapFields = function(p20, p21, p22)
-	-- upvalues: map (ref), string (ref), boolean (ref), isObjectType (ref), isInterfaceType (ref), isInputObjectType (ref), getFieldMapper (write), object (ref), array (ref), var16 (write), graphQLObjectType (ref), graphQLInterfaceType (ref), graphQLInputObjectType (ref)
-	local var42 = map.new()
+mapFields = function(p8, p9, p10)
+	-- upvalues: map (ref), string (ref), boolean (ref), isObjectType (ref), isInterfaceType (ref), isInputObjectType (ref), getFieldMapper (write), object (ref), array (ref), var1 (write), graphQLObjectType (ref), graphQLInterfaceType (ref), graphQLInputObjectType (ref)
+	local var8 = map.new()
 	
-	for i, v in p20 do
+	for i, v in p8 do
 		local unpacked = table.unpack(v)
 		
 		if not string.startsWith(unpacked, "__") then
-			local var44 = p20:get(unpacked)
+			local var9 = p8:get(unpacked)
 			
-			if boolean.toJSBoolean(isObjectType(var44)) or boolean.toJSBoolean(isInterfaceType(var44)) or boolean.toJSBoolean(isInputObjectType(var44)) then
-				local var45 = getFieldMapper(p21, p22, unpacked)
+			if boolean.toJSBoolean(isObjectType(var9)) or boolean.toJSBoolean(isInterfaceType(var9)) or boolean.toJSBoolean(isInputObjectType(var9)) then
+				local var10 = getFieldMapper(p9, p10, unpacked)
 				
-				if var45 == nil or var45 == object.None then
-					var42:set(unpacked, var44)
+				if var10 == nil or var10 == object.None then
+					var8:set(unpacked, var9)
 				else
-					local var46 = var44:toConfig()
-					local fields = var46.fields
-					local var47 = map.new()
+					local var11 = var9:toConfig()
+					local fields = var11.fields
+					local var12 = map.new()
 					
 					for i_1, v_1 in fields do
 						local unpacked_1 = table.unpack(v_1)
-						local var49 = fields:get(unpacked_1)
-						local var50 = var45(var49, unpacked_1, unpacked, p21)
+						local var13 = fields:get(unpacked_1)
+						local var14 = var10(var13, unpacked_1, unpacked, p9)
 						
-						if var50 == nil then
-							var47:set(unpacked_1, var49)
-						elseif boolean.toJSBoolean(array.isArray(var50)) then
-							local unpacked_2, unpacked_3 = table.unpack(var50, 1, 2)
+						if var14 == nil then
+							var12:set(unpacked_1, var13)
+						elseif boolean.toJSBoolean(array.isArray(var14)) then
+							local unpacked_2, unpacked_3 = table.unpack(var14, 1, 2)
 							
 							if unpacked_3.astNode ~= nil and unpacked_3.astNode ~= object.None then
 								unpacked_3.astNode = object.assign({}, unpacked_3.astNode, {
 									name = object.assign({}, unpacked_3.astNode.name, { value = unpacked_2 })
 								})
 							end
-							var47:set(unpacked_2, if unpacked_3 == nil then var49 else unpacked_3)
-						elseif var50 ~= object.None then
-							var47:set(unpacked_1, var50)
+							var12:set(unpacked_2, if unpacked_3 == nil then var13 else unpacked_3)
+						elseif var14 ~= object.None then
+							var12:set(unpacked_1, var14)
 						end
 					end
-					if boolean.toJSBoolean(isObjectType(var44)) then
-						var42:set(unpacked, var16(graphQLObjectType.new(object.assign({}, var46, { fields = var47 }))))
-					elseif boolean.toJSBoolean(isInterfaceType(var44)) then
-						var42:set(unpacked, var16(graphQLInterfaceType.new(object.assign({}, var46, { fields = var47 }))))
+					if boolean.toJSBoolean(isObjectType(var9)) then
+						var8:set(unpacked, var1(graphQLObjectType.new(object.assign({}, var11, { fields = var12 }))))
+					elseif boolean.toJSBoolean(isInterfaceType(var9)) then
+						var8:set(unpacked, var1(graphQLInterfaceType.new(object.assign({}, var11, { fields = var12 }))))
 					else
-						var42:set(unpacked, var16(graphQLInputObjectType.new(object.assign({}, var46, { fields = var47 }))))
+						var8:set(unpacked, var1(graphQLInputObjectType.new(object.assign({}, var11, { fields = var12 }))))
 					end
 				end
 			else
-				var42:set(unpacked, var44)
+				var8:set(unpacked, var9)
 			end
 		end
 	end
-	return var42
+	return var8
 end
 
-mapArguments = function(p23, p24, p25)
+mapArguments = function(p11, p12, p13)
 	-- upvalues: map (ref), string (ref), boolean (ref), isObjectType (ref), isInterfaceType (ref), getArgumentMapper (write), object (ref), array (ref), graphQLObjectType (ref), graphQLInterfaceType (ref), graphQLInputObjectType (ref)
-	local var53 = map.new()
+	local var15 = map.new()
 	
-	for i, v in p23 do
+	for i, v in p11 do
 		local unpacked = table.unpack(v)
 		
 		if not string.startsWith(unpacked, "__") then
-			local var55 = p23:get(unpacked)
+			local var16 = p11:get(unpacked)
 			
-			if boolean.toJSBoolean(isObjectType(var55)) or boolean.toJSBoolean(isInterfaceType(var55)) then
-				local var56 = getArgumentMapper(p25)
+			if boolean.toJSBoolean(isObjectType(var16)) or boolean.toJSBoolean(isInterfaceType(var16)) then
+				local var17 = getArgumentMapper(p13)
 				
-				if var56 == nil or var56 == object.None then
-					var53:set(unpacked, var55)
+				if var17 == nil or var17 == object.None then
+					var15:set(unpacked, var16)
 				else
-					local var57 = var55:toConfig()
-					local fields = var57.fields
-					local var58 = map.new()
+					local var18 = var16:toConfig()
+					local fields = var18.fields
+					local var19 = map.new()
 					
 					for i_1, v_1 in fields do
 						local unpacked_1 = table.unpack(v_1)
-						local var60 = fields:get(unpacked_1)
-						local args = var60.args
+						local var20 = fields:get(unpacked_1)
+						local args = var20.args
 						
 						if args == nil or args == object.None then
-							var58:set(unpacked_1, var60)
+							var19:set(unpacked_1, var20)
 						else
-							local var61 = args:keys()
+							local var21 = args:keys()
 							
-							if #var61 > 0 then
-								local var62 = map.new()
+							if #var21 > 0 then
+								local var22 = map.new()
 								
-								for i_2, v_2 in var61 do
-									local var63 = args:get(v_2)
-									local var64 = var56(var63, unpacked_1, unpacked, p24)
+								for i_2, v_2 in var21 do
+									local var23 = args:get(v_2)
+									local var24 = var17(var23, unpacked_1, unpacked, p12)
 									
-									if var64 == nil then
-										var62:set(v_2, var63)
-									elseif boolean.toJSBoolean(array.isArray(var64)) then
-										local unpacked_2, unpacked_3 = table.unpack(var64, 1, 2)
-										var62:set(unpacked_2, unpacked_3)
-									elseif var64 ~= object.None then
-										var62:set(v_2, var64)
+									if var24 == nil then
+										var22:set(v_2, var23)
+									elseif boolean.toJSBoolean(array.isArray(var24)) then
+										local unpacked_2, unpacked_3 = table.unpack(var24, 1, 2)
+										var22:set(unpacked_2, unpacked_3)
+									elseif var24 ~= object.None then
+										var22:set(v_2, var24)
 									end
 								end
-								var58:set(unpacked_1, object.assign({}, var60, { args = var62 }))
+								var19:set(unpacked_1, object.assign({}, var20, { args = var22 }))
 							else
-								var58:set(unpacked_1, var60)
+								var19:set(unpacked_1, var20)
 							end
 						end
 					end
-					if boolean.toJSBoolean(isObjectType(var55)) then
-						var53:set(unpacked, graphQLObjectType.new(object.assign({}, var57, { fields = var58 })))
-					elseif boolean.toJSBoolean(isInterfaceType(var55)) then
-						var53:set(unpacked, graphQLInterfaceType.new(object.assign({}, var57, { fields = var58 })))
+					if boolean.toJSBoolean(isObjectType(var16)) then
+						var15:set(unpacked, graphQLObjectType.new(object.assign({}, var18, { fields = var19 })))
+					elseif boolean.toJSBoolean(isInterfaceType(var16)) then
+						var15:set(unpacked, graphQLInterfaceType.new(object.assign({}, var18, { fields = var19 })))
 					else
-						var53:set(unpacked, graphQLInputObjectType.new(object.assign({}, var57, { fields = var58 })))
+						var15:set(unpacked, graphQLInputObjectType.new(object.assign({}, var18, { fields = var19 })))
 					end
 				end
 			else
-				var53:set(unpacked, var55)
+				var15:set(unpacked, var16)
 			end
 		end
 	end
-	return var53
+	return var15
 end
 
-mapDirectives = function(p26, p27, p28)
+mapDirectives = function(p14, p15, p16)
 	-- upvalues: getDirectiveMapper (write), object (ref), array (ref)
-	local var67 = getDirectiveMapper(p28)
+	local var25 = getDirectiveMapper(p16)
 	
-	if var67 == nil or var67 == object.None then
-		return array.slice(p26)
+	if var25 == nil or var25 == object.None then
+		return array.slice(p14)
 	end
 	local t = {}
 	
-	for i, v in p26 do
-		local var69 = var67(v, p27)
+	for i, v in p14 do
+		local var26 = var25(v, p15)
 		
-		if var69 == nil then
+		if var26 == nil then
 			table.insert(t, v)
-		elseif var69 ~= object.None then
-			table.insert(t, var69)
+		elseif var26 ~= object.None then
+			table.insert(t, var26)
 		end
 	end
 	return t
 end
 
-local function getTypeSpecifiers(p29, p30)
+local function getTypeSpecifiers(p17, p18)
 	-- upvalues: mapperKind (ref), boolean (ref), isObjectType (ref), array (ref), isInputObjectType (ref), isInterfaceType (ref), isUnionType (ref), isEnumType (ref), isScalarType (ref)
-	local var70 = p29:getType(p30)
+	local var27 = p17:getType(p18)
 	local list = { mapperKind.TYPE }
 	
-	if boolean.toJSBoolean(isObjectType(var70)) then
+	if boolean.toJSBoolean(isObjectType(var27)) then
 		list = array.concat(list, { mapperKind.COMPOSITE_TYPE, mapperKind.OBJECT_TYPE })
 		
-		if p30 == (if typeof(p29:getQueryType()) == "table" then p29:getQueryType().name else nil) then
+		if p18 == (if typeof(p17:getQueryType()) == "table" then p17:getQueryType().name else nil) then
 			list = array.concat(list, { mapperKind.ROOT_OBJECT, mapperKind.QUERY })
 			
 			return list
-		elseif p30 == (if typeof(p29:getMutationType()) == "table" then p29:getMutationType().name else nil) then
+		elseif p18 == (if typeof(p17:getMutationType()) == "table" then p17:getMutationType().name else nil) then
 			list = array.concat(list, { mapperKind.ROOT_OBJECT, mapperKind.MUTATION })
 			
 			return list
-		elseif p30 == (if typeof(p29:getSubscriptionType()) == "table" then p29:getSubscriptionType().name else nil) then
+		elseif p18 == (if typeof(p17:getSubscriptionType()) == "table" then p17:getSubscriptionType().name else nil) then
 			list = array.concat(list, { mapperKind.ROOT_OBJECT, mapperKind.SUBSCRIPTION })
 			
 			return list
 		end
-	elseif boolean.toJSBoolean(isInputObjectType(var70)) then
+	elseif boolean.toJSBoolean(isInputObjectType(var27)) then
 		table.insert(list, mapperKind.INPUT_OBJECT_TYPE)
 		
 		return list
-	elseif boolean.toJSBoolean(isInterfaceType(var70)) then
+	elseif boolean.toJSBoolean(isInterfaceType(var27)) then
 		list = array.concat(list, {
 			mapperKind.COMPOSITE_TYPE,
 			mapperKind.ABSTRACT_TYPE,
@@ -358,7 +358,7 @@ local function getTypeSpecifiers(p29, p30)
 		})
 		
 		return list
-	elseif boolean.toJSBoolean(isUnionType(var70)) then
+	elseif boolean.toJSBoolean(isUnionType(var27)) then
 		list = array.concat(list, {
 			mapperKind.COMPOSITE_TYPE,
 			mapperKind.ABSTRACT_TYPE,
@@ -366,43 +366,43 @@ local function getTypeSpecifiers(p29, p30)
 		})
 		
 		return list
-	elseif boolean.toJSBoolean(isEnumType(var70)) then
+	elseif boolean.toJSBoolean(isEnumType(var27)) then
 		table.insert(list, mapperKind.ENUM_TYPE)
 		
 		return list
-	elseif boolean.toJSBoolean(isScalarType(var70)) then
+	elseif boolean.toJSBoolean(isScalarType(var27)) then
 		table.insert(list, mapperKind.SCALAR_TYPE)
 	end
 	return list
 end
 
-getTypeMapper = function(p31, p32, p33)
+getTypeMapper = function(p17, p18, p19)
 	-- upvalues: getTypeSpecifiers (ref), array (ref), boolean (ref)
-	local var72 = nil
-	local var73 = array.concat({}, getTypeSpecifiers(p31, p33))
-	while not boolean.toJSBoolean(var72) and #var73 > 0 do
-		var72 = p32[tostring(table.remove(var73))]
+	local var27 = nil
+	local var28 = array.concat({}, getTypeSpecifiers(p17, p19))
+	while not boolean.toJSBoolean(var27) and #var28 > 0 do
+		var27 = p18[tostring(table.remove(var28))]
 	end
-	return if var72 == nil then nil else var72
+	return if var27 == nil then nil else var27
 end
 
-local function getFieldSpecifiers(p34, p35)
+local function getFieldSpecifiers(p20, p21)
 	-- upvalues: mapperKind (ref), boolean (ref), isObjectType (ref), array (ref), isInterfaceType (ref), isInputObjectType (ref)
-	local var74 = p34:getType(p35)
+	local var29 = p20:getType(p21)
 	local list = { mapperKind.FIELD }
 	
-	if boolean.toJSBoolean(isObjectType(var74)) then
+	if boolean.toJSBoolean(isObjectType(var29)) then
 		list = array.concat(list, { mapperKind.COMPOSITE_FIELD, mapperKind.OBJECT_FIELD })
 		
-		if p35 == (if typeof(p34:getQueryType()) == "table" then p34:getQueryType().name else nil) then
+		if p21 == (if typeof(p20:getQueryType()) == "table" then p20:getQueryType().name else nil) then
 			list = array.concat(list, { mapperKind.ROOT_FIELD, mapperKind.QUERY_ROOT_FIELD })
 			
 			return list
-		elseif p35 == (if typeof(p34:getMutationType()) == "table" then p34:getMutationType().name else nil) then
+		elseif p21 == (if typeof(p20:getMutationType()) == "table" then p20:getMutationType().name else nil) then
 			list = array.concat(list, { mapperKind.ROOT_FIELD, mapperKind.MUTATION_ROOT_FIELD })
 			
 			return list
-		elseif p35 == (if typeof(p34:getSubscriptionType()) == "table" then p34:getSubscriptionType().name else nil) then
+		elseif p21 == (if typeof(p20:getSubscriptionType()) == "table" then p20:getSubscriptionType().name else nil) then
 			list = array.concat(list, {
 				mapperKind.ROOT_FIELD,
 				mapperKind.SUBSCRIPTION_ROOT_FIELD
@@ -410,145 +410,145 @@ local function getFieldSpecifiers(p34, p35)
 			
 			return list
 		end
-	elseif boolean.toJSBoolean(isInterfaceType(var74)) then
+	elseif boolean.toJSBoolean(isInterfaceType(var29)) then
 		list = array.concat(list, { mapperKind.COMPOSITE_FIELD, mapperKind.INTERFACE_FIELD })
 		
 		return list
-	elseif boolean.toJSBoolean(isInputObjectType(var74)) then
+	elseif boolean.toJSBoolean(isInputObjectType(var29)) then
 		table.insert(list, mapperKind.INPUT_OBJECT_FIELD)
 	end
 	return list
 end
 
-getFieldMapper = function(p36, p37, p38)
+getFieldMapper = function(p20, p21, p22)
 	-- upvalues: getFieldSpecifiers (ref), array (ref), boolean (ref)
-	local var76 = nil
-	local var77 = array.concat({}, table.unpack(getFieldSpecifiers(p36, p38)))
-	while not boolean.toJSBoolean(var76) and #var77 > 0 do
-		var76 = p37[tostring(table.remove(var77))]
+	local var29 = nil
+	local var30 = array.concat({}, table.unpack(getFieldSpecifiers(p20, p22)))
+	while not boolean.toJSBoolean(var29) and #var30 > 0 do
+		var29 = p21[tostring(table.remove(var30))]
 	end
-	return if var76 == nil then nil else var76
+	return if var29 == nil then nil else var29
 end
 
-getArgumentMapper = function(p39)
+getArgumentMapper = function(p23)
 	-- upvalues: mapperKind (ref)
-	local ARGUMENT = p39[tostring(mapperKind.ARGUMENT)]
+	local ARGUMENT = p23[tostring(mapperKind.ARGUMENT)]
 	
 	return if ARGUMENT == nil then nil else ARGUMENT
 end
 
-getDirectiveMapper = function(p40)
+getDirectiveMapper = function(p23)
 	-- upvalues: mapperKind (ref)
-	local DIRECTIVE = p40[tostring(mapperKind.DIRECTIVE)]
+	local DIRECTIVE = p23[tostring(mapperKind.DIRECTIVE)]
 	
 	return if DIRECTIVE == nil then nil else DIRECTIVE
 end
 
-getEnumValueMapper = function(p41)
+getEnumValueMapper = function(p23)
 	-- upvalues: mapperKind (ref)
-	local ENUM_VALUE = p41[tostring(mapperKind.ENUM_VALUE)]
+	local ENUM_VALUE = p23[tostring(mapperKind.ENUM_VALUE)]
 	
 	return if ENUM_VALUE == nil then nil else ENUM_VALUE
 end
 
-function t.correctASTNodes(p42)
+function t.correctASTNodes(p23)
 	-- upvalues: boolean (ref), isObjectType (ref), object (ref), kind (ref), array (ref), graphQLObjectType (ref), isInterfaceType (ref), graphQLInterfaceType (ref), isInputObjectType (ref), graphQLInputObjectType (ref), isEnumType (ref), graphQLEnumType (ref)
-	if boolean.toJSBoolean(isObjectType(p42)) then
-		local var78 = p42:toConfig()
+	if boolean.toJSBoolean(isObjectType(p23)) then
+		local var31 = p23:toConfig()
 		
-		if var78.astNode ~= nil then
+		if var31.astNode ~= nil then
 			local t = {}
 			
-			for i, v in var78.fields do
-				local var80 = var78.fields:get(table.unpack(v))
+			for i, v in var31.fields do
+				local var32 = var31.fields:get(table.unpack(v))
 				
-				if var80.astNode ~= nil then
-					table.insert(t, var80.astNode)
+				if var32.astNode ~= nil then
+					table.insert(t, var32.astNode)
 				end
 			end
-			var78.astNode = object.assign({}, var78.astNode, { kind = kind.OBJECT_TYPE_DEFINITION, fields = t })
+			var31.astNode = object.assign({}, var31.astNode, { kind = kind.OBJECT_TYPE_DEFINITION, fields = t })
 		end
-		if var78.extensionASTNodes ~= nil then
-			var78.extensionASTNodes = array.map(var78.extensionASTNodes, function(p43)
+		if var31.extensionASTNodes ~= nil then
+			var31.extensionASTNodes = array.map(var31.extensionASTNodes, function(p24)
 				-- upvalues: object (copy), kind (copy)
-				return object.assign({}, p43, { kind = kind.OBJECT_TYPE_EXTENSION, fields = object.None })
+				return object.assign({}, p24, { kind = kind.OBJECT_TYPE_EXTENSION, fields = object.None })
 			end)
 		end
-		return graphQLObjectType.new(var78)
-	elseif boolean.toJSBoolean(isInterfaceType(p42)) then
-		local var81 = p42:toConfig()
+		return graphQLObjectType.new(var31)
+	elseif boolean.toJSBoolean(isInterfaceType(p23)) then
+		local var33 = p23:toConfig()
 		
-		if var81.astNode ~= nil then
+		if var33.astNode ~= nil then
 			local t = {}
 			
-			for i, v in var81.fields do
-				local var83 = var81.fields:get(table.unpack(v))
+			for i, v in var33.fields do
+				local var34 = var33.fields:get(table.unpack(v))
 				
-				if var83.astNode ~= nil then
-					table.insert(t, var83.astNode)
+				if var34.astNode ~= nil then
+					table.insert(t, var34.astNode)
 				end
 			end
-			var81.astNode = object.assign({}, var81.astNode, { kind = kind.INTERFACE_TYPE_DEFINITION, fields = t })
+			var33.astNode = object.assign({}, var33.astNode, { kind = kind.INTERFACE_TYPE_DEFINITION, fields = t })
 		end
-		if var81.extensionASTNodes ~= nil then
-			var81.extensionASTNodes = array.map(var81.extensionASTNodes, function(p44)
+		if var33.extensionASTNodes ~= nil then
+			var33.extensionASTNodes = array.map(var33.extensionASTNodes, function(p24)
 				-- upvalues: object (copy), kind (copy)
-				return object.assign({}, p44, {
+				return object.assign({}, p24, {
 					kind = kind.INTERFACE_TYPE_EXTENSION,
 					fields = object.None
 				})
 			end)
 		end
-		return graphQLInterfaceType.new(var81)
-	elseif boolean.toJSBoolean(isInputObjectType(p42)) then
-		local var84 = p42:toConfig()
+		return graphQLInterfaceType.new(var33)
+	elseif boolean.toJSBoolean(isInputObjectType(p23)) then
+		local var35 = p23:toConfig()
 		
-		if var84.astNode ~= nil then
+		if var35.astNode ~= nil then
 			local t = {}
 			
-			for i, v in var84.fields do
-				local var86 = var84.fields:get(table.unpack(v))
+			for i, v in var35.fields do
+				local var36 = var35.fields:get(table.unpack(v))
 				
-				if var86.astNode ~= nil then
-					table.insert(t, var86.astNode)
+				if var36.astNode ~= nil then
+					table.insert(t, var36.astNode)
 				end
 			end
-			var84.astNode = object.assign({}, var84.astNode, { kind = kind.INPUT_OBJECT_TYPE_DEFINITION, fields = t })
+			var35.astNode = object.assign({}, var35.astNode, { kind = kind.INPUT_OBJECT_TYPE_DEFINITION, fields = t })
 		end
-		if var84.extensionASTNodes ~= nil then
-			var84.extensionASTNodes = array.map(var84.extensionASTNodes, function(p45)
+		if var35.extensionASTNodes ~= nil then
+			var35.extensionASTNodes = array.map(var35.extensionASTNodes, function(p24)
 				-- upvalues: object (copy), kind (copy)
-				return object.assign({}, p45, {
+				return object.assign({}, p24, {
 					kind = kind.INPUT_OBJECT_TYPE_EXTENSION,
 					fields = object.None
 				})
 			end)
 		end
-		return graphQLInputObjectType.new(var84)
-	elseif not boolean.toJSBoolean(isEnumType(p42)) then
-		return p42
+		return graphQLInputObjectType.new(var35)
+	elseif not boolean.toJSBoolean(isEnumType(p23)) then
+		return p23
 	end
-	local var87 = p42:toConfig()
+	local var37 = p23:toConfig()
 	
-	if var87.astNode ~= nil then
+	if var37.astNode ~= nil then
 		local t = {}
 		
-		for i, v in var87.values do
-			local var89 = var87.values:get(table.unpack(v))
+		for i, v in var37.values do
+			local var38 = var37.values:get(table.unpack(v))
 			
-			if var89.astNode ~= nil then
-				table.insert(t, var89.astNode)
+			if var38.astNode ~= nil then
+				table.insert(t, var38.astNode)
 			end
 		end
-		var87.astNode = object.assign({}, var87.astNode, { values = t })
+		var37.astNode = object.assign({}, var37.astNode, { values = t })
 	end
-	if var87.extensionASTNodes ~= nil then
-		var87.extensionASTNodes = array.map(var87.extensionASTNodes, function(p46)
+	if var37.extensionASTNodes ~= nil then
+		var37.extensionASTNodes = array.map(var37.extensionASTNodes, function(p24)
 			-- upvalues: object (copy)
-			return object.assign({}, p46, { values = object.None })
+			return object.assign({}, p24, { values = object.None })
 		end)
 	end
-	return graphQLEnumType.new(var87)
+	return graphQLEnumType.new(var37)
 end
 
 return t

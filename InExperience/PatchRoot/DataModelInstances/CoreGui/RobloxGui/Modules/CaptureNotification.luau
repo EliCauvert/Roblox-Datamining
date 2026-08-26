@@ -25,24 +25,24 @@ captureNotification.validateProps = tModule.strictInterface({
 	permissionEvent = tModule.optional(tModule.instanceOf("BindableEvent"))
 })
 
-function captureNotification.init(p0)
+function captureNotification.init(p1)
 	-- upvalues: images (ref), robloxTranslatorModule (ref), roactModule (ref), userInputService (ref)
-	p0.state = {
+	p1.state = {
 		dismissedPermission = false,
 		notificationType = "None",
 		toastContent = nil,
 		screenSize = Vector2.new(0, 0)
 	}
 	
-	function p0.onScreenSizeChanged(p1)
-		-- upvalues: p0 (ref)
-		if p0.state.screenSize ~= p1.AbsoluteSize then
-			p0:setState({ screenSize = p1.AbsoluteSize })
+	function p0.onScreenSizeChanged(p2)
+		-- upvalues: p1 (ref)
+		if p1.state.screenSize ~= p2.AbsoluteSize then
+			p1:setState({ screenSize = p2.AbsoluteSize })
 		end
 	end
 	
 	function p0.getToastContent(p2)
-		-- upvalues: images (copy), robloxTranslatorModule (copy), p0 (ref), roactModule (copy)
+		-- upvalues: images (copy), robloxTranslatorModule (copy), p1 (ref), roactModule (copy)
 		if p2 == "Success" or p2 == "Fail" then
 			local isSuccess = p2 == "Success"
 			
@@ -51,14 +51,14 @@ function captureNotification.init(p0)
 				iconColorStyle = if not isSuccess then { Transparency = 0, Color = Color3.fromRGB(247, 75, 82) } else nil,
 				toastTitle = isSuccess and robloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Capture.Success.ToastText") or robloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Capture.Fail.ToastText"),
 				onDismissed = function()
-					-- upvalues: p0 (copy), roactModule (copy)
-					p0:setState({
+					-- upvalues: p1 (copy), roactModule (copy)
+					p1:setState({
 						notificationType = "None",
 						toastContent = roactModule.None
 					})
 					
-					if p0.props.forceDismissToast and p0.props.forceDismissToast.onDismissed then
-						p0.props.forceDismissToast.onDismissed()
+					if p1.props.forceDismissToast and p1.props.forceDismissToast.onDismissed then
+						p1.props.forceDismissToast.onDismissed()
 					end
 				end
 			}
@@ -67,29 +67,29 @@ function captureNotification.init(p0)
 	end
 	
 	function p0.dismissPermissionAlert()
-		-- upvalues: p0 (ref)
-		p0:setState({
+		-- upvalues: p1 (ref)
+		p1:setState({
 			dismissedPermission = true,
 			notificationType = "Fail",
-			toastContent = p0.getToastContent("Fail")
+			toastContent = p1.getToastContent("Fail")
 		})
 	end
 	
-	function p0.screenshotSavedToAlbumCallback(_, p3, p4)
-		-- upvalues: p0 (ref)
+	function p0.screenshotSavedToAlbumCallback(_, p2, p3)
+		-- upvalues: p1 (ref)
 		local _ = nil
-		local var12 = if p3 then "Success" elseif p0.state.dismissedPermission or not p4:find("Domain=ALAssetsLibraryErrorDomain") or not p4:find("Data unavailable") then "Fail" else "Permission"
-		p0:setState({
-			notificationType = var12,
-			toastContent = p0.getToastContent(var12)
+		local var1 = if p2 then "Success" elseif p1.state.dismissedPermission or not p3:find("Domain=ALAssetsLibraryErrorDomain") or not p3:find("Data unavailable") then "Fail" else "Permission"
+		p1:setState({
+			notificationType = var1,
+			toastContent = p1.getToastContent(var1)
 		})
 	end
 	
 	function p0.permissionEventCallback()
-		-- upvalues: p0 (ref)
-		p0:setState({
+		-- upvalues: p1 (ref)
+		p1:setState({
 			notificationType = "Permission",
-			toastContent = p0.getToastContent("Permission")
+			toastContent = p1.getToastContent("Permission")
 		})
 	end
 	
@@ -99,16 +99,16 @@ function captureNotification.init(p0)
 	end
 end
 
-function captureNotification.renderWithStyle(_, p5)
+function captureNotification.renderWithStyle(_, p1)
 	-- upvalues: renderWithCoreScriptsStyleProviderModule (ref)
-	return renderWithCoreScriptsStyleProviderModule(p5)
+	return renderWithCoreScriptsStyleProviderModule(p1)
 end
 
-function captureNotification.render(p6)
+function captureNotification.render(p1)
 	-- upvalues: roactModule (ref), toast (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref), shouldSaveScreenshotToAlbumModule (ref), externalEventConnection (ref)
-	local notificationType = p6.state.notificationType
+	local notificationType = p1.state.notificationType
 	
-	return p6:renderWithStyle({
+	return p1:renderWithStyle({
 		RobloxCaptureNotificationGui = roactModule.createElement("ScreenGui", {
 			AutoLocalize = false,
 			DisplayOrder = 9,
@@ -119,17 +119,17 @@ function captureNotification.render(p6)
 			Content = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
-				[roactModule.Change.AbsoluteSize] = p6.onScreenSizeChanged
+				[roactModule.Change.AbsoluteSize] = p1.onScreenSizeChanged
 			}, {
-				SuccessToast = (notificationType == "Success" and p6.state.toastContent) and roactModule.createElement(toast, {
+				SuccessToast = (notificationType == "Success" and p1.state.toastContent) and roactModule.createElement(toast, {
 					duration = 3,
-					show = not p6.props.forceDismissToast,
-					toastContent = p6.state.toastContent
+					show = not p1.props.forceDismissToast,
+					toastContent = p1.state.toastContent
 				}),
-				FailToast = (notificationType == "Fail" and p6.state.toastContent) and roactModule.createElement(toast, {
+				FailToast = (notificationType == "Fail" and p1.state.toastContent) and roactModule.createElement(toast, {
 					duration = 3,
-					show = not p6.props.forceDismissToast,
-					toastContent = p6.state.toastContent
+					show = not p1.props.forceDismissToast,
+					toastContent = p1.state.toastContent
 				}),
 				PermissionAlertOverlay = notificationType == "Permission" and roactModule.createElement("Frame", {
 					Active = true,
@@ -139,44 +139,44 @@ function captureNotification.render(p6)
 				}, {
 					PermissionAlert = roactModule.createElement(interactiveAlert, {
 						title = robloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Capture.Permission.AlertTitle"),
-						bodyText = p6.getPermissionAlertBodyText(),
+						bodyText = p1.getPermissionAlertBodyText(),
 						buttonStackInfo = {
 							buttons = {
 								{
 									buttonType = buttonType.PrimarySystem,
 									props = {
-										onActivated = p6.dismissPermissionAlert,
+										onActivated = p1.dismissPermissionAlert,
 										text = robloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Capture.Permission.AlertButtonText")
 									}
 								}
 							}
 						},
 						position = UDim2.fromScale(0.5, 0.5),
-						screenSize = p6.state.screenSize
+						screenSize = p1.state.screenSize
 					})
 				}),
 				ScreenshotSavedToAlbumConnection = shouldSaveScreenshotToAlbumModule() and roactModule.createElement(externalEventConnection, {
 					event = game.ScreenshotSavedToAlbum,
-					callback = p6.screenshotSavedToAlbumCallback
+					callback = p1.screenshotSavedToAlbumCallback
 				}),
-				PermissionEventConnection = p6.props.permissionEvent and roactModule.createElement(externalEventConnection, {
-					event = p6.props.permissionEvent.Event,
-					callback = p6.permissionEventCallback
+				PermissionEventConnection = p1.props.permissionEvent and roactModule.createElement(externalEventConnection, {
+					event = p1.props.permissionEvent.Event,
+					callback = p1.permissionEventCallback
 				})
 			})
 		})
 	})
 end
 
-function captureNotification.didUpdate(p7, p8)
-	local forceDismissToast = p7.props.forceDismissToast
+function captureNotification.didUpdate(p1, p2)
+	local forceDismissToast = p1.props.forceDismissToast
 	
-	if p8.forceDismissToast ~= forceDismissToast then
-		local var13
-		if p7.state.notificationType ~= "Success" then
-			var13 = p7.state.notificationType == "Fail" and p7.state.toastContent
+	if p2.forceDismissToast ~= forceDismissToast then
+		local var1
+		if p1.state.notificationType ~= "Success" then
+			var1 = p1.state.notificationType == "Fail" and p1.state.toastContent
 		end
-		if not var13 and forceDismissToast and forceDismissToast.onDismissed then
+		if not var1 and forceDismissToast and forceDismissToast.onDismissed then
 			forceDismissToast.onDismissed()
 		end
 	end

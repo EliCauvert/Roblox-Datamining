@@ -23,40 +23,40 @@ local t = {
 	onDismissed = function() end
 }
 
-return memo(function(p0)
+return memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useIsInExperienceModule (ref), warning (ref), info (ref), reactModule (ref), partialPageModal (ref), enum (ref), styledTextLabel (ref)
-	local var7 = cryoModule.Dictionary.union(t, p0)
-	local style = var7.style or useStyle()
+	local var1 = cryoModule.Dictionary.union(t, p1)
+	local style = var1.style or useStyle()
 	local size600 = style.Tokens.Size.Size_600
 	
-	return if useIsInExperienceModule() then reactModule.createElement(if var7.actionText then warning else info, {
+	return if useIsInExperienceModule() then reactModule.createElement(if var1.actionText then warning else info, {
 		soakAreaTransparency = 0.8,
 		displayFailed = false,
-		titleText = var7.titleText,
-		bodyText = var7.bodyText,
-		cancelText = if var7.actionText then var7.cancelAlertText else nil,
-		confirmText = if var7.actionText then var7.actionText else var7.cancelAlertText,
-		screenSize = var7.screenSize,
+		titleText = var1.titleText,
+		bodyText = var1.bodyText,
+		cancelText = if var1.actionText then var1.cancelAlertText else nil,
+		confirmText = if var1.actionText then var1.actionText else var1.cancelAlertText,
+		screenSize = var1.screenSize,
 		soakAreaColor3 = Color3.fromRGB(25, 25, 25),
 		width = UDim.new(0.8, 0),
-		onActivated = var7.onActivated,
-		onModalClose = var7.onDismissed
+		onActivated = var1.onActivated,
+		onModalClose = var1.onDismissed
 	}) else reactModule.createElement(partialPageModal, {
-		title = var7.titleText,
-		buttonStackProps = if var7.actionText then {
+		title = var1.titleText,
+		buttonStackProps = if var1.actionText then {
 			buttons = {
 				{
 					buttonType = enum.ButtonType.PrimarySystem,
 					props = {
-						onActivated = var7.onActivated,
-						text = var7.actionText,
-						isDisabled = var7.isButtonDisabled
+						onActivated = var1.onActivated,
+						text = var1.actionText,
+						isDisabled = var1.isButtonDisabled
 					}
 				}
 			}
 		} else nil,
-		screenSize = var7.screenSize,
-		onCloseClicked = var7.onDismissed
+		screenSize = var1.screenSize,
+		onCloseClicked = var1.onDismissed
 	}, {
 		Body = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -65,11 +65,11 @@ return memo(function(p0)
 		}, {
 			ContentPadding = reactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, size600 / 2),
-				PaddingBottom = if var7.actionText then UDim.new(0, size600) else nil
+				PaddingBottom = if var1.actionText then UDim.new(0, size600) else nil
 			}),
 			Body = reactModule.createElement(styledTextLabel, {
 				fluidSizing = false,
-				text = var7.bodyText,
+				text = var1.bodyText,
 				textXAlignment = Enum.TextXAlignment.Left,
 				fontStyle = style.Font.Body,
 				lineHeight = style.Tokens.LineHeight.LineHeight_140,

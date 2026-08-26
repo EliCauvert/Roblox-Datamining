@@ -9,25 +9,25 @@ local getItemCollectionKeyModule = require(serverDrivenUi.DataStore.getItemColle
 local _ = require(parent.SduiCoreSystem)
 local fFlagSduiGetItemCollectionKeys = require(serverDrivenUi.Flags).FFlagSduiGetItemCollectionKeys
 
-return function(value, p0, p1)
+return function(value, p1, p2)
 	-- upvalues: reactModule (ref), getSduiFeedStoreModule (ref), fFlagSduiGetItemCollectionKeys (ref), signalsReactModule (ref), useSduiContextModule (ref), getItemCollectionKeyModule (ref), processCollectionConfigModule (ref)
-	local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: p1 (ref), getSduiFeedStoreModule (copy), value (ref), fFlagSduiGetItemCollectionKeys (copy)
-		return function(p2)
-			-- upvalues: p1 (copy), getSduiFeedStoreModule (copy), value (copy), fFlagSduiGetItemCollectionKeys (copy)
-			if not p1 then
+	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: p2 (ref), getSduiFeedStoreModule (copy), value (ref), fFlagSduiGetItemCollectionKeys (copy)
+		return function(p3)
+			-- upvalues: p2 (copy), getSduiFeedStoreModule (copy), value (copy), fFlagSduiGetItemCollectionKeys (copy)
+			if not p2 then
 				return {}
 			end
-			local var9 = getSduiFeedStoreModule(value)
-			local templates = var9.getTemplates(p2)
-			local dataUpdatedTimestamp = var9.getDataUpdatedTimestamp(p2)
+			local var2 = getSduiFeedStoreModule(value)
+			local templates = var2.getTemplates(p3)
+			local dataUpdatedTimestamp = var2.getDataUpdatedTimestamp(p3)
 			local t = {}
 			
-			for i, v in if fFlagSduiGetItemCollectionKeys and var9.getItemCollectionKeys then var9.getItemCollectionKeys(p2) else {} do
-				local itemCollection = var9.getItemCollection(v)
+			for i, v in if fFlagSduiGetItemCollectionKeys and var2.getItemCollectionKeys then var2.getItemCollectionKeys(p3) else {} do
+				local itemCollection = var2.getItemCollection(v)
 				
 				if itemCollection then
-					t[v] = itemCollection(p2)
+					t[v] = itemCollection(p3)
 				end
 			end
 			return {
@@ -36,35 +36,35 @@ return function(value, p0, p1)
 				unprocessedItemCollections = t
 			}
 		end
-	end, { value, p1 }))
-	local var8 = useSduiContextModule({
-		appPage = p0,
-		templates = var7.templates,
-		dataUpdatedTimestamp = var7.dataUpdatedTimestamp
+	end, { value, p2 }))
+	local var3 = useSduiContextModule({
+		appPage = p1,
+		templates = var1.templates,
+		dataUpdatedTimestamp = var1.dataUpdatedTimestamp
 	})
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), getSduiFeedStoreModule (copy), p0 (ref), var7 (ref), getItemCollectionKeyModule (copy), processCollectionConfigModule (copy), var8 (ref)
-		if not p1 then return end
-		local var14 = getSduiFeedStoreModule(p0)
+		-- upvalues: p2 (ref), getSduiFeedStoreModule (copy), p1 (ref), var1 (ref), getItemCollectionKeyModule (copy), processCollectionConfigModule (copy), var3 (ref)
+		if not p2 then return end
+		local var4 = getSduiFeedStoreModule(p1)
 		local t = {}
 		
-		if var7.unprocessedItemCollections then
-			for i, v in var7.unprocessedItemCollections do
+		if var1.unprocessedItemCollections then
+			for i, v in var1.unprocessedItemCollections do
 				t[getItemCollectionKeyModule(v.topicId, v.sortIndex)] = {
-					sduiConfig = processCollectionConfigModule(v.componentConfig, v.topicId, var8),
-					dataUpdatedTimestamp = var7.dataUpdatedTimestamp
+					sduiConfig = processCollectionConfigModule(v.componentConfig, v.topicId, var3),
+					dataUpdatedTimestamp = var1.dataUpdatedTimestamp
 				}
 			end
-			var14.updateData({
-				templates = var7.templates,
+			var4.updateData({
+				templates = var1.templates,
 				itemCollections = t,
-				dataUpdatedTimestamp = var7.dataUpdatedTimestamp
+				dataUpdatedTimestamp = var1.dataUpdatedTimestamp
 			})
 		end
 	end, {
-		var8, var7.unprocessedItemCollections, var7.templates,
-		var7.dataUpdatedTimestamp, p0, p1
+		var3, var1.unprocessedItemCollections, var1.templates,
+		var1.dataUpdatedTimestamp, p1, p2
 	})
 	
-	return var8
+	return var3
 end

@@ -14,37 +14,37 @@ local _ = require(script.Parent.Parent.types.types)
 local mutationData = require(script.Parent.Parent.data).MutationData
 local getApolloContext = require(script.Parent.Parent.context).getApolloContext
 
-function t.useMutation(p0, p1)
+function t.useMutation(p1, p2)
 	-- upvalues: useContext (ref), getApolloContext (ref), useState (ref), object (ref), useRef (ref), mutationData (ref), useEffect (ref)
-	local var2 = useContext(getApolloContext())
-	local var3, var4 = useState({ called = false, loading = false })
-	local var5 = if p1 then object.assign({}, p1, { mutation = p0 }) else { mutation = p0 }
-	local var6 = useRef(nil)
-	local var7 = (function()
-		-- upvalues: var6 (ref), mutationData (copy), var5 (ref), var2 (ref), var3 (ref), var4 (ref)
-		if not var6.current then
-			var6.current = mutationData.new({
-				options = var5,
-				context = var2,
-				result = var3,
-				setResult = function(_, p2)
-					-- upvalues: var4 (copy)
-					var4(p2)
+	local var1 = useContext(getApolloContext())
+	local var2, var3 = useState({ called = false, loading = false })
+	local var4 = if p2 then object.assign({}, p2, { mutation = p1 }) else { mutation = p1 }
+	local var5 = useRef(nil)
+	local var6 = (function()
+		-- upvalues: var5 (ref), mutationData (copy), var4 (ref), var1 (ref), var2 (ref), var3 (ref)
+		if not var5.current then
+			var5.current = mutationData.new({
+				options = var4,
+				context = var1,
+				result = var2,
+				setResult = function(_, p3)
+					-- upvalues: var3 (copy)
+					var3(p3)
 					
 					return nil
 				end
 			})
 		end
-		return var6.current
+		return var5.current
 	end)()
-	var7:setOptions(var5)
-	var7.context = var2
+	var6:setOptions(var4)
+	var6.context = var1
 	useEffect(function()
-		-- upvalues: var7 (ref)
-		return var7:afterExecute()
+		-- upvalues: var6 (ref)
+		return var6:afterExecute()
 	end)
 	
-	return var7:execute(var3)
+	return var6:execute(var2)
 end
 
 return t

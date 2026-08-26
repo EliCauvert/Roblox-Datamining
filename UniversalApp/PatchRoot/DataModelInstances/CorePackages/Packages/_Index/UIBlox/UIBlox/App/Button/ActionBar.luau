@@ -26,26 +26,26 @@ function actionBar.init(p1)
 	p1.state = { frameWidth = 0 }
 	p1.frameRef = p1.props.frameRef or roactModule.createRef()
 	
-	function p0.updateFrameSize(p1)
-		-- upvalues: p1 (ref)
-		local x = p1.AbsoluteSize.X
+	function p0.updateFrameSize(p2)
+		-- upvalues: p2 (ref)
+		local x = p2.AbsoluteSize.X
 		
-		if x ~= p1.state.frameWidth then
-			p1:setState({ frameWidth = x })
+		if x ~= p2.state.frameWidth then
+			p2:setState({ frameWidth = x })
 		end
-		if p1.props.onAbsoluteSizeChanged then
-			p1.props.onAbsoluteSizeChanged(p1.AbsoluteSize)
+		if p2.props.onAbsoluteSizeChanged then
+			p2.props.onAbsoluteSizeChanged(p2.AbsoluteSize)
 		end
 	end
 	
-	function p0.getGamepadNextSelectionLeft(p1, _)
-		-- upvalues: p1 (ref)
-		return if p1 > 1 then p1.buttonRefs[p1 - 1] else nil
+	function p0.getGamepadNextSelectionLeft(p2, _)
+		-- upvalues: p2 (ref)
+		return if p2 > 1 then p2.buttonRefs[p2 - 1] else nil
 	end
 	
-	function p0.getGamepadNextSelectionRight(p1, p2)
-		-- upvalues: p1 (ref)
-		return if p1 < p2 then p1.buttonRefs[p1 + 1] else nil
+	function p0.getGamepadNextSelectionRight(p2, p3)
+		-- upvalues: p2 (ref)
+		return if p2 < p3 then p2.buttonRefs[p2 + 1] else nil
 	end
 end
 
@@ -213,15 +213,15 @@ function actionBar.render(p1)
 	end)
 end
 
-function actionBar.didMount(p1)
-	if p1.frameRef.current then
-		p1.updateFrameSize(p1.frameRef.current)
+function actionBar.didMount(p2)
+	if p2.frameRef.current then
+		p2.updateFrameSize(p2.frameRef.current)
 	end
 end
 
-local var16 = roactModule.forwardRef(function(p1, p2)
+local var16 = roactModule.forwardRef(function(p2, p3)
 	-- upvalues: roactModule (ref), actionBar (ref), cryoModule (ref)
-	return roactModule.createElement(actionBar, cryoModule.Dictionary.join(p1, { frameRef = p2 }))
+	return roactModule.createElement(actionBar, cryoModule.Dictionary.join(p2, { frameRef = p3 }))
 end)
 var16.validateProps = actionBar.validateProps
 

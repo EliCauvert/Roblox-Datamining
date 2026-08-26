@@ -2,28 +2,28 @@
 local parent = script.Parent.Parent
 local httpRequestModule = require(parent.HttpRequest)
 local sharedFlagsModule = require(parent.SharedFlags)
-local var3 = `{require(parent.CoreScriptsCommon).Url.APIS_URL .. "platform-leaderboards-api"}/v1/rcc/universes/{game.GameId}/leaderboard`
+local var1 = `{require(parent.CoreScriptsCommon).Url.APIS_URL .. "platform-leaderboards-api"}/v1/rcc/universes/{game.GameId}/leaderboard`
 local leaderboardType = require(script.Parent.PlatformLeaderboardTypes).LeaderboardType
 local platformLeaderboardFetcherHttpRetryCount = game:DefineFastInt("PlatformLeaderboardFetcherHttpRetryCount", 0)
 local platformLeaderboardFetcherDefaultCount = game:DefineFastInt("PlatformLeaderboardFetcherDefaultCount", 100)
 local platformLeaderboardDisplayNameEnabled = game:DefineFastFlag("PlatformLeaderboardDisplayNameEnabled", false)
 local platformLeaderboardBadgeMetadataEnabled = game:DefineFastFlag("PlatformLeaderboardBadgeMetadataEnabled", false)
 local fFlagPlatformLeaderboardDebugLogging = sharedFlagsModule.FFlagPlatformLeaderboardDebugLogging
-local var8 = httpRequestModule.config({
+local var2 = httpRequestModule.config({
 	requestFunction = httpRequestModule.requestFunctions.HttpRbxApi,
 	maxRetryCount = platformLeaderboardFetcherHttpRetryCount
 })
 
-local function get(p0)
-	-- upvalues: var8 (ref), fFlagPlatformLeaderboardDebugLogging (ref), httpService (ref)
-	local ok, status, var15 = pcall(function()
-		-- upvalues: var8 (copy), p0 (ref)
-		return var8(p0, "GET"):await()
+local function get(p1)
+	-- upvalues: var2 (ref), fFlagPlatformLeaderboardDebugLogging (ref), httpService (ref)
+	local ok, status, var3 = pcall(function()
+		-- upvalues: var2 (copy), p1 (ref)
+		return var2(p1, "GET"):await()
 	end)
 	
 	if ok and status then
-		if typeof(var15) == "table" then
-			local body = var15.Body or var15.responseBody
+		if typeof(var3) == "table" then
+			local body = var3.Body or var3.responseBody
 			
 			if typeof(body) ~= "string" then
 				return true, body
@@ -57,54 +57,54 @@ local function formatEntry(p1)
 	if userId == nil or score == nil then
 		return nil
 	end
-	local var17 = tonumber(userId)
-	local var18 = tonumber(score)
+	local var3 = tonumber(userId)
+	local var4 = tonumber(score)
 	
-	if var17 == nil or var18 == nil then
+	if var3 == nil or var4 == nil then
 		return nil
 	end
 	local rank = p1.rank
-	local var19 = if rank == nil then nil else tonumber(rank)
-	local var20 = if platformLeaderboardDisplayNameEnabled then if typeof(p1.displayName) == "string" then p1.displayName else nil else nil
-	local var21 = nil
-	local var22 = nil
+	local var5 = if rank == nil then nil else tonumber(rank)
+	local var6 = if platformLeaderboardDisplayNameEnabled then if typeof(p1.displayName) == "string" then p1.displayName else nil else nil
+	local var7 = nil
+	local var8 = nil
 	
 	if platformLeaderboardBadgeMetadataEnabled then
-		var21 = if typeof(p1.isVerified) == "boolean" then p1.isVerified else nil
-		var22 = if typeof(p1.hasRobloxSubscription) == "boolean" then p1.hasRobloxSubscription else nil
+		var7 = if typeof(p1.isVerified) == "boolean" then p1.isVerified else nil
+		var8 = if typeof(p1.hasRobloxSubscription) == "boolean" then p1.hasRobloxSubscription else nil
 	end
 	return {
-		userId = var17,
-		score = var18,
-		rank = var19,
-		displayName = var20,
-		isVerified = var21,
-		hasRobloxSubscription = var22
+		userId = var3,
+		score = var4,
+		rank = var5,
+		displayName = var6,
+		isVerified = var7,
+		hasRobloxSubscription = var8
 	}
 end
 
-local function formatEntries(p2)
+local function formatEntries(p1)
 	-- upvalues: formatEntry (ref)
 	local t = {}
 	
-	for i, v in p2 do
-		local var24 = formatEntry(v)
+	for i, v in p1 do
+		local var3 = formatEntry(v)
 		
-		if var24 ~= nil then
-			table.insert(t, var24)
+		if var3 ~= nil then
+			table.insert(t, var3)
 		end
 	end
 	return t
 end
 
-local function formatConfig(p3)
-	if p3 == nil or p3.leaderboardId == nil then
+local function formatConfig(p2)
+	if p2 == nil or p2.leaderboardId == nil then
 		return nil
 	end
-	local leaderboardId = p3.leaderboardId
+	local leaderboardId = p2.leaderboardId
 	
 	if typeof(leaderboardId) == "string" then
-		local unit = p3.unit
+		local unit = p2.unit
 		
 		return {
 			leaderboardId = leaderboardId,
@@ -116,13 +116,13 @@ end
 
 local t = {
 	fetchConfig = function()
-		-- upvalues: var3 (ref), get (ref), fFlagPlatformLeaderboardDebugLogging (ref), formatConfig (ref)
-		local var25, var26 = get(`{var3}/config`)
+		-- upvalues: var1 (ref), get (ref), fFlagPlatformLeaderboardDebugLogging (ref), formatConfig (ref)
+		local var4, var5 = get(`{var1}/config`)
 		
-		if not var25 then
+		if not var4 then
 			return false, nil
-		elseif typeof(var26) == "table" then
-			local config = var26.config
+		elseif typeof(var5) == "table" then
+			local config = var5.config
 			
 			if config == nil or typeof(config) == "table" then
 				return true, formatConfig(config)
@@ -137,28 +137,28 @@ local t = {
 	end
 }
 
-local function fetchLeaderboard(_, p4, p5, p6)
-	-- upvalues: platformLeaderboardFetcherDefaultCount (ref), leaderboardType (ref), var3 (ref), fFlagPlatformLeaderboardDebugLogging (ref), get (ref), formatConfig (ref), formatEntries (ref)
-	p6 = p6 or platformLeaderboardFetcherDefaultCount
-	local var28 = nil
+local function fetchLeaderboard(_, p2, p3, p4)
+	-- upvalues: platformLeaderboardFetcherDefaultCount (ref), leaderboardType (ref), var1 (ref), fFlagPlatformLeaderboardDebugLogging (ref), get (ref), formatConfig (ref), formatEntries (ref)
+	p4 = p4 or platformLeaderboardFetcherDefaultCount
+	local var4 = nil
 	
-	if p4 == leaderboardType.Global then
-		var28 = `{var3}/global?count={p6}`
-	elseif p4 == leaderboardType.Friends and p5 ~= nil then
-		var28 = `{var3}/friends?userid={p5}&count={p6}`
+	if p2 == leaderboardType.Global then
+		var4 = `{var1}/global?count={p4}`
+	elseif p2 == leaderboardType.Friends and p3 ~= nil then
+		var4 = `{var1}/friends?userid={p3}&count={p4}`
 	elseif fFlagPlatformLeaderboardDebugLogging then
 		warn("[PlatformLeaderboard] Fetcher missing userId for friends leaderboard")
 	end
 	return false, nil
-	local var29, var30 = get(var28)
+	local var5, var6 = get(var4)
 	
-	if not var29 then
+	if not var5 then
 		return false, nil
-	elseif typeof(var30) == "table" then
-		local config = var30.config
+	elseif typeof(var6) == "table" then
+		local config = var6.config
 		
 		if config == nil or typeof(config) == "table" then
-			local scores = var30.scores
+			local scores = var6.scores
 			
 			if scores == nil or typeof(scores) == "table" then
 				return true, {
@@ -179,24 +179,24 @@ local function fetchLeaderboard(_, p4, p5, p6)
 	return false, nil
 end
 
-function t.fetchGlobalLeaderboard(p7, p8)
+function t.fetchGlobalLeaderboard(p2, p3)
 	-- upvalues: fetchLeaderboard (ref), leaderboardType (ref)
-	return fetchLeaderboard(p7, leaderboardType.Global, nil, p8)
+	return fetchLeaderboard(p2, leaderboardType.Global, nil, p3)
 end
 
-function t.fetchFriendsLeaderboard(p9, p10, p11)
+function t.fetchFriendsLeaderboard(p2, p3, p4)
 	-- upvalues: fetchLeaderboard (ref), leaderboardType (ref)
-	return fetchLeaderboard(p9, leaderboardType.Friends, p10, p11)
+	return fetchLeaderboard(p2, leaderboardType.Friends, p3, p4)
 end
 
-function t.fetchUserScore(_, p12)
-	-- upvalues: var3 (ref), get (ref), fFlagPlatformLeaderboardDebugLogging (ref), formatEntry (ref)
-	local var31, var32 = get(`{var3}/{p12}/score`)
+function t.fetchUserScore(_, p2)
+	-- upvalues: var1 (ref), get (ref), fFlagPlatformLeaderboardDebugLogging (ref), formatEntry (ref)
+	local var4, var5 = get(`{var1}/{p2}/score`)
 	
-	if not var31 then
+	if not var4 then
 		return false, nil
-	elseif typeof(var32) == "table" then
-		local userScore = var32.userScore
+	elseif typeof(var5) == "table" then
+		local userScore = var5.userScore
 		
 		if userScore == nil or typeof(userScore) == "table" then
 			if userScore then

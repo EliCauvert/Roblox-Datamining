@@ -36,19 +36,19 @@ end
 local function validateFacialBounds(p1, p2)
 	-- upvalues: pcallDeferredModule (ref), getExpectedPartSizeModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), var1 (ref)
 	local isServer = p2.isServer
-	local var1, var2 = pcallDeferredModule(function()
-		-- upvalues: getExpectedPartSizeModule (copy), p1 (ref), p2 (ref), getEditableMeshFromContextModule (copy), UGCValidationService (copy), var1 (copy)
-		local var1 = getExpectedPartSizeModule(p1, p2)
-		local var2, var3 = getEditableMeshFromContextModule(p1, "MeshId", p2)
+	local var4, var5 = pcallDeferredModule(function()
+		-- upvalues: getExpectedPartSizeModule (copy), p1 (ref), p2 (ref), getEditableMeshFromContextModule (copy), UGCValidationService (copy), var4 (copy)
+		local var6 = getExpectedPartSizeModule(p1, p2)
+		local var7, var8 = getEditableMeshFromContextModule(p1, "MeshId", p2)
 		
-		if not var2 then
+		if not var7 then
 			error("Failed to retrieve MeshContent")
 		end
-		return UGCValidationService:ValidateEditableMeshFacialBounds(var3, var1, var1)
+		return UGCValidationService:ValidateEditableMeshFacialBounds(var8, var6, var6)
 	end, p2)
 	
-	if var1 then
-		if var2 then
+	if var4 then
+		if var5 then
 			return true
 		end
 		return false, {
@@ -67,21 +67,21 @@ end
 local function validateFacialExpressiveness(p1, p2)
 	-- upvalues: pcallDeferredModule (ref), getExpectedPartSizeModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), var3 (ref), var2 (ref)
 	local isServer = p2.isServer
-	local var1, var2 = pcallDeferredModule(function()
+	local var4, var5 = pcallDeferredModule(function()
 		-- upvalues: getExpectedPartSizeModule (copy), p1 (ref), p2 (ref), getEditableMeshFromContextModule (copy), UGCValidationService (copy), var3 (copy)
-		local var1 = getExpectedPartSizeModule(p1, p2)
-		local var2, var3 = getEditableMeshFromContextModule(p1, "MeshId", p2)
+		local var6 = getExpectedPartSizeModule(p1, p2)
+		local var7, var8 = getEditableMeshFromContextModule(p1, "MeshId", p2)
 		
-		if not var2 then
+		if not var7 then
 			error("Failed to retrieve MeshContent")
 		end
-		return UGCValidationService:ValidateEditableMeshFacialExpressiveness(var3, var3, var1)
+		return UGCValidationService:ValidateEditableMeshFacialExpressiveness(var8, var8, var6)
 	end, p2)
 	
-	if var1 then
-		if var2 < var2 then
+	if var4 then
+		if var5 < var5 then
 			return false, {
-				string.format("DynamicHead (%s) did not pass threshold (%f < %f) for percent change when emoting", p1:GetFullName(), var2, var2)
+				string.format("DynamicHead (%s) did not pass threshold (%f < %f) for percent change when emoting", p1:GetFullName(), var5, var5)
 			}
 		end
 		return true
@@ -103,12 +103,12 @@ return function(p1, p2)
 	if not getFFlagUGCValidateMigrateDynamicHeadDataModule() then
 		local ok, status = pcall(function()
 			-- upvalues: getEditableMeshFromContextModule (copy), p1 (ref), p2 (ref), UGCValidationService (copy)
-			local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p2)
+			local var4, var5 = getEditableMeshFromContextModule(p1, "MeshId", p2)
 			
-			if not var1 then
+			if not var4 then
 				error("Failed to retrieve MeshContent")
 			end
-			return UGCValidationService:ValidateDynamicHeadEditableMesh(var2)
+			return UGCValidationService:ValidateDynamicHeadEditableMesh(var5)
 		end)
 		
 		if not ok then
@@ -121,17 +121,17 @@ return function(p1, p2)
 			}
 		end
 	end
-	local var1 = failureReasonsAccumulatorModule.new()
+	local var4 = failureReasonsAccumulatorModule.new()
 	
 	if not getFFlagUGCValidateMigrateDynamicHeadDataModule() then
-		local ok, status, var2 = pcall(function()
+		local ok, status, var5 = pcall(function()
 			-- upvalues: getEditableMeshFromContextModule (copy), p1 (ref), p2 (ref), UGCValidationService (copy), list (copy)
-			local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p2)
+			local var6, var7 = getEditableMeshFromContextModule(p1, "MeshId", p2)
 			
-			if not var1 then
+			if not var6 then
 				error("Failed to retrieve MeshContent")
 			end
-			return UGCValidationService:GetDynamicHeadEditableMeshInactiveControls(var2, list)
+			return UGCValidationService:GetDynamicHeadEditableMeshInactiveControls(var7, list)
 		end)
 		
 		if not ok then
@@ -140,29 +140,29 @@ return function(p1, p2)
 			end
 			assert(false, status)
 		end
-		local var3 = #status == 0
-		local var4 = #var2 == 0
+		local var6 = #status == 0
+		local var7 = #var5 == 0
 		
-		if not var3 or not var4 then
+		if not var6 or not var7 then
 			analyticsModule.reportFailure(analyticsModule.ErrorType.validateDynamicHeadMeshPartFormat_ValidateDynamicHeadMeshControls, nil, p2)
-			var1:updateReasons(var3, {
+			var4:updateReasons(var6, {
 				`{p1.Name}.MeshId ({p1.MeshId}) is missing FACS controls: {table.concat(status, ", ")}`
 			})
-			var1:updateReasons(var4, {
-				`{p1.Name}.MeshId ({p1.MeshId}) has inactive FACS controls: {table.concat(var2, ", ")}`
+			var4:updateReasons(var7, {
+				`{p1.Name}.MeshId ({p1.MeshId}) has inactive FACS controls: {table.concat(var5, ", ")}`
 			})
 		end
 	end
 	if not getFFlagUGCValidateMigrateDynamicHeadDataModule() then
-		var1:updateReasons(validateFacialExpressiveness(p1, p2))
+		var4:updateReasons(validateFacialExpressiveness(p1, p2))
 	end
 	if not getEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule() then
-		var1:updateReasons(validateFacialBounds(p1, p2))
+		var4:updateReasons(validateFacialBounds(p1, p2))
 	end
 	if not getFFlagUGCValidateMigrateDynamicHeadDataModule() and getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then
-		var1:updateReasons(validateFacsJointBoundsModule(p1, p2))
+		var4:updateReasons(validateFacsJointBoundsModule(p1, p2))
 	end
 	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
 	
-	return var1:getFinalResults()
+	return var4:getFinalResults()
 end

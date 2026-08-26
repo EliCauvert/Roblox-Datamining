@@ -2,10 +2,10 @@
 local cryoModule = require(reactSceneUnderstanding.Parent.Cryo)
 local sceneUnderstandingModule = require(reactSceneUnderstanding.Parent.SceneUnderstanding)
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), sceneUnderstandingModule (ref)
-	return cryoModule.List.sort(cryoModule.List.filter(p0, sceneUnderstandingModule.isAudible), function(p1, p2)
+	return cryoModule.List.sort(cryoModule.List.filter(p1, sceneUnderstandingModule.isAudible), function(p2, p3)
 		-- upvalues: sceneUnderstandingModule (copy)
-		return sceneUnderstandingModule.calculatePotentialAudibility(p2) < sceneUnderstandingModule.calculatePotentialAudibility(p1)
+		return sceneUnderstandingModule.calculatePotentialAudibility(p3) < sceneUnderstandingModule.calculatePotentialAudibility(p2)
 	end)
 end

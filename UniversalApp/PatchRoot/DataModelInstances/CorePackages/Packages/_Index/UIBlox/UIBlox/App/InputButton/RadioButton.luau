@@ -31,11 +31,11 @@ radioButton.defaultProps = {
 	isRoactGamepadEnabled = true
 }
 
-function radioButton.init(p0)
+function radioButton.init(p1)
 	function p0.onSetValue()
-		-- upvalues: p0 (ref)
-		if not p0.props.isDisabled then
-			p0.props.onActivated(p0.props.id)
+		-- upvalues: p1 (ref)
+		if not p1.props.isDisabled then
+			p1.props.onActivated(p1.props.id)
 		end
 	end
 end
@@ -53,7 +53,7 @@ function radioButton.render(p1)
 		local _ = nil
 		local isSelected = p1.props.isSelected
 		local color_2 = theme.TextDefault.Color
-		local var8 = if p1.props.isDisabled then 0.5 else theme.TextDefault.Transparency
+		local var1 = if p1.props.isDisabled then 0.5 else theme.TextDefault.Transparency
 		
 		if isSelected then
 			uDim2 = UDim2.new(0, 18, 0, 18)
@@ -73,7 +73,7 @@ function radioButton.render(p1)
 			fillImageColor = color_1,
 			selectedColor = theme.SystemPrimaryDefault.Color,
 			textColor = color_2,
-			transparency = var8,
+			transparency = var1,
 			layoutOrder = p1.props.layoutOrder,
 			isDisabled = p1.props.isDisabled,
 			isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled,
@@ -87,7 +87,7 @@ function radioButton.render(p1)
 	end)
 end
 
-return roactModule.forwardRef(function(p3, p4)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), radioButton (ref), cryoModule (ref)
-	return roactModule.createElement(radioButton, cryoModule.Dictionary.join(p3, { forwardRef = p4 }))
+	return roactModule.createElement(radioButton, cryoModule.Dictionary.join(p1, { forwardRef = p2 }))
 end)

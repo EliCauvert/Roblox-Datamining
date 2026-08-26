@@ -6,22 +6,22 @@ local object = luauPolyfillModule.Object
 local _ = require(script.Parent.ObjMap)
 
 return {
-	promiseForObject = function(p0)
+	promiseForObject = function(p1)
 		-- upvalues: object (ref), array (ref), promiseModule (ref)
-		local var2 = object.keys(p0)
+		local var1 = object.keys(p1)
 		
-		return promiseModule.all(array.map(var2, function(p5)
-			-- upvalues: p0 (ref), promiseModule (copy)
-			local var3 = p0[p5]
+		return promiseModule.all(array.map(var1, function(p2)
+			-- upvalues: p1 (ref), promiseModule (copy)
+			local var2 = p1[p2]
 			
-			return if promiseModule.is(var3) then var3 else promiseModule.resolve(var3)
-		end)):andThen(function(p1)
-			-- upvalues: array (copy), var2 (ref)
-			return array.reduce(p1, function(p2, p3, p4)
-				-- upvalues: var2 (copy)
-				p2[var2[p4]] = p3
+			return if promiseModule.is(var2) then var2 else promiseModule.resolve(var2)
+		end)):andThen(function(p2)
+			-- upvalues: array (copy), var1 (ref)
+			return array.reduce(p2, function(p3, p4, p5)
+				-- upvalues: var1 (copy)
+				p3[var1[p5]] = p4
 				
-				return p2
+				return p3
 			end, {})
 		end)
 	end

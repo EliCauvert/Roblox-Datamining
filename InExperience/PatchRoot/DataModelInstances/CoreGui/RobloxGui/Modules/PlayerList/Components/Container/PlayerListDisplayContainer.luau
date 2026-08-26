@@ -10,49 +10,49 @@ local playerListDisplayViewModule = require(parent.Components.PresentationCommon
 local setPlayerListVisibilityModule = require(parent.Actions.SetPlayerListVisibility)
 local fFlagAddNewPlayerListFocusNav = playerListModule.Flags.FFlagAddNewPlayerListFocusNav
 
-local function PlayerListDisplayContainer(p0)
+local function PlayerListDisplayContainer(p1)
 	-- upvalues: useLeaderboardStore (ref), signalsReactModule (ref), reactModule (ref), playerListDisplayViewModule (ref)
-	local var8 = useLeaderboardStore()
-	local teamList = var8.getTeamList()
+	local var1 = useLeaderboardStore()
+	local teamList = var1.getTeamList()
 	
-	return if var8 then reactModule.createElement(reactModule.Fragment, nil, reactModule.createElement(playerListDisplayViewModule, {
+	return if var1 then reactModule.createElement(reactModule.Fragment, nil, reactModule.createElement(playerListDisplayViewModule, {
 		teamList = teamList,
 		teamListCount = signalsReactModule.useSignalState(teamList.getCount),
-		gameStatsCount = signalsReactModule.useSignalState(var8.getGameStatsList().getCount),
-		entrySizeX = p0.entrySize,
-		screenSizeY = p0.screenSizeY,
-		playerIconInfo = p0.playerIconInfo,
-		playerRelationship = p0.playerRelationship,
-		dropDownPlayer = p0.dropDownPlayer,
-		dropDownVisible = p0.dropDownVisible,
-		dismissPlayerList = p0.dismissPlayerList,
-		isVisible = p0.isVisible,
-		isMinimized = p0.isMinimized,
-		isSmallTouchDevice = p0.isSmallTouchDevice,
-		isDirectionalPreferred = p0.isDirectionalPreferred,
-		isUsingGamepad = p0.isUsingGamepad
+		gameStatsCount = signalsReactModule.useSignalState(var1.getGameStatsList().getCount),
+		entrySizeX = p1.entrySize,
+		screenSizeY = p1.screenSizeY,
+		playerIconInfo = p1.playerIconInfo,
+		playerRelationship = p1.playerRelationship,
+		dropDownPlayer = p1.dropDownPlayer,
+		dropDownVisible = p1.dropDownVisible,
+		dismissPlayerList = p1.dismissPlayerList,
+		isVisible = p1.isVisible,
+		isMinimized = p1.isMinimized,
+		isSmallTouchDevice = p1.isSmallTouchDevice,
+		isDirectionalPreferred = p1.isDirectionalPreferred,
+		isUsingGamepad = p1.isUsingGamepad
 	})) else nil
 end
 
-return reactModule.memo(roactRoduxModule.connect(function(p2)
+return reactModule.memo(roactRoduxModule.connect(function(p1)
 	-- upvalues: fFlagAddNewPlayerListFocusNav (ref)
 	return {
-		isVisible = if fFlagAddNewPlayerListFocusNav then nil else p2.displayOptions.isVisible,
-		isMinimized = p2.displayOptions.isMinimized,
-		isDirectionalPreferred = p2.displayOptions.isTenFootInterface,
-		isUsingGamepad = p2.displayOptions.isUsingGamepad,
-		isSmallTouchDevice = p2.displayOptions.isSmallTouchDevice,
-		playerIconInfo = p2.playerIconInfo,
-		playerRelationship = p2.playerRelationship,
-		dropDownPlayer = p2.playerDropDown.selectedPlayer,
-		dropDownVisible = p2.playerDropDown.isVisible
+		isVisible = if fFlagAddNewPlayerListFocusNav then nil else p1.displayOptions.isVisible,
+		isMinimized = p1.displayOptions.isMinimized,
+		isDirectionalPreferred = p1.displayOptions.isTenFootInterface,
+		isUsingGamepad = p1.displayOptions.isUsingGamepad,
+		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice,
+		playerIconInfo = p1.playerIconInfo,
+		playerRelationship = p1.playerRelationship,
+		dropDownPlayer = p1.playerDropDown.selectedPlayer,
+		dropDownVisible = p1.playerDropDown.isVisible
 	}
-end, function(p3)
+end, function(p1)
 	-- upvalues: setPlayerListVisibilityModule (ref)
 	return {
 		dismissPlayerList = function()
-			-- upvalues: p3 (ref), setPlayerListVisibilityModule (copy)
-			return p3(setPlayerListVisibilityModule(false))
+			-- upvalues: p1 (ref), setPlayerListVisibilityModule (copy)
+			return p1(setPlayerListVisibilityModule(false))
 		end
 	}
 end)(function(p1)

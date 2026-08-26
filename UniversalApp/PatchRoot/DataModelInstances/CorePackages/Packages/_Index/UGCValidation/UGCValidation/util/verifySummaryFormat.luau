@@ -1,18 +1,18 @@
-﻿return function(p0, p1)
-	if p0 == nil or typeof(p0) ~= "table" then
+﻿return function(p1, p2)
+	if p1 == nil or typeof(p1) ~= "table" then
 		return false
 	end
 	local t = {}
 	
-	for i, v in p1 do
+	for i, v in p2 do
 		t[v] = true
 	end
-	for i_1, v_1 in p1 do
-		if p0[v_1] == nil or typeof(p0[v_1]) ~= "number" then
+	for i_1, v_1 in p2 do
+		if p1[v_1] == nil or typeof(p1[v_1]) ~= "number" then
 			return false
 		end
 	end
-	for i_2, v_1 in p0 do
+	for i_2, v_1 in p1 do
 		if not t[i_2] then
 			return false
 		end

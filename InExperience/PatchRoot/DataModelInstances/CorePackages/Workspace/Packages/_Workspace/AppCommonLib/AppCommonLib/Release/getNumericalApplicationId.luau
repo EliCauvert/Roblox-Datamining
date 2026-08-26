@@ -2,10 +2,10 @@
 game:DefineFastFlag("EnableContactInvitesForNonPhoneVerifiedForAll", false)
 game:DefineFastInt("EnableContactInvitesForNonPhoneVerifiedRollout", 0)
 
-return function(p0)
+return function(p1)
 	-- upvalues: appStorageService (ref)
-	local appInstallationIdItem = (p0 or appStorageService):GetItem("AppInstallationId")
-	local var2 = typeof(appInstallationIdItem)
+	local appInstallationIdItem = (p1 or appStorageService):GetItem("AppInstallationId")
+	local var1 = typeof(appInstallationIdItem)
 	
-	return if var2 == "number" then appInstallationIdItem elseif var2 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -2)) else nil
+	return if var1 == "number" then appInstallationIdItem elseif var1 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -2)) else nil
 end

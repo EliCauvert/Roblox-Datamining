@@ -4,56 +4,56 @@ local parent = script.Parent.Parent
 local promiseModule = require(parent.Parent.Promise)
 local loggerModule = require(parent.Logger)
 
-return function(p0)
+return function(p1)
 	-- upvalues: policyService (ref), playersService (ref), promiseModule (ref), loggerModule (ref)
-	p0 = p0 or {}
-	p0.PolicyService = p0.PolicyService or policyService
-	p0.PlayersService = p0.PlayersService or playersService
-	assert(p0.PolicyService, "expected dependencies.PolicyService")
-	assert(p0.PlayersService, "expected dependencies.PlayersService")
-	p0 = p0.PolicyService
-	local playersService_1 = p0.PlayersService
+	p1 = p1 or {}
+	p1.PolicyService = p1.PolicyService or policyService
+	p1.PlayersService = p1.PlayersService or playersService
+	assert(p1.PolicyService, "expected dependencies.PolicyService")
+	assert(p1.PlayersService, "expected dependencies.PlayersService")
+	p1 = p1.PolicyService
+	local playersService_1 = p1.PlayersService
 	
 	return function()
-		-- upvalues: promiseModule (copy), playersService_1 (ref), p0 (ref), loggerModule (copy)
+		-- upvalues: promiseModule (copy), playersService_1 (ref), p1 (ref), loggerModule (copy)
 		return {
 			read = function()
 				return nil
 			end,
-			onPolicyChanged = function(p1)
-				-- upvalues: promiseModule (copy), playersService_1 (copy), p0 (copy), loggerModule (copy)
+			onPolicyChanged = function(p2)
+				-- upvalues: promiseModule (copy), playersService_1 (copy), p1 (copy), loggerModule (copy)
 				local bindableEvent = Instance.new("BindableEvent")
-				local eventConnection = bindableEvent.Event:Connect(p1)
-				promiseModule.new(function(p4, p5)
-					-- upvalues: playersService_1 (copy), p0 (copy)
+				local eventConnection = bindableEvent.Event:Connect(p2)
+				promiseModule.new(function(p3, p4)
+					-- upvalues: playersService_1 (copy), p1 (copy)
 					local localPlayer = playersService_1.LocalPlayer
 					
 					if not localPlayer then
-						p5("LocalPlayer not found")
+						p4("LocalPlayer not found")
 						
 						return
 					end
 					local ok, status = pcall(function()
-						-- upvalues: p0 (copy), localPlayer (ref)
-						return p0:GetPolicyInfoForPlayerAsync(localPlayer)
+						-- upvalues: p1 (copy), localPlayer (ref)
+						return p1:GetPolicyInfoForPlayerAsync(localPlayer)
 					end)
 					
 					if not ok then
-						p5("GetPolicyInfoForPlayerAsync had an error when calling")
+						p4("GetPolicyInfoForPlayerAsync had an error when calling")
 						
 						return
 					elseif status then
-						p4(status)
+						p3(status)
 						
 						return
 					end
-					p5("GetPolicyInfoForPlayerAsync return nil value")
+					p4("GetPolicyInfoForPlayerAsync return nil value")
 				end):andThen(function(p3)
 					-- upvalues: bindableEvent (ref)
 					bindableEvent:Fire(p3)
-				end):catch(function(p2)
+				end):catch(function(p3)
 					-- upvalues: loggerModule (copy)
-					loggerModule:warning("Could not fetch from PolicyService due to error: {}", p2)
+					loggerModule:warning("Could not fetch from PolicyService due to error: {}", p3)
 				end)
 				
 				return eventConnection

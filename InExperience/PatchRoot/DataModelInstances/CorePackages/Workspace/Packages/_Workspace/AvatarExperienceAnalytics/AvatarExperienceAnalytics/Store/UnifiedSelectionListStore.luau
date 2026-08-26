@@ -2,9 +2,9 @@
 local t = {}
 
 return {
-	addToSelectionList = function(p0)
+	addToSelectionList = function(p1)
 		-- upvalues: t (write)
-		table.insert(t, p0)
+		table.insert(t, p1)
 	end,
 	removeFromSelectionList = function(p1)
 		-- upvalues: unifiedEventLogConstantsModule (ref), t (write)

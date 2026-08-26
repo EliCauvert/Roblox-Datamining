@@ -3,7 +3,7 @@ local _ = require(userList.Parent.React)
 local _ = require(userList.Common.Types)
 local useCtaRenderRowModule = require(userList.Hooks.useCtaRenderRow)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useCtaRenderRowModule (ref)
-	return p0.render(useCtaRenderRowModule(p0.ctaConfig))
+	return p1.render(useCtaRenderRowModule(p1.ctaConfig))
 end

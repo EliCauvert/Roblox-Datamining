@@ -7,7 +7,7 @@ local phaseModule = require(onPlatformSurveys.Enums.Phase)
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 local t = {}
 
-local function getInitialState(p0)
+local function getInitialState(p1)
 	-- upvalues: phaseModule (ref), t (ref)
 	return {
 		index = 1,
@@ -15,7 +15,7 @@ local function getInitialState(p0)
 		idempotencyKey = nil,
 		errorType = nil,
 		phase = phaseModule.Loading,
-		hasInvite = p0 == true,
+		hasInvite = p1 == true,
 		questions = {},
 		answersByQuestionId = {},
 		answer = t
@@ -29,38 +29,38 @@ end
 
 return {
 	getInitialState = getInitialState,
-	reducer = function(p2, p3)
+	reducer = function(p1, p2)
 		-- upvalues: getInitialState (ref), closedState (ref), dashModule (ref), phaseModule (ref), inlineSurveyHelpersModule (ref), fFlagInlineSurveyBranching (ref), t (ref)
-		if p3.type == "fetchRequested" then
-			return getInitialState(p2.hasInvite)
-		elseif p3.type == "questionsReceived" then
-			local response = p3.response
+		if p2.type == "fetchRequested" then
+			return getInitialState(p1.hasInvite)
+		elseif p2.type == "questionsReceived" then
+			local response = p2.response
 			
 			if response == nil or response.shouldPromptSurvey ~= true then
-				return closedState(p2.hasInvite)
+				return closedState(p1.hasInvite)
 			end
 			local questions = response.questions
 			
-			return if questions == nil or #questions == 0 then closedState(p2.hasInvite) else dashModule.join(getInitialState(p2.hasInvite), {
-				phase = if p2.hasInvite then phaseModule.Invite else phaseModule.Started,
+			return if questions == nil or #questions == 0 then closedState(p1.hasInvite) else dashModule.join(getInitialState(p1.hasInvite), {
+				phase = if p1.hasInvite then phaseModule.Invite else phaseModule.Started,
 				questions = questions,
 				surveyId = response.surveyId
 			})
 		else
-			return if p3.type == "fetchFailed" then dashModule.join(p2, { errorType = "fetch", phase = phaseModule.Error }) elseif p3.type == "setAnswer" then dashModule.join(p2, { answer = p3.answer }) elseif p3.type == "next" then dashModule.join(p2, {
-				index = if fFlagInlineSurveyBranching then inlineSurveyHelpersModule.resolveNextIndex(p2.questions, p2.index, p2.answer) or p2.index + 1 else p2.index + 1,
-				answersByQuestionId = inlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(p2.answersByQuestionId, p2.questions[p2.index], p2.answer),
+			return if p2.type == "fetchFailed" then dashModule.join(p1, { errorType = "fetch", phase = phaseModule.Error }) elseif p2.type == "setAnswer" then dashModule.join(p1, { answer = p2.answer }) elseif p2.type == "next" then dashModule.join(p1, {
+				index = if fFlagInlineSurveyBranching then inlineSurveyHelpersModule.resolveNextIndex(p1.questions, p1.index, p1.answer) or p1.index + 1 else p1.index + 1,
+				answersByQuestionId = inlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(p1.answersByQuestionId, p1.questions[p1.index], p1.answer),
 				answer = t,
 				errorType = dashModule.None
-			}) elseif p3.type == "submitStarted" then dashModule.join(p2, {
+			}) elseif p2.type == "submitStarted" then dashModule.join(p1, {
 				phase = phaseModule.Submitting,
-				answersByQuestionId = inlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(p2.answersByQuestionId, p2.questions[p2.index], p2.answer),
-				idempotencyKey = p3.idempotencyKey,
+				answersByQuestionId = inlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(p1.answersByQuestionId, p1.questions[p1.index], p1.answer),
+				idempotencyKey = p2.idempotencyKey,
 				errorType = dashModule.None
-			}) elseif p3.type == "submitSucceeded" then dashModule.join(p2, {
+			}) elseif p2.type == "submitSucceeded" then dashModule.join(p1, {
 				phase = phaseModule.Completed,
 				errorType = dashModule.None
-			}) elseif p3.type == "submitFailed" then dashModule.join(p2, { errorType = "submit", phase = phaseModule.Error }) elseif p3.type == "inviteAccepted" then dashModule.join(p2, { phase = phaseModule.Started }) elseif p3.type == "inviteDeclined" then closedState(p2.hasInvite) elseif p3.type == "dismissed" then closedState(p2.hasInvite) else p2
+			}) elseif p2.type == "submitFailed" then dashModule.join(p1, { errorType = "submit", phase = phaseModule.Error }) elseif p2.type == "inviteAccepted" then dashModule.join(p1, { phase = phaseModule.Started }) elseif p2.type == "inviteDeclined" then closedState(p1.hasInvite) elseif p2.type == "dismissed" then closedState(p1.hasInvite) else p1
 		end
 	end
 }

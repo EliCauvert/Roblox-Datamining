@@ -8,36 +8,36 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local t = { dampingRatio = 1, frequency = 3 }
 local uDim = UDim.new(0, 296)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref), buttonVariant (ref), view (ref), toast (ref), uDim (ref)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactOtterModule.useAnimatedBinding(-200, reactModule.useCallback(function()
-		-- upvalues: var5 (ref), p0 (ref)
-		if not var5 then
-			p0.onDismissed()
+	local var1, var2 = reactModule.useState(false)
+	local var3, var4 = reactOtterModule.useAnimatedBinding(-200, reactModule.useCallback(function()
+		-- upvalues: var1 (ref), p1 (ref)
+		if not var1 then
+			p1.onDismissed()
 		end
-	end, { var5, p0.onDismissed }))
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var8 (ref), reactOtterModule (copy), t (copy)
-		var6(false)
-		var8(reactOtterModule.spring(-200, t))
-	end, { var8 })
+	end, { var1, p1.onDismissed }))
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), var4 (ref), reactOtterModule (copy), t (copy)
+		var2(false)
+		var4(reactOtterModule.spring(-200, t))
+	end, { var4 })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var6 (ref), var8 (ref), reactOtterModule (copy), t (copy), var9 (ref)
-		if p0.show then
-			var6(true)
-			var8(reactOtterModule.spring(20, t))
+		-- upvalues: p1 (ref), var2 (ref), var4 (ref), reactOtterModule (copy), t (copy), var5 (ref)
+		if p1.show then
+			var2(true)
+			var4(reactOtterModule.spring(20, t))
 			
 			return
 		end
-		var9()
-	end, { p0.show, var8, var9 })
+		var5()
+	end, { p1.show, var4, var5 })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var9 (ref)
-		if p0.show and p0.duration > 0 then
-			local delayedThread = task.delay(p0.duration, function()
-				-- upvalues: var9 (copy)
-				var9()
+		-- upvalues: p1 (ref), var5 (ref)
+		if p1.show and p1.duration > 0 then
+			local delayedThread = task.delay(p1.duration, function()
+				-- upvalues: var5 (copy)
+				var5()
 			end)
 			
 			return function()
@@ -46,35 +46,35 @@ return function(p0)
 			end
 		end
 		return nil
-	end, { p0.show, p0.duration, var9 })
-	local onAction = p0.onAction
+	end, { p1.show, p1.duration, var5 })
+	local onAction = p1.onAction
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col align-x-center anchor-top-center",
-		Position = var7:map(function(p1)
-			return UDim2.new(0.5, 0, 0, p1)
+		Position = var3:map(function(p2)
+			return UDim2.new(0.5, 0, 0, p2)
 		end)
 	}, {
 		Toast = reactModule.createElement(toast, {
-			title = p0.title,
-			text = p0.text,
-			icon = p0.icon,
+			title = p1.title,
+			text = p1.text,
+			icon = p1.icon,
 			actions = reactModule.useMemo(function()
-				-- upvalues: p0 (ref), onAction (ref), var9 (ref), buttonVariant (copy)
-				return if p0.actionText then {
+				-- upvalues: p1 (ref), onAction (ref), var5 (ref), buttonVariant (copy)
+				return if p1.actionText then {
 					{
-						text = p0.actionText,
+						text = p1.actionText,
 						onActivated = function()
-							-- upvalues: onAction (copy), var9 (copy)
+							-- upvalues: onAction (copy), var5 (copy)
 							if onAction then
 								onAction()
 							end
-							var9()
+							var5()
 						end,
 						variant = buttonVariant.Emphasis
 					}
 				} else nil
-			end, { p0.actionText, onAction, var9 }),
+			end, { p1.actionText, onAction, var5 }),
 			width = uDim
 		})
 	})

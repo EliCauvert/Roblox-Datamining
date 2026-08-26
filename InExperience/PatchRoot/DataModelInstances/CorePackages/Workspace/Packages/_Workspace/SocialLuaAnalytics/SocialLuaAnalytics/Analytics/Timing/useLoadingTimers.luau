@@ -2,7 +2,7 @@
 local timersModule = require(script.Parent.Timers)
 local _ = require(script.Parent.SimpleTimer)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), timersModule (ref)
-	return reactModule.useRef(timersModule(p0)).current
+	return reactModule.useRef(timersModule(p1)).current
 end

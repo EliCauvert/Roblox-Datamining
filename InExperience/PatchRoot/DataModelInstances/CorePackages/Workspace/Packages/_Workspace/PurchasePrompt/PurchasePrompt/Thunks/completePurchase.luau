@@ -14,18 +14,18 @@ local unifiedPurchaseTelemetryModule = require(parent.Events.UnifiedPurchaseTele
 local sendUnifiedPurchaseEventLogModule = require(parent.Utils.sendUnifiedPurchaseEventLog)
 local unifiedPurchaseEventNameEnumModule = require(parent.Enums.UnifiedPurchaseEventNameEnum)
 
-return function(p0)
+return function(p1)
 	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), AXEnsureOfferBannerRefetchUnified (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
-	return thunkModule.new(script.Name, {}, function(p1, _)
-		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), p0 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
-		local var11 = workspaceService.DistributedGameTime - p1:getState().purchasingStartTime
-		p1:dispatch(purchaseCompleteRecievedModule())
+	return thunkModule.new(script.Name, {}, function(p2, _)
+		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), p1 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
+		local var1 = workspaceService.DistributedGameTime - p2:getState().purchasingStartTime
+		p2:dispatch(purchaseCompleteRecievedModule())
 		
 		if AXEnsureOfferBannerRefetchUnified then
-			p1:flush()
+			p2:flush()
 		end
-		if fFlagEnableUnifiedProductPurchaseFlow and p1:getState().isUserEligibleForUnifiedPurchaseFlow then
-			local state = p1:getState()
+		if fFlagEnableUnifiedProductPurchaseFlow and p2:getState().isUserEligibleForUnifiedPurchaseFlow then
+			local state = p2:getState()
 			local postPurchaseActions = state.postPurchaseActions
 			local postPurchaseActionsState = state.postPurchaseActionsState or {}
 			
@@ -37,7 +37,7 @@ return function(p0)
 				end
 			end
 			if state.purchaseCallbacks and state.purchaseCallbacks.onPurchaseSuccess then
-				state.purchaseCallbacks.onPurchaseSuccess(p0, postPurchaseActionsState)
+				state.purchaseCallbacks.onPurchaseSuccess(p1, postPurchaseActionsState)
 			end
 			if state.purchaseAnalyticsMetadata then
 				local purchaseAnalyticsMetadata = state.purchaseAnalyticsMetadata
@@ -56,18 +56,18 @@ return function(p0)
 			end
 		end
 		if fFlagSkipCompletionModalForMarketplace then
-			local purchaseOptions = p1:getState().purchaseOptions
+			local purchaseOptions = p2:getState().purchaseOptions
 			
 			if purchaseOptions and purchaseOptions.skipPurchaseSuccessModal then
-				p1:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
+				p2:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
 				
-				return p1:dispatch(completeRequestModule())
-			elseif var11 >= 1 then
-				return p1:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
+				return p2:dispatch(completeRequestModule())
+			elseif var1 >= 1 then
+				return p2:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
 			end
-			delay(1 - var11, function()
-				-- upvalues: p1 (ref), setPromptStateModule (copy), promptStateModule (copy)
-				return p1:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
+			delay(1 - var1, function()
+				-- upvalues: p2 (ref), setPromptStateModule (copy), promptStateModule (copy)
+				return p2:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
 			end)
 		end
 	end)

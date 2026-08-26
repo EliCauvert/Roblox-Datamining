@@ -7,7 +7,7 @@ local _ = {
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
 	return setmetatable({
 		_status = "Disabled",
@@ -15,7 +15,7 @@ function t.new(p0)
 		_suspendedEventQueue = {},
 		_connections = {},
 		_listeners = {},
-		_instance = p0
+		_instance = p1
 	}, t)
 end
 
@@ -23,37 +23,37 @@ function t:connectEvent(p1, p2)
 	self:_connect(p1, self._instance[p1], p2)
 end
 
-function t:connectPropertyChange(p3, p4)
-	local ok, status = pcall(self._instance.GetPropertyChangedSignal, self._instance, p3)
+function t:connectPropertyChange(p1, p2)
+	local ok, status = pcall(self._instance.GetPropertyChangedSignal, self._instance, p1)
 	
 	if not ok then
-		error(string.format("Cannot get changed signal on property %q: %s", tostring(p3), status), 0)
+		error(string.format("Cannot get changed signal on property %q: %s", tostring(p1), status), 0)
 	end
-	self:_connect("Change." .. p3, status, p4)
+	self:_connect("Change." .. p3, status, p2)
 end
 
-function t:_connect(p5, p6, p7)
-	if p7 == nil then
-		if self._connections[p5] ~= nil then
-			self._connections[p5]:Disconnect()
-			self._connections[p5] = nil
+function t:_connect(p1, p2, p3)
+	if p3 == nil then
+		if self._connections[p1] ~= nil then
+			self._connections[p1]:Disconnect()
+			self._connections[p1] = nil
 		end
-		self._listeners[p5] = nil
+		self._listeners[p1] = nil
 		
 		return
-	elseif self._connections[p5] == nil then
-		self._connections[p5] = p6:Connect(function(...)
-			-- upvalues: self (ref), p5 (ref)
+	elseif self._connections[p1] == nil then
+		self._connections[p1] = p2:Connect(function(...)
+			-- upvalues: self (ref), p1 (ref)
 			if self._status == "Enabled" then
-				self._listeners[p5](self._instance, ...)
+				self._listeners[p1](self._instance, ...)
 				
 				return
 			elseif self._status == "Suspended" then
-				table.insert(self._suspendedEventQueue, { p5, select("#", ...), ... })
+				table.insert(self._suspendedEventQueue, { p1, select("#", ...), ... })
 			end
 		end)
 	end
-	self._listeners[p5] = p7
+	self._listeners[p1] = p3
 end
 
 function t:suspend()

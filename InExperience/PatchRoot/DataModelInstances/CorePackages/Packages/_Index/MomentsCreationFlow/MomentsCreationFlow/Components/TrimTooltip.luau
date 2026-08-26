@@ -9,18 +9,18 @@ local useTokens = foundationModule.Hooks.useTokens
 local getFormatTime = momentsCommonModule.Utils.getFormatTime
 local dragHandleModule = require(momentsCreationFlow.Enums.DragHandle)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), dragHandleModule (ref), reactModule (ref), view (ref), text (ref), getFormatTime (ref)
-	local var5 = useTokens()
+	local var1 = useTokens()
 	
-	if (p0.activeHandle == dragHandleModule.LeftHandle or p0.activeHandle == dragHandleModule.RightHandle) and p0.timeLength then
-		local var6 = if p0.activeHandle == dragHandleModule.LeftHandle then p0.leftHandlePosition elseif p0.activeHandle == dragHandleModule.RightHandle then p0.rightHandlePosition else nil
+	if (p1.activeHandle == dragHandleModule.LeftHandle or p1.activeHandle == dragHandleModule.RightHandle) and p1.timeLength then
+		local var2 = if p1.activeHandle == dragHandleModule.LeftHandle then p1.leftHandlePosition elseif p1.activeHandle == dragHandleModule.RightHandle then p1.rightHandlePosition else nil
 		
 		return reactModule.createElement(view, {
 			tag = "align-x-center align-y-bottom anchor-bottom-center col gap-xsmall",
-			Position = var6:map(function(p1)
-				-- upvalues: var5 (ref)
-				return UDim2.new(p1, 0, 0, -var5.Padding.Small)
+			Position = var2:map(function(p2)
+				-- upvalues: var1 (ref)
+				return UDim2.new(p2, 0, 0, -var1.Padding.Small)
 			end)
 		}, {
 			TextContainer = reactModule.createElement(view, {
@@ -29,9 +29,9 @@ return function(p0)
 			}, {
 				TimeText = reactModule.createElement(text, {
 					tag = "anchor-center-center auto-xy content-inverse-default position-center-center text-caption-medium",
-					Text = var6:map(function(p2)
-						-- upvalues: getFormatTime (copy), p0 (ref)
-						return getFormatTime(p2 * p0.timeLength)
+					Text = var2:map(function(p2)
+						-- upvalues: getFormatTime (copy), p1 (ref)
+						return getFormatTime(p2 * p1.timeLength)
 					end)
 				})
 			}),

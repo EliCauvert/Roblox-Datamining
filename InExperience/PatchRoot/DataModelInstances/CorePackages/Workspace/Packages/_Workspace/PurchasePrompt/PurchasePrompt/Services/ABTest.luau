@@ -10,9 +10,9 @@ return {
 			end
 		})
 		
-		function t.getLayerData(p0)
+		function t.getLayerData(p1)
 			-- upvalues: IXPServiceWrapper (copy)
-			return IXPServiceWrapper:GetLayerData(p0)
+			return IXPServiceWrapper:GetLayerData(p1)
 		end
 		
 		function t.logUserLayerExposure(p1)

@@ -8,8 +8,8 @@ local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local dataHydrationModule = require(parent.DataHydration)
-local var7 = if fFlagSocialTabsPagePresenceSignalsMigrationModule then dataHydrationModule.Presence.PresenceStore.get() else nil
-local var8 = if fFlagSocialTabsPagePresenceSignalsMigrationModule then dataHydrationModule.Presence.PresenceEnums.PresenceType else nil
+local var1 = if fFlagSocialTabsPagePresenceSignalsMigrationModule then dataHydrationModule.Presence.PresenceStore.get() else nil
+local var2 = if fFlagSocialTabsPagePresenceSignalsMigrationModule then dataHydrationModule.Presence.PresenceEnums.PresenceType else nil
 local t = {
 	[presenceType.InGame] = 3,
 	[presenceType.Online] = 2,
@@ -17,58 +17,58 @@ local t = {
 	[presenceType.Offline] = 0
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref)
-	return t[p0] or 0
+	return t[p1] or 0
 end
 
-local var10 = if fFlagSocialTabsPagePresenceSignalsMigrationModule then {
-	[var8.InGame] = 3,
-	[var8.Online] = 2,
-	[var8.InStudio] = 1,
-	[var8.Offline] = 0
+local var3 = if fFlagSocialTabsPagePresenceSignalsMigrationModule then {
+	[var2.InGame] = 3,
+	[var2.Online] = 2,
+	[var2.InStudio] = 1,
+	[var2.Offline] = 0
 } else nil
 
 local _ = function(p1)
-	-- upvalues: var10 (ref)
-	return var10[p1] or 0
+	-- upvalues: var3 (ref)
+	return var3[p1] or 0
 end
 
-local function usersOrderEqual(p2, p3)
-	if p2 == p3 then
+local function usersOrderEqual(p1, p2)
+	if p1 == p2 then
 		return true
-	elseif not p2 or not p3 or #p2 ~= #p3 then
+	elseif not p1 or not p2 or #p1 ~= #p2 then
 		return false
 	end
-	for i, v in p2 do
-		if v.id ~= p3[i].id then
+	for i, v in p1 do
+		if v.id ~= p2[i].id then
 			return false
 		end
 	end
 	return true
 end
 
-return function(p4)
-	-- upvalues: fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), reactModule (ref), signalsModule (ref), var7 (ref), var8 (ref), var10 (ref), usersOrderEqual (ref), signalsReactModule (ref), useSelector (ref), roduxPresenceModule (ref), presenceType (ref), t (ref)
+return function(p3)
+	-- upvalues: fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), reactModule (ref), signalsModule (ref), var1 (ref), var2 (ref), var3 (ref), usersOrderEqual (ref), signalsReactModule (ref), useSelector (ref), roduxPresenceModule (ref), presenceType (ref), t (ref)
 	return if fFlagSocialTabsPagePresenceSignalsMigrationModule then signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p4 (ref), var7 (copy), var8 (copy), var10 (copy), usersOrderEqual (copy)
-		return signalsModule.createComputed(function(p8)
-			-- upvalues: p4 (copy), var7 (copy), var8 (copy), var10 (copy)
-			if #p4 == 0 then
-				return p4
+		-- upvalues: signalsModule (copy), p3 (ref), var1 (copy), var2 (copy), var3 (copy), usersOrderEqual (copy)
+		return signalsModule.createComputed(function(p4)
+			-- upvalues: p3 (copy), var1 (copy), var2 (copy), var3 (copy)
+			if #p3 == 0 then
+				return p3
 			end
 			local t = {}
 			
-			for i, v in p4 do
-				local var17 = var7.GetPresenceByUserId(tostring(v.id)).data(p8)
+			for i, v in p3 do
+				local var4 = var1.GetPresenceByUserId(tostring(v.id)).data(p4)
 				table.insert(t, {
 					user = v,
-					weight = var10[if var17 then var17.userPresenceType else var8.Offline] or 0,
+					weight = var3[if var4 then var4.userPresenceType else var2.Offline] or 0,
 					originalIndex = i
 				})
 			end
-			table.sort(t, function(p9, p10)
-				return if p9.weight == p10.weight then p9.originalIndex < p10.originalIndex else p10.weight < p9.weight
+			table.sort(t, function(p5, p6)
+				return if p5.weight == p6.weight then p5.originalIndex < p6.originalIndex else p6.weight < p5.weight
 			end)
 			local t_1 = {}
 			
@@ -77,14 +77,14 @@ return function(p4)
 			end
 			return t_1
 		end, usersOrderEqual)
-	end, { p4 })) else useSelector(function(p5)
-		-- upvalues: p4 (ref), roduxPresenceModule (copy), presenceType (copy), t (copy)
-		if #p4 == 0 then
-			return p4
+	end, { p3 })) else useSelector(function(p5)
+		-- upvalues: p3 (ref), roduxPresenceModule (copy), presenceType (copy), t (copy)
+		if #p3 == 0 then
+			return p3
 		end
 		local t_1 = {}
 		
-		for i, v in p4 do
+		for i, v in p3 do
 			local userPresenceByUserId = roduxPresenceModule.Selectors.getUserPresenceByUserId(p5, v.id)
 			table.insert(t_1, {
 				user = v,

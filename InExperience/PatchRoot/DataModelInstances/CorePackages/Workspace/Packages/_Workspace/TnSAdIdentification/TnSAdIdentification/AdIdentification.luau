@@ -9,28 +9,28 @@ local default = loggingProtocolModule.default
 local identificationUtils = require(parent.AvatarIdentification).IdentificationUtils
 local maxValue = math.max(getFIntAdIdentificationMinimumAreaPerMyriadModule() / 10000, 0)
 local t = {
-	getAdsForPoint = function(p0, p1)
+	getAdsForPoint = function(p1, p2)
 		local t = {}
 		
-		for i, v in pairs(p0) do
+		for i, v in pairs(p1) do
 			local boundingBox = v.boundingBox
 			
-			if p1.X >= boundingBox.min.X and p1.Y >= boundingBox.min.Y and (boundingBox.max.X >= p1.X and boundingBox.max.Y >= p1.Y) then
+			if p2.X >= boundingBox.min.X and p2.Y >= boundingBox.min.Y and (boundingBox.max.X >= p2.X and boundingBox.max.Y >= p2.Y) then
 				for i_1, v_1 in ipairs(v.visibleRegions) do
 					local convexHull = v_1.convexHull
 					
 					if #convexHull >= 3 then
-						local var9 = convexHull[#convexHull]
-						local var10 = true
-						local var11 = true
+						local var1 = convexHull[#convexHull]
+						local var2 = true
+						local var3 = true
 						
 						for i_2, v_2 in ipairs(convexHull) do
-							local var12 = (v_2 - var9):Cross(p1 - var9)
-							var11 = var11 and var12 <= 0
-							var10 = var10 and var12 >= 0
-							var9 = v_2
+							local var4 = (v_2 - var1):Cross(p2 - var1)
+							var3 = var3 and var4 <= 0
+							var2 = var2 and var4 >= 0
+							var1 = v_2
 						end
-						if var10 or var11 then
+						if var2 or var3 then
 							t[i] = v
 							continue
 						end
@@ -55,11 +55,11 @@ local t = {
 		if not localPlayer then
 			return t, t_1
 		end
-		local adUnitName, assetId, encryptedAdTrackingData, encryptionMetadata, assetCorners, magnitude, viewportCorners, viewportCorners_1, var26
+		local adUnitName, assetId, encryptedAdTrackingData, encryptionMetadata, assetCorners, magnitude, viewportCorners, viewportCorners_1, var5
 		local character = localPlayer.Character
 		local _ = nil
 		local t_2 = {}
-		local var17 = if character then getLocalCharacterPosition(character) or currentCamera.CFrame.Position else currentCamera.CFrame.Position
+		local var6 = if character then getLocalCharacterPosition(character) or currentCamera.CFrame.Position else currentCamera.CFrame.Position
 		local viewportInfo = identificationUtils.getViewportInfo()
 		t_1.viewportInfo = viewportInfo
 		local processTime = os.clock()
@@ -77,7 +77,7 @@ local t = {
 			return os.clock() - processTime > 0.2
 		end
 		
-		local var20 = 1
+		local var7 = 1
 		
 		for i, v in ipairs(reportAdInfo) do
 			if os.clock() - processTime <= 0.2 then
@@ -93,36 +93,36 @@ local t = {
 					assetCorners = v.assetCorners
 					
 					if assetCorners and #assetCorners >= 4 then
-						local var22, var23 = getAdCenterAndScreenArea(assetCorners, currentCamera)
-						magnitude = (var22 - var17).Magnitude
+						local var8, var9 = getAdCenterAndScreenArea(assetCorners, currentCamera)
+						magnitude = (var8 - var6).Magnitude
 						
-						if (var22 - currentCamera.CFrame.Position):Dot(currentCamera.CFrame.LookVector) < 0 then
+						if (var8 - currentCamera.CFrame.Position):Dot(currentCamera.CFrame.LookVector) < 0 then
 							t_1.checkedAds += 1
 						else
 							local unit = (assetCorners[1] - assetCorners[2]):Cross(assetCorners[1] - assetCorners[3]).Unit
 							
-							if unit:Dot(var22 - basePart.Position) < 0 then
+							if unit:Dot(var8 - basePart.Position) < 0 then
 								unit = -unit
 							end
-							if (currentCamera.CFrame.Position - var22):Dot(unit) < 0 then
+							if (currentCamera.CFrame.Position - var8):Dot(unit) < 0 then
 								t_1.checkedAds += 1
 							else
 								viewportCorners, viewportCorners_1 = identificationUtils.getViewportCorners(assetCorners, currentCamera, viewportInfo)
 								
 								if viewportCorners == identificationUtils.defaultMin then
 									t_1.checkedAds += 1
-								elseif var23 < maxValue then
+								elseif var9 < maxValue then
 									t_1.checkedAds += 1
 								else
-									var26 = checkVisibility(currentCamera, basePart, assetCorners, t_2)
+									var5 = checkVisibility(currentCamera, basePart, assetCorners, t_2)
 									
-									if var26 < 0.3 then
+									if var5 < 0.3 then
 										t_1.checkedAds += 1
 									elseif os.clock() - processTime <= 0.2 then
-										t[var20] = {
+										t[var7] = {
 											distance = magnitude,
 											boundingBox = { min = viewportCorners, max = viewportCorners_1 },
-											hitRate = var26,
+											hitRate = var5,
 											visibleRegions = {
 												createSingleVisibleRegionFromWorldSpaceCorners(assetCorners, currentCamera, viewportInfo)
 											},
@@ -143,13 +143,13 @@ local t = {
 											encryptionMetadata = encryptionMetadata
 										})
 										t_1.checkedAds += 1
-										var20 += 1
+										var7 += 1
 										continue
 									end
-									local var27 = t
+									local var10 = t
 									t_1.duration = os.clock() - processTime
 									
-									return var27, t_1
+									return var10, t_1
 								end
 							end
 						end
@@ -158,10 +158,10 @@ local t = {
 					end
 				end
 			end
-			local var21 = t
+			local var11 = t
 			t_1.duration = os.clock() - processTime
 			
-			return var21, t_1
+			return var11, t_1
 		end
 		t_1.duration = os.clock() - processTime
 		
@@ -169,8 +169,8 @@ local t = {
 	end
 }
 
-function getLocalCharacterPosition(p2)
-	local humanoidRootPart = p2:FindFirstChild("HumanoidRootPart")
+function getLocalCharacterPosition(p3)
+	local humanoidRootPart = p3:FindFirstChild("HumanoidRootPart")
 	
 	return if humanoidRootPart then humanoidRootPart.Position else nil
 end
@@ -182,30 +182,30 @@ function checkVisibility(p3, p4, p5, p6)
 	raycastParams.FilterType = Enum.RaycastFilterType.Exclude
 	raycastParams.FilterDescendantsInstances = p6
 	raycastParams.IgnoreWater = true
-	local var30 = 0
-	local var31 = 0
-	local var32 = p5[2] - p5[1]
-	local var33 = p5[3] - p5[1]
+	local var12 = 0
+	local var13 = 0
+	local var14 = p5[2] - p5[1]
+	local var15 = p5[3] - p5[1]
 	
 	for i_1 = 1, 4 do
-		local var34 = var32 * (i_1 - 0.5) / 4
+		local var16 = var14 * (i_1 - 0.5) / 4
 		
 		for i = 1, 4 do
-			local var35 = p5[1] + var34 + var33 * (i - 0.5) / 4
-			local var36 = var35 - position
-			var30 += 1
-			local var37, _ = p3:WorldToViewportPoint(var35)
+			local var17 = p5[1] + var16 + var15 * (i - 0.5) / 4
+			local var18 = var17 - position
+			var12 += 1
+			local var19, _ = p3:WorldToViewportPoint(var17)
 			
-			if var37.Z >= 0 and var37.X >= 0 and (var37.Y >= 0 and viewportSize.X >= var37.X) and viewportSize.Y >= var37.Y then
-				local var38 = workspace:Raycast(position, var36 * 1.1, raycastParams)
+			if var19.Z >= 0 and var19.X >= 0 and (var19.Y >= 0 and viewportSize.X >= var19.X) and viewportSize.Y >= var19.Y then
+				local var20 = workspace:Raycast(position, var18 * 1.1, raycastParams)
 				
-				if var38 and var38.Instance == p4 then
-					var31 += 1
+				if var20 and var20.Instance == p4 then
+					var13 += 1
 				end
 			end
 		end
 	end
-	return var31 / var30
+	return var13 / var12
 end
 
 function createSingleVisibleRegionFromWorldSpaceCorners(p7, p8, p9)
@@ -213,8 +213,8 @@ function createSingleVisibleRegionFromWorldSpaceCorners(p7, p8, p9)
 	local list = table.create(#p7)
 	
 	for i, v in ipairs(p7) do
-		local var40, _, _ = identificationUtils.worldToFullViewportPointNormalized(v, p8, p9)
-		list[i] = Vector2.new(var40.X, var40.Y)
+		local var21, _, _ = identificationUtils.worldToFullViewportPointNormalized(v, p8, p9)
+		list[i] = Vector2.new(var21.X, var21.Y)
 	end
 	return {
 		id = 1,
@@ -224,16 +224,16 @@ end
 
 function getAdCenterAndScreenArea(p10, p11)
 	local viewportSize = p11.ViewportSize
-	local var41 = Vector3.new(0, 0, 0)
-	local var42 = 0
+	local var22 = Vector3.new(0, 0, 0)
+	local var23 = 0
 	local t = {}
 	
 	for i, v in ipairs(p10) do
-		var41 += v
-		local var44, _ = p11:WorldToViewportPoint(v)
-		table.insert(t, Vector2.new(var44.X, var44.Y) / viewportSize)
+		var22 += v
+		local var24, _ = p11:WorldToViewportPoint(v)
+		table.insert(t, Vector2.new(var24.X, var24.Y) / viewportSize)
 	end
-	return var41 / 4, (var42 + math.abs((t[2] - t[1]):Cross(t[3] - t[1])) + math.abs((t[2] - t[4]):Cross(t[3] - t[4]))) / 2
+	return var22 / 4, (var23 + math.abs((t[2] - t[1]):Cross(t[3] - t[1])) + math.abs((t[2] - t[4]):Cross(t[3] - t[4]))) / 2
 end
 
 return t

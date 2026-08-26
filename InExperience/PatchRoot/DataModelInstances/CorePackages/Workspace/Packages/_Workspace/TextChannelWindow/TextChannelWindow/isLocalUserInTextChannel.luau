@@ -1,6 +1,6 @@
 ﻿local findLocalTextSourceModule = require(script.Parent.findLocalTextSource)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: findLocalTextSourceModule (ref)
-	return findLocalTextSourceModule(p0, p1) ~= nil
+	return findLocalTextSourceModule(p1, p2) ~= nil
 end

@@ -16,31 +16,31 @@ local isErrorReasonPrefixWithEconomicRestrictions = IAPExperienceModule.Utility.
 local parseErrorReasonToEconomicRestriction = IAPExperienceModule.Utility.parseErrorReasonToEconomicRestriction
 local list = { externalSettingsModule, networkModule }
 
-return function(p0)
+return function(p1)
 	-- upvalues: thunkModule (ref), list (ref), externalSettingsModule (ref), networkModule (ref), purchaseCompleteRecievedModule (ref), hideWindowModule (ref), performSubscriptionPurchaseModule (ref), isErrorReasonPrefixWithEconomicRestrictions (ref), parseErrorReasonToEconomicRestriction (ref), setEconomicRestrictionErrorModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), setPromptStateModule (ref), promptStateModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: externalSettingsModule (copy), networkModule (copy), purchaseCompleteRecievedModule (copy), hideWindowModule (copy), performSubscriptionPurchaseModule (copy), p0 (ref), isErrorReasonPrefixWithEconomicRestrictions (copy), parseErrorReasonToEconomicRestriction (copy), setEconomicRestrictionErrorModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), setPromptStateModule (copy), promptStateModule (copy)
-		local var14 = p2[networkModule]
+	return thunkModule.new(script.Name, list, function(p2, p3)
+		-- upvalues: externalSettingsModule (copy), networkModule (copy), purchaseCompleteRecievedModule (copy), hideWindowModule (copy), performSubscriptionPurchaseModule (copy), p1 (ref), isErrorReasonPrefixWithEconomicRestrictions (copy), parseErrorReasonToEconomicRestriction (copy), setEconomicRestrictionErrorModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), setPromptStateModule (copy), promptStateModule (copy)
+		local var1 = p3[networkModule]
 		
-		if p2[externalSettingsModule].isStudio() then
-			p1:dispatch(purchaseCompleteRecievedModule())
-			p1:dispatch(hideWindowModule())
+		if p3[externalSettingsModule].isStudio() then
+			p2:dispatch(purchaseCompleteRecievedModule())
+			p2:dispatch(hideWindowModule())
 			
 			return nil
 		end
-		performSubscriptionPurchaseModule(var14, p1:getState().promptRequest.id, p0):catch(function(p3)
-			-- upvalues: isErrorReasonPrefixWithEconomicRestrictions (copy), parseErrorReasonToEconomicRestriction (copy), p1 (ref), setEconomicRestrictionErrorModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy)
-			if isErrorReasonPrefixWithEconomicRestrictions(p3) then
-				local var15 = parseErrorReasonToEconomicRestriction(p3)
-				p1:dispatch(setEconomicRestrictionErrorModule(var15.violationType, var15.timeoutMinutes))
-				p1:dispatch(errorOccurredModule(purchaseErrorModule.EconomicRestriction))
+		performSubscriptionPurchaseModule(var1, p2:getState().promptRequest.id, p1):catch(function(p4)
+			-- upvalues: isErrorReasonPrefixWithEconomicRestrictions (copy), parseErrorReasonToEconomicRestriction (copy), p2 (ref), setEconomicRestrictionErrorModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy)
+			if isErrorReasonPrefixWithEconomicRestrictions(p4) then
+				local var2 = parseErrorReasonToEconomicRestriction(p4)
+				p2:dispatch(setEconomicRestrictionErrorModule(var2.violationType, var2.timeoutMinutes))
+				p2:dispatch(errorOccurredModule(purchaseErrorModule.EconomicRestriction))
 				
 				return
 			end
-			p1:dispatch(errorOccurredModule(p3))
+			p2:dispatch(errorOccurredModule(p4))
 		end)
-		p1:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
-		p1:dispatch(hideWindowModule())
+		p2:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
+		p2:dispatch(hideWindowModule())
 		
 		return nil
 	end)

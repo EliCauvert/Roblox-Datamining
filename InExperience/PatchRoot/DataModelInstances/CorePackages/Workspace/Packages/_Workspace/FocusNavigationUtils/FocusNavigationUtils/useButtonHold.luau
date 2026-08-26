@@ -5,17 +5,17 @@ local buttonHoldStateEnumModule = require(focusNavigationUtils.ButtonHoldStateEn
 local inputHandlersModule = require(parent.InputHandlers)
 local reactModule = require(parent.React)
 
-local function useFakeCancelHoldAfterBlur(p0, p1, p2)
+local function useFakeCancelHoldAfterBlur(p1, p2, p3)
 	-- upvalues: reactModule (ref)
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), p2 (ref)
-		p1({ eventData = { UserInputState = Enum.UserInputState.End } })
-		p2()
-	end, { p1, p2 })
+	local var1 = reactModule.useCallback(function()
+		-- upvalues: p2 (ref), p3 (ref)
+		p2({ eventData = { UserInputState = Enum.UserInputState.End } })
+		p3()
+	end, { p2, p3 })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var6 (ref)
-		if p0 and p0:IsA("GuiObject") then
-			local selectionLostConnection = p0.SelectionLost:Connect(var6)
+		-- upvalues: p1 (ref), var1 (ref)
+		if p1 and p1:IsA("GuiObject") then
+			local selectionLostConnection = p1.SelectionLost:Connect(var1)
 			
 			return function()
 				-- upvalues: selectionLostConnection (ref)
@@ -23,79 +23,79 @@ local function useFakeCancelHoldAfterBlur(p0, p1, p2)
 			end
 		end
 		return function() end
-	end, { p0, var6 })
+	end, { p1, var1 })
 end
 
-return function(p3, p4, p5)
+return function(p1, p2, p3)
 	-- upvalues: argCheckModule (ref), reactModule (ref), buttonHoldStateEnumModule (ref), inputHandlersModule (ref), useFakeCancelHoldAfterBlur (ref)
-	argCheckModule.assert(p3 >= 0, "signalHoldIntentSeconds must be greater than or equal to 0")
-	argCheckModule.assert(p4 > 0, "signalHoldCompleteSeconds must be greater than 0")
-	argCheckModule.assert(p3 < p4, "signalHoldIntentSeconds should be less than signalHoldCompleteSeconds")
-	local var8, var9 = reactModule.useState(buttonHoldStateEnumModule.NOT_HELD)
-	local var10 = reactModule.useRef(nil)
-	local var11, var12 = reactModule.useBinding(0)
-	local var13, var14 = reactModule.useState(nil)
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var9 (ref), buttonHoldStateEnumModule (copy)
-		var10.current = tick()
-		var9(buttonHoldStateEnumModule.JUST_PRESSED)
+	argCheckModule.assert(p1 >= 0, "signalHoldIntentSeconds must be greater than or equal to 0")
+	argCheckModule.assert(p2 > 0, "signalHoldCompleteSeconds must be greater than 0")
+	argCheckModule.assert(p1 < p2, "signalHoldIntentSeconds should be less than signalHoldCompleteSeconds")
+	local var1, var2 = reactModule.useState(buttonHoldStateEnumModule.NOT_HELD)
+	local var3 = reactModule.useRef(nil)
+	local var4, var5 = reactModule.useBinding(0)
+	local var6, var7 = reactModule.useState(nil)
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var2 (ref), buttonHoldStateEnumModule (copy)
+		var3.current = tick()
+		var2(buttonHoldStateEnumModule.JUST_PRESSED)
 	end, {})
-	local var16 = reactModule.useCallback(function(_)
-		-- upvalues: argCheckModule (copy), var10 (ref), var12 (ref), var11 (ref), p3 (ref), var9 (ref), buttonHoldStateEnumModule (copy)
+	local var9 = reactModule.useCallback(function(_)
+		-- upvalues: argCheckModule (copy), var3 (ref), var5 (ref), var4 (ref), p1 (ref), var2 (ref), buttonHoldStateEnumModule (copy)
 		local currentTime = tick()
-		argCheckModule.assert(var10.current ~= nil, "startTime.current should not be nil")
+		argCheckModule.assert(var3.current ~= nil, "startTime.current should not be nil")
 		
-		if var10.current then
-			argCheckModule.assert(var10.current <= currentTime, "startTime.current should be less than or equal to tick()")
-			var12(currentTime - var10.current)
+		if var3.current then
+			argCheckModule.assert(var3.current <= currentTime, "startTime.current should be less than or equal to tick()")
+			var5(currentTime - var3.current)
 		end
-		if p3 <= var11:getValue() then
-			var9(buttonHoldStateEnumModule.HOLDING)
+		if p1 <= var4:getValue() then
+			var2(buttonHoldStateEnumModule.HOLDING)
 		end
-	end, { var11, p3 })
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), p4 (ref), var10 (ref), var9 (ref), buttonHoldStateEnumModule (copy)
-		var12(p4)
-		var10.current = nil
-		var9(buttonHoldStateEnumModule.COMPLETED)
-	end, { p4 })
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), var10 (ref), var9 (ref), buttonHoldStateEnumModule (copy)
-		var12(0)
-		var10.current = nil
-		var9(buttonHoldStateEnumModule.NOT_HELD)
+	end, { var4, p1 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), p2 (ref), var3 (ref), var2 (ref), buttonHoldStateEnumModule (copy)
+		var5(p2)
+		var3.current = nil
+		var2(buttonHoldStateEnumModule.COMPLETED)
+	end, { p2 })
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), var3 (ref), var2 (ref), buttonHoldStateEnumModule (copy)
+		var5(0)
+		var3.current = nil
+		var2(buttonHoldStateEnumModule.NOT_HELD)
 	end, {})
-	local var19 = reactModule.useCallback(inputHandlersModule.handleInput({
+	local var12 = reactModule.useCallback(inputHandlersModule.handleInput({
 		hold = {
-			durationSeconds = p4,
-			onStep = var16,
-			onComplete = var17,
-			allowReleaseAfterHold = p5
+			durationSeconds = p2,
+			onStep = var9,
+			onComplete = var10,
+			allowReleaseAfterHold = p3
 		},
-		onPress = var15,
-		onRelease = var18
+		onPress = var8,
+		onRelease = var11
 	}), {
-		var18,
-		var16,
-		var17,
-		p4,
-		p5
+		var11,
+		var9,
+		var10,
+		p2,
+		p3
 	})
-	local var20 = reactModule.useCallback(function(p6)
-		-- upvalues: var14 (ref), var19 (ref)
-		var14(p6.targetInstance)
-		var19(p6)
-	end, { var19 })
-	useFakeCancelHoldAfterBlur(var13, var19, var18)
+	local var13 = reactModule.useCallback(function(p4)
+		-- upvalues: var7 (ref), var12 (ref)
+		var7(p4.targetInstance)
+		var12(p4)
+	end, { var12 })
+	useFakeCancelHoldAfterBlur(var6, var12, var11)
 	
 	return {
-		eventHandler = var20,
-		holdState = var8,
-		holdTime = var11,
-		holdProgress = var11:map(function(p7)
-			-- upvalues: p4 (ref)
-			return p7 / p4
+		eventHandler = var13,
+		holdState = var1,
+		holdTime = var4,
+		holdProgress = var4:map(function(p4)
+			-- upvalues: p2 (ref)
+			return p4 / p2
 		end),
-		cancelHold = var18
+		cancelHold = var11
 	}
 end

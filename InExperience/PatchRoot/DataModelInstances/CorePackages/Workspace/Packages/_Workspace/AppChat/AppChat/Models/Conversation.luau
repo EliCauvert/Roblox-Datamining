@@ -7,16 +7,16 @@ local dateTime = require(parent.Time).DateTime
 local appChatNetworkingModule = require(parent.AppChatNetworking)
 local playersService = game:GetService("Players")
 
-local function getMessageId(p0)
-	return p0.id
+local function getMessageId(p1)
+	return p1.id
 end
 
 local function messageSortPredicate(p1, p2)
 	return p1.sent:GetUnixTimestamp() < p2.sent:GetUnixTimestamp()
 end
 
-local function sendingMessageSortPredicate(p3, p4)
-	return p3.order < p4.order
+local function sendingMessageSortPredicate(p1, p2)
+	return p1.order < p2.order
 end
 
 local t = {
@@ -28,12 +28,12 @@ local t = {
 	UserOptedIntoChatMessagesStatus = appChatNetworkingModule.Constants.UserOptedIntoChatMessagesStatusResponse
 }
 
-function t.IdForFakeOneOnOne(p5)
+function t.IdForFakeOneOnOne(p1)
 	-- upvalues: t (ref)
 	local ONE_TO_ONE_CONVERSATION = t.Type.ONE_TO_ONE_CONVERSATION
-	table.sort(p5)
+	table.sort(p1)
 	
-	for i, v in ipairs(p5) do
+	for i, v in ipairs(p1) do
 		ONE_TO_ONE_CONVERSATION ..= "-" .. tostring(v)
 	end
 	return ONE_TO_ONE_CONVERSATION
@@ -43,88 +43,88 @@ function t.new()
 	return {}
 end
 
-function t.fromUser(p6)
+function t.fromUser(p2)
 	-- upvalues: t (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), generateStringId (ref), playersService (ref), constantsModule (ref)
-	local var8 = t.new()
-	var8.messages = orderedMap.new(getMessageId, messageSortPredicate)
-	var8.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
-	var8.clientId = generateStringId()
-	var8.initiator = nil
-	var8.hasUnreadMessages = false
-	var8.conversationType = t.Type.ONE_TO_ONE_CONVERSATION
-	var8.participants = { tostring(playersService.LocalPlayer.UserId), p6.id }
-	var8.usersTyping = {}
-	var8.isUserLeaving = false
-	var8.fetchingOlderMessages = false
-	var8.fetchedOldestMessage = false
-	var8.serverState = constantsModule.ServerState.NONE
-	var8.id = t.IdForFakeOneOnOne(var8.participants)
-	var8.lastUpdated = nil
-	var8.isDefaultTitle = true
-	var8.title = p6.displayName or p6.name
+	local var1 = t.new()
+	var1.messages = orderedMap.new(getMessageId, messageSortPredicate)
+	var1.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
+	var1.clientId = generateStringId()
+	var1.initiator = nil
+	var1.hasUnreadMessages = false
+	var1.conversationType = t.Type.ONE_TO_ONE_CONVERSATION
+	var1.participants = { tostring(playersService.LocalPlayer.UserId), p2.id }
+	var1.usersTyping = {}
+	var1.isUserLeaving = false
+	var1.fetchingOlderMessages = false
+	var1.fetchedOldestMessage = false
+	var1.serverState = constantsModule.ServerState.NONE
+	var1.id = t.IdForFakeOneOnOne(var1.participants)
+	var1.lastUpdated = nil
+	var1.isDefaultTitle = true
+	var1.title = p2.displayName or p2.name
 	
-	return var8
+	return var1
 end
 
-function t.empty(p7)
+function t.empty(p2)
 	-- upvalues: t (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), constantsModule (ref), dateTime (ref)
-	local var9 = t.new()
-	var9.id = "-1"
-	var9.messages = orderedMap.new(getMessageId, messageSortPredicate)
-	var9.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
-	var9.title = ""
-	var9.initiator = "0"
-	var9.hasUnreadMessages = false
-	var9.conversationType = t.Type.MULTI_USER_CONVERSATION
-	var9.participants = {}
-	var9.usersTyping = {}
-	var9.isUserLeaving = false
-	var9.fetchingOlderMessages = false
-	var9.serverState = constantsModule.ServerState.NONE
-	var9.pinnedGame = {}
-	var9.lastUpdated = dateTime.now()
-	var9.isDefaultTitle = true
-	var9.osaAcknowledgementStatus = t.OsaAcknowledgementStatus.NotApplicable
-	var9.userOptedIntoChatMessages = t.UserOptedIntoChatMessagesStatus.NotApplicable
+	local var1 = t.new()
+	var1.id = "-1"
+	var1.messages = orderedMap.new(getMessageId, messageSortPredicate)
+	var1.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
+	var1.title = ""
+	var1.initiator = "0"
+	var1.hasUnreadMessages = false
+	var1.conversationType = t.Type.MULTI_USER_CONVERSATION
+	var1.participants = {}
+	var1.usersTyping = {}
+	var1.isUserLeaving = false
+	var1.fetchingOlderMessages = false
+	var1.serverState = constantsModule.ServerState.NONE
+	var1.pinnedGame = {}
+	var1.lastUpdated = dateTime.now()
+	var1.isDefaultTitle = true
+	var1.osaAcknowledgementStatus = t.OsaAcknowledgementStatus.NotApplicable
+	var1.userOptedIntoChatMessages = t.UserOptedIntoChatMessagesStatus.NotApplicable
 	
-	if p7 ~= nil then
-		for i, v in pairs(p7) do
-			var9[i] = v
+	if p2 ~= nil then
+		for i, v in pairs(p2) do
+			var1[i] = v
 		end
 	end
-	return var9
+	return var1
 end
 
-function t.fromWeb(p8, p9)
+function t.fromWeb(p3, p4)
 	-- upvalues: t (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), generateStringId (ref), constantsModule (ref), dateTime (ref)
-	local var10 = t.new()
-	var10.messages = orderedMap.new(getMessageId, messageSortPredicate)
-	var10.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
-	var10.id = tostring(p8.id)
-	var10.clientId = p9 or generateStringId()
-	var10.title = p8.title
-	var10.initiator = tostring(p8.initiator.targetId)
-	var10.hasUnreadMessages = p8.hasUnreadMessages
-	var10.conversationType = p8.conversationType
-	var10.participants = {}
-	var10.usersTyping = {}
-	var10.isUserLeaving = false
-	var10.fetchingOlderMessages = false
-	var10.serverState = constantsModule.ServerState.CREATED
-	var10.pinnedGame = {}
+	local var2 = t.new()
+	var2.messages = orderedMap.new(getMessageId, messageSortPredicate)
+	var2.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
+	var2.id = tostring(p3.id)
+	var2.clientId = p4 or generateStringId()
+	var2.title = p3.title
+	var2.initiator = tostring(p3.initiator.targetId)
+	var2.hasUnreadMessages = p3.hasUnreadMessages
+	var2.conversationType = p3.conversationType
+	var2.participants = {}
+	var2.usersTyping = {}
+	var2.isUserLeaving = false
+	var2.fetchingOlderMessages = false
+	var2.serverState = constantsModule.ServerState.CREATED
+	var2.pinnedGame = {}
 	
-	if p8.conversationUniverse ~= nil then
-		var10.pinnedGame.universeId = tostring(p8.conversationUniverse.universeId)
-		var10.pinnedGame.rootPlaceId = tostring(p8.conversationUniverse.rootPlaceId)
+	if p3.conversationUniverse ~= nil then
+		var2.pinnedGame.universeId = tostring(p3.conversationUniverse.universeId)
+		var2.pinnedGame.rootPlaceId = tostring(p3.conversationUniverse.rootPlaceId)
 	end
-	var10.lastUpdated = dateTime.fromIsoDate(p8.lastUpdated)
-	var10.titleForViewer = p8.conversationTitle.titleForViewer
-	var10.isDefaultTitle = p8.conversationTitle.isDefaultTitle
+	var2.lastUpdated = dateTime.fromIsoDate(p3.lastUpdated)
+	var2.titleForViewer = p3.conversationTitle.titleForViewer
+	var2.isDefaultTitle = p3.conversationTitle.isDefaultTitle
 	
-	for i, v in ipairs(p8.participants) do
-		table.insert(var10.participants, tostring(v.targetId))
+	for i, v in ipairs(p3.participants) do
+		table.insert(var2.participants, tostring(v.targetId))
 	end
-	return var10
+	return var2
 end
 
 return t

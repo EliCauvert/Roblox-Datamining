@@ -5,7 +5,7 @@ local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local panel3D = require(corePackagesService.Workspace.Packages.VrCommon).Panel3D
 local VRHub = require(corePackagesService.Workspace.Packages.VrCommon).VRHub
 local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local var3 = false
+local var1 = false
 local t = {
 	ModuleName = "Recenter",
 	KeepVRTopbarOpen = true,
@@ -17,7 +17,7 @@ local recenterCountdown = panel3D.Get("RecenterCountdown")
 recenterCountdown:SetType(panel3D.Type.HorizontalFollow)
 recenterCountdown:ResizeStuds(5, 3, 128)
 recenterCountdown:SetCanFade(false)
-local var6 = create("TextLabel")({
+local var2 = create("TextLabel")({
 	BackgroundTransparency = 0.9,
 	Text = "",
 	TextScaled = true,
@@ -37,34 +37,34 @@ local _ = create("ImageLabel")({
 	Size = UDim2.new(1, 0, 1, 0)
 })
 recenterCountdown:SetVisible(false)
-local var7 = false
+local var3 = false
 
 local function _()
-	-- upvalues: var7 (write), recenterCountdown (ref)
-	var7 = false
+	-- upvalues: var3 (write), recenterCountdown (ref)
+	var3 = false
 	recenterCountdown:SetVisible(false)
 end
 
-VRHub.ModuleOpened.Event:connect(function(p0)
-	-- upvalues: t (ref), VRHub (ref), var7 (write), recenterCountdown (ref)
-	if p0 ~= t.ModuleName and VRHub:GetModule(p0).VRIsExclusive then
-		var7 = false
+VRHub.ModuleOpened.Event:connect(function(p1)
+	-- upvalues: t (ref), VRHub (ref), var3 (write), recenterCountdown (ref)
+	if p1 ~= t.ModuleName and VRHub:GetModule(p1).VRIsExclusive then
+		var3 = false
 		recenterCountdown:SetVisible(false)
 	end
 end)
 
 function t.SetVisible(_, p1)
-	-- upvalues: var3 (write), var7 (write), recenterCountdown (ref), VRHub (ref), t (ref), contextActionService (ref), var6 (ref), userInputService (ref)
-	var3 = p1
+	-- upvalues: var1 (write), var3 (write), recenterCountdown (ref), VRHub (ref), t (ref), contextActionService (ref), var2 (ref), userInputService (ref)
+	var1 = p1
 	
-	if not var3 then
-		var7 = false
+	if not var1 then
+		var3 = false
 		recenterCountdown:SetVisible(false)
 		VRHub:FireModuleClosed(t.ModuleName)
 		
 		return
-	elseif var7 then
-		var7 = false
+	elseif var3 then
+		var3 = false
 		recenterCountdown:SetVisible(false)
 		VRHub:FireModuleClosed(t.ModuleName)
 		
@@ -72,33 +72,33 @@ function t.SetVisible(_, p1)
 	end
 	VRHub:FireModuleOpened(t.ModuleName)
 	spawn(function()
-		-- upvalues: var7 (copy), recenterCountdown (copy), contextActionService (copy), var6 (copy), userInputService (copy), VRHub (copy), t (copy)
-		var7 = true
+		-- upvalues: var3 (copy), recenterCountdown (copy), contextActionService (copy), var2 (copy), userInputService (copy), VRHub (copy), t (copy)
+		var3 = true
 		recenterCountdown:SetVisible(true)
 		contextActionService:BindCoreAction("CancelRecenterShortcut", function(_, p2, _)
-			-- upvalues: var7 (copy), recenterCountdown (copy)
+			-- upvalues: var3 (copy), recenterCountdown (copy)
 			if p2 == Enum.UserInputState.Begin then
-				var7 = false
+				var3 = false
 				recenterCountdown:SetVisible(false)
 			end
 		end, false, Enum.KeyCode.ButtonB)
-		var6.Text = tostring(3)
+		var2.Text = tostring(3)
 		wait(1)
-		var6.Text = tostring(2)
+		var2.Text = tostring(2)
 		wait(1)
-		var6.Text = tostring(1)
+		var2.Text = tostring(1)
 		wait(1)
 		userInputService:RecenterUserHeadCFrame()
 		recenterCountdown:SetVisible(false)
-		var7 = false
+		var3 = false
 		contextActionService:UnbindCoreAction("CancelRecenterShortcut")
 		VRHub:FireModuleClosed(t.ModuleName)
 	end)
 end
 
 function t.IsVisible(_)
-	-- upvalues: var3 (write)
-	return var3
+	-- upvalues: var1 (write)
+	return var1
 end
 
 return t

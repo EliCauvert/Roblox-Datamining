@@ -4,14 +4,14 @@ local textService = game:GetService("TextService")
 local playersService = game:GetService("Players")
 local _ = game:GetService("CoreGui")
 local localizationService = game:GetService("LocalizationService")
-local var5 = nil
+local var1 = nil
 pcall(function()
-	-- upvalues: var5 (write)
-	var5 = game:GetService("PlatformService")
+	-- upvalues: var1 (write)
+	var1 = game:GetService("PlatformService")
 end)
 local t = {
-	IsFinite = function(p0)
-		return p0 == p0 and (p0 ~= 1e999 and p0 ~= -1e999)
+	IsFinite = function(p1)
+		return p1 == p1 and (p1 ~= 1e999 and p1 ~= -1e999)
 	end
 }
 
@@ -22,24 +22,24 @@ function t.FindAncestorOfType(p1, p2)
 	return if parent then if parent:IsA(p2) then parent else t.FindAncestorOfType(parent, p2) else nil
 end
 
-function t.CalculateRelativeDimensions(p3, p4, p5, _)
+function t.CalculateRelativeDimensions(p1, p2, p3, _)
 	-- upvalues: guiService (ref), t (ref)
 	local screenResolution = guiService:GetScreenResolution()
-	local surfaceGui = t.FindAncestorOfType(p3, "SurfaceGui")
+	local surfaceGui = t.FindAncestorOfType(p1, "SurfaceGui")
 	
 	if surfaceGui then
 		screenResolution = surfaceGui.CanvasSize
 	end
-	local var13 = p4 / p5
+	local var2 = p2 / p3
 	
-	if p5.y > 0 and screenResolution.y > 0 then
-		var13 *= p5.x / p5.y / (screenResolution.x / screenResolution.y)
-		local parent = p3.Parent
+	if p3.y > 0 and screenResolution.y > 0 then
+		var2 *= p3.x / p3.y / (screenResolution.x / screenResolution.y)
+		local parent = p1.Parent
 		
 		if parent then
-			local var14 = 1 / (parent.AbsoluteSize / screenResolution)
+			local var3 = 1 / (parent.AbsoluteSize / screenResolution)
 			
-			return if t.IsFinite(var14.x) and t.IsFinite(var14.y) then UDim2.new(var14.x * var13.x, 0, var14.y * var13.y, 0) else UDim2.new(var13.x, 0, var13.y, 0)
+			return if t.IsFinite(var3.x) and t.IsFinite(var3.y) then UDim2.new(var3.x * var2.x, 0, var3.y * var2.y, 0) else UDim2.new(var2.x, 0, var2.y, 0)
 		end
 	end
 end
@@ -58,273 +58,273 @@ t.Enum = {
 	}
 }
 
-function t.CalculateFit(p6, p7)
-	local var15 = p6.AbsoluteSize / p7
-	local var16 = p7 * math.min(var15.X, var15.Y)
+function t.CalculateFit(p1, p2)
+	local var2 = p1.AbsoluteSize / p2
+	local var3 = p2 * math.min(var2.X, var2.Y)
 	
-	return UDim2.new(0, var16.X, 0, var16.Y)
+	return UDim2.new(0, var3.X, 0, var3.Y)
 end
 
-function t.CalculateFill(p8, p9)
-	local var17 = p8.AbsoluteSize / p9
-	local var18 = p9 * math.max(var17.X, var17.Y)
+function t.CalculateFill(p1, p2)
+	local var2 = p1.AbsoluteSize / p2
+	local var3 = p2 * math.max(var2.X, var2.Y)
 	
-	return UDim2.new(0, var18.X, 0, var18.Y)
+	return UDim2.new(0, var3.X, 0, var3.Y)
 end
 
 local t_1 = {}
 
-local function _(p10, p11)
+local function _(p1, p2)
 	-- upvalues: t_1 (ref)
-	return t_1[p10] and t_1[p10][p11]
+	return t_1[p1] and t_1[p1][p2]
 end
 
-local _ = function(value, p12, p13)
+local _ = function(value, p1, p2)
 	-- upvalues: t_1 (ref)
 	if not t_1[value] then
 		t_1[value] = {}
 	end
-	t_1[value][p12] = p13
+	t_1[value][p1] = p2
 end
 
-function t.Linear(p14, p15, p16, p17)
-	return if p17 <= p14 then p15 + p16 else p16 * p14 / p17 + p15
+function t.Linear(p1, p2, p3, p4)
+	return if p4 <= p1 then p2 + p3 else p3 * p1 / p4 + p2
 end
 
-function t.EaseOutQuad(p18, p19, p20, p21)
-	if p21 <= p18 then
-		return p19 + p20
+function t.EaseOutQuad(p1, p2, p3, p4)
+	if p4 <= p1 then
+		return p2 + p3
 	end
-	p18 /= p21
+	p1 /= p4
 	
-	return -p20 * p18 * (p18 - 2) + p19
+	return -p3 * p1 * (p1 - 2) + p2
 end
 
-function t.EaseInOutQuad(p22, p23, p24, p25)
-	if p25 <= p22 then
-		return p23 + p24
+function t.EaseInOutQuad(p1, p2, p3, p4)
+	if p4 <= p1 then
+		return p2 + p3
 	end
-	p22 /= p25 / 2
+	p1 /= p4 / 2
 	
-	if p22 < 1 then
-		return p24 / 2 * p22 * p22 + p23
+	if p1 < 1 then
+		return p3 / 2 * p1 * p1 + p2
 	end
-	p22 -= 1
+	p1 -= 1
 	
-	return -p24 / 2 * (p22 * (p22 - 2) - 1) + p23
+	return -p3 / 2 * (p1 * (p1 - 2) - 1) + p2
 end
 
-function t.SCurveUDim2(p26, p27, p28, p29)
-	if p29 <= p26 then
-		return p27 + p28
+function t.SCurveUDim2(p1, p2, p3, p4)
+	if p4 <= p1 then
+		return p2 + p3
 	end
-	p26 /= p29
+	p1 /= p4
 	
-	if p26 < 0 then
-		p26 = 0
+	if p1 < 0 then
+		p1 = 0
 	end
-	if p26 > 1 then
-		p26 = 1
+	if p1 > 1 then
+		p1 = 1
 	end
-	local var19 = 3 * p26 * p26 - 2 * p26 * p26 * p26
+	local var2 = 3 * p1 * p1 - 2 * p1 * p1 * p1
 	
-	return UDim2.new(var19 * p28.X.Scale, var19 * p28.X.Offset, var19 * p28.Y.Scale, var19 * p28.Y.Offset) + p27
+	return UDim2.new(var2 * p3.X.Scale, var2 * p3.X.Offset, var2 * p3.Y.Scale, var2 * p3.Y.Offset) + p2
 end
 
-function t.SCurveVector2(p30, p31, p32, p33)
-	if p33 <= p30 then
-		return p31 + p32
+function t.SCurveVector2(p1, p2, p3, p4)
+	if p4 <= p1 then
+		return p2 + p3
 	end
-	p30 /= p33
+	p1 /= p4
 	
-	if p30 < 0 then
-		p30 = 0
+	if p1 < 0 then
+		p1 = 0
 	end
-	if p30 > 1 then
-		p30 = 1
+	if p1 > 1 then
+		p1 = 1
 	end
-	local var20 = 3 * p30 * p30 - 2 * p30 * p30 * p30
+	local var2 = 3 * p1 * p1 - 2 * p1 * p1 * p1
 	
-	return Vector2.new(var20 * p32.X, var20 * p32.Y) + p31
+	return Vector2.new(var2 * p3.X, var2 * p3.Y) + p2
 end
 
-function t.PropertyTweener(p34, p35, p36, p37, p38, p39, p40, p41)
+function t.PropertyTweener(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: t (ref), t_1 (ref), runService (ref)
-	p39 = p39 or t.Linear
-	p40 = p40 or false
+	p6 = p6 or t.Linear
+	p7 = p7 or false
 	local t_2 = { StartTime = tick() }
-	t_2.EndTime = t_2.StartTime + p38
+	t_2.EndTime = t_2.StartTime + p5
 	t_2.Cancelled = false
-	local var22 = false
-	local var23 = 0
+	local var2 = false
+	local var3 = 0
 	
 	local function _(value)
-		-- upvalues: p34 (ref), p35 (ref)
-		if p34 then
-			p34[p35] = value
+		-- upvalues: p1 (ref), p2 (ref)
+		if p1 then
+			p1[p2] = value
 		end
 	end
 	
 	local function finalize()
-		-- upvalues: p39 (write), p36 (ref), p37 (ref), p34 (ref), p35 (ref), var22 (write), var23 (write), t_1 (copy), t_2 (ref), p41 (ref)
-		local var26 = p39(1, p36, p37 - p36, 1)
+		-- upvalues: p6 (write), p3 (ref), p4 (ref), p1 (ref), p2 (ref), var2 (write), var3 (write), t_1 (copy), t_2 (ref), p8 (ref)
+		local var4 = p6(1, p3, p4 - p3, 1)
 		
-		if p34 then
-			p34[p35] = var26
+		if p1 then
+			p1[p2] = var4
 		end
-		var22 = true
-		var23 = 1
+		var2 = true
+		var3 = 1
 		
-		if (t_1[p35] and t_1[p35][p34]) == t_2 then
-			local var27 = p35
-			local var28 = p34
+		if (t_1[p2] and t_1[p2][p1]) == t_2 then
+			local var5 = p2
+			local var6 = p1
 			
-			if not t_1[var27] then
-				t_1[var27] = {}
+			if not t_1[var5] then
+				t_1[var5] = {}
 			end
-			t_1[var27][var28] = nil
+			t_1[var5][var6] = nil
 		end
-		if p41 then
-			p41()
+		if p8 then
+			p8()
 		end
 	end
 	
-	if p40 or (not t_1[p35] or not t_1[p35][p34]) then
-		if t_1[p35] and t_1[p35][p34] then
-			(t_1[p35] and t_1[p35][p34]):Cancel()
+	if p7 or (not t_1[p2] or not t_1[p2][p1]) then
+		if t_1[p2] and t_1[p2][p1] then
+			(t_1[p2] and t_1[p2][p1]):Cancel()
 		end
-		if not t_1[p35] then
-			t_1[p35] = {}
+		if not t_1[p2] then
+			t_1[p2] = {}
 		end
-		t_1[p35][p34] = t_2
-		local var25 = p39(0, p36, p37 - p36, p38)
+		t_1[p2][p1] = t_2
+		local var4 = p6(0, p3, p4 - p3, p5)
 		
-		if p34 then
-			p34[p35] = var25
+		if p1 then
+			p1[p2] = var4
 		end
 		spawn(function()
-			-- upvalues: t_2 (ref), p34 (ref), p39 (write), p36 (ref), p37 (ref), p38 (ref), p35 (ref), var23 (write), t (copy), runService (copy), finalize (ref), t_1 (copy)
+			-- upvalues: t_2 (ref), p1 (ref), p6 (write), p3 (ref), p4 (ref), p5 (ref), p2 (ref), var3 (write), t (copy), runService (copy), finalize (ref), t_1 (copy)
 			local currentTime = tick()
-			while currentTime < t_2.EndTime and (p34 and not t_2.Cancelled) do
-				local var30 = p39(currentTime - t_2.StartTime, p36, p37 - p36, p38)
+			while currentTime < t_2.EndTime and (p1 and not t_2.Cancelled) do
+				local var5 = p6(currentTime - t_2.StartTime, p3, p4 - p3, p5)
 				
-				if p34 then
-					p34[p35] = var30
+				if p1 then
+					p1[p2] = var5
 				end
-				var23 = t.Clamp(0, 1, (currentTime - t_2.StartTime) / p38)
+				var3 = t.Clamp(0, 1, (currentTime - t_2.StartTime) / p5)
 				runService.RenderStepped:wait()
 				currentTime = tick()
 			end
-			if t_2.Cancelled == false and p34 then
+			if t_2.Cancelled == false and p1 then
 				finalize()
 			end
-			if (t_1[p35] and t_1[p35][p34]) == t_2 then
-				local var31 = p35
-				local var32 = p34
+			if (t_1[p2] and t_1[p2][p1]) == t_2 then
+				local var6 = p2
+				local var7 = p1
 				
-				if not t_1[var31] then
-					t_1[var31] = {}
+				if not t_1[var6] then
+					t_1[var6] = {}
 				end
-				t_1[var31][var32] = nil
+				t_1[var6][var7] = nil
 			end
 		end)
 	else
-		var22 = true
+		var2 = true
 	end
 	function t_2.GetFinal(_)
-		-- upvalues: p37 (ref)
-		return p37
+		-- upvalues: p4 (ref)
+		return p4
 	end
 	
 	function t_2.GetPercentComplete(_)
-		-- upvalues: var23 (write)
-		return var23
+		-- upvalues: var3 (write)
+		return var3
 	end
 	
 	function t_2.IsFinished(_)
-		-- upvalues: var22 (write)
-		return var22
+		-- upvalues: var2 (write)
+		return var2
 	end
 	
-	function t_2.Finish(p42)
-		-- upvalues: var22 (write), finalize (ref)
-		if not var22 then
-			p42:Cancel()
+	function t_2.Finish(p9)
+		-- upvalues: var2 (write), finalize (ref)
+		if not var2 then
+			p9:Cancel()
 			finalize()
 		end
 	end
 	
 	function t_2.Cancel(_)
-		-- upvalues: t_2 (ref), var22 (write), p35 (ref), p34 (ref), t_1 (copy)
+		-- upvalues: t_2 (ref), var2 (write), p2 (ref), p1 (ref), t_1 (copy)
 		t_2.Cancelled = true
-		var22 = true
+		var2 = true
 		
-		if (t_1[p35] and t_1[p35][p34]) == t_2 then
-			local var33 = p35
-			local var34 = p34
+		if (t_1[p2] and t_1[p2][p1]) == t_2 then
+			local var5 = p2
+			local var6 = p1
 			
-			if not t_1[var33] then
-				t_1[var33] = {}
+			if not t_1[var5] then
+				t_1[var5] = {}
 			end
-			t_1[var33][var34] = nil
+			t_1[var5][var6] = nil
 		end
 	end
 	
 	return t_2
 end
 
-function t.CancelTweens(p43)
-	for i, v in pairs(p43) do
+function t.CancelTweens(p9)
+	for i, v in pairs(p9) do
 		v:Finish()
-		p43[i] = nil
+		p9[i] = nil
 	end
 end
 
 function t.Signal()
 	local t = {}
 	local bindableEvent = Instance.new("BindableEvent")
-	local var37 = nil
-	local var38 = nil
+	local var5 = nil
+	local var6 = nil
 	
 	function t.fire(_, ...)
-		-- upvalues: var37 (write), var38 (write), bindableEvent (ref)
-		var37 = { ... }
-		var38 = select("#", ...)
+		-- upvalues: var5 (write), var6 (write), bindableEvent (ref)
+		var5 = { ... }
+		var6 = select("#", ...)
 		bindableEvent:Fire()
 	end
 	
-	function t.connect(_, p44)
-		-- upvalues: bindableEvent (ref), var37 (write), var38 (write)
-		if not p44 then
+	function t.connect(_, p10)
+		-- upvalues: bindableEvent (ref), var5 (write), var6 (write)
+		if not p10 then
 			error("connect(nil)", 2)
 		end
 		return bindableEvent.Event:connect(function()
-			-- upvalues: p44 (ref), var37 (copy), var38 (copy)
-			p44(unpack(var37, 1, var38))
+			-- upvalues: p10 (ref), var5 (copy), var6 (copy)
+			p10(unpack(var5, 1, var6))
 		end)
 	end
 	
 	function t.wait(_)
-		-- upvalues: bindableEvent (ref), var37 (write), var38 (write)
+		-- upvalues: bindableEvent (ref), var5 (write), var6 (write)
 		bindableEvent.Event:wait()
-		assert(var37, "Missing arg data, likely due to :TweenSize/Position corrupting threadrefs.")
+		assert(var5, "Missing arg data, likely due to :TweenSize/Position corrupting threadrefs.")
 		
-		return unpack(var37, 1, var38)
+		return unpack(var5, 1, var6)
 	end
 	
 	return t
 end
 
-function t.DisconnectEvent(p45)
-	if p45 then
-		p45:disconnect()
+function t.DisconnectEvent(p10)
+	if p10 then
+		p10:disconnect()
 	end
 	return nil
 end
 
-function t.DisconnectEvents(p46)
-	if p46 and type(p46) == "table" then
-		for i, v in pairs(p46) do
+function t.DisconnectEvents(p10)
+	if p10 and type(p10) == "table" then
+		for i, v in pairs(p10) do
 			v:disconnect()
 		end
 	end
@@ -350,29 +350,29 @@ end
 
 function t.ClampCanvasPosition(value, minValue)
 	-- upvalues: t (ref)
-	local var39 = if value.Parent then value.Parent.AbsoluteSize else Vector2.new(0, 0)
-	local vector2 = Vector2.new(value.CanvasSize.X.Scale * var39.X + value.CanvasSize.X.Offset, value.CanvasSize.Y.Scale * var39.Y + value.CanvasSize.Y.Offset)
+	local var5 = if value.Parent then value.Parent.AbsoluteSize else Vector2.new(0, 0)
+	local vector2 = Vector2.new(value.CanvasSize.X.Scale * var5.X + value.CanvasSize.X.Offset, value.CanvasSize.Y.Scale * var5.Y + value.CanvasSize.Y.Offset)
 	
 	return Vector2.new(t.Clamp(0, vector2.X - value.AbsoluteWindowSize.X, minValue.X), t.Clamp(0, vector2.Y - value.AbsoluteWindowSize.Y, minValue.Y))
 end
 
-function t.Round(value, p47)
-	p47 = p47 or 1
+function t.Round(value, p11)
+	p11 = p11 or 1
 	
-	return math.floor((value + p47 / 2) / p47) * p47
+	return math.floor((value + p11 / 2) / p11) * p11
 end
 
-function t.ChompString(p48)
-	return tostring(p48):gsub("^%s+", ""):gsub("%s+$", "")
+function t.ChompString(p11)
+	return tostring(p11):gsub("^%s+", ""):gsub("%s+$", "")
 end
 
-function t.SpaceNormalizeString(p49)
-	return tostring(p49):gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
+function t.SpaceNormalizeString(p11)
+	return tostring(p11):gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
 end
 
 local function getDelimiterByLocale()
 	-- upvalues: localizationService (ref)
-	local var41 = localizationService.RobloxLocaleId:lower()
+	local var5 = localizationService.RobloxLocaleId:lower()
 	local t = {
 		["en-us"] = ",",
 		["zh-hk"] = "",
@@ -393,100 +393,100 @@ local function getDelimiterByLocale()
 		["sv-se"] = " "
 	}
 	
-	return if t[var41] then t[var41] else ","
+	return if t[var5] then t[var5] else ","
 end
 
-function t.FormatNumberString(p50)
+function t.FormatNumberString(p11)
 	-- upvalues: getDelimiterByLocale (ref), t (ref)
-	local var43 = t.ChompString(p50)
+	local var5 = t.ChompString(p11)
 	local formattedText = string.format("%%1%s%%2", getDelimiterByLocale())
 	local _ = nil
 	repeat
-		local replaced, replaced_1 = string.gsub(var43, "^(-?%d+)(%d%d%d)", formattedText)
-		var43 = replaced
+		local replaced, replaced_1 = string.gsub(var5, "^(-?%d+)(%d%d%d)", formattedText)
+		var5 = replaced
 	until replaced_1 == 0
-	return var43
+	return var5
 end
 
-function t.PrettyPrint(p51)
+function t.PrettyPrint(p11)
 	-- upvalues: t (ref)
-	if type(p51) == "table" then
-		local var47 = "{"
+	if type(p11) == "table" then
+		local var5 = "{"
 		
-		for i, v in pairs(p51) do
-			var47 = if var47 == "{" then var47 else var47 .. ", "
+		for i, v in pairs(p11) do
+			var5 = if var5 == "{" then var5 else var5 .. ", "
 			
 			if type(i) == "string" then
-				var47 ..= i .. " = "
+				var5 ..= i .. " = "
 			elseif type(i) ~= "number" then
-				var47 ..= "[" .. i .. "] = "
+				var5 ..= "[" .. i .. "] = "
 			end
-			var47 ..= t.PrettyPrint(v)
+			var5 ..= t.PrettyPrint(v)
 		end
-		return var47 .. "}"
+		return var5 .. "}"
 	else
-		return if type(p51) == "string" then "'" .. p51 .. "'" else tostring(p51)
+		return if type(p11) == "string" then "'" .. p51 .. "'" else tostring(p11)
 	end
 end
 
-local _ = function(p52, p53, p54)
+local _ = function(p12, p13, p14)
 	-- upvalues: t (ref)
-	p53 = p53 or 0.35
-	p54 = p54 or 0.8
-	local var48 = t.Clamp(-1, 1, p52)
+	p13 = p13 or 0.35
+	p14 = p14 or 0.8
+	local var6 = t.Clamp(-1, 1, p12)
 	
-	return if var48 >= 0 then p53 * var48 / (p53 - var48 + 1) else -(p54 * -var48 / (p54 + var48 + 1))
+	return if var6 >= 0 then p13 * var6 / (p13 - var6 + 1) else -(p14 * -var6 / (p14 + var6 + 1))
 end
 
-local _ = function(p55, p56)
-	p56 = p56 or 0.1
+local _ = function(p12, p13)
+	p13 = p13 or 0.1
 	
-	return (1 + p56) * (math.abs(p55) * 2 - 1) - p56
+	return (1 + p13) * (math.abs(p12) * 2 - 1) - p13
 end
 
-local _ = function(p57)
-	return p57 / 2 + 0.5
+local _ = function(p12)
+	return p12 / 2 + 0.5
 end
 
-function t.GamepadLinearToCurve(p58, p59, _, _)
+function t.GamepadLinearToCurve(p12, p13, _, _)
 	-- upvalues: t (ref)
-	local function onAxis(p60)
-		-- upvalues: p59 (ref), t (copy)
-		local var56 = if p60 < 0 then -1 else 1
-		local p59_1 = p59 or 0.1
-		local var58 = (1 + p59_1) * (math.abs(math.abs(p60)) * 2 - 1) - p59_1
-		local var59 = nil or 0.35
-		local var60 = nil or 0.8
-		local var61 = t.Clamp(-1, 1, var58)
+	local function onAxis(p14)
+		-- upvalues: p13 (ref), t (copy)
+		local var6 = if p14 < 0 then -1 else 1
+		local p15 = p13 or 0.1
+		local var7 = (1 + p15) * (math.abs(math.abs(p14)) * 2 - 1) - p15
+		local var8 = nil or 0.35
+		local var9 = nil or 0.8
+		local var10 = t.Clamp(-1, 1, var7)
 		
-		return t.Clamp(-1, 1, ((if var61 >= 0 then var59 * var61 / (var59 - var61 + 1) else -(var60 * -var61 / (var60 + var61 + 1))) / 2 + 0.5) * var56)
+		return t.Clamp(-1, 1, ((if var10 >= 0 then var8 * var10 / (var8 - var10 + 1) else -(var9 * -var10 / (var9 + var10 + 1))) / 2 + 0.5) * var6)
 	end
 	
 	local new = Vector2.new
-	local x = p58.x
-	local var50 = if x < 0 then -1 else 1
-	p59 = p59 or 0.1
-	local var52 = (1 + p59) * (math.abs(math.abs(x)) * 2 - 1) - p59
-	local var53 = nil or 0.35
-	local var54 = nil or 0.8
-	local var55 = t.Clamp(-1, 1, var52)
+	local x = p12.x
+	local var6 = if x < 0 then -1 else 1
+	p13 = p13 or 0.1
+	local var7 = (1 + p13) * (math.abs(math.abs(x)) * 2 - 1) - p13
+	local var8 = nil or 0.35
+	local var9 = nil or 0.8
+	local var10 = t.Clamp(-1, 1, var7)
 	
-	return new(t.Clamp(-1, 1, ((if var55 >= 0 then var53 * var55 / (var53 - var55 + 1) else -(var54 * -var55 / (var54 + var55 + 1))) / 2 + 0.5) * var50), onAxis(p58.y))
+	return new(t.Clamp(-1, 1, ((if var10 >= 0 then var8 * var10 / (var8 - var10 + 1) else -(var9 * -var10 / (var9 + var10 + 1))) / 2 + 0.5) * var6), onAxis(p12.y))
 end
 
-function t.IsFastFlagEnabled(p61)
+function t.IsFastFlagEnabled(p12)
 	local ok, status = pcall(function()
-		-- upvalues: p61 (ref)
-		return settings():GetFFlag(p61)
+		-- upvalues: p12 (ref)
+		return settings():GetFFlag(p12)
 	end)
 	
 	return ok and status
 end
 
-function t.GetFastVariable(p62)
+function t.GetFastVariable(p12)
 	local ok, status = pcall(function()
-		-- upvalues: p62 (ref)
-		return settings():GetFVariable(p62)
+		-- upvalues: p12 (ref)
+		return settings():GetFVariable(p12)
 	end)
 	
 	return ok and status
@@ -500,86 +500,86 @@ local _ = function()
 	return playersService.LocalPlayer
 end
 
-function t.IsFeatureNonZero(p63)
+function t.IsFeatureNonZero(p12)
 	-- upvalues: t (ref)
-	return (tonumber(t.GetFastVariable(p63)) or 0) ~= 0
+	return (tonumber(t.GetFastVariable(p12)) or 0) ~= 0
 end
 
-function t.IsFeatureRolledOut(p64)
+function t.IsFeatureRolledOut(p12)
 	-- upvalues: playersService (ref), t (ref)
 	while playersService.LocalPlayer == nil do
 		wait()
 	end
-	return playersService.LocalPlayer.UserId % 100 < (tonumber(t.GetFastVariable(p64)) or 0)
+	return playersService.LocalPlayer.UserId % 100 < (tonumber(t.GetFastVariable(p12)) or 0)
 end
 
-function t.ExponentialRepeat(p65, p66, p67)
-	p67 = p67 or 6
-	local var62 = 1
-	while var62 <= p67 and p65() do
-		if not p66() then
-			wait(var62 ^ 2)
-			var62 += 1
+function t.ExponentialRepeat(p13, p14, p15)
+	p15 = p15 or 6
+	local var6 = 1
+	while var6 <= p15 and p13() do
+		if not p14() then
+			wait(var6 ^ 2)
+			var6 += 1
 			continue
 		end
 		return
 	end
 end
 
-function t.SplitString(p68, p69)
+function t.SplitString(p16, p17)
 	local t = {}
 	
-	if p68 and p69 then
-		for i in string.gmatch(p68, "([^" .. p69 .. "]+)") do
+	if p16 and p17 then
+		for i in string.gmatch(p16, "([^" .. p69 .. "]+)") do
 			table.insert(t, i)
 		end
 	end
 	return t
 end
 
-local function findAssetsHelper(value, p70, p71)
+local function findAssetsHelper(value, p18, p19)
 	-- upvalues: findAssetsHelper (ref)
 	if not value then return end
 	if value:IsA("CharacterMesh") then
 		if value.MeshId > 0 then
-			table.insert(p70, p71 .. tostring(value.MeshId))
+			table.insert(p18, p19 .. tostring(value.MeshId))
 		end
 		if value.BaseTextureId > 0 then
-			table.insert(p70, p71 .. tostring(value.BaseTextureId))
+			table.insert(p18, p19 .. tostring(value.BaseTextureId))
 		end
 		if value.OverlayTextureId > 0 then
-			table.insert(p70, p71 .. tostring(value.OverlayTextureId))
+			table.insert(p18, p19 .. tostring(value.OverlayTextureId))
 		end
 	elseif value:IsA("FileMesh") then
-		table.insert(p70, value.MeshId)
-		table.insert(p70, value.TextureId)
+		table.insert(p18, value.MeshId)
+		table.insert(p18, value.TextureId)
 	elseif value:IsA("Decal") then
-		table.insert(p70, value.Texture)
+		table.insert(p18, value.Texture)
 	elseif value:IsA("Pants") then
-		table.insert(p70, value.PantsTemplate)
+		table.insert(p18, value.PantsTemplate)
 	elseif value:IsA("Shirt") then
-		table.insert(p70, value.ShirtTemplate)
+		table.insert(p18, value.ShirtTemplate)
 	end
 	for i, v in pairs(value:GetChildren()) do
-		findAssetsHelper(v, p70, p71)
+		findAssetsHelper(v, p18, p19)
 	end
 end
 
-function t.FindAssetsInModel(value, p72)
+function t.FindAssetsInModel(value, p20)
 	-- upvalues: findAssetsHelper (ref)
 	local t = {}
-	findAssetsHelper(value, t, p72 or "https://assetgame.roblox.com/asset/?id=")
+	findAssetsHelper(value, t, p20 or "https://assetgame.roblox.com/asset/?id=")
 	
 	return t
 end
 
-function t.ConvertFontSizeEnumToInt(p73)
-	return string.match(p73.Name, "%d+") or 10
+function t.ConvertFontSizeEnumToInt(p20)
+	return string.match(p20.Name, "%d+") or 10
 end
 
-function t.Upper(p74)
-	-- upvalues: var5 (write)
-	return if var5 then var5:Upper(p74) else string.upper(p74)
+function t.Upper(p20)
+	-- upvalues: var1 (write)
+	return if var1 then var1:Upper(p20) else string.upper(p20)
 end
 
 function t.SetSelectedCoreObject(value)
@@ -587,74 +587,74 @@ function t.SetSelectedCoreObject(value)
 	guiService.SelectedCoreObject = value
 end
 
-function t.AddSelectionParent(p75, p76)
+function t.AddSelectionParent(p20, p21)
 	-- upvalues: guiService (ref)
-	guiService:AddSelectionParent(p75, p76)
+	guiService:AddSelectionParent(p20, p21)
 end
 
-function t.RemoveSelectionGroup(p77)
+function t.RemoveSelectionGroup(p20)
 	-- upvalues: guiService (ref)
-	guiService:RemoveSelectionGroup(p77)
+	guiService:RemoveSelectionGroup(p20)
 end
 
-function t.GetTextBounds(p78)
+function t.GetTextBounds(p20)
 	-- upvalues: textService (ref)
-	local var65 = false
+	local var7 = false
 	local textTextSize = nil
 	
-	if p78 then
-		if p78.TextFits then
-			textTextSize = p78.TextBounds
-			var65 = true
+	if p20 then
+		if p20.TextFits then
+			textTextSize = p20.TextBounds
+			var7 = true
 			
-			return var65, textTextSize
-		elseif not p78.TextWrapped then
-			textTextSize = textService:GetTextSize(p78.Text, p78.TextSize, p78.Font, Vector2.new(0, 0))
-			var65 = true
+			return var7, textTextSize
+		elseif not p20.TextWrapped then
+			textTextSize = textService:GetTextSize(p20.Text, p20.TextSize, p20.Font, Vector2.new(0, 0))
+			var7 = true
 		end
 	end
-	return var65, textTextSize
+	return var7, textTextSize
 end
 
-function t.ResizeButtonWithText(p79, p80, p81, p82)
+function t.ResizeButtonWithText(p20, p21, p22, p23)
 	-- upvalues: t (ref)
-	local var67 = false
-	local textBounds, textBounds_1 = t.GetTextBounds(p80)
+	local var7 = false
+	local textBounds, textBounds_1 = t.GetTextBounds(p21)
 	
-	if textBounds and p79.Size.X.Scale == 0 and p79.Size.Y.Scale == 0 then
-		local vector2 = Vector2.new(p79.Size.X.Offset, p79.Size.Y.Offset)
+	if textBounds and p20.Size.X.Scale == 0 and p20.Size.Y.Scale == 0 then
+		local vector2 = Vector2.new(p20.Size.X.Offset, p20.Size.Y.Offset)
 		local x = vector2.X
 		local y = vector2.Y
 		
-		if p81 and vector2.X < textBounds_1.X + p81 * 2 then
-			x = textBounds_1.X + p81 * 2
-			var67 = true
+		if p22 and vector2.X < textBounds_1.X + p22 * 2 then
+			x = textBounds_1.X + p22 * 2
+			var7 = true
 		end
-		if p82 and vector2.Y < textBounds_1.Y + p82 * 2 then
-			y = textBounds_1.Y + p82 * 2
-			var67 = true
+		if p23 and vector2.Y < textBounds_1.Y + p23 * 2 then
+			y = textBounds_1.Y + p23 * 2
+			var7 = true
 		end
-		if var67 then
-			p79.Size = UDim2.new(0, x, 0, y)
+		if var7 then
+			p20.Size = UDim2.new(0, x, 0, y)
 		end
 	end
-	return var67
+	return var7
 end
 
-function t.ResizeButtonWithDynamicText(p83, p84, p85, p86, p87)
+function t.ResizeButtonWithDynamicText(p20, p21, p22, p23, p24)
 	-- upvalues: t (ref)
-	local var71 = t.ResizeButtonWithText(p83, p84, p86, p87) or false
-	local text = p84.Text
+	local var7 = t.ResizeButtonWithText(p20, p21, p23, p24) or false
+	local text = p21.Text
 	
-	if p85 and #p85 > 0 then
-		for i = 1, #p85 do
-			p84.Text = p85[i]
-			var71 = t.ResizeButtonWithText(p83, p84, p86, p87) or var71
+	if p22 and #p22 > 0 then
+		for i = 1, #p22 do
+			p21.Text = p22[i]
+			var7 = t.ResizeButtonWithText(p20, p21, p23, p24) or var7
 		end
 	end
-	p84.Text = text
+	p21.Text = text
 	
-	return var71
+	return var7
 end
 
 return t

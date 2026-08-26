@@ -2,6 +2,6 @@
 local _ = require(commercePurchaseApp.Enums.ErrorCodeEnum)
 local _ = require(commercePurchaseApp.Store.Types)
 
-return function(p0)
-	return p0.commercePurchaseState.errorCode
+return function(p1)
+	return p1.commercePurchaseState.errorCode
 end

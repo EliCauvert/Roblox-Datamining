@@ -1,4 +1,4 @@
-﻿return function(p0)
+﻿return function(p1)
 	local parent = script.Parent.Parent
 	local reactGlobalsModule = require(parent.ReactGlobals)
 	local sharedModule = require(parent.Shared)
@@ -7,97 +7,97 @@
 	local schedulerFeatureFlagsModule = require(script.Parent.SchedulerFeatureFlags)
 	local enableSchedulerDebugging = schedulerFeatureFlagsModule.enableSchedulerDebugging
 	local enableProfiling = schedulerFeatureFlagsModule.enableProfiling
-	p0 = p0 or require(script.Parent.SchedulerHostConfig)
-	local requestHostCallback = p0.requestHostCallback
-	local requestHostTimeout = p0.requestHostTimeout
-	local cancelHostTimeout = p0.cancelHostTimeout
-	local shouldYieldToHost = p0.shouldYieldToHost
-	local getCurrentTime = p0.getCurrentTime
-	local forceFrameRate = p0.forceFrameRate
-	local requestPaint = p0.requestPaint
-	local setSchedulerFlags = p0.setSchedulerFlags
-	local getSchedulerFlags = p0.getSchedulerFlags
+	p1 = p1 or require(script.Parent.SchedulerHostConfig)
+	local requestHostCallback = p1.requestHostCallback
+	local requestHostTimeout = p1.requestHostTimeout
+	local cancelHostTimeout = p1.cancelHostTimeout
+	local shouldYieldToHost = p1.shouldYieldToHost
+	local getCurrentTime = p1.getCurrentTime
+	local forceFrameRate = p1.forceFrameRate
+	local requestPaint = p1.requestPaint
+	local setSchedulerFlags = p1.setSchedulerFlags
+	local getSchedulerFlags = p1.getSchedulerFlags
 	local noYieldModule = require(script.Parent.NoYield)
-	local var5 = nil
-	local var6 = nil
-	local var7 = nil
+	local var1 = nil
+	local var2 = nil
+	local var3 = nil
 	
-	local _ = function(p1, p2)
-		-- upvalues: var6 (write)
-		local var23 = #p1 + 1
-		p1[var23] = p2
-		var6(p1, p2, var23)
+	local _ = function(p2, p3)
+		-- upvalues: var2 (write)
+		local var4 = #p2 + 1
+		p2[var4] = p3
+		var2(p2, p3, var4)
 	end
 	
-	local _ = function(p3)
-		return p3[1]
+	local _ = function(p2)
+		return p2[1]
 	end
 	
-	local _ = function(p4)
-		-- upvalues: var7 (write)
-		local var24 = p4[1]
+	local _ = function(p2)
+		-- upvalues: var3 (write)
+		local var4 = p2[1]
 		
-		if var24 == nil then
+		if var4 == nil then
 			return nil
 		end
-		local var25 = p4[#p4]
-		p4[#p4] = nil
+		local var5 = p2[#p2]
+		p2[#p2] = nil
 		
-		if var25 ~= var24 then
-			p4[1] = var25
-			var7(p4, var25, 1)
+		if var5 ~= var4 then
+			p2[1] = var5
+			var3(p2, var5, 1)
 		end
-		return var24
+		return var4
 	end
 	
-	var6 = function(p5, p6, p7)
-		-- upvalues: var5 (write)
-		local floored, var27
+	var2 = function(p2, p3, p4)
+		-- upvalues: var1 (write)
+		local floored, var4
 		while true do
-			floored = math.floor(p7 / 2)
-			var27 = p5[floored]
-			if var27 ~= nil and var5(var27, p6) > 0 then
+			floored = math.floor(p4 / 2)
+			var4 = p2[floored]
+			if var4 ~= nil and var1(var4, p3) > 0 then
 				return
 			end
-			p5[floored] = p6
-			p5[p7] = var27
+			p2[floored] = p3
+			p2[p4] = var4
 			_ = floored
 		end
 	end
 	
-	var7 = function(p8, p9, p10)
-		-- upvalues: var5 (write)
-		local var31, var32
-		local p8Count = #p8
-		while p10 < p8Count do
-			local var29 = p10 * 2
-			local var30 = p8[var29]
-			var31 = var29 + 1
-			var32 = p8[var31]
+	var3 = function(p5, p6, p7)
+		-- upvalues: var1 (write)
+		local var5, var6
+		local p8Count = #p5
+		while p7 < p8Count do
+			local var7 = p7 * 2
+			local var8 = p5[var7]
+			var5 = var7 + 1
+			var6 = p5[var5]
 			
-			if var30 == nil or var5(var30, p9) >= 0 then
-				if var32 ~= nil and var5(var32, p9) < 0 then
+			if var8 == nil or var1(var8, p6) >= 0 then
+				if var6 ~= nil and var1(var6, p6) < 0 then
 					return
 				end
-				p8[p10] = var32
-				p8[var31] = p9
-				p10 = var31
-			elseif var32 == nil or var5(var32, var30) >= 0 then
-				p8[p10] = var30
-				p8[var29] = p9
-				p10 = var29
+				p5[p7] = var6
+				p5[var5] = p6
+				p7 = var5
+			elseif var6 == nil or var1(var6, var8) >= 0 then
+				p5[p7] = var8
+				p5[var7] = p6
+				p7 = var7
 			else
-				p8[p10] = var32
-				p8[var31] = p9
-				p10 = var31
+				p5[p7] = var6
+				p5[var5] = p6
+				p7 = var5
 			end
 		end
 	end
 	
-	var5 = function(p11, p12)
-		local var33 = p11.sortIndex - p12.sortIndex
+	var1 = function(p8, p9)
+		local var9 = p8.sortIndex - p9.sortIndex
 		
-		return if var33 == 0 then p11.id - p12.id else var33
+		return if var9 == 0 then p8.id - p9.id else var9
 	end
 	
 	local schedulerPrioritiesModule = require(script.Parent.SchedulerPriorities)
@@ -119,189 +119,189 @@
 	local startLoggingProfilingEvents = schedulerProfilingModule.startLoggingProfilingEvents
 	local t = {}
 	local t_1 = {}
-	local var12 = 1
+	local var9 = 1
+	local var10 = false
+	local var11 = nil
+	local var12 = normalPriority
 	local var13 = false
-	local var14 = nil
-	local var15 = normalPriority
-	local var16 = false
-	local var17 = false
-	local var18 = false
+	local var14 = false
+	local var15 = false
 	local _ = nil
-	local var19 = nil
-	local var20 = nil
+	local var16 = nil
+	local var17 = nil
 	
-	local function advanceTimers(p13)
-		-- upvalues: t_1 (ref), var7 (write), t (ref), var6 (write), enableProfiling (ref), markTaskStart (ref)
-		local var34 = t_1[1]
-		while var34 ~= nil do
-			if var34.callback == nil then
-				local var35 = t_1
-				local var36 = var35[1]
+	local function advanceTimers(p8)
+		-- upvalues: t_1 (ref), var3 (write), t (ref), var2 (write), enableProfiling (ref), markTaskStart (ref)
+		local var18 = t_1[1]
+		while var18 ~= nil do
+			if var18.callback == nil then
+				local var19 = t_1
+				local var20 = var19[1]
 				
-				if var36 ~= nil then
-					local var37 = var35[#var35]
-					var35[#var35] = nil
+				if var20 ~= nil then
+					local var21 = var19[#var19]
+					var19[#var19] = nil
 					
-					if var37 ~= var36 then
-						var35[1] = var37
-						var7(var35, var37, 1)
+					if var21 ~= var20 then
+						var19[1] = var21
+						var3(var19, var21, 1)
 					end
 				end
-				var34 = t_1[1]
+				var18 = t_1[1]
 			end
-			if var34.startTime <= p13 then
-				local var38 = t_1[1]
+			if var18.startTime <= p8 then
+				local var22 = t_1[1]
 				
-				if var38 ~= nil then
-					local var39 = t_1[#t_1]
+				if var22 ~= nil then
+					local var23 = t_1[#t_1]
 					t_1[#t_1] = nil
 					
-					if var39 ~= var38 then
-						t_1[1] = var39
-						var7(t_1, var39, 1)
+					if var23 ~= var22 then
+						t_1[1] = var23
+						var3(t_1, var23, 1)
 					end
 				end
-				var34.sortIndex = var34.expirationTime
-				local var40 = var34
-				local var41 = #t + 1
-				t[var41] = var40
-				var6(t, var40, var41)
+				var18.sortIndex = var18.expirationTime
+				local var24 = var18
+				local var25 = #t + 1
+				t[var25] = var24
+				var2(t, var24, var25)
 				
 				if enableProfiling then
-					markTaskStart(var34, p13)
-					var34.isQueued = true
+					markTaskStart(var18, p8)
+					var18.isQueued = true
 				end
 			end
 			return
 		end
 	end
 	
-	local var22 = function(p14)
-		-- upvalues: var18 (write), advanceTimers (ref), var17 (write), t (ref), requestHostCallback (ref), var19 (write), t_1 (ref), requestHostTimeout (ref), var22 (write)
-		var18 = false
-		advanceTimers(p14)
+	local var26 = function(p9)
+		-- upvalues: var15 (write), advanceTimers (ref), var14 (write), t (ref), requestHostCallback (ref), var16 (write), t_1 (ref), requestHostTimeout (ref), var26 (write)
+		var15 = false
+		advanceTimers(p9)
 		
-		if not var17 then
+		if not var14 then
 			if t[1] ~= nil then
-				var17 = true
-				requestHostCallback(var19)
+				var14 = true
+				requestHostCallback(var16)
 				
 				return
 			end
-			local var42 = t_1[1]
+			local var27 = t_1[1]
 			
-			if var42 ~= nil then
-				requestHostTimeout(var22, var42.startTime - p14)
+			if var27 ~= nil then
+				requestHostTimeout(var26, var27.startTime - p9)
 			end
 		end
 	end
 	
-	var19 = function(p15, p16)
-		-- upvalues: enableProfiling (ref), markSchedulerUnsuspended (ref), var17 (write), var18 (write), cancelHostTimeout (ref), var16 (write), var15 (write), reactGlobalsModule (ref), var20 (write), describeError (ref), var14 (write), getCurrentTime (ref), markTaskErrored (ref), markSchedulerSuspended (ref)
+	var16 = function(p9, p10)
+		-- upvalues: enableProfiling (ref), markSchedulerUnsuspended (ref), var14 (write), var15 (write), cancelHostTimeout (ref), var13 (write), var12 (write), reactGlobalsModule (ref), var17 (write), describeError (ref), var11 (write), getCurrentTime (ref), markTaskErrored (ref), markSchedulerSuspended (ref)
 		if enableProfiling then
-			markSchedulerUnsuspended(p16)
+			markSchedulerUnsuspended(p10)
 		end
-		var17 = false
+		var14 = false
 		
-		if var18 then
-			var18 = false
+		if var15 then
+			var15 = false
 			cancelHostTimeout()
 		end
-		local var43, var44
-		var16 = true
+		local var27, var28
+		var13 = true
 		local _ = nil
 		local _ = nil
 		
 		if reactGlobalsModule.__YOLO__ then
-			var43 = true
-			var44 = var20(p15, p16)
+			var27 = true
+			var28 = var17(p9, p10)
 		elseif enableProfiling then
-			local ok, status = xpcall(var20, describeError, p15, p16)
-			var43 = ok
-			var44 = status
+			local ok, status = xpcall(var17, describeError, p9, p10)
+			var27 = ok
+			var28 = status
 			
-			if not var43 and var14 ~= nil then
-				markTaskErrored(var14, getCurrentTime())
-				var14.isQueued = false
+			if not var27 and var11 ~= nil then
+				markTaskErrored(var11, getCurrentTime())
+				var11.isQueued = false
 			end
 		else
-			var43 = true
-			var44 = var20(p15, p16)
+			var27 = true
+			var28 = var17(p9, p10)
 		end
-		var14 = nil
-		var15 = var15
-		var16 = false
+		var11 = nil
+		var12 = var12
+		var13 = false
 		
 		if enableProfiling then
 			markSchedulerSuspended(getCurrentTime())
 		end
-		if not var43 then
-			error(var44)
+		if not var27 then
+			error(var28)
 		end
-		return var44
+		return var28
 	end
 	
-	var20 = function(p17, p18)
-		-- upvalues: reactGlobalsModule (ref), reactFeatureFlags (ref), advanceTimers (ref), var14 (write), t (ref), enableSchedulerDebugging (ref), var13 (write), shouldYieldToHost (ref), var15 (write), markTaskRun (ref), noYieldModule (ref), getCurrentTime (ref), markTaskYield (ref), enableProfiling (ref), markTaskCompleted (ref), var7 (write), t_1 (ref), requestHostTimeout (ref), var22 (write)
+	var17 = function(p9, p10)
+		-- upvalues: reactGlobalsModule (ref), reactFeatureFlags (ref), advanceTimers (ref), var11 (write), t (ref), enableSchedulerDebugging (ref), var10 (write), shouldYieldToHost (ref), var12 (write), markTaskRun (ref), noYieldModule (ref), getCurrentTime (ref), markTaskYield (ref), enableProfiling (ref), markTaskCompleted (ref), var3 (write), t_1 (ref), requestHostTimeout (ref), var26 (write)
 		local catchYieldingInDEV = reactGlobalsModule.__DEV__ and reactFeatureFlags.catchYieldingInDEV
-		local var46 = p18
-		advanceTimers(var46)
-		var14 = t[1]
-		while var14 ~= nil and (not enableSchedulerDebugging or not var13) and (var46 >= var14.expirationTime or p17 and not shouldYieldToHost()) do
-			local callback = var14.callback
+		local var27 = p10
+		advanceTimers(var27)
+		var11 = t[1]
+		while var11 ~= nil and (not enableSchedulerDebugging or not var10) and (var27 >= var11.expirationTime or p9 and not shouldYieldToHost()) do
+			local callback = var11.callback
 			
 			if typeof(callback) ~= "function" then
-				local var52 = t
-				local var53 = var52[1]
+				local var28 = t
+				local var29 = var28[1]
 				
-				if var53 ~= nil then
-					local var54 = var52[#var52]
-					var52[#var52] = nil
+				if var29 ~= nil then
+					local var30 = var28[#var28]
+					var28[#var28] = nil
 					
-					if var54 ~= var53 then
-						var52[1] = var54
-						var7(var52, var54, 1)
+					if var30 ~= var29 then
+						var28[1] = var30
+						var3(var28, var30, 1)
 					end
 				end
-				var14 = t[1]
+				var11 = t[1]
 			end
-			var14.callback = nil
-			var15 = var14.priorityLevel
-			local var47 = var14.expirationTime <= var46
-			markTaskRun(var14, var46)
-			local var48 = if catchYieldingInDEV then noYieldModule(callback, var47) else callback(var47)
-			var46 = getCurrentTime()
+			var11.callback = nil
+			var12 = var11.priorityLevel
+			local var31 = var11.expirationTime <= var27
+			markTaskRun(var11, var27)
+			local var32 = if catchYieldingInDEV then noYieldModule(callback, var31) else callback(var31)
+			var27 = getCurrentTime()
 			
-			if typeof(var48) == "function" then
-				var14.callback = var48
-				markTaskYield(var14, var46)
+			if typeof(var32) == "function" then
+				var11.callback = var32
+				markTaskYield(var11, var27)
 			elseif enableProfiling then
-				markTaskCompleted(var14, var46)
-				var14.isQueued = false
+				markTaskCompleted(var11, var27)
+				var11.isQueued = false
 			end
-			if var14 == t[1] then
-				local var49 = t
-				local var50 = var49[1]
+			if var11 == t[1] then
+				local var33 = t
+				local var34 = var33[1]
 				
-				if var50 ~= nil then
-					local var51 = var49[#var49]
-					var49[#var49] = nil
+				if var34 ~= nil then
+					local var35 = var33[#var33]
+					var33[#var33] = nil
 					
-					if var51 ~= var50 then
-						var49[1] = var51
-						var7(var49, var51, 1)
+					if var35 ~= var34 then
+						var33[1] = var35
+						var3(var33, var35, 1)
 					end
 				end
 			end
-			advanceTimers(var46)
+			advanceTimers(var27)
 		end
-		if var14 ~= nil then
+		if var11 ~= nil then
 			return true
 		end
-		local var55 = t_1[1]
+		local var36 = t_1[1]
 		
-		if var55 ~= nil then
-			requestHostTimeout(var22, var55.startTime - var46)
+		if var36 ~= nil then
+			requestHostTimeout(var26, var36.startTime - var27)
 		end
 		return false
 	end
@@ -312,164 +312,164 @@
 		unstable_NormalPriority = normalPriority,
 		unstable_IdlePriority = idlePriority,
 		unstable_LowPriority = lowPriority,
-		unstable_runWithPriority = function(p19, p20)
-			-- upvalues: immediatePriority (ref), userBlockingPriority (ref), normalPriority (ref), lowPriority (ref), idlePriority (ref), var15 (write), reactGlobalsModule (ref), describeError (ref)
-			if p19 ~= immediatePriority and p19 ~= userBlockingPriority and (p19 ~= normalPriority and p19 ~= lowPriority) and p19 ~= idlePriority then
-				p19 = normalPriority
+		unstable_runWithPriority = function(p11, p12)
+			-- upvalues: immediatePriority (ref), userBlockingPriority (ref), normalPriority (ref), lowPriority (ref), idlePriority (ref), var12 (write), reactGlobalsModule (ref), describeError (ref)
+			if p11 ~= immediatePriority and p11 ~= userBlockingPriority and (p11 ~= normalPriority and p11 ~= lowPriority) and p11 ~= idlePriority then
+				p11 = normalPriority
 			end
-			local var56, var57
-			var15 = p19
+			local var37, var38
+			var12 = p11
 			local _ = nil
 			local _ = nil
 			
 			if reactGlobalsModule.__YOLO__ then
-				var56 = true
-				var57 = p20()
+				var37 = true
+				var38 = p12()
 			else
-				local ok, status = xpcall(p20, describeError)
-				var56 = ok
-				var57 = status
+				local ok, status = xpcall(p12, describeError)
+				var37 = ok
+				var38 = status
 			end
-			var15 = var15
+			var12 = var12
 			
-			if not var56 then
-				error(var57)
+			if not var37 then
+				error(var38)
 			end
-			return var57
+			return var38
 		end,
-		unstable_next = function(p21)
-			-- upvalues: var15 (write), immediatePriority (ref), userBlockingPriority (ref), normalPriority (ref), reactGlobalsModule (ref), describeError (ref)
-			local var58, var59
+		unstable_next = function(p11)
+			-- upvalues: var12 (write), immediatePriority (ref), userBlockingPriority (ref), normalPriority (ref), reactGlobalsModule (ref), describeError (ref)
+			local var37, var38
 			local _ = nil
-			var15 = if var15 == immediatePriority or var15 == userBlockingPriority or var15 == normalPriority then normalPriority else var15
+			var12 = if var12 == immediatePriority or var12 == userBlockingPriority or var12 == normalPriority then normalPriority else var12
 			local _ = nil
 			local _ = nil
 			
 			if reactGlobalsModule.__YOLO__ then
-				var58 = true
-				var59 = p21()
+				var37 = true
+				var38 = p11()
 			else
-				local ok, status = xpcall(p21, describeError)
-				var58 = ok
-				var59 = status
+				local ok, status = xpcall(p11, describeError)
+				var37 = ok
+				var38 = status
 			end
-			var15 = var15
+			var12 = var12
 			
-			if not var58 then
-				error(var59)
+			if not var37 then
+				error(var38)
 			end
-			return var59
+			return var38
 		end,
-		unstable_scheduleCallback = function(p22, p23, p24)
-			-- upvalues: getCurrentTime (ref), immediatePriority (ref), userBlockingPriority (ref), idlePriority (ref), lowPriority (ref), var12 (write), enableProfiling (ref), t_1 (ref), var6 (write), t (ref), var18 (write), cancelHostTimeout (ref), requestHostTimeout (ref), var22 (write), markTaskStart (ref), var17 (write), var16 (write), requestHostCallback (ref), var19 (write)
-			local var61
-			local var60 = getCurrentTime()
+		unstable_scheduleCallback = function(p11, p12, p13)
+			-- upvalues: getCurrentTime (ref), immediatePriority (ref), userBlockingPriority (ref), idlePriority (ref), lowPriority (ref), var9 (write), enableProfiling (ref), t_1 (ref), var2 (write), t (ref), var15 (write), cancelHostTimeout (ref), requestHostTimeout (ref), var26 (write), markTaskStart (ref), var14 (write), var13 (write), requestHostCallback (ref), var16 (write)
+			local var37
+			local var38 = getCurrentTime()
 			local _ = nil
 			
-			if typeof(p24) == "table" then
-				local delay = p24.delay
-				var61 = if typeof(delay) == "number" and delay > 0 then var60 + delay else var60
+			if typeof(p13) == "table" then
+				local delay = p13.delay
+				var37 = if typeof(delay) == "number" and delay > 0 then var38 + delay else var38
 			else
-				var61 = var60
+				var37 = var38
 			end
-			local var62 = var61 + (if p22 == immediatePriority then -1 elseif p22 == userBlockingPriority then 250 elseif p22 == idlePriority then 1073741823 elseif p22 == lowPriority then 10000 else 5000)
+			local var39 = var37 + (if p11 == immediatePriority then -1 elseif p11 == userBlockingPriority then 250 elseif p11 == idlePriority then 1073741823 elseif p11 == lowPriority then 10000 else 5000)
 			local t_2 = {
 				sortIndex = -1,
-				id = var12,
-				callback = p23,
-				priorityLevel = p22,
-				startTime = var61,
-				expirationTime = var62
+				id = var9,
+				callback = p12,
+				priorityLevel = p11,
+				startTime = var37,
+				expirationTime = var39
 			}
-			var12 += 1
+			var9 += 1
 			
 			if enableProfiling then
 				t_2.isQueued = false
 			end
-			if var60 < var61 then
-				t_2.sortIndex = var61
-				local var64 = #t_1 + 1
-				t_1[var64] = t_2
-				var6(t_1, t_2, var64)
+			if var38 < var37 then
+				t_2.sortIndex = var37
+				local var40 = #t_1 + 1
+				t_1[var40] = t_2
+				var2(t_1, t_2, var40)
 				
 				if #t ~= 0 or t_2 ~= t_1[1] then
 					return t_2
 				end
-				if var18 then
+				if var15 then
 					cancelHostTimeout()
 				else
-					var18 = true
+					var15 = true
 				end
-				requestHostTimeout(var22, var61 - var60)
+				requestHostTimeout(var26, var37 - var38)
 				
 				return t_2
 			else
-				t_2.sortIndex = var62
-				local var65 = #t + 1
-				t[var65] = t_2
-				var6(t, t_2, var65)
+				t_2.sortIndex = var39
+				local var41 = #t + 1
+				t[var41] = t_2
+				var2(t, t_2, var41)
 				
 				if enableProfiling then
-					markTaskStart(t_2, var60)
+					markTaskStart(t_2, var38)
 					t_2.isQueued = true
 				end
-				if not var17 and not var16 then
-					var17 = true
-					requestHostCallback(var19)
+				if not var14 and not var13 then
+					var14 = true
+					requestHostCallback(var16)
 				end
 			end
 		end,
-		unstable_cancelCallback = function(p25)
+		unstable_cancelCallback = function(p11)
 			-- upvalues: enableProfiling (ref), getCurrentTime (ref), markTaskCanceled (ref)
-			if enableProfiling and p25.isQueued then
-				markTaskCanceled(p25, getCurrentTime())
-				p25.isQueued = false
+			if enableProfiling and p11.isQueued then
+				markTaskCanceled(p11, getCurrentTime())
+				p11.isQueued = false
 			end
-			p25.callback = nil
+			p11.callback = nil
 		end,
-		unstable_wrapCallback = function(p26)
-			-- upvalues: var15 (write), reactGlobalsModule (ref), describeError (ref)
+		unstable_wrapCallback = function(p11)
+			-- upvalues: var12 (write), reactGlobalsModule (ref), describeError (ref)
 			return function(...)
-				-- upvalues: var15 (copy), var15 (ref), reactGlobalsModule (copy), p26 (ref), describeError (copy)
-				local var66, var67
-				var15 = var15
+				-- upvalues: var12 (copy), var12 (ref), reactGlobalsModule (copy), p11 (ref), describeError (copy)
+				local var37, var38
+				var12 = var12
 				local _ = nil
 				local _ = nil
 				
 				if reactGlobalsModule.__YOLO__ then
-					var66 = true
-					var67 = p26(...)
+					var37 = true
+					var38 = p11(...)
 				else
-					local ok, status = xpcall(p26, describeError, ...)
-					var66 = ok
-					var67 = status
+					local ok, status = xpcall(p11, describeError, ...)
+					var37 = ok
+					var38 = status
 				end
-				var15 = var15
+				var12 = var12
 				
-				if not var66 then
-					error(var67)
+				if not var37 then
+					error(var38)
 				end
-				return var67
+				return var38
 			end
 		end,
 		unstable_getCurrentPriorityLevel = function()
-			-- upvalues: var15 (write)
-			return var15
+			-- upvalues: var12 (write)
+			return var12
 		end,
 		unstable_shouldYield = shouldYieldToHost,
 		unstable_requestPaint = requestPaint,
 		unstable_continueExecution = function()
-			-- upvalues: var13 (write), var17 (write), var16 (write), requestHostCallback (ref), var19 (write)
-			var13 = false
+			-- upvalues: var10 (write), var14 (write), var13 (write), requestHostCallback (ref), var16 (write)
+			var10 = false
 			
-			if not var17 and not var16 then
-				var17 = true
-				requestHostCallback(var19)
+			if not var14 and not var13 then
+				var14 = true
+				requestHostCallback(var16)
 			end
 		end,
 		unstable_pauseExecution = function()
-			-- upvalues: var13 (write)
-			var13 = true
+			-- upvalues: var10 (write)
+			var10 = true
 		end,
 		unstable_getFirstCallbackNode = function()
 			-- upvalues: t (ref)

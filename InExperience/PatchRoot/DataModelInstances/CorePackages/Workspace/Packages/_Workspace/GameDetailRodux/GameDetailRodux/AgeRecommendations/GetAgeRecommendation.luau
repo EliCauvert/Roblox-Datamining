@@ -5,7 +5,7 @@ local var1 = require(parent.UrlBuilder).UrlBuilder.new({
 	base = require(parent.Http).Url.APIS_URL
 })
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: var1 (ref), httpService (ref)
-	return p0(var1(), "POST", { postBody = httpService:JSONEncode({ universeId = p1 }) })
+	return p1(var1(), "POST", { postBody = httpService:JSONEncode({ universeId = p2 }) })
 end

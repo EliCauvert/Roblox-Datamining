@@ -15,9 +15,9 @@ infoAlertView.defaultProps = {
 	soakAreaColor3 = Color3.fromRGB(0, 0, 255)
 }
 
-function infoAlertView.render(p0)
+function infoAlertView.render(p1)
 	-- upvalues: roact (ref), alertViewBuilderModule (ref), buttonType (ref)
-	local props = p0.props
+	local props = p1.props
 	
 	return roact.createElement(alertViewBuilderModule, {
 		title = props.titleText,

@@ -1,18 +1,18 @@
-﻿return function(p0, p1)
-	local var0 = nil
-	p1 = p1 or 0.5
+﻿return function(p1, p2)
+	local var1 = nil
+	p2 = p2 or 0.5
 	
 	return function(...)
-		-- upvalues: var0 (write), p1 (ref), p0 (ref)
+		-- upvalues: var1 (write), p2 (ref), p1 (ref)
 		local list = { ... }
 		
-		if var0 then
-			task.cancel(var0)
+		if var1 then
+			task.cancel(var1)
 		end
-		var0 = task.delay(p1, function()
-			-- upvalues: p0 (copy), list (ref), var0 (copy)
-			p0(unpack(list))
-			var0 = nil
+		var1 = task.delay(p2, function()
+			-- upvalues: p1 (copy), list (ref), var1 (copy)
+			p1(unpack(list))
+			var1 = nil
 		end)
 	end
 end

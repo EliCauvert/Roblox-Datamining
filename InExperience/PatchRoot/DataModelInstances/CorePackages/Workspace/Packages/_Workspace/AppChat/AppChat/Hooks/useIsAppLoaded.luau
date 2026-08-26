@@ -4,8 +4,8 @@ local getDeepValueModule = require(appChat.Utils.getDeepValue)
 
 return function()
 	-- upvalues: useSelector (ref), getDeepValueModule (ref)
-	return useSelector(function(p0)
+	return useSelector(function(p1)
 		-- upvalues: getDeepValueModule (copy)
-		return getDeepValueModule(p0, "ChatAppReducer.AppLoaded") or false
+		return getDeepValueModule(p1, "ChatAppReducer.AppLoaded") or false
 	end)
 end

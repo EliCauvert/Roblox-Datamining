@@ -1,37 +1,37 @@
 ﻿local _nil = require(script.Parent.Parent.Parent.Parent.Shared).Symbol.named("Nil")
 local t = {}
 
-local function tryPropertyName(p0, p1)
-	return p0[p1]
+local function tryPropertyName(p1, p2)
+	return p1[p2]
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: t (ref), _nil (ref), tryPropertyName (ref)
-	local var3 = t[p2]
+	local var1 = t[p1]
 	
-	if var3 then
-		local var4 = var3[p3]
+	if var1 then
+		local var2 = var1[p2]
 		
-		if var4 == _nil then
+		if var2 == _nil then
 			return true, nil
-		elseif var4 ~= nil then
-			return true, var4
+		elseif var2 ~= nil then
+			return true, var2
 		end
 	else
-		var3 = {}
-		t[p2] = var3
+		var1 = {}
+		t[p1] = var1
 	end
-	local var5 = Instance.new(p2)
-	local ok, status = pcall(tryPropertyName, var5, p3)
-	var5:Destroy()
+	local var3 = Instance.new(p1)
+	local ok, status = pcall(tryPropertyName, var3, p2)
+	var3:Destroy()
 	
 	if ok then
 		if status == nil then
-			var3[p3] = _nil
+			var1[p2] = _nil
 			
 			return ok, status
 		end
-		var3[p3] = status
+		var1[p2] = status
 	end
 	return ok, status
 end

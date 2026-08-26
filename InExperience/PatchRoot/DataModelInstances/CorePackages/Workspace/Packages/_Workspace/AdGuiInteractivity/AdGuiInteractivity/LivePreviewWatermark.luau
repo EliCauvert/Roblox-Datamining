@@ -6,8 +6,8 @@ local fStringLivePreviewPlaceId = flagsModule.GetFStringLivePreviewPlaceId()
 local fFlagUseV2LivePreviewWatermark = flagsModule.GetFFlagUseV2LivePreviewWatermark()
 local livePreviewWatermark = roactModule.PureComponent:extend("LivePreviewWatermark")
 
-function livePreviewWatermark.init(p0)
-	p0.placeId = tostring(game.PlaceId)
+function livePreviewWatermark.init(p1)
+	p1.placeId = tostring(game.PlaceId)
 end
 
 function livePreviewWatermark.render(p1)

@@ -19,55 +19,55 @@ local fFlagDevConsoleMicroProfilerImproveWordingModule = require(script.Parent.F
 local devConsoleMicroProfilerNewLayout = game:DefineFastFlag("DevConsoleMicroProfilerNewLayout", false)
 local mainViewProfiler = roactModule.Component:extend("MainViewProfiler")
 
-function mainViewProfiler.init(p0)
+function mainViewProfiler.init(p1)
 	-- upvalues: gameSettings (ref), rbxAnalyticsService (ref), roactModule (ref)
-	function p0.onUtilTabHeightChanged(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ utilTabHeight = p1 })
+	function p0.onUtilTabHeightChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ utilTabHeight = p2 })
 	end
 	
 	function p0.changeProfilerState(p2)
-		-- upvalues: gameSettings (copy), p0 (ref), rbxAnalyticsService (copy)
+		-- upvalues: gameSettings (copy), p1 (ref), rbxAnalyticsService (copy)
 		return function()
-			-- upvalues: gameSettings (copy), p2 (ref), p0 (copy), rbxAnalyticsService (copy)
+			-- upvalues: gameSettings (copy), p2 (ref), p1 (copy), rbxAnalyticsService (copy)
 			gameSettings.OnScreenProfilerEnabled = p2
-			p0:setState({ clientProfilerEnabled = p2 })
+			p1:setState({ clientProfilerEnabled = p2 })
 			rbxAnalyticsService:ReportCounter("MicroprofilerDevConsolePressed")
 		end
 	end
 	
-	p0.microProfilerChangedConnection = gameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function()
-		-- upvalues: p0 (ref), gameSettings (copy)
-		p0:setState({
+	p1.microProfilerChangedConnection = gameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function()
+		-- upvalues: p1 (ref), gameSettings (copy)
+		p1:setState({
 			clientProfilerEnabled = gameSettings.OnScreenProfilerEnabled
 		})
 	end)
-	p0.utilRef = roactModule.createRef()
-	p0.state = { utilTabHeight = 0 }
+	p1.utilRef = roactModule.createRef()
+	p1.state = { utilTabHeight = 0 }
 end
 
-function mainViewProfiler.didMount(p3)
-	p3:setState({ utilTabHeight = p3.utilRef.current.Size.Y.Offset })
+function mainViewProfiler.didMount(p1)
+	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewProfiler.willUnmount(p4)
-	if p4.microProfilerChangedConnection then
-		p4.microProfilerChangedConnection:Disconnect()
-		p4.microProfilerChangedConnection = nil
+function mainViewProfiler.willUnmount(p1)
+	if p1.microProfilerChangedConnection then
+		p1.microProfilerChangedConnection:Disconnect()
+		p1.microProfilerChangedConnection = nil
 	end
 end
 
-function mainViewProfiler.didUpdate(p5)
-	local size = p5.utilRef.current.Size
+function mainViewProfiler.didUpdate(p1)
+	local size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p5.state.utilTabHeight then
-		p5:setState({ utilTabHeight = size.Y.Offset })
+	if size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = size.Y.Offset })
 	end
 end
 
-function mainViewProfiler.renderNewLayout(p6)
+function mainViewProfiler.renderNewLayout(p1)
 	-- upvalues: roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), microProfilerViewModule (ref)
-	local size = p6.props.size
+	local size = p1.props.size
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -82,33 +82,33 @@ function mainViewProfiler.renderNewLayout(p6)
 		UtilAndTab = roactModule.createElement(utilAndTabModule, {
 			layoutOrder = 1,
 			windowWidth = size.X.Offset,
-			formFactor = p6.props.formFactor,
-			tabList = p6.props.tabList,
-			refForParent = p6.utilRef,
-			onHeightChanged = p6.onUtilTabHeightChanged
+			formFactor = p1.props.formFactor,
+			tabList = p1.props.tabList,
+			refForParent = p1.utilRef,
+			onHeightChanged = p1.onUtilTabHeightChanged
 		}),
 		MicroProfilerView = roactModule.createElement(microProfilerViewModule, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 1, -p6.state.utilTabHeight)
+			Size = UDim2.new(1, 0, 1, -p1.state.utilTabHeight)
 		})
 	})
 end
 
-function mainViewProfiler.render(p7)
+function mainViewProfiler.render(p1)
 	-- upvalues: devConsoleMicroProfilerNewLayout (ref), buttonWidth (ref), roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), fFlagDevConsoleMicroProfilerImproveWordingModule (ref), mainWindowHeader (ref), buttonTextSize (ref), unselectedGray_1 (ref), unselectedGray (ref), selectedBlue (ref), serverProfilerInterfaceModule (ref)
 	if devConsoleMicroProfilerNewLayout then
-		return p7:renderNewLayout()
+		return p1:renderNewLayout()
 	end
-	local size = p7.props.size
-	local formFactor = p7.props.formFactor
-	local tabList = p7.props.tabList
-	local utilTabHeight = p7.state.utilTabHeight
-	local _ = p7.state.frameRate
-	local _ = p7.state.timeFrame
-	local _ = p7.state.waitingForData
-	local clientProfilerEnabled = p7.state.clientProfilerEnabled
-	local _ = p7.state.outputPath
+	local size = p1.props.size
+	local formFactor = p1.props.formFactor
+	local tabList = p1.props.tabList
+	local utilTabHeight = p1.state.utilTabHeight
+	local _ = p1.state.frameRate
+	local _ = p1.state.timeFrame
+	local _ = p1.state.waitingForData
+	local clientProfilerEnabled = p1.state.clientProfilerEnabled
+	local _ = p1.state.outputPath
 	local _ = UDim2.new(0.8, -buttonWidth, 0, 30)
 	local _ = UDim2.new(0.6, buttonWidth, 0, 0)
 	
@@ -127,8 +127,8 @@ function mainViewProfiler.render(p7)
 			windowWidth = size.X.Offset,
 			formFactor = formFactor,
 			tabList = tabList,
-			refForParent = p7.utilRef,
-			onHeightChanged = p7.onUtilTabHeightChanged
+			refForParent = p1.utilRef,
+			onHeightChanged = p1.onUtilTabHeightChanged
 		}),
 		MainFrame = roactModule.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,
@@ -175,7 +175,7 @@ function mainViewProfiler.render(p7)
 						TextXAlignment = Enum.TextXAlignment.Center,
 						TextYAlignment = Enum.TextYAlignment.Center,
 						BackgroundColor3 = if clientProfilerEnabled then unselectedGray else selectedBlue,
-						[roactModule.Event.Activated] = p7.changeProfilerState(false)
+						[roactModule.Event.Activated] = p1.changeProfilerState(false)
 					}),
 					ClientButton = roactModule.createElement("TextButton", {
 						Size = UDim2.new(0.5, 0, 1, 0),
@@ -187,7 +187,7 @@ function mainViewProfiler.render(p7)
 						TextXAlignment = Enum.TextXAlignment.Center,
 						TextYAlignment = Enum.TextYAlignment.Center,
 						BackgroundColor3 = if clientProfilerEnabled then selectedBlue else unselectedGray,
-						[roactModule.Event.Activated] = p7.changeProfilerState(true)
+						[roactModule.Event.Activated] = p1.changeProfilerState(true)
 					})
 				})
 			}),

@@ -1,8 +1,8 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3)
+﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3, p4)
 	return {
-		conversationId = p0,
-		messages = p1,
-		shouldMarkConversationUnread = p2,
-		exclusiveStartMessageId = p3
+		conversationId = p1,
+		messages = p2,
+		shouldMarkConversationUnread = p3,
+		exclusiveStartMessageId = p4
 	}
 end)

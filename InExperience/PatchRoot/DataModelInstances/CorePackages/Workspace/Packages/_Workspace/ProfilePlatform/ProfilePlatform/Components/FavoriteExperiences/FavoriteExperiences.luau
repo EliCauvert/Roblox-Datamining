@@ -34,60 +34,60 @@ local fFlagProfilePlatformFavoritesEnableGameDetailAnalytics = sharedFlagsModule
 local fFlagProfilePlatformEnableImpressions = require(parent.SharedFlags).FFlagProfilePlatformEnableImpressions
 local fFlagProfilePlatformImproveGameDetailsAnalytics = require(parent.SharedFlags).FFlagProfilePlatformImproveGameDetailsAnalytics
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var20 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local t = {}
 
-local function getSquareExperienceTileHeight(p0)
-	return p0 + 42
+local function getSquareExperienceTileHeight(p1)
+	return p1 + 42
 end
 
 local function useFavoriteExperiences(_)
 	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), t (ref), reactModule (ref), cryoModule (ref), networkingGamesModule (ref), useSelector (ref), getDeepValue (ref)
-	local var24 = useDispatch()
+	local var2 = useDispatch()
 	local experiences = useProfileJsonComponentModule(enumsModule.Components.FavoriteExperiences).experiences or t
-	local var26 = reactModule.useMemo(function()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), experiences (ref)
 		return cryoModule.List.map(experiences, function(p1, _)
 			return tostring(p1.universeId)
 		end)
 	end, { experiences })
 	reactModule.useEffect(function()
-		-- upvalues: var26 (ref), cryoModule (copy), var24 (ref), networkingGamesModule (copy)
-		if var26 ~= nil and not cryoModule.isEmpty(var26) then
-			var24(networkingGamesModule.GetExperiencesDetails.API(var26)):catch(function(_) end)
+		-- upvalues: var3 (ref), cryoModule (copy), var2 (ref), networkingGamesModule (copy)
+		if var3 ~= nil and not cryoModule.isEmpty(var3) then
+			var2(networkingGamesModule.GetExperiencesDetails.API(var3)):catch(function(_) end)
 		end
-	end, { var26 })
-	local var27 = useSelector(function(p2)
+	end, { var3 })
+	local var4 = useSelector(function(p1)
 		-- upvalues: getDeepValue (copy), t (copy)
-		return getDeepValue(p2, "ProfilePlatform.Games.byGameId") or t
+		return getDeepValue(p1, "ProfilePlatform.Games.byGameId") or t
 	end)
-	local var28 = reactModule.useMemo(function()
-		-- upvalues: var26 (ref), var27 (ref)
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), var4 (ref)
 		local t = {}
 		
-		for i, v in var26 do
-			if var27[v] then
-				table.insert(t, var27[v])
+		for i, v in var3 do
+			if var4[v] then
+				table.insert(t, var4[v])
 			end
 		end
 		return t
-	end, { var26, var27 })
+	end, { var3, var4 })
 	
-	return if experiences and #var28 == #var26 then var28 else t
+	return if experiences and #var5 == #var3 then var5 else t
 end
 
-return function(p3)
-	-- upvalues: useDispatch (ref), useProfileWrapperContextModule (ref), profilePlatformFavoritesEnableProfilePlatformClickAnalytics (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformEnableImpressions (ref), useGenerateImpressionsTagModule (ref), enumsModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), profilePlatformFavoritesNavigateToWebV2 (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var20 (ref), navigateDown (ref), getSquareExperienceTileHeight (ref), useFavoriteExperiences (ref), fFlagProfilePlatformFavoritesEnableGameDetailAnalytics (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), useRenderExperienceTileModule (ref), useRenderExperienceTileDEPRECATEDModule (ref), formatExperienceDetailsForImpressionsModule (ref), useSendItemImpressionsModule (ref), contentType (ref), cryoModule (ref), squareCollectionGridViewModule (ref)
-	local var30 = useDispatch()
-	local var31 = useProfileWrapperContextModule()
-	local var32 = if profilePlatformFavoritesEnableProfilePlatformClickAnalytics then useProfileAnalyticsContextModule() else nil
-	local var33 = if fFlagProfilePlatformEnableImpressions then useGenerateImpressionsTagModule(enumsModule.Components.FavoriteExperiences) else nil
-	local profileId = var31.profileId
-	local var34 = useLocalization({ title = textKeysModule.Favorites })
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: profilePlatformFavoritesEnableProfilePlatformClickAnalytics (copy), var32 (ref), eventNamesModule (copy), profilePlatformFavoritesNavigateToWebV2 (copy), appPage (copy), url (copy), profileId (ref), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var20 (copy), var30 (ref), navigateDown (copy)
-		if profilePlatformFavoritesEnableProfilePlatformClickAnalytics and var32 then
-			var32.fireAnalyticsEvent(eventNamesModule.FavoriteExperienceSeeAll)
+return function(p1)
+	-- upvalues: useDispatch (ref), useProfileWrapperContextModule (ref), profilePlatformFavoritesEnableProfilePlatformClickAnalytics (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformEnableImpressions (ref), useGenerateImpressionsTagModule (ref), enumsModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), profilePlatformFavoritesNavigateToWebV2 (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), getSquareExperienceTileHeight (ref), useFavoriteExperiences (ref), fFlagProfilePlatformFavoritesEnableGameDetailAnalytics (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), useRenderExperienceTileModule (ref), useRenderExperienceTileDEPRECATEDModule (ref), formatExperienceDetailsForImpressionsModule (ref), useSendItemImpressionsModule (ref), contentType (ref), cryoModule (ref), squareCollectionGridViewModule (ref)
+	local var6 = useDispatch()
+	local var7 = useProfileWrapperContextModule()
+	local var8 = if profilePlatformFavoritesEnableProfilePlatformClickAnalytics then useProfileAnalyticsContextModule() else nil
+	local var9 = if fFlagProfilePlatformEnableImpressions then useGenerateImpressionsTagModule(enumsModule.Components.FavoriteExperiences) else nil
+	local profileId = var7.profileId
+	local var10 = useLocalization({ title = textKeysModule.Favorites })
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: profilePlatformFavoritesEnableProfilePlatformClickAnalytics (copy), var8 (ref), eventNamesModule (copy), profilePlatformFavoritesNavigateToWebV2 (copy), appPage (copy), url (copy), profileId (ref), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var6 (ref), navigateDown (copy)
+		if profilePlatformFavoritesEnableProfilePlatformClickAnalytics and var8 then
+			var8.fireAnalyticsEvent(eventNamesModule.FavoriteExperienceSeeAll)
 		end
 		if profilePlatformFavoritesNavigateToWebV2 then
 			local t = {
@@ -97,39 +97,39 @@ return function(p3)
 			}
 			
 			if fFlagSignalsNavP3Dispatch then
-				var20.down(var20.fromLegacyPage(t))
+				var1.down(var1.fromLegacyPage(t))
 				
 				return
 			end
-			var30(navigateDown(t, nil))
+			var6(navigateDown(t, nil))
 		end
-	end, if profilePlatformFavoritesEnableProfilePlatformClickAnalytics then { profileId, var32 } else nil)
-	local var36 = not profilePlatformFavoritesNavigateToWebV2
-	local var37 = useFavoriteExperiences(profileId)
-	local var38 = if fFlagProfilePlatformFavoritesEnableGameDetailAnalytics then useRoactService(roactAnalyticsCommonGameEvents) else nil
-	local var39 = reactModule.useCallback(function(p4, p5, p6)
-		-- upvalues: profilePlatformFavoritesEnableProfilePlatformClickAnalytics (copy), var32 (ref), eventNamesModule (copy), fFlagProfilePlatformFavoritesEnableGameDetailAnalytics (copy), var37 (ref), var38 (ref), appPage (copy), p3 (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), profileId (ref)
+	end, if profilePlatformFavoritesEnableProfilePlatformClickAnalytics then { profileId, var8 } else nil)
+	local var12 = not profilePlatformFavoritesNavigateToWebV2
+	local var13 = useFavoriteExperiences(profileId)
+	local var14 = if fFlagProfilePlatformFavoritesEnableGameDetailAnalytics then useRoactService(roactAnalyticsCommonGameEvents) else nil
+	local var15 = reactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: profilePlatformFavoritesEnableProfilePlatformClickAnalytics (copy), var8 (ref), eventNamesModule (copy), fFlagProfilePlatformFavoritesEnableGameDetailAnalytics (copy), var13 (ref), var14 (ref), appPage (copy), p1 (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), profileId (ref)
 		if profilePlatformFavoritesEnableProfilePlatformClickAnalytics then
-			var32.fireAnalyticsEvent(eventNamesModule.FavoriteExperienceOpened, { experienceId = p4.experienceId, positionInComponent = p5 })
+			var8.fireAnalyticsEvent(eventNamesModule.FavoriteExperienceOpened, { experienceId = p2.experienceId, positionInComponent = p3 })
 		end
 		if fFlagProfilePlatformFavoritesEnableGameDetailAnalytics then
-			var38.reportOpenGameDetailFromProfile(p4.rootPlaceId, p5, if var37 then #var37 else 0, p4.experienceId, appPage.ProfilePlatform, p3.layoutOrder, p6 or 1, if fFlagProfilePlatformImproveGameDetailsAnalytics then profileId else nil)
+			var14.reportOpenGameDetailFromProfile(p2.rootPlaceId, p3, if var13 then #var13 else 0, p2.experienceId, appPage.ProfilePlatform, p1.layoutOrder, p4 or 1, if fFlagProfilePlatformImproveGameDetailsAnalytics then profileId else nil)
 		end
-	end, if fFlagProfilePlatformFavoritesEnableGameDetailAnalytics then { var32, var37, var38, p3.layoutOrder } else { var32 })
+	end, if fFlagProfilePlatformFavoritesEnableGameDetailAnalytics then { var8, var13, var14, p1.layoutOrder } else { var8 })
 	
-	return if cryoModule.isEmpty(var37) then nil else reactModule.createElement(squareCollectionGridViewModule, {
+	return if cryoModule.isEmpty(var13) then nil else reactModule.createElement(squareCollectionGridViewModule, {
 		getItemHeight = getSquareExperienceTileHeight,
-		hideHeaderButton = var36,
-		items = var37,
-		layoutOrder = p3.layoutOrder,
-		onActivateHeader = var35,
-		renderItem = if fFlagProfilePlatformEnableImpressions then useRenderExperienceTileModule(var33, "ProfileFavoriteExperienceTile", var39) else useRenderExperienceTileDEPRECATEDModule("ProfileFavoriteExperienceTile", var39),
-		title = var34.title,
-		impressionsTag = if fFlagProfilePlatformEnableImpressions then var33 else nil,
+		hideHeaderButton = var12,
+		items = var13,
+		layoutOrder = p1.layoutOrder,
+		onActivateHeader = var11,
+		renderItem = if fFlagProfilePlatformEnableImpressions then useRenderExperienceTileModule(var9, "ProfileFavoriteExperienceTile", var15) else useRenderExperienceTileDEPRECATEDModule("ProfileFavoriteExperienceTile", var15),
+		title = var10.title,
+		impressionsTag = if fFlagProfilePlatformEnableImpressions then var9 else nil,
 		sendImpressions = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then useSendItemImpressionsModule(if fFlagProfilePlatformEnableImpressions then reactModule.useMemo(function()
-			-- upvalues: formatExperienceDetailsForImpressionsModule (copy), var37 (ref)
-			return formatExperienceDetailsForImpressionsModule(var37)
-		end, { var37 }) else nil, 3, contentType.Game, p3.layoutOrder, enumsModule.Components.FavoriteExperiences) else nil else nil,
+			-- upvalues: formatExperienceDetailsForImpressionsModule (copy), var13 (ref)
+			return formatExperienceDetailsForImpressionsModule(var13)
+		end, { var13 }) else nil, 3, contentType.Game, p1.layoutOrder, enumsModule.Components.FavoriteExperiences) else nil else nil,
 		overrides = { numColumns = 3 }
 	})
 end

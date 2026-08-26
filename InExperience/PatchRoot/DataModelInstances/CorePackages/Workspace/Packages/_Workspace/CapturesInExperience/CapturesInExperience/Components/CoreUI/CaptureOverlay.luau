@@ -17,34 +17,34 @@ local spring = reactOtterModule.spring
 return function(_)
 	-- upvalues: useBindCaptureShortcutModule (ref), useTopbarInsetHeightModule (ref), useSelector (ref), constantsModule (ref), useShowFlashOverlayModule (ref), useAnimatedBinding (ref), useEffect (ref), instant (ref), runService (ref), spring (ref), reactModule (ref)
 	useBindCaptureShortcutModule()
-	local var8 = useTopbarInsetHeightModule()
-	local var9 = useSelector(function(p0)
+	local var1 = useTopbarInsetHeightModule()
+	local var2 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
-		return p0[constantsModule.RoduxKey].IsOverlayActive
+		return p1[constantsModule.RoduxKey].IsOverlayActive
 	end)
-	local var10, var11 = useShowFlashOverlayModule()
-	local var12, var13 = useAnimatedBinding(1)
+	local var3, var4 = useShowFlashOverlayModule()
+	local var5, var6 = useAnimatedBinding(1)
 	useEffect(function()
-		-- upvalues: var10 (ref), var11 (ref), var13 (ref), instant (copy), runService (copy), spring (copy)
-		if var10 then
-			var11()
-			var13(instant(0))
+		-- upvalues: var3 (ref), var4 (ref), var6 (ref), instant (copy), runService (copy), spring (copy)
+		if var3 then
+			var4()
+			var6(instant(0))
 			task.defer(function()
-				-- upvalues: runService (copy), var13 (copy), spring (copy)
+				-- upvalues: runService (copy), var6 (copy), spring (copy)
 				runService.RenderStepped:Wait()
 				runService.RenderStepped:Wait()
-				var13(spring(1))
+				var6(spring(1))
 			end)
 		end
-	end, { var10 })
+	end, { var3 })
 	
 	return reactModule.createElement("Frame", {
 		Active = false,
 		BackgroundColor3 = Color3.new(0, 0, 0),
-		BackgroundTransparency = if var10 then var12 else 1,
-		Position = UDim2.fromOffset(0, -var8),
-		Size = UDim2.new(1, 0, 1, var8),
-		Visible = var9,
+		BackgroundTransparency = if var3 then var5 else 1,
+		Position = UDim2.fromOffset(0, -var1),
+		Size = UDim2.new(1, 0, 1, var1),
+		Visible = var2,
 		ZIndex = constantsModule.ZIndex.Entrypoint
 	}, {})
 end

@@ -10,11 +10,11 @@ return {
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: UGCValidationService (ref), getFIntUGCValidationVertexDensityThresholdModule (ref), errorSourceStringsModule (ref)
-		for i, v in p1.renderMeshesData do
+		for i, v in p2.renderMeshesData do
 			if getFIntUGCValidationVertexDensityThresholdModule() < UGCValidationService:GetEditableMeshMaxNearbyVerticesCollisions(v.editable, v.scale) then
-				p0:fail(errorSourceStringsModule.Keys.MeshGeometry_VertexDensityExceeded, {})
+				p1:fail(errorSourceStringsModule.Keys.MeshGeometry_VertexDensityExceeded, {})
 			end
 		end
 	end

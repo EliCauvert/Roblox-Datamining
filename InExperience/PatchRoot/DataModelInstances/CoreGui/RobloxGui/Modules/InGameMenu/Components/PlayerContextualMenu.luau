@@ -20,10 +20,10 @@ playerContextualMenu.validateProps = t.strictInterface({
 	canCaptureFocus = t.boolean
 })
 
-function playerContextualMenu.init(p0)
+function playerContextualMenu.init(p1)
 	-- upvalues: roact (ref)
-	p0.firstOptionRef = roact.createRef()
-	p0.containerRef = roact.createRef()
+	p1.firstOptionRef = roact.createRef()
+	p1.containerRef = roact.createRef()
 end
 
 function playerContextualMenu.renderContextualMenuFocusHandler(p1, p2, p3)
@@ -58,7 +58,7 @@ function playerContextualMenu.renderContextualMenuFocusHandler(p1, p2, p3)
 	}, p3)
 end
 
-function playerContextualMenu.render(p6)
+function playerContextualMenu.render(p1)
 	-- upvalues: roact (ref), coreGuiService (ref), rootedConnectionModule (ref), baseMenu (ref)
 	return roact.createElement(roact.Portal, { target = coreGuiService }, {
 		InGameMenuContextGui = roact.createElement("ScreenGui", {
@@ -66,19 +66,19 @@ function playerContextualMenu.render(p6)
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
 			RootedConnection = roact.createElement(rootedConnectionModule, {
-				render = function(p7)
-					-- upvalues: p6 (ref), roact (copy), baseMenu (copy)
-					return p6:renderContextualMenuFocusHandler(p7, {
+				render = function(p2)
+					-- upvalues: p1 (ref), roact (copy), baseMenu (copy)
+					return p1:renderContextualMenuFocusHandler(p2, {
 						MoreActionsMenu = roact.createElement("Frame", {
 							Size = UDim2.fromScale(1, 1),
 							BackgroundTransparency = 1,
-							[roact.Ref] = p6.containerRef
+							[roact.Ref] = p1.containerRef
 						}, {
 							BaseMenu = roact.createElement(baseMenu, {
-								buttonProps = p6.props.moreActions,
-								setFirstItemRef = p6.firstOptionRef,
-								width = UDim.new(0, p6.props.actionWidth),
-								position = UDim2.fromOffset(p6.props.xOffset, p6.props.yOffset)
+								buttonProps = p1.props.moreActions,
+								setFirstItemRef = p1.firstOptionRef,
+								width = UDim.new(0, p1.props.actionWidth),
+								position = UDim2.fromOffset(p1.props.xOffset, p1.props.yOffset)
 							})
 						})
 					})

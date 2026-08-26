@@ -8,13 +8,13 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local testId = p0.testId or "PlusSubscribeBanner"
+	local testId = p1.testId or "PlusSubscribeBanner"
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y padding-medium stroke-standard stroke-default radius-medium",
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		testId = testId
 	}, {
 		Content = reactModule.createElement(view, {
@@ -24,7 +24,7 @@ return reactModule.memo(function(p0)
 				tag = "row align-y-center fill gap-small auto-xy",
 				LayoutOrder = 1
 			}, {
-				PlusIcon = if p0.showPlusIcon then reactModule.createElement(icon, {
+				PlusIcon = if p1.showPlusIcon then reactModule.createElement(icon, {
 					LayoutOrder = 1,
 					name = iconName.RobloxPlus,
 					size = iconSize.Medium,
@@ -34,19 +34,19 @@ return reactModule.memo(function(p0)
 				Message = reactModule.createElement(text, {
 					tag = "fill text-body-small text-align-x-left content-emphasis",
 					LayoutOrder = 2,
-					Text = p0.message
+					Text = p1.message
 				})
 			}),
 			Subscribe = reactModule.createElement(view, {
 				tag = "auto-xy",
 				LayoutOrder = 2,
-				onActivated = p0.onActivated,
+				onActivated = p1.onActivated,
 				testId = `{testId}Action`
 			}, {
 				Label = reactModule.createElement(text, {
 					tag = "auto-xy text-body-small content-default",
 					RichText = true,
-					Text = `<u>{p0.actionText}</u>`
+					Text = `<u>{p1.actionText}</u>`
 				})
 			})
 		})

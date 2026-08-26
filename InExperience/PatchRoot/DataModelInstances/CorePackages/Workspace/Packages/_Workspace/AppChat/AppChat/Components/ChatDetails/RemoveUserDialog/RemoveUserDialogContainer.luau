@@ -25,60 +25,60 @@ local t = {
 	failureBodyKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Message.FailedToRemoveUser.V2" else "Feature.Chat.Message.FailedToRemoveUser"
 }
 
-function RemoveUserDialogContainer(p0)
+function RemoveUserDialogContainer(p1)
 	-- upvalues: cryoModule (ref), t (ref), useState (ref), useDispatch (ref), useCallback (ref), appChatNetworkingModule (ref), useSelector (ref), populateUserWithStateModule (ref), useLocalization (ref), reactModule (ref), removeUserDialogLayoutModule (ref)
-	local var7 = cryoModule.Dictionary.join(t, p0)
-	local var8, var9 = useState(true)
-	local var10, var11 = useState(false)
-	local var12, var13 = useState(false)
-	local var14 = useDispatch()
-	local var15 = useCallback(function(p1, p2)
-		-- upvalues: var14 (ref), appChatNetworkingModule (copy)
-		return var14(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p2, p1))
-	end, { var14 })
-	local var16 = useSelector(function(p3)
-		-- upvalues: var7 (ref), populateUserWithStateModule (copy)
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2, var3 = useState(true)
+	local var4, var5 = useState(false)
+	local var6, var7 = useState(false)
+	local var8 = useDispatch()
+	local var9 = useCallback(function(p2, p3)
+		-- upvalues: var8 (ref), appChatNetworkingModule (copy)
+		return var8(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p3, p2))
+	end, { var8 })
+	local var10 = useSelector(function(p2)
+		-- upvalues: var1 (ref), populateUserWithStateModule (copy)
 		return {
-			conversationTitle = (p3.ChatAppReducer.Conversations[var7.conversationId] or { title = nil }).title,
-			targetUser = populateUserWithStateModule(p3, p3.Users[var7.participantId])
+			conversationTitle = (p2.ChatAppReducer.Conversations[var1.conversationId] or { title = nil }).title,
+			targetUser = populateUserWithStateModule(p2, p2.Users[var1.participantId])
 		}
 	end)
 	
-	return reactModule.createElement(removeUserDialogLayoutModule, cryoModule.Dictionary.join(var7, useLocalization({
+	return reactModule.createElement(removeUserDialogLayoutModule, cryoModule.Dictionary.join(var1, useLocalization({
 		failureTitleText = "Feature.Chat.Heading.FailedToRemoveUser",
 		failureButtonText = "Feature.Chat.Action.Confirm",
-		titleText = var7.titleKey,
-		bodyText = { var7.messageKey, USERNAME = var16.targetUser.displayName },
-		cancelText = var7.cancelTitleKey,
-		confirmText = var7.confirmationTitleKey,
+		titleText = var1.titleKey,
+		bodyText = { var1.messageKey, USERNAME = var10.targetUser.displayName },
+		cancelText = var1.cancelTitleKey,
+		confirmText = var1.confirmationTitleKey,
 		failureBodyText = {
-			var7.failureBodyKey,
-			USERNAME = var16.targetUser.displayName,
-			CONVERSATION_TITLE = var16.conversationTitle
+			var1.failureBodyKey,
+			USERNAME = var10.targetUser.displayName,
+			CONVERSATION_TITLE = var10.conversationTitle
 		}
-	}), var16, {
+	}), var10, {
 		onActivated = useCallback(function()
-			-- upvalues: var11 (ref), var9 (ref), var7 (ref), var15 (ref), var13 (ref)
-			var11(true)
-			var9(false)
-			local conversationId = var7.conversationId
+			-- upvalues: var5 (ref), var3 (ref), var1 (ref), var9 (ref), var7 (ref)
+			var5(true)
+			var3(false)
+			local conversationId = var1.conversationId
 			
 			if conversationId then
-				var15(var7.participantId, conversationId):andThen(function()
-					-- upvalues: var7 (copy)
-					var7.onModalClose()
+				var9(var1.participantId, conversationId):andThen(function()
+					-- upvalues: var1 (copy)
+					var1.onModalClose()
 				end):catch(function()
-					-- upvalues: var11 (copy), var9 (copy), var13 (copy)
-					var11(false)
-					var9(true)
-					var13(true)
+					-- upvalues: var5 (copy), var3 (copy), var7 (copy)
+					var5(false)
+					var3(true)
+					var7(true)
 				end)
 			end
 			return true
-		end, { var7.participantId, var7.conversationId }),
-		displayFailed = var12,
-		isModalVisible = var8,
-		isLoading = var10
+		end, { var1.participantId, var1.conversationId }),
+		displayFailed = var6,
+		isModalVisible = var2,
+		isLoading = var4
 	}))
 end
 

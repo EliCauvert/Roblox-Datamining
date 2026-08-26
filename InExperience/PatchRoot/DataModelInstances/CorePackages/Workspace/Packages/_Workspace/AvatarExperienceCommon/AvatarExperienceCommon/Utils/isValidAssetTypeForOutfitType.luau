@@ -4,7 +4,7 @@ local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAss
 local _ = require(avatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 local outfitTypesModule = require(avatarExperienceCommon.Enums.OutfitTypes)
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: outfitTypesModule (ref), isMakeupAssetTypeModule (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref)
-	return if p0 then if p0 == outfitTypesModule.Makeup then isMakeupAssetTypeModule(value) or (if value ~= ASSET_TYPE_NAME_TO_ID_STRING.EyebrowAccessory then value == ASSET_TYPE_NAME_TO_ID_STRING.EyelashAccessory else true) else true else true
+	return if p1 then if p1 == outfitTypesModule.Makeup then isMakeupAssetTypeModule(value) or (if value ~= ASSET_TYPE_NAME_TO_ID_STRING.EyebrowAccessory then value == ASSET_TYPE_NAME_TO_ID_STRING.EyelashAccessory else true) else true else true
 end

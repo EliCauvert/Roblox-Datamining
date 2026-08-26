@@ -2,9 +2,9 @@
 local componentModule = require(script.Parent.component)
 
 return {
-	init = function(p0)
+	init = function(p1)
 		-- upvalues: pageLoggerModule (ref)
-		pageLoggerModule:setParent(p0)
+		pageLoggerModule:setParent(p1)
 	end,
 	doSomething = function()
 		-- upvalues: pageLoggerModule (ref), componentModule (ref)

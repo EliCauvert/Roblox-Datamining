@@ -9,30 +9,30 @@ local _ = require(profilePlatform.Components.CTARow.Types)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 local fFlagMigrateFriendshipStatusesRemainingActions = require(parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
-local var5 = require(parent.DataHydration).Friends.FriendsStore.get()
+local var1 = require(parent.DataHydration).Friends.FriendsStore.get()
 
 return {
-	[enumsModule.ProfileActions.IgnoreFriendRequest] = function(p0)
-		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var5 (ref), networkingFriendsModule (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
+	[enumsModule.ProfileActions.IgnoreFriendRequest] = function(p1)
+		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), networkingFriendsModule (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
 		return {
-			text = p0.localized[enumsModule.ProfileActions.IgnoreFriendRequest],
+			text = p1.localized[enumsModule.ProfileActions.IgnoreFriendRequest],
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p0 (ref), eventNamesModule (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var5 (copy), networkingFriendsModule (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
-					p0.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonIgnoreFriendRequest, { buttonSurface = p0.buttonSurface })
+					-- upvalues: p1 (ref), eventNamesModule (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var1 (copy), networkingFriendsModule (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonIgnoreFriendRequest, { buttonSurface = p1.buttonSurface })
 					
-					return (if fFlagMigrateFriendshipStatusesRemainingActions then var5.DeclineFriendRequest(p0.profileId) else p0.dispatch(networkingFriendsModule.DeclineFriendRequestFromUserId.API({
-						targetUserId = p0.profileId,
-						currentUserId = p0.localUserId
+					return (if fFlagMigrateFriendshipStatusesRemainingActions then var1.DeclineFriendRequest(p1.profileId) else p1.dispatch(networkingFriendsModule.DeclineFriendRequestFromUserId.API({
+						targetUserId = p1.profileId,
+						currentUserId = p1.localUserId
 					}))):andThen(function()
-						-- upvalues: p0 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
-						p0.dispatch(setCurrentToastMessage({
+						-- upvalues: p1 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
+						p1.dispatch(setCurrentToastMessage({
 							isLocalized = true,
-							toastMessage = p0.localized.friendRequestIgnoredToast,
+							toastMessage = p1.localized.friendRequestIgnoredToast,
 							toastIcon = images["icons/actions/reject"]
 						}))
 						
-						return p0.dispatch(refreshProfilePlatformActionInfoModule(p0.profileId, p0.actionsComponentRequest))
+						return p1.dispatch(refreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
 					end)
 				end
 			}

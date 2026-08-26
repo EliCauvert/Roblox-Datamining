@@ -14,10 +14,10 @@ return {
 	end,
 	Refresh = function(_)
 		-- upvalues: httpService (ref), var2 (ref)
-		local var4 = httpService:GenerateGUID(false)
-		var2(var4)
+		local var3 = httpService:GenerateGUID(false)
+		var2(var3)
 		
-		return var4
+		return var3
 	end,
 	GetSignal = function(_)
 		-- upvalues: var1 (ref)

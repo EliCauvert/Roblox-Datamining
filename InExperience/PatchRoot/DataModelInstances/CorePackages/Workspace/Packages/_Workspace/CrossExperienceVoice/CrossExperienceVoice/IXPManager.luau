@@ -22,11 +22,11 @@ end
 
 function t:initialize()
 	-- upvalues: experimentCacheManager (ref), crossExpVoiceIXPLayer (ref), debugCrossExpVoiceIXPLayer (ref), t_1 (ref), partyVoiceDisallowIXPLayerExposureOnInit (ref)
-	local var8 = experimentCacheManager.default:getLayerVariables(crossExpVoiceIXPLayer)
+	local var1 = experimentCacheManager.default:getLayerVariables(crossExpVoiceIXPLayer)
 	
-	if var8 ~= nil then
+	if var1 ~= nil then
 		self.initialized = true
-		self.variant = table.clone(var8)
+		self.variant = table.clone(var1)
 	end
 	if debugCrossExpVoiceIXPLayer ~= "None" then
 		self.initialized = true

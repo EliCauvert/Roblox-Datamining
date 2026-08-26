@@ -60,184 +60,184 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-function wrapWithFocusRoot(p0, p1, p2)
+function wrapWithFocusRoot(p1, p2, p3)
 	-- upvalues: reactModule (ref), focusRoot (ref), t (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	return reactModule.createElement(focusRoot, {
 		isIsolated = true,
-		eventHandlers = p1,
+		eventHandlers = p2,
 		eventMap = t,
-		isAutoFocusRoot = if fFlagEnableAppChatSnoozeMenuFocus then p2 else true,
+		isAutoFocusRoot = if fFlagEnableAppChatSnoozeMenuFocus then p3 else true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
-	}, p0)
+	}, p1)
 end
 
 function InExperienceAppChat()
 	-- upvalues: reactModule (ref), useDispatch (ref), useIsAppChatVisibleModule (ref), debugAppChatDisplayOnJoin (ref), parentContainerContextModule (ref), getFFlagAppChatRequestedRouteModule (ref), fFlagEnableSideSheet (ref), fFlagSideSheetFocusNav (ref), fFlagEnableDrawerAnimatingHook (ref), useDrawerVisible (ref), useDrawerAnimating (ref), useParentContainerVisibilitySignalModule (ref), useAppChatUpdateSessionModule (ref), usePreventExperienceControlsModule (ref), setAppLoadedModule (ref), getAllFriendsAsyncModule (ref), partyPageCarouselExperimentation (ref), getLocalUserFriendsCountModule (ref), getLocalUser (ref), getFFlagIsSquadEnabled (ref), useSelector (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppPolicy (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), notificationSnoozeMenuVisibleSignal (ref), enteredChatFromEntryPointModule (ref), socialCommonModule (ref), fFlagExpChatEnableFriendsTab (ref), squadEventReceiverModule (ref), appChatPersistentEventReceiversModule (ref), appChatToastManagerInExpModule (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), designTokenProvider (ref), appChatInExperienceDisplayOrder (ref), squadOverlayModule (ref), layerCollectorProvider (ref), responsiveModule (ref), roactServices (ref), appSessionService (ref), sessionService (ref), inExperienceAppChatContainerModule (ref), overlayHostModule (ref), foundationModule (ref)
-	local var31 = reactModule.useRef(nil)
-	local var32 = useDispatch()
-	local var33, var34 = useIsAppChatVisibleModule(debugAppChatDisplayOnJoin)
-	local var35 = reactModule.useContext(parentContainerContextModule)
-	local showParentContainer = var35.showParentContainer
-	local hideParentContainer = var35.hideParentContainer
-	local updateCurrentSquadId = var35.updateCurrentSquadId
-	local visibilitySignal = var35.visibilitySignal
-	local requestedRouteSignal = var35.requestedRouteSignal
-	local getRequestedRoute = var35.getRequestedRoute
-	local clearRequestedRoute = var35.clearRequestedRoute
-	local var36, var37 = reactModule.useState("")
-	local var38 = getFFlagAppChatRequestedRouteModule()
-	local var39 = nil
-	local var40 = nil
+	local var1 = reactModule.useRef(nil)
+	local var2 = useDispatch()
+	local var3, var4 = useIsAppChatVisibleModule(debugAppChatDisplayOnJoin)
+	local var5 = reactModule.useContext(parentContainerContextModule)
+	local showParentContainer = var5.showParentContainer
+	local hideParentContainer = var5.hideParentContainer
+	local updateCurrentSquadId = var5.updateCurrentSquadId
+	local visibilitySignal = var5.visibilitySignal
+	local requestedRouteSignal = var5.requestedRouteSignal
+	local getRequestedRoute = var5.getRequestedRoute
+	local clearRequestedRoute = var5.clearRequestedRoute
+	local var6, var7 = reactModule.useState("")
+	local var8 = getFFlagAppChatRequestedRouteModule()
+	local var9 = nil
+	local var10 = nil
 	
-	if var38 then
-		local var41, var42 = reactModule.useState(getRequestedRoute())
-		var39 = var41
-		var40 = var42
+	if var8 then
+		local var11, var12 = reactModule.useState(getRequestedRoute())
+		var9 = var11
+		var10 = var12
 	end
-	local var43, var44 = reactModule.useState(true)
-	local var45 = nil
-	local var46 = nil
+	local var13, var14 = reactModule.useState(true)
+	local var15 = nil
+	local var16 = nil
 	
 	if fFlagEnableSideSheet and fFlagSideSheetFocusNav and fFlagEnableDrawerAnimatingHook then
-		var45 = useDrawerVisible()
-		var46 = useDrawerAnimating()
+		var15 = useDrawerVisible()
+		var16 = useDrawerAnimating()
 	end
 	useParentContainerVisibilitySignalModule()
-	useAppChatUpdateSessionModule(var33)
-	usePreventExperienceControlsModule(var33)
+	useAppChatUpdateSessionModule(var3)
+	usePreventExperienceControlsModule(var3)
 	reactModule.useEffect(function()
-		-- upvalues: var33 (ref), var32 (ref), setAppLoadedModule (copy), getAllFriendsAsyncModule (copy), partyPageCarouselExperimentation (copy), getLocalUserFriendsCountModule (copy)
-		if var33 then
-			var32(setAppLoadedModule(true))
-			var32(getAllFriendsAsyncModule(true))
+		-- upvalues: var3 (ref), var2 (ref), setAppLoadedModule (copy), getAllFriendsAsyncModule (copy), partyPageCarouselExperimentation (copy), getLocalUserFriendsCountModule (copy)
+		if var3 then
+			var2(setAppLoadedModule(true))
+			var2(getAllFriendsAsyncModule(true))
 			
 			if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then
-				var32(getLocalUserFriendsCountModule())
+				var2(getLocalUserFriendsCountModule())
 			end
 		end
-	end, { var32, var33 })
+	end, { var2, var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var32 (ref), getLocalUser (copy)
-		var32(getLocalUser())
-	end, { var32 })
+		-- upvalues: var2 (ref), getLocalUser (copy)
+		var2(getLocalUser())
+	end, { var2 })
 	reactModule.useEffect(function()
-		-- upvalues: visibilitySignal (ref), var31 (ref)
-		local var53 = visibilitySignal:connect(function(p3)
-			-- upvalues: var31 (copy)
-			if not p3 and var31.current then
-				var31.current.Enabled = false
+		-- upvalues: visibilitySignal (ref), var1 (ref)
+		local var17 = visibilitySignal:connect(function(p1)
+			-- upvalues: var1 (copy)
+			if not p1 and var1.current then
+				var1.current.Enabled = false
 			end
 		end)
 		
 		return function()
-			-- upvalues: var53 (ref)
-			var53:disconnect()
+			-- upvalues: var17 (ref)
+			var17:disconnect()
 		end
 	end, { visibilitySignal })
 	
-	if var38 then
+	if var8 then
 		reactModule.useEffect(function()
-			-- upvalues: requestedRouteSignal (ref), var40 (write)
-			local var54 = requestedRouteSignal:connect(function(p4)
-				-- upvalues: var40 (copy)
-				var40(p4)
+			-- upvalues: requestedRouteSignal (ref), var10 (write)
+			local var17 = requestedRouteSignal:connect(function(p1)
+				-- upvalues: var10 (copy)
+				var10(p1)
 			end)
 			
 			return function()
-				-- upvalues: var54 (ref)
-				var54:disconnect()
+				-- upvalues: var17 (ref)
+				var17:disconnect()
 			end
 		end, { requestedRouteSignal })
 	end
 	if getFFlagIsSquadEnabled() then
-		local var47 = useSelector(function(p5)
-			local currentSquad = p5.Squad and (p5.Squad.Squad and p5.Squad.Squad.currentSquad)
+		local var17 = useSelector(function(p1)
+			local currentSquad = p1.Squad and (p1.Squad.Squad and p1.Squad.Squad.currentSquad)
 			
 			return if currentSquad and currentSquad.squadId then currentSquad.squadId else ""
 		end)
 		reactModule.useEffect(function()
-			-- upvalues: updateCurrentSquadId (ref), var47 (ref)
-			updateCurrentSquadId(var47)
-		end, { var47, updateCurrentSquadId })
+			-- upvalues: updateCurrentSquadId (ref), var17 (ref)
+			updateCurrentSquadId(var17)
+		end, { var17, updateCurrentSquadId })
 	end
-	local var48 = if getFFlagIsSquadEnabled() then useSelector(function(p6)
-		return p6.Squad.SquadPrompt.arguments
+	local var18 = if getFFlagIsSquadEnabled() then useSelector(function(p1)
+		return p1.Squad.SquadPrompt.arguments
 	end) else nil
-	local var49 = reactModule.useMemo(function()
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), hideParentContainer (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p7)
+				handler = inputHandlersModule.onRelease(function(p1)
 					-- upvalues: hideParentContainer (copy)
 					hideParentContainer()
-					p7:cancel()
+					p1:cancel()
 				end)
 			}
 		}
 	end, { hideParentContainer })
-	local var50 = useAppPolicy(function(p8)
-		return p8.getCanAccessParty()
+	local var20 = useAppPolicy(function(p1)
+		return p1.getCanAccessParty()
 	end)
-	local promptType = getFFlagIsSquadEnabled() and (var48 and var48.promptType)
+	local promptType = getFFlagIsSquadEnabled() and (var18 and var18.promptType)
 	
 	if fFlagEnableAppChatSnoozeMenuFocus then
 		reactModule.useEffect(function()
-			-- upvalues: notificationSnoozeMenuVisibleSignal (copy), var44 (ref)
-			local var56 = notificationSnoozeMenuVisibleSignal:connect(function(p9)
-				-- upvalues: var44 (copy)
-				var44(not p9.visible)
+			-- upvalues: notificationSnoozeMenuVisibleSignal (copy), var14 (ref)
+			local var21 = notificationSnoozeMenuVisibleSignal:connect(function(p1)
+				-- upvalues: var14 (copy)
+				var14(not p1.visible)
 			end)
 			
 			return function()
-				-- upvalues: var56 (ref)
-				var56:disconnect()
+				-- upvalues: var21 (ref)
+				var21:disconnect()
 			end
 		end, {})
 	end
-	local var52 = reactModule.useCallback(function(p10)
-		-- upvalues: showParentContainer (ref), var37 (ref), var32 (ref), enteredChatFromEntryPointModule (copy), socialCommonModule (copy), fFlagExpChatEnableFriendsTab (copy), var35 (ref)
+	local var21 = reactModule.useCallback(function(p1)
+		-- upvalues: showParentContainer (ref), var7 (ref), var2 (ref), enteredChatFromEntryPointModule (copy), socialCommonModule (copy), fFlagExpChatEnableFriendsTab (copy), var5 (ref)
 		local function _()
-			-- upvalues: showParentContainer (copy), var37 (copy), p10 (ref), var32 (copy), enteredChatFromEntryPointModule (copy), socialCommonModule (copy)
+			-- upvalues: showParentContainer (copy), var7 (copy), p1 (ref), var2 (copy), enteredChatFromEntryPointModule (copy), socialCommonModule (copy)
 			showParentContainer()
-			var37(p10)
-			var32(enteredChatFromEntryPointModule(socialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
+			var7(p1)
+			var2(enteredChatFromEntryPointModule(socialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
 		end
 		
 		if fFlagExpChatEnableFriendsTab then
-			return var35.openFriendsChatConversation(p10):andThen(function(p11)
-				-- upvalues: showParentContainer (copy), var37 (copy), p10 (ref), var32 (copy), enteredChatFromEntryPointModule (copy), socialCommonModule (copy)
-				if not p11 then
+			return var5.openFriendsChatConversation(p1):andThen(function(p2)
+				-- upvalues: showParentContainer (copy), var7 (copy), p1 (ref), var2 (copy), enteredChatFromEntryPointModule (copy), socialCommonModule (copy)
+				if not p2 then
 					showParentContainer()
-					var37(p10)
-					var32(enteredChatFromEntryPointModule(socialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
+					var7(p1)
+					var2(enteredChatFromEntryPointModule(socialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
 				end
-				return p11
+				return p2
 			end)
 		end
 		showParentContainer()
-		var37(p10)
-		var32(enteredChatFromEntryPointModule(socialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
+		var7(p1)
+		var2(enteredChatFromEntryPointModule(socialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
 		
 		return nil
 	end, {
-		var32,
-		var35.openFriendsChatConversation,
+		var2,
+		var5.openFriendsChatConversation,
 		showParentContainer
 	})
 	
 	if fFlagEnableSideSheet and fFlagSideSheetFocusNav and fFlagEnableDrawerAnimatingHook then
 		reactModule.useEffect(function()
-			-- upvalues: var44 (ref), var45 (write), var46 (write)
-			var44(not var45 and not var46)
-		end, { var45, var46 })
+			-- upvalues: var14 (ref), var15 (write), var16 (write)
+			var14(not var15 and not var16)
+		end, { var15, var16 })
 	end
 	return reactModule.createElement(reactModule.Fragment, {}, {
-		SquadEventReceiver = if var50 then reactModule.createElement(squadEventReceiverModule) else nil,
+		SquadEventReceiver = if var20 then reactModule.createElement(squadEventReceiverModule) else nil,
 		AppChatPersistentEventReceivers = reactModule.createElement(appChatPersistentEventReceiversModule, { isInExperience = true }),
 		AppChatToastManagerInExp = reactModule.createElement(appChatToastManagerInExpModule, {
-			hideAllChatToasts = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then nil else var33,
-			isAppChatVisible = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then var33 else nil,
-			navigateToChat = var52
+			hideAllChatToasts = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then nil else var3,
+			isAppChatVisible = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then var3 else nil,
+			navigateToChat = var21
 		}),
 		AppChatContainer = reactModule.createElement(uiModeStyleProvider, {
 			style = {
@@ -246,28 +246,28 @@ function InExperienceAppChat()
 			}
 		}, {
 			reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
-				AppChatScreenGui = if var33 or promptType then reactModule.createElement("ScreenGui", {
+				AppChatScreenGui = if var3 or promptType then reactModule.createElement("ScreenGui", {
 					ResetOnSpawn = false,
 					ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 					ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets,
 					DisplayOrder = appChatInExperienceDisplayOrder,
-					ref = var31
+					ref = var1
 				}, wrapWithFocusRoot({
 					SquadOverlay = if promptType then reactModule.createElement(squadOverlayModule) else nil,
-					AppChat = if var33 then reactModule.createElement(layerCollectorProvider, {}, {
-						containerRef = reactModule.createElement(responsiveModule.ContainerRef.Provider, { value = var31 }, {
+					AppChat = if var3 then reactModule.createElement(layerCollectorProvider, {}, {
+						containerRef = reactModule.createElement(responsiveModule.ContainerRef.Provider, { value = var1 }, {
 							reactModule.createElement(roactServices.ServiceProvider, { services = { [appSessionService] = sessionService } }, {
 								InExperienceAppChatContainer = reactModule.createElement(inExperienceAppChatContainerModule, {
-									hideAppChat = var34,
-									initialConversationId = var36,
-									setInitialConversationId = var37,
-									requestedRoute = if var38 then var39 else nil,
-									clearRequestedRoute = if var38 then clearRequestedRoute else nil
+									hideAppChat = var4,
+									initialConversationId = var6,
+									setInitialConversationId = var7,
+									requestedRoute = if var8 then var9 else nil,
+									clearRequestedRoute = if var8 then clearRequestedRoute else nil
 								})
 							})
 						})
 					}) else nil
-				}, var49, var43)) else nil
+				}, var19, var13)) else nil
 			})
 		}),
 		OverlayHost = reactModule.createElement(overlayHostModule, {

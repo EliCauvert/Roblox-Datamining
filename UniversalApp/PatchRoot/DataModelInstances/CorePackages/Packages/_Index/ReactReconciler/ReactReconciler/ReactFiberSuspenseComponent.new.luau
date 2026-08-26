@@ -12,50 +12,50 @@ local isSuspenseInstancePending = reactFiberHostConfigModule.isSuspenseInstanceP
 local isSuspenseInstanceFallback = reactFiberHostConfigModule.isSuspenseInstanceFallback
 
 return {
-	shouldCaptureSuspense = function(p0, p1)
-		local memoizedState = p0.memoizedState
+	shouldCaptureSuspense = function(p1, p2)
+		local memoizedState = p1.memoizedState
 		
 		if memoizedState then
 			return memoizedState.dehydrated ~= nil
 		end
-		local memoizedProps = p0.memoizedProps
+		local memoizedProps = p1.memoizedProps
 		
-		return if memoizedProps.fallback == nil then false elseif memoizedProps.unstable_avoidThisFallback == true then p1 else true
+		return if memoizedProps.fallback == nil then false elseif memoizedProps.unstable_avoidThisFallback == true then p2 else true
 	end,
-	findFirstSuspended = function(p2)
+	findFirstSuspended = function(p1)
 		-- upvalues: suspenseComponent (ref), isSuspenseInstancePending (ref), isSuspenseInstanceFallback (ref), suspenseListComponent (ref), didCapture (ref), noFlags (ref)
-		local var3 = p2
-		while var3 ~= nil do
-			if var3.tag == suspenseComponent then
-				local memoizedState = var3.memoizedState
+		local var1 = p1
+		while var1 ~= nil do
+			if var1.tag == suspenseComponent then
+				local memoizedState = var1.memoizedState
 				
 				if memoizedState then
 					local dehydrated = memoizedState.dehydrated
 					
 					if dehydrated ~= nil and not isSuspenseInstancePending(dehydrated) and not isSuspenseInstanceFallback(dehydrated) then
-						if var3 ~= p2 then
-							while var3.sibling == nil do
-								if var3.return_ ~= nil and var3.return_ ~= p2 then
-									var3 = var3.return_
+						if var1 ~= p1 then
+							while var1.sibling == nil do
+								if var1.return_ ~= nil and var1.return_ ~= p1 then
+									var1 = var1.return_
 									continue
 								end
 								return nil
 							end
-							var3.sibling.return_ = var3.return_
-							var3 = var3.sibling
+							var1.sibling.return_ = var1.return_
+							var1 = var1.sibling
 						end
 						return nil
 					end
-					return var3
+					return var1
 				end
-			elseif var3.tag == suspenseListComponent and var3.memoizedProps.revealOrder ~= nil then
-				if bit32.band(var3.flags, didCapture) == noFlags then
+			elseif var1.tag == suspenseListComponent and var1.memoizedProps.revealOrder ~= nil then
+				if bit32.band(var1.flags, didCapture) == noFlags then
 				end
-				return var3
-			elseif var3.child == nil then
+				return var1
+			elseif var1.child == nil then
 			else
-				var3.child.return_ = var3
-				var3 = var3.child
+				var1.child.return_ = var1
+				var1 = var1.child
 			end
 		end
 		return nil

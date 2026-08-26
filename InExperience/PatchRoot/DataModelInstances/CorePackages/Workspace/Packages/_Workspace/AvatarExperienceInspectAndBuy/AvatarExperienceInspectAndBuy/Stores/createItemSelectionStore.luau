@@ -9,26 +9,26 @@ return function()
 	
 	return {
 		getItemDataMap = var1,
-		getItemData = function(p0)
+		getItemData = function(p1)
 			-- upvalues: t (ref), signalsModule (copy), var1 (ref)
-			if t[p0] == nil then
-				t[p0] = signalsModule.createComputed(function(p1)
-					-- upvalues: var1 (copy), p0 (ref)
-					return var1(p1)[p0]
+			if t[p1] == nil then
+				t[p1] = signalsModule.createComputed(function(p2)
+					-- upvalues: var1 (copy), p1 (ref)
+					return var1(p2)[p1]
 				end)
 			end
-			return t[p0]
+			return t[p1]
 		end,
-		setItemData = function(value, p2)
+		setItemData = function(value, p1)
 			-- upvalues: var1 (ref), var2 (ref)
 			local cloned = table.clone(var1(false))
-			cloned[value] = p2
+			cloned[value] = p1
 			var2(cloned)
 		end,
-		clearItemData = function(p3)
+		clearItemData = function(p1)
 			-- upvalues: var1 (ref), var2 (ref)
 			local cloned = table.clone(var1(false))
-			cloned[p3] = nil
+			cloned[p1] = nil
 			var2(cloned)
 		end,
 		clearAll = function()

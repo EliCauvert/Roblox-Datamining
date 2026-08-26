@@ -3,75 +3,75 @@ local popoverAlignModule = require(foundation.Enums.PopoverAlign)
 local popoverSideModule = require(foundation.Enums.PopoverSide)
 local _ = require(foundation.Providers.StudioPanels.Types)
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: popoverAlignModule (ref), popoverSideModule (ref)
-	local var3 = 0
-	local var4 = 0
-	local var5 = p0
-	local var6 = p1
+	local var1 = 0
+	local var2 = 0
+	local var3 = p1
+	local var4 = p2
 	
-	if type(p0) == "table" then
-		var3 = p0.offset
-		var5 = p0.position
-	end
 	if type(p1) == "table" then
-		var4 = p1.offset
-		var6 = p1.position
+		var1 = p1.offset
+		var3 = p1.position
 	end
-	local var7 = var3 + (p4 or 0)
-	local var8 = 0
+	if type(p2) == "table" then
+		var2 = p2.offset
+		var4 = p2.position
+	end
+	local var5 = var1 + (p5 or 0)
+	local var6 = 0
 	
-	if var6 == popoverAlignModule.Center then
-		var8 = 0.5
-		var4 = 0
-	elseif var6 == popoverAlignModule.End then
-		var8 = 1
-		var4 = -var4
+	if var4 == popoverAlignModule.Center then
+		var6 = 0.5
+		var2 = 0
+	elseif var4 == popoverAlignModule.End then
+		var6 = 1
+		var2 = -var2
 	end
-	local var9 = nil
+	local var7 = nil
 	local zero = nil
 	local vector2 = nil
 	
-	if var5 == popoverSideModule.Top then
-		var9 = Vector2.new(var4, -var7)
-		zero = Vector2.new(var8, 0)
-		vector2 = Vector2.new(var8, 1)
-	elseif var5 == popoverSideModule.Bottom then
-		var9 = Vector2.new(var4, var7)
-		zero = Vector2.new(var8, 1)
-		vector2 = Vector2.new(var8, 0)
-	elseif var5 == popoverSideModule.Left then
-		var9 = Vector2.new(-var7, var4)
-		zero = Vector2.new(0, var8)
-		vector2 = Vector2.new(1, var8)
-	elseif var5 == popoverSideModule.Right then
-		var9 = Vector2.new(var7, var4)
-		zero = Vector2.new(1, var8)
-		vector2 = Vector2.new(0, var8)
+	if var3 == popoverSideModule.Top then
+		var7 = Vector2.new(var2, -var5)
+		zero = Vector2.new(var6, 0)
+		vector2 = Vector2.new(var6, 1)
+	elseif var3 == popoverSideModule.Bottom then
+		var7 = Vector2.new(var2, var5)
+		zero = Vector2.new(var6, 1)
+		vector2 = Vector2.new(var6, 0)
+	elseif var3 == popoverSideModule.Left then
+		var7 = Vector2.new(-var5, var2)
+		zero = Vector2.new(0, var6)
+		vector2 = Vector2.new(1, var6)
+	elseif var3 == popoverSideModule.Right then
+		var7 = Vector2.new(var5, var2)
+		zero = Vector2.new(1, var6)
+		vector2 = Vector2.new(0, var6)
 	end
-	p3 = p3 or 0
+	p4 = p4 or 0
 	
-	if p3 > 0 then
-		local var13 = if var5 ~= popoverSideModule.Top then var5 == popoverSideModule.Bottom else true
-		local var14 = p3 * 2
-		local var15 = p3 * 2
+	if p4 > 0 then
+		local var8 = if var3 ~= popoverSideModule.Top then var3 == popoverSideModule.Bottom else true
+		local var9 = p4 * 2
+		local var10 = p4 * 2
 		
-		if var13 then
-			var14 += var4
-			var15 += var7
+		if var8 then
+			var9 += var2
+			var10 += var5
 		else
-			var14 += var7
-			var15 += var4
+			var9 += var5
+			var10 += var2
 		end
-		var9 += Vector2.new(vector2.X * var14 - p3, vector2.Y * var15 - p3)
+		var7 += Vector2.new(vector2.X * var9 - p4, vector2.Y * var10 - p4)
 	end
-	if p2 then
-		var9 = p2
+	if p3 then
+		var7 = p3
 		zero = Vector2.zero
 	end
 	return {
 		targetAnchorPoint = zero,
 		subjectAnchorPoint = vector2,
-		offset = var9
+		offset = var7
 	}
 end

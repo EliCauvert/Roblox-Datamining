@@ -6,13 +6,13 @@ local squadsCore_1 = require(parent.Loggers).Logger:new("SquadsCore")
 
 return function()
 	-- upvalues: networkingSquadsModule (ref), squadsCore_1 (ref), promiseModule (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: networkingSquadsModule (copy), squadsCore_1 (copy), promiseModule (copy)
-		return p0:dispatch(networkingSquadsModule.GetSquadActive.API({})):catch(function(p1)
+		return p1:dispatch(networkingSquadsModule.GetSquadActive.API({})):catch(function(p2)
 			-- upvalues: squadsCore_1 (copy), promiseModule (copy)
-			squadsCore_1:warning("Error fetching active squad: {}", if p1.StatusCode then p1.StatusCode else -1)
+			squadsCore_1:warning("Error fetching active squad: {}", if p2.StatusCode then p2.StatusCode else -1)
 			
-			return promiseModule.reject(p1)
+			return promiseModule.reject(p2)
 		end)
 	end
 end

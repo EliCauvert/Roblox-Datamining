@@ -28,23 +28,23 @@ callbackInputBoxWithIcon.defaultProps = {
 	clearIconColor3 = Color3.new(1, 1, 0)
 }
 
-function callbackInputBoxWithIcon.render(p0)
+function callbackInputBoxWithIcon.render(p1)
 	-- upvalues: roact (ref), callbackInputBoxModule (ref)
-	local iconCellWidth = p0.props.iconCellWidth
-	local iconSize = p0.props.iconSize
+	local iconCellWidth = p1.props.iconCellWidth
+	local iconSize = p1.props.iconSize
 	
 	return roact.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundTransparency = p0.props.backgroundTransparency,
-		BackgroundColor3 = p0.props.backgroundColor3,
+		BackgroundTransparency = p1.props.backgroundTransparency,
+		BackgroundColor3 = p1.props.backgroundColor3,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
 		UIStroke = roact.createElement("UIStroke", {
-			Thickness = p0.props.borderThickness,
-			Color = p0.props.borderColor,
-			Transparency = p0.props.borderTransparency
+			Thickness = p1.props.borderThickness,
+			Color = p1.props.borderColor,
+			Transparency = p1.props.borderTransparency
 		}),
-		UICorner = roact.createElement("UICorner", { CornerRadius = UDim.new(0, p0.props.cornerRadius) }),
+		UICorner = roact.createElement("UICorner", { CornerRadius = UDim.new(0, p1.props.cornerRadius) }),
 		layout = roact.createElement("UIListLayout", {
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
@@ -57,9 +57,9 @@ function callbackInputBoxWithIcon.render(p0)
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(0, iconSize, 0, iconSize),
-			ImageColor3 = p0.props.iconColor3,
-			ImageTransparency = p0.props.iconTransparency,
-			Image = p0.props.iconImage
+			ImageColor3 = p1.props.iconColor3,
+			ImageTransparency = p1.props.iconTransparency,
+			Image = p1.props.iconImage
 		}),
 		inputBoxContainer = roact.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -67,7 +67,7 @@ function callbackInputBoxWithIcon.render(p0)
 			Size = UDim2.new(1, (-iconSize) - iconCellWidth / 4, 1, 0)
 		}, {
 			padding = roact.createElement("UIPadding", { PaddingRight = UDim.new(0, iconCellWidth / 4) }),
-			inputBox = roact.createElement(callbackInputBoxModule, p0.props)
+			inputBox = roact.createElement(callbackInputBoxModule, p1.props)
 		})
 	})
 end

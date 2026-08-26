@@ -4,23 +4,23 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: progressSizeModule (ref)
 	return {
 		sizes = {
 			[progressSizeModule.Small] = {
-				bar = { height = p0.Size.Size_50 },
-				circle = { size = p0.Size.Size_400 }
+				bar = { height = p1.Size.Size_50 },
+				circle = { size = p1.Size.Size_400 }
 			},
 			[progressSizeModule.Medium] = {
-				bar = { height = p0.Size.Size_100 },
-				circle = { size = p0.Size.Size_800 }
+				bar = { height = p1.Size.Size_100 },
+				circle = { size = p1.Size.Size_800 }
 			},
 			[progressSizeModule.Large] = {
-				bar = { height = p0.Size.Size_150 },
+				bar = { height = p1.Size.Size_150 },
 				circle = {
-					size = p0.Size.Size_1300,
-					labelFont = p0.Typography.LabelMedium
+					size = p1.Size.Size_1300,
+					labelFont = p1.Typography.LabelMedium
 				}
 			}
 		}

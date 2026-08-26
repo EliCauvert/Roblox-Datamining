@@ -64,17 +64,17 @@ function t.setAccountSwitchStartupQueryParams(value)
 		value = httpService:JSONEncode(value)
 	end
 	if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
-		local var6
+		local var1
 		local accountSwitcherMetadataMap = t.getAccountSwitcherMetadataMap()
 		local _ = nil
 		
 		if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
-			var6 = { AccountSwitchStartupQueryParams = value }
+			var1 = { AccountSwitchStartupQueryParams = value }
 		else
-			var6 = httpService:JSONDecode(accountSwitcherMetadataMap)
-			var6.AccountSwitchStartupQueryParams = value
+			var1 = httpService:JSONDecode(accountSwitcherMetadataMap)
+			var1.AccountSwitchStartupQueryParams = value
 		end
-		t.setAccountSwitcherMetadataMap(httpService:JSONEncode(var6))
+		t.setAccountSwitcherMetadataMap(httpService:JSONEncode(var1))
 	end
 end
 
@@ -93,31 +93,31 @@ function t.getAccountSwitchStartupGameParams()
 	if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
 		return nil
 	end
-	local var8 = httpService:JSONDecode(accountSwitcherMetadataMap)
+	local var1 = httpService:JSONDecode(accountSwitcherMetadataMap)
 	
-	if var8 == nil or var8 == "" or (next(var8) == nil or next(var8) == "") or var8.AccountSwitchTargetUsername == nil then
+	if var1 == nil or var1 == "" or (next(var1) == nil or next(var1) == "") or var1.AccountSwitchTargetUsername == nil then
 		return nil
 	end
-	local accountSwitchStartupQueryParams = var8.AccountSwitchStartupQueryParams
+	local accountSwitchStartupQueryParams = var1.AccountSwitchStartupQueryParams
 	
 	if accountSwitchStartupQueryParams == nil or accountSwitchStartupQueryParams == "" then
 		return nil
 	end
 	accountSwitchStartupQueryParams = httpService:JSONDecode(accountSwitchStartupQueryParams)
 	
-	local _ = function(p0)
-		local var11 = tonumber(p0)
+	local _ = function(p1)
+		local var2 = tonumber(p1)
 		
-		return var11 or (p0 == "true" or (if p0 == "false" then false else p0))
+		return var2 or (p1 == "true" or (if p1 == "false" then false else p1))
 	end
 	
-	local var9 = gameParams.fromParams(accountSwitchStartupQueryParams)
+	local var2 = gameParams.fromParams(accountSwitchStartupQueryParams)
 	
 	for i, v in pairs(accountSwitchStartupQueryParams) do
-		local var10 = tonumber(v)
-		var9[i] = var10 or (v == "true" or (if v == "false" then false else v))
+		local var3 = tonumber(v)
+		var2[i] = var3 or (v == "true" or (if v == "false" then false else v))
 	end
-	return var9
+	return var2
 end
 
 function t.getAccountSwitchTargetUsername()
@@ -130,25 +130,25 @@ function t.getAccountSwitchTargetUsername()
 	if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
 		return ""
 	end
-	local var13 = httpService:JSONDecode(accountSwitcherMetadataMap)
+	local var4 = httpService:JSONDecode(accountSwitcherMetadataMap)
 	
-	return if var13 == nil or var13 == "" or (next(var13) == nil or next(var13) == "") or var13.AccountSwitchTargetUsername == nil then "" else var13.AccountSwitchTargetUsername
+	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4.AccountSwitchTargetUsername == nil then "" else var4.AccountSwitchTargetUsername
 end
 
 function t.setAccountSwitchTargetUsername(value)
 	-- upvalues: t (ref), httpService (ref)
 	if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
-		local var15
+		local var4
 		local accountSwitcherMetadataMap = t.getAccountSwitcherMetadataMap()
 		local _ = nil
 		
 		if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
-			var15 = { AccountSwitchTargetUsername = value }
+			var4 = { AccountSwitchTargetUsername = value }
 		else
-			var15 = httpService:JSONDecode(accountSwitcherMetadataMap)
-			var15.AccountSwitchTargetUsername = value
+			var4 = httpService:JSONDecode(accountSwitcherMetadataMap)
+			var4.AccountSwitchTargetUsername = value
 		end
-		t.setAccountSwitcherMetadataMap(httpService:JSONEncode(var15))
+		t.setAccountSwitcherMetadataMap(httpService:JSONEncode(var4))
 	end
 end
 
@@ -162,25 +162,25 @@ function t.getAccountSwitchStatus()
 	if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
 		return ""
 	end
-	local var17 = httpService:JSONDecode(accountSwitcherMetadataMap)
+	local var4 = httpService:JSONDecode(accountSwitcherMetadataMap)
 	
-	return if var17 == nil or var17 == "" or (next(var17) == nil or next(var17) == "") or var17.AccountSwitchStatus == nil then "" else var17.AccountSwitchStatus
+	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4.AccountSwitchStatus == nil then "" else var4.AccountSwitchStatus
 end
 
 function t.setAccountSwitchStatus(value)
 	-- upvalues: t (ref), httpService (ref)
 	if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
-		local var19
+		local var4
 		local accountSwitcherMetadataMap = t.getAccountSwitcherMetadataMap()
 		local _ = nil
 		
 		if accountSwitcherMetadataMap == nil or accountSwitcherMetadataMap == "" then
-			var19 = { AccountSwitchStatus = value }
+			var4 = { AccountSwitchStatus = value }
 		else
-			var19 = httpService:JSONDecode(accountSwitcherMetadataMap)
-			var19.AccountSwitchStatus = value
+			var4 = httpService:JSONDecode(accountSwitcherMetadataMap)
+			var4.AccountSwitchStatus = value
 		end
-		t.setAccountSwitcherMetadataMap(httpService:JSONEncode(var19))
+		t.setAccountSwitcherMetadataMap(httpService:JSONEncode(var4))
 	end
 end
 
@@ -201,25 +201,25 @@ function t.getIncompleteSignupUserId()
 	if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
 		return ""
 	end
-	local var21 = httpService:JSONDecode(multipageSignupMetadataMap)
+	local var4 = httpService:JSONDecode(multipageSignupMetadataMap)
 	
-	return if var21 == nil or var21 == "" or (next(var21) == nil or next(var21) == "") or var21.IncompleteSignupUserId == nil then "" else var21.IncompleteSignupUserId
+	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4.IncompleteSignupUserId == nil then "" else var4.IncompleteSignupUserId
 end
 
 function t.setIncompleteSignupUserId(value)
 	-- upvalues: getFFlagEnableMultiPageSignup (ref), t (ref), httpService (ref)
 	if getFFlagEnableMultiPageSignup() then
-		local var23
+		local var4
 		local multipageSignupMetadataMap = t.getMultipageSignupMetadataMap()
 		local _ = nil
 		
 		if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
-			var23 = { IncompleteSignupUserId = value }
+			var4 = { IncompleteSignupUserId = value }
 		else
-			var23 = httpService:JSONDecode(multipageSignupMetadataMap)
-			var23.IncompleteSignupUserId = value
+			var4 = httpService:JSONDecode(multipageSignupMetadataMap)
+			var4.IncompleteSignupUserId = value
 		end
-		t.setMultipageSignupMetadataMap(httpService:JSONEncode(var23))
+		t.setMultipageSignupMetadataMap(httpService:JSONEncode(var4))
 	end
 end
 
@@ -230,25 +230,25 @@ function t.getIncompleteSignupUsername()
 	if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
 		return ""
 	end
-	local var25 = httpService:JSONDecode(multipageSignupMetadataMap)
+	local var4 = httpService:JSONDecode(multipageSignupMetadataMap)
 	
-	return if var25 == nil or var25 == "" or (next(var25) == nil or next(var25) == "") or var25.IncompleteSignupUsername == nil then "" else var25.IncompleteSignupUsername
+	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4.IncompleteSignupUsername == nil then "" else var4.IncompleteSignupUsername
 end
 
 function t.setIncompleteSignupUsername(value)
 	-- upvalues: getFFlagEnableMultiPageSignup (ref), t (ref), httpService (ref)
 	if getFFlagEnableMultiPageSignup() then
-		local var27
+		local var4
 		local multipageSignupMetadataMap = t.getMultipageSignupMetadataMap()
 		local _ = nil
 		
 		if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
-			var27 = { IncompleteSignupUsername = value }
+			var4 = { IncompleteSignupUsername = value }
 		else
-			var27 = httpService:JSONDecode(multipageSignupMetadataMap)
-			var27.IncompleteSignupUsername = value
+			var4 = httpService:JSONDecode(multipageSignupMetadataMap)
+			var4.IncompleteSignupUsername = value
 		end
-		t.setMultipageSignupMetadataMap(httpService:JSONEncode(var27))
+		t.setMultipageSignupMetadataMap(httpService:JSONEncode(var4))
 	end
 end
 
@@ -259,25 +259,25 @@ function getMultiPageSignupKey(value)
 	if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
 		return ""
 	end
-	local var29 = httpService:JSONDecode(multipageSignupMetadataMap)
+	local var4 = httpService:JSONDecode(multipageSignupMetadataMap)
 	
-	return if var29 == nil or var29 == "" or (next(var29) == nil or next(var29) == "") or var29[value] == nil then "" else var29[value]
+	return if var4 == nil or var4 == "" or (next(var4) == nil or next(var4) == "") or var4[value] == nil then "" else var4[value]
 end
 
 function setMultiPageSignupKey(value, p1)
 	-- upvalues: t (ref), httpService (ref)
 	if game:GetEngineFeature("MultipageSignupMetadataMapKeyAvailable") then
-		local var31
+		local var4
 		local multipageSignupMetadataMap = t.getMultipageSignupMetadataMap()
 		local _ = nil
 		
 		if multipageSignupMetadataMap == nil or multipageSignupMetadataMap == "" then
-			var31 = { [value] = p1 }
+			var4 = { [value] = p1 }
 		else
-			var31 = httpService:JSONDecode(multipageSignupMetadataMap)
-			var31[value] = p1
+			var4 = httpService:JSONDecode(multipageSignupMetadataMap)
+			var4[value] = p1
 		end
-		t.setMultipageSignupMetadataMap(httpService:JSONEncode(var31))
+		t.setMultipageSignupMetadataMap(httpService:JSONEncode(var4))
 	end
 end
 

@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.types)
 
-return function(p0)
-	if typeof(p0) ~= "table" or typeof(p0.errors) ~= "table" then
+return function(p1)
+	if typeof(p1) ~= "table" or typeof(p1.errors) ~= "table" then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p0.errors do
+	for i, v in p1.errors do
 		if typeof(v) == "table" and typeof(v.code) == "number" and typeof(v.message) == "string" then
 			table.insert(t, {
 				code = v.code,

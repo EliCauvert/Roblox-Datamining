@@ -3,14 +3,14 @@ local _ = require(parent.Foundation)
 local reactModule = require(parent.React)
 local _ = require(script.Parent.SearchBarView)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
-	local clear = p0.clear
-	local onDismiss = p0.onDismiss
-	local setQuery = p0.setQuery
-	local onFocusGained = p0.onFocusGained
-	local onFocusLost = p0.onFocusLost
-	local shouldFocus = p0.shouldFocus
+	local clear = p1.clear
+	local onDismiss = p1.onDismiss
+	local setQuery = p1.setQuery
+	local onFocusGained = p1.onFocusGained
+	local onFocusLost = p1.onFocusLost
+	local shouldFocus = p1.shouldFocus
 	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(false)
 	reactModule.useEffect(function()
@@ -21,10 +21,10 @@ return function(p0)
 	end, { shouldFocus })
 	
 	return {
-		LayoutOrder = p0.LayoutOrder,
-		onChanged = reactModule.useCallback(function(p1)
+		LayoutOrder = p1.LayoutOrder,
+		onChanged = reactModule.useCallback(function(p2)
 			-- upvalues: clear (ref), var2 (ref), onDismiss (ref), setQuery (ref)
-			if p1 == "" then
+			if p2 == "" then
 				clear()
 				
 				if var2.current or not onDismiss then
@@ -35,7 +35,7 @@ return function(p0)
 					return
 				end
 			else
-				setQuery(p1)
+				setQuery(p2)
 			end
 		end, { clear, onDismiss, setQuery }),
 		onFocusGained = reactModule.useCallback(function()
@@ -54,8 +54,8 @@ return function(p0)
 				onFocusLost(p2)
 			end
 		end, { onFocusLost }),
-		placeholder = p0.placeholder,
-		query = p0.query,
+		placeholder = p1.placeholder,
+		query = p1.query,
 		textInputRef = var1
 	}
 end

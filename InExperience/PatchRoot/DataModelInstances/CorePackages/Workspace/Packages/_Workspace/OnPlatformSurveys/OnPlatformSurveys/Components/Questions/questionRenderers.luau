@@ -10,12 +10,12 @@ local textQuestionModule = require(onPlatformSurveys.Components.Questions.TextQu
 local thumbsQuestionModule = require(onPlatformSurveys.Components.Questions.ThumbsQuestion)
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 
-local function isThumbsQuestion(p0)
+local function isThumbsQuestion(p1)
 	-- upvalues: inlineQuestionTypeModule (ref), fFlagInlineSurveyChoiceTextEntry (ref)
-	if p0.type ~= inlineQuestionTypeModule.MultipleChoiceSingle then
+	if p1.type ~= inlineQuestionTypeModule.MultipleChoiceSingle then
 		return false
 	end
-	local choices = p0.choices
+	local choices = p1.choices
 	
 	if choices == nil or #choices ~= 2 then
 		return false
@@ -35,21 +35,21 @@ local function isThumbsQuestion(p0)
 end
 
 return {
-	renderQuestion = function(p1)
+	renderQuestion = function(p2)
 		-- upvalues: isThumbsQuestion (ref), reactModule (ref), thumbsQuestionModule (ref), fFlagInlineSurveyEnhancements (ref), inlineQuestionTypeModule (ref), textQuestionModule (ref), multipleChoiceQuestionModule (ref)
-		local question = p1.question
+		local question = p2.question
 		
-		return if isThumbsQuestion(question) then reactModule.createElement(thumbsQuestionModule, p1) elseif fFlagInlineSurveyEnhancements and question.type == inlineQuestionTypeModule.Text then reactModule.createElement(textQuestionModule, {
-			answer = p1.answer,
-			onAnswerChanged = p1.onAnswerChanged,
-			isDisabled = p1.isDisabled,
-			layoutOrder = p1.layoutOrder
+		return if isThumbsQuestion(question) then reactModule.createElement(thumbsQuestionModule, p2) elseif fFlagInlineSurveyEnhancements and question.type == inlineQuestionTypeModule.Text then reactModule.createElement(textQuestionModule, {
+			answer = p2.answer,
+			onAnswerChanged = p2.onAnswerChanged,
+			isDisabled = p2.isDisabled,
+			layoutOrder = p2.layoutOrder
 		}) elseif question.type == inlineQuestionTypeModule.MultipleChoiceSingle or question.type == inlineQuestionTypeModule.MultipleChoiceMulti then reactModule.createElement(multipleChoiceQuestionModule, {
 			question = question,
-			answer = p1.answer,
-			onAnswerChanged = p1.onAnswerChanged,
-			isDisabled = p1.isDisabled,
-			layoutOrder = p1.layoutOrder
+			answer = p2.answer,
+			onAnswerChanged = p2.onAnswerChanged,
+			isDisabled = p2.isDisabled,
+			layoutOrder = p2.layoutOrder
 		}) else nil
 	end,
 	isThumbsQuestion = isThumbsQuestion

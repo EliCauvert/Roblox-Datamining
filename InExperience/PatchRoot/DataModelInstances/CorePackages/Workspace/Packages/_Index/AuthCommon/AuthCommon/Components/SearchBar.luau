@@ -5,46 +5,46 @@ local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
 local getImageData = require(parent.RobloxAppAssets).GetImageData
 local loginSearchBar = roactModule.PureComponent:extend("LoginSearchBar")
 
-function loginSearchBar.init(p0)
-	p0.state = { longText = false }
-	p0.lastInput = 0
+function loginSearchBar.init(p1)
+	p1.state = { longText = false }
+	p1.lastInput = 0
 	
-	function p0.searchTextChanged(p1)
-		-- upvalues: p0 (ref)
-		local var2 = p1.AbsoluteSize.X < p1.TextBounds.X
+	function p0.searchTextChanged(p2)
+		-- upvalues: p1 (ref)
+		local var1 = p2.AbsoluteSize.X < p2.TextBounds.X
 		
-		if var2 ~= p0.state.longText then
-			p1.TextXAlignment = if var2 then Enum.TextXAlignment.Right else Enum.TextXAlignment.Left
+		if var1 ~= p1.state.longText then
+			p2.TextXAlignment = if var1 then Enum.TextXAlignment.Right else Enum.TextXAlignment.Left
 			spawn(function()
-				-- upvalues: p0 (copy), var2 (ref)
-				p0:setState({ longText = var2 })
+				-- upvalues: p1 (copy), var1 (ref)
+				p1:setState({ longText = var1 })
 			end)
 		end
-		if p0.props.TextChanged then
-			p0.lastInput += 1
-			local lastInput = p0.lastInput
+		if p1.props.TextChanged then
+			p1.lastInput += 1
+			local lastInput = p1.lastInput
 			wait(0.3)
 			
-			if lastInput == p0.lastInput then
-				p0.props.TextChanged(p1)
+			if lastInput == p1.lastInput then
+				p1.props.TextChanged(p2)
 			end
 		end
 	end
 end
 
-function loginSearchBar.render(p2)
+function loginSearchBar.render(p1)
 	-- upvalues: roactModule (ref), imageSetLabel (ref), getImageData (ref), appFonts (ref)
-	local offset = p2.props.Size.Y.Offset
-	local iconSize = p2.props.IconSize
-	local textColor3 = p2.props.TextColor3
+	local offset = p1.props.Size.Y.Offset
+	local iconSize = p1.props.IconSize
+	local textColor3 = p1.props.TextColor3
 	
 	return roactModule.createElement(imageSetLabel, {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = p2.props.Size,
-		Position = p2.props.Position,
+		Size = p1.props.Size,
+		Position = p1.props.Position,
 		Image = getImageData("LuaApp/buttons/buttonFill") or "LuaApp/buttons/buttonFill",
-		ImageColor3 = p2.props.ImageColor3,
+		ImageColor3 = p1.props.ImageColor3,
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(8, 8, 9, 9)
 	}, {
@@ -59,17 +59,17 @@ function loginSearchBar.render(p2)
 		SearchInput = roactModule.createElement("TextBox", {
 			Size = UDim2.new(1, (-offset) - 10, 1, 0),
 			Position = UDim2.new(0, offset, 0, 0),
-			TextSize = p2.props.TextSize,
+			TextSize = p1.props.TextSize,
 			TextColor3 = textColor3,
-			PlaceholderText = p2.props.PlaceholderText,
-			PlaceholderColor3 = p2.props.PlaceholderColor3,
+			PlaceholderText = p1.props.PlaceholderText,
+			PlaceholderColor3 = p1.props.PlaceholderColor3,
 			Font = appFonts.default:getDefault(),
-			TextXAlignment = if p2.state.longText then Enum.TextXAlignment.Right else Enum.TextXAlignment.Left,
+			TextXAlignment = if p1.state.longText then Enum.TextXAlignment.Right else Enum.TextXAlignment.Left,
 			BackgroundTransparency = 1,
-			Text = p2.props.Text,
+			Text = p1.props.Text,
 			ClearTextOnFocus = false,
 			ClipsDescendants = true,
-			[roactModule.Change.Text] = p2.searchTextChanged
+			[roactModule.Change.Text] = p1.searchTextChanged
 		})
 	})
 end

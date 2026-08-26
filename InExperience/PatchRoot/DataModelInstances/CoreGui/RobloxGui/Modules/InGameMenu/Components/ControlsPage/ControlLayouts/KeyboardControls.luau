@@ -19,33 +19,33 @@ return function(_)
 			MinSize = Vector2.new(150, 0)
 		})
 	}
-	local var6 = 0
-	local var7 = 0
-	local var8 = 1
+	local var1 = 0
+	local var2 = 0
+	local var3 = 1
 	
 	for i, v in ipairs(controlsModule.keybinds) do
 		local title = v.title
-		var6 += 1
-		t[title .. "_header"] = roact.createElement(controlEntryHeaderModule, { title = title, LayoutOrder = var8 })
-		var8 += 1
+		var1 += 1
+		t[title .. "_header"] = roact.createElement(controlEntryHeaderModule, { title = title, LayoutOrder = var3 })
+		var3 += 1
 		
 		for i_1, v_1 in ipairs(v.controls) do
-			var7 += 1
+			var2 += 1
 			t[title .. "_" .. i_1] = roact.createElement(controlEntryModule, {
-				LayoutOrder = var8,
+				LayoutOrder = var3,
 				actionDescription = v_1.desc,
 				inputs = v_1.inputs,
 				isList = v_1.list,
 				hasDivider = i_1 ~= #v.controls
 			})
-			var8 += 1
+			var3 += 1
 		end
 	end
 	return roact.createElement(controlLayoutContainerModule, {
 		titleText = "CoreScripts.InGameMenu.Controls.KeyboardAndMouseTitle"
 	}, {
 		ScrollContent = roact.createElement(paddedScrollFrameModule, {
-			CanvasSize = UDim2.new(0, 0, 0, var6 * 45 + var7 * 50),
+			CanvasSize = UDim2.new(0, 0, 0, var1 * 45 + var2 * 50),
 			ScrollingDirection = Enum.ScrollingDirection.Y,
 			Size = UDim2.new(1, 0, 1, -130)
 		}, {

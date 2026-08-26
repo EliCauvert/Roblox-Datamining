@@ -10,60 +10,60 @@ local RODUX_KEY = require(userList.Common.Constants).RODUX_KEY
 local getDeepValue = require(parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
 local userPresence = require(parent.Foundation).Enums.UserPresence
 local fFlagUserListPresenceStoreMigrationModule = require(userList.Flags.FFlagUserListPresenceStoreMigration)
-local var4 = if fFlagUserListPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
-local var5 = if fFlagUserListPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceEnums.PresenceType else nil
+local var1 = if fFlagUserListPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local var2 = if fFlagUserListPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceEnums.PresenceType else nil
 local userProfileStoreDataFetchFix = game:DefineFastFlag("UserProfileStoreDataFetchFix", false)
 local userRowModule = require(script.Parent.UserRow)
 
-return function(p0)
-	-- upvalues: reactModule (ref), useEffect (ref), userProfileStore (ref), userProfileStoreDataFetchFix (ref), fFlagUserListPresenceStoreMigrationModule (ref), var4 (ref), useSelector (ref), getDeepValue (ref), RODUX_KEY (ref), presenceType (ref), var5 (ref), userPresence (ref), userRowModule (ref)
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.onActivated(p0.userId)
-	end, { p0.onActivated, p0.userId })
-	local var9, var10 = reactModule.useState("")
-	local var11, var12 = reactModule.useState("")
+return function(p1)
+	-- upvalues: reactModule (ref), useEffect (ref), userProfileStore (ref), userProfileStoreDataFetchFix (ref), fFlagUserListPresenceStoreMigrationModule (ref), var1 (ref), useSelector (ref), getDeepValue (ref), RODUX_KEY (ref), presenceType (ref), var2 (ref), userPresence (ref), userRowModule (ref)
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		p1.onActivated(p1.userId)
+	end, { p1.onActivated, p1.userId })
+	local var4, var5 = reactModule.useState("")
+	local var6, var7 = reactModule.useState("")
 	useEffect(function()
-		-- upvalues: userProfileStore (copy), p0 (ref), userProfileStoreDataFetchFix (copy), var10 (ref), var12 (ref)
-		userProfileStore.get().fetchNamesByUserIds({ tostring(p0.userId) }, function(p1)
-			-- upvalues: userProfileStoreDataFetchFix (copy), var10 (copy), var12 (copy)
+		-- upvalues: userProfileStore (copy), p1 (ref), userProfileStoreDataFetchFix (copy), var5 (ref), var7 (ref)
+		userProfileStore.get().fetchNamesByUserIds({ tostring(p1.userId) }, function(p2)
+			-- upvalues: userProfileStoreDataFetchFix (copy), var5 (copy), var7 (copy)
 			local data
 			if userProfileStoreDataFetchFix then
-				data = p1.data
+				data = p2.data
 				
-				if p1.status == "success" and #data > 0 and (data[1] and data[1].names) then
+				if p2.status == "success" and #data > 0 and (data[1] and data[1].names) then
 					local username = data[1].names.getUsername(false)
-					var10(data[1].names.getCombinedName(false))
-					var12(username)
+					var5(data[1].names.getCombinedName(false))
+					var7(username)
 					
 					return
 				end
 			else
-				data = p1.data
+				data = p2.data
 				
-				if p1.status == "success" then
+				if p2.status == "success" then
 					local username = data[1].names.getUsername(false)
-					var10(data[1].names.getCombinedName(false))
-					var12(username)
+					var5(data[1].names.getCombinedName(false))
+					var7(username)
 				end
 			end
 		end)
-	end, { p0.userId })
-	local var13 = if fFlagUserListPresenceStoreMigrationModule then var4(p0.userId) else useSelector(function(p2)
-		-- upvalues: getDeepValue (copy), RODUX_KEY (copy), p0 (ref)
-		return getDeepValue(p2, string.format("%s.Presence.byUserId.%s", RODUX_KEY, p0.userId)) or {}
+	end, { p1.userId })
+	local var8 = if fFlagUserListPresenceStoreMigrationModule then var1(p1.userId) else useSelector(function(p2)
+		-- upvalues: getDeepValue (copy), RODUX_KEY (copy), p1 (ref)
+		return getDeepValue(p2, string.format("%s.Presence.byUserId.%s", RODUX_KEY, p1.userId)) or {}
 	end)
 	
 	return reactModule.createElement(userRowModule, {
-		userId = p0.userId,
+		userId = p1.userId,
 		userPresence = if fFlagUserListPresenceStoreMigrationModule then reactModule.useMemo(function()
-			-- upvalues: var13 (ref), var5 (copy), userPresence (copy)
-			local userPresenceType = var13 and var13.userPresenceType
+			-- upvalues: var8 (ref), var2 (copy), userPresence (copy)
+			local userPresenceType = var8 and var8.userPresenceType
 			
-			return if if userPresenceType ~= var5.Online then if userPresenceType ~= var5.InStudio then userPresenceType == var5.InGame else true else true then userPresence.Active else userPresence.None
-		end, { var13 }) elseif if fFlagUserListPresenceStoreMigrationModule then nil elseif var13.userPresenceType ~= presenceType.Online then if var13.userPresenceType ~= presenceType.InStudio then var13.userPresenceType == presenceType.InGame else true else true then userPresence.Active else userPresence.None,
-		displayName = var9,
-		username = var11,
-		onActivated = var8
+			return if if userPresenceType ~= var2.Online then if userPresenceType ~= var2.InStudio then userPresenceType == var2.InGame else true else true then userPresence.Active else userPresence.None
+		end, { var8 }) elseif if fFlagUserListPresenceStoreMigrationModule then nil elseif var8.userPresenceType ~= presenceType.Online then if var8.userPresenceType ~= presenceType.InStudio then var8.userPresenceType == presenceType.InGame else true else true then userPresence.Active else userPresence.None,
+		displayName = var4,
+		username = var6,
+		onActivated = var3
 	})
 end

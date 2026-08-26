@@ -6,18 +6,18 @@ local roactChatAnalyticsModule = require(appChat.LegacyAnalytics.RoactChatAnalyt
 local filterForLinksWithPolicyModule = require(appChat.Components.ChatConversation.Utils.filterForLinksWithPolicy)
 local enumMessageTypesModule = require(appChat.Components.ChatConversation.EnumMessageTypes)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: analytics (ref), rbxAnalyticsService (ref), playersService (ref), roactChatAnalyticsModule (ref), enumMessageTypesModule (ref), filterForLinksWithPolicyModule (ref)
-	local var6 = p2 or roactChatAnalyticsModule.new(analytics.new(rbxAnalyticsService), tostring(playersService.LocalPlayer.UserId))
+	local var1 = p3 or roactChatAnalyticsModule.new(analytics.new(rbxAnalyticsService), tostring(playersService.LocalPlayer.UserId))
 	
-	if p0.messageType == enumMessageTypesModule.PlainText then
-		for i, v in pairs(filterForLinksWithPolicyModule(p0)) do
+	if p1.messageType == enumMessageTypesModule.PlainText then
+		for i, v in pairs(filterForLinksWithPolicyModule(p1)) do
 			if v.messageType == enumMessageTypesModule.Link then
-				var6:loadGameLinkCardInChat(p1, v.placeId)
+				var1:loadGameLinkCardInChat(p2, v.placeId)
 			end
 		end
 		return
-	elseif p0.messageType == enumMessageTypesModule.Link then
-		var6:loadGameLinkCardInChat(p1, p0.gameLink.universeId)
+	elseif p1.messageType == enumMessageTypesModule.Link then
+		var1:loadGameLinkCardInChat(p2, p1.gameLink.universeId)
 	end
 end

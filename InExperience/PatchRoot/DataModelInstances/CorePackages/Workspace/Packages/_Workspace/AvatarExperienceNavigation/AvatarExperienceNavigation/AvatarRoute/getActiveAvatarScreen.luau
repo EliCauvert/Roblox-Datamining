@@ -1,11 +1,11 @@
 ﻿local avatarScreenPropertiesModule = require(script:FindFirstAncestor("AvatarExperienceNavigation").AvatarRoute.AvatarScreenProperties)
 
-return function(p0)
+return function(p1)
 	-- upvalues: avatarScreenPropertiesModule (ref)
-	if not p0 then
+	if not p1 then
 		return nil
 	end
-	local var1 = p0
+	local var1 = p1
 	while var1 and var1.routes do
 		local index = var1.routes[var1.index]
 		

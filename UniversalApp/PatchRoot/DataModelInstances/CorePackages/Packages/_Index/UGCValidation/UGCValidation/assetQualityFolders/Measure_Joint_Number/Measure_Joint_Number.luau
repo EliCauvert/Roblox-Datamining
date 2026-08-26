@@ -7,23 +7,23 @@ return {
 		require(parent.validationSystem.ValidationEnums).UploadCategory.FULL_BODY
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQRiggingQuality),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: errorSourceStringsModule (ref)
-		local measureJointNumber = p1.aqsSummaryData.Measure_Joint_Number
+		local measureJointNumber = p2.aqsSummaryData.Measure_Joint_Number
 		
 		if measureJointNumber == nil then
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Joint_Number" })
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Joint_Number" })
 			
 			return
 		end
 		local fullBodyMesh = measureJointNumber.full_body_mesh
 		
 		if fullBodyMesh == nil or fullBodyMesh.score == nil then
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Joint_Number" })
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Joint_Number" })
 			
 			return
 		elseif tonumber(fullBodyMesh.score) ~= 100 then
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_JointNumber, {
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_JointNumber, {
 				score = tostring(math.floor(tonumber(fullBodyMesh.score) or 0)),
 				joint_number = fullBodyMesh.joint_number or "unknown",
 				left_hand_joint_number = fullBodyMesh.left_hand_joint_number or "unknown",

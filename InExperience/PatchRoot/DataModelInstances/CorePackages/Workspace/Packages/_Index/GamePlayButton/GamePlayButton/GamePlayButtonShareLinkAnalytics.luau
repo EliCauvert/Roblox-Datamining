@@ -7,13 +7,13 @@ local var1 = tModule.strictInterface({
 	universeId = tModule.string
 })
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: var1 (ref), mutedError (ref)
-	local var2, var3 = var1(p1)
+	local var2, var3 = var1(p2)
 	
 	if not var2 then
 		mutedError(var3)
 	end
-	p0.EventStream:setRBXEventStream("GamePlayButton", "shareLinkGameJoin", p1)
-	p0.Diag:reportCounter("shareLinkGameJoin", 1)
+	p1.EventStream:setRBXEventStream("GamePlayButton", "shareLinkGameJoin", p2)
+	p1.Diag:reportCounter("shareLinkGameJoin", 1)
 end

@@ -8,14 +8,14 @@ local getUniverseIdModule = require(inExperienceSideSheet.Utils.getUniverseId)
 
 return function()
 	-- upvalues: getUniverseIdModule (ref), reactModule (ref), signalsModule (ref), dataHydrationModule (ref), signalsReactModule (ref)
-	local var6 = getUniverseIdModule()
-	local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var6 (ref), dataHydrationModule (copy)
-		return signalsModule.createComputed(function(p0)
-			-- upvalues: var6 (copy), dataHydrationModule (copy)
-			return if var6 then dataHydrationModule.Game.getGameInfoStore(p0).getAndFetchGameInfo(var6).data(p0) else nil
+	local var1 = getUniverseIdModule()
+	local var2 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var1 (ref), dataHydrationModule (copy)
+		return signalsModule.createComputed(function(p1)
+			-- upvalues: var1 (copy), dataHydrationModule (copy)
+			return if var1 then dataHydrationModule.Game.getGameInfoStore(p1).getAndFetchGameInfo(var1).data(p1) else nil
 		end)
-	end, { var6 }))
+	end, { var1 }))
 	
-	return if var7 then var7.name else nil
+	return if var2 then var2.name else nil
 end

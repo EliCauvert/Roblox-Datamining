@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return (p0.Min + p0.Max) / 2
+﻿return function(p1)
+	return (p1.Min + p1.Max) / 2
 end

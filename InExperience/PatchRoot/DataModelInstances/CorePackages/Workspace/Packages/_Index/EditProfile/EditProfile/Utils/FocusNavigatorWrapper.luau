@@ -6,19 +6,19 @@ local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSu
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
 	return reactModule.createElement(focusNavigableSurfaceWrapper, {
 		isIsolated = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
 		customEventHandlers = {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p2)
-					-- upvalues: p0 (ref)
-					p0.onClose()
-					p2:cancel()
+				handler = inputHandlersModule.onRelease(function(p3)
+					-- upvalues: p1 (ref)
+					p1.onClose()
+					p3:cancel()
 				end)
 			}
 		}
-	}, p1)
+	}, p2)
 end

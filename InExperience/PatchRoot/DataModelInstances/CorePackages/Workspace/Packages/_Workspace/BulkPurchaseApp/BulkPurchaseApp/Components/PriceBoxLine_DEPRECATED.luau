@@ -7,29 +7,29 @@ local lineItemLayoutModule = require(script.Parent.LineItemLayout)
 local priceDEPRECATEDModule = require(script.Parent.Price_DEPRECATED)
 local priceBoxLineVariantEnumModule = require(bulkPurchaseApp.Enums.PriceBoxLineVariantEnum)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDesignTokens (ref), priceBoxLineVariantEnumModule (ref), reactModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref), priceDEPRECATEDModule (ref)
-	local var5 = useDesignTokens()
-	local var6 = if p0.variant == priceBoxLineVariantEnumModule.Danger then {
-		LineHeight = var5.Typography.BodyLarge.LineHeight,
-		Font = var5.Typography.TitleLarge.Font,
-		FontSize = var5.Typography.BodyLarge.FontSize,
-		LetterSpacing = var5.Typography.BodyLarge.LetterSpacing
-	} else var5.Typography.BodyLarge
-	local default = var5.Color.Content.Default
+	local var1 = useDesignTokens()
+	local var2 = if p1.variant == priceBoxLineVariantEnumModule.Danger then {
+		LineHeight = var1.Typography.BodyLarge.LineHeight,
+		Font = var1.Typography.TitleLarge.Font,
+		FontSize = var1.Typography.BodyLarge.FontSize,
+		LetterSpacing = var1.Typography.BodyLarge.LetterSpacing
+	} else var1.Typography.BodyLarge
+	local default = var1.Color.Content.Default
 	
-	if p0.variant == priceBoxLineVariantEnumModule.Highlight then
-		default = var5.Color.Content.Emphasis
-	elseif p0.variant == priceBoxLineVariantEnumModule.Danger then
-		default = var5.Color.System.Alert
+	if p1.variant == priceBoxLineVariantEnumModule.Highlight then
+		default = var1.Color.Content.Emphasis
+	elseif p1.variant == priceBoxLineVariantEnumModule.Danger then
+		default = var1.Color.System.Alert
 	end
 	return reactModule.createElement(lineItemLayoutModule, {
-		LayoutOrder = p0.LayoutOrder,
-		startSlot = reactModule.createElement(styledTextLabel, { fontStyle = var6, colorStyle = default, text = p0.text }),
+		LayoutOrder = p1.LayoutOrder,
+		startSlot = reactModule.createElement(styledTextLabel, { fontStyle = var2, colorStyle = default, text = p1.text }),
 		endSlot = reactModule.createElement(priceDEPRECATEDModule, {
 			colorStyle = default,
-			fontStyle = var6,
-			amount = p0.amount
+			fontStyle = var2,
+			amount = p1.amount
 		})
 	})
 end

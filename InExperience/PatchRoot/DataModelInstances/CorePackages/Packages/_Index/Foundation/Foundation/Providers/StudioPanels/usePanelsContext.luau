@@ -4,10 +4,10 @@ local _ = require(script.Parent.Types)
 
 return function()
 	-- upvalues: reactModule (ref), panelsContextModule (ref)
-	local var2 = reactModule.useContext(panelsContextModule)
+	local var1 = reactModule.useContext(panelsContextModule)
 	
-	if var2 == nil then
+	if var1 == nil then
 		error("usePanelsContext must be used within a PanelsContext")
 	end
-	return var2
+	return var1
 end

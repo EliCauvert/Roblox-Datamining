@@ -11,62 +11,62 @@ local useState = reactModule.useState
 local contentPostsThumbnailsInitialDelayTimeMs = game:DefineFastInt("ContentPostsThumbnailsInitialDelayTimeMs", 100)
 local contentPostsThumbnailsMaxRetries = game:DefineFastInt("ContentPostsThumbnailsMaxRetries", 10)
 
-local function makeThumbnailRequest(p0, p1, p2)
+local function makeThumbnailRequest(p1, p2, p3)
 	-- upvalues: capturesCommonNetworking (ref), assetTypeModule (ref), thumbnailStateModule (ref)
-	return p0(capturesCommonNetworking.GetThumbnailByAssetId.API({
-		assetId = p1,
+	return p1(capturesCommonNetworking.GetThumbnailByAssetId.API({
+		assetId = p2,
 		assetType = assetTypeModule.Screenshot,
-		size = p2
-	})):andThen(function(p3)
+		size = p3
+	})):andThen(function(p4)
 		-- upvalues: thumbnailStateModule (copy)
-		local var7 = p3.responseBody.data[1]
+		local var1 = p4.responseBody.data[1]
 		
-		return if var7.imageUrl and var7.imageUrl ~= "" and var7.state == thumbnailStateModule.Completed then var7.imageUrl else nil
+		return if var1.imageUrl and var1.imageUrl ~= "" and var1.state == thumbnailStateModule.Completed then var1.imageUrl else nil
 	end):catch(function(_)
 		return nil
 	end):await()
 end
 
-return function(p4, p5, p6)
+return function(p1, p2, p3)
 	-- upvalues: useDispatch (ref), useState (ref), useEffect (ref), contentPostsThumbnailsInitialDelayTimeMs (ref), contentPostsThumbnailsMaxRetries (ref), makeThumbnailRequest (ref)
-	local var8 = useDispatch()
-	local var9, var10 = useState("")
-	local var11, var12 = useState(false)
-	local text = tostring(p5) .. "x" .. tostring(p6)
+	local var1 = useDispatch()
+	local var2, var3 = useState("")
+	local var4, var5 = useState(false)
+	local text = tostring(p2) .. "x" .. tostring(p3)
 	useEffect(function()
-		-- upvalues: contentPostsThumbnailsInitialDelayTimeMs (copy), contentPostsThumbnailsMaxRetries (copy), var12 (ref), var10 (ref), p4 (ref), makeThumbnailRequest (copy), var8 (ref), text (ref)
-		local var14 = false
-		local var15 = contentPostsThumbnailsInitialDelayTimeMs
-		local var16 = contentPostsThumbnailsMaxRetries
-		var12(false)
-		var10("")
+		-- upvalues: contentPostsThumbnailsInitialDelayTimeMs (copy), contentPostsThumbnailsMaxRetries (copy), var5 (ref), var3 (ref), p1 (ref), makeThumbnailRequest (copy), var1 (ref), text (ref)
+		local var6 = false
+		local var7 = contentPostsThumbnailsInitialDelayTimeMs
+		local var8 = contentPostsThumbnailsMaxRetries
+		var5(false)
+		var3("")
 		
-		if p4 then
+		if p1 then
 			task.spawn(function()
-				-- upvalues: var14 (write), var16 (write), makeThumbnailRequest (copy), var8 (copy), p4 (copy), text (copy), var10 (copy), var12 (copy), var15 (write)
-				while not var14 and var16 > 0 do
-					local var17, var18 = makeThumbnailRequest(var8, p4, text)
+				-- upvalues: var6 (write), var8 (write), makeThumbnailRequest (copy), var1 (copy), p1 (copy), text (copy), var3 (copy), var5 (copy), var7 (write)
+				while not var6 and var8 > 0 do
+					local var9, var10 = makeThumbnailRequest(var1, p1, text)
 					
-					if var14 then break end
-					if not var17 or not var18 then
-						task.wait(var15 / 1000)
-						var15 *= 2
-						var16 -= 1
+					if var6 then break end
+					if not var9 or not var10 then
+						task.wait(var7 / 1000)
+						var7 *= 2
+						var8 -= 1
 						continue
 					end
-					var10(var18)
-					var12(true)
+					var3(var10)
+					var5(true)
 					
 					return
 				end
 			end)
 			
 			return function()
-				-- upvalues: var14 (write)
-				var14 = true
+				-- upvalues: var6 (write)
+				var6 = true
 			end
 		end
-	end, { p4, text })
+	end, { p1, text })
 	
-	return var9, var11
+	return var2, var4
 end

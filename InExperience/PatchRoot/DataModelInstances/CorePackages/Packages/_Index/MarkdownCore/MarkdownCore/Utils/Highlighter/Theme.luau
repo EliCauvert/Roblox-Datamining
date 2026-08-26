@@ -14,13 +14,13 @@ function t.setColors(value)
 	end
 end
 
-function t.getColoredRichText(p0, p1)
+function t.getColoredRichText(p1, p2)
 	return "<font color=\"#" .. p0:ToHex() .. "\">" .. p1 .. "</font>"
 end
 
-function t.getColor(p2)
+function t.getColor(p1)
 	-- upvalues: t (ref)
-	return t.tokenColors[p2]
+	return t.tokenColors[p1]
 end
 
 t.setColors(defaultTokenColorsModule)

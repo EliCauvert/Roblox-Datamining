@@ -5,55 +5,55 @@ local luauPolyfillModule = require(packages.LuauPolyfill)
 local setTimeout = luauPolyfillModule.setTimeout
 local clearTimeout = luauPolyfillModule.clearTimeout
 
-local function _(p0)
-	return if p0.UserInputType ~= Enum.UserInputType.MouseButton1 then p0.UserInputType == Enum.UserInputType.Touch else true
+local function _(p1)
+	return if p1.UserInputType ~= Enum.UserInputType.MouseButton1 then p1.UserInputType == Enum.UserInputType.Touch else true
 end
 
 return function(p1)
 	-- upvalues: reactModule (ref), clearTimeout (ref), setTimeout (ref), userInputService (ref)
+	local var1, var2 = reactModule.useState("")
 	local var3, var4 = reactModule.useState("")
-	local var5, var6 = reactModule.useState("")
-	local var7, var8 = reactModule.useState(false)
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useRef(nil)
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), clearTimeout (copy), var9 (ref)
-		if var10.current then
-			clearTimeout(var10.current)
+	local var5, var6 = reactModule.useState(false)
+	local var7 = reactModule.useRef(nil)
+	local var8 = reactModule.useRef(nil)
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var8 (ref), clearTimeout (copy), var7 (ref)
+		if var8.current then
+			clearTimeout(var8.current)
 		end
-		if var9.current then
-			var9.current:Disconnect()
-			var9.current = nil
+		if var7.current then
+			var7.current:Disconnect()
+			var7.current = nil
 		end
-	end, { var10, var9 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), var8 (ref), var10 (ref), setTimeout (copy), p1 (ref), var9 (ref), userInputService (copy)
-		var11()
-		var8(true)
-		var10.current = setTimeout(function()
-			-- upvalues: var11 (copy), var8 (copy)
-			var11()
-			var8(false)
+	end, { var8, var7 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var9 (ref), var6 (ref), var8 (ref), setTimeout (copy), p1 (ref), var7 (ref), userInputService (copy)
+		var9()
+		var6(true)
+		var8.current = setTimeout(function()
+			-- upvalues: var9 (copy), var6 (copy)
+			var9()
+			var6(false)
 		end, p1)
-		var9.current = userInputService.InputBegan:Connect(function(p2, _)
-			-- upvalues: var11 (copy), var8 (copy)
+		var7.current = userInputService.InputBegan:Connect(function(p2, _)
+			-- upvalues: var9 (copy), var6 (copy)
 			if if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true then
-				var11()
-				var8(false)
+				var9()
+				var6(false)
 				
 				return
 			end
 		end)
-	end, { var10, var9 })
+	end, { var8, var7 })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref)
-		return var11
+		-- upvalues: var9 (ref)
+		return var9
 	end, {})
 	
-	return var3, var5, var7, reactModule.useCallback(function(p3, p4)
-		-- upvalues: var4 (ref), var6 (ref), var12 (ref)
+	return var1, var3, var5, reactModule.useCallback(function(p2, p3)
+		-- upvalues: var2 (ref), var4 (ref), var10 (ref)
+		var2(p2)
 		var4(p3)
-		var6(p4)
-		var12()
+		var10()
 	end, {})
 end

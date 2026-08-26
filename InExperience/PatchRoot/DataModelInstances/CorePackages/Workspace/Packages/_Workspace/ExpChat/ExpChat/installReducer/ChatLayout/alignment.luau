@@ -11,42 +11,42 @@ return roduxModule.createReducer({
 	AnchorPoint = Vector2.new(0, 0),
 	UIListLayoutVerticalAlignment = Enum.VerticalAlignment.Top
 }, {
-	[require(actions.ChatLayoutHorizontalAlignmentChanged).name] = function(p0, p1)
+	[require(actions.ChatLayoutHorizontalAlignmentChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		local position = p0.Position
-		local anchorPoint = p0.AnchorPoint
+		local position = p1.Position
+		local anchorPoint = p1.AnchorPoint
 		
-		if p1.value == Enum.HorizontalAlignment.Left then
+		if p2.value == Enum.HorizontalAlignment.Left then
 			position = UDim2.new(0, 8, position.Y.Scale, position.Y.Offset)
 			anchorPoint = Vector2.new(0, anchorPoint.Y)
-		elseif p1.value == Enum.HorizontalAlignment.Center then
+		elseif p2.value == Enum.HorizontalAlignment.Center then
 			position = UDim2.new(0.5, 0, position.Y.Scale, position.Y.Offset)
 			anchorPoint = Vector2.new(0.5, anchorPoint.Y)
-		elseif p1.value == Enum.HorizontalAlignment.Right then
+		elseif p2.value == Enum.HorizontalAlignment.Right then
 			position = UDim2.new(1, -8, position.Y.Scale, position.Y.Offset)
 			anchorPoint = Vector2.new(1, anchorPoint.Y)
 		end
-		return dictionary.join(p0, { Position = position, AnchorPoint = anchorPoint })
+		return dictionary.join(p1, { Position = position, AnchorPoint = anchorPoint })
 	end,
-	[require(actions.ChatLayoutVerticalAlignmentChanged).name] = function(p2, p3)
+	[require(actions.ChatLayoutVerticalAlignmentChanged).name] = function(p1, p2)
 		-- upvalues: y (ref), dictionary (ref)
-		local position = p2.Position
-		local anchorPoint = p2.AnchorPoint
+		local position = p1.Position
+		local anchorPoint = p1.AnchorPoint
 		
-		if p3.value == Enum.VerticalAlignment.Top then
+		if p2.value == Enum.VerticalAlignment.Top then
 			position = UDim2.new(position.X.Scale, position.X.Offset, 0, 4)
 			anchorPoint = Vector2.new(anchorPoint.X, 0)
-		elseif p3.value == Enum.VerticalAlignment.Center then
+		elseif p2.value == Enum.VerticalAlignment.Center then
 			position = UDim2.new(position.X.Scale, position.X.Offset, 0.5, -y)
 			anchorPoint = Vector2.new(anchorPoint.X, 0.5)
-		elseif p3.value == Enum.VerticalAlignment.Bottom then
+		elseif p2.value == Enum.VerticalAlignment.Bottom then
 			position = UDim2.new(position.X.Scale, position.X.Offset, 1, -4)
 			anchorPoint = Vector2.new(anchorPoint.X, 1)
 		end
-		return dictionary.join(p2, {
+		return dictionary.join(p1, {
 			Position = position,
 			AnchorPoint = anchorPoint,
-			UIListLayoutVerticalAlignment = p3.value
+			UIListLayoutVerticalAlignment = p2.value
 		})
 	end
 })

@@ -21,134 +21,134 @@ local valueCellWidth = constantsModule.ScriptProfilerFormatting.ValueCellWidth
 local cellPadding = constantsModule.ScriptProfilerFormatting.CellPadding
 local valuePadding = constantsModule.ScriptProfilerFormatting.ValuePadding
 local profilerViewEntry = roactModule.PureComponent:extend("ProfilerViewEntry")
-local var10 = roactRoduxModule.UNSTABLE_connect2(nil, function(p0)
+local var1 = roactRoduxModule.UNSTABLE_connect2(nil, function(p1)
 	-- upvalues: setScriptProfilerRootModule (ref)
 	return {
-		dispatchSetScriptProfilerRoot = function(value, p1, p2)
-			-- upvalues: p0 (ref), setScriptProfilerRootModule (copy)
-			p0(setScriptProfilerRootModule(value, p1, p2))
+		dispatchSetScriptProfilerRoot = function(value, p2, p3)
+			-- upvalues: p1 (ref), setScriptProfilerRootModule (copy)
+			p1(setScriptProfilerRootModule(value, p2, p3))
 		end
 	}
 end)(profilerViewEntry)
 
-local function BorderedCellLabel(p3)
+local function BorderedCellLabel(p1)
 	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
 	return roactModule.createFragment({
-		Label = roactModule.createElement(cellLabelModule, { text = p3.text, size = p3.size, pos = p3.pos }),
+		Label = roactModule.createElement(cellLabelModule, { text = p1.text, size = p1.size, pos = p1.pos }),
 		LeftBorder = roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(UDim.new(0, lineWidth), p3.size.Y),
-			Position = UDim2.fromOffset(-valuePadding, 0) + p3.pos,
+			Size = UDim2.new(UDim.new(0, lineWidth), p1.size.Y),
+			Position = UDim2.fromOffset(-valuePadding, 0) + p1.pos,
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = lineColor
 		})
 	})
 end
 
-local function _(p4)
-	local depth = p4.depth
-	local functionId = p4.functionId
-	local _ = p4.data.Functions[functionId]
-	local var12 = if depth == 0 and functionId == 0 then "<root>" else "<anonymous>"
-	local nodeName = p4.nodeName
+local function _(p1)
+	local depth = p1.depth
+	local functionId = p1.functionId
+	local _ = p1.data.Functions[functionId]
+	local var2 = if depth == 0 and functionId == 0 then "<root>" else "<anonymous>"
+	local nodeName = p1.nodeName
 	
 	if nodeName and #nodeName ~= 0 then
 		return nodeName
 	end
-	nodeName = var12
+	nodeName = var2
 	
 	return nodeName
 end
 
-function profilerViewEntry.init(p5)
-	p5.state = {
+function profilerViewEntry.init(p1)
+	p1.state = {
 		showTooltip = false,
-		expanded = if p5.props.depth ~= 0 then p5.props.expandedNodes[p5.props.nodeId] else true,
+		expanded = if p1.props.depth ~= 0 then p1.props.expandedNodes[p1.props.nodeId] else true,
 		tooltipPos = UDim2.fromOffset(0, 0)
 	}
 	
 	function p5.onButtonPress()
-		-- upvalues: p5 (ref)
-		p5.props.expandedNodes[p5.props.nodeId] = not p5.state.expanded
-		p5:setState(function(_)
-			-- upvalues: p5 (copy)
-			return { expanded = not p5.state.expanded }
+		-- upvalues: p1 (ref)
+		p1.props.expandedNodes[p1.props.nodeId] = not p1.state.expanded
+		p1:setState(function(_)
+			-- upvalues: p1 (copy)
+			return { expanded = not p1.state.expanded }
 		end)
 	end
 	
-	function p5.onMouseEnter(_, p6, p7)
-		-- upvalues: p5 (ref)
-		p5:setState({
+	function p5.onMouseEnter(_, p2, p3)
+		-- upvalues: p1 (ref)
+		p1:setState({
 			showTooltip = true,
-			tooltipPos = UDim2.fromOffset(p6, p7)
+			tooltipPos = UDim2.fromOffset(p2, p3)
 		})
 	end
 	
-	function p5.onMouseMove(_, p8, p9)
-		-- upvalues: p5 (ref)
-		p5:setState({
+	function p5.onMouseMove(_, p2, p3)
+		-- upvalues: p1 (ref)
+		p1:setState({
 			showTooltip = true,
-			tooltipPos = UDim2.fromOffset(p8, p9)
+			tooltipPos = UDim2.fromOffset(p2, p3)
 		})
 	end
 	
 	function p5.onMouseLeave()
-		-- upvalues: p5 (ref)
-		p5:setState({ showTooltip = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ showTooltip = false })
 	end
 	
 	function p5.onMouse2Click()
-		-- upvalues: p5 (ref)
-		local dispatchSetScriptProfilerRoot = p5.props.dispatchSetScriptProfilerRoot
-		local nodeId = p5.props.nodeId
-		local functionId = p5.props.functionId
-		local props = p5.props
+		-- upvalues: p1 (ref)
+		local dispatchSetScriptProfilerRoot = p1.props.dispatchSetScriptProfilerRoot
+		local nodeId = p1.props.nodeId
+		local functionId = p1.props.functionId
+		local props = p1.props
 		local depth = props.depth
 		local functionId_1 = props.functionId
 		local _ = props.data.Functions[functionId_1]
-		local var13 = if depth == 0 and functionId_1 == 0 then "<root>" else "<anonymous>"
+		local var2 = if depth == 0 and functionId_1 == 0 then "<root>" else "<anonymous>"
 		local nodeName = props.nodeName
 		
 		if not nodeName or #nodeName == 0 then
-			nodeName = var13
+			nodeName = var2
 		end
 		dispatchSetScriptProfilerRoot(nodeId, functionId, nodeName)
 	end
 end
 
-function profilerViewEntry.renderChildren(p10, p11)
-	-- upvalues: getDurations (ref), getPluginFlag (ref), roactModule (ref), var10 (ref)
+function profilerViewEntry.renderChildren(p1, p2)
+	-- upvalues: getDurations (ref), getPluginFlag (ref), roactModule (ref), var1 (ref)
 	local t = {}
 	
-	if p10.state.expanded then
-		local var17
-		local percentageRatio = p10.props.percentageRatio
-		local var15 = getDurations(p10.props.data, p10.props.nodeId)
-		local var16 = p10.props.depth + 1
-		local average = p10.props.average
-		local searchTerm = p10.props.searchTerm
-		local searchFilter = p10.props.searchFilter
-		local showPlugins = p10.props.showPlugins
-		local showGC = p10.props.showGC
-		local gcNodeOffsets = p10.props.gcNodeOffsets
-		local expandedNodes = p10.props.expandedNodes
-		local data = p10.props.data
+	if p1.state.expanded then
+		local var2
+		local percentageRatio = p1.props.percentageRatio
+		local var3 = getDurations(p1.props.data, p1.props.nodeId)
+		local var4 = p1.props.depth + 1
+		local average = p1.props.average
+		local searchTerm = p1.props.searchTerm
+		local searchFilter = p1.props.searchFilter
+		local showPlugins = p1.props.showPlugins
+		local showGC = p1.props.showGC
+		local gcNodeOffsets = p1.props.gcNodeOffsets
+		local expandedNodes = p1.props.expandedNodes
+		local data = p1.props.data
 		local GCFuncId = data.GCFuncId
 		
-		if p11 then
-			for i, v in pairs(p11) do
+		if p2 then
+			for i, v in pairs(p2) do
 				if (#searchFilter <= 0 or searchFilter[v]) and (showGC or i ~= GCFuncId) then
-					var17 = data.Nodes[v]
-					local var18 = data.Functions[i]
+					var2 = data.Nodes[v]
+					local var5 = data.Functions[i]
 					
-					if showPlugins or not getPluginFlag(data, var18) then
-						t[i] = roactModule.createElement(var10, {
-							layoutOrder = (var15 - getDurations(data, v)) * 1000000,
-							depth = var16,
+					if showPlugins or not getPluginFlag(data, var5) then
+						t[i] = roactModule.createElement(var1, {
+							layoutOrder = (var3 - getDurations(data, v)) * 1000000,
+							depth = var4,
 							data = data,
 							nodeId = v,
 							functionId = i,
-							nodeName = var18.Name,
+							nodeName = var5.Name,
 							average = average,
 							percentageRatio = percentageRatio,
 							searchTerm = searchTerm,
@@ -162,27 +162,27 @@ function profilerViewEntry.renderChildren(p10, p11)
 				end
 			end
 			return t
-		elseif p10.props.nodeId == 0 then
-			assert(p11 == nil)
+		elseif p1.props.nodeId == 0 then
+			assert(p2 == nil)
 			
 			for i, v in data.Categories do
 				if #searchFilter <= 0 or searchFilter[v.NodeId] then
-					var17 = data.Nodes[v.NodeId]
-					local var19 = getDurations(data, v.NodeId)
-					local var20 = p10.props.pluginOffsets[i]
-					local var21 = p10.props.pluginGCOffsets[i]
+					var2 = data.Nodes[v.NodeId]
+					local var6 = getDurations(data, v.NodeId)
+					local var7 = p1.props.pluginOffsets[i]
+					local var8 = p1.props.pluginGCOffsets[i]
 					
 					if not showPlugins then
-						var19 -= var20
+						var6 -= var7
 						
 						if showGC then
-							var19 -= var21
+							var6 -= var8
 						end
 					end
-					t[i] = roactModule.createElement(var10, {
+					t[i] = roactModule.createElement(var1, {
 						functionId = nil,
-						layoutOrder = (var15 - var19) * 1000000,
-						depth = var16,
+						layoutOrder = (var3 - var6) * 1000000,
+						depth = var4,
 						data = data,
 						nodeId = v.NodeId,
 						nodeName = v.Name,
@@ -191,8 +191,8 @@ function profilerViewEntry.renderChildren(p10, p11)
 						searchTerm = searchTerm,
 						searchFilter = searchFilter,
 						showPlugins = showPlugins,
-						pluginOffset = var20,
-						pluginGCOffset = var21,
+						pluginOffset = var7,
+						pluginGCOffset = var8,
 						showGC = showGC,
 						gcNodeOffsets = gcNodeOffsets,
 						expandedNodes = expandedNodes
@@ -204,13 +204,13 @@ function profilerViewEntry.renderChildren(p10, p11)
 	return t
 end
 
-function profilerViewEntry.renderValues(_, p12)
+function profilerViewEntry.renderValues(_, p3)
 	-- upvalues: valueCellWidth (ref), valuePadding (ref), entryFrameHeight (ref), roactModule (ref), BorderedCellLabel (ref)
 	local t = {}
 	local uDim2 = UDim2.new(valueCellWidth, -valuePadding, 0, entryFrameHeight)
-	local uDim2_1 = UDim2.new(1 - valueCellWidth * #p12, valuePadding, 0, 0)
+	local uDim2_1 = UDim2.new(1 - valueCellWidth * #p3, valuePadding, 0, 0)
 	
-	for i, v in ipairs(p12) do
+	for i, v in ipairs(p3) do
 		t[tostring(i)] = roactModule.createElement(BorderedCellLabel, {
 			text = tostring(v),
 			size = uDim2,
@@ -220,80 +220,80 @@ function profilerViewEntry.renderValues(_, p12)
 	return t
 end
 
-function profilerViewEntry.render(p13)
+function profilerViewEntry.render(p4)
 	-- upvalues: entryFrameHeight (ref), depthIndent (ref), getDurations (ref), standardizeChildren (ref), profilerUtilModule (ref), getNativeFlag (ref), getPluginFlag (ref), valueCellWidth (ref), roactModule (ref), tooltipModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
-	local props = p13.props
+	local props = p4.props
 	local size = props.size or UDim2.new(1, 0, 0, entryFrameHeight)
 	local depth = props.depth
 	local layoutOrder = props.layoutOrder or 0
-	local var27 = depth * depthIndent
+	local var9 = depth * depthIndent
 	local percentageRatio = props.percentageRatio
 	local data = props.data
 	local showPlugins = props.showPlugins
 	local showGC = props.showGC
 	local nodeId = props.nodeId
 	local functionId = data.Functions[props.functionId]
-	local var28 = data.Nodes[nodeId]
-	local var29, var30 = getDurations(data, nodeId)
-	var29 /= p13.props.average
-	var30 /= p13.props.average
-	local var31 = standardizeChildren(data, var28)
+	local var10 = data.Nodes[nodeId]
+	local var11, var12 = getDurations(data, nodeId)
+	var11 /= p4.props.average
+	var12 /= p4.props.average
+	local var13 = standardizeChildren(data, var10)
 	
 	if not showPlugins then
 		if nodeId == 0 then
-			var29 -= p13.props.pluginOffsets.Total or 0
+			var11 -= p4.props.pluginOffsets.Total or 0
 			
 			if showGC then
-				var29 -= p13.props.pluginGCOffsets.Total or 0
+				var11 -= p4.props.pluginGCOffsets.Total or 0
 			end
 		else
-			var29 -= p13.props.pluginOffset or 0
+			var11 -= p4.props.pluginOffset or 0
 			
 			if showGC then
-				var29 -= p13.props.pluginGCOffset or 0
+				var11 -= p4.props.pluginGCOffset or 0
 			end
 		end
 	end
 	if not showGC then
 		local gcNodeOffsets = props.gcNodeOffsets
-		var29 = if nodeId == 0 then var29 - (gcNodeOffsets.Total or 0) else var29 - (gcNodeOffsets[nodeId] or 0)
+		var11 = if nodeId == 0 then var11 - (gcNodeOffsets.Total or 0) else var11 - (gcNodeOffsets[nodeId] or 0)
 	end
-	local var32, var33
+	local var14, var15
 	local _ = nil
 	local _ = nil
 	
 	if not percentageRatio then
-		var32 = string.format("%.3f", var29 * 1000)
-		var33 = string.format("%.3f", var30 * 1000)
+		var14 = string.format("%.3f", var11 * 1000)
+		var15 = string.format("%.3f", var12 * 1000)
 	elseif percentageRatio == 0 then
-		var32 = "N/A"
-		var33 = "N/A"
+		var14 = "N/A"
+		var15 = "N/A"
 	else
-		var32 = string.format("%.3f%%", var29 / percentageRatio)
-		var33 = string.format("%.3f%%", var30 / percentageRatio)
+		var14 = string.format("%.3f%%", var11 / percentageRatio)
+		var15 = string.format("%.3f%%", var12 / percentageRatio)
 	end
-	local list = { var32, var33 }
+	local list = { var14, var15 }
 	local depth_1 = props.depth
 	local functionId_1 = props.functionId
 	local _ = props.data.Functions[functionId_1]
-	local var35 = if depth_1 == 0 and functionId_1 == 0 then "<root>" else "<anonymous>"
+	local var16 = if depth_1 == 0 and functionId_1 == 0 then "<root>" else "<anonymous>"
 	local nodeName = props.nodeName
 	
 	if not nodeName or #nodeName == 0 then
-		nodeName = var35
+		nodeName = var16
 	end
-	local var36 = nodeName
-	depth_1 = profilerUtilModule.getSourceLocationString(data, functionId, var36)
-	local var37 = getNativeFlag(data, functionId)
+	local var17 = nodeName
+	depth_1 = profilerUtilModule.getSourceLocationString(data, functionId, var17)
+	local var18 = getNativeFlag(data, functionId)
 	
 	if getPluginFlag(data, functionId) then
-		var36 ..= " <plugin>"
+		var17 ..= " <plugin>"
 	end
-	if var37 then
-		var36 ..= " <native>"
+	if var18 then
+		var17 ..= " <native>"
 	end
-	local var42
-	local uDim = UDim.new(1 - valueCellWidth * #list, -var27)
+	local var19
+	local uDim = UDim.new(1 - valueCellWidth * #list, -var9)
 	local createElement = roactModule.createElement
 	nodeName = "Frame"
 	local t = {
@@ -303,7 +303,7 @@ function profilerViewEntry.render(p13)
 		AutomaticSize = Enum.AutomaticSize.Y
 	}
 	local t_1 = {
-		tooltip = if p13.state.showTooltip then roactModule.createElement(tooltipModule, { text = depth_1, pos = p13.state.tooltipPos }) else nil,
+		tooltip = if p4.state.showTooltip then roactModule.createElement(tooltipModule, { text = depth_1, pos = p4.state.tooltipPos }) else nil,
 		layout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
@@ -314,30 +314,30 @@ function profilerViewEntry.render(p13)
 	local t_2 = {
 		layoutOrder = -1,
 		size = UDim2.new(1, 0, 0, entryFrameHeight),
-		inset = var27,
-		isExpanded = p13.state.expanded
+		inset = var9,
+		isExpanded = p4.state.expanded
 	}
 	
-	if var31 then
-		var42 = if next(var31) == nil then depth == 0 else true
+	if var13 then
+		var19 = if next(var13) == nil then depth == 0 else true
 	end
-	t_2.isExpandable = var42
-	t_2.onButtonPress = p13.onButtonPress
-	t_2.onMouseEnter = p13.onMouseEnter
-	t_2.onMouseLeave = p13.onMouseLeave
-	t_2.onMouseMove = p13.onMouseMove
-	t_2.onMouse2Click = p13.onMouse2Click
+	t_2.isExpandable = var19
+	t_2.onButtonPress = p4.onButtonPress
+	t_2.onMouseEnter = p4.onMouseEnter
+	t_2.onMouseLeave = p4.onMouseLeave
+	t_2.onMouseMove = p4.onMouseMove
+	t_2.onMouse2Click = p4.onMouse2Click
 	t_1.button = createElement_1(bannerButtonModule, t_2, {
 		name = roactModule.createElement(cellLabelModule, {
-			text = var36,
+			text = var17,
 			size = UDim2.new(uDim, UDim.new(1, 0)),
-			pos = UDim2.new(0, cellPadding + var27, 0, 0)
+			pos = UDim2.new(0, cellPadding + var9, 0, 0)
 		}),
-		values = roactModule.createFragment(p13:renderValues(list))
+		values = roactModule.createFragment(p4:renderValues(list))
 	})
-	t_1.children = roactModule.createFragment(p13:renderChildren(var31))
+	t_1.children = roactModule.createFragment(p4:renderChildren(var13))
 	
 	return createElement(nodeName, t, t_1)
 end
 
-return var10
+return var1

@@ -7,12 +7,12 @@ local _ = require(avatarExperienceRodux.Types.RoduxTypes)
 local fFlagAXBackgroundsPersistence = require(parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
 
 return roduxModule.createReducer({}, {
-	[require(avatarExperienceRodux.Actions.ApplyProfileConfiguration).name] = function(p0, p1)
+	[require(avatarExperienceRodux.Actions.ApplyProfileConfiguration).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, p1.profileConfiguration)
+		return cryoModule.Dictionary.join(p1, p2.profileConfiguration)
 	end,
-	[avatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p2, p3)
+	[avatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p1, p2)
 		-- upvalues: fFlagAXBackgroundsPersistence (ref)
-		return if fFlagAXBackgroundsPersistence and p3.equipped then { BackgroundAssetId = p3.equipped.BackgroundAssetId } else p2
+		return if fFlagAXBackgroundsPersistence and p2.equipped then { BackgroundAssetId = p2.equipped.BackgroundAssetId } else p1
 	end
 })

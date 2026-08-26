@@ -8,42 +8,42 @@ local function getDefaultCycles()
 	return { nextRef = 1, visited = {}, refs = {}, omit = {} }
 end
 
-local function cycles(p0, p1, p2)
+local function cycles(p1, p2, p3)
 	-- upvalues: getDefaultCycles (ref), keysModule (ref), sort (ref), includesModule (ref), cycles (ref)
-	if p1 == -1 then
-		return p2
-	elseif typeof(p0) ~= "table" then
+	if p2 == -1 then
+		return p3
+	elseif typeof(p1) ~= "table" then
 		return nil
 	end
-	p2 = p2 or getDefaultCycles()
+	p3 = p3 or getDefaultCycles()
 	
-	if p2.visited[p0] then
-		if not p2.refs[p0] then
-			p2.refs[p0] = p2.nextRef
-			p2.nextRef += 1
+	if p3.visited[p1] then
+		if not p3.refs[p1] then
+			p3.refs[p1] = p3.nextRef
+			p3.nextRef += 1
 		end
 		return nil
 	else
-		p2.visited[p0] = true
-		local var5 = keysModule(p0)
-		sort(var5, function(p3, p4)
-			return if typeof(p3) == "number" and typeof(p4) == "number" then p3 < p4 else tostring(p3) < tostring(p4)
+		p3.visited[p1] = true
+		local var1 = keysModule(p1)
+		sort(var1, function(p4, p5)
+			return if typeof(p4) == "number" and typeof(p5) == "number" then p4 < p5 else tostring(p4) < tostring(p5)
 		end)
 		
-		for i, v in ipairs(var5) do
-			local var6 = p0[v]
+		for i, v in ipairs(var1) do
+			local var2 = p1[v]
 			
-			if not includesModule(p2.omit, v) then
-				if p1 then
-					cycles(v, p1 - 1, p2)
-					cycles(var6, p1 - 1, p2)
+			if not includesModule(p3.omit, v) then
+				if p2 then
+					cycles(v, p2 - 1, p3)
+					cycles(var2, p2 - 1, p3)
 				else
-					cycles(v, nil, p2)
-					cycles(var6, nil, p2)
+					cycles(v, nil, p3)
+					cycles(var2, nil, p3)
 				end
 			end
 		end
-		return p2
+		return p3
 	end
 end
 

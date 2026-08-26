@@ -6,16 +6,16 @@ local function _()
 end
 
 return {
-	mutePlayer = function(p0)
+	mutePlayer = function(p1)
 		-- upvalues: getMutedUsersStoreModule (ref)
-		if p0.userId then
-			getMutedUsersStoreModule(false).muteGlobalUserId(p0.userId)
+		if p1.userId then
+			getMutedUsersStoreModule(false).muteGlobalUserId(p1.userId)
 		end
-		if p0.username then
-			getMutedUsersStoreModule(false).muteGlobalUsername(p0.username)
+		if p1.username then
+			getMutedUsersStoreModule(false).muteGlobalUsername(p1.username)
 		end
-		if p0.displayName then
-			getMutedUsersStoreModule(false).muteGlobalDisplayName(p0.displayName)
+		if p1.displayName then
+			getMutedUsersStoreModule(false).muteGlobalDisplayName(p1.displayName)
 		end
 	end,
 	unmutePlayer = function(p1)
@@ -30,17 +30,17 @@ return {
 			getMutedUsersStoreModule(false).unmuteGlobalDisplayName(p1.displayName)
 		end
 	end,
-	isUserIdMuted = function(p2)
+	isUserIdMuted = function(p1)
 		-- upvalues: getMutedUsersStoreModule (ref)
-		return getMutedUsersStoreModule(false).isUserIdMuted(p2)
+		return getMutedUsersStoreModule(false).isUserIdMuted(p1)
 	end,
-	isUsernameMuted = function(p3)
+	isUsernameMuted = function(p1)
 		-- upvalues: getMutedUsersStoreModule (ref)
-		return getMutedUsersStoreModule(false).isUsernameMuted(p3)
+		return getMutedUsersStoreModule(false).isUsernameMuted(p1)
 	end,
-	isDisplayNameMuted = function(p4)
+	isDisplayNameMuted = function(p1)
 		-- upvalues: getMutedUsersStoreModule (ref)
-		return getMutedUsersStoreModule(false).isDisplayNameMuted(p4)
+		return getMutedUsersStoreModule(false).isDisplayNameMuted(p1)
 	end,
 	getMutedUserIds = function()
 		-- upvalues: getMutedUsersStoreModule (ref)

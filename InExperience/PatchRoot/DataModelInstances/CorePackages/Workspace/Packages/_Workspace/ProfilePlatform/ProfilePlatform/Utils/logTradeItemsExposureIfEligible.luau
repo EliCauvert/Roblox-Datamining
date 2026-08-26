@@ -2,13 +2,13 @@
 local fFlagProfileTradeItemsExposureLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsExposureLogging)
 local fStringProfileTradeItemsIxpLayerModule = require(profilePlatform.Flags.FStringProfileTradeItemsIxpLayer)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagProfileTradeItemsExposureLoggingModule (ref), fStringProfileTradeItemsIxpLayerModule (ref)
 	if not fFlagProfileTradeItemsExposureLoggingModule then return end
-	if tostring(p0.profileId) == tostring(p0.localUserId) then return end
-	if not p0.localHasPaidTradingAccess or not p0.otherHasPaidTradingAccess then return end
+	if tostring(p1.profileId) == tostring(p1.localUserId) then return end
+	if not p1.localHasPaidTradingAccess or not p1.otherHasPaidTradingAccess then return end
 	if fStringProfileTradeItemsIxpLayerModule == "" then return end
-	local ixpService = p0.ixpService
+	local ixpService = p1.ixpService
 	
 	if ixpService == nil then
 		if not game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then return end

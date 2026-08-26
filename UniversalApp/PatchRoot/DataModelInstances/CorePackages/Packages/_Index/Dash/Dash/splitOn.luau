@@ -1,27 +1,27 @@
 ﻿local insert = table.insert
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: insert (ref)
 	local t = {}
 	local t_1 = {}
-	local var2 = 1
+	local var1 = 1
 	
-	if p1 then
-		local var3, var4 = p0:find(p1, var2)
-		while var3 do
-			insert(t_1, p0:sub(var3, var4))
-			insert(t, p0:sub(var2, var3 - 1))
-			var2 = var4 + 1
-			local var5, var6 = p0:find(p1, var2)
+	if p2 then
+		local var2, var3 = p1:find(p2, var1)
+		while var2 do
+			insert(t_1, p1:sub(var2, var3))
+			insert(t, p1:sub(var1, var2 - 1))
+			var1 = var3 + 1
+			local var4, var5 = p1:find(p2, var1)
+			var2 = var4
 			var3 = var5
-			var4 = var6
 		end
-		insert(t, p0:sub(var2))
+		insert(t, p1:sub(var1))
 		
 		return t, t_1
 	else
-		for i = 1, #p0 do
-			insert(t, p0:sub(i, i))
+		for i = 1, #p1 do
+			insert(t, p1:sub(i, i))
 		end
 		return t
 	end

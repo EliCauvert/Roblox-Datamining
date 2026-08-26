@@ -1,4 +1,4 @@
-﻿local var0 = require(script:FindFirstAncestor("AppChat").Logger):new(script:GetFullName() .. ":EditChatGroupNameDialogScreen")
-var0:setContext({ screen = "EditChatGroupNameDialogScreen" })
+﻿local var1 = require(script:FindFirstAncestor("AppChat").Logger):new(script:GetFullName() .. ":EditChatGroupNameDialogScreen")
+var1:setContext({ screen = "EditChatGroupNameDialogScreen" })
 
-return var0
+return var1

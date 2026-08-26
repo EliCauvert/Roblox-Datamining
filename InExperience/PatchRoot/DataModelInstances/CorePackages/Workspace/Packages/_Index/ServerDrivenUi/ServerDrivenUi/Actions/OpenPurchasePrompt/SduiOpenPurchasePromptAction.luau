@@ -23,13 +23,13 @@ local httpService = game:GetService("HttpService")
 local enableJoinAfterBuyFromEDP = game:DefineFastFlag("EnableJoinAfterBuyFromEDP", false)
 local enablePurchasePayloadForSduiPurchase = game:DefineFastFlag("EnablePurchasePayloadForSduiPurchase", false)
 
-local function mapPriceDiscountDetails(p0)
-	if p0 == nil or #p0 == 0 then
+local function mapPriceDiscountDetails(p1)
+	if p1 == nil or #p1 == 0 then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		table.insert(t, {
 			Type = v.type,
 			AmountInRobux = v.amountInRobux,
@@ -39,117 +39,117 @@ local function mapPriceDiscountDetails(p0)
 	return t
 end
 
-local function _(p1, p2)
+local function _(p2, p3)
 	-- upvalues: promiseModule (ref), mapPriceDiscountDetails (ref)
-	return if p1 == nil then nil else function()
-		-- upvalues: promiseModule (copy), p1 (ref), p2 (ref), mapPriceDiscountDetails (copy)
+	return if p2 == nil then nil else function()
+		-- upvalues: promiseModule (copy), p2 (ref), p3 (ref), mapPriceDiscountDetails (copy)
 		return promiseModule.resolve({
-			ProductId = p1.productId,
-			TargetId = p1.targetId,
-			Name = p1.productName,
-			Description = p1.description,
-			PriceInRobux = p1.priceInRobux,
-			IsForSale = p1.isForSale ~= nil or p1.isForSale,
-			ProductType = p1.productType or p2,
-			ImageUrl = p1.imageUrl,
-			DisplayPrice = p1.displayPrice,
-			IconImageAssetId = p1.iconImageAssetId,
-			BasePriceInRobux = p1.basePriceInRobux,
-			PriceDiscountDetails = mapPriceDiscountDetails(p1.priceDiscountDetails)
+			ProductId = p2.productId,
+			TargetId = p2.targetId,
+			Name = p2.productName,
+			Description = p2.description,
+			PriceInRobux = p2.priceInRobux,
+			IsForSale = p2.isForSale ~= nil or p2.isForSale,
+			ProductType = p2.productType or p3,
+			ImageUrl = p2.imageUrl,
+			DisplayPrice = p2.displayPrice,
+			IconImageAssetId = p2.iconImageAssetId,
+			BasePriceInRobux = p2.basePriceInRobux,
+			PriceDiscountDetails = mapPriceDiscountDetails(p2.priceDiscountDetails)
 		})
 	end
 end
 
-local function buildOnPurchaseSuccess(p3, p4, p5, p6)
+local function buildOnPurchaseSuccess(p2, p3, p4, p5)
 	-- upvalues: productKind (ref), productPurchaseSurface (ref), fFlagEnableHomeGameItemOwnershipUpdate (ref), dataHydrationModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), playersService (ref)
-	return if p5 then if p4 == productKind.Gamepass and (p3 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p3 == productPurchaseSurface.HomePageGameItemShop) then function()
-		-- upvalues: dataHydrationModule (copy), p5 (ref)
-		dataHydrationModule.Game.getGamePassStore(false).updateGamePassInfo(p5, { isOwned = true })
-	end elseif fFlagSduiDevStoreSeeAllSupport and p4 == productKind.DeveloperSubscription and p3 == productPurchaseSurface.EDP then function()
-		-- upvalues: dataHydrationModule (copy), p5 (ref)
-		dataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfo(p5, { isSubscribed = true })
-	end elseif p4 == productKind.Product and (fFlagSduiDevStoreSeeAllSupport and p3 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p3 == productPurchaseSurface.HomePageGameItemShop) and p6 then function()
-		-- upvalues: playersService (copy), dataHydrationModule (copy), p6 (ref)
+	return if p4 then if p3 == productKind.Gamepass and (p2 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p2 == productPurchaseSurface.HomePageGameItemShop) then function()
+		-- upvalues: dataHydrationModule (copy), p4 (ref)
+		dataHydrationModule.Game.getGamePassStore(false).updateGamePassInfo(p4, { isOwned = true })
+	end elseif fFlagSduiDevStoreSeeAllSupport and p3 == productKind.DeveloperSubscription and p2 == productPurchaseSurface.EDP then function()
+		-- upvalues: dataHydrationModule (copy), p4 (ref)
+		dataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfo(p4, { isSubscribed = true })
+	end elseif p3 == productKind.Product and (fFlagSduiDevStoreSeeAllSupport and p2 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p2 == productPurchaseSurface.HomePageGameItemShop) and p5 then function()
+		-- upvalues: playersService (copy), dataHydrationModule (copy), p5 (ref)
 		local localPlayer = playersService.LocalPlayer
 		local userId = localPlayer and localPlayer.UserId
 		
 		if userId == nil then
 			return
 		end
-		dataHydrationModule.Game.getGameDeveloperProductStore(false).fetchStatuses(tostring(userId), tostring(p6))
+		dataHydrationModule.Game.getGameDeveloperProductStore(false).fetchStatuses(tostring(userId), tostring(p5))
 	end else nil else nil
 end
 
-local _ = function(p7, p8, p9)
+local _ = function(p2, p3, p4)
 	-- upvalues: enableJoinAfterBuyFromEDP (ref), productPurchaseSurface (ref), experienceService (ref), closeCentralOverlay (ref)
-	return if enableJoinAfterBuyFromEDP and p7 == productPurchaseSurface.EDP and p8 then function()
-		-- upvalues: experienceService (copy), p8 (ref), p9 (ref), closeCentralOverlay (copy)
-		experienceService:LaunchExperience({ placeId = tonumber(p8) })
-		p9(closeCentralOverlay())
+	return if enableJoinAfterBuyFromEDP and p2 == productPurchaseSurface.EDP and p3 then function()
+		-- upvalues: experienceService (copy), p3 (ref), p4 (ref), closeCentralOverlay (copy)
+		experienceService:LaunchExperience({ placeId = tonumber(p3) })
+		p4(closeCentralOverlay())
 	end else nil
 end
 
-local _ = function(p10, p11, p12)
+local _ = function(p2, p3, p4)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiCoreSystemModule (ref), sduiReportGamePlayIntent (ref)
 	return function()
-		-- upvalues: p10 (ref), p12 (ref), sduiErrorType (copy), sduiActionType (copy), sduiCoreSystemModule (copy), p11 (ref), sduiReportGamePlayIntent (copy)
-		local logger = p10.dependencies.logger
+		-- upvalues: p2 (ref), p4 (ref), sduiErrorType (copy), sduiActionType (copy), sduiCoreSystemModule (copy), p3 (ref), sduiReportGamePlayIntent (copy)
+		local logger = p2.dependencies.logger
 		
-		if p12 == nil then
+		if p4 == nil then
 			logger.reportError(sduiErrorType.InvalidActionParams, {
 				message = "Missing rootPlaceId for launch-after-purchase play attribution",
 				name = sduiActionType.OpenPurchasePrompt
-			}, p10.appPage)
+			}, p2.appPage)
 			
 			return
 		end
-		local universeId = sduiCoreSystemModule.findAnalyticsFieldInAncestors("universeId", p11)
+		local universeId = sduiCoreSystemModule.findAnalyticsFieldInAncestors("universeId", p3)
 		
 		if universeId == nil or tostring(universeId) == "" then
 			logger.reportError(sduiErrorType.InvalidActionParams, {
 				message = "Missing universeId for launch-after-purchase play attribution",
 				name = sduiActionType.OpenPurchasePrompt
-			}, p10.appPage)
+			}, p2.appPage)
 			
 			return
 		end
 		sduiReportGamePlayIntent({
 			actionType = "PlayAfterPurchase",
-			sduiContext = p10,
-			analyticsContext = p11,
+			sduiContext = p2,
+			analyticsContext = p3,
 			universeId = tostring(universeId),
-			placeId = p12,
-			rootPlaceId = p12
+			placeId = p4,
+			rootPlaceId = p4
 		})
 	end
 end
 
-local _ = function(p13)
+local _ = function(p2)
 	-- upvalues: closeCentralOverlay (ref)
 	return function()
-		-- upvalues: p13 (ref), closeCentralOverlay (copy)
-		p13(closeCentralOverlay())
+		-- upvalues: p2 (ref), closeCentralOverlay (copy)
+		p2(closeCentralOverlay())
 	end
 end
 
-local function normalizeProductPayload(p14, p15)
+local function normalizeProductPayload(p2, p3)
 	-- upvalues: productKind (ref)
-	if (p15 == productKind.Gamepass or p15 == productKind.Product) and typeof(p14.id) == "string" then
-		local var18 = tonumber(p14.id)
+	if (p3 == productKind.Gamepass or p3 == productKind.Product) and typeof(p2.id) == "string" then
+		local var1 = tonumber(p2.id)
 		
-		if var18 ~= nil then
-			p14.id = var18
+		if var1 ~= nil then
+			p2.id = var1
 		end
 	end
-	if p15 == productKind.DeveloperSubscription then
-		local expectedPrice = p14.expectedPrice
+	if p3 == productKind.DeveloperSubscription then
+		local expectedPrice = p2.expectedPrice
 		
 		if typeof(expectedPrice) == "string" then
 			expectedPrice = tonumber(expectedPrice) or 0
-			p14.expectedPrice = expectedPrice
+			p2.expectedPrice = expectedPrice
 		end
-		if p14.isSubscriptionInRobux == nil then
-			p14.isSubscriptionInRobux = typeof(expectedPrice) == "number" and expectedPrice > 0
+		if p2.isSubscriptionInRobux == nil then
+			p2.isSubscriptionInRobux = typeof(expectedPrice) == "number" and expectedPrice > 0
 		end
 	end
 end
@@ -158,19 +158,19 @@ local t = {
 	[productPurchaseSurface.HomePageGameItemShop] = "homePageGameItemShop"
 }
 
-local function buildPurchasePayload(p16)
+local function buildPurchasePayload(p2)
 	-- upvalues: httpService (ref)
 	return httpService:JSONEncode({
-		surface = { scopeType = "lua", location = { locationType = p16 } }
+		surface = { scopeType = "lua", location = { locationType = p2 } }
 	})
 end
 
-return function(p17, p18, p19)
+return function(p2, p3, p4)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiDevStoreSeeAllSupport (ref), normalizeProductPayload (ref), enablePurchasePayloadForSduiPurchase (ref), t (ref), buildPurchasePayload (ref), purchasePromptLiteModule (ref), timeToInteractiveTracker (ref), setCentralOverlay (ref), centralOverlayType (ref), buildOnPurchaseSuccess (ref), promiseModule (ref), mapPriceDiscountDetails (ref), closeCentralOverlay (ref), enableJoinAfterBuyFromEDP (ref), productPurchaseSurface (ref), experienceService (ref), fFlagEnableLaunchAfterPurchase (ref), sduiCoreSystemModule (ref), sduiReportGamePlayIntent (ref)
-	local logger = p19.dependencies.logger
-	local appPage = p19.appPage
-	local dispatch = p19.dependencies.dispatch
-	local actionParams = p17 and p17.actionParams
+	local logger = p4.dependencies.logger
+	local appPage = p4.appPage
+	local dispatch = p4.dependencies.dispatch
+	local actionParams = p2 and p2.actionParams
 	
 	if actionParams == nil then
 		logger.reportError(sduiErrorType.InvalidActionParams, {
@@ -203,10 +203,10 @@ return function(p17, p18, p19)
 	local surface = purchaseAnalyticsMetadata and purchaseAnalyticsMetadata.surface
 	
 	if enablePurchasePayloadForSduiPurchase and surface ~= nil then
-		local var22 = t[surface]
+		local var1 = t[surface]
 		
-		if var22 ~= nil then
-			productPayload.purchasePayload = buildPurchasePayload(var22)
+		if var1 ~= nil then
+			productPayload.purchasePayload = buildPurchasePayload(var1)
 		end
 	end
 	if purchaseOptions and purchaseOptions.enablePreloadedPurchaseUi ~= nil then
@@ -247,31 +247,31 @@ return function(p17, p18, p19)
 				dispatch(closeCentralOverlay())
 			end else nil,
 			onLaunchAfterPurchase = if fFlagEnableLaunchAfterPurchase then function()
-				-- upvalues: p19 (ref), rootPlaceId (ref), sduiErrorType (copy), sduiActionType (copy), sduiCoreSystemModule (copy), p18 (ref), sduiReportGamePlayIntent (copy)
-				local logger = p19.dependencies.logger
+				-- upvalues: p4 (ref), rootPlaceId (ref), sduiErrorType (copy), sduiActionType (copy), sduiCoreSystemModule (copy), p3 (ref), sduiReportGamePlayIntent (copy)
+				local logger = p4.dependencies.logger
 				
 				if rootPlaceId == nil then
 					logger.reportError(sduiErrorType.InvalidActionParams, {
 						message = "Missing rootPlaceId for launch-after-purchase play attribution",
 						name = sduiActionType.OpenPurchasePrompt
-					}, p19.appPage)
+					}, p4.appPage)
 					
 					return
 				end
-				local universeId = sduiCoreSystemModule.findAnalyticsFieldInAncestors("universeId", p18)
+				local universeId = sduiCoreSystemModule.findAnalyticsFieldInAncestors("universeId", p3)
 				
 				if universeId == nil or tostring(universeId) == "" then
 					logger.reportError(sduiErrorType.InvalidActionParams, {
 						message = "Missing universeId for launch-after-purchase play attribution",
 						name = sduiActionType.OpenPurchasePrompt
-					}, p19.appPage)
+					}, p4.appPage)
 					
 					return
 				end
 				sduiReportGamePlayIntent({
 					actionType = "PlayAfterPurchase",
-					sduiContext = p19,
-					analyticsContext = p18,
+					sduiContext = p4,
+					analyticsContext = p3,
 					universeId = tostring(universeId),
 					placeId = rootPlaceId,
 					rootPlaceId = rootPlaceId

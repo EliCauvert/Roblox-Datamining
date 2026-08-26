@@ -5,20 +5,20 @@ local t = { frequency = 3, dampingRatio = 1 }
 
 return function()
 	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref)
-	local var3, var4 = reactModule.useState(true)
-	local var5, var6 = reactOtterModule.useAnimatedBinding(0, function()
-		-- upvalues: var4 (ref)
-		var4(false)
+	local var1, var2 = reactModule.useState(true)
+	local var3, var4 = reactOtterModule.useAnimatedBinding(0, function()
+		-- upvalues: var2 (ref)
+		var2(false)
 	end)
 	
 	return {
-		onLoaded = reactModule.useCallback(function(p0)
-			-- upvalues: var6 (ref), reactOtterModule (copy), t (copy)
-			if p0 == Enum.AssetFetchStatus.Success then
-				var6(reactOtterModule.spring(1, t))
+		onLoaded = reactModule.useCallback(function(p1)
+			-- upvalues: var4 (ref), reactOtterModule (copy), t (copy)
+			if p1 == Enum.AssetFetchStatus.Success then
+				var4(reactOtterModule.spring(1, t))
 			end
 		end, {}),
-		skeletonVisible = var3,
-		overlayTransparency = var5
+		skeletonVisible = var1,
+		overlayTransparency = var3
 	}
 end

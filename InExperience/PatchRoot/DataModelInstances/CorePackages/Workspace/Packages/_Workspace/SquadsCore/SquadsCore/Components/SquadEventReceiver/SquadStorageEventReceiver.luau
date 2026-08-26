@@ -13,32 +13,32 @@ local useEffect = reactModule.useEffect
 
 return function()
 	-- upvalues: useDispatch (ref), useCurrentSquadIdModule (ref), reactModule (ref), squadExternalContractContextModule (ref), appStorageService (ref), constantsModule (ref), useEffect (ref), validateSquadIdModule (ref), fetchActiveSquadModule (ref), roduxSquadsModule (ref)
-	local var9 = useDispatch()
-	local var10 = useCurrentSquadIdModule() or ""
-	local var11, var12 = reactModule.useState(false)
-	local var13 = reactModule.useContext(squadExternalContractContextModule).useIsChatEnabled()
+	local var1 = useDispatch()
+	local var2 = useCurrentSquadIdModule() or ""
+	local var3, var4 = reactModule.useState(false)
+	local var5 = reactModule.useContext(squadExternalContractContextModule).useIsChatEnabled()
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), appStorageService (copy), constantsModule (copy), var10 (ref)
-		if var11 then
-			appStorageService:SetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, var10)
+		-- upvalues: var3 (ref), appStorageService (copy), constantsModule (copy), var2 (ref)
+		if var3 then
+			appStorageService:SetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, var2)
 			appStorageService:Flush()
 		end
-	end, { var10, var11 })
+	end, { var2, var3 })
 	useEffect(function()
-		-- upvalues: var13 (ref), appStorageService (copy), constantsModule (copy), validateSquadIdModule (copy), var10 (ref), var9 (ref), fetchActiveSquadModule (copy), roduxSquadsModule (copy), var12 (ref)
-		if not var13 then return end
+		-- upvalues: var5 (ref), appStorageService (copy), constantsModule (copy), validateSquadIdModule (copy), var2 (ref), var1 (ref), fetchActiveSquadModule (copy), roduxSquadsModule (copy), var4 (ref)
+		if not var5 then return end
 		local active_squad_app_storage_keyItem = appStorageService:GetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY)
-		local var15 = validateSquadIdModule(active_squad_app_storage_keyItem)
+		local var6 = validateSquadIdModule(active_squad_app_storage_keyItem)
 		
-		if var15 and var10 == "" then
-			var9(fetchActiveSquadModule())
-		elseif active_squad_app_storage_keyItem ~= "" and not var15 or var10 ~= "" and var10 ~= active_squad_app_storage_keyItem then
-			var9(roduxSquadsModule.Actions.CurrentSquadUpdated(nil))
+		if var6 and var2 == "" then
+			var1(fetchActiveSquadModule())
+		elseif active_squad_app_storage_keyItem ~= "" and not var6 or var2 ~= "" and var2 ~= active_squad_app_storage_keyItem then
+			var1(roduxSquadsModule.Actions.CurrentSquadUpdated(nil))
 			appStorageService:SetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, "")
 			appStorageService:Flush()
 		end
-		var12(true)
-	end, { var13 })
+		var4(true)
+	end, { var5 })
 	
 	return nil
 end

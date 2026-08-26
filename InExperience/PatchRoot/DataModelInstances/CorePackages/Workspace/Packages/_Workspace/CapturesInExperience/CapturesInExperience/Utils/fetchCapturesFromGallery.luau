@@ -9,9 +9,9 @@ return function()
 	if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
 		local ok, status = pcall(function()
 			-- upvalues: captureService (copy)
-			local var4, var5 = captureService:ReadCapturesFromGalleryAsync()
+			local var1, var2 = captureService:ReadCapturesFromGalleryAsync()
 			
-			return if var4 == Enum.ReadCapturesFromGalleryResult.Success then var5 else nil
+			return if var1 == Enum.ReadCapturesFromGalleryResult.Success then var2 else nil
 		end)
 		
 		if ok and status then

@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("FetchStatusRodux").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2)
-	return { fetchNamespace = p0, fetchKey = p1, fetchStatus = p2 }
+﻿return require(script:FindFirstAncestor("FetchStatusRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3)
+	return { fetchNamespace = p1, fetchKey = p2, fetchStatus = p3 }
 end)

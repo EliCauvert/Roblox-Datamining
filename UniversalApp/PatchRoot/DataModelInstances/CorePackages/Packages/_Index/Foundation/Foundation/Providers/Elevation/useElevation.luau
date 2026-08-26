@@ -6,25 +6,25 @@ local _ = require(script.Parent.elevation)
 local useElevationManager = elevationProviderModule.useElevationManager
 local useOwnerToken = elevationProviderModule.useOwnerToken
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useElevationManager (ref), useOwnerToken (ref), reactModule (ref)
-	local var3 = useElevationManager()
-	local var4 = useOwnerToken()
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), p0 (ref), p1 (ref), var3 (ref)
-		local var6 = var4 ~= nil and var4.layer == p0
+	local var1 = useElevationManager()
+	local var2 = useOwnerToken()
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), p1 (ref), p2 (ref), var1 (ref)
+		local var4 = var2 ~= nil and var2.layer == p1
 		
-		return if p1.stackAboveOwner then if var4 then if var6 then var3.acquire(p0, { reserve = true, owner = var4 }) else { index = -1, layer = p0, zIndex = var4.zIndex + 1 } else var3.acquire(p0, { reserve = false }) else var3.acquire(p0, { reserve = var6 })
-	end, { p0, var4, var3, p1.stackAboveOwner })
+		return if p2.stackAboveOwner then if var2 then if var4 then var1.acquire(p1, { reserve = true, owner = var2 }) else { index = -1, layer = p1, zIndex = var2.zIndex + 1 } else var1.acquire(p1, { reserve = false }) else var1.acquire(p1, { reserve = var4 })
+	end, { p1, var2, var1, p2.stackAboveOwner })
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var3 (ref), p0 (ref)
+		-- upvalues: var3 (ref), var1 (ref), p1 (ref)
 		return function()
-			-- upvalues: var5 (copy), var3 (copy), p0 (copy)
-			if var5.index ~= nil and var5.index >= 0 then
-				var3.releaseIfTop(p0, var5.index)
+			-- upvalues: var3 (copy), var1 (copy), p1 (copy)
+			if var3.index ~= nil and var3.index >= 0 then
+				var1.releaseIfTop(p1, var3.index)
 			end
 		end
-	end, { p0, var5.index })
+	end, { p1, var3.index })
 	
-	return var5
+	return var3
 end

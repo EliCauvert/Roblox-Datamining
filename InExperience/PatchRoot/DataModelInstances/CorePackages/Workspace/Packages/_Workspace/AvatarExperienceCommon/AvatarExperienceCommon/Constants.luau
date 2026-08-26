@@ -16,9 +16,9 @@ for i, v in enumItems do
 	t_1[tostring(v.Value)] = v.Name
 end
 if fFlagAXInventoryDurablesSupport then
-	local var7 = tostring(#enumItems + 1)
-	t.Avatars = var7
-	t_1[var7] = "Avatars"
+	local var1 = tostring(#enumItems + 1)
+	t.Avatars = var1
+	t_1[var1] = "Avatars"
 end
 local t_2 = {
 	["1"] = "Body",

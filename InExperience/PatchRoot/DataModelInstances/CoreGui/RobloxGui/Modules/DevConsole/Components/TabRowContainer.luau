@@ -11,36 +11,36 @@ local tabDropDownWidth = constantsModule.TabRowFormatting.TabDropDownWidth
 local tabOverlapThreshold = constantsModule.TabRowFormatting.TabOverlapThreshold
 local tabRowContainer = roactModule.Component:extend("TabRowContainer")
 
-local function initTabList(p0)
+local function initTabList(p1)
 	-- upvalues: textService (ref), constantsModule (ref)
 	local t = {}
-	local var12 = 0
-	local var13 = 0
+	local var1 = 0
+	local var2 = 0
 	
-	for i, v in pairs(p0) do
-		local var14 = textService:GetTextSize(i, constantsModule.DefaultFontSize.TabBar, constantsModule.Font.TabBar, Vector2.new(0, 0))
-		t[i] = var14.X
-		var12 += var14.X
-		var13 += 1
+	for i, v in pairs(p1) do
+		local var3 = textService:GetTextSize(i, constantsModule.DefaultFontSize.TabBar, constantsModule.Font.TabBar, Vector2.new(0, 0))
+		t[i] = var3.X
+		var1 += var3.X
+		var2 += 1
 	end
-	return t, var12, var13
+	return t, var1, var2
 end
 
-function tabRowContainer.init(p1)
+function tabRowContainer.init(p2)
 	-- upvalues: initTabList (ref)
-	local var15, var16, var17 = initTabList(p1.props.tabList)
-	p1.state = {
+	local var4, var5, var6 = initTabList(p2.props.tabList)
+	p2.state = {
 		currContainerWidth = 0,
-		textWidths = var15,
-		totalTextLength = var16,
-		totalTabCount = var17
+		textWidths = var4,
+		totalTextLength = var5,
+		totalTabCount = var6
 	}
 	
-	function p1.onTabButtonClicked(p2)
-		-- upvalues: p1 (ref)
-		for i, v in pairs(p1.props.tabList) do
-			if v.layoutOrder == p2 then
-				p1.props.dispatchSetActiveTab(i, v.hasClientServer)
+	function p1.onTabButtonClicked(p3)
+		-- upvalues: p2 (ref)
+		for i, v in pairs(p2.props.tabList) do
+			if v.layoutOrder == p3 then
+				p2.props.dispatchSetActiveTab(i, v.hasClientServer)
 				
 				return
 			end
@@ -51,54 +51,54 @@ end
 function tabRowContainer.didUpdate(p3, p4, _)
 	-- upvalues: initTabList (ref)
 	if p4.tabList ~= p3.props.tabList then
-		local var18, var19, var20 = initTabList(p3.props.tabList)
+		local var7, var8, var9 = initTabList(p3.props.tabList)
 		p3:setState({
-			textWidths = var18,
-			totalTextLength = var19,
-			totalTabCount = var20
+			textWidths = var7,
+			totalTextLength = var8,
+			totalTabCount = var9
 		})
 	end
 end
 
-function tabRowContainer.render(p5)
+function tabRowContainer.render(p3)
 	-- upvalues: tabOverlapThreshold (ref), constantsModule (ref), roactModule (ref), fullScreenDropDownButtonModule (ref), tabDropDownWidth (ref), dropDownModule (ref), tabRowButtonModule (ref)
-	local tabList = p5.props.tabList
-	local currTabIndex = p5.props.currTabIndex
-	local formFactor = p5.props.formFactor
-	local windowWidth = p5.props.windowWidth
-	local frameHeight = p5.props.frameHeight
-	local layoutOrder = p5.props.layoutOrder
-	local textWidths = p5.state.textWidths
-	local totalTextLength = p5.state.totalTextLength
-	local totalTabCount = p5.state.totalTabCount
+	local tabList = p3.props.tabList
+	local currTabIndex = p3.props.currTabIndex
+	local formFactor = p3.props.formFactor
+	local windowWidth = p3.props.windowWidth
+	local frameHeight = p3.props.frameHeight
+	local layoutOrder = p3.props.layoutOrder
+	local textWidths = p3.state.textWidths
+	local totalTextLength = p3.state.totalTextLength
+	local totalTabCount = p3.state.totalTabCount
 	local t = {}
-	local var22 = (windowWidth - totalTextLength) / totalTabCount
-	local var23 = var22 % 1 * totalTabCount / 2
-	local var24 = var22 < tabOverlapThreshold and windowWidth > 0
-	local var25 = formFactor == constantsModule.FormFactor.Small
+	local var7 = (windowWidth - totalTextLength) / totalTabCount
+	local var8 = var7 % 1 * totalTabCount / 2
+	local var9 = var7 < tabOverlapThreshold and windowWidth > 0
+	local var10 = formFactor == constantsModule.FormFactor.Small
 	
 	if tabList then
-		if var24 or var25 then
+		if var9 or var10 then
 			local t_1 = {}
 			local layoutOrder_1 = tabList[currTabIndex].layoutOrder
 			
 			for i, v in pairs(tabList) do
 				t_1[v.layoutOrder] = i
 			end
-			if var25 then
+			if var10 then
 				return roactModule.createElement(fullScreenDropDownButtonModule, {
 					buttonSize = UDim2.new(0, tabDropDownWidth, 0, frameHeight),
 					dropDownList = t_1,
 					selectedIndex = layoutOrder_1,
-					onSelection = p5.onTabButtonClicked,
+					onSelection = p3.onTabButtonClicked,
 					layoutOrder = layoutOrder
 				})
-			elseif var24 then
+			elseif var9 then
 				return roactModule.createElement(dropDownModule, {
 					buttonSize = UDim2.new(0, tabDropDownWidth, 0, frameHeight),
 					dropDownList = t_1,
 					selectedIndex = layoutOrder_1,
-					onSelection = p5.onTabButtonClicked
+					onSelection = p3.onTabButtonClicked
 				})
 			end
 		else
@@ -107,11 +107,11 @@ function tabRowContainer.render(p5)
 					t[i] = roactModule.createElement(tabRowButtonModule, {
 						index = v.layoutOrder,
 						name = i,
-						padding = var22,
-						textWidth = if var24 then tabDropDownWidth else textWidths[i],
+						padding = var7,
+						textWidth = if var9 then tabDropDownWidth else textWidths[i],
 						isSelected = i == currTabIndex,
 						layoutOrder = v.layoutOrder,
-						onTabButtonClicked = p5.onTabButtonClicked
+						onTabButtonClicked = p3.onTabButtonClicked
 					})
 				end
 			end
@@ -126,22 +126,22 @@ function tabRowContainer.render(p5)
 	return roactModule.createElement("Frame", {
 		Transparency = 1,
 		Size = UDim2.new(1, 0, 0, frameHeight),
-		Position = UDim2.new(0, var23, 0, 0),
+		Position = UDim2.new(0, var8, 0, 0),
 		LayoutOrder = layoutOrder
 	}, t)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p6, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p4, _)
 	return {
-		tabList = p6.MainView.tabList,
-		currTabIndex = p6.MainView.currTabIndex
+		tabList = p4.MainView.tabList,
+		currTabIndex = p4.MainView.currTabIndex
 	}
-end, function(p7)
+end, function(p4)
 	-- upvalues: setActiveTabModule (ref)
 	return {
-		dispatchSetActiveTab = function(value, p8)
-			-- upvalues: p7 (ref), setActiveTabModule (copy)
-			p7(setActiveTabModule(value, p8))
+		dispatchSetActiveTab = function(value, p5)
+			-- upvalues: p4 (ref), setActiveTabModule (copy)
+			p4(setActiveTabModule(value, p5))
 		end
 	}
 end)(tabRowContainer)

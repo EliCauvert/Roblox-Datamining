@@ -37,45 +37,45 @@ local t = {
 local function _(value)
 	-- upvalues: preloadAsset (ref), assets (ref)
 	preloadAsset(value)
-	local var8 = assets[value]
+	local var1 = assets[value]
 	
-	return var8.assetId, var8.size
+	return var1.assetId, var1.size
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: dash (ref), t (ref), migrateNoFriendsViewToFoundation (ref), preloadAsset (ref), assets (ref), react (ref), useLocalization (ref), useStyle (ref), fFlagFriendsEmptyStateIllustrationThemingModule (ref), useTokens (ref), image (ref), imageSetLabel (ref), images (ref), colors (ref), styledTextLabel (ref), appFonts (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var9 = dash.join(t, p0 or {})
-	local var10 = if migrateNoFriendsViewToFoundation then "pictograms/collaborators" else nil
+	local var1 = dash.join(t, p1 or {})
+	local var2 = if migrateNoFriendsViewToFoundation then "pictograms/collaborators" else nil
 	local assetId = nil
 	local size = nil
 	
 	if migrateNoFriendsViewToFoundation then
-		preloadAsset(var10)
-		local var11 = assets[var10]
-		assetId = var11.assetId
-		size = var11.size
+		preloadAsset(var2)
+		local var3 = assets[var2]
+		assetId = var3.assetId
+		size = var3.size
 	end
-	local var12 = if migrateNoFriendsViewToFoundation then size / 3 else nil
+	local var4 = if migrateNoFriendsViewToFoundation then size / 3 else nil
 	react.useEffect(function()
-		-- upvalues: var9 (ref)
-		if var9.pageLoadingTimeReport then
-			var9.pageLoadingTimeReport()
+		-- upvalues: var1 (ref)
+		if var1.pageLoadingTimeReport then
+			var1.pageLoadingTimeReport()
 		end
-		if var9.pageRenderReport then
-			var9.pageRenderReport()
+		if var1.pageRenderReport then
+			var1.pageRenderReport()
 		end
 	end, {})
-	local var13 = useLocalization({
-		addFriendsBtn = var9.addFriendsBtnLabelKey,
-		noFriendsText = var9.noFriendsTextLabelKey,
-		noFriendsHeader = var9.noFriendsHeaderKey
+	local var5 = useLocalization({
+		addFriendsBtn = var1.addFriendsBtnLabelKey,
+		noFriendsText = var1.noFriendsTextLabelKey,
+		noFriendsHeader = var1.noFriendsHeaderKey
 	})
-	local var14 = useStyle()
+	local var6 = useStyle()
 	
 	return react.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		LayoutOrder = var9.layoutOrder
+		LayoutOrder = var1.layoutOrder
 	}, {
 		IndicatorInner = react.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 			SidePadding = react.createElement("UIPadding", {
@@ -93,7 +93,7 @@ return function(p0)
 				LayoutOrder = 1,
 				Image = assetId,
 				imageStyle = if fFlagFriendsEmptyStateIllustrationThemingModule then (if fFlagFriendsEmptyStateIllustrationThemingModule then useTokens() else nil).Color.Content.Emphasis else nil,
-				Size = UDim2.fromOffset(var12.X, var12.Y)
+				Size = UDim2.fromOffset(var4.X, var4.Y)
 			}) else react.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
@@ -101,11 +101,11 @@ return function(p0)
 				ImageColor3 = colors.White,
 				Size = UDim2.fromOffset(96, 96)
 			}),
-			Headerlabel = if var9.noFriendsHeaderKey and var13.noFriendsHeader then react.createElement(styledTextLabel, {
+			Headerlabel = if var1.noFriendsHeaderKey and var5.noFriendsHeader then react.createElement(styledTextLabel, {
 				layoutOrder = 2,
-				text = var13.noFriendsHeader,
-				fontStyle = var14.Font.Header1,
-				colorStyle = var14.Theme.TextEmphasis,
+				text = var5.noFriendsHeader,
+				fontStyle = var6.Font.Header1,
+				colorStyle = var6.Theme.TextEmphasis,
 				automaticSize = Enum.AutomaticSize.Y,
 				size = UDim2.new(1, 0, 0, 0),
 				textXAlignment = Enum.TextXAlignment.Center,
@@ -118,22 +118,22 @@ return function(p0)
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Font = appFonts.default:getDefault(),
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = var13.noFriendsText,
-				TextColor3 = var14.Theme.TextMuted.Color,
-				TextSize = var14.Font.Header2.RelativeSize * var14.Font.BaseSize,
-				TextTransparency = var14.Theme.TextMuted.Transparency
+				Text = var5.noFriendsText,
+				TextColor3 = var6.Theme.TextMuted.Color,
+				TextSize = var6.Font.Header2.RelativeSize * var6.Font.BaseSize,
+				TextTransparency = var6.Theme.TextMuted.Transparency
 			}),
 			Padding = react.createElement("Frame", {
 				LayoutOrder = 4,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 0, 0, 10)
 			}),
-			AddFriendsButton = var9.addFriendsBtnEnabled and react.createElement(button, {
+			AddFriendsButton = var1.addFriendsBtnEnabled and react.createElement(button, {
 				layoutOrder = 5,
 				buttonType = buttonType.PrimarySystem,
-				text = var13.addFriendsBtn,
+				text = var5.addFriendsBtn,
 				standardSize = standardButtonSize.Regular,
-				onActivated = var9.openAddFriendsPage
+				onActivated = var1.openAddFriendsPage
 			})
 		})
 	})

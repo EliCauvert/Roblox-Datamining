@@ -7,36 +7,36 @@ local _ = require(parent_1.Style.StyleTypes)
 local _ = require(parent_1.Style.Fonts)
 local footerFrameModule = require(parent.FooterFrame)
 
-local function getStyleProps(p0, p1)
-	p0 = p0 or {}
+local function getStyleProps(p1, p2)
+	p1 = p1 or {}
 	
 	return {
-		cornerRadius = p0.cornerRadius,
-		textColor = p0.textColor or p1.Theme.TextMuted,
-		backgroundColor = p0.backgroundColor,
-		textXAlignment = p0.textXAlignment or Enum.TextXAlignment.Left,
-		textFont = p0.textFont or p1.Font.CaptionBody
+		cornerRadius = p1.cornerRadius,
+		textColor = p1.textColor or p2.Theme.TextMuted,
+		backgroundColor = p1.backgroundColor,
+		textXAlignment = p1.textXAlignment or Enum.TextXAlignment.Left,
+		textFont = p1.textFont or p2.Font.CaptionBody
 	}
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useStyleModule (ref), getStyleProps (ref), reactModule (ref), footerFrameModule (ref)
-	local var5 = useStyleModule()
-	local font = var5.Font
-	local var6 = getStyleProps(p2.styleProps, var5)
-	local cornerRadius = var6.cornerRadius
-	local textColor = var6.textColor
-	local backgroundColor = var6.backgroundColor
-	local textFont = var6.textFont
+	local var1 = useStyleModule()
+	local font = var1.Font
+	local var2 = getStyleProps(p1.styleProps, var1)
+	local cornerRadius = var2.cornerRadius
+	local textColor = var2.textColor
+	local backgroundColor = var2.backgroundColor
+	local textFont = var2.textFont
 	
-	return reactModule.createElement(footerFrameModule, p2, {
+	return reactModule.createElement(footerFrameModule, p1, {
 		Text = reactModule.createElement("TextLabel", {
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
 			BackgroundColor3 = if backgroundColor then backgroundColor.Color else nil,
 			BackgroundTransparency = if backgroundColor then backgroundColor.Transparency else 1,
-			Text = p2.text,
-			TextXAlignment = var6.textXAlignment,
+			Text = p1.text,
+			TextXAlignment = var2.textXAlignment,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			Font = textFont.Font,
 			TextSize = font.BaseSize * textFont.RelativeSize,

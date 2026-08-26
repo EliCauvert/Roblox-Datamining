@@ -1,17 +1,17 @@
 ﻿local loggerModule = require(game.LoadedCode.Packages.Lumberyak.Logger)
 
-local function timeit(p0, p1)
-	local var15 = p0()
+local function timeit(p1, p2)
+	local var1 = p1()
 	local currentTime = tick()
 	
 	for _ = 1, 2000000 do
-		p1(var15)
+		p2(var1)
 	end
 	return (tick() - currentTime) / 2000000
 end
 
-local function callSimple(p2)
-	p2:info("foo")
+local function callSimple(p3)
+	p3:info("foo")
 end
 
 local function callInterp(p3)
@@ -20,19 +20,19 @@ end
 
 local function simple()
 	-- upvalues: loggerModule (ref)
-	local var17 = 0
+	local var2 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Info,
-		log = function(_, _, p4)
-			-- upvalues: var17 (write)
-			var17 += p4.number
+		log = function(_, _, p3)
+			-- upvalues: var2 (write)
+			var2 += p3.number
 		end
 	}
-	local var19 = loggerModule.new()
-	var19:setContext({ number = 1 })
-	var19:addSink(t)
+	local var3 = loggerModule.new()
+	var3:setContext({ number = 1 })
+	var3:addSink(t)
 	
-	return var19
+	return var3
 end
 
 local function empty()
@@ -41,107 +41,107 @@ end
 
 local function off()
 	-- upvalues: loggerModule (ref)
-	local var20 = 0
+	local var2 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Error,
-		log = function(_, _, p5)
-			-- upvalues: var20 (write)
-			var20 += p5.number
+		log = function(_, _, p3)
+			-- upvalues: var2 (write)
+			var2 += p3.number
 		end
 	}
-	local var22 = loggerModule.new()
-	var22:setContext({ number = 1 })
-	var22:addSink(t)
+	local var3 = loggerModule.new()
+	var3:setContext({ number = 1 })
+	var3:addSink(t)
 	
-	return var22
+	return var3
 end
 
 local function short()
 	-- upvalues: loggerModule (ref)
-	local var23 = 0
+	local var2 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Info,
-		log = function(_, _, p6)
-			-- upvalues: var23 (write)
-			var23 += p6.number
+		log = function(_, _, p3)
+			-- upvalues: var2 (write)
+			var2 += p3.number
 		end
 	}
-	local var25 = loggerModule.new()
-	local var26 = var25:new()
-	var25:setContext({ number = 1 })
-	var25:addSink(t)
+	local var3 = loggerModule.new()
+	local var4 = var3:new()
+	var3:setContext({ number = 1 })
+	var3:addSink(t)
 	
-	return var26
+	return var4
 end
 
 local function long()
 	-- upvalues: loggerModule (ref)
-	local var27 = 0
+	local var2 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Info,
-		log = function(_, _, p7)
-			-- upvalues: var27 (write)
-			var27 += p7.number
+		log = function(_, _, p3)
+			-- upvalues: var2 (write)
+			var2 += p3.number
 		end
 	}
-	local var29 = loggerModule.new()
-	var29:setContext({ number = 1 })
-	var29:addSink(t)
+	local var3 = loggerModule.new()
+	var3:setContext({ number = 1 })
+	var3:addSink(t)
 	
-	return var29:new():new():new():new()
+	return var3:new():new():new():new()
 end
 
 local function many()
 	-- upvalues: loggerModule (ref)
-	local var30 = 0
+	local var2 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Error,
-		log = function(_, _, p8)
-			-- upvalues: var30 (write)
-			var30 += p8.number
+		log = function(_, _, p3)
+			-- upvalues: var2 (write)
+			var2 += p3.number
 		end
 	}
 	local t_1 = {
 		maxLevel = loggerModule.Levels.Warning,
-		log = function(_, _, p9)
-			-- upvalues: var30 (write)
-			var30 += p9.number
+		log = function(_, _, p3)
+			-- upvalues: var2 (write)
+			var2 += p3.number
 		end
 	}
 	local t_2 = {
 		maxLevel = loggerModule.Levels.Info,
-		log = function(_, _, p10)
-			-- upvalues: var30 (write)
-			var30 += p10.number
+		log = function(_, _, p3)
+			-- upvalues: var2 (write)
+			var2 += p3.number
 		end
 	}
 	local t_3 = {
 		maxLevel = loggerModule.Levels.Debug,
-		log = function(_, _, p11)
-			-- upvalues: var30 (write)
-			var30 += p11.number
+		log = function(_, _, p3)
+			-- upvalues: var2 (write)
+			var2 += p3.number
 		end
 	}
 	local t_4 = {
 		maxLevel = loggerModule.Levels.Trace,
-		log = function(_, _, p12)
-			-- upvalues: var30 (write)
-			var30 += p12.number
+		log = function(_, _, p3)
+			-- upvalues: var2 (write)
+			var2 += p3.number
 		end
 	}
-	local var36 = loggerModule.new()
-	var36:setContext({ number = 1 })
-	var36:addSink(t)
-	var36:addSink(t_1)
-	var36:addSink(t_2)
-	var36:addSink(t_3)
-	var36:addSink(t_4)
+	local var3 = loggerModule.new()
+	var3:setContext({ number = 1 })
+	var3:addSink(t)
+	var3:addSink(t_1)
+	var3:addSink(t_2)
+	var3:addSink(t_3)
+	var3:addSink(t_4)
 	
-	return var36
+	return var3
 end
 
-local var10 = timeit(empty, callSimple)
-local var11 = timeit(empty, callInterp)
+local var2 = timeit(empty, callSimple)
+local var3 = timeit(empty, callInterp)
 local t = {
 	["Log level off"] = off,
 	["Simple logger"] = simple,
@@ -150,17 +150,17 @@ local t = {
 	["Many sinks"] = many
 }
 
-local function _(p13, p14, p15)
-	-- upvalues: var10 (ref)
-	print(string.format("%-40s %0.3e [%0.4fx]", p13 .. " - " .. p14, p15, p15 / var10))
+local function _(p3, p4, p5)
+	-- upvalues: var2 (ref)
+	print(string.format("%-40s %0.3e [%0.4fx]", p3 .. " - " .. p14, p5, p5 / var2))
 end
 
-print(string.format("%-40s %0.3e [%0.4fx]", "Empty function - Simple", var10, var10 / var10))
-print(string.format("%-40s %0.3e [%0.4fx]", "Empty function - Interpolation", var11, var11 / var10))
+print(string.format("%-40s %0.3e [%0.4fx]", "Empty function - Simple", var2, var2 / var2))
+print(string.format("%-40s %0.3e [%0.4fx]", "Empty function - Interpolation", var3, var3 / var2))
 
 for i, v in pairs(t) do
-	local var13 = timeit(v, callSimple)
-	print(string.format("%-40s %0.3e [%0.4fx]", i .. " - " .. "Simple", var13, var13 / var10))
-	local var14 = timeit(v, callInterp)
-	print(string.format("%-40s %0.3e [%0.4fx]", i .. " - " .. "Interpolation", var14, var14 / var10))
+	local var4 = timeit(v, callSimple)
+	print(string.format("%-40s %0.3e [%0.4fx]", i .. " - " .. "Simple", var4, var4 / var2))
+	local var5 = timeit(v, callInterp)
+	print(string.format("%-40s %0.3e [%0.4fx]", i .. " - " .. "Interpolation", var5, var5 / var2))
 end

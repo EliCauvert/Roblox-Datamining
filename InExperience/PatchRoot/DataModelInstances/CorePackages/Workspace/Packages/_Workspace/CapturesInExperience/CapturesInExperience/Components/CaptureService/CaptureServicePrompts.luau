@@ -20,26 +20,26 @@ if game:GetEngineFeature("CaptureServiceGalleryPermissionPrompt") then
 end
 return function(_)
 	-- upvalues: useSelector (ref), constantsModule (ref), t (ref), reactModule (ref), promptConnectionsModule (ref)
-	local var9 = useSelector(function(p0)
+	local var1 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
-		return p0[constantsModule.RoduxKey].Prompts[1]
+		return p1[constantsModule.RoduxKey].Prompts[1]
 	end)
-	local promptData = var9 and var9.PromptData
-	local promptId = var9 and var9.PromptId
-	local promptType = var9 and var9.PromptType
-	local var13 = nil
+	local promptData = var1 and var1.PromptData
+	local promptId = var1 and var1.PromptId
+	local promptType = var1 and var1.PromptType
+	local var2 = nil
 	
 	if promptType then
-		local var14 = t[promptType]
+		local var3 = t[promptType]
 		
-		if var14 then
-			var13 = reactModule.createElement(var14, { promptData = promptData, promptId = promptId })
+		if var3 then
+			var2 = reactModule.createElement(var3, { promptData = promptData, promptId = promptId })
 		else
 			error(`Unexpected prompt type: {promptType}!`)
 		end
 	end
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		PromptConnections = reactModule.createElement(promptConnectionsModule),
-		Prompt = var13
+		Prompt = var2
 	})
 end

@@ -4,18 +4,18 @@ local fFlagEnableVirtualCursorDebugging = require(script:FindFirstAncestor("Virt
 local enumsModule = require(parent.Enums)
 local propertiesModule = require(parent.Properties)
 
-local function _(p0)
-	local magnitude = p0.Magnitude
+local function _(p1)
+	local magnitude = p1.Magnitude
 	
-	return if magnitude > 0.00001 then p0 / magnitude else Vector2.zero
+	return if magnitude > 0.00001 then p1 / magnitude else Vector2.zero
 end
 
 local _ = function(p1, p2, p3)
 	return Vector2.new(math.clamp(p1.X, p2.X, p2.X + p3.X), math.clamp(p1.Y, p2.Y, p2.Y + p3.Y))
 end
 
-local _ = function(p4)
-	return p4 * p4 * (3 - p4 * 2)
+local _ = function(p1)
+	return p1 * p1 * (3 - p1 * 2)
 end
 
 local t = {}
@@ -37,99 +37,99 @@ function t.new()
 	}, t)
 end
 
-function t:setMethodStrength(p5, p6)
-	self._strengthTable[p5] = math.clamp(p6, 0, 1)
+function t:setMethodStrength(p1, p2)
+	self._strengthTable[p1] = math.clamp(p2, 0, 1)
 end
 
-function t:getScaledMethodStrength(p7, p8)
-	return math.clamp((self._strengthTable[p7] or 0) * p8, 0, 1)
+function t:getScaledMethodStrength(p1, p2)
+	return math.clamp((self._strengthTable[p1] or 0) * p2, 0, 1)
 end
 
-function t:adjustFriction(p9)
+function t:adjustFriction(p1)
 	-- upvalues: enumsModule (ref)
-	local frictionScaledMethodStrength = self:getScaledMethodStrength(enumsModule.SnapAssistMethod.Friction, p9.strengthMultiplier)
+	local frictionScaledMethodStrength = self:getScaledMethodStrength(enumsModule.SnapAssistMethod.Friction, p1.strengthMultiplier)
 	
-	return if not (not p9.targetObject or frictionScaledMethodStrength <= 0) then if self._cursorStartingPosition then p9.cursorPosition:Lerp(self._cursorStartingPosition, frictionScaledMethodStrength) else p9.cursorPosition else p9.cursorPosition
+	return if not (not p1.targetObject or frictionScaledMethodStrength <= 0) then if self._cursorStartingPosition then p1.cursorPosition:Lerp(self._cursorStartingPosition, frictionScaledMethodStrength) else p1.cursorPosition else p1.cursorPosition
 end
 
-function t:adjustTracking(p10)
+function t:adjustTracking(p1)
 	-- upvalues: enumsModule (ref)
-	local trackingScaledMethodStrength = self:getScaledMethodStrength(enumsModule.SnapAssistMethod.Tracking, p10.strengthMultiplier)
+	local trackingScaledMethodStrength = self:getScaledMethodStrength(enumsModule.SnapAssistMethod.Tracking, p1.strengthMultiplier)
 	
-	if p10.targetObject and trackingScaledMethodStrength > 0 then
-		local var6 = p10.targetObject.AbsolutePosition + p10.targetObject.AbsoluteSize / 2
-		local var7 = p10.cursorPosition + Vector2.new(0, 0):Lerp(var6 - (self._currTargetCenter or var6), trackingScaledMethodStrength)
-		self._currTargetCenter = var6
+	if p1.targetObject and trackingScaledMethodStrength > 0 then
+		local var1 = p1.targetObject.AbsolutePosition + p1.targetObject.AbsoluteSize / 2
+		local var2 = p1.cursorPosition + Vector2.new(0, 0):Lerp(var1 - (self._currTargetCenter or var1), trackingScaledMethodStrength)
+		self._currTargetCenter = var1
 		
-		return var7
+		return var2
 	end
-	return p10.cursorPosition
+	return p1.cursorPosition
 end
 
-function t:adjustCentering(p11)
+function t:adjustCentering(p1)
 	-- upvalues: enumsModule (ref), tweenService (ref)
-	local centeringScaledMethodStrength = self:getScaledMethodStrength(enumsModule.SnapAssistMethod.Centering, p11.strengthMultiplier)
+	local centeringScaledMethodStrength = self:getScaledMethodStrength(enumsModule.SnapAssistMethod.Centering, p1.strengthMultiplier)
 	
-	if not p11.targetObject or centeringScaledMethodStrength <= 0 then
-		return p11.cursorPosition
+	if not p1.targetObject or centeringScaledMethodStrength <= 0 then
+		return p1.cursorPosition
 	end
-	local var9 = p11.targetObject.AbsolutePosition + Vector2.new(math.floor(p11.targetObject.AbsoluteSize.X / 2), math.floor(p11.targetObject.AbsoluteSize.Y / 2))
+	local var1 = p1.targetObject.AbsolutePosition + Vector2.new(math.floor(p1.targetObject.AbsoluteSize.X / 2), math.floor(p1.targetObject.AbsoluteSize.Y / 2))
 	
-	if p11.deltaTime then
-		local cursorPosition, cursorPosition_1 = tweenService:SmoothDamp(p11.cursorPosition, var9, self._cursorVelocity, 1 - centeringScaledMethodStrength, 1e999, p11.deltaTime)
+	if p1.deltaTime then
+		local cursorPosition, cursorPosition_1 = tweenService:SmoothDamp(p1.cursorPosition, var1, self._cursorVelocity, 1 - centeringScaledMethodStrength, 1e999, p1.deltaTime)
 		self._cursorVelocity = cursorPosition_1
 		
 		return cursorPosition
 	end
-	return p11.cursorPosition:Lerp(var9, centeringScaledMethodStrength)
+	return p1.cursorPosition:Lerp(var1, centeringScaledMethodStrength)
 end
 
-function t:adjustSnap(p12)
+function t:adjustSnap(p1)
 	-- upvalues: fFlagEnableVirtualCursorDebugging (ref)
-	if p12.targetObject == self._currTargetObject then
-		if p12.expiredTime and p12.expiredTime < tick() - self._snapTimer then
+	if p1.targetObject == self._currTargetObject then
+		if p1.expiredTime and p1.expiredTime < tick() - self._snapTimer then
 			if fFlagEnableVirtualCursorDebugging then
 				print("Snap expired")
 			end
-			return p12.cursorPosition
+			return p1.cursorPosition
 		else
-			p12.cursorPosition = self:adjustFriction(p12)
-			p12.cursorPosition = self:adjustTracking(p12)
-			p12.cursorPosition = self:adjustCentering(p12)
+			p1.cursorPosition = self:adjustFriction(p1)
+			p1.cursorPosition = self:adjustTracking(p1)
+			p1.cursorPosition = self:adjustCentering(p1)
 			
-			return p12.cursorPosition
+			return p1.cursorPosition
 		end
 	else
-		self._currTargetObject = p12.targetObject
-		self._currTargetCenter = if p12.targetObject then p12.targetObject.AbsolutePosition + p12.targetObject.AbsoluteSize / 2 else nil
+		self._currTargetObject = p1.targetObject
+		self._currTargetCenter = if p1.targetObject then p1.targetObject.AbsolutePosition + p1.targetObject.AbsoluteSize / 2 else nil
 		self._cursorVelocity = Vector2.zero
-		self._cursorStartingPosition = p12.cursorPosition
+		self._cursorStartingPosition = p1.cursorPosition
 		self._snapTimer = tick()
 		
 		if fFlagEnableVirtualCursorDebugging then
-			print("New target detected, cursorPos", p12.cursorPosition, "targetPos", self.currTargetCenter)
+			print("New target detected, cursorPos", p1.cursorPosition, "targetPos", self.currTargetCenter)
 		end
 	end
 end
 
-function t.isSnapCandidate(_, p13, p14)
-	return not (not p13.Visible or not p13.Selectable) and (p13.AbsolutePosition.X + p13.AbsoluteSize.X < 0 or p13.AbsolutePosition.Y + p13.AbsoluteSize.Y < 0 or (p14.X < p13.AbsolutePosition.X or p14.Y < p13.AbsolutePosition.Y))
+function t.isSnapCandidate(_, p1, p2)
+	return not (not p1.Visible or not p1.Selectable) and (p1.AbsolutePosition.X + p1.AbsoluteSize.X < 0 or p1.AbsolutePosition.Y + p1.AbsoluteSize.Y < 0 or (p2.X < p1.AbsolutePosition.X or p2.Y < p1.AbsolutePosition.Y))
 end
 
-function t.adjustMove(_, p15, p16)
+function t.adjustMove(_, p1, p2)
 	-- upvalues: propertiesModule (ref), fFlagEnableVirtualCursorDebugging (ref)
-	local cursorPosition = p16.cursorPosition
-	local candidates = p16.candidates
-	local strengthMultiplier = p16.strengthMultiplier
+	local cursorPosition = p2.cursorPosition
+	local candidates = p2.candidates
+	local strengthMultiplier = p2.strengthMultiplier
 	
 	if strengthMultiplier <= 0 or not candidates or #candidates == 0 then
-		return p15
-	elseif p15.Magnitude < 0.00001 then
+		return p1
+	elseif p1.Magnitude < 0.00001 then
 		return Vector2.zero
 	end
-	local magnitude = p15.Magnitude
-	local var12 = if magnitude > 0.00001 then p15 / magnitude else Vector2.zero
-	local var13 = 0
+	local magnitude = p1.Magnitude
+	local var1 = if magnitude > 0.00001 then p1 / magnitude else Vector2.zero
+	local var2 = 0
 	local zero = Vector2.zero
 	
 	for i, v in candidates do
@@ -140,31 +140,31 @@ function t.adjustMove(_, p15, p16)
 		
 		if magnitude_1 < propertiesModule.SnapRadius then
 			local magnitude_2 = absolutePosition.Magnitude
-			local var17 = if magnitude_2 > 0.00001 then absolutePosition / magnitude_2 else Vector2.zero
-			local var18 = var12:Dot(var17)
+			local var3 = if magnitude_2 > 0.00001 then absolutePosition / magnitude_2 else Vector2.zero
+			local var4 = var1:Dot(var3)
 			
-			if var18 > 0.25 then
+			if var4 > 0.25 then
 				local clampedValue = math.clamp(1 - magnitude_1 / propertiesModule.SnapRadius, 0, 1)
-				local var20 = clampedValue * clampedValue * (3 - clampedValue * 2) * var18
+				local var5 = clampedValue * clampedValue * (3 - clampedValue * 2) * var4
 				
-				if var13 < var20 then
-					var13 = var20
-					zero = var17
+				if var2 < var5 then
+					var2 = var5
+					zero = var3
 				end
 			end
 		end
 	end
-	local var15 = var12
+	local var6 = var1
 	
-	if var13 > 0 then
-		local var16 = var12 + zero * (var13 * strengthMultiplier)
-		local magnitude_1 = var16.Magnitude
-		var15 = if magnitude_1 > 0.00001 then var16 / magnitude_1 else Vector2.zero
+	if var2 > 0 then
+		local var7 = var1 + zero * (var2 * strengthMultiplier)
+		local magnitude_1 = var7.Magnitude
+		var6 = if magnitude_1 > 0.00001 then var7 / magnitude_1 else Vector2.zero
 	end
-	if (var15 - p15).Magnitude > 0 and fFlagEnableVirtualCursorDebugging then
-		print("Move input adjusted from", p15, "to", var15)
+	if (var6 - p1).Magnitude > 0 and fFlagEnableVirtualCursorDebugging then
+		print("Move input adjusted from", p1, "to", var6)
 	end
-	return var15
+	return var6
 end
 
 return t

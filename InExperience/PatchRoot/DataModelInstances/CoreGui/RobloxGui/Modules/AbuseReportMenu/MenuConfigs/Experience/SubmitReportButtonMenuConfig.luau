@@ -22,44 +22,44 @@ return {
 	getButtonLabel = function(_)
 		return "SubmitButton"
 	end,
-	onClick = function(p0, _, p1)
+	onClick = function(p1, _, p2)
 		-- upvalues: playersService (ref), tnSIXPWrapperModule (ref), abuseReportBuilderModule (ref), reportAbuseAnalyticsModule (ref), constantsModule (ref), getToastMessageFromAbuseReasonModule (ref), marketplaceService (ref)
-		local abuseReason = p0.abuseReason
+		local abuseReason = p1.abuseReason
 		
 		if abuseReason ~= nil and playersService.LocalPlayer ~= nil then
 			if tnSIXPWrapperModule.getReportAnythingExperienceEnabled() then
 				playersService:ReportAbuseV3(playersService.LocalPlayer, abuseReportBuilderModule.buildExperienceReportRequest({
 					localUserId = playersService.LocalPlayer.UserId,
 					placeId = game.PlaceId,
-					abuseComment = p0.comment,
+					abuseComment = p1.comment,
 					abuseReason = abuseReason,
 					menuEntryPoint = reportAbuseAnalyticsModule:getAbuseReportSessionEntryPoint(),
 					variant = abuseReportBuilderModule.Constants.Variant.NM
-				}, p1.reportAnythingState, p1.reportAnythingAnalytics.getAccumulatedParameters()))
-				p1.analyticsDispatch({
+				}, p2.reportAnythingState, p2.reportAnythingAnalytics.getAccumulatedParameters()))
+				p2.analyticsDispatch({
 					type = constantsModule.AnalyticsActions.SetSubmissionCompleted
 				})
-				p1.onReportComplete(getToastMessageFromAbuseReasonModule(abuseReason, true))
+				p2.onReportComplete(getToastMessageFromAbuseReasonModule(abuseReason, true))
 				
 				return
 			end
 			spawn(function()
-				-- upvalues: marketplaceService (copy), p0 (ref), playersService (copy), abuseReason (ref)
-				local var8 = tostring(game.PlaceId)
-				local var9 = "N/A"
-				local var10 = "N/A"
+				-- upvalues: marketplaceService (copy), p1 (ref), playersService (copy), abuseReason (ref)
+				local var1 = tostring(game.PlaceId)
+				local var2 = "N/A"
+				local var3 = "N/A"
 				pcall(function()
-					-- upvalues: marketplaceService (copy), var9 (write), var10 (write)
+					-- upvalues: marketplaceService (copy), var2 (write), var3 (write)
 					local placeIdProductInfoAsync = marketplaceService:GetProductInfoAsync(game.PlaceId, Enum.InfoType.Asset)
-					var9 = placeIdProductInfoAsync.Name
-					var10 = placeIdProductInfoAsync.Description
+					var2 = placeIdProductInfoAsync.Name
+					var3 = placeIdProductInfoAsync.Description
 				end)
-				playersService:ReportAbuse(nil, abuseReason, string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p0.comment, var9, var8, var10))
+				playersService:ReportAbuse(nil, abuseReason, string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p1.comment, var2, var1, var3))
 			end)
-			p1.analyticsDispatch({
+			p2.analyticsDispatch({
 				type = constantsModule.AnalyticsActions.SetSubmissionCompleted
 			})
-			p1.onReportComplete(getToastMessageFromAbuseReasonModule(abuseReason))
+			p2.onReportComplete(getToastMessageFromAbuseReasonModule(abuseReason))
 		end
 	end
 }

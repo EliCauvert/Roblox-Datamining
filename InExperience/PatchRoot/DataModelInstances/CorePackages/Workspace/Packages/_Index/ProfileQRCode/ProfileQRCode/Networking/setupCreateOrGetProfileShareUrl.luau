@@ -1,8 +1,8 @@
 ﻿local httpModule = require(script:FindFirstAncestor("ProfileQRCode").Parent.Http)
 
-local var1 = function(p0, _)
+local var1 = function(p1, _)
 	-- upvalues: httpModule (ref)
-	return p0(httpModule.Url.APIS_URL .. "sharelinks"):path("v1"):path("get-or-create-link"):body({ linkType = "Profile" })
+	return p1(httpModule.Url.APIS_URL .. "sharelinks"):path("v1"):path("get-or-create-link"):body({ linkType = "Profile" })
 end
 
 return {

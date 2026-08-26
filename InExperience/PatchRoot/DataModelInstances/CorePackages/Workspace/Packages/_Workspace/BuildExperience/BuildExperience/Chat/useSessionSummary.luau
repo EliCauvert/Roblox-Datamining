@@ -4,20 +4,20 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local parseSessionStreamModule = require(script.Parent.parseSessionStream)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), signalsReactModule (ref), parseSessionStreamModule (ref)
-	local var3 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
-		-- upvalues: p0 (ref)
-		return p0.getMergedHistory(p1)
-	end, { p0 }))
+	local var1 = signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
+		-- upvalues: p1 (ref)
+		return p1.getMergedHistory(p2)
+	end, { p1 }))
 	
 	return reactModule.useMemo(function()
-		-- upvalues: parseSessionStreamModule (copy), var3 (ref), p0 (ref)
-		local var4 = parseSessionStreamModule(var3, { sessionId = p0.getCasSessionId() })
+		-- upvalues: parseSessionStreamModule (copy), var1 (ref), p1 (ref)
+		local var2 = parseSessionStreamModule(var1, { sessionId = p1.getCasSessionId() })
 		
 		return {
-			subagentTaskState = var4.subagentTaskState,
-			hasPublishedTurn = var4.includesPublishTool
+			subagentTaskState = var2.subagentTaskState,
+			hasPublishedTurn = var2.includesPublishTool
 		}
-	end, { var3, p0 })
+	end, { var1, p1 })
 end

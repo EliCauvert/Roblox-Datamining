@@ -21,105 +21,105 @@ local t = {
 	edits = { music = nil, trim = nil }
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: cryoModule (ref), t (ref), useToggleStateModule (ref), useRef (ref), signalModule (ref), useMemo (ref), constantsModule (ref), useAudioPlaybackModule (ref), useVideoPlaybackModule (ref), useImageDisplayModule (ref), useCallback (ref), useEffect (ref)
-	local var10 = cryoModule.Dictionary.union(t, p1)
-	local var11 = useToggleStateModule(false)
-	local var12 = useToggleStateModule(false)
-	local var13 = useRef(signalModule.new())
-	local var14 = useMemo(function()
-		-- upvalues: var10 (ref)
-		return if var10.edits.music then var10.edits.music.assetId else nil
-	end, { var10.edits })
-	local var15 = useMemo(function()
-		-- upvalues: var10 (ref), constantsModule (copy)
-		return if var10.captureType == Enum.CaptureType.Screenshot then NumberRange.new(0, constantsModule.ScreenshotMusicDuration) elseif var10.edits.trim then NumberRange.new(var10.edits.trim.startTime, var10.edits.trim.endTime) else NumberRange.new(0, 1e999)
-	end, { var10.edits, var10.captureType })
-	local var16 = useAudioPlaybackModule(p0, var14, {
+	local var1 = cryoModule.Dictionary.union(t, p2)
+	local var2 = useToggleStateModule(false)
+	local var3 = useToggleStateModule(false)
+	local var4 = useRef(signalModule.new())
+	local var5 = useMemo(function()
+		-- upvalues: var1 (ref)
+		return if var1.edits.music then var1.edits.music.assetId else nil
+	end, { var1.edits })
+	local var6 = useMemo(function()
+		-- upvalues: var1 (ref), constantsModule (copy)
+		return if var1.captureType == Enum.CaptureType.Screenshot then NumberRange.new(0, constantsModule.ScreenshotMusicDuration) elseif var1.edits.trim then NumberRange.new(var1.edits.trim.startTime, var1.edits.trim.endTime) else NumberRange.new(0, 1e999)
+	end, { var1.edits, var1.captureType })
+	local var7 = useAudioPlaybackModule(p1, var5, {
 		playbackRegion = useMemo(function()
-			-- upvalues: var10 (ref), var15 (ref)
-			return if var10.edits.music then NumberRange.new(var10.edits.music.startTime, var10.edits.music.startTime + (var15.Max - var15.Min)) else NumberRange.new(0, 1e999)
-		end, { var10.edits, var15 }),
-		looping = p1.looping
+			-- upvalues: var1 (ref), var6 (ref)
+			return if var1.edits.music then NumberRange.new(var1.edits.music.startTime, var1.edits.music.startTime + (var6.Max - var6.Min)) else NumberRange.new(0, 1e999)
+		end, { var1.edits, var6 }),
+		looping = p2.looping
 	})
-	local var17 = useVideoPlaybackModule(p0, if var10.captureType == Enum.CaptureType.Screenshot then nil else var10.content, { playbackRegion = var15, looping = p1.looping })
-	local var18 = useImageDisplayModule(p0, if var10.captureType == Enum.CaptureType.Screenshot then var10.content else nil)
-	local var19 = useCallback(function(p2)
-		-- upvalues: var17 (ref), var16 (ref)
-		if var17.ref.current and var17.ref.current.IsLoaded then
-			var17.timeline.seek(p2)
-			var16.timeline.seek(p2)
+	local var8 = useVideoPlaybackModule(p1, if var1.captureType == Enum.CaptureType.Screenshot then nil else var1.content, { playbackRegion = var6, looping = p2.looping })
+	local var9 = useImageDisplayModule(p1, if var1.captureType == Enum.CaptureType.Screenshot then var1.content else nil)
+	local var10 = useCallback(function(p3)
+		-- upvalues: var8 (ref), var7 (ref)
+		if var8.ref.current and var8.ref.current.IsLoaded then
+			var8.timeline.seek(p3)
+			var7.timeline.seek(p3)
 			
 			return
 		end
-	end, { var17.timeline.seek, var16.timeline.seek })
+	end, { var8.timeline.seek, var7.timeline.seek })
 	useEffect(function()
-		-- upvalues: var17 (ref), var18 (ref), p0 (ref), var11 (ref)
-		if (not var17.ref.current or not var17.ref.current.IsLoaded) and (not var18.ref.current or not var18.isLoadedRef.current) then return end
-		if p0 then
-			var11.enable()
+		-- upvalues: var8 (ref), var9 (ref), p1 (ref), var2 (ref)
+		if (not var8.ref.current or not var8.ref.current.IsLoaded) and (not var9.ref.current or not var9.isLoadedRef.current) then return end
+		if p1 then
+			var2.enable()
 			
 			return
 		end
-		var11.disable()
-	end, { p0 })
+		var2.disable()
+	end, { p1 })
 	useEffect(function()
-		-- upvalues: var17 (ref), var18 (ref), var11 (ref), var16 (ref)
-		if (not var17.ref.current or not var17.ref.current.IsLoaded) and (not var18.ref.current or not var18.isLoadedRef.current) then return end
-		if var11.enabled then
-			var17.playback.play()
-			var16.playback.play()
+		-- upvalues: var8 (ref), var9 (ref), var2 (ref), var7 (ref)
+		if (not var8.ref.current or not var8.ref.current.IsLoaded) and (not var9.ref.current or not var9.isLoadedRef.current) then return end
+		if var2.enabled then
+			var8.playback.play()
+			var7.playback.play()
 			
 			return
 		end
-		var17.playback.pause()
-		var16.playback.pause()
-	end, { var11.enabled })
+		var8.playback.pause()
+		var7.playback.pause()
+	end, { var2.enabled })
 	useEffect(function()
-		-- upvalues: var12 (ref), var16 (ref), var14 (ref), var17 (ref)
-		if var12.enabled then
-			var16.volume.mute()
+		-- upvalues: var3 (ref), var7 (ref), var5 (ref), var8 (ref)
+		if var3.enabled then
+			var7.volume.mute()
 		else
-			var16.volume.unmute()
+			var7.volume.unmute()
 		end
-		if var14 or var12.enabled then
-			var17.volume.mute()
+		if var5 or var3.enabled then
+			var8.volume.mute()
 			
 			return
 		end
-		var17.volume.unmute()
-	end, { var12.enabled, var14 })
-	local var20 = useCallback(function(p3)
-		-- upvalues: p0 (ref), var10 (ref), var11 (ref), var13 (ref)
-		if p0 and var10.autoplay then
-			var11.enable()
+		var8.volume.unmute()
+	end, { var3.enabled, var5 })
+	local var11 = useCallback(function(p3)
+		-- upvalues: p1 (ref), var1 (ref), var2 (ref), var4 (ref)
+		if p1 and var1.autoplay then
+			var2.enable()
 		end
-		var13.current:fire(p3)
-	end, { p0, var10.autoplay })
-	local var21 = useCallback(function()
-		-- upvalues: var20 (ref)
-		var20(Enum.AssetType.Image)
-	end, { var20 })
-	local var22 = useCallback(function()
-		-- upvalues: var20 (ref)
-		var20(Enum.AssetType.Video)
-	end, { var20 })
-	local var23 = useCallback(function()
-		-- upvalues: var16 (ref)
-		var16.timeline.seek(0)
-	end, { var16.timeline.seek })
+		var4.current:fire(p3)
+	end, { p1, var1.autoplay })
+	local var12 = useCallback(function()
+		-- upvalues: var11 (ref)
+		var11(Enum.AssetType.Image)
+	end, { var11 })
+	local var13 = useCallback(function()
+		-- upvalues: var11 (ref)
+		var11(Enum.AssetType.Video)
+	end, { var11 })
+	local var14 = useCallback(function()
+		-- upvalues: var7 (ref)
+		var7.timeline.seek(0)
+	end, { var7.timeline.seek })
 	useEffect(function()
-		-- upvalues: var17 (ref), var23 (ref), var22 (ref), var18 (ref), var21 (ref)
+		-- upvalues: var8 (ref), var14 (ref), var13 (ref), var9 (ref), var12 (ref)
 		local t = {}
 		
-		if var17.onVideoDidLoopSignalRef.current then
-			table.insert(t, var17.onVideoDidLoopSignalRef.current:connect(var23))
+		if var8.onVideoDidLoopSignalRef.current then
+			table.insert(t, var8.onVideoDidLoopSignalRef.current:connect(var14))
 		end
-		if var17.onVideoLoadedSignalRef.current then
-			table.insert(t, var17.onVideoLoadedSignalRef.current:connect(var22))
+		if var8.onVideoLoadedSignalRef.current then
+			table.insert(t, var8.onVideoLoadedSignalRef.current:connect(var13))
 		end
-		if var18.onImageLoadedSignalRef.current then
-			table.insert(t, var18.onImageLoadedSignalRef.current:connect(var21))
+		if var9.onImageLoadedSignalRef.current then
+			table.insert(t, var9.onImageLoadedSignalRef.current:connect(var12))
 		end
 		return function()
 			-- upvalues: t (ref)
@@ -127,41 +127,41 @@ return function(p0, p1)
 				v.disconnect()
 			end
 		end
-	end, { var22, var23, var21 })
+	end, { var13, var14, var12 })
 	
 	return {
-		timeline = if var10.captureType == Enum.CaptureType.Video then {
-			duration = var17.timeline.duration,
-			elapsed = var17.timeline.elapsed,
-			seek = var19,
-			timeLength = var17.timeline.timeLength,
-			timePosition = var17.timeline.timePosition
+		timeline = if var1.captureType == Enum.CaptureType.Video then {
+			duration = var8.timeline.duration,
+			elapsed = var8.timeline.elapsed,
+			seek = var10,
+			timeLength = var8.timeline.timeLength,
+			timePosition = var8.timeline.timePosition
 		} else {
 			duration = constantsModule.ScreenshotMusicDuration,
-			elapsed = var16.timeline.elapsed,
-			seek = var19,
+			elapsed = var7.timeline.elapsed,
+			seek = var10,
 			timeLength = constantsModule.ScreenshotMusicDuration,
-			timePosition = var16.timeline.timePosition
+			timePosition = var7.timeline.timePosition
 		},
 		playback = {
-			isPlaying = var11.enabled,
-			pause = var11.disable,
-			play = var11.enable,
-			toggle = var11.toggle
+			isPlaying = var2.enabled,
+			pause = var2.disable,
+			play = var2.enable,
+			toggle = var2.toggle
 		},
 		volume = {
-			isMuted = var12.enabled,
-			mute = var12.enable,
-			unmute = var12.disable,
-			toggle = var12.toggle
+			isMuted = var3.enabled,
+			mute = var3.enable,
+			unmute = var3.disable,
+			toggle = var3.toggle
 		},
 		audio = {
-			timeLength = var16.timeline.timeLength,
-			timePosition = var16.timeline.timePosition
+			timeLength = var7.timeline.timeLength,
+			timePosition = var7.timeline.timePosition
 		},
-		onContentLoadedSignalRef = var13,
-		imageRef = var18.updateRef,
-		videoRef = var17.updateRef,
-		audioRef = var16.ref
+		onContentLoadedSignalRef = var4,
+		imageRef = var9.updateRef,
+		videoRef = var8.updateRef,
+		audioRef = var7.ref
 	}
 end

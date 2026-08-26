@@ -8,12 +8,12 @@ local createPinnedItemModule = require(viewRecyclerReact.ReactAdapter.createPinn
 local createRecyclableComponentModule = require(viewRecyclerReact.ReactAdapter.createRecyclableComponent)
 local createRecyclableViewModule = require(viewRecyclerReact.ReactAdapter.createRecyclableView)
 
-return function(p0)
+return function(p1)
 	-- upvalues: virtualListModule (ref), recyclingScopeModule (ref), recyclingViewportModule (ref), createPinnedItemModule (ref), createRecyclableComponentModule (ref), createRecyclableViewModule (ref), itemHooksModule (ref), viewRecyclerModule (ref), viewRecyclerReact (ref)
 	return table.freeze({
-		VirtualList = virtualListModule.create(p0),
-		RecyclingScope = recyclingScopeModule.create(p0),
-		RecyclingViewport = recyclingViewportModule.create(p0),
+		VirtualList = virtualListModule.create(p1),
+		RecyclingScope = recyclingScopeModule.create(p1),
+		RecyclingViewport = recyclingViewportModule.create(p1),
 		createPinnedItem = createPinnedItemModule,
 		createRecyclableComponent = createRecyclableComponentModule,
 		createRecyclableView = createRecyclableViewModule,

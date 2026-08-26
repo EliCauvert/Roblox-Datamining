@@ -6,38 +6,38 @@ local useButtonHold = focusNavigationUtilsModule.useButtonHold
 local constantsModule = require(holdToPlay.Constants)
 local buttonHoldStateEnum = focusNavigationUtilsModule.ButtonHoldStateEnum
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useButtonHold (ref), constantsModule (ref), reactModule (ref), buttonHoldStateEnum (ref)
-	local var4 = useButtonHold(p0 or constantsModule.SIGNAL_HOLD_INTENT_SECONDS, p1 or constantsModule.SIGNAL_HOLD_COMPLETE_SECONDS)
-	local var5, var6 = reactModule.useState(nil)
-	local var7, var8 = reactModule.useState(nil)
-	local var9, var10 = reactModule.useState(nil)
-	local var11 = if var4.holdState ~= buttonHoldStateEnum.HOLDING then var4.holdState == buttonHoldStateEnum.COMPLETED else true
+	local var1 = useButtonHold(p1 or constantsModule.SIGNAL_HOLD_INTENT_SECONDS, p2 or constantsModule.SIGNAL_HOLD_COMPLETE_SECONDS)
+	local var2, var3 = reactModule.useState(nil)
+	local var4, var5 = reactModule.useState(nil)
+	local var6, var7 = reactModule.useState(nil)
+	local var8 = if var1.holdState ~= buttonHoldStateEnum.HOLDING then var1.holdState == buttonHoldStateEnum.COMPLETED else true
 	
 	return {
-		selectedEntry = var9,
-		selectedIndex = var7,
-		selectedNavigationUniverseId = var5,
-		onHoldableFocused = reactModule.useCallback(function(p2, p3, p4)
-			-- upvalues: var10 (ref), var8 (ref), var6 (ref)
-			var10(p2)
-			var8(p3)
-			var6(p4)
+		selectedEntry = var6,
+		selectedIndex = var4,
+		selectedNavigationUniverseId = var2,
+		onHoldableFocused = reactModule.useCallback(function(p3, p4, p5)
+			-- upvalues: var7 (ref), var5 (ref), var3 (ref)
+			var7(p3)
+			var5(p4)
+			var3(p5)
 		end, {}),
 		onHoldableUnfocused = reactModule.useCallback(function()
-			-- upvalues: var6 (ref), var8 (ref), var10 (ref)
-			var6(nil)
-			var8(nil)
-			var10(nil)
+			-- upvalues: var3 (ref), var5 (ref), var7 (ref)
+			var3(nil)
+			var5(nil)
+			var7(nil)
 		end, {}),
-		shouldRenderHoldToPlayLauncher = var9 ~= nil,
-		shouldDisableHoldable = reactModule.useCallback(function(p5)
-			-- upvalues: var11 (ref), var7 (ref)
-			return var11 and (var7 and p5 == var7)
-		end, { var11, var7 }),
-		holdState = var4.holdState,
-		holdProgress = var4.holdProgress,
-		cancelHold = var4.cancelHold,
-		holdToPlayEventHandler = var4.eventHandler
+		shouldRenderHoldToPlayLauncher = var6 ~= nil,
+		shouldDisableHoldable = reactModule.useCallback(function(p3)
+			-- upvalues: var8 (ref), var4 (ref)
+			return var8 and (var4 and p3 == var4)
+		end, { var8, var4 }),
+		holdState = var1.holdState,
+		holdProgress = var1.holdProgress,
+		cancelHold = var1.cancelHold,
+		holdToPlayEventHandler = var1.eventHandler
 	}
 end

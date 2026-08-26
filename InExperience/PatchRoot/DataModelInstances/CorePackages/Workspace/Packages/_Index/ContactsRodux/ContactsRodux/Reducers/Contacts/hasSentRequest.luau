@@ -11,9 +11,9 @@ local t = {}
 return function(_)
 	-- upvalues: roduxModule (ref), t (ref), requestSent (ref), dashModule (ref)
 	return roduxModule.createReducer(t, {
-		[requestSent.name] = function(p0, p1)
+		[requestSent.name] = function(p1, p2)
 			-- upvalues: dashModule (copy)
-			return dashModule.join(p0, { [p1.payload.id] = true })
+			return dashModule.join(p1, { [p2.payload.id] = true })
 		end
 	})
 end

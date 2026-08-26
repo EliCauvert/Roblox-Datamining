@@ -6,41 +6,41 @@ local function _()
 	return httpService:GenerateGUID(false):lower()
 end
 
-local var2 = ""
-local var3, var4 = signalsModule.createSignal(nil)
+local var1 = ""
+local var2, var3 = signalsModule.createSignal(nil)
 
 return {
 	Get = function(_)
-		-- upvalues: var2 (write), httpService (ref)
-		if var2 == "" then
-			var2 = httpService:GenerateGUID(false):lower()
+		-- upvalues: var1 (write), httpService (ref)
+		if var1 == "" then
+			var1 = httpService:GenerateGUID(false):lower()
 		end
-		return var2
+		return var1
 	end,
 	Refresh = function(_)
-		-- upvalues: var2 (write), httpService (ref)
-		var2 = httpService:GenerateGUID(false):lower()
+		-- upvalues: var1 (write), httpService (ref)
+		var1 = httpService:GenerateGUID(false):lower()
 		
-		return var2
+		return var1
 	end,
-	Commit = function(p0, p1)
-		-- upvalues: var3 (ref), var4 (ref)
-		local var5 = p0:Get()
-		local var6 = var3(false)
+	Commit = function(p1, p2)
+		-- upvalues: var2 (ref), var3 (ref)
+		local var4 = p1:Get()
+		local var5 = var2(false)
 		
-		if var6 == nil or var6.sessionId ~= var5 then
-			var4({ sessionId = var5, requestId = p1 })
+		if var5 == nil or var5.sessionId ~= var4 then
+			var3({ sessionId = var4, requestId = p2 })
 			
 			return true
 		end
 		return false
 	end,
 	GetCommitted = function(_)
-		-- upvalues: var3 (ref)
-		return var3(false)
+		-- upvalues: var2 (ref)
+		return var2(false)
 	end,
 	GetCommittedSignal = function(_)
-		-- upvalues: var3 (ref)
-		return var3
+		-- upvalues: var2 (ref)
+		return var2
 	end
 }

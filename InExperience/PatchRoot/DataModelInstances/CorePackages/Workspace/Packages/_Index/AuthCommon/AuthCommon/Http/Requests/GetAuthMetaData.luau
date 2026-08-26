@@ -1,6 +1,6 @@
 ﻿local url = require(script:FindFirstAncestor("AuthCommon").Parent.Http).Url
 
-return function(p0)
+return function(p1)
 	-- upvalues: url (ref)
-	return p0(string.format("%sv2/metadata", url.AUTH_URL), "GET")
+	return p1(string.format("%sv2/metadata", url.AUTH_URL), "GET")
 end

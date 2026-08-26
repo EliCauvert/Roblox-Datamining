@@ -15,67 +15,67 @@ end
 
 return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), dimensionsMethodsModule (ref), getKeyDefault (ref), var2 (ref), createElement (ref), joinAndMapBindingsModule (ref), adjustPositionToScrollAxisModule (ref)
-	local var1, var2 = reactModule.useState(function()
+	local var3, var4 = reactModule.useState(function()
 		-- upvalues: dimensionsMethodsModule (copy), p1 (ref), reactModule (copy)
 		local t = {}
-		local var1 = dimensionsMethodsModule.elementsDisplayedHint(p1.dimensions, p1.virtualizedListController.getWindowSize(), p1.direction)
+		local var5 = dimensionsMethodsModule.elementsDisplayedHint(p1.dimensions, p1.virtualizedListController.getWindowSize(), p1.direction)
 		
-		if var1 == nil then
+		if var5 == nil then
 			return t
 		end
-		for _ = 1, var1 do
-			local var2, var3 = reactModule.createBinding({ contents = { type = "vacant" } })
-			table.insert(t, { binding = var2, set = var3 })
+		for _ = 1, var5 do
+			local var6, var7 = reactModule.createBinding({ contents = { type = "vacant" } })
+			table.insert(t, { binding = var6, set = var7 })
 		end
 		return t
 	end)
 	local getKey = p1.getKey or getKeyDefault
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), getKey (ref), var1 (ref), var2 (copy), reactModule (copy), var2 (ref)
+		-- upvalues: p1 (ref), getKey (ref), var5 (ref), var6 (copy), reactModule (copy), var6 (ref)
 		return p1.virtualizedListController.bindToUpdate(function()
-			-- upvalues: p1 (copy), getKey (copy), var1 (copy), var2 (copy), reactModule (copy), var2 (copy)
-			local var1 = p1.virtualizedListController.get()
+			-- upvalues: p1 (copy), getKey (copy), var5 (copy), var6 (copy), reactModule (copy), var6 (copy)
+			local var8 = p1.virtualizedListController.get()
 			local range = p1.virtualizedListController.getRange()
 			local t = {}
 			
-			for i, v in var1 do
+			for i, v in var8 do
 				t[getKey(v, i + (range.X - 1))] = i
 			end
 			local t_1 = {}
 			local t_2 = {}
 			local t_3 = {}
 			
-			for i_1, v_1 in var1 do
+			for i_1, v_1 in var8 do
 				local value = v_1.binding:getValue()
 				
 				if value.contents.type == "vacant" then
 					table.insert(t_2, v_1.set)
 				else
 					local key = value.contents.key
-					local var2 = t[key]
+					local var9 = t[key]
 					
-					if var2 == nil then
-						var2("%s is now dead", key)
+					if var9 == nil then
+						var9("%s is now dead", key)
 						table.insert(t_1, v_1.set)
 					else
 						t[key] = nil
-						local var3 = var1[var2]
+						local var10 = var8[var9]
 						
-						if value.contents.value ~= var3 then
-							var2("%s existed, but changed", key)
+						if value.contents.value ~= var10 then
+							var9("%s existed, but changed", key)
 							v_1.set({
 								contents = {
 									type = "full",
-									index = var2 + (range.X - 1),
+									index = var9 + (range.X - 1),
 									key = key,
-									value = var3
+									value = var10
 								}
 							})
 						end
 					end
 				end
 			end
-			var2("%d total setters, %d dead setters, %d vacant setters", #var1, #t_1, #t_2)
+			var9("%d total setters, %d dead setters, %d vacant setters", #var8, #t_1, #t_2)
 			
 			for i_2, v_2 in t do
 				assert(v_2 ~= nil, "Luau")
@@ -84,7 +84,7 @@ return reactModule.memo(function(p1)
 						type = "full",
 						index = v_2 + (range.X - 1),
 						key = i_2,
-						value = var1[v_2]
+						value = var8[v_2]
 					}
 				}
 				local removed = table.remove(t_1)
@@ -93,22 +93,22 @@ return reactModule.memo(function(p1)
 					local removed_1 = table.remove(t_2)
 					
 					if removed_1 == nil then
-						local var4, var5 = reactModule.createBinding(t_4)
-						table.insert(t_3, { binding = var4, set = var5 })
+						local var11, var12 = reactModule.createBinding(t_4)
+						table.insert(t_3, { binding = var11, set = var12 })
 					else
-						var2("%s is filling vacant spot", i_2)
+						var9("%s is filling vacant spot", i_2)
 						removed_1(t_4)
 					end
 				else
-					var2("%s is filling dead spot", i_2)
+					var9("%s is filling dead spot", i_2)
 					removed(t_4)
 				end
 			end
 			if #t_3 > 0 then
-				var2("Needed to create %d more bindings to fit, there will be %d setters", #t_3, #t_3 + #var1)
-				var2(function(p1)
+				var9("Needed to create %d more bindings to fit, there will be %d setters", #t_3, #t_3 + #var8)
+				var9(function(p2)
 					-- upvalues: t_3 (ref)
-					local cloned = table.clone(p1)
+					local cloned = table.clone(p2)
 					table.move(t_3, 1, #t_3, #cloned + 1, cloned)
 					
 					return cloned
@@ -118,30 +118,30 @@ return reactModule.memo(function(p1)
 				v_3({ contents = { type = "vacant" } })
 			end
 		end)
-	end, { p1.virtualizedListController, getKey, var1 })
+	end, { p1.virtualizedListController, getKey, var8 })
 	local t = {}
 	
-	for i, v in var1 do
+	for i, v in var8 do
 		local binding = v.binding
-		local var6 = binding:map(function(p1)
-			-- upvalues: dimensionsMethodsModule (copy), p1 (ref)
-			return if p1.contents.type == "vacant" then { size = UDim2.new(), position = UDim2.new() } else dimensionsMethodsModule.getUDimRect(p1.dimensions, p1.contents.value, p1.contents.index, p1.virtualizedListController.getWindowSize(), p1.direction)
+		local var13 = binding:map(function(p2)
+			-- upvalues: dimensionsMethodsModule (copy), p2 (ref)
+			return if p2.contents.type == "vacant" then { size = UDim2.new(), position = UDim2.new() } else dimensionsMethodsModule.getUDimRect(p2.dimensions, p2.contents.value, p2.contents.index, p2.virtualizedListController.getWindowSize(), p2.direction)
 		end)
 		t[`Item{i}`] = createElement("Frame", {
 			BackgroundTransparency = 1,
-			Position = joinAndMapBindingsModule(function(p1, p2)
-				-- upvalues: adjustPositionToScrollAxisModule (copy), p1 (ref)
-				return adjustPositionToScrollAxisModule(p1.position, p2, p1.direction)
-			end, var6, p1.scrollAxisBinding),
-			Size = var6:map(function(p1)
-				return p1.size
+			Position = joinAndMapBindingsModule(function(p2, p3)
+				-- upvalues: adjustPositionToScrollAxisModule (copy), p2 (ref)
+				return adjustPositionToScrollAxisModule(p2.position, p3, p2.direction)
+			end, var13, p1.scrollAxisBinding),
+			Size = var13:map(function(p2)
+				return p2.size
 			end),
-			Visible = binding:map(function(p1)
-				return p1.contents.type == "full"
+			Visible = binding:map(function(p2)
+				return p2.contents.type == "full"
 			end)
 		}, {
-			Content = p1.callback(binding:map(function(p1)
-				return if p1.contents.type == "full" then p1.contents.value else nil
+			Content = p1.callback(binding:map(function(p2)
+				return if p2.contents.type == "full" then p2.contents.value else nil
 			end))
 		})
 	end

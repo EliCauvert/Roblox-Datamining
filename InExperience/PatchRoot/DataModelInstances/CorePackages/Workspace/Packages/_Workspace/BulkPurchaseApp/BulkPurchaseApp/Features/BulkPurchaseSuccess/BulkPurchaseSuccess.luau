@@ -4,18 +4,18 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local alertPromptModule = require(bulkPurchaseApp.Components.AlertPrompt)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), alertPromptModule (ref)
-	local var3 = useLocalization({
+	local var1 = useLocalization({
 		title = "CoreScripts.BulkPurchasePrompt.SuccessPrompt.Heading",
 		bodyText = "CoreScripts.BulkPurchasePrompt.SuccessPrompt.Body",
 		dismissCTA = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.DismissCTA"
 	})
 	
 	return reactModule.createElement(alertPromptModule, {
-		title = var3.title,
-		bodyText = var3.bodyText:gsub("{.*}", tostring(p0.itemCount)),
-		dismissCTA = var3.dismissCTA,
-		onDismiss = p0.onDismiss
+		title = var1.title,
+		bodyText = var1.bodyText:gsub("{.*}", tostring(p1.itemCount)),
+		dismissCTA = var1.dismissCTA,
+		onDismiss = p1.onDismiss
 	})
 end

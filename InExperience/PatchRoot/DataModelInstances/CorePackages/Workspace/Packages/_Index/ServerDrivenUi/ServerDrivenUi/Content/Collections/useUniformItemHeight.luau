@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ServerDrivenUi").Parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef({})
 	local var2 = reactModule.useRef(false)
@@ -9,13 +9,13 @@ return function(p0)
 	local var6, var7 = reactModule.useBinding(nil)
 	
 	return {
-		measuredMaxHeight = if p0 then var4 else nil,
-		measuredMaxHeightBinding = if p0 then var6 else nil,
-		onItemSizeChanged = if p0 then reactModule.useCallback(function(p1, p2)
-			-- upvalues: p0 (ref), var3 (ref), var1 (ref), var5 (ref), var7 (ref), var2 (ref)
-			if not p0 then return end
-			local x = p2.AbsoluteSize.X
-			local y = p2.AbsoluteSize.Y
+		measuredMaxHeight = if p1 then var4 else nil,
+		measuredMaxHeightBinding = if p1 then var6 else nil,
+		onItemSizeChanged = if p1 then reactModule.useCallback(function(p2, p3)
+			-- upvalues: p1 (ref), var3 (ref), var1 (ref), var5 (ref), var7 (ref), var2 (ref)
+			if not p1 then return end
+			local x = p3.AbsoluteSize.X
+			local y = p3.AbsoluteSize.Y
 			
 			if var3.current > 0 and math.abs(x - var3.current) > 1 then
 				var3.current = x
@@ -27,8 +27,8 @@ return function(p0)
 			end
 			var3.current = x
 			
-			if y <= 0 or var1.current[p1] == y then return end
-			var1.current[p1] = y
+			if y <= 0 or var1.current[p2] == y then return end
+			var1.current[p2] = y
 			
 			if not var2.current then
 				var2.current = true
@@ -46,6 +46,6 @@ return function(p0)
 					end
 				end)
 			end
-		end, { p0 }) else nil
+		end, { p1 }) else nil
 	}
 end

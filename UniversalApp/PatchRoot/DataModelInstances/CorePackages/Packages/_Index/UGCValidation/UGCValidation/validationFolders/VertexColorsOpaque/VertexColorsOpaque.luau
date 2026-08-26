@@ -14,16 +14,16 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: validationEnumsModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
-		local uploadCategory = p1.uploadCategory
-		local var3 = if uploadCategory ~= validationEnumsModule.UploadCategory.TORSO_AND_LIMBS then uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD else true
+		local uploadCategory = p2.uploadCategory
+		local var1 = if uploadCategory ~= validationEnumsModule.UploadCategory.TORSO_AND_LIMBS then uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD else true
 		
-		for i, v in p1.renderMeshesData do
-			if not UGCValidationService:ValidateEditableMeshVertColors(v.editable, var3) then
-				p0:fail(errorSourceStringsModule.Keys.VertexColors_NotOpaque, {
+		for i, v in p2.renderMeshesData do
+			if not UGCValidationService:ValidateEditableMeshVertColors(v.editable, var1) then
+				p1:fail(errorSourceStringsModule.Keys.VertexColors_NotOpaque, {
 					MeshName = i,
-					TransparencyNote = if var3 then "with no transparency" else ""
+					TransparencyNote = if var1 then "with no transparency" else ""
 				})
 			end
 		end

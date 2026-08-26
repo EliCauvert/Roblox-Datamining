@@ -2,10 +2,10 @@
 local promiseModule = require(parent.Promise)
 local parseSubscriptionErrorModule = require(parent.Utils.parseSubscriptionError)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: promiseModule (ref), parseSubscriptionErrorModule (ref)
-	return p0.performSubscriptionPurchase(p1, p2):catch(function(p3)
+	return p1.performSubscriptionPurchase(p2, p3):catch(function(p4)
 		-- upvalues: promiseModule (copy), parseSubscriptionErrorModule (copy)
-		return promiseModule.reject(parseSubscriptionErrorModule(p3))
+		return promiseModule.reject(parseSubscriptionErrorModule(p4))
 	end)
 end

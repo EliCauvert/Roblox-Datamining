@@ -14,12 +14,12 @@ return {
 	prereqTests = {
 		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: errorSourceStringsModule (ref)
-		if p1.uploadEnum.assetType == Enum.AssetType.JumpAnimation then return end
-		for i, v in p1.curveAnimations do
+		if p2.uploadEnum.assetType == Enum.AssetType.JumpAnimation then return end
+		for i, v in p2.curveAnimations do
 			if not v.Loop then
-				p0:fail(errorSourceStringsModule.Keys.CurveAnim_LoopingNotEnabled, { animationName = v:GetFullName() })
+				p1:fail(errorSourceStringsModule.Keys.CurveAnim_LoopingNotEnabled, { animationName = v:GetFullName() })
 			end
 		end
 	end

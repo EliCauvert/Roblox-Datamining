@@ -63,82 +63,82 @@ linkButton.defaultProps = {
 	debugGetTextSize = getTextSizeModule
 }
 
-function linkButton.init(p0)
+function linkButton.init(p1)
 	-- upvalues: controlStateModule (ref)
-	p0:setState({ controlState = controlStateModule.Initialize })
+	p1:setState({ controlState = controlStateModule.Initialize })
 	
-	function p0.applyRichTextUnderline(p1)
+	function p0.applyRichTextUnderline(p2)
 		return "<u>" .. p1 .. "</u>"
 	end
 	
 	function p0.onStateChanged(p2, p3)
-		-- upvalues: p0 (ref)
-		p0:setState({ controlState = p3 })
+		-- upvalues: p1 (ref)
+		p1:setState({ controlState = p3 })
 		
-		if p0.props.onStateChanged then
-			p0.props.onStateChanged(p2, p3)
+		if p1.props.onStateChanged then
+			p1.props.onStateChanged(p2, p3)
 		end
 	end
 end
 
-function linkButton.render(p4)
-	return p4:renderWithSelectionCursorProvider(nil, p4.props.cursor)
+function linkButton.render(p1)
+	return p1:renderWithSelectionCursorProvider(nil, p1.props.cursor)
 end
 
-function linkButton.renderWithSelectionCursorProvider(p5, _, p6)
+function linkButton.renderWithSelectionCursorProvider(p1, _, p2)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), cleanRichTextTagsModule (ref), roactModule (ref), focusable (ref), interactableModule (ref), genericTextLabelModule (ref), hoverButtonBackgroundModule (ref)
-	return withStyleModule(function(p7)
-		-- upvalues: p5 (ref), controlStateModule (copy), getContentStyleModule (copy), cleanRichTextTagsModule (copy), p6 (ref), roactModule (copy), focusable (copy), interactableModule (copy), genericTextLabelModule (copy), hoverButtonBackgroundModule (copy)
-		local debugControlState = p5.props.debugControlState or p5.state.controlState
-		local var16 = getContentStyleModule({
-			[controlStateModule.Default] = p5.props.colorStyleDefault,
-			[controlStateModule.Hover] = p5.props.colorStyleHover
-		}, debugControlState, p7)
-		local fontStyle = p7.Font[p5.props.fontStyle]
+	return withStyleModule(function(p3)
+		-- upvalues: p1 (ref), controlStateModule (copy), getContentStyleModule (copy), cleanRichTextTagsModule (copy), p2 (ref), roactModule (copy), focusable (copy), interactableModule (copy), genericTextLabelModule (copy), hoverButtonBackgroundModule (copy)
+		local debugControlState = p1.props.debugControlState or p1.state.controlState
+		local var1 = getContentStyleModule({
+			[controlStateModule.Default] = p1.props.colorStyleDefault,
+			[controlStateModule.Hover] = p1.props.colorStyleHover
+		}, debugControlState, p3)
+		local fontStyle = p3.Font[p1.props.fontStyle]
 		
-		if p5.props.underlineAlwaysEnabled == true and debugControlState == controlStateModule.Hover then
-			var16.Transparency = 0.3
+		if p1.props.underlineAlwaysEnabled == true and debugControlState == controlStateModule.Hover then
+			var1.Transparency = 0.3
 		end
-		local var17 = fontStyle.RelativeSize * p7.Font.BaseSize
+		local var2 = fontStyle.RelativeSize * p3.Font.BaseSize
 		
 		return roactModule.createElement(focusable[interactableModule], {
-			AnchorPoint = p5.props.anchorPoint,
-			LayoutOrder = p5.props.layoutOrder,
-			Position = p5.props.position,
-			Size = p5.props.size,
-			isDisabled = p5.props.isDisabled,
-			onStateChanged = p5.onStateChanged,
-			userInteractionEnabled = p5.props.userInteractionEnabled,
+			AnchorPoint = p1.props.anchorPoint,
+			LayoutOrder = p1.props.layoutOrder,
+			Position = p1.props.position,
+			Size = p1.props.size,
+			isDisabled = p1.props.isDisabled,
+			onStateChanged = p1.onStateChanged,
+			userInteractionEnabled = p1.props.userInteractionEnabled,
 			BackgroundTransparency = 1,
 			AutoButtonColor = false,
-			SelectionImageObject = p6,
-			[roactModule.Event.Activated] = p5.props.onActivated,
-			[roactModule.Ref] = p5.props.buttonRef,
-			NextSelectionLeft = p5.props.NextSelectionLeft,
-			NextSelectionRight = p5.props.NextSelectionRight,
-			NextSelectionUp = p5.props.NextSelectionUp,
-			NextSelectionDown = p5.props.NextSelectionDown
+			SelectionImageObject = p2,
+			[roactModule.Event.Activated] = p1.props.onActivated,
+			[roactModule.Ref] = p1.props.buttonRef,
+			NextSelectionLeft = p1.props.NextSelectionLeft,
+			NextSelectionRight = p1.props.NextSelectionRight,
+			NextSelectionUp = p1.props.NextSelectionUp,
+			NextSelectionDown = p1.props.NextSelectionDown
 		}, {
 			sizeConstraint = roactModule.createElement("UISizeConstraint", {
-				MinSize = Vector2.new(p5.props.debugGetTextSize(cleanRichTextTagsModule(p5.props.text), var17, fontStyle.Font, Vector2.new(10000, 0)).X + p5.props.minPaddingX * 2, var17 + p5.props.minPaddingY * 2)
+				MinSize = Vector2.new(p1.props.debugGetTextSize(cleanRichTextTagsModule(p1.props.text), var2, fontStyle.Font, Vector2.new(10000, 0)).X + p1.props.minPaddingX * 2, var2 + p1.props.minPaddingY * 2)
 			}),
 			textLabel = roactModule.createElement(genericTextLabelModule, {
 				BackgroundTransparency = 1,
 				RichText = true,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				Text = if p5.props.underlineAlwaysEnabled or debugControlState == controlStateModule.Hover or debugControlState == controlStateModule.Pressed then p5.applyRichTextUnderline(p5.props.text) else p5.props.text,
+				Text = if p1.props.underlineAlwaysEnabled or debugControlState == controlStateModule.Hover or debugControlState == controlStateModule.Pressed then p1.applyRichTextUnderline(p1.props.text) else p1.props.text,
 				fontStyle = fontStyle,
-				colorStyle = var16
+				colorStyle = var1
 			}),
-			background = p5.props.hoverBackgroundEnabled and (debugControlState == controlStateModule.Hover and roactModule.createElement(hoverButtonBackgroundModule))
+			background = p1.props.hoverBackgroundEnabled and (debugControlState == controlStateModule.Hover and roactModule.createElement(hoverButtonBackgroundModule))
 		})
 	end)
 end
 
-function LinkButtonFunctionalWrapper(p8)
+function LinkButtonFunctionalWrapper(p1)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), linkButton (ref), cryoModule (ref)
-	return roactModule.createElement(linkButton, cryoModule.Dictionary.join(p8, {
+	return roactModule.createElement(linkButton, cryoModule.Dictionary.join(p1, {
 		cursor = useCursorByTypeModule(cursorTypeModule.RoundedRectNoInset)
 	}))
 end

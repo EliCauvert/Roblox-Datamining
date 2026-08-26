@@ -1,8 +1,8 @@
-﻿local var0 = nil
+﻿local var1 = nil
 
 function make_assets_1x()
-	-- upvalues: var0 (write)
-	var0 = {
+	-- upvalues: var1 (write)
+	var1 = {
 		["chat_bubble/chat-bubble"] = {
 			ImageSet = "img_set_1x_3",
 			ImageRectOffset = Vector2.new(490, 246),
@@ -2006,11 +2006,11 @@ function make_assets_1x()
 	}
 end
 
-local var1 = nil
+local var2 = nil
 
 function make_assets_2x()
-	-- upvalues: var1 (write)
-	var1 = {
+	-- upvalues: var2 (write)
+	var2 = {
 		["chat_bubble/chat-bubble"] = {
 			ImageSet = "img_set_2x_4",
 			ImageRectOffset = Vector2.new(338, 460),
@@ -4014,11 +4014,11 @@ function make_assets_2x()
 	}
 end
 
-local var2 = nil
+local var3 = nil
 
 function make_assets_3x()
-	-- upvalues: var2 (write)
-	var2 = {
+	-- upvalues: var3 (write)
+	var3 = {
 		["chat_bubble/chat-bubble"] = {
 			ImageSet = "img_set_3x_7",
 			ImageRectOffset = Vector2.new(436, 957),
@@ -6022,20 +6022,20 @@ function make_assets_3x()
 	}
 end
 
-return function(p0)
-	-- upvalues: var2 (write), var1 (write), var0 (write)
-	if p0 > 2.5 then
-		if not var2 then
+return function(p1)
+	-- upvalues: var3 (write), var2 (write), var1 (write)
+	if p1 > 2.5 then
+		if not var3 then
 			make_assets_3x()
 		end
-		return var2, 3
-	elseif p0 > 1.5 then
-		if not var1 then
+		return var3, 3
+	elseif p1 > 1.5 then
+		if not var2 then
 			make_assets_2x()
 		end
-		return var1, 2
-	elseif not var0 then
+		return var2, 2
+	elseif not var1 then
 		make_assets_1x()
 	end
-	return var0, 1
+	return var1, 1
 end

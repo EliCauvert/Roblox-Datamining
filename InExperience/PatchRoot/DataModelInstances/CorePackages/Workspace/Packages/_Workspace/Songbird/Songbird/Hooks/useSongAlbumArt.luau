@@ -19,41 +19,41 @@ local t = {
 	Masthead = Vector2.new(1440, 456)
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: list (ref)
-	if p0 then
-		local var5 = if typeof(p0) == "string" then tonumber(p0:match("(%d+)$")) else p0
+	if p1 then
+		local var1 = if typeof(p1) == "string" then tonumber(p1:match("(%d+)$")) else p1
 		
-		return if var5 then list[var5 % #list + 1] else "rbxasset://textures/ui/LuaApp/graphic/album_art_fallback_gray.png"
+		return if var1 then list[var1 % #list + 1] else "rbxasset://textures/ui/LuaApp/graphic/album_art_fallback_gray.png"
 	end
 end
 
 return function(p1, p2)
 	-- upvalues: useMemo (ref), list (ref), useAsync (ref), t (ref), tryLoadRbxthumbAsyncModule (ref)
 	p2 = p2 or "Icon"
-	local var7 = useMemo(function()
+	local var1 = useMemo(function()
 		-- upvalues: p1 (ref), list (copy)
 		if p1 then
-			local var9 = if typeof(p1) == "string" then tonumber(p1:match("(%d+)$")) else p1
+			local var2 = if typeof(p1) == "string" then tonumber(p1:match("(%d+)$")) else p1
 			
-			return if var9 then list[var9 % #list + 1] else "rbxasset://textures/ui/LuaApp/graphic/album_art_fallback_gray.png"
+			return if var2 then list[var2 % #list + 1] else "rbxasset://textures/ui/LuaApp/graphic/album_art_fallback_gray.png"
 		end
 	end, { p1 })
-	local var8 = useAsync(function()
+	local var2 = useAsync(function()
 		-- upvalues: p1 (ref), t (copy), p2 (ref), tryLoadRbxthumbAsyncModule (copy)
 		if p1 then
-			local var10 = t[p2]
-			local var11 = `rbxthumb://type=Asset&id={p1}&w={var10.X}&h={var10.Y}`
+			local var3 = t[p2]
+			local var4 = `rbxthumb://type=Asset&id={p1}&w={var3.X}&h={var3.Y}`
 			
-			return if pcall(tryLoadRbxthumbAsyncModule, var11) then var11 else nil
+			return if pcall(tryLoadRbxthumbAsyncModule, var4) then var4 else nil
 		end
 	end, { p2, p1 })
 	
 	return {
-		status = var8.status,
+		status = var2.status,
 		value = useMemo(function()
-			-- upvalues: var8 (ref), var7 (ref)
-			return if var8.status == "ok" and var8.value then var8.value else var7
-		end, { var8, var7 })
+			-- upvalues: var2 (ref), var1 (ref)
+			return if var2.status == "ok" and var2.value then var2.value else var1
+		end, { var2, var1 })
 	}
 end

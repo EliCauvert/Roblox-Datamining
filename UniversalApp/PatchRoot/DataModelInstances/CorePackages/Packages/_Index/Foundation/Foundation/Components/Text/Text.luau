@@ -18,65 +18,65 @@ local t = {
 	isDisabled = false
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), reactModule (ref), reactIsModule (ref), fontScalesModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
-	local var12 = withDefaultsModule(p0, t)
-	local var13 = if var12.onStateChanged == nil then if var12.onActivated == nil then var12.onSecondaryActivated ~= nil else true else true
-	local var14 = if var12.backgroundStyle ~= nil then "gui-object-defaults text-defaults text-size-defaults text-color-defaults" else "gui-object-defaults text-defaults text-size-defaults text-color-defaults x-default-transparency"
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = if var1.onStateChanged == nil then if var1.onActivated == nil then var1.onSecondaryActivated ~= nil else true else true
+	local var3 = if var1.backgroundStyle ~= nil then "gui-object-defaults text-defaults text-size-defaults text-color-defaults" else "gui-object-defaults text-defaults text-size-defaults text-color-defaults x-default-transparency"
 	
-	if var12.fontStyle and var12.fontStyle.FontSize then
-		var14 ..= " x-default-text-size"
+	if var1.fontStyle and var1.fontStyle.FontSize then
+		var3 ..= " x-default-text-size"
 	end
-	local var15 = useStyleTagsModule(useDefaultTagsModule(var12.tag, var14))
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: var12 (ref), reactIsModule (copy)
-		local var21 = if var12.fontStyle ~= nil then nil else var12.fontStyle.Font
+	local var4 = useStyleTagsModule(useDefaultTagsModule(var1.tag, var3))
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), reactIsModule (copy)
+		local var6 = if var1.fontStyle ~= nil then nil else var1.fontStyle.Font
 		
-		return if typeof(var21) == "table" and not reactIsModule.isBinding(var21) then Font.new(var21.Family, var21.Weight, var21.Style) elseif typeof(var21) == "EnumItem" then Font.fromEnum(var21) else var21
-	end, { var12.fontStyle })
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var12 (ref), var16 (ref), reactIsModule (copy), fontScalesModule (copy)
-		if var12.fontStyle == nil or var12.fontStyle.LineHeight == nil or (var12.fontStyle.FontSize == nil or var16 == nil) then
+		return if typeof(var6) == "table" and not reactIsModule.isBinding(var6) then Font.new(var6.Family, var6.Weight, var6.Style) elseif typeof(var6) == "EnumItem" then Font.fromEnum(var6) else var6
+	end, { var1.fontStyle })
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), var5 (ref), reactIsModule (copy), fontScalesModule (copy)
+		if var1.fontStyle == nil or var1.fontStyle.LineHeight == nil or (var1.fontStyle.FontSize == nil or var5 == nil) then
 			return 0
 		end
-		local var22 = fontScalesModule[if reactIsModule.isBinding(var16) then var16:getValue().Family else var16.Family]
+		local var7 = fontScalesModule[if reactIsModule.isBinding(var5) then var5:getValue().Family else var5.Family]
 		
-		return if var22 == nil then 0 else (var12.fontStyle.FontSize / var22 * (var12.fontStyle.LineHeight * var22) - var12.fontStyle.FontSize) / 2
-	end, { var16, var12.fontStyle })
+		return if var7 == nil then 0 else (var1.fontStyle.FontSize / var7 * (var1.fontStyle.LineHeight * var7) - var1.fontStyle.FontSize) / 2
+	end, { var5, var1.fontStyle })
 	
-	if var12.padding == nil and var17 ~= 0 then
-		var12.padding = Vector2.new(0, var17)
+	if var1.padding == nil and var6 ~= 0 then
+		var1.padding = Vector2.new(0, var6)
 	end
-	local var18 = if var13 then "TextButton" else "TextLabel"
-	local var19 = withGuiObjectPropsModule(var12, {
-		AutoButtonColor = if var18 == "TextButton" then var12.AutoButtonColor else nil,
-		FontFace = var16,
-		LineHeight = if var12.fontStyle ~= nil then nil else var12.fontStyle.LineHeight,
-		RichText = var12.RichText,
-		Text = var12.Text,
-		TextColor3 = if var12.textStyle then indexBindableModule(var12.textStyle, "Color3") else nil,
-		TextTransparency = if var12.textStyle then indexBindableModule(var12.textStyle, "Transparency") else nil,
-		TextDirection = var12.TextDirection,
-		TextScaled = var12.TextScaled,
-		TextSize = if var12.fontStyle ~= nil then nil else var12.fontStyle.FontSize,
-		TextTruncate = var12.TextTruncate,
-		TextWrapped = var12.TextWrapped,
-		TextXAlignment = var12.TextXAlignment,
-		TextYAlignment = var12.TextYAlignment,
-		ref = p1,
-		[reactModule.Tag] = var15
+	local var8 = if var2 then "TextButton" else "TextLabel"
+	local var9 = withGuiObjectPropsModule(var1, {
+		AutoButtonColor = if var8 == "TextButton" then var1.AutoButtonColor else nil,
+		FontFace = var5,
+		LineHeight = if var1.fontStyle ~= nil then nil else var1.fontStyle.LineHeight,
+		RichText = var1.RichText,
+		Text = var1.Text,
+		TextColor3 = if var1.textStyle then indexBindableModule(var1.textStyle, "Color3") else nil,
+		TextTransparency = if var1.textStyle then indexBindableModule(var1.textStyle, "Transparency") else nil,
+		TextDirection = var1.TextDirection,
+		TextScaled = var1.TextScaled,
+		TextSize = if var1.fontStyle ~= nil then nil else var1.fontStyle.FontSize,
+		TextTruncate = var1.TextTruncate,
+		TextWrapped = var1.TextWrapped,
+		TextXAlignment = var1.TextXAlignment,
+		TextYAlignment = var1.TextYAlignment,
+		ref = p2,
+		[reactModule.Tag] = var4
 	})
-	local var20 = var18
+	local var10 = var8
 	
-	if var13 then
-		var20 = interactableModule
-		var19.component = var18
-		var19.onActivated = var12.onActivated
-		var19.onSecondaryActivated = var12.onSecondaryActivated
-		var19.onStateChanged = var12.onStateChanged
-		var19.stateLayer = var12.stateLayer
-		var19.isDisabled = var12.isDisabled
-		var19.cursor = var12.cursor
+	if var2 then
+		var10 = interactableModule
+		var9.component = var8
+		var9.onActivated = var1.onActivated
+		var9.onSecondaryActivated = var1.onSecondaryActivated
+		var9.onStateChanged = var1.onStateChanged
+		var9.stateLayer = var1.stateLayer
+		var9.isDisabled = var1.isDisabled
+		var9.cursor = var1.cursor
 	end
-	return reactModule.createElement(var20, var19, guiObjectChildrenModule(var12))
+	return reactModule.createElement(var10, var9, guiObjectChildrenModule(var1))
 end))

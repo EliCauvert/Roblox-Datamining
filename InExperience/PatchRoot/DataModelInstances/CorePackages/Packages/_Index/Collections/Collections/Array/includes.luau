@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 local indexOfModule = require(script.Parent.indexOf)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: indexOfModule (ref)
-	return indexOfModule(p0, p1, p2) ~= -1
+	return indexOfModule(p1, p2, p3) ~= -1
 end

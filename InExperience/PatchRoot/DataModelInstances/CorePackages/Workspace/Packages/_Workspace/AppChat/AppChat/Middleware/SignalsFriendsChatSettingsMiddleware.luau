@@ -7,9 +7,9 @@ local thirdPartyChatSettingsLoadedModule = require(appChat.Actions.ThirdPartyCha
 local getFriendsChatMetadataStoreModule = require(appChat.Stores.GetFriendsChatMetadataStore)
 local getFriendsChatSettingsStoreModule = require(appChat.Stores.GetFriendsChatSettingsStore)
 local t = {
-	[appChatNetworkingModule.rodux.GetMetadata.Succeeded.name] = function(p0)
+	[appChatNetworkingModule.rodux.GetMetadata.Succeeded.name] = function(p1)
 		-- upvalues: getFriendsChatMetadataStoreModule (ref)
-		getFriendsChatMetadataStoreModule(false).updateFriendsChatMetadata(p0.responseBody)
+		getFriendsChatMetadataStoreModule(false).updateFriendsChatMetadata(p1.responseBody)
 	end,
 	[thirdPartyChatSettingsLoadedModule.name] = function(value)
 		-- upvalues: getFriendsChatSettingsStoreModule (ref)
@@ -21,16 +21,16 @@ return function(value, _)
 	-- upvalues: fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), t (ref)
 	return function(p1)
 		-- upvalues: value (ref), fFlagAppChatFriendsTabIxpEnabledModule (copy), fFlagExpChatEnableFriendsTab (copy), t (copy)
-		local var7 = value(p1)
+		local var1 = value(p1)
 		
 		if not fFlagAppChatFriendsTabIxpEnabledModule and not fFlagExpChatEnableFriendsTab then
-			return var7
+			return var1
 		end
 		local type = t[p1.type]
 		
 		if type then
 			type(p1)
 		end
-		return var7
+		return var1
 	end
 end

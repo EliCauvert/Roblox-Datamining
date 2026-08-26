@@ -26,21 +26,21 @@ local _ = require(profilePlatform.Components.CTARow.Types)
 local supportedProfileTypesModule = require(script.SupportedProfileTypes)
 local t = {}
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: supportedProfileTypesModule (ref)
-	return function(p2)
-		-- upvalues: p1 (ref), p0 (ref), supportedProfileTypesModule (copy)
-		local var25 = p1(p2)
+	return function(p3)
+		-- upvalues: p2 (ref), p1 (ref), supportedProfileTypesModule (copy)
+		local var1 = p2(p3)
 		
-		if var25 ~= nil then
-			assert(type(var25.onActivated) == "table", p0 .. " has onActivated as " .. type(var25.onActivated) .. ", expected table")
+		if var1 ~= nil then
+			assert(type(var1.onActivated) == "table", p1 .. " has onActivated as " .. type(var1.onActivated) .. ", expected table")
 			
-			for i in var25.onActivated do
-				local var26 = supportedProfileTypesModule[i]
-				assert(var26 and table.find(var26, p0), p0 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
+			for i in var1.onActivated do
+				local var2 = supportedProfileTypesModule[i]
+				assert(var2 and table.find(var2, p1), p1 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
 			end
 		end
-		return var25
+		return var1
 	end
 end
 
@@ -59,17 +59,17 @@ for i, v in {
 		
 		t[i_1] = function(p3)
 			-- upvalues: v_1 (ref), i_1 (ref), supportedProfileTypesModule (ref)
-			local var25 = v_1(p3)
+			local var1 = v_1(p3)
 			
-			if var25 ~= nil then
-				assert(type(var25.onActivated) == "table", i_1 .. " has onActivated as " .. type(var25.onActivated) .. ", expected table")
+			if var1 ~= nil then
+				assert(type(var1.onActivated) == "table", i_1 .. " has onActivated as " .. type(var1.onActivated) .. ", expected table")
 				
-				for i in var25.onActivated do
-					local var26 = supportedProfileTypesModule[i]
-					assert(var26 and table.find(var26, i_1), i_1 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
+				for i in var1.onActivated do
+					local var2 = supportedProfileTypesModule[i]
+					assert(var2 and table.find(var2, i_1), i_1 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
 				end
 			end
-			return var25
+			return var1
 		end
 	end
 end

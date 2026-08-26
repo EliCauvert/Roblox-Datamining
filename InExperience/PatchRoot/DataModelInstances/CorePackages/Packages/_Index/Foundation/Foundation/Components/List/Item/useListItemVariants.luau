@@ -47,9 +47,9 @@ local function variantsFactory(_)
 	}
 end
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local listItem = variantsContextModule.useVariants("ListItem", variantsFactory, p0)
+	local listItem = variantsContextModule.useVariants("ListItem", variantsFactory, p1)
 	
-	return composeStyleVariantModule(listItem.common, listItem.sizes[p1])
+	return composeStyleVariantModule(listItem.common, listItem.sizes[p2])
 end

@@ -11,9 +11,9 @@ local observable = require(script.Parent.Observable).Observable
 local iterateObserversSafely = require(script.Parent.iteration).iterateObserversSafely
 local fixObservableSubclass = require(script.Parent.subclassing).fixObservableSubclass
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: boolean (ref)
-	return boolean.toJSBoolean(p0) and typeof(p0.andThen) == "function"
+	return boolean.toJSBoolean(p1) and typeof(p1.andThen) == "function"
 end
 
 local tbl = setmetatable({}, { __index = observable })
@@ -36,27 +36,27 @@ function tbl.new(p1)
 	tbl_1.source = {}
 	tbl_1.latest = nil
 	tbl_1.addCount = 0
-	tbl_1.promise = promiseModule.new(function(p3, p4)
+	tbl_1.promise = promiseModule.new(function(p2, p3)
 		-- upvalues: tbl_1 (write)
 		function tbl_1.resolve(_, ...)
-			-- upvalues: p3 (ref)
-			p3(...)
+			-- upvalues: p2 (ref)
+			p2(...)
 		end
 		
 		function tbl_1.reject(_, ...)
-			-- upvalues: p4 (ref)
-			p4(...)
+			-- upvalues: p3 (ref)
+			p3(...)
 		end
 	end)
 	tbl_1.handlers = {
-		next = function(_, p5)
+		next = function(_, p2)
 			-- upvalues: tbl_1 (write), iterateObserversSafely (copy)
 			if tbl_1.sub ~= nil then
-				tbl_1.latest = { "next", p5 }
-				iterateObserversSafely(tbl_1.observers, "next", p5)
+				tbl_1.latest = { "next", p2 }
+				iterateObserversSafely(tbl_1.observers, "next", p2)
 			end
 		end,
-		error = function(_, p6)
+		error = function(_, p2)
 			-- upvalues: tbl_1 (write), boolean (copy), promiseModule (copy), iterateObserversSafely (copy)
 			local sub = tbl_1.sub
 			
@@ -68,9 +68,9 @@ function tbl.new(p1)
 					end)
 				end
 				tbl_1.sub = nil
-				tbl_1.latest = { "error", p6 }
-				tbl_1:reject(p6)
-				iterateObserversSafely(tbl_1.observers, "error", p6)
+				tbl_1.latest = { "error", p2 }
+				tbl_1:reject(p2)
+				iterateObserversSafely(tbl_1.observers, "error", p2)
 			end
 		end,
 		complete = function(_)
@@ -80,9 +80,9 @@ function tbl.new(p1)
 				
 				if boolean.toJSBoolean(removed) then
 					if boolean.toJSBoolean(removed) and typeof(removed.andThen) == "function" then
-						removed:andThen(function(p7)
+						removed:andThen(function(p2)
 							-- upvalues: tbl_1 (copy)
-							tbl_1.sub = p7:subscribe(tbl_1.handlers)
+							tbl_1.sub = p2:subscribe(tbl_1.handlers)
 						end)
 						
 						return
@@ -104,9 +104,9 @@ function tbl.new(p1)
 		end
 	}
 	
-	function tbl_1.cancel(_, p8)
+	function tbl_1.cancel(_, p2)
 		-- upvalues: tbl_1 (write)
-		tbl_1:reject(p8)
+		tbl_1:reject(p2)
 		tbl_1.sources = {}
 		tbl_1.handlers:complete()
 	end
@@ -117,9 +117,9 @@ function tbl.new(p1)
 		p1 = { observable.new(p1) }
 	end
 	if boolean.toJSBoolean(p1) and typeof(p1.andThen) == "function" then
-		p1:andThen(function(p9)
+		p1:andThen(function(p2)
 			-- upvalues: tbl_1 (write)
-			tbl_1:start(p9)
+			tbl_1:start(p2)
 		end, function(...)
 			-- upvalues: tbl_1 (write)
 			tbl_1.handlers:error(...)
@@ -130,60 +130,60 @@ function tbl.new(p1)
 	return tbl_1
 end
 
-function tbl:start(p10)
+function tbl:start(p1)
 	-- upvalues: t_1 (ref), array (ref)
 	if self.sub == t_1 then
-		self.sources = array.from(p10)
+		self.sources = array.from(p1)
 		self.handlers:complete()
 		
 		return
 	end
 end
 
-function tbl:deliverLastMessage(p11)
+function tbl:deliverLastMessage(p1)
 	-- upvalues: boolean (ref)
 	if boolean.toJSBoolean(self.latest) then
-		local var7 = self.latest[1]
-		local var8 = p11[var7]
+		local var1 = self.latest[1]
+		local var2 = p1[var1]
 		
-		if boolean.toJSBoolean(var8) then
-			var8(p11, self.latest[2])
+		if boolean.toJSBoolean(var2) then
+			var2(p1, self.latest[2])
 		end
-		if self.sub == nil and var7 == "next" and p11.complete ~= nil then
-			p11:complete()
+		if self.sub == nil and var1 == "next" and p1.complete ~= nil then
+			p1:complete()
 		end
 	end
 end
 
-function tbl:addObserver(p12)
-	if not self.observers:has(p12) then
-		self:deliverLastMessage(p12)
-		self.observers:add(p12)
+function tbl:addObserver(p1)
+	if not self.observers:has(p1) then
+		self:deliverLastMessage(p1)
+		self.observers:add(p1)
 		self.addCount += 1
 	end
 end
 
-function tbl:removeObserver(p13, p14)
+function tbl:removeObserver(p1, p2)
 	-- upvalues: error (ref)
-	if self.observers:delete(p13) then
+	if self.observers:delete(p1) then
 		self.addCount -= 1
 		
-		if self.addCount < 1 and not p14 then
+		if self.addCount < 1 and not p2 then
 			self.handlers:error(error.new("Observable cancelled prematurely"))
 		end
 	end
 end
 
-function tbl:cleanup(p15)
-	local var9 = false
-	local var10 = nil
+function tbl:cleanup(p1)
+	local var1 = false
+	local var2 = nil
 	
 	local function once()
-		-- upvalues: var9 (write), self (ref), var10 (write), p15 (ref)
-		if not var9 then
-			var9 = true
-			self.observers:delete(var10)
-			p15()
+		-- upvalues: var1 (write), self (ref), var2 (write), p1 (ref)
+		if not var1 then
+			var1 = true
+			self.observers:delete(var2)
+			p1()
 		end
 	end
 	

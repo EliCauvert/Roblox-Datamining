@@ -1,6 +1,6 @@
 ﻿local constantsModule = require(script:FindFirstAncestor("GenericChallenges").Utils.constants)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: constantsModule (ref)
-	return p0 == constantsModule.forbiddenStatusCode and (p1[constantsModule.challengeTypeHeader] ~= nil and (p1[constantsModule.challengeIdHeader] ~= nil and p1[constantsModule.challengeMetadataHeader] ~= nil))
+	return p1 == constantsModule.forbiddenStatusCode and (p2[constantsModule.challengeTypeHeader] ~= nil and (p2[constantsModule.challengeIdHeader] ~= nil and p2[constantsModule.challengeMetadataHeader] ~= nil))
 end

@@ -10,30 +10,30 @@ local isEnumModule = require(script.Parent.Parent.Utils.isEnum)
 local t = dependenciesModule.t
 local formatKeyValidationErrorModule = require(script.Parent.formatKeyValidationError)
 local formatErrorForIncorrectKeyModule = require(script.Parent.formatErrorForIncorrectKey)
-local var5 = t.strictInterface({
+local var1 = t.strictInterface({
 	context = t.any,
 	eventType = t.any,
 	additionalInfo = t.optional(t.table),
 	formatRulesForAdditionalInfo = t.optional(t.table)
 })
 
-return function(p0, p1)
-	-- upvalues: llama (ref), isEnumModule (ref), contexts (ref), formatKeyValidationErrorModule (ref), eventTypes (ref), formatErrorForIncorrectKeyModule (ref), var5 (ref), subPages (ref), pages (ref)
-	llama.Dictionary.map(p0, function(p2, p3)
-		-- upvalues: isEnumModule (copy), contexts (copy), formatKeyValidationErrorModule (copy), eventTypes (copy), formatErrorForIncorrectKeyModule (copy), var5 (copy), subPages (copy), pages (copy), llama (copy), p1 (ref)
-		local var6 = if isEnumModule(p3) then p3.rawValue() else p3
-		assert(contexts.isEnumValue(p2.context), formatKeyValidationErrorModule("context", "a Context enum", var6))
-		assert(eventTypes.isEnumValue(p2.eventType), formatKeyValidationErrorModule("eventType", "an EventType enum", var6))
-		assert(if type(p2.additionalInfo) ~= "table" then p2.additionalInfo == nil else true, formatKeyValidationErrorModule("additionalInfo", "nil or a table", var6))
-		assert(if type(p2.formatRulesForAdditionalInfo) ~= "table" then p2.formatRulesForAdditionalInfo == nil else true, formatKeyValidationErrorModule("formatRulesForAdditionalInfo", "nil or a table", var6))
-		assert(formatErrorForIncorrectKeyModule(var5)(p2, var6))
+return function(p1, p2)
+	-- upvalues: llama (ref), isEnumModule (ref), contexts (ref), formatKeyValidationErrorModule (ref), eventTypes (ref), formatErrorForIncorrectKeyModule (ref), var1 (ref), subPages (ref), pages (ref)
+	llama.Dictionary.map(p1, function(p3, p4)
+		-- upvalues: isEnumModule (copy), contexts (copy), formatKeyValidationErrorModule (copy), eventTypes (copy), formatErrorForIncorrectKeyModule (copy), var1 (copy), subPages (copy), pages (copy), llama (copy), p2 (ref)
+		local var2 = if isEnumModule(p4) then p4.rawValue() else p4
+		assert(contexts.isEnumValue(p3.context), formatKeyValidationErrorModule("context", "a Context enum", var2))
+		assert(eventTypes.isEnumValue(p3.eventType), formatKeyValidationErrorModule("eventType", "an EventType enum", var2))
+		assert(if type(p3.additionalInfo) ~= "table" then p3.additionalInfo == nil else true, formatKeyValidationErrorModule("additionalInfo", "nil or a table", var2))
+		assert(if type(p3.formatRulesForAdditionalInfo) ~= "table" then p3.formatRulesForAdditionalInfo == nil else true, formatKeyValidationErrorModule("formatRulesForAdditionalInfo", "nil or a table", var2))
+		assert(formatErrorForIncorrectKeyModule(var1)(p3, var2))
 		
-		if p2.additionalInfo then
-			assert(if p2.additionalInfo.subpage ~= nil then subPages.isEnumValue(p2.additionalInfo.subpage) else true, formatKeyValidationErrorModule("subpage additional info", "SubPages enum", var6))
-			assert(if p2.additionalInfo.page ~= nil then pages.isEnumValue(p2.additionalInfo.page) else true, formatKeyValidationErrorModule("page additional info", "Pages enum", var6))
-			llama.Dictionary.map(p1 or {}, function(p4, p5)
-				-- upvalues: p2 (ref), var6 (ref)
-				assert(p4(p2.additionalInfo[p5]), p5 .. " key is invalid. Issue with: " .. var6)
+		if p3.additionalInfo then
+			assert(if p3.additionalInfo.subpage ~= nil then subPages.isEnumValue(p3.additionalInfo.subpage) else true, formatKeyValidationErrorModule("subpage additional info", "SubPages enum", var2))
+			assert(if p3.additionalInfo.page ~= nil then pages.isEnumValue(p3.additionalInfo.page) else true, formatKeyValidationErrorModule("page additional info", "Pages enum", var2))
+			llama.Dictionary.map(p2 or {}, function(p5, p6)
+				-- upvalues: p3 (ref), var2 (ref)
+				assert(p5(p3.additionalInfo[p6]), p6 .. " key is invalid. Issue with: " .. var6)
 			end)
 		end
 	end)

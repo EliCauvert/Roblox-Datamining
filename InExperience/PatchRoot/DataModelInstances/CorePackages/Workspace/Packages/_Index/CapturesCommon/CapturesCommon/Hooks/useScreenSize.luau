@@ -22,7 +22,7 @@ return function()
 	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), var2 (ref)
 		if var3 then
-			local var6 = var3:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+			local var5 = var3:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 				-- upvalues: var3 (copy), var2 (copy)
 				if var3 then
 					var2(var3.ViewportSize)
@@ -30,8 +30,8 @@ return function()
 			end)
 			
 			return function()
-				-- upvalues: var6 (ref)
-				var6:Disconnect()
+				-- upvalues: var5 (ref)
+				var5:Disconnect()
 			end
 		end
 	end, { var3 })

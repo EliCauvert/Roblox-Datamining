@@ -5,13 +5,13 @@ local fFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate = require(parent.SharedFla
 local sduiLoadTimer = require(parent.SduiSharedUtilities).SduiLoadTimer
 local fetchDevStoreSeeAllPageIfNeededModule = require(devStore.DevStoreSeeAllPage.fetchDevStoreSeeAllPageIfNeeded)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: sduiLoadTimer (ref), appPage (ref), fFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate (ref), fetchDevStoreSeeAllPageIfNeededModule (ref)
-	local var2 = sduiLoadTimer.createLoadTimer(appPage.DevStoreSeeAll)
-	var2.start("navigate")
-	p0.navigate(appPage.DevStoreSeeAll, {
-		universeId = p1,
-		pageTimer = var2,
-		url = fetchDevStoreSeeAllPageIfNeededModule(p1, var2, if fFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate then true else nil)
+	local var1 = sduiLoadTimer.createLoadTimer(appPage.DevStoreSeeAll)
+	var1.start("navigate")
+	p1.navigate(appPage.DevStoreSeeAll, {
+		universeId = p2,
+		pageTimer = var1,
+		url = fetchDevStoreSeeAllPageIfNeededModule(p2, var1, if fFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate then true else nil)
 	})
 end

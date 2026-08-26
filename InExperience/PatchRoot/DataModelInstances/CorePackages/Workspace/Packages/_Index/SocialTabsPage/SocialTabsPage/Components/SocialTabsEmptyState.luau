@@ -12,7 +12,7 @@ local collaborators = assets["pictograms/collaborators"] or {}
 
 return function(value)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), image (ref), collaborators (ref), text (ref)
-	local var4 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(view, { tag = "col align-x-center align-y-center size-full" }, {
 		EmptyContainer = reactModule.createElement(view, { tag = "col align-x-center size-full-0 auto-y" }, {
@@ -20,9 +20,9 @@ return function(value)
 				LayoutOrder = 1,
 				tag = "position-top-center anchor-top-center",
 				Image = collaborators.assetId,
-				imageStyle = var4.Color.Content.Emphasis,
+				imageStyle = var1.Color.Content.Emphasis,
 				ScaleType = Enum.ScaleType.Fit,
-				Size = UDim2.new(0, 320 * var4.Config.UI.Scale, 0, 180 * var4.Config.UI.Scale)
+				Size = UDim2.new(0, 320 * var1.Config.UI.Scale, 0, 180 * var1.Config.UI.Scale)
 			}),
 			EmptyText = reactModule.createElement(text, {
 				LayoutOrder = 2,

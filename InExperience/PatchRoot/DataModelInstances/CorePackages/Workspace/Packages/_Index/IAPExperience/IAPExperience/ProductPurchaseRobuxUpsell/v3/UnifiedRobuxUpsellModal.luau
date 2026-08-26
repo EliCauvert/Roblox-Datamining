@@ -51,16 +51,16 @@ local badgeTypeModule = require(parent.Enums.BadgeType)
 local _ = require(parent.Enums.VirtualItemBadgeType)
 local _ = require(parent.ProductPurchase.PricingTypes)
 
-local function UpsellProductDetailsLegacyImpl(p0, p1)
+local function UpsellProductDetailsLegacyImpl(p1, p2)
 	-- upvalues: badgeTypeModule (ref), reactModule (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref), yellowBadgeModule (ref)
-	local var32 = if p0.badgeType == badgeTypeModule.Popular then p1.Popular elseif p0.badgeType == badgeTypeModule.LastPurchased then p1.LastPurchased else nil
-	local var33 = "size-full-1400 radius-medium padding-x-large row"
+	local var1 = if p1.badgeType == badgeTypeModule.Popular then p2.Popular elseif p1.badgeType == badgeTypeModule.LastPurchased then p2.LastPurchased else nil
+	local var2 = "size-full-1400 radius-medium padding-x-large row"
 	
 	return reactModule.createElement(view, {
-		LayoutOrder = p0.layoutOrder,
-		onActivated = p0.onSelected,
-		tag = if p0.selected then var33 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var33 .. " bg-surface-300 stroke-emphasis stroke-standard",
-		Size = if p0.isCompact then UDim2.new(1, 0, 0, 40) else nil
+		LayoutOrder = p1.layoutOrder,
+		onActivated = p1.onSelected,
+		tag = if p1.selected then var2 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var2 .. " bg-surface-300 stroke-emphasis stroke-standard",
+		Size = if p1.isCompact then UDim2.new(1, 0, 0, 40) else nil
 	}, {
 		LeftSide = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -72,14 +72,14 @@ local function UpsellProductDetailsLegacyImpl(p0, p1)
 		}, {
 			RobuxAmount = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.product.robuxAmount),
-				tag = if p0.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-title-large content-emphasis text-align-x-left"
+				Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmount),
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-title-large content-emphasis text-align-x-left"
 			}),
-			RobuxAmountBonus = p0.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
+			RobuxAmountBonus = p1.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
 				LayoutOrder = 2,
 				RichText = true,
-				Text = "<s>" .. utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p0.product.robuxAmountBeforeBonus) .. "</s>",
-				tag = if p0.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-large content-muted text-align-x-left"
+				Text = "<s>" .. utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmountBeforeBonus) .. "</s>",
+				tag = if p1.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-large content-muted text-align-x-left"
 			})
 		}),
 		RightSide = reactModule.createElement(view, {
@@ -87,40 +87,40 @@ local function UpsellProductDetailsLegacyImpl(p0, p1)
 			tag = "row align-x-right align-y-center gap-large",
 			Size = UDim2.new(0.5, 0, 1, 0)
 		}, {
-			Badge = if var32 then reactModule.createElement(yellowBadgeModule, {
+			Badge = if var1 then reactModule.createElement(yellowBadgeModule, {
 				LayoutOrder = 1,
-				Text = var32,
-				Icon = if p0.badgeType == badgeTypeModule.Popular then "icons/menu/fire_fill" else nil
+				Text = var1,
+				Icon = if p1.badgeType == badgeTypeModule.Popular then "icons/menu/fire_fill" else nil
 			}) else nil,
 			RobuxPrice = reactModule.createElement(text, {
 				LayoutOrder = 2,
-				Text = p0.product.price or "",
-				tag = if p0.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
+				Text = p1.product.price or "",
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
 			})
 		})
 	})
 end
 
-local function UpsellProductDetailsMultiDisplayFixedImpl(p2, p3)
+local function UpsellProductDetailsMultiDisplayFixedImpl(p1, p2)
 	-- upvalues: getFFlagIAPExperienceUseUpsellBadgeHelperModule (ref), getUpsellBadgeInfoModule (ref), badgeTypeModule (ref), enums (ref), reactModule (ref), view (ref), text (ref), getIconRichText (ref), formatNumberModule (ref), localizationService (ref), grayBadgeModule (ref)
 	local text_1, icon
 	local _ = nil
 	local _ = nil
 	
 	if getFFlagIAPExperienceUseUpsellBadgeHelperModule() then
-		local var34 = getUpsellBadgeInfoModule(p2.badgeType, p3)
-		text_1 = var34.text
-		icon = var34.icon
+		local var1 = getUpsellBadgeInfoModule(p1.badgeType, p2)
+		text_1 = var1.text
+		icon = var1.icon
 	else
-		text_1 = if p2.badgeType == badgeTypeModule.Popular then p3.Popular elseif p2.badgeType == badgeTypeModule.LastPurchased then p3.LastPurchased elseif p2.badgeType == badgeTypeModule.ForYou then p3.ForYouItem elseif p2.badgeType == badgeTypeModule.BetterValue then p3.BetterValue else nil
-		icon = if p2.badgeType == badgeTypeModule.Popular then enums.IconName.Flame elseif p2.badgeType == badgeTypeModule.ForYou then enums.IconName.CircleStar elseif p2.badgeType == badgeTypeModule.BetterValue then enums.IconName.Tag else nil
+		text_1 = if p1.badgeType == badgeTypeModule.Popular then p2.Popular elseif p1.badgeType == badgeTypeModule.LastPurchased then p2.LastPurchased elseif p1.badgeType == badgeTypeModule.ForYou then p2.ForYouItem elseif p1.badgeType == badgeTypeModule.BetterValue then p2.BetterValue else nil
+		icon = if p1.badgeType == badgeTypeModule.Popular then enums.IconName.Flame elseif p1.badgeType == badgeTypeModule.ForYou then enums.IconName.CircleStar elseif p1.badgeType == badgeTypeModule.BetterValue then enums.IconName.Tag else nil
 	end
-	local var35 = if p2.isCompact then "size-full-1000 radius-medium padding-small row" else "size-full-1400 radius-medium padding-x-large row"
+	local var2 = if p1.isCompact then "size-full-1000 radius-medium padding-small row" else "size-full-1400 radius-medium padding-x-large row"
 	
 	return reactModule.createElement(view, {
-		LayoutOrder = p2.layoutOrder,
-		onActivated = p2.onSelected,
-		tag = if p2.selected then var35 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var35 .. " bg-surface-300 stroke-default stroke-standard"
+		LayoutOrder = p1.layoutOrder,
+		onActivated = p1.onSelected,
+		tag = if p1.selected then var2 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var2 .. " bg-surface-300 stroke-default stroke-standard"
 	}, {
 		LeftSide = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -130,14 +130,14 @@ local function UpsellProductDetailsMultiDisplayFixedImpl(p2, p3)
 			RobuxAmount = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				RichText = true,
-				Text = getIconRichText(enums.IconName.Robux) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p2.product.robuxAmount),
-				tag = if p2.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-heading-small content-emphasis text-align-x-left"
+				Text = getIconRichText(enums.IconName.Robux) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmount),
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-heading-small content-emphasis text-align-x-left"
 			}),
-			RobuxAmountBonus = p2.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
+			RobuxAmountBonus = p1.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
 				LayoutOrder = 2,
 				RichText = true,
-				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. formatNumberModule(localizationService.RobloxLocaleId, p2.product.robuxAmountBeforeBonus) .. "</s>",
-				tag = if p2.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-medium content-muted text-align-x-left"
+				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmountBeforeBonus) .. "</s>",
+				tag = if p1.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-medium content-muted text-align-x-left"
 			}),
 			Badge = if text_1 then reactModule.createElement(grayBadgeModule, { LayoutOrder = 3, Text = text_1, iconName = icon }) else nil
 		}),
@@ -148,54 +148,54 @@ local function UpsellProductDetailsMultiDisplayFixedImpl(p2, p3)
 		}, {
 			RobuxPrice = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				Text = p2.product.price or "",
-				tag = if p2.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
+				Text = p1.product.price or "",
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
 			})
 		})
 	})
 end
 
-local function UpsellProductDetailsMultiDisplayImpl(p4, p5)
+local function UpsellProductDetailsMultiDisplayImpl(p1, p2)
 	-- upvalues: getFFlagIAPExperienceUseUpsellBadgeHelperModule (ref), getUpsellBadgeInfoModule (ref), badgeTypeModule (ref), enums (ref), reactModule (ref), view (ref), text (ref), getIconRichText (ref), formatNumberModule (ref), localizationService (ref), grayBadgeModule (ref)
 	local text_1, icon
 	local _ = nil
 	local _ = nil
 	
 	if getFFlagIAPExperienceUseUpsellBadgeHelperModule() then
-		local var36 = getUpsellBadgeInfoModule(p4.badgeType, p5)
-		text_1 = var36.text
-		icon = var36.icon
+		local var1 = getUpsellBadgeInfoModule(p1.badgeType, p2)
+		text_1 = var1.text
+		icon = var1.icon
 	else
-		text_1 = if p4.badgeType == badgeTypeModule.Popular then p5.Popular elseif p4.badgeType == badgeTypeModule.LastPurchased then p5.LastPurchased elseif p4.badgeType == badgeTypeModule.ForYou then p5.ForYouItem elseif p4.badgeType == badgeTypeModule.BetterValue then p5.BetterValue else nil
-		icon = if p4.badgeType == badgeTypeModule.Popular then enums.IconName.Flame elseif p4.badgeType == badgeTypeModule.ForYou then enums.IconName.CircleStar elseif p4.badgeType == badgeTypeModule.BetterValue then enums.IconName.Tag else nil
+		text_1 = if p1.badgeType == badgeTypeModule.Popular then p2.Popular elseif p1.badgeType == badgeTypeModule.LastPurchased then p2.LastPurchased elseif p1.badgeType == badgeTypeModule.ForYou then p2.ForYouItem elseif p1.badgeType == badgeTypeModule.BetterValue then p2.BetterValue else nil
+		icon = if p1.badgeType == badgeTypeModule.Popular then enums.IconName.Flame elseif p1.badgeType == badgeTypeModule.ForYou then enums.IconName.CircleStar elseif p1.badgeType == badgeTypeModule.BetterValue then enums.IconName.Tag else nil
 	end
-	local var37 = if p4.isCompact then "size-full-0 auto-y radius-medium padding-small row" else "col align-x-left gap-medium size-full-0 auto-y padding-medium radius-medium"
+	local var2 = if p1.isCompact then "size-full-0 auto-y radius-medium padding-small row" else "col align-x-left gap-medium size-full-0 auto-y padding-medium radius-medium"
 	
 	return reactModule.createElement(view, {
-		LayoutOrder = p4.layoutOrder,
-		onActivated = p4.onSelected,
-		tag = if p4.selected then var37 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var37 .. " bg-surface-300 stroke-default stroke-standard",
-		Size = if p4.isCompact then UDim2.new(1, 0, 0, 40) else nil
+		LayoutOrder = p1.layoutOrder,
+		onActivated = p1.onSelected,
+		tag = if p1.selected then var2 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var2 .. " bg-surface-300 stroke-default stroke-standard",
+		Size = if p1.isCompact then UDim2.new(1, 0, 0, 40) else nil
 	}, {
 		LeftSide = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = {
 				["row align-x-left align-y-center gap-small"] = true,
-				["size-full-0 auto-y"] = not p4.isCompact
+				["size-full-0 auto-y"] = not p1.isCompact
 			},
-			Size = if p4.isCompact then UDim2.new(0.65, 0, 1, 0) else nil
+			Size = if p1.isCompact then UDim2.new(0.65, 0, 1, 0) else nil
 		}, {
 			RobuxAmount = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				RichText = true,
-				Text = getIconRichText(enums.IconName.Robux) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p4.product.robuxAmount),
-				tag = if p4.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-heading-small content-emphasis text-align-x-left"
+				Text = getIconRichText(enums.IconName.Robux) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmount),
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-left" else "auto-xy text-heading-small content-emphasis text-align-x-left"
 			}),
-			RobuxAmountBonus = p4.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
+			RobuxAmountBonus = p1.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
 				LayoutOrder = 2,
 				RichText = true,
-				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. formatNumberModule(localizationService.RobloxLocaleId, p4.product.robuxAmountBeforeBonus) .. "</s>",
-				tag = if p4.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-medium content-muted text-align-x-left"
+				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmountBeforeBonus) .. "</s>",
+				tag = if p1.isCompact then "auto-xy text-title-small content-muted text-align-x-left" else "auto-xy text-title-medium content-muted text-align-x-left"
 			}),
 			Badge = if text_1 then reactModule.createElement(grayBadgeModule, { LayoutOrder = 3, Text = text_1, iconName = icon }) else nil
 		}),
@@ -203,22 +203,22 @@ local function UpsellProductDetailsMultiDisplayImpl(p4, p5)
 			LayoutOrder = 2,
 			tag = {
 				["row align-x-right align-y-center gap-large"] = true,
-				["size-full-0 auto-y"] = not p4.isCompact
+				["size-full-0 auto-y"] = not p1.isCompact
 			},
-			Size = if p4.isCompact then UDim2.new(0.35, 0, 1, 0) else nil
+			Size = if p1.isCompact then UDim2.new(0.35, 0, 1, 0) else nil
 		}, {
 			RobuxPrice = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				Text = p4.product.price or "",
-				tag = if p4.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
+				Text = p1.product.price or "",
+				tag = if p1.isCompact then "auto-xy text-title-small content-emphasis text-align-x-right" else "auto-xy text-title-large content-emphasis text-align-x-right"
 			})
 		})
 	})
 end
 
-local function UpsellProductDetails(p6)
+local function UpsellProductDetails(p1)
 	-- upvalues: useLocalization (ref), getFFlagIAPExperienceEnableMultiDisplayUpsellModule (ref), fFlagFixUpsellModalUnevenLayoutModule (ref), UpsellProductDetailsMultiDisplayFixedImpl (ref), UpsellProductDetailsMultiDisplayImpl (ref), UpsellProductDetailsLegacyImpl (ref)
-	local var38 = useLocalization({
+	local var1 = useLocalization({
 		Popular = "IAPExperience.RobuxUpsell.Text.PopularItem",
 		LastPurchased = "IAPExperience.RobuxUpsell.Text.LastPurchased",
 		ForYouItem = "IAPExperience.RobuxUpsell.Text.ForYou",
@@ -226,31 +226,31 @@ local function UpsellProductDetails(p6)
 		BestValue = "IAPExperience.RobuxUpsell.Text.BestValue"
 	})
 	
-	return if getFFlagIAPExperienceEnableMultiDisplayUpsellModule() then if fFlagFixUpsellModalUnevenLayoutModule then UpsellProductDetailsMultiDisplayFixedImpl(p6, var38) else UpsellProductDetailsMultiDisplayImpl(p6, var38) else UpsellProductDetailsLegacyImpl(p6, var38)
+	return if getFFlagIAPExperienceEnableMultiDisplayUpsellModule() then if fFlagFixUpsellModalUnevenLayoutModule then UpsellProductDetailsMultiDisplayFixedImpl(p1, var1) else UpsellProductDetailsMultiDisplayImpl(p1, var1) else UpsellProductDetailsLegacyImpl(p1, var1)
 end
 
-local function UnifiedRobuxUpsellModal(p7)
+local function UnifiedRobuxUpsellModal(p1)
 	-- upvalues: fFlagEnableOffersOnInExperienceSurface (ref), useCartPricingModule (ref), reactModule (ref), useLocalization (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagAXMISWithBlackbird (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), unifiedPurchaseModalTypeEnumModule (ref), compactUpsellModalBreakpoint (ref), useInitialButtonDisableDelayModule (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT (ref), getFFlagIAPExperienceEnableMultiDisplayUpsellModule (ref), fFlagFixUpsellModalUnevenLayoutModule (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_SINGLE_PACKAGE (ref), useScaledValue (ref), fFlagShouldFixDevSubsFlashingTitleModule (ref), useFocusNavigationRefsModule (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), fFlagShouldApplyDevSubsUpsellFixModule (ref), image (ref), text (ref), productDetailsContainerModule (ref), sheet (ref), unifiedPurchaseModalHeaderModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), cartPricingLoadingModule (ref), UpsellProductDetails (ref), foundationModule (ref), fillBehavior (ref), buttonVariant (ref)
-	local var39 = nil
-	local var40 = nil
+	local var1 = nil
+	local var2 = nil
 	
 	if fFlagEnableOffersOnInExperienceSurface then
-		var39 = useCartPricingModule({
-			product = p7.product,
-			purchaseModalType = p7.purchaseModalType,
-			cartPricingResponse = p7.cartPricingResponse,
-			onCartOfferAppliedChanged = p7.onCartOfferAppliedChanged
+		var1 = useCartPricingModule({
+			product = p1.product,
+			purchaseModalType = p1.purchaseModalType,
+			cartPricingResponse = p1.cartPricingResponse,
+			onCartOfferAppliedChanged = p1.onCartOfferAppliedChanged
 		})
-		var40 = reactModule.useMemo(function()
-			-- upvalues: var39 (write), p7 (ref)
-			return if var39.showCartOfferUi then var39.mergedProductForDetails else p7.product
+		var2 = reactModule.useMemo(function()
+			-- upvalues: var1 (write), p1 (ref)
+			return if var1.showCartOfferUi then var1.mergedProductForDetails else p1.product
 		end, {
-			p7.product,
-			var39.showCartOfferUi,
-			var39.mergedProductForDetails
+			p1.product,
+			var1.showCartOfferUi,
+			var1.mergedProductForDetails
 		})
 	end
-	local var41 = useLocalization({
+	local var3 = useLocalization({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
 		DisclosurePayment = "IAPExperience.RobuxUpsell.Text.DisclosurePayment",
 		DisclosureTermsURL = "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL",
@@ -265,109 +265,109 @@ local function UnifiedRobuxUpsellModal(p7)
 		PerMonth = if fFlagEnableUnifiedPurchaseFlowForDevSubs then "Feature.Subscription.Text.PerMonth" else nil
 	})
 	local _ = nil
-	local var42 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p7.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then p7.screenSize.Y > 0 and p7.screenSize.Y < compactUpsellModalBreakpoint else p7.screenSize.Y < compactUpsellModalBreakpoint
-	local var43 = useInitialButtonDisableDelayModule(false)
-	local var44, var45 = reactModule.useState(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT)
+	local var4 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then p1.screenSize.Y > 0 and p1.screenSize.Y < compactUpsellModalBreakpoint else p1.screenSize.Y < compactUpsellModalBreakpoint
+	local var5 = useInitialButtonDisableDelayModule(false)
+	local var6, var7 = reactModule.useState(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT)
 	reactModule.useEffect(function()
-		-- upvalues: getFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), fFlagFixUpsellModalUnevenLayoutModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), p7 (ref), unifiedPurchaseModalTypeEnumModule (copy), var45 (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES (copy), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_SINGLE_PACKAGE (copy), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT (copy)
+		-- upvalues: getFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), fFlagFixUpsellModalUnevenLayoutModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), p1 (ref), unifiedPurchaseModalTypeEnumModule (copy), var7 (ref), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES (copy), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_SINGLE_PACKAGE (copy), UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT (copy)
 		if getFFlagIAPExperienceEnableMultiDisplayUpsellModule() and not fFlagFixUpsellModalUnevenLayoutModule then
-			if fFlagEnableUnifiedPurchaseFlowForDevSubs and p7.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then
-				var45(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES)
+			if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then
+				var7(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES)
 				
 				return
 			end
-			local upsellSuggestionsCount = #p7.upsellSuggestions
+			local upsellSuggestionsCount = #p1.upsellSuggestions
 			
 			if upsellSuggestionsCount == 1 then
-				var45(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_SINGLE_PACKAGE)
+				var7(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_SINGLE_PACKAGE)
 				
 				return
 			elseif upsellSuggestionsCount == 2 then
-				var45(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT)
+				var7(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT)
 				
 				return
 			end
-			var45(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES)
+			var7(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES)
 			
 			return
-		elseif #p7.upsellSuggestions > 1 then
-			var45(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES)
+		elseif #p1.upsellSuggestions > 1 then
+			var7(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES)
 		end
-		if fFlagEnableUnifiedPurchaseFlowForDevSubs and p7.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then
-			var45(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES)
+		if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then
+			var7(UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES)
 		end
-	end, { p7.upsellSuggestions, p7.purchaseModalType })
-	local var46 = useScaledValue(var44 or 0)
-	local var47, var48 = reactModule.useState(var41.BuyRobuxAndItem)
+	end, { p1.upsellSuggestions, p1.purchaseModalType })
+	local var8 = useScaledValue(var6 or 0)
+	local var9, var10 = reactModule.useState(var3.BuyRobuxAndItem)
 	reactModule.useEffect(function()
-		-- upvalues: p7 (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), unifiedPurchaseModalTypeEnumModule (copy), var41 (ref), fFlagShouldFixDevSubsFlashingTitleModule (copy), var48 (ref), fFlagAXMISWithBlackbird (copy), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy)
-		local purchaseModalType = p7.purchaseModalType
+		-- upvalues: p1 (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), unifiedPurchaseModalTypeEnumModule (copy), var3 (ref), fFlagShouldFixDevSubsFlashingTitleModule (copy), var10 (ref), fFlagAXMISWithBlackbird (copy), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy)
+		local purchaseModalType = p1.purchaseModalType
 		
 		if fFlagEnableUnifiedPurchaseFlowForDevSubs and purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then
-			var48(if fFlagShouldFixDevSubsFlashingTitleModule and var41.BuyRobuxAndSubscription and var41.BuyRobuxAndSubscription ~= "" then var41.BuyRobuxAndSubscription else var41.BuyRobuxAndItem)
+			var10(if fFlagShouldFixDevSubsFlashingTitleModule and var3.BuyRobuxAndSubscription and var3.BuyRobuxAndSubscription ~= "" then var3.BuyRobuxAndSubscription else var3.BuyRobuxAndItem)
 			
 			return
 		elseif purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then
 			if fFlagAXMISWithBlackbird then
-				if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements and p7.product.itemName ~= "RobuxUpsell" then
-					var48(var41.BuyRobuxAndAvatar)
+				if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements and p1.product.itemName ~= "RobuxUpsell" then
+					var10(var3.BuyRobuxAndAvatar)
 					
 					return
 				end
-				var48(var41.BuyRobuxOnly)
+				var10(var3.BuyRobuxOnly)
 				
 				return
 			elseif fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then
-				var48(var41.BuyRobuxAndAvatar)
+				var10(var3.BuyRobuxAndAvatar)
 				
 				return
 			end
-			var48(var41.BuyRobuxAndItems)
+			var10(var3.BuyRobuxAndItems)
 			
 			return
 		elseif purchaseModalType == unifiedPurchaseModalTypeEnumModule.Experience then
-			var48(var41.BuyRobuxAndExperience)
+			var10(var3.BuyRobuxAndExperience)
 			
 			return
 		end
-		var48(var41.BuyRobuxAndItem)
+		var10(var3.BuyRobuxAndItem)
 	end, {
-		p7.purchaseModalType, var41.BuyRobuxAndAvatar, var41.BuyRobuxAndExperience,
-		var41.BuyRobuxAndItem, var41.BuyRobuxAndItems, var41.BuyRobuxAndSubscription,
-		if fFlagAXMISWithBlackbird then p7.product.itemName else nil,
-		if fFlagAXMISWithBlackbird then var41.BuyRobuxOnly else nil
+		p1.purchaseModalType, var3.BuyRobuxAndAvatar, var3.BuyRobuxAndExperience,
+		var3.BuyRobuxAndItem, var3.BuyRobuxAndItems, var3.BuyRobuxAndSubscription,
+		if fFlagAXMISWithBlackbird then p1.product.itemName else nil,
+		if fFlagAXMISWithBlackbird then var3.BuyRobuxOnly else nil
 	})
-	local var49, var50 = useFocusNavigationRefsModule(p7.buttons.cancelPurchaseActivated, p7.onBuyItemButtonMounted)
-	reactModule.useEffect(function() end, { p7.upsellSuggestions })
+	local var11, var12 = useFocusNavigationRefsModule(p1.buttons.cancelPurchaseActivated, p1.onBuyItemButtonMounted)
+	reactModule.useEffect(function() end, { p1.upsellSuggestions })
 	
-	local _ = function(p8)
-		-- upvalues: p7 (ref)
-		p7.onUpsellSuggestionsSelected(p8)
+	local _ = function(p2)
+		-- upvalues: p1 (ref)
+		p1.onUpsellSuggestionsSelected(p2)
 	end
 	
-	local parts = string.split(var41.DisclosureTermsURL, " {termsofuse} ")
-	local termsOfUse = var41.TermsOfUse
+	local parts = string.split(var3.DisclosureTermsURL, " {termsofuse} ")
+	local termsOfUse = var3.TermsOfUse
 	
-	if p7.termsOfUseActivated then
+	if p1.termsOfUseActivated then
 		termsOfUse = "<u>" .. termsOfUse .. "</u>"
 	end
-	local var52 = fFlagEnableUnifiedPurchaseFlowForDevSubs and p7.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription
-	local var53 = if var52 then var41.PerMonth else nil
-	local var54 = if var52 then var41.Subscribe else var41.Buy
-	local var55 = nil
+	local var13 = fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription
+	local var14 = if var13 then var3.PerMonth else nil
+	local var15 = if var13 then var3.Subscribe else var3.Buy
+	local var16 = nil
 	
 	if fFlagEnableOffersOnInExperienceSurface then
-		local var56 = buildCartPricingOfferCheckboxesModule({
-			cartPricing = var39,
-			isDisabled = if p7.isCartPricingLoading ~= true then var43 else true
+		local var17 = buildCartPricingOfferCheckboxesModule({
+			cartPricing = var1,
+			isDisabled = if p1.isCartPricingLoading ~= true then var5 else true
 		})
-		var55 = if next(var56) then reactModule.createElement(view, {
+		var16 = if next(var17) then reactModule.createElement(view, {
 			tag = "col gap-medium size-full-0 auto-y",
 			LayoutOrder = 3
-		}, var56) else nil
+		}, var17) else nil
 	end
 	local _ = nil
-	local var57 = if var52 and fFlagShouldApplyDevSubsUpsellFixModule then reactModule.createElement(view, {
+	local var18 = if var13 and fFlagShouldApplyDevSubsUpsellFixModule then reactModule.createElement(view, {
 		LayoutOrder = 1,
 		tag = "row align-y-center gap-medium size-full-0 auto-y"
 	}, {
@@ -375,7 +375,7 @@ local function UnifiedRobuxUpsellModal(p7)
 			LayoutOrder = 1,
 			Size = UDim2.fromOffset(72, 72),
 			ScaleType = Enum.ScaleType.Fit,
-			Image = p7.product.itemIcon
+			Image = p1.product.itemIcon
 		}),
 		ItemInfo = reactModule.createElement(view, {
 			LayoutOrder = 2,
@@ -386,79 +386,79 @@ local function UnifiedRobuxUpsellModal(p7)
 				LayoutOrder = 1,
 				tag = "auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = p7.product.itemName or ""
+				Text = p1.product.itemName or ""
 			}),
 			ItemPrice = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-y text-title-medium text-align-x-left content-emphasis",
 				RichText = true,
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = utf8.char(57346) .. " " .. tostring(p7.product.itemRobuxCost or 0) .. (var53 or "")
+				Text = utf8.char(57346) .. " " .. tostring(p1.product.itemRobuxCost or 0) .. (var14 or "")
 			})
 		})
 	}) else reactModule.createElement(productDetailsContainerModule, {
-		purchaseModalType = p7.purchaseModalType,
-		product = if fFlagEnableOffersOnInExperienceSurface then var40 else p7.product,
-		isCompact = var42,
-		model = if fFlagEnableOffersOnInExperienceSurface then var40.model else p7.product.model,
-		priceSuffix = var53,
-		hideDiscountSummary = if fFlagEnableOffersOnInExperienceSurface then p7.isCartPricingLoading else nil,
-		savingsSummary = if fFlagEnableOffersOnInExperienceSurface then var39.cartPricingSavingsSummary else nil
+		purchaseModalType = p1.purchaseModalType,
+		product = if fFlagEnableOffersOnInExperienceSurface then var2 else p1.product,
+		isCompact = var4,
+		model = if fFlagEnableOffersOnInExperienceSurface then var2.model else p1.product.model,
+		priceSuffix = var14,
+		hideDiscountSummary = if fFlagEnableOffersOnInExperienceSurface then p1.isCartPricingLoading else nil,
+		savingsSummary = if fFlagEnableOffersOnInExperienceSurface then var1.cartPricingSavingsSummary else nil
 	})
-	local var58 = getFFlagIAPExperienceEnableMultiDisplayUpsellModule()
+	local var19 = getFFlagIAPExperienceEnableMultiDisplayUpsellModule()
 	
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
-		onClose = p7.buttons.cancelPurchaseActivated,
-		snapPoints = { var46, 0.8 },
-		centerSheetHeight = if fFlagFixUpsellModalUnevenLayoutModule then nil elseif var58 then var46 else nil,
-		ref = if var43 then nil else var49
+		onClose = p1.buttons.cancelPurchaseActivated,
+		snapPoints = { var8, 0.8 },
+		centerSheetHeight = if fFlagFixUpsellModalUnevenLayoutModule then nil elseif var19 then var8 else nil,
+		ref = if var5 then nil else var11
 	}, {
 		Header = reactModule.createElement(sheet.Header, {
-			hasCloseAffordance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then if p7.hideUserRobuxBalance then true else nil else nil
+			hasCloseAffordance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then if p1.hideUserRobuxBalance then true else nil else nil
 		}, {
 			ModalHeader = reactModule.createElement(unifiedPurchaseModalHeaderModule, {
-				titleText = var47,
-				robuxBalanceAmount = p7.userBalance,
-				hideUserRobuxBalance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then p7.hideUserRobuxBalance else nil
+				titleText = var9,
+				robuxBalanceAmount = p1.userBalance,
+				hideUserRobuxBalance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then p1.hideUserRobuxBalance else nil
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
 			SheetContentContainer = reactModule.createElement(view, {
-				tag = if var58 then "col align-x-center align-y-start gap-medium size-full-0 auto-y" else "col gap-medium auto-y size-full-0 align-x-center align-y-start"
+				tag = if var19 then "col align-x-center align-y-start gap-medium size-full-0 auto-y" else "col gap-medium auto-y size-full-0 align-x-center align-y-start"
 			}, {
-				ProductDetailsContainer = var57 or reactModule.createElement(view, {
+				ProductDetailsContainer = var18 or reactModule.createElement(view, {
 					LayoutOrder = 1,
-					tag = if var58 then "col align-x-center align-y-center gap-medium size-full-0 auto-y" else "col gap-medium auto-y size-full-0 align-x-center align-y-center"
+					tag = if var19 then "col align-x-center align-y-center gap-medium size-full-0 auto-y" else "col gap-medium auto-y size-full-0 align-x-center align-y-center"
 				}, {
-					ProductDetails = if p7.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then reactModule.createElement(priceSummaryModule, { amount = p7.product.itemRobuxCost }) else reactModule.createElement(unifiedProductDetailsModule, {
+					ProductDetails = if p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then reactModule.createElement(priceSummaryModule, { amount = p1.product.itemRobuxCost }) else reactModule.createElement(unifiedProductDetailsModule, {
 						isPortrait = false,
-						isCompact = var42,
-						itemIcon = if fFlagEnableOffersOnInExperienceSurface then var40.itemIcon else p7.product.itemIcon,
-						itemName = if fFlagEnableOffersOnInExperienceSurface then var40.itemName else p7.product.itemName,
-						itemRobuxCost = if fFlagEnableOffersOnInExperienceSurface then var40.itemRobuxCost else p7.product.itemRobuxCost,
-						model = if fFlagEnableOffersOnInExperienceSurface then var40.model else p7.product.model,
-						priceSuffix = var53
+						isCompact = var4,
+						itemIcon = if fFlagEnableOffersOnInExperienceSurface then var2.itemIcon else p1.product.itemIcon,
+						itemName = if fFlagEnableOffersOnInExperienceSurface then var2.itemName else p1.product.itemName,
+						itemRobuxCost = if fFlagEnableOffersOnInExperienceSurface then var2.itemRobuxCost else p1.product.itemRobuxCost,
+						model = if fFlagEnableOffersOnInExperienceSurface then var2.model else p1.product.model,
+						priceSuffix = var14
 					})
 				}),
-				CartPricingLoading = if fFlagEnableOffersOnInExperienceSurface then reactModule.createElement(cartPricingLoadingModule, { LayoutOrder = 1, isLoading = p7.isCartPricingLoading }) else nil,
-				PostPurchaseActions = if fFlagEnableOffersOnInExperienceSurface then var55 else nil,
+				CartPricingLoading = if fFlagEnableOffersOnInExperienceSurface then reactModule.createElement(cartPricingLoadingModule, { LayoutOrder = 1, isLoading = p1.isCartPricingLoading }) else nil,
+				PostPurchaseActions = if fFlagEnableOffersOnInExperienceSurface then var16 else nil,
 				UpsellSuggestions = reactModule.createElement(view, {
 					LayoutOrder = 2,
-					tag = if var58 then "col align-x-center align-y-start gap-medium size-full-0 auto-y padding-x-xsmall" else "col gap-medium auto-y size-full-0 align-x-center align-y-center padding-x-xsmall padding-y-small padding-bottom-xxlarge"
-				}, if var58 then (function()
-					-- upvalues: p7 (ref), reactModule (copy), UpsellProductDetails (copy), var42 (write)
+					tag = if var19 then "col align-x-center align-y-start gap-medium size-full-0 auto-y padding-x-xsmall" else "col gap-medium auto-y size-full-0 align-x-center align-y-center padding-x-xsmall padding-y-small padding-bottom-xxlarge"
+				}, if var19 then (function()
+					-- upvalues: p1 (ref), reactModule (copy), UpsellProductDetails (copy), var4 (write)
 					local t = {}
 					
-					for i, v in ipairs(p7.upsellSuggestions) do
+					for i, v in ipairs(p1.upsellSuggestions) do
 						t["UpsellPackage" .. tostring(i)] = reactModule.createElement(UpsellProductDetails, {
 							layoutOrder = i,
 							product = v,
-							selected = p7.selectedUpsellIndex == i,
-							isCompact = var42,
+							selected = p1.selectedUpsellIndex == i,
+							isCompact = var4,
 							onSelected = function()
-								-- upvalues: i (ref), p7 (copy)
-								p7.onUpsellSuggestionsSelected(i)
+								-- upvalues: i (ref), p1 (copy)
+								p1.onUpsellSuggestionsSelected(i)
 							end,
 							badgeType = v.badgeType
 						})
@@ -467,24 +467,24 @@ local function UnifiedRobuxUpsellModal(p7)
 				end)() else {
 					UpsellPackage1 = reactModule.createElement(UpsellProductDetails, {
 						layoutOrder = 1,
-						product = p7.upsellSuggestions[1],
-						selected = p7.selectedUpsellIndex == 1,
-						isCompact = var42,
+						product = p1.upsellSuggestions[1],
+						selected = p1.selectedUpsellIndex == 1,
+						isCompact = var4,
 						onSelected = function()
-							-- upvalues: p7 (ref)
-							p7.onUpsellSuggestionsSelected(1)
+							-- upvalues: p1 (ref)
+							p1.onUpsellSuggestionsSelected(1)
 						end
 					}),
-					UpsellPackage2 = if #p7.upsellSuggestions > 1 then reactModule.createElement(UpsellProductDetails, {
+					UpsellPackage2 = if #p1.upsellSuggestions > 1 then reactModule.createElement(UpsellProductDetails, {
 						layoutOrder = 2,
-						product = p7.upsellSuggestions[2],
-						selected = p7.selectedUpsellIndex == 2,
-						isCompact = var42,
+						product = p1.upsellSuggestions[2],
+						selected = p1.selectedUpsellIndex == 2,
+						isCompact = var4,
 						onSelected = function()
-							-- upvalues: p7 (ref)
-							p7.onUpsellSuggestionsSelected(2)
+							-- upvalues: p1 (ref)
+							p1.onUpsellSuggestionsSelected(2)
 						end,
-						badgeType = p7.upsellSuggestions[2].badgeType
+						badgeType = p1.upsellSuggestions[2].badgeType
 					}) else nil
 				})
 			})
@@ -492,27 +492,27 @@ local function UnifiedRobuxUpsellModal(p7)
 		Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 3 }, {
 			reactModule.createElement(view, {
 				LayoutOrder = 1,
-				tag = if var58 then "row wrap align-x-center align-y-center gap-medium size-full-0 auto-y" else "row wrap auto-xy align-y-center align-x-center size-full-0 gap-medium"
+				tag = if var19 then "row wrap align-x-center align-y-center gap-medium size-full-0 auto-y" else "row wrap auto-xy align-y-center align-x-center size-full-0 gap-medium"
 			}, {
 				reactModule.createElement(foundationModule.Button, {
 					LayoutOrder = 1,
-					text = var54,
-					onActivated = p7.buttons.buyItemActivated,
-					inputDelay = if p7.buttons.buyItemEnableInputDelayed and not var43 then 2.5 else 0,
-					isDisabled = var43,
-					ref = var50,
+					text = var15,
+					onActivated = p1.buttons.buyItemActivated,
+					inputDelay = if p1.buttons.buyItemEnableInputDelayed and not var5 then 2.5 else 0,
+					isDisabled = var5,
+					ref = var12,
 					fillBehavior = fillBehavior.Fill,
 					variant = buttonVariant.Emphasis,
-					size = if var42 then "Small" elseif var58 then "Medium" else nil
+					size = if var4 then "Small" elseif var19 then "Medium" else nil
 				}),
 				DisclosureTerms = reactModule.createElement(view, {
 					LayoutOrder = 2,
-					tag = if var58 then "row wrap align-x-left align-y-center gap-xxsmall size-full-0 auto-y" else "row wrap auto-y align-y-center align-x-center size-full-0 gap-xxsmall"
+					tag = if var19 then "row wrap align-x-left align-y-center gap-xxsmall size-full-0 auto-y" else "row wrap auto-y align-y-center align-x-center size-full-0 gap-xxsmall"
 				}, {
 					DisclosurePayment = reactModule.createElement(text, {
 						LayoutOrder = 1,
 						tag = "auto-xy text-body content-default text-align-x-left content-muted text-caption-small",
-						Text = var41.DisclosurePayment
+						Text = var3.DisclosurePayment
 					}),
 					BeforeText = reactModule.createElement(text, {
 						LayoutOrder = 2,
@@ -524,7 +524,7 @@ local function UnifiedRobuxUpsellModal(p7)
 						RichText = true,
 						tag = "auto-xy text-body content-default text-align-x-left content-muted text-caption-small",
 						Text = termsOfUse,
-						onActivated = p7.termsOfUseActivated
+						onActivated = p1.termsOfUseActivated
 					}),
 					AfterText = reactModule.createElement(text, {
 						LayoutOrder = 4,
@@ -537,11 +537,11 @@ local function UnifiedRobuxUpsellModal(p7)
 	})
 end
 
-return function(p9)
+return function(p2)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), UnifiedRobuxUpsellModal (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		UnifiedRobuxUpsellModal = reactModule.createElement(UnifiedRobuxUpsellModal, p9)
+		UnifiedRobuxUpsellModal = reactModule.createElement(UnifiedRobuxUpsellModal, p2)
 	})
 end

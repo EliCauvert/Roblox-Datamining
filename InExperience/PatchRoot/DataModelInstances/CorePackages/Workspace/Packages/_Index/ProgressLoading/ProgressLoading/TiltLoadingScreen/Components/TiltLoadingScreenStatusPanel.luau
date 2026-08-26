@@ -75,10 +75,10 @@ return reactModule.memo(function(p1)
 		end
 		var7(true)
 		local processTime = os.clock()
-		local var1 = fIntAutoJoinNewServerTimeMs / 1000
+		local var12 = fIntAutoJoinNewServerTimeMs / 1000
 		var8.current = runService.Heartbeat:Connect(function()
-			-- upvalues: processTime (ref), var1 (ref), var5 (copy), var10 (copy), p1 (copy)
-			local clampedValue = math.clamp((os.clock() - processTime) / var1 * 100, 0, 100)
+			-- upvalues: processTime (ref), var12 (ref), var5 (copy), var10 (copy), p1 (copy)
+			local clampedValue = math.clamp((os.clock() - processTime) / var12 * 100, 0, 100)
 			var5(clampedValue)
 			
 			if clampedValue >= 100 then

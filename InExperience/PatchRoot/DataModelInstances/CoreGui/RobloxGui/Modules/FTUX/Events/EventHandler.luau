@@ -5,25 +5,25 @@ local t = {
 }
 
 return {
-	StartEvents = function(p0, p1, p2)
+	StartEvents = function(p1, p2, p3)
 		-- upvalues: t (ref), eventsModule (ref)
-		local var2 = t[p0]
-		local var3 = eventsModule[p0][p1]
+		local var1 = t[p1]
+		local var2 = eventsModule[p1][p2]
 		
-		if var3 then
-			for i, v in pairs(var3) do
-				var2.StartEvent(v, p2)
+		if var2 then
+			for i, v in pairs(var2) do
+				var1.StartEvent(v, p3)
 			end
 		end
 	end,
-	StopEvents = function(p3, p4)
+	StopEvents = function(p4, p5)
 		-- upvalues: t (ref), eventsModule (ref)
-		local var4 = t[p3]
-		local var5 = eventsModule[p3][p4]
+		local var3 = t[p4]
+		local var4 = eventsModule[p4][p5]
 		
-		if var5 then
-			for i, v in pairs(var5) do
-				var4.StopEvent(v)
+		if var4 then
+			for i, v in pairs(var4) do
+				var3.StopEvent(v)
 			end
 		end
 	end

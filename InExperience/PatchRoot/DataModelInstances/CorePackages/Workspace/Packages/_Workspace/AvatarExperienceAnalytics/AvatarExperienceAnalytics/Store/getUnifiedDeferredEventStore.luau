@@ -8,23 +8,23 @@ return signalsModule.createComputed(function()
 	
 	return {
 		isEntered = var1,
-		enqueue = function(p0, p1)
+		enqueue = function(p1, p2)
 			-- upvalues: t (write)
-			local var4 = t[p0]
+			local var3 = t[p1]
 			
-			if not var4 then
-				var4 = {}
-				t[p0] = var4
+			if not var3 then
+				var3 = {}
+				t[p1] = var3
 			end
-			table.insert(var4, p1)
+			table.insert(var3, p2)
 		end,
-		takePending = function(p2)
+		takePending = function(p1)
 			-- upvalues: t (write)
-			if p2 ~= nil then
-				local var5 = t[p2] or {}
-				t[p2] = nil
+			if p1 ~= nil then
+				local var3 = t[p1] or {}
+				t[p1] = nil
 				
-				return var5
+				return var3
 			end
 			local t_1 = {}
 			

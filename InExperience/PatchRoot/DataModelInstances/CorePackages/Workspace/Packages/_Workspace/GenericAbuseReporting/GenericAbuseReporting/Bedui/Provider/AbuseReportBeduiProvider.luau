@@ -10,62 +10,62 @@ local fetchBeduiDataModule = require(genericAbuseReporting.Bedui.Provider.fetchB
 local validateBeduiDataModule = require(genericAbuseReporting.Bedui.Provider.validateBeduiData)
 local fallbackGenericAbuseReporting = game:DefineFastFlag("FallbackGenericAbuseReporting", false)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), abuseReportBeduiContextStatus (ref), useRoactService (ref), roactNetworking (ref), fetchBeduiDataModule (ref), validateBeduiDataModule (ref), fallbackGenericAbuseReporting (ref), abuseVectorModule (ref), abuseReportBeduiContextModule (ref)
-	local var7, var8 = reactModule.useState({ status = abuseReportBeduiContextStatus.Loading })
-	local var9 = useRoactService(roactNetworking)
+	local var1, var2 = reactModule.useState({ status = abuseReportBeduiContextStatus.Loading })
+	local var3 = useRoactService(roactNetworking)
 	reactModule.useEffect(function()
-		-- upvalues: fetchBeduiDataModule (copy), var9 (ref), p0 (ref), validateBeduiDataModule (copy), fallbackGenericAbuseReporting (copy), abuseVectorModule (copy), var8 (ref), abuseReportBeduiContextStatus (copy)
-		fetchBeduiDataModule(var9, p0.abuseVector):andThen(function(p2)
-			-- upvalues: validateBeduiDataModule (copy), fallbackGenericAbuseReporting (copy), fetchBeduiDataModule (copy), var9 (copy), abuseVectorModule (copy), var8 (copy), abuseReportBeduiContextStatus (copy)
-			local var10, var11 = validateBeduiDataModule(p2.responseBody)
+		-- upvalues: fetchBeduiDataModule (copy), var3 (ref), p1 (ref), validateBeduiDataModule (copy), fallbackGenericAbuseReporting (copy), abuseVectorModule (copy), var2 (ref), abuseReportBeduiContextStatus (copy)
+		fetchBeduiDataModule(var3, p1.abuseVector):andThen(function(p2)
+			-- upvalues: validateBeduiDataModule (copy), fallbackGenericAbuseReporting (copy), fetchBeduiDataModule (copy), var3 (copy), abuseVectorModule (copy), var2 (copy), abuseReportBeduiContextStatus (copy)
+			local var4, var5 = validateBeduiDataModule(p2.responseBody)
 			
-			if var10 then
-				var8({
+			if var4 then
+				var2({
 					status = abuseReportBeduiContextStatus.Success,
 					beduiData = p2.responseBody
 				})
 				
 				return
 			end
-			warn("Invalid Bedui data:", var11)
+			warn("Invalid Bedui data:", var5)
 			
 			if fallbackGenericAbuseReporting then
-				fetchBeduiDataModule(var9, abuseVectorModule.Common):andThen(function(p4)
-					-- upvalues: validateBeduiDataModule (copy), var8 (copy), abuseReportBeduiContextStatus (copy)
-					local var12, var13 = validateBeduiDataModule(p4.responseBody)
+				fetchBeduiDataModule(var3, abuseVectorModule.Common):andThen(function(p3)
+					-- upvalues: validateBeduiDataModule (copy), var2 (copy), abuseReportBeduiContextStatus (copy)
+					local var6, var7 = validateBeduiDataModule(p3.responseBody)
 					
-					if var12 then
-						var8({
+					if var6 then
+						var2({
 							status = abuseReportBeduiContextStatus.Success,
-							beduiData = p4.responseBody
+							beduiData = p3.responseBody
 						})
 						
 						return
 					end
-					warn("Invalid Bedui common data:", var13)
-					var8({
+					warn("Invalid Bedui common data:", var7)
+					var2({
 						status = abuseReportBeduiContextStatus.Error,
-						error = var13
+						error = var7
 					})
 				end):catch(function(p3)
-					-- upvalues: var8 (copy), abuseReportBeduiContextStatus (copy)
+					-- upvalues: var2 (copy), abuseReportBeduiContextStatus (copy)
 					warn("Failed to get Bedui common data")
-					var8({ status = abuseReportBeduiContextStatus.Error, error = p3 })
+					var2({ status = abuseReportBeduiContextStatus.Error, error = p3 })
 				end)
 				
 				return
 			end
-			var8({
+			var2({
 				status = abuseReportBeduiContextStatus.Error,
-				error = var11
+				error = var5
 			})
-		end):catch(function(p1)
-			-- upvalues: var8 (copy), abuseReportBeduiContextStatus (copy)
+		end):catch(function(p2)
+			-- upvalues: var2 (copy), abuseReportBeduiContextStatus (copy)
 			warn("Failed to get Bedui data")
-			var8({ status = abuseReportBeduiContextStatus.Error, error = p1 })
+			var2({ status = abuseReportBeduiContextStatus.Error, error = p2 })
 		end)
-	end, { p0.abuseVector })
+	end, { p1.abuseVector })
 	
-	return reactModule.createElement(abuseReportBeduiContextModule.Provider, { value = var7 }, p0.children)
+	return reactModule.createElement(abuseReportBeduiContextModule.Provider, { value = var1 }, p1.children)
 end

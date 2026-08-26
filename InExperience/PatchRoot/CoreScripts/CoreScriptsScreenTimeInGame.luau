@@ -17,7 +17,7 @@ local function _()
 end
 
 local _ = { Warning = 1, Lockout = 2, OpenWebView = 3 }
-local var6 = httpRequests:new(httpService)
+local var1 = httpRequests:new(httpService)
 local robloxEventReceivedConnection = nil
 
 local _ = function()
@@ -35,37 +35,37 @@ local t = {
 	displayMessageCallback = nil,
 	pendingResolveMessage = {},
 	resolvedMessage = {},
-	update = function(p0, p1)
-		for i, v in pairs(p1) do
-			table.insert(p0.pendingResolveMessage, {
+	update = function(p1, p2)
+		for i, v in pairs(p2) do
+			table.insert(p1.pendingResolveMessage, {
 				id = v.serialId,
 				instructionName = v.instructionName,
 				message = v.message,
 				type = v.type
 			})
 		end
-		p0:processNext()
+		p1:processNext()
 	end,
-	processNext = function(p2)
-		if p2.displaying then return end
-		local removed = table.remove(p2.pendingResolveMessage, 1)
+	processNext = function(p3)
+		if p3.displaying then return end
+		local removed = table.remove(p3.pendingResolveMessage, 1)
 		
 		if not removed then return end
-		if p2.resolvedMessage[removed.id] then
-			p2:processNext()
+		if p3.resolvedMessage[removed.id] then
+			p3:processNext()
 			
 			return
 		end
-		p2.displaying = removed
+		p3.displaying = removed
 		
-		if p2.displayMessageCallback then
-			p2.displayMessageCallback(removed.message)
+		if p3.displayMessageCallback then
+			p3.displayMessageCallback(removed.message)
 		end
 	end,
 	resolve = function(p3)
-		-- upvalues: var6 (ref)
+		-- upvalues: var1 (ref)
 		p3.resolvedMessage[p3.displaying.id] = p3.displaying.message
-		var6:reportExecution(p3.displaying.instructionName, p3.displaying.id)
+		var1:reportExecution(p3.displaying.instructionName, p3.displaying.id)
 		p3.displaying = nil
 		p3:processNext()
 	end
@@ -90,9 +90,9 @@ local list = {
 	}
 }
 
-function t.displayMessage(p4)
+function t.displayMessage(p3)
 	-- upvalues: default (ref)
-	default:_open(p4)
+	default:_open(p3)
 end
 
 default:updateButtons(list)
@@ -120,11 +120,11 @@ if default then
 		default:resizeWidthAndHeight(x_1, y_1)
 	end
 end
-local function x_1(p5)
+local function x_1(p3)
 	-- upvalues: robloxEventReceivedConnection (write), guiService (ref), t (ref)
 	local t_1 = {}
 	
-	for i, v in ipairs(p5) do
+	for i, v in ipairs(p3) do
 		if v.type == 1 then
 			table.insert(t_1, v)
 		elseif v.type ~= 2 then
@@ -142,14 +142,14 @@ local function x_1(p5)
 end
 
 local _ = function()
-	-- upvalues: var6 (ref), x_1 (ref), logging (ref)
-	var6:getInstructions(function(p6, p7, p8)
+	-- upvalues: var1 (ref), x_1 (ref), logging (ref)
+	var1:getInstructions(function(p4, p5, p6)
 		-- upvalues: x_1 (copy), logging (copy)
-		if p6 then
-			x_1(p8)
+		if p4 then
+			x_1(p6)
 			
 			return
-		elseif p7 then
+		elseif p5 then
 			logging.warn("ScreenTimeInGame requestInstructions failed: unauthorized")
 			
 			return
@@ -158,17 +158,17 @@ local _ = function()
 	end)
 end
 
-robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(function(p9)
-	-- upvalues: getFFlagScreenTimeSignalR (ref), constants (ref), var6 (ref), x_1 (ref), logging (ref), robloxEventReceivedConnection (write), guiService (ref), httpService (ref)
+robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(function(p4)
+	-- upvalues: getFFlagScreenTimeSignalR (ref), constants (ref), var1 (ref), x_1 (ref), logging (ref), robloxEventReceivedConnection (write), guiService (ref), httpService (ref)
 	if getFFlagScreenTimeSignalR() then
-		if p9.namespace == constants.SIGNALR_NAMESPACE and p9.detailType == constants.SIGNALR_TYPE_NEW_INSTRUCTION then
-			var6:getInstructions(function(p10, p11, p12)
+		if p4.namespace == constants.SIGNALR_NAMESPACE and p4.detailType == constants.SIGNALR_TYPE_NEW_INSTRUCTION then
+			var1:getInstructions(function(p5, p6, p7)
 				-- upvalues: x_1 (copy), logging (copy)
-				if p10 then
-					x_1(p12)
+				if p5 then
+					x_1(p7)
 					
 					return
-				elseif p11 then
+				elseif p6 then
 					logging.warn("ScreenTimeInGame requestInstructions failed: unauthorized")
 					
 					return
@@ -178,8 +178,8 @@ robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(
 			
 			return
 		end
-	elseif p9.namespace == constants.HEARTBEAT_NOTIFICATIONS_NAMESPACE then
-		if p9.detailType == constants.HEARTBEAT_CONSECUTIVE_FAILURE then
+	elseif p4.namespace == constants.HEARTBEAT_NOTIFICATIONS_NAMESPACE then
+		if p4.detailType == constants.HEARTBEAT_CONSECUTIVE_FAILURE then
 			if robloxEventReceivedConnection then
 				robloxEventReceivedConnection:Disconnect()
 				robloxEventReceivedConnection = nil
@@ -190,8 +190,8 @@ robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(
 			return
 		else
 			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), p9 (ref)
-				return httpService:JSONDecode(p9.detail)
+				-- upvalues: httpService (copy), p4 (ref)
+				return httpService:JSONDecode(p4.detail)
 			end)
 			
 			if not ok then
@@ -205,13 +205,13 @@ robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(
 			end
 			for i, v in ipairs(status.notifications) do
 				if v.type == constants.HEARTBEAT_NOTIFICATION_TYPE_NEW_INSTRUCTION then
-					var6:getInstructions(function(p13, p14, p15)
+					var1:getInstructions(function(p5, p6, p7)
 						-- upvalues: x_1 (copy), logging (copy)
-						if p13 then
-							x_1(p15)
+						if p5 then
+							x_1(p7)
 							
 							return
-						elseif p14 then
+						elseif p6 then
 							logging.warn("ScreenTimeInGame requestInstructions failed: unauthorized")
 							
 							return

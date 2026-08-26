@@ -35,14 +35,14 @@ local constantsModule = require(script.Resources.Constants)
 local getFFlagIGMGamepadSelectionHistoryModule = require(script.Flags.GetFFlagIGMGamepadSelectionHistory)
 local bindableEvent = Instance.new("BindableEvent")
 local bindableEvent_1 = Instance.new("BindableEvent")
-local var29 = createStoreModule()
+local var1 = createStoreModule()
 
 return {
 	mountInGameMenu = function()
-		-- upvalues: registerSetCoresModule (ref), var29 (ref), bindMenuActionsModule (ref), requestGameNameAndDescriptionModule (ref), globalConfigModule (ref), roact (ref), bindableEvent (ref), bindableEvent_1 (ref), localization (ref), localizationService (ref), setLocaleIdModule (ref), setInspectMenuEnabledModule (ref), guiService (ref), initVoiceChatStoreModule (ref), renderWithCoreScriptsStyleProviderModule (ref), localizationProvider (ref), selectionCursorProvider (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), focusHandlerContextProviderModule (ref), appModule (ref), appInteractionFeedbackProvider (ref), feedbackManagerInjectionContextProvider (ref), constantsModule (ref), setScreenSizeModule (ref), roactRodux (ref), inGameMenuPolicyModule (ref), coreGuiService (ref)
-		registerSetCoresModule(var29)
-		bindMenuActionsModule(var29)
-		requestGameNameAndDescriptionModule(var29)
+		-- upvalues: registerSetCoresModule (ref), var1 (ref), bindMenuActionsModule (ref), requestGameNameAndDescriptionModule (ref), globalConfigModule (ref), roact (ref), bindableEvent (ref), bindableEvent_1 (ref), localization (ref), localizationService (ref), setLocaleIdModule (ref), setInspectMenuEnabledModule (ref), guiService (ref), initVoiceChatStoreModule (ref), renderWithCoreScriptsStyleProviderModule (ref), localizationProvider (ref), selectionCursorProvider (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), focusHandlerContextProviderModule (ref), appModule (ref), appInteractionFeedbackProvider (ref), feedbackManagerInjectionContextProvider (ref), constantsModule (ref), setScreenSizeModule (ref), roactRodux (ref), inGameMenuPolicyModule (ref), coreGuiService (ref)
+		registerSetCoresModule(var1)
+		bindMenuActionsModule(var1)
+		requestGameNameAndDescriptionModule(var1)
 		
 		if globalConfigModule.propValidation then
 			roact.setGlobalConfig({ propValidation = true })
@@ -50,48 +50,48 @@ return {
 		if globalConfigModule.elementTracing then
 			roact.setGlobalConfig({ elementTracing = true })
 		end
-		var29.changed:connect(function(p0, p1)
+		var1.changed:connect(function(p1, p2)
 			-- upvalues: bindableEvent (copy), bindableEvent_1 (copy)
-			if p0.isMenuOpen ~= p1.isMenuOpen then
-				bindableEvent:Fire(p0.isMenuOpen)
+			if p1.isMenuOpen ~= p2.isMenuOpen then
+				bindableEvent:Fire(p1.isMenuOpen)
 			end
-			local enabled = p0.respawn.enabled
-			local customCallback = p0.respawn.customCallback
+			local enabled = p1.respawn.enabled
+			local customCallback = p1.respawn.customCallback
 			
-			if enabled ~= p1.respawn.enabled and customCallback ~= p1.respawn.customCallback then
+			if enabled ~= p2.respawn.enabled and customCallback ~= p2.respawn.customCallback then
 				bindableEvent_1:Fire(enabled, customCallback)
 			end
 		end)
-		local var30 = localization.new(localizationService.RobloxLocaleId)
-		var29:dispatch(setLocaleIdModule(localizationService.RobloxLocaleId))
+		local var2 = localization.new(localizationService.RobloxLocaleId)
+		var1:dispatch(setLocaleIdModule(localizationService.RobloxLocaleId))
 		localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
-			-- upvalues: var30 (ref), localizationService (copy), var29 (copy), setLocaleIdModule (copy)
-			var30:SetLocale(localizationService.RobloxLocaleId)
-			var29:dispatch(setLocaleIdModule(localizationService.RobloxLocaleId))
+			-- upvalues: var2 (ref), localizationService (copy), var1 (copy), setLocaleIdModule (copy)
+			var2:SetLocale(localizationService.RobloxLocaleId)
+			var1:dispatch(setLocaleIdModule(localizationService.RobloxLocaleId))
 		end)
-		var29:dispatch(setInspectMenuEnabledModule(guiService:GetInspectMenuEnabled()))
-		guiService.InspectMenuEnabledChangedSignal:Connect(function(p2)
-			-- upvalues: var29 (copy), setInspectMenuEnabledModule (copy)
-			var29:dispatch(setInspectMenuEnabledModule(p2))
+		var1:dispatch(setInspectMenuEnabledModule(guiService:GetInspectMenuEnabled()))
+		guiService.InspectMenuEnabledChangedSignal:Connect(function(p1)
+			-- upvalues: var1 (copy), setInspectMenuEnabledModule (copy)
+			var1:dispatch(setInspectMenuEnabledModule(p1))
 		end)
-		initVoiceChatStoreModule(var29)
+		initVoiceChatStoreModule(var1)
 		roact.mount(roact.createElement("ScreenGui", {
 			ResetOnSpawn = false,
 			IgnoreGuiInset = true,
 			DisplayOrder = constantsModule.DisplayOrder.RootMenu,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 			AutoLocalize = false,
-			[roact.Change.AbsoluteSize] = function(p3)
-				-- upvalues: var29 (copy), setScreenSizeModule (copy)
-				var29:dispatch(setScreenSizeModule(p3.AbsoluteSize))
+			[roact.Change.AbsoluteSize] = function(p1)
+				-- upvalues: var1 (copy), setScreenSizeModule (copy)
+				var1:dispatch(setScreenSizeModule(p1.AbsoluteSize))
 			end
 		}, {
-			StoreProvider = roact.createElement(roactRodux.StoreProvider, { store = var29 }, {
+			StoreProvider = roact.createElement(roactRodux.StoreProvider, { store = var1 }, {
 				PolicyProvider = roact.createElement(inGameMenuPolicyModule.Provider, { policy = { inGameMenuPolicyModule.Mapper } }, {
 					ThemeProvider = roact.createElement(appInteractionFeedbackProvider, {}, {
 						tree = roact.createElement(feedbackManagerInjectionContextProvider, nil, {
 							tree = renderWithCoreScriptsStyleProviderModule({
-								LocalizationProvider = roact.createElement(localizationProvider, { localization = var30 }, {
+								LocalizationProvider = roact.createElement(localizationProvider, { localization = var2 }, {
 									CursorProvider = roact.createElement(selectionCursorProvider, {}, {
 										FocusHandlerContextProvider = getFFlagIGMGamepadSelectionHistoryModule() and roact.createElement(focusHandlerContextProviderModule, {}, { InGameMenu = roact.createElement(appModule) }) or nil,
 										InGameMenu = not getFFlagIGMGamepadSelectionHistoryModule() and roact.createElement(appModule) or nil
@@ -104,51 +104,51 @@ return {
 			})
 		}), coreGuiService, "InGameMenu")
 	end,
-	openInGameMenu = function(p4)
-		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref)
-		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.TopbarButton, p4))
+	openInGameMenu = function(p1)
+		-- upvalues: var1 (ref), openMenuModule (ref), constantsModule (ref)
+		var1:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.TopbarButton, p1))
 	end,
 	closeInGameMenu = function()
-		-- upvalues: closeMenuModule (ref), var29 (ref)
-		closeMenuModule(var29)
+		-- upvalues: closeMenuModule (ref), var1 (ref)
+		closeMenuModule(var1)
 	end,
-	openReportDialog = function(p5, p6)
-		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), trustAndSafetyModule (ref)
-		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.ReportAbuseTriggered, constantsModule.ReportDialogKey))
-		trustAndSafetyModule.openReportDialogForPlayer(p5, if p6 ~= nil then constantsModule.AnalyticsInGameMenuName else p6)
+	openReportDialog = function(p1, p2)
+		-- upvalues: var1 (ref), openMenuModule (ref), constantsModule (ref), trustAndSafetyModule (ref)
+		var1:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.ReportAbuseTriggered, constantsModule.ReportDialogKey))
+		trustAndSafetyModule.openReportDialogForPlayer(p1, if p2 ~= nil then constantsModule.AnalyticsInGameMenuName else p2)
 	end,
 	openGameSettingsPage = function()
-		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref)
-		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.SettingsTriggered))
-		var29:dispatch(setCurrentPageModule("GameSettings"))
+		-- upvalues: var1 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref)
+		var1:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.SettingsTriggered))
+		var1:dispatch(setCurrentPageModule("GameSettings"))
 	end,
 	openGameLeavePage = function()
-		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref)
-		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.GamepadLeaveGame))
-		var29:dispatch(setCurrentPageModule(constantsModule.LeaveGamePromptPageKey))
+		-- upvalues: var1 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref)
+		var1:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.GamepadLeaveGame))
+		var1:dispatch(setCurrentPageModule(constantsModule.LeaveGamePromptPageKey))
 	end,
 	openCharacterResetPage = function()
-		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref), setRespawningModule (ref)
-		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.GamepadResetCharacter))
-		var29:dispatch(setCurrentPageModule(constantsModule.MainPagePageKey))
-		var29:dispatch(setRespawningModule(true))
+		-- upvalues: var1 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref), setRespawningModule (ref)
+		var1:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.GamepadResetCharacter))
+		var1:dispatch(setCurrentPageModule(constantsModule.MainPagePageKey))
+		var1:dispatch(setRespawningModule(true))
 	end,
 	openPlayersPage = function()
-		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref)
-		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.PlayersTriggered))
-		var29:dispatch(setCurrentPageModule("Players"))
+		-- upvalues: var1 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref)
+		var1:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.PlayersTriggered))
+		var1:dispatch(setCurrentPageModule("Players"))
 	end,
 	getOpenChangedEvent = function()
 		-- upvalues: bindableEvent (ref)
 		return bindableEvent
 	end,
 	getOpen = function()
-		-- upvalues: var29 (ref)
-		return var29:getState().isMenuOpen
+		-- upvalues: var1 (ref)
+		return var1:getState().isMenuOpen
 	end,
 	getRespawnBehaviour = function()
-		-- upvalues: var29 (ref)
-		local state = var29:getState()
+		-- upvalues: var1 (ref)
+		local state = var1:getState()
 		
 		return state.respawn.enabled, state.respawn.customCallback
 	end,
@@ -157,7 +157,7 @@ return {
 		return bindableEvent_1
 	end,
 	setMenuIconTooltipOpen = function(value)
-		-- upvalues: var29 (ref), setMenuIconTooltipOpenModule (ref)
-		var29:dispatch(setMenuIconTooltipOpenModule(value))
+		-- upvalues: var1 (ref), setMenuIconTooltipOpenModule (ref)
+		var1:dispatch(setMenuIconTooltipOpenModule(value))
 	end
 }

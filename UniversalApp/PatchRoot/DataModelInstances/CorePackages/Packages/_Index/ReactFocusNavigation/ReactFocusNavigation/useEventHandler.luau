@@ -5,21 +5,21 @@ local focusNavigationContextModule = require(script.Parent.FocusNavigationContex
 local useComposedRefModule = require(script.Parent.useComposedRef)
 local useEventLifecycleRefModule = require(script.Parent.useEventLifecycleRef)
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: reactModule (ref), focusNavigationContextModule (ref), useEventLifecycleRefModule (ref), useComposedRefModule (ref)
-	local var4 = reactModule.useContext(focusNavigationContextModule)
+	local var1 = reactModule.useContext(focusNavigationContextModule)
 	
-	return useComposedRefModule(useEventLifecycleRefModule(reactModule.useCallback(function(p4)
-		-- upvalues: var4 (ref), p0 (ref), p1 (ref), p2 (ref)
-		if var4 then
-			assert(p4:IsA("GuiObject"), "Event handlers can only be applied to GuiObjects")
-			var4:registerEventHandler(p4, p0, p1, p2)
-		end
-	end, { var4, p0, p1, p2 }), reactModule.useCallback(function(p5)
-		-- upvalues: var4 (ref), p0 (ref), p1 (ref), p2 (ref)
-		if var4 then
+	return useComposedRefModule(useEventLifecycleRefModule(reactModule.useCallback(function(p5)
+		-- upvalues: var1 (ref), p1 (ref), p2 (ref), p3 (ref)
+		if var1 then
 			assert(p5:IsA("GuiObject"), "Event handlers can only be applied to GuiObjects")
-			var4:deregisterEventHandler(p5, p0, p1, p2)
+			var1:registerEventHandler(p5, p1, p2, p3)
 		end
-	end, { var4, p0, p1, p2 })), p3)
+	end, { var1, p1, p2, p3 }), reactModule.useCallback(function(p5)
+		-- upvalues: var1 (ref), p1 (ref), p2 (ref), p3 (ref)
+		if var1 then
+			assert(p5:IsA("GuiObject"), "Event handlers can only be applied to GuiObjects")
+			var1:deregisterEventHandler(p5, p1, p2, p3)
+		end
+	end, { var1, p1, p2, p3 })), p4)
 end

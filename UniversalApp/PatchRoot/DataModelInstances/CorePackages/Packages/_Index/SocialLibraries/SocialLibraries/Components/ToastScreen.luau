@@ -8,7 +8,7 @@ local toast = UIBlox.App.Dialog.Toast
 local validateColorInfo = UIBlox.Style.Validator.validateColorInfo
 local toastScreen = roact.PureComponent:extend("ToastScreen")
 toastScreen.defaultProps = { navigation = nil }
-local var2 = t.strictInterface({
+local var1 = t.strictInterface({
 	toastTitle = t.optional(t.string),
 	toastSubtitle = t.optional(t.string),
 	iconColorStyle = t.optional(validateColorInfo),
@@ -20,7 +20,7 @@ local var2 = t.strictInterface({
 	onDismissed = t.optional(t.callback),
 	hideIcon = t.optional(t.boolean)
 })
-local var3 = t.strictInterface({
+local var2 = t.strictInterface({
 	toastContent = t.optional(t.table),
 	anchorPoint = t.optional(t.Vector2),
 	duration = t.optional(t.integer),
@@ -30,15 +30,15 @@ local var3 = t.strictInterface({
 	show = t.optional(t.boolean)
 })
 
-function toastScreen.init(p0)
-	-- upvalues: var3 (ref), var2 (ref), images (ref), iconSize (ref)
-	p0.hasToastChanged = false
+function toastScreen.init(p1)
+	-- upvalues: var2 (ref), var1 (ref), images (ref), iconSize (ref)
+	p1.hasToastChanged = false
 	
-	function p0.getToastProps(p1)
-		-- upvalues: var3 (copy), var2 (copy), images (copy), iconSize (copy), p0 (ref)
-		local toastContent = p1.toastContent or {}
-		assert(var3(p1))
-		assert(var2(toastContent))
+	function p0.getToastProps(p2)
+		-- upvalues: var2 (copy), var1 (copy), images (copy), iconSize (copy), p1 (ref)
+		local toastContent = p2.toastContent or {}
+		assert(var2(p2))
+		assert(var1(toastContent))
 		
 		return {
 			toastContent = {
@@ -49,42 +49,42 @@ function toastScreen.init(p0)
 				iconSize = if not toastContent.hideIcon then toastContent.iconSize or Vector2.new(iconSize.Regular, iconSize.Regular) else nil,
 				swipeUpDismiss = toastContent.swipeUpDismiss,
 				onAppeared = function()
-					-- upvalues: toastContent (ref), p0 (copy)
+					-- upvalues: toastContent (ref), p1 (copy)
 					if toastContent.onAppeared then
 						toastContent.onAppeared()
 					end
-					p0.hasToastChanged = false
+					p1.hasToastChanged = false
 				end,
 				onActivated = toastContent.onActivated,
 				onDismissed = function()
-					-- upvalues: toastContent (ref), p0 (copy)
+					-- upvalues: toastContent (ref), p1 (copy)
 					if toastContent.onDismissed then
 						toastContent.onDismissed()
 					end
-					if not p0.hasToastChanged then
-						p0.props.navigation.goBack()
+					if not p1.hasToastChanged then
+						p1.props.navigation.goBack()
 					end
 				end
 			},
-			anchorPoint = p1.anchorPoint,
-			duration = p1.duration or 2,
-			layoutOrder = p1.layoutOrder,
-			position = p1.position,
-			size = p1.size,
-			show = p1.show
+			anchorPoint = p2.anchorPoint,
+			duration = p2.duration or 2,
+			layoutOrder = p2.layoutOrder,
+			position = p2.position,
+			size = p2.size,
+			show = p2.show
 		}
 	end
 end
 
-function toastScreen.render(p2)
+function toastScreen.render(p1)
 	-- upvalues: roact (ref), toast (ref)
-	assert(type(p2.props.navigation) ~= "nil", "ToastScreen should be wrapped with Roact Navigation")
+	assert(type(p1.props.navigation) ~= "nil", "ToastScreen should be wrapped with Roact Navigation")
 	
-	return roact.createElement(toast, p2.getToastProps(p2.props.navigation.getParam("toastProps", {})))
+	return roact.createElement(toast, p1.getToastProps(p1.props.navigation.getParam("toastProps", {})))
 end
 
-function toastScreen.didUpdate(p3, _, _)
-	p3.hasToastChanged = true
+function toastScreen.didUpdate(p1, _, _)
+	p1.hasToastChanged = true
 end
 
 return toastScreen

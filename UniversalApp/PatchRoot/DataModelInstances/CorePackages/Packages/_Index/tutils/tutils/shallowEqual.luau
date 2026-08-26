@@ -1,18 +1,18 @@
-﻿return function(p0, p1, p2)
-	if not p0 or not p1 then
+﻿return function(p1, p2, p3)
+	if not p1 or not p2 then
 		return false
-	elseif p0 == p1 then
+	elseif p1 == p2 then
 		return true
-	elseif not p2 then
-		p2 = {}
+	elseif not p3 then
+		p3 = {}
 	end
-	for i, v in pairs(p0) do
-		if p1[i] ~= v and not p2[i] then
+	for i, v in pairs(p1) do
+		if p2[i] ~= v and not p3[i] then
 			return false
 		end
 	end
-	for i, v_1 in pairs(p1) do
-		if p0[i] ~= v_1 and not p2[i] then
+	for i, v_1 in pairs(p2) do
+		if p1[i] ~= v_1 and not p3[i] then
 			return false
 		end
 	end

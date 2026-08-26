@@ -71,31 +71,31 @@ return {
 		end
 		return t
 	end,
-	buildTwoMonthPaneCellConfigs = function(p1, p2)
+	buildTwoMonthPaneCellConfigs = function(p2, p3)
 		-- upvalues: NUM_WEEKDAY_HEADERS (ref), dateTimeUtilitiesModule (ref), DAYS_PER_WEEK (ref)
 		local t = {}
-		local var1 = NUM_WEEKDAY_HEADERS + 1
-		local firstDayOfWeek = dateTimeUtilitiesModule.getFirstDayOfWeek(p1, p2)
+		local var5 = NUM_WEEKDAY_HEADERS + 1
+		local firstDayOfWeek = dateTimeUtilitiesModule.getFirstDayOfWeek(p2, p3)
 		
 		for i = 1, firstDayOfWeek do
-			table.insert(t, { key = `lead-{i}`, LayoutOrder = var1 })
-			var1 += 1
+			table.insert(t, { key = `lead-{i}`, LayoutOrder = var5 })
+			var5 += 1
 		end
-		local daysInMonth = dateTimeUtilitiesModule.getDaysInMonth(p1, p2)
+		local daysInMonth = dateTimeUtilitiesModule.getDaysInMonth(p2, p3)
 		
 		for i_1 = 1, daysInMonth do
 			table.insert(t, {
 				day = i_1,
 				key = `day-{i_1}`,
-				LayoutOrder = var1,
-				month = p1,
-				year = p2
+				LayoutOrder = var5,
+				month = p2,
+				year = p3
 			})
-			var1 += 1
+			var5 += 1
 		end
 		for i_2 = 1, (DAYS_PER_WEEK - (firstDayOfWeek + daysInMonth) % DAYS_PER_WEEK) % DAYS_PER_WEEK do
-			table.insert(t, { key = `trail-{i_2}`, LayoutOrder = var1 })
-			var1 += 1
+			table.insert(t, { key = `trail-{i_2}`, LayoutOrder = var5 })
+			var5 += 1
 		end
 		return t
 	end

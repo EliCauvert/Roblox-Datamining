@@ -2,7 +2,7 @@
 local _ = require(profilePlatform.Common.Enums)
 local supportedProfileTypesModule = require(profilePlatform.Components.CTARow.ProfileActions.SupportedProfileTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: supportedProfileTypesModule (ref)
-	return supportedProfileTypesModule[p0] or {}
+	return supportedProfileTypesModule[p1] or {}
 end

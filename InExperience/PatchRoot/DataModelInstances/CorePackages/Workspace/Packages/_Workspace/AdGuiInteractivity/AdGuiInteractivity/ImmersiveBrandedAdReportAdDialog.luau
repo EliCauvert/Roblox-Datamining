@@ -36,12 +36,12 @@ local list = {
 		value = "ABUSE_CATEGORY_INAPPROPRIATE_AD"
 	}
 }
-local var18 = urlBuilder.new({ path = "illegal-content-reporting", base = url.BASE_URL })
-local var19 = urlBuilder.new({
+local var1 = urlBuilder.new({ path = "illegal-content-reporting", base = url.BASE_URL })
+local var2 = urlBuilder.new({
 	path = "store/asset/{assetId}",
 	base = url.CREATOR_HUB_URL
 })
-local var20 = urlBuilder.new({
+local var3 = urlBuilder.new({
 	path = "abuse-reporting/v1/abuse-report",
 	base = url.APIS_URL
 })
@@ -81,9 +81,9 @@ local _ = function()
 	default_1:logRobloxTelemetryCounter(t_1)
 end
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: default_1 (ref), t_2 (ref)
-	default_1:logRobloxTelemetryCounter(t_2, 1, { reason = p0 })
+	default_1:logRobloxTelemetryCounter(t_2, 1, { reason = p1 })
 end
 
 local function logReportImmersiveBrandedAdHttpFailureEvent(p1)
@@ -103,16 +103,16 @@ local function logReportImmersiveBrandedAdHttpFailureEvent(p1)
 	default_1:logRobloxTelemetryEvent(t_3, nil, t)
 end
 
-local function sendImmersiveBrandedAdAbuseReport(p2, p3)
-	-- upvalues: httpService (ref), default_1 (ref), t_2 (ref), var20 (ref), t_1 (ref), logReportImmersiveBrandedAdHttpFailureEvent (ref)
+local function sendImmersiveBrandedAdAbuseReport(p1, p2)
+	-- upvalues: httpService (ref), default_1 (ref), t_2 (ref), var3 (ref), t_1 (ref), logReportImmersiveBrandedAdHttpFailureEvent (ref)
 	local t = {
 		abuseVector = "ad_v2",
 		targetType = "ad_v2",
-		category = p3.reason,
-		comment = p3.comment,
-		custom = { SCREENSHOT_ID = p3.screenshotId, PLACE_ID = p3.placeId },
-		submitterId = p3.userId,
-		targetIdStr = `immersiveBrandedAd/{p3.immersiveBrandedAdId}`
+		category = p2.reason,
+		comment = p2.comment,
+		custom = { SCREENSHOT_ID = p2.screenshotId, PLACE_ID = p2.placeId },
+		submitterId = p2.userId,
+		targetIdStr = `immersiveBrandedAd/{p2.immersiveBrandedAdId}`
 	}
 	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), t (ref)
@@ -121,14 +121,14 @@ local function sendImmersiveBrandedAdAbuseReport(p2, p3)
 	
 	if ok then
 		task.spawn(function()
-			-- upvalues: var20 (copy), p2 (ref), status (ref), default_1 (copy), t_1 (copy), t_2 (copy), logReportImmersiveBrandedAdHttpFailureEvent (copy)
-			p2(var20(), "POST", { postBody = status }):andThen(function(_)
+			-- upvalues: var3 (copy), p1 (ref), status (ref), default_1 (copy), t_1 (copy), t_2 (copy), logReportImmersiveBrandedAdHttpFailureEvent (copy)
+			p1(var3(), "POST", { postBody = status }):andThen(function(_)
 				-- upvalues: default_1 (copy), t_1 (copy)
 				default_1:logRobloxTelemetryCounter(t_1)
-			end, function(p4)
+			end, function(p3)
 				-- upvalues: default_1 (copy), t_2 (copy), logReportImmersiveBrandedAdHttpFailureEvent (copy)
 				default_1:logRobloxTelemetryCounter(t_2, 1, { reason = "http" })
-				logReportImmersiveBrandedAdHttpFailureEvent(p4)
+				logReportImmersiveBrandedAdHttpFailureEvent(p3)
 			end)
 		end)
 		
@@ -139,42 +139,42 @@ local function sendImmersiveBrandedAdAbuseReport(p2, p3)
 	return false
 end
 
-local function ImmersiveBrandedAdReportAdDialog(p5)
-	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), reactModule (ref), useLocalization (ref), useAppPolicy (ref), var19 (ref), urlBuilder (ref), var18 (ref), default (ref), adsInteractivityTelemetryModule (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref), runService (ref), default_1 (ref), t (ref), t_2 (ref), sendImmersiveBrandedAdAbuseReport (ref), screenshotModule (ref), defaultTwoStepReportFlowModule (ref), list (ref)
-	local immersiveBrandedAdId = p5.immersiveBrandedAdId
-	local var30 = useRoactService(roactServiceTagsModule.RoactNetworking)
-	local var31 = reactModule.useRef(nil)
-	local var32, var33 = reactModule.useState(false)
-	local var34 = useLocalization({
+local function ImmersiveBrandedAdReportAdDialog(p1)
+	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), reactModule (ref), useLocalization (ref), useAppPolicy (ref), var2 (ref), urlBuilder (ref), var1 (ref), default (ref), adsInteractivityTelemetryModule (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref), runService (ref), default_1 (ref), t (ref), t_2 (ref), sendImmersiveBrandedAdAbuseReport (ref), screenshotModule (ref), defaultTwoStepReportFlowModule (ref), list (ref)
+	local immersiveBrandedAdId = p1.immersiveBrandedAdId
+	local var4 = useRoactService(roactServiceTagsModule.RoactNetworking)
+	local var5 = reactModule.useRef(nil)
+	local var6, var7 = reactModule.useState(false)
+	local var8 = useLocalization({
 		LinkText = "CoreScripts.Ads.Label.IllegalContentReportingLink"
 	})
-	local var35 = useAppPolicy(function(p6)
-		return p6.getShowIllegalContentReportingUI()
+	local var9 = useAppPolicy(function(p2)
+		return p2.getShowIllegalContentReportingUI()
 	end)
-	local var36 = reactModule.useCallback(function()
-		-- upvalues: var19 (copy), immersiveBrandedAdId (ref), urlBuilder (copy), var18 (copy), default (copy), adsInteractivityTelemetryModule (copy), p5 (ref)
-		default:openURL(urlBuilder.addQueryString(var18(), { contentURL = var19({ assetId = immersiveBrandedAdId }) })):catch(function(_)
-			-- upvalues: adsInteractivityTelemetryModule (copy), p5 (copy)
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var2 (copy), immersiveBrandedAdId (ref), urlBuilder (copy), var1 (copy), default (copy), adsInteractivityTelemetryModule (copy), p1 (ref)
+		default:openURL(urlBuilder.addQueryString(var1(), { contentURL = var2({ assetId = immersiveBrandedAdId }) })):catch(function(_)
+			-- upvalues: adsInteractivityTelemetryModule (copy), p1 (copy)
 			adsInteractivityTelemetryModule.logImmersiveBrandedAdLinkingFailedCounter("reportAd.eudsaIllegalContent")
-			p5.onDismiss()
+			p1.onDismiss()
 		end)
-	end, { immersiveBrandedAdId, p5.onDismiss })
-	local var37 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy), view (copy), button (copy), var34 (ref), buttonVariant (copy), var36 (ref), inputSize (copy)
+	end, { immersiveBrandedAdId, p1.onDismiss })
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: reactModule (copy), view (copy), button (copy), var8 (ref), buttonVariant (copy), var10 (ref), inputSize (copy)
 		return reactModule.createElement(view, {
 			tag = "col margin-x-medium padding-top-medium size-full-0 auto-y"
 		}, {
 			linkButton = reactModule.createElement(button, {
 				icon = "icons/navigation/externallink",
-				text = var34.LinkText,
+				text = var8.LinkText,
 				variant = buttonVariant.Link,
-				onActivated = var36,
+				onActivated = var10,
 				size = inputSize.Small
 			})
 		})
-	end, { var36, var34.LinkText })
-	local var38 = reactModule.useCallback(function(p7, p8)
-		-- upvalues: runService (copy), default_1 (copy), t (copy), t_2 (copy), var31 (ref), sendImmersiveBrandedAdAbuseReport (copy), var30 (ref), immersiveBrandedAdId (ref)
+	end, { var10, var8.LinkText })
+	local var12 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: runService (copy), default_1 (copy), t (copy), t_2 (copy), var5 (ref), sendImmersiveBrandedAdAbuseReport (copy), var4 (ref), immersiveBrandedAdId (ref)
 		if runService:IsStudio() or _G.__TESTEZ_RUNNING_TEST__ or _G.__TEST_SUITE_PACKAGE__ then
 			return true
 		end
@@ -185,12 +185,12 @@ local function ImmersiveBrandedAdReportAdDialog(p5)
 			default_1:logRobloxTelemetryCounter(t_2, 1, { reason = "noPlayer" })
 			
 			return false
-		elseif var31.current then
-			return sendImmersiveBrandedAdAbuseReport(var30, {
-				reason = p7,
-				comment = p8,
+		elseif var5.current then
+			return sendImmersiveBrandedAdAbuseReport(var4, {
+				reason = p2,
+				comment = p3,
 				immersiveBrandedAdId = immersiveBrandedAdId,
-				screenshotId = var31.current,
+				screenshotId = var5.current,
 				userId = localPlayer.UserId,
 				placeId = game.PlaceId
 			})
@@ -198,22 +198,22 @@ local function ImmersiveBrandedAdReportAdDialog(p5)
 		default_1:logRobloxTelemetryCounter(t_2, 1, { reason = "noScreenshot" })
 		
 		return false
-	end, { immersiveBrandedAdId, var30 })
+	end, { immersiveBrandedAdId, var4 })
 	reactModule.useEffect(function()
-		-- upvalues: runService (copy), screenshotModule (copy), var31 (ref), var33 (ref)
+		-- upvalues: runService (copy), screenshotModule (copy), var5 (ref), var7 (ref)
 		if not runService:IsStudio() and not _G.__TESTEZ_RUNNING_TEST__ and not _G.__TEST_SUITE_PACKAGE__ then
-			screenshotModule.ScreenshotManager:TakeScreenshotWithCallback(function(p9)
-				-- upvalues: var31 (copy)
-				var31.current = p9
+			screenshotModule.ScreenshotManager:TakeScreenshotWithCallback(function(p2)
+				-- upvalues: var5 (copy)
+				var5.current = p2
 			end, nil)
 		end
 		task.defer(function()
-			-- upvalues: var33 (copy)
-			var33(true)
+			-- upvalues: var7 (copy)
+			var7(true)
 		end)
 	end, {})
 	
-	return if var32 then reactModule.createElement(reactModule.Fragment, {}, {
+	return if var6 then reactModule.createElement(reactModule.Fragment, {}, {
 		modal = reactModule.createElement("TextButton", {
 			Text = "",
 			BackgroundTransparency = 1,
@@ -223,9 +223,9 @@ local function ImmersiveBrandedAdReportAdDialog(p5)
 		abuseReportFlow = reactModule.createElement(defaultTwoStepReportFlowModule, {
 			analyticsContext = "Ad",
 			isReportCategoryReadonly = true,
-			onCloseProps = { hasPreviousSteps = false, onAbandon = p5.onDismiss },
-			onSubmitProps = { hasNextSteps = false, onSubmit = var38 },
-			onComplete = p5.onDismiss,
+			onCloseProps = { hasPreviousSteps = false, onAbandon = p1.onDismiss },
+			onSubmitProps = { hasNextSteps = false, onSubmit = var12 },
+			onComplete = p1.onDismiss,
 			reportCategories = list,
 			reportCategoryDefaultKey = list[1].value,
 			localizationKeys = {
@@ -233,12 +233,12 @@ local function ImmersiveBrandedAdReportAdDialog(p5)
 				completeTitle = "Feature.ReportAbuse.Title.SelectInSceneThankYou",
 				completeDescription = "Feature.ReportAbuse.Label.SelectInSceneComplete"
 			},
-			footerContent = if var35 then var37 else nil
+			footerContent = if var9 then var11 else nil
 		})
 	}) else nil
 end
 
-return function(p10)
+return function(p1)
 	-- upvalues: reactModule (ref), roactServicesModule (ref), roactServiceTagsModule (ref), httpModule (ref), httpService (ref), universalAppPolicyModule (ref), appStyleProvider (ref), colorMode (ref), constants (ref), ImmersiveBrandedAdReportAdDialog (ref)
 	return reactModule.createElement(roactServicesModule.RoactServices.ServiceProvider, {
 		services = {
@@ -259,7 +259,7 @@ return function(p10)
 					Size = UDim2.fromScale(1, 0.6),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					reportAdDialog = reactModule.createElement(ImmersiveBrandedAdReportAdDialog, p10)
+					reportAdDialog = reactModule.createElement(ImmersiveBrandedAdReportAdDialog, p1)
 				})
 			})
 		})

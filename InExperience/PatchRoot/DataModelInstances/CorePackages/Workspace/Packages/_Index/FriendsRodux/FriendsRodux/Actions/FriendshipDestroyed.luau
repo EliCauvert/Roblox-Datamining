@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("FriendsRodux").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1)
-	return { payload = { userId1 = p0, userId2 = p1 } }
+﻿return require(script:FindFirstAncestor("FriendsRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
+	return { payload = { userId1 = p1, userId2 = p2 } }
 end)

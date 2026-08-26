@@ -10,51 +10,51 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAddTypesToWidgetItems = avatarExperienceFlagsModule.FFlagAddTypesToWidgetItems
 local fFlagAXOrganicItemPosition = avatarExperienceFlagsModule.FFlagAXOrganicItemPosition
 
-local function isReadyToLog(p0)
+local function isReadyToLog(p1)
 	-- upvalues: itemTypeEnum (ref)
-	local itemType = p0.itemType
-	local itemData = p0.itemData
-	local lookData = p0.lookData
-	local hydratedContent = p0.hydratedContent
-	local var9 = nil
-	local var10 = nil
-	local var11 = nil
+	local itemType = p1.itemType
+	local itemData = p1.itemData
+	local lookData = p1.lookData
+	local hydratedContent = p1.hydratedContent
+	local var1 = nil
+	local var2 = nil
+	local var3 = nil
 	
-	if p0.widgetAnalyticsInfo then
+	if p1.widgetAnalyticsInfo then
 		if itemType == itemTypeEnum.Look then
 			if lookData then
-				var9 = lookData.totalPrice ~= nil
-				var9 = nil
+				var1 = lookData.totalPrice ~= nil
+				var1 = nil
 			else
-				var9 = false
+				var1 = false
 			end
-			var10 = p0.widgetAnalyticsInfo.itemId ~= nil
-			var11 = true
+			var2 = p1.widgetAnalyticsInfo.itemId ~= nil
+			var3 = true
 		elseif hydratedContent then
-			var9 = hydratedContent.price ~= nil
-			var9 = nil
+			var1 = hydratedContent.price ~= nil
+			var1 = nil
 		else
-			var9 = false
+			var1 = false
 		end
-		var10 = p0.widgetAnalyticsInfo.itemId ~= nil
-		var11 = true
-	elseif p0.isOrganic then
+		var2 = p1.widgetAnalyticsInfo.itemId ~= nil
+		var3 = true
+	elseif p1.isOrganic then
 		if itemType == itemTypeEnum.Look then
 			if lookData then
-				var9 = lookData.totalPrice ~= nil
-				var9 = nil
+				var1 = lookData.totalPrice ~= nil
+				var1 = nil
 			else
-				var9 = false
+				var1 = false
 			end
-			var10 = p0.itemId ~= nil
-			var11 = true
+			var2 = p1.itemId ~= nil
+			var3 = true
 		else
-			var9 = if itemData then if itemData.lowestPrice == nil then itemData.priceInRobux ~= nil else true else false
-			var10 = p0.itemId ~= nil
-			var11 = if itemData then if itemData.assetType == nil then itemData.bundleType ~= nil and itemData.bundleType ~= "AvatarAnimations" else true else false
+			var1 = if itemData then if itemData.lowestPrice == nil then itemData.priceInRobux ~= nil else true else false
+			var2 = p1.itemId ~= nil
+			var3 = if itemData then if itemData.assetType == nil then itemData.bundleType ~= nil and itemData.bundleType ~= "AvatarAnimations" else true else false
 		end
 	end
-	return var9 == true and (var10 == true and var11 == true)
+	return var1 == true and (var2 == true and var3 == true)
 end
 
 local function buildFields(p1)
@@ -94,7 +94,7 @@ local function buildFields(p1)
 	})
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: isReadyToLog (ref), buildFields (ref)
-	return if isReadyToLog(p2) then buildFields(p2) else nil
+	return if isReadyToLog(p1) then buildFields(p1) else nil
 end

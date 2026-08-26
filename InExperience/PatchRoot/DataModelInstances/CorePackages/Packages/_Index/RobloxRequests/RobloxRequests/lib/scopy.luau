@@ -1,16 +1,16 @@
-﻿local function deepcopy(p0)
+﻿local function deepcopy(p1)
 	-- upvalues: deepcopy (ref)
 	local _ = nil
 	
-	if type(p0) ~= "table" then
-		return p0
+	if type(p1) ~= "table" then
+		return p1
 	end
 	local t = {}
 	
-	for i, v in next, p0 do
+	for i, v in next, p1 do
 		t[deepcopy(i)] = deepcopy(v)
 	end
-	setmetatable(t, deepcopy(getmetatable(p0)))
+	setmetatable(t, deepcopy(getmetatable(p1)))
 	
 	return t
 end

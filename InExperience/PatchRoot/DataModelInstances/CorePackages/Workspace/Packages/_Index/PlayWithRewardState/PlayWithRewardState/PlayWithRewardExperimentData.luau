@@ -3,7 +3,7 @@ local parent = script:FindFirstAncestor("PlayWithRewardState").Parent
 local mutedError = require(parent.Loggers).mutedError
 local tModule = require(parent.t)
 local fFlagLuaAppEnableContainedRewardUiModule = require(script.Parent.FFlagLuaAppEnableContainedRewardUi)
-local var3 = tModule.interface({
+local var1 = tModule.interface({
 	titleText = tModule.string,
 	subtitleText = tModule.string,
 	buttonText = tModule.string,
@@ -25,19 +25,19 @@ local t_1 = {
 	keepRewardContained = if fFlagLuaAppEnableContainedRewardUiModule then false else nil
 }
 
-function t.fromJsonData(p0)
-	-- upvalues: t_1 (ref), httpService (ref), var3 (ref), mutedError (ref), fFlagLuaAppEnableContainedRewardUiModule (ref)
+function t.fromJsonData(p1)
+	-- upvalues: t_1 (ref), httpService (ref), var1 (ref), mutedError (ref), fFlagLuaAppEnableContainedRewardUiModule (ref)
 	local cloned = table.clone(t_1)
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p0 (ref)
-		return httpService:JSONDecode(p0)
+		-- upvalues: httpService (copy), p1 (ref)
+		return httpService:JSONDecode(p1)
 	end)
 	
 	if ok then
-		local var7, var8 = var3(status)
+		local var2, var3 = var1(status)
 		
-		if not var7 then
-			mutedError(`PlayWithRewardExperimentData invalid: {tostring(var8)}`)
+		if not var2 then
+			mutedError(`PlayWithRewardExperimentData invalid: {tostring(var3)}`)
 			
 			return cloned
 		end

@@ -12,30 +12,30 @@ end
 
 function t:fromMinMax(b)
 	-- upvalues: t (ref)
-	local var2 = t.new()
+	local var1 = t.new()
 	local t_1 = { X = self.X, Y = self.Y, Z = self.Z }
 	local t_2 = { X = b.X, Y = b.Y, Z = b.Z }
 	
 	for i, v in { "X", "Y", "Z" } do
 		if t_2[v] ~= -1e999 and t_1[v] ~= 1e999 and t_2[v] < t_1[v] then
-			local var5 = t_1[v]
+			local var2 = t_1[v]
 			t_1[v] = t_2[v]
-			t_2[v] = var5
+			t_2[v] = var2
 		end
 	end
-	var2.min = Vector3.new(t_1.X, t_1.Y, t_1.Z)
-	var2.max = Vector3.new(t_2.X, t_2.Y, t_2.Z)
+	var1.min = Vector3.new(t_1.X, t_1.Y, t_1.Z)
+	var1.max = Vector3.new(t_2.X, t_2.Y, t_2.Z)
 	
-	return var2
+	return var1
 end
 
-function t:unionExtents(p0)
+function t:unionExtents(p1)
 	-- upvalues: t (ref)
-	local var6 = t.new()
-	var6.min = self.min:Min(p0.min)
-	var6.max = self.max:Max(p0.max)
+	local var3 = t.new()
+	var3.min = self.min:Min(p1.min)
+	var3.max = self.max:Max(p1.max)
 	
-	return var6
+	return var3
 end
 
 function t:intersectExtents(p1)
@@ -54,20 +54,20 @@ function t:intersectExtents(p1)
 			end
 		end
 	end
-	local var9 = t.new()
-	var9.min = Vector3.new(t_1.X, t_1.Y, t_1.Z)
-	var9.max = Vector3.new(t_2.X, t_2.Y, t_2.Z)
+	local var3 = t.new()
+	var3.min = Vector3.new(t_1.X, t_1.Y, t_1.Z)
+	var3.max = Vector3.new(t_2.X, t_2.Y, t_2.Z)
 	
-	return var9
+	return var3
 end
 
 function t:expandToInclude(p2)
 	-- upvalues: t (ref)
-	local var12 = t.new()
-	var12.min = self.min:Min(p2)
-	var12.max = self.max:Max(p2)
+	local var4 = t.new()
+	var4.min = self.min:Min(p2)
+	var4.max = self.max:Max(p2)
 	
-	return var12
+	return var4
 end
 
 function t:isValid()

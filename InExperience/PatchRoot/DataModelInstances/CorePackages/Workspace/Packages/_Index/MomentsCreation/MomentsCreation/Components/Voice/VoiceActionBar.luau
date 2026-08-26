@@ -9,28 +9,28 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), button (ref), fillBehavior (ref), inputSize (ref), iconButton (ref), iconName (ref), buttonVariant (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-small size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Primary = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill auto-y" }, {
 			Button = reactModule.createElement(button, {
 				fillBehavior = fillBehavior.Fill,
-				isDisabled = p0.primaryIsDisabled,
-				isLoading = p0.primaryIsLoading,
-				onActivated = p0.primaryOnActivated,
+				isDisabled = p1.primaryIsDisabled,
+				isLoading = p1.primaryIsLoading,
+				onActivated = p1.primaryOnActivated,
 				size = inputSize.Large,
-				text = p0.primaryText,
-				variant = p0.primaryVariant,
+				text = p1.primaryText,
+				variant = p1.primaryVariant,
 				width = UDim.new(1, 0)
 			})
 		}),
 		Delete = reactModule.createElement(iconButton, {
 			LayoutOrder = 2,
 			icon = iconName.TrashCan,
-			onActivated = p0.onDelete,
+			onActivated = p1.onDelete,
 			size = inputSize.Large,
 			variant = buttonVariant.Standard
 		})

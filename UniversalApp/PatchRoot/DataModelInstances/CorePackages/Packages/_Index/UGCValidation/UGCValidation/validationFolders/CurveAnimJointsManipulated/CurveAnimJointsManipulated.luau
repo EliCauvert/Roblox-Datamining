@@ -19,10 +19,10 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), curveAnimationHierarchyUtilsModule (ref), errorSourceStringsModule (ref)
 	local bodyPartFolderRoot
-	for i, v in p1.curveAnimations do
+	for i, v in p2.curveAnimations do
 		local descendants
 		local _ = nil
 		
@@ -33,7 +33,7 @@ function t.run(p0, p1)
 				descendants = bodyPartFolderRoot:GetDescendants()
 				table.insert(descendants, bodyPartFolderRoot)
 			end
-			p0:fail(errorSourceStringsModule.Keys.CurveAnim_NoJointManipulation)
+			p1:fail(errorSourceStringsModule.Keys.CurveAnim_NoJointManipulation)
 			
 			return
 		else
@@ -53,7 +53,7 @@ function t.run(p0, p1)
 			end
 		end
 		if not bodyPartFolderRoot then
-			p0:fail(errorSourceStringsModule.Keys.CurveAnim_NoJointManipulation)
+			p1:fail(errorSourceStringsModule.Keys.CurveAnim_NoJointManipulation)
 			
 			return
 		end

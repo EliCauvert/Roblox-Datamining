@@ -23,28 +23,28 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFFlagUGCValidateCurveAnimRotationSpeedModule (ref), getFIntUGCValidateMaxAnimationFPSModule (ref), getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule (ref), errorSourceStringsModule (ref)
 	if not getFFlagUGCValidateCurveAnimRotationSpeedModule() then return end
-	local animFrames = p1.curveAnimComputedFrames.animFrames
-	local var7 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
-	local var8 = getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule()
-	local var9 = var8 / getFIntUGCValidateMaxAnimationFPSModule()
+	local animFrames = p2.curveAnimComputedFrames.animFrames
+	local var1 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
+	local var2 = getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule()
+	local var3 = var2 / getFIntUGCValidateMaxAnimationFPSModule()
 	local t = {}
 	
 	for i, v in animFrames do
 		for i_1, v_1 in v do
-			local var11 = t[i_1]
+			local var4 = t[i_1]
 			
-			if var11 then
-				local degrees = math.deg(math.abs(v_1:AngleBetween(var11)))
+			if var4 then
+				local degrees = math.deg(math.abs(v_1:AngleBetween(var4)))
 				
-				if var9 < degrees then
-					p0:fail(errorSourceStringsModule.Keys.CurveAnim_RotationTooFast, {
-						time = string.format("%.2f", (i - 1) * var7),
+				if var3 < degrees then
+					p1:fail(errorSourceStringsModule.Keys.CurveAnim_RotationTooFast, {
+						time = string.format("%.2f", (i - 1) * var1),
 						bodyPart = i_1,
 						speed = string.format("%.2f", degrees * getFIntUGCValidateMaxAnimationFPSModule()),
-						maxSpeed = tostring(var8)
+						maxSpeed = tostring(var2)
 					})
 					
 					return

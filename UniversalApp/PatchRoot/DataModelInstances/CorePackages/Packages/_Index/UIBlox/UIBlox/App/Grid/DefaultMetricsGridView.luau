@@ -5,11 +5,11 @@ local cryoModule = require(parent_1.Cryo)
 local tModule = require(parent_1.t)
 local gridViewModule = require(parent.GridView)
 
-local function validateWindowHeight(p0)
-	if p0.windowHeight == nil or p0.maxHeight >= p0.windowHeight then
+local function validateWindowHeight(p1)
+	if p1.windowHeight == nil or p1.maxHeight >= p1.windowHeight then
 		return true
 	end
-	return false, ("windowHeight must be less than or equal to maxHeight\nmaxHeight: %f\nwindowHeight: %f"):format(p0.maxHeight, p0.windowHeight)
+	return false, ("windowHeight must be less than or equal to maxHeight\nmaxHeight: %f\nwindowHeight: %f"):format(p1.maxHeight, p1.windowHeight)
 end
 
 local defaultMetricsGridView = roactModule.PureComponent:extend("DefaultMetricsGridView")
@@ -42,47 +42,47 @@ function defaultMetricsGridView.init(p1)
 	p1.initialSizeCheckerRef = roactModule.createRef()
 end
 
-function defaultMetricsGridView.render(p2)
+function defaultMetricsGridView.render(p1)
 	-- upvalues: validateWindowHeight (ref), roactModule (ref), gridViewModule (ref)
-	assert(validateWindowHeight(p2.props))
-	local itemMetrics = p2.props.getItemMetrics(p2.state.containerWidth, p2.props.itemPadding.X)
+	assert(validateWindowHeight(p1.props))
+	local itemMetrics = p1.props.getItemMetrics(p1.state.containerWidth, p1.props.itemPadding.X)
 	
 	return roactModule.createElement(gridViewModule, {
-		renderItem = p2.props.renderItem,
-		windowHeight = p2.props.windowHeight,
-		maxHeight = p2.props.maxHeight,
-		itemSize = Vector2.new(math.max(0, itemMetrics.itemWidth), math.max(0, p2.props.getItemHeight(itemMetrics.itemWidth))),
-		itemPadding = p2.props.itemPadding,
-		items = p2.props.items,
-		LayoutOrder = p2.props.LayoutOrder,
-		onNumItemsPerRowChanged = p2.props.onNumItemsPerRowChanged,
-		NextSelectionLeft = p2.props.NextSelectionLeft,
-		NextSelectionRight = p2.props.NextSelectionRight,
-		NextSelectionUp = p2.props.NextSelectionUp,
-		NextSelectionDown = p2.props.NextSelectionDown,
-		[roactModule.Ref] = p2.props.frameRef,
-		defaultChildIndex = if p2.props.isRoactGamepadEnabled then p2.props.defaultChildIndex else nil,
-		restorePreviousChildFocus = if p2.props.isRoactGamepadEnabled then p2.props.restorePreviousChildFocus else nil,
-		onFocusGained = if p2.props.isRoactGamepadEnabled then p2.props.onFocusGained else nil,
-		isRoactGamepadEnabled = p2.props.isRoactGamepadEnabled,
-		onWidthChanged = function(p3)
-			-- upvalues: p2 (ref)
-			if p2.isMounted then
-				p2:setState({ containerWidth = p3 })
+		renderItem = p1.props.renderItem,
+		windowHeight = p1.props.windowHeight,
+		maxHeight = p1.props.maxHeight,
+		itemSize = Vector2.new(math.max(0, itemMetrics.itemWidth), math.max(0, p1.props.getItemHeight(itemMetrics.itemWidth))),
+		itemPadding = p1.props.itemPadding,
+		items = p1.props.items,
+		LayoutOrder = p1.props.LayoutOrder,
+		onNumItemsPerRowChanged = p1.props.onNumItemsPerRowChanged,
+		NextSelectionLeft = p1.props.NextSelectionLeft,
+		NextSelectionRight = p1.props.NextSelectionRight,
+		NextSelectionUp = p1.props.NextSelectionUp,
+		NextSelectionDown = p1.props.NextSelectionDown,
+		[roactModule.Ref] = p1.props.frameRef,
+		defaultChildIndex = if p1.props.isRoactGamepadEnabled then p1.props.defaultChildIndex else nil,
+		restorePreviousChildFocus = if p1.props.isRoactGamepadEnabled then p1.props.restorePreviousChildFocus else nil,
+		onFocusGained = if p1.props.isRoactGamepadEnabled then p1.props.onFocusGained else nil,
+		isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled,
+		onWidthChanged = function(p2)
+			-- upvalues: p1 (ref)
+			if p1.isMounted then
+				p1:setState({ containerWidth = p2 })
 			end
 		end
 	})
 end
 
-function defaultMetricsGridView.didMount(p4)
-	p4.isMounted = true
+function defaultMetricsGridView.didMount(p1)
+	p1.isMounted = true
 end
 
-function defaultMetricsGridView.willUnmount(p5)
-	p5.isMounted = false
+function defaultMetricsGridView.willUnmount(p1)
+	p1.isMounted = false
 end
 
-return roactModule.forwardRef(function(p6, p7)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), defaultMetricsGridView (ref), cryoModule (ref)
-	return roactModule.createElement(defaultMetricsGridView, cryoModule.Dictionary.join(p6, { frameRef = p7 }))
+	return roactModule.createElement(defaultMetricsGridView, cryoModule.Dictionary.join(p1, { frameRef = p2 }))
 end)

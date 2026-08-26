@@ -9,11 +9,11 @@ local capturesVideoSupportLegacyVideos = game:DefineFastFlag("CapturesVideoSuppo
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), fFlagCapturesVideoBulkManagerStopGapModule (ref), captureService (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), capturesVideoSupportLegacyVideos (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
 	local t = {}
 	
-	for i, v in ipairs(p0) do
+	for i, v in ipairs(p1) do
 		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
 			if fFlagCapturesVideoBulkManagerStopGapModule then
 				table.insert(t, captureService:PreCaptureShared(v))
@@ -30,9 +30,9 @@ return function(p0)
 			table.insert(t, v.filePath)
 		end
 	end
-	return function(p1)
-		-- upvalues: captureService (copy), t (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy), p0 (ref)
+	return function(p2)
+		-- upvalues: captureService (copy), t (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy), p1 (ref)
 		captureService:SaveCapturesToExternalStorageAsync(t)
-		p1:dispatch(toastTriggeredModule(capturesToastTypeModule.CaptureSavedToDevice, { captureInfo = p0[1] }))
+		p2:dispatch(toastTriggeredModule(capturesToastTypeModule.CaptureSavedToDevice, { captureInfo = p1[1] }))
 	end
 end

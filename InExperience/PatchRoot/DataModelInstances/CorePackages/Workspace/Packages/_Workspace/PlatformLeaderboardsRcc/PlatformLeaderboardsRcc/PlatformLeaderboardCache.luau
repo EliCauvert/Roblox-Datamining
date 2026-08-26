@@ -9,48 +9,48 @@ local t = {}
 t.__index = t
 local _task = task
 
-function t.new(p0, p1, p2)
+function t.new(p1, p2, p3)
 	-- upvalues: _task (ref), signal (ref), t (ref)
 	return setmetatable({
 		_globalData = nil,
 		_globalTimer = nil,
 		_friendsTimer = nil,
-		_fetcher = p0,
-		_config = p1,
+		_fetcher = p1,
+		_config = p2,
 		_globalEntriesByUserId = {},
 		_friendsData = {},
 		_userScoreEntries = {},
 		_currentlyActiveGlobalLeaderboardViewersByUserId = {},
 		_currentFriendsLeaderboardViewersById = {},
-		_scheduler = p2 or _task,
+		_scheduler = p3 or _task,
 		_globalUpdated = signal.new(),
 		_friendsUpdated = signal.new(),
 		_userScoreUpdated = signal.new()
 	}, t)
 end
 
-function t:onGlobalUpdated(p3)
-	return self._globalUpdated:connect(p3)
+function t:onGlobalUpdated(p1)
+	return self._globalUpdated:connect(p1)
 end
 
-function t:onFriendsUpdated(p4)
-	return self._friendsUpdated:connect(p4)
+function t:onFriendsUpdated(p1)
+	return self._friendsUpdated:connect(p1)
 end
 
-function t:onUserScoreUpdated(p5)
-	return self._userScoreUpdated:connect(p5)
+function t:onUserScoreUpdated(p1)
+	return self._userScoreUpdated:connect(p1)
 end
 
 function t:getGlobalData()
 	return self._globalData
 end
 
-function t:getFriendsData(p6)
-	return self._friendsData[p6]
+function t:getFriendsData(p1)
+	return self._friendsData[p1]
 end
 
-function t:getUserScore(p7)
-	return self._userScoreEntries[p7]
+function t:getUserScore(p1)
+	return self._userScoreEntries[p1]
 end
 
 function t:_rebuildGlobalIndex()
@@ -62,35 +62,35 @@ function t:_rebuildGlobalIndex()
 	end
 end
 
-function t:resolveRankFromCache(p8)
-	local var6 = self._globalEntriesByUserId[p8]
+function t:resolveRankFromCache(p1)
+	local var1 = self._globalEntriesByUserId[p1]
 	
-	return if var6 then var6.rank else nil
+	return if var1 then var1.rank else nil
 end
 
-function t:_resolveEntryFromGlobalLeaderboard(p9)
-	return self._globalEntriesByUserId[p9]
+function t:_resolveEntryFromGlobalLeaderboard(p1)
+	return self._globalEntriesByUserId[p1]
 end
 
-function t:_fetchUserScoreForUser(p10)
-	if self._userScoreEntries[p10] then
-		self._userScoreUpdated:fire(p10, self._userScoreEntries[p10])
+function t:_fetchUserScoreForUser(p1)
+	if self._userScoreEntries[p1] then
+		self._userScoreUpdated:fire(p1, self._userScoreEntries[p1])
 		
 		return
 	end
-	local var7 = self:_resolveEntryFromGlobalLeaderboard(p10)
+	local var1 = self:_resolveEntryFromGlobalLeaderboard(p1)
 	
-	if var7 then
-		self._userScoreEntries[p10] = var7
-		self._userScoreUpdated:fire(p10, var7)
+	if var1 then
+		self._userScoreEntries[p1] = var1
+		self._userScoreUpdated:fire(p1, var1)
 		
 		return
 	end
-	local ok, status, var8 = pcall(self._fetcher.fetchUserScore, self._config.leaderboardId, p10)
+	local ok, status, var2 = pcall(self._fetcher.fetchUserScore, self._config.leaderboardId, p1)
 	
 	if ok and status then
-		self._userScoreEntries[p10] = var8
-		self._userScoreUpdated:fire(p10, var8)
+		self._userScoreEntries[p1] = var2
+		self._userScoreUpdated:fire(p1, var2)
 	end
 end
 
@@ -105,56 +105,56 @@ function t:_resolveUserScoresParallel()
 	end
 end
 
-function t:_fetchFriendsLeaderboardForUser(p11)
-	local ok, status, var9 = pcall(self._fetcher.fetchFriendsLeaderboard, self._config.leaderboardId, p11)
+function t:_fetchFriendsLeaderboardForUser(p1)
+	local ok, status, var1 = pcall(self._fetcher.fetchFriendsLeaderboard, self._config.leaderboardId, p1)
 	
-	if ok and status and var9 then
-		local t = { entries = var9.entries, lastRefreshedAt = os.time() }
-		self._friendsData[p11] = t
-		self._friendsUpdated:fire(p11, t, var9.config)
+	if ok and status and var1 then
+		local t = { entries = var1.entries, lastRefreshedAt = os.time() }
+		self._friendsData[p1] = t
+		self._friendsUpdated:fire(p1, t, var1.config)
 	end
 end
 
-function t:startGlobalRefresh(p12)
+function t:startGlobalRefresh(p1)
 	-- upvalues: platformLeaderboardGlobalJitterSeconds (ref), platformLeaderboardGlobalIntervalSeconds (ref)
-	local var11 = self._currentlyActiveGlobalLeaderboardViewersByUserId[p12]
-	self._currentlyActiveGlobalLeaderboardViewersByUserId[p12] = true
+	local var1 = self._currentlyActiveGlobalLeaderboardViewersByUserId[p1]
+	self._currentlyActiveGlobalLeaderboardViewersByUserId[p1] = true
 	
 	if self._globalTimer then
-		if not var11 then
-			self:_fetchUserScoreForUser(p12)
+		if not var1 then
+			self:_fetchUserScoreForUser(p1)
 		end
 		return
 	else
-		local var12 = nil
+		local var2 = nil
 		
 		local function loop()
-			-- upvalues: self (ref), platformLeaderboardGlobalJitterSeconds (copy), platformLeaderboardGlobalIntervalSeconds (copy), var12 (write)
+			-- upvalues: self (ref), platformLeaderboardGlobalJitterSeconds (copy), platformLeaderboardGlobalIntervalSeconds (copy), var2 (write)
 			repeat
-				local ok, status, var14 = pcall(self._fetcher.fetchGlobalLeaderboard, self._config.leaderboardId)
-				if ok and status and var14 then
-					local t = { entries = var14.entries, lastRefreshedAt = os.time() }
+				local ok, status, var3 = pcall(self._fetcher.fetchGlobalLeaderboard, self._config.leaderboardId)
+				if ok and status and var3 then
+					local t = { entries = var3.entries, lastRefreshedAt = os.time() }
 					self._globalData = t
 					self:_rebuildGlobalIndex()
-					self._globalUpdated:fire(t, var14.config)
+					self._globalUpdated:fire(t, var3.config)
 				end
 				self:_resolveUserScoresParallel()
 				self._scheduler.wait(math.max(1, platformLeaderboardGlobalIntervalSeconds + math.random(-platformLeaderboardGlobalJitterSeconds, platformLeaderboardGlobalJitterSeconds)))
-			until self._globalTimer ~= var12
+			until self._globalTimer ~= var2
 		end
 		
 		self._globalTimer = self._scheduler.defer(function()
-			-- upvalues: loop (ref), self (ref), var12 (write)
-			if not pcall(loop) and self._globalTimer == var12 then
+			-- upvalues: loop (ref), self (ref), var2 (write)
+			if not pcall(loop) and self._globalTimer == var2 then
 				self._globalTimer = nil
 			end
 		end)
 	end
 end
 
-function t:stopGlobalRefresh(p13)
-	self._currentlyActiveGlobalLeaderboardViewersByUserId[p13] = nil
-	self._userScoreEntries[p13] = nil
+function t:stopGlobalRefresh(p1)
+	self._currentlyActiveGlobalLeaderboardViewersByUserId[p1] = nil
+	self._userScoreEntries[p1] = nil
 	
 	if next(self._currentlyActiveGlobalLeaderboardViewersByUserId) then return end
 	if self._globalTimer then
@@ -165,50 +165,50 @@ function t:stopGlobalRefresh(p13)
 	table.clear(self._globalEntriesByUserId)
 end
 
-function t:startFriendsRefresh(p14)
+function t:startFriendsRefresh(p1)
 	-- upvalues: platformLeaderboardFriendsJitterSeconds (ref), platformLeaderboardFriendsIntervalSeconds (ref)
-	self._currentFriendsLeaderboardViewersById[p14] = true
+	self._currentFriendsLeaderboardViewersById[p1] = true
 	
 	if self._friendsTimer then
-		if not self._friendsData[p14] then
-			self:_fetchFriendsLeaderboardForUser(p14)
+		if not self._friendsData[p1] then
+			self:_fetchFriendsLeaderboardForUser(p1)
 		end
 		return
 	else
-		local var16 = nil
-		local var17 = true
+		local var1 = nil
+		local var2 = true
 		
 		local function loop()
-			-- upvalues: self (ref), var17 (write), platformLeaderboardFriendsJitterSeconds (copy), platformLeaderboardFriendsIntervalSeconds (copy), var16 (write)
+			-- upvalues: self (ref), var2 (write), platformLeaderboardFriendsJitterSeconds (copy), platformLeaderboardFriendsIntervalSeconds (copy), var1 (write)
 			repeat
 				table.clear(self._friendsData)
 				for i in self._currentFriendsLeaderboardViewersById do
-					local var19 = if var17 then 0 else math.random(0, platformLeaderboardFriendsJitterSeconds)
+					local var3 = if var2 then 0 else math.random(0, platformLeaderboardFriendsJitterSeconds)
 					self._scheduler.spawn(function()
-						-- upvalues: self (copy), var19 (ref), i (ref)
-						self._scheduler.wait(var19)
+						-- upvalues: self (copy), var3 (ref), i (ref)
+						self._scheduler.wait(var3)
 						
 						if self._currentFriendsLeaderboardViewersById[i] then
 							self:_fetchFriendsLeaderboardForUser(i)
 						end
 					end)
 				end
-				var17 = false
+				var2 = false
 				self._scheduler.wait(math.max(1, platformLeaderboardFriendsIntervalSeconds))
-			until self._friendsTimer ~= var16
+			until self._friendsTimer ~= var1
 		end
 		
 		self._friendsTimer = self._scheduler.defer(function()
-			-- upvalues: loop (ref), self (ref), var16 (write)
-			if not pcall(loop) and self._friendsTimer == var16 then
+			-- upvalues: loop (ref), self (ref), var1 (write)
+			if not pcall(loop) and self._friendsTimer == var1 then
 				self._friendsTimer = nil
 			end
 		end)
 	end
 end
 
-function t:stopFriendsRefresh(p15)
-	self._currentFriendsLeaderboardViewersById[p15] = nil
+function t:stopFriendsRefresh(p1)
+	self._currentFriendsLeaderboardViewersById[p1] = nil
 	
 	if next(self._currentFriendsLeaderboardViewersById) then return end
 	if self._friendsTimer then
@@ -217,21 +217,21 @@ function t:stopFriendsRefresh(p15)
 	end
 end
 
-function t:forceRefresh(p16, p17)
-	self._config = p16
+function t:forceRefresh(p1, p2)
+	self._config = p1
 	
-	if p17 then
+	if p2 then
 		self._globalData = nil
 		table.clear(self._globalEntriesByUserId)
 		table.clear(self._friendsData)
 		table.clear(self._userScoreEntries)
 	end
-	local var20 = next(self._currentlyActiveGlobalLeaderboardViewersByUserId)
+	local var1 = next(self._currentlyActiveGlobalLeaderboardViewersByUserId)
 	
-	if self._globalTimer and var20 then
+	if self._globalTimer and var1 then
 		pcall(self._scheduler.cancel, self._globalTimer)
 		self._globalTimer = nil
-		self:startGlobalRefresh(var20)
+		self:startGlobalRefresh(var1)
 	end
 	if self._friendsTimer then
 		pcall(self._scheduler.cancel, self._friendsTimer)
@@ -249,9 +249,9 @@ function t:forceRefresh(p16, p17)
 	end
 end
 
-function t:cleanupForUserId(p18)
-	self:stopGlobalRefresh(p18)
-	self:stopFriendsRefresh(p18)
+function t:cleanupForUserId(p3)
+	self:stopGlobalRefresh(p3)
+	self:stopFriendsRefresh(p3)
 end
 
 function t:teardown()

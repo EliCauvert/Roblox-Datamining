@@ -1,9 +1,9 @@
 ﻿local getDeepValueModule = require(script:FindFirstAncestor("AppChat").Utils.getDeepValue)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getDeepValueModule (ref)
-	local var1 = getDeepValueModule(p0, "keys")
-	local var2 = getDeepValueModule(p0, "values")
+	local var1 = getDeepValueModule(p1, "keys")
+	local var2 = getDeepValueModule(p1, "values")
 	local var3 = nil
 	
 	for i, v in pairs(var1) do

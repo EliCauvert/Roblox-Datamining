@@ -14,8 +14,8 @@ local inputSize = foundationModule.Enums.InputSize
 local radius = foundationModule.Enums.Radius
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-local function _(p0)
-	return string.gsub(p0, "^%s*(.-)%s*$", "%1")
+local function _(p1)
+	return string.gsub(p1, "^%s*(.-)%s*$", "%1")
 end
 
 local function renderSkeletonRow(p1, p2)
@@ -45,15 +45,15 @@ local function renderSkeletonRow(p1, p2)
 	})
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), renderSkeletonRow (ref), reactModule (ref), view (ref), text (ref), userPickerRowModule (ref), list (ref), inputSize (ref)
-	local var7 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 		noResults = localizationStringsModule.USER_PICKER_NO_RESULTS
 	}) else nil).noResults else localizationStringsModule.USER_PICKER_NO_RESULTS
-	local testId = p3.testId or "user-picker-list"
-	local userIds = p3.userIds
+	local testId = p1.testId or "user-picker-list"
+	local userIds = p1.userIds
 	
-	if #userIds == 0 and p3.isLoading then
+	if #userIds == 0 and p1.isLoading then
 		local t = {}
 		
 		for i = 1, 6 do
@@ -61,21 +61,21 @@ return function(p3)
 		end
 		return reactModule.createElement(view, {
 			tag = "col gap-small size-full-0 auto-y",
-			LayoutOrder = p3.layoutOrder,
+			LayoutOrder = p1.layoutOrder,
 			testId = `{testId}-loading`
 		}, t)
-	elseif #userIds == 0 and not p3.isLoading then
-		local var10 = if string.gsub(p3.searchText, "^%s*(.-)%s*$", "%1") ~= "" then p3.emptyText else var7
+	elseif #userIds == 0 and not p1.isLoading then
+		local var2 = if string.gsub(p1.searchText, "^%s*(.-)%s*$", "%1") ~= "" then p1.emptyText else var1
 		
-		if var10 ~= nil then
+		if var2 ~= nil then
 			return reactModule.createElement(view, {
 				tag = "col align-x-center size-full-0 auto-y padding-y-xlarge",
-				LayoutOrder = p3.layoutOrder,
+				LayoutOrder = p1.layoutOrder,
 				testId = `{testId}-empty`
 			}, {
 				Text = reactModule.createElement(text, {
 					tag = "auto-xy text-body-large text-align-x-center content-muted",
-					Text = var10
+					Text = var2
 				})
 			})
 		end
@@ -85,11 +85,11 @@ return function(p3)
 	for i_1, v in userIds do
 		t[`row-{v}`] = reactModule.createElement(userPickerRowModule, {
 			userId = v,
-			isSelected = p3.isSelected(v),
-			isDisabled = not p3.canSelect(v),
+			isSelected = p1.isSelected(v),
+			isDisabled = not p1.canSelect(v),
 			onToggle = function()
-				-- upvalues: p3 (ref), v (ref)
-				p3.toggleSelected(v)
+				-- upvalues: p1 (ref), v (ref)
+				p1.toggleSelected(v)
 			end,
 			layoutOrder = i_1,
 			testId = `{testId}-user-{v}`
@@ -98,7 +98,7 @@ return function(p3)
 	return reactModule.createElement(list.Root, {
 		hasDivider = false,
 		isContained = false,
-		LayoutOrder = p3.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		size = inputSize.Medium,
 		testId = `{testId}-results`
 	}, t)

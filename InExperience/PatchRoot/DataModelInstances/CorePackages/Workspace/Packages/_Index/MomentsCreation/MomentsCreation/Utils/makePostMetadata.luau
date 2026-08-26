@@ -3,12 +3,12 @@ local _ = require(momentsCreation.Parent.MomentsTypes)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local momentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
-local function convertTextOverlayStyle(p0)
+local function convertTextOverlayStyle(p1)
 	return {
-		font = p0.font.Name,
-		fontColor = { p0.fontColor.R, p0.fontColor.G, p0.fontColor.B },
-		fontSize = p0.fontSize,
-		textXAlignment = p0.textXAlignment.Name
+		font = p1.font.Name,
+		fontColor = { p1.fontColor.R, p1.fontColor.G, p1.fontColor.B },
+		fontSize = p1.fontSize,
+		textXAlignment = p1.textXAlignment.Name
 	}
 end
 
@@ -24,33 +24,33 @@ local function convertTextOverlay(p1)
 	}
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: convertTextOverlay (ref), getFFlagMomentsTTSAudioOverlayModule (ref), momentsPostCtaUseCaptureUniverse (ref)
-	local t = { caption = p2.description }
+	local t = { caption = p1.description }
 	
-	if p2.edits then
-		if p2.edits.music then
+	if p1.edits then
+		if p1.edits.music then
 			t.music = {
-				assetId = p2.edits.music.assetId,
-				startTime = p2.edits.music.startTime
+				assetId = p1.edits.music.assetId,
+				startTime = p1.edits.music.startTime
 			}
 		end
-		if p2.edits.trim then
+		if p1.edits.trim then
 			t.trim = {
-				startTime = p2.edits.trim.startTime,
-				endTime = p2.edits.trim.endTime
+				startTime = p1.edits.trim.startTime,
+				endTime = p1.edits.trim.endTime
 			}
 		end
-		if p2.edits.textOverlays then
+		if p1.edits.textOverlays then
 			local t_1 = {}
 			
-			for i, v in p2.edits.textOverlays do
+			for i, v in p1.edits.textOverlays do
 				table.insert(t_1, convertTextOverlay(v))
 			end
 			t.textOverlays = t_1
 		end
-		if getFFlagMomentsTTSAudioOverlayModule and p2.edits.tts and (p2.edits.tts.text ~= nil and p2.edits.tts.text ~= "") then
-			local tts = p2.edits.tts
+		if getFFlagMomentsTTSAudioOverlayModule and p1.edits.tts and (p1.edits.tts.text ~= nil and p1.edits.tts.text ~= "") then
+			local tts = p1.edits.tts
 			t.textToSpeech = {
 				{
 					pitch = 0,
@@ -62,17 +62,17 @@ return function(p2)
 			}
 		end
 	end
-	local var7 = p2.universeIdOverride or p2.universeId
+	local var1 = p1.universeIdOverride or p1.universeId
 	
 	if momentsPostCtaUseCaptureUniverse then
-		local universeId = p2.universeId
-		var7 = if universeId == nil or universeId <= 0 then p2.universeIdOverride else universeId
+		local universeId = p1.universeId
+		var1 = if universeId == nil or universeId <= 0 then p1.universeIdOverride else universeId
 	end
-	if var7 and p2.placeId then
-		t.primaryCta = { experienceId = var7, placeId = p2.placeId }
+	if var1 and p1.placeId then
+		t.primaryCta = { experienceId = var1, placeId = p1.placeId }
 	end
-	if p2.captureType == Enum.CaptureType.Video then
-		t.durationSeconds = p2.assetTotalDuration
+	if p1.captureType == Enum.CaptureType.Video then
+		t.durationSeconds = p1.assetTotalDuration
 	end
 	return t
 end

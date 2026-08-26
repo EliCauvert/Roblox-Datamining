@@ -1,12 +1,12 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-return function(p0)
-	if #p0 <= 1 then
-		return p0
+return function(p1)
+	if #p1 <= 1 then
+		return p1
 	end
-	local cloned = table.clone(p0)
-	table.sort(cloned, function(p1, p2)
-		return if p1.robuxAmount == p2.robuxAmount then p1.id < p2.id else p2.robuxAmount < p1.robuxAmount
+	local cloned = table.clone(p1)
+	table.sort(cloned, function(p2, p3)
+		return if p2.robuxAmount == p3.robuxAmount then p2.id < p3.id else p3.robuxAmount < p2.robuxAmount
 	end)
 	
 	return cloned

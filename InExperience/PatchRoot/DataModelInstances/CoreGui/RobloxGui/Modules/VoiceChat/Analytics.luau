@@ -11,14 +11,14 @@ t.INFO = "info"
 t.WARNING = "warning"
 t.ERROR = "error"
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: rbxAnalyticsService (ref), t (ref)
-	if not p0 then
-		p0 = rbxAnalyticsService
+	if not p1 then
+		p1 = rbxAnalyticsService
 	end
-	assert(p0, "Analytics impl must not be nil.")
+	assert(p1, "Analytics impl must not be nil.")
 	
-	return setmetatable({ _impl = p0 }, t)
+	return setmetatable({ _impl = p1 }, t)
 end
 
 local function stub() end
@@ -39,47 +39,47 @@ function t:setImpl(p1)
 	self._impl = p1
 end
 
-function t:_report(p2, p3, p4, p5)
-	local text = p2 .. "-" .. p3
+function t:_report(p1, p2, p3, p4)
+	local text = p1 .. "-" .. p3
 	
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUsePointsV2") then
-		self._impl:ReportInfluxSeries(text, p5, game:GetFastInt("LuaVoiceChatAnalyticsPointsThrottle"))
+		self._impl:ReportInfluxSeries(text, p4, game:GetFastInt("LuaVoiceChatAnalyticsPointsThrottle"))
 	end
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUseCounterV2") then
-		local var4 = text
+		local var1 = text
 		
-		if p4 then
-			var4 ..= "-" .. p4
+		if p3 then
+			var1 ..= "-" .. p4
 		end
-		local var5 = var4
+		local var2 = var1
 		
-		if p5 and p5.result then
-			var5 ..= "-" .. p5.result
+		if p4 and p4.result then
+			var2 ..= "-" .. p5.result
 		end
-		self._impl:ReportCounter(var5, 1)
+		self._impl:ReportCounter(var2, 1)
 	end
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUseEventsV2") then
-		self._impl:SendEventDeferred("client", p2, p3, p5)
+		self._impl:SendEventDeferred("client", p1, p2, p4)
 	end
 end
 
-function t:reportVoiceChatJoinResult(p6, p7, p8)
+function t:reportVoiceChatJoinResult(p1, p2, p3)
 	-- upvalues: t (ref)
-	self:_report("voiceChat", "defaultChannelJoinResults", p7, { success = p6, result = p7, logLevel = p8 or t.INFO })
+	self:_report("voiceChat", "defaultChannelJoinResults", p2, { success = p1, result = p2, logLevel = p3 or t.INFO })
 end
 
-function t:reportBanMessageEvent(p9)
+function t:reportBanMessageEvent(p1)
 	if game:GetFastFlag("LuaVoiceChatAnalyticsBanMessage") then
 		self._impl:ReportCounter("voiceChat-reportBanMessage" .. p9, 1)
 	end
 end
 
-function t:reportBanMessageEventV2(p10, p11, p12, p13)
+function t:reportBanMessageEventV2(p1, p2, p3, p4)
 	self:_report("voiceChat", "reportBanEvent", nil, {
-		eventType = p10,
-		banReason = p11,
-		userId = p12,
-		voiceSessionId = p13
+		eventType = p1,
+		banReason = p2,
+		userId = p3,
+		voiceSessionId = p4
 	})
 end
 
@@ -93,112 +93,112 @@ function t:reportOutOfOrderSequence()
 	self._impl:ReportCounter("voiceChat-outOfOrderSequence", 1)
 end
 
-function t:reportClosedNudge(p14, p15)
+function t:reportClosedNudge(p1, p2)
 	self._impl:ReportCounter("voicechat-closednudge", 1)
-	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "CLOSED", userId = p14, voiceSessionId = p15 })
+	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "CLOSED", userId = p1, voiceSessionId = p2 })
 end
 
-function t:reportAcknowledgedNudge(p16, p17)
+function t:reportAcknowledgedNudge(p1, p2)
 	self._impl:ReportCounter("voicechat-acknowledgednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
 		closeType = "ACKNOWLEDGED",
-		userId = p16,
-		voiceSessionId = p17
+		userId = p1,
+		voiceSessionId = p2
 	})
 end
 
-function t:reportDeniedNudge(p18, p19)
+function t:reportDeniedNudge(p1, p2)
 	self._impl:ReportCounter("voicechat-deniednudge", 1)
-	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "DENIED", userId = p18, voiceSessionId = p19 })
+	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "DENIED", userId = p1, voiceSessionId = p2 })
 end
 
-function t:reportVoiceMuteIndividual(p20)
+function t:reportVoiceMuteIndividual(p1)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteIndividual", {
-		user_id = p20.userId,
-		client_session_id = p20.clientSessionId,
-		target_user_id = p20.targetUserId,
-		channel_id = p20.channelId,
-		context = p20.context,
-		muted = p20.muted
+		user_id = p1.userId,
+		client_session_id = p1.clientSessionId,
+		target_user_id = p1.targetUserId,
+		channel_id = p1.channelId,
+		context = p1.context,
+		muted = p1.muted
 	})
 end
 
-function t:reportVoiceMuteGroup(p21)
+function t:reportVoiceMuteGroup(p1)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteGroup", {
-		user_id = p21.userId,
-		client_session_id = p21.clientSessionId,
-		channel_id = p21.channelId,
-		context = p21.context,
-		group_type = p21.groupType,
-		muted = p21.muted
+		user_id = p1.userId,
+		client_session_id = p1.clientSessionId,
+		channel_id = p1.channelId,
+		context = p1.context,
+		group_type = p1.groupType,
+		muted = p1.muted
 	})
 end
 
-function t:reportVoiceMuteSelf(p22)
+function t:reportVoiceMuteSelf(p1)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteSelf", {
-		user_id = p22.userId,
-		client_session_id = p22.clientSessionId,
-		channel_id = p22.channelId,
-		context = p22.context,
-		muted = p22.muted
+		user_id = p1.userId,
+		client_session_id = p1.clientSessionId,
+		channel_id = p1.channelId,
+		context = p1.context,
+		muted = p1.muted
 	})
 end
 
-function t:reportJoinVoiceButtonEvent(p23, p24, p25, p26, p27, p28)
+function t:reportJoinVoiceButtonEvent(p1, p2, p3, p4, p5, p6)
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
-		eventType = p23,
-		universeId = p24,
-		placeId = p25,
-		playSessionId = p26,
-		buttonContext = p27,
-		buttonConsequence = p28
+		eventType = p1,
+		universeId = p2,
+		placeId = p3,
+		playSessionId = p4,
+		buttonContext = p5,
+		buttonConsequence = p6
 	})
 end
 
-function t:reportJoinVoiceButtonEventWithVoiceSessionId(p29, p30, p31, p32, p33, p34, p35)
+function t:reportJoinVoiceButtonEventWithVoiceSessionId(p1, p2, p3, p4, p5, p6, p7)
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
-		eventType = p29,
-		universeId = p30,
-		placeId = p31,
-		playSessionId = p32,
-		voiceSessionId = p33,
-		buttonContext = p34,
-		buttonConsequence = p35
+		eventType = p1,
+		universeId = p2,
+		placeId = p3,
+		playSessionId = p4,
+		voiceSessionId = p5,
+		buttonContext = p6,
+		buttonConsequence = p7
 	})
 end
 
-function t:reportLeaveVoiceButtonEvent(p36, p37, p38, p39, p40)
+function t:reportLeaveVoiceButtonEvent(p1, p2, p3, p4, p5)
 	self._impl:SendEventDeferred("client", "voice", "leaveVoiceButtonEvent", {
-		eventType = p36,
-		universeId = p37,
-		placeId = p38,
-		playSessionId = p39,
-		voiceSessionId = p40
+		eventType = p1,
+		universeId = p2,
+		placeId = p3,
+		playSessionId = p4,
+		voiceSessionId = p5
 	})
 end
 
-function t:reportInExpConsent(p41, p42, p43, p44, p45)
+function t:reportInExpConsent(p1, p2, p3, p4, p5)
 	self._impl:SendEventDeferred("client", "voiceChat", "inExpConsentModalEvent", {
-		eventType = p41,
-		entry = p42,
-		universeId = p43,
-		placeId = p44,
-		playSessionId = p45
+		eventType = p1,
+		entry = p2,
+		universeId = p3,
+		placeId = p4,
+		playSessionId = p5
 	})
 end
 
-function t:reportDevicePermissionsModalEvent(p46, p47, p48, p49, p50)
+function t:reportDevicePermissionsModalEvent(p1, p2, p3, p4, p5)
 	self._impl:SendEventDeferred("client", "voiceChat", "devicePermissionsModalEvent", {
-		eventType = p46,
-		universeId = p48,
-		placeId = p49,
-		playSessionId = string.sub(p50, 2, #p50 - 1),
-		voiceSessionId = p47
+		eventType = p1,
+		universeId = p3,
+		placeId = p4,
+		playSessionId = string.sub(p5, 2, #p5 - 1),
+		voiceSessionId = p2
 	})
 end
 
-function t:reportConnectDisconnectEvents(p51, p52)
-	self._impl:SendEventDeferred("client", "voiceChat", p51, p52)
+function t:reportConnectDisconnectEvents(p1, p2)
+	self._impl:SendEventDeferred("client", "voiceChat", p1, p2)
 end
 
 return t

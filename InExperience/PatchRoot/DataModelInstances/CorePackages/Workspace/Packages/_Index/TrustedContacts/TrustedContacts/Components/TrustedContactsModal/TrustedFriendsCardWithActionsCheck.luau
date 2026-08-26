@@ -16,62 +16,62 @@ local fFlagTFUpdateAnalyticsModule = require(trustedContacts.Flags.FFlagTFUpdate
 local fFlagTFPassQRCodeSourceModule = require(trustedContacts.Flags.FFlagTFPassQRCodeSource)
 local _ = require(trustedContacts.Common.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigation (ref), useTrustedFriendActionModule (ref), fFlagTFPassQRCodeSourceModule (ref), fFlagTFUpdateAnalyticsModule (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), appPage (ref), TFActionsEnumModule (ref), roactUtilsModule (ref), foundationModule (ref), iconSize (ref), trustedContactsModalContainerModule (ref)
-	local var10 = useNavigation()
-	local userId = p0.userId
-	local var11 = useTrustedFriendActionModule({
+	local var1 = useNavigation()
+	local userId = p1.userId
+	local var2 = useTrustedFriendActionModule({
 		userId = userId,
-		tokens = p0.tokens,
-		sentFromQrCode = if fFlagTFPassQRCodeSourceModule then p0.sentFromQrCode else nil
+		tokens = p1.tokens,
+		sentFromQrCode = if fFlagTFPassQRCodeSourceModule then p1.sentFromQrCode else nil
 	})
-	local isLoading = var11.isLoading
-	local enum = var11.enum
-	local var12 = if fFlagTFUpdateAnalyticsModule then useTCAnalytics({
+	local isLoading = var2.isLoading
+	local enum = var2.enum
+	local var3 = if fFlagTFUpdateAnalyticsModule then useTCAnalytics({
 		friendId = userId,
-		source = p0.source,
+		source = p1.source,
 		tfActionsEnum = enum
 	}).fireAnalyticsEvent else nil
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var12 (ref), eventNames (copy), p0 (ref), var10 (ref), appPage (copy)
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var3 (ref), eventNames (copy), p1 (ref), var1 (ref), appPage (copy)
 		if fFlagTFUpdateAnalyticsModule then
-			var12(eventNames.TCUpsellAgePrecheckTriggered)
+			var3(eventNames.TCUpsellAgePrecheckTriggered)
 		end
-		p0.externalNavigation.openFacialAgeEstimationUpsell({
+		p1.externalNavigation.openFacialAgeEstimationUpsell({
 			onSuccess = function()
-				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var12 (copy), eventNames (copy), var10 (copy), appPage (copy)
+				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var3 (copy), eventNames (copy), var1 (copy), appPage (copy)
 				if fFlagTFUpdateAnalyticsModule then
-					var12(eventNames.TCUpsellAgePrecheckSucceeded)
+					var3(eventNames.TCUpsellAgePrecheckSucceeded)
 				end
-				var10.replace(appPage.TrustedFriendsUserModal, {})
+				var1.replace(appPage.TrustedFriendsUserModal, {})
 			end,
 			onFailure = function()
-				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var12 (copy), eventNames (copy), p0 (copy)
+				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var3 (copy), eventNames (copy), p1 (copy)
 				if fFlagTFUpdateAnalyticsModule then
-					var12(eventNames.TCUpsellAgePrecheckFailed)
+					var3(eventNames.TCUpsellAgePrecheckFailed)
 				end
-				p0.externalNavigation.closeModal()
+				p1.externalNavigation.closeModal()
 			end
 		})
-	end, { var10, p0.externalNavigation, var12 })
-	local var14 = enum == TFActionsEnumModule.UnlockTrustedFriendByFAE
+	end, { var1, p1.externalNavigation, var3 })
+	local var5 = enum == TFActionsEnumModule.UnlockTrustedFriendByFAE
 	roactUtilsModule.Hooks.useEffectOnce(function()
-		-- upvalues: var13 (ref)
-		var13()
-	end, var14)
+		-- upvalues: var4 (ref)
+		var4()
+	end, var5)
 	
-	return if var14 then nil elseif isLoading then reactModule.createElement(foundationModule.View, { tag = "position-center-center auto-xy" }, {
+	return if var5 then nil elseif isLoading then reactModule.createElement(foundationModule.View, { tag = "position-center-center auto-xy" }, {
 		LoadingIcon = reactModule.createElement(foundationModule.Loading, { LayoutOrder = 1, size = iconSize.Large })
 	}) else reactModule.createElement(trustedContactsModalContainerModule, {
-		userId = p0.userId,
-		source = p0.source,
-		tokens = p0.tokens,
-		sentFromQrCode = p0.sentFromQrCode,
-		isVerticallyConstrained = p0.isVerticallyConstrained,
-		onRequestSent = p0.onRequestSent,
-		onRequestAccepted = p0.onRequestAccepted,
-		onAcknowledged = p0.onAcknowledged,
-		externalNavigation = p0.externalNavigation,
+		userId = p1.userId,
+		source = p1.source,
+		tokens = p1.tokens,
+		sentFromQrCode = p1.sentFromQrCode,
+		isVerticallyConstrained = p1.isVerticallyConstrained,
+		onRequestSent = p1.onRequestSent,
+		onRequestAccepted = p1.onRequestAccepted,
+		onAcknowledged = p1.onAcknowledged,
+		externalNavigation = p1.externalNavigation,
 		tfActionsEnum = enum
 	})
 end

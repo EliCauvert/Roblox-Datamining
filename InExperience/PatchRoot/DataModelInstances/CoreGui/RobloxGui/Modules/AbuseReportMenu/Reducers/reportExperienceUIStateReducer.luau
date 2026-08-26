@@ -2,12 +2,12 @@
 local _ = require(abuseReportMenu.Components.Types)
 local playerMenuActions = require(abuseReportMenu.Components.Constants).PlayerMenuActions
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: playerMenuActions (ref)
-	local cloned = table.clone(p0)
+	local cloned = table.clone(p1)
 	
-	if p1.type == playerMenuActions.UpdateComment then
-		cloned.comment = p1.comment
+	if p2.type == playerMenuActions.UpdateComment then
+		cloned.comment = p2.comment
 	end
 	return cloned
 end

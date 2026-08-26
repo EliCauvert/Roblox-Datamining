@@ -5,32 +5,32 @@ local analyticsServiceModule = require(avatarExperienceAnalytics.AnalyticsServic
 local reportAvatarEventCounterV1Module = require(avatarExperienceAnalytics.reportAvatarEventCounterV1)
 local constantsModule = require(avatarExperienceAnalytics.Constants)
 local t = {}
-local var7 = nil
+local var1 = nil
 
 function t.get(_)
-	-- upvalues: var7 (write), analyticsServiceModule (ref), open3DFullViewModule (ref), close3DFullViewModule (ref), reportAvatarEventCounterV1Module (ref), constantsModule (ref)
-	if var7 then
-		return var7
+	-- upvalues: var1 (write), analyticsServiceModule (ref), open3DFullViewModule (ref), close3DFullViewModule (ref), reportAvatarEventCounterV1Module (ref), constantsModule (ref)
+	if var1 then
+		return var1
 	end
 	local t = {
-		open3DFullView = function(p0)
+		open3DFullView = function(p1)
 			-- upvalues: open3DFullViewModule (copy), analyticsServiceModule (ref)
-			open3DFullViewModule(analyticsServiceModule.EventStream, p0)
+			open3DFullViewModule(analyticsServiceModule.EventStream, p1)
 		end,
 		close3DFullView = function(p1)
 			-- upvalues: close3DFullViewModule (copy), analyticsServiceModule (ref)
 			close3DFullViewModule(analyticsServiceModule.EventStream, p1)
 		end,
-		toggleCameraInEditorAndShop = function(p2, p3)
+		toggleCameraInEditorAndShop = function(p1, p2)
 			-- upvalues: analyticsServiceModule (ref), reportAvatarEventCounterV1Module (copy), constantsModule (copy)
 			analyticsServiceModule.EventStream:sendTelemetryEvent("CameraInEditorAndCatalogButton", "CameraInEditorAndCatalogButton_Toggle", {
-				actionName = if p2 then "Button Enabled" else "Button Disabled",
-				pageName = p3
+				actionName = if p1 then "Button Enabled" else "Button Disabled",
+				pageName = p2
 			})
-			reportAvatarEventCounterV1Module(if p2 then constantsModule.AVATAR_EVENT_COUNTER_NAME.AXCameraEnabled else constantsModule.AVATAR_EVENT_COUNTER_NAME.AXCameraDisabled)
+			reportAvatarEventCounterV1Module(if p1 then constantsModule.AVATAR_EVENT_COUNTER_NAME.AXCameraEnabled else constantsModule.AVATAR_EVENT_COUNTER_NAME.AXCameraDisabled)
 		end
 	}
-	var7 = t
+	var1 = t
 	
 	return t
 end

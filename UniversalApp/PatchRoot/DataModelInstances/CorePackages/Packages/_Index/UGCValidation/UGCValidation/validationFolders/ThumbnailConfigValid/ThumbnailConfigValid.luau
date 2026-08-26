@@ -19,13 +19,13 @@ return {
 	},
 	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (ref), errorSourceStringsModule (ref), UGCValidationAddThumbnailFrustumCheckingv2 (ref), UGCValidationService (ref)
 		local assetType
-		local rootInstance = p1.rootInstance
+		local rootInstance = p2.rootInstance
 		
 		if getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule() then
-			assetType = p1.uploadEnum and p1.uploadEnum.assetType
+			assetType = p2.uploadEnum and p2.uploadEnum.assetType
 			
 			if assetType == Enum.AssetType.EyebrowAccessory or assetType == Enum.AssetType.EyelashAccessory then return end
 		end
@@ -39,11 +39,11 @@ return {
 		
 		if not thumbnailCameraTarget then return end
 		if thumbnailCameraTarget.Value ~= handle then
-			p0:fail(errorSourceStringsModule.Keys.ThumbnailInvalidTarget, { ExpectedTarget = handle:GetFullName() })
+			p1:fail(errorSourceStringsModule.Keys.ThumbnailInvalidTarget, { ExpectedTarget = handle:GetFullName() })
 			
 			return
 		elseif game:GetEngineFeature("EngineUGCValidateThumbnailerMeshInFrustum") and UGCValidationAddThumbnailFrustumCheckingv2 then
-			local renderMeshesData = p1.renderMeshesData
+			local renderMeshesData = p2.renderMeshesData
 			
 			if not renderMeshesData then return end
 			local name = renderMeshesData[handle.Name]
@@ -54,7 +54,7 @@ return {
 			
 			if not thumbnailCameraValue then return end
 			if UGCValidationService:CheckEditableMeshInCameraFrustum(name.editable, name.scale, cFrame, cFrame * thumbnailCameraValue.Value) == false then
-				p0:fail(errorSourceStringsModule.Keys.ThumbnailOutsideView, { InstancePath = handle:GetFullName() })
+				p1:fail(errorSourceStringsModule.Keys.ThumbnailOutsideView, { InstancePath = handle:GetFullName() })
 			end
 		end
 	end

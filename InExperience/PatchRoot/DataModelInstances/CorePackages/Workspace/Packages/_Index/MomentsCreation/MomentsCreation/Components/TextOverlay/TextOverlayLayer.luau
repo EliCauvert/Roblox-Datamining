@@ -80,11 +80,11 @@ return function(p1)
 	local var5 = if var4 then getScale(var2, var3, Enum.ScaleType.Crop) else 1
 	local var6 = useSignalState(useMemo(function()
 		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p1)
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: controller (copy)
-			local activeSession = controller.getActiveSession(p1)
+			local activeSession = controller.getActiveSession(p2)
 			
-			return if activeSession == nil then nil else activeSession.getDraft(p1)
+			return if activeSession == nil then nil else activeSession.getDraft(p2)
 		end)
 	end, { controller }))
 	local var1 = var1 == creationFlowStateModule.TextOverlay
@@ -98,27 +98,27 @@ return function(p1)
 			var3.current:CaptureFocus()
 		end
 	end, {})
-	local var8 = useCallback(function(p1)
+	local var8 = useCallback(function(p2)
 		-- upvalues: controller (ref), getFFlagMomentsStickerButton (copy), dashModule (copy)
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession == nil then return end
 		local draft = activeSession.getDraft(false)
-		local var1 = draft and draft[1]
+		local var9 = draft and draft[1]
 		
-		if var1 == nil then return end
-		local charCount = utf8.len(p1.Text)
+		if var9 == nil then return end
+		local charCount = utf8.len(p2.Text)
 		
 		if charCount ~= nil and charCount >= 100 then
-			local byteOffset = utf8.offset(p1.Text, 101)
+			local byteOffset = utf8.offset(p2.Text, 101)
 			
 			if not getFFlagMomentsStickerButton() then
-				p1.Text = string.sub(p1.Text, 1, byteOffset - 1)
+				p2.Text = string.sub(p2.Text, 1, byteOffset - 1)
 			elseif byteOffset then
-				p1.Text = string.sub(p1.Text, 1, byteOffset - 1)
+				p2.Text = string.sub(p2.Text, 1, byteOffset - 1)
 			end
 		end
-		activeSession.update({ dashModule.joinDeep(var1, { text = p1.Text }) })
+		activeSession.update({ dashModule.joinDeep(var9, { text = p2.Text }) })
 	end, { controller })
 	local var9 = useCallback(function()
 		-- upvalues: getFFlagEnableMomentTextGeneration (copy), controller (ref)
@@ -129,16 +129,16 @@ return function(p1)
 		end
 		controller.beginTool("text")
 	end, { controller })
-	local var10 = useCallback(function(p1)
+	local var10 = useCallback(function(p2)
 		-- upvalues: controller (ref)
-		controller.updateCommittedEdit("text", p1)
+		controller.updateCommittedEdit("text", p2)
 	end, { controller })
 	local var11 = useRef(nil)
 	local var12 = useRef(false)
 	local var13, var14 = useBinding(false)
 	local var15, var16 = useAnimatedBinding(1)
 	local var17, var18 = useAnimatedBinding(1)
-	local var19 = useCallback(function(p1)
+	local var19 = useCallback(function(p2)
 		-- upvalues: var11 (ref)
 		local current = var11.current
 		
@@ -148,7 +148,7 @@ return function(p1)
 		local absolutePosition = current.AbsolutePosition
 		local absoluteSize = current.AbsoluteSize
 		
-		return absolutePosition.X <= p1.X and (p1.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= p1.Y and p1.Y <= absolutePosition.Y + absoluteSize.Y))
+		return absolutePosition.X <= p2.X and (p2.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= p2.Y and p2.Y <= absolutePosition.Y + absoluteSize.Y))
 	end, {})
 	local var20 = useCallback(function()
 		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), p1 (ref), var12 (ref), var16 (ref), reactOtterModule (copy), var18 (ref), var14 (ref)
@@ -161,26 +161,26 @@ return function(p1)
 		var18(reactOtterModule.instant(1))
 		var14(true)
 	end, { p1.ctx, var16, var18, var14 })
-	local var21 = useCallback(function(p1)
+	local var21 = useCallback(function(p2)
 		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), var19 (ref), var12 (ref), var16 (ref), reactOtterModule (copy), t (copy), var18 (ref)
 		if not getFFlagMomentsTextDragToDeleteModule() then return end
-		local var1 = var19(p1)
+		local var22 = var19(p2)
 		
-		if var1 == var12.current then
+		if var22 == var12.current then
 			return
 		end
-		var12.current = var1
-		var16(reactOtterModule.spring(if var1 then 1.15 else 1, t))
-		var18(reactOtterModule.spring(if var1 then 0.45 else 1, t))
+		var12.current = var22
+		var16(reactOtterModule.spring(if var22 then 1.15 else 1, t))
+		var18(reactOtterModule.spring(if var22 then 0.45 else 1, t))
 	end, { var19, var16, var18 })
-	local var2 = useCallback(function(p1)
-		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), var10 (ref), p1 (ref), var12 (ref), var14 (ref), var16 (ref), reactOtterModule (copy), controller (ref), var18 (ref)
+	local var2 = useCallback(function(p2)
+		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), var10 (ref), p2 (ref), var12 (ref), var14 (ref), var16 (ref), reactOtterModule (copy), controller (ref), var18 (ref)
 		if not getFFlagMomentsTextDragToDeleteModule() then
-			var10(p1)
+			var10(p2)
 			
 			return
-		elseif p1.ctx.setIsOverlayDragging then
-			p1.ctx.setIsOverlayDragging(false)
+		elseif p2.ctx.setIsOverlayDragging then
+			p2.ctx.setIsOverlayDragging(false)
 		end
 		local current = var12.current
 		var12.current = false
@@ -193,7 +193,7 @@ return function(p1)
 			return
 		end
 		var18(reactOtterModule.instant(1))
-		var10(p1)
+		var10(p2)
 	end, {
 		p1.ctx, controller, var10, var14, var16, var18
 	})

@@ -23,30 +23,30 @@ local createGetFollowersCountModule = require(networkRequests.createGetFollowers
 local createGetFollowingsCountModule = require(networkRequests.createGetFollowingsCount)
 local createValidateFriendRequestNicknameModule = require(networkRequests.createValidateFriendRequestNickname)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createGetFriendsFromUserIdModule (ref), createFindFriendsFromUserIdModule (ref), createSearchFriendsByQueryModule (ref), createGetFriendRequestsCountModule (ref), createUnfriendTargetUserIdModule (ref), createGetFriendRequestsModule (ref), createAcceptFriendRequestFromUserIdModule (ref), createDeclineFriendRequestFromUserIdModule (ref), createDeclineAllFriendRequestsModule (ref), createGetFriendsCountFromUserIdModule (ref), createGetInactiveFriendsModule (ref), createRequestFriendshipFromUserIdModule (ref), createRequestFriendshipFromContactIdModule (ref), createGetFollowingExistsModule (ref), createGetUserFollowersModule (ref), createGetFriendRecommendationsFromUserIdModule (ref), createGetFriendshipStatusModule (ref), createGetExtendedFriendshipStatusModule (ref), createAcceptFriendRequestWithTokenModule (ref), createGetFollowersCountModule (ref), createGetFollowingsCountModule (ref), createValidateFriendRequestNicknameModule (ref)
 	return {
-		GetFriendsFromUserId = createGetFriendsFromUserIdModule(p0),
-		FindFriendsFromUserId = createFindFriendsFromUserIdModule(p0),
-		SearchFriendsByQuery = createSearchFriendsByQueryModule(p0),
-		GetFriendRequestsCount = createGetFriendRequestsCountModule(p0),
-		UnfriendTargetUserId = createUnfriendTargetUserIdModule(p0),
-		GetFriendRequests = createGetFriendRequestsModule(p0),
-		AcceptFriendRequestFromUserId = createAcceptFriendRequestFromUserIdModule(p0),
-		DeclineFriendRequestFromUserId = createDeclineFriendRequestFromUserIdModule(p0),
-		DeclineAllFriendRequests = createDeclineAllFriendRequestsModule(p0),
-		GetFriendsCountFromUserId = createGetFriendsCountFromUserIdModule(p0),
-		GetInactiveFriends = createGetInactiveFriendsModule(p0),
-		RequestFriendshipFromUserId = createRequestFriendshipFromUserIdModule(p0),
-		RequestFriendshipFromContactId = createRequestFriendshipFromContactIdModule(p0),
-		GetFollowingExists = createGetFollowingExistsModule(p0),
-		GetUserFollowers = createGetUserFollowersModule(p0),
-		GetFriendRecommendationsFromUserId = createGetFriendRecommendationsFromUserIdModule(p0),
-		GetFriendshipStatus = createGetFriendshipStatusModule(p0),
-		GetExtendedFriendshipStatus = createGetExtendedFriendshipStatusModule(p0),
-		AcceptFriendRequestWithToken = createAcceptFriendRequestWithTokenModule(p0),
-		GetFollowersCount = createGetFollowersCountModule(p0),
-		GetFollowingsCount = createGetFollowingsCountModule(p0),
-		ValidateFriendRequestNickname = createValidateFriendRequestNicknameModule(p0)
+		GetFriendsFromUserId = createGetFriendsFromUserIdModule(p1),
+		FindFriendsFromUserId = createFindFriendsFromUserIdModule(p1),
+		SearchFriendsByQuery = createSearchFriendsByQueryModule(p1),
+		GetFriendRequestsCount = createGetFriendRequestsCountModule(p1),
+		UnfriendTargetUserId = createUnfriendTargetUserIdModule(p1),
+		GetFriendRequests = createGetFriendRequestsModule(p1),
+		AcceptFriendRequestFromUserId = createAcceptFriendRequestFromUserIdModule(p1),
+		DeclineFriendRequestFromUserId = createDeclineFriendRequestFromUserIdModule(p1),
+		DeclineAllFriendRequests = createDeclineAllFriendRequestsModule(p1),
+		GetFriendsCountFromUserId = createGetFriendsCountFromUserIdModule(p1),
+		GetInactiveFriends = createGetInactiveFriendsModule(p1),
+		RequestFriendshipFromUserId = createRequestFriendshipFromUserIdModule(p1),
+		RequestFriendshipFromContactId = createRequestFriendshipFromContactIdModule(p1),
+		GetFollowingExists = createGetFollowingExistsModule(p1),
+		GetUserFollowers = createGetUserFollowersModule(p1),
+		GetFriendRecommendationsFromUserId = createGetFriendRecommendationsFromUserIdModule(p1),
+		GetFriendshipStatus = createGetFriendshipStatusModule(p1),
+		GetExtendedFriendshipStatus = createGetExtendedFriendshipStatusModule(p1),
+		AcceptFriendRequestWithToken = createAcceptFriendRequestWithTokenModule(p1),
+		GetFollowersCount = createGetFollowersCountModule(p1),
+		GetFollowingsCount = createGetFollowingsCountModule(p1),
+		ValidateFriendRequestNickname = createValidateFriendRequestNicknameModule(p1)
 	}
 end

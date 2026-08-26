@@ -1,6 +1,6 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("PhoneUpsell").Parent.Cryo)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: cryoModule (ref)
-	return cryoModule.Dictionary.join(p0, p1)
+	return cryoModule.Dictionary.join(p1, p2)
 end

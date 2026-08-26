@@ -5,17 +5,17 @@ return (function()
 	-- upvalues: profileCTAStore (ref), createProfileCTAEventListenerModule (ref)
 	local var1 = 0
 	local t = {}
-	local var3 = profileCTAStore.get()
+	local var2 = profileCTAStore.get()
 	
-	local function _(p0)
-		-- upvalues: var3 (ref)
-		var3.getCTA(p0, true)
+	local function _(p1)
+		-- upvalues: var2 (ref)
+		var2.getCTA(p1, true)
 	end
 	
 	local _ = createProfileCTAEventListenerModule(function(p1)
-		-- upvalues: var1 (write), var3 (ref), t (ref)
+		-- upvalues: var1 (write), var2 (ref), t (ref)
 		if var1 > 0 then
-			var3.getCTA(p1, true)
+			var2.getCTA(p1, true)
 			
 			return
 		end
@@ -40,13 +40,13 @@ return (function()
 		connectRealTimeUpdates = function()
 			-- upvalues: var1 (write)
 			var1 += 1
-			local var4 = false
+			local var3 = false
 			
 			return {
 				Disconnect = function()
-					-- upvalues: var4 (write), var1 (copy)
-					if var4 then return end
-					var4 = true
+					-- upvalues: var3 (write), var1 (copy)
+					if var3 then return end
+					var3 = true
 					var1 -= 1
 					
 					if var1 < 0 then
@@ -55,21 +55,21 @@ return (function()
 				end
 			}
 		end,
-		getProfileCTA = function(p2)
-			-- upvalues: t (ref), var3 (ref)
-			local var5 = false
+		getProfileCTA = function(p1)
+			-- upvalues: t (ref), var2 (ref)
+			local var3 = false
 			
-			if t[p2] then
-				var5 = true
-				t[p2] = nil
+			if t[p1] then
+				var3 = true
+				t[p1] = nil
 			end
-			return var3.getCTA(p2, var5)
+			return var2.getCTA(p1, var3)
 		end,
-		getProfileCTAs = function(p3)
-			-- upvalues: t (ref), var3 (ref)
+		getProfileCTAs = function(p1)
+			-- upvalues: t (ref), var2 (ref)
 			local t_1 = {}
 			
-			for i, v in ipairs(p3) do
+			for i, v in ipairs(p1) do
 				if t[v] then
 					t_1[v] = true
 					t[v] = nil
@@ -77,7 +77,7 @@ return (function()
 					t_1[v] = false
 				end
 			end
-			return var3.getBatchCTAs(p3, t_1)
+			return var2.getBatchCTAs(p1, t_1)
 		end
 	}
 end)()

@@ -6,22 +6,22 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local sduiTextIconRowModule = require(serverDrivenUi.Content.SduiTextIconRow)
 local useCountdownSubtitleTextBinding = require(parent.GameCollections).useCountdownSubtitleTextBinding
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useCountdownSubtitleTextBinding (ref), reactModule (ref), sduiTextIconRowModule (ref), cryoModule (ref)
-	local var4 = useTokens()
-	local textColor = p0.textColor or var4.Color.Content.Default.Color3
+	local var1 = useTokens()
+	local textColor = p1.textColor or var1.Color.Content.Default.Color3
 	
 	return reactModule.createElement(sduiTextIconRowModule, cryoModule.Dictionary.join({
 		testId = "--sdui-countdown-text-icon-row",
-		gap = p0.gap or var4.Gap.XXSmall,
-		fontStyle = p0.fontStyle or var4.Typography.BodyMedium,
+		gap = p1.gap or var1.Gap.XXSmall,
+		fontStyle = p1.fontStyle or var1.Typography.BodyMedium,
 		textColor = textColor,
 		textFlexMode = Enum.UIFlexMode.Shrink,
-		icon = p0.icon,
-		iconWidth = p0.iconWidth or var4.Size.Size_400,
+		icon = p1.icon,
+		iconWidth = p1.iconWidth or var1.Size.Size_400,
 		iconColor = textColor,
-		selectable = p0.onActivated ~= nil
-	}, p0, {
-		text = useCountdownSubtitleTextBinding(p0.endTimestamp, p0.formatStringHoursMinutes, p0.defaultString)
+		selectable = p1.onActivated ~= nil
+	}, p1, {
+		text = useCountdownSubtitleTextBinding(p1.endTimestamp, p1.formatStringHoursMinutes, p1.defaultString)
 	}))
 end)

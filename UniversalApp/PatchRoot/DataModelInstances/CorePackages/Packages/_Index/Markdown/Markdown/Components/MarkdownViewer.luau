@@ -11,56 +11,56 @@ local commonMarkComplianceParserModule = require(parent.Parsers.CommonMarkCompli
 local _ = require(parent.Types)
 local markdownRendererModule = require(script.MarkdownRenderer)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), dashModule (ref), markdownRendererModule (ref), commonMarkComplianceParserModule (ref), view (ref), text (ref)
-	local var5 = useTokens()
+	local var1 = useTokens()
 	
-	if not p0.Markdown and not p0.Ast then
+	if not p1.Markdown and not p1.Ast then
 		warn("MarkdownViewer requires either a Markdown string or an Ast in props")
 		
 		return nil
 	end
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: dashModule (copy), markdownRendererModule (copy), p0 (ref)
-		return dashModule.join(markdownRendererModule.defaultRenderers, p0.Renderers or {}, p0.AdditionalFeatureRenderers or {})
-	end, { p0.Renderers })
-	local var7, var8 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), commonMarkComplianceParserModule (copy)
-		if p0.Ast then
-			return true, p0.Ast
-		elseif not p0.Markdown then
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: dashModule (copy), markdownRendererModule (copy), p1 (ref)
+		return dashModule.join(markdownRendererModule.defaultRenderers, p1.Renderers or {}, p1.AdditionalFeatureRenderers or {})
+	end, { p1.Renderers })
+	local var3, var4 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), commonMarkComplianceParserModule (copy)
+		if p1.Ast then
+			return true, p1.Ast
+		elseif not p1.Markdown then
 			return true, nil
 		end
-		local var9, var10 = commonMarkComplianceParserModule.safeParse(p0.Markdown)
+		local var5, var6 = commonMarkComplianceParserModule.safeParse(p1.Markdown)
 		
-		if not var9 then
-			if p0.OnError then
-				p0.OnError(var10)
+		if not var5 then
+			if p1.OnError then
+				p1.OnError(var6)
 				
-				return var9, var10
+				return var5, var6
 			end
-			warn("MarkdownViewer: Error parsing markdown.", var10)
+			warn("MarkdownViewer: Error parsing markdown.", var6)
 		end
-		return var9, var10
-	end, { p0.Markdown, p0.Ast })
+		return var5, var6
+	end, { p1.Markdown, p1.Ast })
 	
-	return if var7 then reactModule.createElement(view, dashModule.join({
+	return if var3 then reactModule.createElement(view, dashModule.join({
 		tag = "col size-full-0 auto-y",
 		BorderSizePixel = 0,
 		backgroundStyle = { Transparency = 1 }
-	}, p0.WrapperProps or {}), reactModule.useMemo(function()
-		-- upvalues: var7 (ref), markdownRendererModule (copy), var8 (ref), var6 (ref), p0 (ref), var5 (ref)
-		return if var7 then markdownRendererModule.render(var8, {
-			userRenderers = var6,
-			linkCallback = p0.LinkCallback,
-			markdownRendererProps = p0.MarkdownRendererProps,
-			colorScheme = p0.ColorScheme,
-			tokens = var5
+	}, p1.WrapperProps or {}), reactModule.useMemo(function()
+		-- upvalues: var3 (ref), markdownRendererModule (copy), var4 (ref), var2 (ref), p1 (ref), var1 (ref)
+		return if var3 then markdownRendererModule.render(var4, {
+			userRenderers = var2,
+			linkCallback = p1.LinkCallback,
+			markdownRendererProps = p1.MarkdownRendererProps,
+			colorScheme = p1.ColorScheme,
+			tokens = var1
 		}) else nil
 	end, {
-		var7, var8, p0.LinkCallback, p0.MarkdownRendererProps, p0.ColorScheme, var6
-	})) else p0.Fallback or reactModule.createElement(view, dashModule.join({
+		var3, var4, p1.LinkCallback, p1.MarkdownRendererProps, p1.ColorScheme, var2
+	})) else p1.Fallback or reactModule.createElement(view, dashModule.join({
 		tag = "size-full-0 auto-y",
 		backgroundStyle = { Transparency = 1 }
-	}, p0.WrapperProps or {}), reactModule.createElement(text, { Text = "Failed to parse the provided markdown" }))
+	}, p1.WrapperProps or {}), reactModule.createElement(text, { Text = "Failed to parse the provided markdown" }))
 end

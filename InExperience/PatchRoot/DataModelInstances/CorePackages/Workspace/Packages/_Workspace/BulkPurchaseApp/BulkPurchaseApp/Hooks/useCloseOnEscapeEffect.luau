@@ -1,26 +1,26 @@
 ﻿local contextActionService = game:GetService("ContextActionService")
 local reactModule = require(script:FindFirstAncestor("BulkPurchaseApp").Parent.React)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), contextActionService (ref)
-	local var2 = reactModule.useRef(p1)
+	local var1 = reactModule.useRef(p2)
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2.current = p1
-	end, { p1 })
+		-- upvalues: var1 (ref), p2 (ref)
+		var1.current = p2
+	end, { p2 })
 	reactModule.useEffect(function()
-		-- upvalues: contextActionService (copy), p0 (ref), var2 (ref)
-		contextActionService:BindCoreAction(p0, function(_, p2)
-			-- upvalues: var2 (copy)
-			if p2 == Enum.UserInputState.Begin then
-				var2.current()
+		-- upvalues: contextActionService (copy), p1 (ref), var1 (ref)
+		contextActionService:BindCoreAction(p1, function(_, p3)
+			-- upvalues: var1 (copy)
+			if p3 == Enum.UserInputState.Begin then
+				var1.current()
 			end
 			return Enum.ContextActionResult.Pass
 		end, false, Enum.KeyCode.Escape)
 		
 		return function()
-			-- upvalues: contextActionService (copy), p0 (copy)
-			contextActionService:UnbindCoreAction(p0)
+			-- upvalues: contextActionService (copy), p1 (copy)
+			contextActionService:UnbindCoreAction(p1)
 		end
-	end, { p0 })
+	end, { p1 })
 end

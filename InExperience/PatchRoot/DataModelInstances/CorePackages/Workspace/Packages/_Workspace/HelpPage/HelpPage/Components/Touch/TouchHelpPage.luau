@@ -16,36 +16,36 @@ local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
 local deviceOrientationMode = robloxAppEnumsModule.DeviceOrientationMode
 local touchHelpPageResponsiveUnits = game:DefineFastFlag("TouchHelpPageResponsiveUnits", false)
 
-local function _(p0, p1, p2)
-	assert(not (p2[p0] and p2[p1]), "Cannot assign a position to both tap and rotate simultaneously.")
+local function _(p1, p2, p3)
+	assert(not (p3[p1] and p3[p2]), "Cannot assign a position to both tap and rotate simultaneously.")
 	
-	return if p2[p0] then p0 elseif p2[p1] then p1 else nil
+	return if p3[p1] then p1 elseif p3[p2] then p2 else nil
 end
 
-local var11 = reactModule.memo(function(p3)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), deviceOrientationMode (ref), reactModule (ref), view (ref)
-	local var12 = useTokens()
-	local components = p3.components
-	local var13 = p3.orientation == deviceOrientationMode.Portrait
+	local var2 = useTokens()
+	local components = p1.components
+	local var3 = p1.orientation == deviceOrientationMode.Portrait
 	
-	local function createSideColumn(p4, p5, p6, p7)
+	local function createSideColumn(p2, p3, p4, p5)
 		-- upvalues: reactModule (copy), view (copy)
 		return reactModule.createElement(view, {
-			tag = `align-x-{p4} auto-x col flex-y-between size-0-full`,
-			LayoutOrder = p5
-		}, { topComponent = p6, bottomComponent = p7 })
+			tag = `align-x-{p2} auto-x col flex-y-between size-0-full`,
+			LayoutOrder = p3
+		}, { topComponent = p4, bottomComponent = p5 })
 	end
 	
-	local var15 = createSideColumn(if var13 then "center" else "left", 1, components.topLeftComponent, components.bottomLeftComponent)
-	local var16 = createSideColumn(if var13 then "center" else "right", 3, components.topRightComponent, components.bottomRightComponent)
+	local var4 = createSideColumn(if var3 then "center" else "left", 1, components.topLeftComponent, components.bottomLeftComponent)
+	local var5 = createSideColumn(if var3 then "center" else "right", 3, components.topRightComponent, components.bottomRightComponent)
 	
-	return if var13 then reactModule.createElement(view, { tag = "auto-y flex-x-between row size-full-0" }, {
+	return if var3 then reactModule.createElement(view, { tag = "auto-y flex-x-between row size-full-0" }, {
 		Inner = reactModule.createElement(view, {
 			tag = "col flex-y-fill padding-y-large padding-x-xxlarge size-full",
 			LayoutOrder = 1
 		}, {
 			TopRow = reactModule.createElement(view, { tag = "auto-y size-full-0", LayoutOrder = 1 }, {
-				Columns = reactModule.createElement(view, { tag = "auto-y flex-x-between row size-full-0" }, { LeftColumn = var15, RightColumn = var16 }),
+				Columns = reactModule.createElement(view, { tag = "auto-y flex-x-between row size-full-0" }, { LeftColumn = var4, RightColumn = var5 }),
 				Center = reactModule.createElement(view, {
 					tag = "auto-xy",
 					AnchorPoint = Vector2.new(0.5, 0.5),
@@ -62,9 +62,9 @@ local var11 = reactModule.memo(function(p3)
 	}) else reactModule.createElement(view, {
 		tag = "auto-y flex-x-between row size-full-0",
 		LayoutOrder = 1,
-		padding = UDim2.fromOffset(var12.Margin.Large, var12.Margin.Small)
+		padding = UDim2.fromOffset(var2.Margin.Large, var2.Margin.Small)
 	}, {
-		leftColumn = var15,
+		leftColumn = var4,
 		middleColumn = reactModule.createElement(view, {
 			tag = "align-x-center auto-x col flex-y-fill size-0-full",
 			LayoutOrder = 2
@@ -75,31 +75,31 @@ local var11 = reactModule.memo(function(p3)
 			}, { topMid = components.topMidComponent }),
 			bottomMidContainer = reactModule.createElement(view, { tag = "align-y-bottom auto-xy col", LayoutOrder = 2 }, { bottomMid = components.bottomMidComponent })
 		}),
-		rightColumn = var16
+		rightColumn = var5
 	})
 end)
 
 return reactModule.memo(function()
-	-- upvalues: useDeviceOrientation (ref), useKeybindsModule (ref), reactModule (ref), userGameSettingsService (ref), displayModule (ref), touchControlsEnumModule (ref), touchActionModule (ref), view (ref), var11 (ref), constantsModule (ref), touchHelpPageResponsiveUnits (ref)
-	local var17 = useDeviceOrientation()
+	-- upvalues: useDeviceOrientation (ref), useKeybindsModule (ref), reactModule (ref), userGameSettingsService (ref), displayModule (ref), touchControlsEnumModule (ref), touchActionModule (ref), view (ref), var1 (ref), constantsModule (ref), touchHelpPageResponsiveUnits (ref)
+	local var2 = useDeviceOrientation()
 	local controls = useKeybindsModule().controls
-	local var18, var19 = reactModule.useState(userGameSettingsService.TouchMovementMode)
+	local var3, var4 = reactModule.useState(userGameSettingsService.TouchMovementMode)
 	local viewportSize = displayModule.GetDisplayStore(false).getViewportSize(false)
 	reactModule.useEffect(function()
-		-- upvalues: userGameSettingsService (copy), var19 (ref)
-		local var26 = userGameSettingsService:GetPropertyChangedSignal("TouchMovementMode"):Connect(function()
-			-- upvalues: var19 (copy), userGameSettingsService (copy)
-			var19(userGameSettingsService.TouchMovementMode)
+		-- upvalues: userGameSettingsService (copy), var4 (ref)
+		local var5 = userGameSettingsService:GetPropertyChangedSignal("TouchMovementMode"):Connect(function()
+			-- upvalues: var4 (copy), userGameSettingsService (copy)
+			var4(userGameSettingsService.TouchMovementMode)
 		end)
 		
 		return function()
-			-- upvalues: var26 (ref)
-			var26:Disconnect()
+			-- upvalues: var5 (ref)
+			var5:Disconnect()
 		end
 	end, {})
-	local var21 = var18 == Enum.TouchMovementMode.ClickToMove
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: controls (ref), var21 (ref)
+	local var5 = var3 == Enum.TouchMovementMode.ClickToMove
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: controls (ref), var5 (ref)
 		local t = {}
 		
 		if controls == nil then
@@ -107,69 +107,69 @@ return reactModule.memo(function()
 		end
 		for i, v in controls do
 			if v.touchInput ~= nil then
-				for i_1, v_1 in ipairs(if var21 then v.touchInput.tapToMoveInput else v.touchInput.thumbstickInput) do
+				for i_1, v_1 in ipairs(if var5 then v.touchInput.tapToMoveInput else v.touchInput.thumbstickInput) do
 					assert(t[v_1] == nil, "A touch input position cannot have multiple actions.")
 					t[v_1] = v.label
 				end
 			end
 		end
 		return t
-	end, { controls, var18 })
+	end, { controls, var3 })
 	
 	if controls == nil then
 		return nil
 	end
 	local topMidTap = touchControlsEnumModule.TopMidTap
 	local topMidRotate = touchControlsEnumModule.TopMidRotate
-	assert(not (var22[topMidTap] and var22[topMidRotate]), "Cannot assign a position to both tap and rotate simultaneously.")
-	local var23 = if var22[topMidTap] then topMidTap elseif var22[topMidRotate] then topMidRotate else nil
+	assert(not (var6[topMidTap] and var6[topMidRotate]), "Cannot assign a position to both tap and rotate simultaneously.")
+	local var7 = if var6[topMidTap] then topMidTap elseif var6[topMidRotate] then topMidRotate else nil
 	local topRightTap = touchControlsEnumModule.TopRightTap
 	local topRightRotate = touchControlsEnumModule.TopRightRotate
-	assert(not (var22[topRightTap] and var22[topRightRotate]), "Cannot assign a position to both tap and rotate simultaneously.")
-	local var24 = if var22[topRightTap] then topRightTap elseif var22[topRightRotate] then topRightRotate else nil
+	assert(not (var6[topRightTap] and var6[topRightRotate]), "Cannot assign a position to both tap and rotate simultaneously.")
+	local var8 = if var6[topRightTap] then topRightTap elseif var6[topRightRotate] then topRightRotate else nil
 	local bottomLeftTap = touchControlsEnumModule.BottomLeftTap
 	local bottomLeftRotate = touchControlsEnumModule.BottomLeftRotate
-	assert(not (var22[bottomLeftTap] and var22[bottomLeftRotate]), "Cannot assign a position to both tap and rotate simultaneously.")
-	local var25 = if var22[bottomLeftTap] then bottomLeftTap elseif var22[bottomLeftRotate] then bottomLeftRotate else nil
+	assert(not (var6[bottomLeftTap] and var6[bottomLeftRotate]), "Cannot assign a position to both tap and rotate simultaneously.")
+	local var9 = if var6[bottomLeftTap] then bottomLeftTap elseif var6[bottomLeftRotate] then bottomLeftRotate else nil
 	
 	return reactModule.createElement(view, {
 		ClipsDescendants = true,
 		Size = if touchHelpPageResponsiveUnits then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, viewportSize.Y - (if viewportSize.X < constantsModule.HELP_PAGE.TOUCH_OFFSETS.SMALL_SCREEN_CUTOFF_X or viewportSize.Y < constantsModule.HELP_PAGE.TOUCH_OFFSETS.SMALL_SCREEN_CUTOFF_Y then constantsModule.HELP_PAGE.TOUCH_OFFSETS.SMALL_SCREEN_OFFSET else constantsModule.HELP_PAGE.TOUCH_OFFSETS.BIG_SCREEN_OFFSET))
 	}, {
-		pageComponent = reactModule.createElement(var11, {
+		pageComponent = reactModule.createElement(var1, {
 			components = {
-				topLeftComponent = var22[touchControlsEnumModule.TopLeft] and reactModule.createElement(touchActionModule, {
+				topLeftComponent = var6[touchControlsEnumModule.TopLeft] and reactModule.createElement(touchActionModule, {
 					layoutOrder = 0,
-					action = var22[touchControlsEnumModule.TopLeft],
+					action = var6[touchControlsEnumModule.TopLeft],
 					touchInput = touchControlsEnumModule.TopLeft
 				}) or reactModule.createElement(view),
-				bottomLeftComponent = var25 and reactModule.createElement(touchActionModule, {
+				bottomLeftComponent = var9 and reactModule.createElement(touchActionModule, {
 					layoutOrder = 1,
-					action = var25 and var22[var25],
-					touchInput = var25
+					action = var9 and var6[var9],
+					touchInput = var9
 				}) or reactModule.createElement(view),
-				topMidComponent = var23 and reactModule.createElement(touchActionModule, {
+				topMidComponent = var7 and reactModule.createElement(touchActionModule, {
 					layoutOrder = 1,
-					action = var23 and var22[var23],
-					touchInput = var23
+					action = var7 and var6[var7],
+					touchInput = var7
 				}) or reactModule.createElement(view),
-				bottomMidComponent = var22[touchControlsEnumModule.BottomMid] and reactModule.createElement(touchActionModule, {
+				bottomMidComponent = var6[touchControlsEnumModule.BottomMid] and reactModule.createElement(touchActionModule, {
 					layoutOrder = 1,
-					action = var22[touchControlsEnumModule.BottomMid],
+					action = var6[touchControlsEnumModule.BottomMid],
 					touchInput = touchControlsEnumModule.BottomMid
 				}) or reactModule.createElement(view),
-				topRightComponent = var24 and reactModule.createElement(touchActionModule, {
+				topRightComponent = var8 and reactModule.createElement(touchActionModule, {
 					layoutOrder = 1,
-					action = var24 and var22[var24],
-					touchInput = var24
+					action = var8 and var6[var8],
+					touchInput = var8
 				}) or reactModule.createElement(view),
-				bottomRightComponent = var22[touchControlsEnumModule.BottomRight] and reactModule.createElement(touchActionModule, {
+				bottomRightComponent = var6[touchControlsEnumModule.BottomRight] and reactModule.createElement(touchActionModule, {
 					layoutOrder = 2,
-					action = var22[touchControlsEnumModule.BottomRight],
+					action = var6[touchControlsEnumModule.BottomRight],
 					touchInput = touchControlsEnumModule.BottomRight
 				}) or reactModule.createElement(view)
 			},
-			orientation = var17
+			orientation = var2
 		})
 	})
 end)

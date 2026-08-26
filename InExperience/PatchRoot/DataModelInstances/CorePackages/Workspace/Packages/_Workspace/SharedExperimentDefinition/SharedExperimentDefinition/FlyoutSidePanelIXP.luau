@@ -18,25 +18,25 @@ local fFlagSubTabRemoveFlyoutDependency = require(parent.SharedFlags).FFlagSubTa
 local fFlagHiddenFriendsSortHeaderRemoveFlyoutDependency = require(parent.SharedFlags).FFlagHiddenFriendsSortHeaderRemoveFlyoutDependency
 local hiddenFriendsSortHeaderAddSubTabDependency = game:DefineFastFlag("HiddenFriendsSortHeaderAddSubTabDependency", false)
 local fFlagAppIaHomeSubTab = require(parent.SharedFlags).FFlagAppIaHomeSubTab
-local var15 = nil
+local var1 = nil
 
 local function getIXPVariant()
-	-- upvalues: flyoutTestVariantRollout12 (ref), enableFlyoutIxp11 (ref), ixpFlyoutControl (ref), var15 (write), experimentCacheManager (ref), flyoutIxpLayer (ref), enableFlyoutExposure (ref), flyoutIxpVariantKey (ref)
+	-- upvalues: flyoutTestVariantRollout12 (ref), enableFlyoutIxp11 (ref), ixpFlyoutControl (ref), var1 (write), experimentCacheManager (ref), flyoutIxpLayer (ref), enableFlyoutExposure (ref), flyoutIxpVariantKey (ref)
 	if flyoutTestVariantRollout12 ~= -1 then
 		return flyoutTestVariantRollout12
 	elseif not enableFlyoutIxp11 then
 		return ixpFlyoutControl
-	elseif var15 == nil then
-		local var17 = experimentCacheManager.default:getLayerVariables(flyoutIxpLayer)
+	elseif var1 == nil then
+		local var2 = experimentCacheManager.default:getLayerVariables(flyoutIxpLayer)
 		
-		if enableFlyoutExposure and var17 ~= nil then
+		if enableFlyoutExposure and var2 ~= nil then
 			experimentCacheManager.default:logLayerExposure(flyoutIxpLayer)
 		end
-		var15 = var17 or {}
+		var1 = var2 or {}
 	end
-	local var18 = var15[flyoutIxpVariantKey]
+	local var3 = var1[flyoutIxpVariantKey]
 	
-	return if var18 == nil then ixpFlyoutControl else tonumber(var18)
+	return if var3 == nil then ixpFlyoutControl else tonumber(var3)
 end
 
 return {
@@ -50,9 +50,9 @@ return {
 	end,
 	isProfileEntryRemoved = function()
 		-- upvalues: getIXPVariant (ref), flyoutHamburgerEnableProfileEntry (ref), ixpFlyoutVariantHamburger (ref), flyoutFacepileEnableProfileEntry (ref), ixpFlyoutVariantAlternateEntry (ref), ixpFlyoutVariantNoSubTabs (ref), ixpFlyoutControl (ref)
-		local var19 = getIXPVariant()
+		local var2 = getIXPVariant()
 		
-		return if flyoutHamburgerEnableProfileEntry and var19 == ixpFlyoutVariantHamburger then false elseif flyoutFacepileEnableProfileEntry and (var19 == ixpFlyoutVariantAlternateEntry or var19 == ixpFlyoutVariantNoSubTabs) then false else var19 ~= ixpFlyoutControl
+		return if flyoutHamburgerEnableProfileEntry and var2 == ixpFlyoutVariantHamburger then false elseif flyoutFacepileEnableProfileEntry and (var2 == ixpFlyoutVariantAlternateEntry or var2 == ixpFlyoutVariantNoSubTabs) then false else var2 ~= ixpFlyoutControl
 	end,
 	isFriendsSortHeaderHiddenInFlyoutIxp = function()
 		-- upvalues: fFlagHiddenFriendsSortHeaderRemoveFlyoutDependency (ref), hiddenFriendsSortHeaderAddSubTabDependency (ref), fFlagAppIaHomeSubTab (ref), flyoutShowFriendsSortForCurrentVariant (ref), getIXPVariant (ref), ixpFlyoutControl (ref)
@@ -60,18 +60,18 @@ return {
 	end,
 	isAlternateEntryPointEnabled = function()
 		-- upvalues: getIXPVariant (ref), flyoutDisallowAlternativeEntryOnProfileEntryEnabled (ref), flyoutHamburgerEnableProfileEntry (ref), ixpFlyoutVariantHamburger (ref), flyoutFacepileEnableProfileEntry (ref), ixpFlyoutVariantAlternateEntry (ref), ixpFlyoutVariantNoSubTabs (ref), ixpFlyoutControl (ref)
-		local var20 = getIXPVariant()
+		local var2 = getIXPVariant()
 		
 		if flyoutDisallowAlternativeEntryOnProfileEntryEnabled then
-			local var21 = getIXPVariant()
-			local var22 = if flyoutHamburgerEnableProfileEntry and var21 == ixpFlyoutVariantHamburger then false elseif flyoutFacepileEnableProfileEntry and (var21 == ixpFlyoutVariantAlternateEntry or var21 == ixpFlyoutVariantNoSubTabs) then false else var21 ~= ixpFlyoutControl
+			local var3 = getIXPVariant()
+			local var4 = if flyoutHamburgerEnableProfileEntry and var3 == ixpFlyoutVariantHamburger then false elseif flyoutFacepileEnableProfileEntry and (var3 == ixpFlyoutVariantAlternateEntry or var3 == ixpFlyoutVariantNoSubTabs) then false else var3 ~= ixpFlyoutControl
 			
-			if var22 then
-				var22 = if var20 ~= ixpFlyoutVariantAlternateEntry then var20 == ixpFlyoutVariantNoSubTabs else true
+			if var4 then
+				var4 = if var2 ~= ixpFlyoutVariantAlternateEntry then var2 == ixpFlyoutVariantNoSubTabs else true
 			end
-			return var22
+			return var4
 		else
-			return if var20 ~= ixpFlyoutVariantAlternateEntry then var20 == ixpFlyoutVariantNoSubTabs else true
+			return if var2 ~= ixpFlyoutVariantAlternateEntry then var2 == ixpFlyoutVariantNoSubTabs else true
 		end
 	end,
 	isRobuxIconRemoved = function()
@@ -87,8 +87,8 @@ return {
 		if fFlagSubTabRemoveFlyoutDependency then
 			return true
 		end
-		local var23 = getIXPVariant()
+		local var2 = getIXPVariant()
 		
-		return if var23 ~= ixpFlyoutVariantAlternateEntry then var23 == ixpFlyoutVariantHamburger else true
+		return if var2 ~= ixpFlyoutVariantAlternateEntry then var2 == ixpFlyoutVariantHamburger else true
 	end
 }

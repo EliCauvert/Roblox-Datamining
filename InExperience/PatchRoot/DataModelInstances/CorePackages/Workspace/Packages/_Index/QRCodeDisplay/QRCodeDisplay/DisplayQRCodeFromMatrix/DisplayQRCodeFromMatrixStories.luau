@@ -10,31 +10,31 @@ return {
 	end,
 	ComplexMatrix = function()
 		-- upvalues: QRCodeModule (ref), reactModule (ref), displayQRCodeFromMatrixModule (ref)
-		local _, var3 = QRCodeModule.qrcode("https://www.bbc.com/news", 4)
+		local _, var1 = QRCodeModule.qrcode("https://www.bbc.com/news", 4)
 		
-		return reactModule.createElement(displayQRCodeFromMatrixModule, { sideLength = 200, qrCodeMatrix = var3 })
+		return reactModule.createElement(displayQRCodeFromMatrixModule, { sideLength = 200, qrCodeMatrix = var1 })
 	end,
 	SuperComplexMatrix = function()
 		-- upvalues: QRCodeModule (ref), reactModule (ref), displayQRCodeFromMatrixModule (ref)
-		local _, var4 = QRCodeModule.qrcode("https://ro.blox.com/Ebh5?pid=share&is_retargeting=true&af_dp=roblox%3A%2F%2Fnavigation%2Fshare_links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fshare-links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite", 2)
+		local _, var1 = QRCodeModule.qrcode("https://ro.blox.com/Ebh5?pid=share&is_retargeting=true&af_dp=roblox%3A%2F%2Fnavigation%2Fshare_links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fshare-links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite", 2)
 		
-		return reactModule.createElement(displayQRCodeFromMatrixModule, { sideLength = 400, qrCodeMatrix = var4 })
+		return reactModule.createElement(displayQRCodeFromMatrixModule, { sideLength = 400, qrCodeMatrix = var1 })
 	end,
 	CustomisedMatrix = function()
 		-- upvalues: QRCodeModule (ref), reactModule (ref), displayQRCodeFromMatrixModule (ref)
-		local _, var5 = QRCodeModule.qrcode("https://ro.blox.com/Ebh5?pid=share&is_retargeting=true&af_dp=roblox%3A%2F%2Fnavigation%2Fshare_links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fshare-links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite", 4)
+		local _, var1 = QRCodeModule.qrcode("https://ro.blox.com/Ebh5?pid=share&is_retargeting=true&af_dp=roblox%3A%2F%2Fnavigation%2Fshare_links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fshare-links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite", 4)
 		
 		return reactModule.createElement(displayQRCodeFromMatrixModule, {
 			sideLength = 200,
-			qrCodeMatrix = var5,
+			qrCodeMatrix = var1,
 			pixelColor3 = Color3.new(1, 0, 1),
 			backgroundColor3 = Color3.new(0, 1, 0)
 		})
 	end,
 	ReallySmallSideLength = function()
 		-- upvalues: QRCodeModule (ref), reactModule (ref), displayQRCodeFromMatrixModule (ref)
-		local _, var6 = QRCodeModule.qrcode("https://ro.blox.com/Ebh5?pid=share&is_retargeting=true&af_dp=roblox%3A%2F%2Fnavigation%2Fshare_links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fshare-links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite", 4)
+		local _, var1 = QRCodeModule.qrcode("https://ro.blox.com/Ebh5?pid=share&is_retargeting=true&af_dp=roblox%3A%2F%2Fnavigation%2Fshare_links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fshare-links%3Fcode%3D6e5de960f12ec44797d1d974c76605ff%26type%3DFriendInvite", 4)
 		
-		return reactModule.createElement(displayQRCodeFromMatrixModule, { sideLength = 1, qrCodeMatrix = var6 })
+		return reactModule.createElement(displayQRCodeFromMatrixModule, { sideLength = 1, qrCodeMatrix = var1 })
 	end
 }

@@ -13,12 +13,12 @@ local t = {
 	confirmationText = "CoreScripts.Ads.Label.RewardedVideoExitConfirmation"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), adsDisplayOrder (ref), view (ref), stateLayerAffordance (ref), text (ref), button (ref), fillBehavior (ref), buttonVariant (ref)
 	return reactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
 		DisplayOrder = adsDisplayOrder.Modal,
-		Enabled = p0.Enabled
+		Enabled = p1.Enabled
 	}, {
 		modal = reactModule.createElement(view, {
 			tag = "anchor-center-center position-center-center bg-over-media-0 radius-medium padding-x-xxlarge padding-y-xxlarge",
@@ -39,7 +39,7 @@ return function(p0)
 					fillBehavior = fillBehavior.Fill,
 					width = UDim.new(1, 0),
 					variant = buttonVariant.Emphasis,
-					onActivated = p0.onCancel
+					onActivated = p1.onCancel
 				}),
 				confirmExitButton = reactModule.createElement(button, {
 					text = "Exit",
@@ -47,7 +47,7 @@ return function(p0)
 					fillBehavior = fillBehavior.Fill,
 					width = UDim.new(1, 0),
 					variant = buttonVariant.Standard,
-					onActivated = p0.onConfirm
+					onActivated = p1.onConfirm
 				})
 			})
 		})

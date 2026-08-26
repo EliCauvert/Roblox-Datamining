@@ -16,10 +16,10 @@ local getFriends = starWarsDataModule.getFriends
 local getHero = starWarsDataModule.getHero
 local getHuman = starWarsDataModule.getHuman
 local getDroid = starWarsDataModule.getDroid
+local var1 = nil
+local var2 = nil
 local var3 = nil
-local var4 = nil
-local var5 = nil
-local var6 = graphQLEnumType.new({
+local var4 = graphQLEnumType.new({
 	name = "Episode",
 	description = "One of the films in the Star Wars Trilogy",
 	values = map.new({
@@ -34,11 +34,11 @@ local var6 = graphQLEnumType.new({
 		{ "JEDI", { value = 6, description = "Released in 1983." } }
 	})
 })
-var3 = graphQLInterfaceType.new({
+var1 = graphQLInterfaceType.new({
 	name = "Character",
 	description = "A character in the Star Wars Trilogy",
 	fields = function()
-		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var3 (write), var6 (ref)
+		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var1 (write), var4 (ref)
 		return map.new({
 			{
 				"id",
@@ -58,14 +58,14 @@ var3 = graphQLInterfaceType.new({
 				"friends",
 				{
 					description = "The friends of the character, or an empty list if they have none.",
-					type = graphQLList.new(var3)
+					type = graphQLList.new(var1)
 				}
 			},
 			{
 				"appearsIn",
 				{
 					description = "Which movies they appear in.",
-					type = graphQLList.new(var6)
+					type = graphQLList.new(var4)
 				}
 			},
 			{
@@ -77,21 +77,21 @@ var3 = graphQLInterfaceType.new({
 			}
 		})
 	end,
-	resolveType = function(p0)
-		-- upvalues: var4 (write), var5 (write)
-		if p0.type == "Human" then
-			return var4.name
-		elseif p0.type == "Droid" then
-			return var5.name
+	resolveType = function(p1)
+		-- upvalues: var2 (write), var3 (write)
+		if p1.type == "Human" then
+			return var2.name
+		elseif p1.type == "Droid" then
+			return var3.name
 		end
 		assert(false)
 	end
 })
-var4 = graphQLObjectType.new({
+var2 = graphQLObjectType.new({
 	name = "Human",
 	description = "A humanoid creature in the Star Wars universe.",
 	fields = function()
-		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var3 (write), getFriends (ref), var6 (ref), error (ref)
+		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var1 (write), getFriends (ref), var4 (ref), error (ref)
 		return map.new({
 			{
 				"id",
@@ -111,7 +111,7 @@ var4 = graphQLObjectType.new({
 				"friends",
 				{
 					description = "The friends of the human, or an empty list if they have none.",
-					type = graphQLList.new(var3),
+					type = graphQLList.new(var1),
 					resolve = function(p1)
 						-- upvalues: getFriends (copy)
 						return getFriends(p1)
@@ -122,7 +122,7 @@ var4 = graphQLObjectType.new({
 				"appearsIn",
 				{
 					description = "Which movies they appear in.",
-					type = graphQLList.new(var6)
+					type = graphQLList.new(var4)
 				}
 			},
 			{
@@ -145,13 +145,13 @@ var4 = graphQLObjectType.new({
 			}
 		})
 	end,
-	interfaces = { var3 }
+	interfaces = { var1 }
 })
-var5 = graphQLObjectType.new({
+var3 = graphQLObjectType.new({
 	name = "Droid",
 	description = "A mechanical creature in the Star Wars universe.",
 	fields = function()
-		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var3 (write), getFriends (ref), var6 (ref), error (ref)
+		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var1 (write), getFriends (ref), var4 (ref), error (ref)
 		return map.new({
 			{
 				"id",
@@ -171,10 +171,10 @@ var5 = graphQLObjectType.new({
 				"friends",
 				{
 					description = "The friends of the droid, or an empty list if they have none.",
-					type = graphQLList.new(var3),
-					resolve = function(p2)
+					type = graphQLList.new(var1),
+					resolve = function(p1)
 						-- upvalues: getFriends (copy)
-						return getFriends(p2)
+						return getFriends(p1)
 					end
 				}
 			},
@@ -182,7 +182,7 @@ var5 = graphQLObjectType.new({
 				"appearsIn",
 				{
 					description = "Which movies they appear in.",
-					type = graphQLList.new(var6)
+					type = graphQLList.new(var4)
 				}
 			},
 			{
@@ -205,7 +205,7 @@ var5 = graphQLObjectType.new({
 			}
 		})
 	end,
-	interfaces = { var3 }
+	interfaces = { var1 }
 })
 
 return {
@@ -213,59 +213,59 @@ return {
 		query = graphQLObjectType.new({
 			name = "Query",
 			fields = function()
-				-- upvalues: map (ref), var3 (write), var6 (ref), getHero (ref), var4 (write), graphQLNonNull (ref), graphQLString (ref), getHuman (ref), var5 (write), getDroid (ref)
+				-- upvalues: map (ref), var1 (write), var4 (ref), getHero (ref), var2 (write), graphQLNonNull (ref), graphQLString (ref), getHuman (ref), var3 (write), getDroid (ref)
 				return map.new({
 					{
 						"hero",
 						{
-							type = var3,
+							type = var1,
 							args = {
 								episode = {
 									description = "If omitted, returns the hero of the whole saga. If provided, returns the hero of that particular episode.",
-									type = var6
+									type = var4
 								}
 							},
-							resolve = function(_, p3)
+							resolve = function(_, p1)
 								-- upvalues: getHero (copy)
-								return getHero(p3.episode)
+								return getHero(p1.episode)
 							end
 						}
 					},
 					{
 						"human",
 						{
-							type = var4,
+							type = var2,
 							args = {
 								id = {
 									description = "id of the human",
 									type = graphQLNonNull.new(graphQLString)
 								}
 							},
-							resolve = function(_, p4)
+							resolve = function(_, p1)
 								-- upvalues: getHuman (copy)
-								return getHuman(p4.id)
+								return getHuman(p1.id)
 							end
 						}
 					},
 					{
 						"droid",
 						{
-							type = var5,
+							type = var3,
 							args = {
 								id = {
 									description = "id of the droid",
 									type = graphQLNonNull.new(graphQLString)
 								}
 							},
-							resolve = function(_, p5)
+							resolve = function(_, p1)
 								-- upvalues: getDroid (copy)
-								return getDroid(p5.id)
+								return getDroid(p1.id)
 							end
 						}
 					}
 				})
 			end
 		}),
-		types = { var4, var5 }
+		types = { var2, var3 }
 	})
 }

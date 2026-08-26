@@ -10,14 +10,14 @@ local _ = require(parent.Resources.Constants)
 local getFFlagReportAnythingDebugCanvasModule = require(parent.Flags.GetFFlagReportAnythingDebugCanvas)
 local debugCanvas = reactModule.PureComponent:extend("DebugCanvas")
 
-function debugCanvas.render(p0)
+function debugCanvas.render(p1)
 	-- upvalues: getFFlagReportAnythingDebugCanvasModule (ref), reactModule (ref)
-	if not getFFlagReportAnythingDebugCanvasModule() or not p0.props.identifiedAvatars then
+	if not getFFlagReportAnythingDebugCanvasModule() or not p1.props.identifiedAvatars then
 		return reactModule.createElement("Frame", { Size = UDim2.fromScale(0, 0) })
 	end
 	local t = {}
 	
-	for i, v in pairs(p0.props.identifiedAvatars) do
+	for i, v in pairs(p1.props.identifiedAvatars) do
 		local boundingBox = v.boundingBox
 		t[#t + 1] = reactModule.createElement("Frame", {
 			BackgroundTransparency = 0.8,
@@ -36,7 +36,7 @@ function debugCanvas.render(p0)
 			})
 		end
 	end
-	for i, v_1 in pairs(p0.props.identifiedAds) do
+	for i, v_1 in pairs(p1.props.identifiedAds) do
 		local boundingBox = v_1.boundingBox
 		t[#t + 1] = reactModule.createElement("Frame", {
 			BackgroundTransparency = 0.8,
@@ -61,7 +61,7 @@ function debugCanvas.render(p0)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 0.9,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = p0.props.ZIndex
+		ZIndex = p1.props.ZIndex
 	}, t)
 end
 

@@ -17,21 +17,21 @@ local fFlagProfileMomentsOrderingAndReactions = require(parent.SharedFlags).FFla
 local fFlagMomentsRemoveDeletedFromProfile = require(parent.SharedFlags).FFlagMomentsRemoveDeletedFromProfile
 local getFFlagMomentsFilterUnavailableFeedItemsModule = require(moments.Flags.GetFFlagMomentsFilterUnavailableFeedItems)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: momentsGetMomentsUserStoreModule (ref), recommendationSource (ref), fFlagProfileMomentsOrderingAndReactions (ref), getReactionsStoreModule (ref), getShareCountsStoreModule (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), getFFlagMomentsFilterUnavailableFeedItemsModule (ref), shouldShowMomentInFeedModule (ref), reportUnavailableFeedItemModule (ref)
-	p1 = p1 or {}
-	local var10 = if p1.userStore ~= nil then momentsGetMomentsUserStoreModule(false) else p1.userStore
-	local initialIndex = p1.initialIndex
+	p2 = p2 or {}
+	local var1 = if p2.userStore ~= nil then momentsGetMomentsUserStoreModule(false) else p2.userStore
+	local initialIndex = p2.initialIndex
 	
 	return {
-		id = `profile:{p0}`,
+		id = `profile:{p1}`,
 		recommendationSource = recommendationSource.Profile,
-		fetchAsync = function(p2)
-			-- upvalues: var10 (ref), p0 (ref), fFlagProfileMomentsOrderingAndReactions (copy), getReactionsStoreModule (copy), getShareCountsStoreModule (copy), fFlagMomentsRemoveDeletedFromProfile (copy), getDeletedMomentsStoreModule (copy), fFlagMomentsContentStatsTelemetry (copy), analytics (copy), recommendationSource (copy), getFFlagMomentsFilterUnavailableFeedItemsModule (copy), shouldShowMomentInFeedModule (copy), reportUnavailableFeedItemModule (copy), initialIndex (ref)
+		fetchAsync = function(p3)
+			-- upvalues: var1 (ref), p1 (ref), fFlagProfileMomentsOrderingAndReactions (copy), getReactionsStoreModule (copy), getShareCountsStoreModule (copy), fFlagMomentsRemoveDeletedFromProfile (copy), getDeletedMomentsStoreModule (copy), fFlagMomentsContentStatsTelemetry (copy), analytics (copy), recommendationSource (copy), getFFlagMomentsFilterUnavailableFeedItemsModule (copy), shouldShowMomentInFeedModule (copy), reportUnavailableFeedItemModule (copy), initialIndex (ref)
 			local t = {}
-			local var12 = p2
-			local var13 = p2 == nil
-			local var17
+			local var2 = p3
+			local var3 = p3 == nil
+			local var4
 			-- [0.000s] <RUNTIME-ERROR> : Error block 3 analysis at pc 0 (42)
 		end
 	}

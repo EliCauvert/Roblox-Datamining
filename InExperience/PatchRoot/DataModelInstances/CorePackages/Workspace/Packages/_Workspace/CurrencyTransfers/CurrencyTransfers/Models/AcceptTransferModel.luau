@@ -3,13 +3,13 @@ local _ = require(currencyTransfers.types)
 local tModule = require(currencyTransfers.Parent.t)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -40,17 +40,17 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: currencyTransfers (ref), t (ref)
-	local robuxTransfer = p2.robuxTransfer or p2.RobuxTransfer
-	local var5 = if p2.isAlreadyAccepted ~= nil then p2.IsAlreadyAccepted == true else p2.isAlreadyAccepted
+	local robuxTransfer = p1.robuxTransfer or p1.RobuxTransfer
+	local var1 = if p1.isAlreadyAccepted ~= nil then p1.IsAlreadyAccepted == true else p1.isAlreadyAccepted
 	local transferStatusModule = require(currencyTransfers.Enums.TransferStatus)
 	
 	if not robuxTransfer then
 		error("AcceptTransferModel.format: robuxTransfer is missing from response")
 	end
 	return t.new({
-		isAlreadyAccepted = var5,
+		isAlreadyAccepted = var1,
 		robuxTransfer = {
 			transferId = robuxTransfer.transferId or robuxTransfer.TransferId,
 			sender = {

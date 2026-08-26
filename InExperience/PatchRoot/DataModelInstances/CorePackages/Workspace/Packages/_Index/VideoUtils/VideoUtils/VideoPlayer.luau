@@ -18,137 +18,137 @@ local fFlagLuaAppVideoTileHideCenterPlayButton = require(parent.SharedFlags).FFl
 local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
-local var8 = game:DefineFastInt("VideoPlayerPlaybackEndThresholdInMs", 100) / 1000
+local var1 = game:DefineFastInt("VideoPlayerPlaybackEndThresholdInMs", 100) / 1000
 
-return function(p0)
-	-- upvalues: fFlagLuaAppEdpMediaGalleryFullScreen (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), runService (ref), reportWarning (ref), loggingProtocolModule (ref), videoLoggerModule (ref), var8 (ref), responsiveModule (ref), videoActions (ref), fFlagLuaAppVideoTileDisableActivation (ref), loadableVideoFrameModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), roundIconButtonModule (ref), videoPlayerBottomOverlayModule (ref)
-	local showMuteButton = p0.showMuteButton or fFlagLuaAppEdpMediaGalleryFullScreen and (p0.showPlayButton or p0.showProgressBar)
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useState(p0.muted)
-	local var14 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var11 (ref), p0 (ref)
-		var11(true)
+return function(p1)
+	-- upvalues: fFlagLuaAppEdpMediaGalleryFullScreen (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), runService (ref), reportWarning (ref), loggingProtocolModule (ref), videoLoggerModule (ref), var1 (ref), responsiveModule (ref), videoActions (ref), fFlagLuaAppVideoTileDisableActivation (ref), loadableVideoFrameModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), roundIconButtonModule (ref), videoPlayerBottomOverlayModule (ref)
+	local showMuteButton = p1.showMuteButton or fFlagLuaAppEdpMediaGalleryFullScreen and (p1.showPlayButton or p1.showProgressBar)
+	local var2, var3 = reactModule.useState(false)
+	local var4, var5 = reactModule.useState(p1.muted)
+	local var6 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var3 (ref), p1 (ref)
+		var3(true)
 		
-		if p0.onVideoLoaded then
-			p0.onVideoLoaded(p1, p2)
+		if p1.onVideoLoaded then
+			p1.onVideoLoaded(p2, p3)
 		end
-	end, { p0.onVideoLoaded })
+	end, { p1.onVideoLoaded })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var12 (ref)
-		if p0.onMutedChanged then
-			p0.onMutedChanged(var12)
+		-- upvalues: p1 (ref), var4 (ref)
+		if p1.onMutedChanged then
+			p1.onMutedChanged(var4)
 		end
-	end, { p0.onMutedChanged, var12 })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref), p0 (ref)
-		var13(function(p3)
-			-- upvalues: p0 (copy)
-			if p0.onMuteButtonActivated then
-				p0.onMuteButtonActivated(p3)
+	end, { p1.onMutedChanged, var4 })
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), p1 (ref)
+		var5(function(p2)
+			-- upvalues: p1 (copy)
+			if p1.onMuteButtonActivated then
+				p1.onMuteButtonActivated(p2)
 			end
-			return not p3
+			return not p2
 		end)
-	end, { p0.onMuteButtonActivated })
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), var12 (ref), var15 (ref)
-		return if p0.showMuteButton then { muted = var12, onMuteButtonActivated = var15 } else nil
-	end, { p0.showMuteButton, var12, var15 })
-	local var17 = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then reactModule.useRef(nil) else nil
-	local var18 = nil
-	local var19 = nil
+	end, { p1.onMuteButtonActivated })
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), var4 (ref), var7 (ref)
+		return if p1.showMuteButton then { muted = var4, onMuteButtonActivated = var7 } else nil
+	end, { p1.showMuteButton, var4, var7 })
+	local var9 = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then reactModule.useRef(nil) else nil
+	local var10 = nil
+	local var11 = nil
 	
 	if fFlagLuaAppEdpMediaGalleryFullScreen then
-		local var20, var21 = reactModule.useBinding(0)
-		var18 = var20
-		var19 = var21
+		local var12, var13 = reactModule.useBinding(0)
+		var10 = var12
+		var11 = var13
 	end
 	if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen then
 		reactModule.useEffect(function()
-			-- upvalues: var17 (write), p0 (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (copy), fFlagLuaAppEdpMediaGalleryFullScreen (copy), runService (copy), var19 (write)
-			local current = var17.current
+			-- upvalues: var9 (write), p1 (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (copy), fFlagLuaAppEdpMediaGalleryFullScreen (copy), runService (copy), var11 (write)
+			local current = var9.current
 			
-			if p0.shouldStartPlayback and (fFlagLuaAppEdpMediaGalleryAutoAdvance and p0.onVideoProgressChanged or fFlagLuaAppEdpMediaGalleryFullScreen and p0.showProgressBar) and current then
+			if p1.shouldStartPlayback and (fFlagLuaAppEdpMediaGalleryAutoAdvance and p1.onVideoProgressChanged or fFlagLuaAppEdpMediaGalleryFullScreen and p1.showProgressBar) and current then
 				local renderSteppedConnection = runService.RenderStepped:Connect(function()
-					-- upvalues: fFlagLuaAppEdpMediaGalleryAutoAdvance (copy), p0 (copy), current (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), var19 (copy)
-					if fFlagLuaAppEdpMediaGalleryAutoAdvance and p0.onVideoProgressChanged then
-						p0.onVideoProgressChanged(if current.TimeLength > 0 then current.TimePosition / current.TimeLength else 0)
+					-- upvalues: fFlagLuaAppEdpMediaGalleryAutoAdvance (copy), p1 (copy), current (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), var11 (copy)
+					if fFlagLuaAppEdpMediaGalleryAutoAdvance and p1.onVideoProgressChanged then
+						p1.onVideoProgressChanged(if current.TimeLength > 0 then current.TimePosition / current.TimeLength else 0)
 					end
-					if fFlagLuaAppEdpMediaGalleryFullScreen and p0.showProgressBar then
-						var19(if current.TimeLength > 0 then current.TimePosition / current.TimeLength else 0)
+					if fFlagLuaAppEdpMediaGalleryFullScreen and p1.showProgressBar then
+						var11(if current.TimeLength > 0 then current.TimePosition / current.TimeLength else 0)
 					end
 				end)
 				
 				return function()
-					-- upvalues: renderSteppedConnection (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (copy), p0 (copy), fFlagLuaAppEdpMediaGalleryFullScreen (copy), var19 (copy)
+					-- upvalues: renderSteppedConnection (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (copy), p1 (copy), fFlagLuaAppEdpMediaGalleryFullScreen (copy), var11 (copy)
 					renderSteppedConnection:Disconnect()
 					
-					if fFlagLuaAppEdpMediaGalleryAutoAdvance and p0.onVideoProgressChanged then
-						p0.onVideoProgressChanged(0)
+					if fFlagLuaAppEdpMediaGalleryAutoAdvance and p1.onVideoProgressChanged then
+						p1.onVideoProgressChanged(0)
 					end
-					if fFlagLuaAppEdpMediaGalleryFullScreen and p0.showProgressBar then
-						var19(0)
+					if fFlagLuaAppEdpMediaGalleryFullScreen and p1.showProgressBar then
+						var11(0)
 					end
 				end
 			end
 			return nil
 		end, {
-			p0.shouldStartPlayback,
-			if fFlagLuaAppEdpMediaGalleryAutoAdvance then p0.onVideoProgressChanged else nil,
-			if fFlagLuaAppEdpMediaGalleryFullScreen then p0.showProgressBar else nil
+			p1.shouldStartPlayback,
+			if fFlagLuaAppEdpMediaGalleryAutoAdvance then p1.onVideoProgressChanged else nil,
+			if fFlagLuaAppEdpMediaGalleryFullScreen then p1.showProgressBar else nil
 		})
 	end
 	if fFlagLuaAppEnableHomepageOneByTwoTile then
 		reactModule.useEffect(function()
-			-- upvalues: p0 (ref), var17 (write)
-			local onAspectRatioChanged = p0.onAspectRatioChanged
-			local current = var17 and var17.current
+			-- upvalues: p1 (ref), var9 (write)
+			local onAspectRatioChanged = p1.onAspectRatioChanged
+			local current = var9 and var9.current
 			
 			if not onAspectRatioChanged or not current then return end
-			local var34 = nil
-			local var35 = current:GetPropertyChangedSignal("Resolution"):Connect(function()
-				-- upvalues: current (ref), var34 (write), onAspectRatioChanged (ref)
+			local var14 = nil
+			local var15 = current:GetPropertyChangedSignal("Resolution"):Connect(function()
+				-- upvalues: current (ref), var14 (write), onAspectRatioChanged (ref)
 				local resolution = current.Resolution
 				
 				if resolution.X > 0 and resolution.Y > 0 then
-					local var37 = resolution.X / resolution.Y
+					local var16 = resolution.X / resolution.Y
 					
-					if var37 ~= var34 then
-						var34 = var37
-						onAspectRatioChanged(var37)
+					if var16 ~= var14 then
+						var14 = var16
+						onAspectRatioChanged(var16)
 					end
 				end
 			end)
 			local resolution = current.Resolution
 			
 			if resolution.X > 0 and resolution.Y > 0 then
-				local var36 = resolution.X / resolution.Y
+				local var16 = resolution.X / resolution.Y
 				
-				if var36 ~= var34 then
-					var34 = var36
-					onAspectRatioChanged(var36)
+				if var16 ~= var14 then
+					var14 = var16
+					onAspectRatioChanged(var16)
 				end
 			end
 			return function()
-				-- upvalues: var35 (ref)
-				var35:Disconnect()
+				-- upvalues: var15 (ref)
+				var15:Disconnect()
 			end
-		end, { p0.onAspectRatioChanged })
+		end, { p1.onAspectRatioChanged })
 	end
-	local var22 = nil
+	local var14 = nil
 	local _ = nil
-	local var23 = nil
-	local var24 = nil
-	local var25 = nil
-	local var26 = nil
-	local var27 = nil
+	local var15 = nil
+	local var16 = nil
+	local var17 = nil
+	local var18 = nil
+	local var19 = nil
 	
 	if fFlagLuaAppEdpMediaGalleryFullScreen or fFlagLuaAppEdpConsoleMediaGalleryVideo then
-		local var28, var29 = reactModule.useState(false)
-		var22 = var28
-		local var30 = var29
-		local var31 = reactModule.useCallback(function(p4)
-			-- upvalues: var17 (write), reportWarning (copy), loggingProtocolModule (copy), p0 (ref), videoLoggerModule (copy)
-			local current = var17.current
+		local var20, var21 = reactModule.useState(false)
+		var14 = var20
+		local var22 = var21
+		local var23 = reactModule.useCallback(function(p2)
+			-- upvalues: var9 (write), reportWarning (copy), loggingProtocolModule (copy), p1 (ref), videoLoggerModule (copy)
+			local current = var9.current
 			
 			if not current then
 				reportWarning(loggingProtocolModule.default, "EventLogging", "reportVideoAction requires a valid videoFrame")
@@ -159,18 +159,18 @@ return function(p0)
 			local sourceId = nil
 			local playbackSessionId = nil
 			
-			if p0.videoAnalyticsContext then
-				source = p0.videoAnalyticsContext.videoAnalyticsData.source
-				sourceId = p0.videoAnalyticsContext.videoAnalyticsData.sourceId
-				playbackSessionId = p0.videoAnalyticsContext.getPlaybackSessionId()
+			if p1.videoAnalyticsContext then
+				source = p1.videoAnalyticsContext.videoAnalyticsData.source
+				sourceId = p1.videoAnalyticsContext.videoAnalyticsData.sourceId
+				playbackSessionId = p1.videoAnalyticsContext.getPlaybackSessionId()
 				
 				if not source or not sourceId or not playbackSessionId then
 					reportWarning(loggingProtocolModule.default, "EventLogging", `reportVideoAction requires a valid {if not source then "source " else ""}{if not sourceId then "sourceId " else ""}{if not playbackSessionId then "playbackSessionId" else ""}`)
 				end
 			end
-			videoLoggerModule.reportVideoAction(p4, nil, {
+			videoLoggerModule.reportVideoAction(p2, nil, {
 				isVisible = true,
-				videoAssetId = p0.video,
+				videoAssetId = p1.video,
 				source = source or "",
 				sourceId = sourceId or "",
 				playbackSessionId = playbackSessionId or "",
@@ -178,31 +178,31 @@ return function(p0)
 				isAudible = current.Volume ~= 0,
 				volumeLevel = if current.Volume == 0 then 0 else 1
 			})
-		end, { p0.video, p0.videoAnalyticsContext })
-		var23 = reactModule.useCallback(function()
-			-- upvalues: var17 (write), var22 (write), var8 (copy)
-			local current = var17.current
+		end, { p1.video, p1.videoAnalyticsContext })
+		var15 = reactModule.useCallback(function()
+			-- upvalues: var9 (write), var14 (write), var1 (copy)
+			local current = var9.current
 			
 			if not current then return end
-			if var22 then
+			if var14 then
 				current:Pause()
 				
 				return
-			elseif math.abs(current.TimePosition - current.TimeLength) <= var8 then
+			elseif math.abs(current.TimePosition - current.TimeLength) <= var1 then
 				current.TimePosition = 0
 			end
 			current:Play()
-		end, { var22 })
-		var27 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
+		end, { var14 })
+		var19 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
 		reactModule.useEffect(function()
-			-- upvalues: p0 (ref), var23 (write), var15 (ref)
+			-- upvalues: p1 (ref), var15 (write), var7 (ref)
 			local t = {}
 			
-			if p0.toggleVideoPlaybackSignal then
-				table.insert(t, p0.toggleVideoPlaybackSignal:connect(var23))
+			if p1.toggleVideoPlaybackSignal then
+				table.insert(t, p1.toggleVideoPlaybackSignal:connect(var15))
 			end
-			if p0.toggleMuteSignal then
-				table.insert(t, p0.toggleMuteSignal:connect(var15))
+			if p1.toggleMuteSignal then
+				table.insert(t, p1.toggleMuteSignal:connect(var7))
 			end
 			return function()
 				-- upvalues: t (ref)
@@ -213,46 +213,46 @@ return function(p0)
 				end
 			end
 		end, {
-			p0.toggleVideoPlaybackSignal,
-			p0.toggleMuteSignal,
-			var23,
-			var15
+			p1.toggleVideoPlaybackSignal,
+			p1.toggleMuteSignal,
+			var15,
+			var7
 		})
-		var24 = reactModule.useCallback(function()
-			-- upvalues: p0 (ref), var23 (write)
-			if p0.onVideoPlayerActivated then
-				p0.onVideoPlayerActivated()
+		var16 = reactModule.useCallback(function()
+			-- upvalues: p1 (ref), var15 (write)
+			if p1.onVideoPlayerActivated then
+				p1.onVideoPlayerActivated()
 				
 				return
 			end
-			var23()
-		end, { p0.onVideoPlayerActivated, var23 })
-		var25 = reactModule.useMemo(function()
-			-- upvalues: p0 (ref), var22 (write), var23 (write)
-			return if p0.showPlayButton then { isVideoPlaying = var22, onPlayButtonActivated = var23 } else nil
-		end, { p0.showPlayButton, var22, var23 })
-		var26 = reactModule.useMemo(function()
-			-- upvalues: p0 (ref), var18 (write)
-			return if p0.showProgressBar then { progressBinding = var18 } else nil
-		end, { p0.showProgressBar, var18 })
+			var15()
+		end, { p1.onVideoPlayerActivated, var15 })
+		var17 = reactModule.useMemo(function()
+			-- upvalues: p1 (ref), var14 (write), var15 (write)
+			return if p1.showPlayButton then { isVideoPlaying = var14, onPlayButtonActivated = var15 } else nil
+		end, { p1.showPlayButton, var14, var15 })
+		var18 = reactModule.useMemo(function()
+			-- upvalues: p1 (ref), var10 (write)
+			return if p1.showProgressBar then { progressBinding = var10 } else nil
+		end, { p1.showProgressBar, var10 })
 		reactModule.useEffect(function()
-			-- upvalues: var17 (write), p0 (ref), var30 (write), var31 (ref), videoActions (copy)
-			local current = var17.current
+			-- upvalues: var9 (write), p1 (ref), var22 (write), var23 (ref), videoActions (copy)
+			local current = var9.current
 			
-			if p0.shouldStartPlayback and current then
+			if p1.shouldStartPlayback and current then
 				local playedConnection = current.Played:Connect(function()
-					-- upvalues: var30 (copy), var31 (copy), videoActions (copy)
-					var30(true)
-					var31(videoActions.play)
+					-- upvalues: var22 (copy), var23 (copy), videoActions (copy)
+					var22(true)
+					var23(videoActions.play)
 				end)
 				local pausedConnection = current.Paused:Connect(function()
-					-- upvalues: var30 (copy), var31 (copy), videoActions (copy)
-					var30(false)
-					var31(videoActions.pause)
+					-- upvalues: var22 (copy), var23 (copy), videoActions (copy)
+					var22(false)
+					var23(videoActions.pause)
 				end)
 				local endedConnection = current.Ended:Connect(function()
-					-- upvalues: var30 (copy)
-					var30(false)
+					-- upvalues: var22 (copy)
+					var22(false)
 				end)
 				
 				return function()
@@ -263,56 +263,56 @@ return function(p0)
 				end
 			end
 			return nil
-		end, { p0.shouldStartPlayback, var31 })
+		end, { p1.shouldStartPlayback, var23 })
 		reactModule.useEffect(function()
-			-- upvalues: p0 (ref), var11 (ref), var30 (write)
-			if not p0.shouldStartPlayback then
-				var11(false)
-				var30(false)
+			-- upvalues: p1 (ref), var3 (ref), var22 (write)
+			if not p1.shouldStartPlayback then
+				var3(false)
+				var22(false)
 			end
 			return nil
-		end, { p0.shouldStartPlayback })
+		end, { p1.shouldStartPlayback })
 	end
-	return reactModule.createElement(if fFlagLuaAppVideoTileDisableActivation and p0.disableActivation then "Frame" elseif fFlagLuaAppEdpMediaGalleryFullScreen then "TextButton" else "Frame", {
-		Size = p0.Size,
+	return reactModule.createElement(if fFlagLuaAppVideoTileDisableActivation and p1.disableActivation then "Frame" elseif fFlagLuaAppEdpMediaGalleryFullScreen then "TextButton" else "Frame", {
+		Size = p1.Size,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
-		ZIndex = p0.ZIndex,
-		Text = if fFlagLuaAppVideoTileDisableActivation and p0.disableActivation then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen then "" else nil,
-		[reactModule.Event.Activated] = if fFlagLuaAppVideoTileDisableActivation and p0.disableActivation then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen then var24 else nil,
+		ZIndex = p1.ZIndex,
+		Text = if fFlagLuaAppVideoTileDisableActivation and p1.disableActivation then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen then "" else nil,
+		[reactModule.Event.Activated] = if fFlagLuaAppVideoTileDisableActivation and p1.disableActivation then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen then var16 else nil,
 		Selectable = false
 	}, {
-		Corner = if p0.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p0.cornerRadius) }) else nil,
+		Corner = if p1.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil,
 		Video = reactModule.createElement(loadableVideoFrameModule, {
-			video = p0.video,
-			thumbnail = p0.thumbnail,
-			thumbnailComponentOverride = if fFlagLuaAppSduiVideoThumbnail then p0.thumbnailComponentOverride else nil,
-			shouldStartPlayback = p0.shouldStartPlayback,
-			muted = var12,
-			looped = p0.looped,
-			ScaleType = p0.ScaleType,
-			cornerRadius = p0.cornerRadius,
-			onVideoLoaded = var14,
-			onVideoLooped = p0.onVideoLooped,
-			onVideoEnded = if fFlagLuaAppEdpMediaGalleryAutoAdvance then p0.onVideoEnded else nil,
-			ref = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then var17 else nil
+			video = p1.video,
+			thumbnail = p1.thumbnail,
+			thumbnailComponentOverride = if fFlagLuaAppSduiVideoThumbnail then p1.thumbnailComponentOverride else nil,
+			shouldStartPlayback = p1.shouldStartPlayback,
+			muted = var4,
+			looped = p1.looped,
+			ScaleType = p1.ScaleType,
+			cornerRadius = p1.cornerRadius,
+			onVideoLoaded = var6,
+			onVideoLooped = p1.onVideoLooped,
+			onVideoEnded = if fFlagLuaAppEdpMediaGalleryAutoAdvance then p1.onVideoEnded else nil,
+			ref = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then var9 else nil
 		}),
-		PlayButton = if (fFlagLuaAppVideoTileHideCenterPlayButton or fFlagLuaAppEnableHomepageOneByTwoTile) and p0.hideCenterPlayButton then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen and var10 and not var22 then reactModule.createElement(roundIconButtonModule, {
+		PlayButton = if (fFlagLuaAppVideoTileHideCenterPlayButton or fFlagLuaAppEnableHomepageOneByTwoTile) and p1.hideCenterPlayButton then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen and var2 and not var14 then reactModule.createElement(roundIconButtonModule, {
 			icon = "play-large",
 			ZIndex = 2,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Selectable = if var27 then false else nil,
-			onActivated = var23
+			Selectable = if var19 then false else nil,
+			onActivated = var15
 		}) else nil,
 		BottomOverlay = if showMuteButton then reactModule.createElement(videoPlayerBottomOverlayModule, {
 			ZIndex = 10,
-			cornerRadius = p0.cornerRadius,
-			videoLoaded = var10,
-			muteButtonConfig = var16,
-			playButtonConfig = if fFlagLuaAppEdpMediaGalleryFullScreen then var25 else nil,
-			progressBarConfig = if fFlagLuaAppEdpMediaGalleryFullScreen then var26 else nil
+			cornerRadius = p1.cornerRadius,
+			videoLoaded = var2,
+			muteButtonConfig = var8,
+			playButtonConfig = if fFlagLuaAppEdpMediaGalleryFullScreen then var17 else nil,
+			progressBarConfig = if fFlagLuaAppEdpMediaGalleryFullScreen then var18 else nil
 		}) else nil
 	})
 end

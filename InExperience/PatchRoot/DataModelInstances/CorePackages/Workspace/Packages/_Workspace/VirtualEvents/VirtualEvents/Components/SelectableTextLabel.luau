@@ -3,7 +3,7 @@ local cryoModule = require(virtualEvents.Parent.Cryo)
 local reactModule = require(virtualEvents.Parent.React)
 local useStyle = require(virtualEvents.Parent.UIBlox).Core.Style.useStyle
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), cryoModule (ref), reactModule (ref)
 	local baseSize = useStyle().Font.BaseSize
 	
@@ -13,18 +13,18 @@ return function(p0)
 		TextEditable = false,
 		ClipsDescendants = true,
 		AutomaticSize = Enum.AutomaticSize.XY,
-		Font = p0.fontStyle.Font,
-		TextColor3 = p0.colorStyle.Color,
-		TextTransparency = p0.colorStyle.Transparency,
+		Font = p1.fontStyle.Font,
+		TextColor3 = p1.colorStyle.Color,
+		TextTransparency = p1.colorStyle.Transparency,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Top
-	}, p0, {
+	}, p1, {
 		fontStyle = cryoModule.None,
 		colorStyle = cryoModule.None
 	}), {
 		TextSizeConstraint = reactModule.createElement("UITextSizeConstraint", {
-			MaxTextSize = p0.fontStyle.RelativeSize * baseSize,
-			MinTextSize = p0.fontStyle.RelativeMinSize * baseSize
+			MaxTextSize = p1.fontStyle.RelativeSize * baseSize,
+			MinTextSize = p1.fontStyle.RelativeMinSize * baseSize
 		})
 	})
 end

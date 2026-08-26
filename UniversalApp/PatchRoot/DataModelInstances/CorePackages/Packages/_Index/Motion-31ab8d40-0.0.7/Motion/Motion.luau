@@ -2,9 +2,9 @@
 local presets = require(script.Parent.Utility.TimingConfigs).presets
 local default = presets[require(script.Parent.Enums.TransitionPreset).Default]
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: default (ref)
-	return p0.transition or { default = default }
+	return p1.transition or { default = default }
 end
 
 return {
@@ -45,23 +45,23 @@ return {
 		end
 		return t
 	end,
-	animate = function(p5, p6)
+	animate = function(p3, p4)
 		-- upvalues: default (ref)
-		if not p5 then return end
-		local transition = p5.transition or { default = default }
+		if not p3 then return end
+		local transition = p3.transition or { default = default }
 		
-		for i, v in p6 do
-			local var4 = transition[i]
-			local var5 = if var4 ~= nil then transition.default else var4
+		for i, v in p4 do
+			local var1 = transition[i]
+			local var2 = if var1 ~= nil then transition.default else var1
 			
-			if var5.delay and var5.delay > 0 then
-				local cloned = table.clone(var5)
-				task.delay(var5.delay, function()
-					-- upvalues: v (ref), p5 (ref), i (ref), cloned (ref)
-					v(p5[i], cloned)
+			if var2.delay and var2.delay > 0 then
+				local cloned = table.clone(var2)
+				task.delay(var2.delay, function()
+					-- upvalues: v (ref), p3 (ref), i (ref), cloned (ref)
+					v(p3[i], cloned)
 				end)
 			else
-				v(p5[i], var5)
+				v(p3[i], var2)
 			end
 		end
 	end

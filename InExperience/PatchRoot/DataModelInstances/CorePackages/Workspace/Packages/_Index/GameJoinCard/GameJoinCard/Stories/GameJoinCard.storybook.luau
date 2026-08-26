@@ -27,10 +27,10 @@ return {
 	storyRoot = gameJoinCard.Stories,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapDefinition = function(p0)
+	mapDefinition = function(p1)
 		-- upvalues: cryoModule (ref), t (ref)
-		return cryoModule.Dictionary.join(p0, {
-			controls = cryoModule.Dictionary.join(t, p0.controls or {})
+		return cryoModule.Dictionary.join(p1, {
+			controls = cryoModule.Dictionary.join(t, p1.controls or {})
 		})
 	end,
 	mapStory = function(p1)

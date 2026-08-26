@@ -10,20 +10,20 @@ local getFeaturesModule = require(script.Features.GetFeatures)
 local _ = require(script.Enums.PlatformEnum)
 
 return {
-	mountFtuxMenu = function(p0)
+	mountFtuxMenu = function(p1)
 		-- upvalues: roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), renderWithCoreScriptsStyleProviderModule (ref), FTUXPanelModule (ref), getFeaturesModule (ref), coreGuiService (ref)
 		game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
 		game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)
-		local var7 = roactModule.createElement(localizationProvider, {
+		local var1 = roactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {
 			FTUXMenu = roactModule.createElement("ScreenGui", {}, {
 				ThemeProvider = renderWithCoreScriptsStyleProviderModule({
-					FtuxPanel = roactModule.createElement(FTUXPanelModule, { platform = p0 }, {})
+					FtuxPanel = roactModule.createElement(FTUXPanelModule, { platform = p1 }, {})
 				})
 			})
 		})
-		getFeaturesModule(p0)
-		roactModule.mount(var7, coreGuiService, "FTUXMenu")
+		getFeaturesModule(p1)
+		roactModule.mount(var1, coreGuiService, "FTUXMenu")
 	end
 }

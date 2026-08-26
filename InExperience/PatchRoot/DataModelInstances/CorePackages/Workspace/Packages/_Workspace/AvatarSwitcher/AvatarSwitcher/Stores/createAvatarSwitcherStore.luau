@@ -26,40 +26,40 @@ local text_1 = url.AVATAR_URL .. "v2/avatar/experience/get-experience-avatar-sup
 
 return function()
 	-- upvalues: createSignal (ref), createComputed (ref), avatarEditorService (ref), fFlagAvatarSwitcherAccurateAvatarWarning (ref), cryoModule (ref), fFlagAvatarSwitcherUseAvatarInventoryEndpoint (ref), fFlagAXInventoryIncludeUnavailableItems (ref), text (ref), url (ref), httpRbxApiService (ref), httpService (ref), fFlagAvatarSwitcherCounters (ref), sendAXCounterV2 (ref), constantsModule (ref), inventoryItemAvailability (ref), fFlagAvatarSwitcherExpiredItemsWarning (ref), avatarSwitcherPcallApplyOutfit (ref), applyOutfitModule (ref), text_1 (ref), experienceAvatarSupportTypeModule (ref), playersService (ref)
-	local var13, var14 = createSignal({})
-	local var15, var16 = createSignal({})
-	local var17, var18 = createSignal(false)
-	local var19, var20 = createSignal(nil)
-	local var21, var22 = createSignal(false)
-	local var23, var24 = createSignal(false)
-	local var25, var26 = createSignal(nil)
-	local var27, var28 = createSignal(nil)
-	local var29, var30 = createSignal(nil)
-	local var31 = createComputed(function(p0)
-		-- upvalues: var17 (ref), var13 (ref)
-		return var17(p0) and #var13(p0) == 0
+	local var1, var2 = createSignal({})
+	local var3, var4 = createSignal({})
+	local var5, var6 = createSignal(false)
+	local var7, var8 = createSignal(nil)
+	local var9, var10 = createSignal(false)
+	local var11, var12 = createSignal(false)
+	local var13, var14 = createSignal(nil)
+	local var15, var16 = createSignal(nil)
+	local var17, var18 = createSignal(nil)
+	local var19 = createComputed(function(p1)
+		-- upvalues: var5 (ref), var1 (ref)
+		return var5(p1) and #var1(p1) == 0
 	end)
-	local var32 = createComputed(function(p1)
-		-- upvalues: var19 (ref), var15 (ref)
-		local var44 = var19(p1)
+	local var20 = createComputed(function(p1)
+		-- upvalues: var7 (ref), var3 (ref)
+		local var21 = var7(p1)
 		
-		return if var44 == nil then nil else var15(p1)[var44]
+		return if var21 == nil then nil else var3(p1)[var21]
 	end)
 	
-	local function toggleRespawnPrompt(p2)
-		-- upvalues: var22 (ref)
-		var22(p2)
+	local function toggleRespawnPrompt(p1)
+		-- upvalues: var10 (ref)
+		var10(p1)
 	end
 	
-	local function fetchOutfitDetails(p3)
-		-- upvalues: avatarEditorService (copy), fFlagAvatarSwitcherAccurateAvatarWarning (copy), var16 (ref), cryoModule (copy)
+	local function fetchOutfitDetails(p1)
+		-- upvalues: avatarEditorService (copy), fFlagAvatarSwitcherAccurateAvatarWarning (copy), var4 (ref), cryoModule (copy)
 		local ok, status = pcall(function()
-			-- upvalues: avatarEditorService (copy), p3 (ref)
-			return avatarEditorService:GetOutfitDetailsAsync(p3)
+			-- upvalues: avatarEditorService (copy), p1 (ref)
+			return avatarEditorService:GetOutfitDetailsAsync(p1)
 		end)
 		
 		if not ok then
-			warn(`Avatar Switcher: failed to fetch outfit details for outfitId {p3}.`, status)
+			warn(`Avatar Switcher: failed to fetch outfit details for outfitId {p1}.`, status)
 			
 			return
 		end
@@ -80,39 +80,39 @@ return function()
 			rigType = if status.PlayerAvatarType == "R6" then Enum.HumanoidRigType.R6 else Enum.HumanoidRigType.R15,
 			assetIds = if fFlagAvatarSwitcherAccurateAvatarWarning then t else nil
 		}
-		var16(function(p4)
-			-- upvalues: cryoModule (copy), p3 (ref), t_1 (ref)
-			return cryoModule.Dictionary.join(p4, { [p3] = t_1 })
+		var4(function(p2)
+			-- upvalues: cryoModule (copy), p1 (ref), t_1 (ref)
+			return cryoModule.Dictionary.join(p2, { [p1] = t_1 })
 		end)
 	end
 	
-	local function selectOutfit(p5)
-		-- upvalues: var20 (ref), fFlagAvatarSwitcherUseAvatarInventoryEndpoint (copy), var32 (ref), fetchOutfitDetails (ref)
-		var20(p5)
+	local function selectOutfit(p2)
+		-- upvalues: var8 (ref), fFlagAvatarSwitcherUseAvatarInventoryEndpoint (copy), var20 (ref), fetchOutfitDetails (ref)
+		var8(p2)
 		
-		if not fFlagAvatarSwitcherUseAvatarInventoryEndpoint and p5 ~= nil and var32(false) == nil then
-			fetchOutfitDetails(p5)
+		if not fFlagAvatarSwitcherUseAvatarInventoryEndpoint and p2 ~= nil and var20(false) == nil then
+			fetchOutfitDetails(p2)
 		end
 	end
 	
-	local var36 = nil
-	local var37 = false
+	local var21 = nil
+	local var22 = false
 	
 	local function fetchNextOutfitsPage_DEPRECATED()
-		-- upvalues: var37 (write), var17 (ref), var36 (write), var18 (ref), avatarEditorService (copy), var14 (ref)
-		if var37 or var17(false) then return end
-		var37 = true
+		-- upvalues: var22 (write), var5 (ref), var21 (write), var6 (ref), avatarEditorService (copy), var2 (ref)
+		if var22 or var5(false) then return end
+		var22 = true
 		
-		if var36 then
-			if var36.IsFinished then return end
+		if var21 then
+			if var21.IsFinished then return end
 			local ok, status = pcall(function()
-				-- upvalues: var36 (copy)
-				var36:AdvanceToNextPageAsync()
+				-- upvalues: var21 (copy)
+				var21:AdvanceToNextPageAsync()
 			end)
 			
 			if not ok then
 				warn("Avatar Switcher: failed to fetch next page of user outfits.", status)
-				var18(true)
+				var6(true)
 			end
 		else
 			local ok, status = pcall(function()
@@ -121,17 +121,17 @@ return function()
 			end)
 			
 			if ok then
-				var36 = status
+				var21 = status
 			else
 				warn("Avatar Switcher: failed to fetch first page of user outfits.", status)
-				var18(true)
+				var6(true)
 			end
 		end
-		if var36 then
-			local currentPage = var36:GetCurrentPage()
-			var14(function(p6)
+		if var21 then
+			local currentPage = var21:GetCurrentPage()
+			var2(function(p2)
 				-- upvalues: currentPage (ref)
-				local cloned = table.clone(p6)
+				local cloned = table.clone(p2)
 				
 				for i, v in currentPage do
 					table.insert(cloned, { id = v.Id, name = v.Name })
@@ -139,21 +139,21 @@ return function()
 				return cloned
 			end)
 			
-			if var36.IsFinished then
-				var18(true)
+			if var21.IsFinished then
+				var6(true)
 			end
 		end
-		var37 = false
+		var22 = false
 	end
 	
-	local var39 = nil
+	local var23 = nil
 	
 	local function fetchNextOutfitsPage()
-		-- upvalues: var37 (write), var17 (ref), var39 (write), fFlagAXInventoryIncludeUnavailableItems (copy), text (copy), url (copy), httpRbxApiService (copy), httpService (copy), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), var18 (ref), var27 (ref), inventoryItemAvailability (copy), fFlagAvatarSwitcherExpiredItemsWarning (copy), fFlagAvatarSwitcherAccurateAvatarWarning (copy), var14 (ref), cryoModule (copy), var16 (ref)
-		if var37 or var17(false) then return end
-		var37 = true
+		-- upvalues: var22 (write), var5 (ref), var23 (write), fFlagAXInventoryIncludeUnavailableItems (copy), text (copy), url (copy), httpRbxApiService (copy), httpService (copy), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), var6 (ref), var15 (ref), inventoryItemAvailability (copy), fFlagAvatarSwitcherExpiredItemsWarning (copy), fFlagAvatarSwitcherAccurateAvatarWarning (copy), var2 (ref), cryoModule (copy), var4 (ref)
+		if var22 or var5(false) then return end
+		var22 = true
 		local text_1 = text .. url:makeQueryString({
-			pageToken = var39,
+			pageToken = var23,
 			pageLimit = 25,
 			sortOption = "recentAdded",
 			["itemCategories[0].itemType"] = "outfit",
@@ -167,20 +167,20 @@ return function()
 		
 		if ok then
 			if status.nextPageToken then
-				var39 = status.nextPageToken
+				var23 = status.nextPageToken
 			else
-				var18(true)
+				var6(true)
 			end
 			local avatarInventoryItems = status.avatarInventoryItems or {}
 			local t = {}
 			local t_1 = {}
-			local var53 = var27(false)
+			local var24 = var15(false)
 			
 			for i, v in avatarInventoryItems do
 				if v.availabilityStatus ~= inventoryItemAvailability.PartiallyAvailableWithUnavailableSubitems then
-					local var54 = if v.outfitDetail and v.outfitDetail.playerAvatarType == "R6" then Enum.HumanoidRigType.R6 else Enum.HumanoidRigType.R15
-					local var55 = var53 == Enum.HumanoidRigType.R6 and var54 == Enum.HumanoidRigType.R15
-					local var56 = if fFlagAvatarSwitcherExpiredItemsWarning then v.availabilityStatus == inventoryItemAvailability.PartiallyAvailableWithExpiredSubitems else nil
+					local var25 = if v.outfitDetail and v.outfitDetail.playerAvatarType == "R6" then Enum.HumanoidRigType.R6 else Enum.HumanoidRigType.R15
+					local var26 = var24 == Enum.HumanoidRigType.R6 and var25 == Enum.HumanoidRigType.R15
+					local var27 = if fFlagAvatarSwitcherExpiredItemsWarning then v.availabilityStatus == inventoryItemAvailability.PartiallyAvailableWithExpiredSubitems else nil
 					local t_2 = nil
 					
 					if fFlagAvatarSwitcherAccurateAvatarWarning then
@@ -195,26 +195,26 @@ return function()
 					table.insert(t, {
 						id = v.itemId,
 						name = v.itemName,
-						hasWarning = if fFlagAvatarSwitcherExpiredItemsWarning then var55 or var56 else var55
+						hasWarning = if fFlagAvatarSwitcherExpiredItemsWarning then var26 or var27 else var26
 					})
 					t_1[v.itemId] = {
 						id = v.itemId,
 						name = v.itemName,
-						rigType = var54,
+						rigType = var25,
 						availabilityStatus = if fFlagAvatarSwitcherExpiredItemsWarning then v.availabilityStatus else nil,
 						assetIds = if fFlagAvatarSwitcherAccurateAvatarWarning then t_2 else nil
 					}
 				end
 			end
-			var14(function(p7)
+			var2(function(p2)
 				-- upvalues: cryoModule (copy), t (ref)
-				return cryoModule.List.join(p7, t)
+				return cryoModule.List.join(p2, t)
 			end)
-			var16(function(p8)
+			var4(function(p2)
 				-- upvalues: cryoModule (copy), t_1 (ref)
-				return cryoModule.Dictionary.join(p8, t_1)
+				return cryoModule.Dictionary.join(p2, t_1)
 			end)
-			var37 = false
+			var22 = false
 			
 			return
 		else
@@ -223,39 +223,39 @@ return function()
 			if fFlagAvatarSwitcherCounters then
 				sendAXCounterV2(constantsModule.Counters.OutfitFetchFailed)
 			end
-			var18(true)
-			var37 = false
+			var6(true)
+			var22 = false
 		end
 	end
 	
 	local function switchAvatar()
-		-- upvalues: var32 (ref), var24 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), avatarSwitcherPcallApplyOutfit (copy), applyOutfitModule (copy), var30 (ref)
-		local var58 = var32(false)
+		-- upvalues: var20 (ref), var12 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), avatarSwitcherPcallApplyOutfit (copy), applyOutfitModule (copy), var18 (ref)
+		local var28 = var20(false)
 		
-		if not var58 then return end
-		var24(true)
+		if not var28 then return end
+		var12(true)
 		
 		if fFlagAvatarSwitcherCounters then
 			sendAXCounterV2(constantsModule.Counters.SwitchAvatar)
 		end
 		if avatarSwitcherPcallApplyOutfit then
 			local ok, status = pcall(function()
-				-- upvalues: applyOutfitModule (copy), var58 (ref)
-				applyOutfitModule(var58.id, var58.rigType)
+				-- upvalues: applyOutfitModule (copy), var28 (ref)
+				applyOutfitModule(var28.id, var28.rigType)
 			end)
 			
 			if not ok then
 				sendAXCounterV2(constantsModule.Counters.ApplyOutfitFailed, { errorMessage = tostring(status) })
 			end
 		else
-			applyOutfitModule(var58.id, var58.rigType)
+			applyOutfitModule(var28.id, var28.rigType)
 		end
-		var30(var58.name)
-		var24(false)
+		var18(var28.name)
+		var12(false)
 	end
 	
 	local function fetchExperienceAvatarSupportType()
-		-- upvalues: httpRbxApiService (copy), text_1 (copy), httpService (copy), experienceAvatarSupportTypeModule (copy), var26 (ref), var28 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy)
+		-- upvalues: httpRbxApiService (copy), text_1 (copy), httpService (copy), experienceAvatarSupportTypeModule (copy), var14 (ref), var16 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy)
 		local ok, status = pcall(function()
 			-- upvalues: httpRbxApiService (copy), text_1 (copy), httpService (copy)
 			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(text_1))
@@ -263,9 +263,9 @@ return function()
 		
 		if ok then
 			local experienceAvatarSupportType = status.experienceAvatarSupportType
-			var26(if experienceAvatarSupportType == 0 then experienceAvatarSupportTypeModule.NoSupport elseif experienceAvatarSupportType == 2 then experienceAvatarSupportTypeModule.FullSupport else experienceAvatarSupportTypeModule.UnknownSupport)
+			var14(if experienceAvatarSupportType == 0 then experienceAvatarSupportTypeModule.NoSupport elseif experienceAvatarSupportType == 2 then experienceAvatarSupportTypeModule.FullSupport else experienceAvatarSupportTypeModule.UnknownSupport)
 			local experienceAvatarType = status.experienceAvatarType
-			var28(if experienceAvatarType == 1 then Enum.HumanoidRigType.R6 elseif experienceAvatarType == 3 then Enum.HumanoidRigType.R15 else nil)
+			var16(if experienceAvatarType == 1 then Enum.HumanoidRigType.R6 elseif experienceAvatarType == 3 then Enum.HumanoidRigType.R15 else nil)
 			
 			if fFlagAvatarSwitcherCounters then
 				sendAXCounterV2(constantsModule.Counters.AvatarSupportTypeFetched, {
@@ -276,8 +276,8 @@ return function()
 				return
 			end
 		else
-			var26(experienceAvatarSupportTypeModule.UnknownSupport)
-			var28(nil)
+			var14(experienceAvatarSupportTypeModule.UnknownSupport)
+			var16(nil)
 			
 			if fFlagAvatarSwitcherCounters then
 				sendAXCounterV2(constantsModule.Counters.AvatarSupportTypeFetchFailed)
@@ -286,27 +286,27 @@ return function()
 	end
 	
 	local function clearPendingAvatarName()
-		-- upvalues: var30 (ref)
-		var30(nil)
+		-- upvalues: var18 (ref)
+		var18(nil)
 	end
 	
 	if playersService.LocalPlayer then
 		playersService.LocalPlayer.CharacterAdded:Connect(function()
-			-- upvalues: var30 (ref)
-			var30(nil)
+			-- upvalues: var18 (ref)
+			var18(nil)
 		end)
 	end
 	return {
-		getOutfits = var13,
-		getLastPageReached = var17,
-		getSelectedOutfitId = var19,
-		getSelectedOutfitDetails = var32,
-		getRespawnPromptShown = var21,
-		getIsSwitching = var23,
-		getIsEmpty = var31,
-		getExperienceAvatarSupportType = var25,
-		getExperienceAvatarType = var27,
-		getPendingAvatarName = var29,
+		getOutfits = var1,
+		getLastPageReached = var5,
+		getSelectedOutfitId = var7,
+		getSelectedOutfitDetails = var20,
+		getRespawnPromptShown = var9,
+		getIsSwitching = var11,
+		getIsEmpty = var19,
+		getExperienceAvatarSupportType = var13,
+		getExperienceAvatarType = var15,
+		getPendingAvatarName = var17,
 		toggleRespawnPrompt = toggleRespawnPrompt,
 		selectOutfit = selectOutfit,
 		fetchNextOutfitsPage = if fFlagAvatarSwitcherUseAvatarInventoryEndpoint then fetchNextOutfitsPage else fetchNextOutfitsPage_DEPRECATED,

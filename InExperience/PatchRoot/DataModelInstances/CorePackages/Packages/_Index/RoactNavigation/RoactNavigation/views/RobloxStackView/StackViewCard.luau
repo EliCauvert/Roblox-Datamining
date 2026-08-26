@@ -3,12 +3,12 @@ local reactModule = require(parent.Parent.React)
 local invariantModule = require(parent.utils.invariant)
 local stackViewCard = reactModule.Component:extend("StackViewCard")
 
-function stackViewCard.init(p0)
+function stackViewCard.init(p1)
 	-- upvalues: reactModule (ref)
-	local index = p0.props.navigation.state.index
-	p0._isMounted = false
-	p0._positionLastValue = index
-	p0._ref = reactModule.createRef()
+	local index = p1.props.navigation.state.index
+	p1._isMounted = false
+	p1._positionLastValue = index
+	p1._ref = reactModule.createRef()
 end
 
 function stackViewCard.render(p1)
@@ -32,47 +32,47 @@ function stackViewCard.render(p1)
 	}, { Content = renderScene(scene) })
 end
 
-function stackViewCard.didMount(p2)
-	p2._isMounted = true
-	p2._positionDisconnector = p2.props.position:onStep(function(...)
-		-- upvalues: p2 (ref)
-		p2:_onPositionStep(...)
+function stackViewCard.didMount(p1)
+	p1._isMounted = true
+	p1._positionDisconnector = p1.props.position:onStep(function(...)
+		-- upvalues: p1 (ref)
+		p1:_onPositionStep(...)
 	end)
 end
 
-function stackViewCard.willUnmount(p3)
-	p3._isMounted = false
+function stackViewCard.willUnmount(p1)
+	p1._isMounted = false
 	
-	if p3._positionDisconnector then
-		p3._positionDisconnector()
-		p3._positionDisconnector = nil
+	if p1._positionDisconnector then
+		p1._positionDisconnector()
+		p1._positionDisconnector = nil
 	end
 end
 
-function stackViewCard.didUpdate(p4, p5)
-	local position = p4.props.position
-	local positionStep = p4.props.positionStep
+function stackViewCard.didUpdate(p1, p2)
+	local position = p1.props.position
+	local positionStep = p1.props.positionStep
 	
-	if position ~= p5.position then
-		p4._positionDisconnector()
-		p4._positionDisconnector = position:onStep(function(...)
-			-- upvalues: p4 (ref)
-			p4:_onPositionStep(...)
+	if position ~= p2.position then
+		p1._positionDisconnector()
+		p1._positionDisconnector = position:onStep(function(...)
+			-- upvalues: p1 (ref)
+			p1:_onPositionStep(...)
 		end)
 	end
-	if positionStep ~= p5.positionStep then
-		p4:_onPositionStep(p4._positionLastValue)
+	if positionStep ~= p2.positionStep then
+		p1:_onPositionStep(p1._positionLastValue)
 	end
 end
 
-function stackViewCard._onPositionStep(p6, p7)
-	if not p6._isMounted then return end
-	local positionStep = p6.props.positionStep
+function stackViewCard._onPositionStep(p1, p2)
+	if not p1._isMounted then return end
+	local positionStep = p1.props.positionStep
 	
 	if positionStep then
-		positionStep(p6._ref, p7)
+		positionStep(p1._ref, p2)
 	end
-	p6._positionLastValue = p7
+	p1._positionLastValue = p2
 end
 
 return stackViewCard

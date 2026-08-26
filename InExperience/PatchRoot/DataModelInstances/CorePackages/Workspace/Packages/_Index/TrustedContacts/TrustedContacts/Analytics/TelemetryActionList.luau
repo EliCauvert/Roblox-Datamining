@@ -40,8 +40,8 @@ return {
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					modalVariant = function(p0)
-						return p0
+					modalVariant = function(p1)
+						return p1
 					end,
 					source = function(p1)
 						return p1
@@ -51,11 +51,11 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p2)
-						return p2
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p3)
-						return p3
+					source = function(p1)
+						return p1
 					end
 				}
 			}
@@ -127,22 +127,22 @@ return {
 					btn = buttonNamesModule.Close
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p4)
-						return p4
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p5)
-						return p5
+					source = function(p1)
+						return p1
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p6)
-						return p6
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p7)
-						return p7
+					source = function(p1)
+						return p1
 					end
 				}
 			}
@@ -235,22 +235,22 @@ return {
 					btn = buttonNamesModule.Cancel
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p8)
-						return p8
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p9)
-						return p9
+					source = function(p1)
+						return p1
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p10)
-						return p10
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p11)
-						return p11
+					source = function(p1)
+						return p1
 					end
 				}
 			}
@@ -271,22 +271,22 @@ return {
 					btn = buttonNamesModule.AddViaLink
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p12)
-						return p12
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p13)
-						return p13
+					source = function(p1)
+						return p1
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p14)
-						return p14
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p15)
-						return p15
+					source = function(p1)
+						return p1
 					end
 				}
 			}
@@ -307,22 +307,22 @@ return {
 					btn = buttonNamesModule.OpenVPCPrologue
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p16)
-						return p16
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p17)
-						return p17
+					source = function(p1)
+						return p1
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p18)
-						return p18
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p19)
-						return p19
+					source = function(p1)
+						return p1
 					end
 				}
 			}
@@ -430,22 +430,22 @@ return {
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					modalVariant = function(p20)
-						return p20
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p21)
-						return p21
+					source = function(p1)
+						return p1
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p22)
-						return p22
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p23)
-						return p23
+					source = function(p1)
+						return p1
 					end
 				}
 			}
@@ -463,28 +463,28 @@ return {
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					modalVariant = function(p24)
-						return p24
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p25)
-						return p25
+					source = function(p1)
+						return p1
 					end,
-					tfActionsEnum = function(p26)
-						return p26
+					tfActionsEnum = function(p1)
+						return p1
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p27)
-						return p27
+					modalVariant = function(p1)
+						return p1
 					end,
-					source = function(p28)
-						return p28
+					source = function(p1)
+						return p1
 					end,
-					tfActionsEnum = function(p29)
-						return p29
+					tfActionsEnum = function(p1)
+						return p1
 					end
 				}
 			}
@@ -502,22 +502,22 @@ return {
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					source = function(p30)
-						return p30
+					source = function(p1)
+						return p1
 					end,
-					tfActionsEnum = function(p31)
-						return p31
+					tfActionsEnum = function(p1)
+						return p1
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					source = function(p32)
-						return p32
+					source = function(p1)
+						return p1
 					end,
-					tfActionsEnum = function(p33)
-						return p33
+					tfActionsEnum = function(p1)
+						return p1
 					end
 				}
 			}
@@ -535,22 +535,22 @@ return {
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					source = function(p34)
-						return p34
+					source = function(p1)
+						return p1
 					end,
-					tfActionsEnum = function(p35)
-						return p35
+					tfActionsEnum = function(p1)
+						return p1
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					source = function(p36)
-						return p36
+					source = function(p1)
+						return p1
 					end,
-					tfActionsEnum = function(p37)
-						return p37
+					tfActionsEnum = function(p1)
+						return p1
 					end
 				}
 			}
@@ -568,22 +568,22 @@ return {
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					source = function(p38)
-						return p38
+					source = function(p1)
+						return p1
 					end,
-					tfActionsEnum = function(p39)
-						return p39
+					tfActionsEnum = function(p1)
+						return p1
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					source = function(p40)
-						return p40
+					source = function(p1)
+						return p1
 					end,
-					tfActionsEnum = function(p41)
-						return p41
+					tfActionsEnum = function(p1)
+						return p1
 					end
 				}
 			}

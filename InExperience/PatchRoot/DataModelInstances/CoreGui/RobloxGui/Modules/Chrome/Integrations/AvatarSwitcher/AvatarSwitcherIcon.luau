@@ -10,22 +10,22 @@ local _ = require(chrome.ChromeShared.Service.ChromeUtils)
 local useMappedSignal = require(corePackagesService.Workspace.Packages.Chrome).Hooks.useMappedSignal
 local subMenuContextModule = require(chrome.ChromeShared.Unibar.SubMenuContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useMappedSignal (ref), reactModule (ref), subMenuContextModule (ref), useTokens (ref), foundationModule (ref), iconName (ref), iconSize (ref), iconVariant (ref)
-	local var5 = useMappedSignal(p0.isActive)
-	local var6 = reactModule.useContext(subMenuContextModule)
-	local var7 = useTokens()
+	local var1 = useMappedSignal(p1.isActive)
+	local var2 = reactModule.useContext(subMenuContextModule)
+	local var3 = useTokens()
 	
 	return reactModule.createElement(foundationModule.Icon, {
 		name = iconName.CirclePerson,
 		size = iconSize.Large,
-		variant = if var5 then iconVariant.Filled else iconVariant.Regular,
-		style = if var6 then var6:map(function(p1)
-			-- upvalues: var7 (ref)
+		variant = if var1 then iconVariant.Filled else iconVariant.Regular,
+		style = if var2 then var2:map(function(p2)
+			-- upvalues: var3 (ref)
 			return {
-				Color3 = var7.Color.Content.Default.Color3,
-				Transparency = math.lerp(1, var7.Color.Content.Default.Transparency, p1)
+				Color3 = var3.Color.Content.Default.Color3,
+				Transparency = math.lerp(1, var3.Color.Content.Default.Transparency, p2)
 			}
-		end) else var7.Color.Content.Default
+		end) else var3.Color.Content.Default
 	})
 end

@@ -4,7 +4,7 @@ local _ = require(buildExperience.Chat.chatTypes)
 local chatSheetViewModule = require(script.Parent.ChatSheetView)
 local useChatSheetViewModelModule = require(script.Parent.useChatSheetViewModel)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useChatSheetViewModelModule (ref), reactModule (ref), chatSheetViewModule (ref)
-	return reactModule.createElement(chatSheetViewModule, useChatSheetViewModelModule(p0))
+	return reactModule.createElement(chatSheetViewModule, useChatSheetViewModelModule(p1))
 end

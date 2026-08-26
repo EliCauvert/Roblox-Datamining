@@ -15,26 +15,26 @@ local t_1 = {
 	topLeft = 225
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyleModule (ref), reactOtterModule (ref), reactModule (ref), t (ref), t_1 (ref)
 	local theme = useStyleModule().Theme
-	local var5, var6 = reactOtterModule.useAnimatedBinding(if p0.showGradient then 0 else 1)
+	local var1, var2 = reactOtterModule.useAnimatedBinding(if p1.showGradient then 0 else 1)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var6 (ref), reactOtterModule (copy), t (copy)
-		if p0.showGradient == false then
-			var6(reactOtterModule.spring(1, t))
+		-- upvalues: p1 (ref), var2 (ref), reactOtterModule (copy), t (copy)
+		if p1.showGradient == false then
+			var2(reactOtterModule.spring(1, t))
 			
 			return
 		end
-		var6(reactOtterModule.spring(0, t))
-	end, { p0.showGradient })
+		var2(reactOtterModule.spring(0, t))
+	end, { p1.showGradient })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = p0.ZIndex
+		ZIndex = p1.ZIndex
 	}, {
 		Overlay = reactModule.createElement("Frame", {
 			ZIndex = 1,
@@ -45,10 +45,10 @@ return function(p0)
 		Gradient = reactModule.createElement("Frame", {
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundTransparency = var5
+			BackgroundTransparency = var1
 		}, {
 			UIGradient = reactModule.createElement("UIGradient", {
-				Rotation = t_1[p0.gradientDirection],
+				Rotation = t_1[p1.gradientDirection],
 				Color = ColorSequence.new({
 					ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),
 					ColorSequenceKeypoint.new(1, Color3.new(0, 0, 0))

@@ -5,19 +5,19 @@ local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbi
 local userProfileStoreModule = require(userProfiles.Stores.UserProfileStore)
 local createComputed = signalsModule.createComputed
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), createComputed (ref), userProfileStoreModule (ref)
-	if fFlagEnableBlackbirdCheck and p0 ~= nil and p0 ~= "" then
-		local var3 = userProfileStoreModule.get().fetchNamesByUserIds({ p0 })
+	if fFlagEnableBlackbirdCheck and p1 ~= nil and p1 ~= "" then
+		local var1 = userProfileStoreModule.get().fetchNamesByUserIds({ p1 })
 		
-		return createComputed(function(p1)
-			-- upvalues: var3 (ref)
-			local ok, status = pcall(var3, p1)
+		return createComputed(function(p2)
+			-- upvalues: var1 (ref)
+			local ok, status = pcall(var1, p2)
 			
 			if ok and status.status == "success" and #status.data > 0 then
-				local var4 = status.data[1]
+				local var2 = status.data[1]
 				
-				return var4.getHasRobloxSubscription ~= nil and var4.getHasRobloxSubscription(p1)
+				return var2.getHasRobloxSubscription ~= nil and var2.getHasRobloxSubscription(p2)
 			end
 		end)
 	end

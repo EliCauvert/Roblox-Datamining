@@ -7,42 +7,42 @@ local buildPlacementPlanModule = require(viewRecycler.Core.PinnedItems.buildPlac
 local stickyIndexResolverModule = require(viewRecycler.Core.PinnedItems.StickyIndexResolver)
 local frozen = table.freeze({ "key", "value", "itemViewType" })
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: recordModule (ref), frozen (ref)
-	return if p0 ~= p1 then p0 ~= nil and (p1 ~= nil and recordModule.containsEqual(p0, p1, frozen)) else true
+	return if p1 ~= p2 then p1 ~= nil and (p2 ~= nil and recordModule.containsEqual(p1, p2, frozen)) else true
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: stickyIndexResolverModule (ref), recordModule (ref), frozen (ref), buildPlacementPlanModule (ref), placementTypesModule (ref)
-	local var6 = p3
-	local var7 = stickyIndexResolverModule(p2, var6.isItemStickyHeader)
-	local t = { revision = 1, length = 0, item = var6.pinnedStartItem }
-	local t_1 = { revision = 1, length = 0, item = var6.pinnedEndItem }
+	local var1 = p2
+	local var2 = stickyIndexResolverModule(p1, var1.isItemStickyHeader)
+	local t = { revision = 1, length = 0, item = var1.pinnedStartItem }
+	local t_1 = { revision = 1, length = 0, item = var1.pinnedEndItem }
 	
-	local function _(value, p4)
+	local function _(value, p3)
 		-- upvalues: recordModule (copy), frozen (copy)
 		local item = value.item
 		
-		if if item ~= p4 then item ~= nil and (p4 ~= nil and recordModule.containsEqual(item, p4, frozen)) else true then
+		if if item ~= p3 then item ~= nil and (p3 ~= nil and recordModule.containsEqual(item, p3, frozen)) else true then
 			return false
 		end
-		value.item = p4
+		value.item = p3
 		value.revision += 1
 		value.length = 0
 		
 		return true
 	end
 	
-	local _ = function(p5, p6)
-		local item = p5.item
+	local _ = function(p3, p4)
+		local item = p3.item
 		
 		return if item == nil then nil else {
 			key = item.key,
 			value = item.value,
 			itemViewType = item.itemViewType,
-			revision = p5.revision,
-			length = p5.length,
-			position = p6
+			revision = p3.revision,
+			length = p3.length,
+			position = p4
 		}
 	end
 	
@@ -54,16 +54,16 @@ return function(p2, p3)
 				finish = if t_1.item == nil then 0 else t_1.length
 			}
 		end,
-		update = function(p7)
-			-- upvalues: var7 (ref), buildPlacementPlanModule (copy), t (ref), placementTypesModule (copy), t_1 (ref)
-			var7.setDataSource(p7.dataSource)
+		update = function(p3)
+			-- upvalues: var2 (ref), buildPlacementPlanModule (copy), t (ref), placementTypesModule (copy), t_1 (ref)
+			var2.setDataSource(p3.dataSource)
 			local t_2 = {
-				dataSource = p7.dataSource,
-				layout = p7.layout,
-				stickyIndices = var7.resolve(),
-				scrollOffset = p7.scrollOffset,
-				viewportLength = p7.viewportLength,
-				contentStartOffset = p7.contentStartOffset
+				dataSource = p3.dataSource,
+				layout = p3.layout,
+				stickyIndices = var2.resolve(),
+				scrollOffset = p3.scrollOffset,
+				viewportLength = p3.viewportLength,
+				contentStartOffset = p3.contentStartOffset
 			}
 			local item = t.item
 			t_2.pinnedStartItem = if item == nil then nil else {
@@ -86,20 +86,20 @@ return function(p2, p3)
 			
 			return buildPlacementPlanModule(t_2)
 		end,
-		applyDataSourceChange = function(p8)
-			-- upvalues: var7 (ref)
-			var7.applyDataSourceChange(p8)
+		applyDataSourceChange = function(p3)
+			-- upvalues: var2 (ref)
+			var2.applyDataSourceChange(p3)
 		end,
-		updatePinnedMeasurement = function(p9, p10, p11, p12)
+		updatePinnedMeasurement = function(p3, p4, p5, p6)
 			-- upvalues: placementTypesModule (copy), t (ref), t_1 (ref)
-			assert(p12 >= 0 and p12 < 1e999, "PinnedItems: measured length must be finite and non-negative")
-			local var11 = if p9 == placementTypesModule.PinnedPosition.Start then t else t_1
-			local item = var11.item
+			assert(p6 >= 0 and p6 < 1e999, "PinnedItems: measured length must be finite and non-negative")
+			local var3 = if p3 == placementTypesModule.PinnedPosition.Start then t else t_1
+			local item = var3.item
 			
-			if item == nil or item.key ~= p10 or (var11.revision ~= p11 or var11.length == p12) then
+			if item == nil or item.key ~= p4 or (var3.revision ~= p5 or var3.length == p6) then
 				return nil
 			end
-			var11.length = p12
+			var3.length = p6
 			
 			return {
 				start = if t.item == nil then 0 else t.length,
@@ -107,37 +107,37 @@ return function(p2, p3)
 			}
 		end,
 		setOptions = function(value)
-			-- upvalues: var6 (write), var7 (ref), t (ref), recordModule (copy), frozen (copy), t_1 (ref)
-			local var13
-			var6 = value
-			local var12 = var7.setPredicate(value.isItemStickyHeader)
+			-- upvalues: var1 (write), var2 (ref), t (ref), recordModule (copy), frozen (copy), t_1 (ref)
+			local var3
+			var1 = value
+			local var4 = var2.setPredicate(value.isItemStickyHeader)
 			local pinnedStartItem = value.pinnedStartItem
 			local item = t.item
 			
 			if if item ~= pinnedStartItem then item ~= nil and (pinnedStartItem ~= nil and recordModule.containsEqual(item, pinnedStartItem, frozen)) else true then
-				var13 = false
+				var3 = false
 			else
 				t.item = pinnedStartItem
 				t.revision += 1
 				t.length = 0
-				var13 = true
+				var3 = true
 			end
-			local var14
-			var12 = var13 or var12
+			local var5
+			var4 = var3 or var4
 			local pinnedEndItem = value.pinnedEndItem
 			local item_1 = t_1.item
 			
 			if if item_1 ~= pinnedEndItem then item_1 ~= nil and (pinnedEndItem ~= nil and recordModule.containsEqual(item_1, pinnedEndItem, frozen)) else true then
-				var14 = false
+				var5 = false
 			else
 				t_1.item = pinnedEndItem
 				t_1.revision += 1
 				t_1.length = 0
-				var14 = true
+				var5 = true
 			end
-			return var14 or var12
+			return var5 or var4
 		end,
-		setDataSource = var7.setDataSource,
+		setDataSource = var2.setDataSource,
 		destroy = function() end
 	}
 end

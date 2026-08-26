@@ -18,19 +18,19 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagProfilePlatformNewProfileHeader = sharedFlagsModule.FFlagProfilePlatformNewProfileHeader
 local fFlagProfileAboutDetailsUseSheet = sharedFlagsModule.FFlagProfileAboutDetailsUseSheet
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var12 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0)
-	-- upvalues: useDispatch (ref), fFlagProfilePlatformNewProfileHeader (ref), useAboutSectionsModule (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), parseSectionsFromDataModule (ref), fFlagProfileAboutDetailsUseSheet (ref), useLocalization (ref), textKeysModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var12 (ref), navigateDown (ref), descriptionModule (ref)
+return function(p1)
+	-- upvalues: useDispatch (ref), fFlagProfilePlatformNewProfileHeader (ref), useAboutSectionsModule (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), parseSectionsFromDataModule (ref), fFlagProfileAboutDetailsUseSheet (ref), useLocalization (ref), textKeysModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), descriptionModule (ref)
 	local aboutDetails, aboutSections
-	local var13 = useDispatch()
+	local var2 = useDispatch()
 	local _ = nil
 	local _ = nil
 	
 	if fFlagProfilePlatformNewProfileHeader then
-		local var14 = useAboutSectionsModule()
-		aboutDetails = var14.aboutDetails
-		aboutSections = var14.aboutSections
+		local var3 = useAboutSectionsModule()
+		aboutDetails = var3.aboutDetails
+		aboutSections = var3.aboutSections
 	else
 		local profileType = useProfileWrapperContextModule().profileType
 		aboutDetails = useProfileJsonComponentModule(enumsModule.Components.About)
@@ -39,29 +39,29 @@ return function(p0)
 			return parseSectionsFromDataModule(aboutDetails, profileType, if profileType == enumsModule.ProfileTypes.User then `@{aboutDetails.name}` else aboutDetails.name)
 		end, { aboutDetails, profileType, aboutDetails.name })
 	end
-	local var15 = if fFlagProfileAboutDetailsUseSheet then if useProfileWrapperContextModule().profileType == enumsModule.ProfileTypes.User then `@{aboutDetails.name}` else aboutDetails.name else nil
+	local var4 = if fFlagProfileAboutDetailsUseSheet then if useProfileWrapperContextModule().profileType == enumsModule.ProfileTypes.User then `@{aboutDetails.name}` else aboutDetails.name else nil
 	local description = aboutDetails.description
-	local var16 = useLocalization({ noBioYet = textKeysModule.NoBioYet })
+	local var5 = useLocalization({ noBioYet = textKeysModule.NoBioYet })
 	
 	if description == nil or description == "" then
-		description = if fFlagProfilePlatformNewProfileHeader then nil else var16.noBioYet
+		description = if fFlagProfilePlatformNewProfileHeader then nil else var5.noBioYet
 	end
 	return reactModule.createElement(descriptionModule, {
 		description = description,
-		layoutOrder = p0.layoutOrder,
+		layoutOrder = p1.layoutOrder,
 		onActivateMoreButton = reactModule.useCallback(function()
-			-- upvalues: appPage (copy), aboutSections (write), var15 (ref), fFlagSignalsNavP3Dispatch (copy), var12 (copy), var13 (ref), navigateDown (copy)
+			-- upvalues: appPage (copy), aboutSections (write), var4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
 			local t = {
 				name = appPage.AboutDetailsSheet,
-				extraProps = { sections = aboutSections, profileName = var15 }
+				extraProps = { sections = aboutSections, profileName = var4 }
 			}
 			
 			if fFlagSignalsNavP3Dispatch then
-				var12.down(var12.fromLegacyPage(t))
+				var1.down(var1.fromLegacyPage(t))
 				
 				return
 			end
-			var13(navigateDown(t))
-		end, { var13, aboutSections, var15 })
+			var2(navigateDown(t))
+		end, { var2, aboutSections, var4 })
 	})
 end

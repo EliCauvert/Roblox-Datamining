@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("RECEIVED_USER_INVITE_STATUS", function(p0, p1)
-	return { userId = tostring(p0), inviteStatus = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("RECEIVED_USER_INVITE_STATUS", function(p1, p2)
+	return { userId = tostring(p1), inviteStatus = p2 }
 end)

@@ -3,9 +3,9 @@ local parent = script.Parent.Parent
 local closeOpenPromptModule = require(parent.Actions.CloseOpenPrompt)
 local promptTypeModule = require(parent.PromptType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: promptTypeModule (ref), avatarEditorService (ref), closeOpenPromptModule (ref)
-	local promptType = p0:getState().promptInfo.promptType
+	local promptType = p1:getState().promptInfo.promptType
 	
 	if promptType == promptTypeModule.AllowInventoryReadAccess then
 		avatarEditorService:SetAllowInventoryReadAccess(false)
@@ -28,5 +28,5 @@ return function(p0)
 	elseif promptType ~= nil then
 		error("CloseOpenPrompt for unhandled prompt type " .. tostring(promptType))
 	end
-	p0:dispatch(closeOpenPromptModule())
+	p1:dispatch(closeOpenPromptModule())
 end

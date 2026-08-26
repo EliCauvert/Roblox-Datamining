@@ -6,11 +6,11 @@ local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Fl
 local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 local fFlagProfilePlatformRefreshActionsRespectPoliciesModule = require(profilePlatform.Flags.FFlagProfilePlatformRefreshActionsRespectPolicies)
 
-function GetProfilePlatform(p0, p1)
+function GetProfilePlatform(p1, p2)
 	-- upvalues: fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), getProfilePlatformModule (ref)
 	local list = {
 		{ component = enumsModule.Components.UserProfileHeader },
-		if fFlagProfilePlatformRefreshActionsRespectPoliciesModule and p1 ~= nil then p1 else {
+		if fFlagProfilePlatformRefreshActionsRespectPoliciesModule and p2 ~= nil then p2 else {
 			component = enumsModule.Components.Actions,
 			isActionsV2Supported = if fFlagProfilePlatformCTAsRefactorModule then true else nil
 		}
@@ -21,7 +21,7 @@ function GetProfilePlatform(p0, p1)
 	end
 	return getProfilePlatformModule.API({
 		includeComponentOrdering = false,
-		profileId = p0,
+		profileId = p1,
 		profileType = enumsModule.ProfileTypes.User,
 		components = list
 	})

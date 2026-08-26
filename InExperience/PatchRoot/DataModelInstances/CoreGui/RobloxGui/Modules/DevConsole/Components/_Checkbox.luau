@@ -4,26 +4,26 @@ local constantsModule = require(script.Parent.Parent.Constants)
 local checkboxInnerPadding = constantsModule.UtilityBarFormatting.CheckboxInnerPadding
 local checkbox = roactModule.Component:extend("Checkbox")
 
-function checkbox.render(p0)
+function checkbox.render(p1)
 	-- upvalues: constantsModule (ref), textService (ref), roactModule (ref), checkboxInnerPadding (ref)
-	local checkboxHeight = p0.props.checkboxHeight
-	local frameHeight = p0.props.frameHeight
-	local layoutOrder = p0.props.layoutOrder
-	local name = p0.props.name
-	local font = p0.props.font
-	local fontSize = p0.props.fontSize
-	local isSelected = p0.props.isSelected
-	local selectedColor = p0.props.selectedColor
-	local unselectedColor = p0.props.unselectedColor
-	local onCheckboxClicked = p0.props.onCheckboxClicked
-	local var4 = ""
-	local var5 = 1
-	local var6 = unselectedColor
+	local checkboxHeight = p1.props.checkboxHeight
+	local frameHeight = p1.props.frameHeight
+	local layoutOrder = p1.props.layoutOrder
+	local name = p1.props.name
+	local font = p1.props.font
+	local fontSize = p1.props.fontSize
+	local isSelected = p1.props.isSelected
+	local selectedColor = p1.props.selectedColor
+	local unselectedColor = p1.props.unselectedColor
+	local onCheckboxClicked = p1.props.onCheckboxClicked
+	local var1 = ""
+	local var2 = 1
+	local var3 = unselectedColor
 	
 	if isSelected then
-		var4 = constantsModule.Image.Check
-		var5 = 0
-		var6 = selectedColor
+		var1 = constantsModule.Image.Check
+		var2 = 0
+		var3 = selectedColor
 	end
 	return roactModule.createElement("ImageButton", {
 		Size = UDim2.new(0, checkboxHeight + textService:GetTextSize(name, fontSize, font, Vector2.new(0, frameHeight)).X + checkboxInnerPadding * 2, 0, frameHeight),
@@ -36,12 +36,12 @@ function checkbox.render(p0)
 	}, {
 		Icon = roactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 0,
-			Image = var4,
+			Image = var1,
 			Size = UDim2.new(0, checkboxHeight, 0, checkboxHeight),
 			Position = UDim2.new(0, 0, 0.5, -checkboxHeight / 2),
-			BackgroundColor3 = var6,
+			BackgroundColor3 = var3,
 			BorderColor3 = constantsModule.Color.Text,
-			BorderSizePixel = var5
+			BorderSizePixel = var2
 		}),
 		Text = roactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,

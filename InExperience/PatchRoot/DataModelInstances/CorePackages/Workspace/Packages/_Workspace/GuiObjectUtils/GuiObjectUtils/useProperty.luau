@@ -1,7 +1,7 @@
 ﻿local reactModule = require(script:FindFirstAncestor("GuiObjectUtils").Parent.React)
 
-local function _(p0)
-	return if typeof(p0) == "table" then p0.current else p0
+local function _(p1)
+	return if typeof(p1) == "table" then p1.current else p1
 end
 
 return function(p1, p2)
@@ -22,18 +22,18 @@ return function(p1, p2)
 	end, { p1, p2 })
 	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), p2 (ref), var4 (ref)
-		local var7 = nil
-		local var8 = p1
-		local var9 = if typeof(var8) == "table" then var8.current else var8
+		local var5 = nil
+		local var6 = p1
+		local var7 = if typeof(var6) == "table" then var6.current else var6
 		
-		if var9 then
-			var7 = var9:GetPropertyChangedSignal(p2):Connect(var4)
+		if var7 then
+			var5 = var7:GetPropertyChangedSignal(p2):Connect(var4)
 			var4()
 		end
 		return function()
-			-- upvalues: var7 (write)
-			if var7 then
-				var7:Disconnect()
+			-- upvalues: var5 (write)
+			if var5 then
+				var5:Disconnect()
 			end
 		end
 	end, { var1, p2, var4 })

@@ -4,11 +4,11 @@ local getSourceAssetsFromDescendantsModule = require(sceneUnderstanding.getSourc
 local isSourceAssetModule = require(sceneUnderstanding.isSourceAsset)
 local rangeQueryOptionsModule = require(sceneUnderstanding.options.RangeQueryOptions)
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: rangeQueryOptionsModule (ref), isSourceAssetModule (ref), findSourceAssetsFromDescendantModule (ref), getSourceAssetsFromDescendantsModule (ref)
 	local t = {}
 	
-	for i, v in workspace:GetPartBoundsInRadius(value, rangeQueryOptionsModule.new(p0).maxDistance) do
+	for i, v in workspace:GetPartBoundsInRadius(value, rangeQueryOptionsModule.new(p1).maxDistance) do
 		if isSourceAssetModule(v) or #findSourceAssetsFromDescendantModule(v) > 0 then
 			table.insert(t, v)
 		end

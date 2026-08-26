@@ -7,69 +7,69 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
 local refreshChartsSortDetailGenre = chartsModule.refreshChartsSortDetailGenre
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
-	p0.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		name = sduiActionType.RefreshChartsSortDetail,
-		message = p1,
-		propName = p2
-	}, p0.appPage)
+		message = p2,
+		propName = p3
+	}, p1.appPage)
 end
 
-return function(p3, _, p4)
+return function(p1, _, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiLoadTimer (ref), refreshChartsSortDetailGenre (ref)
-	local var3 = if p3 then p3.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var3 == nil then
-		p4.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			propName = nil,
 			name = sduiActionType.RefreshChartsSortDetail
-		}, p4.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	assert(var3, "actionParams must exist")
-	local configKey = p4.configKey
+	assert(var1, "actionParams must exist")
+	local configKey = p2.configKey
 	
 	if typeof(configKey) ~= "string" or configKey == "" then
-		configKey = var3.configKey
+		configKey = var1.configKey
 	end
 	if typeof(configKey) ~= "string" or configKey == "" then
-		p4.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "configKey",
 			name = sduiActionType.RefreshChartsSortDetail,
 			message = `Invalid or missing configKey: {configKey}`
-		}, p4.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local selectedOption = var3.selectedOption
+	local selectedOption = var1.selectedOption
 	
 	if typeof(selectedOption) ~= "string" or selectedOption == "" then
-		p4.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "selectedOption",
 			name = sduiActionType.RefreshChartsSortDetail,
 			message = `Invalid or missing selectedOption: {selectedOption}`
-		}, p4.appPage)
+		}, p2.appPage)
 		
 		return
 	end
 	local chartsSortDetail = sduiLoadTimer.createLoadTimer("ChartsSortDetail")
 	chartsSortDetail.start("refresh")
-	local var5 = refreshChartsSortDetailGenre({
+	local var2 = refreshChartsSortDetailGenre({
 		configKey = configKey,
 		selectedGenre = selectedOption,
 		loadTimer = chartsSortDetail
 	})
 	
-	if var5 then
-		var5:finally(function()
+	if var2 then
+		var2:finally(function()
 			-- upvalues: chartsSortDetail (ref)
 			chartsSortDetail.logRefreshComplete()
 		end)
 		
-		return var5
+		return var2
 	end
 	return nil
 end

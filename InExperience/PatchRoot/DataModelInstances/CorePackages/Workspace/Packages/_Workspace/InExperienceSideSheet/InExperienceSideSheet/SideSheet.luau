@@ -39,7 +39,7 @@ local fIntSideSheetVariant = sharedFlagsModule.FIntSideSheetVariant
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 local fFlagEnableWhatsNew = sharedFlagsModule.FFlagEnableWhatsNew
 local fFlagUseAnimateScrollViewToSelectionHelper = sharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper
-local var26 = if fFlagEnableWhatsNew then require(parent.WhatsNew).WhatsNewAnchor else nil
+local var1 = if fFlagEnableWhatsNew then require(parent.WhatsNew).WhatsNewAnchor else nil
 local list = {
 	Enum.KeyCode.Left, Enum.KeyCode.Right, Enum.KeyCode.Up, Enum.KeyCode.Down,
 	Enum.KeyCode.W, Enum.KeyCode.A, Enum.KeyCode.S, Enum.KeyCode.D
@@ -49,9 +49,9 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local mouseIconOverrideService = coreScriptsCommonModule.MouseIconOverrideService
 local usePreferredInput = responsiveModule.usePreferredInput
 
-local function getDeviceSafePadding(p0)
+local function getDeviceSafePadding(p1)
 	-- upvalues: displayModule (ref)
-	return displayModule.GetDisplayStore(p0).getDeviceSafePadding(p0)
+	return displayModule.GetDisplayStore(p1).getDeviceSafePadding(p1)
 end
 
 local function getToggleIntegrations(p1)
@@ -59,9 +59,9 @@ local function getToggleIntegrations(p1)
 	return getIntegrationsStoreModule(p1).getToggleIntegrations(p1)
 end
 
-local var31 = function(p2)
+local var2 = function(p1)
 	-- upvalues: getIntegrationsStoreModule (ref)
-	return getIntegrationsStoreModule(p2).getPageIntegrations(p2)
+	return getIntegrationsStoreModule(p1).getPageIntegrations(p1)
 end
 
 local t_1 = nil
@@ -71,100 +71,100 @@ if fFlagSideSheetFocusNav then
 	t_1 = { IntegrationsList = 0, PageList = 1 }
 	useFocusGuiObject = require(parent.ReactFocusNavigation).useFocusGuiObject
 end
-local var33 = nil
+local var3 = nil
 
-local function SideSheetContent(p3)
-	-- upvalues: useTokens (ref), useStyleSheet (ref), useBackgroundStyleModule (ref), signalsReactModule (ref), getDeviceSafePadding (ref), fFlagMountUnmountSideSheet (ref), useDrawerShouldMount (ref), getToggleIntegrations (ref), reactModule (ref), sidesheetAnalyticsModule (ref), fFlagSideSheetFocusNav (ref), useFocusGuiObject (write), useLastInputMode (ref), getSideSheetConfigStoreModule (ref), usePreferredInput (ref), signalsModule (ref), getSideSheetVisibilityModule (ref), responsiveModule (ref), mouseIconOverrideService (ref), contextActionService (ref), list (ref), toggleSideSheetModule (ref), fFlagUseAnimateScrollViewToSelectionHelper (ref), useSideSheetFocusNavScrollViewAnimationModule (ref), fIntSideSheetVariant (ref), t_1 (write), experienceDetailsRowModule (ref), view (ref), divider (ref), gridListModule (ref), verticalListModule (ref), var31 (ref), scrollView (ref), footerModule (ref), fFlagEnableWhatsNew (ref), var26 (ref), drawerContainer (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var35 = useTokens()
-	local var36 = useStyleSheet()
-	local var37 = useBackgroundStyleModule()
-	local var38 = signalsReactModule.useSignalState(getDeviceSafePadding)
-	local var39 = if fFlagMountUnmountSideSheet then useDrawerShouldMount() else true
-	local var40 = signalsReactModule.useSignalState(getToggleIntegrations)
-	local var41 = reactModule.useCallback(function(p4)
+local function SideSheetContent(p1)
+	-- upvalues: useTokens (ref), useStyleSheet (ref), useBackgroundStyleModule (ref), signalsReactModule (ref), getDeviceSafePadding (ref), fFlagMountUnmountSideSheet (ref), useDrawerShouldMount (ref), getToggleIntegrations (ref), reactModule (ref), sidesheetAnalyticsModule (ref), fFlagSideSheetFocusNav (ref), useFocusGuiObject (write), useLastInputMode (ref), getSideSheetConfigStoreModule (ref), usePreferredInput (ref), signalsModule (ref), getSideSheetVisibilityModule (ref), responsiveModule (ref), mouseIconOverrideService (ref), contextActionService (ref), list (ref), toggleSideSheetModule (ref), fFlagUseAnimateScrollViewToSelectionHelper (ref), useSideSheetFocusNavScrollViewAnimationModule (ref), fIntSideSheetVariant (ref), t_1 (write), experienceDetailsRowModule (ref), view (ref), divider (ref), gridListModule (ref), verticalListModule (ref), var2 (ref), scrollView (ref), footerModule (ref), fFlagEnableWhatsNew (ref), var1 (ref), drawerContainer (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+	local var4 = useTokens()
+	local var5 = useStyleSheet()
+	local var6 = useBackgroundStyleModule()
+	local var7 = signalsReactModule.useSignalState(getDeviceSafePadding)
+	local var8 = if fFlagMountUnmountSideSheet then useDrawerShouldMount() else true
+	local var9 = signalsReactModule.useSignalState(getToggleIntegrations)
+	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: sidesheetAnalyticsModule (copy)
-		sidesheetAnalyticsModule.logSidesheetClosed(p4.source)
+		sidesheetAnalyticsModule.logSidesheetClosed(p2.source)
 	end, {})
-	local var42 = nil
+	local var11 = nil
 	local _ = nil
 	local _ = nil
-	local var43 = nil
+	local var12 = nil
 	
 	if fFlagSideSheetFocusNav then
-		var42 = reactModule.useRef(nil)
-		local var44 = useFocusGuiObject()
-		local var45 = useLastInputMode()
-		var43 = reactModule.useCallback(function(p5)
-			-- upvalues: var45 (write), var42 (write), var44 (write)
-			if var45 == "Focus" and var42 and var42.current == false then
-				var42.current = true
-				var44(p5)
+		var11 = reactModule.useRef(nil)
+		local var13 = useFocusGuiObject()
+		local var14 = useLastInputMode()
+		var12 = reactModule.useCallback(function(p2)
+			-- upvalues: var14 (write), var11 (write), var13 (write)
+			if var14 == "Focus" and var11 and var11.current == false then
+				var11.current = true
+				var13(p2)
 			end
-		end, { var44, var45 })
+		end, { var13, var14 })
 	end
-	local var46 = reactModule.useCallback(function(p6)
+	local var15 = reactModule.useCallback(function(p2)
 		-- upvalues: getSideSheetConfigStoreModule (copy)
-		return getSideSheetConfigStoreModule().onHeightChanged(p6.AbsoluteSize.Y)
+		return getSideSheetConfigStoreModule().onHeightChanged(p2.AbsoluteSize.Y)
 	end, {})
-	local var47 = reactModule.useRef(false)
-	local var48 = reactModule.useRef(false)
-	local var49 = usePreferredInput()
+	local var16 = reactModule.useRef(false)
+	local var17 = reactModule.useRef(false)
+	local var18 = usePreferredInput()
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), getSideSheetVisibilityModule (copy), p3 (ref), var47 (ref), var49 (ref), responsiveModule (copy), var48 (ref), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var42 (write)
-		local var55 = signalsModule.createEffect(function(p7)
-			-- upvalues: getSideSheetVisibilityModule (copy), p3 (copy), var47 (copy), var49 (copy), responsiveModule (copy), var48 (copy), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var42 (copy)
-			local var57 = getSideSheetVisibilityModule(p7)
+		-- upvalues: signalsModule (copy), getSideSheetVisibilityModule (copy), p1 (ref), var16 (ref), var18 (ref), responsiveModule (copy), var17 (ref), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var11 (write)
+		local var19 = signalsModule.createEffect(function(p2)
+			-- upvalues: getSideSheetVisibilityModule (copy), p1 (copy), var16 (copy), var18 (copy), responsiveModule (copy), var17 (copy), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var11 (copy)
+			local var20 = getSideSheetVisibilityModule(p2)
 			
-			if p3.ChatSelector then
-				if var57 then
-					var47.current = p3.ChatSelector:GetVisibility()
-					p3.ChatSelector:SetVisible(false)
-				elseif var47.current then
-					p3.ChatSelector:SetVisible(true)
-					var47.current = false
+			if p1.ChatSelector then
+				if var20 then
+					var16.current = p1.ChatSelector:GetVisibility()
+					p1.ChatSelector:SetVisible(false)
+				elseif var16.current then
+					p1.ChatSelector:SetVisible(true)
+					var16.current = false
 				end
 			end
-			if var49 == responsiveModule.Input.Pointer then
-				if var57 and not var48.current then
+			if var18 == responsiveModule.Input.Pointer then
+				if var20 and not var17.current then
 					mouseIconOverrideService.push("InExperienceSideSheet", Enum.OverrideMouseIconBehavior.ForceShow)
-					var48.current = true
-				elseif not var57 and var48.current then
+					var17.current = true
+				elseif not var20 and var17.current then
 					mouseIconOverrideService.pop("InExperienceSideSheet")
-					var48.current = false
+					var17.current = false
 				end
 			end
 			if fFlagSideSheetFocusNav then
-				if var57 then
-					var42.current = false
+				if var20 then
+					var11.current = false
 					
 					return
 				end
-				var42.current = nil
+				var11.current = nil
 			end
 		end)
-		local var56 = if p3.ChatSelector then p3.ChatSelector.VisibilityStateChanged:connect(function(p8)
-			-- upvalues: getSideSheetVisibilityModule (copy), var47 (copy)
-			if getSideSheetVisibilityModule() and p8 then
-				var47.current = false
+		local var20 = if p1.ChatSelector then p1.ChatSelector.VisibilityStateChanged:connect(function(p2)
+			-- upvalues: getSideSheetVisibilityModule (copy), var16 (copy)
+			if getSideSheetVisibilityModule() and p2 then
+				var16.current = false
 			end
 		end) else nil
 		
 		return function()
-			-- upvalues: var55 (ref), var56 (write)
-			var55()
+			-- upvalues: var19 (ref), var20 (write)
+			var19()
 			
-			if var56 ~= nil then
-				var56:disconnect()
+			if var20 ~= nil then
+				var20:disconnect()
 			end
 		end
-	end, { p3.ChatSelector, var49 })
+	end, { p1.ChatSelector, var18 })
 	
 	if fFlagSideSheetFocusNav then
 		reactModule.useEffect(function()
-			-- upvalues: contextActionService (copy), var42 (write), list (copy), getSideSheetVisibilityModule (copy), toggleSideSheetModule (copy)
-			contextActionService:BindCoreAction("SideSheetBlockInputAction", function(_, p9, _)
-				-- upvalues: var42 (copy)
-				return if p9 == Enum.UserInputState.Begin then if var42.current == nil then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
+			-- upvalues: contextActionService (copy), var11 (write), list (copy), getSideSheetVisibilityModule (copy), toggleSideSheetModule (copy)
+			contextActionService:BindCoreAction("SideSheetBlockInputAction", function(_, p2, _)
+				-- upvalues: var11 (copy)
+				return if p2 == Enum.UserInputState.Begin then if var11.current == nil then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
 			end, false, unpack(list))
 			contextActionService:BindCoreAction("SideSheetSinkR2Action", function(_, _, _)
 				-- upvalues: getSideSheetVisibilityModule (copy)
@@ -188,16 +188,16 @@ local function SideSheetContent(p3)
 			end
 		end, {})
 	end
-	local var50 = if fFlagSideSheetFocusNav and fFlagUseAnimateScrollViewToSelectionHelper then useSideSheetFocusNavScrollViewAnimationModule() else nil
-	local var51 = nil
+	local var19 = if fFlagSideSheetFocusNav and fFlagUseAnimateScrollViewToSelectionHelper then useSideSheetFocusNavScrollViewAnimationModule() else nil
+	local var20 = nil
 	
 	if fFlagSideSheetFocusNav then
-		var51 = if fIntSideSheetVariant == 2 or #var40 <= 0 then t_1.PageList else t_1.IntegrationsList
+		var20 = if fIntSideSheetVariant == 2 or #var9 <= 0 then t_1.PageList else t_1.IntegrationsList
 	end
-	if not var39 then
+	if not var8 then
 		return nil
 	end
-	local var53
+	local var21
 	local t = {
 		ExperienceDetailsRow = reactModule.createElement(experienceDetailsRowModule, { layoutOrder = 0 }),
 		HeaderDivider = reactModule.createElement(view, {
@@ -206,35 +206,35 @@ local function SideSheetContent(p3)
 		}, { Divider = reactModule.createElement(divider) })
 	}
 	
-	if #var40 <= 0 then
-		var53 = nil
+	if #var9 <= 0 then
+		var21 = nil
 	elseif fIntSideSheetVariant == 0 then
-		var53 = reactModule.createElement
-		var53 = var53(gridListModule, {
+		var21 = reactModule.createElement
+		var21 = var21(gridListModule, {
 			layoutOrder = 2,
 			integrationsGetter = getToggleIntegrations,
-			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var51 == t_1.IntegrationsList then var43 else nil
+			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var20 == t_1.IntegrationsList then var12 else nil
 		})
 	else
-		var53 = reactModule.createElement
-		var53 = var53(verticalListModule, {
+		var21 = reactModule.createElement
+		var21 = var21(verticalListModule, {
 			layoutOrder = if fIntSideSheetVariant == 2 then 4 else 2,
 			integrationsGetter = getToggleIntegrations,
-			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var51 == t_1.IntegrationsList then var43 else nil
+			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var20 == t_1.IntegrationsList then var12 else nil
 		})
 	end
-	t.IntegrationsList = var53
-	t.PageDivider = if #var40 > 0 then reactModule.createElement(view, {
+	t.IntegrationsList = var21
+	t.PageDivider = if #var9 > 0 then reactModule.createElement(view, {
 		tag = "size-full-0 auto-y padding-right-xlarge",
 		LayoutOrder = 3
 	}, { Divider = reactModule.createElement(divider) }) else nil
 	t.PageList = reactModule.createElement(verticalListModule, {
 		layoutOrder = if fIntSideSheetVariant == 2 then 2 else 4,
-		integrationsGetter = var31,
-		firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var51 == t_1.PageList then var43 else nil
+		integrationsGetter = var2,
+		firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var20 == t_1.PageList then var12 else nil
 	})
 	local createElement = reactModule.createElement
-	createElement = createElement(view, { tag = "col size-full", onAbsoluteSizeChanged = var46 }, {
+	createElement = createElement(view, { tag = "col size-full", onAbsoluteSizeChanged = var15 }, {
 		ScrollableContent = reactModule.createElement(scrollView, {
 			LayoutOrder = 1,
 			tag = {
@@ -251,30 +251,30 @@ local function SideSheetContent(p3)
 				SortOrder = Enum.SortOrder.LayoutOrder
 			},
 			selection = if fFlagSideSheetFocusNav then { Selectable = false } else nil,
-			scrollingFrameRef = if fFlagSideSheetFocusNav and fFlagUseAnimateScrollViewToSelectionHelper then var50 else nil
+			scrollingFrameRef = if fFlagSideSheetFocusNav and fFlagUseAnimateScrollViewToSelectionHelper then var19 else nil
 		}, t),
 		Footer = reactModule.createElement(footerModule, { layoutOrder = 2 })
 	})
 	
 	if fFlagEnableWhatsNew then
-		createElement = reactModule.createElement(var26, { anchorId = "sideSheet", tag = "size-full" }, { SideSheetPanel = createElement })
+		createElement = reactModule.createElement(var1, { anchorId = "sideSheet", tag = "size-full" }, { SideSheetPanel = createElement })
 	end
-	local var54 = 300 - var35.Padding.XLarge
+	local var22 = 300 - var4.Padding.XLarge
 	
 	if fFlagSideSheetFocusNav then
-		var54 += var35.Padding.Small
+		var22 += var4.Padding.Small
 	end
 	return reactModule.createElement(drawerContainer, {
 		displayOrder = 12,
 		scrimIsModal = true,
-		menuWidth = var54,
-		leftOffset = var38.left + var35.Padding.XLarge,
-		topOffset = var38.top,
-		bottomOffset = var38.bottom,
-		backgroundStyle = var37,
-		onDrawerClosedAnalytics = var41
+		menuWidth = var22,
+		leftOffset = var7.left + var4.Padding.XLarge,
+		topOffset = var7.top,
+		bottomOffset = var7.bottom,
+		backgroundStyle = var6,
+		onDrawerClosedAnalytics = var10
 	}, {
-		FoundationStyleLink = reactModule.createElement("StyleLink", { StyleSheet = var36 }),
+		FoundationStyleLink = reactModule.createElement("StyleLink", { StyleSheet = var5 }),
 		if fFlagSideSheetFocusNav then reactModule.createElement(focusRoot, {
 			isIsolated = true,
 			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
@@ -282,18 +282,18 @@ local function SideSheetContent(p3)
 	})
 end
 
-function t.createSideSheet(p10, p11, p12)
-	-- upvalues: var33 (write), coreGuiService (ref), wrapWithProvidersModule (ref), reactModule (ref), SideSheetContent (ref), reactRobloxModule (ref)
-	if not var33 then
+function t.createSideSheet(p1, p2, p3)
+	-- upvalues: var3 (write), coreGuiService (ref), wrapWithProvidersModule (ref), reactModule (ref), SideSheetContent (ref), reactRobloxModule (ref)
+	if not var3 then
 		local inExperienceSideSheet = Instance.new("Folder")
 		inExperienceSideSheet.Name = "InExperienceSideSheet"
 		inExperienceSideSheet.Parent = coreGuiService
-		var33 = reactRobloxModule.createRoot(inExperienceSideSheet)
-		var33:render(wrapWithProvidersModule({
-			SideSheetContent = reactModule.createElement(SideSheetContent, p11)
-		}, p10, p12))
+		var3 = reactRobloxModule.createRoot(inExperienceSideSheet)
+		var3:render(wrapWithProvidersModule({
+			SideSheetContent = reactModule.createElement(SideSheetContent, p2)
+		}, p1, p3))
 	end
-	return var33
+	return var3
 end
 
 return t

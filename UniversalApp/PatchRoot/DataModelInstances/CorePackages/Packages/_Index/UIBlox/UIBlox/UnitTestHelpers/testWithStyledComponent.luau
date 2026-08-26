@@ -6,24 +6,24 @@ local roactModule = require(parent_1.Parent.Roact)
 local dumpInstanceTreeModule = require(parent.dumpInstanceTree)
 local mockStyleComponentModule = require(parent_1.Utility.mockStyleComponent)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: roactModule (ref), mockStyleComponentModule (ref), httpService (ref), coreGuiService (ref), dumpInstanceTreeModule (ref)
-	local var5 = ("TestApp-%s"):format(httpService:GenerateGUID())
-	local var6 = roactModule.mount(roactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
-		StyleProvider = mockStyleComponentModule({ TestComponent = roactModule.createElement(p0, p1) })
-	}), coreGuiService, var5)
-	local var7 = ("game.CoreGui.%s.Children.TestComponent"):format(var5)
+	local var1 = ("TestApp-%s"):format(httpService:GenerateGUID())
+	local var2 = roactModule.mount(roactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
+		StyleProvider = mockStyleComponentModule({ TestComponent = roactModule.createElement(p1, p2) })
+	}), coreGuiService, var1)
+	local var3 = ("game.CoreGui.%s.Children.TestComponent"):format(var1)
 	local ok, status = pcall(function()
-		-- upvalues: p2 (ref), var7 (ref)
-		p2(var7)
+		-- upvalues: p3 (ref), var3 (ref)
+		p3(var3)
 	end)
 	
 	if not ok then
 		print("Test instance tree:")
-		dumpInstanceTreeModule(coreGuiService:FindFirstChild(var5))
+		dumpInstanceTreeModule(coreGuiService:FindFirstChild(var1))
 		print("Test instance tree end\n")
 	end
-	roactModule.unmount(var6)
+	roactModule.unmount(var2)
 	
 	if not ok then
 		error(status)

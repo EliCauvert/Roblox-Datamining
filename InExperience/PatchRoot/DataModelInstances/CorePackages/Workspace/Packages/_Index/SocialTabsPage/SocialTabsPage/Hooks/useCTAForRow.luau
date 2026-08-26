@@ -7,44 +7,44 @@ local buttonTypes = require(parent.UserList).Enums.ButtonTypes
 local mapProfileCTAToRowCTAModule = require(socialTabsPage.Utils.mapProfileCTAToRowCTA)
 local _ = require(socialTabsPage.Common.Types)
 
-local var3 = function()
+local var1 = function()
 	return nil
 end
 
-return function(p0, p1, p2, p3)
-	-- upvalues: var3 (ref), useSignalState (ref), reactModule (ref), dataStatus (ref), mapProfileCTAToRowCTAModule (ref), buttonTypes (ref)
-	local var4 = useSignalState(if p0 then p0.data else var3)
-	local var5 = useSignalState(if p0 then p0.status else var3)
+return function(p1, p2, p3, p4)
+	-- upvalues: var1 (ref), useSignalState (ref), reactModule (ref), dataStatus (ref), mapProfileCTAToRowCTAModule (ref), buttonTypes (ref)
+	local var2 = useSignalState(if p1 then p1.data else var1)
+	local var3 = useSignalState(if p1 then p1.status else var1)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var5 (ref), dataStatus (copy), mapProfileCTAToRowCTAModule (copy), var4 (ref), p1 (ref), p2 (ref), buttonTypes (copy), p3 (ref)
-		if var5 == dataStatus.NotReady then
+		-- upvalues: var3 (ref), dataStatus (copy), mapProfileCTAToRowCTAModule (copy), var2 (ref), p2 (ref), p3 (ref), buttonTypes (copy), p4 (ref)
+		if var3 == dataStatus.NotReady then
 			return nil
 		end
-		local var6 = mapProfileCTAToRowCTAModule(var4, p1, p2)
+		local var4 = mapProfileCTAToRowCTAModule(var2, p2, p3)
 		
-		if var6 and var6.type == buttonTypes.Join and p3 then
-			local onActivated = var6.onActivated
+		if var4 and var4.type == buttonTypes.Join and p4 then
+			local onActivated = var4.onActivated
 			
 			return {
-				type = var6.type,
+				type = var4.type,
 				onActivated = function()
-					-- upvalues: onActivated (ref), p3 (copy)
+					-- upvalues: onActivated (ref), p4 (copy)
 					if onActivated then
 						onActivated()
 					end
-					p3.joinExperience()
+					p4.joinExperience()
 				end,
-				isDisabled = not p3.isInExperience,
-				isLoading = p3.isLoading
+				isDisabled = not p4.isInExperience,
+				isLoading = p4.isLoading
 			}
 		end
-		return var6
+		return var4
 	end, {
-		var4,
-		var5,
-		p1,
+		var2,
+		var3,
 		p2,
-		p3
+		p3,
+		p4
 	})
 end

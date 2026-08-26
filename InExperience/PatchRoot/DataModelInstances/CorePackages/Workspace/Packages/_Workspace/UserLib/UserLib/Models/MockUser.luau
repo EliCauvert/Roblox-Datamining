@@ -13,29 +13,29 @@ t.__index = t
 
 function t.new()
 	-- upvalues: userModule (ref), var1 (write)
-	local var3 = userModule.new()
+	local var2 = userModule.new()
 	var1 += 1
-	var3.id = tostring(var1)
-	var3.isFetching = false
-	var3.isFriend = false
-	var3.friendRank = 0
-	var3.lastLocation = nil
-	var3.name = "USER NAME"
-	var3.universeId = nil
-	var3.placeId = nil
-	var3.rootPlaceId = nil
-	var3.gameInstanceId = nil
-	var3.presence = userModule.PresenceType.OFFLINE
-	var3.membership = nil
-	var3.thumbnails = nil
-	var3.lastOnline = nil
-	var3.displayName = "DN+" .. var3.name
-	var3.externalAppDisplayName = "EXTERNAL APP DISPLAY NAME"
-	var3.hasVerifiedBadge = false
-	var3.hasRobloxSubscription = false
-	setmetatable(var3, { __index = userModule })
+	var2.id = tostring(var1)
+	var2.isFetching = false
+	var2.isFriend = false
+	var2.friendRank = 0
+	var2.lastLocation = nil
+	var2.name = "USER NAME"
+	var2.universeId = nil
+	var2.placeId = nil
+	var2.rootPlaceId = nil
+	var2.gameInstanceId = nil
+	var2.presence = userModule.PresenceType.OFFLINE
+	var2.membership = nil
+	var2.thumbnails = nil
+	var2.lastOnline = nil
+	var2.displayName = "DN+" .. var3.name
+	var2.externalAppDisplayName = "EXTERNAL APP DISPLAY NAME"
+	var2.hasVerifiedBadge = false
+	var2.hasRobloxSubscription = false
+	setmetatable(var2, { __index = userModule })
 	
-	return var3
+	return var2
 end
 
 function t.mockEndpointResponse()

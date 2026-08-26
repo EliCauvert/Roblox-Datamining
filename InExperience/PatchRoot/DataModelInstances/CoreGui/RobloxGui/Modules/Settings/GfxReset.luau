@@ -17,9 +17,9 @@ end
 
 local function RunGfxReset()
 	-- upvalues: IGMAlwaysResetGfxLv5 (ref), gameSettings (ref), IGMRevertGfxQuality (ref), IGMRevertGfxLv5Only (ref), IGMResetGfxQuality (ref), IGMResetGfxLv5Only (ref)
-	local var7 = gameSettings.SavedQualityLevel == Enum.SavedQualitySetting.QualityLevel5
+	local var1 = gameSettings.SavedQualityLevel == Enum.SavedQualitySetting.QualityLevel5
 	
-	if IGMAlwaysResetGfxLv5 and var7 then
+	if IGMAlwaysResetGfxLv5 and var1 then
 		gameSettings.SavedQualityLevel = Enum.SavedQualitySetting.Automatic
 	end
 	if game:GetEngineFeature("QualityLevelReset") then
@@ -43,13 +43,13 @@ local function RunGfxReset()
 				automatic = Enum.SavedQualitySetting.Automatic
 			end
 		elseif IGMResetGfxQuality then
-			local var8 = IGMResetGfxLv5Only
+			local var2 = IGMResetGfxLv5Only
 			qualityResetLevel = gameSettings.QualityResetLevel
 			
 			if qualityResetLevel < 0 or qualityResetLevel == nil then
 				local value = gameSettings.SavedQualityLevel.Value
 				
-				if var7 and var8 or var8 == false then
+				if var1 and var2 or var2 == false then
 					gameSettings.SavedQualityLevel = Enum.SavedQualitySetting.Automatic
 				end
 				gameSettings.QualityResetLevel = value
@@ -65,16 +65,16 @@ function applicationId()
 		return nil
 	end
 	local appInstallationIdItem = appStorageService:GetItem("AppInstallationId")
-	local var11 = typeof(appInstallationIdItem)
+	local var3 = typeof(appInstallationIdItem)
 	
-	return if var11 == "number" then tonumber(appInstallationIdItem) or nil elseif var11 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -string.len(tostring(1000)))) else nil
+	return if var3 == "number" then tonumber(appInstallationIdItem) or nil elseif var3 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -string.len(tostring(1000)))) else nil
 end
 
 return {
 	RunGfxReset = RunGfxReset,
-	TemporaryOverride = function(p0)
+	TemporaryOverride = function(p1)
 		-- upvalues: IGMTempOverrideGfxLv5 (ref)
-		if ((applicationId() or 0) + 329) % 1000 < IGMTempOverrideGfxLv5 and (p0 == Enum.SavedQualitySetting.QualityLevel5 or p0 == Enum.SavedQualitySetting.QualityLevel5.Value) then
+		if ((applicationId() or 0) + 329) % 1000 < IGMTempOverrideGfxLv5 and (p1 == Enum.SavedQualitySetting.QualityLevel5 or p1 == Enum.SavedQualitySetting.QualityLevel5.Value) then
 			return true, Enum.SavedQualitySetting.Automatic.Value
 		end
 		return false, Enum.SavedQualitySetting.Automatic.Value

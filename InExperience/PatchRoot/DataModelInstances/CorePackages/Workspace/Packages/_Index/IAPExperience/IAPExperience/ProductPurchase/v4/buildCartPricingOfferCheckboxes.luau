@@ -3,9 +3,9 @@ local reactModule = require(parent.React)
 local checkbox = require(parent.Foundation).Checkbox
 local _ = require(script.Parent.useCartPricing)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), checkbox (ref)
-	local cartPricing = p0.cartPricing
+	local cartPricing = p1.cartPricing
 	local t = {}
 	
 	if not cartPricing.showCartOfferUi then
@@ -18,7 +18,7 @@ return function(p0)
 			LayoutOrder = i,
 			label = v.localizedDescription,
 			isChecked = v.selected,
-			isDisabled = p0.isDisabled,
+			isDisabled = p1.isDisabled,
 			onActivated = function()
 				-- upvalues: cartPricing (ref), offerId (ref)
 				cartPricing.toggleCartPricingOffer(offerId)

@@ -9,38 +9,38 @@ local getMomentDetailsStoreModule = require(appChat.Stores.GetMomentDetailsStore
 local momentDetailsStatusModule = require(script.Parent.MomentDetailsStatus)
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getMomentDetailsStoreModule (ref), reactModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), signalsReactModule (ref), dataHydrationModule (ref), momentDetailsStatusModule (ref)
-	local var7 = getMomentDetailsStoreModule(false)
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (copy), var7 (ref), p0 (ref), p1 (ref)
-		return if fFlagMomentsPassFeedItemIdToBackendApis then var7.getAndFetchMomentDetails(p0, p1) else var7.getAndFetchMomentDetails(p0)
-	end, { var7, p0, p1 })
-	local var9 = signalsReactModule.useSignalState(var8.data)
-	local var10 = signalsReactModule.useSignalState(var8.status)
-	local var11 = if var9 ~= nil then nil else var9.creatorId
-	local var12 = if var9 ~= nil then nil else var9.metadata.description
-	local var13 = if var9 ~= nil then nil else var9.metadata.universeId
-	local var14 = if var9 ~= nil then nil else var9.metadata.experienceName
-	local var15 = if var9 ~= nil then nil else var9.metadata.likeCount
-	local var16 = if var9 ~= nil then nil else var9.assetId
-	local var17 = if var9 ~= nil then nil else var9.metadata.captureType
-	local var18 = if var9 ~= nil then nil else var9.metadata.assetAccessContext
+	local var1 = getMomentDetailsStoreModule(false)
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (copy), var1 (ref), p1 (ref), p2 (ref)
+		return if fFlagMomentsPassFeedItemIdToBackendApis then var1.getAndFetchMomentDetails(p1, p2) else var1.getAndFetchMomentDetails(p1)
+	end, { var1, p1, p2 })
+	local var3 = signalsReactModule.useSignalState(var2.data)
+	local var4 = signalsReactModule.useSignalState(var2.status)
+	local var5 = if var3 ~= nil then nil else var3.creatorId
+	local var6 = if var3 ~= nil then nil else var3.metadata.description
+	local var7 = if var3 ~= nil then nil else var3.metadata.universeId
+	local var8 = if var3 ~= nil then nil else var3.metadata.experienceName
+	local var9 = if var3 ~= nil then nil else var3.metadata.likeCount
+	local var10 = if var3 ~= nil then nil else var3.assetId
+	local var11 = if var3 ~= nil then nil else var3.metadata.captureType
+	local var12 = if var3 ~= nil then nil else var3.metadata.assetAccessContext
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var10 (ref), dataHydrationModule (copy), momentDetailsStatusModule (copy), var11 (ref), var12 (ref), var13 (ref), var14 (ref), var15 (ref), var16 (ref), var17 (ref), var18 (ref)
-		return if var9 == nil then if var10 == dataHydrationModule.DataStatus.Failed then { status = momentDetailsStatusModule.Error } else { status = momentDetailsStatusModule.Loading } else {
+		-- upvalues: var3 (ref), var4 (ref), dataHydrationModule (copy), momentDetailsStatusModule (copy), var5 (ref), var6 (ref), var7 (ref), var8 (ref), var9 (ref), var10 (ref), var11 (ref), var12 (ref)
+		return if var3 == nil then if var4 == dataHydrationModule.DataStatus.Failed then { status = momentDetailsStatusModule.Error } else { status = momentDetailsStatusModule.Loading } else {
 			status = momentDetailsStatusModule.Ready,
-			creatorId = var11,
-			description = var12,
-			universeId = var13,
-			experienceName = var14,
-			likeCount = var15,
-			assetId = var16,
-			captureType = var17,
-			assetAccessContext = var18
+			creatorId = var5,
+			description = var6,
+			universeId = var7,
+			experienceName = var8,
+			likeCount = var9,
+			assetId = var10,
+			captureType = var11,
+			assetAccessContext = var12
 		}
 	end, {
-		var10, var9 ~= nil, var11, var12, var13, var14, var15, var16, var17, var18
+		var4, var3 ~= nil, var5, var6, var7, var8, var9, var10, var11, var12
 	})
 end

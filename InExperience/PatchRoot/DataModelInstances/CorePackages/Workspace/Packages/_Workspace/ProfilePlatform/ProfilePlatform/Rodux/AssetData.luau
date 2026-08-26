@@ -3,11 +3,11 @@ local parent = profilePlatform.Parent
 local cryoModule = require(parent.Cryo)
 
 return require(parent.Rodux).createReducer({}, {
-	[require(profilePlatform.Networking.NetworkingAsset).GetAssetDetails.Succeeded.name] = function(p0, p1)
+	[require(profilePlatform.Networking.NetworkingAsset).GetAssetDetails.Succeeded.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		local responseBody = p1.responseBody
+		local responseBody = p2.responseBody
 		
-		return cryoModule.Dictionary.join(p0, {
+		return cryoModule.Dictionary.join(p1, {
 			[tostring(responseBody.assetId)] = {
 				assetId = responseBody.assetId,
 				displayName = responseBody.displayName,

@@ -1,32 +1,32 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p0)
-	local var0 = 1
-	local var1 = true
-	local var2 = nil
+return function(p1)
+	local var1 = 1
+	local var2 = true
+	local var3 = nil
 	local _ = nil
 	
 	return function()
-		-- upvalues: var1 (write), p0 (ref), var0 (write), var2 (write)
-		if var1 then
-			local var3 = p0[var0]
+		-- upvalues: var2 (write), p1 (ref), var1 (write), var3 (write)
+		if var2 then
+			local var4 = p1[var1]
 			
-			if var3 == nil then
-				var1 = false
+			if var4 == nil then
+				var2 = false
 			else
-				local var4 = var0
-				var0 += 1
+				local var5 = var1
+				var1 += 1
 				
-				return var4, var3
+				return var5, var4
 			end
 		end
 		while true do
-			var2 = next(p0, var2)
-			if typeof(var2) == "number" and var2 > 0 and (var2 < var0 and var2 % 1 == 0) then continue end
-			if var2 == nil then
+			var3 = next(p1, var3)
+			if typeof(var3) == "number" and var3 > 0 and (var3 < var1 and var3 % 1 == 0) then continue end
+			if var3 == nil then
 				return nil
 			end
-			return var2, p0[var2]
+			return var3, p1[var3]
 		end
 	end
 end

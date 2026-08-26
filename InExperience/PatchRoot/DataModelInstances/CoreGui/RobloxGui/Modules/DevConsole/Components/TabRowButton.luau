@@ -3,14 +3,14 @@ local constantsModule = require(script.Parent.Parent.Constants)
 local highlightHeight = constantsModule.TabRowFormatting.HighlightHeight
 local frameHeight = constantsModule.TabRowFormatting.FrameHeight
 
-return function(p0)
+return function(p1)
 	-- upvalues: constantsModule (ref), roactModule (ref), frameHeight (ref), highlightHeight (ref)
-	local index = p0.index
-	local name = p0.name
-	local textWidth = p0.textWidth
-	local padding = p0.padding
-	local isSelected = p0.isSelected
-	local onTabButtonClicked = p0.onTabButtonClicked
+	local index = p1.index
+	local name = p1.name
+	local textWidth = p1.textWidth
+	local padding = p1.padding
+	local isSelected = p1.isSelected
+	local onTabButtonClicked = p1.onTabButtonClicked
 	
 	return roactModule.createElement("TextButton", {
 		Text = name,
@@ -23,7 +23,7 @@ return function(p0)
 		TextColor3 = constantsModule.Color.Text,
 		BackgroundColor3 = constantsModule.Color.UnselectedGray,
 		BorderSizePixel = 0,
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		[roactModule.Event.Activated] = function(_)
 			-- upvalues: onTabButtonClicked (ref), index (ref)
 			onTabButtonClicked(index)

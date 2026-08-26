@@ -2,14 +2,14 @@
 local getTryOnItemComparisonDataModule = require(script.Parent.getTryOnItemComparisonData)
 local getShouldReplaceTryOnModule = require(script.Parent.getShouldReplaceTryOn)
 
-function getFilteredTryOnItems(p0, p1)
+function getFilteredTryOnItems(p1, p2)
 	-- upvalues: getTryOnItemComparisonDataModule (ref), getShouldReplaceTryOnModule (ref)
 	local t = {}
 	local t_1 = {}
-	local var4 = getTryOnItemComparisonDataModule(p1)
+	local var1 = getTryOnItemComparisonDataModule(p2)
 	
-	for i, v in p0 do
-		if getShouldReplaceTryOnModule(var4, getTryOnItemComparisonDataModule(v)) then
+	for i, v in p1 do
+		if getShouldReplaceTryOnModule(var1, getTryOnItemComparisonDataModule(v)) then
 			t_1[i] = v
 		else
 			t[i] = v

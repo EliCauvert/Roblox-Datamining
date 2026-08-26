@@ -10,16 +10,16 @@ local t = {
 	[Enum.AppUpdateStatus.AvailableBetaProgram] = updateMessageTypeModule.BetaProgram
 }
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: promiseModule (ref), joinGamePlayButton (ref), t (ref)
 	return function(_)
-		-- upvalues: p1 (ref), p0 (ref), promiseModule (copy), joinGamePlayButton (copy), p2 (ref), p3 (ref), t (copy)
-		return if p1 and not p0:canPerformBinaryUpdate() then promiseModule.resolve(nil) else p0:checkForUpdate():andThen(function(p4)
-			-- upvalues: joinGamePlayButton (copy), p2 (copy), p3 (copy), promiseModule (copy), t (copy)
-			local appUpdateStatus = p4.appUpdateStatus
-			joinGamePlayButton(p2.InfluxDb, "checkForUpdate", { ctx = p3, appUpdateStatus = appUpdateStatus })
+		-- upvalues: p2 (ref), p1 (ref), promiseModule (copy), joinGamePlayButton (copy), p3 (ref), p4 (ref), t (copy)
+		return if p2 and not p1:canPerformBinaryUpdate() then promiseModule.resolve(nil) else p1:checkForUpdate():andThen(function(p5)
+			-- upvalues: joinGamePlayButton (copy), p3 (copy), p4 (copy), promiseModule (copy), t (copy)
+			local appUpdateStatus = p5.appUpdateStatus
+			joinGamePlayButton(p3.InfluxDb, "checkForUpdate", { ctx = p4, appUpdateStatus = appUpdateStatus })
 			
-			return if p4.errorMessage then promiseModule.reject(p4.errorMessage) else promiseModule.resolve(t[appUpdateStatus])
+			return if p5.errorMessage then promiseModule.reject(p5.errorMessage) else promiseModule.resolve(t[appUpdateStatus])
 		end)
 	end
 end

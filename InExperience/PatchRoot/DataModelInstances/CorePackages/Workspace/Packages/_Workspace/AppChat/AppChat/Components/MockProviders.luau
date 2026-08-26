@@ -27,50 +27,50 @@ local t = {
 	withApolloProvider = true
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), realtimeProvider (ref), foundationProvider (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), signal (ref), layerCollectorProvider (ref), roactRoduxModule (ref), roduxModule (ref), universalAppPolicyModule (ref), socialPoliciesModule (ref), styleModule (ref), mockApolloClient (ref), mockUserDataModule (ref), userProfilesModule (ref), apolloClientModule (ref), interactionFeedbackModule (ref), hapticFeedbackConfig (ref), roactNavigationModule (ref), reactModule (ref), providerContainer (ref)
-	local var14 = cryoModule.Dictionary.union(t, p0)
+	local var1 = cryoModule.Dictionary.union(t, p1)
 	local t_1 = {}
 	
-	if var14.realtime then
+	if var1.realtime then
 		table.insert(t_1, {
 			class = realtimeProvider,
-			props = { realtime = var14.realtime }
+			props = { realtime = var1.realtime }
 		})
 	end
 	table.insert(t_1, {
 		class = foundationProvider,
-		props = { device = "Desktop", theme = var14.themeName }
+		props = { device = "Desktop", theme = var1.themeName }
 	})
 	table.insert(t_1, {
 		class = styleProviderWithDefaultTheme,
 		props = {
-			withDarkTheme = var14.themeName ~= "Light",
-			withUiModeSupport = var14.withUiModeSupport
+			withDarkTheme = var1.themeName ~= "Light",
+			withUiModeSupport = var1.withUiModeSupport
 		}
 	})
 	table.insert(t_1, {
 		class = localizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p1)
-					return p1
+				Format = function(_, p2)
+					return p2
 				end,
 				changed = signal.new()
 			}
 		}
 	})
 	
-	if var14.withLayerCollector then
+	if var1.withLayerCollector then
 		table.insert(t_1, { class = layerCollectorProvider, props = {} })
 	end
 	table.insert(t_1, {
 		class = roactRoduxModule.StoreProvider,
 		props = {
-			store = if var14.rodux then var14.rodux.store else roduxModule.Store.new(function()
-				-- upvalues: var14 (ref)
-				return if var14.rodux then var14.rodux.state else {}
-			end, var14.rodux and var14.rodux.state, { roduxModule.thunkMiddleware })
+			store = if var1.rodux then var1.rodux.store else roduxModule.Store.new(function()
+				-- upvalues: var1 (ref)
+				return if var1.rodux then var1.rodux.state else {}
+			end, var1.rodux and var1.rodux.state, { roduxModule.thunkMiddleware })
 		}
 	})
 	table.insert(t_1, {
@@ -87,12 +87,12 @@ return function(p0)
 		props = { tokenMappers = {} }
 	})
 	
-	if var14.withApolloProvider then
-		local var16 = mockApolloClient({})
-		userProfilesModule.TestUtils.writeProfileDataToCache(var16, mockUserDataModule.createMockApolloProfiles())
+	if var1.withApolloProvider then
+		local var2 = mockApolloClient({})
+		userProfilesModule.TestUtils.writeProfileDataToCache(var2, mockUserDataModule.createMockApolloProfiles())
 		table.insert(t_1, {
 			class = apolloClientModule.ApolloProvider,
-			props = { client = var16 }
+			props = { client = var2 }
 		})
 	end
 	table.insert(t_1, {
@@ -119,5 +119,5 @@ return function(p0)
 		}
 	})
 	
-	return reactModule.createElement(providerContainer, { providers = t_1 }, var14.children)
+	return reactModule.createElement(providerContainer, { providers = t_1 }, var1.children)
 end

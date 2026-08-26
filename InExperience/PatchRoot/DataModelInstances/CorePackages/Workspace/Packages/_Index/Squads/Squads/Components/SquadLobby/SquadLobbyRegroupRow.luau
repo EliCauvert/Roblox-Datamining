@@ -25,37 +25,37 @@ local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local regroupTextTruncationFix = game:DefineFastFlag("RegroupTextTruncationFix", false)
 local fFlagSquadsPresenceStoreMigration = require(parent.SquadsCore.Flags).FFlagSquadsPresenceStoreMigration
 local fFlagSquadExperienceInviteRetryAfter = require(parent.SquadsCore.Flags).FFlagSquadExperienceInviteRetryAfter
-local var8 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local var1 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
 
-return function(p0)
-	-- upvalues: useDispatch (ref), react (ref), squadExternalContractContext (ref), useLocalization (ref), useSelector (ref), useCurrentSquadId (ref), fFlagSquadExperienceInviteRetryAfter (ref), useIsExperienceInviteRetryBlocked (ref), fFlagSquadsPresenceStoreMigration (ref), var8 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), foundation (ref), image (ref), regroupTextTruncationFix (ref), buttonSize (ref), buttonVariant (ref), loggerModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), eventNamesModule (ref), rbxAnalyticsService (ref), squadToastActionsAndStates (ref), squadRegroupEntryPoint (ref)
-	local var9 = useDispatch()
-	local var10 = react.useContext(squadExternalContractContext)
-	local var11 = useLocalization({
+return function(p1)
+	-- upvalues: useDispatch (ref), react (ref), squadExternalContractContext (ref), useLocalization (ref), useSelector (ref), useCurrentSquadId (ref), fFlagSquadExperienceInviteRetryAfter (ref), useIsExperienceInviteRetryBlocked (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), foundation (ref), image (ref), regroupTextTruncationFix (ref), buttonSize (ref), buttonVariant (ref), loggerModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), eventNamesModule (ref), rbxAnalyticsService (ref), squadToastActionsAndStates (ref), squadRegroupEntryPoint (ref)
+	local var2 = useDispatch()
+	local var3 = react.useContext(squadExternalContractContext)
+	local var4 = useLocalization({
 		Title = "Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether",
 		Body = "Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer",
 		Join = "Notifications.SquadRegroupPrompt.ToastAction.Join"
 	})
-	local var12 = useSelector(react.useCallback(function(p1)
-		return p1.Squad and (p1.Squad.Squad and p1.Squad.Squad.currentExperienceInvite)
+	local var5 = useSelector(react.useCallback(function(p2)
+		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
 	end, {}))
-	local var13 = useCurrentSquadId()
-	local var14 = if fFlagSquadExperienceInviteRetryAfter then useIsExperienceInviteRetryBlocked(var13) else false
-	local var15 = if fFlagSquadsPresenceStoreMigration then var8(tostring(p0.localUserId)) else useSelector(react.useCallback(function(p2)
-		-- upvalues: p0 (ref)
-		return p2 and (p2.Squad and (p2.Squad.Presence and (p2.Squad.Presence.byUserId and p2.Squad.Presence.byUserId[tostring(p0.localUserId)])))
-	end, { p0.localUserId }))
-	local var16 = if not fFlagSquadsPresenceStoreMigration then if var15 and var15.rootPlaceId ~= "" then var15.rootPlaceId else nil elseif var15 then var15.rootPlaceId else nil
-	local var17 = if not fFlagSquadsPresenceStoreMigration then if var15 and var15.universeId ~= "" then var15.universeId elseif var15 and var15.gameId ~= "" then var15.gameId else nil else var15 and (var15.universeId or (var15.gameId or nil))
-	local var18 = if var17 ~= nil then nil else getRbxthumbWithTypeSizeAndOptions(tostring(var17), constants.RbxthumbTypes.GameIcon, 150, false)
+	local var6 = useCurrentSquadId()
+	local var7 = if fFlagSquadExperienceInviteRetryAfter then useIsExperienceInviteRetryBlocked(var6) else false
+	local var8 = if fFlagSquadsPresenceStoreMigration then var1(tostring(p1.localUserId)) else useSelector(react.useCallback(function(p2)
+		-- upvalues: p1 (ref)
+		return p2 and (p2.Squad and (p2.Squad.Presence and (p2.Squad.Presence.byUserId and p2.Squad.Presence.byUserId[tostring(p1.localUserId)])))
+	end, { p1.localUserId }))
+	local var9 = if not fFlagSquadsPresenceStoreMigration then if var8 and var8.rootPlaceId ~= "" then var8.rootPlaceId else nil elseif var8 then var8.rootPlaceId else nil
+	local var10 = if not fFlagSquadsPresenceStoreMigration then if var8 and var8.universeId ~= "" then var8.universeId elseif var8 and var8.gameId ~= "" then var8.gameId else nil else var8 and (var8.universeId or (var8.gameId or nil))
+	local var11 = if var10 ~= nil then nil else getRbxthumbWithTypeSizeAndOptions(tostring(var10), constants.RbxthumbTypes.GameIcon, 150, false)
 	
 	return react.createElement(foundation.View, {
 		tag = "align-y-center row auto-none size-full radius-medium gap-medium gui-object-defaults padding-x-xlarge padding-y-medium"
 	}, {
-		Thumbnail = if var18 then react.createElement(image, {
+		Thumbnail = if var11 then react.createElement(image, {
 			tag = "radius-small bg-surface-100 size-1000",
 			LayoutOrder = 1,
-			Image = var18
+			Image = var11
 		}) else nil,
 		TextContainer = react.createElement(foundation.View, {
 			tag = "auto-y fill col gap-xsmall align-x-left gui-object-defaults",
@@ -67,7 +67,7 @@ return function(p0)
 					["auto-y text-align-x-left text-no-wrap text-title-medium content-emphasis"] = true,
 					["size-full-0 text-truncate-end"] = regroupTextTruncationFix
 				},
-				Text = var11.Title
+				Text = var4.Title
 			}),
 			Body = react.createElement(foundation.Text, {
 				LayoutOrder = 2,
@@ -75,40 +75,40 @@ return function(p0)
 					["auto-y content-default text-body-medium text-align-x-left text-no-wrap gui-object-defaults"] = true,
 					["size-full-0 text-truncate-end"] = regroupTextTruncationFix
 				},
-				Text = var11.Body
+				Text = var4.Body
 			})
 		}),
 		JoinButton = react.createElement(foundation.Button, {
 			LayoutOrder = 3,
-			text = var11.Join,
+			text = var4.Join,
 			size = buttonSize.Medium,
 			variant = buttonVariant.Standard,
-			isDisabled = if var12 == nil then var14 else true,
+			isDisabled = if var5 == nil then var7 else true,
 			onActivated = react.useCallback(function()
-				-- upvalues: var16 (ref), loggerModule (copy), var9 (ref), createExperienceInviteModule (copy), var10 (ref), squadExperienceInviteSource (copy), eventNamesModule (copy), var13 (ref), p0 (ref), fFlagSquadsPresenceStoreMigration (copy), var15 (ref), rbxAnalyticsService (copy), squadToastActionsAndStates (copy), squadRegroupEntryPoint (copy)
-				if var16 == nil then
+				-- upvalues: var9 (ref), loggerModule (copy), var2 (ref), createExperienceInviteModule (copy), var3 (ref), squadExperienceInviteSource (copy), eventNamesModule (copy), var6 (ref), p1 (ref), fFlagSquadsPresenceStoreMigration (copy), var8 (ref), rbxAnalyticsService (copy), squadToastActionsAndStates (copy), squadRegroupEntryPoint (copy)
+				if var9 == nil then
 					loggerModule:warning("SquadRegroupEventReceiver: Join clicked but rootPlaceId is missing from local presence")
 					
 					return
 				end
-				var9(createExperienceInviteModule(tostring(var16), var10, squadExperienceInviteSource.Regroup)):andThen(function(p3)
-					-- upvalues: var10 (copy), eventNamesModule (copy), var13 (copy), p0 (copy), fFlagSquadsPresenceStoreMigration (copy), var15 (copy), rbxAnalyticsService (copy), squadToastActionsAndStates (copy), squadRegroupEntryPoint (copy)
-					var10.fireSquadAnalytics(eventNamesModule.SquadRegroupButtonClicked, {
+				var2(createExperienceInviteModule(tostring(var9), var3, squadExperienceInviteSource.Regroup)):andThen(function(p2)
+					-- upvalues: var3 (copy), eventNamesModule (copy), var6 (copy), p1 (copy), fFlagSquadsPresenceStoreMigration (copy), var8 (copy), rbxAnalyticsService (copy), squadToastActionsAndStates (copy), squadRegroupEntryPoint (copy)
+					var3.fireSquadAnalytics(eventNamesModule.SquadRegroupButtonClicked, {
 						clientTimestamp = os.time(),
-						squadId = var13,
-						initiatorId = p0.localUserId,
-						gameInstanceId = if fFlagSquadsPresenceStoreMigration then var15 and var15.gameId else var15.gameId,
-						rootPlaceId = if fFlagSquadsPresenceStoreMigration then var15 and var15.rootPlaceId else var15.rootPlaceId,
-						placeId = if fFlagSquadsPresenceStoreMigration then var15 and var15.placeId else var15.placeId,
-						universeId = if fFlagSquadsPresenceStoreMigration then var15 and var15.universeId else var15.universeId,
+						squadId = var6,
+						initiatorId = p1.localUserId,
+						gameInstanceId = if fFlagSquadsPresenceStoreMigration then var8 and var8.gameId else var8.gameId,
+						rootPlaceId = if fFlagSquadsPresenceStoreMigration then var8 and var8.rootPlaceId else var8.rootPlaceId,
+						placeId = if fFlagSquadsPresenceStoreMigration then var8 and var8.placeId else var8.placeId,
+						universeId = if fFlagSquadsPresenceStoreMigration then var8 and var8.universeId else var8.universeId,
 						playSessionId = rbxAnalyticsService:GetPlaySessionId(),
-						experienceInviteId = p3,
+						experienceInviteId = p2,
 						button = squadToastActionsAndStates.RegroupJoin,
 						entryPoint = squadRegroupEntryPoint.SquadLobbyButton
 					})
 				end)
 			end, {
-				var9, createExperienceInviteModule, var16, var10, var13, p0.localUserId, var15
+				var2, createExperienceInviteModule, var9, var3, var6, p1.localUserId, var8
 			})
 		})
 	})

@@ -4,12 +4,12 @@ local skeleton = dependenciesModule.Foundation.Skeleton
 local withStyle = dependenciesModule.UIBlox.Style.withStyle
 local contactsGlimmer = roact.PureComponent:extend("ContactsGlimmer")
 
-function contactsGlimmer.render(p0)
+function contactsGlimmer.render(p1)
 	-- upvalues: withStyle (ref), roact (ref), skeleton (ref)
-	local props = p0.props
+	local props = p1.props
 	
-	return withStyle(function(p1)
-		-- upvalues: roact (copy), props (ref), p0 (ref), skeleton (copy)
+	return withStyle(function(p2)
+		-- upvalues: roact (copy), props (ref), p1 (ref), skeleton (copy)
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = props.layoutOrder,
@@ -25,7 +25,7 @@ function contactsGlimmer.render(p0)
 				middleGroup = roact.createElement("Frame", {
 					Size = UDim2.new(1, -68, 1, 0),
 					BackgroundTransparency = 1,
-					[roact.Event.Activated] = p0.openBlankProfileView,
+					[roact.Event.Activated] = p1.openBlankProfileView,
 					LayoutOrder = 2,
 					BackgroundColor3 = Color3.fromRGB(222, 22, 222)
 				}, {
@@ -45,8 +45,8 @@ function contactsGlimmer.render(p0)
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 0, 1),
 				Position = UDim2.new(0, 0, 1, 0),
-				BackgroundColor3 = p1.Theme.Divider.Color,
-				BackgroundTransparency = p1.Theme.Divider.Transparency
+				BackgroundColor3 = p2.Theme.Divider.Color,
+				BackgroundTransparency = p2.Theme.Divider.Transparency
 			})
 		})
 	end)

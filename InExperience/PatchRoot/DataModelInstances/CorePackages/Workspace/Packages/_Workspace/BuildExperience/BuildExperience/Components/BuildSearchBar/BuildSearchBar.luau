@@ -11,14 +11,14 @@ local view = foundationModule.View
 local getSearchQueryStoreModule = require(buildExperience.Stores.GetSearchQueryStore)
 local _ = require(buildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), getSearchQueryStoreModule (ref), reactModule (ref), view (ref), searchInput (ref)
-	local store = p0.store or getSearchQueryStoreModule()
+	local store = p1.store or getSearchQueryStoreModule()
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
 		testId = "build-search-bar",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Input = reactModule.createElement(searchInput, {
 			testId = "build-search-bar-input",
@@ -26,14 +26,14 @@ return function(p0)
 			placeholder = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 				placeholder = localizationStringsModule.BUILD_SEARCH_PLACEHOLDER
 			}) else nil).placeholder else localizationStringsModule.BUILD_SEARCH_PLACEHOLDER,
-			onChanged = reactModule.useCallback(function(p1)
+			onChanged = reactModule.useCallback(function(p2)
 				-- upvalues: store (ref)
-				if p1 == "" then
+				if p2 == "" then
 					store.clear()
 					
 					return
 				end
-				store.setQuery(p1)
+				store.setQuery(p2)
 			end, { store }),
 			width = UDim.new(1, 0)
 		})

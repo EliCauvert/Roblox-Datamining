@@ -9,13 +9,13 @@ local assetDataModule = require(profilePlatform.Rodux.AssetData)
 local myRoduxNetworkingModule = require(profilePlatform.Networking.myRoduxNetworking)
 local presenceModule = require(profilePlatform.Rodux.Presence)
 local profilePlatformFixPresenceReducer = game:DefineFastFlag("ProfilePlatformFixPresenceReducer", false)
-local var10 = if profilePlatformFixPresenceReducer then require(profilePlatform.Rodux.PresenceReducer) else nil
+local var1 = if profilePlatformFixPresenceReducer then require(profilePlatform.Rodux.PresenceReducer) else nil
 local profilesModule = require(profilePlatform.Rodux.Profiles)
 local fFlagAddVideoToCommunityProfile = require(parent.SharedFlags).FFlagAddVideoToCommunityProfile
 local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
 
 return function()
-	-- upvalues: roduxModule (ref), gamesModule (ref), itemDetailsModule (ref), bundleDetailsModule (ref), assetDetailsModule (ref), fFlagAddVideoToCommunityProfile (ref), assetDataModule (ref), myRoduxNetworkingModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), profilePlatformFixPresenceReducer (ref), var10 (ref), presenceModule (ref), profilesModule (ref)
+	-- upvalues: roduxModule (ref), gamesModule (ref), itemDetailsModule (ref), bundleDetailsModule (ref), assetDetailsModule (ref), fFlagAddVideoToCommunityProfile (ref), assetDataModule (ref), myRoduxNetworkingModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), profilePlatformFixPresenceReducer (ref), var1 (ref), presenceModule (ref), profilesModule (ref)
 	return roduxModule.combineReducers({
 		Games = gamesModule.installReducer(),
 		ItemAssets = itemDetailsModule,
@@ -23,7 +23,7 @@ return function()
 		AssetDetails = assetDetailsModule,
 		AssetData = if fFlagAddVideoToCommunityProfile then assetDataModule else nil,
 		NetworkStatus = myRoduxNetworkingModule.installReducer(),
-		Presence = if fFlagProfilePlatformPresenceStoreMigrationModule then nil elseif profilePlatformFixPresenceReducer then var10 else presenceModule.installReducer(),
+		Presence = if fFlagProfilePlatformPresenceStoreMigrationModule then nil elseif profilePlatformFixPresenceReducer then var1 else presenceModule.installReducer(),
 		Profiles = profilesModule
 	})
 end

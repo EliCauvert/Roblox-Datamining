@@ -1,6 +1,6 @@
 ﻿return {
-	Format = function(_, p0)
-		return if p0 == "InGame.FriendPlayerPrompt.Title.SendFriendRequest" or p0 == "InGame.FriendPlayerPrompt.Title.SendFriendRequest.FriendsRename" then "Send Friend Request" elseif p0 == "InGame.FriendPlayerPrompt.Action.Send" then "Send" elseif p0 == "Feature.Friends.Action.FriendRequestSent" then "Friend Request Sent" elseif p0 == "CommonUI.Messages.Response.SomethingWentWrong" then "Something Went Wrong" else p0
+	Format = function(_, p1)
+		return if p1 == "InGame.FriendPlayerPrompt.Title.SendFriendRequest" or p1 == "InGame.FriendPlayerPrompt.Title.SendFriendRequest.FriendsRename" then "Send Friend Request" elseif p1 == "InGame.FriendPlayerPrompt.Action.Send" then "Send" elseif p1 == "Feature.Friends.Action.FriendRequestSent" then "Friend Request Sent" elseif p1 == "CommonUI.Messages.Response.SomethingWentWrong" then "Something Went Wrong" else p1
 	end,
 	GetLocale = function()
 		return "en-us"

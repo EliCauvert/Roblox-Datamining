@@ -8,17 +8,17 @@ local UIBloxConfigModule = require(parent.UIBloxConfig)
 local responsiveRowModule = require(parent.Core.Layout.Responsive.ResponsiveRow)
 local useResponsiveLayoutModule = require(parent.Core.Layout.Responsive.useResponsiveLayout)
 
-local function useCellAbsoluteHeight(value, p0)
+local function useCellAbsoluteHeight(value, p1)
 	-- upvalues: useResponsiveLayoutModule (ref), reactModule (ref)
-	local columns = useResponsiveLayoutModule("columns", p0) or 1
-	local gutter = useResponsiveLayoutModule("gutter", p0) or 0
-	local verticalGutter = useResponsiveLayoutModule("verticalGutter", p0) or gutter
-	local margin = useResponsiveLayoutModule("margin", p0) or 0
-	local value_1 = value or useResponsiveLayoutModule("relativeHeight", p0)
+	local columns = useResponsiveLayoutModule("columns", p1) or 1
+	local gutter = useResponsiveLayoutModule("gutter", p1) or 0
+	local verticalGutter = useResponsiveLayoutModule("verticalGutter", p1) or gutter
+	local margin = useResponsiveLayoutModule("margin", p1) or 0
+	local value_1 = value or useResponsiveLayoutModule("relativeHeight", p1)
 	
-	return reactModule.useCallback(function(p1)
+	return reactModule.useCallback(function(p2)
 		-- upvalues: value_1 (ref), margin (ref), gutter (ref), columns (ref), verticalGutter (ref)
-		return if value_1 then math.max(((p1 - 2 * margin + gutter) / columns - gutter) * value_1.Scale + value_1.Offset, 0) + verticalGutter else nil
+		return if value_1 then math.max(((p2 - 2 * margin + gutter) / columns - gutter) * value_1.Scale + value_1.Offset, 0) + verticalGutter else nil
 	end, {
 		columns,
 		gutter,
@@ -28,45 +28,45 @@ local function useCellAbsoluteHeight(value, p0)
 	})
 end
 
-local var6 = if UIBloxConfigModule.responsiveGridDisplayLinesNonNil then NumberRange.new(0, 0) else nil
+local var1 = if UIBloxConfigModule.responsiveGridDisplayLinesNonNil then NumberRange.new(0, 0) else nil
 
-return reactModule.forwardRef(function(p2, p3)
-	-- upvalues: reactModule (ref), var6 (ref), useCellAbsoluteHeight (ref), usePropertiesDeferred (ref), useProperties (ref), responsiveRowModule (ref)
-	local var12, var13 = reactModule.useState(var6)
-	local var14 = useCellAbsoluteHeight(p2.relativeHeight, p2.kind)
+return reactModule.forwardRef(function(p1, p2)
+	-- upvalues: reactModule (ref), var1 (ref), useCellAbsoluteHeight (ref), usePropertiesDeferred (ref), useProperties (ref), responsiveRowModule (ref)
+	local var2, var3 = reactModule.useState(var1)
+	local var4 = useCellAbsoluteHeight(p1.relativeHeight, p1.kind)
 	
 	return reactModule.createElement(responsiveRowModule, {
 		scrollable = false,
 		multiLine = true,
-		kind = p2.kind,
-		layoutOrder = p2.layoutOrder,
-		displayLines = if p2.absoluteWindowTop and p2.absoluteWindowHeight then var12 else nil,
-		relativeHeight = p2.relativeHeight,
-		data = p2.data,
-		getItem = p2.getItem,
-		getItemCount = p2.getItemCount,
-		renderItem = p2.renderItem,
-		keyExtractor = p2.keyExtractor,
-		getCellColspan = p2.getCellColspan,
-		getCellRowspan = p2.getCellRowspan,
-		getCellOrder = p2.getCellOrder,
-		ref = (if p2.enableDeferredRefPropEvents then usePropertiesDeferred else useProperties)(p3, reactModule.useCallback(function(p4, p5)
-			-- upvalues: p2 (ref), var14 (ref), var13 (ref), var6 (copy)
-			if p2.absoluteWindowTop and p2.absoluteWindowHeight then
-				local var15 = var14(p5.X)
+		kind = p1.kind,
+		layoutOrder = p1.layoutOrder,
+		displayLines = if p1.absoluteWindowTop and p1.absoluteWindowHeight then var2 else nil,
+		relativeHeight = p1.relativeHeight,
+		data = p1.data,
+		getItem = p1.getItem,
+		getItemCount = p1.getItemCount,
+		renderItem = p1.renderItem,
+		keyExtractor = p1.keyExtractor,
+		getCellColspan = p1.getCellColspan,
+		getCellRowspan = p1.getCellRowspan,
+		getCellOrder = p1.getCellOrder,
+		ref = (if p1.enableDeferredRefPropEvents then usePropertiesDeferred else useProperties)(p2, reactModule.useCallback(function(p3, p4)
+			-- upvalues: p1 (ref), var4 (ref), var3 (ref), var1 (copy)
+			if p1.absoluteWindowTop and p1.absoluteWindowHeight then
+				local var5 = var4(p4.X)
 				
-				if var15 and var15 > 0 then
-					local var16 = math.floor(math.max(p2.absoluteWindowTop - p4.Y, 0) / var15) + 1
+				if var5 and var5 > 0 then
+					local var6 = math.floor(math.max(p1.absoluteWindowTop - p3.Y, 0) / var5) + 1
 					
-					return var13(NumberRange.new(var16, var16 + (math.ceil(math.max(p2.absoluteWindowHeight, 0) / var15) + 1) - 1))
+					return var3(NumberRange.new(var6, var6 + (math.ceil(math.max(p1.absoluteWindowHeight, 0) / var5) + 1) - 1))
 				end
 			end
-			return var13(var6)
+			return var3(var1)
 		end, {
-			var14,
-			p2.absoluteWindowTop,
-			p2.absoluteWindowHeight,
-			var13
+			var4,
+			p1.absoluteWindowTop,
+			p1.absoluteWindowHeight,
+			var3
 		}), { "AbsolutePosition", "AbsoluteSize" })
 	})
 end)

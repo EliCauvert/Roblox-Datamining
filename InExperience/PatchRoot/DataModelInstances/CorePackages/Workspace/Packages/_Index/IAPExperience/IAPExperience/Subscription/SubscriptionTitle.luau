@@ -16,22 +16,22 @@ subscriptionTitle.validateProps = tModule.strictInterface({
 	itemIcon = tModule.any
 })
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: withStyle (ref), reactModule (ref)
-	return withStyle(function(p2)
-		-- upvalues: reactModule (copy), p0 (ref), p1 (ref)
-		local theme = p2.Theme
-		local font = p2.Font.Body.Font
+	return withStyle(function(p3)
+		-- upvalues: reactModule (copy), p1 (ref), p2 (ref)
+		local theme = p3.Theme
+		local font = p3.Font.Body.Font
 		
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = p0.layoutOrder
+			LayoutOrder = p1.layoutOrder
 		}, {
 			Layout = reactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				HorizontalAlignment = if p1 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+				HorizontalAlignment = if p2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, 8)
 			})
 		}, {
@@ -40,12 +40,12 @@ local function _(p0, p1)
 				TextSize = 16,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 20),
-				Text = p0.subscriptionProviderName,
+				Text = p1.subscriptionProviderName,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				Font = font,
-				TextXAlignment = if p1 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p0.layoutOrder
+				TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				LayoutOrder = p1.layoutOrder
 			})
 		}, {
 			Title = reactModule.createElement("TextLabel", {
@@ -53,12 +53,12 @@ local function _(p0, p1)
 				TextSize = 20,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 20),
-				Text = p0.name,
+				Text = p1.name,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				Font = font,
-				TextXAlignment = if p1 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p0.layoutOrder + 1
+				TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				LayoutOrder = p1.layoutOrder + 1
 			})
 		}, {
 			PriceFrame = reactModule.createElement("Frame", {
@@ -67,11 +67,11 @@ local function _(p0, p1)
 				BackgroundColor3 = Color3.fromRGB(255, 0, 0),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				LayoutOrder = p0.layoutOrder + 2
+				LayoutOrder = p1.layoutOrder + 2
 			}, {
 				Layout = reactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					HorizontalAlignment = if p1 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+					HorizontalAlignment = if p2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
 					FillDirection = Enum.FillDirection.Horizontal
 				}),
 				Price = reactModule.createElement("TextLabel", {
@@ -80,12 +80,12 @@ local function _(p0, p1)
 					RichText = true,
 					TextWrapped = true,
 					Size = UDim2.new(0, 0, 0, 16),
-					Text = p0.displayPrice,
+					Text = p1.displayPrice,
 					TextColor3 = theme.TextEmphasis.Color,
 					TextTransparency = theme.TextDefault.Transparency,
 					Font = font,
-					TextXAlignment = if p1 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p0.layoutOrder + 1,
+					TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
 				}),
 				Period = reactModule.createElement("TextLabel", {
@@ -94,12 +94,12 @@ local function _(p0, p1)
 					RichText = true,
 					TextWrapped = true,
 					Size = UDim2.new(0, 0, 0, 16),
-					Text = p0.period,
+					Text = p1.period,
 					TextColor3 = theme.TextDefault.Color,
 					TextTransparency = theme.TextDefault.Transparency,
 					Font = font,
-					TextXAlignment = if p1 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p0.layoutOrder + 1,
+					TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
 				})
 			})
@@ -109,20 +109,20 @@ local function _(p0, p1)
 				TextSize = 16,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 16),
-				Text = p0.disclaimerText,
+				Text = p1.disclaimerText,
 				TextColor3 = theme.TextDefault.Color,
 				Font = font,
-				TextXAlignment = if p1 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p0.layoutOrder + 3
+				TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				LayoutOrder = p1.layoutOrder + 3
 			})
 		})
 	end)
 end
 
-local function createCompactSubscriptionTitle(p3)
+local function createCompactSubscriptionTitle(p1)
 	-- upvalues: reactModule (ref), imageSetLabel (ref), withStyle (ref)
 	local createElement = reactModule.createElement
-	local var6 = "Frame"
+	local var1 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
@@ -142,24 +142,24 @@ local function createCompactSubscriptionTitle(p3)
 			Size = UDim2.new(0, 96, 0, 96),
 			ScaleType = Enum.ScaleType.Fit,
 			AutomaticSize = Enum.AutomaticSize.X,
-			Image = p3.itemIcon
+			Image = p1.itemIcon
 		})
 	}
-	local var9 = true
-	t_1.SubscriptionInfo = withStyle(function(p4)
-		-- upvalues: reactModule (copy), p3 (ref), var9 (ref)
-		local theme = p4.Theme
-		local font = p4.Font.Body.Font
+	local var2 = true
+	t_1.SubscriptionInfo = withStyle(function(p2)
+		-- upvalues: reactModule (copy), p1 (ref), var2 (ref)
+		local theme = p2.Theme
+		local font = p2.Font.Body.Font
 		
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = p3.layoutOrder
+			LayoutOrder = p1.layoutOrder
 		}, {
 			Layout = reactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				HorizontalAlignment = if var9 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+				HorizontalAlignment = if var2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, 8)
 			})
 		}, {
@@ -168,12 +168,12 @@ local function createCompactSubscriptionTitle(p3)
 				TextSize = 16,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 20),
-				Text = p3.subscriptionProviderName,
+				Text = p1.subscriptionProviderName,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				Font = font,
-				TextXAlignment = if var9 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p3.layoutOrder
+				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				LayoutOrder = p1.layoutOrder
 			})
 		}, {
 			Title = reactModule.createElement("TextLabel", {
@@ -181,12 +181,12 @@ local function createCompactSubscriptionTitle(p3)
 				TextSize = 20,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 20),
-				Text = p3.name,
+				Text = p1.name,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				Font = font,
-				TextXAlignment = if var9 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p3.layoutOrder + 1
+				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				LayoutOrder = p1.layoutOrder + 1
 			})
 		}, {
 			PriceFrame = reactModule.createElement("Frame", {
@@ -195,11 +195,11 @@ local function createCompactSubscriptionTitle(p3)
 				BackgroundColor3 = Color3.fromRGB(255, 0, 0),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				LayoutOrder = p3.layoutOrder + 2
+				LayoutOrder = p1.layoutOrder + 2
 			}, {
 				Layout = reactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					HorizontalAlignment = if var9 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+					HorizontalAlignment = if var2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
 					FillDirection = Enum.FillDirection.Horizontal
 				}),
 				Price = reactModule.createElement("TextLabel", {
@@ -208,12 +208,12 @@ local function createCompactSubscriptionTitle(p3)
 					RichText = true,
 					TextWrapped = true,
 					Size = UDim2.new(0, 0, 0, 16),
-					Text = p3.displayPrice,
+					Text = p1.displayPrice,
 					TextColor3 = theme.TextEmphasis.Color,
 					TextTransparency = theme.TextDefault.Transparency,
 					Font = font,
-					TextXAlignment = if var9 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p3.layoutOrder + 1,
+					TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
 				}),
 				Period = reactModule.createElement("TextLabel", {
@@ -222,12 +222,12 @@ local function createCompactSubscriptionTitle(p3)
 					RichText = true,
 					TextWrapped = true,
 					Size = UDim2.new(0, 0, 0, 16),
-					Text = p3.period,
+					Text = p1.period,
 					TextColor3 = theme.TextDefault.Color,
 					TextTransparency = theme.TextDefault.Transparency,
 					Font = font,
-					TextXAlignment = if var9 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p3.layoutOrder + 1,
+					TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
 				})
 			})
@@ -237,22 +237,22 @@ local function createCompactSubscriptionTitle(p3)
 				TextSize = 16,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 16),
-				Text = p3.disclaimerText,
+				Text = p1.disclaimerText,
 				TextColor3 = theme.TextDefault.Color,
 				Font = font,
-				TextXAlignment = if var9 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p3.layoutOrder + 3
+				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				LayoutOrder = p1.layoutOrder + 3
 			})
 		})
 	end)
 	
-	return createElement(var6, t, t_1)
+	return createElement(var1, t, t_1)
 end
 
-local function createNormalSubscriptionTitle(p5)
+local function createNormalSubscriptionTitle(p1)
 	-- upvalues: reactModule (ref), imageSetLabel (ref), withStyle (ref)
 	local createElement = reactModule.createElement
-	local var10 = "Frame"
+	local var1 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
@@ -272,24 +272,24 @@ local function createNormalSubscriptionTitle(p5)
 			Size = UDim2.new(0, 96, 0, 96),
 			ScaleType = Enum.ScaleType.Fit,
 			AutomaticSize = Enum.AutomaticSize.X,
-			Image = p5.itemIcon
+			Image = p1.itemIcon
 		})
 	}
-	local var13 = false
-	t_1.SubscriptionInfo = withStyle(function(p6)
-		-- upvalues: reactModule (copy), p5 (ref), var13 (ref)
-		local theme = p6.Theme
-		local font = p6.Font.Body.Font
+	local var2 = false
+	t_1.SubscriptionInfo = withStyle(function(p2)
+		-- upvalues: reactModule (copy), p1 (ref), var2 (ref)
+		local theme = p2.Theme
+		local font = p2.Font.Body.Font
 		
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = p5.layoutOrder
+			LayoutOrder = p1.layoutOrder
 		}, {
 			Layout = reactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				HorizontalAlignment = if var13 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+				HorizontalAlignment = if var2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, 8)
 			})
 		}, {
@@ -298,12 +298,12 @@ local function createNormalSubscriptionTitle(p5)
 				TextSize = 16,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 20),
-				Text = p5.subscriptionProviderName,
+				Text = p1.subscriptionProviderName,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				Font = font,
-				TextXAlignment = if var13 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p5.layoutOrder
+				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				LayoutOrder = p1.layoutOrder
 			})
 		}, {
 			Title = reactModule.createElement("TextLabel", {
@@ -311,12 +311,12 @@ local function createNormalSubscriptionTitle(p5)
 				TextSize = 20,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 20),
-				Text = p5.name,
+				Text = p1.name,
 				TextColor3 = theme.TextEmphasis.Color,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				Font = font,
-				TextXAlignment = if var13 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p5.layoutOrder + 1
+				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				LayoutOrder = p1.layoutOrder + 1
 			})
 		}, {
 			PriceFrame = reactModule.createElement("Frame", {
@@ -325,11 +325,11 @@ local function createNormalSubscriptionTitle(p5)
 				BackgroundColor3 = Color3.fromRGB(255, 0, 0),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				LayoutOrder = p5.layoutOrder + 2
+				LayoutOrder = p1.layoutOrder + 2
 			}, {
 				Layout = reactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					HorizontalAlignment = if var13 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+					HorizontalAlignment = if var2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
 					FillDirection = Enum.FillDirection.Horizontal
 				}),
 				Price = reactModule.createElement("TextLabel", {
@@ -338,12 +338,12 @@ local function createNormalSubscriptionTitle(p5)
 					RichText = true,
 					TextWrapped = true,
 					Size = UDim2.new(0, 0, 0, 16),
-					Text = p5.displayPrice,
+					Text = p1.displayPrice,
 					TextColor3 = theme.TextEmphasis.Color,
 					TextTransparency = theme.TextDefault.Transparency,
 					Font = font,
-					TextXAlignment = if var13 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p5.layoutOrder + 1,
+					TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
 				}),
 				Period = reactModule.createElement("TextLabel", {
@@ -352,12 +352,12 @@ local function createNormalSubscriptionTitle(p5)
 					RichText = true,
 					TextWrapped = true,
 					Size = UDim2.new(0, 0, 0, 16),
-					Text = p5.period,
+					Text = p1.period,
 					TextColor3 = theme.TextDefault.Color,
 					TextTransparency = theme.TextDefault.Transparency,
 					Font = font,
-					TextXAlignment = if var13 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p5.layoutOrder + 1,
+					TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
 				})
 			})
@@ -367,25 +367,25 @@ local function createNormalSubscriptionTitle(p5)
 				TextSize = 16,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 16),
-				Text = p5.disclaimerText,
+				Text = p1.disclaimerText,
 				TextColor3 = theme.TextDefault.Color,
 				Font = font,
-				TextXAlignment = if var13 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p5.layoutOrder + 3
+				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				LayoutOrder = p1.layoutOrder + 3
 			})
 		})
 	end)
 	
-	return createElement(var10, t, t_1)
+	return createElement(var1, t, t_1)
 end
 
-function subscriptionTitle.getTitleHeight(_, p7)
-	return if p7 > 216 then 216 else 96
+function subscriptionTitle.getTitleHeight(_, p1)
+	return if p1 > 216 then 216 else 96
 end
 
-function subscriptionTitle.render(p8)
+function subscriptionTitle.render(p1)
 	-- upvalues: createNormalSubscriptionTitle (ref), createCompactSubscriptionTitle (ref)
-	return if p8.props.contentHeight > 216 then createNormalSubscriptionTitle(p8.props) else createCompactSubscriptionTitle(p8.props)
+	return if p1.props.contentHeight > 216 then createNormalSubscriptionTitle(p1.props) else createCompactSubscriptionTitle(p1.props)
 end
 
 return subscriptionTitle

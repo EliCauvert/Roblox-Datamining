@@ -1,10 +1,10 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0)
+return function(p1)
 	-- upvalues: httpService (ref)
-	local var1 = if type(p0) == "table" then p0.StatusCode else nil
+	local var1 = if type(p1) == "table" then p1.StatusCode else nil
 	local code = nil
-	local var2 = if type(p0) == "table" then p0.Body else nil
+	local var2 = if type(p1) == "table" then p1.Body else nil
 	
 	if type(var2) == "string" then
 		local ok, status = pcall(httpService.JSONDecode, httpService, var2)

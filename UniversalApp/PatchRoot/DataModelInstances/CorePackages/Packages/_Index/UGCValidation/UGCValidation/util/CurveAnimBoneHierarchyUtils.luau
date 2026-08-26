@@ -3,34 +3,34 @@ local t = {}
 local list = {
 	"Head", "UpperTorso", "LeftFoot", "RightFoot", "LeftHand", "RightHand"
 }
+local var1 = nil
+local var2 = nil
 local var3 = nil
-local var4 = nil
-local var5 = nil
 
 local function ensureCaches()
-	-- upvalues: var5 (write), list (ref), r15plusUtilsModule (ref), var3 (write), var4 (write)
-	if var5 then return end
+	-- upvalues: var3 (write), list (ref), r15plusUtilsModule (ref), var1 (write), var2 (write)
+	if var3 then return end
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
 	
-	local function traverse(p0, p1, p2)
+	local function traverse(p1, p2, p3)
 		-- upvalues: t (ref), t_1 (ref), t_2 (ref), traverse (ref)
-		for i, v in p0 do
+		for i, v in p1 do
 			if v.ClassName == "Bone" then
 				t[i] = true
 				
-				if p1 == nil then
-					if not t_1[p2] then
-						t_1[p2] = {}
+				if p2 == nil then
+					if not t_1[p3] then
+						t_1[p3] = {}
 					end
-					table.insert(t_1[p2], i)
-				elseif not t_2[p1] then
-					t_2[p1] = {}
+					table.insert(t_1[p3], i)
+				elseif not t_2[p2] then
+					t_2[p2] = {}
 				end
-				table.insert(t_2[p1], i)
+				table.insert(t_2[p2], i)
 				if v._children then
-					traverse(v._children, i, p2)
+					traverse(v._children, i, p3)
 				end
 			end
 		end
@@ -39,14 +39,14 @@ local function ensureCaches()
 	for i, v in list do
 		traverse(r15plusUtilsModule.getAvatarBoneSchema(v), nil, v)
 	end
-	var3 = t_1
-	var4 = t_2
-	var5 = t
+	var1 = t_1
+	var2 = t_2
+	var3 = t
 end
 
-function t.hasBoneFolders(p3)
+function t.hasBoneFolders(p4)
 	-- upvalues: t (ref)
-	for i, v in p3:GetDescendants() do
+	for i, v in p4:GetDescendants() do
 		if v:IsA("Folder") and t.isBoneFolderName(v.Name) then
 			return true
 		end
@@ -54,25 +54,25 @@ function t.hasBoneFolders(p3)
 	return false
 end
 
-function t.isBoneFolderName(p4)
-	-- upvalues: ensureCaches (ref), var5 (write)
-	ensureCaches()
-	
-	return var5[p4] == true
-end
-
-function t.getRootBoneNamesForBodyPart(p5)
+function t.isBoneFolderName(p5)
 	-- upvalues: ensureCaches (ref), var3 (write)
 	ensureCaches()
 	
-	return var3[p5] or {}
+	return var3[p5] == true
 end
 
-function t.getChildBoneNames(p6)
-	-- upvalues: ensureCaches (ref), var4 (write)
+function t.getRootBoneNamesForBodyPart(p5)
+	-- upvalues: ensureCaches (ref), var1 (write)
 	ensureCaches()
 	
-	return var4[p6] or {}
+	return var1[p5] or {}
+end
+
+function t.getChildBoneNames(p5)
+	-- upvalues: ensureCaches (ref), var2 (write)
+	ensureCaches()
+	
+	return var2[p5] or {}
 end
 
 return t

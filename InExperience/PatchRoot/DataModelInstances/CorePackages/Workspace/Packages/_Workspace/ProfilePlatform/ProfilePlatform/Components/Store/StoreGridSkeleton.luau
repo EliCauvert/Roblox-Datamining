@@ -9,12 +9,12 @@ local skeleton = foundationModule.Skeleton
 local radius = foundationModule.Enums.Radius
 local view = foundationModule.View
 
-local var5 = function(p0)
-	return p0 + 49
+local var1 = function(p1)
+	return p1 + 49
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), squareCollectionGridViewModule (ref), var5 (ref)
+	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), squareCollectionGridViewModule (ref), var1 (ref)
 	return reactModule.createElement(squareCollectionGridViewModule, {
 		layoutOrder = p1.layoutOrder,
 		items = reactModule.useMemo(function()
@@ -50,7 +50,7 @@ return function(p1)
 				})
 			}), "Skeleton_" .. p2
 		end, {}),
-		getItemHeight = var5,
+		getItemHeight = var1,
 		title = useLocalization({ store = textKeysModule.Store }).store,
 		overrides = { numColumns = p1.numColumns or 3 }
 	})

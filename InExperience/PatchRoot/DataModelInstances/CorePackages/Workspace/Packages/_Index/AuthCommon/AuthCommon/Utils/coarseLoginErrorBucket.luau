@@ -17,12 +17,12 @@ local t_1 = {
 	[statusCodes.INTERNAL_SERVER_ERROR] = "serverError"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), t_1 (ref)
-	if typeof(p0) ~= "table" then
+	if typeof(p1) ~= "table" then
 		return "unknown"
 	end
-	local errorCode = t[p0.errorCode]
+	local errorCode = t[p1.errorCode]
 	
-	return errorCode or (if p0.HttpError == Enum.HttpError.OK then t_1[p0.StatusCode] or "unknown" else "unknown")
+	return errorCode or (if p1.HttpError == Enum.HttpError.OK then t_1[p1.StatusCode] or "unknown" else "unknown")
 end

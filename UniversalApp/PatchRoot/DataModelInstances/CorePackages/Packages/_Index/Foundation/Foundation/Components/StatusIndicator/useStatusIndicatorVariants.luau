@@ -7,10 +7,10 @@ local _ = require(foundation.Components.Types)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local var7 = _G.__DEV__ == true
+local var1 = _G.__DEV__ == true
 local font = Font.new(require(foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
-function variantsFactory(p0)
+function variantsFactory(p1)
 	-- upvalues: font (ref), statusIndicatorVariantModule (ref), flagsModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
 	return {
 		common = {
@@ -19,37 +19,37 @@ function variantsFactory(p0)
 		variants = {
 			[statusIndicatorVariantModule.Alert] = {
 				container = { tag = "bg-system-alert" },
-				content = { style = p0.DarkMode.Content.Emphasis }
+				content = { style = p1.DarkMode.Content.Emphasis }
 			},
 			[statusIndicatorVariantModule.Success] = {
 				container = { tag = "bg-system-success" },
-				content = { style = p0.LightMode.Content.Emphasis }
+				content = { style = p1.LightMode.Content.Emphasis }
 			},
 			[statusIndicatorVariantModule.Warning] = {
 				container = { tag = "bg-system-warning" },
-				content = { style = p0.LightMode.Content.Emphasis }
+				content = { style = p1.LightMode.Content.Emphasis }
 			},
 			[statusIndicatorVariantModule.Emphasis] = if flagsModule.FoundationActionEmphasisStatusIndicator then {
 				container = { tag = "bg-action-emphasis" },
-				content = { style = p0.Color.ActionEmphasis.Foreground }
+				content = { style = p1.Color.ActionEmphasis.Foreground }
 			} else {
 				container = { tag = "bg-system-emphasis" },
-				content = { style = p0.DarkMode.Content.Emphasis }
+				content = { style = p1.DarkMode.Content.Emphasis }
 			},
 			[statusIndicatorVariantModule.Neutral] = {
 				container = { tag = "bg-system-neutral" },
-				content = { style = p0.Inverse.Content.Emphasis }
+				content = { style = p1.Inverse.Content.Emphasis }
 			},
 			[statusIndicatorVariantModule.Standard] = {
 				container = { tag = "bg-action-standard" },
-				content = { style = p0.Color.Content.Emphasis }
+				content = { style = p1.Color.Content.Emphasis }
 			},
 			[statusIndicatorVariantModule.Contrast_Experiment] = {
 				container = { tag = "bg-system-contrast" },
-				content = { style = p0.Inverse.Content.Emphasis }
+				content = { style = p1.Inverse.Content.Emphasis }
 			},
 			[statusIndicatorVariantModule.Voice] = {
-				container = { backgroundStyle = p0.Color.Extended.Orange.Orange_600 }
+				container = { backgroundStyle = p1.Color.Extended.Orange.Orange_600 }
 			}
 		},
 		hasValue = if flagsModule.FoundationAvatarBeta then {
@@ -79,34 +79,34 @@ function variantsFactory(p0)
 		sizes = if flagsModule.FoundationAvatarBeta then {
 			[statusIndicatorSizeModule.XSmall] = {
 				container = {
-					size = UDim2.fromOffset(p0.Size.Size_150, p0.Size.Size_150)
+					size = UDim2.fromOffset(p1.Size.Size_150, p1.Size.Size_150)
 				},
 				ring = {
-					size = UDim2.fromOffset(p0.Size.Size_150 / 2, p0.Size.Size_150 / 2)
+					size = UDim2.fromOffset(p1.Size.Size_150 / 2, p1.Size.Size_150 / 2)
 				}
 			},
 			[statusIndicatorSizeModule.Small] = {
 				container = {
-					size = UDim2.fromOffset(p0.Size.Size_200, p0.Size.Size_200)
+					size = UDim2.fromOffset(p1.Size.Size_200, p1.Size.Size_200)
 				},
 				ring = {
-					size = UDim2.fromOffset(p0.Size.Size_200 / 2, p0.Size.Size_200 / 2)
+					size = UDim2.fromOffset(p1.Size.Size_200 / 2, p1.Size.Size_200 / 2)
 				}
 			},
 			[statusIndicatorSizeModule.Medium] = {
 				container = {
-					size = UDim2.fromOffset(p0.Size.Size_250, p0.Size.Size_250)
+					size = UDim2.fromOffset(p1.Size.Size_250, p1.Size.Size_250)
 				},
 				ring = {
-					size = UDim2.fromOffset(p0.Size.Size_250 / 2, p0.Size.Size_250 / 2)
+					size = UDim2.fromOffset(p1.Size.Size_250 / 2, p1.Size.Size_250 / 2)
 				}
 			},
 			[statusIndicatorSizeModule.Pictogram] = {
 				container = {
-					size = UDim2.fromOffset(p0.Size.Size_500, p0.Size.Size_500)
+					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
 				},
 				ring = {
-					size = UDim2.fromOffset(p0.Size.Size_500 / 2, p0.Size.Size_500 / 2)
+					size = UDim2.fromOffset(p1.Size.Size_500 / 2, p1.Size.Size_500 / 2)
 				}
 			}
 		} else nil
@@ -114,8 +114,8 @@ function variantsFactory(p0)
 end
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: flagsModule (ref), var7 (ref), statusIndicatorVariantModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref)
-	if not flagsModule.FoundationStatusIndicatorVariantExperiment and var7 then
+	-- upvalues: flagsModule (ref), var1 (ref), statusIndicatorVariantModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref)
+	if not flagsModule.FoundationStatusIndicatorVariantExperiment and var1 then
 		if p2 == statusIndicatorVariantModule.Contrast_Experiment then
 			error("Contrast is not a supported StatusIndicator variant.")
 		end

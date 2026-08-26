@@ -35,7 +35,7 @@ local t_1 = {
 		fallback = "You can only view system messages here."
 	}
 }
-local var4 = reactModule.createContext({
+local var1 = reactModule.createContext({
 	canChat = true,
 	reason = nil,
 	messageKey = nil,
@@ -43,56 +43,56 @@ local var4 = reactModule.createContext({
 })
 
 return {
-	Context = var4,
-	Provider = function(p0)
-		-- upvalues: playersService (ref), reactModule (ref), useEventConnection (ref), t (ref), t_1 (ref), var4 (ref)
-		local subjectPlayer = p0.subjectPlayer or playersService.LocalPlayer
-		local var6, var7 = reactModule.useState(function()
-			-- upvalues: p0 (ref), subjectPlayer (ref)
-			return if p0.value == nil then if subjectPlayer then subjectPlayer.ChatAvailabilityStatus else "Enabled" else p0.value
+	Context = var1,
+	Provider = function(p1)
+		-- upvalues: playersService (ref), reactModule (ref), useEventConnection (ref), t (ref), t_1 (ref), var1 (ref)
+		local subjectPlayer = p1.subjectPlayer or playersService.LocalPlayer
+		local var2, var3 = reactModule.useState(function()
+			-- upvalues: p1 (ref), subjectPlayer (ref)
+			return if p1.value == nil then if subjectPlayer then subjectPlayer.ChatAvailabilityStatus else "Enabled" else p1.value
 		end)
-		useEventConnection(if p0.value == nil and subjectPlayer then subjectPlayer:GetPropertyChangedSignal("ChatAvailabilityStatus") else nil, function()
-			-- upvalues: subjectPlayer (ref), var7 (ref)
+		useEventConnection(if p1.value == nil and subjectPlayer then subjectPlayer:GetPropertyChangedSignal("ChatAvailabilityStatus") else nil, function()
+			-- upvalues: subjectPlayer (ref), var3 (ref)
 			if subjectPlayer then
-				var7(subjectPlayer.ChatAvailabilityStatus)
+				var3(subjectPlayer.ChatAvailabilityStatus)
 			end
 		end, {})
 		reactModule.useEffect(function()
-			-- upvalues: p0 (ref), var7 (ref)
-			if p0.value ~= nil then
-				var7(p0.value)
+			-- upvalues: p1 (ref), var3 (ref)
+			if p1.value ~= nil then
+				var3(p1.value)
 			end
-		end, { p0.value })
+		end, { p1.value })
 		
-		return reactModule.createElement(var4.Provider, {
+		return reactModule.createElement(var1.Provider, {
 			value = reactModule.useMemo(function()
-				-- upvalues: var6 (ref), t (copy), t_1 (copy)
-				local var8 = t[var6]
-				local var9 = if var8 then t_1[var8] else nil
+				-- upvalues: var2 (ref), t (copy), t_1 (copy)
+				local var4 = t[var2]
+				local var5 = if var4 then t_1[var4] else nil
 				
 				return {
-					canChat = var8 == nil,
-					reason = var8,
-					messageKey = if var9 then var9.key else nil,
-					messageFallback = if var9 then var9.fallback else nil
+					canChat = var4 == nil,
+					reason = var4,
+					messageKey = if var5 then var5.key else nil,
+					messageFallback = if var5 then var5.fallback else nil
 				}
-			end, { var6 })
-		}, p0.children)
+			end, { var2 })
+		}, p1.children)
 	end,
 	resolve = function(p1)
 		-- upvalues: t (ref), t_1 (ref)
-		local var10 = t[p1]
-		local var11 = if var10 then t_1[var10] else nil
+		local var2 = t[p1]
+		local var3 = if var2 then t_1[var2] else nil
 		
 		return {
-			canChat = var10 == nil,
-			reason = var10,
-			messageKey = if var11 then var11.key else nil,
-			messageFallback = if var11 then var11.fallback else nil
+			canChat = var2 == nil,
+			reason = var2,
+			messageKey = if var3 then var3.key else nil,
+			messageFallback = if var3 then var3.fallback else nil
 		}
 	end,
 	useLocalUserChatAvailability = function()
-		-- upvalues: reactModule (ref), var4 (ref)
-		return reactModule.useContext(var4)
+		-- upvalues: reactModule (ref), var1 (ref)
+		return reactModule.useContext(var1)
 	end
 }

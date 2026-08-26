@@ -5,7 +5,7 @@ local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDef
 local localizationProvider = require(parent.Localization).LocalizationProvider
 local layerCollectorProvider = require(parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
 
-return function(p0)
+return function(p1)
 	-- upvalues: styleProviderWithDefaultTheme (ref), localizationProvider (ref), layerCollectorProvider (ref), reactModule (ref), providerContainer (ref)
 	local t = {}
 	table.insert(t, {
@@ -16,13 +16,13 @@ return function(p0)
 		class = localizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p1)
-					return p1
+				Format = function(_, p2)
+					return p2
 				end
 			}
 		}
 	})
 	table.insert(t, { class = layerCollectorProvider, props = {} })
 	
-	return reactModule.createElement(providerContainer, { providers = t }, p0.children)
+	return reactModule.createElement(providerContainer, { providers = t }, p1.children)
 end

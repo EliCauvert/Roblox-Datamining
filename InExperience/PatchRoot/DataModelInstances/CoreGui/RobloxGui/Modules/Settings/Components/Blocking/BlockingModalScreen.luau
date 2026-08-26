@@ -24,15 +24,15 @@ blockingModalScreen.validateProps = tModule.interface({
 	overlay = tModule.optional(tModule.instanceIsA("GuiBase2d"))
 })
 
-function blockingModalScreen.render(p0)
+function blockingModalScreen.render(p1)
 	-- upvalues: roactModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), blockingModalContainerModule (ref), coreGuiService (ref), renderWithCoreScriptsStyleProviderModule (ref)
-	local overlay = p0.props.overlay
-	local var10 = roactModule.createElement(focusRoot, {
+	local overlay = p1.props.overlay
+	local var1 = roactModule.createElement(focusRoot, {
 		isIsolated = true,
 		isAutoFocusRoot = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
 	}, {
-		BlockingModalContainerWrapper = roactModule.createElement(blockingModalContainerModule, p0.props)
+		BlockingModalContainerWrapper = roactModule.createElement(blockingModalContainerModule, p1.props)
 	})
 	
 	return renderWithCoreScriptsStyleProviderModule(if overlay ~= nil then {
@@ -41,10 +41,10 @@ function blockingModalScreen.render(p0)
 				IgnoreGuiInset = true,
 				AutoLocalize = false,
 				DisplayOrder = 6
-			}, { BlockingModalContainer = var10 })
+			}, { BlockingModalContainer = var1 })
 		})
 	} else {
-		roactModule.createElement(roactModule.Portal, { target = overlay }, { BlockingModalScreen = var10 })
+		roactModule.createElement(roactModule.Portal, { target = overlay }, { BlockingModalScreen = var1 })
 	})
 end
 

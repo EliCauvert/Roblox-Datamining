@@ -45,29 +45,29 @@ local t_1 = {
 }
 
 return {
-	getStringsFromErrorCodeAndRetryNum = function(p0, p1)
+	getStringsFromErrorCodeAndRetryNum = function(p1, p2)
 		-- upvalues: VPCErrorCodesEnum (ref), t (ref), VPCErrorCategoriesEnum (ref), vpcErrorCategoryToMessageStrings (ref)
-		if p1 >= 4 then
-			p0 = VPCErrorCodesEnum.SenderFlooded
+		if p2 >= 4 then
+			p1 = VPCErrorCodesEnum.SenderFlooded
 		end
-		local var4 = t[p0]
+		local var1 = t[p1]
 		
-		if var4 == nil then
-			var4 = VPCErrorCategoriesEnum.GenericError
+		if var1 == nil then
+			var1 = VPCErrorCategoriesEnum.GenericError
 		end
-		return vpcErrorCategoryToMessageStrings[var4]
+		return vpcErrorCategoryToMessageStrings[var1]
 	end,
-	getRetryBehaviorFromErrorCodeAndRetryNum = function(p2, p3)
+	getRetryBehaviorFromErrorCodeAndRetryNum = function(p1, p2)
 		-- upvalues: VPCErrorCodesEnum (ref), t (ref), VPCErrorCategoriesEnum (ref), t_1 (ref)
-		if p3 >= 4 then
-			p2 = VPCErrorCodesEnum.SenderFlooded
+		if p2 >= 4 then
+			p1 = VPCErrorCodesEnum.SenderFlooded
 		end
-		local var5 = t[p2]
+		local var1 = t[p1]
 		
-		if var5 == nil then
-			var5 = VPCErrorCategoriesEnum.GenericError
+		if var1 == nil then
+			var1 = VPCErrorCategoriesEnum.GenericError
 		end
-		return t_1[var5]
+		return t_1[var1]
 	end,
 	VPCErrorCategoriesEnum = VPCErrorCategoriesEnum,
 	VPCRetryBehaviorEnum = VPCRetryBehaviorEnum

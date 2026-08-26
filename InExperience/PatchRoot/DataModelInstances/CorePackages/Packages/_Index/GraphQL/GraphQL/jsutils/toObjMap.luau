@@ -1,10 +1,10 @@
 ﻿local _ = require(script.Parent.ObjMap)
 
 return {
-	toObjMap = function(p0)
+	toObjMap = function(p1)
 		local t = {}
 		
-		for i, v in pairs(p0) do
+		for i, v in pairs(p1) do
 			t[i] = v
 		end
 		return t

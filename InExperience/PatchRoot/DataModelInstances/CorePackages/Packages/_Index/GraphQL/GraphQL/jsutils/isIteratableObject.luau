@@ -1,5 +1,5 @@
 ﻿return {
-	isIteratableObject = function(p0)
-		return typeof(p0) == "table" and (next(p0) == nil or #p0 ~= 0)
+	isIteratableObject = function(p1)
+		return typeof(p1) == "table" and (next(p1) == nil or #p1 ~= 0)
 	end
 }

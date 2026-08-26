@@ -2,7 +2,7 @@
 local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
 local tModule = require(parent.t)
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local var2 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	universeId = tModule.string,
 	playabilityStatus = tModule.optional(tModule.string),
 	contextualMessage = tModule.string
@@ -15,16 +15,16 @@ local t = {
 	lastUpdated = { 26, 5, 6 }
 }
 
-return function(p0, p1)
-	-- upvalues: var2 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
-	local var4, var5 = var2(p0)
+return function(p1, p2)
+	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
+	local var2, var3 = var1(p1)
 	
-	if not var4 then
-		discoveryEventErrorLogger.reportError("PlayButtonContextualMessageImpressionInvalidInterface", var5)
+	if not var2 then
+		discoveryEventErrorLogger.reportError("PlayButtonContextualMessageImpressionInvalidInterface", var3)
 	end
 	telemetryService:LogEvent(t, {
-		eventContext = p1,
+		eventContext = p2,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-		customFields = p0
+		customFields = p1
 	})
 end

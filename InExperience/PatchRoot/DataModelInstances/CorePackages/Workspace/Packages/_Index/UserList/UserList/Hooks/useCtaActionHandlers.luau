@@ -14,11 +14,11 @@ local _ = require(userList.Common.Types)
 local friendingActionsModule = require(userList.Cta.friendingActions)
 local notificationTypeList = guiService:GetNotificationTypeList()
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), fFlagUserListCtaAnalyticsEnabled (ref), buttonTypes (ref), guiService (ref), notificationTypeList (ref), friendingActionsModule (ref)
-	local var9 = useDispatch()
-	local var10 = reactModule.useRef({})
-	local var11 = useLocalization({
+	local var1 = useDispatch()
+	local var2 = reactModule.useRef({})
+	local var3 = useLocalization({
 		friendRequestSent = textKeysModule.FriendRequestSent,
 		friendAdded = textKeysModule.FriendAdded,
 		invalidTargetUserError = textKeysModule.InvalidTargetUserError,
@@ -32,63 +32,63 @@ return function(p0)
 		tooManyRequestsError = textKeysModule.TooManyRequestsError,
 		defaultFriendingError = textKeysModule.DefaultFriendingError
 	})
-	local var12 = if p0 then p0.friendshipOriginSourceType else nil
-	local var13 = if fFlagUserListCtaAnalyticsEnabled then if p0 then p0.onCtaActivated else nil else nil
+	local var4 = if p1 then p1.friendshipOriginSourceType else nil
+	local var5 = if fFlagUserListCtaAnalyticsEnabled then if p1 then p1.onCtaActivated else nil else nil
 	
 	return reactModule.useMemo(function()
-		-- upvalues: buttonTypes (copy), fFlagUserListCtaAnalyticsEnabled (copy), var13 (write), guiService (copy), notificationTypeList (copy), var10 (ref), friendingActionsModule (copy), var9 (ref), var12 (ref), var11 (ref)
+		-- upvalues: buttonTypes (copy), fFlagUserListCtaAnalyticsEnabled (copy), var5 (write), guiService (copy), notificationTypeList (copy), var2 (ref), friendingActionsModule (copy), var1 (ref), var4 (ref), var3 (ref)
 		return {
-			[buttonTypes.Chat] = function(p1)
-				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), var13 (copy), buttonTypes (copy), guiService (copy), notificationTypeList (copy)
-				if fFlagUserListCtaAnalyticsEnabled and var13 ~= nil then
-					var13({ buttonType = buttonTypes.Chat, userId = p1 })
+			[buttonTypes.Chat] = function(p2)
+				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), var5 (copy), buttonTypes (copy), guiService (copy), notificationTypeList (copy)
+				if fFlagUserListCtaAnalyticsEnabled and var5 ~= nil then
+					var5({ buttonType = buttonTypes.Chat, userId = p2 })
 				end
-				guiService:BroadcastNotification(p1, notificationTypeList.LAUNCH_CONVERSATION)
+				guiService:BroadcastNotification(p2, notificationTypeList.LAUNCH_CONVERSATION)
 			end,
 			[buttonTypes.Add] = function(p2)
-				-- upvalues: var10 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var13 (copy), buttonTypes (copy), friendingActionsModule (copy), var9 (copy), var12 (copy), var11 (copy)
-				if var10.current[p2] then return end
-				var10.current[p2] = true
+				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var5 (copy), buttonTypes (copy), friendingActionsModule (copy), var1 (copy), var4 (copy), var3 (copy)
+				if var2.current[p2] then return end
+				var2.current[p2] = true
 				
-				if fFlagUserListCtaAnalyticsEnabled and var13 ~= nil then
-					var13({ buttonType = buttonTypes.Add, userId = p2 })
+				if fFlagUserListCtaAnalyticsEnabled and var5 ~= nil then
+					var5({ buttonType = buttonTypes.Add, userId = p2 })
 				end
 				friendingActionsModule.executeAddFriend({
-					dispatch = var9,
+					dispatch = var1,
 					targetUserId = p2,
-					friendshipOriginSourceType = var12,
-					localized = var11
+					friendshipOriginSourceType = var4,
+					localized = var3
 				}):finally(function()
-					-- upvalues: var10 (copy), p2 (ref)
-					var10.current[p2] = nil
+					-- upvalues: var2 (copy), p2 (ref)
+					var2.current[p2] = nil
 				end)
 			end,
-			[buttonTypes.Accept] = function(p3)
-				-- upvalues: var10 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var13 (copy), buttonTypes (copy), friendingActionsModule (copy), var9 (copy), var11 (copy)
-				if var10.current[p3] then return end
-				var10.current[p3] = true
+			[buttonTypes.Accept] = function(p2)
+				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var5 (copy), buttonTypes (copy), friendingActionsModule (copy), var1 (copy), var3 (copy)
+				if var2.current[p2] then return end
+				var2.current[p2] = true
 				
-				if fFlagUserListCtaAnalyticsEnabled and var13 ~= nil then
-					var13({ buttonType = buttonTypes.Accept, userId = p3 })
+				if fFlagUserListCtaAnalyticsEnabled and var5 ~= nil then
+					var5({ buttonType = buttonTypes.Accept, userId = p2 })
 				end
-				friendingActionsModule.executeAcceptFriendRequest({ dispatch = var9, targetUserId = p3, localized = var11 }):finally(function()
-					-- upvalues: var10 (copy), p3 (ref)
-					var10.current[p3] = nil
+				friendingActionsModule.executeAcceptFriendRequest({ dispatch = var1, targetUserId = p2, localized = var3 }):finally(function()
+					-- upvalues: var2 (copy), p2 (ref)
+					var2.current[p2] = nil
 				end)
 			end,
-			[buttonTypes.Dismiss] = function(p4)
-				-- upvalues: var10 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var13 (copy), buttonTypes (copy), friendingActionsModule (copy), var9 (copy), var11 (copy)
-				if var10.current[p4] then return end
-				var10.current[p4] = true
+			[buttonTypes.Dismiss] = function(p2)
+				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var5 (copy), buttonTypes (copy), friendingActionsModule (copy), var1 (copy), var3 (copy)
+				if var2.current[p2] then return end
+				var2.current[p2] = true
 				
-				if fFlagUserListCtaAnalyticsEnabled and var13 ~= nil then
-					var13({ buttonType = buttonTypes.Dismiss, userId = p4 })
+				if fFlagUserListCtaAnalyticsEnabled and var5 ~= nil then
+					var5({ buttonType = buttonTypes.Dismiss, userId = p2 })
 				end
-				friendingActionsModule.executeDeclineFriendRequest({ dispatch = var9, targetUserId = p4, localized = var11 }):finally(function()
-					-- upvalues: var10 (copy), p4 (ref)
-					var10.current[p4] = nil
+				friendingActionsModule.executeDeclineFriendRequest({ dispatch = var1, targetUserId = p2, localized = var3 }):finally(function()
+					-- upvalues: var2 (copy), p2 (ref)
+					var2.current[p2] = nil
 				end)
 			end
 		}
-	end, { var9, var11, var12, var13 })
+	end, { var1, var3, var4, var5 })
 end

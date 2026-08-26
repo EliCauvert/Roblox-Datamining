@@ -17,21 +17,21 @@ local t = {
 	style = nil
 }
 
-function AddFriendsEntry(p0)
+function AddFriendsEntry(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), iconWithTextCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
-	local var7 = cryoModule.Dictionary.join(t, p0)
+	local var1 = cryoModule.Dictionary.join(t, p1)
 	
 	return reactModule.createElement(iconWithTextCellModule, {
 		showDivider = false,
-		Size = UDim2.new(1, 0, 0, var7.cellHeight),
-		primaryIcon = var7.iconImage,
-		primaryIconSize = var7.iconSize,
-		iconCellWidth = var7.iconCellWidth,
-		Text = var7.Text,
-		onActivated = var7.onActivated,
-		LayoutOrder = var7.LayoutOrder,
-		style = var7.style,
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsListActionButton(var7.Text) else nil
+		Size = UDim2.new(1, 0, 0, var1.cellHeight),
+		primaryIcon = var1.iconImage,
+		primaryIconSize = var1.iconSize,
+		iconCellWidth = var1.iconCellWidth,
+		Text = var1.Text,
+		onActivated = var1.onActivated,
+		LayoutOrder = var1.LayoutOrder,
+		style = var1.style,
+		testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsListActionButton(var1.Text) else nil
 	})
 end
 

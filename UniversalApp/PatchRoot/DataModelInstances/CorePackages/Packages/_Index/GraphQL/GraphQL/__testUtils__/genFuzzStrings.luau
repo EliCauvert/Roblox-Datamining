@@ -1,9 +1,9 @@
 ﻿return {
-	genFuzzStrings = function(p0)
+	genFuzzStrings = function(p1)
 		return coroutine.wrap(function()
-			-- upvalues: p0 (ref)
-			local allowedChars = p0.allowedChars
-			local maxLength = p0.maxLength
+			-- upvalues: p1 (ref)
+			local allowedChars = p1.allowedChars
+			local maxLength = p1.maxLength
 			local allowedCharsCount = #allowedChars
 			local var1 = 0
 			

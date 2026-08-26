@@ -10,28 +10,28 @@ local fetchGamePassesModule = require(script.Parent.fetchGamePasses)
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), fetchGamePassesModule (ref)
-	local var5 = createDataCacheModule()
-	local var6 = createDataCacheModule()
-	local var7 = createDataResolverModule({
+	local var1 = createDataCacheModule()
+	local var2 = createDataCacheModule()
+	local var3 = createDataResolverModule({
 		supportsMultiGet = false,
-		cache = var6,
-		logError = function(p0)
+		cache = var2,
+		logError = function(p1)
 			-- upvalues: logResponseError (copy), discoveryEventErrorLogger (copy)
 			logResponseError("game-passes/v1/universes/.../game-passes", {
-				StatusCode = if type(p0) == "table" and p0.StatusCode then p0.StatusCode else nil
+				StatusCode = if type(p1) == "table" and p1.StatusCode then p1.StatusCode else nil
 			})
-			discoveryEventErrorLogger.reportError("GamePassStore", "Failed to fetch game passes", { err = tostring(p0) })
+			discoveryEventErrorLogger.reportError("GamePassStore", "Failed to fetch game passes", { err = tostring(p1) })
 		end,
 		fetchFn = function(p1, _)
-			-- upvalues: fetchGamePassesModule (copy), var5 (ref)
+			-- upvalues: fetchGamePassesModule (copy), var1 (ref)
 			return fetchGamePassesModule(p1):andThen(function(p2)
-				-- upvalues: var5 (copy)
+				-- upvalues: var1 (copy)
 				local t = {}
 				
 				for i, v in p2.gamePasses do
-					local var9 = tostring(v.id)
-					table.insert(t, var9)
-					var5.updateItems({ [var9] = v })
+					local var4 = tostring(v.id)
+					table.insert(t, var4)
+					var1.updateItems({ [var4] = v })
 				end
 				return t
 			end)
@@ -39,23 +39,23 @@ return function()
 	})
 	
 	return {
-		getPassesForUniverse = var7.getCachedItem,
-		getAndFetchPassesForUniverse = var7.getAndFetchItem,
-		fetchPassesForUniverse = var7.fetchItem,
-		getGamePassInfo = var5.getItem,
-		updateGamePassInfo = var5.updateItem,
-		updateGamePassInfos = var5.updateItems,
-		updateUniversePasses = var6.updateItems,
+		getPassesForUniverse = var3.getCachedItem,
+		getAndFetchPassesForUniverse = var3.getAndFetchItem,
+		fetchPassesForUniverse = var3.fetchItem,
+		getGamePassInfo = var1.getItem,
+		updateGamePassInfo = var1.updateItem,
+		updateGamePassInfos = var1.updateItems,
+		updateUniversePasses = var2.updateItems,
 		clear = function()
-			-- upvalues: var6 (ref), var7 (ref), var5 (ref)
-			var6.clear()
-			var7.clear()
-			var5.clear()
+			-- upvalues: var2 (ref), var3 (ref), var1 (ref)
+			var2.clear()
+			var3.clear()
+			var1.clear()
 		end,
 		dispose = function()
-			-- upvalues: var7 (ref), var5 (ref)
-			var7.dispose()
-			var5.dispose()
+			-- upvalues: var3 (ref), var1 (ref)
+			var3.dispose()
+			var1.dispose()
 		end
 	}
 end

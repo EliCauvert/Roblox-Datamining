@@ -1,6 +1,6 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetSettings", function(p0)
+﻿return require(script.Parent.Parent.ActionCreator)("SetSettings", function(p1)
 	return {
-		preferredTransparency = p0.preferredTransparency,
-		reducedMotion = p0.reducedMotion
+		preferredTransparency = p1.preferredTransparency,
+		reducedMotion = p1.reducedMotion
 	}
 end)

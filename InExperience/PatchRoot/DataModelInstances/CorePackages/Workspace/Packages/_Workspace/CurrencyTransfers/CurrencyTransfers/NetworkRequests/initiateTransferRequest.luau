@@ -6,27 +6,27 @@ local promiseModule = require(parent.Promise)
 local initiateTransferModelModule = require(currencyTransfers.Models.InitiateTransferModel)
 local httpRequestModule = require(currencyTransfers.NetworkRequests.HttpRequest)
 local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
-local var7 = urlBuilderModule.UrlBuilder.new({
+local var1 = urlBuilderModule.UrlBuilder.new({
 	path = "transfer/v1/robux-transfer/initiate-transfer",
 	base = urlBuilderModule.UrlBase.APIS
 })()
-local var8 = tModule.strictInterface({
+local var2 = tModule.strictInterface({
 	recipientId = tModule.number,
 	transferOrigination = tModule.optional(tModule.string)
 })
 
-return function(p0, p1, p2)
-	-- upvalues: var8 (ref), httpRequestModule (ref), transferOriginationModule (ref), var7 (ref), initiateTransferModelModule (ref), promiseModule (ref)
-	assert(var8(p0))
+return function(p1, p2, p3)
+	-- upvalues: var2 (ref), httpRequestModule (ref), transferOriginationModule (ref), var1 (ref), initiateTransferModelModule (ref), promiseModule (ref)
+	assert(var2(p1))
 	
-	return (if p2 ~= nil then httpRequestModule.new(p1) else httpRequestModule.fromNetworkImpl(p2)):post(var7, {
-		recipientId = p0.recipientId,
-		transferOrigin = transferOriginationModule.toEnumInteger[p0.transferOrigination or transferOriginationModule.Unknown] or transferOriginationModule.toEnumInteger[transferOriginationModule.Unknown]
+	return (if p3 ~= nil then httpRequestModule.new(p2) else httpRequestModule.fromNetworkImpl(p3)):post(var1, {
+		recipientId = p1.recipientId,
+		transferOrigin = transferOriginationModule.toEnumInteger[p1.transferOrigination or transferOriginationModule.Unknown] or transferOriginationModule.toEnumInteger[transferOriginationModule.Unknown]
 	}):andThen(function(p4)
 		-- upvalues: initiateTransferModelModule (copy)
 		return initiateTransferModelModule.format(p4)
-	end):catch(function(p3)
+	end):catch(function(p4)
 		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p3)
+		return promiseModule.reject(p4)
 	end)
 end

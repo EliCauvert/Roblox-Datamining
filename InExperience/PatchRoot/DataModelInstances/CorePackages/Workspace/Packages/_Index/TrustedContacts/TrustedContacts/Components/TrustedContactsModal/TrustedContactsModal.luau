@@ -39,54 +39,54 @@ local fFlagTrustedFriendsUseEnumCTA = require(parent.SharedFlags).FFlagTrustedFr
 local fFlagTrustedFriendsUseFoundationSheet = require(parent.SharedFlags).FFlagTrustedFriendsUseFoundationSheet
 local _ = require(script.Parent.useModalButtonActions)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLayerCollector (ref), useScreenSize (ref), responsiveModule (ref), fFlagTrustedContactsModalFixFocusNavigationModule (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusOnMount (ref), TCMountMinLoadingTimeMs (ref), useTokens (ref), loading (ref), iconSize (ref), fFlagTrustedFriendsUseFoundationSheet (ref), sheet (ref), text (ref), fFlagTCLearnMoreLinkModule (ref), view (ref), socialMetadataSectionModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref), fFlagTrustedFriendsUseEnumCTA (ref), dialog (ref), dialogSize (ref), fFlagTCModalUseFoundationOverlay (ref), onCloseCallbackReason (ref), TCDialogCloseBtn (ref), fullPageModal (ref), partialPageModal (ref), scrollView (ref), foundationModule (ref), sources (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local isVerticallyConstrained = p0.isVerticallyConstrained
-	local var12 = useLayerCollector()
-	local var13 = useScreenSize()
-	local var14 = responsiveModule.useOrientation()
-	local onCloseModal = p0.onCloseModal
-	local var15 = if fFlagTrustedContactsModalFixFocusNavigationModule then reactModule.useMemo(function()
+	local isVerticallyConstrained = p1.isVerticallyConstrained
+	local var1 = useLayerCollector()
+	local var2 = useScreenSize()
+	local var3 = responsiveModule.useOrientation()
+	local onCloseModal = p1.onCloseModal
+	local var4 = if fFlagTrustedContactsModalFixFocusNavigationModule then reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), onCloseModal (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p1)
+				handler = inputHandlersModule.onRelease(function(p2)
 					-- upvalues: onCloseModal (copy)
 					onCloseModal()
-					p1:cancel()
+					p2:cancel()
 				end)
 			}
 		}
 	end, { onCloseModal }) else nil
-	local var16 = if fFlagTrustedContactsModalFixFocusNavigationModule then useFocusOnMount() else nil
-	local var17 = var14 == responsiveModule.DefaultKey
-	local var18, var19 = reactModule.useState(var17)
-	local var20 = reactModule.useRef(os.clock())
+	local var5 = if fFlagTrustedContactsModalFixFocusNavigationModule then useFocusOnMount() else nil
+	local var6 = var3 == responsiveModule.DefaultKey
+	local var7, var8 = reactModule.useState(var6)
+	local var9 = reactModule.useRef(os.clock())
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), var20 (ref), TCMountMinLoadingTimeMs (copy), var19 (ref)
-		if not var17 then
-			local var26 = os.clock() - var20.current
-			local var27 = TCMountMinLoadingTimeMs / 1000
+		-- upvalues: var6 (ref), var9 (ref), TCMountMinLoadingTimeMs (copy), var8 (ref)
+		if not var6 then
+			local var10 = os.clock() - var9.current
+			local var11 = TCMountMinLoadingTimeMs / 1000
 			
-			if var26 < var27 then
-				delay(var27 - var26, function()
-					-- upvalues: var19 (copy)
-					var19(false)
+			if var10 < var11 then
+				delay(var11 - var10, function()
+					-- upvalues: var8 (copy)
+					var8(false)
 				end)
 				
 				return
 			end
-			var19(false)
+			var8(false)
 		end
-	end, { var17, var19 })
+	end, { var6, var8 })
 	
-	if var12 and var12.absoluteSize and var12.absoluteSize ~= Vector2.new(0, 0) then
-		var13 = var12.absoluteSize
+	if var1 and var1.absoluteSize and var1.absoluteSize ~= Vector2.new(0, 0) then
+		var2 = var1.absoluteSize
 	end
-	local var21 = var14 == responsiveModule.BreakpointConfig.Enum.Landscape
-	local var22 = useTokens()
+	local var10 = var3 == responsiveModule.BreakpointConfig.Enum.Landscape
+	local var11 = useTokens()
 	
-	if var18 then
+	if var7 then
 		return reactModule.createElement(loading, {
 			size = iconSize.Large,
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -94,16 +94,16 @@ return function(p0)
 		})
 	end
 	local createElement
-	local var23 = if p0.modalButtonActions then p0.modalButtonActions[1] else nil
-	local var24 = if p0.modalButtonActions then p0.modalButtonActions[2] else nil
+	local var12 = if p1.modalButtonActions then p1.modalButtonActions[1] else nil
+	local var13 = if p1.modalButtonActions then p1.modalButtonActions[2] else nil
 	
 	if fFlagTrustedFriendsUseFoundationSheet then
 		createElement = reactModule.createElement
-		createElement = createElement(sheet.Root, { preferCenterSheet = true, onClose = p0.onCloseModal }, {
+		createElement = createElement(sheet.Root, { preferCenterSheet = true, onClose = p1.onCloseModal }, {
 			Header = reactModule.createElement(sheet.Header, nil, {
 				Title = reactModule.createElement(text, {
 					tag = "auto-xy text-heading-small text-align-x-left content-default",
-					Text = p0.headerText
+					Text = p1.headerText
 				})
 			}),
 			Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
@@ -114,66 +114,66 @@ return function(p0)
 					Text = reactModule.createElement(text, {
 						LayoutOrder = 1,
 						tag = "size-full-0 auto-y text-wrap text-align-x-left",
-						Text = p0.descriptionText
+						Text = p1.descriptionText
 					}),
 					LearnMore = reactModule.createElement(text, {
 						LayoutOrder = 2,
 						tag = "size-0 auto-xy text-wrap text-align-x-left",
 						RichText = true,
-						Text = `<u>{p0.learnMoreText}</u>`,
-						onActivated = p0.onLearnMoreClick
+						Text = `<u>{p1.learnMoreText}</u>`,
+						onActivated = p1.onLearnMoreClick
 					})
 				}) else reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-wrap text-align-x-left",
-					Text = p0.descriptionText
+					Text = p1.descriptionText
 				}),
 				Insights = reactModule.createElement(socialMetadataSectionModule, {
 					layoutOrder = 2,
-					userId = p0.userId,
+					userId = p1.userId,
 					isVerticallyConstrained = isVerticallyConstrained
 				})
 			}),
-			Actions = if var23 or var24 then reactModule.createElement(sheet.Actions, nil, {
-				First = var23 and reactModule.createElement(button, {
+			Actions = if var12 or var13 then reactModule.createElement(sheet.Actions, nil, {
+				First = var12 and reactModule.createElement(button, {
 					LayoutOrder = 1,
-					text = var23.text or "",
-					onActivated = var23.onActivated,
-					icon = var23.icon,
-					isLoading = var23.isLoading,
+					text = var12.text or "",
+					onActivated = var12.onActivated,
+					icon = var12.icon,
+					isLoading = var12.isLoading,
 					variant = buttonVariant.Emphasis,
 					fillBehavior = fillBehavior.Fill,
 					width = UDim.new(1, 0),
-					ref = var16,
-					isDisabled = if fFlagTrustedFriendsUseEnumCTA then var23.isDisabled else nil
+					ref = var5,
+					isDisabled = if fFlagTrustedFriendsUseEnumCTA then var12.isDisabled else nil
 				}) or nil,
-				Second = var24 and reactModule.createElement(button, {
+				Second = var13 and reactModule.createElement(button, {
 					LayoutOrder = 2,
-					text = var24.text or "",
-					onActivated = var24.onActivated,
-					icon = var24.icon,
-					isLoading = var24.isLoading,
+					text = var13.text or "",
+					onActivated = var13.onActivated,
+					icon = var13.icon,
+					isLoading = var13.isLoading,
 					variant = buttonVariant.Standard,
 					fillBehavior = fillBehavior.Fill,
 					width = UDim.new(1, 0),
-					isDisabled = if fFlagTrustedFriendsUseEnumCTA then var24.isDisabled else nil
+					isDisabled = if fFlagTrustedFriendsUseEnumCTA then var13.isDisabled else nil
 				}) or nil
 			}) else nil
 		})
-	elseif var21 then
+	elseif var10 then
 		createElement = reactModule.createElement
 		createElement = createElement(dialog.Root, {
 			size = dialogSize.Medium,
 			onClose = if fFlagTCModalUseFoundationOverlay then function(p2)
-				-- upvalues: onCloseCallbackReason (copy), p0 (ref)
+				-- upvalues: onCloseCallbackReason (copy), p1 (ref)
 				if p2 == onCloseCallbackReason.BackdropClick then
 					return
 				end
-				p0.onCloseModal()
-			end elseif TCDialogCloseBtn then p0.onCloseModal else nil,
+				p1.onCloseModal()
+			end elseif TCDialogCloseBtn then p1.onCloseModal else nil,
 			hasBackdrop = if fFlagTCModalUseFoundationOverlay then true else nil
 		}, {
-			Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = p0.headerText }),
+			Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = p1.headerText }),
 			Contents = reactModule.createElement("ScrollingFrame", {
 				LayoutOrder = 2,
 				BorderSizePixel = 0,
@@ -198,41 +198,41 @@ return function(p0)
 					reactModule.createElement(text, {
 						LayoutOrder = 1,
 						tag = "size-full-0 auto-y text-wrap text-align-x-left",
-						Text = p0.descriptionText
+						Text = p1.descriptionText
 					}),
 					LearnMore = reactModule.createElement(text, {
 						LayoutOrder = 2,
 						tag = "size-0 auto-xy text-wrap text-align-x-left",
 						RichText = true,
-						Text = `<u>{p0.learnMoreText}</u>`,
-						onActivated = p0.onLearnMoreClick
+						Text = `<u>{p1.learnMoreText}</u>`,
+						onActivated = p1.onLearnMoreClick
 					})
 				}) else reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y padding-bottom-large text-wrap text-align-x-left",
-					Text = p0.descriptionText
+					Text = p1.descriptionText
 				}),
-				Insights = reactModule.createElement(socialMetadataSectionModule, { layoutOrder = 2, userId = p0.userId })
+				Insights = reactModule.createElement(socialMetadataSectionModule, { layoutOrder = 2, userId = p1.userId })
 			}),
 			DialogActions = reactModule.createElement(dialog.Actions, {
 				LayoutOrder = 4,
 				actions = {
-					if var23 then {
+					if var12 then {
 						variant = buttonVariant.Emphasis,
-						text = var23.text,
-						onActivated = var23.onActivated,
-						icon = var23.icon,
-						isLoading = var23.isLoading,
-						ref = var16,
-						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var23.isDisabled else nil
+						text = var12.text,
+						onActivated = var12.onActivated,
+						icon = var12.icon,
+						isLoading = var12.isLoading,
+						ref = var5,
+						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var12.isDisabled else nil
 					} else nil,
-					if var24 then {
+					if var13 then {
 						variant = buttonVariant.Standard,
-						text = var24.text,
-						onActivated = var24.onActivated,
-						icon = var24.icon,
-						isLoading = var24.isLoading,
-						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var24.isDisabled else nil
+						text = var13.text,
+						onActivated = var13.onActivated,
+						icon = var13.icon,
+						isLoading = var13.isLoading,
+						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var13.isDisabled else nil
 					} else nil
 				}
 			})
@@ -240,9 +240,9 @@ return function(p0)
 	else
 		createElement = reactModule.createElement
 		createElement = createElement(if isVerticallyConstrained then fullPageModal else partialPageModal, {
-			title = p0.headerText,
-			screenSize = var13,
-			onCloseClicked = p0.onCloseModal
+			title = p1.headerText,
+			screenSize = var2,
+			onCloseClicked = p1.onCloseModal
 		}, {
 			Contents = reactModule.createElement(if isVerticallyConstrained then scrollView else view, {
 				tag = {
@@ -260,8 +260,8 @@ return function(p0)
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}) else nil,
 				OuterPadding = reactModule.createElement("UIPadding", {
-					PaddingTop = UDim.new(0, if isVerticallyConstrained then var22.Padding.XSmall else var22.Padding.Large),
-					PaddingBottom = UDim.new(0, if isVerticallyConstrained then var22.Padding.Small else 0)
+					PaddingTop = UDim.new(0, if isVerticallyConstrained then var11.Padding.XSmall else var11.Padding.Large),
+					PaddingBottom = UDim.new(0, if isVerticallyConstrained then var11.Padding.Small else 0)
 				}),
 				TextIntro = if fFlagTCLearnMoreLinkModule then reactModule.createElement(view, {
 					LayoutOrder = 1,
@@ -278,14 +278,14 @@ return function(p0)
 							["size-full-0 auto-y text-wrap text-align-x-left"] = true,
 							grow = not isVerticallyConstrained
 						},
-						Text = p0.descriptionText
+						Text = p1.descriptionText
 					}),
 					LearnMore = reactModule.createElement(text, {
 						LayoutOrder = 2,
 						tag = "size-0 auto-xy text-wrap text-align-x-left",
 						RichText = true,
-						Text = `<u>{p0.learnMoreText}</u>`,
-						onActivated = p0.onLearnMoreClick
+						Text = `<u>{p1.learnMoreText}</u>`,
+						onActivated = p1.onLearnMoreClick
 					})
 				}) else reactModule.createElement(text, {
 					LayoutOrder = 1,
@@ -293,51 +293,51 @@ return function(p0)
 						["size-full-0 auto-y text-wrap text-align-x-left"] = true,
 						grow = not isVerticallyConstrained
 					},
-					Text = p0.descriptionText
+					Text = p1.descriptionText
 				}),
 				Insights = reactModule.createElement(socialMetadataSectionModule, {
 					layoutOrder = 2,
-					userId = p0.userId,
+					userId = p1.userId,
 					isVerticallyConstrained = isVerticallyConstrained
 				}),
-				ActionButtons = if var23 or var24 then reactModule.createElement(view, {
+				ActionButtons = if var12 or var13 then reactModule.createElement(view, {
 					LayoutOrder = 3,
 					tag = "row gap-small size-full-0 auto-y padding-top-small"
 				}, {
-					First = var23 and reactModule.createElement(button, {
+					First = var12 and reactModule.createElement(button, {
 						LayoutOrder = 1,
-						text = var23.text or "",
-						onActivated = var23.onActivated,
-						icon = var23.icon,
-						isLoading = var23.isLoading,
+						text = var12.text or "",
+						onActivated = var12.onActivated,
+						icon = var12.icon,
+						isLoading = var12.isLoading,
 						variant = buttonVariant.Emphasis,
 						fillBehavior = fillBehavior.Fill,
-						ref = var16,
-						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var23.isDisabled else nil
+						ref = var5,
+						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var12.isDisabled else nil
 					}) or nil,
-					Second = var24 and reactModule.createElement(button, {
+					Second = var13 and reactModule.createElement(button, {
 						LayoutOrder = 2,
-						text = var24.text or "",
-						onActivated = var24.onActivated,
-						icon = var24.icon,
-						isLoading = var24.isLoading,
+						text = var13.text or "",
+						onActivated = var13.onActivated,
+						icon = var13.icon,
+						isLoading = var13.isLoading,
 						variant = buttonVariant.Standard,
 						fillBehavior = fillBehavior.Fill,
-						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var24.isDisabled else nil
+						isDisabled = if fFlagTrustedFriendsUseEnumCTA then var13.isDisabled else nil
 					}) or nil
 				}) else nil
 			})
 		})
 	end
-	local var25 = if fFlagTrustedFriendsUseFoundationSheet or not fFlagTCModalUseFoundationOverlay and p0.source ~= sources.StreamNotification then createElement else reactModule.createElement("TextButton", {
+	local var14 = if fFlagTrustedFriendsUseFoundationSheet or not fFlagTCModalUseFoundationOverlay and p1.source ~= sources.StreamNotification then createElement else reactModule.createElement("TextButton", {
 		Selectable = false,
 		AutoButtonColor = false,
 		Text = "",
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		BackgroundColor3 = var22.Color.Common.Scrim.Color3,
-		BackgroundTransparency = if fFlagTCModalUseFoundationOverlay and var21 then 1 else var22.Color.Common.Scrim.Transparency,
+		BackgroundColor3 = var11.Color.Common.Scrim.Color3,
+		BackgroundTransparency = if fFlagTCModalUseFoundationOverlay and var10 then 1 else var11.Color.Common.Scrim.Transparency,
 		ZIndex = if fFlagTCModalUseFoundationOverlay then 300 else nil
 	}, { TrustedContactModalComponent = createElement })
 	
@@ -345,6 +345,6 @@ return function(p0)
 		isAutoFocusRoot = true,
 		isIsolated = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		eventHandlers = var15
-	}, { Modal = var25 }) else var25
+		eventHandlers = var4
+	}, { Modal = var14 }) else var14
 end

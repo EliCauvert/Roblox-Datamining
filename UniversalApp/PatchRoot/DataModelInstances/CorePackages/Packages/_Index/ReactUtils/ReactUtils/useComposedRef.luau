@@ -1,30 +1,30 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-local function _(p0, p1)
-	if type(p0) == "function" then
-		p0(p1)
+local function _(p1, p2)
+	if type(p1) == "function" then
+		p1(p2)
 		
 		return
-	elseif type(p0) == "table" then
-		p0.current = p1
+	elseif type(p1) == "table" then
+		p1.current = p2
 	end
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: reactModule (ref)
-	return reactModule.useCallback(function(p4)
-		-- upvalues: p2 (ref), p3 (ref)
-		if type(p2) == "function" then
-			p2(p4)
-		elseif type(p2) == "table" then
-			p2.current = p4
+	return reactModule.useCallback(function(p3)
+		-- upvalues: p1 (ref), p2 (ref)
+		if type(p1) == "function" then
+			p1(p3)
+		elseif type(p1) == "table" then
+			p1.current = p3
 		end
-		if type(p3) == "function" then
-			p3(p4)
+		if type(p2) == "function" then
+			p2(p3)
 			
 			return
-		elseif type(p3) == "table" then
-			p3.current = p4
+		elseif type(p2) == "table" then
+			p2.current = p3
 		end
-	end, { p2, p3 })
+	end, { p1, p2 })
 end

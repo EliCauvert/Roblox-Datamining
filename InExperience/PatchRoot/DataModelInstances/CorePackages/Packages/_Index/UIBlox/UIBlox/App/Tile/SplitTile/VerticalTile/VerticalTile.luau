@@ -13,23 +13,23 @@ local tileOverlayModule = require(parent.SplitTile.TileOverlay)
 local _ = require(parent_1.Style.StyleTypes)
 local uDim = UDim.new(0, 8)
 
-local function useIsHoveredState(p0, p1)
+local function useIsHoveredState(p1, p2)
 	-- upvalues: useDebouncedState (ref), reactModule (ref)
-	local var8, var9 = useDebouncedState(false, p0)
+	local var1, var2 = useDebouncedState(false, p1)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), var8 (ref)
-		if p1 ~= nil then
-			p1(var8)
+		-- upvalues: p2 (ref), var1 (ref)
+		if p2 ~= nil then
+			p2(var1)
 		end
-	end, { p1, var8 })
+	end, { p2, var1 })
 	
-	return var8, var9
+	return var1, var2
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useStyleModule (ref), cryoModule (ref), uDim (ref), useIsHoveredState (ref), reactModule (ref), tileOverlayModule (ref), imageSetComponentModule (ref), imagesModule (ref)
 	local theme = useStyleModule().Theme
-	local var10 = cryoModule.Dictionary.join({
+	local var1 = cryoModule.Dictionary.join({
 		hasBackground = true,
 		hasOutline = true,
 		isHoverEnabled = true,
@@ -58,31 +58,31 @@ return function(p2)
 			},
 			SliceCenter = Rect.new(18, 18, 18, 18)
 		}
-	}, p2)
-	local hasBackground = var10.hasBackground
-	local isHoverEnabled = var10.isHoverEnabled
-	local var11, var12 = useIsHoveredState(var10.hoverDelay, var10.onHoverChanged)
-	local var13 = reactModule.useCallback(function(p3)
-		-- upvalues: var12 (ref)
+	}, p1)
+	local hasBackground = var1.hasBackground
+	local isHoverEnabled = var1.isHoverEnabled
+	local var2, var3 = useIsHoveredState(var1.hoverDelay, var1.onHoverChanged)
+	local var4 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref)
 		return function()
-			-- upvalues: var12 (copy), p3 (ref)
-			var12(p3)
+			-- upvalues: var3 (copy), p2 (ref)
+			var3(p2)
 		end
 	end, {})
-	local isHoverEnabled_1 = var11 and isHoverEnabled
+	local isHoverEnabled_1 = var2 and isHoverEnabled
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		UISizeConstraint = if var10.minTileSize then reactModule.createElement("UISizeConstraint", { MinSize = var10.minTileSize }) else nil,
+		UISizeConstraint = if var1.minTileSize then reactModule.createElement("UISizeConstraint", { MinSize = var1.minTileSize }) else nil,
 		TileContent = reactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundColor3 = if hasBackground then var10.backgroundColor.Color else nil,
-			BackgroundTransparency = if hasBackground then var10.backgroundColor.Transparency else 1,
-			[reactModule.Event.MouseEnter] = if isHoverEnabled then var13(true) else nil,
-			[reactModule.Event.MouseLeave] = if isHoverEnabled then var13(false) else nil,
+			BackgroundColor3 = if hasBackground then var1.backgroundColor.Color else nil,
+			BackgroundTransparency = if hasBackground then var1.backgroundColor.Transparency else 1,
+			[reactModule.Event.MouseEnter] = if isHoverEnabled then var4(true) else nil,
+			[reactModule.Event.MouseLeave] = if isHoverEnabled then var4(false) else nil,
 			ClipsDescendants = false,
 			ZIndex = 1
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = var10.border.CornerRadius }),
+			UICorner = reactModule.createElement("UICorner", { CornerRadius = var1.border.CornerRadius }),
 			Panel = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				ZIndex = 2,
@@ -92,44 +92,44 @@ return function(p2)
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.Name
 				}),
-				Content1 = if var10.renderTopContent then var10.renderTopContent(isHoverEnabled_1) else nil,
-				Content2 = if var10.renderBottomContent then var10.renderBottomContent(isHoverEnabled_1) else nil
+				Content1 = if var1.renderTopContent then var1.renderTopContent(isHoverEnabled_1) else nil,
+				Content2 = if var1.renderBottomContent then var1.renderBottomContent(isHoverEnabled_1) else nil
 			}),
-			FooterRow = if var10.renderFooterRow then var10.renderFooterRow(isHoverEnabled_1) else nil,
+			FooterRow = if var1.renderFooterRow then var1.renderFooterRow(isHoverEnabled_1) else nil,
 			Overlay = reactModule.createElement(tileOverlayModule, {
 				zIndex = 3,
-				reservedBottomHeight = var10.reservedBottomHeight,
-				isVisible = var10.isOverlayVisible,
-				isActive = var10.isActive,
-				onActivated = var10.onActivated
+				reservedBottomHeight = var1.reservedBottomHeight,
+				isVisible = var1.isOverlayVisible,
+				isActive = var1.isActive,
+				onActivated = var1.onActivated
 			})
 		}),
-		BorderFrame = if var10.hasOutline then reactModule.createElement("Frame", {
+		BorderFrame = if var1.hasOutline then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 4,
-			Size = UDim2.new(1, -2 * var10.border.Width, 1, -2 * var10.border.Width),
+			Size = UDim2.new(1, -2 * var1.border.Width, 1, -2 * var1.border.Width),
 			AnchorPoint = if hasBackground then Vector2.new(0.5, 0.5) else nil,
-			Position = if hasBackground then UDim2.fromScale(0.5, 0.5) else UDim2.fromOffset(var10.border.Width, var10.border.Width),
+			Position = if hasBackground then UDim2.fromScale(0.5, 0.5) else UDim2.fromOffset(var1.border.Width, var1.border.Width),
 			SizeConstraint = if not hasBackground then Enum.SizeConstraint.RelativeXX else nil
 		}, {
 			UIStroke = reactModule.createElement("UIStroke", {
-				Color = var10.border.BorderColor.Color,
-				Transparency = var10.border.BorderColor.Transparency,
-				Thickness = var10.border.Width
+				Color = var1.border.BorderColor.Color,
+				Transparency = var1.border.BorderColor.Transparency,
+				Thickness = var1.border.Width
 			}),
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = var10.border.CornerRadius })
+			UICorner = reactModule.createElement("UICorner", { CornerRadius = var1.border.CornerRadius })
 		}) else nil,
 		HoverShadow = if isHoverEnabled_1 and hasBackground then reactModule.createElement(imageSetComponentModule.Label, {
 			ZIndex = 0,
 			BackgroundTransparency = 1,
-			Position = var10.dropShadow.Position,
-			AnchorPoint = var10.dropShadow.AnchorPoint,
-			Size = var10.dropShadow.Size,
-			Image = imagesModule[var10.dropShadow.ImageAssetName],
-			ImageColor3 = var10.dropShadow.ImageColor.Color,
-			ImageTransparency = var10.dropShadow.ImageColor.Transparency,
+			Position = var1.dropShadow.Position,
+			AnchorPoint = var1.dropShadow.AnchorPoint,
+			Size = var1.dropShadow.Size,
+			Image = imagesModule[var1.dropShadow.ImageAssetName],
+			ImageColor3 = var1.dropShadow.ImageColor.Color,
+			ImageTransparency = var1.dropShadow.ImageColor.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
-			SliceCenter = var10.dropShadow.SliceCenter
+			SliceCenter = var1.dropShadow.SliceCenter
 		}) else nil
 	})
 end

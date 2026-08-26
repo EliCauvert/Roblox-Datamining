@@ -17,11 +17,11 @@ local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContex
 local premium = images["icons/status/premium"]
 local detailsText = roactModule.PureComponent:extend("DetailsText")
 
-function detailsText.init(p0)
+function detailsText.init(p1)
 	-- upvalues: getSelectionImageObjectRegularModule (ref)
-	p0.name = ""
-	p0.creator = ""
-	p0.selectedImage = getSelectionImageObjectRegularModule()
+	p1.name = ""
+	p1.creator = ""
+	p1.selectedImage = getSelectionImageObjectRegularModule()
 end
 
 function detailsText.setText(value)
@@ -50,26 +50,26 @@ function detailsText.render(p1)
 	local view = p1.props.view
 	local showFavoritesCount = p1.props.showFavoritesCount
 	local assetInfo = p1.props.assetInfo or {}
-	local var17 = assetInfo.parentBundleId ~= nil
-	local var18 = var17 and #p1.props.assetBundles[assetInfo.assetId] > 1
-	local var19 = assetInfo.premiumPricing ~= nil
-	local var20 = if var19 then iconSize.Regular + 5 else 0
-	local var21 = constantsModule.LayeredAssetTypes[assetInfo.assetTypeId] ~= nil and (p1.props.localPlayerModel and p1.props.localPlayerModel.Humanoid.RigType == Enum.HumanoidRigType.R6)
-	local var22 = utilityFunctionsModule.isLimited1Point0(assetInfo)
+	local var1 = assetInfo.parentBundleId ~= nil
+	local var2 = var1 and #p1.props.assetBundles[assetInfo.assetId] > 1
+	local var3 = assetInfo.premiumPricing ~= nil
+	local var4 = if var3 then iconSize.Regular + 5 else 0
+	local var5 = constantsModule.LayeredAssetTypes[assetInfo.assetTypeId] ~= nil and (p1.props.localPlayerModel and p1.props.localPlayerModel.Humanoid.RigType == Enum.HumanoidRigType.R6)
+	local var6 = utilityFunctionsModule.isLimited1Point0(assetInfo)
 	local layeredClothingOnR6Key = nil
 	
-	if var18 then
+	if var2 then
 		layeredClothingOnR6Key = constantsModule.NotificationKeys.MultipleBundleNoticeKey
-	elseif var17 then
+	elseif var1 then
 		layeredClothingOnR6Key = constantsModule.NotificationKeys.SingleBundleNoticeKey
-	elseif var22 then
+	elseif var6 then
 		layeredClothingOnR6Key = constantsModule.NotificationKeys.LimitedItemNoticeKey
-	elseif var21 then
+	elseif var5 then
 		layeredClothingOnR6Key = constantsModule.NotificationKeys.LayeredClothingOnR6Key
 	end
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
 		render = function(p2)
-			-- upvalues: view (ref), roactModule (copy), layeredClothingOnR6Key (write), notificationModule (copy), var19 (ref), cryoModule (copy), premium (copy), iconSize (copy), var20 (ref), p1 (ref), appFonts (copy), colorsModule (copy), showFavoritesCount (ref), favoritesModule (copy)
+			-- upvalues: view (ref), roactModule (copy), layeredClothingOnR6Key (write), notificationModule (copy), var3 (ref), cryoModule (copy), premium (copy), iconSize (copy), var4 (ref), p1 (ref), appFonts (copy), colorsModule (copy), showFavoritesCount (ref), favoritesModule (copy)
 			return roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
@@ -88,7 +88,7 @@ function detailsText.render(p1)
 					LayoutOrder = 1,
 					Size = UDim2.new(1, -10, 0, 50)
 				}, {
-					PremiumIcon = var19 and roactModule.createElement("ImageLabel", cryoModule.Dictionary.join(premium, {
+					PremiumIcon = var3 and roactModule.createElement("ImageLabel", cryoModule.Dictionary.join(premium, {
 						BackgroundTransparency = 1,
 						AnchorPoint = Vector2.new(0, 0.5),
 						Position = UDim2.new(0, 0, 0.5, 0),
@@ -100,8 +100,8 @@ function detailsText.render(p1)
 						LayoutOrder = 1,
 						TextScaled = true,
 						TextSize = 20,
-						Position = UDim2.new(0, var20, 0, 0),
-						Size = UDim2.new(1, var20, 0, 50),
+						Position = UDim2.new(0, var4, 0, 0),
+						Size = UDim2.new(1, var4, 0, 50),
 						Text = p1.name or "",
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Center,
@@ -130,13 +130,13 @@ function detailsText.render(p1)
 	})
 end
 
-return roactRoduxModule.connect(function(p3, _)
+return roactRoduxModule.connect(function(p1, _)
 	return {
-		view = p3.view,
-		locale = p3.locale,
-		assetInfo = p3.assets[p3.detailsInformation.assetId],
-		bundleInfo = p3.bundles,
-		assetBundles = p3.assetBundles,
-		showFavoritesCount = not p3.isSubjectToChinaPolicies
+		view = p1.view,
+		locale = p1.locale,
+		assetInfo = p1.assets[p1.detailsInformation.assetId],
+		bundleInfo = p1.bundles,
+		assetBundles = p1.assetBundles,
+		showFavoritesCount = not p1.isSubjectToChinaPolicies
 	}
 end)(detailsText)

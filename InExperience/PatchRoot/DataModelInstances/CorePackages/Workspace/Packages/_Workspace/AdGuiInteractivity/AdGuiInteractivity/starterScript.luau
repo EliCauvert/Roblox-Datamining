@@ -21,20 +21,20 @@ local function initializeImmersiveAds()
 	adGuiInteractivityControls.Name = "AdGuiInteractivityControls"
 	adGuiInteractivityControls.Parent = coreGuiService
 	local t = {}
-	adService.adGuiRegisterUI:Connect(function(p0)
+	adService.adGuiRegisterUI:Connect(function(p1)
 		-- upvalues: t (ref), roactModule (copy), adsInteractivityControlsModule (copy), adsInteractivityControlsFixStyleLink (copy), adGuiInteractivityControls (ref)
-		if not p0:IsA("AdGui") then return end
-		if t[p0] then return end
-		local var16 = roactModule.createElement(adsInteractivityControlsModule, { adGui = p0 })
+		if not p1:IsA("AdGui") then return end
+		if t[p1] then return end
+		local var1 = roactModule.createElement(adsInteractivityControlsModule, { adGui = p1 })
 		
 		if adsInteractivityControlsFixStyleLink then
-			var16 = roactModule.createElement("Folder", nil, var16)
+			var1 = roactModule.createElement("Folder", nil, var1)
 		end
-		t[p0] = roactModule.mount(var16, adGuiInteractivityControls, "AdsInteractivityControls")
-		p0.Destroying:Connect(function()
-			-- upvalues: roactModule (copy), t (copy), p0 (ref)
-			roactModule.unmount(t[p0])
-			t[p0] = nil
+		t[p1] = roactModule.mount(var1, adGuiInteractivityControls, "AdsInteractivityControls")
+		p1.Destroying:Connect(function()
+			-- upvalues: roactModule (copy), t (copy), p1 (ref)
+			roactModule.unmount(t[p1])
+			t[p1] = nil
 		end)
 	end)
 	adService:SetAdGuiInteractivityHandlerInitialized()

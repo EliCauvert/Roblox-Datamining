@@ -4,20 +4,20 @@ local usersGetFriendCount = require(legacyFriendsRodux.Requests).UsersGetFriendC
 local setFriendCount = require(legacyFriendsRodux.Actions).SetFriendCount
 local isNewFriendsEndpointsEnabled = require(parent.SharedFlags).isNewFriendsEndpointsEnabled
 
-return function(p0)
+return function(p1)
 	-- upvalues: usersGetFriendCount (ref), isNewFriendsEndpointsEnabled (ref), setFriendCount (ref)
-	return function(p1)
-		-- upvalues: usersGetFriendCount (copy), p0 (ref), isNewFriendsEndpointsEnabled (copy), setFriendCount (copy)
-		return usersGetFriendCount(p0):andThen(function(p2)
-			-- upvalues: isNewFriendsEndpointsEnabled (copy), p1 (ref), setFriendCount (copy)
-			local responseBody = p2.responseBody
+	return function(p2)
+		-- upvalues: usersGetFriendCount (copy), p1 (ref), isNewFriendsEndpointsEnabled (copy), setFriendCount (copy)
+		return usersGetFriendCount(p1):andThen(function(p3)
+			-- upvalues: isNewFriendsEndpointsEnabled (copy), p2 (ref), setFriendCount (copy)
+			local responseBody = p3.responseBody
 			
 			if isNewFriendsEndpointsEnabled() then
 				if responseBody.count then
-					p1:dispatch(setFriendCount(responseBody.count))
+					p2:dispatch(setFriendCount(responseBody.count))
 				end
 			elseif responseBody.success and responseBody.count then
-				p1:dispatch(setFriendCount(responseBody.count))
+				p2:dispatch(setFriendCount(responseBody.count))
 			end
 			return responseBody.count
 		end)

@@ -1,6 +1,6 @@
-﻿return function(p0)
-	return function(_, p1)
-		-- upvalues: p0 (ref)
-		return p1 or p0
+﻿return function(p1)
+	return function(_, p2)
+		-- upvalues: p1 (ref)
+		return p2 or p1
 	end
 end

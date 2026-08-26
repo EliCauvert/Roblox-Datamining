@@ -6,9 +6,9 @@ local hideErrorModule = require(parent.Actions.HideError)
 local constantsModule = require(parent.Constants)
 local errorMessage = roactModule.PureComponent:extend("ErrorMessage")
 
-function errorMessage.render(p0)
+function errorMessage.render(p1)
 	-- upvalues: constantsModule (ref), roactModule (ref)
-	local layout = constantsModule.Layouts[p0.props.layout]
+	local layout = constantsModule.Layouts[p1.props.layout]
 	
 	return roactModule.createElement("Frame", {
 		Size = layout.ErrorFrameSize,
@@ -17,15 +17,15 @@ function errorMessage.render(p0)
 		BackgroundTransparency = constantsModule.ErrorFrameBackgroundTransparency,
 		BorderSizePixel = constantsModule.ErrorFrameBorderSize,
 		Selectable = false,
-		Visible = p0.props.displayOptions.errorVisible,
+		Visible = p1.props.displayOptions.errorVisible,
 		[roactModule.Event.TouchTap] = function()
-			-- upvalues: p0 (ref)
-			p0.props.close()
+			-- upvalues: p1 (ref)
+			p1.props.close()
 		end,
-		[roactModule.Event.InputBegan] = function(_, p1)
-			-- upvalues: p0 (ref)
-			if p1.UserInputType == Enum.UserInputType.MouseButton1 then
-				p0.props.close()
+		[roactModule.Event.InputBegan] = function(_, p2)
+			-- upvalues: p1 (ref)
+			if p2.UserInputType == Enum.UserInputType.MouseButton1 then
+				p1.props.close()
 			end
 		end
 	}, {
@@ -49,7 +49,7 @@ function errorMessage.render(p0)
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.new(0.2, -layout.ErrorIconOffset, 0.5, 0),
 			Size = UDim2.new(0.8, 0, 1, 0),
-			Text = p0.props.displayOptions.errorText,
+			Text = p1.props.displayOptions.errorText,
 			TextSize = layout.ErrorTextSize,
 			TextColor3 = constantsModule.Colors.White,
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -63,14 +63,14 @@ function errorMessage.render(p0)
 	})
 end
 
-return roactRoduxModule.connect(function(p2)
-	return { displayOptions = p2.displayOptions, layout = p2.layout }
-end, function(p3)
+return roactRoduxModule.connect(function(p1)
+	return { displayOptions = p1.displayOptions, layout = p1.layout }
+end, function(p1)
 	-- upvalues: hideErrorModule (ref)
 	return {
 		close = function()
-			-- upvalues: p3 (ref), hideErrorModule (copy)
-			return p3(hideErrorModule())
+			-- upvalues: p1 (ref), hideErrorModule (copy)
+			return p1(hideErrorModule())
 		end
 	}
 end)(errorMessage)

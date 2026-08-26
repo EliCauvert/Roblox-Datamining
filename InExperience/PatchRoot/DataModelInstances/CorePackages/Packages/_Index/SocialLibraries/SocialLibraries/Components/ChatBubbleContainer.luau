@@ -16,11 +16,11 @@ chatBubbleContainer.defaultProps = {
 	overrideImageColor = false
 }
 
-function chatBubbleContainer.init(p0)
+function chatBubbleContainer.init(p1)
 	-- upvalues: roact (ref)
-	local var3, var4 = roact.createBinding(Vector2.new(0, 0))
-	p0.bubbleSize = var3
-	p0.updateBubbleSize = var4
+	local var1, var2 = roact.createBinding(Vector2.new(0, 0))
+	p1.bubbleSize = var1
+	p1.updateBubbleSize = var2
 end
 
 function chatBubbleContainer.render(p1)
@@ -31,9 +31,9 @@ function chatBubbleContainer.render(p1)
 		local hasTail = p1.props.hasTail
 		local isIncoming = p1.props.isIncoming
 		local isPending = p1.props.isPending
-		local var6 = if isIncoming then p2.Theme.UIDefault elseif isPending then p2.Theme.UIMuted else p2.Theme.UIEmphasis
-		local color = var6.Color
-		local transparency = var6.Transparency
+		local var1 = if isIncoming then p2.Theme.UIDefault elseif isPending then p2.Theme.UIMuted else p2.Theme.UIEmphasis
+		local color = var1.Color
+		local transparency = var1.Transparency
 		
 		if p1.props.overrideImageColor then
 			color = nil
@@ -63,10 +63,10 @@ function chatBubbleContainer.render(p1)
 				ImageTransparency = transparency,
 				margin = roactFitComponents.Rect.square(p1.props.padding),
 				Position = isIncoming and UDim2.new(0, p1.TAIL_WIDTH, 0, 0) or UDim2.new(1, -p1.TAIL_WIDTH, 0, 0),
-				[roact.Change.AbsoluteSize] = function(p4)
+				[roact.Change.AbsoluteSize] = function(p3)
 					-- upvalues: p1 (copy), roact (copy)
-					p1.updateBubbleSize(p4.AbsoluteSize)
-					p1.props[roact.Change.AbsoluteSize](p4)
+					p1.updateBubbleSize(p3.AbsoluteSize)
+					p1.props[roact.Change.AbsoluteSize](p3)
 				end
 			}, children),
 			tail = roact.createElement("ImageLabel", {

@@ -27,70 +27,70 @@ local t = {
 	[userModel.PresenceType.IN_STUDIO] = { Image = "icons/logo/studiologo_small" }
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), constants (ref), size150x150 (ref), getRbxthumbWithTypeSizeAndOptions (ref), avatarHeadShot (ref), fFlagFriendsMenuUseProfileFrameThumbnailModule (ref), userModel (ref), t (ref), skeleton (ref), radius (ref), imageSetLabel (ref), images (ref), iconSize (ref)
-	local var13
-	local friend = p0.friend
+	local var1
+	local friend = p1.friend
 	assert(friend, "friend should be non-nil. Silence type checker.")
-	local var7 = useStyle()
-	local var8 = reactModule.useMemo(function()
+	local var2 = useStyle()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: friend (ref), constants (copy), size150x150 (copy), getRbxthumbWithTypeSizeAndOptions (copy), avatarHeadShot (copy), fFlagFriendsMenuUseProfileFrameThumbnailModule (copy)
 		return (if friend then getRbxthumbWithTypeSizeAndOptions(friend.id, avatarHeadShot, constants.RbxThumbnailSizeToNumberSize[size150x150], nil, nil, fFlagFriendsMenuUseProfileFrameThumbnailModule) else nil) or "rbxasset://textures/ui/LuaApp/graphic/ph-avatar-portrait.png"
 	end, { friend })
-	local playerBackgroundDefault = var7.Theme.PlayerBackgroundDefault
-	local var9 = if friend.presence ~= userModel.PresenceType.OFFLINE then nil else t[userModel.PresenceType.ONLINE]
+	local playerBackgroundDefault = var2.Theme.PlayerBackgroundDefault
+	local var4 = if friend.presence ~= userModel.PresenceType.OFFLINE then nil else t[userModel.PresenceType.ONLINE]
 	local createElement = reactModule.createElement
-	local var10 = "Frame"
+	local var5 = "Frame"
 	local t_1 = {
 		BackgroundTransparency = 1,
-		Size = p0.size,
-		Position = p0.position,
-		AnchorPoint = p0.anchorPoint
+		Size = p1.size,
+		Position = p1.position,
+		AnchorPoint = p1.anchorPoint
 	}
 	local t_2 = {
 		Background = playerBackgroundDefault and reactModule.createElement("Frame", {
-			Size = p0.size,
-			Position = p0.position,
-			AnchorPoint = p0.anchorPoint,
-			BackgroundColor3 = var7.Theme.UIDefault.Color,
-			BackgroundTransparency = var7.Theme.UIDefault.Transparency
+			Size = p1.size,
+			Position = p1.position,
+			AnchorPoint = p1.anchorPoint,
+			BackgroundColor3 = var2.Theme.UIDefault.Color,
+			BackgroundTransparency = var2.Theme.UIDefault.Transparency
 		}, {
 			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
 		}),
-		Thumbnail = p0.isFetchingFriends and reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 1, 0), radius = radius.Circle }) or reactModule.createElement(imageSetLabel, {
+		Thumbnail = p1.isFetchingFriends and reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 1, 0), radius = radius.Circle }) or reactModule.createElement(imageSetLabel, {
 			BorderSizePixel = 0,
-			Size = p0.size,
-			Position = p0.position,
-			AnchorPoint = p0.anchorPoint,
-			Image = var8,
-			BackgroundColor3 = var7 and var7.Theme.UIDefault.Color,
-			BackgroundTransparency = if playerBackgroundDefault then 1 else var7.Theme.UIDefault.Transparency
+			Size = p1.size,
+			Position = p1.position,
+			AnchorPoint = p1.anchorPoint,
+			Image = var3,
+			BackgroundColor3 = var2 and var2.Theme.UIDefault.Color,
+			BackgroundTransparency = if playerBackgroundDefault then 1 else var2.Theme.UIDefault.Transparency
 		}, {
 			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
 		})
 	}
 	
-	if var9 and not p0.isFetchingFriends then
-		var13 = reactModule.createElement(imageSetLabel, {
+	if var4 and not p1.isFetchingFriends then
+		var1 = reactModule.createElement(imageSetLabel, {
 			BackgroundTransparency = 0,
 			ZIndex = 2,
-			Image = images[var9.Image],
-			BackgroundColor3 = if p0.isHoverRow then var7.Theme.BackgroundOnHover.Color else var7.Theme.BackgroundDefault.Color,
-			ImageColor3 = var9.Color,
+			Image = images[var4.Image],
+			BackgroundColor3 = if p1.isHoverRow then var2.Theme.BackgroundOnHover.Color else var2.Theme.BackgroundDefault.Color,
+			ImageColor3 = var4.Color,
 			Position = UDim2.new(1, -1, 1, -1),
 			AnchorPoint = Vector2.new(1, 1),
-			Size = var9.Size or UDim2.new(0, iconSize.Small, 0, iconSize.Small)
+			Size = var4.Size or UDim2.new(0, iconSize.Small, 0, iconSize.Small)
 		}, {
 			Border = reactModule.createElement("UIStroke", {
 				Thickness = 3,
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-				Color = var7.Theme.BackgroundDefault.Color,
-				Transparency = var7.Theme.BackgroundDefault.Transparency
+				Color = var2.Theme.BackgroundDefault.Color,
+				Transparency = var2.Theme.BackgroundDefault.Transparency
 			}),
 			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) })
 		}) or nil
 	end
-	t_2.PresenceIcon = var13
+	t_2.PresenceIcon = var1
 	
-	return createElement(var10, t_1, t_2)
+	return createElement(var5, t_1, t_2)
 end

@@ -4,12 +4,12 @@ local _ = require(script.Parent.Parent.BulkPurchaseRequestUnpurchasableItem)
 local purchasableStateToItemPurchaseStatusMapModule = require(bulkPurchaseApp.Enums.PurchasableStateToItemPurchaseStatusMap)
 local getThumbnailUrlModule = require(bulkPurchaseApp.Utils.getThumbnailUrl)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getThumbnailUrlModule (ref), purchasableStateToItemPurchaseStatusMapModule (ref)
 	return {
-		id = p0.id,
-		name = p0.name,
-		image = getThumbnailUrlModule(p0.id, p0.type),
-		status = purchasableStateToItemPurchaseStatusMapModule[p0.purchasableState] or Enum.MarketplaceItemPurchaseStatus.SystemError
+		id = p1.id,
+		name = p1.name,
+		image = getThumbnailUrlModule(p1.id, p1.type),
+		status = purchasableStateToItemPurchaseStatusMapModule[p1.purchasableState] or Enum.MarketplaceItemPurchaseStatus.SystemError
 	}
 end

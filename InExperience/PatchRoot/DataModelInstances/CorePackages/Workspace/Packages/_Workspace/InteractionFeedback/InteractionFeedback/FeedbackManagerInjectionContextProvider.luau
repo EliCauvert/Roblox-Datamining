@@ -3,7 +3,7 @@ local feedbackManagerInjectionContext = require(parent.UIBlox).Core.Control.Feed
 local reactModule = require(parent.React)
 local useTriggerFeedbackModule = require(script.Parent.useTriggerFeedback)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTriggerFeedbackModule (ref), reactModule (ref), feedbackManagerInjectionContext (ref)
-	return reactModule.createElement(feedbackManagerInjectionContext.Provider, { value = useTriggerFeedbackModule() }, p0.children)
+	return reactModule.createElement(feedbackManagerInjectionContext.Provider, { value = useTriggerFeedbackModule() }, p1.children)
 end

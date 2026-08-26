@@ -17,60 +17,60 @@ local fFlagTokenizeUnibarConstantsWithStyleProvider = flagsModule.FFlagTokenizeU
 return function()
 	-- upvalues: useTokens (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), mappedSignal (ref), inExperienceAppChatModalModule (ref), useMappedSignal (ref), usePartyIconModule (ref), reactModule (ref), subMenuContextModule (ref), foundationModule (ref)
 	local none
-	local var10 = useTokens()
+	local var1 = useTokens()
 	local _ = nil
-	local var11 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_SIZE else constantsModule.ICON_SIZE
-	local var12 = usePartyIconModule(var11, 24, if useMappedSignal(mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function(_)
+	local var2 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_SIZE else constantsModule.ICON_SIZE
+	local var3 = usePartyIconModule(var2, 24, if useMappedSignal(mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function(_)
 		-- upvalues: inExperienceAppChatModalModule (copy)
 		return inExperienceAppChatModalModule:getVisible()
 	end)) then "icons/menu/2-person-with-bubble-on" else "icons/menu/2-person-with-bubble")
-	local var13 = reactModule.useContext(subMenuContextModule)
+	local var4 = reactModule.useContext(subMenuContextModule)
 	
-	local function _(p0)
-		-- upvalues: var13 (ref)
-		return if var13 then var13:map(function(p1)
-			-- upvalues: p0 (ref)
-			return p0 + (1 - p0) * (1 - p1)
-		end) else p0
+	local function _(p1)
+		-- upvalues: var4 (ref)
+		return if var4 then var4:map(function(p2)
+			-- upvalues: p1 (ref)
+			return p1 + (1 - p1) * (1 - p2)
+		end) else p1
 	end
 	
 	local createElement = reactModule.createElement
 	local view = foundationModule.View
-	local t = { Size = UDim2.new(0, var11, 0, var11) }
+	local t = { Size = UDim2.new(0, var2, 0, var2) }
 	local t_1 = {}
 	local createElement_1 = reactModule.createElement
 	local image = foundationModule.Image
 	local t_2 = {
 		tag = "anchor-center-center position-center-center radius-circle",
-		Size = var12.size:map(function(p2)
-			return UDim2.fromOffset(p2, p2)
+		Size = var3.size:map(function(p1)
+			return UDim2.fromOffset(p1, p1)
 		end)
 	}
 	
-	if var12.image.backgroundColor then
-		local var18
-		none = { Color3 = var12.image.backgroundColor }
+	if var3.image.backgroundColor then
+		local var5
+		none = { Color3 = var3.image.backgroundColor }
 		
-		if var13 then
-			local var17 = 0
-			var18 = var13:map(function(p3)
-				-- upvalues: var17 (ref)
-				return var17 + (1 - var17) * (1 - p3)
+		if var4 then
+			local var6 = 0
+			var5 = var4:map(function(p1)
+				-- upvalues: var6 (ref)
+				return var6 + (1 - var6) * (1 - p1)
 			end)
 		else
-			var18 = 0
+			var5 = 0
 		end
-		none.Transparency = var18
+		none.Transparency = var5
 	else
-		none = var10.Color.None
+		none = var1.Color.None
 	end
 	t_2.backgroundStyle = none
-	t_2.Image = var12.image.thumbnail
-	local t_3 = { Color3 = var10.Color.Content.Emphasis.Color3 }
-	local transparency = var10.Color.Content.Emphasis.Transparency
-	t_3.Transparency = if var13 then var13:map(function(p4)
+	t_2.Image = var3.image.thumbnail
+	local t_3 = { Color3 = var1.Color.Content.Emphasis.Color3 }
+	local transparency = var1.Color.Content.Emphasis.Transparency
+	t_3.Transparency = if var4 then var4:map(function(p1)
 		-- upvalues: transparency (ref)
-		return transparency + (1 - transparency) * (1 - p4)
+		return transparency + (1 - transparency) * (1 - p1)
 	end) else transparency
 	t_2.imageStyle = t_3
 	t_1.Icon = createElement_1(image, t_2)
@@ -79,22 +79,22 @@ return function()
 	local t_4 = {
 		tag = "anchor-top-right radius-circle size-200 stroke-thicker",
 		ZIndex = 2,
-		Position = UDim2.new(1, -var10.Stroke.Thicker, 0, var10.Stroke.Thicker)
+		Position = UDim2.new(1, -var1.Stroke.Thicker, 0, var1.Stroke.Thicker)
 	}
-	local t_5 = { Color3 = var10.Color.System.Success.Color3 }
-	local transparency_1 = var10.Color.System.Success.Transparency
-	t_5.Transparency = if var13 then var13:map(function(p5)
+	local t_5 = { Color3 = var1.Color.System.Success.Color3 }
+	local transparency_1 = var1.Color.System.Success.Transparency
+	t_5.Transparency = if var4 then var4:map(function(p1)
 		-- upvalues: transparency_1 (ref)
-		return transparency_1 + (1 - transparency_1) * (1 - p5)
+		return transparency_1 + (1 - transparency_1) * (1 - p1)
 	end) else transparency_1
 	t_4.backgroundStyle = t_5
-	local t_6 = { Color = var10.Color.Surface.Surface_0.Color3 }
-	local transparency_2 = var10.Color.Surface.Surface_0.Transparency
-	t_6.Transparency = if var13 then var13:map(function(p6)
+	local t_6 = { Color = var1.Color.Surface.Surface_0.Color3 }
+	local transparency_2 = var1.Color.Surface.Surface_0.Transparency
+	t_6.Transparency = if var4 then var4:map(function(p1)
 		-- upvalues: transparency_2 (ref)
-		return transparency_2 + (1 - transparency_2) * (1 - p6)
+		return transparency_2 + (1 - transparency_2) * (1 - p1)
 	end) else transparency_2
-	t_6.Thickness = var10.Stroke.Thicker
+	t_6.Thickness = var1.Stroke.Thicker
 	t_4.stroke = t_6
 	t_1.Badge = createElement_2(view_1, t_4)
 	

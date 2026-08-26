@@ -6,53 +6,53 @@ local constantsModule = require(appChat.Constants)
 local dateTime = require(parent.Time).DateTime
 local conversationModule = require(script.Parent.Conversation)
 
-local function getMessageId(p0)
-	return p0.id
+local function getMessageId(p1)
+	return p1.id
 end
 
 local function messageSortPredicate(p1, p2)
 	return p1.sent:GetUnixTimestamp() < p2.sent:GetUnixTimestamp()
 end
 
-local function sendingMessageSortPredicate(p3, p4)
-	return p3.order < p4.order
+local function sendingMessageSortPredicate(p1, p2)
+	return p1.order < p2.order
 end
 
 local t = {}
 t.__index = t
 
-function t.mock(p5)
+function t.mock(p1)
 	-- upvalues: conversationModule (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), generateStringId (ref), constantsModule (ref), dateTime (ref)
-	local var7 = conversationModule.new()
-	var7.messages = orderedMap.new(getMessageId, messageSortPredicate)
-	var7.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
-	var7.id = generateStringId()
-	var7.clientId = generateStringId()
-	var7.title = ""
-	var7.initiator = generateStringId()
-	var7.hasUnreadMessages = false
-	var7.conversationType = conversationModule.Type.MULTI_USER_CONVERSATION
-	var7.participants = {}
-	var7.usersTyping = {}
-	var7.isUserLeaving = false
-	var7.fetchingOlderMessages = false
-	var7.fetchedOldestMessage = false
-	var7.serverState = constantsModule.ServerState.NONE
-	var7.pinnedGame = {}
-	var7.pinnedGame.universeId = generateStringId()
-	var7.pinnedGame.rootPlaceId = generateStringId()
-	var7.lastUpdated = dateTime.now()
-	var7.titleForViewer = "title"
-	var7.isDefaultTitle = true
+	local var1 = conversationModule.new()
+	var1.messages = orderedMap.new(getMessageId, messageSortPredicate)
+	var1.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
+	var1.id = generateStringId()
+	var1.clientId = generateStringId()
+	var1.title = ""
+	var1.initiator = generateStringId()
+	var1.hasUnreadMessages = false
+	var1.conversationType = conversationModule.Type.MULTI_USER_CONVERSATION
+	var1.participants = {}
+	var1.usersTyping = {}
+	var1.isUserLeaving = false
+	var1.fetchingOlderMessages = false
+	var1.fetchedOldestMessage = false
+	var1.serverState = constantsModule.ServerState.NONE
+	var1.pinnedGame = {}
+	var1.pinnedGame.universeId = generateStringId()
+	var1.pinnedGame.rootPlaceId = generateStringId()
+	var1.lastUpdated = dateTime.now()
+	var1.titleForViewer = "title"
+	var1.isDefaultTitle = true
 	
-	if p5 ~= nil then
-		for i, v in pairs(p5) do
-			var7[i] = v
+	if p1 ~= nil then
+		for i, v in pairs(p1) do
+			var1[i] = v
 		end
 	end
-	setmetatable(var7, { __index = conversationModule })
+	setmetatable(var1, { __index = conversationModule })
 	
-	return var7
+	return var1
 end
 
 return t

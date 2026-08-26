@@ -1,26 +1,26 @@
 ﻿local starterGuiService = game:GetService("StarterGui")
 local reactModule = require(game:GetService("CorePackages").Packages.React)
 
-function useCoreGuiEnabled(p0)
+function useCoreGuiEnabled(p1)
 	-- upvalues: reactModule (ref), starterGuiService (ref)
-	local var2, var3 = reactModule.useState(starterGuiService:GetCoreGuiEnabled(p0))
+	local var1, var2 = reactModule.useState(starterGuiService:GetCoreGuiEnabled(p1))
 	reactModule.useEffect(function()
-		-- upvalues: starterGuiService (copy), p0 (ref), var3 (ref)
-		local coreGuiChangedSignalConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p1, p2)
-			-- upvalues: p0 (copy), var3 (copy)
-			if p1 == p0 then
-				var3(p2)
+		-- upvalues: starterGuiService (copy), p1 (ref), var2 (ref)
+		local coreGuiChangedSignalConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p2, p3)
+			-- upvalues: p1 (copy), var2 (copy)
+			if p2 == p1 then
+				var2(p3)
 			end
 		end)
-		var3(starterGuiService:GetCoreGuiEnabled(p0))
+		var2(starterGuiService:GetCoreGuiEnabled(p1))
 		
 		return function()
 			-- upvalues: coreGuiChangedSignalConnection (ref)
 			coreGuiChangedSignalConnection:Disconnect()
 		end
-	end, { p0 })
+	end, { p1 })
 	
-	return var2
+	return var1
 end
 
 return useCoreGuiEnabled

@@ -1,16 +1,16 @@
-﻿local function defaultCompareFn(p0, p1)
-	return p0.value < p1.value
+﻿local function defaultCompareFn(p1, p2)
+	return p1.value < p2.value
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: defaultCompareFn (ref)
 	local t = {}
-	local var2 = p3 or defaultCompareFn
+	local var1 = p2 or defaultCompareFn
 	
-	for i, v in p2 do
+	for i, v in p1 do
 		table.insert(t, { key = i, value = v })
 	end
-	table.sort(t, var2)
+	table.sort(t, var1)
 	
 	return t
 end

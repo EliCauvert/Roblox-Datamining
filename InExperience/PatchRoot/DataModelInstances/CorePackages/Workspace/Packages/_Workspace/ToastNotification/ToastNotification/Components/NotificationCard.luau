@@ -16,29 +16,29 @@ local defaultCardPadding = constantsModule.Padding.DefaultCardPadding
 local defaultContentPadding = constantsModule.DefaultContentPadding
 local defaultCardCornerRadius = constantsModule.DefaultCardCornerRadius
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNotificationCardDataModule (ref), constantsModule (ref), defaultCardPadding (ref), useStyle (ref), useNotificationCardStateModule (ref), reactModule (ref), interactable (ref), defaultCardCornerRadius (ref), defaultContentPadding (ref), notificationContentFrameModule (ref), notificationActionsFrameModule (ref)
-	local var7 = useNotificationCardDataModule()
-	local cardSize = var7.cardSize
-	local var8 = if var7.cardTransparency then var7.cardTransparency else constantsModule.CardTransparency.Default
-	local var9 = if cardSize and cardSize.cardPadding then cardSize.cardPadding else defaultCardPadding
-	local var10 = useStyle()
-	local handleActions = var7.handleActions
-	local var11 = useNotificationCardStateModule("textBody")
-	local var12 = var11 and var11[1]
+	local var1 = useNotificationCardDataModule()
+	local cardSize = var1.cardSize
+	local var2 = if var1.cardTransparency then var1.cardTransparency else constantsModule.CardTransparency.Default
+	local var3 = if cardSize and cardSize.cardPadding then cardSize.cardPadding else defaultCardPadding
+	local var4 = useStyle()
+	local handleActions = var1.handleActions
+	local var5 = useNotificationCardStateModule("textBody")
+	local var6 = var5 and var5[1]
 	
 	return reactModule.createElement(interactable, {
 		AutoButtonColor = false,
-		BackgroundColor3 = var10.Theme.BackgroundUIDefault.Color,
-		BackgroundTransparency = var8,
+		BackgroundColor3 = var4.Theme.BackgroundUIDefault.Color,
+		BackgroundTransparency = var2,
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		onStateChanged = function() end,
 		Size = UDim2.new(1, 0, 0, 0),
 		[reactModule.Event.Activated] = function()
-			-- upvalues: handleActions (ref), var12 (ref)
-			if handleActions and var12 then
-				handleActions(var12)
+			-- upvalues: handleActions (ref), var6 (ref)
+			if handleActions and var6 then
+				handleActions(var6)
 			end
 		end
 	}, {
@@ -50,16 +50,16 @@ return function(p0)
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
 		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingBottom = UDim.new(0, var9),
-			PaddingLeft = UDim.new(0, var9),
-			PaddingRight = UDim.new(0, var9),
-			PaddingTop = UDim.new(0, var9)
+			PaddingBottom = UDim.new(0, var3),
+			PaddingLeft = UDim.new(0, var3),
+			PaddingRight = UDim.new(0, var3),
+			PaddingTop = UDim.new(0, var3)
 		}),
 		NotificationContentFrame = reactModule.createElement(notificationContentFrameModule, {
-			showHoldButton = p0.showHoldButton,
-			shouldAutoFocus = p0.shouldAutoFocus,
-			holdProgress = p0.holdProgress
+			showHoldButton = p1.showHoldButton,
+			shouldAutoFocus = p1.shouldAutoFocus,
+			holdProgress = p1.holdProgress
 		}),
-		NotificationActionsFrame = reactModule.createElement(notificationActionsFrameModule, { shouldAutoFocus = p0.shouldAutoFocus })
+		NotificationActionsFrame = reactModule.createElement(notificationActionsFrameModule, { shouldAutoFocus = p1.shouldAutoFocus })
 	})
 end

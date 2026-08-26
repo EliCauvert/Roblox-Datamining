@@ -13,9 +13,9 @@ local t = {
 	lastUpdated = { 24, 30, 9 }
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: rbxAnalyticsService (ref), cryoModule (ref), default (ref), t (ref)
-	default:logRobloxTelemetryEvent(t, nil, cryoModule.Dictionary.join(p0, {
+	default:logRobloxTelemetryEvent(t, nil, cryoModule.Dictionary.join(p1, {
 		placeid = tostring(game.PlaceId),
 		sessionid = rbxAnalyticsService:GetSessionId(),
 		universeid = tostring(game.GameId)

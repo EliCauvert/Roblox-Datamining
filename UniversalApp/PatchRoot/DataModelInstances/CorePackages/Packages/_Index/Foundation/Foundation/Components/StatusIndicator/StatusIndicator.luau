@@ -26,55 +26,55 @@ local t = {
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), statusIndicatorShapeModule (ref), var1 (ref), validNumericVariantsModule (ref), dashModule (ref), useTokensModule (ref), useStatusIndicatorVariantsModule (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref), reactIsModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = if var1.value then statusIndicatorShapeModule.Circle else var1.shape
+	local var2 = withDefaultsModule(p1, t)
+	local var3 = if var2.value then statusIndicatorShapeModule.Circle else var2.shape
 	
-	if var1 and var1.value ~= nil then
-		assert(validNumericVariantsModule[var1.variant], `{var1.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(dashModule.filter(dashModule.keys(validNumericVariantsModule), function(p1, _)
+	if var2 and var2.value ~= nil then
+		assert(validNumericVariantsModule[var2.variant], `{var2.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(dashModule.filter(dashModule.keys(validNumericVariantsModule), function(p3, _)
 			-- upvalues: validNumericVariantsModule (copy)
-			return validNumericVariantsModule[p1] == true
+			return validNumericVariantsModule[p3] == true
 		end), ",")}`)
 	end
-	local var3
-	local var4 = useTokensModule()
-	local var5 = var1.value ~= nil
-	local var6 = useStatusIndicatorVariantsModule(var4, var1.variant, var5, var2, if flagsModule.FoundationAvatarBeta then var1.size else nil)
-	local var7 = reactModule.useCallback(function(p1)
-		-- upvalues: var1 (ref)
-		return if var1.max and var1.max < p1 then `{var1.max}+` else tostring(p1)
-	end, { var1.max })
+	local var4
+	local var5 = useTokensModule()
+	local var6 = var2.value ~= nil
+	local var7 = useStatusIndicatorVariantsModule(var5, var2.variant, var6, var3, if flagsModule.FoundationAvatarBeta then var2.size else nil)
+	local var8 = reactModule.useCallback(function(p3)
+		-- upvalues: var2 (ref)
+		return if var2.max and var2.max < p3 then `{var2.max}+` else tostring(p3)
+	end, { var2.max })
 	local createElement = reactModule.createElement
-	local var1 = withCommonPropsModule(var1, {
-		tag = var6.container.tag,
-		backgroundStyle = if var6.container.backgroundStyle then var6.container.backgroundStyle else nil,
+	local var2 = withCommonPropsModule(var2, {
+		tag = var7.container.tag,
+		backgroundStyle = if var7.container.backgroundStyle then var7.container.backgroundStyle else nil,
 		ref = p2,
-		Size = if flagsModule.FoundationAvatarBeta then var6.container.size else nil
+		Size = if flagsModule.FoundationAvatarBeta then var7.container.size else nil
 	})
 	local t_1 = {
-		Text = if var5 and var6.content.style then reactModule.createElement(textModule, {
-			Text = if reactIsModule.isBinding(var1.value) then var1.value:map(var7) else var7(var1.value),
-			textStyle = var6.content.style,
+		Text = if var6 and var7.content.style then reactModule.createElement(textModule, {
+			Text = if reactIsModule.isBinding(var2.value) then var2.value:map(var8) else var8(var2.value),
+			textStyle = var7.content.style,
 			fontStyle = {
-				Font = var6.content.font,
-				FontSize = var4.Typography.LabelSmall.FontSize,
-				LineHeight = var4.Typography.LabelSmall.LineHeight
+				Font = var7.content.font,
+				FontSize = var5.Typography.LabelSmall.FontSize,
+				LineHeight = var5.Typography.LabelSmall.LineHeight
 			},
-			tag = var6.content.tag,
-			testId = `{var1.testId}--text`
+			tag = var7.content.tag,
+			testId = `{var2.testId}--text`
 		}) else nil
 	}
 	
 	if flagsModule.FoundationAvatarBeta then
-		var3 = var2 == statusIndicatorShapeModule.Ring
-		var3 = nil
+		var4 = var3 == statusIndicatorShapeModule.Ring
+		var4 = nil
 	else
-		var3 = true
+		var4 = true
 	end
-	t_1.InnerRing = if var3 and var6.ring then reactModule.createElement(viewModule, {
-		tag = var6.ring.tag,
-		Size = if flagsModule.FoundationAvatarBeta then var6.ring.size else nil,
-		testId = `{var1.testId}--ring`
+	t_1.InnerRing = if var4 and var7.ring then reactModule.createElement(viewModule, {
+		tag = var7.ring.tag,
+		Size = if flagsModule.FoundationAvatarBeta then var7.ring.size else nil,
+		testId = `{var2.testId}--ring`
 	}) else nil
 	
-	return createElement(viewModule, var1, t_1)
+	return createElement(viewModule, var2, t_1)
 end))

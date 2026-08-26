@@ -40,16 +40,16 @@ local t = {
 	checkbox = listItemInputType.Checkbox
 }
 
-local function ListNodeLoading(p0)
+local function ListNodeLoading(p1)
 	-- upvalues: reactModule (ref), eyebrowModule (ref), view (ref), skeleton (ref), radius (ref)
-	local title = p0.title
-	local eyebrow = p0.eyebrow
-	local tokens = p0.tokens
+	local title = p1.title
+	local eyebrow = p1.eyebrow
+	local tokens = p1.tokens
 	
-	return reactModule.createElement(p0.layout, {
+	return reactModule.createElement(p1.layout, {
 		body = reactModule.createElement(reactModule.Fragment, nil, {
 			Eyebrow = eyebrow and reactModule.createElement(eyebrowModule, { layoutOrder = 0, eyebrow = eyebrow }),
-			Title = reactModule.createElement(p0.titleSlot, { layoutOrder = 1, input = title }),
+			Title = reactModule.createElement(p1.titleSlot, { layoutOrder = 1, input = title }),
 			SkeletonContainer = reactModule.createElement(view, {
 				tag = "col gap-medium size-full-0 auto-y",
 				LayoutOrder = 2
@@ -103,92 +103,92 @@ local function ListNodeError(p1)
 	})
 end
 
-return reactModule.memo(function(p2)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useListLoader (ref), useLayoutSlots (ref), fFlagAbuseReportListNodeFullBleedModule (ref), reactFocusNavigationModule (ref), focusBehaviorsModule (ref), scrollToItemModule (ref), telemetryEventType (ref), fFlagAbuseReportSelectItemAddId (ref), dashModule (ref), ListNodeLoading (ref), ListNodeError (ref), empty (ref), eyebrowModule (ref), view (ref), list (ref), fFlagAbuseReportInExpPlayerListV3 (ref), iconName (ref), t (ref), footerModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
-	local var17 = useTokens()
-	local var18, var19 = reactModule.useState(p2.initialValue or nil)
+	local var1 = useTokens()
+	local var2, var3 = reactModule.useState(p1.initialValue or nil)
 	local translateIntoString = useArTranslation().translateIntoString
 	local sendEvent = useAbuseReportAnalytics().sendEvent
-	local var20 = reactModule.useRef(nil)
-	local var21, var22 = reactModule.useState(false)
-	local var23, var24 = reactModule.useState(false)
-	local var25 = reactModule.useRef(false)
-	local var26 = reactModule.useRef(false)
-	local var27 = useListLoader(p2.items)
-	local loading = var27.loading
-	local error = var27.error
-	local retry = var27.retry
-	local data = var27.data
-	local var28 = useLayoutSlots()
-	local layout = var28.Layout
-	local contentInset = var28.ContentInset
-	local var29 = fFlagAbuseReportListNodeFullBleedModule and (data ~= nil and #data > 0)
-	local var30 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	local var31 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef(nil)
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
+	local var9 = reactModule.useRef(false)
+	local var10 = reactModule.useRef(false)
+	local var11 = useListLoader(p1.items)
+	local loading = var11.loading
+	local error = var11.error
+	local retry = var11.retry
+	local data = var11.data
+	local var12 = useLayoutSlots()
+	local layout = var12.Layout
+	local contentInset = var12.ContentInset
+	local var13 = fFlagAbuseReportListNodeFullBleedModule and (data ~= nil and #data > 0)
+	local var14 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
+	local var15 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), var30 (ref), data (ref), focusBehaviorsModule (copy), var31 (ref)
-		local current = var20.current
+		-- upvalues: var4 (ref), var14 (ref), data (ref), focusBehaviorsModule (copy), var15 (ref)
+		local current = var4.current
 		
-		if not current or not var30 then return end
+		if not current or not var14 then return end
 		if data and #data ~= 0 then
-			local var39 = focusBehaviorsModule.mostRecentOrDefault(var31.current)
-			var30:registerFocusBehavior(current, var39)
+			local var16 = focusBehaviorsModule.mostRecentOrDefault(var15.current)
+			var14:registerFocusBehavior(current, var16)
 			
 			return function()
-				-- upvalues: var30 (copy), current (ref), var39 (ref)
-				var30:deregisterFocusBehavior(current, var39)
+				-- upvalues: var14 (copy), current (ref), var16 (ref)
+				var14:deregisterFocusBehavior(current, var16)
 			end
 		end
-	end, { var30, data, var31 })
+	end, { var14, data, var15 })
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), var22 (ref), var24 (ref)
-		local current = var20.current
+		-- upvalues: var4 (ref), var6 (ref), var8 (ref)
+		local current = var4.current
 		
 		if not current then return end
 		local scrollingFrame = current:FindFirstChildWhichIsA("ScrollingFrame", true)
 		
 		if scrollingFrame then
 			local function checkScrollbar()
-				-- upvalues: scrollingFrame (ref), var22 (copy)
-				var22(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
+				-- upvalues: scrollingFrame (ref), var6 (copy)
+				var6(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
 			end
 			
 			local function onScroll()
-				-- upvalues: scrollingFrame (ref), var24 (copy)
+				-- upvalues: scrollingFrame (ref), var8 (copy)
 				if scrollingFrame.CanvasPosition.Y > 0 then
-					var24(true)
+					var8(true)
 				end
 			end
 			
-			var22(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
-			local var43 = scrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(checkScrollbar)
-			local var44 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkScrollbar)
-			local var45 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(onScroll)
+			var6(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
+			local var16 = scrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(checkScrollbar)
+			local var17 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkScrollbar)
+			local var18 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(onScroll)
 			
 			return function()
-				-- upvalues: var43 (ref), var44 (ref), var45 (ref)
-				var43:Disconnect()
-				var44:Disconnect()
-				var45:Disconnect()
+				-- upvalues: var16 (ref), var17 (ref), var18 (ref)
+				var16:Disconnect()
+				var17:Disconnect()
+				var18:Disconnect()
 			end
 		end
 	end, { loading })
-	local var32 = reactModule.useRef({})
-	local var33 = reactModule.useRef(nil)
+	local var16 = reactModule.useRef({})
+	local var17 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), var33 (ref), var32 (ref), scrollToItemModule (copy), var20 (ref)
-		if var18 then
-			var33.current = var32.current[var18]
-			scrollToItemModule(var20, var33)
+		-- upvalues: var2 (ref), var17 (ref), var16 (ref), scrollToItemModule (copy), var4 (ref)
+		if var2 then
+			var17.current = var16.current[var2]
+			scrollToItemModule(var4, var17)
 			
 			return
 		end
-		var33.current = nil
-	end, { var18 })
+		var17.current = nil
+	end, { var2 })
 	reactModule.useEffect(function()
-		-- upvalues: error (ref), var25 (ref), sendEvent (ref), telemetryEventType (copy)
-		if error and not var25.current then
-			var25.current = true
+		-- upvalues: error (ref), var9 (ref), sendEvent (ref), telemetryEventType (copy)
+		if error and not var9.current then
+			var9.current = true
 			sendEvent({
 				sub_event_type = telemetryEventType.Error,
 				error_detail = { error_message = "list: async load failed: " .. error }
@@ -196,101 +196,101 @@ return reactModule.memo(function(p2)
 		end
 	end, { error, sendEvent })
 	reactModule.useEffect(function()
-		-- upvalues: loading (ref), error (ref), data (ref), var26 (ref), sendEvent (ref), telemetryEventType (copy)
-		if not loading and not error and (data == nil or #data == 0) and not var26.current then
-			var26.current = true
+		-- upvalues: loading (ref), error (ref), data (ref), var10 (ref), sendEvent (ref), telemetryEventType (copy)
+		if not loading and not error and (data == nil or #data == 0) and not var10.current then
+			var10.current = true
 			sendEvent({ sub_event_type = telemetryEventType.EmptyState })
 		end
 	end, { loading, error, data, sendEvent })
-	local variant = p2.variant or "radio"
+	local variant = p1.variant or "radio"
 	local isChevron = variant == "chevron"
-	local var36 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: data (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportSelectItemAddId (copy), var21 (ref), var23 (ref)
+	local var18 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: data (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportSelectItemAddId (copy), var5 (ref), var7 (ref)
 		if data then
 			sendEvent({
 				sub_event_type = telemetryEventType.SelectItem,
 				select_item_detail = {
-					selected_index = p3,
-					selected_id = if fFlagAbuseReportSelectItemAddId then p4 else nil,
+					selected_index = p2,
+					selected_id = if fFlagAbuseReportSelectItemAddId then p3 else nil,
 					list_length = #data,
-					has_scroll = var21,
-					did_scroll = var23
+					has_scroll = var5,
+					did_scroll = var7
 				}
 			})
 			
 			return
 		end
-	end, { sendEvent, var21, var23, data })
-	local var37 = reactModule.useCallback(function(p5)
-		-- upvalues: data (ref), var19 (ref), dashModule (copy), var36 (ref), fFlagAbuseReportSelectItemAddId (copy)
+	end, { sendEvent, var5, var7, data })
+	local var19 = reactModule.useCallback(function(p2)
+		-- upvalues: data (ref), var3 (ref), dashModule (copy), var18 (ref), fFlagAbuseReportSelectItemAddId (copy)
 		if data then
-			var19(p5)
-			local var46 = 0
-			dashModule.forEach(data, function(p6, p7)
-				-- upvalues: p5 (ref), var46 (write)
-				if p6.id == p5 then
-					var46 = p7
+			var3(p2)
+			local var20 = 0
+			dashModule.forEach(data, function(p3, p4)
+				-- upvalues: p2 (ref), var20 (write)
+				if p3.id == p2 then
+					var20 = p4
 					
 					return
 				end
 			end)
-			var36(var46, if fFlagAbuseReportSelectItemAddId then p5 else nil)
+			var18(var20, if fFlagAbuseReportSelectItemAddId then p2 else nil)
 			
 			return
 		end
-	end, { var36, data })
-	local var38 = reactModule.useCallback(function()
-		-- upvalues: data (ref), dashModule (copy), var18 (ref), p2 (ref)
+	end, { var18, data })
+	local var20 = reactModule.useCallback(function()
+		-- upvalues: data (ref), dashModule (copy), var2 (ref), p1 (ref)
 		if not data then return end
-		local var47 = dashModule.find(data, function(p8)
-			-- upvalues: var18 (copy)
-			return p8.id == var18
+		local var21 = dashModule.find(data, function(p2)
+			-- upvalues: var2 (copy)
+			return p2.id == var2
 		end)
 		
-		if p2.onNext then
-			p2.onNext(var18, var47)
+		if p1.onNext then
+			p1.onNext(var2, var21)
 		end
-	end, { data, p2.onNext, var18 })
-	local title = var28.Title
+	end, { data, p1.onNext, var2 })
+	local title = var12.Title
 	
 	if loading then
 		return reactModule.createElement(ListNodeLoading, {
 			layout = layout,
 			titleSlot = title,
-			title = p2.title,
-			eyebrow = p2.eyebrow,
-			tokens = var17
+			title = p1.title,
+			eyebrow = p1.eyebrow,
+			tokens = var1
 		})
 	elseif error then
 		return reactModule.createElement(ListNodeError, {
 			layout = layout,
 			titleSlot = title,
-			title = p2.title,
-			eyebrow = p2.eyebrow,
-			errorText = p2.errorText,
-			retryButtonText = p2.retryButtonText,
-			tokens = var17,
+			title = p1.title,
+			eyebrow = p1.eyebrow,
+			errorText = p1.errorText,
+			retryButtonText = p1.retryButtonText,
+			tokens = var1,
 			retry = retry
 		})
 	end
 	local createElement = reactModule.createElement
 	createElement = createElement(reactModule.Fragment, nil, if data == nil or #data == 0 then {
 		Empty = reactModule.createElement(empty, {
-			text = if p2.emptyText then translateIntoString(p2.emptyText) else nil
+			text = if p1.emptyText then translateIntoString(p1.emptyText) else nil
 		})
 	} else {
-		Eyebrow = if fFlagAbuseReportListNodeFullBleedModule then nil else reactModule.createElement(eyebrowModule, { layoutOrder = 0, eyebrow = p2.eyebrow }),
+		Eyebrow = if fFlagAbuseReportListNodeFullBleedModule then nil else reactModule.createElement(eyebrowModule, { layoutOrder = 0, eyebrow = p1.eyebrow }),
 		Title = if fFlagAbuseReportListNodeFullBleedModule then nil else reactModule.createElement(title, {
 			layoutOrder = 1,
-			input = p2.title,
-			subtitle = p2.subtitle
+			input = p1.title,
+			subtitle = p1.subtitle
 		}),
 		Header = if fFlagAbuseReportListNodeFullBleedModule then reactModule.createElement(contentInset, { layoutOrder = 0 }, {
-			Eyebrow = p2.eyebrow and reactModule.createElement(eyebrowModule, { layoutOrder = 0, eyebrow = p2.eyebrow }),
+			Eyebrow = p1.eyebrow and reactModule.createElement(eyebrowModule, { layoutOrder = 0, eyebrow = p1.eyebrow }),
 			Title = reactModule.createElement(title, {
 				layoutOrder = 1,
-				input = p2.title,
-				subtitle = p2.subtitle
+				input = p1.title,
+				subtitle = p1.subtitle
 			})
 		}) else nil,
 		ItemListContainer = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
@@ -298,62 +298,62 @@ return reactModule.memo(function(p2)
 				hasDivider = { hasDivider = true, isInset = false },
 				isContained = { isContained = false, hasMargin = true }
 			}, {
-				dashModule.map(data, function(p9, p10)
-					-- upvalues: fFlagAbuseReportInExpPlayerListV3 (copy), p2 (ref), reactModule (copy), list (copy), iconName (copy), translateIntoString (ref), isChevron (ref), var36 (ref), fFlagAbuseReportSelectItemAddId (copy), var37 (ref), t (copy), variant (ref), var18 (ref), var32 (ref), var31 (ref)
+				dashModule.map(data, function(p2, p3)
+					-- upvalues: fFlagAbuseReportInExpPlayerListV3 (copy), p1 (ref), reactModule (copy), list (copy), iconName (copy), translateIntoString (ref), isChevron (ref), var18 (ref), fFlagAbuseReportSelectItemAddId (copy), var19 (ref), t (copy), variant (ref), var2 (ref), var16 (ref), var15 (ref)
 					return reactModule.createElement(list.Item, {
-						leading = if type(p9.leading) == "string" then iconName[p9.leading] else p9.leading,
-						title = translateIntoString(p9.label),
-						description = if p9.description then translateIntoString(p9.description) else nil,
-						trailing = if fFlagAbuseReportInExpPlayerListV3 and p2.renderTrailingAccessory then p2.renderTrailingAccessory(p9) else nil,
+						leading = if type(p2.leading) == "string" then iconName[p2.leading] else p2.leading,
+						title = translateIntoString(p2.label),
+						description = if p2.description then translateIntoString(p2.description) else nil,
+						trailing = if fFlagAbuseReportInExpPlayerListV3 and p1.renderTrailingAccessory then p1.renderTrailingAccessory(p2) else nil,
 						onActivated = {
 							onActivated = if isChevron then function()
-								-- upvalues: var36 (copy), p10 (ref), fFlagAbuseReportSelectItemAddId (copy), p9 (ref), p2 (copy)
-								var36(p10, if fFlagAbuseReportSelectItemAddId then p9.id else nil)
+								-- upvalues: var18 (copy), p3 (ref), fFlagAbuseReportSelectItemAddId (copy), p2 (ref), p1 (copy)
+								var18(p3, if fFlagAbuseReportSelectItemAddId then p2.id else nil)
 								
-								if p2.onNext then
-									p2.onNext(p9.id, p9)
+								if p1.onNext then
+									p1.onNext(p2.id, p2)
 								end
 							end else function()
-								-- upvalues: var37 (copy), p9 (ref)
-								var37(p9.id)
+								-- upvalues: var19 (copy), p2 (ref)
+								var19(p2.id)
 							end,
 							inputType = t[variant],
-							isChecked = var18 == p9.id
+							isChecked = var2 == p2.id
 						},
-						LayoutOrder = p10,
-						ref = function(p11)
-							-- upvalues: var32 (copy), p9 (ref), p10 (ref), var31 (copy)
-							var32.current[p9.id] = p11
+						LayoutOrder = p3,
+						ref = function(p4)
+							-- upvalues: var16 (copy), p2 (ref), p3 (ref), var15 (copy)
+							var16.current[p2.id] = p4
 							
-							if p10 == 1 then
-								var31.current = p11
+							if p3 == 1 then
+								var15.current = p4
 							end
 						end
 					})
 				end)
 			})
 		}),
-		Footer = if fFlagAbuseReportListNodeFullBleedModule then p2.footerItems and reactModule.createElement(contentInset, { layoutOrder = 3 }, reactModule.createElement(footerModule, {
+		Footer = if fFlagAbuseReportListNodeFullBleedModule then p1.footerItems and reactModule.createElement(contentInset, { layoutOrder = 3 }, reactModule.createElement(footerModule, {
 			additionalTag = "padding-top-medium",
-			footerItems = p2.footerItems
-		})) else p2.footerItems and reactModule.createElement(footerModule, {
+			footerItems = p1.footerItems
+		})) else p1.footerItems and reactModule.createElement(footerModule, {
 			additionalTag = "padding-top-medium",
 			layoutOrder = 3,
-			footerItems = p2.footerItems
+			footerItems = p1.footerItems
 		})
 	})
 	
 	return reactModule.createElement(layout, {
-		ref = var20,
+		ref = var4,
 		body = createElement,
-		actions = if p2.onNext and not isChevron and var18 ~= nil then reactModule.createElement(button, {
-			text = translateIntoString(p2.nextButtonText),
+		actions = if p1.onNext and not isChevron and var2 ~= nil then reactModule.createElement(button, {
+			text = translateIntoString(p1.nextButtonText),
 			variant = buttonVariant.Emphasis,
 			fillBehavior = fillBehavior.Fill,
-			isLoading = p2.isSubmitting,
-			isDisabled = p2.isSubmitting,
-			onActivated = var38
+			isLoading = p1.isSubmitting,
+			isDisabled = p1.isSubmitting,
+			onActivated = var20
 		}) else nil,
-		isContentFullBleed = var29
+		isContentFullBleed = var13
 	})
 end)

@@ -8,16 +8,16 @@ return roduxModule.createReducer({
 	visible = true,
 	screenSize = Vector2.new(0, 0)
 }, {
-	[require(parent.Actions.SetScreenSize).name] = function(p0, p1)
+	[require(parent.Actions.SetScreenSize).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, { screenSize = p1.screenSize })
+		return cryoModule.Dictionary.join(p1, { screenSize = p2.screenSize })
 	end,
-	[require(parent.Actions.Hide).name] = function(p2)
+	[require(parent.Actions.Hide).name] = function(p1)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p2, { visible = false })
+		return cryoModule.Dictionary.join(p1, { visible = false })
 	end,
-	[require(parent.Actions.Show).name] = function(p3)
+	[require(parent.Actions.Show).name] = function(p1)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p3, { visible = true })
+		return cryoModule.Dictionary.join(p1, { visible = true })
 	end
 })

@@ -38,34 +38,34 @@ end
 
 function t:getContacts()
 	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var3 = promiseModule.new(function(p0, _)
+	local var1 = promiseModule.new(function(p1, _)
 		-- upvalues: self (ref)
 		local GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p1)
-			-- upvalues: self (copy), GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p0 (ref)
+		self.subscriber:subscribeProtocolMethodResponse(GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p2)
+			-- upvalues: self (copy), GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p1 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p0(p1)
+			p1(p2)
 		end)
 	end)
 	messageBus.publishProtocolMethodRequest(self.GET_CONTACTS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeVariable = false }, {})
 	
-	return var3
+	return var1
 end
 
 function t:supportsContacts()
 	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var4 = promiseModule.new(function(p2, _)
+	local var1 = promiseModule.new(function(p1, _)
 		-- upvalues: self (ref)
 		local SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p3)
-			-- upvalues: self (copy), SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p2 (ref)
+		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p2)
+			-- upvalues: self (copy), SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p1 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p2(p3.support)
+			p1(p2.support)
 		end)
 	end)
 	messageBus.publishProtocolMethodRequest(self.SUPPORTS_CONTACTS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {})
 	
-	return var4
+	return var1
 end
 
 t.default = t.new()

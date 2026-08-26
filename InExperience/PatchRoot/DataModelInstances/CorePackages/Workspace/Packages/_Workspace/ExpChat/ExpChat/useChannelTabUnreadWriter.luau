@@ -8,17 +8,17 @@ local setChannelUnreadStatusModule = require(expChat.Actions.SetChannelUnreadSta
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
-return function(p0)
+return function(p1)
 	-- upvalues: getChannelTabsStoreModule (ref), useDispatch (ref), reactModule (ref), setChannelUnreadStatusModule (ref), fFlagExpChatUseChannelTabsStore (ref)
-	local var6 = getChannelTabsStoreModule(false)
-	local var7 = useDispatch()
+	local var1 = getChannelTabsStoreModule(false)
+	local var2 = useDispatch()
 	
-	return reactModule.useCallback(function(p1)
-		-- upvalues: var7 (ref), setChannelUnreadStatusModule (copy), p0 (ref), fFlagExpChatUseChannelTabsStore (copy), var6 (ref)
-		var7(setChannelUnreadStatusModule(p0, p1))
+	return reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref), setChannelUnreadStatusModule (copy), p1 (ref), fFlagExpChatUseChannelTabsStore (copy), var1 (ref)
+		var2(setChannelUnreadStatusModule(p1, p2))
 		
 		if fFlagExpChatUseChannelTabsStore then
-			var6.setChannelUnreadStatus(p0, p1)
+			var1.setChannelUnreadStatus(p1, p2)
 		end
-	end, { var6, var7, p0 })
+	end, { var1, var2, p1 })
 end

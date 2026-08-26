@@ -4,32 +4,32 @@ local expChatNewSystemMessagesVariant = game:DefineFastString("ExpChatNewSystemM
 local forceEnableExpChatNewSystemMessages = game:DefineFastFlag("ForceEnableExpChatNewSystemMessages", false)
 local enableExpChatNewSystemMessagesExperimentation = game:DefineFastFlag("EnableExpChatNewSystemMessagesExperimentation", false)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: experimentCacheManager (ref), expChatNewSystemMessagesExperimentLayer (ref)
-	local var4 = experimentCacheManager.default:getLayerVariables(expChatNewSystemMessagesExperimentLayer)
+	local var1 = experimentCacheManager.default:getLayerVariables(expChatNewSystemMessagesExperimentLayer)
 	
-	return if var4 and var4[p0] ~= nil then var4[p0] else false
+	return if var1 and var1[p1] ~= nil then var1[p1] else false
 end
 
 return {
 	getNewSystemMessagesEnabled = function()
 		-- upvalues: forceEnableExpChatNewSystemMessages (ref), enableExpChatNewSystemMessagesExperimentation (ref), expChatNewSystemMessagesVariant (ref), experimentCacheManager (ref), expChatNewSystemMessagesExperimentLayer (ref)
-		local var5 = forceEnableExpChatNewSystemMessages
+		local var1 = forceEnableExpChatNewSystemMessages
 		
-		if not var5 then
-			var5 = enableExpChatNewSystemMessagesExperimentation
+		if not var1 then
+			var1 = enableExpChatNewSystemMessagesExperimentation
 			
-			if var5 then
-				local var6 = expChatNewSystemMessagesVariant
-				local var7 = experimentCacheManager.default:getLayerVariables(expChatNewSystemMessagesExperimentLayer)
+			if var1 then
+				local var2 = expChatNewSystemMessagesVariant
+				local var3 = experimentCacheManager.default:getLayerVariables(expChatNewSystemMessagesExperimentLayer)
 				
-				if var7 and var7[var6] ~= nil then
-					return var7[var6]
+				if var3 and var3[var2] ~= nil then
+					return var3[var2]
 				end
-				var5 = false
+				var1 = false
 			end
 		end
-		return var5
+		return var1
 	end,
 	logExposure = function()
 		-- upvalues: enableExpChatNewSystemMessagesExperimentation (ref), experimentCacheManager (ref), expChatNewSystemMessagesExperimentLayer (ref)

@@ -16,9 +16,9 @@ local t = {}
 local t_1 = {}
 local t_2 = { [1] = robloxGui }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: globalSettingsModule (ref)
-	return if p0.GetPriority ~= nil then p0:GetPriority() else globalSettingsModule.DefaultPriority
+	return if p1.GetPriority ~= nil then p1:GetPriority() else globalSettingsModule.DefaultPriority
 end
 
 local function setRBXEventStream_Screen(value, p1)
@@ -33,9 +33,9 @@ local function setRBXEventStream_Screen(value, p1)
 	end
 end
 
-function t.GetScreenGuiByPriority(_, p2)
+function t.GetScreenGuiByPriority(_, p1)
 	-- upvalues: t_2 (ref), create (ref), coreGuiService (ref)
-	local maxValue = math.max(1, p2)
+	local maxValue = math.max(1, p1)
 	
 	if not t_2[maxValue] then
 		for i = 1, maxValue do
@@ -50,16 +50,16 @@ function t.GetScreenGuiByPriority(_, p2)
 	return t_2[maxValue]
 end
 
-function t.OpenScreen(_, p3, p4)
+function t.OpenScreen(_, p2, p3)
 	-- upvalues: t_1 (ref), screenItemModule (ref), globalSettingsModule (ref), getFIntXboxPrimaryNavABLoggingModule (ref), t (ref), contentHistoryModule (ref), appStateModule (ref), insertScreenModule (ref)
-	if p4 == nil then
-		p4 = true
+	if p3 == nil then
+		p3 = true
 	end
-	local t_2 = { hidePrevious = p4 }
-	local var21 = tostring(p3)
-	t_1[var21] = { isShown = false, screen = p3 }
+	local t_2 = { hidePrevious = p3 }
+	local var1 = tostring(p2)
+	t_1[var1] = { isShown = false, screen = p2 }
 	local new = screenItemModule.new
-	new = new(var21, if p3.GetPriority ~= nil then p3:GetPriority() else globalSettingsModule.DefaultPriority, t_2)
+	new = new(var1, if p2.GetPriority ~= nil then p2:GetPriority() else globalSettingsModule.DefaultPriority, t_2)
 	
 	if getFIntXboxPrimaryNavABLoggingModule() > 0 then
 		local topScreen = t:GetTopScreen()
@@ -71,23 +71,23 @@ function t.OpenScreen(_, p3, p4)
 	appStateModule.store:dispatch(insertScreenModule(new))
 end
 
-function t.CloseCurrent(_, p5)
+function t.CloseCurrent(_, p2)
 	-- upvalues: appStateModule (ref), t_1 (ref), removeScreenModule (ref)
 	local screenList = appStateModule.store:getState().ScreenList
-	local var23 = #screenList > 0 and screenList[1]
+	local var1 = #screenList > 0 and screenList[1]
 	
-	if not var23 or not t_1[var23.id] then return end
-	if p5 and var23.id ~= tostring(p5) then
+	if not var1 or not t_1[var1.id] then return end
+	if p2 and var1.id ~= tostring(p2) then
 		return
 	end
-	appStateModule.store:dispatch(removeScreenModule(var23))
+	appStateModule.store:dispatch(removeScreenModule(var1))
 end
 
-local function handleScreensRemoved(p6)
+local function handleScreensRemoved(p2)
 	-- upvalues: t_1 (ref), setRBXEventStream_Screen (ref)
 	local t = {}
 	
-	for i, v in ipairs(p6) do
+	for i, v in ipairs(p2) do
 		t[v.id] = true
 	end
 	local t_2 = {}
@@ -98,10 +98,10 @@ local function handleScreensRemoved(p6)
 		end
 	end
 	for i_2, v_2 in ipairs(t_2) do
-		local var26 = t_1[v_2]
+		local var1 = t_1[v_2]
 		
-		if var26 then
-			local screen = var26.screen
+		if var1 then
+			local screen = var1.screen
 			screen:RemoveFocus()
 			screen:Hide()
 			
@@ -114,10 +114,10 @@ local function handleScreensRemoved(p6)
 	end
 end
 
-local function handleScreensAdded(p7)
+local function handleScreensAdded(p3)
 	-- upvalues: t_1 (ref), setRBXEventStream_Screen (ref), pageHeartbeatTimerModule (ref), analyticsModule (ref)
-	for i = #p7, 1, -1 do
-		local id = t_1[p7[i].id]
+	for i = #p3, 1, -1 do
+		local id = t_1[p3[i].id]
 		
 		if not id then
 			continue
@@ -126,10 +126,10 @@ local function handleScreensAdded(p7)
 		
 		if i > 1 then
 			local hidePrevious = true
-			local var27 = p7[i - 1]
+			local var2 = p3[i - 1]
 			
-			if var27 and var27.data then
-				hidePrevious = var27.data.hidePrevious
+			if var2 and var2.data then
+				hidePrevious = var2.data.hidePrevious
 			end
 			screen:RemoveFocus()
 			
@@ -148,26 +148,26 @@ local function handleScreensAdded(p7)
 		end
 		screen:Focus()
 		setRBXEventStream_Screen(screen, "Focus")
-		local var28 = id.screen.GetAnalyticsInfo and id.screen.GetAnalyticsInfo()
+		local var3 = id.screen.GetAnalyticsInfo and id.screen.GetAnalyticsInfo()
 		
-		if var28 then
-			pageHeartbeatTimerModule.onPageChanged(var28[analyticsModule.WidgetNames("WidgetId")])
+		if var3 then
+			pageHeartbeatTimerModule.onPageChanged(var3[analyticsModule.WidgetNames("WidgetId")])
 		end
 	end
 	analyticsModule.reportPageChanged()
 end
 
-local _ = function(p8)
+local _ = function(p4)
 	-- upvalues: handleScreensRemoved (ref), handleScreensAdded (ref)
-	handleScreensRemoved(p8)
-	handleScreensAdded(p8)
+	handleScreensRemoved(p4)
+	handleScreensAdded(p4)
 end
 
-appStateModule.store.changed:connect(function(p9, p10)
+appStateModule.store.changed:connect(function(p4, p5)
 	-- upvalues: handleScreensRemoved (ref), handleScreensAdded (ref)
-	local screenList = p9.ScreenList
+	local screenList = p4.ScreenList
 	
-	if screenList == p10.ScreenList then
+	if screenList == p5.ScreenList then
 		return
 	end
 	handleScreensRemoved(screenList)

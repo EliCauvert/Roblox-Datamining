@@ -2,9 +2,9 @@
 local t = { PAGE_TYPE_HOME = "Home" }
 
 return {
-	toAppPage = function(p0)
+	toAppPage = function(p1)
 		-- upvalues: t (ref), appPage (ref)
-		return if p0 == t.PAGE_TYPE_HOME then appPage.Home else nil
+		return if p1 == t.PAGE_TYPE_HOME then appPage.Home else nil
 	end,
 	fromAppPage = function(p1)
 		-- upvalues: appPage (ref), t (ref)

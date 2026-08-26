@@ -23,45 +23,45 @@ return function(p1, p2, p3, ...)
 	local var4, var5 = reactOtterModule.useAnimatedBinding(0)
 	local var6, var7 = reactOtterModule.useAnimatedBinding(0)
 	local var8, var9 = reactModule.useBinding(0)
-	local var10 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: p2 (ref), var7 (ref), reactOtterModule (copy), var5 (ref), var2 (ref), var9 (ref)
-		if p1.current and p2.current then
-			local var1 = p1.current.AbsolutePosition.X - p2.current.AbsolutePosition.X
-			local x = p1.current.AbsoluteSize.X
+	local var10 = reactModule.useCallback(function(p4, p5)
+		-- upvalues: p5 (ref), var7 (ref), reactOtterModule (copy), var5 (ref), var2 (ref), var9 (ref)
+		if p4.current and p5.current then
+			local var11 = p4.current.AbsolutePosition.X - p5.current.AbsolutePosition.X
+			local x = p4.current.AbsoluteSize.X
 			
-			if p2 then
+			if p5 then
 				var7(reactOtterModule.instant(x))
-				var5(reactOtterModule.instant(var1))
+				var5(reactOtterModule.instant(var11))
 			else
-				var5(reactOtterModule.ease(var1, var2))
+				var5(reactOtterModule.ease(var11, var2))
 				var7(reactOtterModule.ease(x, var2))
 			end
-			var9(p1.current.AbsoluteSize.Y)
+			var9(p4.current.AbsoluteSize.Y)
 		end
 	end, { var2, p1 })
 	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), p3 (ref), var3 (ref), var10 (ref), p2 (ref), signal (copy), instance (copy), connection (copy)
 		if p1 then
-			local var1 = p3[p1]
-			local var2 = p1 == var3.current
+			local var11 = p3[p1]
+			local var12 = p1 == var3.current
 			
 			local function animateHighlight()
-				-- upvalues: var1 (ref), var10 (copy), var2 (ref)
-				if var1 then
-					var10(var1, var2)
+				-- upvalues: var11 (ref), var10 (copy), var12 (ref)
+				if var11 then
+					var10(var11, var12)
 				end
 			end
 			
-			if var1 and var1.current and p2.current then
-				local var3 = signal.Connect(instance.GetPropertyChangedSignal(var1.current, "AbsoluteSize"), animateHighlight)
-				local var4 = signal.Connect(instance.GetPropertyChangedSignal(var1.current, "AbsolutePosition"), animateHighlight)
-				local var5 = signal.Connect(instance.GetPropertyChangedSignal(p2.current, "AbsoluteSize"), animateHighlight)
+			if var11 and var11.current and p2.current then
+				local var13 = signal.Connect(instance.GetPropertyChangedSignal(var11.current, "AbsoluteSize"), animateHighlight)
+				local var14 = signal.Connect(instance.GetPropertyChangedSignal(var11.current, "AbsolutePosition"), animateHighlight)
+				local var15 = signal.Connect(instance.GetPropertyChangedSignal(p2.current, "AbsoluteSize"), animateHighlight)
 				
 				return function()
-					-- upvalues: connection (copy), var3 (ref), var4 (ref), var5 (ref)
-					connection.Disconnect(var3)
-					connection.Disconnect(var4)
-					connection.Disconnect(var5)
+					-- upvalues: connection (copy), var13 (ref), var14 (ref), var15 (ref)
+					connection.Disconnect(var13)
+					connection.Disconnect(var14)
+					connection.Disconnect(var15)
 				end
 			end
 		end
@@ -70,10 +70,10 @@ return function(p1, p2, p3, ...)
 	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), p3 (ref), p2 (ref), var10 (ref), var3 (ref)
 		if p1 then
-			local var1 = p3[p1]
+			local var11 = p3[p1]
 			
-			if var1 and var1.current and p2.current then
-				var10(var1, p1 == var3.current)
+			if var11 and var11.current and p2.current then
+				var10(var11, p1 == var3.current)
 			end
 			var3.current = p1
 		end

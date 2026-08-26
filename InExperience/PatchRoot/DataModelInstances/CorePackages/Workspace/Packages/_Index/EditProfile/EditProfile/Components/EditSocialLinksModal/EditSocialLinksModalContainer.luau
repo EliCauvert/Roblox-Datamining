@@ -6,7 +6,7 @@ local reactModule = require(parent.React)
 local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var5 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local appPage = require(parent.RobloxAppEnums).AppPage
 local getDeepValue = luaSocialLibrariesDepsModule.SocialLibraries.config({}).Dictionary.getDeepValue
 local socialLinksNetworkingModule = require(editProfile.Networking.SocialLinksNetworking)
@@ -17,71 +17,71 @@ local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local fFlagProfileEnableSocialNetworksUsernames = require(parent.SharedFlags).FFlagProfileEnableSocialNetworksUsernames
 
 return function()
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), useNavigation (ref), useSelector (ref), getDeepValue (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateDown (ref), socialLinksNetworkingModule (ref), fFlagProfileEnableSocialNetworksUsernames (ref), httpService (ref), reactModule (ref), editSocialLinksModalModule (ref)
-	local var7 = useDispatch()
-	local var8 = useLocalUserId()
-	local var9 = useNavigation()
-	local var10 = useSelector(function(p0)
+	-- upvalues: useDispatch (ref), useLocalUserId (ref), useNavigation (ref), useSelector (ref), getDeepValue (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), socialLinksNetworkingModule (ref), fFlagProfileEnableSocialNetworksUsernames (ref), httpService (ref), reactModule (ref), editSocialLinksModalModule (ref)
+	local var2 = useDispatch()
+	local var3 = useLocalUserId()
+	local var4 = useNavigation()
+	local var5 = useSelector(function(p1)
 		-- upvalues: getDeepValue (copy)
-		return getDeepValue(p0, "Profile.SocialLinks.selfSocialLinks")
+		return getDeepValue(p1, "Profile.SocialLinks.selfSocialLinks")
 	end)
 	
 	local function openEditSocialNetworksErrorModal(p1)
-		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var5 (copy), var7 (ref), navigateDown (copy)
+		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.EditSocialNetworksError,
 			extraProps = { errorCode = p1 }
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var5.down(var5.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		var7(navigateDown(t))
+		var2(navigateDown(t))
 	end
 	
 	return reactModule.createElement(editSocialLinksModalModule, {
-		socialNetworksVisbility = var10.visibility,
-		socialNetworks = var10.socialLinks,
+		socialNetworksVisbility = var5.visibility,
+		socialNetworks = var5.socialLinks,
 		cancelOnActivated = function()
-			-- upvalues: var9 (ref)
-			var9.goBack()
+			-- upvalues: var4 (ref)
+			var4.goBack()
 		end,
-		saveOnActivated = function(p2, p3, p4, p5, p6, p7)
-			-- upvalues: var7 (ref), socialLinksNetworkingModule (copy), var8 (ref), fFlagProfileEnableSocialNetworksUsernames (copy), var9 (ref), httpService (copy), openEditSocialNetworksErrorModal (ref)
-			return var7(socialLinksNetworkingModule.SetSocialLinks.API({
-				promotionChannelsVisibilityPrivacy = p2,
-				facebook = p3,
-				twitter = p4,
-				youtube = p5,
-				twitch = p6,
-				guilded = p7
+		saveOnActivated = function(p1, p2, p3, p4, p5, p6)
+			-- upvalues: var2 (ref), socialLinksNetworkingModule (copy), var3 (ref), fFlagProfileEnableSocialNetworksUsernames (copy), var4 (ref), httpService (copy), openEditSocialNetworksErrorModal (ref)
+			return var2(socialLinksNetworkingModule.SetSocialLinks.API({
+				promotionChannelsVisibilityPrivacy = p1,
+				facebook = p2,
+				twitter = p3,
+				youtube = p4,
+				twitch = p5,
+				guilded = p6
 			})):andThen(function(_)
-				-- upvalues: var7 (copy), socialLinksNetworkingModule (copy), var8 (copy), fFlagProfileEnableSocialNetworksUsernames (copy), var9 (copy)
-				var7(socialLinksNetworkingModule.GetSelfSocialLinks.API({ alwaysReturnUrls = false, filterLink = false })):catch(function(_) end)
-				var7(socialLinksNetworkingModule.GetSocialLinks.API({
+				-- upvalues: var2 (copy), socialLinksNetworkingModule (copy), var3 (copy), fFlagProfileEnableSocialNetworksUsernames (copy), var4 (copy)
+				var2(socialLinksNetworkingModule.GetSelfSocialLinks.API({ alwaysReturnUrls = false, filterLink = false })):catch(function(_) end)
+				var2(socialLinksNetworkingModule.GetSocialLinks.API({
 					alwaysReturnUrls = true,
 					filterLink = true,
-					userId = var8
+					userId = var3
 				})):andThen(function(_)
-					-- upvalues: fFlagProfileEnableSocialNetworksUsernames (copy), var7 (copy), socialLinksNetworkingModule (copy), var8 (copy)
+					-- upvalues: fFlagProfileEnableSocialNetworksUsernames (copy), var2 (copy), socialLinksNetworkingModule (copy), var3 (copy)
 					if fFlagProfileEnableSocialNetworksUsernames then
-						var7(socialLinksNetworkingModule.GetSocialLinks.API({
+						var2(socialLinksNetworkingModule.GetSocialLinks.API({
 							alwaysReturnUrls = false,
 							filterLink = true,
-							userId = var8
+							userId = var3
 						}))
 					end
 				end):catch(function(_) end)
-				var9.goBack()
-			end):catch(function(p8)
+				var4.goBack()
+			end):catch(function(p7)
 				-- upvalues: httpService (copy), openEditSocialNetworksErrorModal (copy)
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p8 (ref)
-					return httpService:JSONDecode(p8.Body)
+					-- upvalues: httpService (copy), p7 (ref)
+					return httpService:JSONDecode(p7.Body)
 				end)
-				local var13 = -1
+				local var6 = -1
 				
 				if ok then
 					local code
@@ -91,10 +91,10 @@ return function()
 						if not code then
 							code = -1
 						end
-						var13 = code
+						var6 = code
 					end
 				end
-				openEditSocialNetworksErrorModal(var13)
+				openEditSocialNetworksErrorModal(var6)
 			end)
 		end
 	})

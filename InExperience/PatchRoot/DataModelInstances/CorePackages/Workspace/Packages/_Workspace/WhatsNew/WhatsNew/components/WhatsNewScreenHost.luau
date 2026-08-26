@@ -5,17 +5,17 @@ local ensureWhatsNewStoreInitializedModule = require(whatsNew.store.ensureWhatsN
 local _ = require(whatsNew.registry.ScopeActions)
 local whatsNewTourtipModule = require(script.Parent.WhatsNewTourtip)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: getWhatsNewStoreModule (ref), reactModule (ref), ensureWhatsNewStoreInitializedModule (ref), whatsNewTourtipModule (ref)
-	local screenScopeId = p0.screenScopeId
-	local scopeActions = p0.scopeActions
-	local var5 = p0.isEnabled == true
-	local onReady = p0.onReady
-	local var6 = getWhatsNewStoreModule()
+	local screenScopeId = p1.screenScopeId
+	local scopeActions = p1.scopeActions
+	local var1 = p1.isEnabled == true
+	local onReady = p1.onReady
+	local var2 = getWhatsNewStoreModule()
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var6 (ref), ensureWhatsNewStoreInitializedModule (copy), scopeActions (ref), onReady (ref), screenScopeId (ref)
-		if not var5 then
-			var6.stopTour()
+		-- upvalues: var1 (ref), var2 (ref), ensureWhatsNewStoreInitializedModule (copy), scopeActions (ref), onReady (ref), screenScopeId (ref)
+		if not var1 then
+			var2.stopTour()
 			
 			return
 		end
@@ -24,22 +24,22 @@ return reactModule.memo(function(p0)
 		if onReady ~= nil then
 			onReady()
 		end
-		var6.startEligibleTour(screenScopeId)
+		var2.startEligibleTour(screenScopeId)
 		
 		return function()
-			-- upvalues: var6 (copy)
-			var6.stopTour()
+			-- upvalues: var2 (copy)
+			var2.stopTour()
 		end
 	end, {
-		var5,
+		var1,
 		onReady,
 		screenScopeId,
 		scopeActions,
-		var6
+		var2
 	})
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		Children = reactModule.createElement(reactModule.Fragment, nil, p0.children),
+		Children = reactModule.createElement(reactModule.Fragment, nil, p1.children),
 		Tooltip = reactModule.createElement(whatsNewTourtipModule)
 	})
 end)

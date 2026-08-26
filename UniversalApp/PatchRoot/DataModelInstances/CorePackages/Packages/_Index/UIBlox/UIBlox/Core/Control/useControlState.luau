@@ -4,10 +4,10 @@ local controlStateModule = require(parent.Control.Enum.ControlState)
 
 return function()
 	-- upvalues: reactModule (ref), controlStateModule (ref)
-	local var2, var3 = reactModule.useState(controlStateModule.Initialize)
+	local var1, var2 = reactModule.useState(controlStateModule.Initialize)
 	
-	return var2, reactModule.useCallback(function(_, p0)
-		-- upvalues: var3 (ref)
-		var3(p0)
+	return var1, reactModule.useCallback(function(_, p1)
+		-- upvalues: var2 (ref)
+		var2(p1)
 	end, {})
 end

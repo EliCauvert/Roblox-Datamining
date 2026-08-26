@@ -6,51 +6,51 @@ local recyclingScopeContextModule = require(viewRecyclerReact.ReactAdapter.Priva
 local createElement = reactModule.createElement
 
 return {
-	create = function(p0)
+	create = function(p1)
 		-- upvalues: reactModule (ref), recyclingRuntimeModule (ref), createElement (ref), recyclingScopeContextModule (ref)
-		local var4 = if p0 == nil then nil else p0.createPortal
+		local var1 = if p1 == nil then nil else p1.createPortal
 		
-		return function(p1)
-			-- upvalues: var4 (ref), reactModule (copy), recyclingRuntimeModule (copy), createElement (copy), recyclingScopeContextModule (copy)
-			assert(var4 ~= nil, "RecyclingScope requires a configured portal renderer")
-			local _, var5 = reactModule.useState(0)
-			local var6 = reactModule.useRef(0)
-			local var7 = reactModule.useRef(false)
-			local var8 = reactModule.useRef(false)
-			local var9 = reactModule.useState(function()
-				-- upvalues: recyclingRuntimeModule (copy), var7 (ref), var5 (ref)
+		return function(p2)
+			-- upvalues: var1 (ref), reactModule (copy), recyclingRuntimeModule (copy), createElement (copy), recyclingScopeContextModule (copy)
+			assert(var1 ~= nil, "RecyclingScope requires a configured portal renderer")
+			local _, var2 = reactModule.useState(0)
+			local var3 = reactModule.useRef(0)
+			local var4 = reactModule.useRef(false)
+			local var5 = reactModule.useRef(false)
+			local var6 = reactModule.useState(function()
+				-- upvalues: recyclingRuntimeModule (copy), var4 (ref), var2 (ref)
 				return recyclingRuntimeModule.new(function()
-					-- upvalues: var7 (copy), var5 (copy)
-					if not var7.current then
-						var5(function(p2)
-							return p2 + 1
+					-- upvalues: var4 (copy), var2 (copy)
+					if not var4.current then
+						var2(function(p3)
+							return p3 + 1
 						end)
 					end
 				end)
 			end)
 			
 			local function destroyRuntimeIfReady()
-				-- upvalues: var7 (ref), var6 (ref), var8 (ref), var9 (ref)
-				if var7.current and var6.current == 0 and not var8.current then
-					var8.current = true
-					var9.destroy()
+				-- upvalues: var4 (ref), var3 (ref), var5 (ref), var6 (ref)
+				if var4.current and var3.current == 0 and not var5.current then
+					var5.current = true
+					var6.destroy()
 				end
 			end
 			
-			local var11 = reactModule.useState(function()
-				-- upvalues: var8 (ref), var7 (ref), var6 (ref), destroyRuntimeIfReady (ref)
+			local var7 = reactModule.useState(function()
+				-- upvalues: var5 (ref), var4 (ref), var3 (ref), destroyRuntimeIfReady (ref)
 				return function()
-					-- upvalues: var8 (copy), var7 (copy), var6 (copy), destroyRuntimeIfReady (copy)
-					assert(not var8.current, "RecyclingScope: cannot register after destruction")
-					var7.current = false
-					var6.current += 1
-					local var14 = true
+					-- upvalues: var5 (copy), var4 (copy), var3 (copy), destroyRuntimeIfReady (copy)
+					assert(not var5.current, "RecyclingScope: cannot register after destruction")
+					var4.current = false
+					var3.current += 1
+					local var8 = true
 					
 					return function()
-						-- upvalues: var14 (write), var6 (copy), destroyRuntimeIfReady (copy)
-						if var14 then
-							var14 = false
-							var6.current -= 1
+						-- upvalues: var8 (write), var3 (copy), destroyRuntimeIfReady (copy)
+						if var8 then
+							var8 = false
+							var3.current -= 1
 							task.defer(destroyRuntimeIfReady)
 							
 							return
@@ -58,32 +58,32 @@ return {
 					end
 				end
 			end)
-			local var12 = reactModule.useMemo(function()
-				-- upvalues: var9 (ref), p1 (ref), var11 (ref)
+			local var8 = reactModule.useMemo(function()
+				-- upvalues: var6 (ref), p2 (ref), var7 (ref)
 				return {
-					runtime = var9,
+					runtime = var6,
 					listOptions = {
-						maxPoolSize = p1.maxPoolSize,
-						diagnostics = p1.diagnostics
+						maxPoolSize = p2.maxPoolSize,
+						diagnostics = p2.diagnostics
 					},
-					registerConsumer = var11
+					registerConsumer = var7
 				}
-			end, { p1.maxPoolSize, p1.diagnostics, var11, var9 })
+			end, { p2.maxPoolSize, p2.diagnostics, var7, var6 })
 			reactModule.useEffect(function()
-				-- upvalues: var7 (ref), destroyRuntimeIfReady (ref)
-				var7.current = false
+				-- upvalues: var4 (ref), destroyRuntimeIfReady (ref)
+				var4.current = false
 				
 				return function()
-					-- upvalues: var7 (copy), destroyRuntimeIfReady (copy)
-					var7.current = true
+					-- upvalues: var4 (copy), destroyRuntimeIfReady (copy)
+					var4.current = true
 					task.defer(destroyRuntimeIfReady)
 				end
-			end, { var9 })
+			end, { var6 })
 			local t = {
-				Consumers = createElement(recyclingScopeContextModule.Provider, { value = var12 }, p1.children)
+				Consumers = createElement(recyclingScopeContextModule.Provider, { value = var8 }, p2.children)
 			}
 			
-			for i, v in var9.getHostChildren(var4) do
+			for i, v in var6.getHostChildren(var1) do
 				t[i] = v
 			end
 			return createElement(reactModule.Fragment, nil, t)

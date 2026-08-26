@@ -24,8 +24,8 @@ function t.new()
 	return t_1
 end
 
-function t:initialize(p0)
-	self.eventManager = p0
+function t:initialize(p1)
+	self.eventManager = p1
 	self.isInitialized = true
 end
 
@@ -37,11 +37,11 @@ function t:fireCEVAnalyticsEvent(p1, p2)
 	self.analytics.fireAnalyticsEvent(p1, p2)
 end
 
-function t:logPartyVoiceTimeout(p3)
+function t:logPartyVoiceTimeout(p1)
 	-- upvalues: analyticsModule (ref), crossExperience (ref), playersService (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChanged, {
-			partyId = p3 or "",
+			partyId = p1 or "",
 			status = crossExperience.Constants.VOICE_STATUS.ERROR_RCC_TIMEOUT,
 			previousStatus = self.previousStatus or "",
 			userId = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0
@@ -51,95 +51,95 @@ function t:logPartyVoiceTimeout(p3)
 	end
 end
 
-function t:logPartyVoiceStatusChanged(p4, p5, p6)
+function t:logPartyVoiceStatusChanged(p1, p2, p3)
 	-- upvalues: flagsModule (ref), analyticsModule (ref)
 	if not self.isInitialized then return end
-	if self.previousStatus ~= p4.status then
+	if self.previousStatus ~= p1.status then
 		if not flagsModule.FFlagEnablePartyVoiceStatusChangedDetailAnalytics then
 			self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChanged, {
-				partyId = p5 or "",
-				status = p4.status,
+				partyId = p2 or "",
+				status = p1.status,
 				previousStatus = self.previousStatus or "",
-				voiceChannelId = p4.voiceChannelId,
-				voiceSessionId = p4.voiceSessionId,
-				userId = p4.userId
+				voiceChannelId = p1.voiceChannelId,
+				voiceSessionId = p1.voiceSessionId,
+				userId = p1.userId
 			})
 		elseif flagsModule.FFlagPartyVoiceLogActiveDM then
 			self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChanged, {
-				partyId = p5 or "",
-				status = p4.status,
-				detail = p4.detail or "",
+				partyId = p2 or "",
+				status = p1.status,
+				detail = p1.detail or "",
 				previousStatus = self.previousStatus or "",
-				voiceChannelId = p4.voiceChannelId,
-				voiceSessionId = p4.voiceSessionId,
-				userId = p4.userId,
-				activeDm = p6 or ""
+				voiceChannelId = p1.voiceChannelId,
+				voiceSessionId = p1.voiceSessionId,
+				userId = p1.userId,
+				activeDm = p3 or ""
 			})
 		else
 			self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChanged, {
 				activeDm = "",
-				partyId = p5 or "",
-				status = p4.status,
-				detail = p4.detail or "",
+				partyId = p2 or "",
+				status = p1.status,
+				detail = p1.detail or "",
 				previousStatus = self.previousStatus or "",
-				voiceChannelId = p4.voiceChannelId,
-				voiceSessionId = p4.voiceSessionId,
-				userId = p4.userId
+				voiceChannelId = p1.voiceChannelId,
+				voiceSessionId = p1.voiceSessionId,
+				userId = p1.userId
 			})
 		end
 	end
-	self.previousStatus = p4.status
+	self.previousStatus = p1.status
 end
 
-function t:logPartyVoiceConnectedState(p7, p8, p9)
+function t:logPartyVoiceConnectedState(p1, p2, p3)
 	-- upvalues: flagsModule (ref), analyticsModule (ref)
 	if not self.isInitialized then return end
 	if flagsModule.FFlagPartyVoiceLogActiveDM then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceConnectedParticipantsOnJoin, {
-			userId = if p7.userId then p7.userId else 0,
-			partyId = p8 or "",
-			status = if p7.status then p7.status else "",
-			voiceChannelId = if p7.voiceChannelId then p7.voiceChannelId else "",
-			voiceSessionId = if p7.voiceSessionId then p7.voiceSessionId else "",
-			voicePlaySessionId = if p7.voicePlaySessionId then p7.voicePlaySessionId else "",
-			participants = if p7.participants then p7.participants else "",
-			numberActive = p7.numberActive or 0,
-			activeDm = p9 or ""
+			userId = if p1.userId then p1.userId else 0,
+			partyId = p2 or "",
+			status = if p1.status then p1.status else "",
+			voiceChannelId = if p1.voiceChannelId then p1.voiceChannelId else "",
+			voiceSessionId = if p1.voiceSessionId then p1.voiceSessionId else "",
+			voicePlaySessionId = if p1.voicePlaySessionId then p1.voicePlaySessionId else "",
+			participants = if p1.participants then p1.participants else "",
+			numberActive = p1.numberActive or 0,
+			activeDm = p3 or ""
 		})
 	else
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceConnectedParticipantsOnJoin, {
 			activeDm = "",
-			userId = if p7.userId then p7.userId else 0,
-			partyId = p8 or "",
-			status = if p7.status then p7.status else "",
-			voiceChannelId = if p7.voiceChannelId then p7.voiceChannelId else "",
-			voiceSessionId = if p7.voiceSessionId then p7.voiceSessionId else "",
-			voicePlaySessionId = if p7.voicePlaySessionId then p7.voicePlaySessionId else "",
-			participants = if p7.participants then p7.participants else "",
-			numberActive = p7.numberActive or 0
+			userId = if p1.userId then p1.userId else 0,
+			partyId = p2 or "",
+			status = if p1.status then p1.status else "",
+			voiceChannelId = if p1.voiceChannelId then p1.voiceChannelId else "",
+			voiceSessionId = if p1.voiceSessionId then p1.voiceSessionId else "",
+			voicePlaySessionId = if p1.voicePlaySessionId then p1.voicePlaySessionId else "",
+			participants = if p1.participants then p1.participants else "",
+			numberActive = p1.numberActive or 0
 		})
 	end
 	self:logLaunchFlowEndEvent()
 end
 
-function t:logPartyVoiceJoinAttempt(p10)
+function t:logPartyVoiceJoinAttempt(p1)
 	-- upvalues: flagsModule (ref), analyticsModule (ref)
 	if not self.isInitialized then return end
 	if flagsModule.FFlagPartyVoiceLogActiveDM then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceJoinAttempt, {
-			userId = if p10.userId then p10.userId else 0,
-			partyId = if p10.partyId then p10.partyId else "",
-			targetPlaceId = if p10.targetPlaceId then p10.targetPlaceId else 0,
-			isConnected = if p10.isConnected then p10.isConnected else false,
-			activeDm = if p10.activeDm then p10.activeDm else ""
+			userId = if p1.userId then p1.userId else 0,
+			partyId = if p1.partyId then p1.partyId else "",
+			targetPlaceId = if p1.targetPlaceId then p1.targetPlaceId else 0,
+			isConnected = if p1.isConnected then p1.isConnected else false,
+			activeDm = if p1.activeDm then p1.activeDm else ""
 		})
 	else
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceJoinAttempt, {
 			activeDm = "",
-			userId = if p10.userId then p10.userId else 0,
-			partyId = if p10.partyId then p10.partyId else "",
-			targetPlaceId = if p10.targetPlaceId then p10.targetPlaceId else 0,
-			isConnected = if p10.isConnected then p10.isConnected else false
+			userId = if p1.userId then p1.userId else 0,
+			partyId = if p1.partyId then p1.partyId else "",
+			targetPlaceId = if p1.targetPlaceId then p1.targetPlaceId else 0,
+			isConnected = if p1.isConnected then p1.isConnected else false
 		})
 	end
 	self:logLaunchFlowBeginEvent()
@@ -155,71 +155,71 @@ function t.logLaunchFlowEndEvent(_)
 	loggingProtocol.default:logEvent("party_voice_launch_flow_end")
 end
 
-function t:logPartyVoiceJoinFailure(p11, p12, p13)
+function t:logPartyVoiceJoinFailure(p1, p2, p3)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceJoinFailure, {
-			partyId = p11,
-			errorMessage = p12 or "",
-			userId = p13 or 0
+			partyId = p1,
+			errorMessage = p2 or "",
+			userId = p3 or 0
 		})
 		
 		return
 	end
 end
 
-function t:logPartyVoiceUnmuteParticipant(p14, p15)
+function t:logPartyVoiceUnmuteParticipant(p1, p2)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceUnmuteParticipant, { partyId = p14, userId = p15 or 0 })
+		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceUnmuteParticipant, { partyId = p1, userId = p2 or 0 })
 		
 		return
 	end
 end
 
-function t:logPartyVoiceMuteParticipant(p16, p17)
+function t:logPartyVoiceMuteParticipant(p1, p2)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceMuteParticipant, { partyId = p16, userId = p17 or 0 })
+		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceMuteParticipant, { partyId = p1, userId = p2 or 0 })
 		
 		return
 	end
 end
 
-function t:logPartyVoiceBlockParticipant(p18, p19)
+function t:logPartyVoiceBlockParticipant(p1, p2)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceBlockParticipant, { partyId = p18, userId = p19 or 0 })
+		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceBlockParticipant, { partyId = p1, userId = p2 or 0 })
 		
 		return
 	end
 end
 
-function t:logPartyVoiceUnblockParticipant(p20, p21)
+function t:logPartyVoiceUnblockParticipant(p1, p2)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceUnblockParticipant, { partyId = p20, userId = p21 or 0 })
+		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceUnblockParticipant, { partyId = p1, userId = p2 or 0 })
 		
 		return
 	end
 end
 
-function t:logPartyVoiceOnCrossExperienceStartedSignalReceived(p22, p23)
+function t:logPartyVoiceOnCrossExperienceStartedSignalReceived(p1, p2)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceOnCrossExperienceStartedSignalReceived, { hasExperienceStarted = p22, isActiveDM = p23 })
+		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceOnCrossExperienceStartedSignalReceived, { hasExperienceStarted = p1, isActiveDM = p2 })
 		
 		return
 	end
 end
 
-function t:logPartyVoiceStateChangeHandlerRun(p24, p25)
+function t:logPartyVoiceStateChangeHandlerRun(p1, p2)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChangeHandlerRun, {
-			isActiveDM = p24,
-			status = p25.status,
-			detail = p25.detail or ""
+			isActiveDM = p1,
+			status = p2.status,
+			detail = p2.detail or ""
 		})
 		
 		return

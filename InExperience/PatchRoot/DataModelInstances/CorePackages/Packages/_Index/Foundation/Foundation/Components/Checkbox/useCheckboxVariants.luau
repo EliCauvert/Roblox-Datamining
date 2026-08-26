@@ -8,14 +8,14 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local flagsModule = require(foundation.Utility.Flags)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: inputSizeModule (ref), flagsModule (ref)
 	return {
 		common = {
 			input = {
 				tag = "radius-small",
-				colors = { checkedStyle = p0.Color.ActionSubEmphasis.Background },
-				cursorRadius = UDim.new(0, p0.Radius.Small)
+				colors = { checkedStyle = p1.Color.ActionSubEmphasis.Background },
+				cursorRadius = UDim.new(0, p1.Radius.Small)
 			},
 			checkmark = {
 				tag = "position-center-center anchor-center-center content-action-sub-emphasis"
@@ -24,25 +24,25 @@ local function variantsFactory(p0)
 		sizes = {
 			[inputSizeModule.XSmall] = {
 				input = {
-					size = UDim2.fromOffset(p0.Size.Size_400, p0.Size.Size_400)
+					size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
 				},
 				checkmark = { tag = "size-400" }
 			},
 			[inputSizeModule.Small] = {
 				input = {
-					size = UDim2.fromOffset(p0.Size.Size_500, p0.Size.Size_500)
+					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
 				},
 				checkmark = { tag = "size-500" }
 			},
 			[inputSizeModule.Medium] = {
 				input = {
-					size = UDim2.fromOffset(p0.Size.Size_600, p0.Size.Size_600)
+					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
 				},
 				checkmark = { tag = "size-600" }
 			},
 			[inputSizeModule.Large] = {
 				input = {
-					size = if flagsModule.FoundationCheckboxBeta then UDim2.fromOffset(p0.Size.Size_600, p0.Size.Size_600) else UDim2.fromOffset(p0.Size.Size_700, p0.Size.Size_700)
+					size = if flagsModule.FoundationCheckboxBeta then UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600) else UDim2.fromOffset(p1.Size.Size_700, p1.Size.Size_700)
 				},
 				checkmark = {
 					tag = if flagsModule.FoundationCheckboxBeta then "size-600" else "size-700"

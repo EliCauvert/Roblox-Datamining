@@ -9,20 +9,20 @@ return {
 	["jest.config"] = script["jest.config"],
 	SduiFocusTags = require(script.FocusNavigation.SduiFocusTags),
 	OnNavigateBackWrapper = require(script.FocusNavigation.NavigateBackBindings).OnNavigateBackWrapper,
-	useOnNavigateBack = function(p0, p1)
-		return require(script.FocusNavigation.NavigateBackBindings).useOnNavigateBack(p0, p1)
+	useOnNavigateBack = function(p1, p2)
+		return require(script.FocusNavigation.NavigateBackBindings).useOnNavigateBack(p1, p2)
 	end,
-	useInitialFocusOnTag = function(p2, p3)
-		require(script.FocusNavigation.useInitialFocusOnTag)(p2, p3)
+	useInitialFocusOnTag = function(p1, p2)
+		require(script.FocusNavigation.useInitialFocusOnTag)(p1, p2)
 	end,
-	useSelectionOrderTracking = function(p4)
-		require(script.FocusNavigation.useSelectionOrderTracking)(p4)
+	useSelectionOrderTracking = function(p1)
+		require(script.FocusNavigation.useSelectionOrderTracking)(p1)
 	end,
-	usePageButtonBindings = function(p5, p6, p7)
-		return require(script.FocusNavigation.usePageButtonBindings)(p5, p6, p7)
+	usePageButtonBindings = function(p1, p2, p3)
+		return require(script.FocusNavigation.usePageButtonBindings)(p1, p2, p3)
 	end,
-	useBackButtonBinding = function(p8)
-		return require(script.FocusNavigation.useBackButtonBinding)(p8)
+	useBackButtonBinding = function(p1)
+		return require(script.FocusNavigation.useBackButtonBinding)(p1)
 	end,
 	createSduiFocusActivationStore = function()
 		return require(script.FocusNavigation.createSduiFocusActivationStore)()
@@ -30,8 +30,8 @@ return {
 	getSduiFocusActivationStore = function()
 		return require(script.FocusNavigation.getSduiFocusActivationStore)()
 	end,
-	useSduiFocusActivation = function(p9, p10)
-		require(script.FocusNavigation.useSduiFocusActivation)(p9, p10)
+	useSduiFocusActivation = function(p1, p2)
+		require(script.FocusNavigation.useSduiFocusActivation)(p1, p2)
 	end,
 	createSduiApiStore = require(script.createSduiApiStore),
 	getSduiApiStore = require(script.getSduiApiStore),

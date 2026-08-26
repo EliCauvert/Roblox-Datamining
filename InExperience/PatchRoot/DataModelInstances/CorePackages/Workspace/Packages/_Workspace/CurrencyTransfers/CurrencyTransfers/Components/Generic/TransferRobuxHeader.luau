@@ -11,7 +11,7 @@ local localizationService = game:GetService("LocalizationService")
 local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 local getFFlagCurrencyTransferFixHeaderTouchPaddingModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFixHeaderTouchPadding)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), formatNumberModule (ref), localizationService (ref), getIconRichText (ref), enums (ref), getFFlagCurrencyTransferFixHeaderTouchPaddingModule (ref), userInputService (ref), view (ref), text (ref)
 	return reactModule.createElement(view, { tag = "auto-xy align-y-center align-x-start row" }, {
 		LeftSide = reactModule.createElement(view, {
@@ -23,7 +23,7 @@ return function(p0)
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small content-default text-align-x-left",
 				RichText = true,
-				Text = `{getIconRichText(enums.IconName.RobloxPlus)} {p0.titleText}`
+				Text = `{getIconRichText(enums.IconName.RobloxPlus)} {p1.titleText}`
 			})
 		}),
 		RightSide = reactModule.createElement(view, {
@@ -36,10 +36,10 @@ return function(p0)
 				tag = "auto-xy text-label-large content-emphasis text-align-x-right",
 				RichText = true,
 				Text = reactModule.useMemo(function()
-					-- upvalues: formatNumberModule (copy), localizationService (copy), p0 (ref), getIconRichText (copy), enums (copy)
-					return `{getIconRichText(enums.IconName.Robux)} {formatNumberModule(localizationService.RobloxLocaleId, p0.robuxBalanceAmount or 0)}`
+					-- upvalues: formatNumberModule (copy), localizationService (copy), p1 (ref), getIconRichText (copy), enums (copy)
+					return `{getIconRichText(enums.IconName.Robux)} {formatNumberModule(localizationService.RobloxLocaleId, p1.robuxBalanceAmount or 0)}`
 				end, {
-					p0.robuxBalanceAmount,
+					p1.robuxBalanceAmount,
 					localizationService.RobloxLocaleId
 				})
 			})

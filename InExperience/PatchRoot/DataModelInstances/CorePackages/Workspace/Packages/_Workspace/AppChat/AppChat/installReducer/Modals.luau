@@ -26,147 +26,147 @@ return roduxModule.createReducer({
 	pendingStateModals = {},
 	conversationBottomModals = {}
 }, {
-	[appChatNetworkingModule.rodux.GetChatLandingModal.Succeeded.name] = function(p0, p1)
+	[appChatNetworkingModule.rodux.GetChatLandingModal.Succeeded.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, { chatLandingModal = p1.responseBody })
+		return cryoModule.Dictionary.join(p1, { chatLandingModal = p2.responseBody })
 	end,
-	[appChatNetworkingModule.rodux.GetConversationTopModal.Succeeded.name] = if fFlagAppChatEnableDoubleOptIn then nil else function(p2, p3)
+	[appChatNetworkingModule.rodux.GetConversationTopModal.Succeeded.name] = if fFlagAppChatEnableDoubleOptIn then nil else function(p1, p2)
 		-- upvalues: conversationChannelsModule (ref), cryoModule (ref)
-		local friendId = p3.postBody and p3.postBody.friend_id
-		local conversationId = friendId and (p3.postBody and p3.postBody.conversation_id or conversationChannelsModule.getFriendConversationId({ friendId }))
+		local friendId = p2.postBody and p2.postBody.friend_id
+		local conversationId = friendId and (p2.postBody and p2.postBody.conversation_id or conversationChannelsModule.getFriendConversationId({ friendId }))
 		
-		return if conversationId then cryoModule.Dictionary.join(p2, {
-			conversationTopModals = cryoModule.Dictionary.join(p2.conversationTopModals, { [conversationId] = p3.responseBody })
-		}) else p2
+		return if conversationId then cryoModule.Dictionary.join(p1, {
+			conversationTopModals = cryoModule.Dictionary.join(p1.conversationTopModals, { [conversationId] = p2.responseBody })
+		}) else p1
 	end,
-	[appChatNetworkingModule.rodux.GetModalSequence.Succeeded.name] = function(p4, p5)
+	[appChatNetworkingModule.rodux.GetModalSequence.Succeeded.name] = function(p1, p2)
 		-- upvalues: conversationChannelsModule (ref), modalSequence (ref), cryoModule (ref), fFlagAppChatEnableDoubleOptIn (ref), loggerModule (ref)
-		local friendId = p5.postBody and p5.postBody.friend_id
-		local conversationId = friendId and (p5.postBody and p5.postBody.conversation_id or conversationChannelsModule.getFriendConversationId({ friendId }))
+		local friendId = p2.postBody and p2.postBody.friend_id
+		local conversationId = friendId and (p2.postBody and p2.postBody.conversation_id or conversationChannelsModule.getFriendConversationId({ friendId }))
 		
-		if p5.postBody.modal_sequence == modalSequence.ConversationOverlay then
-			return if conversationId then cryoModule.Dictionary.join(p4, {
-				conversationOverlays = cryoModule.Dictionary.join(p4.conversationOverlays, { [conversationId] = p5.responseBody })
-			}) else p4
-		elseif p5.postBody.modal_sequence == modalSequence.ConversationTopModal and fFlagAppChatEnableDoubleOptIn then
-			return if conversationId then cryoModule.Dictionary.join(p4, {
-				conversationTopModals = cryoModule.Dictionary.join(p4.conversationTopModals, { [conversationId] = p5.responseBody })
-			}) else p4
-		elseif p5.postBody.modal_sequence ~= modalSequence.ConversationBottomModal then
-			loggerModule:warning(`GetModalSequence.Succeeded with unsupported modal sequence: {p5.postBody.modal_sequence}`)
+		if p2.postBody.modal_sequence == modalSequence.ConversationOverlay then
+			return if conversationId then cryoModule.Dictionary.join(p1, {
+				conversationOverlays = cryoModule.Dictionary.join(p1.conversationOverlays, { [conversationId] = p2.responseBody })
+			}) else p1
+		elseif p2.postBody.modal_sequence == modalSequence.ConversationTopModal and fFlagAppChatEnableDoubleOptIn then
+			return if conversationId then cryoModule.Dictionary.join(p1, {
+				conversationTopModals = cryoModule.Dictionary.join(p1.conversationTopModals, { [conversationId] = p2.responseBody })
+			}) else p1
+		elseif p2.postBody.modal_sequence ~= modalSequence.ConversationBottomModal then
+			loggerModule:warning(`GetModalSequence.Succeeded with unsupported modal sequence: {p2.postBody.modal_sequence}`)
 			
-			return p4
+			return p1
 		end
-		return if conversationId then cryoModule.Dictionary.join(p4, {
-			conversationBottomModals = cryoModule.Dictionary.join(p4.conversationBottomModals, { [conversationId] = p5.responseBody })
-		}) else p4
+		return if conversationId then cryoModule.Dictionary.join(p1, {
+			conversationBottomModals = cryoModule.Dictionary.join(p1.conversationBottomModals, { [conversationId] = p2.responseBody })
+		}) else p1
 	end,
-	[dismissedConversationTopModalModule.name] = if fFlagAppChatEnableDoubleOptIn then nil else function(p6, p7)
+	[dismissedConversationTopModalModule.name] = if fFlagAppChatEnableDoubleOptIn then nil else function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		local conversationId = p7.conversationId
-		local modalVariant = p7.modalVariant
+		local conversationId = p2.conversationId
+		local modalVariant = p2.modalVariant
 		
-		return if conversationId and modalVariant then cryoModule.Dictionary.join(p6, {
-			conversationTopModalsDismissed = cryoModule.Dictionary.join(p6.conversationTopModalsDismissed, {
-				[conversationId] = cryoModule.Dictionary.join(p6.conversationTopModalsDismissed[conversationId] or {}, { [modalVariant] = true })
+		return if conversationId and modalVariant then cryoModule.Dictionary.join(p1, {
+			conversationTopModalsDismissed = cryoModule.Dictionary.join(p1.conversationTopModalsDismissed, {
+				[conversationId] = cryoModule.Dictionary.join(p1.conversationTopModalsDismissed[conversationId] or {}, { [modalVariant] = true })
 			})
-		}) else p6
+		}) else p1
 	end,
-	[dismissedChatModalModule.name] = function(p8, p9)
+	[dismissedChatModalModule.name] = function(p1, p2)
 		-- upvalues: modalSequence (ref), cryoModule (ref), fFlagAppChatEnableDoubleOptIn (ref)
-		local key = p9.key
-		local modalSequence_1 = p9.modalSequence
+		local key = p2.key
+		local modalSequence_1 = p2.modalSequence
 		
-		return if modalSequence_1 == modalSequence.ConversationOverlay then if key then cryoModule.Dictionary.join(p8, {
-			conversationOverlays = cryoModule.Dictionary.join(p8.conversationOverlays, { [key] = cryoModule.None })
-		}) else p8 elseif not (modalSequence_1 ~= modalSequence.ConversationTopModal or not fFlagAppChatEnableDoubleOptIn) then if key then cryoModule.Dictionary.join(p8, {
-			conversationTopModals = cryoModule.Dictionary.join(p8.conversationTopModals, { [key] = cryoModule.None })
-		}) else p8 else p8
+		return if modalSequence_1 == modalSequence.ConversationOverlay then if key then cryoModule.Dictionary.join(p1, {
+			conversationOverlays = cryoModule.Dictionary.join(p1.conversationOverlays, { [key] = cryoModule.None })
+		}) else p1 elseif not (modalSequence_1 ~= modalSequence.ConversationTopModal or not fFlagAppChatEnableDoubleOptIn) then if key then cryoModule.Dictionary.join(p1, {
+			conversationTopModals = cryoModule.Dictionary.join(p1.conversationTopModals, { [key] = cryoModule.None })
+		}) else p1 else p1
 	end,
-	[dismissedAllConversationModalsForSequenceModule.name] = function(p10, p11)
+	[dismissedAllConversationModalsForSequenceModule.name] = function(p1, p2)
 		-- upvalues: fFlagEnableAEGIS2AppChatConversationBanner (ref), modalSequence (ref), loggerModule (ref), cryoModule (ref)
-		local modalSequence_1 = p11.modalSequence
+		local modalSequence_1 = p2.modalSequence
 		
 		if not fFlagEnableAEGIS2AppChatConversationBanner or modalSequence_1 ~= modalSequence.ConversationBottomModal then
 			loggerModule:warning(`DismissedAllConversationModalsForSequence received unsupported modal sequence: {modalSequence_1} `)
 			
-			return p10
+			return p1
 		end
 		loggerModule:debug("Removing all modals of sequence:ConversationBottomModal from the store")
 		local t = {}
 		
-		for i, v in p10.conversationBottomModals do
+		for i, v in p1.conversationBottomModals do
 			t[i] = cryoModule.None
 		end
-		return cryoModule.Dictionary.join(p10, {
-			conversationBottomModals = cryoModule.Dictionary.join(p10.conversationBottomModals, t)
+		return cryoModule.Dictionary.join(p1, {
+			conversationBottomModals = cryoModule.Dictionary.join(p1.conversationBottomModals, t)
 		})
 	end,
-	[appChatNetworkingModule.rodux.GetPendingStateModal.Succeeded.name] = function(p12, p13)
+	[appChatNetworkingModule.rodux.GetPendingStateModal.Succeeded.name] = function(p3, p4)
 		-- upvalues: cryoModule (ref)
-		local conversationId = p13.postBody and p13.postBody.conversation_id
+		local conversationId = p4.postBody and p4.postBody.conversation_id
 		
-		return if conversationId then cryoModule.Dictionary.join(p12, {
-			pendingStateModals = cryoModule.Dictionary.join(p12.pendingStateModals, { [conversationId] = p13.responseBody })
-		}) else p12
+		return if conversationId then cryoModule.Dictionary.join(p3, {
+			pendingStateModals = cryoModule.Dictionary.join(p3.pendingStateModals, { [conversationId] = p4.responseBody })
+		}) else p3
 	end,
-	[removedConversationModule.name] = function(p14, p15)
+	[removedConversationModule.name] = function(p3, p4)
 		-- upvalues: cryoModule (ref)
-		local conversationId = p15.conversationId
+		local conversationId = p4.conversationId
 		
-		return if conversationId then cryoModule.Dictionary.join(p14, {
-			conversationTopModals = cryoModule.Dictionary.join(p14.conversationTopModals, { [conversationId] = cryoModule.None }),
-			pendingStateModals = cryoModule.Dictionary.join(p14.pendingStateModals, { [conversationId] = cryoModule.None }),
-			conversationBottomModals = cryoModule.Dictionary.join(p14.conversationBottomModals, { [conversationId] = cryoModule.None })
-		}) else p14
+		return if conversationId then cryoModule.Dictionary.join(p3, {
+			conversationTopModals = cryoModule.Dictionary.join(p3.conversationTopModals, { [conversationId] = cryoModule.None }),
+			pendingStateModals = cryoModule.Dictionary.join(p3.pendingStateModals, { [conversationId] = cryoModule.None }),
+			conversationBottomModals = cryoModule.Dictionary.join(p3.conversationBottomModals, { [conversationId] = cryoModule.None })
+		}) else p3
 	end,
-	[friendConversationCreatedModule.name] = function(p16, p17)
+	[friendConversationCreatedModule.name] = function(p3, p4)
 		-- upvalues: cryoModule (ref), fFlagAppChatEnableDoubleOptIn (ref)
-		local oldFriendConversationId = p17.oldFriendConversationId
-		local newConversationId = p17.newConversationId
+		local oldFriendConversationId = p4.oldFriendConversationId
+		local newConversationId = p4.newConversationId
 		
 		if not oldFriendConversationId or not newConversationId then
-			return p16
+			return p3
 		end
-		local var19 = p16
+		local var1 = p3
 		
-		if p16.conversationTopModals[oldFriendConversationId] then
-			var19 = cryoModule.Dictionary.join(var19, {
-				conversationTopModals = cryoModule.Dictionary.join(var19.conversationTopModals, {
-					[newConversationId] = p16.conversationTopModals[oldFriendConversationId],
+		if p3.conversationTopModals[oldFriendConversationId] then
+			var1 = cryoModule.Dictionary.join(var1, {
+				conversationTopModals = cryoModule.Dictionary.join(var1.conversationTopModals, {
+					[newConversationId] = p3.conversationTopModals[oldFriendConversationId],
 					[oldFriendConversationId] = cryoModule.None
 				})
 			})
 		end
-		if not fFlagAppChatEnableDoubleOptIn and p16.conversationTopModalsDismissed[oldFriendConversationId] then
-			var19 = cryoModule.Dictionary.join(var19, {
-				conversationTopModalsDismissed = cryoModule.Dictionary.join(var19.conversationTopModalsDismissed, {
-					[newConversationId] = p16.conversationTopModalsDismissed[oldFriendConversationId],
+		if not fFlagAppChatEnableDoubleOptIn and p3.conversationTopModalsDismissed[oldFriendConversationId] then
+			var1 = cryoModule.Dictionary.join(var1, {
+				conversationTopModalsDismissed = cryoModule.Dictionary.join(var1.conversationTopModalsDismissed, {
+					[newConversationId] = p3.conversationTopModalsDismissed[oldFriendConversationId],
 					[oldFriendConversationId] = cryoModule.None
 				})
 			})
 		end
-		if p16.conversationOverlays[oldFriendConversationId] then
-			var19 = cryoModule.Dictionary.join(var19, {
-				conversationOverlays = cryoModule.Dictionary.join(var19.conversationOverlays, {
-					[newConversationId] = p16.conversationOverlays[oldFriendConversationId],
+		if p3.conversationOverlays[oldFriendConversationId] then
+			var1 = cryoModule.Dictionary.join(var1, {
+				conversationOverlays = cryoModule.Dictionary.join(var1.conversationOverlays, {
+					[newConversationId] = p3.conversationOverlays[oldFriendConversationId],
 					[oldFriendConversationId] = cryoModule.None
 				})
 			})
 		end
-		if p16.conversationBottomModals[oldFriendConversationId] then
-			var19 = cryoModule.Dictionary.join(var19, {
-				conversationBottomModals = cryoModule.Dictionary.join(var19.conversationBottomModals, {
-					[newConversationId] = p16.conversationBottomModals[oldFriendConversationId],
+		if p3.conversationBottomModals[oldFriendConversationId] then
+			var1 = cryoModule.Dictionary.join(var1, {
+				conversationBottomModals = cryoModule.Dictionary.join(var1.conversationBottomModals, {
+					[newConversationId] = p3.conversationBottomModals[oldFriendConversationId],
 					[oldFriendConversationId] = cryoModule.None
 				})
 			})
 		end
-		return var19
+		return var1
 	end,
-	DEBUG_ShowChatLandingAgeVerifiedTimedModal = if fFlagDebugAEGIS1AppChatBannerModule then function(p18)
+	DEBUG_ShowChatLandingAgeVerifiedTimedModal = if fFlagDebugAEGIS1AppChatBannerModule then function(p3)
 		-- upvalues: cryoModule (ref), appChatNetworkingModule (ref)
-		return cryoModule.Dictionary.union(p18, {
+		return cryoModule.Dictionary.union(p3, {
 			chatLandingModal = {
 				modal_variant = appChatNetworkingModule.Constants.ChatLandingModalVariant.ChatLandingAgeVerifiedCommsTimedModal,
 				modal_layout = {
@@ -203,9 +203,9 @@ return roduxModule.createReducer({
 			}
 		})
 	end else nil,
-	DEBUG_ShowAppChatFaeUpsell = if fFlagDebugAppChatFaeModule then function(p19)
+	DEBUG_ShowAppChatFaeUpsell = if fFlagDebugAppChatFaeModule then function(p3)
 		-- upvalues: cryoModule (ref), appChatNetworkingModule (ref)
-		return cryoModule.Dictionary.union(p19, {
+		return cryoModule.Dictionary.union(p3, {
 			chatLandingModal = {
 				modal_variant = appChatNetworkingModule.Constants.ChatLandingModalVariant.AgeAssuranceUpsell,
 				modal_layout = {
@@ -228,12 +228,12 @@ return roduxModule.createReducer({
 			}
 		})
 	end else nil,
-	DEBUG_ShowNewTCOverlay = if fFlagTCUpsellModalEnabledDEV or fFlagDebugEnableTCDoubleOptInDEV then function(p20, p21)
+	DEBUG_ShowNewTCOverlay = if fFlagTCUpsellModalEnabledDEV or fFlagDebugEnableTCDoubleOptInDEV then function(p3, p4)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p20, {
-			conversationOverlays = cryoModule.Dictionary.join(p20.conversationOverlays, {
-				[p21.conversationId] = {
-					modal_variant = p21.modalVariant,
+		return cryoModule.Dictionary.join(p3, {
+			conversationOverlays = cryoModule.Dictionary.join(p3.conversationOverlays, {
+				[p4.conversationId] = {
+					modal_variant = p4.modalVariant,
 					modal_layout = {
 						id = "asdf",
 						seen_record_action = "none",
@@ -243,12 +243,12 @@ return roduxModule.createReducer({
 			})
 		})
 	end else nil,
-	DEBUG_ShowNewTopModal = if fFlagDebugEnableTCDoubleOptInDEV then function(p22, p23)
+	DEBUG_ShowNewTopModal = if fFlagDebugEnableTCDoubleOptInDEV then function(p3, p4)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p22, {
-			conversationTopModals = cryoModule.Dictionary.join(p22.conversationTopModals, {
-				[p23.conversationId] = {
-					modal_variant = p23.modalVariant,
+		return cryoModule.Dictionary.join(p3, {
+			conversationTopModals = cryoModule.Dictionary.join(p3.conversationTopModals, {
+				[p4.conversationId] = {
+					modal_variant = p4.modalVariant,
 					modal_layout = {
 						id = "",
 						seen_record_action = "none",
@@ -260,8 +260,8 @@ return roduxModule.createReducer({
 			})
 		})
 	end else nil,
-	DEBUG_DismissChatLandingModal = if fFlagDebugAppChatFaeModule or fFlagDebugAEGIS1AppChatBannerModule then function(p24)
+	DEBUG_DismissChatLandingModal = if fFlagDebugAppChatFaeModule or fFlagDebugAEGIS1AppChatBannerModule then function(p3)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p24, { chatLandingModal = cryoModule.None })
+		return cryoModule.Dictionary.join(p3, { chatLandingModal = cryoModule.None })
 	end else nil
 })

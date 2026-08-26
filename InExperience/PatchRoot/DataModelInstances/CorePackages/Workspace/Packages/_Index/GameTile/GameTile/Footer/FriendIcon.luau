@@ -13,24 +13,24 @@ friendIcon.defaultProps = {
 	maskColor = require(parent.Style).Colors.White
 }
 
-function friendIcon.render(p0)
+function friendIcon.render(p1)
 	-- upvalues: constantsModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref)
-	local user = p0.props.user
-	local dotSize = p0.props.dotSize
-	local itemSize = p0.props.itemSize
-	local layoutOrder = p0.props.layoutOrder
-	local showBackground = p0.props.showBackground
-	local maskColor = p0.props.maskColor
-	local var4 = dotSize ~= nil
-	local var5 = constantsModule:GetPresenceIndicatorSizeKey(dotSize)
-	local var6 = nil
+	local user = p1.props.user
+	local dotSize = p1.props.dotSize
+	local itemSize = p1.props.itemSize
+	local layoutOrder = p1.props.layoutOrder
+	local showBackground = p1.props.showBackground
+	local maskColor = p1.props.maskColor
+	local var1 = dotSize ~= nil
+	local var2 = constantsModule:GetPresenceIndicatorSizeKey(dotSize)
+	local var3 = nil
 	local presence = nil
 	
 	if user then
-		if var4 then
-			presence = constantsModule.PresenceIndicatorImagesBySize[var5][user.presence]
+		if var1 then
+			presence = constantsModule.PresenceIndicatorImagesBySize[var2][user.presence]
 		end
-		var6 = getRbxthumbWithTypeSizeAndOptions(user.id, constants.RbxthumbTypes.AvatarHeadShot, 48)
+		var3 = getRbxthumbWithTypeSizeAndOptions(user.id, constants.RbxthumbTypes.AvatarHeadShot, 48)
 	end
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -43,7 +43,7 @@ function friendIcon.render(p0)
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 1,
-			Image = getImageData(var6) or var6,
+			Image = getImageData(var3) or var3,
 			Size = UDim2.new(0, itemSize, 0, itemSize)
 		}),
 		Mask = showBackground and roactModule.createElement("ImageLabel", {
@@ -54,7 +54,7 @@ function friendIcon.render(p0)
 			ImageColor3 = maskColor,
 			Size = UDim2.new(0, itemSize, 0, itemSize)
 		}) or nil,
-		Dot = showBackground and (var4 and (roactModule.createElement("ImageLabel", {
+		Dot = showBackground and (var1 and (roactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 3,

@@ -4,14 +4,14 @@ local immutable = require(parent.AppCommonLib).Immutable
 local receivedPlacesInfos = require(placeInfoRodux.Actions).ReceivedPlacesInfos
 local convertUniverseIdToString = require(parent.SharedFlags).ConvertUniverseIdToString
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: receivedPlacesInfos (ref), convertUniverseIdToString (ref), immutable (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	if p1.type == receivedPlacesInfos.name then
-		for i, v in pairs(p1.placesInfos) do
-			p0 = immutable.Set(p0, convertUniverseIdToString(v.universeId), v)
+	if p2.type == receivedPlacesInfos.name then
+		for i, v in pairs(p2.placesInfos) do
+			p1 = immutable.Set(p1, convertUniverseIdToString(v.universeId), v)
 		end
 	end
-	return p0
+	return p1
 end

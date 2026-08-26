@@ -5,8 +5,8 @@
 	XRotForFullBody = 15,
 	XRotForCloseup = 0,
 	DistanceScaleForFullBody = 1,
-	GetCameraCFrame = function(p0, p1)
-		return CFrame.lookAt(p0 * p1, p0.Position)
+	GetCameraCFrame = function(p1, p2)
+		return CFrame.lookAt(p1 * p2, p1.Position)
 	end,
 	CreateThumbnailCamera = function()
 		local thumbnailCamera = Instance.new("Camera")
@@ -16,8 +16,8 @@
 		
 		return thumbnailCamera
 	end,
-	CalculateBaseDistanceToCamera = function(p2, p3, p4, p5)
-		return math.max((p4.X - p3.X) / 2, (p4.Y - p3.Y) / 2) * p5 / math.tan(p2 / 2)
+	CalculateBaseDistanceToCamera = function(p1, p2, p3, p4)
+		return math.max((p3.X - p2.X) / 2, (p3.Y - p2.Y) / 2) * p4 / math.tan(p1 / 2)
 	end
 }
 local cFrameUtilityModule = require(script.Parent.CFrameUtility)
@@ -29,58 +29,58 @@ local cframe = CFrame.Angles(0.436332312999, 0.436332312999, 0)
 local cframe_1 = CFrame.Angles(0, 1.570796326795, 0)
 local cframe_2 = CFrame.Angles(0, -1.570796326795, 0)
 
-function t.SetupCamera(p6, p7)
+function t.SetupCamera(p1, p2)
 	-- upvalues: t (ref), cFrameUtilityModule (ref), vectorUtilityModule (ref)
-	if p7.optFieldOfView then
-		p6.FieldOfView = p7.optFieldOfView
+	if p2.optFieldOfView then
+		p1.FieldOfView = p2.optFieldOfView
 	end
-	local var10 = t.CalculateBaseDistanceToCamera(math.rad(p7.optFieldOfViewForDistanceScale or p6.FieldOfView), p7.minExtent, p7.maxExtent, p7.extentScale)
+	local var1 = t.CalculateBaseDistanceToCamera(math.rad(p2.optFieldOfViewForDistanceScale or p1.FieldOfView), p2.minExtent, p2.maxExtent, p2.extentScale)
 	
-	if p7.optCameraDistanceScale then
-		var10 *= p7.optCameraDistanceScale
+	if p2.optCameraDistanceScale then
+		var1 *= p2.optCameraDistanceScale
 	end
-	p6.CFrame = t.GetCameraCFrame(cFrameUtilityModule.AdjustTargetCFrameWithExtents(p7.targetCFrame, p7.minExtent, p7.maxExtent), vectorUtilityModule.Vector3FromXYRotPlusDistance(p7.optCameraXRot or 0, p7.optCameraYRot or 0, var10))
+	p1.CFrame = t.GetCameraCFrame(cFrameUtilityModule.AdjustTargetCFrameWithExtents(p2.targetCFrame, p2.minExtent, p2.maxExtent), vectorUtilityModule.Vector3FromXYRotPlusDistance(p2.optCameraXRot or 0, p2.optCameraYRot or 0, var1))
 end
 
-function t.SetupBodyPartCamera(p8, p9, p10, p11)
+function t.SetupBodyPartCamera(p1, p2, p3, p4)
 	-- upvalues: cFrame_1 (ref), cFrame (ref), characterUtilityModule (ref), t (ref)
 	local t_1 = {}
 	
-	if #p10 > 0 then
-		for i, v in pairs(p10) do
-			local var12 = p8:FindFirstChild(v, true)
+	if #p3 > 0 then
+		for i, v in pairs(p3) do
+			local var1 = p1:FindFirstChild(v, true)
 			
-			if var12 then
-				table.insert(t_1, var12)
+			if var1 then
+				table.insert(t_1, var1)
 			end
 		end
 	end
-	local var13 = (if p9 then cFrame_1 else cFrame) * p8:FindFirstChild("HumanoidRootPart").CFrame
-	local var14, var15 = characterUtilityModule.CalculateBodyPartsExtents(var13, t_1)
-	t.SetupCamera(p11, {
+	local var2 = (if p2 then cFrame_1 else cFrame) * p1:FindFirstChild("HumanoidRootPart").CFrame
+	local var3, var4 = characterUtilityModule.CalculateBodyPartsExtents(var2, t_1)
+	t.SetupCamera(p4, {
 		optFieldOfView = 30,
-		targetCFrame = var13,
-		minExtent = var14,
-		maxExtent = var15,
+		targetCFrame = var2,
+		minExtent = var3,
+		maxExtent = var4,
 		extentScale = t.DefaultBodyPartMarginScale
 	})
 end
 
-function t.SetupHeadCamera(p12, p13)
+function t.SetupHeadCamera(p5, p6)
 	-- upvalues: cFrameUtilityModule (ref), characterUtilityModule (ref), t (ref)
-	local var16 = CFrame.fromEulerAnglesYXZ(0.261799387799, 0.523598775598, 0) * cFrameUtilityModule.CalculateTargetCFrame(p12:FindFirstChild("Head").CFrame)
-	local var17, var18 = characterUtilityModule.CalculateHeadExtents(p12, var16)
-	t.SetupCamera(p13, {
+	local var5 = CFrame.fromEulerAnglesYXZ(0.261799387799, 0.523598775598, 0) * cFrameUtilityModule.CalculateTargetCFrame(p5:FindFirstChild("Head").CFrame)
+	local var6, var7 = characterUtilityModule.CalculateHeadExtents(p5, var5)
+	t.SetupCamera(p6, {
 		optFieldOfView = 30,
 		extentScale = 1.1,
-		targetCFrame = var16,
-		minExtent = var17,
-		maxExtent = var18
+		targetCFrame = var5,
+		minExtent = var6,
+		maxExtent = var7
 	})
 end
 
-local function _(p14)
-	local meshPart = p14:FindFirstChildWhichIsA("MeshPart")
+local function _(p5)
+	local meshPart = p5:FindFirstChildWhichIsA("MeshPart")
 	
 	if meshPart then
 		assert(meshPart, "Assert handle is not nil to silence type checker")
@@ -90,8 +90,8 @@ local function _(p14)
 	return false
 end
 
-local _ = function(p15)
-	local meshPart = p15:FindFirstChildWhichIsA("MeshPart")
+local _ = function(p5)
+	local meshPart = p5:FindFirstChildWhichIsA("MeshPart")
 	
 	if meshPart then
 		assert(meshPart, "Assert handle is not nil to silence type checker")
@@ -103,70 +103,70 @@ end
 
 local _ = function(vectorA)
 	-- upvalues: cframe_1 (ref), cframe_2 (ref), cframe (ref)
-	local var22
+	local var5
 	local meshPart = vectorA:FindFirstChildWhichIsA("MeshPart")
 	
 	if meshPart then
 		assert(meshPart, "Assert handle is not nil to silence type checker")
-		var22 = meshPart:FindFirstChild("LeftFootAttachment") ~= nil
+		var5 = meshPart:FindFirstChild("LeftFootAttachment") ~= nil
 	else
-		var22 = false
+		var5 = false
 	end
-	if var22 then
+	if var5 then
 		return cframe_1
 	end
-	local var24
+	local var6
 	local meshPart_1 = vectorA:FindFirstChildWhichIsA("MeshPart")
 	
 	if meshPart_1 then
 		assert(meshPart_1, "Assert handle is not nil to silence type checker")
-		var24 = meshPart_1:FindFirstChild("RightFootAttachment") ~= nil
+		var6 = meshPart_1:FindFirstChild("RightFootAttachment") ~= nil
 	else
-		var24 = false
+		var6 = false
 	end
-	return if var24 then cframe_2 else cframe
+	return if var6 then cframe_2 else cframe
 end
 
-function t.SetupAccessoryCamera(p16, p17)
+function t.SetupAccessoryCamera(p5, p6)
 	-- upvalues: cframe_1 (ref), cframe_2 (ref), cframe (ref), characterUtilityModule (ref), t (ref)
-	local var29
-	local children = p16:GetChildren()
+	local var5
+	local children = p5:GetChildren()
 	assert(#children == 1, "Assert SetupMeshPartAccessoryCamera accessoryModel only has accessory as a child.")
-	local var26 = children[1]
-	local handle = var26:FindFirstChild("Handle")
+	local var6 = children[1]
+	local handle = var6:FindFirstChild("Handle")
 	assert(handle, "Assert Accessory has handle for camera setup.")
 	handle.CFrame = CFrame.new()
 	local cFrame = handle.CFrame
-	local meshPart = var26:FindFirstChildWhichIsA("MeshPart")
+	local meshPart = var6:FindFirstChildWhichIsA("MeshPart")
 	
 	if meshPart then
 		assert(meshPart, "Assert handle is not nil to silence type checker")
-		var29 = meshPart:FindFirstChild("LeftFootAttachment") ~= nil
+		var5 = meshPart:FindFirstChild("LeftFootAttachment") ~= nil
 	else
-		var29 = false
+		var5 = false
 	end
-	local var30
-	if var29 then
-		var30 = cframe_1
+	local var7
+	if var5 then
+		var7 = cframe_1
 	else
-		local meshPart_1 = var26:FindFirstChildWhichIsA("MeshPart")
+		local meshPart_1 = var6:FindFirstChildWhichIsA("MeshPart")
 		
 		if meshPart_1 then
 			assert(meshPart_1, "Assert handle is not nil to silence type checker")
-			var29 = meshPart_1:FindFirstChild("RightFootAttachment") ~= nil
+			var5 = meshPart_1:FindFirstChild("RightFootAttachment") ~= nil
 		else
-			var29 = false
+			var5 = false
 		end
-		var30 = if var29 then cframe_2 else cframe
+		var7 = if var5 then cframe_2 else cframe
 	end
-	local var32 = cFrame * var30
-	local var33, var34 = characterUtilityModule.CalculateModelExtents(p16, var32)
-	t.SetupCamera(p17, {
+	local var8 = cFrame * var7
+	local var9, var10 = characterUtilityModule.CalculateModelExtents(p5, var8)
+	t.SetupCamera(p6, {
 		optFieldOfView = 20,
 		extentScale = 1.1,
-		targetCFrame = var32,
-		minExtent = var33,
-		maxExtent = var34
+		targetCFrame = var8,
+		minExtent = var9,
+		maxExtent = var10
 	})
 end
 

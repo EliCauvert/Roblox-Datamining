@@ -7,102 +7,102 @@ local createSingleEntityResolverModule = require(dataHydration.createSingleEntit
 local fetchExperienceQuestionnaireModule = require(script.Parent.fetchExperienceQuestionnaire)
 local _ = require(script.Parent.ExperienceQuestionnaireStoreTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createSingleEntityResolverModule (ref), fetchExperienceQuestionnaireModule (ref), createDataCacheModule (ref), createDataResolverModule (ref)
-	p0 = p0 or {}
-	local t = { network = p0.network, baseUrl = p0.baseUrl }
-	local var7 = createSingleEntityResolverModule(function(p1)
+	p1 = p1 or {}
+	local t = { network = p1.network, baseUrl = p1.baseUrl }
+	local var1 = createSingleEntityResolverModule(function(p2)
 		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-		return fetchExperienceQuestionnaireModule.fetchEligibility(p1, t)
+		return fetchExperienceQuestionnaireModule.fetchEligibility(p2, t)
 	end)
-	local var8 = createSingleEntityResolverModule(function(p2)
+	local var2 = createSingleEntityResolverModule(function(p2)
 		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
 		return fetchExperienceQuestionnaireModule.fetchMetadataStatus(p2, t)
 	end)
-	local var9 = createSingleEntityResolverModule(function(p3)
+	local var3 = createSingleEntityResolverModule(function(p2)
 		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-		return fetchExperienceQuestionnaireModule.fetchActiveResponse(p3, t)
+		return fetchExperienceQuestionnaireModule.fetchActiveResponse(p2, t)
 	end)
-	local var10 = createSingleEntityResolverModule(function(p4)
+	local var4 = createSingleEntityResolverModule(function(p2)
 		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-		return fetchExperienceQuestionnaireModule.fetchLatestQuestionnaire(p4, t)
+		return fetchExperienceQuestionnaireModule.fetchLatestQuestionnaire(p2, t)
 	end)
-	local var11 = createSingleEntityResolverModule(function(p5)
+	local var5 = createSingleEntityResolverModule(function(p2)
 		-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-		return fetchExperienceQuestionnaireModule.fetchLatestSubmission(p5, t)
+		return fetchExperienceQuestionnaireModule.fetchLatestSubmission(p2, t)
 	end)
-	local var12 = createDataResolverModule({
+	local var6 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = createDataCacheModule(),
-		fetchFn = function(p6, _)
+		fetchFn = function(p2, _)
 			-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-			return fetchExperienceQuestionnaireModule.fetchQuestionnaireById(p6, t)
+			return fetchExperienceQuestionnaireModule.fetchQuestionnaireById(p2, t)
 		end
 	})
 	
 	return {
-		getEligibility = var7.get,
-		fetchEligibility = var7.fetch,
-		getAndFetchEligibility = var7.getAndFetch,
-		getMetadataStatus = var8.get,
-		fetchMetadataStatus = var8.fetch,
-		getAndFetchMetadataStatus = var8.getAndFetch,
-		getActiveResponse = var9.get,
-		fetchActiveResponse = var9.fetch,
-		getAndFetchActiveResponse = var9.getAndFetch,
-		getLatestQuestionnaire = var10.get,
-		fetchLatestQuestionnaire = var10.fetch,
-		getAndFetchLatestQuestionnaire = var10.getAndFetch,
-		getQuestionnaireById = function(p7)
-			-- upvalues: var12 (ref)
-			return var12.getCachedItem(p7)
+		getEligibility = var1.get,
+		fetchEligibility = var1.fetch,
+		getAndFetchEligibility = var1.getAndFetch,
+		getMetadataStatus = var2.get,
+		fetchMetadataStatus = var2.fetch,
+		getAndFetchMetadataStatus = var2.getAndFetch,
+		getActiveResponse = var3.get,
+		fetchActiveResponse = var3.fetch,
+		getAndFetchActiveResponse = var3.getAndFetch,
+		getLatestQuestionnaire = var4.get,
+		fetchLatestQuestionnaire = var4.fetch,
+		getAndFetchLatestQuestionnaire = var4.getAndFetch,
+		getQuestionnaireById = function(p2)
+			-- upvalues: var6 (ref)
+			return var6.getCachedItem(p2)
 		end,
-		fetchQuestionnaireById = function(p8)
-			-- upvalues: var12 (ref)
-			return var12.fetchItem(p8)
+		fetchQuestionnaireById = function(p2)
+			-- upvalues: var6 (ref)
+			return var6.fetchItem(p2)
 		end,
-		getAndFetchQuestionnaireById = function(p9)
-			-- upvalues: var12 (ref)
-			return var12.getAndFetchItem(p9)
+		getAndFetchQuestionnaireById = function(p2)
+			-- upvalues: var6 (ref)
+			return var6.getAndFetchItem(p2)
 		end,
-		getLatestSubmission = var11.get,
-		fetchLatestSubmission = var11.fetch,
-		getAndFetchLatestSubmission = var11.getAndFetch,
-		saveSubmission = function(p10, p11)
-			-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref), var9 (ref), var11 (ref)
-			return fetchExperienceQuestionnaireModule.saveSubmission(p10, p11, t):andThen(function(p12)
-				-- upvalues: var9 (copy), p10 (ref), var11 (copy)
-				var9.fetch(p10)
-				var11.fetch(p10)
+		getLatestSubmission = var5.get,
+		fetchLatestSubmission = var5.fetch,
+		getAndFetchLatestSubmission = var5.getAndFetch,
+		saveSubmission = function(p2, p3)
+			-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref), var3 (ref), var5 (ref)
+			return fetchExperienceQuestionnaireModule.saveSubmission(p2, p3, t):andThen(function(p4)
+				-- upvalues: var3 (copy), p2 (ref), var5 (copy)
+				var3.fetch(p2)
+				var5.fetch(p2)
 				
-				return p12
+				return p4
 			end)
 		end,
-		validateResponses = function(p13)
+		validateResponses = function(p2)
 			-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-			return fetchExperienceQuestionnaireModule.validateResponses(p13, t)
+			return fetchExperienceQuestionnaireModule.validateResponses(p2, t)
 		end,
-		previewSubmission = function(p14)
+		previewSubmission = function(p2)
 			-- upvalues: fetchExperienceQuestionnaireModule (copy), t (ref)
-			return fetchExperienceQuestionnaireModule.previewSubmission(p14, t)
+			return fetchExperienceQuestionnaireModule.previewSubmission(p2, t)
 		end,
 		clear = function()
-			-- upvalues: var7 (ref), var8 (ref), var9 (ref), var10 (ref), var12 (ref), var11 (ref)
-			var7.clear()
-			var8.clear()
-			var9.clear()
-			var10.clear()
-			var12.clear()
-			var11.clear()
+			-- upvalues: var1 (ref), var2 (ref), var3 (ref), var4 (ref), var6 (ref), var5 (ref)
+			var1.clear()
+			var2.clear()
+			var3.clear()
+			var4.clear()
+			var6.clear()
+			var5.clear()
 		end,
 		dispose = function()
-			-- upvalues: var7 (ref), var8 (ref), var9 (ref), var10 (ref), var12 (ref), var11 (ref)
-			var7.dispose()
-			var8.dispose()
-			var9.dispose()
-			var10.dispose()
-			var12.dispose()
-			var11.dispose()
+			-- upvalues: var1 (ref), var2 (ref), var3 (ref), var4 (ref), var6 (ref), var5 (ref)
+			var1.dispose()
+			var2.dispose()
+			var3.dispose()
+			var4.dispose()
+			var6.dispose()
+			var5.dispose()
 		end
 	}
 end

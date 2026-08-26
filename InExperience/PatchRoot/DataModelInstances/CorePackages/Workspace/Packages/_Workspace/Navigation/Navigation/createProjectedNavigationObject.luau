@@ -9,68 +9,68 @@ local signalsExperimentalModule = require(parent.SignalsExperimental)
 local _ = require(script.Parent.types)
 local dEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
 
-return function(p0)
+return function(p1)
 	-- upvalues: createSignal (ref), actions (ref), signalsExperimentalModule (ref), dEV (ref), createComputed (ref), getNavigation (ref)
 	local t = {}
-	local var5, var6 = createSignal(false)
-	local var7, var8 = createSignal(function()
-		-- upvalues: p0 (ref), actions (copy)
-		return p0.getStateForAction(actions.init())
+	local var1, var2 = createSignal(false)
+	local var3, var4 = createSignal(function()
+		-- upvalues: p1 (ref), actions (copy)
+		return p1.getStateForAction(actions.init())
 	end)
-	local var9 = nil
+	local var5 = nil
 	local t_1 = {}
 	
 	local function setDispatch(value)
-		-- upvalues: var9 (write), t_1 (write)
-		var9 = value
+		-- upvalues: var5 (write), t_1 (write)
+		var5 = value
 		
 		if #t_1 > 0 then
-			local var18 = t_1
+			local var6 = t_1
 			t_1 = {}
 			
-			for i, v in var18 do
+			for i, v in var6 do
 				value(v)
 			end
 		end
 	end
 	
 	local function clearDispatch()
-		-- upvalues: var9 (write)
-		var9 = nil
+		-- upvalues: var5 (write)
+		var5 = nil
 	end
 	
-	local function update(p1)
-		-- upvalues: signalsExperimentalModule (copy), var8 (ref), var6 (ref)
-		if p1 == nil then
+	local function update(p2)
+		-- upvalues: signalsExperimentalModule (copy), var4 (ref), var2 (ref)
+		if p2 == nil then
 			return
 		end
 		signalsExperimentalModule.batch(function()
-			-- upvalues: var8 (copy), p1 (ref), var6 (copy)
-			var8(p1)
-			var6(p1.isTransitioning == true)
+			-- upvalues: var4 (copy), p2 (ref), var2 (copy)
+			var4(p2)
+			var2(p2.isTransitioning == true)
 		end)
 	end
 	
 	local function dispatch(p2)
-		-- upvalues: dEV (copy), signalsExperimentalModule (copy), var8 (ref), p0 (ref), actions (copy), var6 (ref), var9 (write), var7 (ref), t_1 (write)
+		-- upvalues: dEV (copy), signalsExperimentalModule (copy), var4 (ref), p1 (ref), actions (copy), var2 (ref), var5 (write), var3 (ref), t_1 (write)
 		if dEV and p2.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var8 (copy), p0 (copy), actions (copy), var6 (copy)
-				var8(p0.getStateForAction(actions.init()))
-				var6(false)
+				-- upvalues: var4 (copy), p1 (copy), actions (copy), var2 (copy)
+				var4(p1.getStateForAction(actions.init()))
+				var2(false)
 			end)
 			
 			return true
-		elseif var9 ~= nil then
-			var9(p2)
+		elseif var5 ~= nil then
+			var5(p2)
 			
 			return true
 		end
-		local var19 = var7(false)
-		local stateForAction = p0.getStateForAction(p2, var19)
+		local var7 = var3(false)
+		local stateForAction = p1.getStateForAction(p2, var7)
 		
-		if stateForAction ~= nil and stateForAction ~= var19 then
-			var8(stateForAction)
+		if stateForAction ~= nil and stateForAction ~= var7 then
+			var4(stateForAction)
 		end
 		table.insert(t_1, p2)
 		
@@ -79,27 +79,27 @@ return function(p0)
 	
 	local function notifyEvents() end
 	
-	local var16 = function()
+	local var7 = function()
 		return nil
 	end
 	
-	local var17 = createComputed(function(p3)
-		-- upvalues: var7 (ref), getNavigation (copy), p0 (ref), dispatch (ref), t (ref), var16 (write)
-		return getNavigation(p0, var7(p3), dispatch, t, function(_, p4)
-			return p4
+	local var8 = createComputed(function(p2)
+		-- upvalues: var3 (ref), getNavigation (copy), p1 (ref), dispatch (ref), t (ref), var7 (write)
+		return getNavigation(p1, var3(p2), dispatch, t, function(_, p3)
+			return p3
 		end, function()
-			-- upvalues: var16 (copy)
-			return var16()
+			-- upvalues: var7 (copy)
+			return var7()
 		end)
 	end)
-	var16 = var17
+	var7 = var8
 	
 	return {
 		dispatch = dispatch,
 		notifyEvents = notifyEvents,
-		getState = var7,
-		getNavigation = var17,
-		getIsNavigating = var5,
+		getState = var3,
+		getNavigation = var8,
+		getIsNavigating = var1,
 		update = update,
 		setDispatch = setDispatch,
 		clearDispatch = clearDispatch

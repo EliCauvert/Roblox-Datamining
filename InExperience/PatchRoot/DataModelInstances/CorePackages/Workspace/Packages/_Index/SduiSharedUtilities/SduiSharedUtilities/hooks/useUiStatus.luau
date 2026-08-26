@@ -6,9 +6,9 @@ local getSduiApiStoreModule = require(sduiSharedUtilities.getSduiApiStore)
 local uiStatus = require(sduiSharedUtilities.SduiIntegrationTypes).UiStatus
 local dataHydrationTypes = dataHydrationModule.DataHydrationTypes
 
-return function(p0)
+return function(p1)
 	-- upvalues: signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref), uiStatus (ref)
-	local var4 = signalsReactModule.useSignalState(getSduiApiStoreModule().getData(p0).status)
+	local var1 = signalsReactModule.useSignalState(getSduiApiStoreModule().getData(p1).status)
 	
-	return if var4 == dataHydrationTypes.DataStatus.NotReady then uiStatus.Loading elseif var4 == dataHydrationTypes.DataStatus.Failed then uiStatus.Error else uiStatus.Resolved
+	return if var1 == dataHydrationTypes.DataStatus.NotReady then uiStatus.Loading elseif var1 == dataHydrationTypes.DataStatus.Failed then uiStatus.Error else uiStatus.Resolved
 end

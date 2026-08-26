@@ -1,23 +1,23 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.ES7Types)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	local _ = {}
 	
-	if p1 then
+	if p2 then
 		local t = {}
 		
-		for i, v in p0 do
-			if p2 == nil then
-				t[i] = p1(v, i)
+		for i, v in p1 do
+			if p3 == nil then
+				t[i] = p2(v, i)
 			else
-				t[i] = p1(p2, v, i)
+				t[i] = p2(p3, v, i)
 			end
 		end
 		return t
 	else
 		local t = {}
 		
-		for i, v in p0 do
+		for i, v in p1 do
 			t[i] = v
 		end
 		return t

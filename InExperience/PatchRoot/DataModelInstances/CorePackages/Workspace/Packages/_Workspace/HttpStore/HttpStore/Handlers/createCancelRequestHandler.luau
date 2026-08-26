@@ -4,18 +4,18 @@ local signalsModule = require(parent_1.Signals)
 local httpSessionTrackerModule = require(parent.HttpSessionTracker)
 local _ = require(parent_1.InternalHttpStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: signalsModule (ref), httpSessionTrackerModule (ref)
-	return function(p1)
-		-- upvalues: signalsModule (copy), p0 (ref), httpSessionTrackerModule (copy)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: p1 (ref), p0 (copy), httpSessionTrackerModule (copy)
-			local var2 = p1(p2)
+	return function(p2)
+		-- upvalues: signalsModule (copy), p1 (ref), httpSessionTrackerModule (copy)
+		return signalsModule.createComputed(function(p3)
+			-- upvalues: p2 (ref), p1 (copy), httpSessionTrackerModule (copy)
+			local var1 = p2(p3)
 			
-			return if p0 == httpSessionTrackerModule.currentSession() then var2 else {
+			return if p1 == httpSessionTrackerModule.currentSession() then var1 else {
 				status = "Failed",
 				cancelled = true,
-				config = var2.config
+				config = var1.config
 			}
 		end)
 	end

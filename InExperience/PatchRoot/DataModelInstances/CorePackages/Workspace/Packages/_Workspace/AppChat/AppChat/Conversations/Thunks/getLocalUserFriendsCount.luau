@@ -3,10 +3,10 @@ local networkingFriendsModule = require(script:FindFirstAncestor("AppChat").Http
 
 return function()
 	-- upvalues: playersService (ref), networkingFriendsModule (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: playersService (copy), networkingFriendsModule (copy)
 		if playersService.LocalPlayer then
-			return p0:dispatch(networkingFriendsModule.GetFriendsCountFromUserId.API(playersService.LocalPlayer.UserId))
+			return p1:dispatch(networkingFriendsModule.GetFriendsCountFromUserId.API(playersService.LocalPlayer.UserId))
 		end
 	end
 end

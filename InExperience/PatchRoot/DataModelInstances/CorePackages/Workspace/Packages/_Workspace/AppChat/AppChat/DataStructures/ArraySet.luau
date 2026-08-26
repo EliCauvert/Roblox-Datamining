@@ -1,8 +1,8 @@
 ﻿local t = {}
 
-function t:__index(p0)
+function t:__index(p1)
 	-- upvalues: t (ref)
-	return if type(p0) == "number" then self:at(p0) else t[p0]
+	return if type(p1) == "number" then self:at(p1) else t[p1]
 end
 
 function t:__len()
@@ -24,23 +24,23 @@ function t:__iter()
 	end
 end
 
-function t:add(p3)
-	if self._valueToIndex[p3] then
+function t:add(p1)
+	if self._valueToIndex[p1] then
 		return false
 	end
-	local var2 = self._size + 1
-	self._valueToIndex[p3] = var2
-	self._indexToValue[var2] = p3
-	self._size = var2
+	local var1 = self._size + 1
+	self._valueToIndex[p1] = var1
+	self._indexToValue[var1] = p1
+	self._size = var1
 	
 	return true
 end
 
-function t:prependAll(p4)
+function t:prependAll(p1)
 	local t = {}
 	local t_1 = {}
 	
-	for i, v in p4 do
+	for i, v in p1 do
 		if not self._valueToIndex[v] and not t_1[v] then
 			t_1[v] = true
 			table.insert(t, v)
@@ -52,9 +52,9 @@ function t:prependAll(p4)
 	local tCount = #t
 	
 	for i_1 = self._size, 1, -1 do
-		local var6 = self._indexToValue[i_1]
-		self._indexToValue[i_1 + tCount] = var6
-		self._valueToIndex[var6] = i_1 + tCount
+		local var1 = self._indexToValue[i_1]
+		self._indexToValue[i_1 + tCount] = var1
+		self._valueToIndex[var1] = i_1 + tCount
 	end
 	for i_2, v_1 in t do
 		self._indexToValue[i_2] = v_1
@@ -65,17 +65,17 @@ function t:prependAll(p4)
 	return true
 end
 
-function t:remove(p5)
-	if not self._valueToIndex[p5] then
+function t:remove(p2)
+	if not self._valueToIndex[p2] then
 		return false
 	end
-	local var7 = self._valueToIndex[p5]
-	self._valueToIndex[p5] = nil
+	local var2 = self._valueToIndex[p2]
+	self._valueToIndex[p2] = nil
 	
-	for i = var7 + 1, self._size do
-		local var8 = self._indexToValue[i]
-		self._indexToValue[i - 1] = var8
-		self._valueToIndex[var8] = i - 1
+	for i = var2 + 1, self._size do
+		local var3 = self._indexToValue[i]
+		self._indexToValue[i - 1] = var3
+		self._valueToIndex[var3] = i - 1
 	end
 	self._indexToValue[self._size] = nil
 	self._size -= 1
@@ -83,8 +83,8 @@ function t:remove(p5)
 	return true
 end
 
-function t:has(p6)
-	return self._valueToIndex[p6] ~= nil
+function t:has(p3)
+	return self._valueToIndex[p3] ~= nil
 end
 
 function t:clear()
@@ -97,12 +97,12 @@ function t:size()
 	return self._size
 end
 
-function t:at(p7)
-	return if p7 < 1 or self._size < p7 then nil else self._indexToValue[p7]
+function t:at(p3)
+	return if p3 < 1 or self._size < p3 then nil else self._indexToValue[p3]
 end
 
-function t:indexOf(p8)
-	return self._valueToIndex[p8]
+function t:indexOf(p3)
+	return self._valueToIndex[p3]
 end
 
 function t:toArray()
@@ -118,12 +118,12 @@ function t:clone()
 	return t.new(self._indexToValue)
 end
 
-function t.new(p9)
+function t.new(p3)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({ _size = 0, _valueToIndex = {}, _indexToValue = {} }, t)
 	
-	if p9 then
-		for i, v in p9 do
+	if p3 then
+		for i, v in p3 do
 			tbl:add(v)
 		end
 	end

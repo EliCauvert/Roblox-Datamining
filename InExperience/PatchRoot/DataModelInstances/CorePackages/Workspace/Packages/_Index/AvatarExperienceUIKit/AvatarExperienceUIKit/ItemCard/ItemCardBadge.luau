@@ -6,38 +6,38 @@ local useTokens = foundationModule.Hooks.useTokens
 local itemCardIconModule = require(script.Parent.ItemCardIcon)
 local AXItemCardBadgeCheckText = game:DefineFastFlag("AXItemCardBadgeCheckText", false)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), AXItemCardBadgeCheckText (ref), text (ref), itemCardIconModule (ref)
-	local var4 = useTokens()
+	local var1 = useTokens()
 	local t = {
 		ItemCardBadgeCornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
-		Border = if p0.displayBorder then reactModule.createElement("UIStroke", {
-			Color = var4.Color.Stroke.Default.Color3,
-			Transparency = var4.Color.Stroke.Default.Transparency,
-			Thickness = var4.Stroke.Thick
+		Border = if p1.displayBorder then reactModule.createElement("UIStroke", {
+			Color = var1.Color.Stroke.Default.Color3,
+			Transparency = var1.Color.Stroke.Default.Transparency,
+			Thickness = var1.Stroke.Thick
 		}) else nil,
 		ItemCardBadgeLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, var4.Gap.XSmall)
+			Padding = UDim.new(0, var1.Gap.XSmall)
 		}),
 		ItemCardBadgePadding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var4.Padding.Small),
-			PaddingRight = UDim.new(0, var4.Padding.Small),
-			PaddingTop = UDim.new(0, var4.Padding.Small),
-			PaddingBottom = UDim.new(0, var4.Padding.Small)
+			PaddingLeft = UDim.new(0, var1.Padding.Small),
+			PaddingRight = UDim.new(0, var1.Padding.Small),
+			PaddingTop = UDim.new(0, var1.Padding.Small),
+			PaddingBottom = UDim.new(0, var1.Padding.Small)
 		})
 	}
 	
-	for i, v in p0.content do
+	for i, v in p1.content do
 		if v.type ~= "text" then
 			t[v.icon .. tostring(i)] = reactModule.createElement(itemCardIconModule, { icon = v.icon, LayoutOrder = i })
 		elseif not AXItemCardBadgeCheckText then
 			t[v.text .. tostring(i)] = reactModule.createElement(text, {
-				textStyle = var4.Color.Content.Emphasis,
-				fontStyle = var4.Typography.TitleSmall,
+				textStyle = var1.Color.Content.Emphasis,
+				fontStyle = var1.Typography.TitleSmall,
 				LayoutOrder = i,
 				Text = v.text,
 				TextXAlignment = Enum.TextXAlignment.Left,
@@ -47,8 +47,8 @@ return function(p0)
 			})
 		elseif v.text ~= "" then
 			t[v.text .. tostring(i)] = reactModule.createElement(text, {
-				textStyle = var4.Color.Content.Emphasis,
-				fontStyle = var4.Typography.TitleSmall,
+				textStyle = var1.Color.Content.Emphasis,
+				fontStyle = var1.Typography.TitleSmall,
 				LayoutOrder = i,
 				Text = v.text,
 				TextXAlignment = Enum.TextXAlignment.Left,
@@ -60,9 +60,9 @@ return function(p0)
 	end
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundColor3 = var4.Color.OverMedia.OverMedia_100.Color3,
-		BackgroundTransparency = var4.Color.OverMedia.OverMedia_100.Transparency,
-		LayoutOrder = p0.LayoutOrder,
+		BackgroundColor3 = var1.Color.OverMedia.OverMedia_100.Color3,
+		BackgroundTransparency = var1.Color.OverMedia.OverMedia_100.Transparency,
+		LayoutOrder = p1.LayoutOrder,
 		Size = UDim2.fromScale(0, 0),
 		AutomaticSize = Enum.AutomaticSize.XY
 	}, t)

@@ -9,8 +9,8 @@ local _ = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 local inputSizeModule = require(foundation.Enums.InputSize)
 
-local function _(p0)
-	return { Color = p0.Color3, Transparency = p0.Transparency }
+local function _(p1)
+	return { Color = p1.Color3, Transparency = p1.Transparency }
 end
 
 local function createButtonVariantStyles(p1, p2, p3)
@@ -19,13 +19,13 @@ local function createButtonVariantStyles(p1, p2, p3)
 	
 	for i in colorNamespaceModule do
 		local t_3
-		local var10 = p1[i]
-		local var11 = if type(p2) == "table" then { Foreground = dashModule.get(var10, p2) } else var10[p2]
+		local var1 = p1[i]
+		local var2 = if type(p2) == "table" then { Foreground = dashModule.get(var1, p2) } else var1[p2]
 		local t_1 = {}
-		local t_2 = { style = var11.Background }
+		local t_2 = { style = var2.Background }
 		
-		if var11.Border then
-			local border = var11.Border
+		if var2.Border then
+			local border = var2.Border
 			t_3 = {
 				Color = border.Color3,
 				Transparency = border.Transparency
@@ -38,7 +38,7 @@ local function createButtonVariantStyles(p1, p2, p3)
 			mode = constantsModule.COLOR_NAMESPACE_TO_STATE_LAYER_MODE[p3 or false][i]
 		}
 		t_1.container = t_2
-		t_1.content = { style = var11.Foreground }
+		t_1.content = { style = var2.Foreground }
 		t[i] = t_1
 	end
 	return t
@@ -60,25 +60,25 @@ local function getButtonTypes(p4)
 	}
 end
 
-local function getSizes(p5)
+local function getSizes(p4)
 	-- upvalues: inputSizeModule (ref)
 	return {
 		[inputSizeModule.XSmall] = {
-			container = { radius = p5.Radius.Small, height = p5.Size.Size_600 }
+			container = { radius = p4.Radius.Small, height = p4.Size.Size_600 }
 		},
 		[inputSizeModule.Small] = {
-			container = { radius = p5.Radius.Medium, height = p5.Size.Size_800 }
+			container = { radius = p4.Radius.Medium, height = p4.Size.Size_800 }
 		},
 		[inputSizeModule.Medium] = {
-			container = { radius = p5.Radius.Medium, height = p5.Size.Size_1000 }
+			container = { radius = p4.Radius.Medium, height = p4.Size.Size_1000 }
 		},
 		[inputSizeModule.Large] = {
-			container = { radius = p5.Radius.Medium, height = p5.Size.Size_1200 }
+			container = { radius = p4.Radius.Medium, height = p4.Size.Size_1200 }
 		}
 	}
 end
 
-return function(p6)
+return function(p4)
 	-- upvalues: getSizes (ref), getButtonTypes (ref)
-	return { sizes = getSizes(p6), types = getButtonTypes(p6) }
+	return { sizes = getSizes(p4), types = getButtonTypes(p4) }
 end

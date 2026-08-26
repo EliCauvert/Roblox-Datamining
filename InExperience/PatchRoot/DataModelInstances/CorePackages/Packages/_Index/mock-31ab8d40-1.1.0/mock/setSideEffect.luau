@@ -1,6 +1,6 @@
 ﻿local symbolsModule = require(script.Parent.symbols)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: symbolsModule (ref)
-	getmetatable(p0)[symbolsModule.SideEffect] = if p1 then { calls = 0, value = p1 } else nil
+	getmetatable(p1)[symbolsModule.SideEffect] = if p2 then { calls = 0, value = p2 } else nil
 end

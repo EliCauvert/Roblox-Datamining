@@ -195,9 +195,9 @@ local function pickRandomItems()
 	
 	for i = #list_2, 2, -1 do
 		local randomValue = math.random(1, i)
-		local var10 = list_2[i]
+		local var1 = list_2[i]
 		list_2[i] = list_2[randomValue]
-		list_2[randomValue] = var10
+		list_2[randomValue] = var1
 	end
 	local minValue = math.min(math.random(8, 10), #list_2)
 	local list_3 = table.create(minValue)
@@ -293,12 +293,12 @@ local function buildShopData()
 	local t = {}
 	
 	for i, v in ipairs(list_2) do
-		local var15 = tostring(i)
-		list[i] = { id = var15, name = v.name }
+		local var2 = tostring(i)
+		list[i] = { id = var2, name = v.name }
 		
 		if v.name ~= "Home" then
 			table.insert(t, {
-				id = var15,
+				id = var2,
 				name = v.name,
 				items = v.items or {},
 				robuxPackages = v.robuxPackages
@@ -328,9 +328,9 @@ return {
 		end
 		return { categories = t }
 	end,
-	getShopData = function(p0)
+	getShopData = function(p1)
 		-- upvalues: promiseModule (ref), buildShopData (ref)
-		return promiseModule.delay(if p0 ~= nil then 0.5 else p0):andThen(function()
+		return promiseModule.delay(if p1 ~= nil then 0.5 else p1):andThen(function()
 			-- upvalues: buildShopData (copy)
 			return buildShopData()
 		end)

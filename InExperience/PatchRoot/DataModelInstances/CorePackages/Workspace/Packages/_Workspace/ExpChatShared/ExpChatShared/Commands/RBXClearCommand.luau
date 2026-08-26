@@ -6,19 +6,19 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/clear", "/cls" },
-	clientRun = function(p0, _, _, p1)
+	clientRun = function(p1, _, _, p2)
 		-- upvalues: fFlagExpChatUseMessagesStore (ref), chatWindowMessagesClearedModule (ref)
 		if fFlagExpChatUseMessagesStore then
-			if not p1 or not p1.messagesStore then
+			if not p2 or not p2.messagesStore then
 				return {
 					key = "CoreScripts.TextChat.MessageStatus.Warning.Unknown",
 					metadata = "Roblox.Clear.Error.ContextNotAvailable",
 					args = {}
 				}
 			end
-			p1.messagesStore.clearWindowMessages()
+			p2.messagesStore.clearWindowMessages()
 		else
-			p0:dispatch(chatWindowMessagesClearedModule())
+			p1:dispatch(chatWindowMessagesClearedModule())
 		end
 		return { key = "", metadata = "Roblox.Clear.Info.Success" }
 	end

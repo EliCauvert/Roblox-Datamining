@@ -9,133 +9,133 @@ local _ = require(script.Parent.types)
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-return function(p0)
+return function(p1)
 	-- upvalues: configModule (ref), createDataCacheModule (ref), promiseModule (ref), asPromise (ref), fetch (ref), responseDecodersModule (ref), createDataResolverModule (ref)
-	p0 = p0 or {}
-	local quotaSummaryUrl = p0.quotaSummaryUrl or configModule.quotaSummaryUrl
-	local dailyLimitUrl = p0.dailyLimitUrl or configModule.dailyLimitUrl
-	local network = p0.network
-	local ttlSeconds = p0.ttlSeconds or configModule.pollIntervalSeconds
-	local var10 = createDataCacheModule(ttlSeconds, ttlSeconds)
-	local var11 = createDataCacheModule(ttlSeconds, ttlSeconds)
-	local var12 = 0
-	local var13 = 0
-	local var14 = promiseModule.resolve()
-	local var15 = promiseModule.resolve()
-	local var16 = promiseModule.resolve()
-	local var17 = false
+	p1 = p1 or {}
+	local quotaSummaryUrl = p1.quotaSummaryUrl or configModule.quotaSummaryUrl
+	local dailyLimitUrl = p1.dailyLimitUrl or configModule.dailyLimitUrl
+	local network = p1.network
+	local ttlSeconds = p1.ttlSeconds or configModule.pollIntervalSeconds
+	local var1 = createDataCacheModule(ttlSeconds, ttlSeconds)
+	local var2 = createDataCacheModule(ttlSeconds, ttlSeconds)
+	local var3 = 0
+	local var4 = 0
+	local var5 = promiseModule.resolve()
+	local var6 = promiseModule.resolve()
+	local var7 = promiseModule.resolve()
+	local var8 = false
 	
 	local function fetchQuotaSummary(_)
-		-- upvalues: var12 (write), var13 (write), var14 (write), var17 (write), promiseModule (copy), asPromise (copy), fetch (copy), quotaSummaryUrl (ref), network (ref), responseDecodersModule (copy), var11 (ref)
-		local var22 = var14:catch(function()
+		-- upvalues: var3 (write), var4 (write), var5 (write), var8 (write), promiseModule (copy), asPromise (copy), fetch (copy), quotaSummaryUrl (ref), network (ref), responseDecodersModule (copy), var2 (ref)
+		local var9 = var5:catch(function()
 			return nil
 		end):andThen(function()
-			-- upvalues: var17 (copy), var12 (ref), var12 (copy), promiseModule (copy), asPromise (copy), fetch (copy), quotaSummaryUrl (copy), network (copy), responseDecodersModule (copy), var13 (ref), var13 (copy), var11 (copy)
-			return if var17 or var12 ~= var12 then promiseModule.reject("Creator Credit store changed before queued quota read") else asPromise(fetch({
+			-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), asPromise (copy), fetch (copy), quotaSummaryUrl (copy), network (copy), responseDecodersModule (copy), var4 (ref), var4 (copy), var2 (copy)
+			return if var8 or var3 ~= var3 then promiseModule.reject("Creator Credit store changed before queued quota read") else asPromise(fetch({
 				method = "GET",
 				analyticsKey = "creator-credit.get-quota-summary",
 				url = quotaSummaryUrl,
 				network = network,
 				decode = responseDecodersModule.decodeQuotaSummary
-			})):andThen(function(p1)
-				-- upvalues: var17 (copy), var12 (copy), var12 (copy), promiseModule (copy), var13 (copy), var13 (copy), var11 (copy)
-				if var17 or var12 ~= var12 then
+			})):andThen(function(p2)
+				-- upvalues: var8 (copy), var3 (copy), var3 (copy), promiseModule (copy), var4 (copy), var4 (copy), var2 (copy)
+				if var8 or var3 ~= var3 then
 					return promiseModule.reject("Creator Credit store changed during quota read")
-				elseif var13 ~= var13 then
-					local var23 = var11.getItem("current-user").data(false)
+				elseif var4 ~= var4 then
+					local var10 = var2.getItem("current-user").data(false)
 					
-					if var23 then
-						p1.limitSettings = var23
+					if var10 then
+						p2.limitSettings = var10
 					end
 				end
-				return p1
+				return p2
 			end)
 		end)
-		var14 = var22
+		var5 = var9
 		
-		return var22
+		return var9
 	end
 	
-	local var19 = createDataResolverModule({
+	local var9 = createDataResolverModule({
 		supportsMultiGet = false,
-		cache = var10,
+		cache = var1,
 		fetchFn = fetchQuotaSummary
 	})
 	
 	local function fetchDailyLimit(_)
-		-- upvalues: var12 (write), var13 (write), var15 (write), var17 (write), promiseModule (copy), asPromise (copy), fetch (copy), dailyLimitUrl (ref), network (ref), responseDecodersModule (copy), var11 (ref)
-		local var24 = var15:catch(function()
+		-- upvalues: var3 (write), var4 (write), var6 (write), var8 (write), promiseModule (copy), asPromise (copy), fetch (copy), dailyLimitUrl (ref), network (ref), responseDecodersModule (copy), var2 (ref)
+		local var10 = var6:catch(function()
 			return nil
 		end):andThen(function()
-			-- upvalues: var17 (copy), var12 (ref), var12 (copy), promiseModule (copy), asPromise (copy), fetch (copy), dailyLimitUrl (copy), network (copy), responseDecodersModule (copy), var13 (ref), var13 (copy), var11 (copy)
-			return if var17 or var12 ~= var12 then promiseModule.reject("Creator Credit store changed before queued daily-limit read") else asPromise(fetch({
+			-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), asPromise (copy), fetch (copy), dailyLimitUrl (copy), network (copy), responseDecodersModule (copy), var4 (ref), var4 (copy), var2 (copy)
+			return if var8 or var3 ~= var3 then promiseModule.reject("Creator Credit store changed before queued daily-limit read") else asPromise(fetch({
 				method = "GET",
 				analyticsKey = "creator-credit.get-daily-limit",
 				url = dailyLimitUrl,
 				network = network,
 				decode = responseDecodersModule.decodeDailyLimitSettings
 			})):andThen(function(p2)
-				-- upvalues: var17 (copy), var12 (copy), var12 (copy), promiseModule (copy), var13 (copy), var13 (copy), var11 (copy)
-				return if var17 or var12 ~= var12 then promiseModule.reject("Creator Credit store changed during daily-limit read") elseif var13 == var13 then p2 else var11.getItem("current-user").data(false) or p2
+				-- upvalues: var8 (copy), var3 (copy), var3 (copy), promiseModule (copy), var4 (copy), var4 (copy), var2 (copy)
+				return if var8 or var3 ~= var3 then promiseModule.reject("Creator Credit store changed during daily-limit read") elseif var4 == var4 then p2 else var2.getItem("current-user").data(false) or p2
 			end)
 		end)
-		var15 = var24
+		var6 = var10
 		
-		return var24
+		return var10
 	end
 	
-	local var21 = createDataResolverModule({
+	local var10 = createDataResolverModule({
 		supportsMultiGet = false,
-		cache = var11,
+		cache = var2,
 		fetchFn = fetchDailyLimit
 	})
 	
 	return {
 		getQuotaSummary = function()
-			-- upvalues: var19 (ref)
-			return var19.getAndFetchItem("current-user")
+			-- upvalues: var9 (ref)
+			return var9.getAndFetchItem("current-user")
 		end,
 		getQuotaSummarySignals = function()
-			-- upvalues: var19 (ref)
-			return var19.getCachedItem("current-user")
+			-- upvalues: var9 (ref)
+			return var9.getCachedItem("current-user")
 		end,
 		refreshQuotaSummary = function()
-			-- upvalues: var12 (write), fetchQuotaSummary (ref), var17 (write), promiseModule (copy), var10 (ref)
-			return fetchQuotaSummary("current-user"):andThen(function(p3)
-				-- upvalues: var17 (copy), var12 (ref), var12 (copy), promiseModule (copy), var10 (copy)
-				if var17 or var12 ~= var12 then
+			-- upvalues: var3 (write), fetchQuotaSummary (ref), var8 (write), promiseModule (copy), var1 (ref)
+			return fetchQuotaSummary("current-user"):andThen(function(p2)
+				-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), var1 (copy)
+				if var8 or var3 ~= var3 then
 					return promiseModule.reject("Creator Credit store changed during quota refresh")
 				end
-				var10.replaceItem("current-user", p3)
+				var1.replaceItem("current-user", p2)
 				
-				return p3
+				return p2
 			end)
 		end,
 		getDailyLimit = function()
-			-- upvalues: var21 (ref)
-			return var21.getAndFetchItem("current-user")
+			-- upvalues: var10 (ref)
+			return var10.getAndFetchItem("current-user")
 		end,
 		getDailyLimitSignals = function()
-			-- upvalues: var21 (ref)
-			return var21.getCachedItem("current-user")
+			-- upvalues: var10 (ref)
+			return var10.getCachedItem("current-user")
 		end,
 		refreshDailyLimit = function()
-			-- upvalues: var12 (write), fetchDailyLimit (ref), var17 (write), promiseModule (copy), var11 (ref)
-			return fetchDailyLimit("current-user"):andThen(function(p4)
-				-- upvalues: var17 (copy), var12 (ref), var12 (copy), promiseModule (copy), var11 (copy)
-				if var17 or var12 ~= var12 then
+			-- upvalues: var3 (write), fetchDailyLimit (ref), var8 (write), promiseModule (copy), var2 (ref)
+			return fetchDailyLimit("current-user"):andThen(function(p2)
+				-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), var2 (copy)
+				if var8 or var3 ~= var3 then
 					return promiseModule.reject("Creator Credit store changed during daily-limit refresh")
 				end
-				var11.replaceItem("current-user", p4)
+				var2.replaceItem("current-user", p2)
 				
-				return p4
+				return p2
 			end)
 		end,
 		setDailyLimit = function(value)
-			-- upvalues: var12 (write), var16 (write), var17 (write), promiseModule (copy), fetch (copy), dailyLimitUrl (ref), network (ref), responseDecodersModule (copy), asPromise (copy), var13 (write), var11 (ref), var10 (ref)
-			local var25 = var16:catch(function() end):andThen(function()
-				-- upvalues: var17 (copy), var12 (ref), var12 (copy), promiseModule (copy), fetch (copy), dailyLimitUrl (copy), value (ref), network (copy), responseDecodersModule (copy), asPromise (copy)
-				return if var17 or var12 ~= var12 then promiseModule.reject("Creator Credit store changed before queued daily-limit write") else asPromise(fetch({
+			-- upvalues: var3 (write), var7 (write), var8 (write), promiseModule (copy), fetch (copy), dailyLimitUrl (ref), network (ref), responseDecodersModule (copy), asPromise (copy), var4 (write), var2 (ref), var1 (ref)
+			local var11 = var7:catch(function() end):andThen(function()
+				-- upvalues: var8 (copy), var3 (ref), var3 (copy), promiseModule (copy), fetch (copy), dailyLimitUrl (copy), value (ref), network (copy), responseDecodersModule (copy), asPromise (copy)
+				return if var8 or var3 ~= var3 then promiseModule.reject("Creator Credit store changed before queued daily-limit write") else asPromise(fetch({
 					method = "PUT",
 					analyticsKey = "creator-credit.set-daily-limit",
 					url = dailyLimitUrl,
@@ -144,41 +144,41 @@ return function(p0)
 					decode = responseDecodersModule.decodeDailyLimitSettings
 				}))
 			end)
-			var16 = var25
+			var7 = var11
 			
-			return var25:andThen(function(p5)
-				-- upvalues: var17 (copy), var12 (ref), var12 (copy), var13 (copy), var11 (copy), var10 (copy)
-				if not var17 and var12 == var12 then
-					var13 += 1
-					var11.replaceItem("current-user", p5)
-					local var26 = var10.getItem("current-user").data(false)
+			return var11:andThen(function(p2)
+				-- upvalues: var8 (copy), var3 (ref), var3 (copy), var4 (copy), var2 (copy), var1 (copy)
+				if not var8 and var3 == var3 then
+					var4 += 1
+					var2.replaceItem("current-user", p2)
+					local var12 = var1.getItem("current-user").data(false)
 					
-					if var26 then
-						local cloned = table.clone(var26)
-						cloned.limitSettings = p5
-						var10.replaceItem("current-user", cloned)
+					if var12 then
+						local cloned = table.clone(var12)
+						cloned.limitSettings = p2
+						var1.replaceItem("current-user", cloned)
 					end
 				end
-				return p5
+				return p2
 			end)
 		end,
 		clear = function()
-			-- upvalues: var12 (write), var13 (write), var19 (ref), var21 (ref)
-			var12 += 1
-			var13 += 1
-			var19.clear()
-			var21.clear()
+			-- upvalues: var3 (write), var4 (write), var9 (ref), var10 (ref)
+			var3 += 1
+			var4 += 1
+			var9.clear()
+			var10.clear()
 		end,
 		dispose = function()
-			-- upvalues: var17 (write), var12 (write), var13 (write), var19 (ref), var21 (ref)
-			if var17 then
+			-- upvalues: var8 (write), var3 (write), var4 (write), var9 (ref), var10 (ref)
+			if var8 then
 				return
 			end
-			var17 = true
-			var12 += 1
-			var13 += 1
-			var19.dispose()
-			var21.dispose()
+			var8 = true
+			var3 += 1
+			var4 += 1
+			var9.dispose()
+			var10.dispose()
 		end
 	}
 end

@@ -10,69 +10,69 @@ local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
 local sduiBuilderProcessingPhase = sduiBuilderTypesModule.SduiBuilderProcessingPhase
 local serverBindingPropMap = require(parent.SduiCompat).ServerBindingPropMap
 
-local function parseProps(p0, p1, p2, p3, p4, p5, p6)
+local function parseProps(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: sduiBuilderProcessingPhase (ref), serverBindingPropMap (ref), parseProps (ref), reactModule (ref), sduiErrorType (ref), cryoModule (ref), sduiParseHelpersModule (ref)
-	if not p1 then return end
-	assert(p1, "props must exist")
-	p5 = p5 or p3.componentDefinitions:getPropParsers(p0)
+	if not p2 then return end
+	assert(p2, "props must exist")
+	p6 = p6 or p4.componentDefinitions:getPropParsers(p1)
 	
-	if not p5 then return end
-	assert(p5, "componentInterface must exist")
+	if not p6 then return end
+	assert(p6, "componentInterface must exist")
 	
-	for i, v in p1 do
-		local var7 = p5[i]
+	for i, v in p2 do
+		local var1 = p6[i]
 		
-		if var7 and (p6 ~= sduiBuilderProcessingPhase.Render or p3.componentDefinitions:doesParserRequireRenderContext(var7)) then
+		if var1 and (p7 ~= sduiBuilderProcessingPhase.Render or p4.componentDefinitions:doesParserRequireRenderContext(var1)) then
 			local ok, status = pcall(function()
-				-- upvalues: var7 (ref), v (ref), serverBindingPropMap (copy), parseProps (copy), p0 (ref), p2 (ref), p3 (ref), p4 (ref), p6 (ref), reactModule (copy)
-				if typeof(var7) == "table" then
+				-- upvalues: var1 (ref), v (ref), serverBindingPropMap (copy), parseProps (copy), p1 (ref), p3 (ref), p4 (ref), p5 (ref), p7 (ref), reactModule (copy)
+				if typeof(var1) == "table" then
 					if typeof(v) ~= "table" then
 						error({
 							message = `Invalid input {typeof(v)} for prop. Expected table`
 						})
 					end
-					local var8 = nil
+					local var2 = nil
 					
 					for i, v_1 in v do
-						local var9 = serverBindingPropMap[i]
+						local var3 = serverBindingPropMap[i]
 						
-						if var9 then
-							var8 = var8 or {}
-							var8[i] = var9
+						if var3 then
+							var2 = var2 or {}
+							var2[i] = var3
 						end
 					end
-					if var8 then
-						for i_1, v_2 in var8 do
+					if var2 then
+						for i_1, v_2 in var2 do
 							v[v_2] = v[i_1]
 						end
 					end
-					parseProps(p0, v, p2, p3, p4, var7, p6)
+					parseProps(p1, v, p3, p4, p5, var1, p7)
 					
 					return v
 				else
-					return if v == "NULL_PROP" then reactModule.None else var7(v, p3, p4, p6)
+					return if v == "NULL_PROP" then reactModule.None else var1(v, p4, p5, p7)
 				end
 			end)
 			
 			if not ok then
-				p3.dependencies.logger.reportError(sduiErrorType.FailedToParseProp, cryoModule.Dictionary.union({
-					name = p2,
-					componentType = p0,
+				p4.dependencies.logger.reportError(sduiErrorType.FailedToParseProp, cryoModule.Dictionary.union({
+					name = p3,
+					componentType = p1,
 					propName = i,
 					value = sduiParseHelpersModule.stringifyValue(v)
-				}, if typeof(status) == "table" then status elseif typeof(status) == "string" then { message = status } else {}), p3.appPage)
+				}, if typeof(status) == "table" then status elseif typeof(status) == "string" then { message = status } else {}), p4.appPage)
 				
 				if typeof(status) == "table" then
 					if status.overrideValue then
-						p1[i] = status.overrideValue
+						p2[i] = status.overrideValue
 					else
-						p1[i] = nil
+						p2[i] = nil
 					end
 				end
 			elseif status == reactModule.None then
-				p1[i] = nil
+				p2[i] = nil
 			else
-				p1[i] = status
+				p2[i] = status
 			end
 		end
 	end

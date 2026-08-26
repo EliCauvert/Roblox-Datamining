@@ -1,5 +1,5 @@
 ﻿local _ = require(script:FindFirstAncestor("InlineRichText").Types)
 
-return function(p0, _)
-	return { { text = p0.text, engineTags = {} } }
+return function(p1, _)
+	return { { text = p1.text, engineTags = {} } }
 end

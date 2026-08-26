@@ -2,12 +2,12 @@
 local immutable = require(gameDetailRodux.Parent.AppCommonLib).Immutable
 local addGameDetailsV2Module = require(gameDetailRodux.GameDetails.AddGameDetailsV2)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: addGameDetailsV2Module (ref), immutable (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	if p1.type == addGameDetailsV2Module.name then
-		p0 = immutable.JoinDictionaries(p0, p1.gameDetails)
+	if p2.type == addGameDetailsV2Module.name then
+		p1 = immutable.JoinDictionaries(p1, p2.gameDetails)
 	end
-	return p0
+	return p1
 end

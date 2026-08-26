@@ -7,9 +7,9 @@ local _ = require(script.Parent.Parent.roduxCallTypes)
 return function()
 	-- upvalues: roduxModule (ref), updateCall (ref), callStateModel (ref)
 	return roduxModule.createReducer(nil, {
-		[updateCall.name] = function(_, p0)
+		[updateCall.name] = function(_, p1)
 			-- upvalues: callStateModel (copy)
-			return callStateModel.format(p0.payload.call)
+			return callStateModel.format(p1.payload.call)
 		end
 	})
 end

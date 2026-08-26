@@ -22,72 +22,72 @@ local fFlagAppChatEnableDoubleOptIn = sharedFlagsModule.FFlagAppChatEnableDouble
 local fFlagAppChatEnableTrustedFriendEntryPointModule = require(appChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
 local fIntUnfilteredThreadsPvDelayMsModule = require(appChat.Flags.FIntUnfilteredThreadsPvDelayMs)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useIsAppChatVerticallyConstrainedModule (ref), useDispatch (ref), fFlagAppChatEnableDoubleOptIn (ref), useIsInExperienceModule (ref), useTelemetryModule (ref), appTelemetryLayerModule (ref), reactModule (ref), conversationOverlayTelemetryModule (ref), fFlagAppChatEnableTrustedFriendEntryPointModule (ref), setTabBarVisibleFromChat (ref), promiseModule (ref), fIntUnfilteredThreadsPvDelayMsModule (ref), refreshConversationUnfilteredThreadsDetailsModule (ref), modalTelemetryModule (ref), trustedFriendsModalEntry (ref)
-	local var16 = useIsAppChatVerticallyConstrainedModule()
-	local var17 = useDispatch()
-	local var18 = if fFlagAppChatEnableDoubleOptIn then useIsInExperienceModule() else nil
-	local analyticsModalVariant = p0.analyticsModalVariant
-	local conversationId = p0.conversationId
-	local var19 = useTelemetryModule(appTelemetryLayerModule.Context)
+	local var1 = useIsAppChatVerticallyConstrainedModule()
+	local var2 = useDispatch()
+	local var3 = if fFlagAppChatEnableDoubleOptIn then useIsInExperienceModule() else nil
+	local analyticsModalVariant = p1.analyticsModalVariant
+	local conversationId = p1.conversationId
+	local var4 = useTelemetryModule(appTelemetryLayerModule.Context)
 	reactModule.useEffect(function()
-		-- upvalues: analyticsModalVariant (ref), var19 (ref), conversationOverlayTelemetryModule (copy)
+		-- upvalues: analyticsModalVariant (ref), var4 (ref), conversationOverlayTelemetryModule (copy)
 		if analyticsModalVariant == nil then
 			return
 		end
-		var19.emit(conversationOverlayTelemetryModule.Events.ModalRendered, { modalVariant = analyticsModalVariant })
+		var4.emit(conversationOverlayTelemetryModule.Events.ModalRendered, { modalVariant = analyticsModalVariant })
 	end, { analyticsModalVariant })
 	reactModule.useEffect(function()
-		-- upvalues: fFlagAppChatEnableTrustedFriendEntryPointModule (copy), var17 (ref), setTabBarVisibleFromChat (copy)
+		-- upvalues: fFlagAppChatEnableTrustedFriendEntryPointModule (copy), var2 (ref), setTabBarVisibleFromChat (copy)
 		if fFlagAppChatEnableTrustedFriendEntryPointModule then
-			var17(setTabBarVisibleFromChat(false))
+			var2(setTabBarVisibleFromChat(false))
 			
 			return function()
-				-- upvalues: var17 (copy), setTabBarVisibleFromChat (copy)
-				var17(setTabBarVisibleFromChat(true))
+				-- upvalues: var2 (copy), setTabBarVisibleFromChat (copy)
+				var2(setTabBarVisibleFromChat(true))
 			end
 		end
-	end, { var17 })
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), conversationId (ref), fFlagAppChatEnableDoubleOptIn (copy), promiseModule (copy), fIntUnfilteredThreadsPvDelayMsModule (copy), var17 (ref), refreshConversationUnfilteredThreadsDetailsModule (copy), var18 (ref)
-		p0.dismissModal()
+	end, { var2 })
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), conversationId (ref), fFlagAppChatEnableDoubleOptIn (copy), promiseModule (copy), fIntUnfilteredThreadsPvDelayMsModule (copy), var2 (ref), refreshConversationUnfilteredThreadsDetailsModule (copy), var3 (ref)
+		p1.dismissModal()
 		
 		if conversationId ~= nil and fFlagAppChatEnableDoubleOptIn then
 			promiseModule.delay(fIntUnfilteredThreadsPvDelayMsModule / 1000):andThen(function()
-				-- upvalues: var17 (copy), refreshConversationUnfilteredThreadsDetailsModule (copy), conversationId (copy), var18 (copy)
-				var17(refreshConversationUnfilteredThreadsDetailsModule(conversationId, var18))
+				-- upvalues: var2 (copy), refreshConversationUnfilteredThreadsDetailsModule (copy), conversationId (copy), var3 (copy)
+				var2(refreshConversationUnfilteredThreadsDetailsModule(conversationId, var3))
 			end)
 		end
-	end, { conversationId, var17, p0.dismissModal, var18 })
+	end, { conversationId, var2, p1.dismissModal, var3 })
 	
 	return reactModule.createElement(trustedFriendsModalEntry, {
-		userId = p0.userId,
-		source = p0.source,
-		isVerticallyConstrained = var16,
-		modalVariantOverride = p0.modalVariantOverride,
-		onRequestSent = p0.onRequestSent,
-		onRequestAccepted = p0.onRequestAccepted,
+		userId = p1.userId,
+		source = p1.source,
+		isVerticallyConstrained = var1,
+		modalVariantOverride = p1.modalVariantOverride,
+		onRequestSent = p1.onRequestSent,
+		onRequestAccepted = p1.onRequestAccepted,
 		onAcknowledged = reactModule.useCallback(function()
-			-- upvalues: analyticsModalVariant (ref), var19 (ref), conversationOverlayTelemetryModule (copy), modalTelemetryModule (copy), p0 (ref)
+			-- upvalues: analyticsModalVariant (ref), var4 (ref), conversationOverlayTelemetryModule (copy), modalTelemetryModule (copy), p1 (ref)
 			if analyticsModalVariant ~= nil then
-				var19.emit(conversationOverlayTelemetryModule.Events.ModalAction, {
+				var4.emit(conversationOverlayTelemetryModule.Events.ModalAction, {
 					modalVariant = analyticsModalVariant,
 					action = modalTelemetryModule.Enums.ModalActions.PrimaryCta
 				})
 			end
-			if p0.onAcknowledged ~= nil then
-				p0.onAcknowledged()
+			if p1.onAcknowledged ~= nil then
+				p1.onAcknowledged()
 			end
-		end, { var19, analyticsModalVariant, p0.onAcknowledged }),
+		end, { var4, analyticsModalVariant, p1.onAcknowledged }),
 		onClosed = reactModule.useCallback(function()
-			-- upvalues: analyticsModalVariant (ref), var19 (ref), conversationOverlayTelemetryModule (copy), modalTelemetryModule (copy), var20 (ref)
+			-- upvalues: analyticsModalVariant (ref), var4 (ref), conversationOverlayTelemetryModule (copy), modalTelemetryModule (copy), var5 (ref)
 			if analyticsModalVariant ~= nil then
-				var19.emit(conversationOverlayTelemetryModule.Events.ModalAction, {
+				var4.emit(conversationOverlayTelemetryModule.Events.ModalAction, {
 					modalVariant = analyticsModalVariant,
 					action = modalTelemetryModule.Enums.ModalActions.Dismiss
 				})
 			end
-			var20()
-		end, { var20, var19, analyticsModalVariant })
+			var5()
+		end, { var5, var4, analyticsModalVariant })
 	})
 end

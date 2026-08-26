@@ -14,10 +14,10 @@ local t_1 = {
 }
 
 return {
-	logBannerLoadResult = function(p0)
+	logBannerLoadResult = function(p1)
 		-- upvalues: t_1 (ref), loggingProtocolModule (ref), t (ref)
-		if t_1[p0] then
-			loggingProtocolModule.default:logRobloxTelemetryCounter(t, nil, { status = p0 })
+		if t_1[p1] then
+			loggingProtocolModule.default:logRobloxTelemetryCounter(t, nil, { status = p1 })
 			
 			return
 		end

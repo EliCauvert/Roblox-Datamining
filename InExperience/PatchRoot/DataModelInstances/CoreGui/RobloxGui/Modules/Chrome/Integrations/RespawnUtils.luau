@@ -5,26 +5,26 @@ local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSign
 local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
 local robloxGui = coreGuiService:WaitForChild("RobloxGui")
 local fFlagRespawnChromeShortcutTelemetryModule = require(chrome.Flags.FFlagRespawnChromeShortcutTelemetry)
-local var5 = false
-local var6 = signal.new()
-local var7 = mappedSignal.new(var6, function()
-	-- upvalues: var5 (write)
-	return var5
+local var1 = false
+local var2 = signal.new()
+local var3 = mappedSignal.new(var2, function()
+	-- upvalues: var1 (write)
+	return var1
 end)
 task.defer(function()
-	-- upvalues: robloxGui (ref), var5 (write), var6 (ref)
+	-- upvalues: robloxGui (ref), var1 (write), var2 (ref)
 	local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-	settingsHubModule.CurrentPageSignal:connect(function(p0)
-		-- upvalues: var5 (copy), settingsHubModule (ref), var6 (copy)
-		var5 = p0 == settingsHubModule.Instance.ResetCharacterPage.Page.Name
-		var6:fire()
+	settingsHubModule.CurrentPageSignal:connect(function(p1)
+		-- upvalues: var1 (copy), settingsHubModule (ref), var2 (copy)
+		var1 = p1 == settingsHubModule.Instance.ResetCharacterPage.Page.Name
+		var2:fire()
 	end)
 end)
 
 return {
-	respawnPageOpenSignal = var7,
+	respawnPageOpenSignal = var3,
 	respawnPage = function(p1)
-		-- upvalues: robloxGui (ref), var5 (write), fFlagRespawnChromeShortcutTelemetryModule (ref)
+		-- upvalues: robloxGui (ref), var1 (write), fFlagRespawnChromeShortcutTelemetryModule (ref)
 		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
 		local resetCharacterPage = settingsHubModule.Instance.ResetCharacterPage
 		
@@ -34,7 +34,7 @@ return {
 		end
 		
 		if settingsHubModule:GetVisibility() then
-			if var5 then
+			if var1 then
 				settingsHubModule:SetVisibility(false)
 				
 				return

@@ -1,8 +1,8 @@
 ﻿local roduxModule = require(script:FindFirstAncestor("RoduxSquads").Parent.Rodux)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref)
-	local storage = p0.storage
+	local storage = p1.storage
 	assert(storage ~= nil, "Persist storage is required")
 	
 	return roduxModule.makeActionCreator((storage.memStorageKey or "") .. "PersistAndUpdateState", function()

@@ -18,18 +18,18 @@ local t = {
 	})
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: t (ref), mutedError (ref)
-	local var2 = t[p1]
+	local var1 = t[p2]
 	
-	if var2 then
-		local var3, var4 = var2(p2)
+	if var1 then
+		local var2, var3 = var1(p3)
 		
-		if not var3 then
-			mutedError(var4)
+		if not var2 then
+			mutedError(var3)
 		end
 	else
-		mutedError(string.format("Missing interface for eventContext %s to type check gamesFilterClick event parameters", p1))
+		mutedError(string.format("Missing interface for eventContext %s to type check gamesFilterClick event parameters", p2))
 	end
-	p0:sendEventDeferred(p1, "gamesFilterClick", p2)
+	p1:sendEventDeferred(p2, "gamesFilterClick", p3)
 end

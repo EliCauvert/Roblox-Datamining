@@ -3,10 +3,10 @@ local createRefCacheModule = require(script.Parent.createRefCache)
 
 return function()
 	-- upvalues: reactModule (ref), createRefCacheModule (ref)
-	local var2 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	
-	if var2.current == nil then
-		var2.current = createRefCacheModule()
+	if var1.current == nil then
+		var1.current = createRefCacheModule()
 	end
-	return var2.current
+	return var1.current
 end

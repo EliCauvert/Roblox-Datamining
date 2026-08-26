@@ -9,13 +9,13 @@ local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local promiseModule = require(corePackagesService.Packages.Promise)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), robloxTranslatorModule (ref), coreGuiService (ref), tooltipOrientation (ref), userInputService (ref), promiseModule (ref), withTooltip (ref)
-	local var7, var8 = reactModule.useState(true)
-	local fallbackText = p0.fallbackText
+	local var1, var2 = reactModule.useState(true)
+	local fallbackText = p1.fallbackText
 	pcall(function()
-		-- upvalues: fallbackText (write), robloxTranslatorModule (copy), p0 (ref)
-		fallbackText = robloxTranslatorModule:FormatByKey(p0.translationKey)
+		-- upvalues: fallbackText (write), robloxTranslatorModule (copy), p1 (ref)
+		fallbackText = robloxTranslatorModule:FormatByKey(p1.translationKey)
 	end)
 	local t = {
 		textAlignment = Enum.TextXAlignment.Left,
@@ -23,15 +23,15 @@ return function(p0)
 	}
 	local t_1 = {
 		DisplayOrder = 10,
-		active = var7,
+		active = var1,
 		guiTarget = coreGuiService,
 		preferredOrientation = tooltipOrientation.Left
 	}
 	local inputBeganConnection = nil
 	
 	local _ = function()
-		-- upvalues: var8 (ref), inputBeganConnection (write)
-		var8(false)
+		-- upvalues: var2 (ref), inputBeganConnection (write)
+		var2(false)
 		
 		if inputBeganConnection then
 			inputBeganConnection:Disconnect()
@@ -39,12 +39,12 @@ return function(p0)
 		end
 	end
 	
-	inputBeganConnection = userInputService.InputBegan:Connect(function(p1)
-		-- upvalues: var8 (ref), inputBeganConnection (write)
-		local userInputType = p1.UserInputType
+	inputBeganConnection = userInputService.InputBegan:Connect(function(p2)
+		-- upvalues: var2 (ref), inputBeganConnection (write)
+		local userInputType = p2.UserInputType
 		
 		if userInputType == Enum.UserInputType.MouseButton1 or userInputType == Enum.UserInputType.Touch then
-			var8(false)
+			var2(false)
 			
 			if inputBeganConnection then
 				inputBeganConnection:Disconnect()
@@ -52,9 +52,9 @@ return function(p0)
 			end
 		end
 	end)
-	promiseModule.delay(p0.tooltipLifetime):andThen(function()
-		-- upvalues: var8 (ref), inputBeganConnection (write)
-		var8(false)
+	promiseModule.delay(p1.tooltipLifetime):andThen(function()
+		-- upvalues: var2 (ref), inputBeganConnection (write)
+		var2(false)
 		
 		if inputBeganConnection then
 			inputBeganConnection:Disconnect()
@@ -64,7 +64,7 @@ return function(p0)
 	
 	return withTooltip(t, t_1, function(p2)
 		-- upvalues: reactModule (copy)
-		local var12 = function(p3)
+		local var3 = function(p3)
 			-- upvalues: p2 (ref)
 			p2(p3)
 		end
@@ -73,8 +73,8 @@ return function(p0)
 			Visible = false,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			[reactModule.Change.AbsoluteSize] = var12,
-			[reactModule.Change.AbsolutePosition] = var12
+			[reactModule.Change.AbsoluteSize] = var3,
+			[reactModule.Change.AbsolutePosition] = var3
 		})
 	end)
 end

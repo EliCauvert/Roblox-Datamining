@@ -20,23 +20,23 @@ local getAppContextModule = require(parent.Utility.getAppContext)
 local default = require(parent_1.LoggingProtocol).default
 local tooExpensiveUpsellFallbackShownCounter = require(parent.Generic.Events.TooExpensiveUpsellCounter).TooExpensiveUpsellFallbackShownCounter
 
-local function MiddleContent(p0)
+local function MiddleContent(p1)
 	-- upvalues: useLocalization (ref), formatNumberModule (ref), localizationService (ref), reactModule (ref), view (ref), productDetailsModule (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center"
 	}, {
 		ProductDetails = reactModule.createElement(productDetailsModule, {
 			layoutOrder = 1,
-			isPortrait = p0.isPortrait,
-			model = p0.product.model,
-			itemIcon = p0.product.itemIcon,
-			itemName = p0.product.itemName,
-			itemRobuxCost = p0.product.itemRobuxCost
+			isPortrait = p1.isPortrait,
+			model = p1.product.model,
+			itemIcon = p1.product.itemIcon,
+			itemName = p1.product.itemName,
+			itemRobuxCost = p1.product.itemRobuxCost
 		}),
 		BuyRobuxDetails = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "auto-xy text-body-medium content-emphasis text-align-x-left size-full-0 text-wrap padding-x-small line-height-",
-			Text = useLocalization({ YouNeed = "IAPExperience.InsufficientRobux.Text.YouNeed" }).YouNeed:gsub("{robux}", utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p0.product.itemRobuxCost - p0.balanceAmount)),
+			Text = useLocalization({ YouNeed = "IAPExperience.InsufficientRobux.Text.YouNeed" }).YouNeed:gsub("{robux}", utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.itemRobuxCost - p1.balanceAmount)),
 			padding = { bottom = UDim.new(0, -12) }
 		})
 	})
@@ -97,11 +97,11 @@ local function RobuxUpsellModalTooExpensiveFallback(p1)
 	})
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), RobuxUpsellModalTooExpensiveFallback (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		RobuxUpsellModalTooExpensiveFallback = reactModule.createElement(RobuxUpsellModalTooExpensiveFallback, p2)
+		RobuxUpsellModalTooExpensiveFallback = reactModule.createElement(RobuxUpsellModalTooExpensiveFallback, p1)
 	})
 end

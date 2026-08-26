@@ -19,76 +19,76 @@ local isObjectType = graphQLModule.isObjectType
 local isScalarType = graphQLModule.isScalarType
 local isUnionType = graphQLModule.isUnionType
 
-function t.renameType(p0, p1)
+function t.renameType(p1, p2)
 	-- upvalues: boolean (ref), isObjectType (ref), graphQLObjectType (ref), object (ref), array (ref), isInterfaceType (ref), graphQLInterfaceType (ref), isUnionType (ref), graphQLUnionType (ref), isInputObjectType (ref), graphQLInputObjectType (ref), isEnumType (ref), graphQLEnumType (ref), isScalarType (ref), graphQLScalarType (ref), error (ref)
-	if boolean.toJSBoolean(isObjectType(p0)) then
-		return graphQLObjectType.new(object.assign({}, p0:toConfig(), {
-			name = p1,
-			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
-				name = object.assign({}, p0.astNode.name, { value = p1 })
+	if boolean.toJSBoolean(isObjectType(p1)) then
+		return graphQLObjectType.new(object.assign({}, p1:toConfig(), {
+			name = p2,
+			astNode = if p1.astNode == nil then p1.astNode else object.assign({}, p1.astNode, {
+				name = object.assign({}, p1.astNode.name, { value = p2 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p2)
-				-- upvalues: object (copy), p1 (ref)
-				return object.assign({}, p2, { name = object.assign({}, p2.name, { value = p1 }) })
+			extensionASTNodes = if p1.extensionASTNodes == nil then p1.extensionASTNodes else array.map(p1.extensionASTNodes, function(p3)
+				-- upvalues: object (copy), p2 (ref)
+				return object.assign({}, p3, { name = object.assign({}, p3.name, { value = p2 }) })
 			end)
 		}))
-	elseif boolean.toJSBoolean(isInterfaceType(p0)) then
-		return graphQLInterfaceType.new(object.assign({}, p0:toConfig(), {
-			name = p1,
-			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
-				name = object.assign({}, p0.astNode.name, { value = p1 })
+	elseif boolean.toJSBoolean(isInterfaceType(p1)) then
+		return graphQLInterfaceType.new(object.assign({}, p1:toConfig(), {
+			name = p2,
+			astNode = if p1.astNode == nil then p1.astNode else object.assign({}, p1.astNode, {
+				name = object.assign({}, p1.astNode.name, { value = p2 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p3)
-				-- upvalues: object (copy), p1 (ref)
-				return object.assign({}, p3, { name = object.assign({}, p3.name, { value = p1 }) })
+			extensionASTNodes = if p1.extensionASTNodes == nil then p1.extensionASTNodes else array.map(p1.extensionASTNodes, function(p3)
+				-- upvalues: object (copy), p2 (ref)
+				return object.assign({}, p3, { name = object.assign({}, p3.name, { value = p2 }) })
 			end)
 		}))
-	elseif boolean.toJSBoolean(isUnionType(p0)) then
-		return graphQLUnionType.new(object.assign({}, p0:toConfig(), {
-			name = p1,
-			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
-				name = object.assign({}, p0.astNode.name, { value = p1 })
+	elseif boolean.toJSBoolean(isUnionType(p1)) then
+		return graphQLUnionType.new(object.assign({}, p1:toConfig(), {
+			name = p2,
+			astNode = if p1.astNode == nil then p1.astNode else object.assign({}, p1.astNode, {
+				name = object.assign({}, p1.astNode.name, { value = p2 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p4)
-				-- upvalues: object (copy), p1 (ref)
-				return object.assign({}, p4, { name = object.assign({}, p4.name, { value = p1 }) })
+			extensionASTNodes = if p1.extensionASTNodes == nil then p1.extensionASTNodes else array.map(p1.extensionASTNodes, function(p3)
+				-- upvalues: object (copy), p2 (ref)
+				return object.assign({}, p3, { name = object.assign({}, p3.name, { value = p2 }) })
 			end)
 		}))
-	elseif boolean.toJSBoolean(isInputObjectType(p0)) then
-		return graphQLInputObjectType.new(object.assign({}, p0:toConfig(), {
-			name = p1,
-			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
-				name = object.assign({}, p0.astNode.name, { value = p1 })
+	elseif boolean.toJSBoolean(isInputObjectType(p1)) then
+		return graphQLInputObjectType.new(object.assign({}, p1:toConfig(), {
+			name = p2,
+			astNode = if p1.astNode == nil then p1.astNode else object.assign({}, p1.astNode, {
+				name = object.assign({}, p1.astNode.name, { value = p2 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p5)
-				-- upvalues: object (copy), p1 (ref)
-				return object.assign({}, p5, { name = object.assign({}, p5.name, { value = p1 }) })
+			extensionASTNodes = if p1.extensionASTNodes == nil then p1.extensionASTNodes else array.map(p1.extensionASTNodes, function(p3)
+				-- upvalues: object (copy), p2 (ref)
+				return object.assign({}, p3, { name = object.assign({}, p3.name, { value = p2 }) })
 			end)
 		}))
-	elseif boolean.toJSBoolean(isEnumType(p0)) then
-		return graphQLEnumType.new(object.assign({}, p0:toConfig(), {
-			name = p1,
-			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
-				name = object.assign({}, p0.astNode.name, { value = p1 })
+	elseif boolean.toJSBoolean(isEnumType(p1)) then
+		return graphQLEnumType.new(object.assign({}, p1:toConfig(), {
+			name = p2,
+			astNode = if p1.astNode == nil then p1.astNode else object.assign({}, p1.astNode, {
+				name = object.assign({}, p1.astNode.name, { value = p2 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p6)
-				-- upvalues: object (copy), p1 (ref)
-				return object.assign({}, p6, { name = object.assign({}, p6.name, { value = p1 }) })
+			extensionASTNodes = if p1.extensionASTNodes == nil then p1.extensionASTNodes else array.map(p1.extensionASTNodes, function(p3)
+				-- upvalues: object (copy), p2 (ref)
+				return object.assign({}, p3, { name = object.assign({}, p3.name, { value = p2 }) })
 			end)
 		}))
-	elseif boolean.toJSBoolean(isScalarType(p0)) then
-		return graphQLScalarType.new(object.assign({}, p0:toConfig(), {
-			name = p1,
-			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
-				name = object.assign({}, p0.astNode.name, { value = p1 })
+	elseif boolean.toJSBoolean(isScalarType(p1)) then
+		return graphQLScalarType.new(object.assign({}, p1:toConfig(), {
+			name = p2,
+			astNode = if p1.astNode == nil then p1.astNode else object.assign({}, p1.astNode, {
+				name = object.assign({}, p1.astNode.name, { value = p2 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p7)
-				-- upvalues: object (copy), p1 (ref)
-				return object.assign({}, p7, { name = object.assign({}, p7.name, { value = p1 }) })
+			extensionASTNodes = if p1.extensionASTNodes == nil then p1.extensionASTNodes else array.map(p1.extensionASTNodes, function(p3)
+				-- upvalues: object (copy), p2 (ref)
+				return object.assign({}, p3, { name = object.assign({}, p3.name, { value = p2 }) })
 			end)
 		}))
 	end
-	error(error.new(("Unknown type %s."):format(tostring(p0))))
+	error(error.new(("Unknown type %s."):format(tostring(p1))))
 end
 
 return t

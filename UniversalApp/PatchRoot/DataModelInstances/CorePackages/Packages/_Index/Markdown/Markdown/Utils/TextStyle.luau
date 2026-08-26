@@ -6,9 +6,9 @@ local _ = require(parent.InlineLayout)
 local inlineEngineTag = require(parent.MarkdownCore).Enums.InlineEngineTag
 
 return {
-	getCodeTextStyles = function(p0)
+	getCodeTextStyles = function(p1)
 		-- upvalues: dashModule (ref)
-		return dashModule.joinDeep(p0.textStyles, p0.codeStyles)
+		return dashModule.joinDeep(p1.textStyles, p1.codeStyles)
 	end,
 	getBaseTextElementEngineTags = function(value)
 		-- upvalues: inlineEngineTag (ref)

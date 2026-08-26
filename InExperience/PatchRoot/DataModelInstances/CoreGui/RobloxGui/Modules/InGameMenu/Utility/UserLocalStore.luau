@@ -7,56 +7,56 @@ local function _()
 	return if playersService.LocalPlayer and playersService.LocalPlayer.UserId > 0 then tostring(playersService.LocalPlayer.UserId) else "0"
 end
 
-local _ = function(p0)
-	return "u_" .. tostring(p0 or "0")
+local _ = function(p1)
+	return "u_" .. tostring(p1 or "0")
 end
 
 local function getValuesForAllUsers(p1)
 	-- upvalues: appStorageService (ref), httpService (ref)
-	local var5 = appStorageService:GetItem(p1)
+	local var1 = appStorageService:GetItem(p1)
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), var5 (ref)
-		return httpService:JSONDecode(var5)
+		-- upvalues: httpService (copy), var1 (ref)
+		return httpService:JSONDecode(var1)
 	end)
 	
-	return if ok and type(status) == "table" then status else { default = var5 }
+	return if ok and type(status) == "table" then status else { default = var1 }
 end
 
-local _ = function(value, p2)
+local _ = function(value, p1)
 	-- upvalues: httpService (ref), appStorageService (ref)
-	appStorageService:SetItem(value, httpService:JSONEncode(p2))
+	appStorageService:SetItem(value, httpService:JSONEncode(p1))
 end
 
 local t = {}
 t.__index = t
 
-function t.new(p3)
+function t.new(p1)
 	-- upvalues: playersService (ref), t (ref)
-	if not p3 then
-		p3 = if playersService.LocalPlayer and playersService.LocalPlayer.UserId > 0 then tostring(playersService.LocalPlayer.UserId) else "0"
+	if not p1 then
+		p1 = if playersService.LocalPlayer and playersService.LocalPlayer.UserId > 0 then tostring(playersService.LocalPlayer.UserId) else "0"
 	end
-	local t_1 = { userId = tostring(p3) }
+	local t_1 = { userId = tostring(p1) }
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-function t:GetItem(p4)
+function t:GetItem(p1)
 	-- upvalues: getValuesForAllUsers (ref)
-	local var7 = getValuesForAllUsers(p4)
-	local var8 = var7["u_" .. tostring(self.userId or "0")]
+	local var1 = getValuesForAllUsers(p1)
+	local var2 = var1["u_" .. tostring(self.userId or "0")]
 	
-	if var8 == nil then
-		var8 = var7.default
+	if var2 == nil then
+		var2 = var1.default
 	end
-	return var8
+	return var2
 end
 
-function t:SetItem(p5, p6)
+function t:SetItem(p1, p2)
 	-- upvalues: getValuesForAllUsers (ref), httpService (ref), appStorageService (ref)
-	local var9 = getValuesForAllUsers(p5)
-	var9["u_" .. tostring(self.userId or "0")] = p6
-	appStorageService:SetItem(p5, httpService:JSONEncode(var9))
+	local var1 = getValuesForAllUsers(p1)
+	var1["u_" .. tostring(self.userId or "0")] = p2
+	appStorageService:SetItem(p1, httpService:JSONEncode(var1))
 end
 
 function t.Flush(_)

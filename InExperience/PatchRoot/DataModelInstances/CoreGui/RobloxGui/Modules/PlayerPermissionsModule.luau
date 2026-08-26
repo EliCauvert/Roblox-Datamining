@@ -15,10 +15,10 @@ local fFlagEnableVerifiedBadgeStore = require(corePackagesService.Workspace.Pack
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
-	tbl.player = p0
+	tbl.player = p1
 	tbl.pendingGroupData = {}
 	tbl.pendingCanManage = {}
 	tbl.pendingProfileSettings = {}
@@ -108,13 +108,13 @@ local t_2 = {}
 
 local function _(p4)
 	-- upvalues: t_2 (ref), t_1 (ref)
-	local var26 = t_2[p4]
+	local var1 = t_2[p4]
 	
-	if not var26 and p4.Parent ~= nil then
-		var26 = t_1.new(p4)
-		t_2[p4] = var26
+	if not var1 and p4.Parent ~= nil then
+		var1 = t_1.new(p4)
+		t_2[p4] = var1
 	end
-	return var26
+	return var1
 end
 
 spawn(function()
@@ -125,38 +125,38 @@ spawn(function()
 		
 		if #list == 1 then
 			for i, v in pairs(list[1]) do
-				local var28 = playersService:GetPlayerByUserId(tonumber(i))
+				local var1 = playersService:GetPlayerByUserId(tonumber(i))
 				
-				if var28 then
-					local var29 = t_2[var28]
+				if var1 then
+					local var2 = t_2[var1]
 					
-					if not var29 and var28.Parent ~= nil then
-						var29 = t_1.new(var28)
-						t_2[var28] = var29
+					if not var2 and var1.Parent ~= nil then
+						var2 = t_1.new(var1)
+						t_2[var1] = var2
 					end
-					local var30 = var29
+					local var3 = var2
 					
-					if var30 then
-						var30:setGroupData(v)
+					if var3 then
+						var3:setGroupData(v)
 					end
 				end
 			end
 			return
 		else
-			local var31 = list[2]
-			local var32 = playersService:GetPlayerByUserId(tonumber(list[1]))
+			local var4 = list[2]
+			local var5 = playersService:GetPlayerByUserId(tonumber(list[1]))
 			
-			if var32 then
-				local var33 = t_2[var32]
+			if var5 then
+				local var6 = t_2[var5]
 				
-				if not var33 and var32.Parent ~= nil then
-					var33 = t_1.new(var32)
-					t_2[var32] = var33
+				if not var6 and var5.Parent ~= nil then
+					var6 = t_1.new(var5)
+					t_2[var5] = var6
 				end
-				local var34 = var33
+				local var7 = var6
 				
-				if var34 then
-					var34:setGroupData(var31)
+				if var7 then
+					var7:setGroupData(var4)
 				end
 			end
 		end
@@ -164,21 +164,21 @@ spawn(function()
 end)
 coroutine.wrap(function()
 	-- upvalues: playersService (ref), t_2 (ref), t_1 (ref)
-	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerCanManageDetails", 1e999).OnClientEvent:Connect(function(p5, p6)
+	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerCanManageDetails", 1e999).OnClientEvent:Connect(function(p4, p5)
 		-- upvalues: playersService (copy), t_2 (copy), t_1 (copy)
-		local var35 = playersService:GetPlayerByUserId(tonumber(p5))
+		local var1 = playersService:GetPlayerByUserId(tonumber(p4))
 		
-		if var35 then
-			local var36 = t_2[var35]
+		if var1 then
+			local var2 = t_2[var1]
 			
-			if not var36 and var35.Parent ~= nil then
-				var36 = t_1.new(var35)
-				t_2[var35] = var36
+			if not var2 and var1.Parent ~= nil then
+				var2 = t_1.new(var1)
+				t_2[var1] = var2
 			end
-			local var37 = var36
+			local var3 = var2
 			
-			if var37 then
-				var37:setCanManage(p6)
+			if var3 then
+				var3:setCanManage(p5)
 			end
 		end
 	end)
@@ -188,24 +188,24 @@ if fFlagInExperienceUserProfileSettingsEnabledModule then
 	coroutine.wrap(function()
 		-- upvalues: playersService (ref), t_2 (ref), t_1 (ref), fFlagEnableVerifiedBadgeStore (ref), verifiedBadgeDisplayStore (ref), fFlagInExperienceRequestProfileSettingsModule (ref)
 		local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-		robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p7, p8)
+		robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p4, p5)
 			-- upvalues: playersService (copy), t_2 (copy), t_1 (copy), fFlagEnableVerifiedBadgeStore (copy), verifiedBadgeDisplayStore (copy)
-			local var39 = playersService:GetPlayerByUserId(tonumber(p7))
+			local var1 = playersService:GetPlayerByUserId(tonumber(p4))
 			
-			if var39 then
-				local var40 = t_2[var39]
+			if var1 then
+				local var2 = t_2[var1]
 				
-				if not var40 and var39.Parent ~= nil then
-					var40 = t_1.new(var39)
-					t_2[var39] = var40
+				if not var2 and var1.Parent ~= nil then
+					var2 = t_1.new(var1)
+					t_2[var1] = var2
 				end
-				local var41 = var40
+				local var3 = var2
 				
-				if var41 then
-					var41:setProfileSettings(p8)
+				if var3 then
+					var3:setProfileSettings(p5)
 				end
-				if fFlagEnableVerifiedBadgeStore and p8.isInExperienceNameEnabled ~= nil then
-					verifiedBadgeDisplayStore.get().setBadgeVisibility(var39.UserId, not p8.isInExperienceNameEnabled)
+				if fFlagEnableVerifiedBadgeStore and p5.isInExperienceNameEnabled ~= nil then
+					verifiedBadgeDisplayStore.get().setBadgeVisibility(var1.UserId, not p5.isInExperienceNameEnabled)
 				end
 			end
 		end)
@@ -215,78 +215,78 @@ if fFlagInExperienceUserProfileSettingsEnabledModule then
 		end
 	end)()
 end
-playersService.PlayerRemoving:Connect(function(p9)
+playersService.PlayerRemoving:Connect(function(p4)
 	-- upvalues: t_2 (ref)
-	if t_2[p9] then
-		local var42 = t_2[p9]
-		t_2[p9] = nil
-		var42:destroy()
+	if t_2[p4] then
+		local var1 = t_2[p4]
+		t_2[p4] = nil
+		var1:destroy()
 	end
 end)
 
-local _ = function(p10)
+local _ = function(p4)
 	-- upvalues: t_2 (ref), t_1 (ref)
-	return function(p11)
-		-- upvalues: t_2 (copy), t_1 (copy), p10 (ref)
-		local var43 = t_2[p11]
+	return function(p5)
+		-- upvalues: t_2 (copy), t_1 (copy), p4 (ref)
+		local var1 = t_2[p5]
 		
-		if not var43 and p11.Parent ~= nil then
-			var43 = t_1.new(p11)
-			t_2[p11] = var43
+		if not var1 and p5.Parent ~= nil then
+			var1 = t_1.new(p5)
+			t_2[p5] = var1
 		end
-		if var43 then
-			var43 = var43:getGroupDataAsync()
+		if var1 then
+			var1 = var1:getGroupDataAsync()
 			
-			return var43 and var43[p10]
+			return var1 and var1[p4]
 		end
 	end
 end
 
 local t_3 = {}
-local var11 = "SpanishLocalizationExpert"
+local var1 = "SpanishLocalizationExpert"
 
-local var12 = function(p12)
-	-- upvalues: t_2 (ref), t_1 (ref), var11 (ref)
-	local var43 = t_2[p12]
+local var2 = function(p4)
+	-- upvalues: t_2 (ref), t_1 (ref), var1 (ref)
+	local var3 = t_2[p4]
 	
-	if not var43 and p12.Parent ~= nil then
-		var43 = t_1.new(p12)
-		t_2[p12] = var43
+	if not var3 and p4.Parent ~= nil then
+		var3 = t_1.new(p4)
+		t_2[p4] = var3
 	end
-	if var43 then
-		var43 = var43:getGroupDataAsync()
+	if var3 then
+		var3 = var3:getGroupDataAsync()
 		
-		return var43 and var43[var11]
+		return var3 and var3[var1]
 	end
 end
 
-local var13 = "BrazilianLocalizationExpert"
+local var3 = "BrazilianLocalizationExpert"
 
-local var14 = function(p13)
-	-- upvalues: t_2 (ref), t_1 (ref), var13 (ref)
-	local var43 = t_2[p13]
+local var4 = function(p4)
+	-- upvalues: t_2 (ref), t_1 (ref), var3 (ref)
+	local var5 = t_2[p4]
 	
-	if not var43 and p13.Parent ~= nil then
-		var43 = t_1.new(p13)
-		t_2[p13] = var43
+	if not var5 and p4.Parent ~= nil then
+		var5 = t_1.new(p4)
+		t_2[p4] = var5
 	end
-	if var43 then
-		var43 = var43:getGroupDataAsync()
+	if var5 then
+		var5 = var5:getGroupDataAsync()
 		
-		return var43 and var43[var13]
+		return var5 and var5[var3]
 	end
 end
 
-local var15 = "FrenchLocalizationExpert"
-local var16 = "GermanLocalizationExpert"
+local var5 = "FrenchLocalizationExpert"
+local var6 = "GermanLocalizationExpert"
 -- Unknown statement at pc 9: <SetList>
 
 local _ = function()
 	-- upvalues: t_3 (ref)
-	return function(p14)
+	return function(p4)
 		-- upvalues: t_3 (copy)
 		for i = 1, #t_3 do
-			if not t_3[i](p14) then
+			if not t_3[i](p4) then
 				continue
 			end
 			return true
@@ -298,121 +298,121 @@ end
 local _ = function()
 	-- upvalues: t_2 (ref), t_1 (ref)
 	if game.CreatorType == Enum.CreatorType.Group then
-		local var44 = "PlaceCreator"
+		local var7 = "PlaceCreator"
 		
-		return function(p15)
-			-- upvalues: t_2 (copy), t_1 (copy), var44 (ref)
-			local var43 = t_2[p15]
+		return function(p4)
+			-- upvalues: t_2 (copy), t_1 (copy), var7 (ref)
+			local var8 = t_2[p4]
 			
-			if not var43 and p15.Parent ~= nil then
-				var43 = t_1.new(p15)
-				t_2[p15] = var43
+			if not var8 and p4.Parent ~= nil then
+				var8 = t_1.new(p4)
+				t_2[p4] = var8
 			end
-			if var43 then
-				var43 = var43:getGroupDataAsync()
+			if var8 then
+				var8 = var8:getGroupDataAsync()
 				
-				return var43 and var43[var44]
+				return var8 and var8[var7]
 			end
 		end
 	end
-	return function(p16)
-		return p16.UserId == game.CreatorId
+	return function(p4)
+		return p4.UserId == game.CreatorId
 	end
 end
 
-local function CanPlayerManagePlace(p17)
+local function CanPlayerManagePlace(p4)
 	-- upvalues: t_2 (ref), t_1 (ref)
-	local var45 = t_2[p17]
+	local var7 = t_2[p4]
 	
-	if not var45 and p17.Parent ~= nil then
-		var45 = t_1.new(p17)
-		t_2[p17] = var45
+	if not var7 and p4.Parent ~= nil then
+		var7 = t_1.new(p4)
+		t_2[p4] = var7
 	end
-	return if var45 then var45:getCanManageAsync() or false else false
+	return if var7 then var7:getCanManageAsync() or false else false
 end
 
-local function IsPlayerInExperienceNameEnabled(p18)
+local function IsPlayerInExperienceNameEnabled(p4)
 	-- upvalues: t_2 (ref), t_1 (ref)
-	local var46 = t_2[p18]
+	local var7 = t_2[p4]
 	
-	if not var46 and p18.Parent ~= nil then
-		var46 = t_1.new(p18)
-		t_2[p18] = var46
+	if not var7 and p4.Parent ~= nil then
+		var7 = t_1.new(p4)
+		t_2[p4] = var7
 	end
-	if var46 then
-		var46 = var46:getProfileSettingsAsync()
+	if var7 then
+		var7 = var7:getProfileSettingsAsync()
 		
-		return if var46 then var46.isInExperienceNameEnabled else false
+		return if var7 then var7.isInExperienceNameEnabled else false
 	end
 end
 
-local function SetPlayerInExperienceNameEnabled(_, p19)
+local function SetPlayerInExperienceNameEnabled(_, p4)
 	-- upvalues: url (ref), httpService (ref), httpRbxApiService (ref)
 	pcall(function()
-		-- upvalues: url (copy), httpService (copy), p19 (ref), httpRbxApiService (copy)
+		-- upvalues: url (copy), httpService (copy), p4 (ref), httpRbxApiService (copy)
 		local updatePlayerProfileSettings = game:GetService("RobloxReplicatedStorage"):WaitForChild("UpdatePlayerProfileSettings", 1e999)
 		httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "user-profile-api/v1/user/profiles/settings", httpService:JSONEncode({
-			userProfileSettings = { isInExperienceNameEnabled = p19 }
+			userProfileSettings = { isInExperienceNameEnabled = p4 }
 		}), Enum.ThrottlingPriority.Default, Enum.HttpContentType.ApplicationJson, Enum.HttpRequestType.Players)
-		updatePlayerProfileSettings:FireServer({ isInExperienceNameEnabled = p19 })
+		updatePlayerProfileSettings:FireServer({ isInExperienceNameEnabled = p4 })
 	end)
 end
 
-local var20 = "Admin"
+local var7 = "Admin"
 
-function t.IsPlayerAdminAsync(p20)
-	-- upvalues: t_2 (ref), t_1 (ref), var20 (ref)
-	local var43 = t_2[p20]
+function t.IsPlayerAdminAsync(p4)
+	-- upvalues: t_2 (ref), t_1 (ref), var7 (ref)
+	local var8 = t_2[p4]
 	
-	if not var43 and p20.Parent ~= nil then
-		var43 = t_1.new(p20)
-		t_2[p20] = var43
+	if not var8 and p4.Parent ~= nil then
+		var8 = t_1.new(p4)
+		t_2[p4] = var8
 	end
-	if var43 then
-		var43 = var43:getGroupDataAsync()
+	if var8 then
+		var8 = var8:getGroupDataAsync()
 		
-		return var43 and var43[var20]
+		return var8 and var8[var7]
 	end
 end
 
-local var21 = "Intern"
+local var8 = "Intern"
 
-function t.IsPlayerInternAsync(p21)
-	-- upvalues: t_2 (ref), t_1 (ref), var21 (ref)
-	local var43 = t_2[p21]
+function t.IsPlayerInternAsync(p4)
+	-- upvalues: t_2 (ref), t_1 (ref), var8 (ref)
+	local var9 = t_2[p4]
 	
-	if not var43 and p21.Parent ~= nil then
-		var43 = t_1.new(p21)
-		t_2[p21] = var43
+	if not var9 and p4.Parent ~= nil then
+		var9 = t_1.new(p4)
+		t_2[p4] = var9
 	end
-	if var43 then
-		var43 = var43:getGroupDataAsync()
+	if var9 then
+		var9 = var9:getGroupDataAsync()
 		
-		return var43 and var43[var21]
+		return var9 and var9[var8]
 	end
 end
 
-local var22 = "Star"
+local var9 = "Star"
 
-function t.IsPlayerStarAsync(p22)
-	-- upvalues: t_2 (ref), t_1 (ref), var22 (ref)
-	local var43 = t_2[p22]
+function t.IsPlayerStarAsync(p4)
+	-- upvalues: t_2 (ref), t_1 (ref), var9 (ref)
+	local var10 = t_2[p4]
 	
-	if not var43 and p22.Parent ~= nil then
-		var43 = t_1.new(p22)
-		t_2[p22] = var43
+	if not var10 and p4.Parent ~= nil then
+		var10 = t_1.new(p4)
+		t_2[p4] = var10
 	end
-	if var43 then
-		var43 = var43:getGroupDataAsync()
+	if var10 then
+		var10 = var10:getGroupDataAsync()
 		
-		return var43 and var43[var22]
+		return var10 and var10[var9]
 	end
 end
 
-function t.IsPlayerLocalizationExpertAsync(p23)
+function t.IsPlayerLocalizationExpertAsync(p4)
 	-- upvalues: t_3 (ref)
 	for i = 1, #t_3 do
-		if not t_3[i](p23) then
+		if not t_3[i](p4) then
 			continue
 			continue
 		end
@@ -422,28 +422,28 @@ function t.IsPlayerLocalizationExpertAsync(p23)
 end
 
 if game.CreatorType == Enum.CreatorType.Group then
-	local var23 = "PlaceCreator"
+	local var10 = "PlaceCreator"
 	
-	local var24 = function(p24)
-		-- upvalues: t_2 (ref), t_1 (ref), var23 (ref)
-		local var43 = t_2[p24]
+	local var11 = function(p5)
+		-- upvalues: t_2 (ref), t_1 (ref), var10 (ref)
+		local var12 = t_2[p5]
 		
-		if not var43 and p24.Parent ~= nil then
-			var43 = t_1.new(p24)
-			t_2[p24] = var43
+		if not var12 and p5.Parent ~= nil then
+			var12 = t_1.new(p5)
+			t_2[p5] = var12
 		end
-		if var43 then
-			var43 = var43:getGroupDataAsync()
+		if var12 then
+			var12 = var12:getGroupDataAsync()
 			
-			return var43 and var43[var23]
+			return var12 and var12[var10]
 		end
 	end
 else
-	local var24 = function(p25)
-		return p25.UserId == game.CreatorId
+	local var11 = function(p5)
+		return p5.UserId == game.CreatorId
 	end
 end
-t.IsPlayerPlaceOwnerAsync = var24
+t.IsPlayerPlaceOwnerAsync = var11
 t.CanPlayerManagePlaceAsync = CanPlayerManagePlace
 
 if fFlagInExperienceUserProfileSettingsEnabledModule then

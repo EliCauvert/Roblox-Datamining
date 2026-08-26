@@ -7,41 +7,41 @@ local partyChatTimeoutReceivedSignal = require(parent.InterventionShared).Signal
 
 return {
 	configName = "PartyChatDialogNudge",
-	shouldTriggerVisualTreatment = function(p0)
+	shouldTriggerVisualTreatment = function(p1)
 		-- upvalues: constants (ref)
-		return p0.type == constants.NotificationDialogType.ChatTimeout and p0.abuseVector == constants.AbuseVectorType.PartyChat
+		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.PartyChat
 	end,
 	shouldTriggerBehavioralTreatment = function(p1)
 		-- upvalues: constants (ref)
 		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.PartyChat
 	end,
-	shouldTriggerEventReceived = function(p2)
+	shouldTriggerEventReceived = function(p1)
 		-- upvalues: constants (ref)
-		return p2.type == constants.NotificationDialogType.ChatTimeout and p2.abuseVector == constants.AbuseVectorType.PartyChat
+		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.PartyChat
 	end,
-	onTriggerVisualTreatment = function(p3, p4)
+	onTriggerVisualTreatment = function(p1, p2)
 		-- upvalues: constants (ref)
-		p3({
+		p1({
 			isShown = true,
 			type = constants.UIStateActions.ToggleNotificationDialog,
 			treatmentType = constants.TreatmentType.PartyChatTimeoutDialog,
-			endTime = DateTime.now().UnixTimestamp + p4.timeoutDurationSeconds,
-			detail = p4
+			endTime = DateTime.now().UnixTimestamp + p2.timeoutDurationSeconds,
+			detail = p2
 		})
 	end,
-	onTriggerBehavioralTreatment = function(p5)
+	onTriggerBehavioralTreatment = function(p1)
 		-- upvalues: partyChatTimeoutReceivedSignal (ref)
-		partyChatTimeoutReceivedSignal:fire(p5.vectorTargetId)
+		partyChatTimeoutReceivedSignal:fire(p1.vectorTargetId)
 	end,
-	onTriggerEventReceived = function(p6)
+	onTriggerEventReceived = function(p1)
 		-- upvalues: interventionAnalytics (ref), constants (ref)
 		interventionAnalytics.sendAnalyticsEvent(interventionAnalytics.TelemetryConfigs.MessageReceived, {
 			eventType = interventionAnalytics.Constants.EventTypes.ModalMessageReceived,
 			counterNamespace = interventionAnalytics.Constants.CounterNamespaceTypes.PartyChat,
 			interventionType = interventionAnalytics.Constants.InterventionTypes.PartyChatTimeout,
 			renderedTimestamp = DateTime.now().UnixTimestampMillis,
-			eventId = p6.decisionEventId,
-			duration = p6.timeoutDurationSeconds,
+			eventId = p1.decisionEventId,
+			duration = p1.timeoutDurationSeconds,
 			placement = constants.InterventionPlacementType.InExperience
 		})
 	end

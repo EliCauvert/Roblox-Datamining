@@ -38,51 +38,51 @@ if not game:GetFastFlag("DisableCorescriptBacktraceReporting") and game:GetFastS
 		UserAgent = httpService:GetUserAgent(),
 		CoreScriptVersion = runService:GetCoreScriptVersion()
 	}
-	local var15 = piiFilterModule.new({
+	local var1 = piiFilterModule.new({
 		eraseTimeout = game:GetFastInt("CoreScriptBacktracePIIFilterEraseTimeoutSeconds")
 	})
 	local coreScriptBacktraceRepeatedErrorRateLimitingFastFlag = game:GetFastFlag("CoreScriptBacktraceRepeatedErrorRateLimiting")
-	local var17 = if coreScriptBacktraceRepeatedErrorRateLimitingFastFlag then rateLimiterModule.new({
+	local var2 = if coreScriptBacktraceRepeatedErrorRateLimitingFastFlag then rateLimiterModule.new({
 		period = game:GetFastInt("CoreScriptBacktraceRepeatedErrorRateLimitPeriod"),
 		threshold = game:GetFastInt("CoreScriptBacktraceRepeatedErrorRateLimitCount"),
 		processInterval = game:GetFastInt("CoreScriptBacktraceRepeatedErrorRateLimitProcessIntervalTenths") / 10
 	}) else nil
-	local var18 = sessionWithErrorReporter.new(luaCoreScriptsSessionWithErrorConfigModule, 300, nil)
-	local var19 = backtraceReporter.new({
+	local var3 = sessionWithErrorReporter.new(luaCoreScriptsSessionWithErrorConfigModule, 300, nil)
+	local var4 = backtraceReporter.new({
 		httpService = httpService,
 		token = game:GetFastString("CoreScriptBacktraceErrorUploadToken"),
-		processErrorReportMethod = function(p0)
+		processErrorReportMethod = function(p1)
 			-- upvalues: t (ref), playersService (ref), runService (ref)
-			p0:addAttributes(t)
-			p0:addAttributes({ PlayerCount = #playersService:GetPlayers() })
-			p0:addAttributes({ RobloxChannel = runService:GetRobloxClientChannel() })
+			p1:addAttributes(t)
+			p1:addAttributes({ PlayerCount = #playersService:GetPlayers() })
+			p1:addAttributes({ RobloxChannel = runService:GetRobloxClientChannel() })
 			
-			return p0
+			return p1
 		end
 	})
 	
 	local function handleErrorDetailed(p1, p2, p3, p4)
-		-- upvalues: coreGuiService (ref), corePackagesService (ref), reactModule (ref), var15 (ref), coreScriptBacktraceRepeatedErrorRateLimitingFastFlag (ref), var17 (write), var19 (ref), default (ref), luaCoreScriptsErrorV2CounterConfigModule (ref), var18 (ref)
+		-- upvalues: coreGuiService (ref), corePackagesService (ref), reactModule (ref), var1 (ref), coreScriptBacktraceRepeatedErrorRateLimitingFastFlag (ref), var2 (write), var4 (ref), default (ref), luaCoreScriptsErrorV2CounterConfigModule (ref), var3 (ref)
 		if p3 ~= nil and (p3:IsDescendantOf(coreGuiService) or p3:IsDescendantOf(corePackagesService)) then
-			local var21, var22 = reactModule.unstable_parseReactError(p1)
-			message = var21.message
-			p2 = var21.stack or p2
-			p4 = p4 or var22
-			local var23 = var15:cleanPii(message)
-			local var24 = var15:cleanPii(p2)
+			local var5, var6 = reactModule.unstable_parseReactError(p1)
+			message = var5.message
+			p2 = var5.stack or p2
+			p4 = p4 or var6
+			local var7 = var1:cleanPii(message)
+			local var8 = var1:cleanPii(p2)
 			
 			if p4 ~= nil then
-				p4 = var15:cleanPii(p4)
+				p4 = var1:cleanPii(p4)
 			end
 			if coreScriptBacktraceRepeatedErrorRateLimitingFastFlag then
-				local text = var23 .. var24
+				local text = var7 .. var24
 				
-				if var17:isRateLimited(text) then return end
-				var17:increment(text)
+				if var2:isRateLimited(text) then return end
+				var2:increment(text)
 			end
-			var19:reportErrorDeferred(var23, var24, p4)
+			var4:reportErrorDeferred(var7, var8, p4)
 			default:logRobloxTelemetryCounter(luaCoreScriptsErrorV2CounterConfigModule, 1)
-			var18:reportEvent(1, nil, "ERROR")
+			var3:reportEvent(1, nil, "ERROR")
 		end
 	end
 	

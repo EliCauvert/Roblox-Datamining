@@ -1,5 +1,5 @@
-﻿function FindFirstAncestorWithTag(p0, p1)
-	return if p0 == nil then nil elseif p0:HasTag(p1) then p0 else FindFirstAncestorWithTag(p0.Parent, p1)
+﻿function FindFirstAncestorWithTag(p1, p2)
+	return if p1 == nil then nil elseif p1:HasTag(p2) then p1 else FindFirstAncestorWithTag(p1.Parent, p2)
 end
 
 return FindFirstAncestorWithTag

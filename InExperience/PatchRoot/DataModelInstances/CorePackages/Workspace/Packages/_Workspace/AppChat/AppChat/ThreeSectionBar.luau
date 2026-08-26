@@ -11,17 +11,17 @@ threeSectionBar.defaultProps = {
 	height = UDim.new(0, 0)
 }
 
-function threeSectionBar.init(p0)
+function threeSectionBar.init(p1)
 	-- upvalues: roactModule (ref)
-	local var2, var3 = roactModule.createBinding(0)
-	p0.leftWidth = var2
-	p0.updateLeftWidth = var3
-	local var4, var5 = roactModule.createBinding(0)
-	p0.rightWidth = var4
-	p0.updateRightWidth = var5
-	local var6, var7 = roactModule.createBinding(0)
-	p0.fullWidth = var6
-	p0.updateFullWidth = var7
+	local var1, var2 = roactModule.createBinding(0)
+	p1.leftWidth = var1
+	p1.updateLeftWidth = var2
+	local var3, var4 = roactModule.createBinding(0)
+	p1.rightWidth = var3
+	p1.updateRightWidth = var4
+	local var5, var6 = roactModule.createBinding(0)
+	p1.fullWidth = var5
+	p1.updateFullWidth = var6
 end
 
 function threeSectionBar.render(p1)
@@ -43,16 +43,16 @@ function threeSectionBar.render(p1)
 			FillDirection = Enum.FillDirection.Horizontal,
 			contentPadding = p1.props.contentPaddingLeft,
 			margin = p1.props.marginLeft,
-			[roactModule.Change.AbsoluteSize] = function(p3)
+			[roactModule.Change.AbsoluteSize] = function(p2)
 				-- upvalues: p1 (ref)
-				p1.updateLeftWidth(p3.AbsoluteSize.X)
+				p1.updateLeftWidth(p2.AbsoluteSize.X)
 			end
 		}, { leftContent = p1.props.renderLeft(p1.props) }),
 		centerFrame = roactModule.createElement("Frame", {
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.fromScale(0.5, 0),
-			Size = roactModule.joinBindings({ p1.leftWidth, p1.rightWidth, p1.fullWidth }):map(function(p4)
-				return UDim2.new(0, (Vector2.new(p4[3] / 2, 0) - Vector2.new(math.max(p4[1], p4[2]), 0)).Magnitude * 2, 1, 0)
+			Size = roactModule.joinBindings({ p1.leftWidth, p1.rightWidth, p1.fullWidth }):map(function(p2)
+				return UDim2.new(0, (Vector2.new(p2[3] / 2, 0) - Vector2.new(math.max(p2[1], p2[2]), 0)).Magnitude * 2, 1, 0)
 			end)
 		}, {
 			["$layout"] = roactModule.createElement("UIListLayout", { HorizontalAlignment = Enum.HorizontalAlignment.Center }),
@@ -66,9 +66,9 @@ function threeSectionBar.render(p1)
 			FillDirection = Enum.FillDirection.Horizontal,
 			contentPadding = p1.props.contentPaddingRight,
 			margin = p1.props.marginRight,
-			[roactModule.Change.AbsoluteSize] = function(p5)
+			[roactModule.Change.AbsoluteSize] = function(p2)
 				-- upvalues: p1 (ref)
-				p1.updateRightWidth(p5.AbsoluteSize.X)
+				p1.updateRightWidth(p2.AbsoluteSize.X)
 			end
 		}, { rightContent = p1.props.renderRight(p1.props) })
 	})

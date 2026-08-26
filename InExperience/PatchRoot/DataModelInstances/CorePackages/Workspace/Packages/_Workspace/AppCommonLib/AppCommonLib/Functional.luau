@@ -1,77 +1,77 @@
 ﻿return {
-	Filter = function(p0, p1)
+	Filter = function(p1, p2)
 		local t = {}
 		
-		for i = 1, #p0 do
-			local var1 = p0[i]
+		for i = 1, #p1 do
+			local var1 = p1[i]
 			
-			if p1(var1, i) then
+			if p2(var1, i) then
 				table.insert(t, var1)
 			end
 		end
 		return t
 	end,
-	Map = function(p2, p3)
+	Map = function(p3, p4)
 		local t = {}
 		
-		for i = 1, #p2 do
-			t[i] = p3(p2[i], i)
+		for i = 1, #p3 do
+			t[i] = p4(p3[i], i)
 		end
 		return t
 	end,
-	MapReverse = function(p4, p5)
+	MapReverse = function(p5, p6)
 		local t = {}
 		
-		for i = #p4, 1, -1 do
-			t[i] = p5(p4[i], i)
+		for i = #p5, 1, -1 do
+			t[i] = p6(p5[i], i)
 		end
 		return t
 	end,
-	FilterMap = function(p6, p7)
+	FilterMap = function(p7, p8)
 		local t = {}
 		
-		for i = 1, #p6 do
-			local var5 = p7(p6[i], i)
+		for i = 1, #p7 do
+			local var2 = p8(p7[i], i)
 			
-			if var5 ~= nil then
-				table.insert(t, var5)
+			if var2 ~= nil then
+				table.insert(t, var2)
 			end
 		end
 		return t
 	end,
-	Fold = function(p8, p9, p10)
-		local var6 = p9
+	Fold = function(p9, p10, p11)
+		local var3 = p10
 		
-		for i = 1, #p8 do
-			var6 = p10(var6, p8[i], i)
+		for i = 1, #p9 do
+			var3 = p11(var3, p9[i], i)
 		end
-		return var6
+		return var3
 	end,
-	FoldDictionary = function(p11, p12, p13)
-		local var7 = p12
+	FoldDictionary = function(p12, p13, p14)
+		local var4 = p13
 		
-		for i, v in pairs(p11) do
-			var7 = p13(var7, i, v)
+		for i, v in pairs(p12) do
+			var4 = p14(var4, i, v)
 		end
-		return var7
+		return var4
 	end,
-	Take = function(p14, p15, p16)
-		p16 = p16 or 1
-		local var8 = p15 + (p16 - 1)
+	Take = function(p15, p16, p17)
+		p17 = p17 or 1
+		local var5 = p16 + (p17 - 1)
 		
-		if #p14 < var8 then
-			var8 = #p14
+		if #p15 < var5 then
+			var5 = #p15
 		end
 		local t = {}
 		
-		for i = p16, var8 do
-			t[i - (p16 - 1)] = p14[i]
+		for i = p17, var5 do
+			t[i - (p17 - 1)] = p15[i]
 		end
 		return t
 	end,
-	Find = function(p17, p18)
-		for i, v in ipairs(p17) do
-			if v == p18 then
+	Find = function(p18, p19)
+		for i, v in ipairs(p18) do
+			if v == p19 then
 				return i
 			end
 		end

@@ -9,47 +9,47 @@ local frozen = table.freeze({
 	placements = table.freeze({})
 })
 
-return function(p0)
+return function(p1)
 	-- upvalues: frozen (ref), placementTypesModule (ref)
-	if #p0.stickyIndices == 0 and p0.pinnedStartItem == nil and p0.pinnedEndItem == nil then
+	if #p1.stickyIndices == 0 and p1.pinnedStartItem == nil and p1.pinnedEndItem == nil then
 		return frozen
 	end
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
-	local var6 = if p0.pinnedStartItem == nil then 0 else p0.pinnedStartItem.length
-	local var7 = 0
-	local var8 = 1
-	local stickyIndicesCount = #p0.stickyIndices
-	while var8 <= stickyIndicesCount do
-		local floored = math.floor((var8 + stickyIndicesCount) / 2)
+	local var1 = if p1.pinnedStartItem == nil then 0 else p1.pinnedStartItem.length
+	local var2 = 0
+	local var3 = 1
+	local stickyIndicesCount = #p1.stickyIndices
+	while var3 <= stickyIndicesCount do
+		local floored = math.floor((var3 + stickyIndicesCount) / 2)
 		
-		if p0.layout.getItemLayout(p0.stickyIndices[floored]).startOffset + p0.contentStartOffset - p0.scrollOffset < var6 then
-			var7 = floored
-			var8 = floored + 1
+		if p1.layout.getItemLayout(p1.stickyIndices[floored]).startOffset + p1.contentStartOffset - p1.scrollOffset < var1 then
+			var2 = floored
+			var3 = floored + 1
 		else
 			stickyIndicesCount = floored - 1
 		end
 	end
-	if var7 > 0 then
-		local var11 = p0.stickyIndices[var7]
-		local itemLayout = p0.layout.getItemLayout(var11)
-		local var13 = var6
-		local var14 = p0.stickyIndices[var7 + 1]
+	if var2 > 0 then
+		local var4 = p1.stickyIndices[var2]
+		local itemLayout = p1.layout.getItemLayout(var4)
+		local var5 = var1
+		local var6 = p1.stickyIndices[var2 + 1]
 		
-		if var14 ~= nil then
-			var13 = math.min(var6, p0.layout.getItemLayout(var14).startOffset + p0.contentStartOffset - p0.scrollOffset - itemLayout.length)
+		if var6 ~= nil then
+			var5 = math.min(var1, p1.layout.getItemLayout(var6).startOffset + p1.contentStartOffset - p1.scrollOffset - itemLayout.length)
 		end
-		local itemKey = p0.dataSource.getItemKey(var11)
-		table.insert(t, { key = itemKey, index = var11 })
+		local itemKey = p1.dataSource.getItemKey(var4)
+		table.insert(t, { key = itemKey, index = var4 })
 		t_2[itemKey] = {
 			viewportRelative = true,
 			zIndex = 1,
-			mainAxisOffset = var13,
+			mainAxisOffset = var5,
 			mainAxisLength = itemLayout.length
 		}
 	end
-	for i, v in { p0.pinnedStartItem, p0.pinnedEndItem } do
+	for i, v in { p1.pinnedStartItem, p1.pinnedEndItem } do
 		if v ~= nil then
 			table.insert(t_1, {
 				key = v.key,
@@ -64,7 +64,7 @@ return function(p0)
 			t_2[v.key] = {
 				viewportRelative = true,
 				zIndex = 2,
-				mainAxisOffset = if v.position == placementTypesModule.PinnedPosition.Start then 0 else math.max(0, p0.viewportLength - v.length),
+				mainAxisOffset = if v.position == placementTypesModule.PinnedPosition.Start then 0 else math.max(0, p1.viewportLength - v.length),
 				mainAxisLength = v.length
 			}
 		end
@@ -73,6 +73,6 @@ return function(p0)
 		retainedItems = t,
 		additionalAssignments = t_1,
 		placements = t_2,
-		hasViewportRelativePlacements = if var7 <= 0 then if p0.pinnedStartItem == nil then p0.pinnedEndItem ~= nil else true else true
+		hasViewportRelativePlacements = if var2 <= 0 then if p1.pinnedStartItem == nil then p1.pinnedEndItem ~= nil else true else true
 	}
 end

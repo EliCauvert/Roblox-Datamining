@@ -4,7 +4,7 @@ local promiseModule = require(parent.Promise)
 local graphQLError = require(parent.GraphQL).GraphQLError
 local fetch = require(parent.Fetch).fetch
 local t = {}
-local var2 = require(parent.UrlBuilder).UrlBuilder.new({
+local var1 = require(parent.UrlBuilder).UrlBuilder.new({
 	path = "users/avatar-headshot",
 	base = require(parent.UrlBuilder).UrlBase.new("thumbnails", 1),
 	query = {
@@ -15,29 +15,29 @@ local var2 = require(parent.UrlBuilder).UrlBuilder.new({
 	}
 })
 
-function t.findAvatarHeadshotById(p0, p1)
-	-- upvalues: fetch (ref), promiseModule (ref), var2 (ref), graphQLError (ref)
-	local var3 = p1 or fetch
+function t.findAvatarHeadshotById(p1, p2)
+	-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), graphQLError (ref)
+	local var2 = p2 or fetch
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: var2 (copy), p0 (ref), var3 (ref), graphQLError (copy)
-		local var4 = var3(var2({ userIds = p0 }), { method = "GET" }):expect()
+	return promiseModule.new(function(p3, p4)
+		-- upvalues: var1 (copy), p1 (ref), var2 (ref), graphQLError (copy)
+		local var3 = var2(var1({ userIds = p1 }), { method = "GET" }):expect()
 		
-		if not var4.ok then
-			p3(graphQLError.new(string.format("Http error occurred while trying to fetch avatarHeadshot for user %s.", p0)))
+		if not var3.ok then
+			p4(graphQLError.new(string.format("Http error occurred while trying to fetch avatarHeadshot for user %s.", p1)))
 			
 			return
 		end
-		local var5 = var4:json():catch(function()
+		local var4 = var3:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var5 then
-			p2(var5.data[1].imageUrl)
+		if var4 then
+			p3(var4.data[1].imageUrl)
 			
 			return
 		end
-		p3(graphQLError.new(string.format("Failed to parse avatarHeadshot HttpResponse for user %s.", p0)))
+		p4(graphQLError.new(string.format("Failed to parse avatarHeadshot HttpResponse for user %s.", p1)))
 	end)
 end
 

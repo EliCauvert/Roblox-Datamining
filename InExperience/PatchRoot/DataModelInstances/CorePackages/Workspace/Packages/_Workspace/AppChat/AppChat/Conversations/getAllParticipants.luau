@@ -1,13 +1,13 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref)
 	local t = {}
-	cryoModule.List.map(p0, function(p1)
+	cryoModule.List.map(p1, function(p2)
 		-- upvalues: cryoModule (copy), t (ref)
-		cryoModule.List.map(p1.otherParticipants, function(p2)
+		cryoModule.List.map(p2.otherParticipants, function(p3)
 			-- upvalues: t (copy)
-			t[p2] = true
+			t[p3] = true
 		end)
 	end)
 	

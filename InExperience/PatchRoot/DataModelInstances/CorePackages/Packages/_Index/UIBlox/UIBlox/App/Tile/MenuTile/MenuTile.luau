@@ -56,40 +56,40 @@ menuTile.validateProps = tModule.strictInterface({
 	}))
 })
 
-local function withProviders(p0, p1)
+local function withProviders(p1, p2)
 	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: p0 (ref), p1 (ref)
-		return p0(p2, nil, p1)
+	return withStyleModule(function(p3)
+		-- upvalues: p1 (ref), p2 (ref)
+		return p1(p3, nil, p2)
 	end)
 end
 
-local function getStyleProps(p3, p4)
+local function getStyleProps(p1, p2)
 	-- upvalues: getIconSizeModule (ref), iconSizeModule (ref)
-	local theme = p4.Theme
+	local theme = p2.Theme
 	
 	return {
-		iconStyle = p3.iconStyle or theme.IconDefault,
-		iconSize = if p3.iconSize then getIconSizeModule(p3.iconSize, p4) else getIconSizeModule(iconSizeModule.Large),
-		titleStyle = p3.titleStyle or theme.TextDefault,
-		titleFont = p3.titleFont or p4.Font.SubHeader1
+		iconStyle = p1.iconStyle or theme.IconDefault,
+		iconSize = if p1.iconSize then getIconSizeModule(p1.iconSize, p2) else getIconSizeModule(iconSizeModule.Large),
+		titleStyle = p1.titleStyle or theme.TextDefault,
+		titleFont = p1.titleFont or p2.Font.SubHeader1
 	}
 end
 
-function menuTile.init(p5)
+function menuTile.init(p1)
 	-- upvalues: roactModule (ref), otterModule (ref)
-	local var28, var29 = roactModule.createBinding(1)
-	p5.hoverTransparency = var28
-	p5.updateHoverTransparency = var29
-	p5.hoverTransparencyMotor = otterModule.createSingleMotor(1)
-	p5.hoverTransparencyMotor:onStep(p5.updateHoverTransparency)
-	p5.hoverTransparencyMotor:onComplete(function(p6)
-		-- upvalues: p5 (ref)
-		if p6 == 1 then
-			p5:setState({ showHoverMask = false })
+	local var1, var2 = roactModule.createBinding(1)
+	p1.hoverTransparency = var1
+	p1.updateHoverTransparency = var2
+	p1.hoverTransparencyMotor = otterModule.createSingleMotor(1)
+	p1.hoverTransparencyMotor:onStep(p1.updateHoverTransparency)
+	p1.hoverTransparencyMotor:onComplete(function(p2)
+		-- upvalues: p1 (ref)
+		if p2 == 1 then
+			p1:setState({ showHoverMask = false })
 		end
 	end)
-	p5:setState({
+	p1:setState({
 		backgroundTransparency = 0,
 		iconTransparency = 0,
 		titleTransparency = 0,
@@ -97,67 +97,67 @@ function menuTile.init(p5)
 	})
 end
 
-function menuTile.render(p7)
+function menuTile.render(p1)
 	-- upvalues: withProviders (ref), getStyleProps (ref), getTextSizeModule (ref), controlStateModule (ref), otterModule (ref), t (ref), divideTransparencyModule (ref), roactModule (ref), interactableModule (ref), uDim (ref), uDim_1 (ref), imageSetComponentModule (ref), statusIndicator (ref), migrateBadgeVariantModule (ref)
-	local backgroundTransparency = p7.state.backgroundTransparency
-	local iconTransparency = p7.state.iconTransparency
-	local titleTransparency = p7.state.titleTransparency
-	local badgeValue = p7.props.badgeValue
-	local icon = p7.props.icon
-	local layoutOrder = p7.props.layoutOrder
-	local onActivated = p7.props.onActivated
-	local position = p7.props.position
-	local size = p7.props.size
-	local title = p7.props.title
+	local backgroundTransparency = p1.state.backgroundTransparency
+	local iconTransparency = p1.state.iconTransparency
+	local titleTransparency = p1.state.titleTransparency
+	local badgeValue = p1.props.badgeValue
+	local icon = p1.props.icon
+	local layoutOrder = p1.props.layoutOrder
+	local onActivated = p1.props.onActivated
+	local position = p1.props.position
+	local size = p1.props.size
+	local title = p1.props.title
 	
-	return withProviders(function(p8, _, p9)
-		-- upvalues: getStyleProps (copy), p7 (ref), getTextSizeModule (copy), title (ref), controlStateModule (copy), otterModule (copy), t (copy), divideTransparencyModule (copy), roactModule (copy), interactableModule (copy), size (ref), position (ref), layoutOrder (ref), onActivated (ref), backgroundTransparency (ref), uDim (copy), uDim_1 (copy), icon (ref), imageSetComponentModule (copy), iconTransparency (ref), titleTransparency (ref), badgeValue (ref), statusIndicator (copy), migrateBadgeVariantModule (copy)
-		local theme = p8.Theme
-		local var30 = getStyleProps(p7.props.styleProps, p8)
+	return withProviders(function(p2, _, p3)
+		-- upvalues: getStyleProps (copy), p1 (ref), getTextSizeModule (copy), title (ref), controlStateModule (copy), otterModule (copy), t (copy), divideTransparencyModule (copy), roactModule (copy), interactableModule (copy), size (ref), position (ref), layoutOrder (ref), onActivated (ref), backgroundTransparency (ref), uDim (copy), uDim_1 (copy), icon (ref), imageSetComponentModule (copy), iconTransparency (ref), titleTransparency (ref), badgeValue (ref), statusIndicator (copy), migrateBadgeVariantModule (copy)
+		local theme = p2.Theme
+		local var1 = getStyleProps(p1.props.styleProps, p2)
 		local backgroundUIDefault = theme.BackgroundUIDefault
 		local backgroundOnHover = theme.BackgroundOnHover
-		local iconStyle = var30.iconStyle
-		local iconSize = var30.iconSize
-		local titleStyle = var30.titleStyle
-		local titleFont = var30.titleFont
-		local var31 = if titleFont.RelativeSize then titleFont.RelativeSize * p8.Font.BaseSize else titleFont.FontSize
-		local y = getTextSizeModule(title, var31, titleFont.Font, Vector2.new(100, var31)).Y
+		local iconStyle = var1.iconStyle
+		local iconSize = var1.iconSize
+		local titleStyle = var1.titleStyle
+		local titleFont = var1.titleFont
+		local var2 = if titleFont.RelativeSize then titleFont.RelativeSize * p2.Font.BaseSize else titleFont.FontSize
+		local y = getTextSizeModule(title, var2, titleFont.Font, Vector2.new(100, var2)).Y
 		
 		return roactModule.createElement(interactableModule, {
 			Size = size,
 			Position = position,
 			BackgroundTransparency = 1,
-			SelectionImageObject = p9,
+			SelectionImageObject = p3,
 			LayoutOrder = layoutOrder,
-			onStateChanged = function(_, p10)
-				-- upvalues: controlStateModule (copy), p7 (copy), backgroundUIDefault (ref), iconStyle (ref), titleStyle (ref), otterModule (copy), backgroundOnHover (ref), t (copy), divideTransparencyModule (copy)
-				if p10 == controlStateModule.Hover then
-					p7:setState({
+			onStateChanged = function(_, p4)
+				-- upvalues: controlStateModule (copy), p1 (copy), backgroundUIDefault (ref), iconStyle (ref), titleStyle (ref), otterModule (copy), backgroundOnHover (ref), t (copy), divideTransparencyModule (copy)
+				if p4 == controlStateModule.Hover then
+					p1:setState({
 						showHoverMask = true,
 						backgroundTransparency = backgroundUIDefault.Transparency,
 						iconTransparency = iconStyle.Transparency,
 						titleTransparency = titleStyle.Transparency
 					})
-					p7.hoverTransparencyMotor:setGoal(otterModule.spring(backgroundOnHover.Transparency, t))
+					p1.hoverTransparencyMotor:setGoal(otterModule.spring(backgroundOnHover.Transparency, t))
 					
 					return
-				elseif p10 == controlStateModule.Default then
-					p7:setState({
+				elseif p4 == controlStateModule.Default then
+					p1:setState({
 						backgroundTransparency = backgroundUIDefault.Transparency,
 						iconTransparency = iconStyle.Transparency,
 						titleTransparency = titleStyle.Transparency
 					})
-					p7.hoverTransparencyMotor:setGoal(otterModule.spring(1, t))
+					p1.hoverTransparencyMotor:setGoal(otterModule.spring(1, t))
 					
 					return
-				elseif p10 == controlStateModule.Pressed then
-					p7:setState({
+				elseif p4 == controlStateModule.Pressed then
+					p1:setState({
 						showHoverMask = false,
 						backgroundTransparency = divideTransparencyModule(backgroundUIDefault.Transparency, 2),
 						iconTransparency = divideTransparencyModule(iconStyle.Transparency, 2),
 						titleTransparency = divideTransparencyModule(titleStyle.Transparency, 2)
 					})
-					p7.hoverTransparencyMotor:setGoal(otterModule.instant(1))
+					p1.hoverTransparencyMotor:setGoal(otterModule.instant(1))
 				end
 			end,
 			[roactModule.Event.Activated] = onActivated
@@ -172,11 +172,11 @@ function menuTile.render(p7)
 				}, {
 					RoundedCornerUI = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 				}),
-				HoverMask = p7.state.showHoverMask and roactModule.createElement("Frame", {
+				HoverMask = p1.state.showHoverMask and roactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					ZIndex = 2,
 					BackgroundColor3 = backgroundOnHover.Color,
-					BackgroundTransparency = p7.hoverTransparency,
+					BackgroundTransparency = p1.hoverTransparency,
 					Size = UDim2.fromScale(1, 1)
 				}, {
 					RoundedCornerUI = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
@@ -214,7 +214,7 @@ function menuTile.render(p7)
 						Size = UDim2.new(1, 0, 0, y * 2),
 						Text = title,
 						TextColor3 = titleStyle.Color,
-						TextSize = var31,
+						TextSize = var2,
 						TextTransparency = titleTransparency,
 						TextTruncate = Enum.TextTruncate.AtEnd,
 						TextYAlignment = Enum.TextYAlignment.Top
@@ -240,23 +240,23 @@ function menuTile.render(p7)
 					Badge = roactModule.createElement(statusIndicator, {
 						value = tonumber(badgeValue),
 						max = if tonumber(badgeValue) then 99 else nil,
-						variant = migrateBadgeVariantModule(p7.props.badgeVariant)
+						variant = migrateBadgeVariantModule(p1.props.badgeVariant)
 					})
 				})
 			})
 		})
-	end, p7.props.cursor)
+	end, p1.props.cursor)
 end
 
-function menuTile.willUnmount(p11)
-	if p11.hoverTransparencyMotor then
-		p11.hoverTransparencyMotor:destroy()
+function menuTile.willUnmount(p1)
+	if p1.hoverTransparencyMotor then
+		p1.hoverTransparencyMotor:destroy()
 	end
 end
 
-function MenuTileFunctionalWrapper(p12)
+function MenuTileFunctionalWrapper(p1)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), menuTile (ref), cryoModule (ref)
-	return roactModule.createElement(menuTile, cryoModule.Dictionary.join(p12, {
+	return roactModule.createElement(menuTile, cryoModule.Dictionary.join(p1, {
 		cursor = useCursorByTypeModule(cursorTypeModule.RoundedRect)
 	}))
 end

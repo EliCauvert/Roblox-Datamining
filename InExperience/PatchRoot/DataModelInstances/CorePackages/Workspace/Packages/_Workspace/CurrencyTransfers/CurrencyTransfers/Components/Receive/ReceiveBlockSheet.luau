@@ -8,27 +8,27 @@ local ampWizardTransferConstantsModule = require(currencyTransfers.Constants.Amp
 
 return function(_)
 	-- upvalues: useTransferStoreModule (ref), ampWizardTransferConstantsModule (ref), reactModule (ref), transferFAEBlockSheetModule (ref), VPCBlockContainerModule (ref)
-	local var6 = useTransferStoreModule()
-	local direction = var6.getDirection(false)
-	local ampRecourseActions = var6.getAmpRecourseActions(false)
-	local ampFeatureCheck = var6.getAmpFeatureCheck(false)
-	local var10 = false
-	local var11 = false
+	local var1 = useTransferStoreModule()
+	local direction = var1.getDirection(false)
+	local ampRecourseActions = var1.getAmpRecourseActions(false)
+	local ampFeatureCheck = var1.getAmpFeatureCheck(false)
+	local var2 = false
+	local var3 = false
 	
 	if ampRecourseActions then
 		for i, v in ipairs(ampRecourseActions) do
 			if v == ampWizardTransferConstantsModule.RECOURSE_ID_VERIFICATION or v == ampWizardTransferConstantsModule.RECOURSE_AGE_ESTIMATION then
-				var10 = true
+				var2 = true
 			elseif v == ampWizardTransferConstantsModule.RECOURSE_PARENT_LINK or v == ampWizardTransferConstantsModule.RECOURSE_PARENT_CONSENT then
-				var11 = true
+				var3 = true
 			end
 		end
 	end
-	return if var10 and direction then reactModule.createElement(transferFAEBlockSheetModule, {
+	return if var2 and direction then reactModule.createElement(transferFAEBlockSheetModule, {
 		direction = direction,
 		ampRecourseActions = ampRecourseActions,
 		ampFeatureCheck = ampFeatureCheck
-	}) elseif var11 and direction then reactModule.createElement(VPCBlockContainerModule, {
+	}) elseif var3 and direction then reactModule.createElement(VPCBlockContainerModule, {
 		direction = direction,
 		ampRecourseActions = ampRecourseActions,
 		ampFeatureCheck = ampFeatureCheck

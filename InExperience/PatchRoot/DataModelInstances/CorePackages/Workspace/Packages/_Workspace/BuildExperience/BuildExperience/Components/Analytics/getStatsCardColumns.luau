@@ -1,6 +1,6 @@
 ﻿local breakpoint = require(script:FindFirstAncestor("BuildExperience").Parent.Foundation).Enums.Breakpoint
 
-return function(p0)
+return function(p1)
 	-- upvalues: breakpoint (ref)
-	return if p0 == breakpoint.XSmall then 1 else 2
+	return if p1 == breakpoint.XSmall then 1 else 2
 end

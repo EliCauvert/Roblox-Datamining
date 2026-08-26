@@ -14,8 +14,8 @@ if t == nil then
 	t = {}
 end
 if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p0)
-		return p0
+	function t.FormatMessageToSend(_, _, p1)
+		return p1
 	end
 end
 local t_1 = {
@@ -25,155 +25,155 @@ local t_1 = {
 return function(p1)
 	-- upvalues: chatSettingsModule (ref), displayNameHelpersModule (ref), t (write), t_1 (ref), chatConstantsModule (ref)
 	local function _(p2)
-		local var10 = p2
+		local var1 = p2
 		
 		if string.sub(p2, 1, 1) == "\"" then
 			local matchIndex = string.find(p2, "\"", 2)
 			
 			if matchIndex then
-				var10 = string.sub(p2, 2, matchIndex - 1)
+				var1 = string.sub(p2, 2, matchIndex - 1)
 				
-				return var10
+				return var1
 			end
 		else
 			local match = string.match(p2, "^[^%s]+")
 			
 			if match then
-				var10 = match
+				var1 = match
 			end
 		end
-		return var10
+		return var1
 	end
 	
-	local function DoMuteCommand(p3, p4, p5)
+	local function DoMuteCommand(p2, p3, p4)
 		-- upvalues: p1 (ref), chatSettingsModule (copy), displayNameHelpersModule (copy), t (copy), t_1 (copy)
-		local var13 = p4
+		local var1 = p3
 		
-		if string.sub(p4, 1, 1) == "\"" then
-			local matchIndex = string.find(p4, "\"", 2)
+		if string.sub(p3, 1, 1) == "\"" then
+			local matchIndex = string.find(p3, "\"", 2)
 			
 			if matchIndex then
-				var13 = string.sub(p4, 2, matchIndex - 1)
+				var1 = string.sub(p3, 2, matchIndex - 1)
 			end
 		else
-			local match = string.match(p4, "^[^%s]+")
+			local match = string.match(p3, "^[^%s]+")
 			
 			if match then
-				var13 = match
+				var1 = match
 			end
 		end
-		local var16 = p1:GetSpeaker(p3)
+		local var2 = p1:GetSpeaker(p2)
 		
-		if var16 then
-			local var19, var20
+		if var2 then
+			local var3, var4
 			local _ = nil
 			local _ = nil
 			
 			if chatSettingsModule.PlayerDisplayNamesEnabled then
-				local userNameFromChattedName, userNameFromChattedName_1 = displayNameHelpersModule.getUserNameFromChattedName(var13, p3, var16:GetNameForDisplay())
-				var19 = userNameFromChattedName
-				var20 = userNameFromChattedName_1
+				local userNameFromChattedName, userNameFromChattedName_1 = displayNameHelpersModule.getUserNameFromChattedName(var1, p2, var2:GetNameForDisplay())
+				var3 = userNameFromChattedName
+				var4 = userNameFromChattedName_1
 			else
-				local userNameFromChattedName, userNameFromChattedName_1 = displayNameHelpersModule.getUserNameFromChattedName(var13, p3, nil)
-				var19 = userNameFromChattedName
-				var20 = userNameFromChattedName_1
+				local userNameFromChattedName, userNameFromChattedName_1 = displayNameHelpersModule.getUserNameFromChattedName(var1, p2, nil)
+				var3 = userNameFromChattedName
+				var4 = userNameFromChattedName_1
 			end
-			local var23 = p1:GetSpeaker(var19)
+			local var5 = p1:GetSpeaker(var3)
 			
-			if var20 == displayNameHelpersModule.CommandErrorCodes.ChattingToSelf then
-				var16:SendSystemMessage(t:FormatMessageToSend("GameChat_DoMuteCommand_CannotMuteSelf", "You cannot mute yourself."), p5, t_1)
+			if var4 == displayNameHelpersModule.CommandErrorCodes.ChattingToSelf then
+				var2:SendSystemMessage(t:FormatMessageToSend("GameChat_DoMuteCommand_CannotMuteSelf", "You cannot mute yourself."), p4, t_1)
 				
 				return
-			elseif var20 == displayNameHelpersModule.CommandErrorCodes.NoMatches then
-				var16:SendSystemMessage(t:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", tostring(var13)), "RBX_NAME", tostring(var19)), p5, t_1)
+			elseif var4 == displayNameHelpersModule.CommandErrorCodes.NoMatches then
+				var2:SendSystemMessage(t:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", tostring(var1)), "RBX_NAME", tostring(var3)), p4, t_1)
 				
 				return
-			elseif var20 == displayNameHelpersModule.CommandErrorCodes.MultipleMatches then
-				local usersWithDisplayNameString = displayNameHelpersModule.getUsersWithDisplayNameString(var13, p3)
-				var16:SendSystemMessage(t:FormatMessageToSend("InGame.Chat.Response.DisplayNameMultipleMatches", "Warning: The following users have this display name: "), p5, t_1)
-				var16:SendSystemMessage(usersWithDisplayNameString, p5, t_1)
+			elseif var4 == displayNameHelpersModule.CommandErrorCodes.MultipleMatches then
+				local usersWithDisplayNameString = displayNameHelpersModule.getUsersWithDisplayNameString(var1, p2)
+				var2:SendSystemMessage(t:FormatMessageToSend("InGame.Chat.Response.DisplayNameMultipleMatches", "Warning: The following users have this display name: "), p4, t_1)
+				var2:SendSystemMessage(usersWithDisplayNameString, p4, t_1)
 				
 				return
-			elseif var23 then
-				var16:AddMutedSpeaker(var23.Name)
-				local var25 = if chatSettingsModule.PlayerDisplayNamesEnabled then var23:GetNameForDisplay() else var19
-				var16:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMain_SpeakerHasBeenMuted", string.format("Speaker '%s' has been muted.", var25), "RBX_NAME", var25), p5)
+			elseif var5 then
+				var2:AddMutedSpeaker(var5.Name)
+				local var6 = if chatSettingsModule.PlayerDisplayNamesEnabled then var5:GetNameForDisplay() else var3
+				var2:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMain_SpeakerHasBeenMuted", string.format("Speaker '%s' has been muted.", var6), "RBX_NAME", var6), p4)
 			end
 		end
 	end
 	
-	local function DoUnmuteCommand(p6, p7, p8)
+	local function DoUnmuteCommand(p2, p3, p4)
 		-- upvalues: p1 (ref), chatSettingsModule (copy), displayNameHelpersModule (copy), t (copy), t_1 (copy)
-		local var26 = p7
+		local var1 = p3
 		
-		if string.sub(p7, 1, 1) == "\"" then
-			local matchIndex = string.find(p7, "\"", 2)
+		if string.sub(p3, 1, 1) == "\"" then
+			local matchIndex = string.find(p3, "\"", 2)
 			
 			if matchIndex then
-				var26 = string.sub(p7, 2, matchIndex - 1)
+				var1 = string.sub(p3, 2, matchIndex - 1)
 			end
 		else
-			local match = string.match(p7, "^[^%s]+")
+			local match = string.match(p3, "^[^%s]+")
 			
 			if match then
-				var26 = match
+				var1 = match
 			end
 		end
-		local var29 = p1:GetSpeaker(p6)
+		local var2 = p1:GetSpeaker(p2)
 		
-		if var29 then
-			local var32, var33
+		if var2 then
+			local var3, var4
 			local _ = nil
 			local _ = nil
 			
 			if chatSettingsModule.PlayerDisplayNamesEnabled then
-				local userNameFromChattedName, userNameFromChattedName_1 = displayNameHelpersModule.getUserNameFromChattedName(var26, p6, var29:GetNameForDisplay())
-				var32 = userNameFromChattedName
-				var33 = userNameFromChattedName_1
+				local userNameFromChattedName, userNameFromChattedName_1 = displayNameHelpersModule.getUserNameFromChattedName(var1, p2, var2:GetNameForDisplay())
+				var3 = userNameFromChattedName
+				var4 = userNameFromChattedName_1
 			else
-				local userNameFromChattedName, userNameFromChattedName_1 = displayNameHelpersModule.getUserNameFromChattedName(var26, p6, nil)
-				var32 = userNameFromChattedName
-				var33 = userNameFromChattedName_1
+				local userNameFromChattedName, userNameFromChattedName_1 = displayNameHelpersModule.getUserNameFromChattedName(var1, p2, nil)
+				var3 = userNameFromChattedName
+				var4 = userNameFromChattedName_1
 			end
-			local var36 = p1:GetSpeaker(var32)
+			local var5 = p1:GetSpeaker(var3)
 			
-			if var33 == displayNameHelpersModule.CommandErrorCodes.ChattingToSelf then
-				var29:SendSystemMessage(t:FormatMessageToSend("GameChat_DoMuteCommand_CannotMuteSelf", "You cannot mute yourself."), p8, t_1)
+			if var4 == displayNameHelpersModule.CommandErrorCodes.ChattingToSelf then
+				var2:SendSystemMessage(t:FormatMessageToSend("GameChat_DoMuteCommand_CannotMuteSelf", "You cannot mute yourself."), p4, t_1)
 				
 				return
-			elseif var33 == displayNameHelpersModule.CommandErrorCodes.NoMatches then
-				var29:SendSystemMessage(t:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", tostring(var32)), "RBX_NAME", tostring(var32)), p8, t_1)
+			elseif var4 == displayNameHelpersModule.CommandErrorCodes.NoMatches then
+				var2:SendSystemMessage(t:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", tostring(var3)), "RBX_NAME", tostring(var3)), p4, t_1)
 				
 				return
-			elseif var33 == displayNameHelpersModule.CommandErrorCodes.MultipleMatches then
-				local usersWithDisplayNameString = displayNameHelpersModule.getUsersWithDisplayNameString(var26, p6)
-				var29:SendSystemMessage(t:FormatMessageToSend("InGame.Chat.Response.DisplayNameMultipleMatches", "Warning: The following users have this display name: "), p8, t_1)
-				var29:SendSystemMessage(usersWithDisplayNameString, p8, t_1)
+			elseif var4 == displayNameHelpersModule.CommandErrorCodes.MultipleMatches then
+				local usersWithDisplayNameString = displayNameHelpersModule.getUsersWithDisplayNameString(var1, p2)
+				var2:SendSystemMessage(t:FormatMessageToSend("InGame.Chat.Response.DisplayNameMultipleMatches", "Warning: The following users have this display name: "), p4, t_1)
+				var2:SendSystemMessage(usersWithDisplayNameString, p4, t_1)
 				
 				return
-			elseif var36 then
-				var29:RemoveMutedSpeaker(var36.Name)
-				local var38 = if chatSettingsModule.PlayerDisplayNamesEnabled then var36:GetNameForDisplay() else var32
-				var29:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMain_SpeakerHasBeenUnMuted", string.format("Speaker '%s' has been unmuted.", var38), "RBX_NAME", var38), p8)
+			elseif var5 then
+				var2:RemoveMutedSpeaker(var5.Name)
+				local var6 = if chatSettingsModule.PlayerDisplayNamesEnabled then var5:GetNameForDisplay() else var3
+				var2:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMain_SpeakerHasBeenUnMuted", string.format("Speaker '%s' has been unmuted.", var6), "RBX_NAME", var6), p4)
 				
 				return
 			end
 		end
 	end
 	
-	p1:RegisterProcessCommandsFunction("mute_commands", function(p9, p10, p11)
+	p1:RegisterProcessCommandsFunction("mute_commands", function(p2, p3, p4)
 		-- upvalues: DoMuteCommand (ref), DoUnmuteCommand (ref)
-		local var39 = false
+		local var1 = false
 		
-		if string.sub(p10, 1, 6):lower() == "/mute " then
-			DoMuteCommand(p9, string.sub(p10, 7), p11)
-			var39 = true
+		if string.sub(p3, 1, 6):lower() == "/mute " then
+			DoMuteCommand(p2, string.sub(p3, 7), p4)
+			var1 = true
 			
-			return var39
-		elseif string.sub(p10, 1, 8):lower() == "/unmute " then
-			DoUnmuteCommand(p9, string.sub(p10, 9), p11)
-			var39 = true
+			return var1
+		elseif string.sub(p3, 1, 8):lower() == "/unmute " then
+			DoUnmuteCommand(p2, string.sub(p3, 9), p4)
+			var1 = true
 		end
-		return var39
+		return var1
 	end, chatConstantsModule.StandardPriority)
 end

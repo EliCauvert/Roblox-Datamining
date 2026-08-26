@@ -1,9 +1,9 @@
-﻿local var0 = require(script.Parent.class)("Symbol", function(p0)
-	return { name = p0 }
+﻿local var1 = require(script.Parent.class)("Symbol", function(p1)
+	return { name = p1 }
 end)
 
 function var0.toString(p1)
 	return ("Symbol(%s)"):format(p1.name)
 end
 
-return var0
+return var1

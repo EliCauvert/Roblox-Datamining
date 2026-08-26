@@ -2,115 +2,115 @@
 local discoveryAppLaunchTracker = require(sduiCoreSystem.Parent.AppLaunchTracker).DiscoveryAppLaunchTracker
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
-local var2 = math.random(10000) <= game:DefineFastInt("DiscoverySduiInstrumentationHundredthsPercent", 0)
+local var1 = math.random(10000) <= game:DefineFastInt("DiscoverySduiInstrumentationHundredthsPercent", 0)
 local t = {}
 t.__index = t
 
-function t.new(p0, p1)
-	-- upvalues: var2 (ref), t (ref)
+function t.new(p1, p2)
+	-- upvalues: var1 (ref), t (ref)
 	local t_1 = {
 		startTime = 0,
 		openTimerCount = 0,
 		isFlushScheduled = false,
 		openTimers = {},
 		closedTimers = {},
-		flushDelay = p0 or 0.1,
-		enabled = p1 or var2
+		flushDelay = p1 or 0.1,
+		enabled = p2 or var1
 	}
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-function t:startTimerFlow(p2)
+function t:startTimerFlow(p1)
 	if not self.enabled then return end
-	local var5 = 1000 * os.clock()
+	local var2 = 1000 * os.clock()
 	
 	if self.openTimerCount == 0 then
-		self.startTime = var5
+		self.startTime = var2
 	end
 	self.openTimerCount += 1
-	local var6 = self.openTimers[p2]
+	local var3 = self.openTimers[p1]
 	
-	if not var6 then
-		self.openTimers[p2] = { failed = 0, count = 1, openCount = 1, startTime = var5 }
+	if not var3 then
+		self.openTimers[p1] = { failed = 0, count = 1, openCount = 1, startTime = var2 }
 		
 		return
-	elseif var6.openCount == 0 then
-		var6.startTime = var5
+	elseif var3.openCount == 0 then
+		var3.startTime = var2
 	end
-	var6.count += 1
-	var6.openCount += 1
+	var3.count += 1
+	var3.openCount += 1
 end
 
-function t:stopTimerFlow(p3, p4, p5)
+function t:stopTimerFlow(p1, p2, p3)
 	-- upvalues: sduiErrorsModule (ref), discoveryAppLaunchTracker (ref)
 	if not self.enabled then return end
 	self.openTimerCount -= 1
-	local var7 = self.openTimers[p3]
+	local var2 = self.openTimers[p1]
 	
-	if not var7 then
-		p4.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.NilInstrumentationTimer, {
+	if not var2 then
+		p2.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.NilInstrumentationTimer, {
 			message = "Failed to find timer when calling stopTimer",
-			name = p3
-		}, p4.appPage)
+			name = p1
+		}, p2.appPage)
 		
 		return
-	elseif p5 then
-		var7.failed += 1
+	elseif p3 then
+		var2.failed += 1
 	end
-	var7.openCount -= 1
+	var2.openCount -= 1
 	
-	if var7.openCount == 0 then
-		local var8 = 1000 * os.clock()
-		self:aggregateClosedTimer(p3, var7.count, var7.failed, var8 - var7.startTime)
-		self.openTimers[p3] = nil
+	if var2.openCount == 0 then
+		local var3 = 1000 * os.clock()
+		self:aggregateClosedTimer(p1, var2.count, var2.failed, var3 - var2.startTime)
+		self.openTimers[p1] = nil
 		
 		if self.openTimerCount == 0 then
-			self:scheduleFlush(p4)
-			local var9 = var8 - self.startTime
+			self:scheduleFlush(p2)
+			local var4 = var3 - self.startTime
 			
 			if discoveryAppLaunchTracker.isEnabled() and discoveryAppLaunchTracker.default then
-				discoveryAppLaunchTracker.default:trackSduiDuration(var9)
+				discoveryAppLaunchTracker.default:trackSduiDuration(var4)
 				
 				return
 			end
 		elseif self.openTimerCount < 1 then
-			p4.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.ImbalancedStartStopTimer, {
-				name = p3,
+			p2.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.ImbalancedStartStopTimer, {
+				name = p1,
 				message = `Negative timer count when stopping timer {self.openTimerCount}`
-			}, p4.appPage)
+			}, p2.appPage)
 		end
 	end
 end
 
-function t:aggregateClosedTimer(p6, p7, p8, p9)
-	local var10 = self.closedTimers[p6]
+function t:aggregateClosedTimer(p1, p2, p3, p4)
+	local var2 = self.closedTimers[p1]
 	
-	if var10 then
-		var10.failed += p8
-		var10.count += p7
-		var10.durationMs += p9
+	if var2 then
+		var2.failed += p3
+		var2.count += p2
+		var2.durationMs += p4
 		
 		return
 	end
-	self.closedTimers[p6] = { failed = p8, count = p7, durationMs = p9 }
+	self.closedTimers[p1] = { failed = p3, count = p2, durationMs = p4 }
 end
 
-function t:scheduleFlush(p10)
+function t:scheduleFlush(p1)
 	if self.enabled and not self.isFlushScheduled then
 		task.delay(self.flushDelay, function()
-			-- upvalues: self (ref), p10 (ref)
+			-- upvalues: self (ref), p1 (ref)
 			self.isFlushScheduled = false
-			self:reportTimers(p10)
+			self:reportTimers(p1)
 		end)
 		self.isFlushScheduled = true
 	end
 end
 
-function t:reportTimers(p11)
+function t:reportTimers(p1)
 	if self.enabled then
-		p11.dependencies.logger.reportTimers(self.closedTimers, p11.appPage)
+		p1.dependencies.logger.reportTimers(self.closedTimers, p1.appPage)
 		self.closedTimers = {}
 	end
 end

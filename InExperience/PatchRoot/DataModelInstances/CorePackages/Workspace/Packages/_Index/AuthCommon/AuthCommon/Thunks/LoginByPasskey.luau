@@ -12,41 +12,41 @@ local fFlagEnableRecordLogin = require(parent.SharedFlags).FFlagEnableRecordLogi
 local logger = require(parent.Loggers).Logger
 local recordLoginModule = require(authCommon.Utils.recordLogin)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: loginRequestsModule (ref), loginResultModule (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), fFlagEnableRecordLogin (ref), recordLoginModule (ref), logger (ref), httpService (ref), loginErrorCodesModule (ref), promiseModule (ref)
 	return function(_)
-		-- upvalues: loginRequestsModule (copy), p0 (ref), p1 (ref), p2 (ref), loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), logger (copy), httpService (copy), loginErrorCodesModule (copy), promiseModule (copy)
-		return loginRequestsModule.logByPasskey(p0, p1, p2):andThen(function(p3)
+		-- upvalues: loginRequestsModule (copy), p1 (ref), p2 (ref), p3 (ref), loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), logger (copy), httpService (copy), loginErrorCodesModule (copy), promiseModule (copy)
+		return loginRequestsModule.logByPasskey(p1, p2, p3):andThen(function(p4)
 			-- upvalues: loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy)
-			assert(p3, "no login attempt result")
-			assert(#p3 == 1, "no result or more than one result")
-			local var9 = loginResultModule.fromJsonData(p3[1])
-			assert(var9, "result invalid")
+			assert(p4, "no login attempt result")
+			assert(#p4 == 1, "no result or more than one result")
+			local var1 = loginResultModule.fromJsonData(p4[1])
+			assert(var1, "result invalid")
 			
 			if fFlagEnableLastLoginMethodTracking then
 				appStorageUtilitiesModule.setLastSuccessfulSignInMethod(loginMethodsModule.Passkey)
 			end
 			if fFlagEnableRecordLogin then
 				pcall(function()
-					-- upvalues: recordLoginModule (copy), var9 (ref), loginMethodsModule (copy)
-					recordLoginModule(var9, loginMethodsModule.Passkey, var9.user.name)
+					-- upvalues: recordLoginModule (copy), var1 (ref), loginMethodsModule (copy)
+					recordLoginModule(var1, loginMethodsModule.Passkey, var1.user.name)
 				end)
 			end
-			return var9
+			return var1
 		end, function(p4)
 			-- upvalues: logger (copy), httpService (copy), loginErrorCodesModule (copy), promiseModule (copy)
 			logger:error("Error logging in by passkey. Error: {}", p4.Body)
 			local body = httpService:JSONDecode(p4.Body)
 			local code = body.errors[1].code
-			local var11 = "Authentication.Login.Response.SomethingWentWrong"
+			local var1 = "Authentication.Login.Response.SomethingWentWrong"
 			local userFacingMessage = body and (body.errors and (body.errors[1] and body.errors[1].userFacingMessage))
 			
 			if code == loginErrorCodesModule.IncorrectCValueOrPassword then
-				var11 = "Authentication.Login.Response.InvalidPasskeyCredential"
+				var1 = "Authentication.Login.Response.InvalidPasskeyCredential"
 			end
 			return promiseModule.reject({
 				errorCode = code,
-				errorKey = var11,
+				errorKey = var1,
 				userFacingMessage = userFacingMessage
 			})
 		end)

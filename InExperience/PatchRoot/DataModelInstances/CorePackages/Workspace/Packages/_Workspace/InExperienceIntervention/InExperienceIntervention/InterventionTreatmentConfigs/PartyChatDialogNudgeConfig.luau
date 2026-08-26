@@ -6,9 +6,9 @@ local interventionAnalytics = require(parent.InterventionShared).InterventionAna
 
 return {
 	configName = "PartyChatDialogNudge",
-	shouldTriggerVisualTreatment = function(p0)
+	shouldTriggerVisualTreatment = function(p1)
 		-- upvalues: constants (ref)
-		return p0.type == constants.NotificationDialogType.ChatNudge and (p0.modalType == constants.NotificationModalType.Dialog and p0.abuseVector == constants.AbuseVectorType.PartyChat)
+		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Dialog and p1.abuseVector == constants.AbuseVectorType.PartyChat)
 	end,
 	shouldTriggerBehavioralTreatment = function(_)
 		return false
@@ -17,25 +17,25 @@ return {
 		-- upvalues: constants (ref)
 		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Dialog and p1.abuseVector == constants.AbuseVectorType.PartyChat)
 	end,
-	onTriggerVisualTreatment = function(p2, p3)
+	onTriggerVisualTreatment = function(p1, p2)
 		-- upvalues: constants (ref)
-		p2({
+		p1({
 			isShown = true,
 			type = constants.UIStateActions.ToggleNotificationDialog,
 			treatmentType = constants.TreatmentType.PartyChatNudgeDialog,
-			detail = p3
+			detail = p2
 		})
 	end,
 	onTriggerBehavioralTreatment = function(_) end,
-	onTriggerEventReceived = function(p4)
+	onTriggerEventReceived = function(p1)
 		-- upvalues: interventionAnalytics (ref), constants (ref)
 		interventionAnalytics.sendAnalyticsEvent(interventionAnalytics.TelemetryConfigs.MessageReceived, {
 			eventType = interventionAnalytics.Constants.EventTypes.ModalMessageReceived,
 			counterNamespace = interventionAnalytics.Constants.CounterNamespaceTypes.PartyChat,
 			interventionType = interventionAnalytics.Constants.InterventionTypes.PartyChatNudge,
 			renderedTimestamp = DateTime.now().UnixTimestampMillis,
-			eventId = p4.decisionEventId,
-			duration = p4.timeoutDurationSeconds,
+			eventId = p1.decisionEventId,
+			duration = p1.timeoutDurationSeconds,
 			placement = constants.InterventionPlacementType.InExperience
 		})
 	end

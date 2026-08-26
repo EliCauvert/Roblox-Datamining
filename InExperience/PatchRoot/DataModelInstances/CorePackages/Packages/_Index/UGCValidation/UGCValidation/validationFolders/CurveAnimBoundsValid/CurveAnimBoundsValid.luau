@@ -24,24 +24,24 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), getFFlagUGCValidateCurveAnimTimeErrorMessageFixModule (ref), getFStringUGCValidateAnimationHeightTolModule (ref), getFStringUGCValidationMaxAnimationBoundsModule (ref), errorSourceStringsModule (ref)
-	local var9, var10
-	local curveAnimComputedFrames = p1.curveAnimComputedFrames
+	local var1, var2
+	local curveAnimComputedFrames = p2.curveAnimComputedFrames
 	local animFrames = curveAnimComputedFrames.animFrames
 	local animLength = curveAnimComputedFrames.animLength
-	local var8 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
+	local var3 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
 	
 	if getFFlagUGCValidateCurveAnimTimeErrorMessageFixModule() then
-		var9 = getFStringUGCValidateAnimationHeightTolModule.asNumber()
-		var10 = getFStringUGCValidationMaxAnimationBoundsModule.asNumber()
+		var1 = getFStringUGCValidateAnimationHeightTolModule.asNumber()
+		var2 = getFStringUGCValidationMaxAnimationBoundsModule.asNumber()
 		
 		for i, v in animFrames do
 			for i_1, v_1 in v do
-				if v_1.Position.Y >= var9 then
-					if var10 < v_1.Position.Magnitude then
-						p0:fail(errorSourceStringsModule.Keys.CurveAnim_PartTooFar, {
-							time = string.format("%.2f", math.min(animLength, (i - 1) * var8)),
+				if v_1.Position.Y >= var1 then
+					if var2 < v_1.Position.Magnitude then
+						p1:fail(errorSourceStringsModule.Keys.CurveAnim_PartTooFar, {
+							time = string.format("%.2f", math.min(animLength, (i - 1) * var3)),
 							bodyPart = i_1,
 							distance = string.format("%.2f", v_1.Position.Magnitude),
 							maxDistance = getFStringUGCValidationMaxAnimationBoundsModule.asString()
@@ -50,8 +50,8 @@ function t.run(p0, p1)
 						return
 					end
 				end
-				p0:fail(errorSourceStringsModule.Keys.CurveAnim_PartTooLow, {
-					time = string.format("%.2f", math.min(animLength, (i - 1) * var8)),
+				p1:fail(errorSourceStringsModule.Keys.CurveAnim_PartTooLow, {
+					time = string.format("%.2f", math.min(animLength, (i - 1) * var3)),
 					bodyPart = i_1,
 					height = string.format("%.2f", v_1.Position.Y),
 					minHeight = getFStringUGCValidateAnimationHeightTolModule.asString()
@@ -62,23 +62,23 @@ function t.run(p0, p1)
 		end
 		return
 	else
-		var9 = 1e999
-		var10 = 0
+		var1 = 1e999
+		var2 = 0
 		
 		for i, v in animFrames do
 			for i_1, v_1 in v do
-				var10 = math.max(var10, v_1.Position.Magnitude)
-				var9 = math.min(var9, v_1.Position.Y)
+				var2 = math.max(var2, v_1.Position.Magnitude)
+				var1 = math.min(var1, v_1.Position.Y)
 			end
 		end
-		if var9 < getFStringUGCValidateAnimationHeightTolModule.asNumber() then
-			p0:fail(errorSourceStringsModule.Keys.CurveAnim_BoundsExceeded, {
+		if var1 < getFStringUGCValidateAnimationHeightTolModule.asNumber() then
+			p1:fail(errorSourceStringsModule.Keys.CurveAnim_BoundsExceeded, {
 				minHeight = getFStringUGCValidateAnimationHeightTolModule.asString(),
 				maxDistance = getFStringUGCValidationMaxAnimationBoundsModule.asString()
 			})
 		end
-		if getFStringUGCValidationMaxAnimationBoundsModule.asNumber() < var10 then
-			p0:fail(errorSourceStringsModule.Keys.CurveAnim_BoundsExceeded, {
+		if getFStringUGCValidationMaxAnimationBoundsModule.asNumber() < var2 then
+			p1:fail(errorSourceStringsModule.Keys.CurveAnim_BoundsExceeded, {
 				minHeight = getFStringUGCValidateAnimationHeightTolModule.asString(),
 				maxDistance = getFStringUGCValidationMaxAnimationBoundsModule.asString()
 			})

@@ -3,12 +3,12 @@ local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local url = require(parent.Http).Url
 
 return {
-	buildFavoriteUrl = function(p0)
+	buildFavoriteUrl = function(p1)
 		-- upvalues: urlBuilder (ref), url (ref)
 		return urlBuilder.new({
 			path = "v1/games/{universeId}/favorites",
 			base = url.GAME_URL
-		})({ universeId = p0 })
+		})({ universeId = p1 })
 	end,
 	buildFavoriteUpdateUrl = function(p1)
 		-- upvalues: urlBuilder (ref), url (ref)

@@ -4,11 +4,11 @@ local createGenerateLinkModule = require(networkRequests.createGenerateLink)
 local createGetOrGenerateLinkModule = require(networkRequests.createGetOrGenerateLink)
 local createResolveLinkFromLinkIdModule = require(networkRequests.createResolveLinkFromLinkId)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createResolveLinkFromLinkIdModule (ref), createGenerateLinkModule (ref), createGetOrGenerateLinkModule (ref)
 	return {
-		ResolveLinkFromLinkId = createResolveLinkFromLinkIdModule(p0),
-		GenerateLink = createGenerateLinkModule(p0),
-		GetOrGenerateLink = createGetOrGenerateLinkModule(p0)
+		ResolveLinkFromLinkId = createResolveLinkFromLinkIdModule(p1),
+		GenerateLink = createGenerateLinkModule(p1),
+		GetOrGenerateLink = createGetOrGenerateLinkModule(p1)
 	}
 end

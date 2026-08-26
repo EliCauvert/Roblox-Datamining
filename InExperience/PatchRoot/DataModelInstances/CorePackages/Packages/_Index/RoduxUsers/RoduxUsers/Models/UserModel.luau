@@ -2,13 +2,13 @@
 local mockIdModule = require(script.Parent.MockId)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -24,23 +24,23 @@ function t.mock(p1)
 	})
 end
 
-function t.isValid(p2)
-	if not p2 then
+function t.isValid(p1)
+	if not p1 then
 		return false, "Expected user information to be given"
-	elseif not p2.id then
+	elseif not p1.id then
 		return false, "Expected user's id to be given"
-	elseif p2.id ~= "0" and not p2.username then
+	elseif p1.id ~= "0" and not p1.username then
 		return false, "Expected user's username to be given"
-	elseif not p2.displayName then
+	elseif not p1.displayName then
 		return false, "Expected user's displayName to be given"
-	elseif game:GetFastFlag("EnableHasVerifiedBadgeUserModelValidation") and p2.hasVerifiedBadge == nil then
+	elseif game:GetFastFlag("EnableHasVerifiedBadgeUserModelValidation") and p1.hasVerifiedBadge == nil then
 		return false, "Expected user's hasVerifiedBadge to be given"
 	end
 	return true, "Valid UserModel"
 end
 
-function t.isEqual(p3, p4)
-	return if game:GetFastFlag("EnableHasVerifiedBadgeUserModelValidation") then p3.id == p4.id and (p3.username == p4.username and (p3.displayName == p4.displayName and p3.hasVerifiedBadge == p4.hasVerifiedBadge)) else p3.id == p4.id and (p3.username == p4.username and p3.displayName == p4.displayName)
+function t.isEqual(p1, p2)
+	return if game:GetFastFlag("EnableHasVerifiedBadgeUserModelValidation") then p1.id == p2.id and (p1.username == p2.username and (p1.displayName == p2.displayName and p1.hasVerifiedBadge == p2.hasVerifiedBadge)) else p1.id == p2.id and (p1.username == p2.username and p1.displayName == p2.displayName)
 end
 
 return t

@@ -8,9 +8,9 @@ local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 local tutilsModule = require(parent.tutils)
 local luaAppMutedSetNetworkingErrorToast = game:DefineFastFlag("LuaAppMutedSetNetworkingErrorToast", false)
 
-local function getUserFacingMessage(p0)
+local function getUserFacingMessage(p1)
 	-- upvalues: httpService (ref), luaAppMutedSetNetworkingErrorToast (ref), mutedError (ref), tutilsModule (ref)
-	local ok, status = pcall(httpService.JSONDecode, httpService, p0.Body)
+	local ok, status = pcall(httpService.JSONDecode, httpService, p1.Body)
 	
 	if not ok then
 		return nil
@@ -26,35 +26,35 @@ local function getUserFacingMessage(p0)
 			end
 		end
 	elseif luaAppMutedSetNetworkingErrorToast then
-		mutedError("No errors given in err.Body, err = " .. tutilsModule.toString(p0))
+		mutedError("No errors given in err.Body, err = " .. tutilsModule.toString(p1))
 	end
 	return nil
 end
 
-return function(p1)
+return function(p2)
 	-- upvalues: getUserFacingMessage (ref), setCurrentToastMessage (ref), toastType (ref), getLocalizedToastStringFromHttpErrorModule (ref)
-	p1 = p1 or {}
-	assert(p1, "not nil")
+	p2 = p2 or {}
+	assert(p2, "not nil")
 	
-	return function(p2)
-		-- upvalues: getUserFacingMessage (copy), p1 (write), setCurrentToastMessage (copy), toastType (copy), getLocalizedToastStringFromHttpErrorModule (copy)
-		local var6 = getUserFacingMessage(p1)
+	return function(p3)
+		-- upvalues: getUserFacingMessage (copy), p2 (write), setCurrentToastMessage (copy), toastType (copy), getLocalizedToastStringFromHttpErrorModule (copy)
+		local var1 = getUserFacingMessage(p2)
 		
-		if var6 then
-			p2:dispatch(setCurrentToastMessage({
+		if var1 then
+			p3:dispatch(setCurrentToastMessage({
 				isLocalized = true,
 				toastType = toastType.InformationMessage,
-				toastMessage = var6
+				toastMessage = var1
 			}))
 			
 			return
 		end
-		local var7 = getLocalizedToastStringFromHttpErrorModule(p1.HttpError, p1.StatusCode)
+		local var2 = getLocalizedToastStringFromHttpErrorModule(p2.HttpError, p2.StatusCode)
 		
-		if var7 ~= nil then
-			p2:dispatch(setCurrentToastMessage({
+		if var2 ~= nil then
+			p3:dispatch(setCurrentToastMessage({
 				toastType = toastType.NetworkingError,
-				toastMessage = var7
+				toastMessage = var2
 			}))
 		end
 	end

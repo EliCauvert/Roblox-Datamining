@@ -2,19 +2,19 @@
 local _ = require(script.Parent.UserPickerTypes)
 local buildExperienceUserPickerSearchDebounceMs = game:DefineFastInt("BuildExperienceUserPickerSearchDebounceMs", 250)
 
-local function _(p0)
-	return string.gsub(p0, "^%s*(.-)%s*$", "%1")
+local function _(p1)
+	return string.gsub(p1, "^%s*(.-)%s*$", "%1")
 end
 
 local _ = function(p1)
-	local var3 = 0
+	local var1 = 0
 	
 	for i, v in p1 do
 		if v then
-			var3 += 1
+			var1 += 1
 		end
 	end
-	return var3
+	return var1
 end
 
 local function appendUniqueIds(p2, p3)
@@ -43,48 +43,48 @@ return function(p4)
 	local selectionLimit = p4.selectionLimit
 	local onSelectionChanged = p4.onSelectionChanged
 	local excludeUserIds = p4.excludeUserIds
-	local var6, var7 = reactModule.useState("")
-	local var8, var9 = reactModule.useState({})
-	local var10, var11 = reactModule.useState(nil)
-	local var12, var13 = reactModule.useState(false)
-	local var14, var15 = reactModule.useState({})
-	local var16, var17 = reactModule.useState("")
-	local var18, var19 = reactModule.useState(false)
-	local var20 = reactModule.useRef(false)
-	local var21 = reactModule.useRef(0)
-	local var22 = reactModule.useRef(false)
-	local var23 = string.gsub(var6, "^%s*(.-)%s*$", "%1") ~= ""
+	local var2, var3 = reactModule.useState("")
+	local var4, var5 = reactModule.useState({})
+	local var6, var7 = reactModule.useState(nil)
+	local var8, var9 = reactModule.useState(false)
+	local var10, var11 = reactModule.useState({})
+	local var12, var13 = reactModule.useState("")
+	local var14, var15 = reactModule.useState(false)
+	local var16 = reactModule.useRef(false)
+	local var17 = reactModule.useRef(0)
+	local var18 = reactModule.useRef(false)
+	local var19 = string.gsub(var2, "^%s*(.-)%s*$", "%1") ~= ""
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var9 (ref), var11 (ref), var13 (ref), var21 (ref), buildExperienceUserPickerSearchDebounceMs (copy), onSearch (ref)
-		local replaced = string.gsub(var6, "^%s*(.-)%s*$", "%1")
+		-- upvalues: var2 (ref), var5 (ref), var7 (ref), var9 (ref), var17 (ref), buildExperienceUserPickerSearchDebounceMs (copy), onSearch (ref)
+		local replaced = string.gsub(var2, "^%s*(.-)%s*$", "%1")
 		
 		if replaced == "" then
-			var9({})
-			var11(nil)
-			var13(false)
+			var5({})
+			var7(nil)
+			var9(false)
 			
 			return
 		end
-		var21.current += 1
-		local current = var21.current
-		var9({})
-		var11(nil)
-		var13(true)
+		var17.current += 1
+		local current = var17.current
+		var5({})
+		var7(nil)
+		var9(true)
 		replaced = task.delay(buildExperienceUserPickerSearchDebounceMs / 1000, function()
-			-- upvalues: onSearch (copy), replaced (ref), var21 (copy), current (ref), var9 (copy), var11 (copy), var13 (copy)
+			-- upvalues: onSearch (copy), replaced (ref), var17 (copy), current (ref), var5 (copy), var7 (copy), var9 (copy)
 			onSearch(replaced):andThen(function(p5)
-				-- upvalues: var21 (copy), current (copy), var9 (copy), var11 (copy), var13 (copy)
-				if var21.current == current then
-					var9(p5.ids)
-					var11(p5.nextCursor)
-					var13(false)
+				-- upvalues: var17 (copy), current (copy), var5 (copy), var7 (copy), var9 (copy)
+				if var17.current == current then
+					var5(p5.ids)
+					var7(p5.nextCursor)
+					var9(false)
 				end
 			end):catch(function()
-				-- upvalues: var21 (copy), current (copy), var9 (copy), var11 (copy), var13 (copy)
-				if var21.current == current then
-					var9({})
-					var11(nil)
-					var13(false)
+				-- upvalues: var17 (copy), current (copy), var5 (copy), var7 (copy), var9 (copy)
+				if var17.current == current then
+					var5({})
+					var7(nil)
+					var9(false)
 				end
 			end)
 		end)
@@ -93,179 +93,179 @@ return function(p4)
 			-- upvalues: replaced (ref)
 			pcall(task.cancel, replaced)
 		end
-	end, { var6, onSearch })
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: var23 (ref), var20 (ref), var10 (ref), var21 (ref), onSearch (ref), var6 (ref), var9 (ref), appendUniqueIds (copy), var11 (ref), loadMoreBrowse (ref)
-		if not var23 then
+	end, { var2, onSearch })
+	local var20 = reactModule.useCallback(function()
+		-- upvalues: var19 (ref), var16 (ref), var6 (ref), var17 (ref), onSearch (ref), var2 (ref), var5 (ref), appendUniqueIds (copy), var7 (ref), loadMoreBrowse (ref)
+		if not var19 then
 			loadMoreBrowse()
 			
 			return
-		elseif var20.current or var10 == nil then
+		elseif var16.current or var6 == nil then
 			return
 		end
-		var20.current = true
-		local current = var21.current
-		onSearch(string.gsub(var6, "^%s*(.-)%s*$", "%1"), var10):andThen(function(p6)
-			-- upvalues: var21 (copy), current (ref), var9 (copy), appendUniqueIds (copy), var11 (copy)
-			if var21.current == current then
-				var9(function(p7)
-					-- upvalues: appendUniqueIds (copy), p6 (ref)
-					return appendUniqueIds(p7, p6.ids)
+		var16.current = true
+		local current = var17.current
+		onSearch(string.gsub(var2, "^%s*(.-)%s*$", "%1"), var6):andThen(function(p5)
+			-- upvalues: var17 (copy), current (ref), var5 (copy), appendUniqueIds (copy), var7 (copy)
+			if var17.current == current then
+				var5(function(p6)
+					-- upvalues: appendUniqueIds (copy), p5 (ref)
+					return appendUniqueIds(p6, p5.ids)
 				end)
-				var11(p6.nextCursor)
+				var7(p5.nextCursor)
 				
 				return
 			end
 		end):finally(function()
-			-- upvalues: var20 (copy)
-			var20.current = false
+			-- upvalues: var16 (copy)
+			var16.current = false
 		end)
 	end, {
-		var23,
-		var10,
+		var19,
 		var6,
+		var2,
 		onSearch,
 		loadMoreBrowse
 	})
-	local var25 = reactModule.useMemo(function()
-		-- upvalues: var23 (ref), var8 (ref), browseIds (ref), excludeUserIds (ref)
-		local var28 = if var23 then var8 else browseIds
+	local var21 = reactModule.useMemo(function()
+		-- upvalues: var19 (ref), var4 (ref), browseIds (ref), excludeUserIds (ref)
+		local var22 = if var19 then var4 else browseIds
 		
 		if excludeUserIds == nil then
-			return var28
+			return var22
 		end
 		local t = {}
 		
-		for i, v in var28 do
+		for i, v in var22 do
 			if not excludeUserIds[v] then
 				table.insert(t, v)
 			end
 		end
 		return t
-	end, { var23, var8, browseIds, excludeUserIds })
-	local var26 = 0
+	end, { var19, var4, browseIds, excludeUserIds })
+	local var23 = 0
 	
-	for i, v in var14 do
+	for i, v in var10 do
 		if v then
-			var26 += 1
+			var23 += 1
 		end
 	end
 	reactModule.useEffect(function()
-		-- upvalues: selectionLimit (ref), var15 (ref)
+		-- upvalues: selectionLimit (ref), var11 (ref)
 		if selectionLimit == nil then
 			return
 		end
-		var15(function(p8)
+		var11(function(p5)
 			-- upvalues: selectionLimit (ref)
-			local var30 = 0
+			local var24 = 0
 			
-			for i, v in p8 do
+			for i, v in p5 do
 				if v then
-					var30 += 1
+					var24 += 1
 				end
 			end
-			if var30 <= selectionLimit then
-				return p8
+			if var24 <= selectionLimit then
+				return p5
 			end
 			local t = {}
-			local var32 = 0
+			local var25 = 0
 			
-			for i_1, v_1 in p8 do
-				if v_1 and var32 < selectionLimit then
+			for i_1, v_1 in p5 do
+				if v_1 and var25 < selectionLimit then
 					t[i_1] = true
-					var32 += 1
+					var25 += 1
 				end
 			end
 			return t
 		end)
 	end, { selectionLimit })
 	reactModule.useEffect(function()
-		-- upvalues: var22 (ref), onSelectionChanged (ref), var14 (ref)
-		if not var22.current then
-			var22.current = true
+		-- upvalues: var18 (ref), onSelectionChanged (ref), var10 (ref)
+		if not var18.current then
+			var18.current = true
 			
 			return
 		elseif onSelectionChanged ~= nil then
 			local t = {}
 			
-			for i, v in var14 do
+			for i, v in var10 do
 				if v then
 					table.insert(t, i)
 				end
 			end
 			onSelectionChanged(t)
 		end
-	end, { var14, onSelectionChanged })
+	end, { var10, onSelectionChanged })
 	
 	return {
-		searchText = var6,
-		setSearchText = var7,
-		userIds = var25,
-		isLoading = if var23 then var12 else browseIsLoading,
-		loadMore = var24,
-		selectedCount = var26,
-		hasSelection = var26 > 0,
+		searchText = var2,
+		setSearchText = var3,
+		userIds = var21,
+		isLoading = if var19 then var8 else browseIsLoading,
+		loadMore = var20,
+		selectedCount = var23,
+		hasSelection = var23 > 0,
 		selectionLimit = selectionLimit,
-		isSelected = reactModule.useCallback(function(p9)
-			-- upvalues: var14 (ref)
-			return var14[p9] == true
-		end, { var14 }),
-		canSelect = reactModule.useCallback(function(p10)
-			-- upvalues: var14 (ref), selectionLimit (ref)
-			if var14[p10] == true then
+		isSelected = reactModule.useCallback(function(p6)
+			-- upvalues: var10 (ref)
+			return var10[p6] == true
+		end, { var10 }),
+		canSelect = reactModule.useCallback(function(p6)
+			-- upvalues: var10 (ref), selectionLimit (ref)
+			if var10[p6] == true then
 				return true
 			end
-			local var34 = true
+			local var26 = true
 			
 			if selectionLimit ~= nil then
-				local var35 = 0
+				local var27 = 0
 				
-				for i, v in var14 do
+				for i, v in var10 do
 					if v then
-						var35 += 1
+						var27 += 1
 					end
 				end
-				var34 = var35 < selectionLimit
+				var26 = var27 < selectionLimit
 			end
-			return var34
-		end, { var14, selectionLimit }),
-		toggleSelected = reactModule.useCallback(function(p11)
-			-- upvalues: var15 (ref), selectionLimit (ref)
-			var15(function(p12)
-				-- upvalues: p11 (ref), selectionLimit (copy)
-				local cloned = table.clone(p12)
+			return var26
+		end, { var10, selectionLimit }),
+		toggleSelected = reactModule.useCallback(function(p7)
+			-- upvalues: var11 (ref), selectionLimit (ref)
+			var11(function(p8)
+				-- upvalues: p7 (ref), selectionLimit (copy)
+				local cloned = table.clone(p8)
 				
-				if cloned[p11] then
-					cloned[p11] = nil
+				if cloned[p7] then
+					cloned[p7] = nil
 					
 					return cloned
 				elseif selectionLimit ~= nil then
-					local var37 = 0
+					local var28 = 0
 					
 					for i, v in cloned do
 						if v then
-							var37 += 1
+							var28 += 1
 						end
 					end
-					if var37 < selectionLimit then
-						cloned[p11] = true
+					if var28 < selectionLimit then
+						cloned[p7] = true
 						
 						return cloned
 					else
-						return p12
+						return p8
 					end
 				end
 			end)
 		end, { selectionLimit }),
-		message = var16,
-		setMessage = var17,
-		isSubmitting = var18,
+		message = var12,
+		setMessage = var13,
+		isSubmitting = var14,
 		submit = reactModule.useCallback(function()
-			-- upvalues: var18 (ref), var14 (ref), var19 (ref), onSubmit (ref), var16 (ref)
-			if var18 then return end
+			-- upvalues: var14 (ref), var10 (ref), var15 (ref), onSubmit (ref), var12 (ref)
+			if var14 then return end
 			local t = {}
 			
-			for i, v in var14 do
+			for i, v in var10 do
 				if v then
 					table.insert(t, i)
 				end
@@ -273,11 +273,11 @@ return function(p4)
 			if #t == 0 then
 				return
 			end
-			var19(true)
-			onSubmit(t, if string.gsub(var16, "^%s*(.-)%s*$", "%1") ~= "" then nil else var16):finally(function()
-				-- upvalues: var19 (copy)
-				var19(false)
+			var15(true)
+			onSubmit(t, if string.gsub(var12, "^%s*(.-)%s*$", "%1") ~= "" then nil else var12):finally(function()
+				-- upvalues: var15 (copy)
+				var15(false)
 			end)
-		end, { var18, var14, var16, onSubmit })
+		end, { var14, var10, var12, onSubmit })
 	}
 end

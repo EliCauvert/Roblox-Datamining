@@ -44,71 +44,71 @@ local fFlagUFRInlineAppealLinkModule = require(interventionShared.Flags.FFlagUFR
 local fFlagUniversalFeatureRestrictionReceivers = require(parent.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local accept = images["icons/actions/accept"]
 
-local function _(p0)
-	return if p0 == "" then nil else p0
+local function _(p1)
+	return if p1 == "" then nil else p1
 end
 
 return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useRef (ref), useInterventionPlacementModule (ref), useLocalization (ref), constantsModule (ref), usePreferredInput (ref), responsiveModule (ref), fFlagNavigateToSafetyDashboardForAppeals (ref), urlBuilder (ref), useWebViewModule (ref), linkingProtocol (ref), useInterventionFocusRootModule (ref), focusNavigableSurfaceIdentifierEnum (ref), useEffect (ref), interventionAnalyticsModule (ref), useCallback (ref), postDismissInterventionModule (ref), fFlagUniversalFeatureRestrictionReceivers (ref), notificationModalsManagerModule (ref), accept (ref), VRService (ref), fFlagUFRInlineAppealLinkModule (ref), reactModule (ref), text (ref), fFlagUFRImprovementsModule (ref), view (ref), divider (ref), evidenceFieldModule (ref), badge (ref), badgeVariant (ref), iconName (ref), iconPosition (ref), iconVariant (ref), cryoModule (ref), button (ref), buttonVariant (ref), buttonSize (ref), dialog (ref), dialogSize (ref), interventionDialogLoadingSkeletonModule (ref), interventionDialogFooterModule (ref)
-	local var18 = useTokens()
+	local var1 = useTokens()
 	local interventionId = p1.interventionId
-	local var19 = if interventionId == "" then nil else interventionId
+	local var2 = if interventionId == "" then nil else interventionId
 	local dsaMessage = p1.dsaMessage
-	local var20 = if dsaMessage == "" then nil else dsaMessage
+	local var3 = if dsaMessage == "" then nil else dsaMessage
 	local evidence = p1.evidence
-	local var21 = if evidence == "" then nil else evidence
+	local var4 = if evidence == "" then nil else evidence
 	local formattedEndDate = p1.formattedEndDate
-	local var22 = if formattedEndDate == "" then nil else formattedEndDate
+	local var5 = if formattedEndDate == "" then nil else formattedEndDate
 	local userNote = p1.userNote
-	local var23 = if userNote == "" then nil else userNote
+	local var6 = if userNote == "" then nil else userNote
 	local violationReason = p1.violationReason
-	local var24 = if violationReason == "" then nil else violationReason
-	local var25 = useRef(DateTime.now().UnixTimestampMillis)
-	local var26 = useInterventionPlacementModule()
-	local var27 = useLocalization(constantsModule.localizationKeys)
-	local var28 = usePreferredInput() == responsiveModule.Input.Directional
-	local var29 = if fFlagNavigateToSafetyDashboardForAppeals then urlBuilder.static.safetyDashboard.main() else urlBuilder.static.appealsPortal.main()
-	local var30 = useWebViewModule(var29, if fFlagNavigateToSafetyDashboardForAppeals then var27.AccountStatusTitleText else var27.AppealsPortalTitleText)
+	local var7 = if violationReason == "" then nil else violationReason
+	local var8 = useRef(DateTime.now().UnixTimestampMillis)
+	local var9 = useInterventionPlacementModule()
+	local var10 = useLocalization(constantsModule.localizationKeys)
+	local var11 = usePreferredInput() == responsiveModule.Input.Directional
+	local var12 = if fFlagNavigateToSafetyDashboardForAppeals then urlBuilder.static.safetyDashboard.main() else urlBuilder.static.appealsPortal.main()
+	local var13 = useWebViewModule(var12, if fFlagNavigateToSafetyDashboardForAppeals then var10.AccountStatusTitleText else var10.AppealsPortalTitleText)
 	local default = linkingProtocol.default
-	local var31 = useInterventionFocusRootModule({
+	local var14 = useInterventionFocusRootModule({
 		isAutoFocusRoot = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ModerationOverlay
 	})
 	useEffect(function()
-		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var26 (ref), var25 (ref)
+		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var9 (ref), var8 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogRendered, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.ModalAppeared,
 			interventionType = p1.interventionTypeForAnalytics,
-			placement = var26,
-			renderedTimestamp = var25.current,
+			placement = var9,
+			renderedTimestamp = var8.current,
 			eventId = p1.eventId,
 			evidence = p1.evidence,
 			duration = p1.durationForAnalytics,
 			acknowledgeable = p1.acknowledgeable,
 			abuseVector = p1.abuseVectorForAnalytics
 		})
-	end, { var25 })
-	local var32 = useCallback(function()
-		-- upvalues: p1 (ref), var19 (ref), postDismissInterventionModule (copy), interventionAnalyticsModule (copy), var26 (ref), var25 (ref)
-		if p1.acknowledgeable and var19 then
-			postDismissInterventionModule(var19):andThen(function(_)
-				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var26 (copy), var25 (copy)
+	end, { var8 })
+	local var15 = useCallback(function()
+		-- upvalues: p1 (ref), var2 (ref), postDismissInterventionModule (copy), interventionAnalyticsModule (copy), var9 (ref), var8 (ref)
+		if p1.acknowledgeable and var2 then
+			postDismissInterventionModule(var2):andThen(function(_)
+				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var9 (copy), var8 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissSuccess, {
 					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissSuccess,
 					interventionType = p1.interventionTypeForAnalytics,
-					placement = var26,
-					renderedTimestamp = var25.current,
+					placement = var9,
+					renderedTimestamp = var8.current,
 					eventId = p1.eventId,
 					acknowledgeable = p1.acknowledgeable,
 					abuseVector = p1.abuseVectorForAnalytics
 				})
 			end):catch(function(p2)
-				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var26 (copy), var25 (copy)
+				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var9 (copy), var8 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissFailed, {
 					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissFailed,
 					interventionType = p1.interventionTypeForAnalytics,
-					placement = var26,
-					renderedTimestamp = var25.current,
+					placement = var9,
+					renderedTimestamp = var8.current,
 					eventId = p1.eventId,
 					error = p2.error,
 					acknowledgeable = p1.acknowledgeable,
@@ -117,44 +117,44 @@ return reactModule.memo(function(p1)
 			end)
 		end
 	end, {
-		p1.acknowledgeable, var19, p1.interventionTypeForAnalytics, var26,
-		var25.current, p1.eventId, p1.abuseVectorForAnalytics
+		p1.acknowledgeable, var2, p1.interventionTypeForAnalytics, var9,
+		var8.current, p1.eventId, p1.abuseVectorForAnalytics
 	})
-	local var33 = useCallback(function()
-		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var26 (ref), var25 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var32 (ref), var19 (ref), postDismissInterventionModule (copy)
+	local var16 = useCallback(function()
+		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var9 (ref), var8 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var15 (ref), var2 (ref), postDismissInterventionModule (copy)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogCtaClicked, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.CtaClicked,
 			interventionType = p1.interventionTypeForAnalytics,
-			placement = var26,
-			renderedTimestamp = var25.current,
+			placement = var9,
+			renderedTimestamp = var8.current,
 			eventId = p1.eventId,
 			acknowledgeable = p1.acknowledgeable,
 			abuseVector = p1.abuseVectorForAnalytics
 		})
 		
 		if fFlagUniversalFeatureRestrictionReceivers then
-			var32()
-		elseif p1.acknowledgeable and var19 then
-			postDismissInterventionModule(var19):andThen(function(_)
-				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var26 (copy), var25 (copy)
+			var15()
+		elseif p1.acknowledgeable and var2 then
+			postDismissInterventionModule(var2):andThen(function(_)
+				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var9 (copy), var8 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissSuccess, {
 					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissSuccess,
 					interventionType = p1.interventionTypeForAnalytics,
-					placement = var26,
-					renderedTimestamp = var25.current,
+					placement = var9,
+					renderedTimestamp = var8.current,
 					eventId = p1.eventId,
 					acknowledgeable = p1.acknowledgeable,
 					abuseVector = p1.abuseVectorForAnalytics
 				})
-			end):catch(function(p3)
-				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var26 (copy), var25 (copy)
+			end):catch(function(p2)
+				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var9 (copy), var8 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissFailed, {
 					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissFailed,
 					interventionType = p1.interventionTypeForAnalytics,
-					placement = var26,
-					renderedTimestamp = var25.current,
+					placement = var9,
+					renderedTimestamp = var8.current,
 					eventId = p1.eventId,
-					error = p3.error,
+					error = p2.error,
 					acknowledgeable = p1.acknowledgeable,
 					abuseVector = p1.abuseVectorForAnalytics
 				})
@@ -162,16 +162,16 @@ return reactModule.memo(function(p1)
 		end
 		p1.onDismiss()
 	end, {
-		p1.onDismiss, p1.interventionTypeForAnalytics, var26, var25.current,
-		p1.eventId, p1.abuseVectorForAnalytics, p1.acknowledgeable, var19, var32
+		p1.onDismiss, p1.interventionTypeForAnalytics, var9, var8.current,
+		p1.eventId, p1.abuseVectorForAnalytics, p1.acknowledgeable, var2, var15
 	})
-	local var34 = useCallback(function()
-		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var26 (ref), var25 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var32 (ref), notificationModalsManagerModule (copy), accept (copy), var27 (ref), var18 (ref), VRService (copy), var28 (ref), default (ref), var29 (ref), var30 (ref)
+	local var17 = useCallback(function()
+		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var9 (ref), var8 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var15 (ref), notificationModalsManagerModule (copy), accept (copy), var10 (ref), var1 (ref), VRService (copy), var11 (ref), default (ref), var12 (ref), var13 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogAppealClicked, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.AppealClicked,
 			interventionType = p1.interventionTypeForAnalytics,
-			placement = var26,
-			renderedTimestamp = var25.current,
+			placement = var9,
+			renderedTimestamp = var8.current,
 			eventId = p1.eventId,
 			acknowledgeable = p1.acknowledgeable,
 			abuseVector = p1.abuseVectorForAnalytics
@@ -181,33 +181,33 @@ return reactModule.memo(function(p1)
 			p1.onAppeal()
 			
 			if not p1.shouldOpenAppealsPortal then
-				var32()
+				var15()
 				p1.onDismiss()
 				notificationModalsManagerModule.SetUIBloxToast({
 					iconImage = accept,
-					toastTitle = var27.TakeALookText,
-					toastSubtitle = var27.FeedbackHelpsText,
+					toastTitle = var10.TakeALookText,
+					toastSubtitle = var10.FeedbackHelpsText,
 					sequenceNumber = DateTime.now().UnixTimestamp,
 					iconColorStyle = {
 						Transparency = 0,
-						Color = var18.Color.System.Success.Color3
+						Color = var1.Color.System.Success.Color3
 					}
 				})
 				
 				return
-			elseif VRService.VREnabled or var28 then
-				default:openURL(var29)
+			elseif VRService.VREnabled or var11 then
+				default:openURL(var12)
 				
 				return
 			end
-			var30()
+			var13()
 		end
 	end, {
-		var30, default, VRService.VREnabled, var28, p1.interventionTypeForAnalytics,
-		var26, var25.current, var29, p1.abuseVectorForAnalytics, p1.acknowledgeable,
-		var19, p1.eventId, var27.FeedbackHelpsText, var27.TakeALookText, p1.onAppeal,
+		var13, default, VRService.VREnabled, var11, p1.interventionTypeForAnalytics,
+		var9, var8.current, var12, p1.abuseVectorForAnalytics, p1.acknowledgeable,
+		var2, p1.eventId, var10.FeedbackHelpsText, var10.TakeALookText, p1.onAppeal,
 		p1.shouldOpenAppealsPortal, p1.onDismiss, p1.useDetailedLayout,
-		var18.Color.System.Success.Color3, var32
+		var1.Color.System.Success.Color3, var15
 	})
 	local t = {}
 	local useDetailedLayout = fFlagUniversalFeatureRestrictionReceivers and p1.useDetailedLayout
@@ -223,9 +223,9 @@ return reactModule.memo(function(p1)
 	end
 	if useDetailedLayout then
 		local t_1 = {}
-		local var39 = if fFlagUFRImprovementsModule then var24 else var23 or var22
+		local var18 = if fFlagUFRImprovementsModule then var7 else var6 or var5
 		
-		if var21 then
+		if var4 then
 			t_1.EvidenceItem = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y padding-x-medium",
 				testId = "dialog-evidence-item",
@@ -234,16 +234,16 @@ return reactModule.memo(function(p1)
 				EvidenceText = reactModule.createElement(text, {
 					tag = "auto-xy text-body-medium text-align-x-left text-wrap",
 					RichText = true,
-					Text = var21
+					Text = var4
 				})
 			})
 			
-			if fFlagUFRImprovementsModule and var39 then
+			if fFlagUFRImprovementsModule and var18 then
 				t_1.DividerBelowEvidence = reactModule.createElement(divider, { LayoutOrder = 2 })
 			end
 		end
-		if var24 then
-			if not fFlagUFRImprovementsModule and var21 then
+		if var7 then
+			if not fFlagUFRImprovementsModule and var4 then
 				t_1.DividerAfterEvidence = reactModule.createElement(divider, { LayoutOrder = 2 })
 			end
 			t_1.ReasonItem = reactModule.createElement(view, {
@@ -251,22 +251,22 @@ return reactModule.memo(function(p1)
 				testId = "dialog-reason-item",
 				LayoutOrder = 3
 			}, {
-				ReasonField = reactModule.createElement(evidenceFieldModule, { fieldLabel = var27.ReasonText, fieldValue = var24 })
+				ReasonField = reactModule.createElement(evidenceFieldModule, { fieldLabel = var10.ReasonText, fieldValue = var7 })
 			})
 		end
-		if var23 then
+		if var6 then
 			t_1.NoteItem = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y padding-x-medium",
 				testId = "dialog-note-item",
 				LayoutOrder = 4
 			}, {
 				NoteText = reactModule.createElement(evidenceFieldModule, {
-					fieldLabel = var27.ModeratorNoteLabel,
-					fieldValue = var23
+					fieldLabel = var10.ModeratorNoteLabel,
+					fieldValue = var6
 				})
 			})
 		end
-		if var22 then
+		if var5 then
 			t_1.EndingOnItem = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y row padding-x-medium align-y-center",
 				testId = "dialog-ending-on-item",
@@ -275,13 +275,13 @@ return reactModule.memo(function(p1)
 				EndingOnInfo = reactModule.createElement(view, { tag = "auto-y col fill", LayoutOrder = 1 }, {
 					EvidenceField = reactModule.createElement(evidenceFieldModule, {
 						hasColon = false,
-						fieldLabel = var27.EndsOnText,
-						fieldValue = var22
+						fieldLabel = var10.EndsOnText,
+						fieldValue = var5
 					})
 				}),
 				CountdownBadge = reactModule.createElement(badge, {
 					LayoutOrder = 2,
-					text = p1.countdownText or var27.CompleteText,
+					text = p1.countdownText or var10.CompleteText,
 					variant = badgeVariant.Neutral,
 					icon = if p1.countdownText then {
 						name = iconName.Clock,
@@ -300,7 +300,7 @@ return reactModule.memo(function(p1)
 				tag = "col gap-medium size-full-0 auto-y padding-y-large stroke-standard stroke-default radius-large bg-shift-100"
 			}, t_1))
 		end
-	elseif var21 or var24 or p1.isAppealable then
+	elseif var4 or var7 or p1.isAppealable then
 		t.Evidence = reactModule.createElement(view, {
 			tag = "size-full-0 auto-y padding-xxsmall",
 			LayoutOrder = 2
@@ -308,59 +308,59 @@ return reactModule.memo(function(p1)
 			reactModule.createElement(view, {
 				tag = "size-full-0 auto-y col gap-small padding-medium radius-medium bg-surface-200 stroke-standard stroke-default"
 			}, {
-				EvidenceText = var21 and reactModule.createElement(text, {
+				EvidenceText = var4 and reactModule.createElement(text, {
 					tag = "auto-xy text-body-medium text-align-x-left text-wrap",
 					RichText = true,
 					LayoutOrder = 1,
-					Text = var21
+					Text = var4
 				}),
-				Reason = var24 and reactModule.createElement(text, {
+				Reason = var7 and reactModule.createElement(text, {
 					tag = "auto-xy text-body-medium text-align-x-left text-wrap",
 					RichText = true,
 					LayoutOrder = 2,
-					Text = `<b>{var27.ReasonText}:</b>\n{var24}`
+					Text = `<b>{var10.ReasonText}:</b>\n{var7}`
 				}),
 				AppealButton = p1.isAppealable and reactModule.createElement(button, {
 					LayoutOrder = 3,
-					text = var27.ReportMistakeText,
+					text = var10.ReportMistakeText,
 					variant = buttonVariant.Standard,
 					size = buttonSize.XSmall,
 					width = UDim.new(1, 0),
-					onActivated = var34
+					onActivated = var17
 				})
 			})
 		})
 	end
-	if var20 and not useDetailedLayout then
+	if var3 and not useDetailedLayout then
 		t.DsaMessage = reactModule.createElement(text, {
 			tag = "auto-xy text-caption-small content-default text-align-x-left text-wrap",
 			LayoutOrder = 3,
-			Text = var20
+			Text = var3
 		})
 	end
-	local var40 = if useDetailedLayout then {
+	local var19 = if useDetailedLayout then {
 		{
 			variant = buttonVariant.Emphasis,
 			size = buttonSize.Medium,
-			text = var27.OkText,
-			onActivated = var33,
+			text = var10.OkText,
+			onActivated = var16,
 			width = UDim.new(1, 0)
 		}
 	} else {
 		{
 			variant = buttonVariant.Emphasis,
 			size = buttonSize.Small,
-			text = var27.OkText,
-			onActivated = var33
+			text = var10.OkText,
+			onActivated = var16
 		}
 	}
 	
 	if useDetailedLayout and p1.isAppealable and not fFlagUFRInlineAppealLinkModule then
-		table.insert(var40, {
+		table.insert(var19, {
 			variant = buttonVariant.Standard,
 			size = buttonSize.Medium,
-			text = var27.ReportMistakeText,
-			onActivated = var34,
+			text = var10.ReportMistakeText,
+			onActivated = var17,
 			width = UDim.new(1, 0)
 		})
 	end
@@ -369,35 +369,35 @@ return reactModule.memo(function(p1)
 	local t_1 = {
 		hasCloseButton = false,
 		size = dialogSize.Medium,
-		ref = var31,
+		ref = var14,
 		hasBackdrop = not VRService.VREnabled,
-		disablePortal = var26 ~= constantsModule.InterventionPlacementType.InExperience
+		disablePortal = var9 ~= constantsModule.InterventionPlacementType.InExperience
 	}
 	local t_2 = {
 		DialogTitle = not p1.isLoading and reactModule.createElement(dialog.Title, { text = p1.titleText }),
 		DialogContent = reactModule.createElement(dialog.Content, if useDetailedLayout_1 then { LayoutOrder = 2 } else nil, if p1.isLoading then reactModule.createElement(interventionDialogLoadingSkeletonModule) else reactModule.createElement(view, { tag = "size-full-0 auto-y col gap-medium" }, t)),
 		DialogFooter = not p1.isLoading and (useDetailedLayout_1 and reactModule.createElement(interventionDialogFooterModule, {
-			ctaText = var27.OkText,
+			ctaText = var10.OkText,
 			dsaMessage = p1.dsaMessage,
 			isAppealable = p1.isAppealable,
-			onAppealActivated = var34,
-			onCtaActivated = var33
+			onAppealActivated = var17,
+			onCtaActivated = var16
 		}))
 	}
-	local var43 = not p1.isLoading
+	local var20 = not p1.isLoading
 	
-	if var43 then
-		var43 = not useDetailedLayout_1
+	if var20 then
+		var20 = not useDetailedLayout_1
 		
-		if var43 then
-			var43 = reactModule.createElement
-			var43 = var43(dialog.Actions, {
-				actions = var40,
-				label = if useDetailedLayout and p1.useDetailedLayout and var20 then var20 else nil
+		if var20 then
+			var20 = reactModule.createElement
+			var20 = var20(dialog.Actions, {
+				actions = var19,
+				label = if useDetailedLayout and p1.useDetailedLayout and var3 then var3 else nil
 			})
 		end
 	end
-	t_2.DialogActions = var43
+	t_2.DialogActions = var20
 	
 	return createElement(root, t_1, t_2)
 end)

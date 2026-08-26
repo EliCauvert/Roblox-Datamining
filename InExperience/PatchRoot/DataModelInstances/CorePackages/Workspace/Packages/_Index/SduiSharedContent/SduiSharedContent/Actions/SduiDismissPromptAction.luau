@@ -8,53 +8,53 @@ local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
 local reportPromptDismissModule = require(sduiSharedContent.Actions.reportPromptDismiss)
 
-return function(p0, _, p1)
+return function(p1, _, p2)
 	-- upvalues: sduiErrorType (ref), getSduiApiStore (ref), reportPromptDismissModule (ref), sduiLoadTimer (ref), sduiParseHelpers (ref)
-	local var4 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var4 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, { name = "DismissPrompt", message = "Missing actionParams" }, p1.appPage)
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, { name = "DismissPrompt", message = "Missing actionParams" }, p2.appPage)
 		
 		return
 	end
-	assert(var4, "actionParams must exist")
-	local promptType = var4.promptType
+	assert(var1, "actionParams must exist")
+	local promptType = var1.promptType
 	
 	if typeof(promptType) ~= "string" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "DismissPrompt",
 			propName = "promptType",
 			message = `Invalid or missing promptType: {promptType}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local promptId = var4.promptId
+	local promptId = var1.promptId
 	
 	if promptId == nil or typeof(promptId) == "string" then
-		local var5 = getSduiApiStore()
-		local var6 = var5.dismissEntry(promptType)
-		reportPromptDismissModule(p1.dependencies.networking, promptType, promptId):andThen(function()
-			-- upvalues: var6 (ref), var5 (ref), sduiLoadTimer (copy)
-			for i, v in var6 do
-				var5.refreshFromApi({
+		local var2 = getSduiApiStore()
+		local var3 = var2.dismissEntry(promptType)
+		reportPromptDismissModule(p2.dependencies.networking, promptType, promptId):andThen(function()
+			-- upvalues: var3 (ref), var2 (ref), sduiLoadTimer (copy)
+			for i, v in var3 do
+				var2.refreshFromApi({
 					configKey = v,
 					loadTimer = sduiLoadTimer.createLoadTimer(v)
 				})
 			end
-		end):catch(function(p2)
-			-- upvalues: p1 (ref), sduiErrorType (copy), sduiParseHelpers (copy)
-			p1.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
+		end):catch(function(p3)
+			-- upvalues: p2 (ref), sduiErrorType (copy), sduiParseHelpers (copy)
+			p2.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
 				name = "DismissPrompt",
-				message = "reportPromptDismiss failed: " .. sduiParseHelpers.stringifyValue(p2)
-			}, p1.appPage)
+				message = "reportPromptDismiss failed: " .. sduiParseHelpers.stringifyValue(p3)
+			}, p2.appPage)
 		end)
 		
 		return
 	end
-	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		name = "DismissPrompt",
 		propName = "promptId",
 		message = `Invalid promptId: {promptId}`
-	}, p1.appPage)
+	}, p2.appPage)
 end

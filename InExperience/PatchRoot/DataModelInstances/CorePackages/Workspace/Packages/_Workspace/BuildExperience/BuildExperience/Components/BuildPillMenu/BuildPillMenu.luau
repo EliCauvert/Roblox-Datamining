@@ -11,58 +11,58 @@ local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOv
 local publishStatusModule = require(buildExperience.Chat.PublishStatus)
 local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), view (ref), agentDetailMenuModule (ref), iconName (ref), buildOverflowMenuButtonModule (ref)
-	local var8 = publishStatusModule.usePublishStatus(p0.target)
+	local var1 = publishStatusModule.usePublishStatus(p1.target)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Pill = reactModule.createElement(view, {
 			tag = "row align-y-center gap-xsmall size-0-1100 auto-x padding-x-xsmall radius-circle clip bg-over-media-0",
-			Position = p0.position,
-			AnchorPoint = p0.anchorPoint,
-			LayoutOrder = p0.layoutOrder,
-			testId = p0.testId
+			Position = p1.position,
+			AnchorPoint = p1.anchorPoint,
+			LayoutOrder = p1.layoutOrder,
+			testId = p1.testId
 		}, {
 			AgentDetail = reactModule.createElement(agentDetailMenuModule, {
 				layoutOrder = 1,
 				icon = if fFlagBuildExperienceAssetLibraryModule then iconName.SquaresGridPlus else nil,
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: fFlagBuildExperienceAssetLibraryModule (copy), p0 (ref)
-					if fFlagBuildExperienceAssetLibraryModule and p0.onOpenAssetLibraryPage then
-						p0.onOpenAssetLibraryPage()
+					-- upvalues: fFlagBuildExperienceAssetLibraryModule (copy), p1 (ref)
+					if fFlagBuildExperienceAssetLibraryModule and p1.onOpenAssetLibraryPage then
+						p1.onOpenAssetLibraryPage()
 						
 						return
-					elseif p0.onOpenAgentsPage then
-						p0.onOpenAgentsPage()
+					elseif p1.onOpenAgentsPage then
+						p1.onOpenAgentsPage()
 					end
-				end, { p0.onOpenAgentsPage, p0.onOpenAssetLibraryPage })
+				end, { p1.onOpenAgentsPage, p1.onOpenAssetLibraryPage })
 			}),
 			Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
 				layoutOrder = 2,
 				icon = iconName.ThreeDotsHorizontal,
-				store = p0.store or getBuildOverflowMenuStoreModule(),
-				target = p0.target,
-				hasPublishedTurn = var8.hasPublishedTurn,
-				hasPublishedVersion = var8.hasPublishedVersion,
-				onAction = reactModule.useCallback(function(p1)
-					-- upvalues: p0 (ref)
-					if p1.type == "openPage" then
-						if p0.onOpenPage then
-							p0.onOpenPage(p1.page)
+				store = p1.store or getBuildOverflowMenuStoreModule(),
+				target = p1.target,
+				hasPublishedTurn = var1.hasPublishedTurn,
+				hasPublishedVersion = var1.hasPublishedVersion,
+				onAction = reactModule.useCallback(function(p2)
+					-- upvalues: p1 (ref)
+					if p2.type == "openPage" then
+						if p1.onOpenPage then
+							p1.onOpenPage(p2.page)
 							
 							return
 						end
-					elseif p1.type == "openInvitePicker" then
-						if p0.onOpenInvitePicker then
-							p0.onOpenInvitePicker()
+					elseif p2.type == "openInvitePicker" then
+						if p1.onOpenInvitePicker then
+							p1.onOpenInvitePicker()
 							
 							return
 						end
-					elseif p0.onAction then
-						p0.onAction(p1)
+					elseif p1.onAction then
+						p1.onAction(p2)
 					end
-				end, { p0.onAction, p0.onOpenPage, p0.onOpenInvitePicker }),
-				onOpenCreatorCreditPage = p0.onOpenCreatorCreditPage
+				end, { p1.onAction, p1.onOpenPage, p1.onOpenInvitePicker }),
+				onOpenCreatorCreditPage = p1.onOpenCreatorCreditPage
 			})
 		})
 	})

@@ -23,50 +23,50 @@ local timestampHeight = constantsModule.TimestampHeight
 
 return function()
 	-- upvalues: useStyle (ref), useNotificationCardDataModule (ref), constantsModule (ref), useNotificationCardStateModule (ref), defaultTextContentPadding (ref), metaActionsWidth (ref), timestampWidth (ref), timestampHeight (ref), react (ref), defaultContentPadding (ref), notificationThumbnailModule (ref), notificationStyledTextModule (ref), iconButton (ref), iconSize (ref), overflow (ref), notificationActionsFrameModule (ref)
-	local var8 = useStyle()
-	local var9 = var8.Font.BaseSize * var8.Font.CaptionHeader.RelativeSize
-	local var10 = var8.Font.BaseSize * var8.Font.CaptionBody.RelativeSize
-	local var11 = useNotificationCardDataModule()
-	local cardSize = var11.cardSize
-	local readOnly = var11.readOnly
-	local var12 = if cardSize then cardSize.thumbnail else constantsModule.CardSizeDefault.thumbnail
-	local openMetaActions = var11.openMetaActions
-	local notificationPayload = var11.notificationPayload
-	local handleActions = var11.handleActions
-	local var13 = useNotificationCardStateModule("textBody")
-	local var14 = var13 and var13[1]
-	local var15 = var14 and (var14.title and {
+	local var1 = useStyle()
+	local var2 = var1.Font.BaseSize * var1.Font.CaptionHeader.RelativeSize
+	local var3 = var1.Font.BaseSize * var1.Font.CaptionBody.RelativeSize
+	local var4 = useNotificationCardDataModule()
+	local cardSize = var4.cardSize
+	local readOnly = var4.readOnly
+	local var5 = if cardSize then cardSize.thumbnail else constantsModule.CardSizeDefault.thumbnail
+	local openMetaActions = var4.openMetaActions
+	local notificationPayload = var4.notificationPayload
+	local handleActions = var4.handleActions
+	local var6 = useNotificationCardStateModule("textBody")
+	local var7 = var6 and var6[1]
+	local var8 = var7 and (var7.title and {
 		LayoutOrder = 1,
-		Text = var14.title,
+		Text = var7.title,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		TextSize = var9,
+		TextSize = var2,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = var8.Font.CaptionHeader.Font,
-		TextColor3 = var8.Theme.TextEmphasis.Color
+		Font = var1.Font.CaptionHeader.Font,
+		TextColor3 = var1.Theme.TextEmphasis.Color
 	})
-	local var16 = var14 and (var14.label and {
+	local var9 = var7 and (var7.label and {
 		LayoutOrder = 2,
-		Text = var14.label,
+		Text = var7.label,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		TextSize = var10,
+		TextSize = var3,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = var8.Font.CaptionBody.Font,
-		TextColor3 = var8.Theme.TextEmphasis.Color
+		Font = var1.Font.CaptionBody.Font,
+		TextColor3 = var1.Theme.TextEmphasis.Color
 	})
-	local var17 = notificationPayload and (notificationPayload.timestamp and {
+	local var10 = notificationPayload and (notificationPayload.timestamp and {
 		LayoutOrder = 2,
 		TextTransparency = 0,
 		Text = { text = notificationPayload.timestamp },
 		Size = UDim2.new(0, timestampWidth + defaultTextContentPadding, 0, timestampHeight),
-		TextSize = var9,
+		TextSize = var2,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Right,
 		AnchorPoint = Vector2.new(1, 0),
 		Position = UDim2.new(1, if readOnly then -defaultTextContentPadding else -(metaActionsWidth + defaultTextContentPadding), 0, 0),
-		Font = var8.Font.CaptionHeader.Font,
-		TextColor3 = var8.Theme.TextEmphasis.Color
+		Font = var1.Font.CaptionHeader.Font,
+		TextColor3 = var1.Theme.TextEmphasis.Color
 	})
 	
 	return react.createElement("TextButton", {
@@ -79,9 +79,9 @@ return function()
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
 		[react.Event.Activated] = function()
-			-- upvalues: handleActions (ref), var14 (ref), notificationPayload (ref)
-			if handleActions and var14 and notificationPayload then
-				handleActions(var14, notificationPayload)
+			-- upvalues: handleActions (ref), var7 (ref), notificationPayload (ref)
+			if handleActions and var7 and notificationPayload then
+				handleActions(var7, notificationPayload)
 			end
 		end
 	}, {
@@ -95,7 +95,7 @@ return function()
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(0, var12, 0, var12)
+			Size = UDim2.new(0, var5, 0, var5)
 		}, {
 			NotificationThumbnail = react.createElement(notificationThumbnailModule)
 		}),
@@ -103,7 +103,7 @@ return function()
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(1, -(var12 + defaultContentPadding), 0, 0)
+			Size = UDim2.new(1, -(var5 + defaultContentPadding), 0, 0)
 		}, {
 			UIListLayout = react.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
@@ -129,10 +129,10 @@ return function()
 						VerticalAlignment = Enum.VerticalAlignment.Top,
 						Padding = UDim.new(0, defaultTextContentPadding)
 					}),
-					Title = if var15 then react.createElement(notificationStyledTextModule, var15) else nil,
-					Subtitle = if var16 then react.createElement(notificationStyledTextModule, var16) else nil
+					Title = if var8 then react.createElement(notificationStyledTextModule, var8) else nil,
+					Subtitle = if var9 then react.createElement(notificationStyledTextModule, var9) else nil
 				}),
-				Timestamp = if var17 then react.createElement(notificationStyledTextModule, var17) else nil,
+				Timestamp = if var10 then react.createElement(notificationStyledTextModule, var10) else nil,
 				MetaActionsButton = if openMetaActions and not readOnly then react.createElement(iconButton, {
 					layoutOrder = 3,
 					anchorPoint = Vector2.new(1, 0),

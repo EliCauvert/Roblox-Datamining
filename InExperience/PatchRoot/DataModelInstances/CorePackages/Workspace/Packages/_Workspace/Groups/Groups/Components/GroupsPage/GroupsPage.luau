@@ -14,28 +14,28 @@ local eventNamesModule = require(groups.Analytics.EventNames)
 
 return function(_)
 	-- upvalues: useGroupsWrapperContextModule (ref), useTokens (ref), useGroupsListData (ref), useGroupsAnalyticsModule (ref), useEffectOnce (ref), eventNamesModule (ref), reactModule (ref), fullscreenPageWithSafeArea (ref), view (ref), groupsListModule (ref)
-	local var7 = useTokens()
-	local var8 = useGroupsListData(useGroupsWrapperContextModule().userId)
-	local var9 = useGroupsAnalyticsModule()
+	local var1 = useTokens()
+	local var2 = useGroupsListData(useGroupsWrapperContextModule().userId)
+	local var3 = useGroupsAnalyticsModule()
 	useEffectOnce(function()
-		-- upvalues: var9 (ref), eventNamesModule (copy)
-		var9.fireAnalyticsEvent(eventNamesModule.GroupsListPageExposure)
-	end, not var8.isLoading and not var8.loadFailure)
+		-- upvalues: var3 (ref), eventNamesModule (copy)
+		var3.fireAnalyticsEvent(eventNamesModule.GroupsListPageExposure)
+	end, not var2.isLoading and not var2.loadFailure)
 	
 	return reactModule.createElement(fullscreenPageWithSafeArea, {
 		includeStatusBar = true,
-		BackgroundColor3 = var7.Color.Surface.Surface_0.Color3,
-		BackgroundTransparency = var7.Color.Surface.Surface_0.Transparency
+		BackgroundColor3 = var1.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = var1.Color.Surface.Surface_0.Transparency
 	}, {
 		GroupsPageContent = reactModule.createElement(view, {
 			tag = "col size-full-full padding-x-xlarge padding-y-xxlarge"
 		}, {
 			Content = reactModule.createElement(groupsListModule, {
 				layoutOrder = 1,
-				groupsList = var8.groupsList,
-				canCreateGroup = var8.canCreateGroup,
-				isLoading = var8.isLoading,
-				loadFailure = var8.loadFailure
+				groupsList = var2.groupsList,
+				canCreateGroup = var2.canCreateGroup,
+				isLoading = var2.isLoading,
+				loadFailure = var2.loadFailure
 			})
 		})
 	})

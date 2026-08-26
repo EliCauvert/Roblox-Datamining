@@ -1,13 +1,13 @@
 ﻿local httpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
 
-local function toLowerKeyedHeaders(p0)
-	if typeof(p0) ~= "table" then
+local function toLowerKeyedHeaders(p1)
+	if typeof(p1) ~= "table" then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		t[tostring(i):lower()] = tostring(v)
 	end
 	return t
@@ -16,27 +16,27 @@ end
 return function()
 	-- upvalues: httpService (ref), toLowerKeyedHeaders (ref)
 	return {
-		request = function(p1, p2)
+		request = function(p2, p3)
 			-- upvalues: httpService (copy), toLowerKeyedHeaders (copy)
-			assert(p1.onMessage == nil, "createRequestAsyncNetwork does not support onMessage; use createRequestInternalNetwork")
-			local var3 = false
+			assert(p2.onMessage == nil, "createRequestAsyncNetwork does not support onMessage; use createRequestInternalNetwork")
+			local var1 = false
 			task.spawn(function()
-				-- upvalues: httpService (copy), p1 (ref), var3 (write), p2 (ref), toLowerKeyedHeaders (copy)
+				-- upvalues: httpService (copy), p2 (ref), var1 (write), p3 (ref), toLowerKeyedHeaders (copy)
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p1 (copy)
+					-- upvalues: httpService (copy), p2 (copy)
 					return httpService:RequestAsync({
-						Url = p1.url,
-						Method = p1.method,
-						Headers = p1.headers,
-						Body = p1.body
+						Url = p2.url,
+						Method = p2.method,
+						Headers = p2.headers,
+						Body = p2.body
 					})
 				end)
 				
-				if var3 then return end
-				var3 = true
+				if var1 then return end
+				var1 = true
 				
 				if ok then
-					p2(true, {
+					p3(true, {
 						statusCode = tonumber(status.StatusCode) or 0,
 						responseBody = status.Body,
 						headers = toLowerKeyedHeaders(status.Headers)
@@ -44,12 +44,12 @@ return function()
 					
 					return
 				end
-				p2(false, tostring(status))
+				p3(false, tostring(status))
 			end)
 			
 			return function()
-				-- upvalues: var3 (write)
-				var3 = true
+				-- upvalues: var1 (write)
+				var1 = true
 			end
 		end
 	}

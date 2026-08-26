@@ -6,8 +6,8 @@ local t = inGameMenuDependenciesModule.t
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var3 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var4 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local parent = script.Parent.Parent
 local constantsModule = require(parent.Resources.Constants)
 local directionModule = require(parent.Enums.Direction)
@@ -38,33 +38,33 @@ zonePortal.validateProps = t.strictInterface({
 	setCurrentZone = t.optional(t.callback)
 })
 
-function zonePortal.render(p0)
-	-- upvalues: t_1 (ref), var3 (ref), roact (ref), var4 (ref)
-	local direction = t_1[p0.props.direction]
+function zonePortal.render(p1)
+	-- upvalues: t_1 (ref), var1 (ref), roact (ref), var2 (ref)
+	local direction = t_1[p1.props.direction]
 	
-	return var3(function(p1)
-		-- upvalues: roact (copy), direction (ref), var4 (copy), p0 (ref)
+	return var1(function(p2)
+		-- upvalues: roact (copy), direction (ref), var2 (copy), p1 (ref)
 		return roact.createElement("Frame", {
 			Size = direction.size,
 			Position = direction.position,
 			BackgroundTransparency = 1,
 			Selectable = true,
 			ZIndex = 2147483647,
-			SelectionImageObject = p1(var4.Invisible),
+			SelectionImageObject = p2(var2.Invisible),
 			[roact.Event.SelectionGained] = function()
-				-- upvalues: p0 (copy)
-				p0.props.setCurrentZone(p0.props.targetZone)
+				-- upvalues: p1 (copy)
+				p1.props.setCurrentZone(p1.props.targetZone)
 			end
 		})
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p2)
+return roactRodux.UNSTABLE_connect2(nil, function(p1)
 	-- upvalues: setCurrentZoneModule (ref)
 	return {
 		setCurrentZone = function(value)
-			-- upvalues: p2 (ref), setCurrentZoneModule (copy)
-			return p2(setCurrentZoneModule(value))
+			-- upvalues: p1 (ref), setCurrentZoneModule (copy)
+			return p1(setCurrentZoneModule(value))
 		end
 	}
 end)(zonePortal)

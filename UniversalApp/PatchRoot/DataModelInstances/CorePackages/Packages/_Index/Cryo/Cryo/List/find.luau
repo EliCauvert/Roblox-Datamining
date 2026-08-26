@@ -1,6 +1,6 @@
-﻿return function(p0, p1)
-	for i = 1, #p0 do
-		if p0[i] ~= p1 then
+﻿return function(p1, p2)
+	for i = 1, #p1 do
+		if p1[i] ~= p2 then
 			continue
 		end
 		return i

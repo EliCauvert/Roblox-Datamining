@@ -1,5 +1,5 @@
 ﻿return {
-	mock = function(p0)
+	mock = function(p1)
 		return {
 			rootPlaceId = -2,
 			name = "Experience name",
@@ -18,7 +18,7 @@
 			isAllGenre = false,
 			isFavoritedByUser = false,
 			favoritedCount = 0,
-			id = p0 or -1,
+			id = p1 or -1,
 			creator = {
 				id = -3,
 				name = "CreatorName",

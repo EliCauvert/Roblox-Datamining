@@ -21,51 +21,51 @@ local t = {
 	expectedFailures = {}
 }
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: floatEqualsModule (ref)
-	return floatEqualsModule(p0.X, p1.X, 0.00001) and (floatEqualsModule(p0.Y, p1.Y, 0.00001) and floatEqualsModule(p0.Z, p1.Z, 0.00001))
+	return floatEqualsModule(p1.X, p2.X, 0.00001) and (floatEqualsModule(p1.Y, p2.Y, 0.00001) and floatEqualsModule(p1.Z, p2.Z, 0.00001))
 end
 
-local function validateSingleMeshPart(p2, p3, p4)
+local function validateSingleMeshPart(p1, p2, p3)
 	-- upvalues: getEditableMeshFromContextModule (ref), errorSourceStringsModule (ref), getMeshSizeModule (ref), floatEqualsModule (ref)
 	local t = {
 		fieldName = "MeshId",
-		fullName = p2:GetFullName(),
-		contentId = p2.MeshId,
-		context = p2.Name
+		fullName = p1:GetFullName(),
+		contentId = p1.MeshId,
+		context = p1.Name
 	}
-	local var9, var10 = getEditableMeshFromContextModule(p2, "MeshId", p3)
+	local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p2)
 	
-	if not var9 then
-		p4:fail(errorSourceStringsModule.Keys.MeshSize_LoadFailed, { meshName = p2.Name }, p2)
+	if not var1 then
+		p3:fail(errorSourceStringsModule.Keys.MeshSize_LoadFailed, { meshName = p1.Name }, p1)
 		
 		return
 	end
-	t.editableMesh = var10
-	local var11 = getMeshSizeModule(t)
-	local meshSize = p2.MeshSize
+	t.editableMesh = var2
+	local var3 = getMeshSizeModule(t)
+	local meshSize = p1.MeshSize
 	
-	if not floatEqualsModule(meshSize.X, var11.X, 0.00001) or (not floatEqualsModule(meshSize.Y, var11.Y, 0.00001) or not floatEqualsModule(meshSize.Z, var11.Z, 0.00001)) then
-		p4:fail(errorSourceStringsModule.Keys.MeshSize_Mismatch, { meshName = p2.Name }, p2)
+	if not floatEqualsModule(meshSize.X, var3.X, 0.00001) or (not floatEqualsModule(meshSize.Y, var3.Y, 0.00001) or not floatEqualsModule(meshSize.Z, var3.Z, 0.00001)) then
+		p3:fail(errorSourceStringsModule.Keys.MeshSize_Mismatch, { meshName = p1.Name }, p1)
 	end
 end
 
-function t.run(p5, p6)
+function t.run(p1, p2)
 	-- upvalues: validationEnumsModule (ref), validateSingleMeshPart (ref), constantsModule (ref)
-	local rootInstance = p6.rootInstance
-	local assetType = p6.uploadEnum.assetType
-	local consumerEnv = p6.consumerConfig.consumerEnv
-	local var12 = consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+	local rootInstance = p2.rootInstance
+	local assetType = p2.uploadEnum.assetType
+	local consumerEnv = p2.consumerConfig.consumerEnv
+	local var1 = consumerEnv == validationEnumsModule.ConsumerEnv.Backend
 	
 	if consumerEnv == validationEnumsModule.ConsumerEnv.IEC then return end
 	local t = {}
 	
-	if p6.renderMeshesData then
+	if p2.renderMeshesData then
 		local descendants = rootInstance:GetDescendants()
 		table.insert(descendants, rootInstance)
 		
 		for i, v in descendants do
-			local name = p6.renderMeshesData[v.Name]
+			local name = p2.renderMeshesData[v.Name]
 			
 			if name and name.editable then
 				t[v] = { MeshId = { created = false, instance = name.editable } }
@@ -74,23 +74,23 @@ function t.run(p5, p6)
 	end
 	local t_1 = {
 		assetTypeEnum = assetType,
-		isServer = var12,
+		isServer = var1,
 		editableMeshes = t
 	}
 	
 	if Enum.AssetType.DynamicHead == assetType then
-		validateSingleMeshPart(rootInstance, t_1, p5)
+		validateSingleMeshPart(rootInstance, t_1, p1)
 		
 		return
 	end
-	local var16 = constantsModule.ASSET_TYPE_INFO[assetType]
+	local var2 = constantsModule.ASSET_TYPE_INFO[assetType]
 	
-	if not var16 then return end
-	for i in pairs(var16.subParts) do
-		local var17 = rootInstance:FindFirstChild(i)
+	if not var2 then return end
+	for i in pairs(var2.subParts) do
+		local var3 = rootInstance:FindFirstChild(i)
 		
-		if var17 then
-			validateSingleMeshPart(var17, t_1, p5)
+		if var3 then
+			validateSingleMeshPart(var3, t_1, p1)
 		end
 	end
 end

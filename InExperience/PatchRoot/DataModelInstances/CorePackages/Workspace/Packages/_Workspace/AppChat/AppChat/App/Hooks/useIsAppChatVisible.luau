@@ -6,18 +6,18 @@ local useExternalEvent = require(parent.RoactUtils).Hooks.useExternalEvent
 local useState = reactModule.useState
 local useCallback = reactModule.useCallback
 
-return function(p0)
+return function(p1)
 	-- upvalues: useState (ref), useExternalEvent (ref), appChatVisibleModule (ref), useCallback (ref)
-	local var3, var4 = useState(p0 or false)
-	useExternalEvent(appChatVisibleModule.BindableEvent.Event, function(p1)
-		-- upvalues: var3 (ref), var4 (ref)
-		if p1 ~= var3 then
-			var4(p1)
+	local var1, var2 = useState(p1 or false)
+	useExternalEvent(appChatVisibleModule.BindableEvent.Event, function(p2)
+		-- upvalues: var1 (ref), var2 (ref)
+		if p2 ~= var1 then
+			var2(p2)
 		end
-	end, { var3 })
+	end, { var1 })
 	
-	return var3, useCallback(function()
-		-- upvalues: var4 (ref)
-		var4(false)
-	end, { var4 })
+	return var1, useCallback(function()
+		-- upvalues: var2 (ref)
+		var2(false)
+	end, { var2 })
 end

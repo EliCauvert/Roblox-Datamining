@@ -4,30 +4,30 @@ local luauPolyfillModule = require(parent.LuauPolyfill)
 local collectSubFields = require(parent.GraphqlToolsUtils).collectSubFields
 local userProfileNestedFieldsModule = require(graphQLServer.graphql.enums.UserProfileNestedFields)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: collectSubFields (ref), luauPolyfillModule (ref), userProfileNestedFieldsModule (ref)
-	local var3 = p1 or collectSubFields
-	local var4 = var3(p0.schema, p0.fragments, p0.variableValues, p0.returnType, p0.fieldNodes)
+	local var1 = p2 or collectSubFields
+	local var2 = var1(p1.schema, p1.fragments, p1.variableValues, p1.returnType, p1.fieldNodes)
 	local t = {}
 	
-	local _ = function(p2)
+	local _ = function(p3)
 		-- upvalues: luauPolyfillModule (copy)
-		return if p2 ~= nil then if p2 ~= "id" then luauPolyfillModule.String.endsWith(p2, "__typename") else true else true
+		return if p3 ~= nil then if p3 ~= "id" then luauPolyfillModule.String.endsWith(p3, "__typename") else true else true
 	end
 	
-	for i, v in var4 do
-		local var6 = v[1]
+	for i, v in var2 do
+		local var3 = v[1]
 		
-		if not userProfileNestedFieldsModule[var6] then
-			if not (if var6 ~= nil then if var6 ~= "id" then luauPolyfillModule.String.endsWith(var6, "__typename") else true else true) then
-				table.insert(t, var6)
+		if not userProfileNestedFieldsModule[var3] then
+			if not (if var3 ~= nil then if var3 ~= "id" then luauPolyfillModule.String.endsWith(var3, "__typename") else true else true) then
+				table.insert(t, var3)
 			end
 		end
-		for i_1, v_1 in var3(p0.schema, p0.fragments, p0.variableValues, p0.returnType, var4[var6]) do
-			local var7 = `{var6}.{v_1[1]}`
+		for i_1, v_1 in var1(p1.schema, p1.fragments, p1.variableValues, p1.returnType, var2[var3]) do
+			local var4 = `{var3}.{v_1[1]}`
 			
-			if not (if var7 ~= nil then if var7 ~= "id" then luauPolyfillModule.String.endsWith(var7, "__typename") else true else true) then
-				table.insert(t, var7)
+			if not (if var4 ~= nil then if var4 ~= "id" then luauPolyfillModule.String.endsWith(var4, "__typename") else true else true) then
+				table.insert(t, var4)
 			end
 		end
 	end

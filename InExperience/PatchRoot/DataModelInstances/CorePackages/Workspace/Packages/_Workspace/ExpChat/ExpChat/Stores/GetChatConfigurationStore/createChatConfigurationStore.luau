@@ -46,25 +46,25 @@ return function()
 		TextStrokeColor3 = configModule.ChannelTabsSettings.TextStrokeColor3,
 		TextStrokeTransparency = configModule.ChannelTabsSettings.TextStrokeTransparency
 	}
-	local var9, var10 = createSignal(cloned, tutilsModule.deepEqual)
-	local var11, var12 = createSignal(t, tutilsModule.deepEqual)
-	local var13, var14 = createSignal(t_1, tutilsModule.deepEqual)
-	local var15, var16 = createSignal(t_2, tutilsModule.deepEqual)
+	local var1, var2 = createSignal(cloned, tutilsModule.deepEqual)
+	local var3, var4 = createSignal(t, tutilsModule.deepEqual)
+	local var5, var6 = createSignal(t_1, tutilsModule.deepEqual)
+	local var7, var8 = createSignal(t_2, tutilsModule.deepEqual)
 	
 	return {
-		getBubbleChatSettings = var9,
-		getChatWindowSettings = var11,
-		getChatInputBarSettings = var13,
-		getChannelTabsSettings = var15,
-		setBubbleChatSettings = var10,
-		setChatWindowSettings = var12,
-		setChatInputBarSettings = var14,
-		setChannelTabsSettings = var16,
+		getBubbleChatSettings = var1,
+		getChatWindowSettings = var3,
+		getChatInputBarSettings = var5,
+		getChannelTabsSettings = var7,
+		setBubbleChatSettings = var2,
+		setChatWindowSettings = var4,
+		setChatInputBarSettings = var6,
+		setChannelTabsSettings = var8,
 		mergeBubbleChatSettings = function(value)
-			-- upvalues: var10 (ref)
-			var10(function(p0)
+			-- upvalues: var2 (ref)
+			var2(function(p1)
 				-- upvalues: value (ref)
-				local cloned = table.clone(p0)
+				local cloned = table.clone(p1)
 				
 				for i, v in pairs(value) do
 					cloned[i] = v
@@ -73,8 +73,8 @@ return function()
 			end)
 		end,
 		mergeChatWindowSettings = function(value)
-			-- upvalues: var12 (ref)
-			var12(function(p1)
+			-- upvalues: var4 (ref)
+			var4(function(p1)
 				-- upvalues: value (ref)
 				local cloned = table.clone(p1)
 				
@@ -85,10 +85,10 @@ return function()
 			end)
 		end,
 		mergeChatInputBarSettings = function(value)
-			-- upvalues: var14 (ref)
-			var14(function(p2)
+			-- upvalues: var6 (ref)
+			var6(function(p1)
 				-- upvalues: value (ref)
-				local cloned = table.clone(p2)
+				local cloned = table.clone(p1)
 				
 				for i, v in pairs(value) do
 					cloned[i] = v
@@ -97,10 +97,10 @@ return function()
 			end)
 		end,
 		mergeChannelTabsSettings = function(value)
-			-- upvalues: var16 (ref)
-			var16(function(p3)
+			-- upvalues: var8 (ref)
+			var8(function(p1)
 				-- upvalues: value (ref)
-				local cloned = table.clone(p3)
+				local cloned = table.clone(p1)
 				
 				for i, v in pairs(value) do
 					cloned[i] = v
@@ -108,49 +108,49 @@ return function()
 				return cloned
 			end)
 		end,
-		setBubbleChatProperty = function(value, p4)
-			-- upvalues: var10 (ref)
-			var10(function(p5)
-				-- upvalues: value (ref), p4 (ref)
-				local cloned = table.clone(p5)
-				cloned[value] = p4
+		setBubbleChatProperty = function(value, p1)
+			-- upvalues: var2 (ref)
+			var2(function(p2)
+				-- upvalues: value (ref), p1 (ref)
+				local cloned = table.clone(p2)
+				cloned[value] = p1
 				
 				return cloned
 			end)
 		end,
-		setChatWindowProperty = function(value, p6)
-			-- upvalues: var12 (ref)
-			var12(function(p7)
-				-- upvalues: value (ref), p6 (ref)
-				local cloned = table.clone(p7)
-				cloned[value] = p6
+		setChatWindowProperty = function(value, p1)
+			-- upvalues: var4 (ref)
+			var4(function(p2)
+				-- upvalues: value (ref), p1 (ref)
+				local cloned = table.clone(p2)
+				cloned[value] = p1
 				
 				return cloned
 			end)
 		end,
-		setChatInputBarProperty = function(value, p8)
-			-- upvalues: var14 (ref)
-			var14(function(p9)
-				-- upvalues: value (ref), p8 (ref)
-				local cloned = table.clone(p9)
-				cloned[value] = p8
+		setChatInputBarProperty = function(value, p1)
+			-- upvalues: var6 (ref)
+			var6(function(p2)
+				-- upvalues: value (ref), p1 (ref)
+				local cloned = table.clone(p2)
+				cloned[value] = p1
 				
 				return cloned
 			end)
 		end,
-		setChannelTabsProperty = function(value, p10)
-			-- upvalues: var16 (ref)
-			var16(function(p11)
-				-- upvalues: value (ref), p10 (ref)
-				local cloned = table.clone(p11)
-				cloned[value] = p10
+		setChannelTabsProperty = function(value, p1)
+			-- upvalues: var8 (ref)
+			var8(function(p2)
+				-- upvalues: value (ref), p1 (ref)
+				local cloned = table.clone(p2)
+				cloned[value] = p1
 				
 				return cloned
 			end)
 		end,
-		getIsBubbleChatEnabled = createComputed(function(p12)
-			-- upvalues: var9 (ref)
-			return var9(p12).Enabled or false
+		getIsBubbleChatEnabled = createComputed(function(p1)
+			-- upvalues: var1 (ref)
+			return var1(p1).Enabled or false
 		end)
 	}
 end

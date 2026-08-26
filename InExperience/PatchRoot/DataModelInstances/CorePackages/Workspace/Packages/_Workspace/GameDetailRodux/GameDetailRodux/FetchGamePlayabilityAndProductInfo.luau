@@ -6,7 +6,7 @@ local performFetch = require(parent.Http).PerformFetch
 local fetchGamesProductInfo = require(parent.GameProductInfoRodux).FetchGamesProductInfo
 
 return {
-	KeyMapper = function(p0)
+	KeyMapper = function(p1)
 		return "luaapp.playability-and-productinfo." .. p0
 	end,
 	Fetch = function(p1, p2)
@@ -33,8 +33,8 @@ return {
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p6, p7)
+	GetFetchingStatus = function(p1, p2)
 		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p6, "luaapp.playability-and-productinfo." .. p7)
+		return performFetch.GetStatus(p1, "luaapp.playability-and-productinfo." .. p7)
 	end
 }

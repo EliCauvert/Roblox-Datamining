@@ -3,19 +3,19 @@ local useLocalUserId = require(appChat.Parent.RobloxAppHooks).useLocalUserId
 local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
 local getOtherParticipantsModule = require(appChat.Conversations.getOtherParticipants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalUserId (ref), useGetConversationFromIdModule (ref), getOtherParticipantsModule (ref)
-	local var3 = useLocalUserId()
-	local var4 = useGetConversationFromIdModule(p0)
+	local var1 = useLocalUserId()
+	local var2 = useGetConversationFromIdModule(p1)
 	
-	if not p0 or not var3 then
+	if not p1 or not var1 then
 		return nil
-	elseif not var4 then
+	elseif not var2 then
 		return nil
-	elseif var4.type ~= "one_to_one" then
+	elseif var2.type ~= "one_to_one" then
 		return nil
 	end
-	local var5 = getOtherParticipantsModule(var4, var3)
+	local var3 = getOtherParticipantsModule(var2, var1)
 	
-	return if #var5 == 1 then var5[1] else nil
+	return if #var3 == 1 then var3[1] else nil
 end

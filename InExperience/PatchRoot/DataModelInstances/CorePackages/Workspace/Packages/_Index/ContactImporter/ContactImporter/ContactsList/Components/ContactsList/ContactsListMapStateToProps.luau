@@ -10,16 +10,16 @@ local getDeepValue = dependenciesModule.SocialLibraries.Dictionary.getDeepValue
 local getDeviceContactsModule = require(script.Parent.getDeviceContacts)
 local decorateMatchedContactModule = require(script.Parent.decorateMatchedContact)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getDeepValue (ref), RODUX_KEY (ref), memoize (ref), getDeviceContactsModule (ref), decorateMatchedContactModule (ref), selectors (ref), networkingFriends (ref), networkStatus (ref), networkingContacts (ref)
-	local localUserId = p0.LocalUserId
-	local var4 = getDeepValue(p0, RODUX_KEY .. ".Contacts")
+	local localUserId = p1.LocalUserId
+	local var1 = getDeepValue(p1, RODUX_KEY .. ".Contacts")
 	
 	return {
-		localUserId = p0.LocalUserId,
-		matchedContacts = decorateMatchedContactModule(selectors.sortContacts(p0), var4),
-		deviceContacts = memoize(getDeviceContactsModule)(var4),
-		screenSize = p0.ScreenSize,
-		isFetching = if networkingFriends.RequestFriendshipFromContactId.getStatus(p0, localUserId) ~= networkStatus.Fetching then if networkingContacts.FindContactFriends.getStatus(p0, localUserId) ~= networkStatus.Fetching then if networkingContacts.GetContactEntitiesByContactId.getStatus(p0, localUserId) ~= networkStatus.Fetching then networkingContacts.UploadContactsByUser.getStatus(p0, localUserId) == networkStatus.Fetching else true else true else true
+		localUserId = p1.LocalUserId,
+		matchedContacts = decorateMatchedContactModule(selectors.sortContacts(p1), var1),
+		deviceContacts = memoize(getDeviceContactsModule)(var1),
+		screenSize = p1.ScreenSize,
+		isFetching = if networkingFriends.RequestFriendshipFromContactId.getStatus(p1, localUserId) ~= networkStatus.Fetching then if networkingContacts.FindContactFriends.getStatus(p1, localUserId) ~= networkStatus.Fetching then if networkingContacts.GetContactEntitiesByContactId.getStatus(p1, localUserId) ~= networkStatus.Fetching then networkingContacts.UploadContactsByUser.getStatus(p1, localUserId) == networkStatus.Fetching else true else true else true
 	}
 end

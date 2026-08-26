@@ -7,13 +7,13 @@ return function(value)
 	return reactModule.useCallback(function()
 		-- upvalues: var1 (ref)
 		return var1.current
-	end, {}), reactModule.useCallback(function(p0)
+	end, {}), reactModule.useCallback(function(p1)
 		-- upvalues: var1 (ref)
-		if typeof(p0) == "function" then
-			var1.current = p0(var1.current)
+		if typeof(p1) == "function" then
+			var1.current = p1(var1.current)
 			
 			return
 		end
-		var1.current = p0
+		var1.current = p1
 	end, {})
 end

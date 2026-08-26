@@ -3,7 +3,7 @@ local parent = script.Parent.Parent
 local constantsModule = require(parent.Constants)
 local useSelector = require(parent.Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-local var2 = function()
+local var1 = function()
 	-- upvalues: appStorageService (ref), constantsModule (ref)
 	pcall(function()
 		-- upvalues: appStorageService (copy), constantsModule (copy)
@@ -12,33 +12,33 @@ local var2 = function()
 	end)
 end
 
-return function(p0)
-	-- upvalues: appStorageService (ref), useSelector (ref), constantsModule (ref), var2 (ref)
-	local var3 = p0 or appStorageService
+return function(p1)
+	-- upvalues: appStorageService (ref), useSelector (ref), constantsModule (ref), var1 (ref)
+	local var2 = p1 or appStorageService
 	
-	if not useSelector(function(p1)
+	if not useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].IsOverlayFlashActive
+		return p2[constantsModule.RoduxKey].IsOverlayFlashActive
 	end) then
-		return false, var2
+		return false, var1
 	end
 	local ok, status = pcall(function()
-		-- upvalues: var3 (ref), constantsModule (copy)
-		return var3:GetItem(constantsModule.LastFlashOccurrenceTsLocalStorageKey)
+		-- upvalues: var2 (ref), constantsModule (copy)
+		return var2:GetItem(constantsModule.LastFlashOccurrenceTsLocalStorageKey)
 	end)
 	
 	if not ok then
-		return false, var2
+		return false, var1
 	end
-	local var4 = tonumber(status)
+	local var3 = tonumber(status)
 	
-	if var4 == nil then
-		return false, var2
+	if var3 == nil then
+		return false, var1
 	end
-	assert(var4 ~= nil, "lastFlashOccurrenceTs cannot be nil")
+	assert(var3 ~= nil, "lastFlashOccurrenceTs cannot be nil")
 	
-	if DateTime.now().UnixTimestampMillis - var4 < 500 then
-		return false, var2
+	if DateTime.now().UnixTimestampMillis - var3 < 500 then
+		return false, var1
 	end
-	return true, var2
+	return true, var1
 end

@@ -10,9 +10,9 @@ local windowStateModule = require(purchasePrompt.Enums.WindowState)
 local promptStateModule = require(purchasePrompt.Enums.PromptState)
 
 return rodux.createReducer(windowStateModule.Hidden, {
-	[setPromptStateModule.name] = function(_, p0)
+	[setPromptStateModule.name] = function(_, p1)
 		-- upvalues: promptStateModule (ref), windowStateModule (ref)
-		return if p0.promptState == promptStateModule.None then windowStateModule.Hidden else windowStateModule.Shown
+		return if p1.promptState == promptStateModule.None then windowStateModule.Hidden else windowStateModule.Shown
 	end,
 	[setWindowStateModule.name] = function(_, p1)
 		return p1.state

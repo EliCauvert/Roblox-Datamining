@@ -19,9 +19,9 @@ listSection.validateProps = tModule.strictInterface({
 	forwardRef = tModule.table
 })
 
-function listSection.init(p0)
+function listSection.init(p1)
 	-- upvalues: roactGamepadModule (ref)
-	p0.listRefCache = roactGamepadModule.createRefCache()
+	p1.listRefCache = roactGamepadModule.createRefCache()
 end
 
 function listSection.render(p1)

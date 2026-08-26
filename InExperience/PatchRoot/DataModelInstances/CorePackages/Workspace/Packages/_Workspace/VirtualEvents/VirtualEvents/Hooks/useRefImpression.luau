@@ -1,19 +1,19 @@
 ﻿local reactModule = require(script:FindFirstAncestor("VirtualEvents").Parent.React)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(false)
-	local var2 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var1 (ref), p1 (ref)
-		if p2.AbsolutePosition.Y <= p3.AbsoluteSize.Y then
+	local var2 = reactModule.useCallback(function(p3, p4)
+		-- upvalues: var1 (ref), p2 (ref)
+		if p3.AbsolutePosition.Y <= p4.AbsoluteSize.Y then
 			var1.current = true
-			p1()
+			p2()
 		end
-	end, { p1 })
+	end, { p2 })
 	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p0 (ref), var2 (ref)
+		-- upvalues: var1 (ref), p1 (ref), var2 (ref)
 		if var1.current then return end
-		local current = p0.current
+		local current = p1.current
 		local var3 = nil
 		
 		if current then

@@ -33,59 +33,59 @@ local t = {
 	})
 }
 
-function HurtOverlay(p0)
+function HurtOverlay(p1)
 	-- upvalues: starterGuiService (ref), motionModule (ref), t (ref), reactModule (ref), signalsReactModule (ref), getLocalHumanoidStore (ref), signalsModule (ref), constantsModule (ref), fFlagUseNewHurtOverlayImage (ref), color (ref), cachedPolicyServiceModule (ref), color3 (ref), image (ref), fFlagUseNewHurtOverlayAnimation (ref)
-	local mockStarterGui = p0.mockStarterGui or starterGuiService
-	local var13, var14 = motionModule.useMotion(t.hideOverlay)
-	local var15, var16 = reactModule.useState(mockStarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health))
-	local var17 = signalsReactModule.useSignalState(getLocalHumanoidStore)
-	local var18 = reactModule.useRef(var17.getHealthValue(false))
+	local mockStarterGui = p1.mockStarterGui or starterGuiService
+	local var1, var2 = motionModule.useMotion(t.hideOverlay)
+	local var3, var4 = reactModule.useState(mockStarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health))
+	local var5 = signalsReactModule.useSignalState(getLocalHumanoidStore)
+	local var6 = reactModule.useRef(var5.getHealthValue(false))
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var17 (ref), var18 (ref), constantsModule (copy), var14 (ref), t (copy), mockStarterGui (ref), var16 (ref)
-		local var20 = signalsModule.createEffect(function(p1)
-			-- upvalues: var17 (copy), var18 (copy), constantsModule (copy), var14 (copy), t (copy)
-			local healthValue = var17.getHealthValue(p1)
-			local current = var18.current
-			var18.current = healthValue
+		-- upvalues: signalsModule (copy), var5 (ref), var6 (ref), constantsModule (copy), var2 (ref), t (copy), mockStarterGui (ref), var4 (ref)
+		local var7 = signalsModule.createEffect(function(p2)
+			-- upvalues: var5 (copy), var6 (copy), constantsModule (copy), var2 (copy), t (copy)
+			local healthValue = var5.getHealthValue(p2)
+			local current = var6.current
+			var6.current = healthValue
 			
 			if not healthValue.health or not healthValue.maxHealth or not current.health or healthValue.isDead and current.isDead then return end
 			if (current.health - healthValue.health) / healthValue.maxHealth < constantsModule.HealthPercentForOverlay then
 				return
 			end
-			var14(t.showOverlay, {
-				onAnimationComplete = function(p2)
-					-- upvalues: var14 (copy), t (copy)
-					if p2 == true then
-						var14(t.hideOverlay)
+			var2(t.showOverlay, {
+				onAnimationComplete = function(p3)
+					-- upvalues: var2 (copy), t (copy)
+					if p3 == true then
+						var2(t.hideOverlay)
 					end
 				end
 			})
 		end)
-		local coreGuiChangedSignalConnection = mockStarterGui.CoreGuiChangedSignal:Connect(function(p3, p4)
-			-- upvalues: var16 (copy)
-			if p3 == Enum.CoreGuiType.Health or p3 == Enum.CoreGuiType.All then
-				var16(p4)
+		local coreGuiChangedSignalConnection = mockStarterGui.CoreGuiChangedSignal:Connect(function(p2, p3)
+			-- upvalues: var4 (copy)
+			if p2 == Enum.CoreGuiType.Health or p2 == Enum.CoreGuiType.All then
+				var4(p3)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var20 (ref), coreGuiChangedSignalConnection (ref)
-			var20()
+			-- upvalues: var7 (ref), coreGuiChangedSignalConnection (ref)
+			var7()
 			coreGuiChangedSignalConnection:Disconnect()
 		end
-	end, { var17 })
-	local var19 = if cachedPolicyServiceModule:IsSubjectToChinaPolicies() then color3 else color
+	end, { var5 })
+	local var7 = if cachedPolicyServiceModule:IsSubjectToChinaPolicies() then color3 else color
 	
-	return if var15 then reactModule.createElement(image, {
+	return if var3 then reactModule.createElement(image, {
 		tag = "anchor-center-center position-center-center",
 		testId = "hurt-overlay",
 		Image = if fFlagUseNewHurtOverlayImage then "rbxasset://textures/ui/TopBar/HurtOverlayAsset.png" else "rbxasset://textures/ui/TopBar/WhiteOverlayAsset.png",
-		imageStyle = var13.transparency:map(function(p5)
-			-- upvalues: var19 (write)
-			return { Color3 = var19, Transparency = p5 }
+		imageStyle = var1.transparency:map(function(p2)
+			-- upvalues: var7 (write)
+			return { Color3 = var7, Transparency = p2 }
 		end),
 		ScaleType = Enum.ScaleType.Crop,
-		Size = if fFlagUseNewHurtOverlayAnimation then UDim2.fromScale(1, 1) else var13.size
+		Size = if fFlagUseNewHurtOverlayAnimation then UDim2.fromScale(1, 1) else var1.size
 	}) else nil
 end
 

@@ -28,28 +28,28 @@ return {
 		-- upvalues: t (ref)
 		return t[value]
 	end,
-	getAnimatedImageUri = function(p0)
-		return `rbxasset://textures/ui/Moments/Reactions/Animated/{p0}.png`
+	getAnimatedImageUri = function(p1)
+		return `rbxasset://textures/ui/Moments/Reactions/Animated/{p1}.png`
 	end,
 	getSizeKey = function(p1)
 		-- upvalues: t_1 (ref)
 		return t_1[p1]
 	end,
-	getSizePixels = function(p2)
+	getSizePixels = function(p1)
 		-- upvalues: t_2 (ref)
-		return t_2[p2]
+		return t_2[p1]
 	end,
-	getStaticImageUri = function(p3, p4)
+	getStaticImageUri = function(p1, p2)
 		-- upvalues: t (ref), t_1 (ref)
-		local var6 = t[p3]
-		local var7 = t_1[p4]
+		local var1 = t[p1]
+		local var2 = t_1[p2]
 		
-		return if var6 == nil or var7 == nil then nil else `rbxasset://textures/ui/Moments/Reactions/{var6}-{var7}.png`
+		return if var1 == nil or var2 == nil then nil else `rbxasset://textures/ui/Moments/Reactions/{var1}-{var2}.png`
 	end,
-	getStickerImageUri = function(p5)
+	getStickerImageUri = function(p1)
 		-- upvalues: t (ref)
-		local var8 = t[p5]
+		local var1 = t[p1]
 		
-		return if var8 == nil then nil else `rbxasset://textures/ui/Moments/Reactions/{var8}-large@3x.png`
+		return if var1 == nil then nil else `rbxasset://textures/ui/Moments/Reactions/{var1}-large@3x.png`
 	end
 }

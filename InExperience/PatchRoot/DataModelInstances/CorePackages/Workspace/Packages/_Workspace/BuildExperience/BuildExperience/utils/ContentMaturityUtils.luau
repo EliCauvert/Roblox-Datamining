@@ -1,8 +1,8 @@
 ﻿local universeActivationModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.UniverseActivation)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: universeActivationModule (ref)
-	return universeActivationModule.getUniverseActivationStore().getAndFetchEligibility(p0).data()
+	return universeActivationModule.getUniverseActivationStore().getAndFetchEligibility(p1).data()
 end
 
 return {
@@ -12,10 +12,10 @@ return {
 		
 		return var1 ~= nil and var1.provisionalRatingAllowed ~= true
 	end,
-	isContentUnrated = function(p2)
+	isContentUnrated = function(p1)
 		-- upvalues: universeActivationModule (ref)
-		local var2 = universeActivationModule.getUniverseActivationStore().getAndFetchEligibility(p2).data()
+		local var1 = universeActivationModule.getUniverseActivationStore().getAndFetchEligibility(p1).data()
 		
-		return var2 ~= nil and var2.maturityRated ~= true
+		return var1 ~= nil and var1.maturityRated ~= true
 	end
 }

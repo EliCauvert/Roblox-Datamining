@@ -2,17 +2,17 @@
 local _ = require(parent.DataHydration)
 local _ = require(parent.DiscoveryTypes)
 
-return function(p0)
-	local creator = p0.creator
+return function(p1)
+	local creator = p1.creator
 	
 	return {
-		universeId = p0.universeId,
-		placeId = p0.rootPlaceId,
-		name = p0.name,
-		playerCount = p0.playerCount,
-		contentMaturity = p0.contentMaturity,
-		minimumAge = p0.gameMinimumAge,
-		ageRecommendationDisplayName = p0.gameAgeDisplayName,
+		universeId = p1.universeId,
+		placeId = p1.rootPlaceId,
+		name = p1.name,
+		playerCount = p1.playerCount,
+		contentMaturity = p1.contentMaturity,
+		minimumAge = p1.gameMinimumAge,
+		ageRecommendationDisplayName = p1.gameAgeDisplayName,
 		creatorId = if creator then creator.id else nil,
 		creatorName = if creator then creator.name else nil
 	}

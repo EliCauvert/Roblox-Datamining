@@ -6,41 +6,41 @@ local createComputed = signalsModule.createComputed
 
 return function()
 	-- upvalues: createSignal (ref), createComputed (ref), cryoModule (ref)
-	local var2, var3 = createSignal({})
+	local var1, var2 = createSignal({})
 	local t = {}
 	
 	return {
-		getItems = var2,
-		getIsModerated = function(p0)
-			-- upvalues: t (ref), createComputed (copy), var2 (ref)
-			if t[p0] == nil then
-				t[p0] = createComputed(function(p1)
-					-- upvalues: var2 (copy), p0 (ref)
-					return table.find(var2(p1), p0) ~= nil
+		getItems = var1,
+		getIsModerated = function(p1)
+			-- upvalues: t (ref), createComputed (copy), var1 (ref)
+			if t[p1] == nil then
+				t[p1] = createComputed(function(p2)
+					-- upvalues: var1 (copy), p1 (ref)
+					return table.find(var1(p2), p1) ~= nil
 				end)
 			end
-			return t[p0]
+			return t[p1]
 		end,
-		markReported = function(p2)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			local var5 = var2(false)
+		markReported = function(p1)
+			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+			local var3 = var1(false)
 			
-			if not table.find(var5, p2) then
-				var3(cryoModule.List.join(var5, { p2 }))
+			if not table.find(var3, p1) then
+				var2(cryoModule.List.join(var3, { p1 }))
 			end
 		end,
-		addModeratedItems = function(p3)
-			-- upvalues: var2 (ref), var3 (ref), cryoModule (copy)
-			local var6 = var2(false)
+		addModeratedItems = function(p1)
+			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+			local var3 = var1(false)
 			local t = {}
 			
-			for i, v in p3 do
-				if not table.find(var6, v) then
+			for i, v in p1 do
+				if not table.find(var3, v) then
 					table.insert(t, v)
 				end
 			end
 			if #t > 0 then
-				var3(cryoModule.List.join(var6, t))
+				var2(cryoModule.List.join(var3, t))
 			end
 		end
 	}

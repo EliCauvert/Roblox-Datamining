@@ -19,40 +19,40 @@ local t = {
 	expectedFailures = {}
 }
 
-local function checkEditableImageSize(p0, p1, p2, p3, p4, p5, p6)
+local function checkEditableImageSize(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: UGCValidationService (ref), validationEnumsModule (ref), errorSourceStringsModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: UGCValidationService (copy), p0 (ref)
-		return UGCValidationService:GetEditableImageSize(p0)
+		-- upvalues: UGCValidationService (copy), p1 (ref)
+		return UGCValidationService:GetEditableImageSize(p1)
 	end)
 	
 	if ok then
-		if p1 < status.X or p1 < status.Y then
-			p4:fail(errorSourceStringsModule.Keys.TextureSize_TooBig, {
+		if p2 < status.X or p2 < status.Y then
+			p5:fail(errorSourceStringsModule.Keys.TextureSize_TooBig, {
 				Width = tostring(status.X),
 				Height = tostring(status.Y),
-				FullName = p2,
-				MaxSize = tostring(p1),
-				FieldName = p3
-			}, p5)
+				FullName = p3,
+				MaxSize = tostring(p2),
+				FieldName = p4
+			}, p6)
 		end
 		return
-	elseif p6 and p6.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
-		p4:fetchError(string.format("Failed to get texture size for '%s'. Make sure the texture exists and try again.", p2))
+	elseif p7 and p7.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+		p5:fetchError(string.format("Failed to get texture size for '%s'. Make sure the texture exists and try again.", p3))
 	end
-	p4:fail(errorSourceStringsModule.Keys.TextureSize_FailedToLoad, { FullName = p2 }, p5)
+	p5:fail(errorSourceStringsModule.Keys.TextureSize_FailedToLoad, { FullName = p3 }, p6)
 end
 
-function t.run(p7, p8)
+function t.run(p1, p2)
 	-- upvalues: fetchAllDesiredDataModule (ref), validationEnumsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), constantsInterfaceModule (ref), checkEditableImageSize (ref)
-	local rootInstance = p8.rootInstance
-	local assetType = p8.uploadEnum.assetType
-	local meshTextures = p8.meshTextures
-	local consumerConfig = p8.consumerConfig
-	local uploadCategory = p8.uploadCategory
+	local rootInstance = p2.rootInstance
+	local assetType = p2.uploadEnum.assetType
+	local meshTextures = p2.meshTextures
+	local consumerConfig = p2.consumerConfig
+	local uploadCategory = p2.uploadCategory
 	
 	if not meshTextures or meshTextures == fetchAllDesiredDataModule.DATA_FETCH_FAILURE then
-		p7:fetchError("Failed to load texture data for texture size check")
+		p1:fetchError("Failed to load texture data for texture size check")
 		
 		return
 	end
@@ -61,26 +61,26 @@ function t.run(p7, p8)
 	
 	for i, v in descendants do
 		local specialMesh
-		local var9 = nil
-		local var10 = ""
+		local var1 = nil
+		local var2 = ""
 		
 		if v:IsA("MeshPart") then
-			var9 = v
-			var10 = v.Name
+			var1 = v
+			var2 = v.Name
 		elseif v:IsA("Part") then
 			specialMesh = v:FindFirstChildOfClass("SpecialMesh")
 			
 			if specialMesh then
-				var9 = specialMesh
-				var10 = v.Name
+				var1 = specialMesh
+				var2 = v.Name
 			end
 		end
-		if var9 then
-			specialMesh = meshTextures[var10]
+		if var1 then
+			specialMesh = meshTextures[var2]
 			
 			if specialMesh then
 				if specialMesh.isPBR and (if uploadCategory ~= validationEnumsModule.UploadCategory.TORSO_AND_LIMBS then uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD else true) then
-					local surfaceAppearance = var9:FindFirstChildWhichIsA("SurfaceAppearance")
+					local surfaceAppearance = var1:FindFirstChildWhichIsA("SurfaceAppearance")
 					
 					if surfaceAppearance then
 						local list = { "ColorMap", "MetalnessMap", "NormalMap", "RoughnessMap" }
@@ -89,16 +89,16 @@ function t.run(p7, p8)
 							table.insert(list, "EmissiveMask")
 						end
 						for i_1, v_1 in list do
-							local var15 = specialMesh[v_1]
+							local var3 = specialMesh[v_1]
 							
-							if var15 and var15.editable then
-								checkEditableImageSize(var15.editable, constantsInterfaceModule.getTextureLimit(assetType, surfaceAppearance, v_1), surfaceAppearance:GetFullName() .. "." .. v_1, v_1, p7, surfaceAppearance, consumerConfig)
+							if var3 and var3.editable then
+								checkEditableImageSize(var3.editable, constantsInterfaceModule.getTextureLimit(assetType, surfaceAppearance, v_1), surfaceAppearance:GetFullName() .. "." .. v_1, v_1, p1, surfaceAppearance, consumerConfig)
 							end
 						end
 					end
 				elseif not specialMesh.isPBR and specialMesh.Texture and specialMesh.Texture.editable then
-					local var12 = if var9:IsA("MeshPart") then "TextureID" else "TextureId"
-					checkEditableImageSize(specialMesh.Texture.editable, constantsInterfaceModule.getTextureLimit(assetType, var9, var12), var9:GetFullName(), var12, p7, var9, consumerConfig)
+					local var4 = if var1:IsA("MeshPart") then "TextureID" else "TextureId"
+					checkEditableImageSize(specialMesh.Texture.editable, constantsInterfaceModule.getTextureLimit(assetType, var1, var4), var1:GetFullName(), var4, p1, var1, consumerConfig)
 				end
 			end
 		end

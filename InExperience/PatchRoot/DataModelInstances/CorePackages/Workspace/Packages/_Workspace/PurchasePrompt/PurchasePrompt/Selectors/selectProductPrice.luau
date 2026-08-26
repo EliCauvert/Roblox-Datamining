@@ -4,17 +4,17 @@ local fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(purchas
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local selectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getPlayerPriceModule (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectCartPricingOverrideModule (ref)
-	local collectibleItemInstanceId = p0.promptRequest.collectibleItemInstanceId
-	local var4 = if collectibleItemInstanceId and collectibleItemInstanceId ~= "" or fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p0.productPayload and p0.productPayload.timedOptionDays ~= nil then p0.promptRequest.expectedPrice else getPlayerPriceModule(p0.productInfo, p0.accountInfo.membershipType == 4)
+	local collectibleItemInstanceId = p1.promptRequest.collectibleItemInstanceId
+	local var1 = if collectibleItemInstanceId and collectibleItemInstanceId ~= "" or fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p1.productPayload and p1.productPayload.timedOptionDays ~= nil then p1.promptRequest.expectedPrice else getPlayerPriceModule(p1.productInfo, p1.accountInfo.membershipType == 4)
 	
 	if fFlagPurchasePromptCartPricingEnabledModule then
-		local var5 = selectCartPricingOverrideModule(p0)
+		local var2 = selectCartPricingOverrideModule(p1)
 		
-		if var5 ~= nil then
-			var4 = var5.priceInRobux
+		if var2 ~= nil then
+			var1 = var2.priceInRobux
 		end
 	end
-	return var4
+	return var1
 end

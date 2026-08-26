@@ -2,52 +2,52 @@
 local addUserModule = require(script.Parent.addUser)
 local removeUserModule = require(script.Parent.removeUser)
 
-function difference(p0, p1)
+function difference(p1, p2)
 	local t = {}
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		t[v] = true
 	end
-	for i, v_1 in pairs(p1) do
+	for i, v_1 in pairs(p2) do
 		t[v_1] = nil
 	end
 	local t_1 = {}
-	local var5 = 0
+	local var1 = 0
 	
-	for i_2, v_2 in pairs(p0) do
+	for i_2, v_2 in pairs(p1) do
 		if t[v_2] then
-			var5 += 1
-			t_1[var5] = v_2
+			var1 += 1
+			t_1[var1] = v_2
 		end
 	end
 	return t_1
 end
 
-return function(p2, p3)
+return function(p3, p4)
 	-- upvalues: llamaModule (ref), addUserModule (ref), removeUserModule (ref)
-	local var6 = tostring(p3.namedIds.users)
-	local var7 = p2[var6] or {}
-	local var8 = llamaModule.List.map(llamaModule.Dictionary.values(p3.responseBody.data), function(p4)
-		return tostring(p4.id)
+	local var2 = tostring(p4.namedIds.users)
+	local var3 = p3[var2] or {}
+	local var4 = llamaModule.List.map(llamaModule.Dictionary.values(p4.responseBody.data), function(p5)
+		return tostring(p5.id)
 	end)
-	local var9 = difference(var7, var8)
+	local var5 = difference(var3, var4)
 	
-	for i, v in pairs(difference(var8, var7)) do
-		p2 = llamaModule.Dictionary.join(p2, {
-			[var6] = addUserModule(p2[var6], v),
-			[v] = addUserModule(p2[v], var6)
+	for i, v in pairs(difference(var4, var3)) do
+		p3 = llamaModule.Dictionary.join(p3, {
+			[var2] = addUserModule(p3[var2], v),
+			[v] = addUserModule(p3[v], var2)
 		})
 	end
-	for i_1, v_1 in pairs(var9) do
-		p2 = llamaModule.Dictionary.join(p2, {
-			[var6] = removeUserModule(p2[var6], v_1),
-			[v_1] = removeUserModule(p2[v_1], var6)
+	for i_1, v_1 in pairs(var5) do
+		p3 = llamaModule.Dictionary.join(p3, {
+			[var2] = removeUserModule(p3[var2], v_1),
+			[v_1] = removeUserModule(p3[v_1], var2)
 		})
 	end
-	for i_2, v_2 in pairs(p2) do
+	for i_2, v_2 in pairs(p3) do
 		if llamaModule.isEmpty(v_2) then
-			p2[i_2] = nil
+			p3[i_2] = nil
 		end
 	end
-	return p2
+	return p3
 end

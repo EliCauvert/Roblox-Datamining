@@ -8,7 +8,7 @@ local getSelectedUsersStoreModule = require(appChat.Stores.GetSelectedUsersStore
 
 return reactModule.memo(function()
 	-- upvalues: getSelectedUsersStoreModule (ref), signalsReactModule (ref), foundationModule (ref), reactModule (ref), builderIconsModule (ref)
-	local var6 = getSelectedUsersStoreModule(false)
+	local var1 = getSelectedUsersStoreModule(false)
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "col auto-xy padding-y-small gap-small align-x-center"
@@ -24,10 +24,10 @@ return reactModule.memo(function()
 			tag = "auto-xy text-truncate-end text-caption-large content-emphasis",
 			LayoutOrder = 2,
 			Text = reactModule.joinBindings({
-				signalsReactModule.useSignalBinding(var6.getSelectedUserIdsCount()),
-				signalsReactModule.useSignalBinding(var6.getMaxSize())
-			}):map(function(p0)
-				return `{p0[1]}/{p0[2]}`
+				signalsReactModule.useSignalBinding(var1.getSelectedUserIdsCount()),
+				signalsReactModule.useSignalBinding(var1.getMaxSize())
+			}):map(function(p1)
+				return `{p1[1]}/{p1[2]}`
 			end)
 		})
 	})

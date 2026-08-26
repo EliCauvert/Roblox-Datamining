@@ -22,32 +22,32 @@ local t = {
 	[aiOverviewSentiment_1.ThumbsDown] = true
 }
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
-	p0.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		name = sduiActionType.AiOverviewFeedback,
-		message = p1,
-		propName = p2
-	}, p0.appPage)
+		message = p2,
+		propName = p3
+	}, p1.appPage)
 end
 
-local function sendUserSignal(value, p3, p4, p5, p6, p7)
+local function sendUserSignal(value, p1, p2, p3, p4, p5)
 	-- upvalues: postSendUserSignal (ref), httpService (ref), userSignalTypes (ref), sduiErrorType (ref), sduiActionType (ref)
 	local ok, status = pcall(function()
-		-- upvalues: postSendUserSignal (copy), p3 (ref), httpService (copy), p7 (ref), p4 (ref), userSignalTypes (copy), p5 (ref), p6 (ref), value (ref), sduiErrorType (copy), sduiActionType (copy)
-		postSendUserSignal(p3, { stringValue = httpService:JSONEncode(p7) }, {
-			id = p4,
+		-- upvalues: postSendUserSignal (copy), p1 (ref), httpService (copy), p5 (ref), p2 (ref), userSignalTypes (copy), p3 (ref), p4 (ref), value (ref), sduiErrorType (copy), sduiActionType (copy)
+		postSendUserSignal(p1, { stringValue = httpService:JSONEncode(p5) }, {
+			id = p2,
 			assetType = userSignalTypes.AssetType.PowerSearch,
 			signalOrigin = {
 				topicId = "PowerSearch",
-				productSurface = p5,
+				productSurface = p3,
 				subIds = { "PowerSearch" }
 			}
-		}, userSignalTypes.SignalValueType.String, p6):catch(function(p8)
+		}, userSignalTypes.SignalValueType.String, p4):catch(function(p6)
 			-- upvalues: value (copy), sduiErrorType (copy), sduiActionType (copy)
 			value.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
 				name = sduiActionType.AiOverviewFeedback,
-				message = tostring(p8)
+				message = tostring(p6)
 			}, value.appPage)
 		end)
 	end)
@@ -60,53 +60,53 @@ local function sendUserSignal(value, p3, p4, p5, p6, p7)
 	end
 end
 
-return function(p9, p10, p11, _)
+return function(p1, p2, p3, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), t (ref), findAnalyticsFieldInAncestors (ref), sendUserSignal (ref), userSignalTypes (ref), setCentralOverlay (ref), centralOverlayType (ref), buttonVariant (ref), aiOverviewExplicitFeedback (ref), aiOverviewSentiment (ref)
-	local var9 = if p9 then p9.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var9 == nil then
-		p11.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			propName = nil,
 			name = sduiActionType.AiOverviewFeedback
-		}, p11.appPage)
+		}, p3.appPage)
 		
 		return
 	end
-	local sentiment = var9.sentiment
+	local sentiment = var1.sentiment
 	
 	if typeof(sentiment) ~= "string" or not t[sentiment] then
-		p11.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			propName = "sentiment",
 			name = sduiActionType.AiOverviewFeedback,
 			message = `Invalid or missing sentiment: {tostring(sentiment)}`
-		}, p11.appPage)
+		}, p3.appPage)
 		
 		return
 	end
-	local productSurface = var9.productSurface
-	local var10 = if typeof(productSurface) == "string" and productSurface ~= "" then productSurface else "Unknown"
-	local searchSessionId = findAnalyticsFieldInAncestors("searchSessionId", p10) or ""
-	local searchQuery = findAnalyticsFieldInAncestors("searchQuery", p10) or ""
-	local var13 = findAnalyticsFieldInAncestors("universeIds", p10)
-	local appPage = p11.appPage
-	local networking = p11.dependencies.networking
-	sendUserSignal(p11, networking, searchSessionId, var10, userSignalTypes.SignalType.AiOverviewSentiment, {
+	local productSurface = var1.productSurface
+	local var2 = if typeof(productSurface) == "string" and productSurface ~= "" then productSurface else "Unknown"
+	local searchSessionId = findAnalyticsFieldInAncestors("searchSessionId", p2) or ""
+	local searchQuery = findAnalyticsFieldInAncestors("searchQuery", p2) or ""
+	local var3 = findAnalyticsFieldInAncestors("universeIds", p2)
+	local appPage = p3.appPage
+	local networking = p3.dependencies.networking
+	sendUserSignal(p3, networking, searchSessionId, var2, userSignalTypes.SignalType.AiOverviewSentiment, {
 		sentiment = sentiment,
 		query = searchQuery,
-		universe_ids = var13
+		universe_ids = var3
 	})
-	p11.dependencies.dispatch(setCentralOverlay(centralOverlayType.TextFeedbackFormModal, {
+	p3.dependencies.dispatch(setCentralOverlay(centralOverlayType.TextFeedbackFormModal, {
 		showTermsOfUseDisclaimer = true,
-		dialogTitle = var9.dialogTitle or "",
-		dialogText = var9.dialogText,
-		placeholderText = var9.placeholderText,
+		dialogTitle = var1.dialogTitle or "",
+		dialogText = var1.dialogText,
+		placeholderText = var1.placeholderText,
 		buttonVariant = buttonVariant.Emphasis,
-		onSubmit = function(p12)
-			-- upvalues: sendUserSignal (copy), p11 (ref), networking (ref), searchSessionId (ref), var10 (ref), userSignalTypes (copy), sentiment (ref), searchQuery (ref), aiOverviewExplicitFeedback (copy), appPage (ref)
-			sendUserSignal(p11, networking, searchSessionId, var10, userSignalTypes.SignalType.AiOverviewExplicitFeedback, {
+		onSubmit = function(p4)
+			-- upvalues: sendUserSignal (copy), p3 (ref), networking (ref), searchSessionId (ref), var2 (ref), userSignalTypes (copy), sentiment (ref), searchQuery (ref), aiOverviewExplicitFeedback (copy), appPage (ref)
+			sendUserSignal(p3, networking, searchSessionId, var2, userSignalTypes.SignalType.AiOverviewExplicitFeedback, {
 				sentiment = sentiment,
-				feedback_text = p12,
+				feedback_text = p4,
 				query = searchQuery
 			})
 			aiOverviewExplicitFeedback({
@@ -114,15 +114,15 @@ return function(p9, p10, p11, _)
 				sentiment = sentiment,
 				searchSessionId = searchSessionId,
 				query = searchQuery,
-				feedbackText = p12
+				feedbackText = p4
 			}, appPage)
 		end,
-		onClose = function(p13)
-			-- upvalues: sendUserSignal (copy), p11 (ref), networking (ref), searchSessionId (ref), var10 (ref), userSignalTypes (copy), sentiment (ref), searchQuery (ref), aiOverviewExplicitFeedback (copy), appPage (ref)
-			if p13 then
+		onClose = function(p4)
+			-- upvalues: sendUserSignal (copy), p3 (ref), networking (ref), searchSessionId (ref), var2 (ref), userSignalTypes (copy), sentiment (ref), searchQuery (ref), aiOverviewExplicitFeedback (copy), appPage (ref)
+			if p4 then
 				return
 			end
-			sendUserSignal(p11, networking, searchSessionId, var10, userSignalTypes.SignalType.AiOverviewExplicitFeedback, {
+			sendUserSignal(p3, networking, searchSessionId, var2, userSignalTypes.SignalType.AiOverviewExplicitFeedback, {
 				feedback_text = "",
 				sentiment = sentiment,
 				query = searchQuery
@@ -139,6 +139,6 @@ return function(p9, p10, p11, _)
 		sentiment = sentiment,
 		searchSessionId = searchSessionId,
 		query = searchQuery,
-		universeIds = var13
+		universeIds = var3
 	}, appPage)
 end

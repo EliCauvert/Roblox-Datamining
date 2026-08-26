@@ -10,7 +10,7 @@ local t = {
 	lastUpdated = { 25, 6, 10 }
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref), t (ref)
 	local list, t_1
 	local _ = nil
@@ -23,11 +23,11 @@ return function(p0)
 			"addPlaySessionId",
 			"addSessionInfo"
 		}
-		t_1 = { is_toggled_on = tostring(p0) }
+		t_1 = { is_toggled_on = tostring(p1) }
 	else
 		list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
 		t_1 = {
-			is_toggled_on = tostring(p0),
+			is_toggled_on = tostring(p1),
 			playsessionid = rbxAnalyticsService:GetPlaySessionId()
 		}
 	end

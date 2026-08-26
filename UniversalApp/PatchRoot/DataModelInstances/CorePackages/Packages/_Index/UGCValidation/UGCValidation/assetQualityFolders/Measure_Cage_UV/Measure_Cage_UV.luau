@@ -10,9 +10,9 @@ local t = {
 }
 local list = { "Handle_InnerCage", "Handle_OuterCage" }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: list (ref), UGCValidateLCCagingIncorrectUVThreshold (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
-	local measureCageUV = p1.aqsSummaryData.Measure_Cage_UV
+	local measureCageUV = p2.aqsSummaryData.Measure_Cage_UV
 	
 	if measureCageUV == nil then
 		error("Measure_Cage_UV: AQS summary data is nil")
@@ -21,13 +21,13 @@ function t.run(p0, p1)
 		if measureCageUV[v] == nil or measureCageUV[v].incorrect_uv_count == nil then
 			error("Measure_Cage_UV: AQS summary missing required fields for cage " .. v)
 		elseif UGCValidateLCCagingIncorrectUVThreshold < tonumber(measureCageUV[v].incorrect_uv_count) then
-			p0:fail(errorSourceStringsModule.Keys.MeasureCageUV, {
+			p1:fail(errorSourceStringsModule.Keys.MeasureCageUV, {
 				cage_name = v,
 				incorrect_uv_count = tonumber(measureCageUV[v].incorrect_uv_count)
 			})
 		end
 		if getFFlagUGCValidateAQScoreWarningsModule() and measureCageUV[v].score ~= nil and tonumber(measureCageUV[v].score) ~= 100 then
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_CageUV, {
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_CageUV, {
 				score = tostring(math.floor(tonumber(measureCageUV[v].score) or 0)),
 				cage_name = v,
 				incorrect_uv_count = measureCageUV[v].incorrect_uv_count or "0"

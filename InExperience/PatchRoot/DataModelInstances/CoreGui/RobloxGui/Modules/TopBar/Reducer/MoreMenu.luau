@@ -14,24 +14,24 @@ return roduxModule.createReducer({
 	emotesOpen = false,
 	emotesEnabled = true
 }, {
-	[require(actions.SetMoreMenuOpen).name] = function(p0, p1)
+	[require(actions.SetMoreMenuOpen).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, { open = p1.open })
+		return cryoModule.Dictionary.join(p1, { open = p2.open })
 	end,
-	[require(actions.SetBackpackOpen).name] = function(p2, p3)
+	[require(actions.SetBackpackOpen).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p2, { open = false, backpackOpen = p3.open })
+		return cryoModule.Dictionary.join(p1, { open = false, backpackOpen = p2.open })
 	end,
-	[require(actions.SetEmotesOpen).name] = function(p4, p5)
+	[require(actions.SetEmotesOpen).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p4, { open = false, emotesOpen = p5.open })
+		return cryoModule.Dictionary.join(p1, { open = false, emotesOpen = p2.open })
 	end,
-	[require(actions.SetEmotesEnabled).name] = function(p6, p7)
+	[require(actions.SetEmotesEnabled).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p6, { emotesEnabled = p7.enabled })
+		return cryoModule.Dictionary.join(p1, { emotesEnabled = p2.enabled })
 	end,
-	[require(actions.SetLeaderboardOpen).name] = function(p8, p9)
+	[require(actions.SetLeaderboardOpen).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p8, { open = false, leaderboardOpen = p9.open })
+		return cryoModule.Dictionary.join(p1, { open = false, leaderboardOpen = p2.open })
 	end
 })

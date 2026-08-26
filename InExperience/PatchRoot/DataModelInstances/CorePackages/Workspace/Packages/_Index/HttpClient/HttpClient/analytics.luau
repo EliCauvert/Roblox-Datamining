@@ -4,8 +4,8 @@ local luaHttpClientRequestTimerEventHundredthsPercent = game:DefineFastInt("LuaH
 game:DefineFastInt("LuaHttpClientRequestStatusEventHundredthsPercent", 0)
 game:DefineFastInt("LuaHttpClientPayloadSizeEventHundredthsPercent", 0)
 
-local function _(p0)
-	return if p0 <= 0 then false else p0 >= 10000 or math.random(1, 10000) <= p0
+local function _(p1)
+	return if p1 <= 0 then false else p1 >= 10000 or math.random(1, 10000) <= p1
 end
 
 local t = {
@@ -54,55 +54,55 @@ local list = {
 }
 
 return {
-	defaultAnalytics = function(p2, p3, _, p4, p5, p6)
+	defaultAnalytics = function(p1, p2, _, p3, p4, p5)
 		-- upvalues: list (ref), telemetryService (ref), t (ref), t_1 (ref), t_3 (ref), t_2 (ref)
 		local t_4 = {
-			analyticsKey = p2,
-			method = p3,
-			durationMs = p5,
-			status = p6
+			analyticsKey = p1,
+			method = p2,
+			durationMs = p4,
+			status = p5
 		}
 		
-		if p4 and p4.stats then
+		if p3 and p3.stats then
 			for i, v in list do
-				local var8 = p4.stats[v]
+				local var1 = p3.stats[v]
 				
-				if typeof(var8) == "number" then
-					t_4[v] = var8 * 1000
+				if typeof(var1) == "number" then
+					t_4[v] = var1 * 1000
 				end
 			end
-			local wasRequestRetried = p4.stats.WasRequestRetried
+			local wasRequestRetried = p3.stats.WasRequestRetried
 			
 			if typeof(wasRequestRetried) == "number" then
 				t_4.WasRequestRetried = wasRequestRetried
 			end
 		end
-		local var10
+		local var2
 		telemetryService:LogEvent(t, { customFields = t_4, standardizedFields = { "addOSInfo" } })
 		local luaHttpClientRequestStatusEventHundredthsPercentFastInt = game:GetFastInt("LuaHttpClientRequestStatusEventHundredthsPercent")
 		
 		if if luaHttpClientRequestStatusEventHundredthsPercentFastInt <= 0 then false else luaHttpClientRequestStatusEventHundredthsPercentFastInt >= 10000 or math.random(1, 10000) <= luaHttpClientRequestStatusEventHundredthsPercentFastInt then
 			telemetryService:LogCounter(t_1, {
 				customFields = {
-					analyticsKey = p2,
-					method = p3,
-					status = p6,
-					statusCode = if p4 then p4.statusCode else "unknown",
-					httpError = if p4 and p4.httpError then t_3[p4.httpError] else nil
+					analyticsKey = p1,
+					method = p2,
+					status = p5,
+					statusCode = if p3 then p3.statusCode else "unknown",
+					httpError = if p3 and p3.httpError then t_3[p3.httpError] else nil
 				}
 			})
 		end
-		if p4 then
-			local responseBody = p4.responseBody
-			var10 = if typeof(responseBody) == "buffer" then buffer.len(responseBody) elseif typeof(responseBody) == "string" then string.len(responseBody) else nil
+		if p3 then
+			local responseBody = p3.responseBody
+			var2 = if typeof(responseBody) == "buffer" then buffer.len(responseBody) elseif typeof(responseBody) == "string" then string.len(responseBody) else nil
 		else
-			var10 = nil
+			var2 = nil
 		end
-		if var10 ~= nil then
+		if var2 ~= nil then
 			local luaHttpClientPayloadSizeEventHundredthsPercentFastInt = game:GetFastInt("LuaHttpClientPayloadSizeEventHundredthsPercent")
 			
 			if if luaHttpClientPayloadSizeEventHundredthsPercentFastInt <= 0 then false else luaHttpClientPayloadSizeEventHundredthsPercentFastInt >= 10000 or math.random(1, 10000) <= luaHttpClientPayloadSizeEventHundredthsPercentFastInt then
-				telemetryService:LogStat(t_2, { customFields = { analyticsKey = p2 } }, var10)
+				telemetryService:LogStat(t_2, { customFields = { analyticsKey = p1 } }, var2)
 			end
 		end
 	end

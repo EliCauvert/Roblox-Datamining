@@ -8,19 +8,19 @@ local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetInteg
 local getSideSheetVisibilityModule = require(inExperienceSideSheet.Utils.getSideSheetVisibility)
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
 
-local function createActionBinding(p0)
+local function createActionBinding(p1)
 	-- upvalues: signalsModule (ref)
-	local var10, var11 = signalsModule.createSignal(true)
-	local var12, var13 = signalsModule.createSignal(function()
+	local var1, var2 = signalsModule.createSignal(true)
+	local var3, var4 = signalsModule.createSignal(function()
 		return function() end
 	end)
 	
 	return {
-		keyCodes = p0,
-		getOnActivated = var12,
-		setOnActivated = var13,
-		getIsEnabled = var10,
-		setIsEnabled = var11
+		keyCodes = p1,
+		getOnActivated = var3,
+		setOnActivated = var4,
+		getIsEnabled = var1,
+		setIsEnabled = var2
 	}
 end
 
@@ -30,7 +30,7 @@ return function()
 		[enumsModule.ActionBinding.Leave] = createActionBinding({ Enum.KeyCode.L, Enum.KeyCode.ButtonX }),
 		[enumsModule.ActionBinding.Respawn] = createActionBinding({ Enum.KeyCode.R, Enum.KeyCode.ButtonY })
 	}
-	local var15 = signalsModule.createEffect(function(p1)
+	local var1 = signalsModule.createEffect(function(p1)
 		-- upvalues: getIntegrationsStoreModule (copy), t (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 		for i, v in getIntegrationsStoreModule(p1).getSessionActionIntegrations(p1) do
 			local id = t[v.id]
@@ -48,11 +48,11 @@ return function()
 			end
 		end
 	end)
-	local var16 = signalsModule.createEffect(function(p2)
+	local var2 = signalsModule.createEffect(function(p2)
 		-- upvalues: getSideSheetVisibilityModule (copy), t (ref), contextActionService (copy)
 		if getSideSheetVisibilityModule(p2) then
 			for i, v in t do
-				local var17 = function(_, p3, _)
+				local var3 = function(_, p3, _)
 					-- upvalues: v (ref)
 					if p3 == Enum.UserInputState.Begin then
 						v.getOnActivated()()
@@ -60,7 +60,7 @@ return function()
 				end
 				
 				if v.getIsEnabled(p2) then
-					contextActionService:BindCoreAction(i, var17, false, unpack(v.keyCodes))
+					contextActionService:BindCoreAction(i, var3, false, unpack(v.keyCodes))
 				else
 					contextActionService:UnbindCoreAction(i)
 				end
@@ -76,9 +76,9 @@ return function()
 	return {
 		sessionActionBindings = t,
 		cleanUp = function()
-			-- upvalues: var16 (ref), var15 (ref)
-			var16()
-			var15()
+			-- upvalues: var2 (ref), var1 (ref)
+			var2()
+			var1()
 		end
 	}
 end

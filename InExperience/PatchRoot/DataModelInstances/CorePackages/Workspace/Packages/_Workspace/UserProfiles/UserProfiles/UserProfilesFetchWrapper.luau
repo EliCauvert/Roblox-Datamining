@@ -3,7 +3,7 @@ local _ = require(parent.ApolloClient)
 local _ = require(parent.React)
 local useUserProfilesFetch = require(script.Parent.Hooks).useUserProfilesFetch
 
-return function(p0)
+return function(p1)
 	-- upvalues: useUserProfilesFetch (ref)
-	return p0.renderComponent(useUserProfilesFetch({ userIds = p0.userIds, query = p0.query }))
+	return p1.renderComponent(useUserProfilesFetch({ userIds = p1.userIds, query = p1.query }))
 end

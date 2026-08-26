@@ -18,26 +18,26 @@ local t = {
 	style = nil
 }
 
-function LeaveGroupCell(p0)
+function LeaveGroupCell(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), roactFitComponents (ref), iconWithTextCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
-	local var7 = cryoModule.Dictionary.join(t, p0)
+	local var1 = cryoModule.Dictionary.join(t, p1)
 	
 	return reactModule.createElement(roactFitComponents.FitFrameVertical, {
 		BackgroundTransparency = 1,
-		LayoutOrder = var7.LayoutOrder,
+		LayoutOrder = var1.LayoutOrder,
 		width = UDim.new(1, 0),
-		margin = { left = 0, right = 0, bottom = 0, top = var7.marginTop }
+		margin = { left = 0, right = 0, bottom = 0, top = var1.marginTop }
 	}, {
 		LeaveGroupRow = reactModule.createElement(iconWithTextCellModule, {
 			showDivider = false,
-			LayoutOrder = var7.LayoutOrder,
-			onActivated = var7.onActivated,
-			primaryIcon = var7.iconImage,
-			Size = UDim2.new(1, 0, 0, var7.cellHeight),
-			style = var7.style,
-			Text = var7.leaveGroupText,
-			iconCellWidth = var7.iconCellWidth,
-			testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsListActionButton(var7.leaveGroupText) else nil
+			LayoutOrder = var1.LayoutOrder,
+			onActivated = var1.onActivated,
+			primaryIcon = var1.iconImage,
+			Size = UDim2.new(1, 0, 0, var1.cellHeight),
+			style = var1.style,
+			Text = var1.leaveGroupText,
+			iconCellWidth = var1.iconCellWidth,
+			testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsListActionButton(var1.leaveGroupText) else nil
 		})
 	})
 end

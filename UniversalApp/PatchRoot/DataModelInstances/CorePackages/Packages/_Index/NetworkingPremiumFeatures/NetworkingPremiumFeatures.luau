@@ -1,10 +1,10 @@
 ﻿local createGetUserPremiumMembershipStatusModule = require(script.networkRequests.createGetUserPremiumMembershipStatus)
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: createGetUserPremiumMembershipStatusModule (ref)
 		return {
-			GetUserPremiumMembershipStatus = createGetUserPremiumMembershipStatusModule(p0)
+			GetUserPremiumMembershipStatus = createGetUserPremiumMembershipStatusModule(p1)
 		}
 	end
 }

@@ -10,13 +10,13 @@ local leaderboardRowShellModule = require(parent.Components.Presentation.Leaderb
 local leaderboardTextCellModule = require(parent.Components.Presentation.LeaderboardTextCell)
 local peopleCellModule = require(parent.Components.Presentation.PeopleCell)
 local _ = { Rank = "Rank", People = "People", Score = "-" }
-local var8 = signalsModule.createSignal(nil)
+local var1 = signalsModule.createSignal(nil)
 local platformLeaderboardUnrankedLabel = game:DefineFastString("PlatformLeaderboardUnrankedLabel", "100+")
-local var10 = signalsModule.createSignal(nil)
+local var2 = signalsModule.createSignal(nil)
 
-local function formatScoreCell(p0)
+local function formatScoreCell(p1)
 	-- upvalues: numberLocalization (ref), localizationService (ref)
-	return if p0 == nil then "-" else numberLocalization.localize(p0, localizationService.RobloxLocaleId)
+	return if p1 == nil then "-" else numberLocalization.localize(p1, localizationService.RobloxLocaleId)
 end
 
 local function formatRankCell(p1)
@@ -24,55 +24,55 @@ local function formatRankCell(p1)
 	return if p1 == nil then platformLeaderboardUnrankedLabel else tostring(p1)
 end
 
-local function rankToLayoutOrder(p2)
-	return if p2 == nil then 1000000 else p2
+local function rankToLayoutOrder(p1)
+	return if p1 == nil then 1000000 else p1
 end
 
-return reactModule.memo(function(p3)
-	-- upvalues: signalsReactModule (ref), var8 (ref), var10 (ref), reactModule (ref), formatScoreCell (ref), formatRankCell (ref), rankToLayoutOrder (ref), constantsModule (ref), leaderboardRowShellModule (ref), leaderboardTextCellModule (ref), peopleCellModule (ref)
-	local var14 = p3.isHeader == true
-	local var15 = signalsReactModule.useSignalBinding(p3.scoreGetter or var8)
-	local var16 = signalsReactModule.useSignalBinding(p3.rankGetter or var10)
-	local scoreLabel = p3.scoreLabel
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var14 (ref), scoreLabel (ref), var15 (ref), formatScoreCell (copy)
-		return if var14 then scoreLabel or "-" else var15:map(formatScoreCell)
-	end, { var14, var15, scoreLabel })
-	local rankHeaderText = p3.rankHeaderText
-	local rowHeight = p3.rowHeight or (if var14 then constantsModule.PLATFORM_HEADER_HEIGHT else constantsModule.PLATFORM_ROW_HEIGHT)
+return reactModule.memo(function(p1)
+	-- upvalues: signalsReactModule (ref), var1 (ref), var2 (ref), reactModule (ref), formatScoreCell (ref), formatRankCell (ref), rankToLayoutOrder (ref), constantsModule (ref), leaderboardRowShellModule (ref), leaderboardTextCellModule (ref), peopleCellModule (ref)
+	local var3 = p1.isHeader == true
+	local var4 = signalsReactModule.useSignalBinding(p1.scoreGetter or var1)
+	local var5 = signalsReactModule.useSignalBinding(p1.rankGetter or var2)
+	local scoreLabel = p1.scoreLabel
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), scoreLabel (ref), var4 (ref), formatScoreCell (copy)
+		return if var3 then scoreLabel or "-" else var4:map(formatScoreCell)
+	end, { var3, var4, scoreLabel })
+	local rankHeaderText = p1.rankHeaderText
+	local rowHeight = p1.rowHeight or (if var3 then constantsModule.PLATFORM_HEADER_HEIGHT else constantsModule.PLATFORM_ROW_HEIGHT)
 	
 	return reactModule.createElement(leaderboardRowShellModule, {
 		rowHeight = rowHeight,
 		layoutOrder = reactModule.useMemo(function()
-			-- upvalues: p3 (ref), var16 (ref), rankToLayoutOrder (copy)
-			return if p3.layoutOrder == nil then var16:map(rankToLayoutOrder) else p3.layoutOrder
-		end, { p3.layoutOrder, var16 }),
-		isHighlighted = p3.isViewer == true and p3.highlightViewerRow ~= false,
-		showDivider = p3.showDivider == true,
+			-- upvalues: p1 (ref), var5 (ref), rankToLayoutOrder (copy)
+			return if p1.layoutOrder == nil then var5:map(rankToLayoutOrder) else p1.layoutOrder
+		end, { p1.layoutOrder, var5 }),
+		isHighlighted = p1.isViewer == true and p1.highlightViewerRow ~= false,
+		showDivider = p1.showDivider == true,
 		flexTag = constantsModule.PLATFORM_ROW_FLEX_TAG
 	}, {
 		RankCell = reactModule.createElement(leaderboardTextCellModule, {
 			layoutOrder = 1,
 			text = reactModule.useMemo(function()
-				-- upvalues: var14 (ref), rankHeaderText (ref), var16 (ref), formatRankCell (copy)
-				return if var14 then rankHeaderText or "Rank" else var16:map(formatRankCell)
-			end, { var14, var16, rankHeaderText }),
-			width = p3.rankWidth or constantsModule.PLATFORM_RANK_WIDTH,
+				-- upvalues: var3 (ref), rankHeaderText (ref), var5 (ref), formatRankCell (copy)
+				return if var3 then rankHeaderText or "Rank" else var5:map(formatRankCell)
+			end, { var3, var5, rankHeaderText }),
+			width = p1.rankWidth or constantsModule.PLATFORM_RANK_WIDTH,
 			rowHeight = rowHeight,
-			textTag = if var14 then "size-full text-caption-small text-align-x-left content-muted" else "size-full text-body-small text-align-x-left content-default"
+			textTag = if var3 then "size-full text-caption-small text-align-x-left content-muted" else "size-full text-body-small text-align-x-left content-default"
 		}),
 		PeopleCell = reactModule.createElement(peopleCellModule, {
 			layoutOrder = 2,
-			displayName = if var14 then p3.peopleHeaderText or "People" else p3.displayName or "-",
-			textTag = if var14 then "size-full text-caption-small text-align-x-left content-muted" else nil,
-			truncate = not var14
+			displayName = if var3 then p1.peopleHeaderText or "People" else p1.displayName or "-",
+			textTag = if var3 then "size-full text-caption-small text-align-x-left content-muted" else nil,
+			truncate = not var3
 		}),
 		ScoreCell = reactModule.createElement(leaderboardTextCellModule, {
 			layoutOrder = 3,
-			text = var17,
-			width = p3.scoreWidth or constantsModule.PLATFORM_SCORE_WIDTH,
+			text = var6,
+			width = p1.scoreWidth or constantsModule.PLATFORM_SCORE_WIDTH,
 			rowHeight = rowHeight,
-			textTag = if var14 then "size-full text-caption-small text-align-x-right content-muted" else "size-full text-body-small text-align-x-right content-default"
+			textTag = if var3 then "size-full text-caption-small text-align-x-right content-muted" else "size-full text-body-small text-align-x-right content-default"
 		})
 	})
 end)

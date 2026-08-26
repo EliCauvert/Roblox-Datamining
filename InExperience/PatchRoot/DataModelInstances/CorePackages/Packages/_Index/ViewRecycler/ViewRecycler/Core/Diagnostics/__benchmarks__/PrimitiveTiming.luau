@@ -1,29 +1,29 @@
 ﻿local responsibilityCatalogModule = require(script.Parent.ResponsibilityCatalog)
 local list = { 1000, 100000 }
 
-local function _(p0, p1)
-	local var5 = p0.new(40)
-	var5.buildFromArray(table.create(p1, 40))
+local function _(p1, p2)
+	local var1 = p1.new(40)
+	var1.buildFromArray(table.create(p2, 40))
 	
-	return var5
+	return var1
 end
 
-local function measureOffsetQueries(value, p2, p3, p4, p5, p6)
+local function measureOffsetQueries(value, p1, p2, p3, p4, p5)
 	-- upvalues: responsibilityCatalogModule (ref)
-	local var6 = value.OrderStatisticTree.new(40)
-	var6.buildFromArray(table.create(p4, 40))
-	local var7 = var6.totalSum()
-	local var8 = 0
-	var6 = p2.measure(function()
-		-- upvalues: p5 (ref), p4 (ref), var8 (write), var6 (ref), var7 (ref)
-		for i = 1, p5 do
-			var8 += var6.prefixSum(i * 7919 % p4 + 1)
-			var8 += var6.indexAtPrefixSum(i * 104729 % var7)
+	local var1 = value.OrderStatisticTree.new(40)
+	var1.buildFromArray(table.create(p3, 40))
+	local var2 = var1.totalSum()
+	local var3 = 0
+	var1 = p1.measure(function()
+		-- upvalues: p4 (ref), p3 (ref), var3 (write), var1 (ref), var2 (ref)
+		for i = 1, p4 do
+			var3 += var1.prefixSum(i * 7919 % p3 + 1)
+			var3 += var1.indexAtPrefixSum(i * 104729 % var2)
 		end
-	end, p6)
-	assert(var8 > 0, "offset query benchmark did not complete")
+	end, p5)
+	assert(var3 > 0, "offset query benchmark did not complete")
 	
-	return p3.create({
+	return p2.create({
 		suite = "view-recycler-core",
 		layer = "primitive",
 		owner = "core",
@@ -31,37 +31,37 @@ local function measureOffsetQueries(value, p2, p3, p4, p5, p6)
 		workload = "size-tree-offset-queries",
 		description = "Resolves item offsets and indices against the measured-layout size tree.",
 		responsibility = responsibilityCatalogModule.Core.ViewportRange,
-		scale = { items = p4, queries = p5 * 2 },
+		scale = { items = p3, queries = p4 * 2 },
 		timing = {
 			unit = "ms",
 			basis = "offsetQueryBatch",
 			includesSchedulerWaits = false,
-			operationsPerSample = p5 * 2
+			operationsPerSample = p4 * 2
 		},
-		arms = { viewRecycler = var6 },
-		evidence = { treeItems = p4 }
+		arms = { viewRecycler = var1 },
+		evidence = { treeItems = p3 }
 	})
 end
 
-local function measureTreeUpdates(p7, p8, p9, p10, p11, p12)
+local function measureTreeUpdates(p6, p7, p8, p9, p10, p11)
 	-- upvalues: responsibilityCatalogModule (ref)
-	local var9 = p7.OrderStatisticTree.new(40)
-	var9.buildFromArray(table.create(p10, 40))
-	local var10 = 0
-	local var11 = 0
-	var9 = p8.measure(function()
-		-- upvalues: var10 (write), p11 (ref), p10 (ref), var9 (ref), var11 (write)
-		var10 = (var10 + 1) % 5
+	local var4 = p6.OrderStatisticTree.new(40)
+	var4.buildFromArray(table.create(p9, 40))
+	local var5 = 0
+	local var6 = 0
+	var4 = p7.measure(function()
+		-- upvalues: var5 (write), p10 (ref), p9 (ref), var4 (ref), var6 (write)
+		var5 = (var5 + 1) % 5
 		
-		for i = 1, p11 do
-			local var12 = i * 7919 % p10 + 1
-			var9.update(var12, (var12 + var10) % 5 * 2 + 36)
-			var11 += var9.getSize(var12)
+		for i = 1, p10 do
+			local var7 = i * 7919 % p9 + 1
+			var4.update(var7, (var7 + var5) % 5 * 2 + 36)
+			var6 += var4.getSize(var7)
 		end
-	end, p12)
-	assert(var11 > 0, "size-tree update benchmark did not complete")
+	end, p11)
+	assert(var6 > 0, "size-tree update benchmark did not complete")
 	
-	return p9.create({
+	return p8.create({
 		suite = "view-recycler-core",
 		layer = "primitive",
 		owner = "core",
@@ -69,50 +69,50 @@ local function measureTreeUpdates(p7, p8, p9, p10, p11, p12)
 		workload = "size-tree-measured-updates",
 		description = "Updates measured sizes and refreshes aggregate offsets along each tree path.",
 		responsibility = responsibilityCatalogModule.Core.Measurement,
-		scale = { items = p10, measurements = p11 },
+		scale = { items = p9, measurements = p10 },
 		timing = {
 			unit = "ms",
 			basis = "sizeUpdateBatch",
 			includesSchedulerWaits = false,
-			operationsPerSample = p11
+			operationsPerSample = p10
 		},
-		arms = { viewRecycler = var9 },
-		evidence = { treeItems = p10 }
+		arms = { viewRecycler = var4 },
+		evidence = { treeItems = p9 }
 	})
 end
 
-local function measureLayoutBatch(p13, p14, p15, p16, p17, p18)
+local function measureLayoutBatch(p12, p13, p14, p15, p16, p17)
 	-- upvalues: responsibilityCatalogModule (ref)
-	local list = table.create(p16)
+	local list = table.create(p15)
 	
-	for i = 1, p16 do
+	for i = 1, p15 do
 		list[i] = `item{i}`
 	end
-	local var14 = p13.Layout.measured({ estimatedItemLength = 40 })
-	var14.applyDataSourceChange({ type = "reset", keys = list })
-	local var15 = 0
-	local var16 = 0
-	local var17 = p14.measure(function()
-		-- upvalues: var15 (write), p17 (ref), p16 (ref), var14 (ref), list (ref), var16 (write)
-		var15 = (var15 + 1) % 5
+	local var7 = p12.Layout.measured({ estimatedItemLength = 40 })
+	var7.applyDataSourceChange({ type = "reset", keys = list })
+	local var8 = 0
+	local var9 = 0
+	local var10 = p13.measure(function()
+		-- upvalues: var8 (write), p16 (ref), p15 (ref), var7 (ref), list (ref), var9 (write)
+		var8 = (var8 + 1) % 5
 		
-		for i = 1, p17 do
-			local var18 = i * 7919 % p16 + 1
+		for i = 1, p16 do
+			local var11 = i * 7919 % p15 + 1
 			
-			if var14.updateItemMeasurement({
+			if var7.updateItemMeasurement({
 				itemRevision = 0,
-				itemIndex = var18,
-				itemKey = list[var18],
-				length = (var18 + var15) % 5 * 2 + 36
+				itemIndex = var11,
+				itemKey = list[var11],
+				length = (var11 + var8) % 5 * 2 + 36
 			}).accepted then
-				var16 += 1
+				var9 += 1
 			end
 		end
-	end, p18)
-	var14.destroy()
-	assert(var16 > 0, "measured-layout benchmark did not accept measurements")
+	end, p17)
+	var7.destroy()
+	assert(var9 > 0, "measured-layout benchmark did not accept measurements")
 	
-	return p15.create({
+	return p14.create({
 		suite = "view-recycler-core",
 		layer = "subsystem",
 		owner = "core",
@@ -120,34 +120,34 @@ local function measureLayoutBatch(p13, p14, p15, p16, p17, p18)
 		workload = "measured-layout-batch",
 		description = "Validates item identities, updates measured-size state, and propagates the running estimate.",
 		responsibility = responsibilityCatalogModule.Core.Measurement,
-		scale = { items = p16, measurements = p17 },
+		scale = { items = p15, measurements = p16 },
 		timing = {
 			unit = "ms",
 			basis = "measurementBatch",
 			includesSchedulerWaits = false,
-			operationsPerSample = p17
+			operationsPerSample = p16
 		},
-		arms = { viewRecycler = var17 },
-		evidence = { measurementsPerBatch = p17 }
+		arms = { viewRecycler = var10 },
+		evidence = { measurementsPerBatch = p16 }
 	})
 end
 
 return {
-	run = function(p19, p20, p21, p22)
+	run = function(p18, p19, p20, p21)
 		-- upvalues: list (ref), measureOffsetQueries (ref), measureTreeUpdates (ref), measureLayoutBatch (ref)
-		p22 = p22 or {}
-		local itemCounts = p22.itemCounts or list
-		local queryCount = p22.queryCount or 1000
-		local measurementBatchSize = p22.measurementBatchSize or 20
+		p21 = p21 or {}
+		local itemCounts = p21.itemCounts or list
+		local queryCount = p21.queryCount or 1000
+		local measurementBatchSize = p21.measurementBatchSize or 20
 		assert(queryCount >= 1 and queryCount % 1 == 0, "queryCount must be a positive integer")
 		assert(measurementBatchSize >= 1 and measurementBatchSize % 1 == 0, "measurementBatchSize must be a positive integer")
 		local t = {}
 		
 		for i, v in itemCounts do
 			assert(measurementBatchSize <= v, "item count must cover the measurement batch")
-			table.insert(t, measureOffsetQueries(p19, p20, p21, v, queryCount, p22))
-			table.insert(t, measureTreeUpdates(p19, p20, p21, v, measurementBatchSize, p22))
-			table.insert(t, measureLayoutBatch(p19, p20, p21, v, measurementBatchSize, p22))
+			table.insert(t, measureOffsetQueries(p18, p19, p20, v, queryCount, p21))
+			table.insert(t, measureTreeUpdates(p18, p19, p20, v, measurementBatchSize, p21))
+			table.insert(t, measureLayoutBatch(p18, p19, p20, v, measurementBatchSize, p21))
 		end
 		return t
 	end

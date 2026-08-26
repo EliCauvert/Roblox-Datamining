@@ -105,9 +105,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		return { close = var27 }
 	end, {})
 	local uDim2 = UDim2.new(0, clampedValue + (if var6 then right else 0), 1, if var6 then 0 else -medium * 2)
-	local var28 = var11:map(function(p1)
+	local var28 = var11:map(function(p3)
 		-- upvalues: var6 (ref), medium (ref)
-		return UDim2.new(1, if var6 then -p1 else -(p1 + medium), 0, if var6 then 0 else medium)
+		return UDim2.new(1, if var6 then -p3 else -(p3 + medium), 0, if var6 then 0 else medium)
 	end)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), var13 (ref), var14 (ref), var22 (ref), var23 (ref), var15 (ref), var16 (ref), var17 (write), var20 (write), var21 (write), var27 (ref), var6 (ref), sheetTypeModule (copy), var1 (ref), var24 (ref), var25 (ref), var26 (ref)
@@ -173,8 +173,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					variant = if var17 then closeAffordanceVariantModule.OverMedia else closeAffordanceVariantModule.Utility,
 					Position = UDim2.new(1, -var3.Margin.Small, 0, var3.Margin.Small),
 					AnchorPoint = Vector2.new(1, 0),
-					Visible = var15:map(function(p1)
-						return not p1
+					Visible = var15:map(function(p3)
+						return not p3
 					end),
 					testId = `{var1.testId}--close-affordance`
 				})
@@ -183,9 +183,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				ZIndex = 2,
 				Image = SHADOW_IMAGE,
 				Size = uDim2 + UDim2.fromOffset(SHADOW_SIZE * 2, SHADOW_SIZE * 2),
-				Position = var28:map(function(p1)
+				Position = var28:map(function(p3)
 					-- upvalues: SHADOW_SIZE (copy)
-					return p1 + UDim2.fromOffset(-SHADOW_SIZE, -SHADOW_SIZE)
+					return p3 + UDim2.fromOffset(-SHADOW_SIZE, -SHADOW_SIZE)
 				end),
 				slice = {
 					scale = 2,
@@ -198,11 +198,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				Size = UDim2.fromScale(2, 2),
 				Position = UDim2.fromScale(-0.5, -0.5),
 				stateLayer = { affordance = stateLayerAffordanceModule.None },
-				backgroundStyle = var8:map(function(p1)
+				backgroundStyle = var8:map(function(p3)
 					-- upvalues: var3 (ref)
 					return {
 						Color3 = var3.Color.Common.Backdrop.Color3,
-						Transparency = math.lerp(var3.Color.Common.Backdrop.Transparency, 1, p1)
+						Transparency = math.lerp(var3.Color.Common.Backdrop.Transparency, 1, p3)
 					}
 				end),
 				onActivated = var27,

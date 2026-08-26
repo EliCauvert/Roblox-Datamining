@@ -14,18 +14,18 @@ return function(p1, p2)
 	-- upvalues: roactModule (ref), uiblox (ref), useTokens (ref), useTextSizeOffset (ref), imagesInverseModule (ref), getBuilderIconElementModule (ref), scaleSliceToResolutionModule (ref)
 	assert(p2 > 0, "resolutionScale for ImageSet must be greater than 0! got " .. tostring(p2))
 	
-	return roactModule.forwardRef(function(p1, p2)
-		-- upvalues: roactModule (copy), uiblox (copy), useTokens (copy), useTextSizeOffset (copy), imagesInverseModule (copy), getBuilderIconElementModule (copy), p1 (ref), p2 (ref), scaleSliceToResolutionModule (copy)
+	return roactModule.forwardRef(function(p3, p4)
+		-- upvalues: roactModule (copy), uiblox (copy), useTokens (copy), useTextSizeOffset (copy), imagesInverseModule (copy), getBuilderIconElementModule (copy), p3 (ref), p4 (ref), scaleSliceToResolutionModule (copy)
 		local t = {
-			[roactModule.Ref] = p2,
-			[roactModule.Children] = p1[roactModule.Children]
+			[roactModule.Ref] = p4,
+			[roactModule.Children] = p3[roactModule.Children]
 		}
 		local var1 = nil
 		local image = nil
 		local var2 = false
 		local var3 = false
 		
-		for i, v in pairs(p1) do
+		for i, v in pairs(p3) do
 			if i ~= "Image" or typeof(v) ~= "table" then
 				t[i] = v
 			elseif uiblox[v.Image] then
@@ -46,22 +46,22 @@ return function(p1, p2)
 				if not var4.Stroke then
 					error(`No StyleProvider in tree for migrated icon ImageSetComponent.\n UIBlox Icon: {var6}, BuilderIcon: {uiblox[var6]}`)
 				end
-				return getBuilderIconElementModule(t, p1, uiblox[var6], var6, var4, var5, var4.Stroke.Standard)
+				return getBuilderIconElementModule(t, p3, uiblox[var6], var6, var4, var5, var4.Stroke.Standard)
 			elseif var2 then
 				for i_1, v_1 in pairs(var1) do
 					if not t[i_1] then
 						t[i_1] = v_1
 					elseif i_1 == "ImageRectOffset" then
-						t[i_1] = v_1 + t[i_1] * p2
+						t[i_1] = v_1 + t[i_1] * p4
 					elseif i_1 == "ImageRectSize" then
-						t[i_1] *= p2
+						t[i_1] *= p4
 					end
 				end
 			end
 			if var2 then
-				t = scaleSliceToResolutionModule(t, p2)
+				t = scaleSliceToResolutionModule(t, p4)
 			end
-			return roactModule.createElement(p1, t)
+			return roactModule.createElement(p3, t)
 		end
 	end)
 end

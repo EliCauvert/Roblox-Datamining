@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("AddPlayer", function(p0)
-	return { player = p0, userId = p0.UserId }
+﻿return require(script.Parent.Parent.ActionCreator)("AddPlayer", function(p1)
+	return { player = p1, userId = p1.UserId }
 end)

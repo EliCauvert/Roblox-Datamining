@@ -6,11 +6,11 @@ local promptStateModule = require(currencyTransfers.Enums.PromptState)
 local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
 local getFFlagCurrencyTransferSignalRecipientOnCompleteModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferSignalRecipientOnComplete)
 
-return function(p0)
+return function(p1)
 	-- upvalues: transferOriginationModule (ref), playersService (ref), marketplaceService (ref), getFFlagCurrencyTransferSignalRecipientOnCompleteModule (ref), promptStateModule (ref)
-	local transferOrigination = p0.getTransferOrigination(false)
-	local setPromptState = p0.setPromptState
-	local triggerOnClose = p0.triggerOnClose
+	local transferOrigination = p1.getTransferOrigination(false)
+	local setPromptState = p1.setPromptState
+	local triggerOnClose = p1.triggerOnClose
 	
 	if transferOrigination == transferOriginationModule.InExperience then
 		local localPlayer = playersService.LocalPlayer
@@ -22,7 +22,7 @@ return function(p0)
 			end)
 		end
 		if getFFlagCurrencyTransferSignalRecipientOnCompleteModule() then
-			local recipient = p0.getRecipient(false)
+			local recipient = p1.getRecipient(false)
 			
 			if recipient then
 				pcall(function()

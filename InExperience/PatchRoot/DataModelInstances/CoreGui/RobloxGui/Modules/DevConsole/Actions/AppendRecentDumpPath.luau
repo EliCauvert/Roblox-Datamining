@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)(script.Name, function(p0)
-	return { dumpPath = p0 }
+﻿return require(script.Parent.Parent.Action)(script.Name, function(p1)
+	return { dumpPath = p1 }
 end)

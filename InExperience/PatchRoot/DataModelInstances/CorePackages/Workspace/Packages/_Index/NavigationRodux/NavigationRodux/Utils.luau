@@ -6,9 +6,9 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local _ = require(navigationRodux.types)
 local constantsModule = require(navigationRodux.Constants)
 
-local function legacyRouteFilter(p0)
+local function legacyRouteFilter(p1)
 	-- upvalues: constantsModule (ref)
-	return p0.routeName ~= constantsModule.TempRnSwitchNavigatorName and p0.key ~= "StackRouterRoot"
+	return p1.routeName ~= constantsModule.TempRnSwitchNavigatorName and p1.key ~= "StackRouterRoot"
 end
 
 local function getLegacyPageFromRoactNavigationRoute(p1)
@@ -16,31 +16,31 @@ local function getLegacyPageFromRoactNavigationRoute(p1)
 	return cryoModule.Dictionary.join(p1.params or {}, { name = p1.routeName, rnKey = p1.key })
 end
 
-local function getTabNavigatorState(p2)
+local function getTabNavigatorState(p1)
 	-- upvalues: constantsModule (ref), getTabNavigatorState (ref)
-	if p2.routeName == constantsModule.TempRnSwitchNavigatorName then
-		return p2
+	if p1.routeName == constantsModule.TempRnSwitchNavigatorName then
+		return p1
 	end
-	local index = p2.routes[p2.index]
+	local index = p1.routes[p1.index]
 	
 	return if index.routes then getTabNavigatorState(index) else nil
 end
 
 return {
 	getLegacyPageFromRoactNavigationRoute = getLegacyPageFromRoactNavigationRoute,
-	getLegacyRouteFromRoactNavigationState = function(p3)
+	getLegacyRouteFromRoactNavigationState = function(p1)
 		-- upvalues: cryoModule (ref), getActiveRoutes (ref), legacyRouteFilter (ref), getLegacyPageFromRoactNavigationRoute (ref)
-		return cryoModule.List.map(cryoModule.List.filter(getActiveRoutes(p3), legacyRouteFilter), getLegacyPageFromRoactNavigationRoute)
+		return cryoModule.List.map(cryoModule.List.filter(getActiveRoutes(p1), legacyRouteFilter), getLegacyPageFromRoactNavigationRoute)
 	end,
-	getCurrentTabName = function(p4)
+	getCurrentTabName = function(p1)
 		-- upvalues: constantsModule (ref), getTabNavigatorState (ref), appPage (ref)
-		local var6
-		if p4.routeName == constantsModule.TempRnSwitchNavigatorName then
-			var6 = p4
+		local var1
+		if p1.routeName == constantsModule.TempRnSwitchNavigatorName then
+			var1 = p1
 		else
-			local index = p4.routes[p4.index]
-			var6 = if index.routes then getTabNavigatorState(index) else nil
+			local index = p1.routes[p1.index]
+			var1 = if index.routes then getTabNavigatorState(index) else nil
 		end
-		return if var6 == nil then appPage.None else var6.routes[var6.index].routeName
+		return if var1 == nil then appPage.None else var1.routes[var1.index].routeName
 	end
 }

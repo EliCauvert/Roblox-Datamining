@@ -11,9 +11,9 @@ local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local reactModule = require(corePackagesService.Packages.React)
 local closeOpenPromptModule = require(script.Parent.Parent.Actions.CloseOpenPrompt)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useIsGamepad (ref), useDispatch (ref), closeOpenPromptModule (ref), reactModule (ref), overlay (ref), interactiveAlert (ref), buttonType (ref), robloxTranslatorModule (ref), xboxA (ref)
-	local var6 = useDispatch()
+	local var1 = useDispatch()
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -29,15 +29,15 @@ return function(p0)
 			InteractiveAlert = reactModule.createElement(interactiveAlert, {
 				title = "Something Went Wrong",
 				bodyText = "Your creation could not be created due to an error. A report has been sent to the developer of this experience.",
-				screenSize = p0.screenSize,
+				screenSize = p1.screenSize,
 				buttonStackInfo = {
 					buttons = {
 						{
 							buttonType = buttonType.PrimarySystem,
 							props = {
 								onActivated = function()
-									-- upvalues: var6 (ref), closeOpenPromptModule (copy)
-									var6(closeOpenPromptModule())
+									-- upvalues: var1 (ref), closeOpenPromptModule (copy)
+									var1(closeOpenPromptModule())
 								end,
 								text = robloxTranslatorModule:FormatByKey("InGame.CommonUI.Button.Ok"),
 								inputIcon = if useIsGamepad() then xboxA else nil

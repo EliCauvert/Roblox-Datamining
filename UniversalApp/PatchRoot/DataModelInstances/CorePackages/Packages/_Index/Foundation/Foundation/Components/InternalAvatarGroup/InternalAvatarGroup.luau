@@ -44,9 +44,9 @@ local function AvatarOverflow(p1)
 	}))
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
+return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), colorNamespaceModule (ref), reactIsModule (ref), getBindableValueModule (ref), reactModule (ref), AvatarOverflow (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var1 = withDefaultsModule(p1, t)
+	local var1 = withDefaultsModule(p2, t)
 	local var2 = useTokensModule()
 	local shift300 = var2[usePresentationContext().colorNamespace or colorNamespaceModule.Color].Shift.Shift_300
 	local backplateStyle = var1.backplateStyle or var2.Color.Surface.Surface_0
@@ -84,5 +84,5 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			backplateStyle = backplateStyle
 		})
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "auto-xy", ref = p2 }), t_1)
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "auto-xy", ref = p3 }), t_1)
 end))

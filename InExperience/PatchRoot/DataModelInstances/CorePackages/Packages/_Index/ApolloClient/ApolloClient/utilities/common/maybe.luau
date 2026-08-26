@@ -1,10 +1,10 @@
 ﻿return {
-	maybe = function(p0)
-		local _, status, var0 = xpcall(function()
-			-- upvalues: p0 (ref)
-			return p0(), true
+	maybe = function(p1)
+		local _, status, var1 = xpcall(function()
+			-- upvalues: p1 (ref)
+			return p1(), true
 		end, function() end)
 		
-		return if var0 then status else nil
+		return if var1 then status else nil
 	end
 }

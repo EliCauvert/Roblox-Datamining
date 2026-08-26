@@ -8,11 +8,11 @@ local view = foundationModule.View
 local layoutToggleButtonModule = require(peopleReactView.Components.Buttons.LayoutToggleButton)
 local constantsModule = require(peopleReactView.Constants)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), constantsModule (ref), reactModule (ref), view (ref), text (ref), layoutToggleButtonModule (ref)
 	return reactModule.createElement(view, {
 		tag = "row size-full-0 auto-y align-y-center flex-x-between",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Title = reactModule.createElement(text, {
 			tag = "auto-xy content-default text-heading-small text-align-x-left",
@@ -21,8 +21,8 @@ return reactModule.memo(function(p0)
 		}),
 		LayoutToggleButton = reactModule.createElement(layoutToggleButtonModule, {
 			LayoutOrder = 2,
-			layout = p0.layout,
-			setLayout = p0.setLayout
+			layout = p1.layout,
+			setLayout = p1.setLayout
 		})
 	})
 end)

@@ -53,7 +53,7 @@ local fFlagLuaAppHomeReduceRenders = require(parent.SharedFlags).FFlagLuaAppHome
 local fFlagLuaAppRfyRevealRowsFocusFix = require(parent.SharedFlags).FFlagLuaAppRfyRevealRowsFocusFix
 local luaAppGameGridBufferRowsBelowScreen = game:DefineFastInt("LuaAppGameGridBufferRowsBelowScreen", 2)
 local luaAppGameGridBufferRowsAboveScreen = game:DefineFastInt("LuaAppGameGridBufferRowsAboveScreen", 1)
-local var23 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	entries = tModule.optional(tModule.table),
 	title = tModule.optional(tModule.string),
 	headerComponent = tModule.optional(tModule.table),
@@ -99,158 +99,158 @@ local var23 = tModule.strictInterface({
 	videoPlaybackContext = tModule.optional(tModule.table)
 })
 
-return reactModule.memo(function(p0)
-	-- upvalues: validateProps (ref), var23 (ref), useAppPolicy (ref), usePreferredInput (ref), fFlagLuaAppHomeReduceRenders (ref), luaAppGameGridBufferRowsBelowScreen (ref), responsiveModule (ref), luaAppGameGridBufferRowsAboveScreen (ref), fFlagLuaAppCompositionAlways (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppNarrowTileHideRating (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), useBreakpointXOrSmaller (ref), getGameTileCollectionItemSize (ref), reactModule (ref), fFlagLuaAppRfyRevealRowsFocusFix (ref), composeRefs (ref), useGameSortDataModule (ref), cryoModule (ref), useGameCollectionLayoutParamsModule (ref), fFlagLuaAppFixCompositionSizeOverrideGap (ref), useCollectionLayout (ref), useSizeAdjustedEntriesModule (ref), useGameSortAnalyticsModule (ref), gameTileModule (ref), useGameSortTooltipParamsModule (ref), useGameSortImpressionsParamsModule (ref), fFlagLuaAppFixSearchImpressions (ref), useIsHoldToPlayEnabledForGamesModule (ref), useHoldToPlayStateAndCallbacks (ref), useControllerBarFocusNavigationBindings (ref), useTextSizeOffset (ref), gameTileConstants (ref), useGetGameTileHeightModule (ref), getGameTileHiddenStore (ref), signalsReactModule (ref), useRenderGameCollectionItemModule (ref), appPage (ref), discoveryAnalyticsModule (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), gameSortImpressionsDetectorModule (ref), collectionGrid (ref), fFlagLuaAppRfyRevealRows (ref), fFlagLuaAppSortHeaderAnchorTag (ref), waitForPropWrapperModule (ref), holdToPlayLauncher (ref)
-	validateProps(var23, p0)
-	local var24 = useAppPolicy(function(p1)
-		return p1.useGridPageLayout()
+return reactModule.memo(function(p1)
+	-- upvalues: validateProps (ref), var1 (ref), useAppPolicy (ref), usePreferredInput (ref), fFlagLuaAppHomeReduceRenders (ref), luaAppGameGridBufferRowsBelowScreen (ref), responsiveModule (ref), luaAppGameGridBufferRowsAboveScreen (ref), fFlagLuaAppCompositionAlways (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppNarrowTileHideRating (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), useBreakpointXOrSmaller (ref), getGameTileCollectionItemSize (ref), reactModule (ref), fFlagLuaAppRfyRevealRowsFocusFix (ref), composeRefs (ref), useGameSortDataModule (ref), cryoModule (ref), useGameCollectionLayoutParamsModule (ref), fFlagLuaAppFixCompositionSizeOverrideGap (ref), useCollectionLayout (ref), useSizeAdjustedEntriesModule (ref), useGameSortAnalyticsModule (ref), gameTileModule (ref), useGameSortTooltipParamsModule (ref), useGameSortImpressionsParamsModule (ref), fFlagLuaAppFixSearchImpressions (ref), useIsHoldToPlayEnabledForGamesModule (ref), useHoldToPlayStateAndCallbacks (ref), useControllerBarFocusNavigationBindings (ref), useTextSizeOffset (ref), gameTileConstants (ref), useGetGameTileHeightModule (ref), getGameTileHiddenStore (ref), signalsReactModule (ref), useRenderGameCollectionItemModule (ref), appPage (ref), discoveryAnalyticsModule (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), gameSortImpressionsDetectorModule (ref), collectionGrid (ref), fFlagLuaAppRfyRevealRows (ref), fFlagLuaAppSortHeaderAnchorTag (ref), waitForPropWrapperModule (ref), holdToPlayLauncher (ref)
+	validateProps(var1, p1)
+	local var2 = useAppPolicy(function(p2)
+		return p2.useGridPageLayout()
 	end)
-	local var25 = usePreferredInput()
-	local var26 = if fFlagLuaAppHomeReduceRenders then luaAppGameGridBufferRowsBelowScreen elseif var25 == responsiveModule.Input.Directional then 4 else 2
-	local var27 = if fFlagLuaAppHomeReduceRenders then luaAppGameGridBufferRowsAboveScreen elseif var25 == responsiveModule.Input.Directional then 4 else 1
-	local var28 = p0.isHoverSupportEnabled and (var24 and var25 == responsiveModule.Input.Pointer)
-	local gameTileLayoutType = p0.gameTileLayoutType or "Narrow"
-	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p0.appCompositionEnabled
-	local var31 = nil
-	local var32 = nil
-	local var33 = nil
+	local var3 = usePreferredInput()
+	local var4 = if fFlagLuaAppHomeReduceRenders then luaAppGameGridBufferRowsBelowScreen elseif var3 == responsiveModule.Input.Directional then 4 else 2
+	local var5 = if fFlagLuaAppHomeReduceRenders then luaAppGameGridBufferRowsAboveScreen elseif var3 == responsiveModule.Input.Directional then 4 else 1
+	local var6 = p1.isHoverSupportEnabled and (var2 and var3 == responsiveModule.Input.Pointer)
+	local gameTileLayoutType = p1.gameTileLayoutType or "Narrow"
+	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p1.appCompositionEnabled
+	local var7 = nil
+	local var8 = nil
+	local var9 = nil
 	
 	if fFlagLuaAppNarrowTileSmallerFooterFont or fFlagLuaAppNarrowTileHideRating or fFlagLuaAppNarrowTileHidePlayerCount then
-		local var34 = fFlagLuaAppCompositionAlways_1 and (gameTileLayoutType == "Narrow" and useBreakpointXOrSmaller(responsiveModule.Keys.Small))
-		var31 = if fFlagLuaAppNarrowTileSmallerFooterFont then var34 else nil
-		var32 = if fFlagLuaAppNarrowTileHideRating then var34 else nil
-		var33 = if fFlagLuaAppNarrowTileHidePlayerCount then var34 else nil
+		local var10 = fFlagLuaAppCompositionAlways_1 and (gameTileLayoutType == "Narrow" and useBreakpointXOrSmaller(responsiveModule.Keys.Small))
+		var7 = if fFlagLuaAppNarrowTileSmallerFooterFont then var10 else nil
+		var8 = if fFlagLuaAppNarrowTileHideRating then var10 else nil
+		var9 = if fFlagLuaAppNarrowTileHidePlayerCount then var10 else nil
 	end
-	local itemsPerRow, var42
-	local var35 = if fFlagLuaAppCompositionAlways_1 then getGameTileCollectionItemSize(gameTileLayoutType) else nil
-	local var36, var37 = reactModule.useState(nil)
-	local var38 = reactModule.useRef(var36)
-	var38.current = var36
-	local var39 = if fFlagLuaAppRfyRevealRowsFocusFix then reactModule.useMemo(function()
-		-- upvalues: composeRefs (copy), var37 (ref), p0 (ref)
-		return composeRefs(var37, p0.gridContainerRef)
-	end, { p0.gridContainerRef }) else nil
-	local var40 = useGameSortDataModule(p0.gameSortId, p0.pageContext, p0.searchParams and p0.searchParams.searchUuid)
-	local var41 = useGameCollectionLayoutParamsModule(gameTileLayoutType, var36, false, reactModule.useMemo(function()
-		-- upvalues: var24 (ref), p0 (ref), cryoModule (copy)
-		local var67 = if var24 then nil else p0.sideMargin
+	local itemsPerRow, var11
+	local var12 = if fFlagLuaAppCompositionAlways_1 then getGameTileCollectionItemSize(gameTileLayoutType) else nil
+	local var13, var14 = reactModule.useState(nil)
+	local var15 = reactModule.useRef(var13)
+	var15.current = var13
+	local var16 = if fFlagLuaAppRfyRevealRowsFocusFix then reactModule.useMemo(function()
+		-- upvalues: composeRefs (copy), var14 (ref), p1 (ref)
+		return composeRefs(var14, p1.gridContainerRef)
+	end, { p1.gridContainerRef }) else nil
+	local var17 = useGameSortDataModule(p1.gameSortId, p1.pageContext, p1.searchParams and p1.searchParams.searchUuid)
+	local var18 = useGameCollectionLayoutParamsModule(gameTileLayoutType, var13, false, reactModule.useMemo(function()
+		-- upvalues: var2 (ref), p1 (ref), cryoModule (copy)
+		local var19 = if var2 then nil else p1.sideMargin
 		
-		return if not (not p0.layoutOverrides and not var67) then cryoModule.Dictionary.join(p0.layoutOverrides or {}, {
-			sideMargin = if p0.layoutOverrides and p0.layoutOverrides.sideMargin then p0.layoutOverrides.sideMargin else var67
+		return if not (not p1.layoutOverrides and not var19) then cryoModule.Dictionary.join(p1.layoutOverrides or {}, {
+			sideMargin = if p1.layoutOverrides and p1.layoutOverrides.sideMargin then p1.layoutOverrides.sideMargin else var19
 		}) else nil
-	end, { p0.layoutOverrides, var24, p0.sideMargin }))
+	end, { p1.layoutOverrides, var2, p1.sideMargin }))
 	local _ = nil
 	local _ = nil
 	
 	if fFlagLuaAppFixCompositionSizeOverrideGap then
-		local var43 = useCollectionLayout(var35)
-		itemsPerRow = var43.itemsPerRow
-		var42 = useSizeAdjustedEntriesModule(p0.entries, if fFlagLuaAppCompositionAlways_1 then var43.gutter else var41.columnGap, if fFlagLuaAppCompositionAlways_1 then var43.verticalGap else var41.verticalPadding)
+		local var19 = useCollectionLayout(var12)
+		itemsPerRow = var19.itemsPerRow
+		var11 = useSizeAdjustedEntriesModule(p1.entries, if fFlagLuaAppCompositionAlways_1 then var19.gutter else var18.columnGap, if fFlagLuaAppCompositionAlways_1 then var19.verticalGap else var18.verticalPadding)
 	else
-		var42 = useSizeAdjustedEntriesModule(p0.entries, var41.columnGap, var41.verticalPadding)
-		itemsPerRow = useCollectionLayout(var35).itemsPerRow
+		var11 = useSizeAdjustedEntriesModule(p1.entries, var18.columnGap, var18.verticalPadding)
+		itemsPerRow = useCollectionLayout(var12).itemsPerRow
 	end
-	local var44 = if fFlagLuaAppCompositionAlways_1 then itemsPerRow or 0 else var41.numColumns or 0
-	local var45, var46 = useGameSortAnalyticsModule(var40.sort, var40.isOmni, p0.sortIndex, p0.pageContext, nil, var42, var44, p0.startRow)
-	local var47 = gameTileModule.useVideoAnalytics(var40.sort, var40.isOmni, p0.pageContext, p0.sortIndex, var42)
-	local var48, var49 = useGameSortTooltipParamsModule(var40.sort, var40.isOmni, p0.infoText)
-	local var50, var51, var52 = useGameSortImpressionsParamsModule(var40.sort, var40.isOmni, p0.sortIndex, p0.pageContext, p0.useGridTiles, p0.componentType, var40.gamesApiSortPageId, p0.gameSortId, p0.scrollViewPositionChangedSignal, var44, p0.startRow, var42, p0.searchParams)
-	local var53 = if fFlagLuaAppFixSearchImpressions and p0.searchParams then p0.searchParams.searchUuid else nil
-	local var54 = if fFlagLuaAppFixSearchImpressions then reactModule.useMemo(function()
-		-- upvalues: p0 (ref), var53 (ref)
-		local pageContext = `GameGrid_{p0.pageContext}`
+	local var20 = if fFlagLuaAppCompositionAlways_1 then itemsPerRow or 0 else var18.numColumns or 0
+	local var21, var22 = useGameSortAnalyticsModule(var17.sort, var17.isOmni, p1.sortIndex, p1.pageContext, nil, var11, var20, p1.startRow)
+	local var23 = gameTileModule.useVideoAnalytics(var17.sort, var17.isOmni, p1.pageContext, p1.sortIndex, var11)
+	local var24, var25 = useGameSortTooltipParamsModule(var17.sort, var17.isOmni, p1.infoText)
+	local var26, var27, var28 = useGameSortImpressionsParamsModule(var17.sort, var17.isOmni, p1.sortIndex, p1.pageContext, p1.useGridTiles, p1.componentType, var17.gamesApiSortPageId, p1.gameSortId, p1.scrollViewPositionChangedSignal, var20, p1.startRow, var11, p1.searchParams)
+	local var29 = if fFlagLuaAppFixSearchImpressions and p1.searchParams then p1.searchParams.searchUuid else nil
+	local var30 = if fFlagLuaAppFixSearchImpressions then reactModule.useMemo(function()
+		-- upvalues: p1 (ref), var29 (ref)
+		local pageContext = `GameGrid_{p1.pageContext}`
 		
-		if var53 then
-			pageContext ..= `_{var53}`
+		if var29 then
+			pageContext ..= `_{var29}`
 		end
-		return pageContext .. `_{p0.gameSortId}_{p0.sortIndex}`
-	end, { p0.pageContext, var53, p0.gameSortId, p0.sortIndex }) else `GameGrid_{p0.gameSortId}_{p0.sortIndex}`
-	local var55 = useIsHoldToPlayEnabledForGamesModule()
-	local var56 = useHoldToPlayStateAndCallbacks()
-	local var57 = useControllerBarFocusNavigationBindings(nil, if var55 then var56.holdToPlayEventHandler else nil)
+		return pageContext .. `_{p1.gameSortId}_{p1.sortIndex}`
+	end, { p1.pageContext, var29, p1.gameSortId, p1.sortIndex }) else `GameGrid_{p1.gameSortId}_{p1.sortIndex}`
+	local var31 = useIsHoldToPlayEnabledForGamesModule()
+	local var32 = useHoldToPlayStateAndCallbacks()
+	local var33 = useControllerBarFocusNavigationBindings(nil, if var31 then var32.holdToPlayEventHandler else nil)
 	reactModule.useEffect(function()
-		-- upvalues: var57 (ref), var36 (ref)
-		if var57 then
-			var57(var36)
+		-- upvalues: var33 (ref), var13 (ref)
+		if var33 then
+			var33(var13)
 		end
-	end, { var57, var36 })
-	local shouldHideTileTitle = p0.shouldHideTileTitle or false
-	local shouldHideTileMetadata = p0.shouldHideTileMetadata or false
-	local containedTile = p0.containedTile or false
-	local var61 = useTextSizeOffset()
+	end, { var33, var13 })
+	local shouldHideTileTitle = p1.shouldHideTileTitle or false
+	local shouldHideTileMetadata = p1.shouldHideTileMetadata or false
+	local containedTile = p1.containedTile or false
+	local var34 = useTextSizeOffset()
 	local titleTextLines = gameTileConstants.TileTextLines[gameTileLayoutType] and gameTileConstants.TileTextLines[gameTileLayoutType].titleTextLines
-	local var63 = useGetGameTileHeightModule(var28, gameTileLayoutType, containedTile, shouldHideTileMetadata, shouldHideTileTitle, var61, nil, titleTextLines, if fFlagLuaAppNarrowTileHideRating or fFlagLuaAppNarrowTileHidePlayerCount then var32 or var33 else nil)
-	local var64 = getGameTileHiddenStore(p0.gameSortId)
+	local var35 = useGetGameTileHeightModule(var6, gameTileLayoutType, containedTile, shouldHideTileMetadata, shouldHideTileTitle, var34, nil, titleTextLines, if fFlagLuaAppNarrowTileHideRating or fFlagLuaAppNarrowTileHidePlayerCount then var8 or var9 else nil)
+	local var36 = getGameTileHiddenStore(p1.gameSortId)
 	local _ = nil
-	local var65 = useRenderGameCollectionItemModule(if gameTileLayoutType == "Narrow" and not p0.playerCountStyle then gameTileConstants.PlayerCountStyleValues.Footer else p0.playerCountStyle, p0.isSponsoredFooterAllowed, gameTileLayoutType, p0.friendFooterEnabled, p0.pageContext == appPage.Home, var54, var28, var45, var46, if p0.launchExperienceEventContextOverride then p0.launchExperienceEventContextOverride else discoveryAnalyticsModule.Constants.Context.ExperienceTile, nil, nil, nil, if var40.isOmni then p0.gameSortId else nil, nil, nil, p0.playButtonStyle, containedTile, shouldHideTileTitle, shouldHideTileMetadata, if var55 then var56.onHoldableFocused else nil, if var55 then var56.onHoldableUnfocused else nil, if var55 then var56.shouldDisableHoldable else nil, var61, titleTextLines, nil, nil, var47, nil, p0.selectionOrderBase, p0.enableExplicitFeedback, signalsReactModule.useSignalState(var64.getHiddenGames), var64.setGameHidden, p0.pageContext, p0.sponsoredUserCohort, p0.enableSponsoredFeedback, if fFlagLuaAppEnableSponsoredReportAd then p0.enableReportAd else nil, #var42, p0.isSponsoredRatingFooterAllowed, nil, nil, nil, if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then p0.onTileImageLoaded else nil, if fFlagLuaAppNarrowTileSmallerFooterFont then var31 else nil, if fFlagLuaAppNarrowTileHideRating then var32 else nil, if fFlagLuaAppNarrowTileHidePlayerCount then var33 else nil, p0.videoPlaybackContext)
+	local var37 = useRenderGameCollectionItemModule(if gameTileLayoutType == "Narrow" and not p1.playerCountStyle then gameTileConstants.PlayerCountStyleValues.Footer else p1.playerCountStyle, p1.isSponsoredFooterAllowed, gameTileLayoutType, p1.friendFooterEnabled, p1.pageContext == appPage.Home, var30, var6, var21, var22, if p1.launchExperienceEventContextOverride then p1.launchExperienceEventContextOverride else discoveryAnalyticsModule.Constants.Context.ExperienceTile, nil, nil, nil, if var17.isOmni then p1.gameSortId else nil, nil, nil, p1.playButtonStyle, containedTile, shouldHideTileTitle, shouldHideTileMetadata, if var31 then var32.onHoldableFocused else nil, if var31 then var32.onHoldableUnfocused else nil, if var31 then var32.shouldDisableHoldable else nil, var34, titleTextLines, nil, nil, var23, nil, p1.selectionOrderBase, p1.enableExplicitFeedback, signalsReactModule.useSignalState(var36.getHiddenGames), var36.setGameHidden, p1.pageContext, p1.sponsoredUserCohort, p1.enableSponsoredFeedback, if fFlagLuaAppEnableSponsoredReportAd then p1.enableReportAd else nil, #var11, p1.isSponsoredRatingFooterAllowed, nil, nil, nil, if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then p1.onTileImageLoaded else nil, if fFlagLuaAppNarrowTileSmallerFooterFont then var7 else nil, if fFlagLuaAppNarrowTileHideRating then var8 else nil, if fFlagLuaAppNarrowTileHidePlayerCount then var9 else nil, p1.videoPlaybackContext)
 	
 	if not fFlagLuaAppCompositionAlways then
-		local var66 = reactModule.useRef(0)
+		local var38 = reactModule.useRef(0)
 		reactModule.useEffect(function()
-			-- upvalues: fFlagLuaAppCompositionAlways_1 (ref), var41 (ref), var66 (ref), p0 (ref)
-			if not fFlagLuaAppCompositionAlways_1 and var41.numColumns ~= var66.current then
-				var66.current = var41.numColumns
+			-- upvalues: fFlagLuaAppCompositionAlways_1 (ref), var18 (ref), var38 (ref), p1 (ref)
+			if not fFlagLuaAppCompositionAlways_1 and var18.numColumns ~= var38.current then
+				var38.current = var18.numColumns
 				
-				if p0.onItemsPerRowChanged then
-					p0.onItemsPerRowChanged(var41.numColumns)
+				if p1.onItemsPerRowChanged then
+					p1.onItemsPerRowChanged(var18.numColumns)
 				end
 			end
 		end, {
-			var41.numColumns,
-			p0.onItemsPerRowChanged,
-			var66,
+			var18.numColumns,
+			p1.onItemsPerRowChanged,
+			var38,
 			fFlagLuaAppCompositionAlways_1
 		})
 	end
-	return if var40.gameSortDataFound then reactModule.createElement(reactModule.Fragment, nil, {
+	return if var17.gameSortDataFound then reactModule.createElement(reactModule.Fragment, nil, {
 		GameGrid = reactModule.createElement(collectionGrid, {
 			hideHeaderButton = true,
-			collectionItemSize = if fFlagLuaAppCompositionAlways_1 then var35 else nil,
-			LayoutOrder = if fFlagLuaAppRfyRevealRows then p0.LayoutOrder else nil,
-			ZIndex = if fFlagLuaAppRfyRevealRows then p0.ZIndex else nil,
-			title = p0.title,
-			subtitle = if var40.sort then var40.sort.subtitle else nil,
-			onViewableItemsChanged = var52,
-			containerRef = if fFlagLuaAppRfyRevealRowsFocusFix then var39 else var37,
-			tooltipInfoText = var49,
-			items = var42,
-			onActivateInfoIcon = var48,
-			verticalScrollingFrameRef = p0.verticalScrollingFrameRef,
-			renderItem = var65,
-			getItemHeight = var63,
-			numColumns = if fFlagLuaAppCompositionAlways_1 then nil else var41.numColumns,
-			columnGap = if fFlagLuaAppCompositionAlways_1 then nil else var41.columnGap,
-			sideMargin = if fFlagLuaAppCompositionAlways_1 then nil else var41.sideMargin,
-			verticalPadding = if fFlagLuaAppCompositionAlways_1 then nil else var41.verticalPadding,
-			maxNumRows = p0.maxNumRows,
-			bufferRowsBelowScreen = var26,
-			bufferRowsAboveScreen = var27,
-			headerComponent = p0.headerComponent,
-			headerTag = if fFlagLuaAppSortHeaderAnchorTag then p0.headerTag else nil,
-			testId = if p0.gameSortId then `--{p0.gameSortId}-game-collection-grid` else nil
+			collectionItemSize = if fFlagLuaAppCompositionAlways_1 then var12 else nil,
+			LayoutOrder = if fFlagLuaAppRfyRevealRows then p1.LayoutOrder else nil,
+			ZIndex = if fFlagLuaAppRfyRevealRows then p1.ZIndex else nil,
+			title = p1.title,
+			subtitle = if var17.sort then var17.sort.subtitle else nil,
+			onViewableItemsChanged = var28,
+			containerRef = if fFlagLuaAppRfyRevealRowsFocusFix then var16 else var14,
+			tooltipInfoText = var25,
+			items = var11,
+			onActivateInfoIcon = var24,
+			verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
+			renderItem = var37,
+			getItemHeight = var35,
+			numColumns = if fFlagLuaAppCompositionAlways_1 then nil else var18.numColumns,
+			columnGap = if fFlagLuaAppCompositionAlways_1 then nil else var18.columnGap,
+			sideMargin = if fFlagLuaAppCompositionAlways_1 then nil else var18.sideMargin,
+			verticalPadding = if fFlagLuaAppCompositionAlways_1 then nil else var18.verticalPadding,
+			maxNumRows = p1.maxNumRows,
+			bufferRowsBelowScreen = var4,
+			bufferRowsAboveScreen = var5,
+			headerComponent = p1.headerComponent,
+			headerTag = if fFlagLuaAppSortHeaderAnchorTag then p1.headerTag else nil,
+			testId = if p1.gameSortId then `--{p0.gameSortId}-game-collection-grid` else nil
 		}),
 		GameSortImpressionsDetector = reactModule.createElement(waitForPropWrapperModule, {
-			waitForProp = p0.startRow,
-			maxUpdatesToDelay = p0.numUpdatesToDelayImpressions,
+			waitForProp = p1.startRow,
+			maxUpdatesToDelay = p1.numUpdatesToDelayImpressions,
 			wrappedComponent = reactModule.createElement(gameSortImpressionsDetectorModule, {
-				parentRef = var38,
-				pageContext = p0.pageContext,
-				impressionsTag = var54,
-				scrollViewPositionChangedSignal = var51,
-				sendGameImpressions = var50,
-				dataUpdatedTimestamp = if var40.gameSortContents then var40.gameSortContents.updatedTimestamp else nil
+				parentRef = var15,
+				pageContext = p1.pageContext,
+				impressionsTag = var30,
+				scrollViewPositionChangedSignal = var27,
+				sendGameImpressions = var26,
+				dataUpdatedTimestamp = if var17.gameSortContents then var17.gameSortContents.updatedTimestamp else nil
 			})
 		}),
-		HoldToPlayLauncher = if var55 and var56.shouldRenderHoldToPlayLauncher then reactModule.createElement(holdToPlayLauncher, {
-			selectedIndex = var56.selectedIndex,
-			selectedEntry = var56.selectedEntry,
-			selectedNavigationUniverseId = var56.selectedNavigationUniverseId,
-			holdState = var56.holdState,
-			holdProgress = var56.holdProgress,
-			cancelHold = var56.cancelHold,
+		HoldToPlayLauncher = if var31 and var32.shouldRenderHoldToPlayLauncher then reactModule.createElement(holdToPlayLauncher, {
+			selectedIndex = var32.selectedIndex,
+			selectedEntry = var32.selectedEntry,
+			selectedNavigationUniverseId = var32.selectedNavigationUniverseId,
+			holdState = var32.holdState,
+			holdProgress = var32.holdProgress,
+			cancelHold = var32.cancelHold,
 			launchContext = discoveryAnalyticsModule.Constants.Context.HoldToPlayLauncher,
-			referralSource = p0.pageContext,
-			reportExperienceLaunched = var46
+			referralSource = p1.pageContext,
+			reportExperienceLaunched = var22
 		}) else nil
 	}) else nil
 end)

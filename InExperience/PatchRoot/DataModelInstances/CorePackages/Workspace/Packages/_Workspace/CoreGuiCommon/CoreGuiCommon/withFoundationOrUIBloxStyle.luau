@@ -6,9 +6,9 @@ local usePreferences = foundationModule.Hooks.usePreferences
 local withStyle = require(parent.UIBlox).Style.withStyle
 local fFlagCoreUiMigrateUIBloxToFoundation = require(parent.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 
-local function FoundationStyleAdapter(p0)
+local function FoundationStyleAdapter(p1)
 	-- upvalues: useTokens (ref), usePreferences (ref)
-	return p0.renderContent(p0.tokenMapper(useTokens(), usePreferences()))
+	return p1.renderContent(p1.tokenMapper(useTokens(), usePreferences()))
 end
 
 return function(p1, p2)

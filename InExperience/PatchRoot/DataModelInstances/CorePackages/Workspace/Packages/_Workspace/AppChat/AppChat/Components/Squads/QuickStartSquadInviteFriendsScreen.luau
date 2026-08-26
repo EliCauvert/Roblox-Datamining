@@ -15,7 +15,7 @@ local navProps = require(appChat.Constants).NavProps
 local quickStartSquadInviteFriendsContainerModule = require(parent.Squads.QuickStartSquadInviteFriendsContainer)
 local quickStartSquadInviteFriendsScreen = reactModule.PureComponent:extend("QuickStartSquadInviteFriendsScreen")
 
-function quickStartSquadInviteFriendsScreen.navigationOptions(p0)
+function quickStartSquadInviteFriendsScreen.navigationOptions(p1)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), navProps (ref), reactModule (ref), topBarProviderModule (ref), enumScreensModule (ref), argCheckModule (ref), withLocalization (ref), createSystemMenuButtonModule (ref)
 	return if fFlagAppChatTopBarConfigDrivenModule() then { backButtonEnabled = true } else {
 		backButtonEnabled = true,
@@ -23,19 +23,19 @@ function quickStartSquadInviteFriendsScreen.navigationOptions(p0)
 			raw = "Feature.Squads.Action.Party",
 			shouldLocalize = true
 		},
-		renderRight = if p0.navigation and (p0.navigation.getScreenProps and p0.navigation.getScreenProps(navProps.WIDE_MODE, false)) then function()
+		renderRight = if p1.navigation and (p1.navigation.getScreenProps and p1.navigation.getScreenProps(navProps.WIDE_MODE, false)) then function()
 			-- upvalues: reactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), withLocalization (copy), createSystemMenuButtonModule (copy)
 			return reactModule.createElement(topBarProviderModule, {
 				screenName = enumScreensModule.QuickStartSquadInviteFriends,
-				render = function(p1)
+				render = function(p2)
 					-- upvalues: enumScreensModule (copy), argCheckModule (copy), withLocalization (copy), createSystemMenuButtonModule (copy)
-					local screenTopBar = p1.getScreenTopBar(enumScreensModule.QuickStartSquadInviteFriends)
+					local screenTopBar = p2.getScreenTopBar(enumScreensModule.QuickStartSquadInviteFriends)
 					argCheckModule.isType(screenTopBar, "table", "screenTopBar")
 					
-					return withLocalization({ systemButtonText = "Feature.Squads.Action.Start" })(function(p2)
+					return withLocalization({ systemButtonText = "Feature.Squads.Action.Start" })(function(p3)
 						-- upvalues: createSystemMenuButtonModule (copy), screenTopBar (ref)
 						return createSystemMenuButtonModule({
-							localizedStrings = p2,
+							localizedStrings = p3,
 							isDisabled = not screenTopBar.systemButtonEnabled,
 							onActivated = screenTopBar.systemButtonActivated
 						})
@@ -46,9 +46,9 @@ function quickStartSquadInviteFriendsScreen.navigationOptions(p0)
 	}
 end
 
-function quickStartSquadInviteFriendsScreen.init(p3)
+function quickStartSquadInviteFriendsScreen.init(p1)
 	-- upvalues: navProps (ref), fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), resetForSquadLobbyForWideModeModule (ref), resetForSquadLobbyForCompactModeModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), argCheckModule (ref)
-	p3.wideMode = p3.props.navigation.getScreenProps(navProps.WIDE_MODE, false)
+	p1.wideMode = p1.props.navigation.getScreenProps(navProps.WIDE_MODE, false)
 	
 	if fFlagAppChatTopBarConfigDrivenModule() then
 		getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.QuickStartSquadInviteFriends, {
@@ -60,57 +60,57 @@ function quickStartSquadInviteFriendsScreen.init(p3)
 			}
 		})
 	end
-	function p3.navigateIntoSquadLobby(p4)
-		-- upvalues: p3 (ref), navProps (copy), resetForSquadLobbyForWideModeModule (copy), resetForSquadLobbyForCompactModeModule (copy)
-		local partyAttemptId = p3.props.navigation.getParam("partyAttemptId", nil)
+	function p3.navigateIntoSquadLobby(p2)
+		-- upvalues: p1 (ref), navProps (copy), resetForSquadLobbyForWideModeModule (copy), resetForSquadLobbyForCompactModeModule (copy)
+		local partyAttemptId = p1.props.navigation.getParam("partyAttemptId", nil)
 		
-		if p3.props.navigation.getScreenProps(navProps.WIDE_MODE, false) then
-			resetForSquadLobbyForWideModeModule(p3.props.navigation, p4, { squadCreateOrJoinAttemptId = partyAttemptId })
+		if p1.props.navigation.getScreenProps(navProps.WIDE_MODE, false) then
+			resetForSquadLobbyForWideModeModule(p1.props.navigation, p2, { squadCreateOrJoinAttemptId = partyAttemptId })
 			
 			return
 		end
-		resetForSquadLobbyForCompactModeModule(p3.props.navigation, p4, { squadCreateOrJoinAttemptId = partyAttemptId })
+		resetForSquadLobbyForCompactModeModule(p1.props.navigation, p2, { squadCreateOrJoinAttemptId = partyAttemptId })
 	end
 	
-	function p3.onSelectedFriendsChanged(p5, p6)
-		-- upvalues: p3 (ref), fFlagAppChatTopBarSignalsStoreModule (copy), fFlagAppChatTopBarConfigDrivenModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), navProps (copy), argCheckModule (copy)
-		if not p3.wideMode then return end
+	function p3.onSelectedFriendsChanged(p2, p3)
+		-- upvalues: p1 (ref), fFlagAppChatTopBarSignalsStoreModule (copy), fFlagAppChatTopBarConfigDrivenModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), navProps (copy), argCheckModule (copy)
+		if not p1.wideMode then return end
 		if fFlagAppChatTopBarSignalsStoreModule or fFlagAppChatTopBarConfigDrivenModule() then
-			getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.QuickStartSquadInviteFriends, { systemButtonEnabled = p5, systemButtonActivated = p6 })
+			getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.QuickStartSquadInviteFriends, { systemButtonEnabled = p2, systemButtonActivated = p3 })
 			
 			return
 		end
-		local screenProps = p3.props.navigation.getScreenProps(navProps.SET_SCREEN_TOP_BAR, nil)
+		local screenProps = p1.props.navigation.getScreenProps(navProps.SET_SCREEN_TOP_BAR, nil)
 		argCheckModule.isNotNil(screenProps, "setScreenTopBar in screenProps")
 		
 		if screenProps then
-			screenProps(enumScreensModule.QuickStartSquadInviteFriends, { systemButtonEnabled = p5, systemButtonActivated = p6 })
+			screenProps(enumScreensModule.QuickStartSquadInviteFriends, { systemButtonEnabled = p2, systemButtonActivated = p3 })
 			
 			return
 		end
 	end
 end
 
-function quickStartSquadInviteFriendsScreen.render(p7)
+function quickStartSquadInviteFriendsScreen.render(p1)
 	-- upvalues: argCheckModule (ref), reactModule (ref), quickStartSquadInviteFriendsContainerModule (ref)
-	local var16 = argCheckModule.isNotNil(p7.props.navigation, "navigation in CreateNewChatScreen")
+	local var1 = argCheckModule.isNotNil(p1.props.navigation, "navigation in CreateNewChatScreen")
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 1, if var16.getScreenProps("wideMode", false) then -var16.getScreenProps("topBarHeight", 0) else 0)
+		Size = UDim2.new(1, 0, 1, if var1.getScreenProps("wideMode", false) then -var1.getScreenProps("topBarHeight", 0) else 0)
 	}, {
 		reactModule.createElement(quickStartSquadInviteFriendsContainerModule, {
-			navigateIntoSquadLobby = p7.navigateIntoSquadLobby,
-			partyAttemptId = p7.props.navigation.getParam("partyAttemptId", nil),
-			onSelectedFriendsChanged = p7.onSelectedFriendsChanged,
-			shouldHideFooterButton = p7.wideMode
+			navigateIntoSquadLobby = p1.navigateIntoSquadLobby,
+			partyAttemptId = p1.props.navigation.getParam("partyAttemptId", nil),
+			onSelectedFriendsChanged = p1.onSelectedFriendsChanged,
+			shouldHideFooterButton = p1.wideMode
 		})
 	})
 end
 
-function quickStartSquadInviteFriendsScreen.didMount(p8)
-	if p8.wideMode then
-		p8.onSelectedFriendsChanged(false, nil)
+function quickStartSquadInviteFriendsScreen.didMount(p1)
+	if p1.wideMode then
+		p1.onSelectedFriendsChanged(false, nil)
 	end
 end
 

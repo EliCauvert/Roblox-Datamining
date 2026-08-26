@@ -1,5 +1,5 @@
 ﻿local fFlagAXResetAvatarButton = require(script:FindFirstAncestor("AvatarExperienceControlBar").Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
-local var0 = if fFlagAXResetAvatarButton then {
+local var1 = if fFlagAXResetAvatarButton then {
 	Enum.AssetType.Head, Enum.AssetType.Face, Enum.AssetType.Torso,
 	Enum.AssetType.RightArm, Enum.AssetType.LeftArm, Enum.AssetType.LeftLeg,
 	Enum.AssetType.RightLeg, Enum.AssetType.HairAccessory,
@@ -13,8 +13,8 @@ local var0 = if fFlagAXResetAvatarButton then {
 local t = {}
 
 if fFlagAXResetAvatarButton then
-	for i, v in var0 do
+	for i, v in var1 do
 		table.insert(t, tostring(v.Value))
 	end
 end
-return { AssetTypesToKeep = var0, AssetTypeStringsToKeep = t }
+return { AssetTypesToKeep = var1, AssetTypeStringsToKeep = t }

@@ -10,27 +10,27 @@ local t = {
 	prewarm_large_icon = sduiGameIconPrewarmModule.prewarmLargeIcons
 }
 
-local function collectHintsInTemplateTree(p0, p1, p2, p3)
+local function collectHintsInTemplateTree(p1, p2, p3, p4)
 	-- upvalues: collectHintsInTemplateTree (ref)
-	if type(p0) ~= "table" then return end
-	for i, v in p0 do
+	if type(p1) ~= "table" then return end
+	for i, v in p1 do
 		if i ~= "client_hints" or type(v) ~= "table" then
 			if i == "roblox_component" and type(v) == "string" and v ~= "" then
-				if not p3[v] then
-					p3[v] = true
-					local var7 = p1(v)
+				if not p4[v] then
+					p4[v] = true
+					local var1 = p2(v)
 					
-					if var7 ~= nil then
-						collectHintsInTemplateTree(var7, p1, p2, p3)
+					if var1 ~= nil then
+						collectHintsInTemplateTree(var1, p2, p3, p4)
 					end
 				end
 			elseif type(v) == "table" then
-				collectHintsInTemplateTree(v, p1, p2, p3)
+				collectHintsInTemplateTree(v, p2, p3, p4)
 			end
 		end
 		for i_1, v_1 in v do
 			if type(v_1) == "string" then
-				p2[v_1] = true
+				p3[v_1] = true
 			end
 		end
 	end
@@ -38,26 +38,26 @@ end
 
 local tbl = setmetatable({}, { __mode = "k" })
 
-local function getHintsDeclaredBy(p4, p5)
+local function getHintsDeclaredBy(p5, p6)
 	-- upvalues: tbl (ref), collectHintsInTemplateTree (ref)
-	if p4 == nil then
+	if p5 == nil then
 		return {}
 	end
-	local var8 = tbl[p4]
+	local var2 = tbl[p5]
 	
-	if var8 == nil then
+	if var2 == nil then
 		local t = {}
-		collectHintsInTemplateTree(p4, p5, t, {})
-		tbl[p4] = t
+		collectHintsInTemplateTree(p5, p6, t, {})
+		tbl[p5] = t
 		
 		return t
 	end
-	return var8
+	return var2
 end
 
-local function _(p6, p7)
+local function _(p5, p6)
 	-- upvalues: getHintsDeclaredBy (ref), t (ref)
-	for i in getHintsDeclaredBy(p6, p7) do
+	for i in getHintsDeclaredBy(p5, p6) do
 		if t[i] then
 			return true
 		end
@@ -65,99 +65,99 @@ local function _(p6, p7)
 	return false
 end
 
-local _ = function(p8, p9)
+local _ = function(p7, p8)
 	-- upvalues: getHintsDeclaredBy (ref), t (ref)
-	for i, v in p8.getKnownTemplates() do
-		local var10
-		for i_1 in getHintsDeclaredBy(v, p9) do
+	for i, v in p7.getKnownTemplates() do
+		local var2
+		for i_1 in getHintsDeclaredBy(v, p8) do
 			if t[i_1] then
-				var10 = true
-				if var10 then
+				var2 = true
+				if var2 then
 					return true
 				end
 			end
 		end
-		var10 = false
+		var2 = false
 	end
 	return false
 end
 
-local _ = function(p10, p11, p12)
-	local var11 = p10[p11]
+local _ = function(p9, p10, p11)
+	local var3 = p9[p10]
 	
-	if var11 == nil then
-		var11 = {}
-		p10[p11] = var11
+	if var3 == nil then
+		var3 = {}
+		p9[p10] = var3
 	end
-	table.insert(var11, p12)
+	table.insert(var3, p11)
 end
 
-local function attributeHintsInInputData(p13, p14, p15, p16)
+local function attributeHintsInInputData(p9, p10, p11, p12)
 	-- upvalues: getHintsDeclaredBy (ref), t (ref), attributeHintsInInputData (ref)
-	if type(p13) ~= "table" then return end
-	local var12 = p15
-	local robloxComponent = p13.roblox_component
-	local var13 = if type(robloxComponent) == "string" and robloxComponent ~= "" then p14(robloxComponent) else nil
+	if type(p9) ~= "table" then return end
+	local var3 = p11
+	local robloxComponent = p9.roblox_component
+	local var4 = if type(robloxComponent) == "string" and robloxComponent ~= "" then p10(robloxComponent) else nil
 	
-	if var13 ~= nil then
-		for i in getHintsDeclaredBy(var13, p14) do
-			if t[i] and not var12[i] then
-				if var12 == p15 then
-					var12 = table.clone(p15)
+	if var4 ~= nil then
+		for i in getHintsDeclaredBy(var4, p10) do
+			if t[i] and not var3[i] then
+				if var3 == p11 then
+					var3 = table.clone(p11)
 				end
-				var12[i] = true
-				local var14 = p16[i]
+				var3[i] = true
+				local var5 = p12[i]
 				
-				if var14 == nil then
-					var14 = {}
-					p16[i] = var14
+				if var5 == nil then
+					var5 = {}
+					p12[i] = var5
 				end
-				table.insert(var14, p13)
+				table.insert(var5, p9)
 			end
 		end
 	end
-	for i, v in p13 do
+	for i, v in p9 do
 		if type(v) == "table" then
-			attributeHintsInInputData(v, p14, var12, p16)
+			attributeHintsInInputData(v, p10, var3, p12)
 		end
 	end
 end
 
-return function(p17)
+return function(p13)
 	-- upvalues: getHintsDeclaredBy (ref), t (ref), attributeHintsInInputData (ref)
-	local getTemplateForRobloxComponent = p17.getTemplateForRobloxComponent
+	local getTemplateForRobloxComponent = p13.getTemplateForRobloxComponent
 	
 	if getTemplateForRobloxComponent == nil then return end
-	local var15
-	for i, v in p17.getKnownTemplates() do
-		local var16
+	local var6
+	for i, v in p13.getKnownTemplates() do
+		local var7
 		for i_1 in getHintsDeclaredBy(v, getTemplateForRobloxComponent) do
 			if t[i_1] then
-				var16 = true
-				if var16 then
-					var15 = true
-					if not var15 then return end
+				var7 = true
+				if var7 then
+					var6 = true
+					if not var6 then return end
 					local t_1 = {}
 					
-					for i_1, v_1 in p17.pageEntries do
+					for i_1, v_1 in p13.pageEntries do
 						local robloxComponentType = v_1.robloxComponentType
 						local componentInputData = v_1.componentInputData
 						
 						if robloxComponentType and componentInputData then
 							local t_2 = {}
-							local var19 = getTemplateForRobloxComponent(robloxComponentType)
+							local var8 = getTemplateForRobloxComponent(robloxComponentType)
 							
-							if var19 ~= nil then
-								for i_2 in getHintsDeclaredBy(var19, getTemplateForRobloxComponent) do
+							if var8 ~= nil then
+								for i_2 in getHintsDeclaredBy(var8, getTemplateForRobloxComponent) do
 									if t[i_2] then
 										t_2[i_2] = true
-										local var20 = t_1[i_2]
+										local var9 = t_1[i_2]
 										
-										if var20 == nil then
-											var20 = {}
-											t_1[i_2] = var20
+										if var9 == nil then
+											var9 = {}
+											t_1[i_2] = var9
 										end
-										table.insert(var20, componentInputData)
+										table.insert(var9, componentInputData)
 									end
 								end
 							end
@@ -171,7 +171,7 @@ return function(p17)
 				end
 			end
 		end
-		var16 = false
+		var7 = false
 	end
-	var15 = false
+	var6 = false
 end

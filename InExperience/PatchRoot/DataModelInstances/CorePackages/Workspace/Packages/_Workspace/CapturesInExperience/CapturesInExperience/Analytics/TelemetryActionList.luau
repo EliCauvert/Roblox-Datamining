@@ -54,8 +54,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					entrypointType = function(p0)
-						return p0
+					entrypointType = function(p1)
+						return p1
 					end
 				}
 			}
@@ -103,8 +103,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					triggerType = function(p2)
-						return p2
+					triggerType = function(p1)
+						return p1
 					end
 				}
 			}
@@ -115,8 +115,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					triggerType = function(p3)
-						return p3
+					triggerType = function(p1)
+						return p1
 					end
 				}
 			}
@@ -165,8 +165,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowDescriptionEdited
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p4)
-						return p4
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -185,8 +185,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowGalleryItemSelected
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p5)
-						return p5
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -205,8 +205,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowGalleryNoCapturesAvailable
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p6)
-						return p6
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -225,8 +225,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowMusicBackButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p7)
-						return p7
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -245,8 +245,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowMusicButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p8)
-						return p8
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -265,8 +265,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowMusicDoneButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p9)
-						return p9
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -285,8 +285,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowMusicSelected
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p10)
-						return p10
+					creationSessionId = function(p1)
+						return p1
 					end,
 					musicAssetId = function(value)
 						return value
@@ -308,11 +308,11 @@ return {
 					action = eventNamesModule.XExpEditingFlowNextButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p11)
-						return p11
+					creationSessionId = function(p1)
+						return p1
 					end,
-					editFlowState = function(p12)
-						return p12
+					editFlowState = function(p1)
+						return p1
 					end
 				}
 			}
@@ -331,11 +331,11 @@ return {
 					action = eventNamesModule.XExpEditingFlowReturnButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p13)
-						return p13
+					creationSessionId = function(p1)
+						return p1
 					end,
-					editFlowState = function(p14)
-						return p14
+					editFlowState = function(p1)
+						return p1
 					end
 				}
 			}
@@ -354,8 +354,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowTextOverlayBackButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p15)
-						return p15
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -374,8 +374,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowTextOverlayButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p16)
-						return p16
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -394,8 +394,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowTextOverlayDoneButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p17)
-						return p17
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -414,8 +414,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowTrimBackButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p18)
-						return p18
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -434,8 +434,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowTrimButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p19)
-						return p19
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -454,8 +454,8 @@ return {
 					action = eventNamesModule.XExpEditingFlowTrimDoneButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p20)
-						return p20
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -474,8 +474,8 @@ return {
 					action = eventNamesModule.XExpMomentCreationStarted
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p21)
-						return p21
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -494,8 +494,8 @@ return {
 					action = eventNamesModule.XExpMomentsEditingFlowContinueToDescriptionButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p22)
-						return p22
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -514,8 +514,8 @@ return {
 					action = eventNamesModule.XExpMomentsEditingFlowContinueToEditButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p23)
-						return p23
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -534,8 +534,8 @@ return {
 					action = eventNamesModule.XExpMomentsEditingFlowExited
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p24)
-						return p24
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}
@@ -554,8 +554,8 @@ return {
 					action = eventNamesModule.XExpMomentsEditingFlowPublished
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p25)
-						return p25
+					creationSessionId = function(p1)
+						return p1
 					end
 				}
 			}

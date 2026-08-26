@@ -5,67 +5,67 @@ local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local usePreferences = foundationModule.Hooks.usePreferences
 local MAX_CONCURRENT_EXPLOSIONS = require(script.Parent.reactionsConstants).MAX_CONCURRENT_EXPLOSIONS
-local var3 = reactModule.createContext(nil)
+local var1 = reactModule.createContext(nil)
 
 return {
-	Context = var3,
-	Provider = function(p0)
-		-- upvalues: usePreferences (ref), reactModule (ref), signalsModule (ref), MAX_CONCURRENT_EXPLOSIONS (ref), var3 (ref)
+	Context = var1,
+	Provider = function(p1)
+		-- upvalues: usePreferences (ref), reactModule (ref), signalsModule (ref), MAX_CONCURRENT_EXPLOSIONS (ref), var1 (ref)
 		local reducedMotion = usePreferences().reducedMotion
-		local var4 = reactModule.useRef(0)
-		local var5 = reactModule.useRef(nil)
-		local var6 = reactModule.useRef(reducedMotion)
-		var6.current = reducedMotion
-		local var7 = reactModule.useMemo(function()
+		local var2 = reactModule.useRef(0)
+		local var3 = reactModule.useRef(nil)
+		local var4 = reactModule.useRef(reducedMotion)
+		var4.current = reducedMotion
+		local var5 = reactModule.useMemo(function()
 			-- upvalues: signalsModule (copy)
-			local var8, var9 = signalsModule.createSignal({})
+			local var6, var7 = signalsModule.createSignal({})
 			
-			return { get = var8, set = var9 }
+			return { get = var6, set = var7 }
 		end, {})
 		
-		return reactModule.createElement(var3.Provider, {
+		return reactModule.createElement(var1.Provider, {
 			value = reactModule.useMemo(function()
-				-- upvalues: var5 (ref), var6 (ref), var7 (ref), MAX_CONCURRENT_EXPLOSIONS (copy), var4 (ref)
+				-- upvalues: var3 (ref), var4 (ref), var5 (ref), MAX_CONCURRENT_EXPLOSIONS (copy), var2 (ref)
 				return {
-					spawnExplosion = function(p1, p2)
-						-- upvalues: var5 (copy), var6 (copy), var7 (copy), MAX_CONCURRENT_EXPLOSIONS (copy), var4 (copy)
-						local current = var5.current
+					spawnExplosion = function(p2, p3)
+						-- upvalues: var3 (copy), var4 (copy), var5 (copy), MAX_CONCURRENT_EXPLOSIONS (copy), var2 (copy)
+						local current = var3.current
 						
-						if var6.current or current == nil then return end
-						local var10 = var7.get(false)
+						if var4.current or current == nil then return end
+						local var6 = var5.get(false)
 						
-						if MAX_CONCURRENT_EXPLOSIONS <= #var10 then
+						if MAX_CONCURRENT_EXPLOSIONS <= #var6 then
 							return
 						end
-						local var11 = if p2 ~= nil then current.AbsoluteSize / 2 else p2 - current.AbsolutePosition
-						var4.current += 1
-						local cloned = table.clone(var10)
+						local var7 = if p3 ~= nil then current.AbsoluteSize / 2 else p3 - current.AbsolutePosition
+						var2.current += 1
+						local cloned = table.clone(var6)
 						table.insert(cloned, {
-							id = var4.current,
-							reactionType = p1,
-							originLocal = var11
+							id = var2.current,
+							reactionType = p2,
+							originLocal = var7
 						})
-						var7.set(cloned)
+						var5.set(cloned)
 					end,
-					getExplosions = var7.get,
-					onExplosionComplete = function(p3)
-						-- upvalues: var7 (copy)
+					getExplosions = var5.get,
+					onExplosionComplete = function(p2)
+						-- upvalues: var5 (copy)
 						local t = {}
 						
-						for i, v in var7.get(false) do
-							if v.id ~= p3 then
+						for i, v in var5.get(false) do
+							if v.id ~= p2 then
 								table.insert(t, v)
 							end
 						end
-						var7.set(t)
+						var5.set(t)
 					end,
-					layerRef = var5
+					layerRef = var3
 				}
-			end, { var7 })
-		}, p0.children)
+			end, { var5 })
+		}, p1.children)
 	end,
 	useReactionEffects = function()
-		-- upvalues: reactModule (ref), var3 (ref)
-		return reactModule.useContext(var3)
+		-- upvalues: reactModule (ref), var1 (ref)
+		return reactModule.useContext(var1)
 	end
 }

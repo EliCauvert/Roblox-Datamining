@@ -13,11 +13,11 @@ return {
 	roact = reactModule,
 	reactRoblox = require(parent.Dev.ReactRoblox),
 	storyRoot = momentsCommon,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: t (ref), reactModule (ref), foundationModule (ref)
-		return function(p1)
-			-- upvalues: t (copy), reactModule (copy), foundationModule (copy), p0 (ref)
-			return reactModule.createElement(foundationModule.FoundationProvider, { colorMode = if p1 then t[p1.theme] else t.Default }, { Child = reactModule.createElement(p0, p1) })
+		return function(p2)
+			-- upvalues: t (copy), reactModule (copy), foundationModule (copy), p1 (ref)
+			return reactModule.createElement(foundationModule.FoundationProvider, { colorMode = if p2 then t[p2.theme] else t.Default }, { Child = reactModule.createElement(p1, p2) })
 		end
 	end
 }

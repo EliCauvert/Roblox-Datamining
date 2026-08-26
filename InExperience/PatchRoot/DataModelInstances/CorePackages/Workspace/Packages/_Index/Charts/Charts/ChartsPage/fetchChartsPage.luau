@@ -36,8 +36,8 @@ local _ = function()
 	return if fFlagEnableTopSongsSort then getFStringTopSongsSortExploreApiPageType() else nil
 end
 
-local function extractNextFeedPageToken(p0)
-	local pageEntries = p0 and p0.page_entries
+local function extractNextFeedPageToken(p1)
+	local pageEntries = p1 and p1.page_entries
 	
 	if not pageEntries then
 		return nil
@@ -59,61 +59,61 @@ local function extractNextFeedPageToken(p0)
 	return nil
 end
 
-return function(p1, p2)
+return function(p2, p3)
 	-- upvalues: chartsConstantsModule (ref), getSduiApiStore (ref), fFlagSduiChartsDedupSessionRotation (ref), chartsPageSessionModule (ref), fFlagChartsHydrationStreaming (ref), fFlagSduiChartsPostBody (ref), getChartsPageStreamUrlModule (ref), getChartsPagePostUrlModule (ref), parent (ref), sduiCapabilities (ref), buildChartsPageRequestModule (ref), getSduiClientPageScope (ref), chartsPageScopeFieldsModule (ref), fFlagEnableTopSongsSort (ref), getFStringTopSongsSortExploreApiPageType (ref), fFlagSduiChartsRequestPlaceholders (ref), getSduiTemplateStore (ref), appPage (ref), sduiResponseType (ref), fFlagSduiChartsPlaceholderMergeStrategySupport (ref), chartsMergeStrategyModule (ref), sduiApiStorePostConfigContentType (ref), fFlagSduiClientTemplateCache (ref), extractNextFeedPageToken (ref), getChartsPageUrlModule (ref)
-	local var19
+	local var1
 	local configKey = chartsConstantsModule.ConfigKey
-	local var16 = getSduiApiStore()
-	local _, data = var16.getData(configKey)
+	local var2 = getSduiApiStore()
+	local _, data = var2.getData(configKey)
 	local _ = nil
 	
 	if fFlagSduiChartsDedupSessionRotation then
-		local var18
-		if not p2 then
-			var18 = data
+		local var3
+		if not p3 then
+			var3 = data
 			
-			if var18 then
-				var18 = not var16.isInFlight(configKey)
+			if var3 then
+				var3 = not var2.isInFlight(configKey)
 			end
-			var19 = var18
+			var1 = var3
 		end
 	else
-		var19 = p2 or data
+		var1 = p3 or data
 	end
-	if var19 then
+	if var1 then
 		chartsPageSessionModule:Refresh()
 	end
-	local var20
+	local var4
 	local _ = nil
 	
 	if fFlagChartsHydrationStreaming or fFlagSduiChartsPostBody then
-		local var21 = if fFlagChartsHydrationStreaming then getChartsPageStreamUrlModule() else getChartsPagePostUrlModule()
+		local var5 = if fFlagChartsHydrationStreaming then getChartsPageStreamUrlModule() else getChartsPagePostUrlModule()
 		local serviceContractsProtoModule = require(parent.ServiceContractsProto)
 		local chartsPage = serviceContractsProtoModule.apppageplatform.charts.charts_page
-		local var23 = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
+		local var6 = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
 			enabled_capabilities = sduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS" })
 		})
 		
-		local function buildBody(p3)
-			-- upvalues: buildChartsPageRequestModule (copy), chartsPage (ref), chartsPageSessionModule (copy), getSduiClientPageScope (copy), chartsConstantsModule (copy), chartsPageScopeFieldsModule (copy), fFlagEnableTopSongsSort (copy), getFStringTopSongsSortExploreApiPageType (copy), fFlagSduiChartsRequestPlaceholders (copy), fFlagChartsHydrationStreaming (copy), getSduiTemplateStore (copy), appPage (copy), var23 (ref)
+		local function buildBody(p4)
+			-- upvalues: buildChartsPageRequestModule (copy), chartsPage (ref), chartsPageSessionModule (copy), getSduiClientPageScope (copy), chartsConstantsModule (copy), chartsPageScopeFieldsModule (copy), fFlagEnableTopSongsSort (copy), getFStringTopSongsSortExploreApiPageType (copy), fFlagSduiChartsRequestPlaceholders (copy), fFlagChartsHydrationStreaming (copy), getSduiTemplateStore (copy), appPage (copy), var6 (ref)
 			return buildChartsPageRequestModule(chartsPage, {
-				feedPageToken = p3,
+				feedPageToken = p4,
 				sessionId = chartsPageSessionModule:Get(),
 				filterSelections = getSduiClientPageScope(chartsConstantsModule.ConfigKey).get(chartsPageScopeFieldsModule.FilterSelections),
 				pageType = if fFlagEnableTopSongsSort then getFStringTopSongsSortExploreApiPageType() else nil,
 				includePlaceholders = if fFlagSduiChartsRequestPlaceholders then true else nil,
 				hydrationStreamEnabled = if fFlagChartsHydrationStreaming then true else nil,
 				cachedRobloxComponentToTemplateId = getSduiTemplateStore().getCachedRobloxComponentToTemplateId(appPage.Games),
-				clientCapabilities = var23
+				clientCapabilities = var6
 			})
 		end
 		
-		var20 = var16.fetchIfNeeded({
+		var4 = var2.fetchIfNeeded({
 			responseType = sduiResponseType.Protobuf,
-			url = var21,
+			url = var5,
 			surfaceKey = appPage.Games,
 			configKey = configKey,
-			loadTimer = p1,
+			loadTimer = p2,
 			apiProto = chartsPage.GetChartsPageResponse,
 			mergeStrategy = if fFlagSduiChartsPlaceholderMergeStrategySupport then chartsMergeStrategyModule else nil,
 			postConfig = {
@@ -125,29 +125,29 @@ return function(p1, p2)
 			enableStreaming = if fFlagChartsHydrationStreaming then true else nil,
 			allowNoConfigsBuilt = if fFlagChartsHydrationStreaming then true else nil,
 			buildNextPageUrl = function(p4)
-				-- upvalues: extractNextFeedPageToken (copy), var21 (ref)
-				return if extractNextFeedPageToken(p4) then var21 else nil
+				-- upvalues: extractNextFeedPageToken (copy), var5 (ref)
+				return if extractNextFeedPageToken(p4) then var5 else nil
 			end,
-			buildNextPagePostBody = function(p5)
+			buildNextPagePostBody = function(p4)
 				-- upvalues: extractNextFeedPageToken (copy), buildBody (ref)
-				local var25 = extractNextFeedPageToken(p5)
+				local var7 = extractNextFeedPageToken(p4)
 				
-				return if var25 then buildBody(var25) else nil
+				return if var7 then buildBody(var7) else nil
 			end,
 			buildRefreshUrl = function()
-				-- upvalues: fFlagSduiChartsDedupSessionRotation (copy), var16 (ref), configKey (ref), chartsPageSessionModule (copy), var21 (ref)
-				if not fFlagSduiChartsDedupSessionRotation or not var16.isInFlight(configKey) then
+				-- upvalues: fFlagSduiChartsDedupSessionRotation (copy), var2 (ref), configKey (ref), chartsPageSessionModule (copy), var5 (ref)
+				if not fFlagSduiChartsDedupSessionRotation or not var2.isInFlight(configKey) then
 					chartsPageSessionModule:Refresh()
 				end
-				return var21
+				return var5
 			end,
 			buildRefreshPostBody = function()
 				-- upvalues: buildBody (ref)
 				return buildBody(nil)
 			end
-		}, p2)
+		}, p3)
 	else
-		var20 = var16.fetchIfNeeded({
+		var4 = var2.fetchIfNeeded({
 			responseType = sduiResponseType.Protobuf,
 			url = getChartsPageUrlModule({
 				sessionId = chartsPageSessionModule:Get(),
@@ -157,15 +157,15 @@ return function(p1, p2)
 			}),
 			surfaceKey = appPage.Games,
 			configKey = configKey,
-			loadTimer = p1,
+			loadTimer = p2,
 			apiProto = require(parent.ServiceContractsProto).apppageplatform.charts.charts_page.GetChartsPageResponse,
 			mergeStrategy = if fFlagSduiChartsPlaceholderMergeStrategySupport then chartsMergeStrategyModule else nil,
-			buildNextPageUrl = function(p6)
+			buildNextPageUrl = function(p4)
 				-- upvalues: extractNextFeedPageToken (copy), getChartsPageUrlModule (copy), chartsPageSessionModule (copy), getSduiClientPageScope (copy), chartsConstantsModule (copy), chartsPageScopeFieldsModule (copy), fFlagEnableTopSongsSort (copy), getFStringTopSongsSortExploreApiPageType (copy), fFlagSduiChartsRequestPlaceholders (copy)
-				local var26 = extractNextFeedPageToken(p6)
+				local var7 = extractNextFeedPageToken(p4)
 				
-				return if var26 then getChartsPageUrlModule({
-					feedPageToken = var26,
+				return if var7 then getChartsPageUrlModule({
+					feedPageToken = var7,
 					sessionId = chartsPageSessionModule:Get(),
 					filterSelections = getSduiClientPageScope(chartsConstantsModule.ConfigKey).get(chartsPageScopeFieldsModule.FilterSelections),
 					pageType = if fFlagEnableTopSongsSort then getFStringTopSongsSortExploreApiPageType() else nil,
@@ -173,8 +173,8 @@ return function(p1, p2)
 				}) else nil
 			end,
 			buildRefreshUrl = function()
-				-- upvalues: fFlagSduiChartsDedupSessionRotation (copy), var16 (ref), configKey (ref), chartsPageSessionModule (copy), getChartsPageUrlModule (copy), getSduiClientPageScope (copy), chartsConstantsModule (copy), chartsPageScopeFieldsModule (copy), fFlagEnableTopSongsSort (copy), getFStringTopSongsSortExploreApiPageType (copy), fFlagSduiChartsRequestPlaceholders (copy)
-				if not fFlagSduiChartsDedupSessionRotation or not var16.isInFlight(configKey) then
+				-- upvalues: fFlagSduiChartsDedupSessionRotation (copy), var2 (ref), configKey (ref), chartsPageSessionModule (copy), getChartsPageUrlModule (copy), getSduiClientPageScope (copy), chartsConstantsModule (copy), chartsPageScopeFieldsModule (copy), fFlagEnableTopSongsSort (copy), getFStringTopSongsSortExploreApiPageType (copy), fFlagSduiChartsRequestPlaceholders (copy)
+				if not fFlagSduiChartsDedupSessionRotation or not var2.isInFlight(configKey) then
 					chartsPageSessionModule:Refresh()
 				end
 				return getChartsPageUrlModule({
@@ -184,7 +184,7 @@ return function(p1, p2)
 					includePlaceholders = if fFlagSduiChartsRequestPlaceholders then true else nil
 				})
 			end
-		}, p2)
+		}, p3)
 	end
-	return var20, configKey
+	return var4, configKey
 end

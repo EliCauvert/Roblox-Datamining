@@ -12,9 +12,9 @@ local t = {
 	BorderPaddingSize = 40,
 	AssetTextMaxSize = 18,
 	ContainerBackgroundColor = require(script.Parent.Colors).Black,
-	ContainerSize = function(p0)
+	ContainerSize = function(p1)
 		-- upvalues: constantsModule (ref)
-		return UDim2.new(0.7, 0, 0.95, -constantsModule.TopBarHeight * p0)
+		return UDim2.new(0.7, 0, 0.95, -constantsModule.TopBarHeight * p1)
 	end,
 	ContainerAnchorPoint = Vector2.new(0.5, 0.5),
 	ContainerPosition = function(p1)
@@ -39,8 +39,8 @@ local t = {
 }
 setmetatable(t, {
 	__newindex = function(_, _, _) end,
-	__index = function(_, p2)
-		error("WideView table has no value: " .. tostring(p2))
+	__index = function(_, p1)
+		error("WideView table has no value: " .. tostring(p1))
 	end
 })
 

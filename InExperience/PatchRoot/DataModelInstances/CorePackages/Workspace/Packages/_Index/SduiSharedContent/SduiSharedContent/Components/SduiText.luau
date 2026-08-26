@@ -3,37 +3,37 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(parent.SduiCompat)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.Text, {
-		AnchorPoint = p0.anchorPoint,
-		AutomaticSize = p0.automaticSize,
-		LayoutOrder = p0.layoutOrder,
-		Position = p0.position,
-		RichText = p0.richText,
-		Rotation = p0.rotation,
-		Size = p0.size,
-		SizeConstraint = p0.sizeConstraint,
-		Text = p0.text,
-		TextTruncate = p0.textTruncate,
-		TextWrapped = p0.textWrapped,
-		TextXAlignment = p0.textXAlignment,
-		TextYAlignment = p0.textYAlignment,
-		Visible = p0.visible,
-		ZIndex = p0.zIndex,
-		aspectRatio = p0.aspectRatio,
-		backgroundStyle = p0.backgroundStyle,
-		cornerRadius = p0.cornerRadius,
-		cursor = p0.cursorType,
-		fontStyle = p0.fontStyle,
-		isDisabled = p0.isDisabled,
-		onActivated = p0.onActivated,
-		onSecondaryActivated = p0.onSecondaryActivated,
-		padding = p0.padding,
-		scale = p0.scale,
-		selection = if p0.selectable ~= nil then nil else { Selectable = p0.selectable },
-		tag = p0.tag,
-		testId = p0.testId,
-		textStyle = p0.textStyle
-	}, p0.children)
+		AnchorPoint = p1.anchorPoint,
+		AutomaticSize = p1.automaticSize,
+		LayoutOrder = p1.layoutOrder,
+		Position = p1.position,
+		RichText = p1.richText,
+		Rotation = p1.rotation,
+		Size = p1.size,
+		SizeConstraint = p1.sizeConstraint,
+		Text = p1.text,
+		TextTruncate = p1.textTruncate,
+		TextWrapped = p1.textWrapped,
+		TextXAlignment = p1.textXAlignment,
+		TextYAlignment = p1.textYAlignment,
+		Visible = p1.visible,
+		ZIndex = p1.zIndex,
+		aspectRatio = p1.aspectRatio,
+		backgroundStyle = p1.backgroundStyle,
+		cornerRadius = p1.cornerRadius,
+		cursor = p1.cursorType,
+		fontStyle = p1.fontStyle,
+		isDisabled = p1.isDisabled,
+		onActivated = p1.onActivated,
+		onSecondaryActivated = p1.onSecondaryActivated,
+		padding = p1.padding,
+		scale = p1.scale,
+		selection = if p1.selectable ~= nil then nil else { Selectable = p1.selectable },
+		tag = p1.tag,
+		testId = p1.testId,
+		textStyle = p1.textStyle
+	}, p1.children)
 end

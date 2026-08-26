@@ -29,13 +29,13 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useLastInputMode = focusNavigationUtilsModule.useLastInputMode
 local fFlagProfileQRCodeFixFocusNavigationModule = require(profileQRCode.Flags.FFlagProfileQRCodeFixFocusNavigation)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: appStorageService (ref)
-	p0 = p0 or appStorageService
-	assert(p0 ~= nil, "AppStorageService is not nil")
+	p1 = p1 or appStorageService
+	assert(p1 ~= nil, "AppStorageService is not nil")
 	local ok, status = pcall(function()
-		-- upvalues: p0 (write)
-		return p0:GetItem("QrCodeScannerTooltipSeen")
+		-- upvalues: p1 (write)
+		return p1:GetItem("QrCodeScannerTooltipSeen")
 	end)
 	
 	return if ok and status ~= nil then status == "true" else false
@@ -52,7 +52,7 @@ local _ = function(value, p1)
 	end)
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: fFlagProfileQRCodeFixFocusNavigationModule (ref), useLastInputMode (ref), useAnalyticsModule (ref), useLocalization (ref), textKeysModule (ref), useAppPolicy (ref), reactModule (ref), appStorageService (ref), eventNamesModule (ref), inputUtilities (ref), IXPService (ref), appUserLayers (ref), coreGuiService (ref), tooltipOrientation (ref), withTooltip (ref), iconButton (ref), images (ref), iconSize (ref), externalEventConnection (ref), userInputService (ref), makeBackButton (ref), headerBar (ref)
 	local isFocus
 	if fFlagProfileQRCodeFixFocusNavigationModule then
@@ -61,20 +61,20 @@ return function(p2)
 	else
 		isFocus = nil
 	end
-	local var17 = useAnalyticsModule()
-	local var18 = useLocalization({
+	local var1 = useAnalyticsModule()
+	local var2 = useLocalization({
 		title = textKeysModule.Title,
 		tooltipBodyText = textKeysModule.TooltipText,
 		tooltipHeaderText = textKeysModule.TooltipTitle
 	})
-	local var19 = useAppPolicy(function(p3)
-		return p3.getFriendCodeQrCodeScannerEnabled()
+	local var3 = useAppPolicy(function(p2)
+		return p2.getFriendCodeQrCodeScannerEnabled()
 	end)
-	local var20, var21 = reactModule.useState(false)
+	local var4, var5 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), appStorageService (copy), var21 (ref), var17 (ref), eventNamesModule (copy)
+		-- upvalues: p1 (ref), appStorageService (copy), var5 (ref), var1 (ref), eventNamesModule (copy)
 		local isTrue
-		local appStorageService_1 = p2.appStorageService or appStorageService
+		local appStorageService_1 = p1.appStorageService or appStorageService
 		assert(appStorageService_1 ~= nil, "AppStorageService is not nil")
 		local ok, status = pcall(function()
 			-- upvalues: appStorageService_1 (write)
@@ -87,74 +87,74 @@ return function(p2)
 		else
 			isTrue = false
 		end
-		var21(not isTrue)
+		var5(not isTrue)
 		
 		if not isTrue then
-			var17.fireEvent(eventNamesModule.QRCodeScannerTooltipShown)
+			var1.fireEvent(eventNamesModule.QRCodeScannerTooltipShown)
 		end
 	end, {})
-	local var22 = reactModule.useCallback(function(p4)
-		-- upvalues: inputUtilities (copy), var20 (ref), var21 (ref), p2 (ref), appStorageService (copy)
-		if inputUtilities.isActivationInput(p4) and var20 then
-			var21(false)
-			local appStorageService_1 = p2.appStorageService or appStorageService
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: inputUtilities (copy), var4 (ref), var5 (ref), p1 (ref), appStorageService (copy)
+		if inputUtilities.isActivationInput(p2) and var4 then
+			var5(false)
+			local appStorageService_1 = p1.appStorageService or appStorageService
 			assert(appStorageService_1 ~= nil, "AppStorageService is not nil")
-			local var27 = true
+			local var7 = true
 			pcall(function()
-				-- upvalues: appStorageService_1 (write), var27 (ref)
-				appStorageService_1:SetItem("QrCodeScannerTooltipSeen", tostring(var27))
+				-- upvalues: appStorageService_1 (write), var7 (ref)
+				appStorageService_1:SetItem("QrCodeScannerTooltipSeen", tostring(var7))
 				appStorageService_1:Flush()
 			end)
 		end
-	end, { var20 })
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: IXPService (copy), appUserLayers (copy), var17 (ref), eventNamesModule (copy), p2 (ref)
+	end, { var4 })
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: IXPService (copy), appUserLayers (copy), var1 (ref), eventNamesModule (copy), p1 (ref)
 		IXPService:LogUserLayerExposure(appUserLayers.ProfileQRCodeScannerLayer)
-		var17.fireEvent(eventNamesModule.QRCodeScannerOpened)
-		p2.openQrCodeScanner()
-	end, { p2.openQrCodeScanner })
-	local tooltipBodyText = var18.tooltipBodyText
-	local tooltipHeaderText = var18.tooltipHeaderText
+		var1.fireEvent(eventNamesModule.QRCodeScannerOpened)
+		p1.openQrCodeScanner()
+	end, { p1.openQrCodeScanner })
+	local tooltipBodyText = var2.tooltipBodyText
+	local tooltipHeaderText = var2.tooltipHeaderText
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 2,
 		Size = UDim2.new(1, 0, 0, 56),
-		LayoutOrder = p2.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		headerBar = reactModule.createElement(headerBar, {
 			isSecondary = true,
 			backgroundTransparency = 1,
 			barHeight = 56,
-			title = var18.title,
-			renderLeft = if fFlagProfileQRCodeFixFocusNavigationModule and not isFocus or not fFlagProfileQRCodeFixFocusNavigationModule then makeBackButton(p2.onClose) else nil,
-			renderRight = if var19 then reactModule.useCallback(function()
-				-- upvalues: tooltipBodyText (ref), tooltipHeaderText (ref), var20 (ref), coreGuiService (copy), tooltipOrientation (copy), withTooltip (copy), reactModule (copy), iconButton (copy), images (copy), iconSize (copy), var23 (ref), externalEventConnection (copy), userInputService (copy), var22 (ref)
+			title = var2.title,
+			renderLeft = if fFlagProfileQRCodeFixFocusNavigationModule and not isFocus or not fFlagProfileQRCodeFixFocusNavigationModule then makeBackButton(p1.onClose) else nil,
+			renderRight = if var3 then reactModule.useCallback(function()
+				-- upvalues: tooltipBodyText (ref), tooltipHeaderText (ref), var4 (ref), coreGuiService (copy), tooltipOrientation (copy), withTooltip (copy), reactModule (copy), iconButton (copy), images (copy), iconSize (copy), var7 (ref), externalEventConnection (copy), userInputService (copy), var6 (ref)
 				return withTooltip({
 					bodyText = tooltipBodyText,
 					headerText = tooltipHeaderText
 				}, {
 					DisplayOrder = 10,
-					active = var20,
+					active = var4,
 					guiTarget = coreGuiService,
 					preferredOrientation = tooltipOrientation.Bottom
-				}, function(p5)
-					-- upvalues: reactModule (copy), iconButton (copy), images (copy), iconSize (copy), var23 (copy), externalEventConnection (copy), userInputService (copy), var22 (copy)
+				}, function(p2)
+					-- upvalues: reactModule (copy), iconButton (copy), images (copy), iconSize (copy), var7 (copy), externalEventConnection (copy), userInputService (copy), var6 (copy)
 					return reactModule.createElement(iconButton, {
 						icon = images["icons/actions/scan"],
 						iconSize = iconSize.Medium,
-						onActivated = var23,
+						onActivated = var7,
 						size = UDim2.fromOffset(0, 0),
-						onAbsolutePositionChanged = p5,
-						[reactModule.Change.AbsoluteSize] = p5
+						onAbsolutePositionChanged = p2,
+						[reactModule.Change.AbsoluteSize] = p2
 					}, {
-						InputBeganConnection = reactModule.createElement(externalEventConnection, { event = userInputService.InputBegan, callback = var22 })
+						InputBeganConnection = reactModule.createElement(externalEventConnection, { event = userInputService.InputBegan, callback = var6 })
 					})
 				end)
 			end, {
-				var23,
-				var19,
-				var20,
+				var7,
+				var3,
+				var4,
 				tooltipBodyText,
 				tooltipHeaderText
 			}) else nil

@@ -14,39 +14,39 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local fFlagAXSelectedBorderWrapsBackground = avatarExperienceFlagsModule.FFlagAXSelectedBorderWrapsBackground
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: fFlagAXMigrateAXToGlobalAutofocus (ref), useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), fFlagAXMISEnableMultiShopping (ref), itemCardBackgroundsWrapperModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref)
 	return reactModule.createElement("TextButton", {
-		Selectable = if fFlagAXMISEnableMultiShopping then p0.Selectable else nil,
+		Selectable = if fFlagAXMISEnableMultiShopping then p1.Selectable else nil,
 		SelectionImageObject = if fFlagAXMigrateAXToGlobalAutofocus then useSelectionCursor(cursorKind.RoundedRect) else nil,
 		Text = "",
 		AutoButtonColor = false,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Event.Activated] = if p0.isDisabled then nil else p0.onActivated,
-		ref = p1,
-		Size = p0.Size,
-		AutomaticSize = p0.AutomaticSize,
-		LayoutOrder = p0.LayoutOrder,
+		[reactModule.Event.Activated] = if p1.isDisabled then nil else p1.onActivated,
+		ref = p2,
+		Size = p1.Size,
+		AutomaticSize = p1.AutomaticSize,
+		LayoutOrder = p1.LayoutOrder,
 		SelectionGroup = true,
-		[reactModule.Tag] = p0.tag
-	}, if p0.backgroundLayers == nil or #p0.backgroundLayers <= 0 then {
+		[reactModule.Tag] = p1.tag
+	}, if p1.backgroundLayers == nil or #p1.backgroundLayers <= 0 then {
 		ItemCardListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			Padding = UDim.new(0, useTokens().Gap.Small)
 		}),
-		ItemCardHeaderSlot = p0.headerSlot,
-		ItemCardFooterSlot = p0.footerSlot
+		ItemCardHeaderSlot = p1.headerSlot,
+		ItemCardFooterSlot = p1.footerSlot
 	} else {
 		BackgroundsWrapper = reactModule.createElement(itemCardBackgroundsWrapperModule, {
-			backgroundLayers = p0.backgroundLayers,
-			imageScaleType = p0.imageScaleType,
-			headerSlot = p0.headerSlot,
-			footerSlot = p0.footerSlot
+			backgroundLayers = p1.backgroundLayers,
+			imageScaleType = p1.imageScaleType,
+			headerSlot = p1.headerSlot,
+			footerSlot = p1.footerSlot
 		}),
-		SelectedBorder = if fFlagAXSelectedBorderWrapsBackground and p0.showSelectionBorderWithBackground then reactModule.createElement(view, {
+		SelectedBorder = if fFlagAXSelectedBorderWrapsBackground and p1.showSelectionBorderWithBackground then reactModule.createElement(view, {
 			tag = "size-full stroke-standard stroke-system-contrast radius-medium",
 			testId = "card-selection-stroke",
 			ZIndex = 2

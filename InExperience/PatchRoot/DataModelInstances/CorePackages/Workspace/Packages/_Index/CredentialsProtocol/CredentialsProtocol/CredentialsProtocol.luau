@@ -10,11 +10,11 @@ local fFlagLuaAppNormalizeUnifiedPasskeyResponseModule = require(script.Parent.F
 local fFlagCacheCredentialsProtocolIsAvailableModule = require(script.Parent.Flags.FFlagCacheCredentialsProtocolIsAvailable)
 local credentialsTypes = constantsModule.CredentialsTypes
 
-local function _(p0)
-	return if p0.isAvailable == nil then if p0.FIDO2 == nil then if p0.password == nil then if p0.iosKeychainPassword == nil then p0.keystore ~= nil else true else true else true else true
+local function _(p1)
+	return if p1.isAvailable == nil then if p1.FIDO2 == nil then if p1.password == nil then if p1.iosKeychainPassword == nil then p1.keystore ~= nil else true else true else true else true
 end
 
-local var7 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	keyType = tModule.optional(tModule.string),
 	publicKey = tModule.interface({
 		challenge = tModule.string,
@@ -28,9 +28,9 @@ local var7 = tModule.strictInterface({
 	deviceBoundOnly = tModule.optional(tModule.boolean)
 })
 local t = {
-	[credentialsTypes.FIDO2] = tModule.strictInterface({ credentialType = tModule.string, parameters = var7 }),
+	[credentialsTypes.FIDO2] = tModule.strictInterface({ credentialType = tModule.string, parameters = var1 }),
 	[credentialsTypes.all] = tModule.strictInterface({
-		FIDO2 = tModule.optional(var7),
+		FIDO2 = tModule.optional(var1),
 		password = tModule.optional(tModule.strictInterface({ username = tModule.optional(tModule.string) }))
 	}),
 	[credentialsTypes.iosKeychainPassword] = tModule.strictInterface({
@@ -45,7 +45,7 @@ local t = {
 		})
 	})
 }
-local var9 = tModule.strictInterface({
+local var2 = tModule.strictInterface({
 	id = tModule.optional(tModule.string),
 	rawId = tModule.optional(tModule.string),
 	type = tModule.optional(tModule.string),
@@ -58,9 +58,9 @@ local var9 = tModule.strictInterface({
 	errorCode = tModule.optional(tModule.string),
 	errorMsg = tModule.optional(tModule.string)
 })
-local var10 = tModule.strictInterface({
+local var3 = tModule.strictInterface({
 	credentialType = tModule.string,
-	response = tModule.union(var9, tModule.strictInterface({
+	response = tModule.union(var2, tModule.strictInterface({
 		username = tModule.optional(tModule.string),
 		password = tModule.optional(tModule.string),
 		errorCode = tModule.optional(tModule.string),
@@ -68,8 +68,8 @@ local var10 = tModule.strictInterface({
 	}))
 })
 local t_1 = {
-	[credentialsTypes.FIDO2] = var9,
-	[credentialsTypes.all] = if fFlagLuaAppNormalizeUnifiedPasskeyResponseModule then tModule.union(var10, var9) else var10,
+	[credentialsTypes.FIDO2] = var2,
+	[credentialsTypes.all] = if fFlagLuaAppNormalizeUnifiedPasskeyResponseModule then tModule.union(var3, var2) else var3,
 	[credentialsTypes.iosKeychainPassword] = tModule.array(tModule.strictInterface({
 		experimentGroup = tModule.optional(tModule.string),
 		username = tModule.optional(tModule.string),
@@ -323,7 +323,7 @@ function t_4:getCredentials(p1, p2, p3)
 	if self.getCredentialsRequestInFlight then
 		return promiseModule.reject()
 	end
-	local var15 = promiseModule.race({
+	local var4 = promiseModule.race({
 		promiseModule.new(function(p4, _)
 			-- upvalues: self (ref), p1 (ref), fFlagLuaAppNormalizeUnifiedPasskeyResponseModule (copy), credentialsTypes (copy), normalizeUnifiedGetCredentialsResponseModule (copy), httpService (copy)
 			self.subscriber:subscribe(self.GET_CREDENTIALS_RESPONSE_DESCRIPTOR[p1], function(p5)
@@ -344,155 +344,155 @@ function t_4:getCredentials(p1, p2, p3)
 	if p1 == credentialsTypes.all then
 		messageBus.publish(self.GET_CREDENTIALS_REQUEST_DESCRIPTOR[p1], httpService:JSONDecode(p2))
 		
-		return var15
+		return var4
 	end
 	messageBus.publish(self.GET_CREDENTIALS_REQUEST_DESCRIPTOR[p1], {
 		credentialType = p1,
 		parameters = httpService:JSONDecode(p2)
 	})
 	
-	return var15
+	return var4
 end
 
-function t_4:registerCredentials(p6, p7, p8)
+function t_4:registerCredentials(p1, p2, p3)
 	-- upvalues: promiseModule (ref), httpService (ref), messageBus (ref)
 	if self.registerCredentialsRequestInFlight then
 		return promiseModule.reject()
 	end
-	local var16 = promiseModule.race({
-		promiseModule.new(function(p9, _)
-			-- upvalues: self (ref), p6 (ref), httpService (copy)
-			self.subscriber:subscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p6], function(p10)
-				-- upvalues: self (copy), p6 (copy), httpService (copy), p9 (ref)
-				self.subscriber:unsubscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p6])
+	local var4 = promiseModule.race({
+		promiseModule.new(function(p4, _)
+			-- upvalues: self (ref), p1 (ref), httpService (copy)
+			self.subscriber:subscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p1], function(p5)
+				-- upvalues: self (copy), p1 (copy), httpService (copy), p4 (ref)
+				self.subscriber:unsubscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p1])
 				self.registerCredentialsRequestInFlight = false
-				p9(httpService:JSONEncode(p10))
+				p4(httpService:JSONEncode(p5))
 			end)
 		end),
-		promiseModule.delay(p8):andThen(function()
-			-- upvalues: self (ref), p6 (ref)
-			self.subscriber:unsubscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p6])
+		promiseModule.delay(p3):andThen(function()
+			-- upvalues: self (ref), p1 (ref)
+			self.subscriber:unsubscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p1])
 			self.registerCredentialsRequestInFlight = false
 		end)
 	})
 	self.registerCredentialsRequestInFlight = true
-	messageBus.publish(self.REGISTER_CREDENTIALS_REQUEST_DESCRIPTOR[p6], {
-		credentialType = p6,
-		parameters = httpService:JSONDecode(p7)
+	messageBus.publish(self.REGISTER_CREDENTIALS_REQUEST_DESCRIPTOR[p1], {
+		credentialType = p1,
+		parameters = httpService:JSONDecode(p2)
 	})
 	
-	return var16
+	return var4
 end
 
-function t_4:deleteAllCredentialsFromiOSKeychain(p11, p12, p13)
+function t_4:deleteAllCredentialsFromiOSKeychain(p1, p2, p3)
 	-- upvalues: promiseModule (ref), httpService (ref), messageBus (ref)
 	if self.deleteIosKeychainCredentialsRequestInFlight then
 		return promiseModule.reject()
 	end
-	local var17 = promiseModule.race({
-		promiseModule.new(function(p14, _)
-			-- upvalues: self (ref), p11 (ref), httpService (copy)
-			self.subscriber:subscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p11], function(p15)
-				-- upvalues: self (copy), p11 (copy), httpService (copy), p14 (ref)
-				self.subscriber:unsubscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p11])
+	local var4 = promiseModule.race({
+		promiseModule.new(function(p4, _)
+			-- upvalues: self (ref), p1 (ref), httpService (copy)
+			self.subscriber:subscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p1], function(p5)
+				-- upvalues: self (copy), p1 (copy), httpService (copy), p4 (ref)
+				self.subscriber:unsubscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p1])
 				self.deleteIosKeychainCredentialsRequestInFlight = false
-				p14(httpService:JSONEncode(p15))
+				p4(httpService:JSONEncode(p5))
 			end)
 		end),
-		promiseModule.delay(p13):andThen(function()
-			-- upvalues: self (ref), p11 (ref)
-			self.subscriber:unsubscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p11])
+		promiseModule.delay(p3):andThen(function()
+			-- upvalues: self (ref), p1 (ref)
+			self.subscriber:unsubscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p1])
 			self.deleteIosKeychainCredentialsRequestInFlight = false
 		end)
 	})
 	self.deleteIosKeychainCredentialsRequestInFlight = true
-	messageBus.publish(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_REQUEST_DESCRIPTOR[p11], {
-		credentialType = p11,
-		parameters = httpService:JSONDecode(p12)
+	messageBus.publish(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_REQUEST_DESCRIPTOR[p1], {
+		credentialType = p1,
+		parameters = httpService:JSONDecode(p2)
 	})
 	
-	return var17
+	return var4
 end
 
-function t_4:deleteAllCredentialsFromKeystore(p16, p17, p18)
+function t_4:deleteAllCredentialsFromKeystore(p1, p2, p3)
 	-- upvalues: promiseModule (ref), httpService (ref), messageBus (ref)
 	if self.deleteKeystoreCredentialsRequestInFlight then
 		return promiseModule.reject()
 	end
-	local var18 = promiseModule.race({
-		promiseModule.new(function(p19, _)
-			-- upvalues: self (ref), p16 (ref), httpService (copy)
-			self.subscriber:subscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p16], function(p20)
-				-- upvalues: self (copy), p16 (copy), httpService (copy), p19 (ref)
-				self.subscriber:unsubscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p16])
+	local var4 = promiseModule.race({
+		promiseModule.new(function(p4, _)
+			-- upvalues: self (ref), p1 (ref), httpService (copy)
+			self.subscriber:subscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p1], function(p5)
+				-- upvalues: self (copy), p1 (copy), httpService (copy), p4 (ref)
+				self.subscriber:unsubscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p1])
 				self.deleteKeystoreCredentialsRequestInFlight = false
-				p19(httpService:JSONEncode(p20))
+				p4(httpService:JSONEncode(p5))
 			end)
 		end),
-		promiseModule.delay(p18):andThen(function()
-			-- upvalues: self (ref), p16 (ref)
-			self.subscriber:unsubscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p16])
+		promiseModule.delay(p3):andThen(function()
+			-- upvalues: self (ref), p1 (ref)
+			self.subscriber:unsubscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p1])
 			self.deleteKeystoreCredentialsRequestInFlight = false
 		end)
 	})
 	self.deleteKeystoreCredentialsRequestInFlight = true
-	messageBus.publish(self.DELETE_KEYSTORE_CREDENTIALS_REQUEST_DESCRIPTOR[p16], {
-		credentialType = p16,
-		parameters = httpService:JSONDecode(p17)
+	messageBus.publish(self.DELETE_KEYSTORE_CREDENTIALS_REQUEST_DESCRIPTOR[p1], {
+		credentialType = p1,
+		parameters = httpService:JSONDecode(p2)
 	})
 	
-	return var18
+	return var4
 end
 
-function t_4:sendIsAvailableRequest(p21, p22)
+function t_4:sendIsAvailableRequest(p1, p2)
 	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var19 = promiseModule.race({
-		promiseModule.new(function(p23, _)
+	local var4 = promiseModule.race({
+		promiseModule.new(function(p3, _)
 			-- upvalues: self (ref)
-			self.subscriber:subscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR, function(p24)
-				-- upvalues: self (copy), p23 (ref)
+			self.subscriber:subscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR, function(p4)
+				-- upvalues: self (copy), p3 (ref)
 				self.subscriber:unsubscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR)
-				p23(p24)
+				p3(p4)
 			end)
 		end),
-		promiseModule.delay(p22):andThen(function()
+		promiseModule.delay(p2):andThen(function()
 			-- upvalues: self (ref), promiseModule (copy)
 			self.subscriber:unsubscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR)
 			
 			return promiseModule.resolve({ isAvailable = nil, supportsDeviceBoundOnly = nil })
 		end)
 	})
-	messageBus.publish(self.IS_AVAILABLE_REQUEST_DESCRIPTOR, { credentialType = p21 })
+	messageBus.publish(self.IS_AVAILABLE_REQUEST_DESCRIPTOR, { credentialType = p1 })
 	
-	return var19
+	return var4
 end
 
-function t_4:isAvailable(p25, p26)
+function t_4:isAvailable(p1, p2)
 	-- upvalues: fFlagCacheCredentialsProtocolIsAvailableModule (ref), promiseModule (ref)
 	if not fFlagCacheCredentialsProtocolIsAvailableModule then
-		return self:sendIsAvailableRequest(p25, p26)
+		return self:sendIsAvailableRequest(p1, p2)
 	end
 	local isAvailableCache = self.isAvailableCache
 	
 	if isAvailableCache ~= nil and os.clock() - isAvailableCache.clock < 30 then
 		return promiseModule.resolve(isAvailableCache.result)
 	elseif self.isAvailableRequest == nil then
-		local var20 = self:sendIsAvailableRequest(p25, p26)
-		self.isAvailableRequest = var20
+		local var4 = self:sendIsAvailableRequest(p1, p2)
+		self.isAvailableRequest = var4
 		
-		return var20:andThen(function(p28)
+		return var4:andThen(function(p3)
 			-- upvalues: self (ref)
 			self.isAvailableRequest = nil
 			
-			if if p28.isAvailable == nil then if p28.FIDO2 == nil then if p28.password == nil then if p28.iosKeychainPassword == nil then p28.keystore ~= nil else true else true else true else true then
-				self.isAvailableCache = { result = p28, clock = os.clock() }
+			if if p3.isAvailable == nil then if p3.FIDO2 == nil then if p3.password == nil then if p3.iosKeychainPassword == nil then p3.keystore ~= nil else true else true else true else true then
+				self.isAvailableCache = { result = p3, clock = os.clock() }
 			end
-			return p28
-		end):catch(function(p27)
+			return p3
+		end):catch(function(p3)
 			-- upvalues: self (ref), promiseModule (copy)
 			self.isAvailableRequest = nil
 			
-			return promiseModule.reject(p27)
+			return promiseModule.reject(p3)
 		end)
 	end
 	return self.isAvailableRequest

@@ -7,21 +7,21 @@ local VOICE_STATE = require(parent.VoiceChat).Constants.VOICE_STATE
 local actions = expChat.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.VoiceParticipantAdded).name] = function(p0, p1)
+	[require(actions.VoiceParticipantAdded).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		local userId = p1.userId
+		local userId = p2.userId
 		
-		return dictionary.join(p0, { [userId] = p0[userId] or "Hidden" })
+		return dictionary.join(p1, { [userId] = p1[userId] or "Hidden" })
 	end,
-	[require(actions.VoiceParticipantRemoved).name] = function(p2, p3)
+	[require(actions.VoiceParticipantRemoved).name] = function(p1, p2)
 		-- upvalues: dictionary (ref), none (ref)
-		return dictionary.join(p2, { [p3.userId] = none })
+		return dictionary.join(p1, { [p2.userId] = none })
 	end,
-	[require(actions.VoiceParticipantsChanged).name] = function(p4, p5)
+	[require(actions.VoiceParticipantsChanged).name] = function(p1, p2)
 		-- upvalues: VOICE_STATE (ref)
-		local cloned = table.clone(p4)
+		local cloned = table.clone(p1)
 		
-		for i, v in p5.newParticipants do
+		for i, v in p2.newParticipants do
 			local INACTIVE = VOICE_STATE.INACTIVE
 			
 			if not v.subscriptionCompleted then
@@ -37,8 +37,8 @@ return roduxModule.createReducer({}, {
 		end
 		return cloned
 	end,
-	[require(actions.VoiceStateChanged).name] = function(p6, p7)
+	[require(actions.VoiceStateChanged).name] = function(p3, p4)
 		-- upvalues: dictionary (ref)
-		return if p6[p7.userId] then dictionary.join(p6, { [p7.userId] = p7.newState }) else p6
+		return if p3[p4.userId] then dictionary.join(p3, { [p4.userId] = p4.newState }) else p3
 	end
 })

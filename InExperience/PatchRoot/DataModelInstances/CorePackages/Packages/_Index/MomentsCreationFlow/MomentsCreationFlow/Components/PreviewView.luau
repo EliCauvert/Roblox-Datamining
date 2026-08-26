@@ -13,21 +13,21 @@ local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFl
 local constantsModule = require(momentsCreationFlow.Constants)
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), view (ref), constantsModule (ref), button (ref), foundationModule (ref), inputSize (ref), creationFlowLocalizationModule (ref), buttonVariant (ref)
-	local var7 = useDeviceInsets()
-	local var8 = useTokens()
-	local var9 = reactModule.useContext(creationFlowContextModule)
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local var3 = reactModule.useContext(creationFlowContextModule)
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-center auto-y size-full-0",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var8.Padding.Large),
-			PaddingBottom = UDim.new(0, math.max(var7.bottom, var8.Padding.Large)),
-			PaddingLeft = UDim.new(0, math.max(var7.left, var8.Padding.XLarge)),
-			PaddingRight = UDim.new(0, math.max(var7.right, var8.Padding.XLarge))
+			PaddingTop = UDim.new(0, var2.Padding.Large),
+			PaddingBottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Large)),
+			PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
+			PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 		}),
 		SizeConstraint = reactModule.createElement(view, {
 			tag = "align-x-center auto-y gap-small row size-full-0",
@@ -36,19 +36,19 @@ return function(p0)
 			ContinueButton = reactModule.createElement(button, {
 				LayoutOrder = 1,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-				onActivated = p0.onContinueCallback,
+				onActivated = p1.onContinueCallback,
 				size = inputSize.Medium,
-				text = var9.getLocalization(creationFlowLocalizationModule.PublishingCtaContinue),
+				text = var3.getLocalization(creationFlowLocalizationModule.PublishingCtaContinue),
 				variant = buttonVariant.Emphasis,
 				width = UDim.new(0.5, 0)
 			}),
-			ReturnToGalleryButton = if p0.onReturnToGalleryCallback then reactModule.createElement(button, {
+			ReturnToGalleryButton = if p1.onReturnToGalleryCallback then reactModule.createElement(button, {
 				LayoutOrder = 2,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-				text = var9.getLocalization(creationFlowLocalizationModule.PublishingCtaReturn),
+				text = var3.getLocalization(creationFlowLocalizationModule.PublishingCtaReturn),
 				variant = buttonVariant.Standard,
 				width = UDim.new(0.5, 0),
-				onActivated = p0.onReturnToGalleryCallback,
+				onActivated = p1.onReturnToGalleryCallback,
 				size = inputSize.Medium
 			}) else nil
 		})

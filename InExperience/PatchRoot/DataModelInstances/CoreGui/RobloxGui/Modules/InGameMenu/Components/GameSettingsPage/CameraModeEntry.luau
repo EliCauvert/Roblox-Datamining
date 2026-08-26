@@ -31,9 +31,9 @@ cameraModeEntry.validateProps = t.strictInterface({
 })
 cameraModeEntry.defaultProps = { canOpen = true }
 
-function cameraModeEntry.init(p0)
+function cameraModeEntry.init(p1)
 	-- upvalues: userGameSettingsService (ref), playerScripts (ref), localPlayer (ref)
-	p0:setState({
+	p1:setState({
 		selectedComputerMode = userGameSettingsService.ComputerCameraMovementMode,
 		computerOptions = playerScripts and playerScripts:GetRegisteredComputerCameraMovementModes() or {},
 		developerComputerMode = localPlayer.DevComputerCameraMode
@@ -75,17 +75,17 @@ function cameraModeEntry.render(p1)
 	if #p1.state.computerOptions == 0 then
 		return roact.createFragment(t)
 	end
-	local var17 = p1.state.developerComputerMode ~= Enum.DevComputerCameraMovementMode.UserChoice
+	local var1 = p1.state.developerComputerMode ~= Enum.DevComputerCameraMovementMode.UserChoice
 	local t_2 = {}
-	local var19 = 0
+	local var2 = 0
 	
-	if not var17 then
+	if not var1 then
 		for i, v in ipairs(p1.state.computerOptions) do
 			t_2[i] = t_1[v]
 			assert(t_2[i] ~= nil, "Camera movement mode " .. v.Name .. " has no localization key")
 			
 			if p1.state.selectedComputerMode.Value == v.Value then
-				var19 = i
+				var2 = i
 			end
 		end
 	end
@@ -106,18 +106,18 @@ function cameraModeEntry.render(p1)
 			AnchorPoint = Vector2.new(0, 0)
 		}),
 		Dropdown = withLocalizationModule({
-			placeholder = if var17 then t_1[p1.state.developerComputerMode] else nil
+			placeholder = if var1 then t_1[p1.state.developerComputerMode] else nil
 		})(function(_)
-			-- upvalues: roact (copy), dropDownSelectionModule (copy), t_2 (ref), var19 (write), p1 (ref), var17 (ref), userGameSettingsService (copy), sendAnalyticsModule (copy), constantsModule (copy)
+			-- upvalues: roact (copy), dropDownSelectionModule (copy), t_2 (ref), var2 (write), p1 (ref), var1 (ref), userGameSettingsService (copy), sendAnalyticsModule (copy), constantsModule (copy)
 			return roact.createElement(dropDownSelectionModule, {
 				localize = true,
 				selectionParentName = "cameraModeDropdown",
 				Size = UDim2.new(1, 0, 0, 44),
 				Position = UDim2.new(0, 0, 0, 56),
 				selections = t_2,
-				selectedIndex = var19,
+				selectedIndex = var2,
 				placeHolderText = p1.state.developerComputerMode.Name,
-				enabled = not var17,
+				enabled = not var1,
 				selectionChanged = function(p2)
 					-- upvalues: userGameSettingsService (copy), p1 (copy), sendAnalyticsModule (copy), constantsModule (copy)
 					userGameSettingsService.ComputerCameraMovementMode = p1.state.computerOptions[p2]
@@ -128,7 +128,7 @@ function cameraModeEntry.render(p1)
 				ButtonRef = p1.props.ButtonRef
 			})
 		end),
-		LockedLabel = var17 and roact.createElement(developerLockLabelModule, {
+		LockedLabel = var1 and roact.createElement(developerLockLabelModule, {
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
 			Size = UDim2.new(1, -72, 0.25, 0)

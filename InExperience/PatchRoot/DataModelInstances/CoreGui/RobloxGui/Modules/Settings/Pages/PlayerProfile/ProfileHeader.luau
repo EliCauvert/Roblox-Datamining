@@ -9,37 +9,37 @@ local socialChipCountsRowModule = require(corePackagesService.Workspace.Packages
 local useAppPolicy = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).useAppPolicy
 local fFlagFriendRequestNicknames = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagFriendRequestNicknames
 
-local _ = function(p0, p1, p2)
-	local primaryName = p0.names.primaryName or ""
+local _ = function(p1, p2, p3)
+	local primaryName = p1.names.primaryName or ""
 	
-	return if p1.profileUserNickname and p2 and p1.profileUserNickname ~= "" then p1.profileUserNickname .. " (" .. primaryName .. ")" else primaryName
+	return if p2.profileUserNickname and p3 and p2.profileUserNickname ~= "" then p2.profileUserNickname .. " (" .. primaryName .. ")" else primaryName
 end
 
-return reactModule.memo(function(p3)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), profileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagFriendRequestNicknames (ref), useAppPolicy (ref), view (ref), avatarHeadshotComponentModule (ref), socialChipCountsRowModule (ref)
-	local var8 = reactModule.useContext(profileWrapperContextModule)
-	local var9 = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader)
-	local var10 = var9.counts ~= nil
-	local var11 = if fFlagFriendRequestNicknames then useAppPolicy(function(p4)
-		return p4.getFriendRequestNicknamesEnabled()
+	local var1 = reactModule.useContext(profileWrapperContextModule)
+	local var2 = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader)
+	local var3 = var2.counts ~= nil
+	local var4 = if fFlagFriendRequestNicknames then useAppPolicy(function(p2)
+		return p2.getFriendRequestNicknamesEnabled()
 	end) else false
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "size-full-0 auto-y col gap-large",
-		LayoutOrder = p3.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}
 	local t_1 = {}
 	local createElement_1 = reactModule.createElement
-	local var14 = avatarHeadshotComponentModule
-	local t_2 = { layoutOrder = 1, userId = p3.profileId }
-	local primaryName = var9.names.primaryName or ""
-	t_2.primaryName = if var8.profileUserNickname and var11 and var8.profileUserNickname ~= "" then var8.profileUserNickname .. " (" .. primaryName .. ")" else primaryName
-	t_2.username = var9.names.username
-	t_2.isPremium = var9.isPremium
-	t_2.isVerified = var9.isVerified
-	t_2.isRobloxAdmin = var9.isRobloxAdmin
-	t_1.AvatarHeadshotComponent = createElement_1(var14, t_2)
-	t_1.SocialCountsRow = if var10 then reactModule.createElement(socialChipCountsRowModule, { layoutOrder = 2, size = UDim2.fromScale(1, 0) }) else nil
+	local var5 = avatarHeadshotComponentModule
+	local t_2 = { layoutOrder = 1, userId = p1.profileId }
+	local primaryName = var2.names.primaryName or ""
+	t_2.primaryName = if var1.profileUserNickname and var4 and var1.profileUserNickname ~= "" then var1.profileUserNickname .. " (" .. primaryName .. ")" else primaryName
+	t_2.username = var2.names.username
+	t_2.isPremium = var2.isPremium
+	t_2.isVerified = var2.isVerified
+	t_2.isRobloxAdmin = var2.isRobloxAdmin
+	t_1.AvatarHeadshotComponent = createElement_1(var5, t_2)
+	t_1.SocialCountsRow = if var3 then reactModule.createElement(socialChipCountsRowModule, { layoutOrder = 2, size = UDim2.fromScale(1, 0) }) else nil
 	
 	return createElement(view, t, t_1)
 end)

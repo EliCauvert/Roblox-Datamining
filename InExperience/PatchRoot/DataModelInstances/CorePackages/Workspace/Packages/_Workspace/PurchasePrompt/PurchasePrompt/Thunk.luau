@@ -1,60 +1,60 @@
 ﻿local t = {}
 local thunkTag = require(script.Parent.Symbols.Symbol).named("ThunkTag")
 
-function t.middleware(p0)
+function t.middleware(p1)
 	-- upvalues: thunkTag (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	return function(p1, p2)
-		-- upvalues: thunkTag (copy), p0 (write)
-		return function(p3)
-			-- upvalues: thunkTag (copy), p0 (copy), p2 (ref), p1 (ref)
-			if p3[thunkTag] ~= true then
-				return p1(p3)
+	return function(p2, p3)
+		-- upvalues: thunkTag (copy), p1 (write)
+		return function(p4)
+			-- upvalues: thunkTag (copy), p1 (copy), p3 (ref), p2 (ref)
+			if p4[thunkTag] ~= true then
+				return p2(p4)
 			end
 			local t = {}
 			
-			for i, v in pairs(p3.requiredServices) do
-				local var3 = p0[v]
+			for i, v in pairs(p4.requiredServices) do
+				local var1 = p1[v]
 				
-				if var3 == nil then
+				if var1 == nil then
 					error(("Service with key %s is a dependency but was not provided"):format(tostring(v)))
 				end
-				t[v] = var3
+				t[v] = var1
 			end
-			return p3(p2, t)
+			return p4(p3, t)
 		end
 	end
 end
 
-function t.new(p4, p5, p6)
+function t.new(p2, p3, p4)
 	-- upvalues: thunkTag (ref)
-	assert(typeof(p4) == "string", "Bad arg #1: name must be a string")
-	assert(if p5 ~= nil then typeof(p5) == "table" else true, "Bad arg #2: requiredServices must be a table or nil")
-	assert(typeof(p6) == "function", "Bad arg #3: onInvoke must be a function")
+	assert(typeof(p2) == "string", "Bad arg #1: name must be a string")
+	assert(if p3 ~= nil then typeof(p3) == "table" else true, "Bad arg #2: requiredServices must be a table or nil")
+	assert(typeof(p4) == "function", "Bad arg #3: onInvoke must be a function")
 	
 	return setmetatable({
 		[thunkTag] = true,
-		type = p4,
-		requiredServices = p5 or {}
+		type = p2,
+		requiredServices = p3 or {}
 	}, {
 		__call = function(_, ...)
-			-- upvalues: p6 (ref)
-			return p6(...)
+			-- upvalues: p4 (ref)
+			return p4(...)
 		end
 	})
 end
 
-function t.test(p7, p8, p9)
+function t.test(p2, p3, p4)
 	-- upvalues: thunkTag (ref)
-	assert(typeof(p7) == "table" and p7[thunkTag] == true, "Test Error - Bad arg #1: Must provide a valid thunk")
+	assert(typeof(p2) == "table" and p2[thunkTag] == true, "Test Error - Bad arg #1: Must provide a valid thunk")
 	
-	if #p7.requiredServices > 0 then
-		for i, v in ipairs(p7.requiredServices) do
-			assert(p9[v] ~= nil, "Test Error - Bad arg #3: Missing required service " .. tostring(v))
+	if #p2.requiredServices > 0 then
+		for i, v in ipairs(p2.requiredServices) do
+			assert(p4[v] ~= nil, "Test Error - Bad arg #3: Missing required service " .. tostring(v))
 		end
 	end
-	return p7(p8, p9)
+	return p2(p3, p4)
 end
 
 return t

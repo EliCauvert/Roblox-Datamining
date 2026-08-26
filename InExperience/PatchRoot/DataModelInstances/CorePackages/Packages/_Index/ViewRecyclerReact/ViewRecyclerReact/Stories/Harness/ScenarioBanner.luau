@@ -2,12 +2,12 @@
 assert(viewRecyclerReact ~= nil, "ScenarioBanner must be mounted under view-recycler-react")
 local createElement = require(viewRecyclerReact.Parent.React).createElement
 
-return function(p0)
+return function(p1)
 	-- upvalues: createElement (ref)
 	return createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundColor3 = Color3.fromRGB(31, 33, 43),
-		Size = UDim2.new(1, 0, 0, p0.height or 140)
+		Size = UDim2.new(1, 0, 0, p1.height or 140)
 	}, {
 		Title = createElement("TextLabel", {
 			BackgroundTransparency = 1,
@@ -15,7 +15,7 @@ return function(p0)
 			Font = Enum.Font.BuilderSansBold,
 			Position = UDim2.fromOffset(12, 8),
 			Size = UDim2.new(1, -24, 0, 24),
-			Text = p0.title,
+			Text = p1.title,
 			TextColor3 = Color3.new(1, 1, 1),
 			TextXAlignment = Enum.TextXAlignment.Left
 		}),
@@ -26,7 +26,7 @@ return function(p0)
 			Font = Enum.Font.BuilderSans,
 			Position = UDim2.fromOffset(12, 34),
 			Size = UDim2.new(1, -24, 0, 36),
-			Text = `Instructions: {p0.instructions}`,
+			Text = `Instructions: {p1.instructions}`,
 			TextColor3 = Color3.fromRGB(215, 216, 224),
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top
@@ -37,7 +37,7 @@ return function(p0)
 			Font = Enum.Font.BuilderSans,
 			Position = UDim2.fromOffset(12, 72),
 			Size = UDim2.new(1, -24, 0, 20),
-			Text = `Item updates: {p0.itemUpdate}`,
+			Text = `Item updates: {p1.itemUpdate}`,
 			TextColor3 = Color3.fromRGB(174, 197, 255),
 			TextXAlignment = Enum.TextXAlignment.Left
 		}),
@@ -48,7 +48,7 @@ return function(p0)
 			Font = Enum.Font.BuilderSans,
 			Position = UDim2.fromOffset(12, 96),
 			Size = UDim2.new(1, -24, 0, 36),
-			Text = `Acceptance: {p0.acceptanceCriteria}`,
+			Text = `Acceptance: {p1.acceptanceCriteria}`,
 			TextColor3 = Color3.fromRGB(153, 223, 176),
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top

@@ -39,15 +39,15 @@ tooltipContainer.defaultProps = {
 	orientation = tooltipOrientationModule.Bottom
 }
 
-function tooltipContainer.init(p0)
+function tooltipContainer.init(p1)
 	-- upvalues: roactModule (ref), otterModule (ref), t_1 (ref)
-	p0.visible = true
+	p1.visible = true
 	local _ = nil
-	local var15, var16 = roactModule.createBinding(0)
-	p0.progress = var15
-	p0.progressMotor = otterModule.createSingleMotor(0)
-	p0.progressMotor:onStep(var16)
-	p0.progressMotor:setGoal(otterModule.spring(1, t_1))
+	local var1, var2 = roactModule.createBinding(0)
+	p1.progress = var1
+	p1.progressMotor = otterModule.createSingleMotor(0)
+	p1.progressMotor:onStep(var2)
+	p1.progressMotor:setGoal(otterModule.spring(1, t_1))
 end
 
 function tooltipContainer.render(p1)
@@ -58,59 +58,59 @@ function tooltipContainer.render(p1)
 		local theme = p2.Theme
 		local captionHeader = font.CaptionHeader
 		local captionBody = font.CaptionBody
-		local var17 = font.BaseSize * font.CaptionBody.RelativeSize
-		local x = getTextSizeModule(p1.props.bodyText, var17, captionBody.Font, Vector2.new()).X
+		local var1 = font.BaseSize * font.CaptionBody.RelativeSize
+		local x = getTextSizeModule(p1.props.bodyText, var1, captionBody.Font, Vector2.new()).X
 		
 		if p1.props.headerText then
 			x = math.max(x, getTextSizeModule(p1.props.headerText, font.BaseSize * captionHeader.RelativeSize, captionHeader.Font, Vector2.new()).X)
 		end
 		local minValue = math.min(x, 216)
-		local var19 = minValue + 24
-		local var20 = getTextHeightModule(p1.props.bodyText, captionBody.Font, var17, minValue)
-		local headerText = p1.props.headerText and getTextHeightModule(p1.props.headerText, captionHeader.Font, var17, minValue) or 0
-		local var22 = if p1.props.headerText then headerText + var20 + 24 + 4 else var20 + 24
-		local var23 = getPositionInfoModule(var19, var22, p1.props.orientation, p1.props.triggerPosition, p1.props.triggerSize, p1.props.screenSize, p1.props.position)
-		local var24 = p1.progress:map(function(p3)
-			-- upvalues: p1 (copy), var23 (ref)
-			local var27 = if p1.props.position then p1.props.position elseif p1.props.isDirectChild then var23.position else var23.absolutePosition
+		local var2 = minValue + 24
+		local var3 = getTextHeightModule(p1.props.bodyText, captionBody.Font, var1, minValue)
+		local headerText = p1.props.headerText and getTextHeightModule(p1.props.headerText, captionHeader.Font, var1, minValue) or 0
+		local var4 = if p1.props.headerText then headerText + var3 + 24 + 4 else var3 + 24
+		local var5 = getPositionInfoModule(var2, var4, p1.props.orientation, p1.props.triggerPosition, p1.props.triggerSize, p1.props.screenSize, p1.props.position)
+		local var6 = p1.progress:map(function(p3)
+			-- upvalues: p1 (copy), var5 (ref)
+			local var7 = if p1.props.position then p1.props.position elseif p1.props.isDirectChild then var5.position else var5.absolutePosition
 			
-			return var27:lerp(var27 + var23.animatedDistance, p3)
+			return var7:lerp(var7 + var5.animatedDistance, p3)
 		end)
-		local var25 = p1.progress:map(function(p4)
+		local var7 = p1.progress:map(function(p3)
 			-- upvalues: theme (ref), lerpModule (copy), divideTransparencyModule (copy)
-			return lerpModule(1, divideTransparencyModule(theme.BackgroundMuted.Transparency, 1), p4)
+			return lerpModule(1, divideTransparencyModule(theme.BackgroundMuted.Transparency, 1), p3)
 		end)
-		local var26 = p1.progress:map(function(p5)
+		local var8 = p1.progress:map(function(p3)
 			-- upvalues: theme (ref), lerpModule (copy), divideTransparencyModule (copy)
-			return lerpModule(1, divideTransparencyModule(theme.TextEmphasis.Transparency, 2), p5)
+			return lerpModule(1, divideTransparencyModule(theme.TextEmphasis.Transparency, 2), p3)
 		end)
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Visible = p1.visible,
-			Position = var24,
-			Size = var23.fillDirection == Enum.FillDirection.Vertical and UDim2.fromOffset(var19, var22 + 8) or UDim2.fromOffset(var19 + 8, var22)
+			Position = var6,
+			Size = var5.fillDirection == Enum.FillDirection.Vertical and UDim2.fromOffset(var2, var4 + 8) or UDim2.fromOffset(var2 + 8, var4)
 		}, {
 			UIListLayout = roactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				FillDirection = var23.fillDirection
+				FillDirection = var5.fillDirection
 			}),
 			CaretFrame = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = var23.caretFrameSize,
-				LayoutOrder = var23.caretLayoutOrder
+				Size = var5.caretFrameSize,
+				LayoutOrder = var5.caretLayoutOrder
 			}, {
 				Caret = roactModule.createElement(label, {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					Position = var23.caretPosition,
-					AnchorPoint = var23.caretAnchorPoint,
-					Size = var23.caretImageSize,
-					Image = t[var23.updatedOrientation],
+					Position = var5.caretPosition,
+					AnchorPoint = var5.caretAnchorPoint,
+					Size = var5.caretImageSize,
+					Image = t[var5.updatedOrientation],
 					ImageColor3 = theme.BackgroundMuted.Color,
-					ImageTransparency = var25,
+					ImageTransparency = var7,
 					[roactModule.Ref] = p1.caretRef
 				})
 			}),
@@ -119,10 +119,10 @@ function tooltipContainer.render(p1)
 				Text = "",
 				Selectable = false,
 				BorderSizePixel = 0,
-				Size = UDim2.fromOffset(var19, var22),
+				Size = UDim2.fromOffset(var2, var4),
 				BackgroundColor3 = theme.BackgroundMuted.Color,
-				BackgroundTransparency = var25,
-				LayoutOrder = var23.contentLayoutOrder
+				BackgroundTransparency = var7,
+				LayoutOrder = var5.contentLayoutOrder
 			}, {
 				VerticalLayout = roactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
@@ -141,7 +141,7 @@ function tooltipContainer.render(p1)
 					colorStyle = theme.TextEmphasis,
 					fontStyle = captionHeader,
 					Text = p1.props.headerText,
-					TextTransparency = var26,
+					TextTransparency = var8,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, headerText)
 				}),
@@ -150,33 +150,33 @@ function tooltipContainer.render(p1)
 					colorStyle = theme.TextDefault,
 					fontStyle = captionBody,
 					Text = p1.props.bodyText,
-					TextTransparency = var26,
+					TextTransparency = var8,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(1, 0, 0, var20)
+					Size = UDim2.new(1, 0, 0, var3)
 				})
 			})
 		})
 	end)
 end
 
-function tooltipContainer.didMount(p6)
-	p6.progressMotor:start()
+function tooltipContainer.didMount(p1)
+	p1.progressMotor:start()
 end
 
-function tooltipContainer.didUpdate(p7, p8, _)
-	if p8.triggerPosition ~= p7.props.triggerPosition then
-		if p7.props.triggerPosition.Y < 0 or p7.props.screenSize.Y < p7.props.triggerPosition.Y + p7.props.triggerSize.Y then
-			p7.visible = false
+function tooltipContainer.didUpdate(p1, p2, _)
+	if p2.triggerPosition ~= p1.props.triggerPosition then
+		if p1.props.triggerPosition.Y < 0 or p1.props.screenSize.Y < p1.props.triggerPosition.Y + p1.props.triggerSize.Y then
+			p1.visible = false
 			
 			return
 		end
-		p7.visible = true
+		p1.visible = true
 	end
 end
 
-function tooltipContainer.willUnmount(p9)
-	p9.progressMotor:destroy()
-	p9.progressMotor = nil
+function tooltipContainer.willUnmount(p1)
+	p1.progressMotor:destroy()
+	p1.progressMotor = nil
 end
 
 return tooltipContainer

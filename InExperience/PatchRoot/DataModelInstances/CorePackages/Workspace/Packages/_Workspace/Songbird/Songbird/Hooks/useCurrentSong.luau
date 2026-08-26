@@ -15,36 +15,36 @@ local useAssetFavoriting = assetFavoritesModule.useAssetFavoriting
 
 return function()
 	-- upvalues: useAudibleSounds (ref), useMemo (ref), cryoModule (ref), getAssetIdForAudioSourceModule (ref), useAudioMetadataModule (ref), useAssetFavoriting (ref), loggerModule (ref), sendChromeWindowAnalyticsModule (ref), analyticActionsModule (ref)
-	local var10 = useAudibleSounds()
-	local var11 = useMemo(function()
-		-- upvalues: cryoModule (copy), var10 (ref), getAssetIdForAudioSourceModule (copy)
-		return cryoModule.List.filter(var10, function(p0)
+	local var1 = useAudibleSounds()
+	local var2 = useMemo(function()
+		-- upvalues: cryoModule (copy), var1 (ref), getAssetIdForAudioSourceModule (copy)
+		return cryoModule.List.filter(var1, function(p1)
 			-- upvalues: getAssetIdForAudioSourceModule (copy)
-			return getAssetIdForAudioSourceModule(p0) ~= nil
+			return getAssetIdForAudioSourceModule(p1) ~= nil
 		end)
-	end, { var10 })
-	local var12 = useMemo(function()
-		-- upvalues: cryoModule (copy), var11 (ref), getAssetIdForAudioSourceModule (copy)
-		return cryoModule.List.map(var11, function(p1)
+	end, { var1 })
+	local var3 = useMemo(function()
+		-- upvalues: cryoModule (copy), var2 (ref), getAssetIdForAudioSourceModule (copy)
+		return cryoModule.List.map(var2, function(p1)
 			-- upvalues: getAssetIdForAudioSourceModule (copy)
 			return getAssetIdForAudioSourceModule(p1)
 		end)
-	end, { var11 })
-	local var13 = useAudioMetadataModule(var12)
-	local var14 = useAssetFavoriting(var12)
+	end, { var2 })
+	local var4 = useAudioMetadataModule(var3)
+	local var5 = useAssetFavoriting(var3)
 	
 	return useMemo(function()
-		-- upvalues: loggerModule (copy), var11 (ref), getAssetIdForAudioSourceModule (copy), var13 (ref), var14 (ref), sendChromeWindowAnalyticsModule (copy), analyticActionsModule (copy)
+		-- upvalues: loggerModule (copy), var2 (ref), getAssetIdForAudioSourceModule (copy), var4 (ref), var5 (ref), sendChromeWindowAnalyticsModule (copy), analyticActionsModule (copy)
 		local byAssetId
-		loggerModule:info(`determining currently playing song from {#var11} audio sources...`)
+		loggerModule:info(`determining currently playing song from {#var2} audio sources...`)
 		
-		for i, v in var11 do
-			local var15 = getAssetIdForAudioSourceModule(v)
+		for i, v in var2 do
+			local var6 = getAssetIdForAudioSourceModule(v)
 			
-			if var15 then
-				byAssetId = var13.getByAssetId(var15)
-				local var17 = true
-				loggerModule:info(`processing audio source: {v} (AssetId: {var15}, Path: {v:GetFullName()})`)
+			if var6 then
+				byAssetId = var4.getByAssetId(var6)
+				local var7 = true
+				loggerModule:info(`processing audio source: {v} (AssetId: {var6}, Path: {v:GetFullName()})`)
 				
 				if not byAssetId then
 					loggerModule:warning("no metadata found. skipping...")
@@ -57,29 +57,29 @@ return function()
 					
 					if not byAssetId.RecordingCode or byAssetId.RecordingCode == "" then
 						loggerModule:debug(`{byAssetId.Title} does not meet criteria (no recording code found)`)
-						var17 = false
+						var7 = false
 					end
-					if var17 then
+					if var7 then
 						loggerModule:info(`{byAssetId.Title} meets criteria`)
 					end
 					return {
 						sound = v,
 						metadata = byAssetId,
-						meetsCriteria = var17,
-						isFavorited = var14.getByAssetId(var15),
+						meetsCriteria = var7,
+						isFavorited = var5.getByAssetId(var6),
 						toggleFavorite = function()
-							-- upvalues: var14 (copy), var15 (ref), sendChromeWindowAnalyticsModule (copy), analyticActionsModule (copy), loggerModule (copy)
-							return var14.toggleFavorite(var15):andThen(function(p3)
-								-- upvalues: sendChromeWindowAnalyticsModule (copy), var15 (copy), analyticActionsModule (copy)
-								if p3 then
-									sendChromeWindowAnalyticsModule({ assetId = var15, action = analyticActionsModule.Like })
+							-- upvalues: var5 (copy), var6 (ref), sendChromeWindowAnalyticsModule (copy), analyticActionsModule (copy), loggerModule (copy)
+							return var5.toggleFavorite(var6):andThen(function(p1)
+								-- upvalues: sendChromeWindowAnalyticsModule (copy), var6 (copy), analyticActionsModule (copy)
+								if p1 then
+									sendChromeWindowAnalyticsModule({ assetId = var6, action = analyticActionsModule.Like })
 									
 									return
 								end
-								sendChromeWindowAnalyticsModule({ assetId = var15, action = analyticActionsModule.Unlike })
-							end):catch(function(p2)
+								sendChromeWindowAnalyticsModule({ assetId = var6, action = analyticActionsModule.Unlike })
+							end):catch(function(p1)
 								-- upvalues: loggerModule (copy)
-								loggerModule:warning(p2)
+								loggerModule:warning(p1)
 							end)
 						end
 					}
@@ -90,9 +90,9 @@ return function()
 		end
 		return nil
 	end, {
-		var13.getByAssetId,
-		var11,
-		var14.getByAssetId,
-		var14.toggleFavorite
+		var4.getByAssetId,
+		var2,
+		var5.getByAssetId,
+		var5.toggleFavorite
 	})
 end

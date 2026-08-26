@@ -3,42 +3,42 @@ local analyticsModule = require(parent.Analytics)
 local _ = require(parent.util.Types)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref)
-	local allowEditableInstances = p1.allowEditableInstances
-	local descendants = p0:GetDescendants()
-	table.insert(descendants, p0)
-	local var3 = failureReasonsAccumulatorModule.new()
+	local allowEditableInstances = p2.allowEditableInstances
+	local descendants = p1:GetDescendants()
+	table.insert(descendants, p1)
+	local var1 = failureReasonsAccumulatorModule.new()
 	
 	for i, v in pairs(descendants) do
 		if v:IsA("MeshPart") then
-			local var4 = v.TextureID ~= ""
+			local var2 = v.TextureID ~= ""
 			
-			if allowEditableInstances and not var4 then
-				local var5
+			if allowEditableInstances and not var2 then
+				local var3
 				local textureContent = v.TextureContent
 				
 				if textureContent.Uri ~= nil then
-					var5 = if textureContent.Uri == "" then textureContent.Object ~= nil else true
+					var3 = if textureContent.Uri == "" then textureContent.Object ~= nil else true
 				end
-				var4 = var5
+				var2 = var3
 			end
 			local surfaceAppearance = v:FindFirstChildWhichIsA("SurfaceAppearance")
 			
-			if var4 then
+			if var2 then
 				if surfaceAppearance then
-					analyticsModule.reportFailure(analyticsModule.ErrorType.validateSurfaceAppearances_MeshPartHasTexture, nil, p1)
-					var3:updateReasons(false, {
+					analyticsModule.reportFailure(analyticsModule.ErrorType.validateSurfaceAppearances_MeshPartHasTexture, nil, p2)
+					var1:updateReasons(false, {
 						`TextureID and SurfaceAppearance are both defined for MeshPart ({v:GetFullName()}). Publishing will only use SurfaceApperance.`
 					})
 				end
 			elseif not surfaceAppearance then
-				analyticsModule.reportFailure(analyticsModule.ErrorType.validateSurfaceAppearances_MissingSurfaceAppearance, nil, p1)
-				var3:updateReasons(false, {
+				analyticsModule.reportFailure(analyticsModule.ErrorType.validateSurfaceAppearances_MissingSurfaceAppearance, nil, p2)
+				var1:updateReasons(false, {
 					`({v:GetFullName()}) has an empty TextureID and no child SurfaceAppearance instance. You need to define at least one of them.`
 				})
 			end
 		end
 	end
-	return var3:getFinalResults()
+	return var1:getFinalResults()
 end

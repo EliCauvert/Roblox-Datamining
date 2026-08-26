@@ -4,35 +4,35 @@ local reactModule = require(parent.React)
 local roactNavigationModule = require(parent.RoactNavigation)
 local useNavigationProps = require(parent.RobloxAppNavigation).useNavigationProps
 local socialTabsPageModule = require(socialTabsPage.Components.SocialTabsPage)
-local var4 = roactNavigationModule.createRobloxSwitchNavigator(require(script.Parent.SocialTabsPageRouter), {
+local var1 = roactNavigationModule.createRobloxSwitchNavigator(require(script.Parent.SocialTabsPageRouter), {
 	resetOnBlur = false,
 	keepVisitedScreensMounted = true,
 	backBehavior = roactNavigationModule.BackBehavior.None
 })
 
 local function SocialTabsPageNavigatorComponent(value)
-	-- upvalues: useNavigationProps (ref), reactModule (ref), var4 (ref), socialTabsPageModule (ref)
+	-- upvalues: useNavigationProps (ref), reactModule (ref), var1 (ref), socialTabsPageModule (ref)
 	local navigation = value.navigation
-	local var7 = useNavigationProps(function(_, p0)
+	local var2 = useNavigationProps(function(_, p1)
 		return {
-			profileId = p0.profileId,
-			title = p0.title,
-			initialTabId = p0.initialTabId,
-			tabConfig = p0.tabConfig,
-			pageWidth = p0.pageWidth
+			profileId = p1.profileId,
+			title = p1.title,
+			initialTabId = p1.initialTabId,
+			tabConfig = p1.tabConfig,
+			pageWidth = p1.pageWidth
 		}
 	end)
 	
 	return reactModule.createElement(socialTabsPageModule, {
 		renderNavigator = reactModule.useCallback(function()
-			-- upvalues: reactModule (copy), var4 (copy), navigation (ref)
-			return reactModule.createElement(var4, { navigation = navigation })
+			-- upvalues: reactModule (copy), var1 (copy), navigation (ref)
+			return reactModule.createElement(var1, { navigation = navigation })
 		end, { navigation }),
-		tabConfig = var7.tabConfig,
-		profileId = var7.profileId,
-		title = var7.title,
-		initialTabId = var7.initialTabId,
-		pageWidth = var7.pageWidth
+		tabConfig = var2.tabConfig,
+		profileId = var2.profileId,
+		title = var2.title,
+		initialTabId = var2.initialTabId,
+		pageWidth = var2.pageWidth
 	})
 end
 
@@ -43,6 +43,6 @@ function socialTabsPageNavigatorClassWrapper.render(p1)
 	return reactModule.createElement(SocialTabsPageNavigatorComponent, p1.props)
 end
 
-socialTabsPageNavigatorClassWrapper.router = var4.router
+socialTabsPageNavigatorClassWrapper.router = var1.router
 
 return socialTabsPageNavigatorClassWrapper

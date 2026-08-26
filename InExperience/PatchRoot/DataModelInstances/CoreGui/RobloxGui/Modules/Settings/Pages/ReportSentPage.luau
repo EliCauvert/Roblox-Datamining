@@ -16,12 +16,12 @@ while not localPlayer do
 	playersService.ChildAdded:wait()
 	localPlayer = playersService.LocalPlayer
 end
-local var12 = blockingAnalyticsModule.new(localPlayer.UserId, { EventStream = rbxAnalyticsService })
-local var13 = themeModule.textSize(36)
-local var14 = themeModule.textSize(24)
-local var15 = themeModule.textSize(16)
-local var16 = (function()
-	-- upvalues: settingsPageFactoryModule (ref), create (ref), themeModule (ref), utilityModule (ref), robloxTranslatorModule (ref), var13 (ref), var14 (ref), var15 (ref)
+local var1 = blockingAnalyticsModule.new(localPlayer.UserId, { EventStream = rbxAnalyticsService })
+local var2 = themeModule.textSize(36)
+local var3 = themeModule.textSize(24)
+local var4 = themeModule.textSize(16)
+local var5 = (function()
+	-- upvalues: settingsPageFactoryModule (ref), create (ref), themeModule (ref), utilityModule (ref), robloxTranslatorModule (ref), var2 (ref), var3 (ref), var4 (ref)
 	local reportSentPage = settingsPageFactoryModule:CreateNewPage()
 	reportSentPage.TabHeader = nil
 	reportSentPage.PageListLayout.Parent = nil
@@ -46,17 +46,17 @@ local var16 = (function()
 		Parent = reportSentPage.Root
 	})
 	
-	local function createTextLabel(p0, p1, p2, p3)
+	local function createTextLabel(p1, p2, p3, p4)
 		-- upvalues: create (copy), themeModule (copy), reportSentPage (ref)
 		return create("TextLabel")({
 			BackgroundTransparency = 1,
 			TextWrap = true,
-			Name = p0,
-			LayoutOrder = p3,
+			Name = p1,
+			LayoutOrder = p4,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Text = p1,
-			TextSize = p2,
+			Text = p2,
+			TextSize = p3,
 			Font = themeModule.font(Enum.Font.SourceSansBold, "Bold"),
 			TextColor3 = Color3.fromRGB(255, 255, 255),
 			TextXAlignment = Enum.TextXAlignment.Center,
@@ -64,29 +64,29 @@ local var16 = (function()
 		})
 	end
 	
-	local function _(p4, p5, p6, p7)
+	local function _(p1, p2, p3, p4)
 		-- upvalues: utilityModule (copy), reportSentPage (ref)
-		local var23, var24 = utilityModule:MakeStyledButton(p4, p5, UDim2.new(1, 0, 0, 50), p7)
-		var23.LayoutOrder = p6
-		var23.Parent = reportSentPage.Root
+		local var6, var7 = utilityModule:MakeStyledButton(p1, p2, UDim2.new(1, 0, 0, 50), p4)
+		var6.LayoutOrder = p3
+		var6.Parent = reportSentPage.Root
 		
-		return var23, var24
+		return var6, var7
 	end
 	
-	local function createSpacer(p8, p9)
+	local function createSpacer(p1, p2)
 		-- upvalues: create (copy), reportSentPage (ref)
 		return create("Frame")({
-			LayoutOrder = p9,
-			Name = "Spacer" .. tostring(p9),
-			Size = UDim2.fromOffset(0, p8),
+			LayoutOrder = p2,
+			Name = "Spacer" .. tostring(p2),
+			Size = UDim2.fromOffset(0, p1),
 			Parent = reportSentPage.Root
 		})
 	end
 	
-	reportSentPage.TitleLabel = createTextLabel("TitleLabel", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Heading.Report.ThanksForReport"), var13, 0)
-	reportSentPage.BodyLabel = createTextLabel("BodyLabel", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.ReceivedReportBody"), var14, 1)
+	reportSentPage.TitleLabel = createTextLabel("TitleLabel", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Heading.Report.ThanksForReport"), var2, 0)
+	reportSentPage.BodyLabel = createTextLabel("BodyLabel", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.ReceivedReportBody"), var3, 1)
 	reportSentPage.TopSpacer = createSpacer(10, 2)
-	reportSentPage.ActionHeader = createTextLabel("ActionHeader", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.OtherActionsHeader"), var15, 3)
+	reportSentPage.ActionHeader = createTextLabel("ActionHeader", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.OtherActionsHeader"), var4, 3)
 	reportSentPage.ActionHeader.TextXAlignment = Enum.TextXAlignment.Left
 	local blockButton, blockButton_1 = utilityModule:MakeStyledButton("BlockButton", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Block"), UDim2.new(1, 0, 0, 50), function()
 		-- upvalues: reportSentPage (ref)
@@ -108,41 +108,41 @@ local var16 = (function()
 	return reportSentPage
 end)()
 
-function var16.UpdateActions(p10)
+function var16.UpdateActions(p1)
 	-- upvalues: blockingUtilityModule (ref), robloxTranslatorModule (ref)
-	if p10.ReportedPlayer then
-		p10.TopSpacer.Visible = true
-		p10.ActionHeader.Visible = true
-		p10.BlockButton.Visible = not blockingUtilityModule:IsPlayerBlockedByUserId(p10.ReportedPlayer.UserId)
-		p10.BlockLabel.Text = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.BlockDisplayName", {
-			DISPLAY_NAME = p10.ReportedPlayer.DisplayName,
-			RBX_NAME = p10.ReportedPlayer.Name
+	if p1.ReportedPlayer then
+		p1.TopSpacer.Visible = true
+		p1.ActionHeader.Visible = true
+		p1.BlockButton.Visible = not blockingUtilityModule:IsPlayerBlockedByUserId(p1.ReportedPlayer.UserId)
+		p1.BlockLabel.Text = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.BlockDisplayName", {
+			DISPLAY_NAME = p1.ReportedPlayer.DisplayName,
+			RBX_NAME = p1.ReportedPlayer.Name
 		})
 		
 		return
 	end
-	p10.TopSpacer.Visible = false
-	p10.ActionHeader.Visible = false
-	p10.BlockButton.Visible = false
+	p1.TopSpacer.Visible = false
+	p1.ActionHeader.Visible = false
+	p1.BlockButton.Visible = false
 end
 
-function var16.ShowReportedPlayer(p11, p12)
-	-- upvalues: var16 (ref)
-	p11.ReportedPlayer = p12
-	p11:UpdateActions()
-	p11.HubRef:SwitchToPage(var16, true)
+function var16.ShowReportedPlayer(p1, p2)
+	-- upvalues: var5 (ref)
+	p1.ReportedPlayer = p2
+	p1:UpdateActions()
+	p1.HubRef:SwitchToPage(var5, true)
 end
 
-function var16.HandleBlock(p13)
-	-- upvalues: onBlockButtonActivatedModule (ref), var12 (ref)
-	if p13.ReportedPlayer then
-		onBlockButtonActivatedModule(p13.ReportedPlayer, var12)
+function var16.HandleBlock(p1)
+	-- upvalues: onBlockButtonActivatedModule (ref), var1 (ref)
+	if p1.ReportedPlayer then
+		onBlockButtonActivatedModule(p1.ReportedPlayer, var1)
 	end
-	p13:HandleDone()
+	p1:HandleDone()
 end
 
-function var16.HandleDone(p14)
-	p14.HubRef:SetVisibility(false, true)
+function var16.HandleDone(p1)
+	p1.HubRef:SetVisibility(false, true)
 end
 
-return var16
+return var5

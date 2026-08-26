@@ -19,21 +19,21 @@ local fFlagLuaAppHomePageFirstImageLoadObserver = sharedFlagsModule.FFlagLuaAppH
 local t = { Compact = 0.5625, Square = 1, Tall = 1.25 }
 local t_1 = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 
-local function _(p0, p1)
-	return p0 * p1.Stroke.Standard
+local function _(p1, p2)
+	return p1 * p2.Stroke.Standard
 end
 
-local function useHeroConfiguration(p2, p3)
+local function useHeroConfiguration(p1, p2)
 	-- upvalues: responsiveModule (ref), heroNarrowLayout (ref), t (ref), fFlagLuaAppEnableHeroUnitV2 (ref), cryoModule (ref), userGameSettingsService (ref)
-	local displaySmall, bodyLarge, var16, xLarge, XXLarge, var17
+	local displaySmall, bodyLarge, var1, xLarge, XXLarge, var2
 	local _ = nil
-	local var13 = responsiveModule.useResponsive({
+	local var3 = responsiveModule.useResponsive({
 		{ Key = "Small", maxWidth = 413 },
 		{ Key = "Medium", maxWidth = 600 }
 	})
-	local var14 = if var13 ~= "Small" then var13 == "Medium" else true
-	var14 = nil
-	local var15 = nil
+	local var4 = if var3 ~= "Small" then var3 == "Medium" else true
+	var4 = nil
+	local var5 = nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
@@ -41,134 +41,134 @@ local function useHeroConfiguration(p2, p3)
 	local _ = nil
 	local _ = nil
 	
-	if var14 then
-		var14 = t[p2.narrowLayout or heroNarrowLayout.Compact] or t[heroNarrowLayout.Compact]
-		displaySmall = if var13 == "Small" then p3.Typography.HeadingMedium else p3.Typography.HeadingLarge
-		bodyLarge = p3.Typography.BodyMedium
-		var16 = p2.titleImage == nil or p2.subtitle == nil
-		xLarge = p3.Padding.Large
-		XXLarge = p3.Gap.Large
-		var17 = if fFlagLuaAppEnableHeroUnitV2 then if p2.titleImageAspectRatio == 1 then 0.26 else 0.16 else 0.25
+	if var4 then
+		var4 = t[p1.narrowLayout or heroNarrowLayout.Compact] or t[heroNarrowLayout.Compact]
+		displaySmall = if var3 == "Small" then p2.Typography.HeadingMedium else p2.Typography.HeadingLarge
+		bodyLarge = p2.Typography.BodyMedium
+		var1 = p1.titleImage == nil or p1.subtitle == nil
+		xLarge = p2.Padding.Large
+		XXLarge = p2.Gap.Large
+		var2 = if fFlagLuaAppEnableHeroUnitV2 then if p1.titleImageAspectRatio == 1 then 0.26 else 0.16 else 0.25
 	else
-		var15 = 336 * p3.Stroke.Standard
-		displaySmall = p3.Typography.DisplaySmall
-		bodyLarge = p3.Typography.BodyLarge
-		var16 = p2.subtitle == nil
-		xLarge = p3.Padding.XLarge
-		XXLarge = p3.Gap.XXLarge
-		var17 = if fFlagLuaAppEnableHeroUnitV2 then if p2.titleImageAspectRatio == 1 then 0.3 else 0.2 else 0.3
+		var5 = 336 * p2.Stroke.Standard
+		displaySmall = p2.Typography.DisplaySmall
+		bodyLarge = p2.Typography.BodyLarge
+		var1 = p1.subtitle == nil
+		xLarge = p2.Padding.XLarge
+		XXLarge = p2.Gap.XXLarge
+		var2 = if fFlagLuaAppEnableHeroUnitV2 then if p1.titleImageAspectRatio == 1 then 0.3 else 0.2 else 0.3
 	end
-	local var18, var19
+	local var6, var7
 	local _ = nil
 	local _ = nil
 	
-	if p2.gradient == nil then
-		var18 = 0.5
-		var19 = 1
-	elseif p2.gradient.degree == 270 then
-		var18 = 0.5
-		var19 = 1
-	elseif p2.gradient.degree == 0 then
-		var18 = 1
-		var19 = 0.5
+	if p1.gradient == nil then
+		var6 = 0.5
+		var7 = 1
+	elseif p1.gradient.degree == 270 then
+		var6 = 0.5
+		var7 = 1
+	elseif p1.gradient.degree == 0 then
+		var6 = 1
+		var7 = 0.5
 	else
-		var18 = 0.5
-		var19 = 1
+		var6 = 0.5
+		var7 = 1
 	end
 	return cryoModule.Dictionary.join({
 		foregroundAspectRatio = 1,
 		sideMargin = 0,
 		titleImageAspectRatio = 3,
-		cornerRadius = p3.Radius.Medium,
+		cornerRadius = p2.Radius.Medium,
 		titleTypography = displaySmall,
 		subtitleTypography = bodyLarge,
-		aspectRatio = var14,
-		backgroundImageFrameHeight = var15,
-		hideSubtitle = var16,
+		aspectRatio = var4,
+		backgroundImageFrameHeight = var5,
+		hideSubtitle = var1,
 		foregroundOverflow = XXLarge,
-		backgroundOverflow = 50 * p3.Stroke.Standard,
-		gradientWidthPercent = var19,
-		gradientHeightPercent = var18,
+		backgroundOverflow = 50 * p2.Stroke.Standard,
+		gradientWidthPercent = var7,
+		gradientHeightPercent = var6,
 		contentPadding = xLarge,
 		enableBackgroundAnimation = not userGameSettingsService.ReducedMotion,
 		enableForegroundAnimation = not userGameSettingsService.ReducedMotion,
-		titleImageHeightPercentage = var17,
-		minCardHeight = 262 * p3.Stroke.Standard
-	}, p2)
+		titleImageHeightPercentage = var2,
+		minCardHeight = 262 * p2.Stroke.Standard
+	}, p1)
 end
 
-return reactModule.memo(function(p4)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useTokens (ref), useHeroConfiguration (ref), fFlagLuaAppEnableHeroUnitV2 (ref), argCheckModule (ref), image (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), collectionHeader (ref), t_1 (ref), heroImagesModule (ref), userGameSettingsService (ref), maybeForceDarkTheme (ref)
-	local var20, var21 = reactModule.useBinding(0)
-	local var22 = reactModule.useCallback(function(p5)
-		-- upvalues: var21 (ref)
-		if p5 then
-			var21(p5.AbsoluteSize.X)
+	local var1, var2 = reactModule.useBinding(0)
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref)
+		if p2 then
+			var2(p2.AbsoluteSize.X)
 		end
 	end, {})
-	local var23 = useTokens()
-	local var24 = useHeroConfiguration(p4, var23)
+	local var4 = useTokens()
+	local var5 = useHeroConfiguration(p1, var4)
 	local _ = nil
-	local var25 = if var24.backgroundImageFrameHeight and var24.foregroundOverflow then var24.backgroundImageFrameHeight + var24.foregroundOverflow else var24.backgroundImageFrameHeight
+	local var6 = if var5.backgroundImageFrameHeight and var5.foregroundOverflow then var5.backgroundImageFrameHeight + var5.foregroundOverflow else var5.backgroundImageFrameHeight
 	
 	if fFlagLuaAppEnableHeroUnitV2 then
-		assert(var24.minCardHeight ~= nil, "minCardHeight is required")
-		assert(var24.titleImageAspectRatio ~= nil, "titleImageAspectRatio is required")
+		assert(var5.minCardHeight ~= nil, "minCardHeight is required")
+		assert(var5.titleImageAspectRatio ~= nil, "titleImageAspectRatio is required")
 	end
 	return reactModule.createElement("TextButton", {
-		ref = var22,
-		[reactModule.Change.AbsoluteSize] = var22,
-		Position = UDim2.new(0, var24.sideMargin, 0, 0),
-		Size = if var24.aspectRatio then var20:map(function(p6)
-			-- upvalues: var24 (ref)
-			return UDim2.new(1, -2 * var24.sideMargin, 0, math.max(var24.minCardHeight, p6 * var24.aspectRatio + var24.foregroundOverflow))
-		end) else UDim2.new(1, -2 * var24.sideMargin, 0, var25),
+		ref = var3,
+		[reactModule.Change.AbsoluteSize] = var3,
+		Position = UDim2.new(0, var5.sideMargin, 0, 0),
+		Size = if var5.aspectRatio then var1:map(function(p2)
+			-- upvalues: var5 (ref)
+			return UDim2.new(1, -2 * var5.sideMargin, 0, math.max(var5.minCardHeight, p2 * var5.aspectRatio + var5.foregroundOverflow))
+		end) else UDim2.new(1, -2 * var5.sideMargin, 0, var6),
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Text = "",
-		[reactModule.Event.Activated] = p4.onActivated,
-		SelectionOrder = p4.SelectionOrder,
-		[reactModule.Tag] = if p4.testId then `data-testid={p4.testId}` else nil
+		[reactModule.Event.Activated] = p1.onActivated,
+		SelectionOrder = p1.SelectionOrder,
+		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil
 	}, {
-		HeroBackground = p4.backgroundComponent or reactModule.createElement(heroImagesModule, {
+		HeroBackground = p1.backgroundComponent or reactModule.createElement(heroImagesModule, {
 			ZIndex = 0,
 			Size = UDim2.new(1, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
-			verticalScrollingFrameRef = p4.verticalScrollingFrameRef,
-			foregroundImage = p4.foregroundImage,
-			backgroundImage = p4.backgroundImage,
-			foregroundAspectRatio = var24.foregroundAspectRatio,
-			foregroundOverflow = var24.foregroundOverflow,
-			backgroundOverflow = var24.backgroundOverflow,
-			cornerRadius = var24.cornerRadius,
-			enableBackgroundAnimation = var24.enableBackgroundAnimation and not userGameSettingsService.ReducedMotion,
-			enableForegroundAnimation = var24.enableForegroundAnimation and not userGameSettingsService.ReducedMotion,
-			gradient = var24.gradient,
-			gradientHeightPercent = var24.gradientHeightPercent,
-			gradientWidthPercent = var24.gradientWidthPercent,
-			tokens = var23
+			verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
+			foregroundImage = p1.foregroundImage,
+			backgroundImage = p1.backgroundImage,
+			foregroundAspectRatio = var5.foregroundAspectRatio,
+			foregroundOverflow = var5.foregroundOverflow,
+			backgroundOverflow = var5.backgroundOverflow,
+			cornerRadius = var5.cornerRadius,
+			enableBackgroundAnimation = var5.enableBackgroundAnimation and not userGameSettingsService.ReducedMotion,
+			enableForegroundAnimation = var5.enableForegroundAnimation and not userGameSettingsService.ReducedMotion,
+			gradient = var5.gradient,
+			gradientHeightPercent = var5.gradientHeightPercent,
+			gradientWidthPercent = var5.gradientWidthPercent,
+			tokens = var4
 		}),
 		HeroForeground = maybeForceDarkTheme(reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 2,
-			Size = UDim2.new(1, 0, 1, -var24.foregroundOverflow),
-			Position = UDim2.new(0, 0, 0, var24.foregroundOverflow)
+			Size = UDim2.new(1, 0, 1, -var5.foregroundOverflow),
+			Position = UDim2.new(0, 0, 0, var5.foregroundOverflow)
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var24.contentPadding),
-				PaddingRight = UDim.new(0, var24.contentPadding),
-				PaddingTop = UDim.new(0, var24.contentPadding),
-				PaddingBottom = UDim.new(0, var24.contentPadding)
+				PaddingLeft = UDim.new(0, var5.contentPadding),
+				PaddingRight = UDim.new(0, var5.contentPadding),
+				PaddingTop = UDim.new(0, var5.contentPadding),
+				PaddingBottom = UDim.new(0, var5.contentPadding)
 			}),
-			HeroLogo = if fFlagLuaAppEnableHeroUnitV2 and p4.titleImage then reactModule.createElement(image, {
-				Image = p4.titleImage,
-				Size = var20:map(function(p7)
-					-- upvalues: var25 (write), var24 (ref)
-					return UDim2.new(0, p7, 0, (if var24.aspectRatio then math.max(var24.minCardHeight, p7 * var24.aspectRatio + var24.foregroundOverflow) else var25 or 0) * var24.titleImageHeightPercentage)
+			HeroLogo = if fFlagLuaAppEnableHeroUnitV2 and p1.titleImage then reactModule.createElement(image, {
+				Image = p1.titleImage,
+				Size = var1:map(function(p2)
+					-- upvalues: var6 (write), var5 (ref)
+					return UDim2.new(0, p2, 0, (if var5.aspectRatio then math.max(var5.minCardHeight, p2 * var5.aspectRatio + var5.foregroundOverflow) else var6 or 0) * var5.titleImageHeightPercentage)
 				end),
-				aspectRatio = var24.titleImageAspectRatio,
+				aspectRatio = var5.titleImageAspectRatio,
 				Position = UDim2.new(1, 0, 0, 0),
 				AnchorPoint = Vector2.new(1, 0)
 			}) else nil,
@@ -180,22 +180,22 @@ return reactModule.memo(function(p4)
 				Position = UDim2.new(0, 0, 0.5, 0),
 				AnchorPoint = Vector2.new(0, 0.5)
 			}, {
-				HeroHeader = p4.headerComponent or reactModule.createElement(collectionHeader, {
+				HeroHeader = p1.headerComponent or reactModule.createElement(collectionHeader, {
 					LayoutOrder = 0,
 					hideButton = true,
 					forceUpdatedHeader = true,
 					AutomaticSize = Enum.AutomaticSize.Y,
-					title = if fFlagLuaAppEnableHeroUnitV2 then p4.title elseif p4.titleImage then reactModule.useCallback(function()
-						-- upvalues: p4 (ref), argCheckModule (copy), reactModule (copy), image (copy), var20 (ref), var25 (write), var24 (ref), fFlagLuaAppHomePageFirstImageLoadObserver (copy)
-						if p4.titleImage then
+					title = if fFlagLuaAppEnableHeroUnitV2 then p1.title elseif p1.titleImage then reactModule.useCallback(function()
+						-- upvalues: p1 (ref), argCheckModule (copy), reactModule (copy), image (copy), var1 (ref), var6 (write), var5 (ref), fFlagLuaAppHomePageFirstImageLoadObserver (copy)
+						if p1.titleImage then
 							return reactModule.createElement(image, {
 								ZIndex = 0,
-								Image = p4.titleImage,
-								Size = var20:map(function(p8)
-									-- upvalues: var25 (copy), var24 (copy)
-									return UDim2.new(0, p8, 0, (if var24.aspectRatio then math.max(var24.minCardHeight, p8 * var24.aspectRatio + var24.foregroundOverflow) else var25) * var24.titleImageHeightPercentage)
+								Image = p1.titleImage,
+								Size = var1:map(function(p2)
+									-- upvalues: var6 (copy), var5 (copy)
+									return UDim2.new(0, p2, 0, (if var5.aspectRatio then math.max(var5.minCardHeight, p2 * var5.aspectRatio + var5.foregroundOverflow) else var6) * var5.titleImageHeightPercentage)
 								end),
-								aspectRatio = var24.titleImageAspectRatio,
+								aspectRatio = var5.titleImageAspectRatio,
 								Position = UDim2.new(0, 0, 0.5, 0),
 								AnchorPoint = Vector2.new(0, 0.5),
 								tag = if fFlagLuaAppHomePageFirstImageLoadObserver then "observed-image" else nil
@@ -205,15 +205,15 @@ return reactModule.memo(function(p4)
 						
 						return reactModule.createElement(reactModule.Fragment)
 					end, {
-						var20, var25, p4.titleImage, var24.titleImageAspectRatio, var24.minCardHeight,
-						var24.aspectRatio, var24.foregroundOverflow, var24.titleImageHeightPercentage
-					}) else p4.title,
+						var1, var6, p1.titleImage, var5.titleImageAspectRatio, var5.minCardHeight,
+						var5.aspectRatio, var5.foregroundOverflow, var5.titleImageHeightPercentage
+					}) else p1.title,
 					AnchorPoint = Vector2.new(0, 0.5),
-					subtitle = if var24.hideSubtitle then nil else p4.subtitle,
+					subtitle = if var5.hideSubtitle then nil else p1.subtitle,
 					titleColor = t_1,
 					subtitleColor = t_1,
-					titleTypography = var24.titleTypography,
-					subtitleTypography = var24.subtitleTypography,
+					titleTypography = var5.titleTypography,
+					subtitleTypography = var5.subtitleTypography,
 					Position = UDim2.new(0, 0, 0.5, 0)
 				})
 			}),
@@ -224,8 +224,8 @@ return reactModule.memo(function(p4)
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Position = UDim2.new(0, 0, 1, 0),
 				AnchorPoint = Vector2.new(0, 1)
-			}, { HeroBottomRow = p4.bottomRowComponent }),
-			HeroOverlay = p4.overlayComponent
+			}, { HeroBottomRow = p1.bottomRowComponent }),
+			HeroOverlay = p1.overlayComponent
 		}), true)
 	})
 end)

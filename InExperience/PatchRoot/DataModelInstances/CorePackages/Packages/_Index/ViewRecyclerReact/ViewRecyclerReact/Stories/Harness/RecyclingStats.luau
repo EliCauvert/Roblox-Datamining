@@ -1,36 +1,36 @@
 ﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 assert(viewRecyclerReact ~= nil, "RecyclingStats must be mounted under view-recycler-react")
 local reactModule = require(viewRecyclerReact.Parent.React)
-local var2 = reactModule.createContext(nil)
+local var1 = reactModule.createContext(nil)
 
 return {
 	useStats = function()
 		-- upvalues: reactModule (ref)
-		local var3, var4 = reactModule.useState({ mounted = 0, mounts = 0, reassignments = 0 })
-		local var5 = reactModule.useRef(0)
+		local var2, var3 = reactModule.useState({ mounted = 0, mounts = 0, reassignments = 0 })
+		local var4 = reactModule.useRef(0)
 		
-		return var3, reactModule.useMemo(function()
-			-- upvalues: var5 (ref), var4 (ref)
+		return var2, reactModule.useMemo(function()
+			-- upvalues: var4 (ref), var3 (ref)
 			return {
 				allocateMountId = function()
-					-- upvalues: var5 (copy)
-					var5.current += 1
+					-- upvalues: var4 (copy)
+					var4.current += 1
 					
-					return var5.current
+					return var4.current
 				end,
 				onMount = function()
-					-- upvalues: var4 (copy)
-					var4(function(p0)
+					-- upvalues: var3 (copy)
+					var3(function(p1)
 						return {
-							mounted = p0.mounted + 1,
-							mounts = p0.mounts + 1,
-							reassignments = p0.reassignments
+							mounted = p1.mounted + 1,
+							mounts = p1.mounts + 1,
+							reassignments = p1.reassignments
 						}
 					end)
 				end,
 				onUnmount = function()
-					-- upvalues: var4 (copy)
-					var4(function(p1)
+					-- upvalues: var3 (copy)
+					var3(function(p1)
 						return {
 							mounted = p1.mounted - 1,
 							mounts = p1.mounts,
@@ -39,50 +39,50 @@ return {
 					end)
 				end,
 				onReassignment = function()
-					-- upvalues: var4 (copy)
-					var4(function(p2)
+					-- upvalues: var3 (copy)
+					var3(function(p1)
 						return {
-							mounted = p2.mounted,
-							mounts = p2.mounts,
-							reassignments = p2.reassignments + 1
+							mounted = p1.mounted,
+							mounts = p1.mounts,
+							reassignments = p1.reassignments + 1
 						}
 					end)
 				end
 			}
 		end, {})
 	end,
-	Provider = function(p3)
-		-- upvalues: reactModule (ref), var2 (ref)
-		return reactModule.createElement(var2.Provider, { value = p3.actions }, p3.children)
+	Provider = function(p1)
+		-- upvalues: reactModule (ref), var1 (ref)
+		return reactModule.createElement(var1.Provider, { value = p1.actions }, p1.children)
 	end,
 	useAssignment = function(value)
-		-- upvalues: reactModule (ref), var2 (ref)
-		local var6 = reactModule.useContext(var2)
-		local var7 = reactModule.useState(function()
-			-- upvalues: var6 (ref)
-			return if var6 == nil then 0 else var6.allocateMountId()
+		-- upvalues: reactModule (ref), var1 (ref)
+		local var2 = reactModule.useContext(var1)
+		local var3 = reactModule.useState(function()
+			-- upvalues: var2 (ref)
+			return if var2 == nil then 0 else var2.allocateMountId()
 		end)
-		local var8 = reactModule.useRef(nil)
+		local var4 = reactModule.useRef(nil)
 		reactModule.useEffect(function()
-			-- upvalues: var6 (ref)
-			if var6 == nil then
+			-- upvalues: var2 (ref)
+			if var2 == nil then
 				return nil
 			end
-			var6.onMount()
+			var2.onMount()
 			
-			return var6.onUnmount
-		end, { var6 })
+			return var2.onUnmount
+		end, { var2 })
 		reactModule.useEffect(function()
-			-- upvalues: var6 (ref), var8 (ref), value (ref)
-			if var6 ~= nil and var8.current ~= nil and var8.current ~= value then
-				var6.onReassignment()
+			-- upvalues: var2 (ref), var4 (ref), value (ref)
+			if var2 ~= nil and var4.current ~= nil and var4.current ~= value then
+				var2.onReassignment()
 			end
-			var8.current = value
-		end, { var6, value })
+			var4.current = value
+		end, { var2, value })
 		
-		return var7
+		return var3
 	end,
-	format = function(p4)
-		return `Mounted: {p4.mounted}   Total mounts: {p4.mounts}   Reassignments: {p4.reassignments}`
+	format = function(p1)
+		return `Mounted: {p1.mounted}   Total mounts: {p1.mounts}   Reassignments: {p1.reassignments}`
 	end
 }

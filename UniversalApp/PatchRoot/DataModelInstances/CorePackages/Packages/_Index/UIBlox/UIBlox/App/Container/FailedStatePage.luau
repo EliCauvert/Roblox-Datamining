@@ -15,27 +15,27 @@ failedStatePage.validateProps = tModule.strictInterface({
 })
 failedStatePage.defaultProps = { renderOnFailed = renderOnFailedStyleModule.RetryButton }
 
-function failedStatePage.render(p0)
+function failedStatePage.render(p1)
 	-- upvalues: renderOnFailedStyleModule (ref), roactModule (ref), emptyStateModule (ref), imagesModule (ref), buttonModule (ref), buttonTypeModule (ref)
-	if p0.props.renderOnFailed == renderOnFailedStyleModule.EmptyStatePage then
+	if p1.props.renderOnFailed == renderOnFailedStyleModule.EmptyStatePage then
 		return roactModule.createElement(emptyStateModule, {
 			position = UDim2.fromScale(0.5, 0.5),
 			anchorPoint = Vector2.new(0.5, 0.5),
-			onActivated = p0.props.onRetry,
+			onActivated = p1.props.onRetry,
 			icon = imagesModule["icons/status/noconnection_large"],
-			text = p0.props.text
+			text = p1.props.text
 		})
-	elseif p0.props.renderOnFailed ~= renderOnFailedStyleModule.RetryButton then
+	elseif p1.props.renderOnFailed ~= renderOnFailedStyleModule.RetryButton then
 		error("Failed to provide proper RenderOnFailedStyle")
 		
 		return
-	elseif p0.props.onRetry then
+	elseif p1.props.onRetry then
 		return roactModule.createElement(buttonModule, {
 			buttonType = buttonTypeModule.Secondary,
 			size = UDim2.fromOffset(44, 44),
 			position = UDim2.fromScale(0.5, 0.5),
 			anchorPoint = Vector2.new(0.5, 0.5),
-			onActivated = p0.props.onRetry,
+			onActivated = p1.props.onRetry,
 			icon = imagesModule["icons/common/refresh"]
 		})
 	end

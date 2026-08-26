@@ -11,30 +11,30 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableSquadCoplayAnalytic = sharedFlagsModule.FFlagEnableSquadCoplayAnalytic
 local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
-local _ = function(p0, p1, p2, p3)
+local _ = function(p1, p2, p3, p4)
 	-- upvalues: networkingSquadsModule (ref), fFlagEnableSquadCoplayAnalytic (ref), logInExpCoplayTelemetryModule (ref), squadCoplayJoinModule (ref), squadPromptTypeModule (ref)
-	return function(p4)
-		-- upvalues: networkingSquadsModule (copy), p0 (ref), fFlagEnableSquadCoplayAnalytic (copy), p3 (ref), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), p2 (ref), p1 (ref), squadPromptTypeModule (copy)
-		local var8 = p4:dispatch(networkingSquadsModule.JoinSquad.API({
+	return function(p5)
+		-- upvalues: networkingSquadsModule (copy), p1 (ref), fFlagEnableSquadCoplayAnalytic (copy), p4 (ref), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), p3 (ref), p2 (ref), squadPromptTypeModule (copy)
+		local var1 = p5:dispatch(networkingSquadsModule.JoinSquad.API({
 			leaveExisting = true,
-			squadId = p0,
-			squadLocation = if fFlagEnableSquadCoplayAnalytic then p3 else nil
+			squadId = p1,
+			squadLocation = if fFlagEnableSquadCoplayAnalytic then p4 else nil
 		}))
 		
 		if fFlagEnableSquadCoplayAnalytic then
-			var8 = var8:andThen(function(p5)
-				-- upvalues: logInExpCoplayTelemetryModule (copy), p3 (copy), squadCoplayJoinModule (copy), p2 (copy)
-				local groupUpId = p5.responseBody.groupUp.groupUpId
-				local members = p5.responseBody.groupUp.members
+			var1 = var1:andThen(function(p6)
+				-- upvalues: logInExpCoplayTelemetryModule (copy), p4 (copy), squadCoplayJoinModule (copy), p3 (copy)
+				local groupUpId = p6.responseBody.groupUp.groupUpId
+				local members = p6.responseBody.groupUp.members
 				
 				if groupUpId and members then
-					logInExpCoplayTelemetryModule(groupUpId, members, p3, squadCoplayJoinModule.PartyJoin, p2)
+					logInExpCoplayTelemetryModule(groupUpId, members, p4, squadCoplayJoinModule.PartyJoin, p3)
 				end
 			end)
 		end
-		return var8:catch(function(_)
-			-- upvalues: p1 (copy), p4 (ref), squadPromptTypeModule (copy)
-			p1(p4, {
+		return var1:catch(function(_)
+			-- upvalues: p2 (copy), p5 (ref), squadPromptTypeModule (copy)
+			p2(p5, {
 				hideCancelButton = true,
 				promptType = squadPromptTypeModule.Error
 			})
@@ -42,81 +42,81 @@ local _ = function(p0, p1, p2, p3)
 	end
 end
 
-return function(p6, p7, p8, p9, p10)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: squadPromptTypeModule (ref), promiseModule (ref), fFlagEnableSquadCoplayAnalytic (ref), networkingSquadsModule (ref), logInExpCoplayTelemetryModule (ref), squadCoplayJoinModule (ref), leaveSquadModule (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref)
-	return function(p11)
-		-- upvalues: p6 (ref), p7 (ref), squadPromptTypeModule (copy), promiseModule (copy), fFlagEnableSquadCoplayAnalytic (copy), p8 (ref), p9 (ref), networkingSquadsModule (copy), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), leaveSquadModule (copy), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), p10 (ref)
-		local state = p11:getState()
+	return function(p6)
+		-- upvalues: p1 (ref), p2 (ref), squadPromptTypeModule (copy), promiseModule (copy), fFlagEnableSquadCoplayAnalytic (copy), p3 (ref), p4 (ref), networkingSquadsModule (copy), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), leaveSquadModule (copy), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), p5 (ref)
+		local state = p6:getState()
 		local squadId = state.Squad and (state.Squad.Squad and (state.Squad.Squad.currentSquad and state.Squad.Squad.currentSquad.squadId))
 		
-		if squadId == p6 then
-			p7(p11, {
+		if squadId == p1 then
+			p2(p6, {
 				hideCancelButton = true,
 				promptType = squadPromptTypeModule.AlreadyJoined
 			})
 			
 			return promiseModule.resolve({})
 		elseif squadId then
-			return p11:dispatch(leaveSquadModule(squadPromptTypeModule.JoinAnotherSquad, p7, function()
-				-- upvalues: p11 (ref), p6 (copy), p7 (copy), fFlagEnableSquadCoplayAnalytic (copy), p8 (copy), p9 (copy), networkingSquadsModule (copy), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), squadPromptTypeModule (copy)
-				local var15 = if fFlagEnableSquadCoplayAnalytic then p8 else nil
-				local var16 = if fFlagEnableSquadCoplayAnalytic then p9 else nil
-				p11:dispatch(function(p12)
-					-- upvalues: networkingSquadsModule (copy), p6 (ref), fFlagEnableSquadCoplayAnalytic (copy), var16 (ref), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), var15 (ref), p7 (ref), squadPromptTypeModule (copy)
-					local var8 = p12:dispatch(networkingSquadsModule.JoinSquad.API({
+			return p6:dispatch(leaveSquadModule(squadPromptTypeModule.JoinAnotherSquad, p2, function()
+				-- upvalues: p6 (ref), p1 (copy), p2 (copy), fFlagEnableSquadCoplayAnalytic (copy), p3 (copy), p4 (copy), networkingSquadsModule (copy), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), squadPromptTypeModule (copy)
+				local var1 = if fFlagEnableSquadCoplayAnalytic then p3 else nil
+				local var2 = if fFlagEnableSquadCoplayAnalytic then p4 else nil
+				p6:dispatch(function(p7)
+					-- upvalues: networkingSquadsModule (copy), p1 (ref), fFlagEnableSquadCoplayAnalytic (copy), var2 (ref), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), var1 (ref), p2 (ref), squadPromptTypeModule (copy)
+					local var3 = p7:dispatch(networkingSquadsModule.JoinSquad.API({
 						leaveExisting = true,
-						squadId = p6,
-						squadLocation = if fFlagEnableSquadCoplayAnalytic then var16 else nil
+						squadId = p1,
+						squadLocation = if fFlagEnableSquadCoplayAnalytic then var2 else nil
 					}))
 					
 					if fFlagEnableSquadCoplayAnalytic then
-						var8 = var8:andThen(function(p13)
-							-- upvalues: logInExpCoplayTelemetryModule (copy), var16 (copy), squadCoplayJoinModule (copy), var15 (copy)
-							local groupUpId = p13.responseBody.groupUp.groupUpId
-							local members = p13.responseBody.groupUp.members
+						var3 = var3:andThen(function(p8)
+							-- upvalues: logInExpCoplayTelemetryModule (copy), var2 (copy), squadCoplayJoinModule (copy), var1 (copy)
+							local groupUpId = p8.responseBody.groupUp.groupUpId
+							local members = p8.responseBody.groupUp.members
 							
 							if groupUpId and members then
-								logInExpCoplayTelemetryModule(groupUpId, members, var16, squadCoplayJoinModule.PartyJoin, var15)
+								logInExpCoplayTelemetryModule(groupUpId, members, var2, squadCoplayJoinModule.PartyJoin, var1)
 							end
 						end)
 					end
-					return var8:catch(function(_)
-						-- upvalues: p7 (copy), p12 (ref), squadPromptTypeModule (copy)
-						p7(p12, {
+					return var3:catch(function(_)
+						-- upvalues: p2 (copy), p7 (ref), squadPromptTypeModule (copy)
+						p2(p7, {
 							hideCancelButton = true,
 							promptType = squadPromptTypeModule.Error
 						})
 					end)
 				end)
-			end, p9, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then p10 else true))
+			end, p4, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then p5 else true))
 		end
-		local var11 = p6
-		local var12 = p7
-		local var13 = if fFlagEnableSquadCoplayAnalytic then p8 else nil
-		local var14 = if fFlagEnableSquadCoplayAnalytic then p9 else nil
+		local var1 = p1
+		local var2 = p2
+		local var3 = if fFlagEnableSquadCoplayAnalytic then p3 else nil
+		local var4 = if fFlagEnableSquadCoplayAnalytic then p4 else nil
 		
-		return p11:dispatch(function(p14)
-			-- upvalues: networkingSquadsModule (copy), var11 (ref), fFlagEnableSquadCoplayAnalytic (copy), var14 (ref), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), var13 (ref), var12 (ref), squadPromptTypeModule (copy)
-			local var8 = p14:dispatch(networkingSquadsModule.JoinSquad.API({
+		return p6:dispatch(function(p7)
+			-- upvalues: networkingSquadsModule (copy), var1 (ref), fFlagEnableSquadCoplayAnalytic (copy), var4 (ref), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), var3 (ref), var2 (ref), squadPromptTypeModule (copy)
+			local var5 = p7:dispatch(networkingSquadsModule.JoinSquad.API({
 				leaveExisting = true,
-				squadId = var11,
-				squadLocation = if fFlagEnableSquadCoplayAnalytic then var14 else nil
+				squadId = var1,
+				squadLocation = if fFlagEnableSquadCoplayAnalytic then var4 else nil
 			}))
 			
 			if fFlagEnableSquadCoplayAnalytic then
-				var8 = var8:andThen(function(p15)
-					-- upvalues: logInExpCoplayTelemetryModule (copy), var14 (copy), squadCoplayJoinModule (copy), var13 (copy)
-					local groupUpId = p15.responseBody.groupUp.groupUpId
-					local members = p15.responseBody.groupUp.members
+				var5 = var5:andThen(function(p8)
+					-- upvalues: logInExpCoplayTelemetryModule (copy), var4 (copy), squadCoplayJoinModule (copy), var3 (copy)
+					local groupUpId = p8.responseBody.groupUp.groupUpId
+					local members = p8.responseBody.groupUp.members
 					
 					if groupUpId and members then
-						logInExpCoplayTelemetryModule(groupUpId, members, var14, squadCoplayJoinModule.PartyJoin, var13)
+						logInExpCoplayTelemetryModule(groupUpId, members, var4, squadCoplayJoinModule.PartyJoin, var3)
 					end
 				end)
 			end
-			return var8:catch(function(_)
-				-- upvalues: var12 (copy), p14 (ref), squadPromptTypeModule (copy)
-				var12(p14, {
+			return var5:catch(function(_)
+				-- upvalues: var2 (copy), p7 (ref), squadPromptTypeModule (copy)
+				var2(p7, {
 					hideCancelButton = true,
 					promptType = squadPromptTypeModule.Error
 				})

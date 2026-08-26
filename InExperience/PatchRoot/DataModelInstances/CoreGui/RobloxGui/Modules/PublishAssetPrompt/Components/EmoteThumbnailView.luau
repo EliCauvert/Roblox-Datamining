@@ -13,11 +13,11 @@ emoteThumbnailView.validateProps = tModule.strictInterface({
 	size = tModule.optional(tModule.UDim2)
 })
 
-function emoteThumbnailView.updateCameraAndCharacterPose(p0)
+function emoteThumbnailView.updateCameraAndCharacterPose(p1)
 	-- upvalues: emoteUtility (ref), runService (ref)
-	if p0.character == nil then return end
-	local props = p0.props
-	local character = p0.character
+	if p1.character == nil then return end
+	local props = p1.props
+	local character = p1.character
 	local animationClip = props.animationClip
 	local thumbnailParameters = props.thumbnailParameters
 	local thumbnailTime = thumbnailParameters.thumbnailTime
@@ -35,15 +35,15 @@ function emoteThumbnailView.updateCameraAndCharacterPose(p0)
 	emoteUtility.SetPlayerCharacterNeutralPose(character)
 	emoteUtility.ApplyKeyframe(character, thumbnailKeyframe_1)
 	task.spawn(function()
-		-- upvalues: runService (copy), character (ref), emoteUtility (copy), thumbnailParameters (ref), p0 (ref)
+		-- upvalues: runService (copy), character (ref), emoteUtility (copy), thumbnailParameters (ref), p1 (ref)
 		runService.PreAnimation:Wait()
 		runService.PostSimulation:Wait()
 		local folder = Instance.new("Folder")
 		folder.Parent = character
 		folder:Destroy()
 		local modelCFrame = character:GetModelCFrame()
-		p0.updateCameraCFrameBinding(emoteUtility.ThumbnailZoomExtents(character, 20, thumbnailParameters.thumbnailHorizontalOffset, thumbnailParameters.thumbnailVerticalOffset, thumbnailParameters.thumbnailZoom))
-		p0.updateCameraFocusBinding(modelCFrame)
+		p1.updateCameraCFrameBinding(emoteUtility.ThumbnailZoomExtents(character, 20, thumbnailParameters.thumbnailHorizontalOffset, thumbnailParameters.thumbnailVerticalOffset, thumbnailParameters.thumbnailZoom))
+		p1.updateCameraFocusBinding(modelCFrame)
 	end)
 end
 
@@ -55,18 +55,18 @@ function emoteThumbnailView.addCharacterToViewportIfNeeded(p1)
 	end
 end
 
-function emoteThumbnailView.init(p2)
+function emoteThumbnailView.init(p1)
 	-- upvalues: roactModule (ref), playersService (ref)
-	p2.cameraRef = roactModule.createRef()
-	p2.worldModelRef = roactModule.createRef()
-	local var9, var10 = roactModule.createBinding(CFrame.new())
-	p2.cameraCFrameBinding = var9
-	p2.updateCameraCFrameBinding = var10
-	local var11, var12 = roactModule.createBinding(CFrame.new())
-	p2.cameraFocusBinding = var11
-	p2.updateCameraFocusBinding = var12
+	p1.cameraRef = roactModule.createRef()
+	p1.worldModelRef = roactModule.createRef()
+	local var1, var2 = roactModule.createBinding(CFrame.new())
+	p1.cameraCFrameBinding = var1
+	p1.updateCameraCFrameBinding = var2
+	local var3, var4 = roactModule.createBinding(CFrame.new())
+	p1.cameraFocusBinding = var3
+	p1.updateCameraFocusBinding = var4
 	task.spawn(function()
-		-- upvalues: playersService (copy), p2 (ref)
+		-- upvalues: playersService (copy), p1 (ref)
 		local ok, status = pcall(function()
 			-- upvalues: playersService (copy)
 			return playersService:GetHumanoidDescriptionFromOutfitIdAsync(1342485078)
@@ -75,18 +75,18 @@ function emoteThumbnailView.init(p2)
 		if not ok then
 			status = Instance.new("HumanoidDescription")
 		end
-		p2.character = playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15)
-		p2:addCharacterToViewportIfNeeded()
+		p1.character = playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15)
+		p1:addCharacterToViewportIfNeeded()
 	end)
 end
 
-function emoteThumbnailView.render(p3)
+function emoteThumbnailView.render(p1)
 	-- upvalues: roactModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
-		Position = p3.props.position or UDim2.fromScale(0, 0),
-		AnchorPoint = p3.props.anchorPoint or Vector2.new(0, 0),
-		Size = p3.props.size or UDim2.fromScale(1, 1),
+		Position = p1.props.position or UDim2.fromScale(0, 0),
+		AnchorPoint = p1.props.anchorPoint or Vector2.new(0, 0),
+		Size = p1.props.size or UDim2.fromScale(1, 1),
 		BackgroundColor3 = Color3.fromRGB(200, 200, 200)
 	}, {
 		UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
@@ -102,26 +102,26 @@ function emoteThumbnailView.render(p3)
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			ImageColor3 = Color3.new(0, 0, 0),
-			CurrentCamera = p3.cameraRef
+			CurrentCamera = p1.cameraRef
 		}, {
 			Camera = roactModule.createElement("Camera", {
 				CameraType = Enum.CameraType.Scriptable,
 				FieldOfView = 20,
-				CFrame = p3.cameraCFrameBinding,
-				Focus = p3.cameraFocusBinding,
-				[roactModule.Ref] = p3.cameraRef
+				CFrame = p1.cameraCFrameBinding,
+				Focus = p1.cameraFocusBinding,
+				[roactModule.Ref] = p1.cameraRef
 			}),
-			WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p3.worldModelRef })
+			WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p1.worldModelRef })
 		})
 	})
 end
 
-function emoteThumbnailView.didMount(p4)
-	p4:addCharacterToViewportIfNeeded()
+function emoteThumbnailView.didMount(p1)
+	p1:addCharacterToViewportIfNeeded()
 end
 
-function emoteThumbnailView.didUpdate(p5, _)
-	p5:updateCameraAndCharacterPose()
+function emoteThumbnailView.didUpdate(p1, _)
+	p1:updateCameraAndCharacterPose()
 end
 
 return emoteThumbnailView

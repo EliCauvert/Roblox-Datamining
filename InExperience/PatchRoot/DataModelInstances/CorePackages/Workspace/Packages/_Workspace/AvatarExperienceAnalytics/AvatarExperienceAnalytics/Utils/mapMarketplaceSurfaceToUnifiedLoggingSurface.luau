@@ -22,12 +22,12 @@ for i_1, v_1 in unifiedLoggingSurface do
 		t_2[v_1] = true
 	end
 end
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), t_2 (ref)
-	if p0 == nil then
+	if p1 == nil then
 		return nil
 	end
-	local var4 = t[p0]
+	local var1 = t[p1]
 	
-	return if var4 == nil then if t_2[p0] then p0 else nil else var4
+	return if var1 == nil then if t_2[p1] then p1 else nil else var1
 end

@@ -9,27 +9,27 @@ local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContex
 local themeModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Theme)
 local closeButton = roactModule.PureComponent:extend("CloseButton")
 
-function closeButton.render(p0)
+function closeButton.render(p1)
 	-- upvalues: roactModule (ref), inspectAndBuyContextModule (ref), themeModule (ref), guiService (ref)
-	local view = p0.props.view
-	local viewingDetails = p0.props.detailsInformation.viewingDetails
-	local closeDetails = p0.props.closeDetails
-	local setTryingOnInfo = p0.props.setTryingOnInfo
+	local view = p1.props.view
+	local viewingDetails = p1.props.detailsInformation.viewingDetails
+	local closeDetails = p1.props.closeDetails
+	local setTryingOnInfo = p1.props.setTryingOnInfo
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p1)
+		render = function(p2)
 			-- upvalues: view (ref), themeModule (copy), roactModule (copy), viewingDetails (ref), closeDetails (ref), setTryingOnInfo (ref), guiService (copy)
-			local var9 = p1[view]
+			local var1 = p2[view]
 			local uDim2 = UDim2.new(0, 0, 0, 0)
-			local var11 = 26
+			local var2 = 26
 			
 			if themeModule.UseInspectAndBuyPanel() then
-				var11 = 18
-				uDim2 = UDim2.new(0, var9.BorderPaddingSize, 0, 0)
+				var2 = 18
+				uDim2 = UDim2.new(0, var1.BorderPaddingSize, 0, 0)
 			end
 			return roactModule.createElement("ImageButton", {
-				Size = UDim2.new(0, var11, 0, var11),
-				Position = var9.CloseButtonPosition + uDim2,
+				Size = UDim2.new(0, var2, 0, var2),
+				Position = var1.CloseButtonPosition + uDim2,
 				BackgroundTransparency = 1,
 				Selectable = false,
 				Image = if viewingDetails then "rbxasset://textures/ui/InspectMenu/caret_tail_left.png" else "rbxasset://textures/ui/InspectMenu/x.png",
@@ -49,21 +49,21 @@ function closeButton.render(p0)
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
-		view = p2.view,
-		detailsInformation = p2.detailsInformation
+		view = p1.view,
+		detailsInformation = p1.detailsInformation
 	}
-end, function(p3)
+end, function(p1)
 	-- upvalues: setDetailsInformationModule (ref), setTryingOnInfoModule (ref)
 	return {
 		closeDetails = function()
-			-- upvalues: p3 (ref), setDetailsInformationModule (copy)
-			p3(setDetailsInformationModule(false, nil))
+			-- upvalues: p1 (ref), setDetailsInformationModule (copy)
+			p1(setDetailsInformationModule(false, nil))
 		end,
-		setTryingOnInfo = function(value, p4)
-			-- upvalues: p3 (ref), setTryingOnInfoModule (copy)
-			p3(setTryingOnInfoModule(value, p4))
+		setTryingOnInfo = function(value, p2)
+			-- upvalues: p1 (ref), setTryingOnInfoModule (copy)
+			p1(setTryingOnInfoModule(value, p2))
 		end
 	}
 end)(closeButton)

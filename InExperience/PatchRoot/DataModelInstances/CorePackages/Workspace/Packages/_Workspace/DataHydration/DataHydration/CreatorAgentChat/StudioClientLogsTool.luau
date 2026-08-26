@@ -9,8 +9,8 @@ local t = {
 	}
 }
 
-local function _(p0)
-	return typeof(p0) == "string" and string.lower(p0) == "ask_for_logs"
+local function _(p1)
+	return typeof(p1) == "string" and string.lower(p1) == "ask_for_logs"
 end
 
 local function toolCallLooksLikeClientLogsRequest(p1)
@@ -38,30 +38,30 @@ local function toolCallLooksLikeClientLogsRequest(p1)
 	end
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: httpService (ref)
-	local ok, status = pcall(httpService.JSONDecode, httpService, p2)
+	local ok, status = pcall(httpService.JSONDecode, httpService, p1)
 	
 	return if not (not ok or typeof(status) ~= "table") then if typeof(status.text) == "string" then status.text else nil else nil
 end
 
-local function getPersistedToolResultText(p3)
+local function getPersistedToolResultText(p1)
 	-- upvalues: httpService (ref)
-	if p3.content == nil then
+	if p1.content == nil then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p3.content do
+	for i, v in p1.content do
 		if v.type == "content" and v.content ~= nil then
 			local content = v.content
 			
 			if content.type == "text" and typeof(content.text) == "string" then
 				local ok, status = pcall(httpService.JSONDecode, httpService, content.text)
-				local var6 = if ok and typeof(status) == "table" then if typeof(status.text) == "string" then status.text else nil else nil
+				local var1 = if ok and typeof(status) == "table" then if typeof(status.text) == "string" then status.text else nil else nil
 				
-				if var6 ~= nil and var6 ~= "" then
-					table.insert(t, var6)
+				if var1 ~= nil and var1 ~= "" then
+					table.insert(t, var1)
 				end
 			end
 		end
@@ -75,50 +75,50 @@ return {
 	STALE_LOGS_MESSAGE = "The available logs are from an older saved version. Playtest the latest version first.",
 	LOCAL_TOOL_DEFINITION = t,
 	toolCallLooksLikeClientLogsRequest = toolCallLooksLikeClientLogsRequest,
-	findClientLogsRequestInTurnState = function(p4, p5)
+	findClientLogsRequestInTurnState = function(p2, p3)
 		-- upvalues: fFlagCreatorAgentChatFilterTerminalClientToolsModule (ref), getPersistedToolResultText (ref)
 		local t = {}
 		
-		for i in p4.toolCalls do
+		for i in p2.toolCalls do
 			table.insert(t, i)
 		end
 		table.sort(t)
 		
 		for i_1, v in t do
-			if not p5 or not p5[v] then
-				local var8 = p4.toolCalls[v]
+			if not p3 or not p3[v] then
+				local var2 = p2.toolCalls[v]
 				
-				if (not fFlagCreatorAgentChatFilterTerminalClientToolsModule or var8.status ~= "completed" and var8.status ~= "failed" and var8.status ~= "cancelled") and getPersistedToolResultText(var8) == nil then
-					local var9
-					local kind = var8.kind
+				if (not fFlagCreatorAgentChatFilterTerminalClientToolsModule or var2.status ~= "completed" and var2.status ~= "failed" and var2.status ~= "cancelled") and getPersistedToolResultText(var2) == nil then
+					local var3
+					local kind = var2.kind
 					
 					if not (typeof(kind) == "string" and string.lower(kind) == "ask_for_logs") then
-						kind = var8.title
+						kind = var2.title
 						
 						if typeof(kind) == "string" and string.lower(kind) == "ask_for_logs" then
-							var9 = true
+							var3 = true
 						else
-							local rawInput = var8.rawInput
+							local rawInput = var2.rawInput
 							
 							if typeof(rawInput) == "table" then
 								kind = rawInput.name
-								var9 = typeof(kind) == "string" and string.lower(kind) == "ask_for_logs"
+								var3 = typeof(kind) == "string" and string.lower(kind) == "ask_for_logs"
 								
-								if not var9 then
+								if not var3 then
 									kind = rawInput.toolName
-									var9 = false
+									var3 = false
 									
 									if typeof(kind) == "string" then
-										var9 = string.lower(kind) == "ask_for_logs"
-										var9 = nil
+										var3 = string.lower(kind) == "ask_for_logs"
+										var3 = nil
 									end
 								end
 							else
-								var9 = false
+								var3 = false
 							end
 						end
-						if var9 then
-							return v, var8.rawInput, var8.turnId, var8.referenceId
+						if var3 then
+							return v, var2.rawInput, var2.turnId, var2.referenceId
 						end
 					end
 				end
@@ -126,10 +126,10 @@ return {
 		end
 		return nil, nil, nil, nil
 	end,
-	formatLogsContent = function(p6, p7)
+	formatLogsContent = function(p4, p5)
 		-- upvalues: httpService (ref)
 		return {
-			text = httpService:JSONEncode({ status = "ok", clientLogs = p6, serverLogs = p7 })
+			text = httpService:JSONEncode({ status = "ok", clientLogs = p4, serverLogs = p5 })
 		}
 	end,
 	formatNotInGameContent = function()

@@ -1,21 +1,21 @@
-﻿local var0 = if game:DefineFastFlag("PlatformLeaderboardEnabled", false) then require(script.PlatformLeaderboardClientStore) else nil
-local var1 = nil
+﻿local var1 = if game:DefineFastFlag("PlatformLeaderboardEnabled", false) then require(script.PlatformLeaderboardClientStore) else nil
+local var2 = nil
 
 return {
 	["jest.config"] = script["jest.config"],
-	PlatformLeaderboardClientStore = var0,
+	PlatformLeaderboardClientStore = var1,
 	getPlatformLeaderboardClientStore = function()
-		-- upvalues: var1 (write), var0 (ref)
-		if var1 == nil and var0 ~= nil then
-			var1 = var0.new()
+		-- upvalues: var2 (write), var1 (ref)
+		if var2 == nil and var1 ~= nil then
+			var2 = var1.new()
 		end
-		return var1
+		return var2
 	end,
 	reset = function()
-		-- upvalues: var1 (write)
-		if var1 ~= nil then
-			var1:destroy()
-			var1 = nil
+		-- upvalues: var2 (write)
+		if var2 ~= nil then
+			var2:destroy()
+			var2 = nil
 		end
 	end
 }

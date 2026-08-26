@@ -18,22 +18,22 @@ fitFrameOnAxis.defaultProps = {
 	contentPadding = UDim.new(0, 0)
 }
 
-function fitFrameOnAxis.init(p0)
+function fitFrameOnAxis.init(p1)
 	-- upvalues: roactModule (ref), isRoact17Module (ref)
-	p0.layoutRef = roactModule.createRef()
+	p1.layoutRef = roactModule.createRef()
 	
 	if isRoact17Module() then
-		p0.frameRef = p0.props.forwardedRef or roactModule.createRef()
+		p1.frameRef = p1.props.forwardedRef or roactModule.createRef()
 	else
-		p0.frameRef = p0.props[roactModule.Ref] or roactModule.createRef()
+		p1.frameRef = p1.props[roactModule.Ref] or roactModule.createRef()
 	end
 	function p0.onResize()
-		-- upvalues: p0 (ref)
-		local current = p0.layoutRef.current
-		local current_1 = p0.frameRef.current
+		-- upvalues: p1 (ref)
+		local current = p1.layoutRef.current
+		local current_1 = p1.frameRef.current
 		
 		if current_1 and current then
-			current_1.Size = p0:__getSize(current)
+			current_1.Size = p1:__getSize(current)
 			
 			return
 		end
@@ -45,8 +45,8 @@ function fitFrameOnAxis.render(p1)
 	assert(p1.props.Size == nil, "Size is not a valid property of FitFrameOnAxis. Did you mean `minimumSize`?")
 	local children = p1.props[roactModule.Children] or {}
 	local filteredProps = p1:__getFilteredProps()
-	local var9 = if p1.props.onActivated then "ImageButton" else "ImageLabel"
-	local var10 = cryoModule.Dictionary.join(children, {
+	local var1 = if p1.props.onActivated then "ImageButton" else "ImageLabel"
+	local var2 = cryoModule.Dictionary.join(children, {
 		["$layout"] = roactModule.createElement("UIListLayout", {
 			FillDirection = p1.props.FillDirection,
 			HorizontalAlignment = p1.props.HorizontalAlignment,
@@ -64,100 +64,100 @@ function fitFrameOnAxis.render(p1)
 		})
 	})
 	
-	return if p1.props.textProps then roactModule.createElement(var9, filteredProps, {
+	return if p1.props.textProps then roactModule.createElement(var1, filteredProps, {
 		TextLabel = roactModule.createElement("TextLabel", cryoModule.Dictionary.join(p1.props.textProps, { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) })),
-		ChildFrame = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, var10)
-	}) else roactModule.createElement(var9, filteredProps, var10)
+		ChildFrame = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, var2)
+	}) else roactModule.createElement(var1, filteredProps, var2)
 end
 
-function fitFrameOnAxis.didMount(p2)
-	p2.onResize()
+function fitFrameOnAxis.didMount(p1)
+	p1.onResize()
 end
 
-function fitFrameOnAxis.didUpdate(p3)
-	p3.onResize()
+function fitFrameOnAxis.didUpdate(p1)
+	p1.onResize()
 end
 
-function fitFrameOnAxis.__getFilteredProps(p4)
+function fitFrameOnAxis.__getFilteredProps(p1)
 	-- upvalues: cryoModule (ref), roactModule (ref), fitFrameOnAxis (ref)
-	local var11 = cryoModule.Dictionary.join(p4.props.ImageSet, {
-		[roactModule.Ref] = p4.frameRef,
-		[roactModule.Event.Activated] = p4.props.onActivated
+	local var1 = cryoModule.Dictionary.join(p1.props.ImageSet, {
+		[roactModule.Ref] = p1.frameRef,
+		[roactModule.Event.Activated] = p1.props.onActivated
 	})
 	
 	for i, v in pairs(fitFrameOnAxis.defaultProps) do
-		var11[i] = cryoModule.None
+		var1[i] = cryoModule.None
 	end
-	var11.textProps = cryoModule.None
+	var1.textProps = cryoModule.None
 	
-	return cryoModule.Dictionary.join(p4.props, var11, {
+	return cryoModule.Dictionary.join(p1.props, var1, {
 		onActivated = cryoModule.None,
 		forwardedRef = cryoModule.None,
 		[roactModule.Children] = cryoModule.None
 	})
 end
 
-function fitFrameOnAxis.__getSize(p5, p6)
+function fitFrameOnAxis.__getSize(p2, p3)
 	-- upvalues: t (ref)
-	if p5.props.axis == t.Both then
-		return p5:__getBothAxisSize(p6)
+	if p2.props.axis == t.Both then
+		return p2:__getBothAxisSize(p3)
 	end
-	local absoluteContentSizeEtAxisUDim = p5:__getAxisUDim(p6.AbsoluteContentSize)
-	local otherUDim = p5:__getOtherUDim()
+	local absoluteContentSizeEtAxisUDim = p2:__getAxisUDim(p3.AbsoluteContentSize)
+	local otherUDim = p2:__getOtherUDim()
 	
-	if p5.props.axis == t.Vertical then
+	if p2.props.axis == t.Vertical then
 		return UDim2.new(otherUDim, absoluteContentSizeEtAxisUDim)
-	elseif p5.props.axis == t.Horizontal then
+	elseif p2.props.axis == t.Horizontal then
 		return UDim2.new(absoluteContentSizeEtAxisUDim, otherUDim)
 	end
 end
 
-function fitFrameOnAxis.__getBothAxisSize(p7, p8)
-	local minimumSize = p7.props.minimumSize
-	local absoluteContentSize = p8.AbsoluteContentSize
+function fitFrameOnAxis.__getBothAxisSize(p2, p3)
+	local minimumSize = p2.props.minimumSize
+	local absoluteContentSize = p3.AbsoluteContentSize
 	
-	return UDim2.new(UDim.new(minimumSize.X.Scale, absoluteContentSize.X + p7:__getHorizontalMargin()), UDim.new(minimumSize.Y.Scale, absoluteContentSize.Y + p7:__getVerticalMargin()))
+	return UDim2.new(UDim.new(minimumSize.X.Scale, absoluteContentSize.X + p2:__getHorizontalMargin()), UDim.new(minimumSize.Y.Scale, absoluteContentSize.Y + p2:__getVerticalMargin()))
 end
 
-function fitFrameOnAxis.__getAxisUDim(p9, p10)
+function fitFrameOnAxis.__getAxisUDim(p2, p3)
 	-- upvalues: t (ref)
-	local minimumSize = p9.props.minimumSize
+	local minimumSize = p2.props.minimumSize
 	local x = nil
-	local var14 = nil
+	local var2 = nil
 	
-	if p9.props.axis == t.Vertical then
+	if p2.props.axis == t.Vertical then
 		x = minimumSize.Y
-		var14 = p10.Y + p9:__getVerticalMargin()
-	elseif p9.props.axis == t.Horizontal then
+		var2 = p3.Y + p2:__getVerticalMargin()
+	elseif p2.props.axis == t.Horizontal then
 		x = minimumSize.X
-		var14 = p10.X + p9:__getHorizontalMargin()
+		var2 = p3.X + p2:__getHorizontalMargin()
 	end
-	return UDim.new(x.Scale, math.max(var14, x.Offset))
+	return UDim.new(x.Scale, math.max(var2, x.Offset))
 end
 
-function fitFrameOnAxis.__getVerticalMargin(p11)
-	return p11.props.margin.top + p11.props.margin.bottom
+function fitFrameOnAxis.__getVerticalMargin(p2)
+	return p2.props.margin.top + p2.props.margin.bottom
 end
 
-function fitFrameOnAxis.__getHorizontalMargin(p12)
-	return p12.props.margin.left + p12.props.margin.right
+function fitFrameOnAxis.__getHorizontalMargin(p2)
+	return p2.props.margin.left + p2.props.margin.right
 end
 
-function fitFrameOnAxis.__getOtherUDim(p13)
+function fitFrameOnAxis.__getOtherUDim(p2)
 	-- upvalues: t (ref)
-	local minimumSize = p13.props.minimumSize
+	local minimumSize = p2.props.minimumSize
 	
-	if p13.props.axis == t.Vertical then
+	if p2.props.axis == t.Vertical then
 		return minimumSize.X
-	elseif p13.props.axis == t.Horizontal then
+	elseif p2.props.axis == t.Horizontal then
 		return minimumSize.Y
 	end
 end
 
-local var6 = if isRoact17Module() then roactModule.forwardRef(function(p14, p15)
+local var2 = if isRoact17Module() then roactModule.forwardRef(function(p2, p3)
 	-- upvalues: roactModule (ref), fitFrameOnAxis (ref), cryoModule (ref)
-	return roactModule.createElement(fitFrameOnAxis, cryoModule.Dictionary.join(p14, { forwardedRef = p15 }))
+	return roactModule.createElement(fitFrameOnAxis, cryoModule.Dictionary.join(p2, { forwardedRef = p3 }))
 end) else fitFrameOnAxis
-var6.Axis = t
+var2.Axis = t
 
-return var6
+return var2

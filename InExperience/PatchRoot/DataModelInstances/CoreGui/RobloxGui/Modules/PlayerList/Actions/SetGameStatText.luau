@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetGameStatText", function(p0, p1)
-	return { statName = p0, text = p1 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetGameStatText", function(p1, p2)
+	return { statName = p1, text = p2 }
 end)

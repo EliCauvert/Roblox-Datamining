@@ -1,10 +1,10 @@
-﻿local function copyDeep(p0)
+﻿local function copyDeep(p1)
 	-- upvalues: copyDeep (ref)
-	local var1 = type(p0)
+	local var1 = type(p1)
 	assert(var1 == "table", "expected a table for first argument, got " .. var1)
 	local t = {}
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		if type(v) == "table" then
 			t[i] = copyDeep(v)
 		else

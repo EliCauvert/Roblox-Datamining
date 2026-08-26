@@ -28,81 +28,81 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-local function AvatarOverflow(p0)
+local function AvatarOverflow(p1)
 	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), inputSizeModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconSizeModule (ref), textModule (ref)
-	local var20 = usePresentationContext()
-	local emphasis = useTokensModule()[var20.colorNamespace or colorNamespaceModule.Color].Content.Emphasis
+	local var1 = usePresentationContext()
+	local emphasis = useTokensModule()[var1.colorNamespace or colorNamespaceModule.Color].Content.Emphasis
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p0, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
 		tag = "row align-x-center align-y-center radius-circle",
-		Size = p0.Size,
-		backgroundStyle = useCumulativeBackgroundModule(p0.backplateStyle, p0.backgroundStyle)
-	}), if var20.isIconSize and (if p0.size ~= inputSizeModule.XSmall then p0.size == inputSizeModule.Small else true) then reactModule.createElement(iconModule, {
+		Size = p1.Size,
+		backgroundStyle = useCumulativeBackgroundModule(p1.backplateStyle, p1.backgroundStyle)
+	}), if var1.isIconSize and (if p1.size ~= inputSizeModule.XSmall then p1.size == inputSizeModule.Small else true) then reactModule.createElement(iconModule, {
 		name = icon.ThreeDotsHorizontal,
 		size = iconSizeModule.XSmall,
 		style = emphasis
 	}) else reactModule.createElement(textModule, {
-		Text = `+{p0.count}`,
-		tag = `auto-xy text-align-x-center {if var20.isIconSize or inputSizeModule.XSmall then "text-caption-small" else "text-caption-medium"}`,
+		Text = `+{p1.count}`,
+		tag = `auto-xy text-align-x-center {if var1.isIconSize or inputSizeModule.XSmall then "text-caption-small" else "text-caption-medium"}`,
 		textStyle = emphasis
 	}))
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
+return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 	-- upvalues: withDefaultsModule (ref), t (ref), usePresentationContext (ref), useTokensModule (ref), avatarGroupTypeModule (ref), inputSizeModule (ref), colorNamespaceModule (ref), getAvatarSizeModule (ref), flagsModule (ref), reactModule (ref), avatarModule (ref), internalAvatarGroupModule (ref), withCommonPropsModule (ref), getBindableValueModule (ref), AvatarOverflow (ref), viewModule (ref)
-	local var21 = withDefaultsModule(p1, t)
-	local var22 = usePresentationContext()
-	local var23 = useTokensModule()
-	local size = var21.size
+	local var2 = withDefaultsModule(p2, t)
+	local var3 = usePresentationContext()
+	local var4 = useTokensModule()
+	local size = var2.size
 	local _ = nil
-	local var24 = if var21.type == avatarGroupTypeModule.Spread then var23.Size.Size_200 elseif not var22.isIconSize then if size == inputSizeModule.Large or size == inputSizeModule.Medium then -var23.Size.Size_50 else -var23.Size.Size_0 elseif size == inputSizeModule.XSmall then -var23.Size.Size_50 else -var23.Size.Size_100
-	local shift300 = var23[var22.colorNamespace or colorNamespaceModule.Color].Shift.Shift_300
-	local var25 = getAvatarSizeModule(var23, size, var22.isIconSize)
-	local backplateStyle = var21.backplateStyle or var23.Color.Surface.Surface_0
+	local var5 = if var2.type == avatarGroupTypeModule.Spread then var4.Size.Size_200 elseif not var3.isIconSize then if size == inputSizeModule.Large or size == inputSizeModule.Medium then -var4.Size.Size_50 else -var4.Size.Size_0 elseif size == inputSizeModule.XSmall then -var4.Size.Size_50 else -var4.Size.Size_100
+	local shift300 = var4[var3.colorNamespace or colorNamespaceModule.Color].Shift.Shift_300
+	local var6 = getAvatarSizeModule(var4, size, var3.isIconSize)
+	local backplateStyle = var2.backplateStyle or var4.Color.Surface.Surface_0
 	
 	if flagsModule.FoundationAvatarBeta then
-		return reactModule.createElement(internalAvatarGroupModule, withCommonPropsModule(var21, {
-			ref = p2,
-			type = var21.type,
-			max = var21.max,
-			resolvedSize = var25,
-			isEllipsedOverflow = if size ~= inputSizeModule.XSmall then var22.isIconSize and size == inputSizeModule.Small else true,
-			gap = var24,
+		return reactModule.createElement(internalAvatarGroupModule, withCommonPropsModule(var2, {
+			ref = p3,
+			type = var2.type,
+			max = var2.max,
+			resolvedSize = var6,
+			isEllipsedOverflow = if size ~= inputSizeModule.XSmall then var3.isIconSize and size == inputSizeModule.Small else true,
+			gap = var5,
 			backplateStyle = backplateStyle,
-			avatars = var21.avatars,
-			renderAvatar = reactModule.useCallback(function(p3, p4)
-				-- upvalues: reactModule (copy), avatarModule (copy), var21 (ref)
+			avatars = var2.avatars,
+			renderAvatar = reactModule.useCallback(function(p4, p5)
+				-- upvalues: reactModule (copy), avatarModule (copy), var2 (ref)
 				local userId
 				local userPresence = nil
 				local _ = nil
 				
-				if typeof(p3) == "table" then
-					userPresence = p3.userPresence
-					userId = p3.userId
+				if typeof(p4) == "table" then
+					userPresence = p4.userPresence
+					userId = p4.userId
 				else
-					userId = p3
+					userId = p4
 				end
 				return reactModule.createElement(avatarModule, {
 					userId = userId,
-					key = p4.key,
-					backgroundStyle = p4.backgroundStyle,
-					backplateStyle = p4.backplateStyle,
-					size = var21.size,
+					key = p5.key,
+					backgroundStyle = p5.backgroundStyle,
+					backplateStyle = p5.backplateStyle,
+					size = var2.size,
 					userPresence = userPresence,
-					LayoutOrder = p4.LayoutOrder,
-					Position = p4.Position,
-					ZIndex = p4.ZIndex,
-					testId = p4.testId
+					LayoutOrder = p5.LayoutOrder,
+					Position = p5.Position,
+					ZIndex = p5.ZIndex,
+					testId = p5.testId
 				})
-			end, { var21.size })
+			end, { var2.size })
 		}))
 	end
 	local t_1 = {}
-	local var28 = var25 + var24
+	local var7 = var6 + var5
 	
-	for i, v in var21.avatars do
+	for i, v in var2.avatars do
 		local userId
-		local uDim2 = UDim2.fromOffset(var28 * (i - 1), 0)
+		local uDim2 = UDim2.fromOffset(var7 * (i - 1), 0)
 		local userPresence = nil
 		local _ = nil
 		
@@ -119,35 +119,35 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		else
 			userId = v
 		end
-		local var30 = if flagsModule.FoundationAvatarBindableUserId then tostring(getBindableValueModule(userId)) else nil
-		local var31 = #var21.avatars - (i - 1)
+		local var8 = if flagsModule.FoundationAvatarBindableUserId then tostring(getBindableValueModule(userId)) else nil
+		local var9 = #var2.avatars - (i - 1)
 		
-		if var21.max < i then
+		if var2.max < i then
 			t_1[i] = reactModule.createElement(AvatarOverflow, {
 				key = "overflow",
-				count = #var21.avatars - var21.max,
-				size = var21.size,
-				Size = UDim2.fromOffset(var25, var25),
+				count = #var2.avatars - var2.max,
+				size = var2.size,
+				Size = UDim2.fromOffset(var6, var6),
 				LayoutOrder = i,
 				Position = uDim2,
-				ZIndex = var31,
+				ZIndex = var9,
 				backgroundStyle = shift300,
 				backplateStyle = backplateStyle
 			})
 			break
 		end
 		t_1[i] = reactModule.createElement(avatarModule, {
-			key = if flagsModule.FoundationAvatarBindableUserId then var30 else tostring(userId),
+			key = if flagsModule.FoundationAvatarBindableUserId then var8 else tostring(userId),
 			userId = userId,
 			backgroundStyle = shift300,
 			backplateStyle = backplateStyle,
-			size = var21.size,
+			size = var2.size,
 			userPresence = userPresence,
 			LayoutOrder = i,
 			Position = uDim2,
-			ZIndex = var31,
-			testId = if flagsModule.FoundationAvatarBindableUserId then `{var21.testId}--avatar-{var30}` else `{var21.testId}--avatar-{userId}`
+			ZIndex = var9,
+			testId = if flagsModule.FoundationAvatarBindableUserId then `{var2.testId}--avatar-{var30}` else `{var21.testId}--avatar-{userId}`
 		})
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var21, { tag = "auto-xy", ref = p2 }), t_1)
+	return reactModule.createElement(viewModule, withCommonPropsModule(var2, { tag = "auto-xy", ref = p3 }), t_1)
 end))

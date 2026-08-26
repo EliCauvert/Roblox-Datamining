@@ -26,166 +26,166 @@ local getDirectivesInExtensions = require(script.Parent["get-directives"]).getDi
 local astFromValueUntyped = require(script.Parent.astFromValueUntyped).astFromValueUntyped
 local isSome = require(script.Parent.helpers).isSome
 local getRootTypeMap = require(script.Parent.rootTypes).getRootTypeMap
-local var3 = nil
-local var4 = nil
+local var1 = nil
+local var2 = nil
 local makeDirectiveNode = nil
 local getDirectiveNodes = nil
+local var3 = nil
+local var4 = nil
+local var5 = nil
+local var6 = nil
 local var7 = nil
 local var8 = nil
 local var9 = nil
 local var10 = nil
 local var11 = nil
+local astFromArg = nil
 local var12 = nil
 local var13 = nil
-local var14 = nil
-local var15 = nil
-local astFromArg = nil
-local var17 = nil
-local var18 = nil
 local NULL = graphQLModule.NULL
 
-local function getDocumentNodeFromSchema(p0, p1)
-	-- upvalues: var3 (write), boolean (ref), isSpecifiedDirective (ref), var4 (write), isSpecifiedScalarType (ref), isIntrospectionType (ref), isObjectType (ref), var7 (write), isInterfaceType (ref), var11 (write), isUnionType (ref), var12 (write), isInputObjectType (ref), var13 (write), isEnumType (ref), var14 (write), isScalarType (ref), var15 (write), error (ref), kind (ref)
-	local pathToDirectivesInExtensions = (if p1 ~= nil then {} else p1).pathToDirectivesInExtensions
-	local typeMap = p0:getTypeMap()
-	local var22 = var3(p0, pathToDirectivesInExtensions)
-	local var23 = if var22 ~= nil then {} else { var22 }
+local function getDocumentNodeFromSchema(p1, p2)
+	-- upvalues: var1 (write), boolean (ref), isSpecifiedDirective (ref), var2 (write), isSpecifiedScalarType (ref), isIntrospectionType (ref), isObjectType (ref), var3 (write), isInterfaceType (ref), var7 (write), isUnionType (ref), var8 (write), isInputObjectType (ref), var9 (write), isEnumType (ref), var10 (write), isScalarType (ref), var11 (write), error (ref), kind (ref)
+	local pathToDirectivesInExtensions = (if p2 ~= nil then {} else p2).pathToDirectivesInExtensions
+	local typeMap = p1:getTypeMap()
+	local var14 = var1(p1, pathToDirectivesInExtensions)
+	local var15 = if var14 ~= nil then {} else { var14 }
 	
-	for i, v in p0:getDirectives() do
+	for i, v in p1:getDirectives() do
 		if not boolean.toJSBoolean(isSpecifiedDirective(v)) then
-			table.insert(var23, var4(v, p0, pathToDirectivesInExtensions))
+			table.insert(var15, var2(v, p1, pathToDirectivesInExtensions))
 		end
 	end
 	for i, v_1 in typeMap do
-		local var24 = typeMap:get(v_1[1])
+		local var16 = typeMap:get(v_1[1])
 		
-		if not isSpecifiedScalarType(var24) and not isIntrospectionType(var24) then
-			if boolean.toJSBoolean(isObjectType(var24)) then
-				table.insert(var23, var7(var24, p0, pathToDirectivesInExtensions))
-			elseif boolean.toJSBoolean(isInterfaceType(var24)) then
-				table.insert(var23, var11(var24, p0, pathToDirectivesInExtensions))
-			elseif boolean.toJSBoolean(isUnionType(var24)) then
-				table.insert(var23, var12(var24, p0, pathToDirectivesInExtensions))
-			elseif boolean.toJSBoolean(isInputObjectType(var24)) then
-				table.insert(var23, var13(var24, p0, pathToDirectivesInExtensions))
-			elseif boolean.toJSBoolean(isEnumType(var24)) then
-				table.insert(var23, var14(var24, p0, pathToDirectivesInExtensions))
-			elseif boolean.toJSBoolean(isScalarType(var24)) then
-				table.insert(var23, var15(var24, p0, pathToDirectivesInExtensions))
+		if not isSpecifiedScalarType(var16) and not isIntrospectionType(var16) then
+			if boolean.toJSBoolean(isObjectType(var16)) then
+				table.insert(var15, var3(var16, p1, pathToDirectivesInExtensions))
+			elseif boolean.toJSBoolean(isInterfaceType(var16)) then
+				table.insert(var15, var7(var16, p1, pathToDirectivesInExtensions))
+			elseif boolean.toJSBoolean(isUnionType(var16)) then
+				table.insert(var15, var8(var16, p1, pathToDirectivesInExtensions))
+			elseif boolean.toJSBoolean(isInputObjectType(var16)) then
+				table.insert(var15, var9(var16, p1, pathToDirectivesInExtensions))
+			elseif boolean.toJSBoolean(isEnumType(var16)) then
+				table.insert(var15, var10(var16, p1, pathToDirectivesInExtensions))
+			elseif boolean.toJSBoolean(isScalarType(var16)) then
+				table.insert(var15, var11(var16, p1, pathToDirectivesInExtensions))
 			else
-				error(error.new(("Unknown type %s."):format(tostring(var24))))
+				error(error.new(("Unknown type %s."):format(tostring(var16))))
 			end
 		end
 	end
-	return { kind = kind.DOCUMENT, definitions = var23 }
+	return { kind = kind.DOCUMENT, definitions = var15 }
 end
 
 t.getDocumentNodeFromSchema = getDocumentNodeFromSchema
 
-function t.printSchemaWithDirectives(p2, p3)
+function t.printSchemaWithDirectives(p3, p4)
 	-- upvalues: getDocumentNodeFromSchema (ref), print (ref)
-	return print(getDocumentNodeFromSchema(p2, if p3 ~= nil then {} else p3))
+	return print(getDocumentNodeFromSchema(p3, if p4 ~= nil then {} else p4))
 end
 
-function t.astFromSchema(p4, p5)
+function t.astFromSchema(p3, p4)
 	-- upvalues: map (ref), object (ref), boolean (ref), getRootTypeMap (ref), astFromType (ref), kind (ref), array (ref), isSome (ref), getDirectiveNodes (write)
-	local var25 = map.new({
+	local var17 = map.new({
 		{ "query", object.None },
 		{ "mutation", object.None },
 		{ "subscription", object.None }
 	})
 	local t = {}
 	
-	if p4.astNode ~= nil then
-		table.insert(t, p4.astNode)
+	if p3.astNode ~= nil then
+		table.insert(t, p3.astNode)
 	end
-	if p4.extensionASTNodes ~= nil then
-		for i, v in p4.extensionASTNodes do
+	if p3.extensionASTNodes ~= nil then
+		for i, v in p3.extensionASTNodes do
 			table.insert(t, v)
 		end
 	end
 	for i, v in t do
 		if boolean.toJSBoolean(v.operationTypes) then
 			for i_1, v_1 in v.operationTypes do
-				var25:set(v_1.operation, v_1)
+				var17:set(v_1.operation, v_1)
 			end
 		end
 	end
-	local var31
-	local var27 = getRootTypeMap(p4)
+	local var18
+	local var19 = getRootTypeMap(p3)
 	
-	for i_1, v_1 in var25 do
+	for i_1, v_1 in var17 do
 		unpacked, var31 = table.unpack(v_1, 1, 2)
-		local var33 = var27:get(unpacked)
+		local var20 = var19:get(unpacked)
 		
-		if var33 ~= nil then
-			local var34 = astFromType(var33)
+		if var20 ~= nil then
+			local var21 = astFromType(var20)
 			
-			if var31 == nil or var31 == object.None then
-				var25:set(unpacked, {
+			if var18 == nil or var18 == object.None then
+				var17:set(unpacked, {
 					kind = kind.OPERATION_TYPE_DEFINITION,
 					operation = unpacked,
-					type = var34
+					type = var21
 				})
 			else
-				var31.type = var34
+				var18.type = var21
 			end
 		end
 	end
-	local var28 = array.filter(array.concat({}, var25:values()), isSome)
-	local var29 = getDirectiveNodes(p4, p4, p5)
+	local var22 = array.filter(array.concat({}, var17:values()), isSome)
+	local var23 = getDirectiveNodes(p3, p3, p4)
 	
-	if boolean.toJSBoolean(#var28) or boolean.toJSBoolean(#var29) then
+	if boolean.toJSBoolean(#var22) or boolean.toJSBoolean(#var23) then
 		local t_1 = {
-			kind = if var28 ~= nil then kind.SCHEMA_EXTENSION else kind.SCHEMA_DEFINITION,
-			operationTypes = var28,
-			directives = var29
+			kind = if var22 ~= nil then kind.SCHEMA_EXTENSION else kind.SCHEMA_DEFINITION,
+			operationTypes = var22,
+			directives = var23
 		}
-		var31 = if typeof(p4.astNode) == "table" then p4.astNode.description else nil
-		t_1.description = if boolean.toJSBoolean(if var31 ~= nil then p4.description ~= nil else var31) then { block = true, kind = kind.STRING, value = p4.description } else nil
+		var18 = if typeof(p3.astNode) == "table" then p3.astNode.description else nil
+		t_1.description = if boolean.toJSBoolean(if var18 ~= nil then p3.description ~= nil else var18) then { block = true, kind = kind.STRING, value = p3.description } else nil
 		
 		return t_1
 	end
 	return nil
 end
 
-function t.astFromDirective(p6, p7, p8)
+function t.astFromDirective(p5, p6, p7)
 	-- upvalues: kind (ref), boolean (ref), array (ref), astFromArg (write)
 	local DIRECTIVE_DEFINITION = kind.DIRECTIVE_DEFINITION
-	local var35 = if typeof(p6.astNode) == "table" then p6.astNode.description else nil
-	local var36 = if typeof(p6.locations) == "table" then array.map(p6.locations, function(p9)
+	local var24 = if typeof(p5.astNode) == "table" then p5.astNode.description else nil
+	local var25 = if typeof(p5.locations) == "table" then array.map(p5.locations, function(p8)
 		-- upvalues: kind (copy)
-		return { kind = kind.NAME, value = p9 }
+		return { kind = kind.NAME, value = p8 }
 	end) else nil
 	
 	return {
 		kind = DIRECTIVE_DEFINITION,
-		description = if var35 ~= nil then if boolean.toJSBoolean(p6.description) then { kind = kind.STRING, value = p6.description } else nil else var35,
-		name = { kind = kind.NAME, value = p6.name },
-		arguments = if typeof(p6.args) == "table" then array.map(p6.args, function(p10)
-			-- upvalues: astFromArg (copy), p7 (ref), p8 (ref)
-			return astFromArg(p10, p7, p8)
+		description = if var24 ~= nil then if boolean.toJSBoolean(p5.description) then { kind = kind.STRING, value = p5.description } else nil else var24,
+		name = { kind = kind.NAME, value = p5.name },
+		arguments = if typeof(p5.args) == "table" then array.map(p5.args, function(p8)
+			-- upvalues: astFromArg (copy), p6 (ref), p7 (ref)
+			return astFromArg(p8, p6, p7)
 		end) else nil,
-		repeatable = p6.isRepeatable,
-		locations = if boolean.toJSBoolean(var36) then var36 else {}
+		repeatable = p5.isRepeatable,
+		locations = if boolean.toJSBoolean(var25) then var25 else {}
 	}
 end
 
-getDirectiveNodes = function(p11, p12, p13)
-	-- upvalues: getDirectivesInExtensions (ref), array (ref), object (ref), var8 (write), boolean (ref)
-	local var37 = getDirectivesInExtensions(p11, p13)
+getDirectiveNodes = function(p5, p6, p7)
+	-- upvalues: getDirectivesInExtensions (ref), array (ref), object (ref), var4 (write), boolean (ref)
+	local var24 = getDirectivesInExtensions(p5, p7)
 	local t = {}
 	
-	if p11.astNode ~= nil then
-		table.insert(t, p11.astNode)
+	if p5.astNode ~= nil then
+		table.insert(t, p5.astNode)
 	end
-	if array.indexOf(object.keys(p11), "extensionASTNodes") ~= -1 and p11.extensionASTNodes ~= nil then
-		t = array.concat(t, p11.extensionASTNodes)
+	if array.indexOf(object.keys(p5), "extensionASTNodes") ~= -1 and p5.extensionASTNodes ~= nil then
+		t = array.concat(t, p5.extensionASTNodes)
 	end
 	local _ = nil
 	
-	if var37 ~= nil then
-		return var8(p12, var37)
+	if var24 ~= nil then
+		return var4(p6, var24)
 	end
 	local t_1 = {}
 	
@@ -199,269 +199,269 @@ end
 
 t.getDirectiveNodes = getDirectiveNodes
 
-local function getDeprecatableDirectiveNodes(p14, p15, p16)
-	-- upvalues: getDirectivesInExtensions (ref), var8 (write), array (ref), var10 (write)
+local function getDeprecatableDirectiveNodes(p8, p9, p10)
+	-- upvalues: getDirectivesInExtensions (ref), var4 (write), array (ref), var6 (write)
 	local t = {}
-	local var41 = nil
-	local var42 = getDirectivesInExtensions(p14, p16)
-	local var43 = if var42 ~= nil then if typeof(p14.astNode) == "table" then p14.astNode.directives else nil else var8(p15, var42)
+	local var25 = nil
+	local var26 = getDirectivesInExtensions(p8, p10)
+	local var27 = if var26 ~= nil then if typeof(p8.astNode) == "table" then p8.astNode.directives else nil else var4(p9, var26)
 	
-	if var43 ~= nil then
-		t = array.filter(var43, function(p17)
-			return p17.name.value ~= "deprecated"
+	if var27 ~= nil then
+		t = array.filter(var27, function(p11)
+			return p11.name.value ~= "deprecated"
 		end)
 		
-		if p14.deprecationReason ~= nil then
-			var41 = if typeof(array.filter(var43, function(p18)
-				return p18.name.value == "deprecated"
-			end)) == "table" then array.filter(var43, function(p19)
-				return p19.name.value == "deprecated"
+		if p8.deprecationReason ~= nil then
+			var25 = if typeof(array.filter(var27, function(p11)
+				return p11.name.value == "deprecated"
+			end)) == "table" then array.filter(var27, function(p11)
+				return p11.name.value == "deprecated"
 			end)[1] else nil
 		end
 	end
-	if p14.deprecationReason ~= nil and var41 == nil then
-		var41 = var10(p14.deprecationReason)
+	if p8.deprecationReason ~= nil and var25 == nil then
+		var25 = var6(p8.deprecationReason)
 	end
-	return if var41 == nil then t else array.concat({ var41 }, t)
+	return if var25 == nil then t else array.concat({ var25 }, t)
 end
 
 t.getDeprecatableDirectiveNodes = getDeprecatableDirectiveNodes
 
-astFromArg = function(p20, p21, p22)
+astFromArg = function(p8, p9, p10)
 	-- upvalues: kind (ref), boolean (ref), astFromType (ref), astFromValue (ref), getDeprecatableDirectiveNodes (ref)
-	local var44 = if typeof(p20.astNode) == "table" then p20.astNode.description else nil
+	local var25 = if typeof(p8.astNode) == "table" then p8.astNode.description else nil
 	
 	return {
 		kind = kind.INPUT_VALUE_DEFINITION,
-		description = if var44 ~= nil then if boolean.toJSBoolean(p20.description) then {
+		description = if var25 ~= nil then if boolean.toJSBoolean(p8.description) then {
 			block = true,
 			kind = kind.STRING,
-			value = p20.description
-		} else nil else var44,
-		name = { kind = kind.NAME, value = p20.name },
-		type = astFromType(p20.type),
-		defaultValue = if p20.defaultValue ~= nil then nil else astFromValue(p20.defaultValue, p20.type),
-		directives = getDeprecatableDirectiveNodes(p20, p21, p22)
+			value = p8.description
+		} else nil else var25,
+		name = { kind = kind.NAME, value = p8.name },
+		type = astFromType(p8.type),
+		defaultValue = if p8.defaultValue ~= nil then nil else astFromValue(p8.defaultValue, p8.type),
+		directives = getDeprecatableDirectiveNodes(p8, p9, p10)
 	}
 end
 
 t.astFromArg = astFromArg
 
-function t.astFromObjectType(p23, p24, p25)
-	-- upvalues: kind (ref), boolean (ref), array (ref), var17 (write), object (ref), astFromType (ref), getDirectiveNodes (write)
-	local var45 = if typeof(p23.astNode) == "table" then p23.astNode.description else nil
+function t.astFromObjectType(p8, p9, p10)
+	-- upvalues: kind (ref), boolean (ref), array (ref), var12 (write), object (ref), astFromType (ref), getDirectiveNodes (write)
+	local var25 = if typeof(p8.astNode) == "table" then p8.astNode.description else nil
 	
 	return {
 		kind = kind.OBJECT_TYPE_DEFINITION,
-		description = if var45 ~= nil then if boolean.toJSBoolean(p23.description) then {
+		description = if var25 ~= nil then if boolean.toJSBoolean(p8.description) then {
 			block = true,
 			kind = kind.STRING,
-			value = p23.description
-		} else nil else var45,
-		name = { kind = kind.NAME, value = p23.name },
-		fields = array.map(p23:getFields():values(), function(p26)
-			-- upvalues: var17 (copy), p24 (ref), p25 (ref)
-			return var17(p26, p24, p25)
+			value = p8.description
+		} else nil else var25,
+		name = { kind = kind.NAME, value = p8.name },
+		fields = array.map(p8:getFields():values(), function(p11)
+			-- upvalues: var12 (copy), p9 (ref), p10 (ref)
+			return var12(p11, p9, p10)
 		end),
-		interfaces = array.map(object.values(p23:getInterfaces()), function(p27)
+		interfaces = array.map(object.values(p8:getInterfaces()), function(p11)
 			-- upvalues: astFromType (copy)
-			return astFromType(p27)
+			return astFromType(p11)
 		end),
-		directives = getDirectiveNodes(p23, p24, p25)
+		directives = getDirectiveNodes(p8, p9, p10)
 	}
 end
 
-function t.astFromInterfaceType(a, b, p28)
-	-- upvalues: kind (ref), boolean (ref), array (ref), var17 (write), getDirectiveNodes (write), object (ref), astFromType (ref)
-	local var46 = if typeof(a.astNode) == "table" then a.astNode.description else nil
+function t.astFromInterfaceType(a, b, p8)
+	-- upvalues: kind (ref), boolean (ref), array (ref), var12 (write), getDirectiveNodes (write), object (ref), astFromType (ref)
+	local var25 = if typeof(a.astNode) == "table" then a.astNode.description else nil
 	local t = {
 		kind = kind.INTERFACE_TYPE_DEFINITION,
-		description = if var46 ~= nil then if boolean.toJSBoolean(a.description) then { block = true, kind = kind.STRING, value = a.description } else nil else var46,
+		description = if var25 ~= nil then if boolean.toJSBoolean(a.description) then { block = true, kind = kind.STRING, value = a.description } else nil else var25,
 		name = { kind = kind.NAME, value = a.name },
-		fields = array.map(a:getFields():values(), function(p29)
-			-- upvalues: var17 (copy), b (ref), p28 (ref)
-			return var17(p29, b, p28)
+		fields = array.map(a:getFields():values(), function(p9)
+			-- upvalues: var12 (copy), b (ref), p8 (ref)
+			return var12(p9, b, p8)
 		end),
-		directives = getDirectiveNodes(a, b, p28)
+		directives = getDirectiveNodes(a, b, p8)
 	}
 	
 	if a.getInterfaces ~= nil then
-		t.interfaces = array.map(object.values(a:getInterfaces()), function(p30)
+		t.interfaces = array.map(object.values(a:getInterfaces()), function(p9)
 			-- upvalues: astFromType (copy)
-			return astFromType(p30)
+			return astFromType(p9)
 		end)
 	end
 	return t
 end
 
-function t.astFromUnionType(p31, p32, p33)
+function t.astFromUnionType(p8, p9, p10)
 	-- upvalues: kind (ref), boolean (ref), getDirectiveNodes (write), array (ref), astFromType (ref)
-	local var48 = if typeof(p31.astNode) == "table" then p31.astNode.description else nil
+	local var25 = if typeof(p8.astNode) == "table" then p8.astNode.description else nil
 	
 	return {
 		kind = kind.UNION_TYPE_DEFINITION,
-		description = if var48 ~= nil then if boolean.toJSBoolean(p31.description) then {
+		description = if var25 ~= nil then if boolean.toJSBoolean(p8.description) then {
 			block = true,
 			kind = kind.STRING,
-			value = p31.description
-		} else nil else var48,
-		name = { kind = kind.NAME, value = p31.name },
-		directives = getDirectiveNodes(p31, p32, p33),
-		types = array.map(p31:getTypes(), function(p34)
+			value = p8.description
+		} else nil else var25,
+		name = { kind = kind.NAME, value = p8.name },
+		directives = getDirectiveNodes(p8, p9, p10),
+		types = array.map(p8:getTypes(), function(p11)
 			-- upvalues: astFromType (copy)
-			return astFromType(p34)
+			return astFromType(p11)
 		end)
 	}
 end
 
-function t.astFromInputObjectType(a, b, p35)
-	-- upvalues: kind (ref), boolean (ref), array (ref), var18 (write), getDirectiveNodes (write)
-	local var49 = if typeof(a.astNode) == "table" then a.astNode.description else nil
+function t.astFromInputObjectType(a, b, p8)
+	-- upvalues: kind (ref), boolean (ref), array (ref), var13 (write), getDirectiveNodes (write)
+	local var25 = if typeof(a.astNode) == "table" then a.astNode.description else nil
 	
 	return {
 		kind = kind.INPUT_OBJECT_TYPE_DEFINITION,
-		description = if var49 ~= nil then if boolean.toJSBoolean(a.description) then { block = true, kind = kind.STRING, value = a.description } else nil else var49,
+		description = if var25 ~= nil then if boolean.toJSBoolean(a.description) then { block = true, kind = kind.STRING, value = a.description } else nil else var25,
 		name = { kind = kind.NAME, value = a.name },
-		fields = array.map(a:getFields():values(), function(p36)
-			-- upvalues: var18 (copy), b (ref), p35 (ref)
-			return var18(p36, b, p35)
+		fields = array.map(a:getFields():values(), function(p9)
+			-- upvalues: var13 (copy), b (ref), p8 (ref)
+			return var13(p9, b, p8)
 		end),
-		directives = getDirectiveNodes(a, b, p35)
+		directives = getDirectiveNodes(a, b, p8)
 	}
 end
 
-function t.astFromEnumType(p37, p38, p39)
-	-- upvalues: kind (ref), boolean (ref), array (ref), object (ref), var9 (write), getDirectiveNodes (write)
-	local var50 = if typeof(p37.astNode) == "table" then p37.astNode.description else nil
+function t.astFromEnumType(p8, p9, p10)
+	-- upvalues: kind (ref), boolean (ref), array (ref), object (ref), var5 (write), getDirectiveNodes (write)
+	local var25 = if typeof(p8.astNode) == "table" then p8.astNode.description else nil
 	
 	return {
 		kind = kind.ENUM_TYPE_DEFINITION,
-		description = if var50 ~= nil then if boolean.toJSBoolean(p37.description) then {
+		description = if var25 ~= nil then if boolean.toJSBoolean(p8.description) then {
 			block = true,
 			kind = kind.STRING,
-			value = p37.description
-		} else nil else var50,
-		name = { kind = kind.NAME, value = p37.name },
-		values = array.map(object.values(p37:getValues()), function(p40)
-			-- upvalues: var9 (copy), p38 (ref), p39 (ref)
-			return var9(p40, p38, p39)
+			value = p8.description
+		} else nil else var25,
+		name = { kind = kind.NAME, value = p8.name },
+		values = array.map(object.values(p8:getValues()), function(p11)
+			-- upvalues: var5 (copy), p9 (ref), p10 (ref)
+			return var5(p11, p9, p10)
 		end),
-		directives = getDirectiveNodes(p37, p38, p39)
+		directives = getDirectiveNodes(p8, p9, p10)
 	}
 end
 
-function t.astFromScalarType(p41, p42, p43)
-	-- upvalues: getDirectivesInExtensions (ref), boolean (ref), var8 (write), array (ref), makeDirectiveNode (write), kind (ref)
-	local var51 = getDirectivesInExtensions(p41, p43)
-	local var52 = if boolean.toJSBoolean(var51) then var8(p42, var51) else (if typeof(p41.astNode) == "table" then p41.astNode.directives else nil) or {}
-	local var53 = if boolean.toJSBoolean(p41.specifiedByUrl) then p41.specifiedByUrl else p41.specifiedByURL
+function t.astFromScalarType(p8, p9, p10)
+	-- upvalues: getDirectivesInExtensions (ref), boolean (ref), var4 (write), array (ref), makeDirectiveNode (write), kind (ref)
+	local var25 = getDirectivesInExtensions(p8, p10)
+	local var26 = if boolean.toJSBoolean(var25) then var4(p9, var25) else (if typeof(p8.astNode) == "table" then p8.astNode.directives else nil) or {}
+	local var27 = if boolean.toJSBoolean(p8.specifiedByUrl) then p8.specifiedByUrl else p8.specifiedByURL
 	
-	if boolean.toJSBoolean(if boolean.toJSBoolean(var53) then not boolean.toJSBoolean(array.some(var52, function(p44)
-		return p44.name.value == "specifiedBy"
-	end)) else var53) then
-		table.insert(var52, makeDirectiveNode("specifiedBy", { url = var53 }))
+	if boolean.toJSBoolean(if boolean.toJSBoolean(var27) then not boolean.toJSBoolean(array.some(var26, function(p11)
+		return p11.name.value == "specifiedBy"
+	end)) else var27) then
+		table.insert(var26, makeDirectiveNode("specifiedBy", { url = var27 }))
 	end
-	local var54 = if typeof(p41.astNode) == "table" then p41.astNode.description else nil
+	local var28 = if typeof(p8.astNode) == "table" then p8.astNode.description else nil
 	
 	return {
 		kind = kind.SCALAR_TYPE_DEFINITION,
-		description = if var54 ~= nil then if boolean.toJSBoolean(p41.description) then {
+		description = if var28 ~= nil then if boolean.toJSBoolean(p8.description) then {
 			block = true,
 			kind = kind.STRING,
-			value = p41.description
-		} else nil else var54,
-		name = { kind = kind.NAME, value = p41.name },
-		directives = var52
+			value = p8.description
+		} else nil else var28,
+		name = { kind = kind.NAME, value = p8.name },
+		directives = var26
 	}
 end
 
-function t.astFromField(p45, p46, p47)
+function t.astFromField(p8, p9, p10)
 	-- upvalues: kind (ref), boolean (ref), array (ref), astFromArg (write), astFromType (ref), getDeprecatableDirectiveNodes (ref)
-	local var55 = if typeof(p45.astNode) == "table" then p45.astNode.description else nil
+	local var25 = if typeof(p8.astNode) == "table" then p8.astNode.description else nil
 	
 	return {
 		kind = kind.FIELD_DEFINITION,
-		description = if var55 ~= nil then if boolean.toJSBoolean(p45.description) then {
+		description = if var25 ~= nil then if boolean.toJSBoolean(p8.description) then {
 			block = true,
 			kind = kind.STRING,
-			value = p45.description
-		} else nil else var55,
-		name = { kind = kind.NAME, value = p45.name },
-		arguments = array.map(p45.args, function(p48)
-			-- upvalues: astFromArg (copy), p46 (ref), p47 (ref)
-			return astFromArg(p48, p46, p47)
+			value = p8.description
+		} else nil else var25,
+		name = { kind = kind.NAME, value = p8.name },
+		arguments = array.map(p8.args, function(p11)
+			-- upvalues: astFromArg (copy), p9 (ref), p10 (ref)
+			return astFromArg(p11, p9, p10)
 		end),
-		type = astFromType(p45.type),
-		directives = getDeprecatableDirectiveNodes(p45, p46, p47)
+		type = astFromType(p8.type),
+		directives = getDeprecatableDirectiveNodes(p8, p9, p10)
 	}
 end
 
-function t.astFromInputField(a, b, p49)
+function t.astFromInputField(a, b, p8)
 	-- upvalues: kind (ref), boolean (ref), astFromType (ref), getDeprecatableDirectiveNodes (ref), astFromValue (ref), NULL (ref)
 	local INPUT_VALUE_DEFINITION = kind.INPUT_VALUE_DEFINITION
-	local var56 = if typeof(a.astNode) == "table" then a.astNode.description else nil
-	local var57 = astFromValue(a.defaultValue, a.type)
+	local var25 = if typeof(a.astNode) == "table" then a.astNode.description else nil
+	local var26 = astFromValue(a.defaultValue, a.type)
 	
 	return {
 		kind = INPUT_VALUE_DEFINITION,
-		description = if var56 ~= nil then if boolean.toJSBoolean(a.description) then { block = true, kind = kind.STRING, value = a.description } else nil else var56,
+		description = if var25 ~= nil then if boolean.toJSBoolean(a.description) then { block = true, kind = kind.STRING, value = a.description } else nil else var25,
 		name = { kind = kind.NAME, value = a.name },
 		type = astFromType(a.type),
-		directives = getDeprecatableDirectiveNodes(a, b, p49),
-		defaultValue = if var57 == nil or var57 == NULL then nil else var57
+		directives = getDeprecatableDirectiveNodes(a, b, p8),
+		defaultValue = if var26 == nil or var26 == NULL then nil else var26
 	}
 end
 
-function t.astFromEnumValue(p50, p51, p52)
+function t.astFromEnumValue(p8, p9, p10)
 	-- upvalues: kind (ref), boolean (ref), getDeprecatableDirectiveNodes (ref)
-	local var58 = if typeof(p50.astNode) == "table" then p50.astNode.description else nil
+	local var25 = if typeof(p8.astNode) == "table" then p8.astNode.description else nil
 	
 	return {
 		kind = kind.ENUM_VALUE_DEFINITION,
-		description = if var58 ~= nil then if boolean.toJSBoolean(p50.description) then {
+		description = if var25 ~= nil then if boolean.toJSBoolean(p8.description) then {
 			block = true,
 			kind = kind.STRING,
-			value = p50.description
-		} else nil else var58,
-		name = { kind = kind.NAME, value = p50.name },
-		directives = getDeprecatableDirectiveNodes(p50, p51, p52)
+			value = p8.description
+		} else nil else var25,
+		name = { kind = kind.NAME, value = p8.name },
+		directives = getDeprecatableDirectiveNodes(p8, p9, p10)
 	}
 end
 
-function t.makeDeprecatedDirective(p53)
+function t.makeDeprecatedDirective(p8)
 	-- upvalues: makeDirectiveNode (write), graphQLDeprecatedDirective (ref)
-	return makeDirectiveNode("deprecated", { reason = p53 }, graphQLDeprecatedDirective)
+	return makeDirectiveNode("deprecated", { reason = p8 }, graphQLDeprecatedDirective)
 end
 
-makeDirectiveNode = function(p54, p55, p56)
+makeDirectiveNode = function(p8, p9, p10)
 	-- upvalues: astFromValue (ref), boolean (ref), kind (ref), astFromValueUntyped (ref)
 	local t = {}
 	
-	if p56 == nil then
-		for i in p55 do
-			local var62 = astFromValueUntyped(p55[tostring(i)])
+	if p10 == nil then
+		for i in p9 do
+			local var25 = astFromValueUntyped(p9[tostring(i)])
 			
-			if boolean.toJSBoolean(var62) then
+			if boolean.toJSBoolean(var25) then
 				table.insert(t, {
 					kind = kind.ARGUMENT,
 					name = { kind = kind.NAME, value = i },
-					value = var62
+					value = var25
 				})
 			end
 		end
 	else
-		for i, v in p56.args do
+		for i, v in p10.args do
 			local name = v.name
-			local var60 = p55[tostring(name)]
+			local var26 = p9[tostring(name)]
 			
-			if var60 ~= nil then
-				local var61 = astFromValue(var60, v.type)
+			if var26 ~= nil then
+				local var27 = astFromValue(var26, v.type)
 				
-				if boolean.toJSBoolean(var61) then
+				if boolean.toJSBoolean(var27) then
 					table.insert(t, {
 						kind = kind.ARGUMENT,
 						name = { kind = kind.NAME, value = name },
-						value = var61
+						value = var27
 					})
 				end
 			end
@@ -469,28 +469,28 @@ makeDirectiveNode = function(p54, p55, p56)
 	end
 	return {
 		kind = kind.DIRECTIVE,
-		name = { kind = kind.NAME, value = p54 },
+		name = { kind = kind.NAME, value = p8 },
 		arguments = t
 	}
 end
 
 t.makeDirectiveNode = makeDirectiveNode
 
-function t.makeDirectiveNodes(p57, p58)
+function t.makeDirectiveNodes(p11, p12)
 	-- upvalues: array (ref), makeDirectiveNode (write)
-	local var64, var65
+	local var28, var29
 	local t = {}
 	
-	for i in p58 do
-		var64 = p58[tostring(i)]
-		var65 = if typeof(p57) == "table" then p57:getDirective(i) else nil
+	for i in p12 do
+		var28 = p12[tostring(i)]
+		var29 = if typeof(p11) == "table" then p11:getDirective(i) else nil
 		
-		if not array.isArray(var64) or #var64 == 0 then
-			table.insert(t, makeDirectiveNode(i, var64, var65))
+		if not array.isArray(var28) or #var28 == 0 then
+			table.insert(t, makeDirectiveNode(i, var28, var29))
 			continue
 		end
-		for i_1, v in var64 do
-			table.insert(t, makeDirectiveNode(i, v, var65))
+		for i_1, v in var28 do
+			table.insert(t, makeDirectiveNode(i, v, var29))
 		end
 	end
 	return t

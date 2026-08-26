@@ -5,14 +5,14 @@ local skeleton = require(parent.Foundation).Skeleton
 local textPlaceholders = roactModule.PureComponent:extend("TextPlaceholders")
 textPlaceholders.defaultProps = { LayoutOrder = 0, avatarSize = 60, avatarCellWidth = 60 }
 
-function textPlaceholders.render(p0)
+function textPlaceholders.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), skeleton (ref)
 	return withStyle(function(_)
-		-- upvalues: roactModule (copy), p0 (ref), skeleton (copy)
+		-- upvalues: roactModule (copy), p1 (ref), skeleton (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, -p0.props.avatarCellWidth, 1, 0),
-			LayoutOrder = p0.props.LayoutOrder
+			Size = UDim2.new(1, -p1.props.avatarCellWidth, 1, 0),
+			LayoutOrder = p1.props.LayoutOrder
 		}, {
 			Padding = roactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 12),

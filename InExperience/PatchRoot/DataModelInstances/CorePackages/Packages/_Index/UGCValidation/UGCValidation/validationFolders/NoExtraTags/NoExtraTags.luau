@@ -18,32 +18,32 @@ local t = {
 	}
 }
 
-local function collectTaggedPaths(p0, p1)
+local function collectTaggedPaths(p1, p2)
 	-- upvalues: collectionService (ref)
-	local descendants = p0:GetDescendants()
-	table.insert(descendants, p0)
+	local descendants = p1:GetDescendants()
+	table.insert(descendants, p1)
 	
 	for i, v in descendants do
 		if #collectionService:GetTags(v) > 0 then
-			table.insert(p1, v:GetFullName())
+			table.insert(p2, v:GetFullName())
 		end
 	end
 end
 
-function t.run(p2, p3)
+function t.run(p3, p4)
 	-- upvalues: collectTaggedPaths (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), getFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule (ref), errorSourceStringsModule (ref)
 	local t = {}
-	collectTaggedPaths(p3.rootInstance, t)
+	collectTaggedPaths(p4.rootInstance, t)
 	
 	if getFFlagUGCValidateMigrateSchemaPropertiesModule() then
 		if getFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule() then
-			for i, v in p3.hsrAssets do
+			for i, v in p4.hsrAssets do
 				for i_1, v_1 in v do
 					collectTaggedPaths(v_1, t)
 				end
 			end
 		else
-			local hsrAssets = p3.hsrAssets
+			local hsrAssets = p4.hsrAssets
 			
 			if type(hsrAssets) == "table" then
 				for i, v in hsrAssets do
@@ -57,7 +57,7 @@ function t.run(p2, p3)
 		end
 	end
 	if #t > 0 then
-		p2:fail(errorSourceStringsModule.Keys.InstanceTagsFound, { ProblematicDescendantPaths = table.concat(t, ", ") })
+		p3:fail(errorSourceStringsModule.Keys.InstanceTagsFound, { ProblematicDescendantPaths = table.concat(t, ", ") })
 	end
 end
 

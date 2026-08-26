@@ -6,17 +6,17 @@ local promiseModule = require(parent.Promise)
 local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
 local followingsUrlBuilderModule = require(script.Parent.FollowingsUrlBuilder)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getLocalPlayerUserId (ref), promiseModule (ref), followingsUrlBuilderModule (ref), httpRequestModule (ref), httpService (ref)
-	local var5 = getLocalPlayerUserId()
+	local var1 = getLocalPlayerUserId()
 	
-	return if var5 and var5 > 0 then httpRequestModule.config({
-		requestFunction = function(p2, p3, p4)
+	return if var1 and var1 > 0 then httpRequestModule.config({
+		requestFunction = function(p3, p4, p5)
 			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.RequestInternal(p2, p3, p4)
+			return httpRequestModule.requestFunctions.RequestInternal(p3, p4, p5)
 		end
-	})(followingsUrlBuilderModule.buildFollowingUpdateUrl(tostring(var5), p0), if p1 then "POST" else "DELETE", {
-		postBody = if p1 then httpService:JSONEncode({}) else nil
+	})(followingsUrlBuilderModule.buildFollowingUpdateUrl(tostring(var1), p1), if p2 then "POST" else "DELETE", {
+		postBody = if p2 then httpService:JSONEncode({}) else nil
 	}) else promiseModule.reject({
 		ClientError = "Missing or invalid local player ID",
 		message = "Cannot update following status: missing or invalid local player ID"

@@ -10,13 +10,13 @@ local sendFPSStatModule = require(script.Parent.sendFPSStat)
 local AXFixAverageFPSCasing = game:DefineFastFlag("AXFixAverageFPSCasing", false)
 local AXIntervalPerformanceTrackerFPSStandardDeviation = game:DefineFastFlag("AXIntervalPerformanceTrackerFPSStandardDeviation", false)
 local AXIntervalPerformanceTrackerScrollFrameTime = game:DefineFastFlag("AXIntervalPerformanceTrackerScrollFrameTime", false)
-local var7 = math.random(0, 1000) < require(parent.SharedFlags).GetFIntIntervalPerformanceTrackerEventStream()
+local var1 = math.random(0, 1000) < require(parent.SharedFlags).GetFIntIntervalPerformanceTrackerEventStream()
 local t = {
 	averageFPS = {
-		reducer = function(p0)
+		reducer = function(p1)
 			return {
-				framesCount = if p0.framesCount == nil then 0 else p0.framesCount + 1,
-				startTime = p0.startTime or tick()
+				framesCount = if p1.framesCount == nil then 0 else p1.framesCount + 1,
+				startTime = p1.startTime or tick()
 			}
 		end,
 		getResult = function(p1)
@@ -26,50 +26,50 @@ local t = {
 		end
 	},
 	framesCount = {
-		reducer = function(p2)
+		reducer = function(p1)
 			return {
-				framesCount = if p2.framesCount == nil then 0 else p2.framesCount + 1
+				framesCount = if p1.framesCount == nil then 0 else p1.framesCount + 1
 			}
 		end,
-		getResult = function(p3)
-			return p3.framesCount
+		getResult = function(p1)
+			return p1.framesCount
 		end
 	},
 	longestFrameTime = {
-		reducer = function(p4)
+		reducer = function(p1)
 			return {
-				framesCount = if p4.framesCount == nil then 0 else p4.framesCount + 1,
-				longestFrameTime = if p4.longestFrameTime == nil or p4.previousTime == nil then 0 else math.max(p4.longestFrameTime, tick() - p4.previousTime),
+				framesCount = if p1.framesCount == nil then 0 else p1.framesCount + 1,
+				longestFrameTime = if p1.longestFrameTime == nil or p1.previousTime == nil then 0 else math.max(p1.longestFrameTime, tick() - p1.previousTime),
 				previousTime = tick()
 			}
 		end,
-		getResult = function(p5)
-			return if p5.framesCount < 1 then nil else p5.longestFrameTime
+		getResult = function(p1)
+			return if p1.framesCount < 1 then nil else p1.longestFrameTime
 		end
 	},
 	duration = {
-		reducer = function(p6)
-			return { startTime = p6.startTime or tick() }
+		reducer = function(p1)
+			return { startTime = p1.startTime or tick() }
 		end,
-		getResult = function(p7)
-			return tick() - p7.startTime
+		getResult = function(p1)
+			return tick() - p1.startTime
 		end
 	}
 }
 
 if AXIntervalPerformanceTrackerFPSStandardDeviation then
 	t.standardDeviationFPS = {
-		reducer = function(p8)
+		reducer = function(p1)
 			local currentTime = tick()
-			local framesCount = p8.framesCount or 0
-			local sumFPS = p8.sumFPS or 0
-			local sumSquaredFPS = p8.sumSquaredFPS or 0
+			local framesCount = p1.framesCount or 0
+			local sumFPS = p1.sumFPS or 0
+			local sumSquaredFPS = p1.sumSquaredFPS or 0
 			
-			if p8.previousTime ~= nil and p8.previousTime < currentTime then
-				local var20 = 1 / (currentTime - p8.previousTime)
+			if p1.previousTime ~= nil and p1.previousTime < currentTime then
+				local var2 = 1 / (currentTime - p1.previousTime)
 				framesCount += 1
-				sumFPS += var20
-				sumSquaredFPS += var20 * var20
+				sumFPS += var2
+				sumSquaredFPS += var2 * var2
 			end
 			return {
 				framesCount = framesCount,
@@ -78,13 +78,13 @@ if AXIntervalPerformanceTrackerFPSStandardDeviation then
 				sumSquaredFPS = sumSquaredFPS
 			}
 		end,
-		getResult = function(p9)
-			if p9.framesCount == nil or p9.framesCount < 1 then
+		getResult = function(p1)
+			if p1.framesCount == nil or p1.framesCount < 1 then
 				return nil
 			end
-			local var21 = (p9.sumFPS or 0) / p9.framesCount
+			local var2 = (p1.sumFPS or 0) / p1.framesCount
 			
-			return math.sqrt(math.max((p9.sumSquaredFPS or 0) / p9.framesCount - var21 * var21, 0))
+			return math.sqrt(math.max((p1.sumSquaredFPS or 0) / p1.framesCount - var2 * var2, 0))
 		end
 	}
 end
@@ -100,122 +100,122 @@ local list = {
 	"over_25"
 }
 
-local function _(p10)
-	return if p10 < 16 then "under_16" elseif p10 < 16.666666666667 then "16_to_16_7" elseif p10 < 17.5 then "16_7_to_17_5" elseif p10 < 18 then "17_5_to_18" elseif p10 < 21 then "18_to_21" elseif p10 < 25 then "21_to_25" else "over_25"
+local function _(p1)
+	return if p1 < 16 then "under_16" elseif p1 < 16.666666666667 then "16_to_16_7" elseif p1 < 17.5 then "16_7_to_17_5" elseif p1 < 18 then "17_5_to_18" elseif p1 < 21 then "18_to_21" elseif p1 < 25 then "21_to_25" else "over_25"
 end
 
-local _ = function(p11, p12)
-	local p11Count = #p11
-	local ceiled = math.ceil(p12 / 100 * p11Count)
+local _ = function(p1, p2)
+	local p11Count = #p1
+	local ceiled = math.ceil(p2 / 100 * p11Count)
 	
 	if ceiled < 1 then
 		ceiled = 1
 	elseif p11Count < ceiled then
 		ceiled = p11Count
 	end
-	return p11[ceiled]
+	return p1[ceiled]
 end
 
-local _ = function(value, p13)
-	local var24 = 10 ^ p13
+local _ = function(value, p1)
+	local var2 = 10 ^ p1
 	
-	return math.round(value * var24) / var24
+	return math.round(value * var2) / var2
 end
 
-v = function(p14, p15, p16)
-	if p15 ~= nil then
-		table.insert(p14, (p16 - p15) * 1000)
+v = function(p1, p2, p3)
+	if p2 ~= nil then
+		table.insert(p1, (p3 - p2) * 1000)
 	end
 end
 
 if AXIntervalPerformanceTrackerScrollFrameTime then
 	local httpService = game:GetService("HttpService")
 	t.rawFrameTimesMs = {
-		reducer = function(p17, p18)
-			local frames = p17.frames or {}
-			local previousTime = p17.previousTime
+		reducer = function(p1, p2)
+			local frames = p1.frames or {}
+			local previousTime = p1.previousTime
 			
 			if previousTime ~= nil then
-				table.insert(frames, (p18 - previousTime) * 1000)
+				table.insert(frames, (p2 - previousTime) * 1000)
 			end
-			return { frames = frames, previousTime = p18 }
+			return { frames = frames, previousTime = p2 }
 		end,
-		getResult = function(p19)
+		getResult = function(p1)
 			-- upvalues: httpService (ref)
-			if p19.frames == nil or #p19.frames < 1 then
+			if p1.frames == nil or #p1.frames < 1 then
 				return nil
 			end
 			local t = {}
 			
-			for i, v in p19.frames do
+			for i, v in p1.frames do
 				table.insert(t, math.round(v * 100) / 100)
 			end
 			return httpService:JSONEncode(t)
 		end
 	}
 	t.frameTimeAvgMs = {
-		reducer = function(p20, p21)
-			local framesCount = p20.framesCount or 0
-			local sumMs = p20.sumMs or 0
+		reducer = function(p2, p3)
+			local framesCount = p2.framesCount or 0
+			local sumMs = p2.sumMs or 0
 			
-			if p20.previousTime ~= nil then
+			if p2.previousTime ~= nil then
 				framesCount += 1
-				sumMs += (p21 - p20.previousTime) * 1000
+				sumMs += (p3 - p2.previousTime) * 1000
 			end
 			return {
 				framesCount = framesCount,
 				sumMs = sumMs,
-				previousTime = p21
+				previousTime = p3
 			}
 		end,
-		getResult = function(p22)
-			return if p22.framesCount == nil or p22.framesCount < 1 then nil else p22.sumMs / p22.framesCount
+		getResult = function(p2)
+			return if p2.framesCount == nil or p2.framesCount < 1 then nil else p2.sumMs / p2.framesCount
 		end
 	}
 	t.frameTimeStdDevMs = {
-		reducer = function(p23, p24)
-			local framesCount = p23.framesCount or 0
-			local sumMs = p23.sumMs or 0
-			local sumSquaredMs = p23.sumSquaredMs or 0
+		reducer = function(p2, p3)
+			local framesCount = p2.framesCount or 0
+			local sumMs = p2.sumMs or 0
+			local sumSquaredMs = p2.sumSquaredMs or 0
 			
-			if p23.previousTime ~= nil then
-				local var32 = (p24 - p23.previousTime) * 1000
+			if p2.previousTime ~= nil then
+				local var2 = (p3 - p2.previousTime) * 1000
 				framesCount += 1
-				sumMs += var32
-				sumSquaredMs += var32 * var32
+				sumMs += var2
+				sumSquaredMs += var2 * var2
 			end
 			return {
 				framesCount = framesCount,
 				sumMs = sumMs,
 				sumSquaredMs = sumSquaredMs,
-				previousTime = p24
+				previousTime = p3
 			}
 		end,
-		getResult = function(p25)
-			if p25.framesCount == nil or p25.framesCount < 1 then
+		getResult = function(p2)
+			if p2.framesCount == nil or p2.framesCount < 1 then
 				return nil
 			end
-			local var33 = p25.sumMs / p25.framesCount
+			local var2 = p2.sumMs / p2.framesCount
 			
-			return math.sqrt(math.max(p25.sumSquaredMs / p25.framesCount - var33 * var33, 0))
+			return math.sqrt(math.max(p2.sumSquaredMs / p2.framesCount - var2 * var2, 0))
 		end
 	}
 	t.frameTimeDistributionMs = {
-		reducer = function(p26, p27)
-			local frames = p26.frames or {}
-			local previousTime = p26.previousTime
+		reducer = function(p2, p3)
+			local frames = p2.frames or {}
+			local previousTime = p2.previousTime
 			
 			if previousTime ~= nil then
-				table.insert(frames, (p27 - previousTime) * 1000)
+				table.insert(frames, (p3 - previousTime) * 1000)
 			end
-			return { frames = frames, previousTime = p27 }
+			return { frames = frames, previousTime = p3 }
 		end,
-		getResult = function(p28)
+		getResult = function(p2)
 			-- upvalues: httpService (ref)
-			if p28.frames == nil or #p28.frames < 1 then
+			if p2.frames == nil or #p2.frames < 1 then
 				return nil
 			end
-			local cloned = table.clone(p28.frames)
+			local cloned = table.clone(p2.frames)
 			table.sort(cloned)
 			local t = {}
 			local clonedCount = #cloned
@@ -250,29 +250,29 @@ if AXIntervalPerformanceTrackerScrollFrameTime then
 		end
 	}
 	t.frameBuckets = {
-		reducer = function(p29, p30)
+		reducer = function(p2, p3)
 			-- upvalues: list (ref)
 			local counts
 			local _ = nil
 			
-			if p29.counts == nil then
+			if p2.counts == nil then
 				counts = {}
 				
 				for i, v in list do
 					counts[v] = 0
 				end
 			else
-				counts = p29.counts
+				counts = p2.counts
 			end
-			if p29.previousTime ~= nil then
-				local var43 = (p30 - p29.previousTime) * 1000
-				counts[if var43 < 16 then "under_16" elseif var43 < 16.666666666667 then "16_to_16_7" elseif var43 < 17.5 then "16_7_to_17_5" elseif var43 < 18 then "17_5_to_18" elseif var43 < 21 then "18_to_21" elseif var43 < 25 then "21_to_25" else "over_25"] += 1
+			if p2.previousTime ~= nil then
+				local var2 = (p3 - p2.previousTime) * 1000
+				counts[if var2 < 16 then "under_16" elseif var2 < 16.666666666667 then "16_to_16_7" elseif var2 < 17.5 then "16_7_to_17_5" elseif var2 < 18 then "17_5_to_18" elseif var2 < 21 then "18_to_21" elseif var2 < 25 then "21_to_25" else "over_25"] += 1
 			end
-			return { counts = counts, previousTime = p30 }
+			return { counts = counts, previousTime = p3 }
 		end,
-		getResult = function(p31)
+		getResult = function(p4)
 			-- upvalues: httpService (ref)
-			return if p31.counts == nil then nil else httpService:JSONEncode(p31.counts)
+			return if p4.counts == nil then nil else httpService:JSONEncode(p4.counts)
 		end
 	}
 	
@@ -289,16 +289,16 @@ end
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p32, p33, p34, p35, p36)
+function t_3.new(p4, p5, p6, p7, p8)
 	-- upvalues: getFFlagAXFPSEventStreamAndCounters (ref), t_3 (ref)
 	local t = {
 		_startTime = nil,
 		_metricsData = {},
-		_timeout = p32,
-		_metricsToTrack = p33,
-		_countersEnabled = if getFFlagAXFPSEventStreamAndCounters() then p34 else nil,
-		_eventStreamEnabled = if getFFlagAXFPSEventStreamAndCounters() then p35 else nil,
-		_extraFields = p36
+		_timeout = p4,
+		_metricsToTrack = p5,
+		_countersEnabled = if getFFlagAXFPSEventStreamAndCounters() then p6 else nil,
+		_eventStreamEnabled = if getFFlagAXFPSEventStreamAndCounters() then p7 else nil,
+		_extraFields = p8
 	}
 	setmetatable(t, t_3)
 	
@@ -319,16 +319,16 @@ function t_3:updateMetrics()
 	if self._startTime == nil then
 		self._startTime = tick()
 	end
-	local var45 = if AXIntervalPerformanceTrackerScrollFrameTime then tick() else nil
+	local var3 = if AXIntervalPerformanceTrackerScrollFrameTime then tick() else nil
 	
 	for i, v in self:getMetricsToTrack() do
-		local var46 = t[v]
+		local var4 = t[v]
 		
-		if var46 then
+		if var4 then
 			if not self._metricsData[v] then
 				self._metricsData[v] = {}
 			end
-			self._metricsData[v] = var46.reducer(self._metricsData[v], var45)
+			self._metricsData[v] = var4.reducer(self._metricsData[v], var3)
 		end
 	end
 end
@@ -338,10 +338,10 @@ function t_3:getResult()
 	local t_1 = {}
 	
 	for i, v in self:getMetricsToTrack() do
-		local var48 = t[v]
+		local var5 = t[v]
 		
-		if var48 then
-			t_1[v] = var48.getResult(self._metricsData[v])
+		if var5 then
+			t_1[v] = var5.getResult(self._metricsData[v])
 		end
 	end
 	return t_1
@@ -373,13 +373,13 @@ function t_4:_updateIntervals()
 	end
 end
 
-function t_4:startTracking(p37, p38, p39, p40, p41, p42)
-	-- upvalues: var7 (ref), t_3 (ref), getFFlagAXFPSEventStreamAndCounters (ref), runService (ref)
-	if not var7 then return end
-	if not self._intervals[p37] then
-		local var50 = t_3.new(p38, p39, if getFFlagAXFPSEventStreamAndCounters() then p40 else nil, if getFFlagAXFPSEventStreamAndCounters() then p41 else nil, p42)
-		self._intervals[p37] = var50
-		var50:updateMetrics()
+function t_4:startTracking(p4, p5, p6, p7, p8, p9)
+	-- upvalues: var1 (ref), t_3 (ref), getFFlagAXFPSEventStreamAndCounters (ref), runService (ref)
+	if not var1 then return end
+	if not self._intervals[p4] then
+		local var6 = t_3.new(p5, p6, if getFFlagAXFPSEventStreamAndCounters() then p7 else nil, if getFFlagAXFPSEventStreamAndCounters() then p8 else nil, p9)
+		self._intervals[p4] = var6
+		var6:updateMetrics()
 	end
 	if not self._renderSteppedConnection then
 		self._renderSteppedConnection = runService.RenderStepped:Connect(function()
@@ -389,30 +389,30 @@ function t_4:startTracking(p37, p38, p39, p40, p41, p42)
 	end
 end
 
-function t_4:_fireStatsTracking(p43)
+function t_4:_fireStatsTracking(p4)
 	-- upvalues: name (ref), AXFixAverageFPSCasing (ref), sendFPSStatModule (ref)
-	local averageFPS = p43.averageFPS
-	local framesCount = p43.framesCount
-	local longestFrameTime = p43.longestFrameTime
-	local intervalName = p43.intervalName
-	local var51 = self._intervals[intervalName]
+	local averageFPS = p4.averageFPS
+	local framesCount = p4.framesCount
+	local longestFrameTime = p4.longestFrameTime
+	local intervalName = p4.intervalName
+	local var6 = self._intervals[intervalName]
 	
-	if not var51 then
+	if not var6 then
 		name:warning(`Missing interval {intervalName}`)
 		
 		return
 	end
-	local countersEnabled = var51._countersEnabled
-	local eventStreamEnabled = var51._eventStreamEnabled
+	local countersEnabled = var6._countersEnabled
+	local eventStreamEnabled = var6._eventStreamEnabled
 	
-	local function _(p44, p45)
+	local function _(p5, p6)
 		return "IntervalPerformanceTracker_" .. p44 .. "_" .. p45
 	end
 	
 	if not countersEnabled and not eventStreamEnabled or not intervalName then return end
 	if averageFPS then
 		local text = "IntervalPerformanceTracker_" .. "AverageFPS" .. "_" .. intervalName
-		local cloned = table.clone(p43)
+		local cloned = table.clone(p4)
 		cloned.duration = averageFPS
 		cloned.averageFps = if AXFixAverageFPSCasing then averageFPS else nil
 		sendFPSStatModule({
@@ -426,7 +426,7 @@ function t_4:_fireStatsTracking(p43)
 	end
 	if framesCount and countersEnabled then
 		local text = "IntervalPerformanceTracker_" .. "FramesCount" .. "_" .. intervalName
-		local cloned = table.clone(p43)
+		local cloned = table.clone(p4)
 		cloned.duration = framesCount
 		sendFPSStatModule({
 			statName = text,
@@ -434,9 +434,9 @@ function t_4:_fireStatsTracking(p43)
 			interval = framesCount
 		})
 	end
-	if longestFrameTime and var51._countersEnabled then
+	if longestFrameTime and var6._countersEnabled then
 		local text = "IntervalPerformanceTracker_" .. "LongestFrameTime" .. "_" .. intervalName
-		local cloned = table.clone(p43)
+		local cloned = table.clone(p4)
 		cloned.duration = longestFrameTime
 		sendFPSStatModule({
 			statName = text,
@@ -446,33 +446,33 @@ function t_4:_fireStatsTracking(p43)
 	end
 end
 
-function t_4:stopAndLogTracking(p46)
-	-- upvalues: var7 (ref), AXIntervalPerformanceTrackerScrollFrameTime (ref), default (ref), intervalPerformanceTrackerTelemetryConfigModule (ref), getFFlagAXFPSEventStreamAndCounters (ref)
-	if not var7 then return end
-	local var58 = self._intervals[p46]
+function t_4:stopAndLogTracking(p4)
+	-- upvalues: var1 (ref), AXIntervalPerformanceTrackerScrollFrameTime (ref), default (ref), intervalPerformanceTrackerTelemetryConfigModule (ref), getFFlagAXFPSEventStreamAndCounters (ref)
+	if not var1 then return end
+	local var6 = self._intervals[p4]
 	
-	if var58 then
-		local result = var58:getResult()
-		local t = { intervalName = p46 }
+	if var6 then
+		local result = var6:getResult()
+		local t = { intervalName = p4 }
 		
-		if AXIntervalPerformanceTrackerScrollFrameTime and var58._extraFields then
-			for i, v in var58._extraFields do
+		if AXIntervalPerformanceTrackerScrollFrameTime and var6._extraFields then
+			for i, v in var6._extraFields do
 				t[i] = v
 			end
 		end
-		local var61 = 0
+		local var7 = 0
 		
 		for i, v in result do
 			if v ~= nil then
-				var61 += 1
+				var7 += 1
 			end
 			t[i] = v
 		end
-		if var61 > 0 then
+		if var7 > 0 then
 			default:logRobloxTelemetryEvent(intervalPerformanceTrackerTelemetryConfigModule, nil, t)
 			
 			if game:GetFastFlag("DebugPrintIntervalPerformanceTrackerResults") then
-				print("IntervalPerformanceTracker:" .. tostring(p46) .. " logged with results:")
+				print("IntervalPerformanceTracker:" .. tostring(p4) .. " logged with results:")
 				
 				for i_1, v_1 in t do
 					print("\t" .. tostring(i_1) .. " = " .. tostring(v_1))
@@ -482,15 +482,15 @@ function t_4:stopAndLogTracking(p46)
 		if getFFlagAXFPSEventStreamAndCounters() then
 			self:_fireStatsTracking(t)
 		end
-		self._intervals[p46] = nil
+		self._intervals[p4] = nil
 	end
 	self:disconnectUnusedRenderStepped()
 end
 
-function t_4:cancelTracking(p47)
-	-- upvalues: var7 (ref)
-	if var7 then
-		self._intervals[p47] = nil
+function t_4:cancelTracking(p5)
+	-- upvalues: var1 (ref)
+	if var1 then
+		self._intervals[p5] = nil
 		self:disconnectUnusedRenderStepped()
 		
 		return

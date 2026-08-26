@@ -42,10 +42,10 @@ local frozen_2 = table.freeze({
 	Teardown = "react.teardown"
 })
 
-local function _(p0)
+local function _(p1)
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		table.insert(t, v)
 	end
 	table.sort(t)
@@ -92,9 +92,9 @@ return table.freeze({
 	Roblox = frozen_1,
 	React = frozen_2,
 	byOwner = freeze,
-	isKnown = function(p1)
+	isKnown = function(p2)
 		-- upvalues: t_4 (ref)
-		return t_4[p1] == true
+		return t_4[p2] == true
 	end,
 	getMissing = function(p2, p3)
 		-- upvalues: freeze (ref)

@@ -7,7 +7,7 @@ local colorsModule = require(parent.Colors)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local notification = roactModule.PureComponent:extend("Notification")
 
-function notification.render(p0)
+function notification.render(p1)
 	-- upvalues: roactModule (ref), colorsModule (ref), appFonts (ref), robloxTranslatorModule (ref)
 	return roactModule.createElement("Frame", {
 		LayoutOrder = 0,
@@ -39,7 +39,7 @@ function notification.render(p0)
 			TextColor3 = colorsModule.White,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Font = appFonts.default:getDefault(),
-			Text = robloxTranslatorModule:FormatByKeyForLocale(p0.props.noticeKey, p0.props.locale)
+			Text = robloxTranslatorModule:FormatByKeyForLocale(p1.props.noticeKey, p1.props.locale)
 		}, {
 			UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = 16 })
 		})

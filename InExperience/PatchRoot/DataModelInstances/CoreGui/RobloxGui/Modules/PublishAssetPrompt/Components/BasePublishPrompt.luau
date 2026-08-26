@@ -35,9 +35,9 @@ local publishAssetAnalytics = require(corePackagesService.Workspace.Packages.Pur
 local basePublishPrompt = roactModule.PureComponent:extend("BasePublishPrompt")
 local uDim = UDim.new(1.5, 0)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: getInputGroup (ref), inputTypeModule (ref)
-	return getInputGroup(p0) == inputTypeModule.InputTypeConstants.Gamepad
+	return getInputGroup(p1) == inputTypeModule.InputTypeConstants.Gamepad
 end
 
 basePublishPrompt.validateProps = tModule.strictInterface({
@@ -79,10 +79,10 @@ function basePublishPrompt.init(p1)
 		})
 	end)
 	
-	function p1.storeInput(_, p3, p4)
+	function p1.storeInput(_, p2, p3)
 		-- upvalues: p1 (ref)
-		p1.inputState = p3
-		p1.inputObject = p4
+		p1.inputState = p2
+		p1.inputObject = p3
 		
 		return Enum.ContextActionResult.Sink
 	end
@@ -128,14 +128,14 @@ function basePublishPrompt.setUpGamepad(value)
 	if userInputService.GamepadEnabled then
 		contextActionService:UnbindCoreAction("ScrollPrompt")
 		contextActionService:BindCoreAction("ScrollPrompt", value.storeInput, false, Enum.KeyCode.Thumbstick2)
-		value.connection = runService.RenderStepped:Connect(function(p5)
+		value.connection = runService.RenderStepped:Connect(function(p1)
 			-- upvalues: value (ref), gamepadUtils (copy), uDim (copy)
 			if value.inputState == Enum.UserInputState.Change and value.inputObject then
 				local current = value.swipeScrollingFrameRef.current
-				local var26 = current.CanvasPosition.Y + p5 * -gamepadUtils.normalizeStickByDeadzone(value.inputObject.Position).Y * 1000
+				local var1 = current.CanvasPosition.Y + p1 * -gamepadUtils.normalizeStickByDeadzone(value.inputObject.Position).Y * 1000
 				
-				if var26 <= current.AbsoluteSize.Y * uDim.Scale + uDim.Offset then
-					current.CanvasPosition = Vector2.new(0, var26)
+				if var1 <= current.AbsoluteSize.Y * uDim.Scale + uDim.Offset then
+					current.CanvasPosition = Vector2.new(0, var1)
 				end
 			end
 		end)
@@ -144,19 +144,19 @@ function basePublishPrompt.setUpGamepad(value)
 	end
 end
 
-function basePublishPrompt.cleanupGamepad(p6)
+function basePublishPrompt.cleanupGamepad(p1)
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("ClosePrompt")
 	contextActionService:UnbindCoreAction("ScrollPrompt")
 	
-	if p6.connection then
-		p6.connection:Disconnect()
+	if p1.connection then
+		p1.connection:Disconnect()
 	end
 end
 
-function basePublishPrompt.overrideMouseIconBehavior(p7)
+function basePublishPrompt.overrideMouseIconBehavior(p1)
 	-- upvalues: mouseIconOverrideService (ref)
-	mouseIconOverrideService.push("BasePublishPromptOverrideKey", if p7.state.isGamepad then Enum.OverrideMouseIconBehavior.ForceHide else Enum.OverrideMouseIconBehavior.ForceShow)
+	mouseIconOverrideService.push("BasePublishPromptOverrideKey", if p1.state.isGamepad then Enum.OverrideMouseIconBehavior.ForceHide else Enum.OverrideMouseIconBehavior.ForceShow)
 end
 
 function basePublishPrompt.removeMouseIconBehaviorOverride(_)
@@ -164,28 +164,28 @@ function basePublishPrompt.removeMouseIconBehaviorOverride(_)
 	mouseIconOverrideService.pop("BasePublishPromptOverrideKey")
 end
 
-function basePublishPrompt.didMount(p8)
-	p8:setUpGamepad()
-	p8.props.SetPromptVisibility(true)
-	p8:overrideMouseIconBehavior()
+function basePublishPrompt.didMount(p1)
+	p1:setUpGamepad()
+	p1.props.SetPromptVisibility(true)
+	p1:overrideMouseIconBehavior()
 end
 
-function basePublishPrompt.didUpdate(p9, p10, p11)
-	if p10.promptVisible ~= p9.props.promptVisible and p9.props.promptVisible == false then
-		p9.closePrompt()
+function basePublishPrompt.didUpdate(p1, p2, p3)
+	if p2.promptVisible ~= p1.props.promptVisible and p1.props.promptVisible == false then
+		p1.closePrompt()
 	end
-	if p9.state.isGamepad ~= p11.isGamepad then
-		p9:overrideMouseIconBehavior()
+	if p1.state.isGamepad ~= p3.isGamepad then
+		p1:overrideMouseIconBehavior()
 	end
 end
 
-function basePublishPrompt.renderMiddle(p12, p13)
+function basePublishPrompt.renderMiddle(p1, p2)
 	-- upvalues: withStyle (ref), roactModule (ref), constantsModule (ref), labeledTextBoxModule (ref)
-	return withStyle(function(p14)
-		-- upvalues: roactModule (copy), p12 (ref), constantsModule (copy), labeledTextBoxModule (copy), p13 (ref)
-		local font = p14.Font
+	return withStyle(function(p3)
+		-- upvalues: roactModule (copy), p1 (ref), constantsModule (copy), labeledTextBoxModule (copy), p2 (ref)
+		local font = p3.Font
 		local baseSize = font.BaseSize
-		local theme = p14.Theme
+		local theme = p3.Theme
 		local footer = font.Footer
 		
 		return roactModule.createFragment({
@@ -197,7 +197,7 @@ function basePublishPrompt.renderMiddle(p12, p13)
 				ScrollingDirection = Enum.ScrollingDirection.Y,
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				Selectable = false,
-				[roactModule.Ref] = p12.swipeScrollingFrameRef
+				[roactModule.Ref] = p1.swipeScrollingFrameRef
 			}, {
 				layout = roactModule.createElement("UIListLayout", {
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -212,16 +212,16 @@ function basePublishPrompt.renderMiddle(p12, p13)
 					LayoutOrder = 1,
 					topPadding = 24,
 					textBoxHeight = 30,
-					labelText = p12.props.nameLabel,
-					defaultText = p12.props.defaultName,
-					onTextUpdated = p12.props.onNameUpdated
+					labelText = p1.props.nameLabel,
+					defaultText = p1.props.defaultName,
+					onTextUpdated = p1.props.onNameUpdated
 				}),
 				PromptBody = roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					Size = UDim2.fromScale(1, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
-				}, p12.props.promptBody)
+				}, p1.props.promptBody)
 			}),
 			BottomGradient = roactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
@@ -258,7 +258,7 @@ function basePublishPrompt.renderMiddle(p12, p13)
 					BackgroundTransparency = 1,
 					TextWrapped = true,
 					Size = UDim2.fromScale(1, 1),
-					Text = p13.disclaimer,
+					Text = p2.disclaimer,
 					Font = footer.Font,
 					TextSize = baseSize * footer.RelativeSize,
 					TextColor3 = theme.TextDefault.Color
@@ -268,24 +268,24 @@ function basePublishPrompt.renderMiddle(p12, p13)
 	end)
 end
 
-function basePublishPrompt.renderAlertLocalized(p15, p16)
+function basePublishPrompt.renderAlertLocalized(p1, p2)
 	-- upvalues: guiService (ref), constantsModule_1 (ref), withStyle (ref), roactModule (ref), externalEventConnection (ref), userInputService (ref), getInputGroup (ref), inputTypeModule (ref), overlay (ref), fullPageModal (ref), buttonType (ref), leaveCreationAlertModule (ref), validationErrorModalModule (ref), previewViewportModule (ref)
 	local guiInset, _ = guiService:GetGuiInset()
 	local uDim2 = UDim2.new(0, 0, 0, -guiInset.Y)
 	local uDim2_1 = UDim2.new(1, 0, 1, guiInset.Y)
-	local var30 = constantsModule_1.TopBarHeight * p15.state.UiScale
+	local var1 = constantsModule_1.TopBarHeight * p1.state.UiScale
 	
-	return withStyle(function(p17)
-		-- upvalues: p15 (ref), p16 (ref), roactModule (copy), externalEventConnection (copy), userInputService (copy), getInputGroup (copy), inputTypeModule (copy), uDim2 (ref), uDim2_1 (ref), overlay (copy), var30 (ref), fullPageModal (copy), buttonType (copy), leaveCreationAlertModule (copy), validationErrorModalModule (copy), previewViewportModule (copy)
-		local theme = p17.Theme
+	return withStyle(function(p3)
+		-- upvalues: p1 (ref), p2 (ref), roactModule (copy), externalEventConnection (copy), userInputService (copy), getInputGroup (copy), inputTypeModule (copy), uDim2 (ref), uDim2_1 (ref), overlay (copy), var1 (ref), fullPageModal (copy), buttonType (copy), leaveCreationAlertModule (copy), validationErrorModalModule (copy), previewViewportModule (copy)
+		local theme = p3.Theme
 		
 		return roactModule.createFragment({
 			LastInputTypeConnection = roactModule.createElement(externalEventConnection, {
 				event = userInputService.LastInputTypeChanged,
-				callback = function(p18)
-					-- upvalues: p15 (copy), getInputGroup (copy), inputTypeModule (copy)
-					p15:setState({
-						isGamepad = getInputGroup(p18) == inputTypeModule.InputTypeConstants.Gamepad
+				callback = function(p4)
+					-- upvalues: p1 (copy), getInputGroup (copy), inputTypeModule (copy)
+					p1:setState({
+						isGamepad = getInputGroup(p4) == inputTypeModule.InputTypeConstants.Gamepad
 					})
 				end
 			}),
@@ -305,45 +305,45 @@ function basePublishPrompt.renderAlertLocalized(p15, p16)
 			}),
 			PublishPrompt = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 1, -var30),
-				Position = UDim2.fromOffset(0, var30),
-				Visible = not p15.state.showUnsavedDataWarning and (not p15.props.showingPreviewView and not p15.props.showTopScrim)
+				Size = UDim2.new(1, 0, 1, -var1),
+				Position = UDim2.fromOffset(0, var1),
+				Visible = not p1.state.showUnsavedDataWarning and (not p1.props.showingPreviewView and not p1.props.showTopScrim)
 			}, {
 				FullPageModal = roactModule.createElement(fullPageModal, {
 					distanceFromTop = 4,
 					marginSize = 0,
-					title = p15.props.titleText,
-					onCloseClicked = p15.showUnsavedDataWarning,
-					screenSize = p15.props.screenSize,
+					title = p1.props.titleText,
+					onCloseClicked = p1.showUnsavedDataWarning,
+					screenSize = p1.props.screenSize,
 					buttonStackProps = {
 						disableRoactGamepadButtonSelection = true,
 						buttons = {
 							{
 								buttonType = buttonType.PrimarySystem,
 								props = {
-									isDisabled = not p15.props.canSubmit(),
-									isDelayedInput = p15.props.isDelayedInput,
-									enableInputDelayed = p15.props.enableInputDelayed,
-									delayInputSeconds = p15.props.delayInputSeconds,
-									onActivated = p15.confirmAndUpload,
-									text = if p15.props.priceInRobux and p15.props.priceInRobux > 0 then string.format("%s %i", "\238\128\130", p15.props.priceInRobux) else p16.submit,
-									isLoading = not p15.props.priceInRobux
+									isDisabled = not p1.props.canSubmit(),
+									isDelayedInput = p1.props.isDelayedInput,
+									enableInputDelayed = p1.props.enableInputDelayed,
+									delayInputSeconds = p1.props.delayInputSeconds,
+									onActivated = p1.confirmAndUpload,
+									text = if p1.props.priceInRobux and p1.props.priceInRobux > 0 then string.format("%s %i", "\238\128\130", p1.props.priceInRobux) else p2.submit,
+									isLoading = not p1.props.priceInRobux
 								}
 							}
 						}
 					}
-				}, { middleContent = p15:renderMiddle(p16) })
+				}, { middleContent = p1:renderMiddle(p2) })
 			}),
-			LeaveCreationAlert = if p15.state.showUnsavedDataWarning then roactModule.createElement(leaveCreationAlertModule, {
-				screenSize = p15.props.screenSize,
-				closePrompt = p15.denyAndClose,
-				cancelClosePrompt = p15.cancelClosePrompt
+			LeaveCreationAlert = if p1.state.showUnsavedDataWarning then roactModule.createElement(leaveCreationAlertModule, {
+				screenSize = p1.props.screenSize,
+				closePrompt = p1.denyAndClose,
+				cancelClosePrompt = p1.cancelClosePrompt
 			}) else nil,
-			ValidationErrorAlert = if p15.props.errorMessage then roactModule.createElement(validationErrorModalModule, {
-				screenSize = p15.props.screenSize,
-				closePrompt = p15.closePrompt
+			ValidationErrorAlert = if p1.props.errorMessage then roactModule.createElement(validationErrorModalModule, {
+				screenSize = p1.props.screenSize,
+				closePrompt = p1.closePrompt
 			}) else nil,
-			PreviewFrame = p15.props.showingPreviewView and roactModule.createElement("Frame", {
+			PreviewFrame = p1.props.showingPreviewView and roactModule.createElement("Frame", {
 				Size = UDim2.new(1, 0, 1, 0),
 				BackgroundColor3 = theme.BackgroundUIDefault.Color,
 				AnchorPoint = Vector2.new(0.5, 0.5),
@@ -351,9 +351,9 @@ function basePublishPrompt.renderAlertLocalized(p15, p16)
 				BackgroundTransparency = theme.BackgroundUIDefault.Transparency
 			}, {
 				PreviewViewport = roactModule.createElement(previewViewportModule, {
-					asset = p15.props.asset,
-					closePreviewView = p15.props.closePreviewView,
-					isMakeupPreview = p15.props.isMakeupPreview
+					asset = p1.props.asset,
+					closePreviewView = p1.props.closePreviewView,
+					isMakeupPreview = p1.props.isMakeupPreview
 				})
 			}) or nil,
 			TopScrim = roactModule.createElement("Frame", {
@@ -361,7 +361,7 @@ function basePublishPrompt.renderAlertLocalized(p15, p16)
 				BackgroundTransparency = 1,
 				Position = uDim2,
 				Size = uDim2_1,
-				Visible = p15.props.showTopScrim
+				Visible = p1.props.showTopScrim
 			}, {
 				InputSink = roactModule.createElement("TextButton", {
 					BackgroundTransparency = 1,
@@ -381,41 +381,41 @@ local _ = function()
 	}
 end
 
-function basePublishPrompt.render(p19)
+function basePublishPrompt.render(p1)
 	-- upvalues: robloxTranslatorModule (ref)
-	return p19:renderAlertLocalized({
+	return p1:renderAlertLocalized({
 		submit = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Submit"),
 		disclaimer = robloxTranslatorModule:FormatByKey("CoreScripts.PublishCommon.Disclaimer")
 	})
 end
 
-function basePublishPrompt.willUnmount(p20)
-	p20:removeMouseIconBehaviorOverride()
-	p20:cleanupGamepad()
+function basePublishPrompt.willUnmount(p1)
+	p1:removeMouseIconBehaviorOverride()
+	p1:cleanupGamepad()
 	
-	if p20.disposeUiScaleEffect then
-		p20.disposeUiScaleEffect()
+	if p1.disposeUiScaleEffect then
+		p1.disposeUiScaleEffect()
 	end
-	p20.props.SetPromptVisibility(false)
+	p1.props.SetPromptVisibility(false)
 end
 
-return roactRoduxModule.connect(function(p21)
+return roactRoduxModule.connect(function(p1)
 	return {
-		guid = p21.promptRequest.promptInfo.guid,
-		scopes = p21.promptRequest.promptInfo.scopes,
-		errorMessage = p21.promptRequest.promptInfo.errorMessage,
-		promptVisible = p21.promptRequest.promptInfo.promptVisible
+		guid = p1.promptRequest.promptInfo.guid,
+		scopes = p1.promptRequest.promptInfo.scopes,
+		errorMessage = p1.promptRequest.promptInfo.errorMessage,
+		promptVisible = p1.promptRequest.promptInfo.promptVisible
 	}
-end, function(p22)
+end, function(p1)
 	-- upvalues: closeOpenPromptModule (ref), setPromptVisibilityModule (ref)
 	return {
 		closePrompt = function()
-			-- upvalues: p22 (ref), closeOpenPromptModule (copy)
-			return p22(closeOpenPromptModule())
+			-- upvalues: p1 (ref), closeOpenPromptModule (copy)
+			return p1(closeOpenPromptModule())
 		end,
 		SetPromptVisibility = function(value)
-			-- upvalues: p22 (ref), setPromptVisibilityModule (copy)
-			return p22(setPromptVisibilityModule(value))
+			-- upvalues: p1 (ref), setPromptVisibilityModule (copy)
+			return p1(setPromptVisibilityModule(value))
 		end
 	}
 end)(basePublishPrompt)

@@ -22,35 +22,35 @@ local t = {
 	navigateBack = function() end
 }
 
-return memo(function(p0)
+return memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useState (ref), useCallback (ref), useRef (ref), conversationExitTypeModule (ref), useEffect (ref), reactModule (ref), pendingStateIndicatorModule (ref), pendingStateModalContainerModule (ref)
-	local var7 = cryoModule.Dictionary.join(t, p0)
-	local style = var7.style or useStyle()
-	local var9, var10 = useState(0)
-	local var11 = useCallback(function(p1)
-		-- upvalues: var10 (ref)
-		var10(p1)
-	end, { var10 })
-	local var12 = useCallback(function()
-		-- upvalues: var7 (ref)
-		var7.navigateToToast({
-			toastProps = { toastContent = { toastTitle = var7.networkErrorText } }
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local style = var1.style or useStyle()
+	local var2, var3 = useState(0)
+	local var4 = useCallback(function(p2)
+		-- upvalues: var3 (ref)
+		var3(p2)
+	end, { var3 })
+	local var5 = useCallback(function()
+		-- upvalues: var1 (ref)
+		var1.navigateToToast({
+			toastProps = { toastContent = { toastTitle = var1.networkErrorText } }
 		})
-	end, { var7.navigateToToast, var7.networkErrorText })
-	local var13 = useRef(conversationExitTypeModule.Default)
-	local var14 = useCallback(function(_, p2, p3)
-		-- upvalues: var7 (ref), var13 (ref), conversationExitTypeModule (copy)
-		if not var7.wideMode and p2 == Enum.SwipeDirection.Right and p3 == 1 then
-			var13.current = conversationExitTypeModule.SwipedRight
-			var7.navigateBack()
+	end, { var1.navigateToToast, var1.networkErrorText })
+	local var6 = useRef(conversationExitTypeModule.Default)
+	local var7 = useCallback(function(_, p2, p3)
+		-- upvalues: var1 (ref), var6 (ref), conversationExitTypeModule (copy)
+		if not var1.wideMode and p2 == Enum.SwipeDirection.Right and p3 == 1 then
+			var6.current = conversationExitTypeModule.SwipedRight
+			var1.navigateBack()
 		end
-	end, { var7.wideMode, var7.navigateBack })
+	end, { var1.wideMode, var1.navigateBack })
 	useEffect(function()
-		-- upvalues: var7 (ref), var13 (ref), conversationExitTypeModule (copy)
+		-- upvalues: var1 (ref), var6 (ref), conversationExitTypeModule (copy)
 		return function()
-			-- upvalues: var7 (copy), var13 (copy), conversationExitTypeModule (copy)
-			var7.onConversationUnmount(var13.current)
-			var13.current = conversationExitTypeModule.Default
+			-- upvalues: var1 (copy), var6 (copy), conversationExitTypeModule (copy)
+			var1.onConversationUnmount(var6.current)
+			var6.current = conversationExitTypeModule.Default
 		end
 	end, {})
 	
@@ -60,19 +60,19 @@ return memo(function(p0)
 		Size = UDim2.new(1, 0, 1, 0),
 		Transparency = style.Tokens.Color.None.Transparency,
 		Text = "",
-		LayoutOrder = var7.layoutOrder,
-		[reactModule.Event.TouchSwipe] = var14
+		LayoutOrder = var1.layoutOrder,
+		[reactModule.Event.TouchSwipe] = var7
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		PendingStateIndicator = reactModule.createElement(pendingStateIndicatorModule, { layoutOrder = 1, size = UDim2.new(1, 0, 1, -var9) }),
+		PendingStateIndicator = reactModule.createElement(pendingStateIndicatorModule, { layoutOrder = 1, size = UDim2.new(1, 0, 1, -var2) }),
 		ConversationBottomModal = reactModule.createElement(pendingStateModalContainerModule, {
 			layoutOrder = 2,
-			conversationId = var7.conversationId,
-			showNetworkErrorToast = var12,
-			onHeightChanged = var11
+			conversationId = var1.conversationId,
+			showNetworkErrorToast = var5,
+			onHeightChanged = var4
 		})
 	})
 end)

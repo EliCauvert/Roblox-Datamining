@@ -16,13 +16,13 @@ local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 
 return function()
 	-- upvalues: localization (ref), localizationService (ref), settingsPageFactoryModule (ref), constantsModule (ref), fFlagEnableSideSheet (ref), reactRobloxModule (ref), reactModule (ref), foundationProvider (ref), foundationModule (ref), utilsModule (ref), localizationProvider (ref), traversalHistoryPageModule (ref)
-	local var11 = localization.new(localizationService.RobloxLocaleId)
+	local var1 = localization.new(localizationService.RobloxLocaleId)
 	local traversalHistoryPage = settingsPageFactoryModule:CreateNewPage()
 	traversalHistoryPage.Page:ClearAllChildren()
 	traversalHistoryPage.Page.Name = "TraversalHistoryPage"
 	traversalHistoryPage.TabHeader.Name = constantsModule.TRAVERSAL_HISTORY.TAB_HEADER.NAME
 	traversalHistoryPage.TabHeader.TabLabel.Title.AutoLocalize = false
-	traversalHistoryPage.TabHeader.TabLabel.Title.Text = var11:Format(constantsModule.TRAVERSAL_HISTORY.TAB_HEADER.TEXT_KEY)
+	traversalHistoryPage.TabHeader.TabLabel.Title.Text = var1:Format(constantsModule.TRAVERSAL_HISTORY.TAB_HEADER.TEXT_KEY)
 	traversalHistoryPage.PageListLayout.Parent = nil
 	traversalHistoryPage.ShouldShowBottomBar = not fFlagEnableSideSheet
 	traversalHistoryPage.ShouldShowHubBar = true
@@ -31,7 +31,7 @@ return function()
 		colorMode = foundationModule.Enums.ColorMode.Dark,
 		device = utilsModule.getDeviceType()
 	}, {
-		Localization = reactModule.createElement(localizationProvider, { localization = var11 }, {
+		Localization = reactModule.createElement(localizationProvider, { localization = var1 }, {
 			Page = reactModule.createElement(traversalHistoryPageModule)
 		})
 	}))

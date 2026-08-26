@@ -256,75 +256,75 @@ end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), timestampModule (ref)
-	local var1 = t_1.new()
+	local var40 = t_1.new()
 	
 	if self.id ~= nil then
-		var1.id = self.id
+		var40.id = self.id
 	end
 	if self.display_name ~= nil then
-		var1.display_name = self.display_name
+		var40.display_name = self.display_name
 	end
 	if self.displayName ~= nil then
-		var1.display_name = self.displayName
+		var40.display_name = self.displayName
 	end
 	if self.display_icon_image_id ~= nil then
-		var1.display_icon_image_id = self.display_icon_image_id
+		var40.display_icon_image_id = self.display_icon_image_id
 	end
 	if self.displayIconImageId ~= nil then
-		var1.display_icon_image_id = self.displayIconImageId
+		var40.display_icon_image_id = self.displayIconImageId
 	end
 	if self.display_description ~= nil then
-		var1.display_description = self.display_description
+		var40.display_description = self.display_description
 	end
 	if self.displayDescription ~= nil then
-		var1.display_description = self.displayDescription
+		var40.display_description = self.displayDescription
 	end
 	if self.total_awarded_count ~= nil then
-		var1.total_awarded_count = self.total_awarded_count
+		var40.total_awarded_count = self.total_awarded_count
 	end
 	if self.totalAwardedCount ~= nil then
-		var1.total_awarded_count = self.totalAwardedCount
+		var40.total_awarded_count = self.totalAwardedCount
 	end
 	if self.past_day_awarded_count ~= nil then
-		var1.past_day_awarded_count = self.past_day_awarded_count
+		var40.past_day_awarded_count = self.past_day_awarded_count
 	end
 	if self.pastDayAwardedCount ~= nil then
-		var1.past_day_awarded_count = self.pastDayAwardedCount
+		var40.past_day_awarded_count = self.pastDayAwardedCount
 	end
 	if self.rarity ~= nil then
-		var1.rarity = self.rarity
+		var40.rarity = self.rarity
 	end
 	if self.badge_type_label ~= nil then
-		var1.badge_type_label = self.badge_type_label
+		var40.badge_type_label = self.badge_type_label
 	end
 	if self.badgeTypeLabel ~= nil then
-		var1.badge_type_label = self.badgeTypeLabel
+		var40.badge_type_label = self.badgeTypeLabel
 	end
 	if self.created_time ~= nil then
-		var1.created_time = timestampModule.Timestamp.jsonDecode(self.created_time)
+		var40.created_time = timestampModule.Timestamp.jsonDecode(self.created_time)
 	end
 	if self.createdTime ~= nil then
-		var1.created_time = timestampModule.Timestamp.jsonDecode(self.createdTime)
+		var40.created_time = timestampModule.Timestamp.jsonDecode(self.createdTime)
 	end
 	if self.updated_time ~= nil then
-		var1.updated_time = timestampModule.Timestamp.jsonDecode(self.updated_time)
+		var40.updated_time = timestampModule.Timestamp.jsonDecode(self.updated_time)
 	end
 	if self.updatedTime ~= nil then
-		var1.updated_time = timestampModule.Timestamp.jsonDecode(self.updatedTime)
+		var40.updated_time = timestampModule.Timestamp.jsonDecode(self.updatedTime)
 	end
 	if self.is_earned_by_user ~= nil then
-		var1.is_earned_by_user = self.is_earned_by_user
+		var40.is_earned_by_user = self.is_earned_by_user
 	end
 	if self.isEarnedByUser ~= nil then
-		var1.is_earned_by_user = self.isEarnedByUser
+		var40.is_earned_by_user = self.isEarnedByUser
 	end
 	if self.awarded_time ~= nil then
-		var1.awarded_time = timestampModule.Timestamp.jsonDecode(self.awarded_time)
+		var40.awarded_time = timestampModule.Timestamp.jsonDecode(self.awarded_time)
 	end
 	if self.awardedTime ~= nil then
-		var1.awarded_time = timestampModule.Timestamp.jsonDecode(self.awardedTime)
+		var40.awarded_time = timestampModule.Timestamp.jsonDecode(self.awardedTime)
 	end
-	return var1
+	return var40
 end
 
 t_1.descriptor = {

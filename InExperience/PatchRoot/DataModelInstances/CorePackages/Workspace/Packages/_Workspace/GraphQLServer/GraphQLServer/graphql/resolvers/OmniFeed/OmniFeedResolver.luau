@@ -6,18 +6,18 @@ local fetchMoreOmniRecommendationMetadata = omniFeedConnectorModule.fetchMoreOmn
 local _ = require(script.Parent.Parent.Parent.generatedTypes)
 t.default = {
 	OmniFeedItem = {
-		experiences = function(p0)
-			if not p0.metadata or not p0.metadata.Game or not p0.recommendations then
+		experiences = function(p1)
+			if not p1.metadata or not p1.metadata.Game or not p1.recommendations then
 				return nil
 			end
-			local game = p0.metadata.Game
+			local game = p1.metadata.Game
 			local t = {}
 			
-			for i, v in p0.recommendations do
+			for i, v in p1.recommendations do
 				if v.contentId then
 					local contentId = game[tostring(v.contentId)]
 					local contentMetadata = v.contentMetadata
-					local var3 = if contentMetadata and contentMetadata.EncryptedAdTrackingData then contentMetadata.EncryptedAdTrackingData else nil
+					local var1 = if contentMetadata and contentMetadata.EncryptedAdTrackingData then contentMetadata.EncryptedAdTrackingData else nil
 					
 					if contentId and contentId.universeId then
 						table.insert(t, {
@@ -29,8 +29,8 @@ t.default = {
 							playerCount = contentId.playerCount,
 							under9 = if contentId.under9 then contentId.under9 else false,
 							under13 = if contentId.under13 then contentId.under13 else false,
-							adId = var3 or "",
-							isSponsored = var3 ~= nil and var3 ~= ""
+							adId = var1 or "",
+							isSponsored = var1 ~= nil and var1 ~= ""
 						})
 					end
 				end
@@ -39,8 +39,8 @@ t.default = {
 		end
 	},
 	OmniFeedMetadata = {
-		GameJSON = function(p1)
-			return p1.Game
+		GameJSON = function(p2)
+			return p2.Game
 		end,
 		CatalogAssetJSON = function(value)
 			return value.CatalogAsset
@@ -48,57 +48,57 @@ t.default = {
 		CatalogBundleJSON = function(p2)
 			return p2.CatalogBundle
 		end,
-		RecommendedFriendJSON = function(p3)
-			return p3.RecommendedFriend
+		RecommendedFriendJSON = function(p2)
+			return p2.RecommendedFriend
 		end
 	},
 	OmniFeed = {
-		metadata = function(p4)
-			return p4.contentMetadata
+		metadata = function(p2)
+			return p2.contentMetadata
 		end,
-		sortsExpirationTime = function(p5)
-			return if p5.sortsRefreshInterval then math.floor(tick()) + p5.sortsRefreshInterval else nil
+		sortsExpirationTime = function(p2)
+			return if p2.sortsRefreshInterval then math.floor(tick()) + p2.sortsRefreshInterval else nil
 		end,
-		recommendationsId = function(p6)
-			return p6.requestId
+		recommendationsId = function(p2)
+			return p2.requestId
 		end,
-		globalLayoutData = function(p7)
-			return p7.globalLayoutData
+		globalLayoutData = function(p2)
+			return p2.globalLayoutData
 		end,
-		sorts = function(p8)
+		sorts = function(p2)
 			-- upvalues: array (ref)
-			return if p8.sorts then array.map(p8.sorts, function(p9)
-				-- upvalues: p8 (ref)
+			return if p2.sorts then array.map(p2.sorts, function(p3)
+				-- upvalues: p2 (ref)
 				return {
-					topic = p9.topic,
-					topicId = p9.topicId,
-					treatmentType = p9.treatmentType,
-					recommendations = p9.recommendationList,
-					metadata = p8.contentMetadata
+					topic = p3.topic,
+					topicId = p3.topicId,
+					treatmentType = p3.treatmentType,
+					recommendations = p3.recommendationList,
+					metadata = p2.contentMetadata
 				}
 			end) else nil
 		end
 	},
 	OmniFeedItemWithMetadata = {
-		metadata = function(p10)
-			return p10.contentMetadata
+		metadata = function(p2)
+			return p2.contentMetadata
 		end,
-		sort = function(p11)
+		sort = function(p2)
 			return {
-				topicId = p11.topicId,
-				metadata = p11.contentMetadata,
-				recommendations = p11.recommendations
+				topicId = p2.topicId,
+				metadata = p2.contentMetadata,
+				recommendations = p2.recommendations
 			}
 		end
 	},
 	Query = {
-		omniFeed = function(_, p12, p13)
+		omniFeed = function(_, p2, p3)
 			-- upvalues: findOmniFeedBySessionId (ref)
-			return findOmniFeedBySessionId(p12, p13.fetchImpl)
+			return findOmniFeedBySessionId(p2, p3.fetchImpl)
 		end,
-		refreshOmniFeedItem = function(_, p14, p15)
+		refreshOmniFeedItem = function(_, p2, p3)
 			-- upvalues: fetchMoreOmniRecommendationMetadata (ref)
-			return fetchMoreOmniRecommendationMetadata(p14, p15.fetchImpl)
+			return fetchMoreOmniRecommendationMetadata(p2, p3.fetchImpl)
 		end
 	}
 }

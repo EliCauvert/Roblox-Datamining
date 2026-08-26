@@ -30,17 +30,17 @@ end
 
 function t:start()
 	-- upvalues: getClientReplicatorModule (ref), httpService (ref)
-	local var5 = getClientReplicatorModule()
+	local var1 = getClientReplicatorModule()
 	
-	if var5 and not self._statsListenerConnection then
-		self._statsListenerConnection = var5.StatsReceived:connect(function(p0)
+	if var1 and not self._statsListenerConnection then
+		self._statsListenerConnection = var1.StatsReceived:connect(function(p1)
 			-- upvalues: self (ref), httpService (copy)
-			if p0 and p0.ServerLuauHeapData and #p0.ServerLuauHeapData > 0 then
-				self._serverStatsData = httpService:JSONDecode(p0.ServerLuauHeapData)
+			if p1 and p1.ServerLuauHeapData and #p1.ServerLuauHeapData > 0 then
+				self._serverStatsData = httpService:JSONDecode(p1.ServerLuauHeapData)
 				self._serverStatsUpdated:Fire(self._serverStatsData)
 			end
 		end)
-		var5:RequestServerStats(true)
+		var1:RequestServerStats(true)
 		self._isRunning = true
 	end
 end

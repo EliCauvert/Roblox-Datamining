@@ -3,12 +3,12 @@ local _ = require(script.Parent.types)
 
 local function noopCancel() end
 
-local function normalizeResponse(p0)
+local function normalizeResponse(p1)
 	-- upvalues: httpService (ref)
-	return if typeof(p0) == "string" then { statusCode = 200, responseBody = p0 } elseif typeof(p0) == "table" then if p0.statusCode == nil then {
+	return if typeof(p1) == "string" then { statusCode = 200, responseBody = p1 } elseif typeof(p1) == "table" then if p1.statusCode == nil then {
 		statusCode = 200,
-		responseBody = httpService:JSONEncode(p0)
-	} else p0 else { statusCode = 200, responseBody = nil }
+		responseBody = httpService:JSONEncode(p1)
+	} else p1 else { statusCode = 200, responseBody = nil }
 end
 
 return function(p1)

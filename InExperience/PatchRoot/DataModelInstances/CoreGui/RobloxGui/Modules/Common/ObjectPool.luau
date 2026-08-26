@@ -2,39 +2,39 @@
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.GetInstance(p0, p1)
-	if p0.InstancePoolsByClass[p1] == nil then
-		p0.InstancePoolsByClass[p1] = {}
+function t_1.GetInstance(p1, p2)
+	if p1.InstancePoolsByClass[p2] == nil then
+		p1.InstancePoolsByClass[p2] = {}
 	end
-	local count = #p0.InstancePoolsByClass[p1]
+	local count = #p1.InstancePoolsByClass[p2]
 	
 	if count > 0 then
-		local var3 = p0.InstancePoolsByClass[p1][count]
-		table.remove(p0.InstancePoolsByClass[p1])
+		local var1 = p1.InstancePoolsByClass[p2][count]
+		table.remove(p1.InstancePoolsByClass[p2])
 		
-		return var3
+		return var1
 	end
-	return Instance.new(p1)
+	return Instance.new(p2)
 end
 
-function t_1.ReturnInstance(p2, p3)
-	if p2.InstancePoolsByClass[p3.ClassName] == nil then
-		p2.InstancePoolsByClass[p3.ClassName] = {}
+function t_1.ReturnInstance(p1, p2)
+	if p1.InstancePoolsByClass[p2.ClassName] == nil then
+		p1.InstancePoolsByClass[p2.ClassName] = {}
 	end
-	if #p2.InstancePoolsByClass[p3.ClassName] < p2.PoolSizePerType then
-		table.insert(p2.InstancePoolsByClass[p3.ClassName], p3)
+	if #p1.InstancePoolsByClass[p2.ClassName] < p1.PoolSizePerType then
+		table.insert(p1.InstancePoolsByClass[p2.ClassName], p2)
 		
 		return
 	end
-	p3:Destroy()
+	p2:Destroy()
 end
 
-function t.new(p4)
+function t.new(p1)
 	-- upvalues: t_1 (ref)
 	local objectPool = setmetatable({}, t_1)
 	objectPool.InstancePoolsByClass = {}
 	objectPool.Name = "ObjectPool"
-	objectPool.PoolSizePerType = p4
+	objectPool.PoolSizePerType = p1
 	
 	return objectPool
 end

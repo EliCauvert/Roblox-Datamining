@@ -16,8 +16,8 @@ function t.new()
 	return t_1
 end
 
-function t:withEventStream(p0)
-	self.eventStreamImpl = p0
+function t:withEventStream(p1)
+	self.eventStreamImpl = p1
 	
 	return self
 end
@@ -42,16 +42,16 @@ function t:onEmotePlayed(p1, p2)
 	})
 end
 
-function t:onEmoteFailed(p3, p4, p5)
+function t:onEmoteFailed(p1, p2, p3)
 	-- upvalues: playersService (ref), statsService (ref)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.EmoteFailed, {
 		invokedByCoreGui = true,
 		pid = tostring(game.PlaceId),
 		uid = tostring(playersService.LocalPlayer.UserId),
 		btid = statsService:GetBrowserTrackerId(),
-		slotNumber = p3,
-		assetID = p4,
-		errorType = p5
+		slotNumber = p1,
+		assetID = p2,
+		errorType = p3
 	})
 end
 

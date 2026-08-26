@@ -7,115 +7,115 @@ local _ = require(script.Parent.UniverseConfigurationStoreTypes)
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-local function _(p0, p1)
-	return ("%s/v1/universes/%d"):format(p0, p1)
+local function _(p1, p2)
+	return ("%s/v1/universes/%d"):format(p1, p2)
 end
 
-local _ = function(p2, p3)
-	return ("%s/v1/universes/%d/configuration"):format(p2, p3)
+local _ = function(p1, p2)
+	return ("%s/v1/universes/%d/configuration"):format(p1, p2)
 end
 
-local _ = function(p4, p5)
-	return ("%s/v2/universes/%d/configuration"):format(p4, p5)
+local _ = function(p1, p2)
+	return ("%s/v2/universes/%d/configuration"):format(p1, p2)
 end
 
-local _ = function(p6, p7)
-	return ("%s/v1/universes/%d/teamcreate"):format(p6, p7)
+local _ = function(p1, p2)
+	return ("%s/v1/universes/%d/teamcreate"):format(p1, p2)
 end
 
-local _ = function(p8)
+local _ = function(p1)
 	-- upvalues: urlBase (ref)
-	p8 = p8 or {}
+	p1 = p1 or {}
 	
-	return p8.network, p8.baseUrl or urlBase.new("develop")
+	return p1.network, p1.baseUrl or urlBase.new("develop")
 end
 
-local _ = function(p9)
+local _ = function(p1)
 	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
-	return (p9 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
+	return (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 end
 
 return {
-	fetchSummary = function(p10, p11)
+	fetchSummary = function(p1, p2)
 		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
-		p11 = p11 or {}
+		p2 = p2 or {}
 		
 		return asPromise(fetch({
 			method = "GET",
 			analyticsKey = "universe-configuration.get-summary",
 			legacy = true,
-			network = p11.network,
-			url = ("%s/v1/universes/%d"):format(p11.baseUrl or urlBase.new("develop"), p10),
-			decode = function(p12)
-				return p12
+			network = p2.network,
+			url = ("%s/v1/universes/%d"):format(p2.baseUrl or urlBase.new("develop"), p1),
+			decode = function(p3)
+				return p3
 			end
 		}))
 	end,
-	fetchConfiguration = function(p13, p14)
+	fetchConfiguration = function(p1, p2)
 		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
-		p14 = p14 or {}
+		p2 = p2 or {}
 		
 		return asPromise(fetch({
 			method = "GET",
 			analyticsKey = "universe-configuration.get-configuration",
 			legacy = true,
-			network = p14.network,
-			url = ("%s/v1/universes/%d/configuration"):format(p14.baseUrl or urlBase.new("develop"), p13),
-			decode = function(p15)
-				return p15
+			network = p2.network,
+			url = ("%s/v1/universes/%d/configuration"):format(p2.baseUrl or urlBase.new("develop"), p1),
+			decode = function(p3)
+				return p3
 			end
 		}))
 	end,
-	patchConfiguration = function(p16, p17, p18)
+	patchConfiguration = function(p1, p2, p3)
 		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
-		p18 = p18 or {}
-		local _ = p18.network
+		p3 = p3 or {}
+		local _ = p3.network
 		
 		return asPromise(fetch({
 			method = "PATCH",
 			analyticsKey = "universe-configuration.patch-configuration",
 			legacy = true,
-			network = (p18 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/v2/universes/%d/configuration"):format(p18.baseUrl or urlBase.new("develop"), p16),
-			body = p17,
-			decode = function(p19)
-				if p19.studioAccessToApisAllowed ~= nil then
-					p19.isStudioAccessToApisAllowed = p19.studioAccessToApisAllowed
+			network = (p3 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
+			url = ("%s/v2/universes/%d/configuration"):format(p3.baseUrl or urlBase.new("develop"), p1),
+			body = p2,
+			decode = function(p4)
+				if p4.studioAccessToApisAllowed ~= nil then
+					p4.isStudioAccessToApisAllowed = p4.studioAccessToApisAllowed
 				end
-				return p19
+				return p4
 			end
 		}))
 	end,
-	fetchTeamCreate = function(p20, p21)
+	fetchTeamCreate = function(p1, p2)
 		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
-		p21 = p21 or {}
+		p2 = p2 or {}
 		
 		return asPromise(fetch({
 			method = "GET",
 			analyticsKey = "universe-configuration.get-team-create",
 			legacy = true,
-			network = p21.network,
-			url = ("%s/v1/universes/%d/teamcreate"):format(p21.baseUrl or urlBase.new("develop"), p20),
-			decode = function(p22)
-				return p22
+			network = p2.network,
+			url = ("%s/v1/universes/%d/teamcreate"):format(p2.baseUrl or urlBase.new("develop"), p1),
+			decode = function(p3)
+				return p3
 			end
 		}))
 	end,
-	setTeamCreate = function(value, p23, p24)
+	setTeamCreate = function(value, p1, p2)
 		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
-		p24 = p24 or {}
-		local _ = p24.network
+		p2 = p2 or {}
+		local _ = p2.network
 		
 		return asPromise(fetch({
 			method = "PATCH",
 			analyticsKey = "universe-configuration.set-team-create",
 			legacy = true,
-			network = (p24 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/v1/universes/%d/teamcreate"):format(p24.baseUrl or urlBase.new("develop"), value),
-			body = { isEnabled = p23 },
+			network = (p2 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
+			url = ("%s/v1/universes/%d/teamcreate"):format(p2.baseUrl or urlBase.new("develop"), value),
+			body = { isEnabled = p1 },
 			decode = function(_)
-				-- upvalues: p23 (ref)
-				return { isEnabled = p23 }
+				-- upvalues: p1 (ref)
+				return { isEnabled = p1 }
 			end
 		}))
 	end

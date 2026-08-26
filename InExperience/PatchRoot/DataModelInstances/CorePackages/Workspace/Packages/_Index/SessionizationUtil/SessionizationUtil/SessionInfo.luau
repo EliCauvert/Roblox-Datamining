@@ -3,48 +3,48 @@ local sessionType = require(script:FindFirstAncestor("SessionizationUtil").Paren
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2, p3, p4)
+function t.new(p1, p2, p3, p4, p5)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
-	tbl.level = p0
-	tbl.sessionId = p1
-	tbl.tagName = p2
-	tbl.creationTimestamp = p3
-	tbl.metadata = p4 or {}
+	tbl.level = p1
+	tbl.sessionId = p2
+	tbl.tagName = p3
+	tbl.creationTimestamp = p4
+	tbl.metadata = p5 or {}
 	
 	return tbl
 end
 
 function t:__tostring()
-	local var3 = 0
+	local var1 = 0
 	
 	for i in pairs(self.metadata) do
-		var3 += 1
+		var1 += 1
 	end
-	return string.format("SessionInfo{level=%s, sessionId=%s, tagName=%s, creationTimestamp=%s, metadata_count=%d}", tostring(self.level), tostring(self.sessionId), tostring(self.tagName), tostring(self.creationTimestamp), var3)
+	return string.format("SessionInfo{level=%s, sessionId=%s, tagName=%s, creationTimestamp=%s, metadata_count=%d}", tostring(self.level), tostring(self.sessionId), tostring(self.tagName), tostring(self.creationTimestamp), var1)
 end
 
-function t.getSessionByLevel(p5)
+function t.getSessionByLevel(p1)
 	-- upvalues: sessionType (ref), sessionService (ref), t (ref)
-	local rootSID, var6
+	local rootSID, var2
 	local _ = nil
 	local _ = nil
-	local var4 = sessionType.StructuralIdentifier[p5]
+	local var3 = sessionType.StructuralIdentifier[p1]
 	
-	if p5 == sessionType.StructuralIdentifier.Level0 then
+	if p1 == sessionType.StructuralIdentifier.Level0 then
 		rootSID = sessionService:GetRootSID()
-		var6 = nil
-	elseif not var4 then
+		var2 = nil
+	elseif not var3 then
 		rootSID = nil
-		var6 = nil
-	elseif sessionService:SessionExists(var4) then
-		rootSID = sessionService:GetSessionID(var4)
-		var6 = sessionService:GetSessionTag(var4)
+		var2 = nil
+	elseif sessionService:SessionExists(var3) then
+		rootSID = sessionService:GetSessionID(var3)
+		var2 = sessionService:GetSessionTag(var3)
 	else
 		rootSID = nil
-		var6 = nil
+		var2 = nil
 	end
-	return t.new(p5, rootSID, var6, nil, {})
+	return t.new(p1, rootSID, var2, nil, {})
 end
 
 return t

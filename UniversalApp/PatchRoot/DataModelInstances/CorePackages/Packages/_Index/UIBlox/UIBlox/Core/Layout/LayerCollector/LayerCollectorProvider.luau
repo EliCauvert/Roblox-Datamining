@@ -3,10 +3,10 @@ local layerCollectorContextModule = require(script.Parent.LayerCollectorContext)
 local guiService = game:GetService("GuiService")
 local layerCollectorProvider = roactModule.PureComponent:extend("LayerCollectorProvider")
 
-function layerCollectorProvider.init(p0)
+function layerCollectorProvider.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.rootRef = roactModule.createRef()
-	p0.state = {
+	p1.rootRef = roactModule.createRef()
+	p1.state = {
 		absoluteSize = Vector2.new(0, 0),
 		insets = { top = 0, left = 0, bottom = 0, right = 0 }
 	}
@@ -54,36 +54,36 @@ function layerCollectorProvider.watchLayerCollector(p1, p2)
 	end)
 end
 
-function layerCollectorProvider.didMount(p3)
-	local current = p3.rootRef.current
+function layerCollectorProvider.didMount(p1)
+	local current = p1.rootRef.current
 	local layerCollector = current:FindFirstAncestorWhichIsA("LayerCollector")
 	
 	if layerCollector == nil then
-		p3.ancestryConnection = current.AncestryChanged:Connect(function()
-			-- upvalues: layerCollector (write), current (ref), p3 (ref)
+		p1.ancestryConnection = current.AncestryChanged:Connect(function()
+			-- upvalues: layerCollector (write), current (ref), p1 (ref)
 			layerCollector = current:FindFirstAncestorWhichIsA("LayerCollector")
 			
 			if layerCollector ~= nil then
-				p3.ancestryConnection:Disconnect()
-				p3.ancestryConnection = nil
-				p3:watchLayerCollector(layerCollector)
+				p1.ancestryConnection:Disconnect()
+				p1.ancestryConnection = nil
+				p1:watchLayerCollector(layerCollector)
 			end
 		end)
 	else
-		p3:watchLayerCollector(layerCollector)
+		p1:watchLayerCollector(layerCollector)
 	end
 end
 
-function layerCollectorProvider.render(p4)
+function layerCollectorProvider.render(p1)
 	-- upvalues: roactModule (ref), layerCollectorContextModule (ref)
 	return roactModule.createElement(layerCollectorContextModule.Provider, {
 		value = {
-			absoluteSize = p4.state.absoluteSize,
-			insets = p4.state.insets
+			absoluteSize = p1.state.absoluteSize,
+			insets = p1.state.insets
 		}
 	}, {
-		LayerCollectorChildRef = roactModule.createElement("Frame", { Visible = false, [roactModule.Ref] = p4.rootRef }),
-		Children = roactModule.createFragment(p4.props[roactModule.Children])
+		LayerCollectorChildRef = roactModule.createElement("Frame", { Visible = false, [roactModule.Ref] = p1.rootRef }),
+		Children = roactModule.createFragment(p1.props[roactModule.Children])
 	})
 end
 

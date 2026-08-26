@@ -16,13 +16,13 @@ t.__index = t
 function t.new()
 	-- upvalues: t (ref), roactModule (ref), publishAssetPromptAppModule (ref), roduxModule (ref), reducerModule (ref), roactRoduxModule (ref), renderWithCoreScriptsStyleProviderModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), coreGuiService (ref), connectAssetServiceEventsModule (ref)
 	local tbl = setmetatable({}, t)
-	local var12 = roactModule.createElement(publishAssetPromptAppModule)
+	local var1 = roactModule.createElement(publishAssetPromptAppModule)
 	tbl.store = roduxModule.Store.new(reducerModule, nil, { roduxModule.thunkMiddleware })
 	tbl.root = roactModule.createElement("Folder", { Name = "PublishAssetPrompt" }, roactModule.createElement(roactRoduxModule.StoreProvider, { store = tbl.store }, {
 		ThemeProvider = renderWithCoreScriptsStyleProviderModule({
 			LocalizationProvider = roactModule.createElement(localizationProvider, {
 				localization = localization.new(localizationService.RobloxLocaleId)
-			}, { PublishAssetPromptApp = var12 })
+			}, { PublishAssetPromptApp = var1 })
 		})
 	}))
 	tbl.element = roactModule.mount(tbl.root, coreGuiService, "PublishAssetPrompt")

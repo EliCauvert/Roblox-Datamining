@@ -21,9 +21,9 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local getFFlagReportAnythingLocalizationEnabledModule = require(parent.Flags.GetFFlagReportAnythingLocalizationEnabled)
 local dividerModule = require(dependenciesModule.Divider)
 
-local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0)
+local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p1)
 	-- upvalues: reactModule (ref), robloxTranslatorModule (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var10, var11 = reactModule.useState(0)
+	local var1, var2 = reactModule.useState(0)
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		Layout = reactModule.createElement("UIListLayout", {
@@ -38,12 +38,12 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0)
 			TextWrapped = true,
 			BackgroundTransparency = 1,
 			Text = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.SceneCaptured"),
-			Font = p0.font.Header2.Font,
-			TextColor3 = p0.theme.TextEmphasis.Color,
-			TextTransparency = p0.theme.TextEmphasis.Transparency,
+			Font = p1.font.Header2.Font,
+			TextColor3 = p1.theme.TextEmphasis.Color,
+			TextTransparency = p1.theme.TextEmphasis.Transparency,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			Size = UDim2.new(0, p0.viewportWidth - var10 - 50, 1, 0)
+			Size = UDim2.new(0, p1.viewportWidth - var1 - 50, 1, 0)
 		}),
 		RetakeButton = reactModule.createElement(button, {
 			buttonType = buttonType.Secondary,
@@ -51,30 +51,30 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0)
 			fitContent = true,
 			standardSize = standardButtonSize.XSmall,
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: p0 (ref)
-				p0.setShowRestartDialog(true)
-			end, { p0.setShowRestartDialog }),
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1)
-				-- upvalues: var11 (ref)
-				var11(p1.AbsoluteSize.X)
-			end, { var11 })
+				-- upvalues: p1 (ref)
+				p1.setShowRestartDialog(true)
+			end, { p1.setShowRestartDialog }),
+			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
+				-- upvalues: var2 (ref)
+				var2(p2.AbsoluteSize.X)
+			end, { var2 })
 		})
 	})
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: reactModule (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), useStyle (ref), restartScreenshotDialogModule (ref), imageSetButton (ref), assetsModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), ScreenshotReviewDialogSmallPortraitModeHeaderRight (ref), button (ref), buttonType (ref), robloxTranslatorModule (ref), standardButtonSize (ref), dividerModule (ref), buttonStack (ref)
 	reactModule.useEffect(function()
-		-- upvalues: p2 (ref)
-		if p2.reportAnythingAnalytics then
-			p2.reportAnythingAnalytics.incrementAnnotationOptionSeen()
+		-- upvalues: p1 (ref)
+		if p1.reportAnythingAnalytics then
+			p1.reportAnythingAnalytics.incrementAnnotationOptionSeen()
 		end
 	end, {})
-	local var12 = if getFFlagReportAnythingLocalizationEnabledModule() and p2.isSmallPortraitMode then 104 else 60
-	local var13, var14 = reactModule.useState(false)
-	local var15 = useStyle()
-	local theme = var15.Theme
-	local font = var15.Font
+	local var1 = if getFFlagReportAnythingLocalizationEnabledModule() and p1.isSmallPortraitMode then 104 else 60
+	local var2, var3 = reactModule.useState(false)
+	local var4 = useStyle()
+	local theme = var4.Theme
+	local font = var4.Font
 	
 	return reactModule.createElement("TextButton", {
 		AutoButtonColor = false,
@@ -84,29 +84,29 @@ return function(p2)
 		Size = UDim2.fromScale(1, 1),
 		ZIndex = 10,
 		Text = "",
-		[reactModule.Event.Activated] = p2.onBack
+		[reactModule.Event.Activated] = p1.onBack
 	}, {
 		Container = reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 0,
 			ZIndex = 10,
-			Size = if p2.isSmallPortraitMode then UDim2.new(1, 0, 1, 0) elseif p2.viewportHeight >= 800 then UDim2.new(0, 800, 0, 800) else UDim2.new(1, 0, 1, 0),
+			Size = if p1.isSmallPortraitMode then UDim2.new(1, 0, 1, 0) elseif p1.viewportHeight >= 800 then UDim2.new(0, 800, 0, 800) else UDim2.new(1, 0, 1, 0),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = theme.Overlay.Color
 		}, {
-			RestartDialog = var13 and reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+			RestartDialog = var2 and reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 				DialogBody = reactModule.createElement(restartScreenshotDialogModule, {
 					ZIndex = 3,
-					isSmallPortraitMode = p2.isSmallPortraitMode,
+					isSmallPortraitMode = p1.isSmallPortraitMode,
 					onCancel = function()
-						-- upvalues: var14 (ref)
-						var14(false)
+						-- upvalues: var3 (ref)
+						var3(false)
 					end,
-					onRestart = p2.onRestart
+					onRestart = p1.onRestart
 				})
 			}),
-			RestartDialogMask = var13 and reactModule.createElement(imageSetButton, {
+			RestartDialogMask = var2 and reactModule.createElement(imageSetButton, {
 				BackgroundTransparency = 0.2,
 				Active = true,
 				AutoButtonColor = false,
@@ -139,7 +139,7 @@ return function(p2)
 				}),
 				HeaderAndContent = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, 0, 1, -var12)
+					Size = UDim2.new(1, 0, 1, -var1)
 				}, {
 					Layout = reactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
@@ -157,37 +157,37 @@ return function(p2)
 							barHeight = 48,
 							margin = 12,
 							renderLeft = function()
-								-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p2 (ref)
+								-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p1 (ref)
 								return reactModule.createElement(iconButton, {
 									iconSize = iconSize.Medium,
 									icon = images["icons/navigation/pushBack"],
 									onActivated = function()
-										-- upvalues: p2 (copy)
-										p2.onBack()
+										-- upvalues: p1 (copy)
+										p1.onBack()
 									end
 								})
 							end,
 							renderRight = function()
-								-- upvalues: getFFlagReportAnythingLocalizationEnabledModule (copy), p2 (ref), reactModule (copy), ScreenshotReviewDialogSmallPortraitModeHeaderRight (copy), var14 (ref), font (ref), theme (ref), button (copy), buttonType (copy), robloxTranslatorModule (copy), standardButtonSize (copy)
-								return if getFFlagReportAnythingLocalizationEnabledModule() and p2.isSmallPortraitMode then reactModule.createElement(ScreenshotReviewDialogSmallPortraitModeHeaderRight, {
-									setShowRestartDialog = var14,
+								-- upvalues: getFFlagReportAnythingLocalizationEnabledModule (copy), p1 (ref), reactModule (copy), ScreenshotReviewDialogSmallPortraitModeHeaderRight (copy), var3 (ref), font (ref), theme (ref), button (copy), buttonType (copy), robloxTranslatorModule (copy), standardButtonSize (copy)
+								return if getFFlagReportAnythingLocalizationEnabledModule() and p1.isSmallPortraitMode then reactModule.createElement(ScreenshotReviewDialogSmallPortraitModeHeaderRight, {
+									setShowRestartDialog = var3,
 									font = font,
 									theme = theme,
-									viewportWidth = p2.viewportWidth
+									viewportWidth = p1.viewportWidth
 								}) else reactModule.createElement(button, {
 									buttonType = buttonType.Secondary,
-									size = if getFFlagReportAnythingLocalizationEnabledModule() then nil else UDim2.new(0, if p2.isSmallPortraitMode then 72 else 120, 0, if p2.isSmallPortraitMode then 28 else 36),
+									size = if getFFlagReportAnythingLocalizationEnabledModule() then nil else UDim2.new(0, if p1.isSmallPortraitMode then 72 else 120, 0, if p1.isSmallPortraitMode then 28 else 36),
 									text = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Retake") else "Retake",
 									fitContent = getFFlagReportAnythingLocalizationEnabledModule(),
 									standardSize = if getFFlagReportAnythingLocalizationEnabledModule() then standardButtonSize.XSmall else nil,
 									onActivated = function()
-										-- upvalues: var14 (copy)
-										var14(true)
+										-- upvalues: var3 (copy)
+										var3(true)
 									end
 								})
 							end,
-							title = if getFFlagReportAnythingLocalizationEnabledModule() then if p2.isSmallPortraitMode then nil else robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.SceneCaptured") else "Scene Captured",
-							isSecondary = p2.isSmallPortraitMode
+							title = if getFFlagReportAnythingLocalizationEnabledModule() then if p1.isSmallPortraitMode then nil else robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.SceneCaptured") else "Scene Captured",
+							isSecondary = p1.isSmallPortraitMode
 						})
 					}),
 					Divider = reactModule.createElement(dividerModule, { LayoutOrder = 2 }),
@@ -223,11 +223,11 @@ return function(p2)
 								BorderMode = Enum.BorderMode.Inset,
 								BorderColor3 = Color3.fromRGB(255, 255, 255)
 							}, {
-								UIAspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", { AspectRatio = p2.imageAspectRatio }),
+								UIAspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", { AspectRatio = p1.imageAspectRatio }),
 								ScreenshotImage = reactModule.createElement(imageSetButton, {
 									Active = true,
 									Size = UDim2.fromScale(1, 1),
-									Image = p2.screenshot,
+									Image = p1.screenshot,
 									ZIndex = 1,
 									AnchorPoint = Vector2.new(0.5, 0.5),
 									Position = UDim2.fromScale(0.5, 0.5),
@@ -235,8 +235,8 @@ return function(p2)
 									ScaleType = Enum.ScaleType.Fit,
 									SliceCenter = assetsModule.Images.RoundedRect.SliceCenter,
 									[reactModule.Event.Activated] = function()
-										-- upvalues: p2 (ref)
-										p2.onNextPage()
+										-- upvalues: p1 (ref)
+										p1.onNextPage()
 									end
 								})
 							})
@@ -248,17 +248,17 @@ return function(p2)
 							Font = font.Header1.Font,
 							TextColor3 = theme.TextEmphasis.Color,
 							TextTransparency = theme.TextEmphasis.Transparency,
-							TextSize = if p2.isSmallPortraitMode then 12 else 20,
+							TextSize = if p1.isSmallPortraitMode then 12 else 20,
 							TextXAlignment = Enum.TextXAlignment.Center,
 							TextWrapped = getFFlagReportAnythingLocalizationEnabledModule(),
-							Size = if getFFlagReportAnythingLocalizationEnabledModule() then UDim2.new(1, -24, 0, if p2.isSmallPortraitMode then 24 else 40) else UDim2.new(1, 0, 0, 20)
+							Size = if getFFlagReportAnythingLocalizationEnabledModule() then UDim2.new(1, -24, 0, if p1.isSmallPortraitMode then 24 else 40) else UDim2.new(1, 0, 0, 20)
 						})
 					})
 				}),
 				Footer = reactModule.createElement("Frame", {
 					BackgroundTransparency = 0,
 					LayoutOrder = 4,
-					Size = UDim2.new(1, 0, 0, var12),
+					Size = UDim2.new(1, 0, 0, var1),
 					BackgroundColor3 = Color3.fromHex("#4F545F"),
 					AnchorPoint = Vector2.new(0, 1),
 					Position = UDim2.fromScale(0, 1)
@@ -269,7 +269,7 @@ return function(p2)
 					}),
 					Container = reactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
-						Size = if getFFlagReportAnythingLocalizationEnabledModule() and p2.isSmallPortraitMode then UDim2.new(1, 0, 1, 0) else UDim2.new(0, if p2.isSmallPortraitMode then 400 else 612, 1, 0)
+						Size = if getFFlagReportAnythingLocalizationEnabledModule() and p1.isSmallPortraitMode then UDim2.new(1, 0, 1, 0) else UDim2.new(0, if p1.isSmallPortraitMode then 400 else 612, 1, 0)
 					}, {
 						Padding = reactModule.createElement("UIPadding", {
 							PaddingTop = UDim.new(0, 12),
@@ -279,12 +279,12 @@ return function(p2)
 						}),
 						ActionButtons = reactModule.createElement(buttonStack, {
 							marginBetween = 8,
-							forcedFillDirection = if getFFlagReportAnythingLocalizationEnabledModule() and p2.isSmallPortraitMode then Enum.FillDirection.Vertical else nil,
+							forcedFillDirection = if getFFlagReportAnythingLocalizationEnabledModule() and p1.isSmallPortraitMode then Enum.FillDirection.Vertical else nil,
 							buttons = {
 								{
 									buttonType = buttonType.Secondary,
 									props = {
-										onActivated = p2.onSkip,
+										onActivated = p1.onSkip,
 										text = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.AttachScreenshot") else "Attach Screenshot"
 									}
 								},
@@ -292,8 +292,8 @@ return function(p2)
 									buttonType = buttonType.PrimarySystem,
 									props = {
 										onActivated = function()
-											-- upvalues: p2 (ref)
-											p2.onNextPage()
+											-- upvalues: p1 (ref)
+											p1.onNextPage()
 										end,
 										text = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.HighlightScene") else "Highlight Scene"
 									}

@@ -12,26 +12,26 @@ local offset = constantsModule.Tooltip.Offset
 local maxWidth = constantsModule.Tooltip.MaxWidth
 local delay = constantsModule.Tooltip.Delay
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), delay (ref), roactModule (ref), coreGuiService (ref), mainWindowHeader_1 (ref), text (ref), mainWindowHeader (ref), offset (ref), unselectedGray (ref), padding (ref), maxWidth (ref)
-	local var5, var6 = reactModule.useState(false)
-	local text_1 = p0.text
-	local pos = p0.pos
+	local var1, var2 = reactModule.useState(false)
+	local text_1 = p1.text
+	local pos = p1.pos
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), delay (copy)
-		var6(false)
-		local var7 = false
+		-- upvalues: var2 (ref), delay (copy)
+		var2(false)
+		local var3 = false
 		task.delay(delay, function()
-			-- upvalues: var7 (write), var6 (copy)
-			if var7 then
+			-- upvalues: var3 (write), var2 (copy)
+			if var3 then
 				return
 			end
-			var6(true)
+			var2(true)
 		end)
 		
 		return function()
-			-- upvalues: var7 (write)
-			var7 = true
+			-- upvalues: var3 (write)
+			var3 = true
 		end
 	end, { text_1, pos })
 	
@@ -40,7 +40,7 @@ return function(p0)
 			DisplayOrder = 20,
 			IgnoreGuiInset = true,
 			OnTopOfCoreBlur = true,
-			Enabled = var5
+			Enabled = var1
 		}, {
 			Tooltip = roactModule.createElement("TextLabel", {
 				TextWrapped = true,

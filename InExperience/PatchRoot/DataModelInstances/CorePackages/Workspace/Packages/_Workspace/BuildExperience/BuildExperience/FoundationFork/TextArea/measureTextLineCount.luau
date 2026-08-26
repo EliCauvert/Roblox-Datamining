@@ -2,22 +2,22 @@
 local getVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
 local chatTextAreaDebugModule = require(script.Parent.chatTextAreaDebug)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getVisibleLineCountModule (ref), chatTextAreaDebugModule (ref), textService (ref)
-	local var3 = getVisibleLineCountModule(p0.text, p0.maxLines)
-	local var4 = 1
+	local var1 = getVisibleLineCountModule(p1.text, p1.maxLines)
+	local var2 = 1
 	
-	if p0.text ~= "" then
-		for i in string.gmatch(p0.text, "\n") do
-			var4 += 1
+	if p1.text ~= "" then
+		for i in string.gmatch(p1.text, "\n") do
+			var2 += 1
 		end
 	end
-	local layoutWidth = p0.layoutWidth or 0
-	local var6 = nil
-	local var7 = nil
-	local var8 = var3
+	local layoutWidth = p1.layoutWidth or 0
+	local var3 = nil
+	local var4 = nil
+	local var5 = var1
 	
-	if p0.text == "" then
+	if p1.text == "" then
 		local t = {
 			lineCount = 1,
 			newlineLineCount = 1,
@@ -29,26 +29,26 @@ return function(p0)
 		
 		return t
 	elseif layoutWidth > 0 then
-		local y = textService:GetTextSize("M", p0.fontSize, p0.font, Vector2.new(layoutWidth, 100000)).Y
-		local y_1 = textService:GetTextSize(p0.text, p0.fontSize, p0.font, Vector2.new(layoutWidth, 100000)).Y
-		var6 = y_1
+		local y = textService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
+		local y_1 = textService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
+		var3 = y_1
 		
 		if y_1 > 0 and y > 0 then
 			local ceiled = math.ceil(y_1 / y)
-			local maxValue = math.max(var4, ceiled)
-			var7 = ceiled
-			var8 = math.clamp(maxValue, 1, p0.maxLines)
-			var6 = maxValue * p0.singleLineHeight
+			local maxValue = math.max(var2, ceiled)
+			var4 = ceiled
+			var5 = math.clamp(maxValue, 1, p1.maxLines)
+			var3 = maxValue * p1.singleLineHeight
 		end
 	end
 	local t = {
-		lineCount = var8,
-		newlineLineCount = var3,
-		wrappedLineCount = var7,
+		lineCount = var5,
+		newlineLineCount = var1,
+		wrappedLineCount = var4,
 		layoutWidth = layoutWidth,
-		boundsY = var6
+		boundsY = var3
 	}
-	chatTextAreaDebugModule.log("measure", `lineCount={var8} newlines={var3} wrapped={var7 or "nil"} boundsY={var6 or "nil"} layoutWidth={layoutWidth} textLen={utf8.len(p0.text) or #p0.text}`)
+	chatTextAreaDebugModule.log("measure", `lineCount={var5} newlines={var1} wrapped={var4 or "nil"} boundsY={var3 or "nil"} layoutWidth={layoutWidth} textLen={utf8.len(p1.text) or #p1.text}`)
 	
 	return t
 end

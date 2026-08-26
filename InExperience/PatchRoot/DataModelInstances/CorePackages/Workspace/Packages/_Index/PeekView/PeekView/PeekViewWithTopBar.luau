@@ -11,40 +11,40 @@ local peekViewDismissedEventModule = require(script.Parent.analytics.peekViewDis
 local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return function(p0)
+return function(p1)
 	-- upvalues: useRoactService (ref), appEventIngestService (ref), useRouteName (ref), useStyle (ref), reactModule (ref), peekViewStateModule (ref), peekViewDismissedEventModule (ref), cryoModule (ref), peekViewModule (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSduiExperienceDetailsSupport (ref)
-	local var5 = useRoactService(appEventIngestService)
-	local var6 = useRouteName()
-	local var7 = useStyle()
-	local onClosed = p0.onClosed
-	local onViewStateChanged = p0.onViewStateChanged
-	local var8 = reactModule.useCallback(function(p1, p2, p3)
-		-- upvalues: peekViewStateModule (copy), onClosed (ref), var5 (ref), p0 (ref), peekViewDismissedEventModule (copy), cryoModule (copy), var6 (ref), onViewStateChanged (ref)
-		if p1 == peekViewStateModule.Closed then
+	local var1 = useRoactService(appEventIngestService)
+	local var2 = useRouteName()
+	local var3 = useStyle()
+	local onClosed = p1.onClosed
+	local onViewStateChanged = p1.onViewStateChanged
+	local var4 = reactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: peekViewStateModule (copy), onClosed (ref), var1 (ref), p1 (ref), peekViewDismissedEventModule (copy), cryoModule (copy), var2 (ref), onViewStateChanged (ref)
+		if p2 == peekViewStateModule.Closed then
 			if onClosed then
 				onClosed()
 			end
-			if p3.dismissMethod and var5 then
-				peekViewDismissedEventModule.logEvent(var5, "PeekView", cryoModule.Dictionary.join(p0.viewChangedEventMeta or {}, p3, { page = var6 }))
+			if p4.dismissMethod and var1 then
+				peekViewDismissedEventModule.logEvent(var1, "PeekView", cryoModule.Dictionary.join(p1.viewChangedEventMeta or {}, p4, { page = var2 }))
 			end
 		end
 		if onViewStateChanged then
-			onViewStateChanged(p1, p2)
+			onViewStateChanged(p2, p3)
 		end
 	end, {
 		onClosed,
 		onViewStateChanged,
-		p0.viewChangedEventMeta,
-		var5,
-		var6
+		p1.viewChangedEventMeta,
+		var1,
+		var2
 	})
-	local var9, var10 = reactModule.useBinding(0)
+	local var5, var6 = reactModule.useBinding(0)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Position = UDim2.fromOffset(0, 0),
-		Size = UDim2.new(p0.viewWidth or UDim.new(1, 0), UDim.new(1, 0))
+		Size = UDim2.new(p1.viewWidth or UDim.new(1, 0), UDim.new(1, 0))
 	}, {
 		PeekViewTopBar = reactModule.createElement("CanvasGroup", {
 			Active = false,
@@ -52,13 +52,13 @@ return function(p0)
 			BorderSizePixel = 0,
 			ZIndex = 2,
 			Position = UDim2.new(0, 0, 0, 0),
-			Size = UDim2.new(1, 0, 0, p0.topBarHeight),
-			BackgroundColor3 = var7.Theme.BackgroundDefault.Color,
-			BorderColor3 = var7.Tokens.Color.Common.Shimmer.Color3,
-			GroupTransparency = var9:map(function(p4)
-				return 1 - p4
+			Size = UDim2.new(1, 0, 0, p1.topBarHeight),
+			BackgroundColor3 = var3.Theme.BackgroundDefault.Color,
+			BorderColor3 = var3.Tokens.Color.Common.Shimmer.Color3,
+			GroupTransparency = var5:map(function(p2)
+				return 1 - p2
 			end)
-		}, { PeekViewTopBarInner = p0.topBarSlot }),
+		}, { PeekViewTopBarInner = p1.topBarSlot }),
 		PeekViewContainer = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
@@ -67,23 +67,23 @@ return function(p0)
 		}, {
 			PeekView = reactModule.createElement(peekViewModule, {
 				hasScrim = true,
-				fullViewContentHeight = p0.fullViewContentHeight,
-				briefViewContentHeight = p0.briefViewContentHeight,
-				bottomDockedContainerHeight = p0.bottomDockedContainerHeight,
-				bottomDockedContainerContent = { PeekViewBottomBar = p0.bottomBarSlot },
-				mountAsFullView = p0.mountAsFullView,
-				mountAnimation = p0.mountAnimation,
-				viewStateChanged = var8,
-				briefToFullTransitionPercent = function(p5)
-					-- upvalues: var10 (ref), p0 (ref)
-					var10(p5)
+				fullViewContentHeight = p1.fullViewContentHeight,
+				briefViewContentHeight = p1.briefViewContentHeight,
+				bottomDockedContainerHeight = p1.bottomDockedContainerHeight,
+				bottomDockedContainerContent = { PeekViewBottomBar = p1.bottomBarSlot },
+				mountAsFullView = p1.mountAsFullView,
+				mountAnimation = p1.mountAnimation,
+				viewStateChanged = var4,
+				briefToFullTransitionPercent = function(p2)
+					-- upvalues: var6 (ref), p1 (ref)
+					var6(p2)
 					
-					if p0.transitionPercentCallback then
-						p0.transitionPercentCallback(p5)
+					if p1.transitionPercentCallback then
+						p1.transitionPercentCallback(p2)
 					end
 				end,
-				hasSolidDragger = if fFlagProfilePlatformNewProfileHeader then p0.hasSolidDragger else nil,
-				scrollingFrameRef = if fFlagSduiExperienceDetailsSupport then p0.scrollingFrameRef else nil
+				hasSolidDragger = if fFlagProfilePlatformNewProfileHeader then p1.hasSolidDragger else nil,
+				scrollingFrameRef = if fFlagSduiExperienceDetailsSupport then p1.scrollingFrameRef else nil
 			}, {
 				UIListLayout = reactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0, 0),
@@ -91,7 +91,7 @@ return function(p0)
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Top
 				}),
-				Content = p0.contentSlot
+				Content = p1.contentSlot
 			})
 		})
 	})

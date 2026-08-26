@@ -1,11 +1,11 @@
 ﻿local playWithRewardState = script:FindFirstAncestor("PlayWithRewardState")
 local _ = require(playWithRewardState.PlayWithRewardAdData)
 
-return require(playWithRewardState.Parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3)
+return require(playWithRewardState.Parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3, p4)
 	return {
-		flowId = p0,
-		universeId = p1,
-		isAdDataExpected = p2,
-		adData = p3
+		flowId = p1,
+		universeId = p2,
+		isAdDataExpected = p3,
+		adData = p4
 	}
 end)

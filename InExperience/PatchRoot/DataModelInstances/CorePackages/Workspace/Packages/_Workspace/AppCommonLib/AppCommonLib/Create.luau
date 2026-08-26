@@ -1,22 +1,22 @@
-﻿return function(p0)
-	return function(p1)
-		-- upvalues: p0 (ref)
-		local var0 = Instance.new(p0)
-		local var1 = nil
+﻿return function(p1)
+	return function(p2)
+		-- upvalues: p1 (ref)
+		local var1 = Instance.new(p1)
+		local var2 = nil
 		
-		for i, v in pairs(p1) do
+		for i, v in pairs(p2) do
 			if type(i) == "number" and typeof(v) == "Instance" then
-				v.Parent = var0
+				v.Parent = var1
 			elseif type(i) == "string" then
 				if i == "Parent" then
-					var1 = v
+					var2 = v
 				else
-					var0[i] = v
+					var1[i] = v
 				end
 			end
 		end
-		var0.Parent = var1
+		var1.Parent = var2
 		
-		return var0
+		return var1
 	end
 end

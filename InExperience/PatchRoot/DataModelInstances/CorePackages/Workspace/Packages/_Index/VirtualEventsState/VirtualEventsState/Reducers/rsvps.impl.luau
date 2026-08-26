@@ -3,76 +3,76 @@ local roduxModule = require(virtualEventsState.Parent.Rodux)
 local cryoModule = require(virtualEventsState.Parent.Cryo)
 local _ = require(virtualEventsState.Parent.NetworkingVirtualEvents)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: roduxModule (ref), cryoModule (ref)
 	return roduxModule.combineReducers({
 		page = roduxModule.createReducer({ nextPageCursor = nil, prevPageCursor = nil }, {
-			[p0.GetVirtualEventRsvps.Succeeded.name] = function(_, p2)
+			[p1.GetVirtualEventRsvps.Succeeded.name] = function(_, p3)
 				return {
-					nextPageCursor = p2.responseBody.nextPageCursor,
-					prevPageCursor = p2.responseBody.prevPageCursor
+					nextPageCursor = p3.responseBody.nextPageCursor,
+					prevPageCursor = p3.responseBody.prevPageCursor
 				}
 			end
 		}),
 		counters = roduxModule.createReducer({}, {
-			[p0.GetVirtualEventRsvpCounts.Succeeded.name] = function(p3, p4)
+			[p1.GetVirtualEventRsvpCounts.Succeeded.name] = function(p3, p4)
 				-- upvalues: cryoModule (copy)
 				return cryoModule.Dictionary.join(p3, { [p4.ids[1]] = p4.responseBody.counters })
 			end,
-			[p0.GetVirtualEventRsvpCounts.Failed.name] = function(p5, _)
-				return p5
+			[p1.GetVirtualEventRsvpCounts.Failed.name] = function(p3, _)
+				return p3
 			end,
-			[p0.UpdateMyRsvpStatus.Succeeded.name] = function(p6, p7)
+			[p1.UpdateMyRsvpStatus.Succeeded.name] = function(p3, p4)
 				-- upvalues: cryoModule (copy)
-				local var3 = p7.ids[1]
-				local var4 = p6[var3]
+				local var1 = p4.ids[1]
+				local var2 = p3[var1]
 				
-				if not var4 then
-					return p6
+				if not var2 then
+					return p3
 				end
-				local rsvpStatus = p7.postBody.rsvpStatus
-				local var5 = 0
+				local rsvpStatus = p4.postBody.rsvpStatus
+				local var3 = 0
 				
 				if rsvpStatus == "going" then
-					var5 = 1
+					var3 = 1
 				elseif rsvpStatus == "notGoing" then
-					var5 = -1
+					var3 = -1
 				end
-				return cryoModule.Dictionary.join(p6, {
-					[var3] = cryoModule.Dictionary.join(var4, { going = math.clamp(var4.going + var5, 0, 1e999) })
+				return cryoModule.Dictionary.join(p3, {
+					[var1] = cryoModule.Dictionary.join(var2, { going = math.clamp(var2.going + var3, 0, 1e999) })
 				})
 			end,
-			[p0.UpdateMyRsvpStatus.Failed.name] = function(p8, _)
-				return p8
+			[p1.UpdateMyRsvpStatus.Failed.name] = function(p3, _)
+				return p3
 			end
 		}),
 		byVirtualEventId = roduxModule.createReducer({}, {
-			[p0.GetVirtualEventRsvps.Succeeded.name] = function(p9, p10)
+			[p1.GetVirtualEventRsvps.Succeeded.name] = function(p3, p4)
 				-- upvalues: cryoModule (copy)
-				local var6 = p10.ids[1]
+				local var1 = p4.ids[1]
 				local t = {}
 				
-				for i, v in p10.responseBody.data do
+				for i, v in p4.responseBody.data do
 					t[tostring(v.userId)] = v
 				end
-				return cryoModule.Dictionary.join(p9, { [var6] = cryoModule.Dictionary.join(p9[var6] or {}, t) })
+				return cryoModule.Dictionary.join(p3, { [var1] = cryoModule.Dictionary.join(p3[var1] or {}, t) })
 			end,
-			[p0.GetVirtualEventRsvps.Failed.name] = function(p11, _)
-				return p11
+			[p1.GetVirtualEventRsvps.Failed.name] = function(p5, _)
+				return p5
 			end,
-			[p0.UpdateMyRsvpStatus.Succeeded.name] = function(p12, p13)
-				-- upvalues: p1 (ref), cryoModule (copy)
-				local var8 = p13.ids[1]
-				local var9 = if p1.LocalPlayer then p1.LocalPlayer.UserId else -1
+			[p1.UpdateMyRsvpStatus.Succeeded.name] = function(p5, p6)
+				-- upvalues: p2 (ref), cryoModule (copy)
+				local var2 = p6.ids[1]
+				local var3 = if p2.LocalPlayer then p2.LocalPlayer.UserId else -1
 				
-				return cryoModule.Dictionary.join(p12, {
-					[var8] = cryoModule.Dictionary.join(p12[var8] or {}, {
-						[tostring(var9)] = { userId = var9, rsvpStatus = p13.postBody.rsvpStatus }
+				return cryoModule.Dictionary.join(p5, {
+					[var2] = cryoModule.Dictionary.join(p5[var2] or {}, {
+						[tostring(var3)] = { userId = var3, rsvpStatus = p6.postBody.rsvpStatus }
 					})
 				})
 			end,
-			[p0.UpdateMyRsvpStatus.Failed.name] = function(p14, _)
-				return p14
+			[p1.UpdateMyRsvpStatus.Failed.name] = function(p5, _)
+				return p5
 			end
 		})
 	})

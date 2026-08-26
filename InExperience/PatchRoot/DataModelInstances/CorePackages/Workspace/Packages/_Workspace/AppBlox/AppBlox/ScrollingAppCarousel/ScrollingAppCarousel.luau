@@ -37,78 +37,78 @@ scrollingAppCarousel.validateProps = tModule.strictInterface({
 	shouldExpandToFitContentHeight = tModule.optional(tModule.boolean)
 })
 
-function scrollingAppCarousel.getScrollState(p0, p1, p2)
-	return { maxNumOfItemsVisible = math.floor((p2 + p1) / (p0 + p1)) }
+function scrollingAppCarousel.getScrollState(p1, p2, p3)
+	return { maxNumOfItemsVisible = math.floor((p3 + p2) / (p1 + p2)) }
 end
 
-function scrollingAppCarousel.handleMouseEvent(p3, p4, p5)
-	if p4.UserInputType == Enum.UserInputType.MouseMovement then
-		p3:setState({ hoveringCarousel = p5 })
+function scrollingAppCarousel.handleMouseEvent(p1, p2, p3)
+	if p2.UserInputType == Enum.UserInputType.MouseMovement then
+		p1:setState({ hoveringCarousel = p3 })
 	end
 end
 
-function scrollingAppCarousel.handleScroll(p6, p7)
-	if p6.state.animationActive then
+function scrollingAppCarousel.handleScroll(p1, p2)
+	if p1.state.animationActive then
 		return
 	end
-	local index = p6.props.index
-	local maxNumOfItemsVisible = p6.state.maxNumOfItemsVisible
-	p6:scrollToIndex(index, index + (if p7 then maxNumOfItemsVisible else -maxNumOfItemsVisible))
+	local index = p1.props.index
+	local maxNumOfItemsVisible = p1.state.maxNumOfItemsVisible
+	p1:scrollToIndex(index, index + (if p2 then maxNumOfItemsVisible else -maxNumOfItemsVisible))
 end
 
-function scrollingAppCarousel.handleResize(p8, p9)
+function scrollingAppCarousel.handleResize(p1, p2)
 	-- upvalues: cryoModule (ref)
-	if p8._isMounted then
-		local var12 = p9.AbsoluteSize.X - 2 * p8.props.carouselMargin
-		p8:setState(cryoModule.Dictionary.join({ absoluteWidth = p9.AbsoluteSize.X, carouselWidth = var12 }, p8.getScrollState(p8.props.itemWidth, p8.props.itemPadding, var12)))
+	if p1._isMounted then
+		local var1 = p2.AbsoluteSize.X - 2 * p1.props.carouselMargin
+		p1:setState(cryoModule.Dictionary.join({ absoluteWidth = p2.AbsoluteSize.X, carouselWidth = var1 }, p1.getScrollState(p1.props.itemWidth, p1.props.itemPadding, var1)))
 	end
 end
 
-function scrollingAppCarousel.scrollToIndex(p10, p11, p12)
+function scrollingAppCarousel.scrollToIndex(p1, p2, p3)
 	-- upvalues: argCheckModule (ref), userGameSettingsService (ref), otterModule (ref), t (ref)
-	argCheckModule.assert(not p10.props.isScrollingDisabled, "scrolling should be disabled")
-	local itemCount = p10.props.itemCount
-	local var13 = p10.props.itemWidth + p10.props.itemPadding
-	local var14 = (p11 - 1) * var13
-	local var15 = (math.max(math.min(p12, itemCount - p10.state.maxNumOfItemsVisible + 1), 1) - 1) * var13
-	p10:destroyMotor()
-	p10:createMotor(var14)
+	argCheckModule.assert(not p1.props.isScrollingDisabled, "scrolling should be disabled")
+	local itemCount = p1.props.itemCount
+	local var1 = p1.props.itemWidth + p1.props.itemPadding
+	local var2 = (p2 - 1) * var1
+	local var3 = (math.max(math.min(p3, itemCount - p1.state.maxNumOfItemsVisible + 1), 1) - 1) * var1
+	p1:destroyMotor()
+	p1:createMotor(var2)
 	
 	if userGameSettingsService.ReducedMotion then
-		p10.carouselMotor:setGoal(otterModule.instant(var15))
+		p1.carouselMotor:setGoal(otterModule.instant(var3))
 		
 		return
 	end
-	p10.carouselMotor:setGoal(otterModule.spring(var15, t))
+	p1.carouselMotor:setGoal(otterModule.spring(var3, t))
 end
 
-function scrollingAppCarousel.createMotor(p13, p14)
+function scrollingAppCarousel.createMotor(p1, p2)
 	-- upvalues: otterModule (ref)
-	p13.carouselMotor = otterModule.createSingleMotor(p14)
-	p13.carouselMotor:onStep(function(p15)
-		-- upvalues: p13 (ref)
-		p13:setState({
+	p1.carouselMotor = otterModule.createSingleMotor(p2)
+	p1.carouselMotor:onStep(function(p3)
+		-- upvalues: p1 (ref)
+		p1:setState({
 			animationActive = true,
-			canvasPosition = Vector2.new(p15, 0)
+			canvasPosition = Vector2.new(p3, 0)
 		})
 	end)
-	p13.carouselMotor:onComplete(function()
-		-- upvalues: p13 (ref)
-		p13:destroyMotor()
-		p13:setState({ animationActive = false })
+	p1.carouselMotor:onComplete(function()
+		-- upvalues: p1 (ref)
+		p1:destroyMotor()
+		p1:setState({ animationActive = false })
 	end)
 end
 
-function scrollingAppCarousel.destroyMotor(p16)
-	if p16.carouselMotor then
-		p16.carouselMotor:destroy()
-		p16.carouselMotor = nil
+function scrollingAppCarousel.destroyMotor(p1)
+	if p1.carouselMotor then
+		p1.carouselMotor:destroy()
+		p1.carouselMotor = nil
 	end
 end
 
-function scrollingAppCarousel.init(p17)
+function scrollingAppCarousel.init(p1)
 	-- upvalues: roactModule (ref)
-	p17:setState({
+	p1:setState({
 		carouselWidth = 0,
 		hoveringCarousel = false,
 		animationActive = false,
@@ -116,149 +116,149 @@ function scrollingAppCarousel.init(p17)
 		absoluteWidth = 0,
 		canvasPosition = Vector2.new(0, 0)
 	})
-	p17.carouselMotor = nil
+	p1.carouselMotor = nil
 	
-	function p17.onMouseEnter(_, p18)
-		-- upvalues: p17 (ref)
-		if p17._isMounted then
-			p17:handleMouseEvent(p18, true)
+	function p17.onMouseEnter(_, p2)
+		-- upvalues: p1 (ref)
+		if p1._isMounted then
+			p1:handleMouseEvent(p2, true)
 		end
 	end
 	
-	function p17.onMouseLeave(_, p19)
-		-- upvalues: p17 (ref)
-		if p17._isMounted then
-			p17:handleMouseEvent(p19, false)
+	function p17.onMouseLeave(_, p2)
+		-- upvalues: p1 (ref)
+		if p1._isMounted then
+			p1:handleMouseEvent(p2, false)
 		end
 	end
 	
-	p17.frameRef = roactModule.createRef()
+	p1.frameRef = roactModule.createRef()
 	
-	function p17.onResize(p20)
-		-- upvalues: p17 (ref)
-		if p17._isMounted then
-			p17:handleResize(p20)
+	function p17.onResize(p2)
+		-- upvalues: p1 (ref)
+		if p1._isMounted then
+			p1:handleResize(p2)
 			
-			if p17.props.onResize then
-				p17.props.onResize(p20)
+			if p1.props.onResize then
+				p1.props.onResize(p2)
 			end
 		end
 	end
 	
 	function p17.scrollLeft()
-		-- upvalues: p17 (ref)
-		if p17._isMounted then
-			p17:handleScroll(false)
+		-- upvalues: p1 (ref)
+		if p1._isMounted then
+			p1:handleScroll(false)
 		end
 	end
 	
 	function p17.scrollRight()
-		-- upvalues: p17 (ref)
-		if p17._isMounted then
-			p17:handleScroll(true)
+		-- upvalues: p1 (ref)
+		if p1._isMounted then
+			p1:handleScroll(true)
 		end
 	end
 end
 
-function scrollingAppCarousel.getDerivedStateFromProps(p21, p22)
+function scrollingAppCarousel.getDerivedStateFromProps(p1, p2)
 	-- upvalues: cryoModule (ref), scrollingAppCarousel (ref)
-	local maxValue = math.max(0, p22.absoluteWidth - 2 * p21.carouselMargin)
+	local maxValue = math.max(0, p2.absoluteWidth - 2 * p1.carouselMargin)
 	
-	return cryoModule.Dictionary.join({ carouselWidth = maxValue }, scrollingAppCarousel.getScrollState(p21.itemWidth, p21.itemPadding, maxValue))
+	return cryoModule.Dictionary.join({ carouselWidth = maxValue }, scrollingAppCarousel.getScrollState(p1.itemWidth, p1.itemPadding, maxValue))
 end
 
-function scrollingAppCarousel.didMount(p23)
-	p23._isMounted = true
-	p23:handleResize(p23.frameRef:getValue())
+function scrollingAppCarousel.didMount(p1)
+	p1._isMounted = true
+	p1:handleResize(p1.frameRef:getValue())
 end
 
-function scrollingAppCarousel.didUpdate(p24, p25, p26)
-	if not p24.props.isScrollingDisabled and (p24.props.itemCount < p25.itemCount or (p24.props.itemWidth ~= p25.itemWidth or (p24.props.itemPadding ~= p25.itemPadding or p24.state.maxNumOfItemsVisible ~= p26.maxNumOfItemsVisible))) then
-		p24:scrollToIndex(p24.props.index, p25.index)
+function scrollingAppCarousel.didUpdate(p1, p2, p3)
+	if not p1.props.isScrollingDisabled and (p1.props.itemCount < p2.itemCount or (p1.props.itemWidth ~= p2.itemWidth or (p1.props.itemPadding ~= p2.itemPadding or p1.state.maxNumOfItemsVisible ~= p3.maxNumOfItemsVisible))) then
+		p1:scrollToIndex(p1.props.index, p2.index)
 	end
 end
 
-function scrollingAppCarousel.willUnmount(p27)
-	p27._isMounted = false
-	p27:destroyMotor()
+function scrollingAppCarousel.willUnmount(p1)
+	p1._isMounted = false
+	p1:destroyMotor()
 end
 
-function scrollingAppCarousel.render(p28)
+function scrollingAppCarousel.render(p1)
 	-- upvalues: AXFixScrollingCarouselShowRightButton (ref), fFlagAXScrollingCarouselWidgetIndexBugfix (ref), roactModule (ref), scrollButtonModule (ref), cycleLeft (ref), cycleRight (ref), appCarouselModule (ref)
-	local carouselMargin = p28.props.carouselMargin
-	local carouselHeight = p28.props.carouselHeight
-	local var17 = nil
-	local var18 = nil
+	local carouselMargin = p1.props.carouselMargin
+	local carouselHeight = p1.props.carouselHeight
+	local var1 = nil
+	local var2 = nil
 	
-	if p28.state.hoveringCarousel then
-		local var20
-		local isScrollingDisabled = p28.props.isScrollingDisabled
-		local var19 = p28.props.index > 1 and not isScrollingDisabled
+	if p1.state.hoveringCarousel then
+		local var3
+		local isScrollingDisabled = p1.props.isScrollingDisabled
+		local var4 = p1.props.index > 1 and not isScrollingDisabled
 		local _ = nil
 		
 		if AXFixScrollingCarouselShowRightButton then
-			local var21
+			local var5
 			if fFlagAXScrollingCarouselWidgetIndexBugfix then
-				var21 = p28.props.index + p28.state.maxNumOfItemsVisible < p28.props.itemCount
-				var21 = nil
+				var5 = p1.props.index + p1.state.maxNumOfItemsVisible < p1.props.itemCount
+				var5 = nil
 			else
-				var21 = p28.props.index + p28.state.maxNumOfItemsVisible <= p28.props.itemCount
+				var5 = p1.props.index + p1.state.maxNumOfItemsVisible <= p1.props.itemCount
 			end
-			var20 = var21 and not isScrollingDisabled
+			var3 = var5 and not isScrollingDisabled
 		elseif fFlagAXScrollingCarouselWidgetIndexBugfix then
-			var20 = p28.props.index + p28.state.maxNumOfItemsVisible < p28.props.itemCount
-			var20 = nil
+			var3 = p1.props.index + p1.state.maxNumOfItemsVisible < p1.props.itemCount
+			var3 = nil
 		else
-			var20 = p28.props.index + p28.state.maxNumOfItemsVisible <= p28.props.itemCount and not isScrollingDisabled
+			var3 = p1.props.index + p1.state.maxNumOfItemsVisible <= p1.props.itemCount and not isScrollingDisabled
 		end
-		if var19 then
-			var17 = roactModule.createElement(scrollButtonModule, { icon = cycleLeft, callback = p28.scrollLeft })
+		if var4 then
+			var1 = roactModule.createElement(scrollButtonModule, { icon = cycleLeft, callback = p1.scrollLeft })
 		end
-		if var20 then
-			var18 = roactModule.createElement(scrollButtonModule, { icon = cycleRight, callback = p28.scrollRight })
+		if var3 then
+			var2 = roactModule.createElement(scrollButtonModule, { icon = cycleRight, callback = p1.scrollRight })
 		end
 	end
 	return roactModule.createElement("Frame", {
 		Size = UDim2.new(1, carouselMargin, 0, carouselHeight),
-		AutomaticSize = if p28.props.shouldExpandToFitContentHeight then Enum.AutomaticSize.Y else nil,
+		AutomaticSize = if p1.props.shouldExpandToFitContentHeight then Enum.AutomaticSize.Y else nil,
 		Position = UDim2.fromOffset(-carouselMargin, 0),
 		BackgroundTransparency = 1,
-		[roactModule.Event.InputBegan] = p28.onMouseEnter,
-		[roactModule.Event.InputEnded] = p28.onMouseLeave,
-		[roactModule.Change.AbsoluteSize] = p28.onResize,
-		[roactModule.Ref] = p28.frameRef
+		[roactModule.Event.InputBegan] = p1.onMouseEnter,
+		[roactModule.Event.InputEnded] = p1.onMouseLeave,
+		[roactModule.Change.AbsoluteSize] = p1.onResize,
+		[roactModule.Ref] = p1.frameRef
 	}, {
 		LeftMargin = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
-			Position = if p28.props.styleProps and p28.props.styleProps.leftPosition then UDim2.new(0, p28.props.styleProps.leftPosition, 0, 0) else UDim2.fromScale(0, 0),
+			Position = if p1.props.styleProps and p1.props.styleProps.leftPosition then UDim2.new(0, p1.props.styleProps.leftPosition, 0, 0) else UDim2.fromScale(0, 0),
 			AnchorPoint = Vector2.new(0, 0),
 			Size = UDim2.new(0, carouselMargin, 1, 0)
-		}, { ScrollLeftButton = var17 }),
+		}, { ScrollLeftButton = var1 }),
 		Carousel = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, -2 * carouselMargin, 1, 0),
-			AutomaticSize = if p28.props.shouldExpandToFitContentHeight then Enum.AutomaticSize.Y else nil,
+			AutomaticSize = if p1.props.shouldExpandToFitContentHeight then Enum.AutomaticSize.Y else nil,
 			Position = UDim2.fromOffset(carouselMargin, 0)
 		}, {
 			InnerCarouselContent = roactModule.createElement(appCarouselModule, {
 				carouselHeight = carouselHeight,
-				canvasWidth = p28.props.canvasWidth,
-				items = p28.props.items,
-				onChangeCanvasPosition = p28.props.onChangeCanvasPosition,
-				onRefCallback = p28.props.onRefCallback,
-				canvasPosition = p28.state.canvasPosition,
-				scrollingAnimationActive = if p28.props.isScrollingDisabled then true else p28.state.animationActive,
-				shouldExpandToFitContentHeight = p28.props.shouldExpandToFitContentHeight
+				canvasWidth = p1.props.canvasWidth,
+				items = p1.props.items,
+				onChangeCanvasPosition = p1.props.onChangeCanvasPosition,
+				onRefCallback = p1.props.onRefCallback,
+				canvasPosition = p1.state.canvasPosition,
+				scrollingAnimationActive = if p1.props.isScrollingDisabled then true else p1.state.animationActive,
+				shouldExpandToFitContentHeight = p1.props.shouldExpandToFitContentHeight
 			})
 		}),
 		RightMargin = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
-			Position = if p28.props.styleProps and p28.props.styleProps.rightPosition then UDim2.new(1, p28.props.styleProps.rightPosition, 0, 0) else UDim2.fromScale(1, 0),
+			Position = if p1.props.styleProps and p1.props.styleProps.rightPosition then UDim2.new(1, p1.props.styleProps.rightPosition, 0, 0) else UDim2.fromScale(1, 0),
 			AnchorPoint = Vector2.new(1, 0),
 			Size = UDim2.new(0, carouselMargin, 1, 0)
-		}, { ScrollRightButton = var18 })
+		}, { ScrollRightButton = var2 })
 	})
 end
 

@@ -11,15 +11,15 @@ local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext
 local useChatPlacementContext = chatPlacementContextModule.useChatPlacementContext
 local isPlacementInExperience = chatPlacementContextModule.isPlacementInExperience
 
-function generateNavigateToGroups(p0, p1)
+function generateNavigateToGroups(p1, p2)
 	-- upvalues: enumScreensModule (ref), name (ref)
 	return function()
-		-- upvalues: p1 (ref), p0 (ref), enumScreensModule (copy), name (copy)
-		if p1 then
-			p1()
+		-- upvalues: p2 (ref), p1 (ref), enumScreensModule (copy), name (copy)
+		if p2 then
+			p2()
 		end
-		if p0 == nil then return end
-		local groups = p0[enumScreensModule.Groups]
+		if p1 == nil then return end
+		local groups = p1[enumScreensModule.Groups]
 		
 		if groups then
 			name:info("Navigate To Groups from App Chat")
@@ -31,56 +31,56 @@ function generateNavigateToGroups(p0, p1)
 	end
 end
 
-local function _(p2, p3)
+local function _(p1, p2)
 	-- upvalues: enumScreensModule (ref), openUnfilteredThreadsLearnMoreLinkModule (ref)
-	return function(p4)
-		-- upvalues: p2 (ref), p3 (ref), enumScreensModule (copy), openUnfilteredThreadsLearnMoreLinkModule (copy)
-		if not p2 then return end
-		if not p3 then
-			p2(openUnfilteredThreadsLearnMoreLinkModule())
+	return function(p3)
+		-- upvalues: p1 (ref), p2 (ref), enumScreensModule (copy), openUnfilteredThreadsLearnMoreLinkModule (copy)
+		if not p1 then return end
+		if not p2 then
+			p1(openUnfilteredThreadsLearnMoreLinkModule())
 			
 			return
-		elseif p4 then
-			p4(enumScreensModule.LearnMorePartialModal, {}, true)
+		elseif p3 then
+			p3(enumScreensModule.LearnMorePartialModal, {}, true)
 		end
 	end
 end
 
-function LuaAppNavigationContextProvider(p5)
+function LuaAppNavigationContextProvider(p1)
 	-- upvalues: reactModule (ref), useChatPlacementContext (ref), isPlacementInExperience (ref), useAnalyticsModule (ref), eventNamesModule (ref), luaAppNavigationContextModule (ref), enumScreensModule (ref), openUnfilteredThreadsLearnMoreLinkModule (ref)
-	local var9 = reactModule.useRef(function() end)
-	local var10 = isPlacementInExperience(useChatPlacementContext().chatPlacement)
-	local var11 = useAnalyticsModule()
+	local var1 = reactModule.useRef(function() end)
+	local var2 = isPlacementInExperience(useChatPlacementContext().chatPlacement)
+	local var3 = useAnalyticsModule()
 	
-	if var11 then
+	if var3 then
 		function var9.current()
-			-- upvalues: var11 (ref), eventNamesModule (copy)
-			var11.fireAnalyticsEvent(eventNamesModule.ChatLandingGroupsBtnClicked)
+			-- upvalues: var3 (ref), eventNamesModule (copy)
+			var3.fireAnalyticsEvent(eventNamesModule.ChatLandingGroupsBtnClicked)
 		end
 	end
 	local createElement = reactModule.createElement
 	local provider = luaAppNavigationContextModule.Provider
 	local t = {}
 	local t_1 = {
-		navigateToGroups = generateNavigateToGroups(p5.navigateToLuaAppPages, var9.current)
+		navigateToGroups = generateNavigateToGroups(p1.navigateToLuaAppPages, var1.current)
 	}
-	local dispatch = p5.dispatch
+	local dispatch = p1.dispatch
 	
-	function t_1.navigateToUnfilteredThreadsLearnMore(p6)
-		-- upvalues: dispatch (ref), var10 (ref), enumScreensModule (copy), openUnfilteredThreadsLearnMoreLinkModule (copy)
+	function t_1.navigateToUnfilteredThreadsLearnMore(p2)
+		-- upvalues: dispatch (ref), var2 (ref), enumScreensModule (copy), openUnfilteredThreadsLearnMoreLinkModule (copy)
 		if not dispatch then return end
-		if not var10 then
+		if not var2 then
 			dispatch(openUnfilteredThreadsLearnMoreLinkModule())
 			
 			return
-		elseif p6 then
-			p6(enumScreensModule.LearnMorePartialModal, {}, true)
+		elseif p2 then
+			p2(enumScreensModule.LearnMorePartialModal, {}, true)
 		end
 	end
 	
 	t.value = t_1
 	
-	return createElement(provider, t, p5.children)
+	return createElement(provider, t, p1.children)
 end
 
 return LuaAppNavigationContextProvider

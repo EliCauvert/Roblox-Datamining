@@ -5,13 +5,13 @@ local tModule = require(parent.t)
 local enumsModule = require(roduxPresence.Enums)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -31,10 +31,10 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: cryoModule (ref), enumsModule (ref)
-	return cryoModule.Dictionary.join(p2, {
-		userPresenceType = enumsModule.PresenceType.fromRawValue(p2.userPresenceType)
+	return cryoModule.Dictionary.join(p1, {
+		userPresenceType = enumsModule.PresenceType.fromRawValue(p1.userPresenceType)
 	})
 end
 
@@ -47,9 +47,9 @@ t.isValid = tModule.interface({
 	rootPlaceId = tModule.optional(tModule.union(tModule.numberPositive, tModule.string)),
 	universeId = tModule.optional(tModule.union(tModule.numberPositive, tModule.string)),
 	userId = tModule.union(tModule.numberPositive, tModule.string),
-	userPresenceType = function(p3)
+	userPresenceType = function(p1)
 		-- upvalues: enumsModule (ref)
-		return enumsModule.PresenceType.fromRawValue(p3) ~= nil
+		return enumsModule.PresenceType.fromRawValue(p1) ~= nil
 	end
 })
 

@@ -1,6 +1,6 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
-		metadata = p0.fromString("accountinformation:metadata"),
-		phone = p0.fromString("accountinformation:phone")
+		metadata = p1.fromString("accountinformation:metadata"),
+		phone = p1.fromString("accountinformation:phone")
 	}
 end

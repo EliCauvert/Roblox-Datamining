@@ -1,9 +1,9 @@
 ﻿local getPlatformTarget = require(script:FindFirstAncestor("ProfileShareLinks").Parent.Analytics).getPlatformTarget
 
-return function(p0)
+return function(p1)
 	-- upvalues: getPlatformTarget (ref)
-	return function(_, p1, p2, p3)
-		-- upvalues: p0 (ref), getPlatformTarget (copy)
-		p0:setRBXEventStream(getPlatformTarget(), if p3 then p3.context else p1, p2, p3)
+	return function(_, p2, p3, p4)
+		-- upvalues: p1 (ref), getPlatformTarget (copy)
+		p1:setRBXEventStream(getPlatformTarget(), if p4 then p4.context else p2, p3, p4)
 	end
 end

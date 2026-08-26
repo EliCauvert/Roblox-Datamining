@@ -8,10 +8,10 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 
 return function()
 	-- upvalues: useProfileWrapperContextModule (ref), reactModule (ref), enumsModule (ref), contexts (ref), appPage (ref)
-	local var4 = useProfileWrapperContextModule()
+	local var1 = useProfileWrapperContextModule()
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var4 (ref), enumsModule (copy), contexts (copy), appPage (copy)
-		return if var4.profileType == enumsModule.ProfileTypes.Community then contexts.CommunityProfile elseif var4.profileType == enumsModule.ProfileTypes.User then contexts.PlayerProfile else appPage.ProfilePlatform
-	end, { var4.profileType })
+		-- upvalues: var1 (ref), enumsModule (copy), contexts (copy), appPage (copy)
+		return if var1.profileType == enumsModule.ProfileTypes.Community then contexts.CommunityProfile elseif var1.profileType == enumsModule.ProfileTypes.User then contexts.PlayerProfile else appPage.ProfilePlatform
+	end, { var1.profileType })
 end

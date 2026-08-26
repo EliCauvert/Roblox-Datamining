@@ -1,10 +1,10 @@
 ﻿local getPresenceTextFromUserModule = require(script.Parent.getPresenceTextFromUser)
 local presenceImageByPresenceModule = require(script.Parent.presenceImageByPresence)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getPresenceTextFromUserModule (ref), presenceImageByPresenceModule (ref)
 	return {
-		text = getPresenceTextFromUserModule(p0),
-		image = presenceImageByPresenceModule[p0.presence]
+		text = getPresenceTextFromUserModule(p1),
+		image = presenceImageByPresenceModule[p1.presence]
 	}
 end

@@ -5,7 +5,7 @@ local parent = script.Parent.Parent.Parent
 local globalConfigModule = require(parent.GlobalConfig)
 local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
 local withLocalizationModule = require(parent.Localization.withLocalization)
-local var4 = t.strictInterface({
+local var1 = t.strictInterface({
 	AnchorPoint = t.optional(t.Vector2),
 	Position = t.optional(t.UDim2),
 	Size = t.optional(t.UDim2),
@@ -13,21 +13,21 @@ local var4 = t.strictInterface({
 	LayoutOrder = t.optional(t.number)
 })
 
-return function(p0)
-	-- upvalues: globalConfigModule (ref), var4 (ref), withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
+return function(p1)
+	-- upvalues: globalConfigModule (ref), var1 (ref), withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
 	if globalConfigModule.propValidation then
-		assert(var4(p0))
+		assert(var1(p1))
 	end
-	return withLocalizationModule({ text = p0.localizationKey })(function(p1)
-		-- upvalues: roact (copy), themedTextLabelModule (copy), p0 (ref)
+	return withLocalizationModule({ text = p1.localizationKey })(function(p2)
+		-- upvalues: roact (copy), themedTextLabelModule (copy), p1 (ref)
 		return roact.createElement(themedTextLabelModule, {
 			fontKey = "Body",
 			themeKey = "TextDefault",
-			LayoutOrder = p0.LayoutOrder,
-			AnchorPoint = p0.AnchorPoint or Vector2.new(0, 0.5),
-			Position = p0.Position or UDim2.new(0, 0, 0.5, 0),
-			Size = p0.Size or UDim2.new(1, -72, 0.5, 0),
-			Text = p1.text,
+			LayoutOrder = p1.LayoutOrder,
+			AnchorPoint = p1.AnchorPoint or Vector2.new(0, 0.5),
+			Position = p1.Position or UDim2.new(0, 0, 0.5, 0),
+			Size = p1.Size or UDim2.new(1, -72, 0.5, 0),
+			Text = p2.text,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextXAlignment = Enum.TextXAlignment.Left
 		})

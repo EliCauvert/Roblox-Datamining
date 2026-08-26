@@ -17,7 +17,7 @@ local function _()
 end
 
 return {
-	useContext = function(p0, p1, ...)
+	useContext = function(p1, p2, ...)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref), array (ref)
 		local current = reactCurrentDispatcher.current
 		
@@ -25,103 +25,103 @@ return {
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
 		if reactGlobalsModule.__DEV__ then
-			if p1 ~= nil then
-				console.error("useContext() second argument is reserved for future use in React. Passing it is not supported. You passed: %s.%s", p1, if typeof(p1) == "number" and array.isArray({ ... }) then "\n\nDid you call Array.map(useContext)? Calling Hooks inside a loop is not supported. Learn more at https://reactjs.org/link/rules-of-hooks" else "")
+			if p2 ~= nil then
+				console.error("useContext() second argument is reserved for future use in React. Passing it is not supported. You passed: %s.%s", p2, if typeof(p2) == "number" and array.isArray({ ... }) then "\n\nDid you call Array.map(useContext)? Calling Hooks inside a loop is not supported. Learn more at https://reactjs.org/link/rules-of-hooks" else "")
 			end
-			if p0._context ~= nil then
-				local context = p0._context
+			if p1._context ~= nil then
+				local context = p1._context
 				
-				if context.Consumer == p0 then
+				if context.Consumer == p1 then
 					console.error("Calling useContext(Context.Consumer) is not supported, may cause bugs, and will be removed in a future major release. Did you mean to call useContext(Context) instead?")
-				elseif context.Provider == p0 then
+				elseif context.Provider == p1 then
 					console.error("Calling useContext(Context.Provider) is not supported. Did you mean to call useContext(Context) instead?")
 				end
 			end
 		end
-		return current.useContext(p0, p1)
+		return current.useContext(p1, p2)
 	end,
-	useState = function(p2, ...)
+	useState = function(p1, ...)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useState(p2, ...)
+		return current.useState(p1, ...)
 	end,
-	useReducer = function(p3, p4, p5)
+	useReducer = function(p1, p2, p3)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useReducer(p3, p4, p5)
+		return current.useReducer(p1, p2, p3)
 	end,
-	useRef = function(p6)
+	useRef = function(p1)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useRef(p6)
+		return current.useRef(p1)
 	end,
-	useBinding = function(p7)
+	useBinding = function(p1)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useBinding(p7)
+		return current.useBinding(p1)
 	end,
-	useEffect = function(p8, p9)
+	useEffect = function(p1, p2)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useEffect(p8, p9)
+		return current.useEffect(p1, p2)
 	end,
-	useLayoutEffect = function(p10, p11)
+	useLayoutEffect = function(p1, p2)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useLayoutEffect(p10, p11)
+		return current.useLayoutEffect(p1, p2)
 	end,
-	useCallback = function(p12, p13)
+	useCallback = function(p1, p2)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useCallback(p12, p13)
+		return current.useCallback(p1, p2)
 	end,
-	useMemo = function(p14, p15)
+	useMemo = function(p1, p2)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useMemo(p14, p15)
+		return current.useMemo(p1, p2)
 	end,
-	useImperativeHandle = function(p16, p17, p18)
+	useImperativeHandle = function(p1, p2, p3)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useImperativeHandle(p16, p17, p18)
+		return current.useImperativeHandle(p1, p2, p3)
 	end,
-	useDebugValue = function(p19, p20)
+	useDebugValue = function(p1, p2)
 		-- upvalues: reactGlobalsModule (ref), reactCurrentDispatcher (ref), console (ref)
 		if not reactGlobalsModule.__DEV__ then
 			return nil
@@ -131,7 +131,7 @@ return {
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useDebugValue(p19, p20)
+		return current.useDebugValue(p1, p2)
 	end,
 	emptyObject = {},
 	useOpaqueIdentifier = function()
@@ -143,13 +143,13 @@ return {
 		end
 		return current.useOpaqueIdentifier()
 	end,
-	useMutableSource = function(p21, p22, p23)
+	useMutableSource = function(p1, p2, p3)
 		-- upvalues: reactCurrentDispatcher (ref), reactGlobalsModule (ref), console (ref)
 		local current = reactCurrentDispatcher.current
 		
 		if reactGlobalsModule.__DEV__ and current == nil then
 			console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
 		end
-		return current.useMutableSource(p21, p22, p23)
+		return current.useMutableSource(p1, p2, p3)
 	end
 }

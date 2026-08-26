@@ -5,34 +5,34 @@ local usePluginModule = require(foundation.Providers.Plugin.usePlugin)
 local useWidgetRefModule = require(script.Parent.useWidgetRef)
 local useWidgetsContextModule = require(script.Parent.useWidgetsContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: usePluginModule (ref), useWidgetsContextModule (ref), reactModule (ref), studioUriModule (ref), useWidgetRefModule (ref)
-	local var6 = usePluginModule()
+	local var1 = usePluginModule()
 	
-	if var6 == nil then
+	if var1 == nil then
 		error("useUniqueWidget must be used within a Plugin context")
 	end
-	local var7 = useWidgetsContextModule()
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: studioUriModule (copy), var6 (ref)
-		return studioUriModule.wrap(var6:GetUri())
-	end, { var6 })
-	local var9 = reactModule.useRef(nil)
+	local var2 = useWidgetsContextModule()
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: studioUriModule (copy), var1 (ref)
+		return studioUriModule.wrap(var1:GetUri())
+	end, { var1 })
+	local var4 = reactModule.useRef(nil)
 	
-	if var9.current == nil then
-		if p0 and p0.id then
-			var9.current = p0.id
+	if var4.current == nil then
+		if p1 and p1.id then
+			var4.current = p1.id
 		else
-			var9.current = var7.nextId()
+			var4.current = var2.nextId()
 		end
 	end
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: studioUriModule (copy), var8 (ref), var9 (ref)
-		return studioUriModule.join(var8, { Category = "Actions", ItemId = var9.current })
-	end, { var8, var9.current })
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: studioUriModule (copy), var3 (ref), var4 (ref)
+		return studioUriModule.join(var3, { Category = "Actions", ItemId = var4.current })
+	end, { var3, var4.current })
 	
 	return {
-		ref = useWidgetRefModule(var10, p0 and p0.forwardRef),
-		uri = var10
+		ref = useWidgetRefModule(var5, p1 and p1.forwardRef),
+		uri = var5
 	}
 end

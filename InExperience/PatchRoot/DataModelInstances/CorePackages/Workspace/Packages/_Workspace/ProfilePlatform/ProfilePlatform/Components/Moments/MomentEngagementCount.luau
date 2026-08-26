@@ -9,31 +9,31 @@ local iconSize = foundationModule.Enums.IconSize
 local iconVariant = foundationModule.Enums.IconVariant
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAbbreviatedNumberLocalization (ref), useTokens (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), iconVariant (ref), text (ref)
-	local var2 = useAbbreviatedNumberLocalization(p0.count or 0)
-	local var3 = p0.onMedia == true
-	local var4 = if var3 then useTokens().Color.Extended.White.White_100 else nil
+	local var1 = useAbbreviatedNumberLocalization(p1.count or 0)
+	local var2 = p1.onMedia == true
+	local var3 = if var2 then useTokens().Color.Extended.White.White_100 else nil
 	
 	return reactModule.createElement(view, {
 		tag = "row align-x-left align-y-center gap-xxsmall auto-xy",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Glyph = reactModule.createElement(icon, {
 			LayoutOrder = 1,
-			name = p0.icon,
+			name = p1.icon,
 			size = iconSize.XSmall,
-			variant = if var3 then iconVariant.Filled else nil,
-			style = var4
+			variant = if var2 then iconVariant.Filled else nil,
+			style = var3
 		}),
 		Count = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = {
 				["auto-xy text-body-small"] = true,
-				["content-default"] = not var3
+				["content-default"] = not var2
 			},
-			textStyle = var4,
-			Text = var2 or ""
+			textStyle = var3,
+			Text = var1 or ""
 		})
 	})
 end

@@ -1,8 +1,8 @@
 ﻿local playersService = game:GetService("Players")
 
-return function(p0)
+return function(p1)
 	-- upvalues: playersService (ref)
-	local var1, var2 = p0()
+	local var1, var2 = p1()
 	
 	if not var1 then return end
 	if var2 then

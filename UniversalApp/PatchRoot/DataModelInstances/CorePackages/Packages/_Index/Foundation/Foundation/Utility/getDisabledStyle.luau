@@ -2,10 +2,10 @@
 local constantsModule = require(foundation.Constants)
 local _ = require(foundation.Components.Types)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: constantsModule (ref)
-	return if p1 then {
-		Color3 = p0.Color3,
-		Transparency = 1 - (1 - (p0.Transparency or 0)) * constantsModule.DISABLED_TRANSPARENCY
-	} else p0
+	return if p2 then {
+		Color3 = p1.Color3,
+		Transparency = 1 - (1 - (p1.Transparency or 0)) * constantsModule.DISABLED_TRANSPARENCY
+	} else p1
 end

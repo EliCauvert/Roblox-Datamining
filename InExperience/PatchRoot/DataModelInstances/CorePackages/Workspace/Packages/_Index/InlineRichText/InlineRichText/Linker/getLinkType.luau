@@ -3,17 +3,17 @@ local linkTypeModule = require(inlineRichText.Enums.LinkType)
 local default = require(inlineRichText.Parent.LinkingProtocol).LinkingProtocol.default
 local list = {
 	{
-		isLinkType = function(p0)
-			return string.match(p0, "^https://") ~= nil
+		isLinkType = function(p1)
+			return string.match(p1, "^https://") ~= nil
 		end,
 		type = linkTypeModule.Http
 	},
 	{
 		isLinkType = function(p1)
 			-- upvalues: default (ref)
-			local var3, var4 = default:isURLRegistered(p1):await()
+			local var1, var2 = default:isURLRegistered(p1):await()
 			
-			return var3 and var4
+			return var1 and var2
 		end,
 		type = linkTypeModule.LinkingProtocolRegistered
 	},
@@ -25,10 +25,10 @@ local list = {
 	}
 }
 
-return function(p2)
+return function(p1)
 	-- upvalues: list (ref), linkTypeModule (ref)
 	for i, v in list do
-		if v.isLinkType(p2) then
+		if v.isLinkType(p1) then
 			return v.type
 		end
 	end

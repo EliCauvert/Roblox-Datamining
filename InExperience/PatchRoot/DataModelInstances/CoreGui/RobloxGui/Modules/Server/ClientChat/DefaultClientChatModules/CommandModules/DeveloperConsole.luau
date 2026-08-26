@@ -1,9 +1,9 @@
 ﻿local starterGuiService = game:GetService("StarterGui")
 local utilModule = require(script.Parent:WaitForChild("Util"))
 
-function ProcessMessage(p0, _, _)
+function ProcessMessage(p1, _, _)
 	-- upvalues: starterGuiService (ref)
-	if string.sub(p0, 1, 8):lower() ~= "/console" and string.sub(p0, 1, 11):lower() ~= "/newconsole" then
+	if string.sub(p1, 1, 8):lower() ~= "/console" and string.sub(p1, 1, 11):lower() ~= "/newconsole" then
 		return false
 	end
 	local ok, status = pcall(function()

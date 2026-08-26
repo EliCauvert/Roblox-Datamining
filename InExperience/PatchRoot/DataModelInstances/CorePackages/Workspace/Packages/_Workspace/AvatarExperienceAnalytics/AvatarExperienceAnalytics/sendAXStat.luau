@@ -7,7 +7,7 @@ local default = require(parent.LoggingProtocol).default
 local analyticsServiceModule = require(script.Parent.AnalyticsService)
 local isSpatial = require(parent.AppCommonLib).isSpatial
 
-local function getAXStatMetadata(p0)
+local function getAXStatMetadata(p1)
 	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
 	local t = {
 		AppVersion = runService:GetRobloxVersion(),
@@ -16,8 +16,8 @@ local function getAXStatMetadata(p0)
 		Platform = if isSpatial() then "VR" else userInputService:GetPlatform()
 	}
 	
-	if p0 and next(p0) ~= nil then
-		t = dashModule.assign({}, t, p0)
+	if p1 and next(p1) ~= nil then
+		t = dashModule.assign({}, t, p1)
 	end
 	return t
 end
@@ -43,11 +43,11 @@ return function(p1)
 			t.page = p1.metaData.Page
 			t.opaquePage = p1.metaData.OpaquePage
 		end
-		local var8 = getAXStatMetadata()
-		t.appVersion = var8.AppVersion
-		t.userAgent = var8.UserAgent
-		t.coreScriptVersion = var8.CoreScriptVersion
-		t.platform = var8.Platform
+		local var1 = getAXStatMetadata()
+		t.appVersion = var1.AppVersion
+		t.userAgent = var1.UserAgent
+		t.coreScriptVersion = var1.CoreScriptVersion
+		t.platform = var1.Platform
 		analyticsServiceModule.EventStream:sendEventDeferred(p1.statName, if p1.customEventStreamSchemaName then p1.customEventStreamSchemaName else "marketplacePerformanceMetric", t)
 	end
 end

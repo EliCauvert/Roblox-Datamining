@@ -1,10 +1,10 @@
-﻿return function(p0, p1)
-	local var0
-	for i, v in pairs(p1) do
-		var0 = p0:FindFirstChild(v)
+﻿return function(p1, p2)
+	local var1
+	for i, v in pairs(p2) do
+		var1 = p1:FindFirstChild(v)
 		
-		if var0 then
-			return if var0:IsA("Attachment") then var0 else var0
+		if var1 then
+			return if var1:IsA("Attachment") then var1 else var1
 		end
 	end
 	return nil

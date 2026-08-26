@@ -9,9 +9,9 @@ t.default = {
 		end
 	},
 	Query = {
-		me = function(_, _, p0)
+		me = function(_, _, p1)
 			-- upvalues: findMe (ref)
-			return findMe(p0.fetchImpl)
+			return findMe(p1.fetchImpl)
 		end,
 		user = function(_, p1, p2)
 			-- upvalues: findUserById (ref)

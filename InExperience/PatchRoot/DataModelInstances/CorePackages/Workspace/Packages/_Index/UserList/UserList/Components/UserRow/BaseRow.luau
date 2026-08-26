@@ -26,11 +26,11 @@ local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local useTokens = foundationModule.Hooks.useTokens
 local fillBehavior = foundationModule.Enums.FillBehavior
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), userListUseActionAddTranslation (ref), useLocalization (ref), textKeysModule (ref), enumsModule (ref), fFlagFriendsPageViewBtnEnabled (ref), fFlagUserListCtaIntegrationEnabled (ref), reactModule (ref), view (ref), constantsModule (ref), userTile (ref), foundationModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagAddStatusIndicatorToBaseRow (ref), statusIndicator (ref), statusIndicatorVariant (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), skeleton (ref), radius (ref), iconButton (ref), iconSize (ref)
-	local var13
-	local var7 = useTokens()
-	local var8 = if userListUseActionAddTranslation then useLocalization({
+	local var1
+	local var2 = useTokens()
+	local var3 = if userListUseActionAddTranslation then useLocalization({
 		Accept = textKeysModule.Accept,
 		Add = textKeysModule.Add,
 		Chat = textKeysModule.Chat,
@@ -40,38 +40,38 @@ return reactModule.memo(function(p0)
 	}) else nil
 	local createElement = reactModule.createElement
 	local t = {
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		tag = {
 			["size-full-0 auto-y align-y-center"] = true,
-			["row gap-medium padding-top-medium padding-bottom-medium padding-right-xsmall flex-x-between"] = p0.layoutMode == enumsModule.RowLayoutMode.Wide,
-			["col gap-small padding-medium bg-surface-100 radius-medium"] = p0.layoutMode == enumsModule.RowLayoutMode.Compact
+			["row gap-medium padding-top-medium padding-bottom-medium padding-right-xsmall flex-x-between"] = p1.layoutMode == enumsModule.RowLayoutMode.Wide,
+			["col gap-small padding-medium bg-surface-100 radius-medium"] = p1.layoutMode == enumsModule.RowLayoutMode.Compact
 		}
 	}
 	local t_1 = {
 		UserTileContainer = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = {
-				fill = p0.layoutMode == enumsModule.RowLayoutMode.Wide,
-				["size-full-0 auto-y"] = p0.layoutMode == enumsModule.RowLayoutMode.Compact
+				fill = p1.layoutMode == enumsModule.RowLayoutMode.Wide,
+				["size-full-0 auto-y"] = p1.layoutMode == enumsModule.RowLayoutMode.Compact
 			},
-			Size = if p0.layoutMode == enumsModule.RowLayoutMode.Wide then UDim2.new(0, 0, 0, constantsModule.USER_ROW_HEIGHT) else nil
+			Size = if p1.layoutMode == enumsModule.RowLayoutMode.Wide then UDim2.new(0, 0, 0, constantsModule.USER_ROW_HEIGHT) else nil
 		}, {
 			UserTile = reactModule.createElement(userTile, {
-				userId = p0.userId or "",
-				avatarThumbnailUrl = p0.avatarThumbnailUrl,
-				userPresenceType = p0.userPresenceType or foundationModule.Enums.UserPresence.None,
-				title = p0.title,
-				subtitle = p0.subtitle,
-				layoutMode = p0.layoutMode,
-				onActivated = p0.onActivated,
-				selectable = p0.selectable ~= nil or p0.selectable,
-				isTitleLoading = p0.isTitleLoading,
-				isSubtitleLoading = p0.isSubtitleLoading,
-				contextualInfo = p0.contextualInfo and p0.contextualInfo.text,
-				isContextualInfoLoading = p0.isContextualInfoLoading,
-				avatarSize = if p0.layoutMode == enumsModule.RowLayoutMode.Compact then UDim2.new(0, var7.Size.Size_1400, 0, var7.Size.Size_1400) else nil,
-				trustedConnectionIndicatorEnabled = p0.trustedConnectionIndicatorEnabled,
-				isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p0.isRobloxSubscriber else nil
+				userId = p1.userId or "",
+				avatarThumbnailUrl = p1.avatarThumbnailUrl,
+				userPresenceType = p1.userPresenceType or foundationModule.Enums.UserPresence.None,
+				title = p1.title,
+				subtitle = p1.subtitle,
+				layoutMode = p1.layoutMode,
+				onActivated = p1.onActivated,
+				selectable = p1.selectable ~= nil or p1.selectable,
+				isTitleLoading = p1.isTitleLoading,
+				isSubtitleLoading = p1.isSubtitleLoading,
+				contextualInfo = p1.contextualInfo and p1.contextualInfo.text,
+				isContextualInfoLoading = p1.isContextualInfoLoading,
+				avatarSize = if p1.layoutMode == enumsModule.RowLayoutMode.Compact then UDim2.new(0, var2.Size.Size_1400, 0, var2.Size.Size_1400) else nil,
+				trustedConnectionIndicatorEnabled = p1.trustedConnectionIndicatorEnabled,
+				isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p1.isRobloxSubscriber else nil
 			})
 		})
 	}
@@ -80,69 +80,69 @@ return reactModule.memo(function(p0)
 		LayoutOrder = 2,
 		tag = {
 			["gap-xsmall"] = true,
-			["row align-y-center auto-xy"] = p0.layoutMode == enumsModule.RowLayoutMode.Wide,
-			["col size-full-0 auto-y align-x-center"] = p0.layoutMode == enumsModule.RowLayoutMode.Compact
+			["row align-y-center auto-xy"] = p1.layoutMode == enumsModule.RowLayoutMode.Wide,
+			["col size-full-0 auto-y align-x-center"] = p1.layoutMode == enumsModule.RowLayoutMode.Compact
 		}
 	}
 	local t_3 = {
-		StatusIndicatorContainer = if fFlagAddStatusIndicatorToBaseRow and p0.shouldShowNewIndicator then reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy padding-right-small" }, {
+		StatusIndicatorContainer = if fFlagAddStatusIndicatorToBaseRow and p1.shouldShowNewIndicator then reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy padding-right-small" }, {
 			StatusIndicator = reactModule.createElement(statusIndicator, { variant = statusIndicatorVariant.Emphasis })
 		}) else nil
 	}
 	
-	if p0.primaryCta and p0.primaryCta.onActivated then
-		if p0.layoutMode == enumsModule.RowLayoutMode.Wide then
-			var13 = reactModule.createElement
-			var13 = var13(view, {
+	if p1.primaryCta and p1.primaryCta.onActivated then
+		if p1.layoutMode == enumsModule.RowLayoutMode.Wide then
+			var1 = reactModule.createElement
+			var1 = var1(view, {
 				tag = "auto-xy",
 				LayoutOrder = if fFlagAddStatusIndicatorToBaseRow then 2 else 1,
 				sizeConstraint = {
-					MinSize = if p0.primaryCta.minWidth then Vector2.new(p0.primaryCta.minWidth, 0) else nil,
-					MaxSize = if p0.primaryCta.maxWidth then Vector2.new(p0.primaryCta.maxWidth, 1e999) else nil
+					MinSize = if p1.primaryCta.minWidth then Vector2.new(p1.primaryCta.minWidth, 0) else nil,
+					MaxSize = if p1.primaryCta.maxWidth then Vector2.new(p1.primaryCta.maxWidth, 1e999) else nil
 				}
 			}, {
 				Button = reactModule.createElement(button, {
-					text = if userListUseActionAddTranslation then var8[p0.primaryCta.type] else p0.primaryCta.type,
+					text = if userListUseActionAddTranslation then var3[p1.primaryCta.type] else p1.primaryCta.type,
 					size = inputSize.Small,
-					variant = if fFlagFriendsPageViewBtnEnabled or fFlagUserListCtaIntegrationEnabled then p0.primaryCta.variant or buttonVariant.SoftEmphasis else buttonVariant.SoftEmphasis,
-					onActivated = p0.primaryCta.onActivated,
-					isDisabled = p0.primaryCta.isDisabled,
-					isLoading = p0.primaryCta.isLoading,
+					variant = if fFlagFriendsPageViewBtnEnabled or fFlagUserListCtaIntegrationEnabled then p1.primaryCta.variant or buttonVariant.SoftEmphasis else buttonVariant.SoftEmphasis,
+					onActivated = p1.primaryCta.onActivated,
+					isDisabled = p1.primaryCta.isDisabled,
+					isLoading = p1.primaryCta.isLoading,
 					fillBehavior = fillBehavior.Fill
 				})
 			})
 		else
-			var13 = reactModule.createElement
-			var13 = var13(button, {
-				text = if userListUseActionAddTranslation then var8[p0.primaryCta.type] else p0.primaryCta.type,
+			var1 = reactModule.createElement
+			var1 = var1(button, {
+				text = if userListUseActionAddTranslation then var3[p1.primaryCta.type] else p1.primaryCta.type,
 				size = inputSize.Small,
-				variant = if fFlagFriendsPageViewBtnEnabled or fFlagUserListCtaIntegrationEnabled then p0.primaryCta.variant or buttonVariant.SoftEmphasis else buttonVariant.SoftEmphasis,
-				onActivated = p0.primaryCta.onActivated,
-				isDisabled = p0.primaryCta.isDisabled,
-				isLoading = p0.primaryCta.isLoading,
+				variant = if fFlagFriendsPageViewBtnEnabled or fFlagUserListCtaIntegrationEnabled then p1.primaryCta.variant or buttonVariant.SoftEmphasis else buttonVariant.SoftEmphasis,
+				onActivated = p1.primaryCta.onActivated,
+				isDisabled = p1.primaryCta.isDisabled,
+				isLoading = p1.primaryCta.isLoading,
 				LayoutOrder = if fFlagAddStatusIndicatorToBaseRow then 2 else 1,
-				width = if p0.layoutMode == enumsModule.RowLayoutMode.Compact then UDim.new(1, 0) else nil
+				width = if p1.layoutMode == enumsModule.RowLayoutMode.Compact then UDim.new(1, 0) else nil
 			})
 		end
-	var13 = if fFlagUserListCtaIntegrationEnabled and p0.ctaLoading and p0.layoutMode == enumsModule.RowLayoutMode.Wide then reactModule.createElement(skeleton, {
+	var1 = if fFlagUserListCtaIntegrationEnabled and p1.ctaLoading and p1.layoutMode == enumsModule.RowLayoutMode.Wide then reactModule.createElement(skeleton, {
 		LayoutOrder = if fFlagAddStatusIndicatorToBaseRow then 2 else 1,
-		Size = UDim2.fromOffset(p0.ctaLoading.minWidth or 0, var7.Size.Size_800),
+		Size = UDim2.fromOffset(p1.ctaLoading.minWidth or 0, var2.Size.Size_800),
 		radius = radius.Medium
 	}) else nil
-	t_3.PrimaryActionCta = var13
-	t_3.SecondaryActionCta = if p0.layoutMode == enumsModule.RowLayoutMode.Wide and p0.secondaryCta and (p0.secondaryCta.icon and p0.secondaryCta.onActivated) then reactModule.createElement(iconButton, {
-		icon = p0.secondaryCta.icon,
+	t_3.PrimaryActionCta = var1
+	t_3.SecondaryActionCta = if p1.layoutMode == enumsModule.RowLayoutMode.Wide and p1.secondaryCta and (p1.secondaryCta.icon and p1.secondaryCta.onActivated) then reactModule.createElement(iconButton, {
+		icon = p1.secondaryCta.icon,
 		size = iconSize.Small,
 		variant = buttonVariant.Utility,
-		onActivated = p0.secondaryCta.onActivated,
-		isDisabled = p0.secondaryCta.isDisabled,
-		isLoading = p0.secondaryCta.isLoading,
+		onActivated = p1.secondaryCta.onActivated,
+		isDisabled = p1.secondaryCta.isDisabled,
+		isLoading = p1.secondaryCta.isLoading,
 		LayoutOrder = if fFlagAddStatusIndicatorToBaseRow then 3 else 2
 	}) else nil
-	t_3.TrailingContentWrapper = if p0.layoutMode == enumsModule.RowLayoutMode.Wide and p0.trailingContent then reactModule.createElement(view, {
+	t_3.TrailingContentWrapper = if p1.layoutMode == enumsModule.RowLayoutMode.Wide and p1.trailingContent then reactModule.createElement(view, {
 		tag = "auto-xy",
 		LayoutOrder = if fFlagAddStatusIndicatorToBaseRow then 4 else 3
-	}, { Content = p0.trailingContent }) else nil
+	}, { Content = p1.trailingContent }) else nil
 	t_1.TrailingSection = createElement_1(view, t_2, t_3)
 	
 	return createElement(view, t, t_1)

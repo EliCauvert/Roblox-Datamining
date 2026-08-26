@@ -11,7 +11,7 @@ return reactModule.memo(function()
 	-- upvalues: useKeybindsModule (ref), reactModule (ref), view (ref), keyboardGroupModule (ref)
 	local controls = useKeybindsModule().controls
 	local groups = useKeybindsModule().groups
-	local var4 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: controls (ref), groups (ref), reactModule (copy), view (copy), keyboardGroupModule (copy)
 		if controls == nil or groups == nil then
 			return nil
@@ -45,7 +45,7 @@ return reactModule.memo(function()
 		return t_1
 	end, { controls, groups })
 	
-	return if var4 == nil then nil else reactModule.createElement(view, {
+	return if var1 == nil then nil else reactModule.createElement(view, {
 		tag = "row size-full-0 auto-y wrap align-x-left align-y-top"
-	}, var4)
+	}, var1)
 end)

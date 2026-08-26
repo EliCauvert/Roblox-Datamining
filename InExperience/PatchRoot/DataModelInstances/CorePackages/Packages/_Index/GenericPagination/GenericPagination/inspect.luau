@@ -16,8 +16,8 @@
 }
 local _tostring = tostring
 
-local function _(p0)
-	return next, p0, nil
+local function _(p1)
+	return next, p1, nil
 end
 
 local _ = function(p1)
@@ -43,17 +43,17 @@ for i = 0, 31 do
 		t_2[char] = string.format("\\%03d", i)
 	end
 end
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: t_2 (ref), t_1 (ref)
-	return p2:gsub("\\", "\\\\"):gsub("(%c)%f[0-9]", t_2):gsub("%c", t_1)
+	return p1:gsub("\\", "\\\\"):gsub("(%c)%f[0-9]", t_2):gsub("%c", t_1)
 end
 
-local _ = function(p3)
-	return type(p3) == "string" and p3:match("^[_%a][_%a%d]*$")
+local _ = function(p1)
+	return type(p1) == "string" and p1:match("^[_%a][_%a%d]*$")
 end
 
-local _ = function(p4, p5)
-	return type(p4) == "number" and (p4 >= 1 and (p4 <= p5 and math.floor(p4) == p4))
+local _ = function(p1, p2)
+	return type(p1) == "number" and (p1 >= 1 and (p1 <= p2 and math.floor(p1) == p1))
 end
 
 local t_3 = {
@@ -66,92 +66,92 @@ local t_3 = {
 	thread = 7
 }
 
-local function sortKeys(p6, p7)
+local function sortKeys(p1, p2)
 	-- upvalues: t_3 (ref)
-	local var13 = type(p6)
-	local var14 = type(p7)
+	local var1 = type(p1)
+	local var2 = type(p2)
 	
-	if var13 == var14 and (var13 == "string" or var13 == "number") then
-		return p6 < p7
+	if var1 == var2 and (var1 == "string" or var1 == "number") then
+		return p1 < p2
 	end
-	var13 = t_3[var13]
-	local var15 = t_3[var14]
+	var1 = t_3[var1]
+	local var3 = t_3[var2]
 	
-	return if var13 and var15 then t_3[var13] < t_3[var14] elseif var13 then true elseif var15 then false else var13 < var14
+	return if var1 and var3 then t_3[var1] < t_3[var2] elseif var1 then true elseif var3 then false else var1 < var2
 end
 
-local _ = function(p8)
-	local var16 = 1
-	local var17 = rawget(p8, var16)
-	while var17 ~= nil do
-		var16 += 1
-		var17 = rawget(p8, var16)
+local _ = function(p1)
+	local var1 = 1
+	local var2 = rawget(p1, var1)
+	while var2 ~= nil do
+		var1 += 1
+		var2 = rawget(p1, var1)
 	end
-	return var16 - 1
+	return var1 - 1
 end
 
-local function getNonSequentialKeys(p9)
+local function getNonSequentialKeys(p2)
 	-- upvalues: sortKeys (ref)
 	local t = {}
-	local var19 = 0
-	local var20 = 1
-	local var21 = rawget(p9, var20)
-	while var21 ~= nil do
-		var20 += 1
-		var21 = rawget(p9, var20)
+	local var3 = 0
+	local var4 = 1
+	local var5 = rawget(p2, var4)
+	while var5 ~= nil do
+		var4 += 1
+		var5 = rawget(p2, var4)
 	end
-	local var22 = var20 - 1
+	local var6 = var4 - 1
 	
-	for i, v in next, p9 do
-		if not (type(i) == "number" and (i >= 1 and (i <= var22 and math.floor(i) == i))) then
-			var19 += 1
-			t[var19] = i
+	for i, v in next, p2 do
+		if not (type(i) == "number" and (i >= 1 and (i <= var6 and math.floor(i) == i))) then
+			var3 += 1
+			t[var3] = i
 		end
 	end
 	table.sort(t, sortKeys)
 	
-	return t, var19, var22
+	return t, var3, var6
 end
 
-local function countTableAppearances(p10, p11)
+local function countTableAppearances(p3, p4)
 	-- upvalues: countTableAppearances (ref)
-	p11 = p11 or {}
+	p4 = p4 or {}
 	
-	if type(p10) == "table" then
-		if p11[p10] then
-			p11[p10] += 1
+	if type(p3) == "table" then
+		if p4[p3] then
+			p4[p3] += 1
 		else
-			p11[p10] = 1
+			p4[p3] = 1
 			
-			for i, v in next, p10 do
-				countTableAppearances(i, p11)
-				countTableAppearances(v, p11)
+			for i, v in next, p3 do
+				countTableAppearances(i, p4)
+				countTableAppearances(v, p4)
 			end
-			countTableAppearances(getmetatable(p10), p11)
+			countTableAppearances(getmetatable(p3), p4)
 			
-			return p11
+			return p4
 		end
 	end
-	return p11
+	return p4
 end
 
-local _ = function(p12)
+local _ = function(p5)
 	local t = {}
-	local p12Count = #p12
+	local p12Count = #p5
 	
 	for i = 1, p12Count do
-		t[i] = p12[i]
+		t[i] = p5[i]
 	end
 	return t, p12Count
 end
 
-local function makePath(p13, ...)
+local function makePath(p6, ...)
 	local list = { ... }
 	local t = {}
-	local p13Count = #p13
+	local p13Count = #p6
 	
 	for i = 1, p13Count do
-		t[i] = p13[i]
+		t[i] = p6[i]
 	end
 	for i_1 = 1, #list do
 		t[p13Count + i_1] = list[i_1]
@@ -159,44 +159,44 @@ local function makePath(p13, ...)
 	return t
 end
 
-local function processRecursive(p14, p15, p16, p17)
+local function processRecursive(p7, p8, p9, p10)
 	-- upvalues: processRecursive (ref), makePath (ref), t (ref)
-	if p15 == nil then
+	if p8 == nil then
 		return nil
-	elseif p17[p15] then
-		return p17[p15]
+	elseif p10[p8] then
+		return p10[p8]
 	end
-	local var29 = p14(p15, p16)
+	local var7 = p7(p8, p9)
 	
-	if type(var29) == "table" then
+	if type(var7) == "table" then
 		local t_1 = {}
-		p17[p15] = t_1
+		p10[p8] = t_1
 		local _ = nil
 		
-		for i, v in next, var29 do
-			local var32 = processRecursive(p14, i, makePath(p16, i, t.KEY), p17)
+		for i, v in next, var7 do
+			local var8 = processRecursive(p7, i, makePath(p9, i, t.KEY), p10)
 			
-			if var32 ~= nil then
-				t_1[var32] = processRecursive(p14, v, makePath(p16, var32), p17)
+			if var8 ~= nil then
+				t_1[var8] = processRecursive(p7, v, makePath(p9, var8), p10)
 			end
 		end
-		local var31 = processRecursive(p14, getmetatable(var29), makePath(p16, t.METATABLE), p17)
+		local var9 = processRecursive(p7, getmetatable(var7), makePath(p9, t.METATABLE), p10)
 		
-		if type(var31) ~= "table" then
-			var31 = nil
+		if type(var9) ~= "table" then
+			var9 = nil
 		end
-		setmetatable(t_1, var31)
-		var29 = t_1
+		setmetatable(t_1, var9)
+		var7 = t_1
 	end
-	return var29
+	return var7
 end
 
 local t_4 = {}
 local t_5 = { __index = t_4 }
 
-function t_4.puts(p18, ...)
+function t_4.puts(p11, ...)
 	local list = { ... }
-	local buffer = p18.buffer
+	local buffer = p11.buffer
 	local bufferCount = #buffer
 	
 	for i = 1, #list do
@@ -205,147 +205,147 @@ function t_4.puts(p18, ...)
 	end
 end
 
-function t_4.down(p19, p20)
-	p19.level += 1
-	p20()
-	p19.level -= 1
+function t_4.down(p12, p13)
+	p12.level += 1
+	p13()
+	p12.level -= 1
 end
 
-function t_4.tabify(p21)
-	p21:puts(p21.newline, string.rep(p21.indent, p21.level))
+function t_4.tabify(p12)
+	p12:puts(p12.newline, string.rep(p12.indent, p12.level))
 end
 
-function t_4.alreadyVisited(p22, p23)
-	return p22.ids[p23] ~= nil
+function t_4.alreadyVisited(p12, p13)
+	return p12.ids[p13] ~= nil
 end
 
-function t_4.getId(p24, p25)
+function t_4.getId(p12, p13)
 	-- upvalues: _tostring (ref)
-	local var35 = p24.ids[p25]
+	local var10 = p12.ids[p13]
 	
-	if not var35 then
-		local var36 = type(p25)
-		var35 = (p24.maxIds[var36] or 0) + 1
-		p24.maxIds[var36] = var35
-		p24.ids[p25] = var35
+	if not var10 then
+		local var11 = type(p13)
+		var10 = (p12.maxIds[var11] or 0) + 1
+		p12.maxIds[var11] = var10
+		p12.ids[p13] = var10
 	end
-	return _tostring(var35)
+	return _tostring(var10)
 end
 
-function t_4.putKey(p26, p27)
-	if type(p27) == "string" and p27:match("^[_%a][_%a%d]*$") then
-		return p26:puts(p27)
+function t_4.putKey(p12, p13)
+	if type(p13) == "string" and p13:match("^[_%a][_%a%d]*$") then
+		return p12:puts(p13)
 	end
-	p26:puts("[")
-	p26:putValue(p27)
-	p26:puts("]")
+	p12:puts("[")
+	p12:putValue(p13)
+	p12:puts("]")
 end
 
-function t_4.putTable(p28, p29)
+function t_4.putTable(p12, p13)
 	-- upvalues: t (ref), _tostring (ref), getNonSequentialKeys (ref)
-	if p29 == t.KEY or p29 == t.METATABLE then
-		p28:puts(_tostring(p29))
+	if p13 == t.KEY or p13 == t.METATABLE then
+		p12:puts(_tostring(p13))
 		
 		return
-	elseif p28:alreadyVisited(p29) then
-		p28:puts("<table ", p28:getId(p29), ">")
+	elseif p12:alreadyVisited(p13) then
+		p12:puts("<table ", p12:getId(p13), ">")
 		
 		return
-	elseif p28.depth <= p28.level then
-		p28:puts("{...}")
+	elseif p12.depth <= p12.level then
+		p12:puts("{...}")
 		
 		return
-	elseif p28.tableAppearances[p29] > 1 then
-		p28:puts("<", p28:getId(p29), ">")
+	elseif p12.tableAppearances[p13] > 1 then
+		p12:puts("<", p12:getId(p13), ">")
 	end
-	local var37, var38, var39 = getNonSequentialKeys(p29)
-	local var40 = getmetatable(p29)
-	p28:puts("{")
-	p28:down(function()
-		-- upvalues: var39 (ref), p28 (ref), p29 (ref), var38 (ref), var37 (ref), var40 (ref)
-		local var41 = 0
+	local var10, var11, var12 = getNonSequentialKeys(p13)
+	local var13 = getmetatable(p13)
+	p12:puts("{")
+	p12:down(function()
+		-- upvalues: var12 (ref), p12 (ref), p13 (ref), var11 (ref), var10 (ref), var13 (ref)
+		local var14 = 0
 		
-		for i = 1, var39 do
-			if var41 > 0 then
-				p28:puts(",")
+		for i = 1, var12 do
+			if var14 > 0 then
+				p12:puts(",")
 			end
-			p28:puts(" ")
-			p28:putValue(p29[i])
-			var41 += 1
+			p12:puts(" ")
+			p12:putValue(p13[i])
+			var14 += 1
 		end
-		for i_1 = 1, var38 do
-			local var42 = var37[i_1]
+		for i_1 = 1, var11 do
+			local var15 = var10[i_1]
 			
-			if var41 > 0 then
-				p28:puts(",")
+			if var14 > 0 then
+				p12:puts(",")
 			end
-			p28:tabify()
-			p28:putKey(var42)
-			p28:puts(" = ")
-			p28:putValue(p29[var42])
-			var41 += 1
+			p12:tabify()
+			p12:putKey(var15)
+			p12:puts(" = ")
+			p12:putValue(p13[var15])
+			var14 += 1
 		end
-		if type(var40) == "table" then
-			if var41 > 0 then
-				p28:puts(",")
+		if type(var13) == "table" then
+			if var14 > 0 then
+				p12:puts(",")
 			end
-			p28:tabify()
-			p28:puts("<metatable> = ")
-			p28:putValue(var40)
+			p12:tabify()
+			p12:puts("<metatable> = ")
+			p12:putValue(var13)
 		end
 	end)
 	
-	if var38 > 0 or type(var40) == "table" then
-		p28:tabify()
-	elseif var39 > 0 then
-		p28:puts(" ")
+	if var11 > 0 or type(var13) == "table" then
+		p12:tabify()
+	elseif var12 > 0 then
+		p12:puts(" ")
 	end
-	p28:puts("}")
+	p12:puts("}")
 end
 
-function t_4.putValue(p30, p31)
+function t_4.putValue(p14, p15)
 	-- upvalues: t_2 (ref), t_1 (ref), _tostring (ref)
-	local var43 = type(p31)
+	local var16 = type(p15)
 	
-	if var43 == "string" then
-		local var44 = p31:gsub("\\", "\\\\"):gsub("(%c)%f[0-9]", t_2):gsub("%c", t_1)
-		p30:puts(if var44:match("\"") and not var44:match("'") then "'" .. var44 .. "'" else "\"" .. var44:gsub("\"", "\\\"") .. "\"")
+	if var16 == "string" then
+		local var17 = p15:gsub("\\", "\\\\"):gsub("(%c)%f[0-9]", t_2):gsub("%c", t_1)
+		p14:puts(if var17:match("\"") and not var17:match("'") then "'" .. var44 .. "'" else "\"" .. var44:gsub("\"", "\\\"") .. "\"")
 		
 		return
-	elseif var43 == "number" or var43 == "boolean" or (var43 == "nil" or var43 == "cdata") or var43 == "ctype" then
-		p30:puts(_tostring(p31))
+	elseif var16 == "number" or var16 == "boolean" or (var16 == "nil" or var16 == "cdata") or var16 == "ctype" then
+		p14:puts(_tostring(p15))
 		
 		return
-	elseif var43 == "table" then
-		p30:putTable(p31)
+	elseif var16 == "table" then
+		p14:putTable(p15)
 		
 		return
 	end
-	p30:puts("<", var43, " ", p30:getId(p31), ">")
+	p14:puts("<", var16, " ", p14:getId(p15), ">")
 end
 
-function t.inspect(p32, p33)
+function t.inspect(p14, p15)
 	-- upvalues: processRecursive (ref), countTableAppearances (ref), t_5 (ref)
-	p33 = p33 or {}
-	p33 = p33.depth or 1e999
-	local newline = p33.newline or "\n"
-	local indent = p33.indent or "  "
-	local process = p33.process
+	p15 = p15 or {}
+	p15 = p15.depth or 1e999
+	local newline = p15.newline or "\n"
+	local indent = p15.indent or "  "
+	local process = p15.process
 	
 	if process then
-		p32 = processRecursive(process, p32, {}, {})
+		p14 = processRecursive(process, p14, {}, {})
 	end
 	local tbl = setmetatable({
 		level = 0,
-		depth = p33,
+		depth = p15,
 		buffer = {},
 		ids = {},
 		maxIds = {},
 		newline = newline,
 		indent = indent,
-		tableAppearances = countTableAppearances(p32)
+		tableAppearances = countTableAppearances(p14)
 	}, t_5)
-	tbl:putValue(p32)
+	tbl:putValue(p14)
 	
 	return table.concat(tbl.buffer)
 end

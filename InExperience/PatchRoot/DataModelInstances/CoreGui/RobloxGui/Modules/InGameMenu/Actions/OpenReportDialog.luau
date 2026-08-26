@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("OPEN_REPORT_DIALOG", function(p0, p1)
-	return { userId = p0, userName = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("OPEN_REPORT_DIALOG", function(p1, p2)
+	return { userId = p1, userName = p2 }
 end)

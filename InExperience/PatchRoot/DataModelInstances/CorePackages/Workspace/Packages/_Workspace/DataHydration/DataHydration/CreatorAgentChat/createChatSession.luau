@@ -37,14 +37,14 @@ return function(p1, p2, p3, p4)
 		var6(buildMergedHistory())
 	end
 	
-	local function noteHistorySequenceIds(p1)
+	local function noteHistorySequenceIds(p5)
 		-- upvalues: var1 (ref), historyPageUtilsModule (copy)
-		var1.noteHistorySequenceId(historyPageUtilsModule.getMaxHistorySequenceId(p1))
+		var1.noteHistorySequenceId(historyPageUtilsModule.getMaxHistorySequenceId(p5))
 	end
 	
-	local function noteTurnSequenceIds(p1)
+	local function noteTurnSequenceIds(p5)
 		-- upvalues: var1 (ref)
-		local getLatestProcessedSequenceNumber = p1.getLatestProcessedSequenceNumber
+		local getLatestProcessedSequenceNumber = p5.getLatestProcessedSequenceNumber
 		
 		if getLatestProcessedSequenceNumber ~= nil then
 			var1.noteHistorySequenceId(getLatestProcessedSequenceNumber())
@@ -69,25 +69,25 @@ return function(p1, p2, p3, p4)
 		local casSessionId = var1.getCasSessionId(false)
 		
 		if casSessionId == nil or casSessionId == "" or not var1.getHasLoadedHistory(false) then return end
-		local var1 = snapshotActiveSession()
+		local var7 = snapshotActiveSession()
 		
-		if var1 ~= nil then
-			var3.save(casSessionId, var1)
+		if var7 ~= nil then
+			var3.save(casSessionId, var7)
 		end
 	end
 	
-	local _ = function(p1)
+	local _ = function(p5)
 		-- upvalues: var3 (ref), t (write), t_1 (write), var1 (ref), var6 (ref), buildMergedHistory (ref)
-		local var1 = var3.restore(p1)
+		local var7 = var3.restore(p5)
 		
-		if var1 == nil then
+		if var7 == nil then
 			return false
 		end
-		t = var1.loadedBySequenceId
-		t_1 = var1.overlayBySequenceId
-		var1.setHasLoadedHistory(var1.hasLoadedHistory)
-		var1.setNextHistoryPageToken(var1.nextHistoryPageToken)
-		var1.setLatestObservedHistorySequenceId(var1.latestObservedHistorySequenceId)
+		t = var7.loadedBySequenceId
+		t_1 = var7.overlayBySequenceId
+		var7.setHasLoadedHistory(var7.hasLoadedHistory)
+		var7.setNextHistoryPageToken(var7.nextHistoryPageToken)
+		var7.setLatestObservedHistorySequenceId(var7.latestObservedHistorySequenceId)
 		var6(buildMergedHistory())
 		
 		return true
@@ -112,29 +112,29 @@ return function(p1, p2, p3, p4)
 		local casSessionId = var1.getCasSessionId(false)
 		
 		if casSessionId ~= nil and casSessionId ~= "" and var1.getHasLoadedHistory(false) then
-			local var1 = snapshotActiveSession()
+			local var7 = snapshotActiveSession()
 			
-			if var1 ~= nil then
-				var3.save(casSessionId, var1)
+			if var7 ~= nil then
+				var3.save(casSessionId, var7)
 			end
 		end
-		local var2
-		var1.setCasSessionId(value)
-		var1.setHistoryLoadInFlight(false)
-		local var3 = var3.restore(value)
+		local var8
+		var7.setCasSessionId(value)
+		var7.setHistoryLoadInFlight(false)
+		local var9 = var9.restore(value)
 		
-		if var3 == nil then
-			var2 = false
+		if var9 == nil then
+			var8 = false
 		else
-			t = var3.loadedBySequenceId
-			t_1 = var3.overlayBySequenceId
-			var1.setHasLoadedHistory(var3.hasLoadedHistory)
-			var1.setNextHistoryPageToken(var3.nextHistoryPageToken)
-			var1.setLatestObservedHistorySequenceId(var3.latestObservedHistorySequenceId)
+			t = var9.loadedBySequenceId
+			t_1 = var9.overlayBySequenceId
+			var7.setHasLoadedHistory(var9.hasLoadedHistory)
+			var7.setNextHistoryPageToken(var9.nextHistoryPageToken)
+			var7.setLatestObservedHistorySequenceId(var9.latestObservedHistorySequenceId)
 			var6(buildMergedHistory())
-			var2 = true
+			var8 = true
 		end
-		if var2 then
+		if var8 then
 			p1.onCasSessionIdChanged(value)
 			
 			return
@@ -143,18 +143,18 @@ return function(p1, p2, p3, p4)
 		p1.onCasSessionIdChanged(value)
 	end
 	
-	local function mergeHistoryPage(p1, p2)
+	local function mergeHistoryPage(p5, p6)
 		-- upvalues: sessionHistoryMergeModule (copy), t (write), t_1 (write), var1 (ref), historyPageUtilsModule (copy), var6 (ref), buildMergedHistory (ref)
-		sessionHistoryMergeModule.mergeHistoryIntoMap(t, p1, t_1)
-		var1.setNextHistoryPageToken(p2)
-		var1.noteHistorySequenceId(historyPageUtilsModule.getMaxHistorySequenceId(p1))
+		sessionHistoryMergeModule.mergeHistoryIntoMap(t, p5, t_1)
+		var1.setNextHistoryPageToken(p6)
+		var1.noteHistorySequenceId(historyPageUtilsModule.getMaxHistorySequenceId(p5))
 		var6(buildMergedHistory())
 	end
 	
-	local function ingestRealtimeUpdate(p1, p2)
+	local function ingestRealtimeUpdate(p5, p6)
 		-- upvalues: sessionHistoryMergeModule (copy), t_1 (write), t (write), var1 (ref), var6 (ref), buildMergedHistory (ref)
-		if sessionHistoryMergeModule.ingestOverlayUpdate(t_1, t, p1, p2) then
-			var1.noteHistorySequenceId(p2)
+		if sessionHistoryMergeModule.ingestOverlayUpdate(t_1, t, p5, p6) then
+			var1.noteHistorySequenceId(p6)
 			var6(buildMergedHistory())
 		end
 	end
@@ -221,14 +221,14 @@ return function(p1, p2, p3, p4)
 		if var1.getInitialized(false) then
 			return true, nil
 		end
-		local var1 = historyPageUtilsModule.awaitRequestState(p1.initialize({ protocolVersion = acpProtocolModule.ProtocolVersion }).state, os.clock() + rpcTimeoutSeconds)
+		local var7 = historyPageUtilsModule.awaitRequestState(p1.initialize({ protocolVersion = acpProtocolModule.ProtocolVersion }).state, os.clock() + rpcTimeoutSeconds)
 		
-		if var1.status == "succeeded" then
-			var1.setInitialized(true)
+		if var7.status == "succeeded" then
+			var7.setInitialized(true)
 			
 			return true, nil
 		end
-		return false, var1.errorCode
+		return false, var7.errorCode
 	end
 	
 	return {
@@ -264,27 +264,27 @@ return function(p1, p2, p3, p4)
 				elseif p2 == nil or p3 == nil then
 					return nil, { stage = "missing_project" }
 				end
-				local var1, var2 = ensureInitialized()
+				local var7, var8 = ensureInitialized()
 				
-				if not var1 then
-					return nil, { stage = "initialize", errorCode = var2 }
+				if not var7 then
+					return nil, { stage = "initialize", errorCode = var8 }
 				end
-				local var3 = historyPageUtilsModule.awaitRequestState(p1.sessionNew({
+				local var9 = historyPageUtilsModule.awaitRequestState(p1.sessionNew({
 					project = { universeId = p2, placeId = p3 },
 					experiment = experimentOverrideModule.getExperiment(),
 					application = if fFlagBuildExperiencePinForBuild then "build" else nil
 				}).state, os.clock() + rpcTimeoutSeconds)
 				
-				if var3.status ~= "succeeded" then
-					return nil, { stage = "session_new", errorCode = var3.errorCode }
+				if var9.status ~= "succeeded" then
+					return nil, { stage = "session_new", errorCode = var9.errorCode }
 				end
-				local result = var3.result
-				local var4 = if typeof(result) == "table" then result.sessionId else nil
+				local result = var9.result
+				local var10 = if typeof(result) == "table" then result.sessionId else nil
 				
-				if typeof(var4) == "string" and var4 ~= "" then
-					setCasSessionIdInternal(var4)
+				if typeof(var10) == "string" and var10 ~= "" then
+					setCasSessionIdInternal(var10)
 					
-					return var4, nil
+					return var10, nil
 				end
 				return nil, { stage = "session_new" }
 			end,
@@ -311,16 +311,16 @@ return function(p1, p2, p3, p4)
 				var2()
 			end
 		end,
-		submitActiveToolResult = function(p1, p2, p3, p4)
-			-- upvalues: var1 (ref), p1 (ref)
+		submitActiveToolResult = function(p5, p6, p7, p8)
+			-- upvalues: var1 (ref), p5 (ref)
 			local casSessionId = var1.getCasSessionId(false)
 			
-			return if casSessionId == nil then nil else p1.submitToolResult({
+			return if casSessionId == nil then nil else p5.submitToolResult({
 				sessionId = casSessionId,
-				turnId = p3,
-				referenceId = p4,
-				content = p1,
-				isError = if p2 ~= nil then false else p2
+				turnId = p7,
+				referenceId = p8,
+				content = p5,
+				isError = if p6 ~= nil then false else p6
 			})
 		end,
 		getActiveTurnHandle = function()
@@ -329,11 +329,11 @@ return function(p1, p2, p3, p4)
 			
 			return if casSessionId == nil then nil else p1.getActiveTurnHandle(casSessionId)
 		end,
-		startPollingActiveTurn = function(p1)
+		startPollingActiveTurn = function(p5)
 			-- upvalues: var1 (ref), var2 (ref)
 			local casSessionId = var1.getCasSessionId(false)
 			
-			return if casSessionId == nil then function() end else var2.startPollingActiveTurn(casSessionId, p1)
+			return if casSessionId == nil then function() end else var2.startPollingActiveTurn(casSessionId, p5)
 		end
 	}
 end

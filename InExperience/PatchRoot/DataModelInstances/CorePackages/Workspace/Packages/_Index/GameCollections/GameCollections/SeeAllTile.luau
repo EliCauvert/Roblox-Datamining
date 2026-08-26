@@ -8,26 +8,26 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useDesignTokens = require(parent.Style).useDesignTokens
 local pushRight = images["icons/navigation/pushRight"]
 
-function SeeAllTile(p0)
+function SeeAllTile(p1)
 	-- upvalues: useDesignTokens (ref), useLocalization (ref), useCursor (ref), pushRight (ref), reactModule (ref), imageSetLabel (ref)
-	local size = p0.size
-	local layoutOrder = p0.layoutOrder
-	local var2 = useDesignTokens()
-	local var3 = useLocalization({ seeAll = "Feature.Home.ActionSeeAll" })
-	local uDim = UDim.new(0, var2.Size.Size_200)
-	local var5 = useCursor(uDim)
-	local titleLarge = var2.Typography.TitleLarge
-	local size900 = var2.Size.Size_900
+	local size = p1.size
+	local layoutOrder = p1.layoutOrder
+	local var1 = useDesignTokens()
+	local var2 = useLocalization({ seeAll = "Feature.Home.ActionSeeAll" })
+	local uDim = UDim.new(0, var1.Size.Size_200)
+	local var3 = useCursor(uDim)
+	local titleLarge = var1.Typography.TitleLarge
+	local size900 = var1.Size.Size_900
 	
 	return reactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		Text = "",
 		Size = size,
 		LayoutOrder = layoutOrder,
-		BackgroundTransparency = var2.Color.Surface.Surface_300.Transparency,
-		BackgroundColor3 = var2.Color.Surface.Surface_300.Color3,
-		[reactModule.Event.Activated] = p0.onActivated,
-		SelectionImageObject = var5
+		BackgroundTransparency = var1.Color.Surface.Surface_300.Transparency,
+		BackgroundColor3 = var1.Color.Surface.Surface_300.Color3,
+		[reactModule.Event.Activated] = p1.onActivated,
+		SelectionImageObject = var3
 	}, {
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = uDim }),
 		UIListLayout = reactModule.createElement("UIListLayout", {
@@ -35,25 +35,25 @@ function SeeAllTile(p0)
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var2.Size.Size_100)
+			Padding = UDim.new(0, var1.Size.Size_100)
 		}),
 		Icon = reactModule.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.fromOffset(size900, size900),
-			Image = p0.icon or pushRight,
-			ImageColor3 = var2.Color.Content.Emphasis.Color3,
-			ImageTransparency = var2.Color.Content.Emphasis.Transparency
+			Image = p1.icon or pushRight,
+			ImageColor3 = var1.Color.Content.Emphasis.Color3,
+			ImageTransparency = var1.Color.Content.Emphasis.Transparency
 		}),
 		Title = reactModule.createElement("TextLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
-			Text = p0.title or var3.seeAll,
+			Text = p1.title or var2.seeAll,
 			Size = UDim2.new(1, 0, 0, titleLarge.FontSize),
 			TextXAlignment = Enum.TextXAlignment.Center,
 			Font = titleLarge.Font,
 			TextSize = titleLarge.FontSize,
-			TextColor3 = var2.Color.Content.Emphasis.Color3,
+			TextColor3 = var1.Color.Content.Emphasis.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		})
 	})

@@ -30,11 +30,11 @@ local t_1 = {
 }
 setmetatable(t, {
 	__newindex = function(_, _, _) end,
-	__index = function(_, p0)
+	__index = function(_, p1)
 		-- upvalues: t_1 (ref)
-		assert(p0 ~= nil, "LaunchErrorLocalizationKeys needs a key")
+		assert(p1 ~= nil, "LaunchErrorLocalizationKeys needs a key")
 		
-		return t_1[p0] or t_1.Default
+		return t_1[p1] or t_1.Default
 	end
 })
 

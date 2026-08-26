@@ -7,14 +7,14 @@ return {
 	fields = {
 		omniFeedItem = {},
 		profilesInsightsByUserIds = {
-			read = function(_, _, p0)
+			read = function(_, _, p1)
 				local t = {}
 				
-				for i, v in pairs(p0.args.userIds) do
-					local var3 = p0:toReference({ __typename = "ProfileInsights", targetUserId = v })
-					table.insert(t, var3)
+				for i, v in pairs(p1.args.userIds) do
+					local var1 = p1:toReference({ __typename = "ProfileInsights", targetUserId = v })
+					table.insert(t, var1)
 					
-					if not p0:canRead(var3) then
+					if not p1:canRead(var1) then
 						return nil
 					end
 				end
@@ -22,14 +22,14 @@ return {
 			end
 		},
 		userProfiles = {
-			read = function(_, _, p1)
+			read = function(_, _, p2)
 				local t = {}
 				
-				for i, v in p1.args.userIds do
-					local var5 = p1:toReference({ __typename = "UserProfile", id = v })
-					table.insert(t, var5)
+				for i, v in p2.args.userIds do
+					local var2 = p2:toReference({ __typename = "UserProfile", id = v })
+					table.insert(t, var2)
 					
-					if not p1:canRead(var5) then
+					if not p2:canRead(var2) then
 						return nil
 					end
 				end
@@ -38,20 +38,20 @@ return {
 		},
 		allFriendsByUserId = {
 			keyArgs = { "userId", "sort" },
-			merge = function(_, p2, p3)
+			merge = function(_, p3, p4)
 				-- upvalues: mergeListsWithoutDuplicatesModule (ref), cryoModule (ref)
-				return if p2 then if p2.nextCursor == p3.curCursor then cryoModule.Dictionary.join(p3, {
-					friends = mergeListsWithoutDuplicatesModule(p2 and p2.friends, p3 and p3.friends, "__ref")
-				}) else p2 else p3
+				return if p3 then if p3.nextCursor == p4.curCursor then cryoModule.Dictionary.join(p4, {
+					friends = mergeListsWithoutDuplicatesModule(p3 and p3.friends, p4 and p4.friends, "__ref")
+				}) else p3 else p4
 			end
 		},
 		onlineFriendsByUserId = {
 			keyArgs = { "userId", "sort" },
-			read = function(_, p4, p5)
+			read = function(_, p3, p4)
 				-- upvalues: cryoModule (ref)
-				return p4 and cryoModule.List.filter(p4, function(p6)
-					-- upvalues: p5 (ref)
-					local userPresenceType = p5:readField("userPresenceType", p5:readField("presence", p6))
+				return p3 and cryoModule.List.filter(p3, function(p5)
+					-- upvalues: p4 (ref)
+					local userPresenceType = p4:readField("userPresenceType", p4:readField("presence", p5))
 					
 					return userPresenceType and userPresenceType ~= "Offline"
 				end)

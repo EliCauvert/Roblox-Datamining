@@ -6,9 +6,9 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local flagsModule = require(foundation.Utility.Flags)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: flagsModule (ref), inputSizeModule (ref)
-	local ceiled = math.ceil(p0.Stroke.Standard)
+	local ceiled = math.ceil(p1.Stroke.Standard)
 	
 	return {
 		common = {

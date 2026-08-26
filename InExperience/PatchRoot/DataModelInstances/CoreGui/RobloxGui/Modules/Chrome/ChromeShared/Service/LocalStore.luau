@@ -4,8 +4,8 @@ local httpService = game:GetService("HttpService")
 local playersService = game:GetService("Players")
 local constantsModule = require(chromeShared.Unibar.Constants)
 local inGameMenuStateStorageKeyEngineFeature = game:GetEngineFeature("InGameMenuStateStorageKey")
-local var6 = nil
-local var7 = false
+local var1 = nil
+local var2 = false
 local localPlayer = playersService.LocalPlayer
 while not localPlayer do
 	playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
@@ -14,21 +14,21 @@ end
 local text = "player_" .. tostring(if localPlayer then localPlayer.UserId else 0)
 
 local function initStore()
-	-- upvalues: var6 (write), text (ref)
-	if var6.LocalPlayer == nil then
-		var6.LocalPlayer = {}
+	-- upvalues: var1 (write), text (ref)
+	if var1.LocalPlayer == nil then
+		var1.LocalPlayer = {}
 	end
-	if var6.LocalPlayer[text] == nil then
-		var6.LocalPlayer[text] = {}
+	if var1.LocalPlayer[text] == nil then
+		var1.LocalPlayer[text] = {}
 	end
-	if var6.AnyPlayer == nil then
-		var6.AnyPlayer = {}
+	if var1.AnyPlayer == nil then
+		var1.AnyPlayer = {}
 	end
 end
 
-local function localPlayerSelector(p0)
+local function localPlayerSelector(p1)
 	-- upvalues: text (ref)
-	return if p0 and p0.LocalPlayer and p0.LocalPlayer[text] then p0.LocalPlayer[text] else p0
+	return if p1 and p1.LocalPlayer and p1.LocalPlayer[text] then p1.LocalPlayer[text] else p1
 end
 
 local function anyPlayerSelector(p1)
@@ -36,7 +36,7 @@ local function anyPlayerSelector(p1)
 end
 
 local function loadStore()
-	-- upvalues: inGameMenuStateStorageKeyEngineFeature (ref), appStorageService (ref), var7 (write), httpService (ref), var6 (write), initStore (ref)
+	-- upvalues: inGameMenuStateStorageKeyEngineFeature (ref), appStorageService (ref), var2 (write), httpService (ref), var1 (write), initStore (ref)
 	if not inGameMenuStateStorageKeyEngineFeature then return end
 	local ok, status = pcall(function()
 		-- upvalues: appStorageService (copy)
@@ -44,28 +44,28 @@ local function loadStore()
 	end)
 	
 	if ok then
-		var7 = true
+		var2 = true
 		
 		if #status > 0 then
 			local ok_1, status_1 = pcall(function()
 				-- upvalues: httpService (copy), status (ref)
 				return httpService:JSONDecode(status)
 			end)
-			var6 = if ok_1 then status_1 else {}
+			var1 = if ok_1 then status_1 else {}
 		else
-			var6 = {}
+			var1 = {}
 		end
 		initStore()
 	end
 end
 
 local function saveStore()
-	-- upvalues: inGameMenuStateStorageKeyEngineFeature (ref), var7 (write), httpService (ref), var6 (write), appStorageService (ref)
+	-- upvalues: inGameMenuStateStorageKeyEngineFeature (ref), var2 (write), httpService (ref), var1 (write), appStorageService (ref)
 	if not inGameMenuStateStorageKeyEngineFeature then return end
-	if var7 then
+	if var2 then
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), var6 (copy)
-			return httpService:JSONEncode(var6)
+			-- upvalues: httpService (copy), var1 (copy)
+			return httpService:JSONEncode(var1)
 		end)
 		
 		if ok then
@@ -89,44 +89,44 @@ local function saveStore()
 	end
 end
 
-local function deepCopy(p2)
+local function deepCopy(p1)
 	-- upvalues: deepCopy (ref)
-	if type(p2) ~= "table" then
-		return p2
+	if type(p1) ~= "table" then
+		return p1
 	end
 	local t = {}
 	
-	for i, v in pairs(p2) do
+	for i, v in pairs(p1) do
 		t[i] = deepCopy(v)
 	end
 	return t
 end
 
-local function _(p3, p4, p5)
-	-- upvalues: var7 (write), loadStore (ref), var6 (write), deepCopy (ref), saveStore (ref)
-	if not var7 then
+local function _(p2, p3, p4)
+	-- upvalues: var2 (write), loadStore (ref), var1 (write), deepCopy (ref), saveStore (ref)
+	if not var2 then
 		loadStore()
 	end
-	if var7 then
-		local var16 = p5 and p5(var6) or var6
-		local var17 = var16[p3]
-		var16[p3] = deepCopy(p4)
+	if var2 then
+		local var3 = p4 and p4(var1) or var1
+		local var4 = var3[p2]
+		var3[p2] = deepCopy(p3)
 		
-		if var17 ~= var16[p3] then
+		if var4 ~= var3[p2] then
 			saveStore()
 		end
 	end
 end
 
-local _ = function(p6, p7)
-	-- upvalues: var7 (write), loadStore (ref), var6 (write), deepCopy (ref)
-	if not var7 then
+local _ = function(p2, p3)
+	-- upvalues: var2 (write), loadStore (ref), var1 (write), deepCopy (ref)
+	if not var2 then
 		loadStore()
 	end
-	if var7 then
-		local var18 = p7 and p7(var6) or var6
+	if var2 then
+		local var3 = p3 and p3(var1) or var1
 		
-		return if var18 then deepCopy(var18[p6]) else nil
+		return if var3 then deepCopy(var3[p2]) else nil
 	end
 end
 
@@ -135,167 +135,167 @@ return {
 		-- upvalues: inGameMenuStateStorageKeyEngineFeature (ref)
 		return inGameMenuStateStorageKeyEngineFeature
 	end,
-	storeForLocalPlayer = function(p8, p9)
-		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref), saveStore (ref)
-		if not var7 then
+	storeForLocalPlayer = function(p2, p3)
+		-- upvalues: localPlayerSelector (ref), var2 (write), loadStore (ref), var1 (write), text (ref), deepCopy (ref), saveStore (ref)
+		if not var2 then
 			loadStore()
 		end
-		if var7 then
-			local var19, var20
+		if var2 then
+			local var3, var4
 			if localPlayerSelector then
-				var19 = var6
-				var20 = if var19 and var19.LocalPlayer and var19.LocalPlayer[text] then var19.LocalPlayer[text] else var19
-				var20 = var20 or var6
+				var3 = var1
+				var4 = if var3 and var3.LocalPlayer and var3.LocalPlayer[text] then var3.LocalPlayer[text] else var3
+				var4 = var4 or var1
 			end
-			var19 = var20[p8]
-			var20[p8] = deepCopy(p9)
+			var3 = var4[p2]
+			var4[p2] = deepCopy(p3)
 			
-			if var19 ~= var20[p8] then
+			if var3 ~= var4[p2] then
 				saveStore()
 			end
 		end
 	end,
-	loadForLocalPlayer = function(p10)
-		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref)
-		if not var7 then
+	loadForLocalPlayer = function(p2)
+		-- upvalues: localPlayerSelector (ref), var2 (write), loadStore (ref), var1 (write), text (ref), deepCopy (ref)
+		if not var2 then
 			loadStore()
 		end
-		if var7 then
-			local var22
+		if var2 then
+			local var3
 			if localPlayerSelector then
-				local var21 = var6
-				var22 = if var21 and var21.LocalPlayer and var21.LocalPlayer[text] then var21.LocalPlayer[text] else var21
-				var22 = var22 or var6
+				local var4 = var1
+				var3 = if var4 and var4.LocalPlayer and var4.LocalPlayer[text] then var4.LocalPlayer[text] else var4
+				var3 = var3 or var1
 			end
-			return if var22 then deepCopy(var22[p10]) else nil
+			return if var3 then deepCopy(var3[p2]) else nil
 		end
 	end,
-	storeForAnyPlayer = function(p11, p12)
-		-- upvalues: anyPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), deepCopy (ref), saveStore (ref)
-		if not var7 then
+	storeForAnyPlayer = function(p2, p3)
+		-- upvalues: anyPlayerSelector (ref), var2 (write), loadStore (ref), var1 (write), deepCopy (ref), saveStore (ref)
+		if not var2 then
 			loadStore()
 		end
-		if var7 then
-			local var23, var24
+		if var2 then
+			local var3, var4
 			if anyPlayerSelector then
-				var23 = var6
-				var24 = if var23 and var23.AnyPlayer then var23.AnyPlayer else var23
-				var24 = var24 or var6
+				var3 = var1
+				var4 = if var3 and var3.AnyPlayer then var3.AnyPlayer else var3
+				var4 = var4 or var1
 			end
-			var23 = var24[p11]
-			var24[p11] = deepCopy(p12)
+			var3 = var4[p2]
+			var4[p2] = deepCopy(p3)
 			
-			if var23 ~= var24[p11] then
+			if var3 ~= var4[p2] then
 				saveStore()
 			end
 		end
 	end,
-	loadForAnyPlayer = function(p13)
-		-- upvalues: anyPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), deepCopy (ref)
-		if not var7 then
+	loadForAnyPlayer = function(p2)
+		-- upvalues: anyPlayerSelector (ref), var2 (write), loadStore (ref), var1 (write), deepCopy (ref)
+		if not var2 then
 			loadStore()
 		end
-		if var7 then
-			local var26
+		if var2 then
+			local var3
 			if anyPlayerSelector then
-				local var25 = var6
-				var26 = if var25 and var25.AnyPlayer then var25.AnyPlayer else var25
-				var26 = var26 or var6
+				local var4 = var1
+				var3 = if var4 and var4.AnyPlayer then var4.AnyPlayer else var4
+				var3 = var3 or var1
 			end
-			return if var26 then deepCopy(var26[p13]) else nil
+			return if var3 then deepCopy(var3[p2]) else nil
 		end
 	end,
 	clearCache = function()
-		-- upvalues: var7 (write), var6 (write)
-		var7 = false
-		var6 = nil
+		-- upvalues: var2 (write), var1 (write)
+		var2 = false
+		var1 = nil
 	end,
-	getValue = function(p14)
-		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref)
-		if not var7 then
+	getValue = function(p2)
+		-- upvalues: localPlayerSelector (ref), var2 (write), loadStore (ref), var1 (write), text (ref), deepCopy (ref)
+		if not var2 then
 			loadStore()
 		end
-		if var7 then
-			local var28
+		if var2 then
+			local var3
 			if localPlayerSelector then
-				local var27 = var6
-				var28 = if var27 and var27.LocalPlayer and var27.LocalPlayer[text] then var27.LocalPlayer[text] else var27
-				var28 = var28 or var6
+				local var4 = var1
+				var3 = if var4 and var4.LocalPlayer and var4.LocalPlayer[text] then var4.LocalPlayer[text] else var4
+				var3 = var3 or var1
 			end
-			return if var28 then deepCopy(var28[p14]) else nil
+			return if var3 then deepCopy(var3[p2]) else nil
 		end
 	end,
-	getUniversesExposedTo = function(p15)
-		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref)
-		local var32
-		local var29 = localPlayerSelector
+	getUniversesExposedTo = function(p2)
+		-- upvalues: localPlayerSelector (ref), var2 (write), loadStore (ref), var1 (write), text (ref), deepCopy (ref)
+		local var3
+		local var4 = localPlayerSelector
 		
-		if not var7 then
+		if not var2 then
 			loadStore()
 		end
-		if var7 then
-			local var31
-			if var29 then
-				local var30 = var6
-				var31 = if var30 and var30.LocalPlayer and var30.LocalPlayer[text] then var30.LocalPlayer[text] else var30
-				var31 = var31 or var6
+		if var2 then
+			local var5
+			if var4 then
+				local var6 = var1
+				var5 = if var6 and var6.LocalPlayer and var6.LocalPlayer[text] then var6.LocalPlayer[text] else var6
+				var5 = var5 or var1
 			end
-			var32 = if var31 then deepCopy(var31[p15]) else nil
+			var3 = if var5 then deepCopy(var5[p2]) else nil
 		end
-		return var32 or {}
+		return var3 or {}
 	end,
-	getNumUniversesExposedTo = function(p16)
-		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref)
-		local var35
-		if not var7 then
+	getNumUniversesExposedTo = function(p2)
+		-- upvalues: localPlayerSelector (ref), var2 (write), loadStore (ref), var1 (write), text (ref), deepCopy (ref)
+		local var3
+		if not var2 then
 			loadStore()
 		end
-		if var7 then
-			local var34
+		if var2 then
+			local var4
 			if localPlayerSelector then
-				local var33 = var6
-				var34 = if var33 and var33.LocalPlayer and var33.LocalPlayer[text] then var33.LocalPlayer[text] else var33
-				var34 = var34 or var6
+				local var5 = var1
+				var4 = if var5 and var5.LocalPlayer and var5.LocalPlayer[text] then var5.LocalPlayer[text] else var5
+				var4 = var4 or var1
 			end
-			var35 = if var34 then deepCopy(var34[p16]) else nil
+			var3 = if var4 then deepCopy(var4[p2]) else nil
 		end
-		return #(var35 or {})
+		return #(var3 or {})
 	end,
-	addUniverseToExposureList = function(value, p17)
-		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref), constantsModule (ref), saveStore (ref)
-		local var38
-		if not var7 then
+	addUniverseToExposureList = function(value, p2)
+		-- upvalues: localPlayerSelector (ref), var2 (write), loadStore (ref), var1 (write), text (ref), deepCopy (ref), constantsModule (ref), saveStore (ref)
+		local var3
+		if not var2 then
 			loadStore()
 		end
-		if var7 then
-			local var37
+		if var2 then
+			local var4
 			if localPlayerSelector then
-				local var36 = var6
-				var37 = if var36 and var36.LocalPlayer and var36.LocalPlayer[text] then var36.LocalPlayer[text] else var36
-				var37 = var37 or var6
+				local var5 = var1
+				var4 = if var5 and var5.LocalPlayer and var5.LocalPlayer[text] then var5.LocalPlayer[text] else var5
+				var4 = var4 or var1
 			end
-			var38 = if var37 then deepCopy(var37[value]) else nil
+			var3 = if var4 then deepCopy(var4[value]) else nil
 		end
-		local var39 = var38 or {}
+		local var6 = var3 or {}
 		
-		if not table.find(var39, p17) and #var39 < constantsModule.MAX_NUM_UNIVERSES_SHOWN then
-			table.insert(var39, p17)
-			local var40 = localPlayerSelector
+		if not table.find(var6, p2) and #var6 < constantsModule.MAX_NUM_UNIVERSES_SHOWN then
+			table.insert(var6, p2)
+			local var7 = localPlayerSelector
 			
-			if not var7 then
+			if not var2 then
 				loadStore()
 			end
-			if var7 then
-				local var41, var42
-				if var40 then
-					var41 = var6
-					var42 = if var41 and var41.LocalPlayer and var41.LocalPlayer[text] then var41.LocalPlayer[text] else var41
-					var42 = var42 or var6
+			if var2 then
+				local var8, var9
+				if var7 then
+					var8 = var1
+					var9 = if var8 and var8.LocalPlayer and var8.LocalPlayer[text] then var8.LocalPlayer[text] else var8
+					var9 = var9 or var1
 				end
-				var41 = var42[value]
-				var42[value] = deepCopy(var39)
+				var8 = var9[value]
+				var9[value] = deepCopy(var6)
 				
-				if var41 ~= var42[value] then
+				if var8 ~= var9[value] then
 					saveStore()
 				end
 			end

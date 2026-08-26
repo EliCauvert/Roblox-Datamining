@@ -9,8 +9,8 @@ local color3 = Color3.new(0, 0, 0)
 local center = Enum.TextXAlignment.Center
 local uDim2 = UDim2.fromScale(0.5, 0.5)
 
-local function _(p0)
-	return if p0 == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video
+local function _(p1)
+	return if p1 == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video
 end
 
 local _ = function(p1)
@@ -18,155 +18,155 @@ local _ = function(p1)
 	return if p1 == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
 end
 
-local function toEnumItem(p2, p3, p4)
-	if typeof(p3) == "EnumItem" then
+local function toEnumItem(p1, p2, p3)
+	if typeof(p2) == "EnumItem" then
+		return p2
+	elseif type(p2) ~= "string" then
 		return p3
-	elseif type(p3) ~= "string" then
-		return p4
 	end
-	local var13 = string.match(p3, "([^%.]+)$") or p3
+	local var1 = string.match(p2, "([^%.]+)$") or p2
 	local ok, status = pcall(function()
-		-- upvalues: p2 (ref), var13 (ref)
-		return p2[var13]
+		-- upvalues: p1 (ref), var1 (ref)
+		return p1[var1]
 	end)
 	
-	return if ok and status ~= nil then status else p4
+	return if ok and status ~= nil then status else p3
 end
 
-local function toColor3(p5)
+local function toColor3(p1)
 	-- upvalues: color3 (ref)
-	if typeof(p5) == "Color3" then
-		return p5
-	elseif type(p5) ~= "table" then
+	if typeof(p1) == "Color3" then
+		return p1
+	elseif type(p1) ~= "table" then
 		return color3
 	end
-	local r = p5.R or (p5.r or (p5.Red or (p5.red or p5[1])))
-	local g = p5.G or (p5.g or (p5.Green or (p5.green or p5[2])))
-	local b = p5.B or (p5.b or (p5.Blue or (p5.blue or p5[3])))
+	local r = p1.R or (p1.r or (p1.Red or (p1.red or p1[1])))
+	local g = p1.G or (p1.g or (p1.Green or (p1.green or p1[2])))
+	local b = p1.B or (p1.b or (p1.Blue or (p1.blue or p1[3])))
 	
 	return if not (type(r) ~= "number" or type(g) ~= "number" or type(b) ~= "number") then if r > 1 or g > 1 or b > 1 then Color3.fromRGB(r, g, b) else Color3.new(r, g, b) else color3
 end
 
-local function toUDim2(p6)
+local function toUDim2(p1)
 	-- upvalues: uDim2 (ref)
-	if typeof(p6) == "UDim2" then
-		return p6
-	elseif type(p6) ~= "table" then
+	if typeof(p1) == "UDim2" then
+		return p1
+	elseif type(p1) ~= "table" then
 		return uDim2
-	elseif type(p6[1]) == "number" and type(p6[2]) == "number" then
-		return UDim2.fromScale(p6[1], p6[2])
+	elseif type(p1[1]) == "number" and type(p1[2]) == "number" then
+		return UDim2.fromScale(p1[1], p1[2])
 	end
-	local x = p6.X or p6.x
-	local y = p6.Y or p6.y
+	local x = p1.X or p1.x
+	local y = p1.Y or p1.y
 	
-	return if type(x) == "table" and type(y) == "table" then UDim2.new(x.Scale or (x.scale or 0), x.Offset or (x.offset or 0), y.Scale or (y.scale or 0), y.Offset or (y.offset or 0)) else UDim2.new(p6.XScale or (p6.xScale or (p6.scaleX or (p6[1] or 0.5))), p6.XOffset or (p6.xOffset or (p6.offsetX or (p6[2] or 0))), p6.YScale or (p6.yScale or (p6.scaleY or (p6[3] or 0.5))), p6.YOffset or (p6.yOffset or (p6.offsetY or (p6[4] or 0))))
+	return if type(x) == "table" and type(y) == "table" then UDim2.new(x.Scale or (x.scale or 0), x.Offset or (x.offset or 0), y.Scale or (y.scale or 0), y.Offset or (y.offset or 0)) else UDim2.new(p1.XScale or (p1.xScale or (p1.scaleX or (p1[1] or 0.5))), p1.XOffset or (p1.xOffset or (p1.offsetX or (p1[2] or 0))), p1.YScale or (p1.yScale or (p1.scaleY or (p1[3] or 0.5))), p1.YOffset or (p1.yOffset or (p1.offsetY or (p1[4] or 0))))
 end
 
-local function normalizeTextOverlayEdit(p7)
+local function normalizeTextOverlayEdit(p1)
 	-- upvalues: toUDim2 (ref), toEnumItem (ref), builderSansMedium (ref), toColor3 (ref), center (ref)
-	if type(p7) == "table" then
-		local textOverlayStyle = p7.textOverlayStyle or {}
+	if type(p1) == "table" then
+		local textOverlayStyle = p1.textOverlayStyle or {}
 		
 		return {
-			position = toUDim2(p7.position),
-			rotation = if type(p7.rotation) == "number" then p7.rotation else 0,
-			scale = if type(p7.scale) == "number" then p7.scale else 1,
-			text = if type(p7.text) == "string" then p7.text else "",
+			position = toUDim2(p1.position),
+			rotation = if type(p1.rotation) == "number" then p1.rotation else 0,
+			scale = if type(p1.scale) == "number" then p1.scale else 1,
+			text = if type(p1.text) == "string" then p1.text else "",
 			textOverlayStyle = {
 				font = toEnumItem(Enum.Font, textOverlayStyle.font, builderSansMedium),
 				fontColor = toColor3(textOverlayStyle.fontColor),
 				fontSize = if type(textOverlayStyle.fontSize) == "number" then textOverlayStyle.fontSize else 16,
 				textXAlignment = toEnumItem(Enum.TextXAlignment, textOverlayStyle.textXAlignment, center)
 			},
-			zIndex = if type(p7.zIndex) == "number" then p7.zIndex else 1
+			zIndex = if type(p1.zIndex) == "number" then p1.zIndex else 1
 		}
 	end
 	return nil
 end
 
-local function normalizeStickerOverlayEdit(p8)
+local function normalizeStickerOverlayEdit(p1)
 	-- upvalues: toUDim2 (ref)
-	return if type(p8) == "table" then if type(p8.stickerURI) == "string" and p8.stickerURI ~= "" then {
-		position = toUDim2(p8.position),
-		rotation = if type(p8.rotation) == "number" then p8.rotation else 0,
-		scale = if type(p8.scale) == "number" then p8.scale else 1,
-		stickerSize = if type(p8.stickerSize) == "number" then p8.stickerSize else 1,
-		stickerURI = if type(p8.stickerURI) == "string" then p8.stickerURI else "",
-		zIndex = if type(p8.zIndex) == "number" then p8.zIndex else 1
+	return if type(p1) == "table" then if type(p1.stickerURI) == "string" and p1.stickerURI ~= "" then {
+		position = toUDim2(p1.position),
+		rotation = if type(p1.rotation) == "number" then p1.rotation else 0,
+		scale = if type(p1.scale) == "number" then p1.scale else 1,
+		stickerSize = if type(p1.stickerSize) == "number" then p1.stickerSize else 1,
+		stickerURI = if type(p1.stickerURI) == "string" then p1.stickerURI else "",
+		zIndex = if type(p1.zIndex) == "number" then p1.zIndex else 1
 	} else nil else nil
 end
 
-local function normalizeCaptureEdits(p9)
+local function normalizeCaptureEdits(p1)
 	-- upvalues: normalizeTextOverlayEdit (ref), fFlagMomentsStickerOverlayNormalizationModule (ref), normalizeStickerOverlayEdit (ref)
-	if p9 == nil then
+	if p1 == nil then
 		return nil
 	end
-	local var20 = nil
+	local var1 = nil
 	
-	if type(p9.textOverlays) == "table" then
+	if type(p1.textOverlays) == "table" then
 		local t = {}
 		
-		for i, v in p9.textOverlays do
-			local var22 = normalizeTextOverlayEdit(v)
+		for i, v in p1.textOverlays do
+			local var2 = normalizeTextOverlayEdit(v)
 			
-			if var22 ~= nil then
-				table.insert(t, var22)
+			if var2 ~= nil then
+				table.insert(t, var2)
 			end
 		end
 		if #t > 0 then
-			var20 = t
+			var1 = t
 		end
 	end
-	local var23 = nil
+	local var3 = nil
 	
-	if fFlagMomentsStickerOverlayNormalizationModule() and type(p9.stickerOverlays) == "table" then
+	if fFlagMomentsStickerOverlayNormalizationModule() and type(p1.stickerOverlays) == "table" then
 		local t = {}
 		
-		for i, v in p9.stickerOverlays do
-			local var25 = normalizeStickerOverlayEdit(v)
+		for i, v in p1.stickerOverlays do
+			local var4 = normalizeStickerOverlayEdit(v)
 			
-			if var25 ~= nil then
-				table.insert(t, var25)
+			if var4 ~= nil then
+				table.insert(t, var4)
 			end
 		end
 		if #t > 0 then
-			var23 = t
+			var3 = t
 		end
 	end
 	return {
-		trim = p9.trim,
-		music = p9.music,
-		textOverlays = var20,
-		stickerOverlays = var23
+		trim = p1.trim,
+		music = p1.music,
+		textOverlays = var1,
+		stickerOverlays = var3
 	}
 end
 
-local _ = function(p10)
-	if p10 == nil or p10.counts == nil then
+local _ = function(p2)
+	if p2 == nil or p2.counts == nil then
 		return nil
 	end
-	local var26 = 0
+	local var5 = 0
 	
-	for i, v in p10.counts do
-		var26 += v
+	for i, v in p2.counts do
+		var5 += v
 	end
-	return var26
+	return var5
 end
 
-local function convertApiMomentToMomentItem(p11)
+local function convertApiMomentToMomentItem(p3)
 	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref)
-	local captionedAssetMoment = p11.captionedAssetMoment
-	local owner = p11.owner
-	local entityId = p11.entityId or p11.id
-	local feedItemId = p11.feedItemId
+	local captionedAssetMoment = p3.captionedAssetMoment
+	local owner = p3.owner
+	local entityId = p3.entityId or p3.id
+	local feedItemId = p3.feedItemId
 	
 	if captionedAssetMoment == nil or captionedAssetMoment.assetId == nil or (owner == nil or owner.id == nil) or entityId == nil or fFlagMomentsRequireApiFeedItemIdModule and (feedItemId == nil or feedItemId == "") then
 		return nil
 	end
-	local var34
-	local var28 = if p11.primaryCta ~= nil then nil else p11.primaryCta.experienceCta
-	local var29 = normalizeCaptureEdits(if captionedAssetMoment.captureType == "Screenshot" then captionedAssetMoment.screenshotCaptureEdits else captionedAssetMoment.videoCaptureEdits)
-	local var30 = if (captionedAssetMoment.status or p11.status) == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
+	local var6
+	local var7 = if p3.primaryCta ~= nil then nil else p3.primaryCta.experienceCta
+	local var8 = normalizeCaptureEdits(if captionedAssetMoment.captureType == "Screenshot" then captionedAssetMoment.screenshotCaptureEdits else captionedAssetMoment.videoCaptureEdits)
+	local var9 = if (captionedAssetMoment.status or p3.status) == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
 	local t = {
 		assetId = captionedAssetMoment.assetId,
 		creatorId = owner.id,
@@ -178,45 +178,45 @@ local function convertApiMomentToMomentItem(p11)
 		assetAccessContext = captionedAssetMoment.assetAccessContext,
 		captureType = if captionedAssetMoment.captureType == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video,
 		description = captionedAssetMoment.caption,
-		edits = var29,
-		experienceName = if var28 ~= nil then nil else var28.experienceName
+		edits = var8,
+		experienceName = if var7 ~= nil then nil else var7.experienceName
 	}
-	local reactions = p11.reactions
+	local reactions = p3.reactions
 	
 	if reactions == nil or reactions.counts == nil then
-		var34 = nil
+		var6 = nil
 	else
-		local var33 = 0
+		local var10 = 0
 		
 		for i, v in reactions.counts do
-			var33 += v
+			var10 += v
 		end
-		var34 = var33
+		var6 = var10
 	end
-	t_1.likeCount = var34
+	t_1.likeCount = var6
 	t_1.partnerUploadType = captionedAssetMoment.partnerUploadType
-	t_1.placeId = if var28 ~= nil then nil else var28.placeId
-	t_1.universeId = if var28 ~= nil then nil else var28.experienceId
+	t_1.placeId = if var7 ~= nil then nil else var7.placeId
+	t_1.universeId = if var7 ~= nil then nil else var7.experienceId
 	t.metadata = t_1
 	t.momentId = entityId
-	t.recommendationMetadata = { feedItemId = feedItemId, tracingId = p11.feedSessionId }
-	t.status = var30
+	t.recommendationMetadata = { feedItemId = feedItemId, tracingId = p3.feedSessionId }
+	t.status = var9
 	
 	return t
 end
 
-return function(p12)
+return function(p4)
 	-- upvalues: convertApiMomentToMomentItem (ref)
 	local t = {}
 	
-	if p12 == nil then
+	if p4 == nil then
 		return t
 	end
-	for i, v in ipairs(p12) do
-		local var36 = convertApiMomentToMomentItem(v)
+	for i, v in ipairs(p4) do
+		local var11 = convertApiMomentToMomentItem(v)
 		
-		if var36 ~= nil then
-			table.insert(t, var36)
+		if var11 ~= nil then
+			table.insert(t, var11)
 		end
 	end
 	return t

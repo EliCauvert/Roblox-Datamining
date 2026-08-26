@@ -2,10 +2,10 @@
 
 return function()
 	-- upvalues: memoryTracker (ref)
-	local var0 = memoryTracker()
+	local var1 = memoryTracker()
 	
-	if var0 then
-		local snapshot = var0.getSnapshot()
+	if var1 then
+		local snapshot = var1.getSnapshot()
 		
 		return {
 			totalMemoryMB = if snapshot.totalMemory then tonumber(snapshot.totalMemory) else nil,

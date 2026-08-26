@@ -5,57 +5,57 @@ local getNavigationActionCreatorsModule = require(parent.routers.getNavigationAc
 local getChildNavigationModule = require(parent.getChildNavigation)
 local getChildrenNavigationCacheModule = require(parent.getChildrenNavigationCache)
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: getChildrenNavigationCacheModule (ref), getChildNavigationModule (ref), eventsModule (ref), object (ref), getNavigationActionCreatorsModule (ref)
-	local actionCreators = p0.getActionCreators(p1, nil)
+	local actionCreators = p1.getActionCreators(p2, nil)
 	local t = {
 		actions = actionCreators,
-		router = p0,
-		state = p1,
-		dispatch = p2,
-		getScreenProps = p4,
+		router = p1,
+		state = p2,
+		dispatch = p3,
+		getScreenProps = p5,
 		_dangerouslyGetParent = function()
 			return nil
 		end,
 		isFirstRouteInParent = function()
 			return true
 		end,
-		_childrenNavigation = getChildrenNavigationCacheModule(p5())
+		_childrenNavigation = getChildrenNavigationCacheModule(p6())
 	}
 	
-	function t.getChildNavigation(p6)
-		-- upvalues: getChildNavigationModule (copy), t (ref), p5 (ref)
-		return getChildNavigationModule(t, p6, p5)
+	function t.getChildNavigation(p7)
+		-- upvalues: getChildNavigationModule (copy), t (ref), p6 (ref)
+		return getChildNavigationModule(t, p7, p6)
 	end
 	
 	function t.isFocused(p7)
-		-- upvalues: p5 (ref)
-		local state = p5().state
+		-- upvalues: p6 (ref)
+		local state = p6().state
 		
 		return if p7 ~= nil then state.routes[state.index].key == p7 else true
 	end
 	
-	function t.addListener(p8, p9)
-		-- upvalues: eventsModule (copy), p3 (ref)
-		if p8 == eventsModule.Action then
-			p3[p9] = true
+	function t.addListener(p7, p8)
+		-- upvalues: eventsModule (copy), p4 (ref)
+		if p7 == eventsModule.Action then
+			p4[p8] = true
 			
 			return {
 				remove = function()
-					-- upvalues: p3 (copy), p9 (ref)
-					p3[p9] = nil
+					-- upvalues: p4 (copy), p8 (ref)
+					p4[p8] = nil
 				end
 			}
 		end
 		return { remove = function() end }
 	end
 	
-	local var6 = object.assign(getNavigationActionCreatorsModule(t.state), actionCreators)
+	local var1 = object.assign(getNavigationActionCreatorsModule(t.state), actionCreators)
 	
-	for i, v in var6 do
+	for i, v in var1 do
 		t[i] = function(...)
-			-- upvalues: t (ref), var6 (ref), i (ref)
-			t.dispatch(var6[i](...))
+			-- upvalues: t (ref), var1 (ref), i (ref)
+			t.dispatch(var1[i](...))
 		end
 	end
 	return t

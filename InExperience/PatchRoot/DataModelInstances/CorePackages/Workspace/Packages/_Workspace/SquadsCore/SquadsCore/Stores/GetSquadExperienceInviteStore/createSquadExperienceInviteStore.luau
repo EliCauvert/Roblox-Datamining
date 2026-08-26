@@ -4,13 +4,13 @@ local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScop
 
 return function()
 	-- upvalues: createSessionScopedSignal (ref)
-	local var0, var1 = createSessionScopedSignal(false)
+	local var1, var2 = createSessionScopedSignal(false)
 	
 	return {
-		getIsExperienceInvitePending = var0,
-		currentExperienceInviteStatusUpdated = function(p0)
-			-- upvalues: var1 (ref)
-			var1(p0)
+		getIsExperienceInvitePending = var1,
+		currentExperienceInviteStatusUpdated = function(p1)
+			-- upvalues: var2 (ref)
+			var2(p1)
 		end
 	}
 end

@@ -3,10 +3,10 @@ local _ = require(viewRecycler.Core.Layout.LayoutRuntime)
 local _ = require(viewRecycler.Core.Types)
 
 return {
-	expandItemRange = function(p0, p1, p2, p3)
+	expandItemRange = function(p1, p2, p3, p4)
 		return {
-			firstIndex = math.max(1, p0.firstIndex - p1),
-			lastIndex = math.min(p3, p0.lastIndex + p2)
+			firstIndex = math.max(1, p1.firstIndex - p2),
+			lastIndex = math.min(p4, p1.lastIndex + p3)
 		}
 	end,
 	updateItemMeasurementNoop = function(_)

@@ -8,7 +8,7 @@ local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFPro
 
 return function(value)
 	-- upvalues: fFlagTFProfileInsightsBypassCache (ref), reactModule (ref), profileInsightsStoreModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), signalsReactModule (ref)
-	local var4 = if fFlagTFProfileInsightsBypassCache then reactModule.useMemo(function()
+	local var1 = if fFlagTFProfileInsightsBypassCache then reactModule.useMemo(function()
 		-- upvalues: profileInsightsStoreModule (copy), value (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy)
 		return profileInsightsStoreModule(false).getProfileInsightsByUserId({
 			userIds = { value.userId },
@@ -26,15 +26,15 @@ return function(value)
 		rankingStrategy = value.rankingStrategy,
 		skipFetch = if fFlagAddFriendsPageTrustedFriendRequestSection then value.skipFetch else nil
 	})
-	local var5 = signalsReactModule.useSignalState(var4(false).data.getProfileInsights)
+	local var2 = signalsReactModule.useSignalState(var1(false).data.getProfileInsights)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var5 (ref), value (ref)
-		for i, v in var5 do
+		-- upvalues: var2 (ref), value (ref)
+		for i, v in var2 do
 			if v.targetUserId == value.userId then
 				return v
 			end
 		end
 		return {}
-	end, { var5 }), var4(false).status == "fetching"
+	end, { var2 }), var1(false).status == "fetching"
 end

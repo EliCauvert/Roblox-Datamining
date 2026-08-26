@@ -6,21 +6,21 @@ local getApolloContext = require(script.Parent.ApolloContext).getApolloContext
 local invariant = require(parent.jsutils.invariant).invariant
 local _ = require(parent.core.ApolloClient)
 
-function ApolloProvider(p0)
+function ApolloProvider(p1)
 	-- upvalues: getApolloContext (ref), reactModule (ref), invariant (ref)
 	local var1 = getApolloContext()
 	
-	return reactModule.createElement(var1.Consumer, nil, function(p1)
-		-- upvalues: p0 (ref), invariant (copy), reactModule (copy), var1 (ref)
-		if p1 == nil then
-			p1 = {}
+	return reactModule.createElement(var1.Consumer, nil, function(p2)
+		-- upvalues: p1 (ref), invariant (copy), reactModule (copy), var1 (ref)
+		if p2 == nil then
+			p2 = {}
 		end
-		if p0.client and p1.client ~= p0.client then
-			p1.client = p0.client
+		if p1.client and p2.client ~= p1.client then
+			p2.client = p1.client
 		end
-		invariant(p1.client, "ApolloProvider was not passed a client instance. Make sure you pass in your client via the \"client\" prop.")
+		invariant(p2.client, "ApolloProvider was not passed a client instance. Make sure you pass in your client via the \"client\" prop.")
 		
-		return reactModule.createElement(var1.Provider, { value = p1 }, p0.children)
+		return reactModule.createElement(var1.Provider, { value = p2 }, p1.children)
 	end)
 end
 

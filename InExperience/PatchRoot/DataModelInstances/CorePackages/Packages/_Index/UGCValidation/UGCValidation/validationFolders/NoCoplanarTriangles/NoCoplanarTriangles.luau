@@ -18,25 +18,25 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: validationEnumsModule (ref), getFFlagUGCValidateCoplanarTriTestBodyModule (ref), floatEqualsModule (ref), UGCValidationService (ref), getFIntMaxCoplanarIntersectionsPercentageModule (ref), errorSourceStringsModule (ref)
-		local uploadCategory = p1.uploadCategory
+		local uploadCategory = p2.uploadCategory
 		
 		if (if uploadCategory ~= validationEnumsModule.UploadCategory.TORSO_AND_LIMBS then uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD else true) and not getFFlagUGCValidateCoplanarTriTestBodyModule() then return end
-		for i, v in p1.renderMeshesData do
+		for i, v in p2.renderMeshesData do
 			local editable = v.editable
 			local scale = v.scale
 			local originalSize = v.originalSize
 			
 			if not floatEqualsModule(originalSize.X, 0) and not floatEqualsModule(originalSize.Y, 0) and not floatEqualsModule(originalSize.Z, 0) then
-				local var7 = UGCValidationService:GetEditableMeshTriCount(editable)
-				local floored = math.floor(getFIntMaxCoplanarIntersectionsPercentageModule() / 100 * var7)
+				local var1 = UGCValidationService:GetEditableMeshTriCount(editable)
+				local floored = math.floor(getFIntMaxCoplanarIntersectionsPercentageModule() / 100 * var1)
 				
 				if UGCValidationService:IsEditableMeshNumCoplanarIntersectionsOverLimit(editable, floored, scale, true) then
-					p0:fail(errorSourceStringsModule.Keys.CoplanarTri_TooMany, {
+					p1:fail(errorSourceStringsModule.Keys.CoplanarTri_TooMany, {
 						MeshName = i,
 						MaxIntersections = tostring(floored),
-						TriangleCount = tostring(var7)
+						TriangleCount = tostring(var1)
 					})
 				end
 			end

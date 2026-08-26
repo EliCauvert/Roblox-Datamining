@@ -10,23 +10,23 @@ local textKeysModule = require(profileQRCode.Common.TextKeys)
 local useLocalization = localizationModule.Hooks.useLocalization
 local useLocalUserInfoModule = require(profileQRCode.Utils.useLocalUserInfo)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalUserInfoModule (ref), useTokens (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), snackbar (ref)
-	local var6 = useLocalUserInfoModule(p0.acceptedFriendUserId)
-	local var7 = useTokens()
-	local var8 = useLocalization({
+	local var1 = useLocalUserInfoModule(p1.acceptedFriendUserId)
+	local var2 = useTokens()
+	local var3 = useLocalization({
 		nowTrusted = {
 			textKeysModule.NowTrusted,
-			username = if var6 then var6.displayName or var6.username else nil
+			username = if var1 then var1.displayName or var1.username else nil
 		},
 		friendAdded = textKeysModule.QRFriendAdded
 	})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref)
+		-- upvalues: p1 (ref)
 		local delayedThread = task.delay(5, function()
-			-- upvalues: p0 (copy)
-			if p0.onDismissed then
-				p0.onDismissed()
+			-- upvalues: p1 (copy)
+			if p1.onDismissed then
+				p1.onDismissed()
 			end
 		end)
 		
@@ -34,12 +34,12 @@ return function(p0)
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
-	end, { p0.onDismissed, p0.acceptedFriendUserId })
+	end, { p1.onDismissed, p1.acceptedFriendUserId })
 	
 	return reactModule.createElement(view, { tag = "size-full", ZIndex = 101 }, {
 		Message = reactModule.createElement(snackbar, {
-			title = if p0.newFriendIsTrusted then var8.nowTrusted else var8.friendAdded,
-			Position = UDim2.new(0.5, 0, 1, -var7.Size.Size_500),
+			title = if p1.newFriendIsTrusted then var3.nowTrusted else var3.friendAdded,
+			Position = UDim2.new(0.5, 0, 1, -var2.Size.Size_500),
 			AnchorPoint = Vector2.new(0.5, 1)
 		})
 	})

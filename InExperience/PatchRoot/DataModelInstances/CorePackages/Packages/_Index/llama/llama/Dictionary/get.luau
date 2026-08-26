@@ -1,7 +1,7 @@
-﻿return function(p0, p1)
-	local var0 = type(p0)
-	assert(var0 == "table", "expected a table for first argument, got " .. var0)
-	assert(p1 ~= nil, "expected second argument to be anything but nil, got nil")
+﻿return function(p1, p2)
+	local var1 = type(p1)
+	assert(var1 == "table", "expected a table for first argument, got " .. var0)
+	assert(p2 ~= nil, "expected second argument to be anything but nil, got nil")
 	
-	return p0[p1]
+	return p1[p2]
 end

@@ -6,11 +6,11 @@ local _ = function()
 	return game:GetFastFlag("CharacterNameHandlerUserProfileApiEnabledForAll")
 end
 
-local var0 = rolloutByApplicationId(function()
+local var1 = rolloutByApplicationId(function()
 	return game:GetFastInt("CharacterNameHandlerUserProfileApiRollout")
 end)
 
 return function()
-	-- upvalues: var0 (ref)
-	return game:GetFastFlag("CharacterNameHandlerUserProfileApiEnabledForAll") or var0()
+	-- upvalues: var1 (ref)
+	return game:GetFastFlag("CharacterNameHandlerUserProfileApiEnabledForAll") or var1()
 end

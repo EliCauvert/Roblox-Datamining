@@ -16,10 +16,10 @@ return function()
 		somethingIsWrongToast = "Feature.Toast.NetworkingError.SomethingIsWrong"
 	})
 	
-	return reactModule.useCallback(function(p0)
+	return reactModule.useCallback(function(p1)
 		-- upvalues: appPage (copy), sources (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy), setCurrentToastMessage (copy), var3 (ref)
-		local callback = p0 and p0.callback
-		local senderUserid = p0 and (p0.clientEventsPayload and p0.clientEventsPayload.sender_userid)
+		local callback = p1 and p1.callback
+		local senderUserid = p1 and (p1.clientEventsPayload and p1.clientEventsPayload.sender_userid)
 		
 		if not senderUserid then
 			var2(setCurrentToastMessage({

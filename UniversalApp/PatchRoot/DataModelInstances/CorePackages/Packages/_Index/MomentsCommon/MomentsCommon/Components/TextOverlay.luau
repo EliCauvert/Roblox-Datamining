@@ -6,69 +6,69 @@ local view = foundationModule.View
 local useCallback = reactModule.useCallback
 local _ = require(momentsCommon.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useCallback (ref), view (ref), foundationModule (ref)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = useCallback(function(_, p1)
-		-- upvalues: p0 (ref), var4 (ref)
-		if p0.containerRef and p0.containerRef.current then
-			var4.current = p1
+	local var1 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(nil)
+	local var3 = useCallback(function(_, p2)
+		-- upvalues: p1 (ref), var2 (ref)
+		if p1.containerRef and p1.containerRef.current then
+			var2.current = p2
 		end
-	end, { p0.containerRef })
-	local var6 = useCallback(function(_, p2)
-		-- upvalues: var4 (ref), p0 (ref)
-		if var4.current == p2 and p0.onActivated then
-			p0.onActivated()
+	end, { p1.containerRef })
+	local var4 = useCallback(function(_, p2)
+		-- upvalues: var2 (ref), p1 (ref)
+		if var2.current == p2 and p1.onActivated then
+			p1.onActivated()
 		end
-		if p0.onDragEnd then
-			p0.onDragEnd()
+		if p1.onDragEnd then
+			p1.onDragEnd()
 		end
-	end, { p0.onActivated, p0.onDragEnd })
+	end, { p1.onActivated, p1.onDragEnd })
 	
 	return reactModule.createElement(view, {
 		tag = "auto-xy anchor-center-center bg-contrast padding-medium position-center-center radius-medium",
-		ref = p0.containerRef,
-		onActivated = p0.onActivated,
-		Position = p0.textOverlayEdit.position,
-		Rotation = p0.textOverlayEdit.rotation,
-		scale = p0.textOverlayEdit.scale * (p0.additionalScale or 1),
+		ref = p1.containerRef,
+		onActivated = p1.onActivated,
+		Position = p1.textOverlayEdit.position,
+		Rotation = p1.textOverlayEdit.rotation,
+		scale = p1.textOverlayEdit.scale * (p1.additionalScale or 1),
 		sizeConstraint = { MaxSize = Vector2.new(300, 1e999) },
 		stateLayer = {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		},
-		ZIndex = p0.textOverlayEdit.zIndex
+		ZIndex = p1.textOverlayEdit.zIndex
 	}, {
 		UIDragDetector = reactModule.useMemo(function()
-			-- upvalues: p0 (ref), reactModule (copy), var3 (ref), var5 (ref), var6 (ref)
-			return if p0.draggable then reactModule.createElement("UIDragDetector", {
+			-- upvalues: p1 (ref), reactModule (copy), var1 (ref), var3 (ref), var4 (ref)
+			return if p1.draggable then reactModule.createElement("UIDragDetector", {
 				BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,
-				BoundingUI = p0.boundingUI,
+				BoundingUI = p1.boundingUI,
 				DragStyle = Enum.UIDragDetectorDragStyle.TranslatePlane,
-				ref = var3,
-				ReferenceUIInstance = p0.boundingUI,
+				ref = var1,
+				ReferenceUIInstance = p1.boundingUI,
 				ResponseStyle = Enum.UIDragDetectorResponseStyle.Scale,
-				[reactModule.Event.DragStart] = var5,
-				[reactModule.Event.DragEnd] = var6
+				[reactModule.Event.DragStart] = var3,
+				[reactModule.Event.DragEnd] = var4
 			}) else nil
-		end, { p0.boundingUI, p0.draggable, var5, var6 }),
+		end, { p1.boundingUI, p1.draggable, var3, var4 }),
 		TextInput = reactModule.createElement("TextBox", {
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
 			ClearTextOnFocus = false,
 			ClipsDescendants = true,
-			Font = p0.textOverlayEdit.textOverlayStyle.font,
-			Interactable = p0.editable == true,
-			Text = p0.textOverlayEdit.text,
-			TextColor3 = p0.textOverlayEdit.textOverlayStyle.fontColor,
-			TextSize = p0.textOverlayEdit.textOverlayStyle.fontSize,
-			TextXAlignment = p0.textOverlayEdit.textOverlayStyle.textXAlignment,
+			Font = p1.textOverlayEdit.textOverlayStyle.font,
+			Interactable = p1.editable == true,
+			Text = p1.textOverlayEdit.text,
+			TextColor3 = p1.textOverlayEdit.textOverlayStyle.fontColor,
+			TextSize = p1.textOverlayEdit.textOverlayStyle.fontSize,
+			TextXAlignment = p1.textOverlayEdit.textOverlayStyle.textXAlignment,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			TextWrapped = true,
-			Size = p0.size,
-			ZIndex = p0.textOverlayEdit.zIndex,
-			ref = p0.textBoxRef,
-			[reactModule.Change.Text] = p0.onTextChanged
+			Size = p1.size,
+			ZIndex = p1.textOverlayEdit.zIndex,
+			ref = p1.textBoxRef,
+			[reactModule.Change.Text] = p1.onTextChanged
 		})
 	})
 end

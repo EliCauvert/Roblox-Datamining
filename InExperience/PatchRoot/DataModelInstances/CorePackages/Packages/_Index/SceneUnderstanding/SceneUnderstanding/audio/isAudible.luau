@@ -1,6 +1,6 @@
 ﻿local calculatePotentialAudibilityModule = require(script:FindFirstAncestor("SceneUnderstanding").audio.calculatePotentialAudibility)
 
-return function(p0)
+return function(p1)
 	-- upvalues: calculatePotentialAudibilityModule (ref)
-	return calculatePotentialAudibilityModule(p0) > 0.01
+	return calculatePotentialAudibilityModule(p1) > 0.01
 end

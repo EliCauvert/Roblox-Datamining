@@ -7,8 +7,8 @@ local t = {
 	lastUpdated = { 2026, 6, 30 }
 }
 
-local function _(p0)
-	return if p0 <= 0 then false else p0 >= 10000 or math.random(1, 10000) <= p0
+local function _(p1)
+	return if p1 <= 0 then false else p1 >= 10000 or math.random(1, 10000) <= p1
 end
 
 return {

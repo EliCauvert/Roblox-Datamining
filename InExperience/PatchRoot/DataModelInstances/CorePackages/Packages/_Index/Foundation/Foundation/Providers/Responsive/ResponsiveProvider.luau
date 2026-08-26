@@ -13,14 +13,14 @@ local t = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: flagsModule (ref), withDefaultsModule (ref), t (ref), reactModule (ref), responsiveContextModule (ref)
-	local var8 = if flagsModule.FoundationStableContextValues then nil else withDefaultsModule(p0, t)
+	local var1 = if flagsModule.FoundationStableContextValues then nil else withDefaultsModule(p1, t)
 	
 	return reactModule.createElement(responsiveContextModule.Provider, {
 		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
-			-- upvalues: withDefaultsModule (copy), p0 (ref), t (copy)
-			return { config = withDefaultsModule(p0.config or {}, t.config) }
-		end, { p0.config }) else nil else var8
-	}, if flagsModule.FoundationStableContextValues then p0.children else var8.children)
+			-- upvalues: withDefaultsModule (copy), p1 (ref), t (copy)
+			return { config = withDefaultsModule(p1.config or {}, t.config) }
+		end, { p1.config }) else nil else var1
+	}, if flagsModule.FoundationStableContextValues then p1.children else var1.children)
 end

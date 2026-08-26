@@ -1,5 +1,5 @@
-﻿local function _(p0)
-	return p0 ~= p0
+﻿local function _(p1)
+	return p1 ~= p1
 end
 
 return {
@@ -20,46 +20,46 @@ return {
 		
 		return if var4 ~= var4 then 0 else var4
 	end,
-	planTargets = function(p2, p3, p4, p5)
-		local granularity = p5.granularity
+	planTargets = function(p1, p2, p3, p4)
+		local granularity = p4.granularity
 		
-		if p2 ~= p2 or granularity <= 0 or (#p5.bands == 0 or p5.maxSamples <= 0) then
+		if p1 ~= p1 or granularity <= 0 or (#p4.bands == 0 or p4.maxSamples <= 0) then
 			return {}
 		end
-		local var5 = p5.maxLeadFraction * (p4.max - p4.min)
-		local rounded = math.round((p2 + math.clamp((if p3 ~= p3 then 0 else p3) * p5.predictionLead, -var5, var5)) / granularity)
+		local var1 = p4.maxLeadFraction * (p3.max - p3.min)
+		local rounded = math.round((p1 + math.clamp((if p2 ~= p2 then 0 else p2) * p4.predictionLead, -var1, var1)) / granularity)
 		
-		local function _(p6)
-			-- upvalues: p5 (ref)
-			for i, v in p5.bands do
-				if p6 <= v.radius + 0.000000001 then
+		local function _(p5)
+			-- upvalues: p4 (ref)
+			for i, v in p4.bands do
+				if p5 <= v.radius + 0.000000001 then
 					return v.stride
 				end
 			end
 			return nil
 		end
 		
-		local floored = math.floor(p5.bands[#p5.bands].radius / granularity + 0.000000001)
+		local floored = math.floor(p4.bands[#p4.bands].radius / granularity + 0.000000001)
 		local t = {}
 		local t_1 = {}
 		
-		local function consider(p7)
-			-- upvalues: t (ref), p5 (ref), granularity (ref), rounded (ref), p4 (ref), t_1 (ref)
-			if p5.maxSamples <= #t then return end
+		local function consider(p6)
+			-- upvalues: t (ref), p4 (ref), granularity (ref), rounded (ref), p3 (ref), t_1 (ref)
+			if p4.maxSamples <= #t then return end
 			local stride
-			local var12 = math.abs(p7) * granularity
+			local var2 = math.abs(p6) * granularity
 			
-			for i, v in p5.bands do
-				if var12 <= v.radius + 0.000000001 then
+			for i, v in p4.bands do
+				if var2 <= v.radius + 0.000000001 then
 					stride = v.stride
-					if stride == nil or p7 % stride ~= 0 then return end
-					var12 = (rounded + p7) * granularity
+					if stride == nil or p6 % stride ~= 0 then return end
+					var2 = (rounded + p6) * granularity
 					
-					if var12 < p4.min or p4.max < var12 or t_1[var12] then
+					if var2 < p3.min or p3.max < var2 or t_1[var2] then
 						return
 					end
-					t_1[var12] = true
-					table.insert(t, var12)
+					t_1[var2] = true
+					table.insert(t, var2)
 					
 					return
 				end
@@ -67,19 +67,19 @@ return {
 			stride = nil
 		end
 		
-		if p5.maxSamples > #t then
+		if p4.maxSamples > #t then
 			local stride
-			local var11 = granularity * 0
+			local var3 = granularity * 0
 			
-			for i, v in p5.bands do
-				if var11 <= v.radius + 0.000000001 then
+			for i, v in p4.bands do
+				if var3 <= v.radius + 0.000000001 then
 					stride = v.stride
 					if stride ~= nil and 0 % stride == 0 then
-						var11 = (rounded + 0) * granularity
+						var3 = (rounded + 0) * granularity
 						
-						if var11 >= p4.min and p4.max >= var11 and not t_1[var11] then
-							t_1[var11] = true
-							table.insert(t, var11)
+						if var3 >= p3.min and p3.max >= var3 and not t_1[var3] then
+							t_1[var3] = true
+							table.insert(t, var3)
 						end
 					end
 				end
@@ -87,7 +87,7 @@ return {
 			stride = nil
 		end
 		for i = 1, floored do
-			if p5.maxSamples <= #t then break end
+			if p4.maxSamples <= #t then break end
 			consider(i)
 			consider(-i)
 		end
@@ -95,20 +95,20 @@ return {
 		
 		return t
 	end,
-	diff = function(p8, p9)
+	diff = function(p7, p8)
 		local t = {}
 		local t_1 = {}
 		
-		for i, v in p8 do
+		for i, v in p7 do
 			t[v] = true
 			
-			if not p9[v] then
+			if not p8[v] then
 				table.insert(t_1, v)
 			end
 		end
 		local t_2 = {}
 		
-		for i_1 in p9 do
+		for i_1 in p8 do
 			if not t[i_1] then
 				table.insert(t_2, i_1)
 			end
@@ -117,19 +117,19 @@ return {
 		
 		return { fetch = t_1, evict = t_2 }
 	end,
-	selectFrameTime = function(p10, p11)
-		local var16 = nil
-		local var17 = 1e999
+	selectFrameTime = function(p9, p10)
+		local var4 = nil
+		local var5 = 1e999
 		
-		for i, v in p11 do
-			local absValue = math.abs(v - p10)
+		for i, v in p10 do
+			local absValue = math.abs(v - p9)
 			
-			if absValue < var17 then
-				var17 = absValue
-				var16 = v
+			if absValue < var5 then
+				var5 = absValue
+				var4 = v
 			end
 		end
-		return var16
+		return var4
 	end,
 	defaultConfig = {
 		granularity = 0.2,

@@ -2,19 +2,19 @@
 local _ = require(script.Parent.Parent.Stores.types)
 local fFlagDebugTimeToInteractiveTrackerModule = require(script.Parent.FFlagDebugTimeToInteractiveTracker)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: httpService (ref)
-	if p0 == nil then
+	if p1 == nil then
 		return ""
-	elseif type(p0) ~= "table" then
-		return tostring(p0)
+	elseif type(p1) ~= "table" then
+		return tostring(p1)
 	end
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p0 (ref)
-		return httpService:JSONEncode(p0)
+		-- upvalues: httpService (copy), p1 (ref)
+		return httpService:JSONEncode(p1)
 	end)
 	
-	return if ok then status else tostring(p0)
+	return if ok then status else tostring(p1)
 end
 
 local function formatMilestones(p1)
@@ -43,32 +43,32 @@ end
 return function(p2, p3, p4, p5, p6)
 	-- upvalues: fFlagDebugTimeToInteractiveTrackerModule (ref), httpService (ref), formatMilestones (ref)
 	if not fFlagDebugTimeToInteractiveTrackerModule then return end
-	local var5
-	local var4 = ("[TimeToInteractiveTracker][%s]"):format(p2)
+	local var1
+	local var2 = ("[TimeToInteractiveTracker][%s]"):format(p2)
 	
 	if p5 == nil then
-		var5 = ""
+		var1 = ""
 	elseif type(p5) == "table" then
 		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), p5 (ref)
 			return httpService:JSONEncode(p5)
 		end)
-		var5 = if ok then status else tostring(p5)
+		var1 = if ok then status else tostring(p5)
 	else
-		var5 = tostring(p5)
+		var1 = tostring(p5)
 	end
-	local list = { var4, p3 }
+	local list = { var2, p3 }
 	
 	if p4 ~= nil then
 		table.insert(list, ("%.0fms"):format(p4))
 	end
-	if var5 ~= "" then
-		table.insert(list, var5)
+	if var1 ~= "" then
+		table.insert(list, var1)
 	end
-	local var7 = formatMilestones(p6)
+	local var3 = formatMilestones(p6)
 	
-	if var7 ~= "" then
-		table.insert(list, var7)
+	if var3 ~= "" then
+		table.insert(list, var3)
 	end
 	print(table.unpack(list))
 end

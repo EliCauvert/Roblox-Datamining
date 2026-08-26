@@ -2,17 +2,17 @@
 local fFlagPurchasePromptFixOfferMarginUpsell = require(script:FindFirstAncestor("IAPExperience").Parent.SharedFlags).FFlagPurchasePromptFixOfferMarginUpsell
 local _ = require(script.Parent.Parent.PricingTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: cartPricingResponseLineItemModule (ref), fFlagPurchasePromptFixOfferMarginUpsell (ref)
-	if type(p0) ~= "table" then
+	if type(p1) ~= "table" then
 		return nil
 	end
-	local errors = p0.errors
+	local errors = p1.errors
 	
 	if type(errors) == "table" and next(errors) ~= nil then
 		return nil
 	end
-	local items = p0.items
+	local items = p1.items
 	
 	if type(items) ~= "table" or next(items) == nil then
 		return nil
@@ -33,7 +33,7 @@ return function(p0)
 	if var1 <= 0 then
 		return nil
 	end
-	local var3 = cartPricingResponseLineItemModule.extractCartPricingMarketingOffers(p0)
+	local var3 = cartPricingResponseLineItemModule.extractCartPricingMarketingOffers(p1)
 	local t = {}
 	
 	for i_1, v_1 in var3 do
@@ -50,6 +50,6 @@ return function(p0)
 		discounts = cartPricingResponseLineItemModule.extractDiscountRowsFromLineItems(items),
 		offers = var3,
 		selectedOfferIds = t,
-		savingsSummary = cartPricingResponseLineItemModule.extractCartPricingSavingsSummary(p0)
+		savingsSummary = cartPricingResponseLineItemModule.extractCartPricingSavingsSummary(p1)
 	}
 end

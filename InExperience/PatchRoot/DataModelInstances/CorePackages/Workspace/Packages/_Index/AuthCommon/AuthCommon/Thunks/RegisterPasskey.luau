@@ -15,11 +15,11 @@ local function _()
 	return string.format("%sv1/passkey/FinishRegistration", url.AUTH_URL)
 end
 
-local function finishPasskeyRegistration(p0, p1)
+local function finishPasskeyRegistration(p1, p2)
 	-- upvalues: url (ref), promiseModule (ref), httpService (ref), passkeyConstantsModule (ref)
-	return p0(string.format("%sv1/passkey/FinishRegistration", url.AUTH_URL), "POST", { postBody = p1 }):andThen(function(p2)
+	return p1(string.format("%sv1/passkey/FinishRegistration", url.AUTH_URL), "POST", { postBody = p2 }):andThen(function(p3)
 		-- upvalues: promiseModule (copy)
-		return promiseModule.resolve(p2)
+		return promiseModule.resolve(p3)
 	end, function(p3)
 		-- upvalues: httpService (copy), promiseModule (copy), passkeyConstantsModule (copy)
 		return promiseModule.reject({
@@ -30,89 +30,89 @@ local function finishPasskeyRegistration(p0, p1)
 	end)
 end
 
-local _ = function(p4)
+local _ = function(p1)
 	-- upvalues: url (ref)
 	local formattedText = string.format("%sv1/passkey/StartRegistration", url.AUTH_URL)
 	
-	return if p4 then string.format("%s?flow=%s", formattedText, p4) else formattedText
+	return if p1 then string.format("%s?flow=%s", formattedText, p1) else formattedText
 end
 
-local function startPasskeyRegistration(p5, p6, p7)
+local function startPasskeyRegistration(p1, p2, p3)
 	-- upvalues: httpService (ref), url (ref), promiseModule (ref), passkeyConstantsModule (ref)
 	local formattedText = string.format("%sv1/passkey/StartRegistration", url.AUTH_URL)
 	
-	return p5(if p6 then string.format("%s?flow=%s", formattedText, p6) else formattedText, "POST", {
-		postBody = httpService:JSONEncode({ isSilentUpgrade = p7 })
-	}, p7):andThen(function(p8)
+	return p1(if p2 then string.format("%s?flow=%s", formattedText, p2) else formattedText, "POST", {
+		postBody = httpService:JSONEncode({ isSilentUpgrade = p3 })
+	}, p3):andThen(function(p4)
 		-- upvalues: promiseModule (copy)
-		return promiseModule.resolve(p8[1])
-	end, function(p9)
+		return promiseModule.resolve(p4[1])
+	end, function(p4)
 		-- upvalues: httpService (copy), promiseModule (copy), passkeyConstantsModule (copy)
 		return promiseModule.reject({
-			body = if type(p9) == "table" then httpService:JSONEncode(p9) else nil,
+			body = if type(p4) == "table" then httpService:JSONEncode(p4) else nil,
 			name = passkeyConstantsModule.BACKEND_CREATION_ERROR_NAME,
 			source = passkeyConstantsModule.START_STEP
 		})
 	end)
 end
 
-return function(p10, p11, p12, p13)
+return function(p1, p2, p3, p4)
 	-- upvalues: startPasskeyRegistration (ref), httpService (ref), userInputService (ref), base64Module (ref), default (ref), promiseModule (ref), passkeyConstantsModule (ref), logger (ref), fFlagEmitPasskeyRegistrationSourceOnFinish (ref), finishPasskeyRegistration (ref)
-	return startPasskeyRegistration(p10, p11, p12):andThen(function(p14)
-		-- upvalues: httpService (copy), p12 (ref), userInputService (copy), base64Module (copy), default (copy), promiseModule (copy), passkeyConstantsModule (copy), logger (copy), fFlagEmitPasskeyRegistrationSourceOnFinish (copy), p13 (ref), finishPasskeyRegistration (copy), p10 (ref)
-		local creationOptions = httpService:JSONDecode(p14.creationOptions)
-		local sessionId = p14.sessionId
-		local var11 = tonumber(creationOptions.publicKey.timeout)
+	return startPasskeyRegistration(p1, p2, p3):andThen(function(p5)
+		-- upvalues: httpService (copy), p3 (ref), userInputService (copy), base64Module (copy), default (copy), promiseModule (copy), passkeyConstantsModule (copy), logger (copy), fFlagEmitPasskeyRegistrationSourceOnFinish (copy), p4 (ref), finishPasskeyRegistration (copy), p1 (ref)
+		local creationOptions = httpService:JSONDecode(p5.creationOptions)
+		local sessionId = p5.sessionId
+		local var1 = tonumber(creationOptions.publicKey.timeout)
 		creationOptions.keyType = "platform"
 		creationOptions.deviceBoundOnly = true
-		creationOptions.isSilentPasskeyUpgrade = p12
+		creationOptions.isSilentPasskeyUpgrade = p3
 		
 		if userInputService:GetPlatform() ~= Enum.Platform.Android then
 			creationOptions.publicKey.challenge = base64Module.FromUrlSafeBase64(creationOptions.publicKey.challenge)
 			creationOptions.publicKey.user.id = base64Module.FromUrlSafeBase64(creationOptions.publicKey.user.id)
 		end
-		return default:registerCredentials(default.CredentialsTypes.FIDO2, httpService:JSONEncode(creationOptions), var11 / 1000):andThen(function(p15)
-			-- upvalues: httpService (copy), promiseModule (copy), passkeyConstantsModule (copy), logger (copy), base64Module (copy), sessionId (ref), fFlagEmitPasskeyRegistrationSourceOnFinish (copy), p13 (copy), finishPasskeyRegistration (copy), p10 (copy)
-			local var12 = httpService:JSONDecode(p15)
+		return default:registerCredentials(default.CredentialsTypes.FIDO2, httpService:JSONEncode(creationOptions), var1 / 1000):andThen(function(p6)
+			-- upvalues: httpService (copy), promiseModule (copy), passkeyConstantsModule (copy), logger (copy), base64Module (copy), sessionId (ref), fFlagEmitPasskeyRegistrationSourceOnFinish (copy), p4 (copy), finishPasskeyRegistration (copy), p1 (copy)
+			local var2 = httpService:JSONDecode(p6)
 			
-			if var12 == nil or next(var12) == nil then
+			if var2 == nil or next(var2) == nil then
 				return promiseModule.reject({
 					body = "Null resultTable",
 					name = passkeyConstantsModule.USER_OS_DIALOG_ERROR_NAME,
 					source = passkeyConstantsModule.CREDENTIALS_PROTOCOL_REGISTER_CREDENTIALS_EMPTY_RESPONSE
 				})
-			elseif var12.errorCode == nil then
-				var12.id = base64Module.ToUrlSafeBase64(var12.id)
-				var12.rawId = base64Module.ToUrlSafeBase64(var12.rawId)
-				var12.response.attestationObject = base64Module.ToUrlSafeBase64(var12.response.attestationObject)
-				var12.response.clientDataJSON = base64Module.ToUrlSafeBase64(var12.response.clientDataJSON)
+			elseif var2.errorCode == nil then
+				var2.id = base64Module.ToUrlSafeBase64(var2.id)
+				var2.rawId = base64Module.ToUrlSafeBase64(var2.rawId)
+				var2.response.attestationObject = base64Module.ToUrlSafeBase64(var2.response.attestationObject)
+				var2.response.clientDataJSON = base64Module.ToUrlSafeBase64(var2.response.clientDataJSON)
 				
-				return finishPasskeyRegistration(p10, httpService:JSONEncode({
+				return finishPasskeyRegistration(p1, httpService:JSONEncode({
 					credentialNickname = "Passkey",
 					sessionId = sessionId,
-					attestationResponse = httpService:JSONEncode(var12),
-					source = if fFlagEmitPasskeyRegistrationSourceOnFinish then p13 else nil
+					attestationResponse = httpService:JSONEncode(var2),
+					source = if fFlagEmitPasskeyRegistrationSourceOnFinish then p4 else nil
 				}))
 			end
-			logger:warning("Passkey credential signing failed. Error {} ({}) returned.", var12.errorCode, var12.errorMsg)
+			logger:warning("Passkey credential signing failed. Error {} ({}) returned.", var2.errorCode, var2.errorMsg)
 			
 			return promiseModule.reject({
-				body = var12.errorMsg,
+				body = var2.errorMsg,
 				name = passkeyConstantsModule.USER_OS_DIALOG_ERROR_NAME,
 				source = passkeyConstantsModule.CREDENTIALS_PROTOCOL_REGISTER_CREDENTIALS_ERROR_CODE
 			})
-		end, function(p16)
+		end, function(p6)
 			-- upvalues: promiseModule (copy), passkeyConstantsModule (copy)
 			return promiseModule.reject({
-				body = p16,
+				body = p6,
 				name = passkeyConstantsModule.USER_OS_DIALOG_ERROR_NAME,
 				source = passkeyConstantsModule.CREDENTIALS_PROTOCOL_REGISTER_CREDENTIALS_OTHER_ERR
 			})
 		end)
-	end, function(p17)
+	end, function(p5)
 		-- upvalues: promiseModule (copy), passkeyConstantsModule (copy)
-		return if type(p17) == "table" and p17.name then promiseModule.reject(p17) else promiseModule.reject({
-			body = p17,
+		return if type(p5) == "table" and p5.name then promiseModule.reject(p5) else promiseModule.reject({
+			body = p5,
 			name = passkeyConstantsModule.BACKEND_CREATION_ERROR_NAME,
 			source = passkeyConstantsModule.UNKNOWN_BACKEND_ERROR
 		})

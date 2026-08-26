@@ -5,17 +5,17 @@ local _ = require(timeToInteractiveTracker.Milestones.types)
 
 return function(value)
 	-- upvalues: reactModule (ref), constantsModule (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: reactModule (copy), value (ref), constantsModule (copy)
-		local var3 = reactModule.useRef(false)
+		local var1 = reactModule.useRef(false)
 		
-		if not var3.current then
-			var3.current = true
-			value(p0, constantsModule.RenderStarted)
+		if not var1.current then
+			var1.current = true
+			value(p1, constantsModule.RenderStarted)
 		end
 		reactModule.useEffect(function()
-			-- upvalues: value (copy), p0 (ref), constantsModule (copy)
-			value(p0, constantsModule.SurfaceMounted)
+			-- upvalues: value (copy), p1 (ref), constantsModule (copy)
+			value(p1, constantsModule.SurfaceMounted)
 		end, {})
 	end
 end

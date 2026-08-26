@@ -18,13 +18,13 @@ nativeCloseEventConnector.validateProps = t.strictInterface({
 	openEducationalPopup = t.optional(t.callback)
 })
 
-function nativeCloseEventConnector.init(p0)
+function nativeCloseEventConnector.init(p1)
 	-- upvalues: rbxAnalyticsService (ref), userLocalStoreModule (ref), guiService (ref), sendAnalyticsModule (ref), constantsModule (ref)
 	function p0.onNativeCloseConnect()
-		-- upvalues: p0 (ref), rbxAnalyticsService (copy), userLocalStoreModule (copy), guiService (copy), sendAnalyticsModule (copy), constantsModule (copy)
-		if p0.props.isEducationalPopupEnabled then
+		-- upvalues: p1 (ref), rbxAnalyticsService (copy), userLocalStoreModule (copy), guiService (copy), sendAnalyticsModule (copy), constantsModule (copy)
+		if p1.props.isEducationalPopupEnabled then
 			rbxAnalyticsService:ReportCounter("LeaveGame_NativeClose", 1)
-			p0.props.openEducationalPopup(guiService, userLocalStoreModule.new(), p0.props.maxDisplayCount)
+			p1.props.openEducationalPopup(guiService, userLocalStoreModule.new(), p1.props.maxDisplayCount)
 		end
 		sendAnalyticsModule(constantsModule.AnalyticsInGameMenuName, "LeaveGame_NativeClose", {})
 	end
@@ -38,17 +38,17 @@ function nativeCloseEventConnector.render(p1)
 	})
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p3)
+return roactRodux.UNSTABLE_connect2(nil, function(p1)
 	-- upvalues: openEducationalPopupModule (ref)
 	return {
-		openEducationalPopup = function(p4, p5, p6)
-			-- upvalues: p3 (ref), openEducationalPopupModule (copy)
-			return p3(openEducationalPopupModule(p4, p5, p6))
+		openEducationalPopup = function(p2, p3, p4)
+			-- upvalues: p1 (ref), openEducationalPopupModule (copy)
+			return p1(openEducationalPopupModule(p2, p3, p4))
 		end
 	}
-end)(inGameMenuPolicyModule.connect(function(p2, _)
+end)(inGameMenuPolicyModule.connect(function(p1, _)
 	return {
-		isEducationalPopupEnabled = p2.enableEducationalPopup(),
-		maxDisplayCount = p2.educationalPopupMaxDisplayCount()
+		isEducationalPopupEnabled = p1.enableEducationalPopup(),
+		maxDisplayCount = p1.educationalPopupMaxDisplayCount()
 	}
 end)(nativeCloseEventConnector))

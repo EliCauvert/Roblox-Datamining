@@ -8,7 +8,7 @@ local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var4 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local identityVerificationModule = require(parent.IdentityVerification)
 local IDVApiProvider = identityVerificationModule.IDVApiProvider
 local usePollIDVStatus = identityVerificationModule.usePollIDVStatus
@@ -29,103 +29,103 @@ local livenessWithCallbackPollMaxRetries = game:DefineFastInt("LivenessWithCallb
 local livenessBackgroundOnlyPollDelay = game:DefineFastInt("LivenessBackgroundOnlyPollDelay", 6)
 local livenessBackgroundOnlyPollMaxRetries = game:DefineFastInt("LivenessBackgroundOnlyPollMaxRetries", 30)
 
-return function(p0)
-	-- upvalues: useDispatch (ref), useAppPolicy (ref), useRoactService (ref), appLogging (ref), reactModule (ref), getFFlagEnhancedPersonaLivenessEvents (ref), biometricChallengeEventModule (ref), challengeEventConstantsModule (ref), biometricTypeEnum (ref), telemetryReasonsModule (ref), httpService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), navigateDown (ref), personaLivenessServiceWrapperModule (ref), livenessWithCallbackPollDelay (ref), livenessWithCallbackPollMaxRetries (ref), livenessBackgroundOnlyPollDelay (ref), livenessBackgroundOnlyPollMaxRetries (ref), usePollIDVStatus (ref), promiseModule (ref), IDVApiProvider (ref), personaLivenessHostedModule (ref), loading (ref), iconSize (ref)
-	local var16 = useDispatch()
-	local var17 = useAppPolicy(function(p1)
-		return p1.getHasWebViewSupportForFAE()
+return function(p1)
+	-- upvalues: useDispatch (ref), useAppPolicy (ref), useRoactService (ref), appLogging (ref), reactModule (ref), getFFlagEnhancedPersonaLivenessEvents (ref), biometricChallengeEventModule (ref), challengeEventConstantsModule (ref), biometricTypeEnum (ref), telemetryReasonsModule (ref), httpService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), personaLivenessServiceWrapperModule (ref), livenessWithCallbackPollDelay (ref), livenessWithCallbackPollMaxRetries (ref), livenessBackgroundOnlyPollDelay (ref), livenessBackgroundOnlyPollMaxRetries (ref), usePollIDVStatus (ref), promiseModule (ref), IDVApiProvider (ref), personaLivenessHostedModule (ref), loading (ref), iconSize (ref)
+	local var2 = useDispatch()
+	local var3 = useAppPolicy(function(p2)
+		return p2.getHasWebViewSupportForFAE()
 	end)
-	local var18 = useRoactService(appLogging)
-	local var19, var20 = reactModule.useState(nil)
+	local var4 = useRoactService(appLogging)
+	local var5, var6 = reactModule.useState(nil)
 	local persona = reactModule.useRef("Persona")
-	local var22 = reactModule.useRef(nil)
-	local var23 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: p0 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var18 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy), var22 (ref)
-		p0.onChallengeFailed(p2)
+	local var7 = reactModule.useRef(nil)
+	local var8 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: p1 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var4 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy), var7 (ref)
+		p1.onChallengeFailed(p2)
 		
 		if getFFlagEnhancedPersonaLivenessEvents() then
-			var18:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+			var4:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 				context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInvalidated,
-				challengeId = p0.challengeId,
+				challengeId = p1.challengeId,
 				biometricType = biometricTypeEnum.PersonaLiveness,
 				reason = p3,
-				inquiryId = var22.current
+				inquiryId = var7.current
 			})
 			
 			return
 		end
-		var18:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+		var4:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInvalidated,
-			challengeId = p0.challengeId,
+			challengeId = p1.challengeId,
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
-	end, { var18, p0.challengeId, p0.onChallengeFailed })
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), persona (ref), telemetryReasonsModule (copy), var18 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy), var22 (ref)
-		p0.onChallengeAbandoned("")
+	end, { var4, p1.challengeId, p1.onChallengeFailed })
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), persona (ref), telemetryReasonsModule (copy), var4 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy), var7 (ref)
+		p1.onChallengeAbandoned("")
 		
 		if getFFlagEnhancedPersonaLivenessEvents() then
-			var18:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+			var4:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 				context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeAbandoned,
-				challengeId = p0.challengeId,
+				challengeId = p1.challengeId,
 				biometricType = biometricTypeEnum.PersonaLiveness,
 				reason = if persona.current == "Hosted" then telemetryReasonsModule.HostedUserAbandon else telemetryReasonsModule.PersonaUserAbandon,
-				inquiryId = var22.current
+				inquiryId = var7.current
 			})
 			
 			return
 		end
-		var18:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+		var4:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeAbandoned,
-			challengeId = p0.challengeId,
+			challengeId = p1.challengeId,
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
-	end, { var18, p0.challengeId, p0.onChallengeAbandoned })
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), httpService (copy), biometricTypeEnum (copy), getFFlagEnhancedPersonaLivenessEvents (copy), persona (ref), telemetryReasonsModule (copy), var18 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), var22 (ref)
-		p0.onChallengeCompleted(httpService:JSONEncode({ biometricType = biometricTypeEnum.PersonaLiveness }))
+	end, { var4, p1.challengeId, p1.onChallengeAbandoned })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), httpService (copy), biometricTypeEnum (copy), getFFlagEnhancedPersonaLivenessEvents (copy), persona (ref), telemetryReasonsModule (copy), var4 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), var7 (ref)
+		p1.onChallengeCompleted(httpService:JSONEncode({ biometricType = biometricTypeEnum.PersonaLiveness }))
 		
 		if getFFlagEnhancedPersonaLivenessEvents() then
-			var18:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+			var4:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 				context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeCompleted,
-				challengeId = p0.challengeId,
+				challengeId = p1.challengeId,
 				biometricType = biometricTypeEnum.PersonaLiveness,
 				reason = if persona.current == "Hosted" then telemetryReasonsModule.HostedCompleted else telemetryReasonsModule.PersonaCompleted,
-				inquiryId = var22.current
+				inquiryId = var7.current
 			})
 			
 			return
 		end
-		var18:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+		var4:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeCompleted,
-			challengeId = p0.challengeId,
+			challengeId = p1.challengeId,
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
-	end, { var18, p0.challengeId, p0.onChallengeCompleted })
-	local var26 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var16 (ref), navigateDown (copy)
+	end, { var4, p1.challengeId, p1.onChallengeCompleted })
+	local var11 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.GenericWebPage,
-			detail = p4,
+			detail = p2,
 			extraProps = {
 				title = "",
 				onClose = function()
-					-- upvalues: p5 (ref)
-					p5()
+					-- upvalues: p3 (ref)
+					p3()
 				end
 			}
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var4.down(var4.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		var16(navigateDown(t))
-	end, { var16 })
-	local var27 = reactModule.useMemo(function()
-		-- upvalues: personaLivenessServiceWrapperModule (copy), var17 (ref), livenessWithCallbackPollDelay (copy), livenessWithCallbackPollMaxRetries (copy), livenessBackgroundOnlyPollDelay (copy), livenessBackgroundOnlyPollMaxRetries (copy)
-		return if personaLivenessServiceWrapperModule.isAvailable() or var17 then {
+		var2(navigateDown(t))
+	end, { var2 })
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: personaLivenessServiceWrapperModule (copy), var3 (ref), livenessWithCallbackPollDelay (copy), livenessWithCallbackPollMaxRetries (copy), livenessBackgroundOnlyPollDelay (copy), livenessBackgroundOnlyPollMaxRetries (copy)
+		return if personaLivenessServiceWrapperModule.isAvailable() or var3 then {
 			delay = livenessWithCallbackPollDelay,
 			retries = livenessWithCallbackPollMaxRetries
 		} else {
@@ -133,102 +133,102 @@ return function(p0)
 			retries = livenessBackgroundOnlyPollMaxRetries
 		}
 	end)
-	local var28, var29 = usePollIDVStatus({ delay = var27.delay, retries = var27.retries })
-	local var30 = reactModule.useCallback(function(p6)
-		-- upvalues: var22 (ref), personaLivenessServiceWrapperModule (copy), persona (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var18 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), p0 (ref), biometricTypeEnum (copy), telemetryReasonsModule (copy), var17 (ref), promiseModule (copy), var26 (ref), var20 (ref)
-		local sessionIdentifier = p6.sessionIdentifier
-		local sessionToken = p6.sessionToken
-		var22.current = sessionIdentifier
+	local var13, var14 = usePollIDVStatus({ delay = var12.delay, retries = var12.retries })
+	local var15 = reactModule.useCallback(function(p2)
+		-- upvalues: var7 (ref), personaLivenessServiceWrapperModule (copy), persona (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var4 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), p1 (ref), biometricTypeEnum (copy), telemetryReasonsModule (copy), var3 (ref), promiseModule (copy), var11 (ref), var6 (ref)
+		local sessionIdentifier = p2.sessionIdentifier
+		local sessionToken = p2.sessionToken
+		var7.current = sessionIdentifier
 		
 		if personaLivenessServiceWrapperModule.isAvailable() then
 			persona.current = "Persona"
 			
 			if getFFlagEnhancedPersonaLivenessEvents() then
-				var18:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+				var4:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 					context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeDisplayed,
-					challengeId = p0.challengeId,
+					challengeId = p1.challengeId,
 					biometricType = biometricTypeEnum.PersonaLiveness,
 					reason = telemetryReasonsModule.PersonaDisplayed,
 					inquiryId = sessionIdentifier
 				})
 			end
 			return personaLivenessServiceWrapperModule.startFlow(sessionIdentifier, sessionToken)
-		elseif var17 then
+		elseif var3 then
 			persona.current = "Hosted"
 			
 			if getFFlagEnhancedPersonaLivenessEvents() then
-				var18:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+				var4:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 					context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeDisplayed,
-					challengeId = p0.challengeId,
+					challengeId = p1.challengeId,
 					biometricType = biometricTypeEnum.PersonaLiveness,
 					reason = telemetryReasonsModule.HostedDisplayed,
 					inquiryId = sessionIdentifier
 				})
 			end
-			return promiseModule.new(function(p7)
-				-- upvalues: sessionIdentifier (ref), var26 (copy), p6 (ref)
-				var26(p6.verificationLink, function()
-					-- upvalues: p7 (ref), sessionIdentifier (copy)
-					p7(sessionIdentifier)
+			return promiseModule.new(function(p3)
+				-- upvalues: sessionIdentifier (ref), var11 (copy), p2 (ref)
+				var11(p2.verificationLink, function()
+					-- upvalues: p3 (ref), sessionIdentifier (copy)
+					p3(sessionIdentifier)
 				end)
 			end)
 		else
 			persona.current = "Hosted"
 			
 			if getFFlagEnhancedPersonaLivenessEvents() then
-				var18:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+				var4:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 					context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeDisplayed,
-					challengeId = p0.challengeId,
+					challengeId = p1.challengeId,
 					biometricType = biometricTypeEnum.PersonaLiveness,
 					reason = telemetryReasonsModule.HostedDisplayed,
 					inquiryId = sessionIdentifier
 				})
 			end
-			var20(p6.verificationLink)
+			var6(p2.verificationLink)
 			
 			return promiseModule.resolve(sessionIdentifier)
 		end
-	end, { var17, var26, var18, p0.challengeId })
+	end, { var3, var11, var4, p1.challengeId })
 	reactModule.useEffect(function()
-		-- upvalues: IDVApiProvider (copy), var30 (ref), var28 (ref), var25 (ref), var24 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), persona (ref), telemetryReasonsModule (copy), var23 (ref), var29 (ref)
-		IDVApiProvider.startLivenessVerification():andThen(function(p11)
-			return p11
-		end):andThen(function(p10)
-			-- upvalues: var30 (copy)
-			return var30(p10)
-		end):andThen(function(p9)
-			-- upvalues: var28 (copy)
-			return var28(p9)
+		-- upvalues: IDVApiProvider (copy), var15 (ref), var13 (ref), var10 (ref), var9 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), persona (ref), telemetryReasonsModule (copy), var8 (ref), var14 (ref)
+		IDVApiProvider.startLivenessVerification():andThen(function(p2)
+			return p2
+		end):andThen(function(p2)
+			-- upvalues: var15 (copy)
+			return var15(p2)
+		end):andThen(function(p2)
+			-- upvalues: var13 (copy)
+			return var13(p2)
 		end):andThen(function()
-			-- upvalues: var25 (copy)
-			return var25()
-		end):catch(function(p8)
-			-- upvalues: var24 (copy), getFFlagEnhancedPersonaLivenessEvents (copy), persona (copy), telemetryReasonsModule (copy), var23 (copy)
-			if p8 and p8.resultType == Enum.FacialAgeEstimationResultType.Cancel then
-				var24()
+			-- upvalues: var10 (copy)
+			return var10()
+		end):catch(function(p2)
+			-- upvalues: var9 (copy), getFFlagEnhancedPersonaLivenessEvents (copy), persona (copy), telemetryReasonsModule (copy), var8 (copy)
+			if p2 and p2.resultType == Enum.FacialAgeEstimationResultType.Cancel then
+				var9()
 				
 				return
 			elseif not getFFlagEnhancedPersonaLivenessEvents() then
-				var23("Persona error")
+				var8("Persona error")
 				
 				return
 			end
 			local _ = nil
-			var23("Persona error", if p8 and p8.sessionStatus ~= nil then if persona.current == "Hosted" then telemetryReasonsModule.HostedPollingTimeout else telemetryReasonsModule.PersonaPollingTimeout else telemetryReasonsModule.StartLivenessFailed)
+			var8("Persona error", if p2 and p2.sessionStatus ~= nil then if persona.current == "Hosted" then telemetryReasonsModule.HostedPollingTimeout else telemetryReasonsModule.PersonaPollingTimeout else telemetryReasonsModule.StartLivenessFailed)
 		end)
 		
 		return function()
-			-- upvalues: var29 (copy)
-			var29()
+			-- upvalues: var14 (copy)
+			var14()
 		end
 	end, {})
 	
-	return if var19 then reactModule.createElement(personaLivenessHostedModule, {
+	return if var5 then reactModule.createElement(personaLivenessHostedModule, {
 		sessionId = "",
-		webLink = var19,
+		webLink = var5,
 		onCancel = function()
-			-- upvalues: var24 (ref)
-			var24()
+			-- upvalues: var9 (ref)
+			var9()
 		end
 	}) else reactModule.createElement(loading, {
 		size = iconSize.Medium,

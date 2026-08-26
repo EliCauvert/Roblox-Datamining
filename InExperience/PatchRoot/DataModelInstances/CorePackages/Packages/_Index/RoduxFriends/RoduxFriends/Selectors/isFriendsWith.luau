@@ -1,14 +1,14 @@
 ﻿local llamaModule = require(script:FindFirstAncestor("RoduxFriends").Parent.llama)
 local getDeepValueModule = require(script.Parent.Parent.getDeepValue)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getDeepValueModule (ref), llamaModule (ref)
-	local keyPath = p0.keyPath
+	local keyPath = p1.keyPath
 	
-	return function(p1, p2, p3)
+	return function(p2, p3, p4)
 		-- upvalues: getDeepValueModule (copy), keyPath (ref), llamaModule (copy)
-		local var2 = getDeepValueModule(p1, keyPath .. ".byUserId")
+		local var1 = getDeepValueModule(p2, keyPath .. ".byUserId")
 		
-		return var2[p2] == nil or not llamaModule.List.find(var2[p2], p3)
+		return var1[p3] == nil or not llamaModule.List.find(var1[p3], p4)
 	end
 end

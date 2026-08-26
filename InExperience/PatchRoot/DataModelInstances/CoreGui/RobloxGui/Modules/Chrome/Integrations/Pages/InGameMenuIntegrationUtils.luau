@@ -9,32 +9,32 @@ local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSign
 return {
 	createPageOpenSignal = function(value)
 		-- upvalues: signal (ref), mappedSignal (ref), robloxGui (ref)
-		local var3 = false
-		local var4 = signal.new()
-		local var5 = mappedSignal.new(var4, function()
-			-- upvalues: var3 (write)
-			return var3
+		local var1 = false
+		local var2 = signal.new()
+		local var3 = mappedSignal.new(var2, function()
+			-- upvalues: var1 (write)
+			return var1
 		end)
 		task.defer(function()
-			-- upvalues: robloxGui (copy), value (ref), var3 (write), var4 (ref)
+			-- upvalues: robloxGui (copy), value (ref), var1 (write), var2 (ref)
 			local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-			settingsHubModule.CurrentPageSignal:connect(function(p0)
-				-- upvalues: settingsHubModule (ref), value (copy), var3 (copy), var4 (copy)
-				local var7 = settingsHubModule.Instance[value]
-				var3 = var7 ~= nil and p0 == var7.Page.Name
-				var4:fire()
+			settingsHubModule.CurrentPageSignal:connect(function(p1)
+				-- upvalues: settingsHubModule (ref), value (copy), var1 (copy), var2 (copy)
+				local var4 = settingsHubModule.Instance[value]
+				var1 = var4 ~= nil and p1 == var4.Page.Name
+				var2:fire()
 			end)
 		end)
 		
-		return var5
+		return var3
 	end,
 	toggleIGMPage = function(p1, p2)
 		-- upvalues: robloxGui (ref)
 		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-		local var9 = settingsHubModule.Instance[p1]
+		local var1 = settingsHubModule.Instance[p1]
 		
 		if not settingsHubModule:GetVisibility() then
-			settingsHubModule:SetVisibility(true, false, var9)
+			settingsHubModule:SetVisibility(true, false, var1)
 			
 			return
 		elseif p2 then
@@ -42,7 +42,7 @@ return {
 			
 			return
 		end
-		settingsHubModule:SwitchToPage(var9, true)
+		settingsHubModule:SwitchToPage(var1, true)
 	end,
 	toggleInviteFriendsPage = function()
 		-- upvalues: gameInviteModalManager (ref), robloxGui (ref), gameInviteAnalyticsManager (ref)

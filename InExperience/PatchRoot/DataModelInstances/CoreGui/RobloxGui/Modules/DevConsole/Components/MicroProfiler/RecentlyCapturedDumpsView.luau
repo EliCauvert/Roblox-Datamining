@@ -5,12 +5,12 @@ local roactModule = require(corePackagesService.Packages.Roact)
 local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
 local recentlyCapturedDumpsView = roactModule.Component:extend("RecentlyCapturedDumpsView")
 
-function recentlyCapturedDumpsView.render(p0)
+function recentlyCapturedDumpsView.render(p1)
 	-- upvalues: roactModule (ref), constantsModule (ref), microProfilerPanelModule (ref)
-	local _ = p0.props.RecentDumpPaths or {}
+	local _ = p1.props.RecentDumpPaths or {}
 	local t = {}
 	
-	for i, v in ipairs(p0.props.RecentDumpPaths) do
+	for i, v in ipairs(p1.props.RecentDumpPaths) do
 		table.insert(t, {
 			DumpPathLabel = roactModule.createElement("TextBox", {
 				TextSize = 14,
@@ -50,11 +50,11 @@ function recentlyCapturedDumpsView.render(p0)
 	end
 	return roactModule.createElement(microProfilerPanelModule, {
 		Title = "Recently captured MicroProfiler dumps",
-		LayoutOrder = p0.props.LayoutOrder,
+		LayoutOrder = p1.props.LayoutOrder,
 		Sections = { { Name = "RecentlyCapturedDumps", Rows = t } }
 	})
 end
 
-return roactRoduxModule.connect(function(p1, _)
-	return { RecentDumpPaths = p1.MicroProfiler.recentDumpPaths }
+return roactRoduxModule.connect(function(p2, _)
+	return { RecentDumpPaths = p2.MicroProfiler.recentDumpPaths }
 end, nil)(recentlyCapturedDumpsView)

@@ -1,11 +1,11 @@
 ﻿local platformModule = require(script.Parent.Platform)
 local iconModule = require(script.Parent.Parent.Icon)
 
-local function _(p0, p1)
-	for i, v in p1 do
-		p0[i] = v
+local function _(p1, p2)
+	for i, v in p2 do
+		p1[i] = v
 	end
-	return p0
+	return p1
 end
 
 local t = {

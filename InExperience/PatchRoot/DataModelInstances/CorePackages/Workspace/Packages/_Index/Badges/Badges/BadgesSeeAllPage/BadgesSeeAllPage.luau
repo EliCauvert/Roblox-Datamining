@@ -10,34 +10,34 @@ local compositionTags = require(parent.AppComposition).CompositionTags
 local fetchBadgesSeeAllPageIfNeededModule = require(badges.BadgesSeeAllPage.fetchBadgesSeeAllPageIfNeeded)
 local getBadgesSeeAllPageKeyModule = require(badges.BadgesSeeAllPage.getBadgesSeeAllPageKey)
 
-local function _(p0, p1)
-	return p0[p1] or p0.navigation and p0.navigation.getParam(p1)
+local function _(p1, p2)
+	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-return reactModule.memo(function(p2)
+return reactModule.memo(function(p1)
 	-- upvalues: getBadgesSeeAllPageKeyModule (ref), useLocalization (ref), reactModule (ref), sduiLoadTimer (ref), fetchBadgesSeeAllPageIfNeededModule (ref), sduiPageEntryPoint (ref), compositionTags (ref)
-	local universeId = p2.universeId or p2.navigation and p2.navigation.getParam("universeId")
-	local var6 = getBadgesSeeAllPageKeyModule(universeId)
-	local var7 = useLocalization({ pageTitle = "CommonUI.Features.Label.Badges" })
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: p2 (ref), sduiLoadTimer (copy)
-		local var9 = p2
+	local universeId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
+	local var1 = getBadgesSeeAllPageKeyModule(universeId)
+	local var2 = useLocalization({ pageTitle = "CommonUI.Features.Label.Badges" })
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), sduiLoadTimer (copy)
+		local var4 = p1
 		
-		return var9.pageTimer or var9.navigation and var9.navigation.getParam("pageTimer") or sduiLoadTimer.createLoadTimer("BadgesSeeAll")
-	end, { var6 })
+		return var4.pageTimer or var4.navigation and var4.navigation.getParam("pageTimer") or sduiLoadTimer.createLoadTimer("BadgesSeeAll")
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: universeId (ref), fetchBadgesSeeAllPageIfNeededModule (copy), var8 (ref)
+		-- upvalues: universeId (ref), fetchBadgesSeeAllPageIfNeededModule (copy), var3 (ref)
 		if universeId then
-			fetchBadgesSeeAllPageIfNeededModule(universeId, var8)
+			fetchBadgesSeeAllPageIfNeededModule(universeId, var3)
 		end
-	end, { universeId, var8 })
+	end, { universeId, var3 })
 	
 	return if universeId == nil then nil else reactModule.createElement(sduiPageEntryPoint, {
 		appPage = "BadgesSeeAll",
 		includeNavigationHeaderBar = true,
-		configKey = var6,
-		pageTimer = var8,
-		pageTitle = var7.pageTitle,
+		configKey = var1,
+		pageTimer = var3,
+		pageTitle = var2.pageTitle,
 		refresh = reactModule.useCallback(function()
 			-- upvalues: universeId (ref), sduiLoadTimer (copy), fetchBadgesSeeAllPageIfNeededModule (copy)
 			if universeId then

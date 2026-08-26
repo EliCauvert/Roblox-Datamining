@@ -17,32 +17,32 @@ local widgetsProviderModule = require(parent.StudioWidgets.WidgetsProvider)
 local elevationProvider = require(parent.Elevation.ElevationProvider).ElevationProvider
 local isPluginElevatedModule = require(parent.Plugin.isPluginElevated)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), pluginProviderModule (ref), elevationProvider (ref), preferencesProviderModule (ref), styleProviderModule (ref), flagsModule (ref), responsiveProviderModule (ref), overlayModule (ref), cursorModule (ref), isPluginElevatedModule (ref), widgetsProviderModule (ref), panelsProviderModule (ref), contextStack (ref)
-	local var11 = if p0.preferences then p0.preferences else {}
+	local var1 = if p1.preferences then p1.preferences else {}
 	local list = {
-		reactModule.createElement(pluginProviderModule, { plugin = p0.plugin }),
+		reactModule.createElement(pluginProviderModule, { plugin = p1.plugin }),
 		reactModule.createElement(elevationProvider, nil),
-		reactModule.createElement(preferencesProviderModule, var11),
+		reactModule.createElement(preferencesProviderModule, var1),
 		reactModule.createElement(styleProviderModule, {
-			themeName = if flagsModule.FoundationThemeName then p0.themeName else nil,
-			colorMode = p0.colorMode,
-			theme = p0.theme,
-			device = p0.device,
-			derives = p0.derives,
-			scale = var11.scale,
-			tokenOverrides = p0.tokenOverrides
+			themeName = if flagsModule.FoundationThemeName then p1.themeName else nil,
+			colorMode = p1.colorMode,
+			theme = p1.theme,
+			device = p1.device,
+			derives = p1.derives,
+			scale = var1.scale,
+			tokenOverrides = p1.tokenOverrides
 		}),
 		reactModule.createElement(responsiveProviderModule, {
-			config = if p0.responsiveConfig then p0.responsiveConfig else {}
+			config = if p1.responsiveConfig then p1.responsiveConfig else {}
 		}),
-		reactModule.createElement(overlayModule, if typeof(p0.overlayGui) == "table" then { DisplayOrder = p0.overlayGui.DisplayOrder } else { gui = p0.overlayGui }),
+		reactModule.createElement(overlayModule, if typeof(p1.overlayGui) == "table" then { DisplayOrder = p1.overlayGui.DisplayOrder } else { gui = p1.overlayGui }),
 		reactModule.createElement(cursorModule)
 	}
 	
-	if p0.plugin and isPluginElevatedModule(p0.plugin) then
+	if p1.plugin and isPluginElevatedModule(p1.plugin) then
 		table.insert(list, reactModule.createElement(widgetsProviderModule, {}))
 		table.insert(list, reactModule.createElement(panelsProviderModule, {}))
 	end
-	return reactModule.createElement(contextStack, { providers = list }, p0.children)
+	return reactModule.createElement(contextStack, { providers = list }, p1.children)
 end

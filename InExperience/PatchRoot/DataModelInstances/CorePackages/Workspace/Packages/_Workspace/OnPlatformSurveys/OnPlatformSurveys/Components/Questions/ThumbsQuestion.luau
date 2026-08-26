@@ -14,36 +14,36 @@ local list = {
 	{ id = "2", icon = "thumb-up" }
 }
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: t (ref)
-	for i, v in p0.choices or t do
-		if v.id == p1 then
+	for i, v in p1.choices or t do
+		if v.id == p2 then
 			return v
 		end
 	end
 	return nil
 end
 
-return reactModule.memo(function(p2)
+return reactModule.memo(function(p3)
 	-- upvalues: useTokens (ref), reactModule (ref), list (ref), t (ref), view (ref), icon (ref), iconVariant (ref), text (ref)
-	local var5 = useTokens()
-	local question = p2.question
-	local answer = p2.answer
-	local var6 = p2.isDisabled == true
-	local var7 = if answer.choiceIds ~= nil then nil else answer.choiceIds[1]
-	local var8, var9 = reactModule.useState(nil)
-	local color3 = var5.Color.Content.Default.Color3
+	local var1 = useTokens()
+	local question = p3.question
+	local answer = p3.answer
+	local var2 = p3.isDisabled == true
+	local var3 = if answer.choiceIds ~= nil then nil else answer.choiceIds[1]
+	local var4, var5 = reactModule.useState(nil)
+	local color3 = var1.Color.Content.Default.Color3
 	local t_1 = {}
 	
 	for i, v in list do
-		local var11
+		local var6
 		local id = v.id
 		
 		for i_1, v_1 in question.choices or t do
 			if v_1.id == id then
-				var11 = v_1
-				if var11 ~= nil then
-					id = var7 == v.id
+				var6 = v_1
+				if var6 ~= nil then
+					id = var3 == v.id
 					t_1["Cell_" .. v.id] = reactModule.createElement(view, {
 						tag = "col align-x-center gap-small auto-xy",
 						LayoutOrder = i
@@ -53,26 +53,26 @@ return reactModule.memo(function(p2)
 							BackgroundTransparency = 1,
 							Text = "",
 							AutoButtonColor = false,
-							Active = not var6,
-							Selectable = not var6,
+							Active = not var2,
+							Selectable = not var2,
 							LayoutOrder = 1,
 							[reactModule.Tag] = "data-testid=thumb-" .. v.id,
 							[reactModule.Event.Activated] = function()
-								-- upvalues: var6 (ref), p2 (ref), id (ref), v (ref)
-								if var6 then
+								-- upvalues: var2 (ref), p3 (ref), id (ref), v (ref)
+								if var2 then
 									return
 								end
-								p2.onAnswerChanged({ choiceIds = if id then {} else { v.id } })
+								p3.onAnswerChanged({ choiceIds = if id then {} else { v.id } })
 							end,
 							[reactModule.Event.MouseEnter] = function()
-								-- upvalues: var9 (ref), v (ref)
-								var9(v.id)
+								-- upvalues: var5 (ref), v (ref)
+								var5(v.id)
 							end,
 							[reactModule.Event.MouseLeave] = function()
-								-- upvalues: var9 (ref), v (ref)
-								var9(function(p3)
+								-- upvalues: var5 (ref), v (ref)
+								var5(function(p4)
 									-- upvalues: v (copy)
-									return if p3 == v.id then nil else p3
+									return if p4 == v.id then nil else p4
 								end)
 							end
 						}, {
@@ -81,7 +81,7 @@ return reactModule.memo(function(p2)
 								ZIndex = 1,
 								backgroundStyle = {
 									Color3 = color3,
-									Transparency = if id then 0.75 elseif var8 == v.id then 0.85 else 0.92
+									Transparency = if id then 0.75 elseif var4 == v.id then 0.85 else 0.92
 								}
 							}),
 							Icon = reactModule.createElement(icon, {
@@ -96,16 +96,16 @@ return reactModule.memo(function(p2)
 						Label = reactModule.createElement(text, {
 							tag = "auto-xy text-body-medium text-align-x-center content-default",
 							LayoutOrder = 2,
-							Text = var11.label
+							Text = var6.label
 						})
 					})
 				end
 			end
 		end
-		var11 = nil
+		var6 = nil
 	end
 	return reactModule.createElement(view, {
 		tag = "row flex-around align-y-top size-full-0 auto-y",
-		LayoutOrder = p2.layoutOrder
+		LayoutOrder = p3.layoutOrder
 	}, t_1)
 end)

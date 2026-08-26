@@ -33,18 +33,18 @@ playerNameTag.validateProps = tModule.strictInterface({
 	})
 })
 
-function playerNameTag.render(p0)
+function playerNameTag.render(p1)
 	-- upvalues: withLayoutValues (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), reactModule (ref), verifiedBadgesModule (ref)
-	return withLayoutValues(function(p1)
-		-- upvalues: p0 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), reactModule (copy), verifiedBadgesModule (copy)
-		local var12 = if p0.props.isHovered then p1.IconSelectedColor else p1.IconUnSelectedColor
-		local font = p0.props.textFont.Font
-		local size = p0.props.textFont.Size
+	return withLayoutValues(function(p2)
+		-- upvalues: p1 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), reactModule (copy), verifiedBadgesModule (copy)
+		local var1 = if p1.props.isHovered then p2.IconSelectedColor else p2.IconUnSelectedColor
+		local font = p1.props.textFont.Font
+		local size = p1.props.textFont.Size
 		local t = {}
-		local platformName = p0.props.player.PlatformName
-		local var14 = if fFlagEnableVerifiedBadgeStore then p0.props.hasVerifiedBadge else userLibModule.Utils.isPlayerVerified(p0.props.player)
+		local platformName = p1.props.player.PlatformName
+		local var2 = if fFlagEnableVerifiedBadgeStore then p1.props.hasVerifiedBadge else userLibModule.Utils.isPlayerVerified(p1.props.player)
 		
-		if p1.IsTenFoot and platformName ~= "" then
+		if p2.IsTenFoot and platformName ~= "" then
 			t.VerticalLayout = reactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
@@ -59,10 +59,10 @@ function playerNameTag.render(p0)
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Font = Enum.Font.SourceSans,
 				TextSize = size,
-				TextColor3 = p0.props.textStyle.Color,
-				TextTransparency = p0.props.textStyle.Transparency,
-				TextStrokeColor3 = p0.props.textStyle.StrokeColor,
-				TextStrokeTransparency = p0.props.textStyle.StrokeTransparency,
+				TextColor3 = p1.props.textStyle.Color,
+				TextTransparency = p1.props.textStyle.Transparency,
+				TextStrokeColor3 = p1.props.textStyle.StrokeColor,
+				TextStrokeTransparency = p1.props.textStyle.StrokeTransparency,
 				Text = platformName
 			})
 			t.RobloxNameFrame = reactModule.createElement("Frame", {
@@ -81,13 +81,13 @@ function playerNameTag.render(p0)
 					Selectable = false,
 					LayoutOrder = 1,
 					Size = UDim2.new(0, 24, 0, 24),
-					Image = p1.RobloxIconImage,
-					ImageColor3 = var12
+					Image = p2.RobloxIconImage,
+					ImageColor3 = var1
 				}),
 				PlayerNameContainer = reactModule.createElement(verifiedBadgesModule.EmojiWrapper, {
 					layoutOrder = 2,
 					mockIsEnrolled = true,
-					emoji = if var14 then verifiedBadgesModule.emoji.verified else "",
+					emoji = if var2 then verifiedBadgesModule.emoji.verified else "",
 					size = UDim2.new(1, -30, 0, 0),
 					automaticSize = Enum.AutomaticSize.Y,
 					verticalAlignment = Enum.VerticalAlignment.Center
@@ -98,12 +98,12 @@ function playerNameTag.render(p0)
 						AutomaticSize = Enum.AutomaticSize.X,
 						Size = UDim2.fromScale(0, 1),
 						Font = font,
-						Text = p0.props.name,
+						Text = p1.props.name,
 						TextSize = size,
-						TextColor3 = p0.props.textStyle.Color,
-						TextTransparency = p0.props.textStyle.Transparency,
-						TextStrokeColor3 = p0.props.textStyle.StrokeColor,
-						TextStrokeTransparency = p0.props.textStyle.StrokeTransparency,
+						TextColor3 = p1.props.textStyle.Color,
+						TextTransparency = p1.props.textStyle.Transparency,
+						TextStrokeColor3 = p1.props.textStyle.StrokeColor,
+						TextStrokeTransparency = p1.props.textStyle.StrokeTransparency,
 						TextTruncate = Enum.TextTruncate.AtEnd,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
@@ -112,7 +112,7 @@ function playerNameTag.render(p0)
 		else
 			t.PlayerNameContainer = reactModule.createElement(verifiedBadgesModule.EmojiWrapper, {
 				mockIsEnrolled = true,
-				emoji = if var14 then verifiedBadgesModule.emoji.verified else "",
+				emoji = if var2 then verifiedBadgesModule.emoji.verified else "",
 				anchorPoint = Vector2.new(0, 0.5),
 				position = UDim2.fromScale(0, 0.5),
 				verticalAlignment = Enum.VerticalAlignment.Center,
@@ -125,30 +125,30 @@ function playerNameTag.render(p0)
 					AutomaticSize = Enum.AutomaticSize.X,
 					Size = UDim2.fromScale(0, 1),
 					Font = font,
-					Text = p0.props.name,
+					Text = p1.props.name,
 					TextSize = size,
-					TextColor3 = p0.props.textStyle.Color,
-					TextTransparency = p0.props.textStyle.Transparency,
+					TextColor3 = p1.props.textStyle.Color,
+					TextTransparency = p1.props.textStyle.Transparency,
 					TextTruncate = Enum.TextTruncate.AtEnd,
-					TextStrokeColor3 = p0.props.textStyle.StrokeColor,
-					TextStrokeTransparency = p0.props.textStyle.StrokeTransparency,
+					TextStrokeColor3 = p1.props.textStyle.StrokeColor,
+					TextStrokeTransparency = p1.props.textStyle.StrokeTransparency,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			})
 		end
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = p0.props.layoutOrder,
-			Size = p1.PlayerNameSize
+			LayoutOrder = p1.props.layoutOrder,
+			Size = p2.PlayerNameSize
 		}, t)
 	end)
 end
 
-local function PlayerNameTagContainer(p2)
+local function PlayerNameTagContainer(p1)
 	-- upvalues: usePlayerCombinedNameModule (ref), fFlagEnableVerifiedBadgeStore (ref), useVerifiedBadge (ref), reactModule (ref), playerNameTag (ref), cryoModule (ref)
-	return reactModule.createElement(playerNameTag, cryoModule.Dictionary.join(p2, {
-		name = usePlayerCombinedNameModule(tostring(p2.player.UserId), p2.player.DisplayName),
-		hasVerifiedBadge = if fFlagEnableVerifiedBadgeStore then if fFlagEnableVerifiedBadgeStore then useVerifiedBadge(p2.player) else nil else nil
+	return reactModule.createElement(playerNameTag, cryoModule.Dictionary.join(p1, {
+		name = usePlayerCombinedNameModule(tostring(p1.player.UserId), p1.player.DisplayName),
+		hasVerifiedBadge = if fFlagEnableVerifiedBadgeStore then if fFlagEnableVerifiedBadgeStore then useVerifiedBadge(p1.player) else nil else nil
 	}))
 end
 

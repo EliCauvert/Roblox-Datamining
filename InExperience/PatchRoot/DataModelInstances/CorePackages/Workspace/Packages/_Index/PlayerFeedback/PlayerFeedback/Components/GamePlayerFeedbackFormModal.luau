@@ -23,7 +23,7 @@ local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetN
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var7 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local appPage = require(parent.RobloxAppEnums).AppPage
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local getFFlagEdpPlayerFeedbackCommentsOnly = require(parent.SharedFlags).GetFFlagEdpPlayerFeedbackCommentsOnly
@@ -40,22 +40,22 @@ local addThumbnailReportToPlayerFeedback = game:DefineFastFlag("AddThumbnailRepo
 local useState = reactModule.useState
 local useEffect = reactModule.useEffect
 
-local function CategoryCheckboxes(p0)
+local function CategoryCheckboxes(p1)
 	-- upvalues: reactModule (ref), cryoModule (ref), checkbox (ref)
-	local category = p0.category
-	local selectedCategoryIds = p0.selectedCategoryIds
-	local onOptionSelected = p0.onOptionSelected
+	local category = p1.category
+	local selectedCategoryIds = p1.selectedCategoryIds
+	local onOptionSelected = p1.onOptionSelected
 	local t = {
 		layout = reactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
 		padding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, -8) })
 	}
-	local var18 = reactModule.useCallback(function(p1)
+	local var2 = reactModule.useCallback(function(p2)
 		-- upvalues: cryoModule (copy), selectedCategoryIds (ref), onOptionSelected (ref)
-		return function(p2)
-			-- upvalues: cryoModule (copy), selectedCategoryIds (copy), p1 (ref), onOptionSelected (copy)
-			onOptionSelected(if p2 then cryoModule.List.join(selectedCategoryIds, { p1 }) else cryoModule.List.filter(selectedCategoryIds, function(p3)
-				-- upvalues: p1 (copy)
-				return p3 ~= p1
+		return function(p3)
+			-- upvalues: cryoModule (copy), selectedCategoryIds (copy), p2 (ref), onOptionSelected (copy)
+			onOptionSelected(if p3 then cryoModule.List.join(selectedCategoryIds, { p2 }) else cryoModule.List.filter(selectedCategoryIds, function(p4)
+				-- upvalues: p2 (copy)
+				return p4 ~= p2
 			end))
 		end
 	end, { selectedCategoryIds })
@@ -64,23 +64,23 @@ local function CategoryCheckboxes(p0)
 		t["Checkbox" .. i] = reactModule.createElement(checkbox, {
 			label = v.label,
 			isChecked = cryoModule.List.find(selectedCategoryIds, v.id) ~= nil,
-			onActivated = var18(v.id),
+			onActivated = var2(v.id),
 			LayoutOrder = i
 		})
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, t)
 end
 
-local function _(p4)
-	return if utf8.len(p4) then utf8.len(utf8.nfcnormalize(p4)) else string.len(p4)
+local function _(p2)
+	return if utf8.len(p2) then utf8.len(utf8.nfcnormalize(p2)) else string.len(p2)
 end
 
-local var16 = argCheckModule.wrap(tModule.interface({
+local var3 = argCheckModule.wrap(tModule.interface({
 	closeCentralOverlayThunk = tModule.callback,
 	universeId = tModule.string,
 	playerFeedbackMetadata = tModule.strictInterface({
@@ -109,41 +109,41 @@ local var16 = argCheckModule.wrap(tModule.interface({
 	onSubmitted = tModule.optional(tModule.callback)
 }))
 
-return function(p5)
-	-- upvalues: var16 (ref), useStyle (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useSelector (ref), useState (ref), reactModule (ref), getFFlagEdpPlayerFeedbackCommentsOnly (ref), useLocalization (ref), useEffect (ref), playerFeedbackEventsModule (ref), submitGamePlayerFeedbackModule (ref), setCurrentToastMessage (ref), setNetworkingErrorToast (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), fFlagAddThumbnailSelectorReport (ref), addThumbnailReportToPlayerFeedback (ref), closeCentralOverlay (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var7 (ref), navigateDown (ref), userInputService (ref), partialPageModal (ref), verticalScrollView (ref), CategoryCheckboxes (ref), buttonStack (ref), buttonType (ref), fFlagEnableAbuseReportRevampFlow (ref), enableAbuseReportRevampFeedback (ref)
-	assert(var16(p5))
-	local var19 = useStyle()
-	local var20 = useDispatch()
-	local var21 = useRoactService(roactNetworking)
-	local var22 = useRoactService(appEventIngestService)
-	local tokens = var19.Tokens
-	local var23 = useSelector(function(p6)
-		return p6.ScreenSize
+return function(p2)
+	-- upvalues: var3 (ref), useStyle (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useSelector (ref), useState (ref), reactModule (ref), getFFlagEdpPlayerFeedbackCommentsOnly (ref), useLocalization (ref), useEffect (ref), playerFeedbackEventsModule (ref), submitGamePlayerFeedbackModule (ref), setCurrentToastMessage (ref), setNetworkingErrorToast (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), fFlagAddThumbnailSelectorReport (ref), addThumbnailReportToPlayerFeedback (ref), closeCentralOverlay (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userInputService (ref), partialPageModal (ref), verticalScrollView (ref), CategoryCheckboxes (ref), buttonStack (ref), buttonType (ref), fFlagEnableAbuseReportRevampFlow (ref), enableAbuseReportRevampFeedback (ref)
+	assert(var3(p2))
+	local var4 = useStyle()
+	local var5 = useDispatch()
+	local var6 = useRoactService(roactNetworking)
+	local var7 = useRoactService(appEventIngestService)
+	local tokens = var4.Tokens
+	local var8 = useSelector(function(p3)
+		return p3.ScreenSize
 	end)
-	local var24 = useSelector(function(p7)
-		local globalGuiInset = p7.GlobalGuiInset
+	local var9 = useSelector(function(p3)
+		local globalGuiInset = p3.GlobalGuiInset
 		
 		return if globalGuiInset then globalGuiInset.bottom else 0
 	end)
-	local var25, var26 = useState(false)
-	local var27, var28 = useState(0)
-	local var29 = if var25 then -var27 + var24 else 0
-	local var30 = if var25 then 0 else 48
-	local var31, var32 = useState(0)
-	local var33 = reactModule.useRef(nil)
-	local var34 = reactModule.useRef(nil)
-	local var35 = var23.Y - var27 - 48 - 48 - 48 - var30
-	local playerFeedbackMetadata = p5.playerFeedbackMetadata
+	local var10, var11 = useState(false)
+	local var12, var13 = useState(0)
+	local var14 = if var10 then -var12 + var9 else 0
+	local var15 = if var10 then 0 else 48
+	local var16, var17 = useState(0)
+	local var18 = reactModule.useRef(nil)
+	local var19 = reactModule.useRef(nil)
+	local var20 = var8.Y - var12 - 48 - 48 - 48 - var15
+	local playerFeedbackMetadata = p2.playerFeedbackMetadata
 	local categoryType = playerFeedbackMetadata.categoryType
 	local category = playerFeedbackMetadata.category
 	local metadata = playerFeedbackMetadata.metadata
 	local comment = playerFeedbackMetadata.comment
 	local rootPlaceId = playerFeedbackMetadata.rootPlaceId
-	local var36, var37 = useState("")
-	local var38, var39 = useState(if getFFlagEdpPlayerFeedbackCommentsOnly() then { "Other" } else {})
-	local var40 = playerFeedbackMetadata.canSubmitComment and #var38 > 0
-	local var41, var42 = useState(nil)
-	local var43 = useLocalization({
+	local var21, var22 = useState("")
+	local var23, var24 = useState(if getFFlagEdpPlayerFeedbackCommentsOnly() then { "Other" } else {})
+	local var25 = playerFeedbackMetadata.canSubmitComment and #var23 > 0
+	local var26, var27 = useState(nil)
+	local var28 = useLocalization({
 		abuseReportPromptText = "PlayerFeedbacks.VoteForm.Message.ReportAbuseInsteadLong",
 		reportFlowPageTitle = "PlayerFeedbacks.VoteForm.Message.Action.Report",
 		commentTooLongMessage = {
@@ -155,184 +155,184 @@ return function(p5)
 			count = comment.minimum_length
 		}
 	})
-	local var44 = #var38 > 0 and var41 == nil
+	local var29 = #var23 > 0 and var26 == nil
 	
 	if getFFlagEdpPlayerFeedbackCommentsOnly() then
-		var44 = #var38 > 0 and ((if utf8.len(var36) then utf8.len(utf8.nfcnormalize(var36)) else string.len(var36)) > 0 and var41 == nil)
-		local var45, var46 = useState(false)
+		var29 = #var23 > 0 and ((if utf8.len(var21) then utf8.len(utf8.nfcnormalize(var21)) else string.len(var21)) > 0 and var26 == nil)
+		local var30, var31 = useState(false)
 		useEffect(function()
-			-- upvalues: var45 (ref), var34 (ref), var46 (ref)
+			-- upvalues: var30 (ref), var19 (ref), var31 (ref)
 			task.defer(function()
-				-- upvalues: var45 (copy), var34 (copy), var46 (copy)
-				if not var45 and var34.current then
-					var46(true)
-					var34.current:CaptureFocus()
+				-- upvalues: var30 (copy), var19 (copy), var31 (copy)
+				if not var30 and var19.current then
+					var31(true)
+					var19.current:CaptureFocus()
 				end
 			end)
-		end, { var34, var45 })
+		end, { var19, var30 })
 	end
-	local var47 = reactModule.useCallback(function()
-		-- upvalues: var20 (ref), p5 (ref)
-		var20(p5.closeCentralOverlayThunk())
-	end, { p5.closeCentralOverlayThunk })
-	local var48 = reactModule.useCallback(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), var47 (ref)
-		playerFeedbackEventsModule.DismissPlayerFeedbackFormModal(var22, rootPlaceId, { categoryType = categoryType })
-		var47()
-	end, { var47, categoryType, rootPlaceId, var22 })
-	local var49 = reactModule.useCallback(function(p8)
-		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), var39 (ref)
-		playerFeedbackEventsModule.TogglePlayerFeedbackFormModalReason(var22, rootPlaceId, { categoryType = categoryType })
-		var39(p8)
+	local var32 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), p2 (ref)
+		var5(p2.closeCentralOverlayThunk())
+	end, { p2.closeCentralOverlayThunk })
+	local var33 = reactModule.useCallback(function()
+		-- upvalues: playerFeedbackEventsModule (copy), var7 (ref), rootPlaceId (ref), categoryType (ref), var32 (ref)
+		playerFeedbackEventsModule.DismissPlayerFeedbackFormModal(var7, rootPlaceId, { categoryType = categoryType })
+		var32()
+	end, { var32, categoryType, rootPlaceId, var7 })
+	local var34 = reactModule.useCallback(function(p3)
+		-- upvalues: playerFeedbackEventsModule (copy), var7 (ref), rootPlaceId (ref), categoryType (ref), var24 (ref)
+		playerFeedbackEventsModule.TogglePlayerFeedbackFormModalReason(var7, rootPlaceId, { categoryType = categoryType })
+		var24(p3)
 	end, {})
-	local var50 = reactModule.useCallback(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), var38 (ref), getFFlagEdpPlayerFeedbackCommentsOnly (copy), var36 (ref), var42 (ref), var43 (ref), comment (ref), var20 (ref), submitGamePlayerFeedbackModule (copy), var21 (ref), setCurrentToastMessage (copy), p5 (ref), var47 (ref), setNetworkingErrorToast (copy)
-		playerFeedbackEventsModule.ClickPlayerFeedbackFormModalSubmit(var22, rootPlaceId, { categoryType = categoryType })
+	local var35 = reactModule.useCallback(function()
+		-- upvalues: playerFeedbackEventsModule (copy), var7 (ref), rootPlaceId (ref), categoryType (ref), var23 (ref), getFFlagEdpPlayerFeedbackCommentsOnly (copy), var21 (ref), var27 (ref), var28 (ref), comment (ref), var5 (ref), submitGamePlayerFeedbackModule (copy), var6 (ref), setCurrentToastMessage (copy), p2 (ref), var32 (ref), setNetworkingErrorToast (copy)
+		playerFeedbackEventsModule.ClickPlayerFeedbackFormModalSubmit(var7, rootPlaceId, { categoryType = categoryType })
 		
-		if #var38 == 0 then return end
+		if #var23 == 0 then return end
 		if getFFlagEdpPlayerFeedbackCommentsOnly() then
-			local var61 = var36
+			local var36 = var21
 			
-			if (if utf8.len(var61) then utf8.len(utf8.nfcnormalize(var61)) else string.len(var61)) == 0 then
-				playerFeedbackEventsModule.SubmitPlayerFeedbackFailCommentValidation(var22, rootPlaceId, { value = "CommentTooShort", categoryType = categoryType })
-				var42(var43.commentTooShortMessage)
+			if (if utf8.len(var36) then utf8.len(utf8.nfcnormalize(var36)) else string.len(var36)) == 0 then
+				playerFeedbackEventsModule.SubmitPlayerFeedbackFailCommentValidation(var7, rootPlaceId, { value = "CommentTooShort", categoryType = categoryType })
+				var27(var28.commentTooShortMessage)
 				
 				return
-			elseif (if utf8.len(var36) then utf8.len(utf8.nfcnormalize(var36)) else string.len(var36)) > 0 and (if utf8.len(var36) then utf8.len(utf8.nfcnormalize(var36)) else string.len(var36)) < comment.minimum_length then
-				playerFeedbackEventsModule.SubmitPlayerFeedbackFailCommentValidation(var22, rootPlaceId, { value = "CommentTooShort", categoryType = categoryType })
-				var42(var43.commentTooShortMessage)
+			elseif (if utf8.len(var21) then utf8.len(utf8.nfcnormalize(var21)) else string.len(var21)) > 0 and (if utf8.len(var21) then utf8.len(utf8.nfcnormalize(var21)) else string.len(var21)) < comment.minimum_length then
+				playerFeedbackEventsModule.SubmitPlayerFeedbackFailCommentValidation(var7, rootPlaceId, { value = "CommentTooShort", categoryType = categoryType })
+				var27(var28.commentTooShortMessage)
 				
 				return
-			elseif comment.maximum_length < (if utf8.len(var36) then utf8.len(utf8.nfcnormalize(var36)) else string.len(var36)) then
-				playerFeedbackEventsModule.SubmitPlayerFeedbackFailCommentValidation(var22, rootPlaceId, { value = "CommentTooLong", categoryType = categoryType })
-				var42(var43.commentTooLongMessage)
+			elseif comment.maximum_length < (if utf8.len(var21) then utf8.len(utf8.nfcnormalize(var21)) else string.len(var21)) then
+				playerFeedbackEventsModule.SubmitPlayerFeedbackFailCommentValidation(var7, rootPlaceId, { value = "CommentTooLong", categoryType = categoryType })
+				var27(var28.commentTooLongMessage)
 				
 				return
 			end
-			var20(submitGamePlayerFeedbackModule.Post(var21, rootPlaceId, categoryType, var38, var36)):andThen(function(_)
-				-- upvalues: var20 (copy), setCurrentToastMessage (copy), p5 (copy), var47 (copy)
-				var20(setCurrentToastMessage({
+			var5(submitGamePlayerFeedbackModule.Post(var6, rootPlaceId, categoryType, var23, var21)):andThen(function(_)
+				-- upvalues: var5 (copy), setCurrentToastMessage (copy), p2 (copy), var32 (copy)
+				var5(setCurrentToastMessage({
 					toastMessage = "PlayerFeedbacks.VoteForm.Message.SubmitSuccess"
 				}))
 				
-				if p5.onSubmitted then
-					p5.onSubmitted()
+				if p2.onSubmitted then
+					p2.onSubmitted()
 				end
-				var47()
-			end, function(p9)
-				-- upvalues: var20 (copy), setNetworkingErrorToast (copy)
-				var20(setNetworkingErrorToast(p9))
+				var32()
+			end, function(p3)
+				-- upvalues: var5 (copy), setNetworkingErrorToast (copy)
+				var5(setNetworkingErrorToast(p3))
 			end)
 		end
 	end, {
-		var21, var22, comment.maximum_length, comment.minimum_length,
-		var43.commentTooShortMessage, var43.commentTooLongMessage, rootPlaceId,
-		categoryType, var38, var36, p5.onSubmitted, var47
+		var6, var7, comment.maximum_length, comment.minimum_length,
+		var28.commentTooShortMessage, var28.commentTooLongMessage, rootPlaceId,
+		categoryType, var23, var21, p2.onSubmitted, var32
 	})
 	useEffect(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref)
-		playerFeedbackEventsModule.PlayerFeedbackFormModalMounted(var22, rootPlaceId, { categoryType = categoryType })
-	end, { var22, rootPlaceId, categoryType })
-	local var51 = reactModule.useCallback(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref)
-		playerFeedbackEventsModule.FocusPlayerFeedbackFormModalComment(var22, rootPlaceId, { categoryType = categoryType })
-	end, { var22, rootPlaceId, categoryType })
-	local var52 = reactModule.useCallback(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), var20 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), fFlagAddThumbnailSelectorReport (copy), addThumbnailReportToPlayerFeedback (copy), p5 (ref), closeCentralOverlay (copy)
-		playerFeedbackEventsModule.ClickPlayerFeedbackFormAbuseReportPrompt(var22, rootPlaceId, { categoryType = categoryType })
-		var20(openDynamicAbuseReportModule({
+		-- upvalues: playerFeedbackEventsModule (copy), var7 (ref), rootPlaceId (ref), categoryType (ref)
+		playerFeedbackEventsModule.PlayerFeedbackFormModalMounted(var7, rootPlaceId, { categoryType = categoryType })
+	end, { var7, rootPlaceId, categoryType })
+	local var36 = reactModule.useCallback(function()
+		-- upvalues: playerFeedbackEventsModule (copy), var7 (ref), rootPlaceId (ref), categoryType (ref)
+		playerFeedbackEventsModule.FocusPlayerFeedbackFormModalComment(var7, rootPlaceId, { categoryType = categoryType })
+	end, { var7, rootPlaceId, categoryType })
+	local var37 = reactModule.useCallback(function()
+		-- upvalues: playerFeedbackEventsModule (copy), var7 (ref), rootPlaceId (ref), categoryType (ref), var5 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), fFlagAddThumbnailSelectorReport (copy), addThumbnailReportToPlayerFeedback (copy), p2 (ref), closeCentralOverlay (copy)
+		playerFeedbackEventsModule.ClickPlayerFeedbackFormAbuseReportPrompt(var7, rootPlaceId, { categoryType = categoryType })
+		var5(openDynamicAbuseReportModule({
 			abuseVector = abuseVectorModule.Place,
 			targetId = rootPlaceId,
-			custom = if fFlagAddThumbnailSelectorReport and addThumbnailReportToPlayerFeedback then { universeId = p5.universeId } else nil,
+			custom = if fFlagAddThumbnailSelectorReport and addThumbnailReportToPlayerFeedback then { universeId = p2.universeId } else nil,
 			onClose = function()
-				-- upvalues: var20 (copy), closeCentralOverlay (copy)
-				var20(closeCentralOverlay())
+				-- upvalues: var5 (copy), closeCentralOverlay (copy)
+				var5(closeCentralOverlay())
 			end
 		}))
-	end, { var22, rootPlaceId, categoryType, rootPlaceId })
-	local var53 = reactModule.useCallback(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), appPage (copy), urlBuilder (copy), var43 (ref), fFlagSignalsNavP3Dispatch (copy), var7 (copy), var20 (ref), navigateDown (copy), var47 (ref)
-		playerFeedbackEventsModule.ClickPlayerFeedbackFormAbuseReportPrompt(var22, rootPlaceId, { categoryType = categoryType })
+	end, { var7, rootPlaceId, categoryType, rootPlaceId })
+	local var38 = reactModule.useCallback(function()
+		-- upvalues: playerFeedbackEventsModule (copy), var7 (ref), rootPlaceId (ref), categoryType (ref), appPage (copy), urlBuilder (copy), var28 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), var32 (ref)
+		playerFeedbackEventsModule.ClickPlayerFeedbackFormAbuseReportPrompt(var7, rootPlaceId, { categoryType = categoryType })
 		local t = {
 			name = appPage.GenericWebPage,
 			detail = urlBuilder.game.report({ placeId = rootPlaceId }),
-			extraProps = { title = var43.reportFlowPageTitle }
+			extraProps = { title = var28.reportFlowPageTitle }
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var7.down(var7.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 		else
-			var20(navigateDown(t))
+			var5(navigateDown(t))
 		end
-		var47()
-	end, { var22, rootPlaceId, categoryType, var47 })
-	local var54 = reactModule.useCallback(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), appPage (copy), urlBuilder (copy), fFlagSignalsNavP3Dispatch (copy), var7 (copy), var20 (ref), navigateDown (copy), var47 (ref)
-		playerFeedbackEventsModule.ClickPlayerFeedbackFormModalDisclaimer(var22, rootPlaceId, { categoryType = categoryType })
+		var32()
+	end, { var7, rootPlaceId, categoryType, var32 })
+	local var39 = reactModule.useCallback(function()
+		-- upvalues: playerFeedbackEventsModule (copy), var7 (ref), rootPlaceId (ref), categoryType (ref), appPage (copy), urlBuilder (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), var32 (ref)
+		playerFeedbackEventsModule.ClickPlayerFeedbackFormModalDisclaimer(var7, rootPlaceId, { categoryType = categoryType })
 		local t = {
 			name = appPage.GenericWebPage,
 			detail = urlBuilder.static.about.terms()
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var7.down(var7.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 		else
-			var20(navigateDown(t))
+			var5(navigateDown(t))
 		end
-		var47()
-	end, { var22, rootPlaceId, categoryType, var47 })
-	local var55 = reactModule.useCallback(function(p10)
-		-- upvalues: var37 (ref), comment (ref), var41 (ref), var42 (ref)
-		local text = p10.Text
-		var37(text)
-		local var64 = if utf8.len(text) then utf8.len(utf8.nfcnormalize(text)) else string.len(text)
+		var32()
+	end, { var7, rootPlaceId, categoryType, var32 })
+	local var40 = reactModule.useCallback(function(p3)
+		-- upvalues: var22 (ref), comment (ref), var26 (ref), var27 (ref)
+		local text = p3.Text
+		var22(text)
+		local var41 = if utf8.len(text) then utf8.len(utf8.nfcnormalize(text)) else string.len(text)
 		
-		if var41 and (if var64 ~= 0 then comment.minimum_length <= var64 and var64 <= comment.maximum_length else true) then
-			var42(nil)
+		if var26 and (if var41 ~= 0 then comment.minimum_length <= var41 and var41 <= comment.maximum_length else true) then
+			var27(nil)
 		end
-	end, { var41, comment.minimum_length, comment.maximum_length })
+	end, { var26, comment.minimum_length, comment.maximum_length })
 	useEffect(function()
-		-- upvalues: var33 (ref), var27 (ref)
-		if var33 and var33.current and var27 ~= 0 then
-			var33.current.CanvasPosition = Vector2.new(0, var33.current.AbsoluteCanvasSize.Y)
+		-- upvalues: var18 (ref), var12 (ref)
+		if var18 and var18.current and var12 ~= 0 then
+			var18.current.CanvasPosition = Vector2.new(0, var18.current.AbsoluteCanvasSize.Y)
 			
 			return
 		end
-	end, { var33, var27 })
+	end, { var18, var12 })
 	useEffect(function()
-		-- upvalues: userInputService (copy), var26 (ref), var28 (ref)
-		local var65 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function()
-			-- upvalues: var26 (copy), userInputService (copy), var28 (copy)
-			var26(userInputService.OnScreenKeyboardVisible)
-			var28(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
+		-- upvalues: userInputService (copy), var11 (ref), var13 (ref)
+		local var41 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function()
+			-- upvalues: var11 (copy), userInputService (copy), var13 (copy)
+			var11(userInputService.OnScreenKeyboardVisible)
+			var13(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
 		end)
 		
 		return function()
-			-- upvalues: var65 (write)
-			if var65 then
-				var65:Disconnect()
+			-- upvalues: var41 (write)
+			if var41 then
+				var41:Disconnect()
 			end
-			var65 = nil
+			var41 = nil
 		end
 	end, {})
 	local createElement = reactModule.createElement
 	local t = {
 		marginSize = 0,
 		title = metadata.form_title_label,
-		screenSize = var23,
-		onCloseClicked = var48,
-		position = var25 and UDim2.new(0.5, 0, 1, var29) or nil,
-		anchorPoint = var25 and Vector2.new(0.5, 1) or nil
+		screenSize = var8,
+		onCloseClicked = var33,
+		position = var10 and UDim2.new(0.5, 0, 1, var14) or nil,
+		anchorPoint = var10 and Vector2.new(0.5, 1) or nil
 	}
 	local t_1 = {}
 	local createElement_1 = reactModule.createElement
 	local t_2 = {
 		useAutomaticCanvasSize = true,
-		size = UDim2.new(1, 0, 0, math.min(var31 + 25, var35)),
+		size = UDim2.new(1, 0, 0, math.min(var16 + 25, var20)),
 		canvasSizeY = UDim.new(),
 		elasticBehavior = Enum.ElasticBehavior.Never,
-		scrollingFrameRef = var33,
-		ref = var33
+		scrollingFrameRef = var18,
+		ref = var18
 	}
 	local t_3 = {
 		UIListLayout = reactModule.createElement("UIListLayout", {
@@ -340,9 +340,9 @@ return function(p5)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			Padding = UDim.new(0, 16),
-			[reactModule.Change.AbsoluteContentSize] = function(p11)
-				-- upvalues: var32 (ref)
-				var32(p11.AbsoluteContentSize.Y)
+			[reactModule.Change.AbsoluteContentSize] = function(p3)
+				-- upvalues: var17 (ref)
+				var17(p3.AbsoluteContentSize.Y)
 			end
 		}),
 		ContentPadding = reactModule.createElement("UIPadding", {
@@ -355,7 +355,7 @@ return function(p5)
 			TextWrapped = true,
 			LayoutOrder = 0,
 			Text = category.label,
-			TextSize = var19.Font.BaseSize,
+			TextSize = var4.Font.BaseSize,
 			TextColor3 = tokens.Color.Content.Emphasis.Color3,
 			TextTransparency = tokens.Color.Content.Emphasis.Transparency,
 			Font = tokens.Typography.TitleLarge.Font,
@@ -366,15 +366,15 @@ return function(p5)
 		CategoryCheckboxes = if getFFlagEdpPlayerFeedbackCommentsOnly() then nil else reactModule.createElement(CategoryCheckboxes, {
 			layoutOrder = 1,
 			category = category,
-			selectedCategoryIds = var38,
-			onOptionSelected = var49
+			selectedCategoryIds = var23,
+			onOptionSelected = var34
 		}),
-		CommmentLabel = if getFFlagEdpPlayerFeedbackCommentsOnly() then nil else var40 and reactModule.createElement("TextLabel", {
+		CommmentLabel = if getFFlagEdpPlayerFeedbackCommentsOnly() then nil else var25 and reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 2,
 			Text = comment.label,
-			TextSize = var19.Font.BaseSize,
+			TextSize = var4.Font.BaseSize,
 			TextColor3 = tokens.Color.Content.Emphasis.Color3,
 			TextTransparency = tokens.Color.Content.Emphasis.Transparency,
 			Font = tokens.Typography.TitleLarge.Font,
@@ -382,7 +382,7 @@ return function(p5)
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0)
 		}),
-		Commment = var40 and reactModule.createElement("Frame", {
+		Commment = var25 and reactModule.createElement("Frame", {
 			BorderSizePixel = 1,
 			LayoutOrder = 3,
 			BackgroundColor3 = tokens.Color.Surface.Surface_200.Color3,
@@ -398,9 +398,9 @@ return function(p5)
 				PaddingRight = UDim.new(0, 8)
 			}),
 			TextBox = reactModule.createElement("TextBox", {
-				Text = var36,
+				Text = var21,
 				PlaceholderText = comment.placeholder_text,
-				PlaceholderColor3 = var19.Theme.TextMuted.Color,
+				PlaceholderColor3 = var4.Theme.TextMuted.Color,
 				Size = UDim2.new(1, 0, 0, 100),
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
@@ -417,19 +417,19 @@ return function(p5)
 				TextSize = tokens.Typography.BodyLarge.FontSize,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BorderSizePixel = 0,
-				ref = var34,
-				[reactModule.Change.Text] = var55,
-				[reactModule.Event.Focused] = var51
+				ref = var19,
+				[reactModule.Change.Text] = var40,
+				[reactModule.Event.Focused] = var36
 			})
 		}),
-		HelperText = if var40 and var41 ~= nil then reactModule.createElement("TextLabel", {
+		HelperText = if var25 and var26 ~= nil then reactModule.createElement("TextLabel", {
 			TextWrapped = true,
 			BackgroundTransparency = 1,
 			LayoutOrder = 4,
-			Text = var41,
+			Text = var26,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
-			TextColor3 = var19.Theme.Alert.Color,
+			TextColor3 = var4.Theme.Alert.Color,
 			Font = tokens.Typography.CaptionSmall.Font,
 			TextSize = tokens.Typography.CaptionLarge.FontSize,
 			LineHeight = tokens.Typography.CaptionSmall.LineHeight,
@@ -447,8 +447,8 @@ return function(p5)
 					{
 						buttonType = buttonType.PrimaryContextual,
 						props = {
-							onActivated = var50,
-							isDisabled = var44 == false,
+							onActivated = var35,
+							isDisabled = var29 == false,
 							text = metadata.submit_button_label
 						}
 					}
@@ -459,40 +459,40 @@ return function(p5)
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0),
-			Font = var19.Font.CaptionHeader.Font,
+			Font = var4.Font.CaptionHeader.Font,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextWrapped = true,
 			Text = metadata.disclaimer_label,
-			[reactModule.Event.Activated] = var54,
+			[reactModule.Event.Activated] = var39,
 			RichText = true,
 			TextSize = tokens.Typography.CaptionLarge.FontSize,
-			TextColor3 = var19.Theme.TextMuted.Color,
-			TextTransparency = var19.Theme.TextMuted.Transparency,
+			TextColor3 = var4.Theme.TextMuted.Color,
+			TextTransparency = var4.Theme.TextMuted.Transparency,
 			LineHeight = tokens.LineHeight.LineHeight_140,
 			LayoutOrder = 6
 		})
 	}
-	local var60 = false
+	local var41 = false
 	
 	if categoryType == "Downvote" then
-		var60 = reactModule.createElement
-		var60 = var60("TextButton", {
+		var41 = reactModule.createElement
+		var41 = var41("TextButton", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextWrapped = true,
-			Text = var43.abuseReportPromptText,
-			[reactModule.Event.Activated] = if fFlagEnableAbuseReportRevampFlow and enableAbuseReportRevampFeedback then var52 else var53,
+			Text = var28.abuseReportPromptText,
+			[reactModule.Event.Activated] = if fFlagEnableAbuseReportRevampFlow and enableAbuseReportRevampFeedback then var37 else var38,
 			RichText = true,
 			TextSize = tokens.Typography.CaptionLarge.FontSize,
-			TextColor3 = var19.Theme.TextMuted.Color,
-			TextTransparency = var19.Theme.TextMuted.Transparency,
+			TextColor3 = var4.Theme.TextMuted.Color,
+			TextTransparency = var4.Theme.TextMuted.Transparency,
 			Font = tokens.Typography.BodyLarge.Font,
 			LineHeight = tokens.LineHeight.LineHeight_140,
 			LayoutOrder = 7
 		})
 	end
-	t_3.AbuseReportPromptText = var60
+	t_3.AbuseReportPromptText = var41
 	t_1.Content = createElement_1(verticalScrollView, t_2, t_3)
 	
 	return createElement(partialPageModal, t, t_1)

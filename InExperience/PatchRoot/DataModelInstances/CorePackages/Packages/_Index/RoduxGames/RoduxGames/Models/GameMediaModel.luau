@@ -1,13 +1,13 @@
 ﻿local tModule = require(script:FindFirstAncestor("RoduxGames").Parent.t)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -22,16 +22,16 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: t (ref)
 	return t.new({
-		assetTypeId = p2.assetTypeId,
-		assetType = p2.assetType,
-		imageId = p2.imageId,
-		videoHash = p2.videoHash,
-		videoTitle = p2.videoTitle,
-		approved = if p2.approved then p2.approved else false,
-		altText = p2.altText
+		assetTypeId = p1.assetTypeId,
+		assetType = p1.assetType,
+		imageId = p1.imageId,
+		videoHash = p1.videoHash,
+		videoTitle = p1.videoTitle,
+		approved = if p1.approved then p1.approved else false,
+		altText = p1.altText
 	})
 end
 

@@ -1,37 +1,37 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
 		paymentsGateway = {
-			getUpsellProduct = p0.fromString("apis:payments-gateway/v1/products/get-upsell-product"),
-			preparePayment = p0.fromString("apis:payments-gateway/v1/prepare-payment"),
-			checkUserPurchaseSettings = p0.fromString("apis:payments-gateway/v1/check-user-purchase-settings")
+			getUpsellProduct = p1.fromString("apis:payments-gateway/v1/products/get-upsell-product"),
+			preparePayment = p1.fromString("apis:payments-gateway/v1/prepare-payment"),
+			checkUserPurchaseSettings = p1.fromString("apis:payments-gateway/v1/check-user-purchase-settings")
 		},
 		purchaseWarning = {
-			getPurchaseWarning = function(p1, p2, p3)
-				-- upvalues: p0 (ref)
-				local var0 = ""
+			getPurchaseWarning = function(p2, p3, p4)
+				-- upvalues: p1 (ref)
+				local var1 = ""
 				
-				if p1 == nil then
-					if p2 == nil then
+				if p2 == nil then
+					if p3 == nil then
 						warn(string.format("%s - Invalid parameters, needs mobileProductId or productId", tostring(script.Name)))
 						
 						return nil
 					end
-					var0 = string.format("%s?productId=%d", "apis:purchase-warning/v1/purchase-warnings", p2)
+					var1 = string.format("%s?productId=%d", "apis:purchase-warning/v1/purchase-warnings", p3)
 				else
-					var0 = string.format("%s?mobileProductId=%s", "apis:purchase-warning/v1/purchase-warnings", p1)
+					var1 = string.format("%s?mobileProductId=%s", "apis:purchase-warning/v1/purchase-warnings", p2)
 				end
-				if p3 then
-					var0 = string.format("%s&is13To17ScaryModalEnabled=True", var0)
+				if p4 then
+					var1 = string.format("%s&is13To17ScaryModalEnabled=True", var1)
 				end
-				return p0.fromString(var0)()
+				return p1.fromString(var1)()
 			end,
-			ackPurchaseWarning = p0.fromString("apis:purchase-warning/v1/purchase-warnings/acknowledge")
+			ackPurchaseWarning = p1.fromString("apis:purchase-warning/v1/purchase-warnings/acknowledge")
 		},
 		vngPayments = {
-			getVngShopUrl = p0.fromString("apis:vng-payments/v1/getVngShopUrl")
+			getVngShopUrl = p1.fromString("apis:vng-payments/v1/getVngShopUrl")
 		},
 		info = {
-			developerProduct = p0.fromString("www:developer-product/{universeId}/product/{productId}")
+			developerProduct = p1.fromString("www:developer-product/{universeId}/product/{productId}")
 		}
 	}
 end

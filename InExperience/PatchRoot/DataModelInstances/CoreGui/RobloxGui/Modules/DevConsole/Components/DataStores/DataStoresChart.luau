@@ -18,49 +18,49 @@ local noResultSearchStr = constantsModule.GeneralFormatting.NoResultSearchStr
 local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 local dataStoresChart = roactModule.Component:extend("DataStoresChart")
 
-local function getX(p0)
-	return p0.time
+local function getX(p1)
+	return p1.time
 end
 
 local function getY(p1)
 	return p1.value
 end
 
-local function stringFormatY(p2)
-	return math.ceil(p2)
+local function stringFormatY(p1)
+	return math.ceil(p1)
 end
 
-function dataStoresChart.init(p3, p4)
-	local currentData, currentData_1 = p4.DataStoresData:getCurrentData()
+function dataStoresChart.init(p1, p2)
+	local currentData, currentData_1 = p2.DataStoresData:getCurrentData()
 	
-	function p3.getOnButtonPress(p5)
-		-- upvalues: p3 (ref)
+	function p3.getOnButtonPress(p3)
+		-- upvalues: p1 (ref)
 		return function(_, _)
-			-- upvalues: p3 (copy), p5 (ref)
-			p3:setState({ expandedEntry = p3.state.expandedEntry ~= p5 and p5 })
+			-- upvalues: p1 (copy), p3 (ref)
+			p1:setState({ expandedEntry = p1.state.expandedEntry ~= p3 and p3 })
 		end
 	end
 	
-	p3.state = {
+	p1.state = {
 		expandedEntry = nil,
 		dataStoresData = currentData,
 		dataStoresDataCount = currentData_1
 	}
 end
 
-function dataStoresChart.didMount(p6)
-	p6.statsConnector = p6.props.DataStoresData:Signal():Connect(function(p7, p8)
-		-- upvalues: p6 (ref)
-		p6:setState({ dataStoresData = p7, dataStoresDataCount = p8 })
+function dataStoresChart.didMount(p1)
+	p1.statsConnector = p1.props.DataStoresData:Signal():Connect(function(p2, p3)
+		-- upvalues: p1 (ref)
+		p1:setState({ dataStoresData = p2, dataStoresDataCount = p3 })
 	end)
 end
 
-function dataStoresChart.willUnmount(p9)
-	p9.statsConnector:Disconnect()
-	p9.statsConnector = nil
+function dataStoresChart.willUnmount(p1)
+	p1.statsConnector:Disconnect()
+	p1.statsConnector = nil
 end
 
-function dataStoresChart.render(p10)
+function dataStoresChart.render(p1)
 	-- upvalues: roactModule (ref), headerFrameHeight (ref), entryFrameHeight (ref), lineGraphHeight (ref), bannerButtonModule (ref), cellLabelModule (ref), valueCellWidth (ref), cellPadding (ref), expandArrowPadding (ref), lineWidth (ref), lineColor (ref), lineGraphModule (ref), getX (ref), getY (ref), convertTimeStampModule (ref), stringFormatY (ref), constantsModule (ref), noResultSearchStr (ref), chartHeaderNames (ref)
 	local t = {
 		UIListLayout = roactModule.createElement("UIListLayout", {
@@ -70,32 +70,32 @@ function dataStoresChart.render(p10)
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
-	local searchTerm = p10.props.searchTerm
-	local size = p10.props.size
-	local layoutOrder = p10.props.layoutOrder
-	local expandedEntry = p10.state.expandedEntry
-	local var14 = headerFrameHeight
-	local dataStoresData = p10.state.dataStoresData
-	local var15 = 0
-	local var16 = 1
+	local searchTerm = p1.props.searchTerm
+	local size = p1.props.size
+	local layoutOrder = p1.props.layoutOrder
+	local expandedEntry = p1.state.expandedEntry
+	local var1 = headerFrameHeight
+	local dataStoresData = p1.state.dataStoresData
+	local var2 = 0
+	local var3 = 1
 	
 	if dataStoresData then
 		for i, v in pairs(dataStoresData) do
-			var15 += 1
+			var2 += 1
 			
 			if not searchTerm or string.find(i:lower(), searchTerm:lower()) ~= nil then
-				var16 += 1
-				local var17 = expandedEntry == i
+				var3 += 1
+				local var4 = expandedEntry == i
 				t[i] = roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, 0, 0, if var17 then entryFrameHeight + lineGraphHeight else entryFrameHeight),
-					LayoutOrder = var16
+					Size = UDim2.new(1, 0, 0, if var4 then entryFrameHeight + lineGraphHeight else entryFrameHeight),
+					LayoutOrder = var3
 				}, {
 					DataButton = roactModule.createElement(bannerButtonModule, {
 						size = UDim2.new(1, 0, 0, entryFrameHeight),
 						pos = UDim2.new(),
-						isExpanded = var17,
-						onButtonPress = p10.getOnButtonPress(i)
+						isExpanded = var4,
+						onButtonPress = p1.getOnButtonPress(i)
 					}, {
 						[i] = roactModule.createElement(cellLabelModule, {
 							text = i,
@@ -120,7 +120,7 @@ function dataStoresChart.render(p10)
 							BackgroundColor3 = lineColor
 						})
 					}),
-					Graph = var17 and roactModule.createElement(lineGraphModule, {
+					Graph = var4 and roactModule.createElement(lineGraphModule, {
 						axisLabelX = "Timestamp",
 						pos = UDim2.new(0, 0, 0, entryFrameHeight),
 						size = UDim2.new(1, 0, 1, -entryFrameHeight),
@@ -134,12 +134,12 @@ function dataStoresChart.render(p10)
 						stringFormatY = stringFormatY
 					})
 				})
-				var14 += entryFrameHeight
+				var1 += entryFrameHeight
 			end
 		end
 	end
-	if var16 == 1 then
-		if var15 == 0 then
+	if var3 == 1 then
+		if var2 == 0 then
 			return roactModule.createElement("TextLabel", {
 				Text = "Initialize DataStoresService to view DataStore Budget.",
 				BackgroundTransparency = 1,
@@ -198,7 +198,7 @@ function dataStoresChart.render(p10)
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0, 0, 0, headerFrameHeight),
 			Size = UDim2.new(1, 0, 1, -headerFrameHeight),
-			CanvasSize = UDim2.new(1, 0, 0, var14)
+			CanvasSize = UDim2.new(1, 0, 0, var1)
 		}, t)
 	})
 end

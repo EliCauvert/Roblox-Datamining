@@ -7,22 +7,22 @@ local checkAndFormatPossibleLink = require(parent.CollectionViews).checkAndForma
 local sduiTextModule = require(script.Parent.SduiText)
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), checkAndFormatPossibleLink (ref), reactModule (ref), sduiTextModule (ref), cryoModule (ref)
-	local var4 = useTokens()
-	local text = p0.text
-	local richText = p0.richText
+	local var1 = useTokens()
+	local text = p1.text
+	local richText = p1.richText
 	
 	if text then
-		local var5 = if p0.linkStyle and p0.linkStyle.Color3 then p0.linkStyle.Color3 else var4.Color.Content.Link.Color3
-		local var6, var7 = checkAndFormatPossibleLink(text, nil, nil, `<font color="{string.format("rgb(%d, %d, %d)", math.round(var5.R * 255), math.round(var5.G * 255), math.round(var5.B * 255))}"><b>`, "</b></font>")
+		local var2 = if p1.linkStyle and p1.linkStyle.Color3 then p1.linkStyle.Color3 else var1.Color.Content.Link.Color3
+		local var3, var4 = checkAndFormatPossibleLink(text, nil, nil, `<font color="{string.format("rgb(%d, %d, %d)", math.round(var5.R * 255), math.round(var5.G * 255), math.round(var5.B * 255))}"><b>`, "</b></font>")
 		
-		if var6 then
-			text = var7
+		if var3 then
+			text = var4
 			richText = true
 		end
 	end
-	return reactModule.createElement(sduiTextModule, cryoModule.Dictionary.join(p0, {
+	return reactModule.createElement(sduiTextModule, cryoModule.Dictionary.join(p1, {
 		text = text,
 		richText = richText,
 		linkStyle = cryoModule.None

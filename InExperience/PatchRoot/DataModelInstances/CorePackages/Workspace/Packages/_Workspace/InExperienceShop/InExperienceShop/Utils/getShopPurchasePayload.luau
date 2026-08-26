@@ -1,4 +1,4 @@
-﻿local var0 = game:GetService("HttpService"):JSONEncode({
+﻿local var1 = game:GetService("HttpService"):JSONEncode({
 	surface = {
 		scopeType = "inExperience",
 		universeId = game.GameId,
@@ -8,6 +8,6 @@
 })
 
 return function()
-	-- upvalues: var0 (ref)
-	return var0
+	-- upvalues: var1 (ref)
+	return var1
 end

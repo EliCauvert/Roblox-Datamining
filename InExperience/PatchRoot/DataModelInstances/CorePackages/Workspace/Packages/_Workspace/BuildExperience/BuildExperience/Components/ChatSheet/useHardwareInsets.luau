@@ -16,26 +16,26 @@ end
 
 return function(value)
 	-- upvalues: reactModule (ref), getHardwareSafeAreaInsets (ref)
-	local var5, var6 = reactModule.useState(getHardwareSafeAreaInsets)
+	local var1, var2 = reactModule.useState(getHardwareSafeAreaInsets)
 	reactModule.useEffect(function()
-		-- upvalues: value (ref), var6 (ref), getHardwareSafeAreaInsets (copy)
-		local var7 = if value then value:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			-- upvalues: var6 (copy), getHardwareSafeAreaInsets (copy)
-			var6(function(p0)
+		-- upvalues: value (ref), var2 (ref), getHardwareSafeAreaInsets (copy)
+		local var3 = if value then value:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+			-- upvalues: var2 (copy), getHardwareSafeAreaInsets (copy)
+			var2(function(p1)
 				-- upvalues: getHardwareSafeAreaInsets (copy)
-				local var8 = getHardwareSafeAreaInsets()
+				local var4 = getHardwareSafeAreaInsets()
 				
-				return if var8.bottom == p0.bottom and var8.top == p0.top and (var8.left == p0.left and var8.right == p0.right) then p0 else var8
+				return if var4.bottom == p1.bottom and var4.top == p1.top and (var4.left == p1.left and var4.right == p1.right) then p1 else var4
 			end)
 		end) else nil
 		
 		return function()
-			-- upvalues: var7 (write)
-			if var7 then
-				var7:Disconnect()
+			-- upvalues: var3 (write)
+			if var3 then
+				var3:Disconnect()
 			end
 		end
 	end, { value })
 	
-	return var5
+	return var1
 end

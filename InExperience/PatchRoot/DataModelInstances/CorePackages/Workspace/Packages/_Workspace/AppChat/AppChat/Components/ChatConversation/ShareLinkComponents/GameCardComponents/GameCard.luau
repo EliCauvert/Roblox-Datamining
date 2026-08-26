@@ -30,38 +30,38 @@ gameCard.defaultProps = {
 	viewDetailsEnabled = true
 }
 
-function gameCard.makeButtons(p0, _)
+function gameCard.makeButtons(p1, _)
 	-- upvalues: roactModule (ref), skeleton (ref), radius (ref), playButtonModule (ref), viewDetailsButtonModule (ref)
-	if not p0.props.playabilityStatus then return end
-	local isPlayable = p0.props.playabilityStatus.isPlayable
+	if not p1.props.playabilityStatus then return end
+	local isPlayable = p1.props.playabilityStatus.isPlayable
 	
-	if p0.props.isLoading then
+	if p1.props.isLoading then
 		return {
 			loading = roactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 32), radius = radius.Small })
 		}
-	elseif p0.props.isPlayButtonEnabled and isPlayable == true then
+	elseif p1.props.isPlayButtonEnabled and isPlayable == true then
 		return {
 			playButton = roactModule.createElement(playButtonModule, {
-				placeId = p0.props.placeId,
-				universeId = p0.props.universeId,
-				text = p0.props.playText,
-				conversationId = p0.props.conversationId,
+				placeId = p1.props.placeId,
+				universeId = p1.props.universeId,
+				text = p1.props.playText,
+				conversationId = p1.props.conversationId,
 				onActivated = function()
-					-- upvalues: p0 (ref)
-					p0.props.onPlayButtonActivated(p0.props)
+					-- upvalues: p1 (ref)
+					p1.props.onPlayButtonActivated(p1.props)
 				end,
-				eventStream = p0.props.eventStream
+				eventStream = p1.props.eventStream
 			})
 		}
-	elseif p0.props.viewDetailsEnabled then
+	elseif p1.props.viewDetailsEnabled then
 		return {
 			viewDetails = roactModule.createElement(viewDetailsButtonModule, {
-				text = p0.props.viewDetailsText,
+				text = p1.props.viewDetailsText,
 				onActivated = function()
-					-- upvalues: p0 (ref)
-					p0.props.openDetails(p0.props)
+					-- upvalues: p1 (ref)
+					p1.props.openDetails(p1.props)
 				end,
-				eventStream = p0.props.eventStream
+				eventStream = p1.props.eventStream
 			})
 		}
 	end

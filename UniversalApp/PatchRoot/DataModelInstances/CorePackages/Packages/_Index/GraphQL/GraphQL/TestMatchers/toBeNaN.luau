@@ -1,11 +1,11 @@
 ﻿local number = require(script.Parent.Parent.Parent.LuauPolyfill).Number
 
-return function(p0)
+return function(p1)
 	-- upvalues: number (ref)
-	local var0 = number.isNaN(p0)
+	local var1 = number.isNaN(p1)
 	
-	return if var0 then { pass = var0 } else {
+	return if var1 then { pass = var1 } else {
 		pass = false,
-		message = ("expected: NaN (number), got: \"%s\" (%s) instead"):format(tostring(p0), typeof(p0))
+		message = ("expected: NaN (number), got: \"%s\" (%s) instead"):format(tostring(p1), typeof(p1))
 	}
 end

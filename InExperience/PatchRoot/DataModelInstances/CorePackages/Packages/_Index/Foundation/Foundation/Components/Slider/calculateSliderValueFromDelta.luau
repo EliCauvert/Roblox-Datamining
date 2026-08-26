@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	return math.clamp(p0 + p1 * (p2.Max - p2.Min), p2.Min, p2.Max)
+﻿return function(p1, p2, p3)
+	return math.clamp(p1 + p2 * (p3.Max - p3.Min), p3.Min, p3.Max)
 end

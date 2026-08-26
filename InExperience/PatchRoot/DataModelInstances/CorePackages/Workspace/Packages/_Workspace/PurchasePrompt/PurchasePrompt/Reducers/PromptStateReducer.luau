@@ -2,8 +2,8 @@
 local promptStateModule = require(purchasePrompt.Enums.PromptState)
 
 return require(purchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer(promptStateModule.None, {
-	[require(purchasePrompt.Actions.SetPromptState).name] = function(_, p0)
-		return p0.promptState
+	[require(purchasePrompt.Actions.SetPromptState).name] = function(_, p1)
+		return p1.promptState
 	end,
 	[require(purchasePrompt.Actions.CompleteRequest).name] = function(_, _)
 		-- upvalues: promptStateModule (ref)

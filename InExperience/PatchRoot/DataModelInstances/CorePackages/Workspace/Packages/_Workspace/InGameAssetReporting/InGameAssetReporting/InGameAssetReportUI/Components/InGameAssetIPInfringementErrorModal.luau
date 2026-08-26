@@ -27,76 +27,76 @@ local t_3 = { stiffness = 400, damping = 40, mass = 1 }
 
 return reactModule.memo(function(value)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), t_3 (ref), t_2 (ref), t_1 (ref), withLocalization (ref), buttonType (ref), interactiveAlert (ref)
-	local var9, var10 = reactModule.useState(true)
-	local var11, var12 = reactOtterModule.useAnimatedBinding(1, function()
-		-- upvalues: var9 (ref), value (ref)
-		if not var9 then
+	local var1, var2 = reactModule.useState(true)
+	local var3, var4 = reactOtterModule.useAnimatedBinding(1, function()
+		-- upvalues: var1 (ref), value (ref)
+		if not var1 then
 			value.onBack()
 		end
 	end)
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: var9 (ref)
-		return if var9 then 0 else 1
-	end, { var9 })
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref)
+		return if var1 then 0 else 1
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), reactOtterModule (copy), var13 (ref), t_3 (copy)
-		var12(reactOtterModule.spring(var13, t_3))
-	end, { var13 })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref)
-		var10(false)
-	end, { var10 })
-	local var15 = if value.errorCode and t_2[value.errorCode] then t_2[value.errorCode] else t_1
+		-- upvalues: var4 (ref), reactOtterModule (copy), var5 (ref), t_3 (copy)
+		var4(reactOtterModule.spring(var5, t_3))
+	end, { var5 })
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref)
+		var2(false)
+	end, { var2 })
+	local var7 = if value.errorCode and t_2[value.errorCode] then t_2[value.errorCode] else t_1
 	
 	return withLocalization({
 		errorBack = "Feature.ReportAbuse.Action.ErrorModalGoBack",
 		reportExperience = "Feature.ReportAbuse.Action.IpReportExperience",
-		title = var15.titleKey,
-		description = var15.descriptionKey
-	})(function(p0)
-		-- upvalues: var15 (ref), value (ref), buttonType (copy), var14 (ref), reactModule (copy), var11 (ref), interactiveAlert (copy)
+		title = var7.titleKey,
+		description = var7.descriptionKey
+	})(function(p1)
+		-- upvalues: var7 (ref), value (ref), buttonType (copy), var6 (ref), reactModule (copy), var3 (ref), interactiveAlert (copy)
 		local t = {}
 		
-		if var15.showReportExperience and value.onReportExperience then
+		if var7.showReportExperience and value.onReportExperience then
 			table.insert(t, {
 				buttonType = buttonType.PrimarySystem,
 				props = {
 					onActivated = value.onReportExperience,
-					text = p0.reportExperience,
+					text = p1.reportExperience,
 					isLoading = value.isReportExperienceLoading,
 					isDisabled = value.isReportExperienceLoading
 				}
 			})
 			table.insert(t, {
 				buttonType = buttonType.Secondary,
-				props = { onActivated = var14, text = p0.errorBack }
+				props = { onActivated = var6, text = p1.errorBack }
 			})
 		else
 			table.insert(t, {
 				buttonType = buttonType.PrimarySystem,
-				props = { onActivated = var14, text = p0.errorBack }
+				props = { onActivated = var6, text = p1.errorBack }
 			})
 		end
 		return reactModule.createElement("TextButton", {
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
-			BackgroundTransparency = var11:map(function(p1)
-				return p1 + 0.3
+			BackgroundTransparency = var3:map(function(p2)
+				return p2 + 0.3
 			end),
 			BackgroundColor3 = Color3.fromHex("#000000"),
 			Size = UDim2.new(1, 0, 1, 0),
 			Text = "",
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			[reactModule.Event.Activated] = var14,
+			[reactModule.Event.Activated] = var6,
 			ZIndex = 10
 		}, {
 			Alert = reactModule.createElement(interactiveAlert, {
 				screenSize = value.screenSize,
-				title = p0.title,
-				bodyText = p0.description,
+				title = p1.title,
+				bodyText = p1.description,
 				anchorPoint = Vector2.new(0.5, 0.5),
-				position = var11:map(function(p2)
+				position = var3:map(function(p2)
 					return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), p2)
 				end),
 				buttonStackInfo = { buttons = t }

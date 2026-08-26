@@ -12,23 +12,23 @@ local _ = function()
 	return workspace.CurrentCamera.ViewportSize
 end
 
-local var6 = function(p0)
+local var1 = function(p1)
 	-- upvalues: localizationService (ref)
-	if not p0 or p0 == "" then
+	if not p1 or p1 == "" then
 		return ""
 	end
-	local var7 = DateTime and DateTime.fromIsoDate(p0) or nil
+	local var2 = DateTime and DateTime.fromIsoDate(p1) or nil
 	
-	if var7 then
+	if var2 then
 		local robloxLocaleId = localizationService.RobloxLocaleId
 		
-		return `{var7:FormatLocalTime("LL", robloxLocaleId)} {var7:FormatLocalTime("LT", robloxLocaleId)}`
+		return `{var2:FormatLocalTime("LL", robloxLocaleId)} {var2:FormatLocalTime("LT", robloxLocaleId)}`
 	end
 	return ""
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), partialPageModal (ref), var6 (ref), enableRewardsWebViewOverlay (ref), httpService (ref), getFStringReferralRewardsTermsURL (ref), browserService (ref)
+	-- upvalues: reactModule (ref), foundationModule (ref), partialPageModal (ref), var1 (ref), enableRewardsWebViewOverlay (ref), httpService (ref), getFStringReferralRewardsTermsURL (ref), browserService (ref)
 	return reactModule.createElement("ScreenGui", {
 		DisplayOrder = 100,
 		IgnoreGuiInset = true,

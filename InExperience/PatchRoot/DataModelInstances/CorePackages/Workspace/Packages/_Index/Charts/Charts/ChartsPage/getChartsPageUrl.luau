@@ -2,40 +2,40 @@
 local addSystemInfoToArgs = require(parent.DiscoveryUtils).AddSystemInfoToArgs
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local fFlagSduiChartsRequestPlaceholders = require(parent.SharedFlags).FFlagSduiChartsRequestPlaceholders
-local var0 = urlBuilder.new({
+local var1 = urlBuilder.new({
 	path = "charts-api/v1/charts-page",
 	base = require(parent.Http).Url.APIS_URL
 })
 
-return function(p0)
-	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsRequestPlaceholders (ref), urlBuilder (ref), var0 (ref)
+return function(p1)
+	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsRequestPlaceholders (ref), urlBuilder (ref), var1 (ref)
 	local t = {}
 	addSystemInfoToArgs(t)
 	
-	if p0 then
-		if p0.feedPageToken and p0.feedPageToken ~= "" then
-			t.feedPageToken = p0.feedPageToken
+	if p1 then
+		if p1.feedPageToken and p1.feedPageToken ~= "" then
+			t.feedPageToken = p1.feedPageToken
 		end
-		if p0.sessionId and p0.sessionId ~= "" then
-			t.sessionId = p0.sessionId
+		if p1.sessionId and p1.sessionId ~= "" then
+			t.sessionId = p1.sessionId
 		end
-		if p0.entryPaginationKey and p0.entryPaginationKey ~= "" then
-			t.entryPaginationKey = p0.entryPaginationKey
+		if p1.entryPaginationKey and p1.entryPaginationKey ~= "" then
+			t.entryPaginationKey = p1.entryPaginationKey
 		end
-		if p0.entryPageToken and p0.entryPageToken ~= "" then
-			t.entryPageToken = p0.entryPageToken
+		if p1.entryPageToken and p1.entryPageToken ~= "" then
+			t.entryPageToken = p1.entryPageToken
 		end
-		if p0.pageType and p0.pageType ~= "" then
-			t.pageType = p0.pageType
+		if p1.pageType and p1.pageType ~= "" then
+			t.pageType = p1.pageType
 		end
-		if p0.filterSelections then
-			for i, v in p0.filterSelections do
+		if p1.filterSelections then
+			for i, v in p1.filterSelections do
 				t[i] = v
 			end
 		end
-		if fFlagSduiChartsRequestPlaceholders and p0.includePlaceholders then
+		if fFlagSduiChartsRequestPlaceholders and p1.includePlaceholders then
 			t.includePlaceholders = "true"
 		end
 	end
-	return urlBuilder.addQueryString(var0(), t)
+	return urlBuilder.addQueryString(var1(), t)
 end

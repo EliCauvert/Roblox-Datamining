@@ -3,31 +3,31 @@ local parent = script.Parent.Parent
 local isDetailsItemPartOfBundleAndOffsaleModule = require(parent.Selectors.IsDetailsItemPartOfBundleAndOffsale)
 local utilityFunctionsModule = require(parent.UtilityFunctions)
 local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local var3 = createInspectAndBuyKeyMapperModule("getAssetFavoriteCount")
-local var4 = createInspectAndBuyKeyMapperModule("getBundleFavoriteCount")
+local var1 = createInspectAndBuyKeyMapperModule("getAssetFavoriteCount")
+local var2 = createInspectAndBuyKeyMapperModule("getBundleFavoriteCount")
 
-return function(p0)
-	-- upvalues: isDetailsItemPartOfBundleAndOffsaleModule (ref), utilityFunctionsModule (ref), var4 (ref), retrievalStatus (ref), var3 (ref)
-	local assetId = p0.detailsInformation.assetId
+return function(p1)
+	-- upvalues: isDetailsItemPartOfBundleAndOffsaleModule (ref), utilityFunctionsModule (ref), var2 (ref), retrievalStatus (ref), var1 (ref)
+	local assetId = p1.detailsInformation.assetId
 	
 	if not assetId then
 		return false
 	end
-	local var5 = isDetailsItemPartOfBundleAndOffsaleModule(p0)
+	local var3 = isDetailsItemPartOfBundleAndOffsaleModule(p1)
 	
-	if var5 == nil then
+	if var3 == nil then
 		return false
 	end
-	local var6 = p0.assets[assetId]
+	local var4 = p1.assets[assetId]
 	
-	if not var6 then
+	if not var4 then
 		return false
-	elseif var5 then
-		local var7 = var4(p0.storeId, utilityFunctionsModule.getBundleId(var6))
+	elseif var3 then
+		local var5 = var2(p1.storeId, utilityFunctionsModule.getBundleId(var4))
 		
-		return if p0.FetchingStatus[var7] ~= retrievalStatus.Fetching then p0.FetchingStatus[var7] == retrievalStatus.Done else true
+		return if p1.FetchingStatus[var5] ~= retrievalStatus.Fetching then p1.FetchingStatus[var5] == retrievalStatus.Done else true
 	end
-	local var8 = var3(p0.storeId, assetId)
+	local var6 = var1(p1.storeId, assetId)
 	
-	return if p0.FetchingStatus[var8] ~= retrievalStatus.Fetching then p0.FetchingStatus[var8] == retrievalStatus.Done else true
+	return if p1.FetchingStatus[var6] ~= retrievalStatus.Fetching then p1.FetchingStatus[var6] == retrievalStatus.Done else true
 end

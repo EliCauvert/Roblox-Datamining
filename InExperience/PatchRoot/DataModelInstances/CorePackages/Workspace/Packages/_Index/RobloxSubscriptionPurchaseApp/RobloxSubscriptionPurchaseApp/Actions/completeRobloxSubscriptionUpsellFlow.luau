@@ -9,11 +9,11 @@ local enablePromptSignalRobloxSubscriptionPurchaseFinishedEngineFeature = game:G
 
 return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), promptStateModule (ref), fFlagFixSignalFinishedOnErrorModule (ref), enablePromptSignalRobloxSubscriptionPurchaseFinishedEngineFeature (ref), marketplaceService (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref)
-	local var7 = robloxSubscriptionStoreModule.get()
-	local didTryPurchasing = var7.getDidTryPurchasing()
-	local robloxSubscriptionProductId = var7.getRobloxSubscriptionProductId()
-	local skipWaitingForPurchaseResult = var7.getPurchaseFlowOptions().skipWaitingForPurchaseResult
-	local promptState = var7.getPromptState()
+	local var1 = robloxSubscriptionStoreModule.get()
+	local didTryPurchasing = var1.getDidTryPurchasing()
+	local robloxSubscriptionProductId = var1.getRobloxSubscriptionProductId()
+	local skipWaitingForPurchaseResult = var1.getPurchaseFlowOptions().skipWaitingForPurchaseResult
+	local promptState = var1.getPromptState()
 	
 	if promptState == promptStateModule.Error or promptState == promptStateModule.SubscriptionStatusPolling then
 		if promptState == promptStateModule.Error and fFlagFixSignalFinishedOnErrorModule and enablePromptSignalRobloxSubscriptionPurchaseFinishedEngineFeature then
@@ -23,7 +23,7 @@ return function()
 		
 		return
 	else
-		var7.setPromptState(promptStateModule.SubscriptionPurchaseCompleted)
+		var1.setPromptState(promptStateModule.SubscriptionPurchaseCompleted)
 		
 		if enablePromptSignalRobloxSubscriptionPurchaseFinishedEngineFeature then
 			marketplaceService:signalPromptRobloxSubscriptionPurchaseFinished(robloxSubscriptionProductId, didTryPurchasing)
@@ -33,6 +33,6 @@ return function()
 			
 			return
 		end
-		var7.setPromptState(promptStateModule.SubscriptionStatusPolling)
+		var1.setPromptState(promptStateModule.SubscriptionStatusPolling)
 	end
 end

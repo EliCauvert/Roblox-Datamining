@@ -6,45 +6,45 @@ local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local _ = require(sduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
 local checkPresenceConditionsModule = require(sduiCoreSystem.ConditionalProps.checkPresenceConditions)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), checkPresenceConditionsModule (ref), signalsModule (ref)
-	local allConditionalProps = p0.allConditionalProps
-	local setFailedPresencePropIndexes = p0.setFailedPresencePropIndexes
-	local getInGameFriendsByGame = p0.sduiContext.dataStore.social.getInGameFriendsByGame
+	local allConditionalProps = p1.allConditionalProps
+	local setFailedPresencePropIndexes = p1.setFailedPresencePropIndexes
+	local getInGameFriendsByGame = p1.sduiContext.dataStore.social.getInGameFriendsByGame
 	reactModule.useLayoutEffect(function()
 		-- upvalues: checkPresenceConditionsModule (copy), allConditionalProps (ref), setFailedPresencePropIndexes (ref), getInGameFriendsByGame (ref), signalsModule (copy)
 		local t = {}
 		
-		local function checkConditions(p1)
+		local function checkConditions(p2)
 			-- upvalues: checkPresenceConditionsModule (copy), allConditionalProps (copy), t (write), setFailedPresencePropIndexes (copy)
-			local var6 = checkPresenceConditionsModule(allConditionalProps, p1)
-			local var7 = nil
+			local var1 = checkPresenceConditionsModule(allConditionalProps, p2)
+			local var2 = nil
 			
-			for i, v in var6 do
+			for i, v in var1 do
 				if not not t[i] ~= not not v then
-					var7 = true
+					var2 = true
 					break
 				end
 			end
-			if not var7 then
+			if not var2 then
 				for i, v in t do
-					if not not var6[i] ~= not not v then
-						var7 = true
+					if not not var1[i] ~= not not v then
+						var2 = true
 						break
 					end
 				end
 			end
-			if var7 then
-				t = var6
-				setFailedPresencePropIndexes(var6)
+			if var2 then
+				t = var1
+				setFailedPresencePropIndexes(var1)
 			end
 		end
 		
 		checkConditions(getInGameFriendsByGame(false))
 		
-		return signalsModule.createEffect(function(p2)
+		return signalsModule.createEffect(function(p3)
 			-- upvalues: checkConditions (ref), getInGameFriendsByGame (copy)
-			checkConditions(getInGameFriendsByGame(p2))
+			checkConditions(getInGameFriendsByGame(p3))
 		end)
 	end, {
 		getInGameFriendsByGame,

@@ -4,15 +4,15 @@ local scenarioBannerModule = require(script.Parent.ScenarioBanner)
 local createElement = require(viewRecyclerReact.Parent.React).createElement
 local uDim2 = UDim2.fromOffset(1280, 720)
 
-local function Component(p0)
+local function Component(p1)
 	-- upvalues: createElement (ref), uDim2 (ref), scenarioBannerModule (ref)
-	local var4 = p0.captureMode == true
-	local var5 = if var4 then 44 else p0.bannerHeight or 140
-	local var6 = if p0.toolbar == nil then 0 else p0.toolbarHeight or 42
-	local children = p0.children
+	local var1 = p1.captureMode == true
+	local var2 = if var1 then 44 else p1.bannerHeight or 140
+	local var3 = if p1.toolbar == nil then 0 else p1.toolbarHeight or 42
+	local children = p1.children
 	
-	if var4 then
-		children = table.clone(p0.children or {})
+	if var1 then
+		children = table.clone(p1.children or {})
 		children.CaptureLayout = createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center
@@ -21,45 +21,45 @@ local function Component(p0)
 	return createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundColor3 = Color3.fromRGB(20, 20, 26),
-		Size = if var4 then uDim2 else p0.size or UDim2.fromOffset(760, 700)
+		Size = if var1 then uDim2 else p1.size or UDim2.fromOffset(760, 700)
 	}, {
-		Banner = if var4 then createElement("TextLabel", {
+		Banner = if var1 then createElement("TextLabel", {
 			BorderSizePixel = 0,
 			TextSize = 18,
 			BackgroundColor3 = Color3.fromRGB(25, 26, 34),
 			Font = Enum.Font.BuilderSansBold,
-			Size = UDim2.new(1, 0, 0, var5),
-			Text = `{p0.title} \194\183 Behavior demonstration \226\128\148 not a device benchmark`,
+			Size = UDim2.new(1, 0, 0, var2),
+			Text = `{p1.title} \194\183 Behavior demonstration \226\128\148 not a device benchmark`,
 			TextColor3 = Color3.fromRGB(245, 247, 251)
 		}) else createElement(scenarioBannerModule, {
-			acceptanceCriteria = p0.acceptanceCriteria,
-			height = var5,
-			instructions = p0.instructions,
-			itemUpdate = p0.itemUpdate,
-			title = p0.title
+			acceptanceCriteria = p1.acceptanceCriteria,
+			height = var2,
+			instructions = p1.instructions,
+			itemUpdate = p1.itemUpdate,
+			title = p1.title
 		}),
-		Status = if p0.status == nil then nil else createElement("TextLabel", {
+		Status = if p1.status == nil then nil else createElement("TextLabel", {
 			BorderSizePixel = 0,
 			TextSize = 13,
 			BackgroundColor3 = Color3.fromRGB(25, 26, 34),
 			Font = Enum.Font.Code,
-			Position = UDim2.fromOffset(0, var5),
+			Position = UDim2.fromOffset(0, var2),
 			Size = UDim2.new(1, 0, 0, 30),
-			Text = p0.status,
+			Text = p1.status,
 			TextColor3 = Color3.fromRGB(226, 226, 233),
 			TextXAlignment = Enum.TextXAlignment.Left
 		}),
-		Toolbar = if p0.toolbar == nil then nil else createElement("Frame", {
+		Toolbar = if p1.toolbar == nil then nil else createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundColor3 = Color3.fromRGB(25, 26, 34),
-			Position = UDim2.fromOffset(0, var5 + (if p0.status == nil then 0 else 30)),
-			Size = UDim2.new(1, 0, 0, var6)
-		}, { Content = p0.toolbar }),
+			Position = UDim2.fromOffset(0, var2 + (if p1.status == nil then 0 else 30)),
+			Size = UDim2.new(1, 0, 0, var3)
+		}, { Content = p1.toolbar }),
 		Content = createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
-			Position = UDim2.fromOffset(0, var5 + (if p0.status == nil then 0 else 30) + var6),
-			Size = UDim2.new(1, 0, 1, -(var5 + (if p0.status == nil then 0 else 30) + var6))
+			Position = UDim2.fromOffset(0, var2 + (if p1.status == nil then 0 else 30) + var3),
+			Size = UDim2.new(1, 0, 1, -(var2 + (if p1.status == nil then 0 else 30) + var3))
 		}, children)
 	})
 end

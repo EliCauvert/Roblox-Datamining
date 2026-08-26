@@ -8,18 +8,18 @@ local isNewInGameMenuEnabledModule = require(robloxGui.Modules.isNewInGameMenuEn
 local sendAnalyticsModule = require(inGameMenu.Utility.SendAnalytics)
 local constants = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Constants
 local constantsModule = require(inGameMenu.Resources.Constants)
-local var7 = require(script.Parent.Flags.GetFFlagEnableInGameMenuDurationLogger)()
-local var8 = if statsService then statsService:FindFirstChild("FrameRateManager") else nil
-local var9 = if var8 then var8:FindFirstChild("RenderAverage") else nil
+local var1 = require(script.Parent.Flags.GetFFlagEnableInGameMenuDurationLogger)()
+local var2 = if statsService then statsService:FindFirstChild("FrameRateManager") else nil
+local var3 = if var2 then var2:FindFirstChild("RenderAverage") else nil
 
 local function _()
 	-- upvalues: isNewInGameMenuEnabledModule (ref)
 	return if isNewInGameMenuEnabledModule() then 2 else 1
 end
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: constantsModule (ref)
-	return if p0 then constantsModule.ShieldOpenAnimationTweenTime else constantsModule.ShieldCloseAnimationTweenTime
+	return if p1 then constantsModule.ShieldOpenAnimationTweenTime else constantsModule.ShieldCloseAnimationTweenTime
 end
 
 local _ = function()
@@ -27,29 +27,29 @@ local _ = function()
 end
 
 local function getFps()
-	-- upvalues: var9 (ref)
-	return if var9 then 1000 / var9:GetValue() else nil
+	-- upvalues: var3 (ref)
+	return if var3 then 1000 / var3:GetValue() else nil
 end
 
-local var11 = httpService:GenerateGUID()
+local var4 = httpService:GenerateGUID()
 local processTime = os.clock()
 local processTime_1 = os.clock()
-local var14 = nil
-local var15 = nil
-local var16 = false
-local var17 = false
-local var18 = 0
+local var5 = nil
+local var6 = nil
+local var7 = false
+local var8 = false
+local var9 = 0
 
 local function sendEvent(p1, p2)
-	-- upvalues: var9 (ref), isNewInGameMenuEnabledModule (ref), var7 (ref), default (ref), sendAnalyticsModule (ref), constants (ref)
-	p2.fps = if var9 then 1000 / var9:GetValue() else nil
+	-- upvalues: var3 (ref), isNewInGameMenuEnabledModule (ref), var1 (ref), default (ref), sendAnalyticsModule (ref), constants (ref)
+	p2.fps = if var3 then 1000 / var3:GetValue() else nil
 	p2.menu_version = if isNewInGameMenuEnabledModule() then 2 else 1
 	
-	if var7 then
+	if var1 then
 		p1 ..= "_v" .. p2.menu_version
 	end
 	if p2.menu_session then
-		if var7 then
+		if var1 then
 			default:logEvent(p1, p2)
 			
 			return
@@ -59,107 +59,107 @@ local function sendEvent(p1, p2)
 end
 
 local function sendMenuOpening()
-	-- upvalues: var7 (ref), constants (ref), var14 (write), var11 (ref), var18 (write), var16 (write), sendEvent (ref)
-	local var22 = if var7 then constants.AnalyticsGameMenuOpenStart else constants.AnalyticsPerfMenuOpening
+	-- upvalues: var1 (ref), constants (ref), var5 (write), var4 (ref), var9 (write), var7 (write), sendEvent (ref)
+	local var10 = if var1 then constants.AnalyticsGameMenuOpenStart else constants.AnalyticsPerfMenuOpening
 	local t = {
-		menu_session = var14,
-		game_session = var11,
-		count = var18,
-		interrupted_closing = var16
+		menu_session = var5,
+		game_session = var4,
+		count = var9,
+		interrupted_closing = var7
 	}
 	
-	if var7 then
+	if var1 then
 		sendEvent(constants.AnalyticsGameMenuFlowStart, t)
 	end
-	sendEvent(var22, t)
+	sendEvent(var10, t)
 end
 
-local _ = function(p3, p4)
-	-- upvalues: var7 (ref), constants (ref), sendEvent (ref), var14 (write)
-	sendEvent(if var7 then constants.AnalyticsGameMenuOpenEnd else constants.AnalyticsPerfMenuStarted, {
-		menu_session = var14,
-		transition_time_total = p3,
-		transition_time_normalized = p4
+local _ = function(p1, p2)
+	-- upvalues: var1 (ref), constants (ref), sendEvent (ref), var5 (write)
+	sendEvent(if var1 then constants.AnalyticsGameMenuOpenEnd else constants.AnalyticsPerfMenuStarted, {
+		menu_session = var5,
+		transition_time_total = p1,
+		transition_time_normalized = p2
 	})
 end
 
-local function sendMenuClosed(p5, p6)
-	-- upvalues: var7 (ref), constants (ref), var15 (write), sendEvent (ref)
+local function sendMenuClosed(p1, p2)
+	-- upvalues: var1 (ref), constants (ref), var6 (write), sendEvent (ref)
 	local t = {
-		menu_session = var15,
-		transition_time_total = p5,
-		transition_time_normalized = p6
+		menu_session = var6,
+		transition_time_total = p1,
+		transition_time_normalized = p2
 	}
-	sendEvent(if var7 then constants.AnalyticsGameMenuCloseEnd else constants.AnalyticsPerfMenuClosed, t)
+	sendEvent(if var1 then constants.AnalyticsGameMenuCloseEnd else constants.AnalyticsPerfMenuClosed, t)
 	
-	if var7 then
+	if var1 then
 		sendEvent(constants.AnalyticsGameMenuFlowEnd, t)
 	end
 end
 
-local _ = function(p7, p8)
-	-- upvalues: var7 (ref), constants (ref), sendEvent (ref), var14 (write), var17 (write)
-	sendEvent(if var7 then constants.AnalyticsGameMenuCloseStart else constants.AnalyticsPerfMenuEnding, {
-		menu_session = var14,
-		session_time = p7,
-		reason = if p8 then "leaving" else "resume",
-		interrupted_opening = var17
+local _ = function(p1, p2)
+	-- upvalues: var1 (ref), constants (ref), sendEvent (ref), var5 (write), var8 (write)
+	sendEvent(if var1 then constants.AnalyticsGameMenuCloseStart else constants.AnalyticsPerfMenuEnding, {
+		menu_session = var5,
+		session_time = p1,
+		reason = if p2 then "leaving" else "resume",
+		interrupted_opening = var8
 	})
 end
 
 return {
 	menuOpenBegin = function()
-		-- upvalues: var14 (write), var18 (write), processTime (write), httpService (ref), sendMenuOpening (ref), var17 (write), var16 (write)
-		if var14 then
+		-- upvalues: var5 (write), var9 (write), processTime (write), httpService (ref), sendMenuOpening (ref), var8 (write), var7 (write)
+		if var5 then
 			return
 		end
-		var18 += 1
+		var9 += 1
 		processTime = os.clock()
-		var14 = httpService:GenerateGUID()
+		var5 = httpService:GenerateGUID()
 		sendMenuOpening()
-		var17 = true
-		var16 = false
+		var8 = true
+		var7 = false
 	end,
 	menuOpenComplete = function()
-		-- upvalues: processTime (write), constantsModule (ref), var7 (ref), constants (ref), sendEvent (ref), var14 (write), var17 (write)
-		local var25 = os.clock() - processTime
-		sendEvent(if var7 then constants.AnalyticsGameMenuOpenEnd else constants.AnalyticsPerfMenuStarted, {
-			menu_session = var14,
-			transition_time_total = var25,
-			transition_time_normalized = var25 - constantsModule.ShieldOpenAnimationTweenTime
+		-- upvalues: processTime (write), constantsModule (ref), var1 (ref), constants (ref), sendEvent (ref), var5 (write), var8 (write)
+		local var10 = os.clock() - processTime
+		sendEvent(if var1 then constants.AnalyticsGameMenuOpenEnd else constants.AnalyticsPerfMenuStarted, {
+			menu_session = var5,
+			transition_time_total = var10,
+			transition_time_normalized = var10 - constantsModule.ShieldOpenAnimationTweenTime
 		})
-		var17 = false
+		var8 = false
 	end,
 	menuClose = function()
-		-- upvalues: processTime_1 (write), processTime (write), var7 (ref), constants (ref), sendEvent (ref), var14 (write), var17 (write), var15 (write), var16 (write)
+		-- upvalues: processTime_1 (write), processTime (write), var1 (ref), constants (ref), sendEvent (ref), var5 (write), var8 (write), var6 (write), var7 (write)
 		processTime_1 = os.clock()
-		sendEvent(if var7 then constants.AnalyticsGameMenuCloseStart else constants.AnalyticsPerfMenuEnding, {
+		sendEvent(if var1 then constants.AnalyticsGameMenuCloseStart else constants.AnalyticsPerfMenuEnding, {
 			reason = "resume",
-			menu_session = var14,
+			menu_session = var5,
 			session_time = processTime_1 - processTime,
-			interrupted_opening = var17
+			interrupted_opening = var8
 		})
-		var15 = var14
-		var14 = nil
-		var17 = false
-		var16 = true
+		var6 = var5
+		var5 = nil
+		var8 = false
+		var7 = true
 	end,
 	menuCloseComplete = function()
-		-- upvalues: processTime_1 (write), constantsModule (ref), sendMenuClosed (ref), var15 (write), var16 (write)
-		local var26 = os.clock() - processTime_1
-		sendMenuClosed(var26, var26 - constantsModule.ShieldCloseAnimationTweenTime)
-		var15 = nil
-		var16 = false
+		-- upvalues: processTime_1 (write), constantsModule (ref), sendMenuClosed (ref), var6 (write), var7 (write)
+		local var10 = os.clock() - processTime_1
+		sendMenuClosed(var10, var10 - constantsModule.ShieldCloseAnimationTweenTime)
+		var6 = nil
+		var7 = false
 	end,
 	leavingGame = function()
-		-- upvalues: processTime (write), var7 (ref), constants (ref), sendEvent (ref), var14 (write), var17 (write)
-		sendEvent(if var7 then constants.AnalyticsGameMenuCloseStart else constants.AnalyticsPerfMenuEnding, {
+		-- upvalues: processTime (write), var1 (ref), constants (ref), sendEvent (ref), var5 (write), var8 (write)
+		sendEvent(if var1 then constants.AnalyticsGameMenuCloseStart else constants.AnalyticsPerfMenuEnding, {
 			reason = "leaving",
-			menu_session = var14,
+			menu_session = var5,
 			session_time = os.clock() - processTime,
-			interrupted_opening = var17
+			interrupted_opening = var8
 		})
-		var14 = nil
+		var5 = nil
 	end,
 	getFps = getFps
 }

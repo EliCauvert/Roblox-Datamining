@@ -1,16 +1,16 @@
 ﻿local curveAnimBoneHierarchyUtilsModule = require(script.Parent.Parent.Parent.util.CurveAnimBoneHierarchyUtils)
 
 return {
-	getData = function(p0)
+	getData = function(p1)
 		-- upvalues: curveAnimBoneHierarchyUtilsModule (ref)
-		if not p0 then
+		if not p1 then
 			return nil
-		elseif typeof(p0) ~= "table" or #p0 == 0 then
+		elseif typeof(p1) ~= "table" or #p1 == 0 then
 			return nil
 		end
 		local var1 = false
 		
-		for i, v in p0 do
+		for i, v in p1 do
 			for i_1, v_1 in v:GetDescendants() do
 				if v_1:IsA("Folder") and curveAnimBoneHierarchyUtilsModule.isBoneFolderName(v_1.Name) then
 					var1 = true

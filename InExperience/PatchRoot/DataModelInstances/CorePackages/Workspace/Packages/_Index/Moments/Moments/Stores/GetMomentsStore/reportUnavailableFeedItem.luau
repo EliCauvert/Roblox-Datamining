@@ -2,13 +2,13 @@
 local analytics = require(parent.MomentsCommon).Analytics
 local momentStatus = require(parent.MomentsTypes).Enums.MomentStatus
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: momentStatus (ref), analytics (ref)
-	if p0.status == momentStatus.Deleted then
-		analytics.reportMomentsFeedItemFiltered("deleted", p1)
+	if p1.status == momentStatus.Deleted then
+		analytics.reportMomentsFeedItemFiltered("deleted", p2)
 		
 		return
-	elseif p0.isModerated == true then
-		analytics.reportMomentsFeedItemFiltered("moderated", p1)
+	elseif p1.isModerated == true then
+		analytics.reportMomentsFeedItemFiltered("moderated", p2)
 	end
 end

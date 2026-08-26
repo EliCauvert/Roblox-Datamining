@@ -20,7 +20,7 @@ local function createRoduxStore()
 	return roduxModule.Store.new(roduxModule.combineReducers({ [RODUX_KEYModule] = installReducerModule() }), nil, { roduxModule.thunkMiddleware })
 end
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: coreGuiService (ref), reactFocusNavigationModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationProvider (ref), foundationModule (ref), provider (ref), roactRoduxModule (ref), createRoduxStore (ref), reactRobloxModule (ref)
 	if coreGuiService:FindFirstChild("UserRelationshipModal") then
 		return
@@ -37,7 +37,7 @@ return function(p0, p1)
 	userRelationshipModalOverlay.ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets
 	userRelationshipModalOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
 	userRelationshipModalOverlay.ClipToDeviceSafeArea = false
-	local cloned = table.clone(p1)
+	local cloned = table.clone(p2)
 	
 	function cloned.onClose()
 		-- upvalues: userRelationshipModal (ref)
@@ -56,7 +56,7 @@ return function(p0, p1)
 			}, {
 				FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
 					StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createRoduxStore() }, {
-						UserRelationshipModal = reactModule.createElement(p0, cloned, {})
+						UserRelationshipModal = reactModule.createElement(p1, cloned, {})
 					})
 				})
 			})

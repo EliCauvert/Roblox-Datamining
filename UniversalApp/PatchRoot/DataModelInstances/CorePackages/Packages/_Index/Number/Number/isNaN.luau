@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return type(p0) == "number" and p0 ~= p0
+﻿return function(p1)
+	return type(p1) == "number" and p1 ~= p1
 end

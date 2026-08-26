@@ -4,12 +4,12 @@ local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyl
 local avatarPartViewportModule = require(script.Parent.AvatarPartViewport)
 local getFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), getFFlagSingleUploadMakeupSupportModule (ref), reactModule (ref), avatarPartViewportModule (ref)
-	local var4 = useStyle()
-	local font = var4.Font
-	local theme = var4.Theme
-	local asset = p0.asset
+	local var1 = useStyle()
+	local font = var1.Font
+	local theme = var1.Theme
+	local asset = p1.asset
 	local captionHeader = font.CaptionHeader
 	local color = theme.TextEmphasis.Color
 	
@@ -18,9 +18,9 @@ return function(p0)
 	else
 		assert(if typeof(asset) ~= "table" then asset:IsA("MeshPart") or asset:IsA("Accessory") else true, "Assert that asset is a table, MeshPart, or Accessory")
 	end
-	local var6
-	local bodyName = p0.bodyName
-	local partName = p0.partName
+	local var2
+	local bodyName = p1.bodyName
+	local partName = p1.partName
 	local _ = nil
 	local text = nil
 	
@@ -32,7 +32,7 @@ return function(p0)
 		end
 		local _ = text ~= nil
 	else
-		var6 = bodyName ~= nil and partName ~= nil
+		var2 = bodyName ~= nil and partName ~= nil
 		
 		if bodyName and partName then
 			text = bodyName .. "'s " .. partName
@@ -41,7 +41,7 @@ return function(p0)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -51,10 +51,10 @@ return function(p0)
 		AvatarPartViewport = reactModule.createElement(avatarPartViewportModule, {
 			LayoutOrder = 1,
 			asset = asset,
-			assetType = if getFFlagSingleUploadMakeupSupportModule() then p0.assetType else nil,
-			viewportSize = p0.viewportSize
+			assetType = if getFFlagSingleUploadMakeupSupportModule() then p1.assetType else nil,
+			viewportSize = p1.viewportSize
 		}),
-		TitleText = var6 and reactModule.createElement("TextLabel", {
+		TitleText = var2 and reactModule.createElement("TextLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			TextWrapped = true,

@@ -16,13 +16,13 @@ local eventNamesModule = require(parent.SquadsCore.EventNames)
 local squadExternalContractContext = squadExternalContractProviderModule.SquadExternalContractContext
 local squadInvitePageNavSourceEnum = require(parent.Squads.Enums).SquadInvitePageNavSourceEnum
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), useGetConversationFromIdModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), constantsModule (ref), enumScreensModule (ref), eventNamesModule (ref), squadInvitePageNavSourceEnum (ref), iconButton (ref), images (ref), iconSize (ref)
-	local var8 = reactModule.useContext(squadExternalContractContext)
-	local var9 = useCurrentSquadParentChannelId() or ""
-	local var10 = useGetConversationFromIdModule(var9)
-	local var11 = if var10 then var10.participants else {}
-	local var12 = useLocalization({
+	local var1 = reactModule.useContext(squadExternalContractContext)
+	local var2 = useCurrentSquadParentChannelId() or ""
+	local var3 = useGetConversationFromIdModule(var2)
+	local var4 = if var3 then var3.participants else {}
+	local var5 = useLocalization({
 		tooManyPeopleText = {
 			if fFlagConnectionsToFriendsRename then "Feature.Chat.Message.AddFriendsPartyLimit" else "Feature.Chat.Message.AddConnectionsPartyLimit",
 			friendNum = constantsModule.MAX_PARTICIPANT_COUNT,
@@ -36,19 +36,19 @@ return function(p0)
 		icon = images["icons/actions/friends/friendAdd"],
 		iconSize = iconSize.Medium,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: var11 (ref), constantsModule (copy), p0 (ref), enumScreensModule (copy), var12 (ref), var8 (ref), eventNamesModule (copy), squadInvitePageNavSourceEnum (copy), var9 (ref)
-			if constantsModule.MAX_PARTICIPANT_COUNT < #var11 then
-				p0.navigation.navigate(enumScreensModule.RoactChatToast, {
-					toastProps = { toastContent = { toastTitle = var12.tooManyPeopleText } }
+			-- upvalues: var4 (ref), constantsModule (copy), p1 (ref), enumScreensModule (copy), var5 (ref), var1 (ref), eventNamesModule (copy), squadInvitePageNavSourceEnum (copy), var2 (ref)
+			if constantsModule.MAX_PARTICIPANT_COUNT < #var4 then
+				p1.navigation.navigate(enumScreensModule.RoactChatToast, {
+					toastProps = { toastContent = { toastTitle = var5.tooManyPeopleText } }
 				})
 				
 				return
 			end
-			var8.fireSquadAnalytics(eventNamesModule.SquadInvitePageNavSource, {
+			var1.fireSquadAnalytics(eventNamesModule.SquadInvitePageNavSource, {
 				inviteNavSource = squadInvitePageNavSourceEnum.SquadLobbyAddFriendsIconButtonClicked,
-				parentChannelId = var9
+				parentChannelId = var2
 			})
-			p0.navigation.navigate(enumScreensModule.SquadInviteFriends, { conversationId = var9 })
-		end, { var9, p0.navigation, var11 })
+			p1.navigation.navigate(enumScreensModule.SquadInviteFriends, { conversationId = var2 })
+		end, { var2, p1.navigation, var4 })
 	})
 end

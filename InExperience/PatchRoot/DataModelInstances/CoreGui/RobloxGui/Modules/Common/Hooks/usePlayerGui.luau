@@ -3,18 +3,18 @@ local useLocalPlayerModule = require(script.Parent.useLocalPlayer)
 
 return function()
 	-- upvalues: useLocalPlayerModule (ref), reactModule (ref)
-	local var2 = useLocalPlayerModule()
-	local var3, var4 = reactModule.useState(nil)
+	local var1 = useLocalPlayerModule()
+	local var2, var3 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var4 (ref)
+		-- upvalues: var1 (ref), var3 (ref)
 		local childAddedConnection = nil
 		
-		if var2 then
-			var4(var2:FindFirstChildOfClass("PlayerGui"))
-			childAddedConnection = var2.ChildAdded:Connect(function(p0)
-				-- upvalues: var4 (copy)
-				if p0:IsA("PlayerGui") then
-					var4(p0)
+		if var1 then
+			var3(var1:FindFirstChildOfClass("PlayerGui"))
+			childAddedConnection = var1.ChildAdded:Connect(function(p1)
+				-- upvalues: var3 (copy)
+				if p1:IsA("PlayerGui") then
+					var3(p1)
 				end
 			end)
 		end
@@ -24,7 +24,7 @@ return function()
 				childAddedConnection:Disconnect()
 			end
 		end
-	end, { var2 })
+	end, { var1 })
 	
-	return var3
+	return var2
 end

@@ -12,34 +12,34 @@ local friendsChatTabNameModule = require(script.Parent.Parent.FriendsChatTabName
 local name = expChatSharedModule.Logger:new(script.Name)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagExpChatEnableFriendsTab (ref), getFriendsChatRealtimeStoreModule (ref), getFriendsChatNavigationStoreModule (ref), signalsReactModule (ref), friendsChatTabNameModule (ref), reactModule (ref), inExperienceAppChatModalModule (ref), appChatNetworkingModule (ref), name (ref), signalsModule (ref)
 	if fFlagExpChatEnableFriendsTab then
-		local setTabUnread = p0.setTabUnread
-		local selectedTabName = p0.selectedTabName
-		local isChatWindowVisible = p0.isChatWindowVisible
-		local var11 = getFriendsChatRealtimeStoreModule(false)
-		local var12 = signalsReactModule.useSignalState(getFriendsChatNavigationStoreModule(false).getEffectiveConversationId)
+		local setTabUnread = p1.setTabUnread
+		local selectedTabName = p1.selectedTabName
+		local isChatWindowVisible = p1.isChatWindowVisible
+		local var1 = getFriendsChatRealtimeStoreModule(false)
+		local var2 = signalsReactModule.useSignalState(getFriendsChatNavigationStoreModule(false).getEffectiveConversationId)
 		
 		local function _()
-			-- upvalues: var11 (ref)
-			return next(var11.getLocalUnreadConversationIds(false)) ~= nil
+			-- upvalues: var1 (ref)
+			return next(var1.getLocalUnreadConversationIds(false)) ~= nil
 		end
 		
-		local var13 = isChatWindowVisible == true and selectedTabName == friendsChatTabNameModule
-		local var14 = var13 and var12 == nil
+		local var3 = isChatWindowVisible == true and selectedTabName == friendsChatTabNameModule
+		local var4 = var3 and var2 == nil
 		reactModule.useEffect(function()
-			-- upvalues: var13 (ref), inExperienceAppChatModalModule (copy), appChatNetworkingModule (copy), name (copy), setTabUnread (ref), var11 (ref)
+			-- upvalues: var3 (ref), inExperienceAppChatModalModule (copy), appChatNetworkingModule (copy), name (copy), setTabUnread (ref), var1 (ref)
 			local function onGlobalCount()
-				-- upvalues: var13 (copy), inExperienceAppChatModalModule (copy), appChatNetworkingModule (copy), name (copy), setTabUnread (copy), var11 (copy)
-				if var13 and (inExperienceAppChatModalModule.default.unreadCount or 0) > 0 then
+				-- upvalues: var3 (copy), inExperienceAppChatModalModule (copy), appChatNetworkingModule (copy), name (copy), setTabUnread (copy), var1 (copy)
+				if var3 and (inExperienceAppChatModalModule.default.unreadCount or 0) > 0 then
 					inExperienceAppChatModalModule:setUnreadCount(0)
-					appChatNetworkingModule.http.ClearGlobalUnreadCount():catch(function(p1)
+					appChatNetworkingModule.http.ClearGlobalUnreadCount():catch(function(p2)
 						-- upvalues: name (copy)
-						name:warning(`Failed to clear global unread count: {tostring(p1)}`)
+						name:warning(`Failed to clear global unread count: {tostring(p2)}`)
 					end)
 				end
-				setTabUnread(if (inExperienceAppChatModalModule.default.unreadCount or 0) <= 0 then next(var11.getLocalUnreadConversationIds(false)) ~= nil else true)
+				setTabUnread(if (inExperienceAppChatModalModule.default.unreadCount or 0) <= 0 then next(var1.getLocalUnreadConversationIds(false)) ~= nil else true)
 			end
 			
 			onGlobalCount()
@@ -49,24 +49,24 @@ return function(p0)
 				-- upvalues: eventConnection (ref)
 				eventConnection:Disconnect()
 			end
-		end, { var13, setTabUnread })
+		end, { var3, setTabUnread })
 		reactModule.useEffect(function()
-			-- upvalues: signalsModule (copy), var11 (ref), var13 (ref), var12 (ref), var14 (ref), setTabUnread (ref), inExperienceAppChatModalModule (copy)
-			local var17 = signalsModule.createEffect(function(p2)
-				-- upvalues: var11 (copy), var13 (copy), var12 (copy), var14 (copy), setTabUnread (copy), inExperienceAppChatModalModule (copy)
-				local localUnreadConversationIds = var11.getLocalUnreadConversationIds(p2)
+			-- upvalues: signalsModule (copy), var1 (ref), var3 (ref), var2 (ref), var4 (ref), setTabUnread (ref), inExperienceAppChatModalModule (copy)
+			local var5 = signalsModule.createEffect(function(p2)
+				-- upvalues: var1 (copy), var3 (copy), var2 (copy), var4 (copy), setTabUnread (copy), inExperienceAppChatModalModule (copy)
+				local localUnreadConversationIds = var1.getLocalUnreadConversationIds(p2)
 				
-				if (var13 and (var12 ~= nil and localUnreadConversationIds[var12] == true)) or var14 and next(localUnreadConversationIds) ~= nil then
-					var11.clearLocalUnread()
+				if (var3 and (var2 ~= nil and localUnreadConversationIds[var2] == true)) or var4 and next(localUnreadConversationIds) ~= nil then
+					var1.clearLocalUnread()
 				end
-				setTabUnread(if (inExperienceAppChatModalModule.default.unreadCount or 0) <= 0 then next(var11.getLocalUnreadConversationIds(false)) ~= nil else true)
+				setTabUnread(if (inExperienceAppChatModalModule.default.unreadCount or 0) <= 0 then next(var1.getLocalUnreadConversationIds(false)) ~= nil else true)
 			end)
 			
 			return function()
-				-- upvalues: var17 (ref)
-				var17()
+				-- upvalues: var5 (ref)
+				var5()
 			end
-		end, { var14, var13, var12, setTabUnread })
+		end, { var4, var3, var2, setTabUnread })
 		
 		return nil
 	end

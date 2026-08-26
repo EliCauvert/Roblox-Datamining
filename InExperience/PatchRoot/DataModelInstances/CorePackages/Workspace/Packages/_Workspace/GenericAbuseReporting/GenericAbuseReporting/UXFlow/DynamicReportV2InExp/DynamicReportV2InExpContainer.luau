@@ -122,13 +122,13 @@ return reactModule.memo(function(p1)
 		var9 = var12
 		local var14 = var13
 		local onReportFinish = p1.onReportFinish
-		var10 = reactModule.useCallback(function(p1)
+		var10 = reactModule.useCallback(function(p2)
 			-- upvalues: var14 (write), onReportFinish (ref)
-			if p1.didSubmit and var14 then
+			if p2.didSubmit and var14 then
 				var14(true)
 			end
 			if onReportFinish then
-				onReportFinish(p1)
+				onReportFinish(p2)
 			end
 		end, { onReportFinish, var14 })
 		var11 = reactModule.useCallback(function()
@@ -142,10 +142,10 @@ return reactModule.memo(function(p1)
 		-- upvalues: setHasError (ref)
 		setHasError(true)
 	end, { setHasError })
-	local var16 = reactModule.useCallback(function(p1)
+	local var16 = reactModule.useCallback(function(p2)
 		-- upvalues: sendBoundaryErrorTelemetryModule (copy), abuseVector (ref), var1 (ref), setHasError (ref)
-		warn("AbuseReportErrorBoundary (in-exp) caught:", p1)
-		sendBoundaryErrorTelemetryModule(p1, { abuse_vector = abuseVector, target_id = var1 })
+		warn("AbuseReportErrorBoundary (in-exp) caught:", p2)
+		sendBoundaryErrorTelemetryModule(p2, { abuse_vector = abuseVector, target_id = var1 })
 		setHasError(true)
 	end, { abuseVector, var1, setHasError })
 	local var17 = reactModule.useMemo(function()

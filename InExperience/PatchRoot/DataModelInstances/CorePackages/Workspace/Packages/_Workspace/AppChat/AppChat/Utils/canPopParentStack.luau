@@ -1,9 +1,9 @@
-﻿return function(p0)
-	if not p0 or not p0._dangerouslyGetParent then
+﻿return function(p1)
+	if not p1 or not p1._dangerouslyGetParent then
 		return false
 	end
-	local var0 = p0._dangerouslyGetParent()
-	local state = var0 and var0.state
+	local var1 = p1._dangerouslyGetParent()
+	local state = var1 and var1.state
 	
 	return if state and state.routes then #state.routes > 1 else false
 end

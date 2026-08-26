@@ -1,8 +1,8 @@
-﻿return function(p0, p1, p2)
-	if p0.X == 0 or p0.Y == 0 or (p1.X == 0 or p1.Y == 0) then
+﻿return function(p1, p2, p3)
+	if p1.X == 0 or p1.Y == 0 or (p2.X == 0 or p2.Y == 0) then
 		return 1
 	end
-	local var0 = p1.X / p1.Y
+	local var1 = p2.X / p2.Y
 	
-	return (if p2 == Enum.ScaleType.Fit == (p0.X / p0.Y < var0) then p0.X else p0.Y * var0) / 1280
+	return (if p3 == Enum.ScaleType.Fit == (p1.X / p1.Y < var1) then p1.X else p1.Y * var1) / 1280
 end

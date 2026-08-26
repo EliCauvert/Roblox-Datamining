@@ -2,18 +2,18 @@
 local constantsModule = require(script.Parent.Constants)
 
 return {
-	AddTag = function(p0, p1, p2)
+	AddTag = function(p1, p2, p3)
 		-- upvalues: constantsModule (ref), collectionService (ref)
-		local var2 = if p0 then p0.current else nil
+		local var1 = if p1 then p1.current else nil
 		
-		if p1 and var2 then
-			if p2 then
-				var2:SetAttribute(constantsModule.ItemIndex, p2)
+		if p2 and var1 then
+			if p3 then
+				var1:SetAttribute(constantsModule.ItemIndex, p3)
 				
-				if collectionService:HasTag(var2, p1) then
+				if collectionService:HasTag(var1, p2) then
 					return
 				else
-					collectionService:AddTag(var2, p1)
+					collectionService:AddTag(var1, p2)
 					
 					return
 				end
@@ -22,15 +22,15 @@ return {
 			end
 		end
 	end,
-	RemoveTag = function(p3, p4, p5)
+	RemoveTag = function(p1, p2, p3)
 		-- upvalues: constantsModule (ref), collectionService (ref)
-		local var3 = if p3 then p3.current else nil
+		local var1 = if p1 then p1.current else nil
 		
-		if p4 and var3 then
-			if p5 then
-				var3:SetAttribute(constantsModule.ItemIndex, nil)
+		if p2 and var1 then
+			if p3 then
+				var1:SetAttribute(constantsModule.ItemIndex, nil)
 			end
-			collectionService:RemoveTag(var3, p4)
+			collectionService:RemoveTag(var1, p2)
 		end
 	end
 }

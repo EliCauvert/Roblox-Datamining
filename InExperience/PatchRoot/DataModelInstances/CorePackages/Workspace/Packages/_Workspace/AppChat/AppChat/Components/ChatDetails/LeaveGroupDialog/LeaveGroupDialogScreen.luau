@@ -8,16 +8,16 @@ local loggerModule = require(script.Parent.Logger)
 local leaveGroupDialogScreen = roactModule.PureComponent:extend("LeaveGroupDialogScreen")
 leaveGroupDialogScreen.defaultProps = { navigation = nil }
 
-function leaveGroupDialogScreen.init(p0)
+function leaveGroupDialogScreen.init(p1)
 	-- upvalues: getFFlagAppChatEnableRootedNavigationModule (ref), loggerModule (ref), enumScreensModule (ref)
 	function p0.onLeaveGroupDialogClose()
-		-- upvalues: p0 (ref)
-		p0.props.navigation.goBack()
+		-- upvalues: p1 (ref)
+		p1.props.navigation.goBack()
 	end
 	
 	function p0.onLeaveGroupSuccess()
-		-- upvalues: p0 (ref), getFFlagAppChatEnableRootedNavigationModule (copy), loggerModule (copy), enumScreensModule (copy)
-		local navigation = p0.props.navigation
+		-- upvalues: p1 (ref), getFFlagAppChatEnableRootedNavigationModule (copy), loggerModule (copy), enumScreensModule (copy)
+		local navigation = p1.props.navigation
 		
 		if getFFlagAppChatEnableRootedNavigationModule() and navigation.getParam("isRooted", false) then
 			loggerModule:info("Close rooted ChatDetails after leave from {screen}")

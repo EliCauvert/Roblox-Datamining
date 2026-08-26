@@ -15,9 +15,9 @@ local refreshProfilePlatformUserProfileHeaderModule = require(profilePlatform.Ne
 
 return function(value)
 	-- upvalues: useProfileWrapperContextModule (ref), useStyle (ref), useDispatch (ref), reactModule (ref), userProfileSettingsNetworkingModule (ref), refreshProfilePlatformUserProfileHeaderModule (ref), horizontalPageMargin (ref), styledTextLabel (ref), toggle (ref), toggleSize (ref)
-	local var7 = useProfileWrapperContextModule()
-	local var8 = useStyle()
-	local var9 = useDispatch()
+	local var1 = useProfileWrapperContextModule()
+	local var2 = useStyle()
+	local var3 = useDispatch()
 	
 	return reactModule.createElement(horizontalPageMargin, {
 		backgroundTransparency = 1,
@@ -31,20 +31,20 @@ return function(value)
 		}),
 		Label = reactModule.createElement(styledTextLabel, {
 			text = "In-experience name:",
-			fontStyle = var8.Font.CaptionHeader,
-			colorStyle = var8.Theme.TextEmphasis,
+			fontStyle = var2.Font.CaptionHeader,
+			colorStyle = var2.Theme.TextEmphasis,
 			automaticSize = Enum.AutomaticSize.XY
 		}),
 		Toggle = reactModule.createElement(toggle, {
 			label = "",
 			size = toggleSize.Medium,
 			isChecked = value.isInExperienceNameEnabled,
-			onActivated = reactModule.useCallback(function(p0)
-				-- upvalues: var9 (ref), userProfileSettingsNetworkingModule (copy), refreshProfilePlatformUserProfileHeaderModule (copy), var7 (ref)
-				var9(userProfileSettingsNetworkingModule.SetUserProfileSettings.API({ isInExperienceNameEnabled = p0 })):andThen(function(p1)
-					-- upvalues: var9 (copy), refreshProfilePlatformUserProfileHeaderModule (copy), var7 (copy)
-					if p1.responseBody.successfullyUpdated then
-						var9(refreshProfilePlatformUserProfileHeaderModule(var7.profileId))
+			onActivated = reactModule.useCallback(function(p1)
+				-- upvalues: var3 (ref), userProfileSettingsNetworkingModule (copy), refreshProfilePlatformUserProfileHeaderModule (copy), var1 (ref)
+				var3(userProfileSettingsNetworkingModule.SetUserProfileSettings.API({ isInExperienceNameEnabled = p1 })):andThen(function(p2)
+					-- upvalues: var3 (copy), refreshProfilePlatformUserProfileHeaderModule (copy), var1 (copy)
+					if p2.responseBody.successfullyUpdated then
+						var3(refreshProfilePlatformUserProfileHeaderModule(var1.profileId))
 					end
 				end)
 			end)

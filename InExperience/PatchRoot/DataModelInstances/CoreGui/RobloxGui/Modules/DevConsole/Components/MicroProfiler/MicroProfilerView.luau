@@ -6,12 +6,12 @@ local recordAndDumpViewModule = require(script.Parent.RecordAndDumpView)
 local column = roactModule.Component:extend("Column")
 local microProfilerView = roactModule.Component:extend("MicroProfilerView")
 
-function column.render(p0)
+function column.render(p1)
 	-- upvalues: roactModule (ref), immutableModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 0, 1, 0),
-		LayoutOrder = p0.props.LayoutOrder
+		LayoutOrder = p1.props.LayoutOrder
 	}, immutableModule.JoinDictionaries({
 		UIListLayout = roactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, 12),
@@ -20,7 +20,7 @@ function column.render(p0)
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top
 		})
-	}, p0.props[roactModule.Children]))
+	}, p1.props[roactModule.Children]))
 end
 
 function microProfilerView.render(p1)

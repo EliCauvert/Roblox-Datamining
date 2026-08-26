@@ -19,30 +19,30 @@ humanoidViewport.validateProps = tModule.strictInterface({
 	rigType = tModule.optional(tModule.enum(Enum.HumanoidRigType))
 })
 
-function humanoidViewport.init(p0)
+function humanoidViewport.init(p1)
 	-- upvalues: roactModule (ref)
-	p0:setState({ loading = true, loadingFailed = false })
-	p0.cameraRef = roactModule.createRef()
-	p0.worldModelRef = roactModule.createRef()
-	local var11, var12 = roactModule.createBinding(CFrame.new())
-	p0.cameraCFrameBinding = var11
-	p0.updateCameraCFrameBinding = var12
-	local var13, var14 = roactModule.createBinding(CFrame.new())
-	p0.cameraFocusBinding = var13
-	p0.updateCameraFocusBinding = var14
-	p0.humanoidModel = nil
-	p0.mounted = false
+	p1:setState({ loading = true, loadingFailed = false })
+	p1.cameraRef = roactModule.createRef()
+	p1.worldModelRef = roactModule.createRef()
+	local var1, var2 = roactModule.createBinding(CFrame.new())
+	p1.cameraCFrameBinding = var1
+	p1.updateCameraCFrameBinding = var2
+	local var3, var4 = roactModule.createBinding(CFrame.new())
+	p1.cameraFocusBinding = var3
+	p1.updateCameraFocusBinding = var4
+	p1.humanoidModel = nil
+	p1.mounted = false
 	
 	function p0.onRetryLoading()
-		-- upvalues: p0 (ref)
-		p0:setState({ loading = true, loadingFailed = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ loading = true, loadingFailed = false })
 		
-		if p0.props.humanoidDescription then
-			p0:loadHumanoidModel()
+		if p1.props.humanoidDescription then
+			p1:loadHumanoidModel()
 			
 			return
 		end
-		p0.props.retryLoadDescription()
+		p1.props.retryLoadDescription()
 	end
 end
 
@@ -51,19 +51,19 @@ local function _(p1)
 	return (CFrame.new(Vector3.new(0, 0, 0), if math.abs(p1.Y) > 0.95 then Vector3.new(0, 0, -1) else Vector3.new(p1.X, 0, p1.Z).unit) * cFrame).lookVector
 end
 
-local _ = function(value, p2)
-	return math.max(p2.X, p2.Y) / 2 * (1 / math.tan(math.rad(value) / 2)) + p2.Z / 2
+local _ = function(value, p1)
+	return math.max(p1.X, p1.Y) / 2 * (1 / math.tan(math.rad(value) / 2)) + p1.Z / 2
 end
 
-local _ = function(p3, p4, p5)
-	local extentsSize = p3:GetExtentsSize()
+local _ = function(p1, p2, p3)
+	local extentsSize = p1:GetExtentsSize()
 	
-	return p5 - p5.p + p3:GetModelCFrame().p + p4 * ((math.max(extentsSize.X, extentsSize.Y) / 2 * 1.428148006742 + extentsSize.Z / 2) * 1)
+	return p3 - p3.p + p1:GetModelCFrame().p + p2 * ((math.max(extentsSize.X, extentsSize.Y) / 2 * 1.428148006742 + extentsSize.Z / 2) * 1)
 end
 
-function humanoidViewport.positionCamera(p6)
+function humanoidViewport.positionCamera(p1)
 	-- upvalues: cFrame (ref)
-	local humanoidModel = p6.humanoidModel
+	local humanoidModel = p1.humanoidModel
 	local modelCFrame = humanoidModel:GetModelCFrame()
 	local lookVector = modelCFrame.lookVector
 	local humanoidRootPart = humanoidModel:FindFirstChild("HumanoidRootPart")
@@ -74,15 +74,15 @@ function humanoidViewport.positionCamera(p6)
 	lookVector = (CFrame.new(Vector3.new(0, 0, 0), if math.abs(lookVector.Y) > 0.95 then Vector3.new(0, 0, -1) else Vector3.new(lookVector.X, 0, lookVector.Z).unit) * cFrame).lookVector
 	local cFrame_1 = CFrame.new(modelCFrame.p + lookVector * 5, modelCFrame.p)
 	local extentsSize = humanoidModel:GetExtentsSize()
-	p6.updateCameraCFrameBinding(cFrame_1 - cFrame_1.p + humanoidModel:GetModelCFrame().p + lookVector * ((math.max(extentsSize.X, extentsSize.Y) / 2 * 1.428148006742 + extentsSize.Z / 2) * 1))
-	p6.updateCameraFocusBinding(modelCFrame)
+	p1.updateCameraCFrameBinding(cFrame_1 - cFrame_1.p + humanoidModel:GetModelCFrame().p + lookVector * ((math.max(extentsSize.X, extentsSize.Y) / 2 * 1.428148006742 + extentsSize.Z / 2) * 1))
+	p1.updateCameraFocusBinding(modelCFrame)
 end
 
-function humanoidViewport.loadIdleAnimation(_, p7)
-	local humanoid = p7:FindFirstChildOfClass("Humanoid")
+function humanoidViewport.loadIdleAnimation(_, p1)
+	local humanoid = p1:FindFirstChildOfClass("Humanoid")
 	
 	if humanoid.HumanoidDescription.IdleAnimation == 0 then return end
-	local animate = p7:FindFirstChild("Animate")
+	local animate = p1:FindFirstChild("Animate")
 	
 	if not animate then return end
 	local idle = animate:FindFirstChild("idle")
@@ -91,58 +91,58 @@ function humanoidViewport.loadIdleAnimation(_, p7)
 	local animation = idle:FindFirstChildOfClass("Animation")
 	
 	if animation then
-		local var24 = humanoid:LoadAnimation(animation)
-		var24.Looped = true
-		var24:Play()
+		local var1 = humanoid:LoadAnimation(animation)
+		var1.Looped = true
+		var1:Play()
 		
 		return
 	end
 end
 
-function humanoidViewport.loadHumanoidModel(p8)
+function humanoidViewport.loadHumanoidModel(p1)
 	-- upvalues: playersService (ref), promiseModule (ref), AXClusterCompositionTimeoutMs (ref)
-	local humanoidDescription = p8.props.humanoidDescription
-	local rigType = p8.props.rigType
+	local humanoidDescription = p1.props.humanoidDescription
+	local rigType = p1.props.rigType
 	coroutine.wrap(function()
-		-- upvalues: playersService (copy), humanoidDescription (ref), rigType (ref), p8 (ref), promiseModule (copy), AXClusterCompositionTimeoutMs (copy)
-		local var25 = nil
+		-- upvalues: playersService (copy), humanoidDescription (ref), rigType (ref), p1 (ref), promiseModule (copy), AXClusterCompositionTimeoutMs (copy)
+		local var1 = nil
 		pcall(function()
-			-- upvalues: var25 (write), playersService (copy), humanoidDescription (copy), rigType (copy)
-			var25 = playersService:CreateHumanoidModelFromDescriptionAsync(humanoidDescription, rigType)
+			-- upvalues: var1 (write), playersService (copy), humanoidDescription (copy), rigType (copy)
+			var1 = playersService:CreateHumanoidModelFromDescriptionAsync(humanoidDescription, rigType)
 		end)
 		
-		if not p8.mounted then return end
-		if p8.props.humanoidDescription ~= humanoidDescription then return end
-		if p8.props.rigType ~= rigType then return end
-		if var25 == nil then
-			p8:setState({ loadingFailed = true })
+		if not p1.mounted then return end
+		if p1.props.humanoidDescription ~= humanoidDescription then return end
+		if p1.props.rigType ~= rigType then return end
+		if var1 == nil then
+			p1:setState({ loadingFailed = true })
 			
 			return
 		end
-		p8.humanoidModel = var25
+		p1.humanoidModel = var1
 		
-		if p8.worldModelRef:getValue() then
-			p8.humanoidModel.Parent = p8.worldModelRef:getValue()
+		if p1.worldModelRef:getValue() then
+			p1.humanoidModel.Parent = p1.worldModelRef:getValue()
 		end
 		if #humanoidDescription:GetAccessories(false) > 0 then
 			promiseModule.race({
-				promiseModule.fromEvent(var25.Humanoid.ClusterCompositionFinished),
+				promiseModule.fromEvent(var1.Humanoid.ClusterCompositionFinished),
 				promiseModule.delay(AXClusterCompositionTimeoutMs * 0.001)
 			}):await()
 		end
-		if p8.mounted then
-			p8:positionCamera()
-			p8:loadIdleAnimation(var25)
-			p8:setState({ loading = false, loadingFailed = false })
+		if p1.mounted then
+			p1:positionCamera()
+			p1:loadIdleAnimation(var1)
+			p1:setState({ loading = false, loadingFailed = false })
 			
 			return
 		end
 	end)()
 end
 
-function humanoidViewport.render(p9)
+function humanoidViewport.render(p1)
 	-- upvalues: roactModule (ref), skeleton (ref), emptyState (ref), robloxTranslatorModule (ref)
-	local loadingFailed = p9.props.loadingFailed or p9.state.loadingFailed
+	local loadingFailed = p1.props.loadingFailed or p1.state.loadingFailed
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -155,7 +155,7 @@ function humanoidViewport.render(p9)
 			AspectType = Enum.AspectType.FitWithinMaxSize,
 			DominantAxis = Enum.DominantAxis.Width
 		}),
-		ShimmerFrame = not loadingFailed and p9.state.loading and roactModule.createElement(skeleton, {
+		ShimmerFrame = not loadingFailed and p1.state.loading and roactModule.createElement(skeleton, {
 			Size = UDim2.fromScale(1, 1),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5)
@@ -163,53 +163,53 @@ function humanoidViewport.render(p9)
 		LoadingFailed = loadingFailed and roactModule.createElement(emptyState, {
 			text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.ItemsListLoadingFailed"),
 			size = UDim2.fromScale(1, 1),
-			onActivated = p9.onRetryLoading
+			onActivated = p1.onRetryLoading
 		}),
 		ViewportFrame = roactModule.createElement("ViewportFrame", {
 			BackgroundTransparency = 1,
-			Visible = not (loadingFailed or p9.state.loading),
+			Visible = not (loadingFailed or p1.state.loading),
 			Size = UDim2.fromScale(1, 1),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			LightColor = Color3.fromRGB(240, 240, 240),
 			Ambient = Color3.fromRGB(240, 240, 240),
-			CurrentCamera = p9.cameraRef
+			CurrentCamera = p1.cameraRef
 		}, {
 			Camera = roactModule.createElement("Camera", {
 				CameraType = Enum.CameraType.Scriptable,
 				FieldOfView = 70,
-				CFrame = p9.cameraCFrameBinding,
-				Focus = p9.cameraFocusBinding,
-				[roactModule.Ref] = p9.cameraRef
+				CFrame = p1.cameraCFrameBinding,
+				Focus = p1.cameraFocusBinding,
+				[roactModule.Ref] = p1.cameraRef
 			}),
-			WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p9.worldModelRef })
+			WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p1.worldModelRef })
 		})
 	})
 end
 
-function humanoidViewport.didMount(p10)
-	p10.mounted = true
+function humanoidViewport.didMount(p1)
+	p1.mounted = true
 	
-	if p10.props.humanoidDescription then
-		p10:loadHumanoidModel()
+	if p1.props.humanoidDescription then
+		p1:loadHumanoidModel()
 	end
 end
 
-function humanoidViewport.didUpdate(p11, p12)
-	if p11.worldModelRef:getValue() and p11.humanoidModel then
-		p11.humanoidModel.Parent = p11.worldModelRef:getValue()
+function humanoidViewport.didUpdate(p1, p2)
+	if p1.worldModelRef:getValue() and p1.humanoidModel then
+		p1.humanoidModel.Parent = p1.worldModelRef:getValue()
 	end
-	if p11.props.rigType ~= nil and (p11.props.humanoidDescription ~= nil and (p11.props.humanoidDescription ~= p12.humanoidDescription or p11.props.rigType ~= p12.rigType)) then
-		p11:setState({ loading = true })
+	if p1.props.rigType ~= nil and (p1.props.humanoidDescription ~= nil and (p1.props.humanoidDescription ~= p2.humanoidDescription or p1.props.rigType ~= p2.rigType)) then
+		p1:setState({ loading = true })
 		
-		if p11.props.humanoidDescription ~= nil then
-			p11:loadHumanoidModel()
+		if p1.props.humanoidDescription ~= nil then
+			p1:loadHumanoidModel()
 		end
 	end
 end
 
-function humanoidViewport.willUnmount(p13)
-	p13.mounted = false
+function humanoidViewport.willUnmount(p1)
+	p1.mounted = false
 end
 
 return humanoidViewport

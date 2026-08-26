@@ -22,78 +22,78 @@ local _ = require(parent.SduiCoreSystem)
 local sduiFocusNavActionsModule = require(serverDrivenUi.FocusNavigation.SduiFocusNavActions)
 local useSduiReportExperienceLaunched = require(parent.SduiSharedContent).useSduiReportExperienceLaunched
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useButtonHold (ref), constants (ref), buttonHoldStateEnum (ref), appShortcutBarContext (ref), guiService (ref), getInputModeStore (ref), responsiveModule (ref), focusNavigationEventNameEnum (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), holdToPlayLauncher (ref), useSduiReportExperienceLaunched (ref), setGamePlaySession (ref), sessionType (ref), playButtonStates (ref), sduiFocusNavActionsModule (ref)
-	local dependencies = p0.sduiContext.dependencies
+	local dependencies = p1.sduiContext.dependencies
 	local networking = dependencies.networking
 	local sessionService = dependencies.sessionService
-	local var8 = reactModule.useRef(nil)
-	local var9 = useButtonHold(constants.SIGNAL_HOLD_INTENT_SECONDS, constants.SIGNAL_HOLD_COMPLETE_SECONDS)
-	local var10 = if var9.holdState ~= buttonHoldStateEnum.HOLDING then if var9.holdState ~= buttonHoldStateEnum.JUST_PRESSED then var9.holdState == buttonHoldStateEnum.COMPLETED else true else true
-	local var11 = var9.holdState == buttonHoldStateEnum.COMPLETED
-	local var12 = appShortcutBarContext.useDispatchButtonHoldStarted()
-	local var13 = appShortcutBarContext.useDispatchButtonHoldEnded()
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), guiService (copy)
-		return if p0.guiObject then p0.guiObject else guiService.SelectedCoreObject
-	end, { p0.guiObject })
-	local var15 = if var9.holdState ~= buttonHoldStateEnum.HOLDING then var9.holdState == buttonHoldStateEnum.COMPLETED else true
+	local var1 = reactModule.useRef(nil)
+	local var2 = useButtonHold(constants.SIGNAL_HOLD_INTENT_SECONDS, constants.SIGNAL_HOLD_COMPLETE_SECONDS)
+	local var3 = if var2.holdState ~= buttonHoldStateEnum.HOLDING then if var2.holdState ~= buttonHoldStateEnum.JUST_PRESSED then var2.holdState == buttonHoldStateEnum.COMPLETED else true else true
+	local var4 = var2.holdState == buttonHoldStateEnum.COMPLETED
+	local var5 = appShortcutBarContext.useDispatchButtonHoldStarted()
+	local var6 = appShortcutBarContext.useDispatchButtonHoldEnded()
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), guiService (copy)
+		return if p1.guiObject then p1.guiObject else guiService.SelectedCoreObject
+	end, { p1.guiObject })
+	local var8 = if var2.holdState ~= buttonHoldStateEnum.HOLDING then var2.holdState == buttonHoldStateEnum.COMPLETED else true
 	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), getInputModeStore (copy), p0 (ref), responsiveModule (copy)
-		if var15 then
-			if p0.setDisabledForHold and getInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
-				p0.setDisabledForHold(true)
+		-- upvalues: var8 (ref), getInputModeStore (copy), p1 (ref), responsiveModule (copy)
+		if var8 then
+			if p1.setDisabledForHold and getInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
+				p1.setDisabledForHold(true)
 			end
 		end
 		return function()
-			-- upvalues: p0 (copy)
-			if p0.setDisabledForHold then
-				p0.setDisabledForHold(false)
+			-- upvalues: p1 (copy)
+			if p1.setDisabledForHold then
+				p1.setDisabledForHold(false)
 			end
 		end
-	end, { var15, p0.setDisabledForHold })
+	end, { var8, p1.setDisabledForHold })
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var10 (ref), var12 (ref), focusNavigationEventNameEnum (copy), var9 (ref), var13 (ref)
-		if not var8.current and var10 then
-			var8.current = true
-			var12(focusNavigationEventNameEnum.HoldToPlay, var9.holdProgress)
+		-- upvalues: var1 (ref), var3 (ref), var5 (ref), focusNavigationEventNameEnum (copy), var2 (ref), var6 (ref)
+		if not var1.current and var3 then
+			var1.current = true
+			var5(focusNavigationEventNameEnum.HoldToPlay, var2.holdProgress)
 			
 			return
-		elseif var8.current and not var10 then
-			var13(focusNavigationEventNameEnum.HoldToPlay)
-			var8.current = false
+		elseif var1.current and not var3 then
+			var6(focusNavigationEventNameEnum.HoldToPlay)
+			var1.current = false
 		end
-	end, { var10, var9.holdProgress, var12, var13 })
-	local var16 = usePlayButtonState(networking, p0.universeId)
-	local var17 = useOnPlayButtonCallback(p0.universeId, nil, holdToPlayLauncher, nil, nil)
-	local var18 = useSduiReportExperienceLaunched(p0.sduiContext, p0.analyticsContext, p0.universeId, p0.placeId)
+	end, { var3, var2.holdProgress, var5, var6 })
+	local var9 = usePlayButtonState(networking, p1.universeId)
+	local var10 = useOnPlayButtonCallback(p1.universeId, nil, holdToPlayLauncher, nil, nil)
+	local var11 = useSduiReportExperienceLaunched(p1.sduiContext, p1.analyticsContext, p1.universeId, p1.placeId)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var16 (ref), setGamePlaySession (copy), sessionService (ref), sessionType (copy), var17 (ref), var18 (ref), var9 (ref), playButtonStates (copy)
-		if var11 then
-			local playButtonState = var16.playButtonState
+		-- upvalues: var4 (ref), var9 (ref), setGamePlaySession (copy), sessionService (ref), sessionType (copy), var10 (ref), var11 (ref), var2 (ref), playButtonStates (copy)
+		if var4 then
+			local playButtonState = var9.playButtonState
 			setGamePlaySession(sessionService, sessionType.StructuralIdentifier.GamePlayFromHoldToPlay, true)
-			var17(playButtonState, var18)
+			var10(playButtonState, var11)
 			
-			if var9.cancelHold and playButtonState == playButtonStates.Playable then
-				var9.cancelHold()
+			if var2.cancelHold and playButtonState == playButtonStates.Playable then
+				var2.cancelHold()
 			end
 		end
 	end, {
-		var11, var9.cancelHold, var16.playButtonState, sessionService, var18, var17
+		var4, var2.cancelHold, var9.playButtonState, sessionService, var11, var10
 	})
 	
 	return reactModule.createElement(sduiFocusNavActionsModule, {
 		focusNavActions = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), var9 (ref)
+			-- upvalues: focusNavigationEventNameEnum (copy), var2 (ref)
 			return {
 				keys = {
 					[Enum.KeyCode.ButtonA] = focusNavigationEventNameEnum.HoldToPlay
 				},
 				events = {
-					[focusNavigationEventNameEnum.HoldToPlay] = { handler = var9.eventHandler }
+					[focusNavigationEventNameEnum.HoldToPlay] = { handler = var2.eventHandler }
 				}
 			}
-		end, { var9.eventHandler }),
-		guiObject = var14
+		end, { var2.eventHandler }),
+		guiObject = var7
 	})
 end)

@@ -29,35 +29,35 @@ local function _()
 	}
 end
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: useTokens (ref), useDeviceInsets (ref), useSetDrawerVisible (ref), useIsTvRemoteDevice (ref), fFlagMomentsUseCompositionLibraryModule (ref), fFlagMomentsUseFoundationHeaderBarModule (ref), useCompositionLayout (ref), useStatusBarHeight (ref), noop (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), playersService (ref), getFFlagMomentsAndroidTvEnabledModule (ref)
-	local var10 = useTokens()
-	local var11 = useDeviceInsets()
-	local var12 = useSetDrawerVisible()
-	local var13 = useIsTvRemoteDevice()
+	local var1 = useTokens()
+	local var2 = useDeviceInsets()
+	local var3 = useSetDrawerVisible()
+	local var4 = useIsTvRemoteDevice()
 	local fFlagMomentsUseFoundationHeaderBarModule_1 = fFlagMomentsUseCompositionLibraryModule and fFlagMomentsUseFoundationHeaderBarModule
-	local var15 = nil
-	local var16 = nil
-	local var17 = 0
+	local var5 = nil
+	local var6 = nil
+	local var7 = 0
 	
 	if fFlagMomentsUseFoundationHeaderBarModule_1 then
-		var15 = useCompositionLayout()
-		var16 = useStatusBarHeight()
-		var17 = var10.Size.Size_1400
+		var5 = useCompositionLayout()
+		var6 = useStatusBarHeight()
+		var7 = var1.Size.Size_1400
 	end
-	local var18 = p0.showFtuxTooltip == true
-	local onFtuxTooltipDismissed = p0.onFtuxTooltipDismissed or noop
-	local onCreatePressed = p0.onCreatePressed or noop
+	local var8 = p1.showFtuxTooltip == true
+	local onFtuxTooltipDismissed = p1.onFtuxTooltipDismissed or noop
+	local onCreatePressed = p1.onCreatePressed or noop
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), fireAnalyticsEvent (copy), eventNames (copy), playersService (copy)
-		if var18 then
+		-- upvalues: var8 (ref), fireAnalyticsEvent (copy), eventNames (copy), playersService (copy)
+		if var8 then
 			fireAnalyticsEvent(eventNames.FTUXTooltipImpression, {
 				userId = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0),
 				timestamp = tostring(os.time())
 			})
 		end
-	end, { var18 })
-	local var21 = reactModule.useCallback(function()
+	end, { var8 })
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), playersService (copy), onFtuxTooltipDismissed (ref)
 		fireAnalyticsEvent(eventNames.FTUXTooltipDismissed, {
 			userId = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0),
@@ -65,40 +65,40 @@ return function(p0, p1, p2)
 		})
 		onFtuxTooltipDismissed()
 	end, { onFtuxTooltipDismissed })
-	local var22 = if var15 ~= nil then 0 else var15.margin
+	local var10 = if var5 ~= nil then 0 else var5.margin
 	
 	return {
-		layoutOrder = if p1 then nil else p0.layoutOrder,
-		variant = p0.variant,
-		showFtuxTooltip = var18,
+		layoutOrder = if p2 then nil else p1.layoutOrder,
+		variant = p1.variant,
+		showFtuxTooltip = var8,
 		onCreateMomentButtonPressed = reactModule.useCallback(function()
-			-- upvalues: var18 (ref), var21 (ref), onCreatePressed (ref)
-			if var18 then
-				var21()
+			-- upvalues: var8 (ref), var9 (ref), onCreatePressed (ref)
+			if var8 then
+				var9()
 			end
 			onCreatePressed()
-		end, { var18, var21, onCreatePressed }),
-		onFtuxTooltipClosed = var21,
+		end, { var8, var9, onCreatePressed }),
+		onFtuxTooltipClosed = var9,
 		onHamburgerPressed = reactModule.useCallback(function()
-			-- upvalues: var12 (ref)
-			var12(true)
-		end, { var12 }),
-		onBack = p0.onBack or noop,
-		onClose = p0.onClose or noop,
-		onNavigateToTrending = p0.onNavigateToTrending or noop,
-		onNavigateToMyMoments = p0.onNavigateToMyMoments or noop,
-		title = p0.title or "",
-		showTopScrim = p0.showTopScrim == true,
-		showInteractiveButtons = not (getFFlagMomentsAndroidTvEnabledModule() and var13),
-		showHamburger = p2,
-		showCreateButton = p0.onCreatePressed ~= nil,
-		headerHeight = var17,
+			-- upvalues: var3 (ref)
+			var3(true)
+		end, { var3 }),
+		onBack = p1.onBack or noop,
+		onClose = p1.onClose or noop,
+		onNavigateToTrending = p1.onNavigateToTrending or noop,
+		onNavigateToMyMoments = p1.onNavigateToMyMoments or noop,
+		title = p1.title or "",
+		showTopScrim = p1.showTopScrim == true,
+		showInteractiveButtons = not (getFFlagMomentsAndroidTvEnabledModule() and var4),
+		showHamburger = p3,
+		showCreateButton = p1.onCreatePressed ~= nil,
+		headerHeight = var7,
 		headerPadding = {
-			left = UDim.new(0, math.max(var11.left, var22)),
-			right = UDim.new(0, math.max(var11.right, var22)),
-			top = UDim.new(0, if fFlagMomentsUseFoundationHeaderBarModule_1 then var16 else var11.top)
+			left = UDim.new(0, math.max(var2.left, var10)),
+			right = UDim.new(0, math.max(var2.right, var10)),
+			top = UDim.new(0, if fFlagMomentsUseFoundationHeaderBarModule_1 then var6 else var2.top)
 		},
-		titleTextStyle = var10.Color.Content.Emphasis,
-		scrimHeight = var11.top + var10.Size.Size_2000 + var10.Size.Size_1600
+		titleTextStyle = var1.Color.Content.Emphasis,
+		scrimHeight = var2.top + var1.Size.Size_2000 + var1.Size.Size_1600
 	}
 end

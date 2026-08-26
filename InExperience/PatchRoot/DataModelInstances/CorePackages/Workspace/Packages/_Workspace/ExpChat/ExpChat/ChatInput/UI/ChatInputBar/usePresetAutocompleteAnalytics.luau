@@ -13,38 +13,38 @@ local t = {}
 return function(value)
 	-- upvalues: t (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), reactModule (ref), expChatSharedModule (ref), constantsModule (ref), httpService (ref), extendedStandardizedFields (ref), presetSearchModule (ref), getPresetChatStoreModule (ref)
 	local autocompleteDropdownReducer = value.autocompleteDropdownReducer
-	local var9 = if autocompleteDropdownReducer ~= nil then t else autocompleteDropdownReducer.results
-	local var10 = autocompleteDropdownReducer ~= nil and (autocompleteDropdownReducer.activated and (autocompleteDropdownReducer.autocompleteType == "presets" and (#var9 > 0 and (value.isFocused and (value.autocompleteEnabled == true and getEnableChatInputBarConfigurationAutocompleteEnabledModule())))))
-	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useRef({})
-	local var13 = reactModule.useRef({})
-	local var14 = reactModule.useRef({})
-	local var15 = reactModule.useRef(nil)
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), var14 (ref), var12 (ref), var15 (ref), var13 (ref), expChatSharedModule (copy), constantsModule (copy), httpService (copy), extendedStandardizedFields (copy)
-		local current = var11.current
+	local var1 = if autocompleteDropdownReducer ~= nil then t else autocompleteDropdownReducer.results
+	local var2 = autocompleteDropdownReducer ~= nil and (autocompleteDropdownReducer.activated and (autocompleteDropdownReducer.autocompleteType == "presets" and (#var1 > 0 and (value.isFocused and (value.autocompleteEnabled == true and getEnableChatInputBarConfigurationAutocompleteEnabledModule())))))
+	local var3 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef({})
+	local var5 = reactModule.useRef({})
+	local var6 = reactModule.useRef({})
+	local var7 = reactModule.useRef(nil)
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var6 (ref), var4 (ref), var7 (ref), var5 (ref), expChatSharedModule (copy), constantsModule (copy), httpService (copy), extendedStandardizedFields (copy)
+		local current = var3.current
 		
 		if current == nil then return end
 		local t = {}
 		
-		for i, v in var14.current do
+		for i, v in var6.current do
 			t[v] = i - 1
 		end
 		local t_1 = {}
 		
-		for i_1, v_1 in var12.current do
-			local var20 = t[v_1]
+		for i_1, v_1 in var4.current do
+			local var9 = t[v_1]
 			table.insert(t_1, {
 				preset_id = v_1,
-				index = if var20 ~= nil then -1 else var20,
-				click = if var15.current == v_1 then 1 else 0
+				index = if var9 ~= nil then -1 else var9,
+				click = if var7.current == v_1 then 1 else 0
 			})
 		end
-		var11.current = nil
-		var12.current = {}
-		var13.current = {}
-		var14.current = {}
-		var15.current = nil
+		var3.current = nil
+		var4.current = {}
+		var5.current = {}
+		var6.current = {}
+		var7.current = nil
 		expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
 			event_type = constantsModule.Analytics.EventTypes.Dismiss,
 			component = constantsModule.Analytics.Components.AutocompleteDropdown,
@@ -52,61 +52,61 @@ return function(value)
 			preset_items = httpService:JSONEncode(t_1)
 		}, extendedStandardizedFields)
 	end, {})
-	local var17 = reactModule.useCallback(function(p0)
-		-- upvalues: var11 (ref), presetSearchModule (copy), getPresetChatStoreModule (copy), var15 (ref)
-		if var11.current == nil then return end
-		local presetIdForValue = presetSearchModule.getPresetIdForValue(getPresetChatStoreModule(false), p0)
+	local var10 = reactModule.useCallback(function(p1)
+		-- upvalues: var3 (ref), presetSearchModule (copy), getPresetChatStoreModule (copy), var7 (ref)
+		if var3.current == nil then return end
+		local presetIdForValue = presetSearchModule.getPresetIdForValue(getPresetChatStoreModule(false), p1)
 		
 		if presetIdForValue == nil then
 			return
 		end
-		var15.current = presetIdForValue
+		var7.current = presetIdForValue
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), getPresetChatStoreModule (copy), var9 (ref), presetSearchModule (copy), var13 (ref), var12 (ref), var14 (ref)
-		if not var10 then return end
-		local var22 = getPresetChatStoreModule(false)
+		-- upvalues: var2 (ref), getPresetChatStoreModule (copy), var1 (ref), presetSearchModule (copy), var5 (ref), var4 (ref), var6 (ref)
+		if not var2 then return end
+		local var11 = getPresetChatStoreModule(false)
 		local t = {}
 		
-		for i, v in var9 do
-			local presetIdForValue = presetSearchModule.getPresetIdForValue(var22, v)
+		for i, v in var1 do
+			local presetIdForValue = presetSearchModule.getPresetIdForValue(var11, v)
 			
 			if presetIdForValue ~= nil then
 				table.insert(t, presetIdForValue)
 				
-				if not var13.current[presetIdForValue] then
-					var13.current[presetIdForValue] = true
-					table.insert(var12.current, presetIdForValue)
+				if not var5.current[presetIdForValue] then
+					var5.current[presetIdForValue] = true
+					table.insert(var4.current, presetIdForValue)
 				end
 			end
 		end
-		var14.current = t
-	end, { var10, var9 })
+		var6.current = t
+	end, { var2, var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var16 (ref), var11 (ref), httpService (copy), expChatSharedModule (copy), constantsModule (copy), extendedStandardizedFields (copy)
-		if not var10 then
-			var16()
+		-- upvalues: var2 (ref), var8 (ref), var3 (ref), httpService (copy), expChatSharedModule (copy), constantsModule (copy), extendedStandardizedFields (copy)
+		if not var2 then
+			var8()
 			
 			return
-		elseif var11.current == nil then
-			local var25 = httpService:GenerateGUID(false)
-			var11.current = var25
+		elseif var3.current == nil then
+			local var12 = httpService:GenerateGUID(false)
+			var3.current = var12
 			expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
 				event_type = constantsModule.Analytics.EventTypes.Show,
 				component = constantsModule.Analytics.Components.AutocompleteDropdown,
-				autocomplete_session_id = var25
+				autocomplete_session_id = var12
 			}, extendedStandardizedFields)
 			
 			return
 		end
-	end, { var10, var16 })
+	end, { var2, var8 })
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref)
+		-- upvalues: var8 (ref)
 		return function()
-			-- upvalues: var16 (copy)
-			var16()
+			-- upvalues: var8 (copy)
+			var8()
 		end
-	end, { var16 })
+	end, { var8 })
 	
-	return { recordPresetChosen = var17 }
+	return { recordPresetChosen = var10 }
 end

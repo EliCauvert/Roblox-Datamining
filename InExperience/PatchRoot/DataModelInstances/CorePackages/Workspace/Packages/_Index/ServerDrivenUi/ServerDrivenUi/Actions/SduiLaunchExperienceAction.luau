@@ -8,40 +8,40 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local launchExperience = sduiCoreSystemModule.SduiActionType.LaunchExperience
 
-return function(p0, p1, p2, _)
+return function(p1, p2, p3, _)
 	-- upvalues: sduiErrorType (ref), launchExperience (ref), fFlagDeferInExperienceRbxmDownload (ref), cryoModule (ref), sduiReportGamePlayIntent (ref), fFlagLuaAppFixLaunchGameSourceParam (ref), launchGame (ref)
-	local var2 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var2 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = launchExperience
-		}, p2.appPage)
+		}, p3.appPage)
 		
 		return
 	end
-	assert(var2, "actionParams must exist")
-	local placeId = var2.placeId
+	assert(var1, "actionParams must exist")
+	local placeId = var1.placeId
 	
 	if placeId == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing placeId",
 			propName = "placeId",
 			name = launchExperience
-		}, p2.appPage)
+		}, p3.appPage)
 		
 		return
 	end
-	local universeId = var2.universeId
-	local launchSource = var2.launchSource
-	local experienceJoinData = var2.experienceJoinData
+	local universeId = var1.universeId
+	local launchSource = var1.launchSource
+	local experienceJoinData = var1.experienceJoinData
 	
 	if fFlagDeferInExperienceRbxmDownload then
 		experienceJoinData = cryoModule.Dictionary.join(experienceJoinData or {}, { universeId = universeId })
 	end
 	sduiReportGamePlayIntent({
-		sduiContext = p2,
-		analyticsContext = p1,
+		sduiContext = p3,
+		analyticsContext = p2,
 		universeId = tostring(universeId or ""),
 		placeId = placeId
 	})

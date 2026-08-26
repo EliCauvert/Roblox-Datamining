@@ -20,55 +20,55 @@ return {
 		rewardedVideoAdPlayer.ResetOnSpawn = false
 		rewardedVideoAdPlayer.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		rewardedVideoAdPlayer.Parent = coreGuiService
-		local var9 = reactRobloxModule.createRoot(rewardedVideoAdPlayer)
+		local var1 = reactRobloxModule.createRoot(rewardedVideoAdPlayer)
 		
-		function adService.onDemandVideoPlayInUI(p0)
-			-- upvalues: var9 (ref), adService (copy), flagsModule (copy), reactModule (copy), baseComponentModule (copy), adPlayerComponentModule (copy)
-			local function _(p1)
-				-- upvalues: var9 (copy), adService (copy), p0 (ref)
-				var9:render(nil)
-				adService:onDemandVideoCompleteFromUI(p1, p0.encryptedAdTrackingData, p0.encryptionMetadata, p0.rewardDetails)
+		function adService.onDemandVideoPlayInUI(p1)
+			-- upvalues: var1 (ref), adService (copy), flagsModule (copy), reactModule (copy), baseComponentModule (copy), adPlayerComponentModule (copy)
+			local function _(p2)
+				-- upvalues: var1 (copy), adService (copy), p1 (ref)
+				var1:render(nil)
+				adService:onDemandVideoCompleteFromUI(p2, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 			end
 			
-			local var10 = if flagsModule.GetEnableLuaRewardTimerUI() and p0.durationNeededForRewardMs and p0.durationNeededEnum == "Variable" then p0.durationNeededForRewardMs / 1000 else nil
+			local var2 = if flagsModule.GetEnableLuaRewardTimerUI() and p1.durationNeededForRewardMs and p1.durationNeededEnum == "Variable" then p1.durationNeededForRewardMs / 1000 else nil
 			local bindableEvent = Instance.new("BindableEvent")
-			local var12 = nil
-			var9:render(reactModule.createElement(baseComponentModule, {}, {
+			local var3 = nil
+			var1:render(reactModule.createElement(baseComponentModule, {}, {
 				reactModule.createElement(adPlayerComponentModule, {
-					isEligible = p0.isEligible,
-					creativeAssetUrl = p0.creativeAssetUrl,
-					durationNeededForReward = if flagsModule.GetEnableLuaRewardTimerUI() then var10 else nil,
+					isEligible = p1.isEligible,
+					creativeAssetUrl = p1.creativeAssetUrl,
+					durationNeededForReward = if flagsModule.GetEnableLuaRewardTimerUI() then var2 else nil,
 					onVideoFrameLoaded = function(p2)
-						-- upvalues: var12 (write), bindableEvent (ref)
-						var12 = p2
+						-- upvalues: var3 (write), bindableEvent (ref)
+						var3 = p2
 						
 						if bindableEvent then
 							bindableEvent:Fire()
 						end
 					end,
 					onCancel = function()
-						-- upvalues: var9 (copy), adService (copy), p0 (ref)
+						-- upvalues: var1 (copy), adService (copy), p1 (ref)
 						local showInterrupted = Enum.ShowAdResult.ShowInterrupted
-						var9:render(nil)
-						adService:onDemandVideoCompleteFromUI(showInterrupted, p0.encryptedAdTrackingData, p0.encryptionMetadata, p0.rewardDetails)
+						var1:render(nil)
+						adService:onDemandVideoCompleteFromUI(showInterrupted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 					end,
 					onComplete = function()
-						-- upvalues: var9 (copy), adService (copy), p0 (ref)
+						-- upvalues: var1 (copy), adService (copy), p1 (ref)
 						local showCompleted = Enum.ShowAdResult.ShowCompleted
-						var9:render(nil)
-						adService:onDemandVideoCompleteFromUI(showCompleted, p0.encryptedAdTrackingData, p0.encryptionMetadata, p0.rewardDetails)
+						var1:render(nil)
+						adService:onDemandVideoCompleteFromUI(showCompleted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 					end,
 					showWhyThisAd = function()
 						-- upvalues: adService (copy)
 						adService:HandleWhyThisAdClicked("advertiserName", "payerName")
 					end,
 					getReportAdInfo = function()
-						-- upvalues: p0 (ref)
+						-- upvalues: p1 (ref)
 						return {
 							adUnitName = "Rewarded Video Ad",
-							assetId = p0.creativeAssetUrl,
-							encryptionMetadata = p0.encryptionMetadata,
-							encryptedAdTrackingData = p0.encryptedAdTrackingData
+							assetId = p1.creativeAssetUrl,
+							encryptionMetadata = p1.encryptionMetadata,
+							encryptedAdTrackingData = p1.encryptedAdTrackingData
 						}
 					end
 				})
@@ -76,7 +76,7 @@ return {
 			bindableEvent.Event:Wait()
 			bindableEvent:Destroy()
 			
-			return var12
+			return var3
 		end
 	end
 }

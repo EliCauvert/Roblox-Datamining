@@ -20,11 +20,11 @@ local t_2 = {
 }
 
 return {
-	logAdDisclosureMenuToggled = function(p0)
+	logAdDisclosureMenuToggled = function(p1)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogCounter(t, {
 			standardizedFields = list,
-			customFields = { isOpened = p0 }
+			customFields = { isOpened = p1 }
 		}, 1)
 	end,
 	logAdDisclosureWhyThisAdToggled = function(p1)

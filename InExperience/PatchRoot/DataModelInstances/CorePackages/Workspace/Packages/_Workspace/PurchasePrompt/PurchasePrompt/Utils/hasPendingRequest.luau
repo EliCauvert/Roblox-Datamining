@@ -1,6 +1,6 @@
 ﻿local requestTypeModule = require(script.Parent.Parent.Enums.RequestType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: requestTypeModule (ref)
-	return p0.promptRequest.requestType ~= requestTypeModule.None
+	return p1.promptRequest.requestType ~= requestTypeModule.None
 end

@@ -27,77 +27,77 @@ local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 
-function InterventionDialog(p0)
+function InterventionDialog(p1)
 	-- upvalues: useLayerCollector (ref), reactModule (ref), useTokens (ref), useStyle (ref), useInterventionPlacementModule (ref), useLocalization (ref), constantsModule (ref), interventionAnalyticsModule (ref), notificationModalsManagerModule (ref), accept (ref), useScrollFrameHeightCalculationModule (ref), useCursor (ref), modalWindow (ref), view (ref), scrollView (ref), scrollBarVisibility (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), icon (ref), text (ref), fFlagExpChatEnableFriendsTab (ref), buttonStack (ref), buttonType (ref)
 	local absoluteSize = useLayerCollector().absoluteSize
-	local var10 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
-	local var11 = useTokens()
-	local var12 = useStyle()
-	local var13 = useInterventionPlacementModule()
-	local var14 = useLocalization(constantsModule.localizationKeys)
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: interventionAnalyticsModule (copy), p0 (ref), var13 (ref), var10 (ref)
+	local var1 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
+	local var2 = useTokens()
+	local var3 = useStyle()
+	local var4 = useInterventionPlacementModule()
+	local var5 = useLocalization(constantsModule.localizationKeys)
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var4 (ref), var1 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogCtaClicked, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.CtaClicked,
-			counterNamespace = p0.namespaceForAnalytics,
-			interventionType = p0.interventionTypeForAnalytics,
-			placement = var13,
-			renderedTimestamp = var10.current,
-			eventId = p0.eventId,
-			evidence = p0.evidence,
-			duration = p0.durationForAnalytics
+			counterNamespace = p1.namespaceForAnalytics,
+			interventionType = p1.interventionTypeForAnalytics,
+			placement = var4,
+			renderedTimestamp = var1.current,
+			eventId = p1.eventId,
+			evidence = p1.evidence,
+			duration = p1.durationForAnalytics
 		})
-		p0.onDismiss()
+		p1.onDismiss()
 	end, {
-		var10, p0.interventionTypeForAnalytics, p0.eventId, p0.evidence,
-		p0.durationForAnalytics, p0.onDismiss
+		var1, p1.interventionTypeForAnalytics, p1.eventId, p1.evidence,
+		p1.durationForAnalytics, p1.onDismiss
 	})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), notificationModalsManagerModule (copy), accept (copy), var14 (ref), var12 (ref), interventionAnalyticsModule (copy), var13 (ref), var10 (ref)
-		p0.onDismiss()
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), notificationModalsManagerModule (copy), accept (copy), var5 (ref), var3 (ref), interventionAnalyticsModule (copy), var4 (ref), var1 (ref)
+		p1.onDismiss()
 		notificationModalsManagerModule.SetUIBloxToast({
 			iconImage = accept,
-			toastTitle = var14.TakeALookText,
-			toastSubtitle = var14.FeedbackHelpsText,
+			toastTitle = var5.TakeALookText,
+			toastSubtitle = var5.FeedbackHelpsText,
 			sequenceNumber = DateTime.now().UnixTimestamp,
 			iconColorStyle = {
 				Transparency = 0,
-				Color = var12.Tokens.Color.System.Success.Color3
+				Color = var3.Tokens.Color.System.Success.Color3
 			}
 		})
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogAppealClicked, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.AppealClicked,
-			counterNamespace = p0.namespaceForAnalytics,
-			interventionType = p0.interventionTypeForAnalytics,
-			placement = var13,
-			renderedTimestamp = var10.current,
-			eventId = p0.eventId,
-			evidence = p0.evidence,
-			duration = p0.durationForAnalytics
+			counterNamespace = p1.namespaceForAnalytics,
+			interventionType = p1.interventionTypeForAnalytics,
+			placement = var4,
+			renderedTimestamp = var1.current,
+			eventId = p1.eventId,
+			evidence = p1.evidence,
+			duration = p1.durationForAnalytics
 		})
 	end, {
-		p0.onDismiss,
-		p0.interventionTypeForAnalytics,
-		p0.eventId,
-		p0.evidence,
-		p0.durationForAnalytics
+		p1.onDismiss,
+		p1.interventionTypeForAnalytics,
+		p1.eventId,
+		p1.evidence,
+		p1.durationForAnalytics
 	})
 	reactModule.useEffect(function()
-		-- upvalues: interventionAnalyticsModule (copy), p0 (ref), var13 (ref), var10 (ref)
+		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var4 (ref), var1 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogRendered, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.ModalAppeared,
-			counterNamespace = p0.namespaceForAnalytics,
-			interventionType = p0.interventionTypeForAnalytics,
-			placement = var13,
-			renderedTimestamp = var10.current,
-			eventId = p0.eventId,
-			evidence = p0.evidence,
-			duration = p0.durationForAnalytics
+			counterNamespace = p1.namespaceForAnalytics,
+			interventionType = p1.interventionTypeForAnalytics,
+			placement = var4,
+			renderedTimestamp = var1.current,
+			eventId = p1.eventId,
+			evidence = p1.evidence,
+			duration = p1.durationForAnalytics
 		})
-	end, { var10, p0.eventId })
-	local var17 = useScrollFrameHeightCalculationModule({})
-	local var18 = if absoluteSize.X > 540 then "gap-xlarge" else "gap-medium"
-	local var19 = useCursor(UDim.new(0, var12.Tokens.Radius.Medium), var12.Tokens.Size.Size_100, var12.Tokens.Size.Size_50)
+	end, { var1, p1.eventId })
+	local var8 = useScrollFrameHeightCalculationModule({})
+	local var9 = if absoluteSize.X > 540 then "gap-xlarge" else "gap-medium"
+	local var10 = useCursor(UDim.new(0, var3.Tokens.Radius.Medium), var3.Tokens.Size.Size_100, var3.Tokens.Size.Size_50)
 	
 	return reactModule.createElement(modalWindow, { isFullHeight = false, screenSize = absoluteSize }, {
 		ContentContainer = reactModule.createElement(view, {
@@ -106,7 +106,7 @@ function InterventionDialog(p0)
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
 			ScrollView = reactModule.createElement(scrollView, {
-				Size = UDim2.new(1, 0, 0, var17.scrollFrameContainerHeight),
+				Size = UDim2.new(1, 0, 0, var8.scrollFrameContainerHeight),
 				scroll = {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.new(1, 0, 1, 0),
@@ -117,29 +117,29 @@ function InterventionDialog(p0)
 				FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
 					isIsolated = true,
 					surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-					isAutoFocusRoot = var13 ~= constantsModule.InterventionPlacementType.InApp,
+					isAutoFocusRoot = var4 ~= constantsModule.InterventionPlacementType.InApp,
 					frameProps = {
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}
 				}, {
 					InnerContent = reactModule.createElement(view, {
-						Size = UDim2.new(1, if var17.shouldShowScrollBar then -constantsModule.SCROLL_BAR_WIDTH else 0, 0, 0),
+						Size = UDim2.new(1, if var8.shouldShowScrollBar then -constantsModule.SCROLL_BAR_WIDTH else 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						tag = `col {var18} align-x-center align-y-center` .. (if var17.shouldShowScrollBar then " padding-right-xsmall" else ""),
-						onAbsoluteSizeChanged = var17.onInnerContentSizeChanged
+						tag = `col {var9} align-x-center align-y-center` .. (if var8.shouldShowScrollBar then " padding-right-xsmall" else ""),
+						onAbsoluteSizeChanged = var8.onInnerContentSizeChanged
 					}, {
 						IconAndText = reactModule.createElement(view, {
 							LayoutOrder = 1,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
-							tag = if absoluteSize.X > 540 then `col {var18} align-x-center` else `row {var18} align-x-center align-y-center`
+							tag = if absoluteSize.X > 540 then `col {var9} align-x-center` else `row {var9} align-x-center align-y-center`
 						}, {
-							Icon = if p0.iconName then reactModule.createElement(icon, {
+							Icon = if p1.iconName then reactModule.createElement(icon, {
 								LayoutOrder = 1,
-								size = p0.iconSize,
-								name = p0.iconName,
-								style = p0.iconStyle
+								size = p1.iconSize,
+								name = p1.iconName,
+								style = p1.iconStyle
 							}) else nil,
 							TextContent = reactModule.createElement(view, {
 								LayoutOrder = 2,
@@ -147,23 +147,23 @@ function InterventionDialog(p0)
 								Size = UDim2.new(1, 0, 0, 0),
 								AutomaticSize = Enum.AutomaticSize.Y
 							}, {
-								TitleText = if p0.titleText then reactModule.createElement(text, {
+								TitleText = if p1.titleText then reactModule.createElement(text, {
 									LayoutOrder = 1,
 									TextWrapped = true,
-									Text = p0.titleText,
-									textStyle = var11.Color.Content.Emphasis,
-									fontStyle = var11.Typography.TitleLarge,
+									Text = p1.titleText,
+									textStyle = var2.Color.Content.Emphasis,
+									fontStyle = var2.Typography.TitleLarge,
 									TextXAlignment = if absoluteSize.X > 540 then Enum.TextXAlignment.Center else Enum.TextXAlignment.Left,
 									TextYAlignment = Enum.TextYAlignment.Center,
 									Size = UDim2.new(1, 0, 0, 0),
 									AutomaticSize = Enum.AutomaticSize.Y
 								}) else nil,
-								BodyText = if p0.bodyText then reactModule.createElement(text, {
+								BodyText = if p1.bodyText then reactModule.createElement(text, {
 									LayoutOrder = 2,
 									TextWrapped = true,
-									Text = p0.bodyText,
-									textStyle = var11.Color.Content.Default,
-									fontStyle = var11.Typography.BodyMedium,
+									Text = p1.bodyText,
+									textStyle = var2.Color.Content.Default,
+									fontStyle = var2.Typography.BodyMedium,
 									TextXAlignment = if absoluteSize.X > 540 then Enum.TextXAlignment.Center else Enum.TextXAlignment.Left,
 									TextYAlignment = Enum.TextYAlignment.Center,
 									Size = UDim2.new(1, 0, 0, 0),
@@ -183,18 +183,18 @@ function InterventionDialog(p0)
 										buttonType = buttonType.PrimarySystem,
 										props = {
 											layoutOrder = 1,
-											cursor = var19,
-											text = var14.IUnderstandText,
-											onActivated = var15
+											cursor = var10,
+											text = var5.IUnderstandText,
+											onActivated = var6
 										}
 									},
 									{
 										buttonType = buttonType.Secondary,
 										props = {
 											layoutOrder = 2,
-											cursor = var19,
-											text = var14.MistakeText,
-											onActivated = var16
+											cursor = var10,
+											text = var5.MistakeText,
+											onActivated = var7
 										}
 									}
 								}

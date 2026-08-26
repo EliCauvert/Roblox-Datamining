@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref)
 	local var1 = useTokens()
 	local t = {
@@ -17,12 +17,12 @@ return function(p0)
 	}
 	local text = nil
 	
-	for i, v in p0.states do
-		local var3 = if v.isSelected then var1.Color.Stroke.Emphasis else var1.Color.Stroke.Muted
+	for i, v in p1.states do
+		local var2 = if v.isSelected then var1.Color.Stroke.Emphasis else var1.Color.Stroke.Muted
 		t[`{i}-{v.text}`] = reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			BackgroundColor3 = var3.Color3,
-			Transparency = var3.Transparency,
+			BackgroundColor3 = var2.Color3,
+			Transparency = var2.Transparency,
 			Size = UDim2.new(1, 0, 0, var1.Size.Size_150),
 			LayoutOrder = i
 		})
@@ -35,7 +35,7 @@ return function(p0)
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = p0.ZIndex
+		ZIndex = p1.ZIndex
 	}, {
 		ListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -43,11 +43,11 @@ return function(p0)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 0)
 		}),
-		Padding = if p0.paddingTop or p0.paddingBottom or (p0.paddingLeft or p0.paddingRight) then reactModule.createElement("UIPadding", {
-			PaddingTop = p0.paddingTop,
-			PaddingBottom = p0.paddingBottom,
-			PaddingLeft = p0.paddingLeft,
-			PaddingRight = p0.paddingRight
+		Padding = if p1.paddingTop or p1.paddingBottom or (p1.paddingLeft or p1.paddingRight) then reactModule.createElement("UIPadding", {
+			PaddingTop = p1.paddingTop,
+			PaddingBottom = p1.paddingBottom,
+			PaddingLeft = p1.paddingLeft,
+			PaddingRight = p1.paddingRight
 		}) else nil,
 		Tabs = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

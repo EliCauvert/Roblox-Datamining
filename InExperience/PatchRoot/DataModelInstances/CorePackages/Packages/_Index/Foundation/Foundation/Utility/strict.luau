@@ -1,14 +1,14 @@
-﻿return function(p0, p1)
-	p1 = p1 or tostring(p0)
+﻿return function(p1, p2)
+	p2 = p2 or tostring(p1)
 	
-	return setmetatable(p0, {
-		__index = function(_, p2)
-			-- upvalues: p1 (ref)
-			error(("%q (%s) is not a valid member of %s"):format(tostring(p2), typeof(p2), p1), 2)
+	return setmetatable(p1, {
+		__index = function(_, p3)
+			-- upvalues: p2 (ref)
+			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), p2), 2)
 		end,
 		__newindex = function(_, p3)
-			-- upvalues: p1 (ref)
-			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), p1), 2)
+			-- upvalues: p2 (ref)
+			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), p2), 2)
 		end
 	})
 end

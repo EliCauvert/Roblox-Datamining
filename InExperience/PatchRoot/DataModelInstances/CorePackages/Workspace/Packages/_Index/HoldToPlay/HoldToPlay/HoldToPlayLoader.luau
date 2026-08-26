@@ -13,26 +13,26 @@ local setGamePlaySession = robloxAppSessionizationModule.SetGamePlaySession
 local sessionType = robloxAppSessionizationModule.SessionType
 local holdToPlayLauncher = require(parent.ExperienceAnalytics).Constants.Context.HoldToPlayLauncher
 
-return function(p0)
+return function(p1)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), appSessionService (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), holdToPlayLauncher (ref), reactModule (ref), setGamePlaySession (ref), sessionType (ref), playButtonStates (ref)
-	local var4 = useRoactService(appSessionService)
-	local var5 = usePlayButtonState(useRoactService(roactNetworking), p0.universeId)
-	local var6 = useOnPlayButtonCallback(p0.universeId, nil, holdToPlayLauncher, nil, nil)
+	local var1 = useRoactService(appSessionService)
+	local var2 = usePlayButtonState(useRoactService(roactNetworking), p1.universeId)
+	local var3 = useOnPlayButtonCallback(p1.universeId, nil, holdToPlayLauncher, nil, nil)
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), p0 (ref), setGamePlaySession (copy), var4 (ref), sessionType (copy), var6 (ref), playButtonStates (copy)
-		local playButtonState = var5.playButtonState
+		-- upvalues: var2 (ref), p1 (ref), setGamePlaySession (copy), var1 (ref), sessionType (copy), var3 (ref), playButtonStates (copy)
+		local playButtonState = var2.playButtonState
 		
-		if p0.shouldAttemptLaunch then
-			setGamePlaySession(var4, sessionType.StructuralIdentifier.GamePlayFromHoldToPlay, true)
-			var6(playButtonState, p0.reportExperienceLaunched)
+		if p1.shouldAttemptLaunch then
+			setGamePlaySession(var1, sessionType.StructuralIdentifier.GamePlayFromHoldToPlay, true)
+			var3(playButtonState, p1.reportExperienceLaunched)
 			
-			if p0.onLaunched and playButtonState == playButtonStates.Playable then
-				p0.onLaunched()
+			if p1.onLaunched and playButtonState == playButtonStates.Playable then
+				p1.onLaunched()
 			end
 		end
 	end, {
-		p0.shouldAttemptLaunch, p0.onLaunched, var5.playButtonState, var4,
-		p0.reportExperienceLaunched, var6
+		p1.shouldAttemptLaunch, p1.onLaunched, var2.playButtonState, var1,
+		p1.reportExperienceLaunched, var3
 	})
 	
 	return nil

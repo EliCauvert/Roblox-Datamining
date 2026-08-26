@@ -4,8 +4,8 @@ local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 local localizationService = game:GetService("LocalizationService")
 
-local function _(p0)
-	return if type(p0) == "number" then p0 elseif type(p0) == "string" then tonumber(p0) else nil
+local function _(p1)
+	return if type(p1) == "number" then p1 elseif type(p1) == "string" then tonumber(p1) else nil
 end
 
 local _ = function(p1)
@@ -17,73 +17,73 @@ local _ = function(p1)
 	return if ok and status then status else nil
 end
 
-local function resolveDateTimeForFormat(p2)
+local function resolveDateTimeForFormat(p1)
 	-- upvalues: resolveDateTimeForFormat (ref)
-	if type(p2) == "number" then
-		return DateTime.fromUnixTimestamp(p2)
-	elseif type(p2) == "string" then
-		local var6 = if type(p2) == "number" then p2 elseif type(p2) == "string" then tonumber(p2) else nil
+	if type(p1) == "number" then
+		return DateTime.fromUnixTimestamp(p1)
+	elseif type(p1) == "string" then
+		local var1 = if type(p1) == "number" then p1 elseif type(p1) == "string" then tonumber(p1) else nil
 		
-		if var6 ~= nil then
-			return DateTime.fromUnixTimestamp(var6)
+		if var1 ~= nil then
+			return DateTime.fromUnixTimestamp(var1)
 		end
 		local ok, status = pcall(function()
-			-- upvalues: p2 (ref)
-			return DateTime.fromIsoDate(p2)
+			-- upvalues: p1 (ref)
+			return DateTime.fromIsoDate(p1)
 		end)
 		
 		return if ok and status then status else nil
 	else
-		return if type(p2) == "table" and p2.seconds ~= nil then resolveDateTimeForFormat(p2.seconds) else nil
+		return if type(p1) == "table" and p1.seconds ~= nil then resolveDateTimeForFormat(p1.seconds) else nil
 	end
 end
 
 return {
-	applyFormatArgFormatter = function(p3, p4, p5)
+	applyFormatArgFormatter = function(p1, p2, p3)
 		-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref), localizationModule (ref), localizationService (ref), resolveDateTimeForFormat (ref)
-		if p4.type == "TYPE_INVALID" or p4.type == nil then
-			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, { message = "Formatter specified without a type" }, p5)
+		if p2.type == "TYPE_INVALID" or p2.type == nil then
+			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, { message = "Formatter specified without a type" }, p3)
 			
 			return nil
-		elseif p4.type == "TYPE_NUMBER_ABBREVIATE" then
-			local var7 = if type(p3) == "number" then p3 elseif type(p3) == "string" then tonumber(p3) else nil
+		elseif p2.type == "TYPE_NUMBER_ABBREVIATE" then
+			local var1 = if type(p1) == "number" then p1 elseif type(p1) == "string" then tonumber(p1) else nil
 			
-			if var7 == nil then
+			if var1 == nil then
 				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
 					message = `Formatter TYPE_NUMBER_ABBREVIATE received incompatible type '{typeof(p3)}'`
-				}, p5)
+				}, p3)
 				
 				return nil
 			end
-			return localizationModule.NumberLocalization.abbreviate(var7, localizationService.RobloxLocaleId)
-		elseif p4.type == "TYPE_NUMBER_LOCALIZE" then
-			local var8 = if type(p3) == "number" then p3 elseif type(p3) == "string" then tonumber(p3) else nil
+			return localizationModule.NumberLocalization.abbreviate(var1, localizationService.RobloxLocaleId)
+		elseif p2.type == "TYPE_NUMBER_LOCALIZE" then
+			local var2 = if type(p1) == "number" then p1 elseif type(p1) == "string" then tonumber(p1) else nil
 			
-			if var8 == nil then
+			if var2 == nil then
 				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
 					message = `Formatter TYPE_NUMBER_LOCALIZE received incompatible type '{typeof(p3)}'`
-				}, p5)
+				}, p3)
 				
 				return nil
 			end
-			return localizationModule.NumberLocalization.localize(var8, localizationService.RobloxLocaleId)
-		elseif p4.type ~= "TYPE_DATE_FORMAT" then
-			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, { message = `Unknown formatter type '{p4.type}'` }, p5)
+			return localizationModule.NumberLocalization.localize(var2, localizationService.RobloxLocaleId)
+		elseif p2.type ~= "TYPE_DATE_FORMAT" then
+			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, { message = `Unknown formatter type '{p4.type}'` }, p3)
 			
 			return nil
 		end
-		local var9 = resolveDateTimeForFormat(p3)
+		local var3 = resolveDateTimeForFormat(p1)
 		
-		if var9 == nil then
+		if var3 == nil then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, {
 				message = `Formatter TYPE_DATE_FORMAT received incompatible type '{typeof(p3)}'`
-			}, p5)
+			}, p3)
 			
 			return nil
 		end
-		local config = p4.config
+		local config = p2.config
 		local _ = nil
 		
-		return var9:FormatLocalTime(if config and config.type == "date_config" and (config.value.pattern and config.value.pattern ~= "") then config.value.pattern else "L", localizationService.RobloxLocaleId)
+		return var3:FormatLocalTime(if config and config.type == "date_config" and (config.value.pattern and config.value.pattern ~= "") then config.value.pattern else "L", localizationService.RobloxLocaleId)
 	end
 }

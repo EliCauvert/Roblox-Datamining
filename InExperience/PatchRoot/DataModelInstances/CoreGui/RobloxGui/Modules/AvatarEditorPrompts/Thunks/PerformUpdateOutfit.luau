@@ -3,14 +3,14 @@ local parent = script.Parent.Parent
 local closeOpenPromptModule = require(parent.Actions.CloseOpenPrompt)
 local getConformedHumanoidDescriptionModule = require(parent.GetConformedHumanoidDescription)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getConformedHumanoidDescriptionModule (ref), avatarEditorService (ref), closeOpenPromptModule (ref)
-	getConformedHumanoidDescriptionModule(p0:getState().promptInfo.humanoidDescription, false):andThen(function(p1)
+	getConformedHumanoidDescriptionModule(p1:getState().promptInfo.humanoidDescription, false):andThen(function(p2)
 		-- upvalues: avatarEditorService (copy)
-		avatarEditorService:PerformUpdateOutfit(p1)
+		avatarEditorService:PerformUpdateOutfit(p2)
 	end, function(_)
 		-- upvalues: avatarEditorService (copy)
 		avatarEditorService:SignalUpdateOutfitFailed()
 	end)
-	p0:dispatch(closeOpenPromptModule())
+	p1:dispatch(closeOpenPromptModule())
 end

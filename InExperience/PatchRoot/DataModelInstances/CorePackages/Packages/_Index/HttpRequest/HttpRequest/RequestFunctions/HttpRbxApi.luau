@@ -4,71 +4,71 @@ local statusCodeModule = require(script.Parent.Parent.StatusCode)
 local extreme = Enum.ThrottlingPriority.Extreme
 local applicationJson = Enum.HttpContentType.ApplicationJson
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: httpRbxApiService (ref), extreme (ref)
 	return pcall(function()
-		-- upvalues: httpRbxApiService (copy), p0 (ref), p1 (ref), extreme (copy)
-		return httpRbxApiService:GetAsyncFullUrl(p0, p1.throttlingPriority or extreme, p1.httpRequestType or nil)
+		-- upvalues: httpRbxApiService (copy), p1 (ref), p2 (ref), extreme (copy)
+		return httpRbxApiService:GetAsyncFullUrl(p1, p2.throttlingPriority or extreme, p2.httpRequestType or nil)
 	end)
 end
 
-local function doHttpPost(p2, p3)
+local function doHttpPost(p1, p2)
 	-- upvalues: httpService (ref), httpRbxApiService (ref), extreme (ref), applicationJson (ref)
 	local postBody = nil
-	assert(p3.postBody, "Expected a postBody to be specified with this request")
+	assert(p2.postBody, "Expected a postBody to be specified with this request")
 	
-	if type(p3.postBody) == "table" then
-		postBody = httpService:JSONEncode(p3.postBody)
-	elseif type(p3.postBody) == "string" then
-		postBody = p3.postBody
+	if type(p2.postBody) == "table" then
+		postBody = httpService:JSONEncode(p2.postBody)
+	elseif type(p2.postBody) == "string" then
+		postBody = p2.postBody
 	else
 		error("Expected postBody to be a string or table")
 	end
 	return pcall(function()
-		-- upvalues: httpRbxApiService (copy), p2 (ref), postBody (write), p3 (ref), extreme (copy), applicationJson (copy)
-		return httpRbxApiService:PostAsyncFullUrl(p2, postBody, p3.throttlingPriority or extreme, p3.contentType or applicationJson, p3.httpRequestType or nil)
+		-- upvalues: httpRbxApiService (copy), p1 (ref), postBody (write), p2 (ref), extreme (copy), applicationJson (copy)
+		return httpRbxApiService:PostAsyncFullUrl(p1, postBody, p2.throttlingPriority or extreme, p2.contentType or applicationJson, p2.httpRequestType or nil)
 	end)
 end
 
-local function createResponse(p4)
+local function createResponse(p1)
 	-- upvalues: statusCodeModule (ref), httpService (ref)
 	local OK = statusCodeModule.OK
 	local ok, _ = pcall(function()
-		-- upvalues: httpService (copy), p4 (ref)
-		return httpService:JSONDecode(p4)
+		-- upvalues: httpService (copy), p1 (ref)
+		return httpService:JSONDecode(p1)
 	end)
 	
 	if not ok then
-		OK = tonumber(p4:sub(6, 8))
+		OK = tonumber(p1:sub(6, 8))
 	end
-	return { Body = p4, StatusCode = OK, Headers = {} }
+	return { Body = p1, StatusCode = OK, Headers = {} }
 end
 
-return function(p5, p6, p7)
+return function(p1, p2, p3)
 	-- upvalues: httpRbxApiService (ref), extreme (ref), doHttpPost (ref), createResponse (ref)
 	return {
-		Start = function(_, p8)
-			-- upvalues: p6 (ref), p5 (ref), p7 (ref), httpRbxApiService (copy), extreme (copy), doHttpPost (copy), createResponse (copy)
-			local var5 = nil
-			local var6 = nil
+		Start = function(_, p4)
+			-- upvalues: p2 (ref), p1 (ref), p3 (ref), httpRbxApiService (copy), extreme (copy), doHttpPost (copy), createResponse (copy)
+			local var1 = nil
+			local var2 = nil
 			
-			if p6 == "GET" then
-				local var7 = p5
-				local var8 = p7
+			if p2 == "GET" then
+				local var3 = p1
+				local var4 = p3
 				local ok, status = pcall(function()
-					-- upvalues: httpRbxApiService (copy), var7 (ref), var8 (ref), extreme (copy)
-					return httpRbxApiService:GetAsyncFullUrl(var7, var8.throttlingPriority or extreme, var8.httpRequestType or nil)
+					-- upvalues: httpRbxApiService (copy), var3 (ref), var4 (ref), extreme (copy)
+					return httpRbxApiService:GetAsyncFullUrl(var3, var4.throttlingPriority or extreme, var4.httpRequestType or nil)
 				end)
-				var5 = ok
-				var6 = status
-			elseif p6 == "POST" then
-				local var9, var10 = doHttpPost(p5, p7)
-				var5 = var9
-				var6 = var10
+				var1 = ok
+				var2 = status
+			elseif p2 == "POST" then
+				local var5, var6 = doHttpPost(p1, p3)
+				var1 = var5
+				var2 = var6
 			else
 				error("Unsupported method: " .. p6)
 			end
-			p8(var5, createResponse(var6))
+			p4(var1, createResponse(var2))
 		end,
 		Cancel = function() end
 	}

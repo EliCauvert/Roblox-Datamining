@@ -15,17 +15,17 @@ local preparePaymentCheckCounterModule = require(parent.Events.PreparePaymentChe
 local usePlaystationPaymentsProtocolCommonFunctions = game:DefineFastFlag("UsePlaystationPaymentsProtocolCommonFunctions", false)
 local enableVRPreparePaymentCheck = game:DefineFastFlag("EnableVRPreparePaymentCheck", false)
 
-function GetPaymentMethod(p0)
+function GetPaymentMethod(p1)
 	-- upvalues: paymentPlatformModule (ref), enableVRPreparePaymentCheck (ref), getIsQuestPlatformModule (ref)
-	return if p0 == Enum.Platform.PS4 then "PlaystationStore" elseif p0 == paymentPlatformModule.Maquettes or enableVRPreparePaymentCheck and getIsQuestPlatformModule() then "QuestStore" elseif p0 == Enum.Platform.XBoxOne then "XboxStore" else ""
+	return if p1 == Enum.Platform.PS4 then "PlaystationStore" elseif p1 == paymentPlatformModule.Maquettes or enableVRPreparePaymentCheck and getIsQuestPlatformModule() then "QuestStore" elseif p1 == Enum.Platform.XBoxOne then "XboxStore" else ""
 end
 
 function IsPreparePaymentSuccessful(p1, p2)
 	-- upvalues: httpService (ref), httpRbxApiService (ref), url (ref), default (ref), preparePaymentCheckCounterModule (ref)
-	local var10 = httpService:JSONEncode({ paymentMethod = p1, providerProductId = p2 })
+	local var1 = httpService:JSONEncode({ paymentMethod = p1, providerProductId = p2 })
 	local ok, status = pcall(function()
-		-- upvalues: httpRbxApiService (copy), url (copy), var10 (ref)
-		return httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "payments-gateway/v1/prepare-payment", var10)
+		-- upvalues: httpRbxApiService (copy), url (copy), var1 (ref)
+		return httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "payments-gateway/v1/prepare-payment", var1)
 	end)
 	
 	if not ok then
@@ -42,15 +42,15 @@ function IsPreparePaymentSuccessful(p1, p2)
 	return false
 end
 
-function ConsolePreparePaymentCheck(p3)
+function ConsolePreparePaymentCheck(p1)
 	-- upvalues: userInputService (ref), usePlaystationPaymentsProtocolCommonFunctions (ref)
 	local platform = userInputService:GetPlatform()
-	local var12 = GetPaymentMethod(platform)
+	local var1 = GetPaymentMethod(platform)
 	
-	return if usePlaystationPaymentsProtocolCommonFunctions and (platform == Enum.Platform.PS4 or platform == Enum.Platform.PS5) then true else var12 == "" or platform == Enum.Platform.XBoxOne or IsPreparePaymentSuccessful(var12, p3)
+	return if usePlaystationPaymentsProtocolCommonFunctions and (platform == Enum.Platform.PS4 or platform == Enum.Platform.PS5) then true else var1 == "" or platform == Enum.Platform.XBoxOne or IsPreparePaymentSuccessful(var1, p1)
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: isVRAppBuild (ref), guiService (ref), getBlockingConsolePreparePaymentCheckModule (ref)
-	return if not (not isVRAppBuild() and not guiService:IsTenFootInterface()) then not getBlockingConsolePreparePaymentCheckModule() or ConsolePreparePaymentCheck(p4) else true
+	return if not (not isVRAppBuild() and not guiService:IsTenFootInterface()) then not getBlockingConsolePreparePaymentCheckModule() or ConsolePreparePaymentCheck(p1) else true
 end

@@ -15,39 +15,39 @@ local useEffectOnce = require(parent.RoactUtils).Hooks.useEffectOnce
 local eventNamesModule = require(profileQRCode.Analytics.EventNames)
 local useHasFailedToLoadModule = require(script.Parent.useHasFailedToLoad)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAnalyticsModule (ref), useLoadingStateModule (ref), useGetProfileShareUrlModule (ref), useRefreshQrSessionModule (ref), useShortUrlModule (ref), networkStatus (ref), reactModule (ref), eventNamesModule (ref), useEffectOnce (ref), useHasLoadedSuccessfullyModule (ref), useHasFailedToLoadModule (ref), QRCodeSucceededViewModule (ref), QRCodeFailedViewModule (ref), QRCodeLoadingViewModule (ref)
-	local var13 = useAnalyticsModule()
-	local var14 = useLoadingStateModule()
-	local var15 = useGetProfileShareUrlModule()
-	local var16 = useRefreshQrSessionModule()
-	local var17 = useShortUrlModule()
-	local var18 = var17 ~= nil
-	local var19 = var14 == networkStatus.Failed
+	local var1 = useAnalyticsModule()
+	local var2 = useLoadingStateModule()
+	local var3 = useGetProfileShareUrlModule()
+	local var4 = useRefreshQrSessionModule()
+	local var5 = useShortUrlModule()
+	local var6 = var5 ~= nil
+	local var7 = var2 == networkStatus.Failed
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), var13 (ref), eventNamesModule (copy)
-		var16():andThen(function(p1)
-			-- upvalues: var13 (copy), eventNamesModule (copy)
-			var13.fireEvent(eventNamesModule.RefreshQrSession, {
-				success = (if p1 then p1.responseBody else {}).Success,
-				responseCode = p1 and p1.responseCode
+		-- upvalues: var4 (ref), var1 (ref), eventNamesModule (copy)
+		var4():andThen(function(p2)
+			-- upvalues: var1 (copy), eventNamesModule (copy)
+			var1.fireEvent(eventNamesModule.RefreshQrSession, {
+				success = (if p2 then p2.responseBody else {}).Success,
+				responseCode = p2 and p2.responseCode
 			})
 		end)
 	end, {})
-	useEffectOnce(var15, not var18)
-	useHasLoadedSuccessfullyModule(var13, var18)
-	useHasFailedToLoadModule(var13, var19)
+	useEffectOnce(var3, not var6)
+	useHasLoadedSuccessfullyModule(var1, var6)
+	useHasFailedToLoadModule(var1, var7)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, 304, 0, if p0.isSmallScreen then 280 else 304),
-		LayoutOrder = p0.layoutOrder
+		Size = UDim2.new(0, 304, 0, if p1.isSmallScreen then 280 else 304),
+		LayoutOrder = p1.layoutOrder
 	}, {
-		View = if var18 then reactModule.createElement(QRCodeSucceededViewModule, {
+		View = if var6 then reactModule.createElement(QRCodeSucceededViewModule, {
 			qrCodeLength = 200,
 			padding = 24,
-			url = var17,
-			isSmallScreen = p0.isSmallScreen
-		}) elseif var19 then reactModule.createElement(QRCodeFailedViewModule, { padding = 24, onActivated = var15 }) else reactModule.createElement(QRCodeLoadingViewModule)
+			url = var5,
+			isSmallScreen = p1.isSmallScreen
+		}) elseif var7 then reactModule.createElement(QRCodeFailedViewModule, { padding = 24, onActivated = var3 }) else reactModule.createElement(QRCodeLoadingViewModule)
 	})
 end

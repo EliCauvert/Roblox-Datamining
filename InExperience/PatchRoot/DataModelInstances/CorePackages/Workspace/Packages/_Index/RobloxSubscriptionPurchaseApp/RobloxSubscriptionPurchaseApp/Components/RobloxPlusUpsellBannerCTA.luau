@@ -7,22 +7,22 @@ local badge = foundationModule.Badge
 local badgeVariant = foundationModule.Enums.BadgeVariant
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), badge (ref), badgeVariant (ref), text (ref)
-	local var2 = useLocalization({
+	local var1 = useLocalization({
 		getFreeTrialText = "Feature.RobloxSubscription.Label.FreeTrialText",
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe",
 		newBadge = "Feature.Catalog.Label.New"
 	})
 	
-	return if p0.shouldShowNewBadge then reactModule.createElement(view, {
+	return if p1.shouldShowNewBadge then reactModule.createElement(view, {
 		tag = "row align-y-center gap-xsmall auto-xy",
 		AnchorPoint = Vector2.new(1, 0.5),
 		Position = UDim2.new(1, 0, 0.5, 0)
 	}, {
 		NewBadge = reactModule.createElement(badge, {
 			LayoutOrder = 1,
-			text = var2.newBadge,
+			text = var1.newBadge,
 			variant = badgeVariant.Contrast
 		})
 	}) else reactModule.createElement(view, {
@@ -34,12 +34,12 @@ return function(p0)
 			tag = "auto-xy text-body-small content-default",
 			RichText = true,
 			Text = "<u>" .. reactModule.useCallback(function()
-				-- upvalues: p0 (ref), var2 (ref)
-				return if p0.productInfo.isFreeTrial then var2.getFreeTrialText else var2.subscribe
+				-- upvalues: p1 (ref), var1 (ref)
+				return if p1.productInfo.isFreeTrial then var1.getFreeTrialText else var1.subscribe
 			end, {
-				p0.productInfo.isFreeTrial,
-				var2.getFreeTrialText,
-				var2.subscribe
+				p1.productInfo.isFreeTrial,
+				var1.getFreeTrialText,
+				var1.subscribe
 			})() .. "</u>"
 		})
 	})

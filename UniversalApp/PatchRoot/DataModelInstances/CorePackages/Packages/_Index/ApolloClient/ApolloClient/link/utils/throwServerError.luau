@@ -3,13 +3,13 @@ local error = require(parent.Parent.LuauPolyfill).Error
 local _ = require(parent.luaUtils.Response)
 
 return {
-	throwServerError = function(p0, p1, p2)
+	throwServerError = function(p1, p2, p3)
 		-- upvalues: error (ref)
-		local serverError = error.new(p2)
+		local serverError = error.new(p3)
 		serverError.name = "ServerError"
-		serverError.response = p0
-		serverError.statusCode = p0.status
-		serverError.result = p1
+		serverError.response = p1
+		serverError.statusCode = p1.status
+		serverError.result = p2
 		error(serverError)
 	end
 }

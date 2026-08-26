@@ -9,9 +9,9 @@ local chatLandingWithDialogsNavigatorModule = require(script.Parent.chatLandingW
 local chatLandingWithDialogsNavigatorConnector = roactModule.Component:extend("ChatLandingWithDialogsNavigatorConnector")
 chatLandingWithDialogsNavigatorConnector.router = chatLandingWithDialogsNavigatorModule.router
 
-function chatLandingWithDialogsNavigatorConnector.render(p0)
+function chatLandingWithDialogsNavigatorConnector.render(p1)
 	-- upvalues: roactModule (ref), chatLandingWithDialogsNavigatorModule (ref)
-	return roactModule.createElement(chatLandingWithDialogsNavigatorModule, p0.props)
+	return roactModule.createElement(chatLandingWithDialogsNavigatorModule, p1.props)
 end
 
 return roactNavigationModule.createRobloxStackNavigator({

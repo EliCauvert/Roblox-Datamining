@@ -8,7 +8,7 @@ local systemScrimSignalStoreModule = require(systemScrim["data-model"].SystemScr
 
 return function()
 	-- upvalues: systemScrimSignalStoreModule (ref), coreGuiService (ref), reactModule (ref), systemScrimModule (ref), reactRobloxModule (ref)
-	local var6 = systemScrimSignalStoreModule(false)
+	local var1 = systemScrimSignalStoreModule(false)
 	local systemScrim = Instance.new("ScreenGui")
 	systemScrim.Name = "SystemScrim"
 	systemScrim.DisplayOrder = -2147483648
@@ -18,8 +18,8 @@ return function()
 	systemScrim.ScreenInsets = Enum.ScreenInsets.None
 	systemScrim.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
 	systemScrim.Parent = coreGuiService
-	local var8 = reactRobloxModule.createRoot(systemScrim)
-	var8:render(reactModule.createElement(systemScrimModule, { store = var6 }))
+	local var2 = reactRobloxModule.createRoot(systemScrim)
+	var2:render(reactModule.createElement(systemScrimModule, { store = var1 }))
 	
-	return { root = var8, store = var6 }
+	return { root = var2, store = var1 }
 end

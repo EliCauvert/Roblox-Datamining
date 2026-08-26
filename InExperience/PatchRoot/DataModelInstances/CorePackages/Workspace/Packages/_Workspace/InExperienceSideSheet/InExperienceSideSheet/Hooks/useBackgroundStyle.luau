@@ -13,17 +13,17 @@ end
 
 return function()
 	-- upvalues: useTokens (ref), signalsReactModule (ref), getBackgroundTransparency (ref), reactModule (ref)
-	local var6 = useTokens()
-	local var7 = signalsReactModule.useSignalBinding(getBackgroundTransparency)
+	local var1 = useTokens()
+	local var2 = signalsReactModule.useSignalBinding(getBackgroundTransparency)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var7 (ref), var6 (ref)
-		return var7:map(function(p0)
-			-- upvalues: var6 (copy)
+		-- upvalues: var2 (ref), var1 (ref)
+		return var2:map(function(p1)
+			-- upvalues: var1 (copy)
 			return {
-				Color3 = var6.Color.OverMedia.OverMedia_0.Color3,
-				Transparency = p0
+				Color3 = var1.Color.OverMedia.OverMedia_0.Color3,
+				Transparency = p1
 			}
 		end)
-	end, { var6.Color.OverMedia.OverMedia_0.Color3 })
+	end, { var1.Color.OverMedia.OverMedia_0.Color3 })
 end

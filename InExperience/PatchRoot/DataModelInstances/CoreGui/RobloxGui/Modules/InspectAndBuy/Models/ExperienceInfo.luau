@@ -12,11 +12,11 @@ return {
 			playabilityStatus = playabilityStatusEnum.Playable
 		}
 	end,
-	fromGetPlayabilityStatus = function(p0)
+	fromGetPlayabilityStatus = function(p1)
 		return {
-			universeId = tostring(p0.universeId),
-			isPlayable = p0.isPlayable,
-			playabilityStatus = p0.playabilityStatus
+			universeId = tostring(p1.universeId),
+			isPlayable = p1.isPlayable,
+			playabilityStatus = p1.playabilityStatus
 		}
 	end,
 	fromGetExperienceInfo = function(p1)

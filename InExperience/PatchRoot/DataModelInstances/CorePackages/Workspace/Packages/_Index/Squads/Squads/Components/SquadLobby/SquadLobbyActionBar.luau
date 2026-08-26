@@ -55,7 +55,7 @@ local enableCrossExpVoiceDebug = game:DefineFastFlag("EnableCrossExpVoiceDebug",
 local audioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
 local squadExperiencePickerTooltipSeenStorageValue = game:DefineFastString("SquadExperiencePickerTooltipSeenStorageValue", "True")
 local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlags.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
-local var22 = if squadCoordinationExperienceJoinExperimentation.getIsSearchIconOnExpPickerEnabled() then "size-800-800" else "size-600-600"
+local var1 = if squadCoordinationExperienceJoinExperimentation.getIsSearchIconOnExpPickerEnabled() then "size-800-800" else "size-600-600"
 local t = {
 	["icons/menu/platformChatOff"] = "speech-bubble-align-center",
 	["icons/common/play"] = "play-large",
@@ -65,13 +65,13 @@ local t = {
 	["icons/actions/truncationCollapse_small"] = "chevron-large-up",
 	["icons/status/player/developer"] = "hammer-code"
 }
-local var24 = if squadCoordinationExperienceJoinExperimentation.getIsSearchIconOnExpPickerEnabled() then "icons/common/search" else "icons/common/play"
+local var2 = if squadCoordinationExperienceJoinExperimentation.getIsSearchIconOnExpPickerEnabled() then "icons/common/search" else "icons/common/play"
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: appStorageService (ref), squadExperiencePickerTooltipSeenStorageValue (ref)
 	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy), p0 (ref)
-		return appStorageService:GetItem(p0)
+		-- upvalues: appStorageService (copy), p1 (ref)
+		return appStorageService:GetItem(p1)
 	end)
 	
 	return if ok and status ~= nil then status == squadExperiencePickerTooltipSeenStorageValue else false
@@ -86,15 +86,15 @@ local _ = function(value)
 	end)
 end
 
-local var25 = function(p1)
+local var3 = function(p1)
 	-- upvalues: reactModule (ref), controlState (ref), useTokens (ref), useLastInputMethod (ref), squadCoordinationExperienceJoinExperimentation (ref), appStorageService (ref), squadExperiencePickerTooltipSeenStorageValue (ref), inputUtilities (ref), coreGuiService (ref), externalEventConnection (ref), userInputService (ref), foundationModule (ref), withTooltip (ref), withHoverTooltip (ref)
-	local var29, var30 = reactModule.useBinding(controlState.Initialize)
-	local var31 = useTokens()
-	local var32 = useLastInputMethod()
+	local var4, var5 = reactModule.useBinding(controlState.Initialize)
+	local var6 = useTokens()
+	local var7 = useLastInputMethod()
 	local t = { headerText = p1.tooltipText }
-	local var34, var35 = reactModule.useState(false)
+	local var8, var9 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: squadCoordinationExperienceJoinExperimentation (copy), p1 (ref), appStorageService (copy), squadExperiencePickerTooltipSeenStorageValue (copy), var35 (ref)
+		-- upvalues: squadCoordinationExperienceJoinExperimentation (copy), p1 (ref), appStorageService (copy), squadExperiencePickerTooltipSeenStorageValue (copy), var9 (ref)
 		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then
 			if p1.enableFirstTimeTooltip and p1.showFtuxCustomConditionsMet and (p1.currentHoveredButton == "" or p1.currentHoveredButton == p1.triggerPointName) then
 				local ftuxAppStorageKey = p1.ftuxAppStorageKey
@@ -102,23 +102,23 @@ local var25 = function(p1)
 					-- upvalues: appStorageService (copy), ftuxAppStorageKey (ref)
 					return appStorageService:GetItem(ftuxAppStorageKey)
 				end)
-				local var39 = if ok and status ~= nil then status == squadExperiencePickerTooltipSeenStorageValue else false
+				local var10 = if ok and status ~= nil then status == squadExperiencePickerTooltipSeenStorageValue else false
 				
-				if not var39 then
-					var39 = p1.ftuxAppStorageKey
+				if not var10 then
+					var10 = p1.ftuxAppStorageKey
 					pcall(function()
-						-- upvalues: appStorageService (copy), var39 (ref), squadExperiencePickerTooltipSeenStorageValue (copy)
-						appStorageService:SetItem(var39, squadExperiencePickerTooltipSeenStorageValue)
+						-- upvalues: appStorageService (copy), var10 (ref), squadExperiencePickerTooltipSeenStorageValue (copy)
+						appStorageService:SetItem(var10, squadExperiencePickerTooltipSeenStorageValue)
 						appStorageService:Flush()
 					end)
 					
 					if p1.currentHoveredButton == "" then
-						var35(true)
+						var9(true)
 						
 						return
 					end
 				elseif not p1.enableFirstTimeTooltip or p1.currentHoveredButton ~= "" and p1.currentHoveredButton ~= p1.triggerPointName then
-					var35(false)
+					var9(false)
 				end
 			end
 		end
@@ -129,127 +129,127 @@ local var25 = function(p1)
 		p1.showFtuxCustomConditionsMet,
 		p1.triggerPointName
 	})
-	local var36 = reactModule.useCallback(function(p2)
-		-- upvalues: inputUtilities (copy), var32 (ref), var35 (ref)
-		if inputUtilities.isActivationInput(p2) or var32 == "Gamepad" then
-			var35(false)
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: inputUtilities (copy), var7 (ref), var9 (ref)
+		if inputUtilities.isActivationInput(p2) or var7 == "Gamepad" then
+			var9(false)
 		end
-	end, { var32 })
+	end, { var7 })
 	local t_1 = {
 		DisplayOrder = 6,
 		disabled = false,
 		guiTarget = coreGuiService,
-		active = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var34 else nil,
+		active = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var8 else nil,
 		triggerPointName = p1.triggerPointName
 	}
 	
-	local var38 = function(p3, p4, p5)
-		-- upvalues: reactModule (copy), controlState (copy), squadCoordinationExperienceJoinExperimentation (copy), p1 (ref), var29 (ref), var30 (ref), var34 (ref), externalEventConnection (copy), userInputService (copy), var36 (ref), foundationModule (copy), var31 (ref)
+	local var11 = function(p2, p3, p4)
+		-- upvalues: reactModule (copy), controlState (copy), squadCoordinationExperienceJoinExperimentation (copy), p1 (ref), var4 (ref), var5 (ref), var8 (ref), externalEventConnection (copy), userInputService (copy), var10 (ref), foundationModule (copy), var6 (ref)
 		return reactModule.createElement("Frame", {
 			AutomaticSize = p1.automaticSize,
 			LayoutOrder = p1.layoutOrder,
 			Size = UDim2.fromOffset(40, 40),
 			BackgroundTransparency = 1,
-			[reactModule.Change.AbsolutePosition] = p3,
-			[reactModule.Change.AbsoluteSize] = p4
+			[reactModule.Change.AbsolutePosition] = p2,
+			[reactModule.Change.AbsoluteSize] = p3
 		}, {
-			InputEndedConnection = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() and var34 then reactModule.createElement(externalEventConnection, { event = userInputService.InputEnded, callback = var36 }) else nil,
+			InputEndedConnection = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() and var8 then reactModule.createElement(externalEventConnection, { event = userInputService.InputEnded, callback = var10 }) else nil,
 			reactModule.createElement(foundationModule.View, {
 				Size = UDim2.fromScale(1, 1),
 				backgroundStyle = p1.backgroundStyle,
-				cornerRadius = UDim.new(0, var31.Radius.Circle),
+				cornerRadius = UDim.new(0, var6.Radius.Circle),
 				isDisabled = p1.isDisabled,
 				onActivated = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then reactModule.useCallback(function()
-					-- upvalues: p1 (copy), var34 (copy)
+					-- upvalues: p1 (copy), var8 (copy)
 					if p1.onActivated then
-						p1.onActivated(var34)
+						p1.onActivated(var8)
 					end
-				end, { var34, p1.onActivated }) else p1.onActivated,
-				onStateChanged = reactModule.useCallback(function(p6)
-					-- upvalues: controlState (copy), squadCoordinationExperienceJoinExperimentation (copy), p1 (copy), p5 (ref), var29 (copy), var30 (copy)
-					local var40 = controlState.fromRawValue(p6)
+				end, { var8, p1.onActivated }) else p1.onActivated,
+				onStateChanged = reactModule.useCallback(function(p5)
+					-- upvalues: controlState (copy), squadCoordinationExperienceJoinExperimentation (copy), p1 (copy), p4 (ref), var4 (copy), var5 (copy)
+					local var12 = controlState.fromRawValue(p5)
 					
 					if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then
-						if var40 == controlState.Hover then
+						if var12 == controlState.Hover then
 							p1.onHoverCalled(p1.triggerPointName)
-						elseif var40 == controlState.Default then
+						elseif var12 == controlState.Default then
 							p1.onHoverCalled("")
 						end
 					end
-					if p5 then
-						p5(var29:getValue(), var40)
+					if p4 then
+						p4(var4:getValue(), var12)
 					end
-					var30(var40)
-				end, { var29, p1.onHoverCalled, p1.triggerPointName, var30 })
+					var5(var12)
+				end, { var4, p1.onHoverCalled, p1.triggerPointName, var5 })
 			}, p1.children)
 		})
 	end
 	
-	return if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() and var34 then withTooltip(t, t_1, function(p9)
-		-- upvalues: var38 (ref)
-		return var38(p9, p9, nil)
-	end) else withHoverTooltip(t, t_1, function(p7, p8)
-		-- upvalues: var38 (ref)
-		return var38(p7, p7, p8)
+	return if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() and var8 then withTooltip(t, t_1, function(p2)
+		-- upvalues: var11 (ref)
+		return var11(p2, p2, nil)
+	end) else withHoverTooltip(t, t_1, function(p2, p3)
+		-- upvalues: var11 (ref)
+		return var11(p2, p2, p3)
 	end)
 end
 
-local _ = function(p10)
+local _ = function(p1)
 	return {
-		["size-600-600"] = p10.Size.Size_600,
-		["size-800-800"] = p10.Size.Size_800
+		["size-600-600"] = p1.Size.Size_600,
+		["size-800-800"] = p1.Size.Size_800
 	}
 end
 
-local function renderStandardImage(p11, p12, p13, p14)
+local function renderStandardImage(p1, p2, p3, p4)
 	-- upvalues: t (ref), reactModule (ref), foundationModule (ref)
-	local var41 = t[p12]
+	local var4 = t[p2]
 	
-	if var41 then
+	if var4 then
 		local t_1 = {
-			["size-600-600"] = p14.Size.Size_600,
-			["size-800-800"] = p14.Size.Size_800
+			["size-600-600"] = p4.Size.Size_600,
+			["size-800-800"] = p4.Size.Size_800
 		}
 		
 		return reactModule.createElement(foundationModule.Icon, {
-			name = var41,
-			style = if p11 then p14.Color.Content.Muted else p14.Color.Content.Emphasis,
-			size = t_1[p13] or t_1["size-600-600"],
+			name = var4,
+			style = if p1 then p4.Color.Content.Muted else p4.Color.Content.Emphasis,
+			size = t_1[p3] or t_1["size-600-600"],
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5)
 		})
 	end
 	return reactModule.createElement(foundationModule.Image, {
-		Image = p12,
+		Image = p2,
 		tag = {
-			["content-emphasis"] = not p11,
-			["content-muted"] = p11,
+			["content-emphasis"] = not p1,
+			["content-muted"] = p1,
 			["anchor-center-center position-center-center " .. p13] = true
 		}
 	})
 end
 
-local function getLoadingIndicatorIcon(p15, p16, p17, p18, p19)
+local function getLoadingIndicatorIcon(p1, p2, p3, p4, p5)
 	-- upvalues: voiceChatModule (ref)
-	local var43 = if p15.Config.ColorMode.IsLight == "true" then "MicDark" else "MicLight"
+	local var4 = if p1.Config.ColorMode.IsLight == "true" then "MicDark" else "MicLight"
 	
-	return if not (not p17 or not p16 or p16.isMuted) then if p18 then voiceChatModule.Utils.GetIcon("Unmuted", var43, p19) else voiceChatModule.Utils.GetIcon("Unmuted0", var43) else voiceChatModule.Utils.GetIcon("Muted", var43)
+	return if not (not p3 or not p2 or p2.isMuted) then if p4 then voiceChatModule.Utils.GetIcon("Unmuted", var4, p5) else voiceChatModule.Utils.GetIcon("Unmuted0", var4) else voiceChatModule.Utils.GetIcon("Muted", var4)
 end
 
-local function renderToggleAudioFocusButton(p20, p21, p22, p23, p24)
-	-- upvalues: reactModule (ref), var25 (ref), squadCoordinationExperienceJoinExperimentation (ref), foundationModule (ref)
-	return reactModule.createElement(var25, {
+local function renderToggleAudioFocusButton(p1, p2, p3, p4, p5)
+	-- upvalues: reactModule (ref), var3 (ref), squadCoordinationExperienceJoinExperimentation (ref), foundationModule (ref)
+	return reactModule.createElement(var3, {
 		isDisabled = false,
 		layoutOrder = 0,
 		triggerPointName = "ToggleAudioFocusButton",
 		automaticSize = Enum.AutomaticSize.X,
-		currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then p23 else nil,
+		currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then p4 else nil,
 		enableFirstTimeTooltip = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 		ftuxAppStorageKey = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then "" else nil,
-		onActivated = p22,
-		onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then p24 else nil,
+		onActivated = p3,
+		onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then p5 else nil,
 		showFtuxCustomConditionsMet = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
-		tooltipText = p21
+		tooltipText = p2
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
@@ -257,8 +257,8 @@ local function renderToggleAudioFocusButton(p20, p21, p22, p23, p24)
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
 		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, p20.Padding.Small),
-			PaddingRight = UDim.new(0, p20.Padding.Small)
+			PaddingLeft = UDim.new(0, p1.Padding.Small),
+			PaddingRight = UDim.new(0, p1.Padding.Small)
 		}),
 		ToggleFocusButtonIcon = reactModule.createElement(foundationModule.Image, {
 			Image = "icons/controls/headphone",
@@ -271,10 +271,10 @@ local function renderToggleAudioFocusButton(p20, p21, p22, p23, p24)
 	})
 end
 
-return function(p25)
-	-- upvalues: useDispatch (ref), useLocalization (ref), squadCoordinationExperienceJoinExperimentation (ref), useTokens (ref), useCurrentSquadParentChannelId (ref), useCurrentSquadSelector (ref), useVoiceStatus (ref), reactModule (ref), useAppPolicy (ref), httpService (ref), squadLobbySessionProvider (ref), squadExternalContractContext (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), sessionType (ref), leaveSquad (ref), squadState (ref), var25 (ref), badge (ref), badgeVariant (ref), renderStandardImage (ref), var24 (ref), var22 (ref), getFFlagEnableCrossExpVoice (ref), useLocalUserId (ref), useBackgroundExperience (ref), useParticipant (ref), useIsVoiceConnected (ref), useIsVoiceDisconnected (ref), useIsVoiceFocused (ref), useParticipants (ref), useIsActiveParticipant (ref), audioFocusManagementEngineFeature (ref), crossExperienceVoiceManager (ref), runService (ref), renderToggleAudioFocusButton (ref), enableCrossExpVoiceDebug (ref), getLoadingIndicatorIcon (ref), foundationModule (ref), constantsModule (ref)
-	local var44 = useDispatch()
-	local var45 = useLocalization({
+return function(p1)
+	-- upvalues: useDispatch (ref), useLocalization (ref), squadCoordinationExperienceJoinExperimentation (ref), useTokens (ref), useCurrentSquadParentChannelId (ref), useCurrentSquadSelector (ref), useVoiceStatus (ref), reactModule (ref), useAppPolicy (ref), httpService (ref), squadLobbySessionProvider (ref), squadExternalContractContext (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), sessionType (ref), leaveSquad (ref), squadState (ref), var3 (ref), badge (ref), badgeVariant (ref), renderStandardImage (ref), var2 (ref), var1 (ref), getFFlagEnableCrossExpVoice (ref), useLocalUserId (ref), useBackgroundExperience (ref), useParticipant (ref), useIsVoiceConnected (ref), useIsVoiceDisconnected (ref), useIsVoiceFocused (ref), useParticipants (ref), useIsActiveParticipant (ref), audioFocusManagementEngineFeature (ref), crossExperienceVoiceManager (ref), runService (ref), renderToggleAudioFocusButton (ref), enableCrossExpVoiceDebug (ref), getLoadingIndicatorIcon (ref), foundationModule (ref), constantsModule (ref)
+	local var4 = useDispatch()
+	local var5 = useLocalization({
 		audioText = "Feature.Squads.Label.Audio",
 		leavePartyText = "Feature.Squads.Label.LeaveParty",
 		muteMicText = "Feature.Squads.Label.MuteMic",
@@ -282,312 +282,312 @@ return function(p25)
 		viewChatText = "Feature.Squads.Label.ViewChat",
 		findExperiencesText = if squadCoordinationExperienceJoinExperimentation.getIsNewTooltipCopyEnabled() then "Feature.Squads.Label.FindExperiencesPlayTogether" else "Feature.Squads.Label.FindExperiences"
 	})
-	local var46 = useTokens()
-	local var47 = useCurrentSquadParentChannelId()
-	local var48 = useCurrentSquadSelector()
-	local var49 = useVoiceStatus()
-	local var50, var51 = reactModule.useState("")
-	local var52 = reactModule.useCallback(function(p26)
-		-- upvalues: var51 (ref)
-		var51(p26)
+	local var6 = useTokens()
+	local var7 = useCurrentSquadParentChannelId()
+	local var8 = useCurrentSquadSelector()
+	local var9 = useVoiceStatus()
+	local var10, var11 = reactModule.useState("")
+	local var12 = reactModule.useCallback(function(p2)
+		-- upvalues: var11 (ref)
+		var11(p2)
 	end, {})
-	local var53 = if var48 and var48.members then #var48.members else 0
-	local var54 = useAppPolicy(reactModule.useCallback(function(p27)
-		return p27.getCanUsePlatformChat()
+	local var13 = if var8 and var8.members then #var8.members else 0
+	local var14 = useAppPolicy(reactModule.useCallback(function(p2)
+		return p2.getCanUsePlatformChat()
 	end, {}))
-	local var55 = reactModule.useMemo(function()
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: httpService (copy)
 		return httpService:GenerateGUID()
 	end, {})
-	local var56 = if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then reactModule.useContext(squadLobbySessionProvider.Context) else nil
-	local var57 = reactModule.useContext(squadExternalContractContext)
-	local var58 = if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var57.useIsChatEnabled() else true
-	local var59 = reactModule.useCallback(function(p28)
-		-- upvalues: var57 (ref), eventNamesModule (copy), var47 (ref), squadPartySheetActionEnumModule (copy), var49 (ref), p25 (ref)
-		var57.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
-			parentChannelId = var47,
+	local var16 = if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then reactModule.useContext(squadLobbySessionProvider.Context) else nil
+	local var17 = reactModule.useContext(squadExternalContractContext)
+	local var18 = if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var17.useIsChatEnabled() else true
+	local var19 = reactModule.useCallback(function(p2)
+		-- upvalues: var17 (ref), eventNamesModule (copy), var7 (ref), squadPartySheetActionEnumModule (copy), var9 (ref), p1 (ref)
+		var17.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
+			parentChannelId = var7,
 			actionType = squadPartySheetActionEnumModule.ChatButtonClicked,
-			isFtuxTooltipShown = p28,
-			voiceStatus = var49
+			isFtuxTooltipShown = p2,
+			voiceStatus = var9
 		})
 		
-		if var47 and var47 ~= "" and p25.navigateToChat then
-			p25.navigateToChat(var47)
+		if var7 and var7 ~= "" and p1.navigateToChat then
+			p1.navigateToChat(var7)
 			
 			return
 		end
-		p25.navigateAwayFromSquad()
+		p1.navigateAwayFromSquad()
 	end, {
-		p25.navigateAwayFromSquad,
-		p25.navigateToChat,
-		var47,
-		var57.fireSquadAnalytics,
-		var49
+		p1.navigateAwayFromSquad,
+		p1.navigateToChat,
+		var7,
+		var17.fireSquadAnalytics,
+		var9
 	})
-	local var60 = reactModule.useCallback(function(p29)
-		-- upvalues: squadCoordinationExperienceJoinExperimentation (copy), var56 (ref), sessionType (copy), httpService (copy), var57 (ref), eventNamesModule (copy), var47 (ref), squadPartySheetActionEnumModule (copy), var49 (ref), var44 (ref), p25 (ref)
+	local var20 = reactModule.useCallback(function(p2)
+		-- upvalues: squadCoordinationExperienceJoinExperimentation (copy), var16 (ref), sessionType (copy), httpService (copy), var17 (ref), eventNamesModule (copy), var7 (ref), squadPartySheetActionEnumModule (copy), var9 (ref), var4 (ref), p1 (ref)
 		if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
-			var56.updateMetadata(sessionType.Metadata.SquadLobbyPage.ExperiencePickerUuid, httpService:GenerateGUID(false))
+			var16.updateMetadata(sessionType.Metadata.SquadLobbyPage.ExperiencePickerUuid, httpService:GenerateGUID(false))
 		end
-		var57.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
-			parentChannelId = var47,
+		var17.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
+			parentChannelId = var7,
 			actionType = squadPartySheetActionEnumModule.PickExperienceButtonClicked,
-			isFtuxTooltipShown = p29,
-			voiceStatus = var49
+			isFtuxTooltipShown = p2,
+			voiceStatus = var9
 		})
 		
 		if squadCoordinationExperienceJoinExperimentation.getShouldOpenSLPFromExpPickerEnabled() then
-			var57.showSearchOverlay(var44)
+			var17.showSearchOverlay(var4)
 			
 			return
 		end
-		p25.navigateToHomePage()
+		p1.navigateToHomePage()
 	end, {
-		var47, p25.navigateToHomePage, var57.fireSquadAnalytics,
-		if squadCoordinationExperienceJoinExperimentation.getShouldOpenSLPFromExpPickerEnabled() then var44 else nil,
-		if squadCoordinationExperienceJoinExperimentation.getShouldOpenSLPFromExpPickerEnabled() then var57.showSearchOverlay else nil,
-		if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then var56.updateMetadata else nil,
-		var49
+		var7, p1.navigateToHomePage, var17.fireSquadAnalytics,
+		if squadCoordinationExperienceJoinExperimentation.getShouldOpenSLPFromExpPickerEnabled() then var4 else nil,
+		if squadCoordinationExperienceJoinExperimentation.getShouldOpenSLPFromExpPickerEnabled() then var17.showSearchOverlay else nil,
+		if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then var16.updateMetadata else nil,
+		var9
 	})
-	local var61 = reactModule.useCallback(function(p30)
-		-- upvalues: var57 (ref), eventNamesModule (copy), var47 (ref), squadPartySheetActionEnumModule (copy), var49 (ref), var44 (ref), leaveSquad (copy), p25 (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), var58 (ref)
-		var57.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
-			parentChannelId = var47,
+	local var21 = reactModule.useCallback(function(p2)
+		-- upvalues: var17 (ref), eventNamesModule (copy), var7 (ref), squadPartySheetActionEnumModule (copy), var9 (ref), var4 (ref), leaveSquad (copy), p1 (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), var18 (ref)
+		var17.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
+			parentChannelId = var7,
 			actionType = squadPartySheetActionEnumModule.EndCallButtonClicked,
-			isFtuxTooltipShown = p30,
-			voiceStatus = var49
+			isFtuxTooltipShown = p2,
+			voiceStatus = var9
 		})
-		var44(leaveSquad(nil, var57.setSquadPrompt, function()
-			-- upvalues: p25 (copy)
-			p25.navigateAwayFromSquad()
-		end, var57.squadLocation, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var58 else true))
+		var4(leaveSquad(nil, var17.setSquadPrompt, function()
+			-- upvalues: p1 (copy)
+			p1.navigateAwayFromSquad()
+		end, var17.squadLocation, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var18 else true))
 	end, {
-		var44, p25.navigateAwayFromSquad, var47, var57.fireSquadAnalytics,
-		var57.setSquadPrompt, var57.squadLocation,
-		if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var58 else nil,
-		var49
+		var4, p1.navigateAwayFromSquad, var7, var17.fireSquadAnalytics,
+		var17.setSquadPrompt, var17.squadLocation,
+		if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var18 else nil,
+		var9
 	})
-	local var62 = p25.squadState ~= squadState.Active
-	local var63 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var25 (copy), squadCoordinationExperienceJoinExperimentation (copy), var50 (ref), var62 (ref), var59 (ref), var52 (ref), var45 (ref), p25 (ref), badge (copy), var46 (ref), badgeVariant (copy), renderStandardImage (copy)
-		return reactModule.createElement(var25, {
+	local var22 = p1.squadState ~= squadState.Active
+	local var23 = reactModule.useMemo(function()
+		-- upvalues: reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var22 (ref), var19 (ref), var12 (ref), var5 (ref), p1 (ref), badge (copy), var6 (ref), badgeVariant (copy), renderStandardImage (copy)
+		return reactModule.createElement(var3, {
 			layoutOrder = 2,
 			triggerPointName = "ChatButton",
-			currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
+			currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 			enableFirstTimeTooltip = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 			ftuxAppStorageKey = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then "" else nil,
-			isDisabled = var62,
-			onActivated = var59,
-			onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil,
+			isDisabled = var22,
+			onActivated = var19,
+			onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 			showFtuxCustomConditionsMet = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
-			tooltipText = var45.viewChatText
+			tooltipText = var5.viewChatText
 		}, {
-			UnreadMessagesBadge = if p25.hasUnreadMessages then reactModule.createElement(badge, {
+			UnreadMessagesBadge = if p1.hasUnreadMessages then reactModule.createElement(badge, {
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.new(1, -var46.Size.Size_250, 0, var46.Size.Size_250),
+				Position = UDim2.new(1, -var6.Size.Size_250, 0, var6.Size.Size_250),
 				variant = badgeVariant.Alert
 			}) else nil,
-			renderStandardImage(var62, "icons/menu/platformChatOff", "size-800-800", var46)
+			renderStandardImage(var22, "icons/menu/platformChatOff", "size-800-800", var6)
 		})
 	end, {
-		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
-		var46, var62, var45.viewChatText, var59,
-		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil,
-		p25.hasUnreadMessages
+		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
+		var6, var22, var5.viewChatText, var19,
+		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
+		p1.hasUnreadMessages
 	})
-	local var64 = reactModule.useMemo(function()
-		-- upvalues: p25 (ref), reactModule (copy), var25 (copy), squadCoordinationExperienceJoinExperimentation (copy), var50 (ref), var62 (ref), var60 (ref), var52 (ref), var53 (ref), var45 (ref), renderStandardImage (copy), var24 (copy), var22 (copy), var46 (ref)
-		if p25.isInExperience then
+	local var24 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var22 (ref), var20 (ref), var12 (ref), var13 (ref), var5 (ref), renderStandardImage (copy), var2 (copy), var1 (copy), var6 (ref)
+		if p1.isInExperience then
 			return nil
 		end
-		local var85
+		local var25
 		local createElement = reactModule.createElement
 		local t = {
 			layoutOrder = 3,
 			triggerPointName = "PickExperienceButton",
-			currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
+			currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 			enableFirstTimeTooltip = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then true else nil,
 			ftuxAppStorageKey = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then "SquadExperiencePickerTooltipSeen" else nil,
-			isDisabled = var62,
-			onActivated = var60,
-			onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil
+			isDisabled = var22,
+			onActivated = var20,
+			onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil
 		}
 		
 		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then
-			var85 = var53 >= 2
-			var85 = nil
+			var25 = var13 >= 2
+			var25 = nil
 		else
-			var85 = nil
+			var25 = nil
 		end
-		t.showFtuxCustomConditionsMet = var85
-		t.tooltipText = var45.findExperiencesText
+		t.showFtuxCustomConditionsMet = var25
+		t.tooltipText = var5.findExperiencesText
 		
-		return createElement(var25, t, renderStandardImage(var62, var24, var22, var46))
+		return createElement(var3, t, renderStandardImage(var22, var2, var1, var6))
 	end, {
-		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
-		var46, var62, var45.findExperiencesText,
-		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var53 else nil,
-		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil,
-		p25.isInExperience, p25.navigateToHomePage
+		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
+		var6, var22, var5.findExperiencesText,
+		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var13 else nil,
+		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
+		p1.isInExperience, p1.navigateToHomePage
 	})
-	local var65 = reactModule.useMemo(function()
-		-- upvalues: var62 (ref), var46 (ref), reactModule (copy), var25 (copy), squadCoordinationExperienceJoinExperimentation (copy), var50 (ref), var61 (ref), var52 (ref), var45 (ref), renderStandardImage (copy)
-		return reactModule.createElement(var25, {
+	local var25 = reactModule.useMemo(function()
+		-- upvalues: var22 (ref), var6 (ref), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var21 (ref), var12 (ref), var5 (ref), renderStandardImage (copy)
+		return reactModule.createElement(var3, {
 			layoutOrder = 4,
 			triggerPointName = "EndCallButton",
-			backgroundStyle = if var62 then var46.Color.ActionStandard.Background else var46.Color.System.Alert,
-			currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
+			backgroundStyle = if var22 then var6.Color.ActionStandard.Background else var6.Color.System.Alert,
+			currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 			enableFirstTimeTooltip = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 			ftuxAppStorageKey = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then "" else nil,
-			isDisabled = var62,
-			onActivated = var61,
-			onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil,
+			isDisabled = var22,
+			onActivated = var21,
+			onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 			showFtuxCustomConditionsMet = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
-			tooltipText = var45.leavePartyText
-		}, renderStandardImage(var62, "icons/navigation/close", "size-600-600", var46))
+			tooltipText = var5.leavePartyText
+		}, renderStandardImage(var22, "icons/navigation/close", "size-600-600", var6))
 	end, {
-		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
-		var46, var62, var45.leavePartyText, var61,
-		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil
+		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
+		var6, var22, var5.leavePartyText, var21,
+		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil
 	})
-	local var66 = nil
-	local var67 = nil
-	local var68 = nil
+	local var26 = nil
+	local var27 = nil
+	local var28 = nil
 	
 	if getFFlagEnableCrossExpVoice() then
-		local var69 = tonumber(useLocalUserId()) or -1
-		local var70 = reactModule.useRef(0)
-		local var71 = useBackgroundExperience()
-		local var72 = useParticipant(var69)
-		local var73 = useIsVoiceConnected()
-		local var74 = useIsVoiceDisconnected()
-		local var75 = useIsVoiceFocused() or p25.forceIsVoiceFocused
-		local var76 = useParticipants()
-		local var77 = useIsActiveParticipant(var69)
-		local var78, var79 = reactModule.useState(0)
-		local var80 = audioFocusManagementEngineFeature
-		local var81 = reactModule.useCallback(function(_)
-			-- upvalues: httpService (copy), var71 (ref), var72 (ref), var76 (ref), crossExperienceVoiceManager (copy)
+		local var29 = tonumber(useLocalUserId()) or -1
+		local var30 = reactModule.useRef(0)
+		local var31 = useBackgroundExperience()
+		local var32 = useParticipant(var29)
+		local var33 = useIsVoiceConnected()
+		local var34 = useIsVoiceDisconnected()
+		local var35 = useIsVoiceFocused() or p1.forceIsVoiceFocused
+		local var36 = useParticipants()
+		local var37 = useIsActiveParticipant(var29)
+		local var38, var39 = reactModule.useState(0)
+		local var40 = audioFocusManagementEngineFeature
+		local var41 = reactModule.useCallback(function(_)
+			-- upvalues: httpService (copy), var31 (ref), var32 (ref), var36 (ref), crossExperienceVoiceManager (copy)
 			print("----------- CEV FOREGROUND -----------")
-			print("Experience info", httpService:JSONEncode(var71))
-			print("Current Voice Participant", httpService:JSONEncode(var72))
-			print("Squads Store Participants", httpService:JSONEncode(var76 or {}))
+			print("Experience info", httpService:JSONEncode(var31))
+			print("Current Voice Participant", httpService:JSONEncode(var32))
+			print("Squads Store Participants", httpService:JSONEncode(var36 or {}))
 			print("--------------------------------------")
 			crossExperienceVoiceManager.default:dumpDebugData()
-		end, { var76, var72 })
-		local var82 = reactModule.useCallback(function(_)
-			-- upvalues: var72 (ref), crossExperienceVoiceManager (copy)
-			if var72 then
-				if var72.isMuted then
-					crossExperienceVoiceManager.default:unmuteVoiceParticipant(var72.userId)
+		end, { var36, var32 })
+		local var42 = reactModule.useCallback(function(_)
+			-- upvalues: var32 (ref), crossExperienceVoiceManager (copy)
+			if var32 then
+				if var32.isMuted then
+					crossExperienceVoiceManager.default:unmuteVoiceParticipant(var32.userId)
 					
 					return
 				end
-				crossExperienceVoiceManager.default:muteVoiceParticipant(var72.userId)
+				crossExperienceVoiceManager.default:muteVoiceParticipant(var32.userId)
 			end
-		end, { var72 })
+		end, { var32 })
 		reactModule.useEffect(function()
-			-- upvalues: runService (copy), var55 (ref), var70 (ref), var79 (ref)
-			runService:BindToRenderStep(var55, 1, function()
-				-- upvalues: var70 (copy), var79 (copy)
-				if var70.current > 3 then
-					var79(math.random())
-					var70.current = 0
+			-- upvalues: runService (copy), var15 (ref), var30 (ref), var39 (ref)
+			runService:BindToRenderStep(var15, 1, function()
+				-- upvalues: var30 (copy), var39 (copy)
+				if var30.current > 3 then
+					var39(math.random())
+					var30.current = 0
 					
 					return
 				end
-				var70.current += 1
+				var30.current += 1
 			end)
 			
 			return function()
-				-- upvalues: runService (copy), var55 (copy)
-				runService:UnbindFromRenderStep(var55)
+				-- upvalues: runService (copy), var15 (copy)
+				runService:UnbindFromRenderStep(var15)
 			end
 		end, {})
-		var66 = reactModule.useMemo(function()
-			-- upvalues: var62 (ref), var80 (ref), var73 (ref), renderToggleAudioFocusButton (copy), var46 (ref), var45 (ref), p25 (ref), var50 (ref), var52 (ref)
-			return if var62 or not var80 or not var73 then nil else renderToggleAudioFocusButton(var46, var45.audioText, p25.toggleVoiceChatMenu, var50, var52)
+		var26 = reactModule.useMemo(function()
+			-- upvalues: var22 (ref), var40 (ref), var33 (ref), renderToggleAudioFocusButton (copy), var6 (ref), var5 (ref), p1 (ref), var10 (ref), var12 (ref)
+			return if var22 or not var40 or not var33 then nil else renderToggleAudioFocusButton(var6, var5.audioText, p1.toggleVoiceChatMenu, var10, var12)
 		end, {
-			var46, var80, var50, var62, var73, var45.audioText, var52,
-			p25.toggleVoiceChatMenu
+			var6, var40, var10, var22, var33, var5.audioText, var12,
+			p1.toggleVoiceChatMenu
 		})
 		
 		if enableCrossExpVoiceDebug then
-			var67 = reactModule.useMemo(function()
-				-- upvalues: reactModule (copy), var25 (copy), squadCoordinationExperienceJoinExperimentation (copy), var50 (ref), var62 (ref), var81 (ref), var52 (ref), renderStandardImage (copy), var46 (ref)
-				return reactModule.createElement(var25, {
+			var27 = reactModule.useMemo(function()
+				-- upvalues: reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var22 (ref), var41 (ref), var12 (ref), renderStandardImage (copy), var6 (ref)
+				return reactModule.createElement(var3, {
 					layoutOrder = 5,
 					tooltipText = "Debug voice",
 					triggerPointName = "DebugVoiceButton",
-					currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
+					currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 					enableFirstTimeTooltip = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 					ftuxAppStorageKey = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then "" else nil,
-					isDisabled = var62,
-					onActivated = var81,
-					onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil,
+					isDisabled = var22,
+					onActivated = var41,
+					onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 					showFtuxCustomConditionsMet = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil
-				}, renderStandardImage(var62, "icons/status/player/developer", "size-600-600", var46))
+				}, renderStandardImage(var22, "icons/status/player/developer", "size-600-600", var6))
 			end, {
-				if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
-				var46,
-				var62,
-				var81,
-				if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil
+				if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
+				var6,
+				var22,
+				var41,
+				if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil
 			})
 		end
-		local var83 = reactModule.useMemo(function()
-			-- upvalues: getLoadingIndicatorIcon (copy), var46 (ref), var72 (ref), var73 (ref), var62 (ref), var77 (ref), var78 (ref)
-			return getLoadingIndicatorIcon(var46, var72, var73, not var62 and var77, var78)
+		local var43 = reactModule.useMemo(function()
+			-- upvalues: getLoadingIndicatorIcon (copy), var6 (ref), var32 (ref), var33 (ref), var22 (ref), var37 (ref), var38 (ref)
+			return getLoadingIndicatorIcon(var6, var32, var33, not var22 and var37, var38)
 		end, {
-			var77, var62, var73, var78, var72, var46
+			var37, var22, var33, var38, var32, var6
 		})
-		var68 = reactModule.useMemo(function()
-			-- upvalues: var74 (ref), var62 (ref), audioFocusManagementEngineFeature (copy), var75 (ref), var73 (ref), var72 (ref), reactModule (copy), var25 (copy), squadCoordinationExperienceJoinExperimentation (copy), var50 (ref), var82 (ref), var52 (ref), var45 (ref), renderStandardImage (copy), var83 (ref), var46 (ref)
-			if var74 then
+		var28 = reactModule.useMemo(function()
+			-- upvalues: var34 (ref), var22 (ref), audioFocusManagementEngineFeature (copy), var35 (ref), var33 (ref), var32 (ref), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var42 (ref), var12 (ref), var5 (ref), renderStandardImage (copy), var43 (ref), var6 (ref)
+			if var34 then
 				return nil
-			elseif not var62 and audioFocusManagementEngineFeature and not var75 then
+			elseif not var22 and audioFocusManagementEngineFeature and not var35 then
 				return nil
 			end
-			local var86 = if var73 then if var72 ~= nil then var62 else true else not var73
+			local var44 = if var33 then if var32 ~= nil then var22 else true else not var33
 			
-			return reactModule.createElement(var25, {
+			return reactModule.createElement(var3, {
 				layoutOrder = 1,
 				triggerPointName = "ToggleMicButton",
-				currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
+				currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 				enableFirstTimeTooltip = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 				ftuxAppStorageKey = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then "" else nil,
-				isDisabled = var86,
-				onActivated = var82,
-				onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil,
+				isDisabled = var44,
+				onActivated = var42,
+				onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 				showFtuxCustomConditionsMet = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
-				tooltipText = if not var73 or (not var72 or var72.isMuted) then var45.unmuteMicText else var45.muteMicText
-			}, renderStandardImage(var86, var83, "size-800-800", var46))
+				tooltipText = if not var33 or (not var32 or var32.isMuted) then var5.unmuteMicText else var5.muteMicText
+			}, renderStandardImage(var44, var43, "size-800-800", var6))
 		end, {
-			if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var50 else nil,
-			var46, var83, var62, var75, var73, var45.muteMicText, var45.unmuteMicText,
-			if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var52 else nil,
-			var82, var72, var74
+			if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
+			var6, var43, var22, var35, var33, var5.muteMicText, var5.unmuteMicText,
+			if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
+			var42, var32, var34
 		})
 	end
 	return reactModule.createElement(foundationModule.View, {
 		AutomaticSize = Enum.AutomaticSize.X,
-		AnchorPoint = p25.anchorPoint,
-		Position = p25.position,
+		AnchorPoint = p1.anchorPoint,
+		Position = p1.position,
 		Size = UDim2.fromOffset(0, constantsModule.SQUAD_LOBBY_ACTION_BAR_HEIGHT),
-		backgroundStyle = var46.Color.OverMedia.OverMedia_0,
-		cornerRadius = UDim.new(0, var46.Radius.Circle),
+		backgroundStyle = var6.Color.OverMedia.OverMedia_0,
+		cornerRadius = UDim.new(0, var6.Radius.Circle),
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = UDim.new(0, var46.Gap.Large),
+			Padding = UDim.new(0, var6.Gap.Large),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
-		padding = var46.Padding.Small
+		padding = var6.Padding.Small
 	}, {
-		ToggleAudioFocusButton = var66,
-		ToggleMicButton = var68,
-		ChatButton = if var54 then var63 else nil,
-		PickExperienceButton = var64,
-		EndCallButton = var65,
-		DebugVoiceButton = var67
+		ToggleAudioFocusButton = var26,
+		ToggleMicButton = var28,
+		ChatButton = if var14 then var23 else nil,
+		PickExperienceButton = var24,
+		EndCallButton = var25,
+		DebugVoiceButton = var27
 	})
 end

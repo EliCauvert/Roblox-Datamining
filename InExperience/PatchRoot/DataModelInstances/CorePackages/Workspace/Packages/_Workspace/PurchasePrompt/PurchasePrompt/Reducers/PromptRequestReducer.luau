@@ -20,25 +20,25 @@ local requestTypeModule = require(purchasePrompt.Enums.RequestType)
 local t = { requestType = requestTypeModule.None }
 
 return rodux.createReducer(t, {
-	[requestAssetPurchaseModule.name] = function(_, p0)
+	[requestAssetPurchaseModule.name] = function(_, p1)
 		-- upvalues: httpService (ref), requestTypeModule (ref)
-		local idempotencyKey = p0.idempotencyKey
+		local idempotencyKey = p1.idempotencyKey
 		
 		if idempotencyKey == nil or idempotencyKey == "" then
 			idempotencyKey = httpService:GenerateGUID(false)
 		end
 		return {
-			id = p0.id,
+			id = p1.id,
 			infoType = Enum.InfoType.Asset,
 			requestType = requestTypeModule.Asset,
-			equipIfPurchased = p0.equipIfPurchased,
-			isRobloxPurchase = p0.isRobloxPurchase,
+			equipIfPurchased = p1.equipIfPurchased,
+			isRobloxPurchase = p1.isRobloxPurchase,
 			idempotencyKey = idempotencyKey,
-			purchaseAuthToken = p0.purchaseAuthToken or "",
-			collectibleItemId = p0.collectibleItemId or "",
-			collectibleItemInstanceId = p0.collectibleItemInstanceId or "",
-			collectibleProductId = p0.collectibleProductId or "",
-			expectedPrice = p0.expectedPrice or 0
+			purchaseAuthToken = p1.purchaseAuthToken or "",
+			collectibleItemId = p1.collectibleItemId or "",
+			collectibleItemInstanceId = p1.collectibleItemInstanceId or "",
+			collectibleProductId = p1.collectibleProductId or "",
+			expectedPrice = p1.expectedPrice or 0
 		}
 	end,
 	[requestGamepassPurchaseModule.name] = function(_, p1)
@@ -50,77 +50,77 @@ return rodux.createReducer(t, {
 			requestType = requestTypeModule.GamePass
 		}
 	end,
-	[requestProductPurchaseModule.name] = function(_, p2)
+	[requestProductPurchaseModule.name] = function(_, p1)
 		-- upvalues: requestTypeModule (ref)
 		return {
 			isRobloxPurchase = false,
-			id = p2.id,
+			id = p1.id,
 			infoType = Enum.InfoType.Product,
 			requestType = requestTypeModule.Product
 		}
 	end,
-	[requestBundlePurchaseModule.name] = function(_, p3)
+	[requestBundlePurchaseModule.name] = function(_, p1)
 		-- upvalues: httpService (ref), requestTypeModule (ref)
-		local idempotencyKey = p3.idempotencyKey
+		local idempotencyKey = p1.idempotencyKey
 		
 		if idempotencyKey == nil or idempotencyKey == "" then
 			idempotencyKey = httpService:GenerateGUID(false)
 		end
 		return {
 			isRobloxPurchase = true,
-			id = p3.id,
+			id = p1.id,
 			infoType = Enum.InfoType.Bundle,
 			requestType = requestTypeModule.Bundle,
 			idempotencyKey = idempotencyKey,
-			purchaseAuthToken = p3.purchaseAuthToken or "",
-			collectibleItemId = p3.collectibleItemId or "",
-			collectibleItemInstanceId = p3.collectibleItemInstanceId or "",
-			collectibleProductId = p3.collectibleProductId or "",
-			expectedPrice = p3.expectedPrice or 0
+			purchaseAuthToken = p1.purchaseAuthToken or "",
+			collectibleItemId = p1.collectibleItemId or "",
+			collectibleItemInstanceId = p1.collectibleItemInstanceId or "",
+			collectibleProductId = p1.collectibleProductId or "",
+			expectedPrice = p1.expectedPrice or 0
 		}
 	end,
 	[requestPremiumPurchaseModule.name] = function(_, _)
 		-- upvalues: requestTypeModule (ref)
 		return { requestType = requestTypeModule.Premium }
 	end,
-	[requestSubscriptionPurchaseModule.name] = function(_, p4)
+	[requestSubscriptionPurchaseModule.name] = function(_, p1)
 		-- upvalues: requestTypeModule (ref)
-		return { id = p4.id, requestType = requestTypeModule.Subscription }
+		return { id = p1.id, requestType = requestTypeModule.Subscription }
 	end,
-	[requestAvatarCreationFeePurchaseModule.name] = function(_, p5)
+	[requestAvatarCreationFeePurchaseModule.name] = function(_, p1)
 		-- upvalues: requestTypeModule (ref)
 		return {
 			requestType = requestTypeModule.AvatarCreationFee,
-			humanoidModel = p5.humanoidModel,
-			id = p5.guid
+			humanoidModel = p1.humanoidModel,
+			id = p1.guid
 		}
 	end,
-	[requestExperiencePurchaseModule.name] = function(_, p6)
+	[requestExperiencePurchaseModule.name] = function(_, p1)
 		-- upvalues: requestTypeModule (ref)
 		return {
 			requestType = requestTypeModule.Experience,
-			universeId = p6.universeId
+			universeId = p1.universeId
 		}
 	end,
-	[requestLookPurchaseModule.name] = function(_, p7)
+	[requestLookPurchaseModule.name] = function(_, p1)
 		-- upvalues: requestTypeModule (ref)
-		return { requestType = requestTypeModule.Look, lookId = p7.lookId }
+		return { requestType = requestTypeModule.Look, lookId = p1.lookId }
 	end,
 	[requestRobuxUpsellPurchaseModule.name] = if sharedFlagsModule.FFlagAXMISWithBlackbird then function(_, _)
 		-- upvalues: requestTypeModule (ref)
 		return { requestType = requestTypeModule.RobuxUpsell }
 	end else nil,
-	[requestDeveloperSubscriptionPurchaseModule.name] = function(_, p8)
+	[requestDeveloperSubscriptionPurchaseModule.name] = function(_, p1)
 		-- upvalues: requestTypeModule (ref)
 		return {
 			requestType = requestTypeModule.DeveloperSubscription,
-			subscriptionId = p8.subscriptionId,
-			expectedPrice = p8.expectedPrice
+			subscriptionId = p1.subscriptionId,
+			expectedPrice = p1.expectedPrice
 		}
 	end,
-	[refreshExpectedPriceModule.name] = function(p9, p10)
-		local cloned = table.clone(p9)
-		cloned.expectedPrice = p10.expectedPrice
+	[refreshExpectedPriceModule.name] = function(p1, p2)
+		local cloned = table.clone(p1)
+		cloned.expectedPrice = p2.expectedPrice
 		
 		return cloned
 	end,

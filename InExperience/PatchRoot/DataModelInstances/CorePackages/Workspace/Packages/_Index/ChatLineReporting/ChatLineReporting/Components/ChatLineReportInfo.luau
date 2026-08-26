@@ -16,28 +16,28 @@ local t = {
 	restingVelocityLimit = 0.1
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), constantsModule (ref), reactOtterModule (ref), t (ref), fFlagChatLineReportingFocusFixesEnabled (ref), view (ref)
-	local var6 = useTokens()
-	local var7, var8 = reactModule.useState(false)
-	local var9 = useLocalization(constantsModule.ChatLineLocalizationKeys)
+	local var1 = useTokens()
+	local var2, var3 = reactModule.useState(false)
+	local var4 = useLocalization(constantsModule.ChatLineLocalizationKeys)
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), p0 (ref)
-		var8(p0.visible)
-	end, { p0.visible })
-	local var10, var11 = reactOtterModule.useAnimatedBinding(1, function() end)
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref)
-		return if var7 then 0 else 1
+		-- upvalues: var3 (ref), p1 (ref)
+		var3(p1.visible)
+	end, { p1.visible })
+	local var5, var6 = reactOtterModule.useAnimatedBinding(1, function() end)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref)
+		return if var2 then 0 else 1
+	end, { var2 })
+	reactModule.useEffect(function()
+		-- upvalues: var6 (ref), reactOtterModule (copy), var7 (ref), t (copy)
+		var6(reactOtterModule.spring(var7, t))
 	end, { var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), reactOtterModule (copy), var12 (ref), t (copy)
-		var11(reactOtterModule.spring(var12, t))
-	end, { var12 })
 	
 	return reactModule.createElement("TextButton", {
-		Active = var10:map(function(p1)
-			return p1 == 0
+		Active = var5:map(function(p2)
+			return p2 == 0
 		end),
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
@@ -46,10 +46,10 @@ return function(p0)
 		Size = UDim2.new(1, 0, 1, 0),
 		Text = "",
 		[reactModule.Event.Activated] = function()
-			-- upvalues: var8 (ref)
-			var8(false)
+			-- upvalues: var3 (ref)
+			var3(false)
 		end,
-		ZIndex = var10:map(function(p2)
+		ZIndex = var5:map(function(p2)
 			return (1 - p2) * 4
 		end)
 	}, {
@@ -58,8 +58,8 @@ return function(p0)
 			ClipsDescendants = true,
 			ZIndex = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = var10:map(function(p3)
-				return UDim2.new(1, 0, 0, 60):Lerp(UDim2.new(1, 0, 0, 0), p3)
+			Size = var5:map(function(p2)
+				return UDim2.new(1, 0, 0, 60):Lerp(UDim2.new(1, 0, 0, 0), p2)
 			end)
 		}, {
 			InfoTextContainer = reactModule.createElement(view, {
@@ -69,10 +69,10 @@ return function(p0)
 				InfoText = reactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextWrapped = true,
-					Font = var6.Typography.BodySmall.Font,
-					Text = var9.InfoTextKey,
-					TextColor3 = var6.Color.Content.Default.Color3,
-					TextSize = var6.Typography.BodySmall.FontSize,
+					Font = var1.Typography.BodySmall.Font,
+					Text = var4.InfoTextKey,
+					TextColor3 = var1.Color.Content.Default.Color3,
+					TextSize = var1.Typography.BodySmall.FontSize,
 					Size = UDim2.new(1, 0, 1, 0)
 				})
 			})

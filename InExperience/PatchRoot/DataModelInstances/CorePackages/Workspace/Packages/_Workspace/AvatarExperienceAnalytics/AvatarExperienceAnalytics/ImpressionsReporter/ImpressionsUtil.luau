@@ -1,59 +1,59 @@
 ﻿return {
-	writeItemAttributes = function(p0, p1, p2)
-		if not p0 then
+	writeItemAttributes = function(p1, p2, p3)
+		if not p1 then
 			warn("Impressions schema is nil")
 			
 			return
 		end
-		for i, v in p0.mapping do
-			local var0 = p2[i]
+		for i, v in p1.mapping do
+			local var1 = p3[i]
 			
-			if var0 then
-				p1:SetAttribute(v.attribute, var0)
+			if var1 then
+				p2:SetAttribute(v.attribute, var1)
 			end
 		end
 	end,
-	buildSchema = function(p3, p4)
+	buildSchema = function(p4, p5)
 		local t = {}
-		local groupBy = p4.groupBy
+		local groupBy = p5.groupBy
 		
-		for i, v in p4.mapping do
-			local var3
+		for i, v in p5.mapping do
+			local var2
 			if groupBy then
-				var3 = table.find(groupBy, v.out) ~= nil
-				var3 = nil
+				var2 = table.find(groupBy, v.out) ~= nil
+				var2 = nil
 			else
-				var3 = false
+				var2 = false
 			end
 			t[v.prop] = {
-				attribute = string.format("%s_%s", p3, v.prop),
+				attribute = string.format("%s_%s", p4, v.prop),
 				out = v.out,
-				isGrouping = var3
+				isGrouping = var2
 			}
 		end
 		if groupBy then
 			for i, v_1 in groupBy do
-				local var2 = false
+				local var3 = false
 				
-				for i_2, v_2 in p4.mapping do
+				for i_2, v_2 in p5.mapping do
 					if v_2.out == v_1 then
-						var2 = true
+						var3 = true
 					end
-					if var2 then break end
+					if var3 then break end
 				end
-				if not var2 then
+				if not var3 then
 					error(string.format("Impression schema groupBy field '%s' not specified in output mapping", v_1))
 				end
 			end
 		end
 		return {
 			mapping = t,
-			enumMap = p4.enumMap,
-			surfaceSpecificAnalyticsMetadata = p4.surfaceSpecificAnalyticsMetadata
+			enumMap = p5.enumMap,
+			surfaceSpecificAnalyticsMetadata = p5.surfaceSpecificAnalyticsMetadata
 		}
 	end,
-	packEvents = function(p5, p6)
-		if not p5 then
+	packEvents = function(p6, p7)
+		if not p6 then
 			warn("Impressions schema nil")
 			
 			return
@@ -61,31 +61,31 @@
 		local t = {}
 		local t_1 = {}
 		
-		for i, v in p6 do
+		for i, v in p7 do
 			local attributes = v:GetAttributes()
-			local var9 = ""
+			local var4 = ""
 			
-			for i_1, v_1 in p5.mapping do
+			for i_1, v_1 in p6.mapping do
 				if v_1.isGrouping then
-					var9 ..= attributes[v_1.attribute] or "_"
+					var4 ..= attributes[v_1.attribute] or "_"
 				end
 			end
-			local var10 = t[var9] or {}
-			t[var9] = var10
+			local var5 = t[var4] or {}
+			t[var4] = var5
 			
-			for v_1, v_2 in p5.mapping do
+			for v_1, v_2 in p6.mapping do
 				local attribute = attributes[v_2.attribute]
 				local out = v_2.out
 				
 				if v_2.isGrouping then
-					var10[out] = attribute
+					var5[out] = attribute
 				else
-					local var11 = var10[out] or {}
-					var10[out] = var11
-					var11[i] = attribute or ""
+					local var6 = var5[out] or {}
+					var5[out] = var6
+					var6[i] = attribute or ""
 					
-					if p5.enumMap and p5.enumMap[out] then
-						var11[i] = p5.enumMap[out][attribute]
+					if p6.enumMap and p6.enumMap[out] then
+						var6[i] = p6.enumMap[out][attribute]
 					end
 				end
 			end
@@ -95,7 +95,7 @@
 			t_2 = {}
 			table.insert(t_1, t_2)
 			
-			for i_2, v_2 in p5.mapping do
+			for i_2, v_2 in p6.mapping do
 				out = v_2.out
 				var7 = v_1[out]
 				

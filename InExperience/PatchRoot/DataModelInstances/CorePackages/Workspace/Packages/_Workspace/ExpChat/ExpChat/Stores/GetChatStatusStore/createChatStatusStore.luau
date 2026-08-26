@@ -2,7 +2,7 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal("Unknown")
+	local var1, var2 = createSignal("Unknown")
 	
-	return { getChatStatus = var0, setChatStatus = var1 }
+	return { getChatStatus = var1, setChatStatus = var2 }
 end

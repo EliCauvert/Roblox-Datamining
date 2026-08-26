@@ -1,14 +1,14 @@
-﻿return function(p0)
-	return function(p1)
-		-- upvalues: p0 (ref)
-		if typeof(p1) ~= "table" or not string.match(tostring(p1), "RoactBinding") then
-			warn(string.format("RoactBinding expected, got %s", typeof(p1)))
+﻿return function(p1)
+	return function(p2)
+		-- upvalues: p1 (ref)
+		if typeof(p2) ~= "table" or not string.match(tostring(p2), "RoactBinding") then
+			warn(string.format("RoactBinding expected, got %s", typeof(p2)))
 			
 			return false
 		end
 		local ok, status = pcall(function()
-			-- upvalues: p1 (ref)
-			return p1:getValue()
+			-- upvalues: p2 (ref)
+			return p2:getValue()
 		end)
 		
 		if not ok then
@@ -16,12 +16,12 @@
 			
 			return false
 		end
-		local var0, var1 = p0(status)
+		local var1, var2 = p1(status)
 		
-		if var0 then
+		if var1 then
 			return true
 		end
-		warn(string.format("RoactBinding value: %s", var1))
+		warn(string.format("RoactBinding value: %s", var2))
 		
 		return false
 	end

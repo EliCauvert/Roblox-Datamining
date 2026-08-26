@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	return if p0 == nil then false else p1 - p0 <= p2
+﻿return function(p1, p2, p3)
+	return if p1 == nil then false else p2 - p1 <= p3
 end

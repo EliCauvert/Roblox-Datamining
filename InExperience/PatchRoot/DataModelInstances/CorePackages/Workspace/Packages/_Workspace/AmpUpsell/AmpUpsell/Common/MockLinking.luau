@@ -15,9 +15,9 @@ function t.listenForLuaURLs(_, _) end
 
 function t.stopListeningForLuaURLs(_) end
 
-function t:openURL(p0)
+function t:openURL(p1)
 	-- upvalues: promiseModule (ref)
-	self.lastOpenedURL = p0
+	self.lastOpenedURL = p1
 	
 	return promiseModule.resolve(true)
 end

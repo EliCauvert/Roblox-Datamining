@@ -24,40 +24,40 @@ local t_1 = {
 	SortOrder = Enum.SortOrder.LayoutOrder
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), useResponsiveModule (ref), reactModule (ref), useBreakpointModule (ref), getGridMetricsModule (ref), breakpointModule (ref), t (ref), viewModule (ref), withCommonPropsModule (ref), gridStyleSheetModule (ref)
-	local var12 = withDefaultsModule(p0, t_1)
-	local var13 = useResponsiveModule()
-	local var14, var15 = reactModule.useState(nil)
-	local var16, var17 = useBreakpointModule(var14)
-	local var18 = getGridMetricsModule(var13.config, var16, var17.X)
-	local xLarge = var13.config.breakpoint.widths[breakpointModule.XLarge]
+	local var1 = withDefaultsModule(p1, t_1)
+	local var2 = useResponsiveModule()
+	local var3, var4 = reactModule.useState(nil)
+	local var5, var6 = useBreakpointModule(var3)
+	local var7 = getGridMetricsModule(var2.config, var5, var6.X)
+	local xLarge = var2.config.breakpoint.widths[breakpointModule.XLarge]
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var12, { tag = var12.tag, ref = p1 }), {
-		GridMeasure = reactModule.createElement(viewModule, { tag = "size-full-0", ref = var15 }, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = var1.tag, ref = p2 }), {
+		GridMeasure = reactModule.createElement(viewModule, { tag = "size-full-0", ref = var4 }, {
 			GridMeasureSizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(xLarge, 1e999) })
 		}),
 		GridAlignment = reactModule.createElement(viewModule, {
-			tag = `col flex-x-fill size-full-0 auto-y {t[var12.align]}`
+			tag = `col flex-x-fill size-full-0 auto-y {t[var1.align]}`
 		}, {
-			GridStyleSheet = reactModule.createElement(gridStyleSheetModule, { breakpoint = var16, containerWidth = var17.X }),
+			GridStyleSheet = reactModule.createElement(gridStyleSheetModule, { breakpoint = var5, containerWidth = var6.X }),
 			Grid = reactModule.createElement(viewModule, {
 				tag = "auto-y",
-				Size = UDim2.fromOffset(var17.X, 0),
+				Size = UDim2.fromOffset(var6.X, 0),
 				layout = {
-					Padding = if not var12.Wraps then UDim.new(0, var18.gutterWidth) else nil,
-					SortOrder = var12.SortOrder,
+					Padding = if not var1.Wraps then UDim.new(0, var7.gutterWidth) else nil,
+					SortOrder = var1.SortOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
-					HorizontalFlex = if var12.Wraps then Enum.UIFlexAlignment.SpaceBetween else nil,
-					Wraps = var12.Wraps
+					HorizontalFlex = if var1.Wraps then Enum.UIFlexAlignment.SpaceBetween else nil,
+					Wraps = var1.Wraps
 				}
 			}, {
 				GridSizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(xLarge, 1e999) }),
 				GridMargin = reactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, var18.margin),
-					PaddingRight = UDim.new(0, var18.margin)
+					PaddingLeft = UDim.new(0, var7.margin),
+					PaddingRight = UDim.new(0, var7.margin)
 				})
-			}, var12.children)
+			}, var1.children)
 		})
 	})
 end))

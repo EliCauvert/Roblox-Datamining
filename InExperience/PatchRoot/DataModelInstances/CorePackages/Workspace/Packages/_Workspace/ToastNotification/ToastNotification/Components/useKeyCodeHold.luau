@@ -2,86 +2,86 @@
 local runService = game:GetService("RunService")
 local reactModule = require(script:FindFirstAncestor("ToastNotification").Parent.React)
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), userInputService (ref), runService (ref)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useBinding(0)
-	local var7 = reactModule.useRef(nil)
+	local var1, var2 = reactModule.useState(false)
+	local var3, var4 = reactModule.useBinding(0)
+	local var5 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), userInputService (copy), p0 (ref), var4 (ref)
-		if p4 then
+		-- upvalues: p5 (ref), userInputService (copy), p1 (ref), var2 (ref)
+		if p5 then
 			return
 		end
-		local inputBeganConnection = userInputService.InputBegan:Connect(function(p5, p6)
-			-- upvalues: p0 (copy), var4 (copy)
-			if p6 then return end
-			if p5.KeyCode == p0 then
-				var4(true)
+		local inputBeganConnection = userInputService.InputBegan:Connect(function(p6, p7)
+			-- upvalues: p1 (copy), var2 (copy)
+			if p7 then return end
+			if p6.KeyCode == p1 then
+				var2(true)
 			end
 		end)
-		local inputEndedConnection = userInputService.InputEnded:Connect(function(p7)
-			-- upvalues: p0 (copy), var4 (copy)
-			if p7.KeyCode == p0 then
-				var4(false)
+		local inputEndedConnection = userInputService.InputEnded:Connect(function(p6)
+			-- upvalues: p1 (copy), var2 (copy)
+			if p6.KeyCode == p1 then
+				var2(false)
 			end
 		end)
 		
 		return function()
-			-- upvalues: inputBeganConnection (ref), inputEndedConnection (ref), var4 (copy)
+			-- upvalues: inputBeganConnection (ref), inputEndedConnection (ref), var2 (copy)
 			inputBeganConnection:Disconnect()
 			inputEndedConnection:Disconnect()
-			var4(false)
+			var2(false)
 		end
-	end, { p4, p0 })
+	end, { p5, p1 })
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var7 (ref), runService (copy), p1 (ref), p2 (ref), p3 (ref), var6 (ref)
-		if var3 then
+		-- upvalues: var1 (ref), var5 (ref), runService (copy), p2 (ref), p3 (ref), p4 (ref), var4 (ref)
+		if var1 then
 			local function _()
-				-- upvalues: var7 (copy)
-				if var7.current then
-					var7.current:Disconnect()
-					var7.current = nil
+				-- upvalues: var5 (copy)
+				if var5.current then
+					var5.current:Disconnect()
+					var5.current = nil
 				end
 			end
 			
-			local var10 = 0
-			var7.current = runService.Heartbeat:Connect(function(p8)
-				-- upvalues: var10 (write), p1 (copy), p2 (copy), var7 (copy), p3 (copy), var6 (copy)
-				var10 += p8
+			local var6 = 0
+			var5.current = runService.Heartbeat:Connect(function(p6)
+				-- upvalues: var6 (write), p2 (copy), p3 (copy), var5 (copy), p4 (copy), var4 (copy)
+				var6 += p6
 				
-				if var10 < p1 then return end
-				if p2 == 0 then
-					if var7.current then
-						var7.current:Disconnect()
-						var7.current = nil
+				if var6 < p2 then return end
+				if p3 == 0 then
+					if var5.current then
+						var5.current:Disconnect()
+						var5.current = nil
 					end
-					p3()
+					p4()
 					
 					return
 				else
-					local clampedValue = math.clamp((var10 - p1) / p2, 0, 1)
-					var6(clampedValue)
+					local clampedValue = math.clamp((var6 - p2) / p3, 0, 1)
+					var4(clampedValue)
 					
 					if clampedValue >= 1 then
-						if var7.current then
-							var7.current:Disconnect()
-							var7.current = nil
+						if var5.current then
+							var5.current:Disconnect()
+							var5.current = nil
 						end
-						p3()
+						p4()
 					end
 				end
 			end)
 			
 			return function()
-				-- upvalues: var7 (copy), var6 (copy)
-				if var7.current then
-					var7.current:Disconnect()
-					var7.current = nil
+				-- upvalues: var5 (copy), var4 (copy)
+				if var5.current then
+					var5.current:Disconnect()
+					var5.current = nil
 				end
-				var6(0)
+				var4(0)
 			end
 		end
-	end, { var3, p3, p1, p2 })
+	end, { var1, p4, p2, p3 })
 	
-	return { holding = var3, holdProgress = var5 }
+	return { holding = var1, holdProgress = var3 }
 end

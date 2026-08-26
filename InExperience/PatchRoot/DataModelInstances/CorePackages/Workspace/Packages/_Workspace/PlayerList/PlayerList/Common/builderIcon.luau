@@ -1,7 +1,7 @@
-﻿return function(p0, p1)
+﻿return function(p1, p2)
 	return {
 		isFoundationIcon = true,
-		name = p0,
-		variant = p1 or "Regular"
+		name = p1,
+		variant = p2 or "Regular"
 	}
 end

@@ -2,18 +2,18 @@
 
 return function()
 	-- upvalues: noOpt (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: noOpt (copy)
-		assert(p0, "expected externalPolicy")
+		assert(p1, "expected externalPolicy")
 		
 		return {
 			read = function()
-				-- upvalues: p0 (ref)
-				return p0
+				-- upvalues: p1 (ref)
+				return p1
 			end,
-			onPolicyChanged = function(p1)
+			onPolicyChanged = function(p2)
 				-- upvalues: noOpt (copy)
-				return Instance.new("BindableEvent").Event:Connect(p1 or noOpt)
+				return Instance.new("BindableEvent").Event:Connect(p2 or noOpt)
 			end
 		}
 	end

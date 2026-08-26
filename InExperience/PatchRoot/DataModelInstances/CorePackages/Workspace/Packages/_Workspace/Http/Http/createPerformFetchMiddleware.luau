@@ -2,55 +2,55 @@
 local updateFetchingStatus = require(http.Actions).UpdateFetchingStatus
 local batchUpdateFetchingStatus = require(http.Actions).BatchUpdateFetchingStatus
 
-return function(p0)
+return function(p1)
 	-- upvalues: batchUpdateFetchingStatus (ref), updateFetchingStatus (ref)
 	local t = {}
-	local var2 = false
-	p0 = p0 or 0
+	local var1 = false
+	p1 = p1 or 0
 	
-	return function(p1, p2)
-		-- upvalues: var2 (write), p0 (ref), t (write), batchUpdateFetchingStatus (copy), updateFetchingStatus (copy)
+	return function(p2, p3)
+		-- upvalues: var1 (write), p1 (ref), t (write), batchUpdateFetchingStatus (copy), updateFetchingStatus (copy)
 		local function _()
-			-- upvalues: var2 (copy), p0 (copy), t (copy), p2 (ref), batchUpdateFetchingStatus (copy)
-			if var2 then
+			-- upvalues: var1 (copy), p1 (copy), t (copy), p3 (ref), batchUpdateFetchingStatus (copy)
+			if var1 then
 				return
 			end
-			var2 = true
-			task.delay(p0, function()
-				-- upvalues: t (copy), var2 (copy), p2 (copy), batchUpdateFetchingStatus (copy)
+			var1 = true
+			task.delay(p1, function()
+				-- upvalues: t (copy), var1 (copy), p3 (copy), batchUpdateFetchingStatus (copy)
 				t = {}
-				var2 = false
-				p2:dispatch(batchUpdateFetchingStatus(t, true))
+				var1 = false
+				p3:dispatch(batchUpdateFetchingStatus(t, true))
 			end)
 		end
 		
-		return function(p3)
-			-- upvalues: updateFetchingStatus (copy), t (copy), var2 (copy), p0 (copy), p2 (ref), batchUpdateFetchingStatus (copy), p1 (ref)
-			if p3.type == updateFetchingStatus.name then
-				table.insert(t, p3)
+		return function(p4)
+			-- upvalues: updateFetchingStatus (copy), t (copy), var1 (copy), p1 (copy), p3 (ref), batchUpdateFetchingStatus (copy), p2 (ref)
+			if p4.type == updateFetchingStatus.name then
+				table.insert(t, p4)
 				
-				if not var2 then
-					var2 = true
-					task.delay(p0, function()
-						-- upvalues: t (copy), var2 (copy), p2 (copy), batchUpdateFetchingStatus (copy)
+				if not var1 then
+					var1 = true
+					task.delay(p1, function()
+						-- upvalues: t (copy), var1 (copy), p3 (copy), batchUpdateFetchingStatus (copy)
 						t = {}
-						var2 = false
-						p2:dispatch(batchUpdateFetchingStatus(t, true))
+						var1 = false
+						p3:dispatch(batchUpdateFetchingStatus(t, true))
 					end)
 				end
-			elseif p3.type ~= batchUpdateFetchingStatus.name or p3.shouldImmediatelyDispatch then
-				return p1(p3)
+			elseif p4.type ~= batchUpdateFetchingStatus.name or p4.shouldImmediatelyDispatch then
+				return p2(p4)
 			end
-			for i, v in pairs(p3.fetchingStatuses) do
+			for i, v in pairs(p4.fetchingStatuses) do
 				table.insert(t, v)
 			end
-			if not var2 then
-				var2 = true
-				task.delay(p0, function()
-					-- upvalues: t (copy), var2 (copy), p2 (copy), batchUpdateFetchingStatus (copy)
+			if not var1 then
+				var1 = true
+				task.delay(p1, function()
+					-- upvalues: t (copy), var1 (copy), p3 (copy), batchUpdateFetchingStatus (copy)
 					t = {}
-					var2 = false
-					p2:dispatch(batchUpdateFetchingStatus(t, true))
+					var1 = false
+					p3:dispatch(batchUpdateFetchingStatus(t, true))
 				end)
 			end
 			return nil

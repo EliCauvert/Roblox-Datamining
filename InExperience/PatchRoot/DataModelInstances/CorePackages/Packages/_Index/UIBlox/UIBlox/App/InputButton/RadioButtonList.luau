@@ -30,26 +30,26 @@ radioButtonList.validateProps = tModule.strictInterface({
 })
 radioButtonList.defaultProps = { isRoactGamepadEnabled = true }
 
-function radioButtonList.init(p0)
+function radioButtonList.init(p1)
 	-- upvalues: roactGamepadModule (ref)
-	p0.state = { currentValue = p0.props.initialValue or 0 }
+	p1.state = { currentValue = p1.props.initialValue or 0 }
 	local t = {}
 	
-	for i, v in ipairs(p0.props.radioButtons) do
+	for i, v in ipairs(p1.props.radioButtons) do
 		t[i] = type(v) == "table" and v.isDisabled
 	end
-	p0.state.disabledIndices = t
+	p1.state.disabledIndices = t
 	
-	function p0.doLogic(p1)
-		-- upvalues: p0 (ref)
-		if p0.state.disabledIndices[p1] then
+	function p0.doLogic(p2)
+		-- upvalues: p1 (ref)
+		if p1.state.disabledIndices[p2] then
 			return
 		end
-		p0:setState({ currentValue = p1 })
-		p0.props.onActivated(p1)
+		p1:setState({ currentValue = p2 })
+		p1.props.onActivated(p2)
 	end
 	
-	p0.gamepadRefs = p0.props.isRoactGamepadEnabled and roactGamepadModule.createRefCache() or {}
+	p1.gamepadRefs = p1.props.isRoactGamepadEnabled and roactGamepadModule.createRefCache() or {}
 end
 
 function radioButtonList.renderWithProviders(p2, _, p3)
@@ -65,19 +65,19 @@ function radioButtonList.renderWithProviders(p2, _, p3)
 		if not p2.props.isRoactGamepadEnabled then
 			p2.gamepadRefs[i] = p2.gamepadRefs[i] or roactModule.createRef()
 		end
-		local var13
+		local var1
 		local text = "RadioButton" .. i
 		local createElement = roactModule.createElement
-		local var11 = if p2.props.isRoactGamepadEnabled then roactGamepadModule.Focusable[radioButtonModule] else radioButtonModule
+		local var2 = if p2.props.isRoactGamepadEnabled then roactGamepadModule.Focusable[radioButtonModule] else radioButtonModule
 		local t_1 = { text = if type(v) == "table" then v.label else v }
 		
 		if p2.props.currentValue == nil then
-			var13 = i == p2.state.currentValue
+			var1 = i == p2.state.currentValue
 		else
-			var13 = i == p2.props.currentValue
-			var13 = nil
+			var1 = i == p2.props.currentValue
+			var1 = nil
 		end
-		t_1.isSelected = var13
+		t_1.isSelected = var1
 		t_1.isDisabled = p2.state.disabledIndices[i]
 		t_1.onActivated = p2.doLogic
 		t_1.size = p2.props.elementSize
@@ -94,7 +94,7 @@ function radioButtonList.renderWithProviders(p2, _, p3)
 				p2.doLogic(i)
 			end)
 		} else nil
-		t[text] = createElement(var11, t_1)
+		t[text] = createElement(var2, t_1)
 	end
 	return roactModule.createElement(if p2.props.isRoactGamepadEnabled then roactGamepadModule.Focusable.Frame else "Frame", {
 		Size = if p2.props.automaticSize then UDim2.fromScale(1, 0) else UDim2.fromScale(1, 1),
@@ -113,10 +113,10 @@ function radioButtonList.render(p4)
 	return p4:renderWithProviders(nil, p4.props.cursor)
 end
 
-return roactModule.forwardRef(function(p5, p6)
+return roactModule.forwardRef(function(p4, p5)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), radioButtonList (ref), cryoModule (ref)
-	return roactModule.createElement(radioButtonList, cryoModule.Dictionary.join(p5, {
-		forwardRef = p6,
+	return roactModule.createElement(radioButtonList, cryoModule.Dictionary.join(p4, {
+		forwardRef = p5,
 		cursor = useCursorByTypeModule(cursorTypeModule.RoundedRect)
 	}))
 end)

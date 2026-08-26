@@ -1,11 +1,11 @@
 ﻿local _ = require(script:FindFirstAncestor("RobloxAppNavigation").Parent.Navigation)
-local var0 = nil
-local var1 = false
+local var1 = nil
+local var2 = false
 local t = {
 	dispatch = function()
-		-- upvalues: var1 (write)
-		if not var1 then
-			var1 = true
+		-- upvalues: var2 (write)
+		if not var2 then
+			var2 = true
 			print("AppNavigationRegistry: not registered. This is expected in tests that aren't testing navigation. If you *are* testing navigation, please ensure AppNavigation.lua has been required.")
 		end
 		return false
@@ -16,21 +16,21 @@ local t = {
 }
 
 return {
-	register = function(p0)
-		-- upvalues: var0 (write)
-		assert(var0 == nil, "Attempted to double-register AppNavigation")
-		var0 = p0
+	register = function(p1)
+		-- upvalues: var1 (write)
+		assert(var1 == nil, "Attempted to double-register AppNavigation")
+		var1 = p1
 	end,
 	get = function()
-		-- upvalues: var0 (write), t (ref)
-		return var0 or t
+		-- upvalues: var1 (write), t (ref)
+		return var1 or t
 	end,
 	isRegistered = function()
-		-- upvalues: var0 (write)
-		return var0 ~= nil
+		-- upvalues: var1 (write)
+		return var1 ~= nil
 	end,
 	_resetForTest = function()
-		-- upvalues: var0 (write)
-		var0 = nil
+		-- upvalues: var1 (write)
+		var1 = nil
 	end
 }

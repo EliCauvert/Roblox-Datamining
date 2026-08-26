@@ -6,62 +6,62 @@ return function()
 	
 	local function getLoadingSignal(value)
 		-- upvalues: t (ref), signalsModule (copy)
-		local var3 = t[value]
+		local var1 = t[value]
 		
-		if var3 == nil then
+		if var1 == nil then
 			local idle, idle_1 = signalsModule.createSignal("Idle")
 			local idle_2, idle_3 = signalsModule.createSignal("Idle")
-			var3 = {
+			var1 = {
 				getAgentStatus = idle,
 				setAgentStatus = idle_1,
 				getPlaytestStatus = idle_2,
 				setPlaytestStatus = idle_3,
-				getStatus = signalsModule.createComputed(function(p0)
+				getStatus = signalsModule.createComputed(function(p1)
 					-- upvalues: idle (ref), idle_2 (ref)
-					return if idle(p0) == "Loading" or idle_2(p0) == "Loading" then "Loading" elseif idle(p0) == "Completed" or idle_2(p0) == "Completed" then "Completed" else "Idle"
+					return if idle(p1) == "Loading" or idle_2(p1) == "Loading" then "Loading" elseif idle(p1) == "Completed" or idle_2(p1) == "Completed" then "Completed" else "Idle"
 				end),
 				getIsPlaytestLoading = signalsModule.createComputed(function(p1)
 					-- upvalues: idle_2 (ref)
 					return idle_2(p1) == "Loading"
 				end)
 			}
-			t[value] = var3
+			t[value] = var1
 		end
-		return var3
+		return var1
 	end
 	
 	return {
-		getAgentStatusForPlaceId = function(p2)
+		getAgentStatusForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (ref)
-			return getLoadingSignal(p2).getAgentStatus
+			return getLoadingSignal(p1).getAgentStatus
 		end,
-		getPlaytestStatusForPlaceId = function(p3)
+		getPlaytestStatusForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (ref)
-			return getLoadingSignal(p3).getPlaytestStatus
+			return getLoadingSignal(p1).getPlaytestStatus
 		end,
-		getStatusForPlaceId = function(p4)
+		getStatusForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (ref)
-			return getLoadingSignal(p4).getStatus
+			return getLoadingSignal(p1).getStatus
 		end,
-		getIsPlaytestLoadingForPlaceId = function(p5)
+		getIsPlaytestLoadingForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (ref)
-			return getLoadingSignal(p5).getIsPlaytestLoading
+			return getLoadingSignal(p1).getIsPlaytestLoading
 		end,
-		setAgentStatusForPlaceId = function(value, p6)
+		setAgentStatusForPlaceId = function(value, p1)
 			-- upvalues: getLoadingSignal (ref)
-			getLoadingSignal(value).setAgentStatus(p6)
+			getLoadingSignal(value).setAgentStatus(p1)
 		end,
-		setPlaytestStatusForPlaceId = function(value, p7)
+		setPlaytestStatusForPlaceId = function(value, p1)
 			-- upvalues: getLoadingSignal (ref)
-			getLoadingSignal(value).setPlaytestStatus(p7)
+			getLoadingSignal(value).setPlaytestStatus(p1)
 		end,
-		clearCompletedStatusForPlaceId = function(p8)
+		clearCompletedStatusForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (ref)
-			local var8 = getLoadingSignal(p8)
+			local var1 = getLoadingSignal(p1)
 			
-			if var8.getStatus() == "Completed" then
-				var8.setAgentStatus("Idle")
-				var8.setPlaytestStatus("Idle")
+			if var1.getStatus() == "Completed" then
+				var1.setAgentStatus("Idle")
+				var1.setPlaytestStatus("Idle")
 				
 				return
 			end

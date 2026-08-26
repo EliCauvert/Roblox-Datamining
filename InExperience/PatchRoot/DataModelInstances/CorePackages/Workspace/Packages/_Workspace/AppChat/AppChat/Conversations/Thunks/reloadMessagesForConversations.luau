@@ -6,23 +6,23 @@ local _ = require(appChat.Models.ConversationChannels)
 local reloadedMessagesForConversationsModule = require(appChat.Conversations.Actions.ReloadedMessagesForConversations)
 local multiGetConversationDetailsModule = require(appChat.Conversations.Thunks.multiGetConversationDetails)
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), promiseModule (ref), reloadedMessagesForConversationsModule (ref), multiGetConversationDetailsModule (ref)
-	return function(p1)
-		-- upvalues: cryoModule (copy), p0 (ref), promiseModule (copy), reloadedMessagesForConversationsModule (copy), multiGetConversationDetailsModule (copy)
-		local conversations = p1:getState().ChatAppReducer.Conversations
-		local var5 = cryoModule.List.filter(p0, function(p2)
+	return function(p2)
+		-- upvalues: cryoModule (copy), p1 (ref), promiseModule (copy), reloadedMessagesForConversationsModule (copy), multiGetConversationDetailsModule (copy)
+		local conversations = p2:getState().ChatAppReducer.Conversations
+		local var1 = cryoModule.List.filter(p1, function(p3)
 			-- upvalues: conversations (ref)
-			local var6 = conversations[p2]
+			local var2 = conversations[p3]
 			
-			return var6 and var6.source == "channels"
+			return var2 and var2.source == "channels"
 		end)
 		
-		if #var5 == 0 then
+		if #var1 == 0 then
 			return promiseModule.resolve()
 		end
-		p1:dispatch(reloadedMessagesForConversationsModule(var5))
+		p2:dispatch(reloadedMessagesForConversationsModule(var1))
 		
-		return p1:dispatch(multiGetConversationDetailsModule(var5))
+		return p2:dispatch(multiGetConversationDetailsModule(var1))
 	end
 end

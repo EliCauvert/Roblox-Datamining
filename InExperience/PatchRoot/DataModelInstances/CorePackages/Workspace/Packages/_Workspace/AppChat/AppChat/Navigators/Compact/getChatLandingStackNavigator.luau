@@ -9,10 +9,10 @@ local function instantTransitionConfig()
 	}
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: roactNavigationModule (ref), chatLandingStackNavigatorScreensModule (ref), fFlagAppChatDisableAbsorbInputSelectableModule (ref), instantTransitionConfig (ref)
 	return roactNavigationModule.createRobloxStackNavigator(chatLandingStackNavigatorScreensModule, {
 		defaultNavigationOptions = if fFlagAppChatDisableAbsorbInputSelectableModule then { absorbInputSelectable = false } else nil,
-		transitionConfig = if p0 then instantTransitionConfig else nil
+		transitionConfig = if p1 then instantTransitionConfig else nil
 	})
 end

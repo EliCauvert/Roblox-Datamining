@@ -17,34 +17,34 @@ local closeOpenPromptModule = require(script.Parent.Parent.Parent.Thunks.CloseOp
 
 return function()
 	-- upvalues: useDispatch (ref), getTimeoutStatusStore (ref), useSignalState (ref), reactModule (ref), closeOpenPromptModule (ref), labelAbuseTypeMapping (ref), useLocalization (ref), formatTimeoutEndTime (ref), AXPartialPageModal (ref), buttonVariant (ref), inputSize (ref), view (ref), text (ref)
-	local var5 = useDispatch()
-	local var6 = useSignalState(getTimeoutStatusStore().getTimeoutDetails)
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), closeOpenPromptModule (copy)
-		var5(closeOpenPromptModule)
-	end, { var5 })
+	local var1 = useDispatch()
+	local var2 = useSignalState(getTimeoutStatusStore().getTimeoutDetails)
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), closeOpenPromptModule (copy)
+		var1(closeOpenPromptModule)
+	end, { var1 })
 	local _ = nil
-	local var8 = useLocalization({
+	local var4 = useLocalization({
 		titleText = "Feature.Timeout.Prompt.SaveTitleText",
 		closeText = "Feature.Timeout.Label.OK",
 		bodyText = {
 			"Feature.Timeout.Prompt.BodyText",
 			rule = useLocalization({
-				rule = if var6 and labelAbuseTypeMapping then labelAbuseTypeMapping[var6.labelTranslationKey] or "Feature.NotApproved.Label.AbuseType.Other" else "Feature.NotApproved.Label.AbuseType.Other"
+				rule = if var2 and labelAbuseTypeMapping then labelAbuseTypeMapping[var2.labelTranslationKey] or "Feature.NotApproved.Label.AbuseType.Other" else "Feature.NotApproved.Label.AbuseType.Other"
 			}).rule or "",
-			time = if var6 then formatTimeoutEndTime(var6.endDate) else ""
+			time = if var2 then formatTimeoutEndTime(var2.endDate) else ""
 		}
 	})
 	
 	return reactModule.createElement(AXPartialPageModal, {
-		onBackgroundPress = var7,
+		onBackgroundPress = var3,
 		buttonStackProps = {
 			rowLayout = false,
 			buttons = {
 				{
 					props = {
-						onActivated = var7,
-						text = var8.closeText,
+						onActivated = var3,
+						text = var4.closeText,
 						variant = buttonVariant.Standard,
 						size = inputSize.Medium
 					}
@@ -58,12 +58,12 @@ return function()
 			PromptBodyTitle = reactModule.createElement(text, {
 				tag = "auto-xy padding-bottom-small text-align-x-left text-heading-small text-wrap",
 				LayoutOrder = 2,
-				Text = var8.titleText
+				Text = var4.titleText
 			}),
 			PromptBodyText = reactModule.createElement(text, {
 				tag = "auto-xy text-align-x-left text-body-large text-wrap font-family-code",
 				LayoutOrder = 3,
-				Text = var8.bodyText
+				Text = var4.bodyText
 			})
 		})
 	})

@@ -10,20 +10,20 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref), skeleton (ref), radius (ref), icon (ref), iconName (ref), iconSize (ref)
 	return reactModule.createElement(view, {
 		tag = "row size-full-1100 padding-medium align-y-center flex-x-between gap-medium",
-		LayoutOrder = p0.layoutOrder,
-		onActivated = p0.onActivated,
-		ref = p0.forwardRef
+		LayoutOrder = p1.layoutOrder,
+		onActivated = p1.onActivated,
+		ref = p1.forwardRef
 	}, {
 		TitleText = reactModule.createElement(text, {
 			tag = "text-title-medium content-emphasis auto-xy",
 			LayoutOrder = 1,
-			Text = p0.label
+			Text = p1.label
 		}),
-		EditButton = if p0.shouldShimmer then reactModule.createElement(skeleton, {
+		EditButton = if p1.shouldShimmer then reactModule.createElement(skeleton, {
 			LayoutOrder = 3,
 			Size = UDim2.new(0.3, 0, 0, useTokens().Size.Size_400),
 			radius = radius.Medium
@@ -37,7 +37,7 @@ return function(p0)
 			}, {
 				reactModule.createElement(text, {
 					tag = "text-body-small text-truncate-end size-0-full auto-x",
-					Text = string.gsub(p0.currentValue, "\n", " ")
+					Text = string.gsub(p1.currentValue, "\n", " ")
 				})
 			}),
 			EditIcon = reactModule.createElement(icon, {

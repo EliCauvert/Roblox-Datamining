@@ -1,5 +1,5 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p0)
-	return if p0 then if p0.status == "InGame" or p0.status == "InStudio" then p0.locationString elseif p0.status == "Online" then "Online" else "Offline" else ""
+return function(p1)
+	return if p1 then if p1.status == "InGame" or p1.status == "InStudio" then p1.locationString elseif p1.status == "Online" then "Online" else "Offline" else ""
 end

@@ -13,55 +13,55 @@ spinningImage.validateProps = tModule.strictInterface({
 })
 spinningImage.defaultProps = { rotationRate = 360 }
 
-function spinningImage.init(p0)
+function spinningImage.init(p1)
 	-- upvalues: roactModule (ref)
-	local var4, var5 = roactModule.createBinding(0)
-	p0.angle = var4
-	p0.updateAngle = var5
+	local var1, var2 = roactModule.createBinding(0)
+	p1.angle = var1
+	p1.updateAngle = var2
 end
 
 function spinningImage.didMount(p1)
 	-- upvalues: runService (ref)
 	p1.heartbeatConnection = runService.Heartbeat:Connect(function(p2)
 		-- upvalues: p1 (ref)
-		local var6 = p1.angle:getValue() + p1.props.rotationRate * p2
+		local var1 = p1.angle:getValue() + p1.props.rotationRate * p2
 		
-		if var6 > 360 then
-			var6 -= 360
-		elseif var6 < 0 then
-			var6 += 360
+		if var1 > 360 then
+			var1 -= 360
+		elseif var1 < 0 then
+			var1 += 360
 		end
-		p1.updateAngle(var6)
+		p1.updateAngle(var1)
 	end)
 end
 
-function spinningImage.willUnmount(p3)
-	p3.heartbeatConnection:Disconnect()
+function spinningImage.willUnmount(p1)
+	p1.heartbeatConnection:Disconnect()
 end
 
-function spinningImage.getDerivedStateFromProps(p4, _)
-	local imageRectSize = p4.image.ImageRectSize
+function spinningImage.getDerivedStateFromProps(p1, _)
+	local imageRectSize = p1.image.ImageRectSize
 	
 	return {
-		size = p4.size or UDim2.fromOffset(imageRectSize.X, imageRectSize.Y)
+		size = p1.size or UDim2.fromOffset(imageRectSize.X, imageRectSize.Y)
 	}
 end
 
-function spinningImage.render(p5)
+function spinningImage.render(p1)
 	-- upvalues: roactModule (ref), label (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = p5.state.size,
-		AnchorPoint = p5.props.anchorPoint,
-		Position = p5.props.position
+		Size = p1.state.size,
+		AnchorPoint = p1.props.anchorPoint,
+		Position = p1.props.position
 	}, {
 		inner = roactModule.createElement(label, {
 			BackgroundTransparency = 1,
-			Size = p5.state.size,
+			Size = p1.state.size,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Image = p5.props.image,
-			Rotation = p5.angle
+			Image = p1.props.image,
+			Rotation = p1.angle
 		})
 	})
 end

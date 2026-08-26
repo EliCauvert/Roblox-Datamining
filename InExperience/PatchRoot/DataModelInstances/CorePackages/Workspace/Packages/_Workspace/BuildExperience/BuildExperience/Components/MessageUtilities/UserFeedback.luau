@@ -8,14 +8,14 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: iconVariant (ref), reactModule (ref), iconButton (ref), inputSize (ref), buttonVariant (ref), view (ref)
-	local testId = p0.testId or "user-feedback"
-	local onActivated = p0.onActivated
-	local selectedAction = p0.selectedAction
+	local testId = p1.testId or "user-feedback"
+	local onActivated = p1.onActivated
+	local selectedAction = p1.selectedAction
 	local t = {}
 	
-	for i, v in p0.icons do
+	for i, v in p1.icons do
 		t[v.testId or `{v.iconName}-{i}`] = reactModule.createElement(iconButton, {
 			LayoutOrder = i,
 			icon = if selectedAction == v.action then { name = v.iconName, variant = iconVariant.Filled } else v.iconName,
@@ -34,7 +34,7 @@ return function(p0)
 	end
 	return reactModule.createElement(view, {
 		tag = "row align-y-center size-full-0 auto-y padding-top-small",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		testId = testId
 	}, {
 		Actions = reactModule.createElement(view, {

@@ -2,14 +2,14 @@
 local _ = require(script.Parent.ChatPlatformTypes)
 local createDefaultChatPlatformValueModule = require(script.Parent.createDefaultChatPlatformValue)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createDefaultChatPlatformValueModule (ref), signalsModule (ref)
-	p0 = p0 or {}
-	local var3 = createDefaultChatPlatformValueModule()
-	local var4 = if p0.chatInputBarSettings ~= nil then signalsModule.createSignal(p0.chatInputBarSettings) else var3.getChatInputBarSettings
-	local var5 = if p0.interpolators ~= nil then signalsModule.createSignal(p0.interpolators) else var3.getInterpolators
-	local getTransparencyStore = var3.getTransparencyStore
-	local transparencyStore = p0.transparencyStore
+	p1 = p1 or {}
+	local var1 = createDefaultChatPlatformValueModule()
+	local var2 = if p1.chatInputBarSettings ~= nil then signalsModule.createSignal(p1.chatInputBarSettings) else var1.getChatInputBarSettings
+	local var3 = if p1.interpolators ~= nil then signalsModule.createSignal(p1.interpolators) else var1.getInterpolators
+	local getTransparencyStore = var1.getTransparencyStore
+	local transparencyStore = p1.transparencyStore
 	
 	if transparencyStore ~= nil then
 		getTransparencyStore = function(_)
@@ -18,9 +18,9 @@ return function(p0)
 		end
 	end
 	return {
-		getChatInputBarSettings = var4,
-		chatWindowSettings = p0.chatWindowSettings or var3.chatWindowSettings,
-		getInterpolators = var5,
+		getChatInputBarSettings = var2,
+		chatWindowSettings = p1.chatWindowSettings or var1.chatWindowSettings,
+		getInterpolators = var3,
 		getTransparencyStore = getTransparencyStore
 	}
 end

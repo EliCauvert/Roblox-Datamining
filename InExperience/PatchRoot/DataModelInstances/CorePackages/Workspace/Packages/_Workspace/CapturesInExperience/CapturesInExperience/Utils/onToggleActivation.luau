@@ -5,17 +5,17 @@ local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
 local toastDismissedModule = require(parent.Actions.ToastDismissed)
 local toastTriggeredModule = require(parent.Actions.ToastTriggered)
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: capturesActivatedModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), capturesDeactivatedModule (ref), toastDismissedModule (ref)
-	if (not p1 or p1 == 1) and not p0 then
-		p2(p4)
-		p3(capturesActivatedModule())
-		p3(toastTriggeredModule(capturesToastTypeModule.CapturesActivated))
+	if (not p2 or p2 == 1) and not p1 then
+		p3(p5)
+		p4(capturesActivatedModule())
+		p4(toastTriggeredModule(capturesToastTypeModule.CapturesActivated))
 		
 		return
-	elseif p0 then
-		p2(p5)
-		p3(capturesDeactivatedModule())
-		p3(toastDismissedModule())
+	elseif p1 then
+		p3(p6)
+		p4(capturesDeactivatedModule())
+		p4(toastDismissedModule())
 	end
 end

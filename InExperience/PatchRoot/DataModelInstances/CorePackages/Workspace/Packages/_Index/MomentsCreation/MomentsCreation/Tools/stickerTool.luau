@@ -28,17 +28,17 @@ return {
 		-- upvalues: createEditSessionModule (ref)
 		return createEditSessionModule()
 	end,
-	renderEditor = function(p0)
+	renderEditor = function(p1)
 		-- upvalues: reactModule (ref), stickerOverlayControlsModule (ref)
-		return reactModule.createElement(stickerOverlayControlsModule, { layoutOrder = 2, controller = p0 })
+		return reactModule.createElement(stickerOverlayControlsModule, { layoutOrder = 2, controller = p1 })
 	end,
 	renderPreviewLayer = function(p1, p2)
 		-- upvalues: reactModule (ref), stickerOverlayLayerModule (ref)
 		return reactModule.createElement(stickerOverlayLayerModule, { zIndex = 3, controller = p1, ctx = p2 })
 	end,
-	toEdits = function(p3)
-		local var8 = p3 and p3[1]
+	toEdits = function(p1)
+		local var1 = p1 and p1[1]
 		
-		return if var8 == nil or var8.stickerURI == nil or var8.stickerURI == "" then {} else { stickerOverlays = p3 }
+		return if var1 == nil or var1.stickerURI == nil or var1.stickerURI == "" then {} else { stickerOverlays = p1 }
 	end
 }

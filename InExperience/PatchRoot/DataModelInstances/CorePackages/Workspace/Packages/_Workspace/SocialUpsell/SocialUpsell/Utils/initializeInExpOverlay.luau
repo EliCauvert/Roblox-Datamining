@@ -9,41 +9,41 @@ local signalsModule = require(parent.Signals)
 local inExpOverlayModule = require(socialUpsell.Components.InExpOverlay)
 local constantsModule = require(socialUpsell.Constants)
 local getOverlayStoreModule = require(socialUpsell.Store.getOverlayStore)
-local var10 = nil
-local var11 = nil
+local var1 = nil
+local var2 = nil
 
 function mount()
-	-- upvalues: var10 (write), var11 (write), coreGuiService (ref), reactRobloxModule (ref), guiService (ref), constantsModule (ref), contextActionService (ref), reactModule (ref), inExpOverlayModule (ref)
-	if not var10 then
-		if not var11 then
-			var11 = Instance.new("Folder")
-			var11.Name = "Overlay"
-			var11.Parent = coreGuiService
+	-- upvalues: var1 (write), var2 (write), coreGuiService (ref), reactRobloxModule (ref), guiService (ref), constantsModule (ref), contextActionService (ref), reactModule (ref), inExpOverlayModule (ref)
+	if not var1 then
+		if not var2 then
+			var2 = Instance.new("Folder")
+			var2.Name = "Overlay"
+			var2.Parent = coreGuiService
 		end
-		var10 = reactRobloxModule.createRoot(var11)
+		var1 = reactRobloxModule.createRoot(var2)
 	end
 	guiService:SetMenuIsOpen(true, constantsModule.OVERLAY_MENU_NAME)
 	contextActionService:BindCoreAction(constantsModule.OVERLAY_CORE_ACTION_NAME, function() end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape)
-	var10:render(reactModule.createElement(inExpOverlayModule, { gui = var11 }))
+	var1:render(reactModule.createElement(inExpOverlayModule, { gui = var2 }))
 end
 
 function unmount()
-	-- upvalues: var10 (write), contextActionService (ref), constantsModule (ref), guiService (ref)
-	if var10 then
-		var10:unmount()
+	-- upvalues: var1 (write), contextActionService (ref), constantsModule (ref), guiService (ref)
+	if var1 then
+		var1:unmount()
 		contextActionService:UnbindCoreAction(constantsModule.OVERLAY_CORE_ACTION_NAME)
 		guiService:SetMenuIsOpen(false, constantsModule.OVERLAY_MENU_NAME)
 	end
 end
 
-local var12 = nil
+local var3 = nil
 
 return function()
-	-- upvalues: getOverlayStoreModule (ref), var12 (write), signalsModule (ref)
-	local var13 = getOverlayStoreModule(false)
-	var12 = signalsModule.createEffect(function(p0)
-		-- upvalues: var13 (ref)
-		if var13.getCurrentOverlayType(p0) then
+	-- upvalues: getOverlayStoreModule (ref), var3 (write), signalsModule (ref)
+	local var4 = getOverlayStoreModule(false)
+	var3 = signalsModule.createEffect(function(p1)
+		-- upvalues: var4 (ref)
+		if var4.getCurrentOverlayType(p1) then
 			mount()
 			
 			return

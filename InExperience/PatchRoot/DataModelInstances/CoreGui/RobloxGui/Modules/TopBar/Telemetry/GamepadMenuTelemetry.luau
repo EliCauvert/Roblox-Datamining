@@ -4,8 +4,8 @@ local _ = require(script.Parent.Parent.Components.Presentation.GamepadMenu.EnumG
 local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
 local gamepadMenuActionThrottleHundrethsPercent = game:DefineFastInt("GamepadMenuActionThrottleHundrethsPercent", 0)
 
-local function _(p0, p1)
-	return if p0 == nil then nil else p1(p0)
+local function _(p1, p2)
+	return if p1 == nil then nil else p2(p1)
 end
 
 local t = {}

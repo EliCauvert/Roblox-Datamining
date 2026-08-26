@@ -7,14 +7,14 @@ local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeTo
 local getPurchaseSurfaceModule = require(purchasePrompt.Utils.getPurchaseSurface)
 local getProductTypeFromRequestTypeModule = require(purchasePrompt.Utils.getProductTypeFromRequestType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getPurchaseSurfaceModule (ref), productPurchaseSurface (ref), getTTIEventName (ref), timeToInteractiveTracker (ref), getProductTypeFromRequestTypeModule (ref)
-	local state = p0:getState()
+	local state = p1:getState()
 	
 	if getPurchaseSurfaceModule(state.purchaseAnalyticsMetadata) == productPurchaseSurface.InExperience then
-		local var5 = getTTIEventName(productPurchaseSurface.InExperience)
-		timeToInteractiveTracker.trackStart(var5)
-		timeToInteractiveTracker.updateMetadata(var5, {
+		local var1 = getTTIEventName(productPurchaseSurface.InExperience)
+		timeToInteractiveTracker.trackStart(var1)
+		timeToInteractiveTracker.updateMetadata(var1, {
 			category = "unified_purchase_modal",
 			page = productPurchaseSurface.InExperience,
 			subcategory = getProductTypeFromRequestTypeModule(state.promptRequest.requestType)

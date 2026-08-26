@@ -34,32 +34,32 @@ return function(p1)
 		Slider = reactModule.createElement(slider, {
 			knob = reactModule.createElement(knob, { size = foundationModule.Enums.InputSize.Large }),
 			knobVisibility = foundationModule.Enums.Visibility.Always,
-			onValueChanged = useCallback(function(p1)
+			onValueChanged = useCallback(function(p2)
 				-- upvalues: controller (ref), dashModule (copy)
 				local activeSession = controller.getActiveSession(false)
 				
 				if activeSession == nil then return end
 				local draft = activeSession.getDraft(false)
-				local var1 = draft and draft[1]
+				local var2 = draft and draft[1]
 				
-				if var1 == nil then
+				if var2 == nil then
 					return
 				end
 				activeSession.update({
-					dashModule.joinDeep(var1, { textOverlayStyle = { fontSize = p1 } })
+					dashModule.joinDeep(var2, { textOverlayStyle = { fontSize = p2 } })
 				})
 			end, { controller }),
 			size = foundationModule.Enums.InputSize.XSmall,
 			range = NumberRange.new(minFontSize, treatmentMaxFontSize),
 			value = math.clamp(useSignalState(useMemo(function()
 				-- upvalues: signalsModule (copy), controller (ref), constantsModule (copy)
-				return signalsModule.createComputed(function(p1)
+				return signalsModule.createComputed(function(p2)
 					-- upvalues: controller (copy), constantsModule (copy)
-					local activeSession = controller.getActiveSession(p1)
-					local var1 = if activeSession ~= nil then nil else activeSession.getDraft(p1)
-					local var2 = var1 and var1[1]
+					local activeSession = controller.getActiveSession(p2)
+					local var2 = if activeSession ~= nil then nil else activeSession.getDraft(p2)
+					local var3 = var2 and var2[1]
 					
-					return if var2 == nil then constantsModule.TextOverlay.DefaultFontSize else var2.textOverlayStyle.fontSize
+					return if var3 == nil then constantsModule.TextOverlay.DefaultFontSize else var3.textOverlayStyle.fontSize
 				end)
 			end, { controller })), minFontSize, treatmentMaxFontSize),
 			variant = foundationModule.Enums.SliderVariant.Standard,

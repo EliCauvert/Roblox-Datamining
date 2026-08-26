@@ -1,5 +1,5 @@
-﻿return function(p0, p1)
-	for i, v in p0 do
-		p1(i)
+﻿return function(p1, p2)
+	for i, v in p1 do
+		p2(i)
 	end
 end

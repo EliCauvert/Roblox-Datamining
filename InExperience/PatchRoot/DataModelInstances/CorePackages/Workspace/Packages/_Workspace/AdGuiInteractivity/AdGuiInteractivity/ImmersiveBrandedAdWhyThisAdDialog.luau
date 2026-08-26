@@ -15,10 +15,10 @@ local inputSize = foundationModule.Enums.InputSize
 local useLocalization = localizationModule.Hooks.useLocalization
 local immersiveBrandedAdsLearnMoreUrl = game:DefineFastString("ImmersiveBrandedAdsLearnMoreUrl", "www.roblox.com")
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), default (ref), immersiveBrandedAdsLearnMoreUrl (ref), adsInteractivityTelemetryModule (ref), dialog (ref), dialogSize (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local advertiserName = p0.advertiserName or ""
-	local var8 = useLocalization({
+	local advertiserName = p1.advertiserName or ""
+	local var1 = useLocalization({
 		WhyThisAdText = "CoreScripts.Ads.Label.WhyThisAd",
 		CloseButtonText = "CoreScripts.Ads.Action.Close",
 		StaticBodyText = "CoreScripts.Ads.Label.InExperienceDisclosureStatic",
@@ -33,30 +33,30 @@ return function(p0)
 		dialog = reactModule.createElement(dialog.Root, {
 			size = dialogSize.Small,
 			onClose = reactModule.useCallback(function(_)
-				-- upvalues: p0 (ref)
-				p0.onDismiss()
-			end, { p0.onDismiss })
+				-- upvalues: p1 (ref)
+				p1.onDismiss()
+			end, { p1.onDismiss })
 		}, {
-			dialogTitle = reactModule.createElement(dialog.Title, { text = var8.WhyThisAdText }),
+			dialogTitle = reactModule.createElement(dialog.Title, { text = var1.WhyThisAdText }),
 			dialogContent = reactModule.createElement(dialog.Content, nil, {
 				content = reactModule.createElement(view, { tag = "col size-full-0 auto-y gap-small" }, {
 					dialogText = reactModule.createElement(dialog.Text, {
 						LayoutOrder = 1,
-						Text = if advertiserName ~= "" then var8.DynamicAdvertiserBodyText else var8.StaticBodyText
+						Text = if advertiserName ~= "" then var1.DynamicAdvertiserBodyText else var1.StaticBodyText
 					}),
 					link = reactModule.createElement(button, {
 						LayoutOrder = 2,
 						icon = "icons/navigation/externallink",
-						text = var8.LearnMoreLinkText,
+						text = var1.LearnMoreLinkText,
 						variant = buttonVariant.Link,
 						onActivated = reactModule.useCallback(function()
-							-- upvalues: default (copy), immersiveBrandedAdsLearnMoreUrl (copy), adsInteractivityTelemetryModule (copy), p0 (ref)
+							-- upvalues: default (copy), immersiveBrandedAdsLearnMoreUrl (copy), adsInteractivityTelemetryModule (copy), p1 (ref)
 							default:openURL(immersiveBrandedAdsLearnMoreUrl):catch(function(_)
-								-- upvalues: adsInteractivityTelemetryModule (copy), p0 (copy)
+								-- upvalues: adsInteractivityTelemetryModule (copy), p1 (copy)
 								adsInteractivityTelemetryModule.logImmersiveBrandedAdLinkingFailedCounter("whyThisAd.learnMore")
-								p0.onDismiss()
+								p1.onDismiss()
 							end)
-						end, { p0.onDismiss }),
+						end, { p1.onDismiss }),
 						size = inputSize.Small
 					})
 				})
@@ -64,9 +64,9 @@ return function(p0)
 			dialogActions = reactModule.createElement(dialog.Actions, {
 				actions = {
 					{
-						text = var8.CloseButtonText,
+						text = var1.CloseButtonText,
 						variant = buttonVariant.Standard,
-						onActivated = p0.onDismiss
+						onActivated = p1.onDismiss
 					}
 				}
 			})

@@ -6,41 +6,41 @@ local var3 = nil
 local var4 = nil
 local t = { left = 0, top = 0, right = 0, bottom = 0 }
 
-function diffInsets(value, p0)
-	return if value.top == p0.top then if value.bottom == p0.bottom then if value.left == p0.left then value.right ~= p0.right else true else true else true
+function diffInsets(value, p1)
+	return if value.top == p1.top then if value.bottom == p1.bottom then if value.left == p1.left then value.right ~= p1.right else true else true else true
 end
 
 function getHardwareSafeAreaInsets()
 	-- upvalues: var3 (write), var4 (write)
 	local absolutePosition = var3.AbsolutePosition
 	local absolutePosition_1 = var4.AbsolutePosition
-	local var7 = absolutePosition_1 - absolutePosition
-	local var8 = absolutePosition + var3.AbsoluteSize - (absolutePosition_1 + var4.AbsoluteSize)
+	local var5 = absolutePosition_1 - absolutePosition
+	local var6 = absolutePosition + var3.AbsoluteSize - (absolutePosition_1 + var4.AbsoluteSize)
 	
 	return {
-		left = math.round(var7.X),
-		top = math.round(var7.Y),
-		right = math.round(var8.X),
-		bottom = math.round(var8.Y)
+		left = math.round(var5.X),
+		top = math.round(var5.Y),
+		right = math.round(var6.X),
+		bottom = math.round(var6.Y)
 	}
 end
 
-local var6 = nil
+local var5 = nil
 
 function handleSizeChange()
-	-- upvalues: t (write), var6 (write), var2 (ref)
-	local var9 = getHardwareSafeAreaInsets()
+	-- upvalues: t (write), var5 (write), var2 (ref)
+	local var6 = getHardwareSafeAreaInsets()
 	
-	if diffInsets(var9, t) then
-		t = var9
+	if diffInsets(var6, t) then
+		t = var6
 		
-		if var6 then
-			task.cancel(var6)
+		if var5 then
+			task.cancel(var5)
 		end
-		var6 = task.defer(function()
-			-- upvalues: var6 (copy), var2 (copy), var9 (ref)
-			var6 = nil
-			var2:fire(var9)
+		var5 = task.defer(function()
+			-- upvalues: var5 (copy), var2 (copy), var6 (ref)
+			var5 = nil
+			var2:fire(var6)
 		end)
 	end
 end

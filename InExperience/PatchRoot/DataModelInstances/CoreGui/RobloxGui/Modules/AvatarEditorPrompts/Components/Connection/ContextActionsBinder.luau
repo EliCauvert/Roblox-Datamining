@@ -11,8 +11,8 @@ contextActionsBinder.validateProps = tModule.strictInterface({
 	closeOpenPrompt = tModule.callback
 })
 
-function contextActionsBinder.init(p0)
-	p0.actionsBound = false
+function contextActionsBinder.init(p1)
+	p1.actionsBound = false
 end
 
 function contextActionsBinder.bindActions(p1)
@@ -34,19 +34,19 @@ function contextActionsBinder.bindActions(p1)
 	end, false, Enum.KeyCode.Escape)
 end
 
-function contextActionsBinder.unbindActions(p3)
+function contextActionsBinder.unbindActions(p1)
 	-- upvalues: contextActionService (ref)
-	if p3.actionsBound then
-		p3.actionsBound = false
+	if p1.actionsBound then
+		p1.actionsBound = false
 		contextActionService:UnbindCoreAction("CloseAvatarEditorPrompt")
 		
 		return
 	end
 end
 
-function contextActionsBinder.didMount(p4)
-	if p4.props.promptOpen then
-		p4:bindActions()
+function contextActionsBinder.didMount(p1)
+	if p1.props.promptOpen then
+		p1:bindActions()
 	end
 end
 
@@ -54,31 +54,31 @@ function contextActionsBinder.render(_)
 	return nil
 end
 
-function contextActionsBinder.didUpdate(p5, p6, _)
-	if p5.props.promptOpen ~= p6.promptOpen then
-		if p5.props.promptOpen then
-			p5:bindActions()
+function contextActionsBinder.didUpdate(p1, p2, _)
+	if p1.props.promptOpen ~= p2.promptOpen then
+		if p1.props.promptOpen then
+			p1:bindActions()
 			
 			return
 		end
-		p5:unbindActions()
+		p1:unbindActions()
 	end
 end
 
-function contextActionsBinder.willUnmount(p7)
-	if p7.actionsBound then
-		p7:unbindActions()
+function contextActionsBinder.willUnmount(p1)
+	if p1.actionsBound then
+		p1:unbindActions()
 	end
 end
 
-return roactRoduxModule.connect(function(p8)
-	return { promptOpen = p8.promptInfo.promptType ~= nil }
-end, function(p9)
+return roactRoduxModule.connect(function(p1)
+	return { promptOpen = p1.promptInfo.promptType ~= nil }
+end, function(p1)
 	-- upvalues: closeOpenPromptModule (ref)
 	return {
 		closeOpenPrompt = function()
-			-- upvalues: p9 (ref), closeOpenPromptModule (copy)
-			return p9(closeOpenPromptModule)
+			-- upvalues: p1 (ref), closeOpenPromptModule (copy)
+			return p1(closeOpenPromptModule)
 		end
 	}
 end)(contextActionsBinder)

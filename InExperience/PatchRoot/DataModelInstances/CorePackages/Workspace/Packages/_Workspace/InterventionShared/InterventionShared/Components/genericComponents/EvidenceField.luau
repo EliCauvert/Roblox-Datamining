@@ -4,21 +4,21 @@ local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
 local text = foundationModule.Text
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Label = reactModule.createElement(text, {
 			tag = "auto-xy text-title-medium text-align-x-left text-wrap content-emphasis",
 			LayoutOrder = 1,
-			Text = `{p0.fieldLabel}{if p0.hasColon == nil or p0.hasColon then ":" else ""}`
+			Text = `{p1.fieldLabel}{if p1.hasColon == nil or p1.hasColon then ":" else ""}`
 		}),
 		Value = reactModule.createElement(text, {
 			tag = "auto-xy text-body-medium text-align-x-left text-wrap",
 			LayoutOrder = 2,
-			Text = p0.fieldValue
+			Text = p1.fieldValue
 		})
 	})
 end)

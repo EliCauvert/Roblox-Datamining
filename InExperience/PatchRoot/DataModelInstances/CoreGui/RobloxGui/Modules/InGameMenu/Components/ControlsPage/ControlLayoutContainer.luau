@@ -7,8 +7,8 @@ local t = inGameMenuDependenciesModule.t
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var3 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var4 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local parent = script.Parent.Parent.Parent
 local globalConfigModule = require(parent.GlobalConfig)
 local themedTextLabelModule = require(script.Parent.Parent.ThemedTextLabel)
@@ -19,31 +19,31 @@ local assetsModule = require(parent.Resources.Assets)
 local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local image = foundationModule.Image
-local var11 = t.strictInterface({
+local var3 = t.strictInterface({
 	titleText = t.string,
 	[roact.Children] = t.optional(t.table),
 	onClosed = t.callback,
 	closeButtonRef = t.optional(t.table)
 })
 
-local function ControlLayoutContainerWithSelectionCursor(p0, p1)
-	-- upvalues: globalConfigModule (ref), var11 (ref), withLocalizationModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), var4 (ref), imageSetButton (ref), themedTextLabelModule (ref), dividerModule (ref), imageSetLabel (ref)
+local function ControlLayoutContainerWithSelectionCursor(p1, p2)
+	-- upvalues: globalConfigModule (ref), var3 (ref), withLocalizationModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), var2 (ref), imageSetButton (ref), themedTextLabelModule (ref), dividerModule (ref), imageSetLabel (ref)
 	if globalConfigModule.propValidation then
-		assert(var11(p0))
+		assert(var3(p1))
 	end
-	return withLocalizationModule({ titleText = p0.titleText })(function(p2)
-		-- upvalues: withFoundationOrUIBloxStyle (copy), roact (copy), p0 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), p1 (ref), var4 (copy), imageSetButton (copy), themedTextLabelModule (copy), dividerModule (copy), imageSetLabel (copy)
-		return withFoundationOrUIBloxStyle(function(p3)
+	return withLocalizationModule({ titleText = p1.titleText })(function(p3)
+		-- upvalues: withFoundationOrUIBloxStyle (copy), roact (copy), p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), p2 (ref), var2 (copy), imageSetButton (copy), themedTextLabelModule (copy), dividerModule (copy), imageSetLabel (copy)
+		return withFoundationOrUIBloxStyle(function(p4)
 			return {
 				Theme = {
 					Overlay = {
-						Color = p3.Color.Common.Scrim.Color3,
-						Transparency = p3.Color.Common.Scrim.Transparency
+						Color = p4.Color.Common.Scrim.Color3,
+						Transparency = p4.Color.Common.Scrim.Transparency
 					}
 				}
 			}
 		end, function(p4)
-			-- upvalues: roact (copy), p0 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), p1 (copy), var4 (copy), imageSetButton (copy), themedTextLabelModule (copy), p2 (ref), dividerModule (copy), imageSetLabel (copy)
+			-- upvalues: roact (copy), p1 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), p2 (copy), var2 (copy), imageSetButton (copy), themedTextLabelModule (copy), p3 (ref), dividerModule (copy), imageSetLabel (copy)
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 0,
 				Active = true,
@@ -55,7 +55,7 @@ local function ControlLayoutContainerWithSelectionCursor(p0, p1)
 					ClipsDescendants = true,
 					Size = UDim2.new(1, 0, 1, -132),
 					Position = UDim2.new(0, 0, 0, 132)
-				}, p0[roact.Children]),
+				}, p1[roact.Children]),
 				HeaderContainer = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 132)
@@ -70,18 +70,18 @@ local function ControlLayoutContainerWithSelectionCursor(p0, p1)
 						Size = UDim2.new(0, 36, 0, 36),
 						backgroundStyle = { Transparency = 1 },
 						Image = assetsModule.Images.CloseModal,
-						selection = { SelectionImageObject = p1(var4.RoundedRect) },
-						onActivated = p0.onClosed,
-						ref = p0.closeButtonRef
+						selection = { SelectionImageObject = p2(var2.RoundedRect) },
+						onActivated = p1.onClosed,
+						ref = p1.closeButtonRef
 					}) else roact.createElement(imageSetButton, {
 						AnchorPoint = Vector2.new(0, 0.5),
 						Position = UDim2.new(0, 0, 0, 100),
 						Size = UDim2.new(0, 36, 0, 36),
 						Image = assetsModule.Images.CloseModal,
 						BackgroundTransparency = 1,
-						SelectionImageObject = p1(var4.RoundedRect),
-						[roact.Event.Activated] = p0.onClosed,
-						[roact.Ref] = p0.closeButtonRef
+						SelectionImageObject = p2(var2.RoundedRect),
+						[roact.Event.Activated] = p1.onClosed,
+						[roact.Ref] = p1.closeButtonRef
 					}),
 					HeaderTextLabel = roact.createElement(themedTextLabelModule, {
 						fontKey = "Header1",
@@ -89,7 +89,7 @@ local function ControlLayoutContainerWithSelectionCursor(p0, p1)
 						Size = UDim2.new(0, 250, 0, 28),
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.5, 0, 0, 100),
-						Text = p2.titleText
+						Text = p3.titleText
 					}),
 					HeaderDivider = roact.createElement(dividerModule, {
 						Size = UDim2.new(1, 0, 0, 2),
@@ -132,18 +132,18 @@ local function ControlLayoutContainerWithSelectionCursor(p0, p1)
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p7)
+return roactRodux.UNSTABLE_connect2(nil, function(p1)
 	-- upvalues: navigateBackModule (ref)
 	return {
 		onClosed = function()
-			-- upvalues: p7 (ref), navigateBackModule (copy)
-			p7(navigateBackModule())
+			-- upvalues: p1 (ref), navigateBackModule (copy)
+			p1(navigateBackModule())
 		end
 	}
-end)(function(p5)
-	-- upvalues: var3 (ref), ControlLayoutContainerWithSelectionCursor (ref)
-	return var3(function(p6)
-		-- upvalues: ControlLayoutContainerWithSelectionCursor (copy), p5 (ref)
-		return ControlLayoutContainerWithSelectionCursor(p5, p6)
+end)(function(p1)
+	-- upvalues: var1 (ref), ControlLayoutContainerWithSelectionCursor (ref)
+	return var1(function(p2)
+		-- upvalues: ControlLayoutContainerWithSelectionCursor (copy), p1 (ref)
+		return ControlLayoutContainerWithSelectionCursor(p1, p2)
 	end)
 end)

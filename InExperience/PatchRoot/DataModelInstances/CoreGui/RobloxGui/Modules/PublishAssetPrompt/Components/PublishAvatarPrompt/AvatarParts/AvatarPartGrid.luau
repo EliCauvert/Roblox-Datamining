@@ -8,42 +8,42 @@ local avatarItemCardModule = require(script.Parent.AvatarItemCard)
 local itemTile = UIBloxModule.Tile.ItemTile
 local vector2 = Vector2.new(20, 20)
 
-local function _(p0)
+local function _(p1)
 	local r15ArtistIntent = Instance.new("Folder")
 	r15ArtistIntent.Name = "R15ArtistIntent"
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		v.Parent = r15ArtistIntent
 	end
 	return { [1] = r15ArtistIntent }
 end
 
-local _ = function(p1, p2)
-	return p1:FindFirstChild(p2)
+local _ = function(p2, p3)
+	return p2:FindFirstChild(p3)
 end
 
-local function getItems(p3, _)
-	local var8 = nil
-	local var9 = nil
-	local var10 = nil
+local function getItems(p2, _)
+	local var1 = nil
+	local var2 = nil
+	local var3 = nil
 	
-	for i, v in ipairs(p3:GetChildren()) do
+	for i, v in ipairs(p2:GetChildren()) do
 		if v:IsA("Accessory") then
 			if v.AccessoryType == Enum.AccessoryType.Eyebrow then
-				var9 = v
+				var2 = v
 			elseif v.AccessoryType == Enum.AccessoryType.Eyelash then
-				var8 = v
+				var1 = v
 			elseif v.AccessoryType == Enum.AccessoryType.Hair then
-				var10 = v
+				var3 = v
 			end
 		end
 	end
 	local t = {}
-	local t_1 = { partName = "Head", asset = p3:FindFirstChild("Head") }
+	local t_1 = { partName = "Head", asset = p2:FindFirstChild("Head") }
 	local t_2 = { partName = "Torso" }
 	local list = {
-		p3:FindFirstChild("UpperTorso"),
-		p3:FindFirstChild("LowerTorso")
+		p2:FindFirstChild("UpperTorso"),
+		p2:FindFirstChild("LowerTorso")
 	}
 	local r15ArtistIntent = Instance.new("Folder")
 	r15ArtistIntent.Name = "R15ArtistIntent"
@@ -54,9 +54,9 @@ local function getItems(p3, _)
 	t_2.asset = { [1] = r15ArtistIntent }
 	local t_3 = { partName = "Left Arm" }
 	local list_1 = {
-		p3:FindFirstChild("LeftUpperArm"),
-		p3:FindFirstChild("LeftLowerArm"),
-		p3:FindFirstChild("LeftHand")
+		p2:FindFirstChild("LeftUpperArm"),
+		p2:FindFirstChild("LeftLowerArm"),
+		p2:FindFirstChild("LeftHand")
 	}
 	local r15ArtistIntent_1 = Instance.new("Folder")
 	r15ArtistIntent_1.Name = "R15ArtistIntent"
@@ -67,9 +67,9 @@ local function getItems(p3, _)
 	t_3.asset = { [1] = r15ArtistIntent_1 }
 	local t_4 = { partName = "Left Leg" }
 	local list_2 = {
-		p3:FindFirstChild("LeftUpperLeg"),
-		p3:FindFirstChild("LeftLowerLeg"),
-		p3:FindFirstChild("LeftFoot")
+		p2:FindFirstChild("LeftUpperLeg"),
+		p2:FindFirstChild("LeftLowerLeg"),
+		p2:FindFirstChild("LeftFoot")
 	}
 	local r15ArtistIntent_2 = Instance.new("Folder")
 	r15ArtistIntent_2.Name = "R15ArtistIntent"
@@ -80,9 +80,9 @@ local function getItems(p3, _)
 	t_4.asset = { [1] = r15ArtistIntent_2 }
 	local t_5 = { partName = "Right Arm" }
 	local list_3 = {
-		p3:FindFirstChild("RightUpperArm"),
-		p3:FindFirstChild("RightLowerArm"),
-		p3:FindFirstChild("RightHand")
+		p2:FindFirstChild("RightUpperArm"),
+		p2:FindFirstChild("RightLowerArm"),
+		p2:FindFirstChild("RightHand")
 	}
 	local r15ArtistIntent_3 = Instance.new("Folder")
 	r15ArtistIntent_3.Name = "R15ArtistIntent"
@@ -93,9 +93,9 @@ local function getItems(p3, _)
 	t_5.asset = { [1] = r15ArtistIntent_3 }
 	local t_6 = { partName = "Right Leg" }
 	local list_4 = {
-		p3:FindFirstChild("RightUpperLeg"),
-		p3:FindFirstChild("RightLowerLeg"),
-		p3:FindFirstChild("RightFoot")
+		p2:FindFirstChild("RightUpperLeg"),
+		p2:FindFirstChild("RightLowerLeg"),
+		p2:FindFirstChild("RightFoot")
 	}
 	local r15ArtistIntent_4 = Instance.new("Folder")
 	r15ArtistIntent_4.Name = "R15ArtistIntent"
@@ -106,25 +106,25 @@ local function getItems(p3, _)
 	t_6.asset = { [1] = r15ArtistIntent_4 }
 	-- Unknown statement at pc 1: <SetList>
 	
-	if var9 then
-		table.insert(t, { partName = "Eyebrows", asset = var9 })
+	if var2 then
+		table.insert(t, { partName = "Eyebrows", asset = var2 })
 	end
-	if var8 then
-		table.insert(t, { partName = "Eyelashes", asset = var8 })
+	if var1 then
+		table.insert(t, { partName = "Eyelashes", asset = var1 })
 	end
-	if var10 then
-		table.insert(t, { partName = "Hair", asset = var10 })
+	if var3 then
+		table.insert(t, { partName = "Hair", asset = var3 })
 	end
 	return t
 end
 
-return function(p4)
+return function(p3)
 	-- upvalues: reactModule (ref), getItems (ref), constantsModule (ref), avatarItemCardModule (ref), itemTile (ref), defaultMetricsGridView (ref), gridMetrics (ref), vector2 (ref)
-	local var28, var29 = reactModule.useState({})
+	local var4, var5 = reactModule.useState({})
 	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), var29 (ref), getItems (copy)
-		if p4.humanoidModel then
-			var29(getItems(p4.humanoidModel:Clone(), p4.name))
+		-- upvalues: p3 (ref), var5 (ref), getItems (copy)
+		if p3.humanoidModel then
+			var5(getItems(p3.humanoidModel:Clone(), p3.name))
 			
 			return
 		end
@@ -133,43 +133,43 @@ return function(p4)
 		for i = 1, 6 do
 			t[i] = {}
 		end
-		var29(t)
-	end, { p4.humanoidModel })
+		var5(t)
+	end, { p3.humanoidModel })
 	reactModule.useEffect(function()
-		-- upvalues: var28 (ref), var29 (ref)
-		if var28[1] and var28[1].asset then
+		-- upvalues: var4 (ref), var5 (ref)
+		if var4[1] and var4[1].asset then
 			local t = {}
 			
-			for i, v in var28 do
+			for i, v in var4 do
 				t[i] = { asset = v.asset, partName = v.partName }
 			end
-			var29(t)
+			var5(t)
 		end
-	end, { p4.name })
-	local var30 = if p4.screenSize.X < p4.screenSize.Y then constantsModule.ItemCardWidthPortrait else constantsModule.ItemCardWidthLandscape
+	end, { p3.name })
+	local var6 = if p3.screenSize.X < p3.screenSize.Y then constantsModule.ItemCardWidthPortrait else constantsModule.ItemCardWidthLandscape
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p4.LayoutOrder
+		LayoutOrder = p3.LayoutOrder
 	}, {
 		Grid = reactModule.createElement(defaultMetricsGridView, {
-			getItemHeight = function(p5)
-				return p5 * 1.333333333333
+			getItemHeight = function(p4)
+				return p4 * 1.333333333333
 			end,
-			getItemMetrics = gridMetrics.makeCustomMetricsGetter({ minimumItemsPerRow = 2, minimumItemWidth = var30 }),
-			renderItem = reactModule.useCallback(function(p6)
-				-- upvalues: reactModule (copy), avatarItemCardModule (copy), p4 (ref), var30 (ref), itemTile (copy)
-				return if p6.asset then reactModule.createElement(avatarItemCardModule, {
-					asset = p6.asset,
-					bodyName = p4.name,
-					partName = p6.partName,
-					viewportSize = var30
+			getItemMetrics = gridMetrics.makeCustomMetricsGetter({ minimumItemsPerRow = 2, minimumItemWidth = var6 }),
+			renderItem = reactModule.useCallback(function(p4)
+				-- upvalues: reactModule (copy), avatarItemCardModule (copy), p3 (ref), var6 (ref), itemTile (copy)
+				return if p4.asset then reactModule.createElement(avatarItemCardModule, {
+					asset = p4.asset,
+					bodyName = p3.name,
+					partName = p4.partName,
+					viewportSize = var6
 				}) else reactModule.createElement(itemTile)
-			end, { var30, p4.name }),
+			end, { var6, p3.name }),
 			itemPadding = vector2,
-			items = var28
+			items = var4
 		})
 	})
 end

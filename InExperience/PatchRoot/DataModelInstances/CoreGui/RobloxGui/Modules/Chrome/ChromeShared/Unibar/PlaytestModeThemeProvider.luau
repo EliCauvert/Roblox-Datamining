@@ -7,24 +7,24 @@ local appearanceContext = styleModule.AppearanceContext
 local colorMode = require(corePackagesService.Packages.Foundation).Enums.ColorMode
 local useIsPlaytestModeModule = require(script.Parent.Parent.Hooks.useIsPlaytestMode)
 
-local function ThemeSwitcher(p0)
+local function ThemeSwitcher(p1)
 	-- upvalues: reactModule (ref), appearanceContext (ref)
-	local var5 = reactModule.useContext(appearanceContext)
+	local var1 = reactModule.useContext(appearanceContext)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var5 (ref), p0 (ref)
-		var5.setTheme(p0.themeName)
-	end, { p0.themeName, var5 })
+		-- upvalues: var1 (ref), p1 (ref)
+		var1.setTheme(p1.themeName)
+	end, { p1.themeName, var1 })
 	
-	return reactModule.createElement(reactModule.Fragment, nil, p0.children)
+	return reactModule.createElement(reactModule.Fragment, nil, p1.children)
 end
 
 return function(p1)
 	-- upvalues: useIsPlaytestModeModule (ref), colorMode (ref), reactModule (ref), uiModeStyleProvider (ref), constants (ref), ThemeSwitcher (ref)
-	local var6 = if useIsPlaytestModeModule() then colorMode.Light else colorMode.Dark
+	local var1 = if useIsPlaytestModeModule() then colorMode.Light else colorMode.Dark
 	
 	return reactModule.createElement(uiModeStyleProvider, {
-		style = { themeName = var6, fontName = constants.FontName.Gotham }
+		style = { themeName = var1, fontName = constants.FontName.Gotham }
 	}, {
-		ThemeSwitcher = reactModule.createElement(ThemeSwitcher, { themeName = var6 }, p1.children)
+		ThemeSwitcher = reactModule.createElement(ThemeSwitcher, { themeName = var1 }, p1.children)
 	})
 end

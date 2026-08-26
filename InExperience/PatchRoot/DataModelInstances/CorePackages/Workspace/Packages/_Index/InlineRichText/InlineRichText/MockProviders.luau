@@ -11,19 +11,19 @@ local localizationProvider = require(parent.Localization).LocalizationProvider
 local navigationRoduxModule = require(parent.NavigationRodux)
 local t = { withUiModeSupport = false }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), foundationProvider (ref), roactRoduxModule (ref), roduxModule (ref), navigationRoduxModule (ref), styleProviderWithDefaultTheme (ref), styleModule (ref), localizationProvider (ref), reactModule (ref), providerContainer (ref)
-	local var7 = cryoModule.Dictionary.union(t, p0)
+	local var1 = cryoModule.Dictionary.union(t, p1)
 	local t_1 = {}
 	table.insert(t_1, {
 		class = foundationProvider,
-		props = { device = "Desktop", theme = var7.themeName }
+		props = { device = "Desktop", theme = var1.themeName }
 	})
 	table.insert(t_1, {
 		class = roactRoduxModule.StoreProvider,
 		props = {
-			store = roduxModule.Store.new(function(p1, _)
-				return p1
+			store = roduxModule.Store.new(function(p2, _)
+				return p2
 			end, { Navigation = { lockNavigationActions = false } }, {
 				roduxModule.thunkMiddleware,
 				navigationRoduxModule.Thunks.RNAdapterThunk.middleware(function(p2)
@@ -35,8 +35,8 @@ return function(p0)
 	table.insert(t_1, {
 		class = styleProviderWithDefaultTheme,
 		props = {
-			withDarkTheme = var7.themeName ~= "Light",
-			withUiModeSupport = var7.withUiModeSupport
+			withDarkTheme = var1.themeName ~= "Light",
+			withUiModeSupport = var1.withUiModeSupport
 		}
 	})
 	table.insert(t_1, {
@@ -47,12 +47,12 @@ return function(p0)
 		class = localizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p3)
-					return p3
+				Format = function(_, p2)
+					return p2
 				end
 			}
 		}
 	})
 	
-	return reactModule.createElement(providerContainer, { providers = t_1 }, var7.children)
+	return reactModule.createElement(providerContainer, { providers = t_1 }, var1.children)
 end

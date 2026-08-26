@@ -13,16 +13,16 @@ chatDisabledIndicator.defaultProps = {
 	navigateToPrivacy = function() end
 }
 
-function chatDisabledIndicator.render(p0)
+function chatDisabledIndicator.render(p1)
 	-- upvalues: withStyle (ref), text (ref), appFonts (ref), roactModule (ref)
-	return withStyle(function(p1)
-		-- upvalues: text (copy), p0 (ref), appFonts (copy), roactModule (copy)
-		local var2 = p1.Font.SubHeader1.RelativeSize * p1.Font.BaseSize
+	return withStyle(function(p2)
+		-- upvalues: text (copy), p1 (ref), appFonts (copy), roactModule (copy)
+		local var1 = p2.Font.SubHeader1.RelativeSize * p2.Font.BaseSize
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			LayoutOrder = p0.props.LayoutOrder
+			LayoutOrder = p1.props.LayoutOrder
 		}, {
 			IndicatorInner = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -47,15 +47,15 @@ function chatDisabledIndicator.render(p0)
 					LayoutOrder = 2,
 					TextWrapped = true,
 					Font = appFonts.default:getDefault(),
-					TextColor3 = p1.Theme.TextDefault.Color,
-					TextTransparency = p1.Theme.TextDefault.Transparency,
-					TextSize = p1.Font.SubHeader1.RelativeSize * p1.Font.BaseSize,
+					TextColor3 = p2.Theme.TextDefault.Color,
+					TextTransparency = p2.Theme.TextDefault.Transparency,
+					TextSize = p2.Font.SubHeader1.RelativeSize * p2.Font.BaseSize,
 					Size = UDim2.new(0.8, 0, 0.5, 0),
-					Text = p0.props.chatDisabledText
+					Text = p1.props.chatDisabledText
 				}),
-				PrivacySettings = not p0.props.chatEnabled and (p0.props.privacyButtonEnabled and roactModule.createElement("ImageButton", {
+				PrivacySettings = not p1.props.chatEnabled and (p1.props.privacyButtonEnabled and roactModule.createElement("ImageButton", {
 					AutoButtonColor = false,
-					Size = UDim2.new(0, text.GetTextWidth(p0.props.privacyButtonText, appFonts.default:getDefault(), var2) + 6, 0, 36),
+					Size = UDim2.new(0, text.GetTextWidth(p1.props.privacyButtonText, appFonts.default:getDefault(), var1) + 6, 0, 36),
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
 					BorderSizePixel = 0,
@@ -63,15 +63,15 @@ function chatDisabledIndicator.render(p0)
 					SliceCenter = Rect.new(3, 3, 4, 4),
 					Image = "rbxasset://textures/ui/LuaChat/9-slice/input-default.png",
 					ImageColor3 = Color3.fromRGB(0, 176, 111),
-					[roactModule.Event.Activated] = p0.props.navigateToPrivacy
+					[roactModule.Event.Activated] = p1.props.navigateToPrivacy
 				}, {
 					Textlabel = roactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 1, 0),
 						Font = appFonts.default:getDefault(),
-						TextSize = var2,
+						TextSize = var1,
 						TextColor3 = Color3.fromRGB(255, 255, 255),
-						Text = p0.props.privacyButtonText,
+						Text = p1.props.privacyButtonText,
 						TextXAlignment = Enum.TextXAlignment.Center,
 						TextYAlignment = Enum.TextYAlignment.Center
 					})

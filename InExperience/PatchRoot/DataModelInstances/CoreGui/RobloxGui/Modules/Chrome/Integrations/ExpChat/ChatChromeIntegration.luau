@@ -44,27 +44,27 @@ local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages
 local inExperienceUIVRIXP = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).InExperienceUIVRIXP
 local expChatPerfTracker = expChatModule.ExpChatPerfTracker
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
-local var28 = 0
+local var1 = 0
 local visibility = chatSelectorModule:GetVisibility()
-local var30 = nil
+local var2 = nil
 local visibilityStateChanged = chatSelectorModule.VisibilityStateChanged
 
 local function updateUnreadNotification()
-	-- upvalues: var30 (write), fFlagExpChatEnableFriendsTab (ref), var28 (write), getFriendsChatIconUnreadStoreModule (ref), visibility (write)
-	if not var30.notification then return end
+	-- upvalues: var2 (write), fFlagExpChatEnableFriendsTab (ref), var1 (write), getFriendsChatIconUnreadStoreModule (ref), visibility (write)
+	if not var2.notification then return end
 	if not fFlagExpChatEnableFriendsTab then
-		var30.notification:fireCount(var28)
+		var2.notification:fireCount(var1)
 		
 		return
 	end
-	local var37 = var28 + getFriendsChatIconUnreadStoreModule(false).getUnreadCountToDisplay(false)
+	local var3 = var1 + getFriendsChatIconUnreadStoreModule(false).getUnreadCountToDisplay(false)
 	
-	if visibility or var37 == 0 then
-		var30.notification:clear()
+	if visibility or var3 == 0 then
+		var2.notification:clear()
 		
 		return
 	end
-	var30.notification:fireCount(var37)
+	var2.notification:fireCount(var3)
 end
 
 local function _()
@@ -81,24 +81,24 @@ local function _()
 end
 
 if not fFlagExpChatWindowSyncUnibar then
-	visibilityStateChanged:connect(function(p0)
-		-- upvalues: expChatUnibarAvailabilityRefactor (ref), default (ref), var30 (write)
-		if expChatUnibarAvailabilityRefactor then
-			default.setVisibleViaChatSelector(p0)
-			
-			return
-		elseif p0 then
-			var30.availability:pinned()
-		end
-	end)
-	chatSelectorModule.ChatWindowToggled:connect(function(p1)
-		-- upvalues: expChatUnibarAvailabilityRefactor (ref), default (ref), var30 (write)
+	visibilityStateChanged:connect(function(p1)
+		-- upvalues: expChatUnibarAvailabilityRefactor (ref), default (ref), var2 (write)
 		if expChatUnibarAvailabilityRefactor then
 			default.setVisibleViaChatSelector(p1)
 			
 			return
 		elseif p1 then
-			var30.availability:pinned()
+			var2.availability:pinned()
+		end
+	end)
+	chatSelectorModule.ChatWindowToggled:connect(function(p1)
+		-- upvalues: expChatUnibarAvailabilityRefactor (ref), default (ref), var2 (write)
+		if expChatUnibarAvailabilityRefactor then
+			default.setVisibleViaChatSelector(p1)
+			
+			return
+		elseif p1 then
+			var2.availability:pinned()
 		end
 	end)
 end
@@ -109,11 +109,11 @@ if fFlagExpChatWindowSyncUnibar then
 	end)
 	default.setGameSettingsChatVisible(gameSettings.ChatVisible)
 end
-local var32 = mappedSignal.new(visibilityStateChanged, function()
+local var3 = mappedSignal.new(visibilityStateChanged, function()
 	-- upvalues: visibility (write)
 	return visibility
 end, function()
-	-- upvalues: chatSelectorModule (ref), expChatUnibarAvailabilityRefactor (ref), runService (ref), chatService (ref), playersService (ref), var30 (write), guiService (ref), gameSettings (ref), visibility (write), fFlagExpChatEnableFriendsTab (ref), var28 (write), getFriendsChatIconUnreadStoreModule (ref), updateUnreadNotification (ref)
+	-- upvalues: chatSelectorModule (ref), expChatUnibarAvailabilityRefactor (ref), runService (ref), chatService (ref), playersService (ref), var2 (write), guiService (ref), gameSettings (ref), visibility (write), fFlagExpChatEnableFriendsTab (ref), var1 (write), getFriendsChatIconUnreadStoreModule (ref), updateUnreadNotification (ref)
 	local visibility_1 = chatSelectorModule.GetVisibility()
 	
 	if not expChatUnibarAvailabilityRefactor and not visibility_1 then
@@ -128,7 +128,7 @@ end, function()
 			status_1 = ok and status
 		end
 		if not status_1 then
-			var30.availability:unavailable()
+			var2.availability:unavailable()
 		end
 	end
 	if not guiService.MenuIsOpen then
@@ -138,15 +138,15 @@ end, function()
 	
 	if fFlagExpChatEnableFriendsTab then
 		if visibility_1 then
-			var28 = 0
+			var1 = 0
 			getFriendsChatIconUnreadStoreModule(false).clearDisplayCount()
 		end
 		updateUnreadNotification()
 		
 		return
-	elseif visibility_1 and var28 and var30.notification then
-		var28 = 0
-		var30.notification:clear()
+	elseif visibility_1 and var1 and var2.notification then
+		var1 = 0
+		var2.notification:clear()
 	end
 end)
 
@@ -160,20 +160,20 @@ local _ = function()
 end
 
 local _ = function()
-	-- upvalues: inExperienceAppChatModalModule (ref), chatSelectorModule (ref), fFlagEnableConsoleExpControls (ref), focusSelectExpChatModule (ref), var30 (write)
+	-- upvalues: inExperienceAppChatModalModule (ref), chatSelectorModule (ref), fFlagEnableConsoleExpControls (ref), focusSelectExpChatModule (ref), var2 (write)
 	if inExperienceAppChatModalModule:getVisible() then
 		inExperienceAppChatModalModule.default:setVisible(false)
 	end
 	chatSelectorModule:SetVisible(true)
 	
 	if fFlagEnableConsoleExpControls then
-		focusSelectExpChatModule(var30.id)
+		focusSelectExpChatModule(var2.id)
 	end
 end
 
 local function isChatOpenAvailable()
-	-- upvalues: var30 (write), serviceModule (ref)
-	return var30.availability:get() ~= serviceModule.AvailabilitySignal.Unavailable
+	-- upvalues: var2 (write), serviceModule (ref)
+	return var2.availability:get() ~= serviceModule.AvailabilitySignal.Unavailable
 end
 
 local _ = function()
@@ -181,8 +181,8 @@ local _ = function()
 	return isInExperienceUIVREnabled and (isSpatial() and not inExperienceUIVRIXP:isMovePanelToCenter())
 end
 
-local function ensureOpenChat(p2)
-	-- upvalues: visibility (write), inExperienceAppChatModalModule (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), chatSelectorModule (ref), fFlagEnableConsoleExpControls (ref), focusSelectExpChatModule (ref), var30 (write), chromeIntegrationUtilsModule (ref), serviceModule (ref)
+local function ensureOpenChat(p1)
+	-- upvalues: visibility (write), inExperienceAppChatModalModule (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), chatSelectorModule (ref), fFlagEnableConsoleExpControls (ref), focusSelectExpChatModule (ref), var2 (write), chromeIntegrationUtilsModule (ref), serviceModule (ref)
 	if visibility then
 		if inExperienceAppChatModalModule:getVisible() then
 			inExperienceAppChatModalModule.default:setVisible(false)
@@ -197,21 +197,21 @@ local function ensureOpenChat(p2)
 		chatSelectorModule:SetVisible(true)
 		
 		if fFlagEnableConsoleExpControls then
-			focusSelectExpChatModule(var30.id)
+			focusSelectExpChatModule(var2.id)
 			
 			return
 		end
 	else
 		chromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
-			-- upvalues: p2 (ref), var30 (copy), serviceModule (copy), inExperienceAppChatModalModule (copy), chatSelectorModule (copy), fFlagEnableConsoleExpControls (copy), focusSelectExpChatModule (copy)
-			if p2() and var30.availability:get() ~= serviceModule.AvailabilitySignal.Unavailable then
+			-- upvalues: p1 (ref), var2 (copy), serviceModule (copy), inExperienceAppChatModalModule (copy), chatSelectorModule (copy), fFlagEnableConsoleExpControls (copy), focusSelectExpChatModule (copy)
+			if p1() and var2.availability:get() ~= serviceModule.AvailabilitySignal.Unavailable then
 				if inExperienceAppChatModalModule:getVisible() then
 					inExperienceAppChatModalModule.default:setVisible(false)
 				end
 				chatSelectorModule:SetVisible(true)
 				
 				if fFlagEnableConsoleExpControls then
-					focusSelectExpChatModule(var30.id)
+					focusSelectExpChatModule(var2.id)
 				end
 			end
 		end)
@@ -225,7 +225,7 @@ local t = {
 }
 
 function t.activated(_)
-	-- upvalues: visibility (write), chatSelectorModule (ref), expChatPerfTracker (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), chromeIntegrationUtilsModule (ref), inExperienceAppChatModalModule (ref), fFlagEnableConsoleExpControls (ref), focusSelectExpChatModule (ref), var30 (write)
+	-- upvalues: visibility (write), chatSelectorModule (ref), expChatPerfTracker (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), chromeIntegrationUtilsModule (ref), inExperienceAppChatModalModule (ref), fFlagEnableConsoleExpControls (ref), focusSelectExpChatModule (ref), var2 (write)
 	if visibility then
 		chatSelectorModule:SetVisible(false)
 		
@@ -239,96 +239,96 @@ function t.activated(_)
 		return
 	end
 	chromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
-		-- upvalues: inExperienceAppChatModalModule (copy), chatSelectorModule (copy), fFlagEnableConsoleExpControls (copy), focusSelectExpChatModule (copy), var30 (copy)
+		-- upvalues: inExperienceAppChatModalModule (copy), chatSelectorModule (copy), fFlagEnableConsoleExpControls (copy), focusSelectExpChatModule (copy), var2 (copy)
 		if inExperienceAppChatModalModule:getVisible() then
 			inExperienceAppChatModalModule.default:setVisible(false)
 		end
 		chatSelectorModule:SetVisible(true)
 		
 		if fFlagEnableConsoleExpControls then
-			focusSelectExpChatModule(var30.id)
+			focusSelectExpChatModule(var2.id)
 		end
 	end)
 end
 
-t.isActivated = var32
-t.selected = if fFlagEnableConsoleExpControls then function(p3)
-	-- upvalues: expChatUnibarThumbstickNavigate (ref), serviceModule (ref), userInputService (ref), gamepadUtils (ref), focusSelectExpChatModule (ref), var30 (write)
+t.isActivated = var3
+t.selected = if fFlagEnableConsoleExpControls then function(p1)
+	-- upvalues: expChatUnibarThumbstickNavigate (ref), serviceModule (ref), userInputService (ref), gamepadUtils (ref), focusSelectExpChatModule (ref), var2 (write)
 	local inputEndedConnection
 	if expChatUnibarThumbstickNavigate then
 		inputEndedConnection = nil
 		local inputChangedConnection = nil
 		local inputBeganConnection = nil
-		inputEndedConnection = serviceModule:selectedItem():connect(function(p4)
-			-- upvalues: p3 (ref), inputEndedConnection (write), inputChangedConnection (write), inputBeganConnection (write)
-			assert(p4 ~= p3.id, "Expected selectedId to not be self.id on selection")
+		inputEndedConnection = serviceModule:selectedItem():connect(function(p2)
+			-- upvalues: p1 (ref), inputEndedConnection (write), inputChangedConnection (write), inputBeganConnection (write)
+			assert(p2 ~= p1.id, "Expected selectedId to not be self.id on selection")
 			inputEndedConnection:disconnect()
 			inputChangedConnection:Disconnect()
 			inputBeganConnection:Disconnect()
 		end)
-		inputChangedConnection = userInputService.InputChanged:Connect(function(p5)
-			-- upvalues: gamepadUtils (copy), focusSelectExpChatModule (copy), var30 (copy)
-			if p5.KeyCode == Enum.KeyCode.Thumbstick1 and gamepadUtils.mapPositionToDirection(Vector2.new(p5.Position.X, p5.Position.Y)) == Enum.KeyCode.Down then
-				focusSelectExpChatModule(var30.id)
+		inputChangedConnection = userInputService.InputChanged:Connect(function(p2)
+			-- upvalues: gamepadUtils (copy), focusSelectExpChatModule (copy), var2 (copy)
+			if p2.KeyCode == Enum.KeyCode.Thumbstick1 and gamepadUtils.mapPositionToDirection(Vector2.new(p2.Position.X, p2.Position.Y)) == Enum.KeyCode.Down then
+				focusSelectExpChatModule(var2.id)
 			end
 		end)
-		inputBeganConnection = userInputService.InputBegan:Connect(function(p6)
-			-- upvalues: focusSelectExpChatModule (copy), var30 (copy)
-			local keyCode = p6.KeyCode
+		inputBeganConnection = userInputService.InputBegan:Connect(function(p2)
+			-- upvalues: focusSelectExpChatModule (copy), var2 (copy)
+			local keyCode = p2.KeyCode
 			
 			if keyCode == Enum.KeyCode.DPadDown or keyCode == Enum.KeyCode.Down then
-				focusSelectExpChatModule(var30.id)
+				focusSelectExpChatModule(var2.id)
 			end
 		end)
 		
 		return
 	end
 	inputEndedConnection = nil
-	inputEndedConnection = userInputService.InputEnded:Connect(function(p7)
-		-- upvalues: focusSelectExpChatModule (copy), var30 (copy), inputEndedConnection (write), serviceModule (copy), p3 (ref)
-		if p7.KeyCode == Enum.KeyCode.DPadDown then
-			focusSelectExpChatModule(var30.id)
+	inputEndedConnection = userInputService.InputEnded:Connect(function(p2)
+		-- upvalues: focusSelectExpChatModule (copy), var2 (copy), inputEndedConnection (write), serviceModule (copy), p1 (ref)
+		if p2.KeyCode == Enum.KeyCode.DPadDown then
+			focusSelectExpChatModule(var2.id)
 		end
-		if inputEndedConnection and serviceModule:selectedItem():get() ~= p3.id then
+		if inputEndedConnection and serviceModule:selectedItem():get() ~= p1.id then
 			inputEndedConnection:Disconnect()
 		end
 	end)
 end else nil
 t.components = {
 	Icon = function(_)
-		-- upvalues: getExperienceChatVisualConfig (ref), commonIconModule (ref), var32 (ref)
-		local var43 = getExperienceChatVisualConfig()
+		-- upvalues: getExperienceChatVisualConfig (ref), commonIconModule (ref), var3 (ref)
+		local var4 = getExperienceChatVisualConfig()
 		
-		return commonIconModule(var43.icon.off, var43.icon.on, var32)
+		return commonIconModule(var4.icon.off, var4.icon.on, var3)
 	end
 }
-var30 = serviceModule:register(t)
-var30.chatOpenCapability = if fFlagExpChatEnableFriendsTab then {
+var2 = serviceModule:register(t)
+var2.chatOpenCapability = if fFlagExpChatEnableFriendsTab then {
 	isAvailable = isChatOpenAvailable,
 	ensureOpenChat = ensureOpenChat
 } else nil
 
 if expChatUnibarAvailabilityRefactor then
-	signalsUtilsModule.createDetachedEffect(function(p8)
-		-- upvalues: default (ref), var30 (write), fFlagExpChatWindowSyncUnibar (ref), expChatModule (ref)
-		if default.getIsChatIconVisible(p8) then
-			var30.availability:available()
+	signalsUtilsModule.createDetachedEffect(function(p1)
+		-- upvalues: default (ref), var2 (write), fFlagExpChatWindowSyncUnibar (ref), expChatModule (ref)
+		if default.getIsChatIconVisible(p1) then
+			var2.availability:available()
 		else
-			var30.availability:unavailable()
+			var2.availability:unavailable()
 		end
 		if fFlagExpChatWindowSyncUnibar then
-			expChatModule.Events.ChatTopBarButtonActivated(default.getIsChatWindowVisible(p8))
+			expChatModule.Events.ChatTopBarButtonActivated(default.getIsChatWindowVisible(p1))
 		end
 	end)
-	chromeUtilsModule.setCoreGuiAvailability(var30, Enum.CoreGuiType.Chat, function(p9)
+	chromeUtilsModule.setCoreGuiAvailability(var2, Enum.CoreGuiType.Chat, function(p1)
 		-- upvalues: default (ref)
-		default.setCoreGuiEnabled(p9)
+		default.setCoreGuiEnabled(p1)
 	end)
 end
 if fFlagChatIntegrationFixShortcutModule and fFlagEnableConsoleExpControls then
-	signalsUtilsModule.createDetachedEffect(function(p10)
+	signalsUtilsModule.createDetachedEffect(function(p1)
 		-- upvalues: focusNavigationStore (ref), serviceModule (ref), constantsModule (ref)
-		if focusNavigationStore.getChatInputBarFocused(p10) then
+		if focusNavigationStore.getChatInputBarFocused(p1) then
 			serviceModule:setShortcutBar(constantsModule.UNIBAR_SHORTCUTBAR_ID)
 			
 			return
@@ -337,69 +337,69 @@ if fFlagChatIntegrationFixShortcutModule and fFlagEnableConsoleExpControls then
 	end)
 end
 if fFlagExpChatEnableFriendsTab then
-	signalsUtilsModule.createDetachedEffect(function(p11)
+	signalsUtilsModule.createDetachedEffect(function(p1)
 		-- upvalues: getFriendsChatIconUnreadStoreModule (ref), updateUnreadNotification (ref)
-		getFriendsChatIconUnreadStoreModule(p11).getUnreadCountToDisplay(p11)
+		getFriendsChatIconUnreadStoreModule(p1).getUnreadCountToDisplay(p1)
 		updateUnreadNotification()
 	end)
 end
-local _ = function(p12)
+local _ = function(p1)
 	-- upvalues: expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref)
-	local var44 = expChatSuppressWelcomeMessageUnibarUnread
+	local var4 = expChatSuppressWelcomeMessageUnibarUnread
 	
-	if var44 then
-		var44 = shouldSuppressUnreadForTabMetadata(p12 and p12.Metadata)
+	if var4 then
+		var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
 	end
-	return var44
+	return var4
 end
 
-textChatService.MessageReceived:Connect(function(p13)
-	-- upvalues: expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), visibility (write), var28 (write), updateUnreadNotification (ref)
-	local var45 = expChatSuppressWelcomeMessageUnibarUnread
+textChatService.MessageReceived:Connect(function(p1)
+	-- upvalues: expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), visibility (write), var1 (write), updateUnreadNotification (ref)
+	local var4 = expChatSuppressWelcomeMessageUnibarUnread
 	
-	if var45 then
-		var45 = shouldSuppressUnreadForTabMetadata(p13 and p13.Metadata)
+	if var4 then
+		var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
 	end
-	if var45 then return end
+	if var4 then return end
 	if not visibility then
-		var28 += 1
+		var1 += 1
 		updateUnreadNotification()
 	end
 end)
 
 if getFFlagTextChatEnableUniverseChatTabs() then
-	textChatService.UniverseChatMessageReceived:Connect(function(p14)
-		-- upvalues: expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), visibility (write), var28 (write), updateUnreadNotification (ref)
-		local var46 = expChatSuppressWelcomeMessageUnibarUnread
+	textChatService.UniverseChatMessageReceived:Connect(function(p1)
+		-- upvalues: expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), visibility (write), var1 (write), updateUnreadNotification (ref)
+		local var4 = expChatSuppressWelcomeMessageUnibarUnread
 		
-		if var46 then
-			var46 = shouldSuppressUnreadForTabMetadata(p14 and p14.Metadata)
+		if var4 then
+			var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
 		end
-		if var46 then return end
+		if var4 then return end
 		if not visibility then
-			var28 += 1
+			var1 += 1
 			updateUnreadNotification()
 		end
 	end)
 end
-local var36 = 0
-chatSelectorModule.MessagesChanged:connect(function(p15)
-	-- upvalues: visibility (write), var28 (write), var36 (write), updateUnreadNotification (ref)
+local var4 = 0
+chatSelectorModule.MessagesChanged:connect(function(p1)
+	-- upvalues: visibility (write), var1 (write), var4 (write), updateUnreadNotification (ref)
 	if not visibility then
-		var28 += p15 - var36
+		var1 += p1 - var4
 		updateUnreadNotification()
 	end
-	var36 = p15
+	var4 = p1
 end)
 
 if not fFlagExpChatWindowSyncUnibar then
-	chatSelectorModule.ChatActiveChanged:connect(function(p16)
-		-- upvalues: expChatUnibarAvailabilityRefactor (ref), default (ref), runService (ref), chatService (ref), playersService (ref), var30 (write)
+	chatSelectorModule.ChatActiveChanged:connect(function(p1)
+		-- upvalues: expChatUnibarAvailabilityRefactor (ref), default (ref), runService (ref), chatService (ref), playersService (ref), var2 (write)
 		if expChatUnibarAvailabilityRefactor then
-			default.setChatActiveCalledByDeveloper(p16)
+			default.setChatActiveCalledByDeveloper(p1)
 			
 			return
-		elseif p16 then
+		elseif p1 then
 			local status_1
 			if runService:IsStudio() then
 				status_1 = true
@@ -411,20 +411,20 @@ if not fFlagExpChatWindowSyncUnibar then
 				status_1 = ok and status
 			end
 			if not status_1 then
-				var30.availability:available()
+				var2.availability:available()
 			end
 		end
 	end)
 end
 local _ = function()
 	-- upvalues: gameSettings (ref), viewportUtilModule (ref), visibility (write), chatSelectorModule (ref)
-	local var48 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
-	visibility = var48
-	chatSelectorModule:SetVisible(var48)
+	local var5 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
+	visibility = var5
+	chatSelectorModule:SetVisible(var5)
 end
 
 coroutine.wrap(function()
-	-- upvalues: playersService (ref), runService (ref), chatService (ref), expChatUnibarAvailabilityRefactor (ref), default (ref), gameSettings (ref), viewportUtilModule (ref), visibility (write), chatSelectorModule (ref), var30 (write), chromeUtilsModule (ref)
+	-- upvalues: playersService (ref), runService (ref), chatService (ref), expChatUnibarAvailabilityRefactor (ref), default (ref), gameSettings (ref), viewportUtilModule (ref), visibility (write), chatSelectorModule (ref), var2 (write), chromeUtilsModule (ref)
 	local localPlayer = playersService.LocalPlayer
 	while not localPlayer do
 		playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
@@ -444,36 +444,36 @@ coroutine.wrap(function()
 		default.setLocalUserChat(status_1)
 		
 		if status_1 then
-			local var50 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
-			visibility = var50
-			chatSelectorModule:SetVisible(var50)
+			local var5 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
+			visibility = var5
+			chatSelectorModule:SetVisible(var5)
 			
 			return
 		end
-	elseif status_1 and var30.availability then
-		chromeUtilsModule.setCoreGuiAvailability(var30, Enum.CoreGuiType.Chat, function(p17)
-			-- upvalues: var30 (copy)
-			if p17 then
-				var30.availability:pinned()
+	elseif status_1 and var2.availability then
+		chromeUtilsModule.setCoreGuiAvailability(var2, Enum.CoreGuiType.Chat, function(p1)
+			-- upvalues: var2 (copy)
+			if p1 then
+				var2.availability:pinned()
 				
 				return
 			end
-			var30.availability:unavailable()
+			var2.availability:unavailable()
 		end)
-		local var51 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
-		visibility = var51
-		chatSelectorModule:SetVisible(var51)
+		local var6 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
+		visibility = var6
+		chatSelectorModule:SetVisible(var6)
 	end
 end)()
 
 function _simulateChat()
-	-- upvalues: visibility (write), var28 (write), updateUnreadNotification (ref)
+	-- upvalues: visibility (write), var1 (write), updateUnreadNotification (ref)
 	while true do
 		task.wait(math.random(1, 15))
 		if visibility then continue end
-		var28 += 1
+		var1 += 1
 		updateUnreadNotification()
 	end
 end
 
-return var30
+return var2

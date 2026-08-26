@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AuthCommon").Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { loginResult = p0 }
+﻿return require(script:FindFirstAncestor("AuthCommon").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { loginResult = p1 }
 end)

@@ -1,13 +1,13 @@
 ﻿local robloxTransportModule = require(script.Parent.RobloxTransport)
 local versionModule = require(script.Parent.Version)
-local var2 = game:GetService("RunService"):IsStudio()
+local var1 = game:GetService("RunService"):IsStudio()
 
 local function _()
 	return type(_G.LUAUFORGE_BUNDLED_FILE_PATH) == "string"
 end
 
-local _ = function(p0)
-	return next(p0) == nil
+local _ = function(p1)
+	return next(p1) == nil
 end
 
 local _ = function(p1, p2)
@@ -25,17 +25,17 @@ local _ = function(p1, p2)
 	return nil, tostring(status)
 end
 
-local _ = function(p3, p4)
-	return if p4 then function(p5, p6)
-		-- upvalues: p3 (ref), p4 (ref)
+local _ = function(p1, p2)
+	return if p2 then function(p3, p4)
+		-- upvalues: p1 (ref), p2 (ref)
 		local id = nil
-		local var4 = nil
+		local var2 = nil
 		
-		if p5 and p6 and p6.body then
-			if type(p6.body) == "table" and p6.body.Body then
-				local var6, var7
-				local var5 = p3
-				local body = p6.body.Body
+		if p3 and p4 and p4.body then
+			if type(p4.body) == "table" and p4.body.Body then
+				local var3, var4
+				local var5 = p1
+				local body = p4.body.Body
 				
 				if type(body) == "string" then
 					local ok, status = pcall(function()
@@ -44,44 +44,44 @@ local _ = function(p3, p4)
 					end)
 					
 					if ok then
-						var6 = status
-						var7 = nil
+						var3 = status
+						var4 = nil
 					else
-						var6 = nil
-						var7 = tostring(status)
+						var3 = nil
+						var4 = tostring(status)
 					end
 				else
-					var6 = nil
-					var7 = "Input is not a string"
+					var3 = nil
+					var4 = "Input is not a string"
 				end
-				if var6 and var6.id then
-					id = var6.id
+				if var3 and var3.id then
+					id = var3.id
 				end
 			end
-			var4 = p6
-		elseif p6 then
-			var4 = p6
+			var2 = p4
+		elseif p4 then
+			var2 = p4
 		end
-		p4(p5, var4, id)
+		p2(p3, var2, id)
 	end else nil
 end
 
 local t = {}
 t.__index = t
 
-function t.new(_, p7, p8)
+function t.new(_, p1, p2)
 	-- upvalues: robloxTransportModule (ref), t (ref)
-	if not p7.dsn then
+	if not p1.dsn then
 		error("DSN is required")
 	end
 	return setmetatable({
 		user = nil,
-		transport = robloxTransportModule:new(p7.dsn, p8),
-		httpService = p8,
+		transport = robloxTransportModule:new(p1.dsn, p2),
+		httpService = p2,
 		tags = {},
 		extra = {},
 		breadcrumbs = {},
-		config = p7
+		config = p1
 	}, t)
 end
 
@@ -99,14 +99,14 @@ function t._buildDebugMeta(_)
 	return if #t == 0 then nil else { images = t }
 end
 
-function t:capture_message(p9, p10, p11)
+function t:capture_message(p1, p2, p3)
 	-- upvalues: versionModule (ref)
 	local httpService = self.httpService
 	self.transport:send({
 		platform = "roblox",
 		server_name = "roblox-server",
-		message = { message = p9 },
-		level = p10 or "info",
+		message = { message = p1 },
+		level = p2 or "info",
 		timestamp = os.time(),
 		environment = self.config.environment or "production",
 		release = self.config.release or "unknown",
@@ -122,16 +122,16 @@ function t:capture_message(p9, p10, p11)
 				job_id = game.JobId or "unknown"
 			}
 		}
-	}, if not p11 then nil else function(p12, p13)
-		-- upvalues: httpService (ref), p11 (ref)
+	}, if not p3 then nil else function(p4, p5)
+		-- upvalues: httpService (ref), p3 (ref)
 		local id = nil
-		local var4 = nil
+		local var2 = nil
 		
-		if p12 and p13 and p13.body then
-			if type(p13.body) == "table" and p13.body.Body then
-				local var6, var7
+		if p4 and p5 and p5.body then
+			if type(p5.body) == "table" and p5.body.Body then
+				local var3, var4
 				local var5 = httpService
-				local body = p13.body.Body
+				local body = p5.body.Body
 				
 				if type(body) == "string" then
 					local ok, status = pcall(function()
@@ -140,31 +140,31 @@ function t:capture_message(p9, p10, p11)
 					end)
 					
 					if ok then
-						var6 = status
-						var7 = nil
+						var3 = status
+						var4 = nil
 					else
-						var6 = nil
-						var7 = tostring(status)
+						var3 = nil
+						var4 = tostring(status)
 					end
 				else
-					var6 = nil
-					var7 = "Input is not a string"
+					var3 = nil
+					var4 = "Input is not a string"
 				end
-				if var6 and var6.id then
-					id = var6.id
+				if var3 and var3.id then
+					id = var3.id
 				end
 			end
-			var4 = p13
-		elseif p13 then
-			var4 = p13
+			var2 = p5
+		elseif p5 then
+			var2 = p5
 		end
-		p11(p12, var4, id)
+		p3(p4, var2, id)
 	end)
 end
 
-function t:capture_exception(p14, p15, p16, p17, p18)
-	-- upvalues: versionModule (ref), var2 (ref)
-	p15 = p15 or "error"
+function t:capture_exception(p1, p2, p3, p4, p5)
+	-- upvalues: versionModule (ref), var1 (ref)
+	p2 = p2 or "error"
 	local t = {
 		roblox = {
 			version = versionModule.SDK_VERSION,
@@ -173,35 +173,35 @@ function t:capture_exception(p14, p15, p16, p17, p18)
 		}
 	}
 	
-	if p16 then
-		for i, v in pairs(p16) do
+	if p3 then
+		for i, v in pairs(p3) do
 			t[i] = v
 		end
 	end
 	local t_1 = {
-		type = p14.type or "RobloxError",
-		value = p14.message or tostring(p14)
+		type = p1.type or "RobloxError",
+		value = p1.message or tostring(p1)
 	}
 	
-	if p14.stacktrace and p14.stacktrace.frames and #p14.stacktrace.frames > 0 then
-		t_1.stacktrace = p14.stacktrace
+	if p1.stacktrace and p1.stacktrace.frames and #p1.stacktrace.frames > 0 then
+		t_1.stacktrace = p1.stacktrace
 		
 		if type(_G.LUAUFORGE_BUNDLED_FILE_PATH) == "string" then
-			for i, v in p14.stacktrace.frames do
+			for i, v in p1.stacktrace.frames do
 				v.platform = "javascript"
 			end
 		end
 	end
 	local t_2 = { values = { t_1 } }
 	
-	if var2 then
+	if var1 then
 		print("\240\159\148\141 Exception structure:", t_2)
 	end
 	local t_3 = {
 		platform = "roblox",
 		server_name = "roblox-server",
 		exception = t_2,
-		level = p15,
+		level = p2,
 		timestamp = os.time(),
 		environment = self.config.environment or "production",
 		release = self.config.release or "unknown",
@@ -213,21 +213,21 @@ function t:capture_exception(p14, p15, p16, p17, p18)
 		contexts = t
 	}
 	
-	if p17 then
-		t_3.threads = p17
+	if p4 then
+		t_3.threads = p4
 	end
 	t_3.debug_meta = self:_buildDebugMeta()
 	local httpService = self.httpService
-	self.transport:send(t_3, if not p18 then nil else function(p19, p20)
-		-- upvalues: httpService (ref), p18 (ref)
+	self.transport:send(t_3, if not p5 then nil else function(p6, p7)
+		-- upvalues: httpService (ref), p5 (ref)
 		local id = nil
-		local var4 = nil
+		local var2 = nil
 		
-		if p19 and p20 and p20.body then
-			if type(p20.body) == "table" and p20.body.Body then
-				local var6, var7
+		if p6 and p7 and p7.body then
+			if type(p7.body) == "table" and p7.body.Body then
+				local var3, var4
 				local var5 = httpService
-				local body = p20.body.Body
+				local body = p7.body.Body
 				
 				if type(body) == "string" then
 					local ok, status = pcall(function()
@@ -236,41 +236,41 @@ function t:capture_exception(p14, p15, p16, p17, p18)
 					end)
 					
 					if ok then
-						var6 = status
-						var7 = nil
+						var3 = status
+						var4 = nil
 					else
-						var6 = nil
-						var7 = tostring(status)
+						var3 = nil
+						var4 = tostring(status)
 					end
 				else
-					var6 = nil
-					var7 = "Input is not a string"
+					var3 = nil
+					var4 = "Input is not a string"
 				end
-				if var6 and var6.id then
-					id = var6.id
+				if var3 and var3.id then
+					id = var3.id
 				end
 			end
-			var4 = p20
-		elseif p20 then
-			var4 = p20
+			var2 = p7
+		elseif p7 then
+			var2 = p7
 		end
-		p18(p19, var4, id)
+		p5(p6, var2, id)
 	end)
 end
 
-function t:send_event_with_attachments(p21, p22, p23)
-	if p21 and #p22 ~= 0 then
+function t:send_event_with_attachments(p6, p7, p8)
+	if p6 and #p7 ~= 0 then
 		local httpService = self.httpService
-		self.transport:send_attachments(p21, p22, if not p23 then nil else function(p24, p25)
-			-- upvalues: httpService (ref), p23 (ref)
+		self.transport:send_attachments(p6, p7, if not p8 then nil else function(p9, p10)
+			-- upvalues: httpService (ref), p8 (ref)
 			local id = nil
-			local var4 = nil
+			local var2 = nil
 			
-			if p24 and p25 and p25.body then
-				if type(p25.body) == "table" and p25.body.Body then
-					local var6, var7
+			if p9 and p10 and p10.body then
+				if type(p10.body) == "table" and p10.body.Body then
+					local var3, var4
 					local var5 = httpService
-					local body = p25.body.Body
+					local body = p10.body.Body
 					
 					if type(body) == "string" then
 						local ok, status = pcall(function()
@@ -279,48 +279,48 @@ function t:send_event_with_attachments(p21, p22, p23)
 						end)
 						
 						if ok then
-							var6 = status
-							var7 = nil
+							var3 = status
+							var4 = nil
 						else
-							var6 = nil
-							var7 = tostring(status)
+							var3 = nil
+							var4 = tostring(status)
 						end
 					else
-						var6 = nil
-						var7 = "Input is not a string"
+						var3 = nil
+						var4 = "Input is not a string"
 					end
-					if var6 and var6.id then
-						id = var6.id
+					if var3 and var3.id then
+						id = var3.id
 					end
 				end
-				var4 = p25
-			elseif p25 then
-				var4 = p25
+				var2 = p10
+			elseif p10 then
+				var2 = p10
 			end
-			p23(p24, var4, id)
+			p8(p9, var2, id)
 		end)
 		
 		return
-	elseif p23 then
-		p23(false, { error = "eventId and attachments are required" }, nil)
+	elseif p8 then
+		p8(false, { error = "eventId and attachments are required" }, nil)
 	end
 end
 
-function t:set_user(p26)
-	self.user = p26
+function t:set_user(p6)
+	self.user = p6
 end
 
-function t:set_tag(p27, p28)
-	self.tags[p27] = tostring(p28)
+function t:set_tag(p6, p7)
+	self.tags[p6] = tostring(p7)
 end
 
-function t:set_extra(p29, p30)
-	self.extra[p29] = p30
+function t:set_extra(p6, p7)
+	self.extra[p6] = p7
 end
 
-function t:add_breadcrumb(p31)
-	p31.timestamp = os.time()
-	table.insert(self.breadcrumbs, p31)
+function t:add_breadcrumb(p6)
+	p6.timestamp = os.time()
+	table.insert(self.breadcrumbs, p6)
 	
 	if #self.breadcrumbs > 50 then
 		table.remove(self.breadcrumbs, 1)

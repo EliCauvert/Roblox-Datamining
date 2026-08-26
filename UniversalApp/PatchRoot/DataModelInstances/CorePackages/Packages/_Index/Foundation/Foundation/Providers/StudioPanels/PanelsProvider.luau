@@ -35,21 +35,21 @@ return function(p1)
 			var3:destroy()
 		end
 	end, { var3 })
-	local var4 = reactModule.useCallback(function(p1, p2, p3, p4, p5)
+	local var4 = reactModule.useCallback(function(p2, p3, p4, p5, p6)
 		-- upvalues: flagsModule (copy), var2 (ref), var3 (ref)
 		if flagsModule.FoundationPopoverPluginAnchorRefresh then
-			var2.refreshAsync(p1)
+			var2.refreshAsync(p2)
 		end
-		local var1 = var3:openAtAsync({
-			targetWidgetUri = p1,
-			targetAnchorPoint = p2.targetAnchorPoint,
-			subjectAnchorPoint = p2.subjectAnchorPoint,
-			offset = p2.offset
-		}, p3, p4, p5)
+		local var5 = var3:openAtAsync({
+			targetWidgetUri = p2,
+			targetAnchorPoint = p3.targetAnchorPoint,
+			subjectAnchorPoint = p3.subjectAnchorPoint,
+			offset = p3.offset
+		}, p4, p5, p6)
 		
-		return var1, function()
-			-- upvalues: var1 (ref)
-			var1.close()
+		return var5, function()
+			-- upvalues: var5 (ref)
+			var5.close()
 		end
 	end, { var3, var2 })
 	

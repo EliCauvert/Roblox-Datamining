@@ -83,9 +83,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end
 		var12(var10.Default)
 	end, if flagsModule.FoundationInternalInputBeta then { isChecked, var10 } else { isChecked, var3, var10 })
-	local var13 = if flagsModule.FoundationInternalInputBeta then nil else reactModule.useCallback(function(p1)
+	local var13 = if flagsModule.FoundationInternalInputBeta then nil else reactModule.useCallback(function(p3)
 		-- upvalues: var4 (write), controlStateModule (copy)
-		var4(p1 == controlStateModule.Hover)
+		var4(p3 == controlStateModule.Hover)
 	end, {})
 	local var14 = reactModule.useCallback(function()
 		-- upvalues: var2 (ref)
@@ -127,12 +127,12 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			}
 		end, {}) else nil else { affordance = stateLayerAffordanceModule.Background },
 		stroke = {
-			Color = var11.strokeStyle:map(function(p1)
-				return p1.Color3
+			Color = var11.strokeStyle:map(function(p3)
+				return p3.Color3
 			end),
-			Transparency = var11.strokeStyle:map(function(p1)
+			Transparency = var11.strokeStyle:map(function(p3)
 				-- upvalues: var2 (ref), var1 (ref), constantsModule (copy)
-				return if var2.isDisabled and not var1 then constantsModule.DISABLED_TRANSPARENCY else p1.Transparency
+				return if var2.isDisabled and not var1 then constantsModule.DISABLED_TRANSPARENCY else p3.Transparency
 			end),
 			Thickness = var15,
 			BorderStrokePosition = Enum.BorderStrokePosition.Inner

@@ -11,17 +11,17 @@ local userSearchBarModule = require(socialCommon.Components.UserSearchBar.UserSe
 local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
 local fFlagAddFriendsPageCapitalization = require(parent.SharedFlags).FFlagAddFriendsPageCapitalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: useIsWideModeModule (ref), useSelector (ref), getPageMargin (ref), useLocalization (ref), fFlagAddFriendsPageCapitalization (ref), reactModule (ref), imageSetButton (ref), fFlagCreateConnectionsHub (ref), userSearchBarModule (ref)
-	local var5 = getPageMargin(useSelector(function(p1)
-		return p1.ScreenSize
+	local var1 = getPageMargin(useSelector(function(p2)
+		return p2.ScreenSize
 	end).X)
 	
 	return reactModule.createElement(imageSetButton, {
 		BackgroundTransparency = 1,
-		Size = if useIsWideModeModule() then UDim2.fromOffset(400, 48) else UDim2.new(1, if fFlagCreateConnectionsHub then 0 else -2 * var5, 0, 48),
-		Position = UDim2.new(0, if fFlagCreateConnectionsHub then 0 else var5, 0, 0),
-		[reactModule.Event.Activated] = p0.onActivated
+		Size = if useIsWideModeModule() then UDim2.fromOffset(400, 48) else UDim2.new(1, if fFlagCreateConnectionsHub then 0 else -2 * var1, 0, 48),
+		Position = UDim2.new(0, if fFlagCreateConnectionsHub then 0 else var1, 0, 0),
+		[reactModule.Event.Activated] = p1.onActivated
 	}, {
 		SearchBar = reactModule.createElement(userSearchBarModule, {
 			isDisabled = true,

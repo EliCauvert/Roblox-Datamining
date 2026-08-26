@@ -22,7 +22,7 @@ local useTokens = foundationModule.Hooks.useTokens
 
 local function AssetLibrarySearchField(value)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), iconButton (ref), inputSize (ref), buttonVariant (ref)
-	local var9 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-left-medium padding-right-xsmall stroke-default radius-circle bg-surface-100",
@@ -39,17 +39,17 @@ local function AssetLibrarySearchField(value)
 				ref = value.inputRef,
 				BackgroundTransparency = 1,
 				ClearTextOnFocus = false,
-				FontFace = Font.fromEnum(var9.Typography.BodyMedium.Font),
-				PlaceholderColor3 = var9.Color.Content.Default.Color3,
+				FontFace = Font.fromEnum(var1.Typography.BodyMedium.Font),
+				PlaceholderColor3 = var1.Color.Content.Default.Color3,
 				PlaceholderText = value.placeholder,
 				Size = UDim2.fromScale(1, 1),
 				Text = value.text,
-				TextColor3 = var9.Color.Content.Emphasis.Color3,
-				TextSize = var9.Typography.BodyMedium.FontSize,
+				TextColor3 = var1.Color.Content.Emphasis.Color3,
+				TextSize = var1.Typography.BodyMedium.FontSize,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				[reactModule.Change.Text] = function(p0)
+				[reactModule.Change.Text] = function(p1)
 					-- upvalues: value (ref)
-					value.onChanged(p0.Text)
+					value.onChanged(p1.Text)
 				end
 			})
 		}),
@@ -97,7 +97,7 @@ local function renderCategory(p3, p4, p5, p6)
 	if p3.status == "Ready" and #p3.assets == 0 then
 		return nil
 	end
-	local var11 = p6 + 48
+	local var1 = p6 + 48
 	local t = {}
 	
 	for i, v in p3.assets do
@@ -109,13 +109,13 @@ local function renderCategory(p3, p4, p5, p6)
 			thumbnail = v.thumbnail,
 			onActivated = v.onActivated,
 			LayoutOrder = i,
-			Size = UDim2.fromOffset(p6, var11),
+			Size = UDim2.fromOffset(p6, var1),
 			mediaSize = UDim2.fromOffset(p6, p6)
 		})
 	end
 	t.EndPadding = reactModule.createElement(view, {
 		LayoutOrder = #p3.assets + 1,
-		Size = UDim2.fromOffset(20, var11),
+		Size = UDim2.fromOffset(20, var1),
 		testId = `AssetLibrary.Category.{p3.assetType}.EndPadding`
 	})
 	local _ = nil
@@ -149,7 +149,7 @@ local function renderCategory(p3, p4, p5, p6)
 			})
 		}),
 		Content = reactModule.createElement(view, { LayoutOrder = 2, tag = "size-full-0 auto-y" }, {
-			Content = if p3.status == "Loading" or p3.status == "NotReady" then reactModule.createElement(view, { tag = "no-clip", Size = UDim2.new(1, 0, 0, var11) }, { Tiles = renderLoadingTiles(p3.assetType, p6) }) elseif p3.status == "Failed" then reactModule.createElement(view, { tag = "row align-y-center gap-small size-full-0 auto-y" }, {
+			Content = if p3.status == "Loading" or p3.status == "NotReady" then reactModule.createElement(view, { tag = "no-clip", Size = UDim2.new(1, 0, 0, var1) }, { Tiles = renderLoadingTiles(p3.assetType, p6) }) elseif p3.status == "Failed" then reactModule.createElement(view, { tag = "row align-y-center gap-small size-full-0 auto-y" }, {
 				Message = reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "fill text-body-medium text-align-x-left content-default",
@@ -165,7 +165,7 @@ local function renderCategory(p3, p4, p5, p6)
 			}) elseif #p3.assets > 0 then reactModule.createElement(scrollView, {
 				ClipsDescendants = false,
 				tag = "no-clip",
-				Size = UDim2.new(1, 0, 0, var11),
+				Size = UDim2.new(1, 0, 0, var1),
 				testId = `AssetLibrary.Category.{p3.assetType}.Carousel`,
 				scroll = {
 					AutomaticCanvasSize = Enum.AutomaticSize.X,
@@ -185,20 +185,20 @@ end
 
 return function(value)
 	-- upvalues: responsiveModule (ref), useTokens (ref), renderCategory (ref), reactModule (ref), text (ref), overflowMenuPageShellModule (ref), iconName (ref), AssetLibrarySearchField (ref), iconButton (ref), inputSize (ref), buttonVariant (ref), view (ref)
-	local var13 = responsiveModule.useBreakpointX()
-	local var14 = if var13 == responsiveModule.Keys.XSmall or var13 == responsiveModule.Keys.Small then useTokens().Size.Size_2500 else 163
+	local var2 = responsiveModule.useBreakpointX()
+	local var3 = if var2 == responsiveModule.Keys.XSmall or var2 == responsiveModule.Keys.Small then useTokens().Size.Size_2500 else 163
 	local t = {}
-	local var16 = false
+	local var4 = false
 	
 	for i, v in value.categories do
-		local var17 = renderCategory(v, i, value.strings, var14)
+		local var5 = renderCategory(v, i, value.strings, var3)
 		
-		if var17 ~= nil then
-			var16 = true
-			t[v.assetType] = var17
+		if var5 ~= nil then
+			var4 = true
+			t[v.assetType] = var5
 		end
 	end
-	if not var16 then
+	if not var4 then
 		t.Empty = reactModule.createElement(text, {
 			tag = "size-full-0 auto-y padding-large text-body-medium text-align-x-center content-muted",
 			Text = value.strings.empty

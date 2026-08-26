@@ -17,16 +17,16 @@ local constants = require(corePackagesService.Workspace.Packages.VoiceChatCore).
 local playerMenuActions = constantsModule.PlayerMenuActions
 local preselectedPlayerReportBugfix = game:DefineFastFlag("PreselectedPlayerReportBugfix", false)
 
-local function alphabeticalSort(x, p0)
-	return x.Name:lower() < p0.Name:lower()
+local function alphabeticalSort(x, p1)
+	return x.Name:lower() < p1.Name:lower()
 end
 
 return function(p1)
 	-- upvalues: getMenuItemSizingsModule (ref), reactModule (ref), reportPersonUIStateReducerModule (ref), constantsModule (ref), preselectedPlayerReportBugfix (ref), default (ref), constants (ref), handlePreselectedPlayerModule (ref), playerMenuActions (ref), alphabeticalSort (ref), playersService (ref), cryoModule (ref), getMenuItemsFromConfigsModule (ref), reportPlayerMenuItemConfigListModule (ref)
-	local var13 = getMenuItemSizingsModule()
-	local var14, var15 = reactModule.useReducer(reportPersonUIStateReducerModule, constantsModule.InitPersonUIState)
+	local var1 = getMenuItemSizingsModule()
+	local var2, var3 = reactModule.useReducer(reportPersonUIStateReducerModule, constantsModule.InitPersonUIState)
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), constantsModule (copy), preselectedPlayerReportBugfix (copy), default (copy), constants (copy), handlePreselectedPlayerModule (copy), var15 (ref), playerMenuActions (copy)
+		-- upvalues: p1 (ref), constantsModule (copy), preselectedPlayerReportBugfix (copy), default (copy), constants (copy), handlePreselectedPlayerModule (copy), var3 (ref), playerMenuActions (copy)
 		if p1.utilityProps.isReportTabVisible ~= true then return end
 		p1.utilityProps.analyticsDispatch({
 			type = constantsModule.AnalyticsActions.SwitchToPersonInitialSelections
@@ -34,65 +34,65 @@ return function(p1)
 		
 		if not preselectedPlayerReportBugfix or default:UserVoiceEnabled() and default:GetVoiceJoinProgress() ~= constants.VOICE_JOIN_PROGRESS.Suspended then
 			default:asyncInit():andThen(function()
-				-- upvalues: p1 (copy), handlePreselectedPlayerModule (copy), var15 (copy), playerMenuActions (copy)
+				-- upvalues: p1 (copy), handlePreselectedPlayerModule (copy), var3 (copy), playerMenuActions (copy)
 				if p1.utilityProps.preselectedPlayer then
-					handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, true, var15, p1.utilityProps.analyticsDispatch)
+					handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, true, var3, p1.utilityProps.analyticsDispatch)
 				end
-				var15({ enabled = true, type = playerMenuActions.SetVoiceEnabled })
+				var3({ enabled = true, type = playerMenuActions.SetVoiceEnabled })
 			end):catch(function()
-				-- upvalues: p1 (copy), handlePreselectedPlayerModule (copy), var15 (copy)
+				-- upvalues: p1 (copy), handlePreselectedPlayerModule (copy), var3 (copy)
 				if p1.utilityProps.preselectedPlayer then
-					handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, var15, p1.utilityProps.analyticsDispatch)
+					handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, var3, p1.utilityProps.analyticsDispatch)
 				end
 			end)
 			
 			return
 		elseif p1.utilityProps.preselectedPlayer then
-			handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, var15, p1.utilityProps.analyticsDispatch)
+			handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, var3, p1.utilityProps.analyticsDispatch)
 		end
-		var15({
+		var3({
 			enabled = false,
 			type = playerMenuActions.SetVoiceEnabled
 		})
 	end, { p1.utilityProps.isReportTabVisible })
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), constantsModule (copy), default (copy), alphabeticalSort (copy), playersService (copy), cryoModule (copy), var15 (ref), playerMenuActions (copy)
+		-- upvalues: var2 (ref), constantsModule (copy), default (copy), alphabeticalSort (copy), playersService (copy), cryoModule (copy), var3 (ref), playerMenuActions (copy)
 		local t = {}
 		
-		if var14.methodOfAbuse == constantsModule.AbuseMethods.VoiceChat then
+		if var2.methodOfAbuse == constantsModule.AbuseMethods.VoiceChat then
 			for i, v in pairs(default:getRecentUsersInteractionData()) do
 				table.insert(t, v.player)
 			end
 			table.sort(t, alphabeticalSort)
-		elseif var14.methodOfAbuse == constantsModule.AbuseMethods.TextChat or var14.methodOfAbuse == constantsModule.AbuseMethods.Other or (var14.methodOfAbuse == constantsModule.AbuseMethods.Avatar or var14.methodOfAbuse == nil) then
+		elseif var2.methodOfAbuse == constantsModule.AbuseMethods.TextChat or var2.methodOfAbuse == constantsModule.AbuseMethods.Other or (var2.methodOfAbuse == constantsModule.AbuseMethods.Avatar or var2.methodOfAbuse == nil) then
 			t = playersService:GetPlayers()
 			table.sort(t, alphabeticalSort)
 		end
-		local var17 = false
-		local var18 = false
-		var15({
+		local var4 = false
+		local var5 = false
+		var3({
 			type = playerMenuActions.UpdatePlayerNameMap,
 			playerObjects = cryoModule.List.filter(t, function(p2)
-				-- upvalues: var14 (copy), var17 (write), var18 (write), playersService (copy)
-				if var14.preselectedPlayer and p2.UserId == var14.preselectedPlayer.UserId then
-					var17 = true
+				-- upvalues: var2 (copy), var4 (write), var5 (write), playersService (copy)
+				if var2.preselectedPlayer and p2.UserId == var2.preselectedPlayer.UserId then
+					var4 = true
 				end
-				if var14.allegedAbuser and p2.UserId == var14.allegedAbuserId then
-					var18 = true
+				if var2.allegedAbuser and p2.UserId == var2.allegedAbuserId then
+					var5 = true
 				end
 				return p2 ~= playersService.LocalPlayer and p2.UserId > 0
 			end)
 		})
-		var15({
+		var3({
 			abuseId = nil,
 			abuser = nil,
 			type = constantsModule.PlayerMenuActions.UpdateAbuser
 		})
 	end, {
-		var14.methodOfAbuse,
-		var14.isVoiceEnabled,
+		var2.methodOfAbuse,
+		var2.isVoiceEnabled,
 		p1.utilityProps.isReportTabVisible,
-		var14.preselectedPlayer
+		var2.preselectedPlayer
 	})
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
@@ -100,8 +100,8 @@ return function(p1)
 			Layout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var13.ItemPadding)
+				Padding = UDim.new(0, var1.ItemPadding)
 			})
-		}, getMenuItemsFromConfigsModule(var14, var15, p1.utilityProps, reportPlayerMenuItemConfigListModule, p1.isSmallPortraitViewport)))
+		}, getMenuItemsFromConfigsModule(var2, var3, p1.utilityProps, reportPlayerMenuItemConfigListModule, p1.isSmallPortraitViewport)))
 	})
 end

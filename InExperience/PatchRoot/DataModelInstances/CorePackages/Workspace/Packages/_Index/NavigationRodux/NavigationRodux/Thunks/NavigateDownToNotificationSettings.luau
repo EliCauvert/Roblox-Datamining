@@ -5,16 +5,16 @@ local navigateDownModule = require(navigationRodux.Thunks.NavigateDown)
 local appPage = require(parent.RobloxAppEnums).AppPage
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 
-return function(p0)
+return function(p1)
 	-- upvalues: argCheckModule (ref), navigateDownModule (ref), appPage (ref), urlBuilder (ref)
-	argCheckModule.isTypeOrNil(p0, "function", "onClose")
+	argCheckModule.isTypeOrNil(p1, "function", "onClose")
 	
 	return navigateDownModule({
 		name = appPage.SettingsSubPage,
 		detail = urlBuilder.static.settings.notifications(),
 		extraProps = {
 			titleKey = "Feature.AccountSettings.Heading.Tab.Notifications",
-			onClose = p0
+			onClose = p1
 		}
 	})
 end

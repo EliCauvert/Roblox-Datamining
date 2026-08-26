@@ -1,5 +1,5 @@
-﻿local function tracebackReporter(p0)
-	return debug.traceback(p0)
+﻿local function tracebackReporter(p1)
+	return debug.traceback(p1)
 end
 
 return function(p1)

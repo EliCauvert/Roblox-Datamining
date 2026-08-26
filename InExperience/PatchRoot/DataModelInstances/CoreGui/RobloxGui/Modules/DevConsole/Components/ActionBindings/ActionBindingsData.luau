@@ -2,20 +2,20 @@
 local signalModule = require(script.Parent.Parent.Parent.Signal)
 local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).ActionBindingsFormatting.ChartHeaderNames
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1)
-		return p0.counter < p1.counter
+	[chartHeaderNames[1]] = function(p1, p2)
+		return p1.counter < p2.counter
 	end,
-	[chartHeaderNames[2]] = function(p2, p3)
-		return if p2.actionInfo.priorityLevel == p3.actionInfo.priorityLevel then p2.counter < p3.counter else p2.actionInfo.priorityLevel < p3.actionInfo.priorityLevel
+	[chartHeaderNames[2]] = function(p1, p2)
+		return if p1.actionInfo.priorityLevel == p2.actionInfo.priorityLevel then p1.counter < p2.counter else p1.actionInfo.priorityLevel < p2.actionInfo.priorityLevel
 	end,
-	[chartHeaderNames[3]] = function(p4, p5)
-		return if p4.actionInfo.isCore == p5.actionInfo.isCore then p4.counter < p5.counter else p4.actionInfo.isCore
+	[chartHeaderNames[3]] = function(p1, p2)
+		return if p1.actionInfo.isCore == p2.actionInfo.isCore then p1.counter < p2.counter else p1.actionInfo.isCore
 	end,
-	[chartHeaderNames[4]] = function(p6, p7)
-		return p6.name:lower() < p7.name:lower()
+	[chartHeaderNames[4]] = function(p1, p2)
+		return p1.name:lower() < p2.name:lower()
 	end,
-	[chartHeaderNames[5]] = function(p8, p9)
-		return tostring(p8.actionInfo.inputTypes[1]) < tostring(p9.actionInfo.inputTypes[1])
+	[chartHeaderNames[5]] = function(p1, p2)
+		return tostring(p1.actionInfo.inputTypes[1]) < tostring(p2.actionInfo.inputTypes[1])
 	end
 }
 local t_1 = {}
@@ -35,16 +35,16 @@ function t_1.new()
 	return t
 end
 
-function t_1:setSortType(p10)
+function t_1:setSortType(p1)
 	-- upvalues: t (ref)
-	if t[p10] then
-		self._sortType = p10
+	if t[p1] then
+		self._sortType = p1
 		table.sort(self._sortedBindingData, t[self._sortType])
 		self._bindingsUpdated:Fire(self._sortedBindingData)
 		
 		return
 	end
-	error(string.format("attempted to pass invalid sortType: %s", tostring(p10)), 2)
+	error(string.format("attempted to pass invalid sortType: %s", tostring(p1)), 2)
 end
 
 function t_1:getSortType()
@@ -59,28 +59,28 @@ function t_1:getCurrentData()
 	return self._sortedBindingData
 end
 
-function t_1:updateBindingDataEntry(p11, p12)
-	if p12 == nil then
-		self._bindingsData[p11] = nil
+function t_1:updateBindingDataEntry(p1, p2)
+	if p2 == nil then
+		self._bindingsData[p1] = nil
 		
 		for i, v in pairs(self._sortedBindingData) do
-			if v.name == p11 then
+			if v.name == p1 then
 				table.remove(self._sortedBindingData, i)
 				
 				return
 			end
 		end
 		return
-	elseif self._bindingsData[p11] then
-		self._bindingsData[p11] = p12
+	elseif self._bindingsData[p1] then
+		self._bindingsData[p1] = p2
 		
 		return
 	end
 	self._bindingCounter += 1
-	self._bindingsData[p11] = p12
+	self._bindingsData[p1] = p2
 	table.insert(self._sortedBindingData, {
-		name = p11,
-		actionInfo = self._bindingsData[p11],
+		name = p1,
+		actionInfo = self._bindingsData[p1],
 		counter = self._bindingCounter
 	})
 end
@@ -100,25 +100,25 @@ function t_1:start()
 		self:updateBindingDataEntry(i_1, v_1)
 	end
 	if not self._actionChangedConnection then
-		self._actionChangedConnection = contextActionService.BoundActionChanged:connect(function(p13, p14, p15)
+		self._actionChangedConnection = contextActionService.BoundActionChanged:connect(function(p3, p4, p5)
 			-- upvalues: self (ref)
-			self:updateBindingDataEntry(p13, nil)
-			self:updateBindingDataEntry(p14, p15)
+			self:updateBindingDataEntry(p3, nil)
+			self:updateBindingDataEntry(p4, p5)
 			self._bindingsUpdated:Fire(self._sortedBindingData)
 		end)
 	end
 	if not self._actionAddedConnection then
-		self._actionAddedConnection = contextActionService.BoundActionAdded:connect(function(p16, _, p17, p18)
+		self._actionAddedConnection = contextActionService.BoundActionAdded:connect(function(p3, _, p4, p5)
 			-- upvalues: self (ref)
-			p17.isCore = p18
-			self:updateBindingDataEntry(p16, p17)
+			p4.isCore = p5
+			self:updateBindingDataEntry(p3, p4)
 			self._bindingsUpdated:Fire(self._sortedBindingData)
 		end)
 	end
 	if not self._actionRemovedConnection then
-		self._actionRemovedConnection = contextActionService.BoundActionRemoved:connect(function(p19, _, _)
+		self._actionRemovedConnection = contextActionService.BoundActionRemoved:connect(function(p3, _, _)
 			-- upvalues: self (ref)
-			self:updateBindingDataEntry(p19, nil)
+			self:updateBindingDataEntry(p3, nil)
 			self._bindingsUpdated:Fire(self._sortedBindingData)
 		end)
 	end

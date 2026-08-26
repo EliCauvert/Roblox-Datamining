@@ -10,7 +10,7 @@ if guiService:IsTenFootInterface() then
 end
 return function()
 	-- upvalues: getImageSetDataModule (ref), status (write)
-	local _, var2 = getImageSetDataModule(status)
+	local _, var1 = getImageSetDataModule(status)
 	
-	return var2
+	return var1
 end

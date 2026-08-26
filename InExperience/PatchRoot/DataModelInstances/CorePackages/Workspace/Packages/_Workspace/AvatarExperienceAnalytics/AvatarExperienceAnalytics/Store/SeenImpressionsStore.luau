@@ -4,32 +4,32 @@
 }
 local t_1 = {}
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t_1 (ref)
-	if not t_1[p0] then
-		t_1[p0] = {}
+	if not t_1[p1] then
+		t_1[p1] = {}
 	end
-	return t_1[p0]
+	return t_1[p1]
 end
 
 return {
 	Category = t,
 	hasSeen = function(p1, p2)
 		-- upvalues: t_1 (ref)
-		local var2 = t_1[p1]
+		local var1 = t_1[p1]
 		
-		return var2 ~= nil and var2[p2] == true
+		return var1 ~= nil and var1[p2] == true
 	end,
-	markSeen = function(p3, p4)
+	markSeen = function(p1, p2)
 		-- upvalues: t_1 (ref)
-		if not t_1[p3] then
-			t_1[p3] = {}
+		if not t_1[p1] then
+			t_1[p1] = {}
 		end
-		t_1[p3][p4] = true
+		t_1[p1][p2] = true
 	end,
-	clearCategory = function(p5)
+	clearCategory = function(p1)
 		-- upvalues: t_1 (ref)
-		t_1[p5] = nil
+		t_1[p1] = nil
 	end,
 	clear = function()
 		-- upvalues: t_1 (ref)

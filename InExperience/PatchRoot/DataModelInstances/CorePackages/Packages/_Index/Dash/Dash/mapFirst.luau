@@ -1,9 +1,9 @@
-﻿return function(p0, p1)
-	for i, v in ipairs(p0) do
-		local var0 = p1(v, i)
+﻿return function(p1, p2)
+	for i, v in ipairs(p1) do
+		local var1 = p2(v, i)
 		
-		if var0 ~= nil then
-			return var0
+		if var1 ~= nil then
+			return var1
 		end
 	end
 	return nil

@@ -1,10 +1,10 @@
 ﻿local insert = table.insert
 
-return function(p0)
+return function(p1)
 	-- upvalues: insert (ref)
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		insert(t, i)
 	end
 	return t

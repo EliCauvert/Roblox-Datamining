@@ -1,11 +1,11 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	local var1 = type(p0)
+	local var1 = type(p1)
 	assert(if var1 ~= "table" then var1 == "userdata" else true, "Unexpected value for reportingService")
-	local t_1 = { _isEnabled = true, _reporter = p0 }
+	local t_1 = { _isEnabled = true, _reporter = p1 }
 	setmetatable(t_1, t)
 	
 	return t_1
@@ -16,19 +16,19 @@ function t:setEnabled(p1)
 	self._isEnabled = p1
 end
 
-function t:trackEvent(p2, p3, p4, p5)
-	assert(type(p2) == "string", "Expected category to be a string")
-	assert(type(p3) == "string", "Expected action to be a string")
+function t:trackEvent(p1, p2, p3, p4)
+	assert(type(p1) == "string", "Expected category to be a string")
+	assert(type(p2) == "string", "Expected action to be a string")
 	
-	if p4 then
-		assert(type(p4) == "string", "Expected label to be a string")
+	if p3 then
+		assert(type(p3) == "string", "Expected label to be a string")
 	end
-	if p5 then
-		assert(type(p5) == "number", "Expected value to be a number")
-		assert(p5 >= 0, "Expected value must not be a negative value")
+	if p4 then
+		assert(type(p4) == "number", "Expected value to be a number")
+		assert(p4 >= 0, "Expected value must not be a negative value")
 	end
 	assert(self._isEnabled, "This reporting service is disabled")
-	self._reporter:TrackEvent(p2, p3, p4, p5)
+	self._reporter:TrackEvent(p1, p2, p3, p4)
 end
 
 return t

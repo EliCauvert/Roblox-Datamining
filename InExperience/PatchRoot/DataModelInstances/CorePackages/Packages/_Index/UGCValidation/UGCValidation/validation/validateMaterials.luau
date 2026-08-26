@@ -3,11 +3,11 @@ local _ = require(parent.util.Types)
 local analyticsModule = require(parent.Analytics)
 local constantsModule = require(parent.Constants)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: constantsModule (ref), analyticsModule (ref)
 	local t = {}
-	local descendants = p0:GetDescendants()
-	table.insert(descendants, p0)
+	local descendants = p1:GetDescendants()
+	table.insert(descendants, p1)
 	
 	for i, v in descendants do
 		if v:IsA("BasePart") and not constantsModule.MATERIAL_WHITELIST[v.Material] then
@@ -29,7 +29,7 @@ return function(p0, p1)
 		table.insert(t_1, v_1)
 	end
 	table.insert(t_1, "Accepted values are: " .. table.concat(t_2, ", "))
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateMaterials, nil, p1)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validateMaterials, nil, p2)
 	
 	return false, t_1
 end

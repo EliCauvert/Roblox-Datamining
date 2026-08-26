@@ -1,8 +1,8 @@
 ﻿local urlBuilder = require(script:FindFirstAncestor("VirtualEvents").Parent.UrlBuilder).UrlBuilder
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: urlBuilder (ref)
-	return p0(urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}")({ id = p1 }), "GET"):andThen(function(p2)
-		return p2.responseBody
+	return p1(urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}")({ id = p2 }), "GET"):andThen(function(p3)
+		return p3.responseBody
 	end)
 end

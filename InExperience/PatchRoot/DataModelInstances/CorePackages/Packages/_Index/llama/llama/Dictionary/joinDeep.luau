@@ -6,12 +6,12 @@ local function joinDeep(...)
 	local t = {}
 	
 	for i = 1, select("#", ...) do
-		local var4 = select(i, ...)
+		local var1 = select(i, ...)
 		
-		if not var4 then
+		if not var1 then
 			continue
 		end
-		for i, v in pairs(var4) do
+		for i, v in pairs(var1) do
 			if v == noneModule then
 				t[i] = nil
 			elseif type(v) ~= "table" then

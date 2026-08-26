@@ -17,22 +17,22 @@ local useTokens = foundationModule.Hooks.useTokens
 local fillBehavior = foundationModule.Enums.FillBehavior
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-local function mapErrorReasonToCopy(p0, p1)
+local function mapErrorReasonToCopy(p1, p2)
 	-- upvalues: errorReasonModule (ref)
-	local var8 = ({
-		[errorReasonModule.GenericError] = { p1.GenericErrorTitle, p1.GenericErrorBody },
-		[errorReasonModule.AlreadySubscribed] = { p1.AlreadySubscribedTitle, p1.AlreadySubscribedBody },
-		[errorReasonModule.UnsupportedPlatform] = { p1.UnsupportedPlatformTitle, p1.UnsupportedPlatformBody }
-	})[p0]
+	local var1 = ({
+		[errorReasonModule.GenericError] = { p2.GenericErrorTitle, p2.GenericErrorBody },
+		[errorReasonModule.AlreadySubscribed] = { p2.AlreadySubscribedTitle, p2.AlreadySubscribedBody },
+		[errorReasonModule.UnsupportedPlatform] = { p2.UnsupportedPlatformTitle, p2.UnsupportedPlatformBody }
+	})[p1]
 	
-	return if var8 then { title = var8[1], body = var8[2] } else { title = p1.GenericErrorTitle, body = p1.GenericErrorBody }
+	return if var1 then { title = var1[1], body = var1[2] } else { title = p2.GenericErrorTitle, body = p2.GenericErrorBody }
 end
 
 return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), useTokens (ref), useLocalization (ref), reactModule (ref), mapErrorReasonToCopy (ref), completeRobloxSubscriptionUpsellFlowModule (ref), sheet (ref), view (ref), text (ref), icon (ref), iconName (ref), button (ref), fillBehavior (ref), buttonVariant (ref)
-	local var9 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getErrorReason)
-	local var10 = useTokens()
-	local var11 = useLocalization({
+	local var1 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getErrorReason)
+	local var2 = useTokens()
+	local var3 = useLocalization({
 		okButton = "Features.Transfers.Action.Ok",
 		GenericErrorTitle = "Feature.RobloxSubscription.Title.GenericError",
 		GenericErrorBody = "Feature.RobloxSubscription.Body.GenericError",
@@ -41,23 +41,23 @@ return function()
 		UnsupportedPlatformTitle = "Feature.RobloxSubscription.Title.UnsupportedPlatform",
 		UnsupportedPlatformBody = "Feature.RobloxSubscription.Body.UnsupportedPlatform"
 	})
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: mapErrorReasonToCopy (copy), var9 (ref), var11 (ref)
-		return mapErrorReasonToCopy(var9, var11)
-	end, { var9, var11 })
-	local var13 = reactModule.useCallback(function()
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: mapErrorReasonToCopy (copy), var1 (ref), var3 (ref)
+		return mapErrorReasonToCopy(var1, var3)
+	end, { var1, var3 })
+	local var5 = reactModule.useCallback(function()
 		-- upvalues: completeRobloxSubscriptionUpsellFlowModule (copy)
 		completeRobloxSubscriptionUpsellFlowModule()
 	end, {})
 	
 	return reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), sheet (copy), view (copy), text (copy), var12 (ref), icon (copy), iconName (copy), var10 (ref), button (copy), var11 (ref), var13 (ref), fillBehavior (copy), buttonVariant (copy)
+		-- upvalues: reactModule (copy), sheet (copy), view (copy), text (copy), var4 (ref), icon (copy), iconName (copy), var2 (ref), button (copy), var3 (ref), var5 (ref), fillBehavior (copy), buttonVariant (copy)
 		return {
 			Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
 				TitleRow = reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy gap-small row" }, {
 					Title = reactModule.createElement(text, {
 						tag = "auto-xy text-heading-small content-emphasis text-align-x-center",
-						Text = var12.title
+						Text = var4.title
 					})
 				})
 			}),
@@ -68,12 +68,12 @@ return function()
 					CenterIcon = reactModule.createElement(icon, {
 						LayoutOrder = 1,
 						name = iconName.TriangleExclamation,
-						size = var10.Size.Size_1200
+						size = var2.Size.Size_1200
 					}),
 					BodyText = reactModule.createElement(text, {
 						LayoutOrder = 2,
 						tag = "size-full-0 auto-y text-body-medium content-default text-align-x-center text-wrap",
-						Text = var12.body
+						Text = var4.body
 					})
 				})
 			}),
@@ -84,13 +84,13 @@ return function()
 				}, {
 					reactModule.createElement(button, {
 						LayoutOrder = 1,
-						text = var11.okButton,
-						onActivated = var13,
+						text = var3.okButton,
+						onActivated = var5,
 						fillBehavior = fillBehavior.Fill,
 						variant = buttonVariant.Emphasis
 					})
 				})
 			})
 		}
-	end, { var12, var11.okButton, var13 })
+	end, { var4, var3.okButton, var5 })
 end

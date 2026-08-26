@@ -1,10 +1,10 @@
 ﻿local UIBloxModule = require(script.Parent.UIBlox)
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: UIBloxModule (ref)
-		if p0.UIBloxConfig then
-			UIBloxModule.init(p0.UIBloxConfig)
+		if p1.UIBloxConfig then
+			UIBloxModule.init(p1.UIBloxConfig)
 		end
 		return {
 			Analytics = require(script.Analytics),

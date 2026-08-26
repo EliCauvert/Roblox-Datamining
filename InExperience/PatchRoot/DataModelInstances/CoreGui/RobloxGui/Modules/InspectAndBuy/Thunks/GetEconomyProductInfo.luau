@@ -10,43 +10,43 @@ local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKey
 local sendCounterModule = require(parent.Thunks.SendCounter)
 local constantsModule = require(parent.Constants)
 local list = { networkModule }
-local var10 = createInspectAndBuyKeyMapperModule("getEconomyProductInfo")
+local var1 = createInspectAndBuyKeyMapperModule("getEconomyProductInfo")
 
-return function(p0, p1, p2)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var10 (ref), performFetch (ref), assetInfoModule (ref), setAssetsModule (ref), bundleInfoModule (ref), setBundlesModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p3, p4)
-		-- upvalues: networkModule (copy), var10 (copy), p0 (ref), performFetch (copy), p1 (ref), assetInfoModule (copy), setAssetsModule (copy), bundleInfoModule (copy), p2 (ref), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var11 = p4[networkModule]
+return function(p1, p2, p3)
+	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), assetInfoModule (ref), setAssetsModule (ref), bundleInfoModule (ref), setBundlesModule (ref), sendCounterModule (ref), constantsModule (ref)
+	return thunkModule.new(script.Name, list, function(p4, p5)
+		-- upvalues: networkModule (copy), var1 (copy), p1 (ref), performFetch (copy), p2 (ref), assetInfoModule (copy), setAssetsModule (copy), bundleInfoModule (copy), p3 (ref), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
+		local var2 = p5[networkModule]
 		
-		return performFetch.Single(var10(p3:getState().storeId, p0), function()
-			-- upvalues: var11 (ref), p0 (copy), p1 (copy), assetInfoModule (copy), p3 (ref), setAssetsModule (copy), bundleInfoModule (copy), p2 (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var11.getEconomyProductInfo(p0):andThen(function(p5)
-				-- upvalues: p1 (copy), assetInfoModule (copy), p3 (copy), setAssetsModule (copy), bundleInfoModule (copy), p2 (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
-				local var12 = not p5.purchasable and true
-				local price = p5.price or 0
-				local purchasable = p5.purchasable
-				local premiumPricing = p5.premiumPricing
+		return performFetch.Single(var1(p4:getState().storeId, p1), function()
+			-- upvalues: var2 (ref), p1 (copy), p2 (copy), assetInfoModule (copy), p4 (ref), setAssetsModule (copy), bundleInfoModule (copy), p3 (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
+			return var2.getEconomyProductInfo(p1):andThen(function(p6)
+				-- upvalues: p2 (copy), assetInfoModule (copy), p4 (copy), setAssetsModule (copy), bundleInfoModule (copy), p3 (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
+				local var3 = not p6.purchasable and true
+				local price = p6.price or 0
+				local purchasable = p6.purchasable
+				local premiumPricing = p6.premiumPricing
 				
-				if not p5.purchasable and p5.reason == "InsufficientFunds" then
+				if not p6.purchasable and p6.reason == "InsufficientFunds" then
 					purchasable = true
 				end
-				if p1 then
-					p3:dispatch(setBundlesModule({
-						bundleInfoModule.fromGetEconomyProductInfo(var12, p2, price, purchasable)
+				if p2 then
+					p4:dispatch(setBundlesModule({
+						bundleInfoModule.fromGetEconomyProductInfo(var3, p3, price, purchasable)
 					}))
 				else
-					p3:dispatch(setAssetsModule({
-						assetInfoModule.fromGetEconomyProductInfo(p5, var12, price, purchasable, premiumPricing)
+					p4:dispatch(setAssetsModule({
+						assetInfoModule.fromGetEconomyProductInfo(p6, var3, price, purchasable, premiumPricing)
 					}))
 				end
-				p3:dispatch(sendCounterModule(constantsModule.Counters.GetEconomyProductInfo .. constantsModule.CounterSuffix.RequestSucceeded))
+				p4:dispatch(sendCounterModule(constantsModule.Counters.GetEconomyProductInfo .. constantsModule.CounterSuffix.RequestSucceeded))
 			end, function(_)
-				-- upvalues: p3 (copy), sendCounterModule (copy), constantsModule (copy)
-				p3:dispatch(sendCounterModule(constantsModule.Counters.GetEconomyProductInfo .. constantsModule.CounterSuffix.RequestRejected))
+				-- upvalues: p4 (copy), sendCounterModule (copy), constantsModule (copy)
+				p4:dispatch(sendCounterModule(constantsModule.Counters.GetEconomyProductInfo .. constantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p3):catch(function(_)
-			-- upvalues: p3 (ref), sendCounterModule (copy), constantsModule (copy)
-			p3:dispatch(sendCounterModule(constantsModule.Counters.GetEconomyProductInfo .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p4):catch(function(_)
+			-- upvalues: p4 (ref), sendCounterModule (copy), constantsModule (copy)
+			p4:dispatch(sendCounterModule(constantsModule.Counters.GetEconomyProductInfo .. constantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

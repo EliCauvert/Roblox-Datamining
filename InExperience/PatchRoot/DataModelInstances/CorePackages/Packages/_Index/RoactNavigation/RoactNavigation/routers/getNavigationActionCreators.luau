@@ -1,16 +1,16 @@
 ﻿local navigationActionsModule = require(script.Parent.Parent.NavigationActions)
 local invariantModule = require(script.Parent.Parent.utils.invariant)
 
-return function(p0)
+return function(p1)
 	-- upvalues: invariantModule (ref), navigationActionsModule (ref)
 	return {
-		goBack = function(p1)
-			-- upvalues: p0 (ref), invariantModule (copy), navigationActionsModule (copy)
-			if p1 == nil and p0.key then
-				invariantModule(type(p0.key) == "string", ".goBack(): key should be a string")
-				p1 = p0.key
+		goBack = function(p2)
+			-- upvalues: p1 (ref), invariantModule (copy), navigationActionsModule (copy)
+			if p2 == nil and p1.key then
+				invariantModule(type(p1.key) == "string", ".goBack(): key should be a string")
+				p2 = p1.key
 			end
-			return navigationActionsModule.back({ key = p1 })
+			return navigationActionsModule.back({ key = p2 })
 		end,
 		navigate = function(p2, p3, p4)
 			-- upvalues: navigationActionsModule (copy), invariantModule (copy)
@@ -24,10 +24,10 @@ return function(p0)
 			return navigationActionsModule.navigate(p2)
 		end,
 		setParams = function(value)
-			-- upvalues: invariantModule (copy), p0 (ref), navigationActionsModule (copy)
-			invariantModule(type(p0.key) == "string", ".setParams(): cannot be called by the root navigator")
+			-- upvalues: invariantModule (copy), p1 (ref), navigationActionsModule (copy)
+			invariantModule(type(p1.key) == "string", ".setParams(): cannot be called by the root navigator")
 			
-			return navigationActionsModule.setParams({ params = value, key = p0.key })
+			return navigationActionsModule.setParams({ params = value, key = p1.key })
 		end
 	}
 end

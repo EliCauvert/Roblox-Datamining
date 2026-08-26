@@ -1,33 +1,33 @@
 ﻿local _ = require(script.Parent.Parent.util.Types)
 
-return function(p0, p1, p2, p3)
-	if not p2 then
-		if p3.isServer then
+return function(p1, p2, p3, p4)
+	if not p3 then
+		if p4.isServer then
 			error(string.format("Failed to load texture data"))
 		else
 			return false
 		end
 	end
 	local var1
-	local var0 = p2[p0]
+	local var2 = p3[p1]
 	
-	if not var0 then
-		var1 = p0[p1]
+	if not var2 then
+		var1 = p1[p2]
 		
 		if not var1 or var1 == "" then
 			return false
-		elseif p3.isServer then
+		elseif p4.isServer then
 			error(string.format("Failed to load texture data"))
 		end
 	end
-	var1 = var0[p1]
+	var1 = var2[p2]
 	
 	if not var1 or not var1.instance then
-		local var2 = p0[p1]
+		local var3 = p1[p2]
 		
-		if not var2 or var2 == "" then
+		if not var3 or var3 == "" then
 			return false
-		elseif p3.isServer then
+		elseif p4.isServer then
 			error(string.format("Failed to load texture data"))
 		else
 			return false

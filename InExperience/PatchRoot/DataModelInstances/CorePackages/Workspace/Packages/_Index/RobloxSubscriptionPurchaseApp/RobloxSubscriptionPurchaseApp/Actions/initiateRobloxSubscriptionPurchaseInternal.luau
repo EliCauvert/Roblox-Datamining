@@ -19,50 +19,50 @@ local errorReasonModule = require(robloxSubscriptionPurchaseApp.Enums.ErrorReaso
 local ampAccessResponseModule = require(robloxSubscriptionPurchaseApp.Enums.AmpAccessResponse)
 local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
 
-function initiateRobloxSubscriptionPurchaseInternal(p0)
+function initiateRobloxSubscriptionPurchaseInternal(p1)
 	-- upvalues: logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), getAppFeaturePolicies (ref), transitionToErrorModule (ref), errorReasonModule (ref), promptStateModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), createPaymentSessionModule (ref), getRobloxSubscriptionProductsModule (ref), fFlagRobloxPlusAmpSubscriptionCheckModule (ref), getAmpFeatureAccessModule (ref), promiseModule (ref), ampAccessResponseModule (ref)
 	logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalInitiatedCounter)
-	local var16 = robloxSubscriptionStoreModule.get()
-	local var17 = if fFlagRobloxPlusFAEFreeTrialModule then var16.getPurchaseUIOptions() else nil
+	local var1 = robloxSubscriptionStoreModule.get()
+	local var2 = if fFlagRobloxPlusFAEFreeTrialModule then var1.getPurchaseUIOptions() else nil
 	
-	if if fFlagRobloxPlusFAEFreeTrialModule and var17 ~= nil and var17.skipGuacPolicy then false else getAppFeaturePolicies().getDisableBlackbirdEntrypoints() then
+	if if fFlagRobloxPlusFAEFreeTrialModule and var2 ~= nil and var2.skipGuacPolicy then false else getAppFeaturePolicies().getDisableBlackbirdEntrypoints() then
 		transitionToErrorModule(errorReasonModule.UnsupportedPlatform, "initiateRobloxSubscriptionPurchaseInternal")
 		
 		return
 	end
-	var16.setPromptState(promptStateModule.SubscriptionPurchaseRequested)
+	var1.setPromptState(promptStateModule.SubscriptionPurchaseRequested)
 	
 	if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
 		logSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalOpen")
 	end
 	local list = {
-		createPaymentSessionModule(p0),
+		createPaymentSessionModule(p1),
 		getRobloxSubscriptionProductsModule()
 	}
 	
 	if fFlagRobloxPlusAmpSubscriptionCheckModule then
 		table.insert(list, getAmpFeatureAccessModule())
 	end
-	promiseModule.all(list):andThen(function(p1)
-		-- upvalues: fFlagRobloxPlusAmpSubscriptionCheckModule (copy), ampAccessResponseModule (copy), transitionToErrorModule (copy), errorReasonModule (copy), var16 (ref), promptStateModule (copy)
-		local var19 = p1[1]
-		local var20 = p1[2]
+	promiseModule.all(list):andThen(function(p2)
+		-- upvalues: fFlagRobloxPlusAmpSubscriptionCheckModule (copy), ampAccessResponseModule (copy), transitionToErrorModule (copy), errorReasonModule (copy), var1 (ref), promptStateModule (copy)
+		local var3 = p2[1]
+		local var4 = p2[2]
 		
-		if fFlagRobloxPlusAmpSubscriptionCheckModule and p1[3] == ampAccessResponseModule.Granted then
+		if fFlagRobloxPlusAmpSubscriptionCheckModule and p2[3] == ampAccessResponseModule.Granted then
 			transitionToErrorModule(errorReasonModule.AlreadySubscribed, "initiateRobloxSubscriptionPurchaseInternal")
 			
 			return
 		end
-		var16.setPaymentSessionId(var19)
+		var1.setPaymentSessionId(var3)
 		
-		if #var20 > 0 then
-			var16.setRobloxSubscriptionProduct(var20[1])
+		if #var4 > 0 then
+			var1.setRobloxSubscriptionProduct(var4[1])
 		else
 			transitionToErrorModule(errorReasonModule.AlreadySubscribed, "initiateRobloxSubscriptionPurchaseInternal")
 			
 			return
 		end
-		var16.setPromptState(promptStateModule.SubscriptionPurchaseUIReady)
+		var1.setPromptState(promptStateModule.SubscriptionPurchaseUIReady)
 	end, function(_)
 		-- upvalues: transitionToErrorModule (copy), errorReasonModule (copy)
 		transitionToErrorModule(errorReasonModule.GenericError, "initiateRobloxSubscriptionPurchaseInternal")

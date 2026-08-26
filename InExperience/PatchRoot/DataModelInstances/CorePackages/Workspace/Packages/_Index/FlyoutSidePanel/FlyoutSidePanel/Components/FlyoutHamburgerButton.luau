@@ -26,66 +26,66 @@ local fFlagLuaAppFixNotificationBadgeCountsSync = require(parent.SharedFlags).FF
 local fFlagEnableFlyoutOnNavRail = require(parent.SharedFlags).FFlagEnableFlyoutOnNavRail
 local fFlagFlyoutUseOpenHook = require(parent.SharedFlags).FFlagFlyoutUseOpenHook
 
-local function getTotalNotificationCount(p0, p1, p2)
+local function getTotalNotificationCount(p1, p2, p3)
 	-- upvalues: fFlagLuaAppFixNotificationBadgeCountsSync (ref)
-	local var11 = 0
+	local var1 = 0
 	
-	if p0.MorePageSettings and p0.MorePageSettings > 0 then
-		var11 += p0.MorePageSettings
+	if p1.MorePageSettings and p1.MorePageSettings > 0 then
+		var1 += p1.MorePageSettings
 	end
 	if fFlagLuaAppFixNotificationBadgeCountsSync then
-		if p1 > 0 then
-			var11 += p1
-		end
 		if p2 > 0 then
-			var11 += p2
-			
-			return var11
+			var1 += p2
 		end
-	elseif p0.MorePageFriends and p0.MorePageFriends > 0 then
-		var11 += p0.MorePageFriends
+		if p3 > 0 then
+			var1 += p3
+			
+			return var1
+		end
+	elseif p1.MorePageFriends and p1.MorePageFriends > 0 then
+		var1 += p1.MorePageFriends
 	end
-	if p0.MorePageMessages and p0.MorePageMessages > 0 then
-		var11 += p0.MorePageMessages
+	if p1.MorePageMessages and p1.MorePageMessages > 0 then
+		var1 += p1.MorePageMessages
 	end
-	return var11
+	return var1
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: useSelector (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref), getTotalNotificationCount (ref), useTokens (ref), fFlagFlyoutUseOpenHook (ref), useOpenFlyoutSidePanelModule (ref), useSetDrawerVisible (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutTooltipManagerModule (ref), useLocalization (ref), coreGuiService (ref), tooltipOrientation (ref), userInputService (ref), fFlagEnableFlyoutOnNavRail (ref), foundationModule (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), flyoutAlternateEntryPointModule (ref), icon (ref), builderIconsModule (ref), iconSize (ref), withTooltip (ref)
-	local var14
-	local var12 = getTotalNotificationCount(useSelector(function(p4)
-		return p4.NotificationBadgeCounts or {}
-	end), useSelector(function(p5)
+	local var1
+	local var2 = getTotalNotificationCount(useSelector(function(p2)
+		return p2.NotificationBadgeCounts or {}
+	end), useSelector(function(p2)
 		-- upvalues: fFlagLuaAppFixNotificationBadgeCountsSync (copy)
 		if fFlagLuaAppFixNotificationBadgeCountsSync then
-			local friendsCarousel = p5.FriendsCarousel
+			local friendsCarousel = p2.FriendsCarousel
 			local requests = friendsCarousel and (friendsCarousel.Friends and friendsCarousel.Friends.requests)
 			
 			return if requests then requests.receivedCount else 0
 		end
 		return 0
-	end), useSelector(function(p6)
+	end), useSelector(function(p2)
 		-- upvalues: fFlagLuaAppFixNotificationBadgeCountsSync (copy)
-		return if fFlagLuaAppFixNotificationBadgeCountsSync then if p6.SocialTab then p6.SocialTab.UnreadConversationCount else 0 else 0
+		return if fFlagLuaAppFixNotificationBadgeCountsSync then if p2.SocialTab then p2.SocialTab.UnreadConversationCount else 0 else 0
 	end))
-	local var13 = useTokens()
+	local var3 = useTokens()
 	local _ = nil
 	
 	if fFlagFlyoutUseOpenHook then
-		var14 = useOpenFlyoutSidePanelModule(p3.titleText)
+		var1 = useOpenFlyoutSidePanelModule(p1.titleText)
 	else
-		local var15 = useSetDrawerVisible()
-		local var16 = useRoactService(appEventIngestService)
-		var14 = reactModule.useCallback(function()
-			-- upvalues: flyoutAnalyticsModule (copy), var16 (ref), p3 (ref), var15 (ref), flyoutTooltipManagerModule (copy)
-			flyoutAnalyticsModule.sendPageLoadEvent(var16, p3.titleText)
-			var15(true)
+		local var4 = useSetDrawerVisible()
+		local var5 = useRoactService(appEventIngestService)
+		var1 = reactModule.useCallback(function()
+			-- upvalues: flyoutAnalyticsModule (copy), var5 (ref), p1 (ref), var4 (ref), flyoutTooltipManagerModule (copy)
+			flyoutAnalyticsModule.sendPageLoadEvent(var5, p1.titleText)
+			var4(true)
 			flyoutTooltipManagerModule:flyoutSidePanelOpened()
 		end, {})
 	end
-	local var17, var18 = reactModule.useState(flyoutTooltipManagerModule:isTooltipActive())
-	local var19 = useLocalization({
+	local var6, var7 = reactModule.useState(flyoutTooltipManagerModule:isTooltipActive())
+	local var8 = useLocalization({
 		body = "Feature.FlyoutSidePanel.Label.TooltipBody",
 		title = {
 			"Feature.FlyoutSidePanel.Label.TooltipTitle",
@@ -95,7 +95,7 @@ return function(p3)
 	local t = nil
 	local t_1 = nil
 	
-	if var17 then
+	if var6 then
 		t = {
 			active = true,
 			DisplayOrder = 10,
@@ -105,25 +105,25 @@ return function(p3)
 		t_1 = {
 			useLargeDropShadow = false,
 			headerRichText = true,
-			headerText = var19.title,
-			bodyText = var19.body,
+			headerText = var8.title,
+			bodyText = var8.body,
 			textAlignment = Enum.TextXAlignment.Left
 		}
 	end
-	local var22 = reactModule.useCallback(function(_)
-		-- upvalues: var17 (ref), var18 (ref), flyoutAnalyticsModule (copy)
-		if var17 then
-			var18(false)
+	local var9 = reactModule.useCallback(function(_)
+		-- upvalues: var6 (ref), var7 (ref), flyoutAnalyticsModule (copy)
+		if var6 then
+			var7(false)
 			flyoutAnalyticsModule.onFlyoutTooltipDismissed({ source = "click" })
 		end
-	end, { var17 })
+	end, { var6 })
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), flyoutTooltipManagerModule (copy), flyoutAnalyticsModule (copy), userInputService (copy), var22 (ref)
+		-- upvalues: var6 (ref), flyoutTooltipManagerModule (copy), flyoutAnalyticsModule (copy), userInputService (copy), var9 (ref)
 		local inputBeganConnection = nil
 		
-		if var17 then
+		if var6 then
 			flyoutAnalyticsModule.onFlyoutTooltipShown({ count = flyoutTooltipManagerModule:getTooltipCount() })
-			inputBeganConnection = userInputService.InputBegan:Connect(var22)
+			inputBeganConnection = userInputService.InputBegan:Connect(var9)
 		end
 		return function()
 			-- upvalues: inputBeganConnection (write)
@@ -132,22 +132,22 @@ return function(p3)
 				inputBeganConnection = nil
 			end
 		end
-	end, { var17, var22 })
+	end, { var6, var9 })
 	
 	return reactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Text = "",
-		Size = UDim2.fromOffset(var13.Size.Size_1000, var13.Size.Size_1000),
-		Selectable = if fFlagEnableFlyoutOnNavRail then p3.selectable else nil,
-		[reactModule.Event.Activated] = var14,
-		ref = p3.buttonRef
+		Size = UDim2.fromOffset(var3.Size.Size_1000, var3.Size.Size_1000),
+		Selectable = if fFlagEnableFlyoutOnNavRail then p1.selectable else nil,
+		[reactModule.Event.Activated] = var1,
+		ref = p1.buttonRef
 	}, {
-		StatusIndicatorContainer = if var12 > 0 then reactModule.createElement(foundationModule.View, {
+		StatusIndicatorContainer = if var2 > 0 then reactModule.createElement(foundationModule.View, {
 			tag = "auto-xy padding-xxsmall radius-circle bg-surface-0",
 			ZIndex = 2,
-			Position = if p3.isAlternateEntryPointEnabled then if fFlagEnableFlyoutOnNavRail and p3.isIconCentered then UDim2.new(1, 0, 0, var13.Size.Size_100) else UDim2.new(1, -var13.Size.Size_100, 0, var13.Size.Size_100) elseif fFlagEnableFlyoutOnNavRail and p3.isIconCentered then UDim2.new(1, -var13.Size.Size_100, 0, var13.Size.Size_150) else UDim2.new(1, -var13.Size.Size_300, 0, var13.Size.Size_150),
+			Position = if p1.isAlternateEntryPointEnabled then if fFlagEnableFlyoutOnNavRail and p1.isIconCentered then UDim2.new(1, 0, 0, var3.Size.Size_100) else UDim2.new(1, -var3.Size.Size_100, 0, var3.Size.Size_100) elseif fFlagEnableFlyoutOnNavRail and p1.isIconCentered then UDim2.new(1, -var3.Size.Size_100, 0, var3.Size.Size_150) else UDim2.new(1, -var3.Size.Size_300, 0, var3.Size.Size_150),
 			AnchorPoint = Vector2.new(1, 0)
 		}, {
 			StatusIndicator = reactModule.createElement(statusIndicator, {
@@ -156,22 +156,22 @@ return function(p3)
 		}) else nil,
 		HamburgerButton = reactModule.createElement(foundationModule.View, {
 			tag = "auto-xy",
-			Position = if fFlagEnableFlyoutOnNavRail and p3.isIconCentered then UDim2.new(0.5, 0, 0.5, 0) else UDim2.new(0, 0, 0.5, 0),
-			AnchorPoint = if fFlagEnableFlyoutOnNavRail and p3.isIconCentered then Vector2.new(0.5, 0.5) else Vector2.new(0, 0.5)
+			Position = if fFlagEnableFlyoutOnNavRail and p1.isIconCentered then UDim2.new(0.5, 0, 0.5, 0) else UDim2.new(0, 0, 0.5, 0),
+			AnchorPoint = if fFlagEnableFlyoutOnNavRail and p1.isIconCentered then Vector2.new(0.5, 0.5) else Vector2.new(0, 0.5)
 		}, {
-			Hamburger = if p3.isAlternateEntryPointEnabled then reactModule.createElement(flyoutAlternateEntryPointModule) else reactModule.createElement(icon, {
+			Hamburger = if p1.isAlternateEntryPointEnabled then reactModule.createElement(flyoutAlternateEntryPointModule) else reactModule.createElement(icon, {
 				name = builderIconsModule.Icon.ThreeBarsHorizontal,
 				size = iconSize.Large
 			}),
-			Tooltip = if var17 then withTooltip(t_1, t, function(p7)
+			Tooltip = if var6 then withTooltip(t_1, t, function(p2)
 				-- upvalues: reactModule (copy)
 				return reactModule.createElement("Frame", {
 					Visible = false,
 					Size = UDim2.new(1, 0, 1, 0),
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					[reactModule.Change.AbsolutePosition] = p7,
-					[reactModule.Change.AbsoluteSize] = p7
+					[reactModule.Change.AbsolutePosition] = p2,
+					[reactModule.Change.AbsoluteSize] = p2
 				})
 			end) else nil
 		})

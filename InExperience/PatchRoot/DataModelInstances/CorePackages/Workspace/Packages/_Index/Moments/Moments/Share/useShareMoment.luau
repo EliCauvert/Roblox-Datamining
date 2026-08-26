@@ -15,31 +15,31 @@ local t = {
 	linkCopyFailed = "Feature.Moments.Label.LinkCopyFailed"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: momentContextModule (ref), reactModule (ref), feedContextModule (ref), useLocalization (ref), t (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), shareMomentModule (ref)
 	local momentId = momentContextModule.useMoment().momentId
-	local var9 = reactModule.useContext(feedContextModule.FeedContext)
-	local var10 = useLocalization(t)
+	local var1 = reactModule.useContext(feedContextModule.FeedContext)
+	local var2 = useLocalization(t)
 	
 	return {
 		onShareActivated = reactModule.useCallback(function()
-			-- upvalues: makeRecommendationAttributionModule (copy), p0 (ref), var9 (ref), signalActionTypeModule (copy), shareMomentModule (copy), momentId (ref), var10 (ref)
-			local var11 = makeRecommendationAttributionModule(if p0 then p0.recommendationMetadata else nil)
+			-- upvalues: makeRecommendationAttributionModule (copy), p1 (ref), var1 (ref), signalActionTypeModule (copy), shareMomentModule (copy), momentId (ref), var2 (ref)
+			local var3 = makeRecommendationAttributionModule(if p1 then p1.recommendationMetadata else nil)
 			shareMomentModule({
 				momentId = momentId,
-				feedItemId = if p0 and p0.recommendationMetadata then p0.recommendationMetadata.feedItemId else nil,
-				feedSessionId = if p0 and p0.recommendationMetadata then p0.recommendationMetadata.tracingId else nil,
-				description = if p0 and p0.metadata then p0.metadata.description else nil,
-				logAction = if var11 and var9 then function(p1)
-					-- upvalues: var9 (copy), signalActionTypeModule (copy), var11 (ref)
-					return var9.logAction(signalActionTypeModule.Share, var11, p1)
+				feedItemId = if p1 and p1.recommendationMetadata then p1.recommendationMetadata.feedItemId else nil,
+				feedSessionId = if p1 and p1.recommendationMetadata then p1.recommendationMetadata.tracingId else nil,
+				description = if p1 and p1.metadata then p1.metadata.description else nil,
+				logAction = if var3 and var1 then function(p2)
+					-- upvalues: var1 (copy), signalActionTypeModule (copy), var3 (ref)
+					return var1.logAction(signalActionTypeModule.Share, var3, p2)
 				end else nil,
 				strings = {
-					linkPreviewTitle = var10.shareLinkTitle,
-					linkCopied = var10.linkCopied,
-					linkCopyFailed = var10.linkCopyFailed
+					linkPreviewTitle = var2.shareLinkTitle,
+					linkCopied = var2.linkCopied,
+					linkCopyFailed = var2.linkCopyFailed
 				}
 			})
-		end, { momentId, p0, var9, var10 })
+		end, { momentId, p1, var1, var2 })
 	}
 end

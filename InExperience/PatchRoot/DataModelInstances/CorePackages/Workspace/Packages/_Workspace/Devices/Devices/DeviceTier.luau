@@ -18,8 +18,8 @@ return {
 		if not ok or typeof(status) ~= "table" then
 			return nil
 		end
-		local var2 = tonumber(status[systemInfoProtocol.InfoNames.MAX_MEMORY])
+		local var1 = tonumber(status[systemInfoProtocol.InfoNames.MAX_MEMORY])
 		
-		return if var2 then if var2 <= reactLowEndMemoryCutoff then "LowEnd" elseif reactHighEndMemoryCutoff <= var2 then "HighEnd" else "MidTier" else nil
+		return if var1 then if var1 <= reactLowEndMemoryCutoff then "LowEnd" elseif reactHighEndMemoryCutoff <= var1 then "HighEnd" else "MidTier" else nil
 	end
 }

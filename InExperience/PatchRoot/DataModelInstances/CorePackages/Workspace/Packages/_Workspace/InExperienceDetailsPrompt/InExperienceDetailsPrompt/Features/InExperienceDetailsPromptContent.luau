@@ -11,7 +11,7 @@ local visibility = foundationModule.Enums.Visibility
 local useTokens = foundationModule.Hooks.useTokens
 local luaAppIedpSwitchChipToBadge = game:DefineFastFlag("LuaAppIedpSwitchChipToBadge", false)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), scrollView (ref), visibility (ref), luaAppIedpSwitchChipToBadge (ref), badge (ref), badgeVariant (ref), chip (ref), enums (ref)
 	return reactModule.createElement(scrollView, {
 		tag = "size-full-0 auto-y",
@@ -27,19 +27,19 @@ return function(p0)
 			scrollBarVisibility = visibility.None
 		}
 	}, {
-		AgeRecommendation = if p0.ageRecommendation and p0.ageRecommendation.displayNameWithHeaderShort then if luaAppIedpSwitchChipToBadge then reactModule.createElement(badge, {
+		AgeRecommendation = if p1.ageRecommendation and p1.ageRecommendation.displayNameWithHeaderShort then if luaAppIedpSwitchChipToBadge then reactModule.createElement(badge, {
 			LayoutOrder = 1,
-			text = p0.ageRecommendation.displayNameWithHeaderShort,
+			text = p1.ageRecommendation.displayNameWithHeaderShort,
 			variant = badgeVariant.Neutral
 		}) else reactModule.createElement(chip, {
 			LayoutOrder = 1,
 			Selectable = false,
-			text = p0.ageRecommendation.displayNameWithHeaderShort,
+			text = p1.ageRecommendation.displayNameWithHeaderShort,
 			onActivated = function() end
 		}) else nil,
-		Rating = if p0.rating then if luaAppIedpSwitchChipToBadge then reactModule.createElement(badge, {
+		Rating = if p1.rating then if luaAppIedpSwitchChipToBadge then reactModule.createElement(badge, {
 			LayoutOrder = 2,
-			text = p0.rating,
+			text = p1.rating,
 			variant = badgeVariant.Neutral,
 			icon = {
 				name = enums.IconName.ThumbUp,
@@ -49,7 +49,7 @@ return function(p0)
 		}) else reactModule.createElement(chip, {
 			LayoutOrder = 2,
 			Selectable = false,
-			text = p0.rating,
+			text = p1.rating,
 			leading = {
 				iconName = enums.IconName.ThumbUp,
 				iconVariant = enums.IconVariant.Filled

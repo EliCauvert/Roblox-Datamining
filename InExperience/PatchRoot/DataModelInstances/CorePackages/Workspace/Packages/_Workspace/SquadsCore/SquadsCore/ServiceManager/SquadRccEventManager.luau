@@ -11,31 +11,31 @@ function t.new()
 	return setmetatable({ isLeaveSquadPending = false, lastFiredSquadId = "" }, t)
 end
 
-function t:setLeaveSquadPendingAndFireEvent(p0, p1)
-	if self:_setLeaveSquadPending(p0) then
-		self:fireSquadChangeEvent(nil, p1)
+function t:setLeaveSquadPendingAndFireEvent(p1, p2)
+	if self:_setLeaveSquadPending(p1) then
+		self:fireSquadChangeEvent(nil, p2)
 	end
 end
 
-function t:fireSquadChangeEvent(p2, p3)
+function t:fireSquadChangeEvent(p1, p2)
 	-- upvalues: validateSquadIdModule (ref), socialService (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref)
-	p2 = p2 or ""
-	assert(if p2 ~= "" then validateSquadIdModule(p2) else true, "Try to fire with wrong squadId")
+	p1 = p1 or ""
+	assert(if p1 ~= "" then validateSquadIdModule(p1) else true, "Try to fire with wrong squadId")
 	
-	if p2 ~= "" then
+	if p1 ~= "" then
 		self:_setLeaveSquadPending(false)
 	end
-	if (not self.isLeaveSquadPending or p2 ~= "") and self.lastFiredSquadId ~= p2 then
-		self.lastFiredSquadId = p2
-		socialService:UpdatePlayerPartyData(p2, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then not p3 else nil)
+	if (not self.isLeaveSquadPending or p1 ~= "") and self.lastFiredSquadId ~= p1 then
+		self.lastFiredSquadId = p1
+		socialService:UpdatePlayerPartyData(p1, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then not p2 else nil)
 	end
 end
 
-function t:_setLeaveSquadPending(p4)
-	if self.isLeaveSquadPending == p4 then
+function t:_setLeaveSquadPending(p1)
+	if self.isLeaveSquadPending == p1 then
 		return false
 	end
-	self.isLeaveSquadPending = p4
+	self.isLeaveSquadPending = p1
 	
 	return true
 end

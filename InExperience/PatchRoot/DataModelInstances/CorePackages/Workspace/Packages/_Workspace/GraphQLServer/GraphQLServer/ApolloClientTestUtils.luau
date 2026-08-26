@@ -11,28 +11,28 @@ local object = require(parent.LuauPolyfill).Object
 local _ = require(script.ApolloClientTestUtilsTypes)
 
 return {
-	mockApolloClient = function(p0)
+	mockApolloClient = function(p1)
 		-- upvalues: httpService (ref), serverModule (ref), buildFetch (ref), apolloClient (ref), inMemoryCache (ref), typePolicies (ref), httpLink (ref)
-		local var3 = serverModule.new({
-			mockResolvers = p0.mockResolvers,
+		local var1 = serverModule.new({
+			mockResolvers = p1.mockResolvers,
 			fetchImpl = buildFetch({
-				RequestInternal = function(_, p1)
-					-- upvalues: p0 (ref), httpService (copy)
+				RequestInternal = function(_, p2)
+					-- upvalues: p1 (ref), httpService (copy)
 					return {
-						Start = function(_, p2)
-							-- upvalues: p0 (copy), p1 (ref), httpService (copy)
+						Start = function(_, p3)
+							-- upvalues: p1 (copy), p2 (ref), httpService (copy)
 							local _ = nil
-							local var4 = if p0.responseMap and p0.responseMap[p1.Url] then p0.responseMap[p1.Url] else p0.defaultResponse or {}
-							p2(true, {
-								Body = httpService:JSONEncode(var4.Body),
-								Success = var4.Success ~= nil or var4.Success,
-								StatusCode = if var4.StatusCode then var4.StatusCode else 200,
-								StatusMessage = if var4.StatusMessage then var4.StatusMessage else "OK",
-								Headers = if var4.Headers then var4.Headers else {}
+							local var2 = if p1.responseMap and p1.responseMap[p2.Url] then p1.responseMap[p2.Url] else p1.defaultResponse or {}
+							p3(true, {
+								Body = httpService:JSONEncode(var2.Body),
+								Success = var2.Success ~= nil or var2.Success,
+								StatusCode = if var2.StatusCode then var2.StatusCode else 200,
+								StatusMessage = if var2.StatusMessage then var2.StatusMessage else "OK",
+								Headers = if var2.Headers then var2.Headers else {}
 							})
 							
-							if p0.responseSpy then
-								p0.responseSpy(p1)
+							if p1.responseSpy then
+								p1.responseSpy(p2)
 							end
 						end
 					}
@@ -44,44 +44,44 @@ return {
 			cache = inMemoryCache.new({ typePolicies = typePolicies }),
 			link = httpLink.new({
 				uri = "/api",
-				fetch = function(_, p3)
-					-- upvalues: var3 (ref)
-					return var3:fetchLocal(p3)
+				fetch = function(_, p2)
+					-- upvalues: var1 (ref)
+					return var1:fetchLocal(p2)
 				end
 			})
 		})
 	end,
-	mockHttpService = function(p4)
+	mockHttpService = function(p1)
 		-- upvalues: httpService (ref)
 		return {
-			RequestInternal = function(_, p5)
-				-- upvalues: p4 (ref), httpService (copy)
+			RequestInternal = function(_, p2)
+				-- upvalues: p1 (ref), httpService (copy)
 				return {
-					Start = function(_, p6)
-						-- upvalues: p4 (copy), p5 (ref), httpService (copy)
+					Start = function(_, p3)
+						-- upvalues: p1 (copy), p2 (ref), httpService (copy)
 						local _ = nil
-						local var4 = if p4.responseMap and p4.responseMap[p5.Url] then p4.responseMap[p5.Url] else p4.defaultResponse or {}
-						p6(true, {
-							Body = httpService:JSONEncode(var4.Body),
-							Success = var4.Success ~= nil or var4.Success,
-							StatusCode = if var4.StatusCode then var4.StatusCode else 200,
-							StatusMessage = if var4.StatusMessage then var4.StatusMessage else "OK",
-							Headers = if var4.Headers then var4.Headers else {}
+						local var1 = if p1.responseMap and p1.responseMap[p2.Url] then p1.responseMap[p2.Url] else p1.defaultResponse or {}
+						p3(true, {
+							Body = httpService:JSONEncode(var1.Body),
+							Success = var1.Success ~= nil or var1.Success,
+							StatusCode = if var1.StatusCode then var1.StatusCode else 200,
+							StatusMessage = if var1.StatusMessage then var1.StatusMessage else "OK",
+							Headers = if var1.Headers then var1.Headers else {}
 						})
 						
-						if p4.responseSpy then
-							p4.responseSpy(p5)
+						if p1.responseSpy then
+							p1.responseSpy(p2)
 						end
 					end
 				}
 			end
 		}
 	end,
-	appendApolloClientToReducer = function(p7, p8)
+	appendApolloClientToReducer = function(p1, p2)
 		-- upvalues: object (ref)
-		return function(p9, p10)
-			-- upvalues: p7 (ref), object (copy), p8 (ref)
-			return object.assign(table.clone(p7(p9 or {}, p10)), { ApolloClient = { apolloClient = p8 } })
+		return function(p3, p4)
+			-- upvalues: p1 (ref), object (copy), p2 (ref)
+			return object.assign(table.clone(p1(p3 or {}, p4)), { ApolloClient = { apolloClient = p2 } })
 		end
 	end
 }

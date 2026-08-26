@@ -7,17 +7,17 @@ local colorsModule = require(parent.Colors)
 local avatarHeadShot = roactModule.PureComponent:extend("AvatarHeadShot")
 local headshot = require(coreGuiService:WaitForChild("RobloxGui"):WaitForChild("Modules").Common.LegacyThumbnailUrls).Headshot
 
-function avatarHeadShot.render(p0)
+function avatarHeadShot.render(p1)
 	-- upvalues: headshot (ref), roactModule (ref), colorsModule (ref)
-	local playerId = p0.props.playerId
-	local var6 = if playerId and playerId ~= "" then headshot:format(playerId, 48, 48) else nil
+	local playerId = p1.props.playerId
+	local var1 = if playerId and playerId ~= "" then headshot:format(playerId, 48, 48) else nil
 	
-	return if var6 then roactModule.createElement("ImageLabel", {
+	return if var1 then roactModule.createElement("ImageLabel", {
 		BorderSizePixel = 0,
 		LayoutOrder = 1,
 		Size = UDim2.new(0, 48, 0, 48),
 		BackgroundColor3 = colorsModule.GrayBackground,
-		Image = var6
+		Image = var1
 	}, {
 		MaskFrame = roactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,

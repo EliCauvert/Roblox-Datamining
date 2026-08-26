@@ -6,38 +6,38 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 
-return function(p0, _, p1, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), dataHydrationModule (ref), signalsModule (ref), setCurrentToastMessage (ref)
-	local var3 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var3 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing action params",
 			name = sduiActionType.JoinCommunity
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local communityId = var3.communityId
+	local communityId = var1.communityId
 	
 	if communityId == nil or typeof(communityId) ~= "string" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: communityId",
 			propName = "communityId",
 			name = sduiActionType.JoinCommunity
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local var4 = dataHydrationModule.CommunityUserMembership.getCommunityUserMembershipStore(false).joinCommunity(communityId)
-	local dispatch = p1.dependencies.dispatch
+	local var2 = dataHydrationModule.CommunityUserMembership.getCommunityUserMembershipStore(false).joinCommunity(communityId)
+	local dispatch = p2.dependencies.dispatch
 	local t = {}
-	t.dispose = signalsModule.createEffect(function(p2)
-		-- upvalues: var4 (ref), dispatch (ref), setCurrentToastMessage (copy), t (ref)
-		local var6 = var4(p2)
+	t.dispose = signalsModule.createEffect(function(p3)
+		-- upvalues: var2 (ref), dispatch (ref), setCurrentToastMessage (copy), t (ref)
+		local var3 = var2(p3)
 		
-		if var6 == nil then return end
-		if var6.type == "error" then
+		if var3 == nil then return end
+		if var3.type == "error" then
 			dispatch(setCurrentToastMessage({
 				toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong"
 			}))

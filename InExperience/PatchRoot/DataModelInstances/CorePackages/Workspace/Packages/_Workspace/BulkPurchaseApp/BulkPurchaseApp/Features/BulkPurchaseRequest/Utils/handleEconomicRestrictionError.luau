@@ -9,15 +9,15 @@ local default = require(parent.LoggingProtocol).default
 local bulkPurchaseFailedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
 local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: parseErrorReasonToEconomicRestriction (ref), default (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), bulkPurchaseFailedModule (ref), errorCodeEnumModule (ref)
-	local var4 = parseErrorReasonToEconomicRestriction(p0)
+	local var1 = parseErrorReasonToEconomicRestriction(p1)
 	default:logRobloxTelemetryCounter(universalEconomicRestrictionsCounter, 1, {
 		surface = economicRestrictionsSurface.BulkPurchase,
-		failureReason = if var4.violationType then tostring(var4.violationType) else "null"
+		failureReason = if var1.violationType then tostring(var1.violationType) else "null"
 	})
-	p1(bulkPurchaseFailedModule(errorCodeEnumModule.EconomicRestriction, {
-		failureReason = var4.violationType,
-		expirationTimeInMinutes = var4.timeoutMinutes
+	p2(bulkPurchaseFailedModule(errorCodeEnumModule.EconomicRestriction, {
+		failureReason = var1.violationType,
+		expirationTimeInMinutes = var1.timeoutMinutes
 	}))
 end

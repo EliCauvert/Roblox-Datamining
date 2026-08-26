@@ -7,12 +7,12 @@ local t_1 = {
 	RoughnessMap = true
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), UGCValidationService (ref), t_1 (ref)
 	local t_2 = {}
 	local t_3 = {}
-	local descendants = p0:GetDescendants()
-	table.insert(descendants, p0)
+	local descendants = p1:GetDescendants()
+	table.insert(descendants, p1)
 	
 	for i, v in descendants do
 		if v:IsA("BinaryStringValue") and t[v.Name] then

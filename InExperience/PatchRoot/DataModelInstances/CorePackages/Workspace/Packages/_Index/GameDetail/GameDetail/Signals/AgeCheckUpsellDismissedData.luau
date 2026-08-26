@@ -3,9 +3,9 @@ local parent = script:FindFirstAncestor("GameDetail").Parent
 local fFlagLuaAppDismissUnlockUpsell = require(parent.SharedFlags).FFlagLuaAppDismissUnlockUpsell
 local var1, var2 = require(parent.Signals).createSignal(false)
 
-local function getIsAgeCheckUpsellDismissed(p0)
+local function getIsAgeCheckUpsellDismissed(p1)
 	-- upvalues: var1 (ref)
-	return var1(p0)
+	return var1(p1)
 end
 
 local function setAgeCheckUpsellDismissed()
@@ -15,21 +15,21 @@ end
 
 local function _()
 	-- upvalues: playersService (ref)
-	local var7 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+	local var3 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
 	
-	return if var7 == nil or var7 <= 0 then nil else var7
+	return if var3 == nil or var3 <= 0 then nil else var3
 end
 
 if fFlagLuaAppDismissUnlockUpsell then
-	local var5 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
-	local var6 = if var5 == nil or var5 <= 0 then nil else var5
+	local var3 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+	local var4 = if var3 == nil or var3 <= 0 then nil else var3
 	playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-		-- upvalues: playersService (ref), var6 (write), var2 (ref)
-		local var8 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
-		local var9 = if var8 == nil or var8 <= 0 then nil else var8
+		-- upvalues: playersService (ref), var4 (write), var2 (ref)
+		local var5 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+		local var6 = if var5 == nil or var5 <= 0 then nil else var5
 		
-		if var9 ~= var6 then
-			var6 = var9
+		if var6 ~= var4 then
+			var4 = var6
 			var2(false)
 		end
 	end)

@@ -11,24 +11,24 @@ local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
 return function()
 	-- upvalues: useIsInExperienceModule (ref), useIsChatEnabledModule (ref), useAppPolicyModule (ref), getFFlagHideNotificationIconForVRModule (ref), useSelector (ref), fFlagAppChatRemoveNotifications (ref), getFFlagEnableAppChatInExperience (ref)
-	local var6 = useIsInExperienceModule()
-	local var7 = useIsChatEnabledModule()
+	local var1 = useIsInExperienceModule()
+	local var2 = useIsChatEnabledModule()
 	
 	return {
-		topBarShowSearch = useAppPolicyModule(function(p0)
-			return p0.getChatHeaderSearch()
-		end) and (not var6 and var7),
+		topBarShowSearch = useAppPolicyModule(function(p1)
+			return p1.getChatHeaderSearch()
+		end) and (not var1 and var2),
 		topBarShowCreateChatGroup = useAppPolicyModule(function(p1)
 			return p1.getChatHeaderCreateChatGroup()
-		end) and var7,
-		topBarShowNotifications = not var6 and (useAppPolicyModule(function(p2)
+		end) and var2,
+		topBarShowNotifications = not var1 and (useAppPolicyModule(function(p1)
 			-- upvalues: getFFlagHideNotificationIconForVRModule (copy)
-			return p2.getChatHeaderNotifications() and (not getFFlagHideNotificationIconForVRModule() or p2.getWebViewSupport())
+			return p1.getChatHeaderNotifications() and (not getFFlagHideNotificationIconForVRModule() or p1.getWebViewSupport())
 		end) and not fFlagAppChatRemoveNotifications),
-		topBarShowSnoozeNotifications = var6 and getFFlagEnableAppChatInExperience(),
-		showSearchRow = var6,
-		notificationCount = useSelector(function(p3)
-			local notificationBadgeCounts = p3.NotificationBadgeCounts
+		topBarShowSnoozeNotifications = var1 and getFFlagEnableAppChatInExperience(),
+		showSearchRow = var1,
+		notificationCount = useSelector(function(p1)
+			local notificationBadgeCounts = p1.NotificationBadgeCounts
 			
 			return if notificationBadgeCounts then notificationBadgeCounts.TopBarNotificationIcon else 0
 		end)

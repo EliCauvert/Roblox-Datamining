@@ -4,39 +4,39 @@ local PATCHModule = require(script.Parent.PATCH)
 local DELETEModule = require(script.Parent.DELETE)
 local _ = require(script.Parent.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: GETModule (ref), POSTModule (ref), PATCHModule (ref), DELETEModule (ref)
-	assert(p0, "Expected options to be passed into RoduxNetworking")
-	assert(p0.keyPath, "Expected options.keyPath to be passed into RoduxNetworking")
-	assert(p0.networkImpl, "Expected options.networkImpl to be passed into RoduxNetworking")
+	assert(p1, "Expected options to be passed into RoduxNetworking")
+	assert(p1.keyPath, "Expected options.keyPath to be passed into RoduxNetworking")
+	assert(p1.networkImpl, "Expected options.networkImpl to be passed into RoduxNetworking")
 	
 	return {
-		GET = function(p1, p2)
-			-- upvalues: GETModule (copy), p0 (ref)
-			assert(p1, "RoduxNetworking:GET expects moduleScript argument")
-			assert(p1, "RoduxNetworking:GET expects constructBuilderFunction argument")
+		GET = function(p2, p3)
+			-- upvalues: GETModule (copy), p1 (ref)
+			assert(p2, "RoduxNetworking:GET expects moduleScript argument")
+			assert(p2, "RoduxNetworking:GET expects constructBuilderFunction argument")
 			
-			return GETModule(p0)(p1, p2)
+			return GETModule(p1)(p2, p3)
 		end,
-		POST = function(p3, p4)
-			-- upvalues: POSTModule (copy), p0 (ref)
-			return POSTModule(p0)(p3, p4)
+		POST = function(p2, p3)
+			-- upvalues: POSTModule (copy), p1 (ref)
+			return POSTModule(p1)(p2, p3)
 		end,
-		PATCH = function(p5, p6)
-			-- upvalues: PATCHModule (copy), p0 (ref)
-			return PATCHModule(p0)(p5, p6)
+		PATCH = function(p2, p3)
+			-- upvalues: PATCHModule (copy), p1 (ref)
+			return PATCHModule(p1)(p2, p3)
 		end,
-		DELETE = function(p7, p8)
-			-- upvalues: DELETEModule (copy), p0 (ref)
-			return DELETEModule(p0)(p7, p8)
+		DELETE = function(p2, p3)
+			-- upvalues: DELETEModule (copy), p1 (ref)
+			return DELETEModule(p1)(p2, p3)
 		end,
 		getNetworkImpl = function()
-			-- upvalues: p0 (ref)
-			return p0.networkImpl
+			-- upvalues: p1 (ref)
+			return p1.networkImpl
 		end,
 		setNetworkImpl = function(value)
-			-- upvalues: p0 (ref)
-			p0.networkImpl = value
+			-- upvalues: p1 (ref)
+			p1.networkImpl = value
 		end
 	}
 end

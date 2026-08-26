@@ -5,30 +5,30 @@ local luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache = game:DefineFastS
 
 return {
 	HOME_OMNI_FEED_CACHE_VERSION = 2,
-	cacheOmniRecommendationsData = function(p0)
+	cacheOmniRecommendationsData = function(p1)
 		-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (ref), discoveryClientAppStorageModule (ref), discoveryEventErrorLoggerModule (ref)
-		assert(p0.pageType, "pageType is required")
-		assert(p0.sorts, "sorts is required")
-		assert(p0.contentMetadata, "contentMetadata is required")
-		assert(p0.contentMetadata.Game, "contentMetadata.Game is required")
+		assert(p1.pageType, "pageType is required")
+		assert(p1.sorts, "sorts is required")
+		assert(p1.contentMetadata, "contentMetadata is required")
+		assert(p1.contentMetadata.Game, "contentMetadata.Game is required")
 		task.spawn(function()
-			-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), p0 (ref), discoveryClientAppStorageModule (copy), discoveryEventErrorLoggerModule (copy)
+			-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), p1 (ref), discoveryClientAppStorageModule (copy), discoveryEventErrorLoggerModule (copy)
 			local ok, status = pcall(function()
-				-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), p0 (copy), discoveryClientAppStorageModule (copy)
+				-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), p1 (copy), discoveryClientAppStorageModule (copy)
 				local t = {}
 				
 				for i, v in string.split(luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache, ",") do
 					local parts = string.split(v, ":")
-					local var13 = tonumber(parts[1])
-					local var14 = tonumber(parts[2])
+					local var1 = tonumber(parts[1])
+					local var2 = tonumber(parts[2])
 					
-					if var13 and var14 then
-						t[var13] = { count = 0, cap = var14 }
+					if var1 and var2 then
+						t[var1] = { count = 0, cap = var2 }
 					end
 				end
 				local t_1 = {}
 				
-				for i_1, v_1 in p0.sorts do
+				for i_1, v_1 in p1.sorts do
 					local topicId = t[v_1.topicId]
 					
 					if topicId ~= nil and v_1.recommendationList ~= nil then
@@ -52,19 +52,19 @@ return {
 				for i_2, v_2 in ipairs(t_1) do
 					for i_3, v_3 in ipairs(v_2.recommendationList) do
 						if v_3.contentType == "Game" then
-							local var7 = tostring(v_3.contentId)
-							local var8 = p0.contentMetadata.Game[var7]
+							local var3 = tostring(v_3.contentId)
+							local var4 = p1.contentMetadata.Game[var3]
 							
-							if var8 then
-								local cloned = table.clone(var8)
+							if var4 then
+								local cloned = table.clone(var4)
 								cloned.playerCount = nil
-								t_2[var7] = cloned
+								t_2[var3] = cloned
 							end
 						end
 					end
 				end
 				discoveryClientAppStorageModule.setJsonStorageData(discoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, {
-					pageType = p0.pageType,
+					pageType = p1.pageType,
 					sorts = t_1,
 					contentMetadata = { Game = t_2 }
 				}, 2)

@@ -4,7 +4,7 @@ local buildSduiCollectionInfo = require(parent.SduiSharedUtilities).buildSduiCol
 local fFlagSduiChartsRequestPlaceholders = require(parent.SharedFlags).FFlagSduiChartsRequestPlaceholders
 local uDim = UDim.new(1, 72)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsRequestPlaceholders (ref), buildSduiCollectionInfo (ref), uDim (ref)
 	local t = {}
 	local t_1 = {}
@@ -13,23 +13,23 @@ return function(p0, p1)
 	if t_1.maxMemory and t_1.maxMemory ~= "" then
 		t.max_memory = t_1.maxMemory
 	end
-	if p1 then
-		if p1.feedPageToken and p1.feedPageToken ~= "" then
-			t.feed_page_token = p1.feedPageToken
+	if p2 then
+		if p2.feedPageToken and p2.feedPageToken ~= "" then
+			t.feed_page_token = p2.feedPageToken
 		end
-		if p1.sessionId and p1.sessionId ~= "" then
-			t.session_id = p1.sessionId
+		if p2.sessionId and p2.sessionId ~= "" then
+			t.session_id = p2.sessionId
 		end
-		if p1.entryPaginationKey and p1.entryPaginationKey ~= "" then
-			t.entry_pagination_key = p1.entryPaginationKey
+		if p2.entryPaginationKey and p2.entryPaginationKey ~= "" then
+			t.entry_pagination_key = p2.entryPaginationKey
 		end
-		if p1.entryPageToken and p1.entryPageToken ~= "" then
-			t.entry_page_token = p1.entryPageToken
+		if p2.entryPageToken and p2.entryPageToken ~= "" then
+			t.entry_page_token = p2.entryPageToken
 		end
-		if p1.pageType and p1.pageType ~= "" then
-			t.page_type = p1.pageType
+		if p2.pageType and p2.pageType ~= "" then
+			t.page_type = p2.pageType
 		end
-		local filterSelections = p1.filterSelections
+		local filterSelections = p2.filterSelections
 		
 		if filterSelections then
 			if filterSelections.device and filterSelections.device ~= "" then
@@ -42,25 +42,25 @@ return function(p0, p1)
 				t.age_group = filterSelections.ageGroup
 			end
 		end
-		if fFlagSduiChartsRequestPlaceholders and p1.includePlaceholders then
+		if fFlagSduiChartsRequestPlaceholders and p2.includePlaceholders then
 			t.include_placeholders = true
 		end
-		if p1.hydrationStreamEnabled ~= nil then
-			t.hydration_stream_enabled = p1.hydrationStreamEnabled
+		if p2.hydrationStreamEnabled ~= nil then
+			t.hydration_stream_enabled = p2.hydrationStreamEnabled
 		end
-		if p1.cachedRobloxComponentToTemplateId then
-			t.cached_roblox_component_to_template_id = p1.cachedRobloxComponentToTemplateId
+		if p2.cachedRobloxComponentToTemplateId then
+			t.cached_roblox_component_to_template_id = p2.cachedRobloxComponentToTemplateId
 		end
-		if p1.clientCapabilities then
-			t.client_capabilities = p1.clientCapabilities
+		if p2.clientCapabilities then
+			t.client_capabilities = p2.clientCapabilities
 		end
-		if p1.hydrationStreamEnabled then
-			local var3 = buildSduiCollectionInfo("Small", uDim)
-			t.collection_layout = p0.CollectionLayoutInfo.new({
-				items_per_row = var3.items_per_row,
-				rows_above_fold = var3.rows_above_fold
+		if p2.hydrationStreamEnabled then
+			local var1 = buildSduiCollectionInfo("Small", uDim)
+			t.collection_layout = p1.CollectionLayoutInfo.new({
+				items_per_row = var1.items_per_row,
+				rows_above_fold = var1.rows_above_fold
 			})
 		end
 	end
-	return p0.GetChartsPageRequest.new(t)
+	return p1.GetChartsPageRequest.new(t)
 end

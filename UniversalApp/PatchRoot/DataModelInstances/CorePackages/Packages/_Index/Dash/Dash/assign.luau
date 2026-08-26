@@ -6,19 +6,19 @@ local forEachArgsModule = require(parent.forEachArgs)
 
 return function(value, ...)
 	-- upvalues: forEachArgsModule (ref), noneModule (ref), forEachModule (ref)
-	forEachArgsModule(function(p0)
+	forEachArgsModule(function(p1)
 		-- upvalues: noneModule (copy), forEachModule (copy), value (ref)
-		if p0 == nil or p0 == noneModule then
+		if p1 == nil or p1 == noneModule then
 			return
 		end
-		forEachModule(p0, function(p1, p2)
+		forEachModule(p1, function(p2, p3)
 			-- upvalues: noneModule (copy), value (copy)
-			if p1 == noneModule then
-				value[p2] = nil
+			if p2 == noneModule then
+				value[p3] = nil
 				
 				return
 			end
-			value[p2] = p1
+			value[p3] = p2
 		end)
 	end, ...)
 	

@@ -9,7 +9,7 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useStyle = UIBloxModule.Core.Style.useStyle
 local baseMenu = UIBloxModule.App.Menu.BaseMenu
 local truncationExpandSmall = images["icons/actions/truncationExpand_small"]
-local var6 = argCheckModule.wrap(tModule.strictInterface({
+local var1 = argCheckModule.wrap(tModule.strictInterface({
 	buttonSize = tModule.UDim2,
 	dropdownList = tModule.table,
 	selectedIndex = tModule.number,
@@ -17,24 +17,24 @@ local var6 = argCheckModule.wrap(tModule.strictInterface({
 	layoutOrder = tModule.number
 }))
 
-return function(p0)
-	-- upvalues: var6 (ref), useStyle (ref), reactModule (ref), roactModule (ref), imageSetLabel (ref), truncationExpandSmall (ref), baseMenu (ref)
-	assert(var6(p0))
-	local var7 = useStyle()
-	local captionHeader = var7.Font.CaptionHeader
-	local var8 = captionHeader.RelativeSize * var7.Font.BaseSize
-	local var9 = if var7.UIBloxThemeEnabled then var7.color("ControlInputBackground") else Color3.fromRGB(79, 84, 95)
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useState({})
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), var10 (ref)
-		var11(not var10)
+return function(p1)
+	-- upvalues: var1 (ref), useStyle (ref), reactModule (ref), roactModule (ref), imageSetLabel (ref), truncationExpandSmall (ref), baseMenu (ref)
+	assert(var1(p1))
+	local var2 = useStyle()
+	local captionHeader = var2.Font.CaptionHeader
+	local var3 = captionHeader.RelativeSize * var2.Font.BaseSize
+	local var4 = if var2.UIBloxThemeEnabled then var2.color("ControlInputBackground") else Color3.fromRGB(79, 84, 95)
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState({})
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), var5 (ref)
+		var6(not var5)
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), captionHeader (ref), var11 (ref), var13 (ref)
+		-- upvalues: p1 (ref), captionHeader (ref), var6 (ref), var8 (ref)
 		local t = {}
 		
-		for i, v in pairs(p0.dropdownList) do
+		for i, v in pairs(p1.dropdownList) do
 			t[i] = {
 				leftPaddingOffset = -12,
 				selectedIconPaddingRight = 12,
@@ -44,34 +44,34 @@ return function(p0)
 					RelativeSize = captionHeader.RelativeSize
 				},
 				onActivated = function()
-					-- upvalues: p0 (copy), i (ref), var11 (copy)
-					p0.onSelection(i)
-					var11(false)
+					-- upvalues: p1 (copy), i (ref), var6 (copy)
+					p1.onSelection(i)
+					var6(false)
 				end,
-				selected = i == p0.selectedIndex
+				selected = i == p1.selectedIndex
 			}
 		end
-		var13(t)
-	end, { p0.dropdownList, p0.selectedIndex })
+		var8(t)
+	end, { p1.dropdownList, p1.selectedIndex })
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ZIndex = 3,
-		Size = p0.buttonSize,
-		LayoutOrder = p0.layoutOrder
+		Size = p1.buttonSize,
+		LayoutOrder = p1.layoutOrder
 	}, {
 		SpawnButton = roactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 1, 0),
-			Text = p0.dropdownList[p0.selectedIndex],
+			Text = p1.dropdownList[p1.selectedIndex],
 			TextColor3 = Color3.new(1, 1, 1),
-			TextSize = var8,
+			TextSize = var3,
 			Font = captionHeader.Font,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			BackgroundColor3 = var9,
+			BackgroundColor3 = var4,
 			BackgroundTransparency = 0,
-			LayoutOrder = p0.layoutOrder,
-			[roactModule.Event.Activated] = var14
+			LayoutOrder = p1.layoutOrder,
+			[roactModule.Event.Activated] = var9
 		}, {
 			UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
 			UIPadding = roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 12) }),
@@ -88,13 +88,13 @@ return function(p0)
 				Position = UDim2.new(1, -28, 0.5, -8)
 			})
 		}),
-		Dropdown = var10 and roactModule.createElement(baseMenu, {
+		Dropdown = var5 and roactModule.createElement(baseMenu, {
 			layoutOrder = 2,
 			elementHeight = 40,
 			showDropShadow = true,
-			buttonProps = var12,
+			buttonProps = var7,
 			position = UDim2.new(0, 0, 1, 6),
-			background = { Color = var9 }
+			background = { Color = var4 }
 		})
 	})
 end

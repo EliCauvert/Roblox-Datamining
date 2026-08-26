@@ -11,23 +11,23 @@ local getIconRichText = foundationModule.Utility.getIconRichText
 local useTokens = foundationModule.Hooks.useTokens
 local getFFlagCurrencyTransferCenterRobuxIconModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferCenterRobuxIcon)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), formatNumberModule (ref), localizationService (ref), getFFlagCurrencyTransferCenterRobuxIconModule (ref), useTokens (ref), icon (ref), text (ref), view (ref), getIconRichText (ref)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: formatNumberModule (copy), localizationService (copy), p0 (ref)
-		return formatNumberModule(localizationService.RobloxLocaleId, p0.amount or 0)
-	end, { p0.amount, localizationService.RobloxLocaleId })
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: formatNumberModule (copy), localizationService (copy), p1 (ref)
+		return formatNumberModule(localizationService.RobloxLocaleId, p1.amount or 0)
+	end, { p1.amount, localizationService.RobloxLocaleId })
 	
 	if getFFlagCurrencyTransferCenterRobuxIconModule() then
-		local var7 = useTokens()
-		local fontSize = var7.Typography.HeadingLarge.FontSize
-		local rounded = math.round(var7.Typography.DisplaySmall.FontSize)
+		local var2 = useTokens()
+		local fontSize = var2.Typography.HeadingLarge.FontSize
+		local rounded = math.round(var2.Typography.DisplaySmall.FontSize)
 		
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = UDim2.fromOffset(0, rounded),
-			LayoutOrder = p0.layoutOrder
+			LayoutOrder = p1.layoutOrder
 		}, {
 			Layout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -43,16 +43,16 @@ return function(p0)
 				RobuxIcon = reactModule.createElement(icon, {
 					name = "robux",
 					size = fontSize,
-					style = var7.Color.Content.Emphasis,
+					style = var2.Color.Content.Emphasis,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 4)
 				})
 			}),
 			RobuxAmount = reactModule.createElement(text, {
 				LayoutOrder = 2,
-				Text = var6,
-				fontStyle = var7.Typography.DisplaySmall,
-				textStyle = var7.Color.Content.Emphasis,
+				Text = var1,
+				fontStyle = var2.Typography.DisplaySmall,
+				textStyle = var2.Color.Content.Emphasis,
 				Size = UDim2.fromOffset(0, rounded),
 				AutomaticSize = Enum.AutomaticSize.X,
 				TextXAlignment = Enum.TextXAlignment.Center
@@ -61,7 +61,7 @@ return function(p0)
 	end
 	return reactModule.createElement(view, {
 		tag = "row align-x-center align-y-center auto-xy",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		RobuxIcon = reactModule.createElement(text, {
 			tag = "auto-xy text-heading-large content-emphasis text-align-x-center",
@@ -77,7 +77,7 @@ return function(p0)
 		RobuxAmount = reactModule.createElement(text, {
 			tag = "auto-xy text-display-small content-emphasis text-align-x-center",
 			LayoutOrder = 3,
-			Text = var6
+			Text = var1
 		})
 	})
 end

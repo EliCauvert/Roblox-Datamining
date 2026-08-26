@@ -1,19 +1,19 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("ApolloLocalState").Parent.Cryo)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: cryoModule (ref)
-	if not p1 or #p1 == 0 then
-		return p0
-	elseif p0 and #p0 ~= 0 then
-		local var1 = cryoModule.List.toSet(cryoModule.List.map(p0, function(p3)
-			-- upvalues: p2 (ref)
-			return if p2 then p3[p2] else p3
+	if not p2 or #p2 == 0 then
+		return p1
+	elseif p1 and #p1 ~= 0 then
+		local var1 = cryoModule.List.toSet(cryoModule.List.map(p1, function(p4)
+			-- upvalues: p3 (ref)
+			return if p3 then p4[p3] else p4
 		end))
 		
-		return cryoModule.List.join(table.clone(p0), cryoModule.List.filter(p1, function(p4)
-			-- upvalues: p2 (ref), var1 (ref)
-			return not var1[if p2 then p4[p2] else p4]
+		return cryoModule.List.join(table.clone(p1), cryoModule.List.filter(p2, function(p4)
+			-- upvalues: p3 (ref), var1 (ref)
+			return not var1[if p3 then p4[p3] else p4]
 		end))
 	end
-	return p1
+	return p2
 end

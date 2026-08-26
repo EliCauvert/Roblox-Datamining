@@ -11,91 +11,91 @@ local controlState = foundationModule.Enums.ControlState
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local useSignalBinding = signalsReactModule.useSignalBinding
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: momentContextModule (ref), reactModule (ref), useMomentProgressModule (ref), useSignalBinding (ref), view (ref), stateLayerAffordance (ref), controlState (ref), scrubberBarModule (ref), previewPopoverModule (ref)
-	local var7 = momentContextModule.useMoment()
-	local var8, var9 = reactModule.useState(false)
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useState(false)
-	local var14 = reactModule.useRef(nil)
-	local var15 = reactModule.useCallback(function(p1)
-		-- upvalues: var14 (ref), var7 (ref)
-		local current = var14.current
+	local var1 = momentContextModule.useMoment()
+	local var2, var3 = reactModule.useState(false)
+	local var4, var5 = reactModule.useState(false)
+	local var6, var7 = reactModule.useState(false)
+	local var8 = reactModule.useRef(nil)
+	local var9 = reactModule.useCallback(function(p2)
+		-- upvalues: var8 (ref), var1 (ref)
+		local current = var8.current
 		
 		if current == nil then
 			return 0
 		end
-		local clampedValue = math.clamp((p1.X - current.AbsolutePosition.X) / current.AbsoluteSize.X, 0, 1)
-		var7.store.setScrubPosition(clampedValue)
+		local clampedValue = math.clamp((p2.X - current.AbsolutePosition.X) / current.AbsoluteSize.X, 0, 1)
+		var1.store.setScrubPosition(clampedValue)
 		
 		return clampedValue
-	end, { var7.store.setScrubPosition })
-	local var16 = reactModule.joinBindings({
-		useSignalBinding(var7.store.getScrubPosition),
+	end, { var1.store.setScrubPosition })
+	local var10 = reactModule.joinBindings({
+		useSignalBinding(var1.store.getScrubPosition),
 		useSignalBinding(useMomentProgressModule())
 	}):map(function(p2)
-		local var19 = p2[1]
-		local var20 = p2[2]
-		local var21 = if var19 ~= nil then var20.ratio else var19
+		local var11 = p2[1]
+		local var12 = p2[2]
+		local var13 = if var11 ~= nil then var12.ratio else var11
 		
 		return {
-			time = var21 * var20.duration,
-			duration = var20.duration,
-			ratio = var21
+			time = var13 * var12.duration,
+			duration = var12.duration,
+			ratio = var13
 		}
 	end)
-	local var17 = var16:map(function(p3)
-		return p3.ratio
+	local var11 = var10:map(function(p2)
+		return p2.ratio
 	end)
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-300",
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		stateLayer = { affordance = stateLayerAffordance.None },
-		onStateChanged = function(p4)
-			-- upvalues: controlState (copy), var9 (ref), var11 (ref)
-			local var22 = if p4 ~= controlState.Pressed then p4 == controlState.SelectedPressed else true
-			var9(if p4 ~= controlState.Hover then p4 == controlState.Selected else true)
-			var11(var22)
+		onStateChanged = function(p2)
+			-- upvalues: controlState (copy), var3 (ref), var5 (ref)
+			local var12 = if p2 ~= controlState.Pressed then p2 == controlState.SelectedPressed else true
+			var3(if p2 ~= controlState.Hover then p2 == controlState.Selected else true)
+			var5(var12)
 		end
 	}, {
-		DragContainer = reactModule.createElement(view, { tag = "size-full", ZIndex = 2, ref = var14 }, {
+		DragContainer = reactModule.createElement(view, { tag = "size-full", ZIndex = 2, ref = var8 }, {
 			DragDetector = reactModule.createElement("UIDragDetector", {
 				CursorIcon = "",
 				DragAxis = Vector2.new(1, 0),
 				DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
 				ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale,
-				[reactModule.Event.DragStart] = function(_, p5)
-					-- upvalues: var13 (ref), var7 (ref), var15 (ref)
-					var13(true)
+				[reactModule.Event.DragStart] = function(_, p2)
+					-- upvalues: var7 (ref), var1 (ref), var9 (ref)
+					var7(true)
 					
-					if var7.controller then
-						var7.controller.pause(0)
+					if var1.controller then
+						var1.controller.pause(0)
 					end
-					var15(p5)
+					var9(p2)
 				end,
-				[reactModule.Event.DragContinue] = function(_, p6)
-					-- upvalues: var15 (ref)
-					var15(p6)
+				[reactModule.Event.DragContinue] = function(_, p2)
+					-- upvalues: var9 (ref)
+					var9(p2)
 				end,
-				[reactModule.Event.DragEnd] = function(_, p7)
-					-- upvalues: var15 (ref), var7 (ref), var13 (ref)
-					local var23 = var15(p7)
-					var7.store.setScrubPosition(nil)
-					var13(false)
+				[reactModule.Event.DragEnd] = function(_, p2)
+					-- upvalues: var9 (ref), var1 (ref), var7 (ref)
+					local var12 = var9(p2)
+					var1.store.setScrubPosition(nil)
+					var7(false)
 					
-					if var7.controller then
-						var7.controller.play()
-						var7.controller.seek(var23 * var7.controller.getState(false).duration)
+					if var1.controller then
+						var1.controller.play()
+						var1.controller.seek(var12 * var1.controller.getState(false).duration)
 					end
 				end
 			})
 		}),
 		ScrubberBar = reactModule.createElement(scrubberBarModule, {
-			isHovering = var8,
-			isPressed = var10 or var12,
-			progressRatio = var17
+			isHovering = var2,
+			isPressed = var4 or var6,
+			progressRatio = var11
 		}),
-		PreviewPopover = reactModule.createElement(previewPopoverModule, { progress = var16, progressRatio = var17 })
+		PreviewPopover = reactModule.createElement(previewPopoverModule, { progress = var10, progressRatio = var11 })
 	})
 end)

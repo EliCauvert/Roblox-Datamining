@@ -2,14 +2,14 @@
 local buildSubscriptionPurchaseFlowPayloadModule = require(robloxSubscriptionPurchaseApp.Utils.buildSubscriptionPurchaseFlowPayload)
 local sendSubscriptionPurchaseFlowEventModule = require(robloxSubscriptionPurchaseApp.Utils.sendSubscriptionPurchaseFlowEvent)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: buildSubscriptionPurchaseFlowPayloadModule (ref), sendSubscriptionPurchaseFlowEventModule (ref)
-	local var3 = buildSubscriptionPurchaseFlowPayloadModule(p0)
+	local var1 = buildSubscriptionPurchaseFlowPayloadModule(p1)
 	
-	if p1 then
-		for i, v in pairs(p1) do
-			var3[i] = v
+	if p2 then
+		for i, v in pairs(p2) do
+			var1[i] = v
 		end
 	end
-	sendSubscriptionPurchaseFlowEventModule(var3)
+	sendSubscriptionPurchaseFlowEventModule(var1)
 end

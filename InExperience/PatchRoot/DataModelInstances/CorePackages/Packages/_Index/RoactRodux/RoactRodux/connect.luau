@@ -3,180 +3,180 @@ local shallowEqualModule = require(script.Parent.shallowEqual)
 local joinModule = require(script.Parent.join)
 local storeContextModule = require(script.Parent.StoreContext)
 
-local function _(p0, p1)
-	return table.concat(p0, "\n"):format(unpack(p1 or {}))
+local function _(p1, p2)
+	return table.concat(p1, "\n"):format(unpack(p2 or {}))
 end
 
 local function noop()
 	return nil
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: joinModule (ref)
-	return function(p3, p4, p5)
-		-- upvalues: p2 (ref), joinModule (copy)
-		if p5 == nil then
-			p5 = p4.mapStateToProps(p2:getState(), p3)
+	return function(p2, p3, p4)
+		-- upvalues: p1 (ref), joinModule (copy)
+		if p4 == nil then
+			p4 = p3.mapStateToProps(p1:getState(), p2)
 		end
 		return {
-			mappedStoreState = p5,
-			propsForChild = joinModule(p3, p5, p4.mappedStoreDispatch)
+			mappedStoreState = p4,
+			propsForChild = joinModule(p2, p4, p3.mappedStoreDispatch)
 		}
 	end
 end
 
-return function(p6, p7)
+return function(p1, p2)
 	-- upvalues: noop (ref), roactModule (ref), joinModule (ref), shallowEqualModule (ref), storeContextModule (ref)
 	local trac = debug.traceback()
 	
-	if p6 == nil then
-		p6 = noop
+	if p1 == nil then
+		p1 = noop
 	else
-		assert(typeof(p6) == "function", "mapStateToProps must be a function or nil!")
+		assert(typeof(p1) == "function", "mapStateToProps must be a function or nil!")
 	end
-	local var6 = typeof(p7)
+	local var1 = typeof(p2)
 	
-	if p7 == nil then
-		p7 = noop
+	if p2 == nil then
+		p2 = noop
 	else
-		assert(if var6 ~= "function" then var6 == "table" else true, "mapDispatchToProps must be a function, table, or nil!")
+		assert(if var1 ~= "function" then var1 == "table" else true, "mapDispatchToProps must be a function, table, or nil!")
 	end
-	return function(p8)
-		-- upvalues: trac (ref), roactModule (copy), p6 (write), var6 (ref), p7 (write), joinModule (copy), shallowEqualModule (copy), storeContextModule (copy)
-		if p8 == nil then
+	return function(p3)
+		-- upvalues: trac (ref), roactModule (copy), p1 (write), var1 (ref), p2 (write), joinModule (copy), shallowEqualModule (copy), storeContextModule (copy)
+		if p3 == nil then
 			error(table.concat({
 				"connect returns a function that must be passed a component.",
 				"Check the connection at:",
 				"%s"
 			}, "\n"):format(unpack({ trac } or {})), 2)
 		end
-		local var7 = ("RoduxConnection(%s)"):format(tostring(p8))
-		local var8 = roactModule.Component:extend(var7)
+		local var2 = ("RoduxConnection(%s)"):format(tostring(p3))
+		local var3 = roactModule.Component:extend(var2)
 		
-		function var8.getDerivedStateFromProps(p9, p10)
-			if p10.stateUpdater == nil then
+		function var8.getDerivedStateFromProps(p4, p5)
+			if p5.stateUpdater == nil then
 				return
 			end
-			return p10.stateUpdater(p9.innerProps, p10)
+			return p5.stateUpdater(p4.innerProps, p5)
 		end
 		
-		function var8.init(p11, p12)
-			-- upvalues: p8 (ref), p6 (copy), var6 (copy), p7 (copy), joinModule (copy)
-			p11.store = p12.store
+		function var8.init(p4, p5)
+			-- upvalues: p3 (ref), p1 (copy), var1 (copy), p2 (copy), joinModule (copy)
+			p4.store = p5.store
 			
-			if p11.store == nil then
+			if p4.store == nil then
 				error(table.concat({
 					"Cannot initialize Roact-Rodux connection without being a descendent of StoreProvider!",
 					"Tried to wrap component %q",
 					"Make sure there is a StoreProvider above this component in the tree."
-				}, "\n"):format(unpack({ tostring(p8) } or {})))
+				}, "\n"):format(unpack({ tostring(p3) } or {})))
 			end
-			local state = p11.store:getState()
-			local var11 = p6
-			local var12 = var11(state, p11.props.innerProps)
+			local state = p4.store:getState()
+			local var4 = p1
+			local var5 = var4(state, p4.props.innerProps)
 			
-			if typeof(var12) == "function" then
-				var11 = var12
-				var12 = var11(state, p11.props.innerProps)
+			if typeof(var5) == "function" then
+				var4 = var5
+				var5 = var4(state, p4.props.innerProps)
 			end
-			if var12 ~= nil and typeof(var12) ~= "table" then
+			if var5 ~= nil and typeof(var5) ~= "table" then
 				error(table.concat({
 					"mapStateToProps must either return a table, or return another function that returns a table.",
 					"Instead, it returned %q, which is of type %s."
-				}, "\n"):format(unpack({ tostring(var12), typeof(var12) } or {})))
+				}, "\n"):format(unpack({ tostring(var5), typeof(var5) } or {})))
 			end
 			local function dispatch(...)
-				-- upvalues: p11 (ref)
-				return p11.store:dispatch(...)
+				-- upvalues: p4 (ref)
+				return p4.store:dispatch(...)
 			end
 			
-			local var14 = nil
+			local var6 = nil
 			
-			if var6 == "table" then
-				var14 = {}
+			if var1 == "table" then
+				var6 = {}
 				
-				for i, v in pairs(p7) do
+				for i, v in pairs(p2) do
 					assert(typeof(v) == "function", "mapDispatchToProps must contain function values")
 					
-					var14[i] = function(...)
+					var6[i] = function(...)
 						-- upvalues: dispatch (ref), v (ref)
 						dispatch(v(...))
 					end
 				end
-			elseif var6 == "function" then
-				var14 = p7(dispatch)
+			elseif var1 == "function" then
+				var6 = p2(dispatch)
 			end
-			local store = p11.store
+			local store = p4.store
 			
-			local var15 = function(p13, p14, p15)
+			local var7 = function(p6, p7, p8)
 				-- upvalues: store (ref), joinModule (copy)
-				if p15 == nil then
-					p15 = p14.mapStateToProps(store:getState(), p13)
+				if p8 == nil then
+					p8 = p7.mapStateToProps(store:getState(), p6)
 				end
 				return {
-					mappedStoreState = p15,
-					propsForChild = joinModule(p13, p15, p14.mappedStoreDispatch)
+					mappedStoreState = p8,
+					propsForChild = joinModule(p6, p8, p7.mappedStoreDispatch)
 				}
 			end
 			
-			p11.state = {
+			p4.state = {
 				propsForChild = nil,
-				stateUpdater = var15,
-				mapStateToProps = var11,
-				mappedStoreDispatch = var14
+				stateUpdater = var7,
+				mapStateToProps = var4,
+				mappedStoreDispatch = var6
 			}
 			
-			for i, v in pairs(var15(p11.props.innerProps, p11.state, var12)) do
-				p11.state[i] = v
+			for i, v in pairs(var7(p4.props.innerProps, p4.state, var5)) do
+				p4.state[i] = v
 			end
 		end
 		
-		function var8.didMount(p16)
+		function var8.didMount(p6)
 			-- upvalues: shallowEqualModule (copy)
-			local var16 = function(p17)
-				-- upvalues: p16 (ref), shallowEqualModule (copy)
-				p16:setState(function(p18, p19)
-					-- upvalues: p17 (ref), shallowEqualModule (copy)
-					local var18 = p18.mapStateToProps(p17, p19.innerProps)
+			local var8 = function(p7)
+				-- upvalues: p6 (ref), shallowEqualModule (copy)
+				p6:setState(function(p8, p9)
+					-- upvalues: p7 (ref), shallowEqualModule (copy)
+					local var9 = p8.mapStateToProps(p7, p9.innerProps)
 					
-					return if shallowEqualModule(var18, p18.mappedStoreState) then nil else p18.stateUpdater(p19.innerProps, p18, var18)
+					return if shallowEqualModule(var9, p8.mappedStoreState) then nil else p8.stateUpdater(p9.innerProps, p8, var9)
 				end)
 			end
 			
-			local state = p16.store:getState()
-			p16:setState(function(p20, p21)
+			local state = p6.store:getState()
+			p6:setState(function(p7, p8)
 				-- upvalues: state (ref), shallowEqualModule (copy)
-				local var18 = p20.mapStateToProps(state, p21.innerProps)
+				local var9 = p7.mapStateToProps(state, p8.innerProps)
 				
-				return if shallowEqualModule(var18, p20.mappedStoreState) then nil else p20.stateUpdater(p21.innerProps, p20, var18)
+				return if shallowEqualModule(var9, p7.mappedStoreState) then nil else p7.stateUpdater(p8.innerProps, p7, var9)
 			end)
-			p16.storeChangedConnection = p16.store.changed:connect(var16)
+			p6.storeChangedConnection = p6.store.changed:connect(var8)
 		end
 		
-		function var8.willUnmount(p22)
-			if p22.storeChangedConnection then
-				p22.storeChangedConnection:disconnect()
-				p22.storeChangedConnection = nil
+		function var8.willUnmount(p6)
+			if p6.storeChangedConnection then
+				p6.storeChangedConnection:disconnect()
+				p6.storeChangedConnection = nil
 			end
 		end
 		
-		function var8.render(p23)
-			-- upvalues: roactModule (copy), p8 (ref)
-			return roactModule.createElement(p8, p23.state.propsForChild)
+		function var8.render(p6)
+			-- upvalues: roactModule (copy), p3 (ref)
+			return roactModule.createElement(p3, p6.state.propsForChild)
 		end
 		
-		local var9 = roactModule.Component:extend(var7)
+		local var8 = roactModule.Component:extend(var2)
 		
-		function var9.render(p24)
-			-- upvalues: roactModule (copy), storeContextModule (copy), var8 (ref)
+		function var9.render(p6)
+			-- upvalues: roactModule (copy), storeContextModule (copy), var3 (ref)
 			return roactModule.createElement(storeContextModule.Consumer, {
-				render = function(p25)
-					-- upvalues: roactModule (copy), var8 (copy), p24 (ref)
-					return roactModule.createElement(var8, { innerProps = p24.props, store = p25 })
+				render = function(p7)
+					-- upvalues: roactModule (copy), var3 (copy), p6 (ref)
+					return roactModule.createElement(var3, { innerProps = p6.props, store = p7 })
 				end
 			})
 		end
 		
-		return var9
+		return var8
 	end
 end

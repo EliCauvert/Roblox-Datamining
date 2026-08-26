@@ -20,18 +20,18 @@ end
 
 local fullModalShareGameComponent = roactModule.PureComponent:extend("FullModalShareGameComponent")
 
-function fullModalShareGameComponent.render(p0)
+function fullModalShareGameComponent.render(p1)
 	-- upvalues: getFFlagExtraInviteModalStringValidationModule (ref), roactModule (ref), roactRoduxModule (ref), fFlagFixPromptGameInviteUIButtonScalingModule (ref), FoundationStyleLink (ref), loadingModalModule (ref), layoutProviderModule (ref), shareGameContainerModule (ref), inviteSingleUserContainerModule (ref), modalShareGamePageFrameModule (ref)
-	local isVisible = p0.props.isVisible
-	local analytics = p0.props.analytics
-	local onAfterClosePage = p0.props.onAfterClosePage
-	local store = p0.props.store
-	local promptMessage = p0.props.promptMessage
-	local inviteUserId = p0.props.inviteUserId
-	local inviteMessageId = p0.props.inviteMessageId
-	local launchData = p0.props.launchData
-	local isLoading = p0.props.isLoading
-	local requestImpl = p0.props.requestImpl
+	local isVisible = p1.props.isVisible
+	local analytics = p1.props.analytics
+	local onAfterClosePage = p1.props.onAfterClosePage
+	local store = p1.props.store
+	local promptMessage = p1.props.promptMessage
+	local inviteUserId = p1.props.inviteUserId
+	local inviteMessageId = p1.props.inviteMessageId
+	local launchData = p1.props.launchData
+	local isLoading = p1.props.isLoading
+	local requestImpl = p1.props.requestImpl
 	
 	if getFFlagExtraInviteModalStringValidationModule() and promptMessage then
 		if not inviteUserId then

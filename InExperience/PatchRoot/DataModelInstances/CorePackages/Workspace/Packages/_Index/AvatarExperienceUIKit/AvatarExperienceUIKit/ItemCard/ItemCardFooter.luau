@@ -6,9 +6,9 @@ local itemCardCreatorNameModule = require(script.Parent.ItemCardCreatorName)
 local itemCardTitleModule = require(script.Parent.ItemCardTitle)
 local fFlagAXAddTextXAlignmentProp = require(parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 
-local function ItemCardFooter(p0)
+local function ItemCardFooter(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), itemCardTitleModule (ref), fFlagAXAddTextXAlignmentProp (ref), itemCardCreatorNameModule (ref), itemCardPriceLineModule (ref)
-	local var5 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -16,15 +16,15 @@ local function ItemCardFooter(p0)
 		ClipsDescendants = true,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		ItemCardFooterLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			Padding = UDim.new(0, var5.Gap.XSmall)
+			Padding = UDim.new(0, var1.Gap.XSmall)
 		}),
-		ItemCardFooterInfo = if p0.title or p0.creatorName then reactModule.createElement("Frame", {
+		ItemCardFooterInfo = if p1.title or p1.creatorName then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
@@ -35,22 +35,22 @@ local function ItemCardFooter(p0)
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
-				Padding = UDim.new(0, var5.Gap.XXSmall)
+				Padding = UDim.new(0, var1.Gap.XXSmall)
 			}),
-			ItemCardFooterInfoTitle = if p0.title then reactModule.createElement(itemCardTitleModule, {
+			ItemCardFooterInfoTitle = if p1.title then reactModule.createElement(itemCardTitleModule, {
 				LayoutOrder = 1,
-				title = p0.title,
-				titleTextSize = p0.titleTextSize,
-				TextXAlignment = if fFlagAXAddTextXAlignmentProp then p0.TextXAlignment else nil
+				title = p1.title,
+				titleTextSize = p1.titleTextSize,
+				TextXAlignment = if fFlagAXAddTextXAlignmentProp then p1.TextXAlignment else nil
 			}) else nil,
-			ItemCardFooterInfoCreatorName = if p0.creatorName then reactModule.createElement(itemCardCreatorNameModule, {
+			ItemCardFooterInfoCreatorName = if p1.creatorName then reactModule.createElement(itemCardCreatorNameModule, {
 				LayoutOrder = 2,
-				name = p0.creatorName,
-				hasVerifiedBadge = p0.creatorHasVerifiedBadge,
-				TextXAlignment = if fFlagAXAddTextXAlignmentProp then p0.TextXAlignment else nil
+				name = p1.creatorName,
+				hasVerifiedBadge = p1.creatorHasVerifiedBadge,
+				TextXAlignment = if fFlagAXAddTextXAlignmentProp then p1.TextXAlignment else nil
 			}) else nil
 		}) else nil,
-		ItemCardFooterPrice = if p0.priceLineContent then reactModule.createElement(itemCardPriceLineModule, { LayoutOrder = 2, content = p0.priceLineContent }) else nil
+		ItemCardFooterPrice = if p1.priceLineContent then reactModule.createElement(itemCardPriceLineModule, { LayoutOrder = 2, content = p1.priceLineContent }) else nil
 	})
 end
 

@@ -1,13 +1,13 @@
 ﻿local tModule = require(script:FindFirstAncestor("SquadsCore").Parent.t)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -26,17 +26,17 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: t (ref)
 	return t.new({
-		createdAtTime = p2.scheduledGroupUp.createdAtTime,
-		initiatorId = p2.scheduledGroupUp.initiatorId,
-		parentChannelId = p2.scheduledGroupUp.parentChannelId,
-		scheduledGroupUpId = p2.scheduledGroupUp.scheduledGroupUpId,
-		startTime = p2.scheduledGroupUp.startTime,
-		subscribers = p2.scheduledGroupUp.subscribers,
-		title = p2.scheduledGroupUp.title,
-		updatedAtTime = p2.scheduledGroupUp.updatedAtTime
+		createdAtTime = p1.scheduledGroupUp.createdAtTime,
+		initiatorId = p1.scheduledGroupUp.initiatorId,
+		parentChannelId = p1.scheduledGroupUp.parentChannelId,
+		scheduledGroupUpId = p1.scheduledGroupUp.scheduledGroupUpId,
+		startTime = p1.scheduledGroupUp.startTime,
+		subscribers = p1.scheduledGroupUp.subscribers,
+		title = p1.scheduledGroupUp.title,
+		updatedAtTime = p1.scheduledGroupUp.updatedAtTime
 	})
 end
 

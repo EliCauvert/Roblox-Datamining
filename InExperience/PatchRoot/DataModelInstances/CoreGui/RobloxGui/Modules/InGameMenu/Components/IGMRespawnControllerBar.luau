@@ -8,16 +8,16 @@ local withLocalizationModule = require(parent.Localization.withLocalization)
 local IGMRespawnControllerBar = roact.PureComponent:extend("IGMRespawnControllerBar")
 IGMRespawnControllerBar.validateProps = t.strictInterface({ inputType = t.string })
 
-function IGMRespawnControllerBar.render(p0)
+function IGMRespawnControllerBar.render(p1)
 	-- upvalues: constantsModule (ref), withLocalizationModule (ref), roact (ref), IGMControllerBar2Module (ref)
-	return if p0.props.inputType == constantsModule.InputType.Gamepad then withLocalizationModule({
+	return if p1.props.inputType == constantsModule.InputType.Gamepad then withLocalizationModule({
 		cancel = "CoreScripts.InGameMenu.ControllerBar.Cancel",
 		respawn = "CoreScripts.InGameMenu.ControllerBar.Respawn"
-	})(function(p1)
+	})(function(p2)
 		-- upvalues: roact (copy), IGMControllerBar2Module (copy)
 		return roact.createElement(IGMControllerBar2Module, {
-			leftHint = { text = p1.cancel, keyCode = Enum.KeyCode.ButtonB },
-			rightHints = { { text = p1.respawn, keyCode = Enum.KeyCode.ButtonA } }
+			leftHint = { text = p2.cancel, keyCode = Enum.KeyCode.ButtonB },
+			rightHints = { { text = p2.respawn, keyCode = Enum.KeyCode.ButtonA } }
 		})
 	end) else nil
 end

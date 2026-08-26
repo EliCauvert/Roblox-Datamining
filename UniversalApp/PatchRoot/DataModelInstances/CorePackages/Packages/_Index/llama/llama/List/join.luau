@@ -3,18 +3,18 @@
 return function(...)
 	-- upvalues: noneModule (ref)
 	local t = {}
-	local var2 = 1
+	local var1 = 1
 	
 	for i_1 = 1, select("#", ...) do
-		local var3 = select(i_1, ...)
+		local var2 = select(i_1, ...)
 		
-		if not var3 then
+		if not var2 then
 			continue
 		end
-		for i = 1, #var3 do
-			if var3[i] ~= noneModule then
-				t[var2] = var3[i]
-				var2 += 1
+		for i = 1, #var2 do
+			if var2[i] ~= noneModule then
+				t[var1] = var2[i]
+				var1 += 1
 			end
 		end
 	end

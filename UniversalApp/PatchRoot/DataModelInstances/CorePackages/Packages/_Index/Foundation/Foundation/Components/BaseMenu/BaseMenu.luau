@@ -45,30 +45,30 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	end, {})
 	local var12 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref), flagsModule (copy), var6 (ref)
-		return var4:map(function(p1)
+		return var4:map(function(p3)
 			-- upvalues: flagsModule (copy), var6 (copy)
-			return if p1 then p1.Offset elseif flagsModule.FoundationBaseMenuContentSizing then 0 else var6
+			return if p3 then p3.Offset elseif flagsModule.FoundationBaseMenuContentSizing then 0 else var6
 		end)
 	end, { var4, var6 })
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref), flagsModule (copy), var3 (ref), var7 (ref)
-		return var4:map(function(p1)
+		return var4:map(function(p3)
 			-- upvalues: flagsModule (copy), var3 (copy), var7 (copy)
-			return if flagsModule.FoundationBaseMenuContentSizing then not p1 or var3.couldGrow == true else not p1 or (var3.couldGrow == true and p1.Offset < var7)
+			return if flagsModule.FoundationBaseMenuContentSizing then not p3 or var3.couldGrow == true else not p3 or (var3.couldGrow == true and p3.Offset < var7)
 		end)
 	end, { var4, var7, var3.couldGrow })
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), var1 (ref), var12 (ref), flagsModule (copy), var7 (ref)
 		return {
-			MinSize = reactModule.joinBindings({ var1, var12 }):map(function(p1)
+			MinSize = reactModule.joinBindings({ var1, var12 }):map(function(p3)
 				-- upvalues: flagsModule (copy)
-				local var1 = p1[2]
+				local var13 = p3[2]
 				
-				return if p1[1] then if flagsModule.FoundationBaseMenuContentSizing and var1 == 0 then nil else Vector2.new(var1, 0) else nil
+				return if p3[1] then if flagsModule.FoundationBaseMenuContentSizing and var13 == 0 then nil else Vector2.new(var13, 0) else nil
 			end),
-			MaxSize = if flagsModule.FoundationBaseMenuContentSizing then nil else var1:map(function(p1)
+			MaxSize = if flagsModule.FoundationBaseMenuContentSizing then nil else var1:map(function(p3)
 				-- upvalues: var7 (copy)
-				return if p1 then Vector2.new(var7, 1e999) else nil
+				return if p3 then Vector2.new(var7, 1e999) else nil
 			end)
 		}
 	end, { var1, var12, var7 })
@@ -125,11 +125,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		})
 	}, var3) else reactModule.createElement(viewModule, withCommonPropsModule(var3, {
 		tag = `col stroke-standard stroke-default {var2}`,
-		AutomaticSize = var1:map(function(p1)
-			return if p1 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
+		AutomaticSize = var1:map(function(p3)
+			return if p3 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
 		end),
-		Size = reactModule.joinBindings({ var1, var4 }):map(function(p1)
-			return if p1[1] then nil else UDim2.new(p1[2], UDim.new())
+		Size = reactModule.joinBindings({ var1, var4 }):map(function(p3)
+			return if p3[1] then nil else UDim2.new(p3[2], UDim.new())
 		end),
 		ref = p2,
 		sizeConstraint = var1

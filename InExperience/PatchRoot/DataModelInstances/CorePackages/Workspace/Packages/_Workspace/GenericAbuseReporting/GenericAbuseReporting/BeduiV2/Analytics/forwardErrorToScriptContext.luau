@@ -1,6 +1,6 @@
-﻿return function(p0, p1)
+﻿return function(p1, p2)
 	task.spawn(function()
-		-- upvalues: p1 (ref), p0 (ref)
-		error(tostring(p0) .. "\n" .. (p1 or ""), 0)
+		-- upvalues: p2 (ref), p1 (ref)
+		error(tostring(p1) .. "\n" .. (p2 or ""), 0)
 	end)
 end

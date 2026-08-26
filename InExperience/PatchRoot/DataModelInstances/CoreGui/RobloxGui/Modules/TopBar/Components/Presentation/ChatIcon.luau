@@ -17,7 +17,7 @@ local tenFootInterfaceModule = require(robloxGui.Modules.TenFootInterface)
 local iconButtonModule = require(script.Parent.IconButton)
 local parent = script.Parent.Parent.Parent
 local analyticsModule = require(parent.Analytics)
-local var12 = require(parent.Flags.GetFFlagEnableTopBarAnalytics)()
+local var1 = require(parent.Flags.GetFFlagEnableTopBarAnalytics)()
 local setKeepOutAreaModule = require(parent.Actions.SetKeepOutArea)
 local removeKeepOutAreaModule = require(parent.Actions.RemoveKeepOutArea)
 local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreGuiCommon)
@@ -46,22 +46,22 @@ chatIcon.validateProps = tModule.strictInterface({
 	removeKeepOutArea = if fFlagTopBarSignalizeKeepOutAreas then nil else tModule.callback
 })
 
-function chatIcon.init(p0)
-	-- upvalues: roactModule (ref), chatSelectorModule (ref), gameSettings (ref), var12 (ref), analyticsModule (ref), fFlagTopBarSignalizeKeepOutAreas (ref), coreGuiCommonModule (ref)
-	p0.buttonRef = roactModule.createRef()
+function chatIcon.init(p1)
+	-- upvalues: roactModule (ref), chatSelectorModule (ref), gameSettings (ref), var1 (ref), analyticsModule (ref), fFlagTopBarSignalizeKeepOutAreas (ref), coreGuiCommonModule (ref)
+	p1.buttonRef = roactModule.createRef()
 	
 	function p0.chatIconActivated()
-		-- upvalues: chatSelectorModule (copy), gameSettings (copy), var12 (copy), analyticsModule (copy)
+		-- upvalues: chatSelectorModule (copy), gameSettings (copy), var1 (copy), analyticsModule (copy)
 		chatSelectorModule:ToggleVisibility()
 		gameSettings.ChatVisible = chatSelectorModule:GetVisibility()
 		
-		if var12 then
+		if var1 then
 			analyticsModule.default:onChatButtonActivated(gameSettings.ChatVisible)
 		end
 	end
 	
 	if fFlagTopBarSignalizeKeepOutAreas then
-		p0.keepOutAreasStore = coreGuiCommonModule.Stores.GetKeepOutAreasStore(false)
+		p1.keepOutAreasStore = coreGuiCommonModule.Stores.GetKeepOutAreasStore(false)
 	end
 end
 
@@ -69,16 +69,16 @@ function chatIcon.render(p1)
 	-- upvalues: withStyle (ref), tenFootInterfaceModule (ref), VRService (ref), getExperienceChatVisualConfig (ref), images (ref), fFlagTopBarSignalizeKeepOutAreas (ref), constantsModule (ref), roactModule (ref), iconButtonModule (ref), getFFlagEnableAppChatInExperience (ref), unibarHoldoutChatIconUseNewIconSize (ref), badge (ref), badgeStates (ref)
 	return withStyle(function(_)
 		-- upvalues: p1 (ref), tenFootInterfaceModule (copy), VRService (copy), getExperienceChatVisualConfig (copy), images (copy), fFlagTopBarSignalizeKeepOutAreas (copy), constantsModule (copy), roactModule (copy), iconButtonModule (copy), getFFlagEnableAppChatInExperience (copy), unibarHoldoutChatIconUseNewIconSize (copy), badge (copy), badgeStates (copy)
-		local var19 = p1.props.topBarEnabled and (p1.props.chatEnabled and (not tenFootInterfaceModule:IsEnabled() and not VRService.VREnabled))
+		local var2 = p1.props.topBarEnabled and (p1.props.chatEnabled and (not tenFootInterfaceModule:IsEnabled() and not VRService.VREnabled))
 		local _ = nil
 		local _ = nil
-		local var20 = getExperienceChatVisualConfig()
-		local iconSize = var20.iconSize
-		local var21 = if not p1.props.chatVisible then images[var20.icon.off] else images[var20.icon.on]
+		local var3 = getExperienceChatVisualConfig()
+		local iconSize = var3.iconSize
+		local var4 = if not p1.props.chatVisible then images[var3.icon.off] else images[var3.icon.on]
 		
-		local var22 = function(p2)
-			-- upvalues: var19 (ref), fFlagTopBarSignalizeKeepOutAreas (copy), p1 (copy), constantsModule (copy)
-			if var19 and p2 then
+		local var5 = function(p2)
+			-- upvalues: var2 (ref), fFlagTopBarSignalizeKeepOutAreas (copy), p1 (copy), constantsModule (copy)
+			if var2 and p2 then
 				if fFlagTopBarSignalizeKeepOutAreas then
 					p1.keepOutAreasStore.setKeepOutArea(constantsModule.ChatIconKeepOutAreaId, p2.AbsolutePosition, p2.AbsoluteSize)
 					
@@ -95,32 +95,32 @@ function chatIcon.render(p1)
 			p1.props.removeKeepOutArea(constantsModule.ChatIconKeepOutAreaId)
 		end
 		
-		local var23 = function(p3)
-			-- upvalues: p1 (copy), var22 (ref)
-			if p3 then
-				p1.buttonRef.current = p3
-				var22(p1.buttonRef.current)
+		local var6 = function(p2)
+			-- upvalues: p1 (copy), var5 (ref)
+			if p2 then
+				p1.buttonRef.current = p2
+				var5(p1.buttonRef.current)
 			end
 		end
 		
 		if p1.buttonRef.current then
-			var22(p1.buttonRef.current)
+			var5(p1.buttonRef.current)
 		end
 		return roactModule.createElement("TextButton", {
 			Text = "",
 			BackgroundTransparency = 1,
 			Selectable = false,
-			Visible = var19,
+			Visible = var2,
 			Size = UDim2.new(0, 44, 1, 0),
 			LayoutOrder = p1.props.layoutOrder
 		}, {
 			Background = roactModule.createElement(iconButtonModule, {
-				icon = var21,
+				icon = var4,
 				iconSize = if getFFlagEnableAppChatInExperience() or unibarHoldoutChatIconUseNewIconSize then iconSize else 20,
 				onActivated = p1.chatIconActivated,
-				[roactModule.Change.AbsoluteSize] = var22,
-				[roactModule.Change.AbsolutePosition] = var22,
-				[roactModule.Ref] = var23
+				[roactModule.Change.AbsoluteSize] = var5,
+				[roactModule.Change.AbsolutePosition] = var5,
+				[roactModule.Ref] = var6
 			}),
 			BadgeContainer = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -138,23 +138,23 @@ function chatIcon.render(p1)
 	end)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4)
+return roactRoduxModule.UNSTABLE_connect2(function(p1)
 	return {
-		chatVisible = p4.chat.visible,
-		unreadMessages = p4.chat.unreadMessages,
-		topBarEnabled = p4.displayOptions.topbarEnabled,
-		chatEnabled = p4.coreGuiEnabled[Enum.CoreGuiType.Chat]
+		chatVisible = p1.chat.visible,
+		unreadMessages = p1.chat.unreadMessages,
+		topBarEnabled = p1.displayOptions.topbarEnabled,
+		chatEnabled = p1.coreGuiEnabled[Enum.CoreGuiType.Chat]
 	}
-end, if fFlagTopBarSignalizeKeepOutAreas then nil else function(p5)
+end, if fFlagTopBarSignalizeKeepOutAreas then nil else function(p1)
 	-- upvalues: fFlagTopBarSignalizeKeepOutAreas (ref), setKeepOutAreaModule (ref), removeKeepOutAreaModule (ref)
 	return if fFlagTopBarSignalizeKeepOutAreas then {} else {
-		setKeepOutArea = function(value, p6, p7)
-			-- upvalues: p5 (ref), setKeepOutAreaModule (copy)
-			return p5(setKeepOutAreaModule(value, p6, p7))
+		setKeepOutArea = function(value, p2, p3)
+			-- upvalues: p1 (ref), setKeepOutAreaModule (copy)
+			return p1(setKeepOutAreaModule(value, p2, p3))
 		end,
-		removeKeepOutArea = function(p8)
-			-- upvalues: p5 (ref), removeKeepOutAreaModule (copy)
-			return p5(removeKeepOutAreaModule(p8))
+		removeKeepOutArea = function(p2)
+			-- upvalues: p1 (ref), removeKeepOutAreaModule (copy)
+			return p1(removeKeepOutAreaModule(p2))
 		end
 	}
 end)(chatIcon)

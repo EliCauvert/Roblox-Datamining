@@ -40,11 +40,11 @@ local appEventIngestService = roactServiceTagsModule.AppEventIngestService
 local roactAnalytics = roactServiceTagsModule.RoactAnalytics
 local useRoactService = robloxAppHooksModule.useRoactService
 
-local function getCardsPerRowAndCardWidth(p0)
-	local availableWidth = p0.availableWidth
-	local maxCardsPerRow = p0.maxCardsPerRow
-	local minCardWidth = p0.minCardWidth
-	local cardGap = p0.cardGap or 0
+local function getCardsPerRowAndCardWidth(p1)
+	local availableWidth = p1.availableWidth
+	local maxCardsPerRow = p1.maxCardsPerRow
+	local minCardWidth = p1.minCardWidth
+	local cardGap = p1.cardGap or 0
 	local floored = math.floor((availableWidth + cardGap) / (minCardWidth + cardGap))
 	local floored_1 = math.floor((availableWidth - cardGap * (floored - 1)) / floored)
 	local floored_2 = math.floor((availableWidth - cardGap * (maxCardsPerRow - 1)) / maxCardsPerRow)
@@ -61,95 +61,95 @@ end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useRoactService (ref), appEventIngestService (ref), roactAnalytics (ref), useTokens (ref), useLocalization (ref), fFlagTraversalExpPagePaddingFixes (ref), reactModule (ref), traversalUseDiscoveryCollectionViews (ref), traversalUseXSmallCollectionItems (ref), guiService (ref), collectionItemSize (ref), collectionLayoutCalculators (ref), collectionViewsModule (ref), getCardsPerRowAndCardWidth (ref), maxTraversalHistoryCardsPerRow709 (ref), signal (ref), cryoModule (ref), traversalExperienceCardModule (ref), constantsModule (ref), traversalTelemetryModule (ref), fFlagTraversalHistoryDiscoveryTelemetry (ref), gamePlayIntent (ref), discoveryAnalyticsModule (ref), useViewportBounds (ref), sendGameImpressions (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), view (ref), iconButton (ref), iconName (ref), text (ref), scrollView (ref), impressionsTrackerWithoutNavigation (ref)
-	local var34, var35
-	local var25 = useRoactService(appEventIngestService)
-	local var26 = useRoactService(roactAnalytics)
-	local var27 = useTokens()
-	local var28 = useLocalization({
+	local var1, var2
+	local var3 = useRoactService(appEventIngestService)
+	local var4 = useRoactService(roactAnalytics)
+	local var5 = useTokens()
+	local var6 = useLocalization({
 		historyTitle = "CoreScripts.TopBar.Traversal.History",
 		historyDescription = "CoreScripts.InGameMenu.Traversal.HistoryDescription"
 	})
-	local var29 = if fFlagTraversalExpPagePaddingFixes then var27.Gap.Large else var27.Gap.Small
-	local xLarge = var27.Padding.XLarge
-	local var30, var31 = reactModule.useState(0)
+	local var7 = if fFlagTraversalExpPagePaddingFixes then var5.Gap.Large else var5.Gap.Small
+	local xLarge = var5.Padding.XLarge
+	local var8, var9 = reactModule.useState(0)
 	local _ = nil
 	local _ = nil
 	
 	if traversalUseDiscoveryCollectionViews then
 		local _ = nil
-		var34 = collectionLayoutCalculators.calculateNumColumns(var30, 0, var29, if traversalUseXSmallCollectionItems and guiService.ViewportDisplaySize == Enum.DisplaySize.Small then collectionItemSize.XSmall else collectionItemSize.Small, var27)
-		var35 = collectionViewsModule.calculateItemWidth(var34, var29, 0, var30, 0)
+		var1 = collectionLayoutCalculators.calculateNumColumns(var8, 0, var7, if traversalUseXSmallCollectionItems and guiService.ViewportDisplaySize == Enum.DisplaySize.Small then collectionItemSize.XSmall else collectionItemSize.Small, var5)
+		var2 = collectionViewsModule.calculateItemWidth(var1, var7, 0, var8, 0)
 	else
-		local var32, var33 = getCardsPerRowAndCardWidth({
-			availableWidth = var30,
+		local var10, var11 = getCardsPerRowAndCardWidth({
+			availableWidth = var8,
 			maxCardsPerRow = maxTraversalHistoryCardsPerRow709,
-			minCardWidth = var27.Size.Size_2500,
-			cardGap = var29
+			minCardWidth = var5.Size.Size_2500,
+			cardGap = var7
 		})
-		var34 = var32
-		var35 = var33
+		var1 = var10
+		var2 = var11
 	end
-	var34 = math.max(var34, 1)
-	local floored = math.floor(#p1.historyItems / var34)
-	local var37 = reactModule.useRef(nil)
-	local var38 = reactModule.useRef({})
-	local var39 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var38 (ref)
-		var38.current[p3] = p4
+	var1 = math.max(var1, 1)
+	local floored = math.floor(#p1.historyItems / var1)
+	local var12 = reactModule.useRef(nil)
+	local var13 = reactModule.useRef({})
+	local var14 = reactModule.useCallback(function(p3, p4)
+		-- upvalues: var13 (ref)
+		var13.current[p3] = p4
 	end, {})
-	local var40 = reactModule.useRef(nil)
-	local var41 = reactModule.useMemo(function()
+	local var15 = reactModule.useRef(nil)
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: signal (copy)
 		return signal.new()
 	end, {})
-	local var42 = cryoModule.List.map(p1.historyItems, function(p5, p6)
-		-- upvalues: reactModule (copy), traversalExperienceCardModule (copy), constantsModule (copy), p1 (ref), traversalTelemetryModule (copy), fFlagTraversalHistoryDiscoveryTelemetry (copy), gamePlayIntent (copy), var25 (ref), discoveryAnalyticsModule (copy), var35 (write), var39 (ref)
+	local var17 = cryoModule.List.map(p1.historyItems, function(p3, p4)
+		-- upvalues: reactModule (copy), traversalExperienceCardModule (copy), constantsModule (copy), p1 (ref), traversalTelemetryModule (copy), fFlagTraversalHistoryDiscoveryTelemetry (copy), gamePlayIntent (copy), var3 (ref), discoveryAnalyticsModule (copy), var2 (write), var14 (ref)
 		return reactModule.createElement(traversalExperienceCardModule, {
-			key = p6,
-			name = p5.name,
-			image = p5.image,
-			impressionIndex = p6,
+			key = p4,
+			name = p3.name,
+			image = p3.image,
+			impressionIndex = p4,
 			impressionTag = constantsModule.CardImpressionTag,
-			rating = p5.rating,
+			rating = p3.rating,
 			onActivated = function()
-				-- upvalues: p1 (copy), traversalTelemetryModule (copy), p5 (ref), p6 (ref), fFlagTraversalHistoryDiscoveryTelemetry (copy), gamePlayIntent (copy), var25 (copy), discoveryAnalyticsModule (copy)
+				-- upvalues: p1 (copy), traversalTelemetryModule (copy), p3 (ref), p4 (ref), fFlagTraversalHistoryDiscoveryTelemetry (copy), gamePlayIntent (copy), var3 (copy), discoveryAnalyticsModule (copy)
 				if not p1.onCardItemActivated then return end
 				traversalTelemetryModule.sendHistoryPageExperienceTileClick({
 					integration_id = "history_landing_game_tile",
 					event_type = "click",
-					destination_universe_id = tostring(p5.universeId),
-					recency_pos = p6
+					destination_universe_id = tostring(p3.universeId),
+					recency_pos = p4
 				})
 				
 				if fFlagTraversalHistoryDiscoveryTelemetry then
-					gamePlayIntent(var25, discoveryAnalyticsModule.Constants.Context.InExpHistoryTile, {
-						placeId = tostring(p5.placeId),
-						universeId = tostring(p5.universeId),
-						sortEntryIndex = tostring(p6)
+					gamePlayIntent(var3, discoveryAnalyticsModule.Constants.Context.InExpHistoryTile, {
+						placeId = tostring(p3.placeId),
+						universeId = tostring(p3.universeId),
+						sortEntryIndex = tostring(p4)
 					})
 				end
-				p1.onCardItemActivated(p5.universeId)
+				p1.onCardItemActivated(p3.universeId)
 			end,
-			width = var35,
-			ref = function(p7)
-				-- upvalues: var39 (copy), p6 (ref)
-				var39(p6, p7)
+			width = var2,
+			ref = function(p5)
+				-- upvalues: var14 (copy), p4 (ref)
+				var14(p4, p5)
 			end
 		})
 	end)
-	local var43 = reactModule.useRef(false)
+	local var18 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var43 (ref), var37 (ref), var40 (ref), p1 (ref), floored (ref), var34 (write)
-		if var43.current then return end
-		if not var37.current or not var40.current or not p1.onLoadMoreHistory then return end
-		local var45 = var37.current * floored
+		-- upvalues: var18 (ref), var12 (ref), var15 (ref), p1 (ref), floored (ref), var1 (write)
+		if var18.current then return end
+		if not var12.current or not var15.current or not p1.onLoadMoreHistory then return end
+		local var19 = var12.current * floored
 		
-		if var45 + var37.current <= var40.current.AbsoluteSize.Y then
-			var43.current = true
-			p1.onLoadMoreHistory(math.max(math.floor((var40.current.AbsoluteSize.Y - var45) / var37.current), 1) * var34)
+		if var19 + var12.current <= var15.current.AbsoluteSize.Y then
+			var18.current = true
+			p1.onLoadMoreHistory(math.max(math.floor((var15.current.AbsoluteSize.Y - var19) / var12.current), 1) * var1)
 		end
-	end, { p1.onLoadMoreHistory, var34, floored })
-	local var44 = reactModule.useCallback(function()
+	end, { p1.onLoadMoreHistory, var1, floored })
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: traversalTelemetryModule (copy), p1 (ref)
 		traversalTelemetryModule.sendHistoryPageBackButtonClick({
 			integration_id = "history_landing_back_button",
@@ -172,12 +172,12 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}, {
 			ChevronButton = reactModule.createElement(iconButton, {
 				icon = iconName.ChevronLargeLeft,
-				onActivated = var44,
+				onActivated = var19,
 				ref = p2
 			})
 		}) else reactModule.createElement(iconButton, {
 			icon = iconName.ChevronLargeLeft,
-			onActivated = var44,
+			onActivated = var19,
 			ref = p2
 		}),
 		Header = reactModule.createElement(view, {
@@ -185,16 +185,16 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			tag = "col auto-y size-full-0 " .. (if fFlagTraversalExpPagePaddingFixes then "" else "padding-left-medium padding-top-small padding-bottom-large"),
 			padding = if fFlagTraversalExpPagePaddingFixes then {
 				left = UDim.new(0, xLarge),
-				bottom = UDim.new(0, var27.Padding.XLarge)
+				bottom = UDim.new(0, var5.Padding.XLarge)
 			} else nil
 		}, {
 			Title = not fFlagIntegrateTraversalHistoryInSideSheet and reactModule.createElement(text, {
 				tag = "auto-xy text-heading-small text-truncate-split",
-				Text = var28.historyTitle
+				Text = var6.historyTitle
 			}),
 			Description = reactModule.createElement(text, {
 				tag = "auto-xy text-body-large text-truncate-split",
-				Text = var28.historyDescription
+				Text = var6.historyDescription
 			})
 		}),
 		ScrollContent = reactModule.createElement(scrollView, {
@@ -204,44 +204,44 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			padding = if fFlagIntegrateTraversalHistoryInSideSheet then {
 				left = UDim.new(0, xLarge),
 				right = UDim.new(0, xLarge),
-				top = UDim.new(0, var27.Padding.Small)
+				top = UDim.new(0, var5.Padding.Small)
 			} elseif fFlagTraversalExpPagePaddingFixes then { left = UDim.new(0, xLarge), right = UDim.new(0, xLarge) } else UDim.new(0, xLarge),
 			layout = {
 				Wraps = true,
 				FillDirection = Enum.FillDirection.Horizontal,
-				Padding = UDim.new(0, var29)
+				Padding = UDim.new(0, var7)
 			},
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(0, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			},
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p8)
-				-- upvalues: xLarge (ref), var31 (ref), var38 (ref), var37 (ref)
-				var31(p8.AbsoluteSize.X - 2 * xLarge)
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p3)
+				-- upvalues: xLarge (ref), var9 (ref), var13 (ref), var12 (ref)
+				var9(p3.AbsoluteSize.X - 2 * xLarge)
 				
-				if var38.current[1] then
-					var37.current = var38.current[1].AbsoluteSize.Y
+				if var13.current[1] then
+					var12.current = var13.current[1].AbsoluteSize.Y
 				end
 			end, { xLarge }),
-			onCanvasPositionChanged = reactModule.useCallback(function(p9)
-				-- upvalues: var41 (ref), p1 (ref), var37 (ref), var34 (write)
-				var41:fire()
+			onCanvasPositionChanged = reactModule.useCallback(function(p3)
+				-- upvalues: var16 (ref), p1 (ref), var12 (ref), var1 (write)
+				var16:fire()
 				
-				if not p1.onLoadMoreHistory or not var37.current then return end
-				if p9.AbsoluteCanvasSize.Y <= p9.CanvasPosition.Y + p9.AbsoluteWindowSize.Y + var37.current then
-					p1.onLoadMoreHistory(var34)
+				if not p1.onLoadMoreHistory or not var12.current then return end
+				if p3.AbsoluteCanvasSize.Y <= p3.CanvasPosition.Y + p3.AbsoluteWindowSize.Y + var12.current then
+					p1.onLoadMoreHistory(var1)
 				end
-			end, { p1.onLoadMoreHistory, var34, var41 }),
-			scrollingFrameRef = var40,
+			end, { p1.onLoadMoreHistory, var1, var16 }),
+			scrollingFrameRef = var15,
 			selection = { Selectable = false }
-		}, var42),
+		}, var17),
 		TraversalHistoryCardImpressionTracker = fFlagTraversalHistoryDiscoveryTelemetry and reactModule.createElement(impressionsTrackerWithoutNavigation, {
-			parentRef = var40,
+			parentRef = var15,
 			impressionsTag = constantsModule.CardImpressionTag,
-			scrollViewPositionChangedSignal = var41,
-			sendImpressions = reactModule.useCallback(function(p10)
-				-- upvalues: fFlagTraversalHistoryDiscoveryTelemetry (copy), p1 (ref), sendGameImpressions (copy), var25 (ref), var26 (ref), var34 (write), floored (ref)
+			scrollViewPositionChangedSignal = var16,
+			sendImpressions = reactModule.useCallback(function(p3)
+				-- upvalues: fFlagTraversalHistoryDiscoveryTelemetry (copy), p1 (ref), sendGameImpressions (copy), var3 (ref), var4 (ref), var1 (write), floored (ref)
 				if fFlagTraversalHistoryDiscoveryTelemetry then
 					local t = {}
 					
@@ -254,13 +254,13 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 							})
 						end
 					end
-					sendGameImpressions.sendFromTraversalHistoryPage(var25, var26, p10, t, var34, floored)
+					sendGameImpressions.sendFromTraversalHistoryPage(var3, var4, p3, t, var1, floored)
 				end
 			end, {
 				p1.historyItems,
-				var26,
-				var34,
-				var25,
+				var4,
+				var1,
+				var3,
 				floored
 			}),
 			viewPortBounds = useViewportBounds()

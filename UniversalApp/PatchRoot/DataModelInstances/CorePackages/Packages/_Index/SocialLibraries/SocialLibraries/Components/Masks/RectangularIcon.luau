@@ -4,7 +4,7 @@ maskedIcon.defaultProps = {
 	icon = "rbxasset://textures/ui/LuaChat/icons/share-game-thumbnail.png"
 }
 
-function maskedIcon.render(p0)
+function maskedIcon.render(p1)
 	-- upvalues: roact (ref)
 	return roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		layout = roact.createElement("UIListLayout", {
@@ -13,7 +13,7 @@ function maskedIcon.render(p0)
 		}),
 		button = roact.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
-			Image = p0.props.icon,
+			Image = p1.props.icon,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
 			layout = roact.createElement("UIListLayout", {

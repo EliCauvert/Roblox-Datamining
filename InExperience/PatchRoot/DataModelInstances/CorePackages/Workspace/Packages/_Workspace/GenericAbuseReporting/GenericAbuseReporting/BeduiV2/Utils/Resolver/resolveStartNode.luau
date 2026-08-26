@@ -3,13 +3,13 @@ local configResolversModule = require(script.Parent.configResolvers)
 
 return {
 	DEFAULT_START_NODE_ID = "root",
-	resolveStartNode = function(p0)
+	resolveStartNode = function(p1)
 		-- upvalues: configResolversModule (ref)
-		if p0.startNode == nil or p0.startNode == "" then
+		if p1.startNode == nil or p1.startNode == "" then
 			return "root"
 		end
-		local var1 = configResolversModule.resolveConfig(p0.startNode, {
-			attribute = p0.attributes or {},
+		local var1 = configResolversModule.resolveConfig(p1.startNode, {
+			attribute = p1.attributes or {},
 			resources = {},
 			store = {}
 		})

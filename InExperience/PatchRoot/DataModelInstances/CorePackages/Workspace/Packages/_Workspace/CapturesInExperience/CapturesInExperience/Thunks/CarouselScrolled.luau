@@ -2,10 +2,10 @@
 local carouselIndexSelectedModule = require(parent.Actions.CarouselIndexSelected)
 local constantsModule = require(parent.Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: constantsModule (ref), carouselIndexSelectedModule (ref)
-	return function(p1)
-		-- upvalues: constantsModule (copy), p0 (ref), carouselIndexSelectedModule (copy)
-		p1:dispatch(carouselIndexSelectedModule(math.clamp(p0, 1, #p1:getState()[constantsModule.RoduxKey].Captures)))
+	return function(p2)
+		-- upvalues: constantsModule (copy), p1 (ref), carouselIndexSelectedModule (copy)
+		p2:dispatch(carouselIndexSelectedModule(math.clamp(p1, 1, #p2:getState()[constantsModule.RoduxKey].Captures)))
 	end
 end

@@ -4,7 +4,7 @@ local interactable = require(parent.UIBlox).Core.Control.Interactable
 local linkingProtocol = require(parent.LinkingProtocol).LinkingProtocol
 local var1 = require(parent.RobloxTranslator):FormatByKey("CoreScripts.Ads.Label.IllegalContentReportingLink")
 
-function ReportAdFooter(p0)
+function ReportAdFooter(p1)
 	-- upvalues: linkingProtocol (ref), roactModule (ref), interactable (ref), var1 (ref)
 	local default = linkingProtocol.default
 	local text = "https://www.roblox.com/illegal-content-reporting?contentURL=" .. ("https://create.roblox.com/store/asset/" .. p0.assetId)

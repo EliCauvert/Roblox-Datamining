@@ -13,40 +13,40 @@ local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local usePreferredInput = responsiveModule.usePreferredInput
 local useRoactService = robloxAppHooksModule.useRoactService
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var6 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
 return function()
-	-- upvalues: useDispatch (ref), useRoactService (ref), appLinking (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), VRService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var6 (ref), navigateDown (ref), default (ref)
-	local var7 = useDispatch()
-	local var8 = useRoactService(appLinking)
-	local var9 = usePreferredInput() == responsiveModule.Input.Directional
+	-- upvalues: useDispatch (ref), useRoactService (ref), appLinking (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), VRService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), default (ref)
+	local var2 = useDispatch()
+	local var3 = useRoactService(appLinking)
+	local var4 = usePreferredInput() == responsiveModule.Input.Directional
 	
-	return reactModule.useCallback(function(p0, p1)
-		-- upvalues: var8 (ref), var9 (ref), VRService (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var6 (copy), var7 (ref), navigateDown (copy), default (copy)
-		if p1 then
-			if var8 then
-				if var9 or VRService.VREnabled then
-					var8:openURL(p1)
+	return reactModule.useCallback(function(p1, p2)
+		-- upvalues: var3 (ref), var4 (ref), VRService (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy), default (copy)
+		if p2 then
+			if var3 then
+				if var4 or VRService.VREnabled then
+					var3:openURL(p2)
 					
 					return
 				end
 				local t = {
 					name = appPage.GenericWebPage,
-					detail = p1,
-					extraProps = { title = p0 }
+					detail = p2,
+					extraProps = { title = p1 }
 				}
 				
 				if fFlagSignalsNavP3Dispatch then
-					var6.down(var6.fromLegacyPage(t))
+					var1.down(var1.fromLegacyPage(t))
 					
 					return
 				end
-				var7(navigateDown(t))
+				var2(navigateDown(t))
 				
 				return
 			else
-				default:openURL(p1)
+				default:openURL(p2)
 			end
 		end
-	end, { var8, var7, var9 })
+	end, { var3, var2, var4 })
 end

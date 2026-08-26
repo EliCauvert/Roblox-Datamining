@@ -23,14 +23,14 @@ local t = {
 	push = function() end
 }
 
-local function reducer(p0)
-	return p0
+local function reducer(p1)
+	return p1
 end
 
 return function(p1)
 	-- upvalues: roduxModule (ref), reducer (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), layerCollectorProvider (ref), roactNavigationModule (ref), t (ref), roactRoduxModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), reactModule (ref), providerContainer (ref)
 	local t_1 = {}
-	local var7 = roduxModule.Store.new(reducer, {}, { roduxModule.thunkMiddleware })
+	local var1 = roduxModule.Store.new(reducer, {}, { roduxModule.thunkMiddleware })
 	table.insert(t_1, {
 		class = styleProviderWithDefaultTheme,
 		props = { withDarkTheme = true }
@@ -52,7 +52,7 @@ return function(p1)
 	})
 	table.insert(t_1, {
 		class = roactRoduxModule.StoreProvider,
-		props = { store = var7 }
+		props = { store = var1 }
 	})
 	table.insert(t_1, {
 		class = roactAppPolicy.Provider,

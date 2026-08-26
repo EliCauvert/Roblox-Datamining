@@ -7,34 +7,34 @@ local textChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindow
 local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
 local messageLayoutContainer = chatUIPrimitivesModule.MessageLayoutContainer
 
-return function(p0)
+return function(p1)
 	-- upvalues: foundationModule (ref), useInExperienceLocalization (ref), reactModule (ref), textChannelWindowAnalyticsModule (ref), messageLayoutContainer (ref)
-	local var4 = foundationModule.Hooks.useTokens()
-	local var5 = useInExperienceLocalization()
+	local var1 = foundationModule.Hooks.useTokens()
+	local var2 = useInExperienceLocalization()
 	
-	return if p0.channelState == "no-channel" then reactModule.createElement(foundationModule.Empty, {
+	return if p1.channelState == "no-channel" then reactModule.createElement(foundationModule.Empty, {
 		icon = { name = "icons/status/oof_xlarge" },
-		text = var5("CoreScripts.TextChat.Error.NoChannelSelected")
-	}) elseif p0.channelState == "not-member" then reactModule.createElement(foundationModule.Empty, {
+		text = var2("CoreScripts.TextChat.Error.NoChannelSelected")
+	}) elseif p1.channelState == "not-member" then reactModule.createElement(foundationModule.Empty, {
 		icon = { name = "icons/status/oof_xlarge" },
-		text = var5("CoreScripts.TextChat.Error.NoChannelAccess")
-	}) elseif p0.channelState == "member" then reactModule.createElement(messageLayoutContainer, {
+		text = var2("CoreScripts.TextChat.Error.NoChannelAccess")
+	}) elseif p1.channelState == "member" then reactModule.createElement(messageLayoutContainer, {
 		layoutStyle = "textLine",
-		messagesSignal = p0.messagesSignal,
-		fontFace = p0.fontFace,
+		messagesSignal = p1.messagesSignal,
+		fontFace = p1.fontFace,
 		Size = UDim2.fromScale(1, 1),
 		contentPadding = {
-			top = UDim.new(0, var4.Size.Size_100),
-			bottom = UDim.new(0, var4.Size.Size_100),
-			left = UDim.new(0, var4.Size.Size_200),
-			right = UDim.new(0, var4.Size.Size_1400)
+			top = UDim.new(0, var1.Size.Size_100),
+			bottom = UDim.new(0, var1.Size.Size_100),
+			left = UDim.new(0, var1.Size.Size_200),
+			right = UDim.new(0, var1.Size.Size_1400)
 		},
 		onScroll = reactModule.useMemo(function()
-			-- upvalues: textChannelWindowAnalyticsModule (copy), p0 (ref)
-			return textChannelWindowAnalyticsModule.createOnScrollCallback(p0.windowName)
-		end, { p0.windowName })
+			-- upvalues: textChannelWindowAnalyticsModule (copy), p1 (ref)
+			return textChannelWindowAnalyticsModule.createOnScrollCallback(p1.windowName)
+		end, { p1.windowName })
 	}) else reactModule.createElement(foundationModule.Empty, {
 		icon = { name = "icons/status/oof_xlarge" },
-		text = var5("CoreScripts.TextChat.InputBar.Hint.ChatUnavailable")
+		text = var2("CoreScripts.TextChat.InputBar.Hint.ChatUnavailable")
 	})
 end

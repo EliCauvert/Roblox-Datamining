@@ -28,20 +28,20 @@ reportList.validateProps = t.strictInterface({
 	currentZone = getFFlagIGMGamepadSelectionHistoryModule() and t.optional(t.number) or nil
 })
 
-local function sortPlayers(p0, p1)
-	return p0.Name:lower() < p1.Name:lower()
+local function sortPlayers(p1, p2)
+	return p1.Name:lower() < p2.Name:lower()
 end
 
-function reportList.init(p2)
+function reportList.init(p1)
 	-- upvalues: roact (ref)
-	p2.reportGameRef = roact.createRef()
+	p1.reportGameRef = roact.createRef()
 end
 
-function reportList.renderListEntries(p3)
+function reportList.renderListEntries(p1)
 	-- upvalues: cryo (ref), sortPlayers (ref), roact (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), focusHandlerModule (ref), constantsModule (ref), guiService (ref), gameLabelModule (ref), trustAndSafetyModule (ref), reportButtonModule (ref), dividerModule (ref), playerLabelModule (ref)
-	local var17 = cryo.List.sort(p3.props.players, sortPlayers)
-	local var17Count = #var17
-	local var19 = 3
+	local var1 = cryo.List.sort(p1.props.players, sortPlayers)
+	local var17Count = #var1
+	local var2 = 3
 	local t = {
 		ListLayout = roact.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -51,19 +51,19 @@ function reportList.renderListEntries(p3)
 	
 	if getFFlagIGMGamepadSelectionHistoryModule() then
 		t.FocusHandler = roact.createElement(focusHandlerModule, {
-			isFocused = p3.props.canCaptureFocus,
-			shouldForgetPreviousSelection = if p3.props.currentPage ~= constantsModule.MainPagePageKey then p3.props.currentZone == 0 else true,
-			didFocus = function(p4)
-				-- upvalues: guiService (copy), p3 (ref)
-				guiService.SelectedCoreObject = p4 or p3.reportGameRef:getValue()
+			isFocused = p1.props.canCaptureFocus,
+			shouldForgetPreviousSelection = if p1.props.currentPage ~= constantsModule.MainPagePageKey then p1.props.currentZone == 0 else true,
+			didFocus = function(p2)
+				-- upvalues: guiService (copy), p1 (ref)
+				guiService.SelectedCoreObject = p2 or p1.reportGameRef:getValue()
 			end
 		})
 	end
 	t.GameReport = roact.createElement(gameLabelModule, {
 		gameId = game.GameId,
-		gameName = p3.props.placeName,
+		gameName = p1.props.placeName,
 		LayoutOrder = 1,
-		[roact.Ref] = p3.reportGameRef,
+		[roact.Ref] = p1.reportGameRef,
 		onActivated = function()
 			-- upvalues: trustAndSafetyModule (copy), constantsModule (copy)
 			trustAndSafetyModule.openReportDialogForPlace(constantsModule.AnalyticsInGameMenuName)
@@ -72,16 +72,16 @@ function reportList.renderListEntries(p3)
 		ReportButton = roact.createElement(reportButtonModule, { LayoutOrder = 1 })
 	})
 	
-	if #var17 > 0 then
+	if #var1 > 0 then
 		t["divider_" .. var19] = roact.createElement(dividerModule, { LayoutOrder = 2, Size = UDim2.new(1, -80, 0, 1) })
 	end
-	for i, v in pairs(var17) do
+	for i, v in pairs(var1) do
 		t["player_" .. i] = roact.createElement(playerLabelModule, {
 			isOnline = true,
 			isSelected = false,
 			username = v.Name,
 			userId = v.UserId,
-			LayoutOrder = var19,
+			LayoutOrder = var2,
 			onActivated = function()
 				-- upvalues: trustAndSafetyModule (copy), v (ref), constantsModule (copy)
 				trustAndSafetyModule.openReportDialogForPlayer(v, constantsModule.AnalyticsInGameMenuName)
@@ -89,31 +89,31 @@ function reportList.renderListEntries(p3)
 		}, {
 			ReportButton = roact.createElement(reportButtonModule, { LayoutOrder = 1, userId = v.UserId, userName = v.Name })
 		})
-		var19 += 1
+		var2 += 1
 		
 		if i < var17Count then
-			t["divider_" .. var19] = roact.createElement(dividerModule, { LayoutOrder = var19, Size = UDim2.new(1, -80, 0, 1) })
-			var19 += 1
+			t["divider_" .. var19] = roact.createElement(dividerModule, { LayoutOrder = var2, Size = UDim2.new(1, -80, 0, 1) })
+			var2 += 1
 		end
 	end
 	return t
 end
 
-function reportList.didUpdate(p5, p6, _)
+function reportList.didUpdate(p2, p3, _)
 	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), guiService (ref)
-	if not getFFlagIGMGamepadSelectionHistoryModule() and p5.props.canCaptureFocus and not p6.canCaptureFocus then
-		guiService.SelectedCoreObject = p5.reportGameRef:getValue()
+	if not getFFlagIGMGamepadSelectionHistoryModule() and p2.props.canCaptureFocus and not p3.canCaptureFocus then
+		guiService.SelectedCoreObject = p2.reportGameRef:getValue()
 	end
 end
 
-function reportList.render(p7)
+function reportList.render(p2)
 	-- upvalues: isShowEUDSAIllegalContentReportingLink (ref), withLocalizationModule (ref), roact (ref), barOnTopScrollingFrameModule (ref), themedTextLabelModule (ref)
-	local var21 = #p7.props.players * 71 + 70
+	local var3 = #p2.props.players * 71 + 70
 	
 	return if isShowEUDSAIllegalContentReportingLink() then withLocalizationModule({
 		DSAFooterText = "CoreScripts.InGameMenu.Report.DSAFooter"
-	})(function(p8)
-		-- upvalues: roact (copy), barOnTopScrollingFrameModule (copy), var21 (ref), p7 (ref), themedTextLabelModule (copy)
+	})(function(p3)
+		-- upvalues: roact (copy), barOnTopScrollingFrameModule (copy), var3 (ref), p2 (ref), themedTextLabelModule (copy)
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0, 0, 0, 0),
@@ -122,8 +122,8 @@ function reportList.render(p7)
 			ScrollingFrame = roact.createElement(barOnTopScrollingFrameModule, {
 				Position = UDim2.new(0, 0, 0, 0),
 				Size = UDim2.new(1, 0, 1, -50),
-				CanvasSize = UDim2.new(1, 0, 0, var21)
-			}, p7:renderListEntries()),
+				CanvasSize = UDim2.new(1, 0, 0, var3)
+			}, p2:renderListEntries()),
 			EUWarning = roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 50),
@@ -141,7 +141,7 @@ function reportList.render(p7)
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					Size = UDim2.new(1, 0, 1, 0),
-					Text = p8.DSAFooterText,
+					Text = p3.DSAFooterText,
 					TextXAlignment = Enum.TextXAlignment.Center
 				})
 			})
@@ -149,26 +149,26 @@ function reportList.render(p7)
 	end) else roact.createElement(barOnTopScrollingFrameModule, {
 		Position = UDim2.new(0, 0, 0, 0),
 		Size = UDim2.new(1, 0, 1, 0),
-		CanvasSize = UDim2.new(1, 0, 0, var21)
-	}, p7:renderListEntries())
+		CanvasSize = UDim2.new(1, 0, 0, var3)
+	}, p2:renderListEntries())
 end
 
-return roactRodux.UNSTABLE_connect2(function(p9, _)
+return roactRodux.UNSTABLE_connect2(function(p2, _)
 	-- upvalues: constantsModule (ref), getFFlagIGMGamepadSelectionHistoryModule (ref)
-	local name = p9.gameInfo.name
-	local var22 = false
+	local name = p2.gameInfo.name
+	local var3 = false
 	
-	if p9.menuPage == "Report" then
-		var22 = false
+	if p2.menuPage == "Report" then
+		var3 = false
 		
-		if p9.displayOptions.inputType == constantsModule.InputType.Gamepad then
-			var22 = not (p9.report.dialogOpen or (p9.report.reportSentOpen or p9.respawn.dialogOpen)) and p9.currentZone == 1
+		if p2.displayOptions.inputType == constantsModule.InputType.Gamepad then
+			var3 = not (p2.report.dialogOpen or (p2.report.reportSentOpen or p2.respawn.dialogOpen)) and p2.currentZone == 1
 		end
 	end
 	return {
 		placeName = name,
-		canCaptureFocus = var22,
-		currentPage = if not getFFlagIGMGamepadSelectionHistoryModule() then nil else p9.menuPage,
-		currentZone = if not getFFlagIGMGamepadSelectionHistoryModule() then nil else p9.currentZone
+		canCaptureFocus = var3,
+		currentPage = if not getFFlagIGMGamepadSelectionHistoryModule() then nil else p2.menuPage,
+		currentZone = if not getFFlagIGMGamepadSelectionHistoryModule() then nil else p2.currentZone
 	}
 end)(reportList)

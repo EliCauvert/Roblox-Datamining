@@ -9,14 +9,14 @@ local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagM
 
 return function()
 	-- upvalues: mediaNodeRegistryModule (ref), createVideoNodeModule (ref), createMusicNodeModule (ref), createScreenshotNodeModule (ref), createTextOverlayNodeModule (ref), getFFlagMomentsStickerButtonModule (ref), createStickerOverlayNodeModule (ref)
-	local var8 = mediaNodeRegistryModule()
-	var8.register(createVideoNodeModule)
-	var8.register(createMusicNodeModule)
-	var8.register(createScreenshotNodeModule)
-	var8.register(createTextOverlayNodeModule)
+	local var1 = mediaNodeRegistryModule()
+	var1.register(createVideoNodeModule)
+	var1.register(createMusicNodeModule)
+	var1.register(createScreenshotNodeModule)
+	var1.register(createTextOverlayNodeModule)
 	
 	if getFFlagMomentsStickerButtonModule() then
-		var8.register(createStickerOverlayNodeModule)
+		var1.register(createStickerOverlayNodeModule)
 	end
-	return var8
+	return var1
 end

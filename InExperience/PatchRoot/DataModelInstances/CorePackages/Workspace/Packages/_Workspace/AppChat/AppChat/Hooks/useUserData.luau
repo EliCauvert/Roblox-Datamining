@@ -7,81 +7,81 @@ local reactModule = require(parent.React)
 local _ = require(appChat.types)
 local useFoundationPresenceModule = require(script.Parent.useFoundationPresence)
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: signalsModule (ref)
-	return signalsModule.createComputed(function(p3)
-		-- upvalues: p1 (ref), p0 (ref), p2 (ref)
-		if p1(p3) then
+	return signalsModule.createComputed(function(p4)
+		-- upvalues: p2 (ref), p1 (ref), p3 (ref)
+		if p2(p4) then
 			return ""
 		end
-		local var5 = p0(p3)
+		local var1 = p1(p4)
 		
-		return if var5.data and #var5.data ~= 0 then p2(var5.data[1].names) or "" else ""
+		return if var1.data and #var1.data ~= 0 then p3(var1.data[1].names) or "" else ""
 	end)
 end
 
-return function(p4)
+return function(p1)
 	-- upvalues: userProfilesModule (ref), signalsModule (ref), useSignalBinding (ref), useFoundationPresenceModule (ref), reactModule (ref)
-	local var6 = if p4 and p4 ~= "" then userProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds({ p4 }) else nil
-	local var7 = signalsModule.createComputed(function(p5)
-		-- upvalues: var6 (ref)
-		return if var6 then var6(p5).status ~= "success" else true
+	local var1 = if p1 and p1 ~= "" then userProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds({ p1 }) else nil
+	local var2 = signalsModule.createComputed(function(p2)
+		-- upvalues: var1 (ref)
+		return if var1 then var1(p2).status ~= "success" else true
 	end)
-	local var8 = useSignalBinding(var7)
+	local var3 = useSignalBinding(var2)
 	
-	local var9 = function(p6)
-		return p6.getDisplayName(false) or p6.getUsername(false)
+	local var4 = function(p2)
+		return p2.getDisplayName(false) or p2.getUsername(false)
 	end
 	
-	var9 = useSignalBinding(signalsModule.createComputed(function(p7)
-		-- upvalues: var7 (ref), var6 (ref), var9 (ref)
-		if var7(p7) then
+	var4 = useSignalBinding(signalsModule.createComputed(function(p2)
+		-- upvalues: var2 (ref), var1 (ref), var4 (ref)
+		if var2(p2) then
 			return ""
 		end
-		local var5 = var6(p7)
+		local var5 = var1(p2)
 		
-		return if var5.data and #var5.data ~= 0 then var9(var5.data[1].names) or "" else ""
+		return if var5.data and #var5.data ~= 0 then var4(var5.data[1].names) or "" else ""
 	end))
 	
-	local var10 = function(p8)
-		return p8.getUsername(false)
+	local var5 = function(p2)
+		return p2.getUsername(false)
 	end
 	
-	var10 = useSignalBinding(signalsModule.createComputed(function(p9)
-		-- upvalues: var7 (ref), var6 (ref), var10 (ref)
-		if var7(p9) then
+	var5 = useSignalBinding(signalsModule.createComputed(function(p2)
+		-- upvalues: var2 (ref), var1 (ref), var5 (ref)
+		if var2(p2) then
 			return ""
 		end
-		local var5 = var6(p9)
+		local var6 = var1(p2)
 		
-		return if var5.data and #var5.data ~= 0 then var10(var5.data[1].names) or "" else ""
+		return if var6.data and #var6.data ~= 0 then var5(var6.data[1].names) or "" else ""
 	end))
 	
-	local var11 = function(p10)
-		return p10.getCombinedName(false)
+	local var6 = function(p2)
+		return p2.getCombinedName(false)
 	end
 	
-	var11 = useSignalBinding(signalsModule.createComputed(function(p11)
-		-- upvalues: var7 (ref), var6 (ref), var11 (ref)
-		if var7(p11) then
+	var6 = useSignalBinding(signalsModule.createComputed(function(p2)
+		-- upvalues: var2 (ref), var1 (ref), var6 (ref)
+		if var2(p2) then
 			return ""
 		end
-		local var5 = var6(p11)
+		local var7 = var1(p2)
 		
-		return if var5.data and #var5.data ~= 0 then var11(var5.data[1].names) or "" else ""
+		return if var7.data and #var7.data ~= 0 then var6(var7.data[1].names) or "" else ""
 	end))
-	local var12 = useFoundationPresenceModule(p4)
+	local var7 = useFoundationPresenceModule(p1)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var8 (ref), p4 (ref), var9 (ref), var11 (ref), var10 (ref), var12 (ref)
+		-- upvalues: var3 (ref), p1 (ref), var4 (ref), var6 (ref), var5 (ref), var7 (ref)
 		return {
-			isLoading = var8,
-			id = tonumber(p4) or -1,
-			displayName = var9,
-			combinedName = var11,
-			username = var10,
-			presenceText = var12.presenceText,
-			presence = var12.presence
+			isLoading = var3,
+			id = tonumber(p1) or -1,
+			displayName = var4,
+			combinedName = var6,
+			username = var5,
+			presenceText = var7.presenceText,
+			presence = var7.presence
 		}
-	end, { p4, var12 })
+	end, { p1, var7 })
 end

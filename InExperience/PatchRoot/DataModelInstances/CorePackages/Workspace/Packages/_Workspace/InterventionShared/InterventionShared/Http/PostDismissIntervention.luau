@@ -4,22 +4,22 @@ local httpService = game:GetService("HttpService")
 local promiseModule = require(parent.Promise)
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 
-return function(p0)
+return function(p1)
 	-- upvalues: urlBuilder (ref), httpService (ref), promiseModule (ref), httpRbxApiService (ref)
-	local var3 = urlBuilder.usermoderation.dismissIntervention()
-	local var4 = httpService:JSONEncode({ intervention_id = p0 })
+	local var1 = urlBuilder.usermoderation.dismissIntervention()
+	local var2 = httpService:JSONEncode({ intervention_id = p1 })
 	
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: httpRbxApiService (copy), var3 (ref), var4 (ref), httpService (copy)
+	return promiseModule.new(function(p2, p3)
+		-- upvalues: httpRbxApiService (copy), var1 (ref), var2 (ref), httpService (copy)
 		task.defer(function()
-			-- upvalues: httpRbxApiService (copy), var3 (copy), var4 (copy), httpService (copy), p1 (ref), p2 (ref)
+			-- upvalues: httpRbxApiService (copy), var1 (copy), var2 (copy), httpService (copy), p2 (ref), p3 (ref)
 			local ok, status = pcall(function()
-				-- upvalues: httpRbxApiService (copy), var3 (copy), var4 (copy)
-				return httpRbxApiService:PostAsyncFullUrl(var3, var4, Enum.ThrottlingPriority.Default)
+				-- upvalues: httpRbxApiService (copy), var1 (copy), var2 (copy)
+				return httpRbxApiService:PostAsyncFullUrl(var1, var2, Enum.ThrottlingPriority.Default)
 			end)
 			
 			if not ok then
-				p2({ error = "HTTP request failed", details = status })
+				p3({ error = "HTTP request failed", details = status })
 				
 				return
 			end
@@ -29,11 +29,11 @@ return function(p0)
 			end)
 			
 			if ok_1 then
-				p1(status_1)
+				p2(status_1)
 				
 				return
 			end
-			p2({
+			p3({
 				error = "Failed to parse JSON response",
 				details = status_1
 			})

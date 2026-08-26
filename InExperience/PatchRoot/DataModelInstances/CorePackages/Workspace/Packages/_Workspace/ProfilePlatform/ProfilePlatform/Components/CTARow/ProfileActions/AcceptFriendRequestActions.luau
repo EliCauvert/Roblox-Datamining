@@ -10,41 +10,41 @@ local _ = require(profilePlatform.Components.CTARow.Types)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 local fFlagMigrateFriendshipStatusesRemainingActions = require(parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
-local var5 = require(parent.DataHydration).Friends.FriendsStore.get()
+local var1 = require(parent.DataHydration).Friends.FriendsStore.get()
 
 return {
-	[enumsModule.ProfileActions.AcceptFriendRequest] = function(p0)
-		-- upvalues: enumsModule (ref), buttonVariant (ref), profileTypes (ref), eventNamesModule (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var5 (ref), networkingFriendsModule (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
+	[enumsModule.ProfileActions.AcceptFriendRequest] = function(p1)
+		-- upvalues: enumsModule (ref), buttonVariant (ref), profileTypes (ref), eventNamesModule (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), networkingFriendsModule (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
 		return {
-			text = p0.localized[enumsModule.ProfileActions.AcceptFriendRequest],
+			text = p1.localized[enumsModule.ProfileActions.AcceptFriendRequest],
 			variant = buttonVariant.Emphasis,
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p0 (ref), eventNamesModule (copy), enumsModule (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var5 (copy), networkingFriendsModule (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
-					p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonAcceptFriendRequest, {
-						buttonSurface = p0.buttonSurface,
-						absolutePosition = p0.profileWrapperContext.sourceInfo.homepageCarouselAbsolutePosition,
-						isHomePageCarousel = p0.profileWrapperContext.sourceInfo.source == enumsModule.Sources.HomepageFriendsCarousel,
-						isRecommendation = p0.profileWrapperContext.sourceInfo.isRecommendation,
-						source = p0.profileWrapperContext.sourceInfo.source,
-						contextualInfoType = p0.profileWrapperContext.sourceInfo.contextualInfoType,
-						recommendationContextType = p0.profileWrapperContext.sourceInfo.recommendationContextType,
-						recommendationRank = p0.profileWrapperContext.sourceInfo.recommendationRank,
-						recommendationSessionId = p0.profileWrapperContext.sourceInfo.recommendationSessionId
+					-- upvalues: p1 (ref), eventNamesModule (copy), enumsModule (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var1 (copy), networkingFriendsModule (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonAcceptFriendRequest, {
+						buttonSurface = p1.buttonSurface,
+						absolutePosition = p1.profileWrapperContext.sourceInfo.homepageCarouselAbsolutePosition,
+						isHomePageCarousel = p1.profileWrapperContext.sourceInfo.source == enumsModule.Sources.HomepageFriendsCarousel,
+						isRecommendation = p1.profileWrapperContext.sourceInfo.isRecommendation,
+						source = p1.profileWrapperContext.sourceInfo.source,
+						contextualInfoType = p1.profileWrapperContext.sourceInfo.contextualInfoType,
+						recommendationContextType = p1.profileWrapperContext.sourceInfo.recommendationContextType,
+						recommendationRank = p1.profileWrapperContext.sourceInfo.recommendationRank,
+						recommendationSessionId = p1.profileWrapperContext.sourceInfo.recommendationSessionId
 					})
 					
-					return (if fFlagMigrateFriendshipStatusesRemainingActions then var5.AcceptFriendRequest(p0.profileId) else p0.dispatch(networkingFriendsModule.AcceptFriendRequestFromUserId.API({
-						targetUserId = p0.profileId,
-						currentUserId = p0.localUserId
+					return (if fFlagMigrateFriendshipStatusesRemainingActions then var1.AcceptFriendRequest(p1.profileId) else p1.dispatch(networkingFriendsModule.AcceptFriendRequestFromUserId.API({
+						targetUserId = p1.profileId,
+						currentUserId = p1.localUserId
 					}))):andThen(function()
-						-- upvalues: p0 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
-						p0.dispatch(setCurrentToastMessage({
+						-- upvalues: p1 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
+						p1.dispatch(setCurrentToastMessage({
 							isLocalized = true,
-							toastMessage = p0.localized.friendAcceptedToast,
+							toastMessage = p1.localized.friendAcceptedToast,
 							toastIcon = images["icons/actions/friends/friendAdd"]
 						}))
 						
-						return p0.dispatch(refreshProfilePlatformActionInfoModule(p0.profileId, p0.actionsComponentRequest))
+						return p1.dispatch(refreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
 					end)
 				end
 			}

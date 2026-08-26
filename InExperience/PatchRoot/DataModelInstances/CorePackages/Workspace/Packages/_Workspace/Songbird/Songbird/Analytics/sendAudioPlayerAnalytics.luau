@@ -10,10 +10,10 @@ local t = {
 	lastUpdated = { 25, 10, 24 }
 }
 
-local function createCounterEventConfig(p0)
+local function createCounterEventConfig(p1)
 	-- upvalues: t (ref), loggingProtocolModule (ref)
 	return {
-		eventName = `{t.eventName}_{p0}`,
+		eventName = `{t.eventName}_{p1}`,
 		backends = { loggingProtocolModule.TelemetryBackends.Counter },
 		throttlingPercentage = t.throttlingPercentage,
 		lastUpdated = t.lastUpdated,
@@ -24,7 +24,7 @@ end
 
 return function(p1)
 	-- upvalues: createCounterEventConfig (ref), loggingProtocolModule (ref), t (ref)
-	local var4 = createCounterEventConfig(p1.action)
+	local var1 = createCounterEventConfig(p1.action)
 	loggingProtocolModule.default:logRobloxTelemetryEvent(t, nil, p1)
-	loggingProtocolModule.default:logRobloxTelemetryCounter(var4, 1)
+	loggingProtocolModule.default:logRobloxTelemetryCounter(var1, 1)
 end

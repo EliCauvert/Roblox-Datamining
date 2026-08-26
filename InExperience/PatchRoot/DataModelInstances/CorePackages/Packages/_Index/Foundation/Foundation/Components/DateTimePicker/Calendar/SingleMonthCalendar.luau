@@ -14,26 +14,26 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = { testId = "--foundation-calendar" }
 
-local function CalendarPane(p0)
+local function CalendarPane(p1)
 	-- upvalues: reactModule (ref), viewModule (ref), calendarHeaderModule (ref), calendarGrid (ref)
-	local state = p0.state
+	local state = p1.state
 	
 	return reactModule.createElement(viewModule, {
-		LayoutOrder = p0.LayoutOrder,
-		Size = p0.Size,
+		LayoutOrder = p1.LayoutOrder,
+		Size = p1.Size,
 		tag = {
-			["col gap-small padding-large"] = p0.showTimeList == true,
-			["col auto-y"] = p0.showTimeList ~= true
+			["col gap-small padding-large"] = p1.showTimeList == true,
+			["col auto-y"] = p1.showTimeList ~= true
 		},
-		testId = p0.rootTestId
+		testId = p1.rootTestId
 	}, {
 		CalendarHeader = reactModule.createElement(calendarHeaderModule, {
 			LayoutOrder = 1,
 			onNextMonth = state.navigateToNextMonth,
 			onPreviousMonth = state.navigateToPreviousMonth,
 			onViewDateChanged = state.onViewDateChanged,
-			selectableDateRange = p0.selectableDateRange,
-			testId = p0.testId,
+			selectableDateRange = p1.selectableDateRange,
+			testId = p1.testId,
 			viewDate = state.currViewDate
 		}),
 		WeekAndDates = reactModule.createElement(calendarGrid, {
@@ -45,77 +45,77 @@ local function CalendarPane(p0)
 			localSelectedDateTimes = state.localSelectedDateTimes,
 			onHoverEnter = state.onHoverEnter,
 			onHoverLeave = state.onHoverLeave,
-			scaledCalendarWidth = p0.scaledCalendarWidth,
-			selectableDateRange = p0.selectableDateRange,
-			Size = p0.gridSize,
-			testId = p0.testId
+			scaledCalendarWidth = p1.scaledCalendarWidth,
+			selectableDateRange = p1.selectableDateRange,
+			Size = p1.gridSize,
+			testId = p1.testId
 		})
 	})
 end
 
 return function(p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), dateTimeLayoutUtilitiesModule (ref), useSingleMonthCalendarStateModule (ref), dateTimeCalendarConstantsModule (ref), reactModule (ref), viewModule (ref), CalendarPane (ref), timeListModule (ref), dateTimeCalendarViewUtilitiesModule (ref)
-	local var14 = withDefaultsModule(p1, t)
-	local var15 = useTokensModule()
-	local var16 = useScaledValueModule(dateTimeLayoutUtilitiesModule.CALENDAR_WIDTH)
-	local var17 = useScaledValueModule(dateTimeLayoutUtilitiesModule.TIME_LIST_WIDTH)
-	local var18 = useSingleMonthCalendarStateModule({
-		isDateRange = var14.isDateRange,
-		onSelectedDateChanged = var14.onSelectedDateChanged,
-		referenceDate = var14.referenceDate,
-		selectableDateRange = var14.selectableDateRange,
-		selectedDates = var14.selectedDates,
-		showTimeList = var14.showTimeList,
-		viewAnchorDate = var14.viewAnchorDate
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3 = useScaledValueModule(dateTimeLayoutUtilitiesModule.CALENDAR_WIDTH)
+	local var4 = useScaledValueModule(dateTimeLayoutUtilitiesModule.TIME_LIST_WIDTH)
+	local var5 = useSingleMonthCalendarStateModule({
+		isDateRange = var1.isDateRange,
+		onSelectedDateChanged = var1.onSelectedDateChanged,
+		referenceDate = var1.referenceDate,
+		selectableDateRange = var1.selectableDateRange,
+		selectedDates = var1.selectedDates,
+		showTimeList = var1.showTimeList,
+		viewAnchorDate = var1.viewAnchorDate
 	})
 	
-	if var14.showTimeList then
-		local var19 = dateTimeLayoutUtilitiesModule.computeSingleWithTimeLayout(var16, var17, var15, dateTimeCalendarConstantsModule.NUM_CALENDAR_GRID_ROWS)
+	if var1.showTimeList then
+		local var6 = dateTimeLayoutUtilitiesModule.computeSingleWithTimeLayout(var3, var4, var2, dateTimeCalendarConstantsModule.NUM_CALENDAR_GRID_ROWS)
 		
 		return reactModule.createElement(viewModule, {
 			tag = "row align-y-top auto-xy",
-			LayoutOrder = var14.LayoutOrder,
-			testId = var14.testId
+			LayoutOrder = var1.LayoutOrder,
+			testId = var1.testId
 		}, {
 			CalendarPane = reactModule.createElement(CalendarPane, {
 				LayoutOrder = 1,
 				showTimeList = true,
-				gridSize = UDim2.fromOffset(var16, var19.gridHeight),
-				scaledCalendarWidth = var16,
-				selectableDateRange = var14.selectableDateRange,
-				Size = UDim2.fromOffset(var19.calendarColumnWidth, var19.bodyHeight),
-				state = var18,
-				testId = var14.testId
+				gridSize = UDim2.fromOffset(var3, var6.gridHeight),
+				scaledCalendarWidth = var3,
+				selectableDateRange = var1.selectableDateRange,
+				Size = UDim2.fromOffset(var6.calendarColumnWidth, var6.bodyHeight),
+				state = var5,
+				testId = var1.testId
 			}),
 			Divider = reactModule.createElement(viewModule, {
 				LayoutOrder = 2,
-				backgroundStyle = var15.Color.Stroke.Default,
-				Size = UDim2.fromOffset(var15.Stroke.Standard, var19.bodyHeight)
+				backgroundStyle = var2.Color.Stroke.Default,
+				Size = UDim2.fromOffset(var2.Stroke.Standard, var6.bodyHeight)
 			}),
 			TimeListColumn = reactModule.createElement(viewModule, {
 				LayoutOrder = 3,
 				tag = "col padding-large",
-				Size = UDim2.fromOffset(var19.timeListColumnWidth, var19.bodyHeight)
+				Size = UDim2.fromOffset(var6.timeListColumnWidth, var6.bodyHeight)
 			}, {
 				TimeList = reactModule.createElement(timeListModule, {
 					LayoutOrder = 1,
-					dateTime = var18.selectedDateTimes[1],
-					dayAnchor = dateTimeCalendarViewUtilitiesModule.resolveAnchorDate(var18.selectedDateTimes, var14.viewAnchorDate or var14.referenceDate),
-					height = var19.timeListHeight,
-					onItemChanged = var18.onTimeListItemChanged,
-					testId = `{var14.testId}--time-list`,
-					width = UDim.new(0, var17)
+					dateTime = var5.selectedDateTimes[1],
+					dayAnchor = dateTimeCalendarViewUtilitiesModule.resolveAnchorDate(var5.selectedDateTimes, var1.viewAnchorDate or var1.referenceDate),
+					height = var6.timeListHeight,
+					onItemChanged = var5.onTimeListItemChanged,
+					testId = `{var1.testId}--time-list`,
+					width = UDim.new(0, var4)
 				})
 			})
 		})
 	end
 	return reactModule.createElement(CalendarPane, {
-		LayoutOrder = var14.LayoutOrder,
-		rootTestId = var14.testId,
-		scaledCalendarWidth = var16,
-		selectableDateRange = var14.selectableDateRange,
-		Size = UDim2.fromOffset(var16, 0),
-		state = var18,
-		testId = var14.testId
+		LayoutOrder = var1.LayoutOrder,
+		rootTestId = var1.testId,
+		scaledCalendarWidth = var3,
+		selectableDateRange = var1.selectableDateRange,
+		Size = UDim2.fromOffset(var3, 0),
+		state = var5,
+		testId = var1.testId
 	})
 end

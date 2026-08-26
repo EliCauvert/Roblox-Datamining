@@ -10,15 +10,15 @@ return {
 	fflag = require(parent.flags.getFFlagUGCValidationEnableR15plusSkinning),
 	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: r15plusUtilsModule (ref), UGCValidationService (ref), constantsModule (ref), errorSourceStringsModule (ref)
 		local jointNameWhitelist = r15plusUtilsModule.getJointNameWhitelist()
 		
 		for i, v in {
-			UGCValidationService:GetFacsDrivenJointNamesFromEditableMesh(p1.renderMeshesData.Head.editable)
+			UGCValidationService:GetFacsDrivenJointNamesFromEditableMesh(p2.renderMeshesData.Head.editable)
 		} do
 			if jointNameWhitelist[v] or constantsModule.ALLOWED_SKINNING_TRANSFER_JOINT_NAMES[v] then
-				p0:fail(errorSourceStringsModule.Keys.UnallowedFacsJoints, { jointName = v })
+				p1:fail(errorSourceStringsModule.Keys.UnallowedFacsJoints, { jointName = v })
 			end
 		end
 	end

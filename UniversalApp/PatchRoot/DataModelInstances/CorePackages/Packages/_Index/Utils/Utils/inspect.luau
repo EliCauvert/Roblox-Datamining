@@ -15,82 +15,82 @@ local getObjectTag = nil
 local graphQLError = require(parent.GraphQL).GraphQLError
 local isAggregateError = require(script.Parent.AggregateError).isAggregateError
 
-function t.inspect(p0)
+function t.inspect(p1)
 	-- upvalues: formatValue (write)
-	return formatValue(p0, {})
+	return formatValue(p1, {})
 end
 
 formatValue = function(p1, p2)
 	-- upvalues: boolean (ref), formatObjectValue (write)
-	local var9 = typeof(p1)
+	local var1 = typeof(p1)
 	
-	if var9 == "string" then
+	if var1 == "string" then
 		return "\"" .. p1 .. "\""
-	elseif var9 == "function" then
+	elseif var1 == "function" then
 		local debugInfo = debug.info(p1, "n")
 		
 		return if boolean.toJSBoolean(debugInfo) then ("[function %s]"):format(debugInfo) else "[function]"
 	end
-	return if var9 == "table" then formatObjectValue(p1, p2) else tostring(p1)
+	return if var1 == "table" then formatObjectValue(p1, p2) else tostring(p1)
 end
 
-local function formatError(p3)
+local function formatError(p1)
 	-- upvalues: instanceof (ref), graphQLError (ref)
-	return if instanceof(p3, graphQLError) then tostring(p3) else ("%s: %s;\n %s"):format(tostring(p3.name), tostring(p3.message), tostring(p3.stack))
+	return if instanceof(p1, graphQLError) then tostring(p1) else ("%s: %s;\n %s"):format(tostring(p1.name), tostring(p1.message), tostring(p1.stack))
 end
 
-formatObjectValue = function(p4, p5)
+formatObjectValue = function(p1, p2)
 	-- upvalues: instanceof (ref), error (ref), isAggregateError (ref), graphQLError (ref), formatArray (write), formatError (ref), boolean (ref), array (ref), isJSONable (write), formatValue (write), formatObject (write)
-	if p4 == nil then
+	if p1 == nil then
 		return "null"
-	elseif instanceof(p4, error) then
-		return if isAggregateError(p4) then (if instanceof(p4, graphQLError) then tostring(p4) else ("%s: %s;\n %s"):format(tostring(p4.name), tostring(p4.message), tostring(p4.stack))) .. "\n" .. formatArray(p4.errors, p5) else formatError(p4)
-	elseif boolean.toJSBoolean(array.includes(p5, p4)) then
+	elseif instanceof(p1, error) then
+		return if isAggregateError(p1) then (if instanceof(p1, graphQLError) then tostring(p1) else ("%s: %s;\n %s"):format(tostring(p1.name), tostring(p1.message), tostring(p1.stack))) .. "\n" .. formatArray(p1.errors, p2) else formatError(p1)
+	elseif boolean.toJSBoolean(array.includes(p2, p1)) then
 		return "[Circular]"
 	end
-	local var11 = array.concat({}, p5, { p4 })
+	local var1 = array.concat({}, p2, { p1 })
 	
-	if boolean.toJSBoolean(isJSONable(p4)) then
-		local var12 = p4:toJSON()
+	if boolean.toJSBoolean(isJSONable(p1)) then
+		local var2 = p1:toJSON()
 		
-		if var12 == p4 then
+		if var2 == p1 then
 		end
-		return if typeof(var12) == "string" then var12 else formatValue(var12, var11)
+		return if typeof(var2) == "string" then var2 else formatValue(var2, var1)
 	else
-		return if boolean.toJSBoolean(array.isArray(p4)) then formatArray(p4, var11) else formatObject(p4, var11)
+		return if boolean.toJSBoolean(array.isArray(p1)) then formatArray(p1, var1) else formatObject(p1, var1)
 	end
 end
 
-isJSONable = function(p6)
-	return typeof(p6.toJSON) == "function"
+isJSONable = function(p1)
+	return typeof(p1.toJSON) == "function"
 end
 
-formatObject = function(p7, p8)
+formatObject = function(p1, p2)
 	-- upvalues: object (ref), getObjectTag (write), array (ref), formatValue (write)
-	local var13 = object.entries(p7)
+	local var1 = object.entries(p1)
 	
-	return if #var13 == 0 then "{}" elseif #p8 > 3 then "[" .. tostring(getObjectTag(p7)) .. "]" else "{ " .. tostring(array.join(array.map(var13, function(p9)
-		-- upvalues: formatValue (copy), p8 (ref)
-		local unpacked, unpacked_1 = table.unpack(p9, 1, 2)
+	return if #var1 == 0 then "{}" elseif #p2 > 3 then "[" .. tostring(getObjectTag(p1)) .. "]" else "{ " .. tostring(array.join(array.map(var1, function(p3)
+		-- upvalues: formatValue (copy), p2 (ref)
+		local unpacked, unpacked_1 = table.unpack(p3, 1, 2)
 		
-		return tostring(unpacked) .. ": " .. tostring(formatValue(unpacked_1, p8))
+		return tostring(unpacked) .. ": " .. tostring(formatValue(unpacked_1, p2))
 	end), ", ")) .. " }"
 end
 
-formatArray = function(p10, p11)
+formatArray = function(p1, p2)
 	-- upvalues: formatValue (write), array (ref)
-	if #p10 == 0 then
+	if #p1 == 0 then
 		return "[]"
-	elseif #p11 > 3 then
+	elseif #p2 > 3 then
 		return "[Array]"
 	end
-	local p10Count = #p10
-	local p10Count_1 = #p10
+	local p10Count = #p1
+	local p10Count_1 = #p1
 	local t = {}
-	local var19 = 1
-	while var19 <= p10Count do
-		table.insert(t, formatValue(p10[var19], p11))
-		var19 += 1
+	local var1 = 1
+	while var1 <= p10Count do
+		table.insert(t, formatValue(p1[var1], p2))
+		var1 += 1
 	end
 	if p10Count_1 == 1 then
 		table.insert(t, "... 1 more item")

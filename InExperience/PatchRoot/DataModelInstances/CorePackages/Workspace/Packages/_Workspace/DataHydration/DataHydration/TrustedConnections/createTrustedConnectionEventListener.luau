@@ -2,7 +2,7 @@
 local playersService = game:GetService("Players")
 local dataHydration = script:FindFirstAncestor("DataHydration")
 local parent = dataHydration.Parent
-local var3 = require(parent.RealtimeDelivery).RobloxEventReceiver.new(notificationService)
+local var1 = require(parent.RealtimeDelivery).RobloxEventReceiver.new(notificationService)
 local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
 local trustedConnectionStatusModule = require(dataHydration.TrustedConnections.Enums.TrustedConnectionStatus)
 local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
@@ -17,55 +17,55 @@ local t = {
 	}
 }
 
-return function(p0)
-	-- upvalues: getLocalPlayerUserId (ref), playersService (ref), var3 (ref), t (ref), trustedConnectionStatusModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref)
-	local var6 = getLocalPlayerUserId()
-	local var7 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-		-- upvalues: getLocalPlayerUserId (copy), var6 (write)
-		local var9 = getLocalPlayerUserId()
+return function(p1)
+	-- upvalues: getLocalPlayerUserId (ref), playersService (ref), var1 (ref), t (ref), trustedConnectionStatusModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref)
+	local var2 = getLocalPlayerUserId()
+	local var3 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
+		-- upvalues: getLocalPlayerUserId (copy), var2 (write)
+		local var4 = getLocalPlayerUserId()
 		
-		if var9 ~= var6 then
-			var6 = var9
+		if var4 ~= var2 then
+			var2 = var4
 		end
 	end)
-	local namespace = var3:observeEvent(t.Namespace, function(p1)
-		-- upvalues: var6 (write), t (copy), p0 (ref), trustedConnectionStatusModule (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy)
-		if not p1.Actor or not p1.Target or not var6 then return end
-		local var10 = tostring(p1.Actor)
-		local var11 = tostring(p1.Target)
-		local var12 = tostring(var6)
+	local namespace = var1:observeEvent(t.Namespace, function(p2)
+		-- upvalues: var2 (write), t (copy), p1 (ref), trustedConnectionStatusModule (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy)
+		if not p2.Actor or not p2.Target or not var2 then return end
+		local var4 = tostring(p2.Actor)
+		local var5 = tostring(p2.Target)
+		local var6 = tostring(var2)
 		
-		if p1.EventType == t.EventTypes.TrustedConnectionCreated then
-			p0(if var10 == var12 then var11 else var10, trustedConnectionStatusModule.TrustedFriends)
+		if p2.EventType == t.EventTypes.TrustedConnectionCreated then
+			p1(if var4 == var6 then var5 else var4, trustedConnectionStatusModule.TrustedFriends)
 		end
-		if p1.EventType == t.EventTypes.TrustedConnectionDeleted then
-			if var12 ~= var10 then
-				p0(var10, trustedConnectionStatusModule.RequestSent)
+		if p2.EventType == t.EventTypes.TrustedConnectionDeleted then
+			if var6 ~= var4 then
+				p1(var4, trustedConnectionStatusModule.RequestSent)
 			elseif fFlagAddFriendsPageTrustedFriendRequestSection then
-				p0(var11, trustedConnectionStatusModule.RequestIgnored)
+				p1(var5, trustedConnectionStatusModule.RequestIgnored)
 			else
-				p0(var11, trustedConnectionStatusModule.RequestReceived)
+				p1(var5, trustedConnectionStatusModule.RequestReceived)
 			end
 		end
-		if p1.EventType == t.EventTypes.TrustedConnectionRequestSent then
-			if var12 == var10 then
-				p0(var11, trustedConnectionStatusModule.RequestSent)
+		if p2.EventType == t.EventTypes.TrustedConnectionRequestSent then
+			if var6 == var4 then
+				p1(var5, trustedConnectionStatusModule.RequestSent)
 				
 				return
 			end
-			p0(var10, trustedConnectionStatusModule.RequestReceived)
+			p1(var4, trustedConnectionStatusModule.RequestReceived)
 		end
 	end)
 	
 	return function()
-		-- upvalues: var7 (write), namespace (ref)
-		if var7 then
-			var7:Disconnect()
-			var7 = nil
+		-- upvalues: var3 (write), namespace (ref)
+		if var3 then
+			var3:Disconnect()
+			var3 = nil
 		end
 		if namespace then
 			namespace:disconnect()
-			var7 = nil
+			var3 = nil
 		end
 	end
 end

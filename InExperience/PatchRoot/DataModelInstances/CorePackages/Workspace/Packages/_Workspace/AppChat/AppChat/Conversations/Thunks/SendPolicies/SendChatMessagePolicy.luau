@@ -19,56 +19,56 @@ local _ = require(appChat.Models.ConversationChannels)
 local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
 local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppChatMessageTTIMilestones)
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local var15 = 0
+local var1 = 0
 local name = require(appChat.Logger):new(script.Name)
 
 local function _()
-	-- upvalues: var15 (write)
-	var15 += 1
+	-- upvalues: var1 (write)
+	var1 += 1
 	
-	return var15
+	return var1
 end
 
 local tbl = setmetatable({}, sendMessagePolicyModule)
 tbl.__index = tbl
 
-function tbl.new(p0, p1, p2)
+function tbl.new(p1, p2, p3)
 	-- upvalues: messageModelModule (ref)
 	return setmetatable({
 		messageSendingId = messageModelModule.newSendingId(),
-		conversationId = p1,
-		replyingToMessage = p2
-	}, p0)
+		conversationId = p2,
+		replyingToMessage = p3
+	}, p1)
 end
 
-function tbl:onBeforeSendingMessage(p3)
-	-- upvalues: name (ref), getDeepValue2Module (ref), messageModelModule (ref), immutable (ref), var15 (write), dateTime (ref), sendingMessageModule (ref)
+function tbl:onBeforeSendingMessage(p1)
+	-- upvalues: name (ref), getDeepValue2Module (ref), messageModelModule (ref), immutable (ref), var1 (write), dateTime (ref), sendingMessageModule (ref)
 	name:trace("onBeforeSendingMessage conversationId: {} messageSendingId: {}, replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	local _ = nil
-	local var18 = getDeepValue2Module(p3:getState(), `ChatAppReducer.Conversations.{self.conversationId}`)
-	local moderationType = var18 and var18.moderationType
+	local var2 = getDeepValue2Module(p1:getState(), `ChatAppReducer.Conversations.{self.conversationId}`)
+	local moderationType = var2 and var2.moderationType
 	local newSending = messageModelModule.newSending
 	local joinDictionaries = immutable.JoinDictionaries
 	local t = {
 		id = self.messageSendingId,
-		order = var15,
+		order = var1,
 		conversationId = self.conversationId,
 		repliesTo = self.replyingToMessage,
 		sent = dateTime.now(),
 		moderationType = moderationType
 	}
-	var15 += 1
+	var1 += 1
 	newSending = newSending(joinDictionaries(t, self:sendingMessagePayload()))
 	self.sendingMessageStableKey = newSending.stableKey
 	assert(newSending, "Failed to create sending message placeholder")
-	p3:dispatch(sendingMessageModule(self.conversationId, newSending))
+	p1:dispatch(sendingMessageModule(self.conversationId, newSending))
 end
 
 function tbl.sendingMessagePayload(_)
 	error("Override me")
 end
 
-function tbl:onSuccess(p4, p5)
+function tbl:onSuccess(p1, p2)
 	-- upvalues: name (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), sentMessageModule (ref), receivedChatResponseModule (ref)
 	name:debug("Message sent successfully. conversationId: {} messageSendingId: {} replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	
@@ -81,15 +81,15 @@ function tbl:onSuccess(p4, p5)
 			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendResponseToFinalRender, { conversationId = self.conversationId })
 		end
 	end
-	p4:dispatch(sentMessageModule(self.conversationId, self.messageSendingId))
-	p4:dispatch(receivedChatResponseModule(self.conversationId, p5.responseBody, self.sendingMessageStableKey))
+	p1:dispatch(sentMessageModule(self.conversationId, self.messageSendingId))
+	p1:dispatch(receivedChatResponseModule(self.conversationId, p2.responseBody, self.sendingMessageStableKey))
 	
-	return p5
+	return p2
 end
 
-function tbl:onFailure(p6, p7)
+function tbl:onFailure(p1, p2)
 	-- upvalues: name (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), statusCodes (ref), receivedChannelsMigrationConflictModule (ref), navigateIntoChatModule (ref), enumScreensModule (ref), messageFailedToSendModule (ref), responseStatus (ref), messageModeratedModule (ref)
-	name:error("Failed to send message. conversationId: {}, messageSendingId: {}, responseCode: {}", self.conversationId, self.messageSendingId, p7.responseCode)
+	name:error("Failed to send message. conversationId: {}, messageSendingId: {}, responseCode: {}", self.conversationId, self.messageSendingId, p2.responseCode)
 	
 	if fFlagAppChatPerfTrackingModule then
 		if fFlagAppChatMessageTTIMilestonesModule then
@@ -100,44 +100,44 @@ function tbl:onFailure(p6, p7)
 			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendResponseToFinalRender, { conversationId = self.conversationId })
 		end
 	end
-	local var23 = not p7
+	local var2 = not p2
 	
-	if not var23 then
-		if p7.responseCode ~= nil then
-			var23 = true
+	if not var2 then
+		if p2.responseCode ~= nil then
+			var2 = true
 			
-			if p7.responseCode == statusCodes.OK then
-				if p7.StatusCode ~= nil then
-					var23 = if p7.StatusCode == statusCodes.OK then not p7.responseBody or (not p7.responseBody.messages or #p7.responseBody.messages == 0) else true
+			if p2.responseCode == statusCodes.OK then
+				if p2.StatusCode ~= nil then
+					var2 = if p2.StatusCode == statusCodes.OK then not p2.responseBody or (not p2.responseBody.messages or #p2.responseBody.messages == 0) else true
 				end
 			end
 		end
 	end
-	if var23 then
-		if p7.StatusCode == statusCodes.CONFLICT then
+	if var2 then
+		if p2.StatusCode == statusCodes.CONFLICT then
 			name:error("Message sent conflicting system (409). Reloading messages...")
-			p6:dispatch(receivedChannelsMigrationConflictModule())
-			p6:dispatch(navigateIntoChatModule({
+			p1:dispatch(receivedChannelsMigrationConflictModule())
+			p1:dispatch(navigateIntoChatModule({
 				screen = enumScreensModule.ChatLanding,
 				params = { key = tostring(os.clock()) }
 			}))
 			
-			return p7
+			return p2
 		end
-		p6:dispatch(messageFailedToSendModule(self.conversationId, self.messageSendingId))
+		p1:dispatch(messageFailedToSendModule(self.conversationId, self.messageSendingId))
 		name:error("Message could not be sent, no response body or no messages in response body")
 		
-		return p7
-	elseif p7.responseBody.messages[1].status and p7.responseBody.messages[1].status == responseStatus.MODERATED then
-		p6:dispatch(messageModeratedModule(self.conversationId, self.messageSendingId))
+		return p2
+	elseif p2.responseBody.messages[1].status and p2.responseBody.messages[1].status == responseStatus.MODERATED then
+		p1:dispatch(messageModeratedModule(self.conversationId, self.messageSendingId))
 		name:error("Message was moderated.")
 		
-		return p7
+		return p2
 	end
-	p6:dispatch(messageFailedToSendModule(self.conversationId, self.messageSendingId))
+	p1:dispatch(messageFailedToSendModule(self.conversationId, self.messageSendingId))
 	name:error("Message could not be sent, no response body or no messages in response body")
 	
-	return p7
+	return p2
 end
 
 return tbl

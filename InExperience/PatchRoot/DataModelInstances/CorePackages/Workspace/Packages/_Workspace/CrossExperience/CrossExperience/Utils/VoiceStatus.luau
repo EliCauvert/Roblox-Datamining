@@ -18,9 +18,9 @@ local t_1 = {
 	[VOICE_STATUS.ERROR_BACKGROUND_DM_LOAD_LOCALPLAYER_TIMEOUT] = true
 }
 
-function isVoiceRetriableErrorByGameJoin(p0)
+function isVoiceRetriableErrorByGameJoin(p1)
 	-- upvalues: t_1 (ref)
-	return if p0 == nil then false else t_1[p0] == true
+	return if p1 == nil then false else t_1[p1] == true
 end
 
 function isMicPermissionsError(p1)
@@ -28,13 +28,13 @@ function isMicPermissionsError(p1)
 	return if p1 == nil then false else p1 == VOICE_STATUS.ERROR_VOICE_MIC_REJECTED
 end
 
-function isVoiceRetriableErrorByVoiceJoin(p2)
+function isVoiceRetriableErrorByVoiceJoin(p1)
 	-- upvalues: t (ref)
-	return if p2 == nil then false else t[p2] == true
+	return if p1 == nil then false else t[p1] == true
 end
 
-function isVoiceRetriableError(p3)
-	return isVoiceRetriableErrorByGameJoin(p3) or isVoiceRetriableErrorByVoiceJoin(p3)
+function isVoiceRetriableError(p1)
+	return isVoiceRetriableErrorByGameJoin(p1) or isVoiceRetriableErrorByVoiceJoin(p1)
 end
 
 return {

@@ -6,8 +6,8 @@ local constantsModule = require(profileQRCode.Common.Constants)
 
 return function()
 	-- upvalues: useSelector (ref), getDeepValue (ref), constantsModule (ref)
-	return useSelector(function(p0)
+	return useSelector(function(p1)
 		-- upvalues: getDeepValue (copy), constantsModule (copy)
-		return getDeepValue(p0, constantsModule.RODUX_KEY .. ".ShareUrl.shortUrl")
+		return getDeepValue(p1, constantsModule.RODUX_KEY .. ".ShareUrl.shortUrl")
 	end)
 end

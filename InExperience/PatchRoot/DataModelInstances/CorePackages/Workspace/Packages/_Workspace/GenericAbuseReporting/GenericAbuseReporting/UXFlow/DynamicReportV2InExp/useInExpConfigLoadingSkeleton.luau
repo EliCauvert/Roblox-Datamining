@@ -1,13 +1,13 @@
 ﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	local var1 = false
 	local var2 = false
-	local delayedThread = task.delay(p0, function()
-		-- upvalues: var1 (write), var2 (write), p1 (ref)
+	local delayedThread = task.delay(p1, function()
+		-- upvalues: var1 (write), var2 (write), p2 (ref)
 		if not var1 then
 			var2 = true
-			p1()
+			p2()
 		end
 	end)
 	
@@ -24,20 +24,20 @@ end
 return {
 	CONFIG_LOADING_DELAY_SECONDS = 0.35,
 	CONFIG_LOADING_MINIMUM_DISPLAY_SECONDS = 0.5,
-	useInExpConfigLoadingSkeleton = function(p2, p3)
+	useInExpConfigLoadingSkeleton = function(p1, p2)
 		-- upvalues: reactModule (ref)
 		local idle, idle_1 = reactModule.useState("idle")
-		local var6 = reactModule.useRef(p2)
-		local var7 = reactModule.useRef(p3)
-		var6.current = p2
-		var7.current = p3
+		local var1 = reactModule.useRef(p1)
+		local var2 = reactModule.useRef(p2)
+		var1.current = p1
+		var2.current = p2
 		reactModule.useEffect(function()
-			-- upvalues: p2 (ref), idle_1 (ref), p3 (ref), idle (ref)
-			if not p2 then
+			-- upvalues: p1 (ref), idle_1 (ref), p2 (ref), idle (ref)
+			if not p1 then
 				idle_1("idle")
 				
 				return
-			elseif p3 then
+			elseif p2 then
 				if idle == "idle" then
 					idle_1("waiting")
 					
@@ -46,14 +46,14 @@ return {
 			elseif idle == "waiting" or idle == "visible" then
 				idle_1("idle")
 			end
-		end, { p2, p3, idle })
+		end, { p1, p2, idle })
 		reactModule.useEffect(function()
-			-- upvalues: idle (ref), var6 (ref), var7 (ref), idle_1 (ref)
-			local var9, var10
+			-- upvalues: idle (ref), var1 (ref), var2 (ref), idle_1 (ref)
+			local var3, var4
 			if idle == "waiting" then
-				local var8 = function()
-					-- upvalues: var6 (copy), var7 (copy), idle_1 (copy)
-					if var6.current and var7.current then
+				local var5 = function()
+					-- upvalues: var1 (copy), var2 (copy), idle_1 (copy)
+					if var1.current and var2.current then
 						idle_1("minimum")
 						
 						return
@@ -61,28 +61,28 @@ return {
 					idle_1("idle")
 				end
 				
-				var9 = false
-				var10 = false
+				var3 = false
+				var4 = false
 				local delayedThread = task.delay(0.35, function()
-					-- upvalues: var9 (write), var10 (write), var8 (ref)
-					if not var9 then
+					-- upvalues: var3 (write), var4 (write), var5 (ref)
+					if not var3 then
 						var2 = true
-						var8()
+						var5()
 					end
 				end)
 				
 				return function()
-					-- upvalues: var9 (write), var10 (write), delayedThread (ref)
+					-- upvalues: var3 (write), var4 (write), delayedThread (ref)
 					var1 = true
 					
-					if not var10 then
+					if not var4 then
 						task.cancel(delayedThread)
 					end
 				end
 			elseif idle == "minimum" then
-				local var12 = function()
-					-- upvalues: var6 (copy), var7 (copy), idle_1 (copy)
-					if var6.current and var7.current then
+				local var6 = function()
+					-- upvalues: var1 (copy), var2 (copy), idle_1 (copy)
+					if var1.current and var2.current then
 						idle_1("visible")
 						
 						return
@@ -90,21 +90,21 @@ return {
 					idle_1("idle")
 				end
 				
-				var9 = false
-				var10 = false
+				var3 = false
+				var4 = false
 				local delayedThread = task.delay(0.5, function()
-					-- upvalues: var9 (write), var10 (write), var12 (ref)
-					if not var9 then
+					-- upvalues: var3 (write), var4 (write), var6 (ref)
+					if not var3 then
 						var2 = true
-						var12()
+						var6()
 					end
 				end)
 				
 				return function()
-					-- upvalues: var9 (write), var10 (write), delayedThread (ref)
+					-- upvalues: var3 (write), var4 (write), delayedThread (ref)
 					var1 = true
 					
-					if not var10 then
+					if not var4 then
 						task.cancel(delayedThread)
 					end
 				end
@@ -112,6 +112,6 @@ return {
 			return nil
 		end, { idle })
 		
-		return p2 and (if idle ~= "minimum" then idle == "visible" else true)
+		return p1 and (if idle ~= "minimum" then idle == "visible" else true)
 	end
 }

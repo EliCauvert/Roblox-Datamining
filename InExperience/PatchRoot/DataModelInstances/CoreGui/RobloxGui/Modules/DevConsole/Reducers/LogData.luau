@@ -1,7 +1,7 @@
 ﻿local roduxModule = require(game:GetService("CorePackages").Packages.Rodux)
 local immutableModule = require(script.Parent.Parent.Immutable)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: roduxModule (ref), immutableModule (ref)
 	return roduxModule.createReducer({
 		clientSearchTerm = "",
@@ -9,59 +9,59 @@ return function(p0, p1)
 		clientTypeFilters = {},
 		serverTypeFilters = {}
 	}, {
-		ClientLogAppendMessage = function(p2, p3)
+		ClientLogAppendMessage = function(p3, p4)
 			-- upvalues: immutableModule (copy)
-			return immutableModule.JoinDictionaries(p2, {
-				clientData = immutableModule.Append(p2.clientData, p3.newMessage)
+			return immutableModule.JoinDictionaries(p3, {
+				clientData = immutableModule.Append(p3.clientData, p4.newMessage)
 			})
 		end,
-		ServerLogAppendMessage = function(p4, p5)
+		ServerLogAppendMessage = function(p3, p4)
 			-- upvalues: immutableModule (copy)
-			return immutableModule.JoinDictionaries(p4, {
-				serverData = immutableModule.Append(p4.serverData, p5.newMessage)
+			return immutableModule.JoinDictionaries(p3, {
+				serverData = immutableModule.Append(p3.serverData, p4.newMessage)
 			})
 		end,
-		ClientLogAppendFilteredMessage = function(p6, p7)
+		ClientLogAppendFilteredMessage = function(p3, p4)
 			-- upvalues: immutableModule (copy)
-			return immutableModule.JoinDictionaries(p6, {
-				clientData = immutableModule.Append(p6.clientData, p7.newMessage),
-				clientDataFiltered = immutableModule.Append(p6.clientDataFiltered, p7.newMessage)
+			return immutableModule.JoinDictionaries(p3, {
+				clientData = immutableModule.Append(p3.clientData, p4.newMessage),
+				clientDataFiltered = immutableModule.Append(p3.clientDataFiltered, p4.newMessage)
 			})
 		end,
-		ServerLogAppendFilteredMessage = function(p8, p9)
+		ServerLogAppendFilteredMessage = function(p3, p4)
 			-- upvalues: immutableModule (copy)
-			return immutableModule.JoinDictionaries(p8, {
-				serverData = immutableModule.Append(p8.serverData, p9.newMessage),
-				serverDataFiltered = immutableModule.Append(p8.serverDataFiltered, p9.newMessage)
+			return immutableModule.JoinDictionaries(p3, {
+				serverData = immutableModule.Append(p3.serverData, p4.newMessage),
+				serverDataFiltered = immutableModule.Append(p3.serverDataFiltered, p4.newMessage)
 			})
 		end,
-		ClientLogSetData = function(value, p10)
+		ClientLogSetData = function(value, p3)
 			-- upvalues: immutableModule (copy)
 			return immutableModule.JoinDictionaries(value, {
-				clientData = p10.newData,
-				clientDataFiltered = p10.newDataFiltered
+				clientData = p3.newData,
+				clientDataFiltered = p3.newDataFiltered
 			})
 		end,
-		ServerLogSetData = function(value, p11)
+		ServerLogSetData = function(value, p3)
 			-- upvalues: immutableModule (copy)
 			return immutableModule.JoinDictionaries(value, {
-				serverData = p11.newData,
-				serverDataFiltered = p11.newDataFiltered
+				serverData = p3.newData,
+				serverDataFiltered = p3.newDataFiltered
 			})
 		end,
-		ClientLogUpdateSearchFilter = function(p12, p13)
+		ClientLogUpdateSearchFilter = function(p3, p4)
 			-- upvalues: immutableModule (copy)
-			return immutableModule.JoinDictionaries(p12, {
-				clientSearchTerm = p13.searchTerm,
-				clientTypeFilters = immutableModule.JoinDictionaries(p12.clientTypeFilters, p13.filterTypes)
+			return immutableModule.JoinDictionaries(p3, {
+				clientSearchTerm = p4.searchTerm,
+				clientTypeFilters = immutableModule.JoinDictionaries(p3.clientTypeFilters, p4.filterTypes)
 			})
 		end,
-		ServerLogUpdateSearchFilter = function(p14, p15)
+		ServerLogUpdateSearchFilter = function(p3, p4)
 			-- upvalues: immutableModule (copy)
-			return immutableModule.JoinDictionaries(p14, {
-				serverSearchTerm = p15.searchTerm,
-				serverTypeFilters = immutableModule.JoinDictionaries(p14.serverTypeFilters, p15.filterTypes)
+			return immutableModule.JoinDictionaries(p3, {
+				serverSearchTerm = p4.searchTerm,
+				serverTypeFilters = immutableModule.JoinDictionaries(p3.serverTypeFilters, p4.filterTypes)
 			})
 		end
-	})(p0, p1)
+	})(p1, p2)
 end

@@ -1,23 +1,23 @@
 ﻿local useEffect = require(script:FindFirstAncestor("ReactSceneUnderstanding").Parent.React).useEffect
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: useEffect (ref)
 	useEffect(function()
-		-- upvalues: value (ref), p0 (ref)
-		local var0 = true
+		-- upvalues: value (ref), p1 (ref)
+		local var1 = true
 		task.spawn(function()
-			-- upvalues: var0 (write), value (copy), p0 (copy)
-			while var0 do
+			-- upvalues: var1 (write), value (copy), p1 (copy)
+			while var1 do
 				task.wait(value)
 				
-				if not var0 then break end
-				p0()
+				if not var1 then break end
+				p1()
 			end
 		end)
 		
 		return function()
-			-- upvalues: var0 (write)
-			var0 = false
+			-- upvalues: var1 (write)
+			var1 = false
 		end
-	end, { value, p0 })
+	end, { value, p1 })
 end

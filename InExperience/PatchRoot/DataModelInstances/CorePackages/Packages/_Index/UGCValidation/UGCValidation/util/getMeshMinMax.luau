@@ -4,48 +4,48 @@ local _ = require(parent.util.Types)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 local calculateMinMaxModule = require(parent.util.calculateMinMax)
 
-local function getVerts(p0, p1, p2)
+local function getVerts(p1, p2, p3)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref)
-	local var5, var6 = pcallDeferredModule(function()
-		-- upvalues: UGCValidationService (copy), p0 (ref)
-		return UGCValidationService:GetEditableMeshVerts(p0.editableMesh)
-	end, p2)
+	local var1, var2 = pcallDeferredModule(function()
+		-- upvalues: UGCValidationService (copy), p1 (ref)
+		return UGCValidationService:GetEditableMeshVerts(p1.editableMesh)
+	end, p3)
 	
-	if var5 then
-		return true, nil, var6
+	if var1 then
+		return true, nil, var2
 	end
 	local text = "Failed to read mesh: " .. p0.fullName
 	
-	if p1 then
+	if p2 then
 		error(text)
 	end
 	return false, { text }
 end
 
-local function getBoundsInfo(p3, p4)
+local function getBoundsInfo(p1, p2)
 	-- upvalues: calculateMinMaxModule (ref)
-	local var8 = nil
-	local var9 = nil
+	local var1 = nil
+	local var2 = nil
 	
-	for i, v in pairs(p3) do
-		local var10 = if p4 then v * p4 else v
-		local var11, var12 = calculateMinMaxModule(var8, var9, var10, var10)
-		var8 = var11
-		var9 = var12
+	for i, v in pairs(p1) do
+		local var3 = if p2 then v * p2 else v
+		local var4, var5 = calculateMinMaxModule(var1, var2, var3, var3)
+		var1 = var4
+		var2 = var5
 	end
-	return var8, var9
+	return var1, var2
 end
 
 return function(a, b)
 	-- upvalues: getVerts (ref), getBoundsInfo (ref)
-	local var13, var14, var15 = getVerts(a, b.isServer, b)
+	local var6, var7, var8 = getVerts(a, b.isServer, b)
 	
-	if not var13 then
-		return var13, var14
-	elseif var15 and #var15 ~= 0 then
-		local var16, var17 = getBoundsInfo(var15, a.scale)
+	if not var6 then
+		return var6, var7
+	elseif var8 and #var8 ~= 0 then
+		local var9, var10 = getBoundsInfo(var8, a.scale)
 		
-		return true, nil, var16, var17
+		return true, nil, var9, var10
 	end
 	return false, { "Mesh: " .. a.fullName .. " contains no verts" }
 end

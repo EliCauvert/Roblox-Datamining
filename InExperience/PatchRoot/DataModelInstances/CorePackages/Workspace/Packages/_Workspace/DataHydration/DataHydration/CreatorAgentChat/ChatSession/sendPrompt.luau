@@ -2,12 +2,12 @@
 local _ = require(script.Parent.Parent.types)
 
 return {
-	createSendPrompt = function(p0)
+	createSendPrompt = function(p1)
 		-- upvalues: signalsModule (ref)
 		return {
-			sendPrompt = function(p1)
-				-- upvalues: p0 (ref), signalsModule (copy)
-				local var1 = p0.incrementAssistantTurnSequence()
+			sendPrompt = function(p2)
+				-- upvalues: p1 (ref), signalsModule (copy)
+				local var1 = p1.incrementAssistantTurnSequence()
 				local var2, var3 = signalsModule.createSignal(nil)
 				local var4, var5 = signalsModule.createSignal(nil)
 				local var6 = false
@@ -18,12 +18,12 @@ return {
 				local var11 = nil
 				local var12 = nil
 				
-				local function fireCompleted(p2)
-					-- upvalues: var7 (write), var1 (ref), p0 (copy), var12 (write), var11 (write), var10 (write), p1 (ref)
+				local function fireCompleted(p3)
+					-- upvalues: var7 (write), var1 (ref), p1 (copy), var12 (write), var11 (write), var10 (write), p2 (ref)
 					if var7 then return end
-					if var1 ~= p0.getAssistantTurnSequence() then return end
+					if var1 ~= p1.getAssistantTurnSequence() then return end
 					var7 = true
-					p0.setActiveStop(nil)
+					p1.setActiveStop(nil)
 					
 					if var12 ~= nil then
 						var12()
@@ -34,40 +34,40 @@ return {
 						var11 = nil
 					end
 					if var10 ~= nil then
-						p0.noteTurnSequenceIds(var10)
+						p1.noteTurnSequenceIds(var10)
 					end
-					if p1.onCompleted ~= nil then
-						p1.onCompleted(p2)
+					if p2.onCompleted ~= nil then
+						p2.onCompleted(p3)
 					end
 				end
 				
 				local function start()
-					-- upvalues: var6 (write), var9 (write), fireCompleted (ref), p0 (copy), var5 (ref), p1 (ref), var10 (write), var3 (ref), var11 (write), var12 (write), signalsModule (copy), var8 (write)
+					-- upvalues: var6 (write), var9 (write), fireCompleted (ref), p1 (copy), var5 (ref), p2 (ref), var10 (write), var3 (ref), var11 (write), var12 (write), signalsModule (copy), var8 (write)
 					if var6 then
 						return
 					end
 					var6 = true
 					task.spawn(function()
-						-- upvalues: var9 (copy), fireCompleted (copy), p0 (copy), var5 (copy), p1 (copy), var10 (copy), var3 (copy), var11 (copy), var12 (copy), signalsModule (copy), var8 (copy)
+						-- upvalues: var9 (copy), fireCompleted (copy), p1 (copy), var5 (copy), p2 (copy), var10 (copy), var3 (copy), var11 (copy), var12 (copy), signalsModule (copy), var8 (copy)
 						if var9 then
 							fireCompleted(nil)
 							
 							return
 						end
-						local var16, var17 = p0.ensureInitialized()
+						local var13, var14 = p1.ensureInitialized()
 						
-						if not var16 then
-							var5({ stage = "initialize", errorCode = var17 })
+						if not var13 then
+							var5({ stage = "initialize", errorCode = var14 })
 							fireCompleted(nil)
 							
 							return
 						end
 						local _ = nil
 						local _ = nil
-						local var18, var19 = p0.ensureCasSession()
+						local var15, var16 = p1.ensureCasSession()
 						
-						if var18 == nil then
-							var5(var19 or { stage = "session_new" })
+						if var15 == nil then
+							var5(var16 or { stage = "session_new" })
 							fireCompleted(nil)
 							
 							return
@@ -76,35 +76,35 @@ return {
 							
 							return
 						end
-						var18 = p0.sessionPrompt({
-							sessionId = var18,
-							prompt = p1.prompt,
-							_meta = p1.promptMeta
+						var15 = p1.sessionPrompt({
+							sessionId = var15,
+							prompt = p2.prompt,
+							_meta = p2.promptMeta
 						})
-						var10 = var18
-						var3(var18)
+						var10 = var15
+						var3(var15)
 						
 						if var9 then
-							var18.cancel()
+							var15.cancel()
 						end
-						var11 = p0.startPollingTurnFromHistory(var18, var18, {
-							rtnIdleFallbackSeconds = p1.rtnIdleFallbackSeconds,
-							rtnSequenceGapFallbackSeconds = p1.rtnSequenceGapFallbackSeconds,
-							pollMinIntervalSeconds = p1.pollMinIntervalSeconds,
-							pollMaxIntervalSeconds = p1.pollMaxIntervalSeconds,
-							afterSequenceId = p0.getLatestObservedHistorySequenceId(),
-							onDroppedChatMessage = p1.onDroppedChatMessage
+						var11 = p1.startPollingTurnFromHistory(var15, var15, {
+							rtnIdleFallbackSeconds = p2.rtnIdleFallbackSeconds,
+							rtnSequenceGapFallbackSeconds = p2.rtnSequenceGapFallbackSeconds,
+							pollMinIntervalSeconds = p2.pollMinIntervalSeconds,
+							pollMaxIntervalSeconds = p2.pollMaxIntervalSeconds,
+							afterSequenceId = p1.getLatestObservedHistorySequenceId(),
+							onDroppedChatMessage = p2.onDroppedChatMessage
 						})
 						var12 = signalsModule.createEffect(function(p3)
-							-- upvalues: var18 (ref), p1 (copy), var8 (copy), fireCompleted (copy)
-							local var20 = var18.state(p3)
+							-- upvalues: var15 (ref), p2 (copy), var8 (copy), fireCompleted (copy)
+							local var17 = var15.state(p3)
 							
-							if p1.onReceived ~= nil and not var8 and (var20.status == "streaming" or var20.status == "succeeded") then
+							if p2.onReceived ~= nil and not var8 and (var17.status == "streaming" or var17.status == "succeeded") then
 								var8 = true
-								p1.onReceived(var18.getTurnId())
+								p2.onReceived(var15.getTurnId())
 							end
-							if var20.isDone then
-								fireCompleted(var18.state(false))
+							if var17.isDone then
+								fireCompleted(var15.state(false))
 							end
 						end)
 					end)
@@ -130,7 +130,7 @@ return {
 					fireCompleted(nil)
 				end
 				
-				p0.setActiveStop(stop)
+				p1.setActiveStop(stop)
 				
 				return {
 					getTurnHandle = var2,

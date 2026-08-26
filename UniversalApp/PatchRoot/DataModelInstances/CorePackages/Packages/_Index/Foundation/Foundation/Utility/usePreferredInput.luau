@@ -4,22 +4,22 @@ local userInputService = require(foundation.Utility.Wrappers.Services).UserInput
 
 return function()
 	-- upvalues: reactModule (ref), userInputService (ref)
-	local var2, var3 = reactModule.useState(userInputService.PreferredInput)
+	local var1, var2 = reactModule.useState(userInputService.PreferredInput)
 	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var3 (ref)
-		local var4 = userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function()
-			-- upvalues: var3 (copy), userInputService (copy)
-			var3(userInputService.PreferredInput)
+		-- upvalues: userInputService (copy), var2 (ref)
+		local var3 = userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function()
+			-- upvalues: var2 (copy), userInputService (copy)
+			var2(userInputService.PreferredInput)
 		end)
-		var3(userInputService.PreferredInput)
+		var2(userInputService.PreferredInput)
 		
 		return function()
-			-- upvalues: var4 (ref)
-			if var4 then
-				var4:Disconnect()
+			-- upvalues: var3 (ref)
+			if var3 then
+				var3:Disconnect()
 			end
 		end
 	end, {})
 	
-	return var2
+	return var1
 end

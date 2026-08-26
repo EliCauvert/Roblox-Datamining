@@ -9,9 +9,9 @@ local UGCValidateLCCagingIncorrectUVThresholdBodyPart = game:DefineFastInt("UGCV
 return {
 	categories = { validationEnumsModule.UploadCategory.FULL_BODY },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityAvatar),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: constantsModule (ref), UGCValidateLCCagingIncorrectUVThresholdBodyPart (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
-		local measureCageUVAvatar = p1.aqsSummaryData.Measure_Cage_UV_Avatar
+		local measureCageUVAvatar = p2.aqsSummaryData.Measure_Cage_UV_Avatar
 		
 		if measureCageUVAvatar == nil then
 			error("Measure_Cage_UV_Avatar: AQS summary data is nil")
@@ -20,13 +20,13 @@ return {
 			if measureCageUVAvatar[v] == nil or measureCageUVAvatar[v].incorrect_uv_count == nil then
 				error("Measure_Cage_UV_Avatar: AQS summary missing required fields for cage " .. v)
 			elseif UGCValidateLCCagingIncorrectUVThresholdBodyPart < tonumber(measureCageUVAvatar[v].incorrect_uv_count) then
-				p0:fail(errorSourceStringsModule.Keys.MeasureCageUV, {
+				p1:fail(errorSourceStringsModule.Keys.MeasureCageUV, {
 					cage_name = v,
 					incorrect_uv_count = tonumber(measureCageUVAvatar[v].incorrect_uv_count)
 				})
 			end
 			if getFFlagUGCValidateAQScoreWarningsModule() and measureCageUVAvatar[v].score ~= nil and tonumber(measureCageUVAvatar[v].score) ~= 100 then
-				p0:warn(errorSourceStringsModule.Keys.AQSWarn_CageUV, {
+				p1:warn(errorSourceStringsModule.Keys.AQSWarn_CageUV, {
 					score = tostring(math.floor(tonumber(measureCageUVAvatar[v].score) or 0)),
 					cage_name = v,
 					incorrect_uv_count = measureCageUVAvatar[v].incorrect_uv_count or "0"

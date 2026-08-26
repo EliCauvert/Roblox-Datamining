@@ -22,26 +22,26 @@ local t = {
 	[promptStateModule.TransferProcessing] = { promptStateModule.TransferSuccess }
 }
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: t (ref)
-	for i, v in ipairs(t[p0]) do
-		if v == p1 then
+	for i, v in ipairs(t[p1]) do
+		if v == p2 then
 			return true
 		end
 	end
 	return false
 end
 
-return function(value, p2)
+return function(value, p3)
 	-- upvalues: t (ref), promptStateModule (ref)
-	local var3
+	local var1
 	local setPromptState = value.setPromptState
 	
 	for i, v in ipairs(t[value.getPromptState(false)]) do
-		if v == p2 then
-			var3 = true
-			if var3 then
-				setPromptState(p2)
+		if v == p3 then
+			var1 = true
+			if var1 then
+				setPromptState(p3)
 				
 				return
 			end
@@ -50,5 +50,5 @@ return function(value, p2)
 			return
 		end
 	end
-	var3 = false
+	var1 = false
 end

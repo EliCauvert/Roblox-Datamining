@@ -5,18 +5,18 @@ return function()
 	local var1, var2 = reactModule.useState({})
 	
 	return {
-		onConversationActivated = reactModule.useCallback(function(p0)
+		onConversationActivated = reactModule.useCallback(function(p1)
 			-- upvalues: var2 (ref)
-			var2(function(p1)
-				-- upvalues: p0 (ref)
-				local cloned = table.clone(p1)
+			var2(function(p2)
+				-- upvalues: p1 (ref)
+				local cloned = table.clone(p2)
 				
-				if cloned[p0] then
-					cloned[p0] = nil
+				if cloned[p1] then
+					cloned[p1] = nil
 					
 					return cloned
 				end
-				cloned[p0] = true
+				cloned[p1] = true
 				
 				return cloned
 			end)

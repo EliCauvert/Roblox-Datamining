@@ -8,73 +8,73 @@ local optionallyLogModule = require(script.Parent.optionallyLog)
 local isEnumModule = require(script.Parent.Parent.Parent.Utils.isEnum)
 local dashModule = require(parent_1.Dash)
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: llama (ref), isEnumModule (ref)
-	return llama.Dictionary.map(p0 or {}, function(p1)
+	return llama.Dictionary.map(p1 or {}, function(p2)
 		-- upvalues: isEnumModule (copy)
-		return if isEnumModule(p1) then p1.rawValue() else p1
+		return if isEnumModule(p2) then p2.rawValue() else p2
 	end)
 end
 
-local var5 = function(p2, p3)
+local var1 = function(p1, p2)
 	-- upvalues: llama (ref)
-	return if p2 and p3 then llama.Dictionary.map(p2, function(p4, p5)
-		-- upvalues: p3 (ref), llama (copy)
-		local var8 = p3[p5]
+	return if p1 and p2 then llama.Dictionary.map(p1, function(p3, p4)
+		-- upvalues: p2 (ref), llama (copy)
+		local var2 = p2[p4]
 		
-		return if var8 then if type(var8) == "function" then var8(p4) else p4 else llama.None
+		return if var2 then if type(var2) == "function" then var2(p3) else p3 else llama.None
 	end) else {}
 end
 
-local var6 = function(p6)
+local var2 = function(p1)
 	-- upvalues: toStringAdditionalArgsModule (ref)
-	return string.format("context: (%s), eventName: (%s), additionalInfo: (%s)", p6.context, p6.eventType, toStringAdditionalArgsModule(p6.additionalInfo))
+	return string.format("context: (%s), eventName: (%s), additionalInfo: (%s)", p1.context, p1.eventType, toStringAdditionalArgsModule(p1.additionalInfo))
 end
 
-local var7 = function(p7, p8)
-	return function(p9)
-		-- upvalues: p8 (ref), p7 (ref)
-		if p8 then
-			p7:sendEventDeferred(p9.context, p9.eventType, p9.additionalInfo)
+local var3 = function(p1, p2)
+	return function(p3)
+		-- upvalues: p2 (ref), p1 (ref)
+		if p2 then
+			p1:sendEventDeferred(p3.context, p3.eventType, p3.additionalInfo)
 			
-			return p9
+			return p3
 		end
-		p7:setRBXEventStream(p9.context, p9.eventType, p9.additionalInfo)
+		p1:setRBXEventStream(p3.context, p3.eventType, p3.additionalInfo)
 		
-		return p9
+		return p3
 	end
 end
 
-return function(p10)
-	-- upvalues: getEventInfoModule (ref), var7 (ref), dashModule (ref), optionallyLogModule (ref), var6 (ref), llama (ref), isEnumModule (ref), var5 (ref)
-	local var9 = getEventInfoModule(p10.eventList)
+return function(p1)
+	-- upvalues: getEventInfoModule (ref), var3 (ref), dashModule (ref), optionallyLogModule (ref), var2 (ref), llama (ref), isEnumModule (ref), var1 (ref)
+	local var4 = getEventInfoModule(p1.eventList)
 	
-	return function(p11, p12)
-		-- upvalues: var9 (ref), var7 (copy), p10 (ref), dashModule (copy), optionallyLogModule (copy), var6 (copy), llama (copy), isEnumModule (copy), var5 (copy)
-		local var10 = var9(p11)
-		local var11 = if p10.getInfoForAllEvents then p10.getInfoForAllEvents() else p10.infoForAllEvents
+	return function(p2, p3)
+		-- upvalues: var4 (ref), var3 (copy), p1 (ref), dashModule (copy), optionallyLogModule (copy), var2 (copy), llama (copy), isEnumModule (copy), var1 (copy)
+		local var5 = var4(p2)
+		local var6 = if p1.getInfoForAllEvents then p1.getInfoForAllEvents() else p1.infoForAllEvents
 		local pipe = dashModule.pipe
-		local eventStreamImpl = p10.eventStreamImpl
-		local shouldUseSendEventDeferred = p10.shouldUseSendEventDeferred
-		pipe(function(p14)
+		local eventStreamImpl = p1.eventStreamImpl
+		local shouldUseSendEventDeferred = p1.shouldUseSendEventDeferred
+		pipe(function(p4)
 			-- upvalues: shouldUseSendEventDeferred (ref), eventStreamImpl (ref)
 			if shouldUseSendEventDeferred then
-				eventStreamImpl:sendEventDeferred(p14.context, p14.eventType, p14.additionalInfo)
+				eventStreamImpl:sendEventDeferred(p4.context, p4.eventType, p4.additionalInfo)
 				
-				return p14
+				return p4
 			end
-			eventStreamImpl:setRBXEventStream(p14.context, p14.eventType, p14.additionalInfo)
+			eventStreamImpl:setRBXEventStream(p4.context, p4.eventType, p4.additionalInfo)
 			
-			return p14
-		end, optionallyLogModule(p10.loggerImpl, var6))({
-			context = var10.context,
-			eventType = var10.eventType,
-			additionalInfo = llama.Dictionary.join(var11 or {}, llama.Dictionary.map(var10.additionalInfo or {}, function(p13)
+			return p4
+		end, optionallyLogModule(p1.loggerImpl, var2))({
+			context = var5.context,
+			eventType = var5.eventType,
+			additionalInfo = llama.Dictionary.join(var6 or {}, llama.Dictionary.map(var5.additionalInfo or {}, function(p4)
 				-- upvalues: isEnumModule (copy)
-				return if isEnumModule(p13) then p13.rawValue() else p13
-			end), var5(p12, var10.formatRulesForAdditionalInfo))
+				return if isEnumModule(p4) then p4.rawValue() else p4
+			end), var1(p3, var5.formatRulesForAdditionalInfo))
 		})
 		
-		return p11, p12
+		return p2, p3
 	end
 end

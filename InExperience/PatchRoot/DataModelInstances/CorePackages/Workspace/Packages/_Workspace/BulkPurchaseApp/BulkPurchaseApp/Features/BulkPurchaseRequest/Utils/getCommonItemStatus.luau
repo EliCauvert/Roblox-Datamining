@@ -1,13 +1,13 @@
-﻿return function(p0)
-	local var0 = nil
+﻿return function(p1)
+	local var1 = nil
 	
-	for i, v in p0 do
-		if var0 == nil or v == var0 then
-			if var0 == nil then
-				var0 = v
+	for i, v in p1 do
+		if var1 == nil or v == var1 then
+			if var1 == nil then
+				var1 = v
 			end
 		end
 		return nil
 	end
-	return var0
+	return var1
 end

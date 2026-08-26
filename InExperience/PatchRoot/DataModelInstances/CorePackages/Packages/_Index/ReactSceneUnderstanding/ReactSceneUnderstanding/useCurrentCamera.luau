@@ -6,25 +6,25 @@ local camera = Instance.new("Camera")
 
 return function()
 	-- upvalues: useState (ref), useCallback (ref), useEffect (ref), camera (ref)
-	local var2, var3 = useState(nil)
-	local var4 = useCallback(function()
-		-- upvalues: var2 (ref), var3 (ref)
+	local var1, var2 = useState(nil)
+	local var3 = useCallback(function()
+		-- upvalues: var1 (ref), var2 (ref)
 		local currentCamera = workspace.CurrentCamera
 		
-		if currentCamera and currentCamera ~= var2 then
-			var3(currentCamera)
+		if currentCamera and currentCamera ~= var1 then
+			var2(currentCamera)
 		end
-	end, { var2 })
+	end, { var1 })
 	useEffect(function()
-		-- upvalues: var4 (ref)
-		local var5 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(var4)
+		-- upvalues: var3 (ref)
+		local var4 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(var3)
 		
 		return function()
-			-- upvalues: var5 (ref)
-			var5:Disconnect()
+			-- upvalues: var4 (ref)
+			var4:Disconnect()
 		end
-	end, { var4 })
-	useEffect(var4, {})
+	end, { var3 })
+	useEffect(var3, {})
 	
-	return var2 or camera
+	return var1 or camera
 end

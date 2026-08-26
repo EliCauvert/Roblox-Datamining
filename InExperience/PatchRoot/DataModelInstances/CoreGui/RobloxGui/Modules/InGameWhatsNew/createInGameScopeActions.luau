@@ -5,20 +5,20 @@ local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packag
 return function()
 	-- upvalues: inExperienceSideSheetModule (ref), whatsNewModule (ref)
 	local toggleSideSheet = inExperienceSideSheetModule.toggleSideSheet
-	local var3 = whatsNewModule.scopeActions.createScopeActions()
-	var3:register("OpenTiltMenu", function()
+	local var1 = whatsNewModule.scopeActions.createScopeActions()
+	var1:register("OpenTiltMenu", function()
 		-- upvalues: toggleSideSheet (ref)
 		toggleSideSheet(true)
 	end)
-	var3:register("CloseTiltMenu", function()
+	var1:register("CloseTiltMenu", function()
 		-- upvalues: toggleSideSheet (ref)
 		toggleSideSheet(false)
 	end)
-	var3:bindOpenState({
+	var1:bindOpenState({
 		openActionKey = "OpenTiltMenu",
 		closeActionKey = "CloseTiltMenu",
 		getIsOpen = inExperienceSideSheetModule.getSideSheetVisibility
 	})
 	
-	return var3
+	return var1
 end

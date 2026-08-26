@@ -1,12 +1,12 @@
-﻿return function(p0, p1, p2)
-	local var0 = p1.X * p1.Y
+﻿return function(p1, p2, p3)
+	local var1 = p2.X * p2.Y
 	
-	if var0 <= 0 then
+	if var1 <= 0 then
 		return 0
 	end
-	local var1 = p0 + p1
-	local var2 = p1.X - (math.max(0, p2.min.X - p0.X) + math.max(0, var1.X - p2.max.X))
-	local var3 = p1.Y - (math.max(0, p2.min.Y - p0.Y) + math.max(0, var1.Y - p2.max.Y))
+	local var2 = p1 + p2
+	local var3 = p2.X - (math.max(0, p3.min.X - p1.X) + math.max(0, var2.X - p3.max.X))
+	local var4 = p2.Y - (math.max(0, p3.min.Y - p1.Y) + math.max(0, var2.Y - p3.max.Y))
 	
-	return if var2 <= 0 or var3 <= 0 then 0 else var2 * var3 / var0
+	return if var3 <= 0 or var4 <= 0 then 0 else var3 * var4 / var1
 end

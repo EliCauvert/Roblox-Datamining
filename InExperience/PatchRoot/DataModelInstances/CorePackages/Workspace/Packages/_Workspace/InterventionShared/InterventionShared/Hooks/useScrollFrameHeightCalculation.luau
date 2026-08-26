@@ -4,18 +4,18 @@ local constantsModule = require(interventionShared.Utils.Constants)
 local reactModule = require(parent.React)
 local useLayerCollector = require(parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLayerCollector (ref), reactModule (ref), constantsModule (ref)
 	local absoluteSize = useLayerCollector().absoluteSize
-	local var3, var4 = reactModule.useState(p0.initialInnerContentHeight or 0)
-	local ceiled = math.ceil(math.min(absoluteSize.Y - constantsModule.UNIBAR_HEIGHT - (p0.scrollFrameHeaderFooterHeight or constantsModule.DIALOG_HEADER_HEIGHT), var3))
+	local var1, var2 = reactModule.useState(p1.initialInnerContentHeight or 0)
+	local ceiled = math.ceil(math.min(absoluteSize.Y - constantsModule.UNIBAR_HEIGHT - (p1.scrollFrameHeaderFooterHeight or constantsModule.DIALOG_HEADER_HEIGHT), var1))
 	
 	return {
-		onInnerContentSizeChanged = reactModule.useCallback(function(p1)
-			-- upvalues: var4 (ref)
-			var4(p1.AbsoluteSize.Y)
+		onInnerContentSizeChanged = reactModule.useCallback(function(p2)
+			-- upvalues: var2 (ref)
+			var2(p2.AbsoluteSize.Y)
 		end, {}),
 		scrollFrameContainerHeight = ceiled,
-		shouldShowScrollBar = ceiled < var3
+		shouldShowScrollBar = ceiled < var1
 	}
 end

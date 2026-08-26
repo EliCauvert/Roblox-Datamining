@@ -8,16 +8,16 @@ local tModule = require(parent.t)
 local appPage = robloxAppEnumsModule.AppPage
 local urlBuilder = urlBuilderModule.UrlBuilder
 
-return function(p0)
+return function(p1)
 	-- upvalues: tModule (ref), navigateDownModule (ref), appPage (ref), urlBuilder (ref), getFFlagUseCommunitiesTranslation (ref)
-	assert(tModule.callback(p0) or tModule.none(p0), "")
+	assert(tModule.callback(p1) or tModule.none(p1), "")
 	
 	return navigateDownModule({
 		name = appPage.GenericWebPage,
 		detail = urlBuilder.static.groups(),
 		extraProps = {
 			titleKey = if getFFlagUseCommunitiesTranslation() then "CommonUI.Features.Label.Groups" else "CommonUI.Features.Label.sGroups",
-			onClose = p0
+			onClose = p1
 		}
 	})
 end

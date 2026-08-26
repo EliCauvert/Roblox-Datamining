@@ -12,134 +12,134 @@ local assetCalculatorModule = require(util.AssetCalculator)
 local getFStringUGCValidationMaxCageDistanceModule = require(parent.flags.GetFStringUGCValidationMaxCageDistance)
 local t = {}
 
-local function validateInternal(p0, p1)
+local function validateInternal(p1, p2)
 	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), getExpectedPartSizeModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref), getFStringUGCValidationMaxCageDistanceModule (ref)
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var11, var12, var13 = getMeshInfoModule(p0, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p1)
-	local var14 = var13
+	local var1, var2, var3 = getMeshInfoModule(p1, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p2)
+	local var4 = var3
 	
-	if not var11 then
-		return false, var12
+	if not var1 then
+		return false, var2
 	end
-	local wrapTarget = p0:FindFirstChildWhichIsA("WrapTarget")
+	local wrapTarget = p1:FindFirstChildWhichIsA("WrapTarget")
 	assert(wrapTarget, "Missing WrapTarget child for " .. p0.Name)
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var16, var17, var18 = getMeshInfoModule(wrapTarget, constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p1)
-	local var19 = var18
+	local var5, var6, var7 = getMeshInfoModule(wrapTarget, constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p2)
+	local var8 = var7
 	
-	if not var16 then
-		return false, var17
+	if not var5 then
+		return false, var6
 	end
-	local var20 = getExpectedPartSizeModule(p0, p1) / getExpectedPartSizeModule(p0, p1, true)
-	local var21, var22 = pcallDeferredModule(function()
-		-- upvalues: UGCValidationService (copy), var19 (write), var14 (write), wrapTarget (ref), var20 (ref)
-		return UGCValidationService:CalculateBodyPartMaxCageDistance(var19.editableMesh, var14.editableMesh, wrapTarget.CageOrigin, var20)
-	end, p1)
+	local var9 = getExpectedPartSizeModule(p1, p2) / getExpectedPartSizeModule(p1, p2, true)
+	local var10, var11 = pcallDeferredModule(function()
+		-- upvalues: UGCValidationService (copy), var8 (write), var4 (write), wrapTarget (ref), var9 (ref)
+		return UGCValidationService:CalculateBodyPartMaxCageDistance(var8.editableMesh, var4.editableMesh, wrapTarget.CageOrigin, var9)
+	end, p2)
 	
-	if var21 then
-		if getFStringUGCValidationMaxCageDistanceModule.asNumber() < var22 then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_VertsAreTooFarInFrontOfRenderMesh, nil, p1)
+	if var10 then
+		if getFStringUGCValidationMaxCageDistanceModule.asNumber() < var11 then
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_VertsAreTooFarInFrontOfRenderMesh, nil, p2)
 			
 			return false, {
-				string.format("Cage mesh verts referenced in %s.%s.CageMeshId were found that are %.2f studs outside the %s render mesh. %s studs is the maximum. Reduce the size of your cage mesh.", p0.Name, wrapTarget.Name, var22, p0.Name, getFStringUGCValidationMaxCageDistanceModule.asString())
+				string.format("Cage mesh verts referenced in %s.%s.CageMeshId were found that are %.2f studs outside the %s render mesh. %s studs is the maximum. Reduce the size of your cage mesh.", p1.Name, wrapTarget.Name, var11, p1.Name, getFStringUGCValidationMaxCageDistanceModule.asString())
 			}
 		end
 		return true
 	else
-		local name = `Failed to execute body part max cage distance check. Make sure {p0.Name}'s render mesh and its WrapTarget's cage mesh exist, and try again.`
+		local name = `Failed to execute body part max cage distance check. Make sure {p1.Name}'s render mesh and its WrapTarget's cage mesh exist, and try again.`
 		
-		if p1.isServer ~= nil and p1.isServer then
+		if p2.isServer ~= nil and p2.isServer then
 			error(name)
 		end
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_FailedToExecute, nil, p1)
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_FailedToExecute, nil, p2)
 		
 		return false, { name }
 	end
 end
 
-function t.validateSingleBodyPart(p2, p3)
+function t.validateSingleBodyPart(p1, p2)
 	-- upvalues: constantsModule (ref), failureReasonsAccumulatorModule (ref), validateInternal (ref), analyticsModule (ref)
 	local currentTime = tick()
-	local assetTypeEnum = constantsModule.ASSET_TYPE_INFO[p3.assetTypeEnum]
-	local var25 = failureReasonsAccumulatorModule.new()
+	local assetTypeEnum = constantsModule.ASSET_TYPE_INFO[p2.assetTypeEnum]
+	local var1 = failureReasonsAccumulatorModule.new()
 	
-	if Enum.AssetType.DynamicHead == p3.assetTypeEnum then
-		return validateInternal(p2, p3)
+	if Enum.AssetType.DynamicHead == p2.assetTypeEnum then
+		return validateInternal(p1, p2)
 	end
 	for i in pairs(assetTypeEnum.subParts) do
-		local var26 = p2:FindFirstChild(i)
-		assert(var26, "expected parts have been checked for existance before calling this function")
-		var25:updateReasons(validateInternal(var26, p3))
+		local var2 = p1:FindFirstChild(i)
+		assert(var2, "expected parts have been checked for existance before calling this function")
+		var1:updateReasons(validateInternal(var2, p2))
 	end
-	analyticsModule.recordScriptTime(script.Name, currentTime, p3)
+	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
 	
-	return var25:getFinalResults()
+	return var1:getFinalResults()
 end
 
-function t.validateFullBody(p4, p5)
+function t.validateFullBody(p3, p4)
 	-- upvalues: assetCalculatorModule (ref), getMeshInfoModule (ref), constantsModule (ref), getExpectedPartSizeModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref), getFStringUGCValidationMaxCageDistanceModule (ref)
 	local currentTime = tick()
-	local var28 = assetCalculatorModule.calculateAllTransformsForFullBody(p4)
+	local var3 = assetCalculatorModule.calculateAllTransformsForFullBody(p3)
 	local t = {}
 	
-	for i, v in p4 do
-		local var33 = nil
+	for i, v in p3 do
+		local var4 = nil
 		local _ = nil
 		local _ = nil
-		local var34, var35, var36 = getMeshInfoModule(v, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p5)
-		var33 = var34
-		local var37 = var35
-		local var38 = var36
+		local var5, var6, var7 = getMeshInfoModule(v, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p4)
+		var4 = var5
+		local var8 = var6
+		local var9 = var7
 		
-		if var33 then
+		if var4 then
 			local wrapTarget = v:FindFirstChildWhichIsA("WrapTarget")
 			assert(wrapTarget, "Missing WrapTarget child for " .. v.Name)
-			var35 = nil
+			var6 = nil
 			local _ = nil
 			local _ = nil
-			local var40, var41, var42 = getMeshInfoModule(wrapTarget, constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p5)
-			var35 = var40
-			local var43 = var41
-			local var44 = var42
+			local var10, var11, var12 = getMeshInfoModule(wrapTarget, constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p4)
+			var6 = var10
+			local var13 = var11
+			local var14 = var12
 			
-			if var35 then
+			if var6 then
 				table.insert(t, {
-					renderMesh = var38.editableMesh,
-					outerCage = var44.editableMesh,
-					renderMeshTransform = var28[v.Name],
+					renderMesh = var9.editableMesh,
+					outerCage = var14.editableMesh,
+					renderMeshTransform = var3[v.Name],
 					outerCageLocalTransform = wrapTarget.CageOrigin,
-					scale = getExpectedPartSizeModule(v, p5) / getExpectedPartSizeModule(v, p5, true),
+					scale = getExpectedPartSizeModule(v, p4) / getExpectedPartSizeModule(v, p4, true),
 					name = v.Name
 				})
 				continue
 			end
-			return false, var43
+			return false, var13
 		end
-		return false, var37
+		return false, var8
 	end
-	local var30, var31, var32 = pcallDeferredModule(function()
+	local var15, var16, var17 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), t (ref)
 		return UGCValidationService:CalculateBodyMaxCageDistance(t)
-	end, p5)
-	analyticsModule.recordScriptTime(script.Name, currentTime, p5)
+	end, p4)
+	analyticsModule.recordScriptTime(script.Name, currentTime, p4)
 	
-	if var30 then
-		if getFStringUGCValidationMaxCageDistanceModule.asNumber() < var31 then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_VertsAreTooFarInFrontOfRenderMesh, nil, p5)
+	if var15 then
+		if getFStringUGCValidationMaxCageDistanceModule.asNumber() < var16 then
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_VertsAreTooFarInFrontOfRenderMesh, nil, p4)
 			
 			return false, {
-				string.format("A vertex was found on the %s's cage mesh that is %.2f studs away from the closest render mesh. %s studs is the maximum. Make the cage mesh more closely match the shape and size of the render mesh.", var32, var31, getFStringUGCValidationMaxCageDistanceModule.asString()) .. "[Read more](https://create.roblox.com/docs/art/validation-errors#bodyCageMaxSize)"
+				string.format("A vertex was found on the %s's cage mesh that is %.2f studs away from the closest render mesh. %s studs is the maximum. Make the cage mesh more closely match the shape and size of the render mesh.", var17, var16, getFStringUGCValidationMaxCageDistanceModule.asString()) .. "[Read more](https://create.roblox.com/docs/art/validation-errors#bodyCageMaxSize)"
 			}
 		end
 		return true
-	elseif p5.isServer ~= nil and p5.isServer then
+	elseif p4.isServer ~= nil and p4.isServer then
 		error("Failed to execute body max cage distance check. Make sure all render meshes and their WrapTarget cage meshes exist, and try again.")
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_FailedToExecute, nil, p5)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_FailedToExecute, nil, p4)
 	
 	return false, {
 		"Failed to execute body max cage distance check. Make sure all render meshes and their WrapTarget cage meshes exist, and try again."

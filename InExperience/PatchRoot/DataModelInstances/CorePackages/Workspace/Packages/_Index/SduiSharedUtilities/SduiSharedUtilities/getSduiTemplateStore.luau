@@ -8,43 +8,43 @@ local function createSduiTemplateStore()
 	local t_1 = {}
 	
 	return {
-		getTemplate = function(p0)
+		getTemplate = function(p1)
 			-- upvalues: t (write)
-			return t[p0]
+			return t[p1]
 		end,
 		addTemplates = function(p1)
 			-- upvalues: t (write), cryoModule (copy)
 			t = cryoModule.Dictionary.join(t, p1)
 		end,
-		recordSurfaceTemplates = function(p2, p3)
+		recordSurfaceTemplates = function(p1, p2)
 			-- upvalues: t_1 (write)
-			if p3 == nil then return end
-			local var6 = t_1[p2]
+			if p2 == nil then return end
+			local var1 = t_1[p1]
 			
-			if var6 == nil then
-				var6 = {}
-				t_1[p2] = var6
+			if var1 == nil then
+				var1 = {}
+				t_1[p1] = var1
 			end
-			for i, v in p3 do
-				var6[i] = v
+			for i, v in p2 do
+				var1[i] = v
 			end
 		end,
-		getCachedRobloxComponentToTemplateId = function(p4)
+		getCachedRobloxComponentToTemplateId = function(p3)
 			-- upvalues: t_1 (write)
-			local var7 = t_1[p4]
+			local var2 = t_1[p3]
 			
-			return if var7 == nil then {} else var7
+			return if var2 == nil then {} else var2
 		end,
-		getTemplateForRobloxComponent = function(p5, p6)
+		getTemplateForRobloxComponent = function(p3, p4)
 			-- upvalues: t_1 (write), t (write)
-			local var8 = t_1[p5]
+			local var2 = t_1[p3]
 			
-			if var8 == nil then
+			if var2 == nil then
 				return nil
 			end
-			local var9 = var8[p6]
+			local var3 = var2[p4]
 			
-			return if var9 == nil then nil else t[var9]
+			return if var3 == nil then nil else t[var3]
 		end,
 		clear = function()
 			-- upvalues: t (write), t_1 (write)
@@ -54,12 +54,12 @@ local function createSduiTemplateStore()
 	}
 end
 
-local var3 = nil
+local var1 = nil
 
 return function()
-	-- upvalues: var3 (write), createSduiTemplateStore (ref)
-	if var3 == nil then
-		var3 = createSduiTemplateStore()
+	-- upvalues: var1 (write), createSduiTemplateStore (ref)
+	if var1 == nil then
+		var1 = createSduiTemplateStore()
 	end
-	return var3
+	return var1
 end

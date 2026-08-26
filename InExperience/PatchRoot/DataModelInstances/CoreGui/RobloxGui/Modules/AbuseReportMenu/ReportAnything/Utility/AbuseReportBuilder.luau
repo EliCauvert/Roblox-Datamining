@@ -25,19 +25,19 @@ local t = {
 	}
 }
 
-local var6 = function(p0)
+local var1 = function(p1)
 	local t = {}
 	
-	for i, v in ipairs(p0) do
+	for i, v in ipairs(p1) do
 		t[#t + 1] = { v.X, v.Y }
 	end
 	return t
 end
 
-local var7 = function(p1)
+local var2 = function(p2)
 	local t = {}
 	
-	for i, v in pairs(p1) do
+	for i, v in pairs(p2) do
 		t[#t + 1] = {
 			assetId = v.assetId,
 			distance = v.distance,
@@ -55,11 +55,11 @@ local var7 = function(p1)
 	return t
 end
 
-local var8 = function(p2)
-	-- upvalues: var6 (ref)
+local var3 = function(p3)
+	-- upvalues: var1 (ref)
 	local t = {}
 	
-	for i, v in pairs(p2) do
+	for i, v in pairs(p3) do
 		t[#t + 1] = {
 			userId = tostring(i),
 			distance = v.distance,
@@ -70,7 +70,7 @@ local var8 = function(p2)
 				maxY = v.boundingBox.max.Y
 			},
 			hitRate = v.hitRate,
-			convexHull = var6(v.convexHull)
+			convexHull = var1(v.convexHull)
 		}
 		
 		if v.pointProcessingStats ~= nil then
@@ -85,279 +85,279 @@ local var8 = function(p2)
 	return t
 end
 
-local _ = function(p3, p4)
+local _ = function(p4, p5)
 	-- upvalues: getFFlagGetHumanoidDescriptionUpdatesV2E (ref), getHumanoidDescription (ref)
 	local _ = nil
 	local _ = nil
 	
 	if not getFFlagGetHumanoidDescriptionUpdatesV2E() then
-		local var17, var18 = getHumanoidDescription(p3)
+		local var4, var5 = getHumanoidDescription(p4)
 		
-		return var17, var18
+		return var4, var5
 	end
-	local var14 = p4.identificationResults.identifiedAvatars[p3]
+	local var6 = p5.identificationResults.identifiedAvatars[p4]
 	
-	if var14 and var14.humanoidDescription and var14.humanoidDescriptionStatus == "OK" then
-		return var14.humanoidDescription, var14.humanoidDescriptionStatus
+	if var6 and var6.humanoidDescription and var6.humanoidDescriptionStatus == "OK" then
+		return var6.humanoidDescription, var6.humanoidDescriptionStatus
 	end
-	local var15, var16 = getHumanoidDescription(p3)
+	local var7, var8 = getHumanoidDescription(p4)
 	
-	return var15, var16
+	return var7, var8
 end
 
-local var9 = function(p5)
+local var4 = function(p4)
 	-- upvalues: getFFlagRAEnableCircleRegion (ref), getAvatarsForRegion (ref), getAvatarsForPoint (ref), getFFlagReportAnythingEnableAdReport (ref), getAdsForPoint (ref)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
 	local t_3 = {}
 	
-	for i, v in ipairs(p5.annotationPoints) do
+	for i, v in ipairs(p4.annotationPoints) do
 		local i_2
-		local var23 = 1e999
-		local var24 = nil
+		local var5 = 1e999
+		local var6 = nil
 		
-		for i_1, v_1 in pairs(if getFFlagRAEnableCircleRegion() then getAvatarsForRegion(p5.identificationResults.identifiedAvatars, v, p5.annotationCircleRadius, p5.annotationAreaWidth, p5.annotationAreaHeight) else getAvatarsForPoint(p5.identificationResults.identifiedAvatars, v)) do
-			i_2 = p5.identificationResults.identifiedAvatars[i_1].distance
+		for i_1, v_1 in pairs(if getFFlagRAEnableCircleRegion() then getAvatarsForRegion(p4.identificationResults.identifiedAvatars, v, p4.annotationCircleRadius, p4.annotationAreaWidth, p4.annotationAreaHeight) else getAvatarsForPoint(p4.identificationResults.identifiedAvatars, v)) do
+			i_2 = p4.identificationResults.identifiedAvatars[i_1].distance
 			
-			if i_2 < var23 then
-				var23 = i_2
-				var24 = i_1
+			if i_2 < var5 then
+				var5 = i_2
+				var6 = i_1
 			end
 		end
-		local var25 = nil
+		local var7 = nil
 		
 		if getFFlagReportAnythingEnableAdReport() then
-			local var26 = 1e999
+			local var8 = 1e999
 			
-			for i_2, v_2 in pairs(getAdsForPoint(p5.identificationResults.identifiedAds, v)) do
-				local distance = p5.identificationResults.identifiedAds[i_2].distance
+			for i_2, v_2 in pairs(getAdsForPoint(p4.identificationResults.identifiedAds, v)) do
+				local distance = p4.identificationResults.identifiedAds[i_2].distance
 				
-				if distance < var26 then
-					var26 = distance
-					var25 = i_2
+				if distance < var8 then
+					var8 = distance
+					var7 = i_2
 				end
 			end
 		end
-		if var24 ~= nil and not t[var24] then
-			t[var24] = true
-			t_2[#t_2 + 1] = p5.identificationResults.identifiedAvatars[var24].player
-		elseif getFFlagReportAnythingEnableAdReport() and var25 ~= nil and not t_1[var25] then
-			t_1[var25] = true
-			t_3[#t_3 + 1] = p5.identificationResults.identifiedAds[var25]
+		if var6 ~= nil and not t[var6] then
+			t[var6] = true
+			t_2[#t_2 + 1] = p4.identificationResults.identifiedAvatars[var6].player
+		elseif getFFlagReportAnythingEnableAdReport() and var7 ~= nil and not t_1[var7] then
+			t_1[var7] = true
+			t_3[#t_3 + 1] = p4.identificationResults.identifiedAds[var7]
 		end
 	end
 	return t_2, t_3
 end
 
-local var10 = function(p6, _, p7)
-	-- upvalues: getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var8 (ref), var7 (ref), var6 (ref)
-	local var27 = false
+local var9 = function(p5, _, p6)
+	-- upvalues: getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var3 (ref), var2 (ref), var1 (ref)
+	local var10 = false
 	
-	for i, v in pairs(p6.identificationResults.identifiedAvatars) do
-		var27 = true
+	for i, v in pairs(p5.identificationResults.identifiedAvatars) do
+		var10 = true
 		break
 	end
-	local var28 = false
+	local var11 = false
 	
 	if getFFlagReportAnythingEnableAdReport() then
-		for v, v_1 in pairs(p6.identificationResults.identifiedAds) do
-			var28 = true
+		for v, v_1 in pairs(p5.identificationResults.identifiedAds) do
+			var11 = true
 			break
 		end
 	end
-	if var27 then
-		p7.tags.IDENTIFIED_AVATARS = {
+	if var10 then
+		p6.tags.IDENTIFIED_AVATARS = {
 			valueList = {
 				{
-					data = httpService:JSONEncode(var8(p6.identificationResults.identifiedAvatars))
+					data = httpService:JSONEncode(var3(p5.identificationResults.identifiedAvatars))
 				}
 			}
 		}
 	end
-	if p6.identificationResults.avatarIDStats then
-		p7.tags.AVATAR_ID_STATS = {
+	if p5.identificationResults.avatarIDStats then
+		p6.tags.AVATAR_ID_STATS = {
 			valueList = {
 				{
-					data = httpService:JSONEncode(p6.identificationResults.avatarIDStats)
+					data = httpService:JSONEncode(p5.identificationResults.avatarIDStats)
 				}
 			}
 		}
 	end
-	if var28 and getFFlagReportAnythingEnableAdReport() then
-		p7.tags.IDENTIFIED_ADS = {
+	if var11 and getFFlagReportAnythingEnableAdReport() then
+		p6.tags.IDENTIFIED_ADS = {
 			valueList = {
 				{
-					data = httpService:JSONEncode(var7(p6.identificationResults.identifiedAds))
+					data = httpService:JSONEncode(var2(p5.identificationResults.identifiedAds))
 				}
 			}
 		}
 	end
-	if p6.identificationResults.adIDStats and getFFlagReportAnythingEnableAdReport() then
-		p7.tags.AD_ID_STATS = {
+	if p5.identificationResults.adIDStats and getFFlagReportAnythingEnableAdReport() then
+		p6.tags.AD_ID_STATS = {
 			valueList = {
 				{
-					data = httpService:JSONEncode(p6.identificationResults.adIDStats)
+					data = httpService:JSONEncode(p5.identificationResults.adIDStats)
 				}
 			}
 		}
 	end
-	if #p6.screenshotId > 0 then
-		p7.tags.SCREENSHOT_ID = { valueList = { { data = p6.screenshotId } } }
+	if #p5.screenshotId > 0 then
+		p6.tags.SCREENSHOT_ID = { valueList = { { data = p5.screenshotId } } }
 	end
-	if #p6.annotationPoints > 0 then
-		p7.tags.RA_ANNOTATION_POINTS = {
+	if #p5.annotationPoints > 0 then
+		p6.tags.RA_ANNOTATION_POINTS = {
 			valueList = {
-				{ data = httpService:JSONEncode(var6(p6.annotationPoints)) }
+				{ data = httpService:JSONEncode(var1(p5.annotationPoints)) }
 			}
 		}
 	end
-	p7.tags.RA_ANNOTATION_OPTION_SEEN = {
-		valueList = { { data = tostring(p6.annotationOptionSeen) } }
+	p6.tags.RA_ANNOTATION_OPTION_SEEN = {
+		valueList = { { data = tostring(p5.annotationOptionSeen) } }
 	}
-	p7.tags.RA_ANNOTATION_PAGE_SEEN = {
-		valueList = { { data = tostring(p6.annotationPageSeen) } }
+	p6.tags.RA_ANNOTATION_PAGE_SEEN = {
+		valueList = { { data = tostring(p5.annotationPageSeen) } }
 	}
 end
 
 return {
-	buildExperienceReportRequest = function(p8, p9, p10)
-		-- upvalues: t (ref), var9 (ref), var10 (ref), getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var7 (ref)
+	buildExperienceReportRequest = function(p7, p8, p9)
+		-- upvalues: t (ref), var4 (ref), var9 (ref), getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var2 (ref)
 		local t_1 = {
 			tags = {
 				ENTRY_POINT = { valueList = { { data = "in-experience" } } },
-				SUBMITTER_USER_ID = { valueList = { { data = tostring(p8.localUserId) } } },
-				REPORTED_ABUSE_CATEGORY = { valueList = { { data = p8.abuseReason } } },
-				PLACE_ID = { valueList = { { data = tostring(p8.placeId) } } },
-				REPORTER_COMMENT = { valueList = { { data = p8.abuseComment } } },
+				SUBMITTER_USER_ID = { valueList = { { data = tostring(p7.localUserId) } } },
+				REPORTED_ABUSE_CATEGORY = { valueList = { { data = p7.abuseReason } } },
+				PLACE_ID = { valueList = { { data = tostring(p7.placeId) } } },
+				REPORTER_COMMENT = { valueList = { { data = p7.abuseComment } } },
 				REPORTED_ABUSE_VECTOR = { valueList = { { data = "place" } } },
-				IN_EXP_MENU_ENTRY_POINT = { valueList = { { data = p8.menuEntryPoint } } },
-				VARIANT = { valueList = { { data = p8.variant or t.Variant.CS } } }
+				IN_EXP_MENU_ENTRY_POINT = { valueList = { { data = p7.menuEntryPoint } } },
+				VARIANT = { valueList = { { data = p7.variant or t.Variant.CS } } }
 			}
 		}
-		local _, var30 = var9(p9)
-		var10(p9, p10, t_1)
+		local _, var12 = var4(p8)
+		var9(p8, p9, t_1)
 		
-		if #var30 > 0 and getFFlagReportAnythingEnableAdReport() then
+		if #var12 > 0 and getFFlagReportAnythingEnableAdReport() then
 			t_1.tags.REPORT_TARGET_ADS = {
-				valueList = { { data = httpService:JSONEncode(var7(var30)) } }
+				valueList = { { data = httpService:JSONEncode(var2(var12)) } }
 			}
 		end
 		return httpService:JSONEncode(t_1)
 	end,
-	buildOtherReportRequest = function(p11, p12, p13)
-		-- upvalues: t (ref), var9 (ref), var10 (ref), getFFlagGetHumanoidDescription (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), getHumanoidDescription (ref), httpService (ref)
+	buildOtherReportRequest = function(p7, p8, p9)
+		-- upvalues: t (ref), var4 (ref), var9 (ref), getFFlagGetHumanoidDescription (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), getHumanoidDescription (ref), httpService (ref)
 		local t_1 = {
 			tags = {
 				ENTRY_POINT = { valueList = { { data = "in-experience" } } },
-				SUBMITTER_USER_ID = { valueList = { { data = tostring(p11.localUserId) } } },
-				REPORTED_ABUSE_CATEGORY = { valueList = { { data = p11.abuseReason } } },
-				REPORTER_COMMENT = { valueList = { { data = p11.abuseComment } } },
+				SUBMITTER_USER_ID = { valueList = { { data = tostring(p7.localUserId) } } },
+				REPORTED_ABUSE_CATEGORY = { valueList = { { data = p7.abuseReason } } },
+				REPORTER_COMMENT = { valueList = { { data = p7.abuseComment } } },
 				REPORTED_ABUSE_VECTOR = { valueList = { { data = "avatar" } } },
-				IN_EXP_MENU_ENTRY_POINT = { valueList = { { data = p11.menuEntryPoint } } },
+				IN_EXP_MENU_ENTRY_POINT = { valueList = { { data = p7.menuEntryPoint } } },
 				VARIANT = {
-					valueList = { { data = p11.variant or t.Variant.Unknown } }
+					valueList = { { data = p7.variant or t.Variant.Unknown } }
 				}
 			}
 		}
-		local var32, _ = var9(p12)
-		var10(p12, p13, t_1)
+		local var12, _ = var4(p8)
+		var9(p8, p9, t_1)
 		
-		if #var32 > 0 then
-			local var33 = tostring(var32[1].UserId)
+		if #var12 > 0 then
+			local var13 = tostring(var12[1].UserId)
 			local t_2 = {}
 			
-			for i, v in ipairs(var32) do
+			for i, v in ipairs(var12) do
 				t_2[#t_2 + 1] = tostring(v.UserId)
 			end
 			if getFFlagGetHumanoidDescription() then
-				local var38, var39
-				local userId = var32[1].UserId
+				local var14, var15
+				local userId = var12[1].UserId
 				local _ = nil
 				local _ = nil
 				
 				if getFFlagGetHumanoidDescriptionUpdatesV2E() then
-					local var35 = p12.identificationResults.identifiedAvatars[userId]
+					local var16 = p8.identificationResults.identifiedAvatars[userId]
 					
-					if var35 and var35.humanoidDescription and var35.humanoidDescriptionStatus == "OK" then
-						var38 = var35.humanoidDescription
-						var39 = var35.humanoidDescriptionStatus
+					if var16 and var16.humanoidDescription and var16.humanoidDescriptionStatus == "OK" then
+						var14 = var16.humanoidDescription
+						var15 = var16.humanoidDescriptionStatus
 					else
-						local var36, var37 = getHumanoidDescription(userId)
-						var38 = var36
-						var39 = var37
+						local var17, var18 = getHumanoidDescription(userId)
+						var14 = var17
+						var15 = var18
 					end
 				else
-					local var40, var41 = getHumanoidDescription(userId)
-					var38 = var40
-					var39 = var41
+					local var19, var20 = getHumanoidDescription(userId)
+					var14 = var19
+					var15 = var20
 				end
-				local var42 = var39
-				t_1.tags.REPORT_TARGET_HUMANOID_DESCRIPTION = { valueList = { { data = httpService:JSONEncode(var38) } } }
-				t_1.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = var42 } } }
+				local var21 = var15
+				t_1.tags.REPORT_TARGET_HUMANOID_DESCRIPTION = { valueList = { { data = httpService:JSONEncode(var14) } } }
+				t_1.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = var21 } } }
 				local t_3 = {}
 				
-				for i_1, v_1 in ipairs(var32) do
-					local var44, var47, var48
+				for i_1, v_1 in ipairs(var12) do
+					local var22, var23, var24
 					local userId_1 = v_1.UserId
 					local _ = nil
 					local _ = nil
 					
 					if getFFlagGetHumanoidDescriptionUpdatesV2E() then
-						var44 = p12.identificationResults.identifiedAvatars[userId_1]
+						var22 = p8.identificationResults.identifiedAvatars[userId_1]
 						
-						if var44 and var44.humanoidDescription and var44.humanoidDescriptionStatus == "OK" then
-							var47 = var44.humanoidDescription
-							var48 = var44.humanoidDescriptionStatus
+						if var22 and var22.humanoidDescription and var22.humanoidDescriptionStatus == "OK" then
+							var23 = var22.humanoidDescription
+							var24 = var22.humanoidDescriptionStatus
 						else
-							local var45, var46 = getHumanoidDescription(userId_1)
-							var47 = var45
-							var48 = var46
+							local var25, var26 = getHumanoidDescription(userId_1)
+							var23 = var25
+							var24 = var26
 						end
 					else
-						var44, var49 = getHumanoidDescription(userId_1)
-						var47 = var44
-						var48 = var49
+						var22, var49 = getHumanoidDescription(userId_1)
+						var23 = var22
+						var24 = var49
 					end
-					t_3[#t_3 + 1] = { humanoidDescription = var47, outputMessage = var48 }
+					t_3[#t_3 + 1] = { humanoidDescription = var23, outputMessage = var24 }
 				end
 				t_1.tags.RA_ALL_ANNOTATED_HUMANOID_DESCRIPTIONS = { valueList = { { data = httpService:JSONEncode(t_3) } } }
 			end
-			t_1.tags.REPORT_TARGET_USER_ID = { valueList = { { data = tostring(var33) } } }
+			t_1.tags.REPORT_TARGET_USER_ID = { valueList = { { data = tostring(var13) } } }
 			t_1.tags.RA_ALL_ANNOTATED_USER_IDS = { valueList = { { data = httpService:JSONEncode(t_2) } } }
-		elseif p11.formSelectedAbuserUserId then
+		elseif p7.formSelectedAbuserUserId then
 			if getFFlagGetHumanoidDescription() then
-				local var53, var54
-				local formSelectedAbuserUserId = p11.formSelectedAbuserUserId
+				local var27, var28
+				local formSelectedAbuserUserId = p7.formSelectedAbuserUserId
 				local _ = nil
 				local _ = nil
 				
 				if getFFlagGetHumanoidDescriptionUpdatesV2E() then
-					local var50 = p12.identificationResults.identifiedAvatars[formSelectedAbuserUserId]
+					local var29 = p8.identificationResults.identifiedAvatars[formSelectedAbuserUserId]
 					
-					if var50 and var50.humanoidDescription and var50.humanoidDescriptionStatus == "OK" then
-						var53 = var50.humanoidDescription
-						var54 = var50.humanoidDescriptionStatus
+					if var29 and var29.humanoidDescription and var29.humanoidDescriptionStatus == "OK" then
+						var27 = var29.humanoidDescription
+						var28 = var29.humanoidDescriptionStatus
 					else
-						local var51, var52 = getHumanoidDescription(formSelectedAbuserUserId)
-						var53 = var51
-						var54 = var52
+						local var30, var31 = getHumanoidDescription(formSelectedAbuserUserId)
+						var27 = var30
+						var28 = var31
 					end
 				else
-					local var55, var56 = getHumanoidDescription(formSelectedAbuserUserId)
-					var53 = var55
-					var54 = var56
+					local var32, var33 = getHumanoidDescription(formSelectedAbuserUserId)
+					var27 = var32
+					var28 = var33
 				end
-				local var57 = var54
-				t_1.tags.REPORT_TARGET_HUMANOID_DESCRIPTION = { valueList = { { data = httpService:JSONEncode(var53) } } }
-				t_1.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = var57 } } }
+				local var34 = var28
+				t_1.tags.REPORT_TARGET_HUMANOID_DESCRIPTION = { valueList = { { data = httpService:JSONEncode(var27) } } }
+				t_1.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = var34 } } }
 			end
 			t_1.tags.REPORT_TARGET_USER_ID = {
-				valueList = { { data = tostring(p11.formSelectedAbuserUserId) } }
+				valueList = { { data = tostring(p7.formSelectedAbuserUserId) } }
 			}
 		end
 		return if game:GetEngineFeature("WHAM2165") then t_1 else httpService:JSONEncode(t_1)
 	end,
-	interpretAnnotations = var9,
+	interpretAnnotations = var4,
 	Constants = t
 }

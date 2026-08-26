@@ -31,14 +31,14 @@ return {
 	initialize = function()
 		-- upvalues: inGameAssetReportModeModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariantModule (ref), highlightModeVariants (ref), t (ref), reactModule (ref), layerCollectorProvider (ref), foundationProvider (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), fFlagAbuseReportMenuV2 (ref), messageBusService (ref), captureModeMessageId (ref), experienceStateCaptureService (ref), coreGuiService (ref)
 		local _ = nil
-		local var13 = inGameAssetReportModeModule
+		local var1 = inGameAssetReportModeModule
 		
 		if fFlagHighlightModePreciseSelectionEnabled then
-			local var14 = getHighlightModeVariantModule()
+			local var2 = getHighlightModeVariantModule()
 			
-			if var14 ~= highlightModeVariants.Default and t[var14] ~= nil then
+			if var2 ~= highlightModeVariants.Default and t[var2] ~= nil then
 				game:GetService("ExperienceStateCaptureService").SelectionMode = Enum.ExperienceStateCaptureSelectionMode.SafetyHighlightMode
-				var13 = t[var14]
+				var1 = t[var2]
 			end
 		end
 		local screenGui = reactModule.createElement("ScreenGui", {
@@ -52,7 +52,7 @@ return {
 						localization = localization.new(localizationService.RobloxLocaleId)
 					}, {
 						StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true }, {
-							InGameAssetReportUI = roactModule.createElement(var13, {
+							InGameAssetReportUI = roactModule.createElement(var1, {
 								backAction = function()
 									-- upvalues: fFlagAbuseReportMenuV2 (copy), messageBusService (copy), captureModeMessageId (copy), experienceStateCaptureService (copy)
 									if fFlagAbuseReportMenuV2 then
@@ -67,8 +67,8 @@ return {
 									end
 									experienceStateCaptureService:ToggleCaptureMode()
 								end,
-								getIsSmallPortraitMode = function(p0)
-									return p0.X < p0.Y and p0.X < 800
+								getIsSmallPortraitMode = function(p1)
+									return p1.X < p1.Y and p1.X < 800
 								end
 							})
 						})

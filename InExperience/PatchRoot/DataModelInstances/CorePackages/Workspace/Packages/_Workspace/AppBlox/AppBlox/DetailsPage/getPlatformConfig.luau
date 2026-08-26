@@ -37,9 +37,9 @@ local t = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), deviceType (ref)
-	local var1 = t[p0]
+	local var1 = t[p1]
 	
 	return if var1 == nil then t[deviceType.Desktop] else var1
 end

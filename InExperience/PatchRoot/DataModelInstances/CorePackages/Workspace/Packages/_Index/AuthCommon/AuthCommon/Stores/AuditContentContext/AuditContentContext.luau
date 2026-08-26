@@ -8,7 +8,7 @@ local useMemo = reactModule.useMemo
 local useContext = reactModule.useContext
 local useCallback = reactModule.useCallback
 local useEffect = reactModule.useEffect
-local var4 = reactModule.createContext({
+local var1 = reactModule.createContext({
 	capturedAuditContent = {},
 	additionalAuditContent = {},
 	setCapturedAuditContentItem = function() end,
@@ -18,111 +18,111 @@ local var4 = reactModule.createContext({
 })
 
 return {
-	Context = var4,
-	Provider = function(p0)
-		-- upvalues: useState (ref), useCallback (ref), cryoModule (ref), useMemo (ref), reactModule (ref), var4 (ref)
-		local var5, var6 = useState({})
-		local var7, var8 = useState({})
-		local var9 = useCallback(function(p1, p2)
-			-- upvalues: var6 (ref), cryoModule (copy)
-			var6(function(p3)
-				-- upvalues: cryoModule (copy), p1 (ref), p2 (ref)
-				return cryoModule.Dictionary.join(p3, { [p1] = p2 })
+	Context = var1,
+	Provider = function(p1)
+		-- upvalues: useState (ref), useCallback (ref), cryoModule (ref), useMemo (ref), reactModule (ref), var1 (ref)
+		local var2, var3 = useState({})
+		local var4, var5 = useState({})
+		local var6 = useCallback(function(p2, p3)
+			-- upvalues: var3 (ref), cryoModule (copy)
+			var3(function(p4)
+				-- upvalues: cryoModule (copy), p2 (ref), p3 (ref)
+				return cryoModule.Dictionary.join(p4, { [p2] = p3 })
 			end)
-		end, { var6 })
-		local var10 = useCallback(function(p4)
-			-- upvalues: var6 (ref), cryoModule (copy)
-			var6(function(p5)
-				-- upvalues: cryoModule (copy), p4 (ref)
-				return cryoModule.Dictionary.join(p5, { [p4] = cryoModule.None })
+		end, { var3 })
+		local var7 = useCallback(function(p2)
+			-- upvalues: var3 (ref), cryoModule (copy)
+			var3(function(p3)
+				-- upvalues: cryoModule (copy), p2 (ref)
+				return cryoModule.Dictionary.join(p3, { [p2] = cryoModule.None })
 			end)
-		end, { var6 })
-		local var11 = useCallback(function(p6, p7)
-			-- upvalues: var8 (ref), cryoModule (copy)
-			var8(function(p8)
-				-- upvalues: cryoModule (copy), p6 (ref), p7 (ref)
-				return cryoModule.Dictionary.join(p8, { [p6] = p7 })
+		end, { var3 })
+		local var8 = useCallback(function(p2, p3)
+			-- upvalues: var5 (ref), cryoModule (copy)
+			var5(function(p4)
+				-- upvalues: cryoModule (copy), p2 (ref), p3 (ref)
+				return cryoModule.Dictionary.join(p4, { [p2] = p3 })
 			end)
-		end, { var8 })
-		local var12 = useCallback(function(p9)
-			-- upvalues: var8 (ref), cryoModule (copy)
-			var8(function(p10)
-				-- upvalues: cryoModule (copy), p9 (ref)
-				return cryoModule.Dictionary.join(p10, { [p9] = cryoModule.None })
+		end, { var5 })
+		local var9 = useCallback(function(p2)
+			-- upvalues: var5 (ref), cryoModule (copy)
+			var5(function(p3)
+				-- upvalues: cryoModule (copy), p2 (ref)
+				return cryoModule.Dictionary.join(p3, { [p2] = cryoModule.None })
 			end)
-		end, { var8 })
+		end, { var5 })
 		
-		return reactModule.createElement(var4.Provider, {
+		return reactModule.createElement(var1.Provider, {
 			value = useMemo(function()
-				-- upvalues: var5 (ref), var7 (ref), var9 (ref), var10 (ref), var11 (ref), var12 (ref)
+				-- upvalues: var2 (ref), var4 (ref), var6 (ref), var7 (ref), var8 (ref), var9 (ref)
 				return {
-					capturedAuditContent = var5,
-					additionalAuditContent = var7,
-					setCapturedAuditContentItem = var9,
-					removeCapturedAuditContentItem = var10,
-					setAdditionalAuditContentItem = var11,
-					removeAdditionalAuditContentItem = var12
+					capturedAuditContent = var2,
+					additionalAuditContent = var4,
+					setCapturedAuditContentItem = var6,
+					removeCapturedAuditContentItem = var7,
+					setAdditionalAuditContentItem = var8,
+					removeAdditionalAuditContentItem = var9
 				}
-			end, { var5, var7 })
-		}, p0.children)
+			end, { var2, var4 })
+		}, p1.children)
 	end,
-	useCapturedAuditContent = function(p11, p12)
-		-- upvalues: useContext (ref), var4 (ref), useEffect (ref), getFFlagEnableAuditSystemModule (ref)
-		local var13 = useContext(var4)
+	useCapturedAuditContent = function(p1, p2)
+		-- upvalues: useContext (ref), var1 (ref), useEffect (ref), getFFlagEnableAuditSystemModule (ref)
+		local var2 = useContext(var1)
 		useEffect(function()
-			-- upvalues: getFFlagEnableAuditSystemModule (copy), p11 (ref), p12 (ref), var13 (ref)
+			-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (ref), p2 (ref), var2 (ref)
 			if not getFFlagEnableAuditSystemModule() then return end
-			if p11 and p12 then
-				var13.setCapturedAuditContentItem(p11, p12)
+			if p1 and p2 then
+				var2.setCapturedAuditContentItem(p1, p2)
 				
 				return
 			end
-		end, { p11, p12 })
+		end, { p1, p2 })
 		useEffect(function()
-			-- upvalues: getFFlagEnableAuditSystemModule (copy), p11 (ref), var13 (ref)
+			-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (ref), var2 (ref)
 			return function()
-				-- upvalues: getFFlagEnableAuditSystemModule (copy), p11 (copy), var13 (copy)
+				-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (copy), var2 (copy)
 				if not getFFlagEnableAuditSystemModule() then return end
-				if p11 then
-					var13.removeCapturedAuditContentItem(p11)
+				if p1 then
+					var2.removeCapturedAuditContentItem(p1)
 				end
 			end
-		end, { p11 })
+		end, { p1 })
 	end,
-	useAdditionalAuditContent = function(p13, p14)
-		-- upvalues: useContext (ref), var4 (ref), useEffect (ref), getFFlagEnableAuditSystemModule (ref)
-		local var14 = useContext(var4)
+	useAdditionalAuditContent = function(p1, p2)
+		-- upvalues: useContext (ref), var1 (ref), useEffect (ref), getFFlagEnableAuditSystemModule (ref)
+		local var2 = useContext(var1)
 		useEffect(function()
-			-- upvalues: getFFlagEnableAuditSystemModule (copy), p13 (ref), p14 (ref), var14 (ref)
+			-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (ref), p2 (ref), var2 (ref)
 			if not getFFlagEnableAuditSystemModule() then return end
-			if p13 and p14 then
-				var14.setAdditionalAuditContentItem(p13, p14)
+			if p1 and p2 then
+				var2.setAdditionalAuditContentItem(p1, p2)
 				
 				return
 			end
-		end, { p13, p14 })
+		end, { p1, p2 })
 		useEffect(function()
-			-- upvalues: getFFlagEnableAuditSystemModule (copy), p13 (ref), var14 (ref)
+			-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (ref), var2 (ref)
 			return function()
-				-- upvalues: getFFlagEnableAuditSystemModule (copy), p13 (copy), var14 (copy)
+				-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (copy), var2 (copy)
 				if not getFFlagEnableAuditSystemModule() then return end
-				if p13 then
-					var14.removeAdditionalAuditContentItem(p13)
+				if p1 then
+					var2.removeAdditionalAuditContentItem(p1)
 				end
 			end
-		end, { p13 })
+		end, { p1 })
 	end,
 	useAuditContentContext = function()
-		-- upvalues: useContext (ref), var4 (ref)
-		local var15 = useContext(var4)
+		-- upvalues: useContext (ref), var1 (ref)
+		local var2 = useContext(var1)
 		
 		return {
-			capturedAuditContent = var15.capturedAuditContent,
-			additionalAuditContent = var15.additionalAuditContent,
-			setCapturedAuditContentItem = var15.setCapturedAuditContentItem,
-			removeCapturedAuditContentItem = var15.removeCapturedAuditContentItem,
-			setAdditionalAuditContentItem = var15.setAdditionalAuditContentItem,
-			removeAdditionalAuditContentItem = var15.removeAdditionalAuditContentItem
+			capturedAuditContent = var2.capturedAuditContent,
+			additionalAuditContent = var2.additionalAuditContent,
+			setCapturedAuditContentItem = var2.setCapturedAuditContentItem,
+			removeCapturedAuditContentItem = var2.removeCapturedAuditContentItem,
+			setAdditionalAuditContentItem = var2.setAdditionalAuditContentItem,
+			removeAdditionalAuditContentItem = var2.removeAdditionalAuditContentItem
 		}
 	end
 }

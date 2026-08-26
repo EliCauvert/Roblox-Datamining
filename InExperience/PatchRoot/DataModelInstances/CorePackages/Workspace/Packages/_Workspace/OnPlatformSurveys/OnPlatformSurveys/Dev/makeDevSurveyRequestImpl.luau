@@ -45,8 +45,8 @@ local list_1 = {
 	}
 }
 
-local function _(p0)
-	return string.sub(p0, -16) == "/survey/response"
+local function _(p1)
+	return string.sub(p1, -16) == "/survey/response"
 end
 
 local _ = function(p1, p2)
@@ -80,27 +80,27 @@ return {
 	RESPONSE_DELAY_SECONDS = 0.4,
 	makeRequestImpl = function()
 		-- upvalues: list (ref), promiseModule (ref)
-		local var5 = "dev-survey"
+		local var1 = "dev-survey"
 		
-		return function(p5, _, _)
-			-- upvalues: promiseModule (copy), var5 (ref), list (ref)
-			return promiseModule.new(function(p6)
-				-- upvalues: p5 (ref), var5 (copy), list (copy)
+		return function(p1, _, _)
+			-- upvalues: promiseModule (copy), var1 (ref), list (ref)
+			return promiseModule.new(function(p2)
+				-- upvalues: p1 (ref), var1 (copy), list (copy)
 				task.delay(0.4, function()
-					-- upvalues: p5 (copy), p6 (ref), var5 (copy), list (copy)
-					if string.sub(p5, -16) == "/survey/response" then
-						p6({
+					-- upvalues: p1 (copy), p2 (ref), var1 (copy), list (copy)
+					if string.sub(p1, -16) == "/survey/response" then
+						p2({
 							responseCode = 200,
 							responseBody = { responseId = "dev-response" }
 						})
 						
 						return
 					end
-					p6({
+					p2({
 						responseCode = 200,
 						responseBody = {
 							shouldPromptSurvey = true,
-							surveyId = var5,
+							surveyId = var1,
 							questions = list
 						}
 					})
@@ -110,27 +110,27 @@ return {
 	end,
 	makeBranchingRequestImpl = function()
 		-- upvalues: list_1 (ref), promiseModule (ref)
-		local var6 = "dev-branching-survey"
+		local var1 = "dev-branching-survey"
 		
-		return function(p7, _, _)
-			-- upvalues: promiseModule (copy), var6 (ref), list_1 (ref)
-			return promiseModule.new(function(p8)
-				-- upvalues: p7 (ref), var6 (copy), list_1 (copy)
+		return function(p1, _, _)
+			-- upvalues: promiseModule (copy), var1 (ref), list_1 (ref)
+			return promiseModule.new(function(p2)
+				-- upvalues: p1 (ref), var1 (copy), list_1 (copy)
 				task.delay(0.4, function()
-					-- upvalues: p7 (copy), p8 (ref), var6 (copy), list_1 (copy)
-					if string.sub(p7, -16) == "/survey/response" then
-						p8({
+					-- upvalues: p1 (copy), p2 (ref), var1 (copy), list_1 (copy)
+					if string.sub(p1, -16) == "/survey/response" then
+						p2({
 							responseCode = 200,
 							responseBody = { responseId = "dev-response" }
 						})
 						
 						return
 					end
-					p8({
+					p2({
 						responseCode = 200,
 						responseBody = {
 							shouldPromptSurvey = true,
-							surveyId = var6,
+							surveyId = var1,
 							questions = list_1
 						}
 					})

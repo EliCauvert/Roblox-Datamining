@@ -36,14 +36,14 @@ local t = {
 	})
 }
 
-function t.mock(p0)
+function t.mock(p1)
 	-- upvalues: t (ref), dashModule (ref)
-	p0 = p0 or {}
-	local var5 = t.new()
-	var5.summary = {
+	p1 = p1 or {}
+	local var1 = t.new()
+	var1.summary = {
 		ageRecommendation = { displayName = "13+", minimumAge = 13 }
 	}
-	var5.descriptorUsages = {
+	var1.descriptorUsages = {
 		[1] = {
 			name = "blood",
 			descriptor = {
@@ -77,9 +77,9 @@ function t.mock(p0)
 			}
 		}
 	}
-	local var6 = dashModule.joinDeep(var5, p0)
+	local var2 = dashModule.joinDeep(var1, p1)
 	
-	return if t.validateModel(var6) then var6 else error("AgeRecommendationDetails mockData is invalid")
+	return if t.validateModel(var2) then var2 else error("AgeRecommendationDetails mockData is invalid")
 end
 
 function t.fromJsonData(p1)

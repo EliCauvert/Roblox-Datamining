@@ -5,20 +5,20 @@ local dashModule = require(parent.Dash)
 local blockingModule = require(playerContextualMenu.Http.Blocking)
 
 return roduxModule.createReducer({}, {
-	[blockingModule.GetBlockedUsers.Succeeded.name] = function(_, p0)
+	[blockingModule.GetBlockedUsers.Succeeded.name] = function(_, p1)
 		local t = {}
 		
-		for i, v in ipairs(if p0.responseBody then p0.responseBody.blockedUsers else {}) do
+		for i, v in ipairs(if p1.responseBody then p1.responseBody.blockedUsers else {}) do
 			t[tostring(v.userId)] = true
 		end
 		return t
 	end,
-	[blockingModule.BlockUserById.Succeeded.name] = function(p1, p2)
+	[blockingModule.BlockUserById.Succeeded.name] = function(p2, p3)
 		-- upvalues: dashModule (ref)
-		return dashModule.join(p1, { [tostring(p2.namedIds.users)] = true })
+		return dashModule.join(p2, { [tostring(p3.namedIds.users)] = true })
 	end,
-	[blockingModule.UnblockUserById.Succeeded.name] = function(p3, p4)
+	[blockingModule.UnblockUserById.Succeeded.name] = function(p2, p3)
 		-- upvalues: dashModule (ref)
-		return dashModule.join(p3, { [tostring(p4.namedIds.users)] = false })
+		return dashModule.join(p2, { [tostring(p3.namedIds.users)] = false })
 	end
 })

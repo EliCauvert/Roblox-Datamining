@@ -27,9 +27,9 @@ return {
 		-- upvalues: createEditSessionModule (ref)
 		return createEditSessionModule()
 	end,
-	renderEditor = function(p0)
+	renderEditor = function(p1)
 		-- upvalues: reactModule (ref), trimmingViewModule (ref)
-		return reactModule.createElement(trimmingViewModule, { layoutOrder = 2, controller = p0 })
+		return reactModule.createElement(trimmingViewModule, { layoutOrder = 2, controller = p1 })
 	end,
 	toEdits = function(p1)
 		return { trim = p1 }

@@ -40,37 +40,37 @@ local function _()
 	return textLabel
 end
 
-function chatBubble.init(p0)
+function chatBubble.init(p1)
 	-- upvalues: roactModule (ref), otterModule (ref), textChatService (ref)
-	local var15, var16 = roactModule.createBinding(0)
-	p0.width = var15
-	p0.updateWidth = var16
-	p0.widthMotor = otterModule.createSingleMotor(0)
-	p0.widthMotor:onStep(function(p1)
-		-- upvalues: p0 (ref)
-		p0.updateWidth(math.round(p1))
+	local var1, var2 = roactModule.createBinding(0)
+	p1.width = var1
+	p1.updateWidth = var2
+	p1.widthMotor = otterModule.createSingleMotor(0)
+	p1.widthMotor:onStep(function(p2)
+		-- upvalues: p1 (ref)
+		p1.updateWidth(math.round(p2))
 	end)
-	local var17, var18 = roactModule.createBinding(0)
-	p0.height = var17
-	p0.updateHeight = var18
-	p0.heightMotor = otterModule.createSingleMotor(0)
-	p0.heightMotor:onStep(function(p2)
-		-- upvalues: p0 (ref)
-		p0.updateHeight(math.round(p2))
+	local var3, var4 = roactModule.createBinding(0)
+	p1.height = var3
+	p1.updateHeight = var4
+	p1.heightMotor = otterModule.createSingleMotor(0)
+	p1.heightMotor:onStep(function(p2)
+		-- upvalues: p1 (ref)
+		p1.updateHeight(math.round(p2))
 	end)
-	local var19, var20 = roactModule.createBinding(1)
-	p0.transparency = var19
-	p0.updateTransparency = var20
-	p0.transparencyMotor = otterModule.createSingleMotor(1)
-	p0.transparencyMotor:onStep(p0.updateTransparency)
-	p0.size = roactModule.joinBindings({ p0.width, p0.height }):map(function(p3)
-		return UDim2.fromOffset(p3[1], p3[2])
+	local var5, var6 = roactModule.createBinding(1)
+	p1.transparency = var5
+	p1.updateTransparency = var6
+	p1.transparencyMotor = otterModule.createSingleMotor(1)
+	p1.transparencyMotor:onStep(p1.updateTransparency)
+	p1.size = roactModule.joinBindings({ p1.width, p1.height }):map(function(p2)
+		return UDim2.fromOffset(p2[1], p2[2])
 	end)
-	p0.mockSizingLabel = nil
-	p0.isRichTextEnabled = textChatService.ChatVersion == Enum.ChatVersion.TextChatService
+	p1.mockSizingLabel = nil
+	p1.isRichTextEnabled = textChatService.ChatVersion == Enum.ChatVersion.TextChatService
 end
 
-function chatBubble.getBoundsFromSizingLabel(_, p4, p5, p6, p7)
+function chatBubble.getBoundsFromSizingLabel(_, p1, p2, p3, p4)
 	-- upvalues: coreGuiService (ref)
 	local richTextSizingLabel = Instance.new("ScreenGui")
 	richTextSizingLabel.Enabled = false
@@ -80,34 +80,34 @@ function chatBubble.getBoundsFromSizingLabel(_, p4, p5, p6, p7)
 	textLabel.RichText = true
 	textLabel.Parent = richTextSizingLabel
 	richTextSizingLabel.Parent = coreGuiService
-	textLabel.Text = p4
-	textLabel.TextSize = p5
-	textLabel.Font = p6
-	textLabel.Size = UDim2.fromOffset(p7.X, p7.Y)
+	textLabel.Text = p1
+	textLabel.TextSize = p2
+	textLabel.Font = p3
+	textLabel.Size = UDim2.fromOffset(p4.X, p4.Y)
 	local textBounds = textLabel.TextBounds
 	textLabel.Parent:Destroy()
 	
 	return textBounds
 end
 
-function chatBubble.getTextBounds(p8)
+function chatBubble.getTextBounds(p1)
 	-- upvalues: textService (ref)
-	local chatSettings = p8.props.chatSettings
+	local chatSettings = p1.props.chatSettings
 	
-	return (if p8.isRichTextEnabled then p8:getBoundsFromSizingLabel(p8.props.text, chatSettings.TextSize, chatSettings.Font, Vector2.new(chatSettings.MaxWidth, 10000)) else textService:GetTextSize(p8.props.text, chatSettings.TextSize, chatSettings.Font, Vector2.new(chatSettings.MaxWidth, 10000))) + Vector2.new(chatSettings.Padding * 4, chatSettings.Padding * 2)
+	return (if p1.isRichTextEnabled then p1:getBoundsFromSizingLabel(p1.props.text, chatSettings.TextSize, chatSettings.Font, Vector2.new(chatSettings.MaxWidth, 10000)) else textService:GetTextSize(p1.props.text, chatSettings.TextSize, chatSettings.Font, Vector2.new(chatSettings.MaxWidth, 10000))) + Vector2.new(chatSettings.Padding * 4, chatSettings.Padding * 2)
 end
 
-function chatBubble.render(p9)
+function chatBubble.render(p1)
 	-- upvalues: roactModule (ref), cryoModule (ref)
-	local chatSettings = p9.props.chatSettings
+	local chatSettings = p1.props.chatSettings
 	local backgroundImage = chatSettings.BackgroundImage
 	local backgroundGradient = chatSettings.BackgroundGradient
 	
 	return roactModule.createElement("Frame", {
 		Transparency = 1,
-		LayoutOrder = p9.props.timestamp,
+		LayoutOrder = p1.props.timestamp,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Size = p9.size,
+		Size = p1.size,
 		Position = UDim2.fromScale(1, 0.5)
 	}, {
 		Layout = roactModule.createElement("UIListLayout", {
@@ -123,8 +123,8 @@ function chatBubble.render(p9)
 			AnchorPoint = Vector2.new(0.5, 0),
 			Size = UDim2.fromScale(1, 1),
 			Position = UDim2.new(0.5, 0, 0, 0),
-			BackgroundTransparency = if backgroundImage.Image ~= "" then p9.transparency else 1,
-			ImageTransparency = p9.transparency
+			BackgroundTransparency = if backgroundImage.Image ~= "" then p1.transparency else 1,
+			ImageTransparency = p1.transparency
 		}), {
 			UICorner = chatSettings.CornerEnabled and roactModule.createElement("UICorner", { CornerRadius = chatSettings.CornerRadius }),
 			UIListLayout = roactModule.createElement("UIListLayout", {
@@ -139,103 +139,103 @@ function chatBubble.render(p9)
 				PaddingBottom = UDim.new(0, chatSettings.Padding),
 				PaddingLeft = UDim.new(0, chatSettings.Padding)
 			}),
-			Insert = p9.props.renderInsert and p9.props.renderInsert(),
+			Insert = p1.props.renderInsert and p1.props.renderInsert(),
 			Text = roactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = true,
 				AutoLocalize = false,
 				LayoutOrder = 2,
-				Text = p9.props.text,
-				Size = UDim2.new(1, -(if p9.props.renderInsert then p9.props.insertSize.X + chatSettings.Padding else 0), 1, 0),
+				Text = p1.props.text,
+				Size = UDim2.new(1, -(if p1.props.renderInsert then p1.props.insertSize.X + chatSettings.Padding else 0), 1, 0),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
 				Font = chatSettings.Font,
 				TextColor3 = chatSettings.TextColor3,
 				TextSize = chatSettings.TextSize,
-				TextTransparency = p9.transparency,
-				RichText = p9.isRichTextEnabled
+				TextTransparency = p1.transparency,
+				RichText = p1.isRichTextEnabled
 			}),
 			Gradient = backgroundGradient.Enabled and roactModule.createElement("UIGradient", backgroundGradient)
 		}),
-		Carat = p9.props.isMostRecent and (chatSettings.TailVisible and (p9.props.showCarat and roactModule.createElement("ImageLabel", {
+		Carat = p1.props.isMostRecent and (chatSettings.TailVisible and (p1.props.showCarat and roactModule.createElement("ImageLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/InGameChat/Caret.png",
 			Size = UDim2.fromOffset(9, 6),
 			ImageColor3 = chatSettings.BackgroundColor3,
-			ImageTransparency = p9.transparency
+			ImageTransparency = p1.transparency
 		})))
 	})
 end
 
-function chatBubble.fadeOut(p10)
+function chatBubble.fadeOut(p1)
 	-- upvalues: getTransparencySpringFromSettingsModule (ref)
-	if not p10.isFadingOut then
-		p10.isFadingOut = true
-		p10.transparencyMotor:onComplete(function()
-			-- upvalues: p10 (ref)
-			if p10.props.onFadeOut then
-				p10.props.onFadeOut(p10.props.messageId)
+	if not p1.isFadingOut then
+		p1.isFadingOut = true
+		p1.transparencyMotor:onComplete(function()
+			-- upvalues: p1 (ref)
+			if p1.props.onFadeOut then
+				p1.props.onFadeOut(p1.props.messageId)
 			end
 		end)
-		p10.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(p10.props.chatSettings)(1))
+		p1.transparencyMotor:setGoal(getTransparencySpringFromSettingsModule(p1.props.chatSettings)(1))
 	end
 end
 
-function chatBubble.didUpdate(p11, p12)
+function chatBubble.didUpdate(p1, p2)
 	-- upvalues: getSizeSpringFromSettingsModule (ref)
-	if p11.props.fadingOut then
-		p11:fadeOut()
+	if p1.props.fadingOut then
+		p1:fadeOut()
 	end
-	if p12.text ~= p11.props.text or p12.chatSettings ~= p11.props.chatSettings or (p12.renderInsert ~= p11.props.renderInsert or p12.insertSize ~= p11.props.insertSize) then
-		local textBounds = p11:getTextBounds()
-		local var24 = getSizeSpringFromSettingsModule(p11.props.chatSettings)
-		local padding = p11.props.chatSettings.Padding
+	if p2.text ~= p1.props.text or p2.chatSettings ~= p1.props.chatSettings or (p2.renderInsert ~= p1.props.renderInsert or p2.insertSize ~= p1.props.insertSize) then
+		local textBounds = p1:getTextBounds()
+		local var1 = getSizeSpringFromSettingsModule(p1.props.chatSettings)
+		local padding = p1.props.chatSettings.Padding
 		local x = textBounds.X
 		local y = textBounds.Y
 		
-		if p11.props.renderInsert then
-			x += p11.props.insertSize.X + padding
-			y = math.max(y, p11.props.insertSize.Y + padding * 2)
+		if p1.props.renderInsert then
+			x += p1.props.insertSize.X + padding
+			y = math.max(y, p1.props.insertSize.Y + padding * 2)
 		end
-		p11.heightMotor:setGoal(var24(y))
-		p11.widthMotor:setGoal(var24(x))
+		p1.heightMotor:setGoal(var1(y))
+		p1.widthMotor:setGoal(var1(x))
 	end
 end
 
-function chatBubble.didMount(p13)
+function chatBubble.didMount(p1)
 	-- upvalues: getSizeSpringFromSettingsModule (ref), getTransparencySpringFromSettingsModule (ref), otterModule (ref)
-	p13.isMounted = true
-	local textBounds = p13:getTextBounds()
-	local chatSettings = p13.props.chatSettings
-	local var26 = getSizeSpringFromSettingsModule(chatSettings)
-	local var27 = getTransparencySpringFromSettingsModule(chatSettings)
+	p1.isMounted = true
+	local textBounds = p1:getTextBounds()
+	local chatSettings = p1.props.chatSettings
+	local var1 = getSizeSpringFromSettingsModule(chatSettings)
+	local var2 = getTransparencySpringFromSettingsModule(chatSettings)
 	local x = textBounds.X
 	local y = textBounds.Y
 	
-	if p13.props.renderInsert then
-		x += p13.props.insertSize.X + chatSettings.Padding
-		y = math.max(y, p13.props.insertSize.Y + chatSettings.Padding * 2)
+	if p1.props.renderInsert then
+		x += p1.props.insertSize.X + chatSettings.Padding
+		y = math.max(y, p1.props.insertSize.Y + chatSettings.Padding * 2)
 	end
-	if p13.props.isMostRecent then
-		p13.heightMotor:setGoal(var26(y))
-		p13.widthMotor:setGoal(otterModule.instant(x))
+	if p1.props.isMostRecent then
+		p1.heightMotor:setGoal(var1(y))
+		p1.widthMotor:setGoal(otterModule.instant(x))
 	else
-		p13.heightMotor:setGoal(var26(y))
-		p13.widthMotor:setGoal(var26(x))
+		p1.heightMotor:setGoal(var1(y))
+		p1.widthMotor:setGoal(var1(x))
 	end
-	p13.transparencyMotor:setGoal(var27(chatSettings.Transparency))
+	p1.transparencyMotor:setGoal(var2(chatSettings.Transparency))
 end
 
-function chatBubble.willUnmount(p14)
-	p14.isMounted = false
-	p14.transparencyMotor:destroy()
-	p14.heightMotor:destroy()
-	p14.widthMotor:destroy()
+function chatBubble.willUnmount(p1)
+	p1.isMounted = false
+	p1.transparencyMotor:destroy()
+	p1.heightMotor:destroy()
+	p1.widthMotor:destroy()
 end
 
-return roactRoduxModule.connect(function(p15, p16)
-	local messageId = p15.messages[p16.messageId]
+return roactRoduxModule.connect(function(p1, p2)
+	local messageId = p1.messages[p2.messageId]
 	
 	return {
 		text = if messageId then messageId.text else "",

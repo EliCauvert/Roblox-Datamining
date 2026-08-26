@@ -5,19 +5,19 @@ local useTokens = foundationModule.Hooks.useTokens
 local colorMode = foundationModule.Enums.ColorMode
 local getSceneOverridesStoreModule = require(script.Parent.getSceneOverridesStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), colorMode (ref), getSceneOverridesStoreModule (ref)
-	local isActive = p0.isActive
-	local var3 = useTokens()
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), colorMode (copy)
-		local color3 = var3.Color.Extended.Gray.Gray_300.Color3
-		local color3_1 = var3.Color.Extended.Gray.Gray_400.Color3
-		local color3_2 = var3.Color.Extended.Gray.Gray_500.Color3
-		local color3_3 = var3.Color.Extended.Gray.Gray_700.Color3
-		local color3_4 = var3.Color.Surface.Surface_200.Color3
+	local isActive = p1.isActive
+	local var1 = useTokens()
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), colorMode (copy)
+		local color3 = var1.Color.Extended.Gray.Gray_300.Color3
+		local color3_1 = var1.Color.Extended.Gray.Gray_400.Color3
+		local color3_2 = var1.Color.Extended.Gray.Gray_500.Color3
+		local color3_3 = var1.Color.Extended.Gray.Gray_700.Color3
+		local color3_4 = var1.Color.Surface.Surface_200.Color3
 		
-		return if var3.Config.ColorMode.Name == colorMode.Light then {
+		return if var1.Config.ColorMode.Name == colorMode.Light then {
 			SkyboxBlockerTransparency = 0,
 			FogStart = 400,
 			FogEnd = 500,
@@ -32,28 +32,28 @@ return function(p0)
 			SkyboxBlockerTransparency = 0,
 			FogStart = 400,
 			FogEnd = 500,
-			SkyboxBlockerColor = var3.Color.Extended.Gray.Gray_800.Color3:Lerp(color3_4, 0.3),
+			SkyboxBlockerColor = var1.Color.Extended.Gray.Gray_800.Color3:Lerp(color3_4, 0.3),
 			BackPanel = color3_3:Lerp(color3_4, 0.3),
 			Clouds = color3_3:Lerp(color3_4, 0.3),
-			LargerShapes = color3_3:Lerp(var3.Color.Surface.Surface_100.Color3, 0.4),
+			LargerShapes = color3_3:Lerp(var1.Color.Surface.Surface_100.Color3, 0.4),
 			AvatarParticles = color3_3:Lerp(color3_4, 0.4),
-			Baseplate = var3.Color.Extended.Gray.Gray_900.Color3:Lerp(color3_4, 0.2),
-			FogColor = var3.Color.Extended.Gray.Gray_1100.Color3:Lerp(color3_4, 0.3)
+			Baseplate = var1.Color.Extended.Gray.Gray_900.Color3:Lerp(color3_4, 0.2),
+			FogColor = var1.Color.Extended.Gray.Gray_1100.Color3:Lerp(color3_4, 0.3)
 		}
-	end, { var3 })
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: getSceneOverridesStoreModule (copy), isActive (ref), var4 (ref)
-		local var5 = getSceneOverridesStoreModule()
+		-- upvalues: getSceneOverridesStoreModule (copy), isActive (ref), var2 (ref)
+		local var3 = getSceneOverridesStoreModule()
 		
 		if isActive then
-			var5.setSceneOverrides(var4)
+			var3.setSceneOverrides(var2)
 			
 			return function()
-				-- upvalues: var5 (ref)
-				var5.setSceneOverrides(nil)
+				-- upvalues: var3 (ref)
+				var3.setSceneOverrides(nil)
 			end
 		end
-	end, { isActive, var4 })
+	end, { isActive, var2 })
 	
-	return p0.children
+	return p1.children
 end

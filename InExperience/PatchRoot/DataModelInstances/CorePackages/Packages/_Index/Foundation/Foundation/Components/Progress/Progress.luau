@@ -11,12 +11,12 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local _ = require(foundation.Providers.Style.Tokens)
 local t = { testId = "--foundation-progress" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), progressShapeModule (ref), reactModule (ref), progressCircleModule (ref), dashModule (ref), progressBarModule (ref)
-	local var9 = withDefaultsModule(p0, t)
+	local var1 = withDefaultsModule(p1, t)
 	
 	if not flagsModule.FoundationProgressBarBetaUpdate then
-		var9.ref = p1
+		var1.ref = p2
 	end
-	return if var9.shape == progressShapeModule.Circle then reactModule.createElement(progressCircleModule, if flagsModule.FoundationProgressBarBetaUpdate then dashModule.join(var9, { ref = p1 }) else var9) else reactModule.createElement(progressBarModule, if flagsModule.FoundationProgressBarBetaUpdate then dashModule.join(var9, { ref = p1 }) else var9)
+	return if var1.shape == progressShapeModule.Circle then reactModule.createElement(progressCircleModule, if flagsModule.FoundationProgressBarBetaUpdate then dashModule.join(var1, { ref = p2 }) else var1) else reactModule.createElement(progressBarModule, if flagsModule.FoundationProgressBarBetaUpdate then dashModule.join(var1, { ref = p2 }) else var1)
 end))

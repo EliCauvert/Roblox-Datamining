@@ -7,18 +7,18 @@ local getProfileTrustedFriendActionsModule = require(appChat.Http.getProfileTrus
 local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
 local pendingIncomingTrustedConnection = game:DefineFastFlag("PendingIncomingTrustedConnection", false)
 
-local function _(p0, p1, p2, p3)
+local function _(p1, p2, p3, p4)
 	return {
-		rawActionType = p0,
-		actionType = p1,
-		isDisabled = p2,
-		modalVariantOverride = p3
+		rawActionType = p1,
+		actionType = p2,
+		isDisabled = p3,
+		modalVariantOverride = p4
 	}
 end
 
-local function normalizeTrustedFriendAction(p4)
+local function normalizeTrustedFriendAction(p1)
 	-- upvalues: fFlagProfilePlatformAddTC (ref), sources (ref), pendingIncomingTrustedConnection (ref)
-	for i, v in p4 do
+	for i, v in p1 do
 		if v ~= "RemoveTrustedConnection" then
 			if v == "AddTrustedConnection" then
 				if fFlagProfilePlatformAddTC then
@@ -74,11 +74,11 @@ local function normalizeTrustedFriendAction(p4)
 	return nil
 end
 
-return function(p5)
+return function(p2)
 	-- upvalues: promiseModule (ref), getProfileTrustedFriendActionsModule (ref), normalizeTrustedFriendAction (ref)
-	return if p5 == "" then promiseModule.resolve(nil) else getProfileTrustedFriendActionsModule(p5):andThen(function(p6)
+	return if p2 == "" then promiseModule.resolve(nil) else getProfileTrustedFriendActionsModule(p2):andThen(function(p3)
 		-- upvalues: normalizeTrustedFriendAction (copy)
-		return normalizeTrustedFriendAction(p6)
+		return normalizeTrustedFriendAction(p3)
 	end):catch(function()
 		return nil
 	end)

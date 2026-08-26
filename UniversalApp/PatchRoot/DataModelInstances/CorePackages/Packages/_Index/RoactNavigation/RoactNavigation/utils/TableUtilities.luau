@@ -1,126 +1,126 @@
 ﻿local t = {}
 local t_1 = {}
 
-local function _(p0)
-	return if type(p0) == "string" then string.format("%s", p0) else string.format("[%s]", tostring(p0))
+local function _(p1)
+	return if type(p1) == "string" then string.format("%s", p1) else string.format("[%s]", tostring(p1))
 end
 
 local function makeValueString(p1)
-	local var5 = type(p1)
+	local var1 = type(p1)
 	
-	return if var5 == "string" then string.format("%q", p1) elseif var5 == "function" or var5 == "table" then string.format("<%s>", tostring(p1)) else string.format("%s", tostring(p1))
+	return if var1 == "string" then string.format("%q", p1) elseif var1 == "function" or var1 == "table" then string.format("<%s>", tostring(p1)) else string.format("%s", tostring(p1))
 end
 
-local function printKeypair(p2, p3, p4, p5)
+local function printKeypair(p1, p2, p3, p4)
 	-- upvalues: makeValueString (ref)
-	print(string.format("%s%s = %s,%s", p4, if type(p2) == "string" then string.format("%s", p2) else string.format("[%s]", tostring(p2)), makeValueString(p3), if p5 then string.format(" -- %s", p5) else ""))
+	print(string.format("%s%s = %s,%s", p3, if type(p1) == "string" then string.format("%s", p1) else string.format("[%s]", tostring(p1)), makeValueString(p2), if p4 then string.format(" -- %s", p4) else ""))
 end
 
-function t.ShallowEqual(p6, p7, p8)
+function t.ShallowEqual(p1, p2, p3)
 	-- upvalues: t_1 (ref)
-	if not p6 or not p7 then
+	if not p1 or not p2 then
 		return false
-	elseif p6 == p7 then
+	elseif p1 == p2 then
 		return true
-	elseif not p8 then
-		p8 = t_1
+	elseif not p3 then
+		p3 = t_1
 	end
-	for i, v in p6 do
-		if p7[i] ~= v and not p8[i] then
+	for i, v in p1 do
+		if p2[i] ~= v and not p3[i] then
 			return false
 		end
 	end
-	for i, v_1 in p7 do
-		if p6[i] ~= v_1 and not p8[i] then
+	for i, v_1 in p2 do
+		if p1[i] ~= v_1 and not p3[i] then
 			return false
 		end
 	end
 	return true
 end
 
-local function formatDeepEqualMessage(p9, p10)
-	return if p10 == 0 then p9:gsub("{1}", "first"):gsub("{2}", "second") else p9
+local function formatDeepEqualMessage(p4, p5)
+	return if p5 == 0 then p4:gsub("{1}", "first"):gsub("{2}", "second") else p4
 end
 
-function t.DeepEqual(p11, p12, p13)
+function t.DeepEqual(p4, p5, p6)
 	-- upvalues: formatDeepEqualMessage (ref), t (ref)
-	p13 = p13 or 0
+	p6 = p6 or 0
 	
-	if p11 == p12 then
+	if p4 == p5 then
 		return true
-	elseif typeof(p11) ~= typeof(p12) then
-		return false, formatDeepEqualMessage(("{1} is of type %s, but {2} is of type %s"):format(typeof(p11), typeof(p12)), p13)
-	elseif typeof(p11) ~= "table" then
-		return false, formatDeepEqualMessage("{1} ~= {2}", p13)
+	elseif typeof(p4) ~= typeof(p5) then
+		return false, formatDeepEqualMessage(("{1} is of type %s, but {2} is of type %s"):format(typeof(p4), typeof(p5)), p6)
+	elseif typeof(p4) ~= "table" then
+		return false, formatDeepEqualMessage("{1} ~= {2}", p6)
 	end
-	local var7
+	local var1
 	local t_1 = {}
 	
-	for i, v in p11 do
+	for i, v in p4 do
 		t_1[i] = true
-		var7, var9 = t.DeepEqual(v, p12[i], p13 + 1)
+		var1, var9 = t.DeepEqual(v, p5[i], p6 + 1)
 		
-		if not var7 then
-			return false, formatDeepEqualMessage(var9:gsub("{1}", ("{1}[%s]"):format(tostring(i))):gsub("{2}", ("{2}[%s]"):format(tostring(i))), p13)
+		if not var1 then
+			return false, formatDeepEqualMessage(var9:gsub("{1}", ("{1}[%s]"):format(tostring(i))):gsub("{2}", ("{2}[%s]"):format(tostring(i))), p6)
 		end
 	end
-	for i_1, v_1 in p12 do
+	for i_1, v_1 in p5 do
 		if not t_1[i_1] then
-			var7, var8 = t.DeepEqual(p11[i_1], v_1, p13 + 1)
+			var1, var8 = t.DeepEqual(p4[i_1], v_1, p6 + 1)
 			
-			if not var7 then
-				return false, formatDeepEqualMessage(var8:gsub("{1}", ("{1}[%s]"):format(tostring(i_1))):gsub("{2}", ("{2}[%s]"):format(tostring(i_1))), p13)
+			if not var1 then
+				return false, formatDeepEqualMessage(var8:gsub("{1}", ("{1}[%s]"):format(tostring(i_1))):gsub("{2}", ("{2}[%s]"):format(tostring(i_1))), p6)
 			end
 		end
 	end
 	return true
 end
 
-function t.EqualKey(p14, p15, p16)
-	return p14 and p15 and (p16 and p16 ~= "") and (p14[p16] and p15[p16] and p14[p16] == p15[p16])
+function t.EqualKey(p7, p8, p9)
+	return p7 and p8 and (p9 and p9 ~= "") and (p7[p9] and p8[p9] and p7[p9] == p8[p9])
 end
 
-function t.TableDifference(p17, p18)
+function t.TableDifference(p7, p8)
 	local t = {}
 	
-	for i, v in p17 do
-		if p18[i] ~= p17[i] then
+	for i, v in p7 do
+		if p8[i] ~= p7[i] then
 			t[i] = v
 		end
 	end
 	return t
 end
 
-local _ = function(p19)
+local _ = function(p9)
 	local t = {}
 	
-	for i = 1, #p19 do
-		t[p19[i]] = true
+	for i = 1, #p9 do
+		t[p9[i]] = true
 	end
 	return t
 end
 
-local _ = function(p20)
+local _ = function(p10)
 	local t = {}
 	
-	for i, v in p20 do
+	for i, v in p10 do
 		table.insert(t, i)
 	end
 	return t
 end
 
-function t.ListDifference(p21, p22)
+function t.ListDifference(p11, p12)
 	-- upvalues: t (ref)
 	local tableDifference = t.TableDifference
 	local t_1 = {}
 	
-	for i = 1, #p21 do
-		t_1[p21[i]] = true
+	for i = 1, #p11 do
+		t_1[p11[i]] = true
 	end
 	local t_2 = {}
 	
-	for i_1 = 1, #p22 do
-		t_2[p22[i_1]] = true
+	for i_1 = 1, #p12 do
+		t_2[p12[i_1]] = true
 	end
 	local t_3 = {}
 	
@@ -130,98 +130,98 @@ function t.ListDifference(p21, p22)
 	return t_3
 end
 
-function t.CheckListConsistency(p23)
-	local var16 = false
-	local var17 = false
-	local var18 = true
-	local var19 = 1
+function t.CheckListConsistency(p13)
+	local var2 = false
+	local var3 = false
+	local var4 = true
+	local var5 = 1
 	
-	for i, v in p23 do
+	for i, v in p13 do
 		if type(i) == "string" then
-			var17 = true
+			var3 = true
 		elseif type(i) == "number" then
-			if var19 ~= i then
-				var18 = false
+			if var5 ~= i then
+				var4 = false
 			end
-			var16 = true
+			var2 = true
 		end
 		return false
-		if not var17 or not var16 then
-			var19 += 1
+		if not var3 or not var2 then
+			var5 += 1
 			continue
 		end
 		return false
 	end
-	return if var16 then var18 else true
+	return if var2 then var4 else true
 end
 
-function t.RecursiveToString(p24, p25)
+function t.RecursiveToString(p14, p15)
 	-- upvalues: t (ref)
-	p25 = p25 or ""
+	p15 = p15 or ""
 	
-	if type(p24) ~= "table" then
-		return tostring(p24)
+	if type(p14) ~= "table" then
+		return tostring(p14)
 	end
-	local var20 = ""
+	local var6 = ""
 	
-	if not t.CheckListConsistency(p24) then
-		var20 ..= "-- WARNING: this table fails the list consistency test\n"
+	if not t.CheckListConsistency(p14) then
+		var6 ..= "-- WARNING: this table fails the list consistency test\n"
 	end
-	var20 ..= "{\n"
+	var6 ..= "{\n"
 	
-	for i, v in p24 do
+	for i, v in p14 do
 		if type(i) == "string" then
-			var20 ..= "  " .. p25 .. tostring(i) .. " = " .. t.RecursiveToString(v, "  " .. p25) .. ";\n"
+			var6 ..= "  " .. p25 .. tostring(i) .. " = " .. t.RecursiveToString(v, "  " .. p25) .. ";\n"
 		end
 		if type(i) == "number" then
-			var20 ..= "  " .. p25 .. t.RecursiveToString(v, "  " .. p25) .. ",\n"
+			var6 ..= "  " .. p25 .. t.RecursiveToString(v, "  " .. p25) .. ",\n"
 		end
 	end
-	return var20 .. p25 .. "}"
+	return var6 .. p25 .. "}"
 end
 
-function t.Print(p26, p27)
+function t.Print(p16, p17)
 	-- upvalues: makeValueString (ref), printKeypair (ref)
-	p27 = p27 or "  "
+	p17 = p17 or "  "
 	
-	if type(p26) ~= "table" then
+	if type(p16) ~= "table" then
 		error("TableUtilities.Print must be passed a table", 2)
 	end
 	local t = {}
 	
-	local function recurse(p28, p29, p30)
-		-- upvalues: t (ref), p27 (write), makeValueString (copy), printKeypair (copy), recurse (ref)
-		t[p28] = true
-		local repeated = string.rep(p27, p30)
-		local repeated_1 = string.rep(p27, p30 + 1)
+	local function recurse(p18, p19, p20)
+		-- upvalues: t (ref), p17 (write), makeValueString (copy), printKeypair (copy), recurse (ref)
+		t[p18] = true
+		local repeated = string.rep(p17, p20)
+		local repeated_1 = string.rep(p17, p20 + 1)
 		
-		if p29 then
-			print(string.format("%s%s = %s {", repeated, if type(p29) == "string" then string.format("%s", p29) else string.format("[%s]", tostring(p29)), makeValueString(p28)))
+		if p19 then
+			print(string.format("%s%s = %s {", repeated, if type(p19) == "string" then string.format("%s", p19) else string.format("[%s]", tostring(p19)), makeValueString(p18)))
 		else
-			print(string.format("%s%s {", repeated, makeValueString(p28)))
+			print(string.format("%s%s {", repeated, makeValueString(p18)))
 		end
-		for i, v in p28 do
+		for i, v in p18 do
 			if type(v) ~= "table" then
 				print(string.format("%s%s = %s,%s", repeated_1, if type(i) == "string" then string.format("%s", i) else string.format("[%s]", tostring(i)), makeValueString(v), ""))
 			elseif t[v] then
 				printKeypair(i, v, repeated_1, "Possible cycle")
 			else
-				recurse(v, i, p30 + 1)
+				recurse(v, i, p20 + 1)
 			end
 		end
-		print(string.format("%s}%s", repeated, if p30 > 0 then "," else ""))
+		print(string.format("%s}%s", repeated, if p20 > 0 then "," else ""))
 	end
 	
-	recurse(p26, nil, 0)
+	recurse(p16, nil, 0)
 end
 
-function t.FieldCount(p31)
-	local var25 = 0
+function t.FieldCount(p18)
+	local var7 = 0
 	
-	for i in p31 do
-		var25 += 1
+	for i in p18 do
+		var7 += 1
 	end
-	return var25
+	return var7
 end
 
 return t

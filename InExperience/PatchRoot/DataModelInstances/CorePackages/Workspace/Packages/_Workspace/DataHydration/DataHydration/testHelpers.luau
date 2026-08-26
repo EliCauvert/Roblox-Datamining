@@ -2,11 +2,11 @@
 local dataStatus = require(script:FindFirstAncestor("DataHydration").DataHydrationTypes).DataStatus
 
 return {
-	jsonOk = function(p0)
+	jsonOk = function(p1)
 		-- upvalues: httpService (ref)
 		return {
 			statusCode = 200,
-			responseBody = httpService:JSONEncode(p0)
+			responseBody = httpService:JSONEncode(p1)
 		}
 	end,
 	awaitReady = function(p1, p2)

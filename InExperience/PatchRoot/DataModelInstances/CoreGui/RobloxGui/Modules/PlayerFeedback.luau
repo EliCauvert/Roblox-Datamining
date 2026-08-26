@@ -1,4 +1,4 @@
-﻿local var0 = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsPlayerFeedback).createApp()
-var0.instance.Parent = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+﻿local var1 = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsPlayerFeedback).createApp()
+var1.instance.Parent = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 
-return var0
+return var1

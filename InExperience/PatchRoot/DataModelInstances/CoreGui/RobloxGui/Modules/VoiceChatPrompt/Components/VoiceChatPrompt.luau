@@ -18,7 +18,7 @@ voiceChatPrompt.validateProps = tModule.strictInterface({
 	settingsAppAvailable = tModule.optional(tModule.boolean)
 })
 
-function voiceChatPrompt.render(p0)
+function voiceChatPrompt.render(p1)
 	-- upvalues: roactModule (ref), inGameMenuPolicyModule (ref), voiceChatPromptFrameModule (ref)
 	return roactModule.createElement("ScreenGui", {
 		AutoLocalize = false,
@@ -28,9 +28,9 @@ function voiceChatPrompt.render(p0)
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
 		PolicyProvider = roactModule.createElement(inGameMenuPolicyModule.Provider, {
-			policy = { p0.props.policyMapper or inGameMenuPolicyModule.Mapper }
+			policy = { p1.props.policyMapper or inGameMenuPolicyModule.Mapper }
 		}, {
-			Content = roactModule.createElement(voiceChatPromptFrameModule, p0.props)
+			Content = roactModule.createElement(voiceChatPromptFrameModule, p1.props)
 		})
 	})
 end

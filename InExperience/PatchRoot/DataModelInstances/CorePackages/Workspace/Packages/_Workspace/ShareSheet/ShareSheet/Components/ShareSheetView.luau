@@ -18,18 +18,18 @@ local function setContentScrollingFrameRef(value)
 	end
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), sheet (ref), text (ref), setContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetActionRowModule (ref)
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
-		isOpen = p0.isOpen,
-		onClose = p0.onClose
+		isOpen = p1.isOpen,
+		onClose = p1.onClose
 	}, {
 		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small content-emphasis",
-				Text = p0.shareLabel
+				Text = p1.shareLabel
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, {
@@ -37,27 +37,27 @@ return function(p0)
 			scrollingFrameRef = setContentScrollingFrameRef
 		}, {
 			ContentLayout = reactModule.createElement(view, { tag = "col gap-xlarge size-full-0 auto-y" }, {
-				SocialRow = if p0.shouldShowSocialRow then reactModule.createElement(shareSheetSocialRowModule, {
+				SocialRow = if p1.shouldShowSocialRow then reactModule.createElement(shareSheetSocialRowModule, {
 					LayoutOrder = 1,
-					conversationEligibility = p0.conversationEligibility,
-					isLoading = p0.isSocialRowLoading,
-					onConversationActivated = p0.onConversationActivated,
-					selectedConversationIds = p0.selectedConversationIds
+					conversationEligibility = p1.conversationEligibility,
+					isLoading = p1.isSocialRowLoading,
+					onConversationActivated = p1.onConversationActivated,
+					selectedConversationIds = p1.selectedConversationIds
 				}) else nil,
-				RowDivider = if p0.shouldShowSocialRow then reactModule.createElement(divider, { LayoutOrder = 2, testId = "share-sheet-row-divider" }) else nil,
-				ActionsRow = if next(p0.selectedConversationIds) ~= nil or p0.isSending then reactModule.createElement(shareSendRowModule, {
+				RowDivider = if p1.shouldShowSocialRow then reactModule.createElement(divider, { LayoutOrder = 2, testId = "share-sheet-row-divider" }) else nil,
+				ActionsRow = if next(p1.selectedConversationIds) ~= nil or p1.isSending then reactModule.createElement(shareSendRowModule, {
 					LayoutOrder = 3,
-					isLoading = p0.isSending,
-					label = p0.sendLabel,
-					messagePlaceholder = p0.messagePlaceholder,
-					onActivated = p0.onSendActivated,
-					onFocusGained = if fFlagShareSheetTelemetryRefactorModule then p0.onComposerFocused else nil
+					isLoading = p1.isSending,
+					label = p1.sendLabel,
+					messagePlaceholder = p1.messagePlaceholder,
+					onActivated = p1.onSendActivated,
+					onFocusGained = if fFlagShareSheetTelemetryRefactorModule then p1.onComposerFocused else nil
 				}) else reactModule.createElement(shareSheetActionRowModule, {
 					LayoutOrder = 3,
-					canShare = p0.canShareLink,
-					context = p0.context,
-					telemetryId = p0.telemetryId,
-					url = p0.url
+					canShare = p1.canShareLink,
+					context = p1.context,
+					telemetryId = p1.telemetryId,
+					url = p1.url
 				})
 			})
 		})

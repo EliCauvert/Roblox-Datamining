@@ -13,45 +13,45 @@ local isNonNullType = definitionModule.isNonNullType
 local nullModule = require(parent.luaUtils.null)
 local isMissingVariable = nil
 
-local function valueFromAST(p0, p1, p2)
+local function valueFromAST(p1, p2, p3)
 	-- upvalues: kind (ref), nullModule (ref), isNonNullType (ref), valueFromAST (ref), isListType (ref), isMissingVariable (write), isInputObjectType (ref), keyMap (ref), isLeafType (ref), invariant (ref), inspect (ref)
-	local ofType, var6
-	if not p0 then return end
-	if p0.kind == kind.VARIABLE then
-		local value = p0.name.value
+	local ofType, var1
+	if not p1 then return end
+	if p1.kind == kind.VARIABLE then
+		local value = p1.name.value
 		
-		if p2 == nil or p2[value] == nil then return end
-		local var4 = p2[value]
+		if p3 == nil or p3[value] == nil then return end
+		local var2 = p3[value]
 		
-		if var4 == nullModule and isNonNullType(p1) then
+		if var2 == nullModule and isNonNullType(p2) then
 			return
 		end
-		return var4
-	elseif isNonNullType(p1) then
-		if p0.kind == kind.NULL then
+		return var2
+	elseif isNonNullType(p2) then
+		if p1.kind == kind.NULL then
 			return
 		end
-		return valueFromAST(p0, p1.ofType, p2)
-	elseif p0.kind == kind.NULL then
+		return valueFromAST(p1, p2.ofType, p3)
+	elseif p1.kind == kind.NULL then
 		return nullModule
-	elseif isListType(p1) then
-		ofType = p1.ofType
+	elseif isListType(p2) then
+		ofType = p2.ofType
 		
-		if p0.kind == kind.LIST then
+		if p1.kind == kind.LIST then
 			local t = {}
 			
-			for i, v in ipairs(p0.values) do
-				if isMissingVariable(v, p2) then
+			for i, v in ipairs(p1.values) do
+				if isMissingVariable(v, p3) then
 					if not isNonNullType(ofType) then
 						table.insert(t, nullModule)
 						continue
 					end
 					return
 				else
-					var6 = valueFromAST(v, ofType, p2)
+					var1 = valueFromAST(v, ofType, p3)
 					
-					if var6 ~= nil then
-						table.insert(t, var6)
+					if var1 ~= nil then
+						table.insert(t, var1)
 						continue
 					end
 					return
@@ -59,28 +59,28 @@ local function valueFromAST(p0, p1, p2)
 			end
 			return t
 		else
-			local var7 = valueFromAST(p0, ofType, p2)
+			local var3 = valueFromAST(p1, ofType, p3)
 			
-			if var7 == nil then
+			if var3 == nil then
 				return
 			end
-			return { var7 }
+			return { var3 }
 		end
-	elseif isInputObjectType(p1) then
-		if p0.kind ~= kind.OBJECT then return end
+	elseif isInputObjectType(p2) then
+		if p1.kind ~= kind.OBJECT then return end
 		ofType = {}
-		local var8 = keyMap(p0.fields, function(p3)
-			return p3.name.value
+		local var4 = keyMap(p1.fields, function(p4)
+			return p4.name.value
 		end)
 		
-		for i, v in ipairs(p1:getFields():values()) do
-			var6 = var8[v.name]
+		for i, v in ipairs(p2:getFields():values()) do
+			var1 = var4[v.name]
 			
-			if var6 and not isMissingVariable(var6.value, p2) then
-				local var9 = valueFromAST(var6.value, v.type, p2)
+			if var1 and not isMissingVariable(var1.value, p3) then
+				local var5 = valueFromAST(var1.value, v.type, p3)
 				
-				if var9 ~= nil then
-					ofType[v.name] = var9
+				if var5 ~= nil then
+					ofType[v.name] = var5
 					continue
 				end
 				return
@@ -91,16 +91,16 @@ local function valueFromAST(p0, p1, p2)
 			end
 		end
 		return ofType
-	elseif not isLeafType(p1) then
-		invariant(false, "Unexpected input type: " .. inspect(p1))
+	elseif not isLeafType(p2) then
+		invariant(false, "Unexpected input type: " .. inspect(p2))
 		
 		return
 	end
 	ofType = nil
 	
 	if not pcall(function()
-		-- upvalues: ofType (write), p1 (ref), p0 (ref), p2 (ref)
-		ofType = p1:parseLiteral(p0, p2)
+		-- upvalues: ofType (write), p2 (ref), p1 (ref), p3 (ref)
+		ofType = p2:parseLiteral(p1, p3)
 	end) then return end
 	if ofType == nil then
 		return

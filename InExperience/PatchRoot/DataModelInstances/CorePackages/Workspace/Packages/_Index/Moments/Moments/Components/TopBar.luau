@@ -8,20 +8,20 @@ local t = {
 	defaultTitle = "Feature.Moments.Label.MomentsExperienceName"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), momentsHeaderContainerModule (ref)
 	return reactModule.createElement(momentsHeaderContainerModule, {
 		animateWithImmersiveChrome = true,
-		layoutOrder = p0.layoutOrder,
-		variant = if p0.isBaseScreen then "base" else "close",
-		showFtuxTooltip = p0.showFtuxTooltip,
-		onFtuxTooltipDismissed = p0.onFtuxTooltipDismissed,
-		onCreatePressed = p0.onCreatePressed,
-		onClose = p0.onClose,
-		onNavigateToTrending = p0.onNavigateToTrending,
-		onNavigateToMyMoments = p0.onNavigateToMyMoments,
-		title = p0.title or useLocalization(t).defaultTitle,
-		showTopScrim = p0.showTopScrim,
-		showHamburger = p0.showHamburger
+		layoutOrder = p1.layoutOrder,
+		variant = if p1.isBaseScreen then "base" else "close",
+		showFtuxTooltip = p1.showFtuxTooltip,
+		onFtuxTooltipDismissed = p1.onFtuxTooltipDismissed,
+		onCreatePressed = p1.onCreatePressed,
+		onClose = p1.onClose,
+		onNavigateToTrending = p1.onNavigateToTrending,
+		onNavigateToMyMoments = p1.onNavigateToMyMoments,
+		title = p1.title or useLocalization(t).defaultTitle,
+		showTopScrim = p1.showTopScrim,
+		showHamburger = p1.showHamburger
 	})
 end

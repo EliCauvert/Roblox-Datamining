@@ -10,9 +10,9 @@ function t.new()
 	return t_1
 end
 
-function t:connect(p0)
+function t:connect(p1)
 	-- upvalues: immutableModule (ref)
-	local t = { isConnected = true, callback = p0 }
+	local t = { isConnected = true, callback = p1 }
 	self._listeners = immutableModule.Append(self._listeners, t)
 	
 	return {

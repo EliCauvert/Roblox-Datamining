@@ -7,109 +7,109 @@ local impressionsVisualizerModule = require(script.Parent.ImpressionsVisualizer)
 local luaAppFixImpressionsHookDependencies = game:DefineFastFlag("LuaAppFixImpressionsHookDependencies", false)
 local fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = require(parent.SharedFlags).FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), signal (ref), impressionsVisualizerModule (ref), luaAppFixImpressionsHookDependencies (ref), impressionsDetectorModule (ref), impressionDetectorWithoutNavigationModule (ref), fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref)
-	local var5 = reactModule.useRef({})
-	local var6 = reactModule.useRef(signal.new())
+	local var1 = reactModule.useRef({})
+	local var2 = reactModule.useRef(signal.new())
 	local _ = nil
-	local var7 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(nil)
 	
-	if var7.current == nil then
-		var7.current = impressionsVisualizerModule.new(p0.impressionsTag)
+	if var3.current == nil then
+		var3.current = impressionsVisualizerModule.new(p1.impressionsTag)
 	end
-	assert(var7.current, "impressionsVisualizer should always be truthy; check needed for lint")
-	local var8, var9 = reactModule.useState({})
-	local var10, var11 = reactModule.useState(p0.dataUpdatedTimestamp)
-	local var12 = reactModule.useRef(p0.impressionsTag)
-	local viewPortBounds = p0.viewPortBounds
+	assert(var3.current, "impressionsVisualizer should always be truthy; check needed for lint")
+	local var4, var5 = reactModule.useState({})
+	local var6, var7 = reactModule.useState(p1.dataUpdatedTimestamp)
+	local var8 = reactModule.useRef(p1.impressionsTag)
+	local viewPortBounds = p1.viewPortBounds
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), p0 (ref), var11 (ref), var5 (ref), var7 (write), var6 (ref)
-		if var12.current ~= p0.impressionsTag then
-			var12.current = p0.impressionsTag
-			var11(p0.dataUpdatedTimestamp)
-			var5.current = {}
-			var7.current:onClearAllImpressions()
-			var7.current:setImpressionsTag(p0.impressionsTag)
-			var6.current:fire()
+		-- upvalues: var8 (ref), p1 (ref), var7 (ref), var1 (ref), var3 (write), var2 (ref)
+		if var8.current ~= p1.impressionsTag then
+			var8.current = p1.impressionsTag
+			var7(p1.dataUpdatedTimestamp)
+			var1.current = {}
+			var3.current:onClearAllImpressions()
+			var3.current:setImpressionsTag(p1.impressionsTag)
+			var2.current:fire()
 		end
 	end, {
-		p0.impressionsTag,
-		if luaAppFixImpressionsHookDependencies then p0.dataUpdatedTimestamp else nil
+		p1.impressionsTag,
+		if luaAppFixImpressionsHookDependencies then p1.dataUpdatedTimestamp else nil
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), p0 (ref)
-		var6.current:fire()
-		local var13 = if p0.scrollViewPositionChangedSignal then p0.scrollViewPositionChangedSignal:connect(function()
-			-- upvalues: var6 (copy)
-			var6.current:fire()
+		-- upvalues: var2 (ref), p1 (ref)
+		var2.current:fire()
+		local var9 = if p1.scrollViewPositionChangedSignal then p1.scrollViewPositionChangedSignal:connect(function()
+			-- upvalues: var2 (copy)
+			var2.current:fire()
 		end) else nil
 		
 		return function()
-			-- upvalues: var13 (write)
-			if var13 ~= nil then
-				var13:disconnect()
+			-- upvalues: var9 (write)
+			if var9 ~= nil then
+				var9:disconnect()
 			end
 		end
-	end, { p0.scrollViewPositionChangedSignal })
+	end, { p1.scrollViewPositionChangedSignal })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var6 (ref), var10 (ref), var11 (ref), var5 (ref), var7 (write)
-		if p0.pageContext and p0.routeName == p0.pageContext then
-			var6.current:fire()
+		-- upvalues: p1 (ref), var2 (ref), var6 (ref), var7 (ref), var1 (ref), var3 (write)
+		if p1.pageContext and p1.routeName == p1.pageContext then
+			var2.current:fire()
 			
-			if p0.dataUpdatedTimestamp ~= var10 then
-				var11(p0.dataUpdatedTimestamp)
-				var5.current = {}
-				var7.current:onClearAllImpressions()
+			if p1.dataUpdatedTimestamp ~= var6 then
+				var7(p1.dataUpdatedTimestamp)
+				var1.current = {}
+				var3.current:onClearAllImpressions()
 			end
 		end
 	end, {
-		p0.routeName,
-		p0.pageContext,
-		p0.dataUpdatedTimestamp,
-		var10,
+		p1.routeName,
+		p1.pageContext,
+		p1.dataUpdatedTimestamp,
+		var6,
 		viewPortBounds
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), p0 (ref), var7 (write), var9 (ref)
-		if var8 ~= nil and #var8 > 0 then
-			p0.sendImpressions(var8)
-			var7.current:onSendImpressions(var8)
-			var9({})
+		-- upvalues: var4 (ref), p1 (ref), var3 (write), var5 (ref)
+		if var4 ~= nil and #var4 > 0 then
+			p1.sendImpressions(var4)
+			var3.current:onSendImpressions(var4)
+			var5({})
 		end
 	end, {
-		var8,
-		if luaAppFixImpressionsHookDependencies then p0.sendImpressions else nil
+		var4,
+		if luaAppFixImpressionsHookDependencies then p1.sendImpressions else nil
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var7 (write)
+		-- upvalues: var3 (write)
 		return function()
-			-- upvalues: var7 (copy)
-			var7.current:destroy()
+			-- upvalues: var3 (copy)
+			var3.current:destroy()
 		end
 	end, {})
 	
-	return reactModule.createElement(if p0.pageContext then impressionsDetectorModule else impressionDetectorWithoutNavigationModule, {
-		parentRef = p0.parentRef,
+	return reactModule.createElement(if p1.pageContext then impressionsDetectorModule else impressionDetectorWithoutNavigationModule, {
+		parentRef = p1.parentRef,
 		viewPortBounds = viewPortBounds,
-		viewPortFillBounds = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then p0.viewPortFillBounds else nil,
-		onRequestImpressionsSignal = var6.current,
-		filterImpressionFunc = reactModule.useCallback(function(p1)
-			-- upvalues: var5 (ref)
-			if var5.current[p1] == nil then
-				var5.current[p1] = true
+		viewPortFillBounds = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then p1.viewPortFillBounds else nil,
+		onRequestImpressionsSignal = var2.current,
+		filterImpressionFunc = reactModule.useCallback(function(p2)
+			-- upvalues: var1 (ref)
+			if var1.current[p2] == nil then
+				var1.current[p2] = true
 				
 				return true
 			end
 			return false
 		end, {}),
 		onImpressionsDetected = reactModule.useCallback(function(p2)
-			-- upvalues: var9 (ref)
+			-- upvalues: var5 (ref)
 			if p2 and #p2 ~= 0 then
-				var9(p2)
+				var5(p2)
 				
 				return
 			end
 		end, {}),
-		impressionsTag = p0.impressionsTag
+		impressionsTag = p1.impressionsTag
 	})
 end

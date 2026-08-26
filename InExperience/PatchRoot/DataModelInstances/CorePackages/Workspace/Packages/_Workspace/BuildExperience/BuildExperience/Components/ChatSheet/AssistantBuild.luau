@@ -18,69 +18,69 @@ local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 local view = foundationModule.View
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
-	local var9 = if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		disabledTitle = localizationStringsModule.CHAT_ASSISTANT_DISABLED,
 		portraitRequired = localizationStringsModule.CHAT_PORTRAIT_REQUIRED
 	}) else nil
-	local var10 = getAssistantBuildStoreModule()
-	local var11 = getPlayButtonStoreModule()
-	local var12 = signalsReactModule.useSignalState(var10.getIsDisabled)
-	local var13 = signalsReactModule.useSignalState(var10.getIsDisabledTooltipOpen)
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), var10 (ref), var13 (ref), var11 (ref)
-		if var12 then
-			var10.setIsDisabledTooltipOpen(not var13)
+	local var2 = getAssistantBuildStoreModule()
+	local var3 = getPlayButtonStoreModule()
+	local var4 = signalsReactModule.useSignalState(var2.getIsDisabled)
+	local var5 = signalsReactModule.useSignalState(var2.getIsDisabledTooltipOpen)
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref), var2 (ref), var5 (ref), var3 (ref)
+		if var4 then
+			var2.setIsDisabledTooltipOpen(not var5)
 			
 			return
 		end
-		var10.setIsDisabledTooltipOpen(false)
-		var11.setIsActive(true)
-	end, { var10, var12, var13, var11 })
-	local var15 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
-		-- upvalues: var10 (ref)
-		var10.setIsDisabledTooltipOpen(false)
-	end, { var10 }) else nil
+		var2.setIsDisabledTooltipOpen(false)
+		var3.setIsActive(true)
+	end, { var2, var4, var5, var3 })
+	local var7 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
+		-- upvalues: var2 (ref)
+		var2.setIsDisabledTooltipOpen(false)
+	end, { var2 }) else nil
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), var11 (ref), var10 (ref)
-		if var12 then
-			var11.setIsActive(false)
+		-- upvalues: var4 (ref), var3 (ref), var2 (ref)
+		if var4 then
+			var3.setIsActive(false)
 			
 			return
 		end
-		var10.setIsDisabledTooltipOpen(false)
-	end, { var10, var12, var11 })
-	local var16 = reactModule.createElement(iconButton, {
+		var2.setIsDisabledTooltipOpen(false)
+	end, { var2, var4, var3 })
+	local var8 = reactModule.createElement(iconButton, {
 		isCircular = true,
 		testId = "build-header-play-button",
 		icon = iconName.Nebula,
-		variant = p0.variant,
+		variant = p1.variant,
 		size = inputSize.Medium,
-		isDisabled = var12,
-		onActivated = var14
+		isDisabled = var4,
+		onActivated = var6
 	})
 	
 	return reactModule.createElement(view, {
 		tag = "auto-xy",
-		LayoutOrder = p0.layoutOrder,
-		testId = p0.testId or "assistant-build"
+		LayoutOrder = p1.layoutOrder,
+		testId = p1.testId or "assistant-build"
 	}, {
-		Tooltip = if var12 then reactModule.createElement(educationalTooltip, {
+		Tooltip = if var4 then reactModule.createElement(educationalTooltip, {
 			testId = "build-assistant-disabled-tooltip",
 			align = popoverAlign.Start,
-			isOpen = var13,
-			onPressedOutside = var15,
+			isOpen = var5,
+			onPressedOutside = var7,
 			side = popoverSide.Bottom,
-			text = if fFlagBuildLocalization then var9.portraitRequired else localizationStringsModule.CHAT_PORTRAIT_REQUIRED,
-			title = if fFlagBuildLocalization then var9.disabledTitle else localizationStringsModule.CHAT_ASSISTANT_DISABLED
+			text = if fFlagBuildLocalization then var1.portraitRequired else localizationStringsModule.CHAT_PORTRAIT_REQUIRED,
+			title = if fFlagBuildLocalization then var1.disabledTitle else localizationStringsModule.CHAT_ASSISTANT_DISABLED
 		}, {
 			Button = reactModule.createElement(view, {
 				tag = "auto-xy",
 				testId = "build-header-play-button-disabled",
-				onActivated = var14
-			}, { Button = var16 })
+				onActivated = var6
+			}, { Button = var8 })
 		}) else nil,
-		Button = if not var12 then var16 else nil
+		Button = if not var4 then var8 else nil
 	})
 end)

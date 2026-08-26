@@ -23,26 +23,26 @@ local fFlagPlayerListTwoTabsModule = require(parent.Flags.FFlagPlayerListTwoTabs
 local fStringPlayerListIXPLayerModule = require(parent.Flags.FStringPlayerListIXPLayer)
 local IXPService = game:GetService("IXPService")
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: fFlagPlayerListReskinModule (ref), reactModule (ref), createLayoutValuesModule (ref), focusNavigationService (ref), reactFocusNavigationModule (ref), signalsReactModule (ref), fFlagEnablePlayerListExposureEventsModule (ref), IXPService (ref), fStringPlayerListIXPLayerModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), fFlagPlayerListTwoTabsModule (ref), platformLeaderboardContainerModule (ref), leaderboardStoreContextModule (ref), layoutValuesContextModule (ref), fFlagAddNewPlayerListFocusNavModule (ref), focusNavigationContext (ref), gameTextTranslatorContextModule (ref), localizationProvider (ref)
-	local var17, var18
+	local var1, var2
 	local _ = nil
 	local _ = nil
 	
 	if fFlagPlayerListReskinModule then
-		var17 = reactModule.useMemo(function()
-			-- upvalues: createLayoutValuesModule (copy), p0 (ref)
-			return createLayoutValuesModule(p0.isTenFoot or false, p0.TopBarConstants)
-		end, { p0.isTenFoot, p0.TopBarConstants })
-		var18 = reactModule.useMemo(function()
+		var1 = reactModule.useMemo(function()
+			-- upvalues: createLayoutValuesModule (copy), p1 (ref)
+			return createLayoutValuesModule(p1.isTenFoot or false, p1.TopBarConstants)
+		end, { p1.isTenFoot, p1.TopBarConstants })
+		var2 = reactModule.useMemo(function()
 			-- upvalues: focusNavigationService (copy), reactFocusNavigationModule (copy)
 			return focusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 		end, {})
 	else
-		var17 = createLayoutValuesModule(p0.isTenFoot or false, p0.TopBarConstants)
-		var18 = focusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+		var1 = createLayoutValuesModule(p1.isTenFoot or false, p1.TopBarConstants)
+		var2 = focusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 	end
-	local var19 = signalsReactModule.useSignalState(p0.leaderboardStore)
+	local var3 = signalsReactModule.useSignalState(p1.leaderboardStore)
 	
 	if fFlagEnablePlayerListExposureEventsModule then
 		reactModule.useEffect(function()
@@ -50,17 +50,17 @@ return reactModule.memo(function(p0)
 			IXPService:LogFlagLinkedUserLayerExposure(fStringPlayerListIXPLayerModule)
 		end, {})
 	end
-	local var20 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
+	local var4 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
 		-- upvalues: inExperienceLocalesModule (copy), localizationService (copy)
 		return inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
 	end, {}) else nil
-	local var21 = if fFlagPlayerListTwoTabsModule then reactModule.createElement(platformLeaderboardContainerModule, {}, p0.children) else p0.children
-	local var22 = reactModule.createElement(leaderboardStoreContextModule.Provider, { value = var19 }, {
-		LayoutValuesProvider = reactModule.createElement(layoutValuesContextModule.Provider, { value = var17 }, if fFlagAddNewPlayerListFocusNavModule then {
-			FocusNavigationProvider = reactModule.createElement(focusNavigationContext.Provider, { value = var18 }, var21)
-		} else var21)
+	local var5 = if fFlagPlayerListTwoTabsModule then reactModule.createElement(platformLeaderboardContainerModule, {}, p1.children) else p1.children
+	local var6 = reactModule.createElement(leaderboardStoreContextModule.Provider, { value = var3 }, {
+		LayoutValuesProvider = reactModule.createElement(layoutValuesContextModule.Provider, { value = var1 }, if fFlagAddNewPlayerListFocusNavModule then {
+			FocusNavigationProvider = reactModule.createElement(focusNavigationContext.Provider, { value = var2 }, var5)
+		} else var5)
 	})
-	local var23 = if fFlagPlayerListLocalizeGameTextModule and p0.translateGameText then reactModule.createElement(gameTextTranslatorContextModule.Provider, { value = p0.translateGameText }, { LeaderboardStoreProvider = var22 }) else var22
+	local var7 = if fFlagPlayerListLocalizeGameTextModule and p1.translateGameText then reactModule.createElement(gameTextTranslatorContextModule.Provider, { value = p1.translateGameText }, { LeaderboardStoreProvider = var6 }) else var6
 	
-	return if fFlagPlayerListLocalizeGameTextModule then reactModule.createElement(localizationProvider, { localization = var20 }, { LeaderboardTree = var23 }) else var23
+	return if fFlagPlayerListLocalizeGameTextModule then reactModule.createElement(localizationProvider, { localization = var4 }, { LeaderboardTree = var7 }) else var7
 end)

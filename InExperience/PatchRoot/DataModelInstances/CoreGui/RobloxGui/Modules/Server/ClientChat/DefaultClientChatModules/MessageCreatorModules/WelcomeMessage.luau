@@ -6,54 +6,54 @@ pcall(function()
 	ChatLocalization = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-function CreateWelcomeMessageLabel(p0, p1)
+function CreateWelcomeMessageLabel(p1, p2)
 	-- upvalues: chatSettingsModule (ref), utilModule (ref)
-	local message = p0.Message
+	local message = p1.Message
 	
 	if ChatLocalization and ChatLocalization.LocalizeFormattedMessage then
 		message = ChatLocalization:LocalizeFormattedMessage(message)
 	end
-	local extraData = p0.ExtraData or {}
+	local extraData = p1.ExtraData or {}
 	local font = extraData.Font or chatSettingsModule.DefaultFont
 	local fontSize = extraData.FontSize or chatSettingsModule.ChatWindowTextSize
 	local chatColor = extraData.ChatColor or chatSettingsModule.DefaultMessageColor
 	local channelColor = extraData.ChannelColor or chatColor
-	local var8, var9 = utilModule:CreateBaseMessage(message, font, fontSize, chatColor)
-	local var10 = nil
+	local var1, var2 = utilModule:CreateBaseMessage(message, font, fontSize, chatColor)
+	local var3 = nil
 	
-	if p1 ~= p0.OriginalChannel then
-		local formattedText = string.format("{%s}", if ChatLocalization.tryLocalize then ChatLocalization:tryLocalize(p0.OriginalChannel) else p0.OriginalChannel)
-		var10 = utilModule:AddChannelButtonToBaseMessage(var9, channelColor, formattedText, p0.OriginalChannel)
-		var9.Text = utilModule:CreateLeadingSpaces(utilModule:GetNumberOfSpaces(formattedText, font, fontSize) + 1) .. utilModule:SanitizeForRichText(message)
+	if p2 ~= p1.OriginalChannel then
+		local formattedText = string.format("{%s}", if ChatLocalization.tryLocalize then ChatLocalization:tryLocalize(p1.OriginalChannel) else p1.OriginalChannel)
+		var3 = utilModule:AddChannelButtonToBaseMessage(var2, channelColor, formattedText, p1.OriginalChannel)
+		var2.Text = utilModule:CreateLeadingSpaces(utilModule:GetNumberOfSpaces(formattedText, font, fontSize) + 1) .. utilModule:SanitizeForRichText(message)
 	end
-	local function GetHeightFunction(p2)
-		-- upvalues: utilModule (copy), var9 (ref), var8 (ref)
-		return utilModule:GetMessageHeight(var9, var8, p2)
+	local function GetHeightFunction(p3)
+		-- upvalues: utilModule (copy), var2 (ref), var1 (ref)
+		return utilModule:GetMessageHeight(var2, var1, p3)
 	end
 	
 	local t = {
-		[var9] = {
+		[var2] = {
 			TextTransparency = { FadedIn = 0, FadedOut = 1 },
 			TextStrokeTransparency = { FadedIn = 0.75, FadedOut = 1 }
 		}
 	}
 	
-	if var10 then
-		t[var10] = {
+	if var3 then
+		t[var3] = {
 			TextTransparency = { FadedIn = 0, FadedOut = 1 },
 			TextStrokeTransparency = { FadedIn = 0.75, FadedOut = 1 }
 		}
 	end
-	local var14, var15, var16 = utilModule:CreateFadeFunctions(t)
+	local var4, var5, var6 = utilModule:CreateFadeFunctions(t)
 	
 	return {
-		[utilModule.KEY_BASE_FRAME] = var8,
-		[utilModule.KEY_BASE_MESSAGE] = var9,
+		[utilModule.KEY_BASE_FRAME] = var1,
+		[utilModule.KEY_BASE_MESSAGE] = var2,
 		[utilModule.KEY_UPDATE_TEXT_FUNC] = nil,
 		[utilModule.KEY_GET_HEIGHT] = GetHeightFunction,
-		[utilModule.KEY_FADE_IN] = var14,
-		[utilModule.KEY_FADE_OUT] = var15,
-		[utilModule.KEY_UPDATE_ANIMATION] = var16
+		[utilModule.KEY_FADE_IN] = var4,
+		[utilModule.KEY_FADE_OUT] = var5,
+		[utilModule.KEY_UPDATE_ANIMATION] = var6
 	}
 end
 

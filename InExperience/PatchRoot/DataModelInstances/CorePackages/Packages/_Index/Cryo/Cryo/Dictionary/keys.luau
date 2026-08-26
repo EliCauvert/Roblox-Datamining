@@ -1,8 +1,8 @@
-﻿return function(p0)
+﻿return function(p1)
 	local t = {}
 	local var1 = 1
 	
-	for i in pairs(p0) do
+	for i in pairs(p1) do
 		t[var1] = i
 		var1 += 1
 	end

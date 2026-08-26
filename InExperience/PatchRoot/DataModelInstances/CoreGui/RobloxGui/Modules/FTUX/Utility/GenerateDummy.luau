@@ -200,50 +200,50 @@ local t_2 = {
 	}
 }
 
-local function Scan(p0, p1, p2, p3)
+local function Scan(p1, p2, p3, p4)
 	-- upvalues: t_1 (ref), t (ref), Scan (ref)
-	local var4 = Instance.new(p0.Type)
+	local var1 = Instance.new(p1.Type)
 	
-	if p0.ID then
-		local ID = t_1[p0.ID]
+	if p1.ID then
+		local ID = t_1[p1.ID]
 		
 		if ID then
-			ID[1][ID[2]] = var4
-			t_1[p0.ID] = nil
+			ID[1][ID[2]] = var1
+			t_1[p1.ID] = nil
 		else
-			t[p0.ID] = var4
+			t[p1.ID] = var1
 		end
 	end
-	for i, v in pairs(p0.Properties) do
+	for i, v in pairs(p1.Properties) do
 		local v
 		if type(v) == "string" then
-			local var5 = tonumber(v:match("^_R:(%w+)_$"))
+			local var2 = tonumber(v:match("^_R:(%w+)_$"))
 			
-			if var5 then
-				if t[var5] then
-					v = t[var5]
+			if var2 then
+				if t[var2] then
+					v = t[var2]
 				else
-					t_1[var5] = { var4, i }
+					t_1[var2] = { var1, i }
 					v = nil
 				end
 			end
 		end
-		var4[i] = v
+		var1[i] = v
 	end
-	for i_1, v_1 in pairs(p0.Children) do
-		Scan(v_1, var4, p2, p3)
+	for i_1, v_1 in pairs(p1.Children) do
+		Scan(v_1, var1, p3, p4)
 	end
-	var4.Parent = p1
+	var1.Parent = p2
 	
-	if var4:IsA("Part") then
-		var4.Position += p2
-		var4.Orientation += p3
-		var4.Anchored = true
+	if var1:IsA("Part") then
+		var1.Position += p3
+		var1.Orientation += p4
+		var1.Anchored = true
 	end
-	return var4
+	return var1
 end
 
-return function(p4, p5)
+return function(p5, p6)
 	-- upvalues: Scan (ref), t_2 (ref)
-	return Scan(t_2, nil, p4, p5)
+	return Scan(t_2, nil, p5, p6)
 end

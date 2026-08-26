@@ -18,14 +18,14 @@ local t_1 = {
 
 local function _(a)
 	-- upvalues: t (ref)
-	local var5 = t[a]
+	local var1 = t[a]
 	
-	return var5 and string.format(" fillcolor=%s style=filled", var5) or ""
+	return var1 and string.format(" fillcolor=%s style=filled", var1) or ""
 end
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: t_1 (ref)
-	return t_1[p0] or 0
+	return t_1[p1] or 0
 end
 
 local _ = function(a, b)
@@ -35,22 +35,22 @@ end
 
 local function dfsGraphviz(p1, p2)
 	-- upvalues: t_1 (ref), t (ref), dfsGraphviz (ref)
-	local var6 = ""
-	local var7 = tostring(p1.name)
+	local var1 = ""
+	local var2 = tostring(p1.name)
 	
 	for i, v in p1.sinks do
-		var7 ..= "\\n(sink: " .. tostring(v.maxLevel) .. ")"
-		local var9 = p2
+		var2 ..= "\\n(sink: " .. tostring(v.maxLevel) .. ")"
+		local var3 = p2
 		local maxLevel = v.maxLevel
-		p2 = if (t_1[maxLevel] or 0) < (t_1[var9] or 0) then var9 else maxLevel
+		p2 = if (t_1[maxLevel] or 0) < (t_1[var3] or 0) then var3 else maxLevel
 	end
-	local var8 = t[p2]
-	var6 ..= string.format("\"%s\" [label=\"%s\"%s];\n", p1.name, var7, if var8 then string.format(" fillcolor=%s style=filled", var8) else "")
+	local var4 = t[p2]
+	var1 ..= string.format("\"%s\" [label=\"%s\"%s];\n", p1.name, var2, if var4 then string.format(" fillcolor=%s style=filled", var4) else "")
 	
 	for i_1, v_1 in p1.children do
-		var6 = (var6 .. string.format("\"%s\" -> \"%s\"\n", tostring(i_1.name), p1.name)) .. dfsGraphviz(i_1, p2)
+		var1 = (var1 .. string.format("\"%s\" -> \"%s\"\n", tostring(i_1.name), p1.name)) .. dfsGraphviz(i_1, p2)
 	end
-	return var6
+	return var1
 end
 
 return function()

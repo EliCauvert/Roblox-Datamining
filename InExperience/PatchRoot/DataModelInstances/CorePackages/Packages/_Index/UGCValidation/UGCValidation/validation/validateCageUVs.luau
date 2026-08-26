@@ -6,39 +6,39 @@ local constantsModule = require(parent.Constants)
 local getFIntUniqueUVToleranceModule = require(parent.flags.getFIntUniqueUVTolerance)
 local UGCValidationService = game:GetService("UGCValidationService")
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: constantsModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), getFIntUniqueUVToleranceModule (ref), analyticsModule (ref)
 	local currentTime = tick()
-	local isServer = p2.isServer
-	local var6 = assert(constantsModule.WRAP_TARGET_CAGE_MESH_UV_COUNTS[p1.Parent.Name], "WrapTarget is not parented to a MeshPart")
+	local isServer = p3.isServer
+	local var1 = assert(constantsModule.WRAP_TARGET_CAGE_MESH_UV_COUNTS[p2.Parent.Name], "WrapTarget is not parented to a MeshPart")
 	local _ = nil
 	local _ = nil
-	local var7 = nil
-	local var8, var9 = pcallDeferredModule(function()
-		-- upvalues: var7 (write), UGCValidationService (copy), p0 (ref), var6 (ref), getFIntUniqueUVToleranceModule (copy)
-		var7 = UGCValidationService:CalculateEditableMeshUniqueUVCount(p0.editableMesh)
+	local var2 = nil
+	local var3, var4 = pcallDeferredModule(function()
+		-- upvalues: var2 (write), UGCValidationService (copy), p1 (ref), var1 (ref), getFIntUniqueUVToleranceModule (copy)
+		var2 = UGCValidationService:CalculateEditableMeshUniqueUVCount(p1.editableMesh)
 		
-		return math.abs(var7 - var6) <= getFIntUniqueUVToleranceModule()
-	end, p2)
+		return math.abs(var2 - var1) <= getFIntUniqueUVToleranceModule()
+	end, p3)
 	
-	if var8 then
-		if var9 then
-			analyticsModule.recordScriptTime(script.Name, currentTime, p2)
+	if var3 then
+		if var4 then
+			analyticsModule.recordScriptTime(script.Name, currentTime, p3)
 			
 			return true
 		end
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateCageUVs_TestPassed, nil, p2)
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateCageUVs_TestPassed, nil, p3)
 		
 		return false, {
-			string.format("%s.%s ( %s ) should have %d unique UVs, but has %d. Please make sure the mesh has the required number of unique UVs and try again.", p1:GetFullName(), p0.fieldName, if p0.contentId then p0.contentId else "", var6, var7)
+			string.format("%s.%s ( %s ) should have %d unique UVs, but has %d. Please make sure the mesh has the required number of unique UVs and try again.", p2:GetFullName(), p1.fieldName, if p1.contentId then p1.contentId else "", var1, var2)
 		}
 	else
-		local formattedText = string.format("Failed to execute UV check for '%s'. Make sure the UV map exists and try again.", p1:GetFullName())
+		local formattedText = string.format("Failed to execute UV check for '%s'. Make sure the UV map exists and try again.", p2:GetFullName())
 		
 		if isServer then
 			error(formattedText)
 		end
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateCageUVs_TestExecutedSuccessfully, nil, p2)
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateCageUVs_TestExecutedSuccessfully, nil, p3)
 		
 		return false, { formattedText }
 	end

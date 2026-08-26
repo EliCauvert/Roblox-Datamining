@@ -4,68 +4,68 @@ local cryoModule = require(parent.Cryo)
 local impressionsTagUtility = require(parent.Impressions).ImpressionsTagUtility
 local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: fFlagSduiPoolBackedFeed (ref), reactModule (ref), impressionsTagUtility (ref), cryoModule (ref)
-	local layoutOrder = p0.layoutOrder
-	local size = p0.size
-	local position = p0.position
-	local anchorPoint = p0.anchorPoint
-	local zIndex = p0.zIndex
-	local automaticSize = p0.automaticSize
-	local var2 = if fFlagSduiPoolBackedFeed then p0.innerWrapperSize else nil
-	local var3 = reactModule.useRef(nil)
+	local layoutOrder = p1.layoutOrder
+	local size = p1.size
+	local position = p1.position
+	local anchorPoint = p1.anchorPoint
+	local zIndex = p1.zIndex
+	local automaticSize = p1.automaticSize
+	local var1 = if fFlagSduiPoolBackedFeed then p1.innerWrapperSize else nil
+	local var2 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: impressionsTagUtility (copy), var3 (ref), p0 (ref)
-		impressionsTagUtility.AddTag(var3, p0.impressionsTag, p0.index)
+		-- upvalues: impressionsTagUtility (copy), var2 (ref), p1 (ref)
+		impressionsTagUtility.AddTag(var2, p1.impressionsTag, p1.index)
 		
 		return function()
-			-- upvalues: impressionsTagUtility (copy), var3 (copy), p0 (copy)
-			impressionsTagUtility.RemoveTag(var3, p0.impressionsTag, p0.index)
+			-- upvalues: impressionsTagUtility (copy), var2 (copy), p1 (copy)
+			impressionsTagUtility.RemoveTag(var2, p1.impressionsTag, p1.index)
 		end
-	end, { var3, p0.impressionsTag, p0.index })
-	local var4 = reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref), impressionsTagUtility (copy), p0 (ref)
-		var3.current = p1
+	end, { var2, p1.impressionsTag, p1.index })
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref), impressionsTagUtility (copy), p1 (ref)
+		var2.current = p2
 		
-		if p1 then
-			impressionsTagUtility.AddTag(var3, p0.impressionsTag, p0.index)
+		if p2 then
+			impressionsTagUtility.AddTag(var2, p1.impressionsTag, p1.index)
 		end
-	end, { p0.impressionsTag, p0.index })
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: p0 (ref)
-		if p0.onItemSizeChanged then
-			p0.onItemSizeChanged(p0.index, p2)
+	end, { p1.impressionsTag, p1.index })
+	local var4 = reactModule.useCallback(function(p2)
+		-- upvalues: p1 (ref)
+		if p1.onItemSizeChanged then
+			p1.onItemSizeChanged(p1.index, p2)
 		end
-	end, { p0.onItemSizeChanged, p0.index })
+	end, { p1.onItemSizeChanged, p1.index })
 	local _ = nil
-	local var6 = if fFlagSduiPoolBackedFeed and var2 ~= nil then {
+	local var5 = if fFlagSduiPoolBackedFeed and var1 ~= nil then {
 		InnerWrapper = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			ref = var4,
-			Size = var2,
+			ref = var3,
+			Size = var1,
 			Position = UDim2.fromScale(0, 0)
-		}, p0.children)
-	} else p0.children
+		}, p1.children)
+	} else p1.children
 	
-	if p0.minHeightBinding then
-		var6 = cryoModule.Dictionary.join(var6 or {}, {
+	if p1.minHeightBinding then
+		var5 = cryoModule.Dictionary.join(var5 or {}, {
 			SizeConstraint = reactModule.createElement("UISizeConstraint", {
-				MinSize = p0.minHeightBinding:map(function(p3)
-					return Vector2.new(0, if p3 and p3 > 0 then p3 else 0)
+				MinSize = p1.minHeightBinding:map(function(p2)
+					return Vector2.new(0, if p2 and p2 > 0 then p2 else 0)
 				end)
 			})
 		})
 	end
 	return reactModule.createElement("Frame", {
-		ref = if fFlagSduiPoolBackedFeed and var2 ~= nil then nil else var4,
+		ref = if fFlagSduiPoolBackedFeed and var1 ~= nil then nil else var3,
 		AnchorPoint = anchorPoint,
 		Position = position,
 		Size = size,
-		LayoutOrder = layoutOrder or p0.index,
+		LayoutOrder = layoutOrder or p1.index,
 		ZIndex = zIndex,
 		BackgroundTransparency = 1,
 		AutomaticSize = automaticSize,
-		[reactModule.Change.AbsoluteSize] = if p0.onItemSizeChanged then var5 else nil,
-		[reactModule.Tag] = if p0.testId then `data-testid={p0.testId}` else nil
-	}, var6)
+		[reactModule.Change.AbsoluteSize] = if p1.onItemSizeChanged then var4 else nil,
+		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil
+	}, var5)
 end)

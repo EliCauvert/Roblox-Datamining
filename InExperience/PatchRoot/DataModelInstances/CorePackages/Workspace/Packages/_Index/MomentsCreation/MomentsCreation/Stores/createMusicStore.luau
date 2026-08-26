@@ -9,16 +9,16 @@ local createComputed = signalsModule.createComputed
 
 local function makeDefaultSource()
 	-- upvalues: dashModule (ref), constantsModule (ref)
-	local function formatMusic(p0)
+	local function formatMusic(p1)
 		local t = {}
 		
-		for i, v in p0 do
-			local var8 = tonumber(v.AssetId)
+		for i, v in p1 do
+			local var1 = tonumber(v.AssetId)
 			
-			if var8 ~= nil and v.RecordingCode ~= nil then
+			if var1 ~= nil and v.RecordingCode ~= nil then
 				table.insert(t, {
 					Artist = v.Artist,
-					AssetId = var8,
+					AssetId = var1,
 					AudioType = v.AudioType,
 					Duration = v.Duration,
 					RecordingCode = v.RecordingCode,
@@ -30,13 +30,13 @@ local function makeDefaultSource()
 	end
 	
 	return {
-		searchMusic = function(p1, p2)
+		searchMusic = function(p2, p3)
 			-- upvalues: dashModule (copy), constantsModule (copy), formatMusic (ref)
 			local assetService = game:GetService("AssetService")
 			local audioSearchParams = Instance.new("AudioSearchParams")
-			audioSearchParams.SearchKeyword = p1
+			audioSearchParams.SearchKeyword = p2
 			audioSearchParams.AudioSubType = Enum.AudioSubType.Music
-			audioSearchParams.MinDuration = p2
+			audioSearchParams.MinDuration = p3
 			local t = {}
 			
 			for i, v in assetService:SearchAudio(audioSearchParams):GetCurrentPage() do
@@ -46,153 +46,153 @@ local function makeDefaultSource()
 			end
 			return if #t == 0 then {} else formatMusic(assetService:GetAudioMetadataAsync(t))
 		end,
-		getMetadata = function(p3)
+		getMetadata = function(p4)
 			-- upvalues: formatMusic (ref)
-			return formatMusic(game:GetService("AssetService"):GetAudioMetadataAsync(p3))
+			return formatMusic(game:GetService("AssetService"):GetAudioMetadataAsync(p4))
 		end
 	}
 end
 
-return function(p4)
+return function(p2)
 	-- upvalues: makeDefaultSource (ref), createSignal (ref), createComputed (ref), getFFlagMomentsCreationMusicSearchStateFixModule (ref)
-	p4 = p4 or makeDefaultSource()
-	local var13, var14 = createSignal({})
-	local var15, var16 = createSignal({})
-	local var17, var18 = createSignal("idle")
-	local var19 = 0
+	p2 = p2 or makeDefaultSource()
+	local var2, var3 = createSignal({})
+	local var4, var5 = createSignal({})
+	local var6, var7 = createSignal("idle")
+	local var8 = 0
 	local t = {}
-	local var21 = createComputed(function(p5)
-		-- upvalues: var13 (ref), var15 (ref)
-		local var22 = var13(p5)
+	local var9 = createComputed(function(p3)
+		-- upvalues: var2 (ref), var4 (ref)
+		local var10 = var2(p3)
 		local t = {}
 		
-		for i, v in var15(p5) do
-			local var24 = var22[v]
+		for i, v in var4(p3) do
+			local var11 = var10[v]
 			
-			if var24 ~= nil then
-				table.insert(t, var24)
+			if var11 ~= nil then
+				table.insert(t, var11)
 			end
 		end
 		return t
 	end)
 	
-	local function _(p6)
-		-- upvalues: var13 (ref), var14 (ref)
-		if #p6 == 0 then return end
-		local cloned = table.clone(var13(false))
+	local function _(p4)
+		-- upvalues: var2 (ref), var3 (ref)
+		if #p4 == 0 then return end
+		local cloned = table.clone(var2(false))
 		
-		for i, v in p6 do
+		for i, v in p4 do
 			cloned[v.AssetId] = v
 		end
-		var14(cloned)
+		var3(cloned)
 	end
 	
-	local _ = function(p7)
+	local _ = function(p5)
 		local t = {}
 		
-		for i, v in p7 do
+		for i, v in p5 do
 			table.insert(t, v.AssetId)
 		end
 		return t
 	end
 	
 	return {
-		getInfoMap = var13,
-		getResults = var21,
-		getSearchStatus = var17,
-		search = function(p8, p9)
-			-- upvalues: getFFlagMomentsCreationMusicSearchStateFixModule (copy), p4 (ref), var13 (ref), var14 (ref), var16 (ref), var19 (write), var18 (ref)
+		getInfoMap = var2,
+		getResults = var9,
+		getSearchStatus = var6,
+		search = function(p6, p7)
+			-- upvalues: getFFlagMomentsCreationMusicSearchStateFixModule (copy), p2 (ref), var2 (ref), var3 (ref), var5 (ref), var8 (write), var7 (ref)
 			if getFFlagMomentsCreationMusicSearchStateFixModule() then
-				var19 += 1
-				local var27 = var19
-				var18("loading")
-				var16({})
+				var8 += 1
+				local var12 = var8
+				var7("loading")
+				var5({})
 				task.spawn(function()
-					-- upvalues: p4 (copy), p8 (ref), p9 (ref), var27 (ref), var19 (copy), var18 (copy), var13 (copy), var14 (copy), var16 (copy)
-					local ok, status = pcall(p4.searchMusic, p8, p9 or 30)
+					-- upvalues: p2 (copy), p6 (ref), p7 (ref), var12 (ref), var8 (copy), var7 (copy), var2 (copy), var3 (copy), var5 (copy)
+					local ok, status = pcall(p2.searchMusic, p6, p7 or 30)
 					
-					if var27 ~= var19 then return end
+					if var12 ~= var8 then return end
 					if not ok then
-						var18("error")
+						var7("error")
 						
 						return
 					elseif #status ~= 0 then
-						local cloned = table.clone(var13(false))
+						local cloned = table.clone(var2(false))
 						
 						for i, v in status do
 							cloned[v.AssetId] = v
 						end
-						var14(cloned)
+						var3(cloned)
 					end
 					local t = {}
 					
 					for i, v in status do
 						table.insert(t, v.AssetId)
 					end
-					var16(t)
-					var18("success")
+					var5(t)
+					var7("success")
 				end)
 				
 				return
 			end
 			task.spawn(function()
-				-- upvalues: p4 (copy), p8 (ref), p9 (ref), var13 (copy), var14 (copy), var16 (copy)
-				local ok, status = pcall(p4.searchMusic, p8, p9 or 30)
+				-- upvalues: p2 (copy), p6 (ref), p7 (ref), var2 (copy), var3 (copy), var5 (copy)
+				local ok, status = pcall(p2.searchMusic, p6, p7 or 30)
 				
 				if not ok then return end
 				if #status ~= 0 then
-					local cloned = table.clone(var13(false))
+					local cloned = table.clone(var2(false))
 					
 					for i, v in status do
 						cloned[v.AssetId] = v
 					end
-					var14(cloned)
+					var3(cloned)
 				end
 				local t = {}
 				
 				for i, v in status do
 					table.insert(t, v.AssetId)
 				end
-				var16(t)
+				var5(t)
 			end)
 		end,
-		fetchInfo = function(p10)
-			-- upvalues: var13 (ref), getFFlagMomentsCreationMusicSearchStateFixModule (copy), t (ref), p4 (ref), var14 (ref)
-			if var13(false)[p10] ~= nil then return end
+		fetchInfo = function(p8)
+			-- upvalues: var2 (ref), getFFlagMomentsCreationMusicSearchStateFixModule (copy), t (ref), p2 (ref), var3 (ref)
+			if var2(false)[p8] ~= nil then return end
 			if not getFFlagMomentsCreationMusicSearchStateFixModule() then
 				task.spawn(function()
-					-- upvalues: p4 (copy), p10 (ref), var13 (copy), var14 (copy)
-					local ok, status = pcall(p4.getMetadata, { p10 })
+					-- upvalues: p2 (copy), p8 (ref), var2 (copy), var3 (copy)
+					local ok, status = pcall(p2.getMetadata, { p8 })
 					
 					if ok then
 						if #status == 0 then return end
-						local cloned = table.clone(var13(false))
+						local cloned = table.clone(var2(false))
 						
 						for i, v in status do
 							cloned[v.AssetId] = v
 						end
-						var14(cloned)
+						var3(cloned)
 					end
 				end)
 				
 				return
-			elseif t[p10] then
+			elseif t[p8] then
 				return
 			end
-			t[p10] = true
+			t[p8] = true
 			task.spawn(function()
-				-- upvalues: p4 (copy), p10 (ref), t (copy), var13 (copy), var14 (copy)
-				local ok, status = pcall(p4.getMetadata, { p10 })
-				t[p10] = nil
+				-- upvalues: p2 (copy), p8 (ref), t (copy), var2 (copy), var3 (copy)
+				local ok, status = pcall(p2.getMetadata, { p8 })
+				t[p8] = nil
 				
 				if ok then
 					if #status == 0 then return end
-					local cloned = table.clone(var13(false))
+					local cloned = table.clone(var2(false))
 					
 					for i, v in status do
 						cloned[v.AssetId] = v
 					end
-					var14(cloned)
+					var3(cloned)
 				end
 			end)
 		end

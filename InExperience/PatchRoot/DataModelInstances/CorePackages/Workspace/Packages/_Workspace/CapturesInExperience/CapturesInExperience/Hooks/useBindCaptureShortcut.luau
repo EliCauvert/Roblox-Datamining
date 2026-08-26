@@ -28,49 +28,49 @@ end
 
 return function()
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useSelector (ref), constantsModule (ref), usePlayShutterSoundModule (ref), useKeyboardEnabledModule (ref), useEffect (ref), socialStopwatchModule (ref), eventNamesModule (ref), takeCaptureModule (ref), contextActionService (ref), getCaptureShortcutSetupKeysModule (ref), userInputService (ref)
-	local var12 = useAnalyticsModule()
-	local var13 = useDispatch()
-	local var14 = useSelector(function(p0)
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
-		return p0[constantsModule.RoduxKey].IsActive
+		return p1[constantsModule.RoduxKey].IsActive
 	end)
-	local var15 = useSelector(function(p1)
+	local var4 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)
-	local var16 = usePlayShutterSoundModule()
-	local var17 = useKeyboardEnabledModule()
+	local var5 = usePlayShutterSoundModule()
+	local var6 = useKeyboardEnabledModule()
 	useEffect(function()
-		-- upvalues: var17 (ref), var15 (ref), var16 (ref), socialStopwatchModule (copy), var12 (ref), eventNamesModule (copy), var13 (ref), takeCaptureModule (copy), contextActionService (copy), getCaptureShortcutSetupKeysModule (copy), userInputService (copy)
-		if not var17 then return end
-		if var15 then
-			local var18 = function()
-				-- upvalues: var16 (copy), socialStopwatchModule (copy), var12 (copy), eventNamesModule (copy), var13 (copy), takeCaptureModule (copy)
-				var16()
+		-- upvalues: var6 (ref), var4 (ref), var5 (ref), socialStopwatchModule (copy), var1 (ref), eventNamesModule (copy), var2 (ref), takeCaptureModule (copy), contextActionService (copy), getCaptureShortcutSetupKeysModule (copy), userInputService (copy)
+		if not var6 then return end
+		if var4 then
+			local var7 = function()
+				-- upvalues: var5 (copy), socialStopwatchModule (copy), var1 (copy), eventNamesModule (copy), var2 (copy), takeCaptureModule (copy)
+				var5()
 				
 				if not socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CaptureTaken) then
 					socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CaptureTaken)
 				end
-				var12.fireEvent(eventNamesModule.CapturesEntrypointActivated)
-				var12.fireEvent(eventNamesModule.CapturesDesktopHotkeyCaptureTriggered)
-				var13(takeCaptureModule())
+				var1.fireEvent(eventNamesModule.CapturesEntrypointActivated)
+				var1.fireEvent(eventNamesModule.CapturesDesktopHotkeyCaptureTriggered)
+				var2(takeCaptureModule())
 			end
 			
-			contextActionService:BindCoreAction("CaptureShortcutAction", function(_, p2)
-				-- upvalues: getCaptureShortcutSetupKeysModule (copy), userInputService (copy), var18 (ref)
-				if p2 == Enum.UserInputState.Begin then
-					local var19
+			contextActionService:BindCoreAction("CaptureShortcutAction", function(_, p1)
+				-- upvalues: getCaptureShortcutSetupKeysModule (copy), userInputService (copy), var7 (ref)
+				if p1 == Enum.UserInputState.Begin then
+					local var8
 					for i, v in getCaptureShortcutSetupKeysModule() do
 						if userInputService:IsKeyDown(v) then
-							var19 = true
-							if var19 then
-								var18()
+							var8 = true
+							if var8 then
+								var7()
 								
 								return Enum.ContextActionResult.Sink
 							end
 						end
 					end
-					var19 = false
+					var8 = false
 				end
 				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.One)
@@ -80,5 +80,5 @@ return function()
 				contextActionService:UnbindCoreAction("CaptureShortcutAction")
 			end
 		end
-	end, { var14, var15, var17 })
+	end, { var3, var4, var6 })
 end

@@ -2,10 +2,10 @@
 local attributeType = momentsCommonModule.Enums.AttributeType
 local getTagsForMoment = momentsCommonModule.Utils.getTagsForMoment
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: attributeType (ref), getTagsForMoment (ref)
 	local assetTotalDuration
-	local edits = p1.edits
+	local edits = p2.edits
 	local t = {}
 	local _ = 0
 	
@@ -22,7 +22,7 @@ return function(p0, p1)
 			TrimStartTime = 0,
 			Description = attributeType.PrimaryAsset
 		})
-		assetTotalDuration = p1.assetTotalDuration
+		assetTotalDuration = p2.assetTotalDuration
 	end
 	if edits and edits.music then
 		table.insert(t, {
@@ -33,8 +33,8 @@ return function(p0, p1)
 	end
 	return {
 		attributes = t,
-		contentType = if p0.CaptureType == Enum.CaptureType.Screenshot then Enum.RecommendationItemContentType.Static else Enum.RecommendationItemContentType.Dynamic,
-		customTags = getTagsForMoment(p1),
+		contentType = if p1.CaptureType == Enum.CaptureType.Screenshot then Enum.RecommendationItemContentType.Static else Enum.RecommendationItemContentType.Dynamic,
+		customTags = getTagsForMoment(p2),
 		duration = assetTotalDuration
 	}
 end

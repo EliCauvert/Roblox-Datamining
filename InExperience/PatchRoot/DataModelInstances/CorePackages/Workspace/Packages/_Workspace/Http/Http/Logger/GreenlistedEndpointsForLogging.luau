@@ -12,20 +12,20 @@
 	["marketplace-widgets/v1/pills"] = "avatar_experience_catalog_categories"
 }
 local t_1 = {
-	isSuccessStatusCode = function(_, p0)
-		return p0 >= 200 and p0 < 300
+	isSuccessStatusCode = function(_, p1)
+		return p1 >= 200 and p1 < 300
 	end
 }
 
 function t_1.getMatchingName(p1, p2)
 	-- upvalues: t_1 (ref), t (ref)
 	local text = nil
-	local var3 = tostring(p2)
-	local var4 = if t_1:isSuccessStatusCode(p2) then "api_success_" else "api_error_"
+	local var1 = tostring(p2)
+	local var2 = if t_1:isSuccessStatusCode(p2) then "api_success_" else "api_error_"
 	
 	for i, v in t do
 		if string.find(p1, i, 1, true) then
-			text = var4 .. v .. "_" .. var3
+			text = var2 .. v .. "_" .. var3
 			
 			return text
 		end

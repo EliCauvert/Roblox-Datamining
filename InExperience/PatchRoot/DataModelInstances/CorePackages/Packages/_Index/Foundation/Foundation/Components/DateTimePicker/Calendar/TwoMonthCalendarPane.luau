@@ -9,17 +9,17 @@ local viewModule = require(foundation.Components.View)
 local DAYS_PER_WEEK = dateTimeCalendarConstantsModule.DAYS_PER_WEEK
 local buildTwoMonthPaneCellConfigs = dateTimeCalendarDayConfigUtilitiesModule.buildTwoMonthPaneCellConfigs
 
-local function EmptyCell(p0)
+local function EmptyCell(p1)
 	-- upvalues: reactModule (ref), viewModule (ref)
 	return reactModule.createElement(viewModule, {
-		LayoutOrder = p0.LayoutOrder,
-		Size = UDim2.fromOffset(p0.cellSize, p0.cellSize)
+		LayoutOrder = p1.LayoutOrder,
+		Size = UDim2.fromOffset(p1.cellSize, p1.cellSize)
 	})
 end
 
 return function(p1)
 	-- upvalues: reactModule (ref), buildTwoMonthPaneCellConfigs (ref), DAYS_PER_WEEK (ref), dateTimeUtilitiesModule (ref), textModule (ref), EmptyCell (ref), rangeCalendarDayCellModule (ref), viewModule (ref)
-	local var9 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: buildTwoMonthPaneCellConfigs (copy), p1 (ref)
 		return buildTwoMonthPaneCellConfigs(p1.month, p1.year)
 	end, { p1.month, p1.year })
@@ -35,18 +35,18 @@ return function(p1)
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		})
 	}
-	local var11 = 1
+	local var2 = 1
 	
 	for i, v in dateTimeUtilitiesModule.weekdays do
 		table.insert(list, reactModule.createElement(textModule, {
 			tag = "text-body-small text-align-x-center text-align-y-center",
 			key = `weekday-{v}`,
-			LayoutOrder = var11,
+			LayoutOrder = var2,
 			Text = v
 		}))
-		var11 += 1
+		var2 += 1
 	end
-	for i, v_1 in var9 do
+	for i, v_1 in var1 do
 		if v_1.day == nil then
 			table.insert(list, reactModule.createElement(EmptyCell, {
 				key = v_1.key,

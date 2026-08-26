@@ -1,31 +1,31 @@
 ﻿local openNativeClosePromptModule = require(script.Parent.Parent.Actions.OpenNativeClosePrompt)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: openNativeClosePromptModule (ref)
 	local function _()
-		-- upvalues: p1 (ref)
-		return tonumber(p1:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
+		-- upvalues: p2 (ref)
+		return tonumber(p2:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
 	end
 	
 	local _ = function(value)
-		-- upvalues: p1 (ref)
-		p1:SetItem("NativeCloseLuaPromptDisplayCount", tostring(value))
-		p1:flush()
+		-- upvalues: p2 (ref)
+		p2:SetItem("NativeCloseLuaPromptDisplayCount", tostring(value))
+		p2:flush()
 	end
 	
-	local notificationTypeList = p0:GetNotificationTypeList()
+	local notificationTypeList = p1:GetNotificationTypeList()
 	
-	return function(p3)
-		-- upvalues: p1 (ref), p2 (ref), p0 (ref), notificationTypeList (ref), openNativeClosePromptModule (copy)
-		local nativeCloseLuaPromptDisplayCount = tonumber(p1:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
+	return function(p4)
+		-- upvalues: p2 (ref), p3 (ref), p1 (ref), notificationTypeList (ref), openNativeClosePromptModule (copy)
+		local nativeCloseLuaPromptDisplayCount = tonumber(p2:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
 		
-		if p3:getState().nativeClosePrompt.closingApp or p2 <= nativeCloseLuaPromptDisplayCount then
-			p0:BroadcastNotification("", notificationTypeList.NATIVE_EXIT)
+		if p4:getState().nativeClosePrompt.closingApp or p3 <= nativeCloseLuaPromptDisplayCount then
+			p1:BroadcastNotification("", notificationTypeList.NATIVE_EXIT)
 			
 			return
 		end
-		p3:dispatch(openNativeClosePromptModule())
-		p1:SetItem("NativeCloseLuaPromptDisplayCount", tostring(nativeCloseLuaPromptDisplayCount + 1))
-		p1:flush()
+		p4:dispatch(openNativeClosePromptModule())
+		p2:SetItem("NativeCloseLuaPromptDisplayCount", tostring(nativeCloseLuaPromptDisplayCount + 1))
+		p2:flush()
 	end
 end

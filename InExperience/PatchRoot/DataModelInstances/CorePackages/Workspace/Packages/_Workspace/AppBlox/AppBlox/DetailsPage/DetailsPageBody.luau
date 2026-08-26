@@ -22,18 +22,18 @@ detailsPageBody.validateProps = tModule.strictInterface({
 })
 detailsPageBody.defaultProps = { bodyClipsDescendants = true, showPageDetails = false }
 
-function detailsPageBody.init(p0)
+function detailsPageBody.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.state = { containerWidth = nil }
-	p0.containerFrameRef = roactModule.createRef()
-	p0.mounted = false
+	p1.state = { containerWidth = nil }
+	p1.containerFrameRef = roactModule.createRef()
+	p1.mounted = false
 	
-	function p0.onContainerSizeChange(p1)
-		-- upvalues: p0 (ref)
-		if p0.mounted then
-			p0:setState(function(p2, _)
-				-- upvalues: p1 (ref)
-				return if p2.containerWidth == p1.AbsoluteSize.x then nil else { containerWidth = p1.AbsoluteSize.x }
+	function p0.onContainerSizeChange(p2)
+		-- upvalues: p1 (ref)
+		if p1.mounted then
+			p1:setState(function(p3, _)
+				-- upvalues: p2 (ref)
+				return if p3.containerWidth == p2.AbsoluteSize.x then nil else { containerWidth = p2.AbsoluteSize.x }
 			end)
 			
 			return
@@ -41,7 +41,7 @@ function detailsPageBody.init(p0)
 	end
 end
 
-function detailsPageBody.renderSinglePanel(p3)
+function detailsPageBody.renderSinglePanel(p1)
 	-- upvalues: roactModule (ref), fFlagLuaAppFixEdpRecommendedCarouselHoverZIndex (ref)
 	local t = {
 		Layout = roactModule.createElement("UIListLayout", {
@@ -51,10 +51,10 @@ function detailsPageBody.renderSinglePanel(p3)
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			Padding = UDim.new(0, 24)
 		}),
-		UISizeConstraint = if p3.props.maxContentWidth then roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(p3.props.maxContentWidth, 1e999) }) else nil
+		UISizeConstraint = if p1.props.maxContentWidth then roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(p1.props.maxContentWidth, 1e999) }) else nil
 	}
 	
-	for i, v in pairs(p3.props.componentList) do
+	for i, v in pairs(p1.props.componentList) do
 		t[i .. "Container"] = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
@@ -75,9 +75,9 @@ function detailsPageBody.renderSinglePanel(p3)
 	}
 end
 
-function detailsPageBody.renderDualPanel(p4)
+function detailsPageBody.renderDualPanel(p2)
 	-- upvalues: roactModule (ref), contentPositionModule (ref)
-	local var8 = if p4.state.containerWidth < 1920 then 48 else 96
+	local var1 = if p2.state.containerWidth < 1920 then 48 else 96
 	local t = {
 		Layout = roactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -97,7 +97,7 @@ function detailsPageBody.renderDualPanel(p4)
 		})
 	}
 	
-	for i, v in pairs(p4.props.componentList) do
+	for i, v in pairs(p2.props.componentList) do
 		(if v.landscapePosition == contentPositionModule.Right then t_1 else t)[i .. "Container"] = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
@@ -111,40 +111,40 @@ function detailsPageBody.renderDualPanel(p4)
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
-			Padding = UDim.new(0, var8)
+			Padding = UDim.new(0, var1)
 		}),
 		LeftPanel = roactModule.createElement("Frame", {
 			ClipsDescendants = true,
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UDim2.new(0.5, -var8 / 2, 0, 0),
+			Size = UDim2.new(0.5, -var1 / 2, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, t),
 		RightPanel = roactModule.createElement("Frame", {
 			ClipsDescendants = false,
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(0.5, -var8 / 2, 0, 0),
+			Size = UDim2.new(0.5, -var1 / 2, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, t_1)
 	}
 end
 
-function detailsPageBody.renderBodyContent(p5)
-	return if not (not p5.state.containerWidth or not p5.props.componentList) then if p5.state.containerWidth < (p5.props.dualPanelBreakpoint or 1280) then p5:renderSinglePanel() else p5:renderDualPanel() else {}
+function detailsPageBody.renderBodyContent(p3)
+	return if not (not p3.state.containerWidth or not p3.props.componentList) then if p3.state.containerWidth < (p3.props.dualPanelBreakpoint or 1280) then p3:renderSinglePanel() else p3:renderDualPanel() else {}
 end
 
-function detailsPageBody.render(p6)
+function detailsPageBody.render(p3)
 	-- upvalues: getPlatformConfigModule (ref), roactModule (ref), detailsPageTitleContentModule (ref)
-	local var11 = if p6.props.sideMargin then p6.props.sideMargin else getPlatformConfigModule(p6.props.deviceType).sideMargin
+	local var2 = if p3.props.sideMargin then p3.props.sideMargin else getPlatformConfigModule(p3.props.deviceType).sideMargin
 	
 	return roactModule.createElement("Frame", {
 		Size = UDim2.fromScale(1, 0),
 		BackgroundTransparency = 1,
-		ClipsDescendants = p6.props.bodyClipsDescendants,
+		ClipsDescendants = p3.props.bodyClipsDescendants,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		[roactModule.Ref] = p6.containerFrameRef,
-		[roactModule.Change.AbsoluteSize] = p6.onContainerSizeChange
+		[roactModule.Ref] = p3.containerFrameRef,
+		[roactModule.Change.AbsoluteSize] = p3.onContainerSizeChange
 	}, {
 		Layout = roactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -153,45 +153,45 @@ function detailsPageBody.render(p6)
 			HorizontalAlignment = Enum.HorizontalAlignment.Left
 		}),
 		UIPadding = roactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var11),
-			PaddingRight = UDim.new(0, var11)
+			PaddingLeft = UDim.new(0, var2),
+			PaddingRight = UDim.new(0, var2)
 		}),
-		TitleInfo = p6.props.showPageDetails and roactModule.createElement(detailsPageTitleContentModule, {
+		TitleInfo = p3.props.showPageDetails and roactModule.createElement(detailsPageTitleContentModule, {
 			layoutOrder = 1,
-			titleText = p6.props.titleText,
-			subTitleText = p6.props.subTitleText,
-			renderInfoContent = p6.props.renderInfoContent,
+			titleText = p3.props.titleText,
+			subTitleText = p3.props.subTitleText,
+			renderInfoContent = p3.props.renderInfoContent,
 			verticalAlignment = Enum.VerticalAlignment.Top
 		} or nil),
 		Padding = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 0, if not p6.props.showPageDetails then 24 else var11)
+			Size = UDim2.new(1, 0, 0, if not p3.props.showPageDetails then 24 else var2)
 		}),
 		ContentFrame = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
-		}, p6:renderBodyContent()),
+		}, p3:renderBodyContent()),
 		BottomPadding = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 4,
-			Size = UDim2.new(1, 0, 0, p6.props.bottomPadding or 3 * var11)
+			Size = UDim2.new(1, 0, 0, p3.props.bottomPadding or 3 * var2)
 		})
 	})
 end
 
-function detailsPageBody.didMount(p7)
-	p7.mounted = true
+function detailsPageBody.didMount(p3)
+	p3.mounted = true
 	
-	if p7.containerFrameRef.current then
-		p7.onContainerSizeChange(p7.containerFrameRef.current)
+	if p3.containerFrameRef.current then
+		p3.onContainerSizeChange(p3.containerFrameRef.current)
 	end
 end
 
-function detailsPageBody.willUnmount(p8)
-	p8.mounted = false
+function detailsPageBody.willUnmount(p3)
+	p3.mounted = false
 end
 
 return detailsPageBody

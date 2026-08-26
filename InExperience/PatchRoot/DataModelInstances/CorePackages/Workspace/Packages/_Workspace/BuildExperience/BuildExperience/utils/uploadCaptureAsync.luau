@@ -4,7 +4,7 @@ local debug = require(parent.DataHydration.CreatorAgentChat).debug
 local captureService = game:GetService("CaptureService")
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: promiseModule (ref), t (ref), debug (ref), captureService (ref)
 	local ok, status = pcall(function()
 		return game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass")
@@ -13,36 +13,36 @@ return function(p0)
 	if not ok or status ~= true then
 		return promiseModule.reject("Capture upload is not supported on this platform")
 	end
-	local var3 = t[p0]
+	local var1 = t[p1]
 	
-	if var3 then
-		return promiseModule.resolve({ assetId = var3 })
+	if var1 then
+		return promiseModule.resolve({ assetId = var1 })
 	end
 	debug.log("info", "capture_upload starting")
 	
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: captureService (copy), p0 (ref), debug (copy), t (copy)
-		local ok, status, var4 = pcall(function()
-			-- upvalues: captureService (copy), p0 (copy)
-			return captureService:StartUploadCaptureAsync(p0)
+	return promiseModule.new(function(p2, p3)
+		-- upvalues: captureService (copy), p1 (ref), debug (copy), t (copy)
+		local ok, status, var2 = pcall(function()
+			-- upvalues: captureService (copy), p1 (copy)
+			return captureService:StartUploadCaptureAsync(p1)
 		end)
 		
 		if not ok then
 			debug.log("warn", "capture_upload start failed", { error = tostring(status) })
-			p2(`Failed to start capture upload: {status}`)
+			p3(`Failed to start capture upload: {status}`)
 			
 			return
 		elseif status ~= Enum.UploadCaptureResult.Success then
 			debug.log("warn", "capture_upload rejected", { status = tostring(status) })
-			p2(`Upload rejected: {tostring(status)}`)
+			p3(`Upload rejected: {tostring(status)}`)
 			
 			return
 		end
 		for _ = 1, 30 do
 			task.wait(2)
-			local ok_1, status_1, var5 = pcall(function()
-				-- upvalues: captureService (copy), var4 (ref)
-				return captureService:CheckUploadCaptureStatusAsync(var4)
+			local ok_1, status_1, var3 = pcall(function()
+				-- upvalues: captureService (copy), var2 (ref)
+				return captureService:CheckUploadCaptureStatusAsync(var2)
 			end)
 			
 			if ok_1 then
@@ -51,21 +51,21 @@ return function(p0)
 						continue
 					end
 					debug.log("warn", "capture_upload failed", { status = tostring(status_1) })
-					p2(`Upload failed: {tostring(status_1)}`)
+					p3(`Upload failed: {tostring(status_1)}`)
 					
 					return
 				end
-				debug.log("info", "capture_upload succeeded", { assetId = var5 })
-				t[p0] = var5
-				p1({ assetId = var5 })
+				debug.log("info", "capture_upload succeeded", { assetId = var3 })
+				t[p1] = var3
+				p2({ assetId = var3 })
 				
 				return
 			end
 			debug.log("warn", "capture_upload poll error", { error = tostring(status_1) })
-			p2(`Upload poll error: {status_1}`)
+			p3(`Upload poll error: {status_1}`)
 			
 			return
 		end
-		p2("Upload timed out")
+		p3("Upload timed out")
 	end)
 end

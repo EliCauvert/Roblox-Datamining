@@ -19,17 +19,17 @@
 	["tr-tr"] = "."
 }
 
-local function addGroupDelimiters(p0, p1)
-	local formattedText = string.format("%%1%s%%2", p1)
+local function addGroupDelimiters(p1, p2)
+	local formattedText = string.format("%%1%s%%2", p2)
 	local _ = nil
 	repeat
-		local replaced, replaced_1 = string.gsub(p0, "^(-?%d+)(%d%d%d)", formattedText)
-		p0 = replaced
+		local replaced, replaced_1 = string.gsub(p1, "^(-?%d+)(%d%d%d)", formattedText)
+		p1 = replaced
 	until replaced_1 == 0
-	return p0
+	return p1
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: t (ref), addGroupDelimiters (ref)
-	return addGroupDelimiters(p3, t[p2] or ",")
+	return addGroupDelimiters(p2, t[p1] or ",")
 end

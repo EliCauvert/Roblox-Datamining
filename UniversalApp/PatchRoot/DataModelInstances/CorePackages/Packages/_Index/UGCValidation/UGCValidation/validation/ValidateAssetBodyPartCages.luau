@@ -80,66 +80,66 @@ function t.validateSingleBodyPart(p1, p2)
 	return var1:getFinalResults()
 end
 
-function t.validateFullBody(p1, p2)
+function t.validateFullBody(p3, p4)
 	-- upvalues: assetCalculatorModule (ref), getMeshInfoModule (ref), constantsModule (ref), getExpectedPartSizeModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref), getFStringUGCValidationMaxCageDistanceModule (ref)
 	local currentTime = tick()
-	local var1 = assetCalculatorModule.calculateAllTransformsForFullBody(p1)
+	local var3 = assetCalculatorModule.calculateAllTransformsForFullBody(p3)
 	local t = {}
 	
-	for i, v in p1 do
-		local var2 = nil
+	for i, v in p3 do
+		local var4 = nil
 		local _ = nil
 		local _ = nil
-		local var3, var4, var5 = getMeshInfoModule(v, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p2)
-		var2 = var3
-		local var6 = var4
-		local var7 = var5
+		local var5, var6, var7 = getMeshInfoModule(v, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p4)
+		var4 = var5
+		local var8 = var6
+		local var9 = var7
 		
-		if var2 then
+		if var4 then
 			local wrapTarget = v:FindFirstChildWhichIsA("WrapTarget")
 			assert(wrapTarget, "Missing WrapTarget child for " .. v.Name)
-			var4 = nil
+			var6 = nil
 			local _ = nil
 			local _ = nil
-			local var8, var9, var10 = getMeshInfoModule(wrapTarget, constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p2)
-			var4 = var8
-			local var11 = var9
-			local var12 = var10
+			local var10, var11, var12 = getMeshInfoModule(wrapTarget, constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p4)
+			var6 = var10
+			local var13 = var11
+			local var14 = var12
 			
-			if var4 then
+			if var6 then
 				table.insert(t, {
-					renderMesh = var7.editableMesh,
-					outerCage = var12.editableMesh,
-					renderMeshTransform = var1[v.Name],
+					renderMesh = var9.editableMesh,
+					outerCage = var14.editableMesh,
+					renderMeshTransform = var3[v.Name],
 					outerCageLocalTransform = wrapTarget.CageOrigin,
-					scale = getExpectedPartSizeModule(v, p2) / getExpectedPartSizeModule(v, p2, true),
+					scale = getExpectedPartSizeModule(v, p4) / getExpectedPartSizeModule(v, p4, true),
 					name = v.Name
 				})
 				continue
 			end
-			return false, var11
+			return false, var13
 		end
-		return false, var6
+		return false, var8
 	end
-	local var13, var14, var15 = pcallDeferredModule(function()
+	local var15, var16, var17 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), t (ref)
 		return UGCValidationService:CalculateBodyMaxCageDistance(t)
-	end, p2)
-	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
+	end, p4)
+	analyticsModule.recordScriptTime(script.Name, currentTime, p4)
 	
-	if var13 then
-		if getFStringUGCValidationMaxCageDistanceModule.asNumber() < var14 then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_VertsAreTooFarInFrontOfRenderMesh, nil, p2)
+	if var15 then
+		if getFStringUGCValidationMaxCageDistanceModule.asNumber() < var16 then
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_VertsAreTooFarInFrontOfRenderMesh, nil, p4)
 			
 			return false, {
-				string.format("A vertex was found on the %s's cage mesh that is %.2f studs away from the closest render mesh. %s studs is the maximum. Make the cage mesh more closely match the shape and size of the render mesh.", var15, var14, getFStringUGCValidationMaxCageDistanceModule.asString()) .. "[Read more](https://create.roblox.com/docs/art/validation-errors#bodyCageMaxSize)"
+				string.format("A vertex was found on the %s's cage mesh that is %.2f studs away from the closest render mesh. %s studs is the maximum. Make the cage mesh more closely match the shape and size of the render mesh.", var17, var16, getFStringUGCValidationMaxCageDistanceModule.asString()) .. "[Read more](https://create.roblox.com/docs/art/validation-errors#bodyCageMaxSize)"
 			}
 		end
 		return true
-	elseif p2.isServer ~= nil and p2.isServer then
+	elseif p4.isServer ~= nil and p4.isServer then
 		error("Failed to execute body max cage distance check. Make sure all render meshes and their WrapTarget cage meshes exist, and try again.")
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_FailedToExecute, nil, p2)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartCage_FailedToExecute, nil, p4)
 	
 	return false, {
 		"Failed to execute body max cage distance check. Make sure all render meshes and their WrapTarget cage meshes exist, and try again."

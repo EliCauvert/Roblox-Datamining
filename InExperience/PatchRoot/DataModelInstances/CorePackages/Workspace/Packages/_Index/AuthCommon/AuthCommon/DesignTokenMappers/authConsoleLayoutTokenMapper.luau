@@ -2,7 +2,7 @@
 local _ = require(parent.RobloxAppHooks)
 local _ = require(parent.Style)
 
-return function(_, p0)
+return function(_, p1)
 	return {
 		robloxLogoTextImageUrl = "rbxasset://textures/ui/LuaApp/graphic/Auth/logo_white_1x.png",
 		containerWidth = 846,
@@ -13,6 +13,6 @@ return function(_, p0)
 		robloxLogoTextImageSize = UDim2.new(0, 476, 0, 88),
 		robloxLogoTextImagePosition = UDim2.new(0.5, 0, 0.28, 0),
 		buttonContainerPosition = UDim2.new(0.5, 0, 0.58, 0),
-		buttonPadding = p0.Size.Size_150
+		buttonPadding = p1.Size.Size_150
 	}
 end

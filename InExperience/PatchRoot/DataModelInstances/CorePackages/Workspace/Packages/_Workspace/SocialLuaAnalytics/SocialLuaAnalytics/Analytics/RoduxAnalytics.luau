@@ -4,15 +4,15 @@ local reducersModule = require(script.Reducers)
 local _ = require(script.AnalyticsTypes)
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: reducersModule (ref), actionsModule (ref), selectorsModule (ref)
 		return {
 			installReducer = function()
-				-- upvalues: reducersModule (copy), p0 (ref)
-				return reducersModule(p0)
+				-- upvalues: reducersModule (copy), p1 (ref)
+				return reducersModule(p1)
 			end,
-			Actions = actionsModule(p0),
-			Selectors = selectorsModule(p0)
+			Actions = actionsModule(p1),
+			Selectors = selectorsModule(p1)
 		}
 	end
 }

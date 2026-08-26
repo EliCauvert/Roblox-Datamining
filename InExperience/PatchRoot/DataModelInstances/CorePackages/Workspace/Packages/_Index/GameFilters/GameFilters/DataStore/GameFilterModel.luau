@@ -9,62 +9,62 @@ local t = {
 	end
 }
 
-function t.mockFromExploreApi(p0, p1)
+function t.mockFromExploreApi(p1, p2)
 	-- upvalues: t (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), fFlagLuaAppChartsActiveFilterChips (ref)
-	local var2 = t.fromExploreJsonData({
+	local var1 = t.fromExploreJsonData({
 		filterType = "",
 		filterDisplayName = "",
-		filterId = p0,
+		filterId = p1,
 		filterOptions = {
 			{
 				optionDisplayName = "",
-				optionId = p0 .. "_option",
-				optionContextTag = if fFlagLuaAppChartsFilterOptionTextTag then p0 .. "_context" else nil
+				optionId = p1 .. "_option",
+				optionContextTag = if fFlagLuaAppChartsFilterOptionTextTag then p1 .. "_context" else nil
 			}
 		},
-		defaultOptionId = p0 .. "_option",
-		selectedOptionId = p0 .. "_option",
-		inactiveOptionIds = if fFlagLuaAppChartsActiveFilterChips then { p0 .. "_option" } else nil
+		defaultOptionId = p1 .. "_option",
+		selectedOptionId = p1 .. "_option",
+		inactiveOptionIds = if fFlagLuaAppChartsActiveFilterChips then { p1 .. "_option" } else nil
 	})
-	var2.selectedOptionDisplayName = p1 or ""
+	var1.selectedOptionDisplayName = p2 or ""
 	
-	return var2
+	return var1
 end
 
-function t.fromExploreJsonData(p2)
+function t.fromExploreJsonData(p1)
 	-- upvalues: t (ref), fFlagLuaAppChartsActiveFilterChips (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), argCheckModule (ref)
-	local var3 = t.new()
-	var3.filterId = p2.filterId
-	var3.filterType = p2.filterType
-	var3.filterDisplayName = p2.filterDisplayName
-	var3.defaultOptionId = p2.defaultOptionId
-	var3.selectedOptionId = p2.selectedOptionId
+	local var1 = t.new()
+	var1.filterId = p1.filterId
+	var1.filterType = p1.filterType
+	var1.filterDisplayName = p1.filterDisplayName
+	var1.defaultOptionId = p1.defaultOptionId
+	var1.selectedOptionId = p1.selectedOptionId
 	
-	if fFlagLuaAppChartsActiveFilterChips and p2.inactiveOptionIds then
+	if fFlagLuaAppChartsActiveFilterChips and p1.inactiveOptionIds then
 		local t_1 = {}
 		
-		for i, v in p2.inactiveOptionIds do
+		for i, v in p1.inactiveOptionIds do
 			t_1[v] = true
 		end
-		var3.inactiveOptionIds = t_1
+		var1.inactiveOptionIds = t_1
 	end
 	local t_1 = {}
 	
-	for i, v in ipairs(p2.filterOptions) do
+	for i, v in ipairs(p1.filterOptions) do
 		table.insert(t_1, {
 			optionId = v.optionId,
 			optionDisplayName = v.optionDisplayName,
 			optionContextTag = if fFlagLuaAppChartsFilterOptionTextTag then v.optionContextTag else nil
 		})
 		
-		if v.optionId == p2.selectedOptionId then
-			argCheckModule.assert(var3.selectedOptionDisplayName == nil, "Multiple selected options found")
-			var3.selectedOptionDisplayName = v.optionDisplayName
+		if v.optionId == p1.selectedOptionId then
+			argCheckModule.assert(var1.selectedOptionDisplayName == nil, "Multiple selected options found")
+			var1.selectedOptionDisplayName = v.optionDisplayName
 		end
 	end
-	var3.filterOptions = t_1
+	var1.filterOptions = t_1
 	
-	return var3
+	return var1
 end
 
 return t

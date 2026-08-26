@@ -12,15 +12,15 @@ local t = {
 	lastUpdated = { 2026, 7, 30 }
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: debug (ref), telemetryService (ref), t (ref)
 	local t_1 = {
-		action = p0,
-		universeid = p1.universeId,
-		placeid = p1.placeId,
-		sessionid = p1.sessionId,
-		sequenceId = p1.sequenceId,
-		turnId = p1.turnId
+		action = p1,
+		universeid = p2.universeId,
+		placeid = p2.placeId,
+		sessionid = p2.sessionId,
+		sequenceId = p2.sequenceId,
+		turnId = p2.turnId
 	}
 	debug.log("info", "agent_turn_feedback sending event", { customFields = t_1 })
 	telemetryService:LogEvent(t, { standardizedFields = { "addUserId" }, customFields = t_1 })

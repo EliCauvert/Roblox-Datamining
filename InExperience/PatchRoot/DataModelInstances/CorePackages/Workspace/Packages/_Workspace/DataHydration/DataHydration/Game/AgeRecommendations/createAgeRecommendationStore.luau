@@ -14,65 +14,65 @@ local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), fetchAgeRecommendationModule (ref), ageRecommendationStoreTypesModule (ref), fFlagShowGameAgeRating (ref), fFlagSduiExperienceDetailsSupport (ref)
-	local var7 = createDataCacheModule()
-	local var8 = createDataResolverModule({
+	local var1 = createDataCacheModule()
+	local var2 = createDataResolverModule({
 		requestBatchSize = 1,
-		cache = var7,
-		logError = function(p0)
+		cache = var1,
+		logError = function(p1)
 			-- upvalues: logResponseError (copy), discoveryEventErrorLogger (copy)
-			if type(p0) == "table" then
-				if p0.responseCode then
-					logResponseError("experience-guidelines-api/get-age-recommendation", { StatusCode = tonumber(p0.responseCode) })
+			if type(p1) == "table" then
+				if p1.responseCode then
+					logResponseError("experience-guidelines-api/get-age-recommendation", { StatusCode = tonumber(p1.responseCode) })
 				end
-				if p0.errorType and p0.errorMessage then
-					discoveryEventErrorLogger.reportError(p0.errorType, p0.errorMessage, p0.customFields)
+				if p1.errorType and p1.errorMessage then
+					discoveryEventErrorLogger.reportError(p1.errorType, p1.errorMessage, p1.customFields)
 					
 					return
 				end
 			else
-				discoveryEventErrorLogger.reportError("FetchAgeRecommendationError", tostring(p0))
+				discoveryEventErrorLogger.reportError("FetchAgeRecommendationError", tostring(p1))
 			end
 		end,
 		fetchFn = function(p1)
 			-- upvalues: fetchAgeRecommendationModule (copy), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy), fFlagSduiExperienceDetailsSupport (copy)
-			local var9 = next(p1)
+			local var3 = next(p1)
 			
-			if not var9 then
+			if not var3 then
 				error({
 					errorType = "CreateAgeRecommendationStoreMissingUniverseId",
 					errorMessage = "CreateAgeRecommendationStore requires universeId",
-					customFields = { universeId = var9 }
+					customFields = { universeId = var3 }
 				})
 			end
-			return fetchAgeRecommendationModule(var9):andThen(function(p3)
-				-- upvalues: var9 (ref), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy), fFlagSduiExperienceDetailsSupport (copy)
-				if not p3 or not p3.responseBody then
+			return fetchAgeRecommendationModule(var3):andThen(function(p2)
+				-- upvalues: var3 (ref), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy), fFlagSduiExperienceDetailsSupport (copy)
+				if not p2 or not p2.responseBody then
 					error({
 						errorType = "FetchAgeRecommendationResponseError",
-						responseCode = p3 and p3.responseCode,
-						errorMessage = if p3 then "Missing response body" else "No response",
-						customFields = { universeId = var9 }
+						responseCode = p2 and p2.responseCode,
+						errorMessage = if p2 then "Missing response body" else "No response",
+						customFields = { universeId = var3 }
 					})
 				end
-				local var10, var11 = ageRecommendationStoreTypesModule.ageRecommendationResponseValidator(p3.responseBody)
+				local var4, var5 = ageRecommendationStoreTypesModule.ageRecommendationResponseValidator(p2.responseBody)
 				
-				if not var10 then
+				if not var4 then
 					error({
 						errorType = "FetchAgeRecommendationResponseInvalidInterface",
-						responseCode = p3.responseCode,
-						errorMessage = var11,
-						customFields = { universeId = var9 }
+						responseCode = p2.responseCode,
+						errorMessage = var5,
+						customFields = { universeId = var3 }
 					})
 				end
 				local t = {}
-				local ageRecommendation = p3.responseBody.ageRecommendationDetails.summary.ageRecommendation
+				local ageRecommendation = p2.responseBody.ageRecommendationDetails.summary.ageRecommendation
 				
 				if fFlagShowGameAgeRating and not ageRecommendation then
-					t[var9] = {}
+					t[var3] = {}
 					
 					return t
 				end
-				t[var9] = {
+				t[var3] = {
 					displayName = ageRecommendation.displayName,
 					displayNameWithHeaderShort = ageRecommendation.displayNameWithHeaderShort,
 					minimumAgeDisplay = if fFlagShowGameAgeRating then ageRecommendation.minimumAgeDisplay else nil,
@@ -88,11 +88,11 @@ return function()
 	})
 	
 	return {
-		fetchAgeRecommendation = var8.fetchItem,
-		getAgeRecommendation = var8.getCachedItem,
-		getAndFetchAgeRecommendation = var8.getAndFetchItem,
-		updateAgeRecommendations = if fFlagSduiExperienceDetailsSupport then var7.updateItems else nil,
-		clear = var8.clear,
-		dispose = var8.dispose
+		fetchAgeRecommendation = var2.fetchItem,
+		getAgeRecommendation = var2.getCachedItem,
+		getAndFetchAgeRecommendation = var2.getAndFetchItem,
+		updateAgeRecommendations = if fFlagSduiExperienceDetailsSupport then var1.updateItems else nil,
+		clear = var2.clear,
+		dispose = var2.dispose
 	}
 end

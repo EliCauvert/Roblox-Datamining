@@ -27,314 +27,314 @@ local t = {
 	isDisabled = false
 }
 
-local function _(p0)
-	return p0.X / p0.Y
+local function _(p1)
+	return p1.X / p1.Y
 end
 
-local var18 = _G.__DEV__ == true
+local var1 = _G.__DEV__ == true
 
 local _ = function(value)
-	-- upvalues: iconImagesDEPRECATED (ref), var18 (ref), images (ref)
-	local var19 = iconImagesDEPRECATED[value]
+	-- upvalues: iconImagesDEPRECATED (ref), var1 (ref), images (ref)
+	local var2 = iconImagesDEPRECATED[value]
 	
-	return var19 or (if var18 then images[value] else rawget(images, value))
+	return var2 or (if var1 then images[value] else rawget(images, value))
 end
 
 local _ = function(p1)
-	-- upvalues: isFoundationImageModule (ref), isCloudAssetModule (ref), iconImagesDEPRECATED (ref), var18 (ref), images (ref)
+	-- upvalues: isFoundationImageModule (ref), isCloudAssetModule (ref), iconImagesDEPRECATED (ref), var1 (ref), images (ref)
 	if not isFoundationImageModule(p1) then
 		return false
 	end
-	local var20 = isCloudAssetModule(p1)
+	local var2 = isCloudAssetModule(p1)
 	
-	if not var20 then
-		local var21 = iconImagesDEPRECATED[p1]
-		var20 = (var21 or (if var18 then images[p1] else rawget(images, p1))) ~= nil
+	if not var2 then
+		local var3 = iconImagesDEPRECATED[p1]
+		var2 = (var3 or (if var1 then images[p1] else rawget(images, p1))) ~= nil
 	end
-	return var20
+	return var2
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p2, p3)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), reactIsModule (ref), isCloudAssetModule (ref), isFoundationImageModule (ref), assets (ref), iconImagesDEPRECATED (ref), var18 (ref), images (ref), getScaledSliceModule (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), useOnLoadedModule (ref), flagsModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
-	local var22 = withDefaultsModule(p2, t)
-	local var23 = if var22.onStateChanged == nil then if var22.onActivated == nil then var22.onSecondaryActivated ~= nil else true else true
-	local aspectRatio = var22.aspectRatio
-	local var24, var25 = reactModule.useState(false)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), reactIsModule (ref), isCloudAssetModule (ref), isFoundationImageModule (ref), assets (ref), iconImagesDEPRECATED (ref), var1 (ref), images (ref), getScaledSliceModule (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), useOnLoadedModule (ref), flagsModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
+	local var2 = withDefaultsModule(p1, t)
+	local var3 = if var2.onStateChanged == nil then if var2.onActivated == nil then var2.onSecondaryActivated ~= nil else true else true
+	local aspectRatio = var2.aspectRatio
+	local var4, var5 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: reactIsModule (copy), var22 (ref), var25 (ref), isCloudAssetModule (copy), reactModule (copy)
-		if reactIsModule.isBinding(var22.Image) then
-			local image = var22.Image
-			var25(isCloudAssetModule(image:getValue()))
-			local var37 = reactModule.__subscribeToBinding(image, function(p4)
-				-- upvalues: var25 (copy), isCloudAssetModule (copy)
-				var25(isCloudAssetModule(p4))
+		-- upvalues: reactIsModule (copy), var2 (ref), var5 (ref), isCloudAssetModule (copy), reactModule (copy)
+		if reactIsModule.isBinding(var2.Image) then
+			local image = var2.Image
+			var5(isCloudAssetModule(image:getValue()))
+			local var6 = reactModule.__subscribeToBinding(image, function(p3)
+				-- upvalues: var5 (copy), isCloudAssetModule (copy)
+				var5(isCloudAssetModule(p3))
 			end)
 			
 			return function()
-				-- upvalues: var37 (ref)
-				var37()
+				-- upvalues: var6 (ref)
+				var6()
 			end
 		end
-	end, { var22.Image, aspectRatio })
-	local var26, var27, var28, var29 = reactModule.useMemo(function()
-		-- upvalues: var22 (ref), aspectRatio (ref), reactIsModule (copy), isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), iconImagesDEPRECATED (copy), var18 (copy), images (copy), var24 (ref)
-		local image = var22.Image
-		local var38 = if var22.imageRect then var22.imageRect.offset else nil
-		local var39 = if var22.imageRect then var22.imageRect.size else nil
-		local var40 = aspectRatio
+	end, { var2.Image, aspectRatio })
+	local var6, var7, var8, var9 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), aspectRatio (ref), reactIsModule (copy), isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), iconImagesDEPRECATED (copy), var1 (copy), images (copy), var4 (ref)
+		local image = var2.Image
+		local var10 = if var2.imageRect then var2.imageRect.offset else nil
+		local var11 = if var2.imageRect then var2.imageRect.size else nil
+		local var12 = aspectRatio
 		
-		if reactIsModule.isBinding(var22.Image) then
-			local function _(p5)
-				-- upvalues: var22 (copy), isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy)
-				return var22.Image:map(function(p6)
-					-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), p5 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
-					if isFoundationImageModule(p6) then
+		if reactIsModule.isBinding(var2.Image) then
+			local function _(p3)
+				-- upvalues: var2 (copy), isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), iconImagesDEPRECATED (copy), var1 (copy), images (copy), aspectRatio (copy)
+				return var2.Image:map(function(p4)
+					-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), p3 (ref), iconImagesDEPRECATED (copy), var1 (copy), images (copy), aspectRatio (copy), var2 (copy)
+					if isFoundationImageModule(p4) then
 						local _ = nil
 						
-						if isCloudAssetModule(p6) then
-							local var47 = assets[p6]
+						if isCloudAssetModule(p4) then
+							local var13 = assets[p4]
 							
-							if p5 == "Image" then
-								return var47.assetId
-							elseif p5 == "AspectRatio" then
-								local size = var47.size
+							if p3 == "Image" then
+								return var13.assetId
+							elseif p3 == "AspectRatio" then
+								local size = var13.size
 								
 								return size.X / size.Y
 							end
 							return nil
 						else
-							local var48 = iconImagesDEPRECATED[p6]
-							local var49 = var48 or (if var18 then images[p6] else rawget(images, p6))
+							local var14 = iconImagesDEPRECATED[p4]
+							local var15 = var14 or (if var1 then images[p4] else rawget(images, p4))
 							
-							return if p5 == "AspectRatio" then aspectRatio elseif var49 then var49[p5] elseif p5 == "Image" then p6 else nil
+							return if p3 == "AspectRatio" then aspectRatio elseif var15 then var15[p3] elseif p3 == "Image" then p4 else nil
 						end
 					else
-						return if p5 == "Image" then p6 elseif p5 == "ImageRectOffset" and var22.imageRect then var22.imageRect.offset elseif p5 == "ImageRectSize" and var22.imageRect then var22.imageRect.size else nil
+						return if p3 == "Image" then p4 elseif p3 == "ImageRectOffset" and var2.imageRect then var2.imageRect.offset elseif p3 == "ImageRectSize" and var2.imageRect then var2.imageRect.size else nil
 					end
 				end)
 			end
 			
-			if var24 then
-				local var41 = "AspectRatio"
-				var40 = var22.Image:map(function(p7)
-					-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var41 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
-					if not isFoundationImageModule(p7) then
-						return if var41 == "Image" then p7 elseif var41 == "ImageRectOffset" and var22.imageRect then var22.imageRect.offset elseif var41 == "ImageRectSize" and var22.imageRect then var22.imageRect.size else nil
+			if var4 then
+				local var13 = "AspectRatio"
+				var12 = var2.Image:map(function(p3)
+					-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var13 (ref), iconImagesDEPRECATED (copy), var1 (copy), images (copy), aspectRatio (copy), var2 (copy)
+					if not isFoundationImageModule(p3) then
+						return if var13 == "Image" then p3 elseif var13 == "ImageRectOffset" and var2.imageRect then var2.imageRect.offset elseif var13 == "ImageRectSize" and var2.imageRect then var2.imageRect.size else nil
 					end
 					local _ = nil
 					
-					if not isCloudAssetModule(p7) then
-						local var48 = iconImagesDEPRECATED[p7]
-						local var49 = var48 or (if var18 then images[p7] else rawget(images, p7))
+					if not isCloudAssetModule(p3) then
+						local var14 = iconImagesDEPRECATED[p3]
+						local var15 = var14 or (if var1 then images[p3] else rawget(images, p3))
 						
-						return if var41 == "AspectRatio" then aspectRatio elseif var49 then var49[var41] elseif var41 == "Image" then p7 else nil
+						return if var13 == "AspectRatio" then aspectRatio elseif var15 then var15[var13] elseif var13 == "Image" then p3 else nil
 					end
-					local var47 = assets[p7]
+					local var16 = assets[p3]
 					
-					if var41 == "Image" then
-						return var47.assetId
-					elseif var41 == "AspectRatio" then
-						local size = var47.size
+					if var13 == "Image" then
+						return var16.assetId
+					elseif var13 == "AspectRatio" then
+						local size = var16.size
 						
 						return size.X / size.Y
 					end
 					return nil
 				end)
 			else
-				var40 = aspectRatio
+				var12 = aspectRatio
 			end
-			local var42 = "Image"
-			image = var22.Image:map(function(p8)
-				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var42 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
-				if not isFoundationImageModule(p8) then
-					return if var42 == "Image" then p8 elseif var42 == "ImageRectOffset" and var22.imageRect then var22.imageRect.offset elseif var42 == "ImageRectSize" and var22.imageRect then var22.imageRect.size else nil
+			local var14 = "Image"
+			image = var2.Image:map(function(p3)
+				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var14 (ref), iconImagesDEPRECATED (copy), var1 (copy), images (copy), aspectRatio (copy), var2 (copy)
+				if not isFoundationImageModule(p3) then
+					return if var14 == "Image" then p3 elseif var14 == "ImageRectOffset" and var2.imageRect then var2.imageRect.offset elseif var14 == "ImageRectSize" and var2.imageRect then var2.imageRect.size else nil
 				end
 				local _ = nil
 				
-				if not isCloudAssetModule(p8) then
-					local var48 = iconImagesDEPRECATED[p8]
-					local var49 = var48 or (if var18 then images[p8] else rawget(images, p8))
+				if not isCloudAssetModule(p3) then
+					local var15 = iconImagesDEPRECATED[p3]
+					local var16 = var15 or (if var1 then images[p3] else rawget(images, p3))
 					
-					return if var42 == "AspectRatio" then aspectRatio elseif var49 then var49[var42] elseif var42 == "Image" then p8 else nil
+					return if var14 == "AspectRatio" then aspectRatio elseif var16 then var16[var14] elseif var14 == "Image" then p3 else nil
 				end
-				local var47 = assets[p8]
+				local var17 = assets[p3]
 				
-				if var42 == "Image" then
-					return var47.assetId
-				elseif var42 == "AspectRatio" then
-					local size = var47.size
+				if var14 == "Image" then
+					return var17.assetId
+				elseif var14 == "AspectRatio" then
+					local size = var17.size
 					
 					return size.X / size.Y
 				end
 				return nil
 			end)
-			local var43 = "ImageRectOffset"
-			var38 = var22.Image:map(function(p9)
-				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var43 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
-				if not isFoundationImageModule(p9) then
-					return if var43 == "Image" then p9 elseif var43 == "ImageRectOffset" and var22.imageRect then var22.imageRect.offset elseif var43 == "ImageRectSize" and var22.imageRect then var22.imageRect.size else nil
+			local var15 = "ImageRectOffset"
+			var10 = var2.Image:map(function(p3)
+				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var15 (ref), iconImagesDEPRECATED (copy), var1 (copy), images (copy), aspectRatio (copy), var2 (copy)
+				if not isFoundationImageModule(p3) then
+					return if var15 == "Image" then p3 elseif var15 == "ImageRectOffset" and var2.imageRect then var2.imageRect.offset elseif var15 == "ImageRectSize" and var2.imageRect then var2.imageRect.size else nil
 				end
 				local _ = nil
 				
-				if not isCloudAssetModule(p9) then
-					local var48 = iconImagesDEPRECATED[p9]
-					local var49 = var48 or (if var18 then images[p9] else rawget(images, p9))
+				if not isCloudAssetModule(p3) then
+					local var16 = iconImagesDEPRECATED[p3]
+					local var17 = var16 or (if var1 then images[p3] else rawget(images, p3))
 					
-					return if var43 == "AspectRatio" then aspectRatio elseif var49 then var49[var43] elseif var43 == "Image" then p9 else nil
+					return if var15 == "AspectRatio" then aspectRatio elseif var17 then var17[var15] elseif var15 == "Image" then p3 else nil
 				end
-				local var47 = assets[p9]
+				local var18 = assets[p3]
 				
-				if var43 == "Image" then
-					return var47.assetId
-				elseif var43 == "AspectRatio" then
-					local size = var47.size
+				if var15 == "Image" then
+					return var18.assetId
+				elseif var15 == "AspectRatio" then
+					local size = var18.size
 					
 					return size.X / size.Y
 				end
 				return nil
 			end)
-			local var44 = "ImageRectSize"
-			var39 = var22.Image:map(function(p10)
-				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var44 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
-				if not isFoundationImageModule(p10) then
-					return if var44 == "Image" then p10 elseif var44 == "ImageRectOffset" and var22.imageRect then var22.imageRect.offset elseif var44 == "ImageRectSize" and var22.imageRect then var22.imageRect.size else nil
+			local var16 = "ImageRectSize"
+			var11 = var2.Image:map(function(p3)
+				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var16 (ref), iconImagesDEPRECATED (copy), var1 (copy), images (copy), aspectRatio (copy), var2 (copy)
+				if not isFoundationImageModule(p3) then
+					return if var16 == "Image" then p3 elseif var16 == "ImageRectOffset" and var2.imageRect then var2.imageRect.offset elseif var16 == "ImageRectSize" and var2.imageRect then var2.imageRect.size else nil
 				end
 				local _ = nil
 				
-				if not isCloudAssetModule(p10) then
-					local var48 = iconImagesDEPRECATED[p10]
-					local var49 = var48 or (if var18 then images[p10] else rawget(images, p10))
+				if not isCloudAssetModule(p3) then
+					local var17 = iconImagesDEPRECATED[p3]
+					local var18 = var17 or (if var1 then images[p3] else rawget(images, p3))
 					
-					return if var44 == "AspectRatio" then aspectRatio elseif var49 then var49[var44] elseif var44 == "Image" then p10 else nil
+					return if var16 == "AspectRatio" then aspectRatio elseif var18 then var18[var16] elseif var16 == "Image" then p3 else nil
 				end
-				local var47 = assets[p10]
+				local var19 = assets[p3]
 				
-				if var44 == "Image" then
-					return var47.assetId
-				elseif var44 == "AspectRatio" then
-					local size = var47.size
+				if var16 == "Image" then
+					return var19.assetId
+				elseif var16 == "AspectRatio" then
+					local size = var19.size
 					
 					return size.X / size.Y
 				end
 				return nil
 			end)
 			
-			return image, var38, var39, var40
-		elseif typeof(var22.Image) == "string" and isFoundationImageModule(var22.Image) then
-			if isCloudAssetModule(var22.Image) then
-				local image_1 = assets[var22.Image]
+			return image, var10, var11, var12
+		elseif typeof(var2.Image) == "string" and isFoundationImageModule(var2.Image) then
+			if isCloudAssetModule(var2.Image) then
+				local image_1 = assets[var2.Image]
 				image = image_1.assetId
 				local size = image_1.size
-				var40 = size.X / size.Y
+				var12 = size.X / size.Y
 				
-				return image, var38, var39, var40
+				return image, var10, var11, var12
 			end
-			local image_1 = var22.Image
-			local var45 = iconImagesDEPRECATED[image_1]
-			local var46 = var45 or (if var18 then images[image_1] else rawget(images, image_1))
+			local image_1 = var2.Image
+			local var17 = iconImagesDEPRECATED[image_1]
+			local var18 = var17 or (if var1 then images[image_1] else rawget(images, image_1))
 			
-			if var46 then
-				image = var46.Image
-				var38 = var46.ImageRectOffset
-				var39 = var46.ImageRectSize
+			if var18 then
+				image = var18.Image
+				var10 = var18.ImageRectOffset
+				var11 = var18.ImageRectSize
 			end
 		end
-		return image, var38, var39, var40
+		return image, var10, var11, var12
 	end, {
-		var22.Image,
-		var22.imageRect,
-		var24,
+		var2.Image,
+		var2.imageRect,
+		var4,
 		aspectRatio,
 		images
 	})
 	local center = nil
 	local scale = nil
-	local scaleType = var22.ScaleType
+	local scaleType = var2.ScaleType
 	
-	if var22.slice then
-		if reactIsModule.isBinding(var22.Image) then
-			local var30 = var22.Image:map(function(p11)
-				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), iconImagesDEPRECATED (copy), var18 (copy), images (copy), getScaledSliceModule (copy), var22 (ref)
-				local var50
-				if isFoundationImageModule(p11) then
-					var50 = isCloudAssetModule(p11)
+	if var2.slice then
+		if reactIsModule.isBinding(var2.Image) then
+			local var10 = var2.Image:map(function(p3)
+				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), iconImagesDEPRECATED (copy), var1 (copy), images (copy), getScaledSliceModule (copy), var2 (ref)
+				local var11
+				if isFoundationImageModule(p3) then
+					var11 = isCloudAssetModule(p3)
 					
-					if not var50 then
-						local var51 = iconImagesDEPRECATED[p11]
-						var50 = (var51 or (if var18 then images[p11] else rawget(images, p11))) ~= nil
+					if not var11 then
+						local var12 = iconImagesDEPRECATED[p3]
+						var11 = (var12 or (if var1 then images[p3] else rawget(images, p3))) ~= nil
 					end
 				else
-					var50 = false
+					var11 = false
 				end
-				return if var50 then getScaledSliceModule(var22.slice.center, var22.slice.scale) else var22.slice
+				return if var11 then getScaledSliceModule(var2.slice.center, var2.slice.scale) else var2.slice
 			end)
-			center = var30:map(function(p12)
-				return p12.center
+			center = var10:map(function(p3)
+				return p3.center
 			end)
-			scale = var30:map(function(p13)
-				return p13.scale
+			scale = var10:map(function(p3)
+				return p3.scale
 			end)
-		elseif typeof(var22.Image) == "string" then
-			local var31
-			local image = var22.Image
+		elseif typeof(var2.Image) == "string" then
+			local var11
+			local image = var2.Image
 			
 			if isFoundationImageModule(image) then
-				var31 = isCloudAssetModule(image)
+				var11 = isCloudAssetModule(image)
 				
-				if not var31 then
-					local var32 = iconImagesDEPRECATED[image]
-					var31 = (var32 or (if var18 then images[image] else rawget(images, image))) ~= nil
+				if not var11 then
+					local var12 = iconImagesDEPRECATED[image]
+					var11 = (var12 or (if var1 then images[image] else rawget(images, image))) ~= nil
 				end
 			else
-				var31 = false
+				var11 = false
 			end
-			if var31 then
-				var31 = getScaledSliceModule(var22.slice.center, var22.slice.scale)
-				center = var31.center
-				scale = var31.scale
+			if var11 then
+				var11 = getScaledSliceModule(var2.slice.center, var2.slice.scale)
+				center = var11.center
+				scale = var11.scale
 			else
-				center = var22.slice.center
-				scale = var22.slice.scale
+				center = var2.slice.center
+				scale = var2.slice.scale
 			end
 		end
 		scaleType = Enum.ScaleType.Slice
 	end
-	var22.aspectRatio = var29
-	local var33 = useStyleTagsModule(useDefaultTagsModule(var22.tag, if var22.backgroundStyle ~= nil then "gui-object-defaults" else "gui-object-defaults x-default-transparency"))
-	useOnLoadedModule(var26, var22.onLoaded)
-	local var34 = if var23 then "ImageButton" else "ImageLabel"
-	local var35 = withGuiObjectPropsModule(var22, {
-		AutoButtonColor = if var34 == "ImageButton" then var22.AutoButtonColor else nil,
-		Image = var26,
+	var2.aspectRatio = var9
+	local var13 = useStyleTagsModule(useDefaultTagsModule(var2.tag, if var2.backgroundStyle ~= nil then "gui-object-defaults" else "gui-object-defaults x-default-transparency"))
+	useOnLoadedModule(var6, var2.onLoaded)
+	local var14 = if var3 then "ImageButton" else "ImageLabel"
+	local var15 = withGuiObjectPropsModule(var2, {
+		AutoButtonColor = if var14 == "ImageButton" then var2.AutoButtonColor else nil,
+		Image = var6,
 		ImageContent = if flagsModule.FoundationImageContentSupport then reactModule.useMemo(function()
-			-- upvalues: reactIsModule (copy), var22 (ref)
-			return if reactIsModule.isBinding(var22.ImageContent) then var22.ImageContent:map(function(p14)
-				return if typeof(p14) == "string" then Content.fromUri(p14) else p14
-			end) elseif typeof(var22.ImageContent) == "string" then Content.fromUri(var22.ImageContent) else var22.ImageContent
-		end, { var22.ImageContent }) else nil,
-		ImageColor3 = if var22.imageStyle then indexBindableModule(var22.imageStyle, "Color3") else nil,
-		ImageTransparency = if var22.imageStyle then indexBindableModule(var22.imageStyle, "Transparency") else nil,
-		ImageRectOffset = var27,
-		ImageRectSize = var28,
-		ResampleMode = var22.ResampleMode,
+			-- upvalues: reactIsModule (copy), var2 (ref)
+			return if reactIsModule.isBinding(var2.ImageContent) then var2.ImageContent:map(function(p3)
+				return if typeof(p3) == "string" then Content.fromUri(p3) else p3
+			end) elseif typeof(var2.ImageContent) == "string" then Content.fromUri(var2.ImageContent) else var2.ImageContent
+		end, { var2.ImageContent }) else nil,
+		ImageColor3 = if var2.imageStyle then indexBindableModule(var2.imageStyle, "Color3") else nil,
+		ImageTransparency = if var2.imageStyle then indexBindableModule(var2.imageStyle, "Transparency") else nil,
+		ImageRectOffset = var7,
+		ImageRectSize = var8,
+		ResampleMode = var2.ResampleMode,
 		ScaleType = scaleType,
 		SliceCenter = center,
 		SliceScale = scale,
-		TileSize = var22.TileSize,
-		ref = p3,
-		[reactModule.Tag] = var33
+		TileSize = var2.TileSize,
+		ref = p2,
+		[reactModule.Tag] = var13
 	})
-	local var36 = var34
+	local var16 = var14
 	
-	if var23 then
-		var36 = interactableModule
-		var35.component = var34
-		var35.onActivated = var22.onActivated
-		var35.onSecondaryActivated = var22.onSecondaryActivated
-		var35.onStateChanged = var22.onStateChanged
-		var35.stateLayer = var22.stateLayer
-		var35.isDisabled = var22.isDisabled
-		var35.cursor = var22.cursor
+	if var3 then
+		var16 = interactableModule
+		var15.component = var14
+		var15.onActivated = var2.onActivated
+		var15.onSecondaryActivated = var2.onSecondaryActivated
+		var15.onStateChanged = var2.onStateChanged
+		var15.stateLayer = var2.stateLayer
+		var15.isDisabled = var2.isDisabled
+		var15.cursor = var2.cursor
 	end
-	return reactModule.createElement(var36, var35, guiObjectChildrenModule(var22))
+	return reactModule.createElement(var16, var15, guiObjectChildrenModule(var2))
 end))

@@ -14,41 +14,41 @@ local networkingAssetModule = require(profilePlatform.Networking.NetworkingAsset
 local constants = userLibModule.Utils.Constants
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 
-return function(p0)
+return function(p1)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useDispatch (ref), useLazyFmod (ref), useSelector (ref), constantsModule (ref), reactModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), networkingAssetModule (ref), videoTileModule (ref)
-	local var9 = useProfileJsonComponentModule(enumsModule.Components.Videos)
-	local var10 = useDispatch()
+	local var1 = useProfileJsonComponentModule(enumsModule.Components.Videos)
+	local var2 = useDispatch()
 	useLazyFmod()
-	local var11 = if var9 and var9.assetIds and #var9.assetIds > 0 then var9.assetIds else {}
-	local var12 = useSelector(function(p1)
+	local var3 = if var1 and var1.assetIds and #var1.assetIds > 0 then var1.assetIds else {}
+	local var4 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RODUX_KEY].AssetData or {}
+		return p2[constantsModule.RODUX_KEY].AssetData or {}
 	end)
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: var11 (write), var12 (ref), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy)
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var3 (write), var4 (ref), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy)
 		local t = {}
 		
-		for i, v in var11 do
-			local var15 = var12[tostring(v)]
+		for i, v in var3 do
+			local var6 = var4[tostring(v)]
 			
-			if var15 then
+			if var6 then
 				table.insert(t, {
 					videoId = "rbxassetid://" .. tostring(v),
-					title = var15.displayName or "",
+					title = var6.displayName or "",
 					thumbnailImage = getRbxthumbWithTypeSizeAndOptions(tostring(v), constants.RbxthumbTypes.Asset, 150)
 				})
 			end
 		end
 		return t
-	end, { var11, var12 })
+	end, { var3, var4 })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (write), var12 (ref), var10 (ref), networkingAssetModule (copy)
-		for i, v in var11 do
-			if not var12[tostring(v)] then
-				var10(networkingAssetModule.GetAssetDetails.API(tostring(v))):catch(function() end)
+		-- upvalues: var3 (write), var4 (ref), var2 (ref), networkingAssetModule (copy)
+		for i, v in var3 do
+			if not var4[tostring(v)] then
+				var2(networkingAssetModule.GetAssetDetails.API(tostring(v))):catch(function() end)
 			end
 		end
-	end, { var11, var12 })
+	end, { var3, var4 })
 	
-	return if #var13 == 0 then reactModule.None else reactModule.createElement(videoTileModule, { layoutOrder = p0.layoutOrder, videos = var13 })
+	return if #var5 == 0 then reactModule.None else reactModule.createElement(videoTileModule, { layoutOrder = p1.layoutOrder, videos = var5 })
 end

@@ -1,19 +1,19 @@
 ﻿local getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule = require(script.Parent.Parent.flags.getFFlagUGCValidationExtendSchemaToIgnoreDescendants)
 
-local function _(p0, p1)
-	if type(p0) == "table" then
-		for i, v in pairs(p0) do
-			if v == p1 then
+local function _(p1, p2)
+	if type(p1) == "table" then
+		for i, v in pairs(p1) do
+			if v == p2 then
 				return true
 			end
 		end
 	else
-		return type(p0) == "string" and p0 == p1
+		return type(p1) == "string" and p1 == p2
 	end
 end
 
-local _ = function(p2)
-	return if type(p2) == "table" then table.concat(p2, " or ") elseif type(p2) == "string" then p2 else "*"
+local _ = function(p3)
+	return if type(p3) == "table" then table.concat(p3, " or ") elseif type(p3) == "string" then p3 else "*"
 end
 
 local function validateWithSchemaHelper(p3, p4, p5)
@@ -21,15 +21,15 @@ local function validateWithSchemaHelper(p3, p4, p5)
 	local v
 	if p4.ClassName == p3.ClassName then
 		if p3.Name ~= nil then
-			local var2
+			local var1
 			local name = p3.Name
 			local name_1 = p4.Name
 			
 			if type(name) == "table" then
 				for i, v in pairs(name) do
 					if v == name_1 then
-						var2 = true
-						if not var2 then
+						var1 = true
+						if not var1 then
 							return { success = false }
 						end
 					end
@@ -37,7 +37,7 @@ local function validateWithSchemaHelper(p3, p4, p5)
 			elseif type(name) == "string" then
 				local _ = name == name_1
 			else
-				var2 = false
+				var1 = false
 			end
 		end
 		if getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() and p3._ignoreDescendants then
@@ -50,26 +50,26 @@ local function validateWithSchemaHelper(p3, p4, p5)
 			
 			return { success = true }
 		elseif p3._children then
-			local var3
+			local var2
 			for i, v in pairs(p3._children) do
-				var3 = false
-				local var4 = nil
+				var2 = false
+				local var3 = nil
 				
 				for i_1, v_1 in pairs(p4:GetChildren()) do
 					if not getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() or not p5[v_1] then
-						local var5 = validateWithSchemaHelper(v, v_1, p5)
+						local var4 = validateWithSchemaHelper(v, v_1, p5)
 						
-						if var5.success then
-							var3 = true
+						if var4.success then
+							var2 = true
 							break
-						elseif var5.message then
-							var4 = var5
+						elseif var4.message then
+							var3 = var4
 						end
 					end
 				end
-				if not var3 and not v._optional then
-					if var4 then
-						return var4
+				if not var2 and not v._optional then
+					if var3 then
+						return var3
 					end
 					v = { success = false }
 					local name = v.Name
@@ -90,15 +90,15 @@ return function(p6, p7, _)
 	local name_1
 	if p7.ClassName == p6.ClassName then
 		if p6.Name ~= nil then
-			local var6
+			local var5
 			local name = p6.Name
 			name_1 = p7.Name
 			
 			if type(name) == "table" then
 				for i, v in pairs(name) do
 					if v == name_1 then
-						var6 = true
-						if not var6 then
+						var5 = true
+						if not var5 then
 							local t = { success = false }
 							local name = p6.Name
 							t.message = "Expected top-level instance to be a " .. p6.ClassName .. " named " .. (if type(name) == "table" then table.concat(name, " or ") elseif type(name) == "string" then name else "*")
@@ -110,7 +110,7 @@ return function(p6, p7, _)
 			elseif type(name) == "string" then
 				local _ = name == name_1
 			else
-				var6 = false
+				var5 = false
 			end
 		end
 		local t = {}

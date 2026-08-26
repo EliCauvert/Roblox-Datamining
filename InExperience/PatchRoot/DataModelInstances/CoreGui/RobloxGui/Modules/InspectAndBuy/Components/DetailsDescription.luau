@@ -26,10 +26,10 @@ function detailsDescription.setText(value)
 	end
 end
 
-function detailsDescription.init(p0)
+function detailsDescription.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.description = ""
-	p0.descriptionRef = roactModule.createRef()
+	p1.description = ""
+	p1.descriptionRef = roactModule.createRef()
 end
 
 function detailsDescription.render(p1)
@@ -51,18 +51,18 @@ function detailsDescription.render(p1)
 	})
 end
 
-function detailsDescription.calculateSize(p2)
+function detailsDescription.calculateSize(p1)
 	-- upvalues: textService (ref), appFonts (ref)
-	if p2.descriptionRef.current and p2.props.assetInfo then
-		return textService:GetTextSize(p2.description, 16, appFonts.default:getDefault(), Vector2.new(p2.descriptionRef.current.AbsoluteSize.X, 5000)).Y
+	if p1.descriptionRef.current and p1.props.assetInfo then
+		return textService:GetTextSize(p1.description, 16, appFonts.default:getDefault(), Vector2.new(p1.descriptionRef.current.AbsoluteSize.X, 5000)).Y
 	end
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p3, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
-		view = p3.view,
-		assetInfo = p3.assets[p3.detailsInformation.assetId],
-		detailsInformation = p3.detailsInformation,
-		bundleInfo = p3.bundles
+		view = p1.view,
+		assetInfo = p1.assets[p1.detailsInformation.assetId],
+		detailsInformation = p1.detailsInformation,
+		bundleInfo = p1.bundles
 	}
 end)(detailsDescription)

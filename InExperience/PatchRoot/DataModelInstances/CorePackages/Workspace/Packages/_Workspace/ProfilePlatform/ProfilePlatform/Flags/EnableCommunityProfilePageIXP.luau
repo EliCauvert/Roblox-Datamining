@@ -5,9 +5,9 @@ local enableCommunityProfilePageExperimentLayer = game:DefineFastString("EnableC
 local IXPService = game:GetService("IXPService")
 local useUserExperiment = require(profilePlatform.Parent.RoactAppExperiment).useUserExperiment
 
-local function isFeatureActive(p0)
+local function isFeatureActive(p1)
 	-- upvalues: enableCommunityProfilePageExperimentLayer (ref), enableCommunityProfilePageIXPEnabledForAll (ref)
-	return enableCommunityProfilePageIXPEnabledForAll or ((p0 or {})[enableCommunityProfilePageExperimentLayer] or {}).enableCommunityProfilePage == true
+	return enableCommunityProfilePageIXPEnabledForAll or ((p1 or {})[enableCommunityProfilePageExperimentLayer] or {}).enableCommunityProfilePage == true
 end
 
 return {

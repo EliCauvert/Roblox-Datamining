@@ -6,19 +6,19 @@ local getUpdateMessageType = thunksModule.GetUpdateMessageType
 local openCentralOverlayForUpdateRequiredPrompt = thunksModule.OpenCentralOverlayForUpdateRequiredPrompt
 local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: getUpdateMessageType (ref), openCentralOverlayForUpdateRequiredPrompt (ref), setNetworkingErrorToast (ref)
-	p0(getUpdateMessageType(p1, p2, p3, p4)):andThen(function(p7)
-		-- upvalues: p0 (ref), openCentralOverlayForUpdateRequiredPrompt (copy), p1 (ref), p5 (ref)
+	p1(getUpdateMessageType(p2, p3, p4, p5)):andThen(function(p7)
+		-- upvalues: p1 (ref), openCentralOverlayForUpdateRequiredPrompt (copy), p2 (ref), p6 (ref)
 		if p7 then
-			p0(openCentralOverlayForUpdateRequiredPrompt(p1:canPerformBinaryUpdate(), false, p7))
+			p1(openCentralOverlayForUpdateRequiredPrompt(p2:canPerformBinaryUpdate(), false, p7))
 			
 			return
 		end
-		p5()
-	end):catch(function(p6)
-		-- upvalues: p0 (ref), setNetworkingErrorToast (copy)
-		warn(p6)
-		p0(setNetworkingErrorToast({ HttpError = Enum.HttpError.OK }))
+		p6()
+	end):catch(function(p7)
+		-- upvalues: p1 (ref), setNetworkingErrorToast (copy)
+		warn(p7)
+		p1(setNetworkingErrorToast({ HttpError = Enum.HttpError.OK }))
 	end)
 end

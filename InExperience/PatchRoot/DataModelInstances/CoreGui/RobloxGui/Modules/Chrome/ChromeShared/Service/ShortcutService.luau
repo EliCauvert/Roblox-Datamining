@@ -2,7 +2,7 @@
 local corePackagesService = game:GetService("CorePackages")
 local contextActionService = game:GetService("ContextActionService")
 local userInputService = game:GetService("UserInputService")
-local var4 = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
+local var1 = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 local _ = require(corePackagesService.Workspace.Packages.Chrome)
 local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
 local availabilitySignal = chromeUtilsModule.AvailabilitySignal
@@ -11,15 +11,15 @@ local fFlagGamepadIconSupportCheck = require(corePackagesService.Workspace.Packa
 local t = {}
 t.__index = t
 
-local function _(p0)
-	return function(p1, p2, _)
-		-- upvalues: p0 (ref)
-		if p2 ~= Enum.UserInputState.Begin then
+local function _(p1)
+	return function(p2, p3, _)
+		-- upvalues: p1 (ref)
+		if p3 ~= Enum.UserInputState.Begin then
 			return Enum.ContextActionResult.Pass
 		end
-		for i, v in p0._shortcuts do
-			if v.actionName and v.actionName == p1 then
-				return p0:activateShortcut(i) or Enum.ContextActionResult.Sink
+		for i, v in p1._shortcuts do
+			if v.actionName and v.actionName == p2 then
+				return p1:activateShortcut(i) or Enum.ContextActionResult.Sink
 			end
 		end
 		return Enum.ContextActionResult.Pass
@@ -37,32 +37,32 @@ function t.new()
 	}, t)
 end
 
-function t:registerShortcut(p3)
-	-- upvalues: var4 (ref), availabilitySignal (ref), availabilitySignalState (ref), userInputService (ref)
-	if self._shortcuts[p3.id] then
+function t:registerShortcut(p2)
+	-- upvalues: var1 (ref), availabilitySignal (ref), availabilitySignalState (ref), userInputService (ref)
+	if self._shortcuts[p2.id] then
 		warn(string.format("shortcut " .. p3.id .. " already registered", debug.traceback()))
 	end
-	if p3.label then
-		p3.label = var4:Format(p3.label)
+	if p2.label then
+		p2.label = var1:Format(p2.label)
 	end
-	p3.displayPriority = p3.displayPriority or 0
+	p2.displayPriority = p2.displayPriority or 0
 	
-	if p3.availability == nil then
-		p3.availability = availabilitySignal.new(availabilitySignalState.Available)
+	if p2.availability == nil then
+		p2.availability = availabilitySignal.new(availabilitySignalState.Available)
 	end
-	p3.availability:connect(function()
-		-- upvalues: self (ref), p3 (ref)
-		self:shortcutChanged(p3)
+	p2.availability:connect(function()
+		-- upvalues: self (ref), p2 (ref)
+		self:shortcutChanged(p2)
 	end)
-	p3.icon = userInputService:GetImageForKeyCode(p3.keyCode)
-	self._shortcuts[p3.id] = p3
+	p2.icon = userInputService:GetImageForKeyCode(p2.keyCode)
+	self._shortcuts[p2.id] = p2
 end
 
-function t:activateShortcut(p4)
-	if self._shortcuts[p4] then
-		local var6 = self._shortcuts[p4]
+function t:activateShortcut(p2)
+	if self._shortcuts[p2] then
+		local var2 = self._shortcuts[p2]
 		
-		return if var6.activated then var6.activated() else nil
+		return if var2.activated then var2.activated() else nil
 	end
 end
 
@@ -70,48 +70,48 @@ function t:shortcutChanged(_)
 	self:updateShortcutBar(self:getCurrentShortcutBar())
 end
 
-function t:updateShortcutBar(p5)
+function t:updateShortcutBar(p2)
 	self:_unbindAllShortcuts()
-	self._currentShortcutBar = p5
+	self._currentShortcutBar = p2
 	
 	if self._shortcutBarHidden then
 		self.onShortcutBarChanged:fire(nil)
 		
 		return
 	end
-	self.onShortcutBarChanged:fire(p5)
+	self.onShortcutBarChanged:fire(p2)
 	
-	if p5 and self._shortcutBarList[p5] then
-		self:_bindShortcutBar(p5)
+	if p2 and self._shortcutBarList[p2] then
+		self:_bindShortcutBar(p2)
 	end
 end
 
-function t:configureShortcutBar(p6, p7)
-	self._shortcutBarList[p6] = p7
+function t:configureShortcutBar(p2, p3)
+	self._shortcutBarList[p2] = p3
 end
 
-function t:setShortcutBar(p8)
-	if self._currentShortcutBar ~= p8 then
-		self:updateShortcutBar(p8)
+function t:setShortcutBar(p2)
+	if self._currentShortcutBar ~= p2 then
+		self:updateShortcutBar(p2)
 	end
 end
 
-function t:setHideShortcutBar(p9, p10)
-	if self._shortcutBarHiddenOverrides[p9] ~= p10 then
-		if p10 then
-			self._shortcutBarHiddenOverrides[p9] = p10
+function t:setHideShortcutBar(p2, p3)
+	if self._shortcutBarHiddenOverrides[p2] ~= p3 then
+		if p3 then
+			self._shortcutBarHiddenOverrides[p2] = p3
 		else
-			self._shortcutBarHiddenOverrides[p9] = nil
+			self._shortcutBarHiddenOverrides[p2] = nil
 		end
-		local var7 = false
+		local var2 = false
 		
 		for i, v in pairs(self._shortcutBarHiddenOverrides) do
 			if v then
-				var7 = true
+				var2 = true
 				break
 			end
 		end
-		self._shortcutBarHidden = var7
+		self._shortcutBarHidden = var2
 		self:updateShortcutBar(self._currentShortcutBar)
 	end
 end
@@ -120,23 +120,23 @@ function t:getHideShortcutBar()
 	return self._shortcutBarHidden
 end
 
-function t:getShortcut(p11)
-	return self._shortcuts[p11]
+function t:getShortcut(p4)
+	return self._shortcuts[p4]
 end
 
-function t:getShortcutsFromBar(p12, _)
+function t:getShortcutsFromBar(p4, _)
 	-- upvalues: availabilitySignalState (ref), fFlagGamepadIconSupportCheck (ref), userInputService (ref)
-	if not p12 then
+	if not p4 then
 		return {}
 	end
 	local t = {}
 	
-	for i, v in self._shortcutBarList[p12] do
+	for i, v in self._shortcutBarList[p4] do
 		if self._shortcuts[v] then
-			local var9 = self._shortcuts[v]
+			local var3 = self._shortcuts[v]
 			
-			if var9.availability:get() ~= availabilitySignalState.Unavailable and (not fFlagGamepadIconSupportCheck or userInputService:GamepadSupports(userInputService:GetLastInputType(), var9.keyCode)) then
-				table.insert(t, var9)
+			if var3.availability:get() ~= availabilitySignalState.Unavailable and (not fFlagGamepadIconSupportCheck or userInputService:GamepadSupports(userInputService:GetLastInputType(), var3.keyCode)) then
+				table.insert(t, var3)
 			end
 		else
 			warn(string.format("shortcut " .. v .. " not found", debug.traceback()))
@@ -149,61 +149,61 @@ function t:getCurrentShortcutBar()
 	return self._currentShortcutBar
 end
 
-function t:_bindShortcutBar(p13)
+function t:_bindShortcutBar(p5)
 	-- upvalues: availabilitySignalState (ref)
-	for i, v in self._shortcutBarList[p13] do
-		local var10 = self._shortcuts[v]
+	for i, v in self._shortcutBarList[p5] do
+		local var4 = self._shortcuts[v]
 		
-		if var10 and var10.actionName then
+		if var4 and var4.actionName then
 			self:_unbindShortcut(v)
 			
-			if var10.availability:get() ~= availabilitySignalState.Unavailable then
+			if var4.availability:get() ~= availabilitySignalState.Unavailable then
 				self:_bindShortcut(v)
 			end
 		end
 	end
 end
 
-function t:_unbindShortcutBar(p14)
-	if p14 then
-		for i, v in self._shortcutBarList[p14] do
-			local var11 = self._shortcuts[v]
+function t:_unbindShortcutBar(p6)
+	if p6 then
+		for i, v in self._shortcutBarList[p6] do
+			local var5 = self._shortcuts[v]
 			
-			if var11 and var11.actionName then
+			if var5 and var5.actionName then
 				self:_unbindShortcut(v)
 			end
 		end
 	end
 end
 
-function t:_bindShortcut(p15)
+function t:_bindShortcut(p7)
 	-- upvalues: contextActionService (ref)
-	local var12 = self._shortcuts[p15]
+	local var6 = self._shortcuts[p7]
 	
-	if var12 and var12.actionName then
-		contextActionService:BindCoreAction(var12.actionName, function(p16, p17, _)
+	if var6 and var6.actionName then
+		contextActionService:BindCoreAction(var6.actionName, function(p8, p9, _)
 			-- upvalues: self (ref)
-			if p17 ~= Enum.UserInputState.Begin then
+			if p9 ~= Enum.UserInputState.Begin then
 				return Enum.ContextActionResult.Pass
 			end
 			for i, v in self._shortcuts do
-				if v.actionName and v.actionName == p16 then
+				if v.actionName and v.actionName == p8 then
 					return self:activateShortcut(i) or Enum.ContextActionResult.Sink
 				end
 			end
 			return Enum.ContextActionResult.Pass
-		end, false, var12.keyCode)
-		self._boundShortcuts[var12.actionName] = true
+		end, false, var6.keyCode)
+		self._boundShortcuts[var6.actionName] = true
 	end
 end
 
-function t:_unbindShortcut(p18)
+function t:_unbindShortcut(p8)
 	-- upvalues: contextActionService (ref)
-	local var13 = self._shortcuts[p18]
+	local var7 = self._shortcuts[p8]
 	
-	if var13 and var13.actionName then
-		contextActionService:UnbindCoreAction(var13.actionName)
-		self._boundShortcuts[var13.actionName] = false
+	if var7 and var7.actionName then
+		contextActionService:UnbindCoreAction(var7.actionName)
+		self._boundShortcuts[var7.actionName] = false
 	end
 end
 

@@ -7,19 +7,19 @@ local escapeRichText = require(parent.ChatUIPrimitives).Utils.escapeRichText
 local getFacePileParticipantIdsModule = require(script.Parent.getFacePileParticipantIds)
 local useFacePilePresenceModule = require(script.Parent.useFacePilePresence)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFacePileParticipantIdsModule (ref), useFacePilePresenceModule (ref), reactModule (ref), userTile (ref), layoutMode (ref), fFlagAppChatSanitizeConversationTitleRichText (ref), escapeRichText (ref)
-	local var3 = getFacePileParticipantIdsModule(p0.participantUserIds or {}, p0.localUserId)
+	local var1 = getFacePileParticipantIdsModule(p1.participantUserIds or {}, p1.localUserId)
 	
-	return if p0.participantUserIds ~= nil and #p0.participantUserIds > 0 then reactModule.createElement(userTile, {
-		userId = tostring(var3[1]),
-		facePileSecondUserId = if var3[2] then tostring(var3[2]) else nil,
+	return if p1.participantUserIds ~= nil and #p1.participantUserIds > 0 then reactModule.createElement(userTile, {
+		userId = tostring(var1[1]),
+		facePileSecondUserId = if var1[2] then tostring(var1[2]) else nil,
 		layoutMode = layoutMode.wide,
-		title = if fFlagAppChatSanitizeConversationTitleRichText and p0.titleText then escapeRichText(p0.titleText) else p0.titleText,
-		titleStyle = p0.titleStyle,
-		userPresenceType = useFacePilePresenceModule(var3),
-		onActivated = p0.onActivated,
-		selectable = p0.selectable,
+		title = if fFlagAppChatSanitizeConversationTitleRichText and p1.titleText then escapeRichText(p1.titleText) else p1.titleText,
+		titleStyle = p1.titleStyle,
+		userPresenceType = useFacePilePresenceModule(var1),
+		onActivated = p1.onActivated,
+		selectable = p1.selectable,
 		customTextTruncation = Enum.TextTruncate.SplitWord
 	}) else nil
 end

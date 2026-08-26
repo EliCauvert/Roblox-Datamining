@@ -14,29 +14,29 @@ local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPa
 local momentGetIdType = momentsTypesModule.Enums.MomentGetIdType
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: constructApiUrlModule (ref), momentsFixBatchedGetMomentsQueryParams (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), shareLinkTargetIdType (ref), momentGetIdType (ref), httpModule (ref), httpClientModule (ref), convertApiMomentsToMomentItemsModule (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref)
-	local var10, var11 = constructApiUrlModule("content-captures-api/v2/moments/get-moments")
-	local t = { Ids = table.concat(p0, ",") }
+	local var1, var2 = constructApiUrlModule("content-captures-api/v2/moments/get-moments")
+	local t = { Ids = table.concat(p1, ",") }
 	
 	if momentsFixBatchedGetMomentsQueryParams then
-		t.Ids = p0
+		t.Ids = p1
 	end
 	if fFlagMomentsPassFeedItemIdToBackendApis then
-		t.type = if p2 == shareLinkTargetIdType.FeedItemId then momentGetIdType.FeedItemId else momentGetIdType.MomentId
+		t.type = if p3 == shareLinkTargetIdType.FeedItemId then momentGetIdType.FeedItemId else momentGetIdType.MomentId
 	end
 	return httpClientModule.fetch({
 		method = "GET",
 		analyticsKey = "moments.get-moments",
-		url = `{var10}?{httpModule.Url:makeQueryString(t)}`,
-		headers = var11,
-		network = p1,
-		decode = function(p3)
+		url = `{var1}?{httpModule.Url:makeQueryString(t)}`,
+		headers = var2,
+		network = p2,
+		decode = function(p4)
 			-- upvalues: convertApiMomentsToMomentItemsModule (copy), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy)
 			return {
-				moments = convertApiMomentsToMomentItemsModule(p3.items),
-				reactionsByMomentId = extractReactionsByMomentIdModule(p3.items),
-				shareInfoByMomentId = extractShareInfoByMomentIdModule(p3.items)
+				moments = convertApiMomentsToMomentItemsModule(p4.items),
+				reactionsByMomentId = extractReactionsByMomentIdModule(p4.items),
+				shareInfoByMomentId = extractShareInfoByMomentIdModule(p4.items)
 			}
 		end
 	})

@@ -9,67 +9,67 @@ local response = fetchModule.Response
 local urlBuilder = require(graphQLServer.Parent.UrlBuilder).UrlBuilder
 local urlBase = require(graphQLServer.Parent.UrlBuilder).UrlBase
 local t = {}
-local var4 = urlBuilder.fromString("games:games?universeIds={universeIds}")
-local var5 = urlBuilder.new({
+local var1 = urlBuilder.fromString("games:games?universeIds={universeIds}")
+local var2 = urlBuilder.new({
 	path = "games/{universeId}/media",
 	base = urlBase.new("games", 2)
 })
 
-function t.findExperienceDetailsByUniverseId(p0, p1)
-	-- upvalues: fetch (ref), promiseModule (ref), var4 (ref), response (ref), graphQLError (ref)
-	local var6 = p1 or fetch
+function t.findExperienceDetailsByUniverseId(p1, p2)
+	-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), response (ref), graphQLError (ref)
+	local var3 = p2 or fetch
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: var4 (copy), p0 (ref), var6 (ref), response (copy), graphQLError (copy)
-		local var7 = var6(var4({ universeIds = p0 }), { method = "GET" }):catch(function()
+	return promiseModule.new(function(p3, p4)
+		-- upvalues: var1 (copy), p1 (ref), var3 (ref), response (copy), graphQLError (copy)
+		local var4 = var3(var1({ universeIds = p1 }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
-		if not var7.ok then
-			p3(graphQLError.new(string.format("Failed to find experience for universeId: %s.", p0)))
+		if not var4.ok then
+			p4(graphQLError.new(string.format("Failed to find experience for universeId: %s.", p1)))
 			
 			return
 		end
-		local var8 = var7:json():catch(function()
+		local var5 = var4:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var8 then
-			p2(var8.data[1])
+		if var5 then
+			p3(var5.data[1])
 			
 			return
 		end
-		p3(graphQLError.new(string.format("Failed to decode HTTP response as JSON for experience with universeId: %s.", p0)))
+		p4(graphQLError.new(string.format("Failed to decode HTTP response as JSON for experience with universeId: %s.", p1)))
 	end)
 end
 
-function t.findExperienceMediaByUniverseId(p4, p5)
-	-- upvalues: fetch (ref), promiseModule (ref), var5 (ref), response (ref), graphQLError (ref)
-	local var9 = p5 or fetch
+function t.findExperienceMediaByUniverseId(p1, p2)
+	-- upvalues: fetch (ref), promiseModule (ref), var2 (ref), response (ref), graphQLError (ref)
+	local var3 = p2 or fetch
 	
-	return promiseModule.new(function(p6, p7)
-		-- upvalues: var5 (copy), p4 (ref), var9 (ref), response (copy), graphQLError (copy)
-		local var10 = var9(var5({ universeId = p4 }), { method = "GET" }):catch(function()
+	return promiseModule.new(function(p3, p4)
+		-- upvalues: var2 (copy), p1 (ref), var3 (ref), response (copy), graphQLError (copy)
+		local var4 = var3(var2({ universeId = p1 }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
-		if not var10.ok then
-			p7(graphQLError.new(string.format("Failed to find experience media for universeId: %s.", p4)))
+		if not var4.ok then
+			p4(graphQLError.new(string.format("Failed to find experience media for universeId: %s.", p1)))
 			
 			return
 		end
-		local var11 = var10:json():catch(function()
+		local var5 = var4:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var11 then
-			p6(var11.data)
+		if var5 then
+			p3(var5.data)
 			
 			return
 		end
-		p7(graphQLError.new(string.format("Failed to decode HTTP response as JSON for experience media for universeId: %s.", p4)))
+		p4(graphQLError.new(string.format("Failed to decode HTTP response as JSON for experience media for universeId: %s.", p1)))
 	end)
 end
 

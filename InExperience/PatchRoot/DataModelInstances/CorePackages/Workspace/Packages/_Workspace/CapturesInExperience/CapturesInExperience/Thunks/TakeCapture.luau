@@ -18,10 +18,10 @@ local toastTriggeredModule = require(parent.Actions.ToastTriggered)
 local fStringSocialCaptureTakenIXPLayer = require(parent_1.SharedFlags).FStringSocialCaptureTakenIXPLayer
 local debugAPPEXP4747B = game:DefineFastFlag("DebugAPPEXP4747B", false)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: guiService (ref)
-	if guiService:GetGuiIsVisible(p0) then
-		guiService:ToggleGuiIsVisibleForCaptures(p0)
+	if guiService:GetGuiIsVisible(p1) then
+		guiService:ToggleGuiIsVisibleForCaptures(p1)
 	end
 end
 
@@ -48,27 +48,27 @@ end
 
 return function()
 	-- upvalues: toastTriggeredModule (ref), capturesToastTypeModule (ref), userInputService (ref), getScreenshotHudModule (ref), debugAPPEXP4747B (ref), guiService (ref), removeCoreUIModule (ref), overlayActivatedModule (ref), captureService (ref), getAvatarAssetsModule (ref), getUserMetadataModule (ref), httpService (ref), overlayFlashActivatedModule (ref), overlayFlashDeactivatedModule (ref), overlayDeactivatedModule (ref), IXPServiceWrapper (ref), fStringSocialCaptureTakenIXPLayer (ref)
-	return function(p2)
+	return function(p1)
 		-- upvalues: toastTriggeredModule (copy), capturesToastTypeModule (copy), userInputService (copy), getScreenshotHudModule (copy), debugAPPEXP4747B (copy), guiService (copy), removeCoreUIModule (copy), overlayActivatedModule (copy), captureService (copy), getAvatarAssetsModule (copy), getUserMetadataModule (copy), httpService (copy), overlayFlashActivatedModule (copy), overlayFlashDeactivatedModule (copy), overlayDeactivatedModule (copy), IXPServiceWrapper (copy), fStringSocialCaptureTakenIXPLayer (copy)
-		local var15 = false
-		local var16 = false
-		p2:dispatch(toastTriggeredModule(capturesToastTypeModule.None))
+		local var1 = false
+		local var2 = false
+		p1:dispatch(toastTriggeredModule(capturesToastTypeModule.None))
 		local overrideMouseIconBehavior = userInputService.OverrideMouseIconBehavior
 		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
-		local var17 = getScreenshotHudModule()
+		local var3 = getScreenshotHudModule()
 		
-		if not debugAPPEXP4747B and (not var17 or var17.HidePlayerGuiForCaptures) then
+		if not debugAPPEXP4747B and (not var3 or var3.HidePlayerGuiForCaptures) then
 			if guiService:GetGuiIsVisible(Enum.GuiType.Custom) then
 				guiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 			end
-			var16 = true
+			var2 = true
 		end
-		local var18 = nil
+		local var4 = nil
 		
 		if not debugAPPEXP4747B then
-			if not var17 or var17.HideCoreGuiForCaptures then
-				var18 = removeCoreUIModule()
-				var15 = true
+			if not var3 or var3.HideCoreGuiForCaptures then
+				var4 = removeCoreUIModule()
+				var1 = true
 			end
 			local customBillboards = Enum.GuiType.CustomBillboards
 			
@@ -81,33 +81,33 @@ return function()
 				guiService:ToggleGuiIsVisibleForCaptures(playerNameplates)
 			end
 		end
-		p2:dispatch(overlayActivatedModule())
+		p1:dispatch(overlayActivatedModule())
 		captureService:OnCaptureBegan()
 		task.wait(0.1)
-		local var19 = getAvatarAssetsModule()
-		local var20 = getUserMetadataModule()
+		local var5 = getAvatarAssetsModule()
+		local var6 = getUserMetadataModule()
 		
-		if next(var19) == nil and next(var20) == nil then
+		if next(var5) == nil and next(var6) == nil then
 			captureService:SaveScreenshotCapture()
 		else
 			captureService:SaveScreenshotCapture(httpService:JSONEncode({
-				avatarItems = if next(var19) ~= nil then nil else var19,
-				userMetadata = if next(var20) ~= nil then nil else var20
+				avatarItems = if next(var5) ~= nil then nil else var5,
+				userMetadata = if next(var6) ~= nil then nil else var6
 			}))
 		end
 		task.wait()
-		p2:dispatch(overlayFlashActivatedModule())
+		p1:dispatch(overlayFlashActivatedModule())
 		task.wait(0.5)
 		captureService:OnCaptureEnded()
-		p2:dispatch(overlayFlashDeactivatedModule())
-		p2:dispatch(overlayDeactivatedModule())
+		p1:dispatch(overlayFlashDeactivatedModule())
+		p1:dispatch(overlayDeactivatedModule())
 		userInputService.OverrideMouseIconBehavior = overrideMouseIconBehavior
 		
-		if var16 and not guiService:GetGuiIsVisible(Enum.GuiType.Custom) then
+		if var2 and not guiService:GetGuiIsVisible(Enum.GuiType.Custom) then
 			guiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 		end
-		if var15 then
-			var18()
+		if var1 then
+			var4()
 		end
 		local customBillboards = Enum.GuiType.CustomBillboards
 		

@@ -44,7 +44,7 @@ local t = {
 	})
 }
 setmetatable(t, {
-	__newindex = function(_, p0)
+	__newindex = function(_, p1)
 		error("Attempt to insert into impressions schemas: " .. p0)
 	end,
 	__index = function(p1, p2)
@@ -53,12 +53,12 @@ setmetatable(t, {
 			
 			return
 		end
-		local var2 = rawget(p1, p2)
+		local var1 = rawget(p1, p2)
 		
-		if not var2 then
+		if not var1 then
 			warn("No such impressions schema: " .. p2)
 		end
-		return var2
+		return var1
 	end
 })
 

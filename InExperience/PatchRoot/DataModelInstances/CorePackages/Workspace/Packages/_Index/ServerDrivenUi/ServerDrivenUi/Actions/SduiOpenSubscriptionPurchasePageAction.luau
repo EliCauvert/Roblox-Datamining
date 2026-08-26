@@ -6,19 +6,19 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-local function buildSubscriptionProductInfo(p0)
+local function buildSubscriptionProductInfo(p1)
 	return {
 		isForSale = true,
-		name = p0.name or "",
-		description = p0.description or "",
-		iconImageAssetId = tonumber(p0.imageAssetId) or 0,
-		subscriptionPeriod = p0.periodType or "",
-		displayPrice = p0.priceDisplay or "",
-		priceInRobux = tonumber(p0.priceInRobux),
-		priceTier = tonumber(p0.priceTier) or 0,
-		subscriptionProviderName = p0.creatorName or "",
-		subscriptionProviderId = p0.universeId,
-		subscriptionTargetKey = p0.subscriptionId
+		name = p1.name or "",
+		description = p1.description or "",
+		iconImageAssetId = tonumber(p1.imageAssetId) or 0,
+		subscriptionPeriod = p1.periodType or "",
+		displayPrice = p1.priceDisplay or "",
+		priceInRobux = tonumber(p1.priceInRobux),
+		priceTier = tonumber(p1.priceTier) or 0,
+		subscriptionProviderName = p1.creatorName or "",
+		subscriptionProviderId = p1.universeId,
+		subscriptionTargetKey = p1.subscriptionId
 	}
 end
 
@@ -48,13 +48,13 @@ return function(p1, _, p2)
 		
 		return
 	elseif typeof(universeId) == "string" and universeId ~= "" then
-		local var4 = actionParams.isSubscribed == true
+		local var1 = actionParams.isSubscribed == true
 		p2.dependencies.getNavigation().push(appPage.SubscriptionPurchase, {
 			extraProps = {
 				subscriptionPurchaseProductInfo = buildSubscriptionProductInfo(actionParams),
 				thumbnailString = actionParams.thumbnailString or "",
-				isSubScribed = var4,
-				isSubscribed = var4,
+				isSubScribed = var1,
+				isSubscribed = var1,
 				creatorName = actionParams.creatorName,
 				creatorVerified = actionParams.creatorVerified,
 				onPurchaseSuccess = if fFlagSduiSubscriptionCellPostPurchaseSync then function()

@@ -11,10 +11,10 @@ local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local images = UIBloxModule.App.ImageSet.Images
 local withStyle = UIBloxModule.Style.withStyle
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
 	return function()
-		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p0 (ref)
+		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p1 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 30, 1, 0)
@@ -29,7 +29,7 @@ local function _(p0)
 				layoutOrder = 1,
 				iconSize = iconSize.Medium,
 				icon = images["icons/navigation/pushBack"],
-				onActivated = p0
+				onActivated = p1
 			})
 		})
 	end
@@ -79,10 +79,10 @@ local _ = function()
 end
 
 return {
-	PortraitModeHeader = function(p3)
+	PortraitModeHeader = function(p1)
 		-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), withStyle (ref)
 		local createElement = reactModule.createElement
-		local var3 = "Frame"
+		local var1 = "Frame"
 		local t = {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 0.1,
@@ -99,7 +99,7 @@ return {
 			margin = 12,
 			isSecondary = true
 		}
-		local backAction = p3.backAction
+		local backAction = p1.backAction
 		
 		function t_2.renderLeft()
 			-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), backAction (ref)
@@ -137,21 +137,21 @@ return {
 			})
 		end
 		
-		local titleText = p3.titleText
+		local titleText = p1.titleText
 		
 		function t_2.renderCenter()
 			-- upvalues: withStyle (copy), reactModule (copy), titleText (ref)
-			return withStyle(function(p4)
+			return withStyle(function(p2)
 				-- upvalues: reactModule (copy), titleText (copy)
 				local currentCamera = game.Workspace.CurrentCamera
-				local theme = p4.Theme
+				local theme = p2.Theme
 				
 				return reactModule.createElement("TextLabel", {
 					TextSize = 20,
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					Text = titleText,
-					Font = p4.Font.Header2.Font,
+					Font = p2.Font.Header2.Font,
 					TextColor3 = theme.TextEmphasis.Color,
 					TextTransparency = theme.TextEmphasis.Transparency,
 					TextXAlignment = Enum.TextXAlignment.Center,
@@ -163,9 +163,9 @@ return {
 		
 		t_1.Bar = createElement_1(headerBar, t_2)
 		
-		return createElement(var3, t, t_1)
+		return createElement(var1, t, t_1)
 	end,
-	PortraitModeFooter = function(p5)
+	PortraitModeFooter = function(p1)
 		-- upvalues: reactModule (ref), foundationModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
 		return reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -182,19 +182,19 @@ return {
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
 			CoachmarkWrapper = reactModule.createElement(foundationModule.Coachmark, {
-				title = p5.coachmarkTitle,
-				text = p5.coachmarkText,
-				isOpen = p5.isCoachmarkOpen or false,
+				title = p1.coachmarkTitle,
+				text = p1.coachmarkText,
+				isOpen = p1.isCoachmarkOpen or false,
 				side = foundationModule.Enums.PopoverSide.Top,
 				align = foundationModule.Enums.PopoverAlign.Center,
-				onClose = p5.onCoachmarkClose
+				onClose = p1.onCoachmarkClose
 			}, {
 				NextButton = reactModule.createElement(button, {
 					variant = buttonVariant.Emphasis,
 					inputSize = inputSize.Large,
 					width = UDim.new(0, 400),
-					onActivated = p5.nextAction,
-					text = p5.nextText
+					onActivated = p1.nextAction,
+					text = p1.nextText
 				})
 			})
 		})

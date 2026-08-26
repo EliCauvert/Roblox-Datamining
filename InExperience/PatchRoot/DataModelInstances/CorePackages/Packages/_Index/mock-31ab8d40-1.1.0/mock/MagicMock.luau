@@ -3,14 +3,14 @@ local spyModule = require(script.Parent.Spy)
 local setReturnValueModule = require(script.Parent.setReturnValue)
 local setSideEffectModule = require(script.Parent.setSideEffect)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: symbolsModule (ref)
-	local spec = p0[symbolsModule.Spec]
+	local spec = p1[symbolsModule.Spec]
 	
 	if spec then
 		local ok, status = pcall(function()
-			-- upvalues: spec (ref), p1 (ref)
-			return spec[p1]
+			-- upvalues: spec (ref), p2 (ref)
+			return spec[p2]
 		end)
 		
 		return ok and status
@@ -20,91 +20,91 @@ end
 
 local t = { is = require(script.Parent.isAMagicMock) }
 local t_1 = {
-	__tostring = function(p2)
+	__tostring = function(p1)
 		-- upvalues: symbolsModule (ref)
-		local var15 = getmetatable(p2)
+		local var1 = getmetatable(p1)
 		local list = { "id=" .. var15[symbolsModule.Address] }
-		local name = var15[symbolsModule.Name]
+		local name = var1[symbolsModule.Name]
 		
 		if name ~= nil and name ~= "mock" then
 			table.insert(list, "name=" .. name)
 		end
 		return "<MagicMock " .. table.concat(list, " ") .. ">"
 	end,
-	__index = function(p3, p4)
+	__index = function(p1, p2)
 		-- upvalues: symbolsModule (ref), t (ref)
 		local status_1
-		local var17 = getmetatable(p3)
-		local spec = var17[symbolsModule.Spec]
+		local var1 = getmetatable(p1)
+		local spec = var1[symbolsModule.Spec]
 		
 		if spec then
 			local ok, status = pcall(function()
-				-- upvalues: spec (ref), p4 (ref)
-				return spec[p4]
+				-- upvalues: spec (ref), p2 (ref)
+				return spec[p2]
 			end)
 			status_1 = ok and status
 		else
 			status_1 = true
 		end
 		if not status_1 then
-			error(string.format("MagicMock Error: Cannot index key %q since it is out of spec.", tostring(p4)))
+			error(string.format("MagicMock Error: Cannot index key %q since it is out of spec.", tostring(p2)))
 		end
-		local var19 = var17[symbolsModule.Children][p4]
+		local var2 = var1[symbolsModule.Children][p2]
 		
-		if var19 == nil then
-			var19 = t.new({ name = var17[symbolsModule.Name] .. "." .. tostring(p4) })
-			var17[symbolsModule.Children][p4] = var19
+		if var2 == nil then
+			var2 = t.new({ name = var1[symbolsModule.Name] .. "." .. tostring(p2) })
+			var1[symbolsModule.Children][p2] = var2
 			
-			return var19
+			return var2
 		end
-		return if var19 == symbolsModule.None then nil else var19
+		return if var2 == symbolsModule.None then nil else var2
 	end,
-	__newindex = function(p5, p6, p7)
+	__newindex = function(p1, p2, p3)
 		-- upvalues: symbolsModule (ref), spyModule (ref)
 		local status_1
-		local var20 = getmetatable(p5)
-		local spec = var20[symbolsModule.Spec]
+		local var1 = getmetatable(p1)
+		local spec = var1[symbolsModule.Spec]
 		
 		if spec then
 			local ok, status = pcall(function()
-				-- upvalues: spec (ref), p6 (ref)
-				return spec[p6]
+				-- upvalues: spec (ref), p2 (ref)
+				return spec[p2]
 			end)
 			status_1 = ok and status
 		else
 			status_1 = true
 		end
 		if not status_1 then
-			error(string.format("MagicMock Error: Cannot write key %q since it is out of spec", tostring(p6)))
+			error(string.format("MagicMock Error: Cannot write key %q since it is out of spec", tostring(p2)))
 		end
-		if type(p7) == "function" then
-			local _, var22 = spyModule.new(p7)
-			p7 = var22
-		elseif p7 == nil then
-			p7 = symbolsModule.None
+		if type(p3) == "function" then
+			local _, var2 = spyModule.new(p3)
+			p3 = var2
+		elseif p3 == nil then
+			p3 = symbolsModule.None
 		end
-		if p6 == symbolsModule.ReturnValue then
-			var20[symbolsModule.ReturnValue] = { p7, n = 1 }
+		if p2 == symbolsModule.ReturnValue then
+			var1[symbolsModule.ReturnValue] = { p3, n = 1 }
 			
 			return
 		end
-		var20[symbolsModule.Children][p6] = p7
+		var1[symbolsModule.Children][p2] = p3
 	end
 }
 
-local _ = function(p8)
+local _ = function(p1)
 	-- upvalues: symbolsModule (ref), t (ref)
-	if type(p8) == "table" and p8[symbolsModule.isTuple] then
-		return not t.is(p8)
+	if type(p1) == "table" and p1[symbolsModule.isTuple] then
+		return not t.is(p1)
 	end
 end
 
-local function getReturnValue(p9, ...)
+local function getReturnValue(p1, ...)
 	-- upvalues: symbolsModule (ref), spyModule (ref), t (ref)
-	if p9[symbolsModule.ReturnValue] then
-		return p9[symbolsModule.ReturnValue]
+	if p1[symbolsModule.ReturnValue] then
+		return p1[symbolsModule.ReturnValue]
 	end
-	local sideEffect = p9[symbolsModule.SideEffect]
+	local sideEffect = p1[symbolsModule.SideEffect]
 	
 	if sideEffect then
 		sideEffect.calls += 1
@@ -115,10 +115,10 @@ local function getReturnValue(p9, ...)
 			local calls = sideEffect.calls
 			local _ = nil
 			local value = sideEffect.value
-			local var23 = if if type(value) == "table" and value[symbolsModule.isTuple] then not t.is(value) else nil then sideEffect.value.values[calls] else sideEffect.value[calls]
+			local var1 = if if type(value) == "table" and value[symbolsModule.isTuple] then not t.is(value) else nil then sideEffect.value.values[calls] else sideEffect.value[calls]
 			
-			if var23 then
-				return { var23 }
+			if var1 then
+				return { var1 }
 			end
 			error("MagicMock Error: SideEffect iteration reached")
 		else
@@ -130,285 +130,285 @@ end
 
 function t_1:__call(...)
 	-- upvalues: getReturnValue (ref), t (ref), symbolsModule (ref)
-	local var24 = getmetatable(self)
+	local var1 = getmetatable(self)
 	local t_1 = {
 		args = table.pack(...),
-		result = getReturnValue(var24, ...)
+		result = getReturnValue(var1, ...)
 	}
 	
 	if t_1.result == nil then
 		t_1.result = {
-			t.new({ name = var24[symbolsModule.Name] .. "()" }),
+			t.new({ name = var1[symbolsModule.Name] .. "()" }),
 			n = 1
 		}
-		var24[symbolsModule.ReturnValue] = t_1.result
+		var1[symbolsModule.ReturnValue] = t_1.result
 	elseif t_1.result == symbolsModule.None then
 		t_1.result = { n = 1 }
 	else
-		local var26 = t_1.result[1]
+		local var2 = t_1.result[1]
 		
-		if if type(var26) == "table" and var26[symbolsModule.isTuple] then not t.is(var26) else nil then
+		if if type(var2) == "table" and var2[symbolsModule.isTuple] then not t.is(var2) else nil then
 			t_1.result = t_1.result[1].values
 		end
 	end
-	table.insert(var24[symbolsModule.Calls], t_1)
+	table.insert(var1[symbolsModule.Calls], t_1)
 	
 	return table.unpack(t_1.result)
 end
 
-local _ = function(p10)
+local _ = function(p1)
 	-- upvalues: symbolsModule (ref), t (ref)
-	return function(p11, p12)
-		-- upvalues: p10 (ref), symbolsModule (copy), t (copy)
-		local var27, formattedText
+	return function(p2, p3)
+		-- upvalues: p1 (ref), symbolsModule (copy), t (copy)
+		local var1, formattedText
 		local _ = nil
 		local _ = nil
 		
-		if type(p11) == "string" or not getmetatable(p11) then
-			var27 = getmetatable(p12)
-			formattedText = string.format("__r_%s()", p10)
+		if type(p2) == "string" or not getmetatable(p2) then
+			var1 = getmetatable(p3)
+			formattedText = string.format("__r_%s()", p1)
 		else
-			var27 = getmetatable(p11)
-			formattedText = string.format("__%s()", p10)
+			var1 = getmetatable(p2)
+			formattedText = string.format("__%s()", p1)
 		end
-		local var29 = var27[symbolsModule.Operations][formattedText]
+		local var2 = var1[symbolsModule.Operations][formattedText]
 		
-		if var29 == nil then
-			local var30 = t.new({ name = var27[symbolsModule.Name] .. "." .. formattedText })
-			var27[symbolsModule.Operations][formattedText] = var30
+		if var2 == nil then
+			local var3 = t.new({ name = var1[symbolsModule.Name] .. "." .. formattedText })
+			var1[symbolsModule.Operations][formattedText] = var3
 			
-			return var30
+			return var3
 		end
-		return var29
+		return var2
 	end
 end
 
-local var7 = "add"
+local var1 = "add"
 
-function t_1:__add(p13)
-	-- upvalues: var7 (ref), symbolsModule (ref), t (ref)
-	local var27, formattedText
+function t_1:__add(p1)
+	-- upvalues: var1 (ref), symbolsModule (ref), t (ref)
+	local var2, formattedText
 	local _ = nil
 	local _ = nil
 	
 	if type(self) == "string" or not getmetatable(self) then
-		var27 = getmetatable(p13)
+		var2 = getmetatable(p1)
+		formattedText = string.format("__r_%s()", var1)
+	else
+		var2 = getmetatable(self)
+		formattedText = string.format("__%s()", var1)
+	end
+	local var3 = var2[symbolsModule.Operations][formattedText]
+	
+	if var3 == nil then
+		local var4 = t.new({ name = var2[symbolsModule.Name] .. "." .. formattedText })
+		var2[symbolsModule.Operations][formattedText] = var4
+		
+		return var4
+	end
+	return var3
+end
+
+local var2 = "sub"
+
+function t_1:__sub(p1)
+	-- upvalues: var2 (ref), symbolsModule (ref), t (ref)
+	local var3, formattedText
+	local _ = nil
+	local _ = nil
+	
+	if type(self) == "string" or not getmetatable(self) then
+		var3 = getmetatable(p1)
+		formattedText = string.format("__r_%s()", var2)
+	else
+		var3 = getmetatable(self)
+		formattedText = string.format("__%s()", var2)
+	end
+	local var4 = var3[symbolsModule.Operations][formattedText]
+	
+	if var4 == nil then
+		local var5 = t.new({ name = var3[symbolsModule.Name] .. "." .. formattedText })
+		var3[symbolsModule.Operations][formattedText] = var5
+		
+		return var5
+	end
+	return var4
+end
+
+local var3 = "div"
+
+function t_1:__div(p1)
+	-- upvalues: var3 (ref), symbolsModule (ref), t (ref)
+	local var4, formattedText
+	local _ = nil
+	local _ = nil
+	
+	if type(self) == "string" or not getmetatable(self) then
+		var4 = getmetatable(p1)
+		formattedText = string.format("__r_%s()", var3)
+	else
+		var4 = getmetatable(self)
+		formattedText = string.format("__%s()", var3)
+	end
+	local var5 = var4[symbolsModule.Operations][formattedText]
+	
+	if var5 == nil then
+		local var6 = t.new({ name = var4[symbolsModule.Name] .. "." .. formattedText })
+		var4[symbolsModule.Operations][formattedText] = var6
+		
+		return var6
+	end
+	return var5
+end
+
+local var4 = "mul"
+
+function t_1:__mul(p1)
+	-- upvalues: var4 (ref), symbolsModule (ref), t (ref)
+	local var5, formattedText
+	local _ = nil
+	local _ = nil
+	
+	if type(self) == "string" or not getmetatable(self) then
+		var5 = getmetatable(p1)
+		formattedText = string.format("__r_%s()", var4)
+	else
+		var5 = getmetatable(self)
+		formattedText = string.format("__%s()", var4)
+	end
+	local var6 = var5[symbolsModule.Operations][formattedText]
+	
+	if var6 == nil then
+		local var7 = t.new({ name = var5[symbolsModule.Name] .. "." .. formattedText })
+		var5[symbolsModule.Operations][formattedText] = var7
+		
+		return var7
+	end
+	return var6
+end
+
+local var5 = "mod"
+
+function t_1:__mod(p1)
+	-- upvalues: var5 (ref), symbolsModule (ref), t (ref)
+	local var6, formattedText
+	local _ = nil
+	local _ = nil
+	
+	if type(self) == "string" or not getmetatable(self) then
+		var6 = getmetatable(p1)
+		formattedText = string.format("__r_%s()", var5)
+	else
+		var6 = getmetatable(self)
+		formattedText = string.format("__%s()", var5)
+	end
+	local var7 = var6[symbolsModule.Operations][formattedText]
+	
+	if var7 == nil then
+		local var8 = t.new({ name = var6[symbolsModule.Name] .. "." .. formattedText })
+		var6[symbolsModule.Operations][formattedText] = var8
+		
+		return var8
+	end
+	return var7
+end
+
+local var6 = "pow"
+
+function t_1:__pow(p1)
+	-- upvalues: var6 (ref), symbolsModule (ref), t (ref)
+	local var7, formattedText
+	local _ = nil
+	local _ = nil
+	
+	if type(self) == "string" or not getmetatable(self) then
+		var7 = getmetatable(p1)
+		formattedText = string.format("__r_%s()", var6)
+	else
+		var7 = getmetatable(self)
+		formattedText = string.format("__%s()", var6)
+	end
+	local var8 = var7[symbolsModule.Operations][formattedText]
+	
+	if var8 == nil then
+		local var9 = t.new({ name = var7[symbolsModule.Name] .. "." .. formattedText })
+		var7[symbolsModule.Operations][formattedText] = var9
+		
+		return var9
+	end
+	return var8
+end
+
+local var7 = "neg"
+
+function t_1:__unm(p1)
+	-- upvalues: var7 (ref), symbolsModule (ref), t (ref)
+	local var8, formattedText
+	local _ = nil
+	local _ = nil
+	
+	if type(self) == "string" or not getmetatable(self) then
+		var8 = getmetatable(p1)
 		formattedText = string.format("__r_%s()", var7)
 	else
-		var27 = getmetatable(self)
+		var8 = getmetatable(self)
 		formattedText = string.format("__%s()", var7)
 	end
-	local var29 = var27[symbolsModule.Operations][formattedText]
+	local var9 = var8[symbolsModule.Operations][formattedText]
 	
-	if var29 == nil then
-		local var30 = t.new({ name = var27[symbolsModule.Name] .. "." .. formattedText })
-		var27[symbolsModule.Operations][formattedText] = var30
+	if var9 == nil then
+		local var10 = t.new({ name = var8[symbolsModule.Name] .. "." .. formattedText })
+		var8[symbolsModule.Operations][formattedText] = var10
 		
-		return var30
+		return var10
 	end
-	return var29
+	return var9
 end
 
-local var8 = "sub"
+local var8 = "concat"
 
-function t_1:__sub(p14)
+function t_1:__concat(p1)
 	-- upvalues: var8 (ref), symbolsModule (ref), t (ref)
-	local var27, formattedText
+	local var9, formattedText
 	local _ = nil
 	local _ = nil
 	
 	if type(self) == "string" or not getmetatable(self) then
-		var27 = getmetatable(p14)
+		var9 = getmetatable(p1)
 		formattedText = string.format("__r_%s()", var8)
 	else
-		var27 = getmetatable(self)
+		var9 = getmetatable(self)
 		formattedText = string.format("__%s()", var8)
 	end
-	local var29 = var27[symbolsModule.Operations][formattedText]
+	local var10 = var9[symbolsModule.Operations][formattedText]
 	
-	if var29 == nil then
-		local var30 = t.new({ name = var27[symbolsModule.Name] .. "." .. formattedText })
-		var27[symbolsModule.Operations][formattedText] = var30
+	if var10 == nil then
+		local var11 = t.new({ name = var9[symbolsModule.Name] .. "." .. formattedText })
+		var9[symbolsModule.Operations][formattedText] = var11
 		
-		return var30
+		return var11
 	end
-	return var29
+	return var10
 end
 
-local var9 = "div"
-
-function t_1:__div(p15)
-	-- upvalues: var9 (ref), symbolsModule (ref), t (ref)
-	local var27, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var27 = getmetatable(p15)
-		formattedText = string.format("__r_%s()", var9)
-	else
-		var27 = getmetatable(self)
-		formattedText = string.format("__%s()", var9)
-	end
-	local var29 = var27[symbolsModule.Operations][formattedText]
-	
-	if var29 == nil then
-		local var30 = t.new({ name = var27[symbolsModule.Name] .. "." .. formattedText })
-		var27[symbolsModule.Operations][formattedText] = var30
-		
-		return var30
-	end
-	return var29
-end
-
-local var10 = "mul"
-
-function t_1:__mul(p16)
-	-- upvalues: var10 (ref), symbolsModule (ref), t (ref)
-	local var27, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var27 = getmetatable(p16)
-		formattedText = string.format("__r_%s()", var10)
-	else
-		var27 = getmetatable(self)
-		formattedText = string.format("__%s()", var10)
-	end
-	local var29 = var27[symbolsModule.Operations][formattedText]
-	
-	if var29 == nil then
-		local var30 = t.new({ name = var27[symbolsModule.Name] .. "." .. formattedText })
-		var27[symbolsModule.Operations][formattedText] = var30
-		
-		return var30
-	end
-	return var29
-end
-
-local var11 = "mod"
-
-function t_1:__mod(p17)
-	-- upvalues: var11 (ref), symbolsModule (ref), t (ref)
-	local var27, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var27 = getmetatable(p17)
-		formattedText = string.format("__r_%s()", var11)
-	else
-		var27 = getmetatable(self)
-		formattedText = string.format("__%s()", var11)
-	end
-	local var29 = var27[symbolsModule.Operations][formattedText]
-	
-	if var29 == nil then
-		local var30 = t.new({ name = var27[symbolsModule.Name] .. "." .. formattedText })
-		var27[symbolsModule.Operations][formattedText] = var30
-		
-		return var30
-	end
-	return var29
-end
-
-local var12 = "pow"
-
-function t_1:__pow(p18)
-	-- upvalues: var12 (ref), symbolsModule (ref), t (ref)
-	local var27, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var27 = getmetatable(p18)
-		formattedText = string.format("__r_%s()", var12)
-	else
-		var27 = getmetatable(self)
-		formattedText = string.format("__%s()", var12)
-	end
-	local var29 = var27[symbolsModule.Operations][formattedText]
-	
-	if var29 == nil then
-		local var30 = t.new({ name = var27[symbolsModule.Name] .. "." .. formattedText })
-		var27[symbolsModule.Operations][formattedText] = var30
-		
-		return var30
-	end
-	return var29
-end
-
-local var13 = "neg"
-
-function t_1:__unm(p19)
-	-- upvalues: var13 (ref), symbolsModule (ref), t (ref)
-	local var27, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var27 = getmetatable(p19)
-		formattedText = string.format("__r_%s()", var13)
-	else
-		var27 = getmetatable(self)
-		formattedText = string.format("__%s()", var13)
-	end
-	local var29 = var27[symbolsModule.Operations][formattedText]
-	
-	if var29 == nil then
-		local var30 = t.new({ name = var27[symbolsModule.Name] .. "." .. formattedText })
-		var27[symbolsModule.Operations][formattedText] = var30
-		
-		return var30
-	end
-	return var29
-end
-
-local var14 = "concat"
-
-function t_1:__concat(p20)
-	-- upvalues: var14 (ref), symbolsModule (ref), t (ref)
-	local var27, formattedText
-	local _ = nil
-	local _ = nil
-	
-	if type(self) == "string" or not getmetatable(self) then
-		var27 = getmetatable(p20)
-		formattedText = string.format("__r_%s()", var14)
-	else
-		var27 = getmetatable(self)
-		formattedText = string.format("__%s()", var14)
-	end
-	local var29 = var27[symbolsModule.Operations][formattedText]
-	
-	if var29 == nil then
-		local var30 = t.new({ name = var27[symbolsModule.Name] .. "." .. formattedText })
-		var27[symbolsModule.Operations][formattedText] = var30
-		
-		return var30
-	end
-	return var29
-end
-
-function t.new(p21)
+function t.new(p1)
 	-- upvalues: symbolsModule (ref), t_1 (ref), setReturnValueModule (ref), setSideEffectModule (ref)
-	p21 = p21 or {}
+	p1 = p1 or {}
 	
 	local function _()
-		-- upvalues: p21 (write)
-		return if p21.name then p21.name elseif p21.spec then tostring(p21.spec) else "mock"
+		-- upvalues: p1 (write)
+		return if p1.name then p1.name elseif p1.spec then tostring(p1.spec) else "mock"
 	end
 	
 	local t = {}
 	local t_2 = {
 		[symbolsModule.isMagicMock] = true,
 		[symbolsModule.Address] = tostring(t),
-		[symbolsModule.Name] = if p21.name then p21.name elseif p21.spec then tostring(p21.spec) else "mock",
+		[symbolsModule.Name] = if p1.name then p1.name elseif p1.spec then tostring(p1.spec) else "mock",
 		[symbolsModule.Operations] = {},
 		[symbolsModule.Calls] = {},
 		[symbolsModule.Children] = {},
-		[symbolsModule.Spec] = p21.spec or nil,
+		[symbolsModule.Spec] = p1.spec or nil,
 		[symbolsModule.ReturnValue] = nil,
 		[symbolsModule.SideEffect] = nil
 	}
@@ -418,20 +418,20 @@ function t.new(p21)
 	end
 	local tbl = setmetatable(t, t_2)
 	
-	if p21.returnValue then
-		setReturnValueModule(tbl, p21.returnValue)
+	if p1.returnValue then
+		setReturnValueModule(tbl, p1.returnValue)
 	end
-	if p21.sideEffect then
-		setSideEffectModule(tbl, p21.sideEffect)
+	if p1.sideEffect then
+		setSideEffectModule(tbl, p1.sideEffect)
 	end
 	return tbl
 end
 
-function t.is(p22)
+function t.is(p2)
 	-- upvalues: symbolsModule (ref)
-	local var34 = getmetatable(p22)
+	local var9 = getmetatable(p2)
 	
-	return if var34 then var34[symbolsModule.isMagicMock] ~= nil else false
+	return if var9 then var9[symbolsModule.isMagicMock] ~= nil else false
 end
 
 return t

@@ -10,10 +10,10 @@ return {
 		if var1 then
 			return var1
 		end
-		local var2 = default(value):catch(function(p0)
+		local var2 = default(value):catch(function(p1)
 			-- upvalues: t (copy), value (ref)
 			t[value] = nil
-			error(p0)
+			error(p1)
 		end)
 		t[value] = var2
 		

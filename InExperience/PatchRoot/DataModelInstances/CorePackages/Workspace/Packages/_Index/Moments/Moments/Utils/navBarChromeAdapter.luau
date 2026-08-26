@@ -1,16 +1,16 @@
 ﻿local appNavBarModule = require(script:FindFirstAncestor("Moments").Parent.AppNavBar)
 
-return function(p0)
+return function(p1)
 	-- upvalues: appNavBarModule (ref)
-	p0 = p0 or {}
-	local visibilityControl = p0.visibilityControl or appNavBarModule.VisibilityControl
-	local var3 = (p0.isScrollAwayEnabled or appNavBarModule.getScrollAwayEnabled)()
+	p1 = p1 or {}
+	local visibilityControl = p1.visibilityControl or appNavBarModule.VisibilityControl
+	local var1 = (p1.isScrollAwayEnabled or appNavBarModule.getScrollAwayEnabled)()
 	
 	return {
-		isEnabled = var3,
+		isEnabled = var1,
 		setVisible = function(value)
-			-- upvalues: var3 (ref), visibilityControl (ref)
-			if not var3 then return end
+			-- upvalues: var1 (ref), visibilityControl (ref)
+			if not var1 then return end
 			if value then
 				visibilityControl.show()
 				
@@ -19,8 +19,8 @@ return function(p0)
 			visibilityControl.hide()
 		end,
 		dispose = function()
-			-- upvalues: var3 (ref), visibilityControl (ref)
-			if var3 then
+			-- upvalues: var1 (ref), visibilityControl (ref)
+			if var1 then
 				visibilityControl.show()
 				
 				return

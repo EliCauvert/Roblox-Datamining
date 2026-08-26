@@ -4,14 +4,14 @@ local signalsReactModule = require(parent.SignalsReact)
 
 return function()
 	-- upvalues: signalsModule (ref), signalsReactModule (ref)
-	local var2, var3 = signalsModule.createSignal(false)
+	local var1, var2 = signalsModule.createSignal(false)
 	
 	return {
-		getShortcutBarVisible = var2,
-		setShortcutBarVisible = var3,
+		getShortcutBarVisible = var1,
+		setShortcutBarVisible = var2,
 		useShortcutBarVisible = function()
-			-- upvalues: signalsReactModule (copy), var2 (ref)
-			return signalsReactModule.useSignalState(var2)
+			-- upvalues: signalsReactModule (copy), var1 (ref)
+			return signalsReactModule.useSignalState(var1)
 		end
 	}
 end

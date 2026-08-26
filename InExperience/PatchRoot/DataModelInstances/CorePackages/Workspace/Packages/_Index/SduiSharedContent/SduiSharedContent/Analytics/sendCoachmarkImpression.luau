@@ -8,10 +8,10 @@ local t = {
 }
 local list = { "addOSInfo", "addSessionInfo" }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: telemetryService (ref), t (ref), list (ref)
 	telemetryService:LogEvent(t, {
 		standardizedFields = list,
-		customFields = { collectionServiceAnchorTag = p0, hasMedia = p1 }
+		customFields = { collectionServiceAnchorTag = p1, hasMedia = p2 }
 	})
 end

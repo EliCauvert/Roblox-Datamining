@@ -9,21 +9,21 @@ local _ = require(script.Parent.BulkPurchaseSuccess)
 
 return function()
 	-- upvalues: useDispatch (ref), useSelector (ref), selectPurchaseResultsModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref)
-	local var4 = useDispatch()
-	local var5 = useSelector(selectPurchaseResultsModule)
-	local var6 = 0
+	local var1 = useDispatch()
+	local var2 = useSelector(selectPurchaseResultsModule)
+	local var3 = 0
 	
-	for i, v in var5.Items do
+	for i, v in var2.Items do
 		if v.status == Enum.MarketplaceItemPurchaseStatus.Success then
-			var6 += 1
+			var3 += 1
 		end
 	end
 	return {
 		onDismiss = function()
-			-- upvalues: marketplaceService (copy), var5 (ref), var4 (ref), bulkPurchaseEndedModule (copy)
-			marketplaceService:signalPromptBulkPurchaseFinished(1, var5)
-			var4(bulkPurchaseEndedModule())
+			-- upvalues: marketplaceService (copy), var2 (ref), var1 (ref), bulkPurchaseEndedModule (copy)
+			marketplaceService:signalPromptBulkPurchaseFinished(1, var2)
+			var1(bulkPurchaseEndedModule())
 		end,
-		itemCount = var6
+		itemCount = var3
 	}
 end

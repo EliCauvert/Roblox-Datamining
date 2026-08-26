@@ -3,7 +3,7 @@ local _ = require(parent.Foundation)
 local fFlagLuaAppMigrateGameTileFixConsoleMetadataText = require(parent.SharedFlags).FFlagLuaAppMigrateGameTileFixConsoleMetadataText
 local fFlagLuaAppNarrowTileSmallerFooterFont = require(parent.SharedFlags).FFlagLuaAppNarrowTileSmallerFooterFont
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppMigrateGameTileFixConsoleMetadataText (ref)
-	return if p3 and p2 then if fFlagLuaAppNarrowTileSmallerFooterFont and p4 or fFlagLuaAppMigrateGameTileFixConsoleMetadataText and p0 == false then p2.Typography.BodySmall else p2.Typography.BodyMedium elseif p0 then p1.Typography.BodyLarge else p1.Typography.CaptionMedium
+	return if p4 and p3 then if fFlagLuaAppNarrowTileSmallerFooterFont and p5 or fFlagLuaAppMigrateGameTileFixConsoleMetadataText and p1 == false then p3.Typography.BodySmall else p3.Typography.BodyMedium elseif p1 then p2.Typography.BodyLarge else p2.Typography.CaptionMedium
 end

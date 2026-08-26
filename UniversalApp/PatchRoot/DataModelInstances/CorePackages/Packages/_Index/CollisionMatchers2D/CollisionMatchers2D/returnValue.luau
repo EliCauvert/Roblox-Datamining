@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	return { pass = p0, message = if p0 then p1 else p2 or p1 }
+﻿return function(p1, p2, p3)
+	return { pass = p1, message = if p1 then p2 else p3 or p2 }
 end

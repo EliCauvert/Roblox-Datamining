@@ -74,9 +74,9 @@ return function(p1)
 	local var3 = if fFlagBuildLocalization then useLocalization(var2) else nil
 	local var4 = useCreatorCreditMenuItem({ onOpenCreatorCreditPage = p1.onOpenCreatorCreditPage })
 	
-	local function _(p1)
+	local function _(p2)
 		-- upvalues: fFlagBuildLocalization (copy), var3 (ref), var17 (ref)
-		return if fFlagBuildLocalization then var3[p1.id] elseif p1.getText == nil then p1.text else p1.getText(var17)
+		return if fFlagBuildLocalization then var3[p2.id] elseif p2.getText == nil then p2.text else p2.getText(var17)
 	end
 	
 	local function buildMenuItems()
@@ -107,108 +107,108 @@ return function(p1)
 		return t
 	end
 	
-	local var1 = if fFlagBuildLocalization then buildMenuItems() else reactModule.useMemo(buildMenuItems, {
+	local var18 = if fFlagBuildLocalization then buildMenuItems() else reactModule.useMemo(buildMenuItems, {
 		var15,
-		var1,
+		var18,
 		var17,
 		var14,
 		var4
 	})
-	local var2 = reactModule.useCallback(function()
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), var7 (ref), var3 (ref), p1 (ref)
 		if var15 then return end
 		var7(false)
-		var3(function(p1)
-			return not p1
+		var3(function(p2)
+			return not p2
 		end)
 		
 		if p1.onActivated then
 			p1.onActivated()
 		end
 	end, { var15, p1.onActivated })
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var7 (ref)
-		var3(false)
+	local var20 = reactModule.useCallback(function()
+		-- upvalues: var20 (ref), var7 (ref)
+		var20(false)
 		var7(false)
 	end, {})
-	local var4 = reactModule.useCallback(function()
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref)
 		var5(false)
 	end, {})
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Menu = reactModule.createElement(menu, {
-			isOpen = var2 and not var15,
-			items = var1,
+			isOpen = var19 and not var15,
+			items = var18,
 			side = popoverSide.Bottom,
 			size = if fFlagBuildDesktopReadinessModule then inputSize.Large else nil,
 			align = popoverAlign.End,
-			onPressedOutside = var3,
-			onActivated = reactModule.useCallback(function(p1)
-				-- upvalues: var14 (ref), var4 (ref), var3 (ref), var17 (ref), var1 (ref), p1 (ref), releaseAnyFocusModule (copy), var5 (ref), fFlagBuildExperiencePrivateInvitesModule (copy), var10 (ref), var11 (ref), var13 (ref), var7 (ref), leaveExperienceModule (copy)
-				if var14 and var4 ~= nil and p1 == var4.item.id then
-					var4.activate()
-					var3(false)
+			onPressedOutside = var20,
+			onActivated = reactModule.useCallback(function(p2)
+				-- upvalues: var14 (ref), var21 (ref), var20 (ref), var17 (ref), var18 (ref), p2 (ref), releaseAnyFocusModule (copy), var5 (ref), fFlagBuildExperiencePrivateInvitesModule (copy), var10 (ref), var11 (ref), var13 (ref), var7 (ref), leaveExperienceModule (copy)
+				if var14 and var21 ~= nil and p2 == var21.item.id then
+					var21.activate()
+					var20(false)
 					
 					return
 				elseif var17 == nil then return end
-				for i, v in var1 do
+				for i, v in var18 do
 					for i_1, v_1 in v.items do
-						if v_1.id == p1 then
-							local var1 = if v_1.onActivated then v_1.onActivated(var17) else nil
+						if v_1.id == p2 then
+							local var22 = if v_1.onActivated then v_1.onActivated(var17) else nil
 							
-							if var1 ~= nil then
-								if var1.type == "openPage" then
-									if p1.onAction then
-										p1.onAction(var1)
+							if var22 ~= nil then
+								if var22.type == "openPage" then
+									if p2.onAction then
+										p2.onAction(var22)
 									end
-								elseif var1.type == "openInvitePicker" then
-									if p1.onAction then
-										p1.onAction(var1)
+								elseif var22.type == "openInvitePicker" then
+									if p2.onAction then
+										p2.onAction(var22)
 									end
-								elseif var1.type == "openVersionHistory" then
+								elseif var22.type == "openVersionHistory" then
 									releaseAnyFocusModule()
 									var5(true)
-								elseif var1.type == "share" then
+								elseif var22.type == "share" then
 									if fFlagBuildExperiencePrivateInvitesModule and var10 ~= nil then
 										var10()
-									elseif var1.placeId ~= nil then
-										var11(var1.placeId)
+									elseif var22.placeId ~= nil then
+										var11(var22.placeId)
 									end
-								elseif var1.type == "confirmFriendsShare" then
-									var13(var1.placeId)
-								elseif var1.type == "showPrivateShareTooltip" then
-									var7(function(p1)
-										return not p1
+								elseif var22.type == "confirmFriendsShare" then
+									var13(var22.placeId)
+								elseif var22.type == "showPrivateShareTooltip" then
+									var7(function(p3)
+										return not p3
 									end)
 									
 									return
-								elseif var1.type == "leaveExperience" then
-									var3(false)
+								elseif var22.type == "leaveExperience" then
+									var20(false)
 									leaveExperienceModule()
 									
 									return
 								end
 							end
-							var3(false)
+							var20(false)
 							
 							return
 						end
 					end
 				end
 			end, {
-				var1, var17, p1.onAction, var10, var11, var14, var4
+				var22, var17, p2.onAction, var10, var11, var14, var21
 			}),
-			LayoutOrder = p1.layoutOrder,
-			width = UDim.new(0, var1)
+			LayoutOrder = p2.layoutOrder,
+			width = UDim.new(0, var22)
 		}, reactModule.createElement(iconButton, {
 			isCircular = true,
 			testId = "build-header-overflow-button",
-			icon = p1.icon,
+			icon = p2.icon,
 			variant = buttonVariant.Utility,
 			size = inputSize.Medium,
 			isDisabled = var15,
-			onActivated = var2
+			onActivated = var19
 		})),
 		ShareOverlays = if fFlagBuildExperiencePrivateInvitesModule and var9 ~= nil then reactModule.createElement(experienceShareOverlaysModule, {
 			activeDialog = var9.activeDialog,
@@ -233,16 +233,16 @@ return function(p1)
 		}),
 		PrivateShareTooltip = reactModule.createElement(privateShareTooltipModule, {
 			anchorRef = var8,
-			isOpen = var2 and var6,
-			onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then var3 else nil
+			isOpen = var19 and var6,
+			onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then var20 else nil
 		}),
-		VersionHistory = if var4 and p1.target.placeId ~= nil then reactModule.createElement(versionHistoryContainerModule, {
+		VersionHistory = if var21 and p2.target.placeId ~= nil then reactModule.createElement(versionHistoryContainerModule, {
 			isOpen = true,
 			testId = "build-version-history",
-			universeId = p1.target.universeId,
-			placeId = p1.target.placeId,
-			onClose = var4,
-			onAgentRollbackStarted = if fFlagBuildAgentRollbackModule then var4 else nil
+			universeId = p2.target.universeId,
+			placeId = p2.target.placeId,
+			onClose = var21,
+			onAgentRollbackStarted = if fFlagBuildAgentRollbackModule then var21 else nil
 		}) else nil
 	})
 end

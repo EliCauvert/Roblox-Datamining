@@ -26,9 +26,9 @@ end
 local function defaultDeps()
 	-- upvalues: screenshotManager (ref), avatarIdentification (ref), adIdentification (ref), runService (ref), defaultGetWaitFrames (ref), defaultGetWaitTime (ref)
 	return {
-		takeScreenshot = function(p0)
+		takeScreenshot = function(p1)
 			-- upvalues: screenshotManager (copy)
-			return screenshotManager:TakeScreenshotWithCallback(p0)
+			return screenshotManager:TakeScreenshotWithCallback(p1)
 		end,
 		getVisibleAvatars = function()
 			-- upvalues: avatarIdentification (copy)
@@ -56,25 +56,25 @@ local function _(p1)
 	}
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: defaultDeps (ref), fFlagIEMTabFocusNav (ref), guiService (ref)
-	p3 = p3 or defaultDeps()
-	local var17 = if fFlagIEMTabFocusNav then guiService.SelectedCoreObject else nil
-	p2.hide()
-	local var18 = 0
+	p2 = p2 or defaultDeps()
+	local var1 = if fFlagIEMTabFocusNav then guiService.SelectedCoreObject else nil
+	p1.hide()
+	local var2 = 0
 	local processTime = os.clock()
-	local var20 = false
+	local var3 = false
 	local heartbeatConnection = nil
-	heartbeatConnection = p3.runService.Heartbeat:Connect(function()
-		-- upvalues: var20 (write), var18 (write), p3 (ref), p2 (ref), processTime (ref), heartbeatConnection (write), fFlagIEMTabFocusNav (copy), var17 (write), guiService (copy)
-		if not var20 and var18 >= 1 then
-			var20 = true
-			p3.takeScreenshot(p2.onScreenshotUploaded)
-			p2.onScreenshotTaken()
-			local onIdentificationCompleted = p2.onIdentificationCompleted
-			local var22 = p3
-			local visibleAvatars, visibleAvatars_1 = var22.getVisibleAvatars()
-			local visibleAds, visibleAds_1 = var22.getVisibleAds()
+	heartbeatConnection = p2.runService.Heartbeat:Connect(function()
+		-- upvalues: var3 (write), var2 (write), p2 (ref), p1 (ref), processTime (ref), heartbeatConnection (write), fFlagIEMTabFocusNav (copy), var1 (write), guiService (copy)
+		if not var3 and var2 >= 1 then
+			var3 = true
+			p2.takeScreenshot(p1.onScreenshotUploaded)
+			p1.onScreenshotTaken()
+			local onIdentificationCompleted = p1.onIdentificationCompleted
+			local var4 = p2
+			local visibleAvatars, visibleAvatars_1 = var4.getVisibleAvatars()
+			local visibleAds, visibleAds_1 = var4.getVisibleAds()
 			onIdentificationCompleted({
 				identifiedAvatars = visibleAvatars,
 				identifiedAds = visibleAds,
@@ -82,17 +82,17 @@ return function(p2, p3)
 				adIDStats = visibleAds_1
 			})
 		end
-		if not var20 or not (p3.getWaitFrames() <= var18) or not (p3.getWaitTime() <= os.clock() - processTime) then
-			var18 += 1
+		if not var3 or not (p2.getWaitFrames() <= var2) or not (p2.getWaitTime() <= os.clock() - processTime) then
+			var2 += 1
 			
 			return
 		end
 		heartbeatConnection:Disconnect()
-		p2.show()
+		p1.show()
 		
-		if fFlagIEMTabFocusNav and var17 and var17:IsDescendantOf(game) then
-			guiService.SelectedCoreObject = var17
+		if fFlagIEMTabFocusNav and var1 and var1:IsDescendantOf(game) then
+			guiService.SelectedCoreObject = var1
 		end
-		p2.onCaptureEnd()
+		p1.onCaptureEnd()
 	end)
 end

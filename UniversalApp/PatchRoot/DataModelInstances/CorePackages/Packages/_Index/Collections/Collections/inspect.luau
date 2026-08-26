@@ -8,154 +8,154 @@ local formatArray = nil
 local formatObject = nil
 local getObjectTag = nil
 
-local function inspect(p0, p1)
+local function inspect(p1, p2)
 	-- upvalues: formatValue (write)
-	p1 = p1 or { depth = 2 }
-	local depth = p1.depth or 2
-	p1.depth = if depth >= 0 then depth else 2
+	p2 = p2 or { depth = 2 }
+	local depth = p2.depth or 2
+	p2.depth = if depth >= 0 then depth else 2
 	
-	return formatValue(p0, {}, p1)
+	return formatValue(p1, {}, p2)
 end
 
-local function _(p2, p3)
-	return type(p2) == "number" and (p2 <= p3 and (p2 >= 1 and math.floor(p2) == p2))
+local function _(p1, p2)
+	return type(p1) == "number" and (p1 <= p2 and (p1 >= 1 and math.floor(p1) == p1))
 end
 
-local _ = function(p4)
-	local var12 = 1
-	local var13 = rawget(p4, var12)
-	while var13 ~= nil do
-		var12 += 1
-		var13 = rawget(p4, var12)
+local _ = function(p1)
+	local var1 = 1
+	local var2 = rawget(p1, var1)
+	while var2 ~= nil do
+		var1 += 1
+		var2 = rawget(p1, var1)
 	end
-	return var12 - 1
+	return var1 - 1
 end
 
-local function sortKeysForPrinting(p5, p6)
-	local var14 = type(p5)
-	local var15 = type(p6)
+local function sortKeysForPrinting(p2, p3)
+	local var3 = type(p2)
+	local var4 = type(p3)
 	
-	return if var14 == var15 and (var14 == "number" or var14 == "string") then p5 < p6 else var14 < var15
+	return if var3 == var4 and (var3 == "number" or var3 == "string") then p2 < p3 else var3 < var4
 end
 
-local _ = function(p7)
-	return next, p7, nil
+local _ = function(p2)
+	return next, p2, nil
 end
 
-local function getFragmentedKeys(p8)
+local function getFragmentedKeys(p2)
 	-- upvalues: sortKeysForPrinting (ref)
 	local t = {}
-	local var17 = 0
-	local var18 = 1
-	local var19 = rawget(p8, var18)
-	while var19 ~= nil do
-		var18 += 1
-		var19 = rawget(p8, var18)
+	local var3 = 0
+	local var4 = 1
+	local var5 = rawget(p2, var4)
+	while var5 ~= nil do
+		var4 += 1
+		var5 = rawget(p2, var4)
 	end
-	local var20 = var18 - 1
+	local var6 = var4 - 1
 	
-	for i, v in next, p8 do
-		if not (type(i) == "number" and (i <= var20 and (i >= 1 and math.floor(i) == i))) then
-			var17 += 1
-			t[var17] = i
+	for i, v in next, p2 do
+		if not (type(i) == "number" and (i <= var6 and (i >= 1 and math.floor(i) == i))) then
+			var3 += 1
+			t[var3] = i
 		end
 	end
 	table.sort(t, sortKeysForPrinting)
 	
-	return t, var17, var20
+	return t, var3, var6
 end
 
-formatValue = function(p9, p10, p11)
+formatValue = function(p3, p4, p5)
 	-- upvalues: httpService (ref), formatObjectValue (write)
-	local var21 = typeof(p9)
+	local var7 = typeof(p3)
 	
-	if var21 == "string" then
-		return httpService:JSONEncode(p9)
-	elseif var21 == "number" then
-		return if p9 == p9 then if p9 == 1e999 then "Infinity" elseif p9 == -1e999 then "-Infinity" else tostring(p9) else "NaN"
-	elseif var21 == "function" then
-		local var22 = "[function"
-		local debugInfo = debug.info(p9, "n")
+	if var7 == "string" then
+		return httpService:JSONEncode(p3)
+	elseif var7 == "number" then
+		return if p3 == p3 then if p3 == 1e999 then "Infinity" elseif p3 == -1e999 then "-Infinity" else tostring(p3) else "NaN"
+	elseif var7 == "function" then
+		local var8 = "[function"
+		local debugInfo = debug.info(p3, "n")
 		
 		if debugInfo ~= nil and debugInfo ~= "" then
-			var22 ..= " " .. debugInfo
+			var8 ..= " " .. debugInfo
 		end
-		return var22 .. "]"
+		return var8 .. "]"
 	else
-		return if var21 == "table" then formatObjectValue(p9, p10, p11) else tostring(p9)
+		return if var7 == "table" then formatObjectValue(p3, p4, p5) else tostring(p3)
 	end
 end
 
-formatObjectValue = function(p12, p13, p14)
+formatObjectValue = function(p3, p4, p5)
 	-- upvalues: formatValue (write), isArrayModule (ref), formatArray (write), formatObject (write)
-	if table.find(p13, p12) ~= nil then
+	if table.find(p4, p3) ~= nil then
 		return "[Circular]"
 	end
-	local list = { unpack(p13) }
-	table.insert(list, p12)
+	local list = { unpack(p4) }
+	table.insert(list, p3)
 	
-	if typeof(p12.toJSON) == "function" then
-		local var25 = p12:toJSON(p12)
+	if typeof(p3.toJSON) == "function" then
+		local var7 = p3:toJSON(p3)
 		
-		if var25 == p12 then
+		if var7 == p3 then
 		end
-		return if typeof(var25) == "string" then var25 else formatValue(var25, list, p14)
+		return if typeof(var7) == "string" then var7 else formatValue(var7, list, p5)
 	else
-		return if isArrayModule(p12) then formatArray(p12, list, p14) else formatObject(p12, list, p14)
+		return if isArrayModule(p3) then formatArray(p3, list, p5) else formatObject(p3, list, p5)
 	end
 end
 
-formatObject = function(p15, p16, p17)
+formatObject = function(p3, p4, p5)
 	-- upvalues: getFragmentedKeys (ref), getObjectTag (write), formatValue (write)
-	local var26 = ""
-	local var27 = getmetatable(p15)
+	local var7 = ""
+	local var8 = getmetatable(p3)
 	
-	if var27 and rawget(var27, "__tostring") then
-		return tostring(p15)
+	if var8 and rawget(var8, "__tostring") then
+		return tostring(p3)
 	end
-	local var28, var29, var30 = getFragmentedKeys(p15)
+	local var9, var10, var11 = getFragmentedKeys(p3)
 	
-	if var30 == 0 and var29 == 0 then
-		var26 ..= "{}"
+	if var11 == 0 and var10 == 0 then
+		var7 ..= "{}"
 		
-		return var26
-	elseif p17.depth < #p16 then
-		var26 ..= "[" .. getObjectTag(p15) .. "]"
+		return var7
+	elseif p5.depth < #p4 then
+		var7 ..= "[" .. getObjectTag(p3) .. "]"
 		
-		return var26
+		return var7
 	end
 	local t = {}
 	
-	for i = 1, var30 do
-		table.insert(t, formatValue(p15[i], p16, p17))
+	for i = 1, var11 do
+		table.insert(t, formatValue(p3[i], p4, p5))
 	end
-	for i_1 = 1, var29 do
-		local var32 = var28[i_1]
-		table.insert(t, var32 .. ": " .. formatValue(p15[var32], p16, p17))
+	for i_1 = 1, var10 do
+		local var12 = var9[i_1]
+		table.insert(t, var12 .. ": " .. formatValue(p3[var12], p4, p5))
 	end
-	return var26 .. "{ " .. table.concat(t, ", ") .. " }"
+	return var7 .. "{ " .. table.concat(t, ", ") .. " }"
 end
 
-formatArray = function(p18, p19, p20)
+formatArray = function(p6, p7, p8)
 	-- upvalues: formatValue (write)
-	local p18Count = #p18
+	local p18Count = #p6
 	
 	if p18Count == 0 then
 		return "[]"
-	elseif p20.depth < #p19 then
+	elseif p8.depth < #p7 then
 		return "[Array]"
 	end
 	local minValue = math.min(10, p18Count)
-	local var35 = p18Count - minValue
+	local var13 = p18Count - minValue
 	local t = {}
 	
 	for i = 1, minValue do
-		t[i] = formatValue(p18[i], p19, p20)
+		t[i] = formatValue(p6[i], p7, p8)
 	end
-	if var35 == 1 then
+	if var13 == 1 then
 		table.insert(t, "... 1 more item")
-	elseif var35 > 1 then
-		table.insert(t, ("... %s more items"):format(tostring(var35)))
+	elseif var13 > 1 then
+		table.insert(t, ("... %s more items"):format(tostring(var13)))
 	end
 	return "[" .. table.concat(t, ", ") .. "]"
 end

@@ -1,11 +1,11 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 
-return function(p0, p1)
-	return function(p2)
-		-- upvalues: p0 (ref), p1 (ref)
-		if p0 then
-			p0:info(p1(p2))
+return function(p1, p2)
+	return function(p3)
+		-- upvalues: p1 (ref), p2 (ref)
+		if p1 then
+			p1:info(p2(p3))
 		end
-		return p2
+		return p3
 	end
 end

@@ -4,13 +4,13 @@ local setBigGameIconsModule = require(gameIconRodux.BigGameIcons.SetBigGameIcons
 
 return {
 	key = "BigGameIconsKey",
-	reducer = function(p0, p1)
+	reducer = function(p1, p2)
 		-- upvalues: setBigGameIconsModule (ref), cryoModule (ref)
-		p0 = p0 or {}
+		p1 = p1 or {}
 		
-		if p1.type == setBigGameIconsModule.name then
-			p0 = cryoModule.Dictionary.join(p0, p1.gameIcons)
+		if p2.type == setBigGameIconsModule.name then
+			p1 = cryoModule.Dictionary.join(p1, p2.gameIcons)
 		end
-		return p0
+		return p1
 	end
 }

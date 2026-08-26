@@ -9,21 +9,21 @@ local assetOrderRelativelyEqualModule = require(avatarExperienceSave.Utils.asset
 local constants = avatarExperienceCommonModule.Constants
 local _ = require(parent.AvatarExperienceRodux)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getSubstateToTrackForChangesModule (ref), tutilsModule (ref), assetOrderRelativelyEqualModule (ref), constants (ref), itemTypeEnum (ref)
-	local var5 = getSubstateToTrackForChangesModule(p1, true)
+	local var1 = getSubstateToTrackForChangesModule(p2, true)
 	
-	if tutilsModule.deepEqual(getSubstateToTrackForChangesModule(p0, true), var5) and assetOrderRelativelyEqualModule(p0, p1, constants.LAYERED_ASSET_TYPES) and assetOrderRelativelyEqualModule(p0, p1, constants.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE) then
+	if tutilsModule.deepEqual(getSubstateToTrackForChangesModule(p1, true), var1) and assetOrderRelativelyEqualModule(p1, p2, constants.LAYERED_ASSET_TYPES) and assetOrderRelativelyEqualModule(p1, p2, constants.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE) then
 		return false
 	end
-	local var6 = true
+	local var2 = true
 	
-	for i, v in var5.OutfitTryOn.TryOnItems or {} do
+	for i, v in var1.OutfitTryOn.TryOnItems or {} do
 		if v.itemType == itemTypeEnum.Bundle and tutilsModule.fieldCount(v.bundleInfo or {}) == 0 then
-			var6 = false
+			var2 = false
 			
-			return var6
+			return var2
 		end
 	end
-	return var6
+	return var2
 end

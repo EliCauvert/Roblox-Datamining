@@ -37,8 +37,8 @@ local function _(value)
 	return math.clamp(value, 0, 1)
 end
 
-local _ = function(p0)
-	return math.ceil(p0.FontSize * p0.LineHeight)
+local _ = function(p1)
+	return math.ceil(p1.FontSize * p1.LineHeight)
 end
 
 local _ = function(p1)
@@ -47,46 +47,46 @@ local _ = function(p1)
 	end)
 end
 
-return reactModule.memo(function(p3)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), t (ref), reactModule (ref), view (ref), tiltKeyartModule (ref), text (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule_1 (ref), verifiedBadgeModule (ref)
-	local var7 = useTokens()
-	local animation = p3.animation or t
-	local color3 = var7.Color.Content.Emphasis.Color3
-	local color3_1 = var7.Color.Content.Default.Color3
-	local color3_2 = var7.Color.System.Emphasis.Color3
-	local headingLarge = var7.Typography.HeadingLarge
+	local var1 = useTokens()
+	local animation = p1.animation or t
+	local color3 = var1.Color.Content.Emphasis.Color3
+	local color3_1 = var1.Color.Content.Default.Color3
+	local color3_2 = var1.Color.System.Emphasis.Color3
+	local headingLarge = var1.Typography.HeadingLarge
 	local ceiled = math.ceil(headingLarge.FontSize * headingLarge.LineHeight)
-	local bodyMedium = var7.Typography.BodyMedium
+	local bodyMedium = var1.Typography.BodyMedium
 	local ceiled_1 = math.ceil(bodyMedium.FontSize * bodyMedium.LineHeight)
-	local var11 = animation.title.reveal:map(function(p4)
-		return p4 < 0.999
+	local var2 = animation.title.reveal:map(function(p2)
+		return p2 < 0.999
 	end)
-	local var12 = animation.creator.reveal:map(function(p5)
-		return p5 < 0.999
+	local var3 = animation.creator.reveal:map(function(p2)
+		return p2 < 0.999
 	end)
-	local var13 = animation.title.reveal:map(function(p6)
+	local var4 = animation.title.reveal:map(function(p2)
 		-- upvalues: color3 (ref)
-		return { Color3 = color3, Transparency = 1 - math.clamp(p6, 0, 1) }
+		return { Color3 = color3, Transparency = 1 - math.clamp(p2, 0, 1) }
 	end)
-	local var14 = animation.creator.reveal:map(function(p7)
+	local var5 = animation.creator.reveal:map(function(p2)
 		-- upvalues: color3_1 (ref)
 		return {
 			Color3 = color3_1,
-			Transparency = 1 - math.clamp(p7, 0, 1) * 0.6
+			Transparency = 1 - math.clamp(p2, 0, 1) * 0.6
 		}
 	end)
-	local var15 = animation.verified.reveal:map(function(p8)
+	local var6 = animation.verified.reveal:map(function(p2)
 		-- upvalues: color3_2 (ref)
 		return {
 			Color3 = color3_2,
-			Transparency = 1 - math.clamp(p8, 0, 1)
+			Transparency = 1 - math.clamp(p2, 0, 1)
 		}
 	end)
-	local var16 = animation.verified.reveal:map(function(p9)
-		-- upvalues: var7 (ref)
+	local var7 = animation.verified.reveal:map(function(p2)
+		-- upvalues: var1 (ref)
 		return {
-			Color3 = var7.Color.Content.Emphasis.Color3,
-			Transparency = 1 - math.clamp(p9, 0, 1)
+			Color3 = var1.Color.Content.Emphasis.Color3,
+			Transparency = 1 - math.clamp(p2, 0, 1)
 		}
 	end)
 	
@@ -99,7 +99,7 @@ return reactModule.memo(function(p3)
 			LayoutOrder = 1
 		}, {
 			Card = reactModule.createElement(tiltKeyartModule, {
-				thumbnailUrl = p3.thumbnailUrl or "",
+				thumbnailUrl = p1.thumbnailUrl or "",
 				keyart = animation.keyart,
 				frame = animation.frame
 			}),
@@ -110,20 +110,20 @@ return reactModule.memo(function(p3)
 			}, {
 				TitleWrap = reactModule.createElement(view, {
 					LayoutOrder = 1,
-					ClipsDescendants = var11,
+					ClipsDescendants = var2,
 					Size = UDim2.new(1, 0, 0, ceiled),
 					padding = { top = animation.title.slide }
 				}, {
 					Title = reactModule.createElement(text, {
 						tag = "size-full text-heading-large text-no-wrap text-align-x-center text-align-y-center text-truncate-end",
-						Text = p3.gameName or "",
-						textStyle = var13
+						Text = p1.gameName or "",
+						textStyle = var4
 					})
 				}),
 				SubWrap = reactModule.createElement(view, {
 					tag = "col align-x-center align-y-center",
 					LayoutOrder = 2,
-					ClipsDescendants = var12,
+					ClipsDescendants = var3,
 					Size = UDim2.new(1, 0, 0, ceiled_1),
 					padding = { top = animation.creator.slide }
 				}, {
@@ -133,18 +133,18 @@ return reactModule.memo(function(p3)
 						Author = reactModule.createElement(text, {
 							tag = "shrink auto-xy text-body-medium text-no-wrap text-truncate-end",
 							LayoutOrder = 1,
-							Text = p3.creatorName or "",
-							textStyle = var14
+							Text = p1.creatorName or "",
+							textStyle = var5
 						}),
-						Verified = if p3.isCreatorVerified then if fFlagUnifyVerifiedBadgeComponent then reactModule.createElement(verifiedBadgeModule_1, {
+						Verified = if p1.isCreatorVerified then if fFlagUnifyVerifiedBadgeComponent then reactModule.createElement(verifiedBadgeModule_1, {
 							LayoutOrder = 2,
 							testId = "tilt-verified-badge",
-							backplateStyle = var15,
-							checkStyle = var16
+							backplateStyle = var6,
+							checkStyle = var7
 						}) else reactModule.createElement(verifiedBadgeModule, {
 							LayoutOrder = 2,
-							backplateStyle = var15,
-							checkStyle = var16
+							backplateStyle = var6,
+							checkStyle = var7
 						}) else nil
 					})
 				})

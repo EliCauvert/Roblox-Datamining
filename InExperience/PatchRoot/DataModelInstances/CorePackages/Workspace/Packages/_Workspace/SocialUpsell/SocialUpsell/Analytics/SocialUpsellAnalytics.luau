@@ -17,42 +17,42 @@ local t = {
 	lastUpdated = { 2025, 9, 26 }
 }
 
-function evaluateUpsellStage(p0, p1, p2)
+function evaluateUpsellStage(p1, p2, p3)
 	-- upvalues: upsellComponentModule (ref), upsellEntrySurfaceTypeModule (ref), fFlagAddAEGIS2AnalyticsModule (ref), upsellStageModule (ref)
-	return if p1 == upsellComponentModule.Modal then if p2 == upsellComponentModule.Modal and (p0 == upsellEntrySurfaceTypeModule.Homepage or fFlagAddAEGIS2AnalyticsModule and (p0 == upsellEntrySurfaceTypeModule.InExperienceChatInputBar or p0 == upsellEntrySurfaceTypeModule.InExperienceVoiceChatIcon)) then upsellStageModule.Fae else upsellStageModule.FaeDetails else upsellStageModule.Fae
+	return if p2 == upsellComponentModule.Modal then if p3 == upsellComponentModule.Modal and (p1 == upsellEntrySurfaceTypeModule.Homepage or fFlagAddAEGIS2AnalyticsModule and (p1 == upsellEntrySurfaceTypeModule.InExperienceChatInputBar or p1 == upsellEntrySurfaceTypeModule.InExperienceVoiceChatIcon)) then upsellStageModule.Fae else upsellStageModule.FaeDetails else upsellStageModule.Fae
 end
 
-local function _(p3, p4, p5)
-	return if p3 and p4 and p5 then p3 .. p4 .. p5 else nil
+local function _(p1, p2, p3)
+	return if p1 and p2 and p3 then p1 .. p4 .. p5 else nil
 end
 
-function logUpsellEvent(p6, p7)
+function logUpsellEvent(p1, p2)
 	-- upvalues: cryoModule (ref), t (ref), rbxAnalyticsService (ref), fFlagAddUpsellEntryComponentToAnalyticsModule (ref), fFlagAddAEGIS2AnalyticsModule (ref), telemetryService (ref)
-	local var10 = cryoModule.Dictionary.join(t, { eventName = p6 })
+	local var1 = cryoModule.Dictionary.join(t, { eventName = p1 })
 	local playSessionId = rbxAnalyticsService:GetPlaySessionId()
 	local t_1 = {
-		upsellEntrySurface = p7.upsellEntrySurface,
-		upsellStage = p7.upsellStage,
-		upsellImpressionId = p7.upsellImpressionId,
-		upsellComponent = p7.upsellComponent,
-		btn = p7.btn or nil,
-		conversationId = p7.conversationId or nil,
+		upsellEntrySurface = p2.upsellEntrySurface,
+		upsellStage = p2.upsellStage,
+		upsellImpressionId = p2.upsellImpressionId,
+		upsellComponent = p2.upsellComponent,
+		btn = p2.btn or nil,
+		conversationId = p2.conversationId or nil,
 		playSessionId = if playSessionId ~= "" then nil else playSessionId,
 		clientTimeStamp = os.time(),
-		upsellEntryComponent = if fFlagAddUpsellEntryComponentToAnalyticsModule then p7.upsellEntryComponent else nil
+		upsellEntryComponent = if fFlagAddUpsellEntryComponentToAnalyticsModule then p2.upsellEntryComponent else nil
 	}
-	local upsellPurpose = p7.upsellPurpose
-	local upsellEntrySurface = p7.upsellEntrySurface
-	local upsellComponent = p7.upsellComponent
+	local upsellPurpose = p2.upsellPurpose
+	local upsellEntrySurface = p2.upsellEntrySurface
+	local upsellComponent = p2.upsellComponent
 	t_1.upsellIdentifier = if upsellPurpose and upsellEntrySurface and upsellComponent then upsellPurpose .. upsellEntrySurface .. upsellComponent else nil
-	t_1.upsellPurpose = p7.upsellPurpose
+	t_1.upsellPurpose = p2.upsellPurpose
 	local list = { "addSessionInfo" }
 	
 	if fFlagAddAEGIS2AnalyticsModule then
 		table.insert(list, "addPlaceId")
 		table.insert(list, "addUniverseId")
 	end
-	telemetryService:LogEvent(var10, { customFields = t_1, standardizedFields = list })
+	telemetryService:LogEvent(var1, { customFields = t_1, standardizedFields = list })
 end
 
 return {

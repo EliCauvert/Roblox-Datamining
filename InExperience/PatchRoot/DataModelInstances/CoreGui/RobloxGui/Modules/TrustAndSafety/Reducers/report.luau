@@ -34,9 +34,9 @@ return roduxModule.createReducer({
 	identifiedAvatars = {},
 	selectedAvatars = {}
 }, {
-	[endReportFlowModule.name] = function(p0, _)
+	[endReportFlowModule.name] = function(p1, _)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
-		return cryoModule.Dictionary.join(p0, {
+		return cryoModule.Dictionary.join(p1, {
 			history = {},
 			currentPage = constantsModule.Page.None,
 			targetPlayer = cryoModule.None,
@@ -72,88 +72,88 @@ return roduxModule.createReducer({
 			currentPage = if p1.voiceReportingFlowEnabled then constantsModule.Page.Category else constantsModule.Page.Listing
 		})
 	end,
-	[navigateBackModule.name] = function(p3, _)
+	[navigateBackModule.name] = function(p1, _)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p3, {
-			history = cryoModule.List.removeIndex(p3.history, #p3.history),
-			currentPage = p3.history[#p3.history] or p3.currentPage
+		return cryoModule.Dictionary.join(p1, {
+			history = cryoModule.List.removeIndex(p1.history, #p1.history),
+			currentPage = p1.history[#p1.history] or p1.currentPage
 		})
 	end,
-	[selectReportCategoryModule.name] = function(p4, p5)
+	[selectReportCategoryModule.name] = function(p1, p2)
 		-- upvalues: constantsModule (ref), getFFlagReportAnythingScreenshotModule (ref), cryoModule (ref)
-		local var18 = p5.reportCategory == constantsModule.Category.Experience
-		local var19 = p4.beginningReportType == constantsModule.ReportType.Player
+		local var1 = p2.reportCategory == constantsModule.Category.Experience
+		local var2 = p1.beginningReportType == constantsModule.ReportType.Player
 		local listing = constantsModule.Page.Listing
-		local reportType = p4.reportType
+		local reportType = p1.reportType
 		
 		if getFFlagReportAnythingScreenshotModule() then
-			if var18 then
+			if var1 then
 				listing = constantsModule.Page.ScreenshotDialog
 				reportType = constantsModule.ReportType.Place
-			elseif var19 then
+			elseif var2 then
 				listing = constantsModule.Page.ReportForm
 			end
-		elseif var18 or var19 then
+		elseif var1 or var2 then
 			listing = constantsModule.Page.ReportForm
 			
-			if var18 then
+			if var1 then
 				reportType = constantsModule.ReportType.Place
 			end
 		end
-		return cryoModule.Dictionary.join(p4, {
-			history = cryoModule.List.join(p4.history, { p4.currentPage }),
+		return cryoModule.Dictionary.join(p1, {
+			history = cryoModule.List.join(p1.history, { p1.currentPage }),
 			currentPage = listing,
 			reportType = reportType,
-			reportCategory = p5.reportCategory
+			reportCategory = p2.reportCategory
 		})
 	end,
-	[selectReportListingModule.name] = function(p6, p7)
+	[selectReportListingModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
-		return cryoModule.Dictionary.join(p6, {
-			sortedUserIds = cryoModule.List.join(p7.sortedUserIds or {}, {}),
-			history = cryoModule.List.join(p6.history, { p6.currentPage }),
+		return cryoModule.Dictionary.join(p1, {
+			sortedUserIds = cryoModule.List.join(p2.sortedUserIds or {}, {}),
+			history = cryoModule.List.join(p1.history, { p1.currentPage }),
 			currentPage = constantsModule.Page.ReportForm,
-			reportType = p7.reportType,
-			targetPlayer = p7.targetPlayer or cryoModule.None
+			reportType = p2.reportType,
+			targetPlayer = p2.targetPlayer or cryoModule.None
 		})
 	end,
-	[screenshotAnnotatedModule.name] = function(p8, p9)
+	[screenshotAnnotatedModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
-		return cryoModule.Dictionary.join(p8, {
-			history = cryoModule.List.join(p8.history, { p8.currentPage }),
+		return cryoModule.Dictionary.join(p1, {
+			history = cryoModule.List.join(p1.history, { p1.currentPage }),
 			currentPage = constantsModule.Page.ReportForm,
-			screenshotAnnotationPoints = p9.annotationPoints
+			screenshotAnnotationPoints = p2.annotationPoints
 		})
 	end,
-	[openReportMenuModule.name] = function(p10, _)
+	[openReportMenuModule.name] = function(p1, _)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p10, { isReportMenuOpen = true })
+		return cryoModule.Dictionary.join(p1, { isReportMenuOpen = true })
 	end,
-	[closeReportMenuModule.name] = function(p11, _)
+	[closeReportMenuModule.name] = function(p1, _)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p11, { isReportMenuOpen = false })
+		return cryoModule.Dictionary.join(p1, { isReportMenuOpen = false })
 	end,
-	[openReportSentDialogModule.name] = function(p12, p13)
+	[openReportSentDialogModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
-		return cryoModule.Dictionary.join(p12, {
+		return cryoModule.Dictionary.join(p1, {
 			currentPage = constantsModule.Page.ReportSent,
-			reportType = p13.reportType,
-			targetPlayer = p13.targetPlayer or cryoModule.None
+			reportType = p2.reportType,
+			targetPlayer = p2.targetPlayer or cryoModule.None
 		})
 	end,
-	[setVoiceReportingFlowModule.name] = function(p14, p15)
+	[setVoiceReportingFlowModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p14, { voiceReportingFlowEnabled = p15.enable })
+		return cryoModule.Dictionary.join(p1, { voiceReportingFlowEnabled = p2.enable })
 	end,
-	[setIdentifiedAvatarsModule.name] = function(p16, p17)
+	[setIdentifiedAvatarsModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p16, {
-			identifiedAvatars = p17.identifiedAvatars,
+		return cryoModule.Dictionary.join(p1, {
+			identifiedAvatars = p2.identifiedAvatars,
 			screenshotAnnotationPoints = {}
 		})
 	end,
-	[setSelectedAvatarsModule.name] = function(p18, p19)
+	[setSelectedAvatarsModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p18, { selectedAvatars = p19.selectedAvatars })
+		return cryoModule.Dictionary.join(p1, { selectedAvatars = p2.selectedAvatars })
 	end
 })

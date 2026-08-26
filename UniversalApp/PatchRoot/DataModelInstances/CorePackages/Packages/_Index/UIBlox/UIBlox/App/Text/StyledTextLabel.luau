@@ -38,26 +38,26 @@ styledTextLabel.defaultProps = {
 	automaticSize = Enum.AutomaticSize.None
 }
 
-function styledTextLabel.render(p0)
+function styledTextLabel.render(p1)
 	-- upvalues: roactModule (ref), genericTextLabelModule (ref)
 	return roactModule.createElement(genericTextLabelModule, {
-		maxSize = p0.props.maxSize,
-		fontStyle = p0.props.fontStyle,
-		colorStyle = p0.props.colorStyle,
-		fluidSizing = p0.props.fluidSizing,
-		Size = p0.props.size,
-		Text = p0.props.text,
-		TextXAlignment = p0.props.textXAlignment,
-		TextYAlignment = p0.props.textYAlignment,
-		TextTruncate = p0.props.textTruncate,
-		TextWrapped = p0.props.textWrapped,
-		LayoutOrder = p0.props.layoutOrder,
-		RichText = p0.props.richText,
-		AutomaticSize = p0.props.automaticSize,
-		LineHeight = p0.props.lineHeight,
-		ClipsDescendants = p0.props.clipsDescendants,
-		openTypeFeatures = p0.props.openTypeFeatures,
-		[roactModule.Change.AbsoluteSize] = p0.props.onAbsoluteSizeChange
+		maxSize = p1.props.maxSize,
+		fontStyle = p1.props.fontStyle,
+		colorStyle = p1.props.colorStyle,
+		fluidSizing = p1.props.fluidSizing,
+		Size = p1.props.size,
+		Text = p1.props.text,
+		TextXAlignment = p1.props.textXAlignment,
+		TextYAlignment = p1.props.textYAlignment,
+		TextTruncate = p1.props.textTruncate,
+		TextWrapped = p1.props.textWrapped,
+		LayoutOrder = p1.props.layoutOrder,
+		RichText = p1.props.richText,
+		AutomaticSize = p1.props.automaticSize,
+		LineHeight = p1.props.lineHeight,
+		ClipsDescendants = p1.props.clipsDescendants,
+		openTypeFeatures = p1.props.openTypeFeatures,
+		[roactModule.Change.AbsoluteSize] = p1.props.onAbsoluteSizeChange
 	})
 end
 

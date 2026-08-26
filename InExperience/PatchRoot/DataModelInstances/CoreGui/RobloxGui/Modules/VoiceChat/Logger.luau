@@ -1,6 +1,6 @@
 ﻿local voiceChatLogger = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsInitializer).CoreLogger:new("VoiceChatLogger")
 
-return function(p0)
+return function(p1)
 	-- upvalues: voiceChatLogger (ref)
-	return voiceChatLogger:new(p0)
+	return voiceChatLogger:new(p1)
 end

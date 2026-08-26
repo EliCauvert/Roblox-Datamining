@@ -7,21 +7,21 @@ local signalsReactModule = require(parent.SignalsReact)
 local _ = require(script.Parent.CreatorCreditBalanceChipView)
 local useOpenBuyRobuxWebViewModule = require(script.Parent.Parent.useOpenBuyRobuxWebView)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: numberLocalization (ref), localizationService (ref)
-	return numberLocalization.localize(string.format("%.0f", math.floor(p0)), localizationService.RobloxLocaleId)
+	return numberLocalization.localize(string.format("%.0f", math.floor(p1)), localizationService.RobloxLocaleId)
 end
 
 return function()
 	-- upvalues: creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), useOpenBuyRobuxWebViewModule (ref), numberLocalization (ref), localizationService (ref)
 	local creatorCreditStore = creatorCreditModule.getCreatorCreditStore(false)
-	local var6 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: creatorCreditStore (ref)
 		return creatorCreditStore.getQuotaSummary()
 	end, { creatorCreditStore }).data)
 	
 	return {
-		balanceText = if var6 ~= nil then nil else numberLocalization.localize(string.format("%.0f", math.floor(var6.robuxBalance)), localizationService.RobloxLocaleId),
+		balanceText = if var1 ~= nil then nil else numberLocalization.localize(string.format("%.0f", math.floor(var1.robuxBalance)), localizationService.RobloxLocaleId),
 		onActivated = useOpenBuyRobuxWebViewModule(reactModule.useCallback(function()
 			-- upvalues: creatorCreditStore (ref)
 			creatorCreditStore.refreshQuotaSummary():catch(function() end)

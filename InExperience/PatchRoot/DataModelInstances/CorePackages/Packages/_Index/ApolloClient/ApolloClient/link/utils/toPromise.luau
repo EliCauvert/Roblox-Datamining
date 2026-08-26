@@ -6,31 +6,31 @@ local _ = require(parent_1.LuauPolyfill)
 local invariant = require(parent.jsutils.invariant).invariant
 local _ = require(script.Parent.Parent.Parent.utilities)
 
-function t.toPromise(p0)
+function t.toPromise(p1)
 	-- upvalues: promiseModule (ref), invariant (ref)
-	local var2 = false
+	local var1 = false
 	
 	return promiseModule.new(function(p2, p3)
-		-- upvalues: p0 (ref), var2 (write), invariant (copy)
-		p0:subscribe({
+		-- upvalues: p1 (ref), var1 (write), invariant (copy)
+		p1:subscribe({
 			next = function(_, p4)
-				-- upvalues: var2 (copy), invariant (copy), p2 (ref)
-				if var2 then
+				-- upvalues: var1 (copy), invariant (copy), p2 (ref)
+				if var1 then
 					invariant.warn("Promise Wrapper does not support multiple results from Observable")
 					
 					return
 				end
-				var2 = true
+				var1 = true
 				p2(p4)
 			end,
-			error = function(_, p5)
+			error = function(_, p4)
 				-- upvalues: p3 (ref)
-				p3(p5)
+				p3(p4)
 			end
 		})
-	end):andThen(function(p1)
+	end):andThen(function(p2)
 		-- upvalues: promiseModule (copy)
-		return promiseModule.delay(0):andThenReturn(p1)
+		return promiseModule.delay(0):andThenReturn(p2)
 	end)
 end
 

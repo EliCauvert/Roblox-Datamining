@@ -5,9 +5,9 @@ local avatarScreenModule = require(avatarExperienceNavigation.Enums.AvatarScreen
 local avatarRouteContextModule = require(avatarExperienceNavigation.AvatarRoute.Context.AvatarRouteContext)
 local avatarRouteModule = require(avatarExperienceNavigation.AvatarRoute.AvatarRoute)
 
-local function avatarRouteFromString(p0)
+local function avatarRouteFromString(p1)
 	-- upvalues: avatarRouteModule (ref)
-	local t = { name = p0, key = p0, params = {} }
+	local t = { name = p1, key = p1, params = {} }
 	
 	return avatarRouteModule.new({
 		isVisible = true,
@@ -51,15 +51,15 @@ local function avatarRouteFromTable(p1)
 	})
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: avatarRouteFromString (ref), avatarRouteFromTable (ref), reactModule (ref), avatarRouteContextModule (ref)
-	local var14 = if type(p3) == "string" then avatarRouteFromString(p3) else avatarRouteFromTable(p3)
+	local var1 = if type(p2) == "string" then avatarRouteFromString(p2) else avatarRouteFromTable(p2)
 	
-	return reactModule.forwardRef(function(p4, p5)
-		-- upvalues: reactModule (copy), avatarRouteContextModule (copy), var14 (ref), p2 (ref)
-		local cloned = table.clone(p4)
-		cloned.ref = p5
+	return reactModule.forwardRef(function(p3, p4)
+		-- upvalues: reactModule (copy), avatarRouteContextModule (copy), var1 (ref), p1 (ref)
+		local cloned = table.clone(p3)
+		cloned.ref = p4
 		
-		return reactModule.createElement(avatarRouteContextModule.Provider, { value = var14 }, { component = reactModule.createElement(p2, cloned) })
+		return reactModule.createElement(avatarRouteContextModule.Provider, { value = var1 }, { component = reactModule.createElement(p1, cloned) })
 	end)
 end

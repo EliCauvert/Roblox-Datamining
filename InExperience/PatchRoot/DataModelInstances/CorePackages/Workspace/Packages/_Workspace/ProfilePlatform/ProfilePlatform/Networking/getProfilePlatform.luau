@@ -7,13 +7,13 @@ local fFlagProfilePlatformEnableLazyLoadingComponentsModule = require(profilePla
 local _ = require(parent.SocialCommon)
 local _ = require(profilePlatform.Types.Component)
 
-return myRoduxNetworkingModule.POST("GetProfile", function(p0, p1)
+return myRoduxNetworkingModule.POST("GetProfile", function(p1, p2)
 	-- upvalues: httpModule (ref), fFlagProfilePlatformEnableLazyLoadingComponentsModule (ref)
-	return p0(httpModule.Url.APIS_URL .. "profile-platform-api"):path("v1"):path("profiles"):path("get"):body({
-		profileType = p1.profileType,
-		profileId = p1.profileId,
-		components = p1.components,
-		includeComponentOrdering = p1.includeComponentOrdering,
-		onlyEssentialComponents = if fFlagProfilePlatformEnableLazyLoadingComponentsModule then p1.onlyEssentialComponents else nil
+	return p1(httpModule.Url.APIS_URL .. "profile-platform-api"):path("v1"):path("profiles"):path("get"):body({
+		profileType = p2.profileType,
+		profileId = p2.profileId,
+		components = p2.components,
+		includeComponentOrdering = p2.includeComponentOrdering,
+		onlyEssentialComponents = if fFlagProfilePlatformEnableLazyLoadingComponentsModule then p2.onlyEssentialComponents else nil
 	})
 end)

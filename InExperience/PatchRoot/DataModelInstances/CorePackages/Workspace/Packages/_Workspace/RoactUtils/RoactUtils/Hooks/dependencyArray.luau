@@ -5,12 +5,12 @@ return function(...)
 	local t = {}
 	
 	for i = 1, select("#", ...) do
-		local var2 = select(i, ...)
+		local var1 = select(i, ...)
 		
-		if var2 == nil then
-			var2 = nilDependency
+		if var1 == nil then
+			var1 = nilDependency
 		end
-		t[i] = var2
+		t[i] = var1
 	end
 	return t
 end

@@ -8,46 +8,46 @@ local _ = require(foundation.Enums.ThemeName)
 local _ = require(foundation.Providers.Style.Tokens)
 local styleSheetRegistryModule = require(foundation.StyleSheet.StyleSheetRegistry)
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), styleSheetRegistryModule (ref), flagsModule (ref)
-	local var4 = reactModule.useRef({})
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: styleSheetRegistryModule (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p0 (ref)
-		return styleSheetRegistryModule.resolveStyleSheet(p1, p2, p3, p4, p0)
+	local var1 = reactModule.useRef({})
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: styleSheetRegistryModule (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p1 (ref)
+		return styleSheetRegistryModule.resolveStyleSheet(p2, p3, p4, p5, p1)
 	end, {
-		p0,
 		p1,
 		p2,
 		p3,
-		p4
+		p4,
+		p5
 	})
-	local var6 = reactModule.useRef(var5)
-	var6.current = var5
-	local var7 = reactModule.useCallback(function(p5)
-		-- upvalues: var4 (ref), styleSheetRegistryModule (copy), var6 (ref)
-		for i, v in p5 do
-			var4.current[v] = true
+	local var3 = reactModule.useRef(var2)
+	var3.current = var2
+	local var4 = reactModule.useCallback(function(p6)
+		-- upvalues: var1 (ref), styleSheetRegistryModule (copy), var3 (ref)
+		for i, v in p6 do
+			var1.current[v] = true
 		end
-		styleSheetRegistryModule.addStyleTags(var6.current, p5)
+		styleSheetRegistryModule.addStyleTags(var3.current, p6)
 	end, {})
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var4 (ref), styleSheetRegistryModule (copy), var5 (ref), flagsModule (copy)
+		-- upvalues: var1 (ref), styleSheetRegistryModule (copy), var2 (ref), flagsModule (copy)
 		local t = {}
 		
-		for i in var4.current do
+		for i in var1.current do
 			table.insert(t, i)
 		end
-		styleSheetRegistryModule.addStyleTags(var5, t)
+		styleSheetRegistryModule.addStyleTags(var2, t)
 		
 		if flagsModule.FoundationStyleSheetRefCounting then
-			styleSheetRegistryModule.acquireStyleSheet(var5)
+			styleSheetRegistryModule.acquireStyleSheet(var2)
 			
 			return function()
-				-- upvalues: styleSheetRegistryModule (copy), var5 (copy)
-				styleSheetRegistryModule.releaseStyleSheet(var5)
+				-- upvalues: styleSheetRegistryModule (copy), var2 (copy)
+				styleSheetRegistryModule.releaseStyleSheet(var2)
 			end
 		end
-	end, { var5 })
+	end, { var2 })
 	
-	return var5, var7
+	return var2, var4
 end

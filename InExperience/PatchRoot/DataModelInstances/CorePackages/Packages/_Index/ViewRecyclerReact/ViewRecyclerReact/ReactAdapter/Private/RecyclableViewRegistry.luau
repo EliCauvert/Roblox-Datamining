@@ -4,16 +4,16 @@ local _ = require(viewRecyclerReact.Parent.Signals)
 local tbl = setmetatable({}, { __mode = "k" })
 
 return {
-	register = function(p0, p1)
+	register = function(p1, p2)
 		-- upvalues: tbl (ref)
-		tbl[p0] = p1
+		tbl[p1] = p2
 	end,
-	isRegistered = function(p2)
+	isRegistered = function(p1)
 		-- upvalues: tbl (ref)
-		return tbl[p2] ~= nil
+		return tbl[p1] ~= nil
 	end,
-	getMetadata = function(p3)
+	getMetadata = function(p1)
 		-- upvalues: tbl (ref)
-		return tbl[p3]
+		return tbl[p1]
 	end
 }

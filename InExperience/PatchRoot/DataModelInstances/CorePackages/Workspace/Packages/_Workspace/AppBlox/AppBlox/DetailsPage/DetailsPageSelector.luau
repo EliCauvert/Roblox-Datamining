@@ -12,7 +12,7 @@ local t = {
 	[deviceType.VR] = detailsPageTemplateModule
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), detailsPageTemplateModule (ref), reactModule (ref)
-	return reactModule.createElement(t[p0.deviceType] or detailsPageTemplateModule, p0.detailsPageProps)
+	return reactModule.createElement(t[p1.deviceType] or detailsPageTemplateModule, p1.detailsPageProps)
 end

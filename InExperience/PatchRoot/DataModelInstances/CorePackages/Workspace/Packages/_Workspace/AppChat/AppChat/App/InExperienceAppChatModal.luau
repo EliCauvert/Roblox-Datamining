@@ -23,12 +23,12 @@ local _ = function()
 	return require(appChat.Stores.GetRootedNavigationStore)(false)
 end
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: enumScreensModule (ref)
-	local params = p0.params
-	local var9 = if params then params.conversationId else nil
+	local params = p1.params
+	local var1 = if params then params.conversationId else nil
 	
-	return p0.screen == enumScreensModule.ChatDetails and (params ~= nil and (params.rooted == true and (type(var9) == "string" and var9 ~= "")))
+	return p1.screen == enumScreensModule.ChatDetails and (params ~= nil and (params.rooted == true and (type(var1) == "string" and var1 ~= "")))
 end
 
 function t._new()
@@ -68,23 +68,23 @@ function t.initialize(p1, p2, p3, p4, p5, p6)
 	p1.playerListManager = p6
 end
 
-function t.setVisible(value, p7, p8)
+function t.setVisible(value, p1, p2)
 	-- upvalues: appChat (ref), fFlagExpChatEnableFriendsTab (ref), chatSessionRefCountModule (ref), coreGuiService (ref), getFFlagAppChatInExperienceTabBarAdjustmentModule (ref), guiService (ref), fFlagSettingsHubIndependentBackgroundVisibility (ref)
-	if not p7 and require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)() then
+	if not p1 and require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)() then
 		require(appChat.Stores.GetRootedNavigationStore)(false).cancelNavigation()
 	end
-	if p7 == value._visible then return end
-	if fFlagExpChatEnableFriendsTab and not p7 and value._reserveChatSessionOnClose then
+	if p1 == value._visible then return end
+	if fFlagExpChatEnableFriendsTab and not p1 and value._reserveChatSessionOnClose then
 		value._reserveChatSessionOnClose = false
 		
 		if chatSessionRefCountModule.getReservations() == 0 then
 			chatSessionRefCountModule.reserve()
 		end
 	end
-	value._visible = p7
-	value.visibilitySignal:Fire(p7, p8)
+	value._visible = p1
+	value.visibilitySignal:Fire(p1, p2)
 	
-	if p7 then
+	if p1 then
 		if value.chatSelector then
 			value.chatSelector:HideTemp("AppChat", true)
 		end
@@ -116,12 +116,12 @@ function t.setVisible(value, p7, p8)
 		imageButton.Parent = inExperienceAppChatModal
 		
 		if getFFlagAppChatInExperienceTabBarAdjustmentModule() and value.viewportUtil then
-			local var15 = function()
+			local var1 = function()
 				-- upvalues: value (ref), UIPadding (ref), guiService (copy)
-				local var18 = value.viewportUtil.screenSize:get()
+				local var2 = value.viewportUtil.screenSize:get()
 				
-				if not var18 or not var18.X or not var18.Y then return end
-				if var18.X < var18.Y then
+				if not var2 or not var2.X or not var2.Y then return end
+				if var2.X < var2.Y then
 					UIPadding.PaddingBottom = UDim.new(0, 0)
 					
 					return
@@ -129,8 +129,8 @@ function t.setVisible(value, p7, p8)
 				UIPadding.PaddingBottom = UDim.new(0, guiService:GetSafeZoneOffsets().bottom)
 			end
 			
-			value.viewportUtil.screenSize:connect(var15)
-			var15()
+			value.viewportUtil.screenSize:connect(var1)
+			var1()
 		end
 		local UISizeConstraint = Instance.new("UISizeConstraint")
 		UISizeConstraint.MaxSize = Vector2.new(850, 780)
@@ -150,72 +150,72 @@ function t.setVisible(value, p7, p8)
 		value.playerListManager:HideTemp("AppChat", false)
 	end
 	if value.settingsHub and fFlagSettingsHubIndependentBackgroundVisibility then
-		value.settingsHub:SetBackgroundVisibility(p7, false)
+		value.settingsHub:SetBackgroundVisibility(p1, false)
 	end
 end
 
-function t.toggleVisibility(p9)
-	if p9.default then
-		p9.default:setVisible(not p9.default._visible)
+function t.toggleVisibility(p1)
+	if p1.default then
+		p1.default:setVisible(not p1.default._visible)
 	end
 end
 
-function t.getVisible(p10)
-	return p10.default._visible
+function t.getVisible(p1)
+	return p1.default._visible
 end
 
-function t.setUnreadCount(value, p11)
-	value.default.unreadCount = p11
-	value.default.unreadCountSignal:Fire(p11)
+function t.setUnreadCount(value, p1)
+	value.default.unreadCount = p1
+	value.default.unreadCountSignal:Fire(p1)
 end
 
-function t.markInitialUnreadCountReceived(p12, p13)
-	if p12.default.hasReceivedInitialUnreadCount then
+function t.markInitialUnreadCountReceived(p1, p2)
+	if p1.default.hasReceivedInitialUnreadCount then
 		return
 	end
-	p12.default.hasReceivedInitialUnreadCount = true
-	p12.default.initialUnreadCountSignal:Fire(p13)
+	p1.default.hasReceivedInitialUnreadCount = true
+	p1.default.initialUnreadCountSignal:Fire(p2)
 end
 
-function t.setCurrentSquadId(value, p14)
-	value.default.currentSquadId = p14
-	value.default.currentSquadIdSignal:Fire(p14)
+function t.setCurrentSquadId(value, p1)
+	value.default.currentSquadId = p1
+	value.default.currentSquadIdSignal:Fire(p1)
 end
 
-function t.reserveChatSessionOnClose(p15)
-	p15._reserveChatSessionOnClose = true
+function t.reserveChatSessionOnClose(p1)
+	p1._reserveChatSessionOnClose = true
 end
 
-function t.openToScreen(p16, p17)
+function t.openToScreen(p1, p2)
 	-- upvalues: appChat (ref), enumScreensModule (ref), fFlagExpChatEnableFriendsTab (ref)
-	local var19 = p17
+	local var1 = p2
 	
 	if require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)() then
-		local var20 = require(appChat.Stores.GetRootedNavigationStore)(false)
-		local params = p17.params
-		local var21 = if params then params.conversationId else nil
-		local var22 = p17.screen == enumScreensModule.ChatDetails and (params ~= nil and (params.rooted == true and (type(var21) == "string" and var21 ~= "")))
+		local var2 = require(appChat.Stores.GetRootedNavigationStore)(false)
+		local params = p2.params
+		local var3 = if params then params.conversationId else nil
+		local var4 = p2.screen == enumScreensModule.ChatDetails and (params ~= nil and (params.rooted == true and (type(var3) == "string" and var3 ~= "")))
 		
-		if var22 then
-			var22 = table.clone(p17.params)
-			var22.rootedNavigationRequestId = var20.beginNavigation()
-			var19 = { screen = p17.screen, params = var22 }
+		if var4 then
+			var4 = table.clone(p2.params)
+			var4.rootedNavigationRequestId = var2.beginNavigation()
+			var1 = { screen = p2.screen, params = var4 }
 		else
-			var20.cancelNavigation()
+			var2.cancelNavigation()
 		end
 	end
-	p16.requestedRoute = var19
-	p16.requestedRouteSignal:Fire(var19)
+	p1.requestedRoute = var1
+	p1.requestedRouteSignal:Fire(var1)
 	
-	if fFlagExpChatEnableFriendsTab and p17.params and p17.params.rooted == true then
-		p16:reserveChatSessionOnClose()
+	if fFlagExpChatEnableFriendsTab and p2.params and p2.params.rooted == true then
+		p1:reserveChatSessionOnClose()
 	end
-	p16:setVisible(true, if fFlagExpChatEnableFriendsTab and var19.params then var19.params.entryPoint else nil)
+	p1:setVisible(true, if fFlagExpChatEnableFriendsTab and var1.params then var1.params.entryPoint else nil)
 end
 
-function t.clearRequestedRoute(p18)
-	p18.requestedRoute = nil
-	p18.requestedRouteSignal:Fire(nil)
+function t.clearRequestedRoute(p1)
+	p1.requestedRoute = nil
+	p1.requestedRouteSignal:Fire(nil)
 end
 
 t.default = t._new()

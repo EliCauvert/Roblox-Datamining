@@ -2,13 +2,13 @@
 local runService = game:GetService("RunService")
 local _ = require(script.Parent.Parent.EventType)
 local t = { Name = "FirstPersonToggleEvent" }
-local var3 = false
-local var4 = nil
+local var1 = false
+local var2 = nil
 
-local function onJumpInput(p0, p1, _)
-	-- upvalues: var3 (write)
-	if p0 == "JumpAction" and p1 == Enum.UserInputState.Begin then
-		var3 = true
+local function onJumpInput(p1, p2, _)
+	-- upvalues: var1 (write)
+	if p1 == "JumpAction" and p2 == Enum.UserInputState.Begin then
+		var1 = true
 	end
 	return Enum.ContextActionResult.Pass
 end
@@ -23,28 +23,28 @@ function stopJumpEventListener()
 	contextActionService:UnbindAction("JumpAction")
 end
 
-function t.StartEvent(p2)
-	-- upvalues: var3 (write), var4 (write), runService (ref)
+function t.StartEvent(p1)
+	-- upvalues: var1 (write), var2 (write), runService (ref)
 	startJumpEventListener()
-	var4 = runService.RenderStepped:Connect(function(_)
-		-- upvalues: var3 (copy), p2 (ref), var4 (copy)
-		if var3 then
+	var2 = runService.RenderStepped:Connect(function(_)
+		-- upvalues: var1 (copy), p1 (ref), var2 (copy)
+		if var1 then
 			stopJumpEventListener()
-			p2()
+			p1()
 			
-			if var4 then
-				var4:Disconnect()
-				var4 = nil
+			if var2 then
+				var2:Disconnect()
+				var2 = nil
 			end
 		end
 	end)
 end
 
 function t.StopEvent()
-	-- upvalues: var4 (write)
-	if var4 then
-		var4:Disconnect()
-		var4 = nil
+	-- upvalues: var2 (write)
+	if var2 then
+		var2:Disconnect()
+		var2 = nil
 	end
 	stopJumpEventListener()
 end

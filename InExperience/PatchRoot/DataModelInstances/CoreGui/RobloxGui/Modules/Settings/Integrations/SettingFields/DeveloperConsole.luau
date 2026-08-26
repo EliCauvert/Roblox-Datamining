@@ -13,8 +13,8 @@ local LAYOUT_ORDER = constantsModule.GAMESETTINGS.LAYOUT_ORDER
 
 local function _()
 	-- upvalues: valueChangedSignal (ref), devConsoleMasterModule (ref)
-	local var10 = valueChangedSignal.new()
-	var10:connect(function()
+	local var1 = valueChangedSignal.new()
+	var1:connect(function()
 		-- upvalues: devConsoleMasterModule (copy)
 		if devConsoleMasterModule then
 			devConsoleMasterModule:SetVisibility(true)
@@ -26,28 +26,28 @@ local function _()
 		end
 	end)
 	
-	return var10
+	return var1
 end
 
 local function DeveloperConsoleAvailability()
 	-- upvalues: availabilitySignal (ref), runService (ref), playerPermissionsModule (ref), playersService (ref)
-	local var12 = availabilitySignal.new(false)
+	local var1 = availabilitySignal.new(false)
 	
 	if runService:IsStudio() then
-		var12:set(true)
+		var1:set(true)
 		
-		return var12
+		return var1
 	end
 	spawn(function()
-		-- upvalues: playerPermissionsModule (copy), playersService (copy), var12 (ref)
-		var12:set(playerPermissionsModule.CanPlayerManagePlaceAsync(playersService.LocalPlayer))
+		-- upvalues: playerPermissionsModule (copy), playersService (copy), var1 (ref)
+		var1:set(playerPermissionsModule.CanPlayerManagePlaceAsync(playersService.LocalPlayer))
 	end)
 	
-	return var12
+	return var1
 end
 
-local var9 = valueChangedSignal.new()
-var9:connect(function()
+local var1 = valueChangedSignal.new()
+var1:connect(function()
 	-- upvalues: devConsoleMasterModule (ref)
 	if devConsoleMasterModule then
 		devConsoleMasterModule:SetVisibility(true)
@@ -65,7 +65,7 @@ return {
 	text = "CoreScripts.InGameMenu.GameSettings.Open",
 	alreadyLocalized = false,
 	field_type = settingEnum.TextButton,
-	onActivated = var9,
+	onActivated = var1,
 	layoutOrder = LAYOUT_ORDER.DeveloperConsoleButton,
 	availability = DeveloperConsoleAvailability()
 }

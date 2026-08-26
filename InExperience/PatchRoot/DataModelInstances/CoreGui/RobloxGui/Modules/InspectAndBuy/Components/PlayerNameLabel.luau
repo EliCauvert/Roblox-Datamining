@@ -12,28 +12,28 @@ local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContex
 local playerNameLabel = roactModule.PureComponent:extend("PlayerNameLabel")
 local verified = verifiedBadgesModule.emoji.verified
 
-function playerNameLabel.render(p0)
+function playerNameLabel.render(p1)
 	-- upvalues: playersService (ref), userLibModule (ref), robloxTranslatorModule (ref), verified (ref), roactModule (ref), inspectAndBuyContextModule (ref), colorsModule (ref), appFonts (ref)
-	local locale = p0.props.locale
-	local view = p0.props.view
-	local playerName = p0.props.playerName
-	local var10 = tonumber(p0.props.playerId)
-	local var11 = var10 and playersService:GetPlayerByUserId(var10)
-	local var12 = if playerName == "" then "" elseif if var11 then userLibModule.Utils.isPlayerVerified(var11) else false then robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.VerifiedAvatar", locale, { PLAYER_NAME = playerName, VERIFIED_BADGE = verified }) else robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.Avatar", locale, { PLAYER_NAME = playerName })
+	local locale = p1.props.locale
+	local view = p1.props.view
+	local playerName = p1.props.playerName
+	local var1 = tonumber(p1.props.playerId)
+	local var2 = var1 and playersService:GetPlayerByUserId(var1)
+	local var3 = if playerName == "" then "" elseif if var2 then userLibModule.Utils.isPlayerVerified(var2) else false then robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.VerifiedAvatar", locale, { PLAYER_NAME = playerName, VERIFIED_BADGE = verified }) else robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.Avatar", locale, { PLAYER_NAME = playerName })
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p1)
-			-- upvalues: view (ref), roactModule (copy), colorsModule (copy), var12 (write), appFonts (copy)
-			local var13 = p1[view]
+		render = function(p2)
+			-- upvalues: view (ref), roactModule (copy), colorsModule (copy), var3 (write), appFonts (copy)
+			local var4 = p2[view]
 			
 			return roactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextScaled = true,
 				TextSize = 36,
 				LayoutOrder = 2,
-				Size = UDim2.new(1, -(var13.AvatarHeadShotSize + var13.BorderPaddingSize * 2 + 10), 0, var13.TopSizeY),
+				Size = UDim2.new(1, -(var4.AvatarHeadShotSize + var4.BorderPaddingSize * 2 + 10), 0, var4.TopSizeY),
 				TextColor3 = colorsModule.White,
-				Text = var12,
+				Text = var3,
 				Font = appFonts.default:getBlack(),
 				TextXAlignment = Enum.TextXAlignment.Left
 			}, {
@@ -43,11 +43,11 @@ function playerNameLabel.render(p0)
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
-		view = p2.view,
-		playerName = p2.playerName,
-		playerId = p2.playerId,
-		locale = p2.locale
+		view = p1.view,
+		playerName = p1.playerName,
+		playerId = p1.playerId,
+		locale = p1.locale
 	}
 end)(playerNameLabel)

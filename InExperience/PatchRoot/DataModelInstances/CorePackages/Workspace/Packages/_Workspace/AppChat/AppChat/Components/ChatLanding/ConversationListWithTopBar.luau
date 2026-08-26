@@ -22,23 +22,23 @@ local conversationListWithTopBar = roactModule.PureComponent:extend("Conversatio
 local fFlagAppChatSignalsMessageStoreModule_1 = fFlagAppChatUseNewConversationRowModule and (fFlagAppChatConversationStoreModule and fFlagAppChatSignalsMessageStoreModule)
 local fFlagAppChatUseUltimateListConversationListModule_1 = fFlagAppChatSignalsMessageStoreModule_1 and fFlagAppChatUseUltimateListConversationListModule
 local conversationListModule = require(script.Parent.ConversationList)
-local var18 = false
-local var19 = nil
+local var1 = false
+local var2 = nil
 
 local function _()
-	-- upvalues: var18 (write), var19 (write)
-	if var18 then
-		return var19
+	-- upvalues: var1 (write), var2 (write)
+	if var1 then
+		return var2
 	end
-	var18 = true
+	var1 = true
 	local ok, status = pcall(function()
 		return require(script.Parent.ConversationListUltimate)
 	end)
 	
 	if ok then
-		var19 = status
+		var2 = status
 	end
-	return var19
+	return var2
 end
 
 conversationListWithTopBar.defaultProps = {
@@ -53,200 +53,200 @@ conversationListWithTopBar.defaultProps = {
 	canvasTopPadding = if fFlagAppIaScrollAway then 0 else nil
 }
 
-function conversationListWithTopBar.getDerivedStateFromProps(p0)
+function conversationListWithTopBar.getDerivedStateFromProps(p1)
 	-- upvalues: cryoModule (ref), searchFilterPredicate (ref)
-	local filterText = p0.filterText
+	local filterText = p1.filterText
 	
 	return {
-		filteredItemList = cryoModule.List.filterMap(p0.itemList, function(p1)
+		filteredItemList = cryoModule.List.filterMap(p1.itemList, function(p2)
 			-- upvalues: searchFilterPredicate (copy), filterText (ref)
-			return if searchFilterPredicate(filterText, p1.title) then p1 else nil
+			return if searchFilterPredicate(filterText, p2.title) then p2 else nil
 		end)
 	}
 end
 
-function conversationListWithTopBar.init(p2)
+function conversationListWithTopBar.init(p1)
 	-- upvalues: memoize (ref), roactPaginator (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), cryoModule (ref), httpService (ref), chatLandingTelemetryEventsModule (ref)
-	function p2.showErrorToast(p3)
-		-- upvalues: p2 (ref)
-		p2.props.navigateToToast({ toastProps = { toastContent = { toastTitle = p3 } } })
+	function p2.showErrorToast(p2)
+		-- upvalues: p1 (ref)
+		p1.props.navigateToToast({ toastProps = { toastContent = { toastTitle = p2 } } })
 	end
 	
-	function p2.reportAnalytics(p4)
-		-- upvalues: p2 (ref)
-		if not p2.props.conversationsIsFetching and not p2.props.oldestConversationIsFetched then
-			p4:userFetchedOlderConversations(p2.props.localUserId)
+	function p2.reportAnalytics(p2)
+		-- upvalues: p1 (ref)
+		if not p1.props.conversationsIsFetching and not p1.props.oldestConversationIsFetched then
+			p2:userFetchedOlderConversations(p1.props.localUserId)
 		end
 	end
 	
-	p2.loadNext = memoize(function(p5)
-		-- upvalues: p2 (ref), roactPaginator (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy)
-		return function(p6)
-			-- upvalues: p2 (copy), roactPaginator (copy), p5 (ref), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy)
-			if p2.props[roactPaginator.loadNext] then
-				p2.reportAnalytics(p5)
+	p1.loadNext = memoize(function(p2)
+		-- upvalues: p1 (ref), roactPaginator (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy)
+		return function(p3)
+			-- upvalues: p1 (copy), roactPaginator (copy), p2 (ref), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy)
+			if p1.props[roactPaginator.loadNext] then
+				p1.reportAnalytics(p2)
 				
 				if fFlagAppChatPerfTrackingModule then
 					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.PaginationConversationList)
 				end
-				p2.props[roactPaginator.loadNext](p6)
+				p1.props[roactPaginator.loadNext](p3)
 			end
 		end
 	end)
-	p2.isFiltered = p2.props.filterText and p2.props.filterText:match("%S")
-	p2.indexOfList = memoize(function(p7, p8)
+	p1.isFiltered = p1.props.filterText and p1.props.filterText:match("%S")
+	p1.indexOfList = memoize(function(p2, p3)
 		-- upvalues: cryoModule (copy)
-		local index = table.find(cryoModule.List.map(p7, function(p9)
-			return p9.id
-		end), p8)
+		local index = table.find(cryoModule.List.map(p2, function(p4)
+			return p4.id
+		end), p3)
 		
 		return index or 0
 	end)
 	
-	function p2.formatParticipantIds(p10)
+	function p2.formatParticipantIds(p2)
 		-- upvalues: cryoModule (copy), httpService (copy)
-		local var21 = cryoModule.List.filterMap(p10 or {}, function(p11)
-			return if p11.id then tonumber(p11.id) else nil
+		local var3 = cryoModule.List.filterMap(p2 or {}, function(p3)
+			return if p3.id then tonumber(p3.id) else nil
 		end)
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), var21 (ref)
-			return httpService:JSONEncode(var21)
+			-- upvalues: httpService (copy), var3 (ref)
+			return httpService:JSONEncode(var3)
 		end)
 		
 		return if ok then status else "[]"
 	end
 	
-	function p2.fireClickEvent(p12, p13, p14)
-		-- upvalues: chatLandingTelemetryEventsModule (copy), p2 (ref)
-		local id = p12.id
-		p13.emit(chatLandingTelemetryEventsModule.ConversationClicked, {
-			isFiltered = p2.isFiltered ~= nil,
-			conversationListCount = #p2.state.filteredItemList,
+	function p2.fireClickEvent(p2, p3, p4)
+		-- upvalues: chatLandingTelemetryEventsModule (copy), p1 (ref)
+		local id = p2.id
+		p3.emit(chatLandingTelemetryEventsModule.ConversationClicked, {
+			isFiltered = p1.isFiltered ~= nil,
+			conversationListCount = #p1.state.filteredItemList,
 			selectedConversationId = id,
-			selectedIndex = p2.indexOfList(p2.state.filteredItemList, id),
-			hasUnreadMessages = p12.hasUnreadMessages,
-			selectedConversationModerationType = if p12 then p12.moderationType else nil,
-			selectedConversationUserPendingStatus = if p12 then p12.userPendingStatus else nil,
-			participantUserIds = p2.formatParticipantIds(p12.participants),
-			osaAcknowledgementStatus = p12.osaAcknowledgementStatus,
-			osaImpressionId = p14
+			selectedIndex = p1.indexOfList(p1.state.filteredItemList, id),
+			hasUnreadMessages = p2.hasUnreadMessages,
+			selectedConversationModerationType = if p2 then p2.moderationType else nil,
+			selectedConversationUserPendingStatus = if p2 then p2.userPendingStatus else nil,
+			participantUserIds = p1.formatParticipantIds(p2.participants),
+			osaAcknowledgementStatus = p2.osaAcknowledgementStatus,
+			osaImpressionId = p4
 		})
-		p13.emit(chatLandingTelemetryEventsModule.ConversationClickedIndexStat, {
-			statValue = p2.indexOfList(p2.state.filteredItemList, id) or 0
+		p3.emit(chatLandingTelemetryEventsModule.ConversationClickedIndexStat, {
+			statValue = p1.indexOfList(p1.state.filteredItemList, id) or 0
 		})
 	end
 	
-	p2.fireConversationImpressionEvent = memoize(function(p15)
-		-- upvalues: chatLandingTelemetryEventsModule (copy), p2 (ref)
-		return function(p16)
-			-- upvalues: p15 (ref), chatLandingTelemetryEventsModule (copy), p2 (copy)
-			local id = p16.id
-			p15.emit(chatLandingTelemetryEventsModule.ConversationCellRendered, {
-				isFiltered = p2.isFiltered ~= nil,
-				conversationListCount = #p2.state.filteredItemList,
+	p1.fireConversationImpressionEvent = memoize(function(p2)
+		-- upvalues: chatLandingTelemetryEventsModule (copy), p1 (ref)
+		return function(p3)
+			-- upvalues: p2 (ref), chatLandingTelemetryEventsModule (copy), p1 (copy)
+			local id = p3.id
+			p2.emit(chatLandingTelemetryEventsModule.ConversationCellRendered, {
+				isFiltered = p1.isFiltered ~= nil,
+				conversationListCount = #p1.state.filteredItemList,
 				selectedConversationId = id,
-				selectedIndex = p2.indexOfList(p2.state.filteredItemList, id),
-				hasUnreadMessages = p16.hasUnreadMessages,
-				selectedConversationModerationType = p16.moderationType,
-				selectedConversationUserPendingStatus = p16.userPendingStatus,
-				participantUserIds = p2.formatParticipantIds(p16.participants),
-				osaAcknowledgementStatus = p16.osaAcknowledgementStatus
+				selectedIndex = p1.indexOfList(p1.state.filteredItemList, id),
+				hasUnreadMessages = p3.hasUnreadMessages,
+				selectedConversationModerationType = p3.moderationType,
+				selectedConversationUserPendingStatus = p3.userPendingStatus,
+				participantUserIds = p1.formatParticipantIds(p3.participants),
+				osaAcknowledgementStatus = p3.osaAcknowledgementStatus
 			})
-			p15.emit(chatLandingTelemetryEventsModule.ConversationCellRenderedIndexStat, {
-				statValue = p2.indexOfList(p2.state.filteredItemList, id) or 0
+			p2.emit(chatLandingTelemetryEventsModule.ConversationCellRenderedIndexStat, {
+				statValue = p1.indexOfList(p1.state.filteredItemList, id) or 0
 			})
 		end
 	end)
 	
-	function p2.onActivated(p17)
-		-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), p2 (ref)
+	function p2.onActivated(p2)
+		-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), p1 (ref)
 		if fFlagAppChatPerfTrackingModule then
-			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = tostring(p17.id) })
+			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = tostring(p2.id) })
 		end
-		p2.props.navigateToConversation(p17.id)
+		p1.props.navigateToConversation(p2.id)
 	end
 end
 
-function conversationListWithTopBar.render(p18)
-	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), partyPageCarouselExperimentation (ref), fFlagAppChatSignalsMessageStoreModule_1 (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), conversationListModule (ref), var18 (write), var19 (write), roactModule (ref)
-	return withAnalyticsModule(function(p19)
-		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p18 (ref), partyPageCarouselExperimentation (copy), fFlagAppChatSignalsMessageStoreModule_1 (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var18 (copy), var19 (copy), roactModule (copy)
-		return withTelemetryModule(chatLandingTelemetryLayerModule.Context)(function(p20)
-			-- upvalues: p18 (copy), p19 (ref), partyPageCarouselExperimentation (copy), fFlagAppChatSignalsMessageStoreModule_1 (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var18 (copy), var19 (copy), roactModule (copy)
+function conversationListWithTopBar.render(p1)
+	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), partyPageCarouselExperimentation (ref), fFlagAppChatSignalsMessageStoreModule_1 (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), conversationListModule (ref), var1 (write), var2 (write), roactModule (ref)
+	return withAnalyticsModule(function(p2)
+		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p1 (ref), partyPageCarouselExperimentation (copy), fFlagAppChatSignalsMessageStoreModule_1 (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var1 (copy), var2 (copy), roactModule (copy)
+		return withTelemetryModule(chatLandingTelemetryLayerModule.Context)(function(p3)
+			-- upvalues: p1 (copy), p2 (ref), partyPageCarouselExperimentation (copy), fFlagAppChatSignalsMessageStoreModule_1 (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var1 (copy), var2 (copy), roactModule (copy)
 			local t = {
 				Size = UDim2.fromScale(1, 1),
-				itemList = if p18.props.filterText and p18.props.filterText:match("%S") then p18.state.filteredItemList else p18.props.itemList,
-				loadNext = p18.loadNext(p19),
-				isDebugEnabled = p18.props.isDebugEnabled,
-				isWideMode = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() or fFlagAppChatSignalsMessageStoreModule_1 then p18.props.isWideMode else nil,
-				filterText = p18.props.filterText,
-				onActivated = p18.onActivated,
-				entryHeight = p18.props.entryHeight,
-				navigateToSquadLobby = p18.props.navigateToSquadLobby,
-				isInExperience = p18.props.isInExperience,
-				localUserId = p18.props.localUserId,
-				rowProps = { showBackground = not p18.props.isInExperience },
-				navigateToConversationFromUserId = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then p18.props.navigateToConversationFromUserId else nil,
-				navigateToQuickStartSquadInviteFriends = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then p18.props.navigateToQuickStartSquadInviteFriends else nil,
-				shouldShowPhoneVerificationUpsell = p18.props.shouldShowPhoneVerificationUpsell,
-				shouldShowUnfilteredAccessFtux = p18.props.shouldShowUnfilteredAccessFtux,
-				shouldShowPartyUpsellFtux = p18.props.shouldShowPartyUpsellFtux,
-				dismissUnfilteredThreadsFtux = p18.props.dismissUnfilteredThreadsFtux,
-				showGroupsLink = p18.props.showGroupsLink,
-				canvasTopPadding = if fFlagAppIaScrollAway then p18.props.canvasTopPadding else nil,
-				fireConversationImpressionEvent = p18.fireConversationImpressionEvent(p20),
-				isPartyQuickStartEnabled = p18.props.isPartyQuickStartEnabled,
-				fireConversationClickedEvent = p18.fireClickEvent
+				itemList = if p1.props.filterText and p1.props.filterText:match("%S") then p1.state.filteredItemList else p1.props.itemList,
+				loadNext = p1.loadNext(p2),
+				isDebugEnabled = p1.props.isDebugEnabled,
+				isWideMode = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() or fFlagAppChatSignalsMessageStoreModule_1 then p1.props.isWideMode else nil,
+				filterText = p1.props.filterText,
+				onActivated = p1.onActivated,
+				entryHeight = p1.props.entryHeight,
+				navigateToSquadLobby = p1.props.navigateToSquadLobby,
+				isInExperience = p1.props.isInExperience,
+				localUserId = p1.props.localUserId,
+				rowProps = { showBackground = not p1.props.isInExperience },
+				navigateToConversationFromUserId = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then p1.props.navigateToConversationFromUserId else nil,
+				navigateToQuickStartSquadInviteFriends = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then p1.props.navigateToQuickStartSquadInviteFriends else nil,
+				shouldShowPhoneVerificationUpsell = p1.props.shouldShowPhoneVerificationUpsell,
+				shouldShowUnfilteredAccessFtux = p1.props.shouldShowUnfilteredAccessFtux,
+				shouldShowPartyUpsellFtux = p1.props.shouldShowPartyUpsellFtux,
+				dismissUnfilteredThreadsFtux = p1.props.dismissUnfilteredThreadsFtux,
+				showGroupsLink = p1.props.showGroupsLink,
+				canvasTopPadding = if fFlagAppIaScrollAway then p1.props.canvasTopPadding else nil,
+				fireConversationImpressionEvent = p1.fireConversationImpressionEvent(p3),
+				isPartyQuickStartEnabled = p1.props.isPartyQuickStartEnabled,
+				fireConversationClickedEvent = p1.fireClickEvent
 			}
 			
 			if fFlagAppChatSignalsMessageStoreModule_1 then
-				t.canAccessParty = p18.props.canAccessParty
+				t.canAccessParty = p1.props.canAccessParty
 			end
 			if fFlagAppChatUseUltimateListConversationListModule_1 then
-				t.isLoadingNext = p18.props.conversationsIsFetching
-				t.isLoadingPrevious = p18.props.conversationsIsFetching
-				t.oldestConversationIsFetched = p18.props.oldestConversationIsFetched
+				t.isLoadingNext = p1.props.conversationsIsFetching
+				t.isLoadingPrevious = p1.props.conversationsIsFetching
+				t.oldestConversationIsFetched = p1.props.oldestConversationIsFetched
 			end
-			local var23 = conversationListModule
+			local var3 = conversationListModule
 			
 			if fFlagAppChatUseUltimateListConversationListModule_1 then
-				local var24
-				if var18 then
-					var24 = var19
+				local var4
+				if var1 then
+					var4 = var2
 				else
-					var18 = true
+					var1 = true
 					local ok, status = pcall(function()
 						return require(script.Parent.ConversationListUltimate)
 					end)
 					
 					if ok then
-						var19 = status
+						var2 = status
 					end
-					var24 = var19
+					var4 = var2
 				end
-				if not var24 then
-					var24 = conversationListModule
+				if not var4 then
+					var4 = conversationListModule
 				end
-				var23 = var24
+				var3 = var4
 			end
-			return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, { conversationList = roactModule.createElement(var23, t) })
+			return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, { conversationList = roactModule.createElement(var3, t) })
 		end)
 	end)
 end
 
-function conversationListWithTopBar.didMount(p21)
-	p21.isMounted = true
+function conversationListWithTopBar.didMount(p1)
+	p1.isMounted = true
 end
 
-function conversationListWithTopBar.didUpdate(p22, p23)
+function conversationListWithTopBar.didUpdate(p1, p2)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref)
-	if fFlagAppChatPerfTrackingModule and #p23.itemList < #p22.props.itemList then
+	if fFlagAppChatPerfTrackingModule and #p2.itemList < #p1.props.itemList then
 		appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.PaginationConversationList)
 	end
 end
 
-function conversationListWithTopBar.willUnmount(p24)
-	p24.isMounted = false
+function conversationListWithTopBar.willUnmount(p1)
+	p1.isMounted = false
 end
 
 return conversationListWithTopBar

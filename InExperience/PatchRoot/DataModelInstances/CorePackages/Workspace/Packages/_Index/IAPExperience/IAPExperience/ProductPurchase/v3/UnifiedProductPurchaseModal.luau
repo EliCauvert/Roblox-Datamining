@@ -34,9 +34,9 @@ local fFlagEnableOffersOnInExperienceSurface = require(parent.Parent.SharedFlags
 local _ = require(parent.ProductPurchase.PricingTypes)
 local blackbirdUpsellBanner = require(parent_1.RobloxSubscriptionPurchaseApp).Components.BlackbirdUpsellBanner
 
-local function UnifiedProductPurchaseModal(p0)
+local function UnifiedProductPurchaseModal(p1)
 	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), useInitialButtonDisableDelayModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), useCartPricingModule (ref), useFocusNavigationRefsModule (ref), checkbox (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), text (ref), cartPricingProductDetailsModule (ref), productDetailsContainerModule (ref), sheet (ref), unifiedPurchaseModalHeaderModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), blackbirdUpsellBanner (ref)
-	local var15 = useLocalization({
+	local var1 = useLocalization({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
 		Subscribe = "Feature.Subscription.Action.Subscribe",
 		BuyItem = "IAPExperience.PurchasePrompt.Title.BuyItem",
@@ -53,85 +53,85 @@ local function UnifiedProductPurchaseModal(p0)
 			tosUrl = urlBuilder.static.about.terms()
 		} else nil
 	})
-	local var16 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p0.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then var15.PerMonth else nil
-	local var17, var18 = reactModule.useState(p0.postPurchaseActions or {})
-	local var19, var20 = reactModule.useState(var15.BuyItem)
-	local var21 = useInitialButtonDisableDelayModule(p0.buttons.isDisabled)
-	local var22 = nil
-	local var23 = nil
-	local var24 = nil
-	local var25 = nil
+	local var2 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then var1.PerMonth else nil
+	local var3, var4 = reactModule.useState(p1.postPurchaseActions or {})
+	local var5, var6 = reactModule.useState(var1.BuyItem)
+	local var7 = useInitialButtonDisableDelayModule(p1.buttons.isDisabled)
+	local var8 = nil
+	local var9 = nil
+	local var10 = nil
+	local var11 = nil
 	
 	if fFlagEnableOffersOnInExperienceSurface then
-		var22 = useCartPricingModule({
-			product = p0.product,
-			purchaseModalType = p0.purchaseModalType,
-			cartPricingResponse = p0.cartPricingResponse,
-			onCartOfferAppliedChanged = p0.onCartOfferAppliedChanged
+		var8 = useCartPricingModule({
+			product = p1.product,
+			purchaseModalType = p1.purchaseModalType,
+			cartPricingResponse = p1.cartPricingResponse,
+			onCartOfferAppliedChanged = p1.onCartOfferAppliedChanged
 		})
 		local _ = 0
-		var24 = p0.buttons.isDisabled or (if p0.isCartPricingLoading ~= true then var21 == true else true)
-		local priceWithoutOffersDiscounts = var22.priceWithoutOffersDiscounts
-		var25 = var24 or (priceWithoutOffersDiscounts ~= nil and p0.robuxBalanceAmount < priceWithoutOffersDiscounts)
-		var23 = if var22.showCartOfferUi then #var22.cartPricingOffers else 0
+		var10 = p1.buttons.isDisabled or (if p1.isCartPricingLoading ~= true then var7 == true else true)
+		local priceWithoutOffersDiscounts = var8.priceWithoutOffersDiscounts
+		var11 = var10 or (priceWithoutOffersDiscounts ~= nil and p1.robuxBalanceAmount < priceWithoutOffersDiscounts)
+		var9 = if var8.showCartOfferUi then #var8.cartPricingOffers else 0
 	end
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), unifiedPurchaseModalTypeEnumModule (copy), var20 (ref), var15 (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy)
-		local purchaseModalType = p0.purchaseModalType
+		-- upvalues: p1 (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), unifiedPurchaseModalTypeEnumModule (copy), var6 (ref), var1 (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy)
+		local purchaseModalType = p1.purchaseModalType
 		
 		if fFlagEnableUnifiedPurchaseFlowForDevSubs and purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then
-			var20(var15.GetSubscription)
+			var6(var1.GetSubscription)
 			
 			return
 		elseif purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then
 			if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then
-				var20(var15.BuyAvatar)
+				var6(var1.BuyAvatar)
 				
 				return
 			end
-			var20(var15.BuyItems)
+			var6(var1.BuyItems)
 			
 			return
 		elseif purchaseModalType == unifiedPurchaseModalTypeEnumModule.Experience then
-			var20(var15.BuyExperience)
+			var6(var1.BuyExperience)
 			
 			return
 		elseif fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then
-			var20(var15.BuyItemV2)
+			var6(var1.BuyItemV2)
 			
 			return
 		end
-		var20(var15.BuyItem)
-	end, { p0.purchaseModalType })
-	local var26, var27 = useFocusNavigationRefsModule(p0.buttons.cancelActivated, p0.onBuyItemButtonMounted)
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), p0 (ref)
-		if var17 and p0.setPostPurchaseActions then
-			p0.setPostPurchaseActions(var17)
+		var6(var1.BuyItem)
+	end, { p1.purchaseModalType })
+	local var12, var13 = useFocusNavigationRefsModule(p1.buttons.cancelActivated, p1.onBuyItemButtonMounted)
+	local var14 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), p1 (ref)
+		if var3 and p1.setPostPurchaseActions then
+			p1.setPostPurchaseActions(var3)
 		end
-		p0.buttons.buyItemActivated()
-	end, { p0.buttons.buyItemActivated, var17 })
+		p1.buttons.buyItemActivated()
+	end, { p1.buttons.buyItemActivated, var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), p0 (ref)
-		var18(p0.postPurchaseActions or {})
-	end, { p0.postPurchaseActions })
-	local var29 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p0.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then var15.Subscribe else var15.Buy
-	local var30 = reactModule.useMemo(function()
-		-- upvalues: var17 (ref), reactModule (copy), checkbox (copy), var21 (ref), var18 (ref)
+		-- upvalues: var4 (ref), p1 (ref)
+		var4(p1.postPurchaseActions or {})
+	end, { p1.postPurchaseActions })
+	local var15 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then var1.Subscribe else var1.Buy
+	local var16 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), reactModule (copy), checkbox (copy), var7 (ref), var4 (ref)
 		local t = {}
 		
-		for i, v in ipairs(var17 or {}) do
+		for i, v in ipairs(var3 or {}) do
 			t["PostPurchaseActionCheckBox_" .. tostring(i)] = reactModule.createElement(checkbox, {
 				size = "XSmall",
 				LayoutOrder = i,
 				label = v.label,
-				isChecked = not var21 and v.isActionSelected,
-				isDisabled = var21,
+				isChecked = not var7 and v.isActionSelected,
+				isDisabled = var7,
 				onActivated = function()
-					-- upvalues: var18 (copy), i (ref), v (ref)
-					var18(function(p1)
+					-- upvalues: var4 (copy), i (ref), v (ref)
+					var4(function(p2)
 						-- upvalues: i (copy), v (copy)
-						local cloned = table.clone(p1)
+						local cloned = table.clone(p2)
 						cloned[i] = {
 							label = v.label,
 							isActionSelected = not v.isActionSelected,
@@ -144,24 +144,24 @@ local function UnifiedProductPurchaseModal(p0)
 			})
 		end
 		return t
-	end, { var17, var21 })
-	local var31 = nil
+	end, { var3, var7 })
+	local var17 = nil
 	
 	if fFlagEnableOffersOnInExperienceSurface then
-		var30 = reactModule.useMemo(function()
-			-- upvalues: var17 (ref), reactModule (copy), checkbox (copy), var23 (write), var24 (write), var18 (ref)
+		var16 = reactModule.useMemo(function()
+			-- upvalues: var3 (ref), reactModule (copy), checkbox (copy), var9 (write), var10 (write), var4 (ref)
 			local t = {}
 			
-			for i, v in var17 do
+			for i, v in var3 do
 				t[v.actionKey] = reactModule.createElement(checkbox, {
 					size = "XSmall",
-					LayoutOrder = var23 + i,
+					LayoutOrder = var9 + i,
 					label = v.label,
 					isChecked = v.isActionSelected,
-					isDisabled = var24,
+					isDisabled = var10,
 					onActivated = function()
-						-- upvalues: var18 (copy), i (ref), v (ref)
-						var18(function(p2)
+						-- upvalues: var4 (copy), i (ref), v (ref)
+						var4(function(p2)
 							-- upvalues: i (copy), v (copy)
 							local cloned = table.clone(p2)
 							cloned[i] = {
@@ -176,67 +176,67 @@ local function UnifiedProductPurchaseModal(p0)
 				})
 			end
 			return t
-		end, { var17, var23, var24 })
-		local cloned = table.clone(buildCartPricingOfferCheckboxesModule({ cartPricing = var22, isDisabled = var25 }))
+		end, { var3, var9, var10 })
+		local cloned = table.clone(buildCartPricingOfferCheckboxesModule({ cartPricing = var8, isDisabled = var11 }))
 		
-		for i, v in pairs(var30) do
+		for i, v in pairs(var16) do
 			cloned[i] = v
 		end
-		var31 = reactModule.createElement(view, {
+		var17 = reactModule.createElement(view, {
 			tag = "col gap-medium auto-y size-full-0 align-x-start align-y-start",
 			LayoutOrder = 2
 		}, cloned)
 	end
-	local var33 = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then p0.product.itemPrice else nil
-	local var34 = if var33 then var33.priceInRobux else p0.product.itemRobuxCost
-	local var35 = if fFlagEnableOffersOnInExperienceSurface then reactModule.createElement(cartPricingProductDetailsModule, {
-		cartPricing = var22,
-		purchaseModalType = p0.purchaseModalType,
-		priceSuffix = var16,
-		isCartPricingLoading = p0.isCartPricingLoading
+	local var18 = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then p1.product.itemPrice else nil
+	local var19 = if var18 then var18.priceInRobux else p1.product.itemRobuxCost
+	local var20 = if fFlagEnableOffersOnInExperienceSurface then reactModule.createElement(cartPricingProductDetailsModule, {
+		cartPricing = var8,
+		purchaseModalType = p1.purchaseModalType,
+		priceSuffix = var2,
+		isCartPricingLoading = p1.isCartPricingLoading
 	}) else reactModule.createElement(productDetailsContainerModule, {
-		purchaseModalType = p0.purchaseModalType,
-		product = p0.product,
-		priceSuffix = var16
+		purchaseModalType = p1.purchaseModalType,
+		product = p1.product,
+		priceSuffix = var2
 	})
 	
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
-		onClose = p0.buttons.cancelActivated,
-		ref = if var21 then nil else var26
+		onClose = p1.buttons.cancelActivated,
+		ref = if var7 then nil else var12
 	}, {
 		Header = reactModule.createElement(sheet.Header, {
-			hasCloseAffordance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then if p0.hideUserRobuxBalance then true else nil else nil
+			hasCloseAffordance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then if p1.hideUserRobuxBalance then true else nil else nil
 		}, {
 			ModalHeader = reactModule.createElement(unifiedPurchaseModalHeaderModule, {
-				titleText = var19,
-				robuxBalanceAmount = p0.robuxBalanceAmount,
-				hideUserRobuxBalance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then p0.hideUserRobuxBalance else nil
+				titleText = var5,
+				robuxBalanceAmount = p1.robuxBalanceAmount,
+				hideUserRobuxBalance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then p1.hideUserRobuxBalance else nil
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
 			SheetContentContainer = reactModule.createElement(view, {
 				tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center"
 			}, {
-				ProductDetailsContainer = var35 or reactModule.createElement(view, {
+				ProductDetailsContainer = var20 or reactModule.createElement(view, {
 					tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center",
 					LayoutOrder = 1
 				}, {
-					ProductDetails = if p0.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then reactModule.createElement(priceSummaryModule, { amount = var34, itemPrice = var33 }) else reactModule.createElement(unifiedProductDetailsModule, {
+					ProductDetails = if p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then reactModule.createElement(priceSummaryModule, { amount = var19, itemPrice = var18 }) else reactModule.createElement(unifiedProductDetailsModule, {
 						isPortrait = false,
-						itemIcon = p0.product.itemIcon,
-						itemName = p0.product.itemName,
-						itemRobuxCost = var34,
-						itemPrice = var33,
-						itemDisplayPrice = if fFlagEnableUnifiedPurchaseFlowForDevSubs then p0.product.itemDisplayPrice else nil,
-						priceSuffix = var16,
-						model = p0.product.model
+						itemIcon = p1.product.itemIcon,
+						itemName = p1.product.itemName,
+						itemRobuxCost = var19,
+						itemPrice = var18,
+						itemDisplayPrice = if fFlagEnableUnifiedPurchaseFlowForDevSubs then p1.product.itemDisplayPrice else nil,
+						priceSuffix = var2,
+						model = p1.product.model
 					})
 				}),
-				PostPurchaseActions = if fFlagEnableOffersOnInExperienceSurface then var31 elseif next(var30) then reactModule.createElement(view, {
+				PostPurchaseActions = if fFlagEnableOffersOnInExperienceSurface then var17 elseif next(var16) then reactModule.createElement(view, {
 					LayoutOrder = 3,
 					tag = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then "col gap-medium auto-y size-full-0 align-x-start align-y-start padding-top-small" else "col gap-medium auto-y size-full-0 align-x-start align-y-start"
-				}, { var30 }) else nil
+				}, { var16 }) else nil
 			})
 		}),
 		Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 3 }, {
@@ -246,39 +246,39 @@ local function UnifiedProductPurchaseModal(p0)
 			}, {
 				BuyButton = reactModule.createElement(button, {
 					LayoutOrder = 1,
-					text = var29,
-					onActivated = var28,
-					inputDelay = if p0.buttons.buyItemEnableInputDelayed and not var21 then 2.5 else 0,
-					isDisabled = if fFlagEnableOffersOnInExperienceSurface then var24 else var21,
-					ref = var27,
+					text = var15,
+					onActivated = var14,
+					inputDelay = if p1.buttons.buyItemEnableInputDelayed and not var7 then 2.5 else 0,
+					isDisabled = if fFlagEnableOffersOnInExperienceSurface then var10 else var7,
+					ref = var13,
 					fillBehavior = fillBehavior.Fill,
 					variant = buttonVariant.Emphasis
 				}),
-				BlackbirdUpsellBanner = if p0.BlackbirdUpsellBannerProductInfo and p0.onBlackbirdUpsellActivated then reactModule.createElement(blackbirdUpsellBanner, {
+				BlackbirdUpsellBanner = if p1.BlackbirdUpsellBannerProductInfo and p1.onBlackbirdUpsellActivated then reactModule.createElement(blackbirdUpsellBanner, {
 					LayoutOrder = 2,
-					productInfo = p0.BlackbirdUpsellBannerProductInfo,
-					onActivated = p0.onBlackbirdUpsellActivated
+					productInfo = p1.BlackbirdUpsellBannerProductInfo,
+					onActivated = p1.onBlackbirdUpsellActivated
 				}) else nil,
-				TestPurchaseDisclaimer = if p0.isTestPurchase then reactModule.createElement(text, {
+				TestPurchaseDisclaimer = if p1.isTestPurchase then reactModule.createElement(text, {
 					tag = "auto-y size-full-0 text-caption-small text-align-x-center text-wrap wrap",
 					LayoutOrder = 3,
-					Text = var15.TestPurchaseDisclaimer
+					Text = var1.TestPurchaseDisclaimer
 				}) else nil,
-				SubscribeTerms = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p0.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then reactModule.createElement(text, {
+				SubscribeTerms = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then reactModule.createElement(text, {
 					LayoutOrder = 4,
 					tag = "wrap size-full-0 auto-y text-caption-small text-wrap text-align-x-left",
-					Text = string.gsub(string.gsub(var15.SubscribeTermsAgreement or "", "<a.->(.-)</a>", "%1"), "<.->", "")
+					Text = string.gsub(string.gsub(var1.SubscribeTermsAgreement or "", "<a.->(.-)</a>", "%1"), "<.->", "")
 				}) else nil
 			})
 		})
 	})
 end
 
-return function(p3)
+return function(p2)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), UnifiedProductPurchaseModal (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		ProductPurchaseModal = reactModule.createElement(UnifiedProductPurchaseModal, p3)
+		ProductPurchaseModal = reactModule.createElement(UnifiedProductPurchaseModal, p2)
 	})
 end

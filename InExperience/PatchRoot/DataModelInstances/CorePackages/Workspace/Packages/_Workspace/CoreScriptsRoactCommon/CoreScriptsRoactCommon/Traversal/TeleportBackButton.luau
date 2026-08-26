@@ -11,25 +11,25 @@ local iconSize = foundationModule.Enums.IconSize
 local useTeleportBackModule = require(coreScriptsRoactCommon.Hooks.useTeleportBack)
 local traversalTelemetryModule = require(script.Parent.TraversalTelemetry)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: teleportService (ref), useTeleportBackModule (ref), foundationModule (ref), reactModule (ref), view (ref), traversalTelemetryModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local var6, var7 = teleportService:GetThirdPartyTeleportInfo(false)
-	local var8 = useTeleportBackModule(var7)
-	local var9 = foundationModule.Hooks.useTokens()
-	local foreground = var9.Color.ActionStandard.Foreground
+	local var1, var2 = teleportService:GetThirdPartyTeleportInfo(false)
+	local var3 = useTeleportBackModule(var2)
+	local var4 = foundationModule.Hooks.useTokens()
+	local foreground = var4.Color.ActionStandard.Foreground
 	
 	return reactModule.createElement(view, {
 		tag = "padding-left-small padding-right-medium align-x-center align-y-center auto-x bg-over-media-0 radius-circle row size-0-1100",
 		onActivated = function()
-			-- upvalues: traversalTelemetryModule (copy), var6 (ref), var8 (ref)
+			-- upvalues: traversalTelemetryModule (copy), var1 (ref), var3 (ref)
 			traversalTelemetryModule.sendBackButtonActionEvent({
 				integration_id = "back_button",
 				event_type = "click",
-				destination_universe_id = var6
+				destination_universe_id = var1
 			})
-			var8()
+			var3()
 		end,
-		ref = p1
+		ref = p2
 	}, {
 		TeleportBackIcon = reactModule.createElement(icon, {
 			LayoutOrder = 1,
@@ -37,12 +37,12 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 			style = foreground,
 			size = iconSize.Medium
 		}),
-		TeleportText = p0.text and reactModule.createElement(text, {
+		TeleportText = p1.text and reactModule.createElement(text, {
 			tag = "auto-x size-0-full text-truncate-split text-label-medium",
 			LayoutOrder = 2,
-			Text = p0.text,
-			sizeConstraint = p0.textLimitWidth and {
-				MaxSize = Vector2.new(p0.textLimitWidth, var9.Size.Size_1100)
+			Text = p1.text,
+			sizeConstraint = p1.textLimitWidth and {
+				MaxSize = Vector2.new(p1.textLimitWidth, var4.Size.Size_1100)
 			},
 			textStyle = foreground
 		})

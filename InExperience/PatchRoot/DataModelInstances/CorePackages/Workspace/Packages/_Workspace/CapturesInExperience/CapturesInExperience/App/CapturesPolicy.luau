@@ -2,27 +2,27 @@
 local var1 = policyProviderModule.GetPolicyImplementations.MemStorageService("app-policy")
 local var2 = policyProviderModule.withGetPolicyImplementation(var1)
 
-function var2.Mapper(p0)
+function var2.Mapper(p1)
 	return {
 		eligibleForCapturesFeature = function()
-			-- upvalues: p0 (ref)
-			return p0.EligibleForCapturesFeature or false
+			-- upvalues: p1 (ref)
+			return p1.EligibleForCapturesFeature or false
 		end,
 		eligibleForVideoCapture = function()
-			-- upvalues: p0 (ref)
-			return p0.EligibleForVideoCapture or false
+			-- upvalues: p1 (ref)
+			return p1.EligibleForVideoCapture or false
 		end,
 		enableCapturesBulkManagement = function()
-			-- upvalues: p0 (ref)
-			return p0.EnableCapturesBulkManagement or false
+			-- upvalues: p1 (ref)
+			return p1.EnableCapturesBulkManagement or false
 		end,
 		enableShareCaptureCTA = function()
-			-- upvalues: p0 (ref)
-			return p0.EnableShareCaptureCTA or false
+			-- upvalues: p1 (ref)
+			return p1.EnableShareCaptureCTA or false
 		end,
 		hasVideoCaptureCapability = function()
-			-- upvalues: p0 (ref)
-			return p0.HasVideoCaptureCapability or false
+			-- upvalues: p1 (ref)
+			return p1.HasVideoCaptureCapability or false
 		end
 	}
 end

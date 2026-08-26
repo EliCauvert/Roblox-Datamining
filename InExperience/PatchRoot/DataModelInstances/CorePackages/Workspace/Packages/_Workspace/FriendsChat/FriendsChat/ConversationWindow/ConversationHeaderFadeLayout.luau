@@ -1,34 +1,34 @@
 ﻿local reactModule = require(script:FindFirstAncestor("FriendsChat").Parent.React)
 
 return {
-	getHeaderOverlapPadding = function(p0)
-		return p0:map(function(p1)
-			return UDim.new(0, -p1)
+	getHeaderOverlapPadding = function(p1)
+		return p1:map(function(p2)
+			return UDim.new(0, -p2)
 		end)
 	end,
-	getHeaderVisibleHeight = function(p2, p3)
+	getHeaderVisibleHeight = function(p1, p2)
 		-- upvalues: reactModule (ref)
-		if type(p3) == "number" then
-			local var1 = 1 - math.clamp(p3, 0, 1)
+		if type(p2) == "number" then
+			local var1 = 1 - math.clamp(p2, 0, 1)
 			
-			return p2:map(function(p4)
+			return p1:map(function(p3)
 				-- upvalues: var1 (ref)
-				return p4 * var1
+				return p3 * var1
 			end)
 		end
-		return if p3 == nil then p2 else reactModule.joinBindings({ height = p2, fade = p3 }):map(function(p5)
-			return p5.height * (1 - math.clamp(p5.fade, 0, 1))
+		return if p2 == nil then p1 else reactModule.joinBindings({ height = p1, fade = p2 }):map(function(p3)
+			return p3.height * (1 - math.clamp(p3.fade, 0, 1))
 		end)
 	end,
-	getContentTopPadding = function(p6, p7, p8)
+	getContentTopPadding = function(p1, p2, p3)
 		-- upvalues: reactModule (ref)
-		return reactModule.joinBindings({ height = p6, visibleHeight = p7, canvasY = p8 }):map(function(p9)
-			return p9.height - math.min(p9.height - p9.visibleHeight, math.max(p9.height - p9.canvasY, 0))
+		return reactModule.joinBindings({ height = p1, visibleHeight = p2, canvasY = p3 }):map(function(p4)
+			return p4.height - math.min(p4.height - p4.visibleHeight, math.max(p4.height - p4.canvasY, 0))
 		end)
 	end,
-	getHeaderInteractable = function(p10)
-		return if type(p10) == "number" then p10 < 1 else p10 == nil or p10:map(function(p11)
-			return p11 < 1
+	getHeaderInteractable = function(p1)
+		return if type(p1) == "number" then p1 < 1 else p1 == nil or p1:map(function(p2)
+			return p2 < 1
 		end)
 	end
 }

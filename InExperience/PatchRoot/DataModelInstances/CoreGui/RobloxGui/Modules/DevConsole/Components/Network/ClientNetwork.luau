@@ -3,8 +3,8 @@ local dataConsumerModule = require(script.Parent.Parent.Parent.Components.DataCo
 local networkViewModule = require(script.Parent.NetworkView)
 local clientNetwork = roactModule.Component:extend("ClientNetwork")
 
-function clientNetwork.init(p0, _)
-	p0.state = { targetNetworkData = p0.props.ClientNetworkData }
+function clientNetwork.init(p1, _)
+	p1.state = { targetNetworkData = p1.props.ClientNetworkData }
 end
 
 function clientNetwork.render(p1)

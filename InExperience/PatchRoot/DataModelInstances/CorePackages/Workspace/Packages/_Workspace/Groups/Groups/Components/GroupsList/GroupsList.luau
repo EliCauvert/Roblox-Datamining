@@ -25,19 +25,19 @@ local function renderSkeletons()
 	return t
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), frozen (ref), reactModule (ref), view (ref), renderSkeletons (ref), scrollView (ref), scrollBarVisibility (ref), groupsListSectionModule (ref), groupsListHeaderModule (ref), groupsListToolbarModule (ref), text (ref)
-	local var11 = useLocalization({
+	local var1 = useLocalization({
 		primaryHeading = textKeysModule.HeadingPrimary,
 		myGroupsHeading = textKeysModule.HeadingMyGroups,
 		loadFailure = textKeysModule.MessageLoadGroupListError,
 		notInGroups = textKeysModule.MessageNotInAnyGroups,
 		noResults = textKeysModule.MessageNoGroupsFound
 	})
-	local groupsList = p0.groupsList or frozen
-	local var13, var14 = reactModule.useState("")
-	local var15 = reactModule.useRef(nil)
-	local var16 = reactModule.useMemo(function()
+	local groupsList = p1.groupsList or frozen
+	local var2, var3 = reactModule.useState("")
+	local var4 = reactModule.useRef(nil)
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: groupsList (ref)
 		for i, v in ipairs(groupsList) do
 			if v.isPrimary then
@@ -46,37 +46,37 @@ return function(p0)
 		end
 		return nil
 	end, { groupsList })
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var16 (ref), groupsList (ref)
-		if not var16 then
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref), groupsList (ref)
+		if not var5 then
 			return groupsList
 		end
 		local t = {}
 		
 		for i, v in ipairs(groupsList) do
-			if v ~= var16 then
+			if v ~= var5 then
 				table.insert(t, v)
 			end
 		end
 		return t
-	end, { groupsList, var16 })
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var16 (ref)
-		return if var16 then { var16 } else {}
-	end, { var16 })
+	end, { groupsList, var5 })
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref)
+		return if var5 then { var5 } else {}
+	end, { var5 })
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var15 (ref)
-		if var13 ~= "" and var15.current then
-			var15.current.CanvasPosition = Vector2.new(0, 0)
+		-- upvalues: var2 (ref), var4 (ref)
+		if var2 ~= "" and var4.current then
+			var4.current.CanvasPosition = Vector2.new(0, 0)
 		end
-	end, { var13 })
-	local var19 = var13 ~= ""
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: var19 (ref), var13 (ref), groupsList (ref)
-		if not var19 then
+	end, { var2 })
+	local var8 = var2 ~= ""
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: var8 (ref), var2 (ref), groupsList (ref)
+		if not var8 then
 			return nil
 		end
-		local lowerText = string.lower(var13)
+		local lowerText = string.lower(var2)
 		local t = {}
 		
 		for i, v in ipairs(groupsList) do
@@ -85,19 +85,19 @@ return function(p0)
 			end
 		end
 		return t
-	end, { groupsList, var13 })
-	local var21 = var19 and (var20 ~= nil and next(var20) == nil)
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), var11 (ref), groupsList (ref), var21 (ref)
-		return if p0.isLoading or not p0.groupsList then nil elseif p0.loadFailure then var11.loadFailure elseif #groupsList == 0 then var11.notInGroups elseif var21 then var11.noResults else nil
+	end, { groupsList, var2 })
+	local var10 = var8 and (var9 ~= nil and next(var9) == nil)
+	local var11 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), var1 (ref), groupsList (ref), var10 (ref)
+		return if p1.isLoading or not p1.groupsList then nil elseif p1.loadFailure then var1.loadFailure elseif #groupsList == 0 then var1.notInGroups elseif var10 then var1.noResults else nil
 	end, {
-		p0.isLoading, p0.groupsList, p0.loadFailure, var11, groupsList, var21
+		p1.isLoading, p1.groupsList, p1.loadFailure, var1, groupsList, var10
 	})
-	local var23 = if p0.isLoading and #groupsList == 0 then reactModule.createElement(view, {
+	local var12 = if p1.isLoading and #groupsList == 0 then reactModule.createElement(view, {
 		tag = "col padding-small gap-small",
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
-	}, renderSkeletons()) elseif if #var18 <= 0 then #var17 > 0 else true then reactModule.createElement(scrollView, {
+	}, renderSkeletons()) elseif if #var7 <= 0 then #var6 > 0 else true then reactModule.createElement(scrollView, {
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			CanvasSize = UDim2.new(1, 0, 0, 0),
@@ -105,7 +105,7 @@ return function(p0)
 			scrollBarVisibility = scrollBarVisibility.Auto,
 			VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 		},
-		scrollingFrameRef = var15,
+		scrollingFrameRef = var4,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
 		ListWrapper = reactModule.createElement(view, {
@@ -117,41 +117,41 @@ return function(p0)
 				layoutOrder = 1,
 				showRank = true,
 				showMemberCount = true,
-				heading = var11.primaryHeading,
-				groups = var18,
-				visibleIds = if var19 then var20 else nil
+				heading = var1.primaryHeading,
+				groups = var7,
+				visibleIds = if var8 then var9 else nil
 			}),
 			OtherGroupsSection = reactModule.createElement(groupsListSectionModule, {
 				layoutOrder = 2,
 				showRank = true,
 				showMemberCount = true,
-				heading = if #var18 > 0 then var11.myGroupsHeading else nil,
-				groups = var17,
-				visibleIds = if var19 then var20 else nil
+				heading = if #var7 > 0 then var1.myGroupsHeading else nil,
+				groups = var6,
+				visibleIds = if var8 then var9 else nil
 			})
 		})
 	}) else nil
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-xlarge",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
 		Header = reactModule.createElement(groupsListHeaderModule, { layoutOrder = 1 }),
 		Toolbar = reactModule.createElement(groupsListToolbarModule, {
 			layoutOrder = 2,
-			canCreateGroup = p0.canCreateGroup,
-			onSearchTextChanged = var14
+			canCreateGroup = p1.canCreateGroup,
+			onSearchTextChanged = var3
 		}),
-		Disclaimer = var22 and reactModule.createElement(text, {
+		Disclaimer = var11 and reactModule.createElement(text, {
 			LayoutOrder = 3,
 			tag = "content-muted text-align-x-left text-body-medium",
-			Text = var22
+			Text = var11
 		}) or nil,
-		List = var23 and reactModule.createElement(view, {
+		List = var12 and reactModule.createElement(view, {
 			LayoutOrder = 4,
 			tag = "fill",
 			Size = UDim2.new(1, 0, 1, 0)
-		}, { ListContent = var23 }) or nil
+		}, { ListContent = var12 }) or nil
 	})
 end

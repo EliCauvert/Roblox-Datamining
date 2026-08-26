@@ -10,17 +10,17 @@ local otterModule = require(parent_1.Otter)
 local name = roactModule.Component:extend(script.Name)
 local t = { dampingRatio = 1, frequency = 1.6 }
 
-function name.init(p0)
+function name.init(p1)
 	-- upvalues: roactModule (ref), otterModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), t (ref)
-	p0.state = { shouldRenderChildren = p0.props.shouldShow }
-	local var6, var7 = roactModule.createBinding(1)
-	p0.motor = otterModule.createSingleMotor(1)
-	p0.motor:start()
-	p0.motor:onStep(var7)
-	p0.animationProgress = var6
-	p0.motor:onComplete(function()
-		-- upvalues: p0 (ref)
-		local props = p0.props
+	p1.state = { shouldRenderChildren = p1.props.shouldShow }
+	local var1, var2 = roactModule.createBinding(1)
+	p1.motor = otterModule.createSingleMotor(1)
+	p1.motor:start()
+	p1.motor:onStep(var2)
+	p1.animationProgress = var1
+	p1.motor:onComplete(function()
+		-- upvalues: p1 (ref)
+		local props = p1.props
 		
 		if props.shouldShow then
 			if props.onShown == nil then
@@ -31,21 +31,21 @@ function name.init(p0)
 				return
 			end
 		else
-			p0:setState({ shouldRenderChildren = false })
+			p1:setState({ shouldRenderChildren = false })
 			
 			if props.onHidden ~= nil then
 				props.onHidden()
 			end
 		end
 	end)
-	local var8 = if p0.props.shouldShow then 0 else 1
+	local var3 = if p1.props.shouldShow then 0 else 1
 	
-	if fFlagEnableUnifiedProductPurchaseFlow and p0.props.skipAnimation then
-		p0.motor:setGoal(otterModule.instant(var8))
+	if fFlagEnableUnifiedProductPurchaseFlow and p1.props.skipAnimation then
+		p1.motor:setGoal(otterModule.instant(var3))
 		
 		return
 	end
-	p0.motor:setGoal(otterModule.spring(var8, t))
+	p1.motor:setGoal(otterModule.spring(var3, t))
 end
 
 function name.didUpdate(p1, p2, _)
@@ -56,45 +56,45 @@ function name.didUpdate(p1, p2, _)
 		if props.shouldShow then
 			p1:setState({ shouldRenderChildren = props.shouldShow })
 		end
-		local var9 = if p1.props.shouldShow then 0 else 1
+		local var1 = if p1.props.shouldShow then 0 else 1
 		
 		if fFlagEnableUnifiedProductPurchaseFlow and p1.props.skipAnimation then
-			p1.motor:setGoal(otterModule.instant(var9))
+			p1.motor:setGoal(otterModule.instant(var1))
 			
 			return
 		end
-		p1.motor:setGoal(otterModule.spring(var9, t))
+		p1.motor:setGoal(otterModule.spring(var1, t))
 	end
 end
 
-function name.willUnmount(p3)
-	p3.motor:destroy()
+function name.willUnmount(p1)
+	p1.motor:destroy()
 end
 
-function name.renderWithoutLocale(p4)
+function name.renderWithoutLocale(p1)
 	-- upvalues: roactModule (ref)
-	local props = p4.props
+	local props = p1.props
 	
 	return if props.shouldAnimate then roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		Position = p4.animationProgress:map(function(p5)
+		Position = p1.animationProgress:map(function(p2)
 			-- upvalues: props (ref)
-			return if props.animateDown then UDim2.new(0, 0, -1 * p5, 0) else UDim2.new(0, 0, 1 * p5, 0)
+			return if props.animateDown then UDim2.new(0, 0, -1 * p2, 0) else UDim2.new(0, 0, 1 * p2, 0)
 		end),
 		ZIndex = props.ZIndex
-	}, p4.state.shouldRenderChildren and props.renderChildren() or nil) elseif props.shouldShow then props.renderChildren() else nil
+	}, p1.state.shouldRenderChildren and props.renderChildren() or nil) elseif props.shouldShow then props.renderChildren() else nil
 end
 
-function name.render(p6)
+function name.render(p1)
 	-- upvalues: roactModule (ref), localeProviderModule (ref), localizationService (ref), localizationProvider (ref), localization (ref)
 	return roactModule.createElement(localeProviderModule, {
 		locale = localizationService and localizationService.RobloxLocaleId
 	}, {
 		roactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
-		}, { p6:renderWithoutLocale() })
+		}, { p1:renderWithoutLocale() })
 	})
 end
 

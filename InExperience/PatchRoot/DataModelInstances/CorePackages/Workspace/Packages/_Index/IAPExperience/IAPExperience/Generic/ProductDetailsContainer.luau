@@ -11,10 +11,10 @@ local _ = require(IAPExperience.ProductPurchase.PricingTypes)
 local _ = require(IAPExperience.Enums.VirtualItemBadgeType)
 local fFlagPurchasePromptFetchCartPricing = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 
-local function _(p0)
-	if p0 then
-		local basePriceInRobux = p0.basePriceInRobux
-		local priceInRobux = p0.priceInRobux
+local function _(p1)
+	if p1 then
+		local basePriceInRobux = p1.basePriceInRobux
+		local priceInRobux = p1.priceInRobux
 		
 		return typeof(basePriceInRobux) == "number" and (typeof(priceInRobux) == "number" and priceInRobux < basePriceInRobux)
 	end
@@ -23,17 +23,17 @@ end
 
 return function(p1)
 	-- upvalues: fFlagPurchasePromptFetchCartPricing (ref), multiItemPriceShowsDiscountAccordionModule (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), view (ref), unifiedProductDetailsModule (ref), discountSummaryModule (ref), priceSummaryV2Module (ref)
-	local var8
+	local var1
 	local itemPrice = p1.product and p1.product.itemPrice
 	
 	if itemPrice then
 		local basePriceInRobux = itemPrice.basePriceInRobux
 		local priceInRobux = itemPrice.priceInRobux
-		var8 = typeof(basePriceInRobux) == "number" and (typeof(priceInRobux) == "number" and priceInRobux < basePriceInRobux)
+		var1 = typeof(basePriceInRobux) == "number" and (typeof(priceInRobux) == "number" and priceInRobux < basePriceInRobux)
 	else
-		var8 = false
+		var1 = false
 	end
-	local var9 = if fFlagPurchasePromptFetchCartPricing then multiItemPriceShowsDiscountAccordionModule(itemPrice) else nil
+	local var2 = if fFlagPurchasePromptFetchCartPricing then multiItemPriceShowsDiscountAccordionModule(itemPrice) else nil
 	local uDim2 = UDim2.new(1, 0, 0, 100)
 	
 	if p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then
@@ -64,7 +64,7 @@ return function(p1)
 					savingsSummary = p1.savingsSummary
 				})
 			})
-		}) elseif var8 then reactModule.createElement(view, {
+		}) elseif var1 then reactModule.createElement(view, {
 			tag = {
 				["col align-x-center align-y-top size-full-0"] = fFlagPurchasePromptFetchCartPricing,
 				["col shrink-0 size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing
@@ -82,7 +82,7 @@ return function(p1)
 			subtotalItemCount = if fFlagPurchasePromptFetchCartPricing then p1.subtotalItemCount else nil
 		})
 	end
-	local var11 = if itemPrice and (not fFlagPurchasePromptFetchCartPricing or var9) then reactModule.createElement(view, {
+	local var3 = if itemPrice and (not fFlagPurchasePromptFetchCartPricing or var2) then reactModule.createElement(view, {
 		LayoutOrder = 2,
 		tag = {
 			["size-full-0 auto-y padding-xxsmall"] = fFlagPurchasePromptFetchCartPricing,
@@ -96,16 +96,16 @@ return function(p1)
 		})
 	}) else nil
 	
-	if not var8 then
-		var11 = nil
+	if not var1 then
+		var3 = nil
 	end
 	return reactModule.createElement(view, {
 		tag = {
 			["col align-x-center align-y-top gap-medium size-full-0 auto-y"] = fFlagPurchasePromptFetchCartPricing,
-			["col gap-medium shrink-0 auto-y size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing and var8,
-			["col gap-medium auto-y size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing and not var8
+			["col gap-medium shrink-0 auto-y size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing and var1,
+			["col gap-medium auto-y size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing and not var1
 		},
-		Size = if if fFlagPurchasePromptFetchCartPricing then var9 else var8 then uDim2 else nil
+		Size = if if fFlagPurchasePromptFetchCartPricing then var2 else var1 then uDim2 else nil
 	}, {
 		Details = reactModule.createElement(unifiedProductDetailsModule, {
 			layoutOrder = 1,
@@ -121,6 +121,6 @@ return function(p1)
 			isLoading = p1.isLoading,
 			priceSuffix = p1.priceSuffix
 		}),
-		DiscountSummary = var11
+		DiscountSummary = var3
 	})
 end

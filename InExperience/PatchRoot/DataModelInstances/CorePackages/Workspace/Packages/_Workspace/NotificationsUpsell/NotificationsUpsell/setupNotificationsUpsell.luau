@@ -6,50 +6,50 @@ local fFlagLuaAppDefaultHttpRetry = require(parent.SharedFlags).FFlagLuaAppDefau
 local sendEventDeferred = require(parent.NotificationsCommon).sendEventDeferred
 local modalEventConstantsModule = require(script.Parent.Analytics.ModalEventConstants)
 local httpRequestModule = require(parent.HttpRequest)
-local var4 = httpRequestModule.config({
+local var1 = httpRequestModule.config({
 	requestFunction = httpRequestModule.requestFunctions.HttpRbxApi,
 	maxRetryCount = if fFlagLuaAppDefaultHttpRetry then game:DefineFastInt("SetupNotificationsUpsellHttpRetryCount", 4) else nil
 })
 local notificationsUpsellDisableBackgroundDismiss = game:DefineFastFlag("NotificationsUpsellDisableBackgroundDismiss", false)
 
-local function openModal(p0)
-	-- upvalues: sendEventDeferred (ref), modalEventConstantsModule (ref), notificationModalsManagerModule (ref), getGameNameAndDescription (ref), var4 (ref), notificationsUpsellModalModule (ref), notificationsUpsellDisableBackgroundDismiss (ref)
-	local var7 = function()
-		-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (ref)
+local function openModal(p1)
+	-- upvalues: sendEventDeferred (ref), modalEventConstantsModule (ref), notificationModalsManagerModule (ref), getGameNameAndDescription (ref), var1 (ref), notificationsUpsellModalModule (ref), notificationsUpsellDisableBackgroundDismiss (ref)
+	local var2 = function()
+		-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p1 (ref)
 		game:GetService("ExperienceNotificationService"):InvokeOptInPromptClosed()
 		sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 			[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Closed,
-			[modalEventConstantsModule.UniverseId] = p0
+			[modalEventConstantsModule.UniverseId] = p1
 		})
 	end
 	
-	local var8 = function()
+	local var3 = function()
 		-- upvalues: notificationModalsManagerModule (copy)
 		notificationModalsManagerModule.CloseModal("UENUpsell")
 	end
 	
-	local var9 = false
-	local var10 = nil
+	local var4 = false
+	local var5 = nil
 	
-	if p0 ~= "0" and p0 ~= "" then
-		local var11, var12 = getGameNameAndDescription(var4, p0):andThen(function(p1)
-			return p1 and p1.Name
+	if p1 ~= "0" and p1 ~= "" then
+		local var6, var7 = getGameNameAndDescription(var1, p1):andThen(function(p2)
+			return p2 and p2.Name
 		end, function()
 			return nil
 		end):await()
-		var9 = var11
-		var10 = var12
+		var4 = var6
+		var5 = var7
 	end
 	sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 		[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Opened,
-		[modalEventConstantsModule.UniverseId] = p0
+		[modalEventConstantsModule.UniverseId] = p1
 	})
 	notificationModalsManagerModule.OpenModal("UENUpsell", notificationsUpsellModalModule, {
-		CloseCallback = var7,
+		CloseCallback = var2,
 		Props = {
-			CloseModal = var8,
-			ExperienceId = p0,
-			ExperienceName = if var9 then var10 else nil
+			CloseModal = var3,
+			ExperienceId = p1,
+			ExperienceName = if var4 then var5 else nil
 		},
 		DisableBackgroundDismiss = if notificationsUpsellDisableBackgroundDismiss then true else nil
 	})

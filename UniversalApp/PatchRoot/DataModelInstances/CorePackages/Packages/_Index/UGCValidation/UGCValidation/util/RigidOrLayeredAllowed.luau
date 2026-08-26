@@ -3,11 +3,11 @@ local constantsModule = require(parent.Constants)
 local getFStringUGCLCAllowedAssetTypeIdsModule = require(parent.flags.getFStringUGCLCAllowedAssetTypeIds)
 
 return {
-	isRigidAccessoryAllowed = function(p0)
+	isRigidAccessoryAllowed = function(p1)
 		-- upvalues: constantsModule (ref)
-		local var2 = constantsModule.ASSET_TYPE_INFO[p0]
+		local var1 = constantsModule.ASSET_TYPE_INFO[p1]
 		
-		return if var2 == nil then false else var2.rigidAllowed == true
+		return if var1 == nil then false else var1.rigidAllowed == true
 	end,
 	isLayeredClothingAllowed = function(p1)
 		-- upvalues: getFStringUGCLCAllowedAssetTypeIdsModule (ref)

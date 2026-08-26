@@ -2,127 +2,127 @@
 local reactModule = require(parent.React)
 local useFocusGuiObject = require(parent.ReactFocusNavigation).useFocusGuiObject
 local t = {
-	registered = function(p0, p1)
-		local name = p0[p1.name] or {}
+	registered = function(p1, p2)
+		local name = p1[p2.name] or {}
 		
 		for i, v in name do
-			if v == p1.guiObject then
-				return p0
+			if v == p2.guiObject then
+				return p1
 			end
 		end
-		local cloned = table.clone(p0)
+		local cloned = table.clone(p1)
 		local cloned_1 = table.clone(name)
-		table.insert(cloned_1, p1.guiObject)
-		cloned[p1.name] = cloned_1
+		table.insert(cloned_1, p2.guiObject)
+		cloned[p2.name] = cloned_1
 		
 		return cloned
 	end,
-	deRegistered = function(p2, p3)
-		local name = p2[p3.name]
+	deRegistered = function(p3, p4)
+		local name = p3[p4.name]
 		
 		if not name or #name == 0 then
-			return p2
+			return p3
 		end
 		local t = {}
 		
 		for i, v in name do
-			if v ~= p3.guiObject then
+			if v ~= p4.guiObject then
 				table.insert(t, v)
 			end
 		end
-		local cloned = table.clone(p2)
+		local cloned = table.clone(p3)
 		
 		if #t == 0 then
-			cloned[p3.name] = nil
+			cloned[p4.name] = nil
 			
 			return cloned
 		end
-		cloned[p3.name] = t
+		cloned[p4.name] = t
 		
 		return cloned
 	end
 }
 
-local function registryReducer(p4, p5)
+local function registryReducer(p5, p6)
 	-- upvalues: t (ref)
-	local type = t[p5.type]
+	local type = t[p6.type]
 	
 	if type then
-		return type(p4, p5.payload)
+		return type(p5, p6.payload)
 	end
 	error("Unknown action: " .. p5.type)
 end
 
-local var3 = reactModule.createContext(nil)
+local var1 = reactModule.createContext(nil)
 
 return {
-	Provider = function(p6)
-		-- upvalues: reactModule (ref), registryReducer (ref), var3 (ref)
-		local var9, var10 = reactModule.useReducer(registryReducer, {})
+	Provider = function(p5)
+		-- upvalues: reactModule (ref), registryReducer (ref), var1 (ref)
+		local var2, var3 = reactModule.useReducer(registryReducer, {})
 		
-		return reactModule.createElement(var3.Provider, { value = { state = var9, dispatch = var10 } }, p6.children)
+		return reactModule.createElement(var1.Provider, { value = { state = var2, dispatch = var3 } }, p5.children)
 	end,
-	registryContext = var3,
+	registryContext = var1,
 	useRegisterFocusNavigableSurface = function()
-		-- upvalues: reactModule (ref), var3 (ref)
-		local var11 = reactModule.useContext(var3)
-		local var12 = if var11 then var11.dispatch else nil
+		-- upvalues: reactModule (ref), var1 (ref)
+		local var2 = reactModule.useContext(var1)
+		local var3 = if var2 then var2.dispatch else nil
 		
-		return reactModule.useCallback(function(p7, p8)
-			-- upvalues: var12 (ref)
-			if var12 then
-				var12({
+		return reactModule.useCallback(function(p5, p6)
+			-- upvalues: var3 (ref)
+			if var3 then
+				var3({
 					type = "registered",
-					payload = { name = p7, guiObject = p8 }
+					payload = { name = p5, guiObject = p6 }
 				})
 			end
-		end, { var12 })
+		end, { var3 })
 	end,
 	useDeRegisterFocusNavigableSurface = function()
-		-- upvalues: reactModule (ref), var3 (ref)
-		local var13 = reactModule.useContext(var3)
-		local var14 = if var13 then var13.dispatch else nil
+		-- upvalues: reactModule (ref), var1 (ref)
+		local var2 = reactModule.useContext(var1)
+		local var3 = if var2 then var2.dispatch else nil
 		
-		return reactModule.useCallback(function(p9, p10)
-			-- upvalues: var14 (ref)
-			if var14 then
-				var14({
+		return reactModule.useCallback(function(p5, p6)
+			-- upvalues: var3 (ref)
+			if var3 then
+				var3({
 					type = "deRegistered",
-					payload = { name = p9, guiObject = p10 }
+					payload = { name = p5, guiObject = p6 }
 				})
 			end
-		end, { var14 })
+		end, { var3 })
 	end,
-	useRegistryEntry = function(p11)
-		-- upvalues: reactModule (ref), var3 (ref)
-		local var15 = reactModule.useContext(var3)
+	useRegistryEntry = function(p5)
+		-- upvalues: reactModule (ref), var1 (ref)
+		local var2 = reactModule.useContext(var1)
 		
-		if var15 == nil then
+		if var2 == nil then
 			return nil
 		end
 		local _ = nil
-		local var16 = var15.state[p11]
+		local var3 = var2.state[p5]
 		
-		return if var16 == nil or #var16 == 0 then nil else var16[#var16]
+		return if var3 == nil or #var3 == 0 then nil else var3[#var3]
 	end,
-	useFocusRegistryEntry = function(p12)
-		-- upvalues: useFocusGuiObject (ref), reactModule (ref), var3 (ref)
-		local var19
-		local var17 = useFocusGuiObject()
-		local var18 = reactModule.useContext(var3)
+	useFocusRegistryEntry = function(p5)
+		-- upvalues: useFocusGuiObject (ref), reactModule (ref), var1 (ref)
+		local var2
+		local var3 = useFocusGuiObject()
+		local var4 = reactModule.useContext(var1)
 		
-		if var18 == nil then
-			var19 = nil
+		if var4 == nil then
+			var2 = nil
 		else
 			local _ = nil
-			local var20 = var18.state[p12]
-			var19 = if var20 == nil or #var20 == 0 then nil else var20[#var20]
+			local var5 = var4.state[p5]
+			var2 = if var5 == nil or #var5 == 0 then nil else var5[#var5]
 		end
 		return reactModule.useCallback(function()
-			-- upvalues: var19 (ref), var17 (ref)
-			if var19 then
-				var17(var19)
+			-- upvalues: var2 (ref), var3 (ref)
+			if var2 then
+				var3(var2)
 			end
-		end, { var17, var19 })
+		end, { var3, var2 })
 	end
 }

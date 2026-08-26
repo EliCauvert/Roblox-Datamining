@@ -10,8 +10,8 @@ local text = httpModule.Url.APIS_URL .. "deeplinks/v2/get-or-create-static"
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 
-local function decodeShareLink(p0)
-	return if p0.link and type(p0.link) == "string" then p0.link else nil
+local function decodeShareLink(p1)
+	return if p1.link and type(p1.link) == "string" then p1.link else nil
 end
 
 return function(p1, p2)

@@ -12,27 +12,27 @@ hoverButtonBackground.validateProps = tModule.strictInterface({
 	sliceCenter = tModule.optional(tModule.Rect)
 })
 
-function hoverButtonBackground.render(p0)
+function hoverButtonBackground.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref)
-	local var6 = if p0.props.sidePadding then UDim2.new(p0.props.sidePadding, UDim.new()) + UDim2.new(p0.props.sidePadding, UDim.new()) else UDim2.new()
+	local var1 = if p1.props.sidePadding then UDim2.new(p1.props.sidePadding, UDim.new()) + UDim2.new(p1.props.sidePadding, UDim.new()) else UDim2.new()
 	
-	return withStyleModule(function(p1)
-		-- upvalues: roactModule (copy), imageSetComponentModule (copy), var6 (ref), p0 (ref)
-		local backgroundOnHover = p1.Theme.BackgroundOnHover
+	return withStyleModule(function(p2)
+		-- upvalues: roactModule (copy), imageSetComponentModule (copy), var1 (ref), p1 (ref)
+		local backgroundOnHover = p2.Theme.BackgroundOnHover
 		
 		return roactModule.createElement(imageSetComponentModule.Label, {
-			Size = UDim2.fromScale(1, 1) + var6,
+			Size = UDim2.fromScale(1, 1) + var1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			BackgroundColor3 = if p0.props.image then nil else backgroundOnHover.Color,
-			BackgroundTransparency = if p0.props.image then 1 else backgroundOnHover.Transparency,
-			Image = p0.props.image,
+			BackgroundColor3 = if p1.props.image then nil else backgroundOnHover.Color,
+			BackgroundTransparency = if p1.props.image then 1 else backgroundOnHover.Transparency,
+			Image = p1.props.image,
 			ImageColor3 = backgroundOnHover.Color,
 			ImageTransparency = backgroundOnHover.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
-			SliceCenter = p0.props.sliceCenter
+			SliceCenter = p1.props.sliceCenter
 		}, {
-			corner = if p0.props.image then nil else roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
+			corner = if p1.props.image then nil else roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 		})
 	end)
 end

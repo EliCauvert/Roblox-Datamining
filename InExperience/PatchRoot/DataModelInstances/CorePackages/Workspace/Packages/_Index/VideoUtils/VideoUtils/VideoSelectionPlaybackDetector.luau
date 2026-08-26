@@ -2,20 +2,20 @@
 local reactModule = require(videoUtils.Parent.React)
 local videoEndReason = require(videoUtils.Analytics.Enums).VideoEndReason
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), videoEndReason (ref)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), videoEndReason (copy)
-		if p0.isSelected then
-			p0.requestVideoPlayback(false)
+		-- upvalues: p1 (ref), videoEndReason (copy)
+		if p1.isSelected then
+			p1.requestVideoPlayback(false)
 			
 			return
 		end
-		p0.cancelVideoPlayback(videoEndReason.Unselected)
+		p1.cancelVideoPlayback(videoEndReason.Unselected)
 	end, {
-		p0.isSelected,
-		p0.requestVideoPlayback,
-		p0.cancelVideoPlayback
+		p1.isSelected,
+		p1.requestVideoPlayback,
+		p1.cancelVideoPlayback
 	})
 	
 	return nil

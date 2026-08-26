@@ -10,20 +10,20 @@ sortedList.defaultProps = {
 	end
 }
 
-function sortedList.sortEntries(p0)
+function sortedList.sortEntries(p1)
 	local t = {}
 	
-	for i, v in pairs(p0.props.entries) do
+	for i, v in pairs(p1.props.entries) do
 		table.insert(t, v)
 	end
-	table.sort(t, p0.props.sortComparator)
+	table.sort(t, p1.props.sortComparator)
 	
 	return t
 end
 
-function sortedList.render(p1)
+function sortedList.render(p2)
 	-- upvalues: roact (ref)
-	local var2 = p1:sortEntries()
+	local var1 = p2:sortEntries()
 	local t = {
 		layout = roact.createElement("UIListLayout", {
 			VerticalAlignment = Enum.VerticalAlignment.Top,
@@ -31,17 +31,17 @@ function sortedList.render(p1)
 		})
 	}
 	
-	for i, v in pairs(var2) do
+	for i, v in pairs(var1) do
 		table.insert(t, roact.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, p1.props.entryHeight),
+			Size = UDim2.new(1, 0, 0, p2.props.entryHeight),
 			LayoutOrder = i
-		}, { entry = p1.props.renderEntry(v, i == #var2) }))
+		}, { entry = p2.props.renderEntry(v, i == #var1) }))
 	end
 	return roact.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, #p1.props.entries * p1.props.entryHeight),
-		LayoutOrder = p1.props.LayoutOrder
+		Size = UDim2.new(1, 0, 0, #p2.props.entries * p2.props.entryHeight),
+		LayoutOrder = p2.props.LayoutOrder
 	}, t)
 end
 

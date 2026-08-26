@@ -1,6 +1,6 @@
 ﻿return {
-	positionHasKeyframes = function(p0)
-		local position = p0:FindFirstChild("Position")
+	positionHasKeyframes = function(p1)
+		local position = p1:FindFirstChild("Position")
 		
 		if not position or not position:IsA("Vector3Curve") then
 			return false
@@ -14,8 +14,8 @@
 		end
 		return false
 	end,
-	translationExceedsThreshold = function(p1, p2)
-		local position = p1:FindFirstChild("Position")
+	translationExceedsThreshold = function(p2, p3)
+		local position = p2:FindFirstChild("Position")
 		
 		if not position or not position:IsA("Vector3Curve") then
 			return false, 0
@@ -24,23 +24,23 @@
 		local t = {}
 		
 		for i, v in { "X", "Y", "Z" } do
-			local var6 = position:FindFirstChild(v)
+			local var2 = position:FindFirstChild(v)
 			
-			if var6 and var6:IsA("FloatCurve") then
-				for i_1, v_1 in var6:GetKeys() do
+			if var2 and var2:IsA("FloatCurve") then
+				for i_1, v_1 in var2:GetKeys() do
 					table.insert(t, v_1.Time)
 				end
 			end
 		end
-		local var5 = 0
+		local var3 = 0
 		
 		for i_1, v_1 in t do
 			local magnitude = (Vector3.new(unpack(position:GetValueAtTime(v_1))) - vector3).Magnitude
 			
-			if var5 < magnitude then
-				var5 = magnitude
+			if var3 < magnitude then
+				var3 = magnitude
 			end
 		end
-		return p2 < var5, var5
+		return p3 < var3, var3
 	end
 }

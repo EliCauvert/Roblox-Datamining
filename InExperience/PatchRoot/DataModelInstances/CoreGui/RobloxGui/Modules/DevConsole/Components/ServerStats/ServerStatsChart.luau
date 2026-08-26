@@ -18,74 +18,74 @@ local noResultSearchStr = constantsModule.GeneralFormatting.NoResultSearchStr
 local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 local serverStats = roactModule.Component:extend("ServerStats")
 
-local function formatData(p0)
-	return string.format("%.3f", p0)
+local function formatData(p1)
+	return string.format("%.3f", p1)
 end
 
 local function getX(p1)
 	return p1.time
 end
 
-local function getY(p2)
-	return p2.value
+local function getY(p1)
+	return p1.value
 end
 
-function serverStats.init(p3)
-	local currentData = p3.props.ServerStatsData:getCurrentData()
+function serverStats.init(p1)
+	local currentData = p1.props.ServerStatsData:getCurrentData()
 	
-	function p3.getOnButtonPress(p4)
-		-- upvalues: p3 (ref)
+	function p3.getOnButtonPress(p2)
+		-- upvalues: p1 (ref)
 		return function(_, _)
-			-- upvalues: p3 (copy), p4 (ref)
-			p3:setState({ expandedEntry = p3.state.expandedEntry ~= p4 and p4 })
+			-- upvalues: p1 (copy), p2 (ref)
+			p1:setState({ expandedEntry = p1.state.expandedEntry ~= p2 and p2 })
 		end
 	end
 	
-	p3.state = { serverStatsData = currentData }
+	p1.state = { serverStatsData = currentData }
 end
 
-function serverStats.didMount(p5)
-	p5.statsConnector = p5.props.ServerStatsData:Signal():Connect(function(p6)
-		-- upvalues: p5 (ref)
-		p5:setState({ serverStatsData = p6 })
+function serverStats.didMount(p1)
+	p1.statsConnector = p1.props.ServerStatsData:Signal():Connect(function(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ serverStatsData = p2 })
 	end)
 end
 
-function serverStats.willUnmount(p7)
-	p7.statsConnector:Disconnect()
-	p7.statsConnector = nil
+function serverStats.willUnmount(p1)
+	p1.statsConnector:Disconnect()
+	p1.statsConnector = nil
 end
 
-function serverStats.render(p8)
+function serverStats.render(p1)
 	-- upvalues: entryFrameHeight (ref), lineGraphHeight (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), valueCellWidth (ref), cellPadding (ref), expandArrowPadding (ref), lineWidth (ref), lineColor (ref), lineGraphModule (ref), getX (ref), getY (ref), convertTimeStampModule (ref), formatData (ref), constantsModule (ref), noResultSearchStr (ref), headerFrameHeight (ref), chartHeaderNames (ref)
 	local t = {}
-	local searchTerm = p8.props.searchTerm
-	local layoutOrder = p8.props.layoutOrder
-	local size = p8.props.size
-	local expandedEntry = p8.state.expandedEntry
-	local serverStatsData = p8.state.serverStatsData
-	local var13 = 1
-	local var14 = 0
-	local var15 = 0
+	local searchTerm = p1.props.searchTerm
+	local layoutOrder = p1.props.layoutOrder
+	local size = p1.props.size
+	local expandedEntry = p1.state.expandedEntry
+	local serverStatsData = p1.state.serverStatsData
+	local var1 = 1
+	local var2 = 0
+	local var3 = 0
 	
 	if serverStatsData then
 		for i, v in pairs(serverStatsData) do
-			var14 += 1
+			var2 += 1
 			
 			if not searchTerm or string.find(i:lower(), searchTerm:lower()) ~= nil then
-				var13 += 1
-				local var16 = expandedEntry == i
-				var15 = if var16 then var15 + 1 else var15
+				var1 += 1
+				local var4 = expandedEntry == i
+				var3 = if var4 then var3 + 1 else var3
 				t[i] = roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, 0, 0, if var16 then entryFrameHeight + lineGraphHeight else entryFrameHeight),
-					LayoutOrder = var13
+					Size = UDim2.new(1, 0, 0, if var4 then entryFrameHeight + lineGraphHeight else entryFrameHeight),
+					LayoutOrder = var1
 				}, {
 					DataButton = roactModule.createElement(bannerButtonModule, {
 						size = UDim2.new(1, 0, 0, entryFrameHeight),
 						pos = UDim2.new(),
-						isExpanded = var16,
-						onButtonPress = p8.getOnButtonPress(i)
+						isExpanded = var4,
+						onButtonPress = p1.getOnButtonPress(i)
 					}, {
 						[i] = roactModule.createElement(cellLabelModule, {
 							text = i,
@@ -110,7 +110,7 @@ function serverStats.render(p8)
 							BackgroundColor3 = lineColor
 						})
 					}),
-					Graph = var16 and roactModule.createElement(lineGraphModule, {
+					Graph = var4 and roactModule.createElement(lineGraphModule, {
 						axisLabelX = "Timestamp",
 						pos = UDim2.new(0, 0, 0, entryFrameHeight),
 						size = UDim2.new(1, 0, 1, -entryFrameHeight),
@@ -127,8 +127,8 @@ function serverStats.render(p8)
 			end
 		end
 	end
-	if var13 == 1 then
-		if var14 == 0 then
+	if var1 == 1 then
+		if var2 == 0 then
 			return roactModule.createElement("TextLabel", {
 				Text = "Awaiting Server Stats",
 				BackgroundTransparency = 1,
@@ -194,7 +194,7 @@ function serverStats.render(p8)
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0, 0, 0, headerFrameHeight),
 			Size = UDim2.new(1, 0, 1, -headerFrameHeight),
-			CanvasSize = UDim2.new(1, 0, 0, var14 * entryFrameHeight + var15 * lineGraphHeight)
+			CanvasSize = UDim2.new(1, 0, 0, var2 * entryFrameHeight + var3 * lineGraphHeight)
 		}, t)
 	})
 end

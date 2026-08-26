@@ -9,25 +9,25 @@ local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 
-local var2 = function(p0, p1, p2)
-	return if p0 == Enum.FillDirection.Horizontal then { CellSize = UDim2.new(0.5, -p2, 0, p1) } else { CellSize = UDim2.new(1, 0, 0, p1) }
+local var1 = function(p1, p2, p3)
+	return if p1 == Enum.FillDirection.Horizontal then { CellSize = UDim2.new(0.5, -p3, 0, p2) } else { CellSize = UDim2.new(1, 0, 0, p2) }
 end
 
-local var3 = function(p3)
+local var2 = function(p1)
 	-- upvalues: useStyle (ref), useDesignTokens (ref), useSelectionCursor (ref), cursorKind (ref), reactModule (ref), styledTextLabel (ref), imageSetLabel (ref), images (ref)
-	local var4 = useStyle()
-	local var5 = useDesignTokens()
-	local var6 = useSelectionCursor(cursorKind.RoundedRect)
-	local size1400 = var5.Size.Size_1400 or 80
-	local size700 = var5.Size.Size_700 or 42
+	local var3 = useStyle()
+	local var4 = useDesignTokens()
+	local var5 = useSelectionCursor(cursorKind.RoundedRect)
+	local size1400 = var4.Size.Size_1400 or 80
+	local size700 = var4.Size.Size_700 or 42
 	
 	return reactModule.createElement("ImageButton", {
 		AutoButtonColor = false,
 		Size = UDim2.new(1, 0, 0, size1400),
 		BackgroundTransparency = 1,
-		LayoutOrder = p3.layoutOrder,
-		[reactModule.Event.Activated] = p3.activated,
-		SelectionImageObject = var6
+		LayoutOrder = p1.layoutOrder,
+		[reactModule.Event.Activated] = p1.activated,
+		SelectionImageObject = var5
 	}, {
 		padding = reactModule.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, 36),
@@ -35,12 +35,12 @@ local var3 = function(p3)
 		}),
 		ButtonText = reactModule.createElement(styledTextLabel, {
 			layoutOrder = 1,
-			text = p3.text,
+			text = p1.text,
 			automaticSize = Enum.AutomaticSize.X,
 			size = UDim2.new(1, 0, 0, size1400),
 			textXAlignment = Enum.TextXAlignment.Left,
-			fontStyle = var4.Font.Header1,
-			colorStyle = var4.Theme.TextDefault
+			fontStyle = var3.Font.Header1,
+			colorStyle = var3.Theme.TextDefault
 		}),
 		LinkIconImage = reactModule.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
@@ -51,17 +51,17 @@ local var3 = function(p3)
 			AnchorPoint = Vector2.new(1, 0.5),
 			ScaleType = Enum.ScaleType.Fit,
 			Image = images["icons/navigation/externallink_medium"],
-			ImageColor3 = var4.Theme.UIEmphasis.Color
+			ImageColor3 = var3.Theme.UIEmphasis.Color
 		})
 	})
 end
 
-return function(p4)
-	-- upvalues: useDesignTokens (ref), var2 (ref), reactModule (ref), var3 (ref)
-	local var9 = useDesignTokens()
-	local size1400 = var9.Size.Size_1400 or 80
-	local size300 = var9.Size.Size_300 or 18
-	local fillDirection = p4.fillDirection or Enum.FillDirection.Vertical
+return function(p1)
+	-- upvalues: useDesignTokens (ref), var1 (ref), reactModule (ref), var2 (ref)
+	local var3 = useDesignTokens()
+	local size1400 = var3.Size.Size_1400 or 80
+	local size300 = var3.Size.Size_300 or 18
+	local fillDirection = p1.fillDirection or Enum.FillDirection.Vertical
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -69,23 +69,23 @@ return function(p4)
 		Selectable = false,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
-		LayoutOrder = p4.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		gridlayout = reactModule.createElement("UIGridLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = fillDirection,
 			CellPadding = UDim2.new(0, size300, 0, size300),
-			CellSize = var2(fillDirection, size1400, size300).CellSize
+			CellSize = var1(fillDirection, size1400, size300).CellSize
 		}),
-		ButtonTos = reactModule.createElement(var3, {
+		ButtonTos = reactModule.createElement(var2, {
 			layoutOrder = 1,
-			text = p4.textTos,
-			activated = p4.activatedTos
+			text = p1.textTos,
+			activated = p1.activatedTos
 		}),
-		ButtonPrivacy = reactModule.createElement(var3, {
+		ButtonPrivacy = reactModule.createElement(var2, {
 			layoutOrder = 2,
-			text = p4.textPrivacy,
-			activated = p4.activatedPrivacy
+			text = p1.textPrivacy,
+			activated = p1.activatedPrivacy
 		})
 	})
 end

@@ -10,20 +10,20 @@ return roduxModule.createReducer({
 	isShowChatNudgeModal = false,
 	isShowChatTimeoutModal = false
 }, {
-	[require(actions.UpdateShowChatFeedbackModalAction).name] = function(value, p0)
+	[require(actions.UpdateShowChatFeedbackModalAction).name] = function(value, p1)
 		-- upvalues: dictionary (ref)
-		return dictionary.set(value, "isShowChatFeedbackModal", p0.isShow)
+		return dictionary.set(value, "isShowChatFeedbackModal", p1.isShow)
 	end,
 	[require(actions.UpdateShowChatFeedbackPillAction).name] = function(value, p1)
 		-- upvalues: dictionary (ref)
 		return dictionary.set(value, "isShowChatFeedbackPill", p1.isShow)
 	end,
-	[require(actions.UpdateShowChatNudgeModalAction).name] = function(value, p2)
+	[require(actions.UpdateShowChatNudgeModalAction).name] = function(value, p1)
 		-- upvalues: dictionary (ref)
-		return dictionary.set(value, "isShowChatNudgeModal", p2.isShow)
+		return dictionary.set(value, "isShowChatNudgeModal", p1.isShow)
 	end,
-	[require(actions.UpdateShowChatTimeoutModalAction).name] = function(value, p3)
+	[require(actions.UpdateShowChatTimeoutModalAction).name] = function(value, p1)
 		-- upvalues: dictionary (ref)
-		return dictionary.set(value, "isShowChatTimeoutModal", p3.isShow)
+		return dictionary.set(value, "isShowChatTimeoutModal", p1.isShow)
 	end
 })

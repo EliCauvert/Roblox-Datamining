@@ -15,84 +15,84 @@ local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 
-local function defaultFireEvent(p0, p1, p2)
+local function defaultFireEvent(p1, p2, p3)
 	-- upvalues: eventNames (ref), fireAnalyticsEvent (ref)
-	fireAnalyticsEvent(if p0 then eventNames.MomentsChromeRestored else eventNames.MomentsChromeAutoHidden, { trigger = p1, index = tostring(p2) })
+	fireAnalyticsEvent(if p1 then eventNames.MomentsChromeRestored else eventNames.MomentsChromeAutoHidden, { trigger = p2, index = tostring(p3) })
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: reactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), defaultFireEvent (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (ref), getFIntMomentsImmersiveShownDwellMsModule (ref), getFIntMomentsImmersiveHiddenCooldownMsModule (ref), immersiveChromeMachineModule (ref), signalsModule (ref), useSignalState (ref)
-	local pager = p3.pager
-	local active = p3.active
-	local getActiveIsPlaying = p3.getActiveIsPlaying
-	local getIsScrolling = p3.getIsScrolling
-	local inputAllowed = p3.inputAllowed
-	local reducedMotion = p3.reducedMotion
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: p3 (ref), getImmersiveChromeStoreModule (copy)
-		return p3.store or getImmersiveChromeStoreModule(false)
+	local pager = p1.pager
+	local active = p1.active
+	local getActiveIsPlaying = p1.getActiveIsPlaying
+	local getIsScrolling = p1.getIsScrolling
+	local inputAllowed = p1.inputAllowed
+	local reducedMotion = p1.reducedMotion
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), getImmersiveChromeStoreModule (copy)
+		return p1.store or getImmersiveChromeStoreModule(false)
 	end, {})
-	local var12 = if p3.featureEnabledOverride ~= nil then fFlagMomentsImmersiveChromeModule else p3.featureEnabledOverride
-	local var13 = reactModule.useRef(1)
-	local var14 = reactModule.useRef(var12)
-	var14.current = var12
-	local var15 = reactModule.useRef(p3.fireEvent or defaultFireEvent)
-	var15.current = p3.fireEvent or defaultFireEvent
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: p3 (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (copy), getFIntMomentsImmersiveShownDwellMsModule (copy), getFIntMomentsImmersiveHiddenCooldownMsModule (copy), immersiveChromeMachineModule (copy), var11 (ref), var14 (ref), var15 (ref), var13 (ref)
-		return immersiveChromeMachineModule(p3.config or {
+	local var2 = if p1.featureEnabledOverride ~= nil then fFlagMomentsImmersiveChromeModule else p1.featureEnabledOverride
+	local var3 = reactModule.useRef(1)
+	local var4 = reactModule.useRef(var2)
+	var4.current = var2
+	local var5 = reactModule.useRef(p1.fireEvent or defaultFireEvent)
+	var5.current = p1.fireEvent or defaultFireEvent
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (copy), getFIntMomentsImmersiveShownDwellMsModule (copy), getFIntMomentsImmersiveHiddenCooldownMsModule (copy), immersiveChromeMachineModule (copy), var1 (ref), var4 (ref), var5 (ref), var3 (ref)
+		return immersiveChromeMachineModule(p1.config or {
 			hideAfterAdvances = getFIntMomentsImmersiveHideAfterAdvancesModule(),
 			shownDwellMs = getFIntMomentsImmersiveShownDwellMsModule(),
 			hiddenCooldownMs = getFIntMomentsImmersiveHiddenCooldownMsModule()
 		}, {
-			now = p3.now or function()
+			now = p1.now or function()
 				return os.clock() * 1000
 			end,
-			setChromeVisible = function(value, p4)
-				-- upvalues: var11 (copy), var14 (copy), var15 (copy), var13 (copy)
-				var11.setChromeVisible(value)
+			setChromeVisible = function(value, p2)
+				-- upvalues: var1 (copy), var4 (copy), var5 (copy), var3 (copy)
+				var1.setChromeVisible(value)
 				
-				if var14.current then
-					var15.current(value, p4, var13.current)
+				if var4.current then
+					var5.current(value, p2, var3.current)
 				end
 			end
 		})
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), pager (ref), getActiveIsPlaying (ref), getIsScrolling (ref), var13 (ref), var16 (ref)
-		return signalsModule.createEffect(function(p5)
-			-- upvalues: pager (copy), getActiveIsPlaying (copy), getIsScrolling (copy), var13 (copy), var16 (copy)
-			local count = pager.getCount(p5)
-			local currentIndex = pager.getCurrentIndex(p5)
-			local var20 = getActiveIsPlaying(p5)
-			local var21 = getIsScrolling(p5)
-			var13.current = currentIndex
-			var16.setCount(count)
-			var16.onActiveUpdate(currentIndex, var20, var21)
+		-- upvalues: signalsModule (copy), pager (ref), getActiveIsPlaying (ref), getIsScrolling (ref), var3 (ref), var6 (ref)
+		return signalsModule.createEffect(function(p2)
+			-- upvalues: pager (copy), getActiveIsPlaying (copy), getIsScrolling (copy), var3 (copy), var6 (copy)
+			local count = pager.getCount(p2)
+			local currentIndex = pager.getCurrentIndex(p2)
+			local var7 = getActiveIsPlaying(p2)
+			local var8 = getIsScrolling(p2)
+			var3.current = currentIndex
+			var6.setCount(count)
+			var6.onActiveUpdate(currentIndex, var7, var8)
 		end)
-	end, { pager, getActiveIsPlaying, getIsScrolling, var16 })
-	local var17 = useSignalState(var11.getOverlayCovering)
+	end, { pager, getActiveIsPlaying, getIsScrolling, var6 })
+	local var7 = useSignalState(var1.getOverlayCovering)
 	reactModule.useEffect(function()
-		-- upvalues: active (ref), inputAllowed (ref), reducedMotion (ref), var12 (ref), var16 (ref), var17 (ref)
-		var16.setForceShow((not active or (not inputAllowed or (reducedMotion or not var12))) and not var17)
-		var16.setForceHide(var17)
+		-- upvalues: active (ref), inputAllowed (ref), reducedMotion (ref), var2 (ref), var6 (ref), var7 (ref)
+		var6.setForceShow((not active or (not inputAllowed or (reducedMotion or not var2))) and not var7)
+		var6.setForceHide(var7)
 	end, {
-		active, inputAllowed, reducedMotion, var12, var17, var16
+		active, inputAllowed, reducedMotion, var2, var7, var6
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var16 (ref)
-		var11.setRevealHandler(var16.reveal)
+		-- upvalues: var1 (ref), var6 (ref)
+		var1.setRevealHandler(var6.reveal)
 		
 		return function()
-			-- upvalues: var11 (copy)
-			var11.setRevealHandler(nil)
+			-- upvalues: var1 (copy)
+			var1.setRevealHandler(nil)
 		end
-	end, { var11, var16 })
+	end, { var1, var6 })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref)
+		-- upvalues: var1 (ref)
 		return function()
-			-- upvalues: var11 (copy)
-			var11.setChromeVisible(true)
+			-- upvalues: var1 (copy)
+			var1.setChromeVisible(true)
 		end
-	end, { var11 })
+	end, { var1 })
 end

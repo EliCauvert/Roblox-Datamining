@@ -11,68 +11,68 @@ local t = {
 	pixelColor3 = Color3.fromRGB(0, 0, 0)
 }
 
-local function _(p0, p1)
-	if not p1 then
-		return p0
+local function _(p1, p2)
+	if not p2 then
+		return p1
 	end
-	assert(type(p1) == "number", "rotation must be a number")
+	assert(type(p2) == "number", "rotation must be a number")
 	
-	if p1 % 90 == 0 then
-		return p0
+	if p2 % 90 == 0 then
+		return p1
 	end
-	local radians = math.rad(p1)
+	local radians = math.rad(p2)
 	
-	return math.round(p0 / (math.sin(radians) + math.cos(radians)))
+	return math.round(p1 / (math.sin(radians) + math.cos(radians)))
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: dashModule (ref), t (ref), reactModule (ref), assetService (ref), drawImageModule (ref)
-	local var10
-	local var6 = dashModule.join(t, p2)
-	local var7, var8 = reactModule.useState(nil)
-	local var9 = reactModule.createRef()
-	local sideLength = var6.sideLength
-	local qrCodeRotation = var6.qrCodeRotation
+	local var1
+	local var2 = dashModule.join(t, p1)
+	local var3, var4 = reactModule.useState(nil)
+	local var5 = reactModule.createRef()
+	local sideLength = var2.sideLength
+	local qrCodeRotation = var2.qrCodeRotation
 	
 	if qrCodeRotation then
 		assert(type(qrCodeRotation) == "number", "rotation must be a number")
 		
 		if qrCodeRotation % 90 == 0 then
-			var10 = sideLength
+			var1 = sideLength
 		else
 			local radians = math.rad(qrCodeRotation)
-			var10 = math.round(sideLength / (math.sin(radians) + math.cos(radians)))
+			var1 = math.round(sideLength / (math.sin(radians) + math.cos(radians)))
 		end
 	else
-		var10 = sideLength
+		var1 = sideLength
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var10 (ref), assetService (copy), var8 (ref), drawImageModule (copy), var6 (ref)
-		if not var9.current or var9.current.Size.X ~= var10 then
-			var9.current = assetService:CreateEditableImage({ Size = Vector2.new(var10, var10) })
-			var8(Content.fromObject(var9.current))
+		-- upvalues: var5 (ref), var1 (ref), assetService (copy), var4 (ref), drawImageModule (copy), var2 (ref)
+		if not var5.current or var5.current.Size.X ~= var1 then
+			var5.current = assetService:CreateEditableImage({ Size = Vector2.new(var1, var1) })
+			var4(Content.fromObject(var5.current))
 		end
-		drawImageModule(var9.current, var10, var6.qrCodeMatrix, var6.pixelColor3, var6.pixelTransparency)
+		drawImageModule(var5.current, var1, var2.qrCodeMatrix, var2.pixelColor3, var2.pixelTransparency)
 	end, {
-		var10,
-		var6.qrCodeMatrix,
-		var6.pixelColor3,
-		var6.pixelTransparency
+		var1,
+		var2.qrCodeMatrix,
+		var2.pixelColor3,
+		var2.pixelTransparency
 	})
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundColor3 = var6.backgroundColor3,
-		BackgroundTransparency = var6.backgroundTransparency,
-		Size = UDim2.fromOffset(var6.sideLength, var6.sideLength)
+		BackgroundColor3 = var2.backgroundColor3,
+		BackgroundTransparency = var2.backgroundTransparency,
+		Size = UDim2.fromOffset(var2.sideLength, var2.sideLength)
 	}, {
 		ImageLabel = reactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			ImageContent = var7,
+			ImageContent = var3,
 			Position = UDim2.fromScale(0.5, 0.5),
-			Rotation = var6.qrCodeRotation,
-			Size = UDim2.fromOffset(var10, var10)
+			Rotation = var2.qrCodeRotation,
+			Size = UDim2.fromOffset(var1, var1)
 		})
 	})
 end

@@ -3,27 +3,27 @@ local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.R
 
 return function()
 	-- upvalues: userInputService (ref), reactModule (ref)
-	local var2, var3 = reactModule.useState(function()
+	local var1, var2 = reactModule.useState(function()
 		-- upvalues: userInputService (copy)
 		return if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), userInputService (copy)
+		-- upvalues: var2 (ref), userInputService (copy)
 		local function update()
-			-- upvalues: var3 (copy), userInputService (copy)
-			var3(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
+			-- upvalues: var2 (copy), userInputService (copy)
+			var2(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
 		end
 		
-		local var5 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(update)
-		local var6 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(update)
-		var3(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
+		local var3 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(update)
+		local var4 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(update)
+		var2(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
 		
 		return function()
-			-- upvalues: var5 (ref), var6 (ref)
-			var5:Disconnect()
-			var6:Disconnect()
+			-- upvalues: var3 (ref), var4 (ref)
+			var3:Disconnect()
+			var4:Disconnect()
 		end
 	end, {})
 	
-	return var2
+	return var1
 end

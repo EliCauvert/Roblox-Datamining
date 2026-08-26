@@ -5,19 +5,19 @@ local useState = reactModule.useState
 
 return function()
 	-- upvalues: useState (ref), userInputService (ref), useEffect (ref)
-	local var2, var3 = useState(userInputService.KeyboardEnabled)
+	local var1, var2 = useState(userInputService.KeyboardEnabled)
 	useEffect(function()
-		-- upvalues: userInputService (copy), var3 (ref)
-		local var4 = userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
-			-- upvalues: var3 (copy), userInputService (copy)
-			var3(userInputService.KeyboardEnabled)
+		-- upvalues: userInputService (copy), var2 (ref)
+		local var3 = userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
+			-- upvalues: var2 (copy), userInputService (copy)
+			var2(userInputService.KeyboardEnabled)
 		end)
 		
 		return function()
-			-- upvalues: var4 (ref)
-			var4:Disconnect()
+			-- upvalues: var3 (ref)
+			var3:Disconnect()
 		end
 	end, {})
 	
-	return var2
+	return var1
 end

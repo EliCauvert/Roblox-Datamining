@@ -6,161 +6,161 @@ local reactModule = require(parent.React)
 local positioningModule = require(script.Parent.positioning)
 local _ = require(foundation.Components.Types)
 
-local function useConnectSignals(value, p0, p1)
+local function useConnectSignals(value, p1, p2)
 	-- upvalues: reactModule (ref)
-	local var4 = reactModule.useRef({})
+	local var1 = reactModule.useRef({})
 	reactModule.useLayoutEffect(function()
-		-- upvalues: value (ref), p0 (ref), var4 (ref), p1 (ref)
+		-- upvalues: value (ref), p1 (ref), var1 (ref), p2 (ref)
 		if value ~= nil then
-			for i, v in p0 do
-				var4.current[v] = (if typeof(value) == "Instance" then value:GetPropertyChangedSignal(v) else value:GetPropertyChangedSignal(v)):Connect(if type(p1) == "table" then function()
-					-- upvalues: p1 (copy)
-					p1.current()
-				end else p1)
+			for i, v in p1 do
+				var1.current[v] = (if typeof(value) == "Instance" then value:GetPropertyChangedSignal(v) else value:GetPropertyChangedSignal(v)):Connect(if type(p2) == "table" then function()
+					-- upvalues: p2 (copy)
+					p2.current()
+				end else p2)
 			end
 		end
 		return function()
-			-- upvalues: var4 (copy)
-			for i, v in var4.current do
+			-- upvalues: var1 (copy)
+			for i, v in var1.current do
 				v:Disconnect()
 			end
 		end
-	end, { value, p1 })
+	end, { value, p2 })
 end
 
-return function(p2, p3, p4, p5, p6, p7, p8)
+return function(p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: reactModule (ref), positioningModule (ref), useConnectSignals (ref)
-	local var5, var6 = reactModule.useBinding(Vector2.new())
-	local var7, var8 = reactModule.useBinding(true)
-	local var9, var10 = reactModule.useBinding(UDim2.new())
-	local var11, var12 = reactModule.useBinding(Vector2.new())
-	local var13, var14 = reactModule.useBinding(Vector2.new())
-	local var15, var16 = reactModule.useBinding(Vector2.new(0, 0))
-	local var17 = reactModule.useRef(function() end)
-	local var18 = reactModule.useRef({})
-	local var19 = reactModule.useRef(false)
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: p2 (ref), p3 (ref), p4 (ref), p5 (ref), var8 (ref), positioningModule (copy), var18 (ref), p6 (ref), p7 (ref), p8 (ref), var10 (ref), var12 (ref), var14 (ref), var6 (ref), var16 (ref)
-		if not p2 or not p3 or (not p4 or not p5) then
-			var8(false)
+	local var2, var3 = reactModule.useBinding(Vector2.new())
+	local var4, var5 = reactModule.useBinding(true)
+	local var6, var7 = reactModule.useBinding(UDim2.new())
+	local var8, var9 = reactModule.useBinding(Vector2.new())
+	local var10, var11 = reactModule.useBinding(Vector2.new())
+	local var12, var13 = reactModule.useBinding(Vector2.new(0, 0))
+	local var14 = reactModule.useRef(function() end)
+	local var15 = reactModule.useRef({})
+	local var16 = reactModule.useRef(false)
+	local var17 = reactModule.useCallback(function()
+		-- upvalues: p3 (ref), p4 (ref), p5 (ref), p6 (ref), var5 (ref), positioningModule (copy), var15 (ref), p7 (ref), p8 (ref), p9 (ref), var7 (ref), var9 (ref), var11 (ref), var3 (ref), var13 (ref)
+		if not p3 or not p4 or (not p5 or not p6) then
+			var5(false)
 			
 			return
 		end
-		local absolutePosition = p3.AbsolutePosition
-		local absoluteSize = p3.AbsoluteSize
-		local absoluteSize_1 = p4.AbsoluteSize
-		local absoluteSize_2 = p5.AbsoluteSize
-		local absolutePosition_1 = p5.AbsolutePosition
+		local absolutePosition = p4.AbsolutePosition
+		local absoluteSize = p4.AbsoluteSize
+		local absoluteSize_1 = p5.AbsoluteSize
+		local absoluteSize_2 = p6.AbsoluteSize
+		local absolutePosition_1 = p6.AbsolutePosition
 		local rect = Rect.new(absolutePosition, absolutePosition + absoluteSize)
 		local rect_1 = Rect.new(absolutePosition_1, absolutePosition_1 + absoluteSize_2)
 		
 		if not positioningModule.isOnScreen(rect, rect_1) then
-			var8(false)
+			var5(false)
 			
 			return
 		end
-		local var23 = nil
+		local var18 = nil
 		
-		for i, v in var18.current do
+		for i, v in var15.current do
 			local rect_2 = Rect.new(v.AbsolutePosition, v.AbsolutePosition + v.AbsoluteSize)
-			var23 = if var23 == nil then rect_2 else Rect.new(Vector2.new(math.max(var23.Min.X, rect_2.Min.X), math.max(var23.Min.Y, rect_2.Min.Y)), Vector2.new(math.min(var23.Max.X, rect_2.Max.X), math.min(var23.Max.Y, rect_2.Max.Y)))
+			var18 = if var18 == nil then rect_2 else Rect.new(Vector2.new(math.max(var18.Min.X, rect_2.Min.X), math.max(var18.Min.Y, rect_2.Min.Y)), Vector2.new(math.min(var18.Max.X, rect_2.Max.X), math.min(var18.Max.Y, rect_2.Max.Y)))
 		end
-		if var23 and not positioningModule.isOnScreen(rect, var23) then
-			var8(false)
+		if var18 and not positioningModule.isOnScreen(rect, var18) then
+			var5(false)
 			
 			return
 		end
-		local var24 = if type(p6) == "table" then p6.position else p6
-		local var25 = if type(p6) == "table" then p6.offset else 0
-		local var26 = p7
-		local var27 = 0
+		local var19 = if type(p7) == "table" then p7.position else p7
+		local var20 = if type(p7) == "table" then p7.offset else 0
+		local var21 = p8
+		local var22 = 0
 		
-		if type(p7) == "table" then
-			var26 = p7.position
-			var27 = p7.offset
+		if type(p8) == "table" then
+			var21 = p8.position
+			var22 = p8.offset
 		end
-		local p8_1 = p8 or 0
-		local var29, var30, var31 = positioningModule.calculatePositions(positioningModule.calculateSide(var24, rect, rect_1, positioningModule.calculatePopoverBounds(var24, var25, var27, p8_1, absoluteSize_1)), var25, var26, var27, rect, rect_1, p8_1, absoluteSize_1)
-		var10(UDim2.fromOffset(absoluteSize_1.X, absoluteSize_1.Y))
-		var12(absoluteSize_2)
-		var14(var30 + var29)
-		var6(var29)
-		var16(var31)
-		var8(true)
-		local _ = p4.AbsolutePosition
+		local p10 = p9 or 0
+		local var23, var24, var25 = positioningModule.calculatePositions(positioningModule.calculateSide(var19, rect, rect_1, positioningModule.calculatePopoverBounds(var19, var20, var22, p10, absoluteSize_1)), var20, var21, var22, rect, rect_1, p10, absoluteSize_1)
+		var7(UDim2.fromOffset(absoluteSize_1.X, absoluteSize_1.Y))
+		var9(absoluteSize_2)
+		var11(var24 + var23)
+		var3(var23)
+		var13(var25)
+		var5(true)
+		local _ = p5.AbsolutePosition
 	end, {
-		p2, p3, p4, p5, p6, p7, p8
+		p3, p4, p5, p6, p7, p8, p9
 	})
 	
 	function var17.current()
-		-- upvalues: var19 (ref), var20 (ref)
-		if var19.current then
+		-- upvalues: var16 (ref), var17 (ref)
+		if var16.current then
 			return
 		end
-		var19.current = true
+		var16.current = true
 		task.defer(function()
-			-- upvalues: var19 (copy), var20 (copy)
-			var19.current = false
-			var20()
+			-- upvalues: var16 (copy), var17 (copy)
+			var16.current = false
+			var17()
 		end)
 	end
 	
-	useConnectSignals(p3, { "AbsolutePosition", "AbsoluteSize" }, var17)
-	useConnectSignals(p4, { "AbsoluteSize" }, var17)
-	useConnectSignals(p5, { "AbsoluteSize" }, var17)
+	useConnectSignals(p4, { "AbsolutePosition", "AbsoluteSize" }, var14)
+	useConnectSignals(p5, { "AbsoluteSize" }, var14)
+	useConnectSignals(p6, { "AbsoluteSize" }, var14)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: p2 (ref), p3 (ref), var18 (ref), var17 (ref)
-		if not p2 then return end
-		if typeof(p3) == "Instance" and p3:IsA("GuiObject") then
+		-- upvalues: p3 (ref), p4 (ref), var15 (ref), var14 (ref)
+		if not p3 then return end
+		if typeof(p4) == "Instance" and p4:IsA("GuiObject") then
 			local t = {}
 			
 			local function rebuild()
-				-- upvalues: t (ref), p3 (ref), var17 (copy), var18 (ref)
+				-- upvalues: t (ref), p4 (ref), var14 (copy), var15 (ref)
 				for i, v in t do
 					v:Disconnect()
 				end
 				table.clear(t)
 				local t_1 = {}
-				local parent = p3.Parent
+				local parent = p4.Parent
 				while parent and parent:IsA("GuiObject") do
 					if parent.ClipsDescendants then
 						table.insert(t_1, parent)
 						table.insert(t, parent:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-							-- upvalues: var17 (copy)
-							var17.current()
+							-- upvalues: var14 (copy)
+							var14.current()
 						end))
 						table.insert(t, parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-							-- upvalues: var17 (copy)
-							var17.current()
+							-- upvalues: var14 (copy)
+							var14.current()
 						end))
 					end
 					parent = parent.Parent
 				end
-				var18.current = t_1
+				var15.current = t_1
 				
 				if #t_1 > 0 then
-					var17.current()
+					var14.current()
 				end
 			end
 			
 			rebuild()
-			local ancestryChangedConnection = p3.AncestryChanged:Connect(rebuild)
+			local ancestryChangedConnection = p4.AncestryChanged:Connect(rebuild)
 			
 			return function()
-				-- upvalues: ancestryChangedConnection (ref), t (ref), var18 (ref)
+				-- upvalues: ancestryChangedConnection (ref), t (ref), var15 (ref)
 				ancestryChangedConnection:Disconnect()
 				
 				for i, v in t do
 					v:Disconnect()
 				end
-				var18.current = {}
+				var15.current = {}
 			end
 		end
-	end, { p3, p2 })
+	end, { p4, p3 })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var20 (ref)
-		var20()
-	end, { var20 })
+		-- upvalues: var17 (ref)
+		var17()
+	end, { var17 })
 	
-	return var5, var7, var9, var13, var11, var15
+	return var2, var4, var6, var10, var8, var12
 end

@@ -6,28 +6,28 @@ local withCsrfRetryModule = require(dataHydration.withCsrfRetry)
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-local function _(p0, p1)
-	return ("%s/v1/universes/%d/configuration/playtesters"):format(p0, p1)
+local function _(p1, p2)
+	return ("%s/v1/universes/%d/configuration/playtesters"):format(p1, p2)
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: urlBase (ref)
-	p2 = p2 or {}
+	p1 = p1 or {}
 	
-	return p2.network, p2.baseUrl or urlBase.new("develop")
+	return p1.network, p1.baseUrl or urlBase.new("develop")
 end
 
-local _ = function(p3)
+local _ = function(p1)
 	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
-	return (p3 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
+	return (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 end
 
-local function decodePlaytesterIds(p4)
+local function decodePlaytesterIds(p1)
 	local t = {}
-	local var6 = if type(p4) == "table" then p4.playtesters else nil
+	local var1 = if type(p1) == "table" then p1.playtesters else nil
 	
-	if type(var6) == "table" then
-		for i, v in var6 do
+	if type(var1) == "table" then
+		for i, v in var1 do
 			if type(v) == "number" then
 				table.insert(t, v)
 			elseif type(v) == "table" then
@@ -43,46 +43,46 @@ local function decodePlaytesterIds(p4)
 end
 
 return {
-	fetchPlaytesters = function(p5, p6)
+	fetchPlaytesters = function(p2, p3)
 		-- upvalues: urlBase (ref), fetch (ref), decodePlaytesterIds (ref), asPromise (ref)
-		p6 = p6 or {}
+		p3 = p3 or {}
 		
 		return asPromise(fetch({
 			method = "GET",
 			analyticsKey = "private-playtesters.fetch",
 			legacy = true,
-			network = p6.network,
-			url = ("%s/v1/universes/%d/configuration/playtesters"):format(p6.baseUrl or urlBase.new("develop"), p5),
+			network = p3.network,
+			url = ("%s/v1/universes/%d/configuration/playtesters"):format(p3.baseUrl or urlBase.new("develop"), p2),
 			decode = decodePlaytesterIds
 		}))
 	end,
-	addPlaytester = function(p7, p8, p9)
+	addPlaytester = function(p2, p3, p4)
 		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), decodePlaytesterIds (ref), asPromise (ref)
-		p9 = p9 or {}
-		local _ = p9.network
+		p4 = p4 or {}
+		local _ = p4.network
 		
 		return asPromise(fetch({
 			method = "POST",
 			analyticsKey = "private-playtesters.add",
 			legacy = true,
-			network = (p9 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/v1/universes/%d/configuration/playtesters"):format(p9.baseUrl or urlBase.new("develop"), p7),
-			body = { playtesters = p8 },
+			network = (p4 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
+			url = ("%s/v1/universes/%d/configuration/playtesters"):format(p4.baseUrl or urlBase.new("develop"), p2),
+			body = { playtesters = p3 },
 			decode = decodePlaytesterIds
 		}))
 	end,
-	removePlaytester = function(p10, p11, p12)
+	removePlaytester = function(p2, p3, p4)
 		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), decodePlaytesterIds (ref), asPromise (ref)
-		p12 = p12 or {}
-		local _ = p12.network
+		p4 = p4 or {}
+		local _ = p4.network
 		
 		return asPromise(fetch({
 			method = "DELETE",
 			analyticsKey = "private-playtesters.remove",
 			legacy = true,
-			network = (p12 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/v1/universes/%d/configuration/playtesters"):format(p12.baseUrl or urlBase.new("develop"), p10),
-			body = { playtesters = { p11 } },
+			network = (p4 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
+			url = ("%s/v1/universes/%d/configuration/playtesters"):format(p4.baseUrl or urlBase.new("develop"), p2),
+			body = { playtesters = { p3 } },
 			decode = decodePlaytesterIds
 		}))
 	end

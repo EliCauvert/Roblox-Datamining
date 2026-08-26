@@ -18,27 +18,27 @@ local validateFontInfoModule = require(parent.Core.Style.Validator.validateFontI
 local validateImageModule = require(core.ImageSet.Validator.validateImage)
 local segmentedControlTabName = roactModule.PureComponent:extend("SegmentedControlTabName")
 
-function segmentedControlTabName.init(p0)
+function segmentedControlTabName.init(p1)
 	-- upvalues: controlStateModule (ref)
-	p0.state = { controlState = controlStateModule.Initialize }
+	p1.state = { controlState = controlStateModule.Initialize }
 	
-	function p0.onStateChanged(p1, p2)
-		-- upvalues: p0 (ref)
-		p0:setState({ controlState = p2 })
+	function p0.onStateChanged(p2, p3)
+		-- upvalues: p1 (ref)
+		p1:setState({ controlState = p3 })
 		
-		if p0.props.onStateChanged then
-			p0.props.onStateChanged(p1, p2)
+		if p1.props.onStateChanged then
+			p1.props.onStateChanged(p2, p3)
 		end
 	end
 end
 
-local var15 = tModule.interface({ [controlStateModule.Default] = tModule.string })
+local var1 = tModule.interface({ [controlStateModule.Default] = tModule.string })
 segmentedControlTabName.validateProps = tModule.interface({
 	icon = tModule.optional(validateImageModule),
 	text = tModule.optional(tModule.string),
 	fontStyle = tModule.optional(validateFontInfoModule),
-	textStateColorMap = tModule.optional(var15),
-	iconStateColorMap = tModule.optional(var15),
+	textStateColorMap = tModule.optional(var1),
+	iconStateColorMap = tModule.optional(var1),
 	isDisabled = tModule.optional(tModule.boolean),
 	isLoading = tModule.optional(tModule.boolean),
 	onActivated = tModule.callback,
@@ -58,36 +58,36 @@ segmentedControlTabName.defaultProps = {
 	buttonStateColorMap = { [controlStateModule.Default] = "SecondaryContent" }
 }
 
-function segmentedControlTabName.render(p3)
+function segmentedControlTabName.render(p1)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), roactModule (ref), skeleton (ref), imageSetComponentModule (ref), getIconSizeModule (ref), iconSizeModule (ref), genericTextLabelModule (ref), interactableModule (ref), cryoModule (ref)
-	return withStyleModule(function(p4)
-		-- upvalues: p3 (ref), controlStateModule (copy), getContentStyleModule (copy), roactModule (copy), skeleton (copy), imageSetComponentModule (copy), getIconSizeModule (copy), iconSizeModule (copy), genericTextLabelModule (copy), interactableModule (copy), cryoModule (copy)
-		local controlState = p3.state.controlState
-		local text = p3.props.text
-		local icon = p3.props.icon
-		local isLoading = p3.props.isLoading
-		local isDisabled = p3.props.isDisabled
-		local buttonStateColorMap = p3.props.buttonStateColorMap
-		local contentStateColorMap = p3.props.contentStateColorMap
-		local textStateColorMap = p3.props.textStateColorMap or contentStateColorMap
-		local iconStateColorMap = p3.props.iconStateColorMap or contentStateColorMap
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref), controlStateModule (copy), getContentStyleModule (copy), roactModule (copy), skeleton (copy), imageSetComponentModule (copy), getIconSizeModule (copy), iconSizeModule (copy), genericTextLabelModule (copy), interactableModule (copy), cryoModule (copy)
+		local controlState = p1.state.controlState
+		local text = p1.props.text
+		local icon = p1.props.icon
+		local isLoading = p1.props.isLoading
+		local isDisabled = p1.props.isDisabled
+		local buttonStateColorMap = p1.props.buttonStateColorMap
+		local contentStateColorMap = p1.props.contentStateColorMap
+		local textStateColorMap = p1.props.textStateColorMap or contentStateColorMap
+		local iconStateColorMap = p1.props.iconStateColorMap or contentStateColorMap
 		
 		if isLoading then
 			isDisabled = true
 		end
-		local var18 = controlState
+		local var2 = controlState
 		
-		if p3.props.isDisabled then
-			var18 = controlStateModule.Disabled
-		elseif p3.props.isSelectedStyle then
-			var18 = controlStateModule.Hover
+		if p1.props.isDisabled then
+			var2 = controlStateModule.Disabled
+		elseif p1.props.isSelectedStyle then
+			var2 = controlStateModule.Hover
 		end
-		local var19 = getContentStyleModule(buttonStateColorMap, controlState, p4)
-		local var20 = text and getContentStyleModule(textStateColorMap, var18, p4)
-		local var21 = icon and getContentStyleModule(iconStateColorMap, controlState, p4)
+		local var3 = getContentStyleModule(buttonStateColorMap, controlState, p2)
+		local var4 = text and getContentStyleModule(textStateColorMap, var2, p2)
+		local var5 = icon and getContentStyleModule(iconStateColorMap, controlState, p2)
 		local _ = nil
 		
-		return roactModule.createElement(interactableModule, cryoModule.Dictionary.join(p3.props, {
+		return roactModule.createElement(interactableModule, cryoModule.Dictionary.join(p1.props, {
 			icon = cryoModule.None,
 			text = cryoModule.None,
 			buttonStateColorMap = cryoModule.None,
@@ -99,19 +99,19 @@ function segmentedControlTabName.render(p3)
 			isSelectedStyle = cryoModule.None,
 			[roactModule.Children] = cryoModule.None,
 			isDisabled = isDisabled,
-			onStateChanged = p3.onStateChanged,
-			userInteractionEnabled = p3.props.userInteractionEnabled,
+			onStateChanged = p1.onStateChanged,
+			userInteractionEnabled = p1.props.userInteractionEnabled,
 			Image = cryoModule.None,
 			ScaleType = Enum.ScaleType.Slice,
-			ImageColor3 = var19.Color,
-			ImageTransparency = var19.Transparency,
+			ImageColor3 = var3.Color,
+			ImageTransparency = var3.Transparency,
 			BackgroundTransparency = 1,
 			AutoButtonColor = false,
-			[roactModule.Event.Activated] = p3.props.onActivated
+			[roactModule.Event.Activated] = p1.props.onActivated
 		}), {
 			ButtonContent = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, if isLoading then {
 				isLoadingShimmer = roactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1) })
-			} else p3.props[roactModule.Children] or {
+			} else p1.props[roactModule.Children] or {
 				UIListLayout = roactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
@@ -124,8 +124,8 @@ function segmentedControlTabName.render(p3)
 					LayoutOrder = 1,
 					Size = UDim2.new(0, getIconSizeModule(iconSizeModule.Medium), 0, getIconSizeModule(iconSizeModule.Medium)),
 					Image = icon,
-					ImageColor3 = var21.Color,
-					ImageTransparency = var21.Transparency
+					ImageColor3 = var5.Color,
+					ImageTransparency = var5.Transparency
 				}) or nil,
 				Text = text and roactModule.createElement(genericTextLabelModule, {
 					BackgroundTransparency = 1,
@@ -133,8 +133,8 @@ function segmentedControlTabName.render(p3)
 					AutomaticSize = Enum.AutomaticSize.X,
 					TextTruncate = Enum.TextTruncate.AtEnd,
 					Text = text,
-					fontStyle = p3.props.fontStyle or p4.Font.Header2,
-					colorStyle = var20
+					fontStyle = p1.props.fontStyle or p2.Font.Header2,
+					colorStyle = var4
 				}) or nil
 			})
 		})

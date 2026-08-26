@@ -2,15 +2,15 @@
 local roduxModule = require(roduxFriends.Parent.Rodux)
 local requestReceivedCountUpdatedModule = require(roduxFriends.Actions.RequestReceivedCountUpdated)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), requestReceivedCountUpdatedModule (ref)
 	return roduxModule.createReducer(0, {
-		[requestReceivedCountUpdatedModule.name] = function(_, p1)
-			assert(type(p1.payload.count) == "number", "Expected count to be a number")
+		[requestReceivedCountUpdatedModule.name] = function(_, p2)
+			assert(type(p2.payload.count) == "number", "Expected count to be a number")
 			
-			return p1.payload.count
+			return p2.payload.count
 		end,
-		[p0.friendsNetworking.GetFriendRequestsCount.Succeeded.name] = function(_, p2)
+		[p1.friendsNetworking.GetFriendRequestsCount.Succeeded.name] = function(_, p2)
 			return p2.responseBody.count
 		end
 	})

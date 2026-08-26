@@ -5,9 +5,9 @@ local fStringPaginatedCarouselExperimentLayer = require(parent.SharedFlags).FStr
 return {
 	usePaginatedFriendsCarouselExperiment = function()
 		-- upvalues: useUserExperiment (ref), fStringPaginatedCarouselExperimentLayer (ref)
-		return true, useUserExperiment({ fStringPaginatedCarouselExperimentLayer }, function(p0)
+		return true, useUserExperiment({ fStringPaginatedCarouselExperimentLayer }, function(p1)
 			-- upvalues: fStringPaginatedCarouselExperimentLayer (copy)
-			return (p0[fStringPaginatedCarouselExperimentLayer] or {}).friendsSortVariant
+			return (p1[fStringPaginatedCarouselExperimentLayer] or {}).friendsSortVariant
 		end)
 	end
 }

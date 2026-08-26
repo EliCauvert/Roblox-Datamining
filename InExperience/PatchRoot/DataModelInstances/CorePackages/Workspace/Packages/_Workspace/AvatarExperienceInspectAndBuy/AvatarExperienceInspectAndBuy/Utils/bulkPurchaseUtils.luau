@@ -10,11 +10,11 @@ local getPriceInRobux = require(avatarExperienceInspectAndBuy.Utils.itemDetailsU
 local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
 local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
 
-local function createBulkPurchaseRequestItem(p0)
+local function createBulkPurchaseRequestItem(p1)
 	-- upvalues: itemTypeEnum (ref)
 	return {
-		id = p0.id and tonumber(p0.id) or 0,
-		itemType = if p0.itemType == itemTypeEnum.Asset then Enum.AvatarItemType.Asset.Value else Enum.AvatarItemType.Bundle.Value
+		id = p1.id and tonumber(p1.id) or 0,
+		itemType = if p1.itemType == itemTypeEnum.Asset then Enum.AvatarItemType.Asset.Value else Enum.AvatarItemType.Bundle.Value
 	}
 end
 
@@ -32,77 +32,77 @@ return {
 		
 		return if id then convertBundleInfoToItemDataModule(id) else nil
 	end,
-	isPurchasableItem = function(p3)
+	isPurchasableItem = function(p1)
 		-- upvalues: priceStatusModule (ref)
-		return if p3 ~= priceStatusModule.Free then if p3 ~= priceStatusModule.PurchaseFromRoblox then p3 == priceStatusModule.PurchaseFromResale else true else true
+		return if p1 ~= priceStatusModule.Free then if p1 ~= priceStatusModule.PurchaseFromRoblox then p1 == priceStatusModule.PurchaseFromResale else true else true
 	end,
 	createBulkPurchaseRequestItem = createBulkPurchaseRequestItem,
-	getBulkPurchaseEligibleItems = function(p4, p5, p6)
+	getBulkPurchaseEligibleItems = function(p1, p2, p3)
 		-- upvalues: itemTypeEnum (ref), convertAssetInfoToItemDataModule (ref), convertBundleInfoToItemDataModule (ref), getPriceStatusModule (ref), priceStatusModule (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), getPriceInRobux (ref), createBulkPurchaseRequestItem (ref)
-		if not p4 then
+		if not p1 then
 			return { totalPrice = 0, requestedItems = {} }
 		end
 		local t = {}
-		local var7 = 0
+		local var1 = 0
 		
-		for i, v in p4 do
-			local var8
+		for i, v in p1 do
+			local var2
 			if v.itemType == itemTypeEnum.Asset then
-				local id = p5.assets[v.id]
-				var8 = if not id then nil else convertAssetInfoToItemDataModule(id)
+				local id = p2.assets[v.id]
+				var2 = if not id then nil else convertAssetInfoToItemDataModule(id)
 			elseif v.itemType == itemTypeEnum.Bundle then
-				local id = p5.bundles[v.id]
-				var8 = if not id then nil else convertBundleInfoToItemDataModule(id)
+				local id = p2.bundles[v.id]
+				var2 = if not id then nil else convertBundleInfoToItemDataModule(id)
 			else
-				var8 = nil
+				var2 = nil
 			end
-			local var9 = getPriceStatusModule(var8, true)
+			local var3 = getPriceStatusModule(var2, true)
 			
-			if var8 then
-				local var10 = if var9 ~= priceStatusModule.Free then if var9 ~= priceStatusModule.PurchaseFromRoblox then var9 == priceStatusModule.PurchaseFromResale else true else true
+			if var2 then
+				local var4 = if var3 ~= priceStatusModule.Free then if var3 ~= priceStatusModule.PurchaseFromRoblox then var3 == priceStatusModule.PurchaseFromResale else true else true
 				
-				if var10 then
-					var10 = nil
+				if var4 then
+					var4 = nil
 					
 					if fFlagAXEnableIaBTimedOptionsBulkPurchase then
 						local _ = nil
 						
-						if p6 and var8.id then
-							local id = p6[var8.id]
+						if p3 and var2.id then
+							local id = p3[var2.id]
 							
 							if id and id.timedOptions then
 								for i_1, v_1 in id.timedOptions do
 									if v_1.selected then
-										var10 = getPriceInRobux(var8, var9)
-										local var11 = createBulkPurchaseRequestItem(var8)
+										var4 = getPriceInRobux(var2, var3)
+										local var5 = createBulkPurchaseRequestItem(var2)
 										
 										if v_1.days > 0 then
-											var10 = v_1.price
-											var11.PurchaseOptions = {
+											var4 = v_1.price
+											var5.PurchaseOptions = {
 												{
 													Type = Enum.PurchaseOption.TimedOption,
 													Value = v_1.days * 86400
 												}
 											}
 										end
-										table.insert(t, var11)
+										table.insert(t, var5)
 									end
 								end
 							else
-								var10 = getPriceInRobux(var8, var9)
-								table.insert(t, createBulkPurchaseRequestItem(var8))
+								var4 = getPriceInRobux(var2, var3)
+								table.insert(t, createBulkPurchaseRequestItem(var2))
 							end
 						end
 					else
-						table.insert(t, createBulkPurchaseRequestItem(var8))
-						var10 = getPriceInRobux(var8, var9)
+						table.insert(t, createBulkPurchaseRequestItem(var2))
+						var4 = getPriceInRobux(var2, var3)
 					end
-					if var10 ~= nil then
-						var7 += var10
+					if var4 ~= nil then
+						var1 += var4
 					end
 				end
 			end
 		end
-		return { requestedItems = t, totalPrice = var7 }
+		return { requestedItems = t, totalPrice = var1 }
 	end
 }

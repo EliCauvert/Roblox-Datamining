@@ -1,5 +1,5 @@
 ﻿return {
-	unreachable = function(p0)
-		error(`unhandled tab type: {p0}`)
+	unreachable = function(p1)
+		error(`unhandled tab type: {p1}`)
 	end
 }

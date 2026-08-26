@@ -1,8 +1,8 @@
 ﻿local luauPolyfillModule = require(script.Parent.Parent.Parent.LuauPolyfill)
 
 return luauPolyfillModule.Object.assign({}, luauPolyfillModule.Object, {
-	getPrototypeOf = function(p0)
-		local var1 = getmetatable(p0)
+	getPrototypeOf = function(p1)
+		local var1 = getmetatable(p1)
 		
 		return if var1 ~= false then var1 else nil
 	end,

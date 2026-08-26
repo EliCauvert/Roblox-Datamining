@@ -1,9 +1,9 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceSave").Context.AvatarSaveContext)
 
-return function(value, p0, p1)
+return function(value, p1, p2)
 	local t = {}
 	local equippedAssets = value.equipped.EquippedAssets
-	local equippedAssets_1 = p0.equipped.EquippedAssets
+	local equippedAssets_1 = p1.equipped.EquippedAssets
 	
 	if equippedAssets == nil and equippedAssets_1 == nil then
 		return true
@@ -11,7 +11,7 @@ return function(value, p0, p1)
 		return false
 	end
 	for i, v in equippedAssets do
-		if p1[i] ~= nil then
+		if p2[i] ~= nil then
 			for i_1, v_1 in v do
 				if v_1.order ~= nil then
 					table.insert(t, { itemId = i_1, assetTypeId = i, order = v_1.order })
@@ -20,7 +20,7 @@ return function(value, p0, p1)
 		end
 	end
 	for i_1, v_1 in value.tryOn.OutfitTryOn.TryOnItems or {} do
-		if p1[v_1.itemSubType] ~= nil and v_1.order ~= nil then
+		if p2[v_1.itemSubType] ~= nil and v_1.order ~= nil then
 			table.insert(t, {
 				itemId = v_1.itemId,
 				assetTypeId = v_1.itemSubType,
@@ -29,8 +29,8 @@ return function(value, p0, p1)
 		end
 	end
 	local var1
-	table.sort(t, function(p2, p3)
-		return p2.order < p3.order
+	table.sort(t, function(p3, p4)
+		return p3.order < p4.order
 	end)
 	local order = nil
 	
@@ -41,7 +41,7 @@ return function(value, p0, p1)
 		if equippedAssets_1[v_2.assetTypeId] == nil or equippedAssets_1[v_2.assetTypeId][v_2.itemId] == nil then
 			var1 = false
 			
-			for i_3, v_3 in p0.tryOn.OutfitTryOn.TryOnItems or {} do
+			for i_3, v_3 in p1.tryOn.OutfitTryOn.TryOnItems or {} do
 				if v_2.itemId == v_3.itemId then
 					if v_3.order ~= nil and v_3.order >= order then
 						var1 = true

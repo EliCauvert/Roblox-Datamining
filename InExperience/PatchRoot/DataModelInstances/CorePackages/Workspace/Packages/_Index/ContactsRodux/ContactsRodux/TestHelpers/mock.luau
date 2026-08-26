@@ -44,9 +44,9 @@ return {
 			}
 		}
 	end),
-	mockUploadContactsAction = roduxModule.makeActionCreator("UPLOAD_CONTACTS", function(p0)
+	mockUploadContactsAction = roduxModule.makeActionCreator("UPLOAD_CONTACTS", function(p1)
 		return {
-			responseBody = if p0 then { matchedContactFields = p0 } else {
+			responseBody = if p1 then { matchedContactFields = p1 } else {
 				matchedContactFields = {
 					{
 						userContactId = "abc-123-456-1235",

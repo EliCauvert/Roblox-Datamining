@@ -13,9 +13,9 @@ local t = {
 	policy = "Feature.Moments.Action.GenerateTextFeedbackPolicy"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useCreationFlowStringsModule (ref), useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref), text (ref)
-	local var6 = useLocalization(t)
+	local var1 = useLocalization(t)
 	
 	return reactModule.createElement(dialog.Root, {
 		hasBackdrop = true,
@@ -25,26 +25,26 @@ return function(p0)
 		DialogTitle = reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-center content-emphasis",
-			Text = var6.title
+			Text = var1.title
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 2,
 			orientation = foundationModule.Enums.Orientation.Vertical,
 			actions = {
 				{
-					text = var6.notHelpful,
+					text = var1.notHelpful,
 					variant = foundationModule.Enums.ButtonVariant.Standard,
-					onActivated = p0.onNotHelpful
+					onActivated = p1.onNotHelpful
 				},
 				{
-					text = var6.policy,
+					text = var1.policy,
 					variant = foundationModule.Enums.ButtonVariant.Standard,
-					onActivated = p0.onPolicyViolation
+					onActivated = p1.onPolicyViolation
 				},
 				{
 					text = useCreationFlowStringsModule().GeneralCtaCancel,
 					variant = foundationModule.Enums.ButtonVariant.Standard,
-					onActivated = p0.onDismiss
+					onActivated = p1.onDismiss
 				}
 			}
 		})

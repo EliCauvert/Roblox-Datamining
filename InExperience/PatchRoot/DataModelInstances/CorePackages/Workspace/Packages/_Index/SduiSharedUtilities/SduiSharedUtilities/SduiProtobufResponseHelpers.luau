@@ -11,74 +11,74 @@ local fFlagPromptsHandlerEnabled = require(parent.SharedFlags).FFlagPromptsHandl
 local fFlagSduiPageEntrySurfacing = require(parent.SharedFlags).FFlagSduiPageEntrySurfacing
 local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
 
-local function decodeProto(p0, p1)
-	return p0.decode(if typeof(p1) == "string" then buffer.fromstring(p1) else p1)
+local function decodeProto(p1, p2)
+	return p1.decode(if typeof(p2) == "string" then buffer.fromstring(p2) else p2)
 end
 
-local function decodeProtobufJson(p2, p3)
+local function decodeProtobufJson(p1, p2)
 	-- upvalues: httpService (ref)
-	return p2.jsonDecode(httpService:JSONDecode(if typeof(p3) == "buffer" then buffer.tostring(p3) else p3))
+	return p1.jsonDecode(httpService:JSONDecode(if typeof(p2) == "buffer" then buffer.tostring(p2) else p2))
 end
 
-local function parseSurfacing(p4)
+local function parseSurfacing(p1)
 	-- upvalues: getProtoVariableMapper (ref)
-	if not p4 or not p4.kind then
+	if not p1 or not p1.kind then
 		return nil
 	end
-	local kind = p4.kind
+	local kind = p1.kind
 	
 	if kind.type == nil or kind.value == nil then
 		return nil
 	end
-	local var5 = getProtoVariableMapper()
+	local var1 = getProtoVariableMapper()
 	
 	return {
-		[var5.mapPropName(kind.type)] = var5.camelCaseKeys(kind.value)
+		[var1.mapPropName(kind.type)] = var1.camelCaseKeys(kind.value)
 	}
 end
 
 return {
 	decodeProto = decodeProto,
 	decodeProtobufJson = decodeProtobufJson,
-	makeProtoResponseDecoder = function(p5)
+	makeProtoResponseDecoder = function(p1)
 		-- upvalues: decodeProto (ref)
-		return function(p6)
-			-- upvalues: decodeProto (copy), p5 (ref)
-			return decodeProto(p5, p6)
+		return function(p2)
+			-- upvalues: decodeProto (copy), p1 (ref)
+			return decodeProto(p1, p2)
 		end
 	end,
-	makeProtobufJsonResponseDecoder = function(p7)
+	makeProtobufJsonResponseDecoder = function(p1)
 		-- upvalues: decodeProtobufJson (ref)
-		return function(p8)
-			-- upvalues: decodeProtobufJson (copy), p7 (ref)
-			return decodeProtobufJson(p7, p8)
+		return function(p2)
+			-- upvalues: decodeProtobufJson (copy), p1 (ref)
+			return decodeProtobufJson(p1, p2)
 		end
 	end,
-	parsePageEntriesFromResponse = function(p9)
+	parsePageEntriesFromResponse = function(p1)
 		-- upvalues: fFlagSduiUniversalPageEntry (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagPromptsHandlerEnabled (ref), fFlagSduiPageEntrySurfacing (ref), parseSurfacing (ref)
 		local t = {}
 		
-		if p9.page_entries then
-			for i, v in p9.page_entries do
+		if p1.page_entries then
+			for i, v in p1.page_entries do
 				local robloxComponent = v.page_entry.roblox_component
-				local var7 = if fFlagSduiUniversalPageEntry then v.input_data and (v.input_data.kind and v.input_data.kind.value) else v.kind and v.kind.value
+				local var1 = if fFlagSduiUniversalPageEntry then v.input_data and (v.input_data.kind and v.input_data.kind.value) else v.kind and v.kind.value
 				local identifier = v.page_entry.identifier
-				local var8 = if fFlagEnableHomepagePromptsForModalsAndBanners or fFlagPromptsHandlerEnabled then v.page_entry.category else nil
+				local var2 = if fFlagEnableHomepagePromptsForModalsAndBanners or fFlagPromptsHandlerEnabled then v.page_entry.category else nil
 				table.insert(t, {
 					robloxComponentType = robloxComponent,
 					identifier = if identifier ~= "" then nil else identifier,
-					componentInputData = var7,
+					componentInputData = var1,
 					title = v.page_entry.title,
-					category = if var8 == nil or var8 == "" then nil else var8,
+					category = if var2 == nil or var2 == "" then nil else var2,
 					surfacing = if fFlagSduiPageEntrySurfacing then parseSurfacing(v.page_entry.surfacing) else nil
 				})
 			end
 		end
 		return t
 	end,
-	parseHydrationDataFromResponse = function(p10)
+	parseHydrationDataFromResponse = function(p2)
 		-- upvalues: fFlagSduiHydrationDataCamelCasePropertyKeys (ref), getProtoVariableMapper (ref), fFlagSduiHydrationDataCamelCaseTopLevelKeys (ref)
-		local hydrationData = p10.hydration_data
+		local hydrationData = p2.hydration_data
 		
 		if hydrationData then
 			for i, v in hydrationData do
@@ -99,12 +99,12 @@ return {
 				end
 			end
 			if fFlagSduiHydrationDataCamelCaseTopLevelKeys then
-				local var9 = getProtoVariableMapper()
+				local var3 = getProtoVariableMapper()
 				local t = {}
 				
 				for i_1, v_1 in hydrationData do
 					if v_1 then
-						t[var9.mapPropName(i_1)] = v_1
+						t[var3.mapPropName(i_1)] = v_1
 					end
 				end
 				for i_2, v_2 in t do
@@ -114,10 +114,10 @@ return {
 		end
 		return hydrationData
 	end,
-	parseLocalizedLiteralsFromResponse = function(p11)
-		return if p11.localized_literals then p11.localized_literals else nil
+	parseLocalizedLiteralsFromResponse = function(p3)
+		return if p3.localized_literals then p3.localized_literals else nil
 	end,
-	parseTemplateEntriesFromResponse = function(value, p12)
+	parseTemplateEntriesFromResponse = function(value, p3)
 		-- upvalues: fFlagSduiClientTemplateCache (ref)
 		local t = {}
 		local t_1 = {}
@@ -127,7 +127,7 @@ return {
 			for i, v in value.templates do
 				t_1[v.roblox_component] = v.template
 				
-				if fFlagSduiClientTemplateCache and p12 then
+				if fFlagSduiClientTemplateCache and p3 then
 					t_2[v.roblox_component] = i
 				end
 				t[i] = v.template

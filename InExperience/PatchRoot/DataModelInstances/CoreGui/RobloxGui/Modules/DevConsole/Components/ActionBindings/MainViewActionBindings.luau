@@ -9,41 +9,41 @@ local constantsModule = require(script.Parent.Parent.Parent.Constants)
 local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
 local mainViewActionBindings = roactModule.Component:extend("MainViewActionBindings")
 
-function mainViewActionBindings.init(p0)
+function mainViewActionBindings.init(p1)
 	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ utilTabHeight = p1 })
+	function p0.onUtilTabHeightChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ utilTabHeight = p2 })
 	end
 	
 	function p0.onSearchTermChanged(p2)
-		-- upvalues: p0 (ref)
-		p0.props.dispatchActionBindingsUpdateSearchFilter(p2, {})
+		-- upvalues: p1 (ref)
+		p1.props.dispatchActionBindingsUpdateSearchFilter(p2, {})
 	end
 	
-	p0.utilRef = roactModule.createRef()
-	p0.state = { utilTabHeight = 0 }
+	p1.utilRef = roactModule.createRef()
+	p1.state = { utilTabHeight = 0 }
 end
 
-function mainViewActionBindings.didMount(p3)
-	p3:setState({ utilTabHeight = p3.utilRef.current.Size.Y.Offset })
+function mainViewActionBindings.didMount(p1)
+	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewActionBindings.didUpdate(p4)
-	local size = p4.utilRef.current.Size
+function mainViewActionBindings.didUpdate(p1)
+	local size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p4.state.utilTabHeight then
-		p4:setState({ utilTabHeight = size.Y.Offset })
+	if size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = size.Y.Offset })
 	end
 end
 
-function mainViewActionBindings.render(p5)
+function mainViewActionBindings.render(p1)
 	-- upvalues: roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), actionBindingsChartModule (ref)
-	local size = p5.props.size
-	local formFactor = p5.props.formFactor
-	local tabList = p5.props.tabList
-	local bindingsSearchTerm = p5.props.bindingsSearchTerm
-	local utilTabHeight = p5.state.utilTabHeight
+	local size = p1.props.size
+	local formFactor = p1.props.formFactor
+	local tabList = p1.props.tabList
+	local bindingsSearchTerm = p1.props.bindingsSearchTerm
+	local utilTabHeight = p1.state.utilTabHeight
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -61,9 +61,9 @@ function mainViewActionBindings.render(p5)
 			formFactor = formFactor,
 			tabList = tabList,
 			searchTerm = bindingsSearchTerm,
-			refForParent = p5.utilRef,
-			onHeightChanged = p5.onUtilTabHeightChanged,
-			onSearchTermChanged = p5.onSearchTermChanged
+			refForParent = p1.utilRef,
+			onHeightChanged = p1.onUtilTabHeightChanged,
+			onSearchTermChanged = p1.onSearchTermChanged
 		}),
 		ActionBindings = utilTabHeight > 0 and roactModule.createElement(actionBindingsChartModule, {
 			layoutOrder = 2,
@@ -73,16 +73,16 @@ function mainViewActionBindings.render(p5)
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p6, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
-		bindingsSearchTerm = p6.ActionBindingsData.bindingsSearchTerm
+		bindingsSearchTerm = p1.ActionBindingsData.bindingsSearchTerm
 	}
-end, function(p7)
+end, function(p1)
 	-- upvalues: actionBindingsUpdateSearchFilterModule (ref)
 	return {
-		dispatchActionBindingsUpdateSearchFilter = function(p8, p9)
-			-- upvalues: p7 (ref), actionBindingsUpdateSearchFilterModule (copy)
-			p7(actionBindingsUpdateSearchFilterModule(p8, p9))
+		dispatchActionBindingsUpdateSearchFilter = function(p2, p3)
+			-- upvalues: p1 (ref), actionBindingsUpdateSearchFilterModule (copy)
+			p1(actionBindingsUpdateSearchFilterModule(p2, p3))
 		end
 	}
 end)(mainViewActionBindings)

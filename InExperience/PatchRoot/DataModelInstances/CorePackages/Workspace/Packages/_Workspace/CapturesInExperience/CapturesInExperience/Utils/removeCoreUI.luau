@@ -6,9 +6,9 @@ return function()
 	-- upvalues: constantsModule (ref), capturesRecursiveCoreUIRemoval (ref), coreGuiService (ref)
 	local t = {}
 	
-	local function _(p0)
+	local function _(p1)
 		-- upvalues: constantsModule (copy)
-		return if p0:IsA("LayerCollector") then if p0:IsA("BillboardGui") then false elseif p0.Enabled then p0.Name ~= constantsModule.OverlayName else false else false
+		return if p1:IsA("LayerCollector") then if p1:IsA("BillboardGui") then false elseif p1.Enabled then p1.Name ~= constantsModule.OverlayName else false else false
 	end
 	
 	if capturesRecursiveCoreUIRemoval then

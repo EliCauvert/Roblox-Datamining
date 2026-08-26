@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	return p0:sub(-p1:len()) == p1
+﻿return function(p1, p2)
+	return p1:sub(-p2:len()) == p2
 end

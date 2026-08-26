@@ -13,8 +13,8 @@ local foundationProvider = foundationModule.FoundationProvider
 local colorMode = foundationModule.Enums.ColorMode
 local device = foundationModule.Enums.Device
 local t = { Light = colorMode.Light, Dark = colorMode.Dark }
-local var9 = roduxModule.Store.new(function(p0)
-	return p0
+local var1 = roduxModule.Store.new(function(p1)
+	return p1
 end, {
 	ScreenSize = Vector2.new(1920, 1080),
 	TopBar = { topBarHeight = 0 },
@@ -34,9 +34,9 @@ return {
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
 	mapStory = function(p1)
-		-- upvalues: reactModule (ref), roactRoduxModule (ref), var9 (ref), roactNavigationModule (ref), t_1 (ref), foundationProvider (ref), t (ref), device (ref), appStyleProvider (ref)
+		-- upvalues: reactModule (ref), roactRoduxModule (ref), var1 (ref), roactNavigationModule (ref), t_1 (ref), foundationProvider (ref), t (ref), device (ref), appStyleProvider (ref)
 		return function(p2)
-			-- upvalues: reactModule (copy), roactRoduxModule (copy), var9 (copy), roactNavigationModule (copy), t_1 (copy), foundationProvider (copy), t (copy), device (copy), appStyleProvider (copy), p1 (ref)
+			-- upvalues: reactModule (copy), roactRoduxModule (copy), var1 (copy), roactNavigationModule (copy), t_1 (copy), foundationProvider (copy), t (copy), device (copy), appStyleProvider (copy), p1 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -48,7 +48,7 @@ return {
 					PaddingLeft = UDim.new(0, 10),
 					PaddingRight = UDim.new(0, 10)
 				}),
-				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var9 }, {
+				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var1 }, {
 					NavigationContext = reactModule.createElement(roactNavigationModule.Context.Provider, { value = t_1 }, {
 						FoundationContext = reactModule.createElement(foundationProvider, {
 							colorMode = t[p2.theme],

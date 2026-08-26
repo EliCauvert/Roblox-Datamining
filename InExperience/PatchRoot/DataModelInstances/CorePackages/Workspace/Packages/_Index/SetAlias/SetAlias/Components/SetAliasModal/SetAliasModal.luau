@@ -33,101 +33,101 @@ local callbackInputBox = socialLibraries.Components.CallbackInputBox
 local fFlagConnectionsToFriendsRename = require(parent_1.SharedFlags).FFlagConnectionsToFriendsRename
 local fFlagSetAliasFixFocusNavigationModule = require(parent.Flags.FFlagSetAliasFixFocusNavigation)
 
-return function(p0)
+return function(p1)
 	-- upvalues: react (ref), useEffectOnce (ref), useStyle (ref), useLocalization (ref), textKeysModule (ref), fFlagConnectionsToFriendsRename (ref), useAnalytics (ref), eventNames (ref), fFlagSetAliasFixFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), interactiveAlert (ref), fitFrameVertical (ref), fitTextLabel (ref), skeleton (ref), radius (ref), imageSetLabel (ref), images (ref), callbackInputBox (ref), iconSize (ref), buttonType (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var7 = react.useRef(nil)
-	local var8, var9 = react.useState(Vector2.new(0, 0))
-	local var10, var11 = react.useState(p0.alias)
-	local var12 = if p0.alias then utf8.len(p0.alias) or 0 else 0
-	local var13, var14 = react.useState(var12)
+	local var1 = react.useRef(nil)
+	local var2, var3 = react.useState(Vector2.new(0, 0))
+	local var4, var5 = react.useState(p1.alias)
+	local var6 = if p1.alias then utf8.len(p1.alias) or 0 else 0
+	local var7, var8 = react.useState(var6)
 	useEffectOnce(function()
-		-- upvalues: var11 (ref), p0 (ref), var14 (ref), var12 (ref)
-		var11(p0.alias)
-		var14(var12)
-	end, p0.isLoading == false)
-	local var15 = useStyle()
-	local font = var15.Font
-	local theme = var15.Theme
-	local var16 = font.BaseSize * font.Body.RelativeSize
-	local var17 = useLocalization({
+		-- upvalues: var5 (ref), p1 (ref), var8 (ref), var6 (ref)
+		var5(p1.alias)
+		var8(var6)
+	end, p1.isLoading == false)
+	local var9 = useStyle()
+	local font = var9.Font
+	local theme = var9.Theme
+	local var10 = font.BaseSize * font.Body.RelativeSize
+	local var11 = useLocalization({
 		titleText = textKeysModule.CUSTOMIZE_NAME_MODAL_TITLE,
 		cancelButtonText = textKeysModule.CANCEL_BUTTON,
 		saveButtonText = textKeysModule.SAVE_BUTTON,
-		descriptionText = if p0.displayName then {
+		descriptionText = if p1.displayName then {
 			textKeysModule.SET_CUSTOM_NAME_DESCRIPTION,
-			displayName = p0.displayName
+			displayName = p1.displayName
 		} else textKeysModule.SET_CUSTOM_NAME_NO_DISPLAY_NAME_DESCRIPTION,
 		recognizeFriendsByCustomNameText = if fFlagConnectionsToFriendsRename then textKeysModule.RECOGNIZE_FRIENDS_BY_CUSTOM_NAME_DESCRIPTION else textKeysModule.RECOGNIZE_CONNECTIONS_BY_CUSTOM_NAME_DESCRIPTION,
 		customNamePlaceholderText = textKeysModule.CUSTOM_NAME_PLACEHOLDER,
 		invalidAliasErrorText = textKeysModule.INVALID_ALIAS_ERROR
 	})
-	local var18 = useAnalytics()
-	local var19 = react.useRef(false)
-	local var20 = not p0.hasSaveAliasError
-	local var21 = react.useCallback(function(p1)
-		-- upvalues: var8 (ref), var9 (ref)
-		if var8.X ~= p1.AbsoluteSize.X then
-			var9(p1.AbsoluteSize)
+	local var12 = useAnalytics()
+	local var13 = react.useRef(false)
+	local var14 = not p1.hasSaveAliasError
+	local var15 = react.useCallback(function(p2)
+		-- upvalues: var2 (ref), var3 (ref)
+		if var2.X ~= p2.AbsoluteSize.X then
+			var3(p2.AbsoluteSize)
 		end
-	end, { var8 })
+	end, { var2 })
 	
-	local var22 = function()
-		-- upvalues: p0 (ref), var10 (ref)
-		p0.saveOnActivated(var10)
+	local var16 = function()
+		-- upvalues: p1 (ref), var4 (ref)
+		p1.saveOnActivated(var4)
 	end
 	
-	local var23 = function()
-		-- upvalues: var18 (ref), eventNames (copy), p0 (ref)
-		if var18 then
-			var18.fireAnalyticsEvent(eventNames.CustomizeNameModalClosed)
+	local var17 = function()
+		-- upvalues: var12 (ref), eventNames (copy), p1 (ref)
+		if var12 then
+			var12.fireAnalyticsEvent(eventNames.CustomizeNameModalClosed)
 		end
-		p0.cancelOnActivated()
+		p1.cancelOnActivated()
 	end
 	
-	local var24 = function(p2)
-		-- upvalues: var13 (ref), var10 (ref), var7 (ref), var14 (ref), var11 (ref), p0 (ref), var18 (ref), eventNames (copy), var19 (ref)
+	local var18 = function(p2)
+		-- upvalues: var7 (ref), var4 (ref), var1 (ref), var8 (ref), var5 (ref), p1 (ref), var12 (ref), eventNames (copy), var13 (ref)
 		local charCount = utf8.len(p2)
 		
 		if charCount == nil then return end
-		local var27 = charCount
+		local var19 = charCount
 		
-		if var27 > 20 then
-			p2 = if var13 == 20 then var10 else string.sub(p2, 1, utf8.offset(p2, 21) - 1)
-			var27 = 20
+		if var19 > 20 then
+			p2 = if var7 == 20 then var4 else string.sub(p2, 1, utf8.offset(p2, 21) - 1)
+			var19 = 20
 			
-			if var7 and var7.current then
-				var7.current.Text = p2
+			if var1 and var1.current then
+				var1.current.Text = p2
 			end
 		end
-		var14(var27)
-		var11(p2)
+		var8(var19)
+		var5(p2)
 		
-		if p0.onTextChanged then
-			p0.onTextChanged()
+		if p1.onTextChanged then
+			p1.onTextChanged()
 		end
-		if var27 == 0 and var18 then
-			var18.fireAnalyticsEvent(eventNames.CustomizeNameClearedInput)
+		if var19 == 0 and var12 then
+			var12.fireAnalyticsEvent(eventNames.CustomizeNameClearedInput)
 		end
-		if var27 == 20 and var18 and not var19.current then
-			var19.current = true
-			var18.fireAnalyticsEvent(eventNames.CustomizeNameMaximumCharLimitTyped, { alias = p2 })
+		if var19 == 20 and var12 and not var13.current then
+			var13.current = true
+			var12.fireAnalyticsEvent(eventNames.CustomizeNameMaximumCharLimitTyped, { alias = p2 })
 		end
 	end
 	
-	local var25 = react.createElement(interactiveAlert, {
-		title = var17.titleText,
-		screenSize = p0.screenSize,
+	local var19 = react.createElement(interactiveAlert, {
+		title = var11.titleText,
+		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0),
-		position = UDim2.new(0.5, 0, 0, var8.Y),
+		position = UDim2.new(0.5, 0, 0, var2.Y),
 		middleContent = function()
-			-- upvalues: react (copy), fitFrameVertical (copy), var21 (ref), fitTextLabel (copy), var8 (ref), font (ref), var17 (ref), theme (ref), p0 (ref), skeleton (copy), var16 (ref), radius (copy), imageSetLabel (copy), images (copy), callbackInputBox (copy), iconSize (copy), var24 (ref), var7 (ref), var13 (ref)
+			-- upvalues: react (copy), fitFrameVertical (copy), var15 (ref), fitTextLabel (copy), var2 (ref), font (ref), var11 (ref), theme (ref), p1 (ref), skeleton (copy), var10 (ref), radius (copy), imageSetLabel (copy), images (copy), callbackInputBox (copy), iconSize (copy), var18 (ref), var1 (ref), var7 (ref)
 			return react.createElement(fitFrameVertical, {
 				BackgroundTransparency = 1,
 				width = UDim.new(1, 0),
 				FillDirection = Enum.FillDirection.Vertical,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				contentPadding = UDim.new(0, 16),
-				[react.Change.AbsoluteSize] = var21
+				[react.Change.AbsoluteSize] = var15
 			}, {
 				InputGroup = react.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -147,9 +147,9 @@ return function(p0)
 						TextWrapped = true,
 						RichText = true,
 						width = fitTextLabel.Width.FitToText,
-						maximumWidth = var8.X,
+						maximumWidth = var2.X,
 						Font = font.Body.Font,
-						Text = var17.descriptionText,
+						Text = var11.descriptionText,
 						TextSize = font.BaseSize * font.Body.RelativeSize,
 						TextColor3 = theme.TextDefault.Color
 					}),
@@ -168,22 +168,22 @@ return function(p0)
 							BackgroundTransparency = 1,
 							TextWrapped = true,
 							width = fitTextLabel.Width.FitToText,
-							maximumWidth = var8.X,
+							maximumWidth = var2.X,
 							Font = font.CaptionBody.Font,
-							Text = var17.recognizeFriendsByCustomNameText,
+							Text = var11.recognizeFriendsByCustomNameText,
 							TextSize = font.BaseSize * font.CaptionBody.RelativeSize,
 							TextColor3 = theme.TextDefault.Color
 						})
 					}),
-					LoadingShimmer = if p0.isLoading then react.createElement(skeleton, {
+					LoadingShimmer = if p1.isLoading then react.createElement(skeleton, {
 						LayoutOrder = 3,
-						Size = UDim2.new(1, 0, 0, var16 + 20),
+						Size = UDim2.new(1, 0, 0, var10 + 20),
 						radius = radius.Medium
 					}) else nil,
-					InputBackground = if not p0.isLoading then react.createElement(imageSetLabel, {
+					InputBackground = if not p1.isLoading then react.createElement(imageSetLabel, {
 						BackgroundTransparency = 1,
 						LayoutOrder = 3,
-						Size = UDim2.new(1, 0, 0, var16 + 20),
+						Size = UDim2.new(1, 0, 0, var10 + 20),
 						Image = images["component_assets/circle_21"],
 						ImageColor3 = theme.UIMuted.Color,
 						ImageTransparency = theme.UIMuted.Transparency,
@@ -193,9 +193,9 @@ return function(p0)
 						InputBorder = react.createElement(imageSetLabel, {
 							BackgroundTransparency = 1,
 							LayoutOrder = 1,
-							Size = UDim2.new(1, 0, 0, var16 + 20),
+							Size = UDim2.new(1, 0, 0, var10 + 20),
 							Image = images["component_assets/circle_21_stroke_1"],
-							ImageColor3 = if p0.hasSaveAliasError then theme.Alert.Color else theme.Divider.Color,
+							ImageColor3 = if p1.hasSaveAliasError then theme.Alert.Color else theme.Divider.Color,
 							ScaleType = Enum.ScaleType.Slice,
 							SliceCenter = Rect.new(8, 8, 9, 9)
 						}, {
@@ -209,16 +209,16 @@ return function(p0)
 								inputTextXAlignment = Enum.TextXAlignment.Left,
 								inputTextColor3 = theme.TextDefault.Color,
 								inputTextTransparency = theme.TextDefault.Transparency,
-								inputTextSize = var16,
-								initialInputText = p0.alias,
-								placeholderText = var17.customNamePlaceholderText,
+								inputTextSize = var10,
+								initialInputText = p1.alias,
+								placeholderText = var11.customNamePlaceholderText,
 								placeholderTextColor3 = theme.TextDefault.Color,
 								clearIcon = images["icons/actions/edit/clear_small"],
 								clearIconColor3 = theme.IconEmphasis.Color,
 								clearIconTransparency = theme.IconEmphasis.Transparency,
 								clearButtonSize = iconSize.Small,
-								textChangedCallback = var24,
-								inputBoxRef = var7
+								textChangedCallback = var18,
+								inputBoxRef = var1
 							})
 						})
 					}) else nil
@@ -232,14 +232,14 @@ return function(p0)
 					react.createElement(fitTextLabel, {
 						BackgroundTransparency = 1,
 						width = fitTextLabel.Width.FitToText,
-						maximumWidth = var8.X,
+						maximumWidth = var2.X,
 						Font = font.CaptionBody.Font,
-						Text = if p0.hasSaveAliasError then var17.invalidAliasErrorText else string.format("%d/%d", var13, 20),
+						Text = if p1.hasSaveAliasError then var11.invalidAliasErrorText else string.format("%d/%d", var7, 20),
 						TextSize = font.BaseSize * font.CaptionBody.RelativeSize,
-						TextColor3 = if var13 == 20 or p0.hasSaveAliasError then theme.Alert.Color else theme.TextMuted.Color,
-						TextTransparency = if var13 == 20 or p0.hasSaveAliasError then theme.Alert.Transparency else theme.TextMuted.Transparency,
-						AnchorPoint = if p0.hasSaveAliasError then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
-						Position = if p0.hasSaveAliasError then nil else UDim2.fromScale(1, 0)
+						TextColor3 = if var7 == 20 or p1.hasSaveAliasError then theme.Alert.Color else theme.TextMuted.Color,
+						TextTransparency = if var7 == 20 or p1.hasSaveAliasError then theme.Alert.Transparency else theme.TextMuted.Transparency,
+						AnchorPoint = if p1.hasSaveAliasError then Vector2.new(0, 0.5) else Vector2.new(1, 0.5),
+						Position = if p1.hasSaveAliasError then nil else UDim2.fromScale(1, 0)
 					}, {
 						UISizeConstraint = react.createElement("UISizeConstraint", {
 							MaxSize = Vector2.new(1e999, font.BaseSize * font.CaptionBody.RelativeSize * 2)
@@ -254,14 +254,14 @@ return function(p0)
 			buttons = {
 				{
 					buttonType = buttonType.Secondary,
-					props = { onActivated = var23, text = var17.cancelButtonText }
+					props = { onActivated = var17, text = var11.cancelButtonText }
 				},
 				{
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = var22,
-						text = var17.saveButtonText,
-						isDisabled = not var20
+						onActivated = var16,
+						text = var11.saveButtonText,
+						isDisabled = not var14
 					}
 				}
 			},
@@ -274,19 +274,19 @@ return function(p0)
 		isIsolated = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
 		eventHandlers = if fFlagSetAliasFixFocusNavigationModule then react.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var18 (ref), eventNames (copy), p0 (ref)
+			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var12 (ref), eventNames (copy), p1 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p3)
-						-- upvalues: var18 (copy), eventNames (copy), p0 (copy)
-						if var18 then
-							var18.fireAnalyticsEvent(eventNames.CustomizeNameModalClosed)
+					handler = inputHandlersModule.onRelease(function(p2)
+						-- upvalues: var12 (copy), eventNames (copy), p1 (copy)
+						if var12 then
+							var12.fireAnalyticsEvent(eventNames.CustomizeNameModalClosed)
 						end
-						p0.cancelOnActivated()
-						p3:cancel()
+						p1.cancelOnActivated()
+						p2:cancel()
 					end)
 				}
 			}
-		end, { var23 }) else nil
-	}, { Alert = var25 }) else var25
+		end, { var17 }) else nil
+	}, { Alert = var19 }) else var19
 end

@@ -20,61 +20,61 @@ local t_1 = {
 }
 
 return {
-	makeStepField = function(p0)
+	makeStepField = function(p1)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref), t (ref)
 		if not getFFlagMomentsAnalyticsProducerPrereqs() then
 			return {}
 		end
-		local var3 = t[p0]
+		local var1 = t[p1]
 		
-		return if var3 == nil then {} else { step = var3 }
+		return if var1 == nil then {} else { step = var1 }
 	end,
 	makeStepFieldFromState = function(p1)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref), t_1 (ref)
 		if not getFFlagMomentsAnalyticsProducerPrereqs() then
 			return {}
 		end
-		local var4 = if p1 ~= nil then nil else t_1[p1]
+		local var1 = if p1 ~= nil then nil else t_1[p1]
 		
-		return if var4 == nil then {} else { step = var4 }
+		return if var1 == nil then {} else { step = var1 }
 	end,
-	makeToolField = function(p2)
+	makeToolField = function(p1)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
-		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p2 == nil or p2.kind == nil then {} else { tool = p2.kind } else {}
+		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p1 == nil or p1.kind == nil then {} else { tool = p1.kind } else {}
 	end,
-	makeToolFieldFromKind = function(p3)
+	makeToolFieldFromKind = function(p1)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
-		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p3 == nil then {} else { tool = p3 } else {}
+		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p1 == nil then {} else { tool = p1 } else {}
 	end,
-	makeCreationBaseFields = function(p4)
+	makeCreationBaseFields = function(p1)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
-		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p4 == nil then {} else { creationSessionId = p4 } else {}
+		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p1 == nil then {} else { creationSessionId = p1 } else {}
 	end,
-	makeCaptureDescriptorFields = function(p5)
+	makeCaptureDescriptorFields = function(p1)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
 		local t = {
-			sourcePlaceId = tostring(p5.SourcePlaceId),
-			localId = tostring(p5.LocalId)
+			sourcePlaceId = tostring(p1.SourcePlaceId),
+			localId = tostring(p1.LocalId)
 		}
-		local captureType = p5.CaptureType
+		local captureType = p1.CaptureType
 		t.captureType = if typeof(captureType) == "EnumItem" then captureType.Name elseif captureType == nil then nil else tostring(captureType)
 		
 		if getFFlagMomentsAnalyticsProducerPrereqs() then
-			t.universeId = tostring(p5.SourceUniverseId)
+			t.universeId = tostring(p1.SourceUniverseId)
 		end
 		return t
 	end,
-	makeGeneratedTextOutcomeFields = function(p6, p7, p8, p9)
+	makeGeneratedTextOutcomeFields = function(p1, p2, p3, p4)
 		-- upvalues: getFFlagEnableMomentTextGeneration (ref)
 		return if getFFlagEnableMomentTextGeneration() then {
-			generatedDescriptionOutcome = if p6 == nil then "none" elseif p7 == p6 then "verbatim" elseif p7 == nil or p7 == "" then "discarded" else "edited",
-			generatedSummaryOutcome = if p8 == nil then "none" elseif p9 == p8 then "verbatim" elseif p9 == nil or p9 == "" then "discarded" else "edited"
+			generatedDescriptionOutcome = if p1 == nil then "none" elseif p2 == p1 then "verbatim" elseif p2 == nil or p2 == "" then "discarded" else "edited",
+			generatedSummaryOutcome = if p3 == nil then "none" elseif p4 == p3 then "verbatim" elseif p4 == nil or p4 == "" then "discarded" else "edited"
 		} else {}
 	end,
-	classifyGeneratedTextOutcome = function(p10, p11)
-		return if p10 == nil then "none" elseif p11 == p10 then "verbatim" elseif p11 == nil or p11 == "" then "discarded" else "edited"
+	classifyGeneratedTextOutcome = function(p1, p2)
+		return if p1 == nil then "none" elseif p2 == p1 then "verbatim" elseif p2 == nil or p2 == "" then "discarded" else "edited"
 	end,
-	enumName = function(p12)
-		return if typeof(p12) == "EnumItem" then p12.Name elseif p12 == nil then nil else tostring(p12)
+	enumName = function(p1)
+		return if typeof(p1) == "EnumItem" then p1.Name elseif p1 == nil then nil else tostring(p1)
 	end
 }

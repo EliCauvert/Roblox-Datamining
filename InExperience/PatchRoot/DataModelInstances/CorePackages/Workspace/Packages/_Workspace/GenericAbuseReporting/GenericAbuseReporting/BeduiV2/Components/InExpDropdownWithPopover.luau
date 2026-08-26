@@ -19,96 +19,96 @@ local view = foundationModule.View
 local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
 local t = { offset = 5, position = popoverSide.Bottom }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), view (ref), text (ref), icon (ref), iconName (ref), popover (ref), sideModalDropdownButtonModule (ref), popoverAlign (ref), t (ref), radius (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var7, var8 = reactModule.useState(false)
-	local var9 = reactModule.useRef(nil)
-	local var10, var11 = reactModule.useState(0)
-	local onOpenChange = p0.onOpenChange
-	local var12 = reactModule.useCallback(function(p1)
-		-- upvalues: onOpenChange (ref), var8 (ref)
+	local var1, var2 = reactModule.useState(false)
+	local var3 = reactModule.useRef(nil)
+	local var4, var5 = reactModule.useState(0)
+	local onOpenChange = p1.onOpenChange
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: onOpenChange (ref), var2 (ref)
 		if onOpenChange then
-			onOpenChange(p1)
+			onOpenChange(p2)
 		end
-		var8(p1)
+		var2(p2)
 	end, { onOpenChange })
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref)
-		if p0.value == nil then
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref)
+		if p1.value == nil then
 			return nil
 		end
-		for i, v in p0.items do
-			if v.id == p0.value then
+		for i, v in p1.items do
+			if v.id == p1.value then
 				return v
 			end
 		end
 		return nil
-	end, { p0.items, p0.value })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), var7 (ref)
-		var12(not var7)
-	end, { var7, var12 })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref)
-		var12(false)
-	end, { var12 })
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var15 (ref)
+	end, { p1.items, p1.value })
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), var1 (ref)
+		var6(not var1)
+	end, { var1, var6 })
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref)
+		var6(false)
+	end, { var6 })
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var9 (ref)
 		return {
-			[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var15) }
+			[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var9) }
 		}
-	end, { var15 })
-	local var17 = if var13 then var13.text else p0.placeholder or ""
-	local items = p0.items
-	local onItemChanged = p0.onItemChanged
-	local value = p0.value
+	end, { var9 })
+	local var11 = if var7 then var7.text else p1.placeholder or ""
+	local items = p1.items
+	local onItemChanged = p1.onItemChanged
+	local value = p1.value
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y padding-top-xxsmall",
-		ref = var9,
+		ref = var3,
 		onAbsoluteSizeChanged = function(value)
-			-- upvalues: var11 (ref)
-			var11(value.AbsoluteSize.X)
+			-- upvalues: var5 (ref)
+			var5(value.AbsoluteSize.X)
 		end,
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
-		Popover = reactModule.createElement(popover.Root, { isOpen = var7 }, {
-			Trigger = reactModule.createElement(sideModalDropdownButtonModule, { onActivated = var14, text = var17 }),
-			Anchor = reactModule.createElement(popover.Anchor, { anchorRef = var9 }),
+		Popover = reactModule.createElement(popover.Root, { isOpen = var1 }, {
+			Trigger = reactModule.createElement(sideModalDropdownButtonModule, { onActivated = var8, text = var11 }),
+			Anchor = reactModule.createElement(popover.Anchor, { anchorRef = var3 }),
 			Menu = reactModule.createElement(popover.Content, {
 				hasArrow = false,
 				align = popoverAlign.End,
 				side = t,
-				onPressedOutside = var15,
+				onPressedOutside = var9,
 				radius = radius.Medium
 			}, reactModule.createElement(focusRoot, {
 				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ModerationOverlay,
-				isFocusable = var7,
-				isAutoFocusRoot = var7,
-				isIsolated = var7,
-				eventHandlers = var16
+				isFocusable = var1,
+				isAutoFocusRoot = var1,
+				isIsolated = var1,
+				eventHandlers = var10
 			}, {
 				Menu = reactModule.createElement(view, {
 					tag = "col align-x-center align-y-center gap-xsmall auto-y padding-xsmall stroke-default radius-medium",
-					Size = UDim2.new(0, var10 - 2, 0, -2)
+					Size = UDim2.new(0, var4 - 2, 0, -2)
 				}, reactModule.useMemo(function()
-					-- upvalues: items (ref), value (ref), reactModule (copy), view (copy), var12 (ref), onItemChanged (ref), text (copy), icon (copy), iconName (copy)
+					-- upvalues: items (ref), value (ref), reactModule (copy), view (copy), var6 (ref), onItemChanged (ref), text (copy), icon (copy), iconName (copy)
 					local t = {}
 					
 					for i, v in items do
 						local id = v.id
-						local var19 = id == value
+						local var12 = id == value
 						t[`item-{tostring(id)}`] = reactModule.createElement(view, {
 							LayoutOrder = i,
 							onActivated = function()
-								-- upvalues: var12 (copy), onItemChanged (copy), id (ref)
-								var12(false)
+								-- upvalues: var6 (copy), onItemChanged (copy), id (ref)
+								var6(false)
 								onItemChanged(id)
 							end,
 							selection = { Selectable = true },
 							tag = {
 								["row flex-between size-full-0 auto-y padding-small radius-medium"] = true,
-								["bg-shift-200"] = var19
+								["bg-shift-200"] = var12
 							}
 						}, {
 							Text = reactModule.createElement(text, {
@@ -118,11 +118,11 @@ return reactModule.memo(function(p0)
 								Text = v.text,
 								TextXAlignment = Enum.TextXAlignment.Left
 							}),
-							Check = var19 and reactModule.createElement(icon, { LayoutOrder = 2, name = iconName.CheckLarge }) or nil
+							Check = var12 and reactModule.createElement(icon, { LayoutOrder = 2, name = iconName.CheckLarge }) or nil
 						})
 					end
 					return t
-				end, { items, value, onItemChanged, var12 }))
+				end, { items, value, onItemChanged, var6 }))
 			}))
 		})
 	})

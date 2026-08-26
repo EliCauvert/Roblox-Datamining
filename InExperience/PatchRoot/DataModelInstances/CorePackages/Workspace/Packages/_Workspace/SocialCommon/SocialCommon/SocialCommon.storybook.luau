@@ -13,31 +13,31 @@ local localizationProvider = localizationModule.LocalizationProvider
 local localizationRoactContext = localizationModule.LocalizationRoactContext
 local createStyleProvider = unitTestHelpersModule.createStyleProvider
 local mockLocale = socialTestHelpersModule.StoryHelpers.mockLocale
-local var9 = roduxModule.Store.new(function(p0)
-	return p0
+local var1 = roduxModule.Store.new(function(p1)
+	return p1
 end, { ScreenSize = Vector2.new(390, 844) }, { roduxModule.thunkMiddleware })
 
 local function _(p1)
 	-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationProvider (ref)
 	return function(p2)
 		-- upvalues: reactModule (copy), localizationRoactContext (copy), localizationProvider (copy), p1 (ref)
-		local var10 = reactModule.useContext(localizationRoactContext)
+		local var2 = reactModule.useContext(localizationRoactContext)
 		
 		return reactModule.createElement(localizationProvider, {
 			localization = reactModule.useMemo(function()
-				-- upvalues: var10 (ref)
+				-- upvalues: var2 (ref)
 				return setmetatable({
 					Format = function(_, p3, p4)
-						-- upvalues: var10 (copy)
+						-- upvalues: var2 (copy)
 						local ok, status = pcall(function()
-							-- upvalues: var10 (copy), p3 (ref), p4 (ref)
-							return var10:Format(p3, p4)
+							-- upvalues: var2 (copy), p3 (ref), p4 (ref)
+							return var2:Format(p3, p4)
 						end)
 						
 						return if ok then status else `\194\171{p3}\194\187`
 					end
-				}, { __index = var10 })
-			end, { var10 })
+				}, { __index = var2 })
+			end, { var2 })
 		}, { Story = reactModule.createElement(p1, p2) })
 	end
 end
@@ -47,38 +47,38 @@ return {
 	storyRoots = { socialCommon },
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p5)
-		-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationProvider (ref), foundationProvider (ref), roactRoduxModule (ref), var9 (ref), createStyleProvider (ref), mockLocale (ref)
-		local var11 = function(p6)
-			-- upvalues: reactModule (copy), localizationRoactContext (copy), localizationProvider (copy), p5 (ref)
-			local var10 = reactModule.useContext(localizationRoactContext)
+	mapStory = function(p1)
+		-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationProvider (ref), foundationProvider (ref), roactRoduxModule (ref), var1 (ref), createStyleProvider (ref), mockLocale (ref)
+		local var2 = function(p2)
+			-- upvalues: reactModule (copy), localizationRoactContext (copy), localizationProvider (copy), p1 (ref)
+			local var3 = reactModule.useContext(localizationRoactContext)
 			
 			return reactModule.createElement(localizationProvider, {
 				localization = reactModule.useMemo(function()
-					-- upvalues: var10 (ref)
+					-- upvalues: var3 (ref)
 					return setmetatable({
-						Format = function(_, p7, p8)
-							-- upvalues: var10 (copy)
+						Format = function(_, p3, p4)
+							-- upvalues: var3 (copy)
 							local ok, status = pcall(function()
-								-- upvalues: var10 (copy), p7 (ref), p8 (ref)
-								return var10:Format(p7, p8)
+								-- upvalues: var3 (copy), p3 (ref), p4 (ref)
+								return var3:Format(p3, p4)
 							end)
 							
-							return if ok then status else `\194\171{p7}\194\187`
+							return if ok then status else `\194\171{p3}\194\187`
 						end
-					}, { __index = var10 })
-				end, { var10 })
-			}, { Story = reactModule.createElement(p5, p6) })
+					}, { __index = var3 })
+				end, { var3 })
+			}, { Story = reactModule.createElement(p1, p2) })
 		end
 		
-		return function(p9)
-			-- upvalues: reactModule (copy), foundationProvider (copy), roactRoduxModule (copy), var9 (copy), createStyleProvider (copy), mockLocale (copy), var11 (ref)
+		return function(p2)
+			-- upvalues: reactModule (copy), foundationProvider (copy), roactRoduxModule (copy), var1 (copy), createStyleProvider (copy), mockLocale (copy), var2 (ref)
 			return reactModule.createElement(foundationProvider, {
 				device = "Phone",
-				colorMode = if p9 and p9.theme == "Light" then "Light" else "Dark"
+				colorMode = if p2 and p2.theme == "Light" then "Light" else "Dark"
 			}, {
-				Store = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var9 }, {
-					Style = createStyleProvider({ Localization = mockLocale(var11, p9) })
+				Store = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var1 }, {
+					Style = createStyleProvider({ Localization = mockLocale(var2, p2) })
 				})
 			})
 		end

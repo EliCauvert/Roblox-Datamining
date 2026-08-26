@@ -27,32 +27,32 @@ return {
 		local rootInstance = p2.rootInstance
 		
 		for i, v in p2.renderMeshesData do
-			local var1 = v.originalSize * v.scale
+			local var3 = v.originalSize * v.scale
 			
-			local function checkAxis(p1, p2)
-				-- upvalues: var1 (copy), p1 (ref), errorSourceStringsModule (copy), i (ref), rootInstance (ref), var2 (copy)
-				if p2 < var1 then
-					p1:fail(errorSourceStringsModule.Keys.MeshPartBounds_TooSmall, {
+			local function checkAxis(p3, p4)
+				-- upvalues: var3 (copy), p3 (ref), errorSourceStringsModule (copy), i (ref), rootInstance (ref), var2 (copy)
+				if p4 < var3 then
+					p3:fail(errorSourceStringsModule.Keys.MeshPartBounds_TooSmall, {
 						partName = i,
-						axis = p1,
-						currentSize = string.format("%.2f", p2),
-						minSize = string.format("%.2f", var1)
+						axis = p3,
+						currentSize = string.format("%.2f", p4),
+						minSize = string.format("%.2f", var3)
 					}, rootInstance)
 					
 					return
-				elseif var2 < p2 then
-					p1:fail(errorSourceStringsModule.Keys.MeshPartBounds_TooLarge, {
+				elseif var2 < p4 then
+					p3:fail(errorSourceStringsModule.Keys.MeshPartBounds_TooLarge, {
 						partName = i,
-						axis = p1,
-						currentSize = string.format("%.2f", p2),
+						axis = p3,
+						currentSize = string.format("%.2f", p4),
 						maxSize = string.format("%.2f", var2)
 					}, rootInstance)
 				end
 			end
 			
-			checkAxis("X", var1.X)
-			checkAxis("Y", var1.Y)
-			checkAxis("Z", var1.Z)
+			checkAxis("X", var3.X)
+			checkAxis("Y", var3.Y)
+			checkAxis("Z", var3.Z)
 		end
 	end
 }

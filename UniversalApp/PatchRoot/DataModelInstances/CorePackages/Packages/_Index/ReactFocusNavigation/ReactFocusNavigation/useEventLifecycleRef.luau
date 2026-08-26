@@ -1,17 +1,17 @@
 ﻿local reactModule = require(script.Parent.Parent.React)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), p1 (ref), p0 (ref)
-		if var1.current and p1 then
-			p1(var1.current)
+	return reactModule.useCallback(function(p3)
+		-- upvalues: var1 (ref), p2 (ref), p1 (ref)
+		if var1.current and p2 then
+			p2(var1.current)
 		end
-		if p2 then
-			p0(p2)
+		if p3 then
+			p1(p3)
 		end
-		var1.current = p2
-	end, { p0, p1 })
+		var1.current = p3
+	end, { p1, p2 })
 end

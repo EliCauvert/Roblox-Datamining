@@ -10,10 +10,10 @@ local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
 local getCaptureKeyModule = require(coreScriptsPlayerFeedback.Utils.getCaptureKey)
-local var4 = reactModule.memo(function(p0)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), checkbox (ref)
-	local capture = p0.capture
-	local var5 = p0.isDisabled == true
+	local capture = p1.capture
+	local var2 = p1.isDisabled == true
 	
 	return reactModule.createElement("ImageButton", {
 		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
@@ -21,14 +21,14 @@ local var4 = reactModule.memo(function(p0)
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Image = "",
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		Size = UDim2.fromScale(1, 1),
 		[reactModule.Event.Activated] = reactModule.useCallback(function()
-			-- upvalues: p0 (ref)
-			p0.onPreview()
-		end, { p0.onPreview })
+			-- upvalues: p1 (ref)
+			p1.onPreview()
+		end, { p1.onPreview })
 	}, {
-		DisabledOverlay = if var5 then reactModule.createElement("Frame", {
+		DisabledOverlay = if var2 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 0.5,
 			BorderSizePixel = 0,
 			ZIndex = 3,
@@ -51,13 +51,13 @@ local var4 = reactModule.memo(function(p0)
 			Checkbox = reactModule.createElement(checkbox, {
 				label = "",
 				AnchorPoint = Vector2.new(1, 0),
-				isChecked = p0.isSelected,
+				isChecked = p1.isSelected,
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var5 (ref), p0 (ref)
-					if not var5 then
-						p0.onToggle()
+					-- upvalues: var2 (ref), p1 (ref)
+					if not var2 then
+						p1.onToggle()
 					end
-				end, { var5, p0.onToggle }),
+				end, { var2, p1.onToggle }),
 				Position = UDim2.new(1, -4, 0, 4)
 			})
 		})
@@ -65,21 +65,21 @@ local var4 = reactModule.memo(function(p0)
 end)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), getCaptureKeyModule (ref), var4 (ref), view (ref), text (ref), scrollView (ref), scrollBarVisibility (ref)
-	local var6 = 0
+	-- upvalues: useLocalization (ref), reactModule (ref), getCaptureKeyModule (ref), var1 (ref), view (ref), text (ref), scrollView (ref), scrollBarVisibility (ref)
+	local var2 = 0
 	
 	for i, v in p1.selectedKeys do
 		if v then
-			var6 += 1
+			var2 += 1
 		end
 	end
-	local var7 = p1.maxSelections <= var6
-	local var8 = useLocalization({
+	local var3 = p1.maxSelections <= var2
+	local var4 = useLocalization({
 		loading = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading",
 		empty = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty",
 		selectionHint = {
 			"CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected",
-			count = tostring(var6),
+			count = tostring(var2),
 			max = tostring(p1.maxSelections)
 		}
 	})
@@ -99,12 +99,12 @@ return reactModule.memo(function(p1)
 	}
 	
 	for i_1, v_1 in p1.captures do
-		local var10 = getCaptureKeyModule(v_1)
-		local var11 = p1.selectedKeys[var10] == true
-		t[var10] = reactModule.createElement(var4, {
+		local var5 = getCaptureKeyModule(v_1)
+		local var6 = p1.selectedKeys[var5] == true
+		t[var5] = reactModule.createElement(var1, {
 			capture = v_1,
-			isSelected = var11,
-			isDisabled = var7 and not var11,
+			isSelected = var6,
+			isDisabled = var3 and not var6,
 			onToggle = function()
 				-- upvalues: p1 (ref), v_1 (ref)
 				p1.onToggle(v_1)
@@ -123,7 +123,7 @@ return reactModule.memo(function(p1)
 		Hint = reactModule.createElement(text, {
 			tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-right content-muted",
 			LayoutOrder = 1,
-			Text = var8.selectionHint
+			Text = var4.selectionHint
 		}),
 		Scroll = reactModule.createElement(scrollView, {
 			tag = "fill size-full-0",
@@ -153,10 +153,10 @@ return reactModule.memo(function(p1)
 			}, {
 				Grid = if p1.isLoading and #p1.captures == 0 then reactModule.createElement(text, {
 					tag = "size-full-0 auto-y text-body-medium text-align-x-center content-muted",
-					Text = var8.loading
+					Text = var4.loading
 				}) elseif #p1.captures == 0 then reactModule.createElement(text, {
 					tag = "size-full-0 auto-y text-body-medium text-align-x-center content-muted",
-					Text = var8.empty
+					Text = var4.empty
 				}) else reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,

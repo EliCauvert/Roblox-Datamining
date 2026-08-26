@@ -8,9 +8,9 @@ function t.new()
 		MenuIsOpen = false,
 		broadcasts = {},
 		NativeClose = {
-			Connect = function(_, p0)
+			Connect = function(_, p1)
 				-- upvalues: bindableEvent (ref)
-				return bindableEvent.Event:Connect(p0)
+				return bindableEvent.Event:Connect(p1)
 			end
 		},
 		openedMenus = {}
@@ -33,8 +33,8 @@ function t:SetMenuIsOpen(p1, p2)
 	self.MenuIsOpen = #self.openedMenus > 0
 end
 
-function t:BroadcastNotification(p3, p4)
-	table.insert(self.broadcasts, { data = p3, notification = p4 })
+function t:BroadcastNotification(p1, p2)
+	table.insert(self.broadcasts, { data = p1, notification = p2 })
 end
 
 function t.GetNotificationTypeList(_)

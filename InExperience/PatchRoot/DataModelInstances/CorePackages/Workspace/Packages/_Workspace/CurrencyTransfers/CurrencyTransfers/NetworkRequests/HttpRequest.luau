@@ -5,10 +5,10 @@ local errorTransferModelModule = require(currencyTransfers.Models.ErrorTransferM
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
-	tbl.http = p0 or game:GetService("HttpService")
+	tbl.http = p1 or game:GetService("HttpService")
 	tbl.networkImpl = nil
 	
 	return tbl
@@ -23,115 +23,115 @@ function t.fromNetworkImpl(p1)
 	return tbl
 end
 
-local function rejectFromNetworkImpl(p2, p3)
+local function rejectFromNetworkImpl(p1, p2)
 	-- upvalues: httpService (ref), errorTransferModelModule (ref)
-	local var8 = if p3 then p3.StatusCode else 0
-	local body = p3 and p3.Body
-	local var10 = nil
+	local var1 = if p2 then p2.StatusCode else 0
+	local body = p2 and p2.Body
+	local var2 = nil
 	
 	if type(body) == "table" then
-		var10 = body
+		var2 = body
 	elseif type(body) == "string" and body ~= "" then
 		local ok, status = pcall(httpService.JSONDecode, httpService, body)
 		
 		if ok then
-			var10 = status
+			var2 = status
 		end
 	end
-	if var10 then
-		p2(errorTransferModelModule.format(var10))
+	if var2 then
+		p1(errorTransferModelModule.format(var2))
 		
 		return
 	end
-	p2({ status = var8, body = body })
+	p1({ status = var1, body = body })
 end
 
-function t:get(p4)
+function t:get(p1)
 	-- upvalues: promiseModule (ref), rejectFromNetworkImpl (ref), errorTransferModelModule (ref)
-	return if self.networkImpl then promiseModule.new(function(p8, p9)
-		-- upvalues: self (ref), p4 (ref), rejectFromNetworkImpl (copy)
-		self.networkImpl(p4, "GET", { headers = { Accept = "application/json" } }):andThen(function(p10)
-			-- upvalues: p8 (ref)
-			p8(p10.responseBody)
-		end, function(p11)
-			-- upvalues: rejectFromNetworkImpl (copy), p9 (ref)
-			rejectFromNetworkImpl(p9, p11)
+	return if self.networkImpl then promiseModule.new(function(p2, p3)
+		-- upvalues: self (ref), p1 (ref), rejectFromNetworkImpl (copy)
+		self.networkImpl(p1, "GET", { headers = { Accept = "application/json" } }):andThen(function(p4)
+			-- upvalues: p2 (ref)
+			p2(p4.responseBody)
+		end, function(p4)
+			-- upvalues: rejectFromNetworkImpl (copy), p3 (ref)
+			rejectFromNetworkImpl(p3, p4)
 		end)
-	end) else promiseModule.new(function(p5, p6)
-		-- upvalues: self (ref), p4 (ref), errorTransferModelModule (copy)
+	end) else promiseModule.new(function(p2, p3)
+		-- upvalues: self (ref), p1 (ref), errorTransferModelModule (copy)
 		self.http:RequestInternal({
 			Method = "GET",
-			Url = p4,
+			Url = p1,
 			Headers = { Accept = "application/json" }
-		}):Start(function(_, p7)
-			-- upvalues: p5 (ref), self (copy), errorTransferModelModule (copy), p6 (ref)
-			if p7.StatusCode == 200 then
-				p5(self.http:JSONDecode(p7.Body))
+		}):Start(function(_, p4)
+			-- upvalues: p2 (ref), self (copy), errorTransferModelModule (copy), p3 (ref)
+			if p4.StatusCode == 200 then
+				p2(self.http:JSONDecode(p4.Body))
 				
 				return
-			elseif p7.StatusCode ~= 400 and p7.StatusCode ~= 403 then
-				p6({ status = p7.StatusCode, body = p7.Body })
+			elseif p4.StatusCode ~= 400 and p4.StatusCode ~= 403 then
+				p3({ status = p4.StatusCode, body = p4.Body })
 				
 				return
 			end
-			local var11 = if p7.Body and p7.Body ~= "" then self.http:JSONDecode(p7.Body) else nil
+			local var1 = if p4.Body and p4.Body ~= "" then self.http:JSONDecode(p4.Body) else nil
 			
-			if var11 then
-				p6(errorTransferModelModule.format(var11))
+			if var1 then
+				p3(errorTransferModelModule.format(var1))
 				
 				return
 			end
-			p6({ status = p7.StatusCode, body = p7.Body })
+			p3({ status = p4.StatusCode, body = p4.Body })
 		end)
 	end)
 end
 
-function t:post(p12, p13)
+function t:post(p1, p2)
 	-- upvalues: promiseModule (ref), httpService (ref), rejectFromNetworkImpl (ref), errorTransferModelModule (ref)
-	return if self.networkImpl then promiseModule.new(function(p17, p18)
-		-- upvalues: self (ref), p12 (ref), httpService (copy), p13 (ref), rejectFromNetworkImpl (copy)
-		self.networkImpl(p12, "POST", {
+	return if self.networkImpl then promiseModule.new(function(p3, p4)
+		-- upvalues: self (ref), p1 (ref), httpService (copy), p2 (ref), rejectFromNetworkImpl (copy)
+		self.networkImpl(p1, "POST", {
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			},
-			postBody = httpService:JSONEncode(p13)
-		}):andThen(function(p19)
-			-- upvalues: p17 (ref)
-			p17(p19.responseBody)
-		end, function(p20)
-			-- upvalues: rejectFromNetworkImpl (copy), p18 (ref)
-			rejectFromNetworkImpl(p18, p20)
+			postBody = httpService:JSONEncode(p2)
+		}):andThen(function(p5)
+			-- upvalues: p3 (ref)
+			p3(p5.responseBody)
+		end, function(p5)
+			-- upvalues: rejectFromNetworkImpl (copy), p4 (ref)
+			rejectFromNetworkImpl(p4, p5)
 		end)
-	end) else promiseModule.new(function(p14, p15)
-		-- upvalues: self (ref), p12 (ref), p13 (ref), errorTransferModelModule (copy)
+	end) else promiseModule.new(function(p3, p4)
+		-- upvalues: self (ref), p1 (ref), p2 (ref), errorTransferModelModule (copy)
 		self.http:RequestInternal({
 			Method = "POST",
-			Url = p12,
+			Url = p1,
 			Headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			},
-			Body = self.http:JSONEncode(p13)
-		}):Start(function(_, p16)
-			-- upvalues: p14 (ref), self (copy), errorTransferModelModule (copy), p15 (ref)
-			if p16.StatusCode == 200 then
-				p14(self.http:JSONDecode(p16.Body))
+			Body = self.http:JSONEncode(p2)
+		}):Start(function(_, p5)
+			-- upvalues: p3 (ref), self (copy), errorTransferModelModule (copy), p4 (ref)
+			if p5.StatusCode == 200 then
+				p3(self.http:JSONDecode(p5.Body))
 				
 				return
-			elseif p16.StatusCode ~= 400 and p16.StatusCode ~= 403 then
-				p15({ status = p16.StatusCode, body = p16.Body })
+			elseif p5.StatusCode ~= 400 and p5.StatusCode ~= 403 then
+				p4({ status = p5.StatusCode, body = p5.Body })
 				
 				return
 			end
-			local var12 = if p16.Body and p16.Body ~= "" then self.http:JSONDecode(p16.Body) else nil
+			local var1 = if p5.Body and p5.Body ~= "" then self.http:JSONDecode(p5.Body) else nil
 			
-			if var12 then
-				p15(errorTransferModelModule.format(var12))
+			if var1 then
+				p4(errorTransferModelModule.format(var1))
 				
 				return
 			end
-			p15({ status = p16.StatusCode, body = p16.Body })
+			p4({ status = p5.StatusCode, body = p5.Body })
 		end)
 	end)
 end

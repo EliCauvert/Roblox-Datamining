@@ -8,8 +8,8 @@ return IXPUtilsModule.defineIXPTest({
 	name = "AvatarMarketplace.UA.PrefetchMarketplace",
 	recordExposure = false,
 	layer = appUserLayers.AvatarExperienceUAMarketplaceView,
-	getIsUserInExperiment = function(p0)
-		return p0.enableMarketplacePrefetch ~= nil
+	getIsUserInExperiment = function(p1)
+		return p1.enableMarketplacePrefetch ~= nil
 	end,
 	getDependentFlagsEnabled = function()
 		return true
@@ -26,8 +26,8 @@ return IXPUtilsModule.defineIXPTest({
 		UserIsInExperiment = function(p1, p2)
 			return p2 or p1.enableMarketplacePrefetch ~= nil
 		end,
-		EnabledForUser = function(p3, p4)
-			return p4 or (p3.enableMarketplacePrefetch or false)
+		EnabledForUser = function(p1, p2)
+			return p2 or (p1.enableMarketplacePrefetch or false)
 		end
 	}
 })

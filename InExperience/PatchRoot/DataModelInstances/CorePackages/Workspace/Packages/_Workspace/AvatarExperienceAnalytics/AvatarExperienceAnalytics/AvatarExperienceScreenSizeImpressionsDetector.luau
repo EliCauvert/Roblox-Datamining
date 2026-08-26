@@ -17,22 +17,22 @@ avatarExperienceScreenSizeImpressionsDetector.validateProps = tModule.strictInte
 	topBarHeight = tModule.number
 })
 
-function avatarExperienceScreenSizeImpressionsDetector.render(p0)
+function avatarExperienceScreenSizeImpressionsDetector.render(p1)
 	-- upvalues: roactModule (ref), avatarExperienceImpressionsDetectorModule (ref)
-	local screenSize = p0.props.screenSize
+	local screenSize = p1.props.screenSize
 	
 	return roactModule.createElement(avatarExperienceImpressionsDetectorModule, {
-		parentRef = p0.props.parentRef,
-		onRequestImpressionsSignal = p0.props.onRequestImpressionsSignal,
+		parentRef = p1.props.parentRef,
+		onRequestImpressionsSignal = p1.props.onRequestImpressionsSignal,
 		viewPortBounds = {
-			min = Vector2.new(0, p0.props.topBarHeight),
-			max = Vector2.new(screenSize.X, screenSize.Y - p0.props.globalGuiInset.bottom)
+			min = Vector2.new(0, p1.props.topBarHeight),
+			max = Vector2.new(screenSize.X, screenSize.Y - p1.props.globalGuiInset.bottom)
 		},
-		appPage = p0.props.appPage,
-		pageFilter = p0.props.pageFilter,
-		collectObjectsFunc = p0.props.collectObjectsFunc,
-		filterImpressionFunc = p0.props.filterImpressionFunc,
-		onImpressionsDetected = p0.props.onImpressionsDetected
+		appPage = p1.props.appPage,
+		pageFilter = p1.props.pageFilter,
+		collectObjectsFunc = p1.props.collectObjectsFunc,
+		filterImpressionFunc = p1.props.filterImpressionFunc,
+		onImpressionsDetected = p1.props.onImpressionsDetected
 	})
 end
 

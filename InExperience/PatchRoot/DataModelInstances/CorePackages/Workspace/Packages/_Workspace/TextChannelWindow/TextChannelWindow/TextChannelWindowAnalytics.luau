@@ -2,15 +2,15 @@
 local parent = script:FindFirstAncestor("TextChannelWindow").Parent
 local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
 local t = {
-	getChannelCategory = function(p0)
-		return if not (not p0 or p0 == "") then if p0:match("^RBXGeneral") then "general" elseif p0:match("^RBXTeam") then "team" elseif p0:match("^RBXWhisper") then "whisper" elseif p0:match("^RBXSystem") then "system" else "custom" else "none"
+	getChannelCategory = function(p1)
+		return if not (not p1 or p1 == "") then if p1:match("^RBXGeneral") then "general" elseif p1:match("^RBXTeam") then "team" elseif p1:match("^RBXWhisper") then "whisper" elseif p1:match("^RBXSystem") then "system" else "custom" else "none"
 	end,
 	getEnableProtectedChat = function()
 		-- upvalues: textChatService (ref)
 		return if game:GetEngineFeature("TextChatServiceProtectedChatEnabled") then textChatService:IsProtectedChatEnabled() else false
 	end
 }
-local var3 = socialLuaAnalyticsModule.Telemetry.createEmitter({
+local var1 = socialLuaAnalyticsModule.Telemetry.createEmitter({
 	shouldUseTelemetryService = true,
 	telemetryImpl = require(parent.LoggingProtocol).default,
 	defaultTelemetryConfig = {
@@ -53,9 +53,9 @@ t.Counters = {
 			{
 				type = "RobloxTelemetryCounter",
 				standardizedFields = if textChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
-				format = function(p3, p4)
-					local cloned = table.clone(p3)
-					cloned.enable_protected_chat = tostring(p4.enableProtectedChat)
+				format = function(p1, p2)
+					local cloned = table.clone(p1)
+					cloned.enable_protected_chat = tostring(p2.enableProtectedChat)
 					
 					return cloned
 				end
@@ -71,9 +71,9 @@ t.Counters = {
 			{
 				type = "RobloxTelemetryCounter",
 				standardizedFields = if textChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
-				format = function(p5, p6)
-					local cloned = table.clone(p5)
-					cloned.enable_protected_chat = tostring(p6.enableProtectedChat)
+				format = function(p1, p2)
+					local cloned = table.clone(p1)
+					cloned.enable_protected_chat = tostring(p2.enableProtectedChat)
 					
 					return cloned
 				end
@@ -89,9 +89,9 @@ t.Counters = {
 			{
 				type = "RobloxTelemetryCounter",
 				standardizedFields = if textChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
-				format = function(p7, p8)
-					local cloned = table.clone(p7)
-					cloned.enable_protected_chat = tostring(p8.enableProtectedChat)
+				format = function(p1, p2)
+					local cloned = table.clone(p1)
+					cloned.enable_protected_chat = tostring(p2.enableProtectedChat)
 					
 					return cloned
 				end
@@ -102,17 +102,17 @@ t.Counters = {
 }
 game:SetFlagVersion("TextChannelWindowCountersEnabled", 2)
 local textChannelWindowCountersEnabled = game:DefineFastFlag("TextChannelWindowCountersEnabled", false)
-local var7 = nil
+local var2 = nil
 
 function t._setCountersEnabledForTesting(value)
-	-- upvalues: var7 (write)
-	var7 = value
+	-- upvalues: var2 (write)
+	var2 = value
 end
 
-function t.emit(p9, p10)
-	-- upvalues: var7 (write), textChannelWindowCountersEnabled (ref), var3 (ref)
-	if if var7 ~= nil then textChannelWindowCountersEnabled else var7 then
-		var3.emit(p9, p10)
+function t.emit(p1, p2)
+	-- upvalues: var2 (write), textChannelWindowCountersEnabled (ref), var1 (ref)
+	if if var2 ~= nil then textChannelWindowCountersEnabled else var2 then
+		var1.emit(p1, p2)
 		
 		return
 	end
@@ -141,44 +141,44 @@ end
 
 t.FIntTextChannelWindowScrollThrottleMs = game:DefineFastInt("TextChannelWindowScrollThrottleMs", 400)
 
-local _ = function(p11, p12)
-	local var12 = nil
+local _ = function(p1, p2)
+	local var3 = nil
 	
 	return function()
-		-- upvalues: var12 (write), p11 (ref), p12 (ref)
-		if var12 then
+		-- upvalues: var3 (write), p1 (ref), p2 (ref)
+		if var3 then
 			return
 		end
-		p11()
-		var12 = task.delay(p12() / 1000, function()
-			-- upvalues: var12 (copy)
-			var12 = nil
+		p1()
+		var3 = task.delay(p2() / 1000, function()
+			-- upvalues: var3 (copy)
+			var3 = nil
 		end)
 	end
 end
 
-function t.createOnScrollCallback(p13)
+function t.createOnScrollCallback(p1)
 	-- upvalues: t (ref), textChatService (ref)
 	if t.getFFlagExpChatTelemetryEnabled() then
-		local var13 = function()
-			-- upvalues: textChatService (copy), p13 (ref)
-			textChatService:SendExpChatWindowScroll("text_channel_window", p13 or "")
+		local var3 = function()
+			-- upvalues: textChatService (copy), p1 (ref)
+			textChatService:SendExpChatWindowScroll("text_channel_window", p1 or "")
 		end
 		
-		local var14 = function()
+		local var4 = function()
 			-- upvalues: t (copy)
 			return t.FIntTextChannelWindowScrollThrottleMs
 		end
 		
-		local var15 = nil
+		local var5 = nil
 		
 		return function()
-			-- upvalues: var15 (write), var13 (ref), var14 (ref)
+			-- upvalues: var5 (write), var3 (ref), var4 (ref)
 			if var12 then
 				return
 			end
-			var13()
-			var12 = task.delay(var14() / 1000, function()
+			var3()
+			var12 = task.delay(var4() / 1000, function()
 				-- upvalues: var12 (copy)
 				var12 = nil
 			end)

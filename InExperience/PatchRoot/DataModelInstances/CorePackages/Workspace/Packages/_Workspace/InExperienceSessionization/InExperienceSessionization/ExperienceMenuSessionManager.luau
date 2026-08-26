@@ -2,12 +2,12 @@
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	
-	if p0 then
-		tbl._sessionService = p0
+	if p1 then
+		tbl._sessionService = p1
 	else
 		tbl._sessionService = game:GetService("SessionService")
 	end
@@ -20,12 +20,12 @@ function t:_setMetadata(p1, p2, p3)
 	self._sessionService:SetMetadata(p1, p2, p3)
 end
 
-function t:OpenExperienceMenu(p4)
+function t:OpenExperienceMenu(p1)
 	-- upvalues: sessionTypeModule (ref)
 	self._sessionService:SetSession(sessionTypeModule.StructuralIdentifier.Level2a, sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.Tag.level3.ExperienceMenu)
 	
-	if p4 then
-		for i, v in pairs(p4) do
+	if p1 then
+		for i, v in pairs(p1) do
 			self._sessionService:SetMetadata(sessionTypeModule.StructuralIdentifier.ExperienceMenu, i, v)
 		end
 	end
@@ -44,94 +44,94 @@ function t:CloseOpenedMenuTab()
 	end
 end
 
-function t:OpenPeopleTab(p5, p6)
+function t:OpenPeopleTab(p2, p3)
 	-- upvalues: sessionTypeModule (ref)
-	self._sessionService:SetSession(p5 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.PeopleTab, sessionTypeModule.Tag.level3.PeopleTab)
+	self._sessionService:SetSession(p2 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.PeopleTab, sessionTypeModule.Tag.level3.PeopleTab)
 	
-	if p6 then
-		for i, v in pairs(p6) do
+	if p3 then
+		for i, v in pairs(p3) do
 			self._sessionService:SetMetadata(sessionTypeModule.StructuralIdentifier.PeopleTab, i, v)
 		end
 	end
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.PeopleTab
 end
 
-function t:OpenSettingsTab(p7, p8)
+function t:OpenSettingsTab(p4, p5)
 	-- upvalues: sessionTypeModule (ref)
-	self._sessionService:SetSession(p7 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.SettingsTab, sessionTypeModule.Tag.level3.SettingsTab)
+	self._sessionService:SetSession(p4 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.SettingsTab, sessionTypeModule.Tag.level3.SettingsTab)
 	
-	if p8 then
-		for i, v in pairs(p8) do
+	if p5 then
+		for i, v in pairs(p5) do
 			self._sessionService:SetMetadata(sessionTypeModule.StructuralIdentifier.SettingsTab, i, v)
 		end
 	end
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.SettingsTab
 end
 
-function t:OpenCapturesTab(p9, p10)
+function t:OpenCapturesTab(p6, p7)
 	-- upvalues: sessionTypeModule (ref)
-	self._sessionService:SetSession(p9 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.CapturesTab, sessionTypeModule.Tag.level3.CapturesTab)
+	self._sessionService:SetSession(p6 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.CapturesTab, sessionTypeModule.Tag.level3.CapturesTab)
 	
-	if p10 then
-		for i, v in pairs(p10) do
+	if p7 then
+		for i, v in pairs(p7) do
 			self._sessionService:SetMetadata(sessionTypeModule.StructuralIdentifier.CapturesTab, i, v)
 		end
 	end
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.CapturesTab
 end
 
-function t:OpenReportTab(p11, p12)
+function t:OpenReportTab(p8, p9)
 	-- upvalues: sessionTypeModule (ref)
-	self._sessionService:SetSession(p11 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.ReportTab, sessionTypeModule.Tag.level3.ReportTab)
+	self._sessionService:SetSession(p8 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.ReportTab, sessionTypeModule.Tag.level3.ReportTab)
 	
-	if p12 then
-		for i, v in pairs(p12) do
+	if p9 then
+		for i, v in pairs(p9) do
 			self._sessionService:SetMetadata(sessionTypeModule.StructuralIdentifier.ReportTab, i, v)
 		end
 	end
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.ReportTab
 end
 
-function t:OpenHelpTab(p13, p14)
+function t:OpenHelpTab(p10, p11)
 	-- upvalues: sessionTypeModule (ref)
-	self._sessionService:SetSession(p13 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.HelpTab, sessionTypeModule.Tag.level3.HelpTab)
+	self._sessionService:SetSession(p10 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.HelpTab, sessionTypeModule.Tag.level3.HelpTab)
 	
-	if p14 then
-		for i, v in pairs(p14) do
+	if p11 then
+		for i, v in pairs(p11) do
 			self._sessionService:SetMetadata(sessionTypeModule.StructuralIdentifier.HelpTab, i, v)
 		end
 	end
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.HelpTab
 end
 
-function t:OpenLeaveExperience(p15, p16)
+function t:OpenLeaveExperience(p12, p13)
 	-- upvalues: sessionTypeModule (ref)
-	self._sessionService:SetSession(p15 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.LeaveExperience, sessionTypeModule.Tag.level3.LeaveExperience)
+	self._sessionService:SetSession(p12 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.LeaveExperience, sessionTypeModule.Tag.level3.LeaveExperience)
 	
-	if p16 then
-		for i, v in pairs(p16) do
+	if p13 then
+		for i, v in pairs(p13) do
 			self._sessionService:SetMetadata(sessionTypeModule.StructuralIdentifier.LeaveExperience, i, v)
 		end
 	end
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.LeaveExperience
 end
 
-function t:OpenResetCharacter(p17, p18)
+function t:OpenResetCharacter(p14, p15)
 	-- upvalues: sessionTypeModule (ref)
-	self._sessionService:SetSession(p17 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.ResetCharacter, sessionTypeModule.Tag.level3.ResetCharacter)
+	self._sessionService:SetSession(p14 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.ResetCharacter, sessionTypeModule.Tag.level3.ResetCharacter)
 	
-	if p18 then
-		for i, v in pairs(p18) do
+	if p15 then
+		for i, v in pairs(p15) do
 			self._sessionService:SetMetadata(sessionTypeModule.StructuralIdentifier.ResetCharacter, i, v)
 		end
 	end
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.ResetCharacter
 end
 
-function t:MenuSwitchToPage(p19)
-	if p19 == nil then return end
+function t:MenuSwitchToPage(p16)
+	if p16 == nil then return end
 	self:CloseOpenedMenuTab()
-	local name = p19.Name
+	local name = p16.Name
 	
 	if name == "Players" then
 		self:OpenPeopleTab()

@@ -5,8 +5,8 @@ return function()
 	-- upvalues: useLocalUserIdModule (ref), useSelector (ref)
 	local var1 = useLocalUserIdModule()
 	
-	return useSelector(function(p0)
+	return useSelector(function(p1)
 		-- upvalues: var1 (ref)
-		return p0.UserRobux[var1]
+		return p1.UserRobux[var1]
 	end)
 end

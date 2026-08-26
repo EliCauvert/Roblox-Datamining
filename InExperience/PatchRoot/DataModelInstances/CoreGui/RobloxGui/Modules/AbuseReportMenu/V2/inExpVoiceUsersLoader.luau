@@ -23,16 +23,16 @@ return {
 		local t = {}
 		
 		for i, v in pairs(status) do
-			local var4
+			local var1
 			local player = v.player
 			
 			if localPlayer then
-				var4 = player.UserId == localPlayer.UserId
-				var4 = nil
+				var1 = player.UserId == localPlayer.UserId
+				var1 = nil
 			else
-				var4 = false
+				var1 = false
 			end
-			if player and not var4 then
+			if player and not var1 then
 				table.insert(t, {
 					leading = { type = accessoryType.Avatar, userId = player.UserId },
 					id = tostring(player.UserId),
@@ -42,8 +42,8 @@ return {
 				})
 			end
 		end
-		table.sort(t, function(p0, p1)
-			return p0.label < p1.label
+		table.sort(t, function(p1, p2)
+			return p1.label < p2.label
 		end)
 		
 		return promiseModule.resolve(t)

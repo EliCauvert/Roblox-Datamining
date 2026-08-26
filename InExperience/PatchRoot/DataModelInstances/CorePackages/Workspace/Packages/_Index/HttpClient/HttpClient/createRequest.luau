@@ -7,116 +7,116 @@ local analyticsModule = require(script.Parent.analytics)
 local createSignal = signalsModule.createSignal
 local createResource = resourcesModule.createResource
 
-local function _(p0, p1)
-	local ok, status, var4, var5 = pcall(p0, p1)
+local function _(p1, p2)
+	local ok, status, var1, var2 = pcall(p1, p2)
 	
 	if ok then
-		return status, var4, var5
+		return status, var1, var2
 	end
 	return nil, `decode error: {tostring(status)}`, nil
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: analyticsModule (ref), encodersModule (ref), createSignal (ref), createResource (ref)
-	local analytics = p2.analytics or analyticsModule.defaultAnalytics
-	local encode = p2.encode or encodersModule.encodeJson
-	local var8, var9 = createSignal({ status = "pending" })
+	local analytics = p1.analytics or analyticsModule.defaultAnalytics
+	local encode = p1.encode or encodersModule.encodeJson
+	local var1, var2 = createSignal({ status = "pending" })
 	local t = { Accept = "application/json" }
 	
-	if p2.headers then
-		for i, v in p2.headers do
+	if p1.headers then
+		for i, v in p1.headers do
 			t[i] = v
 		end
 	end
-	local var11 = nil
+	local var3 = nil
 	
-	if p2.body ~= nil then
-		local var12, var13 = encode(p2.body)
-		var11 = var12
-		t["Content-Type"] = t["Content-Type"] or var13
+	if p1.body ~= nil then
+		local var4, var5 = encode(p1.body)
+		var3 = var4
+		t["Content-Type"] = t["Content-Type"] or var5
 	end
 	return {
-		state = var8,
-		dispose = createResource(function(p3)
-			-- upvalues: var9 (ref), analytics (ref), p2 (ref), t (ref), var11 (write)
-			local var14 = false
+		state = var1,
+		dispose = createResource(function(p2)
+			-- upvalues: var2 (ref), analytics (ref), p1 (ref), t (ref), var3 (write)
+			local var6 = false
 			local processTime = os.clock()
 			
 			local function settleFailed(value)
-				-- upvalues: var14 (write), processTime (ref), var9 (copy), analytics (copy), p2 (copy)
-				if var14 then
+				-- upvalues: var6 (write), processTime (ref), var2 (copy), analytics (copy), p1 (copy)
+				if var6 then
 					return
 				end
-				var14 = true
-				local var18 = (os.clock() - processTime) * 1000
-				var9({ status = "failed", error = `transport error: {value}` })
-				analytics(p2.analyticsKey, p2.method, p2.url, nil, var18, "failed")
+				var6 = true
+				local var7 = (os.clock() - processTime) * 1000
+				var2({ status = "failed", error = `transport error: {value}` })
+				analytics(p1.analyticsKey, p1.method, p1.url, nil, var7, "failed")
 			end
 			
 			local function settleResponse(value)
-				-- upvalues: var14 (write), processTime (ref), p2 (copy), var9 (copy), analytics (copy)
-				if var14 then return end
-				var14 = true
-				local var19 = (os.clock() - processTime) * 1000
+				-- upvalues: var6 (write), processTime (ref), p1 (copy), var2 (copy), analytics (copy)
+				if var6 then return end
+				var6 = true
+				local var7 = (os.clock() - processTime) * 1000
 				
-				if p2.statusCodeActions ~= nil then
-					local statusCode = p2.statusCodeActions[value.statusCode]
+				if p1.statusCodeActions ~= nil then
+					local statusCode = p1.statusCodeActions[value.statusCode]
 					
 					if statusCode ~= nil then
 						for i, v in statusCode do
 							local ok, status = pcall(v, value)
 							
 							if not ok then
-								warn(`[HttpClient] {p2.analyticsKey} status code action threw: {tostring(status)}`)
+								warn(`[HttpClient] {p1.analyticsKey} status code action threw: {tostring(status)}`)
 							end
 						end
 					end
 				end
-				local var22, var23, var24
-				local ok, status, var20, var21 = pcall(p2.decode, value)
+				local var8, var9, var10
+				local ok, status, var11, var12 = pcall(p1.decode, value)
 				
 				if ok then
-					var22 = status
-					var23 = var20
-					var24 = var21
+					var8 = status
+					var9 = var11
+					var10 = var12
 				else
-					var22 = nil
-					var23 = `decode error: {tostring(status)}`
-					var24 = nil
+					var8 = nil
+					var9 = `decode error: {tostring(status)}`
+					var10 = nil
 				end
-				local var25 = if var23 ~= nil then "succeeded" else "failed"
+				local var13 = if var9 ~= nil then "succeeded" else "failed"
 				
-				if var23 == nil then
-					var9({ status = "succeeded", result = var22 })
+				if var9 == nil then
+					var2({ status = "succeeded", result = var8 })
 				else
-					var9({ status = "failed", error = var23, errorCode = var24 })
+					var2({ status = "failed", error = var9, errorCode = var10 })
 				end
-				analytics(p2.analyticsKey, p2.method, p2.url, value, var19, var25)
+				analytics(p1.analyticsKey, p1.method, p1.url, value, var7, var13)
 			end
 			
 			local ok, status = pcall(function()
-				-- upvalues: p2 (copy), t (copy), var11 (copy), settleResponse (ref), settleFailed (ref), p3 (ref), var14 (write)
-				local var26 = p2.networkImpl.request({
-					url = p2.url,
-					method = p2.method,
+				-- upvalues: p1 (copy), t (copy), var3 (copy), settleResponse (ref), settleFailed (ref), p2 (ref), var6 (write)
+				local var14 = p1.networkImpl.request({
+					url = p1.url,
+					method = p1.method,
 					headers = t,
-					body = var11
-				}, function(p4, p5)
+					body = var3
+				}, function(p3, p4)
 					-- upvalues: settleResponse (copy), settleFailed (copy)
-					if p4 then
-						settleResponse(p5)
+					if p3 then
+						settleResponse(p4)
 						
 						return
 					end
-					settleFailed(tostring(p5))
+					settleFailed(tostring(p4))
 				end)
-				p3(function()
-					-- upvalues: var14 (copy), var26 (ref)
-					if var14 then
+				p2(function()
+					-- upvalues: var6 (copy), var14 (ref)
+					if var6 then
 						return
 					end
-					var14 = true
-					var26()
+					var6 = true
+					var14()
 				end)
 			end)
 			

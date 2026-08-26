@@ -7,14 +7,14 @@ local friendIconModule = require(gameTile.Footer.FriendIcon)
 local sourceSans = Enum.Font.SourceSans
 local color = Color3.fromRGB(117, 117, 117)
 
-local function NumberedIcon(p0)
+local function NumberedIcon(p1)
 	-- upvalues: roactModule (ref), imageSetLabel (ref), getImageData (ref), sourceSans (ref), color (ref)
-	local size = p0.size
+	local size = p1.size
 	
 	return roactModule.createElement(imageSetLabel, {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, size, 0, size),
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		Image = getImageData("LuaApp/graphic/gr-counter-slot-32x32") or "LuaApp/graphic/gr-counter-slot-32x32"
 	}, {
 		Count = roactModule.createElement("TextLabel", {
@@ -40,7 +40,7 @@ function userIconList.render(p1)
 	local layoutOrder = p1.props.layoutOrder
 	local users = p1.props.users
 	local usersCount = #users
-	local var7 = 0
+	local var1 = 0
 	local maskColor = p1.props.maskColor
 	
 	if usersCount <= 0 then
@@ -51,13 +51,13 @@ function userIconList.render(p1)
 	end
 	
 	local _ = nil
-	local var8 = if height >= 32 and math.floor((width + 3) / 35) >= 3 then 32 elseif height >= 24 then 24 else height
+	local var2 = if height >= 32 and math.floor((width + 3) / 35) >= 3 then 32 elseif height >= 24 then 24 else height
 	local t = {}
-	local floored = math.floor((width + 3) / (var8 + 3))
+	local floored = math.floor((width + 3) / (var2 + 3))
 	
 	if floored > 0 then
 		if floored < usersCount then
-			var7 = usersCount - (floored - 1)
+			var1 = usersCount - (floored - 1)
 		end
 		t.ListLayout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
@@ -67,15 +67,15 @@ function userIconList.render(p1)
 			Padding = UDim.new(0, 3)
 		})
 		
-		for i = 1, if var7 > 0 then floored - 1 else math.min(floored, usersCount) do
+		for i = 1, if var1 > 0 then floored - 1 else math.min(floored, usersCount) do
 			t["UserIcon" .. i] = roactModule.createElement(friendIconModule, {
 				user = users[i],
-				itemSize = var8,
+				itemSize = var2,
 				layoutOrder = i,
 				maskColor = maskColor
 			})
 		end
-		t.NumberedIcon = var7 > 0 and roactModule.createElement(NumberedIcon, { size = var8, layoutOrder = floored, count = var7 })
+		t.NumberedIcon = var1 > 0 and roactModule.createElement(NumberedIcon, { size = var2, layoutOrder = floored, count = var1 })
 	end
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

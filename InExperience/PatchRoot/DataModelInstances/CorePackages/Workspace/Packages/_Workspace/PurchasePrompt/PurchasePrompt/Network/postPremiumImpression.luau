@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return p0.postPremiumImpression()
+﻿return function(p1)
+	return p1.postPremiumImpression()
 end

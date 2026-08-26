@@ -23,9 +23,9 @@ local loadingScreenTelemetryModule = require(progressLoading.LoadingScreenTeleme
 local policyContainerModule = require(progressLoading.Components.PolicyContainer)
 local serverStatusModule = require(progressLoading.Components.ServerStatus)
 local serverStatusWithCountdownModule = require(progressLoading.Components.ServerStatusWithCountdown)
-local var17 = localization.new(localizationService.RobloxLocaleId)
+local var1 = localization.new(localizationService.RobloxLocaleId)
 local queueExperimentation = require(parent.SocialExperiments).QueueExperimentation
-local var18 = if require(parent.SharedFlags).FFlagIncreaseLoadingScreenOrder then 8 else 7
+local var2 = if require(parent.SharedFlags).FFlagIncreaseLoadingScreenOrder then 8 else 7
 local vector2 = Vector2.new(768, 432)
 local color = Color3.fromRGB(101, 102, 104)
 local t = {
@@ -34,17 +34,17 @@ local t = {
 	DESKTOP = { TOP = 24, BOTTOM = 24, LEFT = 24, RIGHT = 24 },
 	CONSOLE = { TOP = 64, BOTTOM = 64, LEFT = 64, RIGHT = 64 }
 }
-local var22 = guiService:IsTenFootInterface()
+local var3 = guiService:IsTenFootInterface()
 local platform = userInputService:GetPlatform()
-local var24 = if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true
+local var4 = if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true
 local list = { 150, 256 }
-local var26 = nil
-local var27 = 0
-local var28 = 1e999
+local var5 = nil
+local var6 = 0
+local var7 = 1e999
 
-local function _(p0)
-	-- upvalues: var24 (ref), t (ref), var22 (ref)
-	return if var24 then if p0 then t.MOBILE_PORTRAIT else t.MOBILE_LANDSCAPE elseif var22 then t.CONSOLE else t.DESKTOP
+local function _(p1)
+	-- upvalues: var4 (ref), t (ref), var3 (ref)
+	return if var4 then if p1 then t.MOBILE_PORTRAIT else t.MOBILE_LANDSCAPE elseif var3 then t.CONSOLE else t.DESKTOP
 end
 
 local _ = function(startValue, endValue)
@@ -63,87 +63,87 @@ local t_1 = {
 		local list_2 = { 1, 0.2 }
 		
 		if p1 <= 0.6 then
-			local var36
-			local var35 = p1 / 0.6
+			local var8
+			local var9 = p1 / 0.6
 			local iconTransparency = p2.iconTransparency
 			
 			if type(list_1) == "table" and #list_1 >= 2 then
-				local clampedValue = math.clamp(var35, 0, 1)
-				var36 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var8 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
 			else
-				var36 = 0
+				var8 = 0
 			end
-			local var38
-			iconTransparency(var36)
+			local var10
+			iconTransparency(var8)
 			local iconSize = p2.iconSize
 			
 			if type(list) == "table" and #list >= 2 then
-				local clampedValue = math.clamp(var35, 0, 1)
-				var38 = list[1] * (1 - clampedValue) + list[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var10 = list[1] * (1 - clampedValue) + list[2] * clampedValue
 			else
-				var38 = 0
+				var10 = 0
 			end
-			local var40
-			iconSize(var38)
+			local var11
+			iconSize(var10)
 			local infoFrameTransparency = p2.infoFrameTransparency
 			
 			if type(list_2) == "table" and #list_2 >= 2 then
-				local clampedValue = math.clamp(var35, 0, 1)
-				var40 = list_2[1] * (1 - clampedValue) + list_2[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var11 = list_2[1] * (1 - clampedValue) + list_2[2] * clampedValue
 			else
-				var40 = 0
+				var11 = 0
 			end
-			local var42
-			infoFrameTransparency(var40)
+			local var12
+			infoFrameTransparency(var11)
 			local thumbnailTransparency = p2.thumbnailTransparency
 			
 			if type(list_1) == "table" and #list_1 >= 2 then
-				local clampedValue = math.clamp(var35, 0, 1)
-				var42 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var12 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
 			else
-				var42 = 0
+				var12 = 0
 			end
-			local var44
-			thumbnailTransparency(var42)
+			local var13
+			thumbnailTransparency(var12)
 			local placeTextTransparency = p2.placeTextTransparency
 			
 			if type(list_1) == "table" and #list_1 >= 2 then
-				local clampedValue = math.clamp(var35, 0, 1)
-				var44 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var13 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
 			else
-				var44 = 0
+				var13 = 0
 			end
-			local var46
-			placeTextTransparency(var44)
+			local var14
+			placeTextTransparency(var13)
 			local placeTextSize = p2.placeTextSize
 			
 			if type(list) == "table" and #list >= 2 then
-				local clampedValue = math.clamp(var35, 0, 1)
-				var46 = list[1] * (1 - clampedValue) + list[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var14 = list[1] * (1 - clampedValue) + list[2] * clampedValue
 			else
-				var46 = 0
+				var14 = 0
 			end
-			local var48
-			placeTextSize(var46)
+			local var15
+			placeTextSize(var14)
 			local creatorTextTransparency = p2.creatorTextTransparency
 			
 			if type(list_1) == "table" and #list_1 >= 2 then
-				local clampedValue = math.clamp(var35, 0, 1)
-				var48 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var15 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
 			else
-				var48 = 0
+				var15 = 0
 			end
-			local var50
-			creatorTextTransparency(var48)
+			local var16
+			creatorTextTransparency(var15)
 			local creatorTextSize = p2.creatorTextSize
 			
 			if type(list) == "table" and #list >= 2 then
-				local clampedValue = math.clamp(var35, 0, 1)
-				var50 = list[1] * (1 - clampedValue) + list[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var16 = list[1] * (1 - clampedValue) + list[2] * clampedValue
 			else
-				var50 = 0
+				var16 = 0
 			end
-			creatorTextSize(var50)
+			creatorTextSize(var16)
 			
 			return
 		else
@@ -158,160 +158,160 @@ local t_1 = {
 			p3()
 		end
 	end,
-	FadeOut = function(p4, _, p5, p6)
+	FadeOut = function(p1, _, p2, p3)
 		-- upvalues: runService (ref)
 		local list = { 1, 0.6 }
 		local list_1 = { 0, 1 }
 		local list_2 = { 0.2, 1 }
 		
-		if p4 <= 0.6 then
-			local var56
-			local var55 = p4 / 0.6
-			local iconTransparency = p5.iconTransparency
+		if p1 <= 0.6 then
+			local var8
+			local var9 = p1 / 0.6
+			local iconTransparency = p2.iconTransparency
 			
 			if type(list_1) == "table" and #list_1 >= 2 then
-				local clampedValue = math.clamp(var55, 0, 1)
-				var56 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var8 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
 			else
-				var56 = 0
+				var8 = 0
 			end
-			local var58
-			iconTransparency(var56)
-			local iconSize = p5.iconSize
+			local var10
+			iconTransparency(var8)
+			local iconSize = p2.iconSize
 			
 			if type(list) == "table" and #list >= 2 then
-				local clampedValue = math.clamp(var55, 0, 1)
-				var58 = list[1] * (1 - clampedValue) + list[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var10 = list[1] * (1 - clampedValue) + list[2] * clampedValue
 			else
-				var58 = 0
+				var10 = 0
 			end
-			local var60
-			iconSize(var58)
-			local infoFrameTransparency = p5.infoFrameTransparency
+			local var11
+			iconSize(var10)
+			local infoFrameTransparency = p2.infoFrameTransparency
 			
 			if type(list_2) == "table" and #list_2 >= 2 then
-				local clampedValue = math.clamp(var55, 0, 1)
-				var60 = list_2[1] * (1 - clampedValue) + list_2[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var11 = list_2[1] * (1 - clampedValue) + list_2[2] * clampedValue
 			else
-				var60 = 0
+				var11 = 0
 			end
-			local var62
-			infoFrameTransparency(var60)
-			local thumbnailTransparency = p5.thumbnailTransparency
+			local var12
+			infoFrameTransparency(var11)
+			local thumbnailTransparency = p2.thumbnailTransparency
 			
 			if type(list_1) == "table" and #list_1 >= 2 then
-				local clampedValue = math.clamp(var55, 0, 1)
-				var62 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var12 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
 			else
-				var62 = 0
+				var12 = 0
 			end
-			local var64
-			thumbnailTransparency(var62)
-			local placeTextTransparency = p5.placeTextTransparency
+			local var13
+			thumbnailTransparency(var12)
+			local placeTextTransparency = p2.placeTextTransparency
 			
 			if type(list_1) == "table" and #list_1 >= 2 then
-				local clampedValue = math.clamp(var55, 0, 1)
-				var64 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var13 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
 			else
-				var64 = 0
+				var13 = 0
 			end
-			local var66
-			placeTextTransparency(var64)
-			local placeTextSize = p5.placeTextSize
+			local var14
+			placeTextTransparency(var13)
+			local placeTextSize = p2.placeTextSize
 			
 			if type(list) == "table" and #list >= 2 then
-				local clampedValue = math.clamp(var55, 0, 1)
-				var66 = list[1] * (1 - clampedValue) + list[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var14 = list[1] * (1 - clampedValue) + list[2] * clampedValue
 			else
-				var66 = 0
+				var14 = 0
 			end
-			local var68
-			placeTextSize(var66)
-			local creatorTextTransparency = p5.creatorTextTransparency
+			local var15
+			placeTextSize(var14)
+			local creatorTextTransparency = p2.creatorTextTransparency
 			
 			if type(list_1) == "table" and #list_1 >= 2 then
-				local clampedValue = math.clamp(var55, 0, 1)
-				var68 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var15 = list_1[1] * (1 - clampedValue) + list_1[2] * clampedValue
 			else
-				var68 = 0
+				var15 = 0
 			end
-			local var70
-			creatorTextTransparency(var68)
-			local creatorTextSize = p5.creatorTextSize
+			local var16
+			creatorTextTransparency(var15)
+			local creatorTextSize = p2.creatorTextSize
 			
 			if type(list) == "table" and #list >= 2 then
-				local clampedValue = math.clamp(var55, 0, 1)
-				var70 = list[1] * (1 - clampedValue) + list[2] * clampedValue
+				local clampedValue = math.clamp(var9, 0, 1)
+				var16 = list[1] * (1 - clampedValue) + list[2] * clampedValue
 			else
-				var70 = 0
+				var16 = 0
 			end
-			creatorTextSize(var70)
+			creatorTextSize(var16)
 			
 			return
 		else
 			runService:SetRobloxGuiFocused(false)
-			p5.iconTransparency(if type(list_1) == "table" and #list_1 >= 2 then list_1[1] * 0 + list_1[2] * 1 else 0)
-			p5.iconSize(if type(list) == "table" and #list >= 2 then list[1] * 0 + list[2] * 1 else 0)
-			p5.infoFrameTransparency(if type(list_2) == "table" and #list_2 >= 2 then list_2[1] * 0 + list_2[2] * 1 else 0)
-			p5.thumbnailTransparency(if type(list_1) == "table" and #list_1 >= 2 then list_1[1] * 0 + list_1[2] * 1 else 0)
-			p5.placeTextTransparency(if type(list_1) == "table" and #list_1 >= 2 then list_1[1] * 0 + list_1[2] * 1 else 0)
-			p5.placeTextSize(if type(list) == "table" and #list >= 2 then list[1] * 0 + list[2] * 1 else 0)
-			p5.creatorTextTransparency(if type(list_1) == "table" and #list_1 >= 2 then list_1[1] * 0 + list_1[2] * 1 else 0)
-			p5.creatorTextSize(if type(list) == "table" and #list >= 2 then list[1] * 0 + list[2] * 1 else 0)
-			p6()
+			p2.iconTransparency(if type(list_1) == "table" and #list_1 >= 2 then list_1[1] * 0 + list_1[2] * 1 else 0)
+			p2.iconSize(if type(list) == "table" and #list >= 2 then list[1] * 0 + list[2] * 1 else 0)
+			p2.infoFrameTransparency(if type(list_2) == "table" and #list_2 >= 2 then list_2[1] * 0 + list_2[2] * 1 else 0)
+			p2.thumbnailTransparency(if type(list_1) == "table" and #list_1 >= 2 then list_1[1] * 0 + list_1[2] * 1 else 0)
+			p2.placeTextTransparency(if type(list_1) == "table" and #list_1 >= 2 then list_1[1] * 0 + list_1[2] * 1 else 0)
+			p2.placeTextSize(if type(list) == "table" and #list >= 2 then list[1] * 0 + list[2] * 1 else 0)
+			p2.creatorTextTransparency(if type(list_1) == "table" and #list_1 >= 2 then list_1[1] * 0 + list_1[2] * 1 else 0)
+			p2.creatorTextSize(if type(list) == "table" and #list >= 2 then list[1] * 0 + list[2] * 1 else 0)
+			p3()
 		end
 	end
 }
 
 local _ = function()
-	-- upvalues: var26 (write), guiService (ref)
-	if var26 then
-		var26:disconnect()
-		var26 = nil
+	-- upvalues: var5 (write), guiService (ref)
+	if var5 then
+		var5:disconnect()
+		var5 = nil
 		guiService:CloseStatsBasedOnInputString("ConnectionHealth")
 	end
 end
 
 local loadingScreenView = roactModule.Component:extend("LoadingScreenView")
 
-function loadingScreenView.playAnimation(p7, p8, p9, p10)
+function loadingScreenView.playAnimation(p1, p2, p3, p4)
 	-- upvalues: runService (ref)
-	p7.animationStartTime = tick()
-	p7.animationFunction = p8
+	p1.animationStartTime = tick()
+	p1.animationFunction = p2
 	
-	if not p7.renderSteppedConnection then
-		p7.renderSteppedConnection = runService.RenderStepped:Connect(function()
-			-- upvalues: p7 (ref), p9 (ref), p10 (ref)
-			p7.animationFunction(tick() - p7.animationStartTime, p9, p7.updateBindings, function()
-				-- upvalues: p7 (copy), p10 (copy)
-				p7:stopAnimation()
+	if not p1.renderSteppedConnection then
+		p1.renderSteppedConnection = runService.RenderStepped:Connect(function()
+			-- upvalues: p1 (ref), p3 (ref), p4 (ref)
+			p1.animationFunction(tick() - p1.animationStartTime, p3, p1.updateBindings, function()
+				-- upvalues: p1 (copy), p4 (copy)
+				p1:stopAnimation()
 				
-				if p10 then
-					p10()
+				if p4 then
+					p4()
 				end
 			end)
 		end)
 	end
 end
 
-function loadingScreenView.stopAnimation(p11)
-	if p11.renderSteppedConnection then
-		p11.renderSteppedConnection:Disconnect()
-		p11.renderSteppedConnection = nil
+function loadingScreenView.stopAnimation(p1)
+	if p1.renderSteppedConnection then
+		p1.renderSteppedConnection:Disconnect()
+		p1.renderSteppedConnection = nil
 	end
 end
 
-function loadingScreenView.renderBackground(value, p12)
-	-- upvalues: roactModule (ref), var18 (write), externalEventConnection (ref), runService (ref)
+function loadingScreenView.renderBackground(value, p1)
+	-- upvalues: roactModule (ref), var2 (write), externalEventConnection (ref), runService (ref)
 	return roactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
-		DisplayOrder = value.props.displayOrder or var18,
+		DisplayOrder = value.props.displayOrder or var2,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
 		roactModule.createElement("Frame", {
 			Name = "BackgroundFrame",
 			[roactModule.Change.AbsoluteSize] = value.onAbsoluteSizeChange,
-			BackgroundColor3 = p12.Theme.BackgroundUIDefault.Color,
+			BackgroundColor3 = p1.Theme.BackgroundUIDefault.Color,
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
@@ -327,7 +327,7 @@ function loadingScreenView.renderBackground(value, p12)
 				Size = UDim2.fromOffset(value.state.thumbnailScaledWidth, value.state.thumbnailScaledHeight),
 				ImageTransparency = value.bindings.thumbnailTransparency
 			}),
-			renderStepped = not p12.Settings.ReducedMotion and roactModule.createElement(externalEventConnection, {
+			renderStepped = not p1.Settings.ReducedMotion and roactModule.createElement(externalEventConnection, {
 				event = runService.renderStepped,
 				callback = value.renderBackgroundSteppedCallback
 			})
@@ -336,44 +336,44 @@ function loadingScreenView.renderBackground(value, p12)
 end
 
 function loadingScreenView.showConnnectionHealthDebugMenu(_, _)
-	-- upvalues: var27 (write), var28 (write), var24 (ref), guiService (ref)
-	if var27 == 0 then
-		var27 = 1
-		var28 = tick()
+	-- upvalues: var6 (write), var7 (write), var4 (ref), guiService (ref)
+	if var6 == 0 then
+		var6 = 1
+		var7 = tick()
 		
 		return
-	elseif var24 and tick() - var28 <= 0.5 then
+	elseif var4 and tick() - var7 <= 0.5 then
 		guiService:ShowStatsBasedOnInputString("ConnectionHealth")
 	end
-	var27 = 0
-	var28 = 1e999
+	var6 = 0
+	var7 = 1e999
 end
 
-function loadingScreenView.renderPlaceIcon(p13, p14)
+function loadingScreenView.renderPlaceIcon(p1, p2)
 	-- upvalues: roactModule (ref), color (ref), externalEventConnection (ref), runService (ref)
-	local shimPos = p13.state.shimPos
-	local value = p13.bindings.iconTransparency:getValue()
-	local var73 = if p13.props.universeId and p13.props.universeId > 0 then ("rbxthumb://type=GameIcon&id=%d&w=256&h=256"):format(p13.props.universeId) else ""
-	local reducedMotion = p14.Settings.ReducedMotion
+	local shimPos = p1.state.shimPos
+	local value = p1.bindings.iconTransparency:getValue()
+	local var8 = if p1.props.universeId and p1.props.universeId > 0 then ("rbxthumb://type=GameIcon&id=%d&w=256&h=256"):format(p1.props.universeId) else ""
+	local reducedMotion = p2.Settings.ReducedMotion
 	local createElement = roactModule.createElement
-	local var74 = "Frame"
+	local var9 = "Frame"
 	local t = {
 		Name = "IconFrame",
 		BorderSizePixel = 0,
 		Active = true,
-		BackgroundTransparency = p13.bindings.iconTransparency,
+		BackgroundTransparency = p1.bindings.iconTransparency,
 		BackgroundColor3 = color,
-		Size = p13.bindings.iconSize,
+		Size = p1.bindings.iconSize,
 		Position = UDim2.fromScale(0.5, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5)
 	}
 	local t_1 = {}
-	local var77 = not reducedMotion
+	local var10 = not reducedMotion
 	
-	if var77 then
-		local var86
-		var77 = roactModule.createElement
-		local var78 = "Frame"
+	if var10 then
+		local var11
+		var10 = roactModule.createElement
+		local var12 = "Frame"
 		local t_2 = {
 			BackgroundTransparency = 0,
 			ZIndex = 2,
@@ -384,7 +384,7 @@ function loadingScreenView.renderPlaceIcon(p13, p14)
 		}
 		local t_3 = { Corner = roactModule.createElement("UICorner") }
 		local createElement_1 = roactModule.createElement
-		local var81 = "UIGradient"
+		local var13 = "UIGradient"
 		local t_4 = {
 			Rotation = 25,
 			Color = ColorSequence.new({
@@ -396,18 +396,18 @@ function loadingScreenView.renderPlaceIcon(p13, p14)
 		local new = NumberSequence.new
 		local t_5 = {}
 		local new_1 = NumberSequenceKeypoint.new
-		local var84 = 0
+		local var14 = 0
 		local list = { 0.7, 1 }
 		
 		if type(list) == "table" and #list >= 2 then
 			local clampedValue = math.clamp(value, 0, 1)
-			var86 = list[1] * (1 - clampedValue) + list[2] * clampedValue
+			var11 = list[1] * (1 - clampedValue) + list[2] * clampedValue
 		else
-			var86 = 0
+			var11 = 0
 		end
-		new_1 = new_1(var84, var86)
+		new_1 = new_1(var14, var11)
 		local new_2 = NumberSequenceKeypoint.new
-		local var88 = 0.5
+		local var15 = 0.5
 		local list_1 = { 0.3, 1 }
 		
 		if type(list_1) == "table" and #list_1 >= 2 then
@@ -416,7 +416,7 @@ function loadingScreenView.renderPlaceIcon(p13, p14)
 		else
 			list = 0
 		end
-		new_2 = new_2(var88, list)
+		new_2 = new_2(var15, list)
 		local new_3 = NumberSequenceKeypoint.new
 		list = 1
 		local list_2 = { 0.7, 1 }
@@ -430,61 +430,61 @@ function loadingScreenView.renderPlaceIcon(p13, p14)
 		-- Unknown statement at pc 0: <SetList>
 		t_4.Transparency = new(t_5)
 		t_4.Offset = Vector2.new(shimPos, 0)
-		t_3.Gradient = createElement_1(var81, t_4)
+		t_3.Gradient = createElement_1(var13, t_4)
 		t_3.renderStepped = roactModule.createElement(externalEventConnection, {
 			event = runService.renderStepped,
-			callback = p13.renderShimmerCallback
+			callback = p1.renderShimmerCallback
 		})
-		var77 = var77(var78, t_2, t_3)
+		var10 = var10(var12, t_2, t_3)
 	end
-	t_1.LoadingOverlay = var77
+	t_1.LoadingOverlay = var10
 	t_1.GameIconImage = roactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
-		Image = var73,
+		Image = var8,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = UDim2.fromScale(1, 1),
-		ImageTransparency = p13.bindings.iconTransparency
+		ImageTransparency = p1.bindings.iconTransparency
 	}, { Corner = roactModule.createElement("UICorner") })
 	t_1.Corner = roactModule.createElement("UICorner")
 	
-	return createElement(var74, t, t_1)
+	return createElement(var9, t, t_1)
 end
 
-function loadingScreenView.renderInfoFrame(p15, p16)
-	-- upvalues: verifiedBadgesModule (ref), list (ref), roactModule (ref), var24 (ref)
-	local productInfo = p15.props.productInfo
-	local var93 = if productInfo then productInfo.Name else ""
-	local var94 = if productInfo then productInfo.Creator.Name else ""
+function loadingScreenView.renderInfoFrame(p1, p2)
+	-- upvalues: verifiedBadgesModule (ref), list (ref), roactModule (ref), var4 (ref)
+	local productInfo = p1.props.productInfo
+	local var8 = if productInfo then productInfo.Name else ""
+	local var9 = if productInfo then productInfo.Creator.Name else ""
 	
 	if productInfo and productInfo.Creator.HasVerifiedBadge then
-		var94 = verifiedBadgesModule.appendVerifiedBadge(var94)
+		var9 = verifiedBadgesModule.appendVerifiedBadge(var9)
 	end
 	return roactModule.createElement("Frame", {
 		Name = "InfoFrame",
-		BackgroundColor3 = p16.Theme.BackgroundMuted.Color,
-		BackgroundTransparency = p15.bindings.infoFrameTransparency,
+		BackgroundColor3 = p2.Theme.BackgroundMuted.Color,
+		BackgroundTransparency = p1.bindings.infoFrameTransparency,
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Position = UDim2.fromScale(0.5, 0.5),
-		Size = p15.isPortrait and UDim2.fromScale(1, 0) or UDim2.fromScale(0.6, 0),
+		Size = p1.isPortrait and UDim2.fromScale(1, 0) or UDim2.fromScale(0.6, 0),
 		Active = true,
-		[roactModule.Change.AbsoluteSize] = function(p17)
-			-- upvalues: p15 (ref)
-			p15.updateBindings.updateInfoFrameAbsoluteSize(p17.AbsoluteSize)
+		[roactModule.Change.AbsoluteSize] = function(p3)
+			-- upvalues: p1 (ref)
+			p1.updateBindings.updateInfoFrameAbsoluteSize(p3.AbsoluteSize)
 		end
 	}, {
-		PlaceIcon = p15:renderPlaceIcon(p16),
+		PlaceIcon = p1:renderPlaceIcon(p2),
 		TextLayoutFrame = roactModule.createElement("Frame", {
 			Name = "TextLayout",
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Active = true,
-			BackgroundColor3 = p16.Theme.BackgroundMuted.Color,
+			BackgroundColor3 = p2.Theme.BackgroundMuted.Color,
 			AnchorPoint = Vector2.new(0.5, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Position = UDim2.new(0.5, 0, 0, math.clamp(math.max(p15.state.absoluteSize.X, p15.state.absoluteSize.Y) / 1024 * list[1], list[1], list[2]) / 2),
+			Position = UDim2.new(0.5, 0, 0, math.clamp(math.max(p1.state.absoluteSize.X, p1.state.absoluteSize.Y) / 1024 * list[1], list[1], list[2]) / 2),
 			Size = UDim2.fromScale(1, 0)
 		}, {
 			PlaceLabel = roactModule.createElement("TextLabel", {
@@ -496,14 +496,14 @@ function loadingScreenView.renderInfoFrame(p15, p16)
 				ZIndex = 2,
 				LayoutOrder = 1,
 				RichText = false,
-				TextTransparency = p15.bindings.placeTextTransparency,
+				TextTransparency = p1.bindings.placeTextTransparency,
 				Size = UDim2.fromScale(0.8, 0),
 				AnchorPoint = Vector2.new(0.5, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = p16.Font.Title.Font,
-				TextSize = p15.bindings.placeTextSize,
-				TextColor3 = p16.Theme.TextEmphasis.Color,
-				Text = var93,
+				Font = p2.Font.Title.Font,
+				TextSize = p1.bindings.placeTextSize,
+				TextColor3 = p2.Theme.TextEmphasis.Color,
+				Text = var8,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				TextTruncate = Enum.TextTruncate.AtEnd
@@ -517,14 +517,14 @@ function loadingScreenView.renderInfoFrame(p15, p16)
 				ZIndex = 2,
 				LayoutOrder = 2,
 				RichText = false,
-				TextTransparency = p15.bindings.creatorTextTransparency,
+				TextTransparency = p1.bindings.creatorTextTransparency,
 				Size = UDim2.fromScale(0.6, 0),
 				AnchorPoint = Vector2.new(0.5, 1),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = p16.Font.CaptionBody.Font,
-				TextSize = p15.bindings.creatorTextSize,
-				TextColor3 = p16.Theme.TextDefault.Color,
-				Text = var94,
+				Font = p2.Font.CaptionBody.Font,
+				TextSize = p1.bindings.creatorTextSize,
+				TextColor3 = p2.Theme.TextDefault.Color,
+				Text = var9,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				TextTruncate = Enum.TextTruncate.AtEnd
@@ -533,25 +533,25 @@ function loadingScreenView.renderInfoFrame(p15, p16)
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				Padding = UDim.new(0, if var24 then 12 else 36)
+				Padding = UDim.new(0, if var4 then 12 else 36)
 			}),
 			Padding = roactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, if var24 then 12 else 36),
-				PaddingBottom = UDim.new(0, if var24 then 12 else 36)
+				PaddingTop = UDim.new(0, if var4 then 12 else 36),
+				PaddingBottom = UDim.new(0, if var4 then 12 else 36)
 			})
 		}),
 		Corner = roactModule.createElement("UICorner")
 	})
 end
 
-function loadingScreenView.renderMain(p18, p19)
-	-- upvalues: var24 (ref), t (ref), var22 (ref), roactModule (ref), var18 (write), loading (ref), iconSize (ref)
-	local var95 = if var24 then if p18.isPortrait then t.MOBILE_PORTRAIT else t.MOBILE_LANDSCAPE elseif var22 then t.CONSOLE else t.DESKTOP
+function loadingScreenView.renderMain(p1, p2)
+	-- upvalues: var4 (ref), t (ref), var3 (ref), roactModule (ref), var2 (write), loading (ref), iconSize (ref)
+	local var8 = if var4 then if p1.isPortrait then t.MOBILE_PORTRAIT else t.MOBILE_LANDSCAPE elseif var3 then t.CONSOLE else t.DESKTOP
 	
 	return roactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
 		OnTopOfCoreBlur = true,
-		DisplayOrder = (p18.props.displayOrder or var18) + 1,
+		DisplayOrder = (p1.props.displayOrder or var2) + 1,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
 		DarkGradient = roactModule.createElement("Frame", {
@@ -574,7 +574,7 @@ function loadingScreenView.renderMain(p18, p19)
 					NumberSequenceKeypoint.new(1, 0.5)
 				})
 			}),
-			Spinner = p19.Settings.ReducedMotion and roactModule.createElement("Frame", {
+			Spinner = p2.Settings.ReducedMotion and roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				ZIndex = 20,
 				Size = UDim2.fromScale(1, 1),
@@ -586,52 +586,52 @@ function loadingScreenView.renderMain(p18, p19)
 					AnchorPoint = Vector2.new(1, 1)
 				})
 			}),
-			infoFrame = p18:renderInfoFrame(p19),
-			AutoTranslate = p18:renderAutoTranslate(),
-			serverFrame = if not p18.isQueueTreatmentEnabled then p18:renderServerFrame(p19) else nil,
-			policyContainer = if p18.isQueueTreatmentEnabled then p18:renderPolicyContainer() else nil,
-			serverStatusContainer = if p18.isQueueTreatmentEnabled then p18:renderServerStatus() else nil,
-			closeBtn = p18:renderCloseBtn(p19),
-			gamepadCancelBtn = p18:renderGamepadCancelBtn(p19),
+			infoFrame = p1:renderInfoFrame(p2),
+			AutoTranslate = p1:renderAutoTranslate(),
+			serverFrame = if not p1.isQueueTreatmentEnabled then p1:renderServerFrame(p2) else nil,
+			policyContainer = if p1.isQueueTreatmentEnabled then p1:renderPolicyContainer() else nil,
+			serverStatusContainer = if p1.isQueueTreatmentEnabled then p1:renderServerStatus() else nil,
+			closeBtn = p1:renderCloseBtn(p2),
+			gamepadCancelBtn = p1:renderGamepadCancelBtn(p2),
 			Padding = roactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var95.LEFT),
-				PaddingRight = UDim.new(0, var95.RIGHT),
-				PaddingTop = UDim.new(0, var95.TOP),
-				PaddingBottom = UDim.new(0, var95.BOTTOM)
+				PaddingLeft = UDim.new(0, var8.LEFT),
+				PaddingRight = UDim.new(0, var8.RIGHT),
+				PaddingTop = UDim.new(0, var8.TOP),
+				PaddingBottom = UDim.new(0, var8.BOTTOM)
 			})
 		})
 	})
 end
 
-function loadingScreenView.renderCloseBtn(p20, _)
+function loadingScreenView.renderCloseBtn(p1, _)
 	-- upvalues: responsiveModule (ref), roactModule (ref)
-	if p20.props.preferredInputRef.current ~= responsiveModule.Input.Directional and not p20.state.showCloseBtn and tick() - p20.startTime > 5 then
-		p20:setState({ showCloseBtn = true })
+	if p1.props.preferredInputRef.current ~= responsiveModule.Input.Directional and not p1.state.showCloseBtn and tick() - p1.startTime > 5 then
+		p1:setState({ showCloseBtn = true })
 	end
-	return p20.state.showCloseBtn and roactModule.createElement("ImageButton", {
+	return p1.state.showCloseBtn and roactModule.createElement("ImageButton", {
 		Name = "CloseButton",
 		Image = "rbxasset://textures/loading/cancelButton.png",
 		ImageTransparency = 0,
 		BackgroundTransparency = 1,
 		Position = UDim2.fromOffset(0, 0),
-		Size = UDim2.fromOffset(if p20.isQueueTreatmentEnabled then 32 else 32, if p20.isQueueTreatmentEnabled then 32 else 32),
+		Size = UDim2.fromOffset(if p1.isQueueTreatmentEnabled then 32 else 32, if p1.isQueueTreatmentEnabled then 32 else 32),
 		Active = false,
 		ZIndex = 10,
 		[roactModule.Event.MouseButton1Click] = function()
-			-- upvalues: p20 (ref)
-			if p20.props.onCloseButtonActivated then
-				p20.props.onCloseButtonActivated()
+			-- upvalues: p1 (ref)
+			if p1.props.onCloseButtonActivated then
+				p1.props.onCloseButtonActivated()
 			end
 		end
 	})
 end
 
-function loadingScreenView.renderServerFrame(p21, p22)
-	-- upvalues: var22 (ref), roactModule (ref), var17 (ref), coreGuiService (ref)
-	local serverStatusText = p21.state.serverStatusText
-	local isSubjectToChinaPolicies = p21.props.isSubjectToChinaPolicies
-	local var96 = if var22 then 16 else 12
-	local var97 = if var22 then 16 else 12
+function loadingScreenView.renderServerFrame(p1, p2)
+	-- upvalues: var3 (ref), roactModule (ref), var1 (ref), coreGuiService (ref)
+	local serverStatusText = p1.state.serverStatusText
+	local isSubjectToChinaPolicies = p1.props.isSubjectToChinaPolicies
+	local var8 = if var3 then 16 else 12
+	local var9 = if var3 then 16 else 12
 	
 	return roactModule.createElement("Frame", {
 		Name = "ServerFrame",
@@ -649,39 +649,39 @@ function loadingScreenView.renderServerFrame(p21, p22)
 			TextScaled = false,
 			TextStrokeTransparency = 1,
 			ZIndex = 2,
-			Size = UDim2.new(1, 0, 0, 2 * var97),
-			Position = UDim2.new(0, 0, 1, -4 * var96 - 2 * var97),
-			Font = p22.Font.Footer.Font,
-			TextSize = var97,
-			TextColor3 = p22.Theme.TextDefault.Color,
-			Text = var17:Format("Authentication.Login.WeChat.AntiAddictionText"),
+			Size = UDim2.new(1, 0, 0, 2 * var9),
+			Position = UDim2.new(0, 0, 1, -4 * var8 - 2 * var9),
+			Font = p2.Font.Footer.Font,
+			TextSize = var9,
+			TextColor3 = p2.Theme.TextDefault.Color,
+			Text = var1:Format("Authentication.Login.WeChat.AntiAddictionText"),
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center
 		}),
 		JoinServerLabel = roactModule.createElement("TextLabel", {
 			Name = "JoinText",
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, 4 * var96),
-			Position = UDim2.new(0, 0, 1, -2 * var96),
-			Font = p22.Font.Footer.Font,
-			TextSize = var96,
+			Size = UDim2.new(1, 0, 0, 4 * var8),
+			Position = UDim2.new(0, 0, 1, -2 * var8),
+			Font = p2.Font.Footer.Font,
+			TextSize = var8,
 			TextWrapped = true,
 			TextScaled = false,
-			TextColor3 = p22.Theme.TextDefault.Color,
+			TextColor3 = p2.Theme.TextDefault.Color,
 			TextStrokeTransparency = 1,
 			Text = serverStatusText,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			ZIndex = 2,
 			RootLocalizationTable = coreGuiService:FindFirstChild("CoreScriptLocalization"),
-			[roactModule.Event.InputBegan] = if not p21.props.isSubjectToChinaPolicies then p21.showConnnectionHealthDebugMenu else nil
+			[roactModule.Event.InputBegan] = if not p1.props.isSubjectToChinaPolicies then p1.showConnnectionHealthDebugMenu else nil
 		})
 	})
 end
 
-function loadingScreenView.renderGamepadCancelBtn(p23, p24)
-	-- upvalues: responsiveModule (ref), roactModule (ref), var17 (ref)
-	return p23.props.preferredInputRef.current == responsiveModule.Input.Directional and (not p23.state.gamepadCancelPressed and roactModule.createElement("Frame", {
+function loadingScreenView.renderGamepadCancelBtn(p1, p2)
+	-- upvalues: responsiveModule (ref), roactModule (ref), var1 (ref)
+	return p1.props.preferredInputRef.current == responsiveModule.Input.Directional and (not p1.state.gamepadCancelPressed and roactModule.createElement("Frame", {
 		Name = "GamepadCancelFrame",
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
@@ -708,9 +708,9 @@ function loadingScreenView.renderGamepadCancelBtn(p23, p24)
 			ZIndex = 2,
 			LayoutOrder = 1,
 			Size = UDim2.fromScale(1, 1),
-			Font = p24.Font.SubHeader1.Font,
-			TextColor3 = p24.Theme.TextEmphasis.Color,
-			Text = var17:Format("CoreScripts.TopBar.Back"),
+			Font = p2.Font.SubHeader1.Font,
+			TextColor3 = p2.Theme.TextEmphasis.Color,
+			Text = var1:Format("CoreScripts.TopBar.Back"),
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center
 		}),
@@ -724,17 +724,17 @@ function loadingScreenView.renderGamepadCancelBtn(p23, p24)
 	}))
 end
 
-function loadingScreenView.init(p25)
-	-- upvalues: vector2 (ref), var22 (ref), queueExperimentation (ref), roactModule (ref), list (ref), var24 (ref), guiService (ref), contextActionService (ref)
-	local var98
-	p25.thumbnailMoveSpd = 0.05
-	p25.fadeinComplete = false
-	p25.isPortrait = false
-	p25.startTime = tick()
-	p25.fadeOutTriggered = false
-	p25.numberOfTaps = 0
-	p25.lastTapTime = 1e999
-	p25:setState({
+function loadingScreenView.init(p1)
+	-- upvalues: vector2 (ref), var3 (ref), queueExperimentation (ref), roactModule (ref), list (ref), var4 (ref), guiService (ref), contextActionService (ref)
+	local var8
+	p1.thumbnailMoveSpd = 0.05
+	p1.fadeinComplete = false
+	p1.isPortrait = false
+	p1.startTime = tick()
+	p1.fadeOutTriggered = false
+	p1.numberOfTaps = 0
+	p1.lastTapTime = 1e999
+	p1:setState({
 		visible = true,
 		thumbnailPositionX = 0.5,
 		shimPos = 0,
@@ -744,236 +744,236 @@ function loadingScreenView.init(p25)
 		absoluteSize = Vector2.new(0, 0),
 		thumbnailScaledWidth = vector2.x,
 		thumbnailScaledHeight = vector2.y,
-		showTenFootCancelBtn = var22
+		showTenFootCancelBtn = var3
 	})
 	
 	if not queueExperimentation.getIsJoinNewServerButtonEnabled() then
-		var98 = queueExperimentation.getIsAutoJoinNewServerEnabled() and p25.props.placeId > 0
+		var8 = queueExperimentation.getIsAutoJoinNewServerEnabled() and p1.props.placeId > 0
 	end
-	p25.isQueueTreatmentEnabled = var98
+	p1.isQueueTreatmentEnabled = var8
 	
-	function p25.onAbsoluteSizeChange(p26)
-		-- upvalues: p25 (ref)
-		p25:setState({ absoluteSize = p26.AbsoluteSize })
-		p25.isPortrait = p26.AbsoluteSize.X < p26.AbsoluteSize.Y
-		p25.updateBindings.iconSize(1)
+	function p25.onAbsoluteSizeChange(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ absoluteSize = p2.AbsoluteSize })
+		p1.isPortrait = p2.AbsoluteSize.X < p2.AbsoluteSize.Y
+		p1.updateBindings.iconSize(1)
 	end
 	
-	local var99, var100 = roactModule.createBinding(1)
-	local var101, var102 = roactModule.createBinding(1)
-	local var103, var104 = roactModule.createBinding(0)
-	local var105, var106 = roactModule.createBinding(1)
-	local var107, var108 = roactModule.createBinding(0)
-	local var109, var110 = roactModule.createBinding(1)
-	local var111, var112 = roactModule.createBinding(0)
-	local var113, var114 = roactModule.createBinding(1)
-	local var115, var116 = roactModule.createBinding(Vector2.new(0, 0))
-	p25.bindings = {
-		thumbnailTransparency = var99,
-		iconTransparency = var101,
-		iconSize = var103:map(function(p27)
-			-- upvalues: p25 (ref), list (copy)
-			local clampedValue = math.clamp(math.max(p25.state.absoluteSize.X, p25.state.absoluteSize.Y) / 1024 * list[1], list[1], list[2])
+	local var9, var10 = roactModule.createBinding(1)
+	local var11, var12 = roactModule.createBinding(1)
+	local var13, var14 = roactModule.createBinding(0)
+	local var15, var16 = roactModule.createBinding(1)
+	local var17, var18 = roactModule.createBinding(0)
+	local var19, var20 = roactModule.createBinding(1)
+	local var21, var22 = roactModule.createBinding(0)
+	local var23, var24 = roactModule.createBinding(1)
+	local var25, var26 = roactModule.createBinding(Vector2.new(0, 0))
+	p1.bindings = {
+		thumbnailTransparency = var9,
+		iconTransparency = var11,
+		iconSize = var13:map(function(p2)
+			-- upvalues: p1 (ref), list (copy)
+			local clampedValue = math.clamp(math.max(p1.state.absoluteSize.X, p1.state.absoluteSize.Y) / 1024 * list[1], list[1], list[2])
 			
-			return UDim2.fromOffset(clampedValue * p27, clampedValue * p27)
+			return UDim2.fromOffset(clampedValue * p2, clampedValue * p2)
 		end),
-		placeTextTransparency = var105,
-		placeTextSize = var107:map(function(p28)
-			-- upvalues: var24 (copy)
-			return (if var24 then 20 else 36) * p28
+		placeTextTransparency = var15,
+		placeTextSize = var17:map(function(p2)
+			-- upvalues: var4 (copy)
+			return (if var4 then 20 else 36) * p2
 		end),
-		creatorTextTransparency = var109,
-		creatorTextSize = var111:map(function(p29)
-			return 20 * p29
+		creatorTextTransparency = var19,
+		creatorTextSize = var21:map(function(p2)
+			return 20 * p2
 		end),
-		infoFrameTransparency = var113,
-		infoFrameAbsoluteSize = var115
+		infoFrameTransparency = var23,
+		infoFrameAbsoluteSize = var25
 	}
-	p25.updateBindings = {
-		thumbnailTransparency = var100,
-		iconTransparency = var102,
-		iconSize = var104,
-		placeTextTransparency = var106,
-		placeTextSize = var108,
-		creatorTextTransparency = var110,
-		creatorTextSize = var112,
-		infoFrameTransparency = var114,
-		updateInfoFrameAbsoluteSize = var116
+	p1.updateBindings = {
+		thumbnailTransparency = var10,
+		iconTransparency = var12,
+		iconSize = var14,
+		placeTextTransparency = var16,
+		placeTextSize = var18,
+		creatorTextTransparency = var20,
+		creatorTextSize = var22,
+		infoFrameTransparency = var24,
+		updateInfoFrameAbsoluteSize = var26
 	}
 	
-	function p25.renderBackgroundSteppedCallback(p30)
-		-- upvalues: p25 (ref), vector2 (copy)
-		local absoluteSize = p25.state.absoluteSize
-		local var119 = absoluteSize.x * 1.5
-		local var120 = var119 / vector2.x * vector2.y
+	function p25.renderBackgroundSteppedCallback(p2)
+		-- upvalues: p1 (ref), vector2 (copy)
+		local absoluteSize = p1.state.absoluteSize
+		local var27 = absoluteSize.x * 1.5
+		local var28 = var27 / vector2.x * vector2.y
 		
-		if var120 < absoluteSize.y then
-			var119 = absoluteSize.y / vector2.y * vector2.x
-			var120 = absoluteSize.y
+		if var28 < absoluteSize.y then
+			var27 = absoluteSize.y / vector2.y * vector2.x
+			var28 = absoluteSize.y
 		end
-		local var121 = var119 / absoluteSize.x / 2
-		local maxValue = math.max(var121, 1 - var121)
-		local minValue = math.min(var121, 1 - var121)
-		local var124 = p25.state.thumbnailPositionX + p25.thumbnailMoveSpd * p30
+		local var29 = var27 / absoluteSize.x / 2
+		local maxValue = math.max(var29, 1 - var29)
+		local minValue = math.min(var29, 1 - var29)
+		local var30 = p1.state.thumbnailPositionX + p1.thumbnailMoveSpd * p2
 		
-		if maxValue <= var124 or var124 <= minValue then
-			p25.thumbnailMoveSpd = -p25.thumbnailMoveSpd
-			var124 = math.clamp(var124, minValue, maxValue)
+		if maxValue <= var30 or var30 <= minValue then
+			p1.thumbnailMoveSpd = -p1.thumbnailMoveSpd
+			var30 = math.clamp(var30, minValue, maxValue)
 		end
-		p25:setState({
-			thumbnailPositionX = var124,
-			thumbnailScaledHeight = var120,
-			thumbnailScaledWidth = var119
+		p1:setState({
+			thumbnailPositionX = var30,
+			thumbnailScaledHeight = var28,
+			thumbnailScaledWidth = var27
 		})
 	end
 	
-	function p25.renderShimmerCallback(p31)
-		-- upvalues: p25 (ref)
-		local var125 = p25.state.shimPos + p31 * 1
+	function p25.renderShimmerCallback(p2)
+		-- upvalues: p1 (ref)
+		local var27 = p1.state.shimPos + p2 * 1
 		
-		if var125 > 1 then
-			var125 = -1
+		if var27 > 1 then
+			var27 = -1
 		end
-		p25:setState({ shimPos = var125 })
+		p1:setState({ shimPos = var27 })
 	end
 	
 	if guiService:GetUiMessage() ~= "" then
-		p25:setState({ serverStatusText = guiService:GetUiMessage() })
+		p1:setState({ serverStatusText = guiService:GetUiMessage() })
 	end
-	guiService.UiMessageChanged:Connect(function(p32, p33)
-		-- upvalues: p25 (ref)
-		if p32 == Enum.UiMessageType.UiMessageInfo then
-			p25:setState({ serverStatusText = p33 })
+	guiService.UiMessageChanged:Connect(function(p2, p3)
+		-- upvalues: p1 (ref)
+		if p2 == Enum.UiMessageType.UiMessageInfo then
+			p1:setState({ serverStatusText = p3 })
 		end
 	end)
-	local var117 = false
-	contextActionService:BindCoreAction("CancelGameLoad", function(_, p34, _)
-		-- upvalues: var117 (write), p25 (ref), contextActionService (copy)
-		if p34 == Enum.UserInputState.Begin then
-			var117 = true
+	local var27 = false
+	contextActionService:BindCoreAction("CancelGameLoad", function(_, p2, _)
+		-- upvalues: var27 (write), p1 (ref), contextActionService (copy)
+		if p2 == Enum.UserInputState.Begin then
+			var27 = true
 			
 			return
-		elseif p34 == Enum.UserInputState.End and var117 then
-			p25:setState({ showTenFootCancelBtn = false })
-			p25:setState({ gamepadCancelPressed = true })
+		elseif p2 == Enum.UserInputState.End and var27 then
+			p1:setState({ showTenFootCancelBtn = false })
+			p1:setState({ gamepadCancelPressed = true })
 			contextActionService:UnbindCoreAction("CancelGameLoad")
 			
-			if p25.props.onGamepadCancel then
-				p25.props.onGamepadCancel()
+			if p1.props.onGamepadCancel then
+				p1.props.onGamepadCancel()
 			end
 		end
 	end, false, Enum.KeyCode.ButtonB)
 end
 
-function loadingScreenView.renderAutoTranslate(p35)
+function loadingScreenView.renderAutoTranslate(p1)
 	-- upvalues: loadingScreenTelemetryModule (ref), roactModule (ref), autoTranslateBadgeModule (ref)
-	if p35.props.universeId <= 0 then
+	if p1.props.universeId <= 0 then
 		loadingScreenTelemetryModule.countAutoTranslateZeroUniverseId()
 		
 		return nil
 	end
 	return roactModule.createElement(autoTranslateBadgeModule, {
-		universeId = p35.props.universeId,
-		positionBinding = p35.bindings.infoFrameAbsoluteSize,
-		transparencyBinding = p35.bindings.infoFrameTransparency
+		universeId = p1.props.universeId,
+		positionBinding = p1.bindings.infoFrameAbsoluteSize,
+		transparencyBinding = p1.bindings.infoFrameTransparency
 	})
 end
 
-function loadingScreenView.renderPolicyContainer(p36)
+function loadingScreenView.renderPolicyContainer(p1)
 	-- upvalues: reactModule (ref), policyContainerModule (ref)
-	return if p36.props.isSubjectToChinaPolicies then reactModule.createElement(policyContainerModule, { position = UDim2.new(0, 0, 0, 32) }) else nil
+	return if p1.props.isSubjectToChinaPolicies then reactModule.createElement(policyContainerModule, { position = UDim2.new(0, 0, 0, 32) }) else nil
 end
 
-function loadingScreenView.renderServerStatus(p37)
+function loadingScreenView.renderServerStatus(p1)
 	-- upvalues: queueExperimentation (ref), roactModule (ref), serverStatusWithCountdownModule (ref), serverStatusModule (ref)
 	return if queueExperimentation.getIsAutoJoinNewServerEnabled() then roactModule.createElement(serverStatusWithCountdownModule, {
 		anchorPoint = Vector2.new(0.5, 1),
-		isSubjectToChinaPolicies = p37.props.isSubjectToChinaPolicies,
-		placeId = p37.props.placeId,
+		isSubjectToChinaPolicies = p1.props.isSubjectToChinaPolicies,
+		placeId = p1.props.placeId,
 		position = UDim2.fromScale(0.5, 1),
 		size = UDim2.fromScale(1, 0.2),
-		universeId = p37.props.universeId
+		universeId = p1.props.universeId
 	}) elseif queueExperimentation.getIsJoinNewServerButtonEnabled() then roactModule.createElement(serverStatusModule, {
 		anchorPoint = Vector2.new(0.5, 1),
-		isSubjectToChinaPolicies = p37.props.isSubjectToChinaPolicies,
-		placeId = p37.props.placeId,
+		isSubjectToChinaPolicies = p1.props.isSubjectToChinaPolicies,
+		placeId = p1.props.placeId,
 		position = UDim2.fromScale(0.5, 1),
 		size = UDim2.fromScale(1, 0.2),
-		universeId = p37.props.universeId
+		universeId = p1.props.universeId
 	}) else nil
 end
 
-function loadingScreenView.renderMainWithProviders(p38, p39)
-	-- upvalues: roactModule (ref), foundationProvider (ref), foundationModule (ref), localizationProvider (ref), var17 (ref)
+function loadingScreenView.renderMainWithProviders(p1, p2)
+	-- upvalues: roactModule (ref), foundationProvider (ref), foundationModule (ref), localizationProvider (ref), var1 (ref)
 	return roactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
-		roactModule.createElement(localizationProvider, { localization = var17 }, p38:renderMain(p39))
+		roactModule.createElement(localizationProvider, { localization = var1 }, p1:renderMain(p2))
 	})
 end
 
-function loadingScreenView.render(p40)
+function loadingScreenView.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref)
-	return withStyle(function(p41)
-		-- upvalues: p40 (ref), roactModule (copy)
-		return p40.state.visible and roactModule.createElement("Folder", {}, {
-			BackgroundScreen = p40:renderBackground(p41),
-			MainScreen = p40:renderMainWithProviders(p41)
+	return withStyle(function(p2)
+		-- upvalues: p1 (ref), roactModule (copy)
+		return p1.state.visible and roactModule.createElement("Folder", {}, {
+			BackgroundScreen = p1:renderBackground(p2),
+			MainScreen = p1:renderMainWithProviders(p2)
 		})
 	end)
 end
 
 function loadingScreenView.willUpdate(_, _, _) end
 
-function loadingScreenView.maybeStartFadeOut(p42)
-	-- upvalues: var22 (ref), contextActionService (ref), t_1 (ref)
-	if p42.props.shouldStartFadeOut and not p42.fadeOutTriggered then
-		p42.fadeOutTriggered = true
+function loadingScreenView.maybeStartFadeOut(p1)
+	-- upvalues: var3 (ref), contextActionService (ref), t_1 (ref)
+	if p1.props.shouldStartFadeOut and not p1.fadeOutTriggered then
+		p1.fadeOutTriggered = true
 		
-		if var22 then
+		if var3 then
 			contextActionService:UnbindCoreAction("CancelGameLoad")
 		end
 		task.spawn(function()
-			-- upvalues: p42 (ref), t_1 (copy)
-			while not p42.fadeinComplete do
+			-- upvalues: p1 (ref), t_1 (copy)
+			while not p1.fadeinComplete do
 				wait()
 			end
-			p42:stopAnimation()
-			p42:playAnimation(t_1.FadeOut, {}, function()
-				-- upvalues: p42 (copy)
-				p42:setState({ visible = false })
+			p1:stopAnimation()
+			p1:playAnimation(t_1.FadeOut, {}, function()
+				-- upvalues: p1 (copy)
+				p1:setState({ visible = false })
 			end)
 		end)
 	end
 end
 
-function loadingScreenView.didUpdate(p43, _, _)
-	p43:maybeStartFadeOut()
+function loadingScreenView.didUpdate(p2, _, _)
+	p2:maybeStartFadeOut()
 end
 
-function loadingScreenView.didMount(p44)
+function loadingScreenView.didMount(p2)
 	-- upvalues: runService (ref), t_1 (ref)
-	if p44.props.manageRobloxGuiFocus then
+	if p2.props.manageRobloxGuiFocus then
 		runService:SetRobloxGuiFocused(true)
 	end
-	p44:playAnimation(t_1.FadeIn, {}, function()
-		-- upvalues: p44 (ref)
-		p44.fadeinComplete = true
+	p2:playAnimation(t_1.FadeIn, {}, function()
+		-- upvalues: p2 (ref)
+		p2.fadeinComplete = true
 	end)
-	p44:maybeStartFadeOut()
+	p2:maybeStartFadeOut()
 end
 
-function loadingScreenView.willUnmount(p45)
-	-- upvalues: contextActionService (ref), runService (ref), var26 (write), userInputService (ref), guiService (ref)
+function loadingScreenView.willUnmount(p2)
+	-- upvalues: contextActionService (ref), runService (ref), var5 (write), userInputService (ref), guiService (ref)
 	contextActionService:UnbindCoreAction("CancelGameLoad")
 	
-	if p45.props.manageRobloxGuiFocus then
+	if p2.props.manageRobloxGuiFocus then
 		runService:SetRobloxGuiFocused(false)
 	end
-	if not var26 then
-		var26 = userInputService.InputBegan:Connect(function()
-			-- upvalues: var26 (copy), guiService (copy)
-			if var26 then
-				var26:disconnect()
-				var26 = nil
+	if not var5 then
+		var5 = userInputService.InputBegan:Connect(function()
+			-- upvalues: var5 (copy), guiService (copy)
+			if var5 then
+				var5:disconnect()
+				var5 = nil
 				guiService:CloseStatsBasedOnInputString("ConnectionHealth")
 			end
 		end)

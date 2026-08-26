@@ -7,10 +7,10 @@ local loadFoundationCloudAsset = require(appChat.Logger):new("loadFoundationClou
 return function(value)
 	-- upvalues: preloadAsset (ref), assets (ref), loadFoundationCloudAsset (ref)
 	preloadAsset(value)
-	local var3 = assets[value]
+	local var1 = assets[value]
 	
-	if var3 then
-		return var3.assetId, var3.size
+	if var1 then
+		return var1.assetId, var1.size
 	end
 	loadFoundationCloudAsset:error("FoundationCloudAsset not found: %s", value)
 	

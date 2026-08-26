@@ -8,45 +8,45 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, _, p1, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), updateUserSettings (ref), enableAdConsentUserSettingsPublish (ref), adConsentAttributionAdapter (ref), linkingProtocol (ref)
-	local var3 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var3 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.UpdateUserSettings
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	assert(var3, "actionParams must exist")
-	local settings = var3.settings
+	assert(var1, "actionParams must exist")
+	local settings = var1.settings
 	
 	if typeof(settings) ~= "table" or next(settings) == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = sduiActionType.UpdateUserSettings,
 			message = `Invalid settings {settings}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local auditData = var3.auditData
+	local auditData = var1.auditData
 	
 	if auditData ~= nil and typeof(auditData) ~= "string" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = sduiActionType.UpdateUserSettings,
 			message = `Invalid auditData {auditData}`
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
 	local ok, status = pcall(function()
-		-- upvalues: updateUserSettings (copy), settings (ref), auditData (ref), enableAdConsentUserSettingsPublish (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy), p1 (ref), sduiErrorType (copy), sduiActionType (copy)
-		local var4 = updateUserSettings(settings, auditData)
+		-- upvalues: updateUserSettings (copy), settings (ref), auditData (ref), enableAdConsentUserSettingsPublish (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy), p2 (ref), sduiErrorType (copy), sduiActionType (copy)
+		local var2 = updateUserSettings(settings, auditData)
 		
 		if enableAdConsentUserSettingsPublish then
-			var4 = var4:andThen(function()
+			var2 = var2:andThen(function()
 				-- upvalues: settings (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy)
 				local allowSellShareData = settings.allowSellShareData
 				
@@ -58,20 +58,20 @@ return function(p0, _, p1, _)
 				end
 			end)
 		end
-		var4:catch(function(p2)
-			-- upvalues: p1 (copy), sduiErrorType (copy), sduiActionType (copy)
-			p1.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
+		var2:catch(function(p3)
+			-- upvalues: p2 (copy), sduiErrorType (copy), sduiActionType (copy)
+			p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
 				name = sduiActionType.UpdateUserSettings,
-				message = tostring(p2)
-			}, p1.appPage)
+				message = tostring(p3)
+			}, p2.appPage)
 		end)
 	end)
 	
 	if ok then
 		return
 	end
-	p1.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
+	p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
 		name = sduiActionType.UpdateUserSettings,
 		message = tostring(status)
-	}, p1.appPage)
+	}, p2.appPage)
 end

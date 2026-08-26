@@ -2,18 +2,18 @@
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), signalsModule (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p0 (ref), p1 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: p0 (copy), p1 (copy)
+		-- upvalues: signalsModule (copy), p1 (ref), p2 (ref)
+		return signalsModule.createComputed(function(p3)
+			-- upvalues: p1 (copy), p2 (copy)
 			local t = {}
 			
-			for i, v in p0(p2) do
-				t[if p1 then p1(v) else v.messageId] = v
+			for i, v in p1(p3) do
+				t[if p2 then p2(v) else v.messageId] = v
 			end
 			return t
 		end)
-	end, { p0, p1 })
+	end, { p1, p2 })
 end

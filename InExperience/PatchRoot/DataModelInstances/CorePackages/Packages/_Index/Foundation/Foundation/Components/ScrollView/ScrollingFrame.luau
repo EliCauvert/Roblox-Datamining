@@ -13,82 +13,82 @@ local controlStateModule = require(foundation.Enums.ControlState)
 local t = { frequency = 2 }
 local t_1 = { scrollBarVisibility = "Auto" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), withGuiObjectPropsModule (ref), useTokensModule (ref), useStyleTagsModule (ref), reactModule (ref), visibilityModule (ref), useCursorModule (ref), reactOtterModule (ref), t (ref), controlStateModule (ref)
-	local var12 = withDefaultsModule(p0, t_1)
-	local var13 = withGuiObjectPropsModule({ selection = var12.selection }, {})
-	local var14 = useTokensModule()
-	local var15 = useStyleTagsModule(p0.tag)
-	local shift400 = var14.Color.Shift.Shift_400
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: var12 (ref), visibilityModule (copy), var14 (ref)
-		return if var12.scrollBarVisibility == visibilityModule.None then 0 else var14.Size.Size_150
-	end, { var12.scrollBarVisibility })
-	local var17 = useCursorModule()
-	local var18 = reactModule.useRef(nil)
-	local var19, var20 = reactOtterModule.useAnimatedBinding(1)
-	local var21 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var18 (ref), var20 (ref), reactOtterModule (copy), shift400 (ref), t (copy)
-		if var18.current then
-			task.cancel(var18.current)
+	local var1 = withDefaultsModule(p1, t_1)
+	local var2 = withGuiObjectPropsModule({ selection = var1.selection }, {})
+	local var3 = useTokensModule()
+	local var4 = useStyleTagsModule(p1.tag)
+	local shift400 = var3.Color.Shift.Shift_400
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), visibilityModule (copy), var3 (ref)
+		return if var1.scrollBarVisibility == visibilityModule.None then 0 else var3.Size.Size_150
+	end, { var1.scrollBarVisibility })
+	local var6 = useCursorModule()
+	local var7 = reactModule.useRef(nil)
+	local var8, var9 = reactOtterModule.useAnimatedBinding(1)
+	local var10 = reactModule.useCallback(function(p3, p4)
+		-- upvalues: var7 (ref), var9 (ref), reactOtterModule (copy), shift400 (ref), t (copy)
+		if var7.current then
+			task.cancel(var7.current)
 		end
-		if p2 then
-			var20(reactOtterModule.spring(shift400.Transparency, t))
+		if p3 then
+			var9(reactOtterModule.spring(shift400.Transparency, t))
 		end
-		if p3 ~= nil then
-			var18.current = task.delay(p3, function()
-				-- upvalues: var20 (copy), reactOtterModule (copy), t (copy)
-				var20(reactOtterModule.spring(1, t))
+		if p4 ~= nil then
+			var7.current = task.delay(p4, function()
+				-- upvalues: var9 (copy), reactOtterModule (copy), t (copy)
+				var9(reactOtterModule.spring(1, t))
 			end)
 		end
 	end, { shift400 })
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), var21 (ref), controlStateModule (copy)
-		if var12.scrollBarVisibility == "None" then
-			var21(false, 0)
+		-- upvalues: var1 (ref), var10 (ref), controlStateModule (copy)
+		if var1.scrollBarVisibility == "None" then
+			var10(false, 0)
 			
 			return
-		elseif var12.scrollBarVisibility == "Always" then
-			var21(true)
+		elseif var1.scrollBarVisibility == "Always" then
+			var10(true)
 			
 			return
 		end
-		var21(if var12.controlState ~= controlStateModule.Hover then if var12.controlState ~= controlStateModule.Selected then var12.controlState == controlStateModule.Pressed else true else true, if var12.controlState == controlStateModule.Default then 0 else nil)
-	end, { var12.scrollBarVisibility, var12.controlState })
+		var10(if var1.controlState ~= controlStateModule.Hover then if var1.controlState ~= controlStateModule.Selected then var1.controlState == controlStateModule.Pressed else true else true, if var1.controlState == controlStateModule.Default then 0 else nil)
+	end, { var1.scrollBarVisibility, var1.controlState })
 	
 	return reactModule.createElement("ScrollingFrame", {
-		AutomaticCanvasSize = var12.AutomaticCanvasSize,
-		CanvasSize = var12.CanvasSize,
-		ClipsDescendants = var12.ClipsDescendants,
-		ScrollingDirection = var12.ScrollingDirection,
-		ScrollingEnabled = var12.ScrollingEnabled,
+		AutomaticCanvasSize = var1.AutomaticCanvasSize,
+		CanvasSize = var1.CanvasSize,
+		ClipsDescendants = var1.ClipsDescendants,
+		ScrollingDirection = var1.ScrollingDirection,
+		ScrollingEnabled = var1.ScrollingEnabled,
 		ScrollBarImageColor3 = shift400.Color3,
-		ScrollBarImageTransparency = var19,
-		ScrollBarThickness = var16,
-		VerticalScrollBarInset = var12.VerticalScrollBarInset,
-		HorizontalScrollBarInset = var12.HorizontalScrollBarInset,
+		ScrollBarImageTransparency = var8,
+		ScrollBarThickness = var5,
+		VerticalScrollBarInset = var1.VerticalScrollBarInset,
+		HorizontalScrollBarInset = var1.HorizontalScrollBarInset,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		AutomaticSize = var12.AutomaticSize,
+		AutomaticSize = var1.AutomaticSize,
 		Size = UDim2.fromScale(1, 1),
-		Selectable = var13.Selectable,
-		NextSelectionUp = var13.NextSelectionUp,
-		NextSelectionDown = var13.NextSelectionDown,
-		NextSelectionLeft = var13.NextSelectionLeft,
-		NextSelectionRight = var13.NextSelectionRight,
-		SelectionImageObject = var13.SelectionImageObject or var17,
-		SelectionOrder = var13.SelectionOrder,
-		[reactModule.Change.CanvasPosition] = if var12.scrollBarVisibility == "Auto" then function(p4)
-			-- upvalues: var21 (ref), var12 (ref)
-			var21(true, 3)
+		Selectable = var2.Selectable,
+		NextSelectionUp = var2.NextSelectionUp,
+		NextSelectionDown = var2.NextSelectionDown,
+		NextSelectionLeft = var2.NextSelectionLeft,
+		NextSelectionRight = var2.NextSelectionRight,
+		SelectionImageObject = var2.SelectionImageObject or var6,
+		SelectionOrder = var2.SelectionOrder,
+		[reactModule.Change.CanvasPosition] = if var1.scrollBarVisibility == "Auto" then function(p3)
+			-- upvalues: var10 (ref), var1 (ref)
+			var10(true, 3)
 			
-			if var12.onCanvasPositionChanged then
-				var12.onCanvasPositionChanged(p4)
+			if var1.onCanvasPositionChanged then
+				var1.onCanvasPositionChanged(p3)
 			end
-		end else var12.onCanvasPositionChanged,
-		[reactModule.Change.AbsoluteCanvasSize] = var12.onAbsoluteCanvasSizeChanged,
-		[reactModule.Change.AbsoluteWindowSize] = var12.onAbsoluteWindowSizeChanged,
-		ref = p1,
-		[reactModule.Tag] = var15
-	}, var12.children)
+		end else var1.onCanvasPositionChanged,
+		[reactModule.Change.AbsoluteCanvasSize] = var1.onAbsoluteCanvasSizeChanged,
+		[reactModule.Change.AbsoluteWindowSize] = var1.onAbsoluteWindowSizeChanged,
+		ref = p2,
+		[reactModule.Tag] = var4
+	}, var1.children)
 end))

@@ -4,48 +4,48 @@ local react = dependenciesModule.React
 local reactOtter = dependenciesModule.ReactOtter
 local _ = require(crossExperienceVoice.Common.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: react (ref), reactOtter (ref)
-	local var2 = react.useRef(nil)
-	local var3, var4 = reactOtter.useAnimatedBinding(p0, function()
-		-- upvalues: var2 (ref)
-		if var2.current then
-			var2.current()
-			var2.current = nil
+	local var1 = react.useRef(nil)
+	local var2, var3 = reactOtter.useAnimatedBinding(p1, function()
+		-- upvalues: var1 (ref)
+		if var1.current then
+			var1.current()
+			var1.current = nil
 		end
 	end)
 	
-	return var3, react.useCallback(function(p1, p2)
-		-- upvalues: var2 (ref), var4 (ref), reactOtter (copy)
-		local function _(p3, p4)
-			-- upvalues: var2 (copy), var4 (copy), reactOtter (copy)
-			var2.current = p4
-			var4(reactOtter.ease(p3.value, {
-				duration = p3.durationInMs / 1000,
-				easingStyle = p3.easingStyle
+	return var2, react.useCallback(function(p2, p3)
+		-- upvalues: var1 (ref), var3 (ref), reactOtter (copy)
+		local function _(p4, p5)
+			-- upvalues: var1 (copy), var3 (copy), reactOtter (copy)
+			var1.current = p5
+			var3(reactOtter.ease(p4.value, {
+				duration = p4.durationInMs / 1000,
+				easingStyle = p4.easingStyle
 			}))
 		end
 		
-		local function animateImpl(p5, p6, p7)
-			-- upvalues: animateImpl (ref), var2 (copy), var4 (copy), reactOtter (copy)
-			local var6 = p5[p6]
+		local function animateImpl(p4, p5, p6)
+			-- upvalues: animateImpl (ref), var1 (copy), var3 (copy), reactOtter (copy)
+			local var4 = p4[p5]
 			
-			if var6 ~= nil then
+			if var4 ~= nil then
 				function var2.current()
-					-- upvalues: p7 (ref), p6 (ref), animateImpl (copy), p5 (ref)
-					if p7 then
-						p7(p6)
+					-- upvalues: p6 (ref), p5 (ref), animateImpl (copy), p4 (ref)
+					if p6 then
+						p6(p5)
 					end
-					animateImpl(p5, p6 + 1, p7)
+					animateImpl(p4, p5 + 1, p6)
 				end
 				
-				var4(reactOtter.ease(var6.value, {
-					duration = var6.durationInMs / 1000,
-					easingStyle = var6.easingStyle
+				var3(reactOtter.ease(var4.value, {
+					duration = var4.durationInMs / 1000,
+					easingStyle = var4.easingStyle
 				}))
 			end
 		end
 		
-		return animateImpl(p1, 1, p2)
+		return animateImpl(p2, 1, p3)
 	end, {})
 end

@@ -7,24 +7,24 @@ local _ = require(parent.MomentsTypes)
 local momentsDraftSerializerModule = require(momentsCreation.Utils.MomentsDraftSerializer)
 local getLocalUserIdModule = require(momentsCreation.Utils.getLocalUserId)
 local failureReasonModule = require(momentsCreation.Enums.FailureReason)
-local var7 = require(parent.Loggers).Logger:new("Moments.DraftStorage")
-local var8 = game:DefineFastInt("MomentDraftTTLDays", 14) * 24 * 60 * 60 * 1000
+local var1 = require(parent.Loggers).Logger:new("Moments.DraftStorage")
+local var2 = game:DefineFastInt("MomentDraftTTLDays", 14) * 24 * 60 * 60 * 1000
 
 return {
-	save = function(p0)
-		-- upvalues: getLocalUserIdModule (ref), playersService (ref), var7 (ref), momentsDraftSerializerModule (ref), appStorageService (ref), httpService (ref)
-		local var9 = getLocalUserIdModule(playersService)
+	save = function(p1)
+		-- upvalues: getLocalUserIdModule (ref), playersService (ref), var1 (ref), momentsDraftSerializerModule (ref), appStorageService (ref), httpService (ref)
+		local var3 = getLocalUserIdModule(playersService)
 		
-		if var9 == nil then
-			var7:debug("event=save_skipped reason=no_local_player")
+		if var3 == nil then
+			var1:debug("event=save_skipped reason=no_local_player")
 			
 			return false
 		end
 		local t = {
-			userId = var9,
-			captureRef = p0.captureRef,
-			description = p0.description,
-			edits = p0.edits,
+			userId = var3,
+			captureRef = p1.captureRef,
+			description = p1.description,
+			edits = p1.edits,
 			lastSaveTime = DateTime.now().UnixTimestampMillis
 		}
 		local ok, status = pcall(function()
@@ -34,16 +34,16 @@ return {
 		end)
 		
 		if not ok then
-			var7:error("event=save_failed reason=app_storage_write_error error={}", tostring(status))
+			var1:error("event=save_failed reason=app_storage_write_error error={}", tostring(status))
 		end
 		return ok
 	end,
 	load = function()
-		-- upvalues: getLocalUserIdModule (ref), playersService (ref), var7 (ref), appStorageService (ref), httpService (ref), failureReasonModule (ref), momentsDraftSerializerModule (ref), var8 (ref)
-		local var11 = getLocalUserIdModule(playersService)
+		-- upvalues: getLocalUserIdModule (ref), playersService (ref), var1 (ref), appStorageService (ref), httpService (ref), failureReasonModule (ref), momentsDraftSerializerModule (ref), var2 (ref)
+		local var3 = getLocalUserIdModule(playersService)
 		
-		if var11 == nil then
-			var7:debug("event=load_failed reason=no_local_player")
+		if var3 == nil then
+			var1:debug("event=load_failed reason=no_local_player")
 			
 			return nil, nil
 		end
@@ -53,7 +53,7 @@ return {
 		end)
 		
 		if not ok then
-			var7:debug("event=load_failed reason=app_storage_read_error")
+			var1:debug("event=load_failed reason=app_storage_read_error")
 			
 			return nil, nil
 		elseif status == nil or status == "" then
@@ -73,9 +73,9 @@ return {
 			
 			return nil, failureReasonModule.CorruptShape
 		end
-		local var12 = momentsDraftSerializerModule.deserialize(status_1)
+		local var4 = momentsDraftSerializerModule.deserialize(status_1)
 		
-		if var12 == nil then
+		if var4 == nil then
 			pcall(function()
 				-- upvalues: appStorageService (copy)
 				appStorageService:SetItem("MomentsDraftStorage", "")
@@ -83,7 +83,7 @@ return {
 			end)
 			
 			return nil, failureReasonModule.CorruptShape
-		elseif var12.userId ~= var11 then
+		elseif var4.userId ~= var3 then
 			pcall(function()
 				-- upvalues: appStorageService (copy)
 				appStorageService:SetItem("MomentsDraftStorage", "")
@@ -91,7 +91,7 @@ return {
 			end)
 			
 			return nil, failureReasonModule.WrongUser
-		elseif var8 < DateTime.now().UnixTimestampMillis - var12.lastSaveTime then
+		elseif var2 < DateTime.now().UnixTimestampMillis - var4.lastSaveTime then
 			pcall(function()
 				-- upvalues: appStorageService (copy)
 				appStorageService:SetItem("MomentsDraftStorage", "")
@@ -100,7 +100,7 @@ return {
 			
 			return nil, failureReasonModule.ExpiredDraft
 		end
-		return var12, nil
+		return var4, nil
 	end,
 	clear = function()
 		-- upvalues: appStorageService (ref)

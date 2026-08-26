@@ -4,16 +4,16 @@ local view = require(parent.Foundation).View
 local getSduiComponentWrapper = require(parent.SduiCoreSystem).getSduiComponentWrapper
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: getSduiComponentWrapper (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), view (ref)
-	local layoutOrder = p0.layoutOrder
+	local layoutOrder = p1.layoutOrder
 	local t = {}
 	
-	for i, v in p0.items do
+	for i, v in p1.items do
 		t[`Item_${i}`] = reactModule.createElement(getSduiComponentWrapper(v), {
 			componentConfig = v,
-			sduiContext = p0.sduiContext,
-			parentAnalyticsContext = p0.analyticsContext,
+			sduiContext = p1.sduiContext,
+			parentAnalyticsContext = p1.analyticsContext,
 			extraLocalProps = { index = i, layoutOrder = i },
 			debugName = `AssociatedItemsRow-Item-${i}`
 		})
@@ -36,7 +36,7 @@ return reactModule.memo(function(p0)
 		}, {
 			ItemsRow = reactModule.createElement(view, { tag = "row gap-small auto-xy size-full-0" }, t)
 		}),
-		Footer = p0.footerComponent
+		Footer = p1.footerComponent
 	}) else reactModule.createElement("ScrollingFrame", {
 		BackgroundTransparency = 1,
 		ClipsDescendants = false,

@@ -11,33 +11,33 @@ local constantsModule = require(chrome.Integrations.Party.Constants)
 local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
 local mappedSignal = chromeUtilsModule.MappedSignal
 local default = crossExperienceVoiceModule.CrossExperienceVoiceManager.default
-local var8 = nil
-local var9 = false
-local var10 = signal.new()
-local var11 = signal.new()
-var10:connect(function(p0)
-	-- upvalues: var8 (write)
-	var8 = p0
+local var1 = nil
+local var2 = false
+local var3 = signal.new()
+local var4 = signal.new()
+var3:connect(function(p1)
+	-- upvalues: var1 (write)
+	var1 = p1
 end)
-var11:connect(function(p1)
-	-- upvalues: var9 (write)
-	var9 = p1
+var4:connect(function(p1)
+	-- upvalues: var2 (write)
+	var2 = p1
 end)
 
 return if getFFlagEnableCrossExpVoice() then serviceModule:register({
 	id = constantsModule.TOGGLE_MIC_INTEGRATION_ID,
 	label = if require(chrome.Flags.FFlagChangeToggleMicText) then "CoreScripts.TopBar.Mic" else "CoreScripts.TopBar.ToggleMic",
 	sideSheetPlacement = sideSheetPlacement.Unibar,
-	isActivated = mappedSignal.new(var10, function()
-		-- upvalues: var9 (write), var8 (write)
-		return var9 and var8 == false
+	isActivated = mappedSignal.new(var3, function()
+		-- upvalues: var2 (write), var1 (write)
+		return var2 and var1 == false
 	end),
 	activated = function()
-		-- upvalues: playersService (ref), var9 (write), var8 (write), default (ref)
+		-- upvalues: playersService (ref), var2 (write), var1 (write), default (ref)
 		local userId = playersService and (playersService.LocalPlayer and (playersService.LocalPlayer.UserId or -1))
 		
-		if userId ~= -1 and var9 and var8 ~= nil then
-			if var8 then
+		if userId ~= -1 and var2 and var1 ~= nil then
+			if var1 then
 				default:unmuteVoiceParticipant(userId)
 				
 				return
@@ -47,10 +47,10 @@ return if getFFlagEnableCrossExpVoice() then serviceModule:register({
 	end,
 	components = {
 		Icon = function()
-			-- upvalues: partyMicIconModule (ref), var10 (ref), var11 (ref)
+			-- upvalues: partyMicIconModule (ref), var3 (ref), var4 (ref)
 			return partyMicIconModule({
-				isLocalPlayerMutedSignal = var10,
-				isVoiceConnectedSignal = var11
+				isLocalPlayerMutedSignal = var3,
+				isVoiceConnectedSignal = var4
 			})
 		end
 	},

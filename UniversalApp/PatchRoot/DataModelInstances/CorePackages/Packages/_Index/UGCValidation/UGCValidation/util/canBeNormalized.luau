@@ -1,6 +1,6 @@
 ﻿local floatEqualsModule = require(script.Parent.Parent.util.floatEquals)
 
-return function(p0)
+return function(p1)
 	-- upvalues: floatEqualsModule (ref)
-	return not floatEqualsModule(p0.X, 0) or (not floatEqualsModule(p0.Y, 0) or not floatEqualsModule(p0.Z, 0))
+	return not floatEqualsModule(p1.X, 0) or (not floatEqualsModule(p1.Y, 0) or not floatEqualsModule(p1.Z, 0))
 end

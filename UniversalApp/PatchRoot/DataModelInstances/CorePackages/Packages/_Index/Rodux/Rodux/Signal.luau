@@ -5,12 +5,12 @@ end, function()
 	return true
 end)
 
-local function immutableAppend(p0, ...)
+local function immutableAppend(p1, ...)
 	local t = {}
-	local p0Count = #p0
+	local p0Count = #p1
 	
 	for i = 1, p0Count do
-		t[i] = p0[i]
+		t[i] = p1[i]
 	end
 	for i_1 = 1, select("#", ...) do
 		t[p0Count + i_1] = select(i_1, ...)
@@ -18,12 +18,12 @@ local function immutableAppend(p0, ...)
 	return t
 end
 
-local function immutableRemoveValue(p1, p2)
+local function immutableRemoveValue(p2, p3)
 	local t = {}
 	
-	for i = 1, #p1 do
-		if p1[i] ~= p2 then
-			table.insert(t, p1[i])
+	for i = 1, #p2 do
+		if p2[i] ~= p3 then
+			table.insert(t, p2[i])
 		end
 	end
 	return t
@@ -32,9 +32,9 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p3)
+function t.new(p4)
 	-- upvalues: t (ref)
-	local t_1 = { _listeners = {}, _store = p3 }
+	local t_1 = { _listeners = {}, _store = p4 }
 	setmetatable(t_1, t)
 	
 	return t_1

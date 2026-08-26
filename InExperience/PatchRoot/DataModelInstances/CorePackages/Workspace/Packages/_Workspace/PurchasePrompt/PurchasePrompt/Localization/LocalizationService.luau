@@ -25,9 +25,9 @@ local _ = {
 }
 local formattedParam = symbolModule.named("FormattedParam")
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: formattedParam (ref)
-	return typeof(p0) == "table" and p0[formattedParam] == true
+	return typeof(p1) == "table" and p1[formattedParam] == true
 end
 
 local _ = function(p1)
@@ -35,35 +35,35 @@ local _ = function(p1)
 	return { [formattedParam] = true, format = p1 }
 end
 
-local _ = function(p2, p3)
-	local translations = p2.translations
-	local fallbackTranslations = p2.fallbackTranslations
+local _ = function(p1, p2)
+	local translations = p1.translations
+	local fallbackTranslations = p1.fallbackTranslations
 	
-	return if fallbackTranslations == nil or translations[p3] ~= nil then translations[p3] else fallbackTranslations[p3]
+	return if fallbackTranslations == nil or translations[p2] ~= nil then translations[p2] else fallbackTranslations[p2]
 end
 
-local _ = function(p4, p5)
-	local formattedText = string.format("%%1%s%%2", p5)
+local _ = function(p1, p2)
+	local formattedText = string.format("%%1%s%%2", p2)
 	local _ = nil
 	repeat
-		local replaced, replaced_1 = string.gsub(p4, "^(-?%d+)(%d%d%d)", formattedText)
-		p4 = replaced
+		local replaced, replaced_1 = string.gsub(p1, "^(-?%d+)(%d%d%d)", formattedText)
+		p1 = replaced
 	until replaced_1 == 0
-	return p4
+	return p1
 end
 
 return {
-	getKeyFromItemType = function(p6)
+	getKeyFromItemType = function(p1)
 		-- upvalues: itemTypeModule (ref), keyMappingsModule (ref)
-		assert(itemTypeModule.isMember(p6) or (if typeof(p6) ~= "number" then typeof(p6) == "string" else true), "provided item type " .. tostring(p6) .. " must be a number, string, or ItemType enum")
+		assert(itemTypeModule.isMember(p1) or (if typeof(p1) ~= "number" then typeof(p1) == "string" else true), "provided item type " .. tostring(p1) .. " must be a number, string, or ItemType enum")
 		local _ = nil
 		
-		return if p6 == itemTypeModule.Bundle then "CoreScripts.PurchasePrompt.ItemType.Bundle" else keyMappingsModule.AssetTypeById[tostring(p6)]
+		return if p1 == itemTypeModule.Bundle then "CoreScripts.PurchasePrompt.ItemType.Bundle" else keyMappingsModule.AssetTypeById[tostring(p1)]
 	end,
-	getErrorKey = function(p7)
+	getErrorKey = function(p1)
 		-- upvalues: purchaseErrorModule (ref), keyMappingsModule (ref)
-		assert(purchaseErrorModule.isMember(p7), "provided value " .. tostring(p7) .. " is not a member of PurchaseError enum")
+		assert(purchaseErrorModule.isMember(p1), "provided value " .. tostring(p1) .. " is not a member of PurchaseError enum")
 		
-		return keyMappingsModule.PurchaseErrorKey[p7]
+		return keyMappingsModule.PurchaseErrorKey[p1]
 	end
 }

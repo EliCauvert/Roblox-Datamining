@@ -20,8 +20,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = {
-					status = function(p0)
-						return p0
+					status = function(p1)
+						return p1
 					end
 				}
 			}
@@ -51,8 +51,8 @@ return {
 					errorType = function(p1)
 						return p1
 					end,
-					errorCode = function(p2)
-						return p2
+					errorCode = function(p1)
+						return p1
 					end
 				}
 			}

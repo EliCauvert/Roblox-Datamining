@@ -3,14 +3,14 @@ local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local guiService = game:GetService("GuiService")
 local playersService = game:GetService("Players")
 local create = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
-local var4 = guiService:IsTenFootInterface()
+local var1 = guiService:IsTenFootInterface()
 local t = {
 	IsEnabled = function(_)
-		-- upvalues: var4 (ref)
-		return var4
+		-- upvalues: var1 (ref)
+		return var1
 	end
 }
-local var6 = (function()
+local var2 = (function()
 	-- upvalues: create (ref), robloxGui (ref), color3 (ref), playersService (ref)
 	local t = { Container = nil }
 	local t_1 = {}
@@ -33,64 +33,64 @@ local var6 = (function()
 		end
 	end
 	
-	function removeFromDisplayStack(p0)
+	function removeFromDisplayStack(p1)
 		-- upvalues: t_1 (ref), bindableEvent (ref)
-		local var12 = nil
-		
-		for i = 1, #t_1 do
-			if t_1[i] ~= p0 then
-				continue
-			end
-			var12 = i + 1
-			break
-		end
-		local var13 = p0
-		
-		for i_1 = var12, #t_1 do
-			local var14 = t_1[i_1]
-			var14.Position = UDim2.new(var14.Position.X.Scale, var14.Position.X.Offset, var14.Position.Y.Scale, var13.AbsolutePosition.Y)
-			var13 = var14
-		end
-		bindableEvent:Fire()
-	end
-	
-	function addBackToDisplayStack(p1)
-		-- upvalues: t_1 (ref), bindableEvent (ref)
-		local var15 = 0
+		local var3 = nil
 		
 		for i = 1, #t_1 do
 			if t_1[i] ~= p1 then
 				continue
 			end
-			var15 = i + 1
+			var3 = i + 1
 			break
 		end
-		local var16 = p1
+		local var4 = p1
 		
-		for i_1 = var15, #t_1 do
-			local var17 = t_1[i_1]
-			var17.Position = UDim2.new(var17.Position.X.Scale, var17.Position.X.Offset, var17.Position.Y.Scale, var16.AbsolutePosition.Y + var16.AbsoluteSize.Y + 4)
-			var16 = var17
+		for i_1 = var3, #t_1 do
+			local var5 = t_1[i_1]
+			var5.Position = UDim2.new(var5.Position.X.Scale, var5.Position.X.Offset, var5.Position.Y.Scale, var4.AbsolutePosition.Y)
+			var4 = var5
 		end
 		bindableEvent:Fire()
 	end
 	
-	function addToDisplayStack(p2)
+	function addBackToDisplayStack(p2)
+		-- upvalues: t_1 (ref), bindableEvent (ref)
+		local var6 = 0
+		
+		for i = 1, #t_1 do
+			if t_1[i] ~= p2 then
+				continue
+			end
+			var6 = i + 1
+			break
+		end
+		local var7 = p2
+		
+		for i_1 = var6, #t_1 do
+			local var8 = t_1[i_1]
+			var8.Position = UDim2.new(var8.Position.X.Scale, var8.Position.X.Offset, var8.Position.Y.Scale, var7.AbsolutePosition.Y + var7.AbsoluteSize.Y + 4)
+			var7 = var8
+		end
+		bindableEvent:Fire()
+	end
+	
+	function addToDisplayStack(p3)
 		-- upvalues: t_1 (ref), createContainer (ref), t (ref), bindableEvent (ref)
-		local var18 = if #t_1 > 0 then t_1[#t_1] else nil
-		t_1[#t_1 + 1] = p2
-		p2.Position = UDim2.new(p2.Position.X.Scale, p2.Position.X.Offset, p2.Position.Y.Scale, if var18 then var18.AbsolutePosition.Y + var18.AbsoluteSize.Y + 4 else 0)
+		local var9 = if #t_1 > 0 then t_1[#t_1] else nil
+		t_1[#t_1 + 1] = p3
+		p3.Position = UDim2.new(p3.Position.X.Scale, p3.Position.X.Offset, p3.Position.Y.Scale, if var9 then var9.AbsolutePosition.Y + var9.AbsoluteSize.Y + 4 else 0)
 		createContainer()
-		p2.Parent = t.Container
-		p2.Changed:connect(function(p3)
-			-- upvalues: p2 (ref)
-			if p3 == "Visible" then
-				if not p2.Visible then
-					removeFromDisplayStack(p2)
+		p3.Parent = t.Container
+		p3.Changed:connect(function(p4)
+			-- upvalues: p3 (ref)
+			if p4 == "Visible" then
+				if not p3.Visible then
+					removeFromDisplayStack(p3)
 					
 					return
 				end
-				addBackToDisplayStack(p2)
+				addBackToDisplayStack(p3)
 			end
 		end)
 		bindableEvent:Fire()
@@ -106,7 +106,7 @@ local var6 = (function()
 			Position = UDim2.new(0, 92, 0, 0),
 			BackgroundColor3 = Color3.new(0, 0, 0)
 		})
-		local var19 = create("Frame")({
+		local var9 = create("Frame")({
 			Name = "HealthFill",
 			BorderSizePixel = 0,
 			BackgroundTransparency = 0,
@@ -136,8 +136,8 @@ local var6 = (function()
 			TextColor3 = Color3.new(1, 1, 1),
 			Parent = t.HealthContainer
 		})
-		local var20 = create("TextLabel")({ Visible = false })
-		local var21 = create("TextLabel")({ Visible = false })
+		local var10 = create("TextLabel")({ Visible = false })
+		local var11 = create("TextLabel")({ Visible = false })
 		addToDisplayStack(t.HealthContainer)
 		createContainer()
 		t.HealthContainer.Changed:connect(function()
@@ -145,10 +145,10 @@ local var6 = (function()
 			bindableEvent_1:Fire()
 		end)
 		
-		return t.Container, var20, t.HealthContainer, var19, var21
+		return t.Container, var10, t.HealthContainer, var9, var11
 	end
 	
-	function t.CreateAccountType(_, p4)
+	function t.CreateAccountType(_, p3)
 		-- upvalues: t (ref), create (copy), robloxGui (copy)
 		t.AccountTypeContainer = create("Frame")({
 			Name = "AccountTypeContainer",
@@ -168,7 +168,7 @@ local var6 = (function()
 			BackgroundColor3 = Color3.new(0, 0, 0),
 			Font = Enum.Font.SourceSans,
 			FontSize = Enum.FontSize.Size36,
-			Text = p4,
+			Text = p3,
 			TextColor3 = Color3.new(1, 1, 1),
 			Parent = t.AccountTypeContainer,
 			TextXAlignment = Enum.TextXAlignment.Center,
@@ -178,19 +178,19 @@ local var6 = (function()
 	
 	function t.SetupTopStat(_)
 		-- upvalues: create (copy), playersService (copy)
-		local var22 = true
-		local var23 = nil
-		local var24 = nil
-		local var25 = nil
-		local var26 = nil
-		local var27 = nil
+		local var9 = true
+		local var10 = nil
+		local var11 = nil
+		local var12 = nil
+		local var13 = nil
+		local var14 = nil
 		
 		local function makeTenFootInterfaceStat()
-			-- upvalues: var27 (write), create (copy)
-			if var27 then
+			-- upvalues: var14 (write), create (copy)
+			if var14 then
 				return
 			end
-			var27 = create("Frame")({
+			var14 = create("Frame")({
 				Name = "OneStatFrame",
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
@@ -210,71 +210,71 @@ local var6 = (function()
 				TextStrokeColor3 = Color3.new(0.407843137255, 0.407843137255, 0.407843137255),
 				TextColor3 = Color3.new(1, 1, 1),
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Parent = var27
+				Parent = var14
 			}):clone()
 			statValue.Position = UDim2.new(0.5, 0, 0, 0)
 			statValue.Name = "StatValue"
 			statValue.Text = "123,643,231"
 			statValue.TextXAlignment = Enum.TextXAlignment.Right
-			statValue.Parent = var27
-			addToDisplayStack(var27)
+			statValue.Parent = var14
+			addToDisplayStack(var14)
 		end
 		
 		local updateTenFootStat = nil
 		
 		local function setDisplayedStat(value)
-			-- upvalues: var24 (write), var25 (write), var23 (write), makeTenFootInterfaceStat (ref), updateTenFootStat (write)
-			if var24 then
-				var24:disconnect()
-				var24 = nil
+			-- upvalues: var11 (write), var12 (write), var10 (write), makeTenFootInterfaceStat (ref), updateTenFootStat (write)
+			if var11 then
+				var11:disconnect()
+				var11 = nil
 			end
-			if var25 then
-				var25:disconnect()
-				var25 = nil
+			if var12 then
+				var12:disconnect()
+				var12 = nil
 			end
-			var23 = value
+			var10 = value
 			
-			if var23 then
+			if var10 then
 				makeTenFootInterfaceStat()
-				updateTenFootStat(var23)
-				var25 = var23.AncestryChanged:connect(function()
-					-- upvalues: updateTenFootStat (copy), var23 (copy)
-					updateTenFootStat(var23, "Parent")
+				updateTenFootStat(var10)
+				var12 = var10.AncestryChanged:connect(function()
+					-- upvalues: updateTenFootStat (copy), var10 (copy)
+					updateTenFootStat(var10, "Parent")
 				end)
-				var24 = var23.Changed:connect(function(p5)
-					-- upvalues: updateTenFootStat (copy), var23 (copy)
-					updateTenFootStat(var23, p5)
+				var11 = var10.Changed:connect(function(p3)
+					-- upvalues: updateTenFootStat (copy), var10 (copy)
+					updateTenFootStat(var10, p3)
 				end)
 			end
 		end
 		
-		updateTenFootStat = function(p6, p7)
-			-- upvalues: var27 (write), setDisplayedStat (ref), var22 (write)
-			if p7 and p7 == "Parent" then
-				var27.StatName.Text = ""
-				var27.StatValue.Text = ""
+		updateTenFootStat = function(p3, p4)
+			-- upvalues: var14 (write), setDisplayedStat (ref), var9 (write)
+			if p4 and p4 == "Parent" then
+				var14.StatName.Text = ""
+				var14.StatValue.Text = ""
 				setDisplayedStat(nil)
 				tenFootInterfaceChanged()
 				
 				return
-			elseif var22 then
-				var27.StatName.Text = " " .. tostring(p6.Name) .. ":"
-				var27.StatValue.Text = tostring(p6.Value)
+			elseif var9 then
+				var14.StatName.Text = " " .. tostring(p3.Name) .. ":"
+				var14.StatValue.Text = tostring(p3.Value)
 				
 				return
 			end
-			var27.StatName.Text = ""
-			var27.StatValue.Text = ""
+			var14.StatName.Text = ""
+			var14.StatValue.Text = ""
 		end
 		
-		local function isValidStat(p8)
-			return p8:IsA("StringValue") or (p8:IsA("IntValue") or (p8:IsA("BoolValue") or (p8:IsA("NumberValue") or (p8:IsA("DoubleConstrainedValue") or p8:IsA("IntConstrainedValue")))))
+		local function isValidStat(p3)
+			return p3:IsA("StringValue") or (p3:IsA("IntValue") or (p3:IsA("BoolValue") or (p3:IsA("NumberValue") or (p3:IsA("DoubleConstrainedValue") or p3:IsA("IntConstrainedValue")))))
 		end
 		
-		local function _(p9)
-			-- upvalues: var23 (write), isValidStat (ref), setDisplayedStat (ref)
-			if not var23 and isValidStat(p9) then
-				setDisplayedStat(p9)
+		local function _(p3)
+			-- upvalues: var10 (write), isValidStat (ref), setDisplayedStat (ref)
+			if not var10 and isValidStat(p3) then
+				setDisplayedStat(p3)
 			end
 		end
 		
@@ -284,26 +284,26 @@ local var6 = (function()
 			localPlayer = playersService.LocalPlayer
 		end
 		function tenFootInterfaceChanged()
-			-- upvalues: localPlayer (write), var23 (write), isValidStat (ref), setDisplayedStat (ref), var26 (write)
+			-- upvalues: localPlayer (write), var10 (write), isValidStat (ref), setDisplayedStat (ref), var13 (write)
 			local leaderstats = localPlayer:FindFirstChild("leaderstats")
 			
 			if leaderstats then
 				local children = leaderstats:GetChildren()
 				
 				for i = 1, #children do
-					local var35 = children[i]
+					local var15 = children[i]
 					
-					if not var23 and isValidStat(var35) then
-						setDisplayedStat(var35)
+					if not var10 and isValidStat(var15) then
+						setDisplayedStat(var15)
 					end
 				end
-				if var26 then
-					var26:disconnect()
+				if var13 then
+					var13:disconnect()
 				end
-				var26 = leaderstats.ChildAdded:connect(function(p10)
-					-- upvalues: var23 (copy), isValidStat (copy), setDisplayedStat (copy)
-					if not var23 and isValidStat(p10) then
-						setDisplayedStat(p10)
+				var13 = leaderstats.ChildAdded:connect(function(p3)
+					-- upvalues: var10 (copy), isValidStat (copy), setDisplayedStat (copy)
+					if not var10 and isValidStat(p3) then
+						setDisplayedStat(p3)
 					end
 				end)
 			end
@@ -315,12 +315,12 @@ local var6 = (function()
 			localPlayer.ChildAdded:connect(tenFootInterfaceChanged)
 		end
 		return {
-			SetTopStatEnabled = function(_, p11)
-				-- upvalues: var22 (write), var23 (write), updateTenFootStat (write)
-				var22 = p11
+			SetTopStatEnabled = function(_, p3)
+				-- upvalues: var9 (write), var10 (write), updateTenFootStat (write)
+				var9 = p3
 				
-				if var23 then
-					updateTenFootStat(var23, "")
+				if var10 then
+					updateTenFootStat(var10, "")
 				end
 			end
 		}
@@ -330,18 +330,18 @@ local var6 = (function()
 end)()
 
 function t.CreateHealthBar(_)
-	-- upvalues: var6 (ref)
-	return var6:CreateHealthBar()
+	-- upvalues: var2 (ref)
+	return var2:CreateHealthBar()
 end
 
-function t.CreateAccountType(_, p12)
-	-- upvalues: var6 (ref)
-	return var6:CreateAccountType(p12)
+function t.CreateAccountType(_, p3)
+	-- upvalues: var2 (ref)
+	return var2:CreateAccountType(p3)
 end
 
 function t.SetupTopStat(_)
-	-- upvalues: var6 (ref)
-	return var6:SetupTopStat()
+	-- upvalues: var2 (ref)
+	return var2:SetupTopStat()
 end
 
 return t

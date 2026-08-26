@@ -5,18 +5,18 @@ local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local useStyle = UIBloxModule.Core.Style.useStyle
 local fFlagChatLineReportingFocusFixesEnabled = require(parent.SharedFlags).FFlagChatLineReportingFocusFixesEnabled
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), useCursor (ref), useStyle (ref)
-	local var2, var3 = reactModule.useState("")
-	local var4 = if fFlagChatLineReportingFocusFixesEnabled then useCursor() else nil
-	local var5 = useStyle()
-	local theme = var5.Theme
+	local var1, var2 = reactModule.useState("")
+	local var3 = if fFlagChatLineReportingFocusFixesEnabled then useCursor() else nil
+	local var4 = useStyle()
+	local theme = var4.Theme
 	
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 60),
-		BackgroundTransparency = if p0.backgroundTransparency ~= nil then var5.Theme.BackgroundDefault.Transparency else p0.backgroundTransparency,
-		BackgroundColor3 = p0.backgroundColor3 or var5.Theme.BackgroundDefault.Color,
-		LayoutOrder = p0.layoutOrder,
+		BackgroundTransparency = if p1.backgroundTransparency ~= nil then var4.Theme.BackgroundDefault.Transparency else p1.backgroundTransparency,
+		BackgroundColor3 = p1.backgroundColor3 or var4.Theme.BackgroundDefault.Color,
+		LayoutOrder = p1.layoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
 		UIPadding = reactModule.createElement("UIPadding", {
@@ -31,16 +31,16 @@ return function(p0)
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Position = UDim2.new(0, 0, 0, 0),
 			AnchorPoint = Vector2.new(0, 0),
-			BackgroundColor3 = p0.backgroundColor3 or theme.BackgroundDefault.Color,
-			PlaceholderText = p0.placeholderText,
-			Font = var5.Font.Body.Font,
-			SelectionImageObject = var4,
-			Text = p0.text,
-			TextSize = var5.Font.BaseSize,
+			BackgroundColor3 = p1.backgroundColor3 or theme.BackgroundDefault.Color,
+			PlaceholderText = p1.placeholderText,
+			Font = var4.Font.Body.Font,
+			SelectionImageObject = var3,
+			Text = p1.text,
+			TextSize = var4.Font.BaseSize,
 			TextColor3 = theme.TextDefault.Color,
 			TextTransparency = theme.TextDefault.Transparency,
-			TextXAlignment = p0.textXAlignment or Enum.TextXAlignment.Left,
-			TextYAlignment = p0.textYAlignment or Enum.TextYAlignment.Top,
+			TextXAlignment = p1.textXAlignment or Enum.TextXAlignment.Left,
+			TextYAlignment = p1.textYAlignment or Enum.TextYAlignment.Top,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
@@ -51,18 +51,18 @@ return function(p0)
 			ClearTextOnFocus = false,
 			OverlayNativeInput = true,
 			ClipsDescendants = true,
-			Interactable = p0.interactable,
-			[reactModule.Change.Text] = reactModule.useCallback(function(p1)
-				-- upvalues: var3 (ref), p0 (ref), var2 (ref)
-				local text = p1.Text
+			Interactable = p1.interactable,
+			[reactModule.Change.Text] = reactModule.useCallback(function(p2)
+				-- upvalues: var2 (ref), p1 (ref), var1 (ref)
+				local text = p2.Text
 				
-				if p1.TextFits then
-					var3(text)
-					p0.onUpdate(text)
+				if p2.TextFits then
+					var2(text)
+					p1.onUpdate(text)
 					
 					return
 				end
-				p1.Text = var2
+				p2.Text = var1
 			end)
 		})
 	})

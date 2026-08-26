@@ -3,14 +3,14 @@ local guiService = game:GetService("GuiService")
 local playersService = game:GetService("Players")
 local gamepadService = game:GetService("GamepadService")
 local coreGuiService = game:GetService("CoreGui")
-local var4 = nil
+local var1 = nil
 local inputModule = require(parent.Input)
 local interfaceModule = require(parent.Interface)
 local propertiesModule = require(parent.Properties)
 local isCircleContainedInGuiObjectModule = require(parent.isCircleContainedInGuiObject)
 local rotatePointAroundObjectModule = require(parent.RotatePointAroundObject)
-local var10 = 1
-local var11 = false
+local var2 = 1
+local var3 = false
 local sin = math.sin
 local cos = math.cos
 local _ = math.abs
@@ -19,62 +19,62 @@ local min = math.min
 local sign = math.sign
 local abs = math.abs
 local t = {}
-local var13 = nil
-local var14 = nil
-local var15 = 1e999
+local var4 = nil
+local var5 = nil
+local var6 = 1e999
 
-local function _(p0)
-	return not (not p0:IsA("GuiButton") and not p0:IsA("TextBox")) and (not (not p0.Active or not p0.Selectable) and p0.AbsoluteSize.Magnitude ~= 0)
+local function _(p1)
+	return not (not p1:IsA("GuiButton") and not p1:IsA("TextBox")) and (not (not p1.Active or not p1.Selectable) and p1.AbsoluteSize.Magnitude ~= 0)
 end
 
 local _ = function(p1, p2, p3)
 	return p2.x <= p1.x and (p2.y <= p1.y and (p1.x <= p3.x and p1.y <= p3.y))
 end
 
-local function handleScrollingFrame(p4, p5, p6)
+local function handleScrollingFrame(p1, p2, p3)
 	-- upvalues: t (ref), inputModule (ref), propertiesModule (ref), abs (ref), cos (ref), sin (ref), max (ref), min (ref), sign (ref), interfaceModule (ref)
-	if not p4:IsA("ScrollingFrame") then
+	if not p1:IsA("ScrollingFrame") then
 		return false
-	elseif not p4.ScrollingEnabled then
+	elseif not p1.ScrollingEnabled then
 		return false
-	elseif t[p4] then
+	elseif t[p1] then
 		return false
 	end
-	t[p4] = true
+	t[p1] = true
 	local thumbstick2Vector = inputModule:GetThumbstick2Vector()
-	local var21 = propertiesModule.ScrollingSpeed * p6
+	local var7 = propertiesModule.ScrollingSpeed * p3
 	local scrollingRadius = propertiesModule.ScrollingRadius
-	local absoluteCanvasSize = p4.AbsoluteCanvasSize
-	local absoluteSize = p4.AbsoluteSize
-	local scrollingDirection = p4.ScrollingDirection
-	local var22 = absoluteSize.X < absoluteCanvasSize.X and (if scrollingDirection ~= Enum.ScrollingDirection.XY then scrollingDirection == Enum.ScrollingDirection.X else true)
-	local var23 = absoluteSize.Y < absoluteCanvasSize.Y and (if scrollingDirection ~= Enum.ScrollingDirection.XY then scrollingDirection == Enum.ScrollingDirection.Y else true)
-	local absoluteSize_1 = p4.AbsoluteSize
-	local absolutePosition = p4.AbsolutePosition
-	local var24 = p4.Rotation / 180 * 3.14159265359
+	local absoluteCanvasSize = p1.AbsoluteCanvasSize
+	local absoluteSize = p1.AbsoluteSize
+	local scrollingDirection = p1.ScrollingDirection
+	local var8 = absoluteSize.X < absoluteCanvasSize.X and (if scrollingDirection ~= Enum.ScrollingDirection.XY then scrollingDirection == Enum.ScrollingDirection.X else true)
+	local var9 = absoluteSize.Y < absoluteCanvasSize.Y and (if scrollingDirection ~= Enum.ScrollingDirection.XY then scrollingDirection == Enum.ScrollingDirection.Y else true)
+	local absoluteSize_1 = p1.AbsoluteSize
+	local absolutePosition = p1.AbsolutePosition
+	local var10 = p1.Rotation / 180 * 3.14159265359
 	
-	if propertiesModule.ThumbstickDeadzone < abs(thumbstick2Vector.x) and var22 then
-		p4.CanvasPosition += Vector2.new(thumbstick2Vector.x * var21, 0)
+	if propertiesModule.ThumbstickDeadzone < abs(thumbstick2Vector.x) and var8 then
+		p1.CanvasPosition += Vector2.new(thumbstick2Vector.x * var7, 0)
 	end
-	if propertiesModule.ThumbstickDeadzone < abs(thumbstick2Vector.y) and var23 then
-		p4.CanvasPosition += Vector2.new(0, thumbstick2Vector.y * var21)
+	if propertiesModule.ThumbstickDeadzone < abs(thumbstick2Vector.y) and var9 then
+		p1.CanvasPosition += Vector2.new(0, thumbstick2Vector.y * var7)
 	end
-	local vector2 = Vector2.new(cos(var24), sin(var24))
-	local vector2_1 = Vector2.new(-sin(var24), cos(var24))
-	local var27 = Vector2.new(p5.X, p5.Y) - absolutePosition
-	local var28 = var27:Dot(vector2) - absoluteSize_1.X / 2
-	local var29 = var27:Dot(vector2_1) - absoluteSize_1.Y / 2
-	local var30 = Vector2.new(abs(var28), abs(var29)) - absoluteSize_1 / 2
+	local vector2 = Vector2.new(cos(var10), sin(var10))
+	local vector2_1 = Vector2.new(-sin(var10), cos(var10))
+	local var11 = Vector2.new(p2.X, p2.Y) - absolutePosition
+	local var12 = var11:Dot(vector2) - absoluteSize_1.X / 2
+	local var13 = var11:Dot(vector2_1) - absoluteSize_1.Y / 2
+	local var14 = Vector2.new(abs(var12), abs(var13)) - absoluteSize_1 / 2
 	
-	if abs(min(max(var30.x, var30.y), 0) + Vector2.new(max(var30.x, 0), max(var30.y, 0)).Magnitude) < scrollingRadius then
-		if abs(var30.x) < abs(var30.y) and var22 then
-			p4.CanvasPosition += Vector2.new(sign(var28) * var21, 0)
-			interfaceModule:SetArrow(sign(var28), 0)
+	if abs(min(max(var14.x, var14.y), 0) + Vector2.new(max(var14.x, 0), max(var14.y, 0)).Magnitude) < scrollingRadius then
+		if abs(var14.x) < abs(var14.y) and var8 then
+			p1.CanvasPosition += Vector2.new(sign(var12) * var7, 0)
+			interfaceModule:SetArrow(sign(var12), 0)
 			
 			return true
-		elseif abs(var30.y) <= abs(var30.x) and var23 then
-			p4.CanvasPosition += Vector2.new(0, sign(var29) * var21)
-			interfaceModule:SetArrow(0, sign(var29))
+		elseif abs(var14.y) <= abs(var14.x) and var9 then
+			p1.CanvasPosition += Vector2.new(0, sign(var13) * var7)
+			interfaceModule:SetArrow(0, sign(var13))
 			
 			return true
 		end
@@ -82,84 +82,84 @@ local function handleScrollingFrame(p4, p5, p6)
 	return false
 end
 
-local function findClosestOrOccludingGuiObject(_, p7, p8, p9)
-	-- upvalues: handleScrollingFrame (ref), var11 (write), var13 (write), rotatePointAroundObjectModule (ref), var15 (write), isCircleContainedInGuiObjectModule (ref), propertiesModule (ref), var14 (write)
-	for i, v in ipairs(p7) do
-		if not handleScrollingFrame(v, p8, p9) then
-			local var31 = not v:IsA("GuiButton") and not v:IsA("TextBox") and (if v.Active and v.Selectable then v.AbsoluteSize.Magnitude ~= 0 else false)
+local function findClosestOrOccludingGuiObject(_, p1, p2, p3)
+	-- upvalues: handleScrollingFrame (ref), var3 (write), var4 (write), rotatePointAroundObjectModule (ref), var6 (write), isCircleContainedInGuiObjectModule (ref), propertiesModule (ref), var5 (write)
+	for i, v in ipairs(p1) do
+		if not handleScrollingFrame(v, p2, p3) then
+			local var7 = not v:IsA("GuiButton") and not v:IsA("TextBox") and (if v.Active and v.Selectable then v.AbsoluteSize.Magnitude ~= 0 else false)
 			
-			if var31 and not var13 then
-				var13 = v
+			if var7 and not var4 then
+				var4 = v
 			end
-			var31 = not v:IsA("GuiButton") and not v:IsA("TextBox") and (if v.Active and v.Selectable then v.AbsoluteSize.Magnitude ~= 0 else false)
+			var7 = not v:IsA("GuiButton") and not v:IsA("TextBox") and (if v.Active and v.Selectable then v.AbsoluteSize.Magnitude ~= 0 else false)
 			
-			if var31 then
-				var31 = v.AbsolutePosition
-				local var32 = v.AbsolutePosition + v.AbsoluteSize
-				local var33 = 0
-				local var34 = if v.AbsoluteRotation ~= 0 then p8 else rotatePointAroundObjectModule(p8, v)
+			if var7 then
+				var7 = v.AbsolutePosition
+				local var8 = v.AbsolutePosition + v.AbsoluteSize
+				local var9 = 0
+				local var10 = if v.AbsoluteRotation ~= 0 then p2 else rotatePointAroundObjectModule(p2, v)
 				
-				if var34.x < var31.x or var34.y < var31.y or (var32.x < var34.x or var32.y < var34.y) then
-					var33 = math.sqrt(math.pow(if var34.x < var31.x then var31.x - var34.x elseif var32.x < var34.x then var34.x - var32.x else 0, 2) + math.pow(if var34.y < var31.y then var31.y - var34.y elseif var32.y < var34.y then var34.y - var32.y else 0, 2))
+				if var10.x < var7.x or var10.y < var7.y or (var8.x < var10.x or var8.y < var10.y) then
+					var9 = math.sqrt(math.pow(if var10.x < var7.x then var7.x - var10.x elseif var8.x < var10.x then var10.x - var8.x else 0, 2) + math.pow(if var10.y < var7.y then var7.y - var10.y elseif var8.y < var10.y then var10.y - var8.y else 0, 2))
 				end
-				if var33 < var15 then
-					var13 = v
-					var15 = var33
+				if var9 < var6 then
+					var4 = v
+					var6 = var9
 				end
 			end
-			if v.Visible and v.Active and (v.Interactable and isCircleContainedInGuiObjectModule(p8, propertiesModule.CursorRadius * propertiesModule.OcclusionRadiusScale, v)) then
-				var14 = v
+			if v.Visible and v.Active and (v.Interactable and isCircleContainedInGuiObjectModule(p2, propertiesModule.CursorRadius * propertiesModule.OcclusionRadiusScale, v)) then
+				var5 = v
 				
 				return
 			end
 		end
-		var11 = true
+		var3 = true
 		
 		return
 	end
 end
 
-local function handleScrollingInAncestors(p10, p11, p12, p13)
-	-- upvalues: handleScrollingFrame (ref), var11 (write)
-	local parent = p10.Parent
-	while parent and parent ~= p11 do
-		if not handleScrollingFrame(parent, p12, p13) then
+local function handleScrollingInAncestors(p4, p5, p6, p7)
+	-- upvalues: handleScrollingFrame (ref), var3 (write)
+	local parent = p4.Parent
+	while parent and parent ~= p5 do
+		if not handleScrollingFrame(parent, p6, p7) then
 			parent = parent.Parent
 			continue
 		end
-		var11 = true
+		var3 = true
 		
 		return
 	end
 end
 
-local function processCursorPosition(p14, p15, p16)
-	-- upvalues: t (ref), var13 (write), var14 (write), var15 (write), guiService (ref), var4 (write), playersService (ref), coreGuiService (ref), var11 (write), findClosestOrOccludingGuiObject (ref), handleScrollingInAncestors (ref)
+local function processCursorPosition(p8, p9, p10)
+	-- upvalues: t (ref), var4 (write), var5 (write), var6 (write), guiService (ref), var1 (write), playersService (ref), coreGuiService (ref), var3 (write), findClosestOrOccludingGuiObject (ref), handleScrollingInAncestors (ref)
 	table.clear(t)
-	var13 = nil
-	var14 = nil
-	var15 = 1e999
-	p14 -= guiService:GetGuiInset()
+	var4 = nil
+	var5 = nil
+	var6 = 1e999
+	p8 -= guiService:GetGuiInset()
 	
-	if var4 == nil then
-		var4 = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
+	if var1 == nil then
+		var1 = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
 	end
-	var11 = false
+	var3 = false
 	
 	for i, v in ipairs({
 		{
 			coreGuiService,
-			coreGuiService:GetGuiObjectsInCircle(p14, p15)
+			coreGuiService:GetGuiObjectsInCircle(p8, p9)
 		},
 		{
-			var4,
-			if var4 then var4:GetGuiObjectsInCircle(p14, p15) else {}
+			var1,
+			if var1 then var1:GetGuiObjectsInCircle(p8, p9) else {}
 		}
 	}) do
-		local var35 = v[1]
-		findClosestOrOccludingGuiObject(var35, v[2], p14, p16)
+		local var11 = v[1]
+		findClosestOrOccludingGuiObject(var11, v[2], p8, p10)
 	end
-	return var13
+	return var4
 end
 
 local _ = function()
@@ -167,55 +167,55 @@ local _ = function()
 	return guiService:GetScreenResolution().Magnitude * propertiesModule.MaxSpeedRelative
 end
 
-return function(p17, p18)
-	-- upvalues: guiService (ref), inputModule (ref), gamepadService (ref), var10 (write), interfaceModule (ref), var11 (write), propertiesModule (ref), processCursorPosition (ref), coreGuiService (ref), var4 (write)
-	local var36 = guiService:GetScreenResolution() + guiService:GetGuiInset()
+return function(p11, p12)
+	-- upvalues: guiService (ref), inputModule (ref), gamepadService (ref), var2 (write), interfaceModule (ref), var3 (write), propertiesModule (ref), processCursorPosition (ref), coreGuiService (ref), var1 (write)
+	local var12 = guiService:GetScreenResolution() + guiService:GetGuiInset()
 	local thumbstickVector = inputModule:GetThumbstickVector()
 	local gamepadCursorPosition = gamepadService:GetGamepadCursorPosition()
 	local _ = nil
 	local _ = Vector2.new()
 	
-	if p17.SelectedObject == nil then
-		var10 = 1
+	if p11.SelectedObject == nil then
+		var2 = 1
 		interfaceModule:SetCursorHighlight(false)
 	end
-	if var11 then
-		var10 = propertiesModule.ScrollingSlowDown
+	if var3 then
+		var2 = propertiesModule.ScrollingSlowDown
 	end
-	local var39 = thumbstickVector * (guiService:GetScreenResolution().Magnitude * propertiesModule.MaxSpeedRelative) * var10
+	local var13 = thumbstickVector * (guiService:GetScreenResolution().Magnitude * propertiesModule.MaxSpeedRelative) * var2
 	
-	if var39.Magnitude > 0 then
-		local var40 = gamepadCursorPosition + var39 * p18
-		gamepadCursorPosition = Vector2.new(math.clamp(var40.x, 0, var36.x), math.clamp(var40.y, 0, var36.y))
+	if var13.Magnitude > 0 then
+		local var14 = gamepadCursorPosition + var13 * p12
+		gamepadCursorPosition = Vector2.new(math.clamp(var14.x, 0, var12.x), math.clamp(var14.y, 0, var12.y))
 	end
 	interfaceModule:SetCursorPosition(gamepadCursorPosition)
 	gamepadService:SetGamepadCursorPosition(gamepadCursorPosition)
-	p17.CursorPosition = gamepadCursorPosition
-	local var41 = processCursorPosition(gamepadCursorPosition, propertiesModule.SelectionRadius, p18)
+	p11.CursorPosition = gamepadCursorPosition
+	local var15 = processCursorPosition(gamepadCursorPosition, propertiesModule.SelectionRadius, p12)
 	
-	if var41 ~= p17.PreviouslySelectedObject then
-		p17.PreviouslySelectedObject = var41
-		interfaceModule:SetCursorHighlight(var41 ~= nil)
+	if var15 ~= p11.PreviouslySelectedObject then
+		p11.PreviouslySelectedObject = var15
+		interfaceModule:SetCursorHighlight(var15 ~= nil)
 		
-		if not var41 then
-			p17.SelectedObject = nil
-			var10 = 1
-		elseif var41 ~= p17.SelectedObject then
-			p17.SelectedObject = var41
-			var10 = propertiesModule.SpeedAdjustmentTarget
+		if not var15 then
+			p11.SelectedObject = nil
+			var2 = 1
+		elseif var15 ~= p11.SelectedObject then
+			p11.SelectedObject = var15
+			var2 = propertiesModule.SpeedAdjustmentTarget
 		end
-		if p17.SelectedObject == nil then
+		if p11.SelectedObject == nil then
 			guiService.SelectedObject = nil
 			guiService.SelectedCoreObject = nil
 			
 			return
-		elseif p17.SelectedObject:IsDescendantOf(coreGuiService) then
-			guiService.SelectedCoreObject = p17.SelectedObject
+		elseif p11.SelectedObject:IsDescendantOf(coreGuiService) then
+			guiService.SelectedCoreObject = p11.SelectedObject
 			guiService.SelectedObject = nil
 			
 			return
-		elseif p17.SelectedObject:IsDescendantOf(var4) then
-			guiService.SelectedObject = p17.SelectedObject
+		elseif p11.SelectedObject:IsDescendantOf(var1) then
+			guiService.SelectedObject = p11.SelectedObject
 			guiService.SelectedCoreObject = nil
 		end
 	end

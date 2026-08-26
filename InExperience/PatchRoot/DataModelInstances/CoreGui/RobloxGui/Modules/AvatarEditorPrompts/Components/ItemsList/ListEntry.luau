@@ -21,36 +21,36 @@ listEntry.validateProps = tModule.strictInterface({
 	forwardRef = tModule.optional(tModule.table)
 })
 
-function listEntry.render(p0)
+function listEntry.render(p1)
 	-- upvalues: withStyle (ref), text (ref), roactModule (ref), roactFitComponents (ref), fitTextLabel (ref)
-	return withStyle(function(p1)
-		-- upvalues: text (copy), p0 (ref), roactModule (copy), roactFitComponents (copy), fitTextLabel (copy)
-		local font = p1.Font
-		local theme = p1.Theme
+	return withStyle(function(p2)
+		-- upvalues: text (copy), p1 (ref), roactModule (copy), roactFitComponents (copy), fitTextLabel (copy)
+		local font = p2.Font
+		local theme = p2.Theme
 		local font_1 = font.CaptionBody.Font
-		local var6 = font.BaseSize * font.CaptionBody.RelativeSize
-		local textWidth = text.GetTextWidth("\226\128\162 ", font_1, var6)
+		local var1 = font.BaseSize * font.CaptionBody.RelativeSize
+		local textWidth = text.GetTextWidth("\226\128\162 ", font_1, var1)
 		
 		return roactModule.createElement(roactFitComponents.FitFrameVertical, {
 			width = UDim.new(1, 0),
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			BackgroundTransparency = 1,
-			LayoutOrder = p0.props.layoutOrder,
-			[roactModule.Change.AbsolutePosition] = p0.props.positionChangedCallback,
-			NextSelectionLeft = p0.props.NextSelectionLeft,
-			NextSelectionRight = p0.props.NextSelectionRight,
-			NextSelectionUp = p0.props.NextSelectionUp,
-			NextSelectionDown = p0.props.NextSelectionDown,
-			[roactModule.Ref] = p0.props.forwardRef
+			LayoutOrder = p1.props.layoutOrder,
+			[roactModule.Change.AbsolutePosition] = p1.props.positionChangedCallback,
+			NextSelectionLeft = p1.props.NextSelectionLeft,
+			NextSelectionRight = p1.props.NextSelectionRight,
+			NextSelectionUp = p1.props.NextSelectionUp,
+			NextSelectionDown = p1.props.NextSelectionDown,
+			[roactModule.Ref] = p1.props.forwardRef
 		}, {
-			Bullet = p0.props.hasBullet and roactModule.createElement("TextLabel", {
+			Bullet = p1.props.hasBullet and roactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				Text = "\226\128\162 ",
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(textWidth, var6),
+				Size = UDim2.fromOffset(textWidth, var1),
 				Font = font_1,
-				TextSize = var6,
+				TextSize = var1,
 				TextColor3 = theme.TextDefault.Color,
 				TextTransparency = theme.TextDefault.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Left
@@ -58,10 +58,10 @@ function listEntry.render(p0)
 			Text = roactModule.createElement(fitTextLabel, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				width = UDim.new(1, if p0.props.hasBullet then -textWidth else 0),
-				Text = p0.props.text,
+				width = UDim.new(1, if p1.props.hasBullet then -textWidth else 0),
+				Text = p1.props.text,
 				Font = font_1,
-				TextSize = var6,
+				TextSize = var1,
 				TextColor3 = theme.TextDefault.Color,
 				TextTransparency = theme.TextDefault.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Left
@@ -70,7 +70,7 @@ function listEntry.render(p0)
 	end)
 end
 
-return roactModule.forwardRef(function(p2, p3)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), listEntry (ref), cryoModule (ref)
-	return roactModule.createElement(listEntry, cryoModule.Dictionary.join(p2, { forwardRef = p3 }))
+	return roactModule.createElement(listEntry, cryoModule.Dictionary.join(p1, { forwardRef = p2 }))
 end)

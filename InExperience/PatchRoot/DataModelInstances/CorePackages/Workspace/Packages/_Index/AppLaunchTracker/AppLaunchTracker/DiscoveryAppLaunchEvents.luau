@@ -21,30 +21,30 @@ local t_1 = {
 }
 
 return {
-	reportStatsforMilestone = function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9)
+	reportStatsforMilestone = function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 		-- upvalues: discoveryAppLaunchMilestonesHundredthsPercent (ref), t (ref)
-		assert(p0, "LoggingProtocol must exist")
+		assert(p1, "LoggingProtocol must exist")
 		
 		if discoveryAppLaunchMilestonesHundredthsPercent > 0 then
 			local t_1 = {
-				milestone = p1,
-				milestoneSpan = `{p2}-{p1}`,
-				durationMs = p3,
-				numTilesInit = p5,
-				numTileRenders = p6,
-				numFeedItems = p7,
-				numFeedRenders = p8,
-				totalSduiDurationMs = p9
+				milestone = p2,
+				milestoneSpan = `{p3}-{p2}`,
+				durationMs = p4,
+				numTilesInit = p6,
+				numTileRenders = p7,
+				numFeedItems = p8,
+				numFeedRenders = p9,
+				totalSduiDurationMs = p10
 			}
 			
-			for i, v in p4 do
+			for i, v in p5 do
 				t_1[i] = v
 			end
-			p0:logRobloxTelemetryEvent(t, { p0.StandardizedFields.addOsInfo }, t_1)
+			p1:logRobloxTelemetryEvent(t, { p1.StandardizedFields.addOsInfo }, t_1)
 		end
 	end,
-	reportError = function(p10, p11)
+	reportError = function(p11, p12)
 		-- upvalues: t_1 (ref)
-		p10:logRobloxTelemetryCounter(t_1, 1, { errorTag = p11 })
+		p11:logRobloxTelemetryCounter(t_1, 1, { errorTag = p12 })
 	end
 }

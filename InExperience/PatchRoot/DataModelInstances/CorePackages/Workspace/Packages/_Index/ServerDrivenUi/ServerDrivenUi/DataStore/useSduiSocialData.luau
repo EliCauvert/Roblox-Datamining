@@ -9,13 +9,13 @@ local fFlagSduiSocialDataMigrateOffLegacyPresence = require(parent.SharedFlags).
 
 local function useOnlineFriendsInGameByUniverseId()
 	-- upvalues: useGetOnlineFriends (ref), reactModule (ref), presenceType (ref)
-	local var4 = useGetOnlineFriends()
+	local var1 = useGetOnlineFriends()
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var4 (ref), presenceType (copy)
+		-- upvalues: var1 (ref), presenceType (copy)
 		local t = {}
 		
-		for i, v in var4 or {} do
+		for i, v in var1 or {} do
 			local presence = v.presence
 			
 			if presence and presence.userPresenceType == presenceType.InGame and (presence.universeId and presence.universeId ~= "") then
@@ -25,27 +25,27 @@ local function useOnlineFriendsInGameByUniverseId()
 			end
 		end
 		return t
-	end, { var4 })
+	end, { var1 })
 end
 
 local function useFriendsInGame()
 	-- upvalues: useSelector (ref), reactModule (ref)
-	local var7 = useSelector(function(p0)
-		return p0.LocalUserId
+	local var2 = useSelector(function(p1)
+		return p1.LocalUserId
 	end)
-	local var8 = useSelector(function(p1)
+	local var3 = useSelector(function(p1)
 		return p1.InGameUsersByGame
 	end)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var7 (ref)
+		-- upvalues: var3 (ref), var2 (ref)
 		local t = {}
 		
-		for i, v in var8 do
+		for i, v in var3 do
 			local t_1 = {}
 			
 			for i_1, v_1 in v do
-				if i_1 ~= tostring(var7) then
+				if i_1 ~= tostring(var2) then
 					t_1[i_1] = i_1
 				end
 			end
@@ -54,19 +54,19 @@ local function useFriendsInGame()
 			end
 		end
 		return t
-	end, { var7, var8 })
+	end, { var2, var3 })
 end
 
 return function()
 	-- upvalues: reactModule (ref), signalsModule (ref), fFlagSduiSocialDataMigrateOffLegacyPresence (ref), useOnlineFriendsInGameByUniverseId (ref), useFriendsInGame (ref)
-	local var11, var12 = reactModule.useMemo(function()
+	local var4, var5 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		return signalsModule.createSignal({})
 	end, {})
-	var12(if fFlagSduiSocialDataMigrateOffLegacyPresence then useOnlineFriendsInGameByUniverseId() else useFriendsInGame())
+	var5(if fFlagSduiSocialDataMigrateOffLegacyPresence then useOnlineFriendsInGameByUniverseId() else useFriendsInGame())
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var11 (ref)
-		return { getInGameFriendsByGame = var11 }
-	end, { var11 })
+		-- upvalues: var4 (ref)
+		return { getInGameFriendsByGame = var4 }
+	end, { var4 })
 end

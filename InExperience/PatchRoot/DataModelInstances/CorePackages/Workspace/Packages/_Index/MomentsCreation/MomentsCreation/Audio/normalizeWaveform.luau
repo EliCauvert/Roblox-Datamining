@@ -1,19 +1,19 @@
-﻿return function(p0)
-	local var0 = 0
+﻿return function(p1)
+	local var1 = 0
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		local absValue = math.abs(v)
 		table.insert(t, absValue)
-		var0 = math.max(var0, absValue)
+		var1 = math.max(var1, absValue)
 	end
-	if var0 == 0 then
+	if var1 == 0 then
 		return t
 	end
 	local t_1 = {}
 	
 	for i_1, v_1 in t do
-		table.insert(t_1, v_1 / var0)
+		table.insert(t_1, v_1 / var1)
 	end
 	return t_1
 end

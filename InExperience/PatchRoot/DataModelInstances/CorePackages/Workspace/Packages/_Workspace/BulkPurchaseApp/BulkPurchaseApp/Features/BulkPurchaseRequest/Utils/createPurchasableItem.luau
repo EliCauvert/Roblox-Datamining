@@ -5,8 +5,8 @@ local getThumbnailUrlModule = require(bulkPurchaseApp.Utils.getThumbnailUrl)
 local fFlagBulkPurchaseEnablePurchaseOptionsModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseEnablePurchaseOptions)
 local fFlagBulkPurchaseUsesPurchaseOptionDiscountModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseUsesPurchaseOptionDiscount)
 
-local function getTimedOptionDays(p0)
-	for i, v in p0 do
+local function getTimedOptionDays(p1)
+	for i, v in p1 do
 		if v.purchaseOptionType == "timedOption" and v.durationInSeconds then
 			local floored = math.floor(v.durationInSeconds / 86400)
 			
@@ -16,32 +16,32 @@ local function getTimedOptionDays(p0)
 	return nil
 end
 
-return function(p1)
+return function(p2)
 	-- upvalues: fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), getTimedOptionDays (ref), fFlagBulkPurchaseUsesPurchaseOptionDiscountModule (ref), getThumbnailUrlModule (ref)
-	local var6 = if fFlagBulkPurchaseEnablePurchaseOptionsModule and p1.purchaseOptions then getTimedOptionDays(p1.purchaseOptions) else nil
-	local priceRobux = p1.priceRobux
+	local var1 = if fFlagBulkPurchaseEnablePurchaseOptionsModule and p2.purchaseOptions then getTimedOptionDays(p2.purchaseOptions) else nil
+	local priceRobux = p2.priceRobux
 	local originalPrice = nil
 	
 	if not fFlagBulkPurchaseUsesPurchaseOptionDiscountModule then
-		originalPrice = p1.discountInformation and p1.discountInformation.originalPrice
-	elseif p1.purchaseOptions then
-		local var7 = p1.purchaseOptions[1]
+		originalPrice = p2.discountInformation and p2.discountInformation.originalPrice
+	elseif p2.purchaseOptions then
+		local var2 = p2.purchaseOptions[1]
 		
-		if var7 then
-			if var7.priceRobux ~= nil then
-				priceRobux = var7.priceRobux
+		if var2 then
+			if var2.priceRobux ~= nil then
+				priceRobux = var2.priceRobux
 			end
-			if var7.discountInformation then
-				originalPrice = var7.discountInformation.originalPrice
+			if var2.discountInformation then
+				originalPrice = var2.discountInformation.originalPrice
 			end
 		end
 	end
 	return {
-		id = p1.id,
+		id = p2.id,
 		cost = priceRobux,
-		name = p1.name,
-		image = getThumbnailUrlModule(p1.id, p1.type),
+		name = p2.name,
+		image = getThumbnailUrlModule(p2.id, p2.type),
 		originalPrice = originalPrice,
-		timedOptionDays = var6
+		timedOptionDays = var1
 	}
 end

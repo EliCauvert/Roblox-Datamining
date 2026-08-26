@@ -4,10 +4,10 @@ local widgetsContextModule = require(script.Parent.WidgetsContext)
 
 return function()
 	-- upvalues: reactModule (ref), widgetsContextModule (ref)
-	local var2 = reactModule.useContext(widgetsContextModule)
+	local var1 = reactModule.useContext(widgetsContextModule)
 	
-	if var2 == nil then
+	if var1 == nil then
 		error("useWidgetsContext must be used within a WidgetsProvider")
 	end
-	return var2
+	return var1
 end

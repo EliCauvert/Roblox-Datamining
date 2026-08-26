@@ -44,9 +44,9 @@ local list = {
 	{
 		[enumScreensModule.ChatDetails] = {
 			screen = chatDetailsScreenModule,
-			navigationOptions = if require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)() then function(p0)
+			navigationOptions = if require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)() then function(p1)
 				-- upvalues: chatDetailsNavigationOptionsModule (ref)
-				return chatDetailsNavigationOptionsModule.getNavigationOptions(p0, { tabBarVisible = false })
+				return chatDetailsNavigationOptionsModule.getNavigationOptions(p1, { tabBarVisible = false })
 			end else { backButtonEnabled = true, tabBarVisible = false }
 		}
 	},

@@ -13,49 +13,49 @@ local fFlagAXBackgroundGeneration = require(parent.AvatarExperienceFlags).FFlagA
 
 return function()
 	-- upvalues: signalsModule (ref), httpService (ref), inventoryItemTypeModule (ref), mutedError (ref), fFlagAXModeratedItemsFlow (ref), fFlagAXEnableModeratedItemsFlowForDurables (ref), fFlagAXInventoryDurablesSupport (ref), fFlagAXBackgroundGeneration (ref)
-	local var4 = nil
-	local var5, var6 = signalsModule.createSignal(nil)
-	local var7, var8 = signalsModule.createSignal(false)
-	local var9, var10 = signalsModule.createSignal(httpService:GenerateGUID(true))
+	local var1 = nil
+	local var2, var3 = signalsModule.createSignal(nil)
+	local var4, var5 = signalsModule.createSignal(false)
+	local var6, var7 = signalsModule.createSignal(httpService:GenerateGUID(true))
 	
 	return {
 		nextPageCursor = nil,
-		getItems = var5,
-		getHasReachedLastPage = var7,
-		getSearchUuid = var9,
+		getItems = var2,
+		getHasReachedLastPage = var4,
+		getSearchUuid = var6,
 		startNewSearch = function()
-			-- upvalues: var4 (write), var6 (ref), var8 (ref), var10 (ref), httpService (copy)
-			var4.nextPageCursor = nil
-			var6(nil)
-			var8(false)
-			var10(httpService:GenerateGUID(true))
+			-- upvalues: var1 (write), var3 (ref), var5 (ref), var7 (ref), httpService (copy)
+			var1.nextPageCursor = nil
+			var3(nil)
+			var5(false)
+			var7(httpService:GenerateGUID(true))
 		end,
-		addResultsPage = function(p0)
-			-- upvalues: var5 (ref), inventoryItemTypeModule (copy), mutedError (copy), fFlagAXModeratedItemsFlow (copy), fFlagAXEnableModeratedItemsFlowForDurables (copy), fFlagAXInventoryDurablesSupport (copy), fFlagAXBackgroundGeneration (copy), var6 (ref), var4 (write), var8 (ref)
-			local var11 = var5(false)
-			local var12 = if var11 then table.clone(var11) else {}
+		addResultsPage = function(p1)
+			-- upvalues: var2 (ref), inventoryItemTypeModule (copy), mutedError (copy), fFlagAXModeratedItemsFlow (copy), fFlagAXEnableModeratedItemsFlowForDurables (copy), fFlagAXInventoryDurablesSupport (copy), fFlagAXBackgroundGeneration (copy), var3 (ref), var1 (write), var5 (ref)
+			local var8 = var2(false)
+			local var9 = if var8 then table.clone(var8) else {}
 			
-			for i, v in p0.avatarInventoryItems do
-				local var13 = if v.itemCategory.itemType == Enum.AvatarItemType.Asset.Value then inventoryItemTypeModule.Asset elseif v.itemCategory.itemType == Enum.AvatarItemType.Bundle.Value then inventoryItemTypeModule.Outfit else inventoryItemTypeModule.Unknown
+			for i, v in p1.avatarInventoryItems do
+				local var10 = if v.itemCategory.itemType == Enum.AvatarItemType.Asset.Value then inventoryItemTypeModule.Asset elseif v.itemCategory.itemType == Enum.AvatarItemType.Bundle.Value then inventoryItemTypeModule.Outfit else inventoryItemTypeModule.Unknown
 				
-				if var13 == inventoryItemTypeModule.Unknown then
+				if var10 == inventoryItemTypeModule.Unknown then
 					mutedError(`Unknown item type received from user inventory endpoint: {v.itemCategory.itemType}`)
 					continue
 				end
-				table.insert(var12, {
+				table.insert(var9, {
 					itemId = tostring(v.itemId),
-					inventoryItemType = var13,
+					inventoryItemType = var10,
 					availabilityStatus = if fFlagAXModeratedItemsFlow or fFlagAXEnableModeratedItemsFlowForDurables then v.availabilityStatus else nil,
 					expirationTime = if fFlagAXInventoryDurablesSupport then v.expirationTime else nil,
 					isPlusExclusive = if fFlagAXBackgroundGeneration then v.isPlusExclusive else nil
 				})
 			end
-			var6(var12)
-			local nextPageToken = p0.nextPageToken
-			var4.nextPageCursor = nextPageToken
+			var3(var9)
+			local nextPageToken = p1.nextPageToken
+			var1.nextPageCursor = nextPageToken
 			
 			if nextPageToken == nil or nextPageToken == "" then
-				var8(true)
+				var5(true)
 			end
 		end
 	}

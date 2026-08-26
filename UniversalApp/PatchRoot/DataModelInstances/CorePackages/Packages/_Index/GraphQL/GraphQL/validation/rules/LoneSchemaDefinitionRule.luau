@@ -5,9 +5,9 @@ local isNillish = isNillishModule.isNillish
 local isNotNillish = isNillishModule.isNotNillish
 
 return {
-	LoneSchemaDefinitionRule = function(p0)
+	LoneSchemaDefinitionRule = function(p1)
 		-- upvalues: isNillish (ref), isNotNillish (ref), graphQLError (ref)
-		local schema = p0:getSchema()
+		local schema = p1:getSchema()
 		local subscriptionType = nil
 		
 		if schema then
@@ -23,19 +23,19 @@ return {
 				subscriptionType = schema:getSubscriptionType()
 			end
 		end
-		local var3 = 0
+		local var1 = 0
 		
 		return {
-			SchemaDefinition = function(_, p1)
-				-- upvalues: isNotNillish (copy), subscriptionType (write), p0 (ref), graphQLError (copy), var3 (write)
+			SchemaDefinition = function(_, p2)
+				-- upvalues: isNotNillish (copy), subscriptionType (write), p1 (ref), graphQLError (copy), var1 (write)
 				if isNotNillish(subscriptionType) then
-					p0:reportError(graphQLError.new("Cannot define a new schema within a schema extension.", p1))
+					p1:reportError(graphQLError.new("Cannot define a new schema within a schema extension.", p2))
 					
 					return
-				elseif var3 > 0 then
-					p0:reportError(graphQLError.new("Must provide only one schema definition.", p1))
+				elseif var1 > 0 then
+					p1:reportError(graphQLError.new("Must provide only one schema definition.", p2))
 				end
-				var3 += 1
+				var1 += 1
 			end
 		}
 	end

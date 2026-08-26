@@ -5,7 +5,7 @@ local performFetch = require(parent.Http).PerformFetch
 local postGamePlayerFeedbackModule = require(playerFeedback.Utils.PostGamePlayerFeedback)
 local feedbackChannelModule = require(playerFeedback.Enums.FeedbackChannel)
 
-local function _(p0)
+local function _(p1)
 	return "luaapp.asset-review-api.channels.reviews" .. p0
 end
 
@@ -17,14 +17,14 @@ return {
 			return postGamePlayerFeedbackModule(p1, feedbackChannelModule.ExperienceDiscoveryPage, p2, p3, p4, p5):andThen(function(p6)
 				-- upvalues: promiseModule (copy)
 				return promiseModule.resolve(p6)
-			end, function(p7)
+			end, function(p6)
 				-- upvalues: promiseModule (copy)
-				return promiseModule.reject(p7)
+				return promiseModule.reject(p6)
 			end)
 		end)
 	end,
-	GetPostingStatus = function(p8, p9)
+	GetPostingStatus = function(p1, p2)
 		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p8, "luaapp.asset-review-api.channels.reviews" .. p9)
+		return performFetch.GetStatus(p1, "luaapp.asset-review-api.channels.reviews" .. p9)
 	end
 }

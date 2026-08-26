@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.AnalyticsTypes)
 local getSessionIdByKeyModule = require(script.getSessionIdByKey)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getSessionIdByKeyModule (ref)
-	return { getSessionIdByKey = getSessionIdByKeyModule(p0) }
+	return { getSessionIdByKey = getSessionIdByKeyModule(p1) }
 end

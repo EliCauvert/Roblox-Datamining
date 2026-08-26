@@ -11,16 +11,16 @@ local t = {
 	[conversationOverlay.TrustedConnectionRequestU18] = fFlagAppChatEnableDoubleOptIn
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSelector (ref), getDeepValue2Module (ref), t (ref), conversationOverlay (ref), loggerModule (ref)
-	local var4 = useSelector(function(p1)
-		-- upvalues: getDeepValue2Module (copy), p0 (ref)
-		return getDeepValue2Module(p1, `ChatAppReducer.Modals.conversationOverlays.{p0}.modal_variant`) or ""
+	local var1 = useSelector(function(p2)
+		-- upvalues: getDeepValue2Module (copy), p1 (ref)
+		return getDeepValue2Module(p2, `ChatAppReducer.Modals.conversationOverlays.{p1}.modal_variant`) or ""
 	end)
-	local var5 = t[var4]
+	local var2 = t[var1]
 	
-	if not var5 and var4 ~= conversationOverlay.None and var4 ~= "" then
-		loggerModule:warning(`Unsupported ConversationOverlay modal variant: {var4} for conversationId: {p0}`)
+	if not var2 and var1 ~= conversationOverlay.None and var1 ~= "" then
+		loggerModule:warning(`Unsupported ConversationOverlay modal variant: {var1} for conversationId: {p1}`)
 	end
-	return not not var5
+	return not not var2
 end

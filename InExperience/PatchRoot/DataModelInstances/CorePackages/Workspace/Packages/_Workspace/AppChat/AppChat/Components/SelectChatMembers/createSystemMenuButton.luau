@@ -7,13 +7,13 @@ local foundationModule = require(parent.Foundation)
 local textButton = require(parent.UIBlox).App.Button.TextButton
 local fFlagAppChatDomLocatorFoundationMigrationModule = require(appChat.Flags.FFlagAppChatDomLocatorFoundationMigration)
 
-return function(p0)
+return function(p1)
 	-- upvalues: argCheckModule (ref), roactModule (ref), textButton (ref), fFlagAppChatDomLocatorFoundationMigrationModule (ref), reactModule (ref), foundationModule (ref)
-	local localizedStrings = p0.localizedStrings
-	local isDisabled = p0.isDisabled
-	local onActivated = p0.onActivated
+	local localizedStrings = p1.localizedStrings
+	local isDisabled = p1.isDisabled
+	local onActivated = p1.onActivated
 	argCheckModule.isNotNil(localizedStrings, "props.localizedStrings")
-	local var6 = roactModule.createElement(textButton, {
+	local var1 = roactModule.createElement(textButton, {
 		text = localizedStrings.systemButtonText,
 		isDisabled = isDisabled,
 		onActivated = function()
@@ -25,5 +25,5 @@ return function(p0)
 		end
 	})
 	
-	return if fFlagAppChatDomLocatorFoundationMigrationModule and p0.testId then reactModule.createElement(foundationModule.View, { tag = "auto-xy", testId = p0.testId }, { button = var6 }) else var6
+	return if fFlagAppChatDomLocatorFoundationMigrationModule and p1.testId then reactModule.createElement(foundationModule.View, { tag = "auto-xy", testId = p1.testId }, { button = var1 }) else var1
 end

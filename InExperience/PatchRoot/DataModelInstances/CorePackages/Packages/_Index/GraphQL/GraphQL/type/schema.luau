@@ -31,9 +31,9 @@ local getNamedType = definitionModule.getNamedType
 local t = nil
 local collectReferencedTypes = nil
 
-local function isSchema(p0)
+local function isSchema(p1)
 	-- upvalues: instanceOfModule (ref), t (write)
-	return instanceOfModule(p0, t)
+	return instanceOfModule(p1, t)
 end
 
 local function assertSchema(p1)
@@ -47,66 +47,66 @@ end
 t = {}
 t.__index = t
 
-function t.new(p2)
+function t.new(p1)
 	-- upvalues: t (write), devAssert (ref), isObjectLike (ref), array (ref), inspect (ref), toObjMap (ref), specifiedDirectives (ref), set (ref), collectReferencedTypes (write), isNotNillish (ref), isDirective (ref), schema (ref), map (ref), isNillish (ref), error (ref), isInterfaceType (ref), isObjectType (ref)
 	local tbl = setmetatable({}, t)
 	tbl.__validationErrors = nil
 	
-	if p2.assumeValid == true then
+	if p1.assumeValid == true then
 		tbl.__validationErrors = {}
 	end
-	devAssert(isObjectLike(p2), "Must provide configuration object.")
-	devAssert(not p2.types or array.isArray(p2.types), ("\"types\" must be Array if provided but got: %s."):format(inspect(p2.types)))
-	devAssert(not p2.directives or array.isArray(p2.directives), "\"directives\" must be Array if provided but got: " .. ("%s."):format(inspect(p2.directives)))
-	tbl.description = p2.description
-	tbl.extensions = if p2.extensions then toObjMap(p2.extensions) else nil
-	tbl.astNode = p2.astNode
-	tbl.extensionASTNodes = p2.extensionASTNodes
-	tbl._queryType = p2.query
-	tbl._mutationType = p2.mutation
-	tbl._subscriptionType = p2.subscription
-	tbl._directives = p2.directives or specifiedDirectives
-	local var10 = set.new()
+	devAssert(isObjectLike(p1), "Must provide configuration object.")
+	devAssert(not p1.types or array.isArray(p1.types), ("\"types\" must be Array if provided but got: %s."):format(inspect(p1.types)))
+	devAssert(not p1.directives or array.isArray(p1.directives), "\"directives\" must be Array if provided but got: " .. ("%s."):format(inspect(p1.directives)))
+	tbl.description = p1.description
+	tbl.extensions = if p1.extensions then toObjMap(p1.extensions) else nil
+	tbl.astNode = p1.astNode
+	tbl.extensionASTNodes = p1.extensionASTNodes
+	tbl._queryType = p1.query
+	tbl._mutationType = p1.mutation
+	tbl._subscriptionType = p1.subscription
+	tbl._directives = p1.directives or specifiedDirectives
+	local var1 = set.new()
 	
-	for i, v in ipairs(p2.types or {}) do
-		var10:add(v)
+	for i, v in ipairs(p1.types or {}) do
+		var1:add(v)
 	end
-	if p2.types ~= nil then
-		for i, v_1 in ipairs(p2.types) do
-			var10:delete(v_1)
-			collectReferencedTypes(v_1, var10)
+	if p1.types ~= nil then
+		for i, v_1 in ipairs(p1.types) do
+			var1:delete(v_1)
+			collectReferencedTypes(v_1, var1)
 		end
 	end
 	if isNotNillish(tbl._queryType) then
-		collectReferencedTypes(tbl._queryType, var10)
+		collectReferencedTypes(tbl._queryType, var1)
 	end
 	if isNotNillish(tbl._mutationType) then
-		collectReferencedTypes(tbl._mutationType, var10)
+		collectReferencedTypes(tbl._mutationType, var1)
 	end
 	if isNotNillish(tbl._subscriptionType) then
-		collectReferencedTypes(tbl._subscriptionType, var10)
+		collectReferencedTypes(tbl._subscriptionType, var1)
 	end
 	for i, v_1 in ipairs(tbl._directives) do
 		if isDirective(v_1) then
 			for i_5, v_2 in ipairs(v_1.args) do
-				collectReferencedTypes(v_2.type, var10)
+				collectReferencedTypes(v_2.type, var1)
 			end
 		end
 	end
-	collectReferencedTypes(schema, var10)
+	collectReferencedTypes(schema, var1)
 	tbl._typeMap = map.new()
 	tbl._subTypeMap = map.new()
 	tbl._implementationsMap = map.new()
 	
-	for i, v_2 in var10 do
+	for i, v_2 in var1 do
 		if not isNillish(v_2) then
-			local var11 = if typeof(v_2) == "table" then v_2.name else tostring(v_2)
-			devAssert(var11 and var11 ~= "", "One of the provided types for building the Schema is missing a name.")
+			local var2 = if typeof(v_2) == "table" then v_2.name else tostring(v_2)
+			devAssert(var2 and var2 ~= "", "One of the provided types for building the Schema is missing a name.")
 			
-			if tbl._typeMap:has(var11) then
-				error(error.new(("Schema must contain uniquely named types but contains multiple types named \"%s\"."):format(var11)))
+			if tbl._typeMap:has(var2) then
+				error(error.new(("Schema must contain uniquely named types but contains multiple types named \"%s\"."):format(var2)))
 			end
-			tbl._typeMap:set(var11, v_2)
+			tbl._typeMap:set(var2, v_2)
 			
 			if isInterfaceType(v_2) then
 				for i_4, v_3 in ipairs(v_2:getInterfaces()) do
@@ -154,54 +154,54 @@ function t:getTypeMap()
 	return self._typeMap
 end
 
-function t:getType(p3)
-	return self:getTypeMap()[p3]
+function t:getType(p2)
+	return self:getTypeMap()[p2]
 end
 
-function t:getPossibleTypes(p4)
+function t:getPossibleTypes(p2)
 	-- upvalues: isUnionType (ref)
-	return if isUnionType(p4) then p4:getTypes() else self:getImplementations(p4).objects
+	return if isUnionType(p2) then p2:getTypes() else self:getImplementations(p2).objects
 end
 
-function t:getImplementations(p5)
-	return self._implementationsMap:get(p5.name) or { objects = {}, interfaces = {} }
+function t:getImplementations(p2)
+	return self._implementationsMap:get(p2.name) or { objects = {}, interfaces = {} }
 end
 
-function t:isSubType(p6, p7)
+function t:isSubType(p2, p3)
 	-- upvalues: isUnionType (ref)
-	local name = self._subTypeMap[p6.name]
+	local name = self._subTypeMap[p2.name]
 	
 	if name == nil then
 		name = {}
 		
-		if isUnionType(p6) then
-			for i, v in ipairs(p6:getTypes()) do
+		if isUnionType(p2) then
+			for i, v in ipairs(p2:getTypes()) do
 				name[v.name] = true
 			end
 		else
-			local var14 = self:getImplementations(p6)
+			local var3 = self:getImplementations(p2)
 			
-			for i, v in ipairs(var14.objects) do
+			for i, v in ipairs(var3.objects) do
 				name[v.name] = true
 			end
-			for i_1, v_1 in ipairs(var14.interfaces) do
+			for i_1, v_1 in ipairs(var3.interfaces) do
 				name[v_1.name] = true
 			end
 		end
-		self._subTypeMap:set(p6.name, name)
+		self._subTypeMap:set(p2.name, name)
 	end
-	return name[p7.name] ~= nil
+	return name[p3.name] ~= nil
 end
 
 function t:getDirectives()
 	return self._directives
 end
 
-function t:getDirective(p8)
+function t:getDirective(p4)
 	-- upvalues: array (ref)
-	return array.find(self:getDirectives(), function(p9)
-		-- upvalues: p8 (ref)
-		return p9.name == p8
+	return array.find(self:getDirectives(), function(p5)
+		-- upvalues: p4 (ref)
+		return p5.name == p4
 	end)
 end
 
@@ -225,37 +225,37 @@ function t:__tostring()
 	return "GraphQLSchema"
 end
 
-collectReferencedTypes = function(p10, p11)
+collectReferencedTypes = function(p4, p5)
 	-- upvalues: getNamedType (ref), isUnionType (ref), collectReferencedTypes (write), isObjectType (ref), isInterfaceType (ref), isInputObjectType (ref)
-	local var15 = getNamedType(p10)
+	local var4 = getNamedType(p4)
 	
-	if not p11:has(var15) then
-		p11:add(var15)
+	if not p5:has(var4) then
+		p5:add(var4)
 		
-		if isUnionType(var15) then
-			for i, v in ipairs(var15:getTypes()) do
-				collectReferencedTypes(v, p11)
+		if isUnionType(var4) then
+			for i, v in ipairs(var4:getTypes()) do
+				collectReferencedTypes(v, p5)
 			end
-			return p11
-		elseif isObjectType(var15) or isInterfaceType(var15) then
-			for i, v in ipairs(var15:getInterfaces()) do
-				collectReferencedTypes(v, p11)
+			return p5
+		elseif isObjectType(var4) or isInterfaceType(var4) then
+			for i, v in ipairs(var4:getInterfaces()) do
+				collectReferencedTypes(v, p5)
 			end
-			for i, v_1 in ipairs(var15:getFields():values()) do
-				collectReferencedTypes(v_1.type, p11)
+			for i, v_1 in ipairs(var4:getFields():values()) do
+				collectReferencedTypes(v_1.type, p5)
 				
 				for i_2, v_2 in ipairs(v_1.args) do
-					collectReferencedTypes(v_2.type, p11)
+					collectReferencedTypes(v_2.type, p5)
 				end
 			end
-			return p11
-		elseif isInputObjectType(var15) then
-			for i, v in ipairs(var15:getFields():values()) do
-				collectReferencedTypes(v.type, p11)
+			return p5
+		elseif isInputObjectType(var4) then
+			for i, v in ipairs(var4:getFields():values()) do
+				collectReferencedTypes(v.type, p5)
 			end
 		end
 	end
-	return p11
+	return p5
 end
 
 return {

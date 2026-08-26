@@ -5,13 +5,13 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local localization = require(parent.InExperienceLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
 local foundationStorybookMiddlewareModule = require(script.Parent.FoundationStorybookMiddleware)
-local var4 = localization.new("en-us")
+local var1 = localization.new("en-us")
 
-local function _(p0)
-	-- upvalues: reactModule (ref), localizationProvider (ref), var4 (ref)
-	return function(p1)
-		-- upvalues: reactModule (copy), localizationProvider (copy), var4 (copy), p0 (ref)
-		return reactModule.createElement(localizationProvider, { localization = var4 }, { Child = reactModule.createElement(p0, p1) })
+local function _(p1)
+	-- upvalues: reactModule (ref), localizationProvider (ref), var1 (ref)
+	return function(p2)
+		-- upvalues: reactModule (copy), localizationProvider (copy), var1 (copy), p1 (ref)
+		return reactModule.createElement(localizationProvider, { localization = var1 }, { Child = reactModule.createElement(p1, p2) })
 	end
 end
 
@@ -20,11 +20,11 @@ return {
 	storyRoot = coreScriptsRoactCommon,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p2)
-		-- upvalues: foundationStorybookMiddlewareModule (ref), reactModule (ref), localizationProvider (ref), var4 (ref)
-		return foundationStorybookMiddlewareModule(function(p3)
-			-- upvalues: reactModule (copy), localizationProvider (copy), var4 (copy), p2 (ref)
-			return reactModule.createElement(localizationProvider, { localization = var4 }, { Child = reactModule.createElement(p2, p3) })
+	mapStory = function(p1)
+		-- upvalues: foundationStorybookMiddlewareModule (ref), reactModule (ref), localizationProvider (ref), var1 (ref)
+		return foundationStorybookMiddlewareModule(function(p2)
+			-- upvalues: reactModule (copy), localizationProvider (copy), var1 (copy), p1 (ref)
+			return reactModule.createElement(localizationProvider, { localization = var1 }, { Child = reactModule.createElement(p1, p2) })
 		end)
 	end
 }

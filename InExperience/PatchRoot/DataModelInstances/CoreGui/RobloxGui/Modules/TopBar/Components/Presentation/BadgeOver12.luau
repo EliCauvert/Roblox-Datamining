@@ -10,41 +10,41 @@ local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedF
 local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), fFlagShowGameAgeRating (ref), fFlagEnableSideSheet (ref), reactModule (ref), getAgeRecommendationStore (ref), dataStatus (ref), signalsReactModule (ref), appFonts (ref)
-	local var5 = useStyle()
-	local var6 = if fFlagShowGameAgeRating then if fFlagEnableSideSheet then UDim2.fromOffset(-6, -2) else UDim2.fromOffset(0, 2) else p0.position
-	local var7 = nil
+	local var1 = useStyle()
+	local var2 = if fFlagShowGameAgeRating then if fFlagEnableSideSheet then UDim2.fromOffset(-6, -2) else UDim2.fromOffset(0, 2) else p1.position
+	local var3 = nil
 	
 	if fFlagShowGameAgeRating then
-		local var8 = tostring(game.GameId)
-		var7 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
-			-- upvalues: getAgeRecommendationStore (copy), var8 (ref), dataStatus (copy)
-			local andFetchAgeRecommendation = getAgeRecommendationStore(p1).getAndFetchAgeRecommendation(var8)
-			local var10 = andFetchAgeRecommendation.status(p1)
+		local var4 = tostring(game.GameId)
+		var3 = signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
+			-- upvalues: getAgeRecommendationStore (copy), var4 (ref), dataStatus (copy)
+			local andFetchAgeRecommendation = getAgeRecommendationStore(p2).getAndFetchAgeRecommendation(var4)
+			local var5 = andFetchAgeRecommendation.status(p2)
 			
-			if var10 == dataStatus.Failed then
+			if var5 == dataStatus.Failed then
 				return "12+"
-			elseif var10 == dataStatus.NotReady then
+			elseif var5 == dataStatus.NotReady then
 				return nil
 			end
-			local var11 = andFetchAgeRecommendation.data(p1)
-			local minimumAgeDisplay = var11 and var11.minimumAgeDisplay
+			local var6 = andFetchAgeRecommendation.data(p2)
+			local minimumAgeDisplay = var6 and var6.minimumAgeDisplay
 			
 			return minimumAgeDisplay or "12+"
-		end, { var8 }))
+		end, { var4 }))
 		
-		return if var7 == nil then nil else reactModule.createElement("TextLabel", {
+		return if var3 == nil then nil else reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 0,
 			LineHeight = 1.25,
 			ZIndex = 2,
 			AnchorPoint = if fFlagShowGameAgeRating then Vector2.new(0.5, 0) else Vector2.new(0, 1),
-			Position = var6,
-			Text = var7 or "12+",
+			Position = var2,
+			Text = var3 or "12+",
 			Font = if fFlagShowGameAgeRating then appFonts.default:getBold() else appFonts.default:getMedium(),
 			TextSize = if fFlagShowGameAgeRating then 12 else 9,
-			TextColor3 = var5.Theme.TextEmphasis.Color,
-			BackgroundColor3 = var5.Theme.BackgroundUIContrast.Color,
+			TextColor3 = var1.Theme.TextEmphasis.Color,
+			BackgroundColor3 = var1.Theme.BackgroundUIContrast.Color,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
 			Padding = reactModule.createElement("UIPadding", {

@@ -8,20 +8,20 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0, p1)
+function t_1.new(p1, p2)
 	-- upvalues: defaultMakeData (ref), t_1 (ref)
-	local var3 = p0
-	local var4 = p1
+	local var1 = p1
+	local var2 = p2
 	
-	if var3 == nil then
-		var3 = true
+	if var1 == nil then
+		var1 = true
 	end
-	if var4 == nil then
-		var4 = defaultMakeData
+	if var2 == nil then
+		var2 = defaultMakeData
 	end
 	local tbl = setmetatable({}, t_1)
-	tbl.weakness = var3
-	tbl.makeData = var4
+	tbl.weakness = var1
+	tbl.makeData = var2
 	
 	return tbl
 end
@@ -30,19 +30,19 @@ function t_1:lookup(...)
 	return self:lookupArray({ ... })
 end
 
-function t_1:lookupArray(p2)
-	local var6 = self
+function t_1:lookupArray(p1)
+	local var1 = self
 	
-	for i, v in p2 do
-		var6 = var6:getChildTrie(v)
+	for i, v in p1 do
+		var1 = var1:getChildTrie(v)
 	end
-	if not var6.data then
-		var6.data = self.makeData(table.clone(p2))
+	if not var1.data then
+		var1.data = self.makeData(table.clone(p1))
 	end
-	return var6.data
+	return var1.data
 end
 
-function t_1:getChildTrie(p3)
+function t_1:getChildTrie(p2)
 	-- upvalues: t_1 (ref)
 	local weak
 	local _ = nil
@@ -56,13 +56,13 @@ function t_1:getChildTrie(p3)
 		self.strong = {}
 	end
 	weak = self.strong
-	local var7 = weak[p3]
+	local var2 = weak[p2]
 	
-	if not var7 then
-		var7 = t_1.new(self.weakness, self.makeData)
-		weak[p3] = var7
+	if not var2 then
+		var2 = t_1.new(self.weakness, self.makeData)
+		weak[p2] = var2
 	end
-	return var7
+	return var2
 end
 
 t.Trie = t_1

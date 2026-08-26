@@ -28,17 +28,17 @@ end
 
 local _ = function(value)
 	-- upvalues: enumItems (ref), gameSettings (ref), sendAnalyticsModule (ref), constantsModule (ref)
-	local var13 = enumItems[value]
-	gameSettings.VRComfortSetting = var13
-	sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, constantsModule.AnalyticsSettingsVRComfortSettingChangeName, { mode = tostring(var13) })
+	local var1 = enumItems[value]
+	gameSettings.VRComfortSetting = var1
+	sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, constantsModule.AnalyticsSettingsVRComfortSettingChangeName, { mode = tostring(var1) })
 end
 
 local comfortSettingsEntry = roactModule.PureComponent:extend("ComfortSettingsEntry")
 comfortSettingsEntry.validateProps = t.strictInterface({ LayoutOrder = t.optional(t.integer) })
 
-function comfortSettingsEntry.init(p0)
+function comfortSettingsEntry.init(p1)
 	-- upvalues: gameSettings (ref), luauPolyfillModule (ref), enumItems (ref)
-	p0:setState({
+	p1:setState({
 		selectedMode = luauPolyfillModule.Array.indexOf(enumItems, gameSettings.VRComfortSetting)
 	})
 end
@@ -97,13 +97,13 @@ function comfortSettingsEntry.render(p1)
 						selectedTabIndex = p1.state.selectedMode,
 						onTabActivated = function(p3)
 							-- upvalues: enumItems (copy), gameSettings (copy), sendAnalyticsModule (copy), constantsModule (copy)
-							local var14 = enumItems[p3]
-							gameSettings.VRComfortSetting = var14
-							sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, constantsModule.AnalyticsSettingsVRComfortSettingChangeName, { mode = tostring(var14) })
+							local var1 = enumItems[p3]
+							gameSettings.VRComfortSetting = var1
+							sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, constantsModule.AnalyticsSettingsVRComfortSettingChangeName, { mode = tostring(var1) })
 						end,
-						tabs = luauPolyfillModule.Array.map(enumItems, function(p4, _)
+						tabs = luauPolyfillModule.Array.map(enumItems, function(p3, _)
 							-- upvalues: p2 (ref)
-							return { tabName = p2[tostring(p4)] }
+							return { tabName = p2[tostring(p3)] }
 						end)
 					})
 				})

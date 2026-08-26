@@ -8,35 +8,35 @@ local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local navControlsModule = require(script.Parent.NavControls)
 local _ = require(script.Parent.Parent.usePaginationSelectionChain)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: reactModule (ref), viewModule (ref), withCommonPropsModule (ref), navControlsModule (ref)
-	return reactModule.createElement(viewModule, withCommonPropsModule(p0, { tag = "row align-y-center gap-small auto-xy", ref = p1 }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { tag = "row align-y-center gap-small auto-xy", ref = p2 }), {
 		LeftNav = reactModule.createElement(navControlsModule, {
 			side = "start",
 			LayoutOrder = 1,
-			size = p0.size,
-			isFirstDisabled = p0.isFirstDisabled,
-			isBackDisabled = p0.isBackDisabled,
-			isForwardDisabled = p0.isForwardDisabled,
-			isLastDisabled = p0.isLastDisabled,
-			onDirectionActivated = p0.onDirectionActivated,
-			hasFirstLastButtons = p0.hasFirstLastButtons,
-			testId = p0.testId,
-			selection = p0.selection
+			size = p1.size,
+			isFirstDisabled = p1.isFirstDisabled,
+			isBackDisabled = p1.isBackDisabled,
+			isForwardDisabled = p1.isForwardDisabled,
+			isLastDisabled = p1.isLastDisabled,
+			onDirectionActivated = p1.onDirectionActivated,
+			hasFirstLastButtons = p1.hasFirstLastButtons,
+			testId = p1.testId,
+			selection = p1.selection
 		}),
-		PageContent = p0.pageContent,
+		PageContent = p1.pageContent,
 		RightNav = reactModule.createElement(navControlsModule, {
 			side = "end",
-			size = p0.size,
-			LayoutOrder = if p0.pageContent then 3 else 2,
-			isFirstDisabled = p0.isFirstDisabled,
-			isBackDisabled = p0.isBackDisabled,
-			isForwardDisabled = p0.isForwardDisabled,
-			isLastDisabled = p0.isLastDisabled,
-			onDirectionActivated = p0.onDirectionActivated,
-			hasFirstLastButtons = p0.hasFirstLastButtons,
-			testId = p0.testId,
-			selection = p0.selection
+			size = p1.size,
+			LayoutOrder = if p1.pageContent then 3 else 2,
+			isFirstDisabled = p1.isFirstDisabled,
+			isBackDisabled = p1.isBackDisabled,
+			isForwardDisabled = p1.isForwardDisabled,
+			isLastDisabled = p1.isLastDisabled,
+			onDirectionActivated = p1.onDirectionActivated,
+			hasFirstLastButtons = p1.hasFirstLastButtons,
+			testId = p1.testId,
+			selection = p1.selection
 		})
 	})
 end))

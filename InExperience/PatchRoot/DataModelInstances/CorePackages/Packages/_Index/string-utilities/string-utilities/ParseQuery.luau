@@ -1,63 +1,63 @@
 ﻿local runService = game:GetService("RunService")
 local stringSplitModule = require(script.Parent.StringSplit)
 
-function assertIsType(p0, p1, p2)
+function assertIsType(p1, p2, p3)
 	-- upvalues: runService (ref)
 	if runService:IsStudio() or _G.__TESTEZ_RUNNING_TEST__ then
-		assert(typeof(p0) == p1, string.format("expects %s to be a %s! it was: %s", p2, p1, typeof(p0)))
+		assert(typeof(p1) == p2, string.format("expects %s to be a %s! it was: %s", p3, p2, typeof(p1)))
 	end
 end
 
-local function urlDecode(p3)
-	assertIsType(p3, "string", "input")
+local function urlDecode(p1)
+	assertIsType(p1, "string", "input")
 	
-	return string.gsub(string.gsub(p3, "%%(%x%x)", function(p4)
-		return string.char(tonumber(p4, 16))
+	return string.gsub(string.gsub(p1, "%%(%x%x)", function(p2)
+		return string.char(tonumber(p2, 16))
 	end), "+", " ")
 end
 
-return function(p5, p6)
+return function(p1, p2)
 	-- upvalues: stringSplitModule (ref), urlDecode (ref)
-	if p5 ~= nil then
-		assertIsType(p5, "string", "input")
+	if p1 ~= nil then
+		assertIsType(p1, "string", "input")
 	end
-	if p6 ~= nil then
-		assertIsType(p6, "function", "listKeyMapper")
+	if p2 ~= nil then
+		assertIsType(p2, "function", "listKeyMapper")
 	end
-	local isFunction = type(p6) == "function"
+	local isFunction = type(p2) == "function"
 	local t = {}
 	
-	if p5 and #p5 > 0 then
-		for i, v in ipairs(stringSplitModule(p5, "[&;]")) do
+	if p1 and #p1 > 0 then
+		for i, v in ipairs(stringSplitModule(p1, "[&;]")) do
 			if v and #v > 0 then
-				local var5, var6 = unpack(string.split(v, "="))
+				local var1, var2 = unpack(string.split(v, "="))
 				
-				if var6 == nil then
-					var6 = ""
+				if var2 == nil then
+					var2 = ""
 				end
-				var5 = urlDecode(var5)
-				var6 = urlDecode(var6)
+				var1 = urlDecode(var1)
+				var2 = urlDecode(var2)
 				
 				if not isFunction then
-					if t[var5] == nil then
-						t[var5] = {}
+					if t[var1] == nil then
+						t[var1] = {}
 					end
-					table.insert(t[var5], var6)
-				elseif t[var5] == nil then
-					t[var5] = var6
+					table.insert(t[var1], var2)
+				elseif t[var1] == nil then
+					t[var1] = var2
 				else
-					local var7 = p6(var5)
+					local var3 = p2(var1)
 					
-					if var7 == nil then
-						var7 = var5
+					if var3 == nil then
+						var3 = var1
 					end
-					if type(t[var7]) ~= "table" then
-						t[var7] = { t[var5] }
+					if type(t[var3]) ~= "table" then
+						t[var3] = { t[var1] }
 					end
-					table.insert(t[var7], var6)
+					table.insert(t[var3], var2)
 					
-					if var5 ~= var7 then
-						t[var5] = var6
+					if var1 ~= var3 then
+						t[var1] = var2
 					end
 				end
 			end

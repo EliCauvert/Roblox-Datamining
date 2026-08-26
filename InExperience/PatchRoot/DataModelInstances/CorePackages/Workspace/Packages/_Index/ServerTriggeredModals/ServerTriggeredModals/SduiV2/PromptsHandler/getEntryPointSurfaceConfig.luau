@@ -30,14 +30,14 @@ local t = {
 	} else nil
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref)
-	local var3 = t[p0]
-	assert(var3 ~= nil, `PromptsHandler: missing surface config for entry point "{p0}"`)
+	local var1 = t[p1]
+	assert(var1 ~= nil, `PromptsHandler: missing surface config for entry point "{p0}"`)
 	
-	return if fFlagEdpGameLeavePromptsHandlerEnabled and p1 ~= nil then {
-		appPage = var3.appPage,
-		surfaceKey = var3.surfaceKey,
-		configKey = `{var3.configKey}-{p1}`
-	} else var3
+	return if fFlagEdpGameLeavePromptsHandlerEnabled and p2 ~= nil then {
+		appPage = var1.appPage,
+		surfaceKey = var1.surfaceKey,
+		configKey = `{var1.configKey}-{p2}`
+	} else var1
 end

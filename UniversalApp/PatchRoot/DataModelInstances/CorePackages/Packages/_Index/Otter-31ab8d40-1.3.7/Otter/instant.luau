@@ -1,11 +1,11 @@
 ﻿local _ = require(script.Parent.types)
 
-return function(p0)
+return function(p1)
 	return {
 		step = function()
-			-- upvalues: p0 (ref)
-			return { complete = true, value = p0 }
+			-- upvalues: p1 (ref)
+			return { complete = true, value = p1 }
 		end,
-		startingValue = p0
+		startingValue = p1
 	}
 end

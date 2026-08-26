@@ -1,33 +1,33 @@
 ﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 local sampleMomentShareCardVideoFrameModule = require(script.Parent.sampleMomentShareCardVideoFrame)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), sampleMomentShareCardVideoFrameModule (ref)
-	local var2, var3 = reactModule.useState(function()
+	local var1, var2 = reactModule.useState(function()
 		return nil
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p0 (ref), sampleMomentShareCardVideoFrameModule (copy)
-		var3(nil)
+		-- upvalues: var2 (ref), p1 (ref), sampleMomentShareCardVideoFrameModule (copy)
+		var2(nil)
 		
-		if p0 == nil then
+		if p1 == nil then
 			return
 		end
-		local var4 = false
+		local var3 = false
 		task.spawn(function()
-			-- upvalues: sampleMomentShareCardVideoFrameModule (copy), p0 (copy), var4 (write), var3 (copy)
-			local var5 = sampleMomentShareCardVideoFrameModule(p0)
+			-- upvalues: sampleMomentShareCardVideoFrameModule (copy), p1 (copy), var3 (write), var2 (copy)
+			local var4 = sampleMomentShareCardVideoFrameModule(p1)
 			
-			if not var4 and var5 ~= nil then
-				var3(var5)
+			if not var3 and var4 ~= nil then
+				var2(var4)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var4 (write)
-			var4 = true
+			-- upvalues: var3 (write)
+			var3 = true
 		end
-	end, { p0 })
+	end, { p1 })
 	
-	return var2
+	return var1
 end

@@ -22,17 +22,17 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local textKeysModule = require(profilePlatform.Common.TextKeys)
 local fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule = require(profilePlatform.Flags.FFlagProfilePlatformUpdateUXForNonSocialCommunities)
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var12 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-function ViewFullProfile(p0)
-	-- upvalues: fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), navigateDownToViewUserProfile (ref), urlBuilder (ref), urlBase (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var12 (ref), navigateDown (ref), horizontalPageMargin (ref), constantsModule (ref), button (ref), buttonType (ref)
-	local var13 = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then useProfileJsonComponentModule(enumsModule.Components.ViewFullProfile) or {} else nil
-	local var14 = useProfileWrapperContextModule()
-	local profileId = var14.profileId
-	local profileType = var14.profileType
-	local var15 = useProfileAnalyticsContextModule()
-	local var16 = useDispatch()
-	local var17 = useLocalization({
+function ViewFullProfile(p1)
+	-- upvalues: fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), navigateDownToViewUserProfile (ref), urlBuilder (ref), urlBase (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), horizontalPageMargin (ref), constantsModule (ref), button (ref), buttonType (ref)
+	local var2 = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then useProfileJsonComponentModule(enumsModule.Components.ViewFullProfile) or {} else nil
+	local var3 = useProfileWrapperContextModule()
+	local profileId = var3.profileId
+	local profileType = var3.profileType
+	local var4 = useProfileAnalyticsContextModule()
+	local var5 = useDispatch()
+	local var6 = useLocalization({
 		viewFullProfileLabel = textKeysModule.ViewFullProfile,
 		viewCommunityLabel = textKeysModule.ViewCommunity
 	})
@@ -41,13 +41,13 @@ function ViewFullProfile(p0)
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		size = UDim2.fromScale(1, 0),
-		layoutOrder = p0.layoutOrder
+		layoutOrder = p1.layoutOrder
 	}, {
 		ViewFullProfileFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = p0.layoutOrder
+			LayoutOrder = p1.layoutOrder
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, constantsModule.ADDITIONAL_PADDING)
@@ -56,46 +56,46 @@ function ViewFullProfile(p0)
 				buttonType = buttonType.Secondary,
 				size = UDim2.new(1, 0, 0, constantsModule.CTA_BUTTON_HEIGHT),
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var15 (ref), eventNamesModule (copy), var14 (ref), enumsModule (copy), profileType (ref), var16 (ref), navigateDownToViewUserProfile (copy), profileId (ref), var13 (ref), urlBuilder (copy), urlBase (copy), appPage (copy), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var12 (copy), navigateDown (copy)
-					var15.fireAnalyticsEvent(eventNamesModule.ViewPlayerProfileButton, {
-						absolutePosition = var14.sourceInfo.homepageCarouselAbsolutePosition,
-						isHomePageCarousel = var14.sourceInfo.source == enumsModule.Sources.HomepageFriendsCarousel,
-						source = var14.sourceInfo.source,
-						isRecommendation = var14.sourceInfo.isRecommendation,
-						recommendationContextType = var14.sourceInfo.recommendationContextType,
-						recommendationRank = var14.sourceInfo.recommendationRank,
-						recommendationSessionId = var14.sourceInfo.recommendationSessionId
+					-- upvalues: var4 (ref), eventNamesModule (copy), var3 (ref), enumsModule (copy), profileType (ref), var5 (ref), navigateDownToViewUserProfile (copy), profileId (ref), var2 (ref), urlBuilder (copy), urlBase (copy), appPage (copy), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
+					var4.fireAnalyticsEvent(eventNamesModule.ViewPlayerProfileButton, {
+						absolutePosition = var3.sourceInfo.homepageCarouselAbsolutePosition,
+						isHomePageCarousel = var3.sourceInfo.source == enumsModule.Sources.HomepageFriendsCarousel,
+						source = var3.sourceInfo.source,
+						isRecommendation = var3.sourceInfo.isRecommendation,
+						recommendationContextType = var3.sourceInfo.recommendationContextType,
+						recommendationRank = var3.sourceInfo.recommendationRank,
+						recommendationSessionId = var3.sourceInfo.recommendationSessionId
 					})
 					
 					if profileType == enumsModule.ProfileTypes.User then
-						var16(navigateDownToViewUserProfile(profileId))
+						var5(navigateDownToViewUserProfile(profileId))
 						
 						return
 					elseif profileType == enumsModule.ProfileTypes.Community then
 						local t = {
 							name = appPage.GenericWebPage,
-							detail = if var13.type == enumsModule.ViewFullProfileTypes.Profile then urlBuilder.new({ base = urlBase.WWW, path = `profiles/{profileId}` })() else urlBuilder.user.group({ groupId = profileId }),
+							detail = if var2.type == enumsModule.ViewFullProfileTypes.Profile then urlBuilder.new({ base = urlBase.WWW, path = `profiles/{profileId}` })() else urlBuilder.user.group({ groupId = profileId }),
 							extraProps = {
-								titleKey = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule and var13.type == enumsModule.ViewFullProfileTypes.Profile then textKeysModule.Profile else textKeysModule.Community
+								titleKey = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule and var2.type == enumsModule.ViewFullProfileTypes.Profile then textKeysModule.Profile else textKeysModule.Community
 							}
 						}
 						
 						if fFlagSignalsNavP3Dispatch then
-							var12.down(var12.fromLegacyPage(t))
+							var1.down(var1.fromLegacyPage(t))
 							
 							return
 						end
-						var16(navigateDown(t))
+						var5(navigateDown(t))
 					end
-				end, { var16, profileId, var15, var14 }),
+				end, { var5, profileId, var4, var3 }),
 				text = reactModule.useMemo(function()
-					-- upvalues: profileType (ref), enumsModule (copy), var17 (ref), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (copy), var13 (ref)
+					-- upvalues: profileType (ref), enumsModule (copy), var6 (ref), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (copy), var2 (ref)
 					if profileType == enumsModule.ProfileTypes.User then
-						return var17.viewFullProfileLabel
+						return var6.viewFullProfileLabel
 					elseif profileType == enumsModule.ProfileTypes.Community then
-						return if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then if var13.type == enumsModule.ViewFullProfileTypes.Profile then var17.viewFullProfileLabel elseif var13.type == enumsModule.ViewFullProfileTypes.Community then var17.viewCommunityLabel else var17.viewFullProfileLabel else var17.viewCommunityLabel
+						return if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then if var2.type == enumsModule.ViewFullProfileTypes.Profile then var6.viewFullProfileLabel elseif var2.type == enumsModule.ViewFullProfileTypes.Community then var6.viewCommunityLabel else var6.viewFullProfileLabel else var6.viewCommunityLabel
 					end
-				end, { var17 })
+				end, { var6 })
 			})
 		})
 	})

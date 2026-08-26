@@ -3,8 +3,8 @@
 return {
 	SCROLL_INCREMENT = 300,
 	STICK_MAX_SPEED = 1000,
-	getScrollableAncestor = function(p0)
-		return if p0 == nil then nil elseif p0:IsA("ScrollingFrame") then p0 else p0:FindFirstAncestorWhichIsA("ScrollingFrame")
+	getScrollableAncestor = function(p1)
+		return if p1 == nil then nil elseif p1:IsA("ScrollingFrame") then p1 else p1:FindFirstAncestorWhichIsA("ScrollingFrame")
 	end,
 	canScrollVertically = function(p1)
 		return if p1.ScrollingEnabled then p1.AbsoluteWindowSize.Y < p1.AbsoluteCanvasSize.Y else false
@@ -12,42 +12,42 @@ return {
 	clampCanvasY = function(value, minValue)
 		return math.clamp(minValue, 0, math.max(0, value.AbsoluteCanvasSize.Y - value.AbsoluteWindowSize.Y))
 	end,
-	scrollByIncrement = function(p2, p3)
-		if p2 == nil then return end
-		local var0 = p2.AbsoluteCanvasSize.Y - p2.AbsoluteWindowSize.Y
+	scrollByIncrement = function(p1, p2)
+		if p1 == nil then return end
+		local var1 = p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y
 		
-		if p3 > 0 and var0 - 350 <= p2.CanvasPosition.Y then
-			p2.CanvasPosition = Vector2.new(0, var0)
+		if p2 > 0 and var1 - 350 <= p1.CanvasPosition.Y then
+			p1.CanvasPosition = Vector2.new(0, var1)
 			
 			return
-		elseif p3 < 0 and p2.CanvasPosition.Y <= 350 then
-			p2.CanvasPosition = Vector2.new(0, 0)
+		elseif p2 < 0 and p1.CanvasPosition.Y <= 350 then
+			p1.CanvasPosition = Vector2.new(0, 0)
 			
 			return
 		end
-		p2.CanvasPosition += Vector2.new(0, p3)
+		p1.CanvasPosition += Vector2.new(0, p2)
 	end,
-	scrollByAnalogInput = function(p4, p5, p6)
+	scrollByAnalogInput = function(p1, p2, p3)
 		-- upvalues: gamepadUtils (ref)
-		if p4 == nil or not (if not p4.ScrollingEnabled then false else p4.AbsoluteWindowSize.Y < p4.AbsoluteCanvasSize.Y) then return end
-		local var1 = gamepadUtils.normalizeStickByDeadzone(Vector2.new(p5.Position.X, p5.Position.Y))
+		if p1 == nil or not (if not p1.ScrollingEnabled then false else p1.AbsoluteWindowSize.Y < p1.AbsoluteCanvasSize.Y) then return end
+		local var1 = gamepadUtils.normalizeStickByDeadzone(Vector2.new(p2.Position.X, p2.Position.Y))
 		
 		if var1.Y == 0 then
 			return
 		end
-		p4.CanvasPosition = Vector2.new(p4.CanvasPosition.X, math.clamp(p4.CanvasPosition.Y + p6 * -var1.Y * 1000, 0, math.max(0, p4.AbsoluteCanvasSize.Y - p4.AbsoluteWindowSize.Y)))
+		p1.CanvasPosition = Vector2.new(p1.CanvasPosition.X, math.clamp(p1.CanvasPosition.Y + p3 * -var1.Y * 1000, 0, math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y)))
 	end,
-	isInsideContainer = function(p7, p8)
-		return if p7 == nil or p8 == nil then false elseif p7 ~= p8 then p7:IsDescendantOf(p8) else true
+	isInsideContainer = function(p1, p2)
+		return if p1 == nil or p2 == nil then false elseif p1 ~= p2 then p1:IsDescendantOf(p2) else true
 	end,
-	resolveScrollTarget = function(p9, p10)
-		if p10 == nil then
+	resolveScrollTarget = function(p1, p2)
+		if p2 == nil then
 			return nil
-		elseif not (if p9 == nil or p10 == nil then false elseif p9 ~= p10 then p9:IsDescendantOf(p10) else true) then
+		elseif not (if p1 == nil or p2 == nil then false elseif p1 ~= p2 then p1:IsDescendantOf(p2) else true) then
 			return nil
 		end
-		local var2 = if p9 == nil then nil elseif p9:IsA("ScrollingFrame") then p9 else p9:FindFirstAncestorWhichIsA("ScrollingFrame")
+		local var1 = if p1 == nil then nil elseif p1:IsA("ScrollingFrame") then p1 else p1:FindFirstAncestorWhichIsA("ScrollingFrame")
 		
-		return if var2 == nil then nil elseif var2 == p10 or var2:IsDescendantOf(p10) then var2 else nil
+		return if var1 == nil then nil elseif var1 == p2 or var1:IsDescendantOf(p2) then var1 else nil
 	end
 }

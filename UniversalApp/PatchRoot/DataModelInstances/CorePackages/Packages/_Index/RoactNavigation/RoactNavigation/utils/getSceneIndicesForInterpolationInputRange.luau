@@ -1,9 +1,9 @@
 ﻿local array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
 
-return function(p0)
+return function(p1)
 	-- upvalues: array (ref)
-	local scene = p0.scene
-	local scenes = p0.scenes
+	local scene = p1.scene
+	local scenes = p1.scenes
 	local index = scene.index
 	local scenesCount = #scenes
 	

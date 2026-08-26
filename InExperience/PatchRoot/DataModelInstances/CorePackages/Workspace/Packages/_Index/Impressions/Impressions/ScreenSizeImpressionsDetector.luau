@@ -16,30 +16,30 @@ screenSizeImpressionsDetector.validateProps = tModule.strictInterface({
 	globalGuiInset = tModule.table,
 	topBarHeight = tModule.number
 })
-local var5 = memoize(function(p0, p1, p2)
+local var1 = memoize(function(p1, p2, p3)
 	return {
-		min = Vector2.new(0, p0),
-		max = Vector2.new(p1.X, p1.Y - p2.bottom)
+		min = Vector2.new(0, p1),
+		max = Vector2.new(p2.X, p2.Y - p3.bottom)
 	}
 end)
 
-function screenSizeImpressionsDetector.render(p3)
-	-- upvalues: roactModule (ref), impressionsDetectorModule (ref), var5 (ref)
+function screenSizeImpressionsDetector.render(p1)
+	-- upvalues: roactModule (ref), impressionsDetectorModule (ref), var1 (ref)
 	return roactModule.createElement(impressionsDetectorModule, {
-		parentRef = p3.props.parentRef,
-		impressionsTag = p3.props.impressionsTag,
-		onRequestImpressionsSignal = p3.props.onRequestImpressionsSignal,
-		viewPortBounds = var5(p3.props.topBarHeight, p3.props.screenSize, p3.props.globalGuiInset),
-		filterImpressionFunc = p3.props.filterImpressionFunc,
-		onImpressionsDetected = p3.props.onImpressionsDetected,
-		skipZeroSizes = p3.props.skipZeroSizes
+		parentRef = p1.props.parentRef,
+		impressionsTag = p1.props.impressionsTag,
+		onRequestImpressionsSignal = p1.props.onRequestImpressionsSignal,
+		viewPortBounds = var1(p1.props.topBarHeight, p1.props.screenSize, p1.props.globalGuiInset),
+		filterImpressionFunc = p1.props.filterImpressionFunc,
+		onImpressionsDetected = p1.props.onImpressionsDetected,
+		skipZeroSizes = p1.props.skipZeroSizes
 	})
 end
 
-return roactRoduxModule.connect(function(p4, _)
+return roactRoduxModule.connect(function(p1, _)
 	return {
-		topBarHeight = p4.TopBar.topBarHeight,
-		globalGuiInset = p4.GlobalGuiInset,
-		screenSize = p4.ScreenSize
+		topBarHeight = p1.TopBar.topBarHeight,
+		globalGuiInset = p1.GlobalGuiInset,
+		screenSize = p1.ScreenSize
 	}
 end)(screenSizeImpressionsDetector)

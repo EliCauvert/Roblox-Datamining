@@ -43,29 +43,29 @@ filteredScrollingList.defaultProps = {
 	end
 }
 
-function filteredScrollingList.shouldUpdate(p0, p1, p2)
-	if p2 ~= p0.state then
+function filteredScrollingList.shouldUpdate(p1, p2, p3)
+	if p3 ~= p1.state then
 		return true
-	elseif p1 == p0.props then
+	elseif p2 == p1.props then
 		return false
 	end
-	for i, v in pairs(p1) do
-		if i ~= "extraProps" or p0.props.extraProps then
-			if p0.props[i] ~= v then
+	for i, v in pairs(p2) do
+		if i ~= "extraProps" or p1.props.extraProps then
+			if p1.props[i] ~= v then
 				return true
 			end
 		end
 		return true
 	end
-	for i, v in pairs(p0.props) do
+	for i, v in pairs(p1.props) do
 		if i ~= "extraProps" then
-			if p1[i] ~= v then
+			if p2[i] ~= v then
 				return true
 			end
 		end
-		if p1.extraProps then
+		if p2.extraProps then
 			for i_2, v_2 in pairs(v) do
-				if p1.extraProps[i_2] ~= v_2 then
+				if p2.extraProps[i_2] ~= v_2 then
 					return true
 				end
 			end
@@ -75,8 +75,8 @@ function filteredScrollingList.shouldUpdate(p0, p1, p2)
 	return false
 end
 
-function filteredScrollingList.init(p3)
-	p3:setState({})
+function filteredScrollingList.init(p4)
+	p4:setState({})
 end
 
 function filteredScrollingList.render(p4)
@@ -84,11 +84,11 @@ function filteredScrollingList.render(p4)
 	local filterPredicate = p4.props.filterPredicate
 	local filterText = p4.state.filterText
 	local t = {}
-	local var4 = 0
+	local var1 = 0
 	
 	for i, v in pairs(p4.props.entries) do
 		if filterPredicate(filterText, v) then
-			var4 += 1
+			var1 += 1
 			table.insert(t, v)
 		end
 	end
@@ -153,7 +153,7 @@ function filteredScrollingList.render(p4)
 		}),
 		entryList = roact.createElement("ScrollingFrame", {
 			Size = UDim2.new(1, 0, 1, (-p4.props.searchBoxHeight) - p4.props.searchBoxTopPadding - p4.props.searchBoxBottomPadding - p4.props.searchDividerHeight * 2),
-			CanvasSize = UDim2.new(0, 0, 0, var4 * p4.props.entryHeight),
+			CanvasSize = UDim2.new(0, 0, 0, var1 * p4.props.entryHeight),
 			BackgroundTransparency = 1,
 			ScrollBarThickness = 5,
 			ElasticBehavior = Enum.ElasticBehavior.Always,
@@ -164,11 +164,11 @@ function filteredScrollingList.render(p4)
 			MidImage = "rbxasset://textures/ui/LuaChat/9-slice/scroll-bar.png",
 			TopImage = "rbxasset://textures/ui/LuaChat/9-slice/scroll-bar.png",
 			LayoutOrder = 4,
-			[roact.Change.CanvasPosition] = function(p6)
+			[roact.Change.CanvasPosition] = function(p5)
 				-- upvalues: p4 (ref)
-				local offset = p6.CanvasSize.Y.Offset
+				local offset = p5.CanvasSize.Y.Offset
 				
-				if not p4.isTouchingBottom and offset <= p6.CanvasPosition.Y + p6.AbsoluteSize.Y then
+				if not p4.isTouchingBottom and offset <= p5.CanvasPosition.Y + p5.AbsoluteSize.Y then
 					p4.isTouchingBottom = true
 					
 					if p4.props.scrollTouchedBottomCallback then
@@ -176,7 +176,7 @@ function filteredScrollingList.render(p4)
 						
 						return
 					end
-				elseif p6.CanvasPosition.Y + p6.AbsoluteSize.Y < offset then
+				elseif p5.CanvasPosition.Y + p5.AbsoluteSize.Y < offset then
 					p4.isTouchingBottom = false
 				end
 			end

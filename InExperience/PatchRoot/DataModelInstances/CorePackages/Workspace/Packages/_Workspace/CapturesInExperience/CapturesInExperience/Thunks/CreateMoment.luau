@@ -11,24 +11,24 @@ local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
 local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
 local makePostMetadata = momentsCreationModule.makePostMetadata
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadata (ref), captureService (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
-	return function(p3)
-		-- upvalues: normalizeMomentMetadataModule (copy), p1 (ref), getFFlagMomentsUseUploadPostAsync (copy), makePostMetadata (copy), captureService (copy), p0 (ref), p2 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
-		local var6 = normalizeMomentMetadataModule(p1)
+	return function(p4)
+		-- upvalues: normalizeMomentMetadataModule (copy), p2 (ref), getFFlagMomentsUseUploadPostAsync (copy), makePostMetadata (copy), captureService (copy), p1 (ref), p3 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
+		local var1 = normalizeMomentMetadataModule(p2)
 		
 		if getFFlagMomentsUseUploadPostAsync() then
-			local var7 = makePostMetadata(p1)
+			local var2 = makePostMetadata(p2)
 			pcall(function()
-				-- upvalues: captureService (copy), p0 (copy), var7 (ref)
-				captureService:UploadPostAsync(p0, var7)
+				-- upvalues: captureService (copy), p1 (copy), var2 (ref)
+				captureService:UploadPostAsync(p1, var2)
 			end)
 		else
 			pcall(function()
-				-- upvalues: captureService (copy), p0 (copy), var6 (ref), p2 (copy)
-				captureService:UploadCaptureAndPostMoment(p0, var6, p2)
+				-- upvalues: captureService (copy), p1 (copy), var1 (ref), p3 (copy)
+				captureService:UploadCaptureAndPostMoment(p1, var1, p3)
 			end)
 		end
-		p3:dispatch(toastTriggeredModule(capturesToastTypeModule.MomentProcessing))
+		p4:dispatch(toastTriggeredModule(capturesToastTypeModule.MomentProcessing))
 	end
 end

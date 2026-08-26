@@ -10,16 +10,16 @@ local responseIndicator = socialLibrariesModule.Components.ResponseIndicator
 local removeUserDialogModule = require(script.Parent.RemoveUserDialog)
 local t = {}
 
-function RemoveUserDialogLayout(p0)
+function RemoveUserDialogLayout(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), removeUserDialogModule (ref), responseIndicator (ref)
-	local var6 = cryoModule.Dictionary.join(t, p0)
-	local var7 = useStyle()
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = useStyle()
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		RemoveUserDialog = var6.isModalVisible and reactModule.createElement(removeUserDialogModule, var6),
-		ResponseIndicator = var6.isLoading and reactModule.createElement(responseIndicator, {
-			soakAreaColor3 = var7.Theme.Overlay.Color,
-			soakAreaTransparency = var7.Theme.Overlay.Transparency
+		RemoveUserDialog = var1.isModalVisible and reactModule.createElement(removeUserDialogModule, var1),
+		ResponseIndicator = var1.isLoading and reactModule.createElement(responseIndicator, {
+			soakAreaColor3 = var2.Theme.Overlay.Color,
+			soakAreaTransparency = var2.Theme.Overlay.Transparency
 		})
 	})
 end

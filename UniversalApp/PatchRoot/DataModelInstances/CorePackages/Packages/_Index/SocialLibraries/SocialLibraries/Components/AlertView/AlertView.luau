@@ -12,28 +12,28 @@ alertView.defaultProps = {
 	width = UDim.new(0.5, 0)
 }
 
-function alertView.render(p0)
+function alertView.render(p1)
 	-- upvalues: UIBlox (ref), roact (ref), fitFrameVerticalModule (ref)
-	return UIBlox.Style.withStyle(function(p1)
-		-- upvalues: roact (copy), fitFrameVerticalModule (copy), p0 (ref)
+	return UIBlox.Style.withStyle(function(p2)
+		-- upvalues: roact (copy), fitFrameVerticalModule (copy), p1 (ref)
 		return roact.createElement(fitFrameVerticalModule, {
-			Visible = p0.props.Visible,
+			Visible = p1.props.Visible,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = p1.Theme.BackgroundUIDefault.Color,
+			BackgroundColor3 = p2.Theme.BackgroundUIDefault.Color,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			width = p0.props.width
+			width = p1.props.width
 		}, {
 			InnerFrame = roact.createElement(fitFrameVerticalModule, {
 				BackgroundTransparency = 1,
 				margin = {
-					top = p0.props.contentPaddingTop,
-					bottom = p0.props.contentPaddingBottom,
-					left = p0.props.contentPaddingLeft,
-					right = p0.props.contentPaddingRight
+					top = p1.props.contentPaddingTop,
+					bottom = p1.props.contentPaddingBottom,
+					left = p1.props.contentPaddingLeft,
+					right = p1.props.contentPaddingRight
 				},
 				width = UDim.new(1, 0),
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
-			}, p0.props[roact.Children])
+			}, p1.props[roact.Children])
 		})
 	end)
 end

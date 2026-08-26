@@ -75,10 +75,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			var3(var1.value)
 		end
 	end, { var1.value })
-	local var4 = reactModule.useCallback(function(p1)
+	local var4 = reactModule.useCallback(function(p3)
 		-- upvalues: var3 (ref), var1 (ref)
-		var3(p1)
-		var1.onValueChanged(p1)
+		var3(p3)
+		var1.onValueChanged(p3)
 	end, { var3, var1.onValueChanged })
 	
 	return if flagsModule.FoundationOptionSelectorGroupBeta then reactModule.createElement(OptionSelectorGroupInner, {

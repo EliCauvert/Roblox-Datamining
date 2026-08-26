@@ -4,7 +4,7 @@ local useStyle = dependenciesModule.UIBlox.Core.Style.useStyle
 local _ = require(parent.type)
 local react = dependenciesModule.React
 local t = {
-	highlight = function(p0)
+	highlight = function(p1)
 		return "<b>" .. p0 .. "</b>"
 	end
 }
@@ -44,50 +44,50 @@ local function formatString(p1)
 	for i in pairs(t) do
 		t_1[i] = 0
 	end
-	local var5 = ""
+	local var1 = ""
 	
 	for i_1 = 1, #list - 1 do
-		local var6 = list[i_1]
-		local var7 = list[i_1 + 1]
+		local var2 = list[i_1]
+		local var3 = list[i_1 + 1]
 		
-		if var6.Format then
-			t_1[var6.Format] += var6.ReferenceCount
+		if var2.Format then
+			t_1[var2.Format] += var2.ReferenceCount
 		end
-		if var6.Position == var7.Position then
+		if var2.Position == var3.Position then
 			continue
 		end
-		local var8 = text:sub(var6.Position + 1, var7.Position)
+		local var4 = text:sub(var2.Position + 1, var3.Position)
 		
 		for i_1, v in pairs(t) do
 			if t_1[i_1] > 0 then
-				var8 = v(var8)
+				var4 = v(var4)
 			end
 		end
-		var5 ..= var8
+		var1 ..= var4
 	end
-	return var5
+	return var1
 end
 
-return function(p4)
+return function(p2)
 	-- upvalues: useStyle (ref), formatString (ref), react (ref)
-	local var9 = useStyle()
+	local var5 = useStyle()
 	
 	return react.createElement("TextLabel", {
 		RichText = true,
 		BackgroundTransparency = 1,
 		TextWrapped = true,
-		Text = if p4.Text then formatString(p4.Text) else "",
-		TextColor3 = p4.TextColor3 or var9.Theme.TextDefault.Color,
-		TextTransparency = p4.TextTransparency or var9.Theme.TextDefault.Transparency,
-		Font = p4.Font or var9.Font.Body.Font,
-		AutomaticSize = p4.AutomaticSize,
-		Size = p4.Size,
-		TextSize = p4.TextSize,
-		Position = p4.Position,
-		AnchorPoint = p4.AnchorPoint,
-		TextXAlignment = p4.TextXAlignment,
+		Text = if p2.Text then formatString(p2.Text) else "",
+		TextColor3 = p2.TextColor3 or var5.Theme.TextDefault.Color,
+		TextTransparency = p2.TextTransparency or var5.Theme.TextDefault.Transparency,
+		Font = p2.Font or var5.Font.Body.Font,
+		AutomaticSize = p2.AutomaticSize,
+		Size = p2.Size,
+		TextSize = p2.TextSize,
+		Position = p2.Position,
+		AnchorPoint = p2.AnchorPoint,
+		TextXAlignment = p2.TextXAlignment,
 		TextTruncate = Enum.TextTruncate.AtEnd
 	}, {
-		UISizeConstraint = if p4.MaxSize then react.createElement("UISizeConstraint", { MaxSize = p4.MaxSize }) else nil
+		UISizeConstraint = if p2.MaxSize then react.createElement("UISizeConstraint", { MaxSize = p2.MaxSize }) else nil
 	})
 end

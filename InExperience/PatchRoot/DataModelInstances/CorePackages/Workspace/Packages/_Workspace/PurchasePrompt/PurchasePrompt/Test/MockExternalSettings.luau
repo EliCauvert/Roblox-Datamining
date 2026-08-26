@@ -3,52 +3,52 @@ local cryo = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchaseP
 local t = { RestrictSales2 = false, Order66 = false }
 
 return {
-	new = function(p0, p1, p2, p3)
+	new = function(p1, p2, p3, p4)
 		-- upvalues: cryo (ref), t (ref)
 		local t_1 = {
 			getPlatform = function()
-				-- upvalues: p3 (ref)
-				return p3 or Enum.Platform.Windows
+				-- upvalues: p4 (ref)
+				return p4 or Enum.Platform.Windows
 			end,
 			isStudio = function()
-				-- upvalues: p0 (ref)
-				return p0 or false
+				-- upvalues: p1 (ref)
+				return p1 or false
 			end,
 			isThirdPartyPurchaseAllowed = function()
-				-- upvalues: p2 (write)
-				return p2.PermissionsServiceIsThirdPartyPurchaseAllowed
+				-- upvalues: p3 (write)
+				return p3.PermissionsServiceIsThirdPartyPurchaseAllowed
 			end,
 			getLuaUseThirdPartyPermissions = function()
-				-- upvalues: p2 (write)
-				local luaUseThirdPartyPermissions = p2.LuaUseThirdPartyPermissions
+				-- upvalues: p3 (write)
+				local luaUseThirdPartyPermissions = p3.LuaUseThirdPartyPermissions
 				
 				return luaUseThirdPartyPermissions == nil or luaUseThirdPartyPermissions
 			end,
 			getFlagBypassThirdPartySettingForRobloxPurchase = function()
-				-- upvalues: p2 (write)
-				return p2.BypassThirdPartySettingForRobloxPurchase
+				-- upvalues: p3 (write)
+				return p3.BypassThirdPartySettingForRobloxPurchase
 			end,
 			getFlagRestrictSales2 = function()
-				-- upvalues: p2 (write)
-				return p2.RestrictSales2
+				-- upvalues: p3 (write)
+				return p3.RestrictSales2
 			end,
 			getFlagOrder66 = function()
-				-- upvalues: p2 (write)
-				return p2.Order66
+				-- upvalues: p3 (write)
+				return p3.Order66
 			end,
 			isTenFootInterface = function()
-				-- upvalues: p1 (ref)
-				return p1
+				-- upvalues: p2 (ref)
+				return p2
 			end,
 			getFFlagDisableRobuxUpsell = function()
-				-- upvalues: p2 (write)
-				return p2.DisableRobuxUpsell
+				-- upvalues: p3 (write)
+				return p3.DisableRobuxUpsell
 			end
 		}
-		p2 = cryo.Dictionary.join(t, p2 or {})
+		p3 = cryo.Dictionary.join(t, p3 or {})
 		
-		local function _(p4, p5)
-			return if p4 == nil then p5 else p4
+		local function _(p5, p6)
+			return if p5 == nil then p6 else p5
 		end
 		
 		return t_1

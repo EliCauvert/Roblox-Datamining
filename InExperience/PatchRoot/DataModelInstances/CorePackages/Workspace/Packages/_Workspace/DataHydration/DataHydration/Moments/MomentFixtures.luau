@@ -36,72 +36,72 @@ local list_6 = {
 	"rbxasset://textures/ui/Moments/Reactions/skull-large.png"
 }
 
-local function _(p0)
-	return Random.new(p0 * 2654435761 + 2026)
+local function _(p1)
+	return Random.new(p1 * 2654435761 + 2026)
 end
 
 local _ = function(p1, p2)
 	return p1[(p2 - 1) % #p1 + 1]
 end
 
-local function makeMomentFeedItem(p3)
+local function makeMomentFeedItem(p1)
 	-- upvalues: list_5 (ref), list (ref), list_1 (ref), list_4 (ref), list_6 (ref), list_3 (ref), list_2 (ref), momentStatus (ref)
 	local t
-	local random = Random.new(p3 * 2654435761 + 2026)
-	local var9 = p3 > 1 and random:NextNumber() < 0.28
-	local var10 = list_5[random:NextInteger(1, #list_5)]
-	local var11 = list[random:NextInteger(1, #list)]
-	local var12 = list_1[random:NextInteger(1, #list_1)]
-	local var13 = random:NextInteger(0, 12)
+	local random = Random.new(p1 * 2654435761 + 2026)
+	local var1 = p1 > 1 and random:NextNumber() < 0.28
+	local var2 = list_5[random:NextInteger(1, #list_5)]
+	local var3 = list[random:NextInteger(1, #list)]
+	local var4 = list_1[random:NextInteger(1, #list_1)]
+	local var5 = random:NextInteger(0, 12)
 	
-	if #list_4 > 0 and (var9 or random:NextNumber() < 0.45) then
+	if #list_4 > 0 and (var1 or random:NextNumber() < 0.45) then
 		t = {}
-		local var15 = list_4
-		t.assetId = var15[(p3 - 1) % #var15 + 1]
-		t.startTime = var13
+		local var6 = list_4
+		t.assetId = var6[(p1 - 1) % #var6 + 1]
+		t.startTime = var5
 	else
 		t = nil
 	end
-	local var18
-	local var16 = if random:NextNumber() < 0.6 then {
+	local var7
+	local var8 = if random:NextNumber() < 0.6 then {
 		{
 			rotation = 0,
 			scale = 1,
 			zIndex = 1,
-			stickerURI = list_6[(p3 - 1) % #list_6 + 1],
+			stickerURI = list_6[(p1 - 1) % #list_6 + 1],
 			position = UDim2.fromScale(random:NextNumber() * 0.6 + 0.2, random:NextNumber() * 0.5 + 0.25),
 			stickerSize = random:NextInteger(50, 200)
 		}
 	} else nil
 	
-	if var9 then
-		local var19 = list_3
-		var18 = var19[(p3 - 1) % #var19 + 1]
+	if var1 then
+		local var9 = list_3
+		var7 = var9[(p1 - 1) % #var9 + 1]
 	else
-		local var17 = list_2
-		var18 = var17[(p3 - 1) % #var17 + 1]
+		local var10 = list_2
+		var7 = var10[(p1 - 1) % #var10 + 1]
 	end
 	return {
 		kind = "moment",
 		moment = {
 			isModerated = false,
-			assetId = var18,
-			creatorId = var12,
-			momentId = `mock-moment-{p3}`,
+			assetId = var7,
+			creatorId = var4,
+			momentId = `mock-moment-{p1}`,
 			status = momentStatus.Public,
 			metadata = {
 				assetTotalDuration = 10,
-				captureType = if var9 then Enum.CaptureType.Screenshot else Enum.CaptureType.Video,
-				description = var10,
-				placeId = var11.placeId,
-				universeId = var11.universeId,
-				edits = { music = t, stickerOverlays = var16 }
+				captureType = if var1 then Enum.CaptureType.Screenshot else Enum.CaptureType.Video,
+				description = var2,
+				placeId = var3.placeId,
+				universeId = var3.universeId,
+				edits = { music = t, stickerOverlays = var8 }
 			},
 			recommendationMetadata = {
 				configName = "MaximizeJoins",
 				locationId = "Trending",
-				feedItemId = `mock-item-{p3}`,
-				tracingId = `mock-trace-{p3}`
+				feedItemId = `mock-item-{p1}`,
+				tracingId = `mock-trace-{p1}`
 			}
 		}
 	}
@@ -109,12 +109,12 @@ end
 
 return {
 	makeMomentFeedItem = makeMomentFeedItem,
-	buildMomentFeedItems = function(p4, p5)
+	buildMomentFeedItems = function(p1, p2)
 		-- upvalues: makeMomentFeedItem (ref)
 		local t = {}
 		
-		for i = 0, p5 - 1 do
-			table.insert(t, makeMomentFeedItem(p4 + i))
+		for i = 0, p2 - 1 do
+			table.insert(t, makeMomentFeedItem(p1 + i))
 		end
 		return t
 	end

@@ -16,24 +16,24 @@ local function readInfiniteScrollPolicy()
 	return if ok then status ~= false else true
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFFlagMomentsNonInfiniteScrollModule (ref), getFIntMomentsNonInfiniteScrollLimitModule (ref), readInfiniteScrollPolicy (ref), createSignal (ref), createComputed (ref)
-	local var5 = getFFlagMomentsNonInfiniteScrollModule()
+	local var1 = getFFlagMomentsNonInfiniteScrollModule()
 	local maxValue = math.max(1, getFIntMomentsNonInfiniteScrollLimitModule())
-	local var7, var8 = createSignal(if var5 then (p0 or readInfiniteScrollPolicy)() else true)
+	local var2, var3 = createSignal(if var1 then (p1 or readInfiniteScrollPolicy)() else true)
 	
 	return {
-		getIsInfiniteScrollEnabled = createComputed(function(p1)
-			-- upvalues: var5 (ref), var7 (ref)
-			return if var5 then var7(p1) else true
+		getIsInfiniteScrollEnabled = createComputed(function(p2)
+			-- upvalues: var1 (ref), var2 (ref)
+			return if var1 then var2(p2) else true
 		end),
 		getMaxMomentsBeforeEndState = createComputed(function(_)
 			-- upvalues: maxValue (ref)
 			return maxValue
 		end),
 		setInfiniteScrollAllowedByPolicy = function(value)
-			-- upvalues: var8 (ref)
-			var8(value)
+			-- upvalues: var3 (ref)
+			var3(value)
 		end
 	}
 end

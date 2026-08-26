@@ -8,41 +8,41 @@ local t = {
 	restingPositionLimit = 0.1
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: signalsModule (ref), otterModule (ref), t (ref)
-	p0 = p0 or 1
-	local var4, var5 = signalsModule.createSignal(p0)
-	local var6, var7 = signalsModule.createSignal(false)
-	local var8, var9 = signalsModule.createSignal(p0 > 0.5)
-	local var10 = otterModule.createSingleMotor(p0)
-	var10:onStep(function(p1)
-		-- upvalues: var5 (ref)
-		var5(p1)
+	p1 = p1 or 1
+	local var1, var2 = signalsModule.createSignal(p1)
+	local var3, var4 = signalsModule.createSignal(false)
+	local var5, var6 = signalsModule.createSignal(p1 > 0.5)
+	local var7 = otterModule.createSingleMotor(p1)
+	var7:onStep(function(p2)
+		-- upvalues: var2 (ref)
+		var2(p2)
 	end)
-	var10:onComplete(function()
-		-- upvalues: var7 (ref)
-		var7(false)
+	var7:onComplete(function()
+		-- upvalues: var4 (ref)
+		var4(false)
 	end)
 	
 	return {
-		getVisibilityRatio = var4,
-		getIsVisible = var8,
-		getIsAnimating = var6,
+		getVisibilityRatio = var1,
+		getIsVisible = var5,
+		getIsAnimating = var3,
 		show = function()
-			-- upvalues: var9 (ref), var7 (ref), var10 (ref), otterModule (copy), t (ref)
-			var9(true)
-			var7(true)
-			var10:setGoal(otterModule.spring(1, t))
+			-- upvalues: var6 (ref), var4 (ref), var7 (ref), otterModule (copy), t (ref)
+			var6(true)
+			var4(true)
+			var7:setGoal(otterModule.spring(1, t))
 		end,
 		hide = function()
-			-- upvalues: var9 (ref), var7 (ref), var10 (ref), otterModule (copy), t (ref)
-			var9(false)
-			var7(true)
-			var10:setGoal(otterModule.spring(0, t))
+			-- upvalues: var6 (ref), var4 (ref), var7 (ref), otterModule (copy), t (ref)
+			var6(false)
+			var4(true)
+			var7:setGoal(otterModule.spring(0, t))
 		end,
 		destroy = function()
-			-- upvalues: var10 (ref)
-			var10:destroy()
+			-- upvalues: var7 (ref)
+			var7:destroy()
 		end
 	}
 end

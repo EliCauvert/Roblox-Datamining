@@ -46,29 +46,29 @@ local t = {
 }
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: messageBus (ref), t (ref)
-	return setmetatable({ messageBus = p0 or messageBus }, t)
+	return setmetatable({ messageBus = p1 or messageBus }, t)
 end
 
 function t:shareText(p1)
 	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_TEXT_DESCRIPTOR, p1)
 end
 
-function t:shareUrl(p2)
-	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_URL_DESCRIPTOR, p2)
+function t:shareUrl(p1)
+	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_URL_DESCRIPTOR, p1)
 end
 
-function t:shareImage(p3)
-	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_IMAGE_DESCRIPTOR, p3)
+function t:shareImage(p1)
+	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_IMAGE_DESCRIPTOR, p1)
 end
 
-function t:shareVideo(p4)
-	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_VIDEO_DESCRIPTOR, p4)
+function t:shareVideo(p1)
+	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_VIDEO_DESCRIPTOR, p1)
 end
 
-function t:setClipboardText(p5)
-	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SET_CLIPBOARD_TEXT_DESCRIPTOR, p5)
+function t:setClipboardText(p1)
+	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SET_CLIPBOARD_TEXT_DESCRIPTOR, p1)
 end
 
 t.default = t.new()

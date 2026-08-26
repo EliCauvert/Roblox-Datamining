@@ -1,8 +1,8 @@
 ﻿local startAttributionOrchestratorModule = require(script.Parent.StartAttributionOrchestrator)
 local getFFlagEnableAdConsentAttributionModule = require(script:FindFirstAncestor("LinkingProtocol").Flags.getFFlagEnableAdConsentAttribution)
 local t = {
-	toAdConsent = function(p0)
-		return p0 == "Enabled" or (if p0 == "Disabled" then false else nil)
+	toAdConsent = function(p1)
+		return p1 == "Enabled" or (if p1 == "Disabled" then false else nil)
 	end
 }
 

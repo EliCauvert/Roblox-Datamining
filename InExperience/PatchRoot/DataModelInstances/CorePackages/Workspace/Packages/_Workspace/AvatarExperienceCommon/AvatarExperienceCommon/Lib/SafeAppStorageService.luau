@@ -3,29 +3,29 @@ local dEV = _G.__DEV__ or false
 local t = {}
 
 return {
-	getItem = function(p0, p1)
+	getItem = function(p1, p2)
 		-- upvalues: dEV (ref), t (write), appStorageService (ref)
-		if dEV or p1 then
-			return t[p0] or ""
+		if dEV or p2 then
+			return t[p1] or ""
 		end
 		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy), p0 (ref)
-			return appStorageService:GetItem(p0)
+			-- upvalues: appStorageService (copy), p1 (ref)
+			return appStorageService:GetItem(p1)
 		end)
 		
-		return if ok then status else t[p0] or ""
+		return if ok then status else t[p1] or ""
 	end,
-	setItem = function(value, p2, p3)
+	setItem = function(value, p1, p2)
 		-- upvalues: dEV (ref), t (write), appStorageService (ref)
-		if dEV or p3 then
-			t[value] = p2
+		if dEV or p2 then
+			t[value] = p1
 			
 			return
 		elseif not pcall(function()
-			-- upvalues: appStorageService (copy), value (ref), p2 (ref)
-			appStorageService:SetItem(value, p2)
+			-- upvalues: appStorageService (copy), value (ref), p1 (ref)
+			appStorageService:SetItem(value, p1)
 		end) then
-			t[value] = p2
+			t[value] = p1
 		end
 	end,
 	flush = function()

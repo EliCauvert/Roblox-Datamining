@@ -12,19 +12,19 @@ local t = {
 		validationEnumsModule.SharedDataMember.innerCagesData
 	}
 }
-local var5 = require(parent.flags.getFIntUGCValidationLeaderVertsNearCageIslandsDistance)() / 10000
+local var1 = require(parent.flags.getFIntUGCValidationLeaderVertsNearCageIslandsDistance)() / 10000
 
-function t.run(p0, p1)
-	-- upvalues: UGCValidationService (ref), eyelashCageUVReferenceValuesModule (ref), var5 (ref), errorSourceStringsModule (ref)
-	if p1.uploadEnum.assetType ~= Enum.AssetType.EyelashAccessory then return end
-	local handle = p1.renderMeshesData.Handle
-	local handle_1 = p1.innerCagesData.Handle
+function t.run(p1, p2)
+	-- upvalues: UGCValidationService (ref), eyelashCageUVReferenceValuesModule (ref), var1 (ref), errorSourceStringsModule (ref)
+	if p2.uploadEnum.assetType ~= Enum.AssetType.EyelashAccessory then return end
+	local handle = p2.renderMeshesData.Handle
+	local handle_1 = p2.innerCagesData.Handle
 	
 	if handle == nil or handle_1 == nil then
 		error("Schema should have ensured data exists for handle")
 	end
-	if not UGCValidationService:ValidateLeaderSkinnedVertsNearCageIslands(handle.editable, handle_1.editable, eyelashCageUVReferenceValuesModule, handle_1.origin, var5) then
-		p0:fail(errorSourceStringsModule.Keys.LeaderVertsNearCageIslands)
+	if not UGCValidationService:ValidateLeaderSkinnedVertsNearCageIslands(handle.editable, handle_1.editable, eyelashCageUVReferenceValuesModule, handle_1.origin, var1) then
+		p1:fail(errorSourceStringsModule.Keys.LeaderVertsNearCageIslands)
 	end
 end
 

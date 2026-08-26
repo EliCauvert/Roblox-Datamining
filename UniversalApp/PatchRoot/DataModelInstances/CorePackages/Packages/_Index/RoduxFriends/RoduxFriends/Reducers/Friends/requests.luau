@@ -9,17 +9,17 @@ local originSourceTypeModule = require(script.originSourceType)
 local orderModule = require(script.order)
 local senderNicknameModule = require(script.senderNickname)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), receivedCountModule (ref), byUserIdModule (ref), mutualFriendsModule (ref), sourceUniverseIdsModule (ref), nextPageCursorModule (ref), sentAtModule (ref), originSourceTypeModule (ref), orderModule (ref), senderNicknameModule (ref)
 	return roduxModule.combineReducers({
-		receivedCount = receivedCountModule(p0),
-		byUserId = byUserIdModule(p0),
-		mutualFriends = mutualFriendsModule(p0),
-		sourceUniverseIds = sourceUniverseIdsModule(p0),
-		nextPageCursor = nextPageCursorModule(p0),
-		sentAt = sentAtModule(p0),
-		originSourceType = originSourceTypeModule(p0),
-		order = orderModule(p0),
-		senderNickname = senderNicknameModule(p0)
+		receivedCount = receivedCountModule(p1),
+		byUserId = byUserIdModule(p1),
+		mutualFriends = mutualFriendsModule(p1),
+		sourceUniverseIds = sourceUniverseIdsModule(p1),
+		nextPageCursor = nextPageCursorModule(p1),
+		sentAt = sentAtModule(p1),
+		originSourceType = originSourceTypeModule(p1),
+		order = orderModule(p1),
+		senderNickname = senderNicknameModule(p1)
 	})
 end

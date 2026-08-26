@@ -5,10 +5,10 @@ local enableSchedulerTracing = require(parent.Shared).ReactFeatureFlags.enableSc
 local subscriberRef = require(script.Parent.Tracing).__subscriberRef
 local var1 = if enableSchedulerTracing then {} else {}
 
-function t.unstable_subscribe(p0)
+function t.unstable_subscribe(p1)
 	-- upvalues: enableSchedulerTracing (ref), var1 (write), object (ref), subscriberRef (ref)
 	if enableSchedulerTracing then
-		var1[p0] = true
+		var1[p1] = true
 		
 		if #object.keys(var1) == 1 then
 			subscriberRef.current = {
@@ -34,13 +34,13 @@ function t.unstable_unsubscribe(p1)
 	end
 end
 
-function onInteractionTraced(p2)
+function onInteractionTraced(p1)
 	-- upvalues: var1 (write)
 	local var2 = false
 	local var3 = nil
 	
 	for i, v in var1 do
-		local ok, status = pcall(i.onInteractionTraced, p2)
+		local ok, status = pcall(i.onInteractionTraced, p1)
 		
 		if not ok and not var2 then
 			var2 = true
@@ -52,13 +52,13 @@ function onInteractionTraced(p2)
 	end
 end
 
-function onInteractionScheduledWorkCompleted(p3)
+function onInteractionScheduledWorkCompleted(p2)
 	-- upvalues: var1 (write)
 	local var4 = false
 	local var5 = nil
 	
 	for i, v in var1 do
-		local ok, status = pcall(i.onInteractionScheduledWorkCompleted, p3)
+		local ok, status = pcall(i.onInteractionScheduledWorkCompleted, p2)
 		
 		if not ok and not var4 then
 			var4 = true
@@ -70,13 +70,13 @@ function onInteractionScheduledWorkCompleted(p3)
 	end
 end
 
-function onWorkScheduled(p4, p5)
+function onWorkScheduled(p3, p4)
 	-- upvalues: var1 (write)
 	local var6 = false
 	local var7 = nil
 	
 	for i, v in var1 do
-		local ok, status = pcall(i.onWorkScheduled, p4, p5)
+		local ok, status = pcall(i.onWorkScheduled, p3, p4)
 		
 		if not ok and not var6 then
 			var6 = true
@@ -88,13 +88,13 @@ function onWorkScheduled(p4, p5)
 	end
 end
 
-function onWorkStarted(p6, p7)
+function onWorkStarted(p5, p6)
 	-- upvalues: var1 (write)
 	local var8 = false
 	local var9 = nil
 	
 	for i, v in var1 do
-		local ok, status = pcall(i.onWorkStarted, p6, p7)
+		local ok, status = pcall(i.onWorkStarted, p5, p6)
 		
 		if not ok and not var8 then
 			var8 = true
@@ -106,13 +106,13 @@ function onWorkStarted(p6, p7)
 	end
 end
 
-function onWorkStopped(p8, p9)
+function onWorkStopped(p7, p8)
 	-- upvalues: var1 (write)
 	local var10 = false
 	local var11 = nil
 	
 	for i, v in var1 do
-		local ok, status = pcall(i.onWorkStopped, p8, p9)
+		local ok, status = pcall(i.onWorkStopped, p7, p8)
 		
 		if not ok and not var10 then
 			var10 = true
@@ -124,13 +124,13 @@ function onWorkStopped(p8, p9)
 	end
 end
 
-function onWorkCanceled(p10, p11)
+function onWorkCanceled(p9, p10)
 	-- upvalues: var1 (write)
 	local var12 = false
 	local var13 = nil
 	
 	for i, v in var1 do
-		local ok, status = pcall(i.onWorkCanceled, p10, p11)
+		local ok, status = pcall(i.onWorkCanceled, p9, p10)
 		
 		if not ok and not var12 then
 			var12 = true

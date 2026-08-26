@@ -6,14 +6,14 @@ local sceneViewModule = require(parent.SceneView)
 local t = { keepVisitedScreensMounted = false }
 local robloxSwitchView = reactModule.Component:extend("RobloxSwitchView")
 
-function robloxSwitchView.getDerivedStateFromProps(p0, p1)
+function robloxSwitchView.getDerivedStateFromProps(p1, p2)
 	-- upvalues: object (ref), t (ref)
-	local state = p0.navigation.state
-	local descriptors = p0.descriptors
+	local state = p1.navigation.state
+	local descriptors = p1.descriptors
 	local t_1 = { [state.routes[state.index].key] = true }
 	
-	if object.assign(table.clone(t), p0.navigationConfig or {}).keepVisitedScreensMounted and p1.visitedScreenKeys then
-		for i in p1.visitedScreenKeys do
+	if object.assign(table.clone(t), p1.navigationConfig or {}).keepVisitedScreensMounted and p2.visitedScreenKeys then
+		for i in p2.visitedScreenKeys do
 			if descriptors[i] ~= nil then
 				t_1[i] = true
 			end
@@ -22,8 +22,8 @@ function robloxSwitchView.getDerivedStateFromProps(p0, p1)
 	return { visitedScreenKeys = t_1 }
 end
 
-function robloxSwitchView.init(p2)
-	p2.state = {}
+function robloxSwitchView.init(p3)
+	p3.state = {}
 end
 
 function robloxSwitchView.render(p3)
@@ -36,7 +36,7 @@ function robloxSwitchView.render(p3)
 	local t = {}
 	
 	for i, v in descriptors do
-		local var6 = i == key
+		local var1 = i == key
 		
 		if visitedScreenKeys[i] == true then
 			t["card_" .. i] = reactModule.createElement("Frame", {
@@ -44,7 +44,7 @@ function robloxSwitchView.render(p3)
 				ClipsDescendants = false,
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 1, 0),
-				Visible = var6
+				Visible = var1
 			}, {
 				Content = reactModule.createElement(sceneViewModule, {
 					component = v.getComponent(),

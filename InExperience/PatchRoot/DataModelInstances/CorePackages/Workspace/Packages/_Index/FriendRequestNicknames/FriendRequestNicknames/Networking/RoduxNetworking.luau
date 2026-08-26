@@ -5,9 +5,9 @@ local httpRequest = require(parent_1.SocialLibraries).httpRequest
 return require(parent_1.RoduxNetworking).config({
 	keyPath = require(parent.Common.Constants).RODUX_KEY .. ".NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2)
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: httpRequest (ref)
-			return httpRequest.requestFunctions.RequestInternal(p0, p1, p2)
+			return httpRequest.requestFunctions.RequestInternal(p1, p2, p3)
 		end,
 		maxRetryCount = game:DefineFastInt("FriendRequestNicknamesMaxHttpRetries", 5)
 	})

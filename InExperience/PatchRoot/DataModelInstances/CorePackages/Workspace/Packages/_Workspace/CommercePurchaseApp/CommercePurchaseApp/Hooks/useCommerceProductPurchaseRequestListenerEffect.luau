@@ -12,26 +12,26 @@ local fFlagAddCommerceErrorsModule = require(commercePurchaseApp.Flags.FFlagAddC
 
 return function()
 	-- upvalues: useDispatch (ref), useSelector (ref), selectPromptStateModule (ref), useLocalization (ref), fFlagAddCommerceErrorsModule (ref), reactModule (ref), commerceService (ref), commercePurchasePromptStateEnumModule (ref), initiateCommercePurchaseFlowModule (ref)
-	local var7 = useDispatch()
-	local var8 = useSelector(selectPromptStateModule)
-	local var9 = useLocalization({
+	local var1 = useDispatch()
+	local var2 = useSelector(selectPromptStateModule)
+	local var3 = useLocalization({
 		genericError = if fFlagAddCommerceErrorsModule then "CoreScripts.CommercePurchasePrompt.ErrorPrompt.Body.ErrorLoading" else "CoreScripts.CommercePurchasePrompt.ErrorPrompt.GenericError"
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), commerceService (copy), var8 (ref), commercePurchasePromptStateEnumModule (copy), initiateCommercePurchaseFlowModule (copy), var9 (ref)
-		local var10 = if var7 then commerceService.PromptCommerceProductPurchaseRequested:Connect(function(p0)
-			-- upvalues: var8 (copy), commercePurchasePromptStateEnumModule (copy), var7 (copy), initiateCommercePurchaseFlowModule (copy), var9 (copy)
-			if var8 == commercePurchasePromptStateEnumModule.None then
-				var7(initiateCommercePurchaseFlowModule(p0, var9.genericError))
+		-- upvalues: var1 (ref), commerceService (copy), var2 (ref), commercePurchasePromptStateEnumModule (copy), initiateCommercePurchaseFlowModule (copy), var3 (ref)
+		local var4 = if var1 then commerceService.PromptCommerceProductPurchaseRequested:Connect(function(p1)
+			-- upvalues: var2 (copy), commercePurchasePromptStateEnumModule (copy), var1 (copy), initiateCommercePurchaseFlowModule (copy), var3 (copy)
+			if var2 == commercePurchasePromptStateEnumModule.None then
+				var1(initiateCommercePurchaseFlowModule(p1, var3.genericError))
 			end
 		end) else nil
 		
 		return function()
-			-- upvalues: var10 (write)
-			if var10 then
-				var10:Disconnect()
-				var10 = nil
+			-- upvalues: var4 (write)
+			if var4 then
+				var4:Disconnect()
+				var4 = nil
 			end
 		end
-	end, { var7, var9 })
+	end, { var1, var3 })
 end

@@ -10,102 +10,102 @@ local _ = require(foundation.Providers.Responsive.ResponsiveContext)
 local useResponsiveModule = require(foundation.Providers.Responsive.useResponsive)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 
-local function _(p0, p1)
-	local var6 = p0.order[#p0.order]
+local function _(p1, p2)
+	local var1 = p1.order[#p1.order]
 	
-	for i, v in p0.order do
-		if p1 <= p0.widths[v] then
-			var6 = v
+	for i, v in p1.order do
+		if p2 <= p1.widths[v] then
+			var1 = v
 			
-			return var6
+			return var1
 		end
 	end
-	return var6
+	return var1
 end
 
-local _ = function(p2, p3)
+local _ = function(p3, p4)
 	-- upvalues: dashModule (ref)
-	return dashModule.findIndex(p2.order, function(p4)
-		-- upvalues: p3 (ref)
-		return p4 == p3
+	return dashModule.findIndex(p3.order, function(p5)
+		-- upvalues: p4 (ref)
+		return p5 == p4
 	end)
 end
 
-local _ = function(p5, p6, p7, p8)
+local _ = function(p3, p4, p5, p6)
 	-- upvalues: dashModule (ref)
-	return if p8 then if p7 == p8 then false elseif dashModule.findIndex(p5.order, function(p9)
-		-- upvalues: p8 (ref)
-		return p9 == p8
-	end) < dashModule.findIndex(p5.order, function(p10)
-		-- upvalues: p7 (ref)
-		return p10 == p7
-	end) then p5.widths[p8] + 5 < p6 else p6 < p5.widths[p7] - 5 else true
+	return if p6 then if p5 == p6 then false elseif dashModule.findIndex(p3.order, function(p7)
+		-- upvalues: p6 (ref)
+		return p7 == p6
+	end) < dashModule.findIndex(p3.order, function(p7)
+		-- upvalues: p5 (ref)
+		return p7 == p5
+	end) then p3.widths[p6] + 5 < p4 else p4 < p3.widths[p5] - 5 else true
 end
 
-return function(p11, p12)
+return function(p3, p4)
 	-- upvalues: withDefaultsModule (ref), constantsModule (ref), useResponsiveModule (ref), reactModule (ref), usePrevious (ref), dashModule (ref), instance (ref)
-	local var7 = withDefaultsModule(p12 or {}, { throttleTime = constantsModule.DEFAULT_DELAY_TIME })
+	local var2 = withDefaultsModule(p4 or {}, { throttleTime = constantsModule.DEFAULT_DELAY_TIME })
 	local breakpoint = useResponsiveModule().config.breakpoint
-	local var8, var9 = reactModule.useState(Vector2.zero)
-	local x = var8.X
-	local var10 = breakpoint.order[#breakpoint.order]
+	local var3, var4 = reactModule.useState(Vector2.zero)
+	local x = var3.X
+	local var5 = breakpoint.order[#breakpoint.order]
 	
 	for i, v in breakpoint.order do
 		if x <= breakpoint.widths[v] then
-			var10 = v
+			var5 = v
 			break
 		end
 	end
-	var11, var10 = reactModule.useState(var10)
-	local var12 = usePrevious(var11)
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: dashModule (copy), var9 (ref), var7 (ref)
-		return dashModule.throttle(var9, var7.throttleTime, { leading = true, trailing = true })
-	end, { var7.throttleTime })
+	var11, var10 = reactModule.useState(var5)
+	local var6 = usePrevious(var11)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: dashModule (copy), var4 (ref), var2 (ref)
+		return dashModule.throttle(var4, var2.throttleTime, { leading = true, trailing = true })
+	end, { var2.throttleTime })
 	reactModule.useEffect(function()
-		-- upvalues: p11 (ref), instance (copy), var13 (ref), var9 (ref)
-		local var14 = nil
+		-- upvalues: p3 (ref), instance (copy), var7 (ref), var4 (ref)
+		local var8 = nil
 		
-		if p11 then
-			var14 = instance.GetPropertyChangedSignal(p11, "AbsoluteSize"):Connect(function()
-				-- upvalues: var13 (copy), p11 (copy)
-				var13(p11.AbsoluteSize)
+		if p3 then
+			var8 = instance.GetPropertyChangedSignal(p3, "AbsoluteSize"):Connect(function()
+				-- upvalues: var7 (copy), p3 (copy)
+				var7(p3.AbsoluteSize)
 			end)
-			var9(p11.AbsoluteSize)
+			var4(p3.AbsoluteSize)
 		end
 		return function()
-			-- upvalues: var14 (write)
-			if var14 then
-				var14:Disconnect()
+			-- upvalues: var8 (write)
+			if var8 then
+				var8:Disconnect()
 			end
 		end
-	end, { p11 })
+	end, { p3 })
 	reactModule.useEffect(function()
-		-- upvalues: breakpoint (ref), var8 (ref), var10 (ref), var12 (ref), dashModule (copy), var10 (ref)
-		local var16
-		local var15 = breakpoint
-		local x = var8.X
+		-- upvalues: breakpoint (ref), var3 (ref), var5 (ref), var6 (ref), dashModule (copy), var5 (ref)
+		local var8
+		local var9 = breakpoint
+		local x = var3.X
 		
-		if not var12 then
-			var16 = true
-		elseif var10 == var12 then
-			var16 = false
-		elseif dashModule.findIndex(var15.order, function(p13)
-			-- upvalues: var12 (ref)
-			return p13 == var12
-		end) < dashModule.findIndex(var15.order, function(p14)
-			-- upvalues: var10 (ref)
-			return p14 == var10
+		if not var6 then
+			var8 = true
+		elseif var5 == var6 then
+			var8 = false
+		elseif dashModule.findIndex(var9.order, function(p5)
+			-- upvalues: var6 (ref)
+			return p5 == var6
+		end) < dashModule.findIndex(var9.order, function(p5)
+			-- upvalues: var5 (ref)
+			return p5 == var5
 		end) then
-			var16 = var15.widths[var12] + 5 < x
-			var16 = nil
+			var8 = var9.widths[var6] + 5 < x
+			var8 = nil
 		else
-			var16 = x < var15.widths[var10] - 5
+			var8 = x < var9.widths[var5] - 5
 		end
-		if var16 then
-			var10(var10)
+		if var8 then
+			var5(var5)
 		end
-	end, { breakpoint, var8.X, var10, var12 })
+	end, { breakpoint, var3.X, var5, var6 })
 	
-	return var11, var8
+	return var11, var3
 end

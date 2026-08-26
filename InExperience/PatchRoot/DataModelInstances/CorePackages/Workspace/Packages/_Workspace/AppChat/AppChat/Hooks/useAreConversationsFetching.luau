@@ -6,8 +6,8 @@ local appChatNetworkingModule = require(parent.AppChatNetworking)
 
 return function()
 	-- upvalues: useSelector (ref), appChatNetworkingModule (ref), roduxNetworkingModule (ref)
-	return useSelector(function(p0)
+	return useSelector(function(p1)
 		-- upvalues: appChatNetworkingModule (copy), roduxNetworkingModule (copy)
-		return appChatNetworkingModule.rodux.GetUserConversations.getStatus(p0, 1) == roduxNetworkingModule.Enum.NetworkStatus.Fetching
+		return appChatNetworkingModule.rodux.GetUserConversations.getStatus(p1, 1) == roduxNetworkingModule.Enum.NetworkStatus.Fetching
 	end)
 end

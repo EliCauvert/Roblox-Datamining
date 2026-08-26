@@ -40,38 +40,38 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.init(p0)
+function name.init(p1)
 	-- upvalues: roactModule (ref), getEnableCondenseRobuxUpsellModule (ref), constantsModule (ref)
-	p0.contentRef = roactModule.createRef()
-	p0.state = {
+	p1.contentRef = roactModule.createRef()
+	p1.state = {
 		isCondensed = false,
 		contentSize = Vector2.new(0, 0),
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p0.validateCondensedCondition(p1)
-		-- upvalues: getEnableCondenseRobuxUpsellModule (copy), constantsModule (copy), p0 (ref)
+	function p0.validateCondensedCondition(p2)
+		-- upvalues: getEnableCondenseRobuxUpsellModule (copy), constantsModule (copy), p1 (ref)
 		if not getEnableCondenseRobuxUpsellModule() then return end
-		local var16 = p1.AbsoluteSize.Y + constantsModule.MODAL_HEIGHT_WITHOUT_CONTENT + constantsModule.MODAL_NORMAL_SECTION_PADDING * 2 + constantsModule.MODAL_NORMAL_BUTTON_HEIGHT * 2
+		local var1 = p2.AbsoluteSize.Y + constantsModule.MODAL_HEIGHT_WITHOUT_CONTENT + constantsModule.MODAL_NORMAL_SECTION_PADDING * 2 + constantsModule.MODAL_NORMAL_BUTTON_HEIGHT * 2
 		
-		if p0.state.isCondensed then
-			p0:setState({
-				isCondensed = p0.props.screenSize.Y < var16 + (constantsModule.MODAL_NORMAL_CONTENT_PADDING - constantsModule.MODAL_CONDENSED_CONTENT_PADDING) * 6 + (constantsModule.MODAL_NORMAL_BUTTON_MARGIN - constantsModule.MODAL_CONDENSED_BUTTON_MARGIN) + (constantsModule.NORMAL_ICON_SIZE - constantsModule.CONDENSED_ICON_SIZE)
+		if p1.state.isCondensed then
+			p1:setState({
+				isCondensed = p1.props.screenSize.Y < var1 + (constantsModule.MODAL_NORMAL_CONTENT_PADDING - constantsModule.MODAL_CONDENSED_CONTENT_PADDING) * 6 + (constantsModule.MODAL_NORMAL_BUTTON_MARGIN - constantsModule.MODAL_CONDENSED_BUTTON_MARGIN) + (constantsModule.NORMAL_ICON_SIZE - constantsModule.CONDENSED_ICON_SIZE)
 			})
 			
 			return
 		end
-		p0:setState({
-			isCondensed = p0.props.screenSize.Y < var16 + constantsModule.MODAL_NORMAL_BUTTON_MARGIN
+		p1:setState({
+			isCondensed = p1.props.screenSize.Y < var1 + constantsModule.MODAL_NORMAL_BUTTON_MARGIN
 		})
 	end
 	
 	function p0.changeContentSize(p2)
-		-- upvalues: p0 (ref)
-		p0.validateCondensedCondition(p2)
+		-- upvalues: p1 (ref)
+		p1.validateCondensedCondition(p2)
 		
-		if p0.state.contentSize ~= p2.AbsoluteSize then
-			p0:setState({ contentSize = p2.AbsoluteSize })
+		if p1.state.contentSize ~= p2.AbsoluteSize then
+			p1:setState({ contentSize = p2.AbsoluteSize })
 		end
 	end
 end
@@ -84,13 +84,13 @@ function name.didMount(_)
 	end
 end
 
-function name.render(p3)
+function name.render(p1)
 	-- upvalues: sharedFlagsModule (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), fFlagMobilePopularItemBadgingExperimentEnabledModule (ref), multiTextLocalizerModule (ref)
 	return if sharedFlagsModule.FFlagLowCogsBannerExperiment then roactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
-	}, { Alert = p3:renderNewAlert() }) elseif fFlagMobilePopularItemBadgingExperimentEnabledModule then roactModule.createElement(localizationProvider, {
+	}, { Alert = p1:renderNewAlert() }) elseif fFlagMobilePopularItemBadgingExperimentEnabledModule then roactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
-	}, { Alert = p3:renderAlertNewProductDetails() }) else roactModule.createElement(multiTextLocalizerModule, {
+	}, { Alert = p1:renderAlertNewProductDetails() }) else roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
 			InsufficientRobuxTitle = {
 				key = "IAPExperience.RobuxUpsell.Title.InsufficientRobux"
@@ -99,7 +99,7 @@ function name.render(p3)
 			WouldYouBuy = { key = "IAPExperience.RobuxUpsell.Text.WouldYouBuy" },
 			DisclosurePayment = { key = "IAPExperience.RobuxUpsell.Text.DisclosurePayment" },
 			DisclosureTermsURL = {
-				key = if p3.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
+				key = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
 			},
 			TermsOfUse = { key = "IAPExperience.RobuxUpsell.Text.TermsOfUse" },
 			BuyRobuxButton = { key = "IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem" },
@@ -109,31 +109,31 @@ function name.render(p3)
 				key = "IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet"
 			}
 		},
-		render = function(p4)
-			-- upvalues: p3 (ref)
-			return p3:renderAlert(p4)
+		render = function(p2)
+			-- upvalues: p1 (ref)
+			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function name.renderAlert(p5, p6)
+function name.renderAlert(p1, p2)
 	-- upvalues: withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), constantsModule (ref), productDetailsModule (ref), buttonType (ref)
-	local props = p5.props
-	local state = p5.state
+	local props = p1.props
+	local state = p1.state
 	
-	return withStyle(function(p7)
-		-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), p6 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p5 (ref), productDetailsModule (copy), buttonType (copy)
-		local theme = p7.Theme
-		local font = p7.Font
-		local var17 = font.BaseSize * font.Body.RelativeSize
+	return withStyle(function(p3)
+		-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), p2 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p1 (ref), productDetailsModule (copy), buttonType (copy)
+		local theme = p3.Theme
+		local font = p3.Font
+		local var1 = font.BaseSize * font.Body.RelativeSize
 		
 		if getEnableCondenseRobuxUpsellModule() then
-			var17 = if state.isCondensed then var17 * 0.9 else var17
+			var1 = if state.isCondensed then var1 * 0.9 else var1
 		end
-		local var18 = p6.AdditionalRobux:gsub("{robux}", utf8.char(57346) .. tostring(props.itemRobuxCost - props.balanceAmount))
-		local var19 = p6.WouldYouBuy:gsub("{robux}", string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring(Color3.new(math.round(theme.TextEmphasis.Color.R * 255), math.round(theme.TextEmphasis.Color.G * 255), math.round(theme.TextEmphasis.Color.B * 255))), utf8.char(57346), tostring(props.robuxPurchaseAmount)))
-		local parts = string.split(p6.DisclosureTermsURL, "{termsofuse}")
-		local termsOfUse = p6.TermsOfUse
+		local var2 = p2.AdditionalRobux:gsub("{robux}", utf8.char(57346) .. tostring(props.itemRobuxCost - props.balanceAmount))
+		local var3 = p2.WouldYouBuy:gsub("{robux}", string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring(Color3.new(math.round(theme.TextEmphasis.Color.R * 255), math.round(theme.TextEmphasis.Color.G * 255), math.round(theme.TextEmphasis.Color.B * 255))), utf8.char(57346), tostring(props.robuxPurchaseAmount)))
+		local parts = string.split(p2.DisclosureTermsURL, "{termsofuse}")
+		local termsOfUse = p2.TermsOfUse
 		
 		if props.termsOfUseActivated then
 			termsOfUse = "<u>" .. termsOfUse .. "</u>"
@@ -142,9 +142,9 @@ function name.renderAlert(p5, p6)
 			screenSize = props.screenSize,
 			position = props.position,
 			anchorPoint = props.anchorPoint,
-			title = p6.InsufficientRobuxTitle,
+			title = p2.InsufficientRobuxTitle,
 			middleContent = function()
-				-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p5 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var18 (ref), var19 (ref), var17 (write), p6 (copy), parts (ref), termsOfUse (write)
+				-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p1 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var2 (ref), var3 (ref), var1 (write), p2 (copy), parts (ref), termsOfUse (write)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
@@ -152,8 +152,8 @@ function name.renderAlert(p5, p6)
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					contentPadding = if getEnableCondenseRobuxUpsellModule() then UDim.new(0, if state.isCondensed then constantsModule.MODAL_CONDENSED_CONTENT_PADDING else constantsModule.MODAL_NORMAL_CONTENT_PADDING) else UDim.new(0, constantsModule.MODAL_NORMAL_CONTENT_PADDING),
-					[roactModule.Ref] = p5.contentRef,
-					[roactModule.Change.AbsoluteSize] = p5.changeContentSize
+					[roactModule.Ref] = p1.contentRef,
+					[roactModule.Change.AbsoluteSize] = p1.changeContentSize
 				}, {
 					ProductDetails = roactModule.createElement(productDetailsModule, {
 						layoutOrder = 1,
@@ -176,11 +176,11 @@ function name.renderAlert(p5, p6)
 						BackgroundTransparency = 1,
 						RichText = true,
 						TextWrapped = true,
-						Size = UDim2.new(0, p5.state.contentSize.X, 0, 0),
+						Size = UDim2.new(0, p1.state.contentSize.X, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Font = font.Body.Font,
-						Text = if p5.props.isQuest then var18 else var18 .. " " .. var19,
-						TextSize = var17,
+						Text = if p1.props.isQuest then var2 else var2 .. " " .. var19,
+						TextSize = var1,
 						TextColor3 = theme.TextDefault.Color,
 						TextTransparency = theme.TextDefault.Transparency
 					}),
@@ -206,12 +206,12 @@ function name.renderAlert(p5, p6)
 							TextWrapped = true,
 							AutomaticSize = Enum.AutomaticSize.XY,
 							Font = font.Body.Font,
-							Text = if p5.props.isQuest then p6.PurchaseNotAvailableOnHeadSet else p6.DisclosurePayment,
-							TextSize = var17,
+							Text = if p1.props.isQuest then p2.PurchaseNotAvailableOnHeadSet else p2.DisclosurePayment,
+							TextSize = var1,
 							TextColor3 = theme.TextDefault.Color,
 							TextTransparency = theme.TextDefault.Transparency
 						}),
-						DisclosureTermsFrame = if p5.props.isQuest then nil else roactModule.createElement(fitFrameVertical, {
+						DisclosureTermsFrame = if p1.props.isQuest then nil else roactModule.createElement(fitFrameVertical, {
 							LayoutOrder = 2,
 							BackgroundTransparency = 1,
 							width = UDim.new(1, 0),
@@ -226,7 +226,7 @@ function name.renderAlert(p5, p6)
 								AutomaticSize = Enum.AutomaticSize.XY,
 								Font = font.Body.Font,
 								Text = parts[1],
-								TextSize = var17,
+								TextSize = var1,
 								TextColor3 = theme.TextDefault.Color,
 								TextTransparency = theme.TextDefault.Transparency
 							}),
@@ -237,7 +237,7 @@ function name.renderAlert(p5, p6)
 								AutomaticSize = Enum.AutomaticSize.XY,
 								Font = font.Body.Font,
 								Text = termsOfUse,
-								TextSize = var17,
+								TextSize = var1,
 								TextColor3 = theme.TextDefault.Color,
 								TextTransparency = theme.TextDefault.Transparency,
 								Selectable = props.termsOfUseActivated ~= nil,
@@ -249,7 +249,7 @@ function name.renderAlert(p5, p6)
 								AutomaticSize = Enum.AutomaticSize.XY,
 								Font = font.Body.Font,
 								Text = parts[2],
-								TextSize = var17,
+								TextSize = var1,
 								TextColor3 = theme.TextDefault.Color,
 								TextTransparency = theme.TextDefault.Transparency
 							})
@@ -260,12 +260,12 @@ function name.renderAlert(p5, p6)
 			buttonStackInfo = {
 				forcedFillDirection = Enum.FillDirection.Vertical,
 				marginBetween = if getEnableCondenseRobuxUpsellModule() then if state.isCondensed then constantsModule.MODAL_CONDENSED_BUTTON_MARGIN else constantsModule.MODAL_NORMAL_BUTTON_MARGIN else constantsModule.MODAL_NORMAL_BUTTON_MARGIN,
-				buttons = if p5.props.isQuest then {
+				buttons = if p1.props.isQuest then {
 					{
 						props = {
 							isDisabled = props.isDisabled,
 							onActivated = props.cancelPurchaseActivated,
-							text = p6.ButtonCancel,
+							text = p2.ButtonCancel,
 							inputIcon = props.cancelControllerIcon
 						}
 					}
@@ -274,7 +274,7 @@ function name.renderAlert(p5, p6)
 						props = {
 							isDisabled = props.isDisabled,
 							onActivated = props.cancelPurchaseActivated,
-							text = p6.ButtonCancel,
+							text = p2.ButtonCancel,
 							inputIcon = props.cancelControllerIcon
 						}
 					},
@@ -287,7 +287,7 @@ function name.renderAlert(p5, p6)
 							enableInputDelayed = props.enableInputDelayed,
 							delayInputSeconds = props.inputDelaySec,
 							onActivated = props.buyItemActivated,
-							text = if props.enableInputDelayed then p6.LoadingText else p6.BuyRobuxButton,
+							text = if props.enableInputDelayed then p2.LoadingText else p2.BuyRobuxButton,
 							inputIcon = props.buyItemControllerIcon
 						}
 					}
@@ -297,10 +297,10 @@ function name.renderAlert(p5, p6)
 	end)
 end
 
-function name.renderAlertNewProductDetails(p8, _)
+function name.renderAlertNewProductDetails(p1, _)
 	-- upvalues: withLocalization (ref), withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), constantsModule (ref), roactModule (ref), productDetailsNewModule (ref), productDetailsModule (ref), interactiveAlert (ref), fitFrameVertical (ref), buttonType (ref)
-	local props = p8.props
-	local state = p8.state
+	local props = p1.props
+	local state = p1.state
 	
 	return withLocalization({
 		InsufficientRobuxTitle = "IAPExperience.RobuxUpsell.Title.InsufficientRobux",
@@ -314,28 +314,28 @@ function name.renderAlertNewProductDetails(p8, _)
 		PurchaseNotAvialableForQuest = "IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet",
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
 		BadgeText = "IAPExperience.RobuxUpsell.Text.PopularItem",
-		DisclosureTermsURL = if p8.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
-	})(function(p9)
-		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p8 (ref), buttonType (copy)
-		return withStyle(function(p10)
-			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p9 (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p8 (copy), buttonType (copy)
-			local theme = p10.Theme
-			local font = p10.Font
-			local var21 = font.BaseSize * font.Body.RelativeSize
+		DisclosureTermsURL = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
+	})(function(p2)
+		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p1 (ref), buttonType (copy)
+		return withStyle(function(p3)
+			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p2 (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p1 (copy), buttonType (copy)
+			local theme = p3.Theme
+			local font = p3.Font
+			local var1 = font.BaseSize * font.Body.RelativeSize
 			
 			if getEnableCondenseRobuxUpsellModule() then
-				var21 = if state.isCondensed then var21 * 0.9 else var21
+				var1 = if state.isCondensed then var1 * 0.9 else var1
 			end
-			local var22 = p9.AdditionalRobux:gsub("{robux}", utf8.char(57346) .. tostring(props.itemRobuxCost - props.balanceAmount))
-			local var23 = p9.WouldYouBuy:gsub("{robux}", string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring(Color3.new(math.round(theme.TextEmphasis.Color.R * 255), math.round(theme.TextEmphasis.Color.G * 255), math.round(theme.TextEmphasis.Color.B * 255))), utf8.char(57346), tostring(props.robuxPurchaseAmount)))
-			local parts = string.split(p9.DisclosureTermsURL, "{termsofuse}")
-			local termsOfUse = p9.TermsOfUse
+			local var2 = p2.AdditionalRobux:gsub("{robux}", utf8.char(57346) .. tostring(props.itemRobuxCost - props.balanceAmount))
+			local var3 = p2.WouldYouBuy:gsub("{robux}", string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring(Color3.new(math.round(theme.TextEmphasis.Color.R * 255), math.round(theme.TextEmphasis.Color.G * 255), math.round(theme.TextEmphasis.Color.B * 255))), utf8.char(57346), tostring(props.robuxPurchaseAmount)))
+			local parts = string.split(p2.DisclosureTermsURL, "{termsofuse}")
+			local termsOfUse = p2.TermsOfUse
 			
 			if props.termsOfUseActivated then
 				termsOfUse = "<u>" .. termsOfUse .. "</u>"
 			end
-			local var25 = if game.GameId then tostring(game.GameId) else nil
-			local var26 = if props.itemProductId then tostring(props.itemProductId) else nil
+			local var4 = if game.GameId then tostring(game.GameId) else nil
+			local var5 = if props.itemProductId then tostring(props.itemProductId) else nil
 			local t = {
 				layoutOrder = 1,
 				model = props.model,
@@ -345,35 +345,35 @@ function name.renderAlertNewProductDetails(p8, _)
 				itemIconWidth = if getEnableCondenseRobuxUpsellModule() then if state.isCondensed then constantsModule.CONDENSED_ICON_SIZE else nil else nil,
 				itemIconHeight = if getEnableCondenseRobuxUpsellModule() then if state.isCondensed then constantsModule.CONDENSED_ICON_SIZE else nil else nil
 			}
-			local var28 = false
-			local var29 = nil
-			local var30 = nil
-			local var31 = 0
+			local var6 = false
+			local var7 = nil
+			local var8 = nil
+			local var9 = 0
 			
-			if var25 then
-				local var32
+			if var4 then
+				local var10
 				local _ = nil
 				
-				if var28 and var31 ~= 0 then
+				if var6 and var9 ~= 0 then
 					local cloned = table.clone(t)
-					cloned.isPopularItem = var28
-					cloned.catalogSize = var29
-					cloned.salesRank = var30
-					cloned.badgeText = p9.BadgeText
-					cloned.universeId = var25
-					cloned.itemProductId = var26
-					cloned.userVariant = var31
-					var32 = roactModule.createElement(productDetailsNewModule, cloned)
+					cloned.isPopularItem = var6
+					cloned.catalogSize = var7
+					cloned.salesRank = var8
+					cloned.badgeText = p2.BadgeText
+					cloned.universeId = var4
+					cloned.itemProductId = var5
+					cloned.userVariant = var9
+					var10 = roactModule.createElement(productDetailsNewModule, cloned)
 				else
-					var32 = roactModule.createElement(productDetailsModule, t)
+					var10 = roactModule.createElement(productDetailsModule, t)
 				end
 				return roactModule.createElement(interactiveAlert, {
 					screenSize = props.screenSize,
 					position = props.position,
 					anchorPoint = props.anchorPoint,
-					title = p9.NeedMoreRobux,
+					title = p2.NeedMoreRobux,
 					middleContent = function()
-						-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p8 (copy), var32 (write), theme (ref), font (ref), var22 (ref), var23 (ref), var21 (write), p9 (copy), parts (ref), termsOfUse (write), props (copy)
+						-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p1 (copy), var10 (write), theme (ref), font (ref), var2 (ref), var3 (ref), var1 (write), p2 (copy), parts (ref), termsOfUse (write), props (copy)
 						return roactModule.createElement(fitFrameVertical, {
 							BackgroundTransparency = 1,
 							width = UDim.new(1, 0),
@@ -381,10 +381,10 @@ function name.renderAlertNewProductDetails(p8, _)
 							HorizontalAlignment = Enum.HorizontalAlignment.Center,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
 							contentPadding = if getEnableCondenseRobuxUpsellModule() then UDim.new(0, if state.isCondensed then constantsModule.MODAL_CONDENSED_CONTENT_PADDING else constantsModule.MODAL_NORMAL_CONTENT_PADDING) else UDim.new(0, constantsModule.MODAL_NORMAL_CONTENT_PADDING),
-							[roactModule.Ref] = p8.contentRef,
-							[roactModule.Change.AbsoluteSize] = p8.changeContentSize
+							[roactModule.Ref] = p1.contentRef,
+							[roactModule.Change.AbsoluteSize] = p1.changeContentSize
 						}, {
-							ProductDetails = var32,
+							ProductDetails = var10,
 							SimulateMargin = roactModule.createElement("Frame", {
 								BackgroundTransparency = 1,
 								LayoutOrder = 2,
@@ -402,11 +402,11 @@ function name.renderAlertNewProductDetails(p8, _)
 								BackgroundTransparency = 1,
 								RichText = true,
 								TextWrapped = true,
-								Size = UDim2.new(0, p8.state.contentSize.X, 0, 0),
+								Size = UDim2.new(0, p1.state.contentSize.X, 0, 0),
 								AutomaticSize = Enum.AutomaticSize.Y,
 								Font = font.Body.Font,
-								Text = if p8.props.isQuest then var22 else var22 .. " " .. var23,
-								TextSize = var21,
+								Text = if p1.props.isQuest then var2 else var2 .. " " .. var23,
+								TextSize = var1,
 								TextColor3 = theme.TextDefault.Color,
 								TextTransparency = theme.TextDefault.Transparency
 							}),
@@ -432,12 +432,12 @@ function name.renderAlertNewProductDetails(p8, _)
 									TextWrapped = true,
 									AutomaticSize = Enum.AutomaticSize.XY,
 									Font = font.Body.Font,
-									Text = if p8.props.isQuest then p9.PurchaseNotAvailableOnHeadSet else p9.DisclosurePayment,
-									TextSize = var21,
+									Text = if p1.props.isQuest then p2.PurchaseNotAvailableOnHeadSet else p2.DisclosurePayment,
+									TextSize = var1,
 									TextColor3 = theme.TextDefault.Color,
 									TextTransparency = theme.TextDefault.Transparency
 								}),
-								DisclosureTermsFrame = if p8.props.isQuest then nil else roactModule.createElement(fitFrameVertical, {
+								DisclosureTermsFrame = if p1.props.isQuest then nil else roactModule.createElement(fitFrameVertical, {
 									LayoutOrder = 2,
 									BackgroundTransparency = 1,
 									width = UDim.new(1, 0),
@@ -452,7 +452,7 @@ function name.renderAlertNewProductDetails(p8, _)
 										AutomaticSize = Enum.AutomaticSize.XY,
 										Font = font.Body.Font,
 										Text = parts[1],
-										TextSize = var21,
+										TextSize = var1,
 										TextColor3 = theme.TextDefault.Color,
 										TextTransparency = theme.TextDefault.Transparency
 									}),
@@ -463,7 +463,7 @@ function name.renderAlertNewProductDetails(p8, _)
 										AutomaticSize = Enum.AutomaticSize.XY,
 										Font = font.Body.Font,
 										Text = termsOfUse,
-										TextSize = var21,
+										TextSize = var1,
 										TextColor3 = theme.TextDefault.Color,
 										TextTransparency = theme.TextDefault.Transparency,
 										Selectable = props.termsOfUseActivated ~= nil,
@@ -475,7 +475,7 @@ function name.renderAlertNewProductDetails(p8, _)
 										AutomaticSize = Enum.AutomaticSize.XY,
 										Font = font.Body.Font,
 										Text = parts[2],
-										TextSize = var21,
+										TextSize = var1,
 										TextColor3 = theme.TextDefault.Color,
 										TextTransparency = theme.TextDefault.Transparency
 									})
@@ -486,12 +486,12 @@ function name.renderAlertNewProductDetails(p8, _)
 					buttonStackInfo = {
 						forcedFillDirection = Enum.FillDirection.Vertical,
 						marginBetween = if getEnableCondenseRobuxUpsellModule() then if state.isCondensed then constantsModule.MODAL_CONDENSED_BUTTON_MARGIN else constantsModule.MODAL_NORMAL_BUTTON_MARGIN else constantsModule.MODAL_NORMAL_BUTTON_MARGIN,
-						buttons = if p8.props.isQuest then {
+						buttons = if p1.props.isQuest then {
 							{
 								props = {
 									isDisabled = props.isDisabled,
 									onActivated = props.cancelPurchaseActivated,
-									text = p9.ButtonCancel,
+									text = p2.ButtonCancel,
 									inputIcon = props.cancelControllerIcon
 								}
 							}
@@ -500,7 +500,7 @@ function name.renderAlertNewProductDetails(p8, _)
 								props = {
 									isDisabled = props.isDisabled,
 									onActivated = props.cancelPurchaseActivated,
-									text = p9.ButtonCancel,
+									text = p2.ButtonCancel,
 									inputIcon = props.cancelControllerIcon
 								}
 							},
@@ -513,7 +513,7 @@ function name.renderAlertNewProductDetails(p8, _)
 									enableInputDelayed = props.enableInputDelayed,
 									delayInputSeconds = props.inputDelaySec,
 									onActivated = props.buyItemActivated,
-									text = if props.enableInputDelayed then p9.LoadingText else p9.BuyRobuxButton,
+									text = if props.enableInputDelayed then p2.LoadingText else p2.BuyRobuxButton,
 									inputIcon = props.buyItemControllerIcon
 								}
 							}
@@ -525,10 +525,10 @@ function name.renderAlertNewProductDetails(p8, _)
 	end)
 end
 
-function name.renderNewAlert(p11)
+function name.renderNewAlert(p1)
 	-- upvalues: withLocalization (ref), withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), constantsModule (ref), productDetailsModule (ref), buttonType (ref)
-	local props = p11.props
-	local state = p11.state
+	local props = p1.props
+	local state = p1.state
 	
 	return withLocalization({
 		InsufficientRobuxTitle = "IAPExperience.RobuxUpsell.Title.InsufficientRobux",
@@ -543,40 +543,40 @@ function name.renderNewAlert(p11)
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
 		BonusBannerV1 = "IAPExperience.RobuxUpsell.Text.BonusBannerV1",
 		BonusBannerInfo = "IAPExperience.RobuxUpsell.Text.BonusBannerInfo",
-		DisclosureTermsURL = if p11.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
-	})(function(p12)
-		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p11 (ref), productDetailsModule (copy), buttonType (copy)
-		return withStyle(function(p13)
-			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p12 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p11 (copy), productDetailsModule (copy), buttonType (copy)
-			local theme = p13.Theme
-			local font = p13.Font
-			local var34 = font.BaseSize * font.Body.RelativeSize
+		DisclosureTermsURL = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
+	})(function(p2)
+		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p1 (ref), productDetailsModule (copy), buttonType (copy)
+		return withStyle(function(p3)
+			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p2 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p1 (copy), productDetailsModule (copy), buttonType (copy)
+			local theme = p3.Theme
+			local font = p3.Font
+			local var1 = font.BaseSize * font.Body.RelativeSize
 			
 			if getEnableCondenseRobuxUpsellModule() then
-				var34 = if state.isCondensed then var34 * 0.9 else var34
+				var1 = if state.isCondensed then var1 * 0.9 else var1
 			end
-			local var35 = font.BaseSize * font.Footer.RelativeSize
-			local var36 = p12.AdditionalRobux:gsub("{robux}", utf8.char(57346) .. tostring(props.itemRobuxCost - props.balanceAmount))
-			local var37 = p12.WouldYouBuy:gsub("{robux}", string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring(Color3.new(math.round(theme.TextEmphasis.Color.R * 255), math.round(theme.TextEmphasis.Color.G * 255), math.round(theme.TextEmphasis.Color.B * 255))), utf8.char(57346), tostring(props.robuxPurchaseAmount)))
-			local parts = string.split(p12.DisclosureTermsURL, "{termsofuse}")
-			local termsOfUse = p12.TermsOfUse
+			local var2 = font.BaseSize * font.Footer.RelativeSize
+			local var3 = p2.AdditionalRobux:gsub("{robux}", utf8.char(57346) .. tostring(props.itemRobuxCost - props.balanceAmount))
+			local var4 = p2.WouldYouBuy:gsub("{robux}", string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring(Color3.new(math.round(theme.TextEmphasis.Color.R * 255), math.round(theme.TextEmphasis.Color.G * 255), math.round(theme.TextEmphasis.Color.B * 255))), utf8.char(57346), tostring(props.robuxPurchaseAmount)))
+			local parts = string.split(p2.DisclosureTermsURL, "{termsofuse}")
+			local termsOfUse = p2.TermsOfUse
 			
 			if props.termsOfUseActivated then
 				termsOfUse = "<u>" .. termsOfUse .. "</u>"
 			end
-			local var39 = ""
+			local var5 = ""
 			
 			if props.robuxPurchaseAmountBeforeBonus ~= nil then
-				var37 = p12.WouldYouBuy:gsub("{robux}", utf8.char(57346) .. "<s>" .. tostring(props.robuxPurchaseAmountBeforeBonus) .. "</s>" .. utf8.char(57346) .. tostring(props.robuxPurchaseAmount))
-				var39 = p12.BonusBannerV1:gsub("{robux}", utf8.char(57346) .. tostring(props.robuxPurchaseAmount - props.robuxPurchaseAmountBeforeBonus))
+				var4 = p2.WouldYouBuy:gsub("{robux}", utf8.char(57346) .. "<s>" .. tostring(props.robuxPurchaseAmountBeforeBonus) .. "</s>" .. utf8.char(57346) .. tostring(props.robuxPurchaseAmount))
+				var5 = p2.BonusBannerV1:gsub("{robux}", utf8.char(57346) .. tostring(props.robuxPurchaseAmount - props.robuxPurchaseAmountBeforeBonus))
 			end
 			return roactModule.createElement(interactiveAlert, {
 				screenSize = props.screenSize,
 				position = props.position,
 				anchorPoint = props.anchorPoint,
-				title = p12.NeedMoreRobux,
+				title = p2.NeedMoreRobux,
 				middleContent = function()
-					-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p11 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var36 (ref), var37 (write), var34 (write), p12 (copy), var35 (ref), parts (ref), termsOfUse (write)
+					-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p1 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var3 (ref), var4 (write), var1 (write), p2 (copy), var2 (ref), parts (ref), termsOfUse (write)
 					return roactModule.createElement(fitFrameVertical, {
 						BackgroundTransparency = 1,
 						BackgroundColor3 = Color3.fromRGB(0, 255, 0),
@@ -585,8 +585,8 @@ function name.renderNewAlert(p11)
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
 						contentPadding = if getEnableCondenseRobuxUpsellModule() then UDim.new(0, if state.isCondensed then constantsModule.MODAL_CONDENSED_CONTENT_PADDING else constantsModule.MODAL_NORMAL_CONTENT_PADDING) else UDim.new(0, constantsModule.MODAL_NORMAL_CONTENT_PADDING),
-						[roactModule.Ref] = p11.contentRef,
-						[roactModule.Change.AbsoluteSize] = p11.changeContentSize
+						[roactModule.Ref] = p1.contentRef,
+						[roactModule.Change.AbsoluteSize] = p1.changeContentSize
 					}, {
 						ProductDetails = roactModule.createElement(productDetailsModule, {
 							layoutOrder = 1,
@@ -609,11 +609,11 @@ function name.renderNewAlert(p11)
 							BackgroundTransparency = 1,
 							RichText = true,
 							TextWrapped = true,
-							Size = UDim2.new(0, p11.state.contentSize.X, 0, 0),
+							Size = UDim2.new(0, p1.state.contentSize.X, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
 							Font = font.Body.Font,
-							Text = if p11.props.isQuest then var36 else var36 .. " " .. var37,
-							TextSize = var34,
+							Text = if p1.props.isQuest then var3 else var3 .. " " .. var37,
+							TextSize = var1,
 							TextColor3 = theme.TextDefault.Color,
 							TextTransparency = theme.TextDefault.Transparency
 						}),
@@ -639,12 +639,12 @@ function name.renderNewAlert(p11)
 								TextWrapped = true,
 								AutomaticSize = Enum.AutomaticSize.XY,
 								Font = font.Body.Font,
-								Text = if p11.props.isQuest then p12.PurchaseNotAvailableOnHeadSet else p12.DisclosurePayment,
-								TextSize = var35,
+								Text = if p1.props.isQuest then p2.PurchaseNotAvailableOnHeadSet else p2.DisclosurePayment,
+								TextSize = var2,
 								TextColor3 = theme.TextDefault.Color,
 								TextTransparency = theme.TextDefault.Transparency
 							}),
-							DisclosureTermsFrame = if p11.props.isQuest then nil else roactModule.createElement(fitFrameVertical, {
+							DisclosureTermsFrame = if p1.props.isQuest then nil else roactModule.createElement(fitFrameVertical, {
 								LayoutOrder = 2,
 								BackgroundTransparency = 1,
 								width = UDim.new(1, 0),
@@ -659,7 +659,7 @@ function name.renderNewAlert(p11)
 									AutomaticSize = Enum.AutomaticSize.XY,
 									Font = font.Body.Font,
 									Text = parts[1],
-									TextSize = var35,
+									TextSize = var2,
 									TextColor3 = theme.TextDefault.Color,
 									TextTransparency = theme.TextDefault.Transparency
 								}),
@@ -670,7 +670,7 @@ function name.renderNewAlert(p11)
 									AutomaticSize = Enum.AutomaticSize.XY,
 									Font = font.Body.Font,
 									Text = termsOfUse,
-									TextSize = var35,
+									TextSize = var2,
 									TextColor3 = theme.TextDefault.Color,
 									TextTransparency = theme.TextDefault.Transparency,
 									Selectable = props.termsOfUseActivated ~= nil,
@@ -682,7 +682,7 @@ function name.renderNewAlert(p11)
 									AutomaticSize = Enum.AutomaticSize.XY,
 									Font = font.Body.Font,
 									Text = parts[2],
-									TextSize = var35,
+									TextSize = var2,
 									TextColor3 = theme.TextDefault.Color,
 									TextTransparency = theme.TextDefault.Transparency
 								})
@@ -693,12 +693,12 @@ function name.renderNewAlert(p11)
 				buttonStackInfo = {
 					forcedFillDirection = Enum.FillDirection.Vertical,
 					marginBetween = if getEnableCondenseRobuxUpsellModule() then if state.isCondensed then constantsModule.MODAL_CONDENSED_BUTTON_MARGIN else constantsModule.MODAL_NORMAL_BUTTON_MARGIN else constantsModule.MODAL_NORMAL_BUTTON_MARGIN,
-					buttons = if p11.props.isQuest then {
+					buttons = if p1.props.isQuest then {
 						{
 							props = {
 								isDisabled = props.isDisabled,
 								onActivated = props.cancelPurchaseActivated,
-								text = p12.ButtonCancel,
+								text = p2.ButtonCancel,
 								inputIcon = props.cancelControllerIcon
 							}
 						}
@@ -707,7 +707,7 @@ function name.renderNewAlert(p11)
 							props = {
 								isDisabled = props.isDisabled,
 								onActivated = props.cancelPurchaseActivated,
-								text = p12.ButtonCancel,
+								text = p2.ButtonCancel,
 								inputIcon = props.cancelControllerIcon
 							}
 						},
@@ -720,32 +720,32 @@ function name.renderNewAlert(p11)
 								enableInputDelayed = props.enableInputDelayed,
 								delayInputSeconds = props.inputDelaySec,
 								onActivated = props.buyItemActivated,
-								text = if props.enableInputDelayed then p12.LoadingText else p12.BuyRobuxButton,
+								text = if props.enableInputDelayed then p2.LoadingText else p2.BuyRobuxButton,
 								inputIcon = props.buyItemControllerIcon
 							}
 						}
 					}
 				},
 				footerContent = function()
-					-- upvalues: p11 (copy), p13 (ref), var39 (write), p12 (copy)
-					return p11:renderFooterExperiment(p13, var39, p12.BonusBannerInfo)
+					-- upvalues: p1 (copy), p3 (ref), var5 (write), p2 (copy)
+					return p1:renderFooterExperiment(p3, var5, p2.BonusBannerInfo)
 				end
 			})
 		end)
 	end)
 end
 
-function name.renderFooterExperiment(p14, p15, p16, p17)
+function name.renderFooterExperiment(p1, p2, p3, p4)
 	-- upvalues: colors (ref), roactModule (ref), fitFrameVertical (ref), fFlagLowCogsBannerInfoIconModule (ref), infoIconWithTooltipModule (ref)
-	local font = p15.Font
+	local font = p2.Font
 	local flint = colors.Flint
 	
-	return if p16 == "" then nil else roactModule.createElement(fitFrameVertical, {
+	return if p3 == "" then nil else roactModule.createElement(fitFrameVertical, {
 		BackgroundTransparency = 1,
 		width = UDim.new(1, 0),
 		margin = { top = 0, bottom = -24, left = -24, right = -24 },
-		[roactModule.Ref] = p14.footerRef,
-		[roactModule.Change.AbsoluteSize] = p14.changeFooterSize
+		[roactModule.Ref] = p1.footerRef,
+		[roactModule.Change.AbsoluteSize] = p1.changeFooterSize
 	}, {
 		Banner = roactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
@@ -773,15 +773,15 @@ function name.renderFooterExperiment(p14, p15, p16, p17)
 					TextWrapped = true,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Font = font.Footer.Font,
-					Text = p16,
+					Text = p3,
 					TextSize = font.BaseSize * font.Footer.RelativeSize,
 					TextColor3 = flint
 				}),
 				InfoIcon = if fFlagLowCogsBannerInfoIconModule then infoIconWithTooltipModule({
 					layoutOrder = 2,
-					text = p17,
+					text = p4,
 					color = flint,
-					eventActivated = p14.bonusBannerInfoIconStateChange
+					eventActivated = p1.bonusBannerInfoIconStateChange
 				}) else nil
 			})
 		})

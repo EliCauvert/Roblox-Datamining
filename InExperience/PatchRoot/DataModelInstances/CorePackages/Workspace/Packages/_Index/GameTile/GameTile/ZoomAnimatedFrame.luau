@@ -2,40 +2,40 @@
 local reactModule = require(parent.React)
 local otterModule = require(parent.Otter)
 
-function ZoomAnimatedFrame(p0)
+function ZoomAnimatedFrame(p1)
 	-- upvalues: reactModule (ref), otterModule (ref)
-	local isZoomEnabled = p0.isZoomEnabled
-	local var2 = reactModule.useRef(nil)
+	local isZoomEnabled = p1.isZoomEnabled
+	local var1 = reactModule.useRef(nil)
 	
-	if var2.current == nil then
-		var2.current = otterModule.createSingleMotor(0)
+	if var1.current == nil then
+		var1.current = otterModule.createSingleMotor(0)
 	end
-	assert(var2.current, "zoomMotorRef should always exist; assert only needed for the linter")
-	local var3, var4 = reactModule.useBinding(0)
+	assert(var1.current, "zoomMotorRef should always exist; assert only needed for the linter")
+	local var2, var3 = reactModule.useBinding(0)
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var4 (ref)
-		var2.current:onStep(var4)
+		-- upvalues: var1 (ref), var3 (ref)
+		var1.current:onStep(var3)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), otterModule (copy), isZoomEnabled (ref), p0 (ref)
-		var2.current:setGoal(otterModule.spring(if isZoomEnabled then 1 else 0, { frequency = if p0.reducedMotion then 200 else 6.5 }))
+		-- upvalues: var1 (ref), otterModule (copy), isZoomEnabled (ref), p1 (ref)
+		var1.current:setGoal(otterModule.spring(if isZoomEnabled then 1 else 0, { frequency = if p1.reducedMotion then 200 else 6.5 }))
 	end, { isZoomEnabled })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Position = var3:map(function(p1)
-			-- upvalues: p0 (ref)
-			local var5 = if p1 > 0.9 then 1 else p1
+		Position = var2:map(function(p2)
+			-- upvalues: p1 (ref)
+			local var4 = if p2 > 0.9 then 1 else p2
 			
-			return UDim2.fromOffset(-p0.expansionOffsetX * var5 / 2, -p0.expansionOffsetTop * var5)
+			return UDim2.fromOffset(-p1.expansionOffsetX * var4 / 2, -p1.expansionOffsetTop * var4)
 		end),
-		Size = var3:map(function(p2)
-			-- upvalues: p0 (ref)
-			local var6 = if p2 > 0.9 then 1 else p2
+		Size = var2:map(function(p2)
+			-- upvalues: p1 (ref)
+			local var4 = if p2 > 0.9 then 1 else p2
 			
-			return UDim2.new(1, p0.expansionOffsetX * var6, 1, p0.expansionOffsetTop * var6 + p0.expansionOffsetBottom * var6)
+			return UDim2.new(1, p1.expansionOffsetX * var4, 1, p1.expansionOffsetTop * var4 + p1.expansionOffsetBottom * var4)
 		end)
-	}, p0.children)
+	}, p1.children)
 end
 
 return ZoomAnimatedFrame

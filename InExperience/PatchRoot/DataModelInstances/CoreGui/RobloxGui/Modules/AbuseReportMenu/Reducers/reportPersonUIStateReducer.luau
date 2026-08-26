@@ -3,40 +3,40 @@ local constantsModule = require(abuseReportMenu.Components.Constants)
 local _ = require(abuseReportMenu.Components.Types)
 local playerMenuActions = constantsModule.PlayerMenuActions
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: playerMenuActions (ref), constantsModule (ref)
-	local cloned = table.clone(p0)
-	local type = p1.type
+	local cloned = table.clone(p1)
+	local type = p2.type
 	
 	if type == playerMenuActions.UpdateAbuseReason then
-		cloned.abuseReason = p1.abuseReason
+		cloned.abuseReason = p2.abuseReason
 		
 		return cloned
 	elseif type == playerMenuActions.UpdateComment then
-		cloned.comment = p1.comment
+		cloned.comment = p2.comment
 		
 		return cloned
 	elseif type == playerMenuActions.UpdateMethodOfAbuse then
 		cloned.playerObjects = {}
 		cloned.abuseReason = nil
-		cloned.methodOfAbuse = p1.methodOfAbuse
+		cloned.methodOfAbuse = p2.methodOfAbuse
 		
 		return cloned
 	elseif type == playerMenuActions.UpdateAbuser then
-		cloned.allegedAbuserId = p1.abuseId
-		cloned.allegedAbuser = p1.abuser
+		cloned.allegedAbuserId = p2.abuseId
+		cloned.allegedAbuser = p2.abuser
 		
 		return cloned
 	elseif type == playerMenuActions.UpdatePlayerNameMap then
-		cloned.playerObjects = p1.playerObjects
+		cloned.playerObjects = p2.playerObjects
 		
 		return cloned
 	elseif type == playerMenuActions.SetVoiceEnabled then
-		cloned.isVoiceEnabled = p1.enabled
+		cloned.isVoiceEnabled = p2.enabled
 		
 		return cloned
 	elseif type == playerMenuActions.SetMenuOpenTimestamp then
-		cloned.menuOpenedUnixTimestampMilliseconds = p1.timestamp
+		cloned.menuOpenedUnixTimestampMilliseconds = p2.timestamp
 		
 		return cloned
 	elseif type == playerMenuActions.ClearState then
@@ -44,12 +44,12 @@ return function(p0, p1)
 		
 		return cloned
 	elseif type == playerMenuActions.SetShowModalSelector then
-		cloned.isModalSelectorShown = p1.isShown
-		cloned.modalSelectorCellData = p1.cellData
+		cloned.isModalSelectorShown = p2.isShown
+		cloned.modalSelectorCellData = p2.cellData
 		
 		return cloned
 	elseif type == playerMenuActions.SetPreselectedPlayer then
-		cloned.preselectedPlayer = p1.player
+		cloned.preselectedPlayer = p2.player
 	end
 	return cloned
 end

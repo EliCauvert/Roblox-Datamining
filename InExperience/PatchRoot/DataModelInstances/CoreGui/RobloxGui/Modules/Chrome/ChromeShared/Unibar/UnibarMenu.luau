@@ -39,17 +39,17 @@ local createEffect = require(corePackagesService.Packages.Signals).createEffect
 local constantsModule_1 = require(chromeShared.Parent.Integrations.Party.Constants)
 local isConnectUnibarEnabledModule = require(chromeShared.Parent.Integrations.Connect.isConnectUnibarEnabled)
 local isConnectDropdownEnabledModule = require(chromeShared.Parent.Integrations.Connect.isConnectDropdownEnabled)
-local var21 = if fFlagEnableConsoleExpControls then require(chromeShared.Parent.Parent.TopBar.Components.GamepadConnector) else nil
+local var1 = if fFlagEnableConsoleExpControls then require(chromeShared.Parent.Parent.TopBar.Components.GamepadConnector) else nil
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local panel3DInSpatialUI = nil
 local panelType = nil
-local var22 = nil
+local var2 = nil
 
 if isInExperienceUIVREnabled then
 	local vrSpatialUiModule = require(corePackagesService.Workspace.Packages.VrSpatialUi)
 	panel3DInSpatialUI = vrSpatialUiModule.Panel3DInSpatialUI
 	panelType = vrSpatialUiModule.Constants.PanelType
-	var22 = require(corePackagesService.Workspace.Packages.Observable).ObservableValue.new(true)
+	var2 = require(corePackagesService.Workspace.Packages.Observable).ObservableValue.new(true)
 end
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
@@ -58,18 +58,18 @@ local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFrien
 if not getFFlagChromeCentralizedConfiguration() then
 	function configureUnibar()
 		-- upvalues: fFlagAddMapToNineDot (ref), buildMenuOrderModule (ref), isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), constantsModule_1 (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), constantsModule (ref), guiService (ref), fFlagEnableInExperienceShop (ref)
-		local var27
+		local var3
 		local _ = nil
 		
 		if fFlagAddMapToNineDot then
-			var27 = buildMenuOrderModule()
+			var3 = buildMenuOrderModule()
 		else
-			var27 = { "leaderboard", "emotes", "backpack" }
-			table.insert(var27, "respawn")
-			table.insert(var27, 1, "trust_and_safety")
+			var3 = { "leaderboard", "emotes", "backpack" }
+			table.insert(var3, "respawn")
+			table.insert(var3, 1, "trust_and_safety")
 			
 			if isConnectDropdownEnabledModule() and (not fFlagRemoveFriendsChatUnibarEntrypoints or not argoPartyExperimentation.getIsRenameEnabled() or not fFlagExpChatCanShowFriendsTab) then
-				table.insert(var27, 1, "connect_dropdown")
+				table.insert(var3, 1, "connect_dropdown")
 			end
 		end
 		local list = { "nine_dot", "chat", "toggle_mic_mute" }
@@ -97,23 +97,23 @@ if not getFFlagChromeCentralizedConfiguration() then
 		end
 		if not fFlagAddMapToNineDot then
 			if not isInExperienceUIVREnabled then
-				table.insert(var27, 2, "camera_entrypoint")
-				table.insert(var27, 2, "selfie_view")
+				table.insert(var3, 2, "camera_entrypoint")
+				table.insert(var3, 2, "selfie_view")
 			elseif not isSpatial() then
-				table.insert(var27, 2, "camera_entrypoint")
-				table.insert(var27, 2, "selfie_view")
+				table.insert(var3, 2, "camera_entrypoint")
+				table.insert(var3, 2, "selfie_view")
 			end
 			if fFlagEnableInExperienceAvatarSwitcher then
-				table.insert(var27, 3, constantsModule.AVATAR_SWITCHER_ID)
+				table.insert(var3, 3, constantsModule.AVATAR_SWITCHER_ID)
 			end
 			if not isSpatial() and not guiService:IsTenFootInterface() then
-				table.insert(var27, 4, "music_entrypoint")
+				table.insert(var3, 4, "music_entrypoint")
 			end
 			if fFlagEnableInExperienceShop then
-				table.insert(var27, 2, constantsModule.IN_EXPERIENCE_SHOP_ID)
+				table.insert(var3, 2, constantsModule.IN_EXPERIENCE_SHOP_ID)
 			end
 		end
-		serviceModule:configureSubMenu("nine_dot", var27)
+		serviceModule:configureSubMenu("nine_dot", var3)
 	end
 	
 	configureUnibar()
@@ -122,15 +122,15 @@ if not getFFlagChromeCentralizedConfiguration() then
 		require(script.Parent.Parent.Shortcuts.ConfigureShortcuts)()
 	end
 end
-function IconDivider(p0)
+function IconDivider(p1)
 	-- upvalues: useStyle (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref)
-	local var30 = useStyle()
+	local var3 = useStyle()
 	local _ = nil
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Position = p0.position,
+		Position = p1.position,
 		Size = UDim2.new(0, constantsModule.DIVIDER_CELL_WIDTH, 1, 0)
 	}, {
 		DividerBar = reactModule.createElement("Frame", {
@@ -138,34 +138,34 @@ function IconDivider(p0)
 			Position = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_DIVIDER_POSITION else constantsModule.ICON_DIVIDER_POSITION,
 			AnchorPoint = Vector2.new(0, 0.5),
 			Size = constantsModule.ICON_DIVIDER_SIZE,
-			BackgroundColor3 = var30.Theme.Divider.Color,
-			BackgroundTransparency = if p0.toggleTransition then p0.toggleTransition:map(function(p1)
-				-- upvalues: var30 (ref)
-				return var30.Theme.Divider.Transparency + (1 - p1) * (1 - var30.Theme.Divider.Transparency)
-			end) else var30.Theme.Divider.Transparency,
-			Visible = p0.visible or true
+			BackgroundColor3 = var3.Theme.Divider.Color,
+			BackgroundTransparency = if p1.toggleTransition then p1.toggleTransition:map(function(p2)
+				-- upvalues: var3 (ref)
+				return var3.Theme.Divider.Transparency + (1 - p2) * (1 - var3.Theme.Divider.Transparency)
+			end) else var3.Theme.Divider.Transparency,
+			Visible = p1.visible or true
 		})
 	})
 end
 
-local function _(p2, p3)
+local function _(p1, p2)
 	-- upvalues: constantsModule (ref)
-	return p2.current:FindFirstChild(constantsModule.ICON_NAME_PREFIX .. tostring(p3), true)
+	return p1.current:FindFirstChild(constantsModule.ICON_NAME_PREFIX .. tostring(p2), true)
 end
 
-function AnimationStateHelper(p4)
+function AnimationStateHelper(p1)
 	-- upvalues: useObservableValueModule (ref), serviceModule (ref), reactModule (ref), fFlagEnableConsoleExpControls (ref), contextActionService (ref), guiService (ref), constantsModule (ref), fFlagUnibarMenuOpenSubmenu (ref), reactOtterModule (ref), getFIntIconSelectionTimeout (ref)
-	local var31 = useObservableValueModule(serviceModule:currentSubMenu())
-	local var32 = useObservableValueModule(serviceModule:selectedItem())
-	local var33 = useObservableValueModule(serviceModule:inFocusNav())
+	local var3 = useObservableValueModule(serviceModule:currentSubMenu())
+	local var4 = useObservableValueModule(serviceModule:selectedItem())
+	local var5 = useObservableValueModule(serviceModule:inFocusNav())
 	reactModule.useEffect(function()
-		-- upvalues: var33 (ref), fFlagEnableConsoleExpControls (copy), contextActionService (copy), serviceModule (copy), guiService (copy), p4 (ref), var32 (ref), constantsModule (copy), fFlagUnibarMenuOpenSubmenu (copy)
-		if var33 then
+		-- upvalues: var5 (ref), fFlagEnableConsoleExpControls (copy), contextActionService (copy), serviceModule (copy), guiService (copy), p1 (ref), var4 (ref), constantsModule (copy), fFlagUnibarMenuOpenSubmenu (copy)
+		if var5 then
 			if not fFlagEnableConsoleExpControls then
-				contextActionService:BindCoreAction("RBXEscapeUnibar", function(_, p5, _)
+				contextActionService:BindCoreAction("RBXEscapeUnibar", function(_, p2, _)
 					-- upvalues: fFlagEnableConsoleExpControls (copy), serviceModule (copy), guiService (copy)
 					if fFlagEnableConsoleExpControls then
-						if p5 == Enum.UserInputState.End then
+						if p2 == Enum.UserInputState.End then
 							serviceModule:disableFocusNav()
 							guiService.SelectedCoreObject = nil
 							
@@ -177,11 +177,11 @@ function AnimationStateHelper(p4)
 				end, false, Enum.KeyCode.ButtonB)
 			end
 			if fFlagEnableConsoleExpControls then
-				if not p4.menuFrameRef.current then return end
-				local var34 = p4.menuFrameRef.current:FindFirstChild(constantsModule.ICON_NAME_PREFIX .. tostring(var32), true)
+				if not p1.menuFrameRef.current then return end
+				local var6 = p1.menuFrameRef.current:FindFirstChild(constantsModule.ICON_NAME_PREFIX .. tostring(var4), true)
 				
-				if var34 then
-					guiService.SelectedCoreObject = var34
+				if var6 then
+					guiService.SelectedCoreObject = var6
 					
 					return
 				elseif fFlagUnibarMenuOpenSubmenu then
@@ -192,330 +192,330 @@ function AnimationStateHelper(p4)
 					
 					return
 				else
-					guiService:Select(p4.menuFrameRef.current)
+					guiService:Select(p1.menuFrameRef.current)
 					
 					return
 				end
-			elseif p4.menuFrameRef.current then
-				guiService:Select(p4.menuFrameRef.current)
+			elseif p1.menuFrameRef.current then
+				guiService:Select(p1.menuFrameRef.current)
 				
 				return
 			end
 		else
 			contextActionService:UnbindCoreAction("RBXEscapeUnibar")
 			
-			if guiService.SelectedCoreObject and p4.menuFrameRef.current:IsAncestorOf(guiService.SelectedCoreObject) then
+			if guiService.SelectedCoreObject and p1.menuFrameRef.current:IsAncestorOf(guiService.SelectedCoreObject) then
 				guiService.SelectedCoreObject = nil
 			end
 		end
-	end, { var33 })
+	end, { var5 })
 	reactModule.useEffect(function()
-		-- upvalues: var31 (ref), fFlagUnibarMenuOpenSubmenu (copy), var33 (ref), guiService (copy), p4 (ref), reactOtterModule (copy), constantsModule (copy)
-		if var31 ~= "nine_dot" then
-			p4.setToggleSubmenuTransition(reactOtterModule.spring(0, constantsModule.MENU_ANIMATION_SPRING))
+		-- upvalues: var3 (ref), fFlagUnibarMenuOpenSubmenu (copy), var5 (ref), guiService (copy), p1 (ref), reactOtterModule (copy), constantsModule (copy)
+		if var3 ~= "nine_dot" then
+			p1.setToggleSubmenuTransition(reactOtterModule.spring(0, constantsModule.MENU_ANIMATION_SPRING))
 			
 			return
-		elseif fFlagUnibarMenuOpenSubmenu and var33 then
-			guiService:Select(p4.subMenuHostRef.current)
+		elseif fFlagUnibarMenuOpenSubmenu and var5 then
+			guiService:Select(p1.subMenuHostRef.current)
 		end
-		p4.setToggleSubmenuTransition(reactOtterModule.spring(1, constantsModule.MENU_ANIMATION_SPRING))
-	end, { var31 })
+		p1.setToggleSubmenuTransition(reactOtterModule.spring(1, constantsModule.MENU_ANIMATION_SPRING))
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableConsoleExpControls (copy), var31 (ref), var32 (ref), getFIntIconSelectionTimeout (copy), p4 (ref), constantsModule (copy), guiService (copy)
-		if fFlagEnableConsoleExpControls and var31 == var32 then
+		-- upvalues: fFlagEnableConsoleExpControls (copy), var3 (ref), var4 (ref), getFIntIconSelectionTimeout (copy), p1 (ref), constantsModule (copy), guiService (copy)
+		if fFlagEnableConsoleExpControls and var3 == var4 then
 			return
 		end
 		coroutine.resume(coroutine.create(function()
-			-- upvalues: getFIntIconSelectionTimeout (copy), p4 (copy), var32 (copy), fFlagEnableConsoleExpControls (copy), constantsModule (copy), guiService (copy)
-			local var35 = 0
-			while var35 < getFIntIconSelectionTimeout() do
-				var35 += 1
+			-- upvalues: getFIntIconSelectionTimeout (copy), p1 (copy), var4 (copy), fFlagEnableConsoleExpControls (copy), constantsModule (copy), guiService (copy)
+			local var6 = 0
+			while var6 < getFIntIconSelectionTimeout() do
+				var6 += 1
 				task.wait()
 				
-				if not p4.menuFrameRef.current or not var32 then continue end
-				local var36 = if fFlagEnableConsoleExpControls then p4.menuFrameRef.current:FindFirstChild(constantsModule.ICON_NAME_PREFIX .. tostring(var32), true) else p4.menuFrameRef.current:FindFirstChild("IconHitArea_" .. var32, true)
+				if not p1.menuFrameRef.current or not var4 then continue end
+				local var7 = if fFlagEnableConsoleExpControls then p1.menuFrameRef.current:FindFirstChild(constantsModule.ICON_NAME_PREFIX .. tostring(var4), true) else p1.menuFrameRef.current:FindFirstChild("IconHitArea_" .. var32, true)
 				
-				if not var36 then continue end
-				guiService.SelectedCoreObject = var36
+				if not var7 then continue end
+				guiService.SelectedCoreObject = var7
 				
 				return
 			end
 		end))
 	end, {
-		var32,
-		if fFlagEnableConsoleExpControls then var31 else nil
+		var4,
+		if fFlagEnableConsoleExpControls then var3 else nil
 	})
 	
 	return nil
 end
 
-function linearInterpolation(p6, p7, p8)
-	return p6 * (1 - p8) + p7 * p8
+function linearInterpolation(p2, p3, p4)
+	return p2 * (1 - p4) + p3 * p4
 end
 
-function IconPositionBinding(p9, p10, p11, p12, p13, p14, p15, p16, p17)
+function IconPositionBinding(p2, p3, p4, p5, p6, p7, p8, p9, p10)
 	-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref)
 	local _ = nil
-	local var37 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().UNIBAR_END_PADDING else constantsModule.UNIBAR_END_PADDING
+	local var6 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().UNIBAR_END_PADDING else constantsModule.UNIBAR_END_PADDING
 	
-	return reactModule.joinBindings({ p9, p13, p14 }):map(function(p18)
-		-- upvalues: p17 (ref), p11 (ref), p10 (ref), p12 (ref), p16 (ref), p15 (ref), var37 (write)
-		local var38 = if p16 and not p15 then p12 - p18[3] else p12
+	return reactModule.joinBindings({ p2, p6, p7 }):map(function(p11)
+		-- upvalues: p10 (ref), p4 (ref), p3 (ref), p5 (ref), p9 (ref), p8 (ref), var6 (write)
+		local var7 = if p9 and not p8 then p5 - p11[3] else p5
 		
-		return UDim2.new(0, var37 + var38 + ((if p17.current then linearInterpolation(p11, p10, p18[2]) else linearInterpolation(p10, p11, p18[2])) - var38) * p18[1], 0, 0)
+		return UDim2.new(0, var6 + var7 + ((if p10.current then linearInterpolation(p4, p3, p11[2]) else linearInterpolation(p3, p4, p11[2])) - var7) * p11[1], 0, 0)
 	end)
 end
 
-local function onUnibarSelectionChanged(p19, _, _, p20)
+local function onUnibarSelectionChanged(p2, _, _, p3)
 	-- upvalues: serviceModule (ref)
-	if not p19:IsAncestorOf(p20) then
+	if not p2:IsAncestorOf(p3) then
 		serviceModule:disableFocusNav()
 	end
 end
 
-function isLeft(p21)
-	return p21 == Enum.HorizontalAlignment.Left
+function isLeft(p2)
+	return p2 == Enum.HorizontalAlignment.Left
 end
 
-function Unibar(p22)
-	-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), stores (ref), useChromeMenuItemsModule (ref), reactOtterModule (ref), serviceModule (ref), fFlagReduceTopBarInsetsWhileHidden (ref), var21 (ref), useMappedObservableValueModule (ref), iconHostModule (ref), createEffect (ref), useStyle (ref), fFlagUnibarMenuOpenSubmenu (ref)
+function Unibar(p2)
+	-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), stores (ref), useChromeMenuItemsModule (ref), reactOtterModule (ref), serviceModule (ref), fFlagReduceTopBarInsetsWhileHidden (ref), var1 (ref), useMappedObservableValueModule (ref), iconHostModule (ref), createEffect (ref), useStyle (ref), fFlagUnibarMenuOpenSubmenu (ref)
 	local ICON_CELL_WIDTH, UNIBAR_END_PADDING
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	
 	if fFlagTokenizeUnibarConstantsWithStyleProvider then
-		local var39 = unibarStyle.use()
-		ICON_CELL_WIDTH = var39.ICON_CELL_WIDTH
-		UNIBAR_END_PADDING = var39.UNIBAR_END_PADDING
+		local var6 = unibarStyle.use()
+		ICON_CELL_WIDTH = var6.ICON_CELL_WIDTH
+		UNIBAR_END_PADDING = var6.UNIBAR_END_PADDING
 	else
 		ICON_CELL_WIDTH = constantsModule.ICON_CELL_WIDTH
 		UNIBAR_END_PADDING = constantsModule.UNIBAR_END_PADDING
 	end
 	local t = {}
-	local var41 = reactModule.useRef({})
-	local var42 = reactModule.useRef(Vector2.zero)
-	local var43 = reactModule.useRef(Vector2.zero)
-	local var44 = if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and stores.GetUILessStore then reactModule.useRef(stores.GetUILessStore(false)) else nil
-	local var45 = false
-	local current = var41.current or {}
-	local var47 = useChromeMenuItemsModule()
-	local var48, var49 = reactOtterModule.useAnimatedBinding(1)
-	local var50, var51 = reactOtterModule.useAnimatedBinding(1)
-	local var52, var53 = reactOtterModule.useAnimatedBinding(0)
-	local var54 = reactModule.useRef(0)
-	local var55, var56 = reactOtterModule.useAnimatedBinding(1)
-	local var57 = reactModule.useRef(false)
-	local var58 = reactModule.useRef(0)
-	local var59, var60 = reactOtterModule.useAnimatedBinding(if serviceModule:currentSubMenu():get() == "nine_dot" then 1 else 0)
+	local var7 = reactModule.useRef({})
+	local var8 = reactModule.useRef(Vector2.zero)
+	local var9 = reactModule.useRef(Vector2.zero)
+	local var10 = if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and stores.GetUILessStore then reactModule.useRef(stores.GetUILessStore(false)) else nil
+	local var11 = false
+	local current = var7.current or {}
+	local var12 = useChromeMenuItemsModule()
+	local var13, var14 = reactOtterModule.useAnimatedBinding(1)
+	local var15, var16 = reactOtterModule.useAnimatedBinding(1)
+	local var17, var18 = reactOtterModule.useAnimatedBinding(0)
+	local var19 = reactModule.useRef(0)
+	local var20, var21 = reactOtterModule.useAnimatedBinding(1)
+	local var22 = reactModule.useRef(false)
+	local var23 = reactModule.useRef(0)
+	local var24, var25 = reactOtterModule.useAnimatedBinding(if serviceModule:currentSubMenu():get() == "nine_dot" then 1 else 0)
 	local t_1 = {}
-	local var62 = 0
-	local var63 = 0
-	local var64 = 0
-	local var65 = 0
+	local var26 = 0
+	local var27 = 0
+	local var28 = 0
+	local var29 = 0
 	local _ = 0
-	local var66 = reactModule.useCallback(function(p23)
-		-- upvalues: var42 (ref), serviceModule (copy), fFlagReduceTopBarInsetsWhileHidden (copy), var43 (ref), fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), var44 (write), var21 (copy), p22 (ref), constantsModule (copy)
+	local var30 = reactModule.useCallback(function(p3)
+		-- upvalues: var8 (ref), serviceModule (copy), fFlagReduceTopBarInsetsWhileHidden (copy), var9 (ref), fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), var10 (write), var1 (copy), p2 (ref), constantsModule (copy)
 		local zero = Vector2.zero
 		local zero_1 = Vector2.zero
 		
-		if p23 then
-			zero = p23.AbsolutePosition
-			zero_1 = p23.AbsoluteSize
+		if p3 then
+			zero = p3.AbsolutePosition
+			zero_1 = p3.AbsoluteSize
 			
-			if zero ~= var42.current then
-				var42.current = zero
+			if zero ~= var8.current then
+				var8.current = zero
 				serviceModule:setMenuAbsolutePosition(zero)
 			end
-			if fFlagReduceTopBarInsetsWhileHidden and zero_1 ~= var43.current then
-				var43.current = zero_1
+			if fFlagReduceTopBarInsetsWhileHidden and zero_1 ~= var9.current then
+				var9.current = zero_1
 			end
-			if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var44.current.getUILessModeEnabled(false) then
-				if zero ~= var42.current then
-					var42.current = zero
+			if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var10.current.getUILessModeEnabled(false) then
+				if zero ~= var8.current then
+					var8.current = zero
 					serviceModule:setMenuAbsolutePosition(zero)
 				end
-				if zero_1 ~= var43.current then
-					var43.current = zero_1
+				if zero_1 ~= var9.current then
+					var9.current = zero_1
 				end
 			end
 		end
-		if fFlagReduceTopBarInsetsWhileHidden and var21 then
-			if p23 and p22.onAreaChanged and var21:getShowTopBar():get() then
-				p22.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, zero, zero_1)
+		if fFlagReduceTopBarInsetsWhileHidden and var1 then
+			if p3 and p2.onAreaChanged and var1:getShowTopBar():get() then
+				p2.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, zero, zero_1)
 				
 				return
 			end
-		elseif fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var44.current.getUILessModeEnabled(false) then
-			if p23 and p22.onAreaChanged and var44.current.getUIVisible(false) then
-				p22.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, zero, zero_1)
+		elseif fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var10.current.getUILessModeEnabled(false) then
+			if p3 and p2.onAreaChanged and var10.current.getUIVisible(false) then
+				p2.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, zero, zero_1)
 				
 				return
 			end
-		elseif p23 and p22.onAreaChanged then
-			p22.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, zero, p23.AbsoluteSize)
+		elseif p3 and p2.onAreaChanged then
+			p2.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, zero, p3.AbsoluteSize)
 		end
 	end, {})
-	local var67 = reactModule.joinBindings({ var50, var52 }):map(function(p24)
-		-- upvalues: var65 (write), ICON_CELL_WIDTH (write)
-		return UDim2.new(0, linearInterpolation(var65, p24[2], p24[1]), 0, ICON_CELL_WIDTH)
+	local var31 = reactModule.joinBindings({ var15, var17 }):map(function(p3)
+		-- upvalues: var29 (write), ICON_CELL_WIDTH (write)
+		return UDim2.new(0, linearInterpolation(var29, p3[2], p3[1]), 0, ICON_CELL_WIDTH)
 	end)
-	local var68 = useMappedObservableValueModule(serviceModule:orderAlignment(), isLeft)
+	local var32 = useMappedObservableValueModule(serviceModule:orderAlignment(), isLeft)
 	
-	for i, v in var47 do
+	for i, v in var12 do
 		if v.integration.availability:get() == serviceModule.AvailabilitySignal.Pinned then
-			var62 += 1
+			var26 += 1
 		end
 	end
-	local var69 = if var68 then 1 else math.max(var62 - 1, 0)
+	local var33 = if var32 then 1 else math.max(var26 - 1, 0)
 	
-	for i_1, v_1 in var47 do
+	for i_1, v_1 in var12 do
 		if v_1.isDivider then
-			local var72 = var63 + ICON_CELL_WIDTH * var69
-			local id = current[v_1.id] or var63
-			t[v_1.id] = var63
-			var45 = var45 or id ~= var63
-			local var74 = IconPositionBinding(var48, id, var63, var72, var55, var52, false, var68, var57)
+			local var34 = var27 + ICON_CELL_WIDTH * var33
+			local id = current[v_1.id] or var27
+			t[v_1.id] = var27
+			var11 = var11 or id ~= var27
+			local var35 = IconPositionBinding(var13, id, var27, var34, var20, var17, false, var32, var22)
 			t_1[v_1.id or "icon" .. i_1] = reactModule.createElement(IconDivider, {
-				position = var74,
-				visible = if var68 then reactModule.joinBindings({ var74, var67 }):map(function(p26)
+				position = var35,
+				visible = if var32 then reactModule.joinBindings({ var35, var31 }):map(function(p3)
 					-- upvalues: ICON_CELL_WIDTH (write)
-					return ICON_CELL_WIDTH * 0.5 <= p26[1].X.Offset
-				end) else reactModule.joinBindings({ var74, var67 }):map(function(p25)
+					return ICON_CELL_WIDTH * 0.5 <= p3[1].X.Offset
+				end) else reactModule.joinBindings({ var35, var31 }):map(function(p3)
 					-- upvalues: ICON_CELL_WIDTH (write)
-					return p25[1].X.Offset <= p25[2].X.Offset - ICON_CELL_WIDTH
+					return p3[1].X.Offset <= p3[2].X.Offset - ICON_CELL_WIDTH
 				end),
-				toggleTransition = var50
+				toggleTransition = var15
 			})
-			var63 += constantsModule.DIVIDER_CELL_WIDTH
+			var27 += constantsModule.DIVIDER_CELL_WIDTH
 		elseif v_1.integration then
-			local var75 = false
-			local var76 = var63 + ICON_CELL_WIDTH * var69
+			local var36 = false
+			local var37 = var27 + ICON_CELL_WIDTH * var33
 			
 			if v_1.integration.availability:get() == serviceModule.AvailabilitySignal.Pinned then
-				var75 = true
-				var76 = var64
+				var36 = true
+				var37 = var28
 			end
-			local var77 = if current[v_1.id] == nil then var63 else current[v_1.id]
-			t[v_1.id] = var63
-			var45 = var45 or var77 ~= var63
-			local var78 = IconPositionBinding(var48, var77, var63, var76, var55, var52, var75, var68, var57)
+			local var38 = if current[v_1.id] == nil then var27 else current[v_1.id]
+			t[v_1.id] = var27
+			var11 = var11 or var38 ~= var27
+			local var39 = IconPositionBinding(var13, var38, var27, var37, var20, var17, var36, var32, var22)
 			t_1[v_1.id or "icon" .. i_1] = reactModule.createElement(iconHostModule, {
-				position = var78,
-				visible = var75 or (if var68 then reactModule.joinBindings({ var78, var67 }):map(function(p28)
+				position = var39,
+				visible = var36 or (if var32 then reactModule.joinBindings({ var39, var31 }):map(function(p3)
 					-- upvalues: ICON_CELL_WIDTH (write)
-					return ICON_CELL_WIDTH * 0.5 <= p28[1].X.Offset
-				end) else reactModule.joinBindings({ var78, var67 }):map(function(p27)
+					return ICON_CELL_WIDTH * 0.5 <= p3[1].X.Offset
+				end) else reactModule.joinBindings({ var39, var31 }):map(function(p3)
 					-- upvalues: ICON_CELL_WIDTH (write)
-					return p27[1].X.Offset <= p27[2].X.Offset - ICON_CELL_WIDTH * 1.5
+					return p3[1].X.Offset <= p3[2].X.Offset - ICON_CELL_WIDTH * 1.5
 				end)),
-				toggleTransition = var59,
+				toggleTransition = var24,
 				integration = v_1
 			})
-			var63 += ICON_CELL_WIDTH
+			var27 += ICON_CELL_WIDTH
 			
-			if var75 then
-				var64 += ICON_CELL_WIDTH
+			if var36 then
+				var28 += ICON_CELL_WIDTH
 			end
 		end
 	end
-	var65 = var63
+	var29 = var27
 	
-	if p22.onMinWidthChanged then
-		p22.onMinWidthChanged(var65)
+	if p2.onMinWidthChanged then
+		p2.onMinWidthChanged(var29)
 	end
-	local var70 = UNIBAR_END_PADDING * 2 + var63
+	local var40 = UNIBAR_END_PADDING * 2 + var27
 	reactModule.useEffect(function()
-		-- upvalues: var54 (ref), var52 (ref), var53 (ref), reactOtterModule (copy), var70 (write), constantsModule (copy), serviceModule (copy), ICON_CELL_WIDTH (write)
-		local current = var54.current
+		-- upvalues: var19 (ref), var17 (ref), var18 (ref), reactOtterModule (copy), var40 (write), constantsModule (copy), serviceModule (copy), ICON_CELL_WIDTH (write)
+		local current = var19.current
 		
-		if var52:getValue() == 0 then
-			var53(reactOtterModule.instant(var70))
-			var54.current = var70
-		elseif current ~= var70 then
-			var53(reactOtterModule.spring(var70, constantsModule.MENU_ANIMATION_SPRING))
-			var54.current = var70
+		if var17:getValue() == 0 then
+			var18(reactOtterModule.instant(var40))
+			var19.current = var40
+		elseif current ~= var40 then
+			var18(reactOtterModule.spring(var40, constantsModule.MENU_ANIMATION_SPRING))
+			var19.current = var40
 		end
-		serviceModule:setMenuAbsoluteSize(Vector2.new(var70, ICON_CELL_WIDTH))
-	end, { var70 })
+		serviceModule:setMenuAbsoluteSize(Vector2.new(var40, ICON_CELL_WIDTH))
+	end, { var40 })
 	
-	if var45 then
-		var58.current = (var58.current or 0) + 1
+	if var11 then
+		var23.current = (var23.current or 0) + 1
 	end
-	var41.current = t
+	var7.current = t
 	reactModule.useEffect(function()
-		-- upvalues: var57 (ref), var56 (ref), reactOtterModule (copy), constantsModule (copy)
-		if var57.current then
-			var56(reactOtterModule.spring(1, constantsModule.MENU_ANIMATION_SPRING))
-			var57.current = false
+		-- upvalues: var22 (ref), var21 (ref), reactOtterModule (copy), constantsModule (copy)
+		if var22.current then
+			var21(reactOtterModule.spring(1, constantsModule.MENU_ANIMATION_SPRING))
+			var22.current = false
 			
 			return
 		end
-		var56(reactOtterModule.spring(0, constantsModule.MENU_ANIMATION_SPRING))
-		var57.current = true
-	end, { var58.current, var57 })
+		var21(reactOtterModule.spring(0, constantsModule.MENU_ANIMATION_SPRING))
+		var22.current = true
+	end, { var23.current, var22 })
 	reactModule.useEffect(function()
-		-- upvalues: fFlagReduceTopBarInsetsWhileHidden (copy), var21 (copy), p22 (ref), constantsModule (copy), var42 (ref), var43 (ref)
-		if fFlagReduceTopBarInsetsWhileHidden and var21 then
-			local showTopBar = var21:getShowTopBar()
+		-- upvalues: fFlagReduceTopBarInsetsWhileHidden (copy), var1 (copy), p2 (ref), constantsModule (copy), var8 (ref), var9 (ref)
+		if fFlagReduceTopBarInsetsWhileHidden and var1 then
+			local showTopBar = var1:getShowTopBar()
 			showTopBar:connect(function()
-				-- upvalues: showTopBar (ref), p22 (copy), constantsModule (copy), var42 (copy), var43 (copy)
+				-- upvalues: showTopBar (ref), p2 (copy), constantsModule (copy), var8 (copy), var9 (copy)
 				if showTopBar:get() then
-					p22.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, var42.current, var43.current)
+					p2.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, var8.current, var9.current)
 					
 					return
 				end
-				p22.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, Vector2.zero, Vector2.zero)
+				p2.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, Vector2.zero, Vector2.zero)
 			end)
-			p22.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, Vector2.zero, Vector2.zero)
+			p2.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, Vector2.zero, Vector2.zero)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), var44 (write), createEffect (copy), p22 (ref), constantsModule (copy), var42 (ref), var43 (ref)
-		local var82 = nil
+		-- upvalues: fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), var10 (write), createEffect (copy), p2 (ref), constantsModule (copy), var8 (ref), var9 (ref)
+		local var41 = nil
 		
-		if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var44.current.getUILessModeEnabled(false) then
-			var82 = createEffect(function(p29)
-				-- upvalues: var44 (copy), p22 (copy), constantsModule (copy), var42 (copy), var43 (copy)
-				if var44.current.getUIVisible(p29) then
-					p22.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, var42.current, var43.current)
+		if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var10.current.getUILessModeEnabled(false) then
+			var41 = createEffect(function(p3)
+				-- upvalues: var10 (copy), p2 (copy), constantsModule (copy), var8 (copy), var9 (copy)
+				if var10.current.getUIVisible(p3) then
+					p2.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, var8.current, var9.current)
 					
 					return
 				end
-				p22.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, Vector2.zero, Vector2.zero)
+				p2.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, Vector2.zero, Vector2.zero)
 			end)
-			p22.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, Vector2.zero, Vector2.zero)
+			p2.onAreaChanged(constantsModule.UNIBAR_KEEP_OUT_AREA_ID, Vector2.zero, Vector2.zero)
 		end
 		return function()
-			-- upvalues: var82 (write)
-			if var82 then
-				var82()
+			-- upvalues: var41 (write)
+			if var41 then
+				var41()
 			end
 		end
 	end, {})
-	local var71 = useStyle()
+	local var41 = useStyle()
 	
 	return reactModule.createElement("Frame", {
-		Size = var67,
+		Size = var31,
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		SelectionGroup = true,
-		ref = p22.menuFrameRef,
-		[reactModule.Change.AbsoluteSize] = var66,
-		[reactModule.Change.AbsolutePosition] = var66
+		ref = p2.menuFrameRef,
+		[reactModule.Change.AbsoluteSize] = var30,
+		[reactModule.Change.AbsolutePosition] = var30
 	}, {
 		reactModule.createElement(AnimationStateHelper, {
-			setToggleIconTransition = var49,
-			setToggleWidthTransition = var51,
-			setToggleSubmenuTransition = var60,
-			menuFrameRef = p22.menuFrameRef,
-			subMenuHostRef = if fFlagUnibarMenuOpenSubmenu then p22.subMenuHostRef else nil
+			setToggleIconTransition = var14,
+			setToggleWidthTransition = var16,
+			setToggleSubmenuTransition = var25,
+			menuFrameRef = p2.menuFrameRef,
+			subMenuHostRef = if fFlagUnibarMenuOpenSubmenu then p2.subMenuHostRef else nil
 		}),
 		reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundColor3 = var71.Theme.BackgroundUIContrast.Color,
-			BackgroundTransparency = var71.Theme.BackgroundUIContrast.Transparency * var71.Settings.PreferredTransparency
+			BackgroundColor3 = var41.Theme.BackgroundUIContrast.Color,
+			BackgroundTransparency = var41.Theme.BackgroundUIContrast.Transparency * var41.Settings.PreferredTransparency
 		}, {
 			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 		}),
@@ -527,39 +527,39 @@ function Unibar(p22)
 	})
 end
 
-local function UnibarPills(p30)
+local function UnibarPills(p3)
 	-- upvalues: useStyle (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), useChromeMenuItemsModule (ref), serviceModule (ref), reactOtterModule (ref), reactModule (ref), iconHostModule (ref)
 	local UNIBAR_END_PADDING, MENU_SUBMENU_PADDING
-	local var83 = useStyle()
+	local var42 = useStyle()
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	
 	if fFlagTokenizeUnibarConstantsWithStyleProvider then
-		local var84 = unibarStyle.use()
-		UNIBAR_END_PADDING = var84.UNIBAR_END_PADDING
-		MENU_SUBMENU_PADDING = var84.MENU_SUBMENU_PADDING
+		local var43 = unibarStyle.use()
+		UNIBAR_END_PADDING = var43.UNIBAR_END_PADDING
+		MENU_SUBMENU_PADDING = var43.MENU_SUBMENU_PADDING
 	else
 		UNIBAR_END_PADDING = constantsModule.UNIBAR_END_PADDING
 		MENU_SUBMENU_PADDING = constantsModule.MENU_SUBMENU_PADDING
 	end
-	local var85 = useChromeMenuItemsModule()
-	local var86, var87 = reactOtterModule.useAnimatedBinding(if serviceModule:currentSubMenu():get() == "nine_dot" then 1 else 0)
-	assert(var85 ~= nil, "Menu items should not be nil")
+	local var44 = useChromeMenuItemsModule()
+	local var45, var46 = reactOtterModule.useAnimatedBinding(if serviceModule:currentSubMenu():get() == "nine_dot" then 1 else 0)
+	assert(var44 ~= nil, "Menu items should not be nil")
 	local t = {}
 	local t_1 = {}
 	
-	for i, v in var85 do
+	for i, v in var44 do
 		if v.integration and v.isDivider == false then
-			t_1["icon_host" .. i] = reactModule.createElement(iconHostModule, { toggleTransition = var86, integration = v })
+			t_1["icon_host" .. i] = reactModule.createElement(iconHostModule, { toggleTransition = var45, integration = v })
 		end
-		if v.isDivider or i == #var85 then
+		if v.isDivider or i == #var44 then
 			t["pill_" .. i] = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(0, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.XY,
-				BackgroundColor3 = var83.Theme.BackgroundUIContrast.Color,
-				BackgroundTransparency = var83.Theme.BackgroundUIContrast.Transparency * var83.Settings.PreferredTransparency
+				BackgroundColor3 = var42.Theme.BackgroundUIContrast.Color,
+				BackgroundTransparency = var42.Theme.BackgroundUIContrast.Transparency * var42.Settings.PreferredTransparency
 			}, {
 				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
 				Padding = reactModule.createElement("UIPadding", {
@@ -579,13 +579,13 @@ local function UnibarPills(p30)
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		SelectionGroup = true,
-		ref = p30.menuFrameRef,
+		ref = p3.menuFrameRef,
 		AutomaticSize = Enum.AutomaticSize.XY
 	}, {
 		reactModule.createElement(AnimationStateHelper, {
-			setToggleSubmenuTransition = var87,
-			menuFrameRef = p30.menuFrameRef,
-			subMenuHostRef = p30.subMenuHostRef
+			setToggleSubmenuTransition = var46,
+			menuFrameRef = p3.menuFrameRef,
+			subMenuHostRef = p3.subMenuHostRef
 		}),
 		reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
@@ -596,106 +596,106 @@ local function UnibarPills(p30)
 	}, t)
 end
 
-local function SubMenuWrapper(p31)
-	-- upvalues: isInExperienceUIVREnabled (ref), isSpatial (ref), panel3DInSpatialUI (write), useObservableValueModule (ref), serviceModule (ref), var22 (write), reactModule (ref), subMenuModule (ref), panelType (write)
+local function SubMenuWrapper(p4)
+	-- upvalues: isInExperienceUIVREnabled (ref), isSpatial (ref), panel3DInSpatialUI (write), useObservableValueModule (ref), serviceModule (ref), var2 (write), reactModule (ref), subMenuModule (ref), panelType (write)
 	if isInExperienceUIVREnabled and isSpatial() and panel3DInSpatialUI then
-		var22:set(useObservableValueModule(serviceModule:currentSubMenu()) ~= nil)
+		var2:set(useObservableValueModule(serviceModule:currentSubMenu()) ~= nil)
 	end
 	return if isInExperienceUIVREnabled and isSpatial() and panel3DInSpatialUI then reactModule.createElement(panel3DInSpatialUI, {
 		panelType = panelType.ChromeSubMenu,
-		renderFunction = reactModule.useCallback(function(p32)
-			-- upvalues: reactModule (copy), subMenuModule (copy), p31 (ref)
-			return reactModule.createElement(subMenuModule, { subMenuHostRef = p31.subMenuHostRef, panelSize = p32 })
-		end, { p31.subMenuHostRef }),
-		visibilityObservable = var22
-	}) else reactModule.createElement(subMenuModule, { subMenuHostRef = p31.subMenuHostRef })
+		renderFunction = reactModule.useCallback(function(p5)
+			-- upvalues: reactModule (copy), subMenuModule (copy), p4 (ref)
+			return reactModule.createElement(subMenuModule, { subMenuHostRef = p4.subMenuHostRef, panelSize = p5 })
+		end, { p4.subMenuHostRef }),
+		visibilityObservable = var2
+	}) else reactModule.createElement(subMenuModule, { subMenuHostRef = p4.subMenuHostRef })
 end
 
-return reactModule.memo(function(p33)
-	-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref), fFlagEnableConsoleExpControls (ref), fFlagUnibarMenuOpenSubmenu (ref), useMappedObservableValueModule (ref), serviceModule (ref), var21 (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), stores (ref), createEffect (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), UnibarPills (ref), fFlagEnablePlaytestModeUnibar (ref), playtestModeThemeProviderModule (ref), onUnibarSelectionChanged (ref), SubMenuWrapper (ref), subMenuModule (ref), shortcutBarModule (ref), windowManagerModule (ref)
+return reactModule.memo(function(p4)
+	-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref), fFlagEnableConsoleExpControls (ref), fFlagUnibarMenuOpenSubmenu (ref), useMappedObservableValueModule (ref), serviceModule (ref), var1 (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), stores (ref), createEffect (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), UnibarPills (ref), fFlagEnablePlaytestModeUnibar (ref), playtestModeThemeProviderModule (ref), onUnibarSelectionChanged (ref), SubMenuWrapper (ref), subMenuModule (ref), shortcutBarModule (ref), windowManagerModule (ref)
 	local _ = nil
-	local var90 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().MENU_SUBMENU_PADDING else constantsModule.MENU_SUBMENU_PADDING
-	local var91 = if fFlagEnableConsoleExpControls and p33.menuRef then p33.menuRef else reactModule.useRef(nil)
-	local var92 = reactModule.useRef(nil)
-	local var93 = if fFlagUnibarMenuOpenSubmenu then reactModule.useRef(nil) else nil
+	local var47 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().MENU_SUBMENU_PADDING else constantsModule.MENU_SUBMENU_PADDING
+	local var48 = if fFlagEnableConsoleExpControls and p4.menuRef then p4.menuRef else reactModule.useRef(nil)
+	local var49 = reactModule.useRef(nil)
+	local var50 = if fFlagUnibarMenuOpenSubmenu then reactModule.useRef(nil) else nil
 	
 	local function updateSize()
-		-- upvalues: var92 (ref), var91 (write)
-		if var92.current and var91.current then
-			var92.current.Size = var91.current.Size
+		-- upvalues: var49 (ref), var48 (write)
+		if var49.current and var48.current then
+			var49.current.Size = var48.current.Size
 		end
 	end
 	
-	local var95 = useMappedObservableValueModule(serviceModule:orderAlignment(), isLeft)
-	local var96 = nil
-	local var97 = nil
+	local var51 = useMappedObservableValueModule(serviceModule:orderAlignment(), isLeft)
+	local var52 = nil
+	local var53 = nil
 	local showTopBar = nil
 	
-	if fFlagEnableConsoleExpControls and var21 then
-		local var99, var100 = reactModule.useBinding(var21:getShowTopBar():get())
-		var96 = var99
-		var97 = var100
-		showTopBar = var21:getShowTopBar()
+	if fFlagEnableConsoleExpControls and var1 then
+		local var54, var55 = reactModule.useBinding(var1:getShowTopBar():get())
+		var52 = var54
+		var53 = var55
+		showTopBar = var1:getShowTopBar()
 	end
-	local var101 = nil
+	local var56 = nil
 	
 	if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and stores.GetUILessStore then
-		var101 = reactModule.useRef(stores.GetUILessStore(false))
+		var56 = reactModule.useRef(stores.GetUILessStore(false))
 		
-		if var101.current.getUILessModeEnabled(false) then
-			local var102, var103 = reactModule.useBinding(true)
-			var96 = var102
-			var97 = var103
+		if var56.current.getUILessModeEnabled(false) then
+			local var57, var58 = reactModule.useBinding(true)
+			var52 = var57
+			var53 = var58
 		end
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var91 (write), updateSize (ref), var92 (ref), fFlagEnableConsoleExpControls (copy), showTopBar (write), var97 (write)
-		local var105 = if var91 and var91.current then var91.current:GetPropertyChangedSignal("Size"):Connect(updateSize) else nil
+		-- upvalues: var48 (write), updateSize (ref), var49 (ref), fFlagEnableConsoleExpControls (copy), showTopBar (write), var53 (write)
+		local var59 = if var48 and var48.current then var48.current:GetPropertyChangedSignal("Size"):Connect(updateSize) else nil
 		
-		if var92.current and var91.current then
-			var92.current.Size = var91.current.Size
+		if var49.current and var48.current then
+			var49.current.Size = var48.current.Size
 		end
 		if fFlagEnableConsoleExpControls then
 			showTopBar:connect(function()
-				-- upvalues: var97 (copy), showTopBar (copy)
-				var97(showTopBar:get())
+				-- upvalues: var53 (copy), showTopBar (copy)
+				var53(showTopBar:get())
 			end)
 		end
 		return function()
-			-- upvalues: var105 (write)
-			if var105 then
-				var105:disconnect()
+			-- upvalues: var59 (write)
+			if var59 then
+				var59:disconnect()
 			end
 		end
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), var101 (write), createEffect (copy), var97 (write)
-		local var106 = if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var101.current.getUILessModeEnabled(false) then createEffect(function(p34)
-			-- upvalues: var97 (copy), var101 (copy)
-			var97(var101.current.getUIVisible(p34))
+		-- upvalues: fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), var56 (write), createEffect (copy), var53 (write)
+		local var59 = if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var56.current.getUILessModeEnabled(false) then createEffect(function(p5)
+			-- upvalues: var53 (copy), var56 (copy)
+			var53(var56.current.getUIVisible(p5))
 		end) else nil
 		
 		return function()
-			-- upvalues: var106 (write)
-			if var106 then
-				var106()
+			-- upvalues: var59 (write)
+			if var59 then
+				var59()
 			end
 		end
 	end, {})
-	local var104 = if isInExperienceUIVREnabled and isSpatial() then reactModule.createElement(UnibarPills, { menuFrameRef = var91, subMenuHostRef = var93 }) else reactModule.createElement(Unibar, {
-		menuFrameRef = var91,
-		subMenuHostRef = if fFlagUnibarMenuOpenSubmenu then var93 else nil,
-		onAreaChanged = p33.onAreaChanged,
-		onMinWidthChanged = p33.onMinWidthChanged
+	local var59 = if isInExperienceUIVREnabled and isSpatial() then reactModule.createElement(UnibarPills, { menuFrameRef = var48, subMenuHostRef = var50 }) else reactModule.createElement(Unibar, {
+		menuFrameRef = var48,
+		subMenuHostRef = if fFlagUnibarMenuOpenSubmenu then var50 else nil,
+		onAreaChanged = p4.onAreaChanged,
+		onMinWidthChanged = p4.onMinWidthChanged
 	})
 	
 	if fFlagEnablePlaytestModeUnibar then
-		var104 = reactModule.createElement("Frame", {
+		var59 = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
-			PlaytestModeThemeProvider = reactModule.createElement(playtestModeThemeProviderModule, nil, { Unibar = var104 })
+			PlaytestModeThemeProvider = reactModule.createElement(playtestModeThemeProviderModule, nil, { Unibar = var59 })
 		})
 	end
 	return {
@@ -704,23 +704,23 @@ return reactModule.memo(function(p33)
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
-			LayoutOrder = p33.layoutOrder,
+			LayoutOrder = p4.layoutOrder,
 			SelectionGroup = true,
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorLeft = if fFlagEnableConsoleExpControls then nil else Enum.SelectionBehavior.Stop,
 			SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
-			ref = var92,
+			ref = var49,
 			[reactModule.Event.SelectionChanged] = if fFlagEnableConsoleExpControls then onUnibarSelectionChanged else nil,
-			Visible = if fFlagEnableConsoleExpControls or fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var101.current.getUILessModeEnabled(false) then var96 else nil
+			Visible = if fFlagEnableConsoleExpControls or fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and var56.current.getUILessModeEnabled(false) then var52 else nil
 		}, {
 			reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
-				HorizontalAlignment = if var95 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Right,
+				HorizontalAlignment = if var51 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Right,
 				VerticalAlignment = Enum.VerticalAlignment.Top,
-				Padding = UDim.new(0, var90)
+				Padding = UDim.new(0, var47)
 			}),
-			var104,
-			if isInExperienceUIVREnabled then reactModule.createElement(SubMenuWrapper, { subMenuHostRef = var93 }) else reactModule.createElement(subMenuModule, { subMenuHostRef = var93 }),
+			var59,
+			if isInExperienceUIVREnabled then reactModule.createElement(SubMenuWrapper, { subMenuHostRef = var50 }) else reactModule.createElement(subMenuModule, { subMenuHostRef = var50 }),
 			if fFlagEnableConsoleExpControls then reactModule.createElement(shortcutBarModule) else nil,
 			reactModule.createElement(windowManagerModule)
 		})

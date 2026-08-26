@@ -11,34 +11,34 @@ local waveformWidth = constantsModule.AudioWaveform.WaveformWidth
 local waveformPadding = constantsModule.AudioWaveform.WaveformPadding
 local waveformMinHeight = constantsModule.AudioWaveform.WaveformMinHeight
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokens (ref), useAudioWaveformModule (ref), reactModule (ref), view (ref), waveformPadding (ref), dashModule (ref), waveformWidth (ref), waveformMinHeight (ref)
-	local var6 = useTokens()
-	local var7 = useAudioWaveformModule(p0.audioAssetId, p0.videoDuration)
+	local var1 = useTokens()
+	local var2 = useAudioWaveformModule(p1.audioAssetId, p1.videoDuration)
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), p0 (ref)
-		if var7 and #var7 > 0 then
-			p0.onWaveformReady()
+		-- upvalues: var2 (ref), p1 (ref)
+		if var2 and #var2 > 0 then
+			p1.onWaveformReady()
 		end
-	end, { p0.audioAssetId, p0.onWaveformReady, var7 })
+	end, { p1.audioAssetId, p1.onWaveformReady, var2 })
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-left align-y-center anchor-center-left auto-x size-0-full row",
-		Position = p0.position,
-		ZIndex = p0.zIndex,
+		Position = p1.position,
+		ZIndex = p1.zIndex,
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
 			Padding = UDim.new(0, waveformPadding)
 		},
-		ref = p1
-	}, dashModule.map(var7, function(p2, p3)
-		-- upvalues: reactModule (copy), view (copy), waveformWidth (copy), waveformMinHeight (copy), var6 (ref)
+		ref = p2
+	}, dashModule.map(var2, function(p3, p4)
+		-- upvalues: reactModule (copy), view (copy), waveformWidth (copy), waveformMinHeight (copy), var1 (ref)
 		return reactModule.createElement(view, {
 			tag = "radius-circle",
-			key = p3,
-			LayoutOrder = p3,
-			Size = UDim2.new(0, waveformWidth, p2, waveformMinHeight),
-			backgroundStyle = var6.Color.Content.Muted
+			key = p4,
+			LayoutOrder = p4,
+			Size = UDim2.new(0, waveformWidth, p3, waveformMinHeight),
+			backgroundStyle = var1.Color.Content.Muted
 		})
 	end))
 end)

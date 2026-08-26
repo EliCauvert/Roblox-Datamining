@@ -7,30 +7,30 @@ local openGameDetails = require(parent.GameDetail).OpenGameDetails
 local experienceTileModule = require(profilePlatform.BaseComponents.Tiles.ExperienceTile)
 local _ = require(profilePlatform.Common.Types)
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: useDispatch (ref), useNavigation (ref), reactModule (ref), openGameDetails (ref), experienceTileModule (ref)
-	local var3 = useDispatch()
-	local var4 = useNavigation()
-	p1 = p1 or "ProfileExperienceTile_"
-	local var5 = reactModule.useCallback(function(p4, p5, p6)
-		-- upvalues: p2 (ref), var3 (ref), openGameDetails (copy), var4 (ref)
+	local var1 = useDispatch()
+	local var2 = useNavigation()
+	p2 = p2 or "ProfileExperienceTile_"
+	local var3 = reactModule.useCallback(function(p5, p6, p7)
+		-- upvalues: p3 (ref), var1 (ref), openGameDetails (copy), var2 (ref)
 		return function()
-			-- upvalues: p2 (copy), p4 (ref), p5 (ref), p6 (ref), var3 (copy), openGameDetails (copy), var4 (copy)
-			if p2 then
-				p2(p4, p5, p6)
+			-- upvalues: p3 (copy), p5 (ref), p6 (ref), p7 (ref), var1 (copy), openGameDetails (copy), var2 (copy)
+			if p3 then
+				p3(p5, p6, p7)
 			end
-			var3(openGameDetails(p4.experienceId, var4, { mountAsFullView = false, showBackButton = true }))
+			var1(openGameDetails(p5.experienceId, var2, { mountAsFullView = false, showBackButton = true }))
 		end
-	end, { p2, var3, var4 })
+	end, { p3, var1, var2 })
 	
-	return reactModule.useCallback(function(p7, p8, _, p9)
-		-- upvalues: reactModule (copy), experienceTileModule (copy), var5 (ref), p0 (ref), p3 (ref), p1 (write)
+	return reactModule.useCallback(function(p5, p6, _, p7)
+		-- upvalues: reactModule (copy), experienceTileModule (copy), var3 (ref), p1 (ref), p4 (ref), p2 (write)
 		return reactModule.createElement(experienceTileModule, {
-			item = p7,
-			index = p8,
-			onActivated = var5(p7, p8, p9),
-			impressionsTag = p0,
-			showFooter = p3
-		}), `{p1}{p7.experienceId}_`
-	end, { p0, var5, p1 })
+			item = p5,
+			index = p6,
+			onActivated = var3(p5, p6, p7),
+			impressionsTag = p1,
+			showFooter = p4
+		}), `{p2}{p5.experienceId}_`
+	end, { p1, var3, p2 })
 end

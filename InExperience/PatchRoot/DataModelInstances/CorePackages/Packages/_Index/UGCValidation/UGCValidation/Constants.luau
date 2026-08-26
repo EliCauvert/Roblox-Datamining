@@ -12,10 +12,10 @@ local getFFlagUGCValidationAllowEngineDefaultPartSurfacesModule = require(parent
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 
-local function _(p0)
+local function _(p1)
 	local t = {}
 	
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		t[v] = true
 	end
 	return t
@@ -200,8 +200,8 @@ t.COMPARISON_METHODS = {
 	FOUND_IN = "one of the following:"
 }
 setmetatable(t.COMPARISON_METHODS, {
-	__index = function(_, p1)
-		return error("Invalid COMPARISON_METHOD " .. tostring(p1))
+	__index = function(_, p2)
+		return error("Invalid COMPARISON_METHOD " .. tostring(p2))
 	end
 })
 t.INCLUSION_METHODS = {

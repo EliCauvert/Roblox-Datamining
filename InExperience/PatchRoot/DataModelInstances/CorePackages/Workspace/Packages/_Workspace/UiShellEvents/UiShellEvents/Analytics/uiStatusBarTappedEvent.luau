@@ -1,14 +1,14 @@
 ﻿local uiShellEvents = script:FindFirstAncestor("UiShellEvents")
 local tModule = require(uiShellEvents.Parent.t)
 local loggerModule = require(uiShellEvents.Logger)
-local var3 = tModule.strictInterface({ page = tModule.string })
+local var1 = tModule.strictInterface({ page = tModule.string })
 
-return function(p0, p1, p2)
-	-- upvalues: var3 (ref), loggerModule (ref)
-	local var4, var5 = var3(p2)
+return function(p1, p2, p3)
+	-- upvalues: var1 (ref), loggerModule (ref)
+	local var2, var3 = var1(p3)
 	
-	if not var4 then
-		loggerModule:error(var5)
+	if not var2 then
+		loggerModule:error(var3)
 	end
-	p0:sendEventDeferred(p1, "uiShellStatusBarTapped", p2)
+	p1:sendEventDeferred(p2, "uiShellStatusBarTapped", p3)
 end

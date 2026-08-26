@@ -1,8 +1,8 @@
 ﻿local localizationService = game:GetService("LocalizationService")
 local playersService = game:GetService("Players")
-local var2 = false
+local var1 = false
 task.spawn(function()
-	-- upvalues: playersService (ref), localizationService (ref), var2 (write)
+	-- upvalues: playersService (ref), localizationService (ref), var1 (write)
 	local localPlayer = playersService.LocalPlayer
 	while not localPlayer do
 		playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
@@ -12,11 +12,11 @@ task.spawn(function()
 	
 	if not ok then return end
 	if status == "GB" then
-		var2 = true
+		var1 = true
 	end
 end)
 
 return function()
-	-- upvalues: var2 (write)
-	return var2
+	-- upvalues: var1 (write)
+	return var1
 end

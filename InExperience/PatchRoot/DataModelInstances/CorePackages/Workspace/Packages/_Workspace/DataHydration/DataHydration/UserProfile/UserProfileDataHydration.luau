@@ -5,132 +5,132 @@ local createDataCacheModule = require(dataHydration.createDataCache)
 local dataHydrationTypesModule = require(dataHydration.DataHydrationTypes)
 local signalsModule = require(parent.Signals)
 local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
-local var5 = createDataCacheModule()
+local var1 = createDataCacheModule()
 local t = {}
-local var7 = getLocalPlayerUserId()
+local var2 = getLocalPlayerUserId()
 playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-	-- upvalues: getLocalPlayerUserId (ref), var7 (write), t (ref)
-	local var11 = getLocalPlayerUserId()
+	-- upvalues: getLocalPlayerUserId (ref), var2 (write), t (ref)
+	local var3 = getLocalPlayerUserId()
 	
-	if var11 ~= var7 then
-		var7 = var11
+	if var3 ~= var2 then
+		var2 = var3
 		table.clear(t)
 	end
 end)
-local var8 = nil
+local var3 = nil
 
 local function _()
-	-- upvalues: var8 (write), parent (ref)
-	if not var8 then
-		var8 = require(parent.UserProfiles.Stores).UserProfileStore
+	-- upvalues: var3 (write), parent (ref)
+	if not var3 then
+		var3 = require(parent.UserProfiles.Stores).UserProfileStore
 	end
-	return var8
+	return var3
 end
 
-local _ = function(p0)
-	-- upvalues: var8 (write), parent (ref)
-	if not var8 then
-		var8 = require(parent.UserProfiles.Stores).UserProfileStore
+local _ = function(p1)
+	-- upvalues: var3 (write), parent (ref)
+	if not var3 then
+		var3 = require(parent.UserProfiles.Stores).UserProfileStore
 	end
-	return var8.get().getProfileByUserId(p0)
+	return var3.get().getProfileByUserId(p1)
 end
 
 local function getStatusAndFetch(p1)
-	-- upvalues: var5 (ref), var8 (write), parent (ref)
-	local item, item_1 = var5.getItem(p1)
+	-- upvalues: var1 (ref), var3 (write), parent (ref)
+	local item, item_1 = var1.getItem(p1)
 	
 	if item_1 then
-		if not var8 then
-			var8 = require(parent.UserProfiles.Stores).UserProfileStore
+		if not var3 then
+			var3 = require(parent.UserProfiles.Stores).UserProfileStore
 		end
-		var8.get().fetchNamesByUserIds({ p1 }, function(p2)
-			-- upvalues: var5 (copy), p1 (ref)
+		var3.get().fetchNamesByUserIds({ p1 }, function(p2)
+			-- upvalues: var1 (copy), p1 (ref)
 			if p2.status == "success" then
-				var5.replaceItem(p1, true)
+				var1.replaceItem(p1, true)
 				
 				return
 			elseif p2.status == "failed" then
-				var5.markItemsAsFailed({ p1 })
+				var1.markItemsAsFailed({ p1 })
 			end
 		end)
 	end
 	return item, item_1
 end
 
-local function resolveUserProfileField(p3, p4, p5)
-	return if p4 == "userId" then tonumber(p3.userId) elseif p4 == "username" then p3.names.getUsername(p5) elseif p4 == "displayName" then p3.names.getDisplayName(p5) elseif p4 == "isVerified" then if p3.getIsVerified == nil then nil else p3.getIsVerified(p5) else nil
+local function resolveUserProfileField(p1, p2, p3)
+	return if p2 == "userId" then tonumber(p1.userId) elseif p2 == "username" then p1.names.getUsername(p3) elseif p2 == "displayName" then p1.names.getDisplayName(p3) elseif p2 == "isVerified" then if p1.getIsVerified == nil then nil else p1.getIsVerified(p3) else nil
 end
 
 return {
-	resolveField = function(_, p6, p7, p8, _)
-		-- upvalues: getStatusAndFetch (ref), dataHydrationTypesModule (ref), var8 (write), parent (ref), resolveUserProfileField (ref)
-		if #p6 < 2 then
+	resolveField = function(_, p1, p2, p3, _)
+		-- upvalues: getStatusAndFetch (ref), dataHydrationTypesModule (ref), var3 (write), parent (ref), resolveUserProfileField (ref)
+		if #p1 < 2 then
 			return nil, nil
 		end
-		local var14 = tostring(p7)
-		local var15 = getStatusAndFetch(var14).status(p8)
+		local var4 = tostring(p2)
+		local var5 = getStatusAndFetch(var4).status(p3)
 		
-		if var15 ~= dataHydrationTypesModule.DataStatus.Ready then
-			return nil, var15
-		elseif not var8 then
-			var8 = require(parent.UserProfiles.Stores).UserProfileStore
+		if var5 ~= dataHydrationTypesModule.DataStatus.Ready then
+			return nil, var5
+		elseif not var3 then
+			var3 = require(parent.UserProfiles.Stores).UserProfileStore
 		end
-		local profileByUserId = var8.get().getProfileByUserId(var14)
+		local profileByUserId = var3.get().getProfileByUserId(var4)
 		
 		if profileByUserId then
-			return resolveUserProfileField(profileByUserId, p6[2], p8), var15
+			return resolveUserProfileField(profileByUserId, p1[2], p3), var5
 		end
-		return nil, var15
+		return nil, var5
 	end,
-	updateFromHydration = function(p9)
-		-- upvalues: var8 (write), parent (ref), var5 (ref)
-		if not var8 then
-			var8 = require(parent.UserProfiles.Stores).UserProfileStore
+	updateFromHydration = function(p1)
+		-- upvalues: var3 (write), parent (ref), var1 (ref)
+		if not var3 then
+			var3 = require(parent.UserProfiles.Stores).UserProfileStore
 		end
-		var8.get().updateFromHydration(p9)
+		var3.get().updateFromHydration(p1)
 		local t = {}
 		
-		for i, v in p9 do
+		for i, v in p1 do
 			t[if v.userId ~= nil then i else tostring(v.userId)] = true
 		end
-		var5.replaceItems(t)
+		var1.replaceItems(t)
 	end,
-	getAndFetchUserInfo = function(p10)
-		-- upvalues: t (ref), signalsModule (ref), getStatusAndFetch (ref), dataHydrationTypesModule (ref), var8 (write), parent (ref)
-		local var18 = tostring(p10)
-		local var19 = t[var18]
+	getAndFetchUserInfo = function(p2)
+		-- upvalues: t (ref), signalsModule (ref), getStatusAndFetch (ref), dataHydrationTypesModule (ref), var3 (write), parent (ref)
+		local var4 = tostring(p2)
+		local var5 = t[var4]
 		
-		if var19 == nil then
-			local var20 = signalsModule.createComputed(function(p11)
-				-- upvalues: getStatusAndFetch (copy), var18 (ref)
-				return getStatusAndFetch(var18).status(p11)
+		if var5 == nil then
+			local var6 = signalsModule.createComputed(function(p3)
+				-- upvalues: getStatusAndFetch (copy), var4 (ref)
+				return getStatusAndFetch(var4).status(p3)
 			end)
 			local t_1 = {
-				info = signalsModule.createComputed(function(p12)
-					-- upvalues: var20 (ref), dataHydrationTypesModule (copy), var18 (ref), var8 (copy), parent (copy)
-					if var20(p12) ~= dataHydrationTypesModule.DataStatus.Ready then
+				info = signalsModule.createComputed(function(p3)
+					-- upvalues: var6 (ref), dataHydrationTypesModule (copy), var4 (ref), var3 (copy), parent (copy)
+					if var6(p3) ~= dataHydrationTypesModule.DataStatus.Ready then
 						return nil
 					end
-					local var22 = var18
+					local var7 = var4
 					
-					if not var8 then
-						var8 = require(parent.UserProfiles.Stores).UserProfileStore
+					if not var3 then
+						var3 = require(parent.UserProfiles.Stores).UserProfileStore
 					end
-					local profileByUserId = var8.get().getProfileByUserId(var22)
+					local profileByUserId = var3.get().getProfileByUserId(var7)
 					
 					return if profileByUserId == nil then nil else {
-						userId = tonumber(var18),
-						displayName = profileByUserId.names.getDisplayName(p12),
-						username = profileByUserId.names.getUsername(p12),
-						hasVerifiedBadge = if profileByUserId.getIsVerified ~= nil then false else profileByUserId.getIsVerified(p12)
+						userId = tonumber(var4),
+						displayName = profileByUserId.names.getDisplayName(p3),
+						username = profileByUserId.names.getUsername(p3),
+						hasVerifiedBadge = if profileByUserId.getIsVerified ~= nil then false else profileByUserId.getIsVerified(p3)
 					}
 				end),
-				status = var20
+				status = var6
 			}
-			t[var18] = t_1
+			t[var4] = t_1
 			
 			return t_1
 		end
-		return var19
+		return var5
 	end
 }

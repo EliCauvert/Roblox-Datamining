@@ -4,14 +4,14 @@ local useCurrentSquadIdModule = require(squadsCore.Hooks.useCurrentSquadId)
 local reactModule = require(parent.React)
 local usePrevious = require(parent.RoactUtils).Hooks.usePrevious
 
-return function(p0)
+return function(p1)
 	-- upvalues: useCurrentSquadIdModule (ref), usePrevious (ref), reactModule (ref)
-	local var3 = useCurrentSquadIdModule() or ""
-	local var4 = usePrevious(var3) or ""
+	local var1 = useCurrentSquadIdModule() or ""
+	local var2 = usePrevious(var1) or ""
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var4 (ref), p0 (ref)
-		if var3 ~= var4 and var4 ~= "" and p0 then
-			p0()
+		-- upvalues: var1 (ref), var2 (ref), p1 (ref)
+		if var1 ~= var2 and var2 ~= "" and p1 then
+			p1()
 		end
-	end, { var3, p0 })
+	end, { var1, p1 })
 end

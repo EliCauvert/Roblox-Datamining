@@ -2,11 +2,11 @@
 local shareLinksNetworking = reducerDependencies.ShareLinksNetworking
 local shareLinksRodux = reducerDependencies.ShareLinksRodux
 
-return function(p0)
+return function(p1)
 	-- upvalues: shareLinksNetworking (ref), shareLinksRodux (ref)
 	return {
-		shareInviteLink = p0.ShareLinks.Invites.ShareInviteLink,
-		fetchShareInviteLinkNetworkStatus = shareLinksNetworking.GenerateLink.getStatus(p0, {
+		shareInviteLink = p1.ShareLinks.Invites.ShareInviteLink,
+		fetchShareInviteLinkNetworkStatus = shareLinksNetworking.GenerateLink.getStatus(p1, {
 			linkType = shareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
 		})
 	}

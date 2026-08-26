@@ -3,8 +3,8 @@ local useIsUserPartyVoiceEligibleModule = require(script.Parent.useIsUserPartyVo
 
 function useIsLocalPlayerPartyVoiceEligible()
 	-- upvalues: useSelector (ref), useIsUserPartyVoiceEligibleModule (ref)
-	local var1 = useSelector(function(p0)
-		return if p0 and p0.LocalUserId then tonumber(p0.LocalUserId) or 0 else 0
+	local var1 = useSelector(function(p1)
+		return if p1 and p1.LocalUserId then tonumber(p1.LocalUserId) or 0 else 0
 	end)
 	
 	return useIsUserPartyVoiceEligibleModule(var1), var1 == 0

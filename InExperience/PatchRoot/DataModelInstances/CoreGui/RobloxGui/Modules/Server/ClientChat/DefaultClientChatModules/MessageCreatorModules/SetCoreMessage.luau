@@ -8,12 +8,12 @@ function CreateSetCoreMessageLabel(value, _)
 	local extraData = value.ExtraData or {}
 	local message, message_1 = utilModule:CreateBaseMessage(value.Message, extraData.Font or chatSettingsModule.DefaultFont, extraData.TextSize or chatSettingsModule.ChatWindowTextSize, extraData.Color or chatSettingsModule.DefaultMessageColor)
 	
-	local function GetHeightFunction(p0)
+	local function GetHeightFunction(p1)
 		-- upvalues: utilModule (copy), message_1 (ref), message (ref)
-		return utilModule:GetMessageHeight(message_1, message, p0)
+		return utilModule:GetMessageHeight(message_1, message, p1)
 	end
 	
-	local var7, var8, var9 = utilModule:CreateFadeFunctions({
+	local var1, var2, var3 = utilModule:CreateFadeFunctions({
 		[message_1] = {
 			TextTransparency = { FadedIn = 0, FadedOut = 1 },
 			TextStrokeTransparency = { FadedIn = 0.75, FadedOut = 1 }
@@ -25,9 +25,9 @@ function CreateSetCoreMessageLabel(value, _)
 		[utilModule.KEY_BASE_MESSAGE] = message_1,
 		[utilModule.KEY_UPDATE_TEXT_FUNC] = nil,
 		[utilModule.KEY_GET_HEIGHT] = GetHeightFunction,
-		[utilModule.KEY_FADE_IN] = var7,
-		[utilModule.KEY_FADE_OUT] = var8,
-		[utilModule.KEY_UPDATE_ANIMATION] = var9
+		[utilModule.KEY_FADE_IN] = var1,
+		[utilModule.KEY_FADE_OUT] = var2,
+		[utilModule.KEY_UPDATE_ANIMATION] = var3
 	}
 end
 

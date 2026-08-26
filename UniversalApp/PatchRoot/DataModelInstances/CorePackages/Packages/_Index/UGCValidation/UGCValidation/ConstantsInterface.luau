@@ -4,9 +4,9 @@ local validationRulesUtilModule = require(parent.util.ValidationRulesUtil)
 local getEngineUGCValidateAssetTextureLimitsModule = require(parent.flags.getEngineUGCValidateAssetTextureLimits)
 
 return {
-	isBodyPart = function(p0)
+	isBodyPart = function(p1)
 		-- upvalues: constantsModule (ref)
-		return constantsModule.ASSET_TYPE_INFO[p0] and constantsModule.ASSET_TYPE_INFO[p0].isBodyPart
+		return constantsModule.ASSET_TYPE_INFO[p1] and constantsModule.ASSET_TYPE_INFO[p1].isBodyPart
 	end,
 	isMakeupAsset = function(value)
 		return if value ~= Enum.AssetType.LipMakeup then if value ~= Enum.AssetType.EyeMakeup then value == Enum.AssetType.FaceMakeup else true else true
@@ -30,53 +30,53 @@ return {
 		if not p1 then
 			return ""
 		end
-		local var4 = constantsModule.ASSET_TYPE_INFO[p1]
+		local var1 = constantsModule.ASSET_TYPE_INFO[p1]
 		
-		return if var4.isBodyPart then var4.subParts[p2].rigAttachmentToParent.name else ""
+		return if var1.isBodyPart then var1.subParts[p2].rigAttachmentToParent.name else ""
 	end,
-	getAttachments = function(p3, p4)
+	getAttachments = function(p1, p2)
 		-- upvalues: constantsModule (ref)
-		if not p3 then
-			p3 = constantsModule.UGC_BODY_PART_NAMES_TO_ASSET_TYPE[p4]
+		if not p1 then
+			p1 = constantsModule.UGC_BODY_PART_NAMES_TO_ASSET_TYPE[p2]
 		end
-		local var5 = nil
+		local var1 = nil
 		
-		if p3 then
-			local var6 = constantsModule.ASSET_TYPE_INFO[p3]
+		if p1 then
+			local var2 = constantsModule.ASSET_TYPE_INFO[p1]
 			
-			if not var6.isBodyPart then
+			if not var2.isBodyPart then
 				return {}
 			end
-			var5 = var6.subParts[p4]
+			var1 = var2.subParts[p2]
 		end
 		local t = {}
 		
-		if var5 then
-			table.insert(t, var5.rigAttachmentToParent.name)
+		if var1 then
+			table.insert(t, var1.rigAttachmentToParent.name)
 			
-			for i in var5.otherAttachments do
+			for i in var1.otherAttachments do
 				table.insert(t, i)
 			end
 		end
 		return t
 	end,
-	getTextureLimit = function(p5, p6, p7)
+	getTextureLimit = function(p3, p4, p5)
 		-- upvalues: getEngineUGCValidateAssetTextureLimitsModule (ref), constantsModule (ref), validationRulesUtilModule (ref)
 		if not getEngineUGCValidateAssetTextureLimitsModule() then
 			return constantsModule.MAX_TEXTURE_SIZE
-		elseif not p5 then
+		elseif not p3 then
 			return constantsModule.MAX_TEXTURE_SIZE
 		end
-		local var8 = validationRulesUtilModule:getRules().TextureRules.AssetTextureLimits[p5]
+		local var3 = validationRulesUtilModule:getRules().TextureRules.AssetTextureLimits[p3]
 		
-		if not var8 then
+		if not var3 then
 			return constantsModule.MAX_TEXTURE_SIZE
-		elseif p6:IsA("SpecialMesh") and p7 == "TextureId" then
-			return var8.ColorMapSize
-		elseif p6:IsA("MeshPart") and p7 == "TextureID" then
-			return var8.ColorMapSize
-		elseif p6:IsA("SurfaceAppearance") or p6:IsA("Decal") then
-			return if p7 == "ColorMap" then var8.ColorMapSize elseif p7 == "MetalnessMap" then var8.MetalnessMapSize elseif p7 == "NormalMap" then var8.NormalMapSize elseif p7 == "RoughnessMap" then var8.RoughnessMapSize else constantsModule.MAX_TEXTURE_SIZE
+		elseif p4:IsA("SpecialMesh") and p5 == "TextureId" then
+			return var3.ColorMapSize
+		elseif p4:IsA("MeshPart") and p5 == "TextureID" then
+			return var3.ColorMapSize
+		elseif p4:IsA("SurfaceAppearance") or p4:IsA("Decal") then
+			return if p5 == "ColorMap" then var3.ColorMapSize elseif p5 == "MetalnessMap" then var3.MetalnessMapSize elseif p5 == "NormalMap" then var3.NormalMapSize elseif p5 == "RoughnessMap" then var3.RoughnessMapSize else constantsModule.MAX_TEXTURE_SIZE
 		end
 	end
 }

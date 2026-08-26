@@ -7,30 +7,30 @@ local _ = require(foundation.Utility.Plugin.StudioUri)
 local _ = require(foundation.Components.Types)
 local t = { testId = "--foundation-popover" }
 
-return function(p0)
+return function(p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), popoverContextModule (ref)
-	local var6 = withDefaultsModule(p0, t)
-	local var7, var8 = reactModule.useState(nil)
-	local var9, var10 = reactModule.useState(nil)
+	local var1 = withDefaultsModule(p1, t)
+	local var2, var3 = reactModule.useState(nil)
+	local var4, var5 = reactModule.useState(nil)
 	
 	return reactModule.createElement(popoverContextModule.Provider, {
 		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
-			-- upvalues: var7 (ref), var8 (ref), var9 (ref), var10 (ref), var6 (ref)
+			-- upvalues: var2 (ref), var3 (ref), var4 (ref), var5 (ref), var1 (ref)
 			return {
-				anchor = var7,
-				setAnchor = var8,
-				anchorUri = var9,
-				setAnchorUri = var10,
-				isOpen = var6.isOpen,
-				testId = var6.testId
+				anchor = var2,
+				setAnchor = var3,
+				anchorUri = var4,
+				setAnchorUri = var5,
+				isOpen = var1.isOpen,
+				testId = var1.testId
 			}
-		end, { var7, var9, var6.isOpen, var6.testId }) else nil else {
-			anchor = var7,
-			setAnchor = var8,
-			anchorUri = var9,
-			setAnchorUri = var10,
-			isOpen = var6.isOpen,
-			testId = var6.testId
+		end, { var2, var4, var1.isOpen, var1.testId }) else nil else {
+			anchor = var2,
+			setAnchor = var3,
+			anchorUri = var4,
+			setAnchorUri = var5,
+			isOpen = var1.isOpen,
+			testId = var1.testId
 		}
-	}, var6.children)
+	}, var1.children)
 end

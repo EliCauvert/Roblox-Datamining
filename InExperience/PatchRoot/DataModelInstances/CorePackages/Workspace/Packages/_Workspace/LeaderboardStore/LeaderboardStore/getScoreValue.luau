@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if typeof(p0) == "boolean" then if p0 then 1 else 0 else p0
+﻿return function(p1)
+	return if typeof(p1) == "boolean" then if p1 then 1 else 0 else p1
 end

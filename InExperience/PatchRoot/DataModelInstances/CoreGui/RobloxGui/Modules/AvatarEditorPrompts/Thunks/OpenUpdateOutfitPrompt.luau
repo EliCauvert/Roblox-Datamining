@@ -4,17 +4,17 @@ local openPromptModule = require(parent.Actions.OpenPrompt)
 local getOutfitNameModule = require(parent.Network.GetOutfitName)
 local promptTypeModule = require(parent.PromptType)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: getOutfitNameModule (ref), openPromptModule (ref), promptTypeModule (ref), avatarEditorService (ref)
-	return function(p3)
-		-- upvalues: getOutfitNameModule (copy), p0 (ref), openPromptModule (copy), promptTypeModule (copy), p1 (ref), p2 (ref), avatarEditorService (copy)
-		getOutfitNameModule(p0):andThen(function(p4)
-			-- upvalues: p3 (ref), openPromptModule (copy), promptTypeModule (copy), p0 (copy), p1 (copy), p2 (copy)
-			p3:dispatch(openPromptModule(promptTypeModule.UpdateOutfit, {
-				outfitId = p0,
-				outfitName = p4,
-				humanoidDescription = p1,
-				rigType = p2
+	return function(p4)
+		-- upvalues: getOutfitNameModule (copy), p1 (ref), openPromptModule (copy), promptTypeModule (copy), p2 (ref), p3 (ref), avatarEditorService (copy)
+		getOutfitNameModule(p1):andThen(function(p5)
+			-- upvalues: p4 (ref), openPromptModule (copy), promptTypeModule (copy), p1 (copy), p2 (copy), p3 (copy)
+			p4:dispatch(openPromptModule(promptTypeModule.UpdateOutfit, {
+				outfitId = p1,
+				outfitName = p5,
+				humanoidDescription = p2,
+				rigType = p3
 			}))
 		end, function(_)
 			-- upvalues: avatarEditorService (copy)

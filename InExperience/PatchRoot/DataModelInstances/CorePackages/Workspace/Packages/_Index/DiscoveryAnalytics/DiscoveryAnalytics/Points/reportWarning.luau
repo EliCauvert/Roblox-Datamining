@@ -16,15 +16,15 @@ local t_1 = {
 	lastUpdated = { 25, 1, 22 }
 }
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: runService (ref), t_1 (ref), t (ref)
-	local var4 = p3 and table.clone(p3) or {}
-	var4.category = p1
-	var4.extraMessage = p2
+	local var1 = p4 and table.clone(p4) or {}
+	var1.category = p2
+	var1.extraMessage = p3
 	
 	if runService:IsStudio() or _G.__TESTEZ_RUNNING_TEST__ or _G.__TEST_SUITE_PACKAGE__ then
-		warn(`DiscoveryWarning: [{p1}] {p2}`)
+		warn(`DiscoveryWarning: [{p2}] {p3}`)
 	end
-	p0:logRobloxTelemetryCounter(t_1, 1, { category = p1 })
-	p0:logRobloxTelemetryEvent(t, { p0.StandardizedFields.addOsInfo }, var4)
+	p1:logRobloxTelemetryCounter(t_1, 1, { category = p2 })
+	p1:logRobloxTelemetryEvent(t, { p1.StandardizedFields.addOsInfo }, var1)
 end

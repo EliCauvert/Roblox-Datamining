@@ -10,10 +10,10 @@ return {
 	name = "SduiSharedUtilities",
 	roact = reactModule,
 	reactRoblox = require(parent.ReactRoblox),
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), foundationProvider (ref), t (ref), device (ref)
-		return function(p1)
-			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), device (copy), p0 (ref)
+		return function(p2)
+			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), device (copy), p1 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -26,11 +26,11 @@ return {
 					PaddingRight = UDim.new(0, 10)
 				}),
 				FoundationContext = reactModule.createElement(foundationProvider, {
-					colorMode = t[p1.theme],
-					device = device[p1.platform],
-					preferences = p1.settings,
-					scale = p1.settings and p1.settings.scale
-				}, { Child = reactModule.createElement(p0, p1) })
+					colorMode = t[p2.theme],
+					device = device[p2.platform],
+					preferences = p2.settings,
+					scale = p2.settings and p2.settings.scale
+				}, { Child = reactModule.createElement(p1, p2) })
 			})
 		end
 	end

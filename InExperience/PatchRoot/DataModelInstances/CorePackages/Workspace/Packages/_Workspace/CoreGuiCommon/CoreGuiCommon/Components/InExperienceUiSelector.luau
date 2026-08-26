@@ -15,29 +15,29 @@ local inputSize = foundationModule.Enums.InputSize
 
 return function(_)
 	-- upvalues: signalsReactModule (ref), getUiSelectorSignalStore (ref), reactModule (ref), useLocalization (ref), guiService (ref), focusOnChrome (ref), gamepadService (ref), foundationModule (ref), baseMenu (ref), inputSize (ref)
-	local var8 = signalsReactModule.useSignalState(getUiSelectorSignalStore)
-	local var9 = signalsReactModule.useSignalState(var8.getVisibility)
-	local var10 = reactModule.useRef(nil)
-	local var11 = reactModule.useRef(nil)
-	local var12 = useLocalization({
+	local var1 = signalsReactModule.useSignalState(getUiSelectorSignalStore)
+	local var2 = signalsReactModule.useSignalState(var1.getVisibility)
+	local var3 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef(nil)
+	local var5 = useLocalization({
 		robloxMenu = "CoreScripts.InGameMenu.Controls.RobloxMenu",
 		uiNavToggle = "CoreScripts.InGameMenu.GameSettings.UINavToggle"
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var11 (ref), guiService (copy)
-		if var9 and var11.current then
-			guiService.SelectedCoreObject = var11.current
+		-- upvalues: var2 (ref), var4 (ref), guiService (copy)
+		if var2 and var4.current then
+			guiService.SelectedCoreObject = var4.current
 			
 			return
-		elseif not var9 then
+		elseif not var2 then
 			guiService.SelectedCoreObject = nil
 		end
-	end, { var9 })
+	end, { var2 })
 	
-	return if var9 then reactModule.createElement(foundationModule.View, {
+	return if var2 then reactModule.createElement(foundationModule.View, {
 		tag = "position-center-center anchor-center-center auto-xy radius-medium bg-surface-200",
 		testId = "in-experience-ui-selector",
-		ref = var10,
+		ref = var3,
 		selectionGroup = {
 			SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
@@ -47,24 +47,24 @@ return function(_)
 	}, {
 		Menu = reactModule.createElement(baseMenu.Root, {
 			items = reactModule.useMemo(function()
-				-- upvalues: var12 (ref), var11 (ref), var8 (ref), focusOnChrome (copy), guiService (copy), gamepadService (copy)
+				-- upvalues: var5 (ref), var4 (ref), var1 (ref), focusOnChrome (copy), guiService (copy), gamepadService (copy)
 				return {
 					{
 						id = "RobloxMenu",
-						text = var12.robloxMenu,
-						ref = var11,
+						text = var5.robloxMenu,
+						ref = var4,
 						onActivated = function()
-							-- upvalues: var8 (copy), focusOnChrome (copy)
-							var8.setVisibility(false)
+							-- upvalues: var1 (copy), focusOnChrome (copy)
+							var1.setVisibility(false)
 							focusOnChrome()
 						end
 					},
 					{
 						id = "UiNavigationMode",
-						text = var12.uiNavToggle,
+						text = var5.uiNavToggle,
 						onActivated = function()
-							-- upvalues: var8 (copy), guiService (copy), gamepadService (copy)
-							var8.setVisibility(false)
+							-- upvalues: var1 (copy), guiService (copy), gamepadService (copy)
+							var1.setVisibility(false)
 							guiService.SelectedCoreObject = nil
 							local _, _ = pcall(function()
 								-- upvalues: gamepadService (copy)
@@ -73,7 +73,7 @@ return function(_)
 						end
 					}
 				}
-			end, { var8, var12 }),
+			end, { var1, var5 }),
 			size = inputSize.Medium,
 			radius = foundationModule.Enums.Radius.Medium
 		})

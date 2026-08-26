@@ -18,9 +18,9 @@ local serviceOverrideContextModule = require(groups.Components.CoreUI.ServiceOve
 local _ = require(groups.Common.Types)
 local THUMBNAIL_SIZE = require(groups.Common.constants).THUMBNAIL_SIZE
 
-local function parseMembershipStatusFromActions(p0)
+local function parseMembershipStatusFromActions(p1)
 	-- upvalues: enumsModule (ref)
-	local buttons = p0.buttons or {}
+	local buttons = p1.buttons or {}
 	local type = nil
 	local disabledReason = nil
 	
@@ -41,7 +41,7 @@ local function buildGroupJoinPromptData(p1)
 	if p1 then
 		local components = p1.components or {}
 		local communityProfileHeader = components.CommunityProfileHeader or {}
-		local var14 = parseMembershipStatusFromActions(components.Actions or {})
+		local var1 = parseMembershipStatusFromActions(components.Actions or {})
 		
 		return {
 			groupName = communityProfileHeader.name,
@@ -50,23 +50,23 @@ local function buildGroupJoinPromptData(p1)
 			ownerIsVerified = communityProfileHeader.ownerIsVerified,
 			ownerUserId = communityProfileHeader.ownerUserId,
 			membersCount = if communityProfileHeader.counts then communityProfileHeader.counts.membersCount else nil,
-			isAlreadyMember = var14.isAlreadyMember,
-			hasPendingRequest = var14.hasPendingRequest,
-			isEligible = var14.isEligible,
-			disabledReason = var14.disabledReason,
+			isAlreadyMember = var1.isAlreadyMember,
+			hasPendingRequest = var1.hasPendingRequest,
+			isEligible = var1.isEligible,
+			disabledReason = var1.disabledReason,
 			hasSocialModules = communityProfileHeader.hasSocialModules
 		}
 	end
 	return nil
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), useContext (ref), serviceOverrideContextModule (ref), useLocalization (ref), reactModule (ref), postJoinGroupModule (ref), fetchGroupActionsModule (ref), parseMembershipStatusFromActions (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), THUMBNAIL_SIZE (ref), fetchGroupDetailsModule (ref), buildGroupJoinPromptData (ref), useEventConnection (ref)
-	local var15 = useRoactService(roactNetworking)
-	local var16 = useContext(serviceOverrideContextModule)
-	local groupService = var16.groupService
-	local guiService = var16.guiService
-	local var17 = useLocalization({
+	local var1 = useRoactService(roactNetworking)
+	local var2 = useContext(serviceOverrideContextModule)
+	local groupService = var2.groupService
+	local guiService = var2.guiService
+	local var3 = useLocalization({
 		notificationJoined = "Feature.Groups.Notification.Joined",
 		notificationFollowing = "Feature.Groups.Notification.Following",
 		notificationJoinRequestPending = "Feature.Groups.Notification.JoinRequestPending",
@@ -76,138 +76,138 @@ return function(p2)
 		notificationGroupDoesNotExist = "Feature.Groups.Notification.GroupDoesNotExist",
 		notificationGroupModerated = "Feature.Groups.Notification.GroupModerated"
 	})
-	local var18 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef(nil)
 	
 	local function _()
-		-- upvalues: var18 (ref), p2 (ref)
-		var18.current = nil
-		p2.closePrompt()
+		-- upvalues: var4 (ref), p1 (ref)
+		var4.current = nil
+		p1.closePrompt()
 	end
 	
-	local var19 = reactModule.useCallback(function(p3, p4, p5)
-		-- upvalues: groupService (ref), guiService (ref), var18 (ref), p2 (ref)
-		groupService:PromptJoinCompleted(p3, false, Enum.GroupMembershipStatus.None, p4)
+	local var5 = reactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: groupService (ref), guiService (ref), var4 (ref), p1 (ref)
+		groupService:PromptJoinCompleted(p2, false, Enum.GroupMembershipStatus.None, p3)
 		guiService:SendNotification({
 			Icon = "rbxasset://textures/ui/ErrorIcon.png",
-			Title = p5
+			Title = p4
 		})
-		var18.current = nil
-		p2.closePrompt()
-	end, { groupService, guiService, p2.closePrompt })
-	local var20 = reactModule.useCallback(function(p6, p7, p8, p9)
-		-- upvalues: var17 (ref), var19 (ref)
-		var19(p6, p8, if p9 then var17.notificationFailedToLoad elseif p7 then var17.notificationFailedToJoin else var17.notificationFailedToFollow)
-	end, { var19 })
-	local var21 = reactModule.useCallback(function(p10, p11)
-		-- upvalues: postJoinGroupModule (copy), var15 (ref), fetchGroupActionsModule (copy), var20 (ref), parseMembershipStatusFromActions (copy), var17 (ref), groupService (ref), var18 (ref), p2 (ref), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (ref)
+		var4.current = nil
+		p1.closePrompt()
+	end, { groupService, guiService, p1.closePrompt })
+	local var6 = reactModule.useCallback(function(p2, p3, p4, p5)
+		-- upvalues: var3 (ref), var5 (ref)
+		var5(p2, p4, if p5 then var3.notificationFailedToLoad elseif p3 then var3.notificationFailedToJoin else var3.notificationFailedToFollow)
+	end, { var5 })
+	local var7 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: postJoinGroupModule (copy), var1 (ref), fetchGroupActionsModule (copy), var6 (ref), parseMembershipStatusFromActions (copy), var3 (ref), groupService (ref), var4 (ref), p1 (ref), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (ref)
 		return function()
-			-- upvalues: p11 (ref), postJoinGroupModule (copy), var15 (copy), p10 (ref), fetchGroupActionsModule (copy), var20 (copy), parseMembershipStatusFromActions (copy), var17 (copy), groupService (copy), var18 (copy), p2 (copy), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (copy)
-			local var23 = if p11 and p11.hasSocialModules ~= nil then p11.hasSocialModules else true
-			local var24 = if p11 then p11.groupName or "" else ""
-			postJoinGroupModule(var15, p10):andThen(function()
-				-- upvalues: fetchGroupActionsModule (copy), var15 (copy), p10 (copy), var20 (copy), var23 (ref), parseMembershipStatusFromActions (copy), var17 (copy), groupService (copy), var18 (copy), p2 (copy), var24 (ref), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (copy)
-				return fetchGroupActionsModule(var15, p10):andThen(function(p12)
-					-- upvalues: var20 (copy), p10 (copy), var23 (copy), parseMembershipStatusFromActions (copy), var17 (copy), groupService (copy), var18 (copy), p2 (copy), var24 (copy), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (copy)
-					if p12.errors then
-						var20(p10, var23, "Network error on join prompt: Some group components failed to load", false)
+			-- upvalues: p3 (ref), postJoinGroupModule (copy), var1 (copy), p2 (ref), fetchGroupActionsModule (copy), var6 (copy), parseMembershipStatusFromActions (copy), var3 (copy), groupService (copy), var4 (copy), p1 (copy), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (copy)
+			local var8 = if p3 and p3.hasSocialModules ~= nil then p3.hasSocialModules else true
+			local var9 = if p3 then p3.groupName or "" else ""
+			postJoinGroupModule(var1, p2):andThen(function()
+				-- upvalues: fetchGroupActionsModule (copy), var1 (copy), p2 (copy), var6 (copy), var8 (ref), parseMembershipStatusFromActions (copy), var3 (copy), groupService (copy), var4 (copy), p1 (copy), var9 (ref), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (copy)
+				return fetchGroupActionsModule(var1, p2):andThen(function(p4)
+					-- upvalues: var6 (copy), p2 (copy), var8 (copy), parseMembershipStatusFromActions (copy), var3 (copy), groupService (copy), var4 (copy), p1 (copy), var9 (copy), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (copy)
+					if p4.errors then
+						var6(p2, var8, "Network error on join prompt: Some group components failed to load", false)
 						
 						return
 					end
-					local var25 = parseMembershipStatusFromActions((p12.components or {}).Actions or {})
+					local var10 = parseMembershipStatusFromActions((p4.components or {}).Actions or {})
 					local joinRequestPending = nil
 					local notificationJoinRequestPending = nil
 					
-					if var25.isAlreadyMember then
+					if var10.isAlreadyMember then
 						joinRequestPending = Enum.GroupMembershipStatus.Joined
-						notificationJoinRequestPending = if var23 then var17.notificationJoined else var17.notificationFollowing
-					elseif var25.hasPendingRequest then
+						notificationJoinRequestPending = if var8 then var3.notificationJoined else var3.notificationFollowing
+					elseif var10.hasPendingRequest then
 						joinRequestPending = Enum.GroupMembershipStatus.JoinRequestPending
-						notificationJoinRequestPending = var17.notificationJoinRequestPending
+						notificationJoinRequestPending = var3.notificationJoinRequestPending
 					else
-						var20(p10, var23, "Unexpected membership status after join prompt", false)
+						var6(p2, var8, "Unexpected membership status after join prompt", false)
 						
 						return
 					end
-					groupService:PromptJoinCompleted(p10, true, joinRequestPending, "")
-					var18.current = nil
-					p2.closePrompt()
+					groupService:PromptJoinCompleted(p2, true, joinRequestPending, "")
+					var4.current = nil
+					p1.closePrompt()
 					guiService:SendNotification({
-						Title = string.gsub(notificationJoinRequestPending, "{groupName}", var24),
-						Icon = getRbxthumbWithTypeSizeAndOptions(tostring(p10), constants.RbxthumbTypes.GroupIcon, THUMBNAIL_SIZE)
+						Title = string.gsub(notificationJoinRequestPending, "{groupName}", var9),
+						Icon = getRbxthumbWithTypeSizeAndOptions(tostring(p2), constants.RbxthumbTypes.GroupIcon, THUMBNAIL_SIZE)
 					})
-				end, function(p13)
-					-- upvalues: var20 (copy), p10 (copy), var23 (copy)
-					var20(p10, var23, "Network error on join prompt: " .. p13.StatusMessage, false)
+				end, function(p4)
+					-- upvalues: var6 (copy), p2 (copy), var8 (copy)
+					var6(p2, var8, "Network error on join prompt: " .. p13.StatusMessage, false)
 				end)
-			end, function(p14)
-				-- upvalues: var20 (copy), p10 (copy), var23 (ref)
-				var20(p10, var23, "Network error on join prompt: " .. p14.StatusMessage, false)
+			end, function(p4)
+				-- upvalues: var6 (copy), p2 (copy), var8 (ref)
+				var6(p2, var8, "Network error on join prompt: " .. p14.StatusMessage, false)
 			end)
 		end
 	end, {
-		var15, var20, var17, groupService, guiService, p2.closePrompt
+		var1, var6, var3, groupService, guiService, p1.closePrompt
 	})
-	local var22 = reactModule.useCallback(function(p15, p16)
-		-- upvalues: groupService (ref), var18 (ref), p2 (ref)
+	local var8 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: groupService (ref), var4 (ref), p1 (ref)
 		return function()
-			-- upvalues: p16 (ref), groupService (copy), p15 (ref), var18 (copy), p2 (copy)
-			groupService:PromptJoinCompleted(p15, true, if if p16 and p16.isAlreadyMember then true else false then Enum.GroupMembershipStatus.AlreadyMember elseif if p16 and p16.hasPendingRequest then true else false then Enum.GroupMembershipStatus.JoinRequestPending else Enum.GroupMembershipStatus.None, "")
-			var18.current = nil
-			p2.closePrompt()
+			-- upvalues: p3 (ref), groupService (copy), p2 (ref), var4 (copy), p1 (copy)
+			groupService:PromptJoinCompleted(p2, true, if if p3 and p3.isAlreadyMember then true else false then Enum.GroupMembershipStatus.AlreadyMember elseif if p3 and p3.hasPendingRequest then true else false then Enum.GroupMembershipStatus.JoinRequestPending else Enum.GroupMembershipStatus.None, "")
+			var4.current = nil
+			p1.closePrompt()
 		end
-	end, { groupService, p2.closePrompt })
-	useEventConnection(groupService.ShowJoinPrompt, reactModule.useCallback(function(p17)
-		-- upvalues: var18 (ref), var21 (ref), var22 (ref), p2 (ref), fetchGroupDetailsModule (copy), var15 (ref), var20 (ref), var19 (ref), var17 (ref), buildGroupJoinPromptData (copy)
+	end, { groupService, p1.closePrompt })
+	useEventConnection(groupService.ShowJoinPrompt, reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref), var7 (ref), var8 (ref), p1 (ref), fetchGroupDetailsModule (copy), var1 (ref), var6 (ref), var5 (ref), var3 (ref), buildGroupJoinPromptData (copy)
 		local t = {}
-		var18.current = t
-		p2.openGroupJoinPrompt(p17, nil, { onJoin = var21(p17, nil), onClose = var22(p17, nil) })
-		fetchGroupDetailsModule(var15, p17):andThen(function(p18)
-			-- upvalues: var18 (copy), t (ref), var20 (copy), p17 (ref), var19 (copy), var17 (copy), buildGroupJoinPromptData (copy), var21 (copy), var22 (copy), p2 (copy)
-			if var18.current ~= t then return end
-			local components = p18.components or {}
-			local var28 = next(components) ~= nil
-			local var29 = components.CommunityLocked ~= nil
-			local var30 = p18.errors ~= nil
+		var4.current = t
+		p1.openGroupJoinPrompt(p2, nil, { onJoin = var7(p2, nil), onClose = var8(p2, nil) })
+		fetchGroupDetailsModule(var1, p2):andThen(function(p3)
+			-- upvalues: var4 (copy), t (ref), var6 (copy), p2 (ref), var5 (copy), var3 (copy), buildGroupJoinPromptData (copy), var7 (copy), var8 (copy), p1 (copy)
+			if var4.current ~= t then return end
+			local components = p3.components or {}
+			local var9 = next(components) ~= nil
+			local var10 = components.CommunityLocked ~= nil
+			local var11 = p3.errors ~= nil
 			local communityProfileHeader = components.CommunityProfileHeader or {}
-			local var32 = communityProfileHeader.hasSocialModules ~= nil or communityProfileHeader.hasSocialModules
+			local var12 = communityProfileHeader.hasSocialModules ~= nil or communityProfileHeader.hasSocialModules
 			
-			if var30 then
-				if var18.current == t then
-					var20(p17, var32, "Network error on join prompt: Some group components failed to load", true)
+			if var11 then
+				if var4.current == t then
+					var6(p2, var12, "Network error on join prompt: Some group components failed to load", true)
 					
 					return
 				end
 				return
-			elseif var28 then
-				if var29 then
-					if var18.current == t then
-						var19(p17, "Group is currently moderated", var17.notificationGroupModerated)
+			elseif var9 then
+				if var10 then
+					if var4.current == t then
+						var5(p2, "Group is currently moderated", var3.notificationGroupModerated)
 						
 						return
 					end
 					return
-				elseif var18.current == t then
-					local var33 = buildGroupJoinPromptData(p18)
-					p2.openGroupJoinPrompt(p17, var33, { onJoin = var21(p17, var33), onClose = var22(p17, var33) })
+				elseif var4.current == t then
+					local var13 = buildGroupJoinPromptData(p3)
+					p1.openGroupJoinPrompt(p2, var13, { onJoin = var7(p2, var13), onClose = var8(p2, var13) })
 					
 					return
 				end
 				return
-			elseif var18.current == t then
-				var19(p17, "Group does not exist", var17.notificationGroupDoesNotExist)
+			elseif var4.current == t then
+				var5(p2, "Group does not exist", var3.notificationGroupDoesNotExist)
 				
 				return
 			end
-		end, function(p19)
-			-- upvalues: var18 (copy), t (ref), var19 (copy), p17 (ref), var17 (copy)
-			if var18.current == t then
-				var19(p17, "Network error on join prompt: " .. p19.StatusMessage, var17.notificationFailedToLoad)
+		end, function(p3)
+			-- upvalues: var4 (copy), t (ref), var5 (copy), p2 (ref), var3 (copy)
+			if var4.current == t then
+				var5(p2, "Network error on join prompt: " .. p19.StatusMessage, var3.notificationFailedToLoad)
 				
 				return
 			end
 		end)
 	end, {
-		p2.openGroupJoinPrompt, var15, var17, var21, var22, var19, var20
+		p1.openGroupJoinPrompt, var1, var3, var7, var8, var5, var6
 	}))
 	
 	return reactModule.createElement(reactModule.Fragment, {}, {})

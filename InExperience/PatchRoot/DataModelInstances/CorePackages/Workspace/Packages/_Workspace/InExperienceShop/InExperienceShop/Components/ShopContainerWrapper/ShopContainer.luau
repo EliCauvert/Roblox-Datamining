@@ -11,39 +11,39 @@ local firstOpenPrefetchHitCounterModule = require(inExperienceShop.Events.FirstO
 local openCounterModule = require(inExperienceShop.Events.OpenCounter)
 local shopViewModule = require(script.Parent.ShopView)
 local useShopViewModelModule = require(script.Parent.useShopViewModel)
-local var12 = false
+local var1 = false
 
-return function(p0)
-	-- upvalues: signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), fFlagEnableShopPrefetchModule (ref), var12 (write), shopDebugLoggerModule (ref), logCounterModule (ref), openCounterModule (ref), firstOpenCounterModule (ref), firstOpenPrefetchHitCounterModule (ref), useShopViewModelModule (ref), shopViewModule (ref)
-	local var13 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
+return function(p1)
+	-- upvalues: signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), fFlagEnableShopPrefetchModule (ref), var1 (write), shopDebugLoggerModule (ref), logCounterModule (ref), openCounterModule (ref), firstOpenCounterModule (ref), firstOpenPrefetchHitCounterModule (ref), useShopViewModelModule (ref), shopViewModule (ref)
+	local var2 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableShopPrefetchModule (copy), var12 (copy), shopDebugLoggerModule (copy), logCounterModule (copy), openCounterModule (copy), firstOpenCounterModule (copy), var13 (ref), firstOpenPrefetchHitCounterModule (copy)
-		local var14 = fFlagEnableShopPrefetchModule and not var12
+		-- upvalues: fFlagEnableShopPrefetchModule (copy), var1 (copy), shopDebugLoggerModule (copy), logCounterModule (copy), openCounterModule (copy), firstOpenCounterModule (copy), var2 (ref), firstOpenPrefetchHitCounterModule (copy)
+		local var3 = fFlagEnableShopPrefetchModule and not var1
 		shopDebugLoggerModule.logLazy(function()
-			-- upvalues: var14 (ref)
-			return "ShopContainer: mount isFirstOpen=" .. tostring(var14)
+			-- upvalues: var3 (ref)
+			return "ShopContainer: mount isFirstOpen=" .. tostring(var3)
 		end)
 		logCounterModule(openCounterModule)
 		
-		if var14 then
-			var12 = true
+		if var3 then
+			var1 = true
 			logCounterModule(firstOpenCounterModule)
-			local var15 = #var13.getCategories(false) > 0
+			local var4 = #var2.getCategories(false) > 0
 			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: var15 (ref)
-				return "ShopContainer: prefetch cache hit=" .. tostring(var15)
+				-- upvalues: var4 (ref)
+				return "ShopContainer: prefetch cache hit=" .. tostring(var4)
 			end)
 			
-			if var15 then
+			if var4 then
 				logCounterModule(firstOpenPrefetchHitCounterModule)
 			end
 		end
 		task.spawn(function()
-			-- upvalues: shopDebugLoggerModule (copy), var13 (copy)
+			-- upvalues: shopDebugLoggerModule (copy), var2 (copy)
 			shopDebugLoggerModule.log("ShopContainer: calling onShopOpened")
-			var13.onShopOpened()
+			var2.onShopOpened()
 		end)
-	end, { var13.onShopOpened, var13.getCategories })
+	end, { var2.onShopOpened, var2.getCategories })
 	
-	return reactModule.createElement(shopViewModule, useShopViewModelModule(p0))
+	return reactModule.createElement(shopViewModule, useShopViewModelModule(p1))
 end

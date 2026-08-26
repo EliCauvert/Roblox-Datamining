@@ -2,11 +2,11 @@
 local _ = require(friendsCarousel.Parent.GraphQLServer)
 local _ = require(friendsCarousel.Common.LocalTypes)
 
-return function(p0)
+return function(p1)
 	local universeId = nil
 	
-	if p0.__typename == "Friend" then
-		local presence = p0.presence or {}
+	if p1.__typename == "Friend" then
+		local presence = p1.presence or {}
 		
 		if presence.universeId then
 			return tonumber(presence.universeId)
@@ -14,8 +14,8 @@ return function(p0)
 		universeId = nil
 		
 		return universeId
-	elseif p0.isFriendWithUser then
-		universeId = p0.universeId
+	elseif p1.isFriendWithUser then
+		universeId = p1.universeId
 	end
 	return universeId
 end

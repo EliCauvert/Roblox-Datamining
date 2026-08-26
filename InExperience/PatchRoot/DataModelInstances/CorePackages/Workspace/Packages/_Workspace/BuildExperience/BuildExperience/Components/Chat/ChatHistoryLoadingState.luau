@@ -8,7 +8,7 @@ local useTokens = foundationModule.Hooks.useTokens
 
 return function()
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local var2 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-xlarge",
@@ -20,7 +20,7 @@ return function()
 			Bubble = reactModule.createElement(skeleton, {
 				LayoutOrder = 2,
 				testId = "ChatHistoryLoadingState.UserMessage",
-				Size = UDim2.new(0.68, 0, 0, var2.Size.Size_1200),
+				Size = UDim2.new(0.68, 0, 0, var1.Size.Size_1200),
 				radius = radius.Large
 			})
 		}),
@@ -31,26 +31,26 @@ return function()
 			Line1 = reactModule.createElement(skeleton, {
 				LayoutOrder = 1,
 				testId = "ChatHistoryLoadingState.AgentLine1",
-				Size = UDim2.new(0.92, 0, 0, var2.Size.Size_300),
+				Size = UDim2.new(0.92, 0, 0, var1.Size.Size_300),
 				radius = radius.Small
 			}),
 			Line2 = reactModule.createElement(skeleton, {
 				LayoutOrder = 2,
 				testId = "ChatHistoryLoadingState.AgentLine2",
-				Size = UDim2.new(0.78, 0, 0, var2.Size.Size_300),
+				Size = UDim2.new(0.78, 0, 0, var1.Size.Size_300),
 				radius = radius.Small
 			}),
 			Line3 = reactModule.createElement(skeleton, {
 				LayoutOrder = 3,
 				testId = "ChatHistoryLoadingState.AgentLine3",
-				Size = UDim2.new(0.54, 0, 0, var2.Size.Size_300),
+				Size = UDim2.new(0.54, 0, 0, var1.Size.Size_300),
 				radius = radius.Small
 			})
 		}),
 		PlaytestCard = reactModule.createElement(skeleton, {
 			LayoutOrder = 3,
 			testId = "ChatHistoryLoadingState.PlaytestCard",
-			Size = UDim2.new(1, 0, 0, var2.Size.Size_2400 + var2.Size.Size_800),
+			Size = UDim2.new(1, 0, 0, var1.Size.Size_2400 + var1.Size.Size_800),
 			radius = radius.Medium
 		})
 	})

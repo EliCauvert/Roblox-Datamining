@@ -5,15 +5,15 @@ local receiveUsersPresenceModule = require(userLib.Utils.receiveUsersPresence)
 local apiFetchGamesDataByPlaceIds = require(parent.GameDetailRodux).GamesByPlaceId.ApiFetchGamesDataByPlaceIds
 local usersGetPresenceModule = require(userLib.Requests.UsersGetPresence)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: usersGetPresenceModule (ref), receiveUsersPresenceModule (ref), getFriendsActiveGamesPlaceIdsFromUsersPresenceModule (ref), apiFetchGamesDataByPlaceIds (ref)
-	return function(p2)
-		-- upvalues: usersGetPresenceModule (copy), p0 (ref), p1 (ref), receiveUsersPresenceModule (copy), getFriendsActiveGamesPlaceIdsFromUsersPresenceModule (copy), apiFetchGamesDataByPlaceIds (copy)
-		return usersGetPresenceModule(p0, p1):andThen(function(p3)
-			-- upvalues: receiveUsersPresenceModule (copy), p2 (ref), getFriendsActiveGamesPlaceIdsFromUsersPresenceModule (copy), apiFetchGamesDataByPlaceIds (copy), p0 (copy)
-			local userPresences = p3.responseBody.userPresences
-			receiveUsersPresenceModule(userPresences, p2)
-			p2:dispatch(apiFetchGamesDataByPlaceIds(p0, getFriendsActiveGamesPlaceIdsFromUsersPresenceModule(userPresences, p2)))
+	return function(p3)
+		-- upvalues: usersGetPresenceModule (copy), p1 (ref), p2 (ref), receiveUsersPresenceModule (copy), getFriendsActiveGamesPlaceIdsFromUsersPresenceModule (copy), apiFetchGamesDataByPlaceIds (copy)
+		return usersGetPresenceModule(p1, p2):andThen(function(p4)
+			-- upvalues: receiveUsersPresenceModule (copy), p3 (ref), getFriendsActiveGamesPlaceIdsFromUsersPresenceModule (copy), apiFetchGamesDataByPlaceIds (copy), p1 (copy)
+			local userPresences = p4.responseBody.userPresences
+			receiveUsersPresenceModule(userPresences, p3)
+			p3:dispatch(apiFetchGamesDataByPlaceIds(p1, getFriendsActiveGamesPlaceIdsFromUsersPresenceModule(userPresences, p3)))
 		end)
 	end
 end

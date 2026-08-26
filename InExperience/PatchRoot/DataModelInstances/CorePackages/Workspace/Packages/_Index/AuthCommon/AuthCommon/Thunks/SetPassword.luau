@@ -8,13 +8,13 @@ local function _()
 	return string.format("%sv2/user/passwords/change", url.AUTH_URL)
 end
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: httpService (ref), url (ref), promiseModule (ref)
-	return p0(string.format("%sv2/user/passwords/change", url.AUTH_URL), "POST", {
-		postBody = httpService:JSONEncode({ currentPassword = nil, newPassword = p1 })
-	}):andThen(function(p2)
+	return p1(string.format("%sv2/user/passwords/change", url.AUTH_URL), "POST", {
+		postBody = httpService:JSONEncode({ currentPassword = nil, newPassword = p2 })
+	}):andThen(function(p3)
 		-- upvalues: promiseModule (copy)
-		return promiseModule.resolve(p2)
+		return promiseModule.resolve(p3)
 	end, function(p3)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.reject(p3)

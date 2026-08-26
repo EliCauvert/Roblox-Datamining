@@ -18,45 +18,45 @@ local customConversationListRowModule = require(script.Parent.CustomConversation
 local fFlagAppChatCustomConversationListRowModule = require(appChat.Flags.FFlagAppChatCustomConversationListRow)
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local enumScreensModule = require(appChat.EnumScreens)
-local var14 = if game.PlaceId > 0 then tostring(game.PlaceId) else nil
-local var15 = if game.GameId > 0 then tostring(game.GameId) else nil
+local var1 = if game.PlaceId > 0 then tostring(game.PlaceId) else nil
+local var2 = if game.GameId > 0 then tostring(game.GameId) else nil
 
-function PartyQuickStartContainer(p0)
-	-- upvalues: useAnalyticsModule (ref), useChatPlacementContext (ref), useNavigation (ref), useLocalization (ref), reactModule (ref), httpService (ref), eventNamesModule (ref), var14 (ref), var15 (ref), enumScreensModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), fFlagAppChatCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref), images (ref)
-	local var16 = useAnalyticsModule()
-	local var17 = useChatPlacementContext()
-	local var18 = useNavigation()
-	local var19 = useLocalization({
+function PartyQuickStartContainer(p1)
+	-- upvalues: useAnalyticsModule (ref), useChatPlacementContext (ref), useNavigation (ref), useLocalization (ref), reactModule (ref), httpService (ref), eventNamesModule (ref), var1 (ref), var2 (ref), enumScreensModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), fFlagAppChatCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref), images (ref)
+	local var3 = useAnalyticsModule()
+	local var4 = useChatPlacementContext()
+	local var5 = useNavigation()
+	local var6 = useLocalization({
 		titleText = "Feature.Squads.Label.StartParty",
 		subTitleText = "Feature.Squads.Label.JoinExperiencesTogether"
 	})
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: httpService (copy), var16 (ref), eventNamesModule (copy), var17 (ref), var14 (copy), var15 (copy), var18 (ref), enumScreensModule (copy)
-		local var22 = httpService:GenerateGUID(false)
-		var16.fireAnalyticsEvent(eventNamesModule.ChatLandingPartyQuickStartButtonClicked, {
-			clickLocation = var17.chatPlacement,
-			partyAttemptId = var22,
-			placeId = var14,
-			universeId = var15
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: httpService (copy), var3 (ref), eventNamesModule (copy), var4 (ref), var1 (copy), var2 (copy), var5 (ref), enumScreensModule (copy)
+		local var8 = httpService:GenerateGUID(false)
+		var3.fireAnalyticsEvent(eventNamesModule.ChatLandingPartyQuickStartButtonClicked, {
+			clickLocation = var4.chatPlacement,
+			partyAttemptId = var8,
+			placeId = var1,
+			universeId = var2
 		})
-		var18.navigate(enumScreensModule.QuickStartSquadInviteFriends, { partyAttemptId = var22 })
-	end, { var16, var18, var17.chatPlacement })
-	local var21 = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationListHeader("startParty") else nil
+		var5.navigate(enumScreensModule.QuickStartSquadInviteFriends, { partyAttemptId = var8 })
+	end, { var3, var5, var4.chatPlacement })
+	local var8 = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationListHeader("startParty") else nil
 	
 	return if fFlagAppChatCustomConversationListRowModule then reactModule.createElement(customConversationListRowModule, {
-		entryHeight = p0.entryHeight,
+		entryHeight = p1.entryHeight,
 		entryIcon = iconName.PersonPlay,
-		onActivated = var20,
-		titleText = var19.titleText,
-		subTitleText = var19.subTitleText,
-		testId = var21
+		onActivated = var7,
+		titleText = var6.titleText,
+		subTitleText = var6.subTitleText,
+		testId = var8
 	}) else reactModule.createElement(customConversationListEntryModule, {
-		entryHeight = p0.entryHeight,
+		entryHeight = p1.entryHeight,
 		entryIcon = images["icons/actions/friends/friendsplaying"],
-		onActivated = var20,
-		titleText = var19.titleText,
-		subTitleText = var19.subTitleText,
-		testId = var21
+		onActivated = var7,
+		titleText = var6.titleText,
+		subTitleText = var6.subTitleText,
+		testId = var8
 	})
 end
 

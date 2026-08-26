@@ -11,7 +11,7 @@ local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-function variantsFactory(p0)
+function variantsFactory(p1)
 	-- upvalues: flagsModule (ref), badgeVariantModule (ref), badgeSizeModule (ref), iconSizeModule (ref), badgeShapeModule (ref), iconPositionModule (ref), dashModule (ref)
 	return {
 		common = {
@@ -27,70 +27,70 @@ function variantsFactory(p0)
 				container = {
 					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then {
 						Transparency = 0.8,
-						Color3 = p0.Color.System.Alert.Color3
-					} else p0.Color.System.Alert
+						Color3 = p1.Color.System.Alert.Color3
+					} else p1.Color.System.Alert
 				},
 				content = {
-					style = if flagsModule.FoundationBadgeBetaUpdate then p0.Color.Content.Emphasis else p0.DarkMode.Content.Emphasis
+					style = if flagsModule.FoundationBadgeBetaUpdate then p1.Color.Content.Emphasis else p1.DarkMode.Content.Emphasis
 				},
-				icon = { style = p0.Color.System.Alert }
+				icon = { style = p1.Color.System.Alert }
 			},
 			[badgeVariantModule.Success] = {
 				container = {
 					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then {
 						Transparency = 0.8,
-						Color3 = p0.Color.System.Success.Color3
-					} else p0.Color.System.Success
+						Color3 = p1.Color.System.Success.Color3
+					} else p1.Color.System.Success
 				},
 				content = {
-					style = if flagsModule.FoundationBadgeBetaUpdate then p0.Color.Content.Emphasis else p0.LightMode.Content.Emphasis
+					style = if flagsModule.FoundationBadgeBetaUpdate then p1.Color.Content.Emphasis else p1.LightMode.Content.Emphasis
 				},
-				icon = { style = p0.Color.System.Success }
+				icon = { style = p1.Color.System.Success }
 			},
 			[badgeVariantModule.Warning] = {
 				container = {
 					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then {
 						Transparency = 0.8,
-						Color3 = p0.Color.System.Warning.Color3
-					} else p0.Color.System.Warning
+						Color3 = p1.Color.System.Warning.Color3
+					} else p1.Color.System.Warning
 				},
 				content = {
-					style = if flagsModule.FoundationBadgeBetaUpdate then p0.Color.Content.Emphasis else p0.LightMode.Content.Emphasis
+					style = if flagsModule.FoundationBadgeBetaUpdate then p1.Color.Content.Emphasis else p1.LightMode.Content.Emphasis
 				},
-				icon = { style = p0.Color.System.Warning }
+				icon = { style = p1.Color.System.Warning }
 			},
 			[badgeVariantModule.Contrast] = {
-				container = { backgroundStyle = p0.Color.System.Contrast },
-				content = { style = p0.Inverse.Content.Emphasis },
-				icon = { style = p0.Inverse.Content.Emphasis }
+				container = { backgroundStyle = p1.Color.System.Contrast },
+				content = { style = p1.Inverse.Content.Emphasis },
+				icon = { style = p1.Inverse.Content.Emphasis }
 			},
 			[badgeVariantModule.Standard] = {
-				container = { backgroundStyle = p0.Color.ActionStandard.Background },
-				content = { style = p0.Color.ActionStandard.Foreground },
-				icon = { style = p0.Color.ActionStandard.Foreground }
+				container = { backgroundStyle = p1.Color.ActionStandard.Background },
+				content = { style = p1.Color.ActionStandard.Foreground },
+				icon = { style = p1.Color.ActionStandard.Foreground }
 			},
 			[badgeVariantModule.Neutral] = if flagsModule.FoundationBadgeBetaUpdate then nil else {
-				container = { backgroundStyle = p0.Color.Shift.Shift_300 },
-				content = { style = p0.Color.Content.Emphasis },
-				icon = { style = p0.Color.ActionStandard.Foreground }
+				container = { backgroundStyle = p1.Color.Shift.Shift_300 },
+				content = { style = p1.Color.Content.Emphasis },
+				icon = { style = p1.Color.ActionStandard.Foreground }
 			},
 			[badgeVariantModule.OverMedia] = {
 				container = {
-					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then p0.Color.OverMedia.OverMedia_0 else p0.LightMode.Surface.Surface_100,
+					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then p1.Color.OverMedia.OverMedia_0 else p1.LightMode.Surface.Surface_100,
 					stroke = if flagsModule.FoundationBadgeBetaUpdate then nil else {
-						Color = p0.LightMode.Stroke.Default.Color3,
-						Transparency = p0.LightMode.Stroke.Default.Transparency
+						Color = p1.LightMode.Stroke.Default.Color3,
+						Transparency = p1.LightMode.Stroke.Default.Transparency
 					}
 				},
 				content = {
-					style = if flagsModule.FoundationBadgeBetaUpdate then p0.Inverse.OverMedia.OverMedia_0 else p0.LightMode.Content.Emphasis
+					style = if flagsModule.FoundationBadgeBetaUpdate then p1.Inverse.OverMedia.OverMedia_0 else p1.LightMode.Content.Emphasis
 				},
-				icon = { style = p0.Inverse.OverMedia.OverMedia_0 }
+				icon = { style = p1.Inverse.OverMedia.OverMedia_0 }
 			},
 			[badgeVariantModule.Emphasis] = {
-				container = { backgroundStyle = p0.Color.ActionEmphasis.Background },
-				content = { style = p0.Color.ActionEmphasis.Foreground },
-				icon = { style = p0.Color.ActionEmphasis.Foreground }
+				container = { backgroundStyle = p1.Color.ActionEmphasis.Background },
+				content = { style = p1.Color.ActionEmphasis.Foreground },
+				icon = { style = p1.Color.ActionEmphasis.Foreground }
 			}
 		},
 		shapes = {

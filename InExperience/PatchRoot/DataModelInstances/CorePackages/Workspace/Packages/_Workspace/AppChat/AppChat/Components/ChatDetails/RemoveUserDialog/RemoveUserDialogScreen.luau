@@ -4,10 +4,10 @@ local loggerModule = require(script.Parent.Logger)
 local removeUserDialog = roactModule.PureComponent:extend("RemoveUserDialog")
 removeUserDialog.defaultProps = { navigation = nil }
 
-function removeUserDialog.init(p0)
+function removeUserDialog.init(p1)
 	function p0.onRemoveUserDialogClose()
-		-- upvalues: p0 (ref)
-		p0.props.navigation.goBack()
+		-- upvalues: p1 (ref)
+		p1.props.navigation.goBack()
 	end
 end
 

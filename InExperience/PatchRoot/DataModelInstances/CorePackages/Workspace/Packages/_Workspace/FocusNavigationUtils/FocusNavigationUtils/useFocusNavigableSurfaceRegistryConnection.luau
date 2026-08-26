@@ -5,21 +5,21 @@ local useRegisterFocusNavigableSurface = focusNavigableSurfaceRegistryModule.use
 local useDeRegisterFocusNavigableSurface = focusNavigableSurfaceRegistryModule.useDeRegisterFocusNavigableSurface
 local _ = require(focusNavigationUtils.FocusNavigableSurfaceIdentifierEnum)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: useRegisterFocusNavigableSurface (ref), useDeRegisterFocusNavigableSurface (ref), reactModule (ref)
-	local var3 = useRegisterFocusNavigableSurface()
-	local var4 = useDeRegisterFocusNavigableSurface()
-	local var5 = p0 ~= nil and (p2 == nil or p2)
+	local var1 = useRegisterFocusNavigableSurface()
+	local var2 = useDeRegisterFocusNavigableSurface()
+	local var3 = p1 ~= nil and (p3 == nil or p3)
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var3 (ref), p1 (ref), p0 (ref), var4 (ref)
-		if var5 then
-			var3(p1, p0)
+		-- upvalues: var3 (ref), var1 (ref), p2 (ref), p1 (ref), var2 (ref)
+		if var3 then
+			var1(p2, p1)
 		else
-			var4(p1, p0)
+			var2(p2, p1)
 		end
 		return function()
-			-- upvalues: var4 (copy), p1 (copy), p0 (copy)
-			var4(p1, p0)
+			-- upvalues: var2 (copy), p2 (copy), p1 (copy)
+			var2(p2, p1)
 		end
-	end, { var5, p1, p0 })
+	end, { var3, p2, p1 })
 end

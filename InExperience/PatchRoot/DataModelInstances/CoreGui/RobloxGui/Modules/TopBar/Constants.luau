@@ -10,28 +10,28 @@ local chromeShared = parent.Chrome.ChromeShared
 local isNewTiltIconEnabledModule = require(parent.isNewTiltIconEnabled)
 local fFlagTopBarRefactor = require(corePackagesService.Workspace.Packages.InExperienceTopBar).Flags.FFlagTopBarRefactor
 local fFlagEnableSideSheet = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableSideSheet
-local var6 = if enabled() then require(chromeShared.Utility.GetStyleTokens)() else nil
+local var1 = if enabled() then require(chromeShared.Utility.GetStyleTokens)() else nil
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: tenFootInterfaceModule (ref), enabled (ref)
-	return if enabled() then (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * p0 else p0
+	return if enabled() then (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * p1 else p1
 end
 
-local var7 = if enabled() then var6.Size.Size_900 else 36
-local var8 = var7 - 4
-local var9 = if enabled() then if enabled() then (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 58 else 58 else 58
-local var10 = if enabled() then var6.Size.Size_1100 else 44
+local var2 = if enabled() then var1.Size.Size_900 else 36
+local var3 = var2 - 4
+local var4 = if enabled() then if enabled() then (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 58 else 58 else 58
+local var5 = if enabled() then var1.Size.Size_1100 else 44
 
 local _ = function()
-	-- upvalues: isNewTiltIconEnabledModule (ref), var7 (ref), enabled (ref), var9 (ref)
-	return if isNewTiltIconEnabledModule() then if enabled() then var9 else var7 else var7
+	-- upvalues: isNewTiltIconEnabledModule (ref), var2 (ref), enabled (ref), var4 (ref)
+	return if isNewTiltIconEnabledModule() then if enabled() then var4 else var2 else var2
 end
 
-local var11 = if not isNewTiltIconEnabledModule() then var7 elseif enabled() then var9 else var7
-local var12 = if enabled() then var10 else var8
-local var13 = if enabled() then var6.Padding.XXSmall else 2
-local var14 = if enabled() then var6.Gap.Large else 16
-local var15 = if enabled() then var6.Padding.Small else 12
+local var6 = if not isNewTiltIconEnabledModule() then var2 elseif enabled() then var4 else var2
+local var7 = if enabled() then var5 else var3
+local var8 = if enabled() then var1.Padding.XXSmall else 2
+local var9 = if enabled() then var1.Gap.Large else 16
+local var10 = if enabled() then var1.Padding.Small else 12
 
 return {
 	MenuIconOpenScale = 1.25,
@@ -47,29 +47,29 @@ return {
 		-- upvalues: getUIScale (ref)
 		return getUIScale(false) * p1
 	end,
-	useDisplayScaleState = function(p2)
+	useDisplayScaleState = function(p1)
 		-- upvalues: signalsReactModule (ref), signalsModule (ref), displayModule (ref)
-		return signalsReactModule.useSignalState(signalsModule.createComputed(function(p3)
-			-- upvalues: displayModule (copy), p2 (ref)
-			return p2 * displayModule.GetDisplayStore(p3).getUIScale(p3)
+		return signalsReactModule.useSignalState(signalsModule.createComputed(function(p2)
+			-- upvalues: displayModule (copy), p1 (ref)
+			return p1 * displayModule.GetDisplayStore(p2).getUIScale(p2)
 		end))
 	end,
-	TopBarHeight = var11,
+	TopBarHeight = var6,
 	TopBarHeightTenFoot = if enabled() then nil else 72,
-	TopBarButtonHeight = var12,
-	TopBarButtonPadding = var13,
-	TopBarTopMargin = if fFlagTopBarRefactor then var6.Gap.Medium else var11 - var12 - 2 * var13,
-	LegacyCloseMenuIconSize = if isNewTiltIconEnabledModule() then var11 - var6.Size.Size_100 else 30,
-	MENU_ICON_SIZE = if enabled() then var6.Size.Size_600 else 24,
+	TopBarButtonHeight = var7,
+	TopBarButtonPadding = var8,
+	TopBarTopMargin = if fFlagTopBarRefactor then var1.Gap.Medium else var6 - var7 - 2 * var8,
+	LegacyCloseMenuIconSize = if isNewTiltIconEnabledModule() then var6 - var1.Size.Size_100 else 30,
+	MENU_ICON_SIZE = if enabled() then var1.Size.Size_600 else 24,
 	UnibarFrame = {
-		PaddingTop = if enabled() then var6.Padding.XXSmall else 2,
-		PaddingBottom = if enabled() then var6.Padding.XXSmall else 2,
-		PaddingLeft = var14 + var15 + (if fFlagEnableSideSheet then 0 else var11) + (if enabled() then var6.Padding.XXSmall else 2),
-		ExtendedSize = var11 - (if enabled() then var6.Size.Size_100 else 4)
+		PaddingTop = if enabled() then var1.Padding.XXSmall else 2,
+		PaddingBottom = if enabled() then var1.Padding.XXSmall else 2,
+		PaddingLeft = var9 + var10 + (if fFlagEnableSideSheet then 0 else var6) + (if enabled() then var1.Padding.XXSmall else 2),
+		ExtendedSize = var6 - (if enabled() then var1.Size.Size_100 else 4)
 	},
-	ScreenSideOffset = var14,
+	ScreenSideOffset = var9,
 	ScreenSideOffsetTenFoot = if enabled() then nil else 48,
-	TopBarPadding = var15,
+	TopBarPadding = var10,
 	HealthRedColor = Color3.fromRGB(255, 28, 0),
 	HealthYellowColor = Color3.fromRGB(250, 235, 0),
 	HealthGreenColor = Color3.fromRGB(27, 252, 107),

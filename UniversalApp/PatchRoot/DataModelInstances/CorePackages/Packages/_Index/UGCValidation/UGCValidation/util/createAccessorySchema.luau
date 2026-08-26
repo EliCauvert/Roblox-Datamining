@@ -1,5 +1,5 @@
-﻿return function(p0)
-	assert(p0, "attachmentName cannot be nil")
+﻿return function(p1)
+	assert(p1, "attachmentName cannot be nil")
 	
 	return {
 		ClassName = "Accessory",
@@ -20,7 +20,7 @@
 				Name = "Handle",
 				ClassName = "Part",
 				_children = {
-					{ ClassName = "Attachment", Name = p0 },
+					{ ClassName = "Attachment", Name = p1 },
 					{ ClassName = "SpecialMesh" },
 					{
 						ClassName = "StringValue",

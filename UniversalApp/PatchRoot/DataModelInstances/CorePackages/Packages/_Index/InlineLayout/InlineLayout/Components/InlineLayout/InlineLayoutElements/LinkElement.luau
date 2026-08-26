@@ -7,29 +7,29 @@ local inlineSpanElementModule = require(inlineLayoutElements.InlineSpanElement)
 local hoverContextModule = require(inlineLayoutElements.HoverContext)
 local _ = require(inlineLayoutElements.RenderableInlineElement)
 local t = {
-	new = function(p0, p1)
+	new = function(p1, p2)
 		-- upvalues: inlineSpanElementModule (ref)
-		return inlineSpanElementModule.new(HoverContextWrapper, p1, p0)
+		return inlineSpanElementModule.new(HoverContextWrapper, p2, p1)
 	end
 }
 
-function HoverContextWrapper(p2)
+function HoverContextWrapper(p1)
 	-- upvalues: hoverContextModule (ref), reactModule (ref), foundationModule (ref), useTokens (ref)
-	local var6, var7 = hoverContextModule.useHoverContext(p2.id)
+	local var1, var2 = hoverContextModule.useHoverContext(p1.id)
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "size-0-0 auto-xy row",
-		LayoutOrder = p2.LayoutOrder,
-		onActivated = p2.onActivated,
-		backgroundStyle = if var6 then useTokens().Color.State.Hover else nil,
-		onStateChanged = reactModule.useCallback(function(p3)
-			-- upvalues: var7 (ref), foundationModule (copy)
-			var7(p3 == foundationModule.Enums.ControlState.Hover)
-		end, { var7 }),
+		LayoutOrder = p1.LayoutOrder,
+		onActivated = p1.onActivated,
+		backgroundStyle = if var1 then useTokens().Color.State.Hover else nil,
+		onStateChanged = reactModule.useCallback(function(p2)
+			-- upvalues: var2 (ref), foundationModule (copy)
+			var2(p2 == foundationModule.Enums.ControlState.Hover)
+		end, { var2 }),
 		stateLayer = {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		}
-	}, p2.children)
+	}, p1.children)
 end
 
 return t

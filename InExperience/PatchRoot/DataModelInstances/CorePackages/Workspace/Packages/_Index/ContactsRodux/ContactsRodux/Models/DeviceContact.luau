@@ -4,13 +4,13 @@ local _ = require(script.Parent.Parent.Types.ContactTypes)
 local dashModule = require(parent.Dash)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
 	t.__index = t
 	local t_1 = {
-		id = p0.id,
-		phoneNumbers = p0.phoneNumbers,
-		contactName = p0.contactName
+		id = p1.id,
+		phoneNumbers = p1.phoneNumbers,
+		contactName = p1.contactName
 	}
 	setmetatable(t_1, t)
 	
@@ -19,26 +19,26 @@ end
 
 function t.mock(p1)
 	-- upvalues: getMockNameModule (ref), dashModule (ref), t (ref)
-	local var4 = getMockNameModule()
+	local var1 = getMockNameModule()
 	
 	return t.new(dashModule.join({
-		id = var4,
-		contactName = var4,
+		id = var1,
+		contactName = var1,
 		phoneNumbers = { "123456" }
 	}, p1))
 end
 
-function t.formatFromDevice(p2)
+function t.formatFromDevice(p1)
 	-- upvalues: t (ref)
 	return t.new({
-		id = t.generateId(p2),
-		contactName = (p2.firstname or "") .. " " .. (p2.lastname or ""),
-		phoneNumbers = p2.phonenumber
+		id = t.generateId(p1),
+		contactName = (p1.firstname or "") .. " " .. (p1.lastname or ""),
+		phoneNumbers = p1.phonenumber
 	})
 end
 
-function t.generateId(p3)
-	return (p3.firstname or "") .. (p3.lastname or "") .. tostring(p3.phonenumber[1])
+function t.generateId(p1)
+	return (p1.firstname or "") .. (p1.lastname or "") .. tostring(p1.phonenumber[1])
 end
 
 return t

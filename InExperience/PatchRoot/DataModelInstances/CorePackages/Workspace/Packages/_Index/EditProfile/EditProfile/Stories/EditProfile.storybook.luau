@@ -22,11 +22,11 @@ local t = { language = "en-us" }
 local t_1 = { Light = colorMode.Light, Dark = colorMode.Dark }
 local t_2 = { Console = device.Console, Desktop = device.Desktop }
 
-local var14 = function(p0)
+local var1 = function(p1)
 	-- upvalues: roduxModule (ref), cryoModule (ref)
 	return roduxModule.Store.new(function()
-		-- upvalues: cryoModule (copy), p0 (ref)
-		return cryoModule.Dictionary.join(p0, {
+		-- upvalues: cryoModule (copy), p1 (ref)
+		return cryoModule.Dictionary.join(p1, {
 			ScreenSize = Vector2.new(600, 600),
 			TopBar = { topBarHeight = 0 },
 			GlobalGuiInset = { left = 0, top = 0, right = 0, bottom = 0 }
@@ -46,20 +46,20 @@ return {
 			controls = cryoModule.Dictionary.join(t, p1.controls or {})
 		})
 	end,
-	mapStory = function(p2)
-		-- upvalues: t_1 (ref), reactModule (ref), styleProviderWithDefaultTheme (ref), roactRoduxModule (ref), var14 (ref), universalAppPolicyModule (ref), apolloClientModule (ref), mockApolloClient (ref), foundationProvider (ref), t_2 (ref), designTokenProvider (ref), mockLocale (ref)
-		return function(p3)
-			-- upvalues: t_1 (copy), reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), var14 (copy), universalAppPolicyModule (copy), apolloClientModule (copy), mockApolloClient (copy), foundationProvider (copy), t_2 (copy), designTokenProvider (copy), mockLocale (copy), p2 (ref)
+	mapStory = function(p1)
+		-- upvalues: t_1 (ref), reactModule (ref), styleProviderWithDefaultTheme (ref), roactRoduxModule (ref), var1 (ref), universalAppPolicyModule (ref), apolloClientModule (ref), mockApolloClient (ref), foundationProvider (ref), t_2 (ref), designTokenProvider (ref), mockLocale (ref)
+		return function(p2)
+			-- upvalues: t_1 (copy), reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), var1 (copy), universalAppPolicyModule (copy), apolloClientModule (copy), mockApolloClient (copy), foundationProvider (copy), t_2 (copy), designTokenProvider (copy), mockLocale (copy), p1 (ref)
 			return reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
-				storeProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var14(p3.definition.state or {}) }, {
+				storeProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var1(p2.definition.state or {}) }, {
 					policyProvider = reactModule.createElement(universalAppPolicyModule.RoactAppPolicy.Provider, { policy = { universalAppPolicyModule.AppFeaturePolicies } }, {
 						apolloClient = reactModule.createElement(apolloClientModule.ApolloProvider, { client = mockApolloClient({}) }, {
 							foundationProvider = reactModule.createElement(foundationProvider, {
-								colorMode = t_1[p3.theme],
-								device = t_2[p3.platform],
-								preferences = p3.settings
+								colorMode = t_1[p2.theme],
+								device = t_2[p2.platform],
+								preferences = p2.settings
 							}, {
-								designTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = mockLocale(p2, p3) })
+								designTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = mockLocale(p1, p2) })
 							})
 						})
 					})

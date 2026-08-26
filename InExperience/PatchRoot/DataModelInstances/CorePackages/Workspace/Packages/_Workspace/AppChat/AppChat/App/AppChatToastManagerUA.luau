@@ -11,15 +11,15 @@ local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 
 function AppChatToastManagerUA()
 	-- upvalues: useDispatch (ref), reactModule (ref), navigateIntoChatModule (ref), enteredChatFromEntryPointModule (ref), socialCommonModule (ref), appChatToastEventReceiverModule (ref), overlayHostModule (ref)
-	local var8 = useDispatch()
+	local var1 = useDispatch()
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		ToastEventReceiver = reactModule.createElement(appChatToastEventReceiverModule, {
-			navigateToChat = reactModule.useCallback(function(p0)
-				-- upvalues: var8 (ref), navigateIntoChatModule (copy), enteredChatFromEntryPointModule (copy), socialCommonModule (copy)
-				var8(navigateIntoChatModule({ conversationId = p0 }, true))
-				var8(enteredChatFromEntryPointModule(socialCommonModule.Enums.ChatEntryPointNames.ToastUniversalApp))
-			end, { var8 })
+			navigateToChat = reactModule.useCallback(function(p1)
+				-- upvalues: var1 (ref), navigateIntoChatModule (copy), enteredChatFromEntryPointModule (copy), socialCommonModule (copy)
+				var1(navigateIntoChatModule({ conversationId = p1 }, true))
+				var1(enteredChatFromEntryPointModule(socialCommonModule.Enums.ChatEntryPointNames.ToastUniversalApp))
+			end, { var1 })
 		}),
 		OverlayHost = reactModule.createElement(overlayHostModule)
 	})

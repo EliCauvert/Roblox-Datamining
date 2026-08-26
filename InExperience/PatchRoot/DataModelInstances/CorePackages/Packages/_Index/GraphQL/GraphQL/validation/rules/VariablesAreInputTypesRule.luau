@@ -5,15 +5,15 @@ local isInputType = require(parent.type.definition).isInputType
 local typeFromAST = require(parent.utilities.typeFromAST).typeFromAST
 
 return {
-	VariablesAreInputTypesRule = function(p0)
+	VariablesAreInputTypesRule = function(p1)
 		-- upvalues: typeFromAST (ref), isInputType (ref), print (ref), graphQLError (ref)
 		return {
-			VariableDefinition = function(_, p1)
-				-- upvalues: typeFromAST (copy), p0 (ref), isInputType (copy), print (copy), graphQLError (copy)
-				local var0 = typeFromAST(p0:getSchema(), p1.type)
+			VariableDefinition = function(_, p2)
+				-- upvalues: typeFromAST (copy), p1 (ref), isInputType (copy), print (copy), graphQLError (copy)
+				local var1 = typeFromAST(p1:getSchema(), p2.type)
 				
-				if var0 and not isInputType(var0) then
-					p0:reportError(graphQLError.new(("Variable \"$%s\" cannot be non-input type \"%s\"."):format(p1.variable.name.value, print(p1.type)), p1.type))
+				if var1 and not isInputType(var1) then
+					p1:reportError(graphQLError.new(("Variable \"$%s\" cannot be non-input type \"%s\"."):format(p2.variable.name.value, print(p2.type)), p2.type))
 				end
 			end
 		}

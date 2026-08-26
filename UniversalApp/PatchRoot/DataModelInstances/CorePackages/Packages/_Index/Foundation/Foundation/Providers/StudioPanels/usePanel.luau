@@ -32,13 +32,13 @@ return function(p1)
 		local var9 = reactUtilsModule.useAsync(function()
 			-- upvalues: p1 (ref), var6 (ref), var5 (ref), var3 (ref), var8 (ref), var2 (ref)
 			if p1.isOpen and not var6 then
-				local var1, var2 = var5.current(var3.current.anchorUri, var3.current.position, var8, var3.current.depth, var3.current.parentPopoverId)
-				var2.current = var2
+				local var10, var11 = var5.current(var3.current.anchorUri, var3.current.position, var8, var3.current.depth, var3.current.parentPopoverId)
+				var11.current = var11
 				
-				return var1
-			elseif var2.current then
-				var2.current()
-				var2.current = nil
+				return var10
+			elseif var11.current then
+				var11.current()
+				var11.current = nil
 			end
 			return nil
 		end, { p1.isOpen, var3, var6 })
@@ -53,13 +53,13 @@ return function(p1)
 		local var10 = reactUtilsModule.useAsync(function()
 			-- upvalues: p1 (ref), var5 (ref), var3 (ref), var4 (ref), var2 (ref)
 			if p1.isOpen then
-				local var1, var2 = var5.current(var3.current.anchorUri, var3.current.position, var4.current, var3.current.depth, var3.current.parentPopoverId)
-				var2.current = var2
+				local var11, var12 = var5.current(var3.current.anchorUri, var3.current.position, var4.current, var3.current.depth, var3.current.parentPopoverId)
+				var12.current = var12
 				
-				return var1
-			elseif var2.current then
-				var2.current()
-				var2.current = nil
+				return var11
+			elseif var12.current then
+				var12.current()
+				var12.current = nil
 			end
 			return nil
 		end, { p1.isOpen, var3 })

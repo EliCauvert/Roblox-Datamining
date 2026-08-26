@@ -12,28 +12,28 @@ local webViewService = game:GetService("WebViewService")
 
 return function()
 	-- upvalues: useRef (ref), useCallback (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), fFlagAppNavMyStatsTab (ref), browserService (ref), httpService (ref), useEffect (ref)
-	local var5 = useRef(nil)
-	local var6 = useCallback(function()
-		-- upvalues: var5 (ref)
-		if var5.current then
-			var5.current:Disconnect()
-			var5.current = nil
+	local var1 = useRef(nil)
+	local var2 = useCallback(function()
+		-- upvalues: var1 (ref)
+		if var1.current then
+			var1.current:Disconnect()
+			var1.current = nil
 		end
-	end, { var5 })
-	local var7 = useCallback(function(p0, p1, p2)
-		-- upvalues: getFFlagEnableUnifiedWebViews (copy), var6 (ref), var5 (ref), webViewService (copy), fFlagAppNavMyStatsTab (copy), browserService (copy), httpService (copy)
+	end, { var1 })
+	local var3 = useCallback(function(p1, p2, p3)
+		-- upvalues: getFFlagEnableUnifiedWebViews (copy), var2 (ref), var1 (ref), webViewService (copy), fFlagAppNavMyStatsTab (copy), browserService (copy), httpService (copy)
 		if getFFlagEnableUnifiedWebViews() then
-			var6()
-			var5.current = webViewService.OnWindowClosed:Connect(function()
-				-- upvalues: webViewService (copy), var6 (copy), fFlagAppNavMyStatsTab (copy), p2 (ref)
+			var2()
+			var1.current = webViewService.OnWindowClosed:Connect(function()
+				-- upvalues: webViewService (copy), var2 (copy), fFlagAppNavMyStatsTab (copy), p3 (ref)
 				webViewService:CloseWindow()
-				var6()
+				var2()
 				
-				if fFlagAppNavMyStatsTab and p2 then
-					p2()
+				if fFlagAppNavMyStatsTab and p3 then
+					p3()
 				end
 			end)
-			webViewService:OpenWindow(p0, p1, true)
+			webViewService:OpenWindow(p1, p2, true)
 			
 			return
 		end
@@ -42,17 +42,17 @@ return function()
 			visible = true,
 			isGenericWebview = true,
 			enableOverlayReplacement = true,
-			url = p0,
-			title = p1
+			url = p1,
+			title = p2
 		}))
-	end, { var6 })
+	end, { var2 })
 	useEffect(function()
-		-- upvalues: var6 (ref)
+		-- upvalues: var2 (ref)
 		return function()
-			-- upvalues: var6 (copy)
-			var6()
+			-- upvalues: var2 (copy)
+			var2()
 		end
-	end, { var6 })
+	end, { var2 })
 	
-	return var7
+	return var3
 end

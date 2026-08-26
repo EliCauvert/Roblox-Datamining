@@ -16,30 +16,30 @@ local t = {
 	closeUpsell = function() end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), imageSetLabel (ref), images (ref), fFlagFixUpsellVerificationToNavigateToOverlaysModule (ref), useLocalization (ref), upsellContainerModule (ref), cryoModule (ref), phoneVerificationStatusOverlayModule (ref)
-	local var9 = mergePropsModule(t, p0)
-	local var10, var11 = reactModule.useState(false)
+	local var1 = mergePropsModule(t, p1)
+	local var2, var3 = reactModule.useState(false)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		PhoneVerificationUpsellOverlay = reactModule.createElement(upsellContainerModule, cryoModule.Dictionary.join(var9, {
+		PhoneVerificationUpsellOverlay = reactModule.createElement(upsellContainerModule, cryoModule.Dictionary.join(var1, {
 			onSuccess = function()
-				-- upvalues: var11 (ref), fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (ref)
-				var11(true)
+				-- upvalues: var3 (ref), fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var1 (ref)
+				var3(true)
 				task.delay(3, function()
-					-- upvalues: fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (copy)
+					-- upvalues: fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var1 (copy)
 					if fFlagFixUpsellVerificationToNavigateToOverlaysModule then
-						var9.closeUpsell()
-						var9.onSuccess()
+						var1.closeUpsell()
+						var1.onSuccess()
 						
 						return
 					end
-					var9.onSuccess()
-					var9.closeUpsell()
+					var1.onSuccess()
+					var1.closeUpsell()
 				end)
 			end
 		})),
-		SuccessOverlay = var10 and reactModule.createElement(phoneVerificationStatusOverlayModule, {
+		SuccessOverlay = var2 and reactModule.createElement(phoneVerificationStatusOverlayModule, {
 			image = reactModule.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromOffset(40, 40),

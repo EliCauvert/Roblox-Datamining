@@ -5,10 +5,10 @@ local createUserChatSettingStoreModule = require(script.createUserChatSettingSto
 local fFlagAIRephraseSettingEnabled = sharedFlagsModule.FFlagAIRephraseSettingEnabled
 local fFlagChatSummariesSettingEnabled = sharedFlagsModule.FFlagChatSummariesSettingEnabled
 
-local function _(p0, p1, p2, p3)
-	if p0 == "AIRephraseSettingStatus" then
-		p2(if p1 ~= "Enabled" then p1 == "Disabled" else true)
-		p3(p1 == "Enabled")
+local function _(p1, p2, p3, p4)
+	if p1 == "AIRephraseSettingStatus" then
+		p3(if p2 ~= "Enabled" then p2 == "Disabled" else true)
+		p4(p2 == "Enabled")
 	end
 end
 
@@ -18,25 +18,25 @@ local function buildAIRephraseConfig()
 		setupListener = function(_, _)
 			return function() end
 		end,
-		buildFeatureValueHandler = function(p4, p5)
-			return function(p6, p7)
-				-- upvalues: p4 (ref), p5 (ref)
-				if p6 == "AIRephraseSettingStatus" then
-					p4(if p7 ~= "Enabled" then p7 == "Disabled" else true)
-					p5(p7 == "Enabled")
+		buildFeatureValueHandler = function(p1, p2)
+			return function(p3, p4)
+				-- upvalues: p1 (ref), p2 (ref)
+				if p3 == "AIRephraseSettingStatus" then
+					p1(if p4 ~= "Enabled" then p4 == "Disabled" else true)
+					p2(p4 == "Enabled")
 				end
 			end
 		end,
-		onSetEnabled = function(value, p8)
-			p8(value)
+		onSetEnabled = function(value, p1)
+			p1(value)
 		end
 	}
 end
 
-local _ = function(p9, p10, p11, p12)
-	if p9 == "AllowThirdPartySummary" then
-		p11(if p10 ~= "Enabled" then p10 == "Disabled" else true)
-		p12(p10 == "Enabled")
+local _ = function(p1, p2, p3, p4)
+	if p1 == "AllowThirdPartySummary" then
+		p3(if p2 ~= "Enabled" then p2 == "Disabled" else true)
+		p4(p2 == "Enabled")
 	end
 end
 
@@ -46,40 +46,40 @@ local function buildChatSummariesConfig()
 		setupListener = function(_, _)
 			return function() end
 		end,
-		buildFeatureValueHandler = function(p13, p14)
-			return function(p15, p16)
-				-- upvalues: p13 (ref), p14 (ref)
-				if p15 == "AllowThirdPartySummary" then
-					p13(if p16 ~= "Enabled" then p16 == "Disabled" else true)
-					p14(p16 == "Enabled")
+		buildFeatureValueHandler = function(p1, p2)
+			return function(p3, p4)
+				-- upvalues: p1 (ref), p2 (ref)
+				if p3 == "AllowThirdPartySummary" then
+					p1(if p4 ~= "Enabled" then p4 == "Disabled" else true)
+					p2(p4 == "Enabled")
 				end
 			end
 		end,
-		onSetEnabled = function(value, p17)
-			p17(value)
+		onSetEnabled = function(value, p1)
+			p1(value)
 		end
 	}
 end
 
-local var5 = if fFlagAIRephraseSettingEnabled then signalsModule.createComputed(function()
+local var1 = if fFlagAIRephraseSettingEnabled then signalsModule.createComputed(function()
 	-- upvalues: createUserChatSettingStoreModule (ref), buildAIRephraseConfig (ref)
 	return createUserChatSettingStoreModule(buildAIRephraseConfig())
 end) else nil
-local var6 = if fFlagChatSummariesSettingEnabled then signalsModule.createComputed(function()
+local var2 = if fFlagChatSummariesSettingEnabled then signalsModule.createComputed(function()
 	-- upvalues: createUserChatSettingStoreModule (ref), buildChatSummariesConfig (ref)
 	return createUserChatSettingStoreModule(buildChatSummariesConfig())
 end) else nil
 
 return {
-	getAIRephraseSettingStore = var5,
-	getChatSummariesSettingStore = var6,
-	updateExpChatFeatureValue = function(p18, p19)
-		-- upvalues: var5 (ref), var6 (ref)
-		if var5 then
-			var5(false).setIsSettingVisible(p18, p19)
+	getAIRephraseSettingStore = var1,
+	getChatSummariesSettingStore = var2,
+	updateExpChatFeatureValue = function(p1, p2)
+		-- upvalues: var1 (ref), var2 (ref)
+		if var1 then
+			var1(false).setIsSettingVisible(p1, p2)
 		end
-		if var6 then
-			var6(false).setIsSettingVisible(p18, p19)
+		if var2 then
+			var2(false).setIsSettingVisible(p1, p2)
 		end
 	end
 }

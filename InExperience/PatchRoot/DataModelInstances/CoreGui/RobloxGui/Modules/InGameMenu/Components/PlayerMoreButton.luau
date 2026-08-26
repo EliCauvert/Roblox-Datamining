@@ -14,12 +14,12 @@ moreButton.validateProps = t.strictInterface({
 	userId = if fFlagLuaMenuPerfImprovementsModule then t.number else nil
 })
 
-function moreButton.init(p0)
+function moreButton.init(p1)
 	-- upvalues: fFlagLuaMenuPerfImprovementsModule (ref)
 	if fFlagLuaMenuPerfImprovementsModule then
 		function p0.onActivated()
-			-- upvalues: p0 (ref)
-			p0.props.onActivated(p0.props.userId)
+			-- upvalues: p1 (ref)
+			p1.props.onActivated(p1.props.userId)
 		end
 	end
 end

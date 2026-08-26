@@ -12,15 +12,15 @@ blurredModalPortal.validateProps = t.strictInterface({
 	[roact.Children] = t.optional(t.table)
 })
 
-function blurredModalPortal.render(p0)
+function blurredModalPortal.render(p1)
 	-- upvalues: roact (ref), coreGuiService (ref), constantsModule (ref)
 	return roact.createElement(roact.Portal, { target = coreGuiService }, {
 		InGameMenuModalBlur = roact.createElement("ScreenGui", {
 			OnTopOfCoreBlur = true,
 			IgnoreGuiInset = true,
-			Enabled = p0.props.Enabled,
+			Enabled = p1.props.Enabled,
 			DisplayOrder = constantsModule.DisplayOrder.BlurredModalPortal
-		}, p0.props[roact.Children])
+		}, p1.props[roact.Children])
 	})
 end
 

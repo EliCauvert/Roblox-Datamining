@@ -6,11 +6,11 @@ function t.new()
 	return setmetatable({ passed = true, reasons = {} }, t)
 end
 
-function t:updateReasons(p0, p1)
-	if p0 then
+function t:updateReasons(p1, p2)
+	if p1 then
 		return
 	end
-	table.insert(self.reasons, table.concat(p1, "\n"))
+	table.insert(self.reasons, table.concat(p2, "\n"))
 	self.passed = false
 end
 

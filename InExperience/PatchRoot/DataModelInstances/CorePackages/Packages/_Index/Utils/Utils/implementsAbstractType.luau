@@ -6,16 +6,16 @@ local doTypesOverlap = graphQLModule.doTypesOverlap
 local isCompositeType = graphQLModule.isCompositeType
 local _ = require(script.Parent.types)
 
-function t.implementsAbstractType(value, p0, p1)
+function t.implementsAbstractType(value, p1, p2)
 	-- upvalues: boolean (ref), isCompositeType (ref), doTypesOverlap (ref)
-	if p1 == nil or p0 == nil then
+	if p2 == nil or p1 == nil then
 		return false
-	elseif p0 == p1 then
+	elseif p1 == p2 then
 		return true
 	end
-	local var2 = isCompositeType(p0)
+	local var1 = isCompositeType(p1)
 	
-	return if boolean.toJSBoolean(if boolean.toJSBoolean(var2) then isCompositeType(p1) else var2) then doTypesOverlap(value, p0, p1) else false
+	return if boolean.toJSBoolean(if boolean.toJSBoolean(var1) then isCompositeType(p2) else var1) then doTypesOverlap(value, p1, p2) else false
 end
 
 return t

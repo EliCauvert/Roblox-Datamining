@@ -10,10 +10,10 @@ local friendsLarge = UIBloxModule.App.ImageSet.Images["icons/menu/friends_large"
 
 return function()
 	-- upvalues: useStyle (ref), fFlagConnectionsToFriendsRename (ref), getLocalizedStrings (ref), reactModule (ref), imageSetLabel (ref), friendsLarge (ref)
-	local var2 = useStyle()
-	local theme = var2.Theme
-	local font = var2.Font
-	local var3 = font.BaseSize * font.Body.RelativeSize
+	local var1 = useStyle()
+	local theme = var1.Theme
+	local font = var1.Font
+	local var2 = font.BaseSize * font.Body.RelativeSize
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -44,9 +44,9 @@ return function()
 			}).noFriendsText,
 			TextColor3 = theme.TextDefault.Color,
 			TextTransparency = theme.TextDefault.Transparency,
-			TextSize = var3,
+			TextSize = var2,
 			Font = font.Body.Font,
-			Size = UDim2.new(1, 0, 0, var3),
+			Size = UDim2.new(1, 0, 0, var2),
 			TextYAlignment = Enum.TextYAlignment.Top
 		})
 	})

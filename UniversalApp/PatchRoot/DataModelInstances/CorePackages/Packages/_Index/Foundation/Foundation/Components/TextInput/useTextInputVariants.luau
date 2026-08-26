@@ -11,19 +11,19 @@ local getInputVariantsFactoryModule = require(foundation.Components.InputField.g
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function computeProps(p0)
+local function computeProps(p1)
 	return {
 		container = {
-			minHeight = p0.minContainerHeight,
-			horizontalPadding = UDim.new(0, p0.horizontalPadding),
-			radius = p0.radius,
-			tag = p0.containerTag
+			minHeight = p1.minContainerHeight,
+			horizontalPadding = UDim.new(0, p1.horizontalPadding),
+			radius = p1.radius,
+			tag = p1.containerTag
 		},
-		textBox = { fontStyle = p0.typography },
-		icon = { size = p0.iconSize },
+		textBox = { fontStyle = p1.typography },
+		icon = { size = p1.iconSize },
 		clearButton = {
-			icon = p0.clearButtonIcon,
-			padding = p0.clearButtonPadding
+			icon = p1.clearButtonIcon,
+			padding = p1.clearButtonPadding
 		}
 	}
 end
@@ -88,11 +88,11 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p2, p3, p4, p5, p6, p7)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref)
-	local textInput = variantsContextModule.useVariants("TextInput", variantsFactory, p2)
-	local inputField = variantsContextModule.useVariants("InputField", getInputVariantsFactoryModule, p2)
-	local var13 = inputField.variants[p4 or inputVariantModule.Standard]
+	local textInput = variantsContextModule.useVariants("TextInput", variantsFactory, p1)
+	local inputField = variantsContextModule.useVariants("InputField", getInputVariantsFactoryModule, p1)
+	local var1 = inputField.variants[p3 or inputVariantModule.Standard]
 	
-	return composeStyleVariantModule(textInput.common, inputField.sizes[p3], textInput.sizes[p3], if p4 ~= inputVariantModule.Utility then {} else var13, if p5 then inputField.radius[p5] else inputField.defaultRadius[p3], if p6 ~= nil then {} else inputField.focusedState[p6], if p7 ~= nil then {} else inputField.errorState[p7], if p4 == inputVariantModule.Utility then var13 else {})
+	return composeStyleVariantModule(textInput.common, inputField.sizes[p2], textInput.sizes[p2], if p3 ~= inputVariantModule.Utility then {} else var1, if p4 then inputField.radius[p4] else inputField.defaultRadius[p2], if p5 ~= nil then {} else inputField.focusedState[p5], if p6 ~= nil then {} else inputField.errorState[p6], if p3 == inputVariantModule.Utility then var1 else {})
 end

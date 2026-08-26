@@ -6,12 +6,12 @@ local parent = script.Parent.Parent
 local assetsModule = require(parent.Resources.Assets)
 local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
 local globalConfigModule = require(parent.GlobalConfig)
-local var3 = t.strictInterface({ onClick = t.callback })
+local var1 = t.strictInterface({ onClick = t.callback })
 
-return function(p0)
-	-- upvalues: globalConfigModule (ref), var3 (ref), roact (ref), imageSetButton (ref), assetsModule (ref)
+return function(p1)
+	-- upvalues: globalConfigModule (ref), var1 (ref), roact (ref), imageSetButton (ref), assetsModule (ref)
 	if globalConfigModule.propValidation then
-		assert(var3(p0))
+		assert(var1(p1))
 	end
 	return roact.createElement(imageSetButton, {
 		AnchorPoint = Vector2.new(0.5, 0.5),
@@ -19,6 +19,6 @@ return function(p0)
 		Image = assetsModule.Images.RobloxLogo,
 		Position = UDim2.new(0, 50, 0.5, 0),
 		Size = UDim2.new(0, 32, 0, 32),
-		[roact.Event.Activated] = p0.onClick
+		[roact.Event.Activated] = p1.onClick
 	})
 end

@@ -23,15 +23,15 @@ return {
 		-- upvalues: createEditSessionModule (ref)
 		return createEditSessionModule()
 	end,
-	renderEditor = function(p0)
+	renderEditor = function(p1)
 		-- upvalues: reactModule (ref), voiceEditorModule (ref)
-		return reactModule.createElement(voiceEditorModule, { layoutOrder = 2, controller = p0 })
+		return reactModule.createElement(voiceEditorModule, { layoutOrder = 2, controller = p1 })
 	end,
 	renderPreviewLayer = function(p1, p2)
 		-- upvalues: reactModule (ref), voicePreviewLayerModule (ref)
 		return reactModule.createElement(voicePreviewLayerModule, { zIndex = 4, controller = p1, ctx = p2 })
 	end,
-	toEdits = function(p3)
-		return if p3 == nil or p3.text == "" then {} else { tts = p3 }
+	toEdits = function(p1)
+		return if p1 == nil or p1.text == "" then {} else { tts = p1 }
 	end
 }

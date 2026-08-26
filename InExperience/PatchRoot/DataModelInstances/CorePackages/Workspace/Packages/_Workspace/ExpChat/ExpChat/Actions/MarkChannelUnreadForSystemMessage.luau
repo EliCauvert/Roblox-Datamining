@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2)
-	return { text = p0, channelNameOverride = p1, metadata = p2 }
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3)
+	return { text = p1, channelNameOverride = p2, metadata = p3 }
 end)

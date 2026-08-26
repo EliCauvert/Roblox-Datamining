@@ -31,13 +31,13 @@ local t_3 = {
 	UPDATE_PROFILE = "Failed to update profile"
 }
 
-local function getErrorType(p0)
+local function getErrorType(p1)
 	-- upvalues: t_1 (ref), t (ref)
-	if typeof(p0) == "table" then
-		if p0.message and string.find(string.lower(p0.message), "timeout") then
+	if typeof(p1) == "table" then
+		if p1.message and string.find(string.lower(p1.message), "timeout") then
 			return t_1.TIMEOUT
 		end
-		local statusCode = p0.StatusCode or p0.statusCode
+		local statusCode = p1.StatusCode or p1.statusCode
 		
 		if statusCode then
 			if statusCode == t.UNAUTHORIZED then
@@ -50,8 +50,8 @@ local function getErrorType(p0)
 				return t_1.SERVER_ERROR
 			end
 		end
-	elseif typeof(p0) == "string" then
-		return if string.find(string.lower(p0), "timeout") then t_1.TIMEOUT elseif string.find(string.lower(p0), "network") or string.find(string.lower(p0), "connection") then t_1.NETWORK else t_1.UNKNOWN
+	elseif typeof(p1) == "string" then
+		return if string.find(string.lower(p1), "timeout") then t_1.TIMEOUT elseif string.find(string.lower(p1), "network") or string.find(string.lower(p1), "connection") then t_1.NETWORK else t_1.UNKNOWN
 	end
 end
 
@@ -63,8 +63,8 @@ return {
 	getErrorType = getErrorType,
 	getErrorMessage = function(p1, p2)
 		-- upvalues: getErrorType (ref), t_2 (ref), t_3 (ref)
-		local var6 = t_2[getErrorType(p1)]
+		local var1 = t_2[getErrorType(p1)]
 		
-		return if p2 and t_3[p2] then var6 or t_3[p2] else var6 or t_3.SAVE_BACKGROUND
+		return if p2 and t_3[p2] then var1 or t_3[p2] else var1 or t_3.SAVE_BACKGROUND
 	end
 }

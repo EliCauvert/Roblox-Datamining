@@ -9,26 +9,26 @@ local getFriendsTabVisibilityStoreModule = require(parent.FriendsChat.GetFriends
 local friendsChatTabNameModule = require(parent.FriendsChat.FriendsChatTabName)
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFriendsTabVisibilityStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), signalsModule (ref), friendsChatChannelAddedModule (ref), friendsChatTabNameModule (ref), friendsChatChannelRemovedModule (ref)
-	local var8 = getFriendsTabVisibilityStoreModule(false)
-	local var9 = if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false) else nil
+	local var1 = getFriendsTabVisibilityStoreModule(false)
+	local var2 = if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false) else nil
 	
-	return signalsModule.createEffect(function(p1)
-		-- upvalues: var8 (ref), p0 (ref), friendsChatChannelAddedModule (copy), friendsChatTabNameModule (copy), var9 (ref), friendsChatChannelRemovedModule (copy)
-		if var8.getIsFriendsTabVisible(p1) then
-			p0:dispatch(friendsChatChannelAddedModule(friendsChatTabNameModule))
+	return signalsModule.createEffect(function(p2)
+		-- upvalues: var1 (ref), p1 (ref), friendsChatChannelAddedModule (copy), friendsChatTabNameModule (copy), var2 (ref), friendsChatChannelRemovedModule (copy)
+		if var1.getIsFriendsTabVisible(p2) then
+			p1:dispatch(friendsChatChannelAddedModule(friendsChatTabNameModule))
 			
-			if var9 then
-				var9.addChannelTab({ type = "FriendsChat", name = friendsChatTabNameModule }, nil)
+			if var2 then
+				var2.addChannelTab({ type = "FriendsChat", name = friendsChatTabNameModule }, nil)
 				
 				return
 			end
 		else
-			p0:dispatch(friendsChatChannelRemovedModule(friendsChatTabNameModule))
+			p1:dispatch(friendsChatChannelRemovedModule(friendsChatTabNameModule))
 			
-			if var9 then
-				var9.handleChannelRemoved(friendsChatTabNameModule)
+			if var2 then
+				var2.handleChannelRemoved(friendsChatTabNameModule)
 			end
 		end
 	end)

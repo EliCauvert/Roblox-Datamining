@@ -24,37 +24,37 @@ return roduxModule.createReducer({
 			promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.None
 		}
 	end,
-	[cancelSubscriptionSucceededModule.name] = function(p0, p1)
+	[cancelSubscriptionSucceededModule.name] = function(p1, p2)
 		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
-		local cloned = table.clone(p0)
-		cloned.subscriptionId = p1.subscriptionId
+		local cloned = table.clone(p1)
+		cloned.subscriptionId = p2.subscriptionId
 		cloned.promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.Success
 		
 		return cloned
 	end,
-	[cancelSubscriptionFailedModule.name] = function(p2, p3)
+	[cancelSubscriptionFailedModule.name] = function(p1, p2)
 		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
-		local cloned = table.clone(p2)
-		cloned.errorState = p3.errorState
-		cloned.subscriptionId = p3.subscriptionId
+		local cloned = table.clone(p1)
+		cloned.errorState = p2.errorState
+		cloned.subscriptionId = p2.subscriptionId
 		cloned.promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.Error
 		
 		return cloned
 	end,
-	[cancelSubscriptionRequestedModule.name] = function(p4, p5)
+	[cancelSubscriptionRequestedModule.name] = function(p1, p2)
 		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
-		local cloned = table.clone(p4)
-		cloned.subscriptionId = p5.subscriptionId
+		local cloned = table.clone(p1)
+		cloned.subscriptionId = p2.subscriptionId
 		cloned.promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.Pending
 		
 		return cloned
 	end,
-	[cancelSubscriptionStartedModule.name] = function(p6, p7)
+	[cancelSubscriptionStartedModule.name] = function(p1, p2)
 		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
-		local cloned = table.clone(p6)
+		local cloned = table.clone(p1)
 		cloned.promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.Request
-		cloned.subscriptionId = p7.subscriptionId
-		cloned.expirationDate = p7.expirationDate
+		cloned.subscriptionId = p2.subscriptionId
+		cloned.expirationDate = p2.expirationDate
 		
 		return cloned
 	end

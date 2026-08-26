@@ -2,19 +2,19 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal({})
+	local var1, var2 = createSignal({})
 	
 	return {
-		getMap = var0,
-		setCommitted = function(value, p0)
-			-- upvalues: var0 (ref), var1 (ref)
-			local cloned = table.clone(var0(false))
-			cloned[value] = p0
-			var1(cloned)
+		getMap = var1,
+		setCommitted = function(value, p1)
+			-- upvalues: var1 (ref), var2 (ref)
+			local cloned = table.clone(var1(false))
+			cloned[value] = p1
+			var2(cloned)
 		end,
 		clear = function()
-			-- upvalues: var1 (ref)
-			var1({})
+			-- upvalues: var2 (ref)
+			var2({})
 		end
 	}
 end

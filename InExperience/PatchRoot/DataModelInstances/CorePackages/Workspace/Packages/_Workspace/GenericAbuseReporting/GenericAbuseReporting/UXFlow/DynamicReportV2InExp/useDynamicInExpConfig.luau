@@ -15,55 +15,55 @@ local sendAnalyticsEvent = analyticsServiceModule.sendAnalyticsEvent
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local inExperience = abuseVectorModule.InExperience
 
-local function getCacheKey(p0, p1)
+local function getCacheKey(p1, p2)
 	local t = {}
 	
-	for i in pairs(p1) do
+	for i in pairs(p2) do
 		table.insert(t, i)
 	end
 	table.sort(t)
-	local list = { p0 }
+	local list = { p1 }
 	
 	for i_1, v in ipairs(t) do
-		table.insert(list, v .. "=" .. tostring(p1[v]))
+		table.insert(list, v .. "=" .. tostring(p2[v]))
 	end
 	return table.concat(list, ":")
 end
 
-local var8 = nil
+local var1 = nil
 
 local function clearCacheForTesting()
-	-- upvalues: var8 (write)
-	var8 = nil
+	-- upvalues: var1 (write)
+	var1 = nil
 end
 
-local function useDynamicInExpConfigWithKeyGuard(p2, p3)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), getCacheKey (ref), inExperience (ref), reactModule (ref), var8 (write), sendAnalyticsEvent (ref), telemetryEventType (ref), fetchConfigWithAttributesModule (ref), dashModule (ref), getNewRunId (ref)
-	local var14 = useRoactService(roactNetworking)
-	local var15 = getCacheKey(inExperience, p3)
-	local var16, var17 = reactModule.useState(nil)
-	local var18, var19 = reactModule.useState(false)
-	local var20 = reactModule.useRef(0)
-	local var21 = if var16 and var16.key ~= var15 then nil elseif var16 then var16.data else nil
+local function useDynamicInExpConfigWithKeyGuard(p3, p4)
+	-- upvalues: useRoactService (ref), roactNetworking (ref), getCacheKey (ref), inExperience (ref), reactModule (ref), var1 (write), sendAnalyticsEvent (ref), telemetryEventType (ref), fetchConfigWithAttributesModule (ref), dashModule (ref), getNewRunId (ref)
+	local var2 = useRoactService(roactNetworking)
+	local var3 = getCacheKey(inExperience, p4)
+	local var4, var5 = reactModule.useState(nil)
+	local var6, var7 = reactModule.useState(false)
+	local var8 = reactModule.useRef(0)
+	local var9 = if var4 and var4.key ~= var3 then nil elseif var4 then var4.data else nil
 	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), var17 (ref), p3 (ref), var8 (copy), var15 (ref), var19 (ref), sendAnalyticsEvent (copy), inExperience (copy), telemetryEventType (copy), var20 (ref), fetchConfigWithAttributesModule (copy), var14 (ref), dashModule (copy), getNewRunId (copy)
-		if not p2 then
-			var17(nil)
+		-- upvalues: p3 (ref), var5 (ref), p4 (ref), var1 (copy), var3 (ref), var7 (ref), sendAnalyticsEvent (copy), inExperience (copy), telemetryEventType (copy), var8 (ref), fetchConfigWithAttributesModule (copy), var2 (ref), dashModule (copy), getNewRunId (copy)
+		if not p3 then
+			var5(nil)
 			
 			return
 		end
-		local experienceTargetId = p3.experienceTargetId
+		local experienceTargetId = p4.experienceTargetId
 		
-		if var8 and var8.key == var15 and DateTime.now().UnixTimestampMillis - var8.fetchedAtMs <= 1800000 then
-			var17({ key = var15, data = var8.data })
-			var19(false)
+		if var1 and var1.key == var3 and DateTime.now().UnixTimestampMillis - var1.fetchedAtMs <= 1800000 then
+			var5({ key = var3, data = var1.data })
+			var7(false)
 			sendAnalyticsEvent({
 				run_id = "unknown",
 				total_duration = 0,
 				abuse_vector = inExperience,
 				target_id = experienceTargetId,
 				path = {},
-				config_name = var8.data.name
+				config_name = var1.data.name
 			}, {
 				sub_event_type = telemetryEventType.ConfigLoaded,
 				config_load_detail = { load_duration_ms = 0, cache_hit = true, retry_count = 0 }
@@ -71,21 +71,21 @@ local function useDynamicInExpConfigWithKeyGuard(p2, p3)
 			
 			return
 		end
-		local var22 = var20.current + 1
-		var20.current = var22
-		var17(nil)
-		var19(false)
+		local var10 = var8.current + 1
+		var8.current = var10
+		var5(nil)
+		var7(false)
 		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
-		fetchConfigWithAttributesModule(var14, inExperience, p3):andThen(function(p5)
-			-- upvalues: var20 (copy), var22 (ref), var8 (copy), var15 (copy), var17 (copy), sendAnalyticsEvent (copy), inExperience (copy), experienceTargetId (ref), telemetryEventType (copy), unixTimestampMillis (ref)
-			if var20.current == var22 then
+		fetchConfigWithAttributesModule(var2, inExperience, p4):andThen(function(p5)
+			-- upvalues: var8 (copy), var10 (ref), var1 (copy), var3 (copy), var5 (copy), sendAnalyticsEvent (copy), inExperience (copy), experienceTargetId (ref), telemetryEventType (copy), unixTimestampMillis (ref)
+			if var8.current == var10 then
 				local responseBody = p5.responseBody
-				var8 = {
-					key = var15,
+				var1 = {
+					key = var3,
 					data = responseBody,
 					fetchedAtMs = DateTime.now().UnixTimestampMillis
 				}
-				var17({ key = var15, data = responseBody })
+				var5({ key = var3, data = responseBody })
 				sendAnalyticsEvent({
 					run_id = "unknown",
 					total_duration = 0,
@@ -104,11 +104,11 @@ local function useDynamicInExpConfigWithKeyGuard(p2, p3)
 				
 				return
 			end
-		end):catch(function(p4)
-			-- upvalues: var20 (copy), var22 (ref), var19 (copy), dashModule (copy), sendAnalyticsEvent (copy), inExperience (copy), experienceTargetId (ref), getNewRunId (copy), telemetryEventType (copy)
-			if var20.current == var22 then
-				warn("Failed to fetch Dynamic Report V2 config:", p4)
-				var19(true)
+		end):catch(function(p5)
+			-- upvalues: var8 (copy), var10 (ref), var7 (copy), dashModule (copy), sendAnalyticsEvent (copy), inExperience (copy), experienceTargetId (ref), getNewRunId (copy), telemetryEventType (copy)
+			if var8.current == var10 then
+				warn("Failed to fetch Dynamic Report V2 config:", p5)
+				var7(true)
 				sendAnalyticsEvent({
 					total_duration = 0,
 					abuse_vector = inExperience,
@@ -118,48 +118,48 @@ local function useDynamicInExpConfigWithKeyGuard(p2, p3)
 				}, {
 					sub_event_type = telemetryEventType.Error,
 					error_detail = {
-						error_message = `Failed to fetch config: {string.sub(dashModule.pretty(p4, { depth = 2 }), 1, 256)}`
+						error_message = `Failed to fetch config: {string.sub(dashModule.pretty(p5, { depth = 2 }), 1, 256)}`
 					}
 				})
 				
 				return
 			end
 		end)
-	end, { var14, p2, p3, var15 })
+	end, { var2, p3, p4, var3 })
 	
 	return {
-		config = var21,
-		hasError = var18,
-		setHasError = var19,
+		config = var9,
+		hasError = var6,
+		setHasError = var7,
 		abuseVector = inExperience
 	}
 end
 
-local function useDynamicInExpConfigLegacy(p6, p7)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), reactModule (ref), getCacheKey (ref), inExperience (ref), var8 (write), sendAnalyticsEvent (ref), telemetryEventType (ref), fetchConfigWithAttributesModule (ref), dashModule (ref), getNewRunId (ref)
-	local var23 = useRoactService(roactNetworking)
-	local var24, var25 = reactModule.useState(nil)
-	local var26, var27 = reactModule.useState(false)
-	local var28 = reactModule.useRef(0)
+local function useDynamicInExpConfigLegacy(p3, p4)
+	-- upvalues: useRoactService (ref), roactNetworking (ref), reactModule (ref), getCacheKey (ref), inExperience (ref), var1 (write), sendAnalyticsEvent (ref), telemetryEventType (ref), fetchConfigWithAttributesModule (ref), dashModule (ref), getNewRunId (ref)
+	local var2 = useRoactService(roactNetworking)
+	local var3, var4 = reactModule.useState(nil)
+	local var5, var6 = reactModule.useState(false)
+	local var7 = reactModule.useRef(0)
 	reactModule.useEffect(function()
-		-- upvalues: p6 (ref), var25 (ref), getCacheKey (copy), inExperience (copy), p7 (ref), var8 (copy), var27 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var28 (ref), fetchConfigWithAttributesModule (copy), var23 (ref), dashModule (copy), getNewRunId (copy)
-		if not p6 then
-			var25(nil)
+		-- upvalues: p3 (ref), var4 (ref), getCacheKey (copy), inExperience (copy), p4 (ref), var1 (copy), var6 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var7 (ref), fetchConfigWithAttributesModule (copy), var2 (ref), dashModule (copy), getNewRunId (copy)
+		if not p3 then
+			var4(nil)
 			
 			return
 		end
-		local var29 = getCacheKey(inExperience, p7)
+		local var8 = getCacheKey(inExperience, p4)
 		
-		if var8 and var8.key == var29 and DateTime.now().UnixTimestampMillis - var8.fetchedAtMs <= 1800000 then
-			var25(var8.data)
-			var27(false)
+		if var1 and var1.key == var8 and DateTime.now().UnixTimestampMillis - var1.fetchedAtMs <= 1800000 then
+			var4(var1.data)
+			var6(false)
 			sendAnalyticsEvent({
 				run_id = "unknown",
 				total_duration = 0,
 				abuse_vector = inExperience,
-				target_id = p7.experienceTargetId,
+				target_id = p4.experienceTargetId,
 				path = {},
-				config_name = var8.data.name
+				config_name = var1.data.name
 			}, {
 				sub_event_type = telemetryEventType.ConfigLoaded,
 				config_load_detail = { load_duration_ms = 0, cache_hit = true, retry_count = 0 }
@@ -167,26 +167,26 @@ local function useDynamicInExpConfigLegacy(p6, p7)
 			
 			return
 		end
-		local var30 = var28.current + 1
-		var28.current = var30
-		var25(nil)
-		var27(false)
+		local var9 = var7.current + 1
+		var7.current = var9
+		var4(nil)
+		var6(false)
 		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
-		fetchConfigWithAttributesModule(var23, inExperience, p7):andThen(function(p9)
-			-- upvalues: var28 (copy), var30 (ref), var8 (copy), var29 (ref), var25 (copy), sendAnalyticsEvent (copy), inExperience (copy), p7 (copy), telemetryEventType (copy), unixTimestampMillis (ref)
-			if var28.current == var30 then
-				local responseBody = p9.responseBody
-				var8 = {
-					key = var29,
+		fetchConfigWithAttributesModule(var2, inExperience, p4):andThen(function(p5)
+			-- upvalues: var7 (copy), var9 (ref), var1 (copy), var8 (ref), var4 (copy), sendAnalyticsEvent (copy), inExperience (copy), p4 (copy), telemetryEventType (copy), unixTimestampMillis (ref)
+			if var7.current == var9 then
+				local responseBody = p5.responseBody
+				var1 = {
+					key = var8,
 					data = responseBody,
 					fetchedAtMs = DateTime.now().UnixTimestampMillis
 				}
-				var25(responseBody)
+				var4(responseBody)
 				sendAnalyticsEvent({
 					run_id = "unknown",
 					total_duration = 0,
 					abuse_vector = inExperience,
-					target_id = p7.experienceTargetId,
+					target_id = p4.experienceTargetId,
 					path = {},
 					config_name = responseBody.name
 				}, {
@@ -200,42 +200,42 @@ local function useDynamicInExpConfigLegacy(p6, p7)
 				
 				return
 			end
-		end):catch(function(p8)
-			-- upvalues: var28 (copy), var30 (ref), var27 (copy), dashModule (copy), sendAnalyticsEvent (copy), inExperience (copy), p7 (copy), getNewRunId (copy), telemetryEventType (copy)
-			if var28.current == var30 then
-				warn("Failed to fetch Dynamic Report V2 config:", p8)
-				var27(true)
+		end):catch(function(p5)
+			-- upvalues: var7 (copy), var9 (ref), var6 (copy), dashModule (copy), sendAnalyticsEvent (copy), inExperience (copy), p4 (copy), getNewRunId (copy), telemetryEventType (copy)
+			if var7.current == var9 then
+				warn("Failed to fetch Dynamic Report V2 config:", p5)
+				var6(true)
 				sendAnalyticsEvent({
 					total_duration = 0,
 					abuse_vector = inExperience,
-					target_id = p7.experienceTargetId,
+					target_id = p4.experienceTargetId,
 					run_id = getNewRunId(),
 					path = {}
 				}, {
 					sub_event_type = telemetryEventType.Error,
 					error_detail = {
-						error_message = `Failed to fetch config: {string.sub(dashModule.pretty(p8, { depth = 2 }), 1, 256)}`
+						error_message = `Failed to fetch config: {string.sub(dashModule.pretty(p5, { depth = 2 }), 1, 256)}`
 					}
 				})
 				
 				return
 			end
 		end)
-	end, { var23, p6, p7 })
+	end, { var2, p3, p4 })
 	
 	return {
-		config = var24,
-		hasError = var26,
-		setHasError = var27,
+		config = var3,
+		hasError = var5,
+		setHasError = var6,
 		abuseVector = inExperience
 	}
 end
 
 return {
 	CONFIG_CACHE_TTL_MS = 1800000,
-	useDynamicInExpConfig = function(p10, p11)
+	useDynamicInExpConfig = function(p3, p4)
 		-- upvalues: fFlagFixAbuseReportInExpPhantomAnalyticsModule (ref), useDynamicInExpConfigWithKeyGuard (ref), useDynamicInExpConfigLegacy (ref)
-		return if fFlagFixAbuseReportInExpPhantomAnalyticsModule then useDynamicInExpConfigWithKeyGuard(p10, p11) else useDynamicInExpConfigLegacy(p10, p11)
+		return if fFlagFixAbuseReportInExpPhantomAnalyticsModule then useDynamicInExpConfigWithKeyGuard(p3, p4) else useDynamicInExpConfigLegacy(p3, p4)
 	end,
 	clearCacheForTesting = clearCacheForTesting
 }

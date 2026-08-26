@@ -9,49 +9,49 @@ local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local receivedPageConversationsModule = require(appChat.Conversations.Actions.ReceivedPageConversations)
 local requestPageConversationsModule = require(appChat.Conversations.Actions.RequestPageConversations)
 
-return function(p0)
+return function(p1)
 	-- upvalues: name (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), fFlagAppChatConversationStoreModule (ref), requestPageConversationsModule (ref), appChatNetworkingModule (ref), processConversationsModule (ref), receivedPageConversationsModule (ref)
-	name:info("Fetching conversations by page with cursor {}", p0 or "nil")
+	name:info("Fetching conversations by page with cursor {}", p1 or "nil")
 	
-	return function(p1)
-		-- upvalues: fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), p0 (ref), appChatPerfTrackerModule (copy), fFlagAppChatConversationStoreModule (copy), requestPageConversationsModule (copy), appChatNetworkingModule (copy), processConversationsModule (copy), receivedPageConversationsModule (copy), name (copy)
-		if fFlagAppChatPerfTrackingModule and fFlagAppChatMessageTTIMilestonesModule and p0 == nil then
+	return function(p2)
+		-- upvalues: fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), p1 (ref), appChatPerfTrackerModule (copy), fFlagAppChatConversationStoreModule (copy), requestPageConversationsModule (copy), appChatNetworkingModule (copy), processConversationsModule (copy), receivedPageConversationsModule (copy), name (copy)
+		if fFlagAppChatPerfTrackingModule and fFlagAppChatMessageTTIMilestonesModule and p1 == nil then
 			appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.ChatLandingTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name)
 			appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.ChatLandingTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch)
 			appChatPerfTrackerModule.trackRequest(appChatPerfTrackerModule.Events.ChatLandingTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "GetUserConversations")
 		end
 		if fFlagAppChatConversationStoreModule then
-			p1:dispatch(requestPageConversationsModule())
+			p2:dispatch(requestPageConversationsModule())
 		end
-		return p1:dispatch(appChatNetworkingModule.rodux.GetUserConversations.API(p0)):tap(function(p4)
-			-- upvalues: p1 (ref), processConversationsModule (copy), fFlagAppChatConversationStoreModule (copy), receivedPageConversationsModule (copy), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), p0 (copy), appChatPerfTrackerModule (copy)
-			p1:dispatch(processConversationsModule(p4.responseBody.conversations))
+		return p2:dispatch(appChatNetworkingModule.rodux.GetUserConversations.API(p1)):tap(function(p3)
+			-- upvalues: p2 (ref), processConversationsModule (copy), fFlagAppChatConversationStoreModule (copy), receivedPageConversationsModule (copy), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), p1 (copy), appChatPerfTrackerModule (copy)
+			p2:dispatch(processConversationsModule(p3.responseBody.conversations))
 			
 			if fFlagAppChatConversationStoreModule then
-				p1:dispatch(receivedPageConversationsModule())
+				p2:dispatch(receivedPageConversationsModule())
 			end
-			if fFlagAppChatPerfTrackingModule and fFlagAppChatMessageTTIMilestonesModule and p0 == nil then
+			if fFlagAppChatPerfTrackingModule and fFlagAppChatMessageTTIMilestonesModule and p1 == nil then
 				appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.ChatLandingTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name)
 				appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.ChatLandingTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived)
 			end
 		end):andThen(function(p3)
-			-- upvalues: name (copy), p0 (copy)
+			-- upvalues: name (copy), p1 (copy)
 			local responseBody = p3.responseBody
 			
 			if responseBody and responseBody.next_cursor and responseBody.next_cursor ~= "" then
 				name:debug("Next cursor found: {}", responseBody.next_cursor)
 				
-				return p0, responseBody.next_cursor
+				return p1, responseBody.next_cursor
 			end
 			name:debug("No next cursor found")
 			
-			return p0, ""
-		end):catch(function(p2)
-			-- upvalues: fFlagAppChatConversationStoreModule (copy), p1 (ref), receivedPageConversationsModule (copy), name (copy)
+			return p1, ""
+		end):catch(function(p3)
+			-- upvalues: fFlagAppChatConversationStoreModule (copy), p2 (ref), receivedPageConversationsModule (copy), name (copy)
 			if fFlagAppChatConversationStoreModule then
-				p1:dispatch(receivedPageConversationsModule())
+				p2:dispatch(receivedPageConversationsModule())
 			end
-			name:warning("Error in GetUserConversations request. Error: {}", tostring(p2))
+			name:warning("Error in GetUserConversations request. Error: {}", tostring(p3))
 		end)
 	end
 end

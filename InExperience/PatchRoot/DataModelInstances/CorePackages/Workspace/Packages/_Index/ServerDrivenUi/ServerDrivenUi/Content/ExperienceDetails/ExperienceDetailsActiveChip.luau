@@ -15,25 +15,25 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local gameDetailsSubpage = discoveryAnalyticsModule.Events.gameDetailsSubpage
 local useNavigateToServersModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useNavigateToServers)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: signalsReactModule (ref), dataHydrationModule (ref), usePlayerCountText (ref), useLocalization (ref), useNavigateToServersModule (ref), reactModule (ref), playersService (ref), gameDetailsSubpage (ref), sduiChip (ref), foundationModule (ref)
-	local layoutOrder = p0.layoutOrder
-	local universeId = p0.universeId
-	local var11 = signalsReactModule.useSignalState(dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
-	local var12 = useNavigateToServersModule(universeId)
+	local layoutOrder = p1.layoutOrder
+	local universeId = p1.universeId
+	local var1 = signalsReactModule.useSignalState(dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
+	local var2 = useNavigateToServersModule(universeId)
 	
 	return reactModule.createElement(sduiChip, {
 		text = useLocalization({
 			numActivePlayers = {
 				"Feature.GameDetails.Label.LowercaseNumberPlaying",
-				numActivePlayers = usePlayerCountText(if var11 then var11.playerCount else 0)
+				numActivePlayers = usePlayerCountText(if var1 then var1.playerCount else 0)
 			}
 		}).numActivePlayers,
 		layoutOrder = layoutOrder,
 		leadingIconName = foundationModule.Enums.IconName.TwoPeople,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: var11 (ref), playersService (copy), gameDetailsSubpage (copy), universeId (ref), var12 (ref)
-			local rootPlaceId = var11 and var11.rootPlaceId
+			-- upvalues: var1 (ref), playersService (copy), gameDetailsSubpage (copy), universeId (ref), var2 (ref)
+			local rootPlaceId = var1 and var1.rootPlaceId
 			
 			if rootPlaceId then
 				gameDetailsSubpage({
@@ -45,7 +45,7 @@ return reactModule.memo(function(p0)
 					placeId = tostring(rootPlaceId)
 				}, "ExperienceDetailsActiveCountChip")
 			end
-			var12()
-		end, { universeId, var11, var12 })
+			var2()
+		end, { universeId, var1, var2 })
 	})
 end)

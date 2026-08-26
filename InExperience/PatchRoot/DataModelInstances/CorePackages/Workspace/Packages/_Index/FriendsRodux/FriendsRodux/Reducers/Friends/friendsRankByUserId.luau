@@ -5,16 +5,16 @@ local llamaModule = require(parent_1.llama)
 local _ = require(parent.roduxFriendsTypes)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), t (ref), llamaModule (ref)
 	return roduxModule.createReducer(t, {
-		[p0.friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p1, p2)
+		[p1.friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: llamaModule (copy)
-			return if p2.queryArgs and p2.queryArgs.userSort then llamaModule.Dictionary.join(p1, {
-				[tostring(p2.namedIds.users)] = llamaModule.Dictionary.map(p2.responseBody.data or {}, function(p3, p4)
-					return p4, tostring(p3.id)
+			return if p3.queryArgs and p3.queryArgs.userSort then llamaModule.Dictionary.join(p2, {
+				[tostring(p3.namedIds.users)] = llamaModule.Dictionary.map(p3.responseBody.data or {}, function(p4, p5)
+					return p5, tostring(p4.id)
 				end)
-			}) else p1
+			}) else p2
 		end
 	})
 end

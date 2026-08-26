@@ -3,15 +3,15 @@ local _ = require(game:GetService("CorePackages").Workspace.Packages.RobloxTrans
 local t = {}
 t.__index = t
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: t (ref), statsUtilsModule (ref)
 	local label = {}
 	setmetatable(label, t)
 	label._frame = Instance.new("Frame")
 	label._frame.Name = "PS_DecoratedValueLabel"
 	label._frame.BackgroundTransparency = 1
-	label._valueName = p1
-	label._statType = p0
+	label._valueName = p2
+	label._statType = p1
 	label._decorationFrame = Instance.new("Frame")
 	label._decorationFrame.Name = "PS_Decoration"
 	label._decorationFrame.Parent = label._frame
@@ -31,25 +31,25 @@ function t.new(p0, p1)
 	return label
 end
 
-function t:SetZIndex(p2)
-	self._frame.ZIndex = p2
-	self._decorationFrame.ZIndex = p2
-	self._label.ZIndex = p2
+function t:SetZIndex(p1)
+	self._frame.ZIndex = p1
+	self._decorationFrame.ZIndex = p1
+	self._label.ZIndex = p1
 end
 
-function t:PlaceInParent(p3, p4, p5)
-	self._frame.Parent = p3
-	self._frame.Size = p4
-	self._frame.Position = p5
+function t:PlaceInParent(p1, p2, p3)
+	self._frame.Parent = p1
+	self._frame.Size = p2
+	self._frame.Position = p3
 end
 
 function t:GetDecorationFrame()
 	return self._decorationFrame
 end
 
-function t:SetValue(p6)
+function t:SetValue(p1)
 	-- upvalues: statsUtilsModule (ref)
-	self._label.Text = string.format("%s: %s", self._valueName, statsUtilsModule.FormatTypedValue(p6, self._statType))
+	self._label.Text = string.format("%s: %s", self._valueName, statsUtilsModule.FormatTypedValue(p1, self._statType))
 end
 
 return t

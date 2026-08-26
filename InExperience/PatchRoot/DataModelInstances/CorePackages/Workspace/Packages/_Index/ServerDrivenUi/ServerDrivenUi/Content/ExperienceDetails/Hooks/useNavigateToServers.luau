@@ -13,41 +13,41 @@ local default = linkingProtocolModule.LinkingProtocol.default
 local fFlagEnableBlackbirdPageCloseCallback = require(parent.SharedFlags).FFlagEnableBlackbirdPageCloseCallback
 local getSubscriptionPurchaseCloseCallback = require(parent.RobloxSubscriptionPurchaseApp).Utils.getSubscriptionPurchaseCloseCallback
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAppPolicy (ref), useNavigation (ref), fFlagEnableBlackbirdPageCloseCallback (ref), reactModule (ref), getSubscriptionPurchaseCloseCallback (ref), urlBuilder (ref), default (ref), appPage (ref)
-	local var6 = useAppPolicy(function(p1)
-		return p1.getWebViewSupport()
+	local var1 = useAppPolicy(function(p2)
+		return p2.getWebViewSupport()
 	end)
-	local var7 = useNavigation()
-	local var8 = if fFlagEnableBlackbirdPageCloseCallback then reactModule.useMemo(function()
+	local var2 = useNavigation()
+	local var3 = if fFlagEnableBlackbirdPageCloseCallback then reactModule.useMemo(function()
 		-- upvalues: getSubscriptionPurchaseCloseCallback (copy)
 		return if getSubscriptionPurchaseCloseCallback then getSubscriptionPurchaseCloseCallback() else nil
 	end, {}) else nil
 	
 	return reactModule.useCallback(function()
-		-- upvalues: urlBuilder (copy), p0 (ref), default (copy), var6 (ref), var7 (ref), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var8 (write)
-		local var9 = urlBuilder.game.info.servers({ universeId = p0 })
+		-- upvalues: urlBuilder (copy), p1 (ref), default (copy), var1 (ref), var2 (ref), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var3 (write)
+		local var4 = urlBuilder.game.info.servers({ universeId = p1 })
 		pcall(function()
-			-- upvalues: default (copy), var9 (ref), var6 (copy), var7 (copy), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var8 (copy)
-			default:isURLRegistered(var9):andThen(function(p2)
-				-- upvalues: default (copy), var9 (copy), var6 (copy), var7 (copy), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var8 (copy)
+			-- upvalues: default (copy), var4 (ref), var1 (copy), var2 (copy), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var3 (copy)
+			default:isURLRegistered(var4):andThen(function(p2)
+				-- upvalues: default (copy), var4 (copy), var1 (copy), var2 (copy), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var3 (copy)
 				if p2 then
-					default:detectURL(var9)
+					default:detectURL(var4)
 					
 					return
-				elseif var6 then
-					var7.navigate(appPage.GenericWebPage, {
-						detail = var9,
-						extraProps = if fFlagEnableBlackbirdPageCloseCallback then { onClose = var8 } else nil
+				elseif var1 then
+					var2.navigate(appPage.GenericWebPage, {
+						detail = var4,
+						extraProps = if fFlagEnableBlackbirdPageCloseCallback then { onClose = var3 } else nil
 					})
 				end
 			end)
 		end)
 	end, {
-		p0,
-		var6,
-		var7,
+		p1,
+		var1,
+		var2,
 		default,
-		var8
+		var3
 	})
 end

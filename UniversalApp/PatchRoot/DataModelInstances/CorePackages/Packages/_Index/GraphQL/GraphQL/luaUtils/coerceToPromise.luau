@@ -5,8 +5,8 @@ local promiseModule = require(parent_1.Promise)
 local _ = require(parent.jsutils.PromiseOrValue)
 
 return {
-	coerceToPromise = function(p0)
+	coerceToPromise = function(p1)
 		-- upvalues: promiseModule (ref)
-		return if promiseModule.is(p0) then p0 else promiseModule.resolve(p0)
+		return if promiseModule.is(p1) then p1 else promiseModule.resolve(p1)
 	end
 }

@@ -13,40 +13,40 @@ local isValidIdentifierModule = require(mediaGallery.isValidIdentifier)
 local _ = require(mediaGallery.MediaGalleryTypes)
 local fFlagLuaAppMediaGalleryNilImageIdFix = require(parent.SharedFlags).FFlagLuaAppMediaGalleryNilImageIdFix
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: useAppPolicy (ref), useIsVideoEligible (ref), isValidIdentifierModule (ref), useCanDevicePlayVideoPreview (ref), edpVideoBlockingConfig (ref), reactModule (ref), isYouTubeVideoModule (ref), fFlagLuaAppMediaGalleryNilImageIdFix (ref), reportWarning (ref), loggingProtocolModule (ref)
-	local var6 = useAppPolicy(function(p3)
-		return p3.getShowVideoThumbnails()
+	local var1 = useAppPolicy(function(p4)
+		return p4.getShowVideoThumbnails()
 	end)
-	local var7 = not isValidIdentifierModule(p1) or useIsVideoEligible(p1)
-	local var8 = useCanDevicePlayVideoPreview(edpVideoBlockingConfig, p1, p2)
+	local var2 = not isValidIdentifierModule(p2) or useIsVideoEligible(p2)
+	local var3 = useCanDevicePlayVideoPreview(edpVideoBlockingConfig, p2, p3)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var7 (ref), p0 (ref), isValidIdentifierModule (copy), isYouTubeVideoModule (copy), var6 (ref), fFlagLuaAppMediaGalleryNilImageIdFix (copy), reportWarning (copy), loggingProtocolModule (copy), p2 (ref)
-		local var7_1 = var8() and var7
-		local var10 = false
+		-- upvalues: var3 (ref), var2 (ref), p1 (ref), isValidIdentifierModule (copy), isYouTubeVideoModule (copy), var1 (ref), fFlagLuaAppMediaGalleryNilImageIdFix (copy), reportWarning (copy), loggingProtocolModule (copy), p3 (ref)
+		local var4 = var3() and var2
+		local var5 = false
 		
-		for i, v in p0 do
+		for i, v in p1 do
 			if isValidIdentifierModule(v.videoId) and not isYouTubeVideoModule(v.assetTypeId) then
-				var10 = true
+				var5 = true
 				break
 			end
 		end
-		local var7_2 = var10 and var7
+		local var6 = var5 and var2
 		local t = {}
 		
-		for i_1, v_1 in p0 do
+		for i_1, v_1 in p1 do
 			if isYouTubeVideoModule(v_1.assetTypeId) then
-				if not var7_2 and var6 then
+				if not var6 and var1 then
 					table.insert(t, v_1)
 				end
 			elseif isValidIdentifierModule(v_1.videoId) then
-				if var7_1 then
+				if var4 then
 					table.insert(t, v_1)
 				end
 			elseif fFlagLuaAppMediaGalleryNilImageIdFix and not isValidIdentifierModule(v_1.imageId) then
 				reportWarning(loggingProtocolModule.default, "MediaGallery", "Dropping non-video MediaItem with invalid imageId", {
-					appPage = p2,
+					appPage = p3,
 					assetTypeId = tostring(v_1.assetTypeId),
 					hasVideoId = tostring(isValidIdentifierModule(v_1.videoId)),
 					hasVideoHash = tostring(isValidIdentifierModule(v_1.videoHash)),
@@ -58,10 +58,10 @@ return function(p0, p1, p2)
 		end
 		return t
 	end, {
-		p0,
-		var6,
-		var7,
-		var8,
-		if fFlagLuaAppMediaGalleryNilImageIdFix then p2 else nil
+		p1,
+		var1,
+		var2,
+		var3,
+		if fFlagLuaAppMediaGalleryNilImageIdFix then p3 else nil
 	})
 end

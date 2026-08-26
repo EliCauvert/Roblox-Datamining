@@ -12,13 +12,13 @@ local namedCounterConfigurationAndFormat = defaultTelemetryEventsModule.namedCou
 
 local function targetMessageFormatFunction()
 	-- upvalues: defaultTelemetryEventsModule (ref)
-	return defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p0)
+	return defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 		return {
-			targetMessageId = p0.targetMessageId,
-			targetMessageSenderId = p0.targetMessageSenderId,
-			targetMessageSentAt = p0.targetMessageSentAt,
-			targetMessageLength = p0.targetMessageLength,
-			targetMessageVisibility = p0.targetMessageVisibility
+			targetMessageId = p1.targetMessageId,
+			targetMessageSenderId = p1.targetMessageSenderId,
+			targetMessageSentAt = p1.targetMessageSentAt,
+			targetMessageLength = p1.targetMessageLength,
+			targetMessageVisibility = p1.targetMessageVisibility
 		}
 	end)
 end
@@ -40,11 +40,11 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Exit", function(p2)
-				return { conversationExitType = p2.conversationExitType }
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Exit", function(p1)
+				return { conversationExitType = p1.conversationExitType }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p3)
-				return { conversationExitType = p3.conversationExitType }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { conversationExitType = p1.conversationExitType }
 			end)
 		}
 	}),
@@ -62,18 +62,18 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.Sent", function(p4)
-				return { messageSentResult = p4.messageSentResult }
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.Sent", function(p1)
+				return { messageSentResult = p1.messageSentResult }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p5)
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
-					messageSentResult = p5.messageSentResult,
-					messageId = p5.messageId,
-					recipientIds = p5.recipientIds,
-					targetMessageId = p5.targetMessageId,
-					targetMessageSenderId = p5.targetMessageSenderId,
-					targetMessageSentAt = p5.targetMessageSentAt,
-					targetMessageLength = p5.targetMessageLength
+					messageSentResult = p1.messageSentResult,
+					messageId = p1.messageId,
+					recipientIds = p1.recipientIds,
+					targetMessageId = p1.targetMessageId,
+					targetMessageSenderId = p1.targetMessageSenderId,
+					targetMessageSentAt = p1.targetMessageSentAt,
+					targetMessageLength = p1.targetMessageLength
 				}
 			end)
 		}
@@ -83,11 +83,11 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Button.MoreMenu", function(p6)
-				return { action = p6.action }
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Button.MoreMenu", function(p1)
+				return { action = p1.action }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p7)
-				return { action = p7.action }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { action = p1.action }
 			end)
 		}
 	}),
@@ -96,11 +96,11 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Button.Send", function(p8)
-				return { sendBtnClickResult = p8.sendBtnClickResult }
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Button.Send", function(p1)
+				return { sendBtnClickResult = p1.sendBtnClickResult }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p9)
-				return { sendBtnClickResult = p9.sendBtnClickResult }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { sendBtnClickResult = p1.sendBtnClickResult }
 			end)
 		}
 	}),
@@ -181,11 +181,11 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.FtuxTooltip.Impression", function(p10)
-				return { tooltipVariant = p10.tooltipVariant }
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.FtuxTooltip.Impression", function(p1)
+				return { tooltipVariant = p1.tooltipVariant }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p11)
-				return { tooltipVariant = p11.tooltipVariant }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { tooltipVariant = p1.tooltipVariant }
 			end)
 		}
 	}),
@@ -194,11 +194,11 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.FtuxTooltip.Dismissed", function(p12)
-				return { tooltipVariant = p12.tooltipVariant }
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.FtuxTooltip.Dismissed", function(p1)
+				return { tooltipVariant = p1.tooltipVariant }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p13)
-				return { tooltipVariant = p13.tooltipVariant }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { tooltipVariant = p1.tooltipVariant }
 			end)
 		}
 	}),
@@ -208,8 +208,8 @@ return {
 		lastUpdated = { 2025, 11, 18 },
 		backendsList = {
 			namedCounterConfigurationNoEmittedInfo("AppChat.ChatConversation.GameCard.Thumbnail.Clicked"),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p14)
-				return { universeId = p14.universeId, placeId = p14.placeId }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { universeId = p1.universeId, placeId = p1.placeId }
 			end)
 		}
 	}),
@@ -219,8 +219,8 @@ return {
 		lastUpdated = { 2025, 11, 18 },
 		backendsList = {
 			namedCounterConfigurationNoEmittedInfo("AppChat.ChatConversation.GameCard.Button.Play"),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p15)
-				return { universeId = p15.universeId, placeId = p15.placeId }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { universeId = p1.universeId, placeId = p1.placeId }
 			end)
 		}
 	}),
@@ -230,8 +230,8 @@ return {
 		lastUpdated = { 2025, 11, 19 },
 		backendsList = {
 			namedCounterConfigurationNoEmittedInfo("AppChat.ChatConversation.GameCard.Metadata.Clicked"),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p16)
-				return { universeId = p16.universeId, placeId = p16.placeId }
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+				return { universeId = p1.universeId, placeId = p1.placeId }
 			end)
 		}
 	})

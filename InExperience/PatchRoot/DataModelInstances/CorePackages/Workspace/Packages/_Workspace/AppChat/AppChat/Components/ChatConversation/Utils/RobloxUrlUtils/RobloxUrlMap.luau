@@ -14,8 +14,8 @@ return {
 				optional = true
 			}
 		},
-		paramCallback = function(p0)
-			return { placeId = p0.id }
+		paramCallback = function(p1)
+			return { placeId = p1.id }
 		end
 	},
 	["/share"] = {

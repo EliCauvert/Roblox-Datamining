@@ -6,53 +6,53 @@ local view = require(parent.Foundation).View
 local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: fFlagSduiExperienceDetailsSupport (ref), getSduiComponentWrapper (ref), reactModule (ref), view (ref), infoTable (ref)
-	local layoutOrder = p0.layoutOrder
+	local layoutOrder = p1.layoutOrder
 	local t = {}
-	local var3 = if p0.numColumns and p0.numColumns > 0 then p0.numColumns else 1
-	local itemsCount = #p0.items
-	local var5 = if fFlagSduiExperienceDetailsSupport then math.ceil(itemsCount / var3) else nil
+	local var1 = if p1.numColumns and p1.numColumns > 0 then p1.numColumns else 1
+	local itemsCount = #p1.items
+	local var2 = if fFlagSduiExperienceDetailsSupport then math.ceil(itemsCount / var1) else nil
 	
-	for i, v in p0.items do
-		local var11
-		local var6 = getSduiComponentWrapper(v)
-		local var7 = if fFlagSduiExperienceDetailsSupport then ((i - 1) % var5 + 1 - 1) * var3 + (math.floor((i - 1) / var5) + 1) else nil
+	for i, v in p1.items do
+		local var3
+		local var4 = getSduiComponentWrapper(v)
+		local var5 = if fFlagSduiExperienceDetailsSupport then ((i - 1) % var2 + 1 - 1) * var1 + (math.floor((i - 1) / var2) + 1) else nil
 		local createElement = reactModule.createElement
-		local var8 = var6
+		local var6 = var4
 		local t_1 = {
 			componentConfig = v,
-			sduiContext = p0.sduiContext,
-			parentAnalyticsContext = p0.analyticsContext
+			sduiContext = p1.sduiContext,
+			parentAnalyticsContext = p1.analyticsContext
 		}
-		local t_2 = { numColumns = p0.numColumns }
+		local t_2 = { numColumns = p1.numColumns }
 		
-		if var3 == 1 then
-			var11 = i == itemsCount
-			var11 = nil
+		if var1 == 1 then
+			var3 = i == itemsCount
+			var3 = nil
 		else
-			var11 = nil
+			var3 = nil
 		end
-		t_2.isLastInSingleColumn = var11
-		t_2.selectionOrder = var7
+		t_2.isLastInSingleColumn = var3
+		t_2.selectionOrder = var5
 		t_1.extraLocalProps = t_2
-		t[i] = createElement(var8, t_1)
+		t[i] = createElement(var6, t_1)
 	end
 	return if fFlagSduiExperienceDetailsSupport then reactModule.createElement(view, {
-		tag = if p0.tag then { [p0.tag] = true, ["col size-full-0 auto-y"] = true } else { ["col size-full-0 auto-y"] = true },
+		tag = if p1.tag then { [p1.tag] = true, ["col size-full-0 auto-y"] = true } else { ["col size-full-0 auto-y"] = true },
 		LayoutOrder = layoutOrder
 	}, {
-		Header = if p0.headerComponent then reactModule.cloneElement(p0.headerComponent, { layoutOrder = 1 }) else nil,
+		Header = if p1.headerComponent then reactModule.cloneElement(p1.headerComponent, { layoutOrder = 1 }) else nil,
 		Content = reactModule.createElement(infoTable, {
 			LayoutOrder = 2,
-			numColumns = p0.numColumns,
-			gridTag = p0.gridTag,
+			numColumns = p1.numColumns,
+			gridTag = p1.gridTag,
 			items = t
 		})
 	}) else reactModule.createElement(infoTable, {
 		LayoutOrder = layoutOrder,
-		numColumns = p0.numColumns,
-		gridTag = p0.gridTag,
+		numColumns = p1.numColumns,
+		gridTag = p1.gridTag,
 		items = t
 	})
 end)

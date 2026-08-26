@@ -4,17 +4,17 @@ return function(value)
 	local getForwardedRef = value.getForwardedRef
 	local setLocalRef = value.setLocalRef
 	
-	return function(p0)
+	return function(p1)
 		-- upvalues: getForwardedRef (ref), setLocalRef (ref)
-		local var0 = getForwardedRef()
-		setLocalRef(p0)
+		local var1 = getForwardedRef()
+		setLocalRef(p1)
 		
-		if typeof(var0) == "function" then
-			var0(p0)
+		if typeof(var1) == "function" then
+			var1(p1)
 			
 			return
-		elseif typeof(var0) == "table" then
-			var0.current = p0
+		elseif typeof(var1) == "table" then
+			var1.current = p1
 		end
 	end
 end

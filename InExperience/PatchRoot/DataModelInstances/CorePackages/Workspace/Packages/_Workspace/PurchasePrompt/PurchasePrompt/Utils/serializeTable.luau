@@ -1,35 +1,35 @@
-﻿local function serializeTable(p0, p1, p2, p3)
+﻿local function serializeTable(p1, p2, p3, p4)
 	-- upvalues: serializeTable (ref)
-	p2 = p2 or false
-	p3 = p3 or 0
-	local repeated = string.rep(" ", p3)
+	p3 = p3 or false
+	p4 = p4 or 0
+	local repeated = string.rep(" ", p4)
 	
-	if p1 then
-		repeated ..= p1 .. " = "
+	if p2 then
+		repeated ..= p2 .. " = "
 	end
-	if type(p0) == "table" then
-		repeated ..= "{" .. if not p2 then "\n" else ""
+	if type(p1) == "table" then
+		repeated ..= "{" .. if not p3 then "\n" else ""
 		
-		for i, v in pairs(p0) do
-			repeated ..= serializeTable(v, i, p2, p3 + 1) .. "," .. if not p2 then "\n" else ""
+		for i, v in pairs(p1) do
+			repeated ..= serializeTable(v, i, p3, p4 + 1) .. "," .. if not p3 then "\n" else ""
 		end
-		repeated ..= string.rep(" ", p3) .. "}"
+		repeated ..= string.rep(" ", p4) .. "}"
 		
 		return repeated
-	elseif type(p0) == "number" then
-		repeated ..= tostring(p0)
+	elseif type(p1) == "number" then
+		repeated ..= tostring(p1)
 		
 		return repeated
-	elseif type(p0) == "string" then
-		repeated ..= string.format("%q", p0)
+	elseif type(p1) == "string" then
+		repeated ..= string.format("%q", p1)
 		
 		return repeated
-	elseif type(p0) == "boolean" then
-		repeated ..= if p0 then "true" else "false"
+	elseif type(p1) == "boolean" then
+		repeated ..= if p1 then "true" else "false"
 		
 		return repeated
 	end
-	return repeated .. "\"[inserializeable datatype:" .. type(p0) .. "]\""
+	return repeated .. "\"[inserializeable datatype:" .. type(p1) .. "]\""
 end
 
 return serializeTable

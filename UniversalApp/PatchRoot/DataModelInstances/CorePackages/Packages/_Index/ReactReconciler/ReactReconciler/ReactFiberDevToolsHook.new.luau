@@ -9,13 +9,13 @@ local t = {
 	end
 }
 
-local function _(p0)
-	if typeof(p0) == "function" then
+local function _(p1)
+	if typeof(p1) == "function" then
 		return true
-	elseif typeof(p0) == "table" then
-		local var5 = getmetatable(p0)
+	elseif typeof(p1) == "table" then
+		local var1 = getmetatable(p1)
 		
-		return if var5 and rawget(var5, "__call") then true else p0._isMockFunction
+		return if var1 and rawget(var1, "__call") then true else p1._isMockFunction
 	end
 end
 
@@ -23,12 +23,12 @@ local enableProfilerTimer = require(parent.Shared).ReactFeatureFlags.enableProfi
 local _ = require(script.Parent.ReactInternalTypes)
 local _ = require(parent.Shared)
 local didCapture = require(script.Parent.ReactFiberFlags).DidCapture
+local var1 = nil
 local var2 = nil
-local var3 = nil
-local var4 = false
+local var3 = false
 
 function t.injectInternals(p1)
-	-- upvalues: reactGlobalsModule (ref), console (ref), var2 (write), var3 (write)
+	-- upvalues: reactGlobalsModule (ref), console (ref), var1 (write), var2 (write)
 	if reactGlobalsModule.__REACT_DEVTOOLS_GLOBAL_HOOK__ == nil then
 		return false
 	end
@@ -38,9 +38,9 @@ function t.injectInternals(p1)
 		return true
 	elseif rEACTDEVTOOLSGLOBALHOOK.supportsFiber then
 		local ok, status = pcall(function()
-			-- upvalues: var2 (copy), rEACTDEVTOOLSGLOBALHOOK (ref), p1 (ref), var3 (copy)
-			var2 = rEACTDEVTOOLSGLOBALHOOK.inject(p1)
-			var3 = rEACTDEVTOOLSGLOBALHOOK
+			-- upvalues: var1 (copy), rEACTDEVTOOLSGLOBALHOOK (ref), p1 (ref), var2 (copy)
+			var1 = rEACTDEVTOOLSGLOBALHOOK.inject(p1)
+			var2 = rEACTDEVTOOLSGLOBALHOOK
 		end)
 		
 		if not ok and reactGlobalsModule.__DEV__ then
@@ -53,79 +53,79 @@ function t.injectInternals(p1)
 	return true
 end
 
-function t.onScheduleRoot(p2, p3)
-	-- upvalues: reactGlobalsModule (ref), var3 (write), var2 (write), var4 (write), console (ref)
-	if reactGlobalsModule.__DEV__ and var3 then
+function t.onScheduleRoot(p1, p2)
+	-- upvalues: reactGlobalsModule (ref), var2 (write), var1 (write), var3 (write), console (ref)
+	if reactGlobalsModule.__DEV__ and var2 then
 		local ok
-		local status = var3.onScheduleFiberRoot
+		local status = var2.onScheduleFiberRoot
 		
 		if typeof(status) == "function" then
 			ok = true
 		elseif typeof(status) == "table" then
-			local var7 = getmetatable(status)
-			ok = if var7 and rawget(var7, "__call") then true elseif status._isMockFunction then true else false
+			local var4 = getmetatable(status)
+			ok = if var4 and rawget(var4, "__call") then true elseif status._isMockFunction then true else false
 		end
 		if ok then
-			ok, status = pcall(var3.onScheduleFiberRoot, var2, p2, p3)
+			ok, status = pcall(var2.onScheduleFiberRoot, var1, p1, p2)
 			
-			if not ok and reactGlobalsModule.__DEV__ and not var4 then
-				var4 = true
+			if not ok and reactGlobalsModule.__DEV__ and not var3 then
+				var3 = true
 				console.error("React instrumentation encountered an error: %s", status)
 			end
 		end
 	end
 end
 
-function t.onCommitRoot(p4, p5)
-	-- upvalues: var3 (write), didCapture (ref), enableProfilerTimer (ref), var2 (write), reactGlobalsModule (ref), var4 (write), console (ref)
-	if var3 then
+function t.onCommitRoot(p1, p2)
+	-- upvalues: var2 (write), didCapture (ref), enableProfilerTimer (ref), var1 (write), reactGlobalsModule (ref), var3 (write), console (ref)
+	if var2 then
 		local ok
-		local status = var3.onCommitFiberRoot
+		local status = var2.onCommitFiberRoot
 		
 		if typeof(status) == "function" then
 			ok = true
 		elseif typeof(status) == "table" then
-			local var9 = getmetatable(status)
-			ok = if var9 and rawget(var9, "__call") then true elseif status._isMockFunction then true else false
+			local var4 = getmetatable(status)
+			ok = if var4 and rawget(var4, "__call") then true elseif status._isMockFunction then true else false
 		end
 		if ok then
 			ok, status = pcall(function()
-				-- upvalues: p4 (ref), didCapture (copy), enableProfilerTimer (copy), var3 (copy), var2 (copy), p5 (ref)
-				local var10 = bit32.band(p4.current.flags, didCapture) == didCapture
+				-- upvalues: p1 (ref), didCapture (copy), enableProfilerTimer (copy), var2 (copy), var1 (copy), p2 (ref)
+				local var5 = bit32.band(p1.current.flags, didCapture) == didCapture
 				
 				if enableProfilerTimer then
-					var3.onCommitFiberRoot(var2, p4, p5, var10)
+					var2.onCommitFiberRoot(var1, p1, p2, var5)
 					
 					return
 				end
-				var3.onCommitFiberRoot(var2, p4, nil, var10)
+				var2.onCommitFiberRoot(var1, p1, nil, var5)
 			end)
 			
-			if not ok and reactGlobalsModule.__DEV__ and not var4 then
-				var4 = true
+			if not ok and reactGlobalsModule.__DEV__ and not var3 then
+				var3 = true
 				console.error("React instrumentation encountered an error: %s", status)
 			end
 		end
 	end
 end
 
-function t.onCommitUnmount(p6)
-	-- upvalues: var3 (write), var2 (write), reactGlobalsModule (ref), var4 (write), console (ref)
-	if var3 then
+function t.onCommitUnmount(p1)
+	-- upvalues: var2 (write), var1 (write), reactGlobalsModule (ref), var3 (write), console (ref)
+	if var2 then
 		local ok
-		local status = var3.onCommitFiberUnmount
+		local status = var2.onCommitFiberUnmount
 		
 		if typeof(status) == "function" then
 			ok = true
 		elseif typeof(status) == "table" then
-			local var12 = getmetatable(status)
-			ok = if var12 and rawget(var12, "__call") then true elseif status._isMockFunction then true else false
+			local var4 = getmetatable(status)
+			ok = if var4 and rawget(var4, "__call") then true elseif status._isMockFunction then true else false
 		end
 		if ok then
-			ok, status = pcall(var3.onCommitFiberUnmount, var2, p6)
+			ok, status = pcall(var2.onCommitFiberUnmount, var1, p1)
 			
-			if not ok and reactGlobalsModule.__DEV__ and not var4 then
-				var4 = true
+			if not ok and reactGlobalsModule.__DEV__ and not var3 then
+				var3 = true
 				console.error("React instrumentation encountered an error: %s", status)
 			end
 		end

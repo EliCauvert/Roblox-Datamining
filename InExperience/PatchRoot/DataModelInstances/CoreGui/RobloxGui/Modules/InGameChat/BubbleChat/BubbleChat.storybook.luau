@@ -9,12 +9,12 @@ roactModule.setGlobalConfig({ elementTracing = true, propValidation = true })
 
 return {
 	roact = roactModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: roactModule (ref), roactRoduxModule (ref), storyStoreModule (ref), cryoModule (ref), chatSettingsModule (ref)
-		return function(p1)
-			-- upvalues: roactModule (copy), roactRoduxModule (copy), storyStoreModule (copy), p0 (ref), cryoModule (copy), chatSettingsModule (copy)
+		return function(p2)
+			-- upvalues: roactModule (copy), roactRoduxModule (copy), storyStoreModule (copy), p1 (ref), cryoModule (copy), chatSettingsModule (copy)
 			return roactModule.createElement(roactRoduxModule.StoreProvider, { store = storyStoreModule }, {
-				Story = roactModule.createElement(p0, cryoModule.Dictionary.join(p1, { chatSettings = chatSettingsModule }))
+				Story = roactModule.createElement(p1, cryoModule.Dictionary.join(p2, { chatSettings = chatSettingsModule }))
 			})
 		end
 	end

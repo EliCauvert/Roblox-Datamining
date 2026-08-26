@@ -7,7 +7,7 @@ local constantsModule = require(robloxSubscriptionPurchaseApp.Constants)
 local httpRequestModule = require(script.Parent.HttpRequest)
 local _ = require(robloxSubscriptionPurchaseApp.Enums.SubscriptionGrantType)
 local ROBLOX_SUBSCRIPTION_PRODUCT_TYPE = constantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE
-local var4 = urlBuilder.new({
+local var1 = urlBuilder.new({
 	path = "subscriptions/v2/products",
 	base = urlBase.APIS,
 	query = {
@@ -28,7 +28,7 @@ local var4 = urlBuilder.new({
 		}
 	}
 })
-local var5 = urlBuilder.new({
+local var2 = urlBuilder.new({
 	base = urlBase.APIS,
 	path = "subscriptions/v2/products/" .. ROBLOX_SUBSCRIPTION_PRODUCT_TYPE .. "/{productId}/claim",
 	query = {
@@ -40,15 +40,15 @@ local var5 = urlBuilder.new({
 	}
 })
 
-return function(p0)
-	-- upvalues: httpRequestModule (ref), var4 (ref), promiseModule (ref), var5 (ref)
-	local var6 = httpRequestModule.new()
+return function(p1)
+	-- upvalues: httpRequestModule (ref), var1 (ref), promiseModule (ref), var2 (ref)
+	local var3 = httpRequestModule.new()
 	
-	return var6:get(var4({ grantType = p0 })):andThen(function(p1)
-		-- upvalues: promiseModule (copy), var5 (copy), p0 (ref), var6 (ref)
-		local var7 = p1 and (p1.products and p1.products[1])
-		local id = var7 and (var7.productKey and var7.productKey.id)
+	return var3:get(var1({ grantType = p1 })):andThen(function(p2)
+		-- upvalues: promiseModule (copy), var2 (copy), p1 (ref), var3 (ref)
+		local var4 = p2 and (p2.products and p2.products[1])
+		local id = var4 and (var4.productKey and var4.productKey.id)
 		
-		return if id and id ~= "" then var6:post(var5({ productId = id, grantType = p0 }), {}) else promiseModule.reject("No eligible trial product found")
+		return if id and id ~= "" then var3:post(var2({ productId = id, grantType = p1 }), {}) else promiseModule.reject("No eligible trial product found")
 	end)
 end

@@ -21,7 +21,7 @@ local fFlagInExperienceUseAppStyleProvider = require(corePackagesService.Workspa
 local feedbackApp = roactModule.PureComponent:extend("FeedbackApp")
 feedbackApp.validateProps = tModule.strictInterface({ setScreenGuiSize = tModule.callback })
 
-function feedbackApp.render(p0)
+function feedbackApp.render(p1)
 	-- upvalues: roactModule (ref), fFlagInExperienceUseAppStyleProvider (ref), appStyleProvider (ref), UIBloxModule (ref), dark (ref), feedbackSubmissionToastModule (ref), helpModalModule (ref), onboardingModalModule (ref), feedbackReportDialogModule (ref), withLocalization (ref), withStyle (ref), refinedFeedbackBarModule (ref), assetsModule (ref)
 	return roactModule.createElement(if fFlagInExperienceUseAppStyleProvider then appStyleProvider else UIBloxModule.Core.Style.Provider, if fFlagInExperienceUseAppStyleProvider then { style = { themeName = dark } } else {}, {
 		Gui = roactModule.createElement("ScreenGui", {
@@ -29,7 +29,7 @@ function feedbackApp.render(p0)
 			IgnoreGuiInset = true,
 			OnTopOfCoreBlur = true,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-			[roactModule.Change.AbsoluteSize] = p0.props.setScreenGuiSize
+			[roactModule.Change.AbsoluteSize] = p1.props.setScreenGuiSize
 		}, {
 			ScreenFrame = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -43,16 +43,16 @@ function feedbackApp.render(p0)
 			}),
 			RefinedFeedbackBar = withLocalization({
 				feedbackBarText = "CoreScripts.Feedback.FeedbackBar.MainLabel"
-			})(function(p1)
+			})(function(p2)
 				-- upvalues: withStyle (copy), roactModule (copy), refinedFeedbackBarModule (copy), assetsModule (copy)
-				return withStyle(function(p2)
-					-- upvalues: roactModule (copy), refinedFeedbackBarModule (copy), p1 (ref), assetsModule (copy)
-					local font = p2.Font
+				return withStyle(function(p3)
+					-- upvalues: roactModule (copy), refinedFeedbackBarModule (copy), p2 (ref), assetsModule (copy)
+					local font = p3.Font
 					
 					return roactModule.createElement(refinedFeedbackBarModule, {
 						leftHint = {
 							maxWidth = 200,
-							text = p1.feedbackBarText,
+							text = p2.feedbackBarText,
 							hintTextSize = font.BaseSize * font.Body.RelativeSize,
 							icon = assetsModule.Images.FeedbackBarHintIcon
 						}
@@ -63,18 +63,18 @@ function feedbackApp.render(p0)
 	})
 end
 
-return roactRoduxModule.connect(function() end, function(p3)
+return roactRoduxModule.connect(function() end, function(p1)
 	-- upvalues: setScreenSizeModule (ref), setFeedbackFlowStateModule (ref)
 	return {
 		setScreenGuiSize = function(value)
-			-- upvalues: p3 (ref), setScreenSizeModule (copy)
-			p3(setScreenSizeModule(value.AbsoluteSize))
+			-- upvalues: p1 (ref), setScreenSizeModule (copy)
+			p1(setScreenSizeModule(value.AbsoluteSize))
 		end,
 		setFeedbackFlowState = function(value)
-			-- upvalues: p3 (ref), setFeedbackFlowStateModule (copy)
-			p3(function(p4)
+			-- upvalues: p1 (ref), setFeedbackFlowStateModule (copy)
+			p1(function(p2)
 				-- upvalues: setFeedbackFlowStateModule (copy), value (ref)
-				p4:dispatch(setFeedbackFlowStateModule(value))
+				p2:dispatch(setFeedbackFlowStateModule(value))
 			end)
 		end
 	}

@@ -17,15 +17,15 @@ local t = {
 }
 local t_1 = { hasBackground = true, testId = "--foundation-header-bar" }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), useViewportBreakpointModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), t (ref), headerBarContextModule (ref)
-	local var10 = withDefaultsModule(p0, t_1)
+	local var1 = withDefaultsModule(p1, t_1)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var10, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
 		tag = {
 			["row flex-between gap-small padding-medium"] = true,
-			["bg-surface-0"] = var10.hasBackground,
+			["bg-surface-0"] = var1.hasBackground,
 			[t[useViewportBreakpointModule()]] = true
 		}
-	}), reactModule.createElement(headerBarContextModule.Provider, { testId = var10.testId }, var10.children))
+	}), reactModule.createElement(headerBarContextModule.Provider, { testId = var1.testId }, var1.children))
 end)

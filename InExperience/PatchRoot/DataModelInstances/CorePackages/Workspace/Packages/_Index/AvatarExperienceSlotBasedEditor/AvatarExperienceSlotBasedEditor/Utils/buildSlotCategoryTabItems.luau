@@ -2,20 +2,20 @@
 local _ = require(script.Parent.Parent.Types)
 local _ = require(script.Parent.Parent.Enums.Categories)
 
-return function(p0, p1)
+return function(p1, p2)
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		if not v.hide then
 			table.insert(t, {
 				id = i,
-				text = p1[v.nameTranslationKey] or v.nameTranslationKey
+				text = p2[v.nameTranslationKey] or v.nameTranslationKey
 			})
 		end
 	end
-	table.sort(t, function(p2, p3)
-		-- upvalues: p0 (ref)
-		return p0[p2.id].index < p0[p3.id].index
+	table.sort(t, function(p3, p4)
+		-- upvalues: p1 (ref)
+		return p1[p3.id].index < p1[p4.id].index
 	end)
 	
 	return t

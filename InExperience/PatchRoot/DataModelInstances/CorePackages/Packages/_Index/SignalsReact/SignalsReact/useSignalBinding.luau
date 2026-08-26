@@ -9,9 +9,9 @@ return function(value)
 		-- upvalues: var2 (ref), value (ref), createEffect (copy)
 		var2(value(false))
 		
-		return createEffect(function(p0)
+		return createEffect(function(p1)
 			-- upvalues: var2 (copy), value (copy)
-			var2(value(p0))
+			var2(value(p1))
 		end)
 	end, { value })
 	

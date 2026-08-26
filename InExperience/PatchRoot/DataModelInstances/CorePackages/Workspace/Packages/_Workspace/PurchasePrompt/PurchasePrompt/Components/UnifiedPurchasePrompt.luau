@@ -17,42 +17,42 @@ local _ = sharedFlagsModule.FFlagEnableBlackbirdUpsellInUnifiedPurchaseModal
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local _ = require(purchasePrompt.types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), setProductPayloadModule (ref), setPurchaseCallbacksModule (ref), setPostPurchaseActionsModule (ref), setPurchaseAnalyticsMetadataModule (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), setPurchaseOptionsModule (ref), dispatchPurchaseForProductPayloadModule (ref), purchasePromptAppModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fFlagPurchasePromptSubtitleForTimedOptions (ref)
-	local store = p0.store
+	local store = p1.store
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), store (ref), setProductPayloadModule (copy), setPurchaseCallbacksModule (copy), setPostPurchaseActionsModule (copy), setPurchaseAnalyticsMetadataModule (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), setPurchaseOptionsModule (copy), dispatchPurchaseForProductPayloadModule (copy)
-		local productPayload = p0.productPayload
+		-- upvalues: p1 (ref), store (ref), setProductPayloadModule (copy), setPurchaseCallbacksModule (copy), setPostPurchaseActionsModule (copy), setPurchaseAnalyticsMetadataModule (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), setPurchaseOptionsModule (copy), dispatchPurchaseForProductPayloadModule (copy)
+		local productPayload = p1.productPayload
 		store:dispatch(setProductPayloadModule(productPayload))
 		
-		if p0.purchaseCallbacks then
-			store:dispatch(setPurchaseCallbacksModule(p0.purchaseCallbacks))
+		if p1.purchaseCallbacks then
+			store:dispatch(setPurchaseCallbacksModule(p1.purchaseCallbacks))
 		end
-		if p0.postPurchaseActions then
-			store:dispatch(setPostPurchaseActionsModule(p0.postPurchaseActions))
+		if p1.postPurchaseActions then
+			store:dispatch(setPostPurchaseActionsModule(p1.postPurchaseActions))
 		end
-		if p0.purchaseAnalyticsMetadata then
+		if p1.purchaseAnalyticsMetadata then
 			store:dispatch(setPurchaseAnalyticsMetadataModule({
-				surface = p0.purchaseAnalyticsMetadata.surface,
-				productUniverseId = p0.purchaseAnalyticsMetadata.productUniverseId
+				surface = p1.purchaseAnalyticsMetadata.surface,
+				productUniverseId = p1.purchaseAnalyticsMetadata.productUniverseId
 			}))
 		end
-		if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p0.purchaseOptions then
-			store:dispatch(setPurchaseOptionsModule(p0.purchaseOptions))
+		if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p1.purchaseOptions then
+			store:dispatch(setPurchaseOptionsModule(p1.purchaseOptions))
 		end
-		dispatchPurchaseForProductPayloadModule(function(p1)
+		dispatchPurchaseForProductPayloadModule(function(p2)
 			-- upvalues: store (copy)
-			store:dispatch(p1)
+			store:dispatch(p2)
 		end, productPayload, nil, false)
 	end, {
-		p0.productPayload,
-		p0.purchaseCallbacks,
-		p0.postPurchaseActions
+		p1.productPayload,
+		p1.purchaseCallbacks,
+		p1.postPurchaseActions
 	})
 	
 	return reactModule.createElement(purchasePromptAppModule, {
 		store = store,
-		network = if fFlagPurchasePromptCartPricingEnabledModule then p0.network else nil,
-		subtitleView = if fFlagPurchasePromptSubtitleForTimedOptions then p0.subtitleView else nil
+		network = if fFlagPurchasePromptCartPricingEnabledModule then p1.network else nil,
+		subtitleView = if fFlagPurchasePromptSubtitleForTimedOptions then p1.subtitleView else nil
 	})
 end

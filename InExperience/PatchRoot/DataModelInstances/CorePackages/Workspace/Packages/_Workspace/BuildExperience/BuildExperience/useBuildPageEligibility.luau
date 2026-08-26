@@ -25,12 +25,12 @@ local frozen = table.freeze({
 	Leaving = "Leaving"
 })
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: actionStatusEnum (ref)
-	if p0 == nil then
+	if p1 == nil then
 		return false
 	end
-	for i, v in p0 do
+	for i, v in p1 do
 		if v == actionStatusEnum.Cancelled then
 			return true
 		end
@@ -40,138 +40,138 @@ end
 
 return {
 	Status = frozen,
-	useBuildPageEligibility = function(p1)
+	useBuildPageEligibility = function(p2)
 		-- upvalues: universalAppPolicyModule (ref), useDispatch (ref), useNavigationFocus (ref), reactModule (ref), frozen (ref), fFlagSignalsNavP3Dispatch (ref), navigationCommands (ref), navigateBack (ref), buildPolicyRefreshTimeoutMs (ref), accessResponseEnum (ref), actionStatusEnum (ref), openAmpWizardContainer (ref), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (ref), fStringCoreContentAmpNameSpace (ref)
-		local var9, var10 = universalAppPolicyModule.useAppPolicy(function(p2)
-			-- upvalues: p1 (ref)
-			if p1 then
-				return p2.getCanViewBuild(), p2.getCanUseBuild()
+		local var1, var2 = universalAppPolicyModule.useAppPolicy(function(p3)
+			-- upvalues: p2 (ref)
+			if p2 then
+				return p3.getCanViewBuild(), p3.getCanUseBuild()
 			end
 			return true, true
 		end)
-		local var11 = useDispatch()
-		local var12 = useNavigationFocus()
-		local var13 = reactModule.useRef(false)
-		local var14 = reactModule.useRef(var12)
-		local var15 = reactModule.useRef(0)
-		local var16, var17 = reactModule.useState(false)
-		local var18, var19 = reactModule.useState(frozen.Prompting)
-		local var20 = reactModule.useCallback(function()
-			-- upvalues: var13 (ref), var15 (ref), var17 (ref), var19 (ref), frozen (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var11 (ref), navigateBack (copy)
-			var13.current = false
-			var15.current += 1
-			var17(false)
-			var19(frozen.Leaving)
+		local var3 = useDispatch()
+		local var4 = useNavigationFocus()
+		local var5 = reactModule.useRef(false)
+		local var6 = reactModule.useRef(var4)
+		local var7 = reactModule.useRef(0)
+		local var8, var9 = reactModule.useState(false)
+		local var10, var11 = reactModule.useState(frozen.Prompting)
+		local var12 = reactModule.useCallback(function()
+			-- upvalues: var5 (ref), var7 (ref), var9 (ref), var11 (ref), frozen (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var3 (ref), navigateBack (copy)
+			var5.current = false
+			var7.current += 1
+			var9(false)
+			var11(frozen.Leaving)
 			
 			if fFlagSignalsNavP3Dispatch then
 				navigationCommands.back(true)
 				
 				return
 			end
-			var11(navigateBack(true))
-		end, { var11 })
-		local var21 = reactModule.useCallback(function()
-			-- upvalues: var17 (ref), var19 (ref), frozen (copy), var15 (ref), buildPolicyRefreshTimeoutMs (copy), universalAppPolicyModule (copy)
-			var17(false)
-			var19(frozen.Refreshing)
-			var15.current += 1
-			local current = var15.current
+			var3(navigateBack(true))
+		end, { var3 })
+		local var13 = reactModule.useCallback(function()
+			-- upvalues: var9 (ref), var11 (ref), frozen (copy), var7 (ref), buildPolicyRefreshTimeoutMs (copy), universalAppPolicyModule (copy)
+			var9(false)
+			var11(frozen.Refreshing)
+			var7.current += 1
+			local current = var7.current
 			task.delay(buildPolicyRefreshTimeoutMs / 1000, function()
-				-- upvalues: var15 (copy), current (ref), universalAppPolicyModule (copy), var17 (copy), var19 (copy), frozen (copy)
-				if var15.current ~= current then return end
+				-- upvalues: var7 (copy), current (ref), universalAppPolicyModule (copy), var9 (copy), var11 (copy), frozen (copy)
+				if var7.current ~= current then return end
 				local appFeaturePolicies = universalAppPolicyModule.getAppFeaturePolicies()
 				local canViewBuild = appFeaturePolicies.getCanViewBuild()
 				
 				if appFeaturePolicies.getCanUseBuild() then
-					var17(true)
+					var9(true)
 					
 					return
 				elseif canViewBuild then
-					var19(frozen.Error)
+					var11(frozen.Error)
 					
 					return
 				end
-				var19(frozen.Ineligible)
+				var11(frozen.Ineligible)
 			end)
 		end, {})
-		local var22 = reactModule.useCallback(function(p3, p4)
-			-- upvalues: accessResponseEnum (copy), var21 (ref), actionStatusEnum (copy), var20 (ref), var19 (ref), frozen (copy)
-			local var26
+		local var14 = reactModule.useCallback(function(p3, p4)
+			-- upvalues: accessResponseEnum (copy), var13 (ref), actionStatusEnum (copy), var12 (ref), var11 (ref), frozen (copy)
+			local var15
 			if p3 == accessResponseEnum.Granted then
-				var21()
+				var13()
 				
 				return
 			elseif p4 == nil then
-				var26 = false
+				var15 = false
 			else
 				for i, v in p4 do
 					if v == actionStatusEnum.Cancelled then
-						var26 = true
+						var15 = true
 					end
 				end
-				var26 = false
+				var15 = false
 			end
-			if var26 then
-				var20()
+			if var15 then
+				var12()
 				
 				return
 			end
-			var19(frozen.Error)
-		end, { var21, var20 })
+			var11(frozen.Error)
+		end, { var13, var12 })
 		reactModule.useEffect(function()
-			-- upvalues: var14 (ref), var12 (ref), var18 (ref), frozen (copy), var13 (ref), var19 (ref)
-			local current = var14.current
-			var14.current = var12
+			-- upvalues: var6 (ref), var4 (ref), var10 (ref), frozen (copy), var5 (ref), var11 (ref)
+			local current = var6.current
+			var6.current = var4
 			
-			if var12 and not current and var18 == frozen.Prompting then
-				var13.current = false
+			if var4 and not current and var10 == frozen.Prompting then
+				var5.current = false
 				
 				return
-			elseif var12 and not current and var18 == frozen.Leaving then
-				var13.current = false
-				var19(frozen.Prompting)
+			elseif var4 and not current and var10 == frozen.Leaving then
+				var5.current = false
+				var11(frozen.Prompting)
 			end
-		end, { var12, var18 })
+		end, { var4, var10 })
 		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var10 (ref), var15 (ref), var13 (ref), var17 (ref), var19 (ref), frozen (copy), var9 (ref)
-			if not p1 then return end
-			if var10 then
-				var15.current += 1
-				var13.current = false
-				var17(false)
-				var19(frozen.Prompting)
+			-- upvalues: p2 (ref), var2 (ref), var7 (ref), var5 (ref), var9 (ref), var11 (ref), frozen (copy), var1 (ref)
+			if not p2 then return end
+			if var2 then
+				var7.current += 1
+				var5.current = false
+				var9(false)
+				var11(frozen.Prompting)
 				
 				return
-			elseif not var9 then
-				var15.current += 1
-				var17(false)
-				var19(frozen.Ineligible)
+			elseif not var1 then
+				var7.current += 1
+				var9(false)
+				var11(frozen.Ineligible)
 			end
-		end, { var9, var10, p1 })
+		end, { var1, var2, p2 })
 		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var12 (ref), var18 (ref), frozen (copy), var10 (ref), var9 (ref), var13 (ref), var11 (ref), openAmpWizardContainer (copy), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), var22 (ref), fStringCoreContentAmpNameSpace (copy)
-			if p1 and var12 and (var18 == frozen.Prompting and not var10) and (var9 and not var13.current) then
-				var13.current = true
-				var11(openAmpWizardContainer(fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature, var22, nil, "BuildPage", nil, fStringCoreContentAmpNameSpace))
+			-- upvalues: p2 (ref), var4 (ref), var10 (ref), frozen (copy), var2 (ref), var1 (ref), var5 (ref), var3 (ref), openAmpWizardContainer (copy), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), var14 (ref), fStringCoreContentAmpNameSpace (copy)
+			if p2 and var4 and (var10 == frozen.Prompting and not var2) and (var1 and not var5.current) then
+				var5.current = true
+				var3(openAmpWizardContainer(fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature, var14, nil, "BuildPage", nil, fStringCoreContentAmpNameSpace))
 				
 				return
 			end
 		end, {
-			var9, var10, var11, p1, var22, var12, var18
+			var1, var2, var3, p2, var14, var4, var10
 		})
 		reactModule.useEffect(function()
-			-- upvalues: var15 (ref)
+			-- upvalues: var7 (ref)
 			return function()
-				-- upvalues: var15 (copy)
-				var15.current += 1
+				-- upvalues: var7 (copy)
+				var7.current += 1
 			end
 		end, {})
-		local var23 = not p1 or (var10 or var16)
+		local var16 = not p2 or (var2 or var8)
 		
 		return {
-			canEnterBuild = var23,
-			status = if var23 or var9 then var18 else frozen.Ineligible,
-			onDialogDismiss = var20
+			canEnterBuild = var16,
+			status = if var16 or var1 then var10 else frozen.Ineligible,
+			onDialogDismiss = var12
 		}
 	end
 }

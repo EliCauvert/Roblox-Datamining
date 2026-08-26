@@ -3,28 +3,28 @@ local reactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
 local useExternalEventModule = require(script.Parent.useExternalEvent)
 local isGamepadInputModule = require(script.Parent.Parent.isGamepadInput)
 
-return function(p0)
+return function(p1)
 	-- upvalues: userInputService (ref), isGamepadInputModule (ref), reactModule (ref), useExternalEventModule (ref)
-	p0 = p0 or userInputService
+	p1 = p1 or userInputService
 	
 	local function wasLastInputGamepad()
-		-- upvalues: p0 (ref), isGamepadInputModule (copy)
-		return isGamepadInputModule(p0:GetLastInputType())
+		-- upvalues: p1 (ref), isGamepadInputModule (copy)
+		return isGamepadInputModule(p1:GetLastInputType())
 	end
 	
-	local var6, var7 = reactModule.useState(wasLastInputGamepad)
-	useExternalEventModule(p0.LastInputTypeChanged, reactModule.useCallback(function(p1)
-		-- upvalues: isGamepadInputModule (copy), var7 (ref)
-		local var8 = isGamepadInputModule(p1)
+	local var1, var2 = reactModule.useState(wasLastInputGamepad)
+	useExternalEventModule(p1.LastInputTypeChanged, reactModule.useCallback(function(p2)
+		-- upvalues: isGamepadInputModule (copy), var2 (ref)
+		local var3 = isGamepadInputModule(p2)
 		
-		if var8 ~= nil then
-			var7(var8)
+		if var3 ~= nil then
+			var2(var3)
 		end
 	end))
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), wasLastInputGamepad (ref)
-		var7(wasLastInputGamepad())
+		-- upvalues: var2 (ref), wasLastInputGamepad (ref)
+		var2(wasLastInputGamepad())
 	end, {})
 	
-	return var6
+	return var1
 end

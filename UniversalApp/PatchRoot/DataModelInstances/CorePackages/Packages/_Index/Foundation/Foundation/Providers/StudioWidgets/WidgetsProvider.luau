@@ -7,55 +7,55 @@ local widgetManagerModule = require(script.Parent.WidgetManager)
 local widgetsContextModule = require(script.Parent.WidgetsContext)
 local _ = require(script.Parent.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: usePluginModule (ref), reactModule (ref), widgetManagerModule (ref), flagsModule (ref), widgetsContextModule (ref)
-	local var6 = usePluginModule()
+	local var1 = usePluginModule()
 	
-	if var6 == nil then
+	if var1 == nil then
 		error("WidgetsProvider must be used within a Plugin context")
 	end
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: widgetManagerModule (copy), var6 (ref)
-		return widgetManagerModule.new(var6:GetPluginComponent("Widgets"))
-	end, { var6 })
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: widgetManagerModule (copy), var1 (ref)
+		return widgetManagerModule.new(var1:GetPluginComponent("Widgets"))
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref)
+		-- upvalues: var2 (ref)
 		return function()
-			-- upvalues: var7 (copy)
-			var7:destroy()
+			-- upvalues: var2 (copy)
+			var2:destroy()
 		end
-	end, { var7 })
-	local var8 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var7 (ref)
-		var7:register(p1, p2)
-	end, { var7 })
-	local var9 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var7 (ref)
-		var7:deregister(p3, p4)
-	end, { var7 })
-	local var10 = if flagsModule.FoundationPopoverPluginAnchorRefresh then reactModule.useCallback(function(p5)
-		-- upvalues: var7 (ref)
-		return var7:refreshAsync(p5)
-	end, { var7 }) else nil
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref)
-		return var7:nextId()
-	end, { var7 })
+	end, { var2 })
+	local var3 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var2 (ref)
+		var2:register(p2, p3)
+	end, { var2 })
+	local var4 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var2 (ref)
+		var2:deregister(p2, p3)
+	end, { var2 })
+	local var5 = if flagsModule.FoundationPopoverPluginAnchorRefresh then reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref)
+		return var2:refreshAsync(p2)
+	end, { var2 }) else nil
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref)
+		return var2:nextId()
+	end, { var2 })
 	
 	return reactModule.createElement(widgetsContextModule.Provider, {
 		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
-			-- upvalues: var8 (ref), var9 (ref), flagsModule (copy), var10 (ref), var11 (ref)
+			-- upvalues: var3 (ref), var4 (ref), flagsModule (copy), var5 (ref), var6 (ref)
 			return {
-				register = var8,
-				deregister = var9,
-				refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then var10 else nil,
-				nextId = var11
+				register = var3,
+				deregister = var4,
+				refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then var5 else nil,
+				nextId = var6
 			}
-		end, { var8, var9, var10, var11 }) else {
-			register = var8,
-			deregister = var9,
-			refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then var10 else nil,
-			nextId = var11
+		end, { var3, var4, var5, var6 }) else {
+			register = var3,
+			deregister = var4,
+			refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then var5 else nil,
+			nextId = var6
 		}
-	}, p0.children)
+	}, p1.children)
 end

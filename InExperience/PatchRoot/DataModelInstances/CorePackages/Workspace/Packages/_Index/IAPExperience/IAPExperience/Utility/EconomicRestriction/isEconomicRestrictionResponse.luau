@@ -1,18 +1,18 @@
-﻿return function(p0)
-	local var0 = false
+﻿return function(p1)
+	local var1 = false
 	
-	if p0 ~= nil then
-		var0 = false
+	if p1 ~= nil then
+		var1 = false
 		
-		if type(p0) == "table" then
-			if p0.failureReason ~= nil then
-				var0 = true
+		if type(p1) == "table" then
+			if p1.failureReason ~= nil then
+				var1 = true
 				
-				if p0.expirationTimeInMinutes == nil then
-					var0 = p0.FailureReason ~= nil and p0.ExpirationTimeInMinutes ~= nil
+				if p1.expirationTimeInMinutes == nil then
+					var1 = p1.FailureReason ~= nil and p1.ExpirationTimeInMinutes ~= nil
 				end
 			end
 		end
 	end
-	return var0
+	return var1
 end

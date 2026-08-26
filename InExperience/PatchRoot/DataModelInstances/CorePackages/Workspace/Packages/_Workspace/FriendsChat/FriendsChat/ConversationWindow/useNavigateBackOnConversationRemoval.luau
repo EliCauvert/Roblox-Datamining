@@ -5,35 +5,35 @@ local signalsReactModule = require(parent.SignalsReact)
 local getFFlagAppChatEnableRootedNavigationModule = require(parent.AppChat.getFFlagAppChatEnableRootedNavigation)
 local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFFlagAppChatEnableRootedNavigationModule (ref), expChatConversationListAdapterModule (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref)
-	local conversationId = p0.conversationId
-	local onBack = p0.onBack
+	local conversationId = p1.conversationId
+	local onBack = p1.onBack
 	
 	if getFFlagAppChatEnableRootedNavigationModule() then
 		local conversationStore = expChatConversationListAdapterModule.getConversationStore()
-		local var6 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 			-- upvalues: signalsModule (copy), conversationStore (ref), conversationId (ref)
-			return signalsModule.createComputed(function(p1)
+			return signalsModule.createComputed(function(p2)
 				-- upvalues: conversationStore (copy), conversationId (copy)
-				return conversationStore.getConversation(conversationId, p1) ~= nil
+				return conversationStore.getConversation(conversationId, p2) ~= nil
 			end)
 		end, { conversationStore, conversationId }))
-		local var7 = reactModule.useRef(false)
+		local var2 = reactModule.useRef(false)
 		reactModule.useEffect(function()
-			-- upvalues: var7 (ref)
-			var7.current = false
+			-- upvalues: var2 (ref)
+			var2.current = false
 		end, { conversationId })
 		reactModule.useEffect(function()
-			-- upvalues: var6 (ref), var7 (ref), onBack (ref)
-			if var6 then
-				var7.current = true
+			-- upvalues: var1 (ref), var2 (ref), onBack (ref)
+			if var1 then
+				var2.current = true
 				
 				return
-			elseif var7.current and onBack then
-				var7.current = false
+			elseif var2.current and onBack then
+				var2.current = false
 				onBack()
 			end
-		end, { var6, onBack })
+		end, { var1, onBack })
 	end
 end

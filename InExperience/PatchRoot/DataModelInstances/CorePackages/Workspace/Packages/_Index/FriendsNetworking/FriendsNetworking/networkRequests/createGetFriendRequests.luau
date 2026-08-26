@@ -4,16 +4,16 @@ local _ = require(script.Parent.Parent.networkingFriendsTypes)
 local fFlagAddFriendsSessionId = require(parent.SharedFlags).FFlagAddFriendsSessionId
 local fFlagAddFriendsPageHighlightUnseenRequests = require(parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
 
-return function(p0)
+return function(p1)
 	-- upvalues: FRIENDS_URLModule (ref), fFlagAddFriendsSessionId (ref), fFlagAddFriendsPageHighlightUnseenRequests (ref)
-	return p0.roduxNetworking.GET("GetFriendRequests", function(p1, p2)
+	return p1.roduxNetworking.GET("GetFriendRequests", function(p2, p3)
 		-- upvalues: FRIENDS_URLModule (copy), fFlagAddFriendsSessionId (copy), fFlagAddFriendsPageHighlightUnseenRequests (copy)
-		return p1(FRIENDS_URLModule, { currentUserId = p2.currentUserId }):path("v1"):path("my"):path("friends"):path("requests"):queryArgs({
-			fetchMutualFriends = p2.fetchMutualFriends,
-			sortOrder = p2.sortOrder,
-			limit = p2.limit,
-			cursor = p2.cursor,
-			sessionId = if fFlagAddFriendsSessionId then p2.sessionId else nil,
+		return p2(FRIENDS_URLModule, { currentUserId = p3.currentUserId }):path("v1"):path("my"):path("friends"):path("requests"):queryArgs({
+			fetchMutualFriends = p3.fetchMutualFriends,
+			sortOrder = p3.sortOrder,
+			limit = p3.limit,
+			cursor = p3.cursor,
+			sessionId = if fFlagAddFriendsSessionId then p3.sessionId else nil,
 			uprankUnseen = if fFlagAddFriendsPageHighlightUnseenRequests then true else nil
 		})
 	end)

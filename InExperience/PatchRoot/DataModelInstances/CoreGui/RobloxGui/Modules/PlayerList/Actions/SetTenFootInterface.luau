@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetTenFootInterface", function(p0)
-	return { isTenFootInterface = p0 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetTenFootInterface", function(p1)
+	return { isTenFootInterface = p1 }
 end)

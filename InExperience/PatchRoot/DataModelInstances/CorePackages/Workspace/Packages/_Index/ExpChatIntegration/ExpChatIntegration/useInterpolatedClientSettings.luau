@@ -7,21 +7,21 @@ local fFlagExpChatAddressFrame0Flash = require(parent.ChatUIPrimitives).Flags.FF
 
 return function(value)
 	-- upvalues: useChatPlatformModule (ref), signalsReactModule (ref), reactModule (ref), fFlagExpChatAddressFrame0Flash (ref)
-	local var3 = signalsReactModule.useSignalState(useChatPlatformModule().getInterpolators)
-	local getBackgroundColor = var3.getBackgroundColor
-	local getBackgroundTransparency = var3.getBackgroundTransparency
-	local var4, var5 = reactModule.useState({
+	local var1 = signalsReactModule.useSignalState(useChatPlatformModule().getInterpolators)
+	local getBackgroundColor = var1.getBackgroundColor
+	local getBackgroundTransparency = var1.getBackgroundTransparency
+	local var2, var3 = reactModule.useState({
 		BackgroundColor3 = if fFlagExpChatAddressFrame0Flash then getBackgroundColor(value) else nil,
 		BackgroundColor = if not fFlagExpChatAddressFrame0Flash then getBackgroundColor(value) else nil,
 		BackgroundTransparency = getBackgroundTransparency(value)
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), getBackgroundColor (ref), value (ref), getBackgroundTransparency (ref)
-		var5({
+		-- upvalues: var3 (ref), getBackgroundColor (ref), value (ref), getBackgroundTransparency (ref)
+		var3({
 			BackgroundColor3 = getBackgroundColor(value),
 			BackgroundTransparency = getBackgroundTransparency(value)
 		})
 	end, { value, getBackgroundColor, getBackgroundTransparency })
 	
-	return var4
+	return var2
 end

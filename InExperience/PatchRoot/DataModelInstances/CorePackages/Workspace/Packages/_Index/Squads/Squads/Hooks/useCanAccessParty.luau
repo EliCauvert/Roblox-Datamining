@@ -2,7 +2,7 @@
 
 return function()
 	-- upvalues: useAppPolicy (ref)
-	return useAppPolicy(function(p0)
-		return p0.getCanAccessParty()
+	return useAppPolicy(function(p1)
+		return p1.getCanAccessParty()
 	end)
 end

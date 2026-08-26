@@ -5,19 +5,19 @@ local tModule = require(parent.t)
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local aiOverviewSentimentModule = require(discoveryAnalytics.Constants.AiOverviewSentiment)
 local aiOverviewSentimentThrottleHundrethsPercent = game:DefineFastInt("AiOverviewSentimentThrottleHundrethsPercent", 10000)
-local var5 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	sentiment = tModule.union(tModule.literal(aiOverviewSentimentModule.ThumbsUp), tModule.literal(aiOverviewSentimentModule.ThumbsDown)),
 	searchSessionId = tModule.string,
 	query = tModule.string,
 	universeIds = tModule.optional(tModule.string)
 })
 
-return function(p0, p1)
-	-- upvalues: var5 (ref), discoveryEventErrorLogger (ref), aiOverviewSentimentThrottleHundrethsPercent (ref), telemetryService (ref)
-	local var6, var7 = var5(p0)
+return function(p1, p2)
+	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), aiOverviewSentimentThrottleHundrethsPercent (ref), telemetryService (ref)
+	local var2, var3 = var1(p1)
 	
-	if not var6 then
-		discoveryEventErrorLogger.reportError("AiOverviewSentimentInvalidInterface", var7)
+	if not var2 then
+		discoveryEventErrorLogger.reportError("AiOverviewSentimentInvalidInterface", var3)
 	end
 	telemetryService:LogEvent({
 		eventName = "aiOverviewSentiment",
@@ -26,8 +26,8 @@ return function(p0, p1)
 		throttlingPercentage = aiOverviewSentimentThrottleHundrethsPercent,
 		lastUpdated = { 26, 6, 24 }
 	}, {
-		eventContext = p1,
+		eventContext = p2,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p0
+		customFields = p1
 	})
 end

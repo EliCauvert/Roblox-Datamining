@@ -31,29 +31,29 @@ local t_3 = {
 }
 
 return {
-	getUserDisplayPresence = if fFlagAppChatPresenceStoreMigrationModule then function(p2, p3)
+	getUserDisplayPresence = if fFlagAppChatPresenceStoreMigrationModule then function(p1, p2)
 		-- upvalues: t_2 (ref), presenceType_1 (ref), t_3 (ref)
-		if not p2 then
+		if not p1 then
 			return { text = "" }
-		elseif p3 then
+		elseif p2 then
 			return {
 				text = t_2[presenceType_1.Online],
 				image = t_3[presenceType_1.Online]
 			}
 		end
 		local t = {}
-		local userPresenceType = p2.userPresenceType
-		local lastLocation = p2.lastLocation
+		local userPresenceType = p1.userPresenceType
+		local lastLocation = p1.lastLocation
 		t.text = if userPresenceType == presenceType_1.Offline then t_2[presenceType_1.Offline] elseif userPresenceType == presenceType_1.Online then t_2[presenceType_1.Online] elseif userPresenceType ~= presenceType_1.InGame and userPresenceType ~= presenceType_1.InStudio then if lastLocation and lastLocation ~= "" then tostring(lastLocation) else t_2[presenceType_1.Online] else ""
-		t.image = t_3[p2.userPresenceType]
+		t.image = t_3[p1.userPresenceType]
 		
 		return t
-	end else function(p0, p1)
+	end else function(p1, p2)
 		-- upvalues: t (ref), presenceType (ref), t_1 (ref)
 		local t_2
-		if not p0 then
+		if not p1 then
 			return { text = "" }
-		elseif p1 then
+		elseif p2 then
 			t_2 = {
 				text = t[presenceType.Online],
 				image = t_1[presenceType.Online]
@@ -61,24 +61,24 @@ return {
 			
 			if not t_2 then
 				t_2 = {}
-				local userPresenceType = p0.userPresenceType
-				local lastLocation = p0.lastLocation
+				local userPresenceType = p1.userPresenceType
+				local lastLocation = p1.lastLocation
 				t_2.text = if userPresenceType == presenceType.Offline then t[presenceType.Offline] elseif userPresenceType == presenceType.Online then t[presenceType.Online] elseif userPresenceType == presenceType.InGame or userPresenceType == presenceType.InStudio then if lastLocation then tostring(lastLocation) else t[presenceType.Online] else ""
-				t_2.image = t_1[p0.userPresenceType]
+				t_2.image = t_1[p1.userPresenceType]
 			end
 			return t_2
 		end
 	end,
-	getUserPresenceText = if fFlagAppChatPresenceStoreMigrationModule then function(p5)
+	getUserPresenceText = if fFlagAppChatPresenceStoreMigrationModule then function(p1)
 		-- upvalues: presenceType_1 (ref), t_2 (ref)
-		local userPresenceType = p5.userPresenceType
-		local lastLocation = p5.lastLocation
+		local userPresenceType = p1.userPresenceType
+		local lastLocation = p1.lastLocation
 		
 		return if userPresenceType == presenceType_1.Offline then t_2[presenceType_1.Offline] elseif userPresenceType == presenceType_1.Online then t_2[presenceType_1.Online] elseif not (userPresenceType ~= presenceType_1.InGame and userPresenceType ~= presenceType_1.InStudio) then if lastLocation and lastLocation ~= "" then tostring(lastLocation) else t_2[presenceType_1.Online] else ""
-	end else function(p4)
+	end else function(p1)
 		-- upvalues: presenceType (ref), t (ref)
-		local userPresenceType = p4.userPresenceType
-		local lastLocation = p4.lastLocation
+		local userPresenceType = p1.userPresenceType
+		local lastLocation = p1.lastLocation
 		
 		return if userPresenceType == presenceType.Offline then t[presenceType.Offline] elseif userPresenceType == presenceType.Online then t[presenceType.Online] elseif not (userPresenceType ~= presenceType.InGame and userPresenceType ~= presenceType.InStudio) then if lastLocation then tostring(lastLocation) else t[presenceType.Online] else ""
 	end,

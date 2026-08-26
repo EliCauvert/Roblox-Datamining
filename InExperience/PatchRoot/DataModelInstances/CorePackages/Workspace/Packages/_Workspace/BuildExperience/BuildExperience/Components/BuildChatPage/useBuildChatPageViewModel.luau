@@ -22,7 +22,7 @@ local fFlagBuildExperienceFocusNewGameComposerModule = require(buildExperience.F
 local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
 local fFlagBuildExperienceDontAskAgainPushUpsellModule = require(buildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
 local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
-local var21 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
+local var1 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
 local default = require(parent.LinkingProtocol).LinkingProtocol.default
 local permissionsProtocol = require(parent.PermissionsProtocol).PermissionsProtocol
 local iconName = foundationModule.Enums.IconName
@@ -35,236 +35,236 @@ local function _()
 	return if userInputService.OnScreenKeyboardVisible then math.max(0, userInputService.OnScreenKeyboardPosition.Y - guiService:GetGuiInset().Y) else 0
 end
 
-local function useUniverseSummary(p0)
+local function useUniverseSummary(p1)
 	-- upvalues: universeConfigurationModule (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref)
 	local universeConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore()
 	
 	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p0 (ref), universeConfigurationStore (ref)
-		return signalsModule.createComputed(function(p1)
-			-- upvalues: p0 (copy), universeConfigurationStore (copy)
-			return if p0 == nil or p0 == 0 then nil else universeConfigurationStore.getAndFetchSummary(p0).data(p1)
+		-- upvalues: signalsModule (copy), p1 (ref), universeConfigurationStore (ref)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: p1 (copy), universeConfigurationStore (copy)
+			return if p1 == nil or p1 == 0 then nil else universeConfigurationStore.getAndFetchSummary(p1).data(p2)
 		end)
-	end, { universeConfigurationStore, p0 }))
+	end, { universeConfigurationStore, p1 }))
 end
 
-local _ = function(p2, p3)
-	local var26 = if p3 ~= nil then nil else p3.name
+local _ = function(p1, p2)
+	local var2 = if p2 ~= nil then nil else p2.name
 	
-	return if typeof(var26) == "string" and var26 ~= "" then var26 else p2
+	return if typeof(var2) == "string" and var2 ~= "" then var2 else p1
 end
 
-return function(p4)
-	-- upvalues: useTokens (ref), useUniverseSummary (ref), getBuildOverflowMenuStoreModule (ref), getCreatorAgentResumeStoreModule (ref), reactModule (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref), buildAppStorageKeyEngineFeature (ref), var21 (ref), userInputService (ref), guiService (ref), permissionsProtocol (ref), messageBusService (ref), realtimeMessageId (ref), default (ref), creatorAgentChatModule (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceFocusNewGameComposerModule (ref), useChatPlaytestFooterModule (ref), universeConfigurationModule (ref), useCreatorCreditChatUpsellViewModelModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), t (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconName (ref)
+return function(p1)
+	-- upvalues: useTokens (ref), useUniverseSummary (ref), getBuildOverflowMenuStoreModule (ref), getCreatorAgentResumeStoreModule (ref), reactModule (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref), buildAppStorageKeyEngineFeature (ref), var1 (ref), userInputService (ref), guiService (ref), permissionsProtocol (ref), messageBusService (ref), realtimeMessageId (ref), default (ref), creatorAgentChatModule (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceFocusNewGameComposerModule (ref), useChatPlaytestFooterModule (ref), universeConfigurationModule (ref), useCreatorCreditChatUpsellViewModelModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), t (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconName (ref)
 	local v
-	local var27 = useTokens()
-	local var28 = useUniverseSummary(p4.target.universeId)
-	local var29 = getBuildOverflowMenuStoreModule()
-	local var30 = getCreatorAgentResumeStoreModule()
-	local var31, var32 = reactModule.useState(nil)
-	local var33, var34 = reactModule.useState(false)
-	local var35, var36 = reactModule.useState(nil)
-	local var37, var38 = reactModule.useState(function()
-		-- upvalues: fFlagBuildExperienceDontAskAgainPushUpsellModule (copy), buildAppStorageKeyEngineFeature (copy), var21 (copy)
-		return fFlagBuildExperienceDontAskAgainPushUpsellModule and (buildAppStorageKeyEngineFeature and var21.isPushNotificationsUpsellDismissedPermanently())
+	local var2 = useTokens()
+	local var3 = useUniverseSummary(p1.target.universeId)
+	local var4 = getBuildOverflowMenuStoreModule()
+	local var5 = getCreatorAgentResumeStoreModule()
+	local var6, var7 = reactModule.useState(nil)
+	local var8, var9 = reactModule.useState(false)
+	local var10, var11 = reactModule.useState(nil)
+	local var12, var13 = reactModule.useState(function()
+		-- upvalues: fFlagBuildExperienceDontAskAgainPushUpsellModule (copy), buildAppStorageKeyEngineFeature (copy), var1 (copy)
+		return fFlagBuildExperienceDontAskAgainPushUpsellModule and (buildAppStorageKeyEngineFeature and var1.isPushNotificationsUpsellDismissedPermanently())
 	end)
-	local var39, var40 = reactModule.useState(false)
-	local var41, var42 = reactModule.useState(false)
-	local var43, var44 = reactModule.useState(function()
-		-- upvalues: buildAppStorageKeyEngineFeature (copy), var21 (copy)
-		return buildAppStorageKeyEngineFeature and var21.wasPushNotificationsUpsellShownToday()
+	local var14, var15 = reactModule.useState(false)
+	local var16, var17 = reactModule.useState(false)
+	local var18, var19 = reactModule.useState(function()
+		-- upvalues: buildAppStorageKeyEngineFeature (copy), var1 (copy)
+		return buildAppStorageKeyEngineFeature and var1.wasPushNotificationsUpsellShownToday()
 	end)
-	local var45, var46 = reactModule.useState(false)
-	local var47 = reactModule.useRef(false)
-	local var48, var49 = reactModule.useState(if not userInputService.OnScreenKeyboardVisible then 0 else math.max(0, userInputService.OnScreenKeyboardPosition.Y - guiService:GetGuiInset().Y))
-	local var50, var51 = reactModule.useState(0)
-	local var52 = reactModule.useCallback(function()
-		-- upvalues: permissionsProtocol (copy), var47 (ref), var36 (ref), var42 (ref)
-		return permissionsProtocol.default:hasPermissions({ permissionsProtocol.Permissions.POST_NOTIFICATIONS }):andThen(function(p5)
-			-- upvalues: var47 (copy), var36 (copy), permissionsProtocol (copy), var42 (copy)
-			if var47.current then
-				var36(p5.status)
+	local var20, var21 = reactModule.useState(false)
+	local var22 = reactModule.useRef(false)
+	local var23, var24 = reactModule.useState(if not userInputService.OnScreenKeyboardVisible then 0 else math.max(0, userInputService.OnScreenKeyboardPosition.Y - guiService:GetGuiInset().Y))
+	local var25, var26 = reactModule.useState(0)
+	local var27 = reactModule.useCallback(function()
+		-- upvalues: permissionsProtocol (copy), var22 (ref), var11 (ref), var17 (ref)
+		return permissionsProtocol.default:hasPermissions({ permissionsProtocol.Permissions.POST_NOTIFICATIONS }):andThen(function(p2)
+			-- upvalues: var22 (copy), var11 (copy), permissionsProtocol (copy), var17 (copy)
+			if var22.current then
+				var11(p2.status)
 				
-				if p5.status == permissionsProtocol.Status.AUTHORIZED then
-					var42(false)
+				if p2.status == permissionsProtocol.Status.AUTHORIZED then
+					var17(false)
 				end
 			end
 		end, function() end)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var47 (ref), var52 (ref), messageBusService (copy), realtimeMessageId (copy)
-		var47.current = true
-		var52()
-		local var74 = messageBusService:Subscribe(realtimeMessageId, var52, false, true)
+		-- upvalues: var22 (ref), var27 (ref), messageBusService (copy), realtimeMessageId (copy)
+		var22.current = true
+		var27()
+		local var28 = messageBusService:Subscribe(realtimeMessageId, var27, false, true)
 		
 		return function()
-			-- upvalues: var47 (copy), var74 (ref)
-			var47.current = false
-			var74:Disconnect()
+			-- upvalues: var22 (copy), var28 (ref)
+			var22.current = false
+			var28:Disconnect()
 		end
-	end, { var52 })
-	local var53 = reactModule.useCallback(function()
-		-- upvalues: var39 (ref), var40 (ref), permissionsProtocol (copy), var47 (ref), var36 (ref), var42 (ref)
-		if var39 then
+	end, { var27 })
+	local var28 = reactModule.useCallback(function()
+		-- upvalues: var14 (ref), var15 (ref), permissionsProtocol (copy), var22 (ref), var11 (ref), var17 (ref)
+		if var14 then
 			return
 		end
-		var40(true)
-		permissionsProtocol.default:requestPermissions({ permissionsProtocol.Permissions.POST_NOTIFICATIONS }):andThen(function(p6)
-			-- upvalues: var47 (copy), var36 (copy), permissionsProtocol (copy), var42 (copy), var40 (copy)
-			if not var47.current then return end
-			var36(p6.status)
+		var15(true)
+		permissionsProtocol.default:requestPermissions({ permissionsProtocol.Permissions.POST_NOTIFICATIONS }):andThen(function(p2)
+			-- upvalues: var22 (copy), var11 (copy), permissionsProtocol (copy), var17 (copy), var15 (copy)
+			if not var22.current then return end
+			var11(p2.status)
 			
-			if p6.status == permissionsProtocol.Status.DENIED then
-				var42(true)
+			if p2.status == permissionsProtocol.Status.DENIED then
+				var17(true)
 			end
-			var40(false)
+			var15(false)
 		end, function()
-			-- upvalues: var47 (copy), var40 (copy)
-			if var47.current then
-				var40(false)
+			-- upvalues: var22 (copy), var15 (copy)
+			if var22.current then
+				var15(false)
 			end
 		end)
-	end, { var39 })
-	local var54 = reactModule.useCallback(function()
+	end, { var14 })
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: default (copy)
 		default:switchToSettingsApp():catch(function() end)
 	end, {})
-	local var55 = reactModule.useCallback(function()
-		-- upvalues: fFlagBuildExperienceDontAskAgainPushUpsellModule (copy), buildAppStorageKeyEngineFeature (copy), var21 (copy), var38 (ref)
+	local var30 = reactModule.useCallback(function()
+		-- upvalues: fFlagBuildExperienceDontAskAgainPushUpsellModule (copy), buildAppStorageKeyEngineFeature (copy), var1 (copy), var13 (ref)
 		if fFlagBuildExperienceDontAskAgainPushUpsellModule and buildAppStorageKeyEngineFeature then
-			var21.markPushNotificationsUpsellDismissedPermanently()
+			var1.markPushNotificationsUpsellDismissedPermanently()
 		end
-		var38(true)
+		var13(true)
 	end, {})
-	local var56 = reactModule.useCallback(function()
-		-- upvalues: var49 (ref), userInputService (copy), guiService (copy)
-		var49(if not userInputService.OnScreenKeyboardVisible then 0 else math.max(0, userInputService.OnScreenKeyboardPosition.Y - guiService:GetGuiInset().Y))
+	local var31 = reactModule.useCallback(function()
+		-- upvalues: var24 (ref), userInputService (copy), guiService (copy)
+		var24(if not userInputService.OnScreenKeyboardVisible then 0 else math.max(0, userInputService.OnScreenKeyboardPosition.Y - guiService:GetGuiInset().Y))
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var56 (ref), userInputService (copy)
-		var56()
-		local var75 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(var56)
-		local var76 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(var56)
-		local var77 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(var56)
+		-- upvalues: var31 (ref), userInputService (copy)
+		var31()
+		local var32 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(var31)
+		local var33 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(var31)
+		local var34 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(var31)
 		
 		return function()
-			-- upvalues: var75 (ref), var76 (ref), var77 (ref)
-			var75:Disconnect()
-			var76:Disconnect()
-			var77:Disconnect()
+			-- upvalues: var32 (ref), var33 (ref), var34 (ref)
+			var32:Disconnect()
+			var33:Disconnect()
+			var34:Disconnect()
 		end
-	end, { var56 })
-	local var57 = reactModule.useCallback(function(p7)
-		-- upvalues: var51 (ref)
-		var51(p7.AbsolutePosition.Y + p7.AbsoluteSize.Y)
+	end, { var31 })
+	local var32 = reactModule.useCallback(function(p2)
+		-- upvalues: var26 (ref)
+		var26(p2.AbsolutePosition.Y + p2.AbsoluteSize.Y)
 	end, {})
-	local var58 = reactModule.useCallback(function(p8)
-		-- upvalues: var34 (ref)
-		local y = p8.AbsoluteWindowSize.Y
-		var34(y > 0 and y < p8.AbsoluteCanvasSize.Y)
+	local var33 = reactModule.useCallback(function(p2)
+		-- upvalues: var9 (ref)
+		local y = p2.AbsoluteWindowSize.Y
+		var9(y > 0 and y < p2.AbsoluteCanvasSize.Y)
 	end, {})
-	local var59 = if var48 <= 0 or var50 <= 0 then 0 else math.max(0, var50 - var48)
-	local var60 = p4.target.isNewGameTarget == true
-	local var61 = reactModule.useMemo(function()
-		-- upvalues: p4 (ref), var28 (ref)
+	local var34 = if var23 <= 0 or var25 <= 0 then 0 else math.max(0, var25 - var23)
+	local var35 = p1.target.isNewGameTarget == true
+	local var36 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), var3 (ref)
 		local t = {
-			universeId = p4.target.universeId,
-			placeId = p4.target.placeId,
-			sessionId = p4.target.sessionId
+			universeId = p1.target.universeId,
+			placeId = p1.target.placeId,
+			sessionId = p1.target.sessionId
 		}
-		local var79 = if var28 ~= nil then nil else var28.name
-		t.experienceName = if typeof(var79) == "string" and var79 ~= "" then var79 else p4.target.experienceName
-		t.isNewGameTarget = p4.target.isNewGameTarget
-		t.creatorName = p4.target.creatorName
-		t.gameIcon = p4.target.gameIcon
+		local var37 = if var3 ~= nil then nil else var3.name
+		t.experienceName = if typeof(var37) == "string" and var37 ~= "" then var37 else p1.target.experienceName
+		t.isNewGameTarget = p1.target.isNewGameTarget
+		t.creatorName = p1.target.creatorName
+		t.gameIcon = p1.target.gameIcon
 		
 		return t
 	end, {
-		p4.target.universeId, p4.target.placeId, p4.target.sessionId,
-		p4.target.experienceName, p4.target.isNewGameTarget, p4.target.creatorName,
-		p4.target.gameIcon, var28
+		p1.target.universeId, p1.target.placeId, p1.target.sessionId,
+		p1.target.experienceName, p1.target.isNewGameTarget, p1.target.creatorName,
+		p1.target.gameIcon, var3
 	})
-	local var62 = reactModule.useCallback(function(p9)
-		-- upvalues: p4 (ref), var61 (ref)
-		if p4.onNavigateToResolvedTarget ~= nil then
-			p4.onNavigateToResolvedTarget({
-				universeId = p9.universeId,
-				placeId = p9.placeId,
-				sessionId = p9.sessionId,
-				experienceName = var61.experienceName,
-				isNewGameTarget = var61.isNewGameTarget,
-				creatorName = var61.creatorName,
-				gameIcon = var61.gameIcon
+	local var37 = reactModule.useCallback(function(p2)
+		-- upvalues: p1 (ref), var36 (ref)
+		if p1.onNavigateToResolvedTarget ~= nil then
+			p1.onNavigateToResolvedTarget({
+				universeId = p2.universeId,
+				placeId = p2.placeId,
+				sessionId = p2.sessionId,
+				experienceName = var36.experienceName,
+				isNewGameTarget = var36.isNewGameTarget,
+				creatorName = var36.creatorName,
+				gameIcon = var36.gameIcon
 			})
 		end
 	end, {
-		p4.onNavigateToResolvedTarget,
-		var61.experienceName,
-		var61.isNewGameTarget,
-		var61.creatorName,
-		var61.gameIcon
+		p1.onNavigateToResolvedTarget,
+		var36.experienceName,
+		var36.isNewGameTarget,
+		var36.creatorName,
+		var36.gameIcon
 	})
-	local var63, var64 = reactModule.useState({ count = 0, reason = nil })
-	local var65 = useChatSessionCoreModule({
-		universeId = p4.target.universeId,
-		placeId = p4.target.placeId,
-		sessionId = p4.target.sessionId,
-		autoFocusComposer = fFlagBuildExperienceFocusNewGameComposerModule and var60,
-		createUniverseOnFirstPrompt = var60,
-		onProjectResolved = var62,
-		onPromptFailure = reactModule.useCallback(function(p10, p11)
-			-- upvalues: creatorAgentChatModule (copy), var64 (ref)
-			if p10 == creatorAgentChatModule.ErrorCodes.OutOfCredits then
-				var64(function(p12)
-					-- upvalues: p11 (ref)
-					return { count = p12.count + 1, reason = p11 }
+	local var38, var39 = reactModule.useState({ count = 0, reason = nil })
+	local var40 = useChatSessionCoreModule({
+		universeId = p1.target.universeId,
+		placeId = p1.target.placeId,
+		sessionId = p1.target.sessionId,
+		autoFocusComposer = fFlagBuildExperienceFocusNewGameComposerModule and var35,
+		createUniverseOnFirstPrompt = var35,
+		onProjectResolved = var37,
+		onPromptFailure = reactModule.useCallback(function(p2, p3)
+			-- upvalues: creatorAgentChatModule (copy), var39 (ref)
+			if p2 == creatorAgentChatModule.ErrorCodes.OutOfCredits then
+				var39(function(p4)
+					-- upvalues: p3 (ref)
+					return { count = p4.count + 1, reason = p3 }
 				end)
 			end
 		end, {})
 	})
-	local var66 = useChatPlaytestFooterModule(var65, "BuildChatPlaytestCta")
-	local subagentTaskState = var65.subagentTaskState
-	local var67 = subagentTaskState ~= nil and #subagentTaskState.groups > 0
-	local var68 = #var65.messages == 0
-	local var69 = false
+	local var41 = useChatPlaytestFooterModule(var40, "BuildChatPlaytestCta")
+	local subagentTaskState = var40.subagentTaskState
+	local var42 = subagentTaskState ~= nil and #subagentTaskState.groups > 0
+	local var43 = #var40.messages == 0
+	local var44 = false
 	
-	for i, v in var65.messages do
+	for i, v in var40.messages do
 		if v.kind == "user_message" then
-			var69 = true
+			var44 = true
 			break
 		end
 	end
-	local var70 = var35 == permissionsProtocol.Status.DENIED and (not var37 and (not var43 or var45))
-	local var71 = reactModule.useRef(false)
+	local var45 = var10 == permissionsProtocol.Status.DENIED and (not var12 and (not var18 or var20))
+	local var46 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: buildAppStorageKeyEngineFeature (copy), var70 (ref), var69 (write), var65 (ref), var45 (ref), var46 (ref), var44 (ref), var21 (copy)
+		-- upvalues: buildAppStorageKeyEngineFeature (copy), var45 (ref), var44 (write), var40 (ref), var20 (ref), var21 (ref), var19 (ref), var1 (copy)
 		if not buildAppStorageKeyEngineFeature then
 			return function() end
 		end
-		local isAssistantResponding = var70 and (var69 and var65.isAssistantResponding)
+		local isAssistantResponding = var45 and (var44 and var40.isAssistantResponding)
 		
-		if isAssistantResponding and not var45 then
-			var46(true)
-			var44(true)
-			var21.markPushNotificationsUpsellShown()
-		elseif not isAssistantResponding and var45 then
-			var46(false)
+		if isAssistantResponding and not var20 then
+			var21(true)
+			var19(true)
+			var1.markPushNotificationsUpsellShown()
+		elseif not isAssistantResponding and var20 then
+			var21(false)
 		end
 		return function() end
 	end, {
-		var70,
-		var69,
-		var65.isAssistantResponding,
-		var43,
-		var45
+		var45,
+		var44,
+		var40.isAssistantResponding,
+		var18,
+		var20
 	})
 	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), var71 (ref), var65 (ref), universeConfigurationModule (copy)
-		local universeId = p4.target.universeId
-		local var81 = var71.current and not var65.isAssistantResponding
-		var71.current = var65.isAssistantResponding
+		-- upvalues: p1 (ref), var46 (ref), var40 (ref), universeConfigurationModule (copy)
+		local universeId = p1.target.universeId
+		local var47 = var46.current and not var40.isAssistantResponding
+		var46.current = var40.isAssistantResponding
 		
-		if not var81 or universeId == nil or universeId == 0 then
+		if not var47 or universeId == nil or universeId == 0 then
 			return function() end
 		end
 		local universeConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore()
@@ -273,146 +273,146 @@ return function(p4)
 			universeConfigurationStore.fetchSummary(universeId)
 		end
 		return function() end
-	end, { p4.target.universeId, var65.isAssistantResponding })
+	end, { p1.target.universeId, var40.isAssistantResponding })
 	reactModule.useEffect(function()
-		-- upvalues: var30 (ref), p4 (ref)
-		var30.setActiveTarget({
-			universeId = p4.target.universeId,
-			sessionId = p4.target.sessionId
+		-- upvalues: var5 (ref), p1 (ref)
+		var5.setActiveTarget({
+			universeId = p1.target.universeId,
+			sessionId = p1.target.sessionId
 		})
 		
 		return function()
-			-- upvalues: var30 (copy)
-			var30.setActiveTarget(nil)
+			-- upvalues: var5 (copy)
+			var5.setActiveTarget(nil)
 		end
-	end, { var30, p4.target.universeId, p4.target.sessionId })
-	local var72 = reactModule.useCallback(function()
-		-- upvalues: var65 (ref)
-		if var65.textBoxRef.current then
-			var65.textBoxRef.current.releaseFocus()
+	end, { var5, p1.target.universeId, p1.target.sessionId })
+	local var47 = reactModule.useCallback(function()
+		-- upvalues: var40 (ref)
+		if var40.textBoxRef.current then
+			var40.textBoxRef.current.releaseFocus()
 		end
-	end, { var65.textBoxRef })
-	v = if p4.onOpenCreatorCreditPage ~= nil then nil else reactModule.useCallback(function()
-		-- upvalues: var72 (ref), p4 (ref)
-		var72()
+	end, { var40.textBoxRef })
+	v = if p1.onOpenCreatorCreditPage ~= nil then nil else reactModule.useCallback(function()
+		-- upvalues: var47 (ref), p1 (ref)
+		var47()
 		
-		if p4.onOpenCreatorCreditPage ~= nil then
-			p4.onOpenCreatorCreditPage()
+		if p1.onOpenCreatorCreditPage ~= nil then
+			p1.onOpenCreatorCreditPage()
 		end
-	end, { var72, p4.onOpenCreatorCreditPage })
-	local var73 = useCreatorCreditChatUpsellViewModelModule({
+	end, { var47, p1.onOpenCreatorCreditPage })
+	local var48 = useCreatorCreditChatUpsellViewModelModule({
 		onOpenCreatorCreditPage = v,
-		outOfCreditsPromptFailureCount = var63.count,
-		outOfCreditsPromptFailureReason = var63.reason,
-		isAssistantResponding = var65.isAssistantResponding
+		outOfCreditsPromptFailureCount = var38.count,
+		outOfCreditsPromptFailureReason = var38.reason,
+		isAssistantResponding = var40.isAssistantResponding
 	})
 	
 	return {
-		target = var61,
-		keyboardOverlap = var59,
-		onPageMetricsChanged = var57,
-		selectedChipGroupName = var31,
-		onChipActivated = reactModule.useCallback(function(p13)
-			-- upvalues: var72 (ref), var32 (ref)
-			var72()
-			var32(p13)
-		end, { var72 }),
+		target = var36,
+		keyboardOverlap = var34,
+		onPageMetricsChanged = var32,
+		selectedChipGroupName = var6,
+		onChipActivated = reactModule.useCallback(function(p2)
+			-- upvalues: var47 (ref), var7 (ref)
+			var47()
+			var7(p2)
+		end, { var47 }),
 		onChipBottomSheetClose = function()
-			-- upvalues: var32 (ref)
-			var32(nil)
+			-- upvalues: var7 (ref)
+			var7(nil)
 		end,
 		onClose = reactModule.useCallback(function()
-			-- upvalues: var72 (ref), p4 (ref)
-			var72()
-			p4.onClose()
-		end, { var72, p4.onClose }),
-		onOverflowMenuAction = reactModule.useCallback(function(p14)
-			-- upvalues: var72 (ref), p4 (ref)
-			if p14.type == "openPage" then
-				var72()
+			-- upvalues: var47 (ref), p1 (ref)
+			var47()
+			p1.onClose()
+		end, { var47, p1.onClose }),
+		onOverflowMenuAction = reactModule.useCallback(function(p2)
+			-- upvalues: var47 (ref), p1 (ref)
+			if p2.type == "openPage" then
+				var47()
 				
-				if p4.onOpenConfigurationPage then
-					p4.onOpenConfigurationPage(p14.page)
+				if p1.onOpenConfigurationPage then
+					p1.onOpenConfigurationPage(p2.page)
 					
 					return
 				end
-			elseif p14.type == "openInvitePicker" then
-				var72()
+			elseif p2.type == "openInvitePicker" then
+				var47()
 				
-				if p4.onOpenInvitePicker then
-					p4.onOpenInvitePicker()
+				if p1.onOpenInvitePicker then
+					p1.onOpenInvitePicker()
 				end
 			end
-		end, { var72, p4.onOpenConfigurationPage, p4.onOpenInvitePicker }),
+		end, { var47, p1.onOpenConfigurationPage, p1.onOpenInvitePicker }),
 		onPlayActivated = reactModule.useCallback(function()
-			-- upvalues: sendBuildExperienceEventModule (copy), fFlagBuildEventsUpdate1Module (copy), p4 (ref), var65 (ref)
+			-- upvalues: sendBuildExperienceEventModule (copy), fFlagBuildEventsUpdate1Module (copy), p1 (ref), var40 (ref)
 			sendBuildExperienceEventModule(if fFlagBuildEventsUpdate1Module then "PLAYTEST_CLICK" else "PLAY_CLICK", {
-				universeId = p4.target.universeId,
-				placeId = var65.playtestPlaceId
+				universeId = p1.target.universeId,
+				placeId = var40.playtestPlaceId
 			}, if fFlagBuildEventsUpdate1Module then { context = "app_header" } else nil)
 			
-			if var65.launchPlaytest then
-				var65.launchPlaytest("BuildChatPage")
+			if var40.launchPlaytest then
+				var40.launchPlaytest("BuildChatPage")
 			end
 		end, {
-			var65.launchPlaytest,
-			var65.playtestPlaceId,
-			p4.target.universeId
+			var40.launchPlaytest,
+			var40.playtestPlaceId,
+			p1.target.universeId
 		}),
 		onOpenAgentsPage = if fFlagBuildExperienceAssetLibraryModule then if fFlagBuildExperienceAssetLibraryModule then reactModule.useCallback(function()
-			-- upvalues: var72 (ref), p4 (ref)
-			var72()
+			-- upvalues: var47 (ref), p1 (ref)
+			var47()
 			
-			if p4.onOpenAssetLibraryPage ~= nil then
-				p4.onOpenAssetLibraryPage()
+			if p1.onOpenAssetLibraryPage ~= nil then
+				p1.onOpenAssetLibraryPage()
 			end
-		end, { var72, p4.onOpenAssetLibraryPage }) else nil else reactModule.useCallback(function()
-			-- upvalues: var72 (ref), p4 (ref), subagentTaskState (ref), t (copy)
-			var72()
-			p4.onOpenAgentsPage(subagentTaskState or t)
-		end, { var72, p4.onOpenAgentsPage, subagentTaskState }),
+		end, { var47, p1.onOpenAssetLibraryPage }) else nil else reactModule.useCallback(function()
+			-- upvalues: var47 (ref), p1 (ref), subagentTaskState (ref), t (copy)
+			var47()
+			p1.onOpenAgentsPage(subagentTaskState or t)
+		end, { var47, p1.onOpenAgentsPage, subagentTaskState }),
 		agentDetailIcon = if fFlagBuildExperienceAssetLibraryModule then iconName.SquaresGridPlus else nil,
-		isAgentDetailDisabled = fFlagBuildExperienceAssetLibraryModule and p4.target.universeId == nil,
+		isAgentDetailDisabled = fFlagBuildExperienceAssetLibraryModule and p1.target.universeId == nil,
 		onOpenCreatorCreditPage = v,
-		buildOverflowMenuStore = var29,
-		messages = var65.messages,
-		localToolActions = var65.localToolActions,
-		clockBinding = var65.clockBinding,
-		onPlaytest = var66.onPlaytest,
-		isPlaytestLoading = var66.isPlaytestLoading,
-		showPushNotificationsUpsell = if buildAppStorageKeyEngineFeature then var45 and var70 else var70,
-		isPushNotificationsRequestPending = var39,
-		shouldOpenPushNotificationsSettings = var41,
-		onNotifyMe = var53,
-		onOpenPushNotificationsSettings = var54,
-		onNotNow = var55,
-		showBuyMoreRobuxCard = var73.showBuyMoreRobuxCard,
-		buyMoreRobuxCardTitle = var73.buyMoreRobuxCardTitle,
-		buyMoreRobuxCardDescription = var73.buyMoreRobuxCardDescription,
-		buyMoreRobuxCardPrimaryActionText = var73.buyMoreRobuxCardPrimaryActionText,
-		onBuyMoreRobuxCardPrimaryAction = var73.onBuyMoreRobuxCardPrimaryAction,
-		buyMoreRobuxCardSecondaryActionText = var73.buyMoreRobuxCardSecondaryActionText,
-		onBuyMoreRobuxCardSecondaryAction = var73.onBuyMoreRobuxCardSecondaryAction,
-		isChatEmpty = var68,
-		isHistoryLoading = var65.isHistoryLoading,
-		isNewGameTarget = var60,
-		hasPublishedTurn = var65.hasPublishedTurn,
-		hasPublishedVersion = var28 ~= nil and var28.isActive,
-		hasTaskGroups = var67,
+		buildOverflowMenuStore = var4,
+		messages = var40.messages,
+		localToolActions = var40.localToolActions,
+		clockBinding = var40.clockBinding,
+		onPlaytest = var41.onPlaytest,
+		isPlaytestLoading = var41.isPlaytestLoading,
+		showPushNotificationsUpsell = if buildAppStorageKeyEngineFeature then var20 and var45 else var45,
+		isPushNotificationsRequestPending = var14,
+		shouldOpenPushNotificationsSettings = var16,
+		onNotifyMe = var28,
+		onOpenPushNotificationsSettings = var29,
+		onNotNow = var30,
+		showBuyMoreRobuxCard = var48.showBuyMoreRobuxCard,
+		buyMoreRobuxCardTitle = var48.buyMoreRobuxCardTitle,
+		buyMoreRobuxCardDescription = var48.buyMoreRobuxCardDescription,
+		buyMoreRobuxCardPrimaryActionText = var48.buyMoreRobuxCardPrimaryActionText,
+		onBuyMoreRobuxCardPrimaryAction = var48.onBuyMoreRobuxCardPrimaryAction,
+		buyMoreRobuxCardSecondaryActionText = var48.buyMoreRobuxCardSecondaryActionText,
+		onBuyMoreRobuxCardSecondaryAction = var48.onBuyMoreRobuxCardSecondaryAction,
+		isChatEmpty = var43,
+		isHistoryLoading = var40.isHistoryLoading,
+		isNewGameTarget = var35,
+		hasPublishedTurn = var40.hasPublishedTurn,
+		hasPublishedVersion = var3 ~= nil and var3.isActive,
+		hasTaskGroups = var42,
 		taskState = subagentTaskState,
-		scrollingFrameRef = var65.setScrollingFrame,
-		onChatViewportChanged = var58,
-		isChatScrollable = var33,
-		composerText = var65.composerText,
-		composerErrorText = var65.composerErrorText,
-		onComposerChanged = var65.setComposerText,
-		textBoxRef = var65.textBoxRef,
-		isAssistantResponding = var65.isAssistantResponding,
-		canStopAssistantResponse = var65.canStopAssistantResponse,
-		canSendWhileResponding = var65.canSendWhileResponding,
-		onSend = var65.sendMessage,
-		onStop = var65.stopAssistantResponse,
-		statusChipGap = var27.Gap.Small,
-		paddingBottom = var27.Padding.Small + var59
+		scrollingFrameRef = var40.setScrollingFrame,
+		onChatViewportChanged = var33,
+		isChatScrollable = var8,
+		composerText = var40.composerText,
+		composerErrorText = var40.composerErrorText,
+		onComposerChanged = var40.setComposerText,
+		textBoxRef = var40.textBoxRef,
+		isAssistantResponding = var40.isAssistantResponding,
+		canStopAssistantResponse = var40.canStopAssistantResponse,
+		canSendWhileResponding = var40.canSendWhileResponding,
+		onSend = var40.sendMessage,
+		onStop = var40.stopAssistantResponse,
+		statusChipGap = var2.Gap.Small,
+		paddingBottom = var2.Padding.Small + var34
 	}
 end

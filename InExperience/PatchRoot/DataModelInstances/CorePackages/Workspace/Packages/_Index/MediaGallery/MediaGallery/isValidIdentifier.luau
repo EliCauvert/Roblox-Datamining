@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return p0 ~= nil and (p0 ~= "" and p0 ~= "0")
+﻿return function(p1)
+	return p1 ~= nil and (p1 ~= "" and p1 ~= "0")
 end

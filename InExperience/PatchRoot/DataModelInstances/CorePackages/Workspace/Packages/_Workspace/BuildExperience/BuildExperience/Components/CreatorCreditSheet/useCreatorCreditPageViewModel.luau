@@ -15,132 +15,132 @@ local dataStatus = dataHydrationModule.DataStatus
 return function()
 	-- upvalues: creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), dataStatus (ref), useOpenBuyRobuxWebViewModule (ref), useRefreshCreatorCreditOnUnhideModule (ref), getHoursUntilResetModule (ref), creatorCreditConfigModule (ref)
 	local creatorCreditStore = creatorCreditModule.getCreatorCreditStore(false)
-	local var10 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: creatorCreditStore (ref)
 		return creatorCreditStore.getDailyLimit()
 	end, { creatorCreditStore })
-	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+	local var2 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: creatorCreditStore (ref)
 		return creatorCreditStore.getQuotaSummary()
 	end, { creatorCreditStore }).data)
-	local var12 = signalsReactModule.useSignalState(var10.data)
-	local var13 = signalsReactModule.useSignalState(var10.status)
-	local var12_1 = var12 or (if var11 then var11.limitSettings else nil)
-	local var15 = if var11 then var11.robuxBalance else 0
-	local var16 = if var11 then var11.robuxSpentToday else 0
-	local var17 = if var12_1 then var12_1.additionalUsageEnabled else false
-	local var18 = if var12_1 and var12_1.dailyLimitSet then var12_1.dailyLimit else nil
-	local var19 = var12_1 ~= nil
-	local var20 = var13 == dataStatus.Ready and var12 ~= nil
-	local var21, var22 = reactModule.useState(false)
-	local var23, var24 = reactModule.useState(false)
-	local var25, var26 = reactModule.useState(false)
-	local var27 = reactModule.useRef(0)
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: var27 (ref), var24 (ref), var26 (ref)
-		var27.current += 1
-		var24(true)
-		var26(false)
+	local var3 = signalsReactModule.useSignalState(var1.data)
+	local var4 = signalsReactModule.useSignalState(var1.status)
+	local var5 = var3 or (if var2 then var2.limitSettings else nil)
+	local var6 = if var2 then var2.robuxBalance else 0
+	local var7 = if var2 then var2.robuxSpentToday else 0
+	local var8 = if var5 then var5.additionalUsageEnabled else false
+	local var9 = if var5 and var5.dailyLimitSet then var5.dailyLimit else nil
+	local var10 = var5 ~= nil
+	local var11 = var4 == dataStatus.Ready and var3 ~= nil
+	local var12, var13 = reactModule.useState(false)
+	local var14, var15 = reactModule.useState(false)
+	local var16, var17 = reactModule.useState(false)
+	local var18 = reactModule.useRef(0)
+	local var19 = reactModule.useCallback(function()
+		-- upvalues: var18 (ref), var15 (ref), var17 (ref)
+		var18.current += 1
+		var15(true)
+		var17(false)
 		
-		return var27.current
+		return var18.current
 	end, {})
-	local var29 = reactModule.useCallback(function(p0, p1)
-		-- upvalues: var27 (ref), var24 (ref), var26 (ref)
-		if var27.current == p0 then
-			var24(false)
-			var26(p1)
+	local var20 = reactModule.useCallback(function(p1, p2)
+		-- upvalues: var18 (ref), var15 (ref), var17 (ref)
+		if var18.current == p1 then
+			var15(false)
+			var17(p2)
 			
 			return
 		end
 	end, {})
-	local var30 = reactModule.useCallback(function(p2)
-		-- upvalues: var20 (ref), var23 (ref), var12_1 (ref), var28 (ref), creatorCreditStore (ref), var29 (ref)
-		if var20 and not var23 and var12_1 ~= nil then
-			local var36 = var28()
+	local var21 = reactModule.useCallback(function(p1)
+		-- upvalues: var11 (ref), var14 (ref), var5 (ref), var19 (ref), creatorCreditStore (ref), var20 (ref)
+		if var11 and not var14 and var5 ~= nil then
+			local var22 = var19()
 			creatorCreditStore.setDailyLimit({
-				additionalUsageEnabled = p2,
-				dailyLimitSet = var12_1.dailyLimitSet,
-				dailyLimit = var12_1.dailyLimit
+				additionalUsageEnabled = p1,
+				dailyLimitSet = var5.dailyLimitSet,
+				dailyLimit = var5.dailyLimit
 			}):andThen(function()
-				-- upvalues: var29 (copy), var36 (ref)
-				var29(var36, false)
+				-- upvalues: var20 (copy), var22 (ref)
+				var20(var22, false)
 			end):catch(function()
-				-- upvalues: var29 (copy), var36 (ref)
-				var29(var36, true)
+				-- upvalues: var20 (copy), var22 (ref)
+				var20(var22, true)
 			end)
 			
 			return
 		end
 	end, {
-		var28, creatorCreditStore, var29, var23, var12_1, var20
+		var19, creatorCreditStore, var20, var14, var5, var11
 	})
-	local var31 = reactModule.useCallback(function()
-		-- upvalues: var20 (ref), var23 (ref), var26 (ref), var22 (ref)
-		if var20 and not var23 then
-			var26(false)
-			var22(true)
+	local var22 = reactModule.useCallback(function()
+		-- upvalues: var11 (ref), var14 (ref), var17 (ref), var13 (ref)
+		if var11 and not var14 then
+			var17(false)
+			var13(true)
 		end
-	end, { var23, var20 })
-	local var32 = reactModule.useCallback(function(p3)
-		-- upvalues: var20 (ref), var23 (ref), var12_1 (ref), var28 (ref), creatorCreditStore (ref), var27 (ref), var29 (ref), var22 (ref)
-		if var20 and not var23 and var12_1 ~= nil then
-			local var37 = var28()
+	end, { var14, var11 })
+	local var23 = reactModule.useCallback(function(p1)
+		-- upvalues: var11 (ref), var14 (ref), var5 (ref), var19 (ref), creatorCreditStore (ref), var18 (ref), var20 (ref), var13 (ref)
+		if var11 and not var14 and var5 ~= nil then
+			local var24 = var19()
 			creatorCreditStore.setDailyLimit({
-				additionalUsageEnabled = var12_1.additionalUsageEnabled,
-				dailyLimitSet = p3 ~= nil,
-				dailyLimit = p3 or 0
+				additionalUsageEnabled = var5.additionalUsageEnabled,
+				dailyLimitSet = p1 ~= nil,
+				dailyLimit = p1 or 0
 			}):andThen(function()
-				-- upvalues: var27 (copy), var37 (ref), var29 (copy), var22 (copy)
-				if var27.current == var37 then
-					var29(var37, false)
-					var22(false)
+				-- upvalues: var18 (copy), var24 (ref), var20 (copy), var13 (copy)
+				if var18.current == var24 then
+					var20(var24, false)
+					var13(false)
 				end
 			end):catch(function()
-				-- upvalues: var29 (copy), var37 (ref)
-				var29(var37, true)
+				-- upvalues: var20 (copy), var24 (ref)
+				var20(var24, true)
 			end)
 			
 			return
 		end
 	end, {
-		var28, creatorCreditStore, var29, var23, var12_1, var20
+		var19, creatorCreditStore, var20, var14, var5, var11
 	})
-	local var33 = reactModule.useCallback(function()
-		-- upvalues: var22 (ref)
-		var22(false)
+	local var24 = reactModule.useCallback(function()
+		-- upvalues: var13 (ref)
+		var13(false)
 	end, {})
-	local var34 = reactModule.useCallback(function()
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: creatorCreditStore (ref)
 		creatorCreditStore.refreshQuotaSummary():catch(function() end)
 	end, { creatorCreditStore })
-	local var35 = useOpenBuyRobuxWebViewModule(var34)
-	useRefreshCreatorCreditOnUnhideModule(var34)
+	local var26 = useOpenBuyRobuxWebViewModule(var25)
+	useRefreshCreatorCreditOnUnhideModule(var25)
 	
 	return {
 		pageProps = {
-			dailyPctUsed = if var11 then var11.freeTrialPctUsed else 0,
-			resetHours = if var11 then getHoursUntilResetModule(var11.nextResetEligibleTime) else nil,
-			additionalEnabled = var17,
-			dailyLimit = var18,
-			hasLimitConfigured = var19,
-			additionalUsed = var16,
-			robuxAvailable = var15,
-			settingsDisabled = not var20 or var23,
-			settingsError = var25 or var13 == dataStatus.Failed,
-			showBuyRobux = var11 ~= nil and (var11.freeTrialRemaining <= 0 and var11.robuxBalance < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance),
-			onToggleAdditional = var30,
-			onOpenLimitSheet = var31,
-			onOpenBuyRobux = var35
+			dailyPctUsed = if var2 then var2.freeTrialPctUsed else 0,
+			resetHours = if var2 then getHoursUntilResetModule(var2.nextResetEligibleTime) else nil,
+			additionalEnabled = var8,
+			dailyLimit = var9,
+			hasLimitConfigured = var10,
+			additionalUsed = var7,
+			robuxAvailable = var6,
+			settingsDisabled = not var11 or var14,
+			settingsError = var16 or var4 == dataStatus.Failed,
+			showBuyRobux = var2 ~= nil and (var2.freeTrialRemaining <= 0 and var2.robuxBalance < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance),
+			onToggleAdditional = var21,
+			onOpenLimitSheet = var22,
+			onOpenBuyRobux = var26
 		},
 		limitSheetProps = {
-			isOpen = var21,
-			initialValue = var18,
-			initialIsNoLimit = var19 and var18 == nil,
-			additionalUsed = var16,
-			isSaving = var23,
-			saveError = var25,
-			onConfirm = var32,
-			onCancel = var33
+			isOpen = var12,
+			initialValue = var9,
+			initialIsNoLimit = var10 and var9 == nil,
+			additionalUsed = var7,
+			isSaving = var14,
+			saveError = var16,
+			onConfirm = var23,
+			onCancel = var24
 		}
 	}
 end

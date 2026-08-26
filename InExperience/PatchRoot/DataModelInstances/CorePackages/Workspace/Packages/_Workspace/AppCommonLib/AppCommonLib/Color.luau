@@ -1,11 +1,11 @@
 ﻿local t = {
-	RgbFromHex = function(p0)
-		assert(p0 >= 0 and p0 <= 16777215, "RgbFromHex: Out of range")
-		local var1 = p0 % 256
-		p0 = (p0 - var1) / 256
-		local var2 = p0 % 256
+	RgbFromHex = function(p1)
+		assert(p1 >= 0 and p1 <= 16777215, "RgbFromHex: Out of range")
+		local var1 = p1 % 256
+		p1 = (p1 - var1) / 256
+		local var2 = p1 % 256
 		
-		return (p0 - var2) / 256, var2, var1
+		return (p1 - var2) / 256, var2, var1
 	end
 }
 

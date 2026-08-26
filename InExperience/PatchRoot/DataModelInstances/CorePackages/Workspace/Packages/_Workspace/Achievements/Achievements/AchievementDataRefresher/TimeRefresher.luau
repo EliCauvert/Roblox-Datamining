@@ -7,29 +7,29 @@ local loggerModule = require(achievements.Logger)
 local _ = require(parent.Signal)
 
 return {
-	init = function(p0, p1, p2)
-		p0.fireDataChanged = p1
-		p0.intervalInSec = p2
+	init = function(p1, p2, p3)
+		p1.fireDataChanged = p2
+		p1.intervalInSec = p3
 	end,
-	start = function(p3)
+	start = function(p1)
 		-- upvalues: setInterval (ref)
-		p3.timerId = setInterval(p3.check, p3.intervalInSec * 1000, p3)
-		p3.startTime = os.time()
+		p1.timerId = setInterval(p1.check, p1.intervalInSec * 1000, p1)
+		p1.startTime = os.time()
 	end,
-	check = function(p4)
+	check = function(p1)
 		-- upvalues: loggerModule (ref)
-		if p4.startTime then
-			p4.fireDataChanged(os.time() - p4.startTime)
+		if p1.startTime then
+			p1.fireDataChanged(os.time() - p1.startTime)
 			
 			return
 		end
 		loggerModule:error("No recorded start time")
 	end,
-	stop = function(p5)
+	stop = function(p1)
 		-- upvalues: clearInterval (ref)
-		if p5.timerId then
-			clearInterval(p5.timerId)
-			p5.startTime = nil
+		if p1.timerId then
+			clearInterval(p1.timerId)
+			p1.startTime = nil
 		end
 	end
 }

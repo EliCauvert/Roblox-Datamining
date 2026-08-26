@@ -1,52 +1,52 @@
-﻿local var0 = nil
-local var1 = false
+﻿local var1 = nil
+local var2 = false
 
 local _ = function()
-	-- upvalues: var1 (write), var0 (write)
-	if not var1 then
+	-- upvalues: var2 (write), var1 (write)
+	if not var2 then
 		local ok, status = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
 		if ok and status then
-			var0 = status
+			var1 = status
 		end
-		var1 = true
+		var2 = true
 	end
-	return var0
+	return var1
 end
 
-return function(p0)
-	-- upvalues: var1 (write), var0 (write)
-	if not var1 then
+return function(p1)
+	-- upvalues: var2 (write), var1 (write)
+	if not var2 then
 		local ok, status = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
 		if ok and status then
-			var0 = status
+			var1 = status
 		end
-		var1 = true
+		var2 = true
 	end
-	local var2 = var0
+	local var3 = var1
 	
-	if var2 then
-		local focusedContextId = var2:GetFocusedContextId()
-		p0(focusedContextId)
+	if var3 then
+		local focusedContextId = var3:GetFocusedContextId()
+		p1(focusedContextId)
 		
 		local var4 = function()
-			-- upvalues: var2 (ref), focusedContextId (write), p0 (ref)
-			local focusedContextId_1 = var2:GetFocusedContextId()
+			-- upvalues: var3 (ref), focusedContextId (write), p1 (ref)
+			local focusedContextId_1 = var3:GetFocusedContextId()
 			
 			if focusedContextId ~= focusedContextId_1 then
 				focusedContextId = focusedContextId_1
-				p0(focusedContextId)
+				p1(focusedContextId)
 			end
 		end
 		
-		var2.OnContextRegistered:Connect(var4)
-		var2.OnContextUnregistered:Connect(var4)
-		var2.OnDeafenVoiceAudio:Connect(var4)
-		var2.OnUndeafenVoiceAudio:Connect(var4)
+		var3.OnContextRegistered:Connect(var4)
+		var3.OnContextUnregistered:Connect(var4)
+		var3.OnDeafenVoiceAudio:Connect(var4)
+		var3.OnUndeafenVoiceAudio:Connect(var4)
 	end
 end

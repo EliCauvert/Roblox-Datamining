@@ -7,8 +7,8 @@ local createPagerStoreModule = require(script.Parent.createPagerStore)
 
 local function noop() end
 
-local var5 = signalsModule.createSignal(false)
-local var6 = reactModule.createContext({
+local var1 = signalsModule.createSignal(false)
+local var2 = reactModule.createContext({
 	analytics = nil,
 	store = createPagerStoreModule(),
 	getActiveIndex = signalsModule.createSignal(1),
@@ -18,26 +18,26 @@ local var6 = reactModule.createContext({
 	previous = noop,
 	removeItem = noop
 })
-local var7 = reactModule.createContext({
+local var3 = reactModule.createContext({
 	index = 0,
 	item = nil,
-	getIsActive = var5,
-	getIsVisible = var5
+	getIsActive = var1,
+	getIsVisible = var1
 })
 
 return {
-	VerticalPagerContext = var6,
-	PagerItemContext = var7,
+	VerticalPagerContext = var2,
+	PagerItemContext = var3,
 	useVerticalPager = function()
-		-- upvalues: reactModule (ref), var6 (ref)
-		return reactModule.useContext(var6)
+		-- upvalues: reactModule (ref), var2 (ref)
+		return reactModule.useContext(var2)
 	end,
 	usePagerItem = function()
-		-- upvalues: reactModule (ref), var7 (ref)
-		return reactModule.useContext(var7)
+		-- upvalues: reactModule (ref), var3 (ref)
+		return reactModule.useContext(var3)
 	end,
 	useIsPagerItemActive = function()
-		-- upvalues: reactModule (ref), var7 (ref), signalsReactModule (ref)
-		return signalsReactModule.useSignalState(reactModule.useContext(var7).getIsActive)
+		-- upvalues: reactModule (ref), var3 (ref), signalsReactModule (ref)
+		return signalsReactModule.useSignalState(reactModule.useContext(var3).getIsActive)
 	end
 }

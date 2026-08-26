@@ -1,8 +1,8 @@
-﻿return function(p0, p1, p2, p3)
-	if p0 + p1 == 0 then
-		return p2 or "--"
+﻿return function(p1, p2, p3, p4)
+	if p1 + p2 == 0 then
+		return p3 or "--"
 	end
-	local rounded = math.round(p0 / (p0 + p1) * 100)
+	local rounded = math.round(p1 / (p1 + p2) * 100)
 	
-	return if p3 then `{rounded}%` else tostring(rounded)
+	return if p4 then `{rounded}%` else tostring(rounded)
 end

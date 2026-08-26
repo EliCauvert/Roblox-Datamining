@@ -4,21 +4,21 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 
-return function(p0, _, p1, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), closeCentralOverlay (ref)
-	local var1 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.DismissDialog
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
 	assert(var1, "actionParams must exist")
 	
 	if var1.dialogType == "centralOverlay" then
-		p1.dependencies.dispatch(closeCentralOverlay())
+		p2.dependencies.dispatch(closeCentralOverlay())
 	end
 end

@@ -21,8 +21,8 @@ local function createStyleSheet(p1, p2, p3, p4, p5)
 	p3 = p3 or 1
 	p5 = p5 or themeNameModule.Default
 	local styleSheet = Instance.new("StyleSheet")
-	local var1 = if flagsModule.FoundationThemeName then `{p5}-` else ""
-	styleSheet.Name = if p4 ~= nil then `{var1}{p1}-{p2}-{p3}` else `{var1}{p1}-{p2}-{p3}-{tostring(p4)}`
+	local var2 = if flagsModule.FoundationThemeName then `{p5}-` else ""
+	styleSheet.Name = if p4 ~= nil then `{var2}{p1}-{p2}-{p3}` else `{var2}{p1}-{p2}-{p3}-{tostring(p4)}`
 	styleSheet.Parent = foundationStyleSheets
 	
 	return {
@@ -42,7 +42,7 @@ end
 
 local function createStyleRule(p1, p2)
 	local text = "." .. p6
-	local var1 = if p1.modifier ~= nil then "" else ":" .. p5.modifier
+	local var2 = if p1.modifier ~= nil then "" else ":" .. p5.modifier
 	local text_1 = text .. var24 .. (if p1.pseudo ~= nil then "" else " ::" .. p5.pseudo)
 	
 	if p1.pseudo ~= nil then
@@ -63,147 +63,147 @@ local function applyAttributes(p1, p2)
 	for i, v in p2 do
 		if not p1.attributes[v.name] then
 			local name = p1.overrideAttributes[v.name]
-			local var1 = if name ~= nil then v.value else name
-			local var2 = if flagsModule.FoundationDisableTokenScaling then var1 else scaleValueModule(var1, p1.scale)
+			local var2 = if name ~= nil then v.value else name
+			local var3 = if flagsModule.FoundationDisableTokenScaling then var2 else scaleValueModule(var2, p1.scale)
 			p1.attributes[v.name] = true
-			p1.instance:SetAttribute(v.name, var2)
+			p1.instance:SetAttribute(v.name, var3)
 		end
 	end
 end
 
-local function addRegisteredStyleSheetTags(p1, p2)
+local function addRegisteredStyleSheetTags(p3, p4)
 	-- upvalues: createStyleRule (ref), applyAttributes (ref)
-	for i, v in p2 do
-		if not p1.tags[v] then
-			local var1 = p1.rules[v]
+	for i, v in p4 do
+		if not p3.tags[v] then
+			local var4 = p3.rules[v]
 			
-			if var1 then
-				createStyleRule(var1, v).Parent = p1.instance
-				applyAttributes(p1, var1.attributes)
+			if var4 then
+				createStyleRule(var4, v).Parent = p3.instance
+				applyAttributes(p3, var4.attributes)
 				
-				if var1.children then
-					for i_1, v_1 in var1.children do
-						createStyleRule(v_1, v_1.tag).Parent = p1.instance
-						applyAttributes(p1, v_1.attributes)
+				if var4.children then
+					for i_1, v_1 in var4.children do
+						createStyleRule(v_1, v_1.tag).Parent = p3.instance
+						applyAttributes(p3, v_1.attributes)
 					end
 				end
-				p1.tags[v] = true
+				p3.tags[v] = true
 			end
 		end
 	end
 end
 
-local function resolveStyleSheet(p1, p2, p3, p4, p5)
+local function resolveStyleSheet(p5, p6, p7, p8, p9)
 	-- upvalues: deviceModule (ref), themeNameModule (ref), t (ref), flagsModule (ref), t_1 (ref), createStyleSheet (ref)
-	p2 = p2 or deviceModule.Desktop
-	p3 = p3 or 1
-	p5 = p5 or themeNameModule.Default
+	p6 = p6 or deviceModule.Desktop
+	p7 = p7 or 1
+	p9 = p9 or themeNameModule.Default
 	
 	for i, v in t do
-		if (not flagsModule.FoundationThemeName or v.themeName == p5) and (v.colorMode == p1 and v.device == p2) and (v.scale == p3 and v.tokenOverrides == p4) then
+		if (not flagsModule.FoundationThemeName or v.themeName == p9) and (v.colorMode == p5 and v.device == p6) and (v.scale == p7 and v.tokenOverrides == p8) then
 			if flagsModule.FoundationStyleSheetRefCounting then
 				t_1[i] = nil
 			end
 			return i
 		end
 	end
-	local var1 = createStyleSheet(p1, p2, p3, p4, p5)
-	t[var1.instance] = var1
+	local var5 = createStyleSheet(p5, p6, p7, p8, p9)
+	t[var5.instance] = var5
 	
-	return var1.instance
+	return var5.instance
 end
 
-local function addStyleTags(p1, p2)
+local function addStyleTags(p10, p11)
 	-- upvalues: t (ref), addRegisteredStyleSheetTags (ref)
-	local var1 = t[p1]
+	local var6 = t[p10]
 	
-	if not var1 then
+	if not var6 then
 		error("StyleSheet not found in registry")
 	end
-	addRegisteredStyleSheetTags(var1, p2)
+	addRegisteredStyleSheetTags(var6, p11)
 end
 
-local function _(p1)
+local function _(p10)
 	-- upvalues: t (ref)
-	local var1 = t[p1]
+	local var6 = t[p10]
 	
-	if var1 == nil or var1.refCount > 0 then
+	if var6 == nil or var6.refCount > 0 then
 		return
 	end
-	t[p1] = nil
-	p1:Destroy()
+	t[p10] = nil
+	p10:Destroy()
 end
 
 local function flushPendingCleanup()
-	-- upvalues: var1 (write), t_1 (ref), t (ref)
-	var1 = false
+	-- upvalues: var5 (write), t_1 (ref), t (ref)
+	var5 = false
 	
 	for i in t_1 do
 		t_1[i] = nil
-		local var1 = t[i]
+		local var6 = t[i]
 		
-		if var1 ~= nil and var1.refCount <= 0 then
+		if var6 ~= nil and var6.refCount <= 0 then
 			t[i] = nil
 			i:Destroy()
 		end
 	end
 end
 
-local _ = function(p1)
-	-- upvalues: t_1 (ref), var1 (write), flushPendingCleanup (ref)
-	t_1[p1] = true
+local _ = function(p10)
+	-- upvalues: t_1 (ref), var6 (write), flushPendingCleanup (ref)
+	t_1[p10] = true
 	
-	if var1 then
+	if var6 then
 		return
 	end
-	var1 = true
+	var6 = true
 	task.delay(5, flushPendingCleanup)
 end
 
 return {
 	resolveStyleSheet = resolveStyleSheet,
-	getStyleSheet = function(p1, p2, p3, p4, p5)
+	getStyleSheet = function(p10, p11, p12, p13, p14)
 		-- upvalues: resolveStyleSheet (ref), flagsModule (ref), t (ref), t_1 (ref)
-		local var1 = resolveStyleSheet(p1, p2, p3, p4, p5)
+		local var7 = resolveStyleSheet(p10, p11, p12, p13, p14)
 		
 		if not flagsModule.FoundationStyleSheetRefCounting then
-			return var1
+			return var7
 		end
-		local var2 = t[var1]
+		local var8 = t[var7]
 		
-		if var2 == nil then
-			return var1
+		if var8 == nil then
+			return var7
 		end
-		var2.refCount += 1
-		t_1[var1] = nil
+		var8.refCount += 1
+		t_1[var7] = nil
 		
-		return var1
+		return var7
 	end,
 	addStyleTags = addStyleTags,
-	acquireStyleSheet = function(p1)
+	acquireStyleSheet = function(p10)
 		-- upvalues: flagsModule (ref), t (ref), t_1 (ref)
 		if not flagsModule.FoundationStyleSheetRefCounting then return end
-		local var1 = t[p1]
+		local var7 = t[p10]
 		
-		if var1 == nil then
+		if var7 == nil then
 			return
 		end
-		var1.refCount += 1
-		t_1[p1] = nil
+		var7.refCount += 1
+		t_1[p10] = nil
 	end,
-	releaseStyleSheet = function(p1)
-		-- upvalues: flagsModule (ref), t (ref), t_1 (ref), var1 (write), flushPendingCleanup (ref)
+	releaseStyleSheet = function(p10)
+		-- upvalues: flagsModule (ref), t (ref), t_1 (ref), var6 (write), flushPendingCleanup (ref)
 		if not flagsModule.FoundationStyleSheetRefCounting then return end
-		local var1 = t[p1]
+		local var7 = t[p10]
 		
-		if var1 == nil or var1.refCount == 0 then return end
-		var1.refCount -= 1
+		if var7 == nil or var7.refCount == 0 then return end
+		var7.refCount -= 1
 		
-		if var1.refCount == 0 then
-			t_1[p1] = true
+		if var7.refCount == 0 then
+			t_1[p10] = true
 			
-			if var1 then return end
-			var1 = true
+			if var7 then return end
+			var7 = true
 			task.delay(5, flushPendingCleanup)
 		end
 	end,

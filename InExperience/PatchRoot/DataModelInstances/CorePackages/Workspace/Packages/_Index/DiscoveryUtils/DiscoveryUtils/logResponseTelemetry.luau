@@ -8,11 +8,11 @@ local t = {
 	lastUpdated = { 24, 8, 2 }
 }
 
-return function(value, p0, p1)
+return function(value, p1, p2)
 	-- upvalues: default (ref), t (ref)
-	if p1 == nil then
-		p1 = default
+	if p2 == nil then
+		p2 = default
 	end
-	assert(p1, "LoggingProtocol must exist")
-	p1:logRobloxTelemetryStat(t, p0.responseSize, { endpoint_name = value })
+	assert(p2, "LoggingProtocol must exist")
+	p2:logRobloxTelemetryStat(t, p1.responseSize, { endpoint_name = value })
 end

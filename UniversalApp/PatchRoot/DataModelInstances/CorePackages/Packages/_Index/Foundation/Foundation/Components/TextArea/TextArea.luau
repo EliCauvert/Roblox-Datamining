@@ -32,7 +32,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		hasError = var1.hasError,
 		isDisabled = var1.isDisabled,
 		isRequired = var1.isRequired,
-		input = function(p1)
+		input = function(p3)
 			-- upvalues: reactModule (copy), internalTextInputModule (copy), var1 (ref), var3 (ref), var2 (ref)
 			return reactModule.createElement(internalTextInputModule, {
 				LayoutOrder = 2,
@@ -53,7 +53,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					left = var3.container.horizontalPadding,
 					right = var3.container.horizontalPadding - UDim.new(0, var2.Size.Size_150)
 				},
-				ref = p1,
+				ref = p3,
 				testId = `{var1.testId}--input`
 			})
 		end,

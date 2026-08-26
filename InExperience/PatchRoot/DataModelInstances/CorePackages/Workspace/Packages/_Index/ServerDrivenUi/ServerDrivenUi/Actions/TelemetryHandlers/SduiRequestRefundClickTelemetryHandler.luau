@@ -4,22 +4,22 @@ local sendRequestRefundClickEvent = require(parent.DiscoveryAnalytics).Events.se
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFieldValue
-local var2 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	placeId = tModule.union(tModule.string, tModule.number),
 	eventContext = tModule.string
 })
 
-return function(p0, p1, p2)
-	-- upvalues: getActionTelemetryFieldValue (ref), var2 (ref), sduiErrorType (ref), sendRequestRefundClickEvent (ref)
-	local var3 = getActionTelemetryFieldValue(p0, p1, "placeId")
-	local var4 = getActionTelemetryFieldValue(p0, p1, "eventContext")
-	local var5, var6 = var2({ placeId = var3, eventContext = var4 })
+return function(p1, p2, p3)
+	-- upvalues: getActionTelemetryFieldValue (ref), var1 (ref), sduiErrorType (ref), sendRequestRefundClickEvent (ref)
+	local var2 = getActionTelemetryFieldValue(p1, p2, "placeId")
+	local var3 = getActionTelemetryFieldValue(p1, p2, "eventContext")
+	local var4, var5 = var1({ placeId = var2, eventContext = var3 })
 	
-	if not var5 then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if not var4 then
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "SduiRequestRefundClickTelemetryHandler",
-			message = var6
-		}, p2.appPage)
+			message = var5
+		}, p3.appPage)
 	end
-	sendRequestRefundClickEvent({ placeId = if var3 then tostring(var3) else "" }, if var4 then tostring(var4) else "")
+	sendRequestRefundClickEvent({ placeId = if var2 then tostring(var2) else "" }, if var3 then tostring(var3) else "")
 end

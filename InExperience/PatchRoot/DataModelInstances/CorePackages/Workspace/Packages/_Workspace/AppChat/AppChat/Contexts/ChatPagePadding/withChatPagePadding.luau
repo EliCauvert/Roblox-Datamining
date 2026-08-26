@@ -1,9 +1,9 @@
 ﻿local roactModule = require(script:FindFirstAncestor("AppChat").Parent.Roact)
 local contextModule = require(script.Parent.Context)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roactModule (ref), contextModule (ref)
-	assert(type(p0) == "function", "Expect renderCallback to be a function.")
+	assert(type(p1) == "function", "Expect renderCallback to be a function.")
 	
-	return roactModule.createElement(contextModule.Consumer, { render = p0 })
+	return roactModule.createElement(contextModule.Consumer, { render = p1 })
 end

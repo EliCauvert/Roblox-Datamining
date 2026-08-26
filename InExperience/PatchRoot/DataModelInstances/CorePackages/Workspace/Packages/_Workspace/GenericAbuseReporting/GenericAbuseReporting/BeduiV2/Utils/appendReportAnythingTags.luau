@@ -1,19 +1,19 @@
 ﻿local httpService = game:GetService("HttpService")
 local getFFlagReportAnythingEnableAdReport = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.SharedFlags).GetFFlagReportAnythingEnableAdReport
 
-local function transformVectorArray(p0)
+local function transformVectorArray(p1)
 	local t = {}
 	
-	for i, v in ipairs(p0) do
+	for i, v in ipairs(p1) do
 		t[#t + 1] = { v.X, v.Y }
 	end
 	return t
 end
 
-local function transformIdentifiedAds(p1)
+local function transformIdentifiedAds(p2)
 	local t = {}
 	
-	for i, v in pairs(p1) do
+	for i, v in pairs(p2) do
 		t[#t + 1] = {
 			assetId = v.assetId,
 			distance = v.distance,
@@ -31,11 +31,11 @@ local function transformIdentifiedAds(p1)
 	return t
 end
 
-local function transformIdentifiedAvatars(p2)
+local function transformIdentifiedAvatars(p3)
 	-- upvalues: transformVectorArray (ref)
 	local t = {}
 	
-	for i, v in pairs(p2) do
+	for i, v in pairs(p3) do
 		local t_1 = {
 			userId = tostring(i),
 			distance = v.distance,
@@ -62,34 +62,34 @@ local function transformIdentifiedAvatars(p2)
 	return t
 end
 
-local function _(p3)
-	for i in pairs(p3.identifiedAvatars) do
+local function _(p4)
+	for i in pairs(p4.identifiedAvatars) do
 		return true
 	end
 	return false
 end
 
-local _ = function(p4)
-	for i in pairs(p4.identifiedAds) do
+local _ = function(p5)
+	for i in pairs(p5.identifiedAds) do
 		return true
 	end
 	return false
 end
 
 return {
-	appendReportAnythingTags = function(p5, p6)
+	appendReportAnythingTags = function(p6, p7)
 		-- upvalues: httpService (ref), transformIdentifiedAvatars (ref), getFFlagReportAnythingEnableAdReport (ref), transformIdentifiedAds (ref)
-		if not p6 then
-			return p5
+		if not p7 then
+			return p6
 		end
-		local identificationResults = p6.identificationResults
+		local identificationResults = p7.identificationResults
 		
 		for i in pairs(identificationResults.identifiedAvatars) do
 			var8 = true
 		end
 		var8 = false
 		if var8 then
-			p5.IDENTIFIED_AVATARS = {
+			p6.IDENTIFIED_AVATARS = {
 				valueList = {
 					{
 						data = httpService:JSONEncode(transformIdentifiedAvatars(identificationResults.identifiedAvatars))
@@ -98,7 +98,7 @@ return {
 			}
 		end
 		if identificationResults.avatarIDStats then
-			p5.AVATAR_ID_STATS = {
+			p6.AVATAR_ID_STATS = {
 				valueList = {
 					{
 						data = httpService:JSONEncode(identificationResults.avatarIDStats)
@@ -112,7 +112,7 @@ return {
 			end
 			var9 = false
 			if var9 then
-				p5.IDENTIFIED_ADS = {
+				p6.IDENTIFIED_ADS = {
 					valueList = {
 						{
 							data = httpService:JSONEncode(transformIdentifiedAds(identificationResults.identifiedAds))
@@ -121,7 +121,7 @@ return {
 				}
 			end
 			if identificationResults.adIDStats then
-				p5.AD_ID_STATS = {
+				p6.AD_ID_STATS = {
 					valueList = {
 						{
 							data = httpService:JSONEncode(identificationResults.adIDStats)
@@ -130,9 +130,9 @@ return {
 				}
 			end
 		end
-		if #p6.screenshotId > 0 then
-			p5.SCREENSHOT_ID = { valueList = { { data = p6.screenshotId } } }
+		if #p7.screenshotId > 0 then
+			p6.SCREENSHOT_ID = { valueList = { { data = p7.screenshotId } } }
 		end
-		return p5
+		return p6
 	end
 }

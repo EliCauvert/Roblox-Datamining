@@ -1,7 +1,7 @@
 ﻿local robuxUpsellModule = require(script.Parent.Parent.Models.RobuxUpsell)
 local t = {
-	new = function(p0)
-		return { products = p0 }
+	new = function(p1)
+		return { products = p1 }
 	end
 }
 

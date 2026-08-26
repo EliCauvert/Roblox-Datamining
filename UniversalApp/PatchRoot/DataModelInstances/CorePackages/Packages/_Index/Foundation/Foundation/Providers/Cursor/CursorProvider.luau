@@ -15,56 +15,56 @@ local _ = require(foundation.Enums.ColorNamespace)
 local _ = require(foundation.Components.Types)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useRefCache (ref), useTokensModule (ref), keyUtilitiesModule (ref), dashModule (ref), cursorModule (ref), cursorComponentModule (ref), isPluginSecurityModule (ref), coreGui (ref), guiService (ref), cursorContextModule (ref)
-	local var9, var10 = reactModule.useState({})
-	local var11 = reactModule.useRef(nil)
-	local var12, var13 = reactModule.useState(nil)
-	local var14 = useRefCache()
-	local var15 = useTokensModule()
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: var14 (ref), var10 (ref), keyUtilitiesModule (copy), var15 (ref), dashModule (copy)
+	local var1, var2 = reactModule.useState({})
+	local var3 = reactModule.useRef(nil)
+	local var4, var5 = reactModule.useState(nil)
+	local var6 = useRefCache()
+	local var7 = useTokensModule()
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: var6 (ref), var2 (ref), keyUtilitiesModule (copy), var7 (ref), dashModule (copy)
 		return {
-			refCache = var14,
-			setMountedCursors = var10,
-			getCursor = function(p1)
-				-- upvalues: keyUtilitiesModule (copy), var15 (copy), var10 (copy), dashModule (copy), var14 (copy)
-				local var18 = keyUtilitiesModule.mapCursorToKey(p1, var15)
-				var10(function(p2)
-					-- upvalues: var18 (ref), dashModule (copy)
-					return if p2[var18] == nil then dashModule.union(p2, { [var18] = true }) else p2
+			refCache = var6,
+			setMountedCursors = var2,
+			getCursor = function(p2)
+				-- upvalues: keyUtilitiesModule (copy), var7 (copy), var2 (copy), dashModule (copy), var6 (copy)
+				local var9 = keyUtilitiesModule.mapCursorToKey(p2, var7)
+				var2(function(p3)
+					-- upvalues: var9 (ref), dashModule (copy)
+					return if p3[var9] == nil then dashModule.union(p3, { [var9] = true }) else p3
 				end)
 				
-				return var14[var18]
+				return var6[var9]
 			end
 		}
-	end, { var14, var10, var15 })
+	end, { var6, var2, var7 })
 	
-	local var17 = function()
-		-- upvalues: var9 (ref), var14 (ref), var12 (ref), keyUtilitiesModule (copy), reactModule (copy), cursorModule (copy), cursorComponentModule (copy)
+	local var9 = function()
+		-- upvalues: var1 (ref), var6 (ref), var4 (ref), keyUtilitiesModule (copy), reactModule (copy), cursorModule (copy), cursorComponentModule (copy)
 		local t = {}
 		
-		for i, v in var9 do
-			local var20 = var14[i] ~= nil and (var12 ~= nil and var14[i].current == var12)
+		for i, v in var1 do
+			local var10 = var6[i] ~= nil and (var4 ~= nil and var6[i].current == var4)
 			local parts = string.split(i, " ")
 			
 			if #parts == 2 then
-				local var26, var27 = keyUtilitiesModule.decodeCursorTypeKey(parts)
+				local var11, var12 = keyUtilitiesModule.decodeCursorTypeKey(parts)
 				t[i] = reactModule.createElement(cursorModule, {
-					ref = var14[i],
-					isVisible = var20,
-					cursorType = var26,
-					colorNamespace = var27
+					ref = var6[i],
+					isVisible = var10,
+					cursorType = var11,
+					colorNamespace = var12
 				})
 			else
-				local var22, var23, var24, var25 = keyUtilitiesModule.decodeKey(parts)
+				local var13, var14, var15, var16 = keyUtilitiesModule.decodeKey(parts)
 				t[i] = reactModule.createElement(cursorComponentModule, {
-					ref = var14[i],
-					isVisible = var20,
-					cornerRadius = var22,
-					offset = var23,
-					borderWidth = var24,
-					colorNamespace = var25
+					ref = var6[i],
+					isVisible = var10,
+					cornerRadius = var13,
+					offset = var14,
+					borderWidth = var15,
+					colorNamespace = var16
 				})
 			end
 		end
@@ -72,53 +72,53 @@ return function(p0)
 	end
 	
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), isPluginSecurityModule (copy), coreGui (copy), guiService (copy), var13 (ref)
-		if var11.current == nil or not game:IsAncestorOf(var11.current) then
+		-- upvalues: var3 (ref), isPluginSecurityModule (copy), coreGui (copy), guiService (copy), var5 (ref)
+		if var3.current == nil or not game:IsAncestorOf(var3.current) then
 			return
 		end
-		local var28 = isPluginSecurityModule() and var11.current:IsDescendantOf(coreGui)
+		local var17 = isPluginSecurityModule() and var3.current:IsDescendantOf(coreGui)
 		
 		local function setUpSelectionImageObjectConnection()
-			-- upvalues: var28 (ref), guiService (copy), var13 (copy)
-			return if var28 then guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
-				-- upvalues: guiService (copy), var13 (copy)
+			-- upvalues: var17 (ref), guiService (copy), var5 (copy)
+			return if var17 then guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
+				-- upvalues: guiService (copy), var5 (copy)
 				if guiService.SelectedCoreObject == nil then
-					var13(nil)
+					var5(nil)
 					
 					return
 				end
-				var13(guiService.SelectedCoreObject.SelectionImageObject)
+				var5(guiService.SelectedCoreObject.SelectionImageObject)
 			end) else guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
-				-- upvalues: guiService (copy), var13 (copy)
+				-- upvalues: guiService (copy), var5 (copy)
 				if guiService.SelectedObject == nil then
-					var13(nil)
+					var5(nil)
 					
 					return
 				end
-				var13(guiService.SelectedObject.SelectionImageObject)
+				var5(guiService.SelectedObject.SelectionImageObject)
 			end)
 		end
 		
-		local var30 = setUpSelectionImageObjectConnection()
-		local ancestryChangedConnection = var11.current.AncestryChanged:Connect(function()
-			-- upvalues: var30 (write), setUpSelectionImageObjectConnection (ref)
-			var30:Disconnect()
-			var30 = setUpSelectionImageObjectConnection()
+		local var18 = setUpSelectionImageObjectConnection()
+		local ancestryChangedConnection = var3.current.AncestryChanged:Connect(function()
+			-- upvalues: var18 (write), setUpSelectionImageObjectConnection (ref)
+			var18:Disconnect()
+			var18 = setUpSelectionImageObjectConnection()
 		end)
 		
 		return function()
-			-- upvalues: var30 (write), ancestryChangedConnection (ref)
-			var30:Disconnect()
+			-- upvalues: var18 (write), ancestryChangedConnection (ref)
+			var18:Disconnect()
 			ancestryChangedConnection:Disconnect()
 		end
 	end, {})
 	
-	return reactModule.createElement(cursorContextModule.Provider, { value = var16 }, {
-		Children = reactModule.createElement(reactModule.Fragment, {}, p0.children),
+	return reactModule.createElement(cursorContextModule.Provider, { value = var8 }, {
+		Children = reactModule.createElement(reactModule.Fragment, {}, p1.children),
 		FoundationCursorContainer = reactModule.createElement("Frame", {
 			Visible = false,
 			Size = UDim2.new(0, 0, 0, 0),
-			ref = var11
-		}, var17())
+			ref = var3
+		}, var9())
 	})
 end

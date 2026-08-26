@@ -11,24 +11,24 @@ local t = {
 	preferredTextSize = Enum.PreferredTextSize.Medium
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: flagsModule (ref), reactModule (ref), withDefaultsModule (ref), t (ref), preferencesContextModule (ref)
 	return reactModule.createElement(preferencesContextModule.Provider, {
 		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
-			-- upvalues: withDefaultsModule (copy), p0 (ref), t (copy)
+			-- upvalues: withDefaultsModule (copy), p1 (ref), t (copy)
 			return withDefaultsModule({
-				preferredTextSize = p0.preferredTextSize,
-				preferredTransparency = p0.preferredTransparency,
-				reducedMotion = p0.reducedMotion
+				preferredTextSize = p1.preferredTextSize,
+				preferredTransparency = p1.preferredTransparency,
+				reducedMotion = p1.reducedMotion
 			}, t)
 		end, {
-			p0.preferredTextSize,
-			p0.preferredTransparency,
-			p0.reducedMotion
+			p1.preferredTextSize,
+			p1.preferredTransparency,
+			p1.reducedMotion
 		}) else withDefaultsModule({
-			preferredTextSize = p0.preferredTextSize,
-			preferredTransparency = p0.preferredTransparency,
-			reducedMotion = p0.reducedMotion
+			preferredTextSize = p1.preferredTextSize,
+			preferredTransparency = p1.preferredTransparency,
+			reducedMotion = p1.reducedMotion
 		}, t)
-	}, p0.children)
+	}, p1.children)
 end

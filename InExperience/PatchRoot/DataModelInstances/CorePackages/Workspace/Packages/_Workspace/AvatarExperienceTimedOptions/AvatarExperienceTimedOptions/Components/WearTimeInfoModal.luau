@@ -12,9 +12,9 @@ local iconName = foundationModule.Enums.IconName
 local useTokens = foundationModule.Hooks.useTokens
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), useSelector (ref), reactModule (ref), modalWindow (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), inputSize (ref)
-	local var2 = useLocalization({
+	local var1 = useLocalization({
 		modalTitle = "Feature.Durables.InfoModal.Title",
 		modalDescription = "Feature.Durables.InfoModal.Description",
 		actionOK = "CommonUI.Messages.Action.OK"
@@ -22,8 +22,8 @@ return function(p0)
 	
 	return reactModule.createElement(modalWindow, {
 		isFullHeight = false,
-		screenSize = useSelector(function(p1)
-			return p1.ScreenSize
+		screenSize = useSelector(function(p2)
+			return p2.ScreenSize
 		end)
 	}, {
 		Body = reactModule.createElement(view, {
@@ -60,22 +60,22 @@ return function(p0)
 			Title = reactModule.createElement(text, {
 				tag = "size-full-0 auto-y text-align-x-left text-heading-medium",
 				LayoutOrder = 1,
-				Text = var2.modalTitle
+				Text = var1.modalTitle
 			}),
 			Description = reactModule.createElement(text, {
 				tag = "size-full-0 auto-y text-wrap text-truncate-none text-align-x-left text-body-medium",
 				RichText = true,
 				LayoutOrder = 2,
-				Text = var2.modalDescription
+				Text = var1.modalDescription
 			}),
 			CloseButton = reactModule.createElement(button, {
 				LayoutOrder = 5,
 				tag = "size-full-0 auto-y",
 				testId = "theCloseButton",
-				text = var2.actionOK,
+				text = var1.actionOK,
 				size = inputSize.Medium,
 				width = UDim.new(1, 0),
-				onActivated = p0.onClose
+				onActivated = p1.onClose
 			})
 		})
 	})

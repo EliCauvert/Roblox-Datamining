@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator("SetTryOnManagerPeekViewState", function(p0)
-	return { viewState = p0 }
+﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator("SetTryOnManagerPeekViewState", function(p1)
+	return { viewState = p1 }
 end)

@@ -17,9 +17,9 @@ local t_1 = {
 	plural = "Feature.RobloxSubscription.Label.months"
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref), t_1 (ref)
-	local var2 = t[string.lower(p0)] or t_1
+	local var1 = t[string.lower(p1)] or t_1
 	
-	return if p1 then var2.plural else var2.singular
+	return if p2 then var1.plural else var1.singular
 end

@@ -16,12 +16,12 @@ return roduxModule.createReducer({
 		secondaryAlias = RBXTeamCommandModule.alias[2]
 	}
 }, {
-	[require(expChatShared.Actions.CommandAliasChanged).name] = function(p0, p1)
+	[require(expChatShared.Actions.CommandAliasChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, {
-			[p1.name] = {
-				primaryAlias = p1.primaryAlias,
-				secondaryAlias = p1.secondaryAlias
+		return dictionary.join(p1, {
+			[p2.name] = {
+				primaryAlias = p2.primaryAlias,
+				secondaryAlias = p2.secondaryAlias
 			}
 		})
 	end

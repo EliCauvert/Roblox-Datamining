@@ -24,8 +24,8 @@ local t_1 = {
 		return game:GetService("AppLifecycleObserverService")
 	end,
 	resolveEnumItem = resolveEnumItemModule,
-	defer = function(p0)
-		task.defer(p0)
+	defer = function(p1)
+		task.defer(p1)
 	end,
 	warn = warn
 }

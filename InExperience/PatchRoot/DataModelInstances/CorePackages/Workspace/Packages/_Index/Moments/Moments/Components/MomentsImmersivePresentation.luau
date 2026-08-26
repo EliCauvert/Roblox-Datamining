@@ -46,68 +46,68 @@ local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local createRecommendationTelemetry = feedModule.createRecommendationTelemetry
 local createMockFeedSource = feedModule.createMockFeedSource
 
-local function PushedFeedSafeAreaProvider(p0)
+local function PushedFeedSafeAreaProvider(p1)
 	-- upvalues: useDeviceInsets (ref), reactModule (ref), momentPushedFeedSafeAreaContextModule (ref)
-	return reactModule.createElement(momentPushedFeedSafeAreaContextModule.Context.Provider, { value = useDeviceInsets() }, { Content = p0.children })
+	return reactModule.createElement(momentPushedFeedSafeAreaContextModule.Context.Provider, { value = useDeviceInsets() }, { Content = p1.children })
 end
 
 return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), fFlagEnableArgus (ref), createSignalTracker (ref), fFlagMomentsFlyoutCreateButtonModule (ref), useCreationEntryModule (ref), useUploadHostModule (ref), logCreateIntentModule (ref), funnelEventNames (ref), immersiveFeedKind (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), createUserMomentsFeedSourceModule (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), createRecommendationTelemetry (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), useNavigationFocus (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), momentsBackHeaderModule (ref), momentsFeedSurfaceModule (ref), getFFlagMomentsPushedFeedSafeAreaModule (ref), PushedFeedSafeAreaProvider (ref), view (ref), constantsModule (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref), momentsHostShellModule (ref)
-	local var27 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	
-	if var27.current == nil then
-		var27.current = createMomentsStoreModule()
+	if var1.current == nil then
+		var1.current = createMomentsStoreModule()
 	end
-	local current = var27.current
-	local var28 = reactModule.useRef(nil)
+	local current = var1.current
+	local var2 = reactModule.useRef(nil)
 	
-	if var28.current == nil and fFlagEnableArgus then
-		var28.current = createSignalTracker()
+	if var2.current == nil and fFlagEnableArgus then
+		var2.current = createSignalTracker()
 	end
-	local current_1 = var28.current
+	local current_1 = var2.current
 	local feedKind = p1.feedKind
 	local targetUserId = p1.targetUserId
 	local initialIndex = p1.initialIndex
-	local var29 = nil
-	local var30 = nil
+	local var3 = nil
+	local var4 = nil
 	
 	if fFlagMomentsFlyoutCreateButtonModule then
-		var29 = useCreationEntryModule({ manageTabBarVisibility = false })
-		var30 = useUploadHostModule({
-			onExit = var29.onExitCreation,
-			captureSource = var29.captureSource
+		var3 = useCreationEntryModule({ manageTabBarVisibility = false })
+		var4 = useUploadHostModule({
+			onExit = var3.onExitCreation,
+			captureSource = var3.captureSource
 		})
 	end
-	local var31 = if var29 ~= nil then nil else var29.onCreatePressed
-	local var32 = reactModule.useCallback(function()
-		-- upvalues: var31 (ref), logCreateIntentModule (copy), funnelEventNames (copy)
-		if var31 ~= nil then
+	local var5 = if var3 ~= nil then nil else var3.onCreatePressed
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), logCreateIntentModule (copy), funnelEventNames (copy)
+		if var5 ~= nil then
 			logCreateIntentModule(funnelEventNames.CreationIntentSource.TopBar)
-			var31()
+			var5()
 		end
-	end, { var31 })
-	local var33 = fFlagMomentsFlyoutCreateButtonModule and feedKind == immersiveFeedKind.Trending
-	local var34 = var33 and (var29 ~= nil and var29.isCreating)
-	local var35 = var33 and (var29 ~= nil and var29.showFtux)
+	end, { var5 })
+	local var7 = fFlagMomentsFlyoutCreateButtonModule and feedKind == immersiveFeedKind.Trending
+	local var8 = var7 and (var3 ~= nil and var3.isCreating)
+	local var9 = var7 and (var3 ~= nil and var3.showFtux)
 	local deepLinkedMomentId = p1.deepLinkedMomentId
 	local deepLinkedMomentTargetIdType = p1.deepLinkedMomentTargetIdType
-	local var36 = reactModule.useRef(nil)
+	local var10 = reactModule.useRef(nil)
 	
 	if deepLinkedMomentId ~= nil then
-		local var37 = `{deepLinkedMomentId}:{tostring(deepLinkedMomentTargetIdType)}`
+		local var11 = `{deepLinkedMomentId}:{tostring(deepLinkedMomentTargetIdType)}`
 		
-		if var36.current ~= var37 then
-			local var38 = getDeepLinkStoreModule()
+		if var10.current ~= var11 then
+			local var12 = getDeepLinkStoreModule()
 			
 			if fFlagMomentsPassFeedItemIdToBackendApis then
-				var38.setDeepLinkedMoment(deepLinkedMomentId, deepLinkedMomentTargetIdType)
+				var12.setDeepLinkedMoment(deepLinkedMomentId, deepLinkedMomentTargetIdType)
 			else
-				var38.setDeepLinkedMomentId(deepLinkedMomentId)
+				var12.setDeepLinkedMomentId(deepLinkedMomentId)
 			end
-			var36.current = var37
+			var10.current = var11
 		end
 	end
-	local var39 = reactModule.useMemo(function()
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: feedKind (ref), immersiveFeedKind (copy), createUserMomentsFeedSourceModule (copy), targetUserId (ref), initialIndex (ref), isStudioModule (copy), getFFlagArgusStudioMockFeedModule (copy), createMockFeedSource (copy), createMomentsFeedSourceModule (copy), current (ref), current_1 (ref)
 		return if feedKind == immersiveFeedKind.User then createUserMomentsFeedSourceModule(targetUserId or 0, { initialIndex = initialIndex }) elseif isStudioModule() and getFFlagArgusStudioMockFeedModule() then createMockFeedSource() else createMomentsFeedSourceModule(current.getMomentsSessionId, { signalTracker = current_1 })
 	end, {
@@ -117,7 +117,7 @@ return reactModule.memo(function(p1)
 		current,
 		current_1
 	})
-	local var40 = reactModule.useMemo(function()
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: feedKind (ref), immersiveFeedKind (copy), fFlagEnableArgus (copy), createRecommendationTelemetry (copy), current (ref), current_1 (ref)
 		return if feedKind == immersiveFeedKind.Trending and fFlagEnableArgus then createRecommendationTelemetry({
 			getMomentsSessionId = current.getMomentsSessionId,
@@ -136,15 +136,15 @@ return reactModule.memo(function(p1)
 		if fFlagMomentsRealtimeSessionTelemetry then
 			analytics.reportMomentsSessionStarted(sessionSource)
 		end
-		local var47 = if fFlagMomentsSessionHeartbeat then analytics.createMomentsSessionHeartbeat() else nil
+		local var15 = if fFlagMomentsSessionHeartbeat then analytics.createMomentsSessionHeartbeat() else nil
 		
-		if var47 ~= nil then
-			var47.start(sessionSource)
+		if var15 ~= nil then
+			var15.start(sessionSource)
 		end
 		return function()
-			-- upvalues: var47 (ref), current (copy), fireAnalyticsEvent (copy), eventNames (copy), sessionSource (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy)
-			if var47 ~= nil then
-				var47.stop()
+			-- upvalues: var15 (ref), current (copy), fireAnalyticsEvent (copy), eventNames (copy), sessionSource (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy)
+			if var15 ~= nil then
+				var15.stop()
 			end
 			fireAnalyticsEvent(eventNames.MomentsSessionEnded, {
 				moments_session_id = current.getMomentsSessionId(false),
@@ -157,45 +157,45 @@ return reactModule.memo(function(p1)
 			end
 		end
 	end, { sessionSource, current })
-	local var41 = useNavigationFocus()
-	local var42 = useSignalState(feedPlaybackSuspension.getSuspended)
-	local var43 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
+	local var15 = useNavigationFocus()
+	local var16 = useSignalState(feedPlaybackSuspension.getSuspended)
+	local var17 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
 	local getCovering = fFlagEnableReportingFlowForMomentsFeed and useSignalState(reportModalCovering.getCovering)
 	local onBack = p1.onBack
-	local var45 = reactModule.createElement(momentsFeedSurfaceModule, {
-		source = var39,
-		telemetry = var40,
-		active = var41 and (not getCovering and not var34),
-		playbackActive = var41 and (not var42 and (not var43 and (not getCovering and not var34))),
+	local var18 = reactModule.createElement(momentsFeedSurfaceModule, {
+		source = var13,
+		telemetry = var14,
+		active = var15 and (not getCovering and not var8),
+		playbackActive = var15 and (not var16 and (not var17 and (not getCovering and not var8))),
 		initialIndex = initialIndex,
 		header = reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), momentsBackHeaderModule (copy), onBack (ref), var33 (ref), var32 (ref)
+			-- upvalues: reactModule (copy), momentsBackHeaderModule (copy), onBack (ref), var7 (ref), var6 (ref)
 			return reactModule.createElement(momentsBackHeaderModule, {
 				onBack = onBack,
-				onCreatePressed = if var33 then var32 else nil
+				onCreatePressed = if var7 then var6 else nil
 			})
-		end, { onBack, var33, var32 })
+		end, { onBack, var7, var6 })
 	})
-	local var46 = if getFFlagMomentsPushedFeedSafeAreaModule() then reactModule.createElement(PushedFeedSafeAreaProvider, nil, var45) else var45
+	local var19 = if getFFlagMomentsPushedFeedSafeAreaModule() then reactModule.createElement(PushedFeedSafeAreaProvider, nil, var18) else var18
 	
 	return reactModule.createElement(momentsHostShellModule, {
 		sessionStore = current,
 		openProfile = p1.openProfile,
 		openOwnMoments = p1.openOwnMoments,
 		openMomentsFeedReport = p1.openMomentsFeedReport
-	}, if var33 then reactModule.createElement(view, { tag = "size-full bg-surface-0" }, {
-		Feed = var46,
-		CreationFlowOverlay = if var34 then reactModule.createElement(view, {
+	}, if var7 then reactModule.createElement(view, { tag = "size-full bg-surface-0" }, {
+		Feed = var19,
+		CreationFlowOverlay = if var8 then reactModule.createElement(view, {
 			tag = "size-full",
 			ZIndex = constantsModule.DisplayOrder.Modals
 		}, {
-			Screen = reactModule.createElement(creationFlowScreen, { host = var30 })
+			Screen = reactModule.createElement(creationFlowScreen, { host = var4 })
 		}) else nil,
-		FtuxOverlay = if var35 then reactModule.createElement(view, {
+		FtuxOverlay = if var9 then reactModule.createElement(view, {
 			tag = "size-full",
 			ZIndex = constantsModule.DisplayOrder.Modals
 		}, {
-			Screen = reactModule.createElement(FTUXEducationScreenModule, { onClose = var29.onExitFtux })
+			Screen = reactModule.createElement(FTUXEducationScreenModule, { onClose = var3.onExitFtux })
 		}) else nil
-	}) else var46)
+	}) else var19)
 end)

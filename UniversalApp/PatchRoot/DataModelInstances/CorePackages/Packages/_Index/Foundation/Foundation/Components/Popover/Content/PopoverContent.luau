@@ -60,17 +60,17 @@ return reactModule.forwardRef(function(p1, p2)
 	end, { var9 })
 	local var14, var15, var16, var17, var18, var19 = useFloatingModule(var3.isOpen, var3.anchor, var9, var5, var2.side, var2.align, if var4 then var8 else 0)
 	local var20 = reactModule.useRef(nil)
-	local var21 = reactModule.useCallback(function(p1)
+	local var21 = reactModule.useCallback(function(p3)
 		-- upvalues: var20 (ref), var12 (ref), var2 (ref), var3 (ref), isInstance (ref), var13 (ref), isPointInGuiObjectBoundsModule (copy)
 		if var20.current then
 			var20.current:Disconnect()
 		end
-		var12(p1)
+		var12(p3)
 		
-		if p1 ~= nil and var2.onPressedOutside then
-			var20.current = p1:GetPropertyChangedSignal("GuiState"):Connect(function()
-				-- upvalues: p1 (ref), var3 (copy), isInstance (copy), var13 (copy), isPointInGuiObjectBoundsModule (copy), var2 (copy)
-				if p1.GuiState == Enum.GuiState.Press then
+		if p3 ~= nil and var2.onPressedOutside then
+			var20.current = p3:GetPropertyChangedSignal("GuiState"):Connect(function()
+				-- upvalues: p3 (ref), var3 (copy), isInstance (copy), var13 (copy), isPointInGuiObjectBoundsModule (copy), var2 (copy)
+				if p3.GuiState == Enum.GuiState.Press then
 					if var3.anchor and isInstance then
 						local anchor = var3.anchor
 						
@@ -91,12 +91,12 @@ return reactModule.forwardRef(function(p1, p2)
 			end
 		end
 	end, {})
-	local var22 = if flagsModule.FoundationPopoverContentAnchorFix then reactModule.joinBindings({ var14, var19, var16 }):map(function(p1)
-		local var1 = p1[1]
-		local var2 = p1[2]
-		local var3 = p1[3]
+	local var22 = if flagsModule.FoundationPopoverContentAnchorFix then reactModule.joinBindings({ var14, var19, var16 }):map(function(p3)
+		local var23 = p3[1]
+		local var24 = p3[2]
+		local var25 = p3[3]
 		
-		return UDim2.fromOffset(var1.X - var2.X * var3.X.Offset, var1.Y - var2.Y * var3.Y.Offset)
+		return UDim2.fromOffset(var23.X - var24.X * var25.X.Offset, var23.Y - var24.Y * var25.Y.Offset)
 	end) else nil
 	
 	if var3.isOpen then
@@ -119,13 +119,13 @@ return reactModule.forwardRef(function(p1, p2)
 				ZIndex = 2,
 				AnchorPoint = var19,
 				Image = SHADOW_IMAGE,
-				Size = var16:map(function(p1)
+				Size = var16:map(function(p3)
 					-- upvalues: SHADOW_SIZE (copy)
-					return p1 + UDim2.fromOffset(SHADOW_SIZE, SHADOW_SIZE)
+					return p3 + UDim2.fromOffset(SHADOW_SIZE, SHADOW_SIZE)
 				end),
-				Position = reactModule.joinBindings({ var14, var19 }):map(function(p1)
+				Position = reactModule.joinBindings({ var14, var19 }):map(function(p3)
 					-- upvalues: SHADOW_SIZE (copy)
-					return UDim2.fromOffset(p1[1].X + SHADOW_SIZE / 2 * (if p1[2].X == 0 then -1 else 1), p1[1].Y + SHADOW_SIZE / 2 * (if p1[2].Y == 0 then -1 else 1) + 2)
+					return UDim2.fromOffset(p3[1].X + SHADOW_SIZE / 2 * (if p3[2].X == 0 then -1 else 1), p3[1].Y + SHADOW_SIZE / 2 * (if p3[2].Y == 0 then -1 else 1) + 2)
 				end),
 				slice = {
 					center = Rect.new(SHADOW_SIZE, SHADOW_SIZE, SHADOW_SIZE + 1, SHADOW_SIZE + 1)
@@ -138,8 +138,8 @@ return reactModule.forwardRef(function(p1, p2)
 				ZIndex = 3,
 				tag = "anchor-center-center",
 				Size = UDim2.fromOffset(size200, size200),
-				Position = var17:map(function(p1)
-					return UDim2.fromOffset(p1.X, p1.Y)
+				Position = var17:map(function(p3)
+					return UDim2.fromOffset(p3.X, p3.Y)
 				end),
 				backgroundStyle = backgroundStyle,
 				testId = `{var3.testId}--arrow`
@@ -147,8 +147,8 @@ return reactModule.forwardRef(function(p1, p2)
 			Content = reactModule.createElement(viewModule, {
 				ZIndex = 4,
 				AnchorPoint = if flagsModule.FoundationPopoverContentAnchorFix then Vector2.zero else var19,
-				Position = if flagsModule.FoundationPopoverContentAnchorFix then var22 else var14:map(function(p1)
-					return UDim2.fromOffset(p1.X, p1.Y)
+				Position = if flagsModule.FoundationPopoverContentAnchorFix then var22 else var14:map(function(p3)
+					return UDim2.fromOffset(p3.X, p3.Y)
 				end),
 				selection = var2.selection,
 				selectionGroup = var2.selectionGroup,

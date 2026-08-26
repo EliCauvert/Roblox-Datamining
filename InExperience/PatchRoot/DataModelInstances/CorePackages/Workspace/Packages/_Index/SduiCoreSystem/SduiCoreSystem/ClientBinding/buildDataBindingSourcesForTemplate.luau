@@ -30,49 +30,49 @@ local t = {
 	[sduiDataBindingContentTypeModule.userProfile] = if fFlagSduiExperienceDetailsSupport then { "user_id" } else nil
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: protoVariableMapperModule (ref), fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), tryGetPathFromDataModule (ref), t (ref), fFlagSduiHydrationFetchIfMissing (ref)
 	local t_1 = {}
 	
-	for i, v in p1 do
-		local var8 = protoVariableMapperModule.mapHydrationContentTypeToLua(v.content_type)
+	for i, v in p2 do
+		local var1 = protoVariableMapperModule.mapHydrationContentTypeToLua(v.content_type)
 		
-		if not var8 then
+		if not var1 then
 			error(`Unsupported contentType {v.content_type}`)
 		end
-		local var13
+		local var2
 		local type = v.id_binding and (v.id_binding.kind and v.id_binding.kind.type)
 		local value = v.id_binding and (v.id_binding.kind and v.id_binding.kind.value)
-		local var11 = nil
+		local var3 = nil
 		
 		if type == "literal" and value then
-			var11 = value
+			var3 = value
 		elseif type == "input_path" and value then
-			var13, var15 = tryGetPathFromDataModule(p0, if fFlagSduiRenderPerf then splitDottedPathModule(value) else string.split(value, "."))
+			var2, var15 = tryGetPathFromDataModule(p1, if fFlagSduiRenderPerf then splitDottedPathModule(value) else string.split(value, "."))
 			
-			if var13 and var15 ~= nil then
-				var11 = var15
+			if var2 and var15 ~= nil then
+				var3 = var15
 			else
 				error(`Unable to resolve path from inputPath: {value} in data`)
 			end
 		else
-			local var12 = t[var8]
+			local var4 = t[var1]
 			
-			if var12 then
-				var13, var14 = tryGetPathFromDataModule(p0, var12)
+			if var4 then
+				var2, var14 = tryGetPathFromDataModule(p1, var4)
 				
-				if var13 and var14 ~= nil then
-					var11 = var14
+				if var2 and var14 ~= nil then
+					var3 = var14
 				else
-					error(`Unable to resolve default path: {table.concat(var12, ",")} in data for contentType {var8}`)
+					error(`Unable to resolve default path: {table.concat(var4, ",")} in data for contentType {var1}`)
 				end
 			else
-				error(`Unable to find default for unknown contentType: {var8}`)
+				error(`Unable to find default for unknown contentType: {var1}`)
 			end
 		end
-		t_1[if v.alias and v.alias ~= "" then v.alias else var8] = {
-			contentType = var8,
-			id = var11,
+		t_1[if v.alias and v.alias ~= "" then v.alias else var1] = {
+			contentType = var1,
+			id = var3,
 			fetchIfMissing = if fFlagSduiHydrationFetchIfMissing then v.client_fetch else nil
 		}
 	end

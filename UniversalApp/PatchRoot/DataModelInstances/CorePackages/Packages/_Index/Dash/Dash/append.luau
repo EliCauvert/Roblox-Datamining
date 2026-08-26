@@ -4,18 +4,18 @@ local forEachArgsModule = require(parent.forEachArgs)
 local forEachModule = require(parent.forEach)
 local insert = table.insert
 
-return function(p0, ...)
+return function(p1, ...)
 	-- upvalues: forEachArgsModule (ref), noneModule (ref), forEachModule (ref), insert (ref)
-	forEachArgsModule(function(p1)
-		-- upvalues: noneModule (copy), forEachModule (copy), p0 (ref), insert (copy)
-		if p1 == noneModule or p1 == nil then
+	forEachArgsModule(function(p2)
+		-- upvalues: noneModule (copy), forEachModule (copy), p1 (ref), insert (copy)
+		if p2 == noneModule or p2 == nil then
 			return
 		end
-		forEachModule(p1, function(p2)
-			-- upvalues: p0 (copy), insert (copy)
-			insert(p0, p2)
+		forEachModule(p2, function(p3)
+			-- upvalues: p1 (copy), insert (copy)
+			insert(p1, p3)
 		end)
 	end, ...)
 	
-	return p0
+	return p1
 end

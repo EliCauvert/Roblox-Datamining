@@ -66,11 +66,11 @@ local _ = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.sendBackButtonActionEvent(p0)
+function t_1.sendBackButtonActionEvent(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.BackButtonActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p0
+		customFields = p1
 	})
 end
 
@@ -82,43 +82,43 @@ function t_1.sendHistoryMenuButtonActionEvent(p1)
 	})
 end
 
-function t_1.sendHistoryMenuItemClick(p2)
+function t_1.sendHistoryMenuItemClick(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.HistoryMenuItemClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p2
+		customFields = p1
 	})
 end
 
-function t_1.sendHistoryMenuHistoryClick(p3)
+function t_1.sendHistoryMenuHistoryClick(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.HistoryMenuHistoryClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p3
+		customFields = p1
 	})
 end
 
-function t_1.sendHistoryPageBackButtonClick(p4)
+function t_1.sendHistoryPageBackButtonClick(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.HistoryPageBackButtonClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p4
+		customFields = p1
 	})
 end
 
-function t_1.sendHistoryPageExperienceTileClick(p5)
+function t_1.sendHistoryPageExperienceTileClick(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.HistoryPageExperienceTileClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p5
+		customFields = p1
 	})
 end
 
-function t_1.sendTeleportConfirmationActions(p6)
+function t_1.sendTeleportConfirmationActions(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.TeleportConfirmationActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p6
+		customFields = p1
 	})
 end
 

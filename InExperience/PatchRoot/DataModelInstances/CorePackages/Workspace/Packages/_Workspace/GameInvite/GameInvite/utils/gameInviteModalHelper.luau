@@ -2,9 +2,9 @@
 local gameInviteConstantsModule = require(gameInvite.GameInviteConstants)
 local _ = require(gameInvite.gameInviteModalType)
 
-function isTriggerDDI(p0)
+function isTriggerDDI(p1)
 	-- upvalues: gameInviteConstantsModule (ref)
-	return if p0 ~= gameInviteConstantsModule.Triggers.DeveloperSingle then p0 == gameInviteConstantsModule.Triggers.DeveloperMultiple else true
+	return if p1 ~= gameInviteConstantsModule.Triggers.DeveloperSingle then p1 == gameInviteConstantsModule.Triggers.DeveloperMultiple else true
 end
 
 function isTriggerGameMenu(p1)

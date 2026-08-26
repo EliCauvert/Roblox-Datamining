@@ -13,20 +13,20 @@ local getItemWidth = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtil
 
 return function(value)
 	-- upvalues: useTokens (ref), viewTypeModule (ref), reactModule (ref), itemCard (ref), getItemWidth (ref), itemCardHeader (ref), itemCardThumbnail (ref), foundationModule (ref)
-	local var5 = useTokens()
+	local var1 = useTokens()
 	local itemData = value.itemData
-	local var6 = value.view == viewTypeModule.WideLandscape
-	local var7 = value.view == viewTypeModule.Compact
-	local var8, var9 = reactModule.useBinding(Vector2.new(0, 0))
+	local var2 = value.view == viewTypeModule.WideLandscape
+	local var3 = value.view == viewTypeModule.Compact
+	local var4, var5 = reactModule.useBinding(Vector2.new(0, 0))
 	local t = {}
-	local var11 = if var6 or var7 then 4 else 6
+	local var6 = if var2 or var3 then 4 else 6
 	
 	if itemData.assetsInBundle then
 		for i, v in itemData.assetsInBundle do
 			t["AssetItemCard" .. i] = reactModule.createElement(itemCard, {
-				Size = var8:map(function(p0)
-					-- upvalues: getItemWidth (copy), var11 (ref), var5 (ref)
-					return UDim2.new(0, getItemWidth(p0.X, var11, var5.Gap.Medium), 1, 0)
+				Size = var4:map(function(p1)
+					-- upvalues: getItemWidth (copy), var6 (ref), var1 (ref)
+					return UDim2.new(0, getItemWidth(p1.X, var6, var1.Gap.Medium), 1, 0)
 				end),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				headerSlot = reactModule.createElement(itemCardHeader, { LayoutOrder = 1 }, reactModule.createElement(itemCardThumbnail, {
@@ -44,8 +44,8 @@ return function(value)
 		tag = "auto-y size-full-0 col align-x-left align-y-top gap-small",
 		LayoutOrder = value.LayoutOrder or 5,
 		onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
-			-- upvalues: var9 (ref)
-			var9(p1.AbsoluteSize)
+			-- upvalues: var5 (ref)
+			var5(p1.AbsoluteSize)
 		end, {})
 	}, {
 		IncludedPartsLabel = reactModule.createElement(foundationModule.View, { tag = "auto-xy padding-top-xxlarge", LayoutOrder = 1 }, {

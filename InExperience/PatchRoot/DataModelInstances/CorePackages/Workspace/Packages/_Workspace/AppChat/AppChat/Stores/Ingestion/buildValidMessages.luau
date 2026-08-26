@@ -3,10 +3,10 @@ local cryoModule = require(parent.Cryo)
 local _ = require(parent.AppChatNetworking)
 local buildConversationMessageFromApiModule = require(script.Parent.buildConversationMessageFromApi)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: cryoModule (ref), buildConversationMessageFromApiModule (ref)
-	return cryoModule.List.filterMap(p1, function(p2)
-		-- upvalues: buildConversationMessageFromApiModule (copy), p0 (ref)
-		return if p2 and p2.id then buildConversationMessageFromApiModule(p2, p0) else nil
+	return cryoModule.List.filterMap(p2, function(p3)
+		-- upvalues: buildConversationMessageFromApiModule (copy), p1 (ref)
+		return if p3 and p3.id then buildConversationMessageFromApiModule(p3, p1) else nil
 	end)
 end

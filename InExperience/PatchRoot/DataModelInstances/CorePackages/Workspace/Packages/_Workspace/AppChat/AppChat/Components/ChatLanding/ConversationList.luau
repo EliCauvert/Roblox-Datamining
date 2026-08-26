@@ -69,8 +69,8 @@ conversationList.defaultProps = {
 	fireConversationClickedEvent = function() end
 }
 
-local function _(p0)
-	return p0.canAccessParty == true
+local function _(p1)
+	return p1.canAccessParty == true
 end
 
 function conversationList.init(p1)
@@ -102,24 +102,24 @@ function conversationList.init(p1)
 	if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then
 		p1.lastContentHeight = 0
 		
-		function p1.onViewportAbsoluteSizeChange(p3)
+		function p1.onViewportAbsoluteSizeChange(p2)
 			-- upvalues: visibilityControl (copy), p1 (ref)
-			visibilityControl.setContentScrollable(p3.AbsoluteSize.Y < p1.lastContentHeight)
+			visibilityControl.setContentScrollable(p2.AbsoluteSize.Y < p1.lastContentHeight)
 		end
 	end
 	p1.focusLock = p1.props.focusLock
 	
 	if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then
-		function p1.navigateToConversationFromSocialCarousel(p4)
+		function p1.navigateToConversationFromSocialCarousel(p2)
 			-- upvalues: p1 (ref)
-			p1.props.navigateToConversationFromUserId(p4.id)
+			p1.props.navigateToConversationFromUserId(p2.id)
 		end
 	end
-	function p1.identifier(p5)
-		return if p5 then p5.id .. tostring(p5.unixTime) else nil
+	function p1.identifier(p2)
+		return if p2 then p2.id .. tostring(p2.unixTime) else nil
 	end
 	
-	local var30 = memoize(function()
+	local var1 = memoize(function()
 		-- upvalues: enums (copy), p1 (ref)
 		return {
 			{
@@ -138,14 +138,14 @@ function conversationList.init(p1)
 		return p1.props.isPartyQuickStartEnabled
 	end
 	
-	function p1.renderItem(p6, _)
-		-- upvalues: roactModule (copy), chatLandingModalContainerModule (copy), conversationGroupsEntryContainerModule (copy), p1 (ref), partyQuickStartContainerModule (copy), partyPageCarouselExperimentation (copy), reactModule (copy), socialCarouselModule (copy), var30 (ref), constants (copy), fFlagAppIaScrollAway (copy), fFlagAppChatSignalsMessageStore (copy), conversationRowModule (copy), conversationEntryModule (copy)
-		local item = p6.item
+	function p1.renderItem(p2, _)
+		-- upvalues: roactModule (copy), chatLandingModalContainerModule (copy), conversationGroupsEntryContainerModule (copy), p1 (ref), partyQuickStartContainerModule (copy), partyPageCarouselExperimentation (copy), reactModule (copy), socialCarouselModule (copy), var1 (ref), constants (copy), fFlagAppIaScrollAway (copy), fFlagAppChatSignalsMessageStore (copy), conversationRowModule (copy), conversationEntryModule (copy)
+		local item = p2.item
 		
 		return if item.isChatLandingModal then roactModule.createElement(chatLandingModalContainerModule, {}) elseif item.isGroupLink then roactModule.createElement(conversationGroupsEntryContainerModule, { entryHeight = p1.ENTRY_HEIGHT }) elseif p1.isPartyQuickStartEnabled() and item.isQuickStartLink then roactModule.createElement(partyQuickStartContainerModule, { entryHeight = p1.ENTRY_HEIGHT }) elseif partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and item.isSocialCarousel then reactModule.createElement(socialCarouselModule.Entry, {
 			roduxKey = "ChatAppReducer",
 			hideCarouselHeader = true,
-			customTileList = var30(),
+			customTileList = var1(),
 			source = if p1.props.isInExperience then constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else constants.ANALYTICS.SRC.PARTY_PAGE_UA,
 			unifiedLogging = p1.unifiedLogging
 		}) elseif fFlagAppIaScrollAway and item.isCanvasTopPadding then roactModule.createElement("Frame", {
@@ -207,56 +207,56 @@ function conversationList.init(p1)
 	end
 end
 
-function conversationList.didMount(p7)
+function conversationList.didMount(p1)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref), createScrollIntervalTrackerModule (ref), appChatPerfTrackerModule (ref)
-	if fFlagAppChatPerfTrackingModule and p7.getScrollRef then
-		local scrollRef = p7.getScrollRef()
+	if fFlagAppChatPerfTrackingModule and p1.getScrollRef then
+		local scrollRef = p1.getScrollRef()
 		
 		if scrollRef ~= nil then
-			p7.scrollIntervalTracker = createScrollIntervalTrackerModule(appChatPerfTrackerModule.Events.ScrollConversationList, scrollRef)
+			p1.scrollIntervalTracker = createScrollIntervalTrackerModule(appChatPerfTrackerModule.Events.ScrollConversationList, scrollRef)
 		end
 	end
-	local scrollRef = p7.getScrollRef()
+	local scrollRef = p1.getScrollRef()
 	
 	if scrollRef ~= nil then
 		scrollRef.Selectable = false
 	end
 end
 
-function conversationList.willUnmount(p8)
+function conversationList.willUnmount(p1)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref), fFlagAppIaScrollAway (ref), fFlagEnableScrollAwayContentScrollableFix (ref), visibilityControl (ref)
-	if fFlagAppChatPerfTrackingModule and p8.scrollIntervalTracker then
-		p8.scrollIntervalTracker.cleanup()
+	if fFlagAppChatPerfTrackingModule and p1.scrollIntervalTracker then
+		p1.scrollIntervalTracker.cleanup()
 	end
 	if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then
 		visibilityControl.setContentScrollable(true)
 	end
-	p8.focusNavigationService:teardown()
+	p1.focusNavigationService:teardown()
 end
 
-function conversationList.willUpdate(p9, p10, _)
+function conversationList.willUpdate(p1, p2, _)
 	-- upvalues: appChatChatLandingInitialFetchLimit (ref), appChatChatLandingInitialFetchMinimumConversations (ref), name (ref), conversationList (ref)
-	if p10.filterText and p10.filterText ~= "" and p10.filterText ~= p9.props.filterText then
-		p9.focusLock = p10.filterText
-	elseif p10.itemList[1] and p9.props.itemList[1] and (p10.itemList[1].id ~= p9.props.itemList[1].id and p9.currentAnchor == 1) then
-		p9.focusLock = {}
+	if p2.filterText and p2.filterText ~= "" and p2.filterText ~= p1.props.filterText then
+		p1.focusLock = p2.filterText
+	elseif p2.itemList[1] and p1.props.itemList[1] and (p2.itemList[1].id ~= p1.props.itemList[1].id and p1.currentAnchor == 1) then
+		p1.focusLock = {}
 	end
-	if p10.itemList and p9.props.itemList ~= p10.itemList and (p9.initialFetchesAttempted < appChatChatLandingInitialFetchLimit and #p10.itemList < appChatChatLandingInitialFetchMinimumConversations) then
-		p9.initialFetchesAttempted += 1
-		name:info("Loading more conversations because the list (count: {} out of {}) is not enough (attempt {} out of {})", #p10.itemList, appChatChatLandingInitialFetchMinimumConversations, p9.initialFetchesAttempted, appChatChatLandingInitialFetchLimit)
-		p9.props.loadNext()
+	if p2.itemList and p1.props.itemList ~= p2.itemList and (p1.initialFetchesAttempted < appChatChatLandingInitialFetchLimit and #p2.itemList < appChatChatLandingInitialFetchMinimumConversations) then
+		p1.initialFetchesAttempted += 1
+		name:info("Loading more conversations because the list (count: {} out of {}) is not enough (attempt {} out of {})", #p2.itemList, appChatChatLandingInitialFetchMinimumConversations, p1.initialFetchesAttempted, appChatChatLandingInitialFetchLimit)
+		p1.props.loadNext()
 	end
-	if p10.entryHeight ~= p9.props.entryHeight then
-		conversationList.ENTRY_HEIGHT = p10.entryHeight
+	if p2.entryHeight ~= p1.props.entryHeight then
+		conversationList.ENTRY_HEIGHT = p2.entryHeight
 	end
 end
 
-function conversationList.render(p11)
+function conversationList.render(p1)
 	-- upvalues: cryoModule (ref), partyPageCarouselExperimentation (ref), fFlagAppIaScrollAway (ref), roactModule (ref), fFlagEnableScrollAwayContentScrollableFix (ref), bidirectionalFlatList (ref), appChatPerfChatLandingPaginationWindowSize (ref), appChatPerfChatLandingPaginationInitialRender (ref), name (ref), promiseModule (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (ref), appChatPerfChatLandingPaginationOnStartReachedUnits (ref), withStyle (ref)
-	local itemList = p11.props.itemList
-	local var34 = if p11.props.filterText ~= "" then p11.props.filterText == nil else true
+	local itemList = p1.props.itemList
+	local var1 = if p1.props.filterText ~= "" then p1.props.filterText == nil else true
 	
-	if var34 and p11.props.showGroupsLink then
+	if var1 and p1.props.showGroupsLink then
 		itemList = cryoModule.List.join({
 			{
 				id = "ConversationGroupsEntryContainer",
@@ -264,136 +264,136 @@ function conversationList.render(p11)
 			}
 		}, itemList)
 	end
-	if not partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and p11.isPartyQuickStartEnabled() then
+	if not partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and p1.isPartyQuickStartEnabled() then
 		itemList = cryoModule.List.join({
 			{ id = "PartyQuickStartContainer", isQuickStartLink = true }
 		}, itemList)
 	end
-	if var34 then
-		if p11.isPartyQuickStartEnabled() and partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and (p11.props.isWideMode or not p11.props.isInExperience) then
+	if var1 then
+		if p1.isPartyQuickStartEnabled() and partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and (p1.props.isWideMode or not p1.props.isInExperience) then
 			itemList = cryoModule.List.join({ { id = "SocialCarousel", isSocialCarousel = true } }, itemList)
 		end
 		itemList = cryoModule.List.join({
 			{ id = "UnfilteredThreadsFtux", isChatLandingModal = true }
 		}, itemList)
 	end
-	if fFlagAppIaScrollAway and p11.props.canvasTopPadding > 0 then
+	if fFlagAppIaScrollAway and p1.props.canvasTopPadding > 0 then
 		itemList = cryoModule.List.join({
 			{
 				id = "CanvasTopPadding",
 				isCanvasTopPadding = true,
-				height = p11.props.canvasTopPadding
+				height = p1.props.canvasTopPadding
 			}
 		}, itemList)
 	end
-	local var35 = if fFlagAppIaScrollAway then function(_, p12)
-		-- upvalues: p11 (ref)
-		local canvasTopPadding, var37
+	local var2 = if fFlagAppIaScrollAway then function(_, p2)
+		-- upvalues: p1 (ref)
+		local canvasTopPadding, var3
 		local _ = nil
 		local _ = nil
 		
-		if p11.props.canvasTopPadding <= 0 then
-			canvasTopPadding = p11.ENTRY_HEIGHT
-			var37 = p11.ENTRY_HEIGHT * (p12 - 1)
-		elseif p12 == 1 then
-			canvasTopPadding = p11.props.canvasTopPadding
-			var37 = 0
+		if p1.props.canvasTopPadding <= 0 then
+			canvasTopPadding = p1.ENTRY_HEIGHT
+			var3 = p1.ENTRY_HEIGHT * (p2 - 1)
+		elseif p2 == 1 then
+			canvasTopPadding = p1.props.canvasTopPadding
+			var3 = 0
 		else
-			canvasTopPadding = p11.ENTRY_HEIGHT
-			var37 = p11.props.canvasTopPadding + p11.ENTRY_HEIGHT * (p12 - 2)
+			canvasTopPadding = p1.ENTRY_HEIGHT
+			var3 = p1.props.canvasTopPadding + p1.ENTRY_HEIGHT * (p2 - 2)
 		end
-		return { length = canvasTopPadding, offset = var37, index = p12 }
+		return { length = canvasTopPadding, offset = var3, index = p2 }
 	end else nil
 	
-	local function renderScroller(p13)
-		-- upvalues: roactModule (copy), p11 (ref), fFlagAppIaScrollAway (copy), fFlagEnableScrollAwayContentScrollableFix (copy), bidirectionalFlatList (copy), itemList (write), var35 (ref), appChatPerfChatLandingPaginationWindowSize (copy), appChatPerfChatLandingPaginationInitialRender (copy), name (copy), promiseModule (copy), appChatPerfChatLandingPaginationOnEndReachedUnits (copy), appChatPerfChatLandingPaginationOnStartReachedUnits (copy)
+	local function renderScroller(p2)
+		-- upvalues: roactModule (copy), p1 (ref), fFlagAppIaScrollAway (copy), fFlagEnableScrollAwayContentScrollableFix (copy), bidirectionalFlatList (copy), itemList (write), var2 (ref), appChatPerfChatLandingPaginationWindowSize (copy), appChatPerfChatLandingPaginationInitialRender (copy), name (copy), promiseModule (copy), appChatPerfChatLandingPaginationOnEndReachedUnits (copy), appChatPerfChatLandingPaginationOnStartReachedUnits (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = p11.props.Size,
-			[roactModule.Ref] = p11.viewRef,
-			[roactModule.Change.AbsoluteSize] = if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then p11.onViewportAbsoluteSizeChange else nil
+			Size = p1.props.Size,
+			[roactModule.Ref] = p1.viewRef,
+			[roactModule.Change.AbsoluteSize] = if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then p1.onViewportAbsoluteSizeChange else nil
 		}, {
 			scroller = roactModule.createElement(bidirectionalFlatList, {
 				data = itemList,
-				renderItem = p11.renderItem,
-				getItemLayout = if fFlagAppIaScrollAway then var35 else function(_, p14)
-					-- upvalues: p11 (copy)
+				renderItem = p1.renderItem,
+				getItemLayout = if fFlagAppIaScrollAway then var2 else function(_, p3)
+					-- upvalues: p1 (copy)
 					return {
-						length = p11.ENTRY_HEIGHT,
-						offset = p11.ENTRY_HEIGHT * (p14 - 1),
-						index = p14
+						length = p1.ENTRY_HEIGHT,
+						offset = p1.ENTRY_HEIGHT * (p3 - 1),
+						index = p3
 					}
 				end,
 				style = {
 					ScrollBarThickness = 0,
 					BorderSizePixel = 0,
-					BackgroundColor3 = p13.Theme.BackgroundDefault.Color,
-					BackgroundTransparency = p13.Tokens.Color.None.Transparency
+					BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
+					BackgroundTransparency = p2.Tokens.Color.None.Transparency
 				},
 				contentContainerStyle = {
 					BorderSizePixel = 0,
-					BackgroundColor3 = p13.Theme.BackgroundDefault.Color,
-					BackgroundTransparency = p13.Tokens.Color.None.Transparency
+					BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
+					BackgroundTransparency = p2.Tokens.Color.None.Transparency
 				},
 				windowSize = appChatPerfChatLandingPaginationWindowSize,
 				initialNumToRender = appChatPerfChatLandingPaginationInitialRender,
-				onScroll = p11.onScrollUpdate,
-				onContentSizeChange = function(_, p15)
-					-- upvalues: p11 (copy), name (copy), fFlagAppIaScrollAway (copy), fFlagEnableScrollAwayContentScrollableFix (copy)
-					local current = p11.viewRef.current
+				onScroll = p1.onScrollUpdate,
+				onContentSizeChange = function(_, p3)
+					-- upvalues: p1 (copy), name (copy), fFlagAppIaScrollAway (copy), fFlagEnableScrollAwayContentScrollableFix (copy)
+					local current = p1.viewRef.current
 					
 					if current then
-						name:debug("onContentSizeChange - Window height: {} vs Content height: {}", current.AbsoluteSize.Y, p15)
+						name:debug("onContentSizeChange - Window height: {} vs Content height: {}", current.AbsoluteSize.Y, p3)
 						
 						if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then
-							p11.lastContentHeight = p15
-							p11.onViewportAbsoluteSizeChange(current)
+							p1.lastContentHeight = p3
+							p1.onViewportAbsoluteSizeChange(current)
 						end
-						if p15 <= current.AbsoluteSize.Y then
+						if p3 <= current.AbsoluteSize.Y then
 							name:info("Not enough content to fill the view, loading more conversations")
-							p11.props.loadNext()
+							p1.props.loadNext()
 						end
 					end
 				end,
 				onEndReached = function()
-					-- upvalues: name (copy), p11 (copy), promiseModule (copy)
+					-- upvalues: name (copy), p1 (copy), promiseModule (copy)
 					name:debug("onEndReached - Loading more conversations")
-					p11.props.loadNext()
+					p1.props.loadNext()
 					
 					return promiseModule.resolve()
 				end,
 				onStartReached = function()
-					-- upvalues: name (copy), p11 (copy), promiseModule (copy)
+					-- upvalues: name (copy), p1 (copy), promiseModule (copy)
 					name:debug("onStartReached - Loading previous conversations")
 					
-					if p11.props.loadPrevious then
-						p11.props.loadPrevious()
+					if p1.props.loadPrevious then
+						p1.props.loadPrevious()
 					end
 					return promiseModule.resolve()
 				end,
 				AutomaticCanvasSize = Enum.AutomaticSize.XY,
 				CanvasSize = UDim2.fromScale(0, 0),
-				onEndReachedThreshold = p11.ENTRY_HEIGHT * appChatPerfChatLandingPaginationOnEndReachedUnits,
-				onStartReachedThreshold = p11.ENTRY_HEIGHT * appChatPerfChatLandingPaginationOnStartReachedUnits,
-				compareItemData = function(p16, p17)
-					return p16.id == p17.id
+				onEndReachedThreshold = p1.ENTRY_HEIGHT * appChatPerfChatLandingPaginationOnEndReachedUnits,
+				onStartReachedThreshold = p1.ENTRY_HEIGHT * appChatPerfChatLandingPaginationOnStartReachedUnits,
+				compareItemData = function(p3, p4)
+					return p3.id == p4.id
 				end,
-				[roactModule.Ref] = p11.ref,
+				[roactModule.Ref] = p1.ref,
 				autoscrollToTopThreshold = 33,
 				enableAutoscrollToTop = true
 			})
 		})
 	end
 	
-	return withStyle(function(p18)
-		-- upvalues: itemList (write), roactModule (copy), p11 (ref), renderScroller (ref)
+	return withStyle(function(p2)
+		-- upvalues: itemList (write), roactModule (copy), p1 (ref), renderScroller (ref)
 		return if #itemList == 0 then roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = p11.props.Size,
-			BackgroundColor3 = p18.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = p18.Tokens.Color.None.Transparency,
-			LayoutOrder = p11.props.LayoutOrder
-		}) else renderScroller(p18)
+			Size = p1.props.Size,
+			BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
+			BackgroundTransparency = p2.Tokens.Color.None.Transparency,
+			LayoutOrder = p1.props.LayoutOrder
+		}) else renderScroller(p2)
 	end)
 end
 

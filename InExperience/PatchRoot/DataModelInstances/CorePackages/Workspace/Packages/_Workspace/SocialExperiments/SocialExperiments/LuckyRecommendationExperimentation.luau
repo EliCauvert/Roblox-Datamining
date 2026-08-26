@@ -6,32 +6,32 @@ local luckyRecommendationEnableVariant = game:DefineFastString("LuckyRecommendat
 local fFlagForceEnableLuckyRecommendation = sharedFlagsModule.FFlagForceEnableLuckyRecommendation
 local fFlagEnableLuckyRecommendationExperimentation = sharedFlagsModule.FFlagEnableLuckyRecommendationExperimentation
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: experimentCacheManager (ref), fStringLuckyRecommendationExpLayer (ref)
-	local var3 = experimentCacheManager.default:getLayerVariables(fStringLuckyRecommendationExpLayer)
+	local var1 = experimentCacheManager.default:getLayerVariables(fStringLuckyRecommendationExpLayer)
 	
-	return if var3 and var3[p0] ~= nil then var3[p0] else false
+	return if var1 and var1[p1] ~= nil then var1[p1] else false
 end
 
 return {
 	getLuckyRecommendationEnabled = function()
 		-- upvalues: fFlagForceEnableLuckyRecommendation (ref), fFlagEnableLuckyRecommendationExperimentation (ref), luckyRecommendationEnableVariant (ref), experimentCacheManager (ref), fStringLuckyRecommendationExpLayer (ref)
-		local var4 = fFlagForceEnableLuckyRecommendation
+		local var1 = fFlagForceEnableLuckyRecommendation
 		
-		if not var4 then
-			var4 = fFlagEnableLuckyRecommendationExperimentation
+		if not var1 then
+			var1 = fFlagEnableLuckyRecommendationExperimentation
 			
-			if var4 then
-				local var5 = luckyRecommendationEnableVariant
-				local var6 = experimentCacheManager.default:getLayerVariables(fStringLuckyRecommendationExpLayer)
+			if var1 then
+				local var2 = luckyRecommendationEnableVariant
+				local var3 = experimentCacheManager.default:getLayerVariables(fStringLuckyRecommendationExpLayer)
 				
-				if var6 and var6[var5] ~= nil then
-					return var6[var5]
+				if var3 and var3[var2] ~= nil then
+					return var3[var2]
 				end
-				var4 = false
+				var1 = false
 			end
 		end
-		return var4
+		return var1
 	end,
 	logExposure = function()
 		-- upvalues: fFlagForceEnableLuckyRecommendation (ref), fFlagEnableLuckyRecommendationExperimentation (ref), experimentCacheManager (ref), fStringLuckyRecommendationExpLayer (ref)

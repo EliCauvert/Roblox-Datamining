@@ -11,7 +11,7 @@ local t = {
 	lastUpdated = { 2026, 4, 8 }
 }
 
-function _logEventWithStandardizedFields(p0, p1)
+function _logEventWithStandardizedFields(p1, p2)
 	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
 	local list = {
 		"addPlaceId",
@@ -20,19 +20,19 @@ function _logEventWithStandardizedFields(p0, p1)
 		"addOSInfo",
 		"addMemoryInfo"
 	}
-	p1 = p1 or {}
+	p2 = p2 or {}
 	
 	if telemetryServicePlaySessionInfoEnabledEngineFeature then
 		table.insert(list, "addPlaySessionId")
 	else
-		p1.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+		p2.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	telemetryService:LogEvent(p0, { standardizedFields = list, customFields = p1 })
+	telemetryService:LogEvent(p1, { standardizedFields = list, customFields = p2 })
 end
 
-function logSidesheetClosed(p2)
+function logSidesheetClosed(p1)
 	-- upvalues: t (ref)
-	_logEventWithStandardizedFields(t, { source = p2 })
+	_logEventWithStandardizedFields(t, { source = p1 })
 end
 
 return { logSidesheetClosed = logSidesheetClosed }

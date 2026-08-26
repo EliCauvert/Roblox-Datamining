@@ -1,7 +1,7 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("ContactImporter").Parent.Cryo)
 
-local function isEmoji(p0)
-	return p0 >= 9728 and p0 <= 9983 or p0 >= 9984 and p0 <= 10175 or (p0 >= 127744 and p0 <= 128511 or p0 >= 128512 and p0 <= 128591) or (p0 >= 128640 and p0 <= 128767 or p0 >= 128768 and p0 <= 128895 or (p0 >= 129280 and p0 <= 129535 or p0 >= 127462 and p0 <= 127487)) or (p0 >= 127344 and p0 <= 127569 or p0 >= 129536 and p0 <= 129791)
+local function isEmoji(p1)
+	return p1 >= 9728 and p1 <= 9983 or p1 >= 9984 and p1 <= 10175 or (p1 >= 127744 and p1 <= 128511 or p1 >= 128512 and p1 <= 128591) or (p1 >= 128640 and p1 <= 128767 or p1 >= 128768 and p1 <= 128895 or (p1 >= 129280 and p1 <= 129535 or p1 >= 127462 and p1 <= 127487)) or (p1 >= 127344 and p1 <= 127569 or p1 >= 129536 and p1 <= 129791)
 end
 
 local function _(p1)
@@ -19,21 +19,21 @@ return function(p2)
 	return cryoModule.List.sort(p2, function(p3, p4)
 		-- upvalues: isEmoji (copy)
 		if p3.contactName and p4.contactName then
-			local var2
+			local var1
 			for i, v in utf8.codes(p3.contactName) do
 				if isEmoji(v) then
-					var2 = true
-					local var3
+					var1 = true
+					local var2
 					for v, v_1 in utf8.codes(p4.contactName) do
 						if isEmoji(v_1) then
-							var3 = true
-							return if var2 == var3 then if p3.contactName == p4.contactName then (p3.contactId or "") < (p4.contactId or "") else string.upper(p3.contactName) < string.upper(p4.contactName) else var2
+							var2 = true
+							return if var1 == var2 then if p3.contactName == p4.contactName then (p3.contactId or "") < (p4.contactId or "") else string.upper(p3.contactName) < string.upper(p4.contactName) else var1
 						end
 					end
-					var3 = false
+					var2 = false
 				end
 			end
-			var2 = false
+			var1 = false
 		end
 	end)
 end

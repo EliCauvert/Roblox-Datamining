@@ -2,7 +2,7 @@
 	if typeof(value) == "number" then
 		return value
 	end
-	local var0 = tonumber(value:match("(%d+)$"))
+	local var1 = tonumber(value:match("(%d+)$"))
 	
-	return var0 or -1
+	return var1 or -1
 end

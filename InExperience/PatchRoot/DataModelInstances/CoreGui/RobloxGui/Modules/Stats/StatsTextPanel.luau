@@ -15,11 +15,11 @@ local uDim2_5 = UDim2.new(1, -statsUtilsModule.TextPanelLeftMarginPix * 2, 0, st
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref), statsUtilsModule (ref), uDim2_4 (ref), uDim2 (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
-	t_1._statType = p0
+	t_1._statType = p1
 	t_1._frame = Instance.new("Frame")
 	t_1._frame.BackgroundTransparency = 1
 	t_1._frame.ZIndex = statsUtilsModule.TextZIndex
@@ -99,18 +99,18 @@ function t:PlaceInParent(p1, p2, p3)
 	self._frame.Parent = p1
 end
 
-function t:SetStatsAggregator(p4)
+function t:SetStatsAggregator(p1)
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
 		self._aggregator = nil
 	end
-	self._aggregator = p4
+	self._aggregator = p1
 	self:_refreshVisibility()
 end
 
-function t:SetVisible(p5)
-	self._frame.Visible = p5
+function t:SetVisible(p1)
+	self._frame.Visible = p1
 	self:_refreshVisibility()
 end
 
@@ -156,26 +156,26 @@ end
 
 function t:_updateFromAggregator()
 	-- upvalues: statsUtilsModule (ref)
-	local var18 = 0
-	local var19 = 0
-	local var20 = 0
+	local var1 = 0
+	local var2 = 0
+	local var3 = 0
 	
 	if self._aggregator ~= nil then
-		var18 = self._aggregator:GetLatestValue()
-		var19 = self._aggregator:GetAverage()
-		var20 = self._aggregator:GetTarget()
+		var1 = self._aggregator:GetLatestValue()
+		var2 = self._aggregator:GetAverage()
+		var3 = self._aggregator:GetTarget()
 	end
-	self._currentValueWidget:SetValue(var18)
-	self._targetValueWidget:SetValue(var20)
-	self._averageValueWidget:SetValue(var19)
-	self._currentValueDecoration.ImageColor3 = statsUtilsModule.GetColorForValue(var18, var20)
+	self._currentValueWidget:SetValue(var1)
+	self._targetValueWidget:SetValue(var3)
+	self._averageValueWidget:SetValue(var2)
+	self._currentValueDecoration.ImageColor3 = statsUtilsModule.GetColorForValue(var1, var3)
 end
 
-function t:SetZIndex(p6)
-	self._frame.ZIndex = p6
-	self._titleLabel.ZIndex = p6
-	self._currentValueWidget:SetZIndex(p6)
-	self._averageValueWidget:SetZIndex(p6)
+function t:SetZIndex(p1)
+	self._frame.ZIndex = p1
+	self._titleLabel.ZIndex = p1
+	self._currentValueWidget:SetZIndex(p1)
+	self._averageValueWidget:SetZIndex(p1)
 end
 
 return t

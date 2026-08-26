@@ -16,9 +16,9 @@ local function _()
 	return game:GetFastFlag("SocialNetworksInEditProfileIXPEnabled")
 end
 
-local function getExperimentVariant(p0)
+local function getExperimentVariant(p1)
 	-- upvalues: socialNetworksEditProfileIXPLayer (ref), t (ref)
-	return if game:GetFastFlag("SocialNetworksInEditProfileIXPEnabled") then ((p0 or {})[socialNetworksEditProfileIXPLayer] or {}).editSocialNetworks or t.Control else nil
+	return if game:GetFastFlag("SocialNetworksInEditProfileIXPEnabled") then ((p1 or {})[socialNetworksEditProfileIXPLayer] or {}).editSocialNetworks or t.Control else nil
 end
 
 return {

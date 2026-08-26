@@ -2,20 +2,20 @@
 local t = {}
 t.__index = t
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: t (ref)
 	local t_1 = {
 		_target = "EventIngest",
-		_eventStreamImpl = p0,
-		_context = p1 or "SettingsHub"
+		_eventStreamImpl = p1,
+		_context = p2 or "SettingsHub"
 	}
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-function t:onToggleMuteAll(p2)
-	if p2 then
+function t:onToggleMuteAll(p1)
+	if p1 then
 		self:onMuteAll()
 		
 		return
@@ -23,8 +23,8 @@ function t:onToggleMuteAll(p2)
 	self:onUnmuteAll()
 end
 
-function t:onToggleMuteSelf(p3)
-	if p3 then
+function t:onToggleMuteSelf(p1)
+	if p1 then
 		self:onMuteSelf()
 		
 		return
@@ -32,13 +32,13 @@ function t:onToggleMuteSelf(p3)
 	self:onUnmuteSelf()
 end
 
-function t:onToggleMutePlayer(p4, p5)
-	if p5 then
-		self:onMutePlayer(p4)
+function t:onToggleMutePlayer(p1, p2)
+	if p2 then
+		self:onMutePlayer(p1)
 		
 		return
 	end
-	self:onUnmutePlayer(p4)
+	self:onUnmutePlayer(p1)
 end
 
 function t:onMuteSelf()
@@ -61,14 +61,14 @@ function t:onUnmuteAll()
 	self._eventStreamImpl:setRBXEventStream(self._target, self._context, constantsModule.VoiceAnalytics.UnmuteAll, {})
 end
 
-function t:onMutePlayer(p6)
+function t:onMutePlayer(p1)
 	-- upvalues: constantsModule (ref)
-	self._eventStreamImpl:setRBXEventStream(self._target, self._context, constantsModule.VoiceAnalytics.MutePlayer, { mutedUserId = p6 })
+	self._eventStreamImpl:setRBXEventStream(self._target, self._context, constantsModule.VoiceAnalytics.MutePlayer, { mutedUserId = p1 })
 end
 
-function t:onUnmutePlayer(p7)
+function t:onUnmutePlayer(p1)
 	-- upvalues: constantsModule (ref)
-	self._eventStreamImpl:setRBXEventStream(self._target, self._context, constantsModule.VoiceAnalytics.UnmutePlayer, { mutedUserId = p7 })
+	self._eventStreamImpl:setRBXEventStream(self._target, self._context, constantsModule.VoiceAnalytics.UnmutePlayer, { mutedUserId = p1 })
 end
 
 return t

@@ -1,11 +1,11 @@
 ﻿local constantsModule = require(script:FindFirstAncestor("AbuseReportMenu").Components.Constants)
 local useStyle = require(game:GetService("CorePackages").Packages.UIBlox).Core.Style.useStyle
 
-function getMenuItemDimensions(p0)
+function getMenuItemDimensions(p1)
 	-- upvalues: useStyle (ref), constantsModule (ref)
 	local var1 = useStyle()
 	
-	return if p0 < constantsModule.SmallLayoutThreshold then {
+	return if p1 < constantsModule.SmallLayoutThreshold then {
 		LeftWidth = constantsModule.LeftContainerWidthSmall,
 		RightWidth = constantsModule.RightContainerWidthSmall,
 		TextSize = constantsModule.FieldLabelSizeSmall

@@ -2,9 +2,9 @@
 local getCaptureMetadataModule = require(parent.Utils.getCaptureMetadata)
 local _ = require(parent.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getCaptureMetadataModule (ref)
-	local var1 = getCaptureMetadataModule(p0)
+	local var1 = getCaptureMetadataModule(p1)
 	
 	return if var1 then var1.placeId else nil
 end

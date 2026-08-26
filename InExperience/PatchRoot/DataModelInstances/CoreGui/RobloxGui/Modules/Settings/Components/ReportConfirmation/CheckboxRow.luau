@@ -28,44 +28,44 @@ checkboxRow.validateProps = tModule.interface({
 	LayoutOrder = tModule.optional(tModule.number)
 })
 
-function checkboxRow.render(p0)
+function checkboxRow.render(p1)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), foundationModule (ref), imageSetLabel (ref), images (ref), checkbox (ref)
-	return withFoundationOrUIBloxStyle(function(p1)
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				IconDefault = {
-					Color = p1.Color.Content.Default.Color3,
-					Transparency = p1.Color.Content.Default.Transparency
+					Color = p2.Color.Content.Default.Color3,
+					Transparency = p2.Color.Content.Default.Transparency
 				},
 				IconEmphasis = {
-					Color = p1.Color.Content.Emphasis.Color3,
-					Transparency = p1.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				TextEmphasis = {
-					Color = p1.Color.Content.Emphasis.Color3,
-					Transparency = p1.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				TextMuted = {
-					Color = p1.Color.Content.Muted.Color3,
-					Transparency = p1.Color.Content.Muted.Transparency
+					Color = p2.Color.Content.Muted.Color3,
+					Transparency = p2.Color.Content.Muted.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				Header2 = {
-					Font = p1.Typography.TitleLarge.Font,
-					RelativeSize = p1.Typography.TitleLarge.FontSize
+					Font = p2.Typography.TitleLarge.Font,
+					RelativeSize = p2.Typography.TitleLarge.FontSize
 				}
 			}
 		}
 	end, function(p2)
-		-- upvalues: p0 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), foundationModule (copy), imageSetLabel (copy), images (copy), checkbox (copy)
+		-- upvalues: p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), foundationModule (copy), imageSetLabel (copy), images (copy), checkbox (copy)
 		local textMuted, iconDefault
 		local baseSize = p2.Font.BaseSize
 		local _ = nil
 		local _ = nil
 		
-		if p0.props.actionDisabled then
+		if p1.props.actionDisabled then
 			textMuted = p2.Theme.TextMuted
 			iconDefault = p2.Theme.IconDefault
 		else
@@ -74,8 +74,8 @@ function checkboxRow.render(p0)
 		end
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, p0.props.height),
-			LayoutOrder = p0.props.LayoutOrder
+			Size = UDim2.new(1, 0, 0, p1.props.height),
+			LayoutOrder = p1.props.LayoutOrder
 		}, {
 			layout = roactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
@@ -86,7 +86,7 @@ function checkboxRow.render(p0)
 			}),
 			image = if fFlagCoreUiMigrateUIBloxToFoundation then roactModule.createElement(foundationModule.Icon, {
 				LayoutOrder = 1,
-				name = p0.props.image,
+				name = p1.props.image,
 				size = foundationModule.Enums.IconSize.Medium,
 				style = {
 					Color3 = iconDefault.Color,
@@ -95,16 +95,16 @@ function checkboxRow.render(p0)
 			}) else roactModule.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(p0.props.height, p0.props.height),
-				Image = images[p0.props.image],
+				Size = UDim2.fromOffset(p1.props.height, p1.props.height),
+				Image = images[p1.props.image],
 				ImageColor3 = iconDefault.Color,
 				ImageTransparency = iconDefault.Transparency
 			}),
 			text = roactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				Size = UDim2.new(1, -(p0.props.height + 12) * 4, 1, 0),
-				Text = p0.props.descriptionText,
+				Size = UDim2.new(1, -(p1.props.height + 12) * 4, 1, 0),
+				Text = p1.props.descriptionText,
 				TextColor3 = textMuted.Color,
 				TextTransparency = textMuted.Transparency,
 				TextSize = p2.Font.Header2.RelativeSize * baseSize,
@@ -114,9 +114,9 @@ function checkboxRow.render(p0)
 			checkbox = roactModule.createElement(checkbox, {
 				label = "",
 				LayoutOrder = 3,
-				isDisabled = p0.props.actionDisabled,
-				isChecked = p0.props.checkboxSelected,
-				onActivated = p0.props.onCheckboxActivated
+				isDisabled = p1.props.actionDisabled,
+				isChecked = p1.props.checkboxSelected,
+				onActivated = p1.props.onCheckboxActivated
 			})
 		})
 	end)

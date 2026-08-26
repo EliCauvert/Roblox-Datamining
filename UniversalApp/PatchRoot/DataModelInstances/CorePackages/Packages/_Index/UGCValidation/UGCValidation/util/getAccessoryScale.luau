@@ -1,18 +1,18 @@
 ﻿local playersService = game:GetService("Players")
 local humanoidParentNil = game:DefineFastFlag("HumanoidParentNil", false)
 local t = {}
-local var3 = nil
+local var1 = nil
 local humanoid = nil
 
 if not humanoidParentNil then
-	var3 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15) else playersService:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
-	humanoid = var3:FindFirstChildOfClass("Humanoid")
+	var1 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15) else playersService:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
+	humanoid = var1:FindFirstChildOfClass("Humanoid")
 	assert(humanoid, "Humanoid must exist in character model")
 	local bodyProportionScale = humanoid:FindFirstChild("BodyProportionScale")
 	humanoid:FindFirstChild("BodyTypeScale").Value = 0
 	bodyProportionScale.Value = 0
 	
-	for i, v in pairs(var3:GetDescendants()) do
+	for i, v in pairs(var1:GetDescendants()) do
 		if v:IsA("BasePart") then
 			for i_1, v_1 in v:GetChildren() do
 				if v_1:IsA("Attachment") then
@@ -22,17 +22,17 @@ if not humanoidParentNil then
 		end
 	end
 end
-return function(p0, p1)
-	-- upvalues: humanoidParentNil (ref), var3 (write), playersService (ref), humanoid (write), t (ref)
-	if humanoidParentNil and var3 == nil then
-		var3 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15) else playersService:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
-		humanoid = var3:FindFirstChildOfClass("Humanoid")
+return function(p1, p2)
+	-- upvalues: humanoidParentNil (ref), var1 (write), playersService (ref), humanoid (write), t (ref)
+	if humanoidParentNil and var1 == nil then
+		var1 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15) else playersService:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
+		humanoid = var1:FindFirstChildOfClass("Humanoid")
 		assert(humanoid, "Humanoid must exist in character model")
 		local bodyProportionScale = humanoid:FindFirstChild("BodyProportionScale")
 		humanoid:FindFirstChild("BodyTypeScale").Value = 0
 		bodyProportionScale.Value = 0
 		
-		for i, v in pairs(var3:GetDescendants()) do
+		for i, v in pairs(var1:GetDescendants()) do
 			if v:IsA("BasePart") then
 				for i_1, v_1 in v:GetChildren() do
 					if v_1:IsA("Attachment") then
@@ -42,5 +42,5 @@ return function(p0, p1)
 			end
 		end
 	end
-	return if humanoid == nil then Vector3.new(1, 1, 1) else humanoid:GetAccessoryHandleScale(p0, t[p1.Name])
+	return if humanoid == nil then Vector3.new(1, 1, 1) else humanoid:GetAccessoryHandleScale(p1, t[p2.Name])
 end

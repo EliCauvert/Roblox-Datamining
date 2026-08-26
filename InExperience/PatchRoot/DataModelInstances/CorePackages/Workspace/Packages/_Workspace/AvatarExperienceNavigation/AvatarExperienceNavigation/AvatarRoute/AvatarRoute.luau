@@ -12,14 +12,14 @@ t.Interface = tModule.strictInterface({
 	isOverlayVisible = tModule.boolean
 })
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: routeInfoModule (ref), t (ref)
 	local t_1 = {
-		current = p0.current or routeInfoModule.EMPTY,
-		previousPages = p0.previousPages or {},
-		opaque = p0.opaque or routeInfoModule.EMPTY,
-		isVisible = p0.isVisible or false,
-		isOverlayVisible = p0.isOverlayVisible or false
+		current = p1.current or routeInfoModule.EMPTY,
+		previousPages = p1.previousPages or {},
+		opaque = p1.opaque or routeInfoModule.EMPTY,
+		isVisible = p1.isVisible or false,
+		isOverlayVisible = p1.isOverlayVisible or false
 	}
 	setmetatable(t_1, t)
 	

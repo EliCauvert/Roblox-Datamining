@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if p0.title == nil then false elseif p0.imageUrl == nil then false else p0.pagePath ~= nil
+﻿return function(p1)
+	return if p1.title == nil then false elseif p1.imageUrl == nil then false else p1.pagePath ~= nil
 end

@@ -3,23 +3,23 @@ local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local useCurrentSquadSelector = require(parent.RoduxSquads).Hooks.useCurrentSquadSelector
 
-function useCurrentSquadMember(p0)
+function useCurrentSquadMember(p1)
 	-- upvalues: useCurrentSquadSelector (ref), reactModule (ref), cryoModule (ref)
-	local var2 = useCurrentSquadSelector()
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref)
-		return if var2 then var2.members else {}
-	end, { var2 })
+	local var1 = useCurrentSquadSelector()
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref)
+		return if var1 then var1.members else {}
+	end, { var1 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var3 (ref), p0 (ref)
-		local var4 = cryoModule.List.findWhere(var3, function(p1)
-			-- upvalues: p0 (copy)
-			return p1.userId == p0
+		-- upvalues: cryoModule (copy), var2 (ref), p1 (ref)
+		local var3 = cryoModule.List.findWhere(var2, function(p2)
+			-- upvalues: p1 (copy)
+			return p2.userId == p1
 		end)
 		
-		return if var4 then var3[var4] else nil
-	end, { var3, p0 })
+		return if var3 then var2[var3] else nil
+	end, { var2, p1 })
 end
 
 return useCurrentSquadMember

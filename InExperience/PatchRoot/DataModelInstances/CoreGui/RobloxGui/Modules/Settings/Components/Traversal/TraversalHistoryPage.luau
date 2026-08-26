@@ -25,41 +25,41 @@ local fIntMaximumTraversalHistoryItemsFetch = traversal.Flags.FIntMaximumTravers
 local fFlagTraversalExpPagePaddingFixes = traversal.Flags.FFlagTraversalExpPagePaddingFixes
 local fFlagIntegrateTraversalHistoryInSideSheet = sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet
 
-return reactModule.memo(reactModule.forwardRef(function(_, p0)
+return reactModule.memo(reactModule.forwardRef(function(_, p1)
 	-- upvalues: reactModule (ref), fIntMaximumTraversalHistoryItemsFetch (ref), useHistoryItems (ref), constants (ref), signalsReactModule (ref), reactPageSignalModule (ref), userInputService (ref), getInputModeStore (ref), input (ref), guiService (ref), cryoModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), default (ref), view (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagTraversalExpPagePaddingFixes (ref), historyPage (ref), traversalLeaveConfirmationModule (ref)
-	local var12 = reactModule.useRef(nil)
-	reactModule.useImperativeHandle(p0, function()
-		-- upvalues: var12 (ref)
-		return var12.current
+	local var1 = reactModule.useRef(nil)
+	reactModule.useImperativeHandle(p1, function()
+		-- upvalues: var1 (ref)
+		return var1.current
 	end, {})
-	local var13, var14 = reactModule.useState(fIntMaximumTraversalHistoryItemsFetch)
-	local var15 = useHistoryItems(var13)
-	local var16, var17 = reactModule.useState(constants.NO_UNIVERSE_ID)
-	local var18 = signalsReactModule.useSignalState(reactPageSignalModule)
+	local var2, var3 = reactModule.useState(fIntMaximumTraversalHistoryItemsFetch)
+	local var4 = useHistoryItems(var2)
+	local var5, var6 = reactModule.useState(constants.NO_UNIVERSE_ID)
+	local var7 = signalsReactModule.useSignalState(reactPageSignalModule)
 	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), getInputModeStore (copy), input (copy), var12 (ref), guiService (copy)
+		-- upvalues: userInputService (copy), getInputModeStore (copy), input (copy), var1 (ref), guiService (copy)
 		local lastInputType = getInputModeStore().getLastInputType()
 		
-		if (if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true) and var12.current then
-			guiService.SelectedCoreObject = var12.current
+		if (if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true) and var1.current then
+			guiService.SelectedCoreObject = var1.current
 		end
 	end, {})
-	local var19 = reactModule.useCallback(function(p1)
-		-- upvalues: var17 (ref)
-		var17(p1)
-	end, { var17 })
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), constants (copy), userInputService (copy), getInputModeStore (copy), input (copy), var12 (ref), guiService (copy)
-		var17(constants.NO_UNIVERSE_ID)
+	local var8 = reactModule.useCallback(function(p2)
+		-- upvalues: var6 (ref)
+		var6(p2)
+	end, { var6 })
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), constants (copy), userInputService (copy), getInputModeStore (copy), input (copy), var1 (ref), guiService (copy)
+		var6(constants.NO_UNIVERSE_ID)
 		local lastInputType = getInputModeStore().getLastInputType()
 		
-		if (if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true) and var12.current then
-			guiService.SelectedCoreObject = var12.current
+		if (if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true) and var1.current then
+			guiService.SelectedCoreObject = var1.current
 		end
 	end, {})
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var15 (ref), getRbxThumb (copy), thumbnailType (copy), thumbnailSize (copy)
-		return cryoModule.List.map(var15, function(p2)
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: cryoModule (copy), var4 (ref), getRbxThumb (copy), thumbnailType (copy), thumbnailSize (copy)
+		return cryoModule.List.map(var4, function(p2)
 			-- upvalues: getRbxThumb (copy), thumbnailType (copy), thumbnailSize (copy)
 			return {
 				placeId = p2.placeId,
@@ -69,34 +69,34 @@ return reactModule.memo(reactModule.forwardRef(function(_, p0)
 				rating = p2.rating
 			}
 		end)
-	end, { var15 })
+	end, { var4 })
 	
-	return next(var21) ~= nil and reactModule.createElement(view, {
+	return next(var10) ~= nil and reactModule.createElement(view, {
 		tag = "size-full " .. (if fFlagIntegrateTraversalHistoryInSideSheet then "" elseif fFlagTraversalExpPagePaddingFixes then "padding-top-medium" else "padding-large")
 	}, {
 		HistoryPage = reactModule.createElement(historyPage, {
-			historyItems = var21,
+			historyItems = var10,
 			onHistoryClose = function()
-				-- upvalues: var18 (ref)
-				var18.setCurrentReactPage(nil)
+				-- upvalues: var7 (ref)
+				var7.setCurrentReactPage(nil)
 			end,
-			onCardItemActivated = var19,
-			onLoadMoreHistory = reactModule.useCallback(function(p3)
-				-- upvalues: var13 (ref), default (copy), var14 (ref)
-				if #default:getUniverseHistory() <= var13 then
+			onCardItemActivated = var8,
+			onLoadMoreHistory = reactModule.useCallback(function(p2)
+				-- upvalues: var2 (ref), default (copy), var3 (ref)
+				if #default:getUniverseHistory() <= var2 then
 					return
 				end
-				var14(var13 + p3)
-			end, { var13 }),
-			ref = var12
+				var3(var2 + p2)
+			end, { var2 }),
+			ref = var1
 		})
 	}, {
 		Dialog = reactModule.createElement(traversalLeaveConfirmationModule, {
 			source = "history_landing_page",
-			isDialogOpen = constants.NO_UNIVERSE_ID < var16,
-			onCancel = var20,
-			onClose = var20,
-			universeId = var16
+			isDialogOpen = constants.NO_UNIVERSE_ID < var5,
+			onCancel = var9,
+			onClose = var9,
+			universeId = var5
 		})
 	})
 end))

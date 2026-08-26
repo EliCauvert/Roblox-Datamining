@@ -21,18 +21,18 @@ local t = {
 
 if require(parent.SharedFlags).GetFFlagEnableCrossExpVoice() then
 	local crossExperienceVoice = nil
-	local var12 = createPersistenceMiddleware({
+	local var1 = createPersistenceMiddleware({
 		storeKey = crossExperienceModule.Constants.STORAGE_CEV_STORE_KEY
 	}).restore()
 	
-	if var12 and var12.Squad and var12.Squad.CrossExperienceVoice then
-		crossExperienceVoice = var12.Squad.CrossExperienceVoice
+	if var1 and var1.Squad and var1.Squad.CrossExperienceVoice then
+		crossExperienceVoice = var1.Squad.CrossExperienceVoice
 	end
 	t.CrossExperienceVoice = crossExperienceVoiceModule.installReducer(crossExperienceVoice)
 end
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), squadLocationModule (ref), squadPromptReducerModule (ref), roduxModule (ref)
-	t.SquadPrompt = if p0 == squadLocationModule.InExperience then squadPromptReducerModule else nil
+	t.SquadPrompt = if p1 == squadLocationModule.InExperience then squadPromptReducerModule else nil
 	
 	return roduxModule.combineReducers(t)
 end

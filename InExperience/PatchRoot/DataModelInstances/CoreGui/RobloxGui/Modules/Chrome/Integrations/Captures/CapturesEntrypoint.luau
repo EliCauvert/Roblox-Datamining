@@ -12,11 +12,11 @@ local mappedSignal = chromeUtilsModule.MappedSignal
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local _ = serviceModule.AvailabilitySignal.Available
-local var9 = mappedSignal.new(capturesAppModule.onIsActiveChanged, function()
+local var1 = mappedSignal.new(capturesAppModule.onIsActiveChanged, function()
 	-- upvalues: capturesAppModule (ref)
 	return capturesAppModule.getIsActive()
 end)
-local var10 = serviceModule:register({
+local var2 = serviceModule:register({
 	id = "camera_entrypoint",
 	label = "Feature.SettingsHub.Label.Captures",
 	initialAvailability = if starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Captures) then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
@@ -25,21 +25,21 @@ local var10 = serviceModule:register({
 		-- upvalues: capturesAppModule (ref)
 		capturesAppModule.onToggleActivationFromChrome()
 	end,
-	isActivated = var9,
+	isActivated = var1,
 	components = {
 		Icon = function(_)
-			-- upvalues: commonIconModule (ref), var9 (ref)
-			return commonIconModule("icons/controls/cameraOff", "icons/controls/cameraOn", var9)
+			-- upvalues: commonIconModule (ref), var1 (ref)
+			return commonIconModule("icons/controls/cameraOff", "icons/controls/cameraOn", var1)
 		end
 	}
 })
-chromeUtilsModule.setCoreGuiAvailability(var10, Enum.CoreGuiType.Captures)
+chromeUtilsModule.setCoreGuiAvailability(var2, Enum.CoreGuiType.Captures)
 
 if fFlagEnableConsoleExpControls then
-	local var11 = capturesPolicy.PolicyImplementation.read()
+	local var3 = capturesPolicy.PolicyImplementation.read()
 	
-	if not (if var11 then capturesPolicy.Mapper(var11).eligibleForCapturesFeature() else false) then
-		var10.availability:forceUnavailable()
+	if not (if var3 then capturesPolicy.Mapper(var3).eligibleForCapturesFeature() else false) then
+		var2.availability:forceUnavailable()
 	end
 end
-return var10
+return var2

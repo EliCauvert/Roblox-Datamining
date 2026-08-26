@@ -14,15 +14,15 @@ local REACT_BLOCK_TYPE = reactSymbolsModule.REACT_BLOCK_TYPE
 local REACT_SERVER_BLOCK_TYPE = reactSymbolsModule.REACT_SERVER_BLOCK_TYPE
 local REACT_LEGACY_HIDDEN_TYPE = reactSymbolsModule.REACT_LEGACY_HIDDEN_TYPE
 
-return function(p0)
+return function(p1)
 	-- upvalues: REACT_FRAGMENT_TYPE (ref), REACT_PROFILER_TYPE (ref), REACT_DEBUG_TRACING_MODE_TYPE (ref), REACT_STRICT_MODE_TYPE (ref), REACT_SUSPENSE_TYPE (ref), REACT_LEGACY_HIDDEN_TYPE (ref), REACT_LAZY_TYPE (ref), REACT_MEMO_TYPE (ref), REACT_PROVIDER_TYPE (ref), REACT_CONTEXT_TYPE (ref), REACT_FORWARD_REF_TYPE (ref), REACT_FUNDAMENTAL_TYPE (ref), REACT_BLOCK_TYPE (ref), REACT_SERVER_BLOCK_TYPE (ref)
-	local var1 = typeof(p0)
+	local var1 = typeof(p1)
 	
 	if var1 == "string" or var1 == "function" then
 		return true
-	elseif p0 == REACT_FRAGMENT_TYPE or p0 == REACT_PROFILER_TYPE or (p0 == REACT_DEBUG_TRACING_MODE_TYPE or p0 == REACT_STRICT_MODE_TYPE) or (p0 == REACT_SUSPENSE_TYPE or p0 == REACT_LEGACY_HIDDEN_TYPE) then
+	elseif p1 == REACT_FRAGMENT_TYPE or p1 == REACT_PROFILER_TYPE or (p1 == REACT_DEBUG_TRACING_MODE_TYPE or p1 == REACT_STRICT_MODE_TYPE) or (p1 == REACT_SUSPENSE_TYPE or p1 == REACT_LEGACY_HIDDEN_TYPE) then
 		return true
 	elseif var1 == "table" then
-		return if p0.isReactComponent then true else p0["$$typeof"] == REACT_LAZY_TYPE or p0["$$typeof"] == REACT_MEMO_TYPE or (p0["$$typeof"] == REACT_PROVIDER_TYPE or p0["$$typeof"] == REACT_CONTEXT_TYPE) or (p0["$$typeof"] == REACT_FORWARD_REF_TYPE or p0["$$typeof"] == REACT_FUNDAMENTAL_TYPE or (p0["$$typeof"] == REACT_BLOCK_TYPE or p0[1] == REACT_SERVER_BLOCK_TYPE))
+		return if p1.isReactComponent then true else p1["$$typeof"] == REACT_LAZY_TYPE or p1["$$typeof"] == REACT_MEMO_TYPE or (p1["$$typeof"] == REACT_PROVIDER_TYPE or p1["$$typeof"] == REACT_CONTEXT_TYPE) or (p1["$$typeof"] == REACT_FORWARD_REF_TYPE or p1["$$typeof"] == REACT_FUNDAMENTAL_TYPE or (p1["$$typeof"] == REACT_BLOCK_TYPE or p1[1] == REACT_SERVER_BLOCK_TYPE))
 	end
 end

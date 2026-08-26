@@ -4,25 +4,25 @@ local object = require(parent.LuauPolyfill).Object
 local flatListModule = require(script.Parent.FlatList)
 local useFocusNavigationScrolling = require(script.Parent.Hooks).useFocusNavigationScrolling
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useFocusNavigationScrolling (ref), object (ref), flatListModule (ref)
-	local var2 = reactModule.useRef(nil)
-	local var3, var4 = useFocusNavigationScrolling({
-		listRef = p0.listRef or var2,
-		onSelectedIndexChanged = p0.onSelectedIndexChanged,
-		initialIndex = p0.initialScrollIndex,
-		cellRendererKey = p0.cellRendererKey,
-		viewOffset = p0.viewOffset,
-		animated = p0.animated,
-		data = p0.data
+	local var1 = reactModule.useRef(nil)
+	local var2, var3 = useFocusNavigationScrolling({
+		listRef = p1.listRef or var1,
+		onSelectedIndexChanged = p1.onSelectedIndexChanged,
+		initialIndex = p1.initialScrollIndex,
+		cellRendererKey = p1.cellRendererKey,
+		viewOffset = p1.viewOffset,
+		animated = p1.animated,
+		data = p1.data
 	})
 	
-	return reactModule.createElement(flatListModule, object.assign(table.clone(p0), {
+	return reactModule.createElement(flatListModule, object.assign(table.clone(p1), {
 		viewOffset = object.None,
 		animated = object.None,
 		onSelectedIndexChanged = object.None,
-		ref = p0.listRef or var2,
-		onScrollToIndexFailed = if p0.getItemLayout then nil else var4,
-		onSelectionChanged = var3
+		ref = p1.listRef or var1,
+		onScrollToIndexFailed = if p1.getItemLayout then nil else var3,
+		onSelectionChanged = var2
 	}))
 end

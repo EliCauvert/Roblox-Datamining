@@ -16,11 +16,11 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local getFFlagLuaAppPushUpsellDeprecateOldEvents = require(parent.SharedFlags).GetFFlagLuaAppPushUpsellDeprecateOldEvents
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), useCallback (ref), pushNotificationsUpsellUtilsModule (ref), appStorageService (ref), getFFlagLuaAppPushUpsellDeprecateOldEvents (ref), sendEventDeferred (ref), modalEventConstantsModule (ref), default_1 (ref), pushUpsellEventNameModule (ref), default (ref), useState (ref), reactModule (ref), reactRobloxModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var7 = useLocalization(p0.TranslationKeys)
-	local var8 = useCallback(function()
-		-- upvalues: pushNotificationsUpsellUtilsModule (copy), appStorageService (copy), getFFlagLuaAppPushUpsellDeprecateOldEvents (copy), sendEventDeferred (copy), modalEventConstantsModule (copy), default_1 (copy), pushUpsellEventNameModule (copy), p0 (ref)
+	local var1 = useLocalization(p1.TranslationKeys)
+	local var2 = useCallback(function()
+		-- upvalues: pushNotificationsUpsellUtilsModule (copy), appStorageService (copy), getFFlagLuaAppPushUpsellDeprecateOldEvents (copy), sendEventDeferred (copy), modalEventConstantsModule (copy), default_1 (copy), pushUpsellEventNameModule (copy), p1 (ref)
 		pushNotificationsUpsellUtilsModule.setPushEduUpsellResponse(appStorageService, "Deny")
 		pushNotificationsUpsellUtilsModule.setPushEduUpsellResponseTimestamp(appStorageService, os.time())
 		
@@ -34,10 +34,10 @@ return function(p0)
 			[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
 			[modalEventConstantsModule.Button] = modalEventConstantsModule.Cancel
 		}, modalEventConstantsModule.ModalContextPushEduUpsell)
-		p0.CloseModal()
-	end, { p0.CloseModal })
-	local var9 = useCallback(function()
-		-- upvalues: getFFlagLuaAppPushUpsellDeprecateOldEvents (copy), sendEventDeferred (copy), modalEventConstantsModule (copy), default_1 (copy), pushUpsellEventNameModule (copy), pushNotificationsUpsellUtilsModule (copy), appStorageService (copy), default (copy), p0 (ref)
+		p1.CloseModal()
+	end, { p1.CloseModal })
+	local var3 = useCallback(function()
+		-- upvalues: getFFlagLuaAppPushUpsellDeprecateOldEvents (copy), sendEventDeferred (copy), modalEventConstantsModule (copy), default_1 (copy), pushUpsellEventNameModule (copy), pushNotificationsUpsellUtilsModule (copy), appStorageService (copy), default (copy), p1 (ref)
 		if not getFFlagLuaAppPushUpsellDeprecateOldEvents() then
 			sendEventDeferred(modalEventConstantsModule.ModalContextPushEduUpsell, modalEventConstantsModule.OptInPushEventName, {
 				[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
@@ -80,33 +80,33 @@ return function(p0)
 				[modalEventConstantsModule.ActionType] = modalEventConstantsModule.RequestFailed
 			}, modalEventConstantsModule.ModalContextSysUpsell)
 		end)
-		p0.CloseModal()
-	end, { p0.CloseModal, var7 })
-	local var10, var11 = useState(Vector2.new(800, 600))
+		p1.CloseModal()
+	end, { p1.CloseModal, var1 })
+	local var4, var5 = useState(Vector2.new(800, 600))
 	
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
-		[reactRobloxModule.Change.AbsoluteSize] = useCallback(function(p1)
-			-- upvalues: var11 (ref)
-			var11(p1.AbsoluteSize)
-		end, { var11 })
+		[reactRobloxModule.Change.AbsoluteSize] = useCallback(function(p2)
+			-- upvalues: var5 (ref)
+			var5(p2.AbsoluteSize)
+		end, { var5 })
 	}, {
 		ConfirmationPrompt = reactModule.createElement(interactiveAlert, {
 			richText = true,
-			screenSize = var10,
-			title = var7.Heading,
-			bodyText = var7.Body,
+			screenSize = var4,
+			title = var1.Heading,
+			bodyText = var1.Body,
 			buttonStackInfo = {
 				buttons = {
 					{
 						isDefaultChild = true,
-						props = { onActivated = var8, text = var7.CancelAction }
+						props = { onActivated = var2, text = var1.CancelAction }
 					},
 					{
 						isDefaultChild = false,
 						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = var9, text = var7.ConfirmAction }
+						props = { onActivated = var3, text = var1.ConfirmAction }
 					}
 				}
 			}

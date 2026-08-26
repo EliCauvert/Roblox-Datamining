@@ -1,12 +1,12 @@
 ﻿local t = {}
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref)
-	p1 = p1 or 2
+	p2 = p2 or 2
 	
-	if not t[p1] then
-		local formattedText = string.format("%%.%df", p1)
-		t[p1] = string.format("%s, %s, %s", formattedText, formattedText, formattedText)
+	if not t[p2] then
+		local formattedText = string.format("%%.%df", p2)
+		t[p2] = string.format("%s, %s, %s", formattedText, formattedText, formattedText)
 	end
-	return string.format(t[p1], p0.X, p0.Y, p0.Z)
+	return string.format(t[p2], p1.X, p1.Y, p1.Z)
 end

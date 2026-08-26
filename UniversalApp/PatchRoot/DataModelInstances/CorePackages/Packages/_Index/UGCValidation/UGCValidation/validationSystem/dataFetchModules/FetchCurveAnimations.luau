@@ -3,11 +3,11 @@ local _ = require(parent.util.Types)
 local getAllInstancesIsAModule = require(parent.util.getAllInstancesIsA)
 
 return {
-	getData = function(p0)
+	getData = function(p1)
 		-- upvalues: getAllInstancesIsAModule (ref)
 		local t = {}
 		
-		for i, v in getAllInstancesIsAModule(p0, "Animation") do
+		for i, v in getAllInstancesIsAModule(p1, "Animation") do
 			local animationId = v.AnimationId
 			
 			if animationId ~= "" then

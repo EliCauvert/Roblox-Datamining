@@ -5,9 +5,9 @@ local dependenciesModule = require(squads.dependencies)
 local react = dependenciesModule.React
 local foundation = dependenciesModule.Foundation
 
-return function(p0)
+return function(p1)
 	-- upvalues: react (ref), foundation (ref), squadVoiceAbuseReportModule (ref)
-	local navigation = p0.navigation
+	local navigation = p1.navigation
 	local reportData = navigation.getParam("reportData", nil)
 	assert(reportData ~= nil, "SquadVoiceAbuseReportScreen requires reportData to be passed in")
 	

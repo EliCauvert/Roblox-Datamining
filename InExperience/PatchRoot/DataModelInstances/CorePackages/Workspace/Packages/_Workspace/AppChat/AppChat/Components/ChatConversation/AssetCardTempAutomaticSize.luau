@@ -30,33 +30,33 @@ local t = {
 
 return function(value)
 	-- upvalues: cryoModule (ref), t (ref), shareLinkContainerModule (ref), placeIdContainerModule (ref), gameCardContainerModule (ref), useScaledValue (ref), constantsModule (ref), roactModule (ref), chatBubbleContainerAutomaticSizeModule (ref)
-	local var9 = cryoModule.Dictionary.union(t, value)
-	local var10 = cryoModule.Dictionary.union(t.additionalProps, var9.additionalProps)
-	local var11 = if var10.shareLink then shareLinkContainerModule elseif var10.placeId then placeIdContainerModule else gameCardContainerModule
-	local isPending = var9.isPending
-	local var12 = useScaledValue(constantsModule.GameCard.THUMBNAIL_WIDTH)
-	local var13 = useScaledValue(constantsModule.GameCard.THUMBNAIL_HEIGHT + constantsModule.GameCard.FOOTER_HEIGHT)
-	var10.isStartOfGroup = var9.hasTail
-	var10.isIncoming = var9.isIncoming
-	var10.isUnfiltered = var9.isUnfiltered
-	var10.isPending = var9.isPending
-	var10.isRepliedTo = var9.isRepliedTo
+	local var1 = cryoModule.Dictionary.union(t, value)
+	local var2 = cryoModule.Dictionary.union(t.additionalProps, var1.additionalProps)
+	local var3 = if var2.shareLink then shareLinkContainerModule elseif var2.placeId then placeIdContainerModule else gameCardContainerModule
+	local isPending = var1.isPending
+	local var4 = useScaledValue(constantsModule.GameCard.THUMBNAIL_WIDTH)
+	local var5 = useScaledValue(constantsModule.GameCard.THUMBNAIL_HEIGHT + constantsModule.GameCard.FOOTER_HEIGHT)
+	var2.isStartOfGroup = var1.hasTail
+	var2.isIncoming = var1.isIncoming
+	var2.isUnfiltered = var1.isUnfiltered
+	var2.isPending = var1.isPending
+	var2.isRepliedTo = var1.isRepliedTo
 	
 	return roactModule.createElement(chatBubbleContainerAutomaticSizeModule, {
-		hasTail = var9.hasTail,
-		isIncoming = var9.isIncoming,
+		hasTail = var1.hasTail,
+		isIncoming = var1.isIncoming,
 		isPending = isPending,
 		isUnfiltered = nil,
 		isAssetCard = true,
-		LayoutOrder = var9.LayoutOrder,
+		LayoutOrder = var1.LayoutOrder,
 		padding = 0,
-		isLastMessageInMessageGroup = var9.isLastMessageInMessageGroup or t.isLastMessageInMessageGroup,
-		[roactModule.Change.AbsoluteSize] = var9[roactModule.Change.AbsoluteSize]
+		isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup or t.isLastMessageInMessageGroup,
+		[roactModule.Change.AbsoluteSize] = var1[roactModule.Change.AbsoluteSize]
 	}, {
 		AssetCard = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.fromOffset(var12 or 256, var13 or 208),
+			Size = UDim2.fromOffset(var4 or 256, var5 or 208),
 			AutomaticSize = Enum.AutomaticSize.XY
-		}, { Card = roactModule.createElement(var11, var10) })
+		}, { Card = roactModule.createElement(var3, var2) })
 	})
 end

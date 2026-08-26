@@ -4,13 +4,13 @@ local openSearchResultsWithQueryDeeplink = require(parent.DiscoveryAnalytics).Ev
 local _ = require(parent.SduiCoreSystem)
 local openSearchResultsWithQueryParamsModule = require(serverDrivenUi.Actions.openSearchResultsWithQueryParams)
 
-return function(p0, _, p1)
+return function(p1, _, p2)
 	-- upvalues: openSearchResultsWithQueryParamsModule (ref), openSearchResultsWithQueryDeeplink (ref)
-	local var2 = openSearchResultsWithQueryParamsModule.resolveSearchQuery(p0)
-	local var3 = openSearchResultsWithQueryParamsModule.resolveSearchType(p0)
+	local var1 = openSearchResultsWithQueryParamsModule.resolveSearchQuery(p1)
+	local var2 = openSearchResultsWithQueryParamsModule.resolveSearchType(p1)
 	
-	if var2 == nil or var3 == nil then
+	if var1 == nil or var2 == nil then
 		return
 	end
-	openSearchResultsWithQueryDeeplink(p1.appPage, { kwd = var2, searchType = var3 })
+	openSearchResultsWithQueryDeeplink(p2.appPage, { kwd = var1, searchType = var2 })
 end

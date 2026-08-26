@@ -4,8 +4,8 @@ local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).F
 
 return function()
 	-- upvalues: useAppPolicy (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref)
-	return useAppPolicy(function(p0)
+	return useAppPolicy(function(p1)
 		-- upvalues: fFlagProfilePlatformEnableCurrencyTransfer (copy)
-		return if fFlagProfilePlatformEnableCurrencyTransfer then p0.getCanRenderTransferOnProfile() else false
+		return if fFlagProfilePlatformEnableCurrencyTransfer then p1.getCanRenderTransferOnProfile() else false
 	end)
 end

@@ -1,6 +1,6 @@
-﻿return function(p0, p1)
-	p0 = p0 or Vector2.new(0, 0)
-	assert(p0, "")
+﻿return function(p1, p2)
+	p1 = p1 or Vector2.new(0, 0)
+	assert(p1, "")
 	
-	return if p1 and p1.screenSize then p1.screenSize else p0
+	return if p2 and p2.screenSize then p2.screenSize else p1
 end

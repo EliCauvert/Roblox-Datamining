@@ -9,8 +9,8 @@ return {
 		safetyService.IsCaptureModeForReport = true
 		experienceStateCaptureService:ToggleCaptureMode()
 	end,
-	subscribeOnceToExitReason = function(p0)
+	subscribeOnceToExitReason = function(p1)
 		-- upvalues: messageBusService (ref), captureModeMessageId (ref)
-		return messageBusService:Subscribe(captureModeMessageId, p0, true, false)
+		return messageBusService:Subscribe(captureModeMessageId, p1, true, false)
 	end
 }

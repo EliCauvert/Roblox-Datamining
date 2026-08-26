@@ -6,12 +6,12 @@ local sin = math.sin
 local cos = math.cos
 local sqrt = math.sqrt
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: sqrt (ref)
-	return p0 / (sqrt(p2 * p1) * 2), sqrt(p1 / p2) / 2 / 3.14159265359
+	return p1 / (sqrt(p3 * p2) * 2), sqrt(p2 / p3) / 2 / 3.14159265359
 end
 
-return function(p3, p4)
+return function(p1, p2)
 	-- upvalues: assign (ref), sqrt (ref), exp (ref), cos (ref), sin (ref), abs (ref)
 	local t = {
 		dampingRatio = 1,
@@ -20,8 +20,8 @@ return function(p3, p4)
 		restingPositionLimit = 0.01
 	}
 	
-	if p4 ~= nil then
-		assign(t, p4)
+	if p2 ~= nil then
+		assign(t, p2)
 	end
 	local dampingRatio, frequency
 	local _ = nil
@@ -44,60 +44,60 @@ return function(p3, p4)
 	assert(restingPositionLimit >= 0, "Expected restingPositionLimit >= 0")
 	
 	return {
-		step = function(p5, p6)
-			-- upvalues: p3 (ref), dampingRatio (ref), var1 (ref), exp (copy), sqrt (copy), cos (copy), sin (copy), p3 (ref), abs (copy), restingVelocityLimit (ref), restingPositionLimit (ref)
-			local var5, var6
-			local velocity = p5.velocity or 0
-			local var3 = p5.value - p3
-			local var4 = exp(-p6 * dampingRatio * var1)
+		step = function(p3, p4)
+			-- upvalues: p1 (ref), dampingRatio (ref), var1 (ref), exp (copy), sqrt (copy), cos (copy), sin (copy), p1 (ref), abs (copy), restingVelocityLimit (ref), restingPositionLimit (ref)
+			local var2, var3
+			local velocity = p3.velocity or 0
+			local var4 = p3.value - p1
+			local var5 = exp(-p4 * dampingRatio * var1)
 			local _ = nil
 			local _ = nil
 			
 			if dampingRatio == 1 then
-				var5 = (velocity * p6 + var3 * (var1 * p6 + 1)) * var4 + p3
-				var6 = (velocity - var1 * p6 * (var3 * var1 + velocity)) * var4
+				var2 = (velocity * p4 + var4 * (var1 * p4 + 1)) * var5 + p1
+				var3 = (velocity - var1 * p4 * (var4 * var1 + velocity)) * var5
 			elseif dampingRatio < 1 then
-				local var10
+				local var6
 				local var7 = sqrt(1 - dampingRatio * dampingRatio)
-				local var8 = cos(var1 * var7 * p6)
-				local var9 = sin(var1 * var7 * p6)
+				local var8 = cos(var1 * var7 * p4)
+				local var9 = sin(var1 * var7 * p4)
 				local _ = nil
 				
 				if var7 > 0.0001 then
-					var10 = var9 / var7
+					var6 = var9 / var7
 				else
-					local var11 = p6 * var1
-					var10 = var11 + (var11 * var11 * (var7 * var7) * (var7 * var7) / 20 - var7 * var7) * (var11 * var11 * var11) / 6
+					local var10 = p4 * var1
+					var6 = var10 + (var10 * var10 * (var7 * var7) * (var7 * var7) / 20 - var7 * var7) * (var10 * var10 * var10) / 6
 				end
-				local var12
+				local var11
 				local _ = nil
 				
 				if var1 * var7 > 0.0001 then
-					var12 = var9 / (var1 * var7)
+					var11 = var9 / (var1 * var7)
 				else
-					local var13 = var1 * var7
-					var12 = p6 + (p6 * p6 * (var13 * var13) * (var13 * var13) / 20 - var13 * var13) * (p6 * p6 * p6) / 6
+					local var12 = var1 * var7
+					var11 = p4 + (p4 * p4 * (var12 * var12) * (var12 * var12) / 20 - var12 * var12) * (p4 * p4 * p4) / 6
 				end
-				var5 = (var3 * (var8 + dampingRatio * var10) + velocity * var12) * var4 + p3
-				var6 = (velocity * (var8 - var10 * dampingRatio) - var3 * (var10 * var1)) * var4
+				var2 = (var4 * (var8 + dampingRatio * var6) + velocity * var11) * var5 + p1
+				var3 = (velocity * (var8 - var6 * dampingRatio) - var4 * (var6 * var1)) * var5
 			else
-				local var14 = sqrt(dampingRatio * dampingRatio - 1)
-				local var15 = -var1 * (dampingRatio - var14)
-				local var16 = -var1 * (dampingRatio + var14)
-				local var17 = (velocity - var15 * var3) / (2 * var1 * var14)
-				local var18 = (var3 - var17) * exp(var15 * p6)
-				local var19 = var17 * exp(var16 * p6)
-				var5 = var18 + var19 + p3
-				var6 = var15 * var18 + var16 * var19
+				local var13 = sqrt(dampingRatio * dampingRatio - 1)
+				local var14 = -var1 * (dampingRatio - var13)
+				local var15 = -var1 * (dampingRatio + var13)
+				local var16 = (velocity - var14 * var4) / (2 * var1 * var13)
+				local var17 = (var4 - var16) * exp(var14 * p4)
+				local var18 = var16 * exp(var15 * p4)
+				var2 = var17 + var18 + p1
+				var3 = var14 * var17 + var15 * var18
 			end
-			local var20 = abs(var6) < restingVelocityLimit and abs(var5 - p3) < restingPositionLimit
+			local var19 = abs(var3) < restingVelocityLimit and abs(var2 - p1) < restingPositionLimit
 			
-			if var20 then
-				var5 = p3
-				var6 = 0
+			if var19 then
+				var2 = p1
+				var3 = 0
 			end
-			return { value = var5, velocity = var6, complete = var20 }
+			return { value = var2, velocity = var3, complete = var19 }
 		end,
-		startingValue = if p4 then p4.startingValue else nil
+		startingValue = if p2 then p2.startingValue else nil
 	}
 end

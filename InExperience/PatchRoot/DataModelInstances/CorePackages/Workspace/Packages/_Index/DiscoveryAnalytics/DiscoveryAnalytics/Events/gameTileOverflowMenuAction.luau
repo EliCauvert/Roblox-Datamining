@@ -5,7 +5,7 @@ local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventE
 local gameTileOverflowMenuActionThrottleHundrethsPercent = game:DefineFastInt("GameTileOverflowMenuActionThrottleHundrethsPercent", 0)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppFixExplicitFeedbackTelemetry = sharedFlagsModule.FFlagLuaAppFixExplicitFeedbackTelemetry
-local var4 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else tModule.string,
 	universeId = tModule.string,
 	sortId = tModule.optional(tModule.string),
@@ -15,15 +15,15 @@ local var4 = tModule.strictInterface({
 	contentType = if sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile then tModule.optional(tModule.string) else nil
 })
 
-return function(p0, p1)
-	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var4 (ref), gameTileOverflowMenuActionThrottleHundrethsPercent (ref), telemetryService (ref)
-	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p1 then
+return function(p1, p2)
+	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var1 (ref), gameTileOverflowMenuActionThrottleHundrethsPercent (ref), telemetryService (ref)
+	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p2 then
 		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", "event is missing context")
 	end
-	local var5, var6 = var4(p0)
+	local var2, var3 = var1(p1)
 	
-	if not var5 then
-		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", var6)
+	if not var2 then
+		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", var3)
 	end
 	telemetryService:LogEvent({
 		eventName = "gameTileOverflowMenuAction",
@@ -32,8 +32,8 @@ return function(p0, p1)
 		throttlingPercentage = gameTileOverflowMenuActionThrottleHundrethsPercent,
 		lastUpdated = { 25, 10, 15 }
 	}, {
-		eventContext = if fFlagLuaAppFixExplicitFeedbackTelemetry then p1 else nil,
+		eventContext = if fFlagLuaAppFixExplicitFeedbackTelemetry then p2 else nil,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p0
+		customFields = p1
 	})
 end

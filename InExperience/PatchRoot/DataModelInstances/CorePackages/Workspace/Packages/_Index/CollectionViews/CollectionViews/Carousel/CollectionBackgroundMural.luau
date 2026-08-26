@@ -9,8 +9,8 @@ return reactModule.memo(function(value)
 		ImageTransparency = 0,
 		BackgroundTransparency = 1,
 		Image = value.backgroundMuralUrl,
-		Size = value.containerSizeBinding:map(function(p0)
-			return UDim2.new(1, 0, 0, p0.Y)
+		Size = value.containerSizeBinding:map(function(p1)
+			return UDim2.new(1, 0, 0, p1.Y)
 		end),
 		ZIndex = value.ZIndex or -1,
 		LayoutOrder = value.LayoutOrder,

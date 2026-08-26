@@ -4,16 +4,16 @@ local textModule = require(foundation.Components.Text)
 local _ = require(foundation.Components.Types)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: reactModule (ref), textModule (ref), withCommonPropsModule (ref)
-	return reactModule.createElement(textModule, withCommonPropsModule(p0, {
-		Text = p0.text,
+	return reactModule.createElement(textModule, withCommonPropsModule(p1, {
+		Text = p1.text,
 		tag = {
 			["size-full-0 auto-y text-caption-small text-align-x-left text-align-y-top text-wrap"] = true,
-			["content-action-alert"] = p0.hasError,
-			["content-muted"] = p0.isDisabled and not p0.hasError,
-			["content-default"] = not p0.isDisabled and not p0.hasError
+			["content-action-alert"] = p1.hasError,
+			["content-muted"] = p1.isDisabled and not p1.hasError,
+			["content-default"] = not p1.isDisabled and not p1.hasError
 		},
-		ref = p1
+		ref = p2
 	}))
 end))

@@ -6,15 +6,15 @@ local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packag
 local textButton = UIBloxModule.App.Button.TextButton
 local reportActionSelection = roactModule.PureComponent:extend("ReportActionSelection")
 
-local var5 = function() end
+local var1 = function() end
 
 reportActionSelection.defaultProps = {
 	isMuted = true,
 	isBlocked = true,
 	ZIndex = 1,
 	uiScale = 1.3,
-	onCancelActivated = var5,
-	onConfirmActivated = var5
+	onCancelActivated = var1,
+	onConfirmActivated = var1
 }
 reportActionSelection.validateProps = tModule.strictInterface({
 	mutedTitleText = tModule.string,
@@ -33,31 +33,31 @@ reportActionSelection.validateProps = tModule.strictInterface({
 	uiScale = tModule.optional(tModule.number)
 })
 
-function reportActionSelection.init(p0)
+function reportActionSelection.init(p1)
 	function p0.onCancelActivated()
-		-- upvalues: p0 (ref)
-		p0.props.onCancelActivated()
+		-- upvalues: p1 (ref)
+		p1.props.onCancelActivated()
 	end
 	
 	function p0.onConfirmActivated()
-		-- upvalues: p0 (ref)
-		p0.props.onConfirmActivated()
+		-- upvalues: p1 (ref)
+		p1.props.onConfirmActivated()
 	end
 	
 	local blockedTitleText = nil
 	local blockedSubtitleText = nil
 	
-	if p0.props.isMuted and p0.props.isBlocked then
-		blockedTitleText = p0.props.mutedAndBlockedTitleText
-		blockedSubtitleText = p0.props.mutedAndBlockedSubtitleText
-	elseif p0.props.isMuted then
-		blockedTitleText = p0.props.mutedTitleText
-		blockedSubtitleText = p0.props.mutedSubtitleText
-	elseif p0.props.isBlocked then
-		blockedTitleText = p0.props.blockedTitleText
-		blockedSubtitleText = p0.props.blockedSubtitleText
+	if p1.props.isMuted and p1.props.isBlocked then
+		blockedTitleText = p1.props.mutedAndBlockedTitleText
+		blockedSubtitleText = p1.props.mutedAndBlockedSubtitleText
+	elseif p1.props.isMuted then
+		blockedTitleText = p1.props.mutedTitleText
+		blockedSubtitleText = p1.props.mutedSubtitleText
+	elseif p1.props.isBlocked then
+		blockedTitleText = p1.props.blockedTitleText
+		blockedSubtitleText = p1.props.blockedSubtitleText
 	end
-	p0:setState({
+	p1:setState({
 		titleText = blockedTitleText,
 		subtitleText = blockedSubtitleText
 	})
@@ -89,9 +89,9 @@ function reportActionSelection.render(p1)
 				}
 			}
 		}
-	end, function(p3)
+	end, function(p2)
 		-- upvalues: roactModule (copy), p1 (ref), textButton (copy), UIBloxModule (copy)
-		local baseSize = p3.Font.BaseSize
+		local baseSize = p2.Font.BaseSize
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -112,10 +112,10 @@ function reportActionSelection.render(p1)
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Text = p1.state.titleText,
-				TextColor3 = p3.Theme.TextEmphasis.Color,
-				TextTransparency = p3.Theme.TextEmphasis.Transparency,
-				TextSize = p3.Font.Header1.RelativeSize * baseSize,
-				Font = p3.Font.Header1.Font,
+				TextColor3 = p2.Theme.TextEmphasis.Color,
+				TextTransparency = p2.Theme.TextEmphasis.Transparency,
+				TextSize = p2.Font.Header1.RelativeSize * baseSize,
+				Font = p2.Font.Header1.Font,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
 			subtitle = roactModule.createElement("TextLabel", {
@@ -124,10 +124,10 @@ function reportActionSelection.render(p1)
 				LayoutOrder = 2,
 				Size = UDim2.fromOffset(612, 0),
 				Text = p1.state.subtitleText,
-				TextColor3 = p3.Theme.TextEmphasis.Color,
-				TextTransparency = p3.Theme.TextEmphasis.Transparency,
-				TextSize = p3.Font.CaptionHeader.RelativeSize * baseSize,
-				Font = p3.Font.CaptionHeader.Font,
+				TextColor3 = p2.Theme.TextEmphasis.Color,
+				TextTransparency = p2.Theme.TextEmphasis.Transparency,
+				TextSize = p2.Font.CaptionHeader.RelativeSize * baseSize,
+				Font = p2.Font.CaptionHeader.Font,
 				AutomaticSize = Enum.AutomaticSize.Y
 			}),
 			spacer = roactModule.createElement("Frame", {
@@ -151,8 +151,8 @@ function reportActionSelection.render(p1)
 				cancelContainer = roactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					LayoutOrder = 1,
-					BackgroundColor3 = p3.Theme.SystemPrimaryContent.Color,
-					BackgroundTransparency = p3.Theme.SystemPrimaryContent.Transparency,
+					BackgroundColor3 = p2.Theme.SystemPrimaryContent.Color,
+					BackgroundTransparency = p2.Theme.SystemPrimaryContent.Transparency,
 					Size = UDim2.fromOffset(234, 44)
 				}, {
 					uiCorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),

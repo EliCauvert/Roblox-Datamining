@@ -8,7 +8,7 @@ local incomingTransferHomepagePromptDismissModule = require(currencyTransfers.Ut
 local appPage = require(parent.RobloxAppEnums).AppPage
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var3 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
 local function parseTransferRequestIdFromUrl(value)
 	local matchIndex = string.find(string.lower(value), "transferrequestid=", 1, true)
@@ -18,28 +18,28 @@ local function parseTransferRequestIdFromUrl(value)
 	end
 	local substring = string.sub(value, matchIndex + 18)
 	local matchIndex_1 = string.find(substring, "&", 1, true)
-	local var8 = if matchIndex_1 then string.sub(substring, 1, matchIndex_1 - 1) else substring
+	local var2 = if matchIndex_1 then string.sub(substring, 1, matchIndex_1 - 1) else substring
 	
-	return if var8 == "" then nil else var8
+	return if var2 == "" then nil else var2
 end
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: parseTransferRequestIdFromUrl (ref)
-	local transferId = p0.transferId
+	local transferId = p1.transferId
 	
 	if typeof(transferId) == "string" and transferId ~= "" then
 		return transferId
 	end
-	local url = p0.url
+	local url = p1.url
 	
 	return if typeof(url) == "string" and url ~= "" then parseTransferRequestIdFromUrl(url) else nil
 end
 
 return function(a, _, p1)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), parseTransferRequestIdFromUrl (ref), incomingTransferHomepagePromptDismissModule (ref), sduiParseHelpers (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateDown (ref)
-	local var9 = if a then a.actionParams else nil
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), parseTransferRequestIdFromUrl (ref), incomingTransferHomepagePromptDismissModule (ref), sduiParseHelpers (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	local var2 = if a then a.actionParams else nil
 	
-	if var9 == nil then
+	if var2 == nil then
 		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.OpenIncomingTransferUpsell
@@ -47,17 +47,17 @@ return function(a, _, p1)
 		
 		return
 	end
-	local url, var10
-	assert(var9, "actionParams must exist")
-	local transferId = var9.transferId
+	local url, var3
+	assert(var2, "actionParams must exist")
+	local transferId = var2.transferId
 	
 	if typeof(transferId) == "string" and transferId ~= "" then
-		var10 = transferId
+		var3 = transferId
 	else
-		url = var9.url
-		var10 = if typeof(url) == "string" and url ~= "" then parseTransferRequestIdFromUrl(url) else nil
+		url = var2.url
+		var3 = if typeof(url) == "string" and url ~= "" then parseTransferRequestIdFromUrl(url) else nil
 	end
-	if var10 == nil then
+	if var3 == nil then
 		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Invalid or missing transferId (set transferId or url with transferrequestid)",
 			propName = "transferId",
@@ -66,7 +66,7 @@ return function(a, _, p1)
 		
 		return
 	end
-	transferId = var9.promptType
+	transferId = var2.promptType
 	
 	if typeof(transferId) ~= "string" then
 		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
@@ -77,7 +77,7 @@ return function(a, _, p1)
 		
 		return
 	end
-	url = var9.promptId
+	url = var2.promptId
 	
 	if url ~= nil and typeof(url) ~= "string" then
 		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
@@ -88,7 +88,7 @@ return function(a, _, p1)
 		
 		return
 	end
-	local var11 = incomingTransferHomepagePromptDismissModule.createCallbacks({
+	local var4 = incomingTransferHomepagePromptDismissModule.createCallbacks({
 		networking = p1.dependencies.networking,
 		promptId = url,
 		optimisticHidePromptType = transferId,
@@ -104,14 +104,14 @@ return function(a, _, p1)
 		name = appPage.TransferRobuxFlow,
 		extraProps = {
 			direction = "receive",
-			transferId = var10,
-			onPromptOptimisticHide = var11.optimisticHide,
-			onPromptDismissCommitted = var11.commitDismiss
+			transferId = var3,
+			onPromptOptimisticHide = var4.optimisticHide,
+			onPromptDismissCommitted = var4.commitDismiss
 		}
 	}
 	
 	if fFlagSignalsNavP3Dispatch then
-		var3.down(var3.fromLegacyPage(t))
+		var1.down(var1.fromLegacyPage(t))
 		
 		return
 	end

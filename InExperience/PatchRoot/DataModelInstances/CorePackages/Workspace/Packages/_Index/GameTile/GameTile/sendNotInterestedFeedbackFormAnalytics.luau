@@ -4,7 +4,7 @@ local tModule = require(parent.t)
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local notInterestedFeedbackFormActionThrottleHundredthsPercent = game:DefineFastInt("NotInterestedFeedbackFormActionThrottleHundredthsPercent", 0)
 local fFlagLuaAppFixExplicitFeedbackTelemetry = require(parent.SharedFlags).FFlagLuaAppFixExplicitFeedbackTelemetry
-local var3 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else tModule.string,
 	universeId = tModule.string,
 	sortId = tModule.optional(tModule.string),
@@ -18,19 +18,19 @@ local t = {
 	lastUpdated = { 25, 10, 22 }
 }
 
-return function(p0, p1)
-	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var3 (ref), telemetryService (ref), t (ref)
-	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p1 then
+return function(p1, p2)
+	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var1 (ref), telemetryService (ref), t (ref)
+	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p2 then
 		discoveryEventErrorLogger.reportError("NotInterestedFeedbackFormActionInvalidInterface", "event is missing context")
 	end
-	local var5, var6 = var3(p0)
+	local var2, var3 = var1(p1)
 	
-	if not var5 then
-		discoveryEventErrorLogger.reportError("NotInterestedFeedbackFormActionInvalidInterface", var6)
+	if not var2 then
+		discoveryEventErrorLogger.reportError("NotInterestedFeedbackFormActionInvalidInterface", var3)
 	end
 	telemetryService:LogEvent(t, {
-		eventContext = if fFlagLuaAppFixExplicitFeedbackTelemetry then p1 else nil,
+		eventContext = if fFlagLuaAppFixExplicitFeedbackTelemetry then p2 else nil,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p0
+		customFields = p1
 	})
 end

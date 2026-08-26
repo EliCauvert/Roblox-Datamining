@@ -10,23 +10,23 @@ local withLocalization = require(corePackagesService.Workspace.Packages.Localiza
 local _ = require(parent.Enums.PlatformEnum)
 local buttonEnumModule = require(parent.Enums.ButtonEnum)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), FTUXSlideshowDataModule (ref), withLocalization (ref), buttonType (ref), buttonEnumModule (ref), reactModule (ref), button (ref)
 	local font = useStyle().Font
-	local increaseCurrentIndex = p0.increaseCurrentIndex
-	local button_1 = FTUXSlideshowDataModule[p0.platform][p0.currentIndex].button
+	local increaseCurrentIndex = p1.increaseCurrentIndex
+	local button_1 = FTUXSlideshowDataModule[p1.platform][p1.currentIndex].button
 	
 	return withLocalization({
 		skip = "CoreScripts.VRFTUX.Action.Skip",
 		next = "CoreScripts.VRFTUX.Action.Next"
-	})(function(p1)
+	})(function(p2)
 		-- upvalues: buttonType (copy), button_1 (ref), buttonEnumModule (copy), reactModule (copy), button (copy), font (ref), increaseCurrentIndex (ref)
 		local secondary = buttonType.Secondary
-		local skip = p1.skip
+		local skip = p2.skip
 		
 		if button_1 == buttonEnumModule.NextButton then
 			secondary = buttonType.PrimaryContextual
-			skip = p1.next
+			skip = p2.next
 		end
 		return reactModule.createElement(button, {
 			layoutOrder = 4,

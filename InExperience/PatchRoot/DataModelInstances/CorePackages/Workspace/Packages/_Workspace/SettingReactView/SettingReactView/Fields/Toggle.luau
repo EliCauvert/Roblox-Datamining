@@ -3,12 +3,12 @@ local _ = require(parent.SettingsService)
 local reactModule = require(parent.React)
 local toggle = require(parent.Foundation).Toggle
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), toggle (ref)
-	local var1, var2 = reactModule.useState(p0.onChanged:get())
-	p0.onChanged:connect(function(p1)
+	local var1, var2 = reactModule.useState(p1.onChanged:get())
+	p1.onChanged:connect(function(p2)
 		-- upvalues: var2 (ref)
-		var2(p1)
+		var2(p2)
 	end)
 	
 	return reactModule.createElement(toggle, {
@@ -16,8 +16,8 @@ return function(p0)
 		isDisabled = false,
 		isChecked = var1,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: p0 (ref), var1 (ref)
-			p0.onChanged:set(not var1)
+			-- upvalues: p1 (ref), var1 (ref)
+			p1.onChanged:set(not var1)
 		end, { var1 })
 	})
 end

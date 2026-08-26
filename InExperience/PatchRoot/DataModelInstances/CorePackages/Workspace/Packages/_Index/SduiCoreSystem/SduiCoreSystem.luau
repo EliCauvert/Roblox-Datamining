@@ -53,8 +53,8 @@ return {
 	getProtoVariableMapper = function()
 		return require(script.ClientBinding.ProtoVariableMapper)
 	end,
-	createBuilderConfig = function(p0)
-		return require(script.ClientBinding.createBuilderConfig)(p0)
+	createBuilderConfig = function(p1)
+		return require(script.ClientBinding.createBuilderConfig)(p1)
 	end,
 	getSduiActionHandlerRegistry = function()
 		return require(script.getSduiActionHandlerRegistry)()

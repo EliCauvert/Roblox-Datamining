@@ -7,10 +7,10 @@ local text = foundationModule.Text
 local icon = foundationModule.Icon
 local enums = foundationModule.Enums
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), icon (ref), enums (ref), text (ref)
-	local timedOptionDays = p0.timedOptionDays
-	local var2 = useLocalization({
+	local timedOptionDays = p1.timedOptionDays
+	local var1 = useLocalization({
 		infinite = "Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite",
 		timedOptionText = {
 			"Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText",
@@ -30,7 +30,7 @@ return function(p0)
 		DurationText = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "auto-xy text-title-small content-default",
-			Text = if timedOptionDays and timedOptionDays ~= 0 then var2.timedOptionText else var2.infinite
+			Text = if timedOptionDays and timedOptionDays ~= 0 then var1.timedOptionText else var1.infinite
 		})
 	})
 end

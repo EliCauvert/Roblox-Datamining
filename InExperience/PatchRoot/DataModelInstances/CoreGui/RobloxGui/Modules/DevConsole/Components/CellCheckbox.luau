@@ -8,20 +8,20 @@ local _ = constantsModule.Font.MainWindowBold
 local checkboxHeight = constantsModule.UtilityBarFormatting.CheckboxHeight
 local _ = constantsModule.UtilityBarFormatting.CheckboxInnerPadding
 
-return function(p0)
+return function(p1)
 	-- upvalues: roactModule (ref), checkboxModule (ref), checkboxHeight (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = p0.size,
-		Position = p0.pos,
-		LayoutOrder = p0.LayoutOrder
+		Size = p1.size,
+		Position = p1.pos,
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Checkbox = roactModule.createElement(checkboxModule, {
-			Name = p0.name,
-			IsSelected = p0.isSelected,
+			Name = p1.name,
+			IsSelected = p1.isSelected,
 			Size = UDim2.new(0, checkboxHeight, 0, checkboxHeight),
 			Position = UDim2.new(0, 0, 0.5, -checkboxHeight / 2),
-			OnSelectedStateChanged = p0.OnCheckboxClicked
+			OnSelectedStateChanged = p1.OnCheckboxClicked
 		})
 	})
 end

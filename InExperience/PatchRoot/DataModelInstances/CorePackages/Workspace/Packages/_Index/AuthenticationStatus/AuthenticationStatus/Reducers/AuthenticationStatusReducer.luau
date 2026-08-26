@@ -4,12 +4,12 @@ local loginStatus = require(parent.RobloxAppEnums).LoginStatus
 local setAuthenticationStatusModule = require(authenticationStatus.Actions.SetAuthenticationStatus)
 local cryoModule = require(parent.Cryo)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: loginStatus (ref), setAuthenticationStatusModule (ref), cryoModule (ref)
-	p0 = p0 or { status = loginStatus.UNKNOWN }
+	p1 = p1 or { status = loginStatus.UNKNOWN }
 	
-	if p1.type == setAuthenticationStatusModule.name then
-		p0 = cryoModule.Dictionary.join(p0, { status = p1.status })
+	if p2.type == setAuthenticationStatusModule.name then
+		p1 = cryoModule.Dictionary.join(p1, { status = p2.status })
 	end
-	return p0
+	return p1
 end

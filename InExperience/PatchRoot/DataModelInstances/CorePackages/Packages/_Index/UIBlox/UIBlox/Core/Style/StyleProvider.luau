@@ -16,7 +16,7 @@ local getFoundationTokens = tokensModule.getFoundationTokens
 local mappers = tokensModule.Mappers
 local parent_2 = parent_1.Parent
 local object = require(parent_2.LuauPolyfill).Object
-local var9 = require(parent_2.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting")
+local var1 = require(parent_2.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting")
 local styleProvider = roactModule.Component:extend("StyleProvider")
 styleProvider.validateProps = tModule.strictInterface({
 	style = tModule.optional(validateStyleModule),
@@ -29,70 +29,70 @@ local t = {
 		PreferredTransparency = 1,
 		ReducedMotion = false,
 		Scale = 1,
-		PreferredTextSize = if var9 then Enum.PreferredTextSize.Medium else nil
+		PreferredTextSize = if var1 then Enum.PreferredTextSize.Medium else nil
 	}
 }
 local t_1 = { textSizeOffset = 0 }
 
-function styleProvider.init(p0)
-	p0:setState({
-		style = p0.props.style,
-		derivedValues = p0.props.derivedValues
+function styleProvider.init(p1)
+	p1:setState({
+		style = p1.props.style,
+		derivedValues = p1.props.derivedValues
 	})
 end
 
 function styleProvider.updateTextSizeOffset(value, p1)
 	-- upvalues: getTextSizeOffsetModule (ref)
-	local var13, var14 = getTextSizeOffsetModule(p1)
+	local var2, var3 = getTextSizeOffsetModule(p1)
 	
-	if var13 then
-		value:setState({ derivedValues = { textSizeOffset = var14 } })
+	if var2 then
+		value:setState({ derivedValues = { textSizeOffset = var3 } })
 	end
 end
 
-function styleProvider.didUpdate(p2, _, p3)
-	if p3.style and p3.style.Settings.PreferredTextSize ~= p2.state.style.Settings.PreferredTextSize then
-		p2:updateTextSizeOffset(p2.state.style.Font.Body.Font)
+function styleProvider.didUpdate(p1, _, p2)
+	if p2.style and p2.style.Settings.PreferredTextSize ~= p1.state.style.Settings.PreferredTextSize then
+		p1:updateTextSizeOffset(p1.state.style.Font.Body.Font)
 	end
 end
 
-function styleProvider.render(p4)
+function styleProvider.render(p1)
 	-- upvalues: object (ref), t (ref), t_1 (ref), themesModule (ref), constantsModule (ref), getTokens (ref), getFoundationTokens (ref), mappers (ref), getFontFromNameModule (ref), roactModule (ref), styleContextModule (ref)
-	local var15 = object.assign({}, t, p4.state.style)
-	local var16 = object.assign({}, t_1, p4.state.derivedValues)
+	local var2 = object.assign({}, t, p1.state.style)
+	local var3 = object.assign({}, t_1, p1.state.derivedValues)
 	
-	if var15.Tokens == nil then
-		local var17 = if var15.Theme == themesModule.LightTheme then constantsModule.ThemeName.Light else constantsModule.ThemeName.Dark
+	if var2.Tokens == nil then
+		local var4 = if var2.Theme == themesModule.LightTheme then constantsModule.ThemeName.Light else constantsModule.ThemeName.Dark
 		local defaultDeviceType = constantsModule.DefaultDeviceType
-		local scale = var15.Settings.Scale
-		local var18 = getFoundationTokens(defaultDeviceType, var17, scale)
-		local var19 = mappers.mapColorTokensToFoundation(getTokens(defaultDeviceType, var17, scale), var18)
-		var15.Theme = mappers.mapThemeToFoundation(var15.Theme, var18)
-		var15.Tokens = mappers.addFoundationFlatKeys(var19, var18)
+		local scale = var2.Settings.Scale
+		local var5 = getFoundationTokens(defaultDeviceType, var4, scale)
+		local var6 = mappers.mapColorTokensToFoundation(getTokens(defaultDeviceType, var4, scale), var5)
+		var2.Theme = mappers.mapThemeToFoundation(var2.Theme, var5)
+		var2.Tokens = mappers.addFoundationFlatKeys(var6, var5)
 	end
-	if var15.Font == nil then
-		var15.Font = getFontFromNameModule(constantsModule.FontName.Gotham, var15.Tokens)
+	if var2.Font == nil then
+		var2.Font = getFontFromNameModule(constantsModule.FontName.Gotham, var2.Tokens)
 	end
 	return roactModule.createElement(styleContextModule.Provider, {
 		value = {
-			style = var15,
-			update = function(_, p5)
-				-- upvalues: p4 (ref)
-				if p4.mounted then
-					p4:setState({ style = p5 })
+			style = var2,
+			update = function(_, p2)
+				-- upvalues: p1 (ref)
+				if p1.mounted then
+					p1:setState({ style = p2 })
 				end
 			end,
-			derivedValues = var16
+			derivedValues = var3
 		}
-	}, roactModule.oneChild(p4.props[roactModule.Children]))
+	}, roactModule.oneChild(p1.props[roactModule.Children]))
 end
 
-function styleProvider.didMount(p6)
-	p6.mounted = true
+function styleProvider.didMount(p1)
+	p1.mounted = true
 end
 
-function styleProvider.willUnmount(p7)
-	p7.mounted = false
+function styleProvider.willUnmount(p1)
+	p1.mounted = false
 end
 
 return styleProvider

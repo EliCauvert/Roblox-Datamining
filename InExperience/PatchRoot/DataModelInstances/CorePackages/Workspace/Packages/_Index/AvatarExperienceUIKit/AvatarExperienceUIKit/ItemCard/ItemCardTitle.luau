@@ -6,16 +6,16 @@ local useTokens = foundationModule.Hooks.useTokens
 local fFlagAXAddTextXAlignmentProp = require(parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 local fFlagAXRootSlotBasedEditorFlag = require(parent.AvatarExperienceFlags).FFlagAXRootSlotBasedEditorFlag
 
-local function ItemCardTitle(p0)
+local function ItemCardTitle(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), text (ref), fFlagAXRootSlotBasedEditorFlag (ref), fFlagAXAddTextXAlignmentProp (ref)
-	local var3 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(text, {
-		textStyle = var3.Color.Content.Emphasis,
-		fontStyle = if fFlagAXRootSlotBasedEditorFlag and p0.titleTextSize then p0.titleTextSize else var3.Typography.TitleMedium,
-		LayoutOrder = p0.LayoutOrder,
-		Text = p0.title,
-		TextXAlignment = if fFlagAXAddTextXAlignmentProp and p0.TextXAlignment then p0.TextXAlignment else Enum.TextXAlignment.Left,
+		textStyle = var1.Color.Content.Emphasis,
+		fontStyle = if fFlagAXRootSlotBasedEditorFlag and p1.titleTextSize then p1.titleTextSize else var1.Typography.TitleMedium,
+		LayoutOrder = p1.LayoutOrder,
+		Text = p1.title,
+		TextXAlignment = if fFlagAXAddTextXAlignmentProp and p1.TextXAlignment then p1.TextXAlignment else Enum.TextXAlignment.Left,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextTruncate = Enum.TextTruncate.SplitWord

@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return type(p0) == "number" and (p0 ~= 1e999 and p0 == math.floor(p0))
+﻿return function(p1)
+	return type(p1) == "number" and (p1 ~= 1e999 and p1 == math.floor(p1))
 end

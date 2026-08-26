@@ -1,11 +1,11 @@
-﻿return function(p0, p1)
-	for i = #p0, 1, -1 do
-		local var0 = p1(p0[i], i)
+﻿return function(p1, p2)
+	for i = #p1, 1, -1 do
+		local var1 = p2(p1[i], i)
 		
-		if var0 == nil then
+		if var1 == nil then
 			continue
 		end
-		return var0
+		return var1
 	end
 	return nil
 end

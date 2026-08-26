@@ -11,52 +11,52 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local gameFavorite = discoveryAnalyticsModule.Events.gameFavorite
 local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 
-return function(p0, _, p1, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameFavorite (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
-	local var6 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var6 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing action params",
 			name = sduiActionType.ToggleExperienceFavorite
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var6.universeId
+	local universeId = var1.universeId
 	
 	if universeId == nil or typeof(universeId) ~= "string" then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing universeId",
 			name = sduiActionType.ToggleExperienceFavorite
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	local placeId = var6.placeId
-	local ctx = var6.ctx or ""
+	local placeId = var1.placeId
+	local ctx = var1.ctx or ""
 	local favoritesStore = game.getFavoritesStore(false)
-	local var9 = favoritesStore.getAndFetchFavorite(universeId).data(false)
-	local var10 = not (var9 ~= nil and var9.isFavorited)
+	local var2 = favoritesStore.getAndFetchFavorite(universeId).data(false)
+	local var3 = not (var2 ~= nil and var2.isFavorited)
 	gameFavorite({
 		uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
 		ctx = ctx,
 		placeId = tostring(placeId),
-		state = if var10 then "on" else "off"
+		state = if var3 then "on" else "off"
 	}, ctx)
-	local var11 = favoritesStore.updateFavorite(universeId, var10)
+	local var4 = favoritesStore.updateFavorite(universeId, var3)
 	local t = {}
-	t.dispose = signalsModule.createEffect(function(p2)
-		-- upvalues: var11 (ref), p1 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), t (ref)
-		local var13 = var11(p2)
+	t.dispose = signalsModule.createEffect(function(p3)
+		-- upvalues: var4 (ref), p2 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), t (ref)
+		local var5 = var4(p3)
 		
-		if var13 == nil then return end
-		if var13.type == "error" then
-			local configKey = p1.configKey
+		if var5 == nil then return end
+		if var5.type == "error" then
+			local configKey = p2.configKey
 			
 			if configKey then
 				getSduiPageEntrySnackbarStore().show(configKey, {
-					title = p1.dependencies.localization:Format("Feature.Toast.NetworkingError.SomethingIsWrong"),
+					title = p2.dependencies.localization:Format("Feature.Toast.NetworkingError.SomethingIsWrong"),
 					icon = foundationModule.Enums.IconName.TriangleExclamation
 				})
 			end

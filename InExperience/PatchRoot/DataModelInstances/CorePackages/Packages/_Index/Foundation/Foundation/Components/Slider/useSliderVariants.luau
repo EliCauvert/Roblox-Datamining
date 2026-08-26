@@ -6,7 +6,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local _ = require(foundation.Components.Types)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: sliderVariantModule (ref), inputSizeModule (ref)
 	return {
 		common = {
@@ -21,8 +21,8 @@ local function variantsFactory(p0)
 				fill = { tag = "bg-emphasis" },
 				knob = {
 					hasShadow = true,
-					style = p0.Color.Extended.White.White_100,
-					dragStyle = p0.Color.ActionEmphasis.Background
+					style = p1.Color.Extended.White.White_100,
+					dragStyle = p1.Color.ActionEmphasis.Background
 				}
 			},
 			[sliderVariantModule.Standard] = {
@@ -30,28 +30,28 @@ local function variantsFactory(p0)
 				fill = { tag = "bg-system-contrast" },
 				knob = {
 					hasShadow = false,
-					style = p0.Color.System.Contrast,
-					dragStyle = p0.Color.System.Contrast
+					style = p1.Color.System.Contrast,
+					dragStyle = p1.Color.System.Contrast
 				}
 			},
 			[sliderVariantModule.Utility] = {
 				knob = {
 					hasShadow = true,
-					style = p0.Color.None,
-					dragStyle = p0.Color.None,
+					style = p1.Color.None,
+					dragStyle = p1.Color.None,
 					stroke = {
-						Color = p0.Color.System.Contrast.Color3,
-						Transparency = p0.Color.System.Contrast.Transparency,
-						Thickness = p0.Stroke.Thicker
+						Color = p1.Color.System.Contrast.Color3,
+						Transparency = p1.Color.System.Contrast.Transparency,
+						Thickness = p1.Stroke.Thicker
 					}
 				}
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = { hitbox = { height = p0.Size.Size_300 } },
-			[inputSizeModule.Small] = { hitbox = { height = p0.Size.Size_400 } },
-			[inputSizeModule.Medium] = { hitbox = { height = p0.Size.Size_500 } },
-			[inputSizeModule.Large] = { hitbox = { height = p0.Size.Size_700 } }
+			[inputSizeModule.XSmall] = { hitbox = { height = p1.Size.Size_300 } },
+			[inputSizeModule.Small] = { hitbox = { height = p1.Size.Size_400 } },
+			[inputSizeModule.Medium] = { hitbox = { height = p1.Size.Size_500 } },
+			[inputSizeModule.Large] = { hitbox = { height = p1.Size.Size_700 } }
 		}
 	}
 end

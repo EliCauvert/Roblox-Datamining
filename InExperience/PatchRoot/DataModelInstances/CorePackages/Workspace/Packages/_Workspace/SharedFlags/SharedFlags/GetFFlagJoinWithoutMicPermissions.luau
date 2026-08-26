@@ -1,10 +1,10 @@
 ﻿game:DefineFastFlag("JoinWithoutMicPermissions3", false)
-local var0 = true
+local var1 = true
 
-return function(p0)
-	-- upvalues: var0 (write)
-	if p0 ~= nil then
-		var0 = p0
+return function(p1)
+	-- upvalues: var1 (write)
+	if p1 ~= nil then
+		var1 = p1
 	end
-	return game:GetFastFlag("JoinWithoutMicPermissions3") and var0
+	return game:GetFastFlag("JoinWithoutMicPermissions3") and var1
 end

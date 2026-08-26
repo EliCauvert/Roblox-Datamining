@@ -6,15 +6,15 @@ local sendChatMessagePolicyModule = require(script.Parent.SendChatMessagePolicy)
 local tbl = setmetatable({}, sendChatMessagePolicyModule)
 tbl.__index = tbl
 
-function tbl.new(p0, p1, p2, p3, p4)
+function tbl.new(p1, p2, p3, p4, p5)
 	-- upvalues: name (ref), sendChatMessagePolicyModule (ref)
-	name:info("New policy constructed for conversationId: {} messageText: {}, replyingToId: {}", p1, p2, if p3 then p3.id else nil)
-	local var6 = sendChatMessagePolicyModule:new(p1, p3)
-	setmetatable(var6, p0)
-	var6.messageText = p2
-	var6.decorators = p4
+	name:info("New policy constructed for conversationId: {} messageText: {}, replyingToId: {}", p2, p3, if p4 then p4.id else nil)
+	local var1 = sendChatMessagePolicyModule:new(p2, p4)
+	setmetatable(var1, p1)
+	var1.messageText = p3
+	var1.decorators = p5
 	
-	return var6
+	return var1
 end
 
 function tbl:sendMessage(_)

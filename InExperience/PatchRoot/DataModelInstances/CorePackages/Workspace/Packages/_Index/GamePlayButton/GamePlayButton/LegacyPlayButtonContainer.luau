@@ -22,20 +22,20 @@ local fFlagLuaAppPlayButtonLoadingDurationTelemetry = require(parent.SharedFlags
 local fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP = require(parent.SharedFlags).FFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP
 local fIntLuaAppPlayButtonSecondaryButtonGap = require(parent.SharedFlags).FIntLuaAppPlayButtonSecondaryButtonGap
 
-local var11 = function(p0)
+local var1 = function(p1)
 	-- upvalues: useLocalization (ref), useTokens (ref), roactModule (ref), playButtonViewModule (ref), menuDirection (ref), inputSize (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = p0.Size,
-		LayoutOrder = p0.LayoutOrder
+		Size = p1.Size,
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		PlayButtonView = roactModule.createElement(playButtonViewModule, {
 			shouldLaunchWhenLoading = false,
 			shouldLaunchOnReleaseAfterUnmount = false,
 			useUIBloxButton = true,
-			playButtonState = p0.playButtonState,
-			gameProductInfo = p0.gameProductInfo,
+			playButtonState = p1.playButtonState,
+			gameProductInfo = p1.gameProductInfo,
 			localized = useLocalization({
 				join = "Feature.ExperienceDetails.PlayButtonText.ActionNeeded",
 				play = "Feature.ExperienceDetails.PlayButtonText.Play",
@@ -46,12 +46,12 @@ local var11 = function(p0)
 				waitingForParty = "Feature.Squads.Action.WaitingForParty"
 			}),
 			tokens = useTokens(),
-			onPlayButtonActivated = p0.onPlayButtonActivated,
-			onPlaySquadButtonActivated = p0.onPlaySquadButtonActivated or function() end,
+			onPlayButtonActivated = p1.onPlayButtonActivated,
+			onPlaySquadButtonActivated = p1.onPlaySquadButtonActivated or function() end,
 			squadButtonMenuDirection = menuDirection.Up,
 			buttonSize = inputSize.Large,
 			width = UDim.new(1, 0),
-			testId = p0.testId
+			testId = p1.testId
 		})
 	})
 end
@@ -105,32 +105,32 @@ function playButtonContainer.init(p1)
 	end else nil
 end
 
-function playButtonContainer.didMount(p3)
-	p3.isMounted = true
+function playButtonContainer.didMount(p1)
+	p1.isMounted = true
 end
 
-function playButtonContainer.willUnmount(p4)
-	p4.isMounted = false
+function playButtonContainer.willUnmount(p1)
+	p1.isMounted = false
 end
 
-function playButtonContainer.render(p5)
-	-- upvalues: fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (ref), fIntLuaAppPlayButtonSecondaryButtonGap (ref), roactModule (ref), var11 (ref), legacyPlayButtonModule (ref), fFlagLuaAppEnablePlaySquadButton (ref)
-	local size = p5.props.Size
-	local layoutOrder = p5.props.LayoutOrder
-	local playButtonState = p5.props.playButtonState
-	local gameProductInfo = p5.props.gameProductInfo
-	local var13 = if gameProductInfo then gameProductInfo.price else 0
+function playButtonContainer.render(p1)
+	-- upvalues: fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (ref), fIntLuaAppPlayButtonSecondaryButtonGap (ref), roactModule (ref), var1 (ref), legacyPlayButtonModule (ref), fFlagLuaAppEnablePlaySquadButton (ref)
+	local size = p1.props.Size
+	local layoutOrder = p1.props.LayoutOrder
+	local playButtonState = p1.props.playButtonState
+	local gameProductInfo = p1.props.gameProductInfo
+	local var2 = if gameProductInfo then gameProductInfo.price else 0
 	
-	if fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP and p5.props.shouldUseUnifiedPlayButtonView then
-		if p5.props.secondaryPlayButtonState == nil then
-			return roactModule.createElement(var11, {
+	if fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP and p1.props.shouldUseUnifiedPlayButtonView then
+		if p1.props.secondaryPlayButtonState == nil then
+			return roactModule.createElement(var1, {
 				Size = size,
 				LayoutOrder = layoutOrder,
 				playButtonState = playButtonState,
 				gameProductInfo = gameProductInfo,
-				onPlayButtonActivated = p5.onPlayButtonActivated,
-				onPlaySquadButtonActivated = p5.onPlaySquadButtonActivated,
-				testId = p5.props.testId
+				onPlayButtonActivated = p1.onPlayButtonActivated,
+				onPlaySquadButtonActivated = p1.onPlaySquadButtonActivated,
+				testId = p1.props.testId
 			})
 		end
 		local uDim2 = UDim2.new(0.5, -fIntLuaAppPlayButtonSecondaryButtonGap / 2, 1, 0)
@@ -146,35 +146,35 @@ function playButtonContainer.render(p5)
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, fIntLuaAppPlayButtonSecondaryButtonGap)
 			}),
-			PlayButton = roactModule.createElement(var11, {
+			PlayButton = roactModule.createElement(var1, {
 				LayoutOrder = 1,
 				Size = uDim2,
 				playButtonState = playButtonState,
 				gameProductInfo = gameProductInfo,
-				onPlayButtonActivated = p5.onPlayButtonActivated,
-				onPlaySquadButtonActivated = p5.onPlaySquadButtonActivated,
-				testId = p5.props.testId
+				onPlayButtonActivated = p1.onPlayButtonActivated,
+				onPlaySquadButtonActivated = p1.onPlaySquadButtonActivated,
+				testId = p1.props.testId
 			}),
-			SecondaryPlayButton = roactModule.createElement(var11, {
+			SecondaryPlayButton = roactModule.createElement(var1, {
 				LayoutOrder = 2,
 				Size = uDim2,
-				playButtonState = p5.props.secondaryPlayButtonState,
+				playButtonState = p1.props.secondaryPlayButtonState,
 				gameProductInfo = gameProductInfo,
-				onPlayButtonActivated = p5.onSecondaryPlayButtonActivated,
-				onPlaySquadButtonActivated = p5.onPlaySquadButtonActivated,
-				testId = if p5.props.testId then p5.props.testId .. "--secondary" else nil
+				onPlayButtonActivated = p1.onSecondaryPlayButtonActivated,
+				onPlaySquadButtonActivated = p1.onPlaySquadButtonActivated,
+				testId = if p1.props.testId then p1.props.testId .. "--secondary" else nil
 			})
 		})
-	elseif p5.props.secondaryPlayButtonState == nil then
+	elseif p1.props.secondaryPlayButtonState == nil then
 		return roactModule.createElement(legacyPlayButtonModule, {
 			Size = size,
 			LayoutOrder = layoutOrder,
 			playButtonState = playButtonState,
-			price = var13,
+			price = var2,
 			localizedFiatPrice = if gameProductInfo then gameProductInfo.localizedFiatPrice else "",
-			onPlayButtonActivated = p5.onPlayButtonActivated,
-			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then p5.onPlaySquadButtonActivated else nil,
-			testId = p5.props.testId
+			onPlayButtonActivated = p1.onPlayButtonActivated,
+			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then p1.onPlaySquadButtonActivated else nil,
+			testId = p1.props.testId
 		})
 	end
 	local uDim2 = UDim2.new(0.5, -fIntLuaAppPlayButtonSecondaryButtonGap / 2, 1, 0)
@@ -194,51 +194,51 @@ function playButtonContainer.render(p5)
 			LayoutOrder = 1,
 			Size = uDim2,
 			playButtonState = playButtonState,
-			price = var13,
+			price = var2,
 			localizedFiatPrice = if gameProductInfo then gameProductInfo.localizedFiatPrice else "",
-			onPlayButtonActivated = p5.onPlayButtonActivated,
-			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then p5.onPlaySquadButtonActivated else nil,
-			testId = p5.props.testId
+			onPlayButtonActivated = p1.onPlayButtonActivated,
+			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then p1.onPlaySquadButtonActivated else nil,
+			testId = p1.props.testId
 		}),
 		SecondaryPlayButton = roactModule.createElement(legacyPlayButtonModule, {
 			LayoutOrder = 2,
 			Size = uDim2,
-			playButtonState = p5.props.secondaryPlayButtonState,
-			price = var13,
+			playButtonState = p1.props.secondaryPlayButtonState,
+			price = var2,
 			localizedFiatPrice = if gameProductInfo then gameProductInfo.localizedFiatPrice else "",
-			onPlayButtonActivated = p5.onSecondaryPlayButtonActivated,
-			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then p5.onPlaySquadButtonActivated else nil,
-			testId = if p5.props.testId then p5.props.testId .. "--secondary" else nil
+			onPlayButtonActivated = p1.onSecondaryPlayButtonActivated,
+			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then p1.onPlaySquadButtonActivated else nil,
+			testId = if p1.props.testId then p1.props.testId .. "--secondary" else nil
 		})
 	})
 end
 
-return roactRoduxModule.connect(function(p7, p8)
+return roactRoduxModule.connect(function(p1, p2)
 	-- upvalues: gamesProductInfoReducer (ref)
 	return {
-		gameProductInfo = p7[gamesProductInfoReducer.key][p8.universeId]
+		gameProductInfo = p1[gamesProductInfoReducer.key][p2.universeId]
 	}
-end)(function(p6)
+end)(function(p1)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), usePlayButtonStateModule (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), useOnPlayButtonCallbackModule (ref), fFlagLuaAppEnablePlaySquadButton (ref), useOnPlaySquadButtonCallbackModule (ref), menuDirection (ref), playButtonStatesModule (ref), cryoModule (ref), roactModule (ref), playButtonContainer (ref)
-	local var16 = usePlayButtonStateModule(useRoactService(roactNetworking), p6.universeId, nil, nil, if fFlagLuaAppPlayButtonLoadingDurationTelemetry then true else nil, if fFlagLuaAppPlayButtonLoadingDurationTelemetry then "PlayButton" else nil)
-	local var17 = useOnPlayButtonCallbackModule(p6.universeId, p6.referralSource, "PlayButton", nil, "LuaGameCard", p6.experienceJoinData, p6.placeId)
-	local var18 = if fFlagLuaAppEnablePlaySquadButton then useOnPlaySquadButtonCallbackModule(menuDirection.Up, var16.playButtonState, p6.referralSource, p6.universeId) else nil
-	local playButtonState = var16.playButtonState
-	local secondaryPlayButtonState = var16.secondaryPlayButtonState
+	local var2 = usePlayButtonStateModule(useRoactService(roactNetworking), p1.universeId, nil, nil, if fFlagLuaAppPlayButtonLoadingDurationTelemetry then true else nil, if fFlagLuaAppPlayButtonLoadingDurationTelemetry then "PlayButton" else nil)
+	local var3 = useOnPlayButtonCallbackModule(p1.universeId, p1.referralSource, "PlayButton", nil, "LuaGameCard", p1.experienceJoinData, p1.placeId)
+	local var4 = if fFlagLuaAppEnablePlaySquadButton then useOnPlaySquadButtonCallbackModule(menuDirection.Up, var2.playButtonState, p1.referralSource, p1.universeId) else nil
+	local playButtonState = var2.playButtonState
+	local secondaryPlayButtonState = var2.secondaryPlayButtonState
 	
 	if secondaryPlayButtonState ~= nil then
-		local var19 = secondaryPlayButtonState == playButtonStatesModule.UnplayableOther
+		local var5 = secondaryPlayButtonState == playButtonStatesModule.UnplayableOther
 		
-		if playButtonState == playButtonStatesModule.UnplayableOther and not var19 then
+		if playButtonState == playButtonStatesModule.UnplayableOther and not var5 then
 			playButtonState = secondaryPlayButtonState
 			secondaryPlayButtonState = nil
-		elseif var19 then
+		elseif var5 then
 			secondaryPlayButtonState = nil
 		end
 	end
-	return roactModule.createElement(playButtonContainer, cryoModule.Dictionary.join(p6, {
-		onPlayButtonCallback = var17,
-		onPlaySquadButtonCallback = var18,
+	return roactModule.createElement(playButtonContainer, cryoModule.Dictionary.join(p1, {
+		onPlayButtonCallback = var3,
+		onPlaySquadButtonCallback = var4,
 		playButtonState = playButtonState,
 		secondaryPlayButtonState = secondaryPlayButtonState
 	}))

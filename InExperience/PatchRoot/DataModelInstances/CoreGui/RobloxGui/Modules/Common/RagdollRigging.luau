@@ -256,10 +256,10 @@ local list_7 = {
 	{ "Right Hip", "Torso" }
 }
 
-local function indexParts(p0)
+local function indexParts(p1)
 	local t = {}
 	
-	for i, v in ipairs(p0:GetChildren()) do
+	for i, v in ipairs(p1:GetChildren()) do
 		if v:IsA("BasePart") then
 			local name = v.name
 			
@@ -271,62 +271,62 @@ local function indexParts(p0)
 	return t
 end
 
-local function createRigJoints(p1, p2, p3)
-	if p3 then
+local function createRigJoints(p2, p3, p4)
+	if p4 then
 		local root = Instance.new("AnimationConstraint")
 		root.Name = "Root"
-		root.Attachment0 = p1.HumanoidRootPart.RootRigAttachment
-		root.Attachment1 = p1.LowerTorso.RootRigAttachment
+		root.Attachment0 = p2.HumanoidRootPart.RootRigAttachment
+		root.Attachment1 = p2.LowerTorso.RootRigAttachment
 		root.IsKinematic = true
-		p1.LowerTorso.Root:Destroy()
-		root.Parent = p1.LowerTorso
+		p2.LowerTorso.Root:Destroy()
+		root.Parent = p2.LowerTorso
 	end
-	for i, v in ipairs(p2) do
-		local var32, var33, var34, var35 = unpack(v)
-		local var36 = p1[var32]
-		local var37 = p1[var33]
+	for i, v in ipairs(p3) do
+		local var1, var2, var3, var4 = unpack(v)
+		local var5 = p2[var1]
+		local var6 = p2[var2]
 		
-		if var36 and var37 then
-			local var38 = var36:FindFirstChild(var34)
-			local var39 = var37:FindFirstChild(var34)
+		if var5 and var6 then
+			local var7 = var5:FindFirstChild(var3)
+			local var8 = var6:FindFirstChild(var3)
 			
-			if var38 and var39 and (var38:IsA("Attachment") and var39:IsA("Attachment")) then
-				local ragdollBallSocket_1 = var37:FindFirstChild("RagdollBallSocket")
+			if var7 and var8 and (var7:IsA("Attachment") and var8:IsA("Attachment")) then
+				local ragdollBallSocket_1 = var6:FindFirstChild("RagdollBallSocket")
 				
 				if not ragdollBallSocket_1 then
 					ragdollBallSocket_1 = Instance.new("BallSocketConstraint")
 					ragdollBallSocket_1.Name = "RagdollBallSocket"
 				end
-				ragdollBallSocket_1.Attachment0 = var38
-				ragdollBallSocket_1.Attachment1 = var39
+				ragdollBallSocket_1.Attachment0 = var7
+				ragdollBallSocket_1.Attachment1 = var8
 				ragdollBallSocket_1.LimitsEnabled = true
-				ragdollBallSocket_1.UpperAngle = var35.UpperAngle
+				ragdollBallSocket_1.UpperAngle = var4.UpperAngle
 				ragdollBallSocket_1.TwistLimitsEnabled = true
-				ragdollBallSocket_1.TwistLowerAngle = var35.TwistLowerAngle
-				ragdollBallSocket_1.TwistUpperAngle = var35.TwistUpperAngle
-				local var41 = workspace.Gravity / 196.2
+				ragdollBallSocket_1.TwistLowerAngle = var4.TwistLowerAngle
+				ragdollBallSocket_1.TwistUpperAngle = var4.TwistUpperAngle
+				local var9 = workspace.Gravity / 196.2
 				
-				if p3 then
-					var41 = math.max(var41, 0.2)
+				if p4 then
+					var9 = math.max(var9, 0.2)
 				end
-				local referenceMass = var35.ReferenceMass
-				local var42 = if referenceMass then var37:GetMass() / referenceMass else 1
-				ragdollBallSocket_1.MaxFrictionTorque = (var35.FrictionTorque or 500) * var42 * var41
+				local referenceMass = var4.ReferenceMass
+				local var10 = if referenceMass then var6:GetMass() / referenceMass else 1
+				ragdollBallSocket_1.MaxFrictionTorque = (var4.FrictionTorque or 500) * var10 * var9
 				
-				if p3 then
+				if p4 then
 					ragdollBallSocket_1.MaxFrictionTorque /= 100
 				end
-				ragdollBallSocket_1.Parent = var37
+				ragdollBallSocket_1.Parent = var6
 				
-				if p3 then
-					local motor6D = var37:FindFirstChildWhichIsA("Motor6D")
+				if p4 then
+					local motor6D = var6:FindFirstChildWhichIsA("Motor6D")
 					assert(motor6D)
 					local animationConstraint = Instance.new("AnimationConstraint")
 					animationConstraint.Name = motor6D.Name
 					animationConstraint.Attachment0 = motor6D.Part0:FindFirstChild(motor6D.Name .. "RigAttachment")
 					animationConstraint.Attachment1 = motor6D.Part1:FindFirstChild(motor6D.Name .. "RigAttachment")
 					animationConstraint.IsKinematic = true
-					animationConstraint.MaxTorque = (var35.StrengthTorque or 500) * var42 * var41
+					animationConstraint.MaxTorque = (var4.StrengthTorque or 500) * var10 * var9
 					animationConstraint.MaxForce = 0
 					animationConstraint.Parent = motor6D.parent
 					motor6D:Destroy()
@@ -336,51 +336,51 @@ local function createRigJoints(p1, p2, p3)
 	end
 end
 
-local function createAdditionalAttachments(p4, p5)
-	for i, v in ipairs(p5) do
-		local var45, var46, var47, var48 = unpack(v)
-		local var49 = p4[var45]
+local function createAdditionalAttachments(p5, p6)
+	for i, v in ipairs(p6) do
+		local var11, var12, var13, var14 = unpack(v)
+		local var15 = p5[var11]
 		
-		if var49 then
-			local var50 = var49:FindFirstChild(var46)
+		if var15 then
+			local var16 = var15:FindFirstChild(var12)
 			
-			if not var50 or var50:IsA("Attachment") then
-				if var48 then
-					local var51 = var49:FindFirstChild(var48)
+			if not var16 or var16:IsA("Attachment") then
+				if var14 then
+					local var17 = var15:FindFirstChild(var14)
 					
-					if var51 and var51:IsA("Attachment") then
-						var47 = var51.CFrame * var47
+					if var17 and var17:IsA("Attachment") then
+						var13 = var17.CFrame * var13
 					end
 				end
-				if var50 then
-					var50.CFrame = var47
+				if var16 then
+					var16.CFrame = var13
 				else
-					var50 = Instance.new("Attachment")
-					var50.Name = var46
-					var50.CFrame = var47
-					var50.Parent = var49
+					var16 = Instance.new("Attachment")
+					var16.Name = var12
+					var16.CFrame = var13
+					var16.Parent = var15
 				end
 			end
 		end
 	end
 end
 
-local function createNoCollides(p6, p7)
+local function createNoCollides(p7, p8)
 	local t = {}
 	
-	for i, v in ipairs(p7) do
-		local var57, var58 = unpack(v)
-		local var59 = p6[var57]
-		local var60 = p6[var58]
+	for i, v in ipairs(p8) do
+		local var18, var19 = unpack(v)
+		local var20 = p7[var18]
+		local var21 = p7[var19]
 		
-		if var59 and var60 then
-			local var61 = t[var60]
+		if var20 and var21 then
+			local var22 = t[var21]
 			
-			if not var61 then
-				var61 = {}
-				t[var60] = var61
+			if not var22 then
+				var22 = {}
+				t[var21] = var22
 			end
-			var61[var59] = true
+			var22[var20] = true
 		end
 	end
 	local t_1 = {}
@@ -402,10 +402,10 @@ local function createNoCollides(p6, p7)
 		t_1[i_1] = t_2
 	end
 	for i_1, v_2 in pairs(t) do
-		local var54 = t_1[i_1]
+		local var23 = t_1[i_1]
 		
 		for i_3, v_3 in pairs(v_2) do
-			local ragdollNoCollision = table.remove(var54) or Instance.new("NoCollisionConstraint")
+			local ragdollNoCollision = table.remove(var23) or Instance.new("NoCollisionConstraint")
 			ragdollNoCollision.Name = "RagdollNoCollision"
 			ragdollNoCollision.Part0 = i_3
 			ragdollNoCollision.Part1 = i_1
@@ -414,16 +414,16 @@ local function createNoCollides(p6, p7)
 	end
 end
 
-local function _(p8, _)
-	return if p8 then true else false
+local function _(p9, _)
+	return if p9 then true else false
 end
 
 local _ = function(_, _, p9, p10)
 	return if (if p9 then true else false) and (if p10 then true else false) then true else (if p9 then true else false) and (if p10 then true else false)
 end
 
-local function hasValidConstraint(_, p11)
-	for i, v in ipairs(p11:GetChildren()) do
+local function hasValidConstraint(_, p9)
+	for i, v in ipairs(p9:GetChildren()) do
 		if v:IsA("BallSocketConstraint") then
 			local attachment0 = v.Attachment0
 			local attachment1 = v.Attachment1
@@ -436,107 +436,107 @@ local function hasValidConstraint(_, p11)
 	return false
 end
 
-local function hasRagdollJoint(p12)
+local function hasRagdollJoint(p10)
 	-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), hasValidConstraint (ref)
-	if avatarJointUpgradeFeatureEngineFeature and not p12:IsA("Motor6D") and not p12:IsA("AnimationConstraint") then
+	if avatarJointUpgradeFeatureEngineFeature and not p10:IsA("Motor6D") and not p10:IsA("AnimationConstraint") then
 		return false
 	end
 	local parent = nil
-	local var63 = nil
+	local var24 = nil
 	
-	if p12:IsA("Motor6D") then
-		parent = p12.Part0
-		var63 = p12.Part1
-	elseif avatarJointUpgradeFeatureEngineFeature and p12:IsA("AnimationConstraint") then
-		local attachment0 = p12.Attachment0
-		local attachment1 = p12.Attachment1
+	if p10:IsA("Motor6D") then
+		parent = p10.Part0
+		var24 = p10.Part1
+	elseif avatarJointUpgradeFeatureEngineFeature and p10:IsA("AnimationConstraint") then
+		local attachment0 = p10.Attachment0
+		local attachment1 = p10.Attachment1
 		parent = attachment0 and attachment0.Parent
-		var63 = attachment1 and attachment1.Parent
+		var24 = attachment1 and attachment1.Parent
 	end
-	return not (not parent or not var63) and (if hasValidConstraint(parent, var63) then true else hasValidConstraint(var63, parent))
+	return not (not parent or not var24) and (if hasValidConstraint(parent, var24) then true else hasValidConstraint(var24, parent))
 end
 
-local function disableMotorSet(value, p13)
+local function disableMotorSet(value, p10)
 	-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), hasRagdollJoint (ref)
 	local t = {}
 	
-	for i, v in ipairs(p13) do
-		local var65 = value:FindFirstChild(v[2])
+	for i, v in ipairs(p10) do
+		local var24 = value:FindFirstChild(v[2])
 		
-		if var65 then
-			local var66 = var65:FindFirstChild(v[1])
+		if var24 then
+			local var25 = var24:FindFirstChild(v[1])
 			
-			if var66 and (avatarJointUpgradeFeatureEngineFeature or var66:IsA("Motor6D")) and hasRagdollJoint(var66) then
-				table.insert(t, var66)
-				var66.Enabled = false
+			if var25 and (avatarJointUpgradeFeatureEngineFeature or var25:IsA("Motor6D")) and hasRagdollJoint(var25) then
+				table.insert(t, var25)
+				var25.Enabled = false
 			end
 		end
 	end
 	return t
 end
 
-function t.createRagdollJoints(p14, p15, p16)
+function t.createRagdollJoints(p11, p12, p13)
 	-- upvalues: indexParts (ref), createAdditionalAttachments (ref), list_4 (ref), createRigJoints (ref), list_5 (ref), createNoCollides (ref), list_6 (ref), list (ref), list_1 (ref), list_2 (ref)
-	local var67 = indexParts(p14)
+	local var26 = indexParts(p11)
 	
-	if p15 == Enum.HumanoidRigType.R6 then
-		createAdditionalAttachments(var67, list_4)
-		createRigJoints(var67, list_5, false)
-		createNoCollides(var67, list_6)
+	if p12 == Enum.HumanoidRigType.R6 then
+		createAdditionalAttachments(var26, list_4)
+		createRigJoints(var26, list_5, false)
+		createNoCollides(var26, list_6)
 		
 		return
-	elseif p15 == Enum.HumanoidRigType.R15 then
-		createAdditionalAttachments(var67, list)
-		createRigJoints(var67, list_1, p16)
-		createNoCollides(var67, list_2)
+	elseif p12 == Enum.HumanoidRigType.R15 then
+		createAdditionalAttachments(var26, list)
+		createRigJoints(var26, list_1, p13)
+		createNoCollides(var26, list_2)
 		
 		return
 	end
 	error("unknown rig type", 2)
 end
 
-function t.disableMotors(p17, p18)
+function t.disableMotors(p11, p12)
 	-- upvalues: disableMotorSet (ref), list_7 (ref), list_3 (ref)
-	local var68 = nil
+	local var26 = nil
 	
-	if p18 == Enum.HumanoidRigType.R6 then
-		var68 = disableMotorSet(p17, list_7)
-	elseif p18 == Enum.HumanoidRigType.R15 then
-		var68 = disableMotorSet(p17, list_3)
+	if p12 == Enum.HumanoidRigType.R6 then
+		var26 = disableMotorSet(p11, list_7)
+	elseif p12 == Enum.HumanoidRigType.R15 then
+		var26 = disableMotorSet(p11, list_3)
 	else
 		error("unknown rig type", 2)
 	end
-	local primaryPart = p17.PrimaryPart or p17:FindFirstChild("HumanoidRootPart")
+	local primaryPart = p11.PrimaryPart or p11:FindFirstChild("HumanoidRootPart")
 	
 	if primaryPart and primaryPart:IsA("BasePart") then
 		primaryPart.CanCollide = false
 	end
-	local head = p17:FindFirstChild("Head")
+	local head = p11:FindFirstChild("Head")
 	
 	if head and head:IsA("BasePart") then
 		head.CanCollide = true
 	end
-	return var68
+	return var26
 end
 
-function t.disableParticleEmittersAndFadeOut(p19, p20)
+function t.disableParticleEmittersAndFadeOut(p11, p12)
 	-- upvalues: runService (ref)
 	if runService:IsServer() then
 		error("disableParticleEmittersAndFadeOut should not be called on the server.", 2)
 	end
 	local t = {}
 	
-	for i, v in pairs(p19:GetDescendants()) do
+	for i, v in pairs(p11:GetDescendants()) do
 		if v:IsA("BasePart") or v:IsA("Decal") then
 			t[v] = v.Transparency
 		elseif v:IsA("ParticleEmitter") then
 			v.Enabled = false
 		end
 	end
-	local var72 = 0
-	while var72 < p20 do
-		var72 += runService.Heartbeat:Wait()
-		local minValue = math.min(var72 / p20, 1)
+	local var26 = 0
+	while var26 < p12 do
+		var26 += runService.Heartbeat:Wait()
+		local minValue = math.min(var26 / p12, 1)
 		
 		for i_1, v_1 in pairs(t) do
 			i_1.Transparency = (1 - minValue) * v_1 + minValue
@@ -544,11 +544,11 @@ function t.disableParticleEmittersAndFadeOut(p19, p20)
 	end
 end
 
-function t.easeNongraphicJointFriction(p21, p22)
+function t.easeNongraphicJointFriction(p13, p14)
 	-- upvalues: runService (ref)
 	local t = {}
 	
-	for i, v in pairs(p21:GetDescendants()) do
+	for i, v in pairs(p13:GetDescendants()) do
 		if v:IsA("BallSocketConstraint") and v.Name == "RagdollBallSocket" then
 			v.MaxFrictionTorque *= 100
 			local maxFrictionTorque = v.MaxFrictionTorque
@@ -560,24 +560,24 @@ function t.easeNongraphicJointFriction(p21, p22)
 			}
 		end
 	end
-	local var75 = 0
-	while var75 < p22 do
-		local _, var76 = runService.Stepped:Wait()
-		var75 += var76
-		local minValue = math.min(var75 / p22, 1)
+	local var27 = 0
+	while var27 < p14 do
+		local _, var28 = runService.Stepped:Wait()
+		var27 += var28
+		local minValue = math.min(var27 / p14, 1)
 		
 		for i_1, v_1 in pairs(t) do
-			local var78, var79, var80 = unpack(v_1)
-			var78.MaxFrictionTorque = (1 - minValue) * var79 + minValue * var80
+			local var29, var30, var31 = unpack(v_1)
+			var29.MaxFrictionTorque = (1 - minValue) * var30 + minValue * var31
 		end
 	end
 end
 
-function t.easeJointFriction_OLD(p23, p24)
+function t.easeJointFriction_OLD(p15, p16)
 	-- upvalues: runService (ref)
 	local t = {}
 	
-	for i, v in pairs(p23:GetDescendants()) do
+	for i, v in pairs(p15:GetDescendants()) do
 		if v:IsA("BallSocketConstraint") and v.Name == "RagdollBallSocket" then
 			local maxFrictionTorque = v.MaxFrictionTorque
 			local name = v.Parent.Name
@@ -588,15 +588,15 @@ function t.easeJointFriction_OLD(p23, p24)
 			}
 		end
 	end
-	local var82 = 0
-	while var82 < p24 do
-		local _, var83 = runService.Stepped:Wait()
-		var82 += var83
-		local minValue = math.min(var82 / p24, 1)
+	local var32 = 0
+	while var32 < p16 do
+		local _, var33 = runService.Stepped:Wait()
+		var32 += var33
+		local minValue = math.min(var32 / p16, 1)
 		
 		for i_1, v_1 in pairs(t) do
-			local var85, var86, var87 = unpack(v_1)
-			var85.MaxFrictionTorque = (1 - minValue) * var86 + minValue * var87
+			local var34, var35, var36 = unpack(v_1)
+			var34.MaxFrictionTorque = (1 - minValue) * var35 + minValue * var36
 		end
 	end
 end

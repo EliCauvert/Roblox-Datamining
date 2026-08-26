@@ -12,182 +12,182 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local fixChatLanguageSwitcherLabel = game:DefineFastFlag("FixChatLanguageSwitcherLabel", false)
 local getFStringChatTranslationEnabledLocalesModule = require(robloxGui.Modules.Flags.GetFStringChatTranslationEnabledLocales)
 local textChatServiceSettingsSavedEngineFeature = game:GetEngineFeature("TextChatServiceSettingsSaved")
-local var11 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.Unavailable")
+local var1 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.Unavailable")
 
-return function(p0, p1, p2)
-	-- upvalues: url (ref), playersService (ref), httpService (ref), name (ref), fixChatLanguageSwitcherLabel (ref), utilityModule (ref), robloxTranslatorModule (ref), var11 (ref), gameSettings (ref), localPlayer (ref), textChatService (ref), textChatServiceSettingsSavedEngineFeature (ref), getFStringChatTranslationEnabledLocalesModule (ref)
+return function(p1, p2, p3)
+	-- upvalues: url (ref), playersService (ref), httpService (ref), name (ref), fixChatLanguageSwitcherLabel (ref), utilityModule (ref), robloxTranslatorModule (ref), var1 (ref), gameSettings (ref), localPlayer (ref), textChatService (ref), textChatServiceSettingsSavedEngineFeature (ref), getFStringChatTranslationEnabledLocalesModule (ref)
 	local t = { [1] = "en_us" }
 	local t_1 = { en_us = 1 }
 	local list = { "English" }
 	local text = url.LOCALE_URL .. string.format("v1/locales?displayValueLocale=%s", playersService.LocalPlayer.LocaleId:gsub("-", "_"))
 	
-	local function localeCodeToLanguageCodeMappingCallback(p3, p4)
-		-- upvalues: name (copy), fixChatLanguageSwitcherLabel (copy), p0 (ref), utilityModule (copy), robloxTranslatorModule (copy), var11 (copy), p1 (ref), gameSettings (copy), t (ref), localPlayer (copy), textChatService (copy), list (ref), p2 (ref), textChatServiceSettingsSavedEngineFeature (copy)
-		if not p3 then
-			if p4 == nil then
-				p4 = "Locales call did not set error message to non-nil value"
+	local function localeCodeToLanguageCodeMappingCallback(p4, p5)
+		-- upvalues: name (copy), fixChatLanguageSwitcherLabel (copy), p1 (ref), utilityModule (copy), robloxTranslatorModule (copy), var1 (copy), p2 (ref), gameSettings (copy), t (ref), localPlayer (copy), textChatService (copy), list (ref), p3 (ref), textChatServiceSettingsSavedEngineFeature (copy)
+		if not p4 then
+			if p5 == nil then
+				p5 = "Locales call did not set error message to non-nil value"
 			end
 			name:warning("GameSettings chat language selector initialization failed to get all required information; defaulting to unavailable for the remainder of this session. Error message: " .. p4)
 			
 			if fixChatLanguageSwitcherLabel then
-				local var17 = p0
-				local var18 = p0
-				local var19 = p0
-				local var20, var21, var22 = utilityModule:AddNewRow(p0, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Chat.ChatLanguageSelectionLabel"), "DropDown", { var11 }, 1)
-				var17.ChatLanguageSelectorFrame = var20
-				var18.ChatLanguageSelectorLabel = var21
-				var19.ChatLanguageSelectorMode = var22
+				local var2 = p1
+				local var3 = p1
+				local var4 = p1
+				local var5, var6, var7 = utilityModule:AddNewRow(p1, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Chat.ChatLanguageSelectionLabel"), "DropDown", { var1 }, 1)
+				var2.ChatLanguageSelectorFrame = var5
+				var3.ChatLanguageSelectorLabel = var6
+				var4.ChatLanguageSelectorMode = var7
 			else
-				local var23 = p0
-				local var24 = p0
-				local var25 = p0
-				local var26, var27, var28 = utilityModule:AddNewRow(p0, "Chat Language", "DropDown", { var11 }, 1)
-				var23.ChatLanguageSelectorFrame = var26
-				var24.ChatLanguageSelectorLabel = var27
-				var25.ChatLanguageSelectorMode = var28
+				local var8 = p1
+				local var9 = p1
+				local var10 = p1
+				local var11, var12, var13 = utilityModule:AddNewRow(p1, "Chat Language", "DropDown", { var1 }, 1)
+				var8.ChatLanguageSelectorFrame = var11
+				var9.ChatLanguageSelectorLabel = var12
+				var10.ChatLanguageSelectorMode = var13
 			end
-			p0.ChatLanguageSelectorFrame.LayoutOrder = p1.ChatLanguageSelectorFrame
+			p1.ChatLanguageSelectorFrame.LayoutOrder = p2.ChatLanguageSelectorFrame
 		end
-		local var29 = nil
+		local var14 = nil
 		local chatTranslationLocale = gameSettings.ChatTranslationLocale
 		
 		if chatTranslationLocale ~= "" then
 			for i, v in t do
 				if v == chatTranslationLocale then
-					var29 = i
+					var14 = i
 				end
 			end
 		end
-		if chatTranslationLocale == "" or var29 == nil then
+		if chatTranslationLocale == "" or var14 == nil then
 			for i, v in t do
 				if v == localPlayer.LocaleId:gsub("-", "_") then
-					var29 = i
+					var14 = i
 					textChatService.ChatTranslationEnabled = true
 				end
 			end
 		end
-		if var29 == nil then
+		if var14 == nil then
 			textChatService.ChatTranslationEnabled = false
-			var29 = 1
+			var14 = 1
 		else
-			gameSettings.ChatTranslationLocale = t[var29]
+			gameSettings.ChatTranslationLocale = t[var14]
 		end
-		localPlayer:SetChatTranslationSettingsLocaleId(t[var29])
-		local var30 = t[var29]
+		localPlayer:SetChatTranslationSettingsLocaleId(t[var14])
+		local var15 = t[var14]
 		
 		if fixChatLanguageSwitcherLabel then
-			local var31 = p0
-			local var32 = p0
-			local var33 = p0
-			local var34, var35, var36 = utilityModule:AddNewRow(p0, "Chat Translation Language", "DropDown", list, var29)
-			var31.ChatLanguageSelectorFrame = var34
-			var32.ChatLanguageSelectorLabel = var35
-			var33.ChatLanguageSelectorMode = var36
+			local var16 = p1
+			local var17 = p1
+			local var18 = p1
+			local var19, var20, var21 = utilityModule:AddNewRow(p1, "Chat Translation Language", "DropDown", list, var14)
+			var16.ChatLanguageSelectorFrame = var19
+			var17.ChatLanguageSelectorLabel = var20
+			var18.ChatLanguageSelectorMode = var21
 		else
-			local var37 = p0
-			local var38 = p0
-			local var39 = p0
-			local var40, var41, var42 = utilityModule:AddNewRow(p0, "Chat Language", "DropDown", list, var29)
-			var37.ChatLanguageSelectorFrame = var40
-			var38.ChatLanguageSelectorLabel = var41
-			var39.ChatLanguageSelectorMode = var42
+			local var22 = p1
+			local var23 = p1
+			local var24 = p1
+			local var25, var26, var27 = utilityModule:AddNewRow(p1, "Chat Language", "DropDown", list, var14)
+			var22.ChatLanguageSelectorFrame = var25
+			var23.ChatLanguageSelectorLabel = var26
+			var24.ChatLanguageSelectorMode = var27
 		end
-		p0.ChatLanguageSelectorFrame.LayoutOrder = p1.ChatLanguageSelectorFrame
-		p0.ChatLanguageSelectorMode.IndexChanged:connect(function(p5)
-			-- upvalues: gameSettings (copy), t (copy), localPlayer (copy), var30 (write), p2 (copy)
+		p1.ChatLanguageSelectorFrame.LayoutOrder = p2.ChatLanguageSelectorFrame
+		p1.ChatLanguageSelectorMode.IndexChanged:connect(function(p6)
+			-- upvalues: gameSettings (copy), t (copy), localPlayer (copy), var15 (write), p3 (copy)
 			local chatTranslationLocale = gameSettings.ChatTranslationLocale
-			local var50 = t[p5]
-			gameSettings.ChatTranslationLocale = var50
-			localPlayer:SetChatTranslationSettingsLocaleId(var50)
-			var30 = var50
-			p2("chat_translation_locale", chatTranslationLocale, var50)
+			local var28 = t[p6]
+			gameSettings.ChatTranslationLocale = var28
+			localPlayer:SetChatTranslationSettingsLocaleId(var28)
+			var15 = var28
+			p3("chat_translation_locale", chatTranslationLocale, var28)
 		end)
-		local var43, var44, var45 = utilityModule:AddNewRow(p0, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Chat.TranslationToggleSetting"), "Selector", { "On", "Off" }, if textChatService.ChatTranslationToggleEnabled then 1 else 2)
-		p0.ChatTranslationToggleFrame = var43
-		p0.ChatTranslationToggleLabel = var44
-		p0.ChatTranslationToggleEnabler = var45
-		p0.ChatTranslationToggleFrame.LayoutOrder = p1.ChatTranslationToggleFrame
-		p0.ChatTranslationToggleEnabler.IndexChanged:connect(function(p6)
-			-- upvalues: textChatService (copy), textChatServiceSettingsSavedEngineFeature (copy), gameSettings (copy), p2 (copy), var30 (write)
-			local var51 = p6 ~= 1
+		local var28, var29, var30 = utilityModule:AddNewRow(p1, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Chat.TranslationToggleSetting"), "Selector", { "On", "Off" }, if textChatService.ChatTranslationToggleEnabled then 1 else 2)
+		p1.ChatTranslationToggleFrame = var28
+		p1.ChatTranslationToggleLabel = var29
+		p1.ChatTranslationToggleEnabler = var30
+		p1.ChatTranslationToggleFrame.LayoutOrder = p2.ChatTranslationToggleFrame
+		p1.ChatTranslationToggleEnabler.IndexChanged:connect(function(p6)
+			-- upvalues: textChatService (copy), textChatServiceSettingsSavedEngineFeature (copy), gameSettings (copy), p3 (copy), var15 (write)
+			local var31 = p6 ~= 1
 			local chatTranslationToggleEnabled = textChatService.ChatTranslationToggleEnabled
 			
-			if var51 ~= chatTranslationToggleEnabled then
+			if var31 ~= chatTranslationToggleEnabled then
 				if textChatServiceSettingsSavedEngineFeature then
-					gameSettings.ChatTranslationToggleEnabled = var51
+					gameSettings.ChatTranslationToggleEnabled = var31
 				else
-					textChatService.ChatTranslationToggleEnabled = var51
+					textChatService.ChatTranslationToggleEnabled = var31
 				end
-				p2("chat_translation_toggle", chatTranslationToggleEnabled, var51, { locale_id = var30 })
+				p3("chat_translation_toggle", chatTranslationToggleEnabled, var31, { locale_id = var15 })
 			end
 		end)
-		local var46 = if textChatService.ChatTranslationEnabled then 1 else 2
+		local var31 = if textChatService.ChatTranslationEnabled then 1 else 2
 		
-		if var46 == 2 then
-			p0.ChatLanguageSelectorFrame.Visible = false
-			p0.ChatTranslationToggleFrame.Visible = false
+		if var31 == 2 then
+			p1.ChatLanguageSelectorFrame.Visible = false
+			p1.ChatTranslationToggleFrame.Visible = false
 		end
-		local var47, var48, var49 = utilityModule:AddNewRow(p0, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Chat.TranslationSetting"), "Selector", { "On", "Off" }, var46)
-		p0.ChatTranslationFrame = var47
-		p0.ChatTranslationLabel = var48
-		p0.ChatTranslationEnabler = var49
-		p0.ChatTranslationFrame.LayoutOrder = p1.ChatTranslationFrame
-		p0.ChatTranslationEnabler.IndexChanged:connect(function(p7)
-			-- upvalues: textChatService (copy), textChatServiceSettingsSavedEngineFeature (copy), gameSettings (copy), p2 (copy), localPlayer (copy), p0 (copy)
-			local var52 = p7 ~= 1
+		local var32, var33, var34 = utilityModule:AddNewRow(p1, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Chat.TranslationSetting"), "Selector", { "On", "Off" }, var31)
+		p1.ChatTranslationFrame = var32
+		p1.ChatTranslationLabel = var33
+		p1.ChatTranslationEnabler = var34
+		p1.ChatTranslationFrame.LayoutOrder = p2.ChatTranslationFrame
+		p1.ChatTranslationEnabler.IndexChanged:connect(function(p6)
+			-- upvalues: textChatService (copy), textChatServiceSettingsSavedEngineFeature (copy), gameSettings (copy), p3 (copy), localPlayer (copy), p1 (copy)
+			local var35 = p6 ~= 1
 			local chatTranslationEnabled = textChatService.ChatTranslationEnabled
 			
 			if textChatServiceSettingsSavedEngineFeature then
-				gameSettings.ChatTranslationEnabled = var52
+				gameSettings.ChatTranslationEnabled = var35
 			else
-				textChatService.ChatTranslationEnabled = var52
+				textChatService.ChatTranslationEnabled = var35
 			end
-			p2("chat_translation", chatTranslationEnabled, var52, { locale_id = localPlayer.LocaleId })
+			p3("chat_translation", chatTranslationEnabled, var35, { locale_id = localPlayer.LocaleId })
 			
-			if p7 == 1 then
-				p0.ChatLanguageSelectorFrame.Visible = true
-				p0.ChatTranslationToggleFrame.Visible = true
+			if p6 == 1 then
+				p1.ChatLanguageSelectorFrame.Visible = true
+				p1.ChatTranslationToggleFrame.Visible = true
 				
 				return
 			end
-			p0.ChatLanguageSelectorFrame.Visible = false
-			p0.ChatTranslationToggleFrame.Visible = false
+			p1.ChatLanguageSelectorFrame.Visible = false
+			p1.ChatTranslationToggleFrame.Visible = false
 		end)
 	end
 	
-	httpService:RequestInternal({ Method = "GET", Url = text }):Start(function(p8, p9)
+	httpService:RequestInternal({ Method = "GET", Url = text }):Start(function(p6, p7)
 		-- upvalues: httpService (copy), getFStringChatTranslationEnabledLocalesModule (copy), list (ref), t (ref), t_1 (ref), name (copy), text (ref), localeCodeToLanguageCodeMappingCallback (ref)
-		local var54
-		local var53 = false
+		local var35
+		local var36 = false
 		local _ = nil
 		
-		if not p8 then
-			var54 = "Locale Code to Language Code Mapping Request: Connection error"
-		elseif p9.StatusCode == 401 then
-			var54 = "Locale Code to Language Code Mapping Request: Unauthorized"
-		elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then
-			var54 = "Locale Code to Language Code Mapping Request Status code: " .. p9.StatusCode
+		if not p6 then
+			var35 = "Locale Code to Language Code Mapping Request: Connection error"
+		elseif p7.StatusCode == 401 then
+			var35 = "Locale Code to Language Code Mapping Request: Unauthorized"
+		elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then
+			var35 = "Locale Code to Language Code Mapping Request Status code: " .. p9.StatusCode
 		else
 			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), p9 (ref), getFStringChatTranslationEnabledLocalesModule (copy), list (copy), t (copy), t_1 (copy)
-				local body = httpService:JSONDecode(p9.Body)
+				-- upvalues: httpService (copy), p7 (ref), getFStringChatTranslationEnabledLocalesModule (copy), list (copy), t (copy), t_1 (copy)
+				local body = httpService:JSONDecode(p7.Body)
 				local t_2 = {}
 				
 				for i in getFStringChatTranslationEnabledLocalesModule():gmatch("([^,]+)") do
 					table.insert(t_2, i)
 				end
 				local name
-				local function _(p10)
+				local function _(p8)
 					-- upvalues: t_2 (ref)
 					for i, v in t_2 do
-						if v == p10 then
+						if v == p8 then
 							return true
 						end
 					end
 					return false
 				end
 				
-				local var57 = 2
+				local var37 = 2
 				
 				for i_1, v in pairs(body.data) do
 					local locale = v.locale.locale
@@ -197,27 +197,27 @@ return function(p0, p1, p2)
 						list[1] = name
 						continue
 					end
-					local var58
+					local var38
 					for i_2, v_1 in t_2 do
 						if v_1 == locale then
-							var58 = true
-							if var58 then
+							var38 = true
+							if var38 then
 								table.insert(list, name)
-								t[var57] = locale
-								t_1[locale] = var57
-								var57 += 1
+								t[var37] = locale
+								t_1[locale] = var37
+								var37 += 1
 							end
 						end
 					end
-					var58 = false
+					var38 = false
 				end
 			end)
-			var53 = ok
-			var54 = status
+			var36 = ok
+			var35 = status
 		end
-		if not var53 then
+		if not var36 then
 			name:warning("GameSettings chat language selector initialization: Failed to get response from Localization API for " .. text .. " with error message: " .. var54)
 		end
-		localeCodeToLanguageCodeMappingCallback(var53, var54)
+		localeCodeToLanguageCodeMappingCallback(var36, var35)
 	end)
 end

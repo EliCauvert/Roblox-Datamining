@@ -14,15 +14,15 @@ return {
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)
-		local rootInstance = p1.rootInstance
+		local rootInstance = p2.rootInstance
 		local descendants = rootInstance:GetDescendants()
 		table.insert(descendants, rootInstance)
 		
 		for i, v in descendants do
 			if v:IsA("StringValue") and v.Name == "AvatarPartScaleType" and not constantsModule.AvatarPartScaleTypes[v.Value] then
-				p0:fail(errorSourceStringsModule.Keys.ScaleTypeInvalid, { ParentName = if v.Parent then v.Parent.Name else v.Name })
+				p1:fail(errorSourceStringsModule.Keys.ScaleTypeInvalid, { ParentName = if v.Parent then v.Parent.Name else v.Name })
 			end
 		end
 	end

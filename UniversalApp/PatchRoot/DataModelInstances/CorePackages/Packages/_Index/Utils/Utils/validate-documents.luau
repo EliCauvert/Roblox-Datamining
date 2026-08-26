@@ -13,24 +13,24 @@ local concatAST = graphQLModule.concatAST
 local versionInfo = graphQLModule.versionInfo
 local _ = require(script.Parent.loaders)
 local aggregateError = require(script.Parent.AggregateError).AggregateError
-local var4 = nil
+local var1 = nil
 
-function t.validateGraphQlDocuments(p0, p1, p2)
-	-- upvalues: var4 (write), promiseModule (ref), map (ref), kind (ref), array (ref), concatAST (ref), validate (ref)
-	local var5 = if p2 ~= nil then var4() else p2
+function t.validateGraphQlDocuments(p1, p2, p3)
+	-- upvalues: var1 (write), promiseModule (ref), map (ref), kind (ref), array (ref), concatAST (ref), validate (ref)
+	local var2 = if p3 ~= nil then var1() else p3
 	
 	return promiseModule.resolve():andThen(function()
-		-- upvalues: map (copy), p1 (ref), kind (copy), array (copy), promiseModule (copy), concatAST (copy), validate (copy), p0 (ref), var5 (ref)
-		local var6 = map.new()
+		-- upvalues: map (copy), p2 (ref), kind (copy), array (copy), promiseModule (copy), concatAST (copy), validate (copy), p1 (ref), var2 (ref)
+		local var3 = map.new()
 		local t = {}
 		
-		for i, v in p1 do
+		for i, v in p2 do
 			if v.document then
 				local t_1 = {}
 				
 				for i_1, v_1 in v.document.definitions do
 					if v_1.kind == kind.FRAGMENT_DEFINITION then
-						var6:set(v_1.name.value, v_1)
+						var3:set(v_1.name.value, v_1)
 					else
 						table.insert(t_1, v_1)
 					end
@@ -44,16 +44,16 @@ function t.validateGraphQlDocuments(p0, p1, p2)
 		local t_1 = {}
 		local t_2 = {
 			kind = kind.DOCUMENT,
-			definitions = array.concat({}, var6:values())
+			definitions = array.concat({}, var3:values())
 		}
-		promiseModule.all(array.map(t, function(p3)
-			-- upvalues: promiseModule (copy), concatAST (copy), t_2 (ref), validate (copy), p0 (copy), var5 (copy), t_1 (ref)
+		promiseModule.all(array.map(t, function(p4)
+			-- upvalues: promiseModule (copy), concatAST (copy), t_2 (ref), validate (copy), p1 (copy), var2 (copy), t_1 (ref)
 			return promiseModule.resolve():andThen(function()
-				-- upvalues: concatAST (copy), t_2 (copy), p3 (ref), validate (copy), p0 (copy), var5 (copy), t_1 (copy)
-				local var11 = validate(p0, concatAST({ t_2, p3.document }), var5)
+				-- upvalues: concatAST (copy), t_2 (copy), p4 (ref), validate (copy), p1 (copy), var2 (copy), t_1 (copy)
+				local var4 = validate(p1, concatAST({ t_2, p4.document }), var2)
 				
-				if #var11 > 0 then
-					table.insert(t_1, { filePath = p3.location, errors = var11 })
+				if #var4 > 0 then
+					table.insert(t_1, { filePath = p4.location, errors = var4 })
 				end
 			end)
 		end)):expect()
@@ -97,13 +97,13 @@ function t.createDefaultRules()
 	}
 	
 	if versionInfo.major < 15 then
-		list = array.map(list, function(p7)
-			return p7:gsub("Rule$", "", 1)
+		list = array.map(list, function(p5)
+			return p5:gsub("Rule$", "", 1)
 		end)
 	end
-	return array.filter(specifiedRules, function(p8)
+	return array.filter(specifiedRules, function(p5)
 		-- upvalues: array (copy), list (write)
-		return not array.includes(list, debug.info(p8, "n"))
+		return not array.includes(list, debug.info(p5, "n"))
 	end)
 end
 

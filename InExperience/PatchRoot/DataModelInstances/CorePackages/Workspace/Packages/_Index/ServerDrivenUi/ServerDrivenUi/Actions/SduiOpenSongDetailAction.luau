@@ -4,15 +4,15 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, _, p1, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), openSongDetail (ref)
-	local var1 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.OpenSongDetail
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
@@ -20,13 +20,13 @@ return function(p0, _, p1, _)
 	local songId = var1.songId
 	
 	if typeof(songId) == "string" and songId ~= "" then
-		p1.dependencies.dispatch(openSongDetail(songId))
+		p2.dependencies.dispatch(openSongDetail(songId))
 		
 		return
 	end
-	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		propName = "songId",
 		name = sduiActionType.OpenSongDetail,
 		message = `Invalid or missing songId: {songId}`
-	}, p1.appPage)
+	}, p2.appPage)
 end

@@ -75,76 +75,76 @@ local function copyMeshPart(p1, p2, p3)
 	return editable
 end
 
-local function addBonesFromPoses(p1, p2, p3)
+local function addBonesFromPoses(p4, p5, p6)
 	-- upvalues: addBonesFromPoses (ref)
-	for i, v in p1:GetChildren() do
+	for i, v in p4:GetChildren() do
 		if v:IsA("Pose") then
 			local name = v.Name
-			local var1 = p3:FindFirstChild(name)
+			local var3 = p6:FindFirstChild(name)
 			
-			if var1 and var1:IsA("BasePart") then
-				addBonesFromPoses(v, var1, p3)
+			if var3 and var3:IsA("BasePart") then
+				addBonesFromPoses(v, var3, p6)
 			else
 				local bone = Instance.new("Bone")
 				bone.Name = name
-				bone.Parent = p2
-				addBonesFromPoses(v, bone, p3)
+				bone.Parent = p5
+				addBonesFromPoses(v, bone, p6)
 			end
 		end
 	end
 end
 
-local function createEmoteExportScene(p1)
+local function createEmoteExportScene(p7)
 	-- upvalues: rigBuilderModule (ref), buildEmoteKeyframeSequenceFromCurveAnimModule (ref), addBonesFromPoses (ref)
-	local var1 = rigBuilderModule.createDefaultCharacter(false)
-	local var2 = if p1.curveAnimations and #p1.curveAnimations > 0 then buildEmoteKeyframeSequenceFromCurveAnimModule(p1.curveAnimations[1]) else nil
+	local var4 = rigBuilderModule.createDefaultCharacter(false)
+	local var5 = if p7.curveAnimations and #p7.curveAnimations > 0 then buildEmoteKeyframeSequenceFromCurveAnimModule(p7.curveAnimations[1]) else nil
 	
-	if not var2 then
+	if not var5 then
 		error("Emote export requires a curve animation, but none was available")
 	end
-	var2.Parent = var1
-	local children = var2:GetChildren()
-	local humanoidRootPart = var1:FindFirstChild("HumanoidRootPart")
+	var5.Parent = var4
+	local children = var5:GetChildren()
+	local humanoidRootPart = var4:FindFirstChild("HumanoidRootPart")
 	
 	if #children > 0 and humanoidRootPart and humanoidRootPart:IsA("BasePart") then
-		addBonesFromPoses(children[1], humanoidRootPart, var1)
+		addBonesFromPoses(children[1], humanoidRootPart, var4)
 	end
-	var1:PivotTo(CFrame.new())
+	var4:PivotTo(CFrame.new())
 	
-	return var1
+	return var4
 end
 
-function t.createModelForGltfExport(p1)
+function t.createModelForGltfExport(p7)
 	-- upvalues: getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), validationEnumsModule (ref), createEmoteExportScene (ref), copyMeshPart (ref), createCagePart (ref), getFFlagUGCValidationAddGeometryToExportsModule (ref)
-	if getEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and p1.uploadCategory == validationEnumsModule.UploadCategory.EMOTE_ANIMATION then
-		return createEmoteExportScene(p1)
+	if getEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and p7.uploadCategory == validationEnumsModule.UploadCategory.EMOTE_ANIMATION then
+		return createEmoteExportScene(p7)
 	end
 	local model = Instance.new("Model")
-	local descendants = p1.rootInstance:GetDescendants()
-	table.insert(descendants, p1.rootInstance)
+	local descendants = p7.rootInstance:GetDescendants()
+	table.insert(descendants, p7.rootInstance)
 	
 	for i, v in descendants do
 		if v:IsA("MeshPart") then
 			local name = v.Name
-			local var1 = p1.renderMeshesData[name]
+			local var4 = p7.renderMeshesData[name]
 			
-			if not var1 then
+			if not var4 then
 				error("Missing editable data")
 			end
-			local var2 = copyMeshPart(v, var1, p1.meshTextures[name])
-			var2.Parent = model
-			local var3 = p1.outerCagesData[name]
+			local var5 = copyMeshPart(v, var4, p7.meshTextures[name])
+			var5.Parent = model
+			local var6 = p7.outerCagesData[name]
 			
-			if var3 then
-				createCagePart(var2, var1, var3, "OuterCage").Parent = model
+			if var6 then
+				createCagePart(var5, var4, var6, "OuterCage").Parent = model
 			end
-			local var4 = p1.innerCagesData[name]
+			local var7 = p7.innerCagesData[name]
 			
-			if var4 then
-				createCagePart(var2, var1, var4, "InnerCage").Parent = model
+			if var7 then
+				createCagePart(var5, var4, var7, "InnerCage").Parent = model
 			end
-			if getFFlagUGCValidationAddGeometryToExportsModule() and p1.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
-				var2.Name = `{name}_Geo`
+			if getFFlagUGCValidationAddGeometryToExportsModule() and p7.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
+				var5.Name = `{name}_Geo`
 			end
 		end
 	end

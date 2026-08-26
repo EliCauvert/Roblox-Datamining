@@ -2,7 +2,7 @@
 local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
 local pagesModule = require(parent.Components.Pages)
 
-return function(p0)
+return function(p1)
 	-- upvalues: setCurrentPageModule (ref), pagesModule (ref)
-	p0:dispatch(setCurrentPageModule(pagesModule.pagesByKey[p0:getState().menuPage].parentPage))
+	p1:dispatch(setCurrentPageModule(pagesModule.pagesByKey[p1:getState().menuPage].parentPage))
 end

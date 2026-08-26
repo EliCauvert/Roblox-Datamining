@@ -1,22 +1,22 @@
-﻿local var0 = false
+﻿local var1 = false
 
 return {
 	setEnabled = function(value)
-		-- upvalues: var0 (write)
-		var0 = value
+		-- upvalues: var1 (write)
+		var1 = value
 	end,
 	isEnabled = function()
-		-- upvalues: var0 (write)
-		return var0
+		-- upvalues: var1 (write)
+		return var1
 	end,
-	log = function(p0, p1)
-		-- upvalues: var0 (write)
-		if not var0 then return end
-		if p1 then
-			print(`[ChatTextArea] {p0} | {p1}`)
+	log = function(p1, p2)
+		-- upvalues: var1 (write)
+		if not var1 then return end
+		if p2 then
+			print(`[ChatTextArea] {p1} | {p2}`)
 			
 			return
 		end
-		print(`[ChatTextArea] {p0}`)
+		print(`[ChatTextArea] {p1}`)
 	end
 }

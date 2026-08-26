@@ -16,15 +16,15 @@ controllerBarHint.validateProps = tModule.strictInterface({
 	hintTextSize = tModule.optional(tModule.number)
 })
 
-function controllerBarHint.render(p0)
+function controllerBarHint.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), controllerBarHintInternalPadding (ref), keyLabelModule (ref), genericTextLabelModule (ref)
-	return withStyleModule(function(p1)
-		-- upvalues: roactModule (copy), p0 (ref), controllerBarHintInternalPadding (copy), keyLabelModule (copy), genericTextLabelModule (copy)
-		local theme = p1.Theme
+	return withStyleModule(function(p2)
+		-- upvalues: roactModule (copy), p1 (ref), controllerBarHintInternalPadding (copy), keyLabelModule (copy), genericTextLabelModule (copy)
+		local theme = p2.Theme
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = p0.props.layoutOrder,
+			LayoutOrder = p1.props.layoutOrder,
 			AutomaticSize = Enum.AutomaticSize.X
 		}, {
 			Layout = roactModule.createElement("UIListLayout", {
@@ -37,20 +37,20 @@ function controllerBarHint.render(p0)
 			ControllerBarHintIcon = roactModule.createElement(keyLabelModule, {
 				LayoutOrder = 1,
 				iconThemeKey = "IconEmphasis",
-				keyCode = p0.props.keyCode
+				keyCode = p1.props.keyCode
 			}),
 			ControllerBarHintText = roactModule.createElement(genericTextLabelModule, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				TextSize = p0.props.hintTextSize,
-				maxSize = p0.props.maxWidth and Vector2.new(p0.props.maxWidth) or nil,
-				fontStyle = p1.Font.Header2,
+				TextSize = p1.props.hintTextSize,
+				maxSize = p1.props.maxWidth and Vector2.new(p1.props.maxWidth) or nil,
+				fontStyle = p2.Font.Header2,
 				colorStyle = theme.TextEmphasis,
-				AutomaticSize = if not p0.props.maxWidth then Enum.AutomaticSize.X else nil,
+				AutomaticSize = if not p1.props.maxWidth then Enum.AutomaticSize.X else nil,
 				TextTransparency = theme.TextEmphasis.TextTransparency,
-				fluidSizing = if p0.props.maxWidth then true else false,
-				Text = p0.props.text,
-				TextTruncate = if p0.props.maxWidth then Enum.TextTruncate.AtEnd else nil,
+				fluidSizing = if p1.props.maxWidth then true else false,
+				Text = p1.props.text,
+				TextTruncate = if p1.props.maxWidth then Enum.TextTruncate.AtEnd else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center
 			})

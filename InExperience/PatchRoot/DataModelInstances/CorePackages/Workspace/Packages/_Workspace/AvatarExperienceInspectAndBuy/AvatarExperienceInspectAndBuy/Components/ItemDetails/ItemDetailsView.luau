@@ -34,119 +34,119 @@ local useTokens = foundationModule.Hooks.useTokens
 local _ = require(avatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
 
-local var21 = function(p0, p1)
+local var1 = function(p1, p2)
 	-- upvalues: viewTypeModule (ref)
-	return if p0 == viewTypeModule.WideLandscape then {
-		PaddingTop = UDim.new(0, p1.Padding.XSmall),
-		PaddingLeft = UDim.new(0, p1.Padding.Medium),
-		PaddingRight = UDim.new(0, p1.Padding.Medium),
-		PaddingBottom = UDim.new(0, p1.Padding.XXLarge)
-	} elseif p0 == viewTypeModule.Wide then {
-		PaddingTop = UDim.new(0, p1.Padding.XSmall),
-		PaddingBottom = UDim.new(0, p1.Padding.XLarge),
-		PaddingLeft = UDim.new(0, p1.Margin.Large * 2),
-		PaddingRight = UDim.new(0, p1.Margin.Large * 2)
+	return if p1 == viewTypeModule.WideLandscape then {
+		PaddingTop = UDim.new(0, p2.Padding.XSmall),
+		PaddingLeft = UDim.new(0, p2.Padding.Medium),
+		PaddingRight = UDim.new(0, p2.Padding.Medium),
+		PaddingBottom = UDim.new(0, p2.Padding.XXLarge)
+	} elseif p1 == viewTypeModule.Wide then {
+		PaddingTop = UDim.new(0, p2.Padding.XSmall),
+		PaddingBottom = UDim.new(0, p2.Padding.XLarge),
+		PaddingLeft = UDim.new(0, p2.Margin.Large * 2),
+		PaddingRight = UDim.new(0, p2.Margin.Large * 2)
 	} else {
-		PaddingTop = UDim.new(0, p1.Padding.XSmall),
-		PaddingBottom = UDim.new(0, p1.Padding.XLarge),
-		PaddingLeft = UDim.new(0, p1.Padding.XXLarge),
-		PaddingRight = UDim.new(0, p1.Padding.XXLarge)
+		PaddingTop = UDim.new(0, p2.Padding.XSmall),
+		PaddingBottom = UDim.new(0, p2.Padding.XLarge),
+		PaddingLeft = UDim.new(0, p2.Padding.XXLarge),
+		PaddingRight = UDim.new(0, p2.Padding.XXLarge)
 	}
 end
 
-local var22 = function(p2, p3)
+local var2 = function(p1, p2)
 	-- upvalues: viewTypeModule (ref)
-	return if p2 == viewTypeModule.WideLandscape then {
-		left = UDim.new(0, p3.Padding.Large),
-		right = UDim.new(0, p3.Padding.Large),
-		bottom = UDim.new(0, p3.Padding.XXLarge)
-	} else { bottom = UDim.new(0, p3.Padding.XXLarge) }
+	return if p1 == viewTypeModule.WideLandscape then {
+		left = UDim.new(0, p2.Padding.Large),
+		right = UDim.new(0, p2.Padding.Large),
+		bottom = UDim.new(0, p2.Padding.XXLarge)
+	} else { bottom = UDim.new(0, p2.Padding.XXLarge) }
 end
 
-local var23 = function(p4, p5, p6)
+local var3 = function(p1, p2, p3)
 	-- upvalues: viewTypeModule (ref)
-	return if p4 == viewTypeModule.Compact then UDim2.new(1, 0, 1, (-p5.buyActionBarOffset) - p5.backButtonOffset - p6.Padding.Small) else UDim2.new(1, 0, 1, (-p5.backButtonOffset) - p6.Padding.Small)
+	return if p1 == viewTypeModule.Compact then UDim2.new(1, 0, 1, (-p2.buyActionBarOffset) - p2.backButtonOffset - p3.Padding.Small) else UDim2.new(1, 0, 1, (-p2.backButtonOffset) - p3.Padding.Small)
 end
 
-local _ = function(p7)
+local _ = function(p1)
 	-- upvalues: viewTypeModule (ref)
-	return if p7 == viewTypeModule.Wide then 2.5 else 2
+	return if p1 == viewTypeModule.Wide then 2.5 else 2
 end
 
-return function(p8)
-	-- upvalues: useTokens (ref), useConvertedItemDataModule (ref), useItemExperienceInfoModule (ref), getPriceStatusModule (ref), viewTypeModule (ref), useItemStatusLocalizationModule (ref), var21 (ref), isCollectible (ref), getQuantitySold (ref), getOriginalPrice (ref), isTradeable (ref), isInExperienceCreationPlayable (ref), reactModule (ref), foundationModule (ref), enums (ref), backButtonModule (ref), var23 (ref), viewportLayoutModule (ref), getItemThumbnailUrlModule (ref), itemHeaderModule (ref), var22 (ref), subheaderLabelPriceModule (ref), getCreatorName (ref), formatNumberModule (ref), getPriceInRobux (ref), controlBarModule (ref), numberLocalization (ref), localizationService (ref), isItemAvailableForTryOnModule (ref), resellableInstancesLabelModule (ref), itemInfoLabelsModule (ref), bundleAssetsListModule (ref)
-	local var24 = useTokens()
-	local var25 = useConvertedItemDataModule(p8.item)
-	local var26 = useItemExperienceInfoModule(if var25 then var25.creatingUniverseId else nil)
-	local var27 = getPriceStatusModule(var25)
-	local var28 = p8.view == viewTypeModule.WideLandscape
-	local var29 = p8.view == viewTypeModule.Compact
-	local var30 = p8.view == viewTypeModule.Wide
-	local var31 = useItemStatusLocalizationModule(var25)
-	local var32 = var21(p8.view, var24)
-	local buyActionBarOffset = p8.buyActionBarOffset or 0
-	local size1000 = var24.Size.Size_1000
+return function(p1)
+	-- upvalues: useTokens (ref), useConvertedItemDataModule (ref), useItemExperienceInfoModule (ref), getPriceStatusModule (ref), viewTypeModule (ref), useItemStatusLocalizationModule (ref), var1 (ref), isCollectible (ref), getQuantitySold (ref), getOriginalPrice (ref), isTradeable (ref), isInExperienceCreationPlayable (ref), reactModule (ref), foundationModule (ref), enums (ref), backButtonModule (ref), var3 (ref), viewportLayoutModule (ref), getItemThumbnailUrlModule (ref), itemHeaderModule (ref), var2 (ref), subheaderLabelPriceModule (ref), getCreatorName (ref), formatNumberModule (ref), getPriceInRobux (ref), controlBarModule (ref), numberLocalization (ref), localizationService (ref), isItemAvailableForTryOnModule (ref), resellableInstancesLabelModule (ref), itemInfoLabelsModule (ref), bundleAssetsListModule (ref)
+	local var4 = useTokens()
+	local var5 = useConvertedItemDataModule(p1.item)
+	local var6 = useItemExperienceInfoModule(if var5 then var5.creatingUniverseId else nil)
+	local var7 = getPriceStatusModule(var5)
+	local var8 = p1.view == viewTypeModule.WideLandscape
+	local var9 = p1.view == viewTypeModule.Compact
+	local var10 = p1.view == viewTypeModule.Wide
+	local var11 = useItemStatusLocalizationModule(var5)
+	local var12 = var1(p1.view, var4)
+	local buyActionBarOffset = p1.buyActionBarOffset or 0
+	local size1000 = var4.Size.Size_1000
 	local list = {
 		{
 			key = "Category",
 			isVisible = true,
 			labelProps = {
-				leftLabel = var31.category,
-				rightLabel = if var25 then var31[var25.itemSubType] else ""
+				leftLabel = var11.category,
+				rightLabel = if var5 then var11[var5.itemSubType] else ""
 			}
 		},
 		{
 			key = "QuantitySold",
-			isVisible = isCollectible(var25),
+			isVisible = isCollectible(var5),
 			labelProps = {
-				leftLabel = var31.quantitySold,
-				rightLabel = getQuantitySold(var25, p8.formatNumber)
+				leftLabel = var11.quantitySold,
+				rightLabel = getQuantitySold(var5, p1.formatNumber)
 			}
 		},
 		{
 			key = "OriginalPrice",
-			isVisible = isCollectible(var25),
+			isVisible = isCollectible(var5),
 			labelProps = {
-				leftLabel = var31.originalPrice,
-				rightLabel = getOriginalPrice(var25, var31.na, p8.formatNumber)
+				leftLabel = var11.originalPrice,
+				rightLabel = getOriginalPrice(var5, var11.na, p1.formatNumber)
 			}
 		},
 		{
 			key = "Tradeable",
-			isVisible = isCollectible(var25),
+			isVisible = isCollectible(var5),
 			labelProps = {
-				leftLabel = var31.tradeable,
-				rightLabel = if isTradeable(var25) then var31.yes else var31.no
+				leftLabel = var11.tradeable,
+				rightLabel = if isTradeable(var5) then var11.yes else var11.no
 			}
 		}
 	}
 	table.insert(list, {
 		key = "MadeIn",
-		isVisible = isInExperienceCreationPlayable(var26),
+		isVisible = isInExperienceCreationPlayable(var6),
 		labelProps = {
-			leftLabel = var31.madein,
+			leftLabel = var11.madein,
 			rightLabel = reactModule.createElement(foundationModule.View, {
 				LayoutOrder = 2,
 				tag = "auto-xy",
 				onActivated = function()
-					-- upvalues: p8 (ref), var26 (ref)
-					if p8.openAttributionOverlay then
-						p8.openAttributionOverlay(var26)
+					-- upvalues: p1 (ref), var6 (ref)
+					if p1.openAttributionOverlay then
+						p1.openAttributionOverlay(var6)
 					end
 				end
 			}, {
 				AttributionLabel = reactModule.createElement(foundationModule.View, { tag = "auto-xy row gap-small align-y-center" }, {
-					ExperienceName = var26 and reactModule.createElement(foundationModule.Text, {
+					ExperienceName = var6 and reactModule.createElement(foundationModule.Text, {
 						LayoutOrder = 1,
 						tag = "auto-xy text-title-medium content-default",
-						Text = var26.name
+						Text = var6.name
 					}) or nil,
-					ArrowIcon = var26 and reactModule.createElement(foundationModule.Icon, {
+					ArrowIcon = var6 and reactModule.createElement(foundationModule.Icon, {
 						LayoutOrder = 2,
 						name = enums.IconName.ArrowSmallRight,
 						variant = enums.IconVariant.Filled,
 						size = enums.IconSize.Medium,
-						style = var24.Color.Content.Default
+						style = var4.Color.Content.Default
 					}) or nil
 				})
 			})
@@ -156,100 +156,100 @@ return function(p8)
 	return reactModule.createElement(foundationModule.View, { tag = "size-full" }, {
 		ButtonContainer = reactModule.createElement(foundationModule.View, {}, {
 			BackButton = reactModule.createElement(backButtonModule, {
-				onBackButtonClick = p8.onItemDetailsClosed,
+				onBackButtonClick = p1.onItemDetailsClosed,
 				Size = UDim2.new(0, size1000, 1, 0),
-				Position = UDim2.new(0, var24.Padding.Small, 0, var24.Padding.Small)
+				Position = UDim2.new(0, var4.Padding.Small, 0, var4.Padding.Small)
 			})
 		}),
 		ScrollingFrame = reactModule.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,
 			ScrollBarThickness = 0,
 			BorderSizePixel = 0,
-			Size = var23(p8.view, {
+			Size = var3(p1.view, {
 				buyActionBarOffset = buyActionBarOffset,
 				backButtonOffset = size1000
-			}, var24),
-			Position = UDim2.new(0, 0, 0, size1000 + var24.Padding.Medium),
+			}, var4),
+			Position = UDim2.new(0, 0, 0, size1000 + var4.Padding.Medium),
 			CanvasSize = UDim2.new(1, 0, 0, 0),
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", var32),
+			UIPadding = reactModule.createElement("UIPadding", var12),
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				VerticalAlignment = Enum.VerticalAlignment.Top,
-				Padding = UDim.new(0, var24.Padding.Small)
+				Padding = UDim.new(0, var4.Padding.Small)
 			}),
-			ViewportLayout = if var29 or var30 then reactModule.createElement(viewportLayoutModule, {
+			ViewportLayout = if var9 or var10 then reactModule.createElement(viewportLayoutModule, {
 				LayoutOrder = 1,
-				view = p8.view,
-				thumbnailUrl = getItemThumbnailUrlModule(p8.item) or "",
+				view = p1.view,
+				thumbnailUrl = getItemThumbnailUrlModule(p1.item) or "",
 				viewportProps = {
-					Size = UDim2.new(0, var24.Size.Size_3000 * (if p8.view == viewTypeModule.Wide then 2.5 else 2), 0, var24.Size.Size_3000 * (if p8.view == viewTypeModule.Wide then 2.5 else 2))
+					Size = UDim2.new(0, var4.Size.Size_3000 * (if p1.view == viewTypeModule.Wide then 2.5 else 2), 0, var4.Size.Size_3000 * (if p1.view == viewTypeModule.Wide then 2.5 else 2))
 				},
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				renderTryOnViewport = p8.renderTryOnViewport,
-				tryOnState = p8.tryOnState
+				renderTryOnViewport = p1.renderTryOnViewport,
+				tryOnState = p1.tryOnState
 			}) else nil,
 			Header = reactModule.createElement(itemHeaderModule, {
 				LayoutOrder = 1,
-				headerHeight = var24.Size.Size_1300,
-				purchaseButtonProps = p8.purchaseButtonProps,
-				padding = var22(p8.view, var24),
+				headerHeight = var4.Size.Size_1300,
+				purchaseButtonProps = p1.purchaseButtonProps,
+				padding = var2(p1.view, var4),
 				header = reactModule.createElement(foundationModule.Text, {
 					LayoutOrder = 1,
 					tag = "auto-xy text-heading-small content-emphasis text-truncate-end",
-					Text = if var25 then var25.name else ""
+					Text = if var5 then var5.name else ""
 				}),
-				subheader = if var30 then reactModule.createElement(subheaderLabelPriceModule, {
+				subheader = if var10 then reactModule.createElement(subheaderLabelPriceModule, {
 					LayoutOrder = 2,
 					subheaderText = {
-						leftSlotLabel = getCreatorName(var25),
-						rightSlotPrice = formatNumberModule(getPriceInRobux(var25, var27))
+						leftSlotLabel = getCreatorName(var5),
+						rightSlotPrice = formatNumberModule(getPriceInRobux(var5, var7))
 					},
-					priceStatus = var27
+					priceStatus = var7
 				}) else reactModule.createElement(foundationModule.Text, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-body-large content-emphasis text-truncate-end",
-					Text = getCreatorName(var25)
+					Text = getCreatorName(var5)
 				})
 			}),
 			DetailsContainer = reactModule.createElement(foundationModule.View, {
 				tag = "auto-xy col align-x-left align-y-top gap-small",
 				LayoutOrder = 2
 			}, {
-				UIPadding = if var28 then reactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, var24.Padding.Large),
-					PaddingRight = UDim.new(0, var24.Padding.Large)
+				UIPadding = if var8 then reactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, var4.Padding.Large),
+					PaddingRight = UDim.new(0, var4.Padding.Large)
 				}) else nil,
 				ControlBar = reactModule.createElement(controlBarModule, {
 					LayoutOrder = 1,
 					favoritesBadge = {
 						LayoutOrder = 1,
-						text = if var25 and var25.favoritesDetails and var25.favoritesDetails.numFavorites then numberLocalization.abbreviate(var25.favoritesDetails.numFavorites, localizationService.RobloxLocaleId) else nil,
-						iconVariant = if var25 and var25.favoritesDetails and var25.favoritesDetails.isFavorited then enums.IconVariant.Filled else enums.IconVariant.Regular,
+						text = if var5 and var5.favoritesDetails and var5.favoritesDetails.numFavorites then numberLocalization.abbreviate(var5.favoritesDetails.numFavorites, localizationService.RobloxLocaleId) else nil,
+						iconVariant = if var5 and var5.favoritesDetails and var5.favoritesDetails.isFavorited then enums.IconVariant.Filled else enums.IconVariant.Regular,
 						onActivated = function()
-							-- upvalues: var25 (ref), p8 (ref)
-							if var25 and var25.favoritesDetails then
-								p8.onToggleFavorite(p8.item, var25.favoritesDetails.isFavorited or false)
+							-- upvalues: var5 (ref), p1 (ref)
+							if var5 and var5.favoritesDetails then
+								p1.onToggleFavorite(p1.item, var5.favoritesDetails.isFavorited or false)
 							end
 						end
 					},
-					tryOnBadge = if var25 and isItemAvailableForTryOnModule(p8.localPlayerModel, var25) then {
+					tryOnBadge = if var5 and isItemAvailableForTryOnModule(p1.localPlayerModel, var5) then {
 						LayoutOrder = 2,
-						text = var31.tryOn,
-						iconVariant = if p8.tryOnState.isTryOnEnabled then enums.IconVariant.Filled else enums.IconVariant.Regular,
+						text = var11.tryOn,
+						iconVariant = if p1.tryOnState.isTryOnEnabled then enums.IconVariant.Filled else enums.IconVariant.Regular,
 						onActivated = function()
-							-- upvalues: var25 (ref), p8 (ref)
-							if var25 then
-								p8.onToggleTryOn({
-									itemId = var25.id,
-									itemType = var25.itemType,
-									itemSubType = var25.itemSubType,
-									assetsInBundle = var25.assetsInBundle
+							-- upvalues: var5 (ref), p1 (ref)
+							if var5 then
+								p1.onToggleTryOn({
+									itemId = var5.id,
+									itemType = var5.itemType,
+									itemSubType = var5.itemSubType,
+									assetsInBundle = var5.assetsInBundle
 								})
 							end
 						end
@@ -258,19 +258,19 @@ return function(p8)
 				DescriptionLabel = reactModule.createElement(foundationModule.Text, {
 					LayoutOrder = 3,
 					tag = "auto-xy text-body-medium content-emphasis text-truncate-end text-align-x-left text-wrap padding-bottom-large padding-top-large",
-					Text = if var25 then var25.description else ""
+					Text = if var5 then var5.description else ""
 				}),
-				ResellableInstancesLabel = if isCollectible(var25) and var25 and (var25.collectibleItemDetails and var25.collectibleItemDetails.resellableCount > 0) then reactModule.createElement(resellableInstancesLabelModule, {
+				ResellableInstancesLabel = if isCollectible(var5) and var5 and (var5.collectibleItemDetails and var5.collectibleItemDetails.resellableCount > 0) then reactModule.createElement(resellableInstancesLabelModule, {
 					LayoutOrder = 3,
-					ownedItemsLabel = var31.ownedItems,
-					padding = { top = UDim.new(0, var24.Padding.Large) }
+					ownedItemsLabel = var11.ownedItems,
+					padding = { top = UDim.new(0, var4.Padding.Large) }
 				}) else nil,
 				ItemInfoLabels = reactModule.createElement(itemInfoLabelsModule, { LayoutOrder = 5, itemInfoLabels = list }),
-				BundleAssetsList = if var25 and var25.assetsInBundle and #var25.assetsInBundle > 0 then reactModule.createElement(bundleAssetsListModule, {
+				BundleAssetsList = if var5 and var5.assetsInBundle and #var5.assetsInBundle > 0 then reactModule.createElement(bundleAssetsListModule, {
 					LayoutOrder = 6,
-					itemData = var25,
-					headerLabel = var31.includedParts,
-					view = p8.view
+					itemData = var5,
+					headerLabel = var11.includedParts,
+					view = p1.view
 				}) else nil
 			})
 		})

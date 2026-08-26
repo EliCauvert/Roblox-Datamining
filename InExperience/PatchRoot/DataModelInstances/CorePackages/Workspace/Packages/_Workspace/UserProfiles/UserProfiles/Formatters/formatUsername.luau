@@ -1,3 +1,3 @@
-﻿return function(p0)
+﻿return function(p1)
 	return "@" .. p0
 end

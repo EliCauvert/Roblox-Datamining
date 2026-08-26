@@ -14,38 +14,38 @@ local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebu
 local fFlagAppChatRemoveConversationListDividerModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local pushRight = images["icons/navigation/pushRight"]
 
-function CustomConversationListEntry(p0)
+function CustomConversationListEntry(p1)
 	-- upvalues: useStyle (ref), getBoldTextThemeModule (ref), useTextSizeOffset (ref), useChatPagePaddingModule (ref), iconSize (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), imageSetLabel (ref), pushRight (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
-	local var8 = useStyle()
-	local var9 = getBoldTextThemeModule(var8)
-	local var10 = useTextSizeOffset()
-	local var11 = useChatPagePaddingModule()
-	local onActivated = p0.onActivated
-	local titleText = p0.titleText
-	local font = var9.Font.Header2.Font
-	local transparency = var9.Theme.TextEmphasis.Transparency
-	local color = var9.Theme.TextEmphasis.Color
-	local var12 = var9.Font.Header2.RelativeSize * var9.Font.BaseSize
-	local var13 = var12 + var10
-	local subTitleText = p0.subTitleText
-	local font_1 = var8.Font.CaptionBody.Font
-	local transparency_1 = var8.Theme.TextDefault.Transparency
-	local color_1 = var8.Theme.TextDefault.Color
-	local var14 = var8.Font.CaptionBody.RelativeSize * var8.Font.BaseSize
-	local var15 = 60 - (60 - iconSize.Regular) / 2
+	local var1 = useStyle()
+	local var2 = getBoldTextThemeModule(var1)
+	local var3 = useTextSizeOffset()
+	local var4 = useChatPagePaddingModule()
+	local onActivated = p1.onActivated
+	local titleText = p1.titleText
+	local font = var2.Font.Header2.Font
+	local transparency = var2.Theme.TextEmphasis.Transparency
+	local color = var2.Theme.TextEmphasis.Color
+	local var5 = var2.Font.Header2.RelativeSize * var2.Font.BaseSize
+	local var6 = var5 + var3
+	local subTitleText = p1.subTitleText
+	local font_1 = var1.Font.CaptionBody.Font
+	local transparency_1 = var1.Theme.TextDefault.Transparency
+	local color_1 = var1.Theme.TextDefault.Color
+	local var7 = var1.Font.CaptionBody.RelativeSize * var1.Font.BaseSize
+	local var8 = 60 - (60 - iconSize.Regular) / 2
 	
 	return reactModule.createElement(foundationModule.View, {
-		Size = UDim2.new(1, 0, 0, p0.entryHeight),
-		BackgroundColor3 = var8.Theme.BackgroundDefault.Color,
-		BackgroundTransparency = var8.Theme.BackgroundDefault.Transparency,
+		Size = UDim2.new(1, 0, 0, p1.entryHeight),
+		BackgroundColor3 = var1.Theme.BackgroundDefault.Color,
+		BackgroundTransparency = var1.Theme.BackgroundDefault.Transparency,
 		onActivated = onActivated,
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then p0.testId else nil
+		testId = if fFlagDebugAppChatEnableDomLocatorsModule then p1.testId else nil
 	}, {
 		leftAlign = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, -(iconSize.Regular + 12), 1, 0)
 		}, {
-			padding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var11.left) }),
+			padding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var4.left) }),
 			layout = reactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
@@ -55,7 +55,7 @@ function CustomConversationListEntry(p0)
 			iconHolder = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 0,
-				Size = UDim2.new(0, var15, 1, 0)
+				Size = UDim2.new(0, var8, 1, 0)
 			}, {
 				layout = reactModule.createElement("UIListLayout", {
 					VerticalAlignment = Enum.VerticalAlignment.Center,
@@ -63,13 +63,13 @@ function CustomConversationListEntry(p0)
 				}),
 				icon = reactModule.createElement(imageSetLabel, {
 					BorderSizePixel = 0,
-					BackgroundColor3 = var9.Theme.BackgroundUIDefault.Color,
-					BackgroundTransparency = var9.Theme.BackgroundUIDefault.Transparency,
+					BackgroundColor3 = var2.Theme.BackgroundUIDefault.Color,
+					BackgroundTransparency = var2.Theme.BackgroundUIDefault.Transparency,
 					Size = UDim2.new(0, iconSize.Regular, 0, iconSize.Regular),
 					ScaleType = Enum.ScaleType.Stretch,
-					Image = p0.entryIcon,
-					ImageColor3 = var8.Theme.IconEmphasis.Color,
-					ImageTransparency = var8.Theme.IconEmphasis.Transparency
+					Image = p1.entryIcon,
+					ImageColor3 = var1.Theme.IconEmphasis.Color,
+					ImageTransparency = var1.Theme.IconEmphasis.Transparency
 				}, {
 					corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 				})
@@ -89,8 +89,8 @@ function CustomConversationListEntry(p0)
 				title = reactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, var13),
-					TextSize = var12,
+					Size = UDim2.new(1, 0, 0, var6),
+					TextSize = var5,
 					TextColor3 = color,
 					TextTransparency = transparency,
 					Font = font,
@@ -101,8 +101,8 @@ function CustomConversationListEntry(p0)
 				subTitle = reactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, var14 + var10),
-					TextSize = var14,
+					Size = UDim2.new(1, 0, 0, var7 + var3),
+					TextSize = var7,
 					TextColor3 = color_1,
 					TextTransparency = transparency_1,
 					Font = font_1,
@@ -119,15 +119,15 @@ function CustomConversationListEntry(p0)
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			padding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var11.right) }),
+			padding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var4.right) }),
 			icon = reactModule.createElement(imageSetLabel, {
 				LayoutOrder = 0,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, iconSize.Regular, 0, iconSize.Regular),
 				ScaleType = Enum.ScaleType.Stretch,
 				Image = pushRight,
-				ImageColor3 = var8.Theme.IconEmphasis.Color,
-				ImageTransparency = var8.Theme.IconEmphasis.Transparency
+				ImageColor3 = var1.Theme.IconEmphasis.Color,
+				ImageTransparency = var1.Theme.IconEmphasis.Transparency
 			})
 		}),
 		divider = if not fFlagAppChatRemoveConversationListDividerModule then reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
@@ -137,9 +137,9 @@ function CustomConversationListEntry(p0)
 			}),
 			divider = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				BackgroundTransparency = var8.Theme.Divider.Transparency,
-				BackgroundColor3 = var8.Theme.Divider.Color,
-				Size = UDim2.new(1, -var15, 0, 1)
+				BackgroundTransparency = var1.Theme.Divider.Transparency,
+				BackgroundColor3 = var1.Theme.Divider.Color,
+				Size = UDim2.new(1, -var8, 0, 1)
 			})
 		}) else nil
 	})

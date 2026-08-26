@@ -5,7 +5,7 @@ local reactModule = require(parent.React)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(buildExperience.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
 local fFlagBuildBackButtonChevronModule = require(buildExperience.Flags.FFlagBuildBackButtonChevron)
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
-local var6 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
+local var1 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
 local iconButton = foundationModule.IconButton
 local divider = foundationModule.Divider
 local scrollView = foundationModule.ScrollView
@@ -15,25 +15,25 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0)
-	-- upvalues: reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var6 (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), scrollView (ref), divider (ref)
-	local testId = p0.testId or "overflow-menu-page"
-	local var8 = reactModule.useRef(nil)
+return function(p1)
+	-- upvalues: reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var1 (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), scrollView (ref), divider (ref)
+	local testId = p1.testId or "overflow-menu-page"
+	local var2 = reactModule.useRef(nil)
 	
 	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
-		var6(p0.scrollPerformanceIntervalName, var8)
+		var1(p1.scrollPerformanceIntervalName, var2)
 	end
-	local var9 = reactModule.createElement(view, {
+	local var3 = reactModule.createElement(view, {
 		tag = {
 			["composition-content-body"] = true,
-			["col size-full"] = p0.disableScrolling == true,
-			["col size-full-0 auto-y"] = p0.disableScrolling ~= true
+			["col size-full"] = p1.disableScrolling == true,
+			["col size-full-0 auto-y"] = p1.disableScrolling ~= true
 		},
 		testId = `{testId}-content-body`
-	}, { Content = p0.content })
+	}, { Content = p1.content })
 	
 	return reactModule.createElement(view, {
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		tag = {
 			["composition-layout-detail"] = fFlagBuildDesktopReadinessModule,
 			["col align-x-center size-full bg-surface-0"] = true
@@ -51,50 +51,50 @@ return function(p0)
 			Close = reactModule.createElement(iconButton, {
 				LayoutOrder = 1,
 				isCircular = true,
-				icon = p0.closeIcon or (if fFlagBuildBackButtonChevronModule then iconName.ChevronLargeLeft else iconName.X),
-				onActivated = p0.onClose,
+				icon = p1.closeIcon or (if fFlagBuildBackButtonChevronModule then iconName.ChevronLargeLeft else iconName.X),
+				onActivated = p1.onClose,
 				size = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium,
 				testId = `{testId}-close`,
 				variant = buttonVariant.Utility
 			}),
-			Title = if p0.headerContent ~= nil then reactModule.createElement(text, {
+			Title = if p1.headerContent ~= nil then reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "fill text-heading-medium text-align-x-left text-truncate-end content-emphasis",
-				Text = p0.title
+				Text = p1.title
 			}) else reactModule.createElement(view, {
 				LayoutOrder = 2,
 				tag = "grow auto-y",
 				testId = `{testId}-header-content`
-			}, { Content = p0.headerContent }),
-			Trailing = if p0.headerTrailing ~= nil then nil else reactModule.createElement(view, {
+			}, { Content = p1.headerContent }),
+			Trailing = if p1.headerTrailing ~= nil then nil else reactModule.createElement(view, {
 				LayoutOrder = 3,
 				tag = "auto-xy",
 				testId = `{testId}-header-trailing`
-			}, { Content = p0.headerTrailing })
+			}, { Content = p1.headerTrailing })
 		}),
-		Body = if p0.disableScrolling then reactModule.createElement(view, {
+		Body = if p1.disableScrolling then reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "fill size-full-0 bg-surface-0",
 			testId = `{testId}-body`
-		}, { ContentBody = var9 }) else reactModule.createElement(scrollView, {
+		}, { ContentBody = var3 }) else reactModule.createElement(scrollView, {
 			LayoutOrder = 2,
 			tag = "fill size-full-0 bg-surface-0",
-			scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var8 else nil,
+			scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var2 else nil,
 			testId = `{testId}-scroll-view`,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
-		}, { ContentBody = var9 }),
-		FooterDivider = if p0.footer ~= nil then nil else reactModule.createElement(divider, { LayoutOrder = 3 }),
-		Footer = if p0.footer ~= nil then nil else reactModule.createElement(view, {
+		}, { ContentBody = var3 }),
+		FooterDivider = if p1.footer ~= nil then nil else reactModule.createElement(divider, { LayoutOrder = 3 }),
+		Footer = if p1.footer ~= nil then nil else reactModule.createElement(view, {
 			LayoutOrder = 4,
 			tag = {
 				["composition-content-body"] = true,
 				["size-full-0 auto-y"] = true
 			},
 			testId = `{testId}-footer-body`
-		}, { Footer = p0.footer })
+		}, { Footer = p1.footer })
 	})
 end

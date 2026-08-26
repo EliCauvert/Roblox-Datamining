@@ -9,10 +9,10 @@ conversationTimestamp.defaultProps = {
 	currentStyle = nil
 }
 
-function conversationTimestamp.render(p0)
+function conversationTimestamp.render(p1)
 	-- upvalues: roactModule (ref)
-	local textSize = p0.props.textSize
-	local currentStyle = p0.props.currentStyle
+	local textSize = p1.props.textSize
+	local currentStyle = p1.props.currentStyle
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -24,15 +24,15 @@ function conversationTimestamp.render(p0)
 			VerticalAlignment = Enum.VerticalAlignment.Top
 		}),
 		padding = roactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, p0.props.paddingY),
-			PaddingRight = UDim.new(0, p0.props.paddingX)
+			PaddingTop = UDim.new(0, p1.props.paddingY),
+			PaddingRight = UDim.new(0, p1.props.paddingX)
 		}),
 		timestamp = roactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextXAlignment = Enum.TextXAlignment.Right,
 			TextYAlignment = Enum.TextYAlignment.Top,
-			Size = UDim2.new(0, p0.props.textWidth, 0, textSize),
-			Text = p0.props.text,
+			Size = UDim2.new(0, p1.props.textWidth, 0, textSize),
+			Text = p1.props.text,
 			TextSize = textSize,
 			Font = currentStyle.Font.Body.Font,
 			TextColor3 = currentStyle.Theme.TextDefault.Color,

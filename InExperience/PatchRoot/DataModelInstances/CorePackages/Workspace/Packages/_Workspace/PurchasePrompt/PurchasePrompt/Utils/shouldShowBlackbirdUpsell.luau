@@ -12,33 +12,33 @@ local fFlagEnableBlackbirdUpsellImpressionGating = sharedFlagsModule.FFlagEnable
 local fIntBlackbirdUpsellMinPriceForDiscountInclusive = sharedFlagsModule.FIntBlackbirdUpsellMinPriceForDiscountInclusive
 local fIntBlackbirdUpsellMaxPriceForDiscountInclusive = sharedFlagsModule.FIntBlackbirdUpsellMaxPriceForDiscountInclusive
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: fFlagBlackbirdUpsellGateTimedOptionModule (ref), fFlagBlackbirdUpsellGateResaleModule (ref), getAppFeaturePolicies (ref), isRequestTypeHiddenFromBlackbirdUpsell (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref), discountType (ref), fFlagEnableBlackbirdUpsellImpressionGating (ref), blackbirdUpsellImpressionTrackerModule (ref)
-	if p2 then
+	if p3 then
 		return false
-	elseif fFlagBlackbirdUpsellGateTimedOptionModule and p3 then
-		local timedOptionDays = p3.timedOptionDays
+	elseif fFlagBlackbirdUpsellGateTimedOptionModule and p4 then
+		local timedOptionDays = p4.timedOptionDays
 		
 		if timedOptionDays and timedOptionDays ~= 0 then
 			return false
-		elseif fFlagBlackbirdUpsellGateResaleModule and p3 then
+		elseif fFlagBlackbirdUpsellGateResaleModule and p4 then
 			local basePriceInRobux
-			local collectibleItemInstanceId = p3.collectibleItemInstanceId
+			local collectibleItemInstanceId = p4.collectibleItemInstanceId
 			
 			if collectibleItemInstanceId and collectibleItemInstanceId ~= "" then
 				return false
 			elseif getAppFeaturePolicies().getDisableBlackbirdEntrypoints() then
 				return false
-			elseif p1 and isRequestTypeHiddenFromBlackbirdUpsell(p1) then
+			elseif p2 and isRequestTypeHiddenFromBlackbirdUpsell(p2) then
 				return false
-			elseif p0 then
-				basePriceInRobux = p0.basePriceInRobux
-				local var5 = fIntBlackbirdUpsellMaxPriceForDiscountInclusive
+			elseif p1 then
+				basePriceInRobux = p1.basePriceInRobux
+				local var1 = fIntBlackbirdUpsellMaxPriceForDiscountInclusive
 				
-				if basePriceInRobux <= fIntBlackbirdUpsellMinPriceForDiscountInclusive or var5 ~= 0 and var5 <= basePriceInRobux then
+				if basePriceInRobux <= fIntBlackbirdUpsellMinPriceForDiscountInclusive or var1 ~= 0 and var1 <= basePriceInRobux then
 					return false
-				elseif p0 then
-					basePriceInRobux = p0.discounts
+				elseif p1 then
+					basePriceInRobux = p1.discounts
 					
 					if basePriceInRobux then
 						for i, v in basePriceInRobux do

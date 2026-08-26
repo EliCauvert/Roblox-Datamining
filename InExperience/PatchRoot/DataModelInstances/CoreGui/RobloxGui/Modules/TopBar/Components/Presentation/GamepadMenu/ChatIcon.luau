@@ -15,33 +15,33 @@ chatIcon.validateProps = tModule.strictInterface({
 	unreadMessages = tModule.integer
 })
 
-function chatIcon.render(p0)
+function chatIcon.render(p1)
 	-- upvalues: withStyle (ref), chatOn (ref), chatOff (ref), roactModule (ref), imageSetLabel (ref), badge (ref)
-	return withStyle(function(p1)
-		-- upvalues: chatOn (copy), p0 (ref), chatOff (copy), roactModule (copy), imageSetLabel (copy), badge (copy)
-		local theme = p1.Theme
+	return withStyle(function(p2)
+		-- upvalues: chatOn (copy), p1 (ref), chatOff (copy), roactModule (copy), imageSetLabel (copy), badge (copy)
+		local theme = p2.Theme
 		
 		return roactModule.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1),
-			Image = if not p0.props.chatVisible then chatOff else chatOn,
+			Image = if not p1.props.chatVisible then chatOff else chatOn,
 			ImageColor3 = theme.IconEmphasis.Color,
 			ImageTransparency = theme.IconEmphasis.Transparency
 		}, {
-			Badge = p0.props.unreadMessages > 0 and roactModule.createElement(badge, {
+			Badge = p1.props.unreadMessages > 0 and roactModule.createElement(badge, {
 				hasShadow = false,
 				position = UDim2.new(0, 24, 0.5, 0),
 				anchorPoint = Vector2.new(0, 0.5),
-				value = p0.props.unreadMessages
+				value = p1.props.unreadMessages
 			})
 		})
 	end)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2)
+return roactRoduxModule.UNSTABLE_connect2(function(p1)
 	return {
-		chatVisible = p2.chat.visible,
-		unreadMessages = p2.chat.unreadMessages
+		chatVisible = p1.chat.visible,
+		unreadMessages = p1.chat.unreadMessages
 	}
 end, nil)(chatIcon)

@@ -1,5 +1,5 @@
-﻿return function(p0)
-	return p0:gsub("[&<>\"']", {
+﻿return function(p1)
+	return p1:gsub("[&<>\"']", {
 		["&"] = "&amp;",
 		["<"] = "&lt;",
 		[">"] = "&gt;",

@@ -32,41 +32,41 @@ local t = {
 	}
 }
 
-local function _(p0)
-	return if p0.chatEnabled then "friends" elseif p0.globalRulesEnabled then if p0.privacySettingsEnabled then if p0.thirdPartyPrivacySettingsEnabled then "fallback" else "thirdParty" else "privacy" else "regional"
+local function _(p1)
+	return if p1.chatEnabled then "friends" elseif p1.globalRulesEnabled then if p1.privacySettingsEnabled then if p1.thirdPartyPrivacySettingsEnabled then "fallback" else "thirdParty" else "privacy" else "regional"
 end
 
 return function(p1)
 	-- upvalues: t (ref), useLocalization (ref), reactModule (ref), foundationModule (ref)
-	local var3 = if p1.chatEnabled then "friends" elseif not p1.globalRulesEnabled then "regional" elseif not p1.privacySettingsEnabled then "privacy" elseif not p1.thirdPartyPrivacySettingsEnabled then "thirdParty" else "fallback"
-	local var4 = t[var3]
-	local var5 = var4.cta ~= nil
+	local var1 = if p1.chatEnabled then "friends" elseif not p1.globalRulesEnabled then "regional" elseif not p1.privacySettingsEnabled then "privacy" elseif not p1.thirdPartyPrivacySettingsEnabled then "thirdParty" else "fallback"
+	local var2 = t[var1]
+	local var3 = var2.cta ~= nil
 	
-	if var3 == "friends" and not p1.canNavigateToAddFriends then
-		var5 = false
-	elseif var3 == "privacy" and not p1.canNavigateToPrivacySettings then
-		var5 = false
+	if var1 == "friends" and not p1.canNavigateToAddFriends then
+		var3 = false
+	elseif var1 == "privacy" and not p1.canNavigateToPrivacySettings then
+		var3 = false
 	end
-	local var6 = useLocalization({
-		callToAction = var4.cta or "Feature.Chat.Label.PrivacySettings",
-		copy = var4.copy
+	local var4 = useLocalization({
+		callToAction = var2.cta or "Feature.Chat.Label.PrivacySettings",
+		copy = var2.copy
 	})
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref)
+		-- upvalues: p1 (ref), var1 (ref)
 		if p1.fireRenderEvent then
-			p1.fireRenderEvent(var3)
+			p1.fireRenderEvent(var1)
 		end
-	end, { p1.fireRenderEvent, var3 })
+	end, { p1.fireRenderEvent, var1 })
 	
 	return reactModule.createElement(foundationModule.Empty, {
-		icon = { size = "XLarge", name = var4.icon },
-		text = var6.copy,
-		button = if var5 then {
+		icon = { size = "XLarge", name = var2.icon },
+		text = var4.copy,
+		button = if var3 then {
 			icon = "icons/navigation/externallink_medium",
-			text = var6.callToAction,
+			text = var4.callToAction,
 			onActivated = function()
-				-- upvalues: p1 (ref), var3 (ref)
-				p1.onCallToAction(var3)
+				-- upvalues: p1 (ref), var1 (ref)
+				p1.onCallToAction(var1)
 			end
 		} else nil
 	})

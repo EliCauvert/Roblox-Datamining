@@ -14,29 +14,29 @@ local deferPlayerInfoRequests = game:DefineFastFlag("DeferPlayerInfoRequests", f
 local playerIconInfoStore = require(corePackagesService.Workspace.Packages.PlayerIconInfoStore).PlayerIconInfoStore
 local playerServiceConnector = roactModule.PureComponent:extend("PlayerServiceConnector")
 
-function playerServiceConnector.didMount(p0)
+function playerServiceConnector.didMount(p1)
 	-- upvalues: playersService (ref), fFlagBadgeVisibilitySettingEnabled (ref), robloxReplicatedStorageService (ref), deferPlayerInfoRequests (ref)
 	for i, v in ipairs(playersService:GetPlayers()) do
-		p0.props.addPlayer(v)
-		p0.props.makePlayerInfoRequests(v)
+		p1.props.addPlayer(v)
+		p1.props.makePlayerInfoRequests(v)
 	end
 	if fFlagBadgeVisibilitySettingEnabled then
 		spawn(function()
-			-- upvalues: robloxReplicatedStorageService (copy), p0 (ref), playersService (copy), deferPlayerInfoRequests (copy)
-			p0.sendPlayerProfileSettingsConnection = robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p1)
-				-- upvalues: playersService (copy), deferPlayerInfoRequests (copy), p0 (copy)
-				local var11 = playersService:GetPlayerByUserId(tonumber(p1))
+			-- upvalues: robloxReplicatedStorageService (copy), p1 (ref), playersService (copy), deferPlayerInfoRequests (copy)
+			p1.sendPlayerProfileSettingsConnection = robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p2)
+				-- upvalues: playersService (copy), deferPlayerInfoRequests (copy), p1 (copy)
+				local var1 = playersService:GetPlayerByUserId(tonumber(p2))
 				
-				if var11 then
+				if var1 then
 					if deferPlayerInfoRequests then
 						task.defer(function()
-							-- upvalues: p0 (copy), var11 (ref)
-							p0.props.makePlayerInfoRequests(var11)
+							-- upvalues: p1 (copy), var1 (ref)
+							p1.props.makePlayerInfoRequests(var1)
 						end)
 						
 						return
 					end
-					p0.props.makePlayerInfoRequests(var11)
+					p1.props.makePlayerInfoRequests(var1)
 				end
 			end)
 		end)
@@ -56,41 +56,41 @@ function playerServiceConnector.render(p2)
 		}),
 		PlayerRemovingConnection = roactModule.createElement(eventConnectionModule, {
 			event = playersService.PlayerRemoving,
-			callback = function(p4)
+			callback = function(p3)
 				-- upvalues: p2 (ref)
-				p2.props.removePlayer(p4)
+				p2.props.removePlayer(p3)
 			end
 		})
 	})
 end
 
-function playerServiceConnector.willUnmount(p5)
+function playerServiceConnector.willUnmount(p2)
 	-- upvalues: playersService (ref), fFlagBadgeVisibilitySettingEnabled (ref)
 	for i, v in ipairs(playersService:GetPlayers()) do
-		p5.props.removePlayer(v)
+		p2.props.removePlayer(v)
 	end
-	if fFlagBadgeVisibilitySettingEnabled and p5.sendPlayerProfileSettingsConnection then
-		p5.sendPlayerProfileSettingsConnection:Disconnect()
+	if fFlagBadgeVisibilitySettingEnabled and p2.sendPlayerProfileSettingsConnection then
+		p2.sendPlayerProfileSettingsConnection:Disconnect()
 	end
 end
 
-return roactRoduxModule.connect(nil, function(p6)
+return roactRoduxModule.connect(nil, function(p3)
 	-- upvalues: addPlayerModule (ref), makePlayerInfoRequestsModule (ref), fFlagReplacePlayerIconRoduxWithSignal (ref), playerIconInfoStore (ref), removePlayerModule (ref)
 	return {
-		addPlayer = function(p7)
-			-- upvalues: p6 (ref), addPlayerModule (copy)
-			return p6(addPlayerModule(p7))
+		addPlayer = function(p4)
+			-- upvalues: p3 (ref), addPlayerModule (copy)
+			return p3(addPlayerModule(p4))
 		end,
-		makePlayerInfoRequests = function(p8)
-			-- upvalues: p6 (ref), makePlayerInfoRequestsModule (copy)
-			return p6(makePlayerInfoRequestsModule(p8))
+		makePlayerInfoRequests = function(p4)
+			-- upvalues: p3 (ref), makePlayerInfoRequestsModule (copy)
+			return p3(makePlayerInfoRequestsModule(p4))
 		end,
-		removePlayer = function(p9)
-			-- upvalues: fFlagReplacePlayerIconRoduxWithSignal (copy), playerIconInfoStore (copy), p6 (ref), removePlayerModule (copy)
+		removePlayer = function(p4)
+			-- upvalues: fFlagReplacePlayerIconRoduxWithSignal (copy), playerIconInfoStore (copy), p3 (ref), removePlayerModule (copy)
 			if fFlagReplacePlayerIconRoduxWithSignal then
-				playerIconInfoStore.removePlayer(p9.UserId)
+				playerIconInfoStore.removePlayer(p4.UserId)
 			end
-			return p6(removePlayerModule(p9))
+			return p3(removePlayerModule(p4))
 		end
 	}
 end)(playerServiceConnector)

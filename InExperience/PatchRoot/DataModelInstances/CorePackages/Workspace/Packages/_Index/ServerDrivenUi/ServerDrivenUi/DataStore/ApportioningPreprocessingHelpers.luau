@@ -1,36 +1,36 @@
 ﻿local flaggedMutedError = require(script:FindFirstAncestor("ServerDrivenUi").Parent.Loggers).flaggedMutedError
 
-local var0 = function(p0, p1, p2, p3)
-	p0[p1] = {
-		gridApportioningMetadata = { { sortIndex = p3, capacity = p2 } }
+local var1 = function(p1, p2, p3, p4)
+	p1[p2] = {
+		gridApportioningMetadata = { { sortIndex = p4, capacity = p3 } }
 	}
 end
 
-local var1 = function(p4, p5, p6)
+local var2 = function(p1, p2, p3)
 	-- upvalues: flaggedMutedError (ref)
-	for i, v in p4.gridApportioningMetadata do
-		if v.sortIndex == p6 then
-			flaggedMutedError("ApportioningSameSortIndex", `Multiple collections at sort index {p6}`)
-		elseif p6 < v.sortIndex then
-			table.insert(p4.gridApportioningMetadata, i, { sortIndex = p6, capacity = p5 })
+	for i, v in p1.gridApportioningMetadata do
+		if v.sortIndex == p3 then
+			flaggedMutedError("ApportioningSameSortIndex", `Multiple collections at sort index {p3}`)
+		elseif p3 < v.sortIndex then
+			table.insert(p1.gridApportioningMetadata, i, { sortIndex = p3, capacity = p2 })
 			
 			return
 		end
 	end
-	table.insert(p4.gridApportioningMetadata, { sortIndex = p6, capacity = p5 })
+	table.insert(p1.gridApportioningMetadata, { sortIndex = p3, capacity = p2 })
 end
 
 return {
-	addToApportioningData = function(p7, p8, p9, p10)
-		-- upvalues: var1 (ref), var0 (ref)
-		local var2 = p7[p8]
+	addToApportioningData = function(p4, p5, p6, p7)
+		-- upvalues: var2 (ref), var1 (ref)
+		local var3 = p4[p5]
 		
-		if var2 then
-			var1(var2, p9, p10)
+		if var3 then
+			var2(var3, p6, p7)
 			
 			return
 		end
-		var0(p7, p8, p9, p10)
+		var1(p4, p5, p6, p7)
 	end,
 	populateStartingItemIndices = function(a)
 		for i, v in a do

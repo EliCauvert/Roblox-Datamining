@@ -3,21 +3,21 @@ local reactModule = require(robloxSubscriptionPurchaseApp.Parent.React)
 local robloxPlusUnifiedBuyModalBannerImpressionModule = require(robloxSubscriptionPurchaseApp.Storage.RobloxPlusUnifiedBuyModalBannerImpression)
 local fIntNewBadgeMaximumImpressionCountModule = require(robloxSubscriptionPurchaseApp.Flags.FIntNewBadgeMaximumImpressionCount)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), robloxPlusUnifiedBuyModalBannerImpressionModule (ref), fIntNewBadgeMaximumImpressionCountModule (ref)
-	local var4 = reactModule.useState(function()
+	local var1 = reactModule.useState(function()
 		-- upvalues: robloxPlusUnifiedBuyModalBannerImpressionModule (copy)
 		return robloxPlusUnifiedBuyModalBannerImpressionModule.getImpressionCount()
 	end) < fIntNewBadgeMaximumImpressionCountModule
 	
 	return {
-		shouldShowNewBadge = var4,
+		shouldShowNewBadge = var1,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: var4 (ref), robloxPlusUnifiedBuyModalBannerImpressionModule (copy), p0 (ref)
-			if var4 then
+			-- upvalues: var1 (ref), robloxPlusUnifiedBuyModalBannerImpressionModule (copy), p1 (ref)
+			if var1 then
 				robloxPlusUnifiedBuyModalBannerImpressionModule.incrementImpressionCount()
 			end
-			p0()
-		end, { var4, p0 })
+			p1()
+		end, { var1, p1 })
 	}
 end

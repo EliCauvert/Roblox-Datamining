@@ -1,11 +1,11 @@
 ﻿local t = {}
 
-local function createEnumMetatable(p0)
+local function createEnumMetatable(p1)
 	return {
 		__metatable = "This metatable is protected",
-		__index = function(_, p1)
-			-- upvalues: p0 (ref)
-			error("Invalid ValidationEnums." .. p0 .. " enum value: " .. tostring(p1))
+		__index = function(_, p2)
+			-- upvalues: p1 (ref)
+			error("Invalid ValidationEnums." .. p0 .. " enum value: " .. tostring(p2))
 		end,
 		__newindex = function(_, _, _)
 			error("Cannot add new keys to ValidationEnums")
@@ -13,19 +13,19 @@ local function createEnumMetatable(p0)
 	}
 end
 
-local function finalizeEnumTable(p2)
+local function finalizeEnumTable(p1)
 	-- upvalues: t (ref), createEnumMetatable (ref)
-	if t[p2] == nil then
-		error(p2 .. " enum table is not found")
+	if t[p1] == nil then
+		error(p1 .. " enum table is not found")
 	end
-	for i, v in t[p2] do
+	for i, v in t[p1] do
 		if typeof(i) ~= "string" then
-			error(p2 .. " enum table has non string key " .. tostring(i))
+			error(p1 .. " enum table has non string key " .. tostring(i))
 		elseif i ~= v then
-			error(p2 .. " enum table has non-matching key and value for key " .. tostring(i))
+			error(p1 .. " enum table has non-matching key and value for key " .. tostring(i))
 		end
 	end
-	setmetatable(t[p2], createEnumMetatable(p2))
+	setmetatable(t[p1], createEnumMetatable(p1))
 end
 
 t.ValidationModule = {

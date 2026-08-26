@@ -5,8 +5,8 @@ local deeplinkConfirmationModal = require(parent.NotificationsCommon).DeeplinkCo
 
 return function()
 	-- upvalues: useSelector (ref), reactModule (ref), deeplinkConfirmationModal (ref)
-	local var1 = useSelector(function(p0)
-		return p0.ConfirmationModal
+	local var1 = useSelector(function(p1)
+		return p1.ConfirmationModal
 	end)
 	
 	return {

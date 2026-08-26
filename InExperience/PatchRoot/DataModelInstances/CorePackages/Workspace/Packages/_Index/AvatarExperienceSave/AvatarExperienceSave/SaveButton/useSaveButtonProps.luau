@@ -10,23 +10,23 @@ local useAvatarRoute = avatarExperienceNavigationModule.AvatarRoute.Hooks.useAva
 
 return function()
 	-- upvalues: useAvatarRoute (ref), useAvatarSaveContextModule (ref), signalsReactModule (ref), reactModule (ref), saveStatusEnumModule (ref), slotBasedEditorAnalytics (ref)
-	local var6 = useAvatarRoute()
-	local var7 = useAvatarSaveContextModule()
-	local trySaveAvatar = var7.trySaveAvatar
-	local var8 = signalsReactModule.useSignalState(var7.getSaveEligibilityStatusSignal)
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), saveStatusEnumModule (copy), var6 (ref)
-		return if var8 == saveStatusEnumModule.Eligible then var6.isOverlayVisible else true
-	end, { var8, var6.isOverlayVisible })
+	local var1 = useAvatarRoute()
+	local var2 = useAvatarSaveContextModule()
+	local trySaveAvatar = var2.trySaveAvatar
+	local var3 = signalsReactModule.useSignalState(var2.getSaveEligibilityStatusSignal)
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), saveStatusEnumModule (copy), var1 (ref)
+		return if var3 == saveStatusEnumModule.Eligible then var1.isOverlayVisible else true
+	end, { var3, var1.isOverlayVisible })
 	
 	return {
-		disabled = var9,
+		disabled = var4,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: var9 (ref), trySaveAvatar (ref), slotBasedEditorAnalytics (copy)
-			if not var9 and trySaveAvatar then
+			-- upvalues: var4 (ref), trySaveAvatar (ref), slotBasedEditorAnalytics (copy)
+			if not var4 and trySaveAvatar then
 				trySaveAvatar()
 				slotBasedEditorAnalytics.trackSaveClick()
 			end
-		end, { var9, trySaveAvatar })
+		end, { var4, trySaveAvatar })
 	}
 end

@@ -12,13 +12,13 @@ local t_1 = nil
 local notifySubscription = nil
 local _ = nil
 
-local function _(p0)
-	if typeof(p0) == "function" then
+local function _(p1)
+	if typeof(p1) == "function" then
 		return true
-	elseif typeof(p0) == "table" then
-		local var14 = getmetatable(p0)
+	elseif typeof(p1) == "table" then
+		local var1 = getmetatable(p1)
 		
-		return if var14 and rawget(var14, "__call") then true else p0._isMockFunction
+		return if var1 and rawget(var1, "__call") then true else p1._isMockFunction
 	end
 end
 
@@ -32,87 +32,87 @@ local _ = function(p1)
 	return (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol[p1])
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: symbol (ref), boolean (ref)
-	return if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol[p2]) then symbol[p2] else "@@" .. p2
+	return if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol[p1]) then symbol[p1] else "@@" .. p2
 end
 
 if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and (not (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") or not boolean.toJSBoolean(symbol.observable)) then
 	symbol.observable = symbol("observable")
 end
 local _ = if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol.iterator) then symbol.iterator else "@@iterator"
-local var5 = if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol.observable) then symbol.observable else "@@observable"
-local var6 = if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol.species) then symbol.species else "@@species"
+local var1 = if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol.observable) then symbol.observable else "@@observable"
+local var2 = if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol.species) then symbol.species else "@@species"
 
-local function getMethod(p3, p4)
+local function getMethod(p1, p2)
 	-- upvalues: error (ref)
-	local var16
-	local var15 = p3[p4]
+	local var3
+	local var4 = p1[p2]
 	
-	if var15 == nil then
+	if var4 == nil then
 		return nil
-	elseif typeof(var15) == "function" then
-		var16 = true
-	elseif typeof(var15) == "table" then
-		local var17 = getmetatable(var15)
-		var16 = if var17 and rawget(var17, "__call") then true elseif var15._isMockFunction then true else false
+	elseif typeof(var4) == "function" then
+		var3 = true
+	elseif typeof(var4) == "table" then
+		local var5 = getmetatable(var4)
+		var3 = if var5 and rawget(var5, "__call") then true elseif var4._isMockFunction then true else false
 	end
-	if not var16 then
-		error(error.new(tostring(var15) .. " is not a function"))
+	if not var3 then
+		error(error.new(tostring(var4) .. " is not a function"))
 	end
-	return var15
+	return var4
 end
 
-local _ = function(p5)
-	-- upvalues: var6 (ref), t (write)
-	local var18 = p5[var6]
+local _ = function(p1)
+	-- upvalues: var2 (ref), t (write)
+	local var3 = p1[var2]
 	
-	return if var18 == nil then t else var18
+	return if var3 == nil then t else var3
 end
 
-local _ = function(p6)
+local _ = function(p1)
 	-- upvalues: instanceof (ref), t (write)
-	return instanceof(p6, t)
+	return instanceof(p1, t)
 end
 
 local tbl = nil
 tbl = setmetatable({}, {
-	__call = function(_, p7)
+	__call = function(_, p1)
 		-- upvalues: tbl (write), setTimeout (ref)
 		if tbl.log then
-			tbl:log(p7)
+			tbl:log(p1)
 			
 			return
 		end
 		setTimeout(function()
-			-- upvalues: p7 (ref)
-			error(p7)
+			-- upvalues: p1 (ref)
+			error(p1)
 		end, 0)
 	end
 })
 
-local _ = function(p8)
+local _ = function(p1)
 	-- upvalues: promiseModule (ref), tbl (write)
 	promiseModule.delay(0):doneCall(function()
-		-- upvalues: p8 (ref), tbl (copy)
-		xpcall(p8, function(p9)
+		-- upvalues: p1 (ref), tbl (copy)
+		xpcall(p1, function(p2)
 			-- upvalues: tbl (copy)
-			tbl(p9)
+			tbl(p2)
 		end)
 	end)
 end
 
-local function cleanupSubscription(p10)
+local function cleanupSubscription(p1)
 	-- upvalues: error (ref), tbl (write)
-	local cleanup = p10._cleanup
+	local cleanup = p1._cleanup
 	
 	if cleanup == nil then return end
-	p10._cleanup = nil
+	p1._cleanup = nil
 	
 	if not cleanup then return end
 	local ok, ok_1
-	local var19 = true
-	local var20 = nil
+	local var3 = true
+	local var4 = nil
 	
 	if typeof(cleanup) == "function" then
 		ok = true
@@ -122,166 +122,166 @@ local function cleanupSubscription(p10)
 	end
 	if ok then
 		ok, ok_1 = pcall(cleanup)
-		var19 = ok
-		var20 = ok_1
+		var3 = ok
+		var4 = ok_1
 	else
-		local var23
+		local var5
 		ok_1 = cleanup.unsubscribe
 		
 		if ok_1 == nil then
 			ok = nil
 		elseif typeof(ok_1) == "function" then
-			var23 = true
+			var5 = true
 		elseif typeof(ok_1) == "table" then
-			local var24 = getmetatable(ok_1)
-			var23 = if var24 and rawget(var24, "__call") then true elseif ok_1._isMockFunction then true else false
+			local var6 = getmetatable(ok_1)
+			var5 = if var6 and rawget(var6, "__call") then true elseif ok_1._isMockFunction then true else false
 		end
-		if not var23 then
+		if not var5 then
 			error(error.new(tostring(ok_1) .. " is not a function"))
 		end
 		ok = ok_1
 		if ok then
 			ok_1, status_1 = pcall(ok, cleanup)
-			var19 = ok_1
-			var20 = status_1
+			var3 = ok_1
+			var4 = status_1
 		end
 	end
-	if not var19 then
-		tbl(var20)
+	if not var3 then
+		tbl(var4)
 	end
 end
 
-local _ = function(p11)
-	p11._observer = nil
-	p11._queue = nil
-	p11._state = "closed"
+local _ = function(p1)
+	p1._observer = nil
+	p1._queue = nil
+	p1._state = "closed"
 end
 
-local function flushSubscription(p12)
+local function flushSubscription(p1)
 	-- upvalues: boolean (ref), notifySubscription (write)
-	local queue = p12._queue
+	local queue = p1._queue
 	
 	if not boolean.toJSBoolean(queue) then return end
-	p12._queue = nil
-	p12._state = "ready"
+	p1._queue = nil
+	p1._state = "ready"
 	
 	for i = 1, #queue do
-		notifySubscription(p12, queue[i].type, queue[i].value)
+		notifySubscription(p1, queue[i].type, queue[i].value)
 		
-		if p12._state == "closed" then break end
+		if p1._state == "closed" then break end
 	end
 end
 
-notifySubscription = function(p13, p14, p15)
+notifySubscription = function(p2, p3, p4)
 	-- upvalues: getMethod (ref), tbl (write), cleanupSubscription (ref)
-	p13._state = "running"
-	local observer = p13._observer
-	local var25 = nil
-	local ok, status = pcall(getMethod, observer, p14)
+	p2._state = "running"
+	local observer = p2._observer
+	local var3 = nil
+	local ok, status = pcall(getMethod, observer, p3)
 	
 	if not ok then
 		tbl(status)
 		
 		return
-	elseif p14 == "next" then
+	elseif p3 == "next" then
 		if status then
-			local ok_1, status_1 = pcall(status, observer, p15)
+			local ok_1, status_1 = pcall(status, observer, p4)
 			ok = ok_1
-			var25 = status_1
+			var3 = status_1
 		end
-	elseif p14 == "error" then
-		p13._observer = nil
-		p13._queue = nil
-		p13._state = "closed"
+	elseif p3 == "error" then
+		p2._observer = nil
+		p2._queue = nil
+		p2._state = "closed"
 		
 		if status then
-			local ok_1, status_1 = pcall(status, observer, p15)
+			local ok_1, status_1 = pcall(status, observer, p4)
 			ok = ok_1
-			var25 = status_1
+			var3 = status_1
 		else
-			tbl(p15)
+			tbl(p4)
 		end
-	elseif p14 == "complete" then
-		p13._observer = nil
-		p13._queue = nil
-		p13._state = "closed"
+	elseif p3 == "complete" then
+		p2._observer = nil
+		p2._queue = nil
+		p2._state = "closed"
 		
 		if status then
-			local ok_1, status_1 = pcall(status, observer, p15)
+			local ok_1, status_1 = pcall(status, observer, p4)
 			ok = ok_1
-			var25 = status_1
+			var3 = status_1
 		end
 	end
 	if not ok then
-		tbl(var25)
+		tbl(var3)
 	end
-	if p13._state == "closed" then
-		cleanupSubscription(p13)
+	if p2._state == "closed" then
+		cleanupSubscription(p2)
 		
 		return
-	elseif p13._state == "running" then
-		p13._state = "ready"
+	elseif p2._state == "running" then
+		p2._state = "ready"
 	end
 end
 
-local function onNotify(p16, p17, p18)
+local function onNotify(p2, p3, p4)
 	-- upvalues: flushSubscription (ref), promiseModule (ref), tbl (write), notifySubscription (write)
-	if p16._state == "closed" then return end
-	if p16._state == "buffering" then
-		assert(p16._queue, "observable subscription queue nil during onNotify")
-		table.insert(p16._queue, { type = p17, value = p18 })
+	if p2._state == "closed" then return end
+	if p2._state == "buffering" then
+		assert(p2._queue, "observable subscription queue nil during onNotify")
+		table.insert(p2._queue, { type = p3, value = p4 })
 		
 		return
-	elseif p16._state == "ready" then
-		notifySubscription(p16, p17, p18)
+	elseif p2._state == "ready" then
+		notifySubscription(p2, p3, p4)
 		
 		return
 	end
-	p16._state = "buffering"
-	p16._queue = { { type = p17, value = p18 } }
+	p2._state = "buffering"
+	p2._queue = { { type = p3, value = p4 } }
 	
-	local var26 = function()
-		-- upvalues: flushSubscription (copy), p16 (ref)
-		return flushSubscription(p16)
+	local var3 = function()
+		-- upvalues: flushSubscription (copy), p2 (ref)
+		return flushSubscription(p2)
 	end
 	
 	promiseModule.delay(0):doneCall(function()
-		-- upvalues: var26 (ref), tbl (copy)
-		xpcall(var26, function(p19)
+		-- upvalues: var3 (ref), tbl (copy)
+		xpcall(var3, function(p5)
 			-- upvalues: tbl (copy)
-			tbl(p19)
+			tbl(p5)
 		end)
 	end)
 end
 
 local t_2 = {}
 
-function t_2:__index(p20)
+function t_2:__index(p2)
 	-- upvalues: t_2 (ref)
-	return if p20 == "closed" then self._state == "closed" elseif rawget(self, p20) then rawget(self, p20) elseif rawget(t_2, p20) then rawget(t_2, p20) else nil
+	return if p2 == "closed" then self._state == "closed" elseif rawget(self, p2) then rawget(self, p2) elseif rawget(t_2, p2) then rawget(t_2, p2) else nil
 end
 
-function t_2:__newindex(p21, p22)
-	if p21 == "closed" then
+function t_2:__newindex(p2, p3)
+	if p2 == "closed" then
 		error("setting getter-only property 'closed'")
 	end
-	rawset(self, p21, p22)
+	rawset(self, p2, p3)
 end
 
-function t_2.new(p23, p24)
+function t_2.new(p2, p3)
 	-- upvalues: t_2 (ref), t_1 (write)
 	local tbl = setmetatable({}, t_2)
 	tbl._cleanup = nil
-	tbl._observer = p23
+	tbl._observer = p2
 	tbl._queue = nil
 	tbl._state = "initializing"
-	local var28 = t_1.new(tbl)
-	local ok, status = pcall(p24, var28)
+	local var3 = t_1.new(tbl)
+	local ok, status = pcall(p3, var3)
 	
 	if ok then
 		tbl._cleanup = status
 	else
-		var28:error(status)
+		var3:error(status)
 	end
 	if tbl._state == "initializing" then
 		tbl._state = "ready"
@@ -301,31 +301,31 @@ end
 
 t_1 = {}
 
-function t_1:__index(p25)
+function t_1:__index(p2)
 	-- upvalues: t_1 (write)
-	return if p25 == "closed" then self._subscription._state == "closed" elseif rawget(t_1, p25) then rawget(t_1, p25) else rawget(self, p25)
+	return if p2 == "closed" then self._subscription._state == "closed" elseif rawget(t_1, p2) then rawget(t_1, p2) else rawget(self, p2)
 end
 
-function t_1:__newindex(p26, p27)
-	if p26 == "closed" then
+function t_1:__newindex(p2, p3)
+	if p2 == "closed" then
 		error("setting getter-only property 'closed'")
 	end
-	rawset(self, p26, p27)
+	rawset(self, p2, p3)
 end
 
-function t_1.new(p28)
+function t_1.new(p2)
 	-- upvalues: t_1 (write)
-	return setmetatable({ _subscription = p28 }, t_1)
+	return setmetatable({ _subscription = p2 }, t_1)
 end
 
-function t_1:next(p29)
+function t_1:next(p2)
 	-- upvalues: onNotify (ref)
-	onNotify(self._subscription, "next", p29)
+	onNotify(self._subscription, "next", p2)
 end
 
-function t_1:error(p30)
+function t_1:error(p2)
 	-- upvalues: onNotify (ref)
-	onNotify(self._subscription, "error", p30)
+	onNotify(self._subscription, "error", p2)
 end
 
 function t_1:complete()
@@ -336,254 +336,254 @@ end
 t = {}
 t.__index = t
 
-local function isObservableClass(p31)
-	-- upvalues: var5 (ref), t (write)
-	return typeof(p31) == "table" and (p31[var5] == t[var5] and typeof(rawget(p31, "new")) == "function")
+local function isObservableClass(p2)
+	-- upvalues: var1 (ref), t (write)
+	return typeof(p2) == "table" and (p2[var1] == t[var1] and typeof(rawget(p2, "new")) == "function")
 end
 
-function t.new(p32)
+function t.new(p2)
 	-- upvalues: t (write)
-	local var29
-	if typeof(p32) == "function" then
-		var29 = true
-	elseif typeof(p32) == "table" then
-		local var30 = getmetatable(p32)
-		var29 = if var30 and rawget(var30, "__call") then true elseif p32._isMockFunction then true else false
+	local var3
+	if typeof(p2) == "function" then
+		var3 = true
+	elseif typeof(p2) == "table" then
+		local var4 = getmetatable(p2)
+		var3 = if var4 and rawget(var4, "__call") then true elseif p2._isMockFunction then true else false
 	end
-	if not var29 then
+	if not var3 then
 		error("Observable initializer must be a function")
 	end
-	return setmetatable({ _subscriber = p32 }, t)
+	return setmetatable({ _subscriber = p2 }, t)
 end
 
-function t:subscribe(p33, p34, p35)
+function t:subscribe(p2, p3, p4)
 	-- upvalues: t_2 (ref)
-	if typeof(p33) ~= "table" or p33 == nil then
-		p33 = { start = nil, next = p33, error = p34, complete = p35 }
+	if typeof(p2) ~= "table" or p2 == nil then
+		p2 = { start = nil, next = p2, error = p3, complete = p4 }
 	end
-	return t_2.new(p33, self._subscriber)
+	return t_2.new(p2, self._subscriber)
 end
 
-function t.forEach(p36, p37)
+function t.forEach(p2, p3)
 	-- upvalues: promiseModule (ref), error (ref)
-	return promiseModule.new(function(p38, p39)
-		-- upvalues: p37 (ref), error (copy), p36 (ref)
-		local var32
-		local var31 = p37
+	return promiseModule.new(function(p4, p5)
+		-- upvalues: p3 (ref), error (copy), p2 (ref)
+		local var3
+		local var4 = p3
 		
-		if typeof(var31) == "function" then
-			var32 = true
-		elseif typeof(var31) == "table" then
-			local var33 = getmetatable(var31)
-			var32 = if var33 and rawget(var33, "__call") then true elseif var31._isMockFunction then true else false
+		if typeof(var4) == "function" then
+			var3 = true
+		elseif typeof(var4) == "table" then
+			local var5 = getmetatable(var4)
+			var3 = if var5 and rawget(var5, "__call") then true elseif var4._isMockFunction then true else false
 		end
-		if var32 then
-			local var34 = nil
+		if var3 then
+			local var6 = nil
 			
-			var31 = function()
-				-- upvalues: var34 (write), p38 (ref)
-				var34:unsubscribe()
-				p38()
+			var4 = function()
+				-- upvalues: var6 (write), p4 (ref)
+				var6:unsubscribe()
+				p4()
 			end
 			
-			var34 = p36:subscribe({
-				next = function(_, p40)
-					-- upvalues: p37 (copy), var31 (ref), p39 (ref), var34 (write)
-					local ok, status = pcall(p37, p40, var31)
+			var6 = p2:subscribe({
+				next = function(_, p6)
+					-- upvalues: p3 (copy), var4 (ref), p5 (ref), var6 (write)
+					local ok, status = pcall(p3, p6, var4)
 					
 					if not ok then
-						p39(status)
-						var34:unsubscribe()
+						p5(status)
+						var6:unsubscribe()
 					end
 				end,
-				error = function(_, p41)
-					-- upvalues: p39 (ref)
-					p39(p41)
+				error = function(_, p6)
+					-- upvalues: p5 (ref)
+					p5(p6)
 				end,
 				complete = function(_)
-					-- upvalues: p38 (ref)
-					p38()
+					-- upvalues: p4 (ref)
+					p4()
 				end
 			})
 			
 			return
 		end
-		p39(error.new(tostring(p37) .. " is not a function"))
+		p5(error.new(tostring(p3) .. " is not a function"))
 	end)
 end
 
-function t:map(p42)
-	-- upvalues: error (ref), var6 (ref), t (write)
-	local var35, var36
-	if typeof(p42) == "function" then
-		var35 = true
-	elseif typeof(p42) == "table" then
-		var36 = getmetatable(p42)
-		var35 = if var36 and rawget(var36, "__call") then true elseif p42._isMockFunction then true else false
+function t:map(p2)
+	-- upvalues: error (ref), var2 (ref), t (write)
+	local var3, var4
+	if typeof(p2) == "function" then
+		var3 = true
+	elseif typeof(p2) == "table" then
+		var4 = getmetatable(p2)
+		var3 = if var4 and rawget(var4, "__call") then true elseif p2._isMockFunction then true else false
 	end
-	if not var35 then
-		error(error.new(tostring(p42) .. " is not a function"))
+	if not var3 then
+		error(error.new(tostring(p2) .. " is not a function"))
 	end
-	var36 = self[var6]
+	var4 = self[var2]
 	
-	return (if var36 ~= nil then t else var36).new(function(p43)
-		-- upvalues: self (ref), p42 (ref)
+	return (if var4 ~= nil then t else var4).new(function(p3)
+		-- upvalues: self (ref), p2 (ref)
 		return self:subscribe({
-			next = function(_, p44)
-				-- upvalues: p42 (copy), p43 (ref)
-				local ok, status = pcall(p42, p44)
+			next = function(_, p4)
+				-- upvalues: p2 (copy), p3 (ref)
+				local ok, status = pcall(p2, p4)
 				
 				if ok then
-					p43:next(status)
+					p3:next(status)
 					
 					return
 				end
-				p43:error(status)
+				p3:error(status)
 			end,
-			error = function(_, p45)
-				-- upvalues: p43 (ref)
-				p43:error(p45)
+			error = function(_, p4)
+				-- upvalues: p3 (ref)
+				p3:error(p4)
 			end,
 			complete = function(_)
-				-- upvalues: p43 (ref)
-				p43:complete()
+				-- upvalues: p3 (ref)
+				p3:complete()
 			end
 		})
 	end)
 end
 
-function t:filter(p46)
-	-- upvalues: error (ref), var6 (ref), t (write), boolean (ref)
-	local var37, var38
-	if typeof(p46) == "function" then
-		var37 = true
-	elseif typeof(p46) == "table" then
-		var38 = getmetatable(p46)
-		var37 = if var38 and rawget(var38, "__call") then true elseif p46._isMockFunction then true else false
+function t:filter(p2)
+	-- upvalues: error (ref), var2 (ref), t (write), boolean (ref)
+	local var3, var4
+	if typeof(p2) == "function" then
+		var3 = true
+	elseif typeof(p2) == "table" then
+		var4 = getmetatable(p2)
+		var3 = if var4 and rawget(var4, "__call") then true elseif p2._isMockFunction then true else false
 	end
-	if not var37 then
-		error(error.new(tostring(p46) .. " is not a function"))
+	if not var3 then
+		error(error.new(tostring(p2) .. " is not a function"))
 	end
-	var38 = self[var6]
+	var4 = self[var2]
 	
-	return (if var38 ~= nil then t else var38).new(function(p47)
-		-- upvalues: self (ref), p46 (ref), boolean (copy)
+	return (if var4 ~= nil then t else var4).new(function(p3)
+		-- upvalues: self (ref), p2 (ref), boolean (copy)
 		return self:subscribe({
-			next = function(_, p48)
-				-- upvalues: p46 (copy), p47 (ref), boolean (copy)
-				local ok, status = xpcall(p46, function(p49)
-					-- upvalues: p47 (copy)
-					p47:error(p49)
-				end, p48)
+			next = function(_, p4)
+				-- upvalues: p2 (copy), p3 (ref), boolean (copy)
+				local ok, status = xpcall(p2, function(p5)
+					-- upvalues: p3 (copy)
+					p3:error(p5)
+				end, p4)
 				
 				if ok and not boolean.toJSBoolean(status) then return end
 				if ok then
-					p47:next(p48)
+					p3:next(p4)
 					
 					return
 				end
 			end,
-			error = function(_, p50)
-				-- upvalues: p47 (ref)
-				p47:error(p50)
+			error = function(_, p4)
+				-- upvalues: p3 (ref)
+				p3:error(p4)
 			end,
 			complete = function(_)
-				-- upvalues: p47 (ref)
-				p47:complete()
+				-- upvalues: p3 (ref)
+				p3:complete()
 			end
 		})
 	end)
 end
 
-function t:reduce(p51, ...)
-	-- upvalues: error (ref), var6 (ref), t (write)
-	local var40, var41
-	local list = { p51, ... }
+function t:reduce(p2, ...)
+	-- upvalues: error (ref), var2 (ref), t (write)
+	local var3, var4
+	local list = { p2, ... }
 	
-	if typeof(p51) == "function" then
-		var40 = true
-	elseif typeof(p51) == "table" then
-		var41 = getmetatable(p51)
-		var40 = if var41 and rawget(var41, "__call") then true elseif p51._isMockFunction then true else false
+	if typeof(p2) == "function" then
+		var3 = true
+	elseif typeof(p2) == "table" then
+		var4 = getmetatable(p2)
+		var3 = if var4 and rawget(var4, "__call") then true elseif p2._isMockFunction then true else false
 	end
-	if not var40 then
-		error(error.new(tostring(p51) .. " is not a function"))
+	if not var3 then
+		error(error.new(tostring(p2) .. " is not a function"))
 	end
-	var41 = self[var6]
-	local var42 = if var41 ~= nil then t else var41
-	var41 = #list > 1
-	local var43 = false
-	local var44 = list[2]
+	var4 = self[var2]
+	local var5 = if var4 ~= nil then t else var4
+	var4 = #list > 1
+	local var6 = false
+	local var7 = list[2]
 	
-	return var42.new(function(p52)
-		-- upvalues: self (ref), var43 (write), var41 (ref), var44 (write), p51 (ref), error (copy)
+	return var5.new(function(p3)
+		-- upvalues: self (ref), var6 (write), var4 (ref), var7 (write), p2 (ref), error (copy)
 		return self:subscribe({
-			next = function(_, p53)
-				-- upvalues: var43 (copy), var41 (copy), var44 (copy), p51 (copy), p52 (ref)
-				local var45 = not var43
-				var43 = true
+			next = function(_, p4)
+				-- upvalues: var6 (copy), var4 (copy), var7 (copy), p2 (copy), p3 (ref)
+				local var8 = not var6
+				var6 = true
 				
-				if var45 and not var41 then
-					var44 = p53
+				if var8 and not var4 then
+					var7 = p4
 					
 					return
 				end
-				local var46 = nil
-				local ok, status = xpcall(p51, function(p54)
-					-- upvalues: p52 (copy)
-					p52:error(p54)
-				end, var44, p53)
-				var44 = status
-				var46 = ok
+				local var9 = nil
+				local ok, status = xpcall(p2, function(p5)
+					-- upvalues: p3 (copy)
+					p3:error(p5)
+				end, var7, p4)
+				var7 = status
+				var9 = ok
 			end,
-			error = function(_, p55)
-				-- upvalues: p52 (ref)
-				p52:error(p55)
+			error = function(_, p4)
+				-- upvalues: p3 (ref)
+				p3:error(p4)
 			end,
 			complete = function(_)
-				-- upvalues: var43 (copy), var41 (copy), p52 (ref), error (copy), var44 (copy)
-				if not var43 and not var41 then
-					p52:error(error.new("Cannot reduce an empty sequence"))
+				-- upvalues: var6 (copy), var4 (copy), p3 (ref), error (copy), var7 (copy)
+				if not var6 and not var4 then
+					p3:error(error.new("Cannot reduce an empty sequence"))
 				end
-				p52:next(var44)
-				p52:complete()
+				p3:next(var7)
+				p3:complete()
 			end
 		})
 	end)
 end
 
 function t:concat(...)
-	-- upvalues: var6 (ref), t (write), boolean (ref)
+	-- upvalues: var2 (ref), t (write), boolean (ref)
 	local list = { ... }
-	local var48 = self[var6]
-	local var49 = if var48 ~= nil then t else var48
+	local var3 = self[var2]
+	local var4 = if var3 ~= nil then t else var3
 	
-	return var49.new(function(p56)
-		-- upvalues: list (ref), var49 (ref), self (ref), boolean (copy)
-		local var50 = nil
-		local var51 = 1
+	return var4.new(function(p2)
+		-- upvalues: list (ref), var4 (ref), self (ref), boolean (copy)
+		local var5 = nil
+		local var6 = 1
 		
-		local function startNext(p57)
-			-- upvalues: var50 (write), p56 (ref), var51 (write), list (copy), startNext (ref), var49 (copy)
-			var50 = p57:subscribe({
-				next = function(_, p58)
-					-- upvalues: p56 (copy)
-					p56:next(p58)
+		local function startNext(p3)
+			-- upvalues: var5 (write), p2 (ref), var6 (write), list (copy), startNext (ref), var4 (copy)
+			var5 = p3:subscribe({
+				next = function(_, p4)
+					-- upvalues: p2 (copy)
+					p2:next(p4)
 				end,
-				error = function(_, p59)
-					-- upvalues: p56 (copy)
-					p56:error(p59)
+				error = function(_, p4)
+					-- upvalues: p2 (copy)
+					p2:error(p4)
 				end,
 				complete = function(_)
-					-- upvalues: var51 (copy), list (copy), var50 (copy), p56 (copy), startNext (copy), var49 (copy)
-					if var51 == #list + 1 then
-						var50 = nil
-						p56:complete()
+					-- upvalues: var6 (copy), list (copy), var5 (copy), p2 (copy), startNext (copy), var4 (copy)
+					if var6 == #list + 1 then
+						var5 = nil
+						p2:complete()
 						
 						return
 					end
-					var51 += 1
-					startNext(var49.from(list[var51]))
+					var6 += 1
+					startNext(var4.from(list[var6]))
 				end
 			})
 		end
@@ -591,202 +591,202 @@ function t:concat(...)
 		startNext(self)
 		
 		return function()
-			-- upvalues: boolean (copy), var50 (write)
-			if boolean.toJSBoolean(var50) then
-				var50:unsubscribe()
-				var50 = nil
+			-- upvalues: boolean (copy), var5 (write)
+			if boolean.toJSBoolean(var5) then
+				var5:unsubscribe()
+				var5 = nil
 			end
 		end
 	end)
 end
 
-function t:flatMap(p60)
-	-- upvalues: error (ref), var6 (ref), t (write), boolean (ref), array (ref)
-	local var54, var55
-	local var53 = nil
+function t:flatMap(p2)
+	-- upvalues: error (ref), var2 (ref), t (write), boolean (ref), array (ref)
+	local var3, var4
+	local var5 = nil
 	
-	if typeof(p60) == "function" then
-		var54 = true
-	elseif typeof(p60) == "table" then
-		var55 = getmetatable(p60)
-		var54 = if var55 and rawget(var55, "__call") then true elseif p60._isMockFunction then true else false
+	if typeof(p2) == "function" then
+		var3 = true
+	elseif typeof(p2) == "table" then
+		var4 = getmetatable(p2)
+		var3 = if var4 and rawget(var4, "__call") then true elseif p2._isMockFunction then true else false
 	end
-	if not var54 then
-		error(error.new(tostring(p60) .. " is not a function"))
+	if not var3 then
+		error(error.new(tostring(p2) .. " is not a function"))
 	end
-	var55 = self[var6]
-	local var56 = if var55 ~= nil then t else var55
+	var4 = self[var2]
+	local var6 = if var4 ~= nil then t else var4
 	
-	return var56.new(function(p61)
-		-- upvalues: self (ref), boolean (copy), p60 (ref), var56 (ref), array (copy), var53 (write)
+	return var6.new(function(p3)
+		-- upvalues: self (ref), boolean (copy), p2 (ref), var6 (ref), array (copy), var5 (write)
 		local t = {}
-		local var58 = self:subscribe({
-			next = function(_, p62)
-				-- upvalues: boolean (copy), p60 (copy), p61 (ref), var56 (copy), array (copy), t (ref), var53 (copy)
-				if boolean.toJSBoolean(p60) then
+		local var7 = self:subscribe({
+			next = function(_, p4)
+				-- upvalues: boolean (copy), p2 (copy), p3 (ref), var6 (copy), array (copy), t (ref), var5 (copy)
+				if boolean.toJSBoolean(p2) then
 					local _ = nil
-					local ok, status = xpcall(p60, function(p63)
-						-- upvalues: p61 (copy)
-						p61:error(p63)
-					end, p62)
+					local ok, status = xpcall(p2, function(p5)
+						-- upvalues: p3 (copy)
+						p3:error(p5)
+					end, p4)
 					local _ = ok
-					p62 = status
+					p4 = status
 				end
-				local var59 = nil
-				table.insert(t, var56.from(p62):subscribe({
-					next = function(_, p64)
-						-- upvalues: p61 (copy)
-						p61:next(p64)
+				local var8 = nil
+				table.insert(t, var6.from(p4):subscribe({
+					next = function(_, p5)
+						-- upvalues: p3 (copy)
+						p3:next(p5)
 					end,
-					error = function(_, p65)
-						-- upvalues: p61 (copy)
-						p61:error(p65)
+					error = function(_, p5)
+						-- upvalues: p3 (copy)
+						p3:error(p5)
 					end,
 					complete = function(_)
-						-- upvalues: array (copy), t (copy), var59 (write), var53 (copy)
-						local var60 = array.indexOf(t, var59)
+						-- upvalues: array (copy), t (copy), var8 (write), var5 (copy)
+						local var9 = array.indexOf(t, var8)
 						
-						if var60 >= 1 then
-							array.splice(t, var60, 1)
+						if var9 >= 1 then
+							array.splice(t, var9, 1)
 						end
-						var53()
+						var5()
 					end
 				}))
 				
 				return nil
 			end,
-			error = function(_, p66)
-				-- upvalues: p61 (ref)
-				p61:error(p66)
+			error = function(_, p4)
+				-- upvalues: p3 (ref)
+				p3:error(p4)
 			end,
 			complete = function(_)
-				-- upvalues: var53 (copy)
-				var53()
+				-- upvalues: var5 (copy)
+				var5()
 			end
 		})
 		
-		var53 = function()
-			-- upvalues: var58 (ref), t (ref), p61 (ref)
-			if var58.closed and #t == 0 then
-				p61:complete()
+		var5 = function()
+			-- upvalues: var7 (ref), t (ref), p3 (ref)
+			if var7.closed and #t == 0 then
+				p3:complete()
 			end
 		end
 		
 		return function()
-			-- upvalues: array (copy), t (ref), var58 (ref)
-			array.forEach(t, function(p67)
-				return p67:unsubscribe()
+			-- upvalues: array (copy), t (ref), var7 (ref)
+			array.forEach(t, function(p4)
+				return p4:unsubscribe()
 			end)
-			var58:unsubscribe()
+			var7:unsubscribe()
 		end
 	end)
 end
 
-t[var5] = function(p68)
-	return p68
+t[var1] = function(p2)
+	return p2
 end
 
-function t.from(p69, p70)
-	-- upvalues: isObservableClass (write), t (write), error (ref), var5 (ref), instanceof (ref), array (ref), promiseModule (ref), tbl (write)
-	local var61, var62
+function t.from(p2, p3)
+	-- upvalues: isObservableClass (write), t (write), error (ref), var1 (ref), instanceof (ref), array (ref), promiseModule (ref), tbl (write)
+	local var3, var4
 	local _ = nil
 	local _ = nil
 	
-	if isObservableClass(p69) then
-		var61 = p69
-		var62 = p70
+	if isObservableClass(p2) then
+		var3 = p2
+		var4 = p3
 	else
-		var61 = t
-		var62 = p69
+		var3 = t
+		var4 = p2
 	end
-	if var62 == nil then
-		error(error.new(tostring(var62) .. " is not an object"))
+	if var4 == nil then
+		error(error.new(tostring(var4) .. " is not an object"))
 	end
-	local var64, var65
-	local var63 = var62[var5]
+	local var5, var6
+	local var7 = var4[var1]
 	
-	if var63 == nil then
-		var64 = nil
-	elseif typeof(var63) == "function" then
-		var65 = true
-	elseif typeof(var63) == "table" then
-		local var66 = getmetatable(var63)
-		var65 = if var66 and rawget(var66, "__call") then true elseif var63._isMockFunction then true else false
+	if var7 == nil then
+		var5 = nil
+	elseif typeof(var7) == "function" then
+		var6 = true
+	elseif typeof(var7) == "table" then
+		local var8 = getmetatable(var7)
+		var6 = if var8 and rawget(var8, "__call") then true elseif var7._isMockFunction then true else false
 	end
-	if not var65 then
-		error(error.new(tostring(var63) .. " is not a function"))
+	if not var6 then
+		error(error.new(tostring(var7) .. " is not a function"))
 	end
-	var64 = var63
-	if var64 then
-		local var67 = var64(var62)
+	var5 = var7
+	if var5 then
+		local var9 = var5(var4)
 		
-		return if instanceof(var67, t) and var67.new == var61.new then var67 else var61.new(function(p71)
-			-- upvalues: var67 (ref)
-			return var67:subscribe(p71)
+		return if instanceof(var9, t) and var9.new == var3.new then var9 else var3.new(function(p4)
+			-- upvalues: var9 (ref)
+			return var9:subscribe(p4)
 		end)
-	elseif array.isArray(var62) then
-		return t.new(function(p72)
-			-- upvalues: var62 (write), promiseModule (copy), tbl (copy)
-			local var68 = function()
-				-- upvalues: p72 (ref), var62 (copy)
-				if p72.closed then return end
-				for i, v in pairs(var62) do
-					p72:next(v)
+	elseif array.isArray(var4) then
+		return t.new(function(p4)
+			-- upvalues: var4 (write), promiseModule (copy), tbl (copy)
+			local var10 = function()
+				-- upvalues: p4 (ref), var4 (copy)
+				if p4.closed then return end
+				for i, v in pairs(var4) do
+					p4:next(v)
 					
-					if p72.closed then return end
+					if p4.closed then return end
 				end
-				p72:complete()
+				p4:complete()
 			end
 			
 			promiseModule.delay(0):doneCall(function()
-				-- upvalues: var68 (ref), tbl (copy)
-				xpcall(var68, function(p73)
+				-- upvalues: var10 (ref), tbl (copy)
+				xpcall(var10, function(p5)
 					-- upvalues: tbl (copy)
-					tbl(p73)
+					tbl(p5)
 				end)
 			end)
 		end)
 	end
-	error(error.new(tostring(var62) .. " is not observable"))
+	error(error.new(tostring(var4) .. " is not observable"))
 end
 
-function t.of(p74, ...)
+function t.of(p4, ...)
 	-- upvalues: isObservableClass (write), t (write), promiseModule (ref), tbl (write)
-	local var69, list
+	local var10, list
 	local _ = nil
 	local _ = nil
 	
-	if isObservableClass(p74) then
-		var69 = p74
+	if isObservableClass(p4) then
+		var10 = p4
 		list = { ... }
 	else
-		var69 = t
-		list = { p74, ... }
+		var10 = t
+		list = { p4, ... }
 	end
-	return var69.new(function(p75)
+	return var10.new(function(p5)
 		-- upvalues: list (write), promiseModule (copy), tbl (copy)
-		local var71 = function()
-			-- upvalues: p75 (ref), list (copy)
-			if p75.closed then return end
+		local var11 = function()
+			-- upvalues: p5 (ref), list (copy)
+			if p5.closed then return end
 			for i, v in ipairs(list) do
-				p75:next(v)
+				p5:next(v)
 				
-				if p75.closed then return end
+				if p5.closed then return end
 			end
-			p75:complete()
+			p5:complete()
 		end
 		
 		promiseModule.delay(0):doneCall(function()
-			-- upvalues: var71 (ref), tbl (copy)
-			xpcall(var71, function(p76)
+			-- upvalues: var11 (ref), tbl (copy)
+			xpcall(var11, function(p6)
 				-- upvalues: tbl (copy)
-				tbl(p76)
+				tbl(p6)
 			end)
 		end)
 	end)
 end
 
 if typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function" then
-	t[symbol("extensions")] = { symbol = var5, hostReportError = tbl }
+	t[symbol("extensions")] = { symbol = var1, hostReportError = tbl }
 end
 return { Observable = t }

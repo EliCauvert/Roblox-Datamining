@@ -10,14 +10,14 @@ local t = {
 	[productKind.Product] = storeEnums.ProductType.DeveloperProducts
 }
 
-return function(p0, p1, _)
+return function(p1, p2, _)
 	-- upvalues: getActionTelemetryFieldValue (ref), t (ref), edpStoreAnalyticsLogger (ref), storeEnums (ref)
-	local var2 = getActionTelemetryFieldValue(p0, p1, "kind")
-	local var3 = var2 and t[var2]
+	local var1 = getActionTelemetryFieldValue(p1, p2, "kind")
+	local var2 = var1 and t[var1]
 	
-	if var3 == nil then
+	if var2 == nil then
 		return
 	end
-	local var4 = getActionTelemetryFieldValue(p0, p1, "productId")
-	edpStoreAnalyticsLogger.logEvent(storeEnums.ActionType.PurchaseAttemptClick, var3, getActionTelemetryFieldValue(p0, p1, "edpLocationType"), tonumber(getActionTelemetryFieldValue(p0, p1, "universeId")), tonumber(var4), tostring(var4))
+	local var3 = getActionTelemetryFieldValue(p1, p2, "productId")
+	edpStoreAnalyticsLogger.logEvent(storeEnums.ActionType.PurchaseAttemptClick, var2, getActionTelemetryFieldValue(p1, p2, "edpLocationType"), tonumber(getActionTelemetryFieldValue(p1, p2, "universeId")), tonumber(var3), tostring(var3))
 end

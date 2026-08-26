@@ -17,24 +17,24 @@ local _ = {
 	hideChat = "CoreScripts.TopBar.HideChat"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), useSelector (ref), roactModule (ref), coreGuiService (ref), inGameMenuConstantsModule (ref), controllerBar (ref)
-	local var7 = localization.new(localizationService.RobloxLocaleId)
+	local var1 = localization.new(localizationService.RobloxLocaleId)
 	local list = {
 		{
-			text = var7:Format("CoreScripts.TopBar.Respawn"),
+			text = var1:Format("CoreScripts.TopBar.Respawn"),
 			keyCode = Enum.KeyCode.ButtonY
 		},
 		{
-			text = var7:Format("CoreScripts.TopBar.Leave"),
+			text = var1:Format("CoreScripts.TopBar.Leave"),
 			keyCode = Enum.KeyCode.ButtonX
 		}
 	}
 	
-	if p0.chatMenuEnabled then
+	if p1.chatMenuEnabled then
 		table.insert(list, 1, {
-			text = var7:Format(if useSelector(reactModule.useCallback(function(p1)
-				return p1.chat.visible
+			text = var1:Format(if useSelector(reactModule.useCallback(function(p2)
+				return p2.chat.visible
 			end)) then "CoreScripts.TopBar.HideChat" else "CoreScripts.TopBar.ShowChat"),
 			keyCode = Enum.KeyCode.ButtonR1
 		})
@@ -45,7 +45,7 @@ return function(p0)
 		}, {
 			ControllerBar = reactModule.createElement(controllerBar, {
 				leftHint = {
-					text = var7:Format("CoreScripts.TopBar.Back"),
+					text = var1:Format("CoreScripts.TopBar.Back"),
 					keyCode = Enum.KeyCode.ButtonB
 				},
 				rightHints = list

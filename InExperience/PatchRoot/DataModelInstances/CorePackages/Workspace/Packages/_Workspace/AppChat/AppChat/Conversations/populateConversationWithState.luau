@@ -12,42 +12,42 @@ local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppC
 local userPresenceUtilsModule = require(appChat.Users.userPresenceUtils)
 local getConversationTimestampModule = require(appChat.Utils.getConversationTimestamp)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: cryoModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), getOtherParticipant (ref), roduxPresenceModule (ref), userPresenceUtilsModule (ref), getConversationTimestampModule (ref), getConversationTitleModule (ref), populateUserIdsWithStateModule (ref), getLastMessageContentModule (ref), getThumbnailsForUserIdsModule (ref), getConversationGameId (ref)
-	local participants = p1.participants or {}
-	local var11 = cryoModule.List.filter(participants, function(p2)
-		-- upvalues: p0 (ref)
-		return p2 ~= p0.LocalUserId
+	local participants = p2.participants or {}
+	local var1 = cryoModule.List.filter(participants, function(p3)
+		-- upvalues: p1 (ref)
+		return p3 ~= p1.LocalUserId
 	end)
-	local var12 = if not (fFlagAppChatPresenceStoreMigrationModule or p1.conversationType ~= "OneToOneConversation") then userPresenceUtilsModule.getUserDisplayPresence(roduxPresenceModule.Selectors.getUserPresenceByUserId(p0, getOtherParticipant(p0, p1.participants))) else nil
+	local var2 = if not (fFlagAppChatPresenceStoreMigrationModule or p2.conversationType ~= "OneToOneConversation") then userPresenceUtilsModule.getUserDisplayPresence(roduxPresenceModule.Selectors.getUserPresenceByUserId(p1, getOtherParticipant(p1, p2.participants))) else nil
 	local t = {}
-	local users = p0.Users
+	local users = p1.Users
 	
 	for i, v in pairs(participants) do
 		t[v] = users[v]
 	end
 	return cryoModule.Dictionary.join({
-		id = p1.id,
-		title = getConversationTitleModule(p1),
-		participants = populateUserIdsWithStateModule(p0, participants),
-		otherParticipants = var11,
-		isDefaultTitle = p1.isDefaultTitle,
-		hasGroupUp = p1.hasGroupUp,
-		lastMessageContent = getLastMessageContentModule(p1) or "",
-		hasUnreadMessages = p1.hasUnreadMessages or false,
-		thumbnails = getThumbnailsForUserIdsModule(var11),
-		presenceText = if fFlagAppChatPresenceStoreMigrationModule then nil else var12 and var12.text,
-		presenceImage = if fFlagAppChatPresenceStoreMigrationModule then nil else var12 and var12.image,
-		gameId = getConversationGameId(p1, p0.LocalUserId, t),
-		serverState = p1.serverState,
-		moderationType = p1.moderationType,
-		userPendingStatus = p1.userPendingStatus,
-		conversationType = p1.conversationType,
-		osaAcknowledgementStatus = p1.osaAcknowledgementStatus,
-		userOptedIntoChatMessages = p1.userOptedIntoChatMessages
+		id = p2.id,
+		title = getConversationTitleModule(p2),
+		participants = populateUserIdsWithStateModule(p1, participants),
+		otherParticipants = var1,
+		isDefaultTitle = p2.isDefaultTitle,
+		hasGroupUp = p2.hasGroupUp,
+		lastMessageContent = getLastMessageContentModule(p2) or "",
+		hasUnreadMessages = p2.hasUnreadMessages or false,
+		thumbnails = getThumbnailsForUserIdsModule(var1),
+		presenceText = if fFlagAppChatPresenceStoreMigrationModule then nil else var2 and var2.text,
+		presenceImage = if fFlagAppChatPresenceStoreMigrationModule then nil else var2 and var2.image,
+		gameId = getConversationGameId(p2, p1.LocalUserId, t),
+		serverState = p2.serverState,
+		moderationType = p2.moderationType,
+		userPendingStatus = p2.userPendingStatus,
+		conversationType = p2.conversationType,
+		osaAcknowledgementStatus = p2.osaAcknowledgementStatus,
+		userOptedIntoChatMessages = p2.userOptedIntoChatMessages
 	}, {
-		shortRelativeTime = p1.lastUpdated and getConversationTimestampModule(p1.lastUpdated),
-		longRelativeTime = p1.lastUpdated and p1.lastUpdated:GetLongRelativeTime(),
-		unixTime = p1.lastUpdated and p1.lastUpdated:GetUnixTimestamp()
+		shortRelativeTime = p2.lastUpdated and getConversationTimestampModule(p2.lastUpdated),
+		longRelativeTime = p2.lastUpdated and p2.lastUpdated:GetLongRelativeTime(),
+		unixTime = p2.lastUpdated and p2.lastUpdated:GetUnixTimestamp()
 	})
 end

@@ -1,9 +1,9 @@
-﻿return function(p0, p1, p2)
-	local ok, status = pcall(p0)
+﻿return function(p1, p2, p3)
+	local ok, status = pcall(p1)
 	
 	if ok then
 		return { pass = false, message = "Expected function to throw" }
-	elseif typeof(p1) ~= "string" then
+	elseif typeof(p2) ~= "string" then
 		return { pass = true, message = "Expected function not to throw" }
 	end
 	local message = nil
@@ -16,11 +16,11 @@
 	return if message == nil then {
 		pass = false,
 		message = string.format("Matcher Error:\nExpected function to throw a string or an Error object, but it threw an error of type '%s'.\nYou may wish to use `pcall` instead and run custom expectations on the returned error", typeof(status))
-	} elseif message:find(p1, 1, not p2) == nil then {
+	} elseif message:find(p2, 1, not p3) == nil then {
 		pass = false,
-		message = string.format("Expected function to throw with\n'%s'\nbut threw\n'%s'\ninstead", p1, message)
+		message = string.format("Expected function to throw with\n'%s'\nbut threw\n'%s'\ninstead", p2, message)
 	} else {
 		pass = true,
-		message = string.format("Expected function not to throw with '%s'", p1)
+		message = string.format("Expected function not to throw with '%s'", p2)
 	}
 end

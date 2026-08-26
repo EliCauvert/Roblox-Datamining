@@ -13,13 +13,13 @@ local reportUnifiedLoggingImpressions = sduiCoreSystemModule.reportUnifiedLoggin
 local sduiComponentType = sduiCoreSystemModule.SduiComponentType
 local useCollectionAnalyticsContextModule = require(script.Parent.useCollectionAnalyticsContext)
 
-local function buildSelectionsFromGroups(p0)
+local function buildSelectionsFromGroups(p1)
 	local t = {}
 	
-	if not p0 then
+	if not p1 then
 		return t
 	end
-	for i, v in p0 do
+	for i, v in p1 do
 		if v.filterType and v.filterType ~= "" then
 			t[v.filterType] = v.selectedOptionId or v.defaultOptionId
 		end
@@ -27,61 +27,61 @@ local function buildSelectionsFromGroups(p0)
 	return t
 end
 
-local function convertToFilterModel(p1, p2)
-	local displayName = p1.displayName
+local function convertToFilterModel(p2, p3)
+	local displayName = p2.displayName
 	local t = {}
 	
-	for i, v in p1.options do
+	for i, v in p2.options do
 		table.insert(t, {
 			optionId = v.optionId,
 			optionDisplayName = v.displayName,
 			optionContextTag = v.optionContextTag
 		})
 		
-		if v.optionId == p2 then
+		if v.optionId == p3 then
 			displayName = v.displayName
 		end
 	end
-	local var9 = nil
+	local var1 = nil
 	
-	if p1.inactiveOptionIds and #p1.inactiveOptionIds > 0 then
+	if p2.inactiveOptionIds and #p2.inactiveOptionIds > 0 then
 		local t_1 = {}
 		
-		for i_1, v_1 in p1.inactiveOptionIds do
+		for i_1, v_1 in p2.inactiveOptionIds do
 			t_1[v_1] = true
 		end
-		var9 = t_1
+		var1 = t_1
 	end
 	return {
-		filterId = p1.filterId,
-		filterType = p1.filterType or "",
-		filterDisplayName = p1.displayName,
+		filterId = p2.filterId,
+		filterType = p2.filterType or "",
+		filterDisplayName = p2.displayName,
 		filterOptions = t,
-		defaultOptionId = p1.defaultOptionId,
-		selectedOptionId = p2,
+		defaultOptionId = p2.defaultOptionId,
+		selectedOptionId = p3,
 		selectedOptionDisplayName = displayName,
-		inactiveOptionIds = var9
+		inactiveOptionIds = var1
 	}
 end
 
-return reactModule.memo(function(p3)
+return reactModule.memo(function(p4)
 	-- upvalues: reactModule (ref), buildSelectionsFromGroups (ref), convertToFilterModel (ref), useCollectionAnalyticsContextModule (ref), sduiComponentType (ref), getOptionContextTag (ref), reportUnifiedLoggingImpressions (ref), cryoModule (ref), view (ref), filterPillCarousel (ref)
-	local filterGroups = p3.filterGroups
-	local sduiContext = p3.sduiContext
-	local analyticsContext = p3.analyticsContext
-	local var11, var12 = reactModule.useState(function()
+	local filterGroups = p4.filterGroups
+	local sduiContext = p4.sduiContext
+	local analyticsContext = p4.analyticsContext
+	local var2, var3 = reactModule.useState(function()
 		-- upvalues: buildSelectionsFromGroups (copy), filterGroups (ref)
 		return buildSelectionsFromGroups(filterGroups)
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: filterGroups (ref), var12 (ref), buildSelectionsFromGroups (copy)
+		-- upvalues: filterGroups (ref), var3 (ref), buildSelectionsFromGroups (copy)
 		if filterGroups then
-			var12(buildSelectionsFromGroups(filterGroups))
+			var3(buildSelectionsFromGroups(filterGroups))
 		end
 	end, { filterGroups })
-	local var13 = reactModule.useRef(nil)
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: filterGroups (ref), var11 (ref), convertToFilterModel (copy)
+	local var4 = reactModule.useRef(nil)
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: filterGroups (ref), var2 (ref), convertToFilterModel (copy)
 		if not filterGroups then
 			return {}
 		end
@@ -89,16 +89,16 @@ return reactModule.memo(function(p3)
 		
 		for i, v in filterGroups do
 			local filterType = v.filterType or ""
-			table.insert(t, convertToFilterModel(v, (if filterType ~= "" then nil else var11[filterType]) or v.defaultOptionId))
+			table.insert(t, convertToFilterModel(v, (if filterType ~= "" then nil else var2[filterType]) or v.defaultOptionId))
 		end
 		return t
-	end, { filterGroups, var11 })
-	local _, var15 = useCollectionAnalyticsContextModule(analyticsContext, sduiComponentType.FilterPillsCarousel, #var14, #var14, sduiContext, nil)
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: var14 (ref), getOptionContextTag (copy)
+	end, { filterGroups, var2 })
+	local _, var6 = useCollectionAnalyticsContextModule(analyticsContext, sduiComponentType.FilterPillsCarousel, #var5, #var5, sduiContext, nil)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref), getOptionContextTag (copy)
 		local t = {}
 		
-		for i, v in var14 do
+		for i, v in var5 do
 			table.insert(t, {
 				itemComponentType = "FilterPill",
 				id = v.filterId,
@@ -109,58 +109,58 @@ return reactModule.memo(function(p3)
 			})
 		end
 		return t
-	end, { var14 })
+	end, { var5 })
 	
 	return if filterGroups and #filterGroups ~= 0 then reactModule.createElement(view, {
-		tag = p3.tag,
+		tag = p4.tag,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		backgroundStyle = p3.backgroundStyle
+		backgroundStyle = p4.backgroundStyle
 	}, {
 		Content = reactModule.createElement(filterPillCarousel, {
-			title = p3.title,
-			filters = var14,
-			sortIndex = if var15.current then var15.current.collectionPosition else 0,
-			onFilterApplied = reactModule.useCallback(function(p4, p5)
-				-- upvalues: var12 (ref), cryoModule (copy), p3 (ref)
-				var12(function(p6)
-					-- upvalues: cryoModule (copy), p4 (ref), p5 (ref), p3 (copy)
-					local var20 = cryoModule.Dictionary.join(p6, { [p4] = p5 })
+			title = p4.title,
+			filters = var5,
+			sortIndex = if var6.current then var6.current.collectionPosition else 0,
+			onFilterApplied = reactModule.useCallback(function(p5, p6)
+				-- upvalues: var3 (ref), cryoModule (copy), p4 (ref)
+				var3(function(p7)
+					-- upvalues: cryoModule (copy), p5 (ref), p6 (ref), p4 (copy)
+					local var8 = cryoModule.Dictionary.join(p7, { [p5] = p6 })
 					
-					if p3.onFilterApplied then
-						p3.onFilterApplied(nil, nil, { filterSelections = var20 })
+					if p4.onFilterApplied then
+						p4.onFilterApplied(nil, nil, { filterSelections = var8 })
 					end
-					return var20
+					return var8
 				end)
-			end, { p3.onFilterApplied }),
-			containerRef = var13,
+			end, { p4.onFilterApplied }),
+			containerRef = var4,
 			pageContext = sduiContext.routeName or sduiContext.appPage,
 			dataUpdatedTimestamp = sduiContext.dataUpdatedTimestamp,
-			scrollViewPositionChangedSignal = p3.scrollViewPositionChangedSignal,
-			sendImpressions = reactModule.useCallback(function(p7)
-				-- upvalues: reportUnifiedLoggingImpressions (copy), sduiContext (ref), var16 (ref), var15 (ref), p3 (ref)
-				reportUnifiedLoggingImpressions(sduiContext, p7, var16, var15.current, nil, p3.impressionEventName, p3.skipItemImpressionsLog)
+			scrollViewPositionChangedSignal = p4.scrollViewPositionChangedSignal,
+			sendImpressions = reactModule.useCallback(function(p5)
+				-- upvalues: reportUnifiedLoggingImpressions (copy), sduiContext (ref), var7 (ref), var6 (ref), p4 (ref)
+				reportUnifiedLoggingImpressions(sduiContext, p5, var7, var6.current, nil, p4.impressionEventName, p4.skipItemImpressionsLog)
 			end, {
 				sduiContext,
-				var16,
-				var15,
-				p3.impressionEventName,
-				p3.skipItemImpressionsLog
+				var7,
+				var6,
+				p4.impressionEventName,
+				p4.skipItemImpressionsLog
 			}),
-			sendFilterClick = reactModule.useCallback(function(p8, p9, p10, p11, p12, p13, p14)
-				-- upvalues: p3 (ref)
-				if p3.onFilterClick then
-					p3.onFilterClick(nil, nil, {
-						buttonName = p8,
-						filterId = p9,
-						selectedOptionId = p10,
-						previousOptionId = p11,
-						selectedOptionContextTag = p12,
-						previousOptionContextTag = p13,
-						isActive = p14
+			sendFilterClick = reactModule.useCallback(function(p5, p6, p7, p8, p9, p10, p11)
+				-- upvalues: p4 (ref)
+				if p4.onFilterClick then
+					p4.onFilterClick(nil, nil, {
+						buttonName = p5,
+						filterId = p6,
+						selectedOptionId = p7,
+						previousOptionId = p8,
+						selectedOptionContextTag = p9,
+						previousOptionContextTag = p10,
+						isActive = p11
 					})
 				end
-			end, { p3.onFilterClick })
+			end, { p4.onFilterClick })
 		})
 	}) else nil
 end)

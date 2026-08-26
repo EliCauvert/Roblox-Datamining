@@ -13,23 +13,23 @@ local useGroupsAnalyticsModule = require(groups.Hooks.useGroupsAnalytics)
 local eventNamesModule = require(groups.Analytics.EventNames)
 local searchBarWrapperModule = require(script.Parent.SearchBarWrapper)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useGroupsWrapperContextModule (ref), useGroupsAnalyticsModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), view (ref), searchBarWrapperModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var8 = useGroupsWrapperContextModule()
-	local var9 = useGroupsAnalyticsModule()
-	local var10 = useLocalization({
+	local var1 = useGroupsWrapperContextModule()
+	local var2 = useGroupsAnalyticsModule()
+	local var3 = useLocalization({
 		searchPlaceholder = textKeysModule.LabelSearchMyGroups,
 		createGroup = textKeysModule.ActionCreateGroup
 	})
 	
 	return reactModule.createElement(view, {
 		tag = "col size-full-0 auto-y align-x-left gap-medium",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Search = reactModule.createElement(searchBarWrapperModule, {
 			LayoutOrder = 1,
-			placeholderText = p0.searchPlaceholder or var10.searchPlaceholder,
-			onTextChanged = p0.onSearchTextChanged
+			placeholderText = p1.searchPlaceholder or var3.searchPlaceholder,
+			onTextChanged = p1.onSearchTextChanged
 		}),
 		CreateGroupButton = reactModule.createElement(view, {
 			LayoutOrder = 2,
@@ -38,16 +38,16 @@ return function(p0)
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
 			Button = reactModule.createElement(button, {
-				text = var10.createGroup,
+				text = var3.createGroup,
 				variant = buttonVariant.Standard,
 				size = inputSize.Medium,
 				width = UDim.new(1, 0),
-				isDisabled = p0.canCreateGroup == false,
+				isDisabled = p1.canCreateGroup == false,
 				onActivated = reactModule.useCallback(function()
-					-- upvalues: var9 (ref), eventNamesModule (copy), var8 (ref)
-					var9.fireAnalyticsEvent(eventNamesModule.GroupsListCreateGroupClicked)
-					var8.navigateTo.createGroup()
-				end, { var8.navigateTo.createGroup, var9 })
+					-- upvalues: var2 (ref), eventNamesModule (copy), var1 (ref)
+					var2.fireAnalyticsEvent(eventNamesModule.GroupsListCreateGroupClicked)
+					var1.navigateTo.createGroup()
+				end, { var1.navigateTo.createGroup, var2 })
 			})
 		})
 	})

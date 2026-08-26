@@ -7,25 +7,25 @@ local initiateCancelUserSubscriptionFlowModule = require(cancelSubscriptionApp.S
 local useNetwork = require(parent.EconomyCommonCoreScriptHooks).useNetwork
 local cancelUserSubscriptionAsyncPromptStateEnumModule = require(cancelSubscriptionApp.Enums.CancelUserSubscriptionAsyncPromptStateEnum)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), useNetwork (ref), reactModule (ref), marketplaceService (ref), cancelUserSubscriptionAsyncPromptStateEnumModule (ref), initiateCancelUserSubscriptionFlowModule (ref)
-	local var5 = useDispatch()
-	local var6 = useNetwork()
+	local var1 = useDispatch()
+	local var2 = useNetwork()
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var6 (ref), marketplaceService (copy), p0 (ref), cancelUserSubscriptionAsyncPromptStateEnumModule (copy), initiateCancelUserSubscriptionFlowModule (copy)
-		local var7 = if var5 and var6 then marketplaceService.PromptCancelSubscriptionRequested:Connect(function(p1)
-			-- upvalues: p0 (copy), cancelUserSubscriptionAsyncPromptStateEnumModule (copy), var5 (copy), initiateCancelUserSubscriptionFlowModule (copy), var6 (copy)
-			if p0 == cancelUserSubscriptionAsyncPromptStateEnumModule.None then
-				var5(initiateCancelUserSubscriptionFlowModule(var6, p1))
+		-- upvalues: var1 (ref), var2 (ref), marketplaceService (copy), p1 (ref), cancelUserSubscriptionAsyncPromptStateEnumModule (copy), initiateCancelUserSubscriptionFlowModule (copy)
+		local var3 = if var1 and var2 then marketplaceService.PromptCancelSubscriptionRequested:Connect(function(p2)
+			-- upvalues: p1 (copy), cancelUserSubscriptionAsyncPromptStateEnumModule (copy), var1 (copy), initiateCancelUserSubscriptionFlowModule (copy), var2 (copy)
+			if p1 == cancelUserSubscriptionAsyncPromptStateEnumModule.None then
+				var1(initiateCancelUserSubscriptionFlowModule(var2, p2))
 			end
 		end) else nil
 		
 		return function()
-			-- upvalues: var7 (write)
-			if var7 then
-				var7:Disconnect()
-				var7 = nil
+			-- upvalues: var3 (write)
+			if var3 then
+				var3:Disconnect()
+				var3 = nil
 			end
 		end
-	end, { var5, var6, p0 })
+	end, { var1, var2, p1 })
 end

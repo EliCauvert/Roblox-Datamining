@@ -23,7 +23,7 @@ return {
 			lastUpdated = { 2026, 2, 24 }
 		}, { standardizedFields = list }, 1)
 	end,
-	countPlayerLocalizationChoiceFailed = function(p0)
+	countPlayerLocalizationChoiceFailed = function(p1)
 		-- upvalues: telemetryService (ref), list (ref)
 		telemetryService:LogCounter({
 			eventName = "PlayerLocalizationChoiceFailed",
@@ -33,7 +33,7 @@ return {
 			lastUpdated = { 2026, 2, 24 }
 		}, {
 			standardizedFields = list,
-			customFields = { responseCode = p0.responseCode, errorType = p0.errorType }
+			customFields = { responseCode = p1.responseCode, errorType = p1.errorType }
 		}, 1)
 	end,
 	countAutoTranslateZeroUniverseId = function()

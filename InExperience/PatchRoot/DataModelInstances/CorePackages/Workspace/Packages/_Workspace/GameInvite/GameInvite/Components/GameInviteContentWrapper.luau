@@ -5,19 +5,19 @@ local gameInviteContextProviderModule = require(gameInvite.Context.GameInviteCon
 local gameInviteContentModule = require(components.GameInviteContent)
 local _ = require(gameInvite.gameInviteModalType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), gameInviteContextProviderModule (ref), gameInviteContentModule (ref)
 	return reactModule.createElement(gameInviteContextProviderModule, {
-		options = p0.options,
-		serverType = p0.serverType,
-		gameDetails = p0.gameDetails,
-		isLoadingCustomParams = p0.isLoading,
-		isCoreScript = p0.isCoreScript
+		options = p1.options,
+		serverType = p1.serverType,
+		gameDetails = p1.gameDetails,
+		isLoadingCustomParams = p1.isLoading,
+		isCoreScript = p1.isCoreScript
 	}, {
 		GameInviteContent = reactModule.createElement(gameInviteContentModule, {
-			isLoadingCustomParams = p0.isLoading,
-			disableSelectionParentManagement = p0.disableSelectionParentManagement,
-			hideCloseButton = p0.hideCloseButton
+			isLoadingCustomParams = p1.isLoading,
+			disableSelectionParentManagement = p1.disableSelectionParentManagement,
+			hideCloseButton = p1.hideCloseButton
 		})
 	})
 end

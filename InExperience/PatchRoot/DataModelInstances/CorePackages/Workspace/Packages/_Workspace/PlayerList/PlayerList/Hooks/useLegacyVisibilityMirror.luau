@@ -2,16 +2,16 @@
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), signalsModule (ref)
-	local var2, var3 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p0 (ref)
-		return signalsModule.createSignal(p0)
+	local var1, var2 = reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), p1 (ref)
+		return signalsModule.createSignal(p1)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p0 (ref)
-		var3(p0)
-	end, { p0 })
+		-- upvalues: var2 (ref), p1 (ref)
+		var2(p1)
+	end, { p1 })
 	
-	return var2
+	return var1
 end

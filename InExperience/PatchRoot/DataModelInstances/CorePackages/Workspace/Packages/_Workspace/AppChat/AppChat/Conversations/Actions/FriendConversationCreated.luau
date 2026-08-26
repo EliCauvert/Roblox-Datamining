@@ -1,6 +1,6 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(p0)
+﻿return require(script:FindFirstAncestor("AppChat").Parent.Rodux).makeActionCreator(script.Name, function(p1)
 	return {
-		newConversationId = p0.newConversationId,
-		oldFriendConversationId = p0.oldFriendConversationId
+		newConversationId = p1.newConversationId,
+		oldFriendConversationId = p1.oldFriendConversationId
 	}
 end)

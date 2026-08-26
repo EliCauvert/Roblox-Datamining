@@ -6,9 +6,9 @@ local isCliModule = require(parent.Utils.isCli)
 
 return function()
 	-- upvalues: reactModule (ref), themeModule (ref), isCliModule (ref)
-	local var3, var4 = reactModule.useState(themeModule.defaultColors)
+	local var1, var2 = reactModule.useState(themeModule.defaultColors)
 	reactModule.useEffect(function()
-		-- upvalues: isCliModule (copy), themeModule (copy), var4 (ref)
+		-- upvalues: isCliModule (copy), themeModule (copy), var2 (ref)
 		local function getTokens()
 			-- upvalues: isCliModule (copy), themeModule (copy)
 			if isCliModule() then
@@ -31,12 +31,12 @@ return function()
 			} else {}
 		end
 		
-		var4(getTokens())
+		var2(getTokens())
 		local ok, status = pcall(function()
-			-- upvalues: var4 (copy), getTokens (ref)
+			-- upvalues: var2 (copy), getTokens (ref)
 			return settings().Studio.ThemeChanged:Connect(function()
-				-- upvalues: var4 (copy), getTokens (copy)
-				var4(getTokens())
+				-- upvalues: var2 (copy), getTokens (copy)
+				var2(getTokens())
 			end)
 		end)
 		
@@ -48,5 +48,5 @@ return function()
 		end
 	end, {})
 	
-	return var3
+	return var1
 end

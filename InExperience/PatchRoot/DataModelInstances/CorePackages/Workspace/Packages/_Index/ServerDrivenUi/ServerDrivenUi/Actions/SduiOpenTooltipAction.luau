@@ -6,13 +6,13 @@ local openInfoPeekView = require(parent.DiscoveryRouting).OpenInfoPeekView
 local openCloseOnlyInteractiveAlert = require(parent.DiscoveryRouting).OpenCloseOnlyInteractiveAlert
 local sduiResponsiveHelpers = require(parent.SduiCoreSystem).SduiResponsiveHelpers
 
-return function(p0, _, p1)
+return function(p1, _, p2)
 	-- upvalues: sduiResponsiveHelpers (ref), getInputModeStore (ref), responsiveModule (ref), openInfoPeekView (ref), openCloseOnlyInteractiveAlert (ref), closeCentralOverlay (ref)
-	local dispatch = p1.dependencies.dispatch
+	local dispatch = p2.dependencies.dispatch
 	local var1 = sduiResponsiveHelpers.isPortraitOrientation()
 	local lastInputType = getInputModeStore(false).getLastInputType(false)
-	local tooltipInfoText = p0 and (p0.actionParams and (p0.actionParams.tooltipInfoText or ""))
-	local tooltipTitle = p0 and (p0.actionParams and (p0.actionParams.tooltipTitle or ""))
+	local tooltipInfoText = p1 and (p1.actionParams and (p1.actionParams.tooltipInfoText or ""))
+	local tooltipTitle = p1 and (p1.actionParams and (p1.actionParams.tooltipTitle or ""))
 	
 	if lastInputType == responsiveModule.Input.Touch and var1 then
 		dispatch(openInfoPeekView(tooltipTitle, tooltipInfoText))

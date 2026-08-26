@@ -9,19 +9,19 @@ local gamesGetProductInfoModule = require(gameProductInfoRodux.GamesGetProductIn
 local gameProductInfoModule = require(gameProductInfoRodux.GameProductInfo)
 local t = {}
 
-local var7 = function(p0)
+local var1 = function(p1)
 	return "luaapp.gamesapi.games-product-info." .. p0
 end
 
-t.KeyMapper = var7
+t.KeyMapper = var1
 
 function t.Fetch(p1, p2)
-	-- upvalues: performFetch (ref), var7 (ref), gamesGetProductInfoModule (ref), resultModule (ref), gameProductInfoModule (ref), logging (ref), setGamesProductInfoModule (ref), promiseModule (ref)
+	-- upvalues: performFetch (ref), var1 (ref), gamesGetProductInfoModule (ref), resultModule (ref), gameProductInfoModule (ref), logging (ref), setGamesProductInfoModule (ref), promiseModule (ref)
 	assert(type(p2) == "table", "FetchGamesProductInfo thunk expects universeIds to be a table")
 	assert(#p2 > 0, "FetchGamesProductInfo thunk expects universeIds count to be greater than 0")
 	assert(#p2 <= 100, "FetchGamesProductInfo thunk expects universeIds count to not exceed " .. 100)
 	
-	return performFetch.Batch(p2, var7, function(p3, p4)
+	return performFetch.Batch(p2, var1, function(p3, p4)
 		-- upvalues: gamesGetProductInfoModule (copy), p1 (ref), resultModule (copy), gameProductInfoModule (copy), logging (copy), setGamesProductInfoModule (copy), promiseModule (copy)
 		return gamesGetProductInfoModule(p1, p4):andThen(function(p5)
 			-- upvalues: p4 (ref), resultModule (copy), gameProductInfoModule (copy), logging (copy), p3 (ref), setGamesProductInfoModule (copy), promiseModule (copy)
@@ -38,9 +38,9 @@ function t.Fetch(p1, p2)
 				local t_1 = {}
 				
 				for i_1, v_1 in ipairs(data) do
-					gameProductInfoModule.fromJsonData(v_1):match(function(p7)
+					gameProductInfoModule.fromJsonData(v_1):match(function(p6)
 						-- upvalues: t_1 (ref), t (ref), resultModule (copy)
-						t_1[p7.universeId] = p7
+						t_1[p6.universeId] = p6
 						t["luaapp.gamesapi.games-product-info." .. p7.universeId] = resultModule.new(true, nil)
 					end):matchError(function(p6)
 						-- upvalues: logging (copy)
@@ -64,9 +64,9 @@ function t.Fetch(p1, p2)
 	end)
 end
 
-function t.GetFetchingStatus(p8, p9)
+function t.GetFetchingStatus(p6, p7)
 	-- upvalues: performFetch (ref)
-	return performFetch.GetStatus(p8, "luaapp.gamesapi.games-product-info." .. p9)
+	return performFetch.GetStatus(p6, "luaapp.gamesapi.games-product-info." .. p9)
 end
 
 return t

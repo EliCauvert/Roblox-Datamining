@@ -1,9 +1,9 @@
 ﻿local hasSameParticipantsModule = require(script.Parent.hasSameParticipants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: hasSameParticipantsModule (ref)
-	return if p0.existing then if p0.new.lastUpdated and p0.existing.lastUpdated and math.floor(p0.existing.lastUpdated:GetUnixTimestamp()) ~= math.floor(p0.new.lastUpdated:GetUnixTimestamp()) then true elseif p0.existing.title == p0.new.title then if hasSameParticipantsModule({
-		existing = p0.existing.participants,
-		new = p0.new.participants
-	}) then p0.new.hasUnreadMessages and not p0.existing.hasUnreadMessages else true else true else true
+	return if p1.existing then if p1.new.lastUpdated and p1.existing.lastUpdated and math.floor(p1.existing.lastUpdated:GetUnixTimestamp()) ~= math.floor(p1.new.lastUpdated:GetUnixTimestamp()) then true elseif p1.existing.title == p1.new.title then if hasSameParticipantsModule({
+		existing = p1.existing.participants,
+		new = p1.new.participants
+	}) then p1.new.hasUnreadMessages and not p1.existing.hasUnreadMessages else true else true else true
 end

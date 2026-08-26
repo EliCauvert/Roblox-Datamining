@@ -1,28 +1,28 @@
 ﻿local t = {
-	type = function(p0)
-		return function(p1)
-			-- upvalues: p0 (ref)
-			local var6 = type(p1)
+	type = function(p1)
+		return function(p2)
+			-- upvalues: p1 (ref)
+			local var1 = type(p2)
 			
-			if var6 == p0 then
+			if var1 == p1 then
 				return true
 			end
-			return false, string.format("%s expected, got %s", p0, var6)
+			return false, string.format("%s expected, got %s", p1, var1)
 		end
 	end,
-	typeof = function(p2)
-		return function(p3)
-			-- upvalues: p2 (ref)
-			local var7 = typeof(p3)
+	typeof = function(p1)
+		return function(p2)
+			-- upvalues: p1 (ref)
+			local var1 = typeof(p2)
 			
-			if var7 == p2 then
+			if var1 == p1 then
 				return true
 			end
-			return false, string.format("%s expected, got %s", p2, var7)
+			return false, string.format("%s expected, got %s", p1, var1)
 		end
 	end,
-	any = function(p4)
-		if p4 == nil then
+	any = function(p1)
+		if p1 == nil then
 			return false, "any expected, got nil"
 		end
 		return true
@@ -38,23 +38,23 @@ t.string = t.typeof("string")
 t.table = t.typeof("table")
 t.userdata = t.type("userdata")
 
-function t.number(p5)
-	local var8 = typeof(p5)
+function t.number(p1)
+	local var1 = typeof(p1)
 	
-	if var8 ~= "number" then
-		return false, string.format("number expected, got %s", var8)
-	elseif p5 == p5 then
+	if var1 ~= "number" then
+		return false, string.format("number expected, got %s", var1)
+	elseif p1 == p1 then
 		return true
 	end
 	return false, "unexpected NaN value"
 end
 
-function t.nan(p6)
-	local var9 = typeof(p6)
+function t.nan(p1)
+	local var1 = typeof(p1)
 	
-	if var9 ~= "number" then
-		return false, string.format("number expected, got %s", var9)
-	elseif p6 == p6 then
+	if var1 ~= "number" then
+		return false, string.format("number expected, got %s", var1)
+	elseif p1 == p1 then
 		return false, "unexpected non-NaN value"
 	end
 	return true
@@ -98,206 +98,206 @@ t.Vector3int16 = t.typeof("Vector3int16")
 
 function t.literal(...)
 	-- upvalues: t (ref)
-	local var10 = select("#", ...)
+	local var1 = select("#", ...)
 	
-	if var10 == 1 then
-		local var11 = ...
+	if var1 == 1 then
+		local var2 = ...
 		
-		return function(p7)
-			-- upvalues: var11 (ref)
-			if p7 == var11 then
+		return function(p1)
+			-- upvalues: var2 (ref)
+			if p1 == var2 then
 				return true
 			end
-			return false, string.format("expected %s, got %s", tostring(var11), tostring(p7))
+			return false, string.format("expected %s, got %s", tostring(var2), tostring(p1))
 		end
 	end
 	local t_1 = {}
 	
-	for i = 1, var10 do
+	for i = 1, var1 do
 		t_1[i] = t.literal(select(i, ...))
 	end
-	return t.union(table.unpack(t_1, 1, var10))
+	return t.union(table.unpack(t_1, 1, var1))
 end
 
 t.exactly = t.literal
 
-function t.keyOf(p8)
+function t.keyOf(p1)
 	-- upvalues: t (ref)
 	local t_1 = {}
-	local var14 = 0
+	local var3 = 0
 	
-	for i in pairs(p8) do
-		var14 += 1
-		t_1[var14] = i
+	for i in pairs(p1) do
+		var3 += 1
+		t_1[var3] = i
 	end
-	return t.literal(table.unpack(t_1, 1, var14))
+	return t.literal(table.unpack(t_1, 1, var3))
 end
 
-function t.valueOf(p9)
+function t.valueOf(p2)
 	-- upvalues: t (ref)
 	local t_1 = {}
-	local var16 = 0
+	local var4 = 0
 	
-	for i, v in pairs(p9) do
-		var16 += 1
-		t_1[var16] = v
+	for i, v in pairs(p2) do
+		var4 += 1
+		t_1[var4] = v
 	end
-	return t.literal(table.unpack(t_1, 1, var16))
+	return t.literal(table.unpack(t_1, 1, var4))
 end
 
-function t.integer(p10)
+function t.integer(p3)
 	-- upvalues: t (ref)
-	local var17, var18 = t.number(p10)
+	local var5, var6 = t.number(p3)
 	
-	if not var17 then
-		return false, var18 or ""
-	elseif p10 % 1 == 0 then
+	if not var5 then
+		return false, var6 or ""
+	elseif p3 % 1 == 0 then
 		return true
 	end
-	return false, string.format("integer expected, got %s", p10)
+	return false, string.format("integer expected, got %s", p3)
 end
 
 function t.numberMin(a)
 	-- upvalues: t (ref)
-	return function(p11)
+	return function(p3)
 		-- upvalues: t (copy), a (ref)
-		local var19, var20 = t.number(p11)
+		local var5, var6 = t.number(p3)
 		
-		if not var19 then
-			return false, var20 or ""
-		elseif a <= p11 then
+		if not var5 then
+			return false, var6 or ""
+		elseif a <= p3 then
 			return true
 		end
-		return false, string.format("number >= %s expected, got %s", a, p11)
+		return false, string.format("number >= %s expected, got %s", a, p3)
 	end
 end
 
 function t.numberMax(a)
 	-- upvalues: t (ref)
-	return function(p12)
+	return function(p3)
 		-- upvalues: t (copy), a (ref)
-		local var21, var22 = t.number(p12)
+		local var5, var6 = t.number(p3)
 		
-		if not var21 then
-			return false, var22
-		elseif p12 <= a then
+		if not var5 then
+			return false, var6
+		elseif p3 <= a then
 			return true
 		end
-		return false, string.format("number <= %s expected, got %s", a, p12)
+		return false, string.format("number <= %s expected, got %s", a, p3)
 	end
 end
 
 function t.numberMinExclusive(a)
 	-- upvalues: t (ref)
-	return function(p13)
+	return function(p3)
 		-- upvalues: t (copy), a (ref)
-		local var23, var24 = t.number(p13)
+		local var5, var6 = t.number(p3)
 		
-		if not var23 then
-			return false, var24 or ""
-		elseif a < p13 then
+		if not var5 then
+			return false, var6 or ""
+		elseif a < p3 then
 			return true
 		end
-		return false, string.format("number > %s expected, got %s", a, p13)
+		return false, string.format("number > %s expected, got %s", a, p3)
 	end
 end
 
 function t.numberMaxExclusive(a)
 	-- upvalues: t (ref)
-	return function(p14)
+	return function(p3)
 		-- upvalues: t (copy), a (ref)
-		local var25, var26 = t.number(p14)
+		local var5, var6 = t.number(p3)
 		
-		if not var25 then
-			return false, var26 or ""
-		elseif p14 < a then
+		if not var5 then
+			return false, var6 or ""
+		elseif p3 < a then
 			return true
 		end
-		return false, string.format("number < %s expected, got %s", a, p14)
+		return false, string.format("number < %s expected, got %s", a, p3)
 	end
 end
 
 t.numberPositive = t.numberMinExclusive(0)
 t.numberNegative = t.numberMaxExclusive(0)
 
-function t.numberConstrained(p15, p16)
+function t.numberConstrained(p3, p4)
 	-- upvalues: t (ref)
-	assert(t.number(p15))
-	assert(t.number(p16))
-	local var27 = t.numberMin(p15)
-	local var28 = t.numberMax(p16)
+	assert(t.number(p3))
+	assert(t.number(p4))
+	local var5 = t.numberMin(p3)
+	local var6 = t.numberMax(p4)
 	
-	return function(p17)
-		-- upvalues: var27 (ref), var28 (ref)
-		local var29, var30 = var27(p17)
+	return function(p5)
+		-- upvalues: var5 (ref), var6 (ref)
+		local var7, var8 = var5(p5)
 		
-		if not var29 then
-			return false, var30 or ""
+		if not var7 then
+			return false, var8 or ""
 		end
-		local var31, var32 = var28(p17)
+		local var9, var10 = var6(p5)
 		
-		if var31 then
+		if var9 then
 			return true
 		end
-		return false, var32 or ""
+		return false, var10 or ""
 	end
 end
 
-function t.numberConstrainedExclusive(p18, p19)
+function t.numberConstrainedExclusive(p3, p4)
 	-- upvalues: t (ref)
-	assert(t.number(p18))
-	assert(t.number(p19))
-	local var33 = t.numberMinExclusive(p18)
-	local var34 = t.numberMaxExclusive(p19)
+	assert(t.number(p3))
+	assert(t.number(p4))
+	local var5 = t.numberMinExclusive(p3)
+	local var6 = t.numberMaxExclusive(p4)
 	
-	return function(p20)
-		-- upvalues: var33 (ref), var34 (ref)
-		local var35, var36 = var33(p20)
+	return function(p5)
+		-- upvalues: var5 (ref), var6 (ref)
+		local var7, var8 = var5(p5)
 		
-		if not var35 then
-			return false, var36 or ""
+		if not var7 then
+			return false, var8 or ""
 		end
-		local var37, var38 = var34(p20)
+		local var9, var10 = var6(p5)
 		
-		if var37 then
+		if var9 then
 			return true
 		end
-		return false, var38 or ""
+		return false, var10 or ""
 	end
 end
 
-function t.match(p21)
+function t.match(p3)
 	-- upvalues: t (ref)
-	assert(t.string(p21))
+	assert(t.string(p3))
 	
-	return function(p22)
-		-- upvalues: t (copy), p21 (ref)
-		local var39, var40 = t.string(p22)
+	return function(p4)
+		-- upvalues: t (copy), p3 (ref)
+		local var5, var6 = t.string(p4)
 		
-		if not var39 then
-			return false, var40
-		elseif string.match(p22, p21) == nil then
-			return false, string.format("%q failed to match pattern %q", p22, p21)
+		if not var5 then
+			return false, var6
+		elseif string.match(p4, p3) == nil then
+			return false, string.format("%q failed to match pattern %q", p4, p3)
 		end
 		return true
 	end
 end
 
-function t.optional(p23)
+function t.optional(p3)
 	-- upvalues: t (ref)
-	assert(t.callback(p23))
+	assert(t.callback(p3))
 	
-	return function(p24)
-		-- upvalues: p23 (ref)
-		if p24 == nil then
+	return function(p4)
+		-- upvalues: p3 (ref)
+		if p4 == nil then
 			return true
 		end
-		local var41, var42 = p23(p24)
+		local var5, var6 = p3(p4)
 		
-		if var41 then
+		if var5 then
 			return true
 		end
-		return false, string.format("(optional) %s", var42 or "")
+		return false, string.format("(optional) %s", var6 or "")
 	end
 end
 
@@ -309,80 +309,80 @@ function t.tuple(...)
 		local list_1 = { ... }
 		
 		for i, v in ipairs(list) do
-			local var45, var46 = v(list_1[i])
+			local var5, var6 = v(list_1[i])
 			
-			if var45 == false then
-				return false, string.format("Bad tuple index #%s:\n\t%s", i, var46 or "")
+			if var5 == false then
+				return false, string.format("Bad tuple index #%s:\n\t%s", i, var6 or "")
 			end
 		end
 		return true
 	end
 end
 
-function t.keys(p25)
+function t.keys(p3)
 	-- upvalues: t (ref)
-	assert(t.callback(p25))
+	assert(t.callback(p3))
 	
-	return function(p26)
-		-- upvalues: t (copy), p25 (ref)
-		local var47, var48 = t.table(p26)
+	return function(p4)
+		-- upvalues: t (copy), p3 (ref)
+		local var5, var6 = t.table(p4)
 		
-		if var47 == false then
-			return false, var48 or ""
+		if var5 == false then
+			return false, var6 or ""
 		end
-		for i in pairs(p26) do
-			local var49, var50 = p25(i)
+		for i in pairs(p4) do
+			local var7, var8 = p3(i)
 			
-			if var49 == false then
-				return false, string.format("bad key %s:\n\t%s", tostring(i), var50 or "")
+			if var7 == false then
+				return false, string.format("bad key %s:\n\t%s", tostring(i), var8 or "")
 			end
 		end
 		return true
 	end
 end
 
-function t.values(p27)
+function t.values(p4)
 	-- upvalues: t (ref)
-	assert(t.callback(p27))
+	assert(t.callback(p4))
 	
-	return function(p28)
-		-- upvalues: t (copy), p27 (ref)
-		local var51, var52 = t.table(p28)
+	return function(p5)
+		-- upvalues: t (copy), p4 (ref)
+		local var5, var6 = t.table(p5)
 		
-		if var51 == false then
-			return false, var52 or ""
+		if var5 == false then
+			return false, var6 or ""
 		end
-		for i, v in pairs(p28) do
-			local var53, var54 = p27(v)
+		for i, v in pairs(p5) do
+			local var7, var8 = p4(v)
 			
-			if var53 == false then
-				return false, string.format("bad value for key %s:\n\t%s", tostring(i), var54 or "")
+			if var7 == false then
+				return false, string.format("bad value for key %s:\n\t%s", tostring(i), var8 or "")
 			end
 		end
 		return true
 	end
 end
 
-function t.map(p29, p30)
+function t.map(p5, p6)
 	-- upvalues: t (ref)
-	assert(t.callback(p29))
-	assert(t.callback(p30))
-	local var55 = t.keys(p29)
-	local var56 = t.values(p30)
+	assert(t.callback(p5))
+	assert(t.callback(p6))
+	local var5 = t.keys(p5)
+	local var6 = t.values(p6)
 	
-	return function(p31)
-		-- upvalues: var55 (ref), var56 (ref)
-		local var57, var58 = var55(p31)
+	return function(p7)
+		-- upvalues: var5 (ref), var6 (ref)
+		local var7, var8 = var5(p7)
 		
-		if not var57 then
-			return false, var58 or ""
+		if not var7 then
+			return false, var8 or ""
 		end
-		local var59, var60 = var56(p31)
+		local var9, var10 = var6(p7)
 		
-		if var59 then
+		if var9 then
 			return true
 		end
-		return false, var60 or ""
+		return false, var10 or ""
 	end
 end
 
@@ -391,75 +391,75 @@ function t.set(value)
 	return t.map(value, t.literal(true))
 end
 
-local var1 = t.keys(t.integer)
+local var5 = t.keys(t.integer)
 
-function t.array(p32)
-	-- upvalues: t (ref), var1 (ref)
-	assert(t.callback(p32))
-	local var61 = t.values(p32)
+function t.array(p5)
+	-- upvalues: t (ref), var5 (ref)
+	assert(t.callback(p5))
+	local var6 = t.values(p5)
 	
-	return function(p33)
-		-- upvalues: var1 (copy), var61 (ref)
-		local var62, var63 = var1(p33)
+	return function(p6)
+		-- upvalues: var5 (copy), var6 (ref)
+		local var7, var8 = var5(p6)
 		
-		if var62 == false then
-			return false, string.format("[array] %s", var63 or "")
+		if var7 == false then
+			return false, string.format("[array] %s", var8 or "")
 		end
-		local var64 = 0
+		local var9 = 0
 		
-		for i in ipairs(p33) do
-			var64 += 1
+		for i in ipairs(p6) do
+			var9 += 1
 		end
-		for i_1 in pairs(p33) do
-			if i_1 < 1 or var64 < i_1 then
+		for i_1 in pairs(p6) do
+			if i_1 < 1 or var9 < i_1 then
 				return false, string.format("[array] key %s must be sequential", tostring(i_1))
 			end
 		end
-		local var65, var66 = var61(p33)
+		local var10, var11 = var6(p6)
 		
-		if var65 then
+		if var10 then
 			return true
 		end
-		return false, string.format("[array] %s", var66 or "")
+		return false, string.format("[array] %s", var11 or "")
 	end
 end
 
 function t.strictArray(...)
-	-- upvalues: t (ref), var1 (ref)
+	-- upvalues: t (ref), var5 (ref)
 	local list = { ... }
 	assert(t.array(t.callback)(list))
 	
-	return function(p34)
-		-- upvalues: var1 (copy), list (ref)
-		local var68, var69 = var1(p34)
+	return function(p7)
+		-- upvalues: var5 (copy), list (ref)
+		local var12, var13 = var5(p7)
 		
-		if var68 == false then
-			return false, string.format("[strictArray] %s", var69 or "")
-		elseif #list < #p34 then
+		if var12 == false then
+			return false, string.format("[strictArray] %s", var13 or "")
+		elseif #list < #p7 then
 			return false, string.format("[strictArray] Array size exceeds limit of %d", #list)
 		end
 		for i, v in pairs(list) do
-			local var70, var71 = v(p34[i])
+			local var14, var15 = v(p7[i])
 			
-			if not var70 then
-				return false, string.format("[strictArray] Array index #%d - %s", i, var71)
+			if not var14 then
+				return false, string.format("[strictArray] Array index #%d - %s", i, var15)
 			end
 		end
 		return true
 	end
 end
 
-local var2 = t.array(t.callback)
+local var12 = t.array(t.callback)
 
 function t.union(...)
-	-- upvalues: var2 (ref)
+	-- upvalues: var12 (ref)
 	local list = { ... }
-	assert(var2(list))
+	assert(var12(list))
 	
-	return function(p35)
+	return function(p7)
 		-- upvalues: list (ref)
 		for i, v in ipairs(list) do
-			if v(p35) then
+			if v(p7) then
 				return true
 			end
 		end
@@ -470,17 +470,17 @@ end
 t.some = t.union
 
 function t.intersection(...)
-	-- upvalues: var2 (ref)
+	-- upvalues: var12 (ref)
 	local list = { ... }
-	assert(var2(list))
+	assert(var12(list))
 	
-	return function(p36)
+	return function(p7)
 		-- upvalues: list (ref)
 		for i, v in ipairs(list) do
-			local var74, var75 = v(p36)
+			local var13, var14 = v(p7)
 			
-			if not var74 then
-				return false, var75 or ""
+			if not var13 then
+				return false, var14 or ""
 			end
 		end
 		return true
@@ -488,50 +488,50 @@ function t.intersection(...)
 end
 
 t.every = t.intersection
-local var3 = t.map(t.any, t.callback)
+local var13 = t.map(t.any, t.callback)
 
-function t.interface(p37)
-	-- upvalues: var3 (ref), t (ref)
-	assert(var3(p37))
+function t.interface(p7)
+	-- upvalues: var13 (ref), t (ref)
+	assert(var13(p7))
 	
-	return function(p38)
-		-- upvalues: t (copy), p37 (ref)
-		local var76, var77 = t.table(p38)
+	return function(p8)
+		-- upvalues: t (copy), p7 (ref)
+		local var14, var15 = t.table(p8)
 		
-		if var76 == false then
-			return false, var77 or ""
+		if var14 == false then
+			return false, var15 or ""
 		end
-		for i, v in pairs(p37) do
-			local var78, var79 = v(p38[i])
+		for i, v in pairs(p7) do
+			local var16, var17 = v(p8[i])
 			
-			if var78 == false then
-				return false, string.format("[interface] bad value for %s:\n\t%s", tostring(i), var79 or "")
+			if var16 == false then
+				return false, string.format("[interface] bad value for %s:\n\t%s", tostring(i), var17 or "")
 			end
 		end
 		return true
 	end
 end
 
-function t.strictInterface(p39)
-	-- upvalues: var3 (ref), t (ref)
-	assert(var3(p39))
+function t.strictInterface(p8)
+	-- upvalues: var13 (ref), t (ref)
+	assert(var13(p8))
 	
-	return function(p40)
-		-- upvalues: t (copy), p39 (ref)
-		local var80, var81 = t.table(p40)
+	return function(p9)
+		-- upvalues: t (copy), p8 (ref)
+		local var14, var15 = t.table(p9)
 		
-		if var80 == false then
-			return false, var81 or ""
+		if var14 == false then
+			return false, var15 or ""
 		end
-		for i, v in pairs(p39) do
-			local var82, var83 = v(p40[i])
+		for i, v in pairs(p8) do
+			local var16, var17 = v(p9[i])
 			
-			if var82 == false then
-				return false, string.format("[interface] bad value for %s:\n\t%s", tostring(i), var83 or "")
+			if var16 == false then
+				return false, string.format("[interface] bad value for %s:\n\t%s", tostring(i), var17 or "")
 			end
 		end
-		for i_1 in pairs(p40) do
-			if not p39[i_1] then
+		for i_1 in pairs(p9) do
+			if not p8[i_1] then
 				return false, string.format("[interface] unexpected field %q", tostring(i_1))
 			end
 		end
@@ -539,26 +539,26 @@ function t.strictInterface(p39)
 	end
 end
 
-function t.instanceOf(p41, p42)
+function t.instanceOf(p10, p11)
 	-- upvalues: t (ref)
-	assert(t.string(p41))
-	local var84 = if p42 ~= nil then t.children(p42) else nil
+	assert(t.string(p10))
+	local var18 = if p11 ~= nil then t.children(p11) else nil
 	
-	return function(p43)
-		-- upvalues: t (copy), p41 (ref), var84 (write)
-		local var85, var86 = t.Instance(p43)
+	return function(p12)
+		-- upvalues: t (copy), p10 (ref), var18 (write)
+		local var19, var20 = t.Instance(p12)
 		
-		if not var85 then
-			return false, var86 or ""
-		elseif p43.ClassName ~= p41 then
-			return false, string.format("%s expected, got %s", p41, p43.ClassName)
-		elseif var84 then
-			local var87, var88 = var84(p43)
+		if not var19 then
+			return false, var20 or ""
+		elseif p12.ClassName ~= p10 then
+			return false, string.format("%s expected, got %s", p10, p12.ClassName)
+		elseif var18 then
+			local var21, var22 = var18(p12)
 			
-			if var87 then
+			if var21 then
 				return true
 			else
-				return false, var88
+				return false, var22
 			end
 		end
 	end
@@ -566,101 +566,101 @@ end
 
 t.instance = t.instanceOf
 
-function t.instanceIsA(p44, p45)
+function t.instanceIsA(p10, p11)
 	-- upvalues: t (ref)
-	assert(t.string(p44))
-	local var89 = if p45 ~= nil then t.children(p45) else nil
+	assert(t.string(p10))
+	local var18 = if p11 ~= nil then t.children(p11) else nil
 	
-	return function(p46)
-		-- upvalues: t (copy), p44 (ref), var89 (write)
-		local var90, var91 = t.Instance(p46)
+	return function(p12)
+		-- upvalues: t (copy), p10 (ref), var18 (write)
+		local var19, var20 = t.Instance(p12)
 		
-		if not var90 then
-			return false, var91 or ""
-		elseif not p46:IsA(p44) then
-			return false, string.format("%s expected, got %s", p44, p46.ClassName)
-		elseif var89 then
-			local var92, var93 = var89(p46)
+		if not var19 then
+			return false, var20 or ""
+		elseif not p12:IsA(p10) then
+			return false, string.format("%s expected, got %s", p10, p12.ClassName)
+		elseif var18 then
+			local var21, var22 = var18(p12)
 			
-			if var92 then
+			if var21 then
 				return true
 			else
-				return false, var93
+				return false, var22
 			end
 		end
 	end
 end
 
-function t.enum(p47)
+function t.enum(p10)
 	-- upvalues: t (ref)
-	assert(t.Enum(p47))
+	assert(t.Enum(p10))
 	
-	return function(p48)
-		-- upvalues: t (copy), p47 (ref)
-		local var94, var95 = t.EnumItem(p48)
+	return function(p11)
+		-- upvalues: t (copy), p10 (ref)
+		local var18, var19 = t.EnumItem(p11)
 		
-		if not var94 then
-			return false, var95
-		elseif p48.EnumType == p47 then
+		if not var18 then
+			return false, var19
+		elseif p11.EnumType == p10 then
 			return true
 		end
-		return false, string.format("enum of %s expected, got enum of %s", tostring(p47), tostring(p48.EnumType))
+		return false, string.format("enum of %s expected, got enum of %s", tostring(p10), tostring(p11.EnumType))
 	end
 end
 
-local var4 = t.tuple(t.callback, t.callback)
+local var18 = t.tuple(t.callback, t.callback)
 
-function t.wrap(p49, p50)
-	-- upvalues: var4 (ref)
-	assert(var4(p49, p50))
+function t.wrap(p10, p11)
+	-- upvalues: var18 (ref)
+	assert(var18(p10, p11))
 	
 	return function(...)
-		-- upvalues: p50 (ref), p49 (ref)
-		assert(p50(...))
+		-- upvalues: p11 (ref), p10 (ref)
+		assert(p11(...))
 		
-		return p49(...)
+		return p10(...)
 	end
 end
 
-function t.strict(p51)
+function t.strict(p10)
 	return function(...)
-		-- upvalues: p51 (ref)
-		assert(p51(...))
+		-- upvalues: p10 (ref)
+		assert(p10(...))
 	end
 end
 
-local var5 = t.map(t.string, t.callback)
+local var19 = t.map(t.string, t.callback)
 
-function t.children(p52)
-	-- upvalues: var5 (ref), t (ref)
-	assert(var5(p52))
+function t.children(p10)
+	-- upvalues: var19 (ref), t (ref)
+	assert(var19(p10))
 	
-	return function(p53)
-		-- upvalues: t (copy), p52 (ref)
-		local var96, var97 = t.Instance(p53)
+	return function(p11)
+		-- upvalues: t (copy), p10 (ref)
+		local var20, var21 = t.Instance(p11)
 		
-		if not var96 then
-			return false, var97 or ""
+		if not var20 then
+			return false, var21 or ""
 		end
-		local var99
+		local var22
 		local t_1 = {}
 		
-		for i, v in ipairs(p53:GetChildren()) do
-			var99 = v.Name
+		for i, v in ipairs(p11:GetChildren()) do
+			var22 = v.Name
 			
-			if p52[var99] then
-				if not t_1[var99] then
-					t_1[var99] = v
+			if p10[var22] then
+				if not t_1[var22] then
+					t_1[var22] = v
 					continue
 				end
-				return false, string.format("Cannot process multiple children with the same name %q", var99)
+				return false, string.format("Cannot process multiple children with the same name %q", var22)
 			end
 		end
-		for i_1, v_1 in pairs(p52) do
-			var99, var100 = v_1(t_1[i_1])
+		for i_1, v_1 in pairs(p10) do
+			var22, var100 = v_1(t_1[i_1])
 			
-			if not var99 then
-				return false, string.format("[%s.%s] %s", p53:GetFullName(), i_1, var100 or "")
+			if not var22 then
+				return false, string.format("[%s.%s] %s", p11:GetFullName(), i_1, var100 or "")
 			end
 		end
 		return true

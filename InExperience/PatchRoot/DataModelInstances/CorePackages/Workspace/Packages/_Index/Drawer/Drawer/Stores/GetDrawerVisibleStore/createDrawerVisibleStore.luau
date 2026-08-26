@@ -5,50 +5,50 @@ local fFlagEnableDrawerAnimatingHook = require(parent.SharedFlags).FFlagEnableDr
 
 return function()
 	-- upvalues: signalsModule (ref), signalsReactModule (ref), fFlagEnableDrawerAnimatingHook (ref)
-	local var2, var3 = signalsModule.createSignal(false)
-	local var4, var5 = signalsModule.createSignal(false)
+	local var1, var2 = signalsModule.createSignal(false)
+	local var3, var4 = signalsModule.createSignal(false)
 	
 	local function useDrawerVisible()
-		-- upvalues: signalsReactModule (copy), var2 (ref)
-		return signalsReactModule.useSignalState(var2)
+		-- upvalues: signalsReactModule (copy), var1 (ref)
+		return signalsReactModule.useSignalState(var1)
 	end
 	
 	local function useDrawerShouldMount()
-		-- upvalues: signalsReactModule (copy), var4 (ref)
-		return signalsReactModule.useSignalState(var4)
+		-- upvalues: signalsReactModule (copy), var3 (ref)
+		return signalsReactModule.useSignalState(var3)
 	end
 	
-	local var8 = function(p0)
-		-- upvalues: var3 (ref), var5 (ref)
-		var3(p0)
+	local var5 = function(p1)
+		-- upvalues: var2 (ref), var4 (ref)
+		var2(p1)
 		
-		if p0 then
-			var5(true)
+		if p1 then
+			var4(true)
 		end
 	end
 	
-	local var9 = nil
-	local var10 = nil
-	local var11 = nil
+	local var6 = nil
+	local var7 = nil
+	local var8 = nil
 	
 	if fFlagEnableDrawerAnimatingHook then
-		local var12, var13 = signalsModule.createSignal(false)
-		var9 = var12
-		var10 = var13
+		local var9, var10 = signalsModule.createSignal(false)
+		var6 = var9
+		var7 = var10
 		
-		var11 = function()
-			-- upvalues: signalsReactModule (copy), var9 (write)
-			return signalsReactModule.useSignalState(var9)
+		var8 = function()
+			-- upvalues: signalsReactModule (copy), var6 (write)
+			return signalsReactModule.useSignalState(var6)
 		end
 	end
 	return {
-		getDrawerVisible = var2,
-		getDrawerAnimating = var9,
-		setDrawerVisible = var8,
-		setDrawerShouldMount = var5,
-		setDrawerAnimating = var10,
+		getDrawerVisible = var1,
+		getDrawerAnimating = var6,
+		setDrawerVisible = var5,
+		setDrawerShouldMount = var4,
+		setDrawerAnimating = var7,
 		useDrawerVisible = useDrawerVisible,
 		useDrawerShouldMount = useDrawerShouldMount,
-		useDrawerAnimating = var11
+		useDrawerAnimating = var8
 	}
 end

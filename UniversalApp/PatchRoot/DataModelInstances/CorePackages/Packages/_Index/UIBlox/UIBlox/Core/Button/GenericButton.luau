@@ -27,45 +27,45 @@ local standardButtonSizeModule = require(parent.Enum.StandardButtonSize)
 local validateImageModule = require(parent_1.ImageSet.Validator.validateImage)
 local genericButton = roactModule.PureComponent:extend("GenericButton")
 
-function genericButton.init(p0)
+function genericButton.init(p1)
 	-- upvalues: controlStateModule (ref), runService (ref), roactModule (ref)
-	p0:setState({
+	p1:setState({
 		targetLoadingProgress = 1,
 		controlState = controlStateModule.Initialize,
 		absoluteSize = Vector2.new(100, 100),
 		isButtonUnfocused = runService:GetRobloxGuiFocused()
 	})
 	
-	function p0.onStateChanged(p1, p2)
-		-- upvalues: p0 (ref)
-		p0:setState({ controlState = p2 })
+	function p0.onStateChanged(p2, p3)
+		-- upvalues: p1 (ref)
+		p1:setState({ controlState = p3 })
 		
-		if p0.props.onStateChanged then
-			p0.props.onStateChanged(p1, p2)
+		if p1.props.onStateChanged then
+			p1.props.onStateChanged(p2, p3)
 		end
 	end
 	
-	function p0.onAbsoluteSizeChanged(p3)
-		-- upvalues: p0 (ref), roactModule (copy)
-		p0:setState({ absoluteSize = p3.AbsoluteSize })
+	function p0.onAbsoluteSizeChanged(p2)
+		-- upvalues: p1 (ref), roactModule (copy)
+		p1:setState({ absoluteSize = p2.AbsoluteSize })
 		
-		if p0.props[roactModule.Change.AbsoluteSize] then
-			p0.props[roactModule.Change.AbsoluteSize](p3)
+		if p1.props[roactModule.Change.AbsoluteSize] then
+			p1.props[roactModule.Change.AbsoluteSize](p2)
 		end
 	end
 	
-	function p0.onRobloxGuiFocusedChanged(p4)
-		-- upvalues: p0 (ref)
-		if p4 then
-			p0:setState({ targetLoadingProgress = 1, isButtonUnfocused = true })
+	function p0.onRobloxGuiFocusedChanged(p2)
+		-- upvalues: p1 (ref)
+		if p2 then
+			p1:setState({ targetLoadingProgress = 1, isButtonUnfocused = true })
 			
 			return
 		end
-		p0:setState({ isButtonUnfocused = false })
+		p1:setState({ isButtonUnfocused = false })
 	end
 end
 
-local var22 = tModule.interface({ [controlStateModule.Default] = tModule.string })
+local var1 = tModule.interface({ [controlStateModule.Default] = tModule.string })
 genericButton.validateProps = tModule.interface({
 	icon = tModule.optional(validateImageModule),
 	text = tModule.optional(tModule.string),
@@ -73,11 +73,11 @@ genericButton.validateProps = tModule.interface({
 	buttonImage = validateImageModule,
 	fontStyle = tModule.optional(tModule.union(tModule.string, validateFontInfoModule, validateTypographyInfoModule)),
 	delayedInputImage = tModule.optional(validateImageModule),
-	buttonStateColorMap = var22,
-	contentStateColorMap = tModule.optional(var22),
-	textStateColorMap = tModule.optional(var22),
-	iconStateColorMap = tModule.optional(var22),
-	inputIconStateColorMap = tModule.optional(var22),
+	buttonStateColorMap = var1,
+	contentStateColorMap = tModule.optional(var1),
+	textStateColorMap = tModule.optional(var1),
+	iconStateColorMap = tModule.optional(var1),
+	inputIconStateColorMap = tModule.optional(var1),
 	isDisabled = tModule.optional(tModule.boolean),
 	isLoading = tModule.optional(tModule.boolean),
 	isDelayedInput = tModule.optional(tModule.boolean),
@@ -112,57 +112,57 @@ genericButton.defaultProps = {
 	SliceCenter = Rect.new(8, 8, 9, 9)
 }
 
-function genericButton.didMount(p5)
-	p5:setState({
-		targetLoadingProgress = if p5.state.isButtonUnfocused or not p5.props.enableInputDelayed then 1 else 0
+function genericButton.didMount(p1)
+	p1:setState({
+		targetLoadingProgress = if p1.state.isButtonUnfocused or not p1.props.enableInputDelayed then 1 else 0
 	})
 end
 
-function genericButton.render(p6)
+function genericButton.render(p1)
 	-- upvalues: withAnimationModule (ref)
-	return if p6.props.isDelayedInput and not p6.state.isButtonUnfocused then withAnimationModule({ loadingProgress = p6.state.targetLoadingProgress }, function(p7)
-		-- upvalues: p6 (ref)
-		return p6:renderButton(math.clamp(p7.loadingProgress, 0, 1))
+	return if p1.props.isDelayedInput and not p1.state.isButtonUnfocused then withAnimationModule({ loadingProgress = p1.state.targetLoadingProgress }, function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderButton(math.clamp(p2.loadingProgress, 0, 1))
 	end, {
 		dampingRatio = 0.8,
-		frequency = 1 / p6.props.delayInputSeconds
-	}) elseif p6.state.isButtonUnfocused then p6:renderButton(1) else p6:renderButton()
+		frequency = 1 / p1.props.delayInputSeconds
+	}) elseif p1.state.isButtonUnfocused then p1:renderButton(1) else p1:renderButton()
 end
 
-function genericButton.renderButton(p8, p9)
-	-- upvalues: withStyleModule (ref), tModule (ref), var22 (ref), getContentStyleModule (ref), controlStateModule (ref), standardButtonSizeModule (ref), roactModule (ref), skeleton (ref), getClosestRadiusModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), cryoModule (ref), interactableModule (ref), hoverButtonBackgroundModule (ref), eventConnection (ref), runService (ref)
-	return withStyleModule(function(p10)
-		-- upvalues: tModule (copy), p8 (ref), var22 (copy), p9 (ref), getContentStyleModule (copy), controlStateModule (copy), standardButtonSizeModule (copy), roactModule (copy), skeleton (copy), getClosestRadiusModule (copy), UIBloxConfigModule (copy), getIconSizeModule (copy), iconSizeModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), cryoModule (copy), interactableModule (copy), hoverButtonBackgroundModule (copy), eventConnection (copy), runService (copy)
-		assert(tModule.table(p10), "Style provider is missing.")
-		local controlState = p8.state.controlState
-		local text = p8.props.text
-		local icon = p8.props.icon
-		local inputIcon = p8.props.inputIcon
-		local isLoading = p8.props.isLoading
-		local isDisabled = p8.props.isDisabled
-		local isDelayedInput = p8.props.isDelayedInput
-		local userInteractionEnabled = p8.props.userInteractionEnabled
-		local buttonImage = p8.props.buttonImage
-		local fontStyle = p8.props.fontStyle
-		local delayedInputImage = p8.props.delayedInputImage
-		local buttonStateColorMap = p8.props.buttonStateColorMap
-		local contentStateColorMap = p8.props.contentStateColorMap
-		local textStateColorMap = p8.props.textStateColorMap or contentStateColorMap
-		local iconStateColorMap = p8.props.iconStateColorMap or contentStateColorMap
-		local inputIconStateColorMap = p8.props.inputIconStateColorMap or contentStateColorMap
-		local size = p8.props.Size
-		local standardSize = p8.props.standardSize
-		local maxWidth = p8.props.maxWidth or 640
-		local fitContent = p8.props.fitContent
+function genericButton.renderButton(p1, p2)
+	-- upvalues: withStyleModule (ref), tModule (ref), var1 (ref), getContentStyleModule (ref), controlStateModule (ref), standardButtonSizeModule (ref), roactModule (ref), skeleton (ref), getClosestRadiusModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), cryoModule (ref), interactableModule (ref), hoverButtonBackgroundModule (ref), eventConnection (ref), runService (ref)
+	return withStyleModule(function(p3)
+		-- upvalues: tModule (copy), p1 (ref), var1 (copy), p2 (ref), getContentStyleModule (copy), controlStateModule (copy), standardButtonSizeModule (copy), roactModule (copy), skeleton (copy), getClosestRadiusModule (copy), UIBloxConfigModule (copy), getIconSizeModule (copy), iconSizeModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), cryoModule (copy), interactableModule (copy), hoverButtonBackgroundModule (copy), eventConnection (copy), runService (copy)
+		assert(tModule.table(p3), "Style provider is missing.")
+		local controlState = p1.state.controlState
+		local text = p1.props.text
+		local icon = p1.props.icon
+		local inputIcon = p1.props.inputIcon
+		local isLoading = p1.props.isLoading
+		local isDisabled = p1.props.isDisabled
+		local isDelayedInput = p1.props.isDelayedInput
+		local userInteractionEnabled = p1.props.userInteractionEnabled
+		local buttonImage = p1.props.buttonImage
+		local fontStyle = p1.props.fontStyle
+		local delayedInputImage = p1.props.delayedInputImage
+		local buttonStateColorMap = p1.props.buttonStateColorMap
+		local contentStateColorMap = p1.props.contentStateColorMap
+		local textStateColorMap = p1.props.textStateColorMap or contentStateColorMap
+		local iconStateColorMap = p1.props.iconStateColorMap or contentStateColorMap
+		local inputIconStateColorMap = p1.props.inputIconStateColorMap or contentStateColorMap
+		local size = p1.props.Size
+		local standardSize = p1.props.standardSize
+		local maxWidth = p1.props.maxWidth or 640
+		local fitContent = p1.props.fitContent
 		
 		if text then
-			assert(var22(textStateColorMap), "textStateColorMap is missing or invalid.")
+			assert(var1(textStateColorMap), "textStateColorMap is missing or invalid.")
 		end
 		if icon then
-			assert(var22(iconStateColorMap), "iconStateColorMap is missing or invalid.")
+			assert(var1(iconStateColorMap), "iconStateColorMap is missing or invalid.")
 		end
 		if inputIcon then
-			assert(var22(inputIconStateColorMap), "inputIconStateColorMap is missing or invalid.")
+			assert(var1(inputIconStateColorMap), "inputIconStateColorMap is missing or invalid.")
 		end
 		if isDelayedInput and delayedInputImage == nil then
 			isDelayedInput = false
@@ -174,45 +174,45 @@ function genericButton.renderButton(p8, p9)
 			isDelayedInput = false
 		end
 		if type(fontStyle) == "string" then
-			fontStyle = p10.Font[fontStyle]
+			fontStyle = p3.Font[fontStyle]
 		end
-		local var27 = if p9 == 1 then buttonImage else delayedInputImage
+		local var2 = if p2 == 1 then buttonImage else delayedInputImage
 		
-		if isDelayedInput and p9 ~= 0 then
+		if isDelayedInput and p2 ~= 0 then
 			userInteractionEnabled = false
 		end
-		local var28 = getContentStyleModule(buttonStateColorMap, controlState, p10)
-		local var29 = text and getContentStyleModule(textStateColorMap, controlState, p10)
-		local var30 = icon and getContentStyleModule(iconStateColorMap, controlState, p10)
-		local var31 = inputIcon and getContentStyleModule(inputIconStateColorMap, controlState, p10)
-		local var32 = controlState == controlStateModule.Hover and p8.props.isHoverBackgroundEnabled == true
-		local hoverImage = p8.props.hoverImage
-		local var33 = 5
+		local var3 = getContentStyleModule(buttonStateColorMap, controlState, p3)
+		local var4 = text and getContentStyleModule(textStateColorMap, controlState, p3)
+		local var5 = icon and getContentStyleModule(iconStateColorMap, controlState, p3)
+		local var6 = inputIcon and getContentStyleModule(inputIconStateColorMap, controlState, p3)
+		local var7 = controlState == controlStateModule.Hover and p1.props.isHoverBackgroundEnabled == true
+		local hoverImage = p1.props.hoverImage
+		local var8 = 5
 		
 		if standardSize then
-			local var34 = nil
-			local var35 = nil
+			local var9 = nil
+			local var10 = nil
 			
 			if standardSize == standardButtonSizeModule.Regular then
-				var34 = 48
-				var33 = 12
-				fontStyle = p10.Font.Header2
-				var35 = false
+				var9 = 48
+				var8 = 12
+				fontStyle = p3.Font.Header2
+				var10 = false
 			elseif standardSize == standardButtonSizeModule.Small then
-				var34 = 36
-				var33 = 8
-				fontStyle = p10.Font.Header2
-				var35 = false
+				var9 = 36
+				var8 = 8
+				fontStyle = p3.Font.Header2
+				var10 = false
 			elseif standardSize == standardButtonSizeModule.XSmall then
-				var34 = 28
-				var33 = 8
-				fontStyle = p10.Font.CaptionHeader
-				var35 = true
+				var9 = 28
+				var8 = 8
+				fontStyle = p3.Font.CaptionHeader
+				var10 = true
 			end
 			if fitContent == nil then
-				fitContent = var35
+				fitContent = var10
 			end
-			size = UDim2.new(if fitContent then 0 else 1, 0, 0, var34)
+			size = UDim2.new(if fitContent then 0 else 1, 0, 0, var9)
 		end
 		local t
 		local _ = nil
@@ -220,27 +220,27 @@ function genericButton.renderButton(p8, p9)
 		if isLoading then
 			t = {
 				isLoadingShimmer = roactModule.createElement(skeleton, {
-					Size = if standardSize then UDim2.new(1, var33 * 2, 1, 0) else UDim2.new(1, 0, 1, 0),
-					Position = if standardSize then UDim2.new(0, -var33, 0, 0) else nil,
+					Size = if standardSize then UDim2.new(1, var8 * 2, 1, 0) else UDim2.new(1, 0, 1, 0),
+					Position = if standardSize then UDim2.new(0, -var8, 0, 0) else nil,
 					radius = getClosestRadiusModule(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then {
-						None = p10.Tokens.Radius.None,
-						Small = p10.Tokens.Radius.Small,
-						Medium = p10.Tokens.Radius.Medium,
-						Large = p10.Tokens.Size.Size_300,
-						XLarge = p10.Tokens.Radius.Large,
-						Circle = p10.Tokens.Radius.Circle
-					} else p10.Tokens.Semantic.Radius, UDim.new(0, 8))
+						None = p3.Tokens.Radius.None,
+						Small = p3.Tokens.Radius.Small,
+						Medium = p3.Tokens.Radius.Medium,
+						Large = p3.Tokens.Size.Size_300,
+						XLarge = p3.Tokens.Radius.Large,
+						Circle = p3.Tokens.Radius.Circle
+					} else p3.Tokens.Semantic.Radius, UDim.new(0, 8))
 				})
 			}
 		else
-			local var37 = p8.state.absoluteSize.Y - 10
-			local var38 = (if standardSize and fitContent then maxWidth else p8.state.absoluteSize.X) - var33 * 2
+			local var11 = p1.state.absoluteSize.Y - 10
+			local var12 = (if standardSize and fitContent then maxWidth else p1.state.absoluteSize.X) - var8 * 2
 			
 			if icon then
-				var38 -= 5 + getIconSizeModule(iconSizeModule.Medium)
+				var12 -= 5 + getIconSizeModule(iconSizeModule.Medium)
 			end
-			local vector2 = Vector2.new(var38, var37)
-			local children = p8.props[roactModule.Children]
+			local vector2 = Vector2.new(var12, var11)
+			local children = p1.props[roactModule.Children]
 			
 			if not children then
 				local createElement
@@ -257,8 +257,8 @@ function genericButton.renderButton(p8, p9)
 						LayoutOrder = 1,
 						Size = UDim2.new(0, getIconSizeModule(iconSizeModule.Medium), 0, getIconSizeModule(iconSizeModule.Medium)),
 						Image = icon,
-						ImageColor3 = var30.Color,
-						ImageTransparency = var30.Transparency
+						ImageColor3 = var5.Color,
+						ImageTransparency = var5.Transparency
 					}) or nil
 				}
 				
@@ -269,16 +269,16 @@ function genericButton.renderButton(p8, p9)
 						LayoutOrder = 2,
 						Text = text,
 						fontStyle = fontStyle,
-						colorStyle = var29,
+						colorStyle = var4,
 						maxSize = vector2,
 						TextWrapped = if standardSize then false else nil,
 						TextTruncate = if standardSize then Enum.TextTruncate.AtEnd else nil,
 						TextXAlignment = if standardSize and icon then Enum.TextXAlignment.Left else nil
-					}, p8.props.buttonTextOverride or {})) or nil
+					}, p1.props.buttonTextOverride or {})) or nil
 				end
 				children.Text = createElement
 			end
-			children = p8.props[roactModule.Children]
+			children = p1.props[roactModule.Children]
 			
 			if not children then
 				children = {
@@ -293,14 +293,14 @@ function genericButton.renderButton(p8, p9)
 						Position = UDim2.new(1, -4, 0.5, 0),
 						Size = UDim2.new(0, getIconSizeModule(iconSizeModule.Medium), 0, getIconSizeModule(iconSizeModule.Medium)),
 						Image = inputIcon,
-						ImageColor3 = var31.Color,
-						ImageTransparency = var31.Transparency
+						ImageColor3 = var6.Color,
+						ImageTransparency = var6.Transparency
 					}) or nil
 				}
 			end
 			t = children
 		end
-		return roactModule.createElement(interactableModule, cryoModule.Dictionary.join(p8.props, {
+		return roactModule.createElement(interactableModule, cryoModule.Dictionary.join(p1.props, {
 			forwardedRef = cryoModule.None,
 			icon = cryoModule.None,
 			text = cryoModule.None,
@@ -327,23 +327,23 @@ function genericButton.renderButton(p8, p9)
 			[roactModule.Children] = cryoModule.None,
 			Size = size,
 			AutomaticSize = if fitContent then Enum.AutomaticSize.X else nil,
-			[roactModule.Ref] = p8.props.forwardedRef,
+			[roactModule.Ref] = p1.props.forwardedRef,
 			isDisabled = isDisabled,
-			onStateChanged = p8.onStateChanged,
+			onStateChanged = p1.onStateChanged,
 			userInteractionEnabled = userInteractionEnabled,
 			Image = buttonImage,
 			ScaleType = Enum.ScaleType.Slice,
-			ImageColor3 = var28.Color,
-			ImageTransparency = var28.Transparency,
+			ImageColor3 = var3.Color,
+			ImageTransparency = var3.Transparency,
 			BackgroundTransparency = 1,
 			AutoButtonColor = false,
-			[roactModule.Event.Activated] = p8.props.onActivated,
-			[roactModule.Change.AbsoluteSize] = p8.onAbsoluteSizeChanged
+			[roactModule.Event.Activated] = p1.props.onActivated,
+			[roactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged
 		}), {
 			UISizeConstraint = if standardSize and maxWidth then roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(maxWidth, 1e999) }) else nil,
 			UIPadding = if standardSize then roactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var33),
-				PaddingRight = UDim.new(0, var33)
+				PaddingLeft = UDim.new(0, var8),
+				PaddingRight = UDim.new(0, var8)
 			}) else nil,
 			ButtonContent = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -353,39 +353,39 @@ function genericButton.renderButton(p8, p9)
 			LoadingImage = isDelayedInput and roactModule.createElement(imageSetComponentModule.Label, {
 				BackgroundTransparency = 1,
 				ImageTransparency = 0.5,
-				Size = UDim2.new(p9, 0, 1, 0),
+				Size = UDim2.new(p2, 0, 1, 0),
 				Position = UDim2.new(1, 0, 0.5, 0),
 				AnchorPoint = Vector2.new(1, 0.5),
-				Image = var27,
+				Image = var2,
 				ImageColor3 = Color3.new(0, 0, 0),
 				ScaleType = Enum.ScaleType.Slice,
-				SliceCenter = p8.props.SliceCenter
+				SliceCenter = p1.props.SliceCenter
 			}),
-			HoverBackground = var32 and (roactModule.createElement(hoverButtonBackgroundModule, {
-				sidePadding = if standardSize then UDim.new(0, var33) else nil,
+			HoverBackground = var7 and (roactModule.createElement(hoverButtonBackgroundModule, {
+				sidePadding = if standardSize then UDim.new(0, var8) else nil,
 				image = hoverImage,
-				sliceCenter = p8.props.SliceCenter
+				sliceCenter = p1.props.SliceCenter
 			}) or nil),
 			EventConnection = roactModule.createElement(eventConnection, {
 				event = runService.RobloxGuiFocusedChanged,
-				callback = p8.onRobloxGuiFocusedChanged
+				callback = p1.onRobloxGuiFocusedChanged
 			})
 		})
 	end)
 end
 
-function genericButton.didUpdate(p11, p12, p13)
-	if p11.props.enableInputDelayed ~= p12.enableInputDelayed then
-		p11:setState({
-			targetLoadingProgress = if p11.props.enableInputDelayed then 0 else 1
+function genericButton.didUpdate(p1, p2, p3)
+	if p1.props.enableInputDelayed ~= p2.enableInputDelayed then
+		p1:setState({
+			targetLoadingProgress = if p1.props.enableInputDelayed then 0 else 1
 		})
 	end
-	if not p11.state.isButtonUnfocused and p13.isButtonUnfocused and (p11.state.targetLoadingProgress == 1 and p11.props.enableInputDelayed) then
-		p11:setState({ targetLoadingProgress = 0 })
+	if not p1.state.isButtonUnfocused and p3.isButtonUnfocused and (p1.state.targetLoadingProgress == 1 and p1.props.enableInputDelayed) then
+		p1:setState({ targetLoadingProgress = 0 })
 	end
 end
 
-return roactModule.forwardRef(function(p14, p15)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), genericButton (ref), cryoModule (ref)
-	return roactModule.createElement(genericButton, cryoModule.Dictionary.join(p14, { forwardedRef = p15 }))
+	return roactModule.createElement(genericButton, cryoModule.Dictionary.join(p1, { forwardedRef = p2 }))
 end)

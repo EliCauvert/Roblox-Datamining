@@ -2,10 +2,10 @@
 local API_URLModule = require(parent.API_URL)
 local _ = require(parent.networkingShareLinkTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.POST("resolve", function(p1, p2)
+	return p1.roduxNetworking.POST("resolve", function(p2, p3)
 		-- upvalues: API_URLModule (copy)
-		return p1(API_URLModule):path("deeplinks"):path("v2"):path("resolve"):body({ linkId = p2.linkId })
+		return p2(API_URLModule):path("deeplinks"):path("v2"):path("resolve"):body({ linkId = p3.linkId })
 	end)
 end

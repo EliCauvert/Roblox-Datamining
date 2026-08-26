@@ -5,8 +5,8 @@ local reactModule = require(parent.React)
 local loaderContextModule = require(script.Parent.LoaderContext)
 local fFlagAbuseReportDensifyResolvedArraysModule = require(genericAbuseReporting.Flags.FFlagAbuseReportDensifyResolvedArrays)
 
-local function _(p0)
-	return typeof(p0) == "table" and p0["$load"] ~= nil
+local function _(p1)
+	return typeof(p1) == "table" and p1["$load"] ~= nil
 end
 
 local function cacheKey(p1, p2)
@@ -29,122 +29,122 @@ end
 
 local function useLoader(p3)
 	-- upvalues: loaderContextModule (ref), reactModule (ref), cacheKey (ref)
-	local var9 = loaderContextModule.useLoaderContext()
-	local registryRef = var9.registryRef
-	local cacheRef = var9.cacheRef
-	local var10 = typeof(p3) == "table" and p3["$load"] ~= nil
-	local var11 = if var10 then p3["$load"] else nil
-	local var12 = if var10 then p3.params else nil
-	local var13, var14 = reactModule.useState(if var10 then { data = nil, loading = true, error = nil } else { loading = false, error = nil, data = p3 })
-	local var15, var16 = reactModule.useState(0)
+	local var1 = loaderContextModule.useLoaderContext()
+	local registryRef = var1.registryRef
+	local cacheRef = var1.cacheRef
+	local var2 = typeof(p3) == "table" and p3["$load"] ~= nil
+	local var3 = if var2 then p3["$load"] else nil
+	local var4 = if var2 then p3.params else nil
+	local var5, var6 = reactModule.useState(if var2 then { data = nil, loading = true, error = nil } else { loading = false, error = nil, data = p3 })
+	local var7, var8 = reactModule.useState(0)
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var14 (ref), p3 (ref), registryRef (ref), var11 (ref), cacheKey (copy), var12 (ref), cacheRef (ref)
-		if not var10 then
-			var14({ loading = false, error = nil, data = p3 })
+		-- upvalues: var2 (ref), var6 (ref), p3 (ref), registryRef (ref), var3 (ref), cacheKey (copy), var4 (ref), cacheRef (ref)
+		if not var2 then
+			var6({ loading = false, error = nil, data = p3 })
 			
 			return
 		end
-		local var17 = registryRef.current[var11]
+		local var9 = registryRef.current[var3]
 		
-		if not var17 then
-			var14({
+		if not var9 then
+			var6({
 				data = nil,
 				loading = false,
-				error = string.format("Loader \"%s\" not found in registry", var11)
+				error = string.format("Loader \"%s\" not found in registry", var3)
 			})
 			
 			return
 		end
-		local var18 = cacheKey(var11, var12)
-		local var19 = cacheRef.current[var18]
+		local var10 = cacheKey(var3, var4)
+		local var11 = cacheRef.current[var10]
 		
-		if var19 then
-			var14({ loading = false, error = nil, data = var19 })
+		if var11 then
+			var6({ loading = false, error = nil, data = var11 })
 			
 			return
 		end
-		local var20 = false
-		var14({ data = nil, loading = true, error = nil })
-		var17.fetch(var12 or {}):andThen(function(p5)
-			-- upvalues: var20 (write), cacheRef (copy), var18 (ref), var14 (copy)
-			if var20 then
+		local var12 = false
+		var6({ data = nil, loading = true, error = nil })
+		var9.fetch(var4 or {}):andThen(function(p4)
+			-- upvalues: var12 (write), cacheRef (copy), var10 (ref), var6 (copy)
+			if var12 then
 				return
 			end
-			cacheRef.current[var18] = p5
-			var14({ loading = false, error = nil, data = p5 })
+			cacheRef.current[var10] = p4
+			var6({ loading = false, error = nil, data = p4 })
 		end):catch(function(p4)
-			-- upvalues: var20 (write), var14 (copy)
-			if var20 then
+			-- upvalues: var12 (write), var6 (copy)
+			if var12 then
 				return
 			end
-			var14({ data = nil, loading = false, error = tostring(p4) })
+			var6({ data = nil, loading = false, error = tostring(p4) })
 		end)
 		
 		return function()
-			-- upvalues: var20 (write)
-			var20 = true
+			-- upvalues: var12 (write)
+			var12 = true
 		end
-	end, { var12, p3, var15, var10 })
+	end, { var4, p3, var7, var2 })
 	
 	return {
-		data = var13.data,
-		loading = var13.loading,
-		error = var13.error,
+		data = var5.data,
+		loading = var5.loading,
+		error = var5.error,
 		retry = reactModule.useCallback(function()
-			-- upvalues: var10 (ref), cacheRef (ref), cacheKey (copy), var11 (ref), var12 (ref), var16 (ref)
-			if var10 then
-				cacheRef.current[cacheKey(var11, var12)] = nil
-				var16(function(p6)
-					return p6 + 1
+			-- upvalues: var2 (ref), cacheRef (ref), cacheKey (copy), var3 (ref), var4 (ref), var8 (ref)
+			if var2 then
+				cacheRef.current[cacheKey(var3, var4)] = nil
+				var8(function(p4)
+					return p4 + 1
 				end)
 				
 				return
 			end
-		end, { p3, var12, var10 })
+		end, { p3, var4, var2 })
 	}
 end
 
 return {
 	useLoader = useLoader,
-	useListLoader = function(p7)
+	useListLoader = function(p3)
 		-- upvalues: useLoader (ref), reactModule (ref), fFlagAbuseReportDensifyResolvedArraysModule (ref), dashModule (ref)
-		local var21 = useLoader(p7)
+		local var1 = useLoader(p3)
 		
 		return {
 			data = reactModule.useMemo(function()
-				-- upvalues: var21 (ref), fFlagAbuseReportDensifyResolvedArraysModule (copy), dashModule (copy)
-				if not var21.data then
+				-- upvalues: var1 (ref), fFlagAbuseReportDensifyResolvedArraysModule (copy), dashModule (copy)
+				if not var1.data then
 					return nil
 				end
-				local data = var21.data
+				local data = var1.data
 				
 				return if fFlagAbuseReportDensifyResolvedArraysModule then data else dashModule.values(data)
-			end, { var21.data }),
-			loading = var21.loading,
-			error = var21.error,
-			retry = var21.retry
+			end, { var1.data }),
+			loading = var1.loading,
+			error = var1.error,
+			retry = var1.retry
 		}
 	end,
-	useGroupedListLoader = function(p8)
+	useGroupedListLoader = function(p3)
 		-- upvalues: useLoader (ref), reactModule (ref), fFlagAbuseReportDensifyResolvedArraysModule (ref), dashModule (ref)
-		local var22 = useLoader(p8)
+		local var1 = useLoader(p3)
 		
 		return {
 			data = reactModule.useMemo(function()
-				-- upvalues: var22 (ref), fFlagAbuseReportDensifyResolvedArraysModule (copy), dashModule (copy)
-				if not var22.data then
+				-- upvalues: var1 (ref), fFlagAbuseReportDensifyResolvedArraysModule (copy), dashModule (copy)
+				if not var1.data then
 					return nil
 				end
-				local data = var22.data
+				local data = var1.data
 				
-				return if fFlagAbuseReportDensifyResolvedArraysModule then data else dashModule.map(dashModule.values(data), function(p9)
+				return if fFlagAbuseReportDensifyResolvedArraysModule then data else dashModule.map(dashModule.values(data), function(p4)
 					-- upvalues: dashModule (copy)
-					return if p9.items then dashModule.join(p9, { items = dashModule.values(p9.items) }) else p9
+					return if p4.items then dashModule.join(p4, { items = dashModule.values(p4.items) }) else p4
 				end)
-			end, { var22.data }),
-			loading = var22.loading,
-			error = var22.error,
-			retry = var22.retry
+			end, { var1.data }),
+			loading = var1.loading,
+			error = var1.error,
+			retry = var1.retry
 		}
 	end
 }

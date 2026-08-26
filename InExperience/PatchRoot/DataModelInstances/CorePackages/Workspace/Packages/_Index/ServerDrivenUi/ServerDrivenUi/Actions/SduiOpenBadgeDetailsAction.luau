@@ -13,27 +13,27 @@ local fFlagLuaAppBadgeDetailsLogExposure = require(parent.SharedFlags).FFlagLuaA
 local fStringLuaAppBadgeDetailsIxpLayer = require(parent.SharedFlags).FStringLuaAppBadgeDetailsIxpLayer
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
-local var3 = urlBuilder.fromString("www:badges")()
+local var2 = urlBuilder.fromString("www:badges")()
 
-return function(p0, _, p1, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagLuaAppBadgeDetailsLogExposure (ref), IXPService (ref), fStringLuaAppBadgeDetailsIxpLayer (ref), fFlagLuaAppBadgeDetailsEnabled (ref), sduiLoadTimer (ref), fetchBadgeDetailsPage (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), var3 (ref)
-	local var4 = if p0 then p0.actionParams else nil
+return function(p1, _, p2, _)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagLuaAppBadgeDetailsLogExposure (ref), IXPService (ref), fStringLuaAppBadgeDetailsIxpLayer (ref), fFlagLuaAppBadgeDetailsEnabled (ref), sduiLoadTimer (ref), fetchBadgeDetailsPage (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), var2 (ref)
+	local var3 = if p1 then p1.actionParams else nil
 	
-	if var4 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var3 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.OpenBadgeDetails
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	assert(var4, "actionParams must exist")
+	assert(var3, "actionParams must exist")
 	
-	if var4.badgeId == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var3.badgeId == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: badgeId",
 			name = sduiActionType.OpenBadgeDetails
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	elseif fFlagLuaAppBadgeDetailsLogExposure then
@@ -42,10 +42,10 @@ return function(p0, _, p1, _)
 	if fFlagLuaAppBadgeDetailsEnabled then
 		local badgeDetails = sduiLoadTimer.createLoadTimer("BadgeDetails")
 		badgeDetails.start("navigate")
-		fetchBadgeDetailsPage(var4.badgeId, badgeDetails)
+		fetchBadgeDetailsPage(var3.badgeId, badgeDetails)
 		local t = {
 			name = appPage.BadgeDetails,
-			extraProps = { badgeId = var4.badgeId, pageTimer = badgeDetails }
+			extraProps = { badgeId = var3.badgeId, pageTimer = badgeDetails }
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
@@ -53,16 +53,16 @@ return function(p0, _, p1, _)
 			
 			return
 		end
-		p1.dependencies.dispatch(navigateDown(t))
+		p2.dependencies.dispatch(navigateDown(t))
 		
 		return
 	else
 		local t = {
 			name = appPage.GenericWebPage,
-			detail = `{var3}/{var4.badgeId}`,
+			detail = `{var2}/{var3.badgeId}`,
 			extraProps = {
 				transitionAnimation = "SlideInFromRight",
-				title = var4.titleText
+				title = var3.titleText
 			}
 		}
 		
@@ -71,6 +71,6 @@ return function(p0, _, p1, _)
 			
 			return
 		end
-		p1.dependencies.dispatch(navigateDown(t))
+		p2.dependencies.dispatch(navigateDown(t))
 	end
 end

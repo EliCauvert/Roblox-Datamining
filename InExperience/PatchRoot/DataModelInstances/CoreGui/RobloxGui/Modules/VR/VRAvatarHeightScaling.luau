@@ -18,9 +18,9 @@ function t.new()
 		-- upvalues: tbl (ref)
 		tbl:onPlayerHeightChanged()
 	end)
-	VRService.UserCFrameChanged:Connect(function(p0, _)
+	VRService.UserCFrameChanged:Connect(function(p1, _)
 		-- upvalues: tbl (ref)
-		if p0 == Enum.UserCFrame.Floor then
+		if p1 == Enum.UserCFrame.Floor then
 			tbl:onPlayerHeightChanged()
 		end
 	end)
@@ -32,32 +32,32 @@ end
 function t:setHeadScale(p1)
 	-- upvalues: VRService (ref), userGameSettingsService (ref)
 	if VRService.AutomaticScaling ~= Enum.VRScaling.World then return end
-	local var6 = self:GetSubjectHeight(p1)
+	local var1 = self:GetSubjectHeight(p1)
 	
-	if not var6 or var6 <= 0 then return end
-	local var7 = -VRService:GetUserCFrame(Enum.UserCFrame.Floor).Position.Y
-	local var8 = if var7 < 0.8 * userGameSettingsService.PlayerHeight then var6 / userGameSettingsService.PlayerHeight else var6 / var7
+	if not var1 or var1 <= 0 then return end
+	local var2 = -VRService:GetUserCFrame(Enum.UserCFrame.Floor).Position.Y
+	local var3 = if var2 < 0.8 * userGameSettingsService.PlayerHeight then var1 / userGameSettingsService.PlayerHeight else var1 / var2
 	local currentCamera = workspace.CurrentCamera
 	
 	if currentCamera then
-		currentCamera.HeadScale = var8
+		currentCamera.HeadScale = var3
 		
 		return
 	end
 end
 
-function t.GetSubjectHeight(_, p2)
-	local humanoid = p2:FindFirstChild("Humanoid")
+function t.GetSubjectHeight(_, p1)
+	local humanoid = p1:FindFirstChild("Humanoid")
 	
 	if humanoid and humanoid:GetState() == Enum.HumanoidStateType.Dead then return end
-	local var10 = if humanoid then humanoid.RootPart else p2:FindFirstChild("HumanoidRootPart")
+	local var1 = if humanoid then humanoid.RootPart else p1:FindFirstChild("HumanoidRootPart")
 	
-	if not var10 or not humanoid then
+	if not var1 or not humanoid then
 		return nil
 	end
-	local var11 = if humanoid.RigType == Enum.HumanoidRigType.R6 then 2 else humanoid.HipHeight
+	local var2 = if humanoid.RigType == Enum.HumanoidRigType.R6 then 2 else humanoid.HipHeight
 	
-	return if humanoid.AutomaticScalingEnabled then var10.Size.Y / 2 + var11 + (var10.Size.Y / 2 + 0.5) + humanoid.CameraOffset.Y else var10.Size.Y / 2 + var11 + 2 + humanoid.CameraOffset.Y
+	return if humanoid.AutomaticScalingEnabled then var1.Size.Y / 2 + var2 + (var1.Size.Y / 2 + 0.5) + humanoid.CameraOffset.Y else var1.Size.Y / 2 + var2 + 2 + humanoid.CameraOffset.Y
 end
 
 function t:onPlayerHeightChanged()
@@ -73,9 +73,9 @@ function t:onScalingChanged()
 		if self.characterChangedConnection then
 			return
 		else
-			self.characterChangedConnection = self.avatarUtil:connectLocalCharacterChanges(function(p3)
+			self.characterChangedConnection = self.avatarUtil:connectLocalCharacterChanges(function(p1)
 				-- upvalues: self (ref)
-				self:setHeadScale(p3)
+				self:setHeadScale(p1)
 			end)
 			
 			return

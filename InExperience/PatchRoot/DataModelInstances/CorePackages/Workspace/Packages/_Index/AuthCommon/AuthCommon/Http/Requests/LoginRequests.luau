@@ -11,14 +11,14 @@ local getFFlagLuaAppUsingSecurityQuestionsForLuaLogin = require(parent.SharedFla
 local getFFlagEnableLoginAccountSelector = require(parent.SharedFlags).GetFFlagEnableLoginAccountSelector
 local fFlagEnableLuaAccountSwitch = require(parent.SharedFlags).FFlagEnableLuaAccountSwitch
 local t = {
-	logByPasskey = function(p0, p1, p2)
+	logByPasskey = function(p1, p2, p3)
 		-- upvalues: httpService (ref), fFlagEnableLuaAccountSwitch (ref), appStorageUtilitiesModule (ref)
-		return p0(getLoginUrl(), "POST", {
+		return p1(getLoginUrl(), "POST", {
 			maxRetryCount = 0,
 			postBody = httpService:JSONEncode({
 				ctype = "Passkey",
-				cvalue = httpService:JSONEncode(p1),
-				password = p2,
+				cvalue = httpService:JSONEncode(p2),
+				password = p3,
 				accountBlob = fFlagEnableLuaAccountSwitch and appStorageUtilitiesModule.getAccountBlob() or nil
 			})
 		})
@@ -68,43 +68,43 @@ Traceback:
 	runtime : [lunaux]:1933 function normalize_cfg
 	runtime : [lunaux]:1320 function match_weird_patterns
 	end,
-	singleSignOnLogin = function(p3)
+	singleSignOnLogin = function(p1)
 		-- upvalues: getSingleSignOnUrlsModule (ref), httpService (ref), consoleAuthRequestWrapper (ref), promiseModule (ref), loginErrorCodesModule (ref)
-		local var7 = getSingleSignOnUrlsModule()
-		local login = var7.login
+		local var1 = getSingleSignOnUrlsModule()
+		local login = var1.login
 		
-		return if login then consoleAuthRequestWrapper(p3, login(), "POST", {
+		return if login then consoleAuthRequestWrapper(p1, login(), "POST", {
 			maxRetryCount = 0,
-			postBody = if var7.linkingPlatform then httpService:JSONEncode({ identityProvider = var7.linkingPlatform }) else "{}"
+			postBody = if var1.linkingPlatform then httpService:JSONEncode({ identityProvider = var1.linkingPlatform }) else "{}"
 		}) else promiseModule.reject({ errorCode = loginErrorCodesModule.ServiceUnavailable })
 	end,
-	singleSignOnConnectWithCode = function(p4, p5, p6)
+	singleSignOnConnectWithCode = function(p1, p2, p3)
 		-- upvalues: getSingleSignOnUrlsModule (ref), httpService (ref), consoleAuthRequestWrapper (ref), promiseModule (ref), loginErrorCodesModule (ref)
-		local var8 = getSingleSignOnUrlsModule()
-		local connect = var8.connect
+		local var1 = getSingleSignOnUrlsModule()
+		local connect = var1.connect
 		
-		return if connect then consoleAuthRequestWrapper(p4, connect(), "POST", {
+		return if connect then consoleAuthRequestWrapper(p1, connect(), "POST", {
 			maxRetryCount = 0,
 			postBody = httpService:JSONEncode({
 				ctype = "AuthToken",
-				cvalue = p5,
-				password = p6,
-				accountLinkParameters = if var8.linkingPlatform then { LinkingPlatform = var8.linkingPlatform } else nil
+				cvalue = p2,
+				password = p3,
+				accountLinkParameters = if var1.linkingPlatform then { LinkingPlatform = var1.linkingPlatform } else nil
 			})
 		}) else promiseModule.reject({ errorCode = loginErrorCodesModule.ServiceUnavailable })
 	end,
-	singleSignOnConnectWithCredential = function(p7, p8, p9, p10)
+	singleSignOnConnectWithCredential = function(p1, p2, p3, p4)
 		-- upvalues: getSingleSignOnUrlsModule (ref), httpService (ref), consoleAuthRequestWrapper (ref), promiseModule (ref), loginErrorCodesModule (ref)
-		local var9 = getSingleSignOnUrlsModule()
-		local connect = var9.connect
+		local var1 = getSingleSignOnUrlsModule()
+		local connect = var1.connect
 		
-		return if connect then consoleAuthRequestWrapper(p7, connect(), "POST", {
+		return if connect then consoleAuthRequestWrapper(p1, connect(), "POST", {
 			maxRetryCount = 0,
 			postBody = httpService:JSONEncode({
-				ctype = p10,
-				cvalue = p8,
-				password = p9,
-				accountLinkParameters = if var9.linkingPlatform then { LinkingPlatform = var9.linkingPlatform } else nil
+				ctype = p4,
+				cvalue = p2,
+				password = p3,
+				accountLinkParameters = if var1.linkingPlatform then { LinkingPlatform = var1.linkingPlatform } else nil
 			})
 		}) else promiseModule.reject({ errorCode = loginErrorCodesModule.ServiceUnavailable })
 	end

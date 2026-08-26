@@ -8,21 +8,21 @@ local constantsModule = require(verifiedBadges.constants)
 local uDim = UDim.new(0, 24)
 local uDim_1 = UDim.new(0, 12)
 
-local function selectScreenSize(p0)
-	return p0.ScreenSize
+local function selectScreenSize(p1)
+	return p1.ScreenSize
 end
 
 return function(p1)
 	-- upvalues: UIBloxModule (ref), useSelector (ref), selectScreenSize (ref), useLocalization (ref), reactModule (ref), uDim (ref), uDim_1 (ref), constantsModule (ref)
-	local var7 = UIBloxModule.Core.Style.useStyle()
-	local var8 = useLocalization({
+	local var1 = UIBloxModule.Core.Style.useStyle()
+	local var2 = useLocalization({
 		titleText = "Feature.ProfileBadges.VerifiedBadgeInfoTitle",
 		bodyText = "Feature.ProfileBadges.VerifiedBadgeInfo",
 		learnMoreText = "Feature.ProfileBadges.VerifiedBadgeInfoLink"
 	})
 	
 	return reactModule.createElement(UIBloxModule.App.Dialog.Modal.PartialPageModal, {
-		title = var8.titleText,
+		title = var2.titleText,
 		screenSize = useSelector(selectScreenSize),
 		buttonStackProps = {
 			buttons = {
@@ -35,7 +35,7 @@ return function(p1)
 								p1.onConfirm()
 							end
 						end, { p1 }),
-						text = var8.learnMoreText
+						text = var2.learnMoreText
 					}
 				}
 			}
@@ -63,16 +63,16 @@ return function(p1)
 				layoutOrder = 1,
 				fluidSizing = false,
 				text = constantsModule.VERIFIED_EMOJI,
-				fontStyle = var7.Font.Title,
-				colorStyle = var7.Theme.TextEmphasis,
+				fontStyle = var1.Font.Title,
+				colorStyle = var1.Theme.TextEmphasis,
 				automaticSize = Enum.AutomaticSize.XY
 			}),
 			Body = reactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 				layoutOrder = 2,
 				fluidSizing = false,
-				text = var8.bodyText,
-				fontStyle = var7.Font.Body,
-				colorStyle = var7.Theme.TextMuted,
+				text = var2.bodyText,
+				fontStyle = var1.Font.Body,
+				colorStyle = var1.Theme.TextMuted,
 				size = UDim2.fromScale(1, 0),
 				automaticSize = Enum.AutomaticSize.Y
 			})

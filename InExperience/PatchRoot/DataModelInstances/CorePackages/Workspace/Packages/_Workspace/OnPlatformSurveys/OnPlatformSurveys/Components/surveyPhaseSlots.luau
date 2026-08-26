@@ -14,9 +14,9 @@ local questionRenderersModule = require(onPlatformSurveys.Components.Questions.q
 local _ = require(onPlatformSurveys.Hooks.inlineSurveyReducer)
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 
-local function LoadingBody(p0)
+local function LoadingBody(p1)
 	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local size600 = p0.tokens.Size.Size_600
+	local size600 = p1.tokens.Size.Size_600
 	
 	return reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
 		Line1 = reactModule.createElement(skeleton, {
@@ -58,75 +58,75 @@ local function QuestionBody(p1)
 end
 
 return {
-	getSlots = function(p2, p3, p4, p5)
+	getSlots = function(p1, p2, p3, p4)
 		-- upvalues: phaseModule (ref), reactModule (ref), text (ref), buttonVariant (ref), LoadingBody (ref), QuestionBody (ref), fFlagInlineSurveyEnhancements (ref), inlineSurveyHelpersModule (ref)
-		if p2.phase == phaseModule.Invite then
+		if p1.phase == phaseModule.Invite then
 			return {
-				headerTitle = p3.surveyTitle,
+				headerTitle = p2.surveyTitle,
 				body = reactModule.createElement(text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-					Text = p3.inviteBody
+					Text = p2.inviteBody
 				}),
 				primaryAction = {
-					text = p3.inviteAccept,
+					text = p2.inviteAccept,
 					variant = buttonVariant.Emphasis,
-					onActivated = p5.onAccept
+					onActivated = p4.onAccept
 				}
 			}
-		elseif p2.phase == phaseModule.Loading then
+		elseif p1.phase == phaseModule.Loading then
 			return {
 				headerTitle = nil,
 				primaryAction = nil,
-				body = reactModule.createElement(LoadingBody, { tokens = p4 })
+				body = reactModule.createElement(LoadingBody, { tokens = p3 })
 			}
-		elseif p2.phase == phaseModule.Error then
+		elseif p1.phase == phaseModule.Error then
 			return {
 				headerTitle = nil,
 				body = reactModule.createElement(text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
-					Text = p3.errorText
+					Text = p2.errorText
 				}),
 				primaryAction = {
-					text = p3.retry,
+					text = p2.retry,
 					variant = buttonVariant.Standard,
-					onActivated = p5.onRetry
+					onActivated = p4.onRetry
 				}
 			}
-		elseif p2.phase == phaseModule.Completed then
+		elseif p1.phase == phaseModule.Completed then
 			return {
 				body = nil,
-				headerTitle = p3.completedTitle,
+				headerTitle = p2.completedTitle,
 				primaryAction = {
-					text = p3.done,
+					text = p2.done,
 					variant = buttonVariant.Emphasis,
-					onActivated = p5.onDismiss
+					onActivated = p4.onDismiss
 				}
 			}
-		elseif p2.phase ~= phaseModule.Started and p2.phase ~= phaseModule.Submitting or p2.questions[p2.index] == nil then
+		elseif p1.phase ~= phaseModule.Started and p1.phase ~= phaseModule.Submitting or p1.questions[p1.index] == nil then
 			return { headerTitle = nil, body = nil, primaryAction = nil }
 		end
-		local var8 = p2.phase == phaseModule.Submitting
-		local var9 = reactModule.createElement(QuestionBody, { state = p2, onAnswerChanged = p5.onAnswerChanged })
+		local var1 = p1.phase == phaseModule.Submitting
+		local var2 = reactModule.createElement(QuestionBody, { state = p1, onAnswerChanged = p4.onAnswerChanged })
 		
 		return if fFlagInlineSurveyEnhancements then {
-			headerTitle = p3.surveyTitle,
-			body = var9,
+			headerTitle = p2.surveyTitle,
+			body = var2,
 			primaryAction = {
-				text = if inlineSurveyHelpersModule.isLastQuestion(p2.questions, p2.index, p2.answer) then p3.send else p3.next,
+				text = if inlineSurveyHelpersModule.isLastQuestion(p1.questions, p1.index, p1.answer) then p2.send else p2.next,
 				variant = buttonVariant.Emphasis,
-				onActivated = p5.onSubmit,
-				isLoading = var8,
-				isDisabled = var8 or not inlineSurveyHelpersModule.canAdvance(p2.questions, p2.index, p2.answersByQuestionId, p2.answer)
+				onActivated = p4.onSubmit,
+				isLoading = var1,
+				isDisabled = var1 or not inlineSurveyHelpersModule.canAdvance(p1.questions, p1.index, p1.answersByQuestionId, p1.answer)
 			}
 		} else {
-			headerTitle = p3.surveyTitle,
-			body = var9,
+			headerTitle = p2.surveyTitle,
+			body = var2,
 			primaryAction = {
-				text = p3.send,
+				text = p2.send,
 				variant = buttonVariant.Emphasis,
-				onActivated = p5.onSubmit,
-				isLoading = var8,
-				isDisabled = var8 or not inlineSurveyHelpersModule.canSubmitAll(p2.questions, inlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(p2.answersByQuestionId, p2.questions[p2.index], p2.answer))
+				onActivated = p4.onSubmit,
+				isLoading = var1,
+				isDisabled = var1 or not inlineSurveyHelpersModule.canSubmitAll(p1.questions, inlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(p1.answersByQuestionId, p1.questions[p1.index], p1.answer))
 			}
 		}
 	end

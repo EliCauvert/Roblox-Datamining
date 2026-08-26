@@ -7,9 +7,9 @@ return function()
 	-- upvalues: tokensModule (ref), formatTokensModule (ref), attributeRulesModule (ref)
 	local t = {}
 	local defaultTokens = tokensModule.defaultTokens
-	local _, var5 = attributeRulesModule.rulesGenerator(defaultTokens, formatTokensModule(defaultTokens))
+	local _, var1 = attributeRulesModule.rulesGenerator(defaultTokens, formatTokensModule(defaultTokens))
 	
-	for i, v in var5 do
+	for i, v in var1 do
 		if v.pseudo == "UIListLayout" and v.tag then
 			t[v.tag] = true
 		end

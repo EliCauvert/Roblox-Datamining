@@ -30,10 +30,10 @@ return {
 	name = "AvatarExperienceCommon",
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: t (ref), reactModule (ref), appStyleProvider_1 (ref), t_2 (ref), appStyleProvider (ref), roactRoduxModule (ref), createStore (ref), designTokenProvider (ref), foundationProvider (ref), t_1 (ref)
-		return function(p1)
-			-- upvalues: t (copy), reactModule (copy), appStyleProvider_1 (copy), t_2 (copy), appStyleProvider (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), foundationProvider (copy), t_1 (copy), p0 (ref)
+		return function(p2)
+			-- upvalues: t (copy), reactModule (copy), appStyleProvider_1 (copy), t_2 (copy), appStyleProvider (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), foundationProvider (copy), t_1 (copy), p1 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -45,15 +45,15 @@ return {
 					PaddingLeft = UDim.new(0, 10),
 					PaddingRight = UDim.new(0, 10)
 				}),
-				AppStyleProvider = reactModule.createElement(appStyleProvider_1, { style = if p1 then t_2[p1.theme] else t_2.Default }, {
-					StyleProvider = reactModule.createElement(appStyleProvider, { style = if p1 then t_2[p1.theme] else t_2.Default }, {
+				AppStyleProvider = reactModule.createElement(appStyleProvider_1, { style = if p2 then t_2[p2.theme] else t_2.Default }, {
+					StyleProvider = reactModule.createElement(appStyleProvider, { style = if p2 then t_2[p2.theme] else t_2.Default }, {
 						StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
 							DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
 								FoundationProvider = reactModule.createElement(foundationProvider, {
-									colorMode = t[p1.theme],
-									device = t_1[p1.platform],
-									preferences = p1.settings
-								}, { Child = reactModule.createElement(p0, p1) })
+									colorMode = t[p2.theme],
+									device = t_1[p2.platform],
+									preferences = p2.settings
+								}, { Child = reactModule.createElement(p1, p2) })
 							})
 						})
 					})

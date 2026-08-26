@@ -11,9 +11,9 @@ return {
 	getIsVisible = function(_)
 		return true
 	end,
-	getMenuItems = function(p0)
+	getMenuItems = function(p1)
 		-- upvalues: constantsModule (ref), cryoModule (ref)
-		return cryoModule.Dictionary.values(if p0.methodOfAbuse == "Voice Chat" then constantsModule.PlayerVoiceAbuseTypes else constantsModule.PlayerAbuseTypes)
+		return cryoModule.Dictionary.values(if p1.methodOfAbuse == "Voice Chat" then constantsModule.PlayerVoiceAbuseTypes else constantsModule.PlayerAbuseTypes)
 	end,
 	onUpdateSelectedOption = function(p1, _, p2, p3)
 		-- upvalues: constantsModule (ref)

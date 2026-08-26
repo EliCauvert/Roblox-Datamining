@@ -8,15 +8,15 @@ return {
 	getIsVisible = function(_)
 		return true
 	end,
-	onUpdate = function(p0, _, p1, p2)
+	onUpdate = function(p1, _, p2, p3)
 		-- upvalues: constantsModule (ref)
-		p2.analyticsDispatch({
+		p3.analyticsDispatch({
 			type = constantsModule.AnalyticsActions.SetCommentAdded,
-			commentAdded = #p0 > 0
+			commentAdded = #p1 > 0
 		})
-		p1({
+		p2({
 			type = constantsModule.PlayerMenuActions.UpdateComment,
-			comment = p0
+			comment = p1
 		})
 	end
 }

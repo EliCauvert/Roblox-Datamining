@@ -10,31 +10,31 @@ local cryo = dependenciesModule.Cryo
 local timeTrigger = dependenciesModule.ToastNotificationProtocolEnums.TimeTrigger
 local fFlagFriendshipNotifsUseSendrExperiment = require(parent_1.SharedFlags).FFlagFriendshipNotifsUseSendrExperiment
 
-local var6 = function(p0)
+local var1 = function(p1)
 	-- upvalues: typeModule (ref)
-	return if p0.Y < p0.X then typeModule.DeviceOrientationEnum.Landscape else typeModule.DeviceOrientationEnum.Portrait
+	return if p1.Y < p1.X then typeModule.DeviceOrientationEnum.Landscape else typeModule.DeviceOrientationEnum.Portrait
 end
 
-local var7 = function(p1, p2)
+local var2 = function(p1, p2)
 	-- upvalues: constantsModule (ref)
 	return if p2 < constantsModule.FullWidthDeviceThreshold then UDim2.new(0, p2 - 24, 0, 0) elseif p1 then if p2 < constantsModule.CompactCardThreashold then UDim2.new(0, constantsModule.InExperienceToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0)
 end
 
-local _ = function(p3, p4)
-	if p3 then
-		table.insert(p3, p4)
+local _ = function(p1, p2)
+	if p1 then
+		table.insert(p1, p2)
 		
-		return p3
+		return p1
 	end
-	return { p4 }
+	return { p2 }
 end
 
-local _ = function(p5)
-	return if p5.button == nil then if p5.textBody == nil then if p5.thumbnail == nil then if p5.metaAction == nil then if p5.singleMetaAction == nil then "unknown" else "singleMetaAction" else "metaAction" else "thumbnail" else "textBody" else "button"
+local _ = function(p1)
+	return if p1.button == nil then if p1.textBody == nil then if p1.thumbnail == nil then if p1.metaAction == nil then if p1.singleMetaAction == nil then "unknown" else "singleMetaAction" else "metaAction" else "thumbnail" else "textBody" else "button"
 end
 
-local var8 = function(p6)
-	if not p6 then
+local var3 = function(p1)
+	if not p1 then
 		return nil
 	end
 	local t = {
@@ -45,54 +45,54 @@ local var8 = function(p6)
 		singleMetaAction = nil
 	}
 	
-	for i, v in ipairs(p6.visualItems) do
-		local var18 = if v.button ~= nil then if v.textBody ~= nil then if v.thumbnail ~= nil then if v.metaAction ~= nil then if v.singleMetaAction ~= nil then "unknown" else "singleMetaAction" else "metaAction" else "thumbnail" else "textBody" else "button"
+	for i, v in ipairs(p1.visualItems) do
+		local var4 = if v.button ~= nil then if v.textBody ~= nil then if v.thumbnail ~= nil then if v.metaAction ~= nil then if v.singleMetaAction ~= nil then "unknown" else "singleMetaAction" else "metaAction" else "thumbnail" else "textBody" else "button"
 		
-		if var18 ~= "unknown" then
-			local var21
-			local var19 = t[var18]
-			local var20 = v[var18]
+		if var4 ~= "unknown" then
+			local var5
+			local var6 = t[var4]
+			local var7 = v[var4]
 			
-			if var19 then
-				table.insert(var19, var20)
-				var21 = var19
+			if var6 then
+				table.insert(var6, var7)
+				var5 = var6
 			else
-				var21 = { var20 }
+				var5 = { var7 }
 			end
-			t[var18] = var21
+			t[var4] = var5
 		end
 	end
 	return {
-		layoutKey = p6.layoutKey,
-		name = p6.name,
-		timeOnScreenMs = p6.timeOnScreenMs,
+		layoutKey = p1.layoutKey,
+		name = p1.name,
+		timeOnScreenMs = p1.timeOnScreenMs,
 		visualItems = t
 	}
 end
 
-local var9 = function(p7)
-	-- upvalues: var8 (ref)
+local var8 = function(p2)
+	-- upvalues: var3 (ref)
 	local t = {
-		currentState = p7.content.currentState,
-		notificationType = p7.content.notificationType,
-		id = p7.content.id,
-		priority = p7.content.priority,
-		clientEventsPayload = p7.content.clientEventsPayload,
-		deliverTimestamp = p7.deliverTimestamp,
-		notificationReceivedTimestampMs = p7.notificationReceivedTimestampMs,
-		timers = p7.content.timers,
-		luaNotifInfo = p7.luaNotifInfo
+		currentState = p2.content.currentState,
+		notificationType = p2.content.notificationType,
+		id = p2.content.id,
+		priority = p2.content.priority,
+		clientEventsPayload = p2.content.clientEventsPayload,
+		deliverTimestamp = p2.deliverTimestamp,
+		notificationReceivedTimestampMs = p2.notificationReceivedTimestampMs,
+		timers = p2.content.timers,
+		luaNotifInfo = p2.luaNotifInfo
 	}
 	
-	if p7.content.states then
-		t.state = var8(p7.content.states[p7.content.currentState])
+	if p2.content.states then
+		t.state = var3(p2.content.states[p2.content.currentState])
 	end
 	return t
 end
 
-local var10 = function(p8)
+local var9 = function(p2)
 	-- upvalues: typeModule (ref)
-	return p8 == typeModule.DeviceOrientationEnum.Landscape
+	return p2 == typeModule.DeviceOrientationEnum.Landscape
 end
 
 local t = {
@@ -125,67 +125,67 @@ local t_3 = {
 }
 local vector2 = Vector2.new(800, 600)
 
-local _ = function(p9)
+local _ = function(p2)
 	-- upvalues: constantsModule (ref)
-	return p9.Y * (constantsModule.FRRToastPosition.NotificationFrameTopScale + constantsModule.FRRToastPosition.NotificationFrameHeightScale) - constantsModule.FRRToastPosition.NotificationRightInset
+	return p2.Y * (constantsModule.FRRToastPosition.NotificationFrameTopScale + constantsModule.FRRToastPosition.NotificationFrameHeightScale) - constantsModule.FRRToastPosition.NotificationRightInset
 end
 
-local var16 = function(p10, p11, p12)
+local var10 = function(p2, p3, p4)
 	-- upvalues: constantsModule (ref)
-	local var23 = p12.Y * (constantsModule.FRRToastPosition.NotificationFrameTopScale + constantsModule.FRRToastPosition.NotificationFrameHeightScale) - constantsModule.FRRToastPosition.NotificationRightInset - p12.Y
+	local var11 = p4.Y * (constantsModule.FRRToastPosition.NotificationFrameTopScale + constantsModule.FRRToastPosition.NotificationFrameHeightScale) - constantsModule.FRRToastPosition.NotificationRightInset - p4.Y
 	local t = {
 		positionX = 1,
 		positionY = 1,
 		anchorX = 1,
 		anchorY = 1,
 		positionXOffset = -constantsModule.FRRToastPosition.NotificationRightInset,
-		positionYOffset = var23
+		positionYOffset = var11
 	}
-	var23 = {
+	var11 = {
 		positionX = 1,
 		positionXOffset = 20,
 		positionY = 1,
 		anchorX = 0,
 		anchorY = 1,
-		positionYOffset = var23
+		positionYOffset = var11
 	}
 	
-	return if p10 then t elseif p11 then t else var23
+	return if p2 then t elseif p3 then t else var11
 end
 
 return {
-	calculateToastPosition = function(p13, p14, p15, p16, p17, p18)
-		-- upvalues: fFlagFriendshipNotifsUseSendrExperiment (ref), vector2 (ref), var16 (ref), guiService (ref), cryo (ref), t (ref), t_2 (ref), t_1 (ref), t_3 (ref)
-		if fFlagFriendshipNotifsUseSendrExperiment and p17 == "legacyBottomRight" then
-			return var16(p13, p16, p18 or (if workspace.CurrentCamera then workspace.CurrentCamera.ViewportSize else vector2))
+	calculateToastPosition = function(p2, p3, p4, p5, p6, p7)
+		-- upvalues: fFlagFriendshipNotifsUseSendrExperiment (ref), vector2 (ref), var10 (ref), guiService (ref), cryo (ref), t (ref), t_2 (ref), t_1 (ref), t_3 (ref)
+		if fFlagFriendshipNotifsUseSendrExperiment and p6 == "legacyBottomRight" then
+			return var10(p2, p5, p7 or (if workspace.CurrentCamera then workspace.CurrentCamera.ViewportSize else vector2))
 		end
-		local var25 = if guiService then guiService:GetGuiInset() else Vector2.new(0, 0)
+		local var11 = if guiService then guiService:GetGuiInset() else Vector2.new(0, 0)
 		
-		return if p13 then if p14 then cryo.Dictionary.union(t, { positionYOffset = p15 }) else cryo.Dictionary.union(t_2, { positionYOffset = p15 + var25.Y }) elseif p14 then if p16 then cryo.Dictionary.union(t, { positionYOffset = p15 }) else cryo.Dictionary.union(t_1, { positionYOffset = p15 }) elseif p16 then cryo.Dictionary.union(t_2, { positionYOffset = p15 + var25.Y }) else cryo.Dictionary.union(t_3, {
-			positionYOffset = -1 * (if guiService then var25.Y + 20 else 60)
+		return if p2 then if p3 then cryo.Dictionary.union(t, { positionYOffset = p4 }) else cryo.Dictionary.union(t_2, { positionYOffset = p4 + var11.Y }) elseif p3 then if p5 then cryo.Dictionary.union(t, { positionYOffset = p4 }) else cryo.Dictionary.union(t_1, { positionYOffset = p4 }) elseif p5 then cryo.Dictionary.union(t_2, { positionYOffset = p4 + var11.Y }) else cryo.Dictionary.union(t_3, {
+			positionYOffset = -1 * (if guiService then var11.Y + 20 else 60)
 		})
 	end,
-	getNotificationScript2LegacyToastOffsets = if fFlagFriendshipNotifsUseSendrExperiment then function(p19)
+	getNotificationScript2LegacyToastOffsets = if fFlagFriendshipNotifsUseSendrExperiment then function(p2)
 		-- upvalues: constantsModule (ref)
-		return -constantsModule.FRRToastPosition.NotificationRightInset, p19.Y * (constantsModule.FRRToastPosition.NotificationFrameTopScale + constantsModule.FRRToastPosition.NotificationFrameHeightScale) - constantsModule.FRRToastPosition.NotificationRightInset - p19.Y
+		return -constantsModule.FRRToastPosition.NotificationRightInset, p2.Y * (constantsModule.FRRToastPosition.NotificationFrameTopScale + constantsModule.FRRToastPosition.NotificationFrameHeightScale) - constantsModule.FRRToastPosition.NotificationRightInset - p2.Y
 	end else nil,
-	calculateTimeRemaining = function(p20, p21, p22)
+	calculateTimeRemaining = function(p2, p3, p4)
 		-- upvalues: timeTrigger (ref)
-		p21 = p21 or DateTime.now().UnixTimestampMillis
-		p21 = p22 or DateTime.now().UnixTimestampMillis
-		p21 = 0
+		p3 = p3 or DateTime.now().UnixTimestampMillis
+		p3 = p4 or DateTime.now().UnixTimestampMillis
+		p3 = 0
 		
-		if p20.trigger == timeTrigger.OnReceive then
-			p21 = p20.timespanMs - (DateTime.now().UnixTimestampMillis - p21)
-		elseif p20.trigger == timeTrigger.OnDisplay then
-			p21 = p20.timespanMs - (DateTime.now().UnixTimestampMillis - p21)
+		if p2.trigger == timeTrigger.OnReceive then
+			p3 = p2.timespanMs - (DateTime.now().UnixTimestampMillis - p3)
+		elseif p2.trigger == timeTrigger.OnDisplay then
+			p3 = p2.timespanMs - (DateTime.now().UnixTimestampMillis - p3)
 		end
-		return math.max(p21, 0)
+		return math.max(p3, 0)
 	end,
-	getDeviceOrientation = var6,
-	getNotificationSize = var7,
-	marshalNotificationData = var9,
-	isToastToRight = var10,
+	getDeviceOrientation = var1,
+	getNotificationSize = var2,
+	marshalNotificationData = var8,
+	isToastToRight = var9,
 	isDesktopDevice = function()
 		-- upvalues: userInputService (ref)
 		local none = Enum.Platform.None
@@ -196,23 +196,23 @@ return {
 		
 		return if none ~= Enum.Platform.Windows then if none ~= Enum.Platform.OSX then none == Enum.Platform.UWP else true else true
 	end,
-	getNearestWholeNumber = function(p23)
-		return if p23 % 1 < 0.5 then math.floor(p23) else math.ceil(p23)
+	getNearestWholeNumber = function(p2)
+		return if p2 % 1 < 0.5 then math.floor(p2) else math.ceil(p2)
 	end,
-	getTimerFromCardData = function(p24, p25)
+	getTimerFromCardData = function(p2, p3)
 		-- upvalues: loggerModule (ref), timeTrigger (ref)
-		if p24 and p24.timers and p24.timers[p25] then
-			return p24.timers[p25]
+		if p2 and p2.timers and p2.timers[p3] then
+			return p2.timers[p3]
 		end
-		loggerModule:warning("timerKey {} not found in list of timers. Using default.", p25)
+		loggerModule:warning("timerKey {} not found in list of timers. Using default.", p3)
 		
 		return { timespanMs = 0, trigger = timeTrigger.OnDisplay }
 	end,
-	fireEvent = function(p26, p27)
-		p26.sendEventDeferred("ToastNotification", "toastNotificationClientEvent", p27)
+	fireEvent = function(p2, p3)
+		p2.sendEventDeferred("ToastNotification", "toastNotificationClientEvent", p3)
 	end,
-	isUserThumbnail = function(p28)
+	isUserThumbnail = function(p2)
 		-- upvalues: typeModule (ref)
-		return if p28.idType ~= typeModule.SENDERThumbnailTypeEnum.User then p28.idType == typeModule.SENDERThumbnailTypeEnum.AvatarImageUrl else true
+		return if p2.idType ~= typeModule.SENDERThumbnailTypeEnum.User then p2.idType == typeModule.SENDERThumbnailTypeEnum.AvatarImageUrl else true
 	end
 }

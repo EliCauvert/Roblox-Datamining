@@ -5,11 +5,11 @@ local image = foundationModule.Image
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-return reactModule.memo(reactModule.forwardRef(function(p0)
+return reactModule.memo(reactModule.forwardRef(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), image (ref)
-	local var2 = useTokens()
-	local background = var2.Color.ActionSubtle.Background
-	local foreground = var2.Color.ActionSubtle.Foreground
+	local var1 = useTokens()
+	local background = var1.Color.ActionSubtle.Background
+	local foreground = var1.Color.ActionSubtle.Foreground
 	local numberSequence = NumberSequence.new({
 		NumberSequenceKeypoint.new(0, foreground.Transparency),
 		NumberSequenceKeypoint.new(0.4999, foreground.Transparency),
@@ -38,8 +38,8 @@ return reactModule.memo(reactModule.forwardRef(function(p0)
 				Gradient = reactModule.createElement("UIGradient", {
 					Transparency = numberSequence,
 					Color = colorSequence,
-					Rotation = p0.progress:map(function(p1)
-						return math.clamp(p1 * 360, 180, 360)
+					Rotation = p1.progress:map(function(p2)
+						return math.clamp(p2 * 360, 180, 360)
 					end)
 				})
 			})
@@ -56,7 +56,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0)
 				Gradient = reactModule.createElement("UIGradient", {
 					Transparency = numberSequence,
 					Color = colorSequence,
-					Rotation = p0.progress:map(function(p2)
+					Rotation = p1.progress:map(function(p2)
 						return math.clamp(p2 * 360, 0, 180)
 					end)
 				})

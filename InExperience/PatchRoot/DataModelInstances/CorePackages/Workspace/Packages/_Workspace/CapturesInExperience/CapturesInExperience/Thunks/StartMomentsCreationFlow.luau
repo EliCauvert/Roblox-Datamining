@@ -6,12 +6,12 @@ local creationFlowStateUpdated = momentsCreationFlowModule.Actions.CreationFlowS
 local momentsCreationFlowOpenedModule = require(parent.Actions.MomentsCreationFlowOpened)
 local _ = require(parent.Types)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: momentsCreationFlowOpenedModule (ref), creationFlowStateUpdated (ref), creationFlowState (ref), selectedCaptureUpdated (ref)
-	return function(p2)
-		-- upvalues: momentsCreationFlowOpenedModule (copy), p0 (ref), p1 (ref), creationFlowStateUpdated (copy), creationFlowState (copy), selectedCaptureUpdated (copy)
-		p2:dispatch(momentsCreationFlowOpenedModule(p0, p1))
-		p2:dispatch(creationFlowStateUpdated(creationFlowState.Preview))
-		p2:dispatch(selectedCaptureUpdated(p0))
+	return function(p3)
+		-- upvalues: momentsCreationFlowOpenedModule (copy), p1 (ref), p2 (ref), creationFlowStateUpdated (copy), creationFlowState (copy), selectedCaptureUpdated (copy)
+		p3:dispatch(momentsCreationFlowOpenedModule(p1, p2))
+		p3:dispatch(creationFlowStateUpdated(creationFlowState.Preview))
+		p3:dispatch(selectedCaptureUpdated(p1))
 	end
 end

@@ -19,63 +19,63 @@ local defaultTextContentPadding = constantsModule.DefaultTextContentPadding
 local vector2 = Vector2.new(36, 36)
 local isUserThumbnail = require(parent_1.utils.toastNotificationHelper).isUserThumbnail
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), useNotificationCardDataModule (ref), isUserThumbnail (ref), useNotificationCardStateModule (ref), reactModule (ref), constantsModule (ref), defaultContentPadding (ref), vector2 (ref), notificationThumbnailModule (ref), defaultTextContentPadding (ref), notificationStyledTextModule (ref), toastHoldButtonModule (ref), interactable (ref), imageSetLabel (ref), typeModule (ref)
-	local var14
-	local var10 = useStyle()
-	local var11 = var10.Font.BaseSize * var10.Font.CaptionHeader.RelativeSize
-	local var12 = var10.Font.BaseSize * var10.Font.CaptionBody.RelativeSize
+	local var1
+	local var2 = useStyle()
+	local var3 = var2.Font.BaseSize * var2.Font.CaptionHeader.RelativeSize
+	local var4 = var2.Font.BaseSize * var2.Font.CaptionBody.RelativeSize
 	local cardSize = useNotificationCardDataModule().cardSize
 	local _ = nil
 	
 	if isUserThumbnail then
-		local var13 = useNotificationCardStateModule("thumbnail")
-		var14 = reactModule.useMemo(function()
-			-- upvalues: var13 (ref), isUserThumbnail (copy), var10 (ref), cardSize (write), constantsModule (copy)
-			local var22 = false
+		local var5 = useNotificationCardStateModule("thumbnail")
+		var1 = reactModule.useMemo(function()
+			-- upvalues: var5 (ref), isUserThumbnail (copy), var2 (ref), cardSize (write), constantsModule (copy)
+			local var6 = false
 			
-			if var13 then
-				for i, v in var13 do
+			if var5 then
+				for i, v in var5 do
 					if not isUserThumbnail(v) then
-						var22 = true
+						var6 = true
 						break
 					end
 				end
 			end
-			return if var22 then if cardSize then cardSize.thumbnail else constantsModule.CardSizeDefault.thumbnail else var10.Tokens.Size.Size_1000
-		end, { var13, var10.Tokens.Size.Size_1000, cardSize })
+			return if var6 then if cardSize then cardSize.thumbnail else constantsModule.CardSizeDefault.thumbnail else var2.Tokens.Size.Size_1000
+		end, { var5, var2.Tokens.Size.Size_1000, cardSize })
 	else
-		var14 = if cardSize then cardSize.thumbnail else constantsModule.CardSizeDefault.thumbnail
+		var1 = if cardSize then cardSize.thumbnail else constantsModule.CardSizeDefault.thumbnail
 	end
-	local size700 = var10.Tokens.Size.Size_700
-	local var15 = useNotificationCardStateModule("textBody")
-	local var16 = var15 and var15[1]
-	local var17 = var16 and (var16.title and {
+	local size700 = var2.Tokens.Size.Size_700
+	local var6 = useNotificationCardStateModule("textBody")
+	local var7 = var6 and var6[1]
+	local var8 = var7 and (var7.title and {
 		LayoutOrder = 1,
-		Text = var16.title,
-		MaxSize = Vector2.new(1e999, var11 * 2),
+		Text = var7.title,
+		MaxSize = Vector2.new(1e999, var3 * 2),
 		Size = UDim2.new(1, 0, 0, 0),
-		TextSize = var11,
+		TextSize = var3,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = var10.Font.CaptionHeader.Font,
-		TextColor3 = var10.Theme.TextEmphasis.Color
+		Font = var2.Font.CaptionHeader.Font,
+		TextColor3 = var2.Theme.TextEmphasis.Color
 	})
-	local var18 = var16 and (var16.label and {
+	local var9 = var7 and (var7.label and {
 		LayoutOrder = 2,
-		Text = var16.label,
-		MaxSize = Vector2.new(1e999, var12 * 2),
+		Text = var7.label,
+		MaxSize = Vector2.new(1e999, var4 * 2),
 		Size = UDim2.new(1, 0, 0, 0),
-		TextSize = var12,
+		TextSize = var4,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = var10.Font.CaptionBody.Font
+		Font = var2.Font.CaptionBody.Font
 	})
-	local var19 = useNotificationCardDataModule()
-	cardSize = var19.cardSize
-	local handleActions = var19.handleActions
-	local var20 = useNotificationCardStateModule("singleMetaAction")
-	local var21 = var20 and var20[1]
+	local var10 = useNotificationCardDataModule()
+	cardSize = var10.cardSize
+	local handleActions = var10.handleActions
+	local var11 = useNotificationCardStateModule("singleMetaAction")
+	local var12 = var11 and var11[1]
 	
 	return reactModule.createElement("Frame", {
 		LayoutOrder = 1,
@@ -93,7 +93,7 @@ return function(p0)
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = if var21 then UDim2.new(1, -(defaultContentPadding + vector2.X), 0, 0) else UDim2.new(1, 0, 0, 0)
+			Size = if var12 then UDim2.new(1, -(defaultContentPadding + vector2.X), 0, 0) else UDim2.new(1, 0, 0, 0)
 		}, {
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -105,7 +105,7 @@ return function(p0)
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = UDim2.new(0, var14, 0, var14)
+				Size = UDim2.new(0, var1, 0, var1)
 			}, {
 				NotificationThumbnail = reactModule.createElement(notificationThumbnailModule)
 			}),
@@ -113,7 +113,7 @@ return function(p0)
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = if p0.showHoldButton then UDim2.new(1, -(var14 + defaultContentPadding * 2 + size700), 0, 0) else UDim2.new(1, -(var14 + defaultContentPadding), 0, 0)
+				Size = if p1.showHoldButton then UDim2.new(1, -(var1 + defaultContentPadding * 2 + size700), 0, 0) else UDim2.new(1, -(var1 + defaultContentPadding), 0, 0)
 			}, {
 				UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 2) }),
 				UIListLayout = reactModule.createElement("UIListLayout", {
@@ -122,27 +122,27 @@ return function(p0)
 					VerticalAlignment = Enum.VerticalAlignment.Top,
 					Padding = UDim.new(0, defaultTextContentPadding)
 				}),
-				ToastTitle = var17 and reactModule.createElement(notificationStyledTextModule, var17),
-				ToastSubtitle = var18 and reactModule.createElement(notificationStyledTextModule, var18)
+				ToastTitle = var8 and reactModule.createElement(notificationStyledTextModule, var8),
+				ToastSubtitle = var9 and reactModule.createElement(notificationStyledTextModule, var9)
 			}),
 			ToastHoldButton = reactModule.createElement(toastHoldButtonModule, {
 				layoutOrder = 3,
 				iconSize = size700,
-				visible = p0.showHoldButton,
-				iconTransparency = if p0.shouldAutoFocus then 0.5 else 0,
-				progress = p0.holdProgress
+				visible = p1.showHoldButton,
+				iconTransparency = if p1.shouldAutoFocus then 0.5 else 0,
+				progress = p1.holdProgress
 			})
 		}),
-		SingleMetaAction = if var21 then reactModule.createElement(interactable, {
+		SingleMetaAction = if var12 then reactModule.createElement(interactable, {
 			AutoButtonColor = false,
-			BackgroundColor3 = var10.Theme.UIMuted.Color,
+			BackgroundColor3 = var2.Theme.UIMuted.Color,
 			BackgroundTransparency = 0.9,
 			LayoutOrder = 2,
 			onStateChanged = function() end,
 			[reactModule.Event.Activated] = function()
-				-- upvalues: handleActions (ref), var21 (ref)
+				-- upvalues: handleActions (ref), var12 (ref)
 				if handleActions then
-					handleActions(var21)
+					handleActions(var12)
 				end
 			end,
 			Size = UDim2.fromOffset(vector2.X, vector2.Y)
@@ -151,8 +151,8 @@ return function(p0)
 			Icon = reactModule.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				Image = typeModule.MetaActionIcons[var21.actionIcon],
-				ImageColor3 = var10.Theme.IconEmphasis.Color,
+				Image = typeModule.MetaActionIcons[var12.actionIcon],
+				ImageColor3 = var2.Theme.IconEmphasis.Color,
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromOffset(28, 28)
 			})

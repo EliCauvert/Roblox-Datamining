@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	return (1 - p2) * p0 + p1 * p2
+﻿return function(p1, p2, p3)
+	return (1 - p3) * p1 + p2 * p3
 end

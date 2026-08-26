@@ -17,30 +17,30 @@ local t = {
 	contactNamesByUserId = {}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: byUserIdModule (ref), countsByUserIdModule (ref), requestsModule (ref), recommendationsModule (ref), followingsModule (ref), friendshipStatusModule (ref), friendsRankByUserIdModule (ref), contactNamesByUserIdModule (ref), t (ref)
-	local var9 = byUserIdModule(p0)
-	local var10 = countsByUserIdModule(p0)
-	local var11 = requestsModule(p0)
-	local var12 = recommendationsModule(p0)
-	local var13 = followingsModule(p0)
-	local var14 = friendshipStatusModule(p0)
-	local var15 = friendsRankByUserIdModule(p0)
-	local var16 = contactNamesByUserIdModule(p0)
+	local var1 = byUserIdModule(p1)
+	local var2 = countsByUserIdModule(p1)
+	local var3 = requestsModule(p1)
+	local var4 = recommendationsModule(p1)
+	local var5 = followingsModule(p1)
+	local var6 = friendshipStatusModule(p1)
+	local var7 = friendsRankByUserIdModule(p1)
+	local var8 = contactNamesByUserIdModule(p1)
 	
-	return function(p1, p2)
-		-- upvalues: t (copy), var9 (ref), var10 (ref), var11 (ref), var12 (ref), var13 (ref), var14 (ref), var15 (ref), var16 (ref)
-		p1 = p1 or t
+	return function(p2, p3)
+		-- upvalues: t (copy), var1 (ref), var2 (ref), var3 (ref), var4 (ref), var5 (ref), var6 (ref), var7 (ref), var8 (ref)
+		p2 = p2 or t
 		
 		return {
-			byUserId = var9(p1.byUserId, p2),
-			countsByUserId = var10(p1.countsByUserId, p2),
-			requests = var11(p1.requests, p2),
-			recommendations = var12(p1.recommendations, p2),
-			followings = var13(p1.followings, p2),
-			friendshipStatus = var14(p1.friendshipStatus, p2),
-			friendsRankByUserId = var15(p1.friendsRankByUserId, p2),
-			contactNamesByUserId = var16(p1.contactNamesByUserId, p2)
+			byUserId = var1(p2.byUserId, p3),
+			countsByUserId = var2(p2.countsByUserId, p3),
+			requests = var3(p2.requests, p3),
+			recommendations = var4(p2.recommendations, p3),
+			followings = var5(p2.followings, p3),
+			friendshipStatus = var6(p2.friendshipStatus, p3),
+			friendsRankByUserId = var7(p2.friendsRankByUserId, p3),
+			contactNamesByUserId = var8(p2.contactNamesByUserId, p3)
 		}
 	end
 end

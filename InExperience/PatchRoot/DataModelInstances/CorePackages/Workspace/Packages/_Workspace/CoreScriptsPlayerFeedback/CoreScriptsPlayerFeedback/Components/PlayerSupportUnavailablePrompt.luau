@@ -51,10 +51,10 @@ local function _()
 	end)
 end
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), t_1 (ref), reactModule (ref), useEscapeDismissModule (ref), dialog (ref), view (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconVariant (ref), text (ref), buttonVariant (ref)
-	local var12 = useTokens()
-	local var13 = useLocalization({
+	local var1 = useTokens()
+	local var2 = useLocalization({
 		BackButton = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton",
 		Under13Title = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Under13.Title",
 		Under13Body = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Under13.Body",
@@ -70,23 +70,23 @@ return reactModule.memo(function(p0)
 		TextFilterBody = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.TextFilter.Body",
 		TextFilterLink = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link"
 	})
-	local var14 = t[p0.reason or ""] or t_1
+	local var3 = t[p1.reason or ""] or t_1
 	local t_2 = {
-		title = var13[var14.titleKey],
-		body = var13[var14.bodyKey],
-		hasReportLink = var14.hasReportLink
+		title = var2[var3.titleKey],
+		body = var2[var3.bodyKey],
+		hasReportLink = var3.hasReportLink
 	}
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.closePrompt()
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		p1.closePrompt()
 		
-		if p0.openPlayerSupportPrompt then
-			p0.openPlayerSupportPrompt()
+		if p1.openPlayerSupportPrompt then
+			p1.openPlayerSupportPrompt()
 		end
-	end, { p0.closePrompt, p0.openPlayerSupportPrompt })
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.closePrompt()
+	end, { p1.closePrompt, p1.openPlayerSupportPrompt })
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		p1.closePrompt()
 		pcall(function()
 			local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
 			local modules = robloxGui and robloxGui:FindFirstChild("Modules") or nil
@@ -100,14 +100,14 @@ return reactModule.memo(function(p0)
 				return
 			end
 		end)
-	end, { p0.closePrompt })
-	useEscapeDismissModule("PlayerSupportUnavailableCancel", var16)
+	end, { p1.closePrompt })
+	useEscapeDismissModule("PlayerSupportUnavailableCancel", var4)
 	
 	return reactModule.createElement(dialog.Root, { hasBackdrop = true }, {
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 1 }, {
 			Body = reactModule.createElement(view, {
 				tag = "col gap-large size-full-0 auto-y",
-				padding = { top = UDim.new(0, var12.Size.Size_500) }
+				padding = { top = UDim.new(0, var1.Size.Size_500) }
 			}, {
 				TitleRow = reactModule.createElement(view, {
 					tag = "row items-center gap-small auto-y",
@@ -118,30 +118,30 @@ return reactModule.memo(function(p0)
 						name = builderIconsModule.Icon.TriangleExclamation,
 						size = iconSize.Large,
 						variant = iconVariant.Filled,
-						style = var12.Color.System.Alert
+						style = var1.Color.System.Alert
 					}),
 					TitleText = reactModule.createElement(text, {
 						tag = "auto-xy text-heading-small text-align-x-left",
 						LayoutOrder = 2,
 						Text = t_2.title,
 						TextYAlignment = Enum.TextYAlignment.Center,
-						textStyle = var12.Color.Content.Emphasis
+						textStyle = var1.Color.Content.Emphasis
 					})
 				}),
 				Paragraph = reactModule.createElement(text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left",
 					LayoutOrder = 2,
 					Text = t_2.body,
-					textStyle = var12.Color.Content.Default
+					textStyle = var1.Color.Content.Default
 				}),
 				LinkRow = if t_2.hasReportLink then reactModule.createElement(text, {
 					RichText = true,
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left",
 					LayoutOrder = 3,
-					Text = var13.TextFilterLink,
-					onActivated = var17,
+					Text = var2.TextFilterLink,
+					onActivated = var5,
 					selection = { Selectable = true },
-					textStyle = var12.Color.Content.Default
+					textStyle = var1.Color.Content.Default
 				}) else nil
 			})
 		}),
@@ -149,9 +149,9 @@ return reactModule.memo(function(p0)
 			LayoutOrder = 2,
 			actions = {
 				{
-					text = var13.BackButton,
+					text = var2.BackButton,
 					variant = buttonVariant.Emphasis,
-					onActivated = var16
+					onActivated = var4
 				}
 			}
 		})

@@ -16,44 +16,44 @@ local getFFlagPeoplePageLazyRenderCards = flags.GetFFlagPeoplePageLazyRenderCard
 local getFFlagFixPeoplePageCardTooltip = flags.GetFFlagFixPeoplePageCardTooltip
 local fFlagPeopleCardsEnableVirtualizedGrid = flags.FFlagPeopleCardsEnableVirtualizedGrid
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: getFFlagPeoplePageEnablePersonSignalStore (ref), signalsReactModule (ref), signalsModule (ref), reactIsModule (ref), reactModule (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), localPlayer (ref), view (ref), getFFlagFixPeoplePageCardTooltip (ref), cardThumbnailModule (ref), getFFlagPeoplePageLazyRenderCards (ref), cardDetailsModule (ref), cardTooltipModule (ref)
-	local var10 = if getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p1)
-		-- upvalues: p0 (ref)
-		return if type(p0.layoutOrder) == "function" then p0.layoutOrder(p1) else p0.layoutOrder or 0
+	local var1 = if getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p2)
+		-- upvalues: p1 (ref)
+		return if type(p1.layoutOrder) == "function" then p1.layoutOrder(p2) else p1.layoutOrder or 0
 	end)) else nil
-	local var11 = if reactIsModule.isBinding(p0.width) then p0.width:map(function(p2)
+	local var2 = if reactIsModule.isBinding(p1.width) then p1.width:map(function(p2)
 		return UDim2.new(0, p2, 0, 0)
-	end) else UDim2.new(0, p0.width, 0, 0)
-	local var12, var13 = reactModule.useState(if fFlagPeopleCardsEnableVirtualizedGrid then false else p0.showTooltip)
+	end) else UDim2.new(0, p1.width, 0, 0)
+	local var3, var4 = reactModule.useState(if fFlagPeopleCardsEnableVirtualizedGrid then false else p1.showTooltip)
 	
 	if fFlagPeopleCardsEnableVirtualizedGrid then
 		reactModule.useEffect(function()
-			-- upvalues: var13 (ref), p0 (ref), localPlayer (copy)
-			var13(p0.showTooltip and (localPlayer ~= nil and p0.person.UserId == localPlayer.UserId))
-		end, { p0.showTooltip, p0.person })
+			-- upvalues: var4 (ref), p1 (ref), localPlayer (copy)
+			var4(p1.showTooltip and (localPlayer ~= nil and p1.person.UserId == localPlayer.UserId))
+		end, { p1.showTooltip, p1.person })
 	end
 	return reactModule.createElement(view, {
 		tag = "auto-y",
-		Size = var11,
-		ZIndex = if var12 then 2 else 1,
-		LayoutOrder = if getFFlagPeoplePageEnablePersonSignalStore() then var10 else p0.layoutOrder
+		Size = var2,
+		ZIndex = if var3 then 2 else 1,
+		LayoutOrder = if getFFlagPeoplePageEnablePersonSignalStore() then var1 else p1.layoutOrder
 	}, {
 		CardContent = reactModule.createElement(view, {
 			tag = if getFFlagFixPeoplePageCardTooltip() then "size-full-0 auto-y col bg-surface-100 radius-medium" else "size-full col bg-surface-100 radius-medium"
 		}, {
 			CardThumbnail = reactModule.createElement(cardThumbnailModule, {
 				layoutOrder = 1,
-				person = p0.person,
-				shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then p0.shouldShowMenu else nil
+				person = p1.person,
+				shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then p1.shouldShowMenu else nil
 			}),
-			CardDetails = reactModule.createElement(cardDetailsModule, { layoutOrder = 2, person = p0.person })
+			CardDetails = reactModule.createElement(cardDetailsModule, { layoutOrder = 2, person = p1.person })
 		}),
-		CardTooltip = if var12 then reactModule.createElement(cardTooltipModule, {
+		CardTooltip = if var3 then reactModule.createElement(cardTooltipModule, {
 			action = reactModule.useCallback(function()
-				-- upvalues: var13 (ref), p0 (ref)
-				var13(false)
-				p0.onDismissTooltip()
+				-- upvalues: var4 (ref), p1 (ref)
+				var4(false)
+				p1.onDismissTooltip()
 			end, {})
 		}) else nil
 	})

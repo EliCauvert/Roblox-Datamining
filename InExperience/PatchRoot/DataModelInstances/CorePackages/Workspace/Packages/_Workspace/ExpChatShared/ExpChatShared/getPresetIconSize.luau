@@ -7,8 +7,8 @@
 	return math.max(0, ceiled)
 end
 
-return function(p0)
-	local ceiled = math.ceil(p0 * 3 / 4)
+return function(p1)
+	local ceiled = math.ceil(p1 * 3 / 4)
 	
 	if ceiled % 2 == 1 then
 		ceiled += 1

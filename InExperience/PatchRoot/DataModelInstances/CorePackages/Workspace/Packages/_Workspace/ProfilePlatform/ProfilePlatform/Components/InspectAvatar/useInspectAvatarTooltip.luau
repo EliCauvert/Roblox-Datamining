@@ -6,29 +6,29 @@ local useSignalState = require(parent.SignalsReact).useSignalState
 local getInspectAvatarTooltipStoreModule = require(profilePlatform.Stores.GetInspectAvatarTooltipStore)
 local fFlagProfileInspectAndBuyRefactorTooltipModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyRefactorTooltip)
 local profilePlatformInspectAvatarTooltipMaxImpressions = game:DefineFastInt("ProfilePlatformInspectAvatarTooltipMaxImpressions", 3)
-local var6 = getInspectAvatarTooltipStoreModule(false)
+local var1 = getInspectAvatarTooltipStoreModule(false)
 
 return function()
-	-- upvalues: fFlagProfileInspectAndBuyRefactorTooltipModule (ref), useSignalState (ref), var6 (ref), reactModule (ref), appStorageService (ref), profilePlatformInspectAvatarTooltipMaxImpressions (ref)
+	-- upvalues: fFlagProfileInspectAndBuyRefactorTooltipModule (ref), useSignalState (ref), var1 (ref), reactModule (ref), appStorageService (ref), profilePlatformInspectAvatarTooltipMaxImpressions (ref)
 	if fFlagProfileInspectAndBuyRefactorTooltipModule then
-		local var7 = useSignalState(var6.getIsOpen)
+		local var2 = useSignalState(var1.getIsOpen)
 		reactModule.useEffect(function()
-			-- upvalues: var6 (copy)
-			var6.tryShow()
+			-- upvalues: var1 (copy)
+			var1.tryShow()
 			
 			return function()
-				-- upvalues: var6 (copy)
-				var6.hide()
+				-- upvalues: var1 (copy)
+				var1.hide()
 			end
 		end, {})
 		
-		return { showTooltip = var7, onDismiss = var6.permanentlyDismiss }
+		return { showTooltip = var2, onDismiss = var1.permanentlyDismiss }
 	end
-	local var8, var9 = reactModule.useState(false)
-	local var10 = reactModule.useRef(false)
+	local var3, var4 = reactModule.useState(false)
+	local var5 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), appStorageService (copy), profilePlatformInspectAvatarTooltipMaxImpressions (copy), var9 (ref)
-		if var10.current then return end
+		-- upvalues: var5 (ref), appStorageService (copy), profilePlatformInspectAvatarTooltipMaxImpressions (copy), var4 (ref)
+		if var5.current then return end
 		local ok, status = pcall(function()
 			-- upvalues: appStorageService (copy)
 			return tonumber(appStorageService:GetItem("ProfileInspectAndBuyImpressionCount")) or 0
@@ -40,23 +40,23 @@ return function()
 				appStorageService:SetItem("ProfileInspectAndBuyImpressionCount", tostring(status + 1))
 				appStorageService:Flush()
 			end)
-			var10.current = true
-			var9(true)
+			var5.current = true
+			var4(true)
 			
 			return
 		end
 	end, {})
 	
 	return {
-		showTooltip = var8,
+		showTooltip = var3,
 		onDismiss = reactModule.useCallback(function()
-			-- upvalues: appStorageService (copy), profilePlatformInspectAvatarTooltipMaxImpressions (copy), var9 (ref)
+			-- upvalues: appStorageService (copy), profilePlatformInspectAvatarTooltipMaxImpressions (copy), var4 (ref)
 			pcall(function()
 				-- upvalues: appStorageService (copy), profilePlatformInspectAvatarTooltipMaxImpressions (copy)
 				appStorageService:SetItem("ProfileInspectAndBuyImpressionCount", tostring(profilePlatformInspectAvatarTooltipMaxImpressions))
 				appStorageService:Flush()
 			end)
-			var9(false)
+			var4(false)
 		end, {})
 	}
 end

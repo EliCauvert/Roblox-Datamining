@@ -23,10 +23,10 @@ deleteOutfitPrompt.validateProps = tModule.strictInterface({
 	showCustomOutfitNames = tModule.boolean
 })
 
-function deleteOutfitPrompt.init(p0)
+function deleteOutfitPrompt.init(p1)
 	-- upvalues: roactModule (ref), loadableImage (ref)
 	function p0.renderAlertMiddleContent()
-		-- upvalues: p0 (ref), roactModule (copy), loadableImage (copy)
+		-- upvalues: p1 (ref), roactModule (copy), loadableImage (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 150)
@@ -75,24 +75,24 @@ function deleteOutfitPrompt.render(p1)
 	})
 end
 
-return avatarEditorPromptsPolicyModule.connect(function(p4, _)
-	return { showCustomOutfitNames = p4.getCustomOutfitNames() }
-end)(roactRoduxModule.connect(function(p2)
+return avatarEditorPromptsPolicyModule.connect(function(p1, _)
+	return { showCustomOutfitNames = p1.getCustomOutfitNames() }
+end)(roactRoduxModule.connect(function(p1)
 	return {
-		screenSize = p2.screenSize,
-		outfitId = p2.promptInfo.outfitId,
-		outfitName = p2.promptInfo.outfitName
+		screenSize = p1.screenSize,
+		outfitId = p1.promptInfo.outfitId,
+		outfitName = p1.promptInfo.outfitName
 	}
-end, function(p3)
+end, function(p1)
 	-- upvalues: signalDeleteOutfitPermissionDeniedModule (ref), performDeleteOutfitModule (ref)
 	return {
 		signalDeleteOutfitPermissionDenied = function()
-			-- upvalues: p3 (ref), signalDeleteOutfitPermissionDeniedModule (copy)
-			return p3(signalDeleteOutfitPermissionDeniedModule)
+			-- upvalues: p1 (ref), signalDeleteOutfitPermissionDeniedModule (copy)
+			return p1(signalDeleteOutfitPermissionDeniedModule)
 		end,
 		performDeleteOutfit = function()
-			-- upvalues: p3 (ref), performDeleteOutfitModule (copy)
-			return p3(performDeleteOutfitModule)
+			-- upvalues: p1 (ref), performDeleteOutfitModule (copy)
+			return p1(performDeleteOutfitModule)
 		end
 	}
 end)(deleteOutfitPrompt))

@@ -4,28 +4,28 @@ local squadEnablePartyQuickStartVariant = game:DefineFastString("SquadEnablePart
 local enablePartyQuickStartChanges2 = game:DefineFastFlag("EnablePartyQuickStartChanges2", false)
 local partyFormationCreateUserExposureEnabled = game:DefineFastFlag("PartyFormationCreateUserExposureEnabled", false)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: experimentCacheManager (ref), squadQuickStartExperimentLayer (ref)
-	local var4 = experimentCacheManager.default:getLayerVariables(squadQuickStartExperimentLayer)
+	local var1 = experimentCacheManager.default:getLayerVariables(squadQuickStartExperimentLayer)
 	
-	return if var4 and var4[p0] ~= nil then var4[p0] else false
+	return if var1 and var1[p1] ~= nil then var1[p1] else false
 end
 
 return {
 	getPartyQuickStartChangesEnabled = function()
 		-- upvalues: enablePartyQuickStartChanges2 (ref), squadEnablePartyQuickStartVariant (ref), experimentCacheManager (ref), squadQuickStartExperimentLayer (ref)
-		local var5 = enablePartyQuickStartChanges2
+		local var1 = enablePartyQuickStartChanges2
 		
-		if not var5 then
-			local var6 = squadEnablePartyQuickStartVariant
-			local var7 = experimentCacheManager.default:getLayerVariables(squadQuickStartExperimentLayer)
+		if not var1 then
+			local var2 = squadEnablePartyQuickStartVariant
+			local var3 = experimentCacheManager.default:getLayerVariables(squadQuickStartExperimentLayer)
 			
-			if var7 and var7[var6] ~= nil then
-				return var7[var6]
+			if var3 and var3[var2] ~= nil then
+				return var3[var2]
 			end
-			var5 = false
+			var1 = false
 		end
-		return var5
+		return var1
 	end,
 	logExposure = function()
 		-- upvalues: partyFormationCreateUserExposureEnabled (ref), experimentCacheManager (ref), squadQuickStartExperimentLayer (ref)

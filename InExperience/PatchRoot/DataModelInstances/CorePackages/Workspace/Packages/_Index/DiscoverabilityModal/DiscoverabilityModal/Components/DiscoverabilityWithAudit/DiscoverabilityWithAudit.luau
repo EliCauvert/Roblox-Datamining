@@ -18,24 +18,24 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 
 return function(_)
 	-- upvalues: useNavigation (ref), useDispatch (ref), useAnalyticsModule (ref), useLegallySensitiveContentAndActions (ref), consentName (ref), reactModule (ref), eventNamesModule (ref), constantsModule (ref), updateIsDiscoverabilityUnset (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
-	local var7 = useNavigation()
-	local var8 = useDispatch()
-	local var9 = useAnalyticsModule()
-	local var10, var11 = useLegallySensitiveContentAndActions(consentName.phoneNumberDiscoverabilityUpsell, "generic-lua-discoverability-setting-upsell")
-	local wordsOfConsent = var10.wordsOfConsent
-	local updateSettingWithAuditing = var11.updateSettingWithAuditing
+	local var1 = useNavigation()
+	local var2 = useDispatch()
+	local var3 = useAnalyticsModule()
+	local var4, var5 = useLegallySensitiveContentAndActions(consentName.phoneNumberDiscoverabilityUpsell, "generic-lua-discoverability-setting-upsell")
+	local wordsOfConsent = var4.wordsOfConsent
+	local updateSettingWithAuditing = var5.updateSettingWithAuditing
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), eventNamesModule (copy), constantsModule (copy)
-		var9.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalLoad, {
+		-- upvalues: var3 (ref), eventNamesModule (copy), constantsModule (copy)
+		var3.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalLoad, {
 			version = "audit_version",
 			wordingVersion = constantsModule.WORDING_VERSION_1
 		})
 	end, {})
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), updateIsDiscoverabilityUnset (copy)
-		var8(updateIsDiscoverabilityUnset({ isDiscoverabilityUnset = false }))
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), updateIsDiscoverabilityUnset (copy)
+		var2(updateIsDiscoverabilityUnset({ isDiscoverabilityUnset = false }))
 	end, {})
-	local param = var7.getParam(constantsModule.NAVIGATE_ON_ACTIVATED)
+	local param = var1.getParam(constantsModule.NAVIGATE_ON_ACTIVATED)
 	
 	return reactModule.createElement(dialog.Root, { hasBackdrop = true, size = dialogSize.Medium }, {
 		DialogTitle = reactModule.createElement(dialog.Title, { text = wordsOfConsent.title }),
@@ -49,10 +49,10 @@ return function(_)
 					text = wordsOfConsent.notNow,
 					variant = buttonVariant.Standard,
 					onActivated = function()
-						-- upvalues: var9 (ref), eventNamesModule (copy), constantsModule (copy), var12 (ref), var7 (ref), param (ref)
-						var9.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalClose, { selected = constantsModule.UNSET })
-						var12()
-						var7.pop()
+						-- upvalues: var3 (ref), eventNamesModule (copy), constantsModule (copy), var6 (ref), var1 (ref), param (ref)
+						var3.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalClose, { selected = constantsModule.UNSET })
+						var6()
+						var1.pop()
 						param()
 					end
 				},
@@ -60,11 +60,11 @@ return function(_)
 					text = wordsOfConsent.turnOn,
 					variant = buttonVariant.Emphasis,
 					onActivated = function()
-						-- upvalues: var9 (ref), eventNamesModule (copy), constantsModule (copy), updateSettingWithAuditing (ref), var12 (ref), var7 (ref), param (ref)
-						var9.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalContinue, { selected = constantsModule.DISCOVERABLE })
+						-- upvalues: var3 (ref), eventNamesModule (copy), constantsModule (copy), updateSettingWithAuditing (ref), var6 (ref), var1 (ref), param (ref)
+						var3.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalContinue, { selected = constantsModule.DISCOVERABLE })
 						updateSettingWithAuditing("phoneNumberDiscoverability", "Discoverable")
-						var12()
-						var7.pop()
+						var6()
+						var1.pop()
 						param()
 					end
 				}

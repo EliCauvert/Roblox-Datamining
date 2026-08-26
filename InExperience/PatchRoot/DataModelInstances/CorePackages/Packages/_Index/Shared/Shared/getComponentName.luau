@@ -16,83 +16,83 @@ local REACT_BLOCK_TYPE = reactSymbolsModule.REACT_BLOCK_TYPE
 local _ = require(script.Parent.ReactTypes)
 local describeError = require(script.Parent["ErrorHandling.roblox"]).describeError
 
-local function _(p0, p1, p2)
-	local var4 = "<function>"
+local function _(p1, p2, p3)
+	local var1 = "<function>"
 	
-	if typeof(p1) == "table" then
-		var4 = p1.displayName or (p1.name or "")
+	if typeof(p2) == "table" then
+		var1 = p2.displayName or (p2.name or "")
 	end
-	return p0.displayName or (var4 ~= "" and string.format("%s(%s)", p2, var4) or p2)
+	return p1.displayName or (var1 ~= "" and string.format("%s(%s)", p3, var1) or p3)
 end
 
-local _ = function(p3)
-	return p3.displayName or "Context"
+local _ = function(p1)
+	return p1.displayName or "Context"
 end
 
-local function getComponentName(p4)
+local function getComponentName(p1)
 	-- upvalues: reactGlobalsModule (ref), consoleModule (ref), REACT_FRAGMENT_TYPE (ref), REACT_PORTAL_TYPE (ref), REACT_PROFILER_TYPE (ref), REACT_STRICT_MODE_TYPE (ref), REACT_SUSPENSE_TYPE (ref), REACT_SUSPENSE_LIST_TYPE (ref), REACT_CONTEXT_TYPE (ref), REACT_PROVIDER_TYPE (ref), REACT_FORWARD_REF_TYPE (ref), REACT_MEMO_TYPE (ref), getComponentName (ref), REACT_BLOCK_TYPE (ref), REACT_LAZY_TYPE (ref), describeError (ref)
-	if p4 == nil then
+	if p1 == nil then
 		return nil
 	end
-	local var5 = typeof(p4)
+	local var1 = typeof(p1)
 	
-	if reactGlobalsModule.__DEV__ and var5 == "table" and typeof(p4.tag) == "number" then
+	if reactGlobalsModule.__DEV__ and var1 == "table" and typeof(p1.tag) == "number" then
 		consoleModule.warn("Received an unexpected object in getComponentName(). This is likely a bug in React. Please file an issue.")
 	end
-	if var5 == "function" then
-		local debugInfo = debug.info(p4, "n")
+	if var1 == "function" then
+		local debugInfo = debug.info(p1, "n")
 		
 		if debugInfo and string.len(debugInfo) > 0 then
 			return debugInfo
 		end
-		local debugInfo_1, debugInfo_2 = debug.info(p4, "sl")
+		local debugInfo_1, debugInfo_2 = debug.info(p1, "sl")
 		
 		return string.format("%s:%d", debugInfo_1, debugInfo_2)
-	elseif var5 == "string" then
-		return p4
-	elseif p4 == REACT_FRAGMENT_TYPE then
+	elseif var1 == "string" then
+		return p1
+	elseif p1 == REACT_FRAGMENT_TYPE then
 		return "Fragment"
-	elseif p4 == REACT_PORTAL_TYPE then
+	elseif p1 == REACT_PORTAL_TYPE then
 		return "Portal"
-	elseif p4 == REACT_PROFILER_TYPE then
+	elseif p1 == REACT_PROFILER_TYPE then
 		return "Profiler"
-	elseif p4 == REACT_STRICT_MODE_TYPE then
+	elseif p1 == REACT_STRICT_MODE_TYPE then
 		return "StrictMode"
-	elseif p4 == REACT_SUSPENSE_TYPE then
+	elseif p1 == REACT_SUSPENSE_TYPE then
 		return "Suspense"
-	elseif p4 == REACT_SUSPENSE_LIST_TYPE then
+	elseif p1 == REACT_SUSPENSE_LIST_TYPE then
 		return "SuspenseList"
-	elseif var5 == "table" then
-		local var9 = p4["$$typeof"]
+	elseif var1 == "table" then
+		local var2 = p1["$$typeof"]
 		
-		if var9 == REACT_CONTEXT_TYPE then
-			return (p4.displayName or "Context") .. ".Consumer"
-		elseif var9 == REACT_PROVIDER_TYPE then
-			return (p4._context.displayName or "Context") .. ".Provider"
-		elseif var9 == REACT_FORWARD_REF_TYPE then
-			local render = p4.render
-			local var10 = "<function>"
+		if var2 == REACT_CONTEXT_TYPE then
+			return (p1.displayName or "Context") .. ".Consumer"
+		elseif var2 == REACT_PROVIDER_TYPE then
+			return (p1._context.displayName or "Context") .. ".Provider"
+		elseif var2 == REACT_FORWARD_REF_TYPE then
+			local render = p1.render
+			local var3 = "<function>"
 			
 			if typeof(render) == "table" then
-				var10 = render.displayName or (render.name or "")
+				var3 = render.displayName or (render.name or "")
 			end
-			return p4.displayName or (if var10 ~= "" then string.format("%s(%s)", "ForwardRef", var10) else "ForwardRef")
-		elseif var9 == REACT_MEMO_TYPE then
-			return getComponentName(p4.type)
-		elseif var9 == REACT_BLOCK_TYPE then
-			return getComponentName(p4._render)
-		elseif var9 == REACT_LAZY_TYPE then
-			local ok, status = xpcall(p4._init, describeError, p4._payload)
+			return p1.displayName or (if var3 ~= "" then string.format("%s(%s)", "ForwardRef", var3) else "ForwardRef")
+		elseif var2 == REACT_MEMO_TYPE then
+			return getComponentName(p1.type)
+		elseif var2 == REACT_BLOCK_TYPE then
+			return getComponentName(p1._render)
+		elseif var2 == REACT_LAZY_TYPE then
+			local ok, status = xpcall(p1._init, describeError, p1._payload)
 			
 			return if ok then getComponentName(status) else nil
-		elseif p4.displayName then
-			return p4.displayName
-		elseif p4.name then
-			return p4.name
+		elseif p1.displayName then
+			return p1.displayName
+		elseif p1.name then
+			return p1.name
 		end
-		local var11 = getmetatable(p4)
+		local var4 = getmetatable(p1)
 		
-		return if var11 and rawget(var11, "__tostring") then tostring(p4) else nil
+		return if var4 and rawget(var4, "__tostring") then tostring(p1) else nil
 	end
 end
 

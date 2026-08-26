@@ -10,7 +10,7 @@ local enableDisplaySizeEngineFeature = game:GetEngineFeature("EnableDisplaySize"
 local debugLuaAppEnableScale = game:DefineFastFlag("DebugLuaAppEnableScale", false)
 local debugLuaAppEnableScale_1 = debugLuaAppEnableScale or game:DefineFastFlag("FFlagLuaAppEnableWindowsHandheldScale", false) and enableDisplaySizeEngineFeature
 local fFlagDebugForceConsoleSafeInsets = require(parent_1.SharedFlags).FFlagDebugForceConsoleSafeInsets
-local var9 = guiService:IsTenFootInterface()
+local var1 = guiService:IsTenFootInterface()
 
 local function forceConsoleSafeInsets(value)
 	-- upvalues: parent_1 (ref)
@@ -33,18 +33,18 @@ local function forceConsoleSafeInsets(value)
 end
 
 return function()
-	-- upvalues: signalsModule (ref), appCommonLibModule (ref), guiService (ref), vrCompatibilityModule (ref), fFlagDebugForceConsoleSafeInsets (ref), forceConsoleSafeInsets (ref), enableDisplaySizeEngineFeature (ref), getGlobalGuiInsetModule (ref), debugLuaAppEnableScale (ref), fIntLuaAppSmallScreenDesignWidthModule (ref), debugLuaAppEnableScale_1 (ref), var9 (ref)
+	-- upvalues: signalsModule (ref), appCommonLibModule (ref), guiService (ref), vrCompatibilityModule (ref), fFlagDebugForceConsoleSafeInsets (ref), forceConsoleSafeInsets (ref), enableDisplaySizeEngineFeature (ref), getGlobalGuiInsetModule (ref), debugLuaAppEnableScale (ref), fIntLuaAppSmallScreenDesignWidthModule (ref), debugLuaAppEnableScale_1 (ref), var1 (ref)
 	local _ = nil
-	local var12, var13 = signalsModule.createSignal(workspace.CurrentCamera)
-	local var14 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-		-- upvalues: var13 (ref)
-		var13(workspace.CurrentCamera)
+	local var2, var3 = signalsModule.createSignal(workspace.CurrentCamera)
+	local var4 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+		-- upvalues: var3 (ref)
+		var3(workspace.CurrentCamera)
 	end)
 	local _ = nil
-	local var15, var16 = signalsModule.createSignal(appCommonLibModule.isSpatial())
-	local var17 = appCommonLibModule.connectToIsSpatialChanged(function(p0)
-		-- upvalues: var16 (ref)
-		var16(p0)
+	local var5, var6 = signalsModule.createSignal(appCommonLibModule.isSpatial())
+	local var7 = appCommonLibModule.connectToIsSpatialChanged(function(p1)
+		-- upvalues: var6 (ref)
+		var6(p1)
 	end)
 	
 	local function calculateDeviceSafePadding()
@@ -60,106 +60,106 @@ return function()
 		}
 	end
 	
-	local var19, var20 = signalsModule.createSignal(calculateDeviceSafePadding())
+	local var8, var9 = signalsModule.createSignal(calculateDeviceSafePadding())
 	local vector2 = Vector2.new(1, 1)
-	local var22 = var12(false)
+	local var10 = var2(false)
 	
-	if var22 then
-		vector2 = var22.ViewportSize
+	if var10 then
+		vector2 = var10.ViewportSize
 	end
-	local var23, var24 = signalsModule.createSignal(vector2)
-	local var25 = nil
-	local var26 = signalsModule.createEffect(function(p1)
-		-- upvalues: var12 (ref), var25 (write), var15 (ref), var24 (ref), vrCompatibilityModule (copy), var20 (ref), calculateDeviceSafePadding (ref), fFlagDebugForceConsoleSafeInsets (copy), forceConsoleSafeInsets (copy), var23 (ref)
-		local var39 = var12(p1)
+	local var11, var12 = signalsModule.createSignal(vector2)
+	local var13 = nil
+	local var14 = signalsModule.createEffect(function(p1)
+		-- upvalues: var2 (ref), var13 (write), var5 (ref), var12 (ref), vrCompatibilityModule (copy), var9 (ref), calculateDeviceSafePadding (ref), fFlagDebugForceConsoleSafeInsets (copy), forceConsoleSafeInsets (copy), var11 (ref)
+		local var15 = var2(p1)
 		
-		if var39 then
-			if var25 then
-				var25:Disconnect()
-				var25 = nil
+		if var15 then
+			if var13 then
+				var13:Disconnect()
+				var13 = nil
 			end
-			if var15(p1) then
-				var24(vrCompatibilityModule.VRConstants.MainScreenResolution)
+			if var5(p1) then
+				var12(vrCompatibilityModule.VRConstants.MainScreenResolution)
 				
 				return
 			end
-			var25 = var39:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-				-- upvalues: var24 (copy), var39 (ref), var20 (copy), calculateDeviceSafePadding (copy), fFlagDebugForceConsoleSafeInsets (copy), forceConsoleSafeInsets (copy), var23 (copy), p1 (ref)
-				var24(var39.ViewportSize)
-				var20(calculateDeviceSafePadding())
+			var13 = var15:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+				-- upvalues: var12 (copy), var15 (ref), var9 (copy), calculateDeviceSafePadding (copy), fFlagDebugForceConsoleSafeInsets (copy), forceConsoleSafeInsets (copy), var11 (copy), p1 (ref)
+				var12(var15.ViewportSize)
+				var9(calculateDeviceSafePadding())
 				
 				if fFlagDebugForceConsoleSafeInsets then
-					forceConsoleSafeInsets(var23(p1))
+					forceConsoleSafeInsets(var11(p1))
 				end
 			end)
 		end
 	end)
-	local var27, var28 = signalsModule.createSignal(if enableDisplaySizeEngineFeature then guiService.ViewportDisplaySize else nil)
-	local var29 = if enableDisplaySizeEngineFeature then guiService:GetPropertyChangedSignal("ViewportDisplaySize"):Connect(function()
-		-- upvalues: var28 (ref), guiService (copy)
-		var28(guiService.ViewportDisplaySize)
+	local var15, var16 = signalsModule.createSignal(if enableDisplaySizeEngineFeature then guiService.ViewportDisplaySize else nil)
+	local var17 = if enableDisplaySizeEngineFeature then guiService:GetPropertyChangedSignal("ViewportDisplaySize"):Connect(function()
+		-- upvalues: var16 (ref), guiService (copy)
+		var16(guiService.ViewportDisplaySize)
 	end) else nil
-	local var30 = getGlobalGuiInsetModule()
-	local var31, var32 = signalsModule.createSignal(var30)
-	local var33, var34 = signalsModule.createSignal(var30.top)
-	local var35 = signalsModule.createComputed(function(p2)
-		-- upvalues: var27 (ref), var23 (ref), debugLuaAppEnableScale (copy), fIntLuaAppSmallScreenDesignWidthModule (copy), debugLuaAppEnableScale_1 (copy)
-		local var40 = var27(p2)
-		local var41 = var23(p2)
+	local var18 = getGlobalGuiInsetModule()
+	local var19, var20 = signalsModule.createSignal(var18)
+	local var21, var22 = signalsModule.createSignal(var18.top)
+	local var23 = signalsModule.createComputed(function(p1)
+		-- upvalues: var15 (ref), var11 (ref), debugLuaAppEnableScale (copy), fIntLuaAppSmallScreenDesignWidthModule (copy), debugLuaAppEnableScale_1 (copy)
+		local var24 = var15(p1)
+		local var25 = var11(p1)
 		
-		return if var40 == nil or var41.X == 0 then 1 elseif debugLuaAppEnableScale_1 and (if var40 ~= Enum.DisplaySize.Small then debugLuaAppEnableScale else true) and fIntLuaAppSmallScreenDesignWidthModule < var41.X then var41.X / fIntLuaAppSmallScreenDesignWidthModule else 1
+		return if var24 == nil or var25.X == 0 then 1 elseif debugLuaAppEnableScale_1 and (if var24 ~= Enum.DisplaySize.Small then debugLuaAppEnableScale else true) and fIntLuaAppSmallScreenDesignWidthModule < var25.X then var25.X / fIntLuaAppSmallScreenDesignWidthModule else 1
 	end)
-	local var36 = signalsModule.createComputed(function(p3)
-		-- upvalues: var9 (copy), var35 (ref)
-		return if var9 then 1.5 else var35(p3)
+	local var24 = signalsModule.createComputed(function(p1)
+		-- upvalues: var1 (copy), var23 (ref)
+		return if var1 then 1.5 else var23(p1)
 	end)
 	
 	return {
-		getViewportSize = var23,
-		getDisplaySize = var27,
-		getGuiInset = var31,
-		getTopBarHeight = var33,
-		getUIScale = var35,
-		getPlatformScale = var36,
-		getDesignSpaceViewportWidth = signalsModule.createComputed(function(p4)
-			-- upvalues: var23 (ref), var36 (ref)
-			local var42 = var23(p4)
-			local var43 = var36(p4)
+		getViewportSize = var11,
+		getDisplaySize = var15,
+		getGuiInset = var19,
+		getTopBarHeight = var21,
+		getUIScale = var23,
+		getPlatformScale = var24,
+		getDesignSpaceViewportWidth = signalsModule.createComputed(function(p1)
+			-- upvalues: var11 (ref), var24 (ref)
+			local var25 = var11(p1)
+			local var26 = var24(p1)
 			
-			if not var43 or var43 == 0 then
-				var43 = 1
+			if not var26 or var26 == 0 then
+				var26 = 1
 			end
-			return var42.X / var43
+			return var25.X / var26
 		end),
-		getIsSpatial = var15,
-		setGuiInset = var32,
-		setTopBarHeight = var34,
-		getDeviceSafePadding = var19,
+		getIsSpatial = var5,
+		setGuiInset = var20,
+		setTopBarHeight = var22,
+		getDeviceSafePadding = var8,
 		cleanUp = function()
-			-- upvalues: var29 (write), var25 (write), var14 (write), var17 (write), var26 (ref)
-			if var29 then
-				var29:Disconnect()
-				var29 = nil
-			end
-			if var25 then
-				var25:Disconnect()
-				var25 = nil
-			end
-			if var14 then
-				var14:Disconnect()
-				var14 = nil
-			end
+			-- upvalues: var17 (write), var13 (write), var4 (write), var7 (write), var14 (ref)
 			if var17 then
 				var17:Disconnect()
 				var17 = nil
 			end
-			if var26 then
-				var26()
+			if var13 then
+				var13:Disconnect()
+				var13 = nil
+			end
+			if var4 then
+				var4:Disconnect()
+				var4 = nil
+			end
+			if var7 then
+				var7:Disconnect()
+				var7 = nil
+			end
+			if var14 then
+				var14()
 			end
 		end,
 		forceConsoleSafeInsets = if fFlagDebugForceConsoleSafeInsets then function()
-			-- upvalues: forceConsoleSafeInsets (copy), var23 (ref)
-			forceConsoleSafeInsets(var23())
+			-- upvalues: forceConsoleSafeInsets (copy), var11 (ref)
+			forceConsoleSafeInsets(var11())
 		end else nil
 	}
 end

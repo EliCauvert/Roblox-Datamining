@@ -5,31 +5,31 @@ local realtimeDeliveryModule = require(parent.RealtimeDelivery)
 local getAgeVerifiedChangedSignalModule = require(socialUpsell.Signals.GetAgeVerifiedChangedSignal)
 local fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace = require(parent.SharedFlags).FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace
 
-function SocialUpsellEventReceiver(p0)
+function SocialUpsellEventReceiver(p1)
 	-- upvalues: realtimeDeliveryModule (ref), fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (ref), getAgeVerifiedChangedSignalModule (ref), reactModule (ref), parent (ref)
-	realtimeDeliveryModule.useRealtimeConnectionStateChanged(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(p1, p2)
+	realtimeDeliveryModule.useRealtimeConnectionStateChanged(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(p2, p3)
 		-- upvalues: getAgeVerifiedChangedSignalModule (copy)
-		if p1 == Enum.ConnectionState.Connected and p2 then
+		if p2 == Enum.ConnectionState.Connected and p3 then
 			getAgeVerifiedChangedSignalModule():fire()
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), parent (copy)
-		if p0.shouldRequestAppAgeSignals then
+		-- upvalues: p1 (ref), parent (copy)
+		if p1.shouldRequestAppAgeSignals then
 			require(parent.AppStoreAgeSignalsManager).AppAgeSignalsManager.requestAppAgeSignals():catch(function() end)
 		end
-	end, { p0.shouldRequestAppAgeSignals })
+	end, { p1.shouldRequestAppAgeSignals })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), getAgeVerifiedChangedSignalModule (copy)
-		local var4 = if p0.onAgeVerifiedChange then getAgeVerifiedChangedSignalModule():connect(p0.onAgeVerifiedChange) else nil
+		-- upvalues: p1 (ref), getAgeVerifiedChangedSignalModule (copy)
+		local var1 = if p1.onAgeVerifiedChange then getAgeVerifiedChangedSignalModule():connect(p1.onAgeVerifiedChange) else nil
 		
 		return function()
-			-- upvalues: var4 (write)
-			if var4 then
-				var4:disconnect()
+			-- upvalues: var1 (write)
+			if var1 then
+				var1:disconnect()
 			end
 		end
-	end, { p0.onAgeVerifiedChange })
+	end, { p1.onAgeVerifiedChange })
 	
 	return nil
 end

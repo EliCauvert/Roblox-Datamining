@@ -2,10 +2,10 @@
 local timeZoneModule = require(script.Parent.TimeZone)
 local t = {}
 
-function t.new(p0, p1, p2, p3, p4, p5, p6)
+function t.new(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: t (ref)
 	local t_1 = {
-		dateTime = DateTime.fromUniversalTime(p0 or 1970, p1 or 1, p2 or 1, p3 or 0, p4 or 0, p5 or 0, p6 or 0)
+		dateTime = DateTime.fromUniversalTime(p1 or 1970, p2 or 1, p3 or 1, p4 or 0, p5 or 0, p6 or 0, p7 or 0)
 	}
 	setmetatable(t_1, t)
 	
@@ -20,48 +20,48 @@ function t.now()
 	return t_1
 end
 
-function t.fromUnixTimestamp(p7)
+function t.fromUnixTimestamp(p1)
 	-- upvalues: t (ref)
-	assert(type(p7) == "number", "Invalid argument #1 to fromUnixTimestamp, expected number.")
-	local t_1 = { dateTime = DateTime.fromUnixTimestampMillis(p7 * 1000) }
+	assert(type(p1) == "number", "Invalid argument #1 to fromUnixTimestamp, expected number.")
+	local t_1 = { dateTime = DateTime.fromUnixTimestampMillis(p1 * 1000) }
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-function t.fromIsoDate(p8)
+function t.fromIsoDate(p1)
 	-- upvalues: t (ref)
-	assert(type(p8) == "string", "Invalid argument #1 to DateTime.fromIsoDate, expected string.")
-	local t_1 = { dateTime = DateTime.fromIsoDate(p8) }
+	assert(type(p1) == "string", "Invalid argument #1 to DateTime.fromIsoDate, expected string.")
+	local t_1 = { dateTime = DateTime.fromIsoDate(p1) }
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-function t:Format(p9, p10, p11)
+function t:Format(p1, p2, p3)
 	-- upvalues: timeZoneModule (ref), localizationService (ref)
-	assert(type(p9) == "string", "Invalid argument #1 to Format, expected string.")
-	p10 = p10 or timeZoneModule.Current
-	p11 = p11 or localizationService.RobloxLocaleId
+	assert(type(p1) == "string", "Invalid argument #1 to Format, expected string.")
+	p2 = p2 or timeZoneModule.Current
+	p3 = p3 or localizationService.RobloxLocaleId
 	
-	if p10 == timeZoneModule.UTC then
-		return self.dateTime:FormatUniversalTime(p9, p11)
-	elseif p10 == timeZoneModule.Current then
-		return self.dateTime:FormatLocalTime(p9, p11)
+	if p2 == timeZoneModule.UTC then
+		return self.dateTime:FormatUniversalTime(p1, p3)
+	elseif p2 == timeZoneModule.Current then
+		return self.dateTime:FormatLocalTime(p1, p3)
 	end
-	error(("Invalid TimeZone \"%s\""):format(tostring(p10)), 2)
+	error(("Invalid TimeZone \"%s\""):format(tostring(p2)), 2)
 end
 
-function t:GetValues(p12)
+function t:GetValues(p1)
 	-- upvalues: timeZoneModule (ref)
-	p12 = p12 or timeZoneModule.Current
+	p1 = p1 or timeZoneModule.Current
 	
-	if p12 == timeZoneModule.UTC then
+	if p1 == timeZoneModule.UTC then
 		return self.dateTime:ToUniversalTime()
-	elseif p12 == timeZoneModule.Current then
+	elseif p1 == timeZoneModule.Current then
 		return self.dateTime:ToLocalTime()
 	end
-	error(("Invalid TimeZone \"%s\""):format(tostring(p12)), 2)
+	error(("Invalid TimeZone \"%s\""):format(tostring(p1)), 2)
 end
 
 function t:GetUnixTimestamp()
@@ -72,13 +72,13 @@ function t:GetIsoDate()
 	return self.dateTime:ToIsoDate()
 end
 
-function t:GetLongRelativeTime(_, p13, p14)
-	return self:Format("lll", p13, p14)
+function t:GetLongRelativeTime(_, p1, p2)
+	return self:Format("lll", p1, p2)
 end
 
-function t:GetShortRelativeTime(_, p15, p16)
+function t:GetShortRelativeTime(_, p1, p2)
 	-- upvalues: timeZoneModule (ref)
-	return self:Format("ll", p15 or timeZoneModule.Current, p16)
+	return self:Format("ll", p1 or timeZoneModule.Current, p2)
 end
 
 t.__index = t

@@ -17,10 +17,10 @@ local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupp
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), experienceEventDerivedFieldsModule (ref), experienceEventTypesModule (ref), updateEventRsvpModule (ref), logResponseError (ref), experienceEventsUrlBuilderModule (ref), discoveryEventErrorLogger (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref)
-	local var10 = createDataCacheModule()
-	local var11 = createDataResolverModule({
+	local var1 = createDataCacheModule()
+	local var2 = createDataResolverModule({
 		supportsMultiGet = false,
-		cache = var10,
+		cache = var1,
 		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
@@ -28,54 +28,54 @@ return function()
 	})
 	
 	return {
-		getExperienceEventInfo = var11.getCachedItem,
-		getExperienceEventInfos = var11.getCachedItems,
-		updateExperienceEventInfo = var10.updateItem,
-		updateExperienceEventInfos = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then function(p0)
-			-- upvalues: experienceEventDerivedFieldsModule (copy), var10 (ref)
-			for i, v in p0 do
-				p0[i] = experienceEventDerivedFieldsModule.enrichWithTimestamps(v)
+		getExperienceEventInfo = var2.getCachedItem,
+		getExperienceEventInfos = var2.getCachedItems,
+		updateExperienceEventInfo = var1.updateItem,
+		updateExperienceEventInfos = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then function(p1)
+			-- upvalues: experienceEventDerivedFieldsModule (copy), var1 (ref)
+			for i, v in p1 do
+				p1[i] = experienceEventDerivedFieldsModule.enrichWithTimestamps(v)
 			end
-			var10.updateItems(p0)
-		end else var10.updateItems,
+			var1.updateItems(p1)
+		end else var1.updateItems,
 		calculateDerivedField = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then experienceEventDerivedFieldsModule.calculateDerivedField else nil,
-		patchRsvpStatus = function(p1, p2)
-			-- upvalues: var11 (ref), experienceEventTypesModule (copy), updateEventRsvpModule (copy), var10 (ref), logResponseError (copy), experienceEventsUrlBuilderModule (copy), discoveryEventErrorLogger (copy), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy)
-			local var12 = var11.getCachedItem(p1).data()
+		patchRsvpStatus = function(p2, p3)
+			-- upvalues: var2 (ref), experienceEventTypesModule (copy), updateEventRsvpModule (copy), var1 (ref), logResponseError (copy), experienceEventsUrlBuilderModule (copy), discoveryEventErrorLogger (copy), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy)
+			local var3 = var2.getCachedItem(p2).data()
 			
-			return if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then updateEventRsvpModule(p1, if p2 then experienceEventTypesModule.EventRsvpTypes.Going else experienceEventTypesModule.EventRsvpTypes.NotGoing):andThen(function(p4)
-				-- upvalues: var12 (ref), p2 (ref), var10 (copy), p1 (ref)
-				if var12 then
-					var10.updateItem(p1, {
-						id = var12.id,
-						title = var12.title,
-						subtitle = var12.subtitle,
-						eventStart = var12.eventStart,
-						eventEnd = var12.eventEnd,
-						userRsvp = p2,
-						mediaAssetId = var12.mediaAssetId,
-						description = var12.description,
-						rsvpCount = (var12.rsvpCount or 0) + (if p2 then 1 else -1)
+			return if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then updateEventRsvpModule(p2, if p3 then experienceEventTypesModule.EventRsvpTypes.Going else experienceEventTypesModule.EventRsvpTypes.NotGoing):andThen(function(p4)
+				-- upvalues: var3 (ref), p3 (ref), var1 (copy), p2 (ref)
+				if var3 then
+					var1.updateItem(p2, {
+						id = var3.id,
+						title = var3.title,
+						subtitle = var3.subtitle,
+						eventStart = var3.eventStart,
+						eventEnd = var3.eventEnd,
+						userRsvp = p3,
+						mediaAssetId = var3.mediaAssetId,
+						description = var3.description,
+						rsvpCount = (var3.rsvpCount or 0) + (if p3 then 1 else -1)
 					})
 				end
 				return p4 and p4.responseBody
-			end):catch(function(p3)
-				-- upvalues: var12 (ref), var10 (copy), p1 (ref), logResponseError (copy), experienceEventsUrlBuilderModule (copy), discoveryEventErrorLogger (copy), p2 (ref)
-				if var12 then
-					var10.updateItem(p1, var12)
+			end):catch(function(p4)
+				-- upvalues: var3 (ref), var1 (copy), p2 (ref), logResponseError (copy), experienceEventsUrlBuilderModule (copy), discoveryEventErrorLogger (copy), p3 (ref)
+				if var3 then
+					var1.updateItem(p2, var3)
 				end
-				local var13 = if type(p3) == "table" and p3.StatusCode then p3.StatusCode else nil
-				local var14 = if type(p3) == "table" and p3.StatusMessage then p3.StatusMessage elseif type(p3) == "string" then p3 else nil
-				logResponseError(experienceEventsUrlBuilderModule.RSVP_UPDATE_URL, { StatusCode = var13 })
+				local var4 = if type(p4) == "table" and p4.StatusCode then p4.StatusCode else nil
+				local var5 = if type(p4) == "table" and p4.StatusMessage then p4.StatusMessage elseif type(p4) == "string" then p4 else nil
+				logResponseError(experienceEventsUrlBuilderModule.RSVP_UPDATE_URL, { StatusCode = var4 })
 				discoveryEventErrorLogger.reportError("patchRsvpStatus", "Error updating event RSVP", {
-					eventId = p1,
-					isRsvpGoing = p2,
-					statusCode = var13,
-					statusMessage = var14
+					eventId = p2,
+					isRsvpGoing = p3,
+					statusCode = var4,
+					statusMessage = var5
 				})
 			end) else nil
 		end,
-		clear = var11.clear,
-		dispose = var11.dispose
+		clear = var2.clear,
+		dispose = var2.dispose
 	}
 end

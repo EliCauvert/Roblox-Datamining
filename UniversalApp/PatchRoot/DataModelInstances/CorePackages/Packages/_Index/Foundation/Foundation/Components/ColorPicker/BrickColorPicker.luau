@@ -21,7 +21,7 @@ local function calculateGridRadius(p1)
 	return 7
 end
 
-local function BottomRowSwatches(p1)
+local function BottomRowSwatches(p2)
 	-- upvalues: reactModule (ref), signal (ref), connection (ref), imageModule (ref), viewModule (ref)
 	local var1, var2 = reactModule.useState(0)
 	local var3 = reactModule.useRef(nil)
@@ -35,29 +35,29 @@ local function BottomRowSwatches(p1)
 		if rounded ~= var1 then
 			var2(rounded)
 		end
-		local var1 = signal.Connect(current:GetPropertyChangedSignal("AbsoluteSize"), function()
+		local var4 = signal.Connect(current:GetPropertyChangedSignal("AbsoluteSize"), function()
 			-- upvalues: var2 (copy), current (ref)
 			var2(math.round(current.AbsoluteSize.X))
 		end)
 		
 		return function()
-			-- upvalues: connection (copy), var1 (ref)
-			connection.Disconnect(var1)
+			-- upvalues: connection (copy), var4 (ref)
+			connection.Disconnect(var4)
 		end
 	end, { var1 })
 	local t = {}
 	
 	if var1 > 0 then
-		local colorsCount = #p1.colors
-		local var4 = var1 - p1.paddingHorizontal * 2
+		local colorsCount = #p2.colors
+		local var4 = var1 - p2.paddingHorizontal * 2
 		local floored = math.floor(var4 / colorsCount)
-		local var5 = p1.paddingHorizontal + math.floor((var4 - floored * (colorsCount - 1)) / 2)
+		local var5 = p2.paddingHorizontal + math.floor((var4 - floored * (colorsCount - 1)) / 2)
 		
-		for i, v in ipairs(p1.colors) do
+		for i, v in ipairs(p2.colors) do
 			t[`Swatch_{i}`] = reactModule.createElement(imageModule, {
 				Image = "component_assets/hexagon_24",
-				Size = UDim2.fromOffset(p1.swatchWidth, p1.swatchHeight),
-				Position = UDim2.fromOffset(var5 + floored * (i - 1), p1.swatchCenterY),
+				Size = UDim2.fromOffset(p2.swatchWidth, p2.swatchHeight),
+				Position = UDim2.fromOffset(var5 + floored * (i - 1), p2.swatchCenterY),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				imageStyle = { Color3 = v.Color }
 			})
@@ -66,86 +66,86 @@ local function BottomRowSwatches(p1)
 	return reactModule.createElement(viewModule, { tag = "size-full", ref = var3 }, t)
 end
 
-return function(p1)
+return function(p3)
 	-- upvalues: useTokensModule (ref), reactModule (ref), brickColorConstantsModule (ref), calculateGridRadius (ref), imageModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), BottomRowSwatches (ref)
-	local var1 = useTokensModule()
-	local size200 = var1.Size.Size_200
-	local size350 = var1.Size.Size_350
-	local size400 = var1.Size.Size_400
-	local size100 = var1.Size.Size_100
-	local size350_1 = var1.Size.Size_350
-	local size400_1 = var1.Size.Size_400
-	local size200_1 = var1.Size.Size_200
-	local var2 = reactModule.useMemo(function()
+	local var6 = useTokensModule()
+	local size200 = var6.Size.Size_200
+	local size350 = var6.Size.Size_350
+	local size400 = var6.Size.Size_400
+	local size100 = var6.Size.Size_100
+	local size350_1 = var6.Size.Size_350
+	local size400_1 = var6.Size.Size_400
+	local size200_1 = var6.Size.Size_200
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: brickColorConstantsModule (copy)
 		return brickColorConstantsModule.MAIN
 	end, {})
-	local var3 = reactModule.useMemo(function()
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: brickColorConstantsModule (copy)
 		return brickColorConstantsModule.BOTTOM
 	end, {})
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: calculateGridRadius (copy), var2 (ref)
-		local var1 = calculateGridRadius(#var2)
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: calculateGridRadius (copy), var7 (ref)
+		local var10 = calculateGridRadius(#var7)
 		
-		if var1 < 3 then
+		if var10 < 3 then
 			warn("BrickColorPicker: Calculated grid radius is too small, falling back to minimum")
 			
 			return 3
 		end
-		return var1
+		return var10
 	end, {})
-	local var5, var6 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), size200 (ref), var2 (ref), size350 (ref), size400 (ref)
+	local var10, var11 = reactModule.useMemo(function()
+		-- upvalues: var9 (ref), size200 (ref), var7 (ref), size350 (ref), size400 (ref)
 		local t = {}
-		local var1 = 1
-		local var2 = size200 + 1
-		local rounded = math.round(var2 * 1.5)
+		local var12 = 1
+		local var13 = size200 + 1
+		local rounded = math.round(var13 * 1.5)
 		
-		for i_1 = 0, var4 - 1 do
-			for i = 0, 2 * var4 - 1 - 1 do
-				if math.abs(math.floor(var4 / 2) - i_1) + math.abs(math.floor((2 * var4 - 1) / 2) - i) < var4 and i_1 % 2 == i % 2 and var1 <= #var2 then
+		for i_1 = 0, var9 - 1 do
+			for i = 0, 2 * var9 - 1 - 1 do
+				if math.abs(math.floor(var9 / 2) - i_1) + math.abs(math.floor((2 * var9 - 1) / 2) - i) < var9 and i_1 % 2 == i % 2 and var12 <= #var13 then
 					table.insert(t, {
-						brickColor = var2[var1],
+						brickColor = var13[var12],
 						x = size200 * i,
-						y = if rounded then rounded * i_1 else math.round(var2 * 1.5 * i_1)
+						y = if rounded then rounded * i_1 else math.round(var13 * 1.5 * i_1)
 					})
-					var1 += 1
+					var12 += 1
 				end
 			end
 		end
-		local var3 = 1e999
-		local var4 = -1e999
-		local var5 = 1e999
-		local var6 = -1e999
+		local var14 = 1e999
+		local var15 = -1e999
+		local var16 = 1e999
+		local var17 = -1e999
 		
 		for i_2, v in t do
-			var3 = math.min(var3, v.x - size350 / 2)
-			var4 = math.max(var4, v.x + size350 / 2)
-			var5 = math.min(var5, v.y - size400 / 2)
-			var6 = math.max(var6, v.y + size400 / 2)
+			var14 = math.min(var14, v.x - size350 / 2)
+			var15 = math.max(var15, v.x + size350 / 2)
+			var16 = math.min(var16, v.y - size400 / 2)
+			var17 = math.max(var17, v.y + size400 / 2)
 		end
 		return t, {
-			width = var4 - var3,
-			height = var6 - var5,
-			offset = Vector2.new(var3, var5)
+			width = var15 - var14,
+			height = var17 - var16,
+			offset = Vector2.new(var14, var16)
 		}
 	end, {
-		var4, size200, var2, var3, var1.Size.Size_100, var1.Size.Size_50
+		var15, size200, var13, var14, var12.Size.Size_100, var12.Size.Size_50
 	})
-	local var7 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var6 (ref), reactModule (copy), imageModule (copy), size350 (ref), size200_1 (ref), size400 (ref), var1 (ref)
-		local uDim2 = UDim2.fromOffset(p1.x - var6.offset.X, p1.y - var6.offset.Y)
+	local var18 = reactModule.useCallback(function(p4, p5)
+		-- upvalues: var17 (ref), reactModule (copy), imageModule (copy), size350 (ref), size200_1 (ref), size400 (ref), var12 (ref)
+		local uDim2 = UDim2.fromOffset(p4.x - var17.offset.X, p4.y - var17.offset.Y)
 		local t = {}
 		
-		if p2 then
+		if p5 then
 			t.outline = reactModule.createElement(imageModule, {
 				Image = "component_assets/hexagon_24",
 				ZIndex = 1,
 				Size = UDim2.fromOffset(size350 + size200_1, size400 + size200_1),
 				Position = uDim2,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				imageStyle = var1.Color.ActionEmphasis.Background
+				imageStyle = var12.Color.ActionEmphasis.Background
 			})
 		end
 		t.hexagon = reactModule.createElement(imageModule, {
@@ -154,88 +154,88 @@ return function(p1)
 			Size = UDim2.fromOffset(size350, size400),
 			Position = uDim2,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			imageStyle = { Color3 = p1.brickColor.Color }
+			imageStyle = { Color3 = p4.brickColor.Color }
 		})
 		
 		return t
-	end, { var6.offset.X, var6.offset.Y, size350, size400 })
+	end, { var17.offset.X, var17.offset.Y, size350, size400 })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { tag = "col align-x-center gap-small size-full-0 auto-y" }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(p3, { tag = "col align-x-center gap-small size-full-0 auto-y" }), {
 		ColorGrid = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
-			Size = UDim2.fromOffset(var6.width, var6.height),
-			onActivated = reactModule.useCallback(function(p1, p2)
-				-- upvalues: var6 (ref), var5 (ref), size200 (ref), p1 (ref)
-				if p2.UserInputType == Enum.UserInputType.MouseButton1 then
-					local var1 = nil
-					local var2 = 1e999
-					local var3 = p2.Position.X - p1.AbsolutePosition.X + var6.offset.X
-					local var4 = p2.Position.Y - p1.AbsolutePosition.Y + var6.offset.Y
+			Size = UDim2.fromOffset(var17.width, var17.height),
+			onActivated = reactModule.useCallback(function(p4, p5)
+				-- upvalues: var17 (ref), var16 (ref), size200 (ref), p4 (ref)
+				if p5.UserInputType == Enum.UserInputType.MouseButton1 then
+					local var19 = nil
+					local var20 = 1e999
+					local var21 = p5.Position.X - p4.AbsolutePosition.X + var17.offset.X
+					local var22 = p5.Position.Y - p4.AbsolutePosition.Y + var17.offset.Y
 					
-					for i, v in var5 do
-						local var5 = (var3 - v.x) ^ 2 + (var4 - v.y) ^ 2
+					for i, v in var16 do
+						local var23 = (var21 - v.x) ^ 2 + (var22 - v.y) ^ 2
 						
-						if var5 < var2 then
-							var2 = var5
-							var1 = v
+						if var23 < var20 then
+							var20 = var23
+							var19 = v
 						end
 					end
-					if var1 and var2 < size200 * size200 then
-						p1.onBrickColorChanged(var1.brickColor)
+					if var19 and var20 < size200 * size200 then
+						p4.onBrickColorChanged(var19.brickColor)
 						
-						if p1.onColorChanged then
-							p1.onColorChanged(var1.brickColor.Color)
+						if p4.onColorChanged then
+							p4.onColorChanged(var19.brickColor.Color)
 						end
 					end
 				end
 			end, {
-				var5,
-				var6,
+				var23,
+				var17,
 				size200,
-				p1.onBrickColorChanged,
-				p1.onColorChanged
+				p4.onBrickColorChanged,
+				p4.onColorChanged
 			}),
 			stateLayer = { affordance = stateLayerAffordanceModule.None }
 		}, reactModule.useCallback(function()
-			-- upvalues: p1 (ref), var5 (ref), var7 (ref)
+			-- upvalues: p4 (ref), var23 (ref), var18 (ref)
 			local t = {}
-			local var1 = p1.selectedColor and p1.selectedColor:getValue() or nil
+			local var24 = p4.selectedColor and p4.selectedColor:getValue() or nil
 			
-			for i, v in var5 do
-				for i_1, v_1 in var7(v, var1 ~= nil and var1 == v.brickColor.Color) do
+			for i, v in var23 do
+				for i_1, v_1 in var18(v, var24 ~= nil and var24 == v.brickColor.Color) do
 					t[`{i_1}_{i}`] = v_1
 				end
 			end
 			return t
-		end, { p1.selectedColor })()),
+		end, { p4.selectedColor })()),
 		BottomRow = reactModule.createElement(viewModule, {
 			tag = "stroke-standard stroke-muted radius-circle bg-surface-100",
 			LayoutOrder = 2,
-			Size = UDim2.new(1, -var1.Size.Size_400, 0, var1.Size.Size_500),
-			onActivated = reactModule.useCallback(function(p1, p2)
-				-- upvalues: size100 (ref), var3 (ref), p1 (ref)
-				if p2.UserInputType == Enum.UserInputType.MouseButton1 then
-					local var1 = p1.AbsoluteSize.X - 2 * size100
-					local var2 = p2.Position.X - p1.AbsolutePosition.X - size100
+			Size = UDim2.new(1, -var24.Size.Size_400, 0, var24.Size.Size_500),
+			onActivated = reactModule.useCallback(function(p6, p7)
+				-- upvalues: size100 (ref), var21 (ref), p6 (ref)
+				if p7.UserInputType == Enum.UserInputType.MouseButton1 then
+					local var25 = p6.AbsoluteSize.X - 2 * size100
+					local var26 = p7.Position.X - p6.AbsolutePosition.X - size100
 					
-					if var2 >= 0 and var2 <= var1 then
-						local var3 = var3[math.clamp(math.floor(var2 / var1 * #var3) + 1, 1, #var3)]
-						p1.onBrickColorChanged(var3)
+					if var26 >= 0 and var26 <= var25 then
+						local var27 = var27[math.clamp(math.floor(var26 / var25 * #var27) + 1, 1, #var27)]
+						p6.onBrickColorChanged(var27)
 						
-						if p1.onColorChanged then
-							p1.onColorChanged(var3.Color)
+						if p6.onColorChanged then
+							p6.onColorChanged(var27.Color)
 						end
 					end
 				end
-			end, { var3, p1.onBrickColorChanged, p1.onColorChanged }),
+			end, { var21, p4.onBrickColorChanged, p4.onColorChanged }),
 			stateLayer = { affordance = stateLayerAffordanceModule.None }
 		}, {
 			Swatches = reactModule.createElement(BottomRowSwatches, {
-				colors = var3,
+				colors = var21,
 				paddingHorizontal = size100,
 				swatchWidth = size350_1,
 				swatchHeight = size400_1,
-				swatchCenterY = var1.Size.Size_250
+				swatchCenterY = var24.Size.Size_250
 			})
 		})
 	})

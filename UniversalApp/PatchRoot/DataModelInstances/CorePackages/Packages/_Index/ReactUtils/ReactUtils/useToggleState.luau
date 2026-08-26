@@ -16,8 +16,8 @@ return function(value)
 		end, {}),
 		toggle = reactModule.useCallback(function()
 			-- upvalues: var2 (ref)
-			var2(function(p0)
-				return not p0
+			var2(function(p1)
+				return not p1
 			end)
 		end, {}),
 		set = var2

@@ -8,8 +8,8 @@ local list = {
 		descriptionActive = "Feature.InExperienceIntervention.Description.ChatSuspension.Days",
 		descriptionExpired = "Feature.InExperienceIntervention.Description.ChatSuspension.Day.Expired",
 		unitInSeconds = 86400,
-		descriptionActiveFormatFunction = function(p0)
-			return tostring(math.ceil(p0 / 86400))
+		descriptionActiveFormatFunction = function(p1)
+			return tostring(math.ceil(p1 / 86400))
 		end
 	},
 	{
@@ -31,56 +31,56 @@ local list = {
 		descriptionActive = "Feature.InExperienceIntervention.Description.ChatSuspension.Minutes",
 		descriptionExpired = "Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired",
 		unitInSeconds = 60,
-		descriptionActiveFormatFunction = function(p2)
+		descriptionActiveFormatFunction = function(p1)
 			-- upvalues: localizationService (ref)
-			return DateTime.fromUnixTimestamp(p2):FormatUniversalTime("mm:ss", localizationService.RobloxLocaleId)
+			return DateTime.fromUnixTimestamp(p1):FormatUniversalTime("mm:ss", localizationService.RobloxLocaleId)
 		end
 	}
 }
 
-local var3 = function(p3, p4)
+local var2 = function(p1, p2)
 	-- upvalues: var1 (ref), list (ref)
-	if p4 then
+	if p2 then
 		return var1:Format("Feature.InExperienceIntervention.Heading.ChatSuspension.Expired")
 	end
-	local var4 = ""
+	local var3 = ""
 	
 	for i, v in list do
-		if p3 ~= v.unitInSeconds then
-			if v.threshold < p3 then
-				var4 = var1:Format(v.headingPlural, { number = math.ceil(p3 / v.unitInSeconds) })
+		if p1 ~= v.unitInSeconds then
+			if v.threshold < p1 then
+				var3 = var1:Format(v.headingPlural, { number = math.ceil(p1 / v.unitInSeconds) })
 				
-				return var4
+				return var3
 			end
 		end
-		var4 = var1:Format(v.headingSingle)
+		var3 = var1:Format(v.headingSingle)
 		
-		return var4
+		return var3
 	end
-	return var4
+	return var3
 end
 
-return function(p5, p6)
-	-- upvalues: var3 (ref), list (ref), var1 (ref)
-	if p5 == nil or p6 == nil then
+return function(p3, p4)
+	-- upvalues: var2 (ref), list (ref), var1 (ref)
+	if p3 == nil or p4 == nil then
 		return 0, "", ""
 	end
-	local maxValue = math.max(p5.UnixTimestamp - DateTime.now().UnixTimestamp, 0)
-	local var6 = p6 / 1000000000
-	local var7 = maxValue <= 0
-	local var8 = ""
-	local var9 = var3(var6, var7)
+	local maxValue = math.max(p3.UnixTimestamp - DateTime.now().UnixTimestamp, 0)
+	local var4 = p4 / 1000000000
+	local var5 = maxValue <= 0
+	local var6 = ""
+	local var7 = var2(var4, var5)
 	
 	for i, v in list do
-		if var7 then
-			if v.threshold <= var6 then
-				var8 = var1:Format(v.descriptionExpired, { number = math.ceil(var6 / v.unitInSeconds) })
+		if var5 then
+			if v.threshold <= var4 then
+				var6 = var1:Format(v.descriptionExpired, { number = math.ceil(var4 / v.unitInSeconds) })
 				break
 			end
 		elseif v.threshold <= maxValue then
-			var8 = var1:Format(v.descriptionActive, { number = v.descriptionActiveFormatFunction(maxValue) })
+			var6 = var1:Format(v.descriptionActive, { number = v.descriptionActiveFormatFunction(maxValue) })
 			break
 		end
 	end
-	return maxValue, var9, var8
+	return maxValue, var7, var6
 end

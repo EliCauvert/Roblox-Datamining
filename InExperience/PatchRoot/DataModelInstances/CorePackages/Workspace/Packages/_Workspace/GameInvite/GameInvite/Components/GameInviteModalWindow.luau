@@ -11,24 +11,24 @@ local imageSet = UIBloxModule.Core.ImageSet
 local images = UIBloxModule.App.ImageSet.Images
 local rect = Rect.new(8, 8, 9, 9)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), gameInviteModalLayoutContextModule (ref), imageSet (ref), fFlagGameInviteModalUnlockMouse (ref), gameInviteModalManagerModule (ref), images (ref), rect (ref)
-	local vector2, var9, uDim2
-	local var6 = useStyle()
-	local theme = var6.Theme
+	local vector2, var1, uDim2
+	local var2 = useStyle()
+	local theme = var2.Theme
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var7 = reactModule.useContext(gameInviteModalLayoutContextModule)
-	local modalSize = var7.modalSize
+	local var3 = reactModule.useContext(gameInviteModalLayoutContextModule)
+	local modalSize = var3.modalSize
 	
-	if var7.isFullWidth or var7.isFullHeight then
+	if var3.isFullWidth or var3.isFullHeight then
 		vector2 = Vector2.new(0.5, 1)
-		var9 = "component_assets/bullet_17"
+		var1 = "component_assets/bullet_17"
 		uDim2 = UDim2.new(0.5, 0, 1, 0)
 	else
 		vector2 = Vector2.new(0.5, 0.5)
-		var9 = "component_assets/circle_17"
+		var1 = "component_assets/circle_17"
 		uDim2 = UDim2.new(0.5, 0, 0.5, 0)
 	end
 	return reactModule.createElement(imageSet.ImageSetButton, {
@@ -36,8 +36,8 @@ return function(p0)
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		BackgroundColor3 = var6.Theme.Overlay.Color,
-		Transparency = var6.Theme.Overlay.Transparency,
+		BackgroundColor3 = var2.Theme.Overlay.Color,
+		Transparency = var2.Theme.Overlay.Transparency,
 		AutoButtonColor = false,
 		Modal = if fFlagGameInviteModalUnlockMouse then true else nil,
 		ZIndex = 0,
@@ -55,11 +55,11 @@ return function(p0)
 			Position = uDim2,
 			Size = modalSize,
 			AnchorPoint = vector2,
-			Image = images[var9],
+			Image = images[var1],
 			ImageColor3 = theme.BackgroundDefault.Color,
 			ImageTransparency = theme.BackgroundDefault.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = rect
-		}, p0.children)
+		}, p1.children)
 	})
 end

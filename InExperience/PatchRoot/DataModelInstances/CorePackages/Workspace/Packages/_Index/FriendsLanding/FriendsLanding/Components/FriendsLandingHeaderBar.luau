@@ -11,39 +11,39 @@ local fFlagEnableLeftNavOnConsole = dependenciesModule.FFlagEnableLeftNavOnConso
 local guiService = dependenciesModule.GuiService
 local friendsLandingHeaderBar = roact.PureComponent:extend("FriendsLandingHeaderBar")
 
-function friendsLandingHeaderBar.init(p0)
+function friendsLandingHeaderBar.init(p1)
 	-- upvalues: appHeaderBar (ref), fFlagEnableLeftNavOnConsole (ref), guiService (ref), actions (ref)
-	function p0.renderLeft(p1, _, _)
+	function p0.renderLeft(p2, _, _)
 		-- upvalues: appHeaderBar (copy), fFlagEnableLeftNavOnConsole (copy), guiService (copy), actions (copy)
 		return if fFlagEnableLeftNavOnConsole and guiService:IsTenFootInterface() then nil else appHeaderBar.makeBackButton(function()
-			-- upvalues: p1 (ref), actions (copy)
-			p1.dispatch(actions.back())
+			-- upvalues: p2 (ref), actions (copy)
+			p2.dispatch(actions.back())
 		end)
 	end
 end
 
-function friendsLandingHeaderBar.render(p2)
+function friendsLandingHeaderBar.render(p1)
 	-- upvalues: friendsLandingContextModule (ref), getActiveChildNavigationOptionsSafelyModule (ref), withLocalization (ref), roact (ref), friendsLandingHeaderBarPresentationalModule (ref)
-	return friendsLandingContextModule.with(function(p3)
-		-- upvalues: p2 (ref), getActiveChildNavigationOptionsSafelyModule (copy), withLocalization (copy), roact (copy), friendsLandingHeaderBarPresentationalModule (copy)
-		local navigation = p2.props.navigation
-		local var6 = getActiveChildNavigationOptionsSafelyModule(navigation)
+	return friendsLandingContextModule.with(function(p2)
+		-- upvalues: p1 (ref), getActiveChildNavigationOptionsSafelyModule (copy), withLocalization (copy), roact (copy), friendsLandingHeaderBarPresentationalModule (copy)
+		local navigation = p1.props.navigation
+		local var1 = getActiveChildNavigationOptionsSafelyModule(navigation)
 		
-		return withLocalization({ titleText = var6.headerText.raw })(function(p4)
-			-- upvalues: p3 (ref), roact (copy), friendsLandingHeaderBarPresentationalModule (copy), var6 (ref), p2 (copy), navigation (ref)
-			local titleText = p4.titleText
+		return withLocalization({ titleText = var1.headerText.raw })(function(p3)
+			-- upvalues: p2 (ref), roact (copy), friendsLandingHeaderBarPresentationalModule (copy), var1 (ref), p1 (copy), navigation (ref)
+			local titleText = p3.titleText
 			
-			return if p3.addFriendsPageSearchbarEnabled then roact.createElement(friendsLandingHeaderBarPresentationalModule, {
+			return if p2.addFriendsPageSearchbarEnabled then roact.createElement(friendsLandingHeaderBarPresentationalModule, {
 				title = titleText,
-				renderLeft = var6.renderLeft or p2.renderLeft(navigation),
-				renderCenter = var6.renderCenter,
-				renderRight = var6.renderRight,
-				isSecondary = var6.useSecondaryHeader
+				renderLeft = var1.renderLeft or p1.renderLeft(navigation),
+				renderCenter = var1.renderCenter,
+				renderRight = var1.renderRight,
+				isSecondary = var1.useSecondaryHeader
 			}) else roact.createElement(friendsLandingHeaderBarPresentationalModule, {
 				title = titleText,
-				renderLeft = var6.renderLeft or p2.renderLeft(navigation),
-				renderCenter = var6.renderCenter,
-				renderRight = var6.renderRight
+				renderLeft = var1.renderLeft or p1.renderLeft(navigation),
+				renderCenter = var1.renderCenter,
+				renderRight = var1.renderRight
 			})
 		end)
 	end)

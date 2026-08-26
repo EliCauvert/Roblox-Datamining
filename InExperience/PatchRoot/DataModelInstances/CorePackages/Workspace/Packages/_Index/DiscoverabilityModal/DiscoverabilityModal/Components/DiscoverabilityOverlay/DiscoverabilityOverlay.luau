@@ -22,15 +22,15 @@ local t = {
 	["nil"] = "Unset"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: playersService (ref), discoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule (ref), react (ref), useStyle (ref), useLocalization (ref), textKeysModule (ref), eventNamesModule (ref), t (ref), imageSetLabel (ref), images (ref), iconSize (ref), checkbox (ref), styledTextLabel (ref), radioButtonList (ref), partialPageModal (ref), buttonType (ref)
-	local titleText, var13, var14, frame, infoText, color
-	local var6 = if playersService.LocalPlayer and discoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule.isWhitelistedUserId(playersService.LocalPlayer.UserId) then false else p0.prefillDiscoverabilitySetting
-	local var7, var8 = react.useState(if var6 then 1 else nil)
-	local var9 = useStyle()
-	local font = var9.Font
-	local theme = var9.Theme
-	local var10 = useLocalization({
+	local titleText, var1, var2, frame, infoText, color
+	local var3 = if playersService.LocalPlayer and discoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule.isWhitelistedUserId(playersService.LocalPlayer.UserId) then false else p1.prefillDiscoverabilitySetting
+	local var4, var5 = react.useState(if var3 then 1 else nil)
+	local var6 = useStyle()
+	local font = var6.Font
+	local theme = var6.Theme
+	local var7 = useLocalization({
 		optInText = textKeysModule.DISCOVERABILITY_OPT_IN,
 		infoText = textKeysModule.DISCOVERABILITY_INFO,
 		learnMoreText = textKeysModule.LEARN_MORE,
@@ -43,15 +43,15 @@ return function(p0)
 		infoTextPrefillDiscoverable = textKeysModule.DISCOVERABILITY_INFO_PREFILL_DISCOVERABLE
 	})
 	
-	local var11 = function(p1)
-		-- upvalues: p0 (ref), eventNamesModule (copy), t (copy), var8 (ref)
-		p0.analytics.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalRadioButtonClick, { selected = t[tostring(p1)] })
-		var8(p1)
+	local var8 = function(p2)
+		-- upvalues: p1 (ref), eventNamesModule (copy), t (copy), var5 (ref)
+		p1.analytics.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalRadioButtonClick, { selected = t[tostring(p2)] })
+		var5(p2)
 	end
 	
-	local var12 = function()
-		-- upvalues: p0 (ref), t (copy), var7 (ref)
-		p0.onActivated(t[tostring(var7)])
+	local var9 = function()
+		-- upvalues: p1 (ref), t (copy), var4 (ref)
+		p1.onActivated(t[tostring(var4)])
 	end
 	
 	local _ = nil
@@ -61,17 +61,17 @@ return function(p0)
 	local _ = nil
 	local _ = nil
 	
-	if var6 then
-		local var16 = function()
-			-- upvalues: var7 (ref), p0 (ref), eventNamesModule (copy), t (copy), var8 (ref)
-			local var17 = if var7 == 1 then 2 else 1
-			p0.analytics.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalRadioButtonClick, { selected = t[tostring(var17)] })
-			var8(var17)
+	if var3 then
+		local var10 = function()
+			-- upvalues: var4 (ref), p1 (ref), eventNamesModule (copy), t (copy), var5 (ref)
+			local var11 = if var4 == 1 then 2 else 1
+			p1.analytics.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalRadioButtonClick, { selected = t[tostring(var11)] })
+			var5(var11)
 		end
 		
-		titleText = var10.titleTextPrefillDiscoverable
-		var13 = 12
-		var14 = react.createElement(imageSetLabel, {
+		titleText = var7.titleTextPrefillDiscoverable
+		var1 = 12
+		var2 = react.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -99,15 +99,15 @@ return function(p0)
 			Checkbox = react.createElement(checkbox, {
 				label = "",
 				LayoutOrder = 1,
-				onActivated = var16,
-				isChecked = var7 == 1
+				onActivated = var10,
+				isChecked = var4 == 1
 			}),
 			CheckboxLabel = react.createElement("TextButton", {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
 				Font = font.Body.Font,
 				Size = UDim2.fromScale(1, 0),
-				Text = var10.optInTextPrefillDiscoverable,
+				Text = var7.optInTextPrefillDiscoverable,
 				TextColor3 = theme.TextDefault.Color,
 				TextSize = font.Body.RelativeSize * font.BaseSize,
 				TextTransparency = theme.TextDefault.Transparency,
@@ -115,17 +115,17 @@ return function(p0)
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
 				LayoutOrder = 2,
-				[react.Event.Activated] = var16
+				[react.Event.Activated] = var10
 			})
 		})
-		infoText = var10.infoTextPrefillDiscoverable
+		infoText = var7.infoTextPrefillDiscoverable
 		color = theme.TextLink.Color
 	else
-		titleText = var10.titleText
-		var13 = 24
-		var14 = react.createElement(styledTextLabel, {
+		titleText = var7.titleText
+		var1 = 24
+		var2 = react.createElement(styledTextLabel, {
 			layoutOrder = 1,
-			text = var10.optInText,
+			text = var7.optInText,
 			fontStyle = font.Body,
 			colorStyle = theme.TextDefault,
 			size = UDim2.fromScale(1, 0),
@@ -142,22 +142,22 @@ return function(p0)
 		}, {
 			RadioButtonList = react.createElement(radioButtonList, {
 				layoutOrder = 1,
-				radioButtons = { { label = var10.yesText }, { label = var10.noText } },
+				radioButtons = { { label = var7.yesText }, { label = var7.noText } },
 				elementSize = UDim2.new(1, 0, 0, 50),
-				onActivated = var11,
-				initialValue = var7,
+				onActivated = var8,
+				initialValue = var4,
 				padding = UDim.new(0, 0)
 			})
 		})
-		infoText = var10.infoText
+		infoText = var7.infoText
 		color = theme.TextEmphasis.Color
 	end
 	return react.createElement(partialPageModal, {
 		title = titleText,
-		screenSize = p0.screenSize,
+		screenSize = p1.screenSize,
 		onCloseClicked = function()
-			-- upvalues: p0 (ref), t (copy), var7 (ref)
-			p0.onCloseClicked(t[tostring(var7)])
+			-- upvalues: p1 (ref), t (copy), var4 (ref)
+			p1.onCloseClicked(t[tostring(var4)])
 		end,
 		buttonStackProps = {
 			buttonHeight = 48,
@@ -165,7 +165,7 @@ return function(p0)
 			buttons = {
 				{
 					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = var12, text = var10.continueText }
+					props = { onActivated = var9, text = var7.continueText }
 				}
 			},
 			forcedFillDirection = Enum.FillDirection.Vertical
@@ -183,10 +183,10 @@ return function(p0)
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
 			}),
 			UIPadding = react.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, var13),
+				PaddingTop = UDim.new(0, var1),
 				PaddingBottom = UDim.new(0, 36)
 			}),
-			Header = var14,
+			Header = var2,
 			Selector = frame,
 			Description = react.createElement(styledTextLabel, {
 				layoutOrder = 3,
@@ -204,14 +204,14 @@ return function(p0)
 				BackgroundTransparency = 1,
 				Font = font.CaptionBody.Font,
 				Size = UDim2.fromScale(1, 0),
-				Text = var10.learnMoreText,
+				Text = var7.learnMoreText,
 				TextColor3 = color,
 				TextSize = font.CaptionBody.RelativeSize * font.BaseSize,
 				TextTransparency = theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
 				LayoutOrder = 4,
-				[react.Event.Activated] = p0.onLearnMoreClick
+				[react.Event.Activated] = p1.onLearnMoreClick
 			})
 		})
 	})

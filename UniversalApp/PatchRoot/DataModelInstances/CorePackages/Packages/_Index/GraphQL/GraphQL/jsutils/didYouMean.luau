@@ -1,21 +1,21 @@
 ﻿local _ = require(script.Parent.Parent.Parent.LuauPolyfill)
 
 return {
-	didYouMean = function(p0, p1)
+	didYouMean = function(p1, p2)
 		local var1
-		local var0 = nil
+		local var2 = nil
 		local _ = nil
 		
-		if p1 then
-			var0 = p0
-			var1 = p1
+		if p2 then
+			var2 = p1
+			var1 = p2
 		else
-			var1 = p0
+			var1 = p1
 		end
-		local var2 = " Did you mean "
+		local var3 = " Did you mean "
 		
-		if var0 then
-			var2 ..= var0 .. " "
+		if var2 then
+			var3 ..= var2 .. " "
 		end
 		local t = {}
 		
@@ -27,13 +27,13 @@ return {
 		if tCount == 0 then
 			return ""
 		elseif tCount == 1 then
-			return var2 .. t[1] .. "?"
+			return var3 .. t[1] .. "?"
 		elseif tCount == 2 then
-			return var2 .. t[1] .. " or " .. t[2] .. "?"
+			return var3 .. t[1] .. " or " .. t[2] .. "?"
 		end
 		local t_1 = {}
 		table.move(t, 1, 5, 1, t_1)
 		
-		return var2 .. table.concat(t_1, ", ") .. ", or " .. tostring(table.remove(t_1)) .. "?"
+		return var3 .. table.concat(t_1, ", ") .. ", or " .. tostring(table.remove(t_1)) .. "?"
 	end
 }

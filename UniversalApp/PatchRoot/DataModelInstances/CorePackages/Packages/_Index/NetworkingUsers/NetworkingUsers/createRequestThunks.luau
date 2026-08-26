@@ -6,14 +6,14 @@ local createGetDisplayNameValidationModule = require(networkRequests.createGetDi
 local createSetDisplayNameModule = require(networkRequests.createSetDisplayName)
 local createSetDescriptionModule = require(networkRequests.createSetDescription)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createGetSkinnyUsersFromUserIdsModule (ref), createGetUsernameHistoryFromUserIdModule (ref), createGetUserV2FromUserIdModule (ref), createGetDisplayNameValidationModule (ref), createSetDisplayNameModule (ref), createSetDescriptionModule (ref)
 	return {
-		GetSkinnyUsersFromUserIds = createGetSkinnyUsersFromUserIdsModule(p0),
-		GetUsernameHistoryFromUserId = createGetUsernameHistoryFromUserIdModule(p0),
-		GetUserV2FromUserId = createGetUserV2FromUserIdModule(p0),
-		GetDisplayNameValidation = createGetDisplayNameValidationModule(p0),
-		SetDisplayName = createSetDisplayNameModule(p0),
-		SetDescription = createSetDescriptionModule(p0)
+		GetSkinnyUsersFromUserIds = createGetSkinnyUsersFromUserIdsModule(p1),
+		GetUsernameHistoryFromUserId = createGetUsernameHistoryFromUserIdModule(p1),
+		GetUserV2FromUserId = createGetUserV2FromUserIdModule(p1),
+		GetDisplayNameValidation = createGetDisplayNameValidationModule(p1),
+		SetDisplayName = createSetDisplayNameModule(p1),
+		SetDescription = createSetDescriptionModule(p1)
 	}
 end

@@ -6,8 +6,8 @@ local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 local text = urlBase.APIS .. "/sharelinks/v1/get-or-create-link"
 
-local function decodeShareLink(p0)
-	return if type(p0) == "table" and type(p0.shortUrl) == "string" then p0.shortUrl else nil
+local function decodeShareLink(p1)
+	return if type(p1) == "table" and type(p1.shortUrl) == "string" then p1.shortUrl else nil
 end
 
 return function(p1)

@@ -2,19 +2,19 @@
 local isDetailsItemPartOfBundleAndOffsaleModule = require(parent.Selectors.IsDetailsItemPartOfBundleAndOffsale)
 local utilityFunctionsModule = require(parent.UtilityFunctions)
 
-return function(p0)
+return function(p1)
 	-- upvalues: isDetailsItemPartOfBundleAndOffsaleModule (ref), utilityFunctionsModule (ref)
-	local assetId = p0.detailsInformation.assetId
+	local assetId = p1.detailsInformation.assetId
 	
 	if not assetId then
 		return false
 	end
-	local var2 = isDetailsItemPartOfBundleAndOffsaleModule(p0)
+	local var1 = isDetailsItemPartOfBundleAndOffsaleModule(p1)
 	
-	if var2 == nil then
+	if var1 == nil then
 		return false
 	end
-	local var3 = p0.assets[assetId]
+	local var2 = p1.assets[assetId]
 	
-	return if var3 then if var2 then p0.favorites.bundles[utilityFunctionsModule.getBundleId(var3)] else p0.favorites.assets[assetId] else false
+	return if var2 then if var1 then p1.favorites.bundles[utilityFunctionsModule.getBundleId(var2)] else p1.favorites.assets[assetId] else false
 end

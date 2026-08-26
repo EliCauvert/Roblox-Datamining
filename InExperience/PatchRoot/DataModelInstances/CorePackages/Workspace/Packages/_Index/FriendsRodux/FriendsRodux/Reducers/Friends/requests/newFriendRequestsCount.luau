@@ -5,14 +5,14 @@ local _ = require(parent.roduxFriendsTypes)
 local clearNewFriendRequestsCountUpdatedModule = require(parent.Actions.ClearNewFriendRequestsCountUpdated)
 local fFlagAddFriendsPageHighlightUnseenRequests = require(parent_1.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), clearNewFriendRequestsCountUpdatedModule (ref), fFlagAddFriendsPageHighlightUnseenRequests (ref)
-	local friendsNetworking = p0.friendsNetworking
+	local friendsNetworking = p1.friendsNetworking
 	
 	return roduxModule.createReducer(0, {
-		[clearNewFriendRequestsCountUpdatedModule.name] = function(p1, _)
+		[clearNewFriendRequestsCountUpdatedModule.name] = function(p2, _)
 			-- upvalues: fFlagAddFriendsPageHighlightUnseenRequests (copy)
-			return if fFlagAddFriendsPageHighlightUnseenRequests then 0 else p1
+			return if fFlagAddFriendsPageHighlightUnseenRequests then 0 else p2
 		end,
 		[friendsNetworking.GetNewFriendRequestsCount.Succeeded.name] = function(_, p2)
 			return p2.responseBody.count

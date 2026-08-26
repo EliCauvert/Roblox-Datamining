@@ -31,74 +31,74 @@ local playerMuteStatusIcons = default.PlayerMuteStatusIcons
 
 return (function()
 	-- upvalues: signalsModule (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (ref), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (ref), runService (ref), FRAME_BUFFER (ref), playerMuteStatusIcons (ref), default (ref), voiceStore (ref), playersService (ref), VOICE_STATE (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), constantsModule (ref), VOICE_VOLUME (ref), luaFlagVoiceChatDisableSubscribeRetryForMultistream (ref), voiceChatMultistreamSubscriptionsEnabledEngineFeature (ref), ICONS (ref), getFFlagNewPeoplePageIcons (ref), getFFlagAddPeoplePageCardLayout (ref), voiceVolumeControlsEligibility (ref), voiceChatService (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref)
-	local var15, var16 = signalsModule.createSignal(false)
-	local var17, var18 = signalsModule.createSignal(false)
-	local var19, var20 = signalsModule.createSignal(nil)
-	local var21, var22 = signalsModule.createSignal(false)
-	local var23 = nil
-	local var24 = nil
+	local var1, var2 = signalsModule.createSignal(false)
+	local var3, var4 = signalsModule.createSignal(false)
+	local var5, var6 = signalsModule.createSignal(nil)
+	local var7, var8 = signalsModule.createSignal(false)
+	local var9 = nil
+	local var10 = nil
 	
 	if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then
-		local var25, var26 = signalsModule.createSignal(false)
-		var23 = var25
-		var24 = var26
+		local var11, var12 = signalsModule.createSignal(false)
+		var9 = var11
+		var10 = var12
 	end
-	local var27 = if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then {} else nil
-	local var28 = nil
-	local var29, var30 = signalsModule.createSignal(0)
-	local var31, var32 = signalsModule.createSignal(0)
-	local var33 = 0
-	local var34 = nil
+	local var13 = if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then {} else nil
+	local var14 = nil
+	local var15, var16 = signalsModule.createSignal(0)
+	local var17, var18 = signalsModule.createSignal(0)
+	local var19 = 0
+	local var20 = nil
 	
 	local function _()
-		-- upvalues: var34 (write), runService (copy), var21 (ref), var33 (write), FRAME_BUFFER (copy), var30 (ref), var32 (ref)
-		if var34 then
+		-- upvalues: var20 (write), runService (copy), var7 (ref), var19 (write), FRAME_BUFFER (copy), var16 (ref), var18 (ref)
+		if var20 then
 			return
 		end
-		var34 = runService.RenderStepped:Connect(function()
-			-- upvalues: var21 (copy), var33 (copy), FRAME_BUFFER (copy), var30 (copy), var32 (copy)
-			if var21(false) then
-				var33 += 1
+		var20 = runService.RenderStepped:Connect(function()
+			-- upvalues: var7 (copy), var19 (copy), FRAME_BUFFER (copy), var16 (copy), var18 (copy)
+			if var7(false) then
+				var19 += 1
 				
-				if FRAME_BUFFER < var33 then
-					var30(math.random())
-					var33 = 0
+				if FRAME_BUFFER < var19 then
+					var16(math.random())
+					var19 = 0
 					
 					return
 				end
 			else
-				var33 += 1
+				var19 += 1
 				
-				if FRAME_BUFFER < var33 then
-					var32(math.random())
-					var33 = 0
+				if FRAME_BUFFER < var19 then
+					var18(math.random())
+					var19 = 0
 				end
 			end
 		end)
 	end
 	
 	local _ = function()
-		-- upvalues: var34 (write)
-		if var34 then
-			var34:Disconnect()
-			var34 = nil
+		-- upvalues: var20 (write)
+		if var20 then
+			var20:Disconnect()
+			var20 = nil
 		end
 	end
 	
 	local function getMuteSelfIcon()
-		-- upvalues: signalsModule (copy), var19 (ref), var21 (ref), playerMuteStatusIcons (copy), var29 (ref), default (copy)
-		return signalsModule.createComputed(function(p0)
-			-- upvalues: var19 (copy), var21 (copy), playerMuteStatusIcons (copy), var29 (copy), default (copy)
-			local var54 = var19(p0)
+		-- upvalues: signalsModule (copy), var5 (ref), var7 (ref), playerMuteStatusIcons (copy), var15 (ref), default (copy)
+		return signalsModule.createComputed(function(p1)
+			-- upvalues: var5 (copy), var7 (copy), playerMuteStatusIcons (copy), var15 (copy), default (copy)
+			local var21 = var5(p1)
 			local _ = nil
 			
-			return if var54 == nil then playerMuteStatusIcons.Loading elseif var54 then playerMuteStatusIcons.MicOff elseif var21(p0) then default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * var29(p0)) * 20), "MicLight") else playerMuteStatusIcons.MicOn
+			return if var21 == nil then playerMuteStatusIcons.Loading elseif var21 then playerMuteStatusIcons.MicOff elseif var7(p1) then default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * var15(p1)) * 20), "MicLight") else playerMuteStatusIcons.MicOn
 		end)
 	end
 	
-	local var36 = signalsModule.createComputed(function(p1)
-		-- upvalues: var15 (ref), default (copy), voiceStore (copy), playersService (copy), VOICE_STATE (copy)
-		if not var15(p1) or not default.voiceUIVisible then
+	local var21 = signalsModule.createComputed(function(p1)
+		-- upvalues: var1 (ref), default (copy), voiceStore (copy), playersService (copy), VOICE_STATE (copy)
+		if not var1(p1) or not default.voiceUIVisible then
 			return false
 		end
 		local voiceParticipants = voiceStore.getVoiceParticipants(p1)
@@ -106,24 +106,24 @@ return (function()
 		if not voiceParticipants then
 			return false
 		end
-		local var56 = true
+		local var22 = true
 		
 		for i, v in pairs(voiceParticipants) do
-			local var57 = tonumber(i)
+			local var23 = tonumber(i)
 			
-			if var57 and playersService.LocalPlayer and (var57 ~= playersService.LocalPlayer.UserId and v ~= VOICE_STATE.LOCAL_MUTED) then
-				var56 = false
+			if var23 and playersService.LocalPlayer and (var23 ~= playersService.LocalPlayer.UserId and v ~= VOICE_STATE.LOCAL_MUTED) then
+				var22 = false
 				
-				return var56
+				return var22
 			end
 		end
-		return var56
+		return var22
 	end)
-	local var37 = if fFlagVoiceChatVolumePerUserMuteVolumeSync then function(p2, p3)
+	local var24 = if fFlagVoiceChatVolumePerUserMuteVolumeSync then function(p2, p3)
 		-- upvalues: default (copy), playersService (copy), constantsModule (copy), VOICE_VOLUME (copy)
-		local var58 = tonumber(p2)
+		local var25 = tonumber(p2)
 		
-		if not var58 then return end
+		if not var25 then return end
 		local coreVoiceManager = default.coreVoiceManager
 		
 		if not p3 and coreVoiceManager and coreVoiceManager.muteAll then
@@ -136,7 +136,7 @@ return (function()
 			local localPlayer = playersService.LocalPlayer
 			
 			for i, v in playersService:GetPlayers() do
-				if localPlayer and v.UserId ~= localPlayer.UserId and v.UserId ~= var58 then
+				if localPlayer and v.UserId ~= localPlayer.UserId and v.UserId ~= var25 then
 					table.insert(t, v.UserId)
 				end
 			end
@@ -144,24 +144,24 @@ return (function()
 				default:ToggleMuteSome(t, true, constantsModule.VOICE_GROUP_TYPE.ALL, constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
 			end
 		end
-		default:ToggleMuteSome({ var58 }, p3, constantsModule.VOICE_GROUP_TYPE.ALL, constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
+		default:ToggleMuteSome({ var25 }, p3, constantsModule.VOICE_GROUP_TYPE.ALL, constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
 		
 		if not p3 then
-			local var60 = playersService:GetPlayerByUserId(var58)
+			local var26 = playersService:GetPlayerByUserId(var25)
 			
-			if var60 and var60.VoiceChatVolume == VOICE_VOLUME.MIN then
-				var60.VoiceChatVolume = VOICE_VOLUME.DEFAULT
+			if var26 and var26.VoiceChatVolume == VOICE_VOLUME.MIN then
+				var26.VoiceChatVolume = VOICE_VOLUME.DEFAULT
 			end
 		end
 	end else nil
 	
 	local function toggleMuteAll()
-		-- upvalues: var15 (ref), var36 (ref), default (copy), constantsModule (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), playersService (copy), VOICE_VOLUME (copy)
-		if not var15(false) then return end
-		local var61 = not var36(false)
-		default:MuteAll(var61, constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
+		-- upvalues: var1 (ref), var21 (ref), default (copy), constantsModule (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), playersService (copy), VOICE_VOLUME (copy)
+		if not var1(false) then return end
+		local var27 = not var21(false)
+		default:MuteAll(var27, constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
 		
-		if fFlagVoiceChatVolumePerUserMuteVolumeSync and not var61 then
+		if fFlagVoiceChatVolumePerUserMuteVolumeSync and not var27 then
 			local localPlayer = playersService.LocalPlayer
 			
 			for i, v in playersService:GetPlayers() do
@@ -173,8 +173,8 @@ return (function()
 	end
 	
 	local function toggleMuteSelf()
-		-- upvalues: var15 (ref), default (copy)
-		if var15(false) then
+		-- upvalues: var1 (ref), default (copy)
+		if var1(false) then
 			default:ToggleMic("InGameMenuPlayers")
 			
 			return
@@ -182,112 +182,112 @@ return (function()
 	end
 	
 	local function SubscribeRetry(p4)
-		-- upvalues: var15 (ref), default (copy)
-		if var15(false) then
+		-- upvalues: var1 (ref), default (copy)
+		if var1(false) then
 			default:SubscribeRetry(p4)
 			
 			return
 		end
 	end
 	
-	local function getPlayerMuteState(p5)
+	local function getPlayerMuteState(p4)
 		-- upvalues: signalsModule (copy), voiceStore (copy), VOICE_STATE (copy)
-		return signalsModule.createComputed(function(p6)
-			-- upvalues: voiceStore (copy), p5 (ref), VOICE_STATE (copy)
-			local var62 = voiceStore.getOrCreateVoiceState(p5)(p6)
+		return signalsModule.createComputed(function(p5)
+			-- upvalues: voiceStore (copy), p4 (ref), VOICE_STATE (copy)
+			local var28 = voiceStore.getOrCreateVoiceState(p4)(p5)
 			
-			return if var62 then if var62 ~= VOICE_STATE.LOCAL_MUTED then var62 == VOICE_STATE.MUTED else true else false
+			return if var28 then if var28 ~= VOICE_STATE.LOCAL_MUTED then var28 == VOICE_STATE.MUTED else true else false
 		end)
 	end
 	
-	local function togglePlayerMute(p7)
-		-- upvalues: var15 (ref), var17 (ref), default (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), var37 (write), voiceStore (copy), VOICE_STATE (copy), constantsModule (copy), luaFlagVoiceChatDisableSubscribeRetryForMultistream (copy), voiceChatMultistreamSubscriptionsEnabledEngineFeature (copy)
-		if not var15(false) then return end
-		if not var17(false) then return end
-		local var63 = default.participants[tostring(p7)]
+	local function togglePlayerMute(p4)
+		-- upvalues: var1 (ref), var3 (ref), default (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), var24 (write), voiceStore (copy), VOICE_STATE (copy), constantsModule (copy), luaFlagVoiceChatDisableSubscribeRetryForMultistream (copy), voiceChatMultistreamSubscriptionsEnabledEngineFeature (copy)
+		if not var1(false) then return end
+		if not var3(false) then return end
+		local var28 = default.participants[tostring(p4)]
 		
-		if var63 and var63.subscriptionCompleted then
-			if fFlagVoiceChatVolumePerUserMuteVolumeSync and var37 then
-				var37(p7, not (voiceStore.getOrCreateVoiceState(p7)(false) == VOICE_STATE.LOCAL_MUTED))
+		if var28 and var28.subscriptionCompleted then
+			if fFlagVoiceChatVolumePerUserMuteVolumeSync and var24 then
+				var24(p4, not (voiceStore.getOrCreateVoiceState(p4)(false) == VOICE_STATE.LOCAL_MUTED))
 				
 				return
 			end
-			default:ToggleMutePlayer(tonumber(p7), constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
+			default:ToggleMutePlayer(tonumber(p4), constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
 			
 			return
-		elseif var63 and var63.subscriptionFailed then
+		elseif var28 and var28.subscriptionFailed then
 			if luaFlagVoiceChatDisableSubscribeRetryForMultistream then
 				if voiceChatMultistreamSubscriptionsEnabledEngineFeature then
 					return
 				else
-					default:SubscribeRetry(p7)
+					default:SubscribeRetry(p4)
 					
 					return
 				end
 			else
-				default:SubscribeRetry(p7)
+				default:SubscribeRetry(p4)
 				
 				return
 			end
-		elseif fFlagVoiceChatVolumePerUserMuteVolumeSync and var37 then
-			var37(p7, not (voiceStore.getOrCreateVoiceState(p7)(false) == VOICE_STATE.LOCAL_MUTED))
+		elseif fFlagVoiceChatVolumePerUserMuteVolumeSync and var24 then
+			var24(p4, not (voiceStore.getOrCreateVoiceState(p4)(false) == VOICE_STATE.LOCAL_MUTED))
 			
 			return
 		end
-		default:ToggleMutePlayer(tonumber(p7), constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
+		default:ToggleMutePlayer(tonumber(p4), constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
 	end
 	
-	local function getPlayerShouldShowMuteButton(p8)
-		-- upvalues: signalsModule (copy), var17 (ref), playersService (copy), voiceStore (copy)
-		return signalsModule.createComputed(function(p9)
-			-- upvalues: var17 (copy), playersService (copy), p8 (ref), voiceStore (copy)
-			return if var17(p9) and (not playersService.LocalPlayer or p8 ~= playersService.LocalPlayer.UserId) then voiceStore.getOrCreateVoiceState(p8)(p9) ~= nil else false
+	local function getPlayerShouldShowMuteButton(p4)
+		-- upvalues: signalsModule (copy), var3 (ref), playersService (copy), voiceStore (copy)
+		return signalsModule.createComputed(function(p5)
+			-- upvalues: var3 (copy), playersService (copy), p4 (ref), voiceStore (copy)
+			return if var3(p5) and (not playersService.LocalPlayer or p4 ~= playersService.LocalPlayer.UserId) then voiceStore.getOrCreateVoiceState(p4)(p5) ~= nil else false
 		end)
 	end
 	
-	local function getPlayerAnimatedIcon(p10)
-		-- upvalues: signalsModule (copy), voiceStore (copy), ICONS (copy), VOICE_STATE (copy), getFFlagNewPeoplePageIcons (copy), var31 (ref)
-		return signalsModule.createComputed(function(p11)
-			-- upvalues: voiceStore (copy), p10 (ref), ICONS (copy), VOICE_STATE (copy), getFFlagNewPeoplePageIcons (copy), var31 (copy)
-			local var64 = voiceStore.getOrCreateVoiceState(p10)(p11)
+	local function getPlayerAnimatedIcon(p4)
+		-- upvalues: signalsModule (copy), voiceStore (copy), ICONS (copy), VOICE_STATE (copy), getFFlagNewPeoplePageIcons (copy), var17 (ref)
+		return signalsModule.createComputed(function(p5)
+			-- upvalues: voiceStore (copy), p4 (ref), ICONS (copy), VOICE_STATE (copy), getFFlagNewPeoplePageIcons (copy), var17 (copy)
+			local var28 = voiceStore.getOrCreateVoiceState(p4)(p5)
 			
-			return if var64 then if var64 == VOICE_STATE.LOCAL_MUTED or var64 == VOICE_STATE.MUTED then if getFFlagNewPeoplePageIcons() then ICONS.MUTED_SPEAKER else ICONS.SPEAKER_OFF elseif var64 == VOICE_STATE.TALKING then string.format(ICONS.ANIMATED_SPEAKER_FORMAT, math.floor(0.5 + 5 * var31(p11)) * 20) else ICONS.DEFAULT_SPEAKER else ICONS.DEFAULT_SPEAKER
+			return if var28 then if var28 == VOICE_STATE.LOCAL_MUTED or var28 == VOICE_STATE.MUTED then if getFFlagNewPeoplePageIcons() then ICONS.MUTED_SPEAKER else ICONS.SPEAKER_OFF elseif var28 == VOICE_STATE.TALKING then string.format(ICONS.ANIMATED_SPEAKER_FORMAT, math.floor(0.5 + 5 * var17(p5)) * 20) else ICONS.DEFAULT_SPEAKER else ICONS.DEFAULT_SPEAKER
 		end)
 	end
 	
-	local function getPlayerIsLocalMuted(p12)
+	local function getPlayerIsLocalMuted(p4)
 		-- upvalues: signalsModule (copy), voiceStore (copy), VOICE_STATE (copy)
-		return signalsModule.createComputed(function(p13)
-			-- upvalues: p12 (ref), voiceStore (copy), VOICE_STATE (copy)
-			return if p12 then voiceStore.getOrCreateVoiceState(p12)(p13) == VOICE_STATE.LOCAL_MUTED else false
+		return signalsModule.createComputed(function(p5)
+			-- upvalues: p4 (ref), voiceStore (copy), VOICE_STATE (copy)
+			return if p4 then voiceStore.getOrCreateVoiceState(p4)(p5) == VOICE_STATE.LOCAL_MUTED else false
 		end)
 	end
 	
-	local var46 = if getFFlagAddPeoplePageCardLayout() then function(p14)
+	local var28 = if getFFlagAddPeoplePageCardLayout() then function(p4)
 		-- upvalues: signalsModule (copy), voiceStore (copy), VOICE_STATE (copy)
-		return signalsModule.createComputed(function(p15)
-			-- upvalues: voiceStore (copy), p14 (ref), VOICE_STATE (copy)
-			return voiceStore.getOrCreateVoiceState(p14)(p15) == VOICE_STATE.TALKING
+		return signalsModule.createComputed(function(p5)
+			-- upvalues: voiceStore (copy), p4 (ref), VOICE_STATE (copy)
+			return voiceStore.getOrCreateVoiceState(p4)(p5) == VOICE_STATE.TALKING
 		end)
 	end else nil
 	
-	local function updateVolumeControlEligibility(p16)
-		-- upvalues: var24 (write), default (copy), voiceVolumeControlsEligibility (copy), voiceChatService (copy)
+	local function updateVolumeControlEligibility(p4)
+		-- upvalues: var10 (write), default (copy), voiceVolumeControlsEligibility (copy), voiceChatService (copy)
 		if game:IsLoaded() then
 			local service = default:getService()
-			var24(voiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible((p16 or service and service.VoiceChatState) == Enum.VoiceChatState.Joined, voiceChatService.UseNewAudioApi))
+			var10(voiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible((p4 or service and service.VoiceChatState) == Enum.VoiceChatState.Joined, voiceChatService.UseNewAudioApi))
 			
 			return
 		end
-		var24(false)
+		var10(false)
 	end
 	
 	local function initializeVoiceChat()
-		-- upvalues: default (copy), var16 (ref), playersService (copy), voiceStore (copy), var20 (ref), var22 (ref), var18 (ref), var34 (write), runService (copy), var21 (ref), var33 (write), FRAME_BUFFER (copy), var30 (ref), var32 (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), var27 (ref), var28 (write), updateVolumeControlEligibility (ref), voiceChatService (copy), getFFlagVoiceChatUILoggingModule (copy), name (copy)
+		-- upvalues: default (copy), var2 (ref), playersService (copy), voiceStore (copy), var6 (ref), var8 (ref), var4 (ref), var20 (write), runService (copy), var7 (ref), var19 (write), FRAME_BUFFER (copy), var16 (ref), var18 (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), var13 (ref), var14 (write), updateVolumeControlEligibility (ref), voiceChatService (copy), getFFlagVoiceChatUILoggingModule (copy), name (copy)
 		if game:GetEngineFeature("VoiceChatSupported") then
 			default:asyncInit():andThen(function()
-				-- upvalues: var16 (copy), default (copy), playersService (copy), voiceStore (copy), var20 (copy), var22 (copy), var18 (copy), var34 (copy), runService (copy), var21 (copy), var33 (copy), FRAME_BUFFER (copy), var30 (copy), var32 (copy), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), var27 (copy), var28 (copy), updateVolumeControlEligibility (copy), voiceChatService (copy)
-				var16(true)
+				-- upvalues: var2 (copy), default (copy), playersService (copy), voiceStore (copy), var6 (copy), var8 (copy), var4 (copy), var20 (copy), runService (copy), var7 (copy), var19 (copy), FRAME_BUFFER (copy), var16 (copy), var18 (copy), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), var13 (copy), var14 (copy), updateVolumeControlEligibility (copy), voiceChatService (copy)
+				var2(true)
 				default:SetupParticipantListeners()
 				
 				for i, v in pairs(default.participants) do
@@ -300,155 +300,155 @@ return (function()
 				if default.participants and next(default.participants) then
 					voiceStore.handleVoiceParticipantsChanged(default.participants)
 				end
-				default.muteChanged.Event:Connect(function(p17)
-					-- upvalues: var20 (copy)
-					var20(p17)
+				default.muteChanged.Event:Connect(function(p4)
+					-- upvalues: var6 (copy)
+					var6(p4)
 				end)
-				default.talkingChanged.Event:Connect(function(p18)
-					-- upvalues: var22 (copy)
-					var22(p18)
+				default.talkingChanged.Event:Connect(function(p4)
+					-- upvalues: var8 (copy)
+					var8(p4)
 				end)
-				var20(default.localMuted)
-				var22(default.isTalking)
-				default.participantsUpdate.Event:Connect(function(p19)
+				var6(default.localMuted)
+				var8(default.isTalking)
+				default.participantsUpdate.Event:Connect(function(p4)
 					-- upvalues: voiceStore (copy)
-					voiceStore.handleVoiceParticipantsChanged(p19)
+					voiceStore.handleVoiceParticipantsChanged(p4)
 				end)
-				default.participantJoined.Event:Connect(function(_, p20)
+				default.participantJoined.Event:Connect(function(_, p4)
 					-- upvalues: voiceStore (copy)
-					voiceStore.handleVoiceParticipantAdded(tostring(p20))
+					voiceStore.handleVoiceParticipantAdded(tostring(p4))
 				end)
-				default.participantLeft.Event:Connect(function(_, p21)
+				default.participantLeft.Event:Connect(function(_, p4)
 					-- upvalues: voiceStore (copy)
-					voiceStore.handleVoiceParticipantRemoved(tostring(p21))
+					voiceStore.handleVoiceParticipantRemoved(tostring(p4))
 				end)
 				default.showVoiceUI.Event:Connect(function()
-					-- upvalues: var18 (copy), var34 (copy), runService (copy), var21 (copy), var33 (copy), FRAME_BUFFER (copy), var30 (copy), var32 (copy)
-					var18(true)
+					-- upvalues: var4 (copy), var20 (copy), runService (copy), var7 (copy), var19 (copy), FRAME_BUFFER (copy), var16 (copy), var18 (copy)
+					var4(true)
 					
-					if var34 then
+					if var20 then
 						return
 					end
-					var34 = runService.RenderStepped:Connect(function()
-						-- upvalues: var21 (copy), var33 (copy), FRAME_BUFFER (copy), var30 (copy), var32 (copy)
-						if var21(false) then
-							var33 += 1
+					var20 = runService.RenderStepped:Connect(function()
+						-- upvalues: var7 (copy), var19 (copy), FRAME_BUFFER (copy), var16 (copy), var18 (copy)
+						if var7(false) then
+							var19 += 1
 							
-							if FRAME_BUFFER < var33 then
-								var30(math.random())
-								var33 = 0
+							if FRAME_BUFFER < var19 then
+								var16(math.random())
+								var19 = 0
 								
 								return
 							end
 						else
-							var33 += 1
+							var19 += 1
 							
-							if FRAME_BUFFER < var33 then
-								var32(math.random())
-								var33 = 0
+							if FRAME_BUFFER < var19 then
+								var18(math.random())
+								var19 = 0
 							end
 						end
 					end)
 				end)
 				default.hideVoiceUI.Event:Connect(function()
-					-- upvalues: var18 (copy), var34 (copy)
-					var18(false)
+					-- upvalues: var4 (copy), var20 (copy)
+					var4(false)
 					
-					if var34 then
-						var34:Disconnect()
-						var34 = nil
+					if var20 then
+						var20:Disconnect()
+						var20 = nil
 					end
 				end)
 				
 				if default.voiceUIVisible then
-					var18(true)
+					var4(true)
 				end
-				if not var34 then
-					var34 = runService.RenderStepped:Connect(function()
-						-- upvalues: var21 (copy), var33 (copy), FRAME_BUFFER (copy), var30 (copy), var32 (copy)
-						if var21(false) then
-							var33 += 1
+				if not var20 then
+					var20 = runService.RenderStepped:Connect(function()
+						-- upvalues: var7 (copy), var19 (copy), FRAME_BUFFER (copy), var16 (copy), var18 (copy)
+						if var7(false) then
+							var19 += 1
 							
-							if FRAME_BUFFER < var33 then
-								var30(math.random())
-								var33 = 0
+							if FRAME_BUFFER < var19 then
+								var16(math.random())
+								var19 = 0
 								
 								return
 							end
 						else
-							var33 += 1
+							var19 += 1
 							
-							if FRAME_BUFFER < var33 then
-								var32(math.random())
-								var33 = 0
+							if FRAME_BUFFER < var19 then
+								var18(math.random())
+								var19 = 0
 							end
 						end
 					end)
 				end
 				if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then
-					local var66 = var27
+					local var29 = var13
 					
-					var28 = function(_, p22)
+					var14 = function(_, p4)
 						-- upvalues: updateVolumeControlEligibility (copy)
-						updateVolumeControlEligibility(p22)
+						updateVolumeControlEligibility(p4)
 					end
 					
-					default:subscribe("OnStateChanged", var28)
+					default:subscribe("OnStateChanged", var14)
 					
-					local function _(p23)
-						-- upvalues: voiceChatService (copy), updateVolumeControlEligibility (copy), var66 (ref)
+					local function _(p4)
+						-- upvalues: voiceChatService (copy), updateVolumeControlEligibility (copy), var29 (ref)
 						local ok, status = pcall(function()
-							-- upvalues: voiceChatService (copy), p23 (ref), updateVolumeControlEligibility (copy)
-							return voiceChatService:GetPropertyChangedSignal(p23):Connect(function()
+							-- upvalues: voiceChatService (copy), p4 (ref), updateVolumeControlEligibility (copy)
+							return voiceChatService:GetPropertyChangedSignal(p4):Connect(function()
 								-- upvalues: updateVolumeControlEligibility (copy)
 								updateVolumeControlEligibility()
 							end)
 						end)
 						
 						if ok then
-							table.insert(var66, status)
+							table.insert(var29, status)
 						end
 					end
 					
-					local var67 = "UseNewAudioApi"
+					local var30 = "UseNewAudioApi"
 					local ok, status = pcall(function()
-						-- upvalues: voiceChatService (copy), var67 (ref), updateVolumeControlEligibility (copy)
-						return voiceChatService:GetPropertyChangedSignal(var67):Connect(function()
+						-- upvalues: voiceChatService (copy), var30 (ref), updateVolumeControlEligibility (copy)
+						return voiceChatService:GetPropertyChangedSignal(var30):Connect(function()
 							-- upvalues: updateVolumeControlEligibility (copy)
 							updateVolumeControlEligibility()
 						end)
 					end)
 					
 					if ok then
-						table.insert(var66, status)
+						table.insert(var29, status)
 					end
-					local var68 = "EnableVoiceVolumeControls"
+					local var31 = "EnableVoiceVolumeControls"
 					local ok_1, status_1 = pcall(function()
-						-- upvalues: voiceChatService (copy), var68 (ref), updateVolumeControlEligibility (copy)
-						return voiceChatService:GetPropertyChangedSignal(var68):Connect(function()
+						-- upvalues: voiceChatService (copy), var31 (ref), updateVolumeControlEligibility (copy)
+						return voiceChatService:GetPropertyChangedSignal(var31):Connect(function()
 							-- upvalues: updateVolumeControlEligibility (copy)
 							updateVolumeControlEligibility()
 						end)
 					end)
 					
 					if ok_1 then
-						table.insert(var66, status_1)
+						table.insert(var29, status_1)
 					end
 					if game:IsLoaded() then
 						updateVolumeControlEligibility()
 						
 						return
 					end
-					table.insert(var66, game.Loaded:Connect(updateVolumeControlEligibility))
+					table.insert(var29, game.Loaded:Connect(updateVolumeControlEligibility))
 				end
 			end):catch(function(_)
-				-- upvalues: getFFlagVoiceChatUILoggingModule (copy), name (copy), var34 (copy)
+				-- upvalues: getFFlagVoiceChatUILoggingModule (copy), name (copy), var20 (copy)
 				if getFFlagVoiceChatUILoggingModule() then
 					name:warning("Failed to init VoiceChatServiceManager")
 				end
-				if var34 then
-					var34:Disconnect()
-					var34 = nil
+				if var20 then
+					var20:Disconnect()
+					var20 = nil
 				end
 			end)
 			
@@ -456,137 +456,137 @@ return (function()
 		end
 	end
 	
-	local function getPlayerVoiceVolume(p24)
+	local function getPlayerVoiceVolume(p4)
 		-- upvalues: fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), playersService (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), voiceStore (copy), VOICE_STATE (copy), VOICE_VOLUME (copy)
 		if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then
-			local var69 = playersService:GetPlayerByUserId(p24)
+			local var29 = playersService:GetPlayerByUserId(p4)
 			
-			return if var69 then if fFlagVoiceChatVolumePerUserMuteVolumeSync and voiceStore.getOrCreateVoiceState(p24)(false) == VOICE_STATE.LOCAL_MUTED then VOICE_VOLUME.MIN else var69.VoiceChatVolume else VOICE_VOLUME.DEFAULT
+			return if var29 then if fFlagVoiceChatVolumePerUserMuteVolumeSync and voiceStore.getOrCreateVoiceState(p4)(false) == VOICE_STATE.LOCAL_MUTED then VOICE_VOLUME.MIN else var29.VoiceChatVolume else VOICE_VOLUME.DEFAULT
 		end
 	end
 	
-	local function subscribePlayerVoiceVolume(p25, p26)
+	local function subscribePlayerVoiceVolume(p4, p5)
 		-- upvalues: fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), playersService (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), voiceStore (copy), VOICE_STATE (copy), VOICE_VOLUME (copy), signalsModule (copy)
 		if not fFlagVoiceVolumeControlsPerUserPlayerListButton and not fFlagVoiceVolumeControlsPerUserPlayerGridMenu then
 			return function() end
 		end
-		local var70 = playersService:GetPlayerByUserId(p25)
+		local var29 = playersService:GetPlayerByUserId(p4)
 		
-		if not var70 then
+		if not var29 then
 			return function() end
 		end
-		local var71 = var70:GetPropertyChangedSignal("VoiceChatVolume"):Connect(function()
-			-- upvalues: p26 (ref), p25 (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), playersService (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), voiceStore (copy), VOICE_STATE (copy), VOICE_VOLUME (copy)
-			local var75
+		local var30 = var29:GetPropertyChangedSignal("VoiceChatVolume"):Connect(function()
+			-- upvalues: p5 (ref), p4 (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), playersService (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), voiceStore (copy), VOICE_STATE (copy), VOICE_VOLUME (copy)
+			local var31
 			if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then
-				local var74 = playersService:GetPlayerByUserId(p25)
-				var75 = if not var74 then if fFlagVoiceChatVolumePerUserMuteVolumeSync and voiceStore.getOrCreateVoiceState(p25)(false) == VOICE_STATE.LOCAL_MUTED then VOICE_VOLUME.MIN else var74.VoiceChatVolume else VOICE_VOLUME.DEFAULT
+				local var32 = playersService:GetPlayerByUserId(p4)
+				var31 = if not var32 then if fFlagVoiceChatVolumePerUserMuteVolumeSync and voiceStore.getOrCreateVoiceState(p4)(false) == VOICE_STATE.LOCAL_MUTED then VOICE_VOLUME.MIN else var32.VoiceChatVolume else VOICE_VOLUME.DEFAULT
 			end
-			p26(var75)
+			p5(var31)
 		end)
-		local var72 = nil
+		local var31 = nil
 		
 		if fFlagVoiceChatVolumePerUserMuteVolumeSync then
-			local var73 = signalsModule.createComputed(function(p27)
-				-- upvalues: p25 (ref), voiceStore (copy), VOICE_STATE (copy)
-				return if p25 then voiceStore.getOrCreateVoiceState(p25)(p27) == VOICE_STATE.LOCAL_MUTED else false
+			local var32 = signalsModule.createComputed(function(p6)
+				-- upvalues: p4 (ref), voiceStore (copy), VOICE_STATE (copy)
+				return if p4 then voiceStore.getOrCreateVoiceState(p4)(p6) == VOICE_STATE.LOCAL_MUTED else false
 			end)
-			var72 = signalsModule.createEffect(function(p28)
-				-- upvalues: var73 (ref), p26 (ref), p25 (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), playersService (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), voiceStore (copy), VOICE_STATE (copy), VOICE_VOLUME (copy)
-				local var77
-				var73(p28)
+			var31 = signalsModule.createEffect(function(p6)
+				-- upvalues: var32 (ref), p5 (ref), p4 (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), playersService (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), voiceStore (copy), VOICE_STATE (copy), VOICE_VOLUME (copy)
+				local var33
+				var32(p6)
 				
 				if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then
-					local var76 = playersService:GetPlayerByUserId(p25)
-					var77 = if not var76 then if fFlagVoiceChatVolumePerUserMuteVolumeSync and voiceStore.getOrCreateVoiceState(p25)(false) == VOICE_STATE.LOCAL_MUTED then VOICE_VOLUME.MIN else var76.VoiceChatVolume else VOICE_VOLUME.DEFAULT
+					local var34 = playersService:GetPlayerByUserId(p4)
+					var33 = if not var34 then if fFlagVoiceChatVolumePerUserMuteVolumeSync and voiceStore.getOrCreateVoiceState(p4)(false) == VOICE_STATE.LOCAL_MUTED then VOICE_VOLUME.MIN else var34.VoiceChatVolume else VOICE_VOLUME.DEFAULT
 				end
-				p26(var77)
+				p5(var33)
 			end)
 		end
 		return function()
-			-- upvalues: var71 (ref), var72 (write)
-			var71:Disconnect()
+			-- upvalues: var30 (ref), var31 (write)
+			var30:Disconnect()
 			
-			if var72 then
-				var72()
+			if var31 then
+				var31()
 			end
 		end
 	end
 	
-	local function setPlayerVoiceVolume(value, p29)
-		-- upvalues: fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), playersService (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), var37 (write), voiceStore (copy), VOICE_STATE (copy), VOICE_VOLUME (copy)
+	local function setPlayerVoiceVolume(value, p4)
+		-- upvalues: fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), playersService (copy), fFlagVoiceChatVolumePerUserMuteVolumeSync (copy), var24 (write), voiceStore (copy), VOICE_STATE (copy), VOICE_VOLUME (copy)
 		if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then
-			local var78 = playersService:GetPlayerByUserId(value)
+			local var29 = playersService:GetPlayerByUserId(value)
 			
-			if not var78 then return end
-			if fFlagVoiceChatVolumePerUserMuteVolumeSync and var37 then
-				local var79 = voiceStore.getOrCreateVoiceState(value)(false) == VOICE_STATE.LOCAL_MUTED
-				local clampedValue = math.clamp(p29, VOICE_VOLUME.MIN, VOICE_VOLUME.MAX)
+			if not var29 then return end
+			if fFlagVoiceChatVolumePerUserMuteVolumeSync and var24 then
+				local var30 = voiceStore.getOrCreateVoiceState(value)(false) == VOICE_STATE.LOCAL_MUTED
+				local clampedValue = math.clamp(p4, VOICE_VOLUME.MIN, VOICE_VOLUME.MAX)
 				
 				if clampedValue == VOICE_VOLUME.MIN then
-					var78.VoiceChatVolume = VOICE_VOLUME.MIN
+					var29.VoiceChatVolume = VOICE_VOLUME.MIN
 					
-					if var79 then
+					if var30 then
 						return
 					else
-						var37(value, true)
+						var24(value, true)
 						
 						return
 					end
 				else
-					var78.VoiceChatVolume = clampedValue
+					var29.VoiceChatVolume = clampedValue
 					
-					if var79 then
-						var37(value, false)
+					if var30 then
+						var24(value, false)
 						
 						return
 					end
 				end
 			else
-				var78.VoiceChatVolume = math.clamp(p29, VOICE_VOLUME.MIN, VOICE_VOLUME.MAX)
+				var29.VoiceChatVolume = math.clamp(p4, VOICE_VOLUME.MIN, VOICE_VOLUME.MAX)
 			end
 		end
 	end
 	
 	local function getVoiceSessionId()
 		-- upvalues: default (copy)
-		local var81 = nil
+		local var29 = nil
 		
 		return if pcall(function()
-			-- upvalues: var81 (write), default (copy)
-			var81 = default:GetSessionId()
-		end) and var81 ~= nil and var81 ~= "" then var81 else nil
+			-- upvalues: var29 (write), default (copy)
+			var29 = default:GetSessionId()
+		end) and var29 ~= nil and var29 ~= "" then var29 else nil
 	end
 	
 	local function cleanup()
-		-- upvalues: var34 (write), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), var28 (write), default (copy), var27 (ref)
-		if var34 then
-			var34:Disconnect()
-			var34 = nil
+		-- upvalues: var20 (write), fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), var14 (write), default (copy), var13 (ref)
+		if var20 then
+			var20:Disconnect()
+			var20 = nil
 		end
 		if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then
-			if var28 then
-				default:unsubscribe("OnStateChanged", var28)
-				var28 = nil
+			if var14 then
+				default:unsubscribe("OnStateChanged", var14)
+				var14 = nil
 			end
-			local var82 = var27
+			local var29 = var13
 			
-			for i, v in var82 do
+			for i, v in var29 do
 				v:Disconnect()
 			end
-			table.clear(var82)
+			table.clear(var29)
 		end
 	end
 	
 	initializeVoiceChat()
 	
 	return {
-		voiceChatServiceConnected = var15,
-		voiceUIVisible = var17,
-		allPlayersMuted = var36,
+		voiceChatServiceConnected = var1,
+		voiceUIVisible = var3,
+		allPlayersMuted = var21,
 		voiceParticipants = voiceStore.getVoiceParticipants,
-		localMuted = var19,
-		localTalking = var21,
+		localMuted = var5,
+		localTalking = var7,
 		toggleMuteAll = toggleMuteAll,
 		toggleMuteSelf = toggleMuteSelf,
 		SubscribeRetry = SubscribeRetry,
@@ -595,9 +595,9 @@ return (function()
 		getPlayerShouldShowMuteButton = getPlayerShouldShowMuteButton,
 		getPlayerAnimatedIcon = getPlayerAnimatedIcon,
 		getPlayerIsLocalMuted = getPlayerIsLocalMuted,
-		getPlayerIsTalking = if getFFlagAddPeoplePageCardLayout() then var46 else nil,
+		getPlayerIsTalking = if getFFlagAddPeoplePageCardLayout() then var28 else nil,
 		getMuteSelfIcon = getMuteSelfIcon,
-		getShowVolumeControl = if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then var23 else nil,
+		getShowVolumeControl = if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then var9 else nil,
 		getPlayerVoiceVolume = if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then getPlayerVoiceVolume else nil,
 		subscribePlayerVoiceVolume = if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then subscribePlayerVoiceVolume else nil,
 		setPlayerVoiceVolume = if fFlagVoiceVolumeControlsPerUserPlayerListButton or fFlagVoiceVolumeControlsPerUserPlayerGridMenu then setPlayerVoiceVolume else nil,

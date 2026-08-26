@@ -1,19 +1,19 @@
-﻿local function dumpInstanceTree(p0, p1)
+﻿local function dumpInstanceTree(p1, p2)
 	-- upvalues: dumpInstanceTree (ref)
-	p1 = p1 or ""
-	assert(p1 ~= nil, "indent must be a string")
+	p2 = p2 or ""
+	assert(p2 ~= nil, "indent must be a string")
 	
-	if p0 == nil then
-		print(p1 .. "[nil Instance]")
+	if p1 == nil then
+		print(p2 .. "[nil Instance]")
 		
 		return
 	end
-	assert(p0 ~= nil, "instance must be non-nil")
-	print(p1 .. p0.Name)
-	p1 ..= "  "
+	assert(p1 ~= nil, "instance must be non-nil")
+	print(p2 .. p0.Name)
+	p2 ..= "  "
 	
-	for i, v in ipairs(p0:GetChildren()) do
-		dumpInstanceTree(v, p1)
+	for i, v in ipairs(p1:GetChildren()) do
+		dumpInstanceTree(v, p2)
 	end
 end
 

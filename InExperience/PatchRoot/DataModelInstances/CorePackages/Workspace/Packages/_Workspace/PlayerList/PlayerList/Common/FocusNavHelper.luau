@@ -2,10 +2,10 @@
 local _ = require(parent.Signals)
 local _ = require(parent.LeaderboardStore)
 
-local function getSortedPlayerInstances(p0)
+local function getSortedPlayerInstances(p1)
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		for i_1, v_1 in v.players do
 			table.insert(t, {
 				teamId = v.teamId,
@@ -15,29 +15,29 @@ local function getSortedPlayerInstances(p0)
 			})
 		end
 	end
-	table.sort(t, function(p1, p2)
-		return if p1.teamOrder == p2.teamOrder then p1.playerOrder < p2.playerOrder else p1.teamOrder < p2.teamOrder
+	table.sort(t, function(p2, p3)
+		return if p2.teamOrder == p3.teamOrder then p2.playerOrder < p3.playerOrder else p2.teamOrder < p3.teamOrder
 	end)
 	
 	return t
 end
 
 return {
-	getNextPlayerInstance = function(p3, p4, p5)
+	getNextPlayerInstance = function(p2, p3, p4)
 		-- upvalues: getSortedPlayerInstances (ref)
-		local var2 = getSortedPlayerInstances(p3)
+		local var1 = getSortedPlayerInstances(p2)
 		local playerInstance = nil
 		
-		for i, v in var2 do
-			if v.playerInstance.userId == p4.userId then
-				if v.playerInstance.object == p4.object then
-					local var3 = if i - 1 > 0 then var2[i - 1] else nil
-					local var4 = if i + 1 <= #var2 then var2[i + 1] else nil
+		for i, v in var1 do
+			if v.playerInstance.userId == p3.userId then
+				if v.playerInstance.object == p3.object then
+					local var2 = if i - 1 > 0 then var1[i - 1] else nil
+					local var3 = if i + 1 <= #var1 then var1[i + 1] else nil
 					
-					if var4 then
-						playerInstance = if var4.teamId == p5 or not var3 or var3.teamId ~= p5 then var4.playerInstance else var3.playerInstance
-					elseif var3 then
-						playerInstance = var3.playerInstance
+					if var3 then
+						playerInstance = if var3.teamId == p4 or not var2 or var2.teamId ~= p4 then var3.playerInstance else var2.playerInstance
+					elseif var2 then
+						playerInstance = var2.playerInstance
 					end
 				end
 				return v.playerInstance
@@ -45,24 +45,24 @@ return {
 		end
 		return playerInstance
 	end,
-	getFirstPlayerInstance = function(p6)
-		local var5 = nil
-		local var6 = 1e999
+	getFirstPlayerInstance = function(p5)
+		local var4 = nil
+		local var5 = 1e999
 		
-		for i, v in p6 do
+		for i, v in p5 do
 			if next(v.players) then
-				local var7 = v.order(false)
+				local var6 = v.order(false)
 				
-				if not var5 or var6 >= var7 then
+				if not var4 or var5 >= var6 then
 					for i_1, v_1 in v.players do
-						if not var5 or v_1.order(false) < var5.order(false) then
-							var5 = v_1
-							var6 = var7
+						if not var4 or v_1.order(false) < var4.order(false) then
+							var4 = v_1
+							var5 = var6
 						end
 					end
 				end
 			end
 		end
-		return var5
+		return var4
 	end
 }

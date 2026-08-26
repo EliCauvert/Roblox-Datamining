@@ -79,39 +79,39 @@ local function layoutElements(p1, p2)
 	if #t_1 > 0 then
 		table.insert(t, t_1)
 	end
-	return map(t, function(p1, p2)
+	return map(t, function(p3, p4)
 		-- upvalues: reactModule (copy), view (copy)
 		return reactModule.createElement(view, {
 			tag = "auto-xy row align-x-left",
-			key = tostring(p2),
-			LayoutOrder = p2
-		}, p1)
+			key = tostring(p4),
+			LayoutOrder = p4
+		}, p3)
 	end)
 end
 
-return function(p1)
+return function(p3)
 	-- upvalues: useRef (ref), foundationModule (ref), useState (ref), useCallback (ref), layoutElements (ref), useEffect (ref), reactModule (ref), hoverContextModule (ref), view (ref)
-	local var1 = useRef(nil)
-	local var2 = foundationModule.Hooks.useTokens()
-	local var3, var4 = useState({})
-	local var5 = useCallback(function()
-		-- upvalues: var1 (ref), var4 (ref), layoutElements (copy), p1 (ref)
-		if var1.current == nil then return end
-		if var1.current.AbsoluteSize.X == 0 then
+	local var10 = useRef(nil)
+	local var11 = foundationModule.Hooks.useTokens()
+	local var12, var13 = useState({})
+	local var14 = useCallback(function()
+		-- upvalues: var10 (ref), var13 (ref), layoutElements (copy), p3 (ref)
+		if var10.current == nil then return end
+		if var10.current.AbsoluteSize.X == 0 then
 			return
 		end
-		var4(layoutElements(p1.Elements, var1.current.AbsoluteSize.X))
-	end, { p1.Elements })
-	useEffect(var5, { var5 })
+		var13(layoutElements(p3.Elements, var10.current.AbsoluteSize.X))
+	end, { p3.Elements })
+	useEffect(var14, { var14 })
 	
 	return reactModule.createElement(hoverContextModule.Provider, nil, reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
-		onAbsoluteSizeChanged = var5,
-		ref = var1,
+		onAbsoluteSizeChanged = var14,
+		ref = var10,
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
-			HorizontalAlignment = p1.HorizontalAlignment or Enum.HorizontalAlignment.Left,
-			Padding = p1.VerticalPadding or UDim.new(0, var2.Gap.Small)
+			HorizontalAlignment = p3.HorizontalAlignment or Enum.HorizontalAlignment.Left,
+			Padding = p3.VerticalPadding or UDim.new(0, var11.Gap.Small)
 		}
-	}, var3))
+	}, var12))
 end

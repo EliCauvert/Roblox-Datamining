@@ -14,19 +14,19 @@ local valuePadding = constantsModule.LuauHeapFormatting.ValuePadding
 local luauHeapViewPathEntryModule = require(script.Parent.LuauHeapViewPathEntry)
 local luauHeapViewRefEntry = roactModule.PureComponent:extend("LuauHeapViewRefEntry")
 
-local function BorderedCellLabel(p0)
+local function BorderedCellLabel(p1)
 	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
 	return roactModule.createFragment({
 		Label = roactModule.createElement(cellLabelModule, {
 			richText = true,
-			text = p0.text,
-			size = p0.size,
-			pos = p0.pos
+			text = p1.text,
+			size = p1.size,
+			pos = p1.pos
 		}),
 		LeftBorder = roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(UDim.new(0, lineWidth), p0.size.Y),
-			Position = UDim2.fromOffset(-valuePadding, 0) + p0.pos,
+			Size = UDim2.new(UDim.new(0, lineWidth), p1.size.Y),
+			Position = UDim2.fromOffset(-valuePadding, 0) + p1.pos,
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = lineColor
 		})
@@ -44,13 +44,13 @@ function luauHeapViewRefEntry.init(p1)
 	end
 end
 
-function luauHeapViewRefEntry.renderValues(_, p3)
+function luauHeapViewRefEntry.renderValues(_, p1)
 	-- upvalues: valueCellWidth (ref), valuePadding (ref), refEntryFrameHeight (ref), roactModule (ref), BorderedCellLabel (ref)
 	local t = {}
 	local uDim2 = UDim2.new(valueCellWidth, -valuePadding, 0, refEntryFrameHeight)
-	local uDim2_1 = UDim2.new(1 - valueCellWidth * #p3, valuePadding, 0, 0)
+	local uDim2_1 = UDim2.new(1 - valueCellWidth * #p1, valuePadding, 0, 0)
 	
-	for i, v in p3 do
+	for i, v in p1 do
 		t[tostring(i)] = roactModule.createElement(BorderedCellLabel, {
 			text = tostring(v),
 			size = uDim2,
@@ -60,21 +60,21 @@ function luauHeapViewRefEntry.renderValues(_, p3)
 	return t
 end
 
-function luauHeapViewRefEntry.renderChildren(p4, p5)
+function luauHeapViewRefEntry.renderChildren(p2, p3)
 	-- upvalues: roactModule (ref), luauHeapViewPathEntryModule (ref)
 	local t = {}
 	
-	if p4.state.expanded and p5 and #p5 then
-		for i, v in ipairs(p5) do
+	if p2.state.expanded and p3 and #p3 then
+		for i, v in ipairs(p3) do
 			t[i] = roactModule.createElement(luauHeapViewPathEntryModule, { depth = 1, layoutOrder = i, name = `Path #{i}`, data = v })
 		end
 	end
 	return t
 end
 
-function luauHeapViewRefEntry.render(p6)
+function luauHeapViewRefEntry.render(p4)
 	-- upvalues: refEntryFrameHeight (ref), valueCellWidth (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
-	local props = p6.props
+	local props = p4.props
 	local size = props.size or UDim2.new(1, 0, 0, refEntryFrameHeight)
 	local layoutOrder = props.layoutOrder or 0
 	local data = props.data
@@ -95,18 +95,18 @@ function luauHeapViewRefEntry.render(p6)
 			inset = 0,
 			layoutOrder = -1,
 			size = UDim2.new(1, 0, 0, refEntryFrameHeight),
-			isExpanded = p6.state.expanded,
+			isExpanded = p4.state.expanded,
 			isExpandable = data.Paths and #data.Paths ~= 0,
-			onButtonPress = p6.onButtonPress
+			onButtonPress = p4.onButtonPress
 		}, {
 			name = roactModule.createElement(cellLabelModule, {
 				text = data.Name,
 				size = UDim2.new(UDim.new(1 - valueCellWidth * #list, 0), UDim.new(1, 0)),
 				pos = UDim2.new(0, cellPadding, 0, 0)
 			}),
-			values = roactModule.createFragment(p6:renderValues(list))
+			values = roactModule.createFragment(p4:renderValues(list))
 		}),
-		children = roactModule.createFragment(p6:renderChildren(data.Paths))
+		children = roactModule.createFragment(p4:renderChildren(data.Paths))
 	})
 end
 

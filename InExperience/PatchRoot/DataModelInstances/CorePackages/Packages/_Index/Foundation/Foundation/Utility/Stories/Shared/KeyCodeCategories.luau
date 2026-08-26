@@ -67,15 +67,15 @@ local t_6 = {
 	RightBracket = true
 }
 
-local function getKeyCodeName(p0)
-	local name = p0.Name
+local function getKeyCodeName(p1)
+	local name = p1.Name
 	
 	if name ~= "" then
 		return name
 	end
-	local var12 = tostring(p0):match("^Enum%.KeyCode%.(.+)$")
+	local var1 = tostring(p1):match("^Enum%.KeyCode%.(.+)$")
 	
-	return var12 or tostring(p0)
+	return var1 or tostring(p1)
 end
 
 local function _(p1)
@@ -83,106 +83,106 @@ local function _(p1)
 	return if t[p1] then true else p1:match("^World%d+$") ~= nil
 end
 
-local _ = function(p2)
-	return if p2:match("^Button") == nil then if p2:match("^DPad") == nil then p2:match("^Thumbstick") ~= nil else true else true
+local _ = function(p1)
+	return if p1:match("^Button") == nil then if p1:match("^DPad") == nil then p1:match("^Thumbstick") ~= nil else true else true
 end
 
-local function getCategory(p3)
+local function getCategory(p1)
 	-- upvalues: t (ref), t_1 (ref), t_2 (ref), t_4 (ref), t_5 (ref), t_3 (ref), t_6 (ref)
-	local var13
-	local name = p3.Name
+	local var1
+	local name = p1.Name
 	
 	if name == "" then
-		local var14 = tostring(p3):match("^Enum%.KeyCode%.(.+)$")
-		var13 = var14 or tostring(p3)
+		local var2 = tostring(p1):match("^Enum%.KeyCode%.(.+)$")
+		var1 = var2 or tostring(p1)
 	else
-		var13 = name
+		var1 = name
 	end
-	return if if t[var13] then true else var13:match("^World%d+$") ~= nil then "Deprecated" elseif if var13:match("^Button") == nil then if var13:match("^DPad") == nil then var13:match("^Thumbstick") ~= nil else true else true then "Gamepad" elseif t_1[var13] then "Mouse and touch" elseif var13:match("^Keypad") then "Keypad" elseif var13:match("^[A-Z]$") then "Letters" elseif t_2[var13] then "Numbers" elseif var13:match("^F%d+$") then "Function keys" elseif t_4[var13] then "Arrows" elseif t_5[var13] then "Navigation" elseif t_3[var13] then "Modifiers" elseif t_6[var13] then "Punctuation" else "Other"
+	return if if t[var1] then true else var1:match("^World%d+$") ~= nil then "Deprecated" elseif if var1:match("^Button") == nil then if var1:match("^DPad") == nil then var1:match("^Thumbstick") ~= nil else true else true then "Gamepad" elseif t_1[var1] then "Mouse and touch" elseif var1:match("^Keypad") then "Keypad" elseif var1:match("^[A-Z]$") then "Letters" elseif t_2[var1] then "Numbers" elseif var1:match("^F%d+$") then "Function keys" elseif t_4[var1] then "Arrows" elseif t_5[var1] then "Navigation" elseif t_3[var1] then "Modifiers" elseif t_6[var1] then "Punctuation" else "Other"
 end
 
-local function sortInCategory(p4, p5)
+local function sortInCategory(p1, p2)
 	-- upvalues: list_1 (ref)
-	if p4 == "Numbers" then
-		table.sort(p5, function(p6, p7)
+	if p1 == "Numbers" then
+		table.sort(p2, function(p3, p4)
 			-- upvalues: list_1 (copy)
-			return (table.find(list_1, p6) or 0) < (table.find(list_1, p7) or 0)
+			return (table.find(list_1, p3) or 0) < (table.find(list_1, p4) or 0)
 		end)
 		
 		return
-	elseif p4 == "Function keys" then
-		table.sort(p5, function(p8, p9)
-			local var15
-			local name = p8.Name
+	elseif p1 == "Function keys" then
+		table.sort(p2, function(p3, p4)
+			local var1
+			local name = p3.Name
 			
 			if name == "" then
-				local var16 = tostring(p8):match("^Enum%.KeyCode%.(.+)$")
-				var15 = var16 or tostring(p8)
+				local var2 = tostring(p3):match("^Enum%.KeyCode%.(.+)$")
+				var1 = var2 or tostring(p3)
 			else
-				var15 = name
+				var1 = name
 			end
-			local var18
-			local var17 = tonumber(var15:match("^F(%d+)$")) or 0
-			local name_1 = p9.Name
+			local var3
+			local var4 = tonumber(var1:match("^F(%d+)$")) or 0
+			local name_1 = p4.Name
 			
 			if name_1 == "" then
-				local var19 = tostring(p9):match("^Enum%.KeyCode%.(.+)$")
-				var18 = var19 or tostring(p9)
+				local var5 = tostring(p4):match("^Enum%.KeyCode%.(.+)$")
+				var3 = var5 or tostring(p4)
 			else
-				var18 = name_1
+				var3 = name_1
 			end
-			return var17 < (tonumber(var18:match("^F(%d+)$")) or 0)
+			return var4 < (tonumber(var3:match("^F(%d+)$")) or 0)
 		end)
 		
 		return
-	elseif p4 == "Deprecated" then
-		table.sort(p5, function(p10, p11)
-			local var20
-			local name = p10.Name
+	elseif p1 == "Deprecated" then
+		table.sort(p2, function(p3, p4)
+			local var1
+			local name = p3.Name
 			
 			if name == "" then
-				local var21 = tostring(p10):match("^Enum%.KeyCode%.(.+)$")
-				var20 = var21 or tostring(p10)
+				local var2 = tostring(p3):match("^Enum%.KeyCode%.(.+)$")
+				var1 = var2 or tostring(p3)
 			else
-				var20 = name
+				var1 = name
 			end
-			local var22
-			local name_1 = p11.Name
+			local var3
+			local name_1 = p4.Name
 			
 			if name_1 == "" then
-				local var23 = tostring(p11):match("^Enum%.KeyCode%.(.+)$")
-				var22 = var23 or tostring(p11)
+				local var4 = tostring(p4):match("^Enum%.KeyCode%.(.+)$")
+				var3 = var4 or tostring(p4)
 			else
-				var22 = name_1
+				var3 = name_1
 			end
-			local var24 = tonumber(var20:match("^World(%d+)$"))
-			local var25 = tonumber(var22:match("^World(%d+)$"))
+			local var5 = tonumber(var1:match("^World(%d+)$"))
+			local var6 = tonumber(var3:match("^World(%d+)$"))
 			
-			return if var24 and var25 then var24 < var25 elseif var24 then true elseif var25 then false else var20 < var22
+			return if var5 and var6 then var5 < var6 elseif var5 then true elseif var6 then false else var1 < var3
 		end)
 		
 		return
 	end
-	table.sort(p5, function(p12, p13)
-		local var26
-		local name = p12.Name
+	table.sort(p2, function(p3, p4)
+		local var1
+		local name = p3.Name
 		
 		if name == "" then
-			local var27 = tostring(p12):match("^Enum%.KeyCode%.(.+)$")
-			var26 = var27 or tostring(p12)
+			local var2 = tostring(p3):match("^Enum%.KeyCode%.(.+)$")
+			var1 = var2 or tostring(p3)
 		else
-			var26 = name
+			var1 = name
 		end
-		local var28
-		local name_1 = p13.Name
+		local var3
+		local name_1 = p4.Name
 		
 		if name_1 == "" then
-			local var29 = tostring(p13):match("^Enum%.KeyCode%.(.+)$")
-			var28 = var29 or tostring(p13)
+			local var4 = tostring(p4):match("^Enum%.KeyCode%.(.+)$")
+			var3 = var4 or tostring(p4)
 		else
-			var28 = name_1
+			var3 = name_1
 		end
-		return var26 < var28
+		return var1 < var3
 	end)
 end
 
@@ -190,31 +190,31 @@ return {
 	CATEGORY_ORDER = list,
 	getKeyCodeName = getKeyCodeName,
 	getCategory = getCategory,
-	groupByCategory = function(p14)
+	groupByCategory = function(p1)
 		-- upvalues: list (ref), getCategory (ref), sortInCategory (ref)
 		local t = {}
 		
 		for i = 1, #list do
 			t[list[i]] = {}
 		end
-		for i_1, v in p14 do
+		for i_1, v in p1 do
 			table.insert(t[getCategory(v)], v)
 		end
 		for i_2 = 1, #list do
-			local var31 = list[i_2]
-			sortInCategory(var31, t[var31])
+			local var1 = list[i_2]
+			sortInCategory(var1, t[var1])
 		end
 		return t
 	end,
-	getNonEmptyCategories = function(p15)
+	getNonEmptyCategories = function(p2)
 		-- upvalues: list (ref)
 		local t = {}
 		
 		for i = 1, #list do
-			local var33 = list[i]
+			local var2 = list[i]
 			
-			if #p15[var33] > 0 then
-				table.insert(t, var33)
+			if #p2[var2] > 0 then
+				table.insert(t, var2)
 			end
 		end
 		return t

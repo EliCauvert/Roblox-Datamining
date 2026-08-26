@@ -6,12 +6,12 @@ local t = {
 	[userModel.PresenceType.OFFLINE] = 0
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref)
-	p0 = p0 or {}
 	p1 = p1 or {}
-	p0 = p0.presence
-	local presence = p1.presence
+	p2 = p2 or {}
+	p1 = p1.presence
+	local presence = p2.presence
 	
-	return if p0 and presence and t[p0] ~= t[presence] then t[presence] < t[p0] else p0.displayName < p1.displayName
+	return if p1 and presence and t[p1] ~= t[presence] then t[presence] < t[p1] else p1.displayName < p2.displayName
 end

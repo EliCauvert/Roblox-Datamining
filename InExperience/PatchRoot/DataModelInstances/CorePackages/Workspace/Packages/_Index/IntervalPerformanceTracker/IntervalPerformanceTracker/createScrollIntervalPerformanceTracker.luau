@@ -6,60 +6,60 @@ local list = {
 	"rawFrameTimesMs"
 }
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: list (ref), intervalPerformanceTrackerModule (ref), scrollIntervalTrackerModule (ref)
-	local var3 = if p3 and p3.metricsToTrack then p3.metricsToTrack else list
-	local var4 = if p3 and p3.countersEnabled ~= nil then p3.countersEnabled else true
-	local var5 = if p3 and p3.eventStreamEnabled ~= nil then p3.eventStreamEnabled else true
-	local var6 = if p3 then p3.scrollOptions else nil
-	local var7 = if p3 and p3.trackScrollType ~= nil then p3.trackScrollType else true
-	local var8 = if p3 then p3.extraFields else nil
-	local var9 = false
+	local var1 = if p4 and p4.metricsToTrack then p4.metricsToTrack else list
+	local var2 = if p4 and p4.countersEnabled ~= nil then p4.countersEnabled else true
+	local var3 = if p4 and p4.eventStreamEnabled ~= nil then p4.eventStreamEnabled else true
+	local var4 = if p4 then p4.scrollOptions else nil
+	local var5 = if p4 and p4.trackScrollType ~= nil then p4.trackScrollType else true
+	local var6 = if p4 then p4.extraFields else nil
+	local var7 = false
 	
 	local function _()
-		-- upvalues: var9 (write), var7 (ref), var8 (ref)
-		local var10 = if var9 then "warm" else "cold"
+		-- upvalues: var7 (write), var5 (ref), var6 (ref)
+		local var8 = if var7 then "warm" else "cold"
 		
-		if not var7 then
-			return var8
+		if not var5 then
+			return var6
 		end
 		local t = {}
 		
-		if var8 then
-			for i, v in var8 do
+		if var6 then
+			for i, v in var6 do
 				t[i] = v
 			end
 		end
-		t.scroll_type = var10
+		t.scroll_type = var8
 		
 		return t
 	end
 	
 	return scrollIntervalTrackerModule.createScrollIntervalTracker(function(_)
-		-- upvalues: intervalPerformanceTrackerModule (copy), p0 (ref), var3 (ref), var4 (ref), var5 (ref), var9 (write), var7 (ref), var8 (ref)
-		local var14
-		local var12 = nil
-		local var13 = if var9 then "warm" else "cold"
+		-- upvalues: intervalPerformanceTrackerModule (copy), p1 (ref), var1 (ref), var2 (ref), var3 (ref), var7 (write), var5 (ref), var6 (ref)
+		local var9
+		local var10 = nil
+		local var11 = if var7 then "warm" else "cold"
 		
-		if var7 then
+		if var5 then
 			local t = {}
 			
-			if var8 then
-				for i, v in var8 do
+			if var6 then
+				for i, v in var6 do
 					t[i] = v
 				end
 			end
-			t.scroll_type = var13
-			var14 = t
+			t.scroll_type = var11
+			var9 = t
 		else
-			var14 = var8
+			var9 = var6
 		end
-		intervalPerformanceTrackerModule:startTracking(p0, var12, var3, var4, var5, var14)
-		var9 = true
+		intervalPerformanceTrackerModule:startTracking(p1, var10, var1, var2, var3, var9)
+		var7 = true
 		
 		return true
 	end, function(_)
-		-- upvalues: intervalPerformanceTrackerModule (copy), p0 (ref)
-		intervalPerformanceTrackerModule:stopAndLogTracking(p0)
-	end, p1, p2, var6)
+		-- upvalues: intervalPerformanceTrackerModule (copy), p1 (ref)
+		intervalPerformanceTrackerModule:stopAndLogTracking(p1)
+	end, p2, p3, var4)
 end

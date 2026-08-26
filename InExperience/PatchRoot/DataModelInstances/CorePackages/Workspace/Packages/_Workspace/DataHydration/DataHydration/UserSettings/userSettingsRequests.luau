@@ -37,9 +37,9 @@ return {
 			analyticsKey = "user-settings.settings-and-options.get",
 			url = `{httpModule.Url.APIS_URL}user-settings-api/v1/user-settings`,
 			network = if value then value.network else httpClientModule.createRequestInternalNetwork(),
-			decode = function(p0)
+			decode = function(p1)
 				-- upvalues: normalizeCachedUserSettings (copy)
-				return normalizeCachedUserSettings(p0)
+				return normalizeCachedUserSettings(p1)
 			end
 		}))
 	end,

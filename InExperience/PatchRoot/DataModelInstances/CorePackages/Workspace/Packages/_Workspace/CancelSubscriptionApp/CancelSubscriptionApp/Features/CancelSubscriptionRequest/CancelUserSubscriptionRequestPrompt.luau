@@ -12,21 +12,21 @@ local t = {
 	yesButtonText = "CoreScripts.CancelUserSubscriptionPrompt.RequestPrompt.YesCancelButton"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref), useScreenSize (ref)
-	local var3 = useLocalization(t)
+	local var1 = useLocalization(t)
 	
 	return reactModule.createElement(interactiveAlert, {
-		title = var3.heading,
-		bodyText = var3.bodyText:gsub("{date}", p0.expirationDate),
+		title = var1.heading,
+		bodyText = var1.bodyText:gsub("{date}", p1.expirationDate),
 		buttonStackInfo = {
 			forcedFillDirection = Enum.FillDirection.Horizontal,
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
-						onActivated = p0.onCancel or function() end,
-						text = var3.noButtonText,
+						onActivated = p1.onCancel or function() end,
+						text = var1.noButtonText,
 						delayInputSeconds = 0.75,
 						[reactModule.Tag] = "data-testid=CancelSubscriptionApp_DontCancelButton"
 					}
@@ -35,8 +35,8 @@ return function(p0)
 					isDefaultChild = false,
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = p0.onConfirm or function() end,
-						text = var3.yesButtonText,
+						onActivated = p1.onConfirm or function() end,
+						text = var1.yesButtonText,
 						delayInputSeconds = 0.75,
 						[reactModule.Tag] = "data-testid=CancelSubscriptionApp_YesCancelButton"
 					}

@@ -3,9 +3,9 @@ local parent = appChat.Parent
 local cryoModule = require(parent.Cryo)
 
 return require(parent.Rodux).createReducer({}, {
-	[require(parent.AppChatNetworking).rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p0, p1)
+	[require(parent.AppChatNetworking).rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		for i, v in p1.responseBody.conversation_participants_metadata do
+		for i, v in p2.responseBody.conversation_participants_metadata do
 			local t = {}
 			
 			for i_1, v_1 in v.participants_metadata do
@@ -16,14 +16,14 @@ return require(parent.Rodux).createReducer({}, {
 					isInvited = v_1.is_invited
 				}
 			end
-			p0 = cryoModule.Dictionary.join(p0, { [i] = t })
+			p1 = cryoModule.Dictionary.join(p1, { [i] = t })
 		end
-		return p0
+		return p1
 	end,
-	[require(appChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3)
+	[require(appChat.Conversations.Actions.RemovedConversation).name] = function(p3, p4)
 		-- upvalues: cryoModule (ref)
-		local conversationId = p3.conversationId
+		local conversationId = p4.conversationId
 		
-		return if conversationId then cryoModule.Dictionary.join(p2, { [conversationId] = cryoModule.None }) else p2
+		return if conversationId then cryoModule.Dictionary.join(p3, { [conversationId] = cryoModule.None }) else p3
 	end
 })

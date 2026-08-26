@@ -84,9 +84,9 @@ local t_2 = {
 }
 
 return {
-	getKeyCodeNote = function(p0)
+	getKeyCodeNote = function(p1)
 		-- upvalues: keyCodeCategoriesModule (ref), t_1 (ref), t (ref), t_2 (ref)
-		local keyCodeName = keyCodeCategoriesModule.getKeyCodeName(p0)
+		local keyCodeName = keyCodeCategoriesModule.getKeyCodeName(p1)
 		
 		if t_1[keyCodeName] then
 			return t_1[keyCodeName]
@@ -95,7 +95,7 @@ return {
 		elseif t[keyCodeName] then
 			return "Shifted symbol KeyCode. Prefer detecting the base key plus Shift; rarely emitted on its own."
 		end
-		local category = keyCodeCategoriesModule.getCategory(p0)
+		local category = keyCodeCategoriesModule.getCategory(p1)
 		
 		return if category == "Other" or category == "Deprecated" then t_2[category] else nil
 	end

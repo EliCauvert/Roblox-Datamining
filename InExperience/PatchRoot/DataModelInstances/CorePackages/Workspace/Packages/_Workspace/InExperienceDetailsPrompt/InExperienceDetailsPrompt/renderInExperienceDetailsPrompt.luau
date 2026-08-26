@@ -37,8 +37,8 @@ return function()
 		inExperienceDetailsPromptOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
 		inExperienceDetailsPromptOverlay.ClipToDeviceSafeArea = false
 	end
-	local var11 = reactRobloxModule.createRoot(if fFlagLuaAppIedpOverlayAndNavigationFix then inExperienceDetailsPromptOverlay else folder)
-	var11:render(reactModule.createElement(localizationProvider, {
+	local var1 = reactRobloxModule.createRoot(if fFlagLuaAppIedpOverlayAndNavigationFix then inExperienceDetailsPromptOverlay else folder)
+	var1:render(reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		FoundationProvider = reactModule.createElement(foundationProvider, {
@@ -55,5 +55,5 @@ return function()
 		})
 	}))
 	
-	return var11
+	return var1
 end

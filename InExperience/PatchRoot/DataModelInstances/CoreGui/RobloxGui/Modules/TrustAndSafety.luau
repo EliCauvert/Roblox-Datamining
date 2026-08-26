@@ -25,12 +25,12 @@ local screenshotHookManagerModule = require(script.Utility.ScreenshotHookManager
 local fetchPlaceInfoModule = require(script.Thunks.FetchPlaceInfo)
 local getFFlagReportAnythingScreenshotModule = require(script.Flags.GetFFlagReportAnythingScreenshot)
 local t = {
-	getInstance = function(p0)
-		if not p0._initialized then
-			p0:initialize()
-			p0._initialized = true
+	getInstance = function(p1)
+		if not p1._initialized then
+			p1:initialize()
+			p1._initialized = true
 		end
-		return p0
+		return p1
 	end,
 	initialize = function(p1)
 		-- upvalues: globalConfigModule (ref), roactModule (ref), fetchPlaceInfoModule (ref), roactRoduxModule (ref), trustAndSafetyAppPolicyModule (ref), localizationProviderModule (ref), trustAndSafetyAppModule (ref), coreGuiService (ref)
@@ -63,49 +63,49 @@ local t = {
 	end,
 	createLocalization = function(_)
 		-- upvalues: localizationService (ref), localization (ref)
-		local var24 = localization.new(localizationService.RobloxLocaleId)
+		local var1 = localization.new(localizationService.RobloxLocaleId)
 		localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
-			-- upvalues: localizationService (copy), var24 (ref)
-			var24:SetLocale(localizationService.RobloxLocaleId)
+			-- upvalues: localizationService (copy), var1 (ref)
+			var1:SetLocale(localizationService.RobloxLocaleId)
 		end)
 		
-		return var24
+		return var1
 	end,
-	openReportDialog = function(p2, p3, p4)
+	openReportDialog = function(p1, p2, p3)
 		-- upvalues: setVoiceReportingFlowModule (ref), getFFlagReportAnythingScreenshotModule (ref), identifyAvatarsModule (ref), beginReportFlowModule (ref)
-		p2.store:dispatch(setVoiceReportingFlowModule(true))
+		p1.store:dispatch(setVoiceReportingFlowModule(true))
 		
 		if getFFlagReportAnythingScreenshotModule() then
-			p2.store:dispatch(identifyAvatarsModule())
+			p1.store:dispatch(identifyAvatarsModule())
 		end
-		p2.store:dispatch(beginReportFlowModule(p3, p4))
+		p1.store:dispatch(beginReportFlowModule(p2, p3))
 	end,
-	openReportMenu = function(p5)
+	openReportMenu = function(p1)
 		-- upvalues: setVoiceReportingFlowModule (ref), getFFlagReportAnythingScreenshotModule (ref), identifyAvatarsModule (ref), beginReportFlowModule (ref)
-		p5.store:dispatch(setVoiceReportingFlowModule(true))
+		p1.store:dispatch(setVoiceReportingFlowModule(true))
 		
 		if getFFlagReportAnythingScreenshotModule() then
-			p5.store:dispatch(identifyAvatarsModule())
+			p1.store:dispatch(identifyAvatarsModule())
 		end
-		p5.store:dispatch(beginReportFlowModule())
+		p1.store:dispatch(beginReportFlowModule())
 	end
 }
 
 return {
-	openReportDialogForPlayer = function(p6, p7)
+	openReportDialogForPlayer = function(p1, p2)
 		-- upvalues: playerInterfaceModule (ref), tModule (ref), sessionUtilityModule (ref), t (ref), constantsModule (ref)
-		assert(playerInterfaceModule(p6) and tModule.instanceIsA("Player")(p6))
-		sessionUtilityModule.startAbuseReportSession(p7)
-		t:getInstance():openReportDialog(constantsModule.ReportType.Player, p6)
+		assert(playerInterfaceModule(p1) and tModule.instanceIsA("Player")(p1))
+		sessionUtilityModule.startAbuseReportSession(p2)
+		t:getInstance():openReportDialog(constantsModule.ReportType.Player, p1)
 	end,
-	openReportDialogForPlace = function(p8)
+	openReportDialogForPlace = function(p1)
 		-- upvalues: sessionUtilityModule (ref), t (ref), constantsModule (ref)
-		sessionUtilityModule.startAbuseReportSession(p8)
+		sessionUtilityModule.startAbuseReportSession(p1)
 		t:getInstance():openReportDialog(constantsModule.ReportType.Place)
 	end,
-	openReportMenu = function(p9)
+	openReportMenu = function(p1)
 		-- upvalues: sessionUtilityModule (ref), t (ref)
-		sessionUtilityModule.startAbuseReportSession(p9)
+		sessionUtilityModule.startAbuseReportSession(p1)
 		t:getInstance():openReportMenu()
 	end,
 	setPreReportScreenshotHook = function(value)

@@ -24,68 +24,68 @@ local eventNamesModule = require(parent.Analytics.EventNames)
 local getCaptureStorageUsageModule = require(parent.Utils.getCaptureStorageUsage)
 local usePingLazyRenderResizingModule = require(parent.Hooks.usePingLazyRenderResizing)
 
-return capturesPolicyModule.connect(function(p5)
+return capturesPolicyModule.connect(function(p1)
 	return {
-		enableCapturesBulkManagement = p5.enableCapturesBulkManagement()
+		enableCapturesBulkManagement = p1.enableCapturesBulkManagement()
 	}
-end)(function(p0)
+end)(function(p1)
 	-- upvalues: useAnalyticsModule (ref), useStyle (ref), useDispatch (ref), reactModule (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), eventNamesModule (ref), captureManagerOpenedModule (ref), getCaptureStorageUsageModule (ref), usePingLazyRenderResizingModule (ref), iconButton (ref), images (ref), iconSize (ref), withTooltip (ref), tooltipOrientation (ref), coreGuiService (ref), interactable (ref), imageSetLabel (ref)
-	local var12 = useAnalyticsModule()
-	local var13 = useStyle()
-	local var14 = useDispatch()
-	local color = var13.Theme.TextDefault.Color
-	local font = var13.Font.CaptionBody.Font
-	local var15 = var13.Font.BaseSize * var13.Font.CaptionBody.RelativeSize
-	local var16, var17 = reactModule.useState(false)
-	local var18 = useLocalization({
+	local var1 = useAnalyticsModule()
+	local var2 = useStyle()
+	local var3 = useDispatch()
+	local color = var2.Theme.TextDefault.Color
+	local font = var2.Font.CaptionBody.Font
+	local var4 = var2.Font.BaseSize * var2.Font.CaptionBody.RelativeSize
+	local var5, var6 = reactModule.useState(false)
+	local var7 = useLocalization({
 		oneCaptureLabel = "Feature.Captures.Label.OneCapture",
 		tooltipTitle = "Feature.Captures.Title.CaptureStorageTooltipTitle",
 		tooltipBody = "Feature.Captures.Label.CaptureStorageTooltipLabel",
 		multipleCapturesLabel = {
 			"Feature.Captures.Label.CaptureCounts",
-			numberOfCaptures = p0.itemCount
+			numberOfCaptures = p1.itemCount
 		}
 	})
-	local var19 = useSelector(function(p1)
+	local var8 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].Captures
+		return p2[constantsModule.RoduxKey].Captures
 	end)
-	local var20 = useSelector(function(p2)
+	local var9 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].Carousel.IsOpen
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), var17 (ref)
-		if var20 then
-			var17(false)
+		-- upvalues: var9 (ref), var6 (ref)
+		if var9 then
+			var6(false)
 		end
-	end, { var20 })
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), var12 (ref), eventNamesModule (copy), var14 (ref), captureManagerOpenedModule (copy)
-		var17(false)
-		var12.fireEvent(eventNamesModule.CapturesManagerOpened)
-		var14(captureManagerOpenedModule())
+	end, { var9 })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), var1 (ref), eventNamesModule (copy), var3 (ref), captureManagerOpenedModule (copy)
+		var6(false)
+		var1.fireEvent(eventNamesModule.CapturesManagerOpened)
+		var3(captureManagerOpenedModule())
 	end, {})
-	local var22 = reactModule.useCallback(function(_)
-		-- upvalues: var17 (ref), var16 (ref)
-		var17(not var16)
-	end, { var16 })
-	local var23 = reactModule.useMemo(function()
-		-- upvalues: getCaptureStorageUsageModule (copy), var19 (ref)
-		return getCaptureStorageUsageModule(var19)
-	end, { var19 })
-	local var24 = if p0.itemCount == 1 then var18.oneCaptureLabel else var18.multipleCapturesLabel
+	local var11 = reactModule.useCallback(function(_)
+		-- upvalues: var6 (ref), var5 (ref)
+		var6(not var5)
+	end, { var5 })
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: getCaptureStorageUsageModule (copy), var8 (ref)
+		return getCaptureStorageUsageModule(var8)
+	end, { var8 })
+	local var13 = if p1.itemCount == 1 then var7.oneCaptureLabel else var7.multipleCapturesLabel
 	
-	if p0.enableCapturesBulkManagement then
-		local var25 = `{var24}{if var23 ~= "" then "" else ", "}{var23}`
-		local var26 = reactModule.useRef(nil)
-		usePingLazyRenderResizingModule(var26, var25)
+	if p1.enableCapturesBulkManagement then
+		local var14 = `{var13}{if var12 ~= "" then "" else ", "}{var12}`
+		local var15 = reactModule.useRef(nil)
+		usePingLazyRenderResizingModule(var15, var14)
 		
 		return reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			BackgroundColor3 = var13.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = var13.Theme.BackgroundDefault.Transparency,
-			LayoutOrder = p0.LayoutOrder,
+			BackgroundColor3 = var2.Theme.BackgroundDefault.Color,
+			BackgroundTransparency = var2.Theme.BackgroundDefault.Transparency,
+			LayoutOrder = p1.LayoutOrder,
 			Size = UDim2.new(1, 0, 0, 36)
 		}, {
 			GridLayout = reactModule.createElement("UIGridLayout", {
@@ -107,7 +107,7 @@ end)(function(p0)
 					showBackground = false,
 					icon = images["icons/common/settings"],
 					iconSize = iconSize.Medium,
-					onActivated = var21,
+					onActivated = var10,
 					size = UDim2.fromOffset(36, 36)
 				})
 			}),
@@ -126,26 +126,26 @@ end)(function(p0)
 					AutomaticSize = Enum.AutomaticSize.X,
 					Font = font,
 					Size = UDim2.fromOffset(0, 20),
-					Text = var25,
+					Text = var14,
 					TextColor3 = color,
-					TextSize = var15,
+					TextSize = var4,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					ref = var26
+					ref = var15
 				}),
 				InfoIconWithTooltip = withTooltip({
-					headerText = var18.tooltipTitle,
-					bodyText = var18.tooltipBody
+					headerText = var7.tooltipTitle,
+					bodyText = var7.tooltipBody
 				}, {
 					DisplayOrder = 100,
 					preferredOrientation = tooltipOrientation.Bottom,
 					guiTarget = coreGuiService,
-					active = var16
-				}, function(p3)
-					-- upvalues: var17 (ref), reactModule (copy), interactable (copy), var22 (ref), imageSetLabel (copy), images (copy)
-					local var27 = function(p4)
-						-- upvalues: var17 (copy), p3 (ref)
-						var17(false)
-						p3(p4)
+					active = var5
+				}, function(p2)
+					-- upvalues: var6 (ref), reactModule (copy), interactable (copy), var11 (ref), imageSetLabel (copy), images (copy)
+					local var16 = function(p3)
+						-- upvalues: var6 (copy), p2 (ref)
+						var6(false)
+						p2(p3)
 					end
 					
 					return reactModule.createElement(interactable, {
@@ -154,9 +154,9 @@ end)(function(p0)
 						LayoutOrder = 2,
 						Position = UDim2.fromScale(1, 0.5),
 						Size = UDim2.fromOffset(16, 16),
-						[reactModule.Change.AbsolutePosition] = var27,
-						[reactModule.Change.AbsoluteSize] = var27,
-						[reactModule.Event.Activated] = var22
+						[reactModule.Change.AbsolutePosition] = var16,
+						[reactModule.Change.AbsoluteSize] = var16,
+						[reactModule.Event.Activated] = var11
 					}, {
 						InfoIcon = reactModule.createElement(imageSetLabel, {
 							BackgroundTransparency = 1,

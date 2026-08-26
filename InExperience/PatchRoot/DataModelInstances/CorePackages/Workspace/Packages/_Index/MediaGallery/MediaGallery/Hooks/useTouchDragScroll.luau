@@ -3,37 +3,37 @@ local mediaGallery = script:FindFirstAncestor("MediaGallery")
 local reactModule = require(mediaGallery.Parent.React)
 local _ = require(mediaGallery.MediaGalleryTypes)
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: reactModule (ref), userInputService (ref)
 	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), value (ref), p0 (ref)
-		local var3 = false
-		local touchStartedConnection = userInputService.TouchStarted:Connect(function(p1)
-			-- upvalues: value (copy), var3 (write)
+		-- upvalues: userInputService (copy), value (ref), p1 (ref)
+		local var1 = false
+		local touchStartedConnection = userInputService.TouchStarted:Connect(function(p2)
+			-- upvalues: value (copy), var1 (write)
 			local current = value.current
 			
 			if current then
 				local absolutePosition = current.AbsolutePosition
 				local absoluteSize = current.AbsoluteSize
 				
-				if absolutePosition.X <= p1.Position.X and p1.Position.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= p1.Position.Y and p1.Position.Y <= absolutePosition.Y + absoluteSize.Y) then
-					var3 = true
+				if absolutePosition.X <= p2.Position.X and p2.Position.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= p2.Position.Y and p2.Position.Y <= absolutePosition.Y + absoluteSize.Y) then
+					var1 = true
 				end
 			end
 		end)
 		local touchEndedConnection = userInputService.TouchEnded:Connect(function()
-			-- upvalues: var3 (write)
-			var3 = false
+			-- upvalues: var1 (write)
+			var1 = false
 		end)
 		local touchDragConnection = userInputService.TouchDrag:Connect(function(p2)
-			-- upvalues: var3 (write), p0 (copy)
-			if var3 then
+			-- upvalues: var1 (write), p1 (copy)
+			if var1 then
 				if p2 == Enum.SwipeDirection.Right then
-					p0("Left")
+					p1("Left")
 					
 					return
 				elseif p2 == Enum.SwipeDirection.Left then
-					p0("Right")
+					p1("Right")
 				end
 			end
 		end)
@@ -44,5 +44,5 @@ return function(value, p0)
 			touchEndedConnection:Disconnect()
 			touchDragConnection:Disconnect()
 		end
-	end, { p0, value })
+	end, { p1, value })
 end

@@ -8,26 +8,26 @@ local t = {
 	[Enum.NormalId.Bottom] = CFrame.fromEulerAnglesYXZ(-1.570796326795, -1.570796326795, 0)
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: guiService (ref), t (ref)
-	local var2 = p1 / p0.AbsoluteSize
+	local var1 = p2 / p1.AbsoluteSize
 	
-	if p0:IsA("ScreenGui") then
-		return p1
-	elseif p0:IsA("BillboardGui") then
-		local screenSpaceBounds = p0:GetScreenSpaceBounds()
+	if p1:IsA("ScreenGui") then
+		return p2
+	elseif p1:IsA("BillboardGui") then
+		local screenSpaceBounds = p1:GetScreenSpaceBounds()
 		
-		return if screenSpaceBounds then screenSpaceBounds.Min + var2 * Vector2.new(screenSpaceBounds.Width, screenSpaceBounds.Height) + guiService:GetInsetArea(Enum.ScreenInsets.None).Min else nil
-	elseif not p0:IsA("SurfaceGui") then
+		return if screenSpaceBounds then screenSpaceBounds.Min + var1 * Vector2.new(screenSpaceBounds.Width, screenSpaceBounds.Height) + guiService:GetInsetArea(Enum.ScreenInsets.None).Min else nil
+	elseif not p1:IsA("SurfaceGui") then
 		return nil
 	end
-	local adornee = p0.Adornee or p0.Parent
+	local adornee = p1.Adornee or p1.Parent
 	
 	if not adornee or not adornee:IsA("BasePart") then
 		return nil
 	end
-	local face = t[p0.Face]
-	local var5, var6 = p2:WorldToScreenPoint(adornee.CFrame * face * ((face:Inverse() * adornee.Size):Abs() * Vector3.new(0.5 - var2.X, 0.5 - var2.Y, -0.5)))
+	local face = t[p1.Face]
+	local var2, var3 = p3:WorldToScreenPoint(adornee.CFrame * face * ((face:Inverse() * adornee.Size):Abs() * Vector3.new(0.5 - var1.X, 0.5 - var1.Y, -0.5)))
 	
-	return if var6 then Vector2.new(var5.X, var5.Y) else nil
+	return if var3 then Vector2.new(var2.X, var2.Y) else nil
 end

@@ -14,25 +14,25 @@ local responseStrHeight = constantsModule.NetworkFormatting.ResponseStrHeight
 local responseWidthRatio = constantsModule.NetworkFormatting.ResponseWidthRatio
 local headerButtonModule = require(script.Parent.Parent.Parent.Components.HeaderButton)
 local networkChartEntryModule = require(script.Parent.NetworkChartEntry)
-local var5 = 0
+local var1 = 0
 
 for i, v in pairs(chartCellWidths) do
-	var5 += v
+	var1 += v
 end
-local var6 = 0
+local var2 = 0
 local t = {}
 local t_1 = {}
 local t_2 = {}
 
 for i_1, v_1 in ipairs(chartCellWidths) do
-	table.insert(t, UDim2.new(0, var6 + cellPadding, 0, 0))
+	table.insert(t, UDim2.new(0, var2 + cellPadding, 0, 0))
 	table.insert(t_1, UDim2.new(0, v_1 - cellPadding, 0, headerFrameHeight))
 	table.insert(t_2, UDim2.new(0, v_1 - cellPadding, 0, entryFrameHeight))
-	var6 += v_1
+	var2 += v_1
 end
-table.insert(t, UDim2.new(0, var6 + cellPadding, 0, 0))
-table.insert(t_1, UDim2.new(1, (-var5) - cellPadding, 0, headerFrameHeight))
-table.insert(t_2, UDim2.new(1, (-var5) - cellPadding, 0, entryFrameHeight))
+table.insert(t, UDim2.new(0, var2 + cellPadding, 0, 0))
+table.insert(t_1, UDim2.new(1, (-var1) - cellPadding, 0, headerFrameHeight))
+table.insert(t_2, UDim2.new(1, (-var1) - cellPadding, 0, entryFrameHeight))
 local t_3 = {}
 
 for i_2, v_2 in ipairs(t) do
@@ -40,72 +40,72 @@ for i_2, v_2 in ipairs(t) do
 end
 local networkChart = roactModule.Component:extend("NetworkChart")
 
-function networkChart.init(p0)
+function networkChart.init(p1)
 	-- upvalues: roactModule (ref)
-	function p0.getOnExpandEntry(p1)
-		-- upvalues: p0 (ref)
+	function p0.getOnExpandEntry(p2)
+		-- upvalues: p1 (ref)
 		return function(_, _)
-			-- upvalues: p0 (copy), p1 (ref)
-			p0:setState({ expandIndex = p0.state.expandIndex ~= p1 and p1 })
+			-- upvalues: p1 (copy), p2 (ref)
+			p1:setState({ expandIndex = p1.state.expandIndex ~= p2 and p2 })
 		end
 	end
 	
 	function p0.onCanvasPosChanged()
-		-- upvalues: p0 (ref)
-		local canvasPosition = p0.scrollingRef.current.CanvasPosition
+		-- upvalues: p1 (ref)
+		local canvasPosition = p1.scrollingRef.current.CanvasPosition
 		
-		if p0.state.canvasPos ~= canvasPosition then
-			p0:setState({
-				absScrollSize = p0.scrollingRef.current.AbsoluteSize,
+		if p1.state.canvasPos ~= canvasPosition then
+			p1:setState({
+				absScrollSize = p1.scrollingRef.current.AbsoluteSize,
 				canvasPos = canvasPosition
 			})
 		end
 	end
 	
-	p0.ref = roactModule.createRef()
-	p0.scrollingRef = roactModule.createRef()
-	p0.state = { expandIndex = false }
+	p1.ref = roactModule.createRef()
+	p1.scrollingRef = roactModule.createRef()
+	p1.state = { expandIndex = false }
 end
 
-function networkChart.willUpdate(p2)
-	if p2.canvasPosConnector then
-		p2.canvasPosConnector:Disconnect()
+function networkChart.willUpdate(p1)
+	if p1.canvasPosConnector then
+		p1.canvasPosConnector:Disconnect()
 	end
 end
 
-function networkChart.didUpdate(p3)
-	if p3.scrollingRef.current then
-		p3.canvasPosConnector = p3.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p3.onCanvasPosChanged)
-		local absoluteSize = p3.scrollingRef.current.AbsoluteSize
+function networkChart.didUpdate(p1)
+	if p1.scrollingRef.current then
+		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
+		local absoluteSize = p1.scrollingRef.current.AbsoluteSize
 		
-		if p3.state.absScrollSize ~= absoluteSize then
-			p3:setState({ absScrollSize = absoluteSize })
+		if p1.state.absScrollSize ~= absoluteSize then
+			p1:setState({ absScrollSize = absoluteSize })
 		end
 	end
 end
 
-function networkChart.didMount(p4)
-	if p4.scrollingRef.current then
-		p4.canvasPosConnector = p4.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p4.onCanvasPosChanged)
-		p4:setState({
-			absScrollSize = p4.scrollingRef.current.AbsoluteSize,
-			canvasPos = p4.scrollingRef.current.CanvasPosition
+function networkChart.didMount(p1)
+	if p1.scrollingRef.current then
+		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
+		p1:setState({
+			absScrollSize = p1.scrollingRef.current.AbsoluteSize,
+			canvasPos = p1.scrollingRef.current.CanvasPosition
 		})
 	end
 end
 
-function networkChart.render(p5)
+function networkChart.render(p1)
 	-- upvalues: chartHeaderNames (ref), roactModule (ref), headerButtonModule (ref), t_1 (ref), t (ref), t_3 (ref), lineWidth (ref), headerFrameHeight (ref), lineColor (ref), entryFrameHeight (ref), responseStrHeight (ref), responseWidthRatio (ref), textService (ref), mainWindow (ref), mainWindow_1 (ref), networkChartEntryModule (ref), t_2 (ref), constantsModule (ref)
-	local httpEntryList = p5.props.httpEntryList or {}
-	local chartHeight = p5.props.chartHeight
-	local width = p5.props.width
-	local searchTerm = p5.props.searchTerm
-	local layoutOrder = p5.props.layoutOrder
-	local reverseSort = p5.props.reverseSort
-	local onSortChanged = p5.props.onSortChanged
-	local expandIndex = p5.state.expandIndex
-	local absScrollSize = p5.state.absScrollSize
-	local canvasPos = p5.state.canvasPos
+	local httpEntryList = p1.props.httpEntryList or {}
+	local chartHeight = p1.props.chartHeight
+	local width = p1.props.width
+	local searchTerm = p1.props.searchTerm
+	local layoutOrder = p1.props.layoutOrder
+	local reverseSort = p1.props.reverseSort
+	local onSortChanged = p1.props.onSortChanged
+	local expandIndex = p1.state.expandIndex
+	local absScrollSize = p1.state.absScrollSize
+	local canvasPos = p1.state.canvasPos
 	local t_4 = {}
 	
 	for i, v in ipairs(chartHeaderNames) do
@@ -132,60 +132,60 @@ function networkChart.render(p5)
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
-	local var15 = 0
-	local var16 = -1
-	local var17 = 0
+	local var3 = 0
+	local var4 = -1
+	local var5 = 0
 	local httpEntryListCount = #httpEntryList
-	local var19 = 0
+	local var6 = 0
 	
 	if canvasPos and absScrollSize then
 		for i_2, v_1 in ipairs(httpEntryList) do
 			if v_1.RequestType ~= "Default" and (if searchTerm ~= "" then if string.find(v_1.RequestType:lower(), searchTerm:lower()) == nil then string.find(v_1.Url:lower(), searchTerm:lower()) ~= nil else true else true) then
-				var19 += 1
-				local var20 = expandIndex == v_1.Num
-				local var21 = entryFrameHeight
-				local var22 = 0
+				var6 += 1
+				local var7 = expandIndex == v_1.Num
+				local var8 = entryFrameHeight
+				local var9 = 0
 				
-				if var20 then
-					var21 += responseStrHeight
+				if var7 then
+					var8 += responseStrHeight
 					
-					if p5.ref.current then
-						var22 = responseStrHeight + textService:GetTextSize(v_1.Response, mainWindow, mainWindow_1, Vector2.new(p5.ref.current.AbsoluteSize.X * responseWidthRatio, 100000000)).Y
-						var21 += var22
+					if p1.ref.current then
+						var9 = responseStrHeight + textService:GetTextSize(v_1.Response, mainWindow, mainWindow_1, Vector2.new(p1.ref.current.AbsoluteSize.X * responseWidthRatio, 100000000)).Y
+						var8 += var9
 					end
 				end
-				if canvasPos.Y <= var15 + var21 then
-					if var17 < absScrollSize.Y then
+				if canvasPos.Y <= var3 + var8 then
+					if var5 < absScrollSize.Y then
 						t_5[i_2] = roactModule.createElement(networkChartEntryModule, {
-							size = UDim2.new(1, 0, 0, var21),
+							size = UDim2.new(1, 0, 0, var8),
 							entry = v_1,
 							entryCellSize = t_2,
 							cellOffset = t,
 							verticalOffsets = t_3,
-							showResponse = var20,
-							responseBodyHeight = var22,
+							showResponse = var7,
+							responseBodyHeight = var9,
 							layoutOrder = (if reverseSort then httpEntryListCount - i_2 else i_2) + 1,
-							onButtonPress = p5.getOnExpandEntry(v_1.Num)
+							onButtonPress = p1.getOnExpandEntry(v_1.Num)
 						})
 					end
-					if var16 < 0 then
-						var16 = var15
+					if var4 < 0 then
+						var4 = var3
 					else
-						var17 += var21
+						var5 += var8
 					end
 				end
-				var15 += var21
+				var3 += var8
 			end
 		end
-		if var19 > 0 then
+		if var6 > 0 then
 			t_5.WindowingPadding = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var16)
+				Size = UDim2.new(1, 0, 0, var4)
 			})
 		end
 	end
-	if httpEntryListCount == 0 or var19 == 0 then
+	if httpEntryListCount == 0 or var6 == 0 then
 		t_5["NONE FOUND"] = roactModule.createElement("TextLabel", {
 			Text = "No Network Entries Found",
 			BackgroundTransparency = 1,
@@ -198,7 +198,7 @@ function networkChart.render(p5)
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
 		LayoutOrder = layoutOrder,
-		[roactModule.Ref] = p5.ref
+		[roactModule.Ref] = p1.ref
 	}, {
 		Layout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -220,11 +220,11 @@ function networkChart.render(p5)
 		}),
 		scrollingFrameEntries = roactModule.createElement("ScrollingFrame", {
 			Size = UDim2.new(1, 0, 1, -headerFrameHeight),
-			CanvasSize = UDim2.new(0, width, 0, var15),
+			CanvasSize = UDim2.new(0, width, 0, var3),
 			ScrollBarThickness = 6,
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
-			[roactModule.Ref] = p5.scrollingRef
+			[roactModule.Ref] = p1.scrollingRef
 		}, t_5)
 	})
 end

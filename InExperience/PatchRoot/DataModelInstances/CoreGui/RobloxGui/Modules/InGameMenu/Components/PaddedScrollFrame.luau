@@ -6,7 +6,7 @@ local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packag
 local parent = script.Parent.Parent
 local assetsModule = require(parent.Resources.Assets)
 local globalConfigModule = require(parent.GlobalConfig)
-local var4 = t.strictInterface({
+local var1 = t.strictInterface({
 	Size = t.optional(t.UDim2),
 	AnchorPoint = t.optional(t.UDim2),
 	CanvasSize = t.optional(t.UDim2),
@@ -14,22 +14,22 @@ local var4 = t.strictInterface({
 	[roact.Children] = t.optional(t.table)
 })
 
-return function(p0)
-	-- upvalues: globalConfigModule (ref), var4 (ref), withFoundationOrUIBloxStyle (ref), roact (ref), assetsModule (ref)
+return function(p1)
+	-- upvalues: globalConfigModule (ref), var1 (ref), withFoundationOrUIBloxStyle (ref), roact (ref), assetsModule (ref)
 	if globalConfigModule.propValidation then
-		assert(var4(p0))
+		assert(var1(p1))
 	end
-	return withFoundationOrUIBloxStyle(function(p1)
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				UIEmphasis = {
-					Color = p1.Color.Shift.Shift_400.Color3,
-					Transparency = p1.Color.Shift.Shift_400.Transparency
+					Color = p2.Color.Shift.Shift_400.Color3,
+					Transparency = p2.Color.Shift.Shift_400.Transparency
 				}
 			}
 		}
 	end, function(p2)
-		-- upvalues: roact (copy), assetsModule (copy), p0 (ref)
+		-- upvalues: roact (copy), assetsModule (copy), p1 (ref)
 		return roact.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -40,10 +40,10 @@ return function(p0)
 			BottomImage = assetsModule.Images.ScrollBottom,
 			MidImage = assetsModule.Images.ScrollMid,
 			TopImage = assetsModule.Images.ScrollTop,
-			Size = p0.Size,
-			AnchorPoint = p0.AnchorPoint,
-			CanvasSize = p0.CanvasSize,
-			Position = p0.Position
-		}, p0[roact.Children])
+			Size = p1.Size,
+			AnchorPoint = p1.AnchorPoint,
+			CanvasSize = p1.CanvasSize,
+			Position = p1.Position
+		}, p1[roact.Children])
 	end)
 end

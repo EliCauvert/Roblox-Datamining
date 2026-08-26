@@ -5,29 +5,29 @@ local fFlagEnableLuaAccountSwitch = require(parent.SharedFlags).FFlagEnableLuaAc
 local t = {}
 local t_1 = {}
 t[t_1] = true
-local var4 = tModule.interface({
+local var1 = tModule.interface({
 	user = tModule.interface({ id = tModule.number, name = tModule.string }),
 	twoStepVerificationData = tModule.optional(tModule.interface({ mediaType = tModule.string, ticket = tModule.string })),
 	twoStepVerificationDataV2 = tModule.optional(tModule.interface({ mediaType = tModule.string, ticket = tModule.string })),
 	accountBlob = tModule.optional(tModule.string)
 })
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: fFlagEnableLuaAccountSwitch (ref), t (ref)
 	local t_1 = { user = { id = "0", name = "" } }
 	
-	if p0 and type(p0) == "table" then
-		if p0.user then
-			t_1.user.id = tostring(p0.user.id) or t_1.user.id
-			t_1.user.name = p0.user.name or t_1.user.name
+	if p1 and type(p1) == "table" then
+		if p1.user then
+			t_1.user.id = tostring(p1.user.id) or t_1.user.id
+			t_1.user.name = p1.user.name or t_1.user.name
 		end
-		if p0.twoStepVerificationData then
+		if p1.twoStepVerificationData then
 			t_1.twoStepVerificationData = {}
-			t_1.twoStepVerificationData.mediaType = p0.twoStepVerificationData.mediaType or ""
-			t_1.twoStepVerificationData.ticket = p0.twoStepVerificationData.ticket or ""
+			t_1.twoStepVerificationData.mediaType = p1.twoStepVerificationData.mediaType or ""
+			t_1.twoStepVerificationData.ticket = p1.twoStepVerificationData.ticket or ""
 		end
-		if fFlagEnableLuaAccountSwitch and p0.accountBlob then
-			t_1.accountBlob = p0.accountBlob
+		if fFlagEnableLuaAccountSwitch and p1.accountBlob then
+			t_1.accountBlob = p1.accountBlob
 		end
 	end
 	setmetatable(t_1, t)
@@ -37,39 +37,39 @@ end
 
 function t.mock()
 	-- upvalues: t (ref)
-	local var6 = t.new()
-	var6.user = { id = "1", name = "ROBLOX" }
-	var6.twoStepVerificationData = {
+	local var2 = t.new()
+	var2.user = { id = "1", name = "ROBLOX" }
+	var2.twoStepVerificationData = {
 		mediaType = "Email",
 		ticket = "00000000-0000-0000-0000-000000000000"
 	}
 	
-	return var6
+	return var2
 end
 
 function t:fromJsonData()
-	-- upvalues: t (ref), var4 (ref), fFlagEnableLuaAccountSwitch (ref), argCheckModule (ref)
-	local var7 = t.new()
-	local var8, var9 = var4(self)
+	-- upvalues: t (ref), var1 (ref), fFlagEnableLuaAccountSwitch (ref), argCheckModule (ref)
+	local var2 = t.new()
+	local var3, var4 = var1(self)
 	
-	if var8 then
-		var7.user = { id = tostring(self.user.id), name = self.user.name }
+	if var3 then
+		var2.user = { id = tostring(self.user.id), name = self.user.name }
 		
 		if self.twoStepVerificationData then
-			var7.twoStepVerificationData = {
+			var2.twoStepVerificationData = {
 				mediaType = self.twoStepVerificationData.mediaType,
 				ticket = self.twoStepVerificationData.ticket
 			}
 		end
 		if fFlagEnableLuaAccountSwitch and self.accountBlob then
-			var7.accountBlob = self.accountBlob
+			var2.accountBlob = self.accountBlob
 			
-			return var7
+			return var2
 		end
 	else
-		argCheckModule.assert(false, var9)
+		argCheckModule.assert(false, var4)
 	end
-	return var7
+	return var2
 end
 
 function t:is()

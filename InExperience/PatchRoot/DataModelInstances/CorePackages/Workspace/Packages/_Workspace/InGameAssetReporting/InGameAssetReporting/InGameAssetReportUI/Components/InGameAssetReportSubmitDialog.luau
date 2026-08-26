@@ -19,7 +19,7 @@ local fFlagDropUnroutableMultiReportOptions = require(parent.SharedFlags).FFlagD
 
 return function(value)
 	-- upvalues: fFlagPrefillPreciseSelectionChoices (ref), useLocalization (ref), getPreselectedSurfaceValueModule (ref), reactModule (ref), constantsModule (ref), fFlagDropUnroutableMultiReportOptions (ref), defaultDualDropdownDialogV2Module (ref), defaultDualDropdownDialogModule (ref), fFlagUpdateInGameAssetReportingCTAs (ref), fFlagGenericAbuseReportingGranularExports (ref), isShowUKOSAIllegalContentReportingLink (ref), view (ref), OSAReportLink (ref)
-	local var8 = if fFlagPrefillPreciseSelectionChoices then useLocalization({
+	local var1 = if fFlagPrefillPreciseSelectionChoices then useLocalization({
 		title = "Feature.ReportAbuse.Title.SelectInSceneFinishYourReport",
 		problemBullying = "Feature.ReportAbuse.Problem.Bullying",
 		problemBullyingDesc = "Feature.ReportAbuse.ProblemDescription.Bullying",
@@ -52,166 +52,166 @@ return function(value)
 	}) else nil
 	
 	if fFlagPrefillPreciseSelectionChoices then
-		local var9 = getPreselectedSurfaceValueModule(value.extractionResult)
-		local var10 = if var9 == "avatar" then var8.surfaceAvatar elseif var9 == "item" then var8.surfaceItem elseif var9 == "text" then var8.surfaceTextChat else nil
+		local var2 = getPreselectedSurfaceValueModule(value.extractionResult)
+		local var3 = if var2 == "avatar" then var1.surfaceAvatar elseif var2 == "item" then var1.surfaceItem elseif var2 == "text" then var1.surfaceTextChat else nil
 		reactModule.useEffect(function()
-			-- upvalues: var10 (ref), value (ref), constantsModule (copy)
-			if var10 then
+			-- upvalues: var3 (ref), value (ref), constantsModule (copy)
+			if var3 then
 				value.analyticsDispatch({
 					type = constantsModule.AnalyticsActions.SetPrefilledSurfaceSelection,
-					prefilled_surface_selection = var10
+					prefilled_surface_selection = var3
 				})
 			end
-		end, { var10 })
-		local var11 = reactModule.useMemo(function()
-			-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var8 (write)
+		end, { var3 })
+		local var4 = reactModule.useMemo(function()
+			-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var1 (write)
 			return if fFlagDropUnroutableMultiReportOptions then {
-				{ value = "avatar", label = var8.surfaceAvatar },
-				{ value = "drawing", label = var8.surfaceDrawing },
-				{ value = "experience", label = var8.surfaceExperience },
-				{ value = "item", label = var8.surfaceItem },
-				{ value = "text", label = var8.surfaceTextChat }
+				{ value = "avatar", label = var1.surfaceAvatar },
+				{ value = "drawing", label = var1.surfaceDrawing },
+				{ value = "experience", label = var1.surfaceExperience },
+				{ value = "item", label = var1.surfaceItem },
+				{ value = "text", label = var1.surfaceTextChat }
 			} else {
-				{ value = "avatar", label = var8.surfaceAvatar },
-				{ value = "drawing", label = var8.surfaceDrawing },
-				{ value = "experience", label = var8.surfaceExperience },
-				{ value = "item", label = var8.surfaceItem },
-				{ value = "movement", label = var8.surfaceMovement },
-				{ value = "music", label = var8.surfaceMusic },
-				{ value = "text", label = var8.surfaceTextChat },
-				{ value = "username", label = var8.surfaceUsername }
+				{ value = "avatar", label = var1.surfaceAvatar },
+				{ value = "drawing", label = var1.surfaceDrawing },
+				{ value = "experience", label = var1.surfaceExperience },
+				{ value = "item", label = var1.surfaceItem },
+				{ value = "movement", label = var1.surfaceMovement },
+				{ value = "music", label = var1.surfaceMusic },
+				{ value = "text", label = var1.surfaceTextChat },
+				{ value = "username", label = var1.surfaceUsername }
 			}
 		end, {
-			var8.surfaceAvatar, var8.surfaceDrawing, var8.surfaceExperience,
-			var8.surfaceItem, var8.surfaceMovement, var8.surfaceMusic,
-			var8.surfaceTextChat, var8.surfaceUsername
+			var1.surfaceAvatar, var1.surfaceDrawing, var1.surfaceExperience,
+			var1.surfaceItem, var1.surfaceMovement, var1.surfaceMusic,
+			var1.surfaceTextChat, var1.surfaceUsername
 		})
 		
 		return reactModule.createElement(defaultDualDropdownDialogV2Module, {
-			title = var8.title,
+			title = var1.title,
 			problems = reactModule.useMemo(function()
-				-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var8 (write)
+				-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var1 (write)
 				return if fFlagDropUnroutableMultiReportOptions then {
 					{
 						value = "bullying",
-						label = var8.problemBullying,
-						description = var8.problemBullyingDesc
+						label = var1.problemBullying,
+						description = var1.problemBullyingDesc
 					},
 					{
 						value = "dating",
-						label = var8.problemDating,
-						description = var8.problemDatingDesc
+						label = var1.problemDating,
+						description = var1.problemDatingDesc
 					},
 					{
 						value = "hate",
-						label = var8.problemHate,
-						description = var8.problemHateDesc
+						label = var1.problemHate,
+						description = var1.problemHateDesc
 					},
 					{
 						value = "offsite links",
-						label = var8.problemLinks,
-						description = var8.problemLinksDesc
+						label = var1.problemLinks,
+						description = var1.problemLinksDesc
 					},
 					{
 						value = "personal question",
-						label = var8.problemPersonal,
-						description = var8.problemPersonalDesc
+						label = var1.problemPersonal,
+						description = var1.problemPersonalDesc
 					},
 					{
 						value = "swearing",
-						label = var8.problemSwearing,
-						description = var8.problemSwearingDesc
+						label = var1.problemSwearing,
+						description = var1.problemSwearingDesc
 					},
 					{
 						value = "violence",
-						label = var8.problemViolence,
-						description = var8.problemViolenceDesc
+						label = var1.problemViolence,
+						description = var1.problemViolenceDesc
 					},
 					{
 						value = "ip infringement",
-						label = var8.problemIPInfringement,
-						description = var8.problemIPInfringementDesc
+						label = var1.problemIPInfringement,
+						description = var1.problemIPInfringementDesc
 					}
 				} else {
 					{
 						value = "bullying",
-						label = var8.problemBullying,
-						description = var8.problemBullyingDesc
+						label = var1.problemBullying,
+						description = var1.problemBullyingDesc
 					},
 					{
 						value = "exploiting",
-						label = var8.problemCheating,
-						description = var8.problemCheatingDesc
+						label = var1.problemCheating,
+						description = var1.problemCheatingDesc
 					},
 					{
 						value = "dating",
-						label = var8.problemDating,
-						description = var8.problemDatingDesc
+						label = var1.problemDating,
+						description = var1.problemDatingDesc
 					},
 					{
 						value = "hate",
-						label = var8.problemHate,
-						description = var8.problemHateDesc
+						label = var1.problemHate,
+						description = var1.problemHateDesc
 					},
 					{
 						value = "offsite links",
-						label = var8.problemLinks,
-						description = var8.problemLinksDesc
+						label = var1.problemLinks,
+						description = var1.problemLinksDesc
 					},
 					{
 						value = "personal question",
-						label = var8.problemPersonal,
-						description = var8.problemPersonalDesc
+						label = var1.problemPersonal,
+						description = var1.problemPersonalDesc
 					},
 					{
 						value = "scamming",
-						label = var8.problemScamming,
-						description = var8.problemScammingDesc
+						label = var1.problemScamming,
+						description = var1.problemScammingDesc
 					},
 					{
 						value = "swearing",
-						label = var8.problemSwearing,
-						description = var8.problemSwearingDesc
+						label = var1.problemSwearing,
+						description = var1.problemSwearingDesc
 					},
 					{
 						value = "violence",
-						label = var8.problemViolence,
-						description = var8.problemViolenceDesc
+						label = var1.problemViolence,
+						description = var1.problemViolenceDesc
 					},
 					{
 						value = "ip infringement",
-						label = var8.problemIPInfringement,
-						description = var8.problemIPInfringementDesc
+						label = var1.problemIPInfringement,
+						description = var1.problemIPInfringementDesc
 					}
 				}
 			end, {
-				var8.problemBullying, var8.problemBullyingDesc, var8.problemCheating,
-				var8.problemCheatingDesc, var8.problemDating, var8.problemDatingDesc,
-				var8.problemHate, var8.problemHateDesc, var8.problemLinks,
-				var8.problemLinksDesc, var8.problemPersonal, var8.problemPersonalDesc,
-				var8.problemScamming, var8.problemScammingDesc, var8.problemSwearing,
-				var8.problemSwearingDesc, var8.problemViolence, var8.problemViolenceDesc,
-				var8.problemIPInfringement, var8.problemIPInfringementDesc
+				var1.problemBullying, var1.problemBullyingDesc, var1.problemCheating,
+				var1.problemCheatingDesc, var1.problemDating, var1.problemDatingDesc,
+				var1.problemHate, var1.problemHateDesc, var1.problemLinks,
+				var1.problemLinksDesc, var1.problemPersonal, var1.problemPersonalDesc,
+				var1.problemScamming, var1.problemScammingDesc, var1.problemSwearing,
+				var1.problemSwearingDesc, var1.problemViolence, var1.problemViolenceDesc,
+				var1.problemIPInfringement, var1.problemIPInfringementDesc
 			}),
-			surfaces = var11,
+			surfaces = var4,
 			preselected = reactModule.useMemo(function()
-				-- upvalues: var9 (ref), var11 (ref)
-				local var12 = nil
+				-- upvalues: var2 (ref), var4 (ref)
+				local var5 = nil
 				
-				if var9 ~= nil and var11 ~= nil then
-					local var13
-					for i = 1, #var11 do
-						var13 = var11[i]
+				if var2 ~= nil and var4 ~= nil then
+					local var6
+					for i = 1, #var4 do
+						var6 = var4[i]
 						
-						if not var13 or var13.value ~= var9 then
+						if not var6 or var6.value ~= var2 then
 							continue
 						end
-						var12 = var13
+						var5 = var6
 						break
 					end
 				end
-				return { surface = var12 }
-			end, { var9, var11 }),
+				return { surface = var5 }
+			end, { var2, var4 }),
 			onClose = value.onBack,
 			onSubmit = value.onSubmit
 		})
@@ -231,9 +231,9 @@ return function(value)
 			},
 			onSubmitProps = {
 				hasNextSteps = true,
-				onProceedToNextStep = if fFlagGenericAbuseReportingGranularExports then function(p0, p1, p2)
+				onProceedToNextStep = if fFlagGenericAbuseReportingGranularExports then function(p1, p2, p3)
 					-- upvalues: value (ref)
-					value.onSubmit(p0, p1, p2)
+					value.onSubmit(p1, p2, p3)
 					
 					return true
 				end else value.onSubmit

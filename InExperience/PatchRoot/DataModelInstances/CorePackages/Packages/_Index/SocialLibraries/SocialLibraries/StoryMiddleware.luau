@@ -7,10 +7,10 @@ local t = {
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: roact (ref), appStyleProvider (ref), t (ref)
-	return function(p1)
-		-- upvalues: roact (copy), appStyleProvider (copy), t (copy), p0 (ref)
-		return roact.createElement(appStyleProvider, { style = if p1 then t[p1.theme] else t.Default }, { Child = roact.createElement(p0, p1) })
+	return function(p2)
+		-- upvalues: roact (copy), appStyleProvider (copy), t (copy), p1 (ref)
+		return roact.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = roact.createElement(p1, p2) })
 	end
 end

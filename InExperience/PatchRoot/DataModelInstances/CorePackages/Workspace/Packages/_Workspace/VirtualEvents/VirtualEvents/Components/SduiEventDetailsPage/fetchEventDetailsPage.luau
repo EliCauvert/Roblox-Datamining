@@ -6,14 +6,14 @@ local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local getEventDetailsUrlModule = require(script.Parent.getEventDetailsUrl)
 local getEventDetailsPageKeyModule = require(script.Parent.getEventDetailsPageKey)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getEventDetailsUrlModule (ref), parent (ref), getSduiApiStore (ref), sduiResponseType (ref), appPage (ref), getEventDetailsPageKeyModule (ref)
 	getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.Protobuf,
-		url = getEventDetailsUrlModule(p0),
+		url = getEventDetailsUrlModule(p1),
 		surfaceKey = appPage.EventDetails,
-		configKey = getEventDetailsPageKeyModule(p0),
-		loadTimer = p1,
+		configKey = getEventDetailsPageKeyModule(p1),
+		loadTimer = p2,
 		apiProto = require(parent.ServiceContractsProto).apppageplatform.experienceevents.experience_event_details_page.ExperienceEventDetailsPageResponse
 	})
 end

@@ -5,14 +5,14 @@ local lineWidth = constantsModule.GeneralFormatting.LineWidth
 local textPadding = constantsModule.Graph.TextPadding
 local innerPaddingY = constantsModule.Graph.InnerPaddingY
 
-return function(p0)
+return function(p1)
 	-- upvalues: roactModule (ref), lineWidth (ref), hoverGreen (ref), textPadding (ref), innerPaddingY (ref)
-	local hoverLineX = p0.hoverLineX
-	local hoverLineY = p0.hoverLineY
-	local hoverValX = p0.hoverValX
-	local hoverValY = p0.hoverValY
-	local stringFormatX = p0.stringFormatX
-	local stringFormatY = p0.stringFormatY
+	local hoverLineX = p1.hoverLineX
+	local hoverLineY = p1.hoverLineY
+	local hoverValX = p1.hoverValX
+	local hoverValY = p1.hoverValY
+	local stringFormatX = p1.stringFormatX
+	local stringFormatY = p1.stringFormatY
 	
 	return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		hoverLine = roactModule.createElement("Frame", {

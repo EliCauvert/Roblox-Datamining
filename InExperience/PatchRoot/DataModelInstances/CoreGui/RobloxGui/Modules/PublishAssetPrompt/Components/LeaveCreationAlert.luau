@@ -5,7 +5,7 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local reactModule = require(corePackagesService.Packages.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref)
 	return reactModule.createElement(interactiveAlert, {
 		title = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.LeaveCreationTitle"),
@@ -15,7 +15,7 @@ return function(p0)
 				{
 					isDefaultChild = false,
 					props = {
-						onActivated = p0.closePrompt,
+						onActivated = p1.closePrompt,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.PublishCommon.Leave")
 					}
 				},
@@ -23,13 +23,13 @@ return function(p0)
 					isDefaultChild = true,
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = p0.cancelClosePrompt,
+						onActivated = p1.cancelClosePrompt,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.PublishCommon.Stay")
 					}
 				}
 			}
 		},
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = p0.screenSize
+		screenSize = p1.screenSize
 	})
 end

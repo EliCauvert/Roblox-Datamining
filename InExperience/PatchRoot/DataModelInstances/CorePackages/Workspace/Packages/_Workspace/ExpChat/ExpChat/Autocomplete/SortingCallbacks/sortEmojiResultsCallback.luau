@@ -2,10 +2,10 @@
 local list = require(parent.llama).List
 local emojiListModule = require(parent.EmojiList)
 
-return function(p0)
+return function(p1)
 	-- upvalues: list (ref), emojiListModule (ref)
-	return list.sort(p0, function(p1, p2)
+	return list.sort(p1, function(p2, p3)
 		-- upvalues: emojiListModule (copy)
-		return if emojiListModule[p1].popularity == emojiListModule[p2].popularity then p1 < p2 else emojiListModule[p1].popularity < emojiListModule[p2].popularity
+		return if emojiListModule[p2].popularity == emojiListModule[p3].popularity then p2 < p3 else emojiListModule[p2].popularity < emojiListModule[p3].popularity
 	end)
 end

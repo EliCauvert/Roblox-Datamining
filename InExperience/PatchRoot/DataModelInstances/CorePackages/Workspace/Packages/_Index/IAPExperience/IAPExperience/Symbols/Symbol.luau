@@ -1,14 +1,14 @@
 ﻿return {
-	named = function(p0)
-		assert(type(p0) == "string", "Symbols must be created using a string name!")
-		local var0 = newproxy(true)
-		local var1 = ("Symbol(%s)"):format(p0)
+	named = function(p1)
+		assert(type(p1) == "string", "Symbols must be created using a string name!")
+		local var1 = newproxy(true)
+		local var2 = ("Symbol(%s)"):format(p1)
 		
-		getmetatable(var0).__tostring = function()
-			-- upvalues: var1 (ref)
-			return var1
+		getmetatable(var1).__tostring = function()
+			-- upvalues: var2 (ref)
+			return var2
 		end
 		
-		return var0
+		return var1
 	end
 }

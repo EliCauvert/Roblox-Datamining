@@ -1,8 +1,8 @@
-﻿return function(p0, p1)
+﻿return function(p1, p2)
 	local t = {}
 	
-	for i = 1, #p0 do
-		t[i] = p1(p0[i], i)
+	for i = 1, #p1 do
+		t[i] = p2(p1[i], i)
 	end
 	return t
 end

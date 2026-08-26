@@ -15,23 +15,23 @@ local setShowGCModule = require(script.Parent.Parent.Components.ScriptProfiler.A
 local setSearchDataModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetSearchData)
 local _ = require(script.Parent.Parent.Components.ScriptProfiler.ProfilerDataFormatV2)
 
-local function _(p0, p1)
-	return if p0 then p1.client else p1.server
+local function _(p1, p2)
+	return if p1 then p2.client else p2.server
 end
 
-local function Update(p2, p3, p4)
+local function Update(p1, p2, p3)
 	-- upvalues: immutableModule (ref)
-	local var16 = immutableModule.JoinDictionaries(if p2 then p3.client else p3.server, p4)
+	local var1 = immutableModule.JoinDictionaries(if p1 then p2.client else p2.server, p3)
 	
-	return immutableModule.JoinDictionaries(p3, {
-		client = if p2 then var16 else nil,
-		server = if p2 then nil else var16
+	return immutableModule.JoinDictionaries(p2, {
+		client = if p1 then var1 else nil,
+		server = if p1 then nil else var1
 	})
 end
 
-return function(p5, p6)
+return function(p1, p2)
 	-- upvalues: setScriptProfilerStateModule (ref), immutableModule (ref), setIsProfilingModule (ref), Update (ref), setAverageModule (ref), setFrequencyModule (ref), setDataViewModule (ref), setLiveUpdateModule (ref), setShowPluginsModule (ref), setShowGCModule (ref), setSearchDataModule (ref), setTimerStateModule (ref), setDataModule (ref), setThreadsModule (ref), clearStateForNewProfilingSessionModule (ref), setScriptProfilerRootModule (ref)
-	p5 = p5 or {
+	p1 = p1 or {
 		isClientView = true,
 		usePercentages = false,
 		isExporting = false,
@@ -92,105 +92,105 @@ return function(p5, p6)
 		}
 	}
 	
-	if p6.type == setScriptProfilerStateModule.name then
-		return immutableModule.JoinDictionaries(p5, {
-			isClientView = p6.isClientView,
-			usePercentages = p6.usePercentages,
-			isExporting = p6.isExporting,
-			isShowingMobileSettings = p6.isShowingMobileSettings,
-			client = p6.clientSessionState,
-			server = p6.serverSessionState
+	if p2.type == setScriptProfilerStateModule.name then
+		return immutableModule.JoinDictionaries(p1, {
+			isClientView = p2.isClientView,
+			usePercentages = p2.usePercentages,
+			isExporting = p2.isExporting,
+			isShowingMobileSettings = p2.isShowingMobileSettings,
+			client = p2.clientSessionState,
+			server = p2.serverSessionState
 		})
-	elseif p6.type == setIsProfilingModule.name then
-		return Update(p6.isClient, p5, { isProfiling = p6.isProfiling })
-	elseif p6.type == setAverageModule.name then
-		return Update(p6.isClient, p5, { average = p6.average })
-	elseif p6.type == setFrequencyModule.name then
-		return Update(p6.isClient, p5, { frequency = p6.frequency })
-	elseif p6.type == setDataViewModule.name then
-		return Update(p6.isClient, p5, { isFunctionsView = p6.isFunctionsView })
-	elseif p6.type == setLiveUpdateModule.name then
-		return Update(p6.isClient, p5, { liveUpdate = p6.liveUpdate })
-	elseif p6.type == setShowPluginsModule.name then
-		return Update(p6.isClient, p5, { showPlugins = p6.showPlugins })
-	elseif p6.type == setShowGCModule.name then
-		return Update(p6.isClient, p5, { showGC = p6.showGC })
-	elseif p6.type == setSearchDataModule.name then
-		return Update(p6.isClient, p5, {
-			searchTerm = p6.state.searchTerm,
-			searchFilterFlat = p6.state.searchFilterFlat,
-			searchFilterGraph = p6.state.searchFilterGraph
+	elseif p2.type == setIsProfilingModule.name then
+		return Update(p2.isClient, p1, { isProfiling = p2.isProfiling })
+	elseif p2.type == setAverageModule.name then
+		return Update(p2.isClient, p1, { average = p2.average })
+	elseif p2.type == setFrequencyModule.name then
+		return Update(p2.isClient, p1, { frequency = p2.frequency })
+	elseif p2.type == setDataViewModule.name then
+		return Update(p2.isClient, p1, { isFunctionsView = p2.isFunctionsView })
+	elseif p2.type == setLiveUpdateModule.name then
+		return Update(p2.isClient, p1, { liveUpdate = p2.liveUpdate })
+	elseif p2.type == setShowPluginsModule.name then
+		return Update(p2.isClient, p1, { showPlugins = p2.showPlugins })
+	elseif p2.type == setShowGCModule.name then
+		return Update(p2.isClient, p1, { showGC = p2.showGC })
+	elseif p2.type == setSearchDataModule.name then
+		return Update(p2.isClient, p1, {
+			searchTerm = p2.state.searchTerm,
+			searchFilterFlat = p2.state.searchFilterFlat,
+			searchFilterGraph = p2.state.searchFilterGraph
 		})
-	elseif p6.type == setTimerStateModule.name then
-		return Update(p6.isClient, p5, {
-			timedProfilingDuration = p6.state.timedProfilingDuration,
-			timedProfilingCountdown = p6.state.timedProfilingCountdown
+	elseif p2.type == setTimerStateModule.name then
+		return Update(p2.isClient, p1, {
+			timedProfilingDuration = p2.state.timedProfilingDuration,
+			timedProfilingCountdown = p2.state.timedProfilingCountdown
 		})
-	elseif p6.type == setDataModule.name then
-		local cloned = table.clone(if p6.isClient then p5.client else p5.server)
-		cloned.data = p6.state.data
-		cloned.serializedData = p6.state.serializedData
-		cloned.pluginOffsets = p6.state.pluginOffsets or {}
-		cloned.pluginGCOffsets = p6.state.pluginGCOffsets or {}
-		cloned.gcFunctionOffsets = p6.state.gcFunctionOffsets or {}
-		cloned.gcNodeOffsets = p6.state.gcNodeOffsets or {}
-		cloned.expandedNodes = p6.state.expandedNodes or {}
-		local cloned_1 = table.clone(p5)
+	elseif p2.type == setDataModule.name then
+		local cloned = table.clone(if p2.isClient then p1.client else p1.server)
+		cloned.data = p2.state.data
+		cloned.serializedData = p2.state.serializedData
+		cloned.pluginOffsets = p2.state.pluginOffsets or {}
+		cloned.pluginGCOffsets = p2.state.pluginGCOffsets or {}
+		cloned.gcFunctionOffsets = p2.state.gcFunctionOffsets or {}
+		cloned.gcNodeOffsets = p2.state.gcNodeOffsets or {}
+		cloned.expandedNodes = p2.state.expandedNodes or {}
+		local cloned_1 = table.clone(p1)
 		
-		if p6.isClient then
+		if p2.isClient then
 			cloned_1.client = cloned
 		else
 			cloned_1.server = cloned
 		end
-		return immutableModule.JoinDictionaries(p5, cloned_1)
-	elseif p6.type == setThreadsModule.name then
-		local cloned = table.clone(if p6.isClient then p5.client else p5.server)
-		cloned.timedProfilingThread = p6.state.timedProfilingThread
-		cloned.timedProfilingTimerThread = p6.state.timedProfilingTimerThread
-		cloned.liveUpdateThread = p6.state.liveUpdateThread
-		local cloned_1 = table.clone(p5)
+		return immutableModule.JoinDictionaries(p1, cloned_1)
+	elseif p2.type == setThreadsModule.name then
+		local cloned = table.clone(if p2.isClient then p1.client else p1.server)
+		cloned.timedProfilingThread = p2.state.timedProfilingThread
+		cloned.timedProfilingTimerThread = p2.state.timedProfilingTimerThread
+		cloned.liveUpdateThread = p2.state.liveUpdateThread
+		local cloned_1 = table.clone(p1)
 		
-		if p6.isClient then
+		if p2.isClient then
 			cloned_1.client = cloned
 		else
 			cloned_1.server = cloned
 		end
-		return immutableModule.JoinDictionaries(p5, cloned_1)
-	elseif p6.type == clearStateForNewProfilingSessionModule.name then
-		local cloned = table.clone(if p6.isClient then p5.client else p5.server)
+		return immutableModule.JoinDictionaries(p1, cloned_1)
+	elseif p2.type == clearStateForNewProfilingSessionModule.name then
+		local cloned = table.clone(if p2.isClient then p1.client else p1.server)
 		cloned.rootNode = 0
 		cloned.rootFunc = 0
 		cloned.rootNodeName = nil
 		cloned.searchFilterFlat = {}
 		cloned.searchFilterGraph = {}
 		cloned.expandedNodes = {}
-		local cloned_1 = table.clone(p5)
+		local cloned_1 = table.clone(p1)
 		
-		if p6.isClient then
+		if p2.isClient then
 			cloned_1.client = cloned
 		else
 			cloned_1.server = cloned
 		end
-		return immutableModule.JoinDictionaries(p5, cloned_1)
-	elseif p6.type ~= setScriptProfilerRootModule.name then
-		return p5
+		return immutableModule.JoinDictionaries(p1, cloned_1)
+	elseif p2.type ~= setScriptProfilerRootModule.name then
+		return p1
 	end
 	local t = {}
-	local cloned = table.clone(if p5.isClientView then p5.client else p5.server)
+	local cloned = table.clone(if p1.isClientView then p1.client else p1.server)
 	
-	if cloned.rootNode == p6.rootNode then
+	if cloned.rootNode == p2.rootNode then
 		cloned.rootNode = 0
 		cloned.rootFunc = 0
 		cloned.rootNodeName = nil
 	else
-		cloned.rootNode = p6.rootNode
-		cloned.rootFunc = p6.rootFunc
-		cloned.rootNodeName = p6.rootNodeName
+		cloned.rootNode = p2.rootNode
+		cloned.rootFunc = p2.rootFunc
+		cloned.rootNodeName = p2.rootNodeName
 	end
-	if p5.isClientView then
+	if p1.isClientView then
 		t.client = cloned
 	else
 		t.server = cloned
 	end
-	return immutableModule.JoinDictionaries(p5, t)
+	return immutableModule.JoinDictionaries(p1, t)
 end

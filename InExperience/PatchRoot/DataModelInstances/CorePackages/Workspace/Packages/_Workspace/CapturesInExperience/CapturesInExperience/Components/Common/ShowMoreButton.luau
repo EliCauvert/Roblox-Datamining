@@ -6,18 +6,18 @@ local eventNamesModule = require(parent.Analytics.EventNames)
 local menuButtonModule = require(parent.Components.Common.MenuButton)
 local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAnalyticsModule (ref), useLocalization (ref), reactModule (ref), eventNamesModule (ref), menuButtonModule (ref)
-	local var4 = useAnalyticsModule()
+	local var1 = useAnalyticsModule()
 	
 	return reactModule.createElement(menuButtonModule, {
-		buttonHeight = p0.buttonHeight,
-		LayoutOrder = p0.LayoutOrder,
+		buttonHeight = p1.buttonHeight,
+		LayoutOrder = p1.LayoutOrder,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: var4 (ref), eventNamesModule (copy), p0 (ref)
-			var4.fireEvent(eventNamesModule.CapturesShowMoreInGameMenu)
-			p0.onActivated()
-		end, { p0.onActivated }),
+			-- upvalues: var1 (ref), eventNamesModule (copy), p1 (ref)
+			var1.fireEvent(eventNamesModule.CapturesShowMoreInGameMenu)
+			p1.onActivated()
+		end, { p1.onActivated }),
 		text = useLocalization({ showMore = "Feature.Avatar.Action.ShowMore" }).showMore
 	})
 end

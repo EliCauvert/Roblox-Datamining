@@ -25,28 +25,28 @@ local squadExperienceInviteType = enumsModule.SquadExperienceInviteType
 local fFlagSquadExperienceInviteRetryAfter = require(parent.SquadsCore.Flags).FFlagSquadExperienceInviteRetryAfter
 local getExperienceInviteRetryAfterStore = require(parent.SquadsCore.Stores).GetExperienceInviteRetryAfterStore
 
-local function _(p0)
-	local var10 = tonumber(if type(p0) == "table" then p0.retryAfterSeconds else nil)
+local function _(p1)
+	local var1 = tonumber(if type(p1) == "table" then p1.retryAfterSeconds else nil)
 	
-	return if var10 and var10 > 0 then var10 else nil
+	return if var1 and var1 > 0 then var1 else nil
 end
 
-local var9 = nil
+local var1 = nil
 
 return function(p1, p2, p3, p4)
-	-- upvalues: fFlagEncodeSquadMembersUpdated (ref), encodeSquadMembersModule (write), cryo (ref), httpService (ref), promiseModule (ref), appStorageService (ref), localStorageKey (ref), fFlagUseSignalsForSquadExperienceInviteStatus (ref), getSquadExperienceInviteStore (ref), roduxSquads (ref), var9 (write), fFlagEnableSquadRegroupExperimentation (ref), luckyRecommendationExperimentation (ref), squadExperienceInviteSource (ref), fFlagEnablePrivatePartyStartJoin (ref), squadExperienceInviteType (ref), networkingSquads (ref), eventNamesModule (ref), httpModule (ref), fFlagSquadExperienceInviteRetryAfter (ref), getExperienceInviteRetryAfterStore (ref), squadPromptType (ref)
+	-- upvalues: fFlagEncodeSquadMembersUpdated (ref), encodeSquadMembersModule (write), cryo (ref), httpService (ref), promiseModule (ref), appStorageService (ref), localStorageKey (ref), fFlagUseSignalsForSquadExperienceInviteStatus (ref), getSquadExperienceInviteStore (ref), roduxSquads (ref), var1 (write), fFlagEnableSquadRegroupExperimentation (ref), luckyRecommendationExperimentation (ref), squadExperienceInviteSource (ref), fFlagEnablePrivatePartyStartJoin (ref), squadExperienceInviteType (ref), networkingSquads (ref), eventNamesModule (ref), httpModule (ref), fFlagSquadExperienceInviteRetryAfter (ref), getExperienceInviteRetryAfterStore (ref), squadPromptType (ref)
 	return function(p5)
-		-- upvalues: fFlagEncodeSquadMembersUpdated (copy), encodeSquadMembersModule (copy), cryo (copy), httpService (copy), promiseModule (copy), appStorageService (copy), localStorageKey (copy), fFlagUseSignalsForSquadExperienceInviteStatus (copy), getSquadExperienceInviteStore (copy), roduxSquads (copy), var9 (copy), p1 (ref), fFlagEnableSquadRegroupExperimentation (copy), luckyRecommendationExperimentation (copy), p3 (ref), squadExperienceInviteSource (copy), fFlagEnablePrivatePartyStartJoin (copy), p4 (ref), squadExperienceInviteType (copy), networkingSquads (copy), p2 (ref), eventNamesModule (copy), httpModule (copy), fFlagSquadExperienceInviteRetryAfter (copy), getExperienceInviteRetryAfterStore (copy), squadPromptType (copy)
+		-- upvalues: fFlagEncodeSquadMembersUpdated (copy), encodeSquadMembersModule (copy), cryo (copy), httpService (copy), promiseModule (copy), appStorageService (copy), localStorageKey (copy), fFlagUseSignalsForSquadExperienceInviteStatus (copy), getSquadExperienceInviteStore (copy), roduxSquads (copy), var1 (copy), p1 (ref), fFlagEnableSquadRegroupExperimentation (copy), luckyRecommendationExperimentation (copy), p3 (ref), squadExperienceInviteSource (copy), fFlagEnablePrivatePartyStartJoin (copy), p4 (ref), squadExperienceInviteType (copy), networkingSquads (copy), p2 (ref), eventNamesModule (copy), httpModule (copy), fFlagSquadExperienceInviteRetryAfter (copy), getExperienceInviteRetryAfterStore (copy), squadPromptType (copy)
 		local state = p5:getState()
 		local currentSquad = state.Squad and (state.Squad.Squad and state.Squad.Squad.currentSquad)
 		local squadId = currentSquad and currentSquad.squadId
 		local parentChannelId = currentSquad and currentSquad.parentChannelId
-		local var15 = if currentSquad and currentSquad.members then currentSquad.members else {}
+		local var2 = if currentSquad and currentSquad.members then currentSquad.members else {}
 		
 		if not fFlagEncodeSquadMembersUpdated then
 			encodeSquadMembersModule = function(_)
-				-- upvalues: cryo (copy), var15 (ref), httpService (copy)
-				var20 = cryo.List.map(var15, function(p6)
+				-- upvalues: cryo (copy), var2 (ref), httpService (copy)
+				var20 = cryo.List.map(var2, function(p6)
 					return p6.userId
 				end)
 				local ok, status = pcall(function()
@@ -57,68 +57,68 @@ return function(p1, p2, p3, p4)
 				return if ok then status else "[]"
 			end
 		end
-		local var16 = encodeSquadMembersModule(var15)
+		local var3 = encodeSquadMembersModule(var2)
 		
 		if squadId then
 			local ok, status = pcall(function()
 				-- upvalues: appStorageService (copy), localStorageKey (copy)
 				return appStorageService:GetItem(localStorageKey.BrowserTrackerId)
 			end)
-			local var17 = if ok then status else ""
+			local var4 = if ok then status else ""
 			
-			local function updateCurrentExperienceInviteStatus(p7)
+			local function updateCurrentExperienceInviteStatus(p6)
 				-- upvalues: fFlagUseSignalsForSquadExperienceInviteStatus (copy), getSquadExperienceInviteStore (copy), p5 (ref), roduxSquads (copy)
 				if fFlagUseSignalsForSquadExperienceInviteStatus then
-					getSquadExperienceInviteStore(false).currentExperienceInviteStatusUpdated(p7)
+					getSquadExperienceInviteStore(false).currentExperienceInviteStatusUpdated(p6)
 					
 					return
 				end
-				p5:dispatch(roduxSquads.Actions.CurrentExperienceInviteStatusUpdated({ isExperienceInvitePending = p7 }))
+				p5:dispatch(roduxSquads.Actions.CurrentExperienceInviteStatusUpdated({ isExperienceInvitePending = p6 }))
 			end
 			
-			local function CreateExperienceInvite(p8)
-				-- upvalues: var9 (copy), updateCurrentExperienceInviteStatus (ref), squadId (ref), p1 (copy), var17 (ref), fFlagEnableSquadRegroupExperimentation (copy), luckyRecommendationExperimentation (copy), p3 (copy), squadExperienceInviteSource (copy), fFlagEnablePrivatePartyStartJoin (copy), p4 (copy), squadExperienceInviteType (copy), p5 (ref), networkingSquads (copy), p2 (copy), eventNamesModule (copy), parentChannelId (ref), var16 (ref), var15 (ref), httpService (copy), httpModule (copy), fFlagSquadExperienceInviteRetryAfter (copy), getExperienceInviteRetryAfterStore (copy), squadPromptType (copy)
-				if var9 then
-					task.cancel(var9)
-					var9 = nil
+			local function CreateExperienceInvite(p6)
+				-- upvalues: var1 (copy), updateCurrentExperienceInviteStatus (ref), squadId (ref), p1 (copy), var4 (ref), fFlagEnableSquadRegroupExperimentation (copy), luckyRecommendationExperimentation (copy), p3 (copy), squadExperienceInviteSource (copy), fFlagEnablePrivatePartyStartJoin (copy), p4 (copy), squadExperienceInviteType (copy), p5 (ref), networkingSquads (copy), p2 (copy), eventNamesModule (copy), parentChannelId (ref), var3 (ref), var2 (ref), httpService (copy), httpModule (copy), fFlagSquadExperienceInviteRetryAfter (copy), getExperienceInviteRetryAfterStore (copy), squadPromptType (copy)
+				if var1 then
+					task.cancel(var1)
+					var1 = nil
 				end
 				updateCurrentExperienceInviteStatus(true)
 				local t = {
 					membershipEntityId = squadId,
 					placeId = p1,
-					voteIdentifier = var17
+					voteIdentifier = var4
 				}
-				local var22 = if fFlagEnableSquadRegroupExperimentation or luckyRecommendationExperimentation.getLuckyRecommendationEnabled() then p3 or squadExperienceInviteSource.Default else nil
+				local var5 = if fFlagEnableSquadRegroupExperimentation or luckyRecommendationExperimentation.getLuckyRecommendationEnabled() then p3 or squadExperienceInviteSource.Default else nil
 				
-				if var22 then
-					t.source = var22
+				if var5 then
+					t.source = var5
 				end
 				if fFlagEnablePrivatePartyStartJoin then
 					t.inviteType = p4 or squadExperienceInviteType.PlayWithPartyInPublicServer
 				end
-				return p5:dispatch(networkingSquads.CreateExperienceInvite.API(t)):andThen(function(p10)
-					-- upvalues: p2 (copy), eventNamesModule (copy), parentChannelId (copy), p1 (copy), var16 (copy), var15 (copy), var9 (copy), updateCurrentExperienceInviteStatus (copy)
-					local experienceInviteId = p10.responseBody.experienceInviteId
+				return p5:dispatch(networkingSquads.CreateExperienceInvite.API(t)):andThen(function(p7)
+					-- upvalues: p2 (copy), eventNamesModule (copy), parentChannelId (copy), p1 (copy), var3 (copy), var2 (copy), var1 (copy), updateCurrentExperienceInviteStatus (copy)
+					local experienceInviteId = p7.responseBody.experienceInviteId
 					p2.fireSquadAnalytics(eventNamesModule.SquadExperienceInviteApiCall, {
 						isSuccess = true,
 						parentChannelId = parentChannelId,
 						experienceInviteId = experienceInviteId,
 						invitationPlaceId = tonumber(p1),
-						squadMembers = var16,
-						squadMembersCount = #var15
+						squadMembers = var3,
+						squadMembersCount = #var2
 					})
-					var9 = task.delay(2, function()
-						-- upvalues: updateCurrentExperienceInviteStatus (copy), var9 (copy)
+					var1 = task.delay(2, function()
+						-- upvalues: updateCurrentExperienceInviteStatus (copy), var1 (copy)
 						updateCurrentExperienceInviteStatus(false)
-						var9 = nil
+						var1 = nil
 					end)
 					
 					return experienceInviteId
-				end):catch(function(p9)
-					-- upvalues: updateCurrentExperienceInviteStatus (copy), httpService (copy), p2 (copy), eventNamesModule (copy), parentChannelId (copy), p1 (copy), var16 (copy), var15 (copy), httpModule (copy), fFlagSquadExperienceInviteRetryAfter (copy), getExperienceInviteRetryAfterStore (copy), squadId (copy), p5 (copy), p8 (ref), squadPromptType (copy)
-					local var23
+				end):catch(function(p7)
+					-- upvalues: updateCurrentExperienceInviteStatus (copy), httpService (copy), p2 (copy), eventNamesModule (copy), parentChannelId (copy), p1 (copy), var3 (copy), var2 (copy), httpModule (copy), fFlagSquadExperienceInviteRetryAfter (copy), getExperienceInviteRetryAfterStore (copy), squadId (copy), p5 (copy), p6 (ref), squadPromptType (copy)
+					local var6
 					updateCurrentExperienceInviteStatus(false)
-					local body = p9.Body
+					local body = p7.Body
 					local ok, status = pcall(function()
 						-- upvalues: httpService (copy), body (ref)
 						return httpService:JSONDecode(body)
@@ -127,31 +127,31 @@ return function(p1, p2, p3, p4)
 						isSuccess = false,
 						parentChannelId = parentChannelId,
 						errorMessage = if ok then status.errorType else nil,
-						errorType = if p9.StatusCode then tostring(p9.StatusCode) else nil,
+						errorType = if p7.StatusCode then tostring(p7.StatusCode) else nil,
 						invitationPlaceId = tonumber(p1),
-						squadMembers = var16,
-						squadMembersCount = #var15
+						squadMembers = var3,
+						squadMembersCount = #var2
 					})
 					
-					if p9.StatusCode ~= httpModule.StatusCodes.CONFLICT then
+					if p7.StatusCode ~= httpModule.StatusCodes.CONFLICT then
 						p2.setSquadPrompt(p5, { promptType = squadPromptType.Error })
 						
 						return
 					elseif fFlagSquadExperienceInviteRetryAfter and ok then
-						local var24 = tonumber(if type(status) == "table" then status.retryAfterSeconds else nil)
-						var23 = if var24 and var24 > 0 then var24 else nil
+						local var7 = tonumber(if type(status) == "table" then status.retryAfterSeconds else nil)
+						var6 = if var7 and var7 > 0 then var7 else nil
 					else
-						var23 = nil
+						var6 = nil
 					end
-					if var23 then
-						getExperienceInviteRetryAfterStore(false).block(squadId, var23)
+					if var6 then
+						getExperienceInviteRetryAfterStore(false).block(squadId, var6)
 						
 						return
 					end
 					p2.setSquadPrompt(p5, {
 						onConfirm = function()
-							-- upvalues: p8 (copy)
-							p8(p8)
+							-- upvalues: p6 (copy)
+							p6(p6)
 						end,
 						promptType = squadPromptType.InvitedToExperience
 					})

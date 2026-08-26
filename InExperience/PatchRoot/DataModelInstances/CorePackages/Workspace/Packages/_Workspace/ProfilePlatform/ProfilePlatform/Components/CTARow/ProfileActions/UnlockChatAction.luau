@@ -11,16 +11,16 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.UnlockChat] = if require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat) then function(p0)
+	[enumsModule.ProfileActions.UnlockChat] = if require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat) then function(p1)
 		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), startFacialAgeEstimation (ref), socialUpsellType (ref), upsellEntrySurfaceType (ref)
 		return {
 			variant = buttonVariant.Emphasis,
-			text = p0.localized[enumsModule.ProfileActions.UnlockChat],
+			text = p1.localized[enumsModule.ProfileActions.UnlockChat],
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p0 (ref), eventNamesModule (copy), startFacialAgeEstimation (copy), socialUpsellType (copy), upsellEntrySurfaceType (copy)
-					p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonUnlockChat, { buttonSurface = p0.buttonSurface })
-					p0.dispatch(startFacialAgeEstimation(socialUpsellType.FacialAgeEstimation .. upsellEntrySurfaceType.ProfileActionBar, nil, nil, upsellEntrySurfaceType.ProfileActionBar, false))
+					-- upvalues: p1 (ref), eventNamesModule (copy), startFacialAgeEstimation (copy), socialUpsellType (copy), upsellEntrySurfaceType (copy)
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonUnlockChat, { buttonSurface = p1.buttonSurface })
+					p1.dispatch(startFacialAgeEstimation(socialUpsellType.FacialAgeEstimation .. upsellEntrySurfaceType.ProfileActionBar, nil, nil, upsellEntrySurfaceType.ProfileActionBar, false))
 				end
 			}
 		}

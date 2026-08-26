@@ -37,11 +37,11 @@ local t_1 = {
 	renderUnderlyingPage = true
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t_1 (ref)
-	return function(p1)
-		-- upvalues: t_1 (copy), p0 (ref)
-		return if p1.navigation.getParam("fullBleed") then t_1 else p0
+	return function(p2)
+		-- upvalues: t_1 (copy), p1 (ref)
+		return if p2.navigation.getParam("fullBleed") then t_1 else p1
 	end
 end
 
@@ -52,9 +52,9 @@ local list = {
 	{
 		[enumsModule.Screens.EditProfilePage] = {
 			screen = editProfileLandingModule,
-			navigationOptions = if fFlagAXEnableProfileTab then function(p2)
+			navigationOptions = if fFlagAXEnableProfileTab then function(p1)
 				-- upvalues: t_1 (ref), t (ref)
-				return if p2.navigation.getParam("fullBleed") then t_1 else t
+				return if p1.navigation.getParam("fullBleed") then t_1 else t
 			end else t
 		}
 	},
@@ -124,18 +124,18 @@ if fFlagAXEnableProfileTab then
 		absorbInput = false
 	}
 	
-	local var28 = function(p3)
+	local var1 = function(p1)
 		-- upvalues: t_1 (ref), t_4 (ref)
-		return if p3.navigation.getParam("fullBleed") then t_1 else t_4
+		return if p1.navigation.getParam("fullBleed") then t_1 else t_4
 	end
 else
-	local var28 = {
+	local var1 = {
 		overlayEnabled = true,
 		overlayTransparency = 0.5,
 		absorbInput = false
 	}
 end
-t_3.navigationOptions = var28
+t_3.navigationOptions = var1
 t_2[editProfileSubScreen] = t_3
 table.insert(list, t_2)
 table.insert(list, {

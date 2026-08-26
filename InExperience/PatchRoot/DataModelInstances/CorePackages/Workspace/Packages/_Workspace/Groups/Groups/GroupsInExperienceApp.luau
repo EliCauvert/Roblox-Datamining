@@ -10,22 +10,22 @@ local coreScriptsRootProvider = require(parent_1.CoreScriptsRoactCommon).CoreScr
 local groupInExperiencePromptsModule = require(parent.Components.CoreUI.GroupInExperiencePrompts)
 local t = {}
 
-local var5 = function(p0, p1)
+local var1 = function(p1, p2)
 	-- upvalues: roactCompatModule (ref), reactModule (ref), coreScriptsRootProvider (ref), roactServices (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref)
 	return roactCompatModule.mount(reactModule.createElement(coreScriptsRootProvider, {}, {
 		RoactServicesProvider = reactModule.createElement(roactServices.ServiceProvider, {
 			services = { [roactNetworking] = requestInternalWrapper(httpService) }
-		}, p1)
-	}), p0, "GroupsInExperienceRoot")
+		}, p2)
+	}), p1, "GroupsInExperienceRoot")
 end
 
 function t.createApp()
-	-- upvalues: var5 (ref), reactModule (ref), groupInExperiencePromptsModule (ref), roactCompatModule (ref)
+	-- upvalues: var1 (ref), reactModule (ref), groupInExperiencePromptsModule (ref), roactCompatModule (ref)
 	local t = { _coreUiHandle = nil }
 	
-	function t.mountCoreUI(p2)
-		-- upvalues: t (ref), var5 (copy), reactModule (copy), groupInExperiencePromptsModule (copy)
-		t._coreUiHandle = var5(p2, {
+	function t.mountCoreUI(p1)
+		-- upvalues: t (ref), var1 (copy), reactModule (copy), groupInExperiencePromptsModule (copy)
+		t._coreUiHandle = var1(p1, {
 			GroupInExperiencePrompts = reactModule.createElement(groupInExperiencePromptsModule)
 		})
 	end

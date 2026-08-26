@@ -15,19 +15,19 @@ local _ = require(script.Parent.useWearTimeSelectedOptionViewModel)
 local useWearTimePopoverFocusNavigationBindingsModule = require(script.Parent.useWearTimePopoverFocusNavigationBindings)
 local fFlagAXFixIaBTimedOptionsPopoverFocus = avatarExperienceFlagsModule.FFlagAXFixIaBTimedOptionsPopoverFocus
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useWearTimePopoverFocusNavigationBindingsModule (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), view (ref), foundationModule (ref), enums (ref), text (ref), numberLocalization (ref), popover (ref), popoverAlign (ref), popoverSide (ref), wearTimeListModule (ref)
-	local tokens = p0.tokens
+	local tokens = p1.tokens
 	local textButton = reactModule.createElement("TextButton", {
 		Text = "",
 		Size = UDim2.fromScale(0, 0),
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		ref = p0.anchorRef,
+		ref = p1.anchorRef,
 		[reactModule.Event.Activated] = function()
-			-- upvalues: p0 (ref)
-			p0.setIsOpen(not p0.isOpen)
+			-- upvalues: p1 (ref)
+			p1.setIsOpen(not p1.isOpen)
 		end
 	}, {
 		Layout = reactModule.createElement("UIListLayout", {
@@ -48,14 +48,14 @@ return function(p0)
 			PriceLabel = reactModule.createElement(text, {
 				tag = "auto-xy",
 				LayoutOrder = 2,
-				Text = numberLocalization.localize(p0.price, p0.localization:GetLocale()),
+				Text = numberLocalization.localize(p1.price, p1.localization:GetLocale()),
 				textStyle = tokens.Color.Content.Emphasis,
 				fontStyle = {
 					Font = tokens.Typography.TitleSmall.Font,
 					FontSize = tokens.FontSize.FontSize_400
 				}
 			}),
-			ChevronIcon = if not p0.disableOptionSelection then reactModule.createElement(foundationModule.Icon, {
+			ChevronIcon = if not p1.disableOptionSelection then reactModule.createElement(foundationModule.Icon, {
 				LayoutOrder = 3,
 				name = enums.IconName.ChevronLargeDown,
 				variant = enums.IconVariant.Regular,
@@ -63,10 +63,10 @@ return function(p0)
 				style = tokens.Color.Content.Emphasis
 			}) else nil
 		}),
-		SubLabel = p0.subLabelText and reactModule.createElement(text, {
+		SubLabel = p1.subLabelText and reactModule.createElement(text, {
 			tag = "auto-xy padding-top-xxsmall",
 			LayoutOrder = 2,
-			Text = p0.subLabelText,
+			Text = p1.subLabelText,
 			textStyle = tokens.Color.Content.Muted,
 			fontStyle = {
 				Font = tokens.Typography.CaptionMedium.Font,
@@ -75,31 +75,31 @@ return function(p0)
 		})
 	})
 	
-	return if p0.disableOptionSelection then textButton else reactModule.createElement(view, { tag = "auto-xy" }, {
+	return if p1.disableOptionSelection then textButton else reactModule.createElement(view, { tag = "auto-xy" }, {
 		TriggerButton = textButton,
-		Popover = reactModule.createElement(popover.Root, { isOpen = p0.isOpen }, {
-			Anchor = reactModule.createElement(popover.Anchor, { anchorRef = p0.anchorRef }),
+		Popover = reactModule.createElement(popover.Root, { isOpen = p1.isOpen }, {
+			Anchor = reactModule.createElement(popover.Anchor, { anchorRef = p1.anchorRef }),
 			Content = reactModule.createElement(popover.Content, {
 				hasArrow = false,
 				align = popoverAlign.Start,
 				side = popoverSide.Top,
 				onPressedOutside = function()
-					-- upvalues: p0 (ref)
-					p0.setIsOpen(false)
+					-- upvalues: p1 (ref)
+					p1.setIsOpen(false)
 				end
 			}, {
 				ContentWrapper = reactModule.createElement(view, {
 					tag = "auto-y",
 					Size = UDim2.new(0, tokens.Size.Size_2900 * 2, 0, 0),
 					ref = useWearTimePopoverFocusNavigationBindingsModule(reactModule.useCallback(function()
-						-- upvalues: p0 (ref)
-						p0.setIsOpen(false)
-					end, { p0.setIsOpen }), p0.isOpen, if fFlagAXFixIaBTimedOptionsPopoverFocus then p0.anchorRef else nil)
+						-- upvalues: p1 (ref)
+						p1.setIsOpen(false)
+					end, { p1.setIsOpen }), p1.isOpen, if fFlagAXFixIaBTimedOptionsPopoverFocus then p1.anchorRef else nil)
 				}, {
 					WearTimeList = reactModule.createElement(wearTimeListModule, {
-						options = p0.updatedOptions,
-						selectedIndex = p0.selectedIndex,
-						onOptionActivated = p0.handleOptionActivated
+						options = p1.updatedOptions,
+						selectedIndex = p1.selectedIndex,
+						onOptionActivated = p1.handleOptionActivated
 					})
 				})
 			})

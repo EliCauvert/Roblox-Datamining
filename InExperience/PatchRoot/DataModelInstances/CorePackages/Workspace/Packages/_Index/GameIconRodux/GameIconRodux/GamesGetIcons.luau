@@ -5,12 +5,12 @@ local fFlagGetGameIconsFromThumbnailsDeliveryApiIxp = require(parent.SharedFlags
 local fFlagForceGetGameIconsFromThumbnailsDeliveryApi = require(parent.SharedFlags).FFlagForceGetGameIconsFromThumbnailsDeliveryApi
 local url = require(parent.Http).Url
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: url (ref), fFlagForceGetGameIconsFromThumbnailsDeliveryApi (ref), fFlagGetGameIconsFromThumbnailsDeliveryApiIxp (ref), IXPServiceWrapper (ref), appUserLayers (ref)
-	local var0 = url:makeQueryString({
+	local var1 = url:makeQueryString({
 		format = "png",
-		universeIds = table.concat(p1, ","),
-		size = p2
+		universeIds = table.concat(p2, ","),
+		size = p3
 	})
 	local THUMBNAILS_URL = url.THUMBNAILS_URL
 	
@@ -23,5 +23,5 @@ return function(p0, p1, p2)
 			THUMBNAILS_URL = url.THUMBNAILSDELIVERY_URL
 		end
 	end
-	return p0(string.format("%sv1/games/icons?%s", THUMBNAILS_URL, var0), "GET")
+	return p1(string.format("%sv1/games/icons?%s", THUMBNAILS_URL, var1), "GET")
 end

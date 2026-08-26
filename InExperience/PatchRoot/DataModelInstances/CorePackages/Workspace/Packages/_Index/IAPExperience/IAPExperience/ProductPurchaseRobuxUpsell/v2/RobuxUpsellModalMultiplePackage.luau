@@ -31,19 +31,19 @@ local _ = require(parent.Enums.VirtualItemBadgeType)
 local useDefaultFocusBehavior = require(parent_1.ReactFocusNavigation).useDefaultFocusBehavior
 local fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule = require(parent.Flags.FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePrompt)
 
-local function UpsellProductDetails(p0)
+local function UpsellProductDetails(p1)
 	-- upvalues: useLocalization (ref), badgeTypeModule (ref), reactModule (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref), yellowBadgeModule (ref)
-	local var19 = useLocalization({
+	local var1 = useLocalization({
 		Popular = "IAPExperience.RobuxUpsell.Text.PopularItem",
 		LastPurchased = "IAPExperience.RobuxUpsell.Text.LastPurchased"
 	})
-	local var20 = if p0.badgeType == badgeTypeModule.Popular then var19.Popular elseif p0.badgeType == badgeTypeModule.LastPurchased then var19.LastPurchased else nil
-	local var21 = "size-full-1400 radius-medium padding-x-large row"
+	local var2 = if p1.badgeType == badgeTypeModule.Popular then var1.Popular elseif p1.badgeType == badgeTypeModule.LastPurchased then var1.LastPurchased else nil
+	local var3 = "size-full-1400 radius-medium padding-x-large row"
 	
 	return reactModule.createElement(view, {
-		LayoutOrder = p0.layoutOrder,
-		onActivated = p0.onSelected,
-		tag = if p0.selected then var21 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var21 .. " bg-surface-300 stroke-emphasis stroke-standard"
+		LayoutOrder = p1.layoutOrder,
+		onActivated = p1.onSelected,
+		tag = if p1.selected then var3 .. " bg-surface-200 stroke-system-contrast stroke-thick" else var3 .. " bg-surface-300 stroke-emphasis stroke-standard"
 	}, {
 		LeftSide = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -53,13 +53,13 @@ local function UpsellProductDetails(p0)
 			RobuxAmount = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-title-large content-emphasis text-align-x-left",
-				Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.product.robuxAmount)
+				Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmount)
 			}),
-			RobuxAmountBonus = p0.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
+			RobuxAmountBonus = p1.product.robuxAmountBeforeBonus and reactModule.createElement(text, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = "auto-xy text-title-large content-muted text-align-x-left",
-				Text = "<s>" .. utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p0.product.robuxAmountBeforeBonus) .. "</s>"
+				Text = "<s>" .. utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p1.product.robuxAmountBeforeBonus) .. "</s>"
 			})
 		}),
 		RightSide = reactModule.createElement(view, {
@@ -67,15 +67,15 @@ local function UpsellProductDetails(p0)
 			tag = "row align-y-center align-x-right gap-large",
 			Size = UDim2.new(0.5, 0, 1, 0)
 		}, {
-			Badge = if var20 then reactModule.createElement(yellowBadgeModule, {
+			Badge = if var2 then reactModule.createElement(yellowBadgeModule, {
 				LayoutOrder = 1,
-				Text = var20,
-				Icon = if p0.badgeType == badgeTypeModule.Popular then "icons/menu/fire_fill" else nil
+				Text = var2,
+				Icon = if p1.badgeType == badgeTypeModule.Popular then "icons/menu/fire_fill" else nil
 			}) else nil,
 			RobuxPrice = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-title-large content-emphasis text-align-x-right",
-				Text = p0.product.price or ""
+				Text = p1.product.price or ""
 			})
 		})
 	})
@@ -122,9 +122,9 @@ local function MiddleContent(p1)
 	})
 end
 
-local function ButtonStackInfo(p2)
+local function ButtonStackInfo(p1)
 	-- upvalues: useLocalization (ref), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), buttonType (ref)
-	local var22 = useLocalization({
+	local var1 = useLocalization({
 		BuyRobuxButton = "IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem",
 		ButtonCancel = "IAPExperience.RobuxUpsell.Action.Cancel",
 		LoadingText = "IAPExperience.RobuxUpsell.Text.Loading"
@@ -133,128 +133,128 @@ local function ButtonStackInfo(p2)
 	return {
 		forcedFillDirection = Enum.FillDirection.Vertical,
 		disableGamepadRefs = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then true else nil,
-		buttons = if p2.isQuest then {
+		buttons = if p1.isQuest then {
 			{
 				props = {
-					onActivated = p2.buttons.cancelPurchaseActivated,
-					text = var22.ButtonCancel,
-					inputIcon = p2.buttons.cancelControllerIcon
+					onActivated = p1.buttons.cancelPurchaseActivated,
+					text = var1.ButtonCancel,
+					inputIcon = p1.buttons.cancelControllerIcon
 				}
 			}
 		} else {
 			{
 				buttonType = buttonType.PrimaryContextual,
 				props = {
-					isDelayedInput = p2.buttons.buyItemisDelayedInput,
-					enableInputDelayed = p2.buttons.buyItemEnableInputDelayed,
-					onActivated = p2.buttons.buyItemActivated,
-					text = var22.BuyRobuxButton,
-					inputIcon = p2.buttons.buyItemControllerIcon,
-					buttonRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then p2.buttons.buttonRef else nil
+					isDelayedInput = p1.buttons.buyItemisDelayedInput,
+					enableInputDelayed = p1.buttons.buyItemEnableInputDelayed,
+					onActivated = p1.buttons.buyItemActivated,
+					text = var1.BuyRobuxButton,
+					inputIcon = p1.buttons.buyItemControllerIcon,
+					buttonRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then p1.buttons.buttonRef else nil
 				}
 			}
 		}
 	}
 end
 
-local function RobuxUpsellModal(p3)
+local function RobuxUpsellModal(p1)
 	-- upvalues: fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), useDefaultFocusBehavior (ref), reactModule (ref), loggerModule (ref), default (ref), multiplePackageUpsellShownCounter (ref), multiplePackageUpsellSelectedCounter (ref), multiplePackageUpsellModalClosedCounter (ref), getAppContextModule (ref), multiplePackageUpsellModalBuyClickedCounter (ref), interactiveAlert (ref), robuxUpsellModalTitleModule (ref), MiddleContent (ref), ButtonStackInfo (ref), robuxUpsellModalFooterModule (ref)
-	local var23 = nil
-	local var24 = nil
+	local var1 = nil
+	local var2 = nil
 	
 	if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
-		local var25, var26 = useDefaultFocusBehavior()
-		var23 = var25
-		var24 = var26
+		local var3, var4 = useDefaultFocusBehavior()
+		var1 = var3
+		var2 = var4
 	end
 	reactModule.useEffect(function()
-		-- upvalues: loggerModule (copy), p3 (ref), default (copy), multiplePackageUpsellShownCounter (copy)
+		-- upvalues: loggerModule (copy), p1 (ref), default (copy), multiplePackageUpsellShownCounter (copy)
 		loggerModule.debug({
 			message = "Multiple Package Upsell Modal Shown",
-			suggestionCount = #p3.upsellSuggestions,
-			screenHeight = p3.screenSize.Y,
-			screenWidth = p3.screenSize.X,
-			portrait = p3.screenSize.X < p3.screenSize.Y
+			suggestionCount = #p1.upsellSuggestions,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y
 		})
 		default:logRobloxTelemetryCounter(multiplePackageUpsellShownCounter, 1, {
-			suggestionCount = #p3.upsellSuggestions,
-			screenHeight = p3.screenSize.Y,
-			screenWidth = p3.screenSize.X,
-			portrait = p3.screenSize.X < p3.screenSize.Y
+			suggestionCount = #p1.upsellSuggestions,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y
 		})
-	end, { p3.upsellSuggestions })
+	end, { p1.upsellSuggestions })
 	
-	local var27 = function(p4)
-		-- upvalues: loggerModule (copy), p3 (ref), default (copy), multiplePackageUpsellSelectedCounter (copy)
+	local var5 = function(p2)
+		-- upvalues: loggerModule (copy), p1 (ref), default (copy), multiplePackageUpsellSelectedCounter (copy)
 		loggerModule.debug({
 			message = "Multiple Package Upsell Option Selected",
-			suggestionCount = #p3.upsellSuggestions,
-			previousIndex = p3.selectedUpsellIndex,
-			selectedIndex = p4
+			suggestionCount = #p1.upsellSuggestions,
+			previousIndex = p1.selectedUpsellIndex,
+			selectedIndex = p2
 		})
 		default:logRobloxTelemetryCounter(multiplePackageUpsellSelectedCounter, 1, {
-			suggestionCount = #p3.upsellSuggestions,
-			previousIndex = p3.selectedUpsellIndex,
-			selectedIndex = p4
+			suggestionCount = #p1.upsellSuggestions,
+			previousIndex = p1.selectedUpsellIndex,
+			selectedIndex = p2
 		})
-		p3.onUpsellSuggestionsSelected(p4)
+		p1.onUpsellSuggestionsSelected(p2)
 	end
 	
-	local var28 = function()
-		-- upvalues: loggerModule (copy), p3 (ref), default (copy), multiplePackageUpsellModalClosedCounter (copy)
+	local var6 = function()
+		-- upvalues: loggerModule (copy), p1 (ref), default (copy), multiplePackageUpsellModalClosedCounter (copy)
 		loggerModule.debug({
 			message = "Multiple Package Upsell Modal Closed",
-			suggestionCount = #p3.upsellSuggestions
+			suggestionCount = #p1.upsellSuggestions
 		})
-		default:logRobloxTelemetryCounter(multiplePackageUpsellModalClosedCounter, 1, { suggestionCount = #p3.upsellSuggestions })
-		p3.buttons.cancelPurchaseActivated()
+		default:logRobloxTelemetryCounter(multiplePackageUpsellModalClosedCounter, 1, { suggestionCount = #p1.upsellSuggestions })
+		p1.buttons.cancelPurchaseActivated()
 	end
 	
-	local buyItemActivated = p3.buttons.buyItemActivated
+	local buyItemActivated = p1.buttons.buyItemActivated
 	
 	function p3.buttons.buyItemActivated()
-		-- upvalues: loggerModule (copy), getAppContextModule (copy), p3 (ref), default (copy), multiplePackageUpsellModalBuyClickedCounter (copy), buyItemActivated (ref)
+		-- upvalues: loggerModule (copy), getAppContextModule (copy), p1 (ref), default (copy), multiplePackageUpsellModalBuyClickedCounter (copy), buyItemActivated (ref)
 		loggerModule.debug({
 			message = "Multiple Package Upsell Modal Buy Clicked",
 			appContext = getAppContextModule(),
-			suggestionCount = #p3.upsellSuggestions,
-			selectedIndex = p3.selectedUpsellIndex
+			suggestionCount = #p1.upsellSuggestions,
+			selectedIndex = p1.selectedUpsellIndex
 		})
 		default:logRobloxTelemetryCounter(multiplePackageUpsellModalBuyClickedCounter, 1, {
 			appContext = getAppContextModule(),
-			suggestionCount = #p3.upsellSuggestions,
-			selectedIndex = p3.selectedUpsellIndex
+			suggestionCount = #p1.upsellSuggestions,
+			selectedIndex = p1.selectedUpsellIndex
 		})
 		buyItemActivated()
 	end
 	
 	if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
-		p3.buttons.buttonRef = var23
+		p1.buttons.buttonRef = var1
 	end
 	return reactModule.createElement(interactiveAlert, {
 		title = "",
-		defaultChildRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then var24 else nil,
-		screenSize = p3.screenSize,
+		defaultChildRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then var2 else nil,
+		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
 		titleContent = function()
-			-- upvalues: reactModule (copy), robuxUpsellModalTitleModule (copy), p3 (ref), var28 (ref)
+			-- upvalues: reactModule (copy), robuxUpsellModalTitleModule (copy), p1 (ref), var6 (ref)
 			return reactModule.createElement(robuxUpsellModalTitleModule, {
-				balanceAmount = p3.userBalance,
-				cancelPurchaseActivated = var28
+				balanceAmount = p1.userBalance,
+				cancelPurchaseActivated = var6
 			})
 		end,
 		middleContent = function()
-			-- upvalues: reactModule (copy), MiddleContent (copy), p3 (ref), var27 (ref)
+			-- upvalues: reactModule (copy), MiddleContent (copy), p1 (ref), var5 (ref)
 			return reactModule.createElement(MiddleContent, {
-				product = p3.product,
-				upsellSuggestions = p3.upsellSuggestions,
-				selectedUpsellIndex = p3.selectedUpsellIndex,
-				onUpsellSuggestionsSelected = var27,
-				isPortrait = p3.screenSize.X < p3.screenSize.Y
+				product = p1.product,
+				upsellSuggestions = p1.upsellSuggestions,
+				selectedUpsellIndex = p1.selectedUpsellIndex,
+				onUpsellSuggestionsSelected = var5,
+				isPortrait = p1.screenSize.X < p1.screenSize.Y
 			})
 		end,
-		buttonStackInfo = ButtonStackInfo({ buttons = p3.buttons, isQuest = p3.isQuest }),
+		buttonStackInfo = ButtonStackInfo({ buttons = p1.buttons, isQuest = p1.isQuest }),
 		footerContent = function()
 			-- upvalues: reactModule (copy), robuxUpsellModalFooterModule (copy)
 			return reactModule.createElement(robuxUpsellModalFooterModule)
@@ -262,11 +262,11 @@ local function RobuxUpsellModal(p3)
 	})
 end
 
-return function(p5)
+return function(p1)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), RobuxUpsellModal (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		RobuxUpsellModal = reactModule.createElement(RobuxUpsellModal, p5)
+		RobuxUpsellModal = reactModule.createElement(RobuxUpsellModal, p1)
 	})
 end

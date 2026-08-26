@@ -1,27 +1,27 @@
 ﻿local getNumericalApplicationIdModule = require(script.Parent.getNumericalApplicationId)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: getNumericalApplicationIdModule (ref)
-	local var1 = p0()
-	local var2 = getNumericalApplicationIdModule(p1)
+	local var1 = p1()
+	local var2 = getNumericalApplicationIdModule(p2)
 	
 	return if var2 == nil then var1 >= 100 else var2 % 100 + 1 <= var1
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: getNumericalApplicationIdModule (ref)
-	local var5
-	local var3 = p2()
-	local var4 = getNumericalApplicationIdModule(p3)
+	local var1
+	local var2 = p1()
+	local var3 = getNumericalApplicationIdModule(p2)
 	
-	if var4 == nil then
-		var5 = var3 >= 100
-		var5 = nil
+	if var3 == nil then
+		var1 = var2 >= 100
+		var1 = nil
 	else
-		var5 = var4 % 100 + 1 <= var3
+		var1 = var3 % 100 + 1 <= var2
 	end
 	return function()
-		-- upvalues: var5 (ref)
-		return var5
+		-- upvalues: var1 (ref)
+		return var1
 	end
 end

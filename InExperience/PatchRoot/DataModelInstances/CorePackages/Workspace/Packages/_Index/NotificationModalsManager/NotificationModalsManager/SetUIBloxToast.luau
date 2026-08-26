@@ -6,9 +6,9 @@ local localizationService = game:GetService("LocalizationService")
 local localization = require(parent.InExperienceLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
 local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
-local var3 = nil
+local var1 = nil
 
-local var4 = function(p0)
+local var2 = function(p1)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), toast (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
@@ -20,19 +20,19 @@ local var4 = function(p0)
 				DisplayOrder = 12,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 			}, {
-				Toast = reactModule.createElement(toast, { duration = 3, toastContent = p0 })
+				Toast = reactModule.createElement(toast, { duration = 3, toastContent = p1 })
 			})
 		})
 	})
 end
 
 return function(p1)
-	-- upvalues: var3 (write), reactRobloxModule (ref), reactModule (ref), var4 (ref)
-	if not var3 then
+	-- upvalues: var1 (write), reactRobloxModule (ref), reactModule (ref), var2 (ref)
+	if not var1 then
 		local UIBloxToast = Instance.new("Folder")
 		UIBloxToast.Name = "UIBloxToast"
 		UIBloxToast.Parent = game:GetService("CoreGui")
-		var3 = reactRobloxModule.createRoot(UIBloxToast)
+		var1 = reactRobloxModule.createRoot(UIBloxToast)
 	end
-	var3:render(reactModule.createElement(var4, p1))
+	var1:render(reactModule.createElement(var2, p1))
 end

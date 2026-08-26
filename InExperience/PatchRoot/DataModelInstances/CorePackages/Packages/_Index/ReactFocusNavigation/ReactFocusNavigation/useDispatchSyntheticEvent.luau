@@ -5,17 +5,17 @@ local focusNavigationContextModule = require(script.Parent.FocusNavigationContex
 
 return function()
 	-- upvalues: reactModule (ref), focusNavigationContextModule (ref)
-	local var2 = reactModule.useContext(focusNavigationContextModule)
+	local var1 = reactModule.useContext(focusNavigationContextModule)
 	
-	return reactModule.useCallback(function(p0, p1, p2)
-		-- upvalues: var2 (ref)
-		if var2 then
-			assert(p1:IsA("GuiObject"), "Synthetic events must be dispatched on GuiObjects")
+	return reactModule.useCallback(function(p1, p2, p3)
+		-- upvalues: var1 (ref)
+		if var1 then
+			assert(p2:IsA("GuiObject"), "Synthetic events must be dispatched on GuiObjects")
 			
-			return var2:dispatchSyntheticEvent(p0, p1, p2)
+			return var1:dispatchSyntheticEvent(p1, p2, p3)
 		elseif _G.__DEV__ then
 			warn("useDispatchSyntheticEvent: No FocusNavigationService available in context")
 		end
 		return false
-	end, { var2 })
+	end, { var1 })
 end

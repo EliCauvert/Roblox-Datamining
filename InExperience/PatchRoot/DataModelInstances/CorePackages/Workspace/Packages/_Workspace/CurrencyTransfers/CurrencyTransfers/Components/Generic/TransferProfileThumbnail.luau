@@ -13,34 +13,34 @@ local constants = userLibModule.Utils.Constants
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local size100x100 = Enum.ThumbnailSize.Size100x100
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), size100x100 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), fFlagCurrencyTransferUseProfileFrameThumbnailModule (ref), reactModule (ref), view (ref), image (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), text (ref)
-	local var6 = useTokens()
+	local var1 = useTokens()
 	
-	if not p0.thumbnailSize then
-		p0.thumbnailSize = size100x100
+	if not p1.thumbnailSize then
+		p1.thumbnailSize = size100x100
 	end
 	return reactModule.createElement(view, {
 		tag = "col gap-xlarge auto-xy align-x-center align-y-center",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		AvatarContainer = reactModule.createElement(view, {
 			tag = "aspect-1-1 position-center-center anchor-center-center",
-			Size = p0.size or UDim2.fromOffset(80, 80)
+			Size = p1.size or UDim2.fromOffset(80, 80)
 		}, {
 			AvatarImage = reactModule.createElement(image, {
 				tag = "size-full aspect-1-1 radius-circle align-x-center align-y-center",
-				Image = getRbxthumbWithTypeSizeAndOptions(p0.userId, constants.RbxthumbTypes.AvatarHeadShot, if p0.thumbnailSize == Enum.ThumbnailSize.Size48x48 then 48 elseif p0.thumbnailSize == Enum.ThumbnailSize.Size60x60 then 60 else 150, true, nil, fFlagCurrencyTransferUseProfileFrameThumbnailModule),
-				backgroundStyle = var6.Color.Shift.Shift_300
+				Image = getRbxthumbWithTypeSizeAndOptions(p1.userId, constants.RbxthumbTypes.AvatarHeadShot, if p1.thumbnailSize == Enum.ThumbnailSize.Size48x48 then 48 elseif p1.thumbnailSize == Enum.ThumbnailSize.Size60x60 then 60 else 150, true, nil, fFlagCurrencyTransferUseProfileFrameThumbnailModule),
+				backgroundStyle = var1.Color.Shift.Shift_300
 			})
 		}),
-		NameContainer = if p0.showUsername and (if getFFlagCurrencyTransferFlowUIImprovementFixModule() then p0.username or p0.displayName else p0.username) then reactModule.createElement(view, { tag = "col auto-y align-x-center" }, {
+		NameContainer = if p1.showUsername and (if getFFlagCurrencyTransferFlowUIImprovementFixModule() then p1.username or p1.displayName else p1.username) then reactModule.createElement(view, { tag = "col auto-y align-x-center" }, {
 			Name = reactModule.createElement(text, {
 				tag = "text-title-medium content-emphasis text-align-x-center",
-				Text = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then p0.displayName or (p0.username or "") else p0.username or ""
+				Text = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then p1.displayName or (p1.username or "") else p1.username or ""
 			})
 		}) else nil,
-		HandleContainer = if not getFFlagCurrencyTransferFlowUIImprovementFixModule() then if p0.displayName and p0.username then reactModule.createElement(view, {
+		HandleContainer = if not getFFlagCurrencyTransferFlowUIImprovementFixModule() then if p1.displayName and p1.username then reactModule.createElement(view, {
 			tag = "col auto-y padding-bottom-medium",
 			LayoutOrder = 3
 		}, {
@@ -48,7 +48,7 @@ return function(p0)
 				tag = "text-label-medium content-emphasis",
 				Text = "@" .. p0.username
 			})
-		}) else nil elseif p0.displayName then reactModule.createElement(view, {
+		}) else nil elseif p1.displayName then reactModule.createElement(view, {
 			tag = "col auto-y padding-bottom-medium",
 			LayoutOrder = 3
 		}, {

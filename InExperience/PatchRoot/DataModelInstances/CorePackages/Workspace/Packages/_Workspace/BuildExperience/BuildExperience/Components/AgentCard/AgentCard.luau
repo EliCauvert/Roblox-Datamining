@@ -4,27 +4,27 @@ local reactModule = require(parent.React)
 local text = foundationModule.Text
 local view = foundationModule.View
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), text (ref)
-	local testId = p0.testId or "agent-card"
+	local testId = p1.testId or "agent-card"
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-xxsmall size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		testId = testId
 	}, {
 		Header = reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-align-x-left text-truncate-end content-emphasis",
-			Text = p0.title
+			Text = p1.title
 		}),
 		Content = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			RichText = true,
 			tag = "size-full-2000 text-body-medium text-wrap text-align-x-left text-align-y-top text-truncate-end content-emphasis",
-			Text = p0.textContent,
+			Text = p1.textContent,
 			testId = `{testId}-text-content`
 		}),
-		Children = reactModule.createElement(reactModule.Fragment, nil, p0.children)
+		Children = reactModule.createElement(reactModule.Fragment, nil, p1.children)
 	})
 end

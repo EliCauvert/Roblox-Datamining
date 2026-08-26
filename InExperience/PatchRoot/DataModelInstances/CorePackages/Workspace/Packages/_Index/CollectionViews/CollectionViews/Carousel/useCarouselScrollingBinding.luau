@@ -1,31 +1,31 @@
 ﻿local runService = game:GetService("RunService")
 local reactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), runService (ref)
-	local var2, var3 = reactModule.useBinding(false)
+	local var1, var2 = reactModule.useBinding(false)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), p1 (ref), var3 (ref), runService (copy)
-		local current = p0.current
+		-- upvalues: p1 (ref), p2 (ref), var2 (ref), runService (copy)
+		local current = p1.current
 		
-		if p1 and current then
+		if p2 and current then
 			assert(current, "scrollingFrame must exist")
-			local var4 = 0
-			local var5 = nil
-			local var6 = current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-				-- upvalues: var4 (write), var5 (write), var3 (copy), runService (copy)
-				var4 = os.clock() + 0.01
+			local var3 = 0
+			local var4 = nil
+			local var5 = current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
+				-- upvalues: var3 (write), var4 (write), var2 (copy), runService (copy)
+				var3 = os.clock() + 0.01
 				
-				if not var5 then
-					var3(true)
-					var5 = runService.Heartbeat:Connect(function()
-						-- upvalues: var4 (copy), var3 (copy), var5 (copy)
-						if var4 <= os.clock() then
-							var3(false)
+				if not var4 then
+					var2(true)
+					var4 = runService.Heartbeat:Connect(function()
+						-- upvalues: var3 (copy), var2 (copy), var4 (copy)
+						if var3 <= os.clock() then
+							var2(false)
 							
-							if var5 then
-								var5:Disconnect()
-								var5 = nil
+							if var4 then
+								var4:Disconnect()
+								var4 = nil
 							end
 						end
 					end)
@@ -33,16 +33,16 @@ return function(p0, p1)
 			end)
 			
 			return function()
-				-- upvalues: var6 (ref), var5 (write)
-				var6:Disconnect()
+				-- upvalues: var5 (ref), var4 (write)
+				var5:Disconnect()
 				
-				if var5 then
-					var5:Disconnect()
+				if var4 then
+					var4:Disconnect()
 				end
 			end
 		end
 		return nil
-	end, { p0 })
+	end, { p1 })
 	
-	return var2
+	return var1
 end

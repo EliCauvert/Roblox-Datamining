@@ -44,26 +44,26 @@ local t = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), t (ref)
-	local var2, var3 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), t (copy)
-		if p0.horizontalAlignment and p0.verticalAlignment then
-			return t[p0.horizontalAlignment][p0.verticalAlignment].anchor, t[p0.horizontalAlignment][p0.verticalAlignment].position
+	local var1, var2 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), t (copy)
+		if p1.horizontalAlignment and p1.verticalAlignment then
+			return t[p1.horizontalAlignment][p1.verticalAlignment].anchor, t[p1.horizontalAlignment][p1.verticalAlignment].position
 		end
 		return nil, nil
-	end, { p0.horizontalAlignment, p0.verticalAlignment })
+	end, { p1.horizontalAlignment, p1.verticalAlignment })
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		AnchorPoint = p0.AnchorPoint or var2,
-		BackgroundColor3 = p0.BackgroundColor3,
-		BackgroundTransparency = p0.BackgroundTransparency or 1,
-		ClipsDescendants = p0.ClipsDescendants,
-		LayoutOrder = p0.LayoutOrder,
-		Position = p0.Position or var3,
-		Size = p0.Size or UDim2.fromScale(1, 1),
-		ZIndex = p0.ZIndex,
-		children = p0.children
+		AnchorPoint = p1.AnchorPoint or var1,
+		BackgroundColor3 = p1.BackgroundColor3,
+		BackgroundTransparency = p1.BackgroundTransparency or 1,
+		ClipsDescendants = p1.ClipsDescendants,
+		LayoutOrder = p1.LayoutOrder,
+		Position = p1.Position or var2,
+		Size = p1.Size or UDim2.fromScale(1, 1),
+		ZIndex = p1.ZIndex,
+		children = p1.children
 	})
 end

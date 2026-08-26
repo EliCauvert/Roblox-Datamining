@@ -17,23 +17,23 @@ local _ = require(script.Parent.types)
 
 return function()
 	-- upvalues: createSignal (ref), updateTTIEventMetadataModule (ref), trackTTIEventStartModule (ref), trackTTIEventEndModule (ref), trackMilestoneModule (ref), trackSubphaseModule (ref), trackRequestModule (ref), fFlagEnableTTIRecordWebViewMilestones (ref), recordWebViewMilestonesModule (ref), resetTTIEventModule (ref), destroyTTIEventModule (ref), constantsModule (ref), useTTIRenderAndMountedTrackingModule (ref)
-	local var12, var13 = createSignal({})
+	local var1, var2 = createSignal({})
 	
 	return {
-		getEvents = var12,
-		setEvents = var13,
-		updateMetadata = updateTTIEventMetadataModule(var13),
-		trackStart = trackTTIEventStartModule(var13),
-		trackEnd = trackTTIEventEndModule(var13),
-		trackMilestone = trackMilestoneModule(var12, var13),
-		trackSubphase = trackSubphaseModule(var12, var13),
-		trackRequest = trackRequestModule(var12, var13),
-		recordWebViewMilestones = if fFlagEnableTTIRecordWebViewMilestones then recordWebViewMilestonesModule(var12, var13) else nil,
-		resetEvent = resetTTIEventModule(var13),
-		destroyEvent = destroyTTIEventModule(var13),
+		getEvents = var1,
+		setEvents = var2,
+		updateMetadata = updateTTIEventMetadataModule(var2),
+		trackStart = trackTTIEventStartModule(var2),
+		trackEnd = trackTTIEventEndModule(var2),
+		trackMilestone = trackMilestoneModule(var1, var2),
+		trackSubphase = trackSubphaseModule(var1, var2),
+		trackRequest = trackRequestModule(var1, var2),
+		recordWebViewMilestones = if fFlagEnableTTIRecordWebViewMilestones then recordWebViewMilestonesModule(var1, var2) else nil,
+		resetEvent = resetTTIEventModule(var2),
+		destroyEvent = destroyTTIEventModule(var2),
 		Milestone = constantsModule,
 		Hooks = {
-			useTTIRenderAndMountedTracking = useTTIRenderAndMountedTrackingModule(trackMilestoneModule(var12, var13))
+			useTTIRenderAndMountedTracking = useTTIRenderAndMountedTrackingModule(trackMilestoneModule(var1, var2))
 		}
 	}
 end

@@ -3,44 +3,44 @@ local reactModule = require(mediaGallery.Parent.React)
 local mediaGalleryConstantsModule = require(mediaGallery.MediaGalleryConstants)
 local useGuiObjectVisibilityModule = require(mediaGallery.Hooks.useGuiObjectVisibility)
 
-return function(p0)
+return function(p1)
 	-- upvalues: mediaGalleryConstantsModule (ref), reactModule (ref), useGuiObjectVisibilityModule (ref)
-	local intervalSeconds = p0.intervalSeconds or mediaGalleryConstantsModule.AUTO_ADVANCE_DURATION_SECONDS
-	local var5, var6 = reactModule.useBinding(0)
-	local var7, var8 = reactModule.useBinding(0)
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var8 (ref)
-		var6(0)
-		var8(0)
+	local intervalSeconds = p1.intervalSeconds or mediaGalleryConstantsModule.AUTO_ADVANCE_DURATION_SECONDS
+	local var1, var2 = reactModule.useBinding(0)
+	local var3, var4 = reactModule.useBinding(0)
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), var4 (ref)
+		var2(0)
+		var4(0)
 	end, {})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		if p0.enabled then
-			p0.scrollRight()
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		if p1.enabled then
+			p1.scrollRight()
 			
 			return
 		end
-	end, { p0.enabled, p0.scrollRight })
-	useGuiObjectVisibilityModule(p0.galleryRef, p0.enabled and (not p0.isMediaGalleryOccluded and not p0.isAutoAdvanceTimerSuspended), reactModule.useCallback(function(p1)
-		-- upvalues: var5 (ref), intervalSeconds (ref), var6 (ref), var8 (ref), p0 (ref)
-		local var11 = var5:getValue() + p1
+	end, { p1.enabled, p1.scrollRight })
+	useGuiObjectVisibilityModule(p1.galleryRef, p1.enabled and (not p1.isMediaGalleryOccluded and not p1.isAutoAdvanceTimerSuspended), reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref), intervalSeconds (ref), var2 (ref), var4 (ref), p1 (ref)
+		local var7 = var1:getValue() + p2
 		
-		if intervalSeconds <= var11 then
-			var6(0)
-			var8(0)
-			p0.scrollRight()
+		if intervalSeconds <= var7 then
+			var2(0)
+			var4(0)
+			p1.scrollRight()
 			
 			return
 		end
-		var6(var11)
-		var8(var11 / intervalSeconds)
-	end, { var5, p0.scrollRight, intervalSeconds }), var9)
+		var2(var7)
+		var4(var7 / intervalSeconds)
+	end, { var1, p1.scrollRight, intervalSeconds }), var5)
 	
 	return {
-		elapsedTimeBinding = var5,
-		progressBinding = var7,
-		resetProgress = var9,
-		onVideoEnded = var10,
-		onVideoProgressChanged = var8
+		elapsedTimeBinding = var1,
+		progressBinding = var3,
+		resetProgress = var5,
+		onVideoEnded = var6,
+		onVideoProgressChanged = var4
 	}
 end

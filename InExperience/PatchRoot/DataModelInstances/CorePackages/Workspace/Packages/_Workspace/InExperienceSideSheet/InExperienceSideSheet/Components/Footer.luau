@@ -7,14 +7,14 @@ local view = foundationModule.View
 local sessionActionButtonsModule = require(inExperienceSideSheet.Components.SessionActionButtons)
 local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), fFlagSideSheetFocusNav (ref), divider (ref), sessionActionButtonsModule (ref)
 	return reactModule.createElement(view, {
 		tag = {
 			["col size-full-0 auto-y padding-right-xlarge padding-bottom-medium"] = true,
 			["padding-left-small"] = fFlagSideSheetFocusNav
 		},
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		FooterDivider = reactModule.createElement(view, {
 			tag = "size-full-0 auto-y padding-bottom-medium",

@@ -12,82 +12,82 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local _ = require(script.Parent.Types)
 local t = { testId = "--foundation-sheet" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useScreenModule (ref), guiService (ref), reactUtilsModule (ref), bottomSheetModule (ref), centerSheetModule (ref), sideSheetModule (ref)
-	local var14
-	local var9 = withDefaultsModule(p0, t)
-	local var10, var11 = reactModule.useState(var9.isOpen == nil or var9.isOpen)
-	local var12 = reactModule.useRef(nil)
-	local var13 = useScreenModule()
+	local var1
+	local var2 = withDefaultsModule(p1, t)
+	local var3, var4 = reactModule.useState(var2.isOpen == nil or var2.isOpen)
+	local var5 = reactModule.useRef(nil)
+	local var6 = useScreenModule()
 	local useState = reactModule.useState
 	
-	if var13 then
-		var14 = var13.AbsoluteSize.Y < var13.AbsoluteSize.X
-		var14 = nil
+	if var6 then
+		var1 = var6.AbsoluteSize.Y < var6.AbsoluteSize.X
+		var1 = nil
 	else
-		var14 = true
+		var1 = true
 	end
-	useState, var14 = useState(var14)
-	local var15, var16 = reactModule.useState(guiService.ViewportDisplaySize)
-	reactModule.useImperativeHandle(var9.sheetRef, function()
-		-- upvalues: var12 (ref)
-		return var12.current
+	useState, var14 = useState(var1)
+	local var7, var8 = reactModule.useState(guiService.ViewportDisplaySize)
+	reactModule.useImperativeHandle(var2.sheetRef, function()
+		-- upvalues: var5 (ref)
+		return var5.current
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var12 (ref), var11 (ref)
-		if var9.isOpen == false and var12.current then
-			var12.current.close()
+		-- upvalues: var2 (ref), var5 (ref), var4 (ref)
+		if var2.isOpen == false and var5.current then
+			var5.current.close()
 			
 			return
-		elseif var9.isOpen then
-			var11(true)
+		elseif var2.isOpen then
+			var4(true)
 		end
-	end, { var9.isOpen })
+	end, { var2.isOpen })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var9 (ref), var11 (ref)
-		if not var10 and var9.isOpen then
-			var11(true)
+		-- upvalues: var3 (ref), var2 (ref), var4 (ref)
+		if not var3 and var2.isOpen then
+			var4(true)
 		end
-	end, { var10 })
+	end, { var3 })
 	reactUtilsModule.useEventConnection(guiService:GetPropertyChangedSignal("ViewportDisplaySize"), function()
-		-- upvalues: var16 (ref), guiService (copy)
-		var16(guiService.ViewportDisplaySize)
+		-- upvalues: var8 (ref), guiService (copy)
+		var8(guiService.ViewportDisplaySize)
 	end, {})
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var13 (ref), var14 (ref)
-		local var18 = nil
+		-- upvalues: var6 (ref), var1 (ref)
+		local var9 = nil
 		
-		if var13 then
-			var14(var13.AbsoluteSize.Y < var13.AbsoluteSize.X)
-			var18 = var13:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var14 (copy), var13 (copy)
-				var14(var13.AbsoluteSize.Y < var13.AbsoluteSize.X)
+		if var6 then
+			var1(var6.AbsoluteSize.Y < var6.AbsoluteSize.X)
+			var9 = var6:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+				-- upvalues: var1 (copy), var6 (copy)
+				var1(var6.AbsoluteSize.Y < var6.AbsoluteSize.X)
 			end)
 		end
 		return function()
-			-- upvalues: var18 (write)
-			if var18 then
-				var18:Disconnect()
+			-- upvalues: var9 (write)
+			if var9 then
+				var9:Disconnect()
 			end
 		end
-	end, { var13 })
+	end, { var6 })
 	
-	if not var10 then
+	if not var3 then
 		return nil
 	end
-	local cloned = table.clone(var9)
+	local cloned = table.clone(var2)
 	cloned.isOpen = nil
-	cloned.ref = p1
-	cloned.sheetRef = var12
-	cloned.displaySize = var15
+	cloned.ref = p2
+	cloned.sheetRef = var5
+	cloned.displaySize = var7
 	
 	function cloned.onClose()
-		-- upvalues: var9 (ref), var11 (ref)
-		if var9.onClose then
-			var9.onClose()
+		-- upvalues: var2 (ref), var4 (ref)
+		if var2.onClose then
+			var2.onClose()
 		end
-		var11(false)
+		var4(false)
 	end
 	
-	return if var15 == Enum.DisplaySize.Small and not useState then reactModule.createElement(bottomSheetModule, cloned) elseif var9.preferCenterSheet then reactModule.createElement(centerSheetModule, cloned) else reactModule.createElement(sideSheetModule, cloned)
+	return if var7 == Enum.DisplaySize.Small and not useState then reactModule.createElement(bottomSheetModule, cloned) elseif var2.preferCenterSheet then reactModule.createElement(centerSheetModule, cloned) else reactModule.createElement(sideSheetModule, cloned)
 end))

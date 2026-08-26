@@ -8,40 +8,40 @@ local view = foundationModule.View
 local loadableVideoModule = require(profilePlatform.Components.Videos.LoadableVideo)
 local timeDurationOverlayModule = require(profilePlatform.Components.Videos.TimeDurationOverlay)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), stateLayerAffordance (ref), loadableVideoModule (ref), image (ref), timeDurationOverlayModule (ref)
 	return reactModule.createElement(view, {
 		tag = "shrink size-full",
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: p0 (ref)
-			if p0.onExpandCallback then
-				p0.onExpandCallback()
+			-- upvalues: p1 (ref)
+			if p1.onExpandCallback then
+				p1.onExpandCallback()
 			end
-		end, { p0.onExpandCallback }),
+		end, { p1.onExpandCallback }),
 		stateLayer = { affordance = stateLayerAffordance.None },
-		ZIndex = p0.ZIndex
+		ZIndex = p1.ZIndex
 	}, {
 		VideoPreview = if reactModule.useMemo(function()
-			-- upvalues: p0 (ref)
-			return p0.Video or not p0.thumbnailImage
-		end, { p0.Video, p0.thumbnailImage }) then reactModule.createElement(loadableVideoModule, {
-			cornerRadius = p0.cornerRadius,
-			Looped = p0.Looped,
-			onLoaded = p0.onVideoLoaded,
-			Playing = p0.Playing,
-			Position = p0.Position,
-			renderOnFailed = p0.renderOnFailed,
-			scaleType = p0.scaleType,
-			Size = p0.Size,
-			Video = p0.Video,
-			videoRef = p0.videoRef
+			-- upvalues: p1 (ref)
+			return p1.Video or not p1.thumbnailImage
+		end, { p1.Video, p1.thumbnailImage }) then reactModule.createElement(loadableVideoModule, {
+			cornerRadius = p1.cornerRadius,
+			Looped = p1.Looped,
+			onLoaded = p1.onVideoLoaded,
+			Playing = p1.Playing,
+			Position = p1.Position,
+			renderOnFailed = p1.renderOnFailed,
+			scaleType = p1.scaleType,
+			Size = p1.Size,
+			Video = p1.Video,
+			videoRef = p1.videoRef
 		}) else nil,
-		ThumbnailImage = if p0.thumbnailImage and not p0.Playing then reactModule.createElement(image, {
+		ThumbnailImage = if p1.thumbnailImage and not p1.Playing then reactModule.createElement(image, {
 			ZIndex = 2,
-			cornerRadius = if p0.cornerRadius then UDim.new(0, p0.cornerRadius) else nil,
-			Image = p0.thumbnailImage,
+			cornerRadius = if p1.cornerRadius then UDim.new(0, p1.cornerRadius) else nil,
+			Image = p1.thumbnailImage,
 			Size = UDim2.fromScale(1, 1)
 		}) else nil,
-		TimeDurationOverlay = if p0.Playing or p0.isFullScreen or (not p0.timeLength or p0.timeLength <= 0) then nil else reactModule.createElement(timeDurationOverlayModule, { timeLength = p0.timeLength })
+		TimeDurationOverlay = if p1.Playing or p1.isFullScreen or (not p1.timeLength or p1.timeLength <= 0) then nil else reactModule.createElement(timeDurationOverlayModule, { timeLength = p1.timeLength })
 	})
 end

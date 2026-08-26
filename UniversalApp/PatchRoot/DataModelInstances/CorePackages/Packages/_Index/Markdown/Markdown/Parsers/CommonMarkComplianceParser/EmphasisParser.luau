@@ -1,87 +1,87 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
 local utilsModule = require(script.Parent.Utils)
 local t = {
-	collectDelimiterRun = function(p0, p1, p2)
+	collectDelimiterRun = function(p1, p2, p3)
 		-- upvalues: utilsModule (ref)
-		local length = p1.length
-		local var2 = p2 + 1
-		while var2 <= #p0 do
-			local delimiterInfo = utilsModule.getDelimiterInfo(p0[var2].name)
+		local length = p2.length
+		local var1 = p3 + 1
+		while var1 <= #p1 do
+			local delimiterInfo = utilsModule.getDelimiterInfo(p1[var1].name)
 			
-			if not delimiterInfo or delimiterInfo.char ~= p1.char then break end
+			if not delimiterInfo or delimiterInfo.char ~= p2.char then break end
 			length += delimiterInfo.length
-			var2 += 1
+			var1 += 1
 		end
 		local prevChar = nil
 		local nextChar = nil
-		local var4 = p0[p2]
+		local var2 = p1[p3]
 		
-		if var4 and var4.context then
-			prevChar = var4.context.prevChar
+		if var2 and var2.context then
+			prevChar = var2.context.prevChar
 		end
-		local var5 = p0[var2 - 1]
+		local var3 = p1[var1 - 1]
 		
-		if var5 and var5.context then
-			nextChar = var5.context.nextChar
+		if var3 and var3.context then
+			nextChar = var3.context.nextChar
 		end
 		return {
-			char = p1.char,
+			char = p2.char,
 			prevChar = prevChar,
 			nextChar = nextChar,
 			length = length,
-			startIdx = p2,
-			endIdx = var2 - 1
+			startIdx = p3,
+			endIdx = var1 - 1
 		}
 	end
 }
 
-function t.processEmphasisRun(p3, p4, p5)
+function t.processEmphasisRun(p4, p5, p6)
 	-- upvalues: utilsModule (ref), t (ref)
 	local t_1 = {}
-	local var7 = p4
+	local var4 = p5
 	local t_2 = {}
 	local t_3 = {}
-	local var10 = 1
-	while var7 <= p5 do
-		local var11 = p3[var7]
-		local delimiterInfo = utilsModule.getDelimiterInfo(var11.name)
+	local var5 = 1
+	while var4 <= p6 do
+		local var6 = p4[var4]
+		local delimiterInfo = utilsModule.getDelimiterInfo(var6.name)
 		
 		if delimiterInfo then
-			local var13 = t.collectDelimiterRun(p3, delimiterInfo, var7)
+			local var7 = t.collectDelimiterRun(p4, delimiterInfo, var4)
 			table.insert(t_2, {
-				char = var13.char,
-				runLength = var13.length,
-				origRunLength = var13.length,
-				canOpen = utilsModule.canOpenEmphasis(var13),
-				canClose = utilsModule.canCloseEmphasis(var13),
-				startIdx = var10,
-				tokenStart = var13.startIdx
+				char = var7.char,
+				runLength = var7.length,
+				origRunLength = var7.length,
+				canOpen = utilsModule.canOpenEmphasis(var7),
+				canClose = utilsModule.canCloseEmphasis(var7),
+				startIdx = var5,
+				tokenStart = var7.startIdx
 			})
-			t_1[var10] = {
+			t_1[var5] = {
 				name = "DELIMITER_RUN",
 				text = "",
 				delimiterIndex = #t_2,
-				offset = p3[var13.startIdx].offset
+				offset = p4[var7.startIdx].offset
 			}
-			var10 += 1
-			var7 = var13.endIdx + 1
+			var5 += 1
+			var4 = var7.endIdx + 1
 		else
-			t_1[var10] = var11
+			t_1[var5] = var6
 			
-			if utilsModule.causesLineBreak(var11) then
-				table.insert(t_3, var7)
+			if utilsModule.causesLineBreak(var6) then
+				table.insert(t_3, var4)
 			end
-			var10 += 1
-			var7 += 1
+			var5 += 1
+			var4 += 1
 		end
 	end
-	local var14 = false
+	local var8 = false
 	
-	for i = p5 + 1, #p3 do
-		if not utilsModule.causesLineBreak(p3[i]) then
+	for i = p6 + 1, #p4 do
+		if not utilsModule.causesLineBreak(p4[i]) then
 			continue
 		end
-		var14 = true
+		var8 = true
 		break
 	end
 	local t_4Count, delimiterIndex
@@ -134,19 +134,19 @@ function t.processEmphasisRun(p3, p4, p5)
 			table.insert(t_5, v_1)
 			continue
 		end
-		local var17, i_3
+		local var9, i_3
 		delimiterIndex = t_2[v_1.delimiterIndex]
 		
-		if delimiterIndex.char == "`" and delimiterIndex.runLength > 0 and (v_1.delimiterIndex == #t_2 and not var14) and v < #t_1 then
+		if delimiterIndex.char == "`" and delimiterIndex.runLength > 0 and (v_1.delimiterIndex == #t_2 and not var8) and v < #t_1 then
 			matches = false
 			
 			for i_3 = #t_3, 1, -1 do
-				var17 = t_3[i_3]
+				var9 = t_3[i_3]
 				
-				if delimiterIndex.tokenStart < var17 then
+				if delimiterIndex.tokenStart < var9 then
 					matches = true
 					break
-				elseif var17 > delimiterIndex.tokenStart then
+				elseif var9 > delimiterIndex.tokenStart then
 					continue
 				else
 					break
@@ -164,17 +164,17 @@ function t.processEmphasisRun(p3, p4, p5)
 						continue
 					end
 					if matches[1].isOpener then
-						local var18 = 0
+						local var10 = 0
 						
 						for i_4, v_2 in matches do
-							var18 += v_2.length
+							var10 += v_2.length
 						end
-						local var19 = delimiterIndex.origRunLength - var18
+						local var11 = delimiterIndex.origRunLength - var10
 						
-						if var19 > 0 then
+						if var11 > 0 then
 							table.insert(t_5, {
 								name = "TEXT",
-								text = string.rep(delimiterIndex.char, var19),
+								text = string.rep(delimiterIndex.char, var11),
 								offset = v_1.offset
 							})
 						end
@@ -187,15 +187,15 @@ function t.processEmphasisRun(p3, p4, p5)
 					for i_4, v_2 in matches do
 						v_3 = v_2.length
 					end
-					for var17 = #t_6, 1, -1 do
-						table.insert(t_5, t_6[var17])
+					for var9 = #t_6, 1, -1 do
+						table.insert(t_5, t_6[var9])
 					end
-					local var22 = 0
+					local var12 = 0
 					
 					for v_2, v_3 in matches do
-						var22 += v_3.length
+						var12 += v_3.length
 					end
-					i_3 = delimiterIndex.origRunLength - var22
+					i_3 = delimiterIndex.origRunLength - var12
 					
 					if i_3 > 0 then
 						table.insert(t_5, {
@@ -208,7 +208,7 @@ function t.processEmphasisRun(p3, p4, p5)
 					table.insert(t_5, {
 						name = "EMPHASIS_START",
 						text = "INLINE_CODE",
-						offset = p3[delimiterIndex.tokenStart].offset
+						offset = p4[delimiterIndex.tokenStart].offset
 					})
 				end
 			end

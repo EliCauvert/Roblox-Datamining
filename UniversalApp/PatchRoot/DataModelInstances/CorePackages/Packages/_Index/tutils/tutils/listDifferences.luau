@@ -1,34 +1,34 @@
 ﻿local tableDifferenceModule = require(script.Parent.tableDifference)
 
-local function _(p0)
+local function _(p1)
 	local t = {}
 	
-	for i = 1, #p0 do
-		t[p0[i]] = true
+	for i = 1, #p1 do
+		t[p1[i]] = true
 	end
 	return t
 end
 
-local _ = function(p1)
+local _ = function(p2)
 	local t = {}
 	
-	for i, v in pairs(p1) do
+	for i, v in pairs(p2) do
 		table.insert(t, i)
 	end
 	return t
 end
 
-return function(p2, p3)
+return function(p3, p4)
 	-- upvalues: tableDifferenceModule (ref)
 	local t = {}
 	
-	for i = 1, #p2 do
-		t[p2[i]] = true
+	for i = 1, #p3 do
+		t[p3[i]] = true
 	end
 	local t_1 = {}
 	
-	for i_1 = 1, #p3 do
-		t_1[p3[i_1]] = true
+	for i_1 = 1, #p4 do
+		t_1[p4[i_1]] = true
 	end
 	local t_2 = {}
 	

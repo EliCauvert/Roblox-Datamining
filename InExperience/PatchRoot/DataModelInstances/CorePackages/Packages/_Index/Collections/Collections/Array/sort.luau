@@ -2,21 +2,21 @@
 local noneModule = require(parent.Object.None)
 local _ = require(parent.Parent.ES7Types)
 
-local var1 = function(p0, p1)
-	return type(p0) .. tostring(p0) < type(p1) .. tostring(p1)
+local var1 = function(p1, p2)
+	return type(p1) .. tostring(p1) < type(p2) .. tostring(p2)
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: var1 (ref), noneModule (ref)
 	local var2 = var1
 	
-	if p3 ~= nil and p3 ~= noneModule then
-		if typeof(p3) ~= "function" then
+	if p2 ~= nil and p2 ~= noneModule then
+		if typeof(p2) ~= "function" then
 			error("invalid argument to Array.sort: compareFunction must be a function")
 		end
-		var2 = function(p4, p5)
-			-- upvalues: p3 (ref)
-			local var3 = p3(p4, p5)
+		var2 = function(p3, p4)
+			-- upvalues: p2 (ref)
+			local var3 = p2(p3, p4)
 			
 			if typeof(var3) ~= "number" then
 				error(("invalid result from compare function, expected number but got %s"):format(typeof(var3)))
@@ -24,7 +24,7 @@ return function(p2, p3)
 			return var3 < 0
 		end
 	end
-	table.sort(p2, var2)
+	table.sort(p1, var2)
 	
-	return p2
+	return p1
 end

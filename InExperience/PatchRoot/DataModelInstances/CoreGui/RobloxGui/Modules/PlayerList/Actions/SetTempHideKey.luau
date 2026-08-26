@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetTempHideKey", function(p0, p1)
-	return { tempHideKey = p0, tempHideValue = p1 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetTempHideKey", function(p1, p2)
+	return { tempHideKey = p1, tempHideValue = p2 }
 end)

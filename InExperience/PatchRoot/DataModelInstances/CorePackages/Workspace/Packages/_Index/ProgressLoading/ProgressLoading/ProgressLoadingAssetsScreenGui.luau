@@ -8,24 +8,24 @@ local constantsModule = require(script.Parent.Constants)
 
 local function getIsLoadingAssets(value)
 	-- upvalues: getDeferredAssetStoreModule (ref)
-	local var7 = getDeferredAssetStoreModule(value)
+	local var1 = getDeferredAssetStoreModule(value)
 	
-	return if var7 then var7.getDownloadStatus(value) == Enum.PrefetchDownloadStatus.InProgress else false
+	return if var1 then var1.getDownloadStatus(value) == Enum.PrefetchDownloadStatus.InProgress else false
 end
 
 return reactModule.memo(function(value)
 	-- upvalues: signalsReactModule (ref), getIsLoadingAssets (ref), reactModule (ref), progressLoadingTelemetryModule (ref), constantsModule (ref), progressLoadingAssetsModule (ref)
-	local var8 = signalsReactModule.useSignalState(getIsLoadingAssets)
-	local var9, var10 = reactModule.useState(var8)
+	local var1 = signalsReactModule.useSignalState(getIsLoadingAssets)
+	local var2, var3 = reactModule.useState(var1)
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), progressLoadingTelemetryModule (copy), var10 (ref)
-		if var8 then
+		-- upvalues: var1 (ref), progressLoadingTelemetryModule (copy), var3 (ref)
+		if var1 then
 			progressLoadingTelemetryModule.logLoadingAssetsActivated()
-			var10(true)
+			var3(true)
 		end
-	end, { var8 })
+	end, { var1 })
 	
-	return if var9 then reactModule.createElement("ScreenGui", {
+	return if var2 then reactModule.createElement("ScreenGui", {
 		Enabled = true,
 		ClipToDeviceSafeArea = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
@@ -33,11 +33,11 @@ return reactModule.memo(function(value)
 		ScreenInsets = Enum.ScreenInsets.None
 	}, {
 		ProgressLoadingAssets = reactModule.createElement(progressLoadingAssetsModule, {
-			isVisible = var8,
+			isVisible = var1,
 			onHideComplete = reactModule.useCallback(function()
-				-- upvalues: progressLoadingTelemetryModule (copy), var10 (ref)
+				-- upvalues: progressLoadingTelemetryModule (copy), var3 (ref)
 				progressLoadingTelemetryModule.logLoadingAssetsDeactivated()
-				var10(false)
+				var3(false)
 			end, {})
 		})
 	}) else nil

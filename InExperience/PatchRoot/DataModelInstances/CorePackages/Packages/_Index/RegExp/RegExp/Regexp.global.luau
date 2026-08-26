@@ -2,26 +2,26 @@
 local t = {}
 local t_1 = {
 	__index = t,
-	__tostring = function(p0)
-		return tostring(p0._innerRegEx)
+	__tostring = function(p1)
+		return tostring(p1._innerRegEx)
 	end
 }
 
 function t.exec(p1, p2)
-	local var3 = p1._innerRegEx:match(p2)
+	local var1 = p1._innerRegEx:match(p2)
 	
-	if not var3 then
+	if not var1 then
 		return nil
 	end
-	local var4 = var3:span()
-	local var5 = var3:grouparr()
-	local list = { var5[0] }
+	local var2 = var1:span()
+	local var3 = var1:grouparr()
+	local list = { var3[0] }
 	
-	for i = 1, var5.n do
-		list[i + 1] = var5[i]
+	for i = 1, var3.n do
+		list[i + 1] = var3[i]
 	end
-	list.n = var5.n + 1
-	list.index = var4
+	list.n = var3.n + 1
+	list.index = var2
 	list.input = p2
 	
 	return list
@@ -32,16 +32,16 @@ function t.test(p3, p4)
 end
 
 return setmetatable(t, {
-	__call = function(_, p5, p6)
+	__call = function(_, p3, p4)
 		-- upvalues: regExModule (ref), t_1 (ref)
-		p6 = p6 or ""
+		p4 = p4 or ""
 		
 		return setmetatable({
-			source = p5,
-			ignoreCase = p6:find("i") ~= nil,
-			global = p6:find("g") ~= nil,
-			multiline = p6:find("m") ~= nil,
-			_innerRegEx = regExModule.new(p5, p6)
+			source = p3,
+			ignoreCase = p4:find("i") ~= nil,
+			global = p4:find("g") ~= nil,
+			multiline = p4:find("m") ~= nil,
+			_innerRegEx = regExModule.new(p3, p4)
 		}, t_1)
 	end
 })

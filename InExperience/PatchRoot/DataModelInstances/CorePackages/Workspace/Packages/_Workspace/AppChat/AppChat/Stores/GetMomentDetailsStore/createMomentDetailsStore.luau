@@ -10,40 +10,40 @@ local momentStatus = momentsTypesModule.Enums.MomentStatus
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 
-return function(p0)
+return function(p1)
 	-- upvalues: dataHydrationModule (ref), name (ref), momentsGetMomentsStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), momentStatus (ref), shareLinkTargetIdType (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	local function createResolver(p1)
-		-- upvalues: dataHydrationModule (copy), p0 (ref), name (copy), momentsGetMomentsStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), momentStatus (copy), shareLinkTargetIdType (copy)
+	local function createResolver(p2)
+		-- upvalues: dataHydrationModule (copy), p1 (ref), name (copy), momentsGetMomentsStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), momentStatus (copy), shareLinkTargetIdType (copy)
 		return dataHydrationModule.createDataResolver({
 			supportsMultiGet = true,
 			queueProcessDelaySec = 0,
 			replaceItems = true,
-			cache = dataHydrationModule.createDataCache(p0.ttlSeconds, p0.failedTtlSeconds),
-			logError = function(p2)
+			cache = dataHydrationModule.createDataCache(p1.ttlSeconds, p1.failedTtlSeconds),
+			logError = function(p3)
 				-- upvalues: name (copy)
-				name:warning(`Error resolving Moment details: {tostring(p2)}`)
+				name:warning(`Error resolving Moment details: {tostring(p3)}`)
 			end,
 			fetchFn = function(p3)
-				-- upvalues: momentsGetMomentsStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), p1 (ref), momentStatus (copy), shareLinkTargetIdType (copy)
+				-- upvalues: momentsGetMomentsStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), p2 (ref), momentStatus (copy), shareLinkTargetIdType (copy)
 				local t = {}
 				
 				for i in p3 do
 					table.insert(t, i)
 				end
-				local var11 = momentsGetMomentsStoreModule(false)
+				local var1 = momentsGetMomentsStoreModule(false)
 				
-				return (if fFlagMomentsPassFeedItemIdToBackendApis then var11.getMomentsByIds(t, p1) else var11.getMomentsByIds(t)):andThen(function(p4)
-					-- upvalues: momentStatus (copy), p1 (copy), shareLinkTargetIdType (copy), p3 (ref)
+				return (if fFlagMomentsPassFeedItemIdToBackendApis then var1.getMomentsByIds(t, p2) else var1.getMomentsByIds(t)):andThen(function(p4)
+					-- upvalues: momentStatus (copy), p2 (copy), shareLinkTargetIdType (copy), p3 (ref)
 					local t = {}
 					
 					for i, v in p4.moments do
 						if v.isModerated ~= true and v.status ~= momentStatus.Deleted then
-							local var13 = if p1 == shareLinkTargetIdType.FeedItemId then v.recommendationMetadata.feedItemId else v.momentId
+							local var2 = if p2 == shareLinkTargetIdType.FeedItemId then v.recommendationMetadata.feedItemId else v.momentId
 							
-							if var13 ~= nil and p3[var13] ~= nil then
-								t[var13] = v
+							if var2 ~= nil and p3[var2] ~= nil then
+								t[var2] = v
 							end
 						end
 					end
@@ -53,41 +53,41 @@ return function(p0)
 		})
 	end
 	
-	local var8 = createResolver(nil)
-	local var9 = if fFlagMomentsPassFeedItemIdToBackendApis then createResolver(shareLinkTargetIdType.FeedItemId) else nil
+	local var2 = createResolver(nil)
+	local var3 = if fFlagMomentsPassFeedItemIdToBackendApis then createResolver(shareLinkTargetIdType.FeedItemId) else nil
 	
-	local function _(p5)
-		-- upvalues: var9 (ref), shareLinkTargetIdType (copy), var8 (ref)
-		return if var9 == nil or p5 ~= shareLinkTargetIdType.FeedItemId then var8 else var9
+	local function _(p4)
+		-- upvalues: var3 (ref), shareLinkTargetIdType (copy), var2 (ref)
+		return if var3 == nil or p4 ~= shareLinkTargetIdType.FeedItemId then var2 else var3
 	end
 	
 	return {
-		getCachedMomentDetails = function(p6, p7)
-			-- upvalues: var9 (ref), shareLinkTargetIdType (copy), var8 (ref)
-			return (if var9 == nil or p7 ~= shareLinkTargetIdType.FeedItemId then var8 else var9).getCachedItem(p6)
+		getCachedMomentDetails = function(p4, p5)
+			-- upvalues: var3 (ref), shareLinkTargetIdType (copy), var2 (ref)
+			return (if var3 == nil or p5 ~= shareLinkTargetIdType.FeedItemId then var2 else var3).getCachedItem(p4)
 		end,
-		fetchMomentDetails = function(p8, p9)
-			-- upvalues: var9 (ref), shareLinkTargetIdType (copy), var8 (ref)
-			return (if var9 == nil or p9 ~= shareLinkTargetIdType.FeedItemId then var8 else var9).fetchItem(p8)
+		fetchMomentDetails = function(p4, p5)
+			-- upvalues: var3 (ref), shareLinkTargetIdType (copy), var2 (ref)
+			return (if var3 == nil or p5 ~= shareLinkTargetIdType.FeedItemId then var2 else var3).fetchItem(p4)
 		end,
-		getAndFetchMomentDetails = function(p10, p11)
-			-- upvalues: var9 (ref), shareLinkTargetIdType (copy), var8 (ref)
-			return (if var9 == nil or p11 ~= shareLinkTargetIdType.FeedItemId then var8 else var9).getAndFetchItem(p10)
+		getAndFetchMomentDetails = function(p4, p5)
+			-- upvalues: var3 (ref), shareLinkTargetIdType (copy), var2 (ref)
+			return (if var3 == nil or p5 ~= shareLinkTargetIdType.FeedItemId then var2 else var3).getAndFetchItem(p4)
 		end,
 		clear = function()
-			-- upvalues: var8 (ref), var9 (ref)
-			var8.clear()
+			-- upvalues: var2 (ref), var3 (ref)
+			var2.clear()
 			
-			if var9 ~= nil then
-				var9.clear()
+			if var3 ~= nil then
+				var3.clear()
 			end
 		end,
 		dispose = function()
-			-- upvalues: var8 (ref), var9 (ref)
-			var8.dispose()
+			-- upvalues: var2 (ref), var3 (ref)
+			var2.dispose()
 			
-			if var9 ~= nil then
-				var9.dispose()
+			if var3 ~= nil then
+				var3.dispose()
 			end
 		end
 	}

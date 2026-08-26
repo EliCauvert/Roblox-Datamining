@@ -84,29 +84,29 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var3 = if var1.isScrubbable then scrubBehaviorModule.On else var1.scrubBehavior
 	local var4 = var3 and var3 ~= scrubBehaviorModule.Off
 	local var5 = if flagsModule.FoundationNumberInputBeta then t[var3] else nil
-	local var6 = reactModule.useCallback(function(p1)
+	local var6 = reactModule.useCallback(function(p3)
 		-- upvalues: var1 (ref)
-		return math.clamp(p1, var1.minimum, var1.maximum)
+		return math.clamp(p3, var1.minimum, var1.maximum)
 	end, { var1.minimum, var1.maximum })
-	local var7 = reactModule.useCallback(function(p1, p2)
+	local var7 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var1 (ref)
-		return p2(p1 / var1.step) * var1.step
+		return p4(p3 / var1.step) * var1.step
 	end, { var1.step })
 	local var8 = reactModule.useMemo(function()
 		-- upvalues: mapBindableModule (copy), var1 (ref), var7 (ref), var6 (ref)
-		return mapBindableModule(var1.value, function(p1)
+		return mapBindableModule(var1.value, function(p3)
 			-- upvalues: var1 (copy), var7 (copy), var6 (copy)
-			local var1 = 10 ^ (var1.precision or 0)
-			local var2 = math.floor(p1 * var1 + 0.5) / var1
-			local var3 = 10 ^ (var1.precision or 0)
-			local var4 = math.floor((p1 + var1.step) * var3 + 0.5) / var3
-			local var5 = 10 ^ (var1.precision or 0)
-			local var6 = math.floor(var7(p1, math.ceil) * var5 + 0.5) / var5
+			local var11 = 10 ^ (var11.precision or 0)
+			local var12 = math.floor(p3 * var11 + 0.5) / var11
+			local var13 = 10 ^ (var11.precision or 0)
+			local var14 = math.floor((p3 + var11.step) * var13 + 0.5) / var13
+			local var15 = 10 ^ (var11.precision or 0)
+			local var16 = math.floor(var7(p3, math.ceil) * var15 + 0.5) / var15
 			
-			if var2 ~= var6 then
-				var4 = var6
+			if var12 ~= var16 then
+				var14 = var16
 			end
-			return var6(var4)
+			return var16(var14)
 		end)
 	end, {
 		var1.value,
@@ -117,19 +117,19 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	})
 	local var9 = reactModule.useMemo(function()
 		-- upvalues: mapBindableModule (copy), var1 (ref), var7 (ref), var6 (ref)
-		return mapBindableModule(var1.value, function(p1)
+		return mapBindableModule(var1.value, function(p3)
 			-- upvalues: var1 (copy), var7 (copy), var6 (copy)
-			local var1 = 10 ^ (var1.precision or 0)
-			local var2 = math.floor(p1 * var1 + 0.5) / var1
-			local var3 = 10 ^ (var1.precision or 0)
-			local var4 = math.floor((p1 - var1.step) * var3 + 0.5) / var3
-			local var5 = 10 ^ (var1.precision or 0)
-			local var6 = math.floor(var7(p1, math.floor) * var5 + 0.5) / var5
+			local var11 = 10 ^ (var11.precision or 0)
+			local var12 = math.floor(p3 * var11 + 0.5) / var11
+			local var13 = 10 ^ (var11.precision or 0)
+			local var14 = math.floor((p3 - var11.step) * var13 + 0.5) / var13
+			local var15 = 10 ^ (var11.precision or 0)
+			local var16 = math.floor(var7(p3, math.floor) * var15 + 0.5) / var15
 			
-			if var2 ~= var6 then
-				var4 = var6
+			if var12 ~= var16 then
+				var14 = var16
 			end
-			return var6(var4)
+			return var16(var14)
 		end)
 	end, {
 		var1.value,
@@ -140,23 +140,23 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	})
 	local var10 = reactModule.useMemo(function()
 		-- upvalues: mapBindableModule (copy), var1 (ref)
-		return mapBindableModule(var1.value, function(p1)
+		return mapBindableModule(var1.value, function(p3)
 			-- upvalues: var1 (copy)
-			return var1.isDisabled or p1 == var1.maximum
+			return var1.isDisabled or p3 == var1.maximum
 		end)
 	end, { var1.isDisabled, var1.value, var1.maximum })
 	local var11 = reactModule.useMemo(function()
 		-- upvalues: mapBindableModule (copy), var1 (ref)
-		return mapBindableModule(var1.value, function(p1)
+		return mapBindableModule(var1.value, function(p3)
 			-- upvalues: var1 (copy)
-			return var1.isDisabled or p1 == var1.minimum
+			return var1.isDisabled or p3 == var1.minimum
 		end)
 	end, { var1.isDisabled, var1.value, var1.minimum })
-	local var12 = reactModule.useCallback(function(p1)
+	local var12 = reactModule.useCallback(function(p3)
 		-- upvalues: var1 (ref)
-		local var1 = 10 ^ (var1.precision or 0)
+		local var13 = 10 ^ (var13.precision or 0)
 		
-		return math.floor(math.clamp(p1, var1.minimum, var1.maximum) * var1 + 0.5) / var1
+		return math.floor(math.clamp(p3, var13.minimum, var13.maximum) * var13 + 0.5) / var13
 	end, { var1.minimum, var1.maximum, var1.precision })
 	local var13, var14 = reactModule.useBinding(var1.formatAsString(var12(getBindableValueModule(var1.value))))
 	local var15 = if flagsModule.FoundationNumberInputBeta then if var1.size == inputSizeModule.XSmall then var2.Gap.Small - var2.Gap.XSmall / 2 else var2.Gap.Small else nil
@@ -203,11 +203,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		})
 		var18 = reactModule.useMemo(function()
 			-- upvalues: getMultiLineTextHeightModule (copy), fontSize (ref), fontStyle (ref), var3 (ref)
-			local var1 = math.round((var3.container.minHeight - 2 - getMultiLineTextHeightModule(fontSize, 1, fontStyle.LineHeight)) * 2) / 2
+			local var26 = math.round((var3.container.minHeight - 2 - getMultiLineTextHeightModule(fontSize, 1, fontStyle.LineHeight)) * 2) / 2
 			
 			return {
-				top = UDim.new(0, math.floor(var1 / 2) + 1),
-				bottom = UDim.new(0, math.ceil(var1 / 2) + 1),
+				top = UDim.new(0, math.floor(var26 / 2) + 1),
+				bottom = UDim.new(0, math.ceil(var26 / 2) + 1),
 				left = UDim.new(),
 				right = UDim.new()
 			}
@@ -223,55 +223,55 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			var1.onFocusGained()
 		end
 	end, { var1.onFocusGained, var1.value })
-	local var29 = reactModule.useCallback(function(p1, p2)
+	local var29 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var12 (ref), var14 (ref), var10 (ref), var1 (ref)
-		local var1 = var12(p1)
-		var14(if var10() then tostring(var1) else var1.formatAsString(var1))
-		var1.onChanged(var1, p2)
+		local var30 = var12(p3)
+		var14(if var10() then tostring(var30) else var30.formatAsString(var30))
+		var30.onChanged(var30, p4)
 	end, { var1.onChanged, var1.formatAsString, var12, var10 })
-	local var2 = reactModule.useCallback(function(p1)
+	local var2 = reactModule.useCallback(function(p3)
 		-- upvalues: var2 (ref), var29 (ref), getBindableValueModule (copy), var1 (ref), onChangeCallbackReasonModule (copy)
 		var2(false)
 		var29(getBindableValueModule(var1.value), onChangeCallbackReasonModule.FocusLost)
 		
 		if var1.onFocusLost then
-			var1.onFocusLost(p1)
+			var1.onFocusLost(p3)
 		end
 	end, { var29, var1.onFocusLost, var1.value, var12 })
-	local var3 = reactModule.useCallback(function(p1)
+	local var3 = reactModule.useCallback(function(p3)
 		-- upvalues: var14 (ref), var10 (ref), flagsModule (copy), var1 (ref), var2 (ref), onChangeCallbackReasonModule (copy)
-		var14(p1)
+		var14(p3)
 		
 		if not var10() then return end
 		if flagsModule.FoundationNumberInputOnTextChanged then
-			local var1 = tonumber(p1)
+			local var30 = tonumber(p3)
 			
-			if var1.onTextChanged == nil then
-				if var1 == nil then
+			if var30.onTextChanged == nil then
+				if var30 == nil then
 					var2(true)
 					
 					return
-				elseif var1 == nil then
+				elseif var30 == nil then
 					return
 				else
 					var2(false)
-					var1.onChanged(var1, onChangeCallbackReasonModule.Keyboard)
+					var30.onChanged(var30, onChangeCallbackReasonModule.Keyboard)
 					
 					return
 				end
 			else
-				var1.onTextChanged(p1)
+				var30.onTextChanged(p3)
 			end
 		else
-			local var2 = tonumber(p1)
+			local var31 = tonumber(p3)
 			
-			if var2 == nil then
-				var2(true)
+			if var31 == nil then
+				var31(true)
 				
 				return
 			end
-			var2(false)
-			var1.onChanged(var2, onChangeCallbackReasonModule.Keyboard)
+			var31(false)
+			var30.onChanged(var31, onChangeCallbackReasonModule.Keyboard)
 		end
 	end, {
 		var10,
@@ -331,19 +331,19 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		if flagsModule.FoundationNumberInputBeta then var15 else nil,
 		if flagsModule.FoundationNumberInputBeta then var26 else nil
 	})
-	local var1 = reactModule.useCallback(function(_, p1)
+	local var1 = reactModule.useCallback(function(_, p3)
 		-- upvalues: var1 (ref), var9 (ref), var8 (ref), getBindableValueModule (copy)
 		local value = var1.value
 		var9.current = false
 		
 		if value then
-			var8.current = { position = p1.X, value = getBindableValueModule(value) }
+			var8.current = { position = p3.X, value = getBindableValueModule(value) }
 		end
 	end, { var1.value })
-	local var2 = reactModule.useCallback(function(_, p1)
+	local var2 = reactModule.useCallback(function(_, p3)
 		-- upvalues: var8 (ref), calculateNumberInputValueFromPositionsModule (copy), var1 (ref), flagsModule (copy), var5 (ref), var29 (ref), onChangeCallbackReasonModule (copy), var9 (ref)
 		if var8.current then
-			var29(calculateNumberInputValueFromPositionsModule(var8.current.value, var8.current.position, p1.X, var1.step, if flagsModule.FoundationNumberInputBeta then var5 else nil), onChangeCallbackReasonModule.Drag)
+			var29(calculateNumberInputValueFromPositionsModule(var8.current.value, var8.current.position, p3.X, var1.step, if flagsModule.FoundationNumberInputBeta then var5 else nil), onChangeCallbackReasonModule.Drag)
 			
 			if flagsModule.FoundationNumberInputScrubCallbackProps and var1.onScrubStarted and not var9.current then
 				var1.onScrubStarted()
@@ -374,24 +374,24 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local transparency_1 = var2.Color.Shift.Shift_100.Transparency
 	local var2 = reactModule.useMemo(function()
 		-- upvalues: mapBindableModule (copy), var1 (ref), var6 (ref), transparency_1 (ref), transparency (ref)
-		return mapBindableModule(var1.value, function(p1)
+		return mapBindableModule(var1.value, function(p3)
 			-- upvalues: var1 (copy), var6 (copy), transparency_1 (copy), transparency (copy)
-			local var1 = if p1 and var1.maximum and var1.minimum then if var1.maximum == var1.minimum then 1 else (var6(p1) - var1.minimum) / (var1.maximum - var1.minimum) else 0
+			local var30 = if p3 and var30.maximum and var30.minimum then if var30.maximum == var30.minimum then 1 else (var6(p3) - var30.minimum) / (var30.maximum - var30.minimum) else 0
 			
-			if var1 == 0 then
+			if var30 == 0 then
 				return NumberSequence.new(transparency_1)
-			elseif var1 == 1 then
+			elseif var30 == 1 then
 				return NumberSequence.new(transparency)
-			elseif var1 <= 0 and var1 >= 1 then
+			elseif var30 <= 0 and var30 >= 1 then
 				return NumberSequence.new(transparency_1)
 			end
 			local list = {
 				NumberSequenceKeypoint.new(0, transparency),
-				NumberSequenceKeypoint.new(var1, transparency),
-				NumberSequenceKeypoint.new(math.min(var1 + 0.001, 1), transparency_1)
+				NumberSequenceKeypoint.new(var30, transparency),
+				NumberSequenceKeypoint.new(math.min(var30 + 0.001, 1), transparency_1)
 			}
 			
-			if var1 < 0.999 then
+			if var30 < 0.999 then
 				table.insert(list, NumberSequenceKeypoint.new(1, transparency_1))
 			end
 			return NumberSequence.new(list)
@@ -416,76 +416,76 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		isDisabled = var1.isDisabled,
 		hint = var1.hint,
 		textBoxRef = var7,
-		input = function(p1)
-			-- upvalues: flagsModule (copy), var26 (ref), var6 (ref), controlsVariant (ref), numberInputControlsVariantModule (copy), reactModule (copy), internalTextInputModule (copy), var1 (ref), joinBindablesModule (copy), var13 (ref), var10 (ref), var12 (ref), hasError (ref), var3 (ref), var17 (write), p1 (ref), var3 (ref), var2 (ref), var28 (ref), var4 (ref), var1 (ref), var2 (ref), var1 (ref), var2 (ref), var2 (ref), viewModule (copy), iconModule (copy), var16 (write), textModule (copy), var19 (write), var18 (write), var27 (ref), var7 (ref), var15 (ref)
-			local var1 = if flagsModule.FoundationNumberInputBeta then var26 and var6 else controlsVariant == numberInputControlsVariantModule.Split
+		input = function(p3)
+			-- upvalues: flagsModule (copy), var26 (ref), var6 (ref), controlsVariant (ref), numberInputControlsVariantModule (copy), reactModule (copy), internalTextInputModule (copy), var1 (ref), joinBindablesModule (copy), var13 (ref), var10 (ref), var12 (ref), hasError (ref), var3 (ref), var17 (write), p3 (ref), var3 (ref), var2 (ref), var28 (ref), var4 (ref), var1 (ref), var2 (ref), var1 (ref), var2 (ref), var2 (ref), viewModule (copy), iconModule (copy), var16 (write), textModule (copy), var19 (write), var18 (write), var27 (ref), var7 (ref), var15 (ref)
+			local var30 = if flagsModule.FoundationNumberInputBeta then var26 and var6 else controlsVariant == numberInputControlsVariantModule.Split
 			local createElement = reactModule.createElement
 			createElement = createElement(internalTextInputModule, {
-				inputRef = var1.inputRef,
-				text = joinBindablesModule({ text = var13, value = var1.value }, function(p1)
-					-- upvalues: var10 (copy), var1 (copy), var12 (copy)
-					return if var10() then p1.text else var1.formatAsString(var12(p1.value))
+				inputRef = var30.inputRef,
+				text = joinBindablesModule({ text = var13, value = var30.value }, function(p4)
+					-- upvalues: var10 (copy), var30 (copy), var12 (copy)
+					return if var10() then p4.text else var30.formatAsString(var12(p4.value))
 				end),
 				hasError = hasError,
-				variant = var1.variant,
-				size = var1.size,
-				Selectable = var1.Selectable,
-				NextSelectionUp = var1.NextSelectionUp,
-				NextSelectionDown = var1.NextSelectionDown,
-				NextSelectionLeft = var1.NextSelectionLeft,
-				NextSelectionRight = var1.NextSelectionRight,
+				variant = var30.variant,
+				size = var30.size,
+				Selectable = var30.Selectable,
+				NextSelectionUp = var30.NextSelectionUp,
+				NextSelectionDown = var30.NextSelectionDown,
+				NextSelectionLeft = var30.NextSelectionLeft,
+				NextSelectionRight = var30.NextSelectionRight,
 				horizontalPadding = {
 					left = var3.container.horizontalPadding,
 					right = if flagsModule.FoundationNumberInputBeta then var3.container.horizontalPadding else nil,
 					innerLeft = if not flagsModule.FoundationNumberInputBeta then if var17 and var17.X > 0 then UDim.new(0, var17.X) else nil else nil
 				},
-				focusBehavior = p1.focusBehavior,
+				focusBehavior = p3.focusBehavior,
 				onChanged = var3,
 				onFocusLost = var2,
 				onFocus = var28,
-				onDragStarted = if var4 then var1 else nil,
+				onDragStarted = if var4 then var30 else nil,
 				onDrag = if var4 then var2 else nil,
-				onDragEnded = if var4 then var1 else nil,
-				onReturnPressed = var1.onReturnPressed,
-				ref = p1,
+				onDragEnded = if var4 then var30 else nil,
+				onReturnPressed = var30.onReturnPressed,
+				ref = p3,
 				backgroundGradient = if var4 and var2 then reactModule.createElement("UIGradient", {
 					Rotation = 0,
 					Color = ColorSequence.new(var2.Color.Shift.Shift_300.Color3),
 					Transparency = var2
 				}) else nil,
-				trailingElement = if flagsModule.FoundationNumberInputBeta then if var1.trailingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
-					name = var1.trailingIcon,
+				trailingElement = if flagsModule.FoundationNumberInputBeta then if var30.trailingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
+					name = var30.trailingIcon,
 					style = var3.icon.style,
 					size = var3.icon.size
 				})) else nil elseif controlsVariant == numberInputControlsVariantModule.Stacked then var6 else nil,
-				leadingElement = if var1.leadingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
-					name = var1.leadingIcon,
+				leadingElement = if var30.leadingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
+					name = var30.leadingIcon,
 					style = var3.icon.style,
 					size = var3.icon.size
 				})) else nil,
-				isDisabled = var1.isDisabled,
-				LayoutOrder = if var1 and flagsModule.FoundationNumberInputBeta then 0 else nil,
-				testId = `{var1.testId}--field`
+				isDisabled = var30.isDisabled,
+				LayoutOrder = if var30 and flagsModule.FoundationNumberInputBeta then 0 else nil,
+				testId = `{var30.testId}--field`
 			})
-			local var1 = if flagsModule.FoundationNumberInputBeta and var16 then reactModule.createElement(textModule, {
+			local var30 = if flagsModule.FoundationNumberInputBeta and var16 then reactModule.createElement(textModule, {
 				tag = "text-align-x-left text-align-y-center content-muted",
 				RichText = true,
 				ClipsDescendants = true,
 				fontStyle = var3.textBox.fontStyle,
 				Size = UDim2.new(1, -(var19.left.Offset + var19.right.Offset), 1, 0),
 				Position = UDim2.fromOffset(var19.left.Offset, 0),
-				Text = var13:map(function(p1)
-					-- upvalues: var1 (copy)
-					return `{if var1.prefix then var1.prefix .. " " else ""}<font transparency="1">{p1}</font>{if var1.suffix then " " .. var34.suffix else ""}`
+				Text = var13:map(function(p4)
+					-- upvalues: var30 (copy)
+					return `{if var30.prefix then var30.prefix .. " " else ""}<font transparency="1">{p4}</font>{if var30.suffix then " " .. var34.suffix else ""}`
 				end),
 				padding = var18,
-				testId = `{var1.testId}--units`
+				testId = `{var30.testId}--units`
 			}) else nil
 			
 			if flagsModule.FoundationNumberInputBeta then
-				createElement = reactModule.createElement(viewModule, { tag = "size-full-0 auto-y" }, { Input = createElement, Units = var1 })
+				createElement = reactModule.createElement(viewModule, { tag = "size-full-0 auto-y" }, { Input = createElement, Units = var30 })
 			end
-			return if var1 or flagsModule.FoundationNumberInputBeta then reactModule.createElement(viewModule, {
+			return if var30 or flagsModule.FoundationNumberInputBeta then reactModule.createElement(viewModule, {
 				Size = if flagsModule.FoundationNumberInputBeta then UDim2.new(var27.Scale - var7.Scale, var27.Offset - var7.Offset, 0, 0) else UDim2.fromOffset(var27.Offset - var7.Offset, 0),
 				tag = if flagsModule.FoundationNumberInputBeta then "row align-y-center auto-y" else "row align-y-center gap-xsmall auto-y",
 				layout = if flagsModule.FoundationNumberInputBeta then {
@@ -495,7 +495,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				} else nil
 			}, {
 				InputField = createElement,
-				Controls = if var1 then var6 else nil
+				Controls = if var30 then var6 else nil
 			}) else createElement
 		end
 	}))

@@ -8,36 +8,36 @@ local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local fFlagAbuseReportForwardCustomTagFieldsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportForwardCustomTagFields)
 local appendReportAnythingTags = require(genericAbuseReporting.BeduiV2.Utils.appendReportAnythingTags).appendReportAnythingTags
 
-local function tag(p0)
-	return if p0 then { valueList = { { data = p0 } } } else nil
+local function tag(p1)
+	return if p1 then { valueList = { { data = p1 } } } else nil
 end
 
 local function _(p1)
 	return typeof(p1) == "string" and string.match(p1, "^[A-Z_][A-Z0-9_]*$") ~= nil
 end
 
-local function appendCustomTagFields(p2, p3)
+local function appendCustomTagFields(p1, p2)
 	-- upvalues: tag (ref)
-	local custom = p3.data.custom
+	local custom = p2.data.custom
 	
 	if not custom then return end
 	for i, v in pairs(custom) do
 		if typeof(i) == "string" and string.match(i, "^[A-Z_][A-Z0-9_]*$") ~= nil then
-			local var11 = typeof(v)
+			local var1 = typeof(v)
 			
-			if var11 == "string" or var11 == "number" or var11 == "boolean" then
-				p2[i] = tag(tostring(v))
+			if var1 == "string" or var1 == "number" or var1 == "boolean" then
+				p1[i] = tag(tostring(v))
 			end
 		end
 	end
 end
 
-local function buildVoiceReport(p4, p5)
+local function buildVoiceReport(p3, p4)
 	-- upvalues: playersService (ref), tag (ref), fFlagAbuseReportForwardCustomTagFieldsModule (ref), appendCustomTagFields (ref), httpService (ref)
 	local t = {}
 	
-	if p5 then
-		for i, v in ipairs(p5.sortedPlayerListUserIds) do
+	if p4 then
+		for i, v in ipairs(p4.sortedPlayerListUserIds) do
 			table.insert(t, { data = tostring(v) })
 		end
 	end
@@ -45,141 +45,141 @@ local function buildVoiceReport(p4, p5)
 	local t_1 = {
 		ENTRY_POINT = tag("in-experience"),
 		SUBMITTER_USER_ID = tag(tostring(if localPlayer then localPlayer.UserId else 0)),
-		REPORT_TARGET_USER_ID = tag(p4.data.targetIdStr),
-		REPORTED_ABUSE_CATEGORY = tag(p4.data.category),
-		REPORTER_COMMENT = tag(p4.data.comment or ""),
+		REPORT_TARGET_USER_ID = tag(p3.data.targetIdStr),
+		REPORTED_ABUSE_CATEGORY = tag(p3.data.category),
+		REPORTER_COMMENT = tag(p3.data.comment or ""),
 		IS_PLACE_VOICE_ENABLED = tag("true"),
 		VOICE_USER_IDS_FROM_CLIENT = { valueList = t },
-		IN_EXP_MENU_OPENED_UNIX_MILLI = tag(tostring(if p5 then p5.menuOpenedUnixMilli else 0)),
-		VOICE_CHANNEL_ID = tag(if p5 then p5.channelId else ""),
-		VOICE_USER_COUNT = tag(tostring(if p5 then p5.voiceUserCount else 0)),
-		VOICE_IMPACTED_USER_COUNT = tag(tostring(if p5 then p5.voiceImpactedUserCount else 0)),
-		REPORTED_ABUSE_VECTOR = tag(p4.data.abuseVector)
+		IN_EXP_MENU_OPENED_UNIX_MILLI = tag(tostring(if p4 then p4.menuOpenedUnixMilli else 0)),
+		VOICE_CHANNEL_ID = tag(if p4 then p4.channelId else ""),
+		VOICE_USER_COUNT = tag(tostring(if p4 then p4.voiceUserCount else 0)),
+		VOICE_IMPACTED_USER_COUNT = tag(tostring(if p4 then p4.voiceImpactedUserCount else 0)),
+		REPORTED_ABUSE_VECTOR = tag(p3.data.abuseVector)
 	}
 	
 	if fFlagAbuseReportForwardCustomTagFieldsModule then
-		appendCustomTagFields(t_1, p4)
+		appendCustomTagFields(t_1, p3)
 	end
 	return httpService:JSONEncode({ tags = t_1 })
 end
 
-local function buildChatReport(p6, p7)
+local function buildChatReport(p5, p6)
 	-- upvalues: playersService (ref), tag (ref), fFlagEnableChatReportingTextChannelTag (ref), fFlagAbuseReportForwardCustomTagFieldsModule (ref), appendCustomTagFields (ref)
 	local localPlayer = playersService.LocalPlayer
 	local t = {
 		tags = {
 			ENTRY_POINT = tag("in-experience"),
 			SUBMITTER_USER_ID = tag(tostring(if localPlayer then localPlayer.UserId else 0)),
-			REPORT_TARGET_USER_ID = tag(p6.data.targetIdStr),
-			REPORTED_ABUSE_CATEGORY = tag(p6.data.category),
-			REPORTER_COMMENT = tag(p6.data.comment or ""),
-			REPORTED_ABUSE_VECTOR = tag(p6.data.abuseVector),
-			REPORT_TARGET_MESSAGE_ID = tag(p7.targetMessages and (p7.targetMessages[1] and (p7.targetMessages[1].messageId or ""))),
-			PRESET_ID = tag(p7.targetMessages and (p7.targetMessages[1] and (p7.targetMessages[1].presetId or nil))),
-			PRESET_CHAT_VERSION = tag(p7.targetMessages and (p7.targetMessages[1] and (p7.targetMessages[1].presetChatVersion or nil))),
+			REPORT_TARGET_USER_ID = tag(p5.data.targetIdStr),
+			REPORTED_ABUSE_CATEGORY = tag(p5.data.category),
+			REPORTER_COMMENT = tag(p5.data.comment or ""),
+			REPORTED_ABUSE_VECTOR = tag(p5.data.abuseVector),
+			REPORT_TARGET_MESSAGE_ID = tag(p6.targetMessages and (p6.targetMessages[1] and (p6.targetMessages[1].messageId or ""))),
+			PRESET_ID = tag(p6.targetMessages and (p6.targetMessages[1] and (p6.targetMessages[1].presetId or nil))),
+			PRESET_CHAT_VERSION = tag(p6.targetMessages and (p6.targetMessages[1] and (p6.targetMessages[1].presetChatVersion or nil))),
 			VARIANT = tag("IGM_CLRv2")
 		}
 	}
 	
 	if fFlagEnableChatReportingTextChannelTag then
-		local channel = p7.targetMessages and (p7.targetMessages[1] and p7.targetMessages[1].channel)
+		local channel = p6.targetMessages and (p6.targetMessages[1] and p6.targetMessages[1].channel)
 		t.tags.IN_GAME_CHAT_TEXT_CHANNEL = tag(if channel then channel.Name else "RBXGlobal")
 	end
 	if fFlagAbuseReportForwardCustomTagFieldsModule then
-		appendCustomTagFields(t.tags, p6)
+		appendCustomTagFields(t.tags, p5)
 	end
 	return t
 end
 
-local function buildAvatarReport(p8, p9)
+local function buildAvatarReport(p5, p6)
 	-- upvalues: playersService (ref), tag (ref), appendReportAnythingTags (ref), fFlagAbuseReportForwardCustomTagFieldsModule (ref), appendCustomTagFields (ref)
 	local localPlayer = playersService.LocalPlayer
 	local t = {
 		ENTRY_POINT = tag("in-experience"),
 		SUBMITTER_USER_ID = tag(tostring(if localPlayer then localPlayer.UserId else 0)),
-		REPORT_TARGET_USER_ID = tag(p8.data.targetIdStr),
-		REPORTED_ABUSE_CATEGORY = tag(p8.data.category),
-		REPORTER_COMMENT = tag(p8.data.comment or ""),
-		REPORTED_ABUSE_VECTOR = tag(p8.data.abuseVector)
+		REPORT_TARGET_USER_ID = tag(p5.data.targetIdStr),
+		REPORTED_ABUSE_CATEGORY = tag(p5.data.category),
+		REPORTER_COMMENT = tag(p5.data.comment or ""),
+		REPORTED_ABUSE_VECTOR = tag(p5.data.abuseVector)
 	}
-	appendReportAnythingTags(t, p9)
+	appendReportAnythingTags(t, p6)
 	
 	if fFlagAbuseReportForwardCustomTagFieldsModule then
-		appendCustomTagFields(t, p8)
+		appendCustomTagFields(t, p5)
 	end
 	return { tags = t }
 end
 
-local function buildPlaceReport(p10, p11)
+local function buildPlaceReport(p5, p6)
 	-- upvalues: playersService (ref), tag (ref), appendReportAnythingTags (ref), fFlagAbuseReportForwardCustomTagFieldsModule (ref), appendCustomTagFields (ref), httpService (ref)
 	local localPlayer = playersService.LocalPlayer
 	local t = {
 		ENTRY_POINT = tag("in-experience"),
 		SUBMITTER_USER_ID = tag(tostring(if localPlayer then localPlayer.UserId else 0)),
 		PLACE_ID = tag(tostring(game.PlaceId)),
-		REPORTED_ABUSE_CATEGORY = tag(p10.data.category),
-		REPORTER_COMMENT = tag(p10.data.comment or ""),
-		REPORTED_ABUSE_VECTOR = tag(p10.data.abuseVector)
+		REPORTED_ABUSE_CATEGORY = tag(p5.data.category),
+		REPORTER_COMMENT = tag(p5.data.comment or ""),
+		REPORTED_ABUSE_VECTOR = tag(p5.data.abuseVector)
 	}
-	appendReportAnythingTags(t, p11)
+	appendReportAnythingTags(t, p6)
 	
 	if fFlagAbuseReportForwardCustomTagFieldsModule then
-		appendCustomTagFields(t, p10)
+		appendCustomTagFields(t, p5)
 	end
 	return httpService:JSONEncode({ tags = t })
 end
 
 return {
-	submitVoiceReport = function(p12, p13)
+	submitVoiceReport = function(p5, p6)
 		-- upvalues: buildVoiceReport (ref), promiseModule (ref), playersService (ref)
-		local var18 = buildVoiceReport(p12, p13)
+		local var2 = buildVoiceReport(p5, p6)
 		
 		return promiseModule.try(function()
-			-- upvalues: playersService (copy), var18 (ref)
-			playersService:ReportAbuseV3(playersService.LocalPlayer, var18)
+			-- upvalues: playersService (copy), var2 (ref)
+			playersService:ReportAbuseV3(playersService.LocalPlayer, var2)
 			
 			return { responseBody = {} }
 		end)
 	end,
-	submitChatReport = function(p14, p15)
+	submitChatReport = function(p5, p6)
 		-- upvalues: buildChatReport (ref), promiseModule (ref), playersService (ref)
-		local var19 = buildChatReport(p14, p15)
+		local var2 = buildChatReport(p5, p6)
 		
 		return promiseModule.try(function()
-			-- upvalues: playersService (copy), p15 (ref), var19 (ref)
-			playersService:ReportChatAbuse(p15.eligibleMessages, p15.targetMessages, var19)
+			-- upvalues: playersService (copy), p6 (ref), var2 (ref)
+			playersService:ReportChatAbuse(p6.eligibleMessages, p6.targetMessages, var2)
 			
 			return { responseBody = {} }
 		end)
 	end,
-	submitChatReportWithoutMessage = function(p16)
+	submitChatReportWithoutMessage = function(p5)
 		-- upvalues: promiseModule (ref), playersService (ref)
 		return promiseModule.try(function()
-			-- upvalues: p16 (ref), playersService (copy)
-			local var20 = tonumber(p16.data.targetIdStr)
-			playersService:ReportAbuse(var20 and playersService:GetPlayerByUserId(var20), p16.data.category, p16.data.comment or "")
+			-- upvalues: p5 (ref), playersService (copy)
+			local var2 = tonumber(p5.data.targetIdStr)
+			playersService:ReportAbuse(var2 and playersService:GetPlayerByUserId(var2), p5.data.category, p5.data.comment or "")
 			
 			return { responseBody = {} }
 		end)
 	end,
-	submitAvatarReport = function(p17, p18)
+	submitAvatarReport = function(p5, p6)
 		-- upvalues: buildAvatarReport (ref), promiseModule (ref), playersService (ref)
-		local var21 = buildAvatarReport(p17, p18)
+		local var2 = buildAvatarReport(p5, p6)
 		
 		return promiseModule.try(function()
-			-- upvalues: playersService (copy), p17 (ref), var21 (ref)
-			playersService:ReportAvatarAbuse(tonumber(p17.data.targetIdStr), var21)
+			-- upvalues: playersService (copy), p5 (ref), var2 (ref)
+			playersService:ReportAvatarAbuse(tonumber(p5.data.targetIdStr), var2)
 			
 			return { responseBody = {} }
 		end)
 	end,
-	submitPlaceReport = function(p19, p20)
+	submitPlaceReport = function(p5, p6)
 		-- upvalues: buildPlaceReport (ref), promiseModule (ref), playersService (ref)
-		local var22 = buildPlaceReport(p19, p20)
+		local var2 = buildPlaceReport(p5, p6)
 		
 		return promiseModule.try(function()
-			-- upvalues: playersService (copy), var22 (ref)
-			playersService:ReportAbuseV3(playersService.LocalPlayer, var22)
+			-- upvalues: playersService (copy), var2 (ref)
+			playersService:ReportAbuseV3(playersService.LocalPlayer, var2)
 			
 			return { responseBody = {} }
 		end)

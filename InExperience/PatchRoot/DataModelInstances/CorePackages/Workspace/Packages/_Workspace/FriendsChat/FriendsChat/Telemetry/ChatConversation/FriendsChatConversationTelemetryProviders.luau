@@ -3,9 +3,9 @@ local reactModule = require(parent.React)
 local chatConversationTelemetryLayerModule = require(parent.AppChat.ChatConversationTelemetryLayer)
 local expChatConversationListAdapterModule = require(script.Parent.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), expChatConversationListAdapterModule (ref), chatConversationTelemetryLayerModule (ref)
-	local conversationId = p0.conversationId
+	local conversationId = p1.conversationId
 	
 	return reactModule.createElement(chatConversationTelemetryLayerModule.Provider, {
 		value = reactModule.useCallback(function()
@@ -27,5 +27,5 @@ return function(p0)
 				userPendingStatus = userPendingStatus
 			}
 		end, { conversationId })
-	}, p0.children)
+	}, p1.children)
 end

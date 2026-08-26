@@ -6,29 +6,29 @@ local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 local viewModule = require(foundation.Components.View)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokensModule (ref), dateTimeUtilitiesModule (ref), dateTimeCalendarDayAppearanceUtilitiesModule (ref), reactModule (ref), viewModule (ref), calendarGridDayLabelModule (ref)
-	local var7 = useTokensModule()
-	local dateTime = DateTime.fromLocalTime(p0.year, p0.month, p0.day)
-	local selectedDates = p0.selectedDates or {}
+	local var1 = useTokensModule()
+	local dateTime = DateTime.fromLocalTime(p1.year, p1.month, p1.day)
+	local selectedDates = p1.selectedDates or {}
 	local t = {}
 	
 	for i, v in selectedDates do
 		table.insert(t, dateTimeUtilitiesModule.toLocalTime(v))
 	end
-	local var11 = dateTimeCalendarDayAppearanceUtilitiesModule.resolveHighlightDates(selectedDates, p0.hoveredDate)
-	local var12 = dateTimeCalendarDayAppearanceUtilitiesModule.isDaySelectable(dateTime, p0.selectableDateRange)
-	local var13 = dateTimeCalendarDayAppearanceUtilitiesModule.isDaySelected(dateTime, t, true)
-	local var14 = dateTimeCalendarDayAppearanceUtilitiesModule.isDayHighlighted(dateTime, var11, true)
-	local rangeBand, rangeBand_1, rangeBand_2 = dateTimeCalendarDayAppearanceUtilitiesModule.getRangeBand(dateTime, var11, true, var13)
+	local var2 = dateTimeCalendarDayAppearanceUtilitiesModule.resolveHighlightDates(selectedDates, p1.hoveredDate)
+	local var3 = dateTimeCalendarDayAppearanceUtilitiesModule.isDaySelectable(dateTime, p1.selectableDateRange)
+	local var4 = dateTimeCalendarDayAppearanceUtilitiesModule.isDaySelected(dateTime, t, true)
+	local var5 = dateTimeCalendarDayAppearanceUtilitiesModule.isDayHighlighted(dateTime, var2, true)
+	local rangeBand, rangeBand_1, rangeBand_2 = dateTimeCalendarDayAppearanceUtilitiesModule.getRangeBand(dateTime, var2, true, var4)
 	
 	return reactModule.createElement(viewModule, {
-		LayoutOrder = p0.LayoutOrder,
-		Size = UDim2.fromOffset(p0.cellSize, p0.cellSize)
+		LayoutOrder = p1.LayoutOrder,
+		Size = UDim2.fromOffset(p1.cellSize, p1.cellSize)
 	}, {
-		RangeFill = if var14 and not var13 then reactModule.createElement(viewModule, {
+		RangeFill = if var5 and not var4 then reactModule.createElement(viewModule, {
 			ZIndex = 0,
-			backgroundStyle = var7.Color.ActionStandard.Background,
+			backgroundStyle = var1.Color.ActionStandard.Background,
 			tag = {
 				["size-full"] = true,
 				[rangeBand_2] = rangeBand_2 ~= nil and rangeBand_2 ~= ""
@@ -37,25 +37,25 @@ return function(p0)
 		Day = reactModule.createElement(calendarGridDayLabelModule, {
 			highlight = false,
 			LayoutOrder = 1,
-			bandPosition = if var13 then rangeBand else nil,
-			bandRadiusTag = if var13 then rangeBand_2 else nil,
-			bandSize = if var13 then rangeBand_1 else nil,
-			emphasizeText = var12 and not var13,
-			isSelectable = var12,
-			isSelected = var13,
-			label = tostring(p0.day),
+			bandPosition = if var4 then rangeBand else nil,
+			bandRadiusTag = if var4 then rangeBand_2 else nil,
+			bandSize = if var4 then rangeBand_1 else nil,
+			emphasizeText = var3 and not var4,
+			isSelectable = var3,
+			isSelected = var4,
+			label = tostring(p1.day),
 			onActivated = function()
-				-- upvalues: p0 (ref), dateTime (ref)
-				p0.onDayActivated(dateTime)
+				-- upvalues: p1 (ref), dateTime (ref)
+				p1.onDayActivated(dateTime)
 			end,
 			onHoverEnter = reactModule.useMemo(function()
-				-- upvalues: p0 (ref), dateTime (ref)
-				return if p0.onHoverEnter == nil then nil else function()
-					-- upvalues: p0 (copy), dateTime (copy)
-					p0.onHoverEnter(dateTime)
+				-- upvalues: p1 (ref), dateTime (ref)
+				return if p1.onHoverEnter == nil then nil else function()
+					-- upvalues: p1 (copy), dateTime (copy)
+					p1.onHoverEnter(dateTime)
 				end
-			end, { p0.onHoverEnter, dateTime }),
-			testId = `{p0.testId}--day-{p0.year}-{p0.month}-{p0.day}`
+			end, { p1.onHoverEnter, dateTime }),
+			testId = `{p1.testId}--day-{p0.year}-{p0.month}-{p0.day}`
 		})
 	})
 end

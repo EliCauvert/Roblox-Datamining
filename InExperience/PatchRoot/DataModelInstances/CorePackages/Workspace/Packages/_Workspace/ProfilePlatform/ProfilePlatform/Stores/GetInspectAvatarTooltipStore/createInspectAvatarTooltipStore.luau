@@ -4,30 +4,30 @@ local profilePlatformInspectAvatarTooltipMaxImpressions = game:DefineFastInt("Pr
 
 return function()
 	-- upvalues: signalsModule (ref), inspectAvatarTooltipImpressionCacheModule (ref), profilePlatformInspectAvatarTooltipMaxImpressions (ref)
-	local var3, var4 = signalsModule.createSignal(false)
+	local var1, var2 = signalsModule.createSignal(false)
 	
 	return {
-		getIsOpen = var3,
+		getIsOpen = var1,
 		tryShow = function()
-			-- upvalues: inspectAvatarTooltipImpressionCacheModule (copy), profilePlatformInspectAvatarTooltipMaxImpressions (copy), var4 (ref)
+			-- upvalues: inspectAvatarTooltipImpressionCacheModule (copy), profilePlatformInspectAvatarTooltipMaxImpressions (copy), var2 (ref)
 			local value = inspectAvatarTooltipImpressionCacheModule.getValue()
 			
 			if value < 0 or profilePlatformInspectAvatarTooltipMaxImpressions <= value then
-				var4(false)
+				var2(false)
 				
 				return
 			end
 			inspectAvatarTooltipImpressionCacheModule.incrementValue()
-			var4(true)
+			var2(true)
 		end,
 		hide = function()
-			-- upvalues: var4 (ref)
-			var4(false)
+			-- upvalues: var2 (ref)
+			var2(false)
 		end,
 		permanentlyDismiss = function()
-			-- upvalues: inspectAvatarTooltipImpressionCacheModule (copy), var4 (ref)
+			-- upvalues: inspectAvatarTooltipImpressionCacheModule (copy), var2 (ref)
 			inspectAvatarTooltipImpressionCacheModule.dismissValue()
-			var4(false)
+			var2(false)
 		end
 	}
 end

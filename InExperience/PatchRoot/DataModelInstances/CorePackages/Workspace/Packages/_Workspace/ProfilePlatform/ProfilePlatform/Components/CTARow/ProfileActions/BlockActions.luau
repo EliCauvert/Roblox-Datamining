@@ -16,25 +16,25 @@ local profileTypes = enumsModule.ProfileTypes
 local USER_BLOCKING_ERRORS = require(profilePlatform.Common.Constants).USER_BLOCKING_ERRORS
 
 return {
-	[enumsModule.ProfileActions.Block] = function(p0)
+	[enumsModule.ProfileActions.Block] = function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), appPage (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
 		return {
-			text = p0.localized[enumsModule.ProfileActions.Block],
+			text = p1.localized[enumsModule.ProfileActions.Block],
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p0 (ref), eventNamesModule (copy), appPage (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
-					p0.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonBlock, { buttonSurface = p0.buttonSurface })
-					p0.navigation.push(appPage.BlockingModal, {
+					-- upvalues: p1 (ref), eventNamesModule (copy), appPage (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonBlock, { buttonSurface = p1.buttonSurface })
+					p1.navigation.push(appPage.BlockingModal, {
 						navProps = {
-							userId = p0.profileId,
+							userId = p1.profileId,
 							onBlockSuccess = function()
-								-- upvalues: p0 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
-								p0.dispatch(setCurrentToastMessage({
+								-- upvalues: p1 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
+								p1.dispatch(setCurrentToastMessage({
 									isLocalized = true,
-									toastMessage = p0.localized.userBlockedToast,
+									toastMessage = p1.localized.userBlockedToast,
 									toastIcon = images["icons/actions/block"]
 								}))
-								p0.dispatch(refreshProfilePlatformActionInfoModule(p0.profileId, p0.actionsComponentRequest))
+								p1.dispatch(refreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
 							end
 						}
 					})

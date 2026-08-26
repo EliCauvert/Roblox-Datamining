@@ -4,7 +4,7 @@ local useSelector = require(appStartup.Parent.RoactUtils).Hooks.RoactRodux.useSe
 
 return function()
 	-- upvalues: useSelector (ref)
-	return useSelector(function(p0)
-		return p0.LaunchContext
+	return useSelector(function(p1)
+		return p1.LaunchContext
 	end)
 end

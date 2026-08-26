@@ -72,10 +72,10 @@ rateCount.defaultProps = {
 	voteState = voteStatesModule.notVoted
 }
 
-function rateCount.init(p0)
+function rateCount.init(p1)
 	function p0.onVoteDownActivated()
-		-- upvalues: p0 (ref)
-		local onVoteDownActivated = p0.props.onVoteDownActivated
+		-- upvalues: p1 (ref)
+		local onVoteDownActivated = p1.props.onVoteDownActivated
 		
 		if onVoteDownActivated then
 			onVoteDownActivated()
@@ -83,8 +83,8 @@ function rateCount.init(p0)
 	end
 	
 	function p0.onVoteUpActivated()
-		-- upvalues: p0 (ref)
-		local onVoteUpActivated = p0.props.onVoteUpActivated
+		-- upvalues: p1 (ref)
+		local onVoteUpActivated = p1.props.onVoteUpActivated
 		
 		if onVoteUpActivated then
 			onVoteUpActivated()
@@ -99,34 +99,34 @@ function rateCount.render(p1)
 	local anchorPoint = p1.props.anchorPoint
 	local width = p1.props.width
 	local height = p1.props.height
-	local var13 = if width then UDim2.new(0, width, 0, height) else UDim2.new(1, 0, 0, height)
+	local var1 = if width then UDim2.new(0, width, 0, height) else UDim2.new(1, 0, 0, height)
 	local rateText = p1.props.rateText
 	local rateLabel = p1.props.rateLabel
 	local voteState = p1.props.voteState
-	local var14 = voteState == voteStatesModule.votedDown
-	local var15 = voteState == voteStatesModule.votedUp
+	local var2 = voteState == voteStatesModule.votedDown
+	local var3 = voteState == voteStatesModule.votedUp
 	
 	return withStyleModule(function(p2)
-		-- upvalues: cryoModule (copy), t (copy), p1 (ref), getIconSizeModule (copy), roactModule (copy), var13 (write), position (ref), anchorPoint (ref), layoutOrder (ref), label (copy), ratingLarge (copy), genericTextLabelModule (copy), rateText (ref), rateLabel (ref), iconButtonModule (copy), var14 (ref), voteDownOn (copy), voteDownOff (copy), var15 (ref), voteUpOn (copy), voteUpOff (copy)
-		local var16 = cryoModule.Dictionary.join(t, p1.props.styleProps or {})
-		local containerSpacingLeading = var16.containerSpacingLeading
-		local containerSpacingTrailing = var16.containerSpacingTrailing
-		local containerBorderRadius = var16.containerBorderRadius
-		local containerBackgroundColor = var16.containerBackgroundColor or p2.Theme.BackgroundContrast
-		local containerGap = var16.containerGap
-		local statWidgetContainerGap = var16.statWidgetContainerGap
-		local statWidgetIconSize = var16.statWidgetIconSize
-		local statWidgetIconContentColor = var16.statWidgetIconContentColor or p2.Theme.IconEmphasis
-		local statWidgetDataGap = var16.statWidgetDataGap
-		local statWidgetDataContentColor = var16.statWidgetDataContentColor or p2.Theme.TextEmphasis
-		local statWidgetDataLabelContentColor = var16.statWidgetDataLabelContentColor or p2.Theme.TextEmphasis
-		local buttonGroupGap = var16.buttonGroupGap
-		local buttonSize = var16.buttonSize
-		local buttonIconSizeEnum = var16.buttonIconSizeEnum
+		-- upvalues: cryoModule (copy), t (copy), p1 (ref), getIconSizeModule (copy), roactModule (copy), var1 (write), position (ref), anchorPoint (ref), layoutOrder (ref), label (copy), ratingLarge (copy), genericTextLabelModule (copy), rateText (ref), rateLabel (ref), iconButtonModule (copy), var2 (ref), voteDownOn (copy), voteDownOff (copy), var3 (ref), voteUpOn (copy), voteUpOff (copy)
+		local var4 = cryoModule.Dictionary.join(t, p1.props.styleProps or {})
+		local containerSpacingLeading = var4.containerSpacingLeading
+		local containerSpacingTrailing = var4.containerSpacingTrailing
+		local containerBorderRadius = var4.containerBorderRadius
+		local containerBackgroundColor = var4.containerBackgroundColor or p2.Theme.BackgroundContrast
+		local containerGap = var4.containerGap
+		local statWidgetContainerGap = var4.statWidgetContainerGap
+		local statWidgetIconSize = var4.statWidgetIconSize
+		local statWidgetIconContentColor = var4.statWidgetIconContentColor or p2.Theme.IconEmphasis
+		local statWidgetDataGap = var4.statWidgetDataGap
+		local statWidgetDataContentColor = var4.statWidgetDataContentColor or p2.Theme.TextEmphasis
+		local statWidgetDataLabelContentColor = var4.statWidgetDataLabelContentColor or p2.Theme.TextEmphasis
+		local buttonGroupGap = var4.buttonGroupGap
+		local buttonSize = var4.buttonSize
+		local buttonIconSizeEnum = var4.buttonIconSizeEnum
 		
 		return roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = var13,
+			Size = var1,
 			Position = position,
 			AnchorPoint = anchorPoint,
 			BackgroundColor3 = containerBackgroundColor.Color,
@@ -185,7 +185,7 @@ function rateCount.render(p1)
 				layoutOrder = 3,
 				showBackground = true,
 				size = UDim2.fromOffset(buttonSize, buttonSize),
-				icon = if var14 then voteDownOn else voteDownOff,
+				icon = if var2 then voteDownOn else voteDownOff,
 				iconColor3 = p2.Theme.IconEmphasis.Color,
 				iconSize = buttonIconSizeEnum,
 				onActivated = p1.onVoteDownActivated
@@ -194,7 +194,7 @@ function rateCount.render(p1)
 				layoutOrder = 4,
 				showBackground = true,
 				size = UDim2.fromOffset(buttonSize, buttonSize),
-				icon = if var15 then voteUpOn else voteUpOff,
+				icon = if var3 then voteUpOn else voteUpOff,
 				iconColor3 = p2.Theme.IconEmphasis.Color,
 				iconSize = buttonIconSizeEnum,
 				onActivated = p1.onVoteUpActivated

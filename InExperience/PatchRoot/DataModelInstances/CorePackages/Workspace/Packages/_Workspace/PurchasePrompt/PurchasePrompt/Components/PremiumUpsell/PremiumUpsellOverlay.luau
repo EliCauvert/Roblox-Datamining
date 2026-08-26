@@ -13,11 +13,11 @@ local name = roact.PureComponent:extend(script.Name)
 local getFFlagEnableVpcForInExperiencePremiumUpsellModule = require(purchasePrompt.Flags.GetFFlagEnableVpcForInExperiencePremiumUpsell)
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 
-function name.init(p0)
+function name.init(p1)
 	-- upvalues: promptStateModule (ref), getFFlagEnableVpcForInExperiencePremiumUpsellModule (ref)
 	function p0.confirmButtonPressed()
-		-- upvalues: p0 (ref), promptStateModule (copy), getFFlagEnableVpcForInExperiencePremiumUpsellModule (copy)
-		local props = p0.props
+		-- upvalues: p1 (ref), promptStateModule (copy), getFFlagEnableVpcForInExperiencePremiumUpsellModule (copy)
+		local props = p1.props
 		local promptState = props.promptState
 		
 		if promptState == promptStateModule.PremiumUpsell then
@@ -41,8 +41,8 @@ function name.init(p0)
 	end
 	
 	function p0.cancelButtonPressed()
-		-- upvalues: p0 (ref)
-		p0.props.endPurchase()
+		-- upvalues: p1 (ref)
+		p1.props.endPurchase()
 	end
 end
 
@@ -54,9 +54,9 @@ function name.didMount(p1)
 			p1.confirmButtonPressed()
 		end
 	end, false, Enum.KeyCode.ButtonA)
-	contextActionService:BindCoreAction("PremiumPurchaseCancelButtonBind", function(_, p3, _)
+	contextActionService:BindCoreAction("PremiumPurchaseCancelButtonBind", function(_, p2, _)
 		-- upvalues: p1 (ref)
-		if p3 == Enum.UserInputState.Begin then
+		if p2 == Enum.UserInputState.Begin then
 			p1.cancelButtonPressed()
 		end
 	end, false, Enum.KeyCode.ButtonB)
@@ -68,28 +68,28 @@ function name.willUnmount(_)
 	contextActionService:UnbindCoreAction("PremiumPurchaseCancelButtonBind")
 end
 
-function name.getFlowState(p4)
+function name.getFlowState(p1)
 	-- upvalues: promptStateModule (ref), premiumUpsellFlowState (ref)
-	local promptState = p4.props.promptState
+	local promptState = p1.props.promptState
 	
 	return if promptState == promptStateModule.PremiumUpsell then premiumUpsellFlowState.PurchaseModal elseif promptState == promptStateModule.Error then premiumUpsellFlowState.Error elseif promptState == promptStateModule.EnablePurchaseVPCModal then premiumUpsellFlowState.PurchaseVPCModal else premiumUpsellFlowState.None
 end
 
-function name.getErrorType(p5)
+function name.getErrorType(p1)
 	-- upvalues: purchaseErrorModule (ref), purchaseErrorType (ref)
-	local props = p5.props
+	local props = p1.props
 	
 	return if props.purchaseError == purchaseErrorModule.AlreadyPremium then purchaseErrorType.AlreadyPremium elseif props.purchaseError == purchaseErrorModule.PremiumUnavailablePlatform then purchaseErrorType.PremiumPlatformUnavailable elseif props.purchaseError == purchaseErrorModule.EconomicRestriction then purchaseErrorType.EconomicRestriction else purchaseErrorType.Unknown
 end
 
-function name.getVPCModalType(p6)
+function name.getVPCModalType(p1)
 	-- upvalues: promptStateModule (ref), VPCModalTypeModule (ref)
-	return if p6.props.promptState == promptStateModule.EnablePurchaseVPCModal then VPCModalTypeModule.toRawValue(VPCModalTypeModule.EnablePurchase) else VPCModalTypeModule.toRawValue(VPCModalTypeModule.None)
+	return if p1.props.promptState == promptStateModule.EnablePurchaseVPCModal then VPCModalTypeModule.toRawValue(VPCModalTypeModule.EnablePurchase) else VPCModalTypeModule.toRawValue(VPCModalTypeModule.None)
 end
 
-function name.render(p7)
+function name.render(p1)
 	-- upvalues: roact (ref), premiumUpsellFlow (ref), getFFlagEnableVpcForInExperiencePremiumUpsellModule (ref)
-	local props = p7.props
+	local props = p1.props
 	
 	return roact.createElement(premiumUpsellFlow, {
 		isCatalog = false,
@@ -98,10 +98,10 @@ function name.render(p7)
 		currencySymbol = props.currencySymbol,
 		robuxPrice = props.robuxPrice,
 		robuxAmount = props.robuxAmount,
-		purchaseState = p7:getFlowState(),
-		errorType = p7:getErrorType(),
+		purchaseState = p1:getFlowState(),
+		errorType = p1:getErrorType(),
 		economicRestrictionError = props.economicRestrictionError,
-		purchaseVPCType = p7:getVPCModalType(),
+		purchaseVPCType = p1:getVPCModalType(),
 		acceptControllerIcon = if props.isGamepadEnabled then "rbxasset://textures/ui/Controls/DesignSystem/ButtonA.png" else nil,
 		purchasePremium = if getFFlagEnableVpcForInExperiencePremiumUpsellModule() then props.dispatchPremiumPrecheck else props.promptPremiumPurchase,
 		cancelPurchase = props.endPurchase,

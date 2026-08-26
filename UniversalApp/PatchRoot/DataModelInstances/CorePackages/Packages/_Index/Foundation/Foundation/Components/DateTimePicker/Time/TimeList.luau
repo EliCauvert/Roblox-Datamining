@@ -26,14 +26,14 @@ return function(p1)
 	end, { var1.dateTime, var1.dayAnchor })
 	local var9 = if var1.dateTime then var8 else nil
 	
-	local function _(p1)
+	local function _(p2)
 		-- upvalues: dateTimeUtilitiesModule (copy)
-		if p1 == nil then
+		if p2 == nil then
 			return nil
 		end
-		local var1 = dateTimeUtilitiesModule.toLocalTime(DateTime.fromUnixTimestamp(p1))
+		local var10 = dateTimeUtilitiesModule.toLocalTime(DateTime.fromUnixTimestamp(p2))
 		
-		return string.format("%02d:%02d", var1.Hour, var1.Minute)
+		return string.format("%02d:%02d", var10.Hour, var10.Minute)
 	end
 	
 	reactModule.useEffect(function()
@@ -42,8 +42,8 @@ return function(p1)
 		if var9 == nil then
 			formattedText = nil
 		else
-			local var1 = dateTimeUtilitiesModule.toLocalTime(DateTime.fromUnixTimestamp(var9))
-			formattedText = string.format("%02d:%02d", var1.Hour, var1.Minute)
+			local var10 = dateTimeUtilitiesModule.toLocalTime(DateTime.fromUnixTimestamp(var9))
+			formattedText = string.format("%02d:%02d", var10.Hour, var10.Minute)
 		end
 		if var4.current then
 			var4.current = false
@@ -72,7 +72,7 @@ return function(p1)
 		local timeSlotIndex = dateTimeCalendarViewUtilitiesModule.getTimeSlotIndex(var7, var9)
 		
 		if timeSlotIndex then
-			current.CanvasPosition = Vector2.new(0, math.max(0, (timeSlotIndex - 1) * size900 - var1.height / 2 + size900 / 2))
+			current.CanvasPosition = Vector2.new(0, math.max(0, (timeSlotIndex - 1) * size900 - var10.height / 2 + size900 / 2))
 			
 			return
 		end

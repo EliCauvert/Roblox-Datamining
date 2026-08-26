@@ -4,20 +4,20 @@ local reportTextEntryModule = require(abuseReportMenu.Components.ReportTextEntry
 local reportMenuItemModule = require(abuseReportMenu.Components.MenuItems.ReportMenuItem)
 local constantsModule = require(abuseReportMenu.Components.Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), reportMenuItemModule (ref), reportTextEntryModule (ref), constantsModule (ref)
 	return reactModule.createElement(reportMenuItemModule, {
 		label = "Abuse Description",
 		isRightComponentFullWidth = true,
-		layoutOrder = p0.layoutOrder,
+		layoutOrder = p1.layoutOrder,
 		rightComponent = reactModule.createElement(reportTextEntryModule, {
-			layoutOrder = p0.layoutOrder,
-			text = p0.comment,
-			placeholderText = p0.placeholderText,
-			onUpdate = p0.onUpdate
+			layoutOrder = p1.layoutOrder,
+			text = p1.comment,
+			placeholderText = p1.placeholderText,
+			onUpdate = p1.onUpdate
 		}),
 		heightOverride = constantsModule.FreeCommentsMenuItemHeight,
-		menuContainerWidth = p0.menuContainerWidth,
-		isSmallPortraitViewport = p0.isSmallPortraitViewport
+		menuContainerWidth = p1.menuContainerWidth,
+		isSmallPortraitViewport = p1.isSmallPortraitViewport
 	})
 end

@@ -24,7 +24,7 @@ local function createStore(_)
 	end, {}, { roduxModule.thunkMiddleware })
 end
 
-local function mockNavigation(p0)
+local function mockNavigation(p1)
 	-- upvalues: reactModule (ref), roactNavigationModule (ref)
 	return reactModule.createElement(roactNavigationModule.Provider, {
 		value = {
@@ -35,12 +35,12 @@ local function mockNavigation(p0)
 			addListener = function()
 				return { remove = function() end }
 			end,
-			getParam = function(_, p1)
-				return p1
+			getParam = function(_, p2)
+				return p2
 			end,
 			navigate = function() end
 		}
-	}, { Child = p0 })
+	}, { Child = p1 })
 end
 
 return {
@@ -48,14 +48,14 @@ return {
 	storyRoot = userTile.Stories,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p2)
+	mapStory = function(p1)
 		-- upvalues: t (ref), reactModule (ref), styleProviderWithDefaultTheme (ref), roactRoduxModule (ref), createStore (ref), mockNavigation (ref), foundationProvider (ref), designTokenProvider (ref)
-		return function(p3)
-			-- upvalues: t (copy), reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), createStore (copy), mockNavigation (copy), foundationProvider (copy), designTokenProvider (copy), p2 (ref)
+		return function(p2)
+			-- upvalues: t (copy), reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), createStore (copy), mockNavigation (copy), foundationProvider (copy), designTokenProvider (copy), p1 (ref)
 			return reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
 				reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore(nil) }, {
-					navigationProvider = mockNavigation(reactModule.createElement(foundationProvider, { colorMode = t[p3.theme] }, {
-						designTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = p2(p3) })
+					navigationProvider = mockNavigation(reactModule.createElement(foundationProvider, { colorMode = t[p2.theme] }, {
+						designTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = p1(p2) })
 					}))
 				})
 			})

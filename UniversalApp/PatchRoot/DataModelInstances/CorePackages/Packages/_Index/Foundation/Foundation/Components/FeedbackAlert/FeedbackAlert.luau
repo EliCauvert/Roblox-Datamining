@@ -80,9 +80,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					Text = if var5 then `<u>{var4}</u>` else var4,
 					tag = var2.link.tag,
 					stateLayer = { affordance = stateLayerAffordanceModule.None },
-					onStateChanged = reactModule.useCallback(function(p1)
+					onStateChanged = reactModule.useCallback(function(p3)
 						-- upvalues: var6 (ref), controlStateModule (copy)
-						var6(p1 == controlStateModule.Hover)
+						var6(p3 == controlStateModule.Hover)
 					end, {}),
 					onActivated = var1.link.onActivated,
 					testId = `{var1.testId}--link`

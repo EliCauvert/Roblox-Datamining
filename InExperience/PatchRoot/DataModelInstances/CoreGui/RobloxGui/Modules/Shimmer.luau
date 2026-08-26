@@ -7,7 +7,7 @@ local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection
 local t = {}
 t.__index = t
 local t_1 = {
-	PrimaryButton = function(p0)
+	PrimaryButton = function(p1)
 		-- upvalues: create (ref), constants (ref)
 		return create("ImageLabel")({
 			Name = "ShimmerFrame",
@@ -17,7 +17,7 @@ local t_1 = {
 			Size = UDim2.new(1, 0, 1, 0),
 			BorderSizePixel = 0,
 			Visible = false,
-			Parent = p0,
+			Parent = p1,
 			ZIndex = 8,
 			create("ImageLabel")({
 				Name = "Shimmer",

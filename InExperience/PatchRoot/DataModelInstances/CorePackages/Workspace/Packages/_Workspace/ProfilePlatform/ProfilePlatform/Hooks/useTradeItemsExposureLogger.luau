@@ -9,30 +9,30 @@ local logTradeItemsExposureIfEligibleModule = require(profilePlatform.Utils.logT
 
 return function()
 	-- upvalues: useProfileWrapperContextModule (ref), enumsModule (ref), useLocalUserId (ref), useHasPaidTradingAccessModule (ref), reactModule (ref), logTradeItemsExposureIfEligibleModule (ref)
-	local var6 = useProfileWrapperContextModule()
-	local profileId = var6.profileId
-	local var7 = var6.profileType == enumsModule.ProfileTypes.User
-	local var8 = tostring(useLocalUserId())
-	local var9 = useHasPaidTradingAccessModule(var8)
-	local var10 = useHasPaidTradingAccessModule(if var7 then profileId else nil)
+	local var1 = useProfileWrapperContextModule()
+	local profileId = var1.profileId
+	local var2 = var1.profileType == enumsModule.ProfileTypes.User
+	local var3 = tostring(useLocalUserId())
+	local var4 = useHasPaidTradingAccessModule(var3)
+	local var5 = useHasPaidTradingAccessModule(if var2 then profileId else nil)
 	
 	return reactModule.useCallback(function()
-		-- upvalues: var7 (ref), logTradeItemsExposureIfEligibleModule (copy), profileId (ref), var8 (ref), var9 (ref), var10 (ref)
-		if var7 then
+		-- upvalues: var2 (ref), logTradeItemsExposureIfEligibleModule (copy), profileId (ref), var3 (ref), var4 (ref), var5 (ref)
+		if var2 then
 			logTradeItemsExposureIfEligibleModule({
 				profileId = tostring(profileId),
-				localUserId = var8,
-				localHasPaidTradingAccess = var9,
-				otherHasPaidTradingAccess = var10
+				localUserId = var3,
+				localHasPaidTradingAccess = var4,
+				otherHasPaidTradingAccess = var5
 			})
 			
 			return
 		end
 	end, {
 		profileId,
-		var8,
-		var9,
-		var10,
-		var7
+		var3,
+		var4,
+		var5,
+		var2
 	})
 end

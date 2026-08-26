@@ -21,27 +21,27 @@ userTypingIndicator.defaultProps = {
 	maxCharacterLength = messageCharacterLimitModule
 }
 
-function userTypingIndicator.init(p0)
+function userTypingIndicator.init(p1)
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
 	function p0.getDisplayText()
-		-- upvalues: p0 (ref)
-		if p0.props.usersTyping then
-			return if #p0.props.usersTyping == 1 then p0.props.oneUserTyping elseif #p0.props.usersTyping == 2 then p0.props.twoUsersTyping elseif #p0.props.usersTyping > 2 then p0.props.severalUsersTyping else ""
+		-- upvalues: p1 (ref)
+		if p1.props.usersTyping then
+			return if #p1.props.usersTyping == 1 then p1.props.oneUserTyping elseif #p1.props.usersTyping == 2 then p1.props.twoUsersTyping elseif #p1.props.usersTyping > 2 then p1.props.severalUsersTyping else ""
 		end
 	end
 	
-	local var6, var7 = roactModule.createBinding(1)
-	p0.motor = otterModule.createSingleMotor(1)
-	p0.motor:start()
-	p0.motor:onStep(var7)
-	p0.animationProgress = var6
+	local var1, var2 = roactModule.createBinding(1)
+	p1.motor = otterModule.createSingleMotor(1)
+	p1.motor:start()
+	p1.motor:onStep(var2)
+	p1.animationProgress = var1
 	
 	function p0.updateAnimationGoal()
-		-- upvalues: p0 (ref), otterModule (copy), t (copy)
-		p0.motor:setGoal(otterModule.spring(if #p0.props.usersTyping > 0 then 0 else 1, t))
+		-- upvalues: p1 (ref), otterModule (copy), t (copy)
+		p1.motor:setGoal(otterModule.spring(if #p1.props.usersTyping > 0 then 0 else 1, t))
 	end
 	
-	p0.updateAnimationGoal()
+	p1.updateAnimationGoal()
 end
 
 function userTypingIndicator.didUpdate(p1, p2, _)
@@ -50,19 +50,19 @@ function userTypingIndicator.didUpdate(p1, p2, _)
 	end
 end
 
-function userTypingIndicator.render(p3)
+function userTypingIndicator.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref)
-	return withStyle(function(p4)
-		-- upvalues: roactModule (copy), p3 (ref), imageSetLabel (copy), images (copy)
-		local font = p4.Font
+	return withStyle(function(p2)
+		-- upvalues: roactModule (copy), p1 (ref), imageSetLabel (copy), images (copy)
+		local font = p2.Font
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			AnchorPoint = p3.props.AnchorPoint,
-			LayoutOrder = p3.props.LayoutOrder,
-			Position = p3.props.Position,
-			Size = UDim2.new(1, 0, 0, p3.props.height),
-			ZIndex = p3.props.ZIndex
+			AnchorPoint = p1.props.AnchorPoint,
+			LayoutOrder = p1.props.LayoutOrder,
+			Position = p1.props.Position,
+			Size = UDim2.new(1, 0, 0, p1.props.height),
+			ZIndex = p1.props.ZIndex
 		}, {
 			Layout = roactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
@@ -78,17 +78,17 @@ function userTypingIndicator.render(p3)
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.new(0.9, 0, 1, 0),
-				BackgroundColor3 = p4.Theme.NavigationBar.Color,
-				BorderColor3 = p4.Theme.Divider.Color,
+				BackgroundColor3 = p2.Theme.NavigationBar.Color,
+				BorderColor3 = p2.Theme.Divider.Color,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(8, 8, 9, 9),
 				Image = images["component_assets/circle_17"],
-				ImageColor3 = p4.Theme.BackgroundUIDefault.Color,
-				ImageTransparency = p3.animationProgress:map(function(p5)
-					return p5
+				ImageColor3 = p2.Theme.BackgroundUIDefault.Color,
+				ImageTransparency = p1.animationProgress:map(function(p3)
+					return p3
 				end),
-				Position = p3.animationProgress:map(function(p6)
-					return UDim2.new(0, 0, p6, 0)
+				Position = p1.animationProgress:map(function(p3)
+					return UDim2.new(0, 0, p3, 0)
 				end)
 			}, {
 				Layout = roactModule.createElement("UIListLayout", {
@@ -105,14 +105,14 @@ function userTypingIndicator.render(p3)
 				}),
 				TextLabel = roactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
-					Text = p3.getDisplayText(),
+					Text = p1.getDisplayText(),
 					TextSize = font.BaseSize * font.Footer.RelativeSize,
 					Font = font.Footer.Font,
-					TextColor3 = p4.Theme.TextMuted.Color,
+					TextColor3 = p2.Theme.TextMuted.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					TextTransparency = p3.animationProgress:map(function(p7)
-						return p7
+					TextTransparency = p1.animationProgress:map(function(p3)
+						return p3
 					end)
 				})
 			})
@@ -120,9 +120,9 @@ function userTypingIndicator.render(p3)
 	end)
 end
 
-function userTypingIndicator.willUnmount(p8)
-	if p8.motor then
-		p8.motor:destroy()
+function userTypingIndicator.willUnmount(p1)
+	if p1.motor then
+		p1.motor:destroy()
 	end
 end
 

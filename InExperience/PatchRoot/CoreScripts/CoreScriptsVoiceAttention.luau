@@ -1,13 +1,13 @@
 ﻿local playersService = game:GetService("Players")
 local _ = game:GetService("CorePackages")
 local faceAnimatorService = game:GetService("FaceAnimatorService")
-require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default.participantsUpdate.Event:Connect(function(p0)
+require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default.participantsUpdate.Event:Connect(function(p1)
 	-- upvalues: playersService (ref)
-	for i, v in pairs(p0) do
-		local var3 = playersService:GetPlayerByUserId(i)
+	for i, v in pairs(p1) do
+		local var1 = playersService:GetPlayerByUserId(i)
 		
-		if var3 then
-			var3:SetAttribute("RBXAttentionVoiceIsActive", v.isSignalActive)
+		if var1 then
+			var1:SetAttribute("RBXAttentionVoiceIsActive", v.isSignalActive)
 		end
 	end
 end)

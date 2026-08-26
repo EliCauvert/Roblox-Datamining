@@ -18,24 +18,24 @@ local t = {
 	style = cryoModule.Dictionary.join(testStyle, { Tokens = { Color = { None = {} } } })
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), presenceBubbleCellStyledModule (ref), userModel (ref), circle25 (ref)
-	local var5 = cryoModule.Dictionary.join(t, p0)
-	local user = var5.user
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local user = var1.user
 	
 	return reactModule.createElement(presenceBubbleCellStyledModule, {
-		style = var5.style,
-		childWidth = var5.childWidth,
+		style = var1.style,
+		childWidth = var1.childWidth,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: var5 (ref)
-			if var5.onActivated then
-				var5.onActivated(var5.user)
+			-- upvalues: var1 (ref)
+			if var1.onActivated then
+				var1.onActivated(var1.user)
 			end
 		end),
-		onCircleActivated = var5.onCircleActivated,
-		subTitleText = var5.subTitleText,
-		showDivider = var5.showDivider,
-		boldTitle = if user.metadata and user.metadata.isPending then false else var5.boldTitle,
+		onCircleActivated = var1.onCircleActivated,
+		subTitleText = var1.subTitleText,
+		showDivider = var1.showDivider,
+		boldTitle = if user.metadata and user.metadata.isPending then false else var1.boldTitle,
 		isRobloxSubscriber = if fFlagEnableBlackbirdCheck then if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(if user.id then tostring(user.id) else nil) else nil else nil,
 		avatarCirclePresenceImage = if user.presence == userModel.PresenceType.OFFLINE or user.presence == nil then nil else circle25,
 		titleText = user.displayName,
@@ -44,5 +44,5 @@ return reactModule.memo(function(p0)
 			-- upvalues: user (ref)
 			return { user.thumbnail }
 		end, { user.thumbnail })
-	}, var5.children or {})
+	}, var1.children or {})
 end)

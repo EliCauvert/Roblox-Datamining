@@ -151,10 +151,10 @@ return reactModule.forwardRef(function(p1, p2)
 		end, { ready })
 	end
 	local var37, var38
-	local var39 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useCallback(function(p1)
+	local var39 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useCallback(function(p3)
 		-- upvalues: flagsModule (copy), var36 (write), var18 (write)
 		if not flagsModule.FoundationPopoverRecomputeContentSize and not var36 then return end
-		local absoluteSize = p1.AbsoluteSize
+		local absoluteSize = p3.AbsoluteSize
 		
 		if absoluteSize.X > 0 and absoluteSize.Y > 0 then
 			var18(absoluteSize)
@@ -171,9 +171,9 @@ return reactModule.forwardRef(function(p1, p2)
 		var34,
 		var25
 	})
-	local var1 = reactModule.useCallback(function(p1, p2, p3, p4)
+	local var1 = reactModule.useCallback(function(p3, p4, p5, p6)
 		-- upvalues: var4 (ref), var2 (ref)
-		return var2.registerPopoverAsync(p1, p2, p3, p4, var4)
+		return var2.registerPopoverAsync(p3, p4, p5, p6, var4)
 	end, { var2.registerPopoverAsync, var4 })
 	local var2 = reactModule.useRef(false)
 	reactModule.useEffect(function()
@@ -213,11 +213,11 @@ return reactModule.forwardRef(function(p1, p2)
 		-- upvalues: flagsModule (copy), var3 (ref), var1 (ref), var9 (ref), isPointInGuiObjectBoundsModule (copy)
 		if not flagsModule.FoundationPopoverClickOutsideInGuiShadow then return end
 		if var3 and var3.container and var1.onPressedOutside then
-			local inputBeganConnection = var3.container.InputBegan:Connect(function(p1)
+			local inputBeganConnection = var3.container.InputBegan:Connect(function(p3)
 				-- upvalues: var9 (copy), isPointInGuiObjectBoundsModule (copy), var1 (copy)
-				if p1.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+				if p3.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
 				if not var9 then return end
-				if not isPointInGuiObjectBoundsModule(var9, Vector2.new(p1.Position.X, p1.Position.Y)) then
+				if not isPointInGuiObjectBoundsModule(var9, Vector2.new(p3.Position.X, p3.Position.Y)) then
 					var1.onPressedOutside()
 				end
 			end)

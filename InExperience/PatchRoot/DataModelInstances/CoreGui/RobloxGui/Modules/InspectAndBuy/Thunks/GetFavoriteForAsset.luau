@@ -7,31 +7,31 @@ local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKey
 local sendCounterModule = require(parent.Thunks.SendCounter)
 local constantsModule = require(parent.Constants)
 local list = { networkModule }
-local var7 = createInspectAndBuyKeyMapperModule("getFavoriteForAsset")
+local var1 = createInspectAndBuyKeyMapperModule("getFavoriteForAsset")
 
 return function(value)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var7 (ref), performFetch (ref), setFavoriteAssetModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1)
-		-- upvalues: networkModule (copy), var7 (copy), value (ref), performFetch (copy), setFavoriteAssetModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var8 = p1[networkModule]
+	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), setFavoriteAssetModule (ref), sendCounterModule (ref), constantsModule (ref)
+	return thunkModule.new(script.Name, list, function(p1, p2)
+		-- upvalues: networkModule (copy), var1 (copy), value (ref), performFetch (copy), setFavoriteAssetModule (copy), sendCounterModule (copy), constantsModule (copy)
+		local var2 = p2[networkModule]
 		
-		return performFetch.Single(var7(p0:getState().storeId, value), function(_)
-			-- upvalues: var8 (ref), value (copy), p0 (ref), setFavoriteAssetModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var8.getFavoriteForAsset(value):andThen(function(p2)
-				-- upvalues: p0 (copy), setFavoriteAssetModule (copy), value (copy), sendCounterModule (copy), constantsModule (copy)
-				if p2 == "null" then
-					p0:dispatch(setFavoriteAssetModule(tostring(value), false))
+		return performFetch.Single(var1(p1:getState().storeId, value), function(_)
+			-- upvalues: var2 (ref), value (copy), p1 (ref), setFavoriteAssetModule (copy), sendCounterModule (copy), constantsModule (copy)
+			return var2.getFavoriteForAsset(value):andThen(function(p3)
+				-- upvalues: p1 (copy), setFavoriteAssetModule (copy), value (copy), sendCounterModule (copy), constantsModule (copy)
+				if p3 == "null" then
+					p1:dispatch(setFavoriteAssetModule(tostring(value), false))
 				else
-					p0:dispatch(setFavoriteAssetModule(tostring(value), true))
+					p1:dispatch(setFavoriteAssetModule(tostring(value), true))
 				end
-				p0:dispatch(sendCounterModule(constantsModule.Counters.GetFavoriteForAsset .. constantsModule.CounterSuffix.RequestSucceeded))
+				p1:dispatch(sendCounterModule(constantsModule.Counters.GetFavoriteForAsset .. constantsModule.CounterSuffix.RequestSucceeded))
 			end, function(_)
-				-- upvalues: p0 (copy), sendCounterModule (copy), constantsModule (copy)
-				p0:dispatch(sendCounterModule(constantsModule.Counters.GetFavoriteForAsset .. constantsModule.CounterSuffix.RequestRejected))
+				-- upvalues: p1 (copy), sendCounterModule (copy), constantsModule (copy)
+				p1:dispatch(sendCounterModule(constantsModule.Counters.GetFavoriteForAsset .. constantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p0):catch(function(_)
-			-- upvalues: p0 (ref), sendCounterModule (copy), constantsModule (copy)
-			p0:dispatch(sendCounterModule(constantsModule.Counters.GetFavoriteForAsset .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p1):catch(function(_)
+			-- upvalues: p1 (ref), sendCounterModule (copy), constantsModule (copy)
+			p1:dispatch(sendCounterModule(constantsModule.Counters.GetFavoriteForAsset .. constantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

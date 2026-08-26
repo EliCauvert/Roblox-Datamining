@@ -26,13 +26,13 @@ local function collectTaggedPaths(p1, p2)
 	end
 end
 
-function t.run(p1, p2)
+function t.run(p3, p4)
 	-- upvalues: collectTaggedPaths (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), errorSourceStringsModule (ref)
 	local t = {}
-	collectTaggedPaths(p2.rootInstance, t)
+	collectTaggedPaths(p4.rootInstance, t)
 	
 	if getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-		local hsrAssets = p2.hsrAssets
+		local hsrAssets = p4.hsrAssets
 		
 		if type(hsrAssets) == "table" then
 			for i, v in hsrAssets do
@@ -45,7 +45,7 @@ function t.run(p1, p2)
 		end
 	end
 	if #t > 0 then
-		p1:fail(errorSourceStringsModule.Keys.InstanceTagsFound, { ProblematicDescendantPaths = table.concat(t, ", ") })
+		p3:fail(errorSourceStringsModule.Keys.InstanceTagsFound, { ProblematicDescendantPaths = table.concat(t, ", ") })
 	end
 end
 

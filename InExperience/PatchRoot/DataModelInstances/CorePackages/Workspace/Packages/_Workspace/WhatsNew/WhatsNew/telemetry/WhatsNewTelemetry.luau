@@ -41,48 +41,48 @@ local t_7 = {
 	LifecycleType = t_3,
 	StopReason = t_4,
 	StartContext = t_5,
-	buildTourSessionFields = function(p0)
-		local currentScopeTour = p0.currentScopeTour
+	buildTourSessionFields = function(p1)
+		local currentScopeTour = p1.currentScopeTour
 		
 		return {
-			screen_scope_id = p0.screenScopeId,
+			screen_scope_id = p1.screenScopeId,
 			scope_id = if currentScopeTour ~= nil then nil else currentScopeTour.id,
-			root_array = p0.activeTourType,
-			global_step_index = p0.globalStepIndex,
-			global_total_steps = p0.globalTotalSteps
+			root_array = p1.activeTourType,
+			global_step_index = p1.globalStepIndex,
+			global_total_steps = p1.globalTotalSteps
 		}
 	end
 }
 
 function t_7.logTourtipInteraction(p1, p2, p3, p4, p5)
 	-- upvalues: t_7 (ref), telemetryService (ref), t_6 (ref), list (ref)
-	local var12 = t_7.buildTourSessionFields(p4)
-	var12.entry_id = p2
-	var12.interaction_type = p1
-	var12.button = p3
+	local var1 = t_7.buildTourSessionFields(p4)
+	var1.entry_id = p2
+	var1.interaction_type = p1
+	var1.button = p3
 	local currentEntry = p4.currentEntry
 	
 	if currentEntry ~= nil and p2 == currentEntry.id then
-		var12.is_gateway = currentEntry.gateway ~= nil
+		var1.is_gateway = currentEntry.gateway ~= nil
 	end
 	if p5 ~= nil then
-		var12.skip_reason = p5
+		var1.skip_reason = p5
 	end
-	telemetryService:LogEvent(t_6.tourtipInteraction, { standardizedFields = list, customFields = var12 })
+	telemetryService:LogEvent(t_6.tourtipInteraction, { standardizedFields = list, customFields = var1 })
 end
 
-function t_7.logTourLifecycle(p6, p7, p8, p9)
+function t_7.logTourLifecycle(p1, p2, p3, p4)
 	-- upvalues: t_7 (ref), telemetryService (ref), t_6 (ref), list (ref)
-	local var13 = t_7.buildTourSessionFields(p7)
-	var13.lifecycle_type = p6
+	local var1 = t_7.buildTourSessionFields(p2)
+	var1.lifecycle_type = p1
 	
-	if p8 ~= nil then
-		var13.stop_reason = p8
+	if p3 ~= nil then
+		var1.stop_reason = p3
 	end
-	if p9 ~= nil then
-		var13.start_context = p9
+	if p4 ~= nil then
+		var1.start_context = p4
 	end
-	telemetryService:LogEvent(t_6.tourLifecycle, { standardizedFields = list, customFields = var13 })
+	telemetryService:LogEvent(t_6.tourLifecycle, { standardizedFields = list, customFields = var1 })
 end
 
 return t_7

@@ -2,8 +2,8 @@
 local invariantModule = require(parent.utils.invariant)
 local isValidScreenComponentModule = require(parent.utils.isValidScreenComponent)
 
-local function _(p0)
-	return if p0 then if type(p0) == "table" and p0.screen then p0.screen else p0 else nil
+local function _(p1)
+	return if p1 then if type(p1) == "table" and p1.screen then p1.screen else p1 else nil
 end
 
 return function(p1)

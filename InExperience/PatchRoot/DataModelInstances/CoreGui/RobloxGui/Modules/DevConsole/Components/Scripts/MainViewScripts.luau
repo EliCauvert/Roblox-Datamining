@@ -10,56 +10,56 @@ local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
 local list = { "Active", "Inactive" }
 local mainViewScripts = roactModule.PureComponent:extend("MainViewScripts")
 
-function mainViewScripts.init(p0)
+function mainViewScripts.init(p1)
 	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p1)
-		-- upvalues: p0 (ref)
-		p0:setState({ utilTabHeight = p1 })
+	function p0.onUtilTabHeightChanged(p2)
+		-- upvalues: p1 (ref)
+		p1:setState({ utilTabHeight = p2 })
 	end
 	
 	function p0.onCheckboxChanged(p2, p3)
-		-- upvalues: p0 (ref)
-		p0.props.dispatchServerScriptsUpdateSearchFilter(nil, { [p2] = p3 })
+		-- upvalues: p1 (ref)
+		p1.props.dispatchServerScriptsUpdateSearchFilter(nil, { [p2] = p3 })
 	end
 	
-	function p0.onSearchTermChanged(p4)
-		-- upvalues: p0 (ref)
-		p0.props.dispatchServerScriptsUpdateSearchFilter(p4, {})
+	function p0.onSearchTermChanged(p2)
+		-- upvalues: p1 (ref)
+		p1.props.dispatchServerScriptsUpdateSearchFilter(p2, {})
 	end
 	
-	p0.utilRef = roactModule.createRef()
-	p0.state = { utilTabHeight = 0, isClientView = true }
+	p1.utilRef = roactModule.createRef()
+	p1.state = { utilTabHeight = 0, isClientView = true }
 end
 
-function mainViewScripts.didMount(p5)
-	p5:setState({ utilTabHeight = p5.utilRef.current.Size.Y.Offset })
+function mainViewScripts.didMount(p1)
+	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewScripts.didUpdate(p6)
-	local size = p6.utilRef.current.Size
+function mainViewScripts.didUpdate(p1)
+	local size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p6.state.utilTabHeight then
-		p6:setState({ utilTabHeight = size.Y.Offset })
+	if size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = size.Y.Offset })
 	end
 end
 
-function mainViewScripts.render(p7)
+function mainViewScripts.render(p1)
 	-- upvalues: list (ref), roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), serverScriptsModule (ref)
-	local size = p7.props.size
-	local formFactor = p7.props.formFactor
-	local tabList = p7.props.tabList
-	local serverTypeFilters = p7.props.serverTypeFilters
-	local utilTabHeight = p7.state.utilTabHeight
-	local serverSearchTerm = p7.props.serverSearchTerm
+	local size = p1.props.size
+	local formFactor = p1.props.formFactor
+	local tabList = p1.props.tabList
+	local serverTypeFilters = p1.props.serverTypeFilters
+	local utilTabHeight = p1.state.utilTabHeight
+	local serverSearchTerm = p1.props.serverSearchTerm
 	local t = {}
 	
 	for i, v in ipairs(list) do
-		local var10 = serverTypeFilters[v]
+		local var1 = serverTypeFilters[v]
 		
-		if var10 == nil then
-			var10 = true
+		if var1 == nil then
+			var1 = true
 		end
-		t[i] = { name = v, state = var10 }
+		t[i] = { name = v, state = var1 }
 	end
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -78,10 +78,10 @@ function mainViewScripts.render(p7)
 			tabList = tabList,
 			orderedCheckboxState = t,
 			searchTerm = serverSearchTerm,
-			refForParent = p7.utilRef,
-			onHeightChanged = p7.onUtilTabHeightChanged,
-			onCheckboxChanged = p7.onCheckboxChanged,
-			onSearchTermChanged = p7.onSearchTermChanged
+			refForParent = p1.utilRef,
+			onHeightChanged = p1.onUtilTabHeightChanged,
+			onCheckboxChanged = p1.onCheckboxChanged,
+			onSearchTermChanged = p1.onSearchTermChanged
 		}),
 		ServerScripts = utilTabHeight > 0 and roactModule.createElement(serverScriptsModule, {
 			layoutOrder = 2,
@@ -92,17 +92,17 @@ function mainViewScripts.render(p7)
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p8, _)
+return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
 	return {
-		serverSearchTerm = p8.ScriptsData.serverSearchTerm,
-		serverTypeFilters = p8.ScriptsData.serverTypeFilters
+		serverSearchTerm = p2.ScriptsData.serverSearchTerm,
+		serverTypeFilters = p2.ScriptsData.serverTypeFilters
 	}
-end, function(p9)
+end, function(p2)
 	-- upvalues: serverScriptsUpdateSearchFilterModule (ref)
 	return {
-		dispatchServerScriptsUpdateSearchFilter = function(p10, p11)
-			-- upvalues: p9 (ref), serverScriptsUpdateSearchFilterModule (copy)
-			p9(serverScriptsUpdateSearchFilterModule(p10, p11))
+		dispatchServerScriptsUpdateSearchFilter = function(p3, p4)
+			-- upvalues: p2 (ref), serverScriptsUpdateSearchFilterModule (copy)
+			p2(serverScriptsUpdateSearchFilterModule(p3, p4))
 		end
 	}
 end)(mainViewScripts)

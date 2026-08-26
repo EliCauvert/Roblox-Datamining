@@ -7,7 +7,7 @@ local _ = require(socialTabsPage.Common.Types)
 
 return function(value)
 	-- upvalues: reactModule (ref), useLocalization (ref), cryoModule (ref)
-	local var3 = useLocalization(reactModule.useMemo(function()
+	local var1 = useLocalization(reactModule.useMemo(function()
 		-- upvalues: value (ref)
 		local t = {}
 		
@@ -18,10 +18,10 @@ return function(value)
 	end, { value }))
 	
 	return reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), value (ref), var3 (ref)
-		return cryoModule.List.map(value, function(p0)
-			-- upvalues: var3 (copy)
-			return { id = p0.id, text = var3[p0.id] }
+		-- upvalues: cryoModule (copy), value (ref), var1 (ref)
+		return cryoModule.List.map(value, function(p1)
+			-- upvalues: var1 (copy)
+			return { id = p1.id, text = var1[p1.id] }
 		end)
-	end, { value, var3 })
+	end, { value, var1 })
 end

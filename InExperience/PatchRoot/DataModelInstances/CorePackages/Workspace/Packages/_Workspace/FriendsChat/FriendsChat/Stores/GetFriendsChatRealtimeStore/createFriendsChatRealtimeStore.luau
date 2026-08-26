@@ -2,39 +2,39 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal(false)
-	local var2, var3 = createSignal(nil)
-	local var4, var5 = createSignal({})
+	local var1, var2 = createSignal(false)
+	local var3, var4 = createSignal(nil)
+	local var5, var6 = createSignal({})
 	
 	return {
-		getHasEnteredFriendsTab = var0,
-		getActiveConversationId = var2,
-		getLocalUnreadConversationIds = var4,
+		getHasEnteredFriendsTab = var1,
+		getActiveConversationId = var3,
+		getLocalUnreadConversationIds = var5,
 		markFriendsTabEntered = function()
-			-- upvalues: var1 (ref)
-			var1(true)
+			-- upvalues: var2 (ref)
+			var2(true)
 		end,
 		setActiveConversationId = function(value)
-			-- upvalues: var3 (ref)
-			var3(value)
+			-- upvalues: var4 (ref)
+			var4(value)
 		end,
-		addLocalUnread = function(p0)
-			-- upvalues: var5 (ref)
-			var5(function(p1)
-				-- upvalues: p0 (ref)
-				if p1[p0] then
-					return p1
+		addLocalUnread = function(p1)
+			-- upvalues: var6 (ref)
+			var6(function(p2)
+				-- upvalues: p1 (ref)
+				if p2[p1] then
+					return p2
 				end
-				local cloned = table.clone(p1)
-				cloned[p0] = true
+				local cloned = table.clone(p2)
+				cloned[p1] = true
 				
 				return cloned
 			end)
 		end,
 		clearLocalUnread = function()
-			-- upvalues: var5 (ref)
-			var5(function(p2)
-				return if next(p2) == nil then p2 else {}
+			-- upvalues: var6 (ref)
+			var6(function(p1)
+				return if next(p1) == nil then p1 else {}
 			end)
 		end
 	}

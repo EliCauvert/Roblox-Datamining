@@ -20,61 +20,61 @@ local list = {
 local t = { InExpServer = true, InExpClient = true }
 local t_1 = { DATA_FETCH_FAILURE = {} }
 
-function t_1.storeDesiredData(p0, p1)
+function t_1.storeDesiredData(p1, p2)
 	-- upvalues: getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validationEnumsModule (ref), resetPhysicsDataModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), t (ref), list (ref), fetchEditablesModule (ref), t_1 (ref), sharedDataMember (ref), fetchCurveAnimationsModule (ref), fetchCurveAnimComputedFramesModule (ref), fetchContentIdsModule (ref), fetchHSRAssetsModule (ref), fetchCurveAnimBoneDataModule (ref)
-	local rootInstance = p0.rootInstance
-	local preloadedEditableMeshes = p0.consumerConfig.preloadedEditableMeshes or {}
-	local preloadedEditableImages = p0.consumerConfig.preloadedEditableImages or {}
+	local rootInstance = p1.rootInstance
+	local preloadedEditableMeshes = p1.consumerConfig.preloadedEditableMeshes or {}
+	local preloadedEditableImages = p1.consumerConfig.preloadedEditableImages or {}
 	
-	if getFFlagUGCValidateMigrateBodyPartBoundsModule() and p0.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC then
+	if getFFlagUGCValidateMigrateBodyPartBoundsModule() and p1.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC then
 		pcall(resetPhysicsDataModule, { rootInstance }, {
-			isServer = p0.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+			isServer = p1.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
 			bypassFlags = {}
 		})
 	end
-	local var15
+	local var1
 	local _ = nil
 	
 	if getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-		var15 = p0.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
-		var15 = nil
+		var1 = p1.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
+		var1 = nil
 	else
-		var15 = t[p0.consumerConfig.source] == true
+		var1 = t[p1.consumerConfig.source] == true
 	end
 	for i, v in list do
-		if p1[v] then
+		if p2[v] then
 			local ok, status = pcall(function()
-				-- upvalues: fetchEditablesModule (copy), rootInstance (ref), v (ref), var15 (write), preloadedEditableMeshes (ref), preloadedEditableImages (ref)
-				return fetchEditablesModule.getDatas(rootInstance, v, var15, preloadedEditableMeshes, preloadedEditableImages)
+				-- upvalues: fetchEditablesModule (copy), rootInstance (ref), v (ref), var1 (write), preloadedEditableMeshes (ref), preloadedEditableImages (ref)
+				return fetchEditablesModule.getDatas(rootInstance, v, var1, preloadedEditableMeshes, preloadedEditableImages)
 			end)
 			
 			if ok and status then
-				p0[v] = status
+				p1[v] = status
 			else
-				p0[v] = t_1.DATA_FETCH_FAILURE
+				p1[v] = t_1.DATA_FETCH_FAILURE
 			end
 		end
 	end
-	if p1[sharedDataMember.curveAnimations] then
-		p0.curveAnimations = fetchCurveAnimationsModule.getData(rootInstance) or t_1.DATA_FETCH_FAILURE
+	if p2[sharedDataMember.curveAnimations] then
+		p1.curveAnimations = fetchCurveAnimationsModule.getData(rootInstance) or t_1.DATA_FETCH_FAILURE
 	end
-	if p1[sharedDataMember.curveAnimComputedFrames] then
-		if p0.curveAnimations and p0.curveAnimations ~= t_1.DATA_FETCH_FAILURE then
-			p0.curveAnimComputedFrames = fetchCurveAnimComputedFramesModule.getData(p0.curveAnimations) or t_1.DATA_FETCH_FAILURE
+	if p2[sharedDataMember.curveAnimComputedFrames] then
+		if p1.curveAnimations and p1.curveAnimations ~= t_1.DATA_FETCH_FAILURE then
+			p1.curveAnimComputedFrames = fetchCurveAnimComputedFramesModule.getData(p1.curveAnimations) or t_1.DATA_FETCH_FAILURE
 		else
-			p0.curveAnimComputedFrames = t_1.DATA_FETCH_FAILURE
+			p1.curveAnimComputedFrames = t_1.DATA_FETCH_FAILURE
 		end
 	end
 	if getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-		if p1[sharedDataMember.contentIds] then
-			p0.contentIds = fetchContentIdsModule.getData(p0)
+		if p2[sharedDataMember.contentIds] then
+			p1.contentIds = fetchContentIdsModule.getData(p1)
 		end
-		if p1[sharedDataMember.hsrAssets] then
-			p0.hsrAssets = fetchHSRAssetsModule.getData(rootInstance, p0.consumerConfig) or t_1.DATA_FETCH_FAILURE
+		if p2[sharedDataMember.hsrAssets] then
+			p1.hsrAssets = fetchHSRAssetsModule.getData(rootInstance, p1.consumerConfig) or t_1.DATA_FETCH_FAILURE
 		end
 	end
-	if p1[sharedDataMember.curveAnimBoneData] then
-		p0[sharedDataMember.curveAnimBoneData] = fetchCurveAnimBoneDataModule.getData(p0[sharedDataMember.curveAnimations])
+	if p2[sharedDataMember.curveAnimBoneData] then
+		p1[sharedDataMember.curveAnimBoneData] = fetchCurveAnimBoneDataModule.getData(p1[sharedDataMember.curveAnimations])
 	end
 end
 

@@ -2,22 +2,8 @@
 local tModule = require(parent.t)
 local array = require(parent.LuauPolyfill).Array
 
-local function _(p0, p1)
-	for i, v in p0 do
-		if v == p1 then
-			return true
-		end
-	end
-	return false
-end
-
-local _ = function(p2, p3)
-	if not p2 or not p3 then
-		return true
-	elseif typeof(p3) ~= "table" then
-		return p3 == p2
-	end
-	for i, v in p3 do
+local function _(p1, p2)
+	for i, v in p1 do
 		if v == p2 then
 			return true
 		end
@@ -25,63 +11,77 @@ local _ = function(p2, p3)
 	return false
 end
 
-local function readValue(p4, p5, p6, p7, p8)
+local _ = function(p3, p4)
+	if not p3 or not p4 then
+		return true
+	elseif typeof(p4) ~= "table" then
+		return p4 == p3
+	end
+	for i, v in p4 do
+		if v == p3 then
+			return true
+		end
+	end
+	return false
+end
+
+local function readValue(p5, p6, p7, p8, p9)
 	-- upvalues: array (ref), readValue (ref)
-	local var4 = p4[p7]
-	local var5 = if var4 ~= nil then -1 else p8
-	array.forEach(p4, function(p9)
-		-- upvalues: p5 (ref), p6 (ref), readValue (copy), p7 (ref), p8 (ref), var5 (write), var4 (write)
-		local var7
-		local var6 = p5
-		local breakpoint = p9.breakpoint
+	local var1 = p5[p8]
+	local var2 = if var1 ~= nil then -1 else p9
+	array.forEach(p5, function(p10)
+		-- upvalues: p6 (ref), p7 (ref), readValue (copy), p8 (ref), p9 (ref), var2 (write), var1 (write)
+		local var3
+		local var4 = p6
+		local breakpoint = p10.breakpoint
 		
-		if not var6 or not breakpoint then
-			var7 = true
+		if not var4 or not breakpoint then
+			var3 = true
 		elseif typeof(breakpoint) == "table" then
 			for i, v in breakpoint do
-				if v == var6 then
-					var7 = true
+				if v == var4 then
+					var3 = true
 				end
 			end
-			var7 = false
+			var3 = false
 		else
-			local _ = breakpoint == var6
+			local _ = breakpoint == var4
 		end
-		if var7 then
-			var6 = p6
-			local kind = p9.kind
+		if var3 then
+			var4 = p7
+			local kind = p10.kind
 			
-			if not var6 or not kind then
-				var7 = true
+			if not var4 or not kind then
+				var3 = true
 			elseif typeof(kind) == "table" then
 				for i, v in kind do
-					if v == var6 then
-						var7 = true
+					if v == var4 then
+						var3 = true
 					end
 				end
-				var7 = false
+				var3 = false
 			else
-				var7 = kind == var6
-				var7 = nil
+				var3 = kind == var4
+				var3 = nil
 			end
-			if var7 then
-				var7, var6 = readValue(p9, p5, p6, p7, p8 + 1)
+			if var3 then
+				var3, var6 = readValue(p10, p6, p7, p8, p9 + 1)
 				
-				if var5 < var6 then
-					var4 = var7
-					var5 = var6
+				if var2 < var4 then
+					var1 = var3
+					var2 = var4
 				end
 			end
 		end
 	end)
 	
-	return var4, var5
+	return var1, var2
 end
 
 local t = { name = "_default", min = 1e999, max = 0 }
 local t_1 = {
-	[tModule.strictInterface({ Scale = tModule.number, Offset = tModule.number })] = function(p10)
-		return UDim.new(p10.Scale, p10.Offset)
+	[tModule.strictInterface({ Scale = tModule.number, Offset = tModule.number })] = function(p11)
+		return UDim.new(p11.Scale, p11.Offset)
 	end
 }
 
@@ -91,75 +91,75 @@ return {
 		local config = p11.config
 		local breakpoint = p11.breakpoint
 		local kind = p11.kind
-		local var8 = config[p12]
-		local var9 = if var8 ~= nil then -1 else 0
-		local var10 = 0
+		local var5 = config[p12]
+		local var6 = if var5 ~= nil then -1 else 0
+		local var7 = 0
 		array.forEach(config, function(p13)
-			-- upvalues: breakpoint (ref), kind (ref), readValue (copy), p12 (ref), var10 (ref), var9 (write), var8 (write)
-			local var7
-			local var6 = breakpoint
+			-- upvalues: breakpoint (ref), kind (ref), readValue (copy), p12 (ref), var7 (ref), var6 (write), var5 (write)
+			local var8
+			local var9 = breakpoint
 			local breakpoint = p13.breakpoint
 			
-			if not var6 or not breakpoint then
-				var7 = true
+			if not var9 or not breakpoint then
+				var8 = true
 			elseif typeof(breakpoint) == "table" then
 				for i, v in breakpoint do
-					if v == var6 then
-						var7 = true
+					if v == var9 then
+						var8 = true
 					end
 				end
-				var7 = false
+				var8 = false
 			else
-				local _ = breakpoint == var6
+				local _ = breakpoint == var9
 			end
-			if var7 then
-				var6 = kind
+			if var8 then
+				var9 = kind
 				local kind = p13.kind
 				
-				if not var6 or not kind then
-					var7 = true
+				if not var9 or not kind then
+					var8 = true
 				elseif typeof(kind) == "table" then
 					for i, v in kind do
-						if v == var6 then
-							var7 = true
+						if v == var9 then
+							var8 = true
 						end
 					end
-					var7 = false
+					var8 = false
 				else
-					var7 = kind == var6
-					var7 = nil
+					var8 = kind == var9
+					var8 = nil
 				end
-				if var7 then
-					var7, var6 = readValue(p13, breakpoint, kind, p12, var10 + 1)
+				if var8 then
+					var8, var6 = readValue(p13, breakpoint, kind, p12, var7 + 1)
 					
-					if var9 < var6 then
-						var4 = var7
-						var9 = var6
+					if var6 < var9 then
+						var1 = var8
+						var6 = var9
 					end
 				end
 			end
 		end)
-		local var11 = var8
-		local _ = var9
+		local var10 = var5
+		local _ = var6
 		
-		for var8, var9 in t_1 do
-			if var8(var11) then
-				return var9(var11)
+		for var5, var6 in t_1 do
+			if var5(var10) then
+				return var6(var10)
 			end
 		end
-		return var11
+		return var10
 	end,
 	findBreakpoint = function(p14, p15)
 		-- upvalues: array (ref), t (ref)
-		local var12 = array.find(p14, function(p16)
+		local var11 = array.find(p14, function(p16)
 			-- upvalues: p15 (ref)
 			return type(p16) == "table" and (type(p16.breakpoint) == "string" and (p15 <= (p16.max or 1e999) and (p16.min or 0) <= p15))
 		end)
 		
-		return if var12 then {
-			name = var12.breakpoint,
-			min = var12.min or 0,
-			max = var12.max or 1e999
+		return if var11 then {
+			name = var11.breakpoint,
+			min = var11.min or 0,
+			max = var11.max or 1e999
 		} else t
 	end
 }

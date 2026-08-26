@@ -12,27 +12,27 @@ local t = {
 	position = UDim2.fromScale(0, 0)
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useMemo (ref), getEasingNumberSequenceModule (ref), reactModule (ref), view (ref)
-	local var5 = cryoModule.Dictionary.union(t, p0)
+	local var1 = cryoModule.Dictionary.union(t, p1)
 	
 	return reactModule.createElement(view, {
 		tag = "bg-contrast",
-		AnchorPoint = var5.anchorPoint,
-		Position = var5.position,
-		Size = var5.size,
-		ZIndex = var5.zIndex or 1
+		AnchorPoint = var1.anchorPoint,
+		Position = var1.position,
+		Size = var1.size,
+		ZIndex = var1.zIndex or 1
 	}, {
 		UIGradient = reactModule.createElement("UIGradient", {
 			Color = ColorSequence.new({
-				ColorSequenceKeypoint.new(0, var5.color3),
-				ColorSequenceKeypoint.new(1, var5.color3)
+				ColorSequenceKeypoint.new(0, var1.color3),
+				ColorSequenceKeypoint.new(1, var1.color3)
 			}),
-			Rotation = var5.rotation,
+			Rotation = var1.rotation,
 			Transparency = useMemo(function()
-				-- upvalues: getEasingNumberSequenceModule (copy), var5 (ref)
-				return NumberSequence.new(getEasingNumberSequenceModule(var5.startingTransparency, var5.endingTransparency, 15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut))
-			end, { var5.startingTransparency, var5.endingTransparency })
+				-- upvalues: getEasingNumberSequenceModule (copy), var1 (ref)
+				return NumberSequence.new(getEasingNumberSequenceModule(var1.startingTransparency, var1.endingTransparency, 15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut))
+			end, { var1.startingTransparency, var1.endingTransparency })
 		})
 	})
 end

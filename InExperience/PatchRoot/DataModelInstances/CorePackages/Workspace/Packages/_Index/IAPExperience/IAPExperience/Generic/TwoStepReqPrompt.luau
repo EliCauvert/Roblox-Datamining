@@ -12,7 +12,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.render(p0)
+function name.render(p1)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -28,30 +28,30 @@ function name.render(p0)
 				key = "Authentication.TwoStepVerification.Action.GoToSecurity"
 			}
 		},
-		render = function(p1)
-			-- upvalues: p0 (ref)
-			return p0:renderAlert(p1)
+		render = function(p2)
+			-- upvalues: p1 (ref)
+			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function name.renderAlert(p2, p3)
+function name.renderAlert(p1, p2)
 	-- upvalues: buttonType (ref), roactModule (ref), interactiveAlert (ref), images (ref)
-	local props = p2.props
+	local props = p1.props
 	
 	return roactModule.createElement(interactiveAlert, {
 		anchorPoint = props.anchorPoint,
 		position = props.position,
 		screenSize = props.screenSize,
-		title = p3.title,
+		title = p2.title,
 		titleIcon = images["icons/status/error_large"],
-		bodyText = p3.message,
+		bodyText = p2.message,
 		buttonStackInfo = if props.openSecuritySettings then {
 			buttons = {
 				{
 					props = {
 						onActivated = props.closePrompt,
-						text = p3.cancel,
+						text = p2.cancel,
 						inputIcon = props.cancelControllerIcon
 					}
 				},
@@ -59,7 +59,7 @@ function name.renderAlert(p2, p3)
 					buttonType = buttonType.PrimarySystem,
 					props = {
 						onActivated = props.openSecuritySettings,
-						text = p3.gotoSecurity,
+						text = p2.gotoSecurity,
 						inputIcon = props.doneControllerIcon
 					}
 				}
@@ -70,7 +70,7 @@ function name.renderAlert(p2, p3)
 					buttonType = buttonType.PrimarySystem,
 					props = {
 						onActivated = props.closePrompt,
-						text = p3.backToGame,
+						text = p2.backToGame,
 						inputIcon = props.doneControllerIcon
 					}
 				}

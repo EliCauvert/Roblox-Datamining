@@ -24,19 +24,19 @@ local t = {
 	shouldShowVerificationText = if fFlagHomePhoneVerificationUpsellNewCopy then false else nil
 }
 
-local function getButtonStackProps(p0, p1, p2, p3, p4)
+local function getButtonStackProps(p1, p2, p3, p4, p5)
 	-- upvalues: buttonType (ref)
 	local list = {
 		{
 			buttonType = buttonType.PrimarySystem,
-			props = { onActivated = p1, text = p0, isDisabled = p2 }
+			props = { onActivated = p2, text = p1, isDisabled = p3 }
 		}
 	}
 	
-	if p3 and p3 ~= "" then
+	if p4 and p4 ~= "" then
 		table.insert(list, 1, {
 			buttonType = buttonType.Secondary,
-			props = { isDisabled = false, onActivated = p4, text = p3 }
+			props = { isDisabled = false, onActivated = p5, text = p4 }
 		})
 	end
 	return {
@@ -46,48 +46,48 @@ local function getButtonStackProps(p0, p1, p2, p3, p4)
 	}
 end
 
-return function(p5)
+return function(p1)
 	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), getPartialPageModalMiddleContentWidth (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), withStyle (ref), withLocalization (ref), partialPageModal (ref), getButtonStackProps (ref), textBoxStateWrapper (ref), phoneNumberTextBox (ref), text (ref), checkbox (ref), linkButton (ref)
-	local var9 = mergePropsModule(t, p5)
+	local var1 = mergePropsModule(t, p1)
 	
 	local function noOp() end
 	
-	local var11, var12 = reactModule.useState(false)
-	local var13 = getPartialPageModalMiddleContentWidth(var9.screenSize.X)
+	local var2, var3 = reactModule.useState(false)
+	local var4 = getPartialPageModalMiddleContentWidth(var1.screenSize.X)
 	local t_1 = {
 		phoneNumberKey = "Feature.VerificationUpsell.Label.PhoneNumber",
 		phonePrivacyDisclaimerKey = "Feature.VerificationUpsell.Description.PhoneNumberNeverPublic",
 		termsOfUseKey = "Feature.VerificationUpsell.Action.TermsOfUse",
 		privacyPolicyKey = "Feature.VerificationUpsell.Action.PrivacyPolicy",
-		titleKey = var9.titleKey,
-		descriptionKey = var9.descriptionKey,
-		buttonKey = var9.buttonKey,
-		legalTextKey = var9.legalTextKey,
+		titleKey = var1.titleKey,
+		descriptionKey = var1.descriptionKey,
+		buttonKey = var1.buttonKey,
+		legalTextKey = var1.legalTextKey,
 		verificationKey = if fFlagHomePhoneVerificationUpsellNewCopy then "Feature.VerificationUpsell.Description.AddPhoneBody" else nil
 	}
 	
-	if var9.extraButtonKey and var9.extraButtonKey ~= "" then
-		t_1.extraButtonKey = var9.extraButtonKey
+	if var1.extraButtonKey and var1.extraButtonKey ~= "" then
+		t_1.extraButtonKey = var1.extraButtonKey
 	end
-	return withStyle(function(p6)
-		-- upvalues: withLocalization (copy), t_1 (ref), var9 (ref), var11 (ref), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), var13 (ref), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (ref), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var12 (ref), linkButton (copy)
-		return withLocalization(t_1)(function(p7)
-			-- upvalues: p6 (ref), var9 (copy), var11 (copy), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), var13 (copy), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (copy), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var12 (copy), linkButton (copy)
-			local baseSize = p6.Font.BaseSize
-			local relativeSize = p6.Font.Body.RelativeSize
-			local relativeSize_1 = p6.Font.CaptionHeader.RelativeSize
+	return withStyle(function(p2)
+		-- upvalues: withLocalization (copy), t_1 (ref), var1 (ref), var2 (ref), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), var4 (ref), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (ref), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (ref), linkButton (copy)
+		return withLocalization(t_1)(function(p3)
+			-- upvalues: p2 (ref), var1 (copy), var2 (copy), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), var4 (copy), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (copy), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (copy), linkButton (copy)
+			local baseSize = p2.Font.BaseSize
+			local relativeSize = p2.Font.Body.RelativeSize
+			local relativeSize_1 = p2.Font.CaptionHeader.RelativeSize
 			local createElement = reactModule.createElement
 			local t = {
-				title = p7.titleKey,
-				screenSize = var9.screenSize,
-				buttonStackProps = getButtonStackProps(p7.buttonKey, var9.onSetPhoneNumber, var9.isDisabled or var9.requireLegalTextCheckbox and not var11, p7.extraButtonKey, var9.onExtraButtonClick),
-				onCloseClicked = var9.onClose,
-				position = var9.isKeyboardShowing and UDim2.new(0.5, 0, 1, -var9.keyboardHeight) or nil,
-				anchorPoint = var9.isKeyboardShowing and Vector2.new(0.5, 1) or nil
+				title = p3.titleKey,
+				screenSize = var1.screenSize,
+				buttonStackProps = getButtonStackProps(p3.buttonKey, var1.onSetPhoneNumber, var1.isDisabled or var1.requireLegalTextCheckbox and not var2, p3.extraButtonKey, var1.onExtraButtonClick),
+				onCloseClicked = var1.onClose,
+				position = var1.isKeyboardShowing and UDim2.new(0.5, 0, 1, -var1.keyboardHeight) or nil,
+				anchorPoint = var1.isKeyboardShowing and Vector2.new(0.5, 1) or nil
 			}
 			local t_1 = {}
 			local createElement_1 = reactModule.createElement
-			local var17 = "Frame"
+			local var5 = "Frame"
 			local t_2 = {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -107,68 +107,68 @@ return function(p5)
 					LayoutOrder = 0,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
-					Text = p7.descriptionKey,
+					Text = p3.descriptionKey,
 					TextSize = baseSize,
-					TextColor3 = p6.Theme.TextDefault.Color,
-					TextTransparency = p6.Theme.TextDefault.Transparency,
-					Font = p6.Font.Body.Font,
+					TextColor3 = p2.Theme.TextDefault.Color,
+					TextTransparency = p2.Theme.TextDefault.Transparency,
+					Font = p2.Font.Body.Font,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(0, var13, 0, 0),
+					Size = UDim2.new(0, var4, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}),
 				PhoneInput = reactModule.createElement(textBoxStateWrapper, {
 					LayoutOrder = 1,
 					ChildClass = phoneNumberTextBox,
-					ErrorState = var9.errorMessage ~= "",
-					ErrorText = var9.errorMessage,
+					ErrorState = var1.errorMessage ~= "",
+					ErrorText = var1.errorMessage,
 					Size = UDim2.new(1, 0, 0, 36),
 					ChildProps = {
 						ClearTextOnFocus = false,
 						PaddingX = 12,
-						CountryCode = var9.countryCode,
-						SetCountryCode = var9.setCountryCode,
-						Text = var9.phoneNumber,
-						PlaceholderText = p7.phoneNumberKey,
-						Font = p6.Font.Body.Font,
+						CountryCode = var1.countryCode,
+						SetCountryCode = var1.setCountryCode,
+						Text = var1.phoneNumber,
+						PlaceholderText = p3.phoneNumberKey,
+						Font = p2.Font.Body.Font,
 						TextSize = baseSize * relativeSize,
 						TextXAlignment = Enum.TextXAlignment.Left,
-						Color = p6.Theme.BackgroundUIContrast.Color,
-						Transparency = p6.Theme.BackgroundUIContrast.Transparency,
-						TextColor = p6.Theme.TextDefault.Color,
-						PlaceholderColor = p6.Theme.UIDefault.Color,
-						TextTransparency = p6.Theme.TextDefault.Transparency,
-						TextInputTypeOverride = if var9.usePhoneNumberTextType then Enum.TextInputType.Phone else Enum.TextInputType.Number,
-						onChangeText = var9.onPhoneNumberTextChange,
-						onFocused = var9.onPhoneInputFocus,
+						Color = p2.Theme.BackgroundUIContrast.Color,
+						Transparency = p2.Theme.BackgroundUIContrast.Transparency,
+						TextColor = p2.Theme.TextDefault.Color,
+						PlaceholderColor = p2.Theme.UIDefault.Color,
+						TextTransparency = p2.Theme.TextDefault.Transparency,
+						TextInputTypeOverride = if var1.usePhoneNumberTextType then Enum.TextInputType.Phone else Enum.TextInputType.Number,
+						onChangeText = var1.onPhoneNumberTextChange,
+						onFocused = var1.onPhoneInputFocus,
 						onFocusLost = noOp,
-						phoneCountryCodeSelectorCallback = var9.onCountryCodeSelectorClick
+						phoneCountryCodeSelectorCallback = var1.onCountryCodeSelectorClick
 					}
 				}),
 				PrivacyText = reactModule.createElement("TextLabel", {
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
-					Text = p7.phonePrivacyDisclaimerKey,
+					Text = p3.phonePrivacyDisclaimerKey,
 					TextSize = baseSize * relativeSize_1,
-					TextColor3 = p6.Theme.TextEmphasis.Color,
-					TextTransparency = p6.Theme.TextEmphasis.Transparency,
-					Font = p6.Font.Body.Font,
+					TextColor3 = p2.Theme.TextEmphasis.Color,
+					TextTransparency = p2.Theme.TextEmphasis.Transparency,
+					Font = p2.Font.Body.Font,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(0, var13, 0, 24)
+					Size = UDim2.new(0, var4, 0, 24)
 				}),
-				VerificationText = if fFlagHomePhoneVerificationUpsellNewCopy and var9.shouldShowVerificationText then reactModule.createElement(text, {
+				VerificationText = if fFlagHomePhoneVerificationUpsellNewCopy and var1.shouldShowVerificationText then reactModule.createElement(text, {
 					tag = "auto-y size-full-0 text-wrap text-body-small text-align-x-left",
 					LayoutOrder = 2,
-					Text = p7.verificationKey
+					Text = p3.verificationKey
 				}) else nil
 			}
-			local var20 = not var9.disableLegalText
+			local var6 = not var1.disableLegalText
 			
-			if var20 then
-				var20 = if var9.requireLegalTextCheckbox then reactModule.createElement("Frame", {
+			if var6 then
+				var6 = if var1.requireLegalTextCheckbox then reactModule.createElement("Frame", {
 					LayoutOrder = 3,
 					BackgroundTransparency = 1,
-					Size = UDim2.new(0, var13, 0, 0),
+					Size = UDim2.new(0, var4, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
 					UIListLayout = reactModule.createElement("UIListLayout", {
@@ -177,35 +177,35 @@ return function(p5)
 						VerticalAlignment = Enum.VerticalAlignment.Center,
 						Padding = UDim.new(0, 6)
 					}),
-					LegalCheckbox = reactModule.createElement(checkbox, { label = "", onActivated = var12, isChecked = var11 }),
+					LegalCheckbox = reactModule.createElement(checkbox, { label = "", onActivated = var3, isChecked = var2 }),
 					LegalText = reactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						TextWrapped = true,
-						Text = p7.legalTextKey,
+						Text = p3.legalTextKey,
 						TextSize = baseSize * relativeSize_1,
-						TextColor3 = p6.Theme.TextDefault.Color,
-						TextTransparency = p6.Theme.TextDefault.Transparency,
-						Font = p6.Font.Body.Font,
+						TextColor3 = p2.Theme.TextDefault.Color,
+						TextTransparency = p2.Theme.TextDefault.Transparency,
+						Font = p2.Font.Body.Font,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(1, -32, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					})
-				}) elseif var9.alwaysShowLegalText or var9.countryCode.prefix == "1" then reactModule.createElement("TextLabel", {
+				}) elseif var1.alwaysShowLegalText or var1.countryCode.prefix == "1" then reactModule.createElement("TextLabel", {
 					LayoutOrder = 3,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
-					Text = p7.legalTextKey,
+					Text = p3.legalTextKey,
 					TextSize = baseSize * relativeSize_1,
-					TextColor3 = p6.Theme.TextDefault.Color,
-					TextTransparency = p6.Theme.TextDefault.Transparency,
-					Font = p6.Font.Body.Font,
+					TextColor3 = p2.Theme.TextDefault.Color,
+					TextTransparency = p2.Theme.TextDefault.Transparency,
+					Font = p2.Font.Body.Font,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(0, var13, 0, 0),
+					Size = UDim2.new(0, var4, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}) else nil
 			end
-			t_3.LegalTextContainer = var20
-			t_3.LegalButtonsContainer = var9.countryCode.prefix == "1" and (not var9.disableLegalText and reactModule.createElement("Frame", {
+			t_3.LegalTextContainer = var6
+			t_3.LegalButtonsContainer = var1.countryCode.prefix == "1" and (not var1.disableLegalText and reactModule.createElement("Frame", {
 				LayoutOrder = 4,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 0),
@@ -221,8 +221,8 @@ return function(p5)
 				TermsOfUseButton = reactModule.createElement(linkButton, {
 					layoutOrder = 5,
 					fontStyle = "CaptionBody",
-					text = p7.termsOfUseKey,
-					onActivated = var9.onTermsOfUseClick,
+					text = p3.termsOfUseKey,
+					onActivated = var1.onTermsOfUseClick,
 					size = UDim2.fromScale(0.2, 0.2)
 				}),
 				TextButtonDivider = reactModule.createElement("TextLabel", {
@@ -231,20 +231,20 @@ return function(p5)
 					Text = "-",
 					TextWrapped = true,
 					TextSize = baseSize * relativeSize_1,
-					TextColor3 = p6.Theme.TextDefault.Color,
-					TextTransparency = p6.Theme.TextDefault.Transparency,
-					Font = p6.Font.Body.Font,
+					TextColor3 = p2.Theme.TextDefault.Color,
+					TextTransparency = p2.Theme.TextDefault.Transparency,
+					Font = p2.Font.Body.Font,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					AutomaticSize = Enum.AutomaticSize.XY
 				}),
 				PrivacyPolicyButton = reactModule.createElement(linkButton, {
 					layoutOrder = 7,
 					fontStyle = "CaptionBody",
-					text = p7.privacyPolicyKey,
-					onActivated = var9.onPrivacyPolicyClick
+					text = p3.privacyPolicyKey,
+					onActivated = var1.onPrivacyPolicyClick
 				})
 			}))
-			t_1.Middle = createElement_1(var17, t_2, t_3)
+			t_1.Middle = createElement_1(var5, t_2, t_3)
 			
 			return createElement(partialPageModal, t, t_1)
 		end)

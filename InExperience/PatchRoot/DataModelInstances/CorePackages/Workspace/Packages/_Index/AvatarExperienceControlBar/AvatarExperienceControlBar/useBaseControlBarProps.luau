@@ -18,93 +18,93 @@ local t = {
 	[Enum.KeyCode.Thumbstick1] = true
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), roactGamepadModule (ref), debounce (ref), t (ref), fFlagAXFixVRControlBarFlicker (ref)
-	local var4 = useTokens()
-	local var5 = reactModule.useRef(false)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef(nil)
-	local var8 = roactGamepadModule.useRefCache()
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), var8 (ref)
+	local var1 = useTokens()
+	local var2 = reactModule.useRef(false)
+	local var3 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef(nil)
+	local var5 = roactGamepadModule.useRefCache()
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), var5 (ref)
 		local t = {}
 		local t_1 = {}
 		
-		if p0.config then
-			for i, v in p0.config do
+		if p1.config then
+			for i, v in p1.config do
 				if v.children then
 					t_1[v.id] = v.children
 				end
-				v.ref = var8[v.id]
+				v.ref = var5[v.id]
 				table.insert(t, v)
 			end
 		end
 		return t, t_1
-	end, { p0.config })
-	local var10, var11 = var9()
-	local var12, var13 = reactModule.useState(var10)
-	local var14, var15 = reactModule.useState(var11)
-	local var16, var17 = reactModule.useState("")
+	end, { p1.config })
+	local var7, var8 = var6()
+	local var9, var10 = reactModule.useState(var7)
+	local var11, var12 = reactModule.useState(var8)
+	local var13, var14 = reactModule.useState("")
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var13 (ref), var15 (ref)
-		local var21, var22 = var9()
-		var13(var21)
-		var15(var22)
-	end, { var9 })
+		-- upvalues: var6 (ref), var10 (ref), var12 (ref)
+		local var15, var16 = var6()
+		var10(var15)
+		var12(var16)
+	end, { var6 })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var16 (ref), var14 (ref)
-		if p0.onActiveMenuItemChanged then
-			p0.onActiveMenuItemChanged(var16, var14[var16] ~= nil)
+		-- upvalues: p1 (ref), var13 (ref), var11 (ref)
+		if p1.onActiveMenuItemChanged then
+			p1.onActiveMenuItemChanged(var13, var11[var13] ~= nil)
 		end
-	end, { var16, var14 })
-	local var18 = reactModule.useCallback(debounce(function()
-		-- upvalues: var5 (ref)
-		var5.current = false
+	end, { var13, var11 })
+	local var15 = reactModule.useCallback(debounce(function()
+		-- upvalues: var2 (ref)
+		var2.current = false
 	end, 0.1), {})
 	
 	return {
-		activeMenuItemId = var16,
-		menus = var12,
-		submenus = var14,
+		activeMenuItemId = var13,
+		menus = var9,
+		submenus = var11,
 		submenuItems = reactModule.useMemo(function()
-			-- upvalues: var14 (ref), var16 (ref)
-			return var14[var16]
-		end, { var16, var14 }),
+			-- upvalues: var11 (ref), var13 (ref)
+			return var11[var13]
+		end, { var13, var11 }),
 		submenuPosition = reactModule.useMemo(function()
-			-- upvalues: var8 (ref), var16 (ref), var6 (ref), var7 (ref), var4 (ref)
-			local var23 = var8[var16]
+			-- upvalues: var5 (ref), var13 (ref), var3 (ref), var4 (ref), var1 (ref)
+			local var16 = var5[var13]
 			
-			if var23 and var23.current and (var6.current and var7.current) then
-				local var24 = var23.current.AbsolutePosition - var6.current.AbsolutePosition + Vector2.new(var7.current.AbsoluteSize.X + var4.Size.Size_50, 0)
+			if var16 and var16.current and (var3.current and var4.current) then
+				local var17 = var16.current.AbsolutePosition - var3.current.AbsolutePosition + Vector2.new(var4.current.AbsoluteSize.X + var1.Size.Size_50, 0)
 				
-				return UDim2.new(0, var24.X, 0, var24.Y)
+				return UDim2.new(0, var17.X, 0, var17.Y)
 			end
 			return nil
-		end, { var16 }),
-		onMenuItemActivated = reactModule.useCallback(function(p1)
-			-- upvalues: var17 (ref), var16 (ref), var5 (ref), var18 (ref)
-			var17(if p1 == var16 then "" else p1)
-			var5.current = true
-			var18()
-		end, { var16 }),
+		end, { var13 }),
+		onMenuItemActivated = reactModule.useCallback(function(p2)
+			-- upvalues: var14 (ref), var13 (ref), var2 (ref), var15 (ref)
+			var14(if p2 == var13 then "" else p2)
+			var2.current = true
+			var15()
+		end, { var13 }),
 		onSubmenuItemActivated = reactModule.useCallback(function(_)
-			-- upvalues: var17 (ref), var5 (ref), var18 (ref)
-			var17("")
-			var5.current = true
-			var18()
+			-- upvalues: var14 (ref), var2 (ref), var15 (ref)
+			var14("")
+			var2.current = true
+			var15()
 		end, {}),
 		onInputEnded = reactModule.useCallback(function(p2)
-			-- upvalues: var16 (ref), var5 (ref), t (copy), var17 (ref), fFlagAXFixVRControlBarFlicker (copy)
-			if var16 ~= "" and not var5.current and not t[p2.KeyCode] then
-				var17("")
+			-- upvalues: var13 (ref), var2 (ref), t (copy), var14 (ref), fFlagAXFixVRControlBarFlicker (copy)
+			if var13 ~= "" and not var2.current and not t[p2.KeyCode] then
+				var14("")
 			end
 			if not fFlagAXFixVRControlBarFlicker then
-				var5.current = false
+				var2.current = false
 			end
-		end, { var16 }),
-		containerRef = var6,
-		iconMenuRef = var7,
-		menuItemsRefCache = var8,
-		LayoutOrder = p0.LayoutOrder
+		end, { var13 }),
+		containerRef = var3,
+		iconMenuRef = var4,
+		menuItemsRefCache = var5,
+		LayoutOrder = p1.LayoutOrder
 	}
 end

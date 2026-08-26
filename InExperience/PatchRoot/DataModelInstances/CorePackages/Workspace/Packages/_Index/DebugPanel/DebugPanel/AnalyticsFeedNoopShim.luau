@@ -1,8 +1,8 @@
-﻿local var0 = function() end
+﻿local var1 = function() end
 
 local function noopRegister(_)
-	-- upvalues: var0 (ref)
-	return var0
+	-- upvalues: var1 (ref)
+	return var1
 end
 
 local function noopNotify(_) end

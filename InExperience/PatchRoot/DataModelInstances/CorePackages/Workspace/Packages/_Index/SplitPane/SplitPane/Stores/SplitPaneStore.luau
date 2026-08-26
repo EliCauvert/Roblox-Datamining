@@ -19,86 +19,86 @@ local t = {
 	[breakpoint.XXLarge] = 6
 }
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: t (ref)
-	return (t[p1] or 0) <= (t[p0] or 0)
+	return (t[p2] or 0) <= (t[p1] or 0)
 end
 
 local _ = function()
 	-- upvalues: getRegionOverrides (ref), regionName (ref)
-	local var9 = if getRegionOverrides and regionName then getRegionOverrides(regionName.SupportRegion) else nil
-	local var10 = if var9 and var9.minWidth then var9.minWidth else 0
+	local var1 = if getRegionOverrides and regionName then getRegionOverrides(regionName.SupportRegion) else nil
+	local var2 = if var1 and var1.minWidth then var1.minWidth else 0
 	
-	if var9 and var9.maxWidth then
-		return var10, var9.maxWidth
+	if var1 and var1.maxWidth then
+		return var2, var1.maxWidth
 	end
-	return var10, 1e999
+	return var2, 1e999
 end
 
-local function evaluateBreakpointEnabled(p2)
+local function evaluateBreakpointEnabled(p1)
 	-- upvalues: displayModule (ref), resolveBreakpoint (ref), xLarge (ref), t (ref)
-	return (t[xLarge] or 0) <= (t[resolveBreakpoint(displayModule.GetDisplayStore(p2).getDesignSpaceViewportWidth(p2))] or 0)
+	return (t[xLarge] or 0) <= (t[resolveBreakpoint(displayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1))] or 0)
 end
 
 local function createSplitPaneStore()
 	-- upvalues: getRegionOverrides (ref), regionName (ref), signalsModule (ref), supportPaneMode (ref), displayModule (ref), resolveBreakpoint (ref), xLarge (ref), t (ref), evaluateBreakpointEnabled (ref)
-	local var11 = if getRegionOverrides and regionName then getRegionOverrides(regionName.SupportRegion) else nil
-	local var12 = if var11 and var11.minWidth then var11.minWidth else 0
-	local var13 = if var11 and var11.maxWidth then var11.maxWidth else 1e999
-	var11, var14 = signalsModule.createSignal(nil)
-	local var15, var16 = signalsModule.createSignal(supportPaneMode.Normal)
-	local var17, var18 = signalsModule.createSignal(false)
+	local var1 = if getRegionOverrides and regionName then getRegionOverrides(regionName.SupportRegion) else nil
+	local var2 = if var1 and var1.minWidth then var1.minWidth else 0
+	local var3 = if var1 and var1.maxWidth then var1.maxWidth else 1e999
+	var1, var14 = signalsModule.createSignal(nil)
+	local var4, var5 = signalsModule.createSignal(supportPaneMode.Normal)
+	local var6, var7 = signalsModule.createSignal(false)
 	
 	return {
-		getSupportWidth = var11,
+		getSupportWidth = var1,
 		setSupportWidth = function(value)
-			-- upvalues: var14 (ref), var12 (ref), var13 (ref)
-			var14(math.clamp(value, var12, var13))
+			-- upvalues: var14 (ref), var2 (ref), var3 (ref)
+			var14(math.clamp(value, var2, var3))
 		end,
 		getMinSupportWidth = function()
-			-- upvalues: var12 (ref)
-			return var12
+			-- upvalues: var2 (ref)
+			return var2
 		end,
 		getMaxSupportWidth = function()
-			-- upvalues: var13 (ref)
-			return var13
+			-- upvalues: var3 (ref)
+			return var3
 		end,
 		getIsBreakpointEnabled = signalsModule.createComputed(evaluateBreakpointEnabled),
-		getIsSplitEnabled = signalsModule.createComputed(function(p3)
-			-- upvalues: displayModule (copy), resolveBreakpoint (copy), xLarge (copy), t (copy), var17 (ref)
-			return (t[xLarge] or 0) <= (t[resolveBreakpoint(displayModule.GetDisplayStore(p3).getDesignSpaceViewportWidth(p3))] or 0) and var17(p3)
+		getIsSplitEnabled = signalsModule.createComputed(function(p1)
+			-- upvalues: displayModule (copy), resolveBreakpoint (copy), xLarge (copy), t (copy), var6 (ref)
+			return (t[xLarge] or 0) <= (t[resolveBreakpoint(displayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1))] or 0) and var6(p1)
 		end),
-		getIsSplitEligible = var17,
-		setIsSplitEligible = var18,
-		getSupportPaneMode = var15,
-		setSupportPaneMode = var16,
-		toggleSupportPaneMode = function(p4)
-			-- upvalues: var16 (ref), var15 (ref), supportPaneMode (copy)
-			var16(if var15(false) == p4 then supportPaneMode.Normal else p4)
+		getIsSplitEligible = var6,
+		setIsSplitEligible = var7,
+		getSupportPaneMode = var4,
+		setSupportPaneMode = var5,
+		toggleSupportPaneMode = function(p1)
+			-- upvalues: var5 (ref), var4 (ref), supportPaneMode (copy)
+			var5(if var4(false) == p1 then supportPaneMode.Normal else p1)
 		end
 	}
 end
 
-local var8 = nil
+local var1 = nil
 
 return {
 	getStore = function()
-		-- upvalues: var8 (write), createSplitPaneStore (ref)
-		if var8 == nil then
-			var8 = createSplitPaneStore()
+		-- upvalues: var1 (write), createSplitPaneStore (ref)
+		if var1 == nil then
+			var1 = createSplitPaneStore()
 		end
-		return var8
+		return var1
 	end,
 	isSplitEnabledNow = function()
-		-- upvalues: displayModule (ref), resolveBreakpoint (ref), xLarge (ref), t (ref), var8 (write), createSplitPaneStore (ref)
-		local var19 = (t[xLarge] or 0) <= (t[resolveBreakpoint(displayModule.GetDisplayStore(false).getDesignSpaceViewportWidth(false))] or 0)
+		-- upvalues: displayModule (ref), resolveBreakpoint (ref), xLarge (ref), t (ref), var1 (write), createSplitPaneStore (ref)
+		local var2 = (t[xLarge] or 0) <= (t[resolveBreakpoint(displayModule.GetDisplayStore(false).getDesignSpaceViewportWidth(false))] or 0)
 		
-		if var19 then
-			if var8 == nil then
-				var8 = createSplitPaneStore()
+		if var2 then
+			if var1 == nil then
+				var1 = createSplitPaneStore()
 			end
-			var19 = var8.getIsSplitEligible(false)
+			var2 = var1.getIsSplitEligible(false)
 		end
-		return var19
+		return var2
 	end
 }

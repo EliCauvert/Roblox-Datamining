@@ -17,129 +17,129 @@ local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local useSignalState = signalsReactModule.useSignalState
 local SCRUB_FADE_SECONDS = momentContextModule.SCRUB_FADE_SECONDS
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), momentContextModule (ref), useScreenSize (ref), useDeviceInsets (ref), reactUtilsModule (ref), useSignalState (ref), reactModule (ref), useVideoScrubPreviewModule (ref), SCRUB_FADE_SECONDS (ref), previewPopoverMathModule (ref), view (ref), videoPreviewModule (ref), timeLabelModule (ref)
 	local createElement_1
-	local var10 = useTokens()
-	local var11 = momentContextModule.useMoment()
-	local var12 = useScreenSize()
-	local var13 = useDeviceInsets()
-	local var14 = reactUtilsModule.createNextOrder()
-	local controller = var11.controller
-	local var15 = useSignalState(var11.store.getIsScrubbing)
-	local var16 = useVideoScrubPreviewModule(reactModule.useMemo(function()
+	local var1 = useTokens()
+	local var2 = momentContextModule.useMoment()
+	local var3 = useScreenSize()
+	local var4 = useDeviceInsets()
+	local var5 = reactUtilsModule.createNextOrder()
+	local controller = var2.controller
+	local var6 = useSignalState(var2.store.getIsScrubbing)
+	local var7 = useVideoScrubPreviewModule(reactModule.useMemo(function()
 		-- upvalues: controller (ref)
 		return if controller == nil then nil else controller.getVideoPreviewSource()
-	end, { controller }), var15, var11.store.getScrubPosition)
-	local var17, var18 = reactModule.useState(false)
+	end, { controller }), var6, var2.store.getScrubPosition)
+	local var8, var9 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), var18 (ref), SCRUB_FADE_SECONDS (copy)
-		if var15 then
-			var18(true)
+		-- upvalues: var6 (ref), var9 (ref), SCRUB_FADE_SECONDS (copy)
+		if var6 then
+			var9(true)
 			
 			return
 		end
-		local var28 = false
+		local var10 = false
 		task.delay(SCRUB_FADE_SECONDS, function()
-			-- upvalues: var28 (write), var18 (copy)
-			if not var28 then
-				var18(false)
+			-- upvalues: var10 (write), var9 (copy)
+			if not var10 then
+				var9(false)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var28 (write)
-			var28 = true
+			-- upvalues: var10 (write)
+			var10 = true
 		end
-	end, { var15 })
-	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useRef(nil)
-	local var21, var22 = reactModule.useBinding({ position = 0, width = 0 })
-	local var23, var24 = reactModule.useBinding(0)
+	end, { var6 })
+	local var10 = reactModule.useRef(nil)
+	local var11 = reactModule.useRef(nil)
+	local var12, var13 = reactModule.useBinding({ position = 0, width = 0 })
+	local var14, var15 = reactModule.useBinding(0)
 	reactModule.useEffect(function()
-		-- upvalues: var19 (ref), var22 (ref)
-		local current = var19.current
+		-- upvalues: var10 (ref), var13 (ref)
+		local current = var10.current
 		
 		if current == nil then
 			return
 		end
 		local function update()
-			-- upvalues: var22 (copy), current (ref)
-			var22({
+			-- upvalues: var13 (copy), current (ref)
+			var13({
 				position = current.AbsolutePosition.X,
 				width = current.AbsoluteSize.X
 			})
 		end
 		
-		var22({
+		var13({
 			position = current.AbsolutePosition.X,
 			width = current.AbsoluteSize.X
 		})
-		local var30 = current:GetPropertyChangedSignal("AbsolutePosition"):Connect(update)
-		local var31 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
+		local var16 = current:GetPropertyChangedSignal("AbsolutePosition"):Connect(update)
+		local var17 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
 		
 		return function()
-			-- upvalues: var30 (ref), var31 (ref)
-			var30:Disconnect()
-			var31:Disconnect()
+			-- upvalues: var16 (ref), var17 (ref)
+			var16:Disconnect()
+			var17:Disconnect()
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), var24 (ref)
-		local current = var20.current
+		-- upvalues: var11 (ref), var15 (ref)
+		local current = var11.current
 		
 		if current == nil then
 			return
 		end
 		local function update()
-			-- upvalues: var24 (copy), current (ref)
-			var24(current.AbsoluteSize.X)
+			-- upvalues: var15 (copy), current (ref)
+			var15(current.AbsoluteSize.X)
 		end
 		
-		var24(current.AbsoluteSize.X)
-		local var33 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
+		var15(current.AbsoluteSize.X)
+		local var16 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
 		
 		return function()
-			-- upvalues: var33 (ref)
-			var33:Disconnect()
+			-- upvalues: var16 (ref)
+			var16:Disconnect()
 		end
-	end, { var17 })
-	local size100 = var10.Size.Size_100
-	local var25 = reactModule.joinBindings({ p0.progressRatio, var21, var23 }):map(function(p1)
-		-- upvalues: previewPopoverMathModule (copy), var12 (ref), var13 (ref), size100 (ref), var10 (ref)
-		local var34 = p1[2]
+	end, { var8 })
+	local size100 = var1.Size.Size_100
+	local var16 = reactModule.joinBindings({ p1.progressRatio, var12, var14 }):map(function(p2)
+		-- upvalues: previewPopoverMathModule (copy), var3 (ref), var4 (ref), size100 (ref), var1 (ref)
+		local var17 = p2[2]
 		
 		return UDim2.new(0, previewPopoverMathModule.getCenterOffsetX({
-			ratio = p1[1],
-			containerPosition = var34.position,
-			containerWidth = var34.width,
-			popoverWidth = p1[3],
-			screenWidth = var12.X,
-			insetLeft = var13.left,
-			insetRight = var13.right,
+			ratio = p2[1],
+			containerPosition = var17.position,
+			containerWidth = var17.width,
+			popoverWidth = p2[3],
+			screenWidth = var3.X,
+			insetLeft = var4.left,
+			insetRight = var4.right,
 			margin = size100
-		}), 0, -var10.Size.Size_600)
+		}), 0, -var1.Size.Size_600)
 	end)
 	local createElement = reactModule.createElement
-	local t = { tag = "size-full", ref = var19 }
+	local t = { tag = "size-full", ref = var10 }
 	local t_1 = {}
 	
-	if var17 then
+	if var8 then
 		createElement_1 = reactModule.createElement
 		createElement_1 = createElement_1(view, {
 			tag = "col align-x-center gap-medium anchor-bottom-center auto-xy",
-			ref = var20,
-			Position = var25
+			ref = var11,
+			Position = var16
 		}, {
 			VideoPreview = if controller == nil or not controller.getHasVideoPreview() then nil else reactModule.createElement(videoPreviewModule, {
-				preview = var16,
-				animationRatio = var11.animationRatio,
-				LayoutOrder = var14()
+				preview = var7,
+				animationRatio = var2.animationRatio,
+				LayoutOrder = var5()
 			}),
 			TimeLabel = reactModule.createElement(timeLabelModule, {
-				progress = p0.progress,
-				animationRatio = var11.animationRatio,
-				LayoutOrder = var14()
+				progress = p1.progress,
+				animationRatio = var2.animationRatio,
+				LayoutOrder = var5()
 			})
 		})
 	else

@@ -12,10 +12,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local getToastStoreModule = require(moments.Stores.GetToastStore)
 local constantsModule = require(moments.Constants)
 
-local function ToastItem(p0)
+local function ToastItem(p1)
 	-- upvalues: reactModule (ref), toast (ref)
-	local entry = p0.entry
-	local onDismiss = p0.onDismiss
+	local entry = p1.entry
+	local onDismiss = p1.onDismiss
 	reactModule.useEffect(function()
 		-- upvalues: onDismiss (ref), entry (ref)
 		local delayedThread = task.delay(3, function()
@@ -33,38 +33,38 @@ local function ToastItem(p0)
 		title = entry.data.title,
 		text = if entry.data.text ~= "" then nil else entry.data.text,
 		LayoutOrder = entry.id,
-		width = p0.toastWidth
+		width = p1.toastWidth
 	})
 end
 
 return function()
 	-- upvalues: getToastStoreModule (ref), signalsReactModule (ref), useDeviceInsets (ref), useScreenSize (ref), useTokens (ref), reactModule (ref), ToastItem (ref), view (ref), constantsModule (ref)
-	local var9 = getToastStoreModule(false)
-	local var10 = signalsReactModule.useSignalState(var9.getToasts)
-	local var11 = useDeviceInsets()
-	local var12 = useScreenSize()
-	local var13 = useTokens()
-	local var14 = reactModule.useCallback(function(p1)
-		-- upvalues: var9 (ref)
-		var9.dismissToast(p1)
-	end, { var9.dismissToast })
+	local var1 = getToastStoreModule(false)
+	local var2 = signalsReactModule.useSignalState(var1.getToasts)
+	local var3 = useDeviceInsets()
+	local var4 = useScreenSize()
+	local var5 = useTokens()
+	local var6 = reactModule.useCallback(function(p1)
+		-- upvalues: var1 (ref)
+		var1.dismissToast(p1)
+	end, { var1.dismissToast })
 	
-	if #var10 == 0 then
+	if #var2 == 0 then
 		return nil
 	end
-	local uDim = UDim.new(0, math.min(400, var12.X - 40))
+	local uDim = UDim.new(0, math.min(400, var4.X - 40))
 	local t = {}
 	
-	for i, v in var10 do
-		t["Toast_" .. tostring(v.id)] = reactModule.createElement(ToastItem, { entry = v, onDismiss = var14, toastWidth = uDim })
+	for i, v in var2 do
+		t["Toast_" .. tostring(v.id)] = reactModule.createElement(ToastItem, { entry = v, onDismiss = var6, toastWidth = uDim })
 	end
 	return reactModule.createElement(view, {
 		tag = "col gap-small position-top-center anchor-top-center auto-xy",
 		ZIndex = constantsModule.ZIndex.Toasts,
 		padding = {
-			top = UDim.new(0, var11.top + var13.Padding.Large),
-			left = UDim.new(0, var11.left + var13.Padding.Large),
-			right = UDim.new(0, var11.right + var13.Padding.Large)
+			top = UDim.new(0, var3.top + var5.Padding.Large),
+			left = UDim.new(0, var3.left + var5.Padding.Large),
+			right = UDim.new(0, var3.right + var5.Padding.Large)
 		}
 	}, t)
 end

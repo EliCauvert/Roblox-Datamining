@@ -1,8 +1,8 @@
-﻿return function(p0, p1)
-	task.delay(p0, function()
-		-- upvalues: p1 (ref)
+﻿return function(p1, p2)
+	task.delay(p1, function()
+		-- upvalues: p2 (ref)
 		if game:IsLoaded() then
-			p1()
+			p2()
 			
 			return
 		end

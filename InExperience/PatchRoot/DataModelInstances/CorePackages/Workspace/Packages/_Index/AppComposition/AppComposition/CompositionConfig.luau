@@ -9,48 +9,48 @@ local fFlagEnableLeftNavOnConsole = sharedFlagsModule.FFlagEnableLeftNavOnConsol
 local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
 local regionName = appCompositionEnumsModule.RegionName
 
-local function getBaseConfig(p0, p1)
+local function getBaseConfig(p1, p2)
 	-- upvalues: breakpoint (ref), fFlagEnableLeftNavOnConsole (ref), hardwareSafeAreaInsets (ref)
 	local t
 	local _ = nil
 	
-	if p0 == breakpoint.XSmall then
-		local size300 = p1.Size.Size_300
+	if p1 == breakpoint.XSmall then
+		local size300 = p2.Size.Size_300
 		t = {
 			columns = 3,
 			margin = size300,
-			gutter = p1.Gutter.Small,
+			gutter = p2.Gutter.Small,
 			carouselPeek = 2 * size300
 		}
-	elseif p0 == breakpoint.Small then
-		local small = p1.Margin.Small
+	elseif p1 == breakpoint.Small then
+		local small = p2.Margin.Small
 		t = {
 			columns = 6,
 			margin = small,
-			gutter = p1.Gutter.Medium,
+			gutter = p2.Gutter.Medium,
 			carouselPeek = 2 * small
 		}
 	else
-		t = if p0 == breakpoint.Medium then {
+		t = if p1 == breakpoint.Medium then {
 			columns = 12,
 			carouselPeek = 0,
-			margin = p1.Size.Size_800,
-			gutter = p1.Gutter.Large
-		} elseif p0 == breakpoint.Large then {
+			margin = p2.Size.Size_800,
+			gutter = p2.Gutter.Large
+		} elseif p1 == breakpoint.Large then {
 			columns = 12,
 			carouselPeek = 0,
-			margin = p1.Size.Size_800,
-			gutter = p1.Gutter.Large
-		} elseif p0 == breakpoint.XLarge then {
+			margin = p2.Size.Size_800,
+			gutter = p2.Gutter.Large
+		} elseif p1 == breakpoint.XLarge then {
 			columns = 12,
 			carouselPeek = 0,
-			margin = p1.Size.Size_1600,
-			gutter = p1.Gutter.XLarge
+			margin = p2.Size.Size_1600,
+			gutter = p2.Gutter.XLarge
 		} else {
 			columns = 12,
 			carouselPeek = 0,
-			margin = p1.Size.Size_1600,
-			gutter = p1.Gutter.XLarge
+			margin = p2.Size.Size_1600,
+			gutter = p2.Gutter.XLarge
 		}
 	end
 	if not fFlagEnableLeftNavOnConsole and hardwareSafeAreaInsets.hasExtraPlatformInset() then
@@ -61,25 +61,25 @@ end
 
 return {
 	getBaseConfig = getBaseConfig,
-	resolveLayout = if fFlagEnableSplitPane then function(p2, p3)
+	resolveLayout = if fFlagEnableSplitPane then function(p1, p2)
 		-- upvalues: getBaseConfig (ref)
-		return getBaseConfig(p2, p3)
+		return getBaseConfig(p1, p2)
 	end else nil,
-	getRegionOverrides = if fFlagEnableSplitPane then function(p4)
+	getRegionOverrides = if fFlagEnableSplitPane then function(p1)
 		-- upvalues: regionName (ref)
-		return if p4 == regionName.SupportRegion then { widthScale = 0.33 } else nil
+		return if p1 == regionName.SupportRegion then { widthScale = 0.33 } else nil
 	end else nil,
-	getRegionLayout = if fFlagEnableSplitPane then function(p5, p6, p7)
+	getRegionLayout = if fFlagEnableSplitPane then function(p1, p2, p3)
 		-- upvalues: getBaseConfig (ref), regionName (ref)
-		local var5 = getBaseConfig(p6, p7)
-		local var6 = if p5 == regionName.SupportRegion then { widthScale = 0.33 } else nil
+		local var1 = getBaseConfig(p2, p3)
+		local var2 = if p1 == regionName.SupportRegion then { widthScale = 0.33 } else nil
 		
-		if var6 then
-			var5.width = var6.width
-			var5.widthScale = var6.widthScale
-			var5.minWidth = var6.minWidth
-			var5.maxWidth = var6.maxWidth
+		if var2 then
+			var1.width = var2.width
+			var1.widthScale = var2.widthScale
+			var1.minWidth = var2.minWidth
+			var1.maxWidth = var2.maxWidth
 		end
-		return var5
+		return var1
 	end else nil
 }

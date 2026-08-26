@@ -8,10 +8,10 @@ local findProfileInsightsByUserIds = profileInsightsConnectorModule.findProfileI
 local findProfileInsightsByUserIdsFeed = profileInsightsConnectorModule.findProfileInsightsByUserIdsFeed
 local fFlagPlayerSearchEnableOnlineFrequents = require(parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
 
-local _ = function(p0, p1)
-	for i, v in p0.profileInsights do
-		if v[p1] then
-			return v[p1]
+local _ = function(p1, p2)
+	for i, v in p1.profileInsights do
+		if v[p2] then
+			return v[p2]
 		end
 	end
 	return {}
@@ -19,8 +19,8 @@ end
 
 return {
 	ProfileInsights = {
-		targetUserId = function(p2)
-			return p2.targetUser
+		targetUserId = function(p3)
+			return p3.targetUser
 		end,
 		mutualFriends = function(p3)
 			-- upvalues: cryoModule (ref)
@@ -30,15 +30,15 @@ return {
 			for i, v in p3.profileInsights do
 				if v.mutualFriendInsight then
 					t = v.mutualFriendInsight
-					local var4 = if t then t.mutualFriends else {}
+					local var1 = if t then t.mutualFriends else {}
 					
-					return if var4 then cryoModule.List.foldLeft(cryoModule.Dictionary.keys(var4), function(p4, p5)
-						-- upvalues: var4 (ref)
-						local var5 = var4[p5]
+					return if var1 then cryoModule.List.foldLeft(cryoModule.Dictionary.keys(var1), function(p4, p5)
+						-- upvalues: var1 (ref)
+						local var2 = var1[p5]
 						table.insert(p4, {
 							id = p5,
-							username = var5.username,
-							displayName = var5.displayName
+							username = var2.username,
+							displayName = var2.displayName
 						})
 						
 						return p4
@@ -47,18 +47,18 @@ return {
 			end
 			t = {}
 		end,
-		isOfflineFrequents = function(p6)
+		isOfflineFrequents = function(p4)
 			-- upvalues: fFlagPlayerSearchEnableOnlineFrequents (ref)
 			local t
 			local _ = nil
 			local _ = nil
 			
-			for i, v in p6.profileInsights do
+			for i, v in p4.profileInsights do
 				if v.offlineFrequentsInsight then
 					t = v.offlineFrequentsInsight
 					local t_1
 					if fFlagPlayerSearchEnableOnlineFrequents then
-						for i, v in p6.profileInsights do
+						for i, v in p4.profileInsights do
 							if v.playedTogetherInsight then
 								t_1 = v.playedTogetherInsight
 							end
@@ -72,9 +72,9 @@ return {
 			end
 			t = {}
 		end,
-		friendshipAgeUnixSeconds = function(p7)
+		friendshipAgeUnixSeconds = function(p5)
 			local t
-			for i, v in p7.profileInsights do
+			for i, v in p5.profileInsights do
 				if v.friendshipAgeInsight then
 					t = v.friendshipAgeInsight
 					return if t.friendsSinceDateTime then t.friendsSinceDateTime.seconds else -1
@@ -82,9 +82,9 @@ return {
 			end
 			t = {}
 		end,
-		friendRequestOriginSource = function(p8)
+		friendRequestOriginSource = function(p6)
 			local t
-			for i, v in p8.profileInsights do
+			for i, v in p6.profileInsights do
 				if v.friendRequestOriginInsight then
 					t = v.friendRequestOriginInsight
 					return t.friendRequestOriginSource or -1
@@ -92,9 +92,9 @@ return {
 			end
 			t = {}
 		end,
-		accountCreationDateUnixSeconds = function(p9)
+		accountCreationDateUnixSeconds = function(p7)
 			local t
-			for i, v in p9.profileInsights do
+			for i, v in p7.profileInsights do
 				if v.accountCreationDateInsight then
 					t = v.accountCreationDateInsight
 					return if t.accountCreatedDateTime then t.accountCreatedDateTime.seconds else -1
@@ -102,9 +102,9 @@ return {
 			end
 			t = {}
 		end,
-		localizedCountryName = function(p10)
+		localizedCountryName = function(p8)
 			local t
-			for i, v in p10.profileInsights do
+			for i, v in p8.profileInsights do
 				if v.accountLocationInsight then
 					t = v.accountLocationInsight
 					return if t then t.localizedCountryName else ""
@@ -112,9 +112,9 @@ return {
 			end
 			t = {}
 		end,
-		userAgeVerifiedBracket = function(p11)
+		userAgeVerifiedBracket = function(p9)
 			local t
-			for i, v in p11.profileInsights do
+			for i, v in p9.profileInsights do
 				if v.userAgeVerifiedInsight then
 					t = v.userAgeVerifiedInsight
 					return if t and t.namespace and t.verifiedAgeBandLabel then `{t.namespace}.{t.verifiedAgeBandLabel}` else ""
@@ -124,22 +124,22 @@ return {
 		end
 	},
 	ProfileInsightsPages = {
-		id = function(p12)
+		id = function(p10)
 			-- upvalues: httpService (ref)
-			return if p12.pageId then p12.pageId else httpService:GenerateGUID(false)
+			return if p10.pageId then p10.pageId else httpService:GenerateGUID(false)
 		end,
-		profileInsights = function(p13)
-			return p13.profileInsights
+		profileInsights = function(p10)
+			return p10.profileInsights
 		end
 	},
 	Query = {
-		profilesInsights = function(_, p14, p15)
+		profilesInsights = function(_, p10, p11)
 			-- upvalues: findProfileInsightsByUserIdsFeed (ref), fFlagPlayerSearchEnableOnlineFrequents (ref)
-			return findProfileInsightsByUserIdsFeed(p14.userIds, p14.count, p14.pageId, if fFlagPlayerSearchEnableOnlineFrequents then p14.rankingStrategy else nil, p15.fetchImpl)
+			return findProfileInsightsByUserIdsFeed(p10.userIds, p10.count, p10.pageId, if fFlagPlayerSearchEnableOnlineFrequents then p10.rankingStrategy else nil, p11.fetchImpl)
 		end,
-		profilesInsightsByUserIds = function(_, p16, p17)
+		profilesInsightsByUserIds = function(_, p10, p11)
 			-- upvalues: findProfileInsightsByUserIds (ref)
-			return findProfileInsightsByUserIds(p16.userIds, p16.count, p16.rankingStrategy, p17.fetchImpl)
+			return findProfileInsightsByUserIds(p10.userIds, p10.count, p10.rankingStrategy, p11.fetchImpl)
 		end
 	}
 }

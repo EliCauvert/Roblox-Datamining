@@ -11,74 +11,74 @@ local getFStringUGCValidationAttachmentErrorLinkModule = require(parent.flags.ge
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
 
-local function validateInMeshSpace(p0, p1, p2, p3, p4)
+local function validateInMeshSpace(p1, p2, p3, p4, p5)
 	-- upvalues: getAttachmentCFrameInPartSpaceModule (ref), boundsDataUtilsModule (ref), analyticsModule (ref), meshSpaceUtilsModule (ref), prettyPrintVector3Module (ref), getFStringUGCValidationAttachmentErrorLinkModule (ref)
-	local var12 = p4.cframe * getAttachmentCFrameInPartSpaceModule(p0)
-	local var13 = boundsDataUtilsModule.calculateBoundsCenters(p4.boundsData)
-	local var14 = boundsDataUtilsModule.calculateBoundsDimensions(p4.boundsData)
+	local var1 = p5.cframe * getAttachmentCFrameInPartSpaceModule(p1)
+	local var2 = boundsDataUtilsModule.calculateBoundsCenters(p5.boundsData)
+	local var3 = boundsDataUtilsModule.calculateBoundsDimensions(p5.boundsData)
 	
-	if not var13 or not var14 then
+	if not var2 or not var3 then
 		return false, { "Missing mesh data for " .. p1.Name }
 	end
-	local var15 = (var12.Position - var13) / (var14 / 2)
-	local min = p2.min
-	local max = p2.max
+	local var4 = (var1.Position - var2) / (var3 / 2)
+	local min = p3.min
+	local max = p3.max
 	
 	for i, v in { "X", "Y", "Z" } do
-		if var15[v] < min[v] or max[v] < var15[v] then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartChildAttachmentBounds_InvalidAttachmentPosition, nil, p3)
-			local var16 = meshSpaceUtilsModule.clampAttachmentToBounds(p0, p4, p2, 0.001)
-			assert(var13 and var14, "meshCenterOpt and meshDimensionsOpt must be defined")
-			local var17, var18 = meshSpaceUtilsModule.calculateAcceptableBoundsLocalSpace(p2, p4, var14, var13)
-			local position = var17.Position
-			local var19, var20, var21 = var17.Rotation:ToOrientation()
+		if var4[v] < min[v] or max[v] < var4[v] then
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyPartChildAttachmentBounds_InvalidAttachmentPosition, nil, p4)
+			local var5 = meshSpaceUtilsModule.clampAttachmentToBounds(p1, p5, p3, 0.001)
+			assert(var2 and var3, "meshCenterOpt and meshDimensionsOpt must be defined")
+			local var6, var7 = meshSpaceUtilsModule.calculateAcceptableBoundsLocalSpace(p3, p5, var3, var2)
+			local position = var6.Position
+			local var8, var9, var10 = var6.Rotation:ToOrientation()
 			
 			return false, {
-				string.format("Attachment (%s) in %s is placed at position [%s] that is outside the valid range. The closest valid position is [%s]. (the attachment must be within the oriented bounding box - Position: [%s], Orientation: [%s], Size: [%s]%s)", p0.Name, p1.Name, prettyPrintVector3Module(p0.CFrame.Position, 3), prettyPrintVector3Module(var16.Position, 3), prettyPrintVector3Module(position, 3), prettyPrintVector3Module(Vector3.new(math.deg(var19), math.deg(var20), math.deg(var21)), 3), prettyPrintVector3Module(var18, 3), if getFStringUGCValidationAttachmentErrorLinkModule() ~= "" then "" else ". See " .. getFStringUGCValidationAttachmentErrorLinkModule() .. " for further explanation")
+				string.format("Attachment (%s) in %s is placed at position [%s] that is outside the valid range. The closest valid position is [%s]. (the attachment must be within the oriented bounding box - Position: [%s], Orientation: [%s], Size: [%s]%s)", p1.Name, p2.Name, prettyPrintVector3Module(p1.CFrame.Position, 3), prettyPrintVector3Module(var5.Position, 3), prettyPrintVector3Module(position, 3), prettyPrintVector3Module(Vector3.new(math.deg(var8), math.deg(var9), math.deg(var10)), 3), prettyPrintVector3Module(var7, 3), if getFStringUGCValidationAttachmentErrorLinkModule() ~= "" then "" else ". See " .. getFStringUGCValidationAttachmentErrorLinkModule() .. " for further explanation")
 			}
 		end
 	end
 	return true
 end
 
-local function checkAll(p5, _, p6, p7, p8)
+local function checkAll(p6, _, p7, p8, p9)
 	-- upvalues: failureReasonsAccumulatorModule (ref), r15plusUtilsModule (ref), validateInMeshSpace (ref)
-	local var22 = failureReasonsAccumulatorModule.new()
-	local name = p5:FindFirstChild(p6.rigAttachmentToParent.name, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local var11 = failureReasonsAccumulatorModule.new()
+	local name = p6:FindFirstChild(p7.rigAttachmentToParent.name, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	assert(name)
-	var22:updateReasons(validateInMeshSpace(name, p5, p6.rigAttachmentToParent.bounds, p7, p8))
+	var11:updateReasons(validateInMeshSpace(name, p6, p7.rigAttachmentToParent.bounds, p8, p9))
 	
-	for i, v in pairs(p6.otherAttachments) do
-		local var24 = p5:FindFirstChild(i, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-		assert(var24)
-		var22:updateReasons(validateInMeshSpace(var24, p5, v.bounds, p7, p8))
+	for i, v in pairs(p7.otherAttachments) do
+		local var12 = p6:FindFirstChild(i, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+		assert(var12)
+		var11:updateReasons(validateInMeshSpace(var12, p6, v.bounds, p8, p9))
 	end
-	return var22:getFinalResults()
+	return var11:getFinalResults()
 end
 
-return function(p9, p10)
+return function(p10, p11)
 	-- upvalues: constantsModule (ref), failureReasonsAccumulatorModule (ref), boundsCalculatorModule (ref), checkAll (ref), analyticsModule (ref)
 	local currentTime = tick()
-	local assetTypeEnum = p10.assetTypeEnum
-	local isServer = p10.isServer
+	local assetTypeEnum = p11.assetTypeEnum
+	local isServer = p11.isServer
 	assert(assetTypeEnum)
-	local var26 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]
-	assert(var26)
-	local var27 = failureReasonsAccumulatorModule.new()
-	local var28, var29, var30 = boundsCalculatorModule.calculateIndividualAssetPartsData(p9, p10)
+	local var13 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]
+	assert(var13)
+	local var14 = failureReasonsAccumulatorModule.new()
+	local var15, var16, var17 = boundsCalculatorModule.calculateIndividualAssetPartsData(p10, p11)
 	
-	if not var28 then
-		return var28, var29
+	if not var15 then
+		return var15, var16
 	elseif Enum.AssetType.DynamicHead == assetTypeEnum then
-		var27:updateReasons(checkAll(p9, isServer, var26.subParts.Head, p10, var30[p9.Name]))
+		var14:updateReasons(checkAll(p10, isServer, var13.subParts.Head, p11, var17[p10.Name]))
 	else
-		for i, v in pairs(var26.subParts) do
-			local var31 = p9:FindFirstChild(i)
-			assert(var31)
-			var27:updateReasons(checkAll(var31, isServer, v, p10, var30[i]))
+		for i, v in pairs(var13.subParts) do
+			local var18 = p10:FindFirstChild(i)
+			assert(var18)
+			var14:updateReasons(checkAll(var18, isServer, v, p11, var17[i]))
 		end
 	end
-	analyticsModule.recordScriptTime(script.Name, currentTime, p10)
+	analyticsModule.recordScriptTime(script.Name, currentTime, p11)
 	
-	return var27:getFinalResults()
+	return var14:getFinalResults()
 end

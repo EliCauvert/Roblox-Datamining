@@ -20,22 +20,22 @@ local t_2 = {
 	end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), abuseReportAnalyticsProvider (ref), t_2 (ref), arTranslationProvider (ref), t_1 (ref), loaderProvider (ref), t (ref), layoutSlotsProvider (ref), inlineSlots (ref), overlaidControlsProvider (ref), view (ref), uDim2 (ref), foundationModule (ref)
-	local var9, var10 = reactModule.useState(nil)
+	local var1, var2 = reactModule.useState(nil)
 	
 	return reactModule.createElement(abuseReportAnalyticsProvider, { analytics = t_2 }, {
-		Translation = reactModule.createElement(arTranslationProvider, { translations = p0.translations or t_1 }, {
-			LoaderCtx = reactModule.createElement(loaderProvider, { open = true, loaders = p0.loaders or t }, {
+		Translation = reactModule.createElement(arTranslationProvider, { translations = p1.translations or t_1 }, {
+			LoaderCtx = reactModule.createElement(loaderProvider, { open = true, loaders = p1.loaders or t }, {
 				Layout = reactModule.createElement(layoutSlotsProvider, { slots = inlineSlots }, {
 					Orientation = reactModule.createElement(overlaidControlsProvider, { value = true }, {
 						Container = reactModule.createElement(view, {
 							ClipsDescendants = true,
 							tag = "col",
-							Size = p0.containerSize or uDim2,
-							ref = var10
+							Size = p1.containerSize or uDim2,
+							ref = var2
 						}, {
-							Overlay = var9 and reactModule.createElement(foundationModule.OverlayProvider, { gui = var9 }, p0.children) or nil
+							Overlay = var1 and reactModule.createElement(foundationModule.OverlayProvider, { gui = var1 }, p1.children) or nil
 						})
 					})
 				})

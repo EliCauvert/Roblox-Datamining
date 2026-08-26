@@ -5,7 +5,7 @@ local constants = UIBloxModule.App.Style.Constants
 local deviceType = constants.DeviceType
 local tenFootInterfaceModule = require(robloxGui.Modules.TenFootInterface)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: tenFootInterfaceModule (ref), deviceType (ref), tokens (ref), constants (ref)
-	return tokens.getFoundationTokens(if tenFootInterfaceModule:IsEnabled() then deviceType.Console else p0 or deviceType.DefaultDeviceType, p1 or constants.DefaultThemeName)
+	return tokens.getFoundationTokens(if tenFootInterfaceModule:IsEnabled() then deviceType.Console else p1 or deviceType.DefaultDeviceType, p2 or constants.DefaultThemeName)
 end

@@ -1,7 +1,7 @@
 ﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueArgumentNamesRule = function(p0)
+	UniqueArgumentNamesRule = function(p1)
 		-- upvalues: graphQLError (ref)
 		local t = {}
 		
@@ -14,14 +14,14 @@ return {
 				-- upvalues: t (write)
 				t = {}
 			end,
-			Argument = function(_, p1)
-				-- upvalues: t (write), p0 (ref), graphQLError (copy)
-				local value = p1.name.value
+			Argument = function(_, p2)
+				-- upvalues: t (write), p1 (ref), graphQLError (copy)
+				local value = p2.name.value
 				
 				if t[value] then
-					p0:reportError(graphQLError.new(("There can be only one argument named \"%s\"."):format(value), { t[value], p1.name }))
+					p1:reportError(graphQLError.new(("There can be only one argument named \"%s\"."):format(value), { t[value], p2.name }))
 				else
-					t[value] = p1.name
+					t[value] = p2.name
 				end
 				return false
 			end

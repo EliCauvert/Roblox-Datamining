@@ -5,64 +5,64 @@ local object = luauPolyfillModule.Object
 local tableUtilitiesModule = require(parent.utils.TableUtilities)
 local invariantModule = require(parent.utils.invariant)
 
-local function compareScenes(p0, p1)
-	if p0.index ~= p1.index then
-		return p0.index < p1.index
+local function compareScenes(p1, p2)
+	if p1.index ~= p2.index then
+		return p1.index < p2.index
 	end
-	local var4 = #p0.key - #p1.key
+	local var1 = #p1.key - #p2.key
 	
-	return if var4 == 0 then p0.key < p1.key else var4 < 0
+	return if var1 == 0 then p1.key < p2.key else var1 < 0
 end
 
-local function _(p2, p3)
+local function _(p1, p2)
 	-- upvalues: tableUtilitiesModule (ref)
-	return if not (not p2 or not p3) then p2.key == p3.key and tableUtilitiesModule.ShallowEqual(p2, p3) else p2 == p3
+	return if not (not p1 or not p2) then p1.key == p2.key and tableUtilitiesModule.ShallowEqual(p1, p2) else p1 == p2
 end
 
-local _ = function(p4, p5)
+local _ = function(p1, p2)
 	-- upvalues: tableUtilitiesModule (ref)
-	local var5 = false
+	local var1 = false
 	
-	if p4.key == p5.key then
-		var5 = false
+	if p1.key == p2.key then
+		var1 = false
 		
-		if p4.index == p5.index then
-			var5 = false
+		if p1.index == p2.index then
+			var1 = false
 			
-			if p4.isStale == p5.isStale then
-				var5 = false
+			if p1.isStale == p2.isStale then
+				var1 = false
 				
-				if p4.isActive == p5.isActive then
-					if not p4 or not p5 then
-						return p4 == p5
-					elseif p4.key ~= p5.key then
+				if p1.isActive == p2.isActive then
+					if not p1 or not p2 then
+						return p1 == p2
+					elseif p1.key ~= p2.key then
 						return false
 					end
-					var5 = tableUtilitiesModule.ShallowEqual(p4, p5)
+					var1 = tableUtilitiesModule.ShallowEqual(p1, p2)
 				end
 			end
 		end
 	end
-	return var5
+	return var1
 end
 
-return function(p6, p7, p8, p9)
+return function(p1, p2, p3, p4)
 	-- upvalues: array (ref), invariantModule (ref), tableUtilitiesModule (ref), compareScenes (ref), object (ref)
-	for i, v in p6 do
+	for i, v in p1 do
 		local route = v.route
 		
-		if p9 and p9[route.key] then
-			v.descriptor = p9[route.key]
+		if p4 and p4[route.key] then
+			v.descriptor = p4[route.key]
 		end
 	end
-	if p8 == p7 then
-		return p6
+	if p3 == p2 then
+		return p1
 	end
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
 	
-	for i_1, v_1 in p6 do
+	for i_1, v_1 in p1 do
 		local key = v_1.key
 		
 		if v_1.isStale then
@@ -71,11 +71,11 @@ return function(p6, p7, p8, p9)
 		t[key] = v_1
 	end
 	local t_3 = {}
-	local routes = p7.routes
+	local routes = p2.routes
 	
-	if p7.index < #routes then
+	if p2.index < #routes then
 		print("Warning: StackRouter provided invalid state. Index should always be the top route")
-		routes = array.slice(routes, 1, p7.index)
+		routes = array.slice(routes, 1, p2.index)
 	end
 	for i_2, v_2 in routes do
 		local text_1 = "scene_" .. v_2.key
@@ -85,7 +85,7 @@ return function(p6, p7, p8, p9)
 			index = i_2,
 			key = text_1,
 			route = v_2,
-			descriptor = if p9 then p9[v_2.key] else nil
+			descriptor = if p4 then p4[v_2.key] else nil
 		}
 		invariantModule(not t_3[text_1], "navigation.state.routes[%d].key '%s' conflicts with another route!", i_2, text_1)
 		t_3[text_1] = true
@@ -96,191 +96,191 @@ return function(p6, p7, p8, p9)
 		t_1[text_1] = t_4
 	end
 	local text
-	if p8 then
-		local routes_1 = p8.routes
+	if p3 then
+		local routes_1 = p3.routes
 		
-		if p8.index < #routes_1 then
+		if p3.index < #routes_1 then
 			print("StackRouter provided invalid state. Index should always be the top route.")
-			routes_1 = array.slice(routes_1, 1, p8.index)
+			routes_1 = array.slice(routes_1, 1, p3.index)
 		end
-		local var11
+		local var1
 		for i_3, v_3 in routes_1 do
 			text = "scene_" .. v_3.key
 			
 			if not t_1[text] then
-				var11 = nil
+				var1 = nil
 				
-				for i_4, v_4 in p6 do
+				for i_4, v_4 in p1 do
 					if v_4.route.key == v_3.key then
-						var11 = v_4
+						var1 = v_4
 						break
 					end
 				end
-				local var12 = if var11 then var11.descriptor else p9[v_3.key]
+				local var2 = if var1 then var1.descriptor else p4[v_3.key]
 				
-				if var12 then
+				if var2 then
 					t_2[text] = {
 						isActive = false,
 						isStale = true,
 						index = i_3,
 						key = text,
 						route = v_3,
-						descriptor = var12
+						descriptor = var2
 					}
 				end
 			end
 		end
 	end
-	local var16
+	local var3
 	local t_4 = {}
 	
-	local function _(p10)
+	local function _(p5)
 		-- upvalues: t (ref), tableUtilitiesModule (copy), t_4 (ref)
-		local key = t[p10.key] or nil
+		local key = t[p5.key] or nil
 		
 		if key then
-			local var22 = false
+			local var4 = false
 			
-			if key.key == p10.key then
-				var22 = false
+			if key.key == p5.key then
+				var4 = false
 				
-				if key.index == p10.index then
-					var22 = false
+				if key.index == p5.index then
+					var4 = false
 					
-					if key.isStale == p10.isStale then
-						var22 = false
+					if key.isStale == p5.isStale then
+						var4 = false
 						
-						if key.isActive == p10.isActive then
-							if key and p10 then
-								var22 = key.key ~= p10.key and tableUtilitiesModule.ShallowEqual(key, p10)
+						if key.isActive == p5.isActive then
+							if key and p5 then
+								var4 = key.key ~= p5.key and tableUtilitiesModule.ShallowEqual(key, p5)
 							else
-								var22 = key == p10
-								var22 = nil
+								var4 = key == p5
+								var4 = nil
 							end
 						end
 					end
 				end
 			end
-			if var22 then
+			if var4 then
 				table.insert(t_4, key)
 				
 				return
 			end
 		end
-		table.insert(t_4, p10)
+		table.insert(t_4, p5)
 	end
 	
 	for i_3, v_3 in t_2 do
-		var16 = t[v_3.key] or nil
+		var3 = t[v_3.key] or nil
 		
-		if var16 then
-			local var18 = false
+		if var3 then
+			local var4 = false
 			
-			if var16.key == v_3.key then
-				var18 = false
+			if var3.key == v_3.key then
+				var4 = false
 				
-				if var16.index == v_3.index then
-					var18 = false
+				if var3.index == v_3.index then
+					var4 = false
 					
-					if var16.isStale == v_3.isStale then
-						var18 = false
+					if var3.isStale == v_3.isStale then
+						var4 = false
 						
-						if var16.isActive == v_3.isActive then
-							if var16 and v_3 then
-								var18 = var16.key ~= v_3.key and tableUtilitiesModule.ShallowEqual(var16, v_3)
+						if var3.isActive == v_3.isActive then
+							if var3 and v_3 then
+								var4 = var3.key ~= v_3.key and tableUtilitiesModule.ShallowEqual(var3, v_3)
 							else
-								var18 = var16 == v_3
-								var18 = nil
+								var4 = var3 == v_3
+								var4 = nil
 							end
 						end
 					end
 				end
 			end
-			if var18 then
-				table.insert(t_4, var16)
+			if var4 then
+				table.insert(t_4, var3)
 			else
 				table.insert(t_4, v_3)
 			end
 		end
 	end
 	for i_4, v_3 in t_1 do
-		var16 = t[v_3.key] or nil
+		var3 = t[v_3.key] or nil
 		
-		if var16 then
-			local var17 = false
+		if var3 then
+			local var5 = false
 			
-			if var16.key == v_3.key then
-				var17 = false
+			if var3.key == v_3.key then
+				var5 = false
 				
-				if var16.index == v_3.index then
-					var17 = false
+				if var3.index == v_3.index then
+					var5 = false
 					
-					if var16.isStale == v_3.isStale then
-						var17 = false
+					if var3.isStale == v_3.isStale then
+						var5 = false
 						
-						if var16.isActive == v_3.isActive then
-							if var16 and v_3 then
-								var17 = var16.key ~= v_3.key and tableUtilitiesModule.ShallowEqual(var16, v_3)
+						if var3.isActive == v_3.isActive then
+							if var3 and v_3 then
+								var5 = var3.key ~= v_3.key and tableUtilitiesModule.ShallowEqual(var3, v_3)
 							else
-								var17 = var16 == v_3
-								var17 = nil
+								var5 = var3 == v_3
+								var5 = nil
 							end
 						end
 					end
 				end
 			end
-			if var17 then
-				table.insert(t_4, var16)
+			if var5 then
+				table.insert(t_4, var3)
 			else
 				table.insert(t_4, v_3)
 			end
 		end
 	end
 	table.sort(t_4, compareScenes)
-	local var14 = 0
+	local var6 = 0
 	
 	for v_3, text in t_4 do
-		var16 = not text.isStale and text.index == p7.index
+		var3 = not text.isStale and text.index == p2.index
 		
-		if var16 ~= text.isActive then
-			t_4[v_3] = object.assign(table.clone(text), { isActive = var16 })
+		if var3 ~= text.isActive then
+			t_4[v_3] = object.assign(table.clone(text), { isActive = var3 })
 		end
-		if var16 then
-			var14 += 1
+		if var3 then
+			var6 += 1
 		end
 	end
-	invariantModule(var14 == 1, "There should only be one active scene, not %d", var14)
+	invariantModule(var6 == 1, "There should only be one active scene, not %d", var6)
 	
-	if #t_4 ~= #p6 then
+	if #t_4 ~= #p1 then
 		return t_4
 	end
 	for v_3, text in t_4 do
-		local var15 = p6[v_3]
-		var16 = false
+		local var7 = p1[v_3]
+		var3 = false
 		
-		if var15.key == text.key then
-			var16 = false
+		if var7.key == text.key then
+			var3 = false
 			
-			if var15.index == text.index then
-				var16 = false
+			if var7.index == text.index then
+				var3 = false
 				
-				if var15.isStale == text.isStale then
-					var16 = false
+				if var7.isStale == text.isStale then
+					var3 = false
 					
-					if var15.isActive == text.isActive then
-						if var15 and text then
-							var16 = var15.key ~= text.key and tableUtilitiesModule.ShallowEqual(var15, text)
+					if var7.isActive == text.isActive then
+						if var7 and text then
+							var3 = var7.key ~= text.key and tableUtilitiesModule.ShallowEqual(var7, text)
 						else
-							var16 = var15 == text
-							var16 = nil
+							var3 = var7 == text
+							var3 = nil
 						end
 					end
 				end
 			end
 		end
-		if not var16 then
+		if not var3 then
 			return t_4
 		end
 	end
-	return p6
+	return p1
 end

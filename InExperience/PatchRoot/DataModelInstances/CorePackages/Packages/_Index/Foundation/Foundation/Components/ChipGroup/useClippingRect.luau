@@ -1,13 +1,13 @@
 ﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
 	local var1, var2 = reactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var2 (ref)
-		if not p0.current then return end
+		-- upvalues: p1 (ref), var2 (ref)
+		if not p1.current then return end
 		local var3 = nil
-		local parent = p0.current.Parent
+		local parent = p1.current.Parent
 		while parent do
 			if not parent:IsA("GuiObject") or not parent.ClipsDescendants then
 				parent = parent.Parent
@@ -17,7 +17,7 @@ return function(p0)
 			break
 		end
 		if not var3 then
-			local layerCollector = p0.current:FindFirstAncestorWhichIsA("LayerCollector")
+			local layerCollector = p1.current:FindFirstAncestorWhichIsA("LayerCollector")
 			
 			if layerCollector and layerCollector:IsA("GuiBase2d") then
 				var3 = layerCollector

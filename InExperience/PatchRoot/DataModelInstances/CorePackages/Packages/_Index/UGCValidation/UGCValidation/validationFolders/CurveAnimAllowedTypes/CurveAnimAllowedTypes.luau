@@ -25,21 +25,21 @@ local list = {
 if getFFlagUGCValidateAddObjectValueToAcceptableTypesModule() then
 	table.insert(list, "ObjectValue")
 end
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: list (ref), errorSourceStringsModule (ref)
-	local var6
-	for i, v in p1.curveAnimations do
+	local var1
+	for i, v in p2.curveAnimations do
 		for i_1, v_1 in v:GetDescendants() do
-			var6 = false
+			var1 = false
 			
 			for i_2, v_2 in list do
 				if v_1:IsA(v_2) then
-					var6 = true
+					var1 = true
 					break
 				end
 			end
-			if not var6 then
-				p0:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidInstanceTypes, { allowedTypes = table.concat(list, ", ") })
+			if not var1 then
+				p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidInstanceTypes, { allowedTypes = table.concat(list, ", ") })
 				
 				return
 			end

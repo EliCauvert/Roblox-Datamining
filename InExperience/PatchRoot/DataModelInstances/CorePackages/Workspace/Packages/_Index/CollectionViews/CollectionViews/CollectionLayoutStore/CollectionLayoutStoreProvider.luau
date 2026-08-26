@@ -7,34 +7,34 @@ local collectionLayoutStoreContextModule = require(script.Parent.CollectionLayou
 local createCollectionLayoutStoreModule = require(script.Parent.createCollectionLayoutStore)
 local getMainCollectionLayoutStoreModule = require(script.Parent.getMainCollectionLayoutStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), signalsModule (ref), createCollectionLayoutStoreModule (ref), getMainCollectionLayoutStoreModule (ref), collectionLayoutStoreContextModule (ref)
-	local var6, var7 = reactModule.useMemo(function()
+	local var1, var2 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		return signalsModule.createSignal(0)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var7 (ref)
-		local container = p0.container
+		-- upvalues: p1 (ref), var2 (ref)
+		local container = p1.container
 		
 		if container then
-			var7(container.AbsoluteSize.X)
-			local var8 = container:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var7 (copy), container (ref)
-				var7(container.AbsoluteSize.X)
+			var2(container.AbsoluteSize.X)
+			local var3 = container:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+				-- upvalues: var2 (copy), container (ref)
+				var2(container.AbsoluteSize.X)
 			end)
 			
 			return function()
-				-- upvalues: var8 (ref)
-				var8:Disconnect()
+				-- upvalues: var3 (ref)
+				var3:Disconnect()
 			end
 		end
-	end, { p0.container })
+	end, { p1.container })
 	
 	return reactModule.createElement(collectionLayoutStoreContextModule.Provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: createCollectionLayoutStoreModule (copy), var6 (ref), getMainCollectionLayoutStoreModule (copy)
-			return createCollectionLayoutStoreModule(var6, getMainCollectionLayoutStoreModule(false))
-		end, { var6 })
-	}, p0.children)
+			-- upvalues: createCollectionLayoutStoreModule (copy), var1 (ref), getMainCollectionLayoutStoreModule (copy)
+			return createCollectionLayoutStoreModule(var1, getMainCollectionLayoutStoreModule(false))
+		end, { var1 })
+	}, p1.children)
 end

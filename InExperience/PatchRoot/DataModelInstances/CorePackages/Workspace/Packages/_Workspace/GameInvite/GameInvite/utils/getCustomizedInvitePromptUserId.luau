@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if p0 and p0.InviteUser ~= 0 then p0.InviteUser else nil
+﻿return function(p1)
+	return if p1 and p1.InviteUser ~= 0 then p1.InviteUser else nil
 end

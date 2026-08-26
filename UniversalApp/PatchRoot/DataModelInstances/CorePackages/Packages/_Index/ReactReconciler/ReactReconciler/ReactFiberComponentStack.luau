@@ -17,20 +17,20 @@ local describeBuiltInComponentFrame = reactComponentStackFrame.describeBuiltInCo
 local describeFunctionComponentFrame = reactComponentStackFrame.describeFunctionComponentFrame
 local describeClassComponentFrame = reactComponentStackFrame.describeClassComponentFrame
 
-local function describeFiber(p0)
+local function describeFiber(p1)
 	-- upvalues: reactGlobalsModule (ref), hostComponent (ref), describeBuiltInComponentFrame (ref), lazyComponent (ref), suspenseComponent (ref), suspenseListComponent (ref), functionComponent (ref), indeterminateComponent (ref), simpleMemoComponent (ref), describeFunctionComponentFrame (ref), forwardRef (ref), classComponent (ref), describeClassComponentFrame (ref)
 	local type = nil
 	
 	if reactGlobalsModule.__DEV__ then
-		local debugOwner = p0._debugOwner
+		local debugOwner = p1._debugOwner
 		
 		if debugOwner then
 			type = debugOwner.type
 		end
 	end
-	local var3 = if reactGlobalsModule.__DEV__ then p0._debugSource else nil
+	local var1 = if reactGlobalsModule.__DEV__ then p1._debugSource else nil
 	
-	return if p0.tag == hostComponent then describeBuiltInComponentFrame(p0.type, var3, type) elseif p0.tag == lazyComponent then describeBuiltInComponentFrame("Lazy", var3, type) elseif p0.tag == suspenseComponent then describeBuiltInComponentFrame("Suspense", var3, type) elseif p0.tag == suspenseListComponent then describeBuiltInComponentFrame("SuspenseList", var3, type) elseif p0.tag == functionComponent or p0.tag == indeterminateComponent or p0.tag == simpleMemoComponent then describeFunctionComponentFrame(p0.type, var3, type) elseif p0.tag == forwardRef then describeFunctionComponentFrame(p0.type.render, var3, type) elseif p0.tag == classComponent then describeClassComponentFrame(p0.type, var3, type) else ""
+	return if p1.tag == hostComponent then describeBuiltInComponentFrame(p1.type, var1, type) elseif p1.tag == lazyComponent then describeBuiltInComponentFrame("Lazy", var1, type) elseif p1.tag == suspenseComponent then describeBuiltInComponentFrame("Suspense", var1, type) elseif p1.tag == suspenseListComponent then describeBuiltInComponentFrame("SuspenseList", var1, type) elseif p1.tag == functionComponent or p1.tag == indeterminateComponent or p1.tag == simpleMemoComponent then describeFunctionComponentFrame(p1.type, var1, type) elseif p1.tag == forwardRef then describeFunctionComponentFrame(p1.type.render, var1, type) elseif p1.tag == classComponent then describeClassComponentFrame(p1.type, var1, type) else ""
 end
 
 return {
@@ -38,13 +38,13 @@ return {
 		-- upvalues: describeFiber (ref)
 		local ok, status = pcall(function()
 			-- upvalues: p1 (ref), describeFiber (copy)
-			local var4 = ""
-			local var5 = p1
+			local var1 = ""
+			local var2 = p1
 			repeat
-				var4 ..= describeFiber(var5)
-				var5 = var5.return_
-			until var5 == nil
-			return var4
+				var1 ..= describeFiber(var2)
+				var2 = var2.return_
+			until var2 == nil
+			return var1
 		end)
 		
 		return if ok then status elseif typeof(status) == "table" and status.message and status.stack then "\nError generating stack: " .. status.message .. "\n" .. tostring(status.stack) else "\nError generating stack: " .. tostring(status)

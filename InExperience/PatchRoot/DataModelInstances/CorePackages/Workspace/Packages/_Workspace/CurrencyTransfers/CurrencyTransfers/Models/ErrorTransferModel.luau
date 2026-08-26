@@ -4,13 +4,13 @@ local failureReasonModule = require(currencyTransfers.Enums.FailureReason)
 local getFFlagEnableLimitHit2SVUpsellModule = require(currencyTransfers.Flags.GetFFlagEnableLimitHit2SVUpsell)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -25,19 +25,19 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: getFFlagEnableLimitHit2SVUpsellModule (ref), failureReasonModule (ref), t (ref)
-	local failureReason = p2.FailureReason or p2.failureReason
-	local errorMessage = p2.ErrorMessage or (p2.errorMessage or "")
-	local ampRecourseActions = p2.AmpRecourseActions or p2.ampRecourseActions
-	local ampFeatureCheck = p2.AmpFeatureCheck or p2.ampFeatureCheck
+	local failureReason = p1.FailureReason or p1.failureReason
+	local errorMessage = p1.ErrorMessage or (p1.errorMessage or "")
+	local ampRecourseActions = p1.AmpRecourseActions or p1.ampRecourseActions
+	local ampFeatureCheck = p1.AmpFeatureCheck or p1.ampFeatureCheck
 	local isEligibleForElevatedLimitUpsell = nil
 	
 	if getFFlagEnableLimitHit2SVUpsellModule() then
-		if p2.IsEligibleForElevatedLimitUpsell ~= nil then
-			isEligibleForElevatedLimitUpsell = p2.IsEligibleForElevatedLimitUpsell
-		elseif p2.isEligibleForElevatedLimitUpsell ~= nil then
-			isEligibleForElevatedLimitUpsell = p2.isEligibleForElevatedLimitUpsell
+		if p1.IsEligibleForElevatedLimitUpsell ~= nil then
+			isEligibleForElevatedLimitUpsell = p1.IsEligibleForElevatedLimitUpsell
+		elseif p1.isEligibleForElevatedLimitUpsell ~= nil then
+			isEligibleForElevatedLimitUpsell = p1.isEligibleForElevatedLimitUpsell
 		end
 	end
 	return t.new({

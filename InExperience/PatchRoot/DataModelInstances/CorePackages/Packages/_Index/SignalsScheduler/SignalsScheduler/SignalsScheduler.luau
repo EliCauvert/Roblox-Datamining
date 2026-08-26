@@ -1,21 +1,21 @@
-﻿local var0 = false
+﻿local var1 = false
 local t = {}
 
-local function batch(p0)
-	-- upvalues: var0 (write), t (ref)
-	if var0 then
-		p0()
+local function batch(p1)
+	-- upvalues: var1 (write), t (ref)
+	if var1 then
+		p1()
 		
 		return
 	end
-	var0 = true
-	p0()
+	var1 = true
+	p1()
 	
 	for i, v in t do
 		v()
 	end
 	table.clear(t)
-	var0 = false
+	var1 = false
 end
 
 return {
@@ -24,8 +24,8 @@ return {
 		-- upvalues: batch (ref)
 		batch(function() end)
 	end,
-	schedule = function(p1)
+	schedule = function(p2)
 		-- upvalues: t (ref)
-		table.insert(t, p1)
+		table.insert(t, p2)
 	end
 }

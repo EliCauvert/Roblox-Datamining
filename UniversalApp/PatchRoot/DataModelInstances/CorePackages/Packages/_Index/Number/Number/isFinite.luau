@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return typeof(p0) == "number" and (p0 == p0 and (p0 ~= 1e999 and p0 ~= -1e999))
+﻿return function(p1)
+	return typeof(p1) == "number" and (p1 == p1 and (p1 ~= 1e999 and p1 ~= -1e999))
 end

@@ -11,8 +11,8 @@ function t:getCFrame()
 	return self.part.CFrame
 end
 
-function t:setCFrame(p0)
-	self.part.CFrame = p0
+function t:setCFrame(p1)
+	self.part.CFrame = p1
 end
 
 function t:updateTransparency()
@@ -73,16 +73,16 @@ function t:hide()
 	self.part.Parent = nil
 end
 
-function t:rescale(p2)
+function t:rescale(p1)
 	-- upvalues: utilsModule (ref)
-	self.part.Size *= p2
+	self.part.Size *= p1
 	
 	if self.uiGroupOffSet then
-		self.uiGroupOffSet = utilsModule.rescaleCFramePosition(self.uiGroupOffSet, p2)
+		self.uiGroupOffSet = utilsModule.rescaleCFramePosition(self.uiGroupOffSet, p1)
 	end
 end
 
-function t.new(p3, p4)
+function t.new(p1, p2)
 	-- upvalues: t (ref)
 	local t_1 = {
 		hovering = false,
@@ -90,9 +90,9 @@ function t.new(p3, p4)
 		everDragged = false,
 		dragBarState = "Idle",
 		uiGroupOffSet = nil,
-		part = p3,
-		dragBarImage = p4,
-		partsParent = p3.Parent
+		part = p1,
+		dragBarImage = p2,
+		partsParent = p1.Parent
 	}
 	setmetatable(t_1, t)
 	t_1.dragBarImage.ImageTransparency = 0.6

@@ -4,7 +4,7 @@ local browserService = game:GetService("BrowserService")
 local httpService = game:GetService("HttpService")
 local getFFlagEnableUnifiedWebViews = require(parent.SharedFlags).GetFFlagEnableUnifiedWebViews
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref), webViewService (ref), browserService (ref), httpService (ref)
 	if getFFlagEnableUnifiedWebViews() then
 		local onWindowClosedConnection = nil
@@ -17,7 +17,7 @@ return function(p0)
 				onWindowClosedConnection = nil
 			end
 		end)
-		webViewService:OpenWindow(p0, "", true)
+		webViewService:OpenWindow(p1, "", true)
 		
 		return
 	end
@@ -27,6 +27,6 @@ return function(p0)
 		visible = true,
 		isGenericWebview = true,
 		enableOverlayReplacement = true,
-		url = p0
+		url = p1
 	}))
 end

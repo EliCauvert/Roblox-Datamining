@@ -15,30 +15,30 @@ local getFFlagFixBundlePromptThumbnailModule = require(purchasePrompt.Flags.GetF
 local getFFlagEnableCreatorStorePurchasingCutoverModule = require(purchasePrompt.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
 local productTypeEnum = require(purchasePrompt.types).ProductTypeEnum
 local fFlagEnableDiscountInfoInUnifiedPurchaseModal = require(purchasePrompt.Parent.SharedFlags).FFlagEnableDiscountInfoInUnifiedPurchaseModal
-local var10 = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then require(purchasePrompt.Utils.normalizePriceDiscountDetails) else nil
+local var1 = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then require(purchasePrompt.Utils.normalizePriceDiscountDetails) else nil
 local fFlagPurchasePromptFetchCartPricingForLooks = require(purchasePrompt.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
 
 return rodux.createReducer({}, {
-	[productInfoReceivedModule.name] = function(_, p0)
-		-- upvalues: fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), constantsModule (ref), getFFlagTranslateDevProductsModule (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), var10 (ref), fFlagAXFixMISUpsellDiscountSummary (ref), getPreviewImageUrlModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref)
-		local productInfo = p0.productInfo
-		local var11 = ""
-		local var12 = ""
-		local var13 = nil
+	[productInfoReceivedModule.name] = function(_, p1)
+		-- upvalues: fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), constantsModule (ref), getFFlagTranslateDevProductsModule (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), var1 (ref), fFlagAXFixMISUpsellDiscountSummary (ref), getPreviewImageUrlModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref)
+		local productInfo = p1.productInfo
+		local var2 = ""
+		local var3 = ""
+		local var4 = nil
 		
 		if fFlagUnifiedPurchaseOptimizeTTIMarketplace then
-			var13 = if productInfo.ProductType ~= constantsModule.ProductType.Asset then productInfo.ProductType == constantsModule.ProductType.Bundle else true
+			var4 = if productInfo.ProductType ~= constantsModule.ProductType.Asset then productInfo.ProductType == constantsModule.ProductType.Bundle else true
 		end
-		if productInfo.ProductType == constantsModule.ProductType.CollectibleItem or fFlagUnifiedPurchaseOptimizeTTIMarketplace and var13 then
-			var11 = productInfo.CollectibleItemId
-			var12 = productInfo.CollectibleProductId
+		if productInfo.ProductType == constantsModule.ProductType.CollectibleItem or fFlagUnifiedPurchaseOptimizeTTIMarketplace and var4 then
+			var2 = productInfo.CollectibleItemId
+			var3 = productInfo.CollectibleProductId
 		end
 		return {
 			name = getFFlagTranslateDevProductsModule() and (productInfo.DisplayName or (productInfo.Name or productInfo.Name)),
 			description = productInfo.Description,
 			basePrice = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then productInfo.UserBasePriceInRobux or (productInfo.BasePriceInRobux or (productInfo.PriceInRobux or 0)) else nil,
 			price = productInfo.PriceInRobux or 0,
-			priceDiscountDetails = if var10 then var10(productInfo.PriceDiscountDetails) else nil,
+			priceDiscountDetails = if var1 then var1(productInfo.PriceDiscountDetails) else nil,
 			savingsSummaryOverride = if fFlagAXFixMISUpsellDiscountSummary then productInfo.SavingsSummaryOverride else nil,
 			premiumPrice = productInfo.PremiumPriceInRobux,
 			imageUrl = getPreviewImageUrlModule(productInfo),
@@ -48,16 +48,16 @@ return rodux.createReducer({}, {
 			productType = productInfo.ProductType,
 			membershipTypeRequired = productInfo.MinimumMembershipLevel,
 			itemType = productInfo.AssetTypeId,
-			collectibleItemId = var11,
+			collectibleItemId = var2,
 			collectibleItemIds = if fFlagPurchasePromptFetchCartPricingForLooks then productInfo.CollectibleItemIds else nil,
 			cartPricingRequestedItems = if fFlagPurchasePromptFetchCartPricingForLooks then productInfo.CartPricingRequestedItems else nil,
-			collectibleProductId = var12,
+			collectibleProductId = var3,
 			productTargetId = if fFlagEnableUnifiedProductPurchaseFlow and productInfo.TargetId then productInfo.TargetId else nil,
 			displayPrice = if fFlagEnableUnifiedPurchaseFlowForDevSubs and productInfo.ProductType == productTypeEnum.DeveloperSubscription then productInfo.DisplayPrice else nil
 		}
 	end,
 	[bundleProductInfoReceivedModule.name] = function(_, p1)
-		-- upvalues: getFFlagFixBundlePromptThumbnailModule (ref), itemTypeModule (ref), fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), var10 (ref), getPreviewImageUrlModule (ref)
+		-- upvalues: getFFlagFixBundlePromptThumbnailModule (ref), itemTypeModule (ref), fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), var1 (ref), getPreviewImageUrlModule (ref)
 		local bundleProductInfo = p1.bundleProductInfo
 		local id = nil
 		
@@ -77,7 +77,7 @@ return rodux.createReducer({}, {
 			name = bundleProductInfo.name or (if fFlagUnifiedPurchaseOptimizeTTIMarketplace then bundleProductInfo.Name else nil),
 			basePrice = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then bundleProductInfo.UserBasePriceInRobux or (bundleProductInfo.BasePriceInRobux or (bundleProductInfo.PriceInRobux or 0)) else nil,
 			price = bundleProductInfo.product.priceInRobux or ((if fFlagUnifiedPurchaseOptimizeTTIMarketplace then bundleProductInfo.PriceInRobux else nil) or 0),
-			priceDiscountDetails = if fFlagEnableDiscountInfoInUnifiedPurchaseModal and var10 then var10(bundleProductInfo.PriceDiscountDetails) else nil,
+			priceDiscountDetails = if fFlagEnableDiscountInfoInUnifiedPurchaseModal and var1 then var1(bundleProductInfo.PriceDiscountDetails) else nil,
 			imageUrl = getPreviewImageUrlModule(bundleProductInfo),
 			productId = bundleProductInfo.product.id,
 			itemType = bundleProductInfo.itemType

@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return string.find(p0, "EconomicRestrictions") ~= nil
+﻿return function(p1)
+	return string.find(p1, "EconomicRestrictions") ~= nil
 end

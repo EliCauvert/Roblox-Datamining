@@ -5,34 +5,34 @@ local pcallDeferredModule = require(parent.util.pcallDeferred)
 local getFIntUGCLCCageVerticesSimilarityMaximumModule = require(parent.flags.getFIntUGCLCCageVerticesSimilarityMaximum)
 local analyticsModule = require(parent.Analytics)
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref), getFIntUGCLCCageVerticesSimilarityMaximumModule (ref)
 	local currentTime = tick()
-	local isServer = p1.isServer
-	local var5, var6 = pcallDeferredModule(function()
-		-- upvalues: UGCValidationService (copy), p0 (ref), p2 (ref)
-		return UGCValidationService:GetEditableMeshVerticesSimilarityRate(p0.editableMesh, p2)
-	end, p1)
+	local isServer = p2.isServer
+	local var1, var2 = pcallDeferredModule(function()
+		-- upvalues: UGCValidationService (copy), p1 (ref), p3 (ref)
+		return UGCValidationService:GetEditableMeshVerticesSimilarityRate(p1.editableMesh, p3)
+	end, p2)
 	
-	if var5 then
-		local floored = math.floor(var6 * 100)
+	if var1 then
+		local floored = math.floor(var2 * 100)
 		
 		if getFIntUGCLCCageVerticesSimilarityMaximumModule() < floored then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateVerticesSimilarity_MaxSimilarityExceeded, nil, p1)
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateVerticesSimilarity_MaxSimilarityExceeded, nil, p2)
 			
 			return false, {
-				string.format("%s has %d%% of vertices too close to each other. Please edit the vertices to have at most %d%% coincident or close to one another.", p3, floored, getFIntUGCLCCageVerticesSimilarityMaximumModule()) .. "[Read more](https://create.roblox.com/docs/art/validation-errors#cageDensity)"
+				string.format("%s has %d%% of vertices too close to each other. Please edit the vertices to have at most %d%% coincident or close to one another.", p4, floored, getFIntUGCLCCageVerticesSimilarityMaximumModule()) .. "[Read more](https://create.roblox.com/docs/art/validation-errors#cageDensity)"
 			}
 		end
-		analyticsModule.recordScriptTime(script.Name, currentTime, p1)
+		analyticsModule.recordScriptTime(script.Name, currentTime, p2)
 		
 		return true
 	elseif isServer ~= nil and isServer then
-		error(string.format("Failed to execute similarity mesh vertex check for '%s'. Make sure mesh exists and try again.", p0.fullName))
+		error(string.format("Failed to execute similarity mesh vertex check for '%s'. Make sure mesh exists and try again.", p1.fullName))
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateVerticesSimilarity_FailedToExecute, nil, p1)
+	analyticsModule.reportFailure(analyticsModule.ErrorType.validateVerticesSimilarity_FailedToExecute, nil, p2)
 	
 	return false, {
-		string.format("Failed to execute similarity mesh vertex check for '%s'. Make sure mesh exists and try again.", p0.fullName)
+		string.format("Failed to execute similarity mesh vertex check for '%s'. Make sure mesh exists and try again.", p1.fullName)
 	}
 end

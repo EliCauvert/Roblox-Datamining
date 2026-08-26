@@ -3,79 +3,79 @@ local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
 local t = { dampingRatio = 0.9, frequency = 6 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref)
-	local var3 = if p0.hasHeader and p0.hasExpandableBody then p0.sectionGap else 0
+	local var1 = if p1.hasHeader and p1.hasExpandableBody then p1.sectionGap else 0
+	local var2, var3 = reactModule.useState(false)
 	local var4, var5 = reactModule.useState(false)
-	local var6, var7 = reactModule.useState(false)
-	local var8 = reactModule.useRef(false)
+	local var6 = reactModule.useRef(false)
+	local var7, var8 = reactModule.useState(nil)
 	local var9, var10 = reactModule.useState(nil)
-	local var11, var12 = reactModule.useState(nil)
-	local var13 = reactModule.useCallback(function(p1)
-		-- upvalues: var12 (ref)
-		var12(p1.AbsoluteSize.Y)
-	end, {})
-	local var14 = reactModule.useCallback(function(p2)
+	local var11 = reactModule.useCallback(function(p2)
 		-- upvalues: var10 (ref)
 		var10(p2.AbsoluteSize.Y)
 	end, {})
-	local compactHeight = p0.compactHeight
-	local buttonHeight = p0.buttonHeight
-	local var15 = compactHeight ~= nil and compactHeight > 0
-	local var16 = if var15 then compactHeight else 0
-	local var9_1 = var9 or 0
-	local var18 = if p0.hasHeader then (var11 or 0) + var3 else 0
-	local var19 = buttonHeight + p0.sectionGap
-	local var20 = not var15 or (not p0.hasHeader or var11 ~= nil)
-	local var21 = not var15 or (not p0.hasExpandableBody or var9 ~= nil)
-	local var22 = if var15 then math.max(0, var16 - var18 - var19) else 0
-	local var23 = var15 and (var20 and (var21 and (var22 > 0 and var22 + 1 < var9_1)))
-	local var24 = var15 and (p0.hasExpandableBody and (not var4 and not (var20 and var21)))
-	local var25 = var23 and not var4
-	local var26 = var23 and (var4 and not var6)
-	local var24_1 = var24 or (var25 or var26)
-	local var24_2 = var24 or var25
-	local reducedMotion = p0.reducedMotion
-	local var29 = if var4 then var9_1 elseif var24_1 then var22 else 0
-	local var30, var31 = reactOtterModule.useAnimatedBinding(var29, reactModule.useCallback(function()
-		-- upvalues: var8 (ref), var7 (ref)
-		if var8.current then
-			var8.current = false
-			var7(true)
+	local var12 = reactModule.useCallback(function(p2)
+		-- upvalues: var8 (ref)
+		var8(p2.AbsoluteSize.Y)
+	end, {})
+	local compactHeight = p1.compactHeight
+	local buttonHeight = p1.buttonHeight
+	local var13 = compactHeight ~= nil and compactHeight > 0
+	local var14 = if var13 then compactHeight else 0
+	local var15 = var7 or 0
+	local var16 = if p1.hasHeader then (var9 or 0) + var1 else 0
+	local var17 = buttonHeight + p1.sectionGap
+	local var18 = not var13 or (not p1.hasHeader or var9 ~= nil)
+	local var19 = not var13 or (not p1.hasExpandableBody or var7 ~= nil)
+	local var20 = if var13 then math.max(0, var14 - var16 - var17) else 0
+	local var21 = var13 and (var18 and (var19 and (var20 > 0 and var20 + 1 < var15)))
+	local var22 = var13 and (p1.hasExpandableBody and (not var2 and not (var18 and var19)))
+	local var23 = var21 and not var2
+	local var24 = var21 and (var2 and not var4)
+	local var25 = var22 or (var23 or var24)
+	local var26 = var22 or var23
+	local reducedMotion = p1.reducedMotion
+	local var27 = if var2 then var15 elseif var25 then var20 else 0
+	local var28, var29 = reactOtterModule.useAnimatedBinding(var27, reactModule.useCallback(function()
+		-- upvalues: var6 (ref), var5 (ref)
+		if var6.current then
+			var6.current = false
+			var5(true)
 		end
 	end, {}))
-	local var32 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var23 (ref), reducedMotion (ref), var8 (ref), var7 (ref), var31 (ref), reactOtterModule (copy), var9_1 (ref), t (copy)
-		var5(true)
+	local var30 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var21 (ref), reducedMotion (ref), var6 (ref), var5 (ref), var29 (ref), reactOtterModule (copy), var15 (ref), t (copy)
+		var3(true)
 		
-		if not var23 then return end
+		if not var21 then return end
 		if reducedMotion then
-			var8.current = false
-			var7(true)
-			var31(reactOtterModule.instant(var9_1))
+			var6.current = false
+			var5(true)
+			var29(reactOtterModule.instant(var15))
 			
 			return
 		end
-		var8.current = true
-		var7(false)
-		var31(reactOtterModule.spring(var9_1, t))
-	end, { var9_1, var23, reducedMotion, var31 })
+		var6.current = true
+		var5(false)
+		var29(reactOtterModule.spring(var15, t))
+	end, { var15, var21, reducedMotion, var29 })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var26 (ref), var8 (ref), var31 (ref), reactOtterModule (copy), var29 (ref)
-		if var26 then
+		-- upvalues: var24 (ref), var6 (ref), var29 (ref), reactOtterModule (copy), var27 (ref)
+		if var24 then
 			return
 		end
-		var8.current = false
-		var31(reactOtterModule.instant(var29))
-	end, { var29, var26, var31 })
+		var6.current = false
+		var29(reactOtterModule.instant(var27))
+	end, { var27, var24, var29 })
 	
 	return {
-		isCompact = var25,
-		shouldReserveCompactHeight = var24_2,
-		useCompactViewport = var24_1,
-		animatedViewportHeight = var30,
-		onExpand = var32,
-		onHeaderAbsoluteSizeChanged = var13,
-		onContentAbsoluteSizeChanged = var14
+		isCompact = var23,
+		shouldReserveCompactHeight = var26,
+		useCompactViewport = var25,
+		animatedViewportHeight = var28,
+		onExpand = var30,
+		onHeaderAbsoluteSizeChanged = var11,
+		onContentAbsoluteSizeChanged = var12
 	}
 end

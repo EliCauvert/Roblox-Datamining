@@ -26,45 +26,45 @@ promptWithTextField.validateProps = tModule.strictInterface({
 	screenSize = tModule.Vector2
 })
 
-function promptWithTextField.init(p0)
+function promptWithTextField.init(p1)
 	-- upvalues: roactModule (ref), userInputService (ref)
-	p0:setState({ alertPosition = UDim2.fromScale(0.5, 0.5) })
-	p0.textBoxRef = roactModule.createRef()
+	p1:setState({ alertPosition = UDim2.fromScale(0.5, 0.5) })
+	p1.textBoxRef = roactModule.createRef()
 	
-	function p0.textUpdated(p1)
-		-- upvalues: p0 (ref)
-		p0.props.onFieldTextUpdated(p1.Text)
+	function p0.textUpdated(p2)
+		-- upvalues: p1 (ref)
+		p1.props.onFieldTextUpdated(p2.Text)
 	end
 	
-	p0.lastAlertHeight = 100
+	p1.lastAlertHeight = 100
 	
 	function p0.calculateAlertPosition()
-		-- upvalues: userInputService (copy), p0 (ref)
+		-- upvalues: userInputService (copy), p1 (ref)
 		local uDim2 = UDim2.fromScale(0.5, 0.5)
 		
 		if userInputService.OnScreenKeyboardVisible then
-			local var12 = (p0.props.screenSize.Y - userInputService.OnScreenKeyboardSize.Y) / 2
-			local var13 = var12 - p0.lastAlertHeight / 2
+			local var1 = (p1.props.screenSize.Y - userInputService.OnScreenKeyboardSize.Y) / 2
+			local var2 = var1 - p1.lastAlertHeight / 2
 			
-			if var13 < 20 then
-				var12 += 20 - var13
+			if var2 < 20 then
+				var1 += 20 - var2
 			end
-			uDim2 = UDim2.new(0.5, 0, 0, var12)
+			uDim2 = UDim2.new(0.5, 0, 0, var1)
 		end
-		if p0.state.alertPosition ~= uDim2 then
-			p0:setState({ alertPosition = uDim2 })
+		if p1.state.alertPosition ~= uDim2 then
+			p1:setState({ alertPosition = uDim2 })
 		end
 	end
 	
 	function p0.alertSizeChanged(p2)
-		-- upvalues: p0 (ref)
-		p0.lastAlertHeight = p2.AbsoluteSize.Y
-		p0.calculateAlertPosition()
+		-- upvalues: p1 (ref)
+		p1.lastAlertHeight = p2.AbsoluteSize.Y
+		p1.calculateAlertPosition()
 	end
 	
 	function p0.alertMounted()
-		-- upvalues: p0 (ref)
-		local value = p0.textBoxRef:getValue()
+		-- upvalues: p1 (ref)
+		local value = p1.textBoxRef:getValue()
 		
 		if value then
 			value:CaptureFocus()
@@ -72,12 +72,12 @@ function promptWithTextField.init(p0)
 	end
 end
 
-function promptWithTextField.renderAlertMiddleContent(p3)
+function promptWithTextField.renderAlertMiddleContent(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), circle17Stroke1 (ref), rect (ref), roactGamepadModule (ref), robloxTranslatorModule (ref)
-	return withStyle(function(p4)
-		-- upvalues: roactModule (copy), imageSetLabel (copy), circle17Stroke1 (copy), rect (copy), roactGamepadModule (copy), robloxTranslatorModule (copy), p3 (ref)
-		local font = p4.Font
-		local theme = p4.Theme
+	return withStyle(function(p2)
+		-- upvalues: roactModule (copy), imageSetLabel (copy), circle17Stroke1 (copy), rect (copy), roactGamepadModule (copy), robloxTranslatorModule (copy), p1 (ref)
+		local font = p2.Font
+		local theme = p2.Theme
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -108,50 +108,50 @@ function promptWithTextField.renderAlertMiddleContent(p3)
 					Size = UDim2.new(1, -12, 1, 0),
 					TextColor3 = theme.TextEmphasis.Color,
 					TextTruncate = Enum.TextTruncate.AtEnd,
-					Text = p3.props.fieldText,
+					Text = p1.props.fieldText,
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					OverlayNativeInput = true,
-					[roactModule.Change.Text] = p3.textUpdated,
-					[roactModule.Ref] = p3.textBoxRef
+					[roactModule.Change.Text] = p1.textUpdated,
+					[roactModule.Ref] = p1.textBoxRef
 				})
 			})
 		})
 	end)
 end
 
-function promptWithTextField.render(p5)
+function promptWithTextField.render(p1)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), externalEventConnection (ref), userInputService (ref)
 	return roactModule.createFragment({
 		InteractiveAlert = roactModule.createElement(interactiveAlert, {
 			isMiddleContentFocusable = true,
-			title = p5.props.title,
-			bodyText = p5.props.bodyText,
-			buttonStackInfo = p5.props.buttonStackInfo,
-			position = p5.state.alertPosition,
-			screenSize = p5.props.screenSize,
+			title = p1.props.title,
+			bodyText = p1.props.bodyText,
+			buttonStackInfo = p1.props.buttonStackInfo,
+			position = p1.state.alertPosition,
+			screenSize = p1.props.screenSize,
 			middleContent = function()
-				-- upvalues: p5 (ref)
-				return p5:renderAlertMiddleContent()
+				-- upvalues: p1 (ref)
+				return p1:renderAlertMiddleContent()
 			end,
-			onAbsoluteSizeChanged = p5.alertSizeChanged,
-			onMounted = p5.alertMounted
+			onAbsoluteSizeChanged = p1.alertSizeChanged,
+			onMounted = p1.alertMounted
 		}),
 		OnScreenKeyboardVisibleConnection = roactModule.createElement(externalEventConnection, {
 			event = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"),
-			callback = p5.calculateAlertPosition
+			callback = p1.calculateAlertPosition
 		}),
 		OnScreenKeyboardSizeConnection = roactModule.createElement(externalEventConnection, {
 			event = userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"),
-			callback = p5.calculateAlertPosition
+			callback = p1.calculateAlertPosition
 		})
 	})
 end
 
-function promptWithTextField.didMount(p6)
-	p6.calculateAlertPosition()
+function promptWithTextField.didMount(p1)
+	p1.calculateAlertPosition()
 end
 
-return roactRoduxModule.connect(function(p7)
-	return { screenSize = p7.screenSize }
+return roactRoduxModule.connect(function(p1)
+	return { screenSize = p1.screenSize }
 end, nil)(promptWithTextField)

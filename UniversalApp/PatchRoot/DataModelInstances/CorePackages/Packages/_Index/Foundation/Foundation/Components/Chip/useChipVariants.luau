@@ -5,7 +5,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: chipSizeModule (ref), chipVariantModule (ref)
 	return {
 		common = {
@@ -31,29 +31,29 @@ local function variantsFactory(p0)
 		types = {
 			[chipVariantModule.Utility] = {
 				[true] = {
-					chip = { backgroundStyle = p0.Inverse.Surface.Surface_0 },
-					text = { contentStyle = p0.Inverse.Content.Emphasis }
+					chip = { backgroundStyle = p1.Inverse.Surface.Surface_0 },
+					text = { contentStyle = p1.Inverse.Content.Emphasis }
 				},
 				[false] = {
-					chip = { backgroundStyle = p0.Color.ActionUtility.Background },
-					text = { contentStyle = p0.Color.ActionUtility.Foreground }
+					chip = { backgroundStyle = p1.Color.ActionUtility.Background },
+					text = { contentStyle = p1.Color.ActionUtility.Foreground }
 				}
 			},
 			[chipVariantModule.Standard] = {
 				[true] = {
-					chip = { backgroundStyle = p0.Inverse.Surface.Surface_0 },
-					text = { contentStyle = p0.Inverse.Content.Emphasis }
+					chip = { backgroundStyle = p1.Inverse.Surface.Surface_0 },
+					text = { contentStyle = p1.Inverse.Content.Emphasis }
 				},
 				[false] = {
-					chip = { backgroundStyle = p0.Color.ActionStandard.Background },
-					text = { contentStyle = p0.Color.ActionStandard.Foreground }
+					chip = { backgroundStyle = p1.Color.ActionStandard.Background },
+					text = { contentStyle = p1.Color.ActionStandard.Foreground }
 				}
 			}
 		},
 		textSpacing = {
-			[chipSizeModule.Small] = UDim.new(0, p0.Padding.Small),
-			[chipSizeModule.Medium] = UDim.new(0, p0.Padding.Medium),
-			[chipSizeModule.Large] = UDim.new(0, p0.Padding.Large)
+			[chipSizeModule.Small] = UDim.new(0, p1.Padding.Small),
+			[chipSizeModule.Medium] = UDim.new(0, p1.Padding.Medium),
+			[chipSizeModule.Large] = UDim.new(0, p1.Padding.Large)
 		}
 	}
 end

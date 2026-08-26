@@ -19,9 +19,9 @@ local t = {
 	DressSkirtAccessory = "Dresses & Skirts"
 }
 
-local function isPurchasableStatus(p0)
+local function isPurchasableStatus(p1)
 	-- upvalues: priceStatus (ref)
-	return if p0 ~= priceStatus.Free then if p0 ~= priceStatus.PurchaseFromRoblox then p0 == priceStatus.PurchaseFromResale else true else true
+	return if p1 ~= priceStatus.Free then if p1 ~= priceStatus.PurchaseFromRoblox then p1 == priceStatus.PurchaseFromResale else true else true
 end
 
 local function _(p1)
@@ -29,20 +29,20 @@ local function _(p1)
 	return if p1.itemType ~= enumsModule.ItemTypes.Bundle then p1.itemType == "Bundle" else true
 end
 
-local function getAssetTypeDisplayName(value, p2)
+local function getAssetTypeDisplayName(value, p1)
 	-- upvalues: t (ref)
 	if not value then
 		return ""
-	elseif p2 and p2[value] then
-		return p2[value]
+	elseif p1 and p1[value] then
+		return p1[value]
 	end
-	local var7 = tonumber(value)
+	local var1 = tonumber(value)
 	
-	if not var7 then
+	if not var1 then
 		return t[value] or value
 	end
 	for i, v in Enum.AvatarAssetType:GetEnumItems() do
-		if v.Value == var7 then
+		if v.Value == var1 then
 			return t[v.Name] or v.Name:gsub("(%l)(%u)", "%1 %2")
 		end
 	end
@@ -51,30 +51,30 @@ end
 
 return {
 	isPurchasableStatus = isPurchasableStatus,
-	getPriceStatus = function(p3)
+	getPriceStatus = function(p2)
 		-- upvalues: getPriceStatusInShop (ref)
-		return getPriceStatusInShop(p3)
+		return getPriceStatusInShop(p2)
 	end,
 	PriceStatusEnum = priceStatus,
-	getThumbnailUrl = function(p4)
+	getThumbnailUrl = function(p2)
 		-- upvalues: enumsModule (ref), bundleThumbnail (ref), asset (ref), getRbxthumbWithTypeSizeAndOptions (ref)
-		return getRbxthumbWithTypeSizeAndOptions(p4.id, if if p4.itemType ~= enumsModule.ItemTypes.Bundle then p4.itemType == "Bundle" else true then bundleThumbnail else asset, 150)
+		return getRbxthumbWithTypeSizeAndOptions(p2.id, if if p2.itemType ~= enumsModule.ItemTypes.Bundle then p2.itemType == "Bundle" else true then bundleThumbnail else asset, 150)
 	end,
-	getItemTypeDisplayName = function(p5, p6)
+	getItemTypeDisplayName = function(p2, p3)
 		-- upvalues: enumsModule (ref), getAssetTypeDisplayName (ref)
-		if p5.taxonomyName then
-			return p5.taxonomyName
+		if p2.taxonomyName then
+			return p2.taxonomyName
 		end
-		local assetTypeNames = p6.assetTypeNames
+		local assetTypeNames = p3.assetTypeNames
 		
-		return if if p5.itemType ~= enumsModule.ItemTypes.Bundle then p5.itemType == "Bundle" else true then if p5.itemSubType and assetTypeNames and assetTypeNames[p5.itemSubType] then assetTypeNames[p5.itemSubType] elseif p6 and p6.bundle then p6.bundle else "Bundle" else getAssetTypeDisplayName(p5.itemSubType, assetTypeNames)
+		return if if p2.itemType ~= enumsModule.ItemTypes.Bundle then p2.itemType == "Bundle" else true then if p2.itemSubType and assetTypeNames and assetTypeNames[p2.itemSubType] then assetTypeNames[p2.itemSubType] elseif p3 and p3.bundle then p3.bundle else "Bundle" else getAssetTypeDisplayName(p2.itemSubType, assetTypeNames)
 	end,
-	shouldShowBundleParts = function(p7)
+	shouldShowBundleParts = function(p2)
 		-- upvalues: getPriceStatusInShop (ref), priceStatus (ref)
-		local var8 = getPriceStatusInShop(p7)
+		local var2 = getPriceStatusInShop(p2)
 		
-		if not p7.isOwned then
-			return if if var8 ~= priceStatus.Free then if var8 ~= priceStatus.PurchaseFromRoblox then var8 == priceStatus.PurchaseFromResale else true else true then p7.bundlePartsCount ~= nil and p7.bundlePartsCount > 0 else false
+		if not p2.isOwned then
+			return if if var2 ~= priceStatus.Free then if var2 ~= priceStatus.PurchaseFromRoblox then var2 == priceStatus.PurchaseFromResale else true else true then p2.bundlePartsCount ~= nil and p2.bundlePartsCount > 0 else false
 		end
 	end,
 	ASSET_TYPE_LOCALIZATION_KEYS = constants.AssetLocalizationKeys,

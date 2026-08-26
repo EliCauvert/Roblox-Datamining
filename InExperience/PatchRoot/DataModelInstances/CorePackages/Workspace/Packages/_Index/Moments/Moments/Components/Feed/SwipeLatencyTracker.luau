@@ -7,67 +7,67 @@ local useSwipeLatencyModule = require(script.Parent.useSwipeLatency)
 local _ = require(moments.Components.VerticalPager)
 local mediaPreloadProvider = momentsCommonModule.Media.MediaPreloadProvider
 
-return function(p0)
+return function(p1)
 	-- upvalues: mediaPreloadProvider (ref), reactModule (ref), useSwipeLatencyModule (ref)
-	local pager = p0.pager
-	local var4 = mediaPreloadProvider.useMediaControllerProvider()
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref)
-		return function(p1, p2)
-			-- upvalues: var4 (copy)
-			return if var4 == nil then nil elseif p2 == nil or p2.kind ~= "moment" then nil else var4.getControllerMap(p1)[p2.moment.momentId]
+	local pager = p1.pager
+	local var1 = mediaPreloadProvider.useMediaControllerProvider()
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref)
+		return function(p2, p3)
+			-- upvalues: var1 (copy)
+			return if var1 == nil then nil elseif p3 == nil or p3.kind ~= "moment" then nil else var1.getControllerMap(p2)[p3.moment.momentId]
 		end
-	end, { var4 })
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref)
-		return function(p3, p4)
-			-- upvalues: var5 (copy)
-			local var8 = var5(p3, p4)
+	end, { var1 })
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref)
+		return function(p2, p3)
+			-- upvalues: var2 (copy)
+			local var4 = var2(p2, p3)
 			
-			return if var8 == nil then false elseif p4 ~= nil and (p4.kind == "moment" and p4.moment.metadata.captureType == Enum.CaptureType.Video) then var8.getPosition(p3) > 0 else var8.getState(p3).readiness == "Ready"
+			return if var4 == nil then false elseif p3 ~= nil and (p3.kind == "moment" and p3.moment.metadata.captureType == Enum.CaptureType.Video) then var4.getPosition(p2) > 0 else var4.getState(p2).readiness == "Ready"
 		end
-	end, { var5 })
-	local var7 = useSwipeLatencyModule({
+	end, { var2 })
+	local var4 = useSwipeLatencyModule({
 		getIsSettled = reactModule.useMemo(function()
-			-- upvalues: p0 (ref)
-			return function(p5)
-				-- upvalues: p0 (copy)
-				local current = p0.controllerRef.current
+			-- upvalues: p1 (ref)
+			return function(p2)
+				-- upvalues: p1 (copy)
+				local current = p1.controllerRef.current
 				
-				return current == nil or current.getScrollState(p5) == "Idle"
+				return current == nil or current.getScrollState(p2) == "Idle"
 			end
-		end, { p0.controllerRef }),
+		end, { p1.controllerRef }),
 		getHasPresentedFrame = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), pager (ref)
-			return function(p6)
-				-- upvalues: var6 (copy), pager (copy)
-				return var6(p6, pager.getCurrentItem(p6))
+			-- upvalues: var3 (ref), pager (ref)
+			return function(p2)
+				-- upvalues: var3 (copy), pager (copy)
+				return var3(p2, pager.getCurrentItem(p2))
 			end
-		end, { pager, var6 }),
-		getTargetHasPresentedFrame = reactModule.useCallback(function(p7)
-			-- upvalues: var6 (ref)
-			return var6(false, p7)
-		end, { var6 }),
-		getCaptureType = reactModule.useCallback(function(p8)
-			if p8 == nil or p8.kind ~= "moment" then
+		end, { pager, var3 }),
+		getTargetHasPresentedFrame = reactModule.useCallback(function(p2)
+			-- upvalues: var3 (ref)
+			return var3(false, p2)
+		end, { var3 }),
+		getCaptureType = reactModule.useCallback(function(p2)
+			if p2 == nil or p2.kind ~= "moment" then
 				return "unknown"
 			end
-			local captureType = p8.moment.metadata.captureType
+			local captureType = p2.moment.metadata.captureType
 			
 			return if captureType == Enum.CaptureType.Video then "video" elseif captureType == Enum.CaptureType.Screenshot then "screenshot" else "unknown"
 		end, {})
 	})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var7 (ref)
-		p0.onTargetCommittedRef.current = var7
+		-- upvalues: p1 (ref), var4 (ref)
+		p1.onTargetCommittedRef.current = var4
 		
 		return function()
-			-- upvalues: p0 (copy), var7 (copy)
-			if p0.onTargetCommittedRef.current == var7 then
-				p0.onTargetCommittedRef.current = nil
+			-- upvalues: p1 (copy), var4 (copy)
+			if p1.onTargetCommittedRef.current == var4 then
+				p1.onTargetCommittedRef.current = nil
 			end
 		end
-	end, { p0.onTargetCommittedRef, var7 })
+	end, { p1.onTargetCommittedRef, var4 })
 	
 	return nil
 end

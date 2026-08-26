@@ -11,13 +11,13 @@ local resolveRefreshedExpectedPriceModule = require(parent.Utils.resolveRefreshe
 local fFlagFixTimedOptionRefreshModule = require(parent.Flags.FFlagFixTimedOptionRefresh)
 local resolveRefreshedProductInfoModule = require(parent.Utils.resolveRefreshedProductInfo)
 
-local function convertDiscountInfoToPriceDiscountDetails(p0)
-	if not p0 or type(p0.discounts) ~= "table" then
+local function convertDiscountInfoToPriceDiscountDetails(p1)
+	if not p1 or type(p1.discounts) ~= "table" then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in ipairs(p0.discounts) do
+	for i, v in ipairs(p1.discounts) do
 		table.insert(t, {
 			Type = v.discountCampaign,
 			AmountInRobux = v.robuxDiscountAmount,
@@ -27,23 +27,23 @@ local function convertDiscountInfoToPriceDiscountDetails(p0)
 	return t
 end
 
-local function normalizeBundleFields(p1)
+local function normalizeBundleFields(p2)
 	-- upvalues: fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), convertDiscountInfoToPriceDiscountDetails (ref)
 	if not fFlagEnableDiscountInfoInUnifiedPurchaseModal then
-		return p1
-	elseif not p1.UserBasePriceInRobux then
-		local discountInformation = p1.discountInformation
-		p1.UserBasePriceInRobux = p1.BasePriceInRobux or ((if discountInformation then discountInformation.originalPrice else nil) or (p1.PriceInRobux or ((if p1.product then p1.product.priceInRobux else nil) or 0)))
+		return p2
+	elseif not p2.UserBasePriceInRobux then
+		local discountInformation = p2.discountInformation
+		p2.UserBasePriceInRobux = p2.BasePriceInRobux or ((if discountInformation then discountInformation.originalPrice else nil) or (p2.PriceInRobux or ((if p2.product then p2.product.priceInRobux else nil) or 0)))
 	end
-	if not p1.PriceDiscountDetails and p1.discountInformation then
-		p1.PriceDiscountDetails = convertDiscountInfoToPriceDiscountDetails(p1.discountInformation)
+	if not p2.PriceDiscountDetails and p2.discountInformation then
+		p2.PriceDiscountDetails = convertDiscountInfoToPriceDiscountDetails(p2.discountInformation)
 	end
-	return p1
+	return p2
 end
 
 return function(p2, p3, p4, p5)
 	-- upvalues: fFlagEnableFetchCartPricingDuringInExperience (ref), normalizeBundleFields (ref), promiseModule (ref), purchaseErrorModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetailsModule (ref), getResellersModule (ref), fFlagFixTimedOptionRefreshModule (ref), resolveRefreshedProductInfoModule (ref), resolveRefreshedExpectedPriceModule (ref)
-	local var11 = p2.getBundleDetails(p3):andThen(function(p6)
+	local var1 = p2.getBundleDetails(p3):andThen(function(p6)
 		-- upvalues: fFlagEnableFetchCartPricingDuringInExperience (copy), p5 (ref), normalizeBundleFields (copy), promiseModule (copy)
 		return if fFlagEnableFetchCartPricingDuringInExperience and p6.collectibleItemDetail and (p6.collectibleItemDetail.collectibleItemId and p5) then p5(p6.collectibleItemDetail.collectibleItemId):andThen(function()
 			-- upvalues: normalizeBundleFields (copy), p6 (ref)
@@ -58,13 +58,13 @@ return function(p2, p3, p4, p5)
 	end)
 	
 	if not fFlagRefreshPriceOnRetryAfterUpsellModule or not p4 then
-		return var11
+		return var1
 	end
 	local collectibleItemId = p4.collectibleItemId
 	local collectibleItemInstanceId = p4.collectibleItemInstanceId
 	
 	return promiseModule.all({
-		bundleDetails = var11,
+		bundleDetails = var1,
 		refreshedExpectedPrice = promiseModule.all({
 			catalogItemDetails = getCatalogItemDetailsModule(p2, p3, "bundle"):catch(function()
 				return nil
@@ -72,16 +72,16 @@ return function(p2, p3, p4, p5)
 			resellersData = if collectibleItemInstanceId and collectibleItemInstanceId ~= "" and (collectibleItemId and collectibleItemId ~= "") then getResellersModule(p2, collectibleItemId, 10):catch(function()
 				return nil
 			end) else promiseModule.resolve(nil)
-		}):andThen(function(p8)
+		}):andThen(function(p6)
 			-- upvalues: fFlagFixTimedOptionRefreshModule (copy), resolveRefreshedProductInfoModule (copy), collectibleItemInstanceId (ref), p4 (ref), resolveRefreshedExpectedPriceModule (copy)
-			return if fFlagFixTimedOptionRefreshModule then resolveRefreshedProductInfoModule(p8.catalogItemDetails, p8.resellersData, collectibleItemInstanceId, p4.timedOptionDays) else resolveRefreshedExpectedPriceModule(p8.catalogItemDetails, p8.resellersData, collectibleItemInstanceId, p4.timedOptionDays)
+			return if fFlagFixTimedOptionRefreshModule then resolveRefreshedProductInfoModule(p6.catalogItemDetails, p6.resellersData, collectibleItemInstanceId, p4.timedOptionDays) else resolveRefreshedExpectedPriceModule(p6.catalogItemDetails, p6.resellersData, collectibleItemInstanceId, p4.timedOptionDays)
 		end)
-	}):andThen(function(p7)
+	}):andThen(function(p6)
 		-- upvalues: fFlagFixTimedOptionRefreshModule (copy)
-		local bundleDetails = p7.bundleDetails
+		local bundleDetails = p6.bundleDetails
 		
 		if fFlagFixTimedOptionRefreshModule then
-			local refreshedExpectedPrice = p7.refreshedExpectedPrice
+			local refreshedExpectedPrice = p6.refreshedExpectedPrice
 			
 			if refreshedExpectedPrice == nil then
 				return bundleDetails
@@ -91,7 +91,7 @@ return function(p2, p3, p4, p5)
 			end
 			return bundleDetails
 		else
-			bundleDetails.refreshedExpectedPrice = p7.refreshedExpectedPrice
+			bundleDetails.refreshedExpectedPrice = p6.refreshedExpectedPrice
 		end
 	end)
 end

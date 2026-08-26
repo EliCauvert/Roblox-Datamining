@@ -21,10 +21,10 @@ return function()
 	local t_2 = {}
 	
 	for i, v in t do
-		local var5 = t_1[i]
+		local var1 = t_1[i]
 		
-		if var5 ~= nil and var5 ~= "" then
-			t_2[v] = tostring(var5)
+		if var1 ~= nil and var1 ~= "" then
+			t_2[v] = tostring(var1)
 		end
 	end
 	local maxResolution = t_1.maxResolution

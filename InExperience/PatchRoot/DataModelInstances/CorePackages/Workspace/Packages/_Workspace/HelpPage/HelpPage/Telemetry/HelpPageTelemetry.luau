@@ -27,12 +27,12 @@ t.telemetryConfigs = {
 	}
 }
 
-function t.logHelpPageInteraction(_, p0, p1)
+function t.logHelpPageInteraction(_, p1, p2)
 	-- upvalues: t (ref), telemetryService (ref)
 	telemetryService:LogEvent(t.telemetryConfigs.helpPageInteraction.eventConfig, {
-		eventContext = p0,
+		eventContext = p1,
 		standardizedFields = t.telemetryConfigs.helpPageInteraction.standardizedFields,
-		customFields = p1
+		customFields = p2
 	})
 end
 

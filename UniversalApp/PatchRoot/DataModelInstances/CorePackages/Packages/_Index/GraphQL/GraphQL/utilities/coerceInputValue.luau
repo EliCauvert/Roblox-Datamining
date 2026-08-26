@@ -28,87 +28,87 @@ local isNonNullType = definitionModule.isNonNullType
 local coerceInputValueImpl = nil
 local defaultOnError = nil
 
-local function coerceInputValue(p0, p1, p2)
+local function coerceInputValue(p1, p2, p3)
 	-- upvalues: defaultOnError (write), coerceInputValueImpl (write)
-	return coerceInputValueImpl(p0, p1, p2 or defaultOnError)
+	return coerceInputValueImpl(p1, p2, p3 or defaultOnError)
 end
 
-defaultOnError = function(p3, p4, p5)
+defaultOnError = function(p1, p2, p3)
 	-- upvalues: inspect (ref), printPathArray (ref)
-	local text = "Invalid value " .. inspect(p4)
+	local text = "Invalid value " .. inspect(p2)
 	
-	if #p3 > 0 then
-		text ..= " at \"value" .. printPathArray(p3) .. "\""
+	if #p1 > 0 then
+		text ..= " at \"value" .. printPathArray(p1) .. "\""
 	end
-	p5.message = text .. ": " .. p5.message
-	error(p5)
+	p3.message = text .. ": " .. p5.message
+	error(p3)
 end
 
-coerceInputValueImpl = function(p6, p7, p8, p9)
+coerceInputValueImpl = function(p1, p2, p3, p4)
 	-- upvalues: isNonNullType (ref), isNotNillish (ref), coerceInputValueImpl (write), pathToArray (ref), graphQLError (ref), inspect (ref), isNillish (ref), nullModule (ref), isListType (ref), isIteratableObject (ref), array (ref), addPath (ref), isInputObjectType (ref), isObjectLike (ref), object (ref), suggestionList (ref), didYouMean (ref), isLeafType (ref), instanceOfModule (ref), invariant (ref)
-	if isNonNullType(p7) then
-		if isNotNillish(p6) then
-			return coerceInputValueImpl(p6, p7.ofType, p8, p9)
+	if isNonNullType(p2) then
+		if isNotNillish(p1) then
+			return coerceInputValueImpl(p1, p2.ofType, p3, p4)
 		end
-		p8(pathToArray(p9), p6, graphQLError.new("Expected non-nullable type \"" .. inspect(p7) .. "\" not to be null."))
+		p3(pathToArray(p4), p1, graphQLError.new("Expected non-nullable type \"" .. inspect(p2) .. "\" not to be null."))
 		
 		return
-	elseif isNillish(p6) then
+	elseif isNillish(p1) then
 		return nullModule
-	elseif isListType(p7) then
-		local ofType = p7.ofType
+	elseif isListType(p2) then
+		local ofType = p2.ofType
 		
-		return if isIteratableObject(p6) then array.from(p6, function(p10, p11)
-			-- upvalues: addPath (copy), p9 (ref), coerceInputValueImpl (copy), ofType (ref), p8 (ref)
-			return coerceInputValueImpl(p10, ofType, p8, addPath(p9, p11, nil))
-		end) else { coerceInputValueImpl(p6, ofType, p8, p9) }
-	elseif isInputObjectType(p7) then
-		if not isObjectLike(p6) then
-			p8(pathToArray(p9), p6, graphQLError.new("Expected type \"" .. p7.name .. "\" to be an object."))
+		return if isIteratableObject(p1) then array.from(p1, function(p5, p6)
+			-- upvalues: addPath (copy), p4 (ref), coerceInputValueImpl (copy), ofType (ref), p3 (ref)
+			return coerceInputValueImpl(p5, ofType, p3, addPath(p4, p6, nil))
+		end) else { coerceInputValueImpl(p1, ofType, p3, p4) }
+	elseif isInputObjectType(p2) then
+		if not isObjectLike(p1) then
+			p3(pathToArray(p4), p1, graphQLError.new("Expected type \"" .. p7.name .. "\" to be an object."))
 			
 			return
 		end
 		local t = {}
-		local fields = p7:getFields()
+		local fields = p2:getFields()
 		
 		for i, v in ipairs(fields:values()) do
-			local name = p6[v.name]
+			local name = p1[v.name]
 			
 			if name ~= nil then
-				t[v.name] = coerceInputValueImpl(name, v.type, p8, addPath(p9, v.name, p7.name))
+				t[v.name] = coerceInputValueImpl(name, v.type, p3, addPath(p4, v.name, p2.name))
 			elseif v.defaultValue ~= nil then
 				t[v.name] = v.defaultValue
 			elseif isNonNullType(v.type) then
-				p8(pathToArray(p9), p6, graphQLError.new("Field \"" .. v.name .. "\" of required type \"" .. inspect(v.type) .. "\" was not provided."))
+				p3(pathToArray(p4), p1, graphQLError.new("Field \"" .. v.name .. "\" of required type \"" .. inspect(v.type) .. "\" was not provided."))
 			end
 		end
-		for i, v_1 in ipairs(object.keys(p6)) do
+		for i, v_1 in ipairs(object.keys(p1)) do
 			if not fields:get(v_1) then
-				p8(pathToArray(p9), p6, graphQLError.new(("Field \"%s\" is not defined by type \"%s\".%s"):format(v_1, p7.name, didYouMean(suggestionList(v_1, p7:getFields():keys())))))
+				p3(pathToArray(p4), p1, graphQLError.new(("Field \"%s\" is not defined by type \"%s\".%s"):format(v_1, p2.name, didYouMean(suggestionList(v_1, p2:getFields():keys())))))
 			end
 		end
 		return t
-	elseif not isLeafType(p7) then
-		invariant(false, "Unexpected input type: " .. inspect(p7))
+	elseif not isLeafType(p2) then
+		invariant(false, "Unexpected input type: " .. inspect(p2))
 		
 		return
 	end
 	local _ = nil
-	local ok, status = pcall(p7.parseValue, p7, p6)
+	local ok, status = pcall(p2.parseValue, p2, p1)
 	
 	if ok then
-		local var11 = status
+		local var1 = status
 		
-		if var11 == nil then
-			p8(pathToArray(p9), p6, graphQLError.new(("Expected type \"%s\"."):format(p7.name)))
+		if var1 == nil then
+			p3(pathToArray(p4), p1, graphQLError.new(("Expected type \"%s\"."):format(p2.name)))
 		end
-		return var11
+		return var1
 	elseif instanceOfModule(status, graphQLError) then
-		p8(pathToArray(p9), p6, status)
+		p3(pathToArray(p4), p1, status)
 		
 		return
 	end
-	p8(pathToArray(p9), p6, graphQLError.new("Expected type \"" .. p7.name .. "\". " .. status.message, nil, nil, nil, nil, status))
+	p3(pathToArray(p4), p1, graphQLError.new("Expected type \"" .. p7.name .. "\". " .. status.message, nil, nil, nil, nil, status))
 end
 
 return { coerceInputValue = coerceInputValue }

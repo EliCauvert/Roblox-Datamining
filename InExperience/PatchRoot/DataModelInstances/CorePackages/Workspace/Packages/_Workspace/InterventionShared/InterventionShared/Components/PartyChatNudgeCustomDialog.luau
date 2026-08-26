@@ -10,10 +10,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local interventionTreatmentShownSignalModule = require(interventionShared.Signals.interventionTreatmentShownSignal)
 local interventionDialogModule = require(interventionShared.Components.InterventionDialog)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), constantsModule (ref), reactModule (ref), interventionTreatmentShownSignalModule (ref), interventionDialogModule (ref), iconSize (ref), interventionAnalyticsModule (ref)
-	local var7 = useTokens()
-	local var8 = useLocalization(constantsModule.localizationKeys)
+	local var1 = useTokens()
+	local var2 = useLocalization(constantsModule.localizationKeys)
 	reactModule.useEffect(function()
 		-- upvalues: interventionTreatmentShownSignalModule (copy), constantsModule (copy)
 		interventionTreatmentShownSignalModule:fire(constantsModule.TreatmentType.PartyChatNudgeDialog)
@@ -21,12 +21,12 @@ return reactModule.memo(function(p0)
 	
 	return reactModule.createElement(interventionDialogModule, {
 		iconName = "icons/status/error_large",
-		titleText = var8.DontSharePersonalInformationText,
-		bodyText = var8.PartyChatMayBeSuspendedText,
-		onDismiss = p0.onDismiss,
+		titleText = var2.DontSharePersonalInformationText,
+		bodyText = var2.PartyChatMayBeSuspendedText,
+		onDismiss = p1.onDismiss,
 		iconSize = iconSize.Large,
-		iconStyle = var7.Color.System.Warning,
-		eventId = p0.eventId,
+		iconStyle = var1.Color.System.Warning,
+		eventId = p1.eventId,
 		namespaceForAnalytics = interventionAnalyticsModule.Constants.CounterNamespaceTypes.PartyChat,
 		interventionTypeForAnalytics = interventionAnalyticsModule.Constants.InterventionTypes.PartyChatNudge
 	})

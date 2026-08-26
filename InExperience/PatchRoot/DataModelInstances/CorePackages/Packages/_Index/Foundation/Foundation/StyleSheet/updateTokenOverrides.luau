@@ -8,14 +8,14 @@ local _ = require(script.Parent.createStyleSheetRules)
 local getOverrideAttributesModule = require(script.Parent.getOverrideAttributes)
 local scaleValueModule = require(foundation.Utility.scaleValue)
 
-return function(p0, p1, p2, p3, p4, p5, p6)
+return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: getOverrideAttributesModule (ref), flagsModule (ref), scaleValueModule (ref)
-	for i, v in getOverrideAttributesModule(if flagsModule.FoundationThemeName then p1 else nil, p2, p3, p5) do
-		local var4 = if flagsModule.FoundationDisableTokenScaling then v else scaleValueModule(v, p4)
-		p0:SetAttribute(i, var4)
+	for i, v in getOverrideAttributesModule(if flagsModule.FoundationThemeName then p2 else nil, p3, p4, p6) do
+		local var1 = if flagsModule.FoundationDisableTokenScaling then v else scaleValueModule(v, p5)
+		p1:SetAttribute(i, var1)
 		
-		if p6 then
-			p6[i] = var4
+		if p7 then
+			p7[i] = var1
 		end
 	end
 end

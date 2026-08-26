@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local image = require(parent.Foundation).Image
 local useSelectedTheme = require(parent.RoactUtils).Hooks.useSelectedTheme
 local constantsModule = require(editProfileBackground.Common.Constants)
-local var3 = constantsModule.BACKGROUND_ASSET_IDS[1]
+local var1 = constantsModule.BACKGROUND_ASSET_IDS[1]
 local color = Color3.fromRGB(255, 255, 255)
 local color_1 = Color3.fromRGB(0, 0, 0)
 local color_2 = Color3.fromRGB(80, 80, 80)
@@ -20,16 +20,16 @@ local t = {
 	[constantsModule.BACKGROUND_ASSET_IDS[8]] = Color3.fromRGB(238, 244, 255)
 }
 
-local function _(p0, p1)
-	-- upvalues: var3 (ref), color_3 (ref), color_4 (ref), t (ref)
-	return if p0 == var3 then if p1 == "dark" then color_3 else color_4 else t[p0]
+local function _(p1, p2)
+	-- upvalues: var1 (ref), color_3 (ref), color_4 (ref), t (ref)
+	return if p1 == var1 then if p2 == "dark" then color_3 else color_4 else t[p1]
 end
 
 return function(value)
-	-- upvalues: useSelectedTheme (ref), reactModule (ref), var3 (ref), color_3 (ref), color_4 (ref), t (ref), color (ref), color_1 (ref), color_2 (ref), image (ref)
+	-- upvalues: useSelectedTheme (ref), reactModule (ref), var1 (ref), color_3 (ref), color_4 (ref), t (ref), color (ref), color_1 (ref), color_2 (ref), image (ref)
 	local buttonSize = value.buttonSize
-	local var10 = useSelectedTheme()
-	local var11 = reactModule.useCallback(function()
+	local var2 = useSelectedTheme()
+	local var3 = reactModule.useCallback(function()
 		-- upvalues: value (ref)
 		if value.selected then return end
 		if value.onActivated then
@@ -46,11 +46,11 @@ return function(value)
 	return reactModule.createElement("ImageButton", {
 		Size = UDim2.new(0, buttonSize, 0, buttonSize),
 		BackgroundTransparency = 0,
-		BackgroundColor3 = if profileBackgroundId == var3 then if var10 == "dark" then color_3 else color_4 else t[profileBackgroundId],
+		BackgroundColor3 = if profileBackgroundId == var1 then if var2 == "dark" then color_3 else color_4 else t[profileBackgroundId],
 		BorderSizePixel = if value.selected then 3 else 0,
 		BorderColor3 = if value.selected then color else color_1,
 		LayoutOrder = value.LayoutOrder,
-		[reactModule.Event.Activated] = var11
+		[reactModule.Event.Activated] = var3
 	}, {
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
 		Overlay = value.selected and reactModule.createElement("Frame", {

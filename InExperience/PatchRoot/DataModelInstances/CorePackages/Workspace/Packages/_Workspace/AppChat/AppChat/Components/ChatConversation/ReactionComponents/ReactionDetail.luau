@@ -7,7 +7,7 @@ local white = colors.White
 local flint = colors.Flint
 local arialBold = Enum.Font.ArialBold
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), roactModule (ref), flint (ref), white (ref), arialBold (ref), colors (ref), detailListModule (ref)
 	return {
 		ReactionDetail = roactModule.createElement("Frame", {
@@ -49,7 +49,7 @@ return function(p0)
 			detailList = roactModule.createElement(detailListModule, {
 				LayoutOrder = 4,
 				emoji = reactModule.useState("All"),
-				reactionData = p0.reactionData
+				reactionData = p1.reactionData
 			})
 		})
 	}

@@ -7,14 +7,14 @@ local recommendationSourceEnum = dependenciesModule.SocialCommon.Enums.Recommend
 return function()
 	-- upvalues: networkingFriends (ref), llama (ref), roduxFriends (ref), recommendationSourceEnum (ref)
 	return {
-		[networkingFriends.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p0)
+		[networkingFriends.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p1)
 			-- upvalues: llama (copy), roduxFriends (copy), recommendationSourceEnum (copy)
 			return {
-				p0,
+				p1,
 				roduxFriends.Actions.RecommendationSourceCreated({
 					source = recommendationSourceEnum.HomepageFriendsCarousel,
-					recommendationIds = llama.List.map(p0.responseBody.data or {}, function(p1)
-						return p1.id
+					recommendationIds = llama.List.map(p1.responseBody.data or {}, function(p2)
+						return p2.id
 					end)
 				})
 			}

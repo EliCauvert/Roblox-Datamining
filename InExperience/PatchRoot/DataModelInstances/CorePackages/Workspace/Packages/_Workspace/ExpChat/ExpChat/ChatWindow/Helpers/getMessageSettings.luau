@@ -3,8 +3,8 @@ local configModule = require(expChat.Config)
 local memoizeModule = require(expChat.memoize)
 local fFlagEnableInExpChatRewriteModule = require(expChat.Flags.FFlagEnableInExpChatRewrite)
 
-local _ = function(p0)
-	return if p0 ~= nil then p0 == "" else true
+local _ = function(p1)
+	return if p1 ~= nil then p1 == "" else true
 end
 
 return memoizeModule(function(p1, p2)

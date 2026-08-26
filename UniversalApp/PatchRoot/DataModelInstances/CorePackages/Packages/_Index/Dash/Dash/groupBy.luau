@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.Types)
 local insert = table.insert
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: insert (ref)
 	local t = {}
 	
-	for i, v in p0 do
-		local var1 = if typeof(p1) == "function" then p1(v, i) else v[p1]
+	for i, v in p1 do
+		local var1 = if typeof(p2) == "function" then p2(v, i) else v[p2]
 		
 		if var1 ~= nil then
 			if t[var1] == nil then

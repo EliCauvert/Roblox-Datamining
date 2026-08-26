@@ -13,17 +13,17 @@ tileSelectionOverlay.validateProps = tModule.strictInterface({
 })
 tileSelectionOverlay.defaultProps = { cornerRadius = UDim.new(0, 0) }
 
-function tileSelectionOverlay.render(p0)
+function tileSelectionOverlay.render(p1)
 	-- upvalues: imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref)
-	local zIndex = p0.props.ZIndex
-	local cornerRadius = p0.props.cornerRadius
+	local zIndex = p1.props.ZIndex
+	local cornerRadius = p1.props.cornerRadius
 	local selectOn = imagesModule["icons/actions/selectOn"]
-	local var7 = selectOn.ImageRectSize / imagesModule.ImagesResolutionScale
+	local var1 = selectOn.ImageRectSize / imagesModule.ImagesResolutionScale
 	
-	return withStyleModule(function(p1)
-		-- upvalues: roactModule (copy), zIndex (ref), imageSetComponentModule (copy), selectOn (ref), UIBloxConfigModule (copy), var7 (ref), cornerRadius (ref)
-		local theme = p1.Theme
-		local tokens = p1.Tokens
+	return withStyleModule(function(p2)
+		-- upvalues: roactModule (copy), zIndex (ref), imageSetComponentModule (copy), selectOn (ref), UIBloxConfigModule (copy), var1 (ref), cornerRadius (ref)
+		local theme = p2.Theme
+		local tokens = p2.Tokens
 		
 		return roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -37,7 +37,7 @@ function tileSelectionOverlay.render(p0)
 				AnchorPoint = Vector2.new(1, 0),
 				Image = selectOn,
 				Position = UDim2.new(1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_50 else -tokens.Global.Size_25, 0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Size_25),
-				Size = UDim2.new(0, var7.X, 0, var7.Y)
+				Size = UDim2.new(0, var1.X, 0, var1.Y)
 			}),
 			UICorner = cornerRadius ~= UDim.new(0, 0) and roactModule.createElement("UICorner", { CornerRadius = cornerRadius }) or nil
 		})

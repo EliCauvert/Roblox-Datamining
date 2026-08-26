@@ -4,16 +4,16 @@ local foundationModule = require(parent.Foundation)
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), text (ref)
-	local var2 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(text, {
 		tag = "auto-xy",
-		Text = p0.requirementMessage,
-		textStyle = if p0.isOptional then var2.Color.Content.Muted else var2.Color.System.Alert,
-		fontStyle = var2.Typography.CaptionMedium,
-		Visible = if p0.isOptional or p0.isErrorState then true else false,
-		LayoutOrder = p0.layoutOrder
+		Text = p1.requirementMessage,
+		textStyle = if p1.isOptional then var1.Color.Content.Muted else var1.Color.System.Alert,
+		fontStyle = var1.Typography.CaptionMedium,
+		Visible = if p1.isOptional or p1.isErrorState then true else false,
+		LayoutOrder = p1.layoutOrder
 	})
 end)

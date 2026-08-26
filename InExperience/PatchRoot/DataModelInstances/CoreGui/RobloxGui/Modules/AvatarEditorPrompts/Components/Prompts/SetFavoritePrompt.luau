@@ -26,16 +26,16 @@ setFavoritePrompt.validateProps = tModule.strictInterface({
 	signalSetFavoritePermissionDenied = tModule.callback
 })
 
-function setFavoritePrompt.init(p0)
+function setFavoritePrompt.init(p1)
 	-- upvalues: roactModule (ref), loadableImage (ref), closeFavoritePromptWithB (ref), guiService (ref), contextActionService (ref)
 	function p0.renderAlertMiddleContent()
-		-- upvalues: p0 (ref), roactModule (copy), loadableImage (copy)
-		local var13 = nil
+		-- upvalues: p1 (ref), roactModule (copy), loadableImage (copy)
+		local var1 = nil
 		
-		if p0.props.itemType == Enum.AvatarItemType.Asset then
-			var13 = "Asset"
-		elseif p0.props.itemType == Enum.AvatarItemType.Bundle then
-			var13 = "BundleThumbnail"
+		if p1.props.itemType == Enum.AvatarItemType.Asset then
+			var1 = "Asset"
+		elseif p1.props.itemType == Enum.AvatarItemType.Bundle then
+			var1 = "BundleThumbnail"
 		end
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -54,12 +54,12 @@ function setFavoritePrompt.init(p0)
 	end
 	
 	if closeFavoritePromptWithB then
-		p0.menuKey = "favorite_prompt_" .. p0.props.itemId
-		guiService:SetMenuIsOpen(true, p0.menuKey)
-		contextActionService:BindCoreAction(p0.menuKey, function(_, p1, _)
-			-- upvalues: p0 (ref)
-			if p1 == Enum.UserInputState.End then
-				p0.props.signalSetFavoritePermissionDenied()
+		p1.menuKey = "favorite_prompt_" .. p0.props.itemId
+		guiService:SetMenuIsOpen(true, p1.menuKey)
+		contextActionService:BindCoreAction(p1.menuKey, function(_, p2, _)
+			-- upvalues: p1 (ref)
+			if p2 == Enum.UserInputState.End then
+				p1.props.signalSetFavoritePermissionDenied()
 				
 				return Enum.ContextActionResult.Sink
 			end
@@ -68,37 +68,37 @@ function setFavoritePrompt.init(p0)
 	end
 end
 
-function setFavoritePrompt.willUnmount(p2)
+function setFavoritePrompt.willUnmount(p1)
 	-- upvalues: closeFavoritePromptWithB (ref), guiService (ref), contextActionService (ref)
 	if closeFavoritePromptWithB then
-		guiService:SetMenuIsOpen(false, p2.menuKey)
-		contextActionService:UnbindCoreAction(p2.menuKey)
+		guiService:SetMenuIsOpen(false, p1.menuKey)
+		contextActionService:UnbindCoreAction(p1.menuKey)
 	end
 end
 
-function setFavoritePrompt.render(p3)
+function setFavoritePrompt.render(p1)
 	-- upvalues: robloxTranslatorModule (ref), roactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var14, var15
+	local var1, var2
 	local _ = nil
 	local _ = nil
 	
-	if p3.props.shouldFavorite then
-		var14 = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.FavouriteItemPromptTitle")
-		var15 = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.FavouriteItemPromptText", { RBX_NAME = p3.props.itemName })
+	if p1.props.shouldFavorite then
+		var1 = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.FavouriteItemPromptTitle")
+		var2 = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.FavouriteItemPromptText", { RBX_NAME = p1.props.itemName })
 	else
-		var14 = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UnfavouriteItemPromptTitle")
-		var15 = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UnfavouriteItemPromptText", { RBX_NAME = p3.props.itemName })
+		var1 = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UnfavouriteItemPromptTitle")
+		var2 = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.UnfavouriteItemPromptText", { RBX_NAME = p1.props.itemName })
 	end
 	return roactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = false,
-		title = var14,
-		bodyText = var15,
+		title = var1,
+		bodyText = var2,
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
-						onActivated = p3.props.signalSetFavoritePermissionDenied,
+						onActivated = p1.props.signalSetFavoritePermissionDenied,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.FavouriteItemPromptNo")
 					}
 				},
@@ -109,36 +109,36 @@ function setFavoritePrompt.render(p3)
 						isDelayedInput = true,
 						enableInputDelayed = true,
 						delayInputSeconds = 3,
-						onActivated = p3.props.performSetFavorite,
+						onActivated = p1.props.performSetFavorite,
 						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.FavouriteItemPromptYes")
 					}
 				}
 			}
 		},
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = p3.props.screenSize,
-		middleContent = p3.renderAlertMiddleContent
+		screenSize = p1.props.screenSize,
+		middleContent = p1.renderAlertMiddleContent
 	})
 end
 
-return roactRoduxModule.connect(function(p4)
+return roactRoduxModule.connect(function(p1)
 	return {
-		itemId = p4.promptInfo.itemId,
-		itemType = p4.promptInfo.itemType,
-		itemName = p4.promptInfo.itemName,
-		shouldFavorite = p4.promptInfo.shouldFavorite,
-		screenSize = p4.screenSize
+		itemId = p1.promptInfo.itemId,
+		itemType = p1.promptInfo.itemType,
+		itemName = p1.promptInfo.itemName,
+		shouldFavorite = p1.promptInfo.shouldFavorite,
+		screenSize = p1.screenSize
 	}
-end, function(p5)
+end, function(p1)
 	-- upvalues: performSetFavoriteModule (ref), signalSetFavoritePermissionDeniedModule (ref)
 	return {
 		performSetFavorite = function()
-			-- upvalues: p5 (ref), performSetFavoriteModule (copy)
-			return p5(performSetFavoriteModule)
+			-- upvalues: p1 (ref), performSetFavoriteModule (copy)
+			return p1(performSetFavoriteModule)
 		end,
 		signalSetFavoritePermissionDenied = function()
-			-- upvalues: p5 (ref), signalSetFavoritePermissionDeniedModule (copy)
-			return p5(signalSetFavoritePermissionDeniedModule)
+			-- upvalues: p1 (ref), signalSetFavoritePermissionDeniedModule (copy)
+			return p1(signalSetFavoritePermissionDeniedModule)
 		end
 	}
 end)(setFavoritePrompt)

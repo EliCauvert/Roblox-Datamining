@@ -53,10 +53,10 @@ return {
 	CalendarGrid = function(p1)
 		-- upvalues: useTokensModule (ref), reactModule (ref), buildCalendarDayConfigs (ref), getDayCellAppearance (ref), DAYS_PER_WEEK (ref), dateTimeUtilitiesModule (ref), textModule (ref), var1 (ref), viewModule (ref)
 		local none = useTokensModule().Padding.None
-		local var1 = reactModule.useRef(nil)
+		local var2 = reactModule.useRef(nil)
 		reactModule.useEffect(function()
-			-- upvalues: var1 (ref), p1 (ref)
-			local current = var1.current
+			-- upvalues: var2 (ref), p1 (ref)
+			local current = var2.current
 			local onHoverLeave = p1.onHoverLeave
 			
 			if current == nil or onHoverLeave == nil then
@@ -69,20 +69,20 @@ return {
 				mouseLeaveConnection:Disconnect()
 			end
 		end, { p1.onHoverLeave })
-		local var2 = reactModule.useMemo(function()
+		local var3 = reactModule.useMemo(function()
 			-- upvalues: buildCalendarDayConfigs (copy), p1 (ref)
 			return buildCalendarDayConfigs(p1.currViewDate)
 		end, { p1.currViewDate })
-		local var3 = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), getDayCellAppearance (copy), p1 (ref)
+		local var4 = reactModule.useMemo(function()
+			-- upvalues: var3 (ref), getDayCellAppearance (copy), p1 (ref)
 			local t = {}
 			
-			for i, v in var2 do
+			for i, v in var3 do
 				t[`{v.keyPrefix}-{v.day}`] = getDayCellAppearance(DateTime.fromLocalTime(v.year, v.month, v.day), p1.localSelectedDateTimes, p1.highlightDates, p1.isDateRange, p1.selectableDateRange)
 			end
 			return t
 		end, {
-			var2,
+			var3,
 			p1.highlightDates,
 			p1.isDateRange,
 			p1.localSelectedDateTimes,
@@ -100,31 +100,31 @@ return {
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			})
 		}
-		local var1 = 1
+		local var5 = 1
 		
 		for i, v in dateTimeUtilitiesModule.weekdays do
 			table.insert(list, reactModule.createElement(textModule, {
 				tag = "text-body-small text-align-x-center text-align-y-center",
 				key = v,
-				LayoutOrder = var1,
+				LayoutOrder = var5,
 				Text = v
 			}))
-			var1 += 1
+			var5 += 1
 		end
-		for i, v_1 in var2 do
+		for i, v_1 in var3 do
 			local keyPrefix = `{v_1.keyPrefix}-{v_1.day}`
-			local var2 = var3[keyPrefix]
-			table.insert(list, reactModule.createElement(var1, {
+			local var6 = var4[keyPrefix]
+			table.insert(list, reactModule.createElement(var5, {
 				key = keyPrefix,
 				applyEmphasis = v_1.applyEmphasis,
-				bandPosition = var2.bandPosition,
-				bandRadiusTag = var2.bandRadiusTag,
-				bandSize = var2.bandSize,
+				bandPosition = var6.bandPosition,
+				bandRadiusTag = var6.bandRadiusTag,
+				bandSize = var6.bandSize,
 				day = v_1.day,
 				handleDateActivated = p1.handleDateActivated,
-				isHighlighted = var2.isHighlighted,
-				isSelectable = var2.isSelectable,
-				isSelected = var2.isSelected,
+				isHighlighted = var6.isHighlighted,
+				isSelectable = var6.isSelectable,
+				isSelected = var6.isSelected,
 				LayoutOrder = v_1.LayoutOrder,
 				month = v_1.month,
 				onHoverEnter = p1.onHoverEnter,
@@ -135,7 +135,7 @@ return {
 		return reactModule.createElement(viewModule, {
 			tag = "size-full-0 auto-y",
 			LayoutOrder = p1.LayoutOrder,
-			ref = var1,
+			ref = var5,
 			Size = p1.Size,
 			testId = `{p1.testId}--weekAndDates`
 		}, list)

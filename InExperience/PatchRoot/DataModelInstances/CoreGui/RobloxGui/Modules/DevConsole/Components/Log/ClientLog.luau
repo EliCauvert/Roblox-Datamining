@@ -3,10 +3,10 @@ local dataConsumerModule = require(script.Parent.Parent.DataConsumer)
 local logOutputModule = require(script.Parent.LogOutput)
 local clientLog = roactModule.Component:extend("ClientLog")
 
-function clientLog.init(p0)
+function clientLog.init(p1)
 	function p0.initClientLogData()
-		-- upvalues: p0 (ref)
-		return p0.props.ClientLogData:getLogData()
+		-- upvalues: p1 (ref)
+		return p1.props.ClientLogData:getLogData()
 	end
 end
 

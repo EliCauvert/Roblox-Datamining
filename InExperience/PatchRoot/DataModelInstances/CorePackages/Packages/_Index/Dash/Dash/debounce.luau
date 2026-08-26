@@ -1,8 +1,8 @@
 ﻿local assignModule = require(script.Parent.assign)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: assignModule (ref)
-	local var1 = assignModule({ leading = false, trailing = true }, p2)
+	local var1 = assignModule({ leading = false, trailing = true }, p3)
 	local var2 = 0
 	local var3 = nil
 	local var4 = false
@@ -10,26 +10,26 @@ return function(p0, p1, p2)
 	local var5 = function() end
 	
 	if var1.trailing then
-		var5 = function(p3, p4, ...)
-			-- upvalues: var2 (write), var4 (write), p0 (ref)
-			if var2 == p3 then
+		var5 = function(p4, p5, ...)
+			-- upvalues: var2 (write), var4 (write), p1 (ref)
+			if var2 == p4 then
 				var4 = false
 				
-				if not p4 then
-					p0(...)
+				if not p5 then
+					p1(...)
 				end
 			end
 		end
 	elseif var1.leading then
-		var5 = function(p5)
+		var5 = function(p4)
 			-- upvalues: var2 (write), var4 (write)
-			if var2 == p5 then
+			if var2 == p4 then
 				var4 = false
 			end
 		end
 	end
 	return function(...)
-		-- upvalues: var2 (write), var1 (ref), var4 (write), var3 (write), p0 (ref), p1 (ref), var5 (write)
+		-- upvalues: var2 (write), var1 (ref), var4 (write), var3 (write), p1 (ref), p2 (ref), var5 (write)
 		var2 += 1
 		local var6 = var2
 		local var7 = var1.leading and not var4
@@ -40,8 +40,8 @@ return function(p0, p1, p2)
 		end
 		if var7 then
 			var4 = true
-			p0(...)
+			p1(...)
 		end
-		var3 = task.delay(p1, var5, var6, var7, ...)
+		var3 = task.delay(p2, var5, var6, var7, ...)
 	end
 end

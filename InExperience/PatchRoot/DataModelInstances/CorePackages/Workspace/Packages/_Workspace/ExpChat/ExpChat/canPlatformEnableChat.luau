@@ -5,13 +5,13 @@ local socialExperimentsModule = require(parent.SocialExperiments)
 local fFlagTestDeviceForFAEUpsell = socialExperimentsModule.FFlagTestDeviceForFAEUpsell
 local deviceMeetsRequirementsForFAE = socialExperimentsModule.deviceMeetsRequirementsForFAE
 local fFlagAEGIS2UseGuacToShowFAEUpsell = require(parent.SharedFlags).FFlagAEGIS2UseGuacToShowFAEUpsell
-local var3 = if fFlagAEGIS2UseGuacToShowFAEUpsell then require(parent.UniversalAppPolicy) else nil
+local var1 = if fFlagAEGIS2UseGuacToShowFAEUpsell then require(parent.UniversalAppPolicy) else nil
 
 return function()
-	-- upvalues: fFlagAEGIS2UseGuacToShowFAEUpsell (ref), userInputService (ref), avatarChatService (ref), fFlagTestDeviceForFAEUpsell (ref), deviceMeetsRequirementsForFAE (ref), var3 (write)
+	-- upvalues: fFlagAEGIS2UseGuacToShowFAEUpsell (ref), userInputService (ref), avatarChatService (ref), fFlagTestDeviceForFAEUpsell (ref), deviceMeetsRequirementsForFAE (ref), var1 (write)
 	local platform
 	if fFlagAEGIS2UseGuacToShowFAEUpsell then
-		platform = var3.getAppFeaturePolicies().getShowInExpFAEUpsell()
+		platform = var1.getAppFeaturePolicies().getShowInExpFAEUpsell()
 		
 		if platform then
 			platform = avatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.InExperienceFAE)

@@ -7,36 +7,36 @@ local fFlagExpChatUseChatMuteStore = sharedFlagsModule.FFlagExpChatUseChatMuteSt
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagAbuseReportVoiceMute = sharedFlagsModule.FFlagAbuseReportVoiceMute
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: fFlagAbuseReportVoiceMute (ref)
-	if not fFlagAbuseReportVoiceMute or not p1 then return end
-	local participants = p1.participants
+	if not fFlagAbuseReportVoiceMute or not p2 then return end
+	local participants = p2.participants
 	
 	if not participants then return end
-	local var3 = participants[tostring(p0)]
+	local var1 = participants[tostring(p1)]
 	
-	if var3 and not var3.isMutedLocally then
-		p1:ToggleMutePlayer(p0, "igm-report-v2")
+	if var1 and not var1.isMutedLocally then
+		p2:ToggleMutePlayer(p1, "igm-report-v2")
 	end
 end
 
-function muteUser(p2, p3, p4)
+function muteUser(p1, p2, p3)
 	-- upvalues: fFlagExpChatUseChatMuteStore (ref), chatMuteModule (ref), fFlagAbuseReportVoiceMute (ref), expChatSharedModule (ref), fFlagExpChatUseMessagesStore (ref), userMuted (ref)
-	if not p2 or not p3 then
+	if not p1 or not p2 then
 		return false
-	elseif p2 == p3.UserId then
+	elseif p1 == p2.UserId then
 		return false
 	elseif fFlagExpChatUseChatMuteStore then
-		chatMuteModule.mutePlayer({ userId = tostring(p2) })
+		chatMuteModule.mutePlayer({ userId = tostring(p1) })
 		
-		if fFlagAbuseReportVoiceMute and fFlagAbuseReportVoiceMute and p4 then
-			local participants = p4.participants
+		if fFlagAbuseReportVoiceMute and fFlagAbuseReportVoiceMute and p3 then
+			local participants = p3.participants
 			
 			if participants then
-				local var4 = participants[tostring(p2)]
+				local var1 = participants[tostring(p1)]
 				
-				if var4 and not var4.isMutedLocally then
-					p4:ToggleMutePlayer(p2, "igm-report-v2")
+				if var1 and not var1.isMutedLocally then
+					p3:ToggleMutePlayer(p1, "igm-report-v2")
 				end
 			end
 		end
@@ -48,16 +48,16 @@ function muteUser(p2, p3, p4)
 			return false
 		elseif fFlagExpChatUseMessagesStore then
 			if context.messagesStore then
-				context.messagesStore.muteUser(p2)
+				context.messagesStore.muteUser(p1)
 				
-				if fFlagAbuseReportVoiceMute and fFlagAbuseReportVoiceMute and p4 then
-					local participants = p4.participants
+				if fFlagAbuseReportVoiceMute and fFlagAbuseReportVoiceMute and p3 then
+					local participants = p3.participants
 					
 					if participants then
-						local var5 = participants[tostring(p2)]
+						local var2 = participants[tostring(p1)]
 						
-						if var5 and not var5.isMutedLocally then
-							p4:ToggleMutePlayer(p2, "igm-report-v2")
+						if var2 and not var2.isMutedLocally then
+							p3:ToggleMutePlayer(p1, "igm-report-v2")
 						end
 					end
 				end
@@ -66,16 +66,16 @@ function muteUser(p2, p3, p4)
 				return false
 			end
 		else
-			context.store:dispatch(userMuted(p2))
+			context.store:dispatch(userMuted(p1))
 			
-			if fFlagAbuseReportVoiceMute and fFlagAbuseReportVoiceMute and p4 then
-				local participants = p4.participants
+			if fFlagAbuseReportVoiceMute and fFlagAbuseReportVoiceMute and p3 then
+				local participants = p3.participants
 				
 				if participants then
-					local var6 = participants[tostring(p2)]
+					local var3 = participants[tostring(p1)]
 					
-					if var6 and not var6.isMutedLocally then
-						p4:ToggleMutePlayer(p2, "igm-report-v2")
+					if var3 and not var3.isMutedLocally then
+						p3:ToggleMutePlayer(p1, "igm-report-v2")
 					end
 				end
 			end
@@ -84,16 +84,16 @@ function muteUser(p2, p3, p4)
 	end
 end
 
-function isUserMuted(p5)
+function isUserMuted(p1)
 	-- upvalues: fFlagExpChatUseChatMuteStore (ref), chatMuteModule (ref), expChatSharedModule (ref), fFlagExpChatUseMessagesStore (ref)
-	if not p5 then
+	if not p1 then
 		return false
 	elseif fFlagExpChatUseChatMuteStore then
-		return chatMuteModule.isUserIdMuted(tostring(p5))
+		return chatMuteModule.isUserIdMuted(tostring(p1))
 	end
 	local context = expChatSharedModule.context
 	
-	return if context.store then if fFlagExpChatUseMessagesStore then if context.messagesStore then context.messagesStore.getMutedUserIds(false)[tostring(p5)] == true else false else context.store:getState().MutedUsers[tostring(p5)] == true else false
+	return if context.store then if fFlagExpChatUseMessagesStore then if context.messagesStore then context.messagesStore.getMutedUserIds(false)[tostring(p1)] == true else false else context.store:getState().MutedUsers[tostring(p1)] == true else false
 end
 
 return { isUserMuted = isUserMuted, muteUser = muteUser }

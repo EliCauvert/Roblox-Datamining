@@ -17,39 +17,39 @@ local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFri
 local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local fIntSideSheetVariant = sharedFlagsModule.FIntSideSheetVariant
 local fFlagDebugEnablePioneerUX = sharedFlagsModule.FFlagDebugEnablePioneerUX
-local var7 = if fFlagIntegrateTraversalHistoryInSideSheet then require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal else nil
-local var8 = if var7 then var7.Flags.FFlagAddTraversalHistory else false
+local var1 = if fFlagIntegrateTraversalHistoryInSideSheet then require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal else nil
+local var2 = if var1 then var1.Flags.FFlagAddTraversalHistory else false
 
-local function _(p0, p1, p2)
-	if p0[p1] ~= nil then
-		p0[p1] = p2
+local function _(p1, p2, p3)
+	if p1[p2] ~= nil then
+		p1[p2] = p3
 	end
 end
 
 return function()
-	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var8 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), fFlagEnableSideSheet (ref), fIntSideSheetVariant (ref), fFlagDebugEnablePioneerUX (ref)
-	local var9 = isConnectDropdownEnabledModule()
+	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var2 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), fFlagEnableSideSheet (ref), fIntSideSheetVariant (ref), fFlagDebugEnablePioneerUX (ref)
+	local var3 = isConnectDropdownEnabledModule()
 	
-	if var9 then
-		var9 = not (fFlagRemoveFriendsChatUnibarEntrypoints and (argoPartyExperimentation.getIsRenameEnabled() and fFlagExpChatCanShowFriendsTab))
+	if var3 then
+		var3 = not (fFlagRemoveFriendsChatUnibarEntrypoints and (argoPartyExperimentation.getIsRenameEnabled() and fFlagExpChatCanShowFriendsTab))
 	end
-	local var10 = not isInExperienceUIVREnabled or not isSpatial()
+	local var4 = not isInExperienceUIVREnabled or not isSpatial()
 	local t = {
 		invite_friends = if fFlagAddInviteFriendsIntegration then 10 else nil,
 		people = 20,
 		settings = 30,
 		trust_and_safety = 40,
-		connect_dropdown = if var9 then 50 else nil,
+		connect_dropdown = if var3 then 50 else nil,
 		[constantsModule.AVATAR_SWITCHER_ID] = if fFlagEnableInExperienceAvatarSwitcher then 60 else nil,
 		[constantsModule.IN_EXPERIENCE_SHOP_ID] = if fFlagEnableInExperienceShop then 70 else nil,
 		leaderboard = 80,
 		emotes = 90,
 		backpack = 100,
-		traversal_history = if var8 and fFlagIntegrateTraversalHistoryInSideSheet then 110 else nil,
+		traversal_history = if var2 and fFlagIntegrateTraversalHistoryInSideSheet then 110 else nil,
 		help = 120,
-		camera_entrypoint = if var10 then 130 else nil,
+		camera_entrypoint = if var4 then 130 else nil,
 		gallery = 140,
-		selfie_view = if var10 then 150 else nil,
+		selfie_view = if var4 then 150 else nil,
 		music_entrypoint = if not isSpatial() and not guiService:IsTenFootInterface() then 160 else nil,
 		[inExperienceSideSheetModule.Enums.ActionBinding.Leave] = 180,
 		[inExperienceSideSheetModule.Enums.ActionBinding.Respawn] = 190
@@ -120,9 +120,9 @@ return function()
 	for i in t do
 		table.insert(t_1, i)
 	end
-	table.sort(t_1, function(p3, p4)
+	table.sort(t_1, function(p1, p2)
 		-- upvalues: t (ref)
-		return t[p3] < t[p4]
+		return t[p1] < t[p2]
 	end)
 	
 	return t_1

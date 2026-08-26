@@ -2,23 +2,23 @@
 local kind = require(script.Parent.Parent.language.kinds).Kind
 
 return {
-	getOperationAST = function(p0, p1)
+	getOperationAST = function(p1, p2)
 		-- upvalues: kind (ref)
-		local var0 = nil
+		local var1 = nil
 		
-		for i, v in pairs(p0.definitions) do
+		for i, v in pairs(p1.definitions) do
 			if v.kind == kind.OPERATION_DEFINITION then
-				if p1 == nil then
-					if not var0 then
-						var0 = v
+				if p2 == nil then
+					if not var1 then
+						var1 = v
 						continue
 					end
 					return nil
-				elseif v.name and v.name.value == p1 then
+				elseif v.name and v.name.value == p2 then
 					return v
 				end
 			end
 		end
-		return var0
+		return var1
 	end
 }

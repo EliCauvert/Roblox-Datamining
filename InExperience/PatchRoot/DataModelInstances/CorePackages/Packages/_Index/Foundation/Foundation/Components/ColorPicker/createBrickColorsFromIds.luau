@@ -1,7 +1,7 @@
-﻿return function(p0)
+﻿return function(p1)
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		local ok, status = pcall(BrickColor.new, v)
 		
 		if ok and status then

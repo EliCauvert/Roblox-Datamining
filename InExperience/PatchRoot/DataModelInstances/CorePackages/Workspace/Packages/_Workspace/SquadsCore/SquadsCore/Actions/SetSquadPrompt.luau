@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("SquadsCore").Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { arguments = p0 }
+﻿return require(script:FindFirstAncestor("SquadsCore").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { arguments = p1 }
 end)

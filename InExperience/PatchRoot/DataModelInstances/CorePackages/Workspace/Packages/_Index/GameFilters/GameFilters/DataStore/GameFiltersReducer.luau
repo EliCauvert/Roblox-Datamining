@@ -6,18 +6,18 @@ local _ = require(parent.DiscoveryTypes)
 
 return {
 	key = "GameFiltersKey",
-	reducer = function(p0, p1)
+	reducer = function(p1, p2)
 		-- upvalues: setGameFiltersModule (ref), cryoModule (ref)
-		local var3 = p0 or {}
+		local var1 = p1 or {}
 		
-		if p1.type == setGameFiltersModule.name then
-			var3 = cryoModule.Dictionary.join(var3, {
-				[p1.groupId] = {
-					allFilters = p1.filters,
-					updatedTimestamp = p1.updatedTimestamp
+		if p2.type == setGameFiltersModule.name then
+			var1 = cryoModule.Dictionary.join(var1, {
+				[p2.groupId] = {
+					allFilters = p2.filters,
+					updatedTimestamp = p2.updatedTimestamp
 				}
 			})
 		end
-		return var3
+		return var1
 	end
 }

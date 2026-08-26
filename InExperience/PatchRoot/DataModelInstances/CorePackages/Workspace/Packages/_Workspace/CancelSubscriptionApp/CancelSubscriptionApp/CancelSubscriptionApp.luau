@@ -14,27 +14,27 @@ local focusNavigationModalSurface = require(parent.EconomyCommonCoreScriptHooks)
 
 return function()
 	-- upvalues: reactModule (ref), useSelector (ref), selectPromptStateModule (ref), useCancelSubscriptionRequestedListenerEffectModule (ref), cancelUserSubscriptionAsyncPromptStateEnumModule (ref), guiService (ref), screenSizeContext (ref), focusNavigationModalSurface (ref), cancelUserSubscriptionErrorContainerModule (ref), cancelUserSubscriptionSuccessContainerModule (ref), cancelUserSubscriptionRequestContainerModule (ref)
-	local var9, var10 = reactModule.useState(Vector2.new(0, 0))
-	local var11 = useSelector(selectPromptStateModule)
-	useCancelSubscriptionRequestedListenerEffectModule(var11)
+	local var1, var2 = reactModule.useState(Vector2.new(0, 0))
+	local var3 = useSelector(selectPromptStateModule)
+	useCancelSubscriptionRequestedListenerEffectModule(var3)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), cancelUserSubscriptionAsyncPromptStateEnumModule (copy), guiService (copy)
-		if var11 == cancelUserSubscriptionAsyncPromptStateEnumModule.None then
+		-- upvalues: var3 (ref), cancelUserSubscriptionAsyncPromptStateEnumModule (copy), guiService (copy)
+		if var3 == cancelUserSubscriptionAsyncPromptStateEnumModule.None then
 			guiService.SelectedCoreObject = nil
 		end
-	end, { var11 })
+	end, { var3 })
 	
-	return if var11 == cancelUserSubscriptionAsyncPromptStateEnumModule.None then nil else reactModule.createElement(screenSizeContext.Provider, { value = var9 }, reactModule.createElement("ScreenGui", {
-		[reactModule.Change.AbsoluteSize] = function(p0)
-			-- upvalues: var10 (ref)
-			var10(p0.AbsoluteSize)
+	return if var3 == cancelUserSubscriptionAsyncPromptStateEnumModule.None then nil else reactModule.createElement(screenSizeContext.Provider, { value = var1 }, reactModule.createElement("ScreenGui", {
+		[reactModule.Change.AbsoluteSize] = function(p1)
+			-- upvalues: var2 (ref)
+			var2(p1.AbsoluteSize)
 		end,
 		ScreenInsets = Enum.ScreenInsets.None
 	}, {
 		FocusNavigationEffects = reactModule.createElement(focusNavigationModalSurface, { selectionGroupName = "CancelSubscriptionApp" }, {
-			Error = if var11 == cancelUserSubscriptionAsyncPromptStateEnumModule.Error then reactModule.createElement(cancelUserSubscriptionErrorContainerModule) else nil,
-			Success = if var11 == cancelUserSubscriptionAsyncPromptStateEnumModule.Success then reactModule.createElement(cancelUserSubscriptionSuccessContainerModule) else nil,
-			Request = if var11 == cancelUserSubscriptionAsyncPromptStateEnumModule.Request then reactModule.createElement(cancelUserSubscriptionRequestContainerModule) else nil
+			Error = if var3 == cancelUserSubscriptionAsyncPromptStateEnumModule.Error then reactModule.createElement(cancelUserSubscriptionErrorContainerModule) else nil,
+			Success = if var3 == cancelUserSubscriptionAsyncPromptStateEnumModule.Success then reactModule.createElement(cancelUserSubscriptionSuccessContainerModule) else nil,
+			Request = if var3 == cancelUserSubscriptionAsyncPromptStateEnumModule.Request then reactModule.createElement(cancelUserSubscriptionRequestContainerModule) else nil
 		})
 	}))
 end

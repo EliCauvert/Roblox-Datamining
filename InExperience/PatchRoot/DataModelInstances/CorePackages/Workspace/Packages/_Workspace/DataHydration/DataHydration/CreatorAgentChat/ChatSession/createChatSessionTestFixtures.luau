@@ -3,20 +3,20 @@ local typesModule = require(script.Parent.Parent.types)
 
 local function makeRequestHandle()
 	-- upvalues: signalsModule (ref)
-	local var4, var5 = signalsModule.createSignal({ status = "pending" })
+	local var1, var2 = signalsModule.createSignal({ status = "pending" })
 	
-	return { state = var4, dispose = function() end }, function(p0)
-		-- upvalues: var5 (ref)
-		var5({ status = "succeeded", result = p0 })
+	return { state = var1, dispose = function() end }, function(p1)
+		-- upvalues: var2 (ref)
+		var2({ status = "succeeded", result = p1 })
 	end, function(p1)
-		-- upvalues: var5 (ref)
-		var5({ status = "failed", error = p1 })
+		-- upvalues: var2 (ref)
+		var2({ status = "failed", error = p1 })
 	end
 end
 
-local function makeTurnHandle(p2)
+local function makeTurnHandle(p1)
 	-- upvalues: signalsModule (ref)
-	local var6, var7 = signalsModule.createSignal({
+	local var1, var2 = signalsModule.createSignal({
 		requestId = nil,
 		status = "queued",
 		assistantText = "",
@@ -28,7 +28,7 @@ local function makeTurnHandle(p2)
 		error = nil,
 		errorCode = nil,
 		isDone = false,
-		sessionId = p2,
+		sessionId = p1,
 		assistantMessages = {},
 		assistantMessageOrder = {},
 		pendingAgentMessageContent = {},
@@ -36,101 +36,101 @@ local function makeTurnHandle(p2)
 		activityItems = {},
 		toolCalls = {}
 	})
-	local var8 = false
-	local var9 = nil
+	local var3 = false
+	local var4 = nil
 	local t = {}
-	local var11 = 0
+	local var5 = 0
 	local t_1 = {}
-	local var13 = nil
-	local var14 = nil
-	local var15 = 0
+	local var6 = nil
+	local var7 = nil
+	local var8 = 0
 	
 	return {
-		state = var6,
+		state = var1,
 		getTurnId = function()
-			-- upvalues: var9 (write)
-			return var9
+			-- upvalues: var4 (write)
+			return var4
 		end,
-		onNotification = function(p3)
-			-- upvalues: var11 (write), t (ref)
-			var11 += 1
-			local var16 = var11
-			t[var16] = p3
+		onNotification = function(p2)
+			-- upvalues: var5 (write), t (ref)
+			var5 += 1
+			local var9 = var5
+			t[var9] = p2
 			
 			return function()
-				-- upvalues: t (copy), var16 (ref)
-				t[var16] = nil
+				-- upvalues: t (copy), var9 (ref)
+				t[var9] = nil
 			end
 		end,
 		getLatestProcessedSequenceNumber = function()
-			-- upvalues: var13 (write)
-			return var13
+			-- upvalues: var6 (write)
+			return var6
 		end,
 		hasSequenceGap = function()
-			-- upvalues: var15 (write)
-			return var15 > 0
+			-- upvalues: var8 (write)
+			return var8 > 0
 		end,
-		noteProcessedSequenceNumber = function(p4)
-			-- upvalues: t_1 (ref), var13 (write), var14 (write), var15 (write)
-			if t_1[p4] == true then return end
-			t_1[p4] = true
+		noteProcessedSequenceNumber = function(p2)
+			-- upvalues: t_1 (ref), var6 (write), var7 (write), var8 (write)
+			if t_1[p2] == true then return end
+			t_1[p2] = true
 			
-			if var13 == nil then
-				var13 = p4
-				var14 = p4
+			if var6 == nil then
+				var6 = p2
+				var7 = p2
 				
 				return
-			elseif var13 < p4 then
-				var15 += p4 - var13 - 1
-				var13 = p4
+			elseif var6 < p2 then
+				var8 += p2 - var6 - 1
+				var6 = p2
 				
 				return
-			elseif p4 < var14 then
-				var15 += var14 - p4 - 1
-				var14 = p4
+			elseif p2 < var7 then
+				var8 += var7 - p2 - 1
+				var7 = p2
 				
 				return
 			end
-			var15 -= 1
+			var8 -= 1
 		end,
 		cancel = function()
-			-- upvalues: var8 (write), var6 (ref), var7 (ref)
-			var8 = true
-			local cloned = table.clone(var6(false))
+			-- upvalues: var3 (write), var1 (ref), var2 (ref)
+			var3 = true
+			local cloned = table.clone(var1(false))
 			cloned.status = "cancelled"
 			cloned.isDone = true
-			var7(cloned)
+			var2(cloned)
 		end,
 		wasCancelled = function()
-			-- upvalues: var8 (write)
-			return var8
+			-- upvalues: var3 (write)
+			return var3
 		end,
-		setTurnId = function(p5)
-			-- upvalues: var9 (write)
-			var9 = p5
+		setTurnId = function(p2)
+			-- upvalues: var4 (write)
+			var4 = p2
 		end,
-		setLatestProcessedSequenceNumber = function(p6)
-			-- upvalues: t_1 (ref), var13 (write), var14 (write), var15 (write)
-			if t_1[p6] == true then return end
-			t_1[p6] = true
+		setLatestProcessedSequenceNumber = function(p2)
+			-- upvalues: t_1 (ref), var6 (write), var7 (write), var8 (write)
+			if t_1[p2] == true then return end
+			t_1[p2] = true
 			
-			if var13 == nil then
-				var13 = p6
-				var14 = p6
+			if var6 == nil then
+				var6 = p2
+				var7 = p2
 				
 				return
-			elseif var13 < p6 then
-				var15 += p6 - var13 - 1
-				var13 = p6
+			elseif var6 < p2 then
+				var8 += p2 - var6 - 1
+				var6 = p2
 				
 				return
-			elseif p6 < var14 then
-				var15 += var14 - p6 - 1
-				var14 = p6
+			elseif p2 < var7 then
+				var8 += var7 - p2 - 1
+				var7 = p2
 				
 				return
 			end
-			var15 -= 1
+			var8 -= 1
 		end,
 		emitNotification = function()
 			-- upvalues: t (ref)
@@ -139,55 +139,55 @@ local function makeTurnHandle(p2)
 			end
 		end,
 		markStreaming = function()
-			-- upvalues: var6 (ref), var7 (ref)
-			local cloned = table.clone(var6(false))
+			-- upvalues: var1 (ref), var2 (ref)
+			local cloned = table.clone(var1(false))
 			cloned.status = "streaming"
-			var7(cloned)
+			var2(cloned)
 		end,
 		fail = function()
-			-- upvalues: var6 (ref), var7 (ref)
-			local cloned = table.clone(var6(false))
+			-- upvalues: var1 (ref), var2 (ref)
+			local cloned = table.clone(var1(false))
 			cloned.status = "failed"
 			cloned.isDone = true
-			var7(cloned)
+			var2(cloned)
 		end
-	}, function(p7)
-		-- upvalues: var6 (ref), var7 (ref)
-		local var20
+	}, function(p2)
+		-- upvalues: var1 (ref), var2 (ref)
+		local var9
 		local _ = nil
 		
-		if p7 == nil then
-			var20 = table.clone(var6(false))
-			var20.status = "succeeded"
-			var20.isDone = true
+		if p2 == nil then
+			var9 = table.clone(var1(false))
+			var9.status = "succeeded"
+			var9.isDone = true
 		else
-			var20 = p7
+			var9 = p2
 		end
-		var7(var20)
+		var2(var9)
 	end
 end
 
 return {
 	Types = typesModule,
 	makeRequestHandle = makeRequestHandle,
-	makeImmediateSuccess = function(p8)
+	makeImmediateSuccess = function(p2)
 		-- upvalues: makeRequestHandle (ref)
-		local var21, var22 = makeRequestHandle()
-		var22(p8)
+		local var9, var10 = makeRequestHandle()
+		var10(p2)
 		
-		return var21
+		return var9
 	end,
-	makeImmediateFailure = function(p9)
+	makeImmediateFailure = function(p2)
 		-- upvalues: makeRequestHandle (ref)
-		local var23, _, var24 = makeRequestHandle()
-		var24(p9)
+		local var9, _, var10 = makeRequestHandle()
+		var10(p2)
 		
-		return var23
+		return var9
 	end,
-	makeImmediateFailureWithCode = function(p10, p11)
+	makeImmediateFailureWithCode = function(p2, p3)
 		-- upvalues: signalsModule (ref)
 		return {
-			state = signalsModule.createSignal({ status = "failed", error = p10, errorCode = p11 }),
+			state = signalsModule.createSignal({ status = "failed", error = p2, errorCode = p3 }),
 			dispose = function() end
 		}
 	end,
@@ -212,68 +212,68 @@ return {
 					-- upvalues: t (ref), makeRequestHandle (copy)
 					table.insert(t, #t + 1)
 					local t_1 = { protocolVersion = 2 }
-					local var36, var37 = makeRequestHandle()
-					var37(t_1)
+					local var9, var10 = makeRequestHandle()
+					var10(t_1)
 					
-					return var36
+					return var9
 				end,
-				sessionNew = function(p12)
+				sessionNew = function(p2)
 					-- upvalues: t_1 (ref), makeRequestHandle (copy)
-					table.insert(t_1, p12)
+					table.insert(t_1, p2)
 					local t = { sessionId = "cas-session-1" }
-					local var39, var40 = makeRequestHandle()
-					var40(t)
+					local var9, var10 = makeRequestHandle()
+					var10(t)
 					
-					return var39
+					return var9
 				end,
-				sessionLoad = function(p13, p14)
+				sessionLoad = function(p2, p3)
 					-- upvalues: t_2 (ref), t_3 (ref), makeRequestHandle (copy)
-					table.insert(t_2, { sessionId = p13, params = p14 })
-					local var41 = t_3[#t_2] or {}
+					table.insert(t_2, { sessionId = p2, params = p3 })
+					local var9 = t_3[#t_2] or {}
 					
-					if var41.history == nil and var41.nextHistoryPageToken == nil then
-						local t = { history = var41 }
-						local var45, var46 = makeRequestHandle()
-						var46(t)
+					if var9.history == nil and var9.nextHistoryPageToken == nil then
+						local t = { history = var9 }
+						local var10, var11 = makeRequestHandle()
+						var11(t)
 						
-						return var45
+						return var10
 					end
-					local var42, var43 = makeRequestHandle()
-					var43(var41)
+					local var12, var13 = makeRequestHandle()
+					var13(var9)
 					
-					return var42
+					return var12
 				end,
-				sessionPrompt = function(p15)
+				sessionPrompt = function(p2)
 					-- upvalues: t_4 (ref), makeTurnHandle (copy), t_8 (ref), t_9 (ref)
-					table.insert(t_4, p15)
-					local var47, var48 = makeTurnHandle(p15.sessionId)
-					table.insert(t_8, var47)
-					table.insert(t_9, var48)
+					table.insert(t_4, p2)
+					local var9, var10 = makeTurnHandle(p2.sessionId)
+					table.insert(t_8, var9)
+					table.insert(t_9, var10)
 					
-					return var47
+					return var9
 				end,
-				ingestSessionHistory = function(p16, p17, p18)
+				ingestSessionHistory = function(p2, p3, p4)
 					-- upvalues: t_5 (ref), t_6 (ref), t_7 (ref), t_8 (ref)
-					table.insert(t_5, { sessionId = p16, history = p17, afterSequenceId = p18 })
-					local var49 = t_6[#t_5]
+					table.insert(t_5, { sessionId = p2, history = p3, afterSequenceId = p4 })
+					local var9 = t_6[#t_5]
 					
-					if var49 ~= nil then
-						return var49
+					if var9 ~= nil then
+						return var9
 					end
 					local t = {}
 					
-					for i, v in p17 do
+					for i, v in p3 do
 						local sequenceId = v.sequenceId
 						
-						if typeof(sequenceId) == "number" and (p18 == nil or p18 < sequenceId) then
+						if typeof(sequenceId) == "number" and (p4 == nil or p4 < sequenceId) then
 							if t_7[sequenceId] ~= true then
 								t_7[sequenceId] = true
 								table.insert(t, sequenceId)
 							end
-							local var51 = t_8[#t_8]
+							local var10 = t_8[#t_8]
 							
-							if var51 ~= nil and var51.noteProcessedSequenceNumber ~= nil then
-								var51.noteProcessedSequenceNumber(sequenceId)
+							if var10 ~= nil and var10.noteProcessedSequenceNumber ~= nil then
+								var10.noteProcessedSequenceNumber(sequenceId)
 							end
 						end
 					end
@@ -281,10 +281,10 @@ return {
 				end,
 				submitToolResult = function(_)
 					-- upvalues: makeRequestHandle (copy)
-					local var52, var53 = makeRequestHandle()
-					var53(nil)
+					local var11, var12 = makeRequestHandle()
+					var12(nil)
 					
-					return var52
+					return var11
 				end,
 				getActiveTurnHandle = function(_)
 					-- upvalues: t_8 (ref)
@@ -300,25 +300,25 @@ return {
 			ingestSessionHistoryCalls = t_5,
 			ingestSessionHistoryResults = t_6,
 			turnHandles = t_8,
-			finishLastTurn = function(p19)
+			finishLastTurn = function(p5)
 				-- upvalues: t_9 (ref)
-				local var54 = t_9[#t_9]
+				local var11 = t_9[#t_9]
 				
-				if var54 ~= nil then
-					var54(p19)
+				if var11 ~= nil then
+					var11(p5)
 				end
 			end
 		}
 	end,
-	awaitTurnHandle = function(p20, p21)
-		local var55 = os.clock() + (p21 or 3)
-		while p20.getTurnHandle(false) == nil and (p20.getSetupError(false) == nil and var55 >= os.clock()) do
+	awaitTurnHandle = function(p2, p3)
+		local var9 = os.clock() + (p3 or 3)
+		while p2.getTurnHandle(false) == nil and (p2.getSetupError(false) == nil and var9 >= os.clock()) do
 			task.wait()
 		end
 	end,
-	waitFor = function(p22, p23)
-		local var56 = os.clock() + (p23 or 3)
-		while not p22() and var56 >= os.clock() do
+	waitFor = function(p4, p5)
+		local var10 = os.clock() + (p5 or 3)
+		while not p4() and var10 >= os.clock() do
 			task.wait()
 		end
 	end

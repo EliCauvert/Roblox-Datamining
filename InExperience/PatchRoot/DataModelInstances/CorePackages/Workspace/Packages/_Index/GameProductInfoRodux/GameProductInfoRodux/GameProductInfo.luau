@@ -5,16 +5,16 @@ local t = {
 	end
 }
 
-function t.mock(p0)
+function t.mock(p1)
 	-- upvalues: t (ref)
-	local var2 = t.new()
-	var2.universeId = p0
-	var2.isForSale = true
-	var2.productId = 12345
-	var2.price = 5
-	var2.sellerId = 6789
+	local var1 = t.new()
+	var1.universeId = p1
+	var1.isForSale = true
+	var1.productId = 12345
+	var1.price = 5
+	var1.sellerId = 6789
 	
-	return var2
+	return var1
 end
 
 function t.fromJsonData(p1)
@@ -22,18 +22,18 @@ function t.fromJsonData(p1)
 	if not (type(p1.universeId) == "number" and (type(p1.isForSale) == "boolean" and (type(p1.productId) == "number" and (type(p1.price) == "number" and type(p1.sellerId) == "number")))) and not (p1.fiatPurchaseData ~= nil and (type(p1.universeId) == "number" and type(p1.isForSale) == "boolean")) then
 		return resultModule.error("invalid data type")
 	end
-	local var3 = t.new()
-	var3.universeId = tostring(p1.universeId)
-	var3.isForSale = p1.isForSale
-	var3.productId = p1.productId
-	var3.price = p1.price
-	var3.sellerId = p1.sellerId
+	local var1 = t.new()
+	var1.universeId = tostring(p1.universeId)
+	var1.isForSale = p1.isForSale
+	var1.productId = p1.productId
+	var1.price = p1.price
+	var1.sellerId = p1.sellerId
 	
 	if p1.fiatPurchaseData then
-		var3.localizedFiatPrice = p1.fiatPurchaseData.localizedFiatPrice
-		var3.fiatBasePriceId = p1.fiatPurchaseData.basePriceId
+		var1.localizedFiatPrice = p1.fiatPurchaseData.localizedFiatPrice
+		var1.fiatBasePriceId = p1.fiatPurchaseData.basePriceId
 	end
-	return resultModule.success(var3)
+	return resultModule.success(var1)
 end
 
 return t

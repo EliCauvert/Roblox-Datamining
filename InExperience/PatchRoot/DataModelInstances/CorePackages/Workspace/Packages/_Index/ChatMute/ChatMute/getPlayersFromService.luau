@@ -1,11 +1,11 @@
-﻿return function(p0)
+﻿return function(p1)
 	local playersService = game:GetService("Players")
 	
-	if not p0 then
+	if not p1 then
 		return {}
 	end
 	local substring
-	local lowerText = string.lower(p0)
+	local lowerText = string.lower(p1)
 	
 	if string.sub(lowerText, 1, 1) == "@" then
 		substring = string.sub(lowerText, 2)

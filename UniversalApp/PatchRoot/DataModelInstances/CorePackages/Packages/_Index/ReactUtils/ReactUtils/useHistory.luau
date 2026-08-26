@@ -3,50 +3,50 @@ local reactUtils = script:FindFirstAncestor("ReactUtils")
 local reactModule = require(reactUtils.Parent.React)
 local LUAU_ANALYZE_ERRORModule = require(reactUtils.LUAU_ANALYZE_ERROR)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), changeHistoryService (ref), LUAU_ANALYZE_ERRORModule (ref)
-	local var4 = reactModule.useRef(p0)
-	local var5 = reactModule.useRef({})
-	local var6 = reactModule.useRef({})
+	local var1 = reactModule.useRef(p1)
+	local var2 = reactModule.useRef({})
+	local var3 = reactModule.useRef({})
 	reactModule.useEffect(function()
-		-- upvalues: changeHistoryService (copy), var5 (ref), var6 (ref), LUAU_ANALYZE_ERRORModule (copy), var4 (ref), p1 (ref)
-		local onUndoConnection = changeHistoryService.OnUndo:Connect(function(p3)
-			-- upvalues: var5 (copy), var6 (copy), LUAU_ANALYZE_ERRORModule (copy), var4 (copy), p1 (copy)
-			local current = var5.current
-			local current_1 = var6.current
+		-- upvalues: changeHistoryService (copy), var2 (ref), var3 (ref), LUAU_ANALYZE_ERRORModule (copy), var1 (ref), p2 (ref)
+		local onUndoConnection = changeHistoryService.OnUndo:Connect(function(p4)
+			-- upvalues: var2 (copy), var3 (copy), LUAU_ANALYZE_ERRORModule (copy), var1 (copy), p2 (copy)
+			local current = var2.current
+			local current_1 = var3.current
 			assert(current ~= nil, LUAU_ANALYZE_ERRORModule)
 			assert(current_1 ~= nil, LUAU_ANALYZE_ERRORModule)
 			
-			if not current[p3] or #current[p3] == 0 then return end
-			if not current_1[p3] then
-				current_1[p3] = {}
+			if not current[p4] or #current[p4] == 0 then return end
+			if not current_1[p4] then
+				current_1[p4] = {}
 			end
-			local count = #current[p3]
-			local var10 = current[p3][count]
-			table.insert(current_1[p3], var4.current)
-			table.remove(current[p3], count)
-			var4.current = var10
-			p1(var10)
-			var5.current = current
-			var6.current = current_1
+			local count = #current[p4]
+			local var4 = current[p4][count]
+			table.insert(current_1[p4], var1.current)
+			table.remove(current[p4], count)
+			var1.current = var4
+			p2(var4)
+			var2.current = current
+			var3.current = current_1
 		end)
 		local onRedoConnection = changeHistoryService.OnRedo:Connect(function(p4)
-			-- upvalues: var5 (copy), var6 (copy), LUAU_ANALYZE_ERRORModule (copy), var4 (copy), p1 (copy)
-			local current = var5.current
-			local current_1 = var6.current
+			-- upvalues: var2 (copy), var3 (copy), LUAU_ANALYZE_ERRORModule (copy), var1 (copy), p2 (copy)
+			local current = var2.current
+			local current_1 = var3.current
 			assert(current ~= nil, LUAU_ANALYZE_ERRORModule)
 			assert(current_1 ~= nil, LUAU_ANALYZE_ERRORModule)
 			
 			if current_1[p4] and #current_1[p4] ~= 0 then
 				local count = #current_1[p4]
-				local var12 = current_1[p4][count]
-				table.insert(current[p4], var4.current)
+				local var4 = current_1[p4][count]
+				table.insert(current[p4], var1.current)
 				table.remove(current_1[p4], count)
-				assert(var12 ~= nil, LUAU_ANALYZE_ERRORModule)
-				var4.current = var12
-				p1(var12)
-				var5.current = current
-				var6.current = current_1
+				assert(var4 ~= nil, LUAU_ANALYZE_ERRORModule)
+				var1.current = var4
+				p2(var4)
+				var2.current = current
+				var3.current = current_1
 				
 				return
 			end
@@ -57,30 +57,30 @@ return function(p0, p1, p2)
 			onUndoConnection:Disconnect()
 			onRedoConnection:Disconnect()
 		end
-	end, p2)
+	end, p3)
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var6 (ref)
-		var5.current = {}
-		var6.current = {}
-	end, p2)
+		-- upvalues: var2 (ref), var3 (ref)
+		var2.current = {}
+		var3.current = {}
+	end, p3)
 	
-	return reactModule.useCallback(function(p5, p6)
-		-- upvalues: var5 (ref), LUAU_ANALYZE_ERRORModule (copy), var6 (ref), changeHistoryService (copy), var4 (ref)
-		local current = var5.current
+	return reactModule.useCallback(function(p4, p5)
+		-- upvalues: var2 (ref), LUAU_ANALYZE_ERRORModule (copy), var3 (ref), changeHistoryService (copy), var1 (ref)
+		local current = var2.current
 		assert(current ~= nil, LUAU_ANALYZE_ERRORModule)
 		
-		if not current[p5] then
-			current[p5] = {}
+		if not current[p4] then
+			current[p4] = {}
 		end
-		var6.current = {}
-		changeHistoryService:SetWaypoint(p5)
+		var3.current = {}
+		changeHistoryService:SetWaypoint(p4)
 		
-		if typeof(var4.current) == "table" then
-			table.insert(current[p5], table.clone(var4.current))
+		if typeof(var1.current) == "table" then
+			table.insert(current[p4], table.clone(var1.current))
 		else
-			table.insert(current[p5], var4.current)
+			table.insert(current[p4], var1.current)
 		end
-		var4.current = p6
-		var5.current = current
-	end, p2)
+		var1.current = p5
+		var2.current = current
+	end, p3)
 end

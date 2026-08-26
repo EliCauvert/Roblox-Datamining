@@ -6,14 +6,14 @@ local styleWidgetsModule = require(coreGuiService.RobloxGui.Modules.StyleWidgets
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local _ = require(corePackagesService.Workspace.Packages.Loggers).mutedError
 
-function LocalizeWithFallback(p0, p1)
+function LocalizeWithFallback(p1, p2)
 	-- upvalues: robloxTranslatorModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: robloxTranslatorModule (copy), p0 (ref)
-		return robloxTranslatorModule:FormatByKey(p0)
+		-- upvalues: robloxTranslatorModule (copy), p1 (ref)
+		return robloxTranslatorModule:FormatByKey(p1)
 	end)
 	
-	return if ok and status then status else p1
+	return if ok and status then status else p2
 end
 
 local t = {
@@ -78,7 +78,7 @@ t.StatMaxNames = {
 	[t.StatType_Ping] = "MaxPing"
 }
 t.NumButtonTypes = #t.AllStatTypes
-local var6 = LocalizeWithFallback("InGame.UnknownNamespace.Network", "Network")
+local var1 = LocalizeWithFallback("InGame.UnknownNamespace.Network", "Network")
 t.TypeToName = {
 	[t.StatType_Memory] = "Memory",
 	[t.StatType_CPU] = "CPU",
@@ -107,66 +107,66 @@ t.MemoryAnalyzerTypeToName = {
 	Meshes = "Meshes"
 }
 
-function t.GetMemoryAnalyzerStatName(p2)
+function t.GetMemoryAnalyzerStatName(p1)
 	-- upvalues: t (ref)
-	return if t.MemoryAnalyzerTypeToName[p2] == nil then p2 else t.MemoryAnalyzerTypeToName[p2]
+	return if t.MemoryAnalyzerTypeToName[p1] == nil then p1 else t.MemoryAnalyzerTypeToName[p1]
 end
 
-function t.StyleFrame(p3)
+function t.StyleFrame(p1)
 	-- upvalues: t (ref)
-	p3.BackgroundColor3 = t.NormalColor
-	p3.BackgroundTransparency = t.Transparency
+	p1.BackgroundColor3 = t.NormalColor
+	p1.BackgroundTransparency = t.Transparency
 end
 
-function t.StyleButton(p4)
+function t.StyleButton(p1)
 	-- upvalues: t (ref)
-	p4.BackgroundColor3 = t.NormalColor
-	p4.BackgroundTransparency = t.Transparency
+	p1.BackgroundColor3 = t.NormalColor
+	p1.BackgroundTransparency = t.Transparency
 end
 
-function t.StyleTextWidget(p5)
+function t.StyleTextWidget(p1)
 	-- upvalues: t (ref)
-	p5.BackgroundTransparency = 1
-	p5.TextColor3 = t.FontColor
-	p5.Font = Enum.Font.SourceSansBold
+	p1.BackgroundTransparency = 1
+	p1.TextColor3 = t.FontColor
+	p1.Font = Enum.Font.SourceSansBold
 end
 
-function t.StyleButtonSelected(p6, p7)
+function t.StyleButtonSelected(p1, p2)
 	-- upvalues: t (ref)
-	t.StyleButton(p6)
+	t.StyleButton(p1)
 	
-	if p7 then
-		p6.BackgroundColor3 = t.SelectedBackgroundColor
+	if p2 then
+		p1.BackgroundColor3 = t.SelectedBackgroundColor
 	end
 end
 
-function t.FormatTypedValue(p8, p9)
+function t.FormatTypedValue(p1, p2)
 	-- upvalues: t (ref)
-	if p9 == t.StatType_Memory then
-		return string.format("%.2f MB", p8)
-	elseif p9 == t.StatType_CPU then
-		return string.format("%.2f ms", p8)
-	elseif p9 == t.StatType_GPU then
-		return string.format("%.2f ms", p8)
-	elseif p9 == t.StatType_NetworkSent then
-		return string.format("%.2f KB/s", p8)
-	elseif p9 == t.StatType_NetworkReceived then
-		return string.format("%.2f KB/s", p8)
-	elseif p9 == t.StatType_Ping then
-		return string.format("%.0f ms", p8)
+	if p2 == t.StatType_Memory then
+		return string.format("%.2f MB", p1)
+	elseif p2 == t.StatType_CPU then
+		return string.format("%.2f ms", p1)
+	elseif p2 == t.StatType_GPU then
+		return string.format("%.2f ms", p1)
+	elseif p2 == t.StatType_NetworkSent then
+		return string.format("%.2f KB/s", p1)
+	elseif p2 == t.StatType_NetworkReceived then
+		return string.format("%.2f KB/s", p1)
+	elseif p2 == t.StatType_Ping then
+		return string.format("%.0f ms", p1)
 	end
 end
 
-function t.StyleAverageLine(p10)
+function t.StyleAverageLine(p1)
 	-- upvalues: t (ref)
-	p10.BackgroundColor3 = t.GraphAverageLineColor
-	p10.BorderSizePixel = t.GraphAverageLineBorderThickness
-	p10.BorderColor3 = t.GraphAverageLineBorderColor
+	p1.BackgroundColor3 = t.GraphAverageLineColor
+	p1.BorderSizePixel = t.GraphAverageLineBorderThickness
+	p1.BorderColor3 = t.GraphAverageLineBorderColor
 end
 
-function t.GetColorForValue(p11, p12)
+function t.GetColorForValue(p1, p2)
 	-- upvalues: t (ref)
-	return if p11 < 0.666 * p12 then t.GraphBarGreenColor elseif p11 < 1.333 * p12 then t.GraphBarYellowColor else t.GraphBarRedColor
+	return if p1 < 0.666 * p2 then t.GraphBarGreenColor elseif p1 < 1.333 * p2 then t.GraphBarYellowColor else t.GraphBarRedColor
 end
 
 function t.PerformanceStatsShouldBeVisible()

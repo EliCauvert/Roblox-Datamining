@@ -6,29 +6,29 @@ local function createSduiActionHandlerRegistry()
 	local t = {}
 	
 	return {
-		getActionHandlerConfig = function(p0)
+		getActionHandlerConfig = function(p1)
 			-- upvalues: t (ref)
-			local var4 = t[p0]
+			local var1 = t[p1]
 			
-			if var4 and not var4.handler and var4.lazyHandler then
-				var4.handler = var4.lazyHandler()
+			if var1 and not var1.handler and var1.lazyHandler then
+				var1.handler = var1.lazyHandler()
 			end
-			if var4 and not var4.telemetryHandler then
-				local lazyTelemetryHandler = var4.lazyTelemetryHandler
+			if var1 and not var1.telemetryHandler then
+				local lazyTelemetryHandler = var1.lazyTelemetryHandler
 				
 				if lazyTelemetryHandler then
-					var4.telemetryHandler = lazyTelemetryHandler()
+					var1.telemetryHandler = lazyTelemetryHandler()
 				end
 			end
-			return var4
+			return var1
 		end,
 		registerActionHandlerConfig = function(p1, p2)
 			-- upvalues: t (ref)
 			t[p1] = p2
 		end,
-		registerActionHandlerConfigs = function(p3)
+		registerActionHandlerConfigs = function(p1)
 			-- upvalues: t (ref)
-			for i, v in p3 do
+			for i, v in p1 do
 				t[i] = v
 			end
 		end,
@@ -43,12 +43,12 @@ local function createSduiActionHandlerRegistry()
 	}
 end
 
-local var2 = nil
+local var1 = nil
 
 return function()
-	-- upvalues: var2 (write), createSduiActionHandlerRegistry (ref)
-	if var2 == nil then
-		var2 = createSduiActionHandlerRegistry()
+	-- upvalues: var1 (write), createSduiActionHandlerRegistry (ref)
+	if var1 == nil then
+		var1 = createSduiActionHandlerRegistry()
 	end
-	return var2
+	return var1
 end

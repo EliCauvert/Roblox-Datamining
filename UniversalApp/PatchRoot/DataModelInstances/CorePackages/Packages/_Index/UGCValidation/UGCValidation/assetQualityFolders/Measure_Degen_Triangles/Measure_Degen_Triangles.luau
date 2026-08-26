@@ -12,9 +12,9 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: getFFlagUGCValidateAQMeshQualityBlockUploadModule (ref), errorSourceStringsModule (ref)
-		local measureDegenTriangles = p1.aqsSummaryData.Measure_Degen_Triangles
+		local measureDegenTriangles = p2.aqsSummaryData.Measure_Degen_Triangles
 		
 		if measureDegenTriangles == nil then
 			if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
@@ -22,7 +22,7 @@ return {
 				
 				return
 			end
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Degen_Triangles" })
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Degen_Triangles" })
 			
 			return
 		else
@@ -37,13 +37,13 @@ return {
 							}
 							
 							if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
-								p0:fail(errorSourceStringsModule.Keys.AQSWarn_DegenTriangles, t)
+								p1:fail(errorSourceStringsModule.Keys.AQSWarn_DegenTriangles, t)
 							else
-								p0:warn(errorSourceStringsModule.Keys.AQSWarn_DegenTriangles, t)
+								p1:warn(errorSourceStringsModule.Keys.AQSWarn_DegenTriangles, t)
 							end
 						end
 					end
-					p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Degen_Triangles" })
+					p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Degen_Triangles" })
 					
 					return
 				end

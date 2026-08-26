@@ -14,24 +14,24 @@ local fFlagAbuseReportMenuV2 = require(parent.SharedFlags).FFlagAbuseReportMenuV
 local reportListRadioSelectable = game:DefineFastFlag("ReportListRadioSelectable", false)
 local t = { hasDivider = false }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaults (ref), t (ref), useListModule (ref), reactModule (ref), view (ref), text (ref), radioGroup (ref), reportListRadioSelectable (ref), inputSize (ref), fFlagAbuseReportMenuV2 (ref), icon (ref), iconName (ref), divider (ref)
-	local var5 = withDefaults(p0, t)
-	local var6 = useListModule()
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var5 (ref)
-		var6.onValueChanged(var5.value)
-	end, { var6, var5.value })
+	local var1 = withDefaults(p1, t)
+	local var2 = useListModule()
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), var1 (ref)
+		var2.onValueChanged(var1.value)
+	end, { var2, var1.value })
 	
-	return reactModule.createElement(view, { tag = "size-full-0 auto-y col", ref = p1 }, {
+	return reactModule.createElement(view, { tag = "size-full-0 auto-y col", ref = p2 }, {
 		ListItem = reactModule.createElement(view, {
 			tag = "size-full-0 auto-y padding-medium",
-			onActivated = var7
+			onActivated = var3
 		}, {
 			ListItemContent = reactModule.createElement(view, {
 				tag = {
 					["size-full-0 auto-y row gap-medium align-x-center align-y-center flex-between"] = true,
-					["padding-x-large"] = var5.hasMargin
+					["padding-x-large"] = var1.hasMargin
 				}
 			}, {
 				TextBlock = reactModule.createElement(view, {
@@ -43,42 +43,42 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 							RichText = true,
 							tag = "auto-xy text-align-x-left text-title-medium text-wrap content-emphasis",
 							LayoutOrder = 0,
-							Text = var5.title
+							Text = var1.title
 						}),
-						Metadata = var5.metadata and reactModule.createElement(text, {
+						Metadata = var1.metadata and reactModule.createElement(text, {
 							RichText = true,
 							tag = "auto-xy text-align-x-left text-body-small text-wrap",
 							LayoutOrder = 1,
-							Text = var5.metadata
+							Text = var1.metadata
 						})
 					}),
-					Description = var5.description and reactModule.createElement(text, {
+					Description = var1.description and reactModule.createElement(text, {
 						RichText = true,
 						tag = "auto-xy text-align-x-left text-body-small text-wrap",
 						LayoutOrder = 1,
-						Text = var5.description
+						Text = var1.description
 					})
 				}),
 				AccessoryBlock = reactModule.createElement(view, {
 					tag = "size-600-0 auto-y align-y-center col",
 					LayoutOrder = 1
 				}, {
-					Radio = var5.trailingAccessory == "Radio" and reactModule.createElement(radioGroup.Root, {
-						onValueChanged = var7,
-						value = var6.value,
+					Radio = var1.trailingAccessory == "Radio" and reactModule.createElement(radioGroup.Root, {
+						onValueChanged = var3,
+						value = var2.value,
 						Selectable = if reportListRadioSelectable then false else true
 					}, {
 						reactModule.createElement(radioGroup.Item, {
 							label = "",
-							value = var5.value,
+							value = var1.value,
 							size = inputSize.Small,
 							ref = reactModule.useRef(nil)
 						})
 					}),
-					Chevron = if fFlagAbuseReportMenuV2 then var5.trailingAccessory == "Chevron" and reactModule.createElement(icon, { name = iconName.ChevronLargeRight }) else nil
+					Chevron = if fFlagAbuseReportMenuV2 then var1.trailingAccessory == "Chevron" and reactModule.createElement(icon, { name = iconName.ChevronLargeRight }) else nil
 				})
 			})
 		}),
-		Divider = var5.hasDivider and reactModule.createElement(divider, { LayoutOrder = 2 }) or nil
+		Divider = var1.hasDivider and reactModule.createElement(divider, { LayoutOrder = 2 }) or nil
 	})
 end))

@@ -4,33 +4,33 @@ local foundationModule = require(parent.Foundation)
 local _ = require(parent.SduiCompat)
 local fFlagSduiViewContainerRefEnabled = require(parent.SharedFlags).FFlagSduiViewContainerRefEnabled
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref), fFlagSduiViewContainerRefEnabled (ref)
 	return reactModule.createElement(foundationModule.View, {
-		ref = if fFlagSduiViewContainerRefEnabled then p0.containerRef else nil,
-		AnchorPoint = p0.anchorPoint,
-		AutomaticSize = p0.automaticSize,
-		ClipsDescendants = p0.clipsDescendants,
-		GroupTransparency = p0.groupTransparency,
-		LayoutOrder = p0.layoutOrder,
-		Position = p0.position,
-		Rotation = p0.rotation,
-		Size = p0.size,
-		SizeConstraint = p0.sizeConstraint,
-		Visible = p0.visible,
-		ZIndex = p0.zIndex,
-		aspectRatio = p0.aspectRatio,
-		backgroundStyle = p0.backgroundStyle,
-		cornerRadius = p0.cornerRadius,
-		cursor = p0.cursorType,
-		isDisabled = p0.isDisabled,
-		onActivated = p0.onActivated,
-		onSecondaryActivated = p0.onSecondaryActivated,
-		padding = p0.padding,
-		scale = p0.scale,
-		selection = if p0.selectable ~= nil then nil else { Selectable = p0.selectable },
-		selectionGroup = p0.selectionGroup,
-		tag = p0.tag,
-		testId = p0.testId
-	}, p0.children)
+		ref = if fFlagSduiViewContainerRefEnabled then p1.containerRef else nil,
+		AnchorPoint = p1.anchorPoint,
+		AutomaticSize = p1.automaticSize,
+		ClipsDescendants = p1.clipsDescendants,
+		GroupTransparency = p1.groupTransparency,
+		LayoutOrder = p1.layoutOrder,
+		Position = p1.position,
+		Rotation = p1.rotation,
+		Size = p1.size,
+		SizeConstraint = p1.sizeConstraint,
+		Visible = p1.visible,
+		ZIndex = p1.zIndex,
+		aspectRatio = p1.aspectRatio,
+		backgroundStyle = p1.backgroundStyle,
+		cornerRadius = p1.cornerRadius,
+		cursor = p1.cursorType,
+		isDisabled = p1.isDisabled,
+		onActivated = p1.onActivated,
+		onSecondaryActivated = p1.onSecondaryActivated,
+		padding = p1.padding,
+		scale = p1.scale,
+		selection = if p1.selectable ~= nil then nil else { Selectable = p1.selectable },
+		selectionGroup = p1.selectionGroup,
+		tag = p1.tag,
+		testId = p1.testId
+	}, p1.children)
 end)

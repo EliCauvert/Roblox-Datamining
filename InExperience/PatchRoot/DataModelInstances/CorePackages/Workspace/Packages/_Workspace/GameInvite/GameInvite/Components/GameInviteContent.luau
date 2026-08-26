@@ -26,53 +26,53 @@ local getRewardMetadataModule = require(gameInvite.Requests.GetRewardMetadata)
 local sidePadding = gameInviteConstantsModule.Layout.SidePadding
 local titleHeight = gameInviteConstantsModule.Layout.TitleHeight
 
-local var13 = function(p0)
+local var1 = function(p1)
 	-- upvalues: reactModule (ref), gameInviteModalLayoutContextModule (ref), gameDetailsContextModule (ref), getFFlagEnableGameInviteRewardsBanner (ref), getRewardMetadataModule (ref), name (ref), useSelector (ref), deviceInfo (ref), titleHeight (ref), gameInviteTitleModule (ref), sidePadding (ref), friendsMenuSearch (ref), gameInviteAnalyticsManagerModule (ref), gameInviteCustomTextModule (ref), gameInviteRewardsBannerModule (ref), friendsMenuFriendsList (ref), gameInviteConstantsModule (ref), friendMenuType (ref)
-	local var14 = reactModule.useContext(gameInviteModalLayoutContextModule)
-	local var15 = reactModule.useContext(gameDetailsContextModule)
-	local var16, var17 = reactModule.useState(nil)
+	local var2 = reactModule.useContext(gameInviteModalLayoutContextModule)
+	local var3 = reactModule.useContext(gameDetailsContextModule)
+	local var4, var5 = reactModule.useState(nil)
 	
 	if getFFlagEnableGameInviteRewardsBanner() then
 		reactModule.useEffect(function()
-			-- upvalues: getRewardMetadataModule (copy), var17 (ref), name (copy)
+			-- upvalues: getRewardMetadataModule (copy), var5 (ref), name (copy)
 			if game.GameId > 0 then
 				getRewardMetadataModule():andThen(function(p2)
-					-- upvalues: var17 (copy)
+					-- upvalues: var5 (copy)
 					if p2.responseBody and p2.responseBody.name and p2.responseBody.description then
-						var17(p2.responseBody)
+						var5(p2.responseBody)
 					end
-				end):catch(function(p1)
+				end):catch(function(p2)
 					-- upvalues: name (copy)
-					name:error(`Error fetching reward metadata: {p1}`)
+					name:error(`Error fetching reward metadata: {p2}`)
 				end)
 			end
 		end, {})
 	end
-	local var18 = useSelector(function(p3)
-		return p3.TopBar
+	local var6 = useSelector(function(p2)
+		return p2.TopBar
 	end)
-	local var19 = deviceInfo.isConsole()
-	local isCompact = var14.modalMode == "compact"
-	local promptMessage = var15.promptMessage
-	local var21 = promptMessage and #promptMessage > 0
-	local var22 = titleHeight + 12
-	local var23 = not isCompact and not var19
+	local var7 = deviceInfo.isConsole()
+	local isCompact = var2.modalMode == "compact"
+	local promptMessage = var3.promptMessage
+	local var8 = promptMessage and #promptMessage > 0
+	local var9 = titleHeight + 12
+	local var10 = not isCompact and not var7
 	
-	if var23 then
-		var22 += 48
+	if var10 then
+		var9 += 48
 	end
-	if var21 then
-		var22 += 48
+	if var8 then
+		var9 += 48
 	end
-	local var24 = titleHeight
+	local var11 = titleHeight
 	
-	if (if var15.isCoreScript or not var18 or not var18.statusBarHeight then false else true) and var18 then
-		var22 += var18.statusBarHeight
-		var24 += var18.statusBarHeight
+	if (if var3.isCoreScript or not var6 or not var6.statusBarHeight then false else true) and var6 then
+		var9 += var6.statusBarHeight
+		var11 += var6.statusBarHeight
 	end
-	local var28
+	local var12
 	local createElement = reactModule.createElement
-	local var25 = "Frame"
+	local var13 = "Frame"
 	local t = {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
@@ -93,15 +93,15 @@ local var13 = function(p0)
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			LayoutOrder = 0,
-			Size = UDim2.new(1, 0, 0, var24)
+			Size = UDim2.new(1, 0, 0, var11)
 		}, {
 			GameInviteTitle = reactModule.createElement(gameInviteTitleModule, {
 				layoutOrder = 0,
 				size = UDim2.new(1, 0, 0, titleHeight),
-				hideCloseButton = p0.hideCloseButton
+				hideCloseButton = p1.hideCloseButton
 			})
 		}),
-		SearchBox = var23 and reactModule.createElement("Frame", {
+		SearchBox = var10 and reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
@@ -127,37 +127,37 @@ local var13 = function(p0)
 				end
 			})
 		}) or nil,
-		CustomTextContainer = var21 and reactModule.createElement(gameInviteCustomTextModule, {
+		CustomTextContainer = var8 and reactModule.createElement(gameInviteCustomTextModule, {
 			layoutOrder = 2,
 			size = UDim2.new(1, 0, 0, 36),
 			promptMessage = promptMessage
 		}) or nil
 	}
 	
-	if getFFlagEnableGameInviteRewardsBanner() and var16 ~= nil then
-		var28 = reactModule.createElement(gameInviteRewardsBannerModule, { layoutOrder = 2, rewardMetadata = var16 }) or nil
+	if getFFlagEnableGameInviteRewardsBanner() and var4 ~= nil then
+		var12 = reactModule.createElement(gameInviteRewardsBannerModule, { layoutOrder = 2, rewardMetadata = var4 }) or nil
 	end
-	t_1.RewardsBanner = var28
+	t_1.RewardsBanner = var12
 	t_1.FriendsList = reactModule.createElement(friendsMenuFriendsList, {
 		layoutOrder = 3,
-		size = UDim2.new(1, 0, 1, -var22),
+		size = UDim2.new(1, 0, 1, -var9),
 		parentComponentName = gameInviteConstantsModule.ParentComponentName,
 		menuType = friendMenuType.SingleSelect,
-		gameDetailsData = var15,
-		disableSelectionParentManagement = p0.disableSelectionParentManagement
+		gameDetailsData = var3,
+		disableSelectionParentManagement = p1.disableSelectionParentManagement
 	})
 	
-	return createElement(var25, t, t_1)
+	return createElement(var13, t, t_1)
 end
 
-return function(p4)
-	-- upvalues: getFFlagEnableCommonFriendsMenu (ref), reactModule (ref), inviteFriendContext (ref), friendsMenuContextWrapper (ref), var13 (ref)
+return function(p1)
+	-- upvalues: getFFlagEnableCommonFriendsMenu (ref), reactModule (ref), inviteFriendContext (ref), friendsMenuContextWrapper (ref), var1 (ref)
 	return if getFFlagEnableCommonFriendsMenu() then reactModule.createElement(friendsMenuContextWrapper, {
 		inviteSingleFriend = (if getFFlagEnableCommonFriendsMenu() then reactModule.useContext(inviteFriendContext) else {
 			inviteSingleFriend = function() end,
 			getMaxRecipientRowNum = function() end
 		}).inviteSingleFriend,
 		inviteMultiFriends = function() end,
-		isLoadingCustomParams = p4.isLoadingCustomParams
-	}, { GameInviteContent = reactModule.createElement(var13, p4) }) else reactModule.createElement(var13, p4)
+		isLoadingCustomParams = p1.isLoadingCustomParams
+	}, { GameInviteContent = reactModule.createElement(var1, p1) }) else reactModule.createElement(var1, p1)
 end

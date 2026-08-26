@@ -5,14 +5,14 @@ local useGetOneToOneFriendIdFromConversationIdModule = require(appChat.Hooks.use
 local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
 local appChatNetworkingModule = require(parent.AppChatNetworking)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), useGetConversationFromIdModule (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), appChatNetworkingModule (ref)
-	local var4 = useDispatch()
-	local var5 = useGetConversationFromIdModule(p0)
-	local var6 = useGetOneToOneFriendIdFromConversationIdModule(p0)
+	local var1 = useDispatch()
+	local var2 = useGetConversationFromIdModule(p1)
+	local var3 = useGetOneToOneFriendIdFromConversationIdModule(p1)
 	
-	return function(p1, p2, p3, p4)
-		-- upvalues: var5 (ref), var6 (ref), var4 (ref), appChatNetworkingModule (copy), p0 (ref)
-		return if var5 and var5.source == "friends" and var6 then var4(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(p1, p2, p3, p4, nil, var6)) else var4(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(p1, p2, p3, p4, p0))
+	return function(p2, p3, p4, p5)
+		-- upvalues: var2 (ref), var3 (ref), var1 (ref), appChatNetworkingModule (copy), p1 (ref)
+		return if var2 and var2.source == "friends" and var3 then var1(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(p2, p3, p4, p5, nil, var3)) else var1(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(p2, p3, p4, p5, p1))
 	end
 end

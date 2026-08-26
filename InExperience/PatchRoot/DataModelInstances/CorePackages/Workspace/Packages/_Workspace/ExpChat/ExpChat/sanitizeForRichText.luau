@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return string.gsub(p0, "%p", { ["<"] = "&lt;", [">"] = "&gt;", ["&"] = "&amp;" })
+﻿return function(p1)
+	return string.gsub(p1, "%p", { ["<"] = "&lt;", [">"] = "&gt;", ["&"] = "&amp;" })
 end

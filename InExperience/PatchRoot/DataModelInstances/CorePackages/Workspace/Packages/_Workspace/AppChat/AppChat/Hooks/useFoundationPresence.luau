@@ -9,7 +9,7 @@ local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppC
 local dataHydrationModule = require(parent.DataHydration)
 local useGetPresenceByUserId = require(parent.FriendsCommon).Hooks.useGetPresenceByUserId
 local presenceType = roduxPresenceModule.Enums.PresenceType
-local var5 = if fFlagAppChatPresenceStoreMigrationModule then dataHydrationModule.Presence.PresenceEnums.PresenceType else nil
+local var1 = if fFlagAppChatPresenceStoreMigrationModule then dataHydrationModule.Presence.PresenceEnums.PresenceType else nil
 local t = {
 	[presenceType.InGame] = "Active",
 	[presenceType.Online] = "Active",
@@ -43,42 +43,42 @@ local t_4 = {
 	ingameStatusLabel = "Common.Presence.Label.InExperience"
 }
 
-return function(p0)
-	-- upvalues: useLocalization (ref), t_4 (ref), reactModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), useGetPresenceByUserId (ref), useSelector (ref), roduxPresenceModule (ref), var5 (ref), presenceType (ref), t_3 (ref), t_2 (ref), t_1 (ref), t (ref)
-	local var11 = useLocalization(t_4)
-	local var12, var13 = reactModule.useBinding(var11.offlinePresenceText)
+return function(p1)
+	-- upvalues: useLocalization (ref), t_4 (ref), reactModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), useGetPresenceByUserId (ref), useSelector (ref), roduxPresenceModule (ref), var1 (ref), presenceType (ref), t_3 (ref), t_2 (ref), t_1 (ref), t (ref)
+	local var2 = useLocalization(t_4)
+	local var3, var4 = reactModule.useBinding(var2.offlinePresenceText)
 	local none, none_1 = reactModule.useState("None")
-	local var16 = if fFlagAppChatPresenceStoreMigrationModule then useGetPresenceByUserId(p0) else useSelector(function(p1)
-		-- upvalues: p0 (ref), roduxPresenceModule (copy)
-		return if not (not p0 or p0 == "") then if p1 == nil or p1.ChatAppReducer == nil or (p1.ChatAppReducer.Presence == nil or p1.ChatAppReducer.Presence.byUserId == nil) then nil else roduxPresenceModule.Selectors.getUserPresenceByUserId(p1, p0) else nil
+	local var5 = if fFlagAppChatPresenceStoreMigrationModule then useGetPresenceByUserId(p1) else useSelector(function(p2)
+		-- upvalues: p1 (ref), roduxPresenceModule (copy)
+		return if not (not p1 or p1 == "") then if p2 == nil or p2.ChatAppReducer == nil or (p2.ChatAppReducer.Presence == nil or p2.ChatAppReducer.Presence.byUserId == nil) then nil else roduxPresenceModule.Selectors.getUserPresenceByUserId(p2, p1) else nil
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), fFlagAppChatPresenceStoreMigrationModule (copy), var5 (copy), presenceType (copy), var16 (write), t_3 (copy), t_2 (copy), t_1 (copy), t (copy), none_1 (ref), var13 (ref)
-		local offlinePresenceText = var11.offlinePresenceText
-		local var17 = if fFlagAppChatPresenceStoreMigrationModule then var5.Offline else presenceType.Offline
+		-- upvalues: var2 (ref), fFlagAppChatPresenceStoreMigrationModule (copy), var1 (copy), presenceType (copy), var5 (write), t_3 (copy), t_2 (copy), t_1 (copy), t (copy), none_1 (ref), var4 (ref)
+		local offlinePresenceText = var2.offlinePresenceText
+		local var6 = if fFlagAppChatPresenceStoreMigrationModule then var1.Offline else presenceType.Offline
 		
-		if var16 then
-			local var18
-			var17 = var16.userPresenceType
-			local lastLocation = var16.lastLocation
-			offlinePresenceText = if fFlagAppChatPresenceStoreMigrationModule then var11[t_3[var17]] else var11[t_2[var17]]
+		if var5 then
+			local var7
+			var6 = var5.userPresenceType
+			local lastLocation = var5.lastLocation
+			offlinePresenceText = if fFlagAppChatPresenceStoreMigrationModule then var2[t_3[var6]] else var2[t_2[var6]]
 			
 			if fFlagAppChatPresenceStoreMigrationModule then
-				var18 = var17 == var5.InGame
-				var18 = nil
+				var7 = var6 == var1.InGame
+				var7 = nil
 			else
-				var18 = var17 == presenceType.InGame
+				var7 = var6 == presenceType.InGame
 			end
-			if var18 and lastLocation and lastLocation ~= "" then
+			if var7 and lastLocation and lastLocation ~= "" then
 				offlinePresenceText = lastLocation
 			end
 		end
-		none_1((if fFlagAppChatPresenceStoreMigrationModule then t_1 else t)[var17] or "None")
-		var13(offlinePresenceText)
-	end, { var16, var11 })
+		none_1((if fFlagAppChatPresenceStoreMigrationModule then t_1 else t)[var6] or "None")
+		var4(offlinePresenceText)
+	end, { var5, var2 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: none (ref), var12 (ref)
-		return { presence = none, presenceText = var12 }
-	end, { none, var12 })
+		-- upvalues: none (ref), var3 (ref)
+		return { presence = none, presenceText = var3 }
+	end, { none, var3 })
 end

@@ -8,7 +8,7 @@
 		ready = 7,
 		error = 8
 	},
-	isNetworkRequestInFlight = function(p0)
-		return if p0 then p0 < 7 else false
+	isNetworkRequestInFlight = function(p1)
+		return if p1 then p1 < 7 else false
 	end
 }

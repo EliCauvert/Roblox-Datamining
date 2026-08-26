@@ -18,8 +18,8 @@ local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlag
 
 return function(value)
 	-- upvalues: useDispatch (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), button (ref), buttonVariant (ref), buttonSize (ref)
-	local var5 = useDispatch()
-	local var6 = useRoactService(appEventIngestService)
+	local var2 = useDispatch()
+	local var3 = useRoactService(appEventIngestService)
 	
 	return reactModule.createElement(button, {
 		isDisabled = false,
@@ -29,17 +29,17 @@ return function(value)
 		variant = buttonVariant.Standard,
 		LayoutOrder = value.layoutOrder,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: value (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy), var6 (ref)
+			-- upvalues: value (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy), var3 (ref)
 			value.closeDrawer()
 			local t = { name = appPage.CrossDeviceLogin }
 			
 			if fFlagSignalsNavP3Dispatch then
 				var1.down(var1.fromLegacyPage(t))
 			else
-				var5(navigateDown(t))
+				var2(navigateDown(t))
 			end
-			flyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(var6, flyoutContentSettingsModule.ItemType.QuickSignin)
-		end, { var6, value.closeDrawer }),
+			flyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(var3, flyoutContentSettingsModule.ItemType.QuickSignin)
+		end, { var3, value.closeDrawer }),
 		size = buttonSize.Large,
 		width = UDim.new(1, 0)
 	})

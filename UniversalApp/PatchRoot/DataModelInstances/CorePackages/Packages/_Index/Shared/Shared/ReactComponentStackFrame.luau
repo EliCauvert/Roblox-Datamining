@@ -15,8 +15,8 @@ local reactCurrentDispatcher = require(script.Parent.ReactSharedInternals).React
 local describeComponentFrame = nil
 local _ = nil
 
-local function _(p0)
-	return if type(p0) == "function" then debug.info(p0, "n") elseif type(p0) == "table" then tostring(p0) else nil
+local function _(p1)
+	return if type(p1) == "function" then debug.info(p1, "n") elseif type(p1) == "table" then tostring(p1) else nil
 end
 
 local function describeBuiltInComponentFrame(p1, p2, p3)
@@ -24,22 +24,22 @@ local function describeBuiltInComponentFrame(p1, p2, p3)
 	return describeComponentFrame(p1, p2, if reactGlobalsModule.__DEV__ and p3 then if type(p3) == "function" then debug.info(p3, "n") elseif type(p3) == "table" then tostring(p3) else nil else nil)
 end
 
-local var5 = false
-local var6 = if reactGlobalsModule.__DEV__ then setmetatable({}, { __mode = "k" }) else nil
+local var1 = false
+local var2 = if reactGlobalsModule.__DEV__ then setmetatable({}, { __mode = "k" }) else nil
 
-local function describeNativeComponentFrame(p4, p5)
-	-- upvalues: var5 (write), reactGlobalsModule (ref), var6 (write), reactCurrentDispatcher (ref), disableLogs (ref), reenableLogs (ref), describeComponentFrame (write)
-	if not p4 or var5 then
+local function describeNativeComponentFrame(p1, p2)
+	-- upvalues: var1 (write), reactGlobalsModule (ref), var2 (write), reactCurrentDispatcher (ref), disableLogs (ref), reenableLogs (ref), describeComponentFrame (write)
+	if not p1 or var1 then
 		return ""
 	elseif reactGlobalsModule.__DEV__ then
-		local var11 = var6[p4]
+		local var3 = var2[p1]
 		
-		if var11 ~= nil then
-			return var11
+		if var3 ~= nil then
+			return var3
 		end
 	end
-	local var12 = nil
-	var5 = true
+	local var4 = nil
+	var1 = true
 	local current = nil
 	
 	if reactGlobalsModule.__DEV__ then
@@ -47,52 +47,52 @@ local function describeNativeComponentFrame(p4, p5)
 		reactCurrentDispatcher.current = nil
 		disableLogs()
 	end
-	local var13 = nil
+	local var5 = nil
 	local _, status = xpcall(function()
-		-- upvalues: p5 (ref), var13 (write), var12 (write), p4 (ref)
-		if p5 then
+		-- upvalues: p2 (ref), var5 (write), var4 (write), p1 (ref)
+		if p2 then
 			return
 		end
 		local _, status = pcall(function()
-			-- upvalues: var13 (copy)
-			var13 = debug.traceback()
-			error({ stack = var13 })
+			-- upvalues: var5 (copy)
+			var5 = debug.traceback()
+			error({ stack = var5 })
 		end)
-		var12 = status
-		p4()
-	end, function(p6)
-		-- upvalues: var13 (write)
-		return { message = p6, stack = var13 }
+		var4 = status
+		p1()
+	end, function(p3)
+		-- upvalues: var5 (write)
+		return { message = p3, stack = var5 }
 	end)
-	local var14 = nil
-	var5 = false
+	local var6 = nil
+	var1 = false
 	
 	if reactGlobalsModule.__DEV__ then
 		reactCurrentDispatcher.current = current
 		reenableLogs()
 	end
-	if var14 ~= nil then
-		return var14
+	if var6 ~= nil then
+		return var6
 	end
-	local var15 = if type(p4) == "function" then debug.info(p4, "n") elseif type(p4) == "table" then tostring(p4) else ""
-	local var16 = ""
+	local var7 = if type(p1) == "function" then debug.info(p1, "n") elseif type(p1) == "table" then tostring(p1) else ""
+	local var8 = ""
 	
-	if var15 ~= nil and var15 ~= "" then
+	if var7 ~= nil and var7 ~= "" then
 		local dEV = reactGlobalsModule.__DEV__
-		var16 = describeComponentFrame(var15, nil, nil)
+		var8 = describeComponentFrame(var7, nil, nil)
 	end
 	if reactGlobalsModule.__DEV__ then
-		var6[p4] = var16
+		var2[p1] = var8
 	end
-	return var16
+	return var8
 end
 
-describeComponentFrame = function(p7, p8, p9)
+describeComponentFrame = function(p1, p2, p3)
 	-- upvalues: reactGlobalsModule (ref)
-	local var21 = ""
+	local var3 = ""
 	
-	if reactGlobalsModule.__DEV__ and p8 then
-		local fileName = p8.fileName
+	if reactGlobalsModule.__DEV__ and p2 then
+		local fileName = p2.fileName
 		local replaced = string.gsub(fileName, "^(.*)[\\/]", "")
 		
 		if string.match(replaced, "^init%.") then
@@ -102,54 +102,54 @@ describeComponentFrame = function(p7, p8, p9)
 				replaced = string.gsub(match, "^(.*)[\\/]", "") .. "/" .. replaced
 			end
 		end
-		var21 = " (at " .. replaced .. ":" .. p8.lineNumber .. ")"
-	elseif p9 then
-		var21 = " (created by " .. p9 .. ")"
+		var3 = " (at " .. replaced .. ":" .. p8.lineNumber .. ")"
+	elseif p3 then
+		var3 = " (created by " .. p9 .. ")"
 	end
-	return "\n    in " .. (p7 or "Unknown") .. var21
+	return "\n    in " .. (p1 or "Unknown") .. var21
 end
 
-local function describeClassComponentFrame(p10, p11, p12)
+local function describeClassComponentFrame(p1, p2, p3)
 	-- upvalues: reactGlobalsModule (ref), describeComponentFrame (write)
-	return describeComponentFrame(tostring(p10), p11, if reactGlobalsModule.__DEV__ and p12 then if type(p12) == "function" then debug.info(p12, "n") elseif type(p12) == "table" then tostring(p12) else nil else nil)
+	return describeComponentFrame(tostring(p1), p2, if reactGlobalsModule.__DEV__ and p3 then if type(p3) == "function" then debug.info(p3, "n") elseif type(p3) == "table" then tostring(p3) else nil else nil)
 end
 
-local function describeFunctionComponentFrame(p13, p14, p15)
+local function describeFunctionComponentFrame(p1, p2, p3)
 	-- upvalues: reactGlobalsModule (ref), describeComponentFrame (write)
-	return if p13 then describeComponentFrame(if type(p13) == "function" then debug.info(p13, "n") else tostring(p13), p14, if reactGlobalsModule.__DEV__ and p15 then if type(p15) == "function" then debug.info(p15, "n") elseif type(p15) == "table" then tostring(p15) else nil else nil) else ""
+	return if p1 then describeComponentFrame(if type(p1) == "function" then debug.info(p1, "n") else tostring(p1), p2, if reactGlobalsModule.__DEV__ and p3 then if type(p3) == "function" then debug.info(p3, "n") elseif type(p3) == "table" then tostring(p3) else nil else nil) else ""
 end
 
-local function describeUnknownElementTypeFrameInDEV(p16, p17, p18)
+local function describeUnknownElementTypeFrameInDEV(p1, p2, p3)
 	-- upvalues: reactGlobalsModule (ref), describeClassComponentFrame (ref), describeFunctionComponentFrame (write), describeBuiltInComponentFrame (ref), REACT_SUSPENSE_TYPE (ref), REACT_SUSPENSE_LIST_TYPE (ref), REACT_FORWARD_REF_TYPE (ref), REACT_MEMO_TYPE (ref), describeUnknownElementTypeFrameInDEV (ref), REACT_BLOCK_TYPE (ref), REACT_LAZY_TYPE (ref)
 	if not reactGlobalsModule.__DEV__ then
 		return ""
-	elseif p16 == nil then
+	elseif p1 == nil then
 		return ""
-	elseif type(p16) == "table" and type(p16.__ctor) == "function" then
-		return describeClassComponentFrame(p16, p17, p18)
-	elseif type(p16) == "function" then
-		return describeFunctionComponentFrame(p16, p17, p18)
-	elseif type(p16) == "string" then
-		return describeBuiltInComponentFrame(p16, p17, p18)
-	elseif p16 == REACT_SUSPENSE_TYPE then
-		return describeBuiltInComponentFrame("Suspense", p17, p18)
-	elseif p16 == REACT_SUSPENSE_LIST_TYPE then
-		return describeBuiltInComponentFrame("SuspenseList", p17, p18)
-	elseif type(p16) == "table" then
-		local var24 = p16["$$typeof"]
+	elseif type(p1) == "table" and type(p1.__ctor) == "function" then
+		return describeClassComponentFrame(p1, p2, p3)
+	elseif type(p1) == "function" then
+		return describeFunctionComponentFrame(p1, p2, p3)
+	elseif type(p1) == "string" then
+		return describeBuiltInComponentFrame(p1, p2, p3)
+	elseif p1 == REACT_SUSPENSE_TYPE then
+		return describeBuiltInComponentFrame("Suspense", p2, p3)
+	elseif p1 == REACT_SUSPENSE_LIST_TYPE then
+		return describeBuiltInComponentFrame("SuspenseList", p2, p3)
+	elseif type(p1) == "table" then
+		local var3 = p1["$$typeof"]
 		
-		if var24 == REACT_FORWARD_REF_TYPE then
-			return describeFunctionComponentFrame(p16.render, p17, p18)
-		elseif var24 == REACT_MEMO_TYPE then
-			return describeUnknownElementTypeFrameInDEV(p16.type, p17, p18)
-		elseif var24 == REACT_BLOCK_TYPE then
-			return describeFunctionComponentFrame(p16._render, p17, p18)
-		elseif var24 == REACT_LAZY_TYPE then
-			local payload = p16._payload
-			local init = p16._init
+		if var3 == REACT_FORWARD_REF_TYPE then
+			return describeFunctionComponentFrame(p1.render, p2, p3)
+		elseif var3 == REACT_MEMO_TYPE then
+			return describeUnknownElementTypeFrameInDEV(p1.type, p2, p3)
+		elseif var3 == REACT_BLOCK_TYPE then
+			return describeFunctionComponentFrame(p1._render, p2, p3)
+		elseif var3 == REACT_LAZY_TYPE then
+			local payload = p1._payload
+			local init = p1._init
 			local ok, status = pcall(function()
-				-- upvalues: describeUnknownElementTypeFrameInDEV (copy), init (ref), payload (ref), p17 (ref), p18 (ref)
-				describeUnknownElementTypeFrameInDEV(init(payload), p17, p18)
+				-- upvalues: describeUnknownElementTypeFrameInDEV (copy), init (ref), payload (ref), p2 (ref), p3 (ref)
+				describeUnknownElementTypeFrameInDEV(init(payload), p2, p3)
 			end)
 			
 			return if ok then status else ""

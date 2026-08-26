@@ -6,26 +6,26 @@ local function _()
 	return game:GetEngineFeature("PinShortcutServiceEnabled")
 end
 
-return function(p0, _, p1, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), pinExperienceShortcut (ref)
-	local var1 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = pinExperienceShortcut
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
 	local var2 = tonumber(var1.placeId)
 	
 	if var2 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing placeId",
 			propName = "placeId",
 			name = pinExperienceShortcut
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
@@ -34,14 +34,14 @@ return function(p0, _, p1, _)
 	
 	if game:GetEngineFeature("PinShortcutServiceEnabled") then
 		task.spawn(function()
-			-- upvalues: p1 (ref), sduiErrorType (copy), pinExperienceShortcut (copy), var2 (ref), universeId (ref), gameName (ref)
+			-- upvalues: p2 (ref), sduiErrorType (copy), pinExperienceShortcut (copy), var2 (ref), universeId (ref), gameName (ref)
 			local ok, status = pcall(game.GetService, game, "PinShortcutService")
 			
 			if not ok or status == nil then
-				p1.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
+				p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
 					message = "PinShortcutService unavailable",
 					name = pinExperienceShortcut
-				}, p1.appPage)
+				}, p2.appPage)
 				
 				return
 			end
@@ -51,10 +51,10 @@ return function(p0, _, p1, _)
 			end)
 			
 			if not ok_1 then
-				p1.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
+				p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
 					name = pinExperienceShortcut,
 					message = tostring(status_1)
-				}, p1.appPage)
+				}, p2.appPage)
 			end
 		end)
 		

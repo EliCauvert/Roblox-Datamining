@@ -33,9 +33,9 @@ movementModeEntry.validateProps = t.strictInterface({
 })
 movementModeEntry.defaultProps = { canOpen = true }
 
-function movementModeEntry.init(p0)
+function movementModeEntry.init(p1)
 	-- upvalues: userGameSettingsService (ref), playerScripts (ref), localPlayer (ref)
-	p0:setState({
+	p1:setState({
 		selectedComputerMode = userGameSettingsService.ComputerMovementMode,
 		computerOptions = playerScripts and playerScripts:GetRegisteredComputerMovementModes() or {},
 		developerComputerMode = localPlayer.DevComputerMovementMode
@@ -77,17 +77,17 @@ function movementModeEntry.render(p1)
 	if #p1.state.computerOptions == 0 then
 		return roact.createFragment(t)
 	end
-	local var18 = p1.state.developerComputerMode ~= Enum.DevComputerMovementMode.UserChoice
+	local var1 = p1.state.developerComputerMode ~= Enum.DevComputerMovementMode.UserChoice
 	local t_3 = {}
-	local var20 = 0
+	local var2 = 0
 	
-	if not var18 then
+	if not var1 then
 		for i, v in ipairs(p1.state.computerOptions) do
 			t_3[i] = t_1[v]
 			assert(t_3[i] ~= nil, "Movement mode " .. v.Name .. " has no localization key")
 			
 			if p1.state.selectedComputerMode.Value == v.Value then
-				var20 = i
+				var2 = i
 			end
 		end
 	end
@@ -108,18 +108,18 @@ function movementModeEntry.render(p1)
 			AnchorPoint = Vector2.new(0, 0)
 		}),
 		Dropdown = withLocalizationModule({
-			placeholder = if var18 then t_2[p1.state.developerComputerMode] else nil
+			placeholder = if var1 then t_2[p1.state.developerComputerMode] else nil
 		})(function(p2)
-			-- upvalues: roact (copy), dropDownSelectionModule (copy), t_3 (ref), var20 (write), var18 (ref), p1 (ref), userGameSettingsService (copy), sendAnalyticsModule (copy), constantsModule (copy)
+			-- upvalues: roact (copy), dropDownSelectionModule (copy), t_3 (ref), var2 (write), var1 (ref), p1 (ref), userGameSettingsService (copy), sendAnalyticsModule (copy), constantsModule (copy)
 			return roact.createElement(dropDownSelectionModule, {
 				localize = true,
 				selectionParentName = "MovementModeEntryDropdown",
 				Size = UDim2.new(1, 0, 0, 44),
 				Position = UDim2.new(0, 0, 0, 56),
 				selections = t_3,
-				selectedIndex = var20,
+				selectedIndex = var2,
 				placeHolderText = p2.placeholder,
-				enabled = not var18,
+				enabled = not var1,
 				canOpen = p1.props.canOpen,
 				canCaptureFocus = p1.props.canCaptureFocus,
 				selectionChanged = function(p3)
@@ -129,7 +129,7 @@ function movementModeEntry.render(p1)
 				end
 			})
 		end),
-		LockedLabel = var18 and roact.createElement(developerLockLabelModule, {
+		LockedLabel = var1 and roact.createElement(developerLockLabelModule, {
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
 			Size = UDim2.new(1, -72, 0.25, 0)

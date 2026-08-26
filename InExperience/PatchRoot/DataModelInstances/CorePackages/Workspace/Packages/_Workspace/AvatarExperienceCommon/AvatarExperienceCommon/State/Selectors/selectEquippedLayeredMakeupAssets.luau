@@ -1,8 +1,8 @@
 ﻿local constantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: constantsModule (ref)
-	local equippedAssets = p0.AvatarExperience.AvatarEditor.Character.EquippedAssets
+	local equippedAssets = p1.AvatarExperience.AvatarEditor.Character.EquippedAssets
 	
 	if equippedAssets == nil then
 		return {}

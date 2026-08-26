@@ -15,30 +15,30 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), popover (ref), popoverSide (ref), popoverAlign (ref), radius (ref), fFlagProfilePlatformEnableTransferTooltipContrastModule (ref), view (ref), text (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref)
-	local var4 = useTokens()
+	local var1 = useTokens()
 	
-	if not p0.isOpen or not p0.text or p0.text == "" then
+	if not p1.isOpen or not p1.text or p1.text == "" then
 		return nil
 	end
-	local var5 = if p0.title and p0.title ~= "" then p0.title else nil
+	local var2 = if p1.title and p1.title ~= "" then p1.title else nil
 	
-	return reactModule.createElement(popover.Root, { isOpen = p0.isOpen }, {
-		Anchor = reactModule.createElement(popover.Anchor, { anchorRef = p0.anchorRef }),
+	return reactModule.createElement(popover.Root, { isOpen = p1.isOpen }, {
+		Anchor = reactModule.createElement(popover.Anchor, { anchorRef = p1.anchorRef }),
 		Content = reactModule.createElement(popover.Content, {
 			hasArrow = true,
-			side = { position = popoverSide.Top, offset = var4.Padding.Medium },
+			side = { position = popoverSide.Top, offset = var1.Padding.Medium },
 			align = popoverAlign.End,
 			radius = radius.Medium,
-			backgroundStyle = if fFlagProfilePlatformEnableTransferTooltipContrastModule then var4.Color.System.Contrast else nil,
-			onPressedOutside = p0.onPressedOutside
+			backgroundStyle = if fFlagProfilePlatformEnableTransferTooltipContrastModule then var1.Color.System.Contrast else nil,
+			onPressedOutside = p1.onPressedOutside
 		}, {
-			Layout = if var5 == nil or var5 == "" then reactModule.createElement(view, {
+			Layout = if var2 == nil or var2 == "" then reactModule.createElement(view, {
 				tag = "row align-y-center flex-between gap-x-small padding-x-small padding-y-small auto-xy"
 			}, {
 				TooltipText = reactModule.createElement(text, {
-					Text = p0.text,
+					Text = p1.text,
 					tag = {
 						["auto-xy text-body-small content-inverse-default"] = fFlagProfilePlatformEnableTransferTooltipContrastModule,
 						["auto-xy text-body-small content-default"] = not fFlagProfilePlatformEnableTransferTooltipContrastModule
@@ -47,7 +47,7 @@ return function(p0)
 				CloseButton = reactModule.createElement(iconButton, {
 					icon = iconName.X,
 					size = iconSize.XSmall,
-					onActivated = p0.onClose,
+					onActivated = p1.onClose,
 					variant = if fFlagProfilePlatformEnableTransferTooltipContrastModule then buttonVariant.OverMedia else nil
 				})
 			}) else reactModule.createElement(view, {
@@ -57,7 +57,7 @@ return function(p0)
 					tag = "row align-y-center flex-between size-full-0 auto-y"
 				}, {
 					Title = reactModule.createElement(text, {
-						Text = var5,
+						Text = var2,
 						tag = {
 							["auto-xy text-title-small content-inverse-emphasis"] = fFlagProfilePlatformEnableTransferTooltipContrastModule,
 							["auto-xy text-title-small content-emphasis"] = not fFlagProfilePlatformEnableTransferTooltipContrastModule
@@ -66,12 +66,12 @@ return function(p0)
 					CloseButton = reactModule.createElement(iconButton, {
 						icon = iconName.X,
 						size = iconSize.XSmall,
-						onActivated = p0.onClose,
+						onActivated = p1.onClose,
 						variant = if fFlagProfilePlatformEnableTransferTooltipContrastModule then buttonVariant.OverMedia else nil
 					})
 				}),
 				Body = reactModule.createElement(text, {
-					Text = p0.text,
+					Text = p1.text,
 					tag = {
 						["auto-xy text-body-small content-inverse-default"] = fFlagProfilePlatformEnableTransferTooltipContrastModule,
 						["auto-xy text-body-small content-default"] = not fFlagProfilePlatformEnableTransferTooltipContrastModule

@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if p0 == nil then 0 else utf8.len(p0) or p0:len()
+﻿return function(p1)
+	return if p1 == nil then 0 else utf8.len(p1) or p1:len()
 end

@@ -12,34 +12,34 @@ textBoxStateWrapper.defaultProps = {
 	IconSize = UDim2.new(1, 0, 1, 0)
 }
 
-function textBoxStateWrapper.init(p0)
-	p0:setState({ Focused = false, Hover = false })
+function textBoxStateWrapper.init(p1)
+	p1:setState({ Focused = false, Hover = false })
 	
 	function p0.onMouseEnter()
-		-- upvalues: p0 (ref)
-		p0:setState({ Hover = true })
+		-- upvalues: p1 (ref)
+		p1:setState({ Hover = true })
 	end
 	
 	function p0.onMouseLeave()
-		-- upvalues: p0 (ref)
-		p0:setState({ Hover = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ Hover = false })
 	end
 	
 	function p0.onFocused(...)
-		-- upvalues: p0 (ref)
-		p0:setState({ Focused = true })
+		-- upvalues: p1 (ref)
+		p1:setState({ Focused = true })
 		
-		if p0.props.ChildProps.onFocused then
-			p0.props.ChildProps.onFocused(...)
+		if p1.props.ChildProps.onFocused then
+			p1.props.ChildProps.onFocused(...)
 		end
 	end
 	
 	function p0.onFocusLost(...)
-		-- upvalues: p0 (ref)
-		p0:setState({ Focused = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ Focused = false })
 		
-		if p0.props.ChildProps.onFocusLost then
-			p0.props.ChildProps.onFocusLost(...)
+		if p1.props.ChildProps.onFocusLost then
+			p1.props.ChildProps.onFocusLost(...)
 		end
 	end
 end
@@ -66,7 +66,7 @@ function textBoxStateWrapper.render(p1)
 			transparency = p2.Theme.IconDefault.Transparency
 		end
 		local createElement = roactModule.createElement
-		local var4 = "Frame"
+		local var1 = "Frame"
 		local t = {
 			AnchorPoint = p1.props.AnchorPoint,
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -140,11 +140,11 @@ function textBoxStateWrapper.render(p1)
 				})
 			})
 		}
-		local var7 = errorText
+		local var2 = errorText
 		
-		if var7 then
-			var7 = roactModule.createElement
-			var7 = var7("TextLabel", {
+		if var2 then
+			var2 = roactModule.createElement
+			var2 = var2("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				TextWrapped = true,
@@ -162,15 +162,15 @@ function textBoxStateWrapper.render(p1)
 				})
 			})
 		end
-		t_1.ErrorText = var7
-		local var8 = not errorText
+		t_1.ErrorText = var2
+		local var3 = not errorText
 		
-		if var8 then
-			var8 = helpComponent
+		if var3 then
+			var3 = helpComponent
 			
-			if var8 then
-				var8 = roactModule.createElement
-				var8 = var8("Frame", {
+			if var3 then
+				var3 = roactModule.createElement
+				var3 = var3("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					LayoutOrder = 4,
@@ -185,9 +185,9 @@ function textBoxStateWrapper.render(p1)
 				})
 			end
 		end
-		t_1.HelpComponentWrapper = var8
+		t_1.HelpComponentWrapper = var3
 		
-		return createElement(var4, t, t_1)
+		return createElement(var1, t, t_1)
 	end)
 end
 

@@ -1,30 +1,30 @@
 ﻿local reactGlobalsModule = require(script.Parent.Parent.ReactGlobals)
 local describeError = require(script.Parent["ErrorHandling.roblox"]).describeError
 
-return function(p0, _, p1, p2, ...)
+return function(p1, _, p2, p3, ...)
 	-- upvalues: reactGlobalsModule (ref), describeError (ref)
-	local var2
+	local var1
 	local _ = nil
-	local var1 = nil
+	local var2 = nil
 	
 	if reactGlobalsModule.__YOLO__ then
-		var2 = true
+		var1 = true
 		
-		if p2 == nil then
-			p1(...)
+		if p3 == nil then
+			p2(...)
 		else
-			p1(p2, ...)
+			p2(p3, ...)
 		end
-	elseif p2 == nil then
-		local ok, status = xpcall(p1, describeError, ...)
-		var2 = ok
-		var1 = status
+	elseif p3 == nil then
+		local ok, status = xpcall(p2, describeError, ...)
+		var1 = ok
+		var2 = status
 	else
-		local ok, status = xpcall(p1, describeError, p2, ...)
-		var2 = ok
-		var1 = status
+		local ok, status = xpcall(p2, describeError, p3, ...)
+		var1 = ok
+		var2 = status
 	end
-	if not var2 then
-		p0.onError(var1)
+	if not var1 then
+		p1.onError(var2)
 	end
 end

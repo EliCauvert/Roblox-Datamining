@@ -4,267 +4,267 @@ local historyPageUtilsModule = require(script.Parent.historyPageUtils)
 local _ = require(script.Parent.sessionDeps)
 
 return {
-	createHistoryPolling = function(p0)
+	createHistoryPolling = function(p1)
 		-- upvalues: historyPageUtilsModule (ref), constantsModule (ref)
-		local function pollSessionHistory(p1, p2, p3, p4)
-			-- upvalues: p0 (ref), historyPageUtilsModule (copy)
-			if p4() then
+		local function pollSessionHistory(p2, p3, p4, p5)
+			-- upvalues: p1 (ref), historyPageUtilsModule (copy)
+			if p5() then
 				return false
 			end
-			local var4 = p0.deps.sessionLoad(p1, nil)
-			local var5 = historyPageUtilsModule.awaitRequestState(var4.state, os.clock() + p0.rpcTimeoutSeconds)
+			local var1 = p1.deps.sessionLoad(p2, nil)
+			local var2 = historyPageUtilsModule.awaitRequestState(var1.state, os.clock() + p1.rpcTimeoutSeconds)
 			
-			if var5.status == "pending" then
-				var4.dispose()
+			if var2.status == "pending" then
+				var1.dispose()
 				
 				return false
-			elseif p4() or var5.status ~= "succeeded" then
+			elseif p5() or var2.status ~= "succeeded" then
 				return false
 			end
-			local sessionLoadHistory = historyPageUtilsModule.getSessionLoadHistory(var5.result)
+			local sessionLoadHistory = historyPageUtilsModule.getSessionLoadHistory(var2.result)
 			
-			if #sessionLoadHistory == 0 or p4() then
+			if #sessionLoadHistory == 0 or p5() then
 				return false
-			elseif p4() then
+			elseif p5() then
 				return false
 			end
-			p0.mergeHistoryPage(sessionLoadHistory, p0.getNextHistoryPageToken())
-			local var7 = p0.deps.ingestSessionHistory(p1, sessionLoadHistory, p2)
+			p1.mergeHistoryPage(sessionLoadHistory, p1.getNextHistoryPageToken())
+			local var3 = p1.deps.ingestSessionHistory(p2, sessionLoadHistory, p3)
 			
-			if p3 ~= nil then
-				for i, v in var7 do
-					p3(v)
+			if p4 ~= nil then
+				for i, v in var3 do
+					p4(v)
 				end
 			end
-			return if p4() then false else #var7 > 0
+			return if p5() then false else #var3 > 0
 		end
 		
-		local function startPollingTurnFromHistory(p5, p6, p7)
-			-- upvalues: historyPageUtilsModule (copy), constantsModule (copy), p0 (ref), pollSessionHistory (ref)
-			p7 = p7 or {}
-			local var9 = historyPageUtilsModule.resolveNonNegativeNumber(p7.rtnIdleFallbackSeconds, constantsModule.getRtnIdleFallbackSeconds())
-			local var10 = historyPageUtilsModule.resolveNonNegativeNumber(p7.rtnSequenceGapFallbackSeconds, constantsModule.getRtnSequenceGapFallbackSeconds())
-			local var11 = historyPageUtilsModule.resolvePositiveNumber(p7.pollMinIntervalSeconds, constantsModule.getPollMinIntervalSeconds())
-			local var12 = historyPageUtilsModule.resolvePositiveNumber(p7.pollMaxIntervalSeconds, constantsModule.getPollMaxIntervalSeconds())
+		local function startPollingTurnFromHistory(p6, p7, p8)
+			-- upvalues: historyPageUtilsModule (copy), constantsModule (copy), p1 (ref), pollSessionHistory (ref)
+			p8 = p8 or {}
+			local var4 = historyPageUtilsModule.resolveNonNegativeNumber(p8.rtnIdleFallbackSeconds, constantsModule.getRtnIdleFallbackSeconds())
+			local var5 = historyPageUtilsModule.resolveNonNegativeNumber(p8.rtnSequenceGapFallbackSeconds, constantsModule.getRtnSequenceGapFallbackSeconds())
+			local var6 = historyPageUtilsModule.resolvePositiveNumber(p8.pollMinIntervalSeconds, constantsModule.getPollMinIntervalSeconds())
+			local var7 = historyPageUtilsModule.resolvePositiveNumber(p8.pollMaxIntervalSeconds, constantsModule.getPollMaxIntervalSeconds())
 			
-			if var12 < var11 then
-				var12 = var11
+			if var7 < var6 then
+				var7 = var6
 			end
-			local afterSequenceId = p7.afterSequenceId
-			local noteProcessedSequenceNumber = p6.noteProcessedSequenceNumber
+			local afterSequenceId = p8.afterSequenceId
+			local noteProcessedSequenceNumber = p7.noteProcessedSequenceNumber
 			
 			if afterSequenceId ~= nil and noteProcessedSequenceNumber ~= nil then
 				noteProcessedSequenceNumber(afterSequenceId)
 			end
-			local var13 = false
-			local var14 = false
-			local var15 = false
-			local var16 = false
-			local var17 = false
-			local var18 = var11
+			local var8 = false
+			local var9 = false
+			local var10 = false
+			local var11 = false
+			local var12 = false
+			local var13 = var6
 			local processTime = os.clock()
-			local var20 = false
-			local var21 = 0
-			local var22 = 0
-			local var23 = 0
+			local var14 = false
+			local var15 = 0
+			local var16 = 0
+			local var17 = 0
 			
 			local function shouldStopPolling()
-				-- upvalues: var13 (write), p6 (ref), p0 (copy), p5 (ref)
-				return var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5)
+				-- upvalues: var8 (write), p7 (ref), p1 (copy), p6 (ref)
+				return var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)
 			end
 			
-			local var25 = nil
+			local var18 = nil
 			
 			local function _()
-				-- upvalues: var14 (write), var18 (write), var11 (ref), var23 (write)
-				if var14 then
-					var14 = false
-					var18 = var11
-					var23 += 1
+				-- upvalues: var9 (write), var13 (write), var6 (ref), var17 (write)
+				if var9 then
+					var9 = false
+					var13 = var6
+					var17 += 1
 					
 					return
 				end
 			end
 			
 			local _ = function()
-				-- upvalues: var14 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), var18 (write), var11 (ref), var25 (write)
-				if var14 or (var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5)) then
+				-- upvalues: var9 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), var13 (write), var6 (ref), var18 (write)
+				if var9 or (var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)) then
 					return
 				end
-				var14 = true
-				var18 = var11
-				var25(0)
+				var9 = true
+				var13 = var6
+				var18(0)
 			end
 			
 			local _ = function()
-				-- upvalues: var13 (write), p6 (ref), p0 (copy), p5 (ref), var14 (write), var18 (write), var11 (ref), var23 (write), var15 (write), var17 (write), var25 (write)
-				if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
-					if var14 then
-						var14 = false
-						var18 = var11
-						var23 += 1
+				-- upvalues: var8 (write), p7 (ref), p1 (copy), p6 (ref), var9 (write), var13 (write), var6 (ref), var17 (write), var10 (write), var12 (write), var18 (write)
+				if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
+					if var9 then
+						var9 = false
+						var13 = var6
+						var17 += 1
 						
 						return
 					end
 					return
-				elseif var15 or var17 then
-					if var14 then return end
-					if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
+				elseif var10 or var12 then
+					if var9 then return end
+					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
 						return
 					end
-					var14 = true
-					var18 = var11
-					var25(0)
+					var9 = true
+					var13 = var6
+					var18(0)
 					
 					return
-				elseif not var14 then return end
-				var14 = false
-				var18 = var11
-				var23 += 1
+				elseif not var9 then return end
+				var9 = false
+				var13 = var6
+				var17 += 1
 			end
 			
 			local function refreshSequenceGapState()
-				-- upvalues: p6 (ref), var16 (write), var17 (write), var22 (write), var10 (ref), var13 (write), p0 (copy), p5 (ref), var14 (write), var18 (write), var11 (ref), var23 (write), var15 (write), var25 (write)
-				local hasSequenceGap = p6.hasSequenceGap
-				local var29 = hasSequenceGap ~= nil and hasSequenceGap()
+				-- upvalues: p7 (ref), var11 (write), var12 (write), var16 (write), var5 (ref), var8 (write), p1 (copy), p6 (ref), var9 (write), var13 (write), var6 (ref), var17 (write), var10 (write), var18 (write)
+				local hasSequenceGap = p7.hasSequenceGap
+				local var19 = hasSequenceGap ~= nil and hasSequenceGap()
 				
-				if var29 == var16 then return end
-				var16 = var29
-				var17 = false
-				var22 += 1
-				local var30 = var22
+				if var19 == var11 then return end
+				var11 = var19
+				var12 = false
+				var16 += 1
+				local var20 = var16
 				
-				if var29 then
-					task.delay(var10, function()
-						-- upvalues: var30 (ref), var22 (copy), var13 (copy), p6 (copy), p0 (copy), p5 (copy), var16 (copy), var17 (copy), var14 (copy), var18 (copy), var11 (copy), var23 (copy), var15 (copy), var25 (copy)
-						if var30 ~= var22 or (var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5)) or not var16 then return end
-						var17 = true
+				if var19 then
+					task.delay(var5, function()
+						-- upvalues: var20 (ref), var16 (copy), var8 (copy), p7 (copy), p1 (copy), p6 (copy), var11 (copy), var12 (copy), var9 (copy), var13 (copy), var6 (copy), var17 (copy), var10 (copy), var18 (copy)
+						if var20 ~= var16 or (var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)) or not var11 then return end
+						var12 = true
 						
-						if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
-							if var14 then
-								var14 = false
-								var18 = var11
-								var23 += 1
+						if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
+							if var9 then
+								var9 = false
+								var13 = var6
+								var17 += 1
 								
 								return
 							end
 							return
 						end
-						if not var14 then
-							if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then return end
-							var14 = true
-							var18 = var11
-							var25(0)
+						if not var9 then
+							if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then return end
+							var9 = true
+							var13 = var6
+							var18(0)
 							
 							return
 						end
 					end)
 				end
-				if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
-					if var14 then
-						var14 = false
-						var18 = var11
-						var23 += 1
+				if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
+					if var9 then
+						var9 = false
+						var13 = var6
+						var17 += 1
 						
 						return
 					end
 					return
-				elseif var15 then
-					if var14 then return end
-					if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
+				elseif var10 then
+					if var9 then return end
+					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
 						return
 					end
-					var14 = true
-					var18 = var11
-					var25(0)
+					var9 = true
+					var13 = var6
+					var18(0)
 					
 					return
-				elseif not var14 then return end
-				var14 = false
-				var18 = var11
-				var23 += 1
+				elseif not var9 then return end
+				var9 = false
+				var13 = var6
+				var17 += 1
 			end
 			
 			local _ = nil
 			
-			local var27 = function(p8)
-				-- upvalues: var20 (write), var21 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), var9 (ref), processTime (write), var27 (write), var15 (write), var14 (write), var18 (write), var11 (ref), var23 (write), var17 (write), var25 (write)
-				if var20 then
+			local var19 = function(p9)
+				-- upvalues: var14 (write), var15 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), var4 (ref), processTime (write), var19 (write), var10 (write), var9 (write), var13 (write), var6 (ref), var17 (write), var12 (write), var18 (write)
+				if var14 then
 					return
 				end
-				var20 = true
-				task.delay(p8, function()
-					-- upvalues: var20 (copy), var21 (ref), var21 (copy), var13 (copy), p6 (copy), p0 (copy), p5 (copy), var9 (copy), processTime (copy), var27 (copy), var15 (copy), var14 (copy), var18 (copy), var11 (copy), var23 (copy), var17 (copy), var25 (copy)
-					var20 = false
+				var14 = true
+				task.delay(p9, function()
+					-- upvalues: var14 (copy), var15 (ref), var15 (copy), var8 (copy), p7 (copy), p1 (copy), p6 (copy), var4 (copy), processTime (copy), var19 (copy), var10 (copy), var9 (copy), var13 (copy), var6 (copy), var17 (copy), var12 (copy), var18 (copy)
+					var14 = false
 					
-					if var21 ~= var21 or (var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5)) then return end
-					local var31 = var9 - (os.clock() - processTime)
+					if var15 ~= var15 or (var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)) then return end
+					local var20 = var4 - (os.clock() - processTime)
 					
-					if var31 > 0 then
-						var27(var31)
+					if var20 > 0 then
+						var19(var20)
 						
 						return
 					end
-					var15 = true
+					var10 = true
 					
-					if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
-						if var14 then
-							var14 = false
-							var18 = var11
-							var23 += 1
+					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
+						if var9 then
+							var9 = false
+							var13 = var6
+							var17 += 1
 							
 							return
 						end
 						return
-					elseif var14 then return end
-					if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
+					elseif var9 then return end
+					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
 						return
 					end
-					var14 = true
-					var18 = var11
-					var25(0)
+					var9 = true
+					var13 = var6
+					var18(0)
 				end)
 			end
 			
 			local _ = function()
-				-- upvalues: processTime (write), var15 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), var14 (write), var18 (write), var11 (ref), var23 (write), var17 (write), var25 (write), var27 (write), var9 (ref)
+				-- upvalues: processTime (write), var10 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), var9 (write), var13 (write), var6 (ref), var17 (write), var12 (write), var18 (write), var19 (write), var4 (ref)
 				processTime = os.clock()
-				var15 = false
+				var10 = false
 				
-				if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
-					if var14 then
-						var14 = false
-						var18 = var11
-						var23 += 1
+				if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
+					if var9 then
+						var9 = false
+						var13 = var6
+						var17 += 1
 					end
-				elseif var17 then
-					if not var14 and (not var13 and (not p6.state(false).isDone and p0.getCasSessionId() == p5)) then
-						var14 = true
-						var18 = var11
-						var25(0)
+				elseif var12 then
+					if not var9 and (not var8 and (not p7.state(false).isDone and p1.getCasSessionId() == p6)) then
+						var9 = true
+						var13 = var6
+						var18(0)
 					end
-				elseif var14 then
-					var14 = false
-					var18 = var11
-					var23 += 1
+				elseif var9 then
+					var9 = false
+					var13 = var6
+					var17 += 1
 				end
-				var27(var9)
+				var19(var4)
 			end
 			
-			var25 = function(p9)
-				-- upvalues: var23 (write), var14 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), pollSessionHistory (copy), afterSequenceId (ref), p7 (ref), shouldStopPolling (ref), var18 (write), var11 (ref), refreshSequenceGapState (ref), var15 (write), var17 (write), var25 (write), var12 (write), constantsModule (copy)
-				var23 += 1
-				local var32 = var23
+			var18 = function(p9)
+				-- upvalues: var17 (write), var9 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), pollSessionHistory (copy), afterSequenceId (ref), p8 (ref), shouldStopPolling (ref), var13 (write), var6 (ref), refreshSequenceGapState (ref), var10 (write), var12 (write), var18 (write), var7 (write), constantsModule (copy)
+				var17 += 1
+				local var20 = var17
 				task.delay(p9, function()
-					-- upvalues: var32 (ref), var23 (copy), var14 (copy), var13 (copy), p6 (copy), p0 (copy), p5 (copy), pollSessionHistory (copy), afterSequenceId (copy), p7 (copy), shouldStopPolling (copy), var18 (copy), var11 (copy), refreshSequenceGapState (copy), var15 (copy), var17 (copy), var25 (copy), var12 (copy), constantsModule (copy)
-					if var32 ~= var23 or not var14 or (var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5)) then return end
-					local var33 = pollSessionHistory(p5, afterSequenceId, p7.onDroppedChatMessage, shouldStopPolling)
+					-- upvalues: var20 (ref), var17 (copy), var9 (copy), var8 (copy), p7 (copy), p1 (copy), p6 (copy), pollSessionHistory (copy), afterSequenceId (copy), p8 (copy), shouldStopPolling (copy), var13 (copy), var6 (copy), refreshSequenceGapState (copy), var10 (copy), var12 (copy), var18 (copy), var7 (copy), constantsModule (copy)
+					if var20 ~= var17 or not var9 or (var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6)) then return end
+					local var21 = pollSessionHistory(p6, afterSequenceId, p8.onDroppedChatMessage, shouldStopPolling)
 					
-					if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
-						if var14 then
-							var14 = false
-							var18 = var11
-							var23 += 1
+					if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
+						if var9 then
+							var9 = false
+							var13 = var6
+							var17 += 1
 							
 							return
 						end
@@ -272,26 +272,26 @@ return {
 					else
 						refreshSequenceGapState()
 						
-						if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
-							if var14 then
-								var14 = false
-								var18 = var11
-								var23 += 1
+						if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
+							if var9 then
+								var9 = false
+								var13 = var6
+								var17 += 1
 							end
-						elseif var15 or var17 then
-							if not var14 and (not var13 and (not p6.state(false).isDone and p0.getCasSessionId() == p5)) then
-								var14 = true
-								var18 = var11
-								var25(0)
+						elseif var10 or var12 then
+							if not var9 and (not var8 and (not p7.state(false).isDone and p1.getCasSessionId() == p6)) then
+								var9 = true
+								var13 = var6
+								var18(0)
 							end
-						elseif var14 then
-							var14 = false
-							var18 = var11
-							var23 += 1
+						elseif var9 then
+							var9 = false
+							var13 = var6
+							var17 += 1
 						end
-						if var14 then
-							var18 = if var33 then var11 else math.min(var12, var18 * constantsModule.getPollBackoffMultiplier())
-							var25(var18)
+						if var9 then
+							var13 = if var21 then var6 else math.min(var7, var13 * constantsModule.getPollBackoffMultiplier())
+							var18(var13)
 							
 							return
 						end
@@ -299,53 +299,53 @@ return {
 				end)
 			end
 			
-			local var28 = p6.onNotification(function()
-				-- upvalues: processTime (write), var15 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), var14 (write), var18 (write), var11 (ref), var23 (write), var17 (write), var25 (write), var27 (write), var9 (ref), refreshSequenceGapState (ref)
+			local var20 = p7.onNotification(function()
+				-- upvalues: processTime (write), var10 (write), var8 (write), p7 (ref), p1 (copy), p6 (ref), var9 (write), var13 (write), var6 (ref), var17 (write), var12 (write), var18 (write), var19 (write), var4 (ref), refreshSequenceGapState (ref)
 				processTime = os.clock()
-				var15 = false
+				var10 = false
 				
-				if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
-					if var14 then
-						var14 = false
-						var18 = var11
-						var23 += 1
+				if var8 or (p7.state(false).isDone or p1.getCasSessionId() ~= p6) then
+					if var9 then
+						var9 = false
+						var13 = var6
+						var17 += 1
 					end
-				elseif var17 then
-					if not var14 and (not var13 and (not p6.state(false).isDone and p0.getCasSessionId() == p5)) then
-						var14 = true
-						var18 = var11
-						var25(0)
+				elseif var12 then
+					if not var9 and (not var8 and (not p7.state(false).isDone and p1.getCasSessionId() == p6)) then
+						var9 = true
+						var13 = var6
+						var18(0)
 					end
-				elseif var14 then
-					var14 = false
-					var18 = var11
-					var23 += 1
+				elseif var9 then
+					var9 = false
+					var13 = var6
+					var17 += 1
 				end
-				var27(var9)
+				var19(var4)
 				refreshSequenceGapState()
 			end)
 			refreshSequenceGapState()
 			processTime = os.clock()
-			var15 = false
-			var27(var9)
+			var10 = false
+			var19(var4)
 			
 			return function()
-				-- upvalues: var13 (write), var21 (write), var22 (write), var23 (write), var28 (ref)
-				var13 = true
-				var21 += 1
-				var22 += 1
-				var23 += 1
-				var28()
+				-- upvalues: var8 (write), var15 (write), var16 (write), var17 (write), var20 (ref)
+				var8 = true
+				var15 += 1
+				var16 += 1
+				var17 += 1
+				var20()
 			end
 		end
 		
 		return {
 			startPollingTurnFromHistory = startPollingTurnFromHistory,
-			startPollingActiveTurn = function(p10, p11)
-				-- upvalues: p0 (ref), startPollingTurnFromHistory (ref)
-				local activeTurnHandle = p0.deps.getActiveTurnHandle(p10)
+			startPollingActiveTurn = function(p6, p7)
+				-- upvalues: p1 (ref), startPollingTurnFromHistory (ref)
+				local activeTurnHandle = p1.deps.getActiveTurnHandle(p6)
 				
-				return if activeTurnHandle == nil then function() end else startPollingTurnFromHistory(p10, activeTurnHandle, p11)
+				return if activeTurnHandle == nil then function() end else startPollingTurnFromHistory(p6, activeTurnHandle, p7)
 			end
 		}
 	end

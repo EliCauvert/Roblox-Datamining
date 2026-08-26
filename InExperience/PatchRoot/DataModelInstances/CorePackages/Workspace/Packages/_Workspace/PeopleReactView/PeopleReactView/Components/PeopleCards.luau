@@ -27,183 +27,183 @@ local getFFlagPeoplePageLazyRenderCards = flags.GetFFlagPeoplePageLazyRenderCard
 local fFlagPeoplePageRemoveUseMemoElements = flags.FFlagPeoplePageRemoveUseMemoElements
 local fFlagPeopleCardsEnableVirtualizedGrid = flags.FFlagPeopleCardsEnableVirtualizedGrid
 local maxNumUniversesExposedToCardTooltip = game:DefineFastInt("MaxNumUniversesExposedToCardTooltip", 3)
-local var16 = false
+local var1 = false
 
-return reactModule.memo(function(p0)
-	-- upvalues: useTokens (ref), useScaledValue (ref), constantsModule (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), useCardLayoutValuesModule (ref), useCardWidthModule (ref), reactModule (ref), useGetPeopleServiceModule (ref), getFFlagPeoplePageEnablePersonSignalStore (ref), signalsReactModule (ref), getFFlagPeoplePageLazyRenderCards (ref), useLastInputMode (ref), usePreferredInput (ref), input (ref), var16 (write), maxNumUniversesExposedToCardTooltip (ref), fFlagPeoplePageRemoveUseMemoElements (ref), lazyPersonCardModule (ref), personCardModule (ref), localPlayer (ref), virtualizedGridModule (ref), view (ref)
-	local var26
+return reactModule.memo(function(p1)
+	-- upvalues: useTokens (ref), useScaledValue (ref), constantsModule (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), useCardLayoutValuesModule (ref), useCardWidthModule (ref), reactModule (ref), useGetPeopleServiceModule (ref), getFFlagPeoplePageEnablePersonSignalStore (ref), signalsReactModule (ref), getFFlagPeoplePageLazyRenderCards (ref), useLastInputMode (ref), usePreferredInput (ref), input (ref), var1 (write), maxNumUniversesExposedToCardTooltip (ref), fFlagPeoplePageRemoveUseMemoElements (ref), lazyPersonCardModule (ref), personCardModule (ref), localPlayer (ref), virtualizedGridModule (ref), view (ref)
+	local var2
 	local medium = useTokens().Gap.Medium
-	local var17 = useScaledValue(constantsModule.PEOPLEPAGE.PEOPLE_CARDS.MINIMUM_CARD_WIDTH)
+	local var3 = useScaledValue(constantsModule.PEOPLEPAGE.PEOPLE_CARDS.MINIMUM_CARD_WIDTH)
 	local _ = nil
-	local var18 = nil
-	local var19 = nil
-	local var20 = nil
-	local var21 = nil
+	local var4 = nil
+	local var5 = nil
+	local var6 = nil
+	local var7 = nil
 	
 	if fFlagPeopleCardsEnableVirtualizedGrid then
-		local var22, var23, var24, var25 = useCardLayoutValuesModule()
-		var26 = var22
-		var19 = var23
-		var20 = var24
-		var21 = var25
+		local var8, var9, var10, var11 = useCardLayoutValuesModule()
+		var2 = var8
+		var5 = var9
+		var6 = var10
+		var7 = var11
 	else
-		local var27, var28 = useCardWidthModule()
-		var26 = var27
-		var18 = var28
+		local var12, var13 = useCardWidthModule()
+		var2 = var12
+		var4 = var13
 	end
-	local var29 = nil
-	local var30 = nil
+	local var14 = nil
+	local var15 = nil
 	
 	if fFlagPeopleCardsEnableVirtualizedGrid then
-		local var31, var32 = reactModule.useState(false)
-		var29 = var31
-		var30 = var32
+		local var16, var17 = reactModule.useState(false)
+		var14 = var16
+		var15 = var17
 	end
-	local var33 = useGetPeopleServiceModule("PeopleListStore")
-	local var34 = if not getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalState(var33.people) else nil
-	local var35 = if getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalState(var33.peopleSignalMap.getCount) else nil
-	local var36 = if getFFlagPeoplePageLazyRenderCards() then useLastInputMode() else nil
-	local var37 = if getFFlagPeoplePageLazyRenderCards() then usePreferredInput() else nil
-	local var38 = if getFFlagPeoplePageLazyRenderCards() then reactModule.useMemo(function()
-		-- upvalues: var36 (ref), var37 (ref), input (copy)
-		return if var36 ~= "Focus" then var37 ~= input.Pointer else true
-	end, { var36, var37 }) else nil
-	local var39 = reactModule.useMemo(function()
-		-- upvalues: fFlagPeopleCardsEnableVirtualizedGrid (copy), var29 (write), var16 (copy), p0 (ref), constantsModule (copy), maxNumUniversesExposedToCardTooltip (copy)
-		if fFlagPeopleCardsEnableVirtualizedGrid and var29 or (var16 or not p0.getUniversesExposedTo) or not p0.addUniverseToExposureList then
+	local var18 = useGetPeopleServiceModule("PeopleListStore")
+	local var19 = if not getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalState(var18.people) else nil
+	local var20 = if getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalState(var18.peopleSignalMap.getCount) else nil
+	local var21 = if getFFlagPeoplePageLazyRenderCards() then useLastInputMode() else nil
+	local var22 = if getFFlagPeoplePageLazyRenderCards() then usePreferredInput() else nil
+	local var23 = if getFFlagPeoplePageLazyRenderCards() then reactModule.useMemo(function()
+		-- upvalues: var21 (ref), var22 (ref), input (copy)
+		return if var21 ~= "Focus" then var22 ~= input.Pointer else true
+	end, { var21, var22 }) else nil
+	local var24 = reactModule.useMemo(function()
+		-- upvalues: fFlagPeopleCardsEnableVirtualizedGrid (copy), var14 (write), var1 (copy), p1 (ref), constantsModule (copy), maxNumUniversesExposedToCardTooltip (copy)
+		if fFlagPeopleCardsEnableVirtualizedGrid and var14 or (var1 or not p1.getUniversesExposedTo) or not p1.addUniverseToExposureList then
 			return false
 		end
-		local var43 = 0
+		local var25 = 0
 		
-		for i, v in p0.getUniversesExposedTo(constantsModule.PEOPLEPAGE.CARD_TOOLTIP.UNIVERSES_EXPOSED_TO_CARD_TOOLTIP) do
+		for i, v in p1.getUniversesExposedTo(constantsModule.PEOPLEPAGE.CARD_TOOLTIP.UNIVERSES_EXPOSED_TO_CARD_TOOLTIP) do
 			if v ~= game.GameId then
-				var43 += 1
+				var25 += 1
 				continue
 			end
 			return false
 		end
-		if maxNumUniversesExposedToCardTooltip <= var43 then
+		if maxNumUniversesExposedToCardTooltip <= var25 then
 			return false
 		end
-		p0.addUniverseToExposureList(constantsModule.PEOPLEPAGE.CARD_TOOLTIP.UNIVERSES_EXPOSED_TO_CARD_TOOLTIP, game.GameId)
+		p1.addUniverseToExposureList(constantsModule.PEOPLEPAGE.CARD_TOOLTIP.UNIVERSES_EXPOSED_TO_CARD_TOOLTIP, game.GameId)
 		
 		return true
 	end, if fFlagPeopleCardsEnableVirtualizedGrid then {
-		var29,
-		p0.getUniversesExposedTo,
-		p0.addUniverseToExposureList
-	} else { p0.getUniversesExposedTo, p0.addUniverseToExposureList })
-	local var40 = reactModule.useCallback(function()
-		-- upvalues: var16 (copy), fFlagPeopleCardsEnableVirtualizedGrid (copy), var30 (write)
-		var16 = true
+		var14,
+		p1.getUniversesExposedTo,
+		p1.addUniverseToExposureList
+	} else { p1.getUniversesExposedTo, p1.addUniverseToExposureList })
+	local var26 = reactModule.useCallback(function()
+		-- upvalues: var1 (copy), fFlagPeopleCardsEnableVirtualizedGrid (copy), var15 (write)
+		var1 = true
 		
 		if fFlagPeopleCardsEnableVirtualizedGrid then
-			var30(true)
+			var15(true)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var40 (ref)
+		-- upvalues: var26 (ref)
 		return function()
-			-- upvalues: var40 (copy)
-			var40()
+			-- upvalues: var26 (copy)
+			var26()
 		end
 	end, {})
-	local var41 = reactModule.useCallback(function(p1)
-		-- upvalues: var18 (write), var17 (ref), medium (ref)
-		var18(var17, p1.AbsoluteSize.X, medium)
-	end, { var18, var17, medium })
+	local var27 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (write), var3 (ref), medium (ref)
+		var4(var3, p2.AbsoluteSize.X, medium)
+	end, { var4, var3, medium })
 	local t = {}
 	
 	if not fFlagPeopleCardsEnableVirtualizedGrid then
 		if not fFlagPeoplePageRemoveUseMemoElements then
 			t = if getFFlagPeoplePageEnablePersonSignalStore() then reactModule.useMemo(function()
-				-- upvalues: var33 (ref), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var26 (write), var39 (ref), localPlayer (copy), var40 (ref), p0 (ref), var38 (ref)
+				-- upvalues: var18 (ref), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var2 (write), var24 (ref), localPlayer (copy), var26 (ref), p1 (ref), var23 (ref)
 				local t = {}
-				var33.peopleSignalMap.iterateData(function(p2, p3)
-					-- upvalues: t (ref), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var26 (copy), var39 (copy), localPlayer (copy), var40 (copy), p0 (copy), var38 (copy)
+				var18.peopleSignalMap.iterateData(function(p2, p3)
+					-- upvalues: t (ref), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var2 (copy), var24 (copy), localPlayer (copy), var26 (copy), p1 (copy), var23 (copy)
 					t["PersonCard_" .. p2] = reactModule.createElement(if getFFlagPeoplePageLazyRenderCards() then lazyPersonCardModule else personCardModule, {
-						width = var26,
+						width = var2,
 						person = p3.getPerson(),
-						showTooltip = var39 and (localPlayer ~= nil and p2 == localPlayer.UserId),
-						onDismissTooltip = var40,
+						showTooltip = var24 and (localPlayer ~= nil and p2 == localPlayer.UserId),
+						onDismissTooltip = var26,
 						layoutOrder = p3.getOrder,
-						scrollingFrameStore = if getFFlagPeoplePageLazyRenderCards() then p0.scrollingFrameStore else nil,
-						shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then var38 else nil
+						scrollingFrameStore = if getFFlagPeoplePageLazyRenderCards() then p1.scrollingFrameStore else nil,
+						shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then var23 else nil
 					})
 				end, false)
 				
 				return t
-			end, { var35, var39, p0.scrollingFrameStore, var38 }) else reactModule.useMemo(function()
-				-- upvalues: var34 (ref), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var26 (write), var39 (ref), var40 (ref), p0 (ref), var38 (ref)
+			end, { var20, var24, p1.scrollingFrameStore, var23 }) else reactModule.useMemo(function()
+				-- upvalues: var19 (ref), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var2 (write), var24 (ref), var26 (ref), p1 (ref), var23 (ref)
 				local t = {}
 				
-				for i, v in var34 do
+				for i, v in var19 do
 					t["PersonCard_" .. v.UserId] = reactModule.createElement(if getFFlagPeoplePageLazyRenderCards() then lazyPersonCardModule else personCardModule, {
-						width = var26,
+						width = var2,
 						person = v,
-						showTooltip = var39 and i == 1,
-						onDismissTooltip = var40,
+						showTooltip = var24 and i == 1,
+						onDismissTooltip = var26,
 						layoutOrder = i,
-						scrollingFrameStore = if getFFlagPeoplePageLazyRenderCards() then p0.scrollingFrameStore else nil,
-						shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then var38 else nil
+						scrollingFrameStore = if getFFlagPeoplePageLazyRenderCards() then p1.scrollingFrameStore else nil,
+						shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then var23 else nil
 					})
 				end
 				return t
-			end, { var34, var39, p0.scrollingFrameStore, var38 })
+			end, { var19, var24, p1.scrollingFrameStore, var23 })
 		elseif getFFlagPeoplePageEnablePersonSignalStore() then
 			t = {}
-			var33.peopleSignalMap.iterateData(function(p4, p5)
-				-- upvalues: t (write), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var26 (write), var39 (ref), localPlayer (copy), var40 (ref), p0 (ref), var38 (ref)
+			var18.peopleSignalMap.iterateData(function(p2, p3)
+				-- upvalues: t (write), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var2 (write), var24 (ref), localPlayer (copy), var26 (ref), p1 (ref), var23 (ref)
 				t["PersonCard_" .. p4] = reactModule.createElement(if getFFlagPeoplePageLazyRenderCards() then lazyPersonCardModule else personCardModule, {
-					width = var26,
-					person = p5.getPerson(),
-					showTooltip = var39 and (localPlayer ~= nil and p4 == localPlayer.UserId),
-					onDismissTooltip = var40,
-					layoutOrder = p5.getOrder,
-					scrollingFrameStore = if getFFlagPeoplePageLazyRenderCards() then p0.scrollingFrameStore else nil,
-					shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then var38 else nil
+					width = var2,
+					person = p3.getPerson(),
+					showTooltip = var24 and (localPlayer ~= nil and p2 == localPlayer.UserId),
+					onDismissTooltip = var26,
+					layoutOrder = p3.getOrder,
+					scrollingFrameStore = if getFFlagPeoplePageLazyRenderCards() then p1.scrollingFrameStore else nil,
+					shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then var23 else nil
 				})
 			end, false)
 		else
 			t = {}
 			
-			for i, v in var34 do
+			for i, v in var19 do
 				t["PersonCard_" .. v.UserId] = reactModule.createElement(if getFFlagPeoplePageLazyRenderCards() then lazyPersonCardModule else personCardModule, {
-					width = var26,
+					width = var2,
 					person = v,
-					showTooltip = var39 and i == 1,
-					onDismissTooltip = var40,
+					showTooltip = var24 and i == 1,
+					onDismissTooltip = var26,
 					layoutOrder = i,
-					scrollingFrameStore = if getFFlagPeoplePageLazyRenderCards() then p0.scrollingFrameStore else nil,
-					shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then var38 else nil
+					scrollingFrameStore = if getFFlagPeoplePageLazyRenderCards() then p1.scrollingFrameStore else nil,
+					shouldShowMenu = if getFFlagPeoplePageLazyRenderCards() then var23 else nil
 				})
 			end
 		end
 	end
 	return if fFlagPeopleCardsEnableVirtualizedGrid then reactModule.createElement(virtualizedGridModule, {
-		scrollingFrameStore = p0.scrollingFrameStore,
-		itemWidth = var26,
-		itemHeight = var19,
-		numColumns = var20,
+		scrollingFrameStore = p1.scrollingFrameStore,
+		itemWidth = var2,
+		itemHeight = var5,
+		numColumns = var6,
 		gapSize = medium,
-		numItems = #var34,
-		layoutOrder = p0.LayoutOrder,
-		onContainerWidthChanged = reactModule.useCallback(function(p6)
-			-- upvalues: var21 (write), var17 (ref), medium (ref)
-			var21(var17, p6, medium)
-		end, { var17, medium }),
-		getElement = reactModule.useCallback(function(p7)
-			-- upvalues: var34 (ref), reactModule (copy), personCardModule (copy), var26 (write), var39 (ref), var40 (ref), var38 (ref)
-			local var46 = if p7 > 0 and p7 <= #var34 then var34[p7] else nil
+		numItems = #var19,
+		layoutOrder = p1.LayoutOrder,
+		onContainerWidthChanged = reactModule.useCallback(function(p2)
+			-- upvalues: var7 (write), var3 (ref), medium (ref)
+			var7(var3, p2, medium)
+		end, { var3, medium }),
+		getElement = reactModule.useCallback(function(p2)
+			-- upvalues: var19 (ref), reactModule (copy), personCardModule (copy), var2 (write), var24 (ref), var26 (ref), var23 (ref)
+			local var28 = if p2 > 0 and p2 <= #var19 then var19[p2] else nil
 			
-			return if var46 then reactModule.createElement(personCardModule, {
-				width = var26,
-				person = var46,
-				showTooltip = var39,
-				onDismissTooltip = var40,
-				shouldShowMenu = var38
+			return if var28 then reactModule.createElement(personCardModule, {
+				width = var2,
+				person = var28,
+				showTooltip = var24,
+				onDismissTooltip = var26,
+				shouldShowMenu = var23
 			}) else nil
-		end, { var34, var39, var38, var40 })
+		end, { var19, var24, var23, var26 })
 	}) else reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
 		layout = {
@@ -212,7 +212,7 @@ return reactModule.memo(function(p0)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, medium)
 		},
-		LayoutOrder = p0.LayoutOrder,
-		onAbsoluteSizeChanged = var41
+		LayoutOrder = p1.LayoutOrder,
+		onAbsoluteSizeChanged = var27
 	}, t)
 end)

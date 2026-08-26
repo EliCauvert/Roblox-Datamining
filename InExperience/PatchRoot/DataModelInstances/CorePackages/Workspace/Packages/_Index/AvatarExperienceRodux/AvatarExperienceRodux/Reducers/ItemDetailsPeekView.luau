@@ -16,57 +16,57 @@ return if avatarExperienceFlagsModule.FFlagAXRootSlotBasedEditorFlag then roduxM
 	tryOnViewState = peekViewState.Closed,
 	tryOnManagerViewState = peekViewState.Closed
 }, {
-	[setItemDetailsPeekViewStateModule.name] = function(p2, p3)
+	[setItemDetailsPeekViewStateModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p2, { viewState = p3.viewState })
+		return cryoModule.Dictionary.join(p1, { viewState = p2.viewState })
 	end,
-	[setItemTryOnPeekViewStateModule.name] = function(p4, p5)
+	[setItemTryOnPeekViewStateModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p4, { tryOnViewState = p5.viewState })
+		return cryoModule.Dictionary.join(p1, { tryOnViewState = p2.viewState })
 	end,
-	[setTryOnManagerPeekViewStateModule.name] = function(p6, p7)
+	[setTryOnManagerPeekViewStateModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p6, { tryOnManagerViewState = p7.viewState })
+		return cryoModule.Dictionary.join(p1, { tryOnManagerViewState = p2.viewState })
 	end,
-	[setLookDetailsPeekViewSelectedTabModule.name] = function(p8, p9)
+	[setLookDetailsPeekViewSelectedTabModule.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p8, { lookDetailsSelectedTab = p9.selectedTab })
+		return cryoModule.Dictionary.join(p1, { lookDetailsSelectedTab = p2.selectedTab })
 	end,
-	[avatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p10, p11)
+	[avatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p1, p2)
 		-- upvalues: cryoModule (ref), peekViewState (ref)
-		if not p11.tryOn or not p11.tryOn.OutfitTryOn then
-			return p10
+		if not p2.tryOn or not p2.tryOn.OutfitTryOn then
+			return p1
 		end
-		local lookId = p11.tryOn.OutfitTryOn.LookId
-		local var9 = lookId ~= nil and lookId ~= cryoModule.None
+		local lookId = p2.tryOn.OutfitTryOn.LookId
+		local var1 = lookId ~= nil and lookId ~= cryoModule.None
 		
-		return cryoModule.Dictionary.join(p10, {
-			tryOnManagerViewState = if var9 and p10.tryOnManagerViewState == peekViewState.Closed then peekViewState.SuperBrief elseif not var9 and p10.tryOnManagerViewState ~= peekViewState.Closed then peekViewState.Closed else p10.tryOnManagerViewState
+		return cryoModule.Dictionary.join(p1, {
+			tryOnManagerViewState = if var1 and p1.tryOnManagerViewState == peekViewState.Closed then peekViewState.SuperBrief elseif not var1 and p1.tryOnManagerViewState ~= peekViewState.Closed then peekViewState.Closed else p1.tryOnManagerViewState
 		})
 	end
-}) else function(p0, p1)
+}) else function(p1, p2)
 	-- upvalues: peekViewState (ref), setItemDetailsPeekViewStateModule (ref), cryoModule (ref), setItemTryOnPeekViewStateModule (ref), setTryOnManagerPeekViewStateModule (ref), setLookDetailsPeekViewSelectedTabModule (ref)
-	p0 = p0 or {
+	p1 = p1 or {
 		lookDetailsSelectedTab = 2,
 		viewState = peekViewState.Closed,
 		tryOnViewState = peekViewState.Closed,
 		tryOnManagerViewState = peekViewState.Closed
 	}
 	
-	if p1.type == setItemDetailsPeekViewStateModule.name then
-		p0 = cryoModule.Dictionary.join(p0, { viewState = p1.viewState })
+	if p2.type == setItemDetailsPeekViewStateModule.name then
+		p1 = cryoModule.Dictionary.join(p1, { viewState = p2.viewState })
 		
-		return p0
-	elseif p1.type == setItemTryOnPeekViewStateModule.name then
-		p0 = cryoModule.Dictionary.join(p0, { tryOnViewState = p1.viewState })
+		return p1
+	elseif p2.type == setItemTryOnPeekViewStateModule.name then
+		p1 = cryoModule.Dictionary.join(p1, { tryOnViewState = p2.viewState })
 		
-		return p0
-	elseif p1.type == setTryOnManagerPeekViewStateModule.name then
-		p0 = cryoModule.Dictionary.join(p0, { tryOnManagerViewState = p1.viewState })
+		return p1
+	elseif p2.type == setTryOnManagerPeekViewStateModule.name then
+		p1 = cryoModule.Dictionary.join(p1, { tryOnManagerViewState = p2.viewState })
 		
-		return p0
-	elseif p1.type == setLookDetailsPeekViewSelectedTabModule.name then
-		p0 = cryoModule.Dictionary.join(p0, { lookDetailsSelectedTab = p1.selectedTab })
+		return p1
+	elseif p2.type == setLookDetailsPeekViewSelectedTabModule.name then
+		p1 = cryoModule.Dictionary.join(p1, { lookDetailsSelectedTab = p2.selectedTab })
 	end
-	return p0
+	return p1
 end

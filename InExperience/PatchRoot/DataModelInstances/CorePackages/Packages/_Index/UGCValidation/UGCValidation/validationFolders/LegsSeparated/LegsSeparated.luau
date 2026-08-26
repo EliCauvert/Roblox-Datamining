@@ -22,62 +22,62 @@ local t = {
 	expectedFailures = {}
 }
 
-local function validateAttachmentPosition(p0, p1, p2)
+local function validateAttachmentPosition(p1, p2, p3)
 	-- upvalues: getFStringUGCValidateLegHipAttachmentRangeModule (ref), errorSourceStringsModule (ref)
-	if p2 == Enum.AssetType.RightLeg then
-		local var15 = p1.RightUpperLeg.Size.X * getFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
+	if p3 == Enum.AssetType.RightLeg then
+		local var1 = p2.RightUpperLeg.Size.X * getFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
 		
-		if var15 < p1.RightUpperLeg.RightHipRigAttachment.CFrame.Position.X then
-			p0:fail(errorSourceStringsModule.Keys.LegsSeparated_HipAttachmentOutOfRange, {
+		if var1 < p2.RightUpperLeg.RightHipRigAttachment.CFrame.Position.X then
+			p1:fail(errorSourceStringsModule.Keys.LegsSeparated_HipAttachmentOutOfRange, {
 				attachmentPath = "RightUpperLeg.RightHipRigAttachment.CFrame.Position.X",
 				comparison = "greater than",
-				currentValue = string.format("%.2f", p1.RightUpperLeg.RightHipRigAttachment.CFrame.Position.X),
-				cutoff = string.format("%.2f", var15)
+				currentValue = string.format("%.2f", p2.RightUpperLeg.RightHipRigAttachment.CFrame.Position.X),
+				cutoff = string.format("%.2f", var1)
 			})
 			
 			return
 		end
-	elseif p2 == Enum.AssetType.LeftLeg then
-		local var16 = -p1.LeftUpperLeg.Size.X * getFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
+	elseif p3 == Enum.AssetType.LeftLeg then
+		local var2 = -p2.LeftUpperLeg.Size.X * getFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
 		
-		if p1.LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X < var16 then
-			p0:fail(errorSourceStringsModule.Keys.LegsSeparated_HipAttachmentOutOfRange, {
+		if p2.LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X < var2 then
+			p1:fail(errorSourceStringsModule.Keys.LegsSeparated_HipAttachmentOutOfRange, {
 				attachmentPath = "LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X",
 				comparison = "less than",
-				currentValue = string.format("%.2f", p1.LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X),
-				cutoff = string.format("%.2f", var16)
+				currentValue = string.format("%.2f", p2.LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X),
+				cutoff = string.format("%.2f", var2)
 			})
 		end
 	end
 end
 
-local function calculateBounds(p3, p4)
+local function calculateBounds(p1, p2)
 	-- upvalues: boundsDataUtilsModule (ref)
 	local t = {}
 	
-	for i, v in p4 do
-		t = boundsDataUtilsModule.combineBounds(t, p3[v].boundsData)
+	for i, v in p2 do
+		t = boundsDataUtilsModule.combineBounds(t, p1[v].boundsData)
 	end
 	return t
 end
 
-local function buildEditableMeshesFromSharedData(p5)
+local function buildEditableMeshesFromSharedData(p3)
 	local t = {}
 	
-	for i, v in p5.renderMeshesData do
-		local var19 = p5.rootInstance:FindFirstChild(i, true)
+	for i, v in p3.renderMeshesData do
+		local var1 = p3.rootInstance:FindFirstChild(i, true)
 		
-		if var19 and v.editable then
-			t[var19] = { MeshId = { created = false, instance = v.editable } }
+		if var1 and v.editable then
+			t[var1] = { MeshId = { created = false, instance = v.editable } }
 		end
 	end
 	return t
 end
 
-local function createAllBodyPartsFromRootInstance(p6)
+local function createAllBodyPartsFromRootInstance(p4)
 	local t = {}
 	
-	for i, v in p6:GetChildren() do
+	for i, v in p4:GetChildren() do
 		if v:IsA("MeshPart") then
 			t[v.Name] = v
 		end
@@ -85,48 +85,48 @@ local function createAllBodyPartsFromRootInstance(p6)
 	return t
 end
 
-local function validateFullBodySeparation(p7, p8)
+local function validateFullBodySeparation(p5, p6)
 	-- upvalues: getFFlagUGCValidateLegFullBodySeparationModule (ref), createAllBodyPartsFromRootInstance (ref), buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref), calculateBounds (ref), constantsModule (ref), boundsDataUtilsModule (ref), getFStringUGCValidateAllowedLegOverlapMultiplierModule (ref)
 	if not getFFlagUGCValidateLegFullBodySeparationModule() then return end
-	local var21, var22, var23 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(createAllBodyPartsFromRootInstance(p8.rootInstance), {
-		isServer = p8.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
-		editableMeshes = buildEditableMeshesFromSharedData(p8)
+	local var2, var3, var4 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(createAllBodyPartsFromRootInstance(p6.rootInstance), {
+		isServer = p6.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+		editableMeshes = buildEditableMeshesFromSharedData(p6)
 	}, nil, false)
 	
-	if not var21 then
-		p7:fail(errorSourceStringsModule.Keys.LegsSeparated_BoundsCalculationFailed, {
-			details = if var22 then table.concat(var22, "; ") else "Unknown error"
+	if not var2 then
+		p5:fail(errorSourceStringsModule.Keys.LegsSeparated_BoundsCalculationFailed, {
+			details = if var3 then table.concat(var3, "; ") else "Unknown error"
 		})
 		
 		return
 	end
-	local var24 = calculateBounds(var23, {
+	local var5 = calculateBounds(var4, {
 		constantsModule.NAMED_R15_BODY_PARTS.LeftUpperLeg,
 		constantsModule.NAMED_R15_BODY_PARTS.LeftLowerLeg,
 		constantsModule.NAMED_R15_BODY_PARTS.LeftFoot
 	})
-	local var25 = boundsDataUtilsModule.calculateBoundsCenters(var24)
-	local var26 = boundsDataUtilsModule.calculateBoundsDimensions(var24)
-	local var27 = calculateBounds(var23, {
+	local var6 = boundsDataUtilsModule.calculateBoundsCenters(var5)
+	local var7 = boundsDataUtilsModule.calculateBoundsDimensions(var5)
+	local var8 = calculateBounds(var4, {
 		constantsModule.NAMED_R15_BODY_PARTS.RightUpperLeg,
 		constantsModule.NAMED_R15_BODY_PARTS.RightLowerLeg,
 		constantsModule.NAMED_R15_BODY_PARTS.RightFoot
 	})
-	local var28 = boundsDataUtilsModule.calculateBoundsCenters(var27)
-	local var29 = boundsDataUtilsModule.calculateBoundsDimensions(var27)
+	local var9 = boundsDataUtilsModule.calculateBoundsCenters(var8)
+	local var10 = boundsDataUtilsModule.calculateBoundsDimensions(var8)
 	
-	if not var25 or not var26 or (not var28 or not var29) then return end
-	local var30 = (var26.X + var29.X) * 0.5 - (var28.X - var25.X)
+	if not var6 or not var7 or (not var9 or not var10) then return end
+	local var11 = (var7.X + var10.X) * 0.5 - (var9.X - var6.X)
 	
-	if var30 <= 0 then return end
-	local var31 = var26.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
-	local var32 = var29.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
+	if var11 <= 0 then return end
+	local var12 = var7.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
+	local var13 = var10.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
 	
-	if var31 < var30 or var32 < var30 then
-		p7:fail(errorSourceStringsModule.Keys.LegsSeparated_LegsOverlap, {
-			overlap = string.format("%.2f", var30),
-			leftMax = string.format("%.2f", var31),
-			rightMax = string.format("%.2f", var32)
+	if var12 < var11 or var13 < var11 then
+		p5:fail(errorSourceStringsModule.Keys.LegsSeparated_LegsOverlap, {
+			overlap = string.format("%.2f", var11),
+			leftMax = string.format("%.2f", var12),
+			rightMax = string.format("%.2f", var13)
 		})
 	end
 end
@@ -135,18 +135,18 @@ local function _(value)
 	return if value.uploadEnum and value.uploadEnum.assetType then value.uploadEnum.assetType else nil
 end
 
-function t.run(p9, p10)
+function t.run(p5, p6)
 	-- upvalues: validationEnumsModule (ref), validateFullBodySeparation (ref), validateAttachmentPosition (ref)
-	if p10.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
-		validateFullBodySeparation(p9, p10)
+	if p6.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
+		validateFullBodySeparation(p5, p6)
 		
 		return
 	end
-	local var33 = if p10.uploadEnum and p10.uploadEnum.assetType then p10.uploadEnum.assetType else nil
+	local var2 = if p6.uploadEnum and p6.uploadEnum.assetType then p6.uploadEnum.assetType else nil
 	
-	if not var33 then return end
-	if var33 == Enum.AssetType.RightLeg or var33 == Enum.AssetType.LeftLeg then
-		validateAttachmentPosition(p9, p10.rootInstance, var33)
+	if not var2 then return end
+	if var2 == Enum.AssetType.RightLeg or var2 == Enum.AssetType.LeftLeg then
+		validateAttachmentPosition(p5, p6.rootInstance, var2)
 		
 		return
 	end

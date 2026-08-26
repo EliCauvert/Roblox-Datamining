@@ -4,12 +4,12 @@ local dashModule = require(parent.Dash)
 local reactModule = require(parent.React)
 local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), creationFlowContextModule (ref), dashModule (ref)
 	return reactModule.createElement(creationFlowContextModule.Provider, {
-		value = dashModule.join(p0.value, {
-			captures = p0.captures,
-			exitCreationFlow = p0.exitCreationFlow
+		value = dashModule.join(p1.value, {
+			captures = p1.captures,
+			exitCreationFlow = p1.exitCreationFlow
 		})
-	}, p0.children)
+	}, p1.children)
 end

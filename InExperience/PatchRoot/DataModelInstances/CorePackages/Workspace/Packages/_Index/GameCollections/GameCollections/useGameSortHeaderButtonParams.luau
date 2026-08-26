@@ -7,42 +7,42 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local _ = require(parent.DiscoveryTypes)
 local fFlagLuaAppHeaderButtonText = require(parent.SharedFlags).FFlagLuaAppHeaderButtonText
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
+return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
 	-- upvalues: useNavigateToSeeAllModule (ref), reactModule (ref), useNavigateToSortLinkWebViewModule (ref), useLocalization (ref), fFlagLuaAppHeaderButtonText (ref)
-	local var4 = useNavigateToSeeAllModule(p1, p2, p3, p4, p5, p6)
-	local var5 = useNavigateToSortLinkWebViewModule()
-	local var6 = if p7 then reactModule.useCallback(function()
-		-- upvalues: p1 (ref), p2 (ref), p7 (ref), var5 (ref), p6 (ref)
-		local var7 = if p1 then if p2 then p1.topicId else p1.gameSetTypeId else nil
+	local var1 = useNavigateToSeeAllModule(p2, p3, p4, p5, p6, p7)
+	local var2 = useNavigateToSortLinkWebViewModule()
+	local var3 = if p8 then reactModule.useCallback(function()
+		-- upvalues: p2 (ref), p3 (ref), p8 (ref), var2 (ref), p7 (ref)
+		local var4 = if p2 then if p3 then p2.topicId else p2.gameSetTypeId else nil
 		
-		if p7 then
-			var5(p7, p6, if p1 then p1.displayName else "", var7)
+		if p8 then
+			var2(p8, p7, if p2 then p2.displayName else "", var4)
 		end
 	end, {
-		var5,
+		var2,
+		p8,
 		p7,
-		p6,
-		p1,
-		p2
+		p2,
+		p3
 	}) else reactModule.useCallback(function()
-		-- upvalues: var4 (ref), p0 (ref)
-		var4()
-		p0()
-	end, { var4, p0 })
+		-- upvalues: var1 (ref), p1 (ref)
+		var1()
+		p1()
+	end, { var1, p1 })
 	
-	return var6, if fFlagLuaAppHeaderButtonText and p9 then p9 elseif p7 then useLocalization({ learnMore = "Feature.GameDetails.Label.LearnMore" }).learnMore else nil, reactModule.useCallback(function()
-		-- upvalues: p10 (ref), p1 (ref), p8 (ref), p2 (ref), var5 (ref), p6 (ref), var6 (ref)
-		if p10 then
-			p10()
+	return var3, if fFlagLuaAppHeaderButtonText and p10 then p10 elseif p8 then useLocalization({ learnMore = "Feature.GameDetails.Label.LearnMore" }).learnMore else nil, reactModule.useCallback(function()
+		-- upvalues: p11 (ref), p2 (ref), p9 (ref), p3 (ref), var2 (ref), p7 (ref), var3 (ref)
+		if p11 then
+			p11()
 			
 			return
-		elseif p1 and p8 then
-			var5(p8, p6, if p1 then p1.displayName else "", if p2 then p1.topicId else p1.gameSetTypeId)
+		elseif p2 and p9 then
+			var2(p9, p7, if p2 then p2.displayName else "", if p3 then p2.topicId else p2.gameSetTypeId)
 			
 			return
 		end
-		var6()
+		var3()
 	end, {
-		var5, p8, p6, p1, p2, var6, p10
+		var2, p9, p7, p2, p3, var3, p11
 	})
 end

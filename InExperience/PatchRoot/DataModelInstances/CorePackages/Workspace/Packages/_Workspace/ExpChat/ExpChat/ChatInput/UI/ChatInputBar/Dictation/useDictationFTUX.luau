@@ -8,61 +8,61 @@ local usePausableTimeoutModule = require(expChat.Stores.GetTransparencyStore.use
 local dictationAnalyticsModule = require(script.Parent.DictationAnalytics)
 local dictationFTUXStorageModule = require(script.Parent.DictationFTUXStorage)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useIsChatBackgroundVisibleModule (ref), getTransparencyStoreModule (ref), signalsReactModule (ref), reactModule (ref), dictationFTUXStorageModule (ref), dictationAnalyticsModule (ref), usePausableTimeoutModule (ref)
-	local var8 = useIsChatBackgroundVisibleModule()
-	local var9 = signalsReactModule.useSignalState(getTransparencyStoreModule(false).getIsTextBoxFocused)
-	local var10, var11 = reactModule.useState(function()
+	local var1 = useIsChatBackgroundVisibleModule()
+	local var2 = signalsReactModule.useSignalState(getTransparencyStoreModule(false).getIsTextBoxFocused)
+	local var3, var4 = reactModule.useState(function()
 		-- upvalues: dictationFTUXStorageModule (copy)
 		return dictationFTUXStorageModule.hasBeenDismissed()
 	end)
-	local var12, var13 = reactModule.useState(function()
+	local var5, var6 = reactModule.useState(function()
 		-- upvalues: dictationFTUXStorageModule (copy)
 		return dictationFTUXStorageModule.hasBeenUsed()
 	end)
-	local var14 = reactModule.useCallback(function(p1)
-		-- upvalues: var11 (ref), dictationFTUXStorageModule (copy), dictationAnalyticsModule (copy)
-		var11(function(p2)
-			-- upvalues: dictationFTUXStorageModule (copy), dictationAnalyticsModule (copy), p1 (ref)
-			if p2 then
-				return p2
+	local var7 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref), dictationFTUXStorageModule (copy), dictationAnalyticsModule (copy)
+		var4(function(p3)
+			-- upvalues: dictationFTUXStorageModule (copy), dictationAnalyticsModule (copy), p2 (ref)
+			if p3 then
+				return p3
 			end
 			dictationFTUXStorageModule.markDismissed()
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.FtuxDismiss, {
 				[dictationAnalyticsModule.Properties.SttMode] = dictationAnalyticsModule.Modes.Continuous,
-				[dictationAnalyticsModule.Properties.DismissReason] = p1 or dictationAnalyticsModule.DismissReasons.UserInteraction
+				[dictationAnalyticsModule.Properties.DismissReason] = p2 or dictationAnalyticsModule.DismissReasons.UserInteraction
 			})
 			
 			return true
 		end)
 	end, {})
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref), dictationFTUXStorageModule (copy)
-		var13(function(p3)
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), dictationFTUXStorageModule (copy)
+		var6(function(p2)
 			-- upvalues: dictationFTUXStorageModule (copy)
-			if p3 then
-				return p3
+			if p2 then
+				return p2
 			end
 			dictationFTUXStorageModule.markUsed()
 			
 			return true
 		end)
 	end, {})
-	local var8_1 = var12 and (not var10 and (p0.isEligible and (not p0.isComposing and (not p0.isActive and (not var9 and var8)))))
-	usePausableTimeoutModule(var8_1, 10, reactModule.useCallback(function()
-		-- upvalues: var14 (ref), dictationAnalyticsModule (copy)
-		var14(dictationAnalyticsModule.DismissReasons.Visibility)
-	end, { var14 }))
-	local var17 = reactModule.useRef(false)
+	local var9 = var5 and (not var3 and (p1.isEligible and (not p1.isComposing and (not p1.isActive and (not var2 and var1)))))
+	usePausableTimeoutModule(var9, 10, reactModule.useCallback(function()
+		-- upvalues: var7 (ref), dictationAnalyticsModule (copy)
+		var7(dictationAnalyticsModule.DismissReasons.Visibility)
+	end, { var7 }))
+	local var10 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var8_1 (ref), var17 (ref), dictationAnalyticsModule (copy)
-		if var8_1 and not var17.current then
-			var17.current = true
+		-- upvalues: var9 (ref), var10 (ref), dictationAnalyticsModule (copy)
+		if var9 and not var10.current then
+			var10.current = true
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.FtuxShown, {
 				[dictationAnalyticsModule.Properties.SttMode] = dictationAnalyticsModule.Modes.Continuous
 			})
 		end
-	end, { var8_1 })
+	end, { var9 })
 	
-	return { shouldShow = var8_1, dismiss = var14, markUsed = var15 }
+	return { shouldShow = var9, dismiss = var7, markUsed = var8 }
 end

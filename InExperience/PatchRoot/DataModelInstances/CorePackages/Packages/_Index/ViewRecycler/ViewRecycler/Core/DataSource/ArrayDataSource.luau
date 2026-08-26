@@ -3,27 +3,27 @@ local keyUtilsModule = require(script.Parent.KeyUtils)
 
 local var1 = function() end
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: keyUtilsModule (ref), var1 (ref)
-	local cloned = table.clone(p0)
-	local var3 = keyUtilsModule.keysFor(cloned, p1)
+	local cloned = table.clone(p1)
+	local var2 = keyUtilsModule.keysFor(cloned, p2)
 	
 	return {
 		getItemCount = function()
 			-- upvalues: cloned (ref)
 			return #cloned
 		end,
-		getItem = function(p2)
+		getItem = function(p3)
 			-- upvalues: cloned (ref)
-			return cloned[p2]
+			return cloned[p3]
 		end,
 		getItemKey = function(p3)
-			-- upvalues: var3 (ref)
-			return var3[p3]
+			-- upvalues: var2 (ref)
+			return var2[p3]
 		end,
-		getItems = function(p4, p5)
+		getItems = function(p3, p4)
 			-- upvalues: cloned (ref)
-			return table.move(cloned, p4, p5, 1, {})
+			return table.move(cloned, p3, p4, 1, {})
 		end,
 		subscribe = function(_)
 			-- upvalues: var1 (copy)

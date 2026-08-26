@@ -8,24 +8,24 @@ function t.new()
 	return setmetatable({ listeners = {} }, t)
 end
 
-function t:addListener(p0, p1)
-	if not self.listeners[p0] then
-		self.listeners[p0] = {}
+function t:addListener(p1, p2)
+	if not self.listeners[p1] then
+		self.listeners[p1] = {}
 	end
-	table.insert(self.listeners[p0], p1)
+	table.insert(self.listeners[p1], p2)
 end
 
-function t:removeListener(p2, p3)
-	local var3 = self.listeners[p2]
+function t:removeListener(p1, p2)
+	local var1 = self.listeners[p1]
 	
-	if not var3 then return end
-	local index = table.find(var3, p3)
+	if not var1 then return end
+	local index = table.find(var1, p2)
 	
 	if index then
-		table.remove(var3, index)
+		table.remove(var1, index)
 		
-		if #var3 == 0 then
-			self.listeners[p2] = nil
+		if #var1 == 0 then
+			self.listeners[p1] = nil
 		end
 	end
 end
@@ -34,11 +34,11 @@ function t:removeAllListeners()
 	table.clear(self.listeners)
 end
 
-function t:emit(p4, ...)
-	local var5 = self.listeners[p4]
+function t:emit(p1, ...)
+	local var1 = self.listeners[p1]
 	
-	if not var5 then return end
-	for i, v in table.clone(var5) do
+	if not var1 then return end
+	for i, v in table.clone(var1) do
 		pcall(function(...)
 			-- upvalues: v (ref)
 			v(...)
@@ -49,30 +49,30 @@ function t:emit(p4, ...)
 end
 
 return {
-	jsonDecode = function(p5)
+	jsonDecode = function(p2)
 		-- upvalues: httpService (ref)
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p5 (ref)
-			return httpService:JSONDecode(p5)
+			-- upvalues: httpService (copy), p2 (ref)
+			return httpService:JSONDecode(p2)
 		end)
 		
 		return if ok and status then status else {}
 	end,
 	EventEmitter = t,
-	shorten = function(p6)
-		return "..." .. string.sub(tostring(p6), -4)
+	shorten = function(p2)
+		return "..." .. string.sub(tostring(p2), -4)
 	end,
-	avoidEmitting = function(p7)
-		p7.DescendantAdded:Connect(function(p8)
-			if p8:HasTag("RbxDefaultVoiceEmitter") then
+	avoidEmitting = function(p2)
+		p2.DescendantAdded:Connect(function(p3)
+			if p3:HasTag("RbxDefaultVoiceEmitter") then
 				task.defer(function()
-					-- upvalues: p8 (ref)
-					p8:Destroy()
+					-- upvalues: p3 (ref)
+					p3:Destroy()
 				end)
 			end
 		end)
 		
-		for i, v in p7:GetDescendants() do
+		for i, v in p2:GetDescendants() do
 			if v:HasTag("RbxDefaultVoiceEmitter") then
 				task.defer(function()
 					-- upvalues: v (ref)
@@ -81,7 +81,7 @@ return {
 			end
 		end
 	end,
-	destroyDefaultEmitter = function(p9)
+	destroyDefaultEmitter = function(p3)
 		-- upvalues: playersService (ref)
 		local localPlayer = playersService.LocalPlayer
 		
@@ -89,17 +89,17 @@ return {
 		local character = localPlayer.Character
 		
 		if not character then return end
-		if p9:IsDescendantOf(character) then
+		if p3:IsDescendantOf(character) then
 			task.defer(function()
-				-- upvalues: p9 (ref)
-				p9:Destroy()
+				-- upvalues: p3 (ref)
+				p3:Destroy()
 			end)
 		end
 	end,
-	bind = function(p10, p11)
+	bind = function(p3, p4)
 		return function(...)
-			-- upvalues: p10 (ref), p11 (ref)
-			return p10[p11](p10, ...)
+			-- upvalues: p3 (ref), p4 (ref)
+			return p3[p4](p3, ...)
 		end
 	end
 }

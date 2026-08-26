@@ -3,11 +3,11 @@ local reactModule = require(parent.React)
 local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
 local useDesignTokens = require(parent.Style).useDesignTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), imageSetLabel (ref)
 	local var1 = useDesignTokens()
-	local padding = p0.padding or var1.Size.Size_100
-	local iconSize = p0.iconSize or 18
+	local padding = p1.padding or var1.Size.Size_100
+	local iconSize = p1.iconSize or 18
 	local font = var1.Typography.BodyLarge.Font
 	local fontSize350 = var1.FontSize.FontSize_350
 	local default = var1.Color.Content.Default
@@ -16,7 +16,7 @@ return function(p0)
 		LayoutOrder = 2,
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
-		Text = p0.bodyText,
+		Text = p1.bodyText,
 		Font = var1.Typography.TitleLarge.Font,
 		TextSize = var1.Typography.TitleLarge.FontSize,
 		TextColor3 = emphasis.Color3,
@@ -29,8 +29,8 @@ return function(p0)
 		TextTransparency = 1,
 		Text = "",
 		BackgroundTransparency = 1,
-		LayoutOrder = p0.LayoutOrder,
-		[reactModule.Event.Activated] = p0.onActivated
+		LayoutOrder = p1.LayoutOrder,
+		[reactModule.Event.Activated] = p1.onActivated
 	}, {
 		Layout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -42,14 +42,14 @@ return function(p0)
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			Text = p0.headerText,
+			Text = p1.headerText,
 			Font = font,
 			TextSize = fontSize350,
 			TextColor3 = default.Color3,
 			TextTransparency = default.Transparency,
 			TextYAlignment = Enum.TextYAlignment.Center
 		}),
-		Body = if p0.icon then reactModule.createElement("Frame", {
+		Body = if p1.icon then reactModule.createElement("Frame", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -67,7 +67,7 @@ return function(p0)
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.fromOffset(iconSize, iconSize),
-				Image = p0.icon,
+				Image = p1.icon,
 				ImageColor3 = emphasis.Color3,
 				ImageTransparency = emphasis.Transparency
 			}),

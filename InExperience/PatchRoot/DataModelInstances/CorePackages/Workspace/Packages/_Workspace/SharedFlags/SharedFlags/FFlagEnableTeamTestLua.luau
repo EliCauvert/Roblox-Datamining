@@ -7,26 +7,26 @@ local enableClientTeamTestTeleportEngineFeature = game:GetEngineFeature("EnableC
 
 local function _()
 	-- upvalues: userInputService (ref), runService (ref)
-	local var9 = tonumber(string.match(runService:GetRobloxVersion(), "^%d+%.(%d+)%."))
+	local var1 = tonumber(string.match(runService:GetRobloxVersion(), "^%d+%.(%d+)%."))
 	
-	return var9 ~= nil and (if userInputService:GetPlatform() == Enum.Platform.IOS then 731 else 730) <= var9
+	return var1 ~= nil and (if userInputService:GetPlatform() == Enum.Platform.IOS then 731 else 730) <= var1
 end
 
-local var6 = enableTeamTestLua
+local var1 = enableTeamTestLua
 
-if var6 then
+if var1 then
 	if enableTeamTestLuaVersionCheck then
-		local var7 = tonumber(string.match(runService:GetRobloxVersion(), "^%d+%.(%d+)%."))
-		local var8 = if userInputService:GetPlatform() == Enum.Platform.IOS then 731 else 730
-		var6 = false
+		local var2 = tonumber(string.match(runService:GetRobloxVersion(), "^%d+%.(%d+)%."))
+		local var3 = if userInputService:GetPlatform() == Enum.Platform.IOS then 731 else 730
+		var1 = false
 		
-		if var7 ~= nil then
-			var6 = var8 <= var7
-			var6 = nil
+		if var2 ~= nil then
+			var1 = var3 <= var2
+			var1 = nil
 		end
 	else
-		var6 = enableClientTeamTestTeleportEngineFeature
+		var1 = enableClientTeamTestTeleportEngineFeature
 	end
-	var6 = var6 and buildAppStorageKeyEngineFeature
+	var1 = var1 and buildAppStorageKeyEngineFeature
 end
-return var6
+return var1

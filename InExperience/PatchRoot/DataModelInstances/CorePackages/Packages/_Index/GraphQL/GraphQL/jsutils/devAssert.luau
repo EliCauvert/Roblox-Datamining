@@ -1,7 +1,7 @@
 ﻿return {
-	devAssert = function(p0, p1)
-		if not p0 then
-			error(p1, 2)
+	devAssert = function(p1, p2)
+		if not p1 then
+			error(p2, 2)
 		end
 	end
 }

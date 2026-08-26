@@ -6,24 +6,24 @@ local sendCounterModule = require(parent.Thunks.SendCounter)
 local constantsModule = require(parent.Constants)
 local list = { analyticsModule }
 
-return function(p0)
+return function(p1)
 	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), utilityFunctionsModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: analyticsModule (copy), p0 (ref), utilityFunctionsModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var8, assetId
-		local var6 = p2[analyticsModule]
-		local var7 = p0 and p0.parentBundleId ~= nil
+	return thunkModule.new(script.Name, list, function(p2, p3)
+		-- upvalues: analyticsModule (copy), p1 (ref), utilityFunctionsModule (copy), sendCounterModule (copy), constantsModule (copy)
+		local var1, assetId
+		local var2 = p3[analyticsModule]
+		local var3 = p1 and p1.parentBundleId ~= nil
 		local _ = nil
 		local _ = nil
 		
-		if var7 then
-			var8 = "Bundle"
-			assetId = utilityFunctionsModule.getBundleId(p0)
+		if var3 then
+			var1 = "Bundle"
+			assetId = utilityFunctionsModule.getBundleId(p1)
 		else
-			var8 = "Asset"
-			assetId = p0.assetId
+			var1 = "Asset"
+			assetId = p1.assetId
 		end
-		var6.reportItemDetailPageOpened(var8, assetId)
-		p1:dispatch(sendCounterModule(constantsModule.Counters.ItemDetailPageOpened))
+		var2.reportItemDetailPageOpened(var1, assetId)
+		p2:dispatch(sendCounterModule(constantsModule.Counters.ItemDetailPageOpened))
 	end)
 end

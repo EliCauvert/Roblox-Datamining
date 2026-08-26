@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return game:GetService("InsertService"):LoadAsset(p0)
+﻿return function(p1)
+	return game:GetService("InsertService"):LoadAsset(p1)
 end

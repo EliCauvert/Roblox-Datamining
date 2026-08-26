@@ -9,18 +9,18 @@ local wireCapDeliveryModule = require(script.Parent.Acp.wireCapDelivery)
 
 return signalsModule.createComputed(function()
 	-- upvalues: resolveAcpUrlModule (ref), debugModule (ref), acpProtocolModule (ref), createCreatorAgentChatStoreModule (ref), getDefaultAuthHeadersModule (ref), wireCapDeliveryModule (ref)
-	local var7 = resolveAcpUrlModule.resolveCreatorAgentAcp()
+	local var1 = resolveAcpUrlModule.resolveCreatorAgentAcp()
 	debugModule.log("info", "creating CreatorAgentChatStore", {
-		acpUrl = var7.url,
-		gateway = var7.gateway,
-		sitetestNumber = var7.sitetestNumber,
+		acpUrl = var1.url,
+		gateway = var1.gateway,
+		sitetestNumber = var1.sitetestNumber,
 		capRtnNamespace = acpProtocolModule.CapRtnNamespace
 	})
-	local var8 = createCreatorAgentChatStoreModule({
-		baseUrl = var7.url,
+	local var2 = createCreatorAgentChatStoreModule({
+		baseUrl = var1.url,
 		getAuthHeaders = getDefaultAuthHeadersModule
 	})
-	wireCapDeliveryModule(var8)
+	wireCapDeliveryModule(var2)
 	
-	return var8
+	return var2
 end)

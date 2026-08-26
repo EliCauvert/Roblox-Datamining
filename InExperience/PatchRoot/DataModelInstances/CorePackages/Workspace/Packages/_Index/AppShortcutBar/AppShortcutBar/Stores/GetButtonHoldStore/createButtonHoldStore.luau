@@ -6,61 +6,61 @@ local _ = require(parent.FocusNavigationUtils)
 
 return function()
 	-- upvalues: signalsModule (ref), reactModule (ref), signalsReactModule (ref)
-	local var3, var4 = signalsModule.createSignal({})
+	local var1, var2 = signalsModule.createSignal({})
 	
-	local function updateButtonHoldState(p0, p1)
-		-- upvalues: var4 (ref)
-		var4(function(p2)
-			-- upvalues: p0 (ref), p1 (ref)
-			if p2[p0] == p1 then
-				return p2
+	local function updateButtonHoldState(p1, p2)
+		-- upvalues: var2 (ref)
+		var2(function(p3)
+			-- upvalues: p1 (ref), p2 (ref)
+			if p3[p1] == p2 then
+				return p3
 			end
-			local cloned = table.clone(p2)
-			cloned[p0] = p1
+			local cloned = table.clone(p3)
+			cloned[p1] = p2
 			
 			return cloned
 		end)
 	end
 	
 	return {
-		getButtonHoldState = var3,
-		setButtonHoldState = var4,
+		getButtonHoldState = var1,
+		setButtonHoldState = var2,
 		useDispatchButtonHoldStarted = function()
-			-- upvalues: reactModule (copy), var4 (ref), updateButtonHoldState (ref)
-			return reactModule.useCallback(function(p3, p4)
-				-- upvalues: var4 (copy)
-				var4(function(p5)
-					-- upvalues: p3 (ref), p4 (ref)
-					if p5[p3] == p4 then
-						return p5
+			-- upvalues: reactModule (copy), var2 (ref), updateButtonHoldState (ref)
+			return reactModule.useCallback(function(p1, p2)
+				-- upvalues: var2 (copy)
+				var2(function(p3)
+					-- upvalues: p1 (ref), p2 (ref)
+					if p3[p1] == p2 then
+						return p3
 					end
-					local cloned = table.clone(p5)
-					cloned[p3] = p4
+					local cloned = table.clone(p3)
+					cloned[p1] = p2
 					
 					return cloned
 				end)
 			end, { updateButtonHoldState })
 		end,
 		useDispatchButtonHoldEnded = function()
-			-- upvalues: reactModule (copy), var4 (ref), updateButtonHoldState (ref)
-			return reactModule.useCallback(function(p6)
-				-- upvalues: var4 (copy)
-				local var7 = nil
-				var4(function(p7)
-					-- upvalues: p6 (ref), var7 (ref)
-					if p7[p6] == var7 then
-						return p7
+			-- upvalues: reactModule (copy), var2 (ref), updateButtonHoldState (ref)
+			return reactModule.useCallback(function(p1)
+				-- upvalues: var2 (copy)
+				local var3 = nil
+				var2(function(p2)
+					-- upvalues: p1 (ref), var3 (ref)
+					if p2[p1] == var3 then
+						return p2
 					end
-					local cloned = table.clone(p7)
-					cloned[p6] = var7
+					local cloned = table.clone(p2)
+					cloned[p1] = var3
 					
 					return cloned
 				end)
 			end, { updateButtonHoldState })
 		end,
 		useHeldProgressByEvent = function()
-			-- upvalues: signalsReactModule (copy), var3 (ref)
-			return signalsReactModule.useSignalState(var3)
+			-- upvalues: signalsReactModule (copy), var1 (ref)
+			return signalsReactModule.useSignalState(var1)
 		end
 	}
 end

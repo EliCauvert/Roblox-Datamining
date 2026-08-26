@@ -6,7 +6,7 @@ local getIsARButtonVisibleModule = require(expChat.getIsARButtonVisible)
 
 return function()
 	-- upvalues: getChatStatusStoreModule (ref), signalsReactModule (ref), getPresetChatStoreModule (ref), getIsARButtonVisibleModule (ref)
-	local var5 = getPresetChatStoreModule(false)
+	local var1 = getPresetChatStoreModule(false)
 	
-	return getIsARButtonVisibleModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus), signalsReactModule.useSignalState(var5.getIsEnabled), signalsReactModule.useSignalState(var5.getAccessLevel))
+	return getIsARButtonVisibleModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus), signalsReactModule.useSignalState(var1.getIsEnabled), signalsReactModule.useSignalState(var1.getAccessLevel))
 end

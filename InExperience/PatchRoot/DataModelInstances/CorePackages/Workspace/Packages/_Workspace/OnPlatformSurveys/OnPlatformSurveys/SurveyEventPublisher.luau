@@ -11,9 +11,9 @@ local t = {
 }
 
 return {
-	publishSurveyEvent = function(p0)
+	publishSurveyEvent = function(p1)
 		-- upvalues: messageBus (ref), t (ref)
-		messageBus.publish(t, { eventType = p0 })
+		messageBus.publish(t, { eventType = p1 })
 	end,
 	OPEN_SURVEY_EVENT_DESCRIPTOR = t
 }

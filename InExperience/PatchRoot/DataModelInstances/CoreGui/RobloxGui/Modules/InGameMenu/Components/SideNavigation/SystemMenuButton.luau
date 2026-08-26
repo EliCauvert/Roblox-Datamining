@@ -16,55 +16,55 @@ systemMenuButton.validateProps = t.strictInterface({
 })
 systemMenuButton.defaultProps = { on = false, canCaptureFocus = false }
 
-function systemMenuButton.tryCaptureFocus(p0, p1)
+function systemMenuButton.tryCaptureFocus(p1, p2)
 	-- upvalues: guiService (ref)
-	if p0.props.canCaptureFocus and not p1.canCaptureFocus or p0.props.canCaptureFocus and p0.props.on ~= p1.on and p0.state.isIconFocused then
-		guiService.SelectedCoreObject = p0.iconRef:getValue()
+	if p1.props.canCaptureFocus and not p2.canCaptureFocus or p1.props.canCaptureFocus and p1.props.on ~= p2.on and p1.state.isIconFocused then
+		guiService.SelectedCoreObject = p1.iconRef:getValue()
 	end
 end
 
-function systemMenuButton.init(p2)
+function systemMenuButton.init(p1)
 	-- upvalues: roact (ref)
-	p2.iconRef = roact.createRef()
-	p2:setState({ isIconFocused = false })
+	p1.iconRef = roact.createRef()
+	p1:setState({ isIconFocused = false })
 	
 	function p2.onIconSelectionGained()
-		-- upvalues: p2 (ref)
-		p2:setState({ isIconFocused = true })
+		-- upvalues: p1 (ref)
+		p1:setState({ isIconFocused = true })
 	end
 	
 	function p2.onIconSelectionLost()
-		-- upvalues: p2 (ref)
-		p2:setState({ isIconFocused = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ isIconFocused = false })
 	end
 end
 
-function systemMenuButton.didMount(p3)
-	p3:tryCaptureFocus({ canCaptureFocus = false })
+function systemMenuButton.didMount(p1)
+	p1:tryCaptureFocus({ canCaptureFocus = false })
 end
 
-function systemMenuButton.didUpdate(p4, p5)
-	p4:tryCaptureFocus(p5)
+function systemMenuButton.didUpdate(p1, p2)
+	p1:tryCaptureFocus(p2)
 end
 
-function systemMenuButton.render(p6)
+function systemMenuButton.render(p1)
 	-- upvalues: roact (ref), closeMenuButtonModule (ref), gameIconButtonModule (ref)
-	return if p6.props.on then roact.createElement(closeMenuButtonModule, {
-		onActivated = p6.props.onClose,
-		layoutOrder = p6.props.layoutOrder,
-		AnchorPoint = p6.props.anchorPoint,
-		Position = p6.props.position,
-		onSelectionGained = p6.onIconSelectionGained,
-		onSelectionLost = p6.onIconSelectionLost,
-		[roact.Ref] = p6.iconRef
+	return if p1.props.on then roact.createElement(closeMenuButtonModule, {
+		onActivated = p1.props.onClose,
+		layoutOrder = p1.props.layoutOrder,
+		AnchorPoint = p1.props.anchorPoint,
+		Position = p1.props.position,
+		onSelectionGained = p1.onIconSelectionGained,
+		onSelectionLost = p1.onIconSelectionLost,
+		[roact.Ref] = p1.iconRef
 	}) else roact.createElement(gameIconButtonModule, {
-		onActivated = p6.props.onActivated,
-		layoutOrder = p6.props.layoutOrder,
-		anchorPoint = p6.props.anchorPoint,
-		position = p6.props.position,
-		onSelectionGained = p6.onIconSelectionGained,
-		onSelectionLost = p6.onIconSelectionLost,
-		[roact.Ref] = p6.iconRef
+		onActivated = p1.props.onActivated,
+		layoutOrder = p1.props.layoutOrder,
+		anchorPoint = p1.props.anchorPoint,
+		position = p1.props.position,
+		onSelectionGained = p1.onIconSelectionGained,
+		onSelectionLost = p1.onIconSelectionLost,
+		[roact.Ref] = p1.iconRef
 	})
 end
 

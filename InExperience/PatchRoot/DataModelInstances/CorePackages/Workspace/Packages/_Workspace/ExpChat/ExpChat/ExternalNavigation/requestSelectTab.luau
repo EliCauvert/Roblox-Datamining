@@ -4,7 +4,7 @@ local expChatSharedModule = require(parent.ExpChatShared)
 local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
 local fFlagExpChatUseChannelTabsStore = require(parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 
-return function(p0)
+return function(p1)
 	-- upvalues: expChatSharedModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref)
 	local store = expChatSharedModule.context.store
 	
@@ -13,15 +13,15 @@ return function(p0)
 	end
 	local channelTabs = store:getState().ChannelTabs
 	
-	if channelTabs == nil or channelTabs.allChannelTabs[p0] == nil then
+	if channelTabs == nil or channelTabs.allChannelTabs[p1] == nil then
 		return false
 	end
-	local var3 = if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false) else nil
+	local var1 = if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false) else nil
 	
-	if var3 and var3.getChannelTabsState(false).allChannelTabs[p0] == nil then
+	if var1 and var1.getChannelTabsState(false).allChannelTabs[p1] == nil then
 		return false
-	elseif var3 then
-		var3.setTargetChannel(p0, false)
+	elseif var1 then
+		var1.setTargetChannel(p1, false)
 	end
 	return true
 end

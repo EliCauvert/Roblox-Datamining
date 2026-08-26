@@ -26,8 +26,8 @@ local t = {
 
 return {
 	DEFAULT_PRESET = "NoInviteModal",
-	getPresentationConfig = function(p0)
+	getPresentationConfig = function(p1)
 		-- upvalues: t (ref)
-		return t[p0 or "NoInviteModal"] or t.NoInviteModal
+		return t[p1 or "NoInviteModal"] or t.NoInviteModal
 	end
 }

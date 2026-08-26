@@ -10,15 +10,15 @@ local renderPeoplePageOnTabSwitch = game:DefineFastFlag("RenderPeoplePageOnTabSw
 local fFlagRelocateMobileMenuButtonsModule = require(modules.Settings.Flags.FFlagRelocateMobileMenuButtons)
 local fIntRelocateMobileMenuButtonsVariantModule = require(modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
 local fFlagIEMFocusNavPeoplePageToButtons = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagIEMFocusNavPeoplePageToButtons
-local var10 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
-local var11 = if var10 then require(robloxGui.Modules.Chrome.ChromeShared.Service.LocalStore) else nil
+local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var2 = if var1 then require(robloxGui.Modules.Chrome.ChromeShared.Service.LocalStore) else nil
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
 local signalsModule = require(corePackagesService.Packages.Signals)
 local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
 local settingsPageFactoryModule = require(modules.Settings.SettingsPageFactory)
 local settingsShowSignal = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
-local var15 = localization.new(localizationService.RobloxLocaleId)
+local var3 = localization.new(localizationService.RobloxLocaleId)
 local builderIconsModule = require(corePackagesService.Packages.BuilderIcons)
 local blockingModalScreenModule = require(modules.Settings.Components.Blocking.BlockingModalScreen)
 local uiblox = builderIconsModule.Migration.uiblox
@@ -28,7 +28,7 @@ local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
 local useRegistryEntry = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry.useRegistryEntry
-local var20 = if fFlagRefactorPeoplePageModule() then require(corePackagesService.Workspace.Packages.PeopleReactView).Constants else nil
+local var4 = if fFlagRefactorPeoplePageModule() then require(corePackagesService.Workspace.Packages.PeopleReactView).Constants else nil
 local flags = peopleServiceModule.getService("Flags")
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local getFFlagPeoplePageLazyRenderCards = flags.GetFFlagPeoplePageLazyRenderCards
@@ -37,30 +37,30 @@ local fFlagPeopleCardsEnableVirtualizedGrid = flags.FFlagPeopleCardsEnableVirtua
 local fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView = flags.FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView
 local fFlagPeoplePageFlipVolumePopoverToFitViewport = flags.FFlagPeoplePageFlipVolumePopoverToFitViewport
 local fFlagPeoplePageDismissCardMenuOnScrollOutOfView = flags.FFlagPeoplePageDismissCardMenuOnScrollOutOfView
-local var22 = nil
-local var23, var24 = signalsModule.createSignal(false)
+local var5 = nil
+local var6, var7 = signalsModule.createSignal(false)
 
-local function PeopleFocusRoot(p0)
+local function PeopleFocusRoot(p1)
 	-- upvalues: useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), focusRoot (ref), fFlagIEMFocusNavPeoplePageToButtons (ref)
 	return reactModule.createElement(focusRoot, {
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.RouterView,
 		isAutoFocusRoot = if fFlagIEMFocusNavPeoplePageToButtons then false else useRegistryEntry(focusNavigableSurfaceIdentifierEnum.CentralOverlay) == nil
-	}, p0.children)
+	}, p1.children)
 end
 
 return if fFlagRefactorPeoplePageModule() then (function()
-	-- upvalues: corePackagesService (ref), settingsPageFactoryModule (ref), var20 (write), uiblox (ref), builderIconsModule (ref), var15 (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), var22 (write), getFFlagPeoplePageLazyRenderCards (ref), fFlagEnablePeopleListLazyRender (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (ref), fFlagPeoplePageFlipVolumePopoverToFitViewport (ref), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (ref), signalsReactModule (ref), var23 (ref), reactModule (ref), coreScriptsRootProvider (ref), localizationProvider (ref), PeopleFocusRoot (ref), blockingModalScreenModule (ref), var10 (ref), getFFlagAddPeoplePageCardLayout (ref), var11 (ref), reactRobloxModule (ref), renderPeoplePageOnTabSwitch (ref), var24 (ref), fFlagIEMFocusNavPeoplePageToButtons (ref), settingsShowSignal (ref)
+	-- upvalues: corePackagesService (ref), settingsPageFactoryModule (ref), var4 (write), uiblox (ref), builderIconsModule (ref), var3 (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), var5 (write), getFFlagPeoplePageLazyRenderCards (ref), fFlagEnablePeopleListLazyRender (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (ref), fFlagPeoplePageFlipVolumePopoverToFitViewport (ref), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (ref), signalsReactModule (ref), var6 (ref), reactModule (ref), coreScriptsRootProvider (ref), localizationProvider (ref), PeopleFocusRoot (ref), blockingModalScreenModule (ref), var1 (ref), getFFlagAddPeoplePageCardLayout (ref), var2 (ref), reactRobloxModule (ref), renderPeoplePageOnTabSwitch (ref), var7 (ref), fFlagIEMFocusNavPeoplePageToButtons (ref), settingsShowSignal (ref)
 	local peopleReactView = require(corePackagesService.Workspace.Packages.PeopleReactView).PeopleReactView
 	local peopleServiceModule = require(corePackagesService.Workspace.Packages.PeopleService)
-	local var27 = settingsPageFactoryModule:CreateNewPage()
-	var27.TabHeader.Name = var20.PEOPLEPAGE.TAB_HEADER.NAME
-	var27.Page.Name = var20.PEOPLEPAGE.PAGE_ID
-	local ICON = uiblox[var20.PEOPLEPAGE.TAB_HEADER.ICON]
-	var27.TabHeader.TabLabel.Icon.Text = ICON.name
-	var27.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[ICON.variant]
-	var27.TabHeader.TabLabel.Title.Text = var15:Format(var20.PEOPLEPAGE.TAB_HEADER.TEXT)
+	local var8 = settingsPageFactoryModule:CreateNewPage()
+	var8.TabHeader.Name = var4.PEOPLEPAGE.TAB_HEADER.NAME
+	var8.Page.Name = var4.PEOPLEPAGE.PAGE_ID
+	local ICON = uiblox[var4.PEOPLEPAGE.TAB_HEADER.ICON]
+	var8.TabHeader.TabLabel.Icon.Text = ICON.name
+	var8.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[ICON.variant]
+	var8.TabHeader.TabLabel.Title.Text = var3:Format(var4.PEOPLEPAGE.TAB_HEADER.TEXT)
 	local settingsHubService = peopleServiceModule.getService("SettingsHubService")
-	settingsHubService.register(var27)
+	settingsHubService.register(var8)
 	
 	function var27.CreateMenuButtonsContainer(_)
 		-- upvalues: settingsHubService (ref)
@@ -74,43 +74,43 @@ return if fFlagRefactorPeoplePageModule() then (function()
 		end
 	end
 	local function createReactTree()
-		-- upvalues: var22 (copy), getFFlagPeoplePageLazyRenderCards (copy), fFlagEnablePeopleListLazyRender (copy), fFlagPeopleCardsEnableVirtualizedGrid (copy), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), fFlagPeoplePageFlipVolumePopoverToFitViewport (copy), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), var27 (ref), signalsReactModule (copy), var23 (copy), reactModule (copy), coreScriptsRootProvider (copy), localizationProvider (copy), var15 (copy), PeopleFocusRoot (copy), peopleReactView (ref), blockingModalScreenModule (copy), var10 (copy), getFFlagAddPeoplePageCardLayout (copy), var11 (copy), reactRobloxModule (copy)
-		if var22 then return end
-		local var30 = if getFFlagPeoplePageLazyRenderCards() or fFlagEnablePeopleListLazyRender or (fFlagPeopleCardsEnableVirtualizedGrid or fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView) or (fFlagPeoplePageFlipVolumePopoverToFitViewport or fFlagPeoplePageDismissCardMenuOnScrollOutOfView) then var27.Page:FindFirstAncestorWhichIsA("ScrollingFrame") else nil
+		-- upvalues: var5 (copy), getFFlagPeoplePageLazyRenderCards (copy), fFlagEnablePeopleListLazyRender (copy), fFlagPeopleCardsEnableVirtualizedGrid (copy), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), fFlagPeoplePageFlipVolumePopoverToFitViewport (copy), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), var8 (ref), signalsReactModule (copy), var6 (copy), reactModule (copy), coreScriptsRootProvider (copy), localizationProvider (copy), var3 (copy), PeopleFocusRoot (copy), peopleReactView (ref), blockingModalScreenModule (copy), var1 (copy), getFFlagAddPeoplePageCardLayout (copy), var2 (copy), reactRobloxModule (copy)
+		if var5 then return end
+		local var9 = if getFFlagPeoplePageLazyRenderCards() or fFlagEnablePeopleListLazyRender or (fFlagPeopleCardsEnableVirtualizedGrid or fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView) or (fFlagPeoplePageFlipVolumePopoverToFitViewport or fFlagPeoplePageDismissCardMenuOnScrollOutOfView) then var8.Page:FindFirstAncestorWhichIsA("ScrollingFrame") else nil
 		
 		local function PeopleConditionalView()
-			-- upvalues: signalsReactModule (copy), var23 (copy), reactModule (copy), coreScriptsRootProvider (copy), localizationProvider (copy), var15 (copy), PeopleFocusRoot (copy), peopleReactView (copy), blockingModalScreenModule (copy), getFFlagPeoplePageLazyRenderCards (copy), fFlagEnablePeopleListLazyRender (copy), fFlagPeopleCardsEnableVirtualizedGrid (copy), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), fFlagPeoplePageFlipVolumePopoverToFitViewport (copy), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), var30 (ref), var10 (copy), getFFlagAddPeoplePageCardLayout (copy), var11 (copy)
-			return if signalsReactModule.useSignalState(var23) then reactModule.createElement(coreScriptsRootProvider, {}, {
-				LocalizationProvider = reactModule.createElement(localizationProvider, { localization = var15 }, {
+			-- upvalues: signalsReactModule (copy), var6 (copy), reactModule (copy), coreScriptsRootProvider (copy), localizationProvider (copy), var3 (copy), PeopleFocusRoot (copy), peopleReactView (copy), blockingModalScreenModule (copy), getFFlagPeoplePageLazyRenderCards (copy), fFlagEnablePeopleListLazyRender (copy), fFlagPeopleCardsEnableVirtualizedGrid (copy), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), fFlagPeoplePageFlipVolumePopoverToFitViewport (copy), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), var9 (ref), var1 (copy), getFFlagAddPeoplePageCardLayout (copy), var2 (copy)
+			return if signalsReactModule.useSignalState(var6) then reactModule.createElement(coreScriptsRootProvider, {}, {
+				LocalizationProvider = reactModule.createElement(localizationProvider, { localization = var3 }, {
 					FocusRoot = reactModule.createElement(PeopleFocusRoot, {}, {
 						PeopleReactView = reactModule.createElement(peopleReactView, {
 							blockingModalScreen = blockingModalScreenModule,
 							blockingFlags = {},
-							scrollingFrame = if getFFlagPeoplePageLazyRenderCards() or fFlagEnablePeopleListLazyRender or (fFlagPeopleCardsEnableVirtualizedGrid or fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView) or (fFlagPeoplePageFlipVolumePopoverToFitViewport or fFlagPeoplePageDismissCardMenuOnScrollOutOfView) then var30 else nil,
-							chromeEnabled = var10,
-							getUniversesExposedTo = if getFFlagAddPeoplePageCardLayout() and var11 then var11.getUniversesExposedTo else nil,
-							addUniverseToExposureList = if getFFlagAddPeoplePageCardLayout() and var11 then var11.addUniverseToExposureList else nil
+							scrollingFrame = if getFFlagPeoplePageLazyRenderCards() or fFlagEnablePeopleListLazyRender or (fFlagPeopleCardsEnableVirtualizedGrid or fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView) or (fFlagPeoplePageFlipVolumePopoverToFitViewport or fFlagPeoplePageDismissCardMenuOnScrollOutOfView) then var9 else nil,
+							chromeEnabled = var1,
+							getUniversesExposedTo = if getFFlagAddPeoplePageCardLayout() and var2 then var2.getUniversesExposedTo else nil,
+							addUniverseToExposureList = if getFFlagAddPeoplePageCardLayout() and var2 then var2.addUniverseToExposureList else nil
 						})
 					})
 				})
 			}) else nil
 		end
 		
-		var22 = reactRobloxModule.createRoot(var27.Page)
+		var5 = reactRobloxModule.createRoot(var8.Page)
 		
-		if var22 then
-			var22:render(reactModule.createElement(PeopleConditionalView))
+		if var5 then
+			var5:render(reactModule.createElement(PeopleConditionalView))
 		end
 	end
 	
-	var27.Displayed.Event:Connect(function()
-		-- upvalues: renderPeoplePageOnTabSwitch (copy), var23 (copy), createReactTree (ref), var24 (copy), fFlagIEMFocusNavPeoplePageToButtons (copy), var27 (ref)
-		if not renderPeoplePageOnTabSwitch or not var23(false) then
+	var8.Displayed.Event:Connect(function()
+		-- upvalues: renderPeoplePageOnTabSwitch (copy), var6 (copy), createReactTree (ref), var7 (copy), fFlagIEMFocusNavPeoplePageToButtons (copy), var8 (ref)
+		if not renderPeoplePageOnTabSwitch or not var6(false) then
 			createReactTree()
-			var24(true)
+			var7(true)
 		end
 		if fFlagIEMFocusNavPeoplePageToButtons then
-			local menuContainer = var27.Page:FindFirstAncestor("MenuContainer")
+			local menuContainer = var8.Page:FindFirstAncestor("MenuContainer")
 			
 			if menuContainer then
 				local bottomButtonFrame = menuContainer:FindFirstChild("BottomButtonFrame", true)
@@ -124,19 +124,19 @@ return if fFlagRefactorPeoplePageModule() then (function()
 	
 	if renderPeoplePageOnTabSwitch then
 		settingsShowSignal:connect(function(p1)
-			-- upvalues: var24 (copy)
+			-- upvalues: var7 (copy)
 			if not p1 then
-				var24(false)
+				var7(false)
 			end
 		end)
 	else
-		var27.Hidden.Event:Connect(function()
-			-- upvalues: var24 (copy)
-			var24(false)
+		var8.Hidden.Event:Connect(function()
+			-- upvalues: var7 (copy)
+			var7(false)
 		end)
 	end
-	var27.Page.Size = UDim2.new(1, 0, 0, 0)
-	var27.Page.AutomaticSize = Enum.AutomaticSize.Y
+	var8.Page.Size = UDim2.new(1, 0, 0, 0)
+	var8.Page.AutomaticSize = Enum.AutomaticSize.Y
 	
-	return var27
+	return var8
 end)() else require(modules.Settings.Pages.Players)

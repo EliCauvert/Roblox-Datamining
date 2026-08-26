@@ -1,6 +1,6 @@
 ﻿local migration = require(script:FindFirstAncestor("Foundation").Parent.BuilderIcons).Migration
 
-return function(p0)
+return function(p1)
 	-- upvalues: migration (ref)
-	return migration.uiblox[p0]
+	return migration.uiblox[p1]
 end

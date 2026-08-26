@@ -7,21 +7,21 @@ local sendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
 local getUnifiedDeferredEventStoreModule = require(script.Parent.Store.getUnifiedDeferredEventStore)
 local WIDGET_LOADED = unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED
 
-local function logWidgetLoaded(p0, p1)
+local function logWidgetLoaded(p1, p2)
 	-- upvalues: fFlagAXDeferWidgetLoadedUntilMarketplaceEntered (ref), getUnifiedDeferredEventStoreModule (ref), WIDGET_LOADED (ref), logWidgetLoaded (ref), fFlagAXLimitWidgetLoadedItemCount (ref), fIntAXWidgetLoadedItemCountLimit (ref), sendUnifiedEventLogModule (ref), unifiedEventLogEnumsModule (ref)
 	if fFlagAXDeferWidgetLoadedUntilMarketplaceEntered then
-		local var5 = getUnifiedDeferredEventStoreModule(false)
+		local var1 = getUnifiedDeferredEventStoreModule(false)
 		
-		if not var5.isEntered(false) then
-			var5.enqueue(WIDGET_LOADED, function()
-				-- upvalues: logWidgetLoaded (copy), p0 (ref), p1 (ref)
-				logWidgetLoaded(p0, p1)
+		if not var1.isEntered(false) then
+			var1.enqueue(WIDGET_LOADED, function()
+				-- upvalues: logWidgetLoaded (copy), p1 (ref), p2 (ref)
+				logWidgetLoaded(p1, p2)
 			end)
 			
 			return
 		end
 	end
-	for i, v in p0 do
+	for i, v in p1 do
 		local t = {}
 		local t_1 = {}
 		local t_2 = {}
@@ -40,7 +40,7 @@ local function logWidgetLoaded(p0, p1)
 		sendUnifiedEventLogModule({
 			gridPositionColumn = 1,
 			action = unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED,
-			requestId = p1,
+			requestId = p2,
 			widgetId = v.id,
 			widgetType = v.type,
 			themeId = v.tagId,

@@ -1,37 +1,37 @@
 ﻿return function()
 	local t = {}
 	local t_1 = {}
-	local var2 = false
+	local var1 = false
 	
 	return {
-		subscribe = function(_, p0)
-			-- upvalues: var2 (write), t (ref), t_1 (ref)
-			assert(typeof(p0) == "function", "Can only subscribe to signals with a function.")
-			local t_2 = { disconnected = false, callback = p0 }
+		subscribe = function(_, p1)
+			-- upvalues: var1 (write), t (ref), t_1 (ref)
+			assert(typeof(p1) == "function", "Can only subscribe to signals with a function.")
+			local t_2 = { disconnected = false, callback = p1 }
 			
-			if var2 and not t[p0] then
-				t_1[p0] = t_2
+			if var1 and not t[p1] then
+				t_1[p1] = t_2
 			end
-			t[p0] = t_2
+			t[p1] = t_2
 			
 			return function()
-				-- upvalues: t_2 (ref), t (copy), p0 (ref), t_1 (copy)
+				-- upvalues: t_2 (ref), t (copy), p1 (ref), t_1 (copy)
 				assert(not t_2.disconnected, "Listeners can only be disconnected once.")
 				t_2.disconnected = true
-				t[p0] = nil
-				t_1[p0] = nil
+				t[p1] = nil
+				t_1[p1] = nil
 			end
 		end,
 		fire = function(_, ...)
-			-- upvalues: var2 (write), t (ref), t_1 (ref)
-			var2 = true
+			-- upvalues: var1 (write), t (ref), t_1 (ref)
+			var1 = true
 			
 			for i, v in pairs(t) do
 				if not v.disconnected and not t_1[i] then
 					i(...)
 				end
 			end
-			var2 = false
+			var1 = false
 			
 			for i_1, v_1 in pairs(t_1) do
 				t_1[i_1] = nil

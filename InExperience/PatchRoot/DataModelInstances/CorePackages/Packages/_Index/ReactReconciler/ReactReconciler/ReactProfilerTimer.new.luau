@@ -5,65 +5,65 @@ local enableProfilerTimer = reactFeatureFlags.enableProfilerTimer
 local enableProfilerCommitHooks = reactFeatureFlags.enableProfilerCommitHooks
 local profiler = require(script.Parent.ReactWorkTags).Profiler
 local unstableNow = require(parent.Scheduler).unstable_now
-local var0 = 0
-local var1 = -1
+local var1 = 0
 local var2 = -1
 local var3 = -1
+local var4 = -1
 
 function getCommitTime()
-	-- upvalues: var0 (write)
-	return var0
+	-- upvalues: var1 (write)
+	return var1
 end
 
 function recordCommitTime()
-	-- upvalues: enableProfilerTimer (ref), var0 (write), unstableNow (ref)
+	-- upvalues: enableProfilerTimer (ref), var1 (write), unstableNow (ref)
 	if enableProfilerTimer then
-		var0 = unstableNow()
+		var1 = unstableNow()
 		
 		return
 	end
 end
 
-function startProfilerTimer(p0)
-	-- upvalues: enableProfilerTimer (ref), var2 (write), unstableNow (ref)
+function startProfilerTimer(p1)
+	-- upvalues: enableProfilerTimer (ref), var3 (write), unstableNow (ref)
 	if not enableProfilerTimer then return end
-	var2 = unstableNow()
+	var3 = unstableNow()
 	
-	if p0.actualStartTime ~= nil and p0.actualStartTime < 0 then
-		p0.actualStartTime = unstableNow()
+	if p1.actualStartTime ~= nil and p1.actualStartTime < 0 then
+		p1.actualStartTime = unstableNow()
 	end
 end
 
 function stopProfilerTimerIfRunning(_)
-	-- upvalues: enableProfilerTimer (ref), var2 (write)
+	-- upvalues: enableProfilerTimer (ref), var3 (write)
 	if enableProfilerTimer then
-		var2 = -1
+		var3 = -1
 		
 		return
 	end
 end
 
 function stopProfilerTimerIfRunningAndRecordDelta(p1, p2)
-	-- upvalues: enableProfilerTimer (ref), var2 (write), unstableNow (ref)
+	-- upvalues: enableProfilerTimer (ref), var3 (write), unstableNow (ref)
 	if not enableProfilerTimer then return end
-	if var2 >= 0 then
-		local var4 = unstableNow() - var2
-		p1.actualDuration += var4
+	if var3 >= 0 then
+		local var5 = unstableNow() - var3
+		p1.actualDuration += var5
 		
 		if p2 then
-			p1.selfBaseDuration = var4
+			p1.selfBaseDuration = var5
 		end
-		var2 = -1
+		var3 = -1
 	end
 end
 
-function recordLayoutEffectDuration(p3)
-	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var1 (write), unstableNow (ref), profiler (ref)
+function recordLayoutEffectDuration(p1)
+	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var2 (write), unstableNow (ref), profiler (ref)
 	if not enableProfilerTimer or not enableProfilerCommitHooks then return end
-	if var1 >= 0 then
-		local var5 = unstableNow() - var1
-		var1 = -1
-		local _return = p3.return_
+	if var2 >= 0 then
+		local var5 = unstableNow() - var2
+		var2 = -1
+		local _return = p1.return_
 		while _return ~= nil do
 			if _return.tag ~= profiler then
 				_return = _return.return_
@@ -76,13 +76,13 @@ function recordLayoutEffectDuration(p3)
 	end
 end
 
-function recordPassiveEffectDuration(p4)
-	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var3 (write), unstableNow (ref), profiler (ref)
+function recordPassiveEffectDuration(p2)
+	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var4 (write), unstableNow (ref), profiler (ref)
 	if not enableProfilerTimer or not enableProfilerCommitHooks then return end
-	if var3 >= 0 then
-		local var6 = unstableNow() - var3
-		var3 = -1
-		local _return = p4.return_
+	if var4 >= 0 then
+		local var6 = unstableNow() - var4
+		var4 = -1
+		local _return = p2.return_
 		while _return ~= nil do
 			if _return.tag ~= profiler then
 				_return = _return.return_
@@ -99,27 +99,27 @@ function recordPassiveEffectDuration(p4)
 end
 
 function startLayoutEffectTimer()
-	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var1 (write), unstableNow (ref)
+	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var2 (write), unstableNow (ref)
 	if enableProfilerTimer and enableProfilerCommitHooks then
-		var1 = unstableNow()
+		var2 = unstableNow()
 		
 		return
 	end
 end
 
 function startPassiveEffectTimer()
-	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var3 (write), unstableNow (ref)
+	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var4 (write), unstableNow (ref)
 	if enableProfilerTimer and enableProfilerCommitHooks then
-		var3 = unstableNow()
+		var4 = unstableNow()
 		
 		return
 	end
 end
 
-function transferActualDuration(p5)
-	local child = p5.child
+function transferActualDuration(p3)
+	local child = p3.child
 	while child do
-		p5.actualDuration += child.actualDuration
+		p3.actualDuration += child.actualDuration
 		child = child.sibling
 	end
 end

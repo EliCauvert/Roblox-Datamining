@@ -2,66 +2,66 @@
 local buildActionNameModule = require(script.Parent.buildActionName)
 local promiseModule = require(script.Parent.Promise)
 
-return function(p0)
+return function(p1)
 	-- upvalues: buildActionNameModule (ref), enumNetworkStatusModule (ref), promiseModule (ref)
-	local var3 = require(script.Parent.getStatus)(p0)
+	local var1 = require(script.Parent.getStatus)(p1)
 	
-	local function _(p1, p2, p3)
-		-- upvalues: buildActionNameModule (copy), p0 (ref)
+	local function _(p2, p3, p4)
+		-- upvalues: buildActionNameModule (copy), p1 (ref)
 		return {
-			ids = p1,
-			keymapper = p2,
-			status = p3,
-			type = buildActionNameModule(p0)
+			ids = p2,
+			keymapper = p3,
+			status = p4,
+			type = buildActionNameModule(p1)
 		}
 	end
 	
-	local function filter(p4, p5, p6)
-		-- upvalues: var3 (ref), enumNetworkStatusModule (copy)
+	local function filter(p2, p3, p4)
+		-- upvalues: var1 (ref), enumNetworkStatusModule (copy)
 		local t = {}
 		
-		for i, v in ipairs(p5) do
-			if var3(p4, p6(v)) ~= enumNetworkStatusModule.Fetching then
+		for i, v in ipairs(p3) do
+			if var1(p2, p4(v)) ~= enumNetworkStatusModule.Fetching then
 				table.insert(t, v)
 			end
 		end
 		return t
 	end
 	
-	return function(p7, p8, p9, p10)
-		-- upvalues: filter (ref), p0 (ref), promiseModule (copy), enumNetworkStatusModule (copy), buildActionNameModule (copy)
-		local var6 = filter(p7:getState(), p8, p9)
+	return function(p5, p6, p7, p8)
+		-- upvalues: filter (ref), p1 (ref), promiseModule (copy), enumNetworkStatusModule (copy), buildActionNameModule (copy)
+		local var2 = filter(p5:getState(), p6, p7)
 		
-		if p0.killRequestWithFilteredIds and #p8 > 0 and #var6 == 0 then
+		if p1.killRequestWithFilteredIds and #p6 > 0 and #var2 == 0 then
 			return promiseModule.reject("Request with provided IDs already fetching.")
 		end
-		p7:dispatch({
-			ids = var6,
-			keymapper = p9,
+		p5:dispatch({
+			ids = var2,
+			keymapper = p7,
 			status = enumNetworkStatusModule.Fetching,
-			type = buildActionNameModule(p0)
+			type = buildActionNameModule(p1)
 		})
 		
-		return p10(p7, var6):andThen(function(p11)
-			-- upvalues: p7 (ref), var6 (ref), p9 (ref), enumNetworkStatusModule (copy), buildActionNameModule (copy), p0 (copy)
-			p7:dispatch({
-				ids = var6,
-				keymapper = p9,
+		return p8(p5, var2):andThen(function(p9)
+			-- upvalues: p5 (ref), var2 (ref), p7 (ref), enumNetworkStatusModule (copy), buildActionNameModule (copy), p1 (copy)
+			p5:dispatch({
+				ids = var2,
+				keymapper = p7,
 				status = enumNetworkStatusModule.Done,
-				type = buildActionNameModule(p0)
+				type = buildActionNameModule(p1)
 			})
 			
-			return p11
-		end, function(p12)
-			-- upvalues: p7 (ref), var6 (ref), p9 (ref), enumNetworkStatusModule (copy), buildActionNameModule (copy), p0 (copy), promiseModule (copy)
-			p7:dispatch({
-				ids = var6,
-				keymapper = p9,
+			return p9
+		end, function(p9)
+			-- upvalues: p5 (ref), var2 (ref), p7 (ref), enumNetworkStatusModule (copy), buildActionNameModule (copy), p1 (copy), promiseModule (copy)
+			p5:dispatch({
+				ids = var2,
+				keymapper = p7,
 				status = enumNetworkStatusModule.Failed,
-				type = buildActionNameModule(p0)
+				type = buildActionNameModule(p1)
 			})
 			
-			return promiseModule.reject(p12)
+			return promiseModule.reject(p9)
 		end)
 	end
 end

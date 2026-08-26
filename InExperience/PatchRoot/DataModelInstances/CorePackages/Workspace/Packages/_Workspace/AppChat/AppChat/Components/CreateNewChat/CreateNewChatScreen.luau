@@ -23,8 +23,8 @@ local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
 local createNewChatScreen = roactModule.PureComponent:extend("CreateNewChatScreen")
 createNewChatScreen.defaultProps = {}
 
-local function _(p0)
-	local navigation = p0 and p0.navigation
+local function _(p1)
+	local navigation = p1 and p1.navigation
 	
 	return if navigation and navigation.getScreenProps then navigation.getScreenProps("wideMode", false) else false
 end
@@ -32,11 +32,11 @@ end
 function createNewChatScreen.navigationOptions(p1)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), getFFlagIsSquadEnabled (ref), argoPartyExperimentation (ref), fFlagAppChatNewChatFixEnabled (ref), fFlagConnectionsToFriendsRename (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), roactModule (ref), topBarProviderModule (ref), enumScreensModule (ref), argCheckModule (ref), withLocalization (ref), createSystemMenuButtonModule (ref)
 	local navigation = p1 and p1.navigation
-	local var19 = if navigation and navigation.getScreenProps then navigation.getScreenProps("wideMode", false) else false
+	local var1 = if navigation and navigation.getScreenProps then navigation.getScreenProps("wideMode", false) else false
 	
-	return if fFlagAppChatTopBarConfigDrivenModule() then { tabBarVisible = var19 } else {
+	return if fFlagAppChatTopBarConfigDrivenModule() then { tabBarVisible = var1 } else {
 		backButtonEnabled = true,
-		tabBarVisible = var19,
+		tabBarVisible = var1,
 		headerText = {
 			shouldLocalize = true,
 			raw = if getFFlagIsSquadEnabled() then if argoPartyExperimentation.getIsRenameEnabled() then if fFlagAppChatNewChatFixEnabled then "Feature.Chat.Title.NewChat" else "Feature.Chat.Heading.ChatWithFriends" elseif fFlagConnectionsToFriendsRename then "Feature.Chat.Heading.PartyWithFriends" else "Feature.Chat.Heading.PartyWithConnections" else "Feature.Chat.Heading.ChatWithConnections"
@@ -70,66 +70,66 @@ function createNewChatScreen.navigationOptions(p1)
 	}
 end
 
-function createNewChatScreen.init(p4)
+function createNewChatScreen.init(p1)
 	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), loggerModule (ref), enumScreensModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), argCheckModule (ref)
-	p4.ixpSubscription = if fFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p4.props.navigation, "Party.ChatMembersPage") else nil
+	p1.ixpSubscription = if fFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.ChatMembersPage") else nil
 	
-	function p4.navigateToConversation(p5)
-		-- upvalues: p4 (ref), loggerModule (copy), enumScreensModule (copy)
-		local navigation = p4.props.navigation
-		loggerModule:info("Navigate To Conversation: {} from {screen}", p5)
+	function p4.navigateToConversation(p2)
+		-- upvalues: p1 (ref), loggerModule (copy), enumScreensModule (copy)
+		local navigation = p1.props.navigation
+		loggerModule:info("Navigate To Conversation: {} from {screen}", p2)
 		
 		if navigation.getScreenProps("wideMode", false) then
-			navigation.navigate(enumScreensModule.ChatConversation, { conversationId = p5 })
+			navigation.navigate(enumScreensModule.ChatConversation, { conversationId = p2 })
 			
 			return
 		end
-		navigation.replace(enumScreensModule.ChatConversation, { conversationId = p5 })
+		navigation.replace(enumScreensModule.ChatConversation, { conversationId = p2 })
 	end
 	
-	function p4.navigateToToast(p6)
-		-- upvalues: loggerModule (copy), p4 (ref), enumScreensModule (copy)
+	function p4.navigateToToast(p2)
+		-- upvalues: loggerModule (copy), p1 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To Toast from {screen}")
-		p4.props.navigation.navigate(enumScreensModule.RoactChatToast, p6)
+		p1.props.navigation.navigate(enumScreensModule.RoactChatToast, p2)
 	end
 	
-	function p4.setSystemButtonActivated(p7)
-		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), fFlagAppChatTopBarConfigDrivenModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), p4 (ref), argCheckModule (copy)
+	function p4.setSystemButtonActivated(p2)
+		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), fFlagAppChatTopBarConfigDrivenModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), p1 (ref), argCheckModule (copy)
 		if fFlagAppChatTopBarSignalsStoreModule or fFlagAppChatTopBarConfigDrivenModule() then
-			getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.CreateNewChat, { systemButtonActivated = p7 })
+			getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.CreateNewChat, { systemButtonActivated = p2 })
 			
 			return
 		end
-		local setScreenTopBar = p4.props.navigation.getScreenProps("setScreenTopBar", nil)
+		local setScreenTopBar = p1.props.navigation.getScreenProps("setScreenTopBar", nil)
 		argCheckModule.isNotNil(setScreenTopBar, "setScreenTopBar in screenProps")
-		setScreenTopBar(enumScreensModule.CreateNewChat, { systemButtonActivated = p7 })
+		setScreenTopBar(enumScreensModule.CreateNewChat, { systemButtonActivated = p2 })
 	end
 	
-	function p4.setSystemButtonEnabled(p8)
-		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), fFlagAppChatTopBarConfigDrivenModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), p4 (ref), argCheckModule (copy)
+	function p4.setSystemButtonEnabled(p2)
+		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), fFlagAppChatTopBarConfigDrivenModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), p1 (ref), argCheckModule (copy)
 		if fFlagAppChatTopBarSignalsStoreModule or fFlagAppChatTopBarConfigDrivenModule() then
-			getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.CreateNewChat, { systemButtonEnabled = p8 })
+			getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.CreateNewChat, { systemButtonEnabled = p2 })
 			
 			return
 		end
-		local setScreenTopBar = p4.props.navigation.getScreenProps("setScreenTopBar", nil)
+		local setScreenTopBar = p1.props.navigation.getScreenProps("setScreenTopBar", nil)
 		argCheckModule.isNotNil(setScreenTopBar, "setScreenTopBar in screenProps")
-		setScreenTopBar(enumScreensModule.CreateNewChat, { systemButtonEnabled = p8 })
+		setScreenTopBar(enumScreensModule.CreateNewChat, { systemButtonEnabled = p2 })
 	end
 end
 
-function createNewChatScreen.render(p9)
+function createNewChatScreen.render(p1)
 	-- upvalues: argCheckModule (ref), roactModule (ref), createNewChatContainerModule (ref)
 	return roactModule.createElement(createNewChatContainerModule, {
-		topBarHeight = argCheckModule.isNotNil(p9.props.navigation, "navigation in CreateNewChatScreen").getScreenProps("topBarHeight", 0),
-		navigateToConversation = p9.navigateToConversation,
-		navigateToToast = p9.navigateToToast,
-		setSystemButtonActivated = p9.setSystemButtonActivated,
-		setSystemButtonEnabled = p9.setSystemButtonEnabled
+		topBarHeight = argCheckModule.isNotNil(p1.props.navigation, "navigation in CreateNewChatScreen").getScreenProps("topBarHeight", 0),
+		navigateToConversation = p1.navigateToConversation,
+		navigateToToast = p1.navigateToToast,
+		setSystemButtonActivated = p1.setSystemButtonActivated,
+		setSystemButtonEnabled = p1.setSystemButtonEnabled
 	})
 end
 
-function createNewChatScreen.didMount(p10)
+function createNewChatScreen.didMount(p1)
 	-- upvalues: loggerModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), getFFlagIsSquadEnabled (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), fFlagAppChatNewChatFixEnabled (ref), fFlagConnectionsToFriendsRename (ref)
 	loggerModule:info("{screen} mounted")
 	
@@ -143,16 +143,16 @@ function createNewChatScreen.didMount(p10)
 			systemButtonText = if getFFlagIsSquadEnabled() then "Feature.Chat.Action.Create" else "Feature.Chat.Action.StartChatWithFriends"
 		})
 	end
-	p10.setSystemButtonEnabled(false)
+	p1.setSystemButtonEnabled(false)
 end
 
-function createNewChatScreen.willUnmount(p11)
+function createNewChatScreen.willUnmount(p1)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref)
 	if fFlagAppChatTopBarConfigDrivenModule() then
 		getTopBarStoreModule(false).clearScreenTopBar(enumScreensModule.CreateNewChat)
 	end
-	if p11.ixpSubscription then
-		p11.ixpSubscription.remove()
+	if p1.ixpSubscription then
+		p1.ixpSubscription.remove()
 	end
 end
 

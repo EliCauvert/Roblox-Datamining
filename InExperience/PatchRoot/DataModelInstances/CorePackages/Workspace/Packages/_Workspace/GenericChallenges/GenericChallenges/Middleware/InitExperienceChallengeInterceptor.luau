@@ -5,52 +5,52 @@ local base64 = require(genericChallenges.Parent.AuthCommon).Utils.Base64
 local httpService = game:GetService("HttpService")
 local genericChallengeService = game:GetService("GenericChallengeService")
 local fFlagEnableMutexOnGenericChallengeInterceptorMount = game:DefineFastFlag("FFlagEnableMutexOnGenericChallengeInterceptorMount", false)
-local var6 = false
+local var1 = false
 
-function challengeRequiredEventHandler(p0, p1, p2)
+function challengeRequiredEventHandler(p1, p2, p3)
 	-- upvalues: renderChallengeModule (ref), challengeTypeModule (ref), genericChallengeService (ref), base64 (ref), httpService (ref)
 	renderChallengeModule({
 		renderWebViewInModal = true,
 		challengeType = challengeTypeModule.Generic,
 		challengeParameters = {
-			genericChallengeId = p0,
-			genericChallengeType = p1,
-			genericChallengeMetadata = p2
+			genericChallengeId = p1,
+			genericChallengeType = p2,
+			genericChallengeMetadata = p3
 		},
 		callbacks = {
 			OnChallengeLoadFailed = function(_)
-				-- upvalues: genericChallengeService (copy), p0 (ref)
-				genericChallengeService:SignalChallengeLoaded(p0, false)
+				-- upvalues: genericChallengeService (copy), p1 (ref)
+				genericChallengeService:SignalChallengeLoaded(p1, false)
 			end,
-			OnChallengeCompleted = function(p3)
-				-- upvalues: base64 (copy), httpService (copy), genericChallengeService (copy), p0 (ref), p1 (ref)
-				if p3.data.metadata ~= nil then
-					genericChallengeService:SignalChallengeCompleted(p0, p1, base64.Encode(httpService:JSONEncode(p3.data.metadata)))
+			OnChallengeCompleted = function(p4)
+				-- upvalues: base64 (copy), httpService (copy), genericChallengeService (copy), p1 (ref), p2 (ref)
+				if p4.data.metadata ~= nil then
+					genericChallengeService:SignalChallengeCompleted(p1, p2, base64.Encode(httpService:JSONEncode(p4.data.metadata)))
 				end
 			end,
 			OnChallengeInvalidated = function(_)
-				-- upvalues: genericChallengeService (copy), p0 (ref)
-				genericChallengeService:SignalChallengeInvalidated(p0)
+				-- upvalues: genericChallengeService (copy), p1 (ref)
+				genericChallengeService:SignalChallengeInvalidated(p1)
 			end,
 			OnChallengeAbandoned = function()
-				-- upvalues: genericChallengeService (copy), p0 (ref)
-				genericChallengeService:SignalChallengeAbandoned(p0)
+				-- upvalues: genericChallengeService (copy), p1 (ref)
+				genericChallengeService:SignalChallengeAbandoned(p1)
 			end
 		},
 		onWebViewOpen = function()
-			-- upvalues: genericChallengeService (copy), p0 (ref)
-			genericChallengeService:SignalChallengeLoaded(p0, true)
+			-- upvalues: genericChallengeService (copy), p1 (ref)
+			genericChallengeService:SignalChallengeLoaded(p1, true)
 		end
 	})
 end
 
 return function()
-	-- upvalues: fFlagEnableMutexOnGenericChallengeInterceptorMount (ref), var6 (write), genericChallengeService (ref)
+	-- upvalues: fFlagEnableMutexOnGenericChallengeInterceptorMount (ref), var1 (write), genericChallengeService (ref)
 	if fFlagEnableMutexOnGenericChallengeInterceptorMount then
-		if var6 then
+		if var1 then
 			return
 		else
-			var6 = true
+			var1 = true
 			genericChallengeService.ChallengeRequiredEvent:Connect(challengeRequiredEventHandler)
 			
 			return

@@ -15,9 +15,9 @@ return function()
 		var7 = var9
 		var8 = var10
 	end
-	local var11 = if fFlagFixVirtualizedGridNumItems then signalsModule.createComputed(function(p0)
+	local var11 = if fFlagFixVirtualizedGridNumItems then signalsModule.createComputed(function(p1)
 		-- upvalues: var5 (ref), var7 (write)
-		return var5(p0) + var7(p0)
+		return var5(p1) + var7(p1)
 	end) else nil
 	local var12 = nil
 	local var13 = nil

@@ -25,7 +25,7 @@ local loggingProtocolModule = require(parent.LoggingProtocol)
 
 local function GenerateDevGUIBlackoutCurtain()
 	-- upvalues: create (ref), coreGuiService (ref)
-	local var10 = create("ScreenGui")({
+	local var1 = create("ScreenGui")({
 		Name = "DevGUIBlackoutCurtain",
 		DisplayOrder = 8,
 		IgnoreGuiInset = true
@@ -37,14 +37,14 @@ local function GenerateDevGUIBlackoutCurtain()
 		BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 		Size = UDim2.fromScale(10, 10),
 		Position = UDim2.fromOffset(0, 0),
-		Parent = var10
+		Parent = var1
 	})
-	var10.Parent = coreGuiService
+	var1.Parent = coreGuiService
 	
-	return var10
+	return var1
 end
 
-local function mountTiltLoadingScreen(p0, p1)
+local function mountTiltLoadingScreen(p1, p2)
 	-- upvalues: parent (ref), coreGuiService (ref), game (ref), loggingProtocolModule (ref)
 	local reactModule = require(parent.React)
 	local reactRobloxModule = require(parent.ReactRoblox)
@@ -52,32 +52,32 @@ local function mountTiltLoadingScreen(p0, p1)
 	local robloxLoadingGUI = Instance.new("Folder")
 	robloxLoadingGUI.Name = "RobloxLoadingGUI"
 	robloxLoadingGUI.Parent = coreGuiService
-	local var14 = reactRobloxModule.createRoot(robloxLoadingGUI)
-	local var15 = false
+	local var1 = reactRobloxModule.createRoot(robloxLoadingGUI)
+	local var2 = false
 	
 	local function unmount()
-		-- upvalues: var14 (ref), robloxLoadingGUI (ref)
-		var14:unmount()
+		-- upvalues: var1 (ref), robloxLoadingGUI (ref)
+		var1:unmount()
 		robloxLoadingGUI:Destroy()
 	end
 	
-	var14:render(reactModule.createElement(tiltLoadingScreen, {
-		placeId = p0,
-		onCancel = function(p2, p3)
-			-- upvalues: var15 (write), game (copy), loggingProtocolModule (copy)
-			if var15 or p3 and game:IsLoaded() then return end
-			var15 = true
+	var1:render(reactModule.createElement(tiltLoadingScreen, {
+		placeId = p1,
+		onCancel = function(p3, p4)
+			-- upvalues: var2 (write), game (copy), loggingProtocolModule (copy)
+			if var2 or p4 and game:IsLoaded() then return end
+			var2 = true
 			
-			if p2 then
+			if p3 then
 				loggingProtocolModule.default:logEventOnce("first_experience_cancelled")
 			end
 			game:Shutdown()
 		end,
 		onDismissComplete = function()
-			-- upvalues: var14 (ref), robloxLoadingGUI (ref), p1 (ref), loggingProtocolModule (copy)
-			var14:unmount()
+			-- upvalues: var1 (ref), robloxLoadingGUI (ref), p2 (ref), loggingProtocolModule (copy)
+			var1:unmount()
 			robloxLoadingGUI:Destroy()
-			p1()
+			p2()
 			loggingProtocolModule.default:logEventOnce("first_experience_interactive")
 		end
 	}))
@@ -87,87 +87,87 @@ end
 
 local _ = nil
 
-local var9 = function(p4, p5)
-	-- upvalues: GenerateDevGUIBlackoutCurtain (ref), parent (ref), loadingScreenReducerModule (ref), loadingScreenModule (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), experienceLoadingScreenFixStyleLink (ref), coreGuiService (ref), runService (ref), waitProxy (ref), splashScreenManager (ref), experienceLoadingScript (ref), players (ref), game (ref), VRService (ref), isVRAppBuild (ref), fFlagEnableTiltLoadingScreen (ref), replicatedFirst (ref), loggingProtocolModule (ref), mountTiltLoadingScreen (ref), var9 (write), settingsProxy (ref)
-	local var17 = true
-	local var18 = false
-	local var19 = false
-	local var20 = nil
-	local var21 = nil
-	local var22 = GenerateDevGUIBlackoutCurtain()
-	local var23 = nil
+local var1 = function(p1, p2)
+	-- upvalues: GenerateDevGUIBlackoutCurtain (ref), parent (ref), loadingScreenReducerModule (ref), loadingScreenModule (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), experienceLoadingScreenFixStyleLink (ref), coreGuiService (ref), runService (ref), waitProxy (ref), splashScreenManager (ref), experienceLoadingScript (ref), players (ref), game (ref), VRService (ref), isVRAppBuild (ref), fFlagEnableTiltLoadingScreen (ref), replicatedFirst (ref), loggingProtocolModule (ref), mountTiltLoadingScreen (ref), var1 (write), settingsProxy (ref)
+	local var2 = true
+	local var3 = false
+	local var4 = false
+	local var5 = nil
+	local var6 = nil
+	local var7 = GenerateDevGUIBlackoutCurtain()
+	local var8 = nil
 	
 	local _ = function()
-		-- upvalues: var22 (write)
-		if var22 then
-			var22.Enabled = false
-			var22:Destroy()
-			var22 = nil
+		-- upvalues: var7 (write)
+		if var7 then
+			var7.Enabled = false
+			var7:Destroy()
+			var7 = nil
 		end
 	end
 	
-	local var24 = function(p6)
-		-- upvalues: var23 (write), parent (copy), loadingScreenReducerModule (copy), loadingScreenModule (copy), uiModeStyleProvider (copy), colorMode (copy), constants (copy), experienceLoadingScreenFixStyleLink (copy), coreGuiService (copy), runService (copy), var22 (write)
-		var23 = require(parent.Roact)
+	local var9 = function(p3)
+		-- upvalues: var8 (write), parent (copy), loadingScreenReducerModule (copy), loadingScreenModule (copy), uiModeStyleProvider (copy), colorMode (copy), constants (copy), experienceLoadingScreenFixStyleLink (copy), coreGuiService (copy), runService (copy), var7 (write)
+		var8 = require(parent.Roact)
 		local roduxModule = require(parent.Rodux)
-		local var31 = var23.createElement(require(parent.RoactRodux).StoreProvider, {
+		local var10 = var8.createElement(require(parent.RoactRodux).StoreProvider, {
 			store = roduxModule.Store.new(loadingScreenReducerModule, {}, { roduxModule.thunkMiddleware })
 		}, {
-			var23.createElement(uiModeStyleProvider, {
+			var8.createElement(uiModeStyleProvider, {
 				style = {
 					themeName = colorMode.Dark,
 					fontName = constants.FontName.Gotham
 				}
 			}, {
-				loadingScreenUI = var23.createElement(loadingScreenModule, { placeId = p6 })
+				loadingScreenUI = var8.createElement(loadingScreenModule, { placeId = p3 })
 			})
 		})
 		
 		if experienceLoadingScreenFixStyleLink then
-			var31 = var23.createElement("Folder", nil, var31)
+			var10 = var8.createElement("Folder", nil, var10)
 		end
-		local robloxLoadingGUI = var23.mount(var31, coreGuiService, "RobloxLoadingGUI")
+		local robloxLoadingGUI = var8.mount(var10, coreGuiService, "RobloxLoadingGUI")
 		runService.Heartbeat:Wait()
-		var22.Enabled = false
+		var7.Enabled = false
 		
 		return robloxLoadingGUI
 	end
 	
 	local _ = function()
-		-- upvalues: var23 (write), waitProxy (copy), var21 (write)
-		if var23 then
+		-- upvalues: var8 (write), waitProxy (copy), var6 (write)
+		if var8 then
 			waitProxy(0.6)
 			
-			if var21 ~= nil then
-				var23.unmount(var21)
-				var21 = nil
+			if var6 ~= nil then
+				var8.unmount(var6)
+				var6 = nil
 			end
 		end
 	end
 	
-	local var25 = function(p7)
-		-- upvalues: var17 (write), var23 (write), waitProxy (copy), var21 (write), splashScreenManager (copy), var20 (write), var22 (write), experienceLoadingScript (copy)
-		var17 = false
+	local var10 = function(p3)
+		-- upvalues: var2 (write), var8 (write), waitProxy (copy), var6 (write), splashScreenManager (copy), var5 (write), var7 (write), experienceLoadingScript (copy)
+		var2 = false
 		
-		if var23 then
+		if var8 then
 			waitProxy(0.6)
 			
-			if var21 ~= nil then
-				var23.unmount(var21)
-				var21 = nil
+			if var6 ~= nil then
+				var8.unmount(var6)
+				var6 = nil
 			end
 		end
-		splashScreenManager.initialize(p7 / 2, game:GetFastInt("FPSAwareSplashScreenTimeout"), p7)
-		splashScreenManager.addStatusChangeListener(function(p8)
-			-- upvalues: var17 (copy), var20 (copy)
-			var17 = p8
+		splashScreenManager.initialize(p3 / 2, game:GetFastInt("FPSAwareSplashScreenTimeout"), p3)
+		splashScreenManager.addStatusChangeListener(function(p4)
+			-- upvalues: var2 (copy), var5 (copy)
+			var2 = p4
 			
-			if var17 and var20 then
-				var20()
+			if var2 and var5 then
+				var5()
 			end
 		end)
-		var22.Enabled = true
-		require(experienceLoadingScript.LoadingScreen3D).Parent = var22
+		var7.Enabled = true
+		require(experienceLoadingScript.LoadingScreen3D).Parent = var7
 	end
 	
 	local _ = function()
@@ -185,8 +185,8 @@ local var9 = function(p4, p5)
 		end
 	end
 	
-	local var26 = function()
-		-- upvalues: game (copy), players (copy), var18 (write), var20 (write)
+	local var11 = function()
+		-- upvalues: game (copy), players (copy), var3 (write), var5 (write)
 		if game:IsLoaded() then
 			if players.CharacterAutoLoads then
 				local localPlayer = players.LocalPlayer
@@ -199,17 +199,17 @@ local var9 = function(p4, p5)
 					localPlayer.CharacterAdded:Wait()
 				end
 			end
-			var18 = true
+			var3 = true
 			
-			if var20 then
-				var20()
+			if var5 then
+				var5()
 				
 				return
 			end
 		else
 			local loadedConnection = nil
 			loadedConnection = game.Loaded:Connect(function()
-				-- upvalues: loadedConnection (write), players (copy), var18 (copy), var20 (copy)
+				-- upvalues: loadedConnection (write), players (copy), var3 (copy), var5 (copy)
 				loadedConnection:Disconnect()
 				loadedConnection = nil
 				
@@ -224,170 +224,170 @@ local var9 = function(p4, p5)
 						localPlayer.CharacterAdded:Wait()
 					end
 				end
-				var18 = true
+				var3 = true
 				
-				if var20 then
-					var20()
+				if var5 then
+					var5()
 				end
 			end)
 		end
 	end
 	
 	if VRService.VREnabled or isVRAppBuild() then
-		var25(p5)
+		var10(p2)
 	elseif fFlagEnableTiltLoadingScreen then
 		if replicatedFirst:IsDefaultLoadingGuiRemoved() then
-			if var22 then
-				var22.Enabled = false
-				var22:Destroy()
-				var22 = nil
+			if var7 then
+				var7.Enabled = false
+				var7:Destroy()
+				var7 = nil
 			end
 			replicatedFirst:SetDefaultLoadingGuiRemoved()
 			loggingProtocolModule.default:logEventOnce("first_experience_interactive")
 			
 			return
 		else
-			local var27 = nil
-			local var28 = true
-			local var29 = mountTiltLoadingScreen(p4, function()
-				-- upvalues: var28 (write), var27 (write), var22 (write)
-				var28 = false
+			local var12 = nil
+			local var13 = true
+			local var14 = mountTiltLoadingScreen(p1, function()
+				-- upvalues: var13 (write), var12 (write), var7 (write)
+				var13 = false
 				
-				if var27 then
-					var27:Disconnect()
-					var27 = nil
+				if var12 then
+					var12:Disconnect()
+					var12 = nil
 				end
-				if var22 then
-					var22.Enabled = false
-					var22:Destroy()
-					var22 = nil
+				if var7 then
+					var7.Enabled = false
+					var7:Destroy()
+					var7 = nil
 				end
 			end)
 			
 			local function _()
-				-- upvalues: var28 (write), var27 (write), var22 (write), var29 (ref), var9 (copy), p4 (ref), p5 (ref)
-				if not var28 then return end
-				var28 = false
+				-- upvalues: var13 (write), var12 (write), var7 (write), var14 (ref), var1 (copy), p1 (ref), p2 (ref)
+				if not var13 then return end
+				var13 = false
 				
-				if var27 then
-					var27:Disconnect()
-					var27 = nil
+				if var12 then
+					var12:Disconnect()
+					var12 = nil
 				end
-				if var22 then
-					var22.Enabled = false
-					var22:Destroy()
-					var22 = nil
+				if var7 then
+					var7.Enabled = false
+					var7:Destroy()
+					var7 = nil
 				end
-				var29()
-				var9(p4, p5)
+				var14()
+				var1(p1, p2)
 			end
 			
-			var27 = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
-				-- upvalues: VRService (copy), var28 (write), var27 (write), var22 (write), var29 (ref), var9 (copy), p4 (ref), p5 (ref)
+			var12 = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
+				-- upvalues: VRService (copy), var13 (write), var12 (write), var7 (write), var14 (ref), var1 (copy), p1 (ref), p2 (ref)
 				if VRService.VREnabled then
-					if not var28 then return end
-					var28 = false
+					if not var13 then return end
+					var13 = false
 					
-					if var27 then
-						var27:Disconnect()
-						var27 = nil
+					if var12 then
+						var12:Disconnect()
+						var12 = nil
 					end
-					if var22 then
-						var22.Enabled = false
-						var22:Destroy()
-						var22 = nil
+					if var7 then
+						var7.Enabled = false
+						var7:Destroy()
+						var7 = nil
 					end
-					var29()
-					var9(p4, p5)
+					var14()
+					var1(p1, p2)
 				end
 			end)
 			
 			if VRService.VREnabled then
-				var28 = false
+				var13 = false
 				
-				if var27 then
-					var27:Disconnect()
-					var27 = nil
+				if var12 then
+					var12:Disconnect()
+					var12 = nil
 				end
-				if var22 then
-					var22.Enabled = false
-					var22:Destroy()
-					var22 = nil
+				if var7 then
+					var7.Enabled = false
+					var7:Destroy()
+					var7 = nil
 				end
-				var29()
-				var9(p4, p5)
+				var14()
+				var1(p1, p2)
 			end
-			if var28 then
+			if var13 then
 				runService.Heartbeat:Wait()
 				
-				if var28 then
-					var22.Enabled = false
+				if var13 then
+					var7.Enabled = false
 				end
 			end
 			return
 		end
 	else
 		VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
-			-- upvalues: VRService (copy), var25 (ref), p5 (ref)
+			-- upvalues: VRService (copy), var10 (ref), p2 (ref)
 			if VRService.VREnabled then
-				var25(p5)
+				var10(p2)
 			end
 		end)
-		var21 = var24(p4)
+		var6 = var9(p1)
 	end
-	var20 = function()
-		-- upvalues: VRService (copy), var17 (write), settingsProxy (copy), var22 (write), replicatedFirst (copy), loggingProtocolModule (copy), var18 (write), var19 (write), var23 (write), waitProxy (copy), var21 (write)
+	var5 = function()
+		-- upvalues: VRService (copy), var2 (write), settingsProxy (copy), var7 (write), replicatedFirst (copy), loggingProtocolModule (copy), var3 (write), var4 (write), var8 (write), waitProxy (copy), var6 (write)
 		if VRService.VREnabled then
-			if not var17 and settingsProxy().Rendering.QualityLevel == Enum.QualityLevel.Automatic then return end
-			if var22 then
-				var22.Enabled = false
-				var22:Destroy()
-				var22 = nil
+			if not var2 and settingsProxy().Rendering.QualityLevel == Enum.QualityLevel.Automatic then return end
+			if var7 then
+				var7.Enabled = false
+				var7:Destroy()
+				var7 = nil
 			end
 			replicatedFirst:SetDefaultLoadingGuiRemoved()
 			loggingProtocolModule.default:logEventOnce("first_experience_interactive")
 			
 			return
-		elseif var18 or var19 then
-			if var23 then
+		elseif var3 or var4 then
+			if var8 then
 				waitProxy(0.6)
 				
-				if var21 ~= nil then
-					var23.unmount(var21)
-					var21 = nil
+				if var6 ~= nil then
+					var8.unmount(var6)
+					var6 = nil
 				end
 			end
-			if var22 then
-				var22.Enabled = false
-				var22:Destroy()
-				var22 = nil
+			if var7 then
+				var7.Enabled = false
+				var7:Destroy()
+				var7 = nil
 			end
 			replicatedFirst:SetDefaultLoadingGuiRemoved()
 			loggingProtocolModule.default:logEventOnce("first_experience_interactive")
 		end
 	end
 	
-	replicatedFirst.FinishedReplicating:Connect(var26)
+	replicatedFirst.FinishedReplicating:Connect(var11)
 	
 	if replicatedFirst:IsFinishedReplicating() then
-		var26()
+		var11()
 	end
 	replicatedFirst.RemoveDefaultLoadingGuiSignal:Connect(function()
-		-- upvalues: var19 (write), var20 (write)
-		var19 = true
+		-- upvalues: var4 (write), var5 (write)
+		var4 = true
 		
-		if var20 then
-			var20()
+		if var5 then
+			var5()
 		end
 	end)
 	
 	if replicatedFirst:IsDefaultLoadingGuiRemoved() then
-		var19 = true
+		var4 = true
 		
-		if var20 then
-			var20()
+		if var5 then
+			var5()
 		end
 	end
 end
 
-return var9
+return var1

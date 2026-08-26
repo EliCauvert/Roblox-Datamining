@@ -1,5 +1,5 @@
-﻿local function convertSecondsToTimeFrames(p0)
-	return if p0 >= 86400 then { unit = "days", value = math.ceil(p0 / 86400) } elseif p0 >= 3600 then { unit = "hours", value = math.ceil(p0 / 3600) } else { unit = "minutes", value = math.ceil(p0 / 60) }
+﻿local function convertSecondsToTimeFrames(p1)
+	return if p1 >= 86400 then { unit = "days", value = math.ceil(p1 / 86400) } elseif p1 >= 3600 then { unit = "hours", value = math.ceil(p1 / 3600) } else { unit = "minutes", value = math.ceil(p1 / 60) }
 end
 
 return function(p1, p2)

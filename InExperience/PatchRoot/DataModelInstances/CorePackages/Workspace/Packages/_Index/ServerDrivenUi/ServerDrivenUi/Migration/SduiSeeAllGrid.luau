@@ -16,21 +16,21 @@ local useCollectionLayoutConfig = require(parent.CollectionViews).useCollectionL
 local fIntLuaAppDelayImpressionsMaxUpdates = require(parent.SharedFlags).FIntLuaAppDelayImpressionsMaxUpdates
 local fFlagLuaAppLayoutParamsInContext = require(parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: argCheckModule (ref), useSelector (ref), sduiConfigReducerModule (ref), tutilsModule (ref), fFlagLuaAppLayoutParamsInContext (ref), useCollectionLayoutConfig (ref), useSduiContextModule (ref), reactModule (ref), sduiErrors (ref), sduiBuilder (ref), sduiParsers (ref), sduiComponentType (ref), sduiComponent (ref), fIntLuaAppDelayImpressionsMaxUpdates (ref)
-	local layoutOrder = p0.layoutOrder
-	local verticalScrollingFrameRef = p0.verticalScrollingFrameRef
-	local scrollViewPositionChangedSignal = p0.scrollViewPositionChangedSignal
-	argCheckModule.assert(p0.collectionId ~= nil, "collectionId id must exist")
-	argCheckModule.assert(p0.collectionIndex ~= nil, "collectionIndex id must exist")
-	local var7 = useSelector(function(p1)
-		-- upvalues: sduiConfigReducerModule (copy), p0 (ref)
+	local layoutOrder = p1.layoutOrder
+	local verticalScrollingFrameRef = p1.verticalScrollingFrameRef
+	local scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal
+	argCheckModule.assert(p1.collectionId ~= nil, "collectionId id must exist")
+	argCheckModule.assert(p1.collectionIndex ~= nil, "collectionIndex id must exist")
+	local var1 = useSelector(function(p2)
+		-- upvalues: sduiConfigReducerModule (copy), p1 (ref)
 		local t = {}
-		local appPage = p1.Personalization[sduiConfigReducerModule.key][p0.appPage]
+		local appPage = p2.Personalization[sduiConfigReducerModule.key][p1.appPage]
 		
 		if appPage then
 			for i, v in appPage.itemCollections do
-				if tostring(p0.collectionId) == tostring(v.sduiConfig.analyticsData.collectionId) then
+				if tostring(p1.collectionId) == tostring(v.sduiConfig.analyticsData.collectionId) then
 					t.feedItemData = v
 					break
 				end
@@ -39,27 +39,27 @@ return reactModule.memo(function(p0)
 		end
 		return t
 	end, tutilsModule.shallowEqual)
-	local var8 = useSduiContextModule({
-		appPage = p0.appPage,
-		templates = var7.templates,
-		dataUpdatedTimestamp = var7.feedItemData and var7.feedItemData.dataUpdatedTimestamp,
-		pageLayoutConfig = if fFlagLuaAppLayoutParamsInContext then if fFlagLuaAppLayoutParamsInContext then useCollectionLayoutConfig(p0.contentFrame, 0) else nil else nil
+	local var2 = useSduiContextModule({
+		appPage = p1.appPage,
+		templates = var1.templates,
+		dataUpdatedTimestamp = var1.feedItemData and var1.feedItemData.dataUpdatedTimestamp,
+		pageLayoutConfig = if fFlagLuaAppLayoutParamsInContext then if fFlagLuaAppLayoutParamsInContext then useCollectionLayoutConfig(p1.contentFrame, 0) else nil else nil
 	})
-	local feedItemData = var7.feedItemData
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: feedItemData (ref), var8 (ref), sduiErrors (copy), p0 (ref), sduiBuilder (copy), sduiParsers (copy), sduiComponentType (copy)
+	local feedItemData = var1.feedItemData
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: feedItemData (ref), var2 (ref), sduiErrors (copy), p1 (ref), sduiBuilder (copy), sduiParsers (copy), sduiComponentType (copy)
 		if not feedItemData or not feedItemData.sduiConfig then
-			var8.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentConfig, {
+			var2.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentConfig, {
 				name = "SduiSeeAllGrid",
-				message = `Missing component config client-driven SDUI grid for see-all. CollectionId: {p0.collectionId}`
-			}, var8.appPage)
+				message = `Missing component config client-driven SDUI grid for see-all. CollectionId: {p1.collectionId}`
+			}, var2.appPage)
 			
 			return nil
 		elseif not feedItemData.sduiConfig.props then
-			var8.dependencies.logger.reportError(sduiErrors.SduiErrorType.InvalidComponentConfig, {
+			var2.dependencies.logger.reportError(sduiErrors.SduiErrorType.InvalidComponentConfig, {
 				name = "SduiSeeAllGrid",
-				message = `Missing props for component config for client-driven SDUI grid for see-all. CollectionId: {p0.collectionId}`
-			}, var8.appPage)
+				message = `Missing props for component config for client-driven SDUI grid for see-all. CollectionId: {p1.collectionId}`
+			}, var2.appPage)
 			
 			return nil
 		end
@@ -68,32 +68,32 @@ return reactModule.memo(function(p0)
 		local _ = nil
 		
 		if sduiConfig.props.items and #sduiConfig.props.items > 0 and sduiConfig.props.itemHeightFromWidth == nil then
-			local var11 = sduiConfig.props.items[1]
+			local var4 = sduiConfig.props.items[1]
 			
-			if sduiConfig.props.itemTemplateKey and var11.templateKey == nil then
-				var11.templateKey = sduiConfig.props.itemTemplateKey
+			if sduiConfig.props.itemTemplateKey and var4.templateKey == nil then
+				var4.templateKey = sduiConfig.props.itemTemplateKey
 			end
-			if not sduiBuilder.getComponentType(var11, var8) then
-				var8.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentType, {
+			if not sduiBuilder.getComponentType(var4, var2) then
+				var2.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentType, {
 					name = "SduiSeeAllGrid",
-					message = `Missing componentType for first item. CollectionId: {p0.collectionId}`
-				}, var8.appPage)
+					message = `Missing componentType for first item. CollectionId: {p1.collectionId}`
+				}, var2.appPage)
 				
 				return nil
 			end
-			local var12 = nil
+			local var5 = nil
 			
-			if var11 then
-				local imageAspectRatio = var11.props and (var11.props.imageAspectRatio and sduiParsers.safeParseNumber(var11.props.imageAspectRatio, var8, {}))
+			if var4 then
+				local imageAspectRatio = var4.props and (var4.props.imageAspectRatio and sduiParsers.safeParseNumber(var4.props.imageAspectRatio, var2, {}))
 				
 				if imageAspectRatio and imageAspectRatio > 0 then
-					var12 = 1 / imageAspectRatio
+					var5 = 1 / imageAspectRatio
 				end
 			end
-			if not var12 then
-				var12 = if sduiConfig.props.collectionItemSize == "Medium" or sduiConfig.props.collectionItemSize == "Large" then 0.5625 else 1
+			if not var5 then
+				var5 = if sduiConfig.props.collectionItemSize == "Medium" or sduiConfig.props.collectionItemSize == "Large" then 0.5625 else 1
 			end
-			itemHeightFromWidth = UDim.new(var12, if var11 then (if var11.props then var11.props.titleLines else 1) * 20 + 20 + 8 else nil)
+			itemHeightFromWidth = UDim.new(var5, if var4 then (if var4.props then var4.props.titleLines else 1) * 20 + 20 + 8 else nil)
 		else
 			itemHeightFromWidth = sduiConfig.props.itemHeightFromWidth
 		end
@@ -109,22 +109,22 @@ return reactModule.memo(function(p0)
 			},
 			analyticsData = sduiConfig.analyticsData
 		}
-	end, { feedItemData and feedItemData.sduiConfig, var8 })
+	end, { feedItemData and feedItemData.sduiConfig, var2 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var8 (ref), sduiErrors (copy), p0 (ref), reactModule (copy), sduiComponent (copy), feedItemData (ref), scrollViewPositionChangedSignal (ref), verticalScrollingFrameRef (ref), fIntLuaAppDelayImpressionsMaxUpdates (copy), layoutOrder (ref), fFlagLuaAppLayoutParamsInContext (copy)
-		if var9 == nil then
-			var8.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentConfig, {
+		-- upvalues: var3 (ref), var2 (ref), sduiErrors (copy), p1 (ref), reactModule (copy), sduiComponent (copy), feedItemData (ref), scrollViewPositionChangedSignal (ref), verticalScrollingFrameRef (ref), fIntLuaAppDelayImpressionsMaxUpdates (copy), layoutOrder (ref), fFlagLuaAppLayoutParamsInContext (copy)
+		if var3 == nil then
+			var2.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentConfig, {
 				name = "SduiSeeAllGrid",
-				message = `Unable to generate component config for client-driven SDUI grid for see-all. CollectionId: {p0.collectionId}`
-			}, var8.appPage)
+				message = `Unable to generate component config for client-driven SDUI grid for see-all. CollectionId: {p1.collectionId}`
+			}, var2.appPage)
 			
 			return nil
 		end
 		return reactModule.createElement(sduiComponent, {
 			debugName = "SeeAllGrid",
-			componentConfig = var9,
-			sduiContext = var8,
+			componentConfig = var3,
+			sduiContext = var2,
 			extraLocalProps = {
 				pageSideMargin = 0,
 				startRow = 1,
@@ -132,8 +132,8 @@ return reactModule.memo(function(p0)
 				dataUpdatedTimestamp = feedItemData.dataUpdatedTimestamp,
 				scrollViewPositionChangedSignal = scrollViewPositionChangedSignal,
 				verticalScrollingFrameRef = verticalScrollingFrameRef,
-				index = p0.collectionIndex,
-				collectionPosition = p0.collectionIndex,
+				index = p1.collectionIndex,
+				collectionPosition = p1.collectionIndex,
 				numUpdatesToDelayImpressions = fIntLuaAppDelayImpressionsMaxUpdates,
 				layoutOrder = layoutOrder,
 				layoutOverrides = if fFlagLuaAppLayoutParamsInContext then nil else {
@@ -141,18 +141,18 @@ return reactModule.memo(function(p0)
 					fractionalItemAmount = 0,
 					overrideLoadMoreThreshold = 1e999
 				},
-				impressionsTag = p0.impressionsTag,
-				setLogImpressions = p0.setLogImpressions,
-				sendGameImpressions = p0.sendGameImpressions,
-				onCollectionViewabilityChanged = p0.onCollectionViewabilityChanged
+				impressionsTag = p1.impressionsTag,
+				setLogImpressions = p1.setLogImpressions,
+				sendGameImpressions = p1.sendGameImpressions,
+				onCollectionViewabilityChanged = p1.onCollectionViewabilityChanged
 			},
-			localAnalyticsData = { seeAllFlag = 1, collectionPosition = p0.collectionIndex }
+			localAnalyticsData = { seeAllFlag = 1, collectionPosition = p1.collectionIndex }
 		})
 	end, {
-		var9, layoutOrder,
+		var3, layoutOrder,
 		if feedItemData then feedItemData.dataUpdatedTimestamp else nil, 1,
-		p0.collectionId, p0.collectionIndex, scrollViewPositionChangedSignal,
-		verticalScrollingFrameRef, var8, p0.impressionsTag, p0.setLogImpressions,
-		p0.sendGameImpressions, p0.onCollectionViewabilityChanged
+		p1.collectionId, p1.collectionIndex, scrollViewPositionChangedSignal,
+		verticalScrollingFrameRef, var2, p1.impressionsTag, p1.setLogImpressions,
+		p1.sendGameImpressions, p1.onCollectionViewabilityChanged
 	})
 end)

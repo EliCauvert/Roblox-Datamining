@@ -12,12 +12,12 @@ local list = { analyticsModule, networkModule, externalSettingsModule }
 
 return function()
 	-- upvalues: thunkModule (ref), list (ref), promptStateModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), sendCounterModule (ref), counterModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, _)
+	return thunkModule.new(script.Name, list, function(p1, _)
 		-- upvalues: promptStateModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), sendCounterModule (copy), counterModule (copy)
-		if p0:getState().promptState == promptStateModule.BlackbirdUpsellInProgress then
+		if p1:getState().promptState == promptStateModule.BlackbirdUpsellInProgress then
 			return
 		end
-		p0:dispatch(errorOccurredModule(purchaseErrorModule.InvalidFundsUnknown))
-		p0:dispatch(sendCounterModule(counterModule.UpsellFailedNativePurchase))
+		p1:dispatch(errorOccurredModule(purchaseErrorModule.InvalidFundsUnknown))
+		p1:dispatch(sendCounterModule(counterModule.UpsellFailedNativePurchase))
 	end)
 end

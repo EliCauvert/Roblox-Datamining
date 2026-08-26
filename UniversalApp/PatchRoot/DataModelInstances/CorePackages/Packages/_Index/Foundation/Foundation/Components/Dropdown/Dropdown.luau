@@ -27,10 +27,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var2, var3 = reactModule.useState(false)
 	local var4 = reactModule.useRef(nil)
 	local var5, var6 = reactModule.useState(nil)
-	local var7 = reactModule.useCallback(function(p1)
+	local var7 = reactModule.useCallback(function(p3)
 		-- upvalues: var4 (ref), var6 (ref)
-		var4.current = p1
-		var6(p1)
+		var4.current = p3
+		var6(p3)
 	end, {})
 	
 	if flagsModule.FoundationDropdownSelectionProps then
@@ -43,25 +43,25 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var10, var11 = markSelectedItemModule(var1.items, var1.value)
 	local var12 = reactModule.useCallback(function()
 		-- upvalues: var3 (ref)
-		var3(function(p1)
-			return not p1
+		var3(function(p3)
+			return not p3
 		end)
 	end, {})
 	local var13 = reactModule.useCallback(function()
 		-- upvalues: var3 (ref)
 		var3(false)
 	end, {})
-	local var14 = reactModule.useCallback(function(p1)
+	local var14 = reactModule.useCallback(function(p3)
 		-- upvalues: var3 (ref), var1 (ref)
 		var3(false)
-		var1.onItemChanged(p1)
+		var1.onItemChanged(p3)
 	end, { var1.onItemChanged })
-	var1.onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
-		-- upvalues: p1 (ref), var9 (ref)
-		if p1.onAbsoluteSizeChanged then
-			p1.onAbsoluteSizeChanged(p1)
+	var1.onAbsoluteSizeChanged = reactModule.useCallback(function(p3)
+		-- upvalues: p3 (ref), var9 (ref)
+		if p3.onAbsoluteSizeChanged then
+			p3.onAbsoluteSizeChanged(p3)
 		end
-		var9(UDim.new(0, p1.AbsoluteSize.X))
+		var9(UDim.new(0, p3.AbsoluteSize.X))
 	end, { var9, p1.onAbsoluteSizeChanged })
 	
 	return reactModule.createElement(popoverModule.Root, {

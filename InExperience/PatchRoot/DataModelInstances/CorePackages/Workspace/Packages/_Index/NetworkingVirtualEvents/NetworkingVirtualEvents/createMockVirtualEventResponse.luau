@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("NetworkingVirtualEvents").types)
 
-return function(p0)
+return function(p1)
 	return {
 		title = "Event Title",
 		description = "Event description...",
@@ -8,7 +8,7 @@ return function(p0)
 		placeId = 123456789,
 		eventStatus = "active",
 		userRsvpStatus = "none",
-		id = p0,
+		id = p1,
 		host = {
 			hostType = "user",
 			hostId = 1,

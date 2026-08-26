@@ -8,39 +8,39 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), textInput (ref), inputSize (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
-	local var2, var3 = reactModule.useState("")
+	local var1, var2 = reactModule.useState("")
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-medium size-full-0 auto-y padding-x-xlarge padding-bottom-medium",
 		testId = "share-send-row",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		MessageInput = reactModule.createElement(textInput, {
 			label = "",
 			LayoutOrder = 1,
 			testId = "share-message-input",
-			isDisabled = p0.isLoading,
-			onChanged = var3,
-			onFocusGained = p0.onFocusGained,
-			placeholder = p0.messagePlaceholder,
+			isDisabled = p1.isLoading,
+			onChanged = var2,
+			onFocusGained = p1.onFocusGained,
+			placeholder = p1.messagePlaceholder,
 			size = inputSize.Medium,
-			text = var2,
+			text = var1,
 			width = UDim.new(1, 0)
 		}),
 		SendButton = reactModule.createElement(button, {
 			LayoutOrder = 2,
 			testId = "share-send-button",
-			text = p0.label,
+			text = p1.label,
 			variant = buttonVariant.Emphasis,
 			fillBehavior = fillBehavior.Fill,
-			isLoading = p0.isLoading,
+			isLoading = p1.isLoading,
 			size = inputSize.Medium,
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: p0 (ref), var2 (ref)
-				p0.onActivated(var2)
-			end, { var2, p0.onActivated }),
+				-- upvalues: p1 (ref), var1 (ref)
+				p1.onActivated(var1)
+			end, { var1, p1.onActivated }),
 			width = UDim.new(1, 0)
 		})
 	})

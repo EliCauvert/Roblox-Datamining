@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return p0 == 33
+﻿return function(p1)
+	return p1 == 33
 end

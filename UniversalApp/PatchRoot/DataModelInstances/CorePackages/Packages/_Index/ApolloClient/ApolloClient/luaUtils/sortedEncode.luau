@@ -3,11 +3,11 @@ local array = luauPolyfillModule.Array
 local object = luauPolyfillModule.Object
 local httpService = game:GetService("HttpService")
 
-function sortedEncode(p0)
+function sortedEncode(p1)
 	-- upvalues: array (ref), object (ref), httpService (ref)
-	return if array.isArray(p0) or typeof(p0) ~= "table" then httpService:JSONEncode(p0) else "{" .. array.join(array.map(array.sort(object.keys(p0)), function(p1)
-		-- upvalues: httpService (copy), p0 (ref)
-		return httpService:JSONEncode(p1) .. ":" .. sortedEncode(p0[p1])
+	return if array.isArray(p1) or typeof(p1) ~= "table" then httpService:JSONEncode(p1) else "{" .. array.join(array.map(array.sort(object.keys(p1)), function(p2)
+		-- upvalues: httpService (copy), p1 (ref)
+		return httpService:JSONEncode(p2) .. ":" .. sortedEncode(p1[p2])
 	end), ",") .. "}"
 end
 

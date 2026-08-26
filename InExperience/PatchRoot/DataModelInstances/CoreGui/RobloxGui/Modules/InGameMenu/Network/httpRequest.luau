@@ -3,72 +3,72 @@ local promiseModule = require(script.Parent.Parent.Utility.Promise)
 local extreme = Enum.ThrottlingPriority.Extreme
 local applicationJson = Enum.HttpContentType.ApplicationJson
 
-return function(p0)
+return function(p1)
 	-- upvalues: applicationJson (ref), extreme (ref), promiseModule (ref), httpService (ref)
-	local function _(p1, p2)
-		-- upvalues: applicationJson (copy), extreme (copy), p0 (ref)
-		assert(p2.postBody, "Expected a postBody to be specified with this request")
-		assert(type(p2.postBody) == "string", "Expected postBody to be a string")
+	local function _(p2, p3)
+		-- upvalues: applicationJson (copy), extreme (copy), p1 (ref)
+		assert(p3.postBody, "Expected a postBody to be specified with this request")
+		assert(type(p3.postBody) == "string", "Expected postBody to be a string")
 		
-		if not p2.contentType then
-			p2.contentType = applicationJson
+		if not p3.contentType then
+			p3.contentType = applicationJson
 		end
-		if not p2.throttlingPriority then
-			p2.throttlingPriority = extreme
+		if not p3.throttlingPriority then
+			p3.throttlingPriority = extreme
 		end
 		return function()
-			-- upvalues: p0 (copy), p1 (ref), p2 (ref)
-			return p0:PostAsyncFullUrl(p1, p2.postBody, p2.throttlingPriority, p2.contentType)
+			-- upvalues: p1 (copy), p2 (ref), p3 (ref)
+			return p1:PostAsyncFullUrl(p2, p3.postBody, p3.throttlingPriority, p3.contentType)
 		end
 	end
 	
-	local _ = function(p3)
-		-- upvalues: p0 (ref), extreme (copy)
+	local _ = function(p2)
+		-- upvalues: p1 (ref), extreme (copy)
 		return function()
-			-- upvalues: p0 (copy), p3 (ref), extreme (copy)
-			return p0:GetAsyncFullUrl(p3, extreme)
+			-- upvalues: p1 (copy), p2 (ref), extreme (copy)
+			return p1:GetAsyncFullUrl(p2, extreme)
 		end
 	end
 	
-	return function(p4, p5, p6)
-		-- upvalues: applicationJson (copy), extreme (copy), p0 (ref), promiseModule (copy), httpService (copy)
-		assert(type(p4) == "string", "Expected url to be a string")
-		assert(type(p5) == "string", "Expected requestMethod to be a string")
-		assert(not p6 or type(p6) == "table", "Expected options to be a table")
-		p5 = string.upper(p5)
-		local var2 = nil
+	return function(p2, p3, p4)
+		-- upvalues: applicationJson (copy), extreme (copy), p1 (ref), promiseModule (copy), httpService (copy)
+		assert(type(p2) == "string", "Expected url to be a string")
+		assert(type(p3) == "string", "Expected requestMethod to be a string")
+		assert(not p4 or type(p4) == "table", "Expected options to be a table")
+		p3 = string.upper(p3)
+		local var1 = nil
 		
-		if p5 == "POST" then
-			assert(p6.postBody, "Expected a postBody to be specified with this request")
-			assert(type(p6.postBody) == "string", "Expected postBody to be a string")
+		if p3 == "POST" then
+			assert(p4.postBody, "Expected a postBody to be specified with this request")
+			assert(type(p4.postBody) == "string", "Expected postBody to be a string")
 			
-			if not p6.contentType then
-				p6.contentType = applicationJson
+			if not p4.contentType then
+				p4.contentType = applicationJson
 			end
-			if not p6.throttlingPriority then
-				p6.throttlingPriority = extreme
+			if not p4.throttlingPriority then
+				p4.throttlingPriority = extreme
 			end
-			var2 = function()
-				-- upvalues: p0 (copy), p4 (ref), p6 (ref)
-				return p0:PostAsyncFullUrl(p4, p6.postBody, p6.throttlingPriority, p6.contentType)
+			var1 = function()
+				-- upvalues: p1 (copy), p2 (ref), p4 (ref)
+				return p1:PostAsyncFullUrl(p2, p4.postBody, p4.throttlingPriority, p4.contentType)
 			end
-		elseif p5 == "GET" then
-			var2 = function()
-				-- upvalues: p0 (copy), p4 (ref), extreme (copy)
-				return p0:GetAsyncFullUrl(p4, extreme)
+		elseif p3 == "GET" then
+			var1 = function()
+				-- upvalues: p1 (copy), p2 (ref), extreme (copy)
+				return p1:GetAsyncFullUrl(p2, extreme)
 			end
 		else
-			error(string.format("Unsupported requestMethod : %s", p5 or "nil"))
+			error(string.format("Unsupported requestMethod : %s", p3 or "nil"))
 		end
-		return promiseModule.new(function(p7, p8)
-			-- upvalues: var2 (write), httpService (copy)
-			if var2 then
+		return promiseModule.new(function(p5, p6)
+			-- upvalues: var1 (write), httpService (copy)
+			if var1 then
 				coroutine.wrap(function()
-					-- upvalues: var2 (copy), httpService (copy), p7 (ref), p8 (ref)
-					local ok, status = pcall(var2)
+					-- upvalues: var1 (copy), httpService (copy), p5 (ref), p6 (ref)
+					local ok, status = pcall(var1)
 					
 					if not ok then
-						p8(status)
+						p6(status)
 						
 						return
 					end
@@ -78,16 +78,16 @@ return function(p0)
 					end)
 					
 					if ok_1 then
-						p7({ responseBody = status_1 })
+						p5({ responseBody = status_1 })
 						
 						return
 					end
-					p8(status_1)
+					p6(status_1)
 				end)()
 				
 				return
 			end
-			p8()
+			p6()
 		end)
 	end
 end

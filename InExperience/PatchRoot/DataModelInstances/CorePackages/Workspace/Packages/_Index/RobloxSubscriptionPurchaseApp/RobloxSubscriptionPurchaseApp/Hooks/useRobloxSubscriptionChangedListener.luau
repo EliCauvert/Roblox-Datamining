@@ -5,36 +5,36 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local finalizeRobloxSubscriptionUpsellFlowModule = require(robloxSubscriptionPurchaseApp.Actions.finalizeRobloxSubscriptionUpsellFlow)
 local promptStateModule = require(robloxSubscriptionPurchaseApp.Enums.PromptState)
 
-return function(p0)
+return function(p1)
 	-- upvalues: robloxSubscriptionStoreModule (ref), reactModule (ref), playersService (ref), promptStateModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref)
-	local var6 = reactModule.useRef(robloxSubscriptionStoreModule.get())
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), playersService (copy)
-		return p0 or function()
+	local var1 = reactModule.useRef(robloxSubscriptionStoreModule.get())
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), playersService (copy)
+		return p1 or function()
 			-- upvalues: playersService (copy)
 			return playersService.LocalPlayer
 		end
-	end, { p0 })
+	end, { p1 })
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var6 (ref), promptStateModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
-		local var8 = var7()
+		-- upvalues: var2 (ref), var1 (ref), promptStateModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
+		local var3 = var2()
 		
-		if var8 then
-			local var9 = var8:GetPropertyChangedSignal("HasRobloxSubscription"):Connect(function()
-				-- upvalues: var8 (ref), var6 (copy), promptStateModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
-				if var8.HasRobloxSubscription ~= true then return end
-				if var6.current.getPromptState() == promptStateModule.SubscriptionStatusPolling then
+		if var3 then
+			local var4 = var3:GetPropertyChangedSignal("HasRobloxSubscription"):Connect(function()
+				-- upvalues: var3 (ref), var1 (copy), promptStateModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
+				if var3.HasRobloxSubscription ~= true then return end
+				if var1.current.getPromptState() == promptStateModule.SubscriptionStatusPolling then
 					finalizeRobloxSubscriptionUpsellFlowModule(true)
 				end
 			end)
 			
 			return function()
-				-- upvalues: var9 (ref)
-				if var9 then
-					var9:Disconnect()
+				-- upvalues: var4 (ref)
+				if var4 then
+					var4:Disconnect()
 				end
 			end
 		end
 		return nil
-	end, { var7 })
+	end, { var2 })
 end

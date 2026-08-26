@@ -6,7 +6,7 @@ local object = luauPolyfillModule.Object
 local invariantError = require(parent.jsutils.invariant).InvariantError
 local _ = require(script.Parent.Parent.core.types)
 
-function t.validateOperation(p0)
+function t.validateOperation(p1)
 	-- upvalues: object (ref), array (ref), invariantError (ref)
 	local list = {
 		"query",
@@ -16,12 +16,12 @@ function t.validateOperation(p0)
 		"context"
 	}
 	
-	for i, v in ipairs(object.keys(p0)) do
+	for i, v in ipairs(object.keys(p1)) do
 		if array.indexOf(list, v) < 0 then
 			error(invariantError.new(("illegal argument: %s"):format(v)))
 		end
 	end
-	return p0
+	return p1
 end
 
 return t

@@ -5,8 +5,8 @@
 		if typeof(abortController) == "nil" then
 			return { controller = false, signal = false }
 		end
-		local var0 = abortController.new()
+		local var1 = abortController.new()
 		
-		return { controller = var0, signal = var0.signal }
+		return { controller = var1, signal = var1.signal }
 	end
 }

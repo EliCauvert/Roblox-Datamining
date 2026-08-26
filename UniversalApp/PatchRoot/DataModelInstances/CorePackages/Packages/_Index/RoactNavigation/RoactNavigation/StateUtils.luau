@@ -2,25 +2,25 @@
 local array = luauPolyfillModule.Array
 local object = luauPolyfillModule.Object
 local t = {
-	get = function(p0, p1)
-		for i, v in p0.routes do
-			if v.key == p1 then
+	get = function(p1, p2)
+		for i, v in p1.routes do
+			if v.key == p2 then
 				return v
 			end
 		end
 		return nil
 	end,
-	indexOf = function(p2, p3)
-		for i, v in p2.routes do
-			if v.key == p3 then
+	indexOf = function(p3, p4)
+		for i, v in p3.routes do
+			if v.key == p4 then
 				return i
 			end
 		end
 		return nil
 	end,
-	has = function(p4, p5)
-		for i, v in p4.routes do
-			if v.key == p5 then
+	has = function(p5, p6)
+		for i, v in p5.routes do
+			if v.key == p6 then
 				return true
 			end
 		end
@@ -28,109 +28,109 @@ local t = {
 	end
 }
 
-function t.push(p6, p7)
+function t.push(p7, p8)
 	-- upvalues: t (ref), array (ref), object (ref)
-	assert(t.indexOf(p6, p7.key) == nil, ("should not push route with duplicated key %s"):format(p7.key))
-	local var2 = array.concat(p6.routes, { p7 })
+	assert(t.indexOf(p7, p8.key) == nil, ("should not push route with duplicated key %s"):format(p8.key))
+	local var1 = array.concat(p7.routes, { p8 })
 	
-	return object.assign(table.clone(p6), { index = #var2, routes = var2 })
+	return object.assign(table.clone(p7), { index = #var1, routes = var1 })
 end
 
-function t.pop(p8)
+function t.pop(p7)
 	-- upvalues: object (ref)
-	if p8.index <= 1 then
-		return p8
+	if p7.index <= 1 then
+		return p7
 	end
-	local cloned = table.clone(p8.routes)
+	local cloned = table.clone(p7.routes)
 	table.remove(cloned, #cloned)
 	
-	return object.assign(table.clone(p8), { index = #cloned, routes = cloned })
+	return object.assign(table.clone(p7), { index = #cloned, routes = cloned })
 end
 
-function t.jumpToIndex(p9, p10)
+function t.jumpToIndex(p7, p8)
 	-- upvalues: object (ref)
-	if p10 == p9.index then
-		return p9
+	if p8 == p7.index then
+		return p7
 	end
-	assert(p9.routes[p10] ~= nil, ("invalid index %d to jump to"):format(p10))
+	assert(p7.routes[p8] ~= nil, ("invalid index %d to jump to"):format(p8))
 	
-	return object.assign(table.clone(p9), { index = p10 })
+	return object.assign(table.clone(p7), { index = p8 })
 end
 
-function t.jumpTo(p11, p12)
+function t.jumpTo(p7, p8)
 	-- upvalues: t (ref)
-	local var4 = t.indexOf(p11, p12)
-	assert(var4 ~= nil, ("attempt to jump to unknown key \"%s\""):format(p12))
+	local var1 = t.indexOf(p7, p8)
+	assert(var1 ~= nil, ("attempt to jump to unknown key \"%s\""):format(p8))
 	
-	return t.jumpToIndex(p11, var4)
+	return t.jumpToIndex(p7, var1)
 end
 
-function t.back(p13)
+function t.back(p7)
 	-- upvalues: t (ref)
-	local var5 = p13.index - 1
+	local var1 = p7.index - 1
 	
-	return if p13.routes[var5] then t.jumpToIndex(p13, var5) else p13
+	return if p7.routes[var1] then t.jumpToIndex(p7, var1) else p7
 end
 
-function t.forward(p14)
+function t.forward(p7)
 	-- upvalues: t (ref)
-	local var6 = p14.index + 1
+	local var1 = p7.index + 1
 	
-	return if p14.routes[var6] then t.jumpToIndex(p14, var6) else p14
+	return if p7.routes[var1] then t.jumpToIndex(p7, var1) else p7
 end
 
-function t.replaceAndPrune(p15, p16, p17)
+function t.replaceAndPrune(p7, p8, p9)
 	-- upvalues: t (ref), object (ref)
-	local var7 = t.indexOf(p15, p16)
-	local var8 = t.replaceAtIndex(p15, var7, p17)
+	local var1 = t.indexOf(p7, p8)
+	local var2 = t.replaceAtIndex(p7, var1, p9)
 	
-	return object.assign(table.clone(var8), { routes = { unpack(var8.routes, 1, var7) } })
+	return object.assign(table.clone(var2), { routes = { unpack(var2.routes, 1, var1) } })
 end
 
-function t.replaceAt(p18, p19, p20, p21)
+function t.replaceAt(p7, p8, p9, p10)
 	-- upvalues: t (ref)
-	local var9 = t.indexOf(p18, p19)
-	local var10 = t.replaceAtIndex(p18, var9, p20)
-	var10.index = if p21 then p18.index else var9
+	local var1 = t.indexOf(p7, p8)
+	local var2 = t.replaceAtIndex(p7, var1, p9)
+	var2.index = if p10 then p7.index else var1
 	
-	return var10
+	return var2
 end
 
-function t.replaceAtIndex(p22, p23, p24)
+function t.replaceAtIndex(p7, p8, p9)
 	-- upvalues: object (ref)
-	assert(p22.routes[p23] ~= nil, ("invalid index %d for replacing route %s"):format(p23, p24.key))
+	assert(p7.routes[p8] ~= nil, ("invalid index %d for replacing route %s"):format(p8, p9.key))
 	
-	if p22.routes[p23] == p24 and p23 == p22.index then
-		return p22
+	if p7.routes[p8] == p9 and p8 == p7.index then
+		return p7
 	end
-	local cloned = table.clone(p22.routes)
-	cloned[p23] = p24
+	local cloned = table.clone(p7.routes)
+	cloned[p8] = p9
 	
-	return object.assign(table.clone(p22), { index = p23, routes = cloned })
+	return object.assign(table.clone(p7), { index = p8, routes = cloned })
 end
 
-function t.reset(value, p25, p26)
+function t.reset(value, p7, p8)
 	-- upvalues: object (ref)
-	assert(type(p25) == "table" and #p25 > 0, "invalid routes to replace")
-	local var12 = p26 or #p25
+	assert(type(p7) == "table" and #p7 > 0, "invalid routes to replace")
+	local var1 = p8 or #p7
 	
-	if #value.routes == #p25 and value.index == var12 then
-		local var13 = true
+	if #value.routes == #p7 and value.index == var1 then
+		local var2 = true
 		
-		for i = 1, #p25 do
-			if value.routes[i] == p25[i] then
+		for i = 1, #p7 do
+			if value.routes[i] == p7[i] then
 				continue
 			end
-			var13 = false
+			var2 = false
 			break
 		end
-		if var13 then
+		if var2 then
 			return value
 		end
 	end
-	assert(p25[var12] ~= nil, ("invalid index %d to reset"):format(var12))
+	assert(p7[var1] ~= nil, ("invalid index %d to reset"):format(var1))
 	
-	return object.assign(table.clone(value), { index = var12, routes = p25 })
+	return object.assign(table.clone(value), { index = var1, routes = p7 })
 end
 
 return t

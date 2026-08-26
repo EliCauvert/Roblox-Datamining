@@ -4,12 +4,12 @@ local _ = require(types.ReducerTypes)
 local _ = require(types.ActionTypes)
 local dashModule = require(parent.Parent.Dash)
 
-return function(p0)
+return function(p1)
 	-- upvalues: dashModule (ref)
 	local t = {}
-	dashModule.forEach(p0.responseBody.userContactIds, function(p1)
+	dashModule.forEach(p1.responseBody.userContactIds, function(p2)
 		-- upvalues: t (ref)
-		t[p1] = {}
+		t[p2] = {}
 	end)
 	
 	return t

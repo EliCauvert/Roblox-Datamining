@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p0, p1)
-	return { toastTitle = p0, toastSubtitle = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1, p2)
+	return { toastTitle = p1, toastSubtitle = p2 }
 end)

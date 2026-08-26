@@ -222,57 +222,57 @@ end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
-	local var1 = t_1.new()
+	local var36 = t_1.new()
 	
 	if self.id ~= nil then
-		var1.id = self.id
+		var36.id = self.id
 	end
 	if self.title ~= nil then
-		var1.title = self.title
+		var36.title = self.title
 	end
 	if self.subtitle ~= nil then
-		var1.subtitle = self.subtitle
+		var36.subtitle = self.subtitle
 	end
 	if self.event_start ~= nil then
-		var1.event_start = self.event_start
+		var36.event_start = self.event_start
 	end
 	if self.eventStart ~= nil then
-		var1.event_start = self.eventStart
+		var36.event_start = self.eventStart
 	end
 	if self.event_end ~= nil then
-		var1.event_end = self.event_end
+		var36.event_end = self.event_end
 	end
 	if self.eventEnd ~= nil then
-		var1.event_end = self.eventEnd
+		var36.event_end = self.eventEnd
 	end
 	if self.user_rsvp ~= nil then
-		var1.user_rsvp = self.user_rsvp
+		var36.user_rsvp = self.user_rsvp
 	end
 	if self.userRsvp ~= nil then
-		var1.user_rsvp = self.userRsvp
+		var36.user_rsvp = self.userRsvp
 	end
 	if self.media_asset_id ~= nil then
-		var1.media_asset_id = self.media_asset_id
+		var36.media_asset_id = self.media_asset_id
 	end
 	if self.mediaAssetId ~= nil then
-		var1.media_asset_id = self.mediaAssetId
+		var36.media_asset_id = self.mediaAssetId
 	end
 	if self.description ~= nil then
-		var1.description = self.description
+		var36.description = self.description
 	end
 	if self.rsvp_count ~= nil then
-		var1.rsvp_count = self.rsvp_count
+		var36.rsvp_count = self.rsvp_count
 	end
 	if self.rsvpCount ~= nil then
-		var1.rsvp_count = self.rsvpCount
+		var36.rsvp_count = self.rsvpCount
 	end
 	if self.place_id ~= nil then
-		var1.place_id = self.place_id
+		var36.place_id = self.place_id
 	end
 	if self.placeId ~= nil then
-		var1.place_id = self.placeId
+		var36.place_id = self.placeId
 	end
-	return var1
+	return var36
 end
 
 t_1.descriptor = {

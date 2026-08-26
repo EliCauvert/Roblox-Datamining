@@ -4,100 +4,100 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
-		type = if p0 == nil or p0.type == nil then "" else p0.type,
-		amount_in_robux = if p0 == nil or p0.amount_in_robux == nil then 0 else p0.amount_in_robux,
-		percent = if p0 == nil or p0.percent == nil then 0 else p0.percent
+		type = if p1 == nil or p1.type == nil then "" else p1.type,
+		amount_in_robux = if p1 == nil or p1.amount_in_robux == nil then 0 else p1.amount_in_robux,
+		percent = if p1 == nil or p1.percent == nil then 0 else p1.percent
 	}, t_1)
 end
 
 function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6 = 0
+	local var1 = 0
 	
 	if self.type ~= nil and self.type ~= "" then
-		local var7, var8 = protoModule.writeTag(buff, var6, 1, protoModule.wireTypes.lengthDelimited)
-		var7, var8 = protoModule.writeString(var7, var8, self.type)
-		buff = var7
-		var6 = var8
+		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
+		var2, var8 = protoModule.writeString(var2, var3, self.type)
+		buff = var2
+		var1 = var3
 	end
 	if self.amount_in_robux ~= nil and self.amount_in_robux ~= 0 then
-		local var9, var10 = protoModule.writeTag(buff, var6, 2, protoModule.wireTypes.varint)
-		var9, var10 = protoModule.writeVarInt(var9, var10, self.amount_in_robux)
-		buff = var9
-		var6 = var10
+		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.varint)
+		var4, var10 = protoModule.writeVarInt(var4, var5, self.amount_in_robux)
+		buff = var4
+		var1 = var5
 	end
 	if self.percent ~= nil and self.percent ~= 0 then
-		local var11, var12 = protoModule.writeTag(buff, var6, 3, protoModule.wireTypes.varint)
-		var11, var12 = protoModule.writeVarInt(var11, var12, self.percent)
-		buff = var11
-		var6 = var12
+		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.varint)
+		var6, var12 = protoModule.writeVarInt(var6, var7, self.percent)
+		buff = var6
+		var1 = var7
 	end
-	local buff_1 = buffer.create(var6)
-	buffer.copy(buff_1, 0, buff, 0, var6)
+	local buff_1 = buffer.create(var1)
+	buffer.copy(buff_1, 0, buff, 0, var1)
 	
 	return buff_1
 end
 
 function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
-	local var14 = t_1.new()
-	local var15 = 0
-	while var15 < buffer.len(p1) do
+	local var1 = t_1.new()
+	local var2 = 0
+	while var2 < buffer.len(p1) do
 		local _ = nil
-		local var16 = nil
-		local var17, var18, var19 = protoModule.readTag(p1, var15)
-		local var20 = var17
-		var16 = var18
-		var15 = var19
+		local var3 = nil
+		local var4, var5, var6 = protoModule.readTag(p1, var2)
+		local var7 = var4
+		var3 = var5
+		var2 = var6
 		
-		if var16 == protoModule.wireTypes.varint then
-			if var20 == 2 then
+		if var3 == protoModule.wireTypes.varint then
+			if var7 == 2 then
 				local _ = nil
-				local var21, var22 = protoModule.readVarIntI64(p1, var15)
-				var15 = var22
-				var14.amount_in_robux = var21
-			elseif var20 == 3 then
+				local var8, var9 = protoModule.readVarIntI64(p1, var2)
+				var2 = var9
+				var1.amount_in_robux = var8
+			elseif var7 == 3 then
 				local _ = nil
-				local var23, var24 = protoModule.readVarIntI64(p1, var15)
-				var15 = var24
-				var14.percent = var23
+				local var10, var11 = protoModule.readVarIntI64(p1, var2)
+				var2 = var11
+				var1.percent = var10
 			else
 				local _ = nil
-				local var25, var26 = protoModule.readVarInt(p1, var15)
-				local _ = var25
-				var15 = var26
+				local var12, var13 = protoModule.readVarInt(p1, var2)
+				local _ = var12
+				var2 = var13
 			end
 		end
-		if var16 == protoModule.wireTypes.lengthDelimited then
-			if var20 == 1 then
+		if var3 == protoModule.wireTypes.lengthDelimited then
+			if var7 == 1 then
 				local _ = nil
-				local var27, var28 = protoModule.readBuffer(p1, var15)
-				var15 = var28
-				var14.type = buffer.tostring(var27)
+				local var14, var15 = protoModule.readBuffer(p1, var2)
+				var2 = var15
+				var1.type = buffer.tostring(var14)
 			else
 				local _ = nil
-				local var29, var30 = protoModule.readVarInt(p1, var15)
-				var15 = var30 + var29
+				local var16, var17 = protoModule.readVarInt(p1, var2)
+				var2 = var17 + var16
 			end
-		elseif var16 == protoModule.wireTypes.i32 then
+		elseif var3 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var31, var32 = protoModule.readFixed32(p1, var15)
-			local _ = var31
-			var15 = var32
-		elseif var16 == protoModule.wireTypes.i64 then
+			local var18, var19 = protoModule.readFixed32(p1, var2)
+			local _ = var18
+			var2 = var19
+		elseif var3 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var33, var34 = protoModule.readFixed64(p1, var15)
-			local _ = var33
-			var15 = var34
+			local var20, var21 = protoModule.readFixed64(p1, var2)
+			local _ = var20
+			var2 = var21
 		else
 			error("Unsupported wire type: " .. var16)
 		end
 	end
-	return var14
+	return var1
 end
 
 function t_1:jsonEncode()
@@ -117,21 +117,21 @@ end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
-	local var36 = t_1.new()
+	local var22 = t_1.new()
 	
 	if self.type ~= nil then
-		var36.type = self.type
+		var22.type = self.type
 	end
 	if self.amount_in_robux ~= nil then
-		var36.amount_in_robux = self.amount_in_robux
+		var22.amount_in_robux = self.amount_in_robux
 	end
 	if self.amountInRobux ~= nil then
-		var36.amount_in_robux = self.amountInRobux
+		var22.amount_in_robux = self.amountInRobux
 	end
 	if self.percent ~= nil then
-		var36.percent = self.percent
+		var22.percent = self.percent
 	end
-	return var36
+	return var22
 end
 
 t_1.descriptor = {
@@ -162,168 +162,168 @@ end
 function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var38 = 0
+	local var22 = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var39, var40 = protoModule.writeTag(buff, var38, 1, protoModule.wireTypes.lengthDelimited)
-		var39, var40 = protoModule.writeString(var39, var40, self.id)
-		buff = var39
-		var38 = var40
+		local var23, var24 = protoModule.writeTag(buff, var22, 1, protoModule.wireTypes.lengthDelimited)
+		var23, var40 = protoModule.writeString(var23, var24, self.id)
+		buff = var23
+		var22 = var24
 	end
 	if self.display_name ~= nil and self.display_name ~= "" then
-		local var41, var42 = protoModule.writeTag(buff, var38, 2, protoModule.wireTypes.lengthDelimited)
-		var41, var42 = protoModule.writeString(var41, var42, self.display_name)
-		buff = var41
-		var38 = var42
+		local var25, var26 = protoModule.writeTag(buff, var22, 2, protoModule.wireTypes.lengthDelimited)
+		var25, var42 = protoModule.writeString(var25, var26, self.display_name)
+		buff = var25
+		var22 = var26
 	end
 	if self.price ~= nil and self.price ~= 0 then
-		local var43, var44 = protoModule.writeTag(buff, var38, 3, protoModule.wireTypes.varint)
-		var43, var44 = protoModule.writeVarInt(var43, var44, self.price)
-		buff = var43
-		var38 = var44
+		local var27, var28 = protoModule.writeTag(buff, var22, 3, protoModule.wireTypes.varint)
+		var27, var44 = protoModule.writeVarInt(var27, var28, self.price)
+		buff = var27
+		var22 = var28
 	end
 	if self.product_id ~= nil and self.product_id ~= 0 then
-		local var45, var46 = protoModule.writeTag(buff, var38, 4, protoModule.wireTypes.varint)
-		var45, var46 = protoModule.writeVarInt(var45, var46, self.product_id)
-		buff = var45
-		var38 = var46
+		local var29, var30 = protoModule.writeTag(buff, var22, 4, protoModule.wireTypes.varint)
+		var29, var46 = protoModule.writeVarInt(var29, var30, self.product_id)
+		buff = var29
+		var22 = var30
 	end
 	if self.is_owned then
-		local var47, var48 = protoModule.writeTag(buff, var38, 5, protoModule.wireTypes.varint)
-		var47, var48 = protoModule.writeVarInt(var47, var48, if self.is_owned then 1 else 0)
-		buff = var47
-		var38 = var48
+		local var31, var32 = protoModule.writeTag(buff, var22, 5, protoModule.wireTypes.varint)
+		var31, var48 = protoModule.writeVarInt(var31, var32, if self.is_owned then 1 else 0)
+		buff = var31
+		var22 = var32
 	end
 	if self.display_icon_image_asset_id ~= nil and self.display_icon_image_asset_id ~= 0 then
-		local var49, var50 = protoModule.writeTag(buff, var38, 6, protoModule.wireTypes.varint)
-		var49, var50 = protoModule.writeVarInt(var49, var50, self.display_icon_image_asset_id)
-		buff = var49
-		var38 = var50
+		local var33, var34 = protoModule.writeTag(buff, var22, 6, protoModule.wireTypes.varint)
+		var33, var50 = protoModule.writeVarInt(var33, var34, self.display_icon_image_asset_id)
+		buff = var33
+		var22 = var34
 	end
 	if self.display_description ~= nil and self.display_description ~= "" then
-		local var51, var52 = protoModule.writeTag(buff, var38, 7, protoModule.wireTypes.lengthDelimited)
-		var51, var52 = protoModule.writeString(var51, var52, self.display_description)
-		buff = var51
-		var38 = var52
+		local var35, var36 = protoModule.writeTag(buff, var22, 7, protoModule.wireTypes.lengthDelimited)
+		var35, var52 = protoModule.writeString(var35, var36, self.display_description)
+		buff = var35
+		var22 = var36
 	end
 	if self.price_discount_details ~= nil and #self.price_discount_details > 0 then
 		for i, v in self.price_discount_details do
-			local var53 = v:encode()
-			local var54, var55 = protoModule.writeTag(buff, var38, 8, protoModule.wireTypes.lengthDelimited)
-			var54, var55 = protoModule.writeBuffer(var54, var55, var53, buffer.len(var53))
-			buff = var54
-			var38 = var55
+			local var37 = v:encode()
+			local var38, var39 = protoModule.writeTag(buff, var22, 8, protoModule.wireTypes.lengthDelimited)
+			var38, var55 = protoModule.writeBuffer(var38, var39, var37, buffer.len(var37))
+			buff = var38
+			var22 = var39
 		end
 	end
 	if self.user_base_price_in_robux ~= nil and self.user_base_price_in_robux ~= 0 then
-		local var56, var57 = protoModule.writeTag(buff, var38, 9, protoModule.wireTypes.varint)
-		var56, var57 = protoModule.writeVarInt(var56, var57, self.user_base_price_in_robux)
-		buff = var56
-		var38 = var57
+		local var40, var41 = protoModule.writeTag(buff, var22, 9, protoModule.wireTypes.varint)
+		var40, var57 = protoModule.writeVarInt(var40, var41, self.user_base_price_in_robux)
+		buff = var40
+		var22 = var41
 	end
 	if self.is_discounted then
-		local var58, var59 = protoModule.writeTag(buff, var38, 10, protoModule.wireTypes.varint)
-		var58, var59 = protoModule.writeVarInt(var58, var59, if self.is_discounted then 1 else 0)
-		buff = var58
-		var38 = var59
+		local var42, var43 = protoModule.writeTag(buff, var22, 10, protoModule.wireTypes.varint)
+		var42, var59 = protoModule.writeVarInt(var42, var43, if self.is_discounted then 1 else 0)
+		buff = var42
+		var22 = var43
 	end
-	local buff_1 = buffer.create(var38)
-	buffer.copy(buff_1, 0, buff, 0, var38)
+	local buff_1 = buffer.create(var22)
+	buffer.copy(buff_1, 0, buff, 0, var22)
 	
 	return buff_1
 end
 
-function t_2.decode(p3)
+function t_2.decode(p2)
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
-	local var61 = t_2.new()
-	local var62 = 0
-	while var62 < buffer.len(p3) do
+	local var44 = t_2.new()
+	local var45 = 0
+	while var45 < buffer.len(p2) do
 		local _ = nil
-		local var63 = nil
-		local var64, var65, var66 = protoModule.readTag(p3, var62)
-		local var67 = var64
-		var63 = var65
-		var62 = var66
+		local var46 = nil
+		local var47, var48, var49 = protoModule.readTag(p2, var45)
+		local var50 = var47
+		var46 = var48
+		var45 = var49
 		
-		if var63 == protoModule.wireTypes.varint then
-			if var67 == 3 then
+		if var46 == protoModule.wireTypes.varint then
+			if var50 == 3 then
 				local _ = nil
-				local var68, var69 = protoModule.readVarIntI64(p3, var62)
-				var62 = var69
-				var61.price = var68
-			elseif var67 == 4 then
+				local var51, var52 = protoModule.readVarIntI64(p2, var45)
+				var45 = var52
+				var44.price = var51
+			elseif var50 == 4 then
 				local _ = nil
-				local var70, var71 = protoModule.readVarIntI64(p3, var62)
-				var62 = var71
-				var61.product_id = var70
-			elseif var67 == 5 then
+				local var53, var54 = protoModule.readVarIntI64(p2, var45)
+				var45 = var54
+				var44.product_id = var53
+			elseif var50 == 5 then
 				local _ = nil
-				local var72, var73 = protoModule.readVarInt(p3, var62)
-				var62 = var73
-				var61.is_owned = var72 ~= 0
-			elseif var67 == 6 then
+				local var55, var56 = protoModule.readVarInt(p2, var45)
+				var45 = var56
+				var44.is_owned = var55 ~= 0
+			elseif var50 == 6 then
 				local _ = nil
-				local var74, var75 = protoModule.readVarIntI64(p3, var62)
-				var62 = var75
-				var61.display_icon_image_asset_id = var74
-			elseif var67 == 9 then
+				local var57, var58 = protoModule.readVarIntI64(p2, var45)
+				var45 = var58
+				var44.display_icon_image_asset_id = var57
+			elseif var50 == 9 then
 				local _ = nil
-				local var76, var77 = protoModule.readVarIntI64(p3, var62)
-				var62 = var77
-				var61.user_base_price_in_robux = var76
-			elseif var67 == 10 then
+				local var59, var60 = protoModule.readVarIntI64(p2, var45)
+				var45 = var60
+				var44.user_base_price_in_robux = var59
+			elseif var50 == 10 then
 				local _ = nil
-				local var78, var79 = protoModule.readVarInt(p3, var62)
-				var62 = var79
-				var61.is_discounted = var78 ~= 0
+				local var61, var62 = protoModule.readVarInt(p2, var45)
+				var45 = var62
+				var44.is_discounted = var61 ~= 0
 			else
 				local _ = nil
-				local var80, var81 = protoModule.readVarInt(p3, var62)
-				local _ = var80
-				var62 = var81
+				local var63, var64 = protoModule.readVarInt(p2, var45)
+				local _ = var63
+				var45 = var64
 			end
 		end
-		if var63 == protoModule.wireTypes.lengthDelimited then
-			if var67 == 1 then
+		if var46 == protoModule.wireTypes.lengthDelimited then
+			if var50 == 1 then
 				local _ = nil
-				local var82, var83 = protoModule.readBuffer(p3, var62)
-				var62 = var83
-				var61.id = buffer.tostring(var82)
-			elseif var67 == 2 then
+				local var65, var66 = protoModule.readBuffer(p2, var45)
+				var45 = var66
+				var44.id = buffer.tostring(var65)
+			elseif var50 == 2 then
 				local _ = nil
-				local var84, var85 = protoModule.readBuffer(p3, var62)
-				var62 = var85
-				var61.display_name = buffer.tostring(var84)
-			elseif var67 == 7 then
+				local var67, var68 = protoModule.readBuffer(p2, var45)
+				var45 = var68
+				var44.display_name = buffer.tostring(var67)
+			elseif var50 == 7 then
 				local _ = nil
-				local var86, var87 = protoModule.readBuffer(p3, var62)
-				var62 = var87
-				var61.display_description = buffer.tostring(var86)
-			elseif var67 == 8 then
+				local var69, var70 = protoModule.readBuffer(p2, var45)
+				var45 = var70
+				var44.display_description = buffer.tostring(var69)
+			elseif var50 == 8 then
 				local _ = nil
-				local var88, var89 = protoModule.readBuffer(p3, var62)
-				var62 = var89
-				table.insert(var61.price_discount_details, t.PriceDiscountDetail.decode(var88))
+				local var71, var72 = protoModule.readBuffer(p2, var45)
+				var45 = var72
+				table.insert(var44.price_discount_details, t.PriceDiscountDetail.decode(var71))
 			else
 				local _ = nil
-				local var90, var91 = protoModule.readVarInt(p3, var62)
-				var62 = var91 + var90
+				local var73, var74 = protoModule.readVarInt(p2, var45)
+				var45 = var74 + var73
 			end
-		elseif var63 == protoModule.wireTypes.i32 then
+		elseif var46 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var92, var93 = protoModule.readFixed32(p3, var62)
-			local _ = var92
-			var62 = var93
-		elseif var63 == protoModule.wireTypes.i64 then
+			local var75, var76 = protoModule.readFixed32(p2, var45)
+			local _ = var75
+			var45 = var76
+		elseif var46 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var94, var95 = protoModule.readFixed64(p3, var62)
-			local _ = var94
-			var62 = var95
+			local var77, var78 = protoModule.readFixed64(p2, var45)
+			local _ = var77
+			var45 = var78
 		else
 			error("Unsupported wire type: " .. var63)
 		end
 	end
-	return var61
+	return var44
 end
 
 function t_2:jsonEncode()
@@ -369,43 +369,43 @@ end
 
 function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), t (ref)
-	local var98 = t_2.new()
+	local var79 = t_2.new()
 	
 	if self.id ~= nil then
-		var98.id = self.id
+		var79.id = self.id
 	end
 	if self.display_name ~= nil then
-		var98.display_name = self.display_name
+		var79.display_name = self.display_name
 	end
 	if self.displayName ~= nil then
-		var98.display_name = self.displayName
+		var79.display_name = self.displayName
 	end
 	if self.price ~= nil then
-		var98.price = self.price
+		var79.price = self.price
 	end
 	if self.product_id ~= nil then
-		var98.product_id = self.product_id
+		var79.product_id = self.product_id
 	end
 	if self.productId ~= nil then
-		var98.product_id = self.productId
+		var79.product_id = self.productId
 	end
 	if self.is_owned ~= nil then
-		var98.is_owned = self.is_owned
+		var79.is_owned = self.is_owned
 	end
 	if self.isOwned ~= nil then
-		var98.is_owned = self.isOwned
+		var79.is_owned = self.isOwned
 	end
 	if self.display_icon_image_asset_id ~= nil then
-		var98.display_icon_image_asset_id = self.display_icon_image_asset_id
+		var79.display_icon_image_asset_id = self.display_icon_image_asset_id
 	end
 	if self.displayIconImageAssetId ~= nil then
-		var98.display_icon_image_asset_id = self.displayIconImageAssetId
+		var79.display_icon_image_asset_id = self.displayIconImageAssetId
 	end
 	if self.display_description ~= nil then
-		var98.display_description = self.display_description
+		var79.display_description = self.display_description
 	end
 	if self.displayDescription ~= nil then
-		var98.display_description = self.displayDescription
+		var79.display_description = self.displayDescription
 	end
 	if self.price_discount_details ~= nil then
 		local t_1 = {}
@@ -413,7 +413,7 @@ function t_2:jsonDecode()
 		for i, v in self.price_discount_details do
 			table.insert(t_1, t.PriceDiscountDetail.jsonDecode(v))
 		end
-		var98.price_discount_details = t_1
+		var79.price_discount_details = t_1
 	end
 	if self.priceDiscountDetails ~= nil then
 		local t_1 = {}
@@ -421,21 +421,21 @@ function t_2:jsonDecode()
 		for i, v in self.priceDiscountDetails do
 			table.insert(t_1, t.PriceDiscountDetail.jsonDecode(v))
 		end
-		var98.price_discount_details = t_1
+		var79.price_discount_details = t_1
 	end
 	if self.user_base_price_in_robux ~= nil then
-		var98.user_base_price_in_robux = self.user_base_price_in_robux
+		var79.user_base_price_in_robux = self.user_base_price_in_robux
 	end
 	if self.userBasePriceInRobux ~= nil then
-		var98.user_base_price_in_robux = self.userBasePriceInRobux
+		var79.user_base_price_in_robux = self.userBasePriceInRobux
 	end
 	if self.is_discounted ~= nil then
-		var98.is_discounted = self.is_discounted
+		var79.is_discounted = self.is_discounted
 	end
 	if self.isDiscounted ~= nil then
-		var98.is_discounted = self.isDiscounted
+		var79.is_discounted = self.isDiscounted
 	end
-	return var98
+	return var79
 end
 
 t_2.descriptor = {

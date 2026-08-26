@@ -23,10 +23,10 @@ local function createNumberInputElement(p1, p2, p3)
 	
 	return if value == nil then reactModule.createElement(numberInputModule, dashModule.join({
 		value = -1,
-		onChanged = function(p1)
-			-- upvalues: p1 (ref)
-			if p1 ~= -1 then
-				p1.handler(p1, p1.component)
+		onChanged = function(p4)
+			-- upvalues: p4 (ref)
+			if p4 ~= -1 then
+				p4.handler(p4, p4.component)
 			end
 		end,
 		controlsVariant = p2,
@@ -39,9 +39,9 @@ local function createNumberInputElement(p1, p2, p3)
 		end
 	}, p3)) else reactModule.createElement(numberInputModule, dashModule.join({
 		value = value,
-		onChanged = function(p1)
-			-- upvalues: p1 (ref)
-			p1.handler(p1, p1.component)
+		onChanged = function(p4)
+			-- upvalues: p4 (ref)
+			p4.handler(p4, p4.component)
 		end,
 		controlsVariant = p2,
 		minimum = p1.minimum or 0,
@@ -57,9 +57,9 @@ local function renderInput(_, p1, p2, p3, p4)
 		Input = reactModule.createElement(textInputModule, {
 			label = "",
 			text = p1.value:getValue(),
-			onChanged = function(p1)
-				-- upvalues: p1 (ref)
-				p1.handler(p1, p1.component)
+			onChanged = function(p5)
+				-- upvalues: p5 (ref)
+				p5.handler(p5, p5.component)
 			end,
 			placeholder = p1.placeholder or "#000000",
 			size = inputSizeModule.XSmall,
@@ -79,92 +79,92 @@ end
 
 local t = { alpha = reactModule.createBinding(1) }
 
-return function(p1)
+return function(p5)
 	-- upvalues: colorInputModeModule (ref), withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), colorUtilsModule (ref), viewModule (ref), textInputModule (ref), inputSizeModule (ref), colorInputUtilsModule (ref), renderInput (ref), withCommonPropsModule (ref), dashModule (ref), dropdownModule (ref)
-	local availableModes = p1.availableModes or {
+	local availableModes = p5.availableModes or {
 		colorInputModeModule.RGB,
 		colorInputModeModule.HSV,
 		colorInputModeModule.Hex,
 		colorInputModeModule.Brick
 	}
-	local var1 = withDefaultsModule(p1, t)
+	local var1 = withDefaultsModule(p5, t)
 	local var2 = useTokensModule()
 	local mode = var1.mode or colorInputModeModule.RGB
 	local color = var1.color
 	local alpha = var1.alpha
-	local var3 = reactModule.useCallback(function(p1)
+	local var3 = reactModule.useCallback(function(p6)
 		-- upvalues: var1 (ref)
 		if var1.onColorChanged then
-			var1.onColorChanged(p1)
+			var1.onColorChanged(p6)
 		end
 	end, { var1.onColorChanged })
 	local onAlphaChanged = var1.onAlphaChanged
 	local var4 = var1.onAlphaChanged ~= nil
-	local var5 = color:map(function(p1)
+	local var5 = color:map(function(p6)
 		-- upvalues: colorUtilsModule (copy)
-		if colorUtilsModule.isPartialHSV(p1) then
+		if colorUtilsModule.isPartialHSV(p6) then
 			return { r = nil, g = nil, b = nil }
 		end
-		local var1 = colorUtilsModule.toColor3(p1)
+		local var6 = colorUtilsModule.toColor3(p6)
 		
 		return {
-			r = math.round(var1.R * 255),
-			g = math.round(var1.G * 255),
-			b = math.round(var1.B * 255)
+			r = math.round(var6.R * 255),
+			g = math.round(var6.G * 255),
+			b = math.round(var6.B * 255)
 		}
 	end)
-	local var6 = color:map(function(p1)
-		if type(p1) == "table" then
-			return { h = p1.H, s = p1.S, v = p1.V }
+	local var6 = color:map(function(p6)
+		if type(p6) == "table" then
+			return { h = p6.H, s = p6.S, v = p6.V }
 		end
-		local var1, var2, var3 = p1:ToHSV()
+		local var7, var8, var9 = p6:ToHSV()
 		
 		return {
-			h = math.round(var1 * 360),
-			s = math.round(var2 * 100),
-			v = math.round(var3 * 100)
+			h = math.round(var7 * 360),
+			s = math.round(var8 * 100),
+			v = math.round(var9 * 100)
 		}
 	end)
-	local var7 = var5:map(function(p1)
-		return if p1.r == nil or p1.g == nil or p1.b == nil then "" else string.format("#%02X%02X%02X", p1.r, p1.g, p1.b)
+	local var7 = var5:map(function(p6)
+		return if p6.r == nil or p6.g == nil or p6.b == nil then "" else string.format("#%02X%02X%02X", p6.r, p6.g, p6.b)
 	end)
-	local var1 = reactModule.useCallback(function(p1, p2)
+	local var1 = reactModule.useCallback(function(p6, p7)
 		-- upvalues: var5 (ref), var3 (ref)
 		local cloned = table.clone(var5:getValue())
-		cloned[p2] = math.clamp(p1, 0, 255)
+		cloned[p7] = math.clamp(p6, 0, 255)
 		
 		if cloned.r == nil or cloned.g == nil or cloned.b == nil then
 			return
 		end
 		var3(Color3.fromRGB(cloned.r, cloned.g, cloned.b))
 	end, { var5, var3 })
-	local var2 = reactModule.useCallback(function(p1)
+	local var2 = reactModule.useCallback(function(p6)
 		-- upvalues: onAlphaChanged (ref)
 		if onAlphaChanged then
-			onAlphaChanged(p1)
+			onAlphaChanged(p6)
 		end
 	end, { onAlphaChanged })
-	local var3 = reactModule.useCallback(function(p1, p2)
+	local var3 = reactModule.useCallback(function(p6, p7)
 		-- upvalues: var6 (ref), var3 (ref)
 		local cloned = table.clone(var6:getValue())
 		
-		if cloned[p2] == nil and p1 == 0 then
+		if cloned[p7] == nil and p6 == 0 then
 			return
 		end
-		cloned[p2] = math.clamp(p1, 0, if p2 == "h" then 360 else 100)
+		cloned[p7] = math.clamp(p6, 0, if p7 == "h" then 360 else 100)
 		var3(Color3.fromHSV(cloned.h / 360, (cloned.s or 100) / 100, (cloned.v or 100) / 100))
 	end, { var6, var3 })
-	local var1 = reactModule.useCallback(function(p1)
+	local var1 = reactModule.useCallback(function(p6)
 		-- upvalues: var3 (ref)
-		local var1 = p1:gsub("#", ""):upper()
+		local var8 = p6:gsub("#", ""):upper()
 		
-		if var1:match("^%x%x%x%x%x%x$") then
-			local var2 = tonumber(var1:sub(1, 2), 16)
-			local var3 = tonumber(var1:sub(3, 4), 16)
-			local var4 = tonumber(var1:sub(5, 6), 16)
+		if var8:match("^%x%x%x%x%x%x$") then
+			local var9 = tonumber(var8:sub(1, 2), 16)
+			local var10 = tonumber(var8:sub(3, 4), 16)
+			local var11 = tonumber(var8:sub(5, 6), 16)
 			
-			if var2 and var3 and var4 then
-				var3(Color3.fromRGB(var2, var3, var4))
+			if var9 and var10 and var11 then
+				var10(Color3.fromRGB(var9, var10, var11))
 			end
 		end
 	end, { var3 })
@@ -224,10 +224,10 @@ return function(p1)
 			label = "",
 			items = var2,
 			value = mode,
-			onItemChanged = function(p1)
+			onItemChanged = function(p6)
 				-- upvalues: var1 (ref)
 				if var1.onModeChanged then
-					var1.onModeChanged(p1)
+					var1.onModeChanged(p6)
 				end
 			end,
 			size = inputSizeModule.XSmall,
@@ -251,15 +251,15 @@ return function(p1)
 				})
 			}
 		end
-		local var1 = colorInputUtilsModule.createInputConfigs(var5, var6, var7, alpha, var1, var3, var1, var2, var2)[mode]
+		local var8 = colorInputUtilsModule.createInputConfigs(var5, var6, var7, alpha, var8, var3, var8, var2, var2)[mode]
 		
-		if not var1 then
+		if not var8 then
 			return nil
 		end
 		local t = {}
 		
-		for i, v in ipairs(var1) do
-			t[v.key .. "Input"] = renderInput(var2, v, i, mode:lower(), var1.testId)
+		for i, v in ipairs(var8) do
+			t[v.key .. "Input"] = renderInput(var2, v, i, mode:lower(), var8.testId)
 		end
 		return t
 	end)()))

@@ -19,38 +19,38 @@ return reactModule.memo(function(value)
 	if not fFlagExpChatPresetChatEnabled or not fFlagExpChatUseUnifiedTooltipStore then
 		return reactModule.createElement(reactModule.Fragment, nil, value.children)
 	end
-	local var9 = signalsReactModule.useSignalState(getChatTooltipStoreModule(false).getShouldShow("PresetChatTooltip"))
-	local var10 = useChatTooltipLifecycleModule({
+	local var1 = signalsReactModule.useSignalState(getChatTooltipStoreModule(false).getShouldShow("PresetChatTooltip"))
+	local var2 = useChatTooltipLifecycleModule({
 		tooltipKey = "PresetChatTooltip",
 		targetTextChannel = value.targetTextChannel
 	})
-	local var11 = localizationModule.useLocalization({
+	local var3 = localizationModule.useLocalization({
 		headerText = "CoreScripts.TextChat.Tooltip.QuickWords.Header",
 		bodyText = "CoreScripts.TextChat.Tooltip.QuickWords.Body"
 	})
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), expChatSharedModule (copy), constantsModule (copy)
-		var10.onDismiss()
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), expChatSharedModule (copy), constantsModule (copy)
+		var2.onDismiss()
 		expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
 			event_type = constantsModule.Analytics.EventTypes.Dismiss,
 			component = constantsModule.Analytics.Components.PresetTooltip
 		}, expChatSharedModule.Analytics.DefaultStandardizedFields)
-	end, { var10.onDismiss })
+	end, { var2.onDismiss })
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), expChatSharedModule (copy), constantsModule (copy)
-		if var9 then
+		-- upvalues: var1 (ref), expChatSharedModule (copy), constantsModule (copy)
+		if var1 then
 			expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
 				event_type = constantsModule.Analytics.EventTypes.Show,
 				component = constantsModule.Analytics.Components.PresetTooltip
 			}, expChatSharedModule.Analytics.DefaultStandardizedFields)
 		end
-	end, { var9 })
+	end, { var1 })
 	
-	return if var9 then reactModule.createElement(coachmark, {
-		title = var11.headerText,
-		text = var11.bodyText,
-		isOpen = var10.isActive,
-		onClose = var12,
+	return if var1 then reactModule.createElement(coachmark, {
+		title = var3.headerText,
+		text = var3.bodyText,
+		isOpen = var2.isActive,
+		onClose = var4,
 		side = popoverSide.Right,
 		align = popoverAlign.Center
 	}, value.children) else reactModule.createElement(reactModule.Fragment, nil, value.children)

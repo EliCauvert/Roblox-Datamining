@@ -11,14 +11,14 @@ local function DoEverything()
 	t.ChatWindow.ChatTypes.BubbleChatEnabled = chatSettingsModule.BubbleChatEnabled
 	t.ChatWindow.ChatTypes.ClassicChatEnabled = chatSettingsModule.ClassicChatEnabled
 	
-	local function _(p0)
+	local function _(p1)
 		-- upvalues: t (ref), chatMainModule (ref)
 		local bindableEvent = Instance.new("BindableEvent")
-		bindableEvent.Name = p0
-		t.ChatWindow[p0] = bindableEvent
+		bindableEvent.Name = p1
+		t.ChatWindow[p1] = bindableEvent
 		bindableEvent.Event:connect(function(...)
-			-- upvalues: chatMainModule (copy), p0 (ref)
-			chatMainModule[p0](chatMainModule, ...)
+			-- upvalues: chatMainModule (copy), p1 (ref)
+			chatMainModule[p1](chatMainModule, ...)
 		end)
 	end
 	
@@ -34,12 +34,12 @@ local function DoEverything()
 		end
 	end
 	
-	local _ = function(p2)
+	local _ = function(p1)
 		-- upvalues: t (ref), chatMainModule (ref)
 		local bindableEvent = Instance.new("BindableEvent")
-		bindableEvent.Name = p2
-		t.ChatWindow[p2] = bindableEvent
-		chatMainModule[p2]:connect(function(...)
+		bindableEvent.Name = p1
+		t.ChatWindow[p1] = bindableEvent
+		chatMainModule[p1]:connect(function(...)
 			-- upvalues: bindableEvent (ref)
 			bindableEvent:Fire(...)
 		end)
@@ -67,14 +67,14 @@ local function DoEverything()
 		end)
 	end
 	
-	local _ = function(p3)
+	local _ = function(p1)
 		-- upvalues: t (ref), chatMainModule (ref)
 		local bindableFunction = Instance.new("BindableFunction")
-		bindableFunction.Name = p3
-		t.GetCore[p3] = bindableFunction
+		bindableFunction.Name = p1
+		t.GetCore[p1] = bindableFunction
 		
 		function bindableFunction.OnInvoke(...)
-			-- upvalues: chatMainModule (copy), p3 (ref)
+			-- upvalues: chatMainModule (copy), p1 (ref)
 			return chatMainModule["f" .. p3](...)
 		end
 	end
@@ -82,71 +82,71 @@ local function DoEverything()
 	local toggleVisibility = Instance.new("BindableEvent")
 	toggleVisibility.Name = "ToggleVisibility"
 	t.ChatWindow.ToggleVisibility = toggleVisibility
-	local var9 = "ToggleVisibility"
+	local var1 = "ToggleVisibility"
 	toggleVisibility.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var9 (ref)
-		chatMainModule[var9](chatMainModule, ...)
+		-- upvalues: chatMainModule (ref), var1 (ref)
+		chatMainModule[var1](chatMainModule, ...)
 	end)
 	local setVisible = Instance.new("BindableEvent")
 	setVisible.Name = "SetVisible"
 	t.ChatWindow.SetVisible = setVisible
-	local var11 = "SetVisible"
+	local var2 = "SetVisible"
 	setVisible.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var11 (ref)
-		chatMainModule[var11](chatMainModule, ...)
+		-- upvalues: chatMainModule (ref), var2 (ref)
+		chatMainModule[var2](chatMainModule, ...)
 	end)
 	local focusChatBar = Instance.new("BindableEvent")
 	focusChatBar.Name = "FocusChatBar"
 	t.ChatWindow.FocusChatBar = focusChatBar
-	local var13 = "FocusChatBar"
+	local var3 = "FocusChatBar"
 	focusChatBar.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var13 (ref)
-		chatMainModule[var13](chatMainModule, ...)
+		-- upvalues: chatMainModule (ref), var3 (ref)
+		chatMainModule[var3](chatMainModule, ...)
 	end)
 	local enterWhisperState = Instance.new("BindableEvent")
 	enterWhisperState.Name = "EnterWhisperState"
 	t.ChatWindow.EnterWhisperState = enterWhisperState
-	local var15 = "EnterWhisperState"
+	local var4 = "EnterWhisperState"
 	enterWhisperState.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var15 (ref)
-		chatMainModule[var15](chatMainModule, ...)
+		-- upvalues: chatMainModule (ref), var4 (ref)
+		chatMainModule[var4](chatMainModule, ...)
 	end)
 	local getVisibility = Instance.new("BindableFunction")
 	getVisibility.Name = "GetVisibility"
 	t.ChatWindow.GetVisibility = getVisibility
-	local var17 = "GetVisibility"
+	local var5 = "GetVisibility"
 	
 	function getVisibility.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var17 (ref)
-		return chatMainModule[var17](chatMainModule, ...)
+		-- upvalues: chatMainModule (ref), var5 (ref)
+		return chatMainModule[var5](chatMainModule, ...)
 	end
 	
 	local getMessageCount = Instance.new("BindableFunction")
 	getMessageCount.Name = "GetMessageCount"
 	t.ChatWindow.GetMessageCount = getMessageCount
-	local var19 = "GetMessageCount"
+	local var6 = "GetMessageCount"
 	
 	function getMessageCount.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var19 (ref)
-		return chatMainModule[var19](chatMainModule, ...)
+		-- upvalues: chatMainModule (ref), var6 (ref)
+		return chatMainModule[var6](chatMainModule, ...)
 	end
 	
 	local topbarEnabledChanged = Instance.new("BindableEvent")
 	topbarEnabledChanged.Name = "TopbarEnabledChanged"
 	t.ChatWindow.TopbarEnabledChanged = topbarEnabledChanged
-	local var21 = "TopbarEnabledChanged"
+	local var7 = "TopbarEnabledChanged"
 	topbarEnabledChanged.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var21 (ref)
-		chatMainModule[var21](chatMainModule, ...)
+		-- upvalues: chatMainModule (ref), var7 (ref)
+		chatMainModule[var7](chatMainModule, ...)
 	end)
 	local isFocused = Instance.new("BindableFunction")
 	isFocused.Name = "IsFocused"
 	t.ChatWindow.IsFocused = isFocused
-	local var23 = "IsFocused"
+	local var8 = "IsFocused"
 	
 	function isFocused.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var23 (ref)
-		return chatMainModule[var23](chatMainModule, ...)
+		-- upvalues: chatMainModule (ref), var8 (ref)
+		return chatMainModule[var8](chatMainModule, ...)
 	end
 	
 	local chatBarFocusChanged = Instance.new("BindableEvent")
@@ -180,96 +180,96 @@ local function DoEverything()
 	local coreGuiEnabled = Instance.new("BindableEvent")
 	coreGuiEnabled.Name = "CoreGuiEnabled"
 	t.ChatWindow.CoreGuiEnabled = coreGuiEnabled
-	local var29 = "CoreGuiEnabled"
+	local var9 = "CoreGuiEnabled"
 	coreGuiEnabled.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var29 (ref)
-		chatMainModule[var29]:fire(...)
+		-- upvalues: chatMainModule (ref), var9 (ref)
+		chatMainModule[var9]:fire(...)
 	end)
 	local chatMakeSystemMessage = Instance.new("BindableEvent")
 	chatMakeSystemMessage.Name = "ChatMakeSystemMessage"
 	t.SetCore.ChatMakeSystemMessage = chatMakeSystemMessage
-	local var31 = "ChatMakeSystemMessage"
+	local var10 = "ChatMakeSystemMessage"
 	chatMakeSystemMessage.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var31 (ref)
-		chatMainModule[var31 .. "Event"]:fire(...)
+		-- upvalues: chatMainModule (ref), var10 (ref)
+		chatMainModule[var10 .. "Event"]:fire(...)
 	end)
 	local chatWindowPosition = Instance.new("BindableEvent")
 	chatWindowPosition.Name = "ChatWindowPosition"
 	t.SetCore.ChatWindowPosition = chatWindowPosition
-	local var33 = "ChatWindowPosition"
+	local var11 = "ChatWindowPosition"
 	chatWindowPosition.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var33 (ref)
-		chatMainModule[var33 .. "Event"]:fire(...)
+		-- upvalues: chatMainModule (ref), var11 (ref)
+		chatMainModule[var11 .. "Event"]:fire(...)
 	end)
 	local chatWindowSize = Instance.new("BindableEvent")
 	chatWindowSize.Name = "ChatWindowSize"
 	t.SetCore.ChatWindowSize = chatWindowSize
-	local var35 = "ChatWindowSize"
+	local var12 = "ChatWindowSize"
 	chatWindowSize.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var35 (ref)
-		chatMainModule[var35 .. "Event"]:fire(...)
+		-- upvalues: chatMainModule (ref), var12 (ref)
+		chatMainModule[var12 .. "Event"]:fire(...)
 	end)
 	local chatWindowPosition_1 = Instance.new("BindableFunction")
 	chatWindowPosition_1.Name = "ChatWindowPosition"
 	t.GetCore.ChatWindowPosition = chatWindowPosition_1
-	local var37 = "ChatWindowPosition"
+	local var13 = "ChatWindowPosition"
 	
 	function chatWindowPosition_1.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var37 (ref)
+		-- upvalues: chatMainModule (ref), var13 (ref)
 		return chatMainModule["f" .. var37](...)
 	end
 	
 	local chatWindowSize_1 = Instance.new("BindableFunction")
 	chatWindowSize_1.Name = "ChatWindowSize"
 	t.GetCore.ChatWindowSize = chatWindowSize_1
-	local var39 = "ChatWindowSize"
+	local var14 = "ChatWindowSize"
 	
 	function chatWindowSize_1.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var39 (ref)
+		-- upvalues: chatMainModule (ref), var14 (ref)
 		return chatMainModule["f" .. var39](...)
 	end
 	
 	local chatBarDisabled = Instance.new("BindableEvent")
 	chatBarDisabled.Name = "ChatBarDisabled"
 	t.SetCore.ChatBarDisabled = chatBarDisabled
-	local var41 = "ChatBarDisabled"
+	local var15 = "ChatBarDisabled"
 	chatBarDisabled.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var41 (ref)
-		chatMainModule[var41 .. "Event"]:fire(...)
+		-- upvalues: chatMainModule (ref), var15 (ref)
+		chatMainModule[var15 .. "Event"]:fire(...)
 	end)
 	local chatBarDisabled_1 = Instance.new("BindableFunction")
 	chatBarDisabled_1.Name = "ChatBarDisabled"
 	t.GetCore.ChatBarDisabled = chatBarDisabled_1
-	local var43 = "ChatBarDisabled"
+	local var16 = "ChatBarDisabled"
 	
 	function chatBarDisabled_1.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var43 (ref)
+		-- upvalues: chatMainModule (ref), var16 (ref)
 		return chatMainModule["f" .. var43](...)
 	end
 	
 	local specialKeyPressed = Instance.new("BindableEvent")
 	specialKeyPressed.Name = "SpecialKeyPressed"
 	t.ChatWindow.SpecialKeyPressed = specialKeyPressed
-	local var45 = "SpecialKeyPressed"
+	local var17 = "SpecialKeyPressed"
 	specialKeyPressed.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var45 (ref)
-		chatMainModule[var45](chatMainModule, ...)
+		-- upvalues: chatMainModule (ref), var17 (ref)
+		chatMainModule[var17](chatMainModule, ...)
 	end)
 	SetCoreGuiChatConnections(t)
 end
 
 function SetCoreGuiChatConnections(value)
 	-- upvalues: starterGuiService (ref)
-	local var52 = 0
-	while var52 < 10 do
-		var52 += 1
+	local var1 = 0
+	while var1 < 10 do
+		var1 += 1
 		local ok, status = pcall(function()
 			-- upvalues: starterGuiService (copy), value (ref)
 			starterGuiService:SetCore("CoreGuiChatConnections", value)
 		end)
 		
 		if ok then break end
-		if not ok and var52 == 10 then
+		if not ok and var1 == 10 then
 			error("Error calling SetCore CoreGuiChatConnections: " .. status)
 		end
 		wait()

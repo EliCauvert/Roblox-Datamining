@@ -45,8 +45,8 @@ function t.new()
 	return t_1
 end
 
-function t:withEventStream(p0)
-	self._eventStreamImpl = p0
+function t:withEventStream(p1)
+	self._eventStreamImpl = p1
 	
 	return self
 end
@@ -57,92 +57,92 @@ function t:withDiag(p1)
 	return self
 end
 
-function t:withButtonName(p2)
-	self._buttonName = p2
+function t:withButtonName(p1)
+	self._buttonName = p1
 	
 	return self
 end
 
-function t:onActivatedInviteSent(_, p3, p4, p5, p6)
+function t:onActivatedInviteSent(_, p1, p2, p3, p4)
 	-- upvalues: t (ref)
-	local var6, var7
+	local var1, var2
 	local buttonName = self:_getButtonName()
-	local var4 = if self:_getIsUniversalApp() then "inApp" else "inGame"
+	local var3 = if self:_getIsUniversalApp() then "inApp" else "inGame"
 	local inviteSent = t.EventName.InviteSent
-	local joined = table.concat(p4, ",")
+	local joined = table.concat(p2, ",")
 	local _ = nil
 	local _ = nil
 	
 	if self:_getIsUniversalApp() then
-		var6 = tostring(p5)
-		var7 = tostring(p6)
+		var1 = tostring(p3)
+		var2 = tostring(p4)
 	else
-		var6 = tostring(game.PlaceId)
-		var7 = tostring(game.GameId)
+		var1 = tostring(game.PlaceId)
+		var2 = tostring(game.GameId)
 	end
-	self:_getEventStream():setRBXEventStream(var4, inviteSent, {
+	self:_getEventStream():setRBXEventStream(var3, inviteSent, {
 		btn = buttonName,
-		placeId = var6,
-		gameId = var7,
-		conversationId = tostring(p3),
+		placeId = var1,
+		gameId = var2,
+		conversationId = tostring(p1),
 		participants = joined
 	})
-	local var8 = t.DiagCounters.InviteSent[self:_getButtonName()]
+	local var4 = t.DiagCounters.InviteSent[self:_getButtonName()]
 	
-	if var8 then
-		self:_getDiag():reportCounter(var8, 1)
+	if var4 then
+		self:_getDiag():reportCounter(var4, 1)
 	end
 end
 
-function t:inputShareGameEntryPoint(p7, p8)
+function t:inputShareGameEntryPoint(p1, p2)
 	-- upvalues: t (ref)
-	local var11, var12
+	local var1, var2
 	local buttonName = self:_getButtonName()
-	local var10 = if self:_getIsUniversalApp() then "inApp" else "inGame"
+	local var3 = if self:_getIsUniversalApp() then "inApp" else "inGame"
 	local entryPoint = t.EventName.EntryPoint
 	local _ = nil
 	local _ = nil
 	
 	if self:_getIsUniversalApp() then
-		var11 = tostring(p7)
-		var12 = tostring(p8)
+		var1 = tostring(p1)
+		var2 = tostring(p2)
 	else
-		var11 = tostring(game.PlaceId)
-		var12 = tostring(game.GameId)
+		var1 = tostring(game.PlaceId)
+		var2 = tostring(game.GameId)
 	end
-	self:_getEventStream():setRBXEventStream(var10, entryPoint, { btn = buttonName, placeId = var11, gameId = var12 })
-	local var13 = t.DiagCounters.EntryPoint[self:_getButtonName()]
+	self:_getEventStream():setRBXEventStream(var3, entryPoint, { btn = buttonName, placeId = var1, gameId = var2 })
+	local var4 = t.DiagCounters.EntryPoint[self:_getButtonName()]
 	
-	if var13 then
-		self:_getDiag():reportCounter(var13, 1)
+	if var4 then
+		self:_getDiag():reportCounter(var4, 1)
 	end
 end
 
-function t:linkGenerated(p9)
+function t:linkGenerated(p1)
 	-- upvalues: t (ref)
 	self:_getEventStream():setRBXEventStream("shareLinks", t.EventName.LinkGenerated, {
 		page = "inGameMenu",
 		subpage = "inviteFriendsPage",
-		linkType = p9.linkType,
-		linkId = p9.linkId
+		linkType = p1.linkType,
+		linkId = p1.linkId
 	})
 end
 
-function t:onShareButtonClick(p10)
+function t:onShareButtonClick(p1)
 	-- upvalues: t (ref)
 	self:_getEventStream():setRBXEventStream("shareLinks", t.EventName.ShareButtonClick, {
 		btn = "shareServerInviteLink",
 		page = "inGameMenu",
 		subpage = "inviteFriendsPage",
 		isShortUrlEnabled = true,
-		linkId = if game:GetFastFlag("GameInviteModalIncludeLinkIdInShareButton") then p10 else nil
+		linkId = if game:GetFastFlag("GameInviteModalIncludeLinkIdInShareButton") then p1 else nil
 	})
 end
 
 function t:onSearchFocused()
 	-- upvalues: t (ref)
 	local inviteSearchFocused = t.EventName.InviteSearchFocused
-	local var14 = "inGame"
+	local var1 = "inGame"
 	local t_1 = {
 		page = "inGameMenu",
 		subpage = "inviteFriendsPage",
@@ -150,35 +150,35 @@ function t:onSearchFocused()
 	}
 	
 	if self:_getIsUniversalApp() then
-		var14 = "inApp"
+		var1 = "inApp"
 		t_1.page = "inAppGameDetails"
 	end
-	self:_getEventStream():setRBXEventStream(var14, inviteSearchFocused, t_1)
+	self:_getEventStream():setRBXEventStream(var1, inviteSearchFocused, t_1)
 end
 
-function t:sendEvent(p11, p12, p13)
+function t:sendEvent(p1, p2, p3)
 	-- upvalues: cryoModule (ref)
 	local join = cryoModule.Dictionary.join
-	join = join(p12.Args, {
-		placeId = if self:_getIsUniversalApp() and p13 and p13.place_id then p13.place_id else game.PlaceId
+	join = join(p2.Args, {
+		placeId = if self:_getIsUniversalApp() and p3 and p3.place_id then p3.place_id else game.PlaceId
 	})
 	
-	if p13 then
-		join = cryoModule.Dictionary.join(join, p13)
+	if p3 then
+		join = cryoModule.Dictionary.join(join, p3)
 	end
-	self:_getEventStream():setRBXEventStream(p11, p12.Type, join)
+	self:_getEventStream():setRBXEventStream(p1, p2.Type, join)
 end
 
-function t:sendGameInviteModalEvent(p14, p15)
+function t:sendGameInviteModalEvent(p1, p2)
 	-- upvalues: cryoModule (ref), t (ref)
 	local t_1 = {
-		place_id = if self:_getIsUniversalApp() and p15 and p15.place_id then p15.place_id else game.PlaceId
+		place_id = if self:_getIsUniversalApp() and p2 and p2.place_id then p2.place_id else game.PlaceId
 	}
 	
-	if p15 then
-		t_1 = cryoModule.Dictionary.join(t_1, p15)
+	if p2 then
+		t_1 = cryoModule.Dictionary.join(t_1, p2)
 	end
-	self:_getEventStream():setRBXEventStream(p14, t.EventName.GameInviteModal, t_1)
+	self:_getEventStream():setRBXEventStream(p1, t.EventName.GameInviteModal, t_1)
 end
 
 function t:_getEventStream()

@@ -93,19 +93,19 @@ local _ = function()
 	if _G.__TESTEZ_RUNNING_TEST__ == true then
 		return false
 	end
-	local var40 = fFlagPlayerListUseMobileOnSmallDisplay and guiService.ViewportDisplaySize == Enum.DisplaySize.Small
-	local var41 = utilityModule:IsSmallTouchScreen()
+	local var1 = fFlagPlayerListUseMobileOnSmallDisplay and guiService.ViewportDisplaySize == Enum.DisplaySize.Small
+	local var2 = utilityModule:IsSmallTouchScreen()
 	
-	if not var41 then
+	if not var2 then
 		if guiService.ViewportDisplaySize == Enum.DisplaySize.Large then
-			var41 = if if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true then fFlagEnableMobilePlayerListOnConsole else false
+			var2 = if if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true then fFlagEnableMobilePlayerListOnConsole else false
 		end
-		if not var41 and var40 then
-			var41 = if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
-			var41 = var41 or fStringPlayerListOverrideTypeModule == "mobile"
+		if not var2 and var1 then
+			var2 = if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
+			var2 = var2 or fStringPlayerListOverrideTypeModule == "mobile"
 		end
 	end
-	return var41
+	return var2
 end
 
 local function setupSettings(value)
@@ -162,29 +162,29 @@ function t.new()
 	end
 	coroutine.wrap(function()
 		-- upvalues: tbl (ref), setSmallTouchDeviceModule (copy), fFlagPlayerListUseMobileOnSmallDisplay (copy), guiService (copy), utilityModule (copy), userInputService (copy), fFlagEnableMobilePlayerListOnConsole (copy), fStringPlayerListOverrideTypeModule (copy)
-		local var46
+		local var1
 		local store = tbl.store
 		
 		if _G.__TESTEZ_RUNNING_TEST__ == true then
-			var46 = false
+			var1 = false
 		else
-			local var45 = fFlagPlayerListUseMobileOnSmallDisplay and guiService.ViewportDisplaySize == Enum.DisplaySize.Small
-			var46 = utilityModule:IsSmallTouchScreen()
+			local var2 = fFlagPlayerListUseMobileOnSmallDisplay and guiService.ViewportDisplaySize == Enum.DisplaySize.Small
+			var1 = utilityModule:IsSmallTouchScreen()
 			
-			if not var46 then
+			if not var1 then
 				if guiService.ViewportDisplaySize == Enum.DisplaySize.Large then
-					var46 = if if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true then fFlagEnableMobilePlayerListOnConsole else false
+					var1 = if if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true then fFlagEnableMobilePlayerListOnConsole else false
 				end
-				if not var46 and var45 then
-					var46 = if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
-					var46 = var46 or fStringPlayerListOverrideTypeModule == "mobile"
+				if not var1 and var2 then
+					var1 = if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
+					var1 = var1 or fStringPlayerListOverrideTypeModule == "mobile"
 				end
 			end
 		end
-		store:dispatch(setSmallTouchDeviceModule(var46))
+		store:dispatch(setSmallTouchDeviceModule(var1))
 	end)()
-	local var43 = fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))
-	tbl.store:dispatch(setTenFootInterfaceModule(if var43 or fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled()))
+	local var1 = fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))
+	tbl.store:dispatch(setTenFootInterfaceModule(if var1 or fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled()))
 	coroutine.wrap(function()
 		-- upvalues: tbl (ref), setSubjectToChinaPoliciesModule (copy), cachedPolicyServiceModule (copy)
 		tbl.store:dispatch(setSubjectToChinaPoliciesModule(cachedPolicyServiceModule:IsSubjectToChinaPolicies()))
@@ -234,9 +234,9 @@ function t.new()
 	local t_1 = {
 		leaderboardStore = leaderboardStoreInstanceManager.getLeaderboardStoreInstance,
 		TopBarConstants = require(robloxGui.Modules.TopBar.Constants),
-		isTenFoot = var43
+		isTenFoot = var1
 	}
-	var43 = if (fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))) or fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled()
+	var1 = if (fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))) or fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled()
 	tbl.root = createElement(playerListContainer, t_1, { PlayerListRoot = tbl.root })
 	tbl.root = roactModule.createElement("ScreenGui", {
 		AutoLocalize = false,
@@ -256,12 +256,12 @@ function t.new()
 		tbl.VisibilityChangedEvent = Instance.new("BindableEvent")
 	end
 	if fFlagTopBarSignalizeSetCores then
-		tbl.disposeEffect = signalsModule.createEffect(function(p0)
+		tbl.disposeEffect = signalsModule.createEffect(function(p1)
 			-- upvalues: inExperienceTopBarModule (copy), tbl (ref)
 			local getTopBarStore = inExperienceTopBarModule.Stores.GetTopBarStore
 			
 			if getTopBarStore then
-				tbl:SetTopBarEnabled(getTopBarStore(p0).getTopBarCoreGuiEnabled(p0))
+				tbl:SetTopBarEnabled(getTopBarStore(p1).getTopBarCoreGuiEnabled(p1))
 			end
 		end)
 	end
@@ -280,19 +280,19 @@ end
 
 function t:_updateMounted()
 	-- upvalues: fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref), tenFootInterfaceModule (ref), roactModule (ref), coreGuiService (ref)
-	local var48 = if (fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))) or fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled()
+	local var1 = if (fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))) or fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled()
 	
-	if not var48 then
-		var48 = self.coreGuiEnabled and self.topBarEnabled
+	if not var1 then
+		var1 = self.coreGuiEnabled and self.topBarEnabled
 		
-		if var48 and not self.mounted then
+		if var1 and not self.mounted then
 			self._mountLeaderboardStore()
 			self._setIsUsingGamepad()
 			self.element = roactModule.mount(self.root, coreGuiService, "PlayerList")
 			self.mounted = true
 			
 			return
-		elseif not var48 and self.mounted then
+		elseif not var1 and self.mounted then
 			roactModule.unmount(self.element)
 			self._unmountLeaderboardStore()
 			
@@ -309,16 +309,16 @@ function t:_updateMounted()
 	end
 end
 
-function t._trackEnabled(p3)
+function t._trackEnabled(p1)
 	-- upvalues: starterGuiService (ref), setPlayerListEnabledModule (ref), fFlagPlayerListIgnoreDevGamepadBindings (ref), guiService (ref), constants_1 (ref)
-	starterGuiService.CoreGuiChangedSignal:Connect(function(p4, p5)
-		-- upvalues: p3 (ref), setPlayerListEnabledModule (copy), fFlagPlayerListIgnoreDevGamepadBindings (copy), guiService (copy), constants_1 (copy)
-		if p4 == Enum.CoreGuiType.All or p4 == Enum.CoreGuiType.PlayerList then
-			p3.coreGuiEnabled = p5
-			p3:_updateMounted()
-			p3.store:dispatch(setPlayerListEnabledModule(p5))
+	starterGuiService.CoreGuiChangedSignal:Connect(function(p2, p3)
+		-- upvalues: p1 (ref), setPlayerListEnabledModule (copy), fFlagPlayerListIgnoreDevGamepadBindings (copy), guiService (copy), constants_1 (copy)
+		if p2 == Enum.CoreGuiType.All or p2 == Enum.CoreGuiType.PlayerList then
+			p1.coreGuiEnabled = p3
+			p1:_updateMounted()
+			p1.store:dispatch(setPlayerListEnabledModule(p3))
 			
-			if fFlagPlayerListIgnoreDevGamepadBindings and not p5 then
+			if fFlagPlayerListIgnoreDevGamepadBindings and not p3 then
 				guiService:SetMenuIsOpen(false, constants_1.PLAYER_LIST_MENU)
 			end
 		end
@@ -333,19 +333,19 @@ if fFlagAddNewPlayerListMobileFocusNav then
 		elseif _G.__TESTEZ_RUNNING_TEST__ == true then
 			return false
 		end
-		local var49 = fFlagPlayerListUseMobileOnSmallDisplay and guiService.ViewportDisplaySize == Enum.DisplaySize.Small
-		local var50 = utilityModule:IsSmallTouchScreen()
+		local var1 = fFlagPlayerListUseMobileOnSmallDisplay and guiService.ViewportDisplaySize == Enum.DisplaySize.Small
+		local var2 = utilityModule:IsSmallTouchScreen()
 		
-		if not var50 then
+		if not var2 then
 			if guiService.ViewportDisplaySize == Enum.DisplaySize.Large then
-				var50 = if if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true then fFlagEnableMobilePlayerListOnConsole else false
+				var2 = if if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true then fFlagEnableMobilePlayerListOnConsole else false
 			end
-			if not var50 and var49 then
-				var50 = if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
-				var50 = var50 or fStringPlayerListOverrideTypeModule == "mobile"
+			if not var2 and var1 then
+				var2 = if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
+				var2 = var2 or fStringPlayerListOverrideTypeModule == "mobile"
 			end
 		end
-		return var50
+		return var2
 	end
 end
 function t:_setupReskin()
@@ -363,48 +363,48 @@ function t:_setupReskin()
 	local leaderboardScrim = playerListModule.Presentation.LeaderboardScrim
 	local contextMenuControllerModule = require(parent.ContextMenuController)
 	
-	local function _(p6, p7)
+	local function _(p1, p2)
 		-- upvalues: robloxTranslatorModule (ref)
 		local ok, status = pcall(function()
-			-- upvalues: robloxTranslatorModule (copy), p6 (ref)
-			return robloxTranslatorModule:FormatByKey(p6)
+			-- upvalues: robloxTranslatorModule (copy), p1 (ref)
+			return robloxTranslatorModule:FormatByKey(p1)
 		end)
 		
-		return if ok and status and status ~= "" then status else p7
+		return if ok and status and status ~= "" then status else p2
 	end
 	
-	local var57 = "InGame.PlayerList.Leaderboard"
+	local var1 = "InGame.PlayerList.Leaderboard"
 	local ok, status = pcall(function()
-		-- upvalues: robloxTranslatorModule (ref), var57 (ref)
-		return robloxTranslatorModule:FormatByKey(var57)
+		-- upvalues: robloxTranslatorModule (ref), var1 (ref)
+		return robloxTranslatorModule:FormatByKey(var1)
 	end)
-	local var58 = if ok and status and status ~= "" then status else "Leaderboard"
+	local var2 = if ok and status and status ~= "" then status else "Leaderboard"
 	status = fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))
 	ok = if status or fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled()
 	
 	if _G.__TESTEZ_RUNNING_TEST__ == true then
 		status = false
 	else
-		local var59 = fFlagPlayerListUseMobileOnSmallDisplay and guiService.ViewportDisplaySize == Enum.DisplaySize.Small
+		local var3 = fFlagPlayerListUseMobileOnSmallDisplay and guiService.ViewportDisplaySize == Enum.DisplaySize.Small
 		status = utilityModule:IsSmallTouchScreen()
 		
 		if not status then
-			local var61
+			local var4
 			if guiService.ViewportDisplaySize == Enum.DisplaySize.Large then
 				status = if if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true then fFlagEnableMobilePlayerListOnConsole else false
 			end
-			if not status and var59 then
+			if not status and var3 then
 				status = if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
 				status = status or fStringPlayerListOverrideTypeModule == "mobile"
 			end
 		end
 	end
 	if not ok then
-		local var60
+		local var5
 		if guiService.ViewportDisplaySize == Enum.DisplaySize.Large then
-			var60 = if if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true then fFlagEnableMobilePlayerListOnConsole else false
+			var5 = if if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true then fFlagEnableMobilePlayerListOnConsole else false
 		end
-		var61 = if var60 then device.Console else device.Unknown
+		var4 = if var5 then device.Console else device.Unknown
 	end
 	if status then
 		playerContextualMenuStore.setOnDismiss(function()
@@ -415,17 +415,17 @@ function t:_setupReskin()
 			playerListVisibilityStore.setVisible(true)
 		end)
 	end
-	playerContextualMenuStore.setContextMenuOpener(function(p8, p9, p10)
+	playerContextualMenuStore.setContextMenuOpener(function(p1, p2, p3)
 		-- upvalues: contextMenuControllerModule (ref), playerContextualMenuStore (copy), status (ref)
 		task.spawn(function()
-			-- upvalues: contextMenuControllerModule (copy), p8 (ref), playerContextualMenuStore (copy), status (copy), p9 (ref), p10 (ref)
-			local var73 = contextMenuControllerModule.buildMenuData(p8, playerContextualMenuStore.closeContextMenu, status)
+			-- upvalues: contextMenuControllerModule (copy), p1 (ref), playerContextualMenuStore (copy), status (copy), p2 (ref), p3 (ref)
+			local var6 = contextMenuControllerModule.buildMenuData(p1, playerContextualMenuStore.closeContextMenu, status)
 			
-			if p8.Parent == nil then
+			if p1.Parent == nil then
 				return
 			end
-			var73.anchorPosition = p9
-			playerContextualMenuStore.setMenuDataIfCurrent(var73, p10)
+			var6.anchorPosition = p2
+			playerContextualMenuStore.setMenuDataIfCurrent(var6, p3)
 		end)
 	end)
 	local playerListInitialVisibleStateModule = require(parent.PlayerListInitialVisibleState)
@@ -446,29 +446,29 @@ function t:_setupReskin()
 	
 	local function setupVisibilityEffect()
 		-- upvalues: self (ref), signalsModule (copy), playerListVisibilityStore (copy)
-		local var74 = false
-		self._reskinSetVisibleEffect = signalsModule.createEffect(function(p11)
-			-- upvalues: playerListVisibilityStore (copy), var74 (write), self (copy)
-			local visible = playerListVisibilityStore.getVisible(p11)
+		local var6 = false
+		self._reskinSetVisibleEffect = signalsModule.createEffect(function(p1)
+			-- upvalues: playerListVisibilityStore (copy), var6 (write), self (copy)
+			local visible = playerListVisibilityStore.getVisible(p1)
 			
-			if var74 then
+			if var6 then
 				self.SetVisibleChangedEvent:Fire(visible)
 				
 				return
 			end
-			var74 = true
+			var6 = true
 		end)
-		local var75 = false
-		self._reskinVisibilityEffect = signalsModule.createEffect(function(p12)
-			-- upvalues: playerListVisibilityStore (copy), var75 (write), self (copy)
-			local effectiveVisible = playerListVisibilityStore.getEffectiveVisible(p12)
+		local var7 = false
+		self._reskinVisibilityEffect = signalsModule.createEffect(function(p1)
+			-- upvalues: playerListVisibilityStore (copy), var7 (write), self (copy)
+			local effectiveVisible = playerListVisibilityStore.getEffectiveVisible(p1)
 			
-			if var75 then
+			if var7 then
 				self.VisibilityChangedEvent:Fire(effectiveVisible)
 				
 				return
 			end
-			var75 = true
+			var7 = true
 		end)
 	end
 	
@@ -488,15 +488,15 @@ function t:_setupReskin()
 		return UDim2.new(0.5, 0, 0, topBarHeight + math.max(MOBILE_EDGE_GAP, constantsModule.ApplyDisplayScale(MOBILE_EDGE_GAP)))
 	end
 	
-	local var65, var66 = reactModule.createBinding(computeMobilePosition())
+	local var6, var7 = reactModule.createBinding(computeMobilePosition())
 	
 	local function resolveContainerProps()
-		-- upvalues: status (ref), var65 (ref), constantsModule (ref), topBarHeight (ref)
+		-- upvalues: status (ref), var6 (ref), constantsModule (ref), topBarHeight (ref)
 		if status then
 			return {
 				tag = "auto-xy",
 				AnchorPoint = Vector2.new(0.5, 0),
-				Position = var65,
+				Position = var6,
 				Size = UDim2.fromOffset(0, 0)
 			}
 		end
@@ -511,10 +511,10 @@ function t:_setupReskin()
 	end
 	
 	local function buildReskinElement()
-		-- upvalues: reactModule (ref), foundationProvider (ref), colorMode (ref), var61 (ref), userGameSettingsService (copy), leaderboardScrim (ref), status (ref), foundationModule (ref), resolveContainerProps (ref), playerListContainer (copy), leaderboardStoreInstanceManager (copy), constantsModule (ref), ok (ref), playerListPanel (ref), var58 (ref), playerContextualMenuView (ref)
+		-- upvalues: reactModule (ref), foundationProvider (ref), colorMode (ref), var4 (ref), userGameSettingsService (copy), leaderboardScrim (ref), status (ref), foundationModule (ref), resolveContainerProps (ref), playerListContainer (copy), leaderboardStoreInstanceManager (copy), constantsModule (ref), ok (ref), playerListPanel (ref), var2 (ref), playerContextualMenuView (ref)
 		return reactModule.createElement(foundationProvider, {
 			colorMode = colorMode.Dark,
-			device = var61,
+			device = var4,
 			preferences = {
 				preferredTransparency = userGameSettingsService.PreferredTransparency
 			}
@@ -526,7 +526,7 @@ function t:_setupReskin()
 					TopBarConstants = constantsModule,
 					isTenFoot = ok
 				}, {
-					PlayerListPanel = reactModule.createElement(playerListPanel, { isSmallTouchDevice = status, title = var58 })
+					PlayerListPanel = reactModule.createElement(playerListPanel, { isSmallTouchDevice = status, title = var2 })
 				})
 			}),
 			ContextMenu = reactModule.createElement(playerContextualMenuView, { isSmallTouchDevice = status })
@@ -540,55 +540,55 @@ function t:_setupReskin()
 				-- upvalues: playersService (copy)
 				return { players = playersService:GetPlayers() }
 			end,
-			dispatch = function(_, p13)
+			dispatch = function(_, p1)
 				-- upvalues: playerRelationshipStore (copy)
-				if type(p13) ~= "table" then return end
-				if p13.type == "SetPlayerIsBlocked" and p13.userId then
-					playerRelationshipStore.patchPlayerRelationship(p13.userId, { isBlocked = p13.isBlocked })
+				if type(p1) ~= "table" then return end
+				if p1.type == "SetPlayerIsBlocked" and p1.userId then
+					playerRelationshipStore.patchPlayerRelationship(p1.userId, { isBlocked = p1.isBlocked })
 					
 					return
-				elseif p13.type == "SetPlayerFriendStatus" and p13.userId then
-					playerRelationshipStore.patchPlayerRelationship(p13.userId, { friendStatus = p13.friendStatus })
+				elseif p1.type == "SetPlayerFriendStatus" and p1.userId then
+					playerRelationshipStore.patchPlayerRelationship(p1.userId, { friendStatus = p1.friendStatus })
 				end
 			end
 		}
 		
-		local function request(p14)
+		local function request(p1)
 			-- upvalues: makePlayerInfoRequestsModule (copy), t (ref)
-			makePlayerInfoRequestsModule(p14)(t)
+			makePlayerInfoRequestsModule(p1)(t)
 		end
 		
 		for i, v in ipairs(playersService:GetPlayers()) do
 			makePlayerInfoRequestsModule(v)(t)
 		end
 		self._reskinPlayerAddedConn = playersService.PlayerAdded:Connect(request)
-		self._reskinPlayerRemovingConn = playersService.PlayerRemoving:Connect(function(p15)
+		self._reskinPlayerRemovingConn = playersService.PlayerRemoving:Connect(function(p1)
 			-- upvalues: playerIconInfoStore (copy), playerRelationshipStore (copy)
-			playerIconInfoStore.removePlayer(p15.UserId)
-			playerRelationshipStore.removePlayer(p15.UserId)
+			playerIconInfoStore.removePlayer(p1.UserId)
+			playerRelationshipStore.removePlayer(p1.UserId)
 		end)
-		self._reskinBlockedStatusConn = blockingUtilityModule:GetBlockedStatusChangedEvent():Connect(function(p16, p17)
+		self._reskinBlockedStatusConn = blockingUtilityModule:GetBlockedStatusChangedEvent():Connect(function(p1, p2)
 			-- upvalues: playerRelationshipStore (copy)
-			local var81 = tonumber(p16)
+			local var8 = tonumber(p1)
 			
-			if var81 then
-				playerRelationshipStore.patchPlayerRelationship(var81, { isBlocked = p17 })
+			if var8 then
+				playerRelationshipStore.patchPlayerRelationship(var8, { isBlocked = p2 })
 			end
 		end)
-		self._reskinFriendStatusConn = playersService.LocalPlayer.FriendStatusChanged:Connect(function(p18, p19)
+		self._reskinFriendStatusConn = playersService.LocalPlayer.FriendStatusChanged:Connect(function(p1, p2)
 			-- upvalues: playerRelationshipStore (copy)
-			playerRelationshipStore.patchPlayerRelationship(p18.UserId, { friendStatus = p19 })
+			playerRelationshipStore.patchPlayerRelationship(p1.UserId, { friendStatus = p2 })
 		end)
 		
 		if fFlagBadgeVisibilitySettingEnabled then
 			task.spawn(function()
 				-- upvalues: robloxReplicatedStorageService (copy), self (copy), playersService (copy), makePlayerInfoRequestsModule (copy), t (ref)
-				self._reskinProfileSettingsConn = robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p20)
+				self._reskinProfileSettingsConn = robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p1)
 					-- upvalues: playersService (copy), makePlayerInfoRequestsModule (copy), t (copy)
-					local var82 = playersService:GetPlayerByUserId(tonumber(p20))
+					local var8 = playersService:GetPlayerByUserId(tonumber(p1))
 					
-					if var82 then
-						makePlayerInfoRequestsModule(var82)(t)
+					if var8 then
+						makePlayerInfoRequestsModule(var8)(t)
 					end
 				end)
 			end)
@@ -621,7 +621,7 @@ function t:_setupReskin()
 	end
 	
 	local function mountReskin()
-		-- upvalues: playerListVisibilityStore (copy), fFlagPlayerListPersistVisibilityModule (copy), status (ref), ok (ref), coreGuiService (copy), reactRobloxModule (ref), buildReskinElement (ref), self (ref), var66 (ref), computeMobilePosition (ref), setupPlayerInfoRequests (ref)
+		-- upvalues: playerListVisibilityStore (copy), fFlagPlayerListPersistVisibilityModule (copy), status (ref), ok (ref), coreGuiService (copy), reactRobloxModule (ref), buildReskinElement (ref), self (ref), var7 (ref), computeMobilePosition (ref), setupPlayerInfoRequests (ref)
 		playerListVisibilityStore.setShouldPersistVisibility(fFlagPlayerListPersistVisibilityModule and (not status and not ok))
 		local playerListReskin = Instance.new("ScreenGui")
 		playerListReskin.Name = "PlayerListReskin"
@@ -630,24 +630,24 @@ function t:_setupReskin()
 		playerListReskin.DisplayOrder = if _G.__TESTEZ_RUNNING_TEST__ == true then -1 else 1
 		playerListReskin.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		playerListReskin.Parent = coreGuiService
-		local var84 = reactRobloxModule.createRoot(playerListReskin)
-		var84:render(buildReskinElement())
-		self._reskinRoot = var84
+		local var8 = reactRobloxModule.createRoot(playerListReskin)
+		var8:render(buildReskinElement())
+		self._reskinRoot = var8
 		self._reskinScreenGui = playerListReskin
 		
 		if status then
-			local function connectViewport(p21)
-				-- upvalues: self (copy), var66 (copy), computeMobilePosition (copy)
+			local function connectViewport(p1)
+				-- upvalues: self (copy), var7 (copy), computeMobilePosition (copy)
 				if self._reskinViewportConn then
 					self._reskinViewportConn:Disconnect()
 					self._reskinViewportConn = nil
 				end
-				if p21 then
-					self._reskinViewportConn = p21:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-						-- upvalues: var66 (copy), computeMobilePosition (copy)
-						var66(computeMobilePosition())
+				if p1 then
+					self._reskinViewportConn = p1:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+						-- upvalues: var7 (copy), computeMobilePosition (copy)
+						var7(computeMobilePosition())
 					end)
-					var66(computeMobilePosition())
+					var7(computeMobilePosition())
 				end
 			end
 			
@@ -707,14 +707,14 @@ function t:_setupReskin()
 	else
 		self.mounted = false
 	end
-	self._reskinCoreGuiConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p22, p23)
+	self._reskinCoreGuiConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p1, p2)
 		-- upvalues: self (ref)
-		if p22 == Enum.CoreGuiType.All or p22 == Enum.CoreGuiType.PlayerList then
-			self.coreGuiEnabled = p23
+		if p1 == Enum.CoreGuiType.All or p1 == Enum.CoreGuiType.PlayerList then
+			self.coreGuiEnabled = p2
 			self:SetTopBarEnabled(self.topBarEnabled)
 		end
 	end)
-	contextActionService:BindCoreAction("RbxPlayerListToggle", function(_, p24, _)
+	contextActionService:BindCoreAction("RbxPlayerListToggle", function(_, p1, _)
 		-- upvalues: self (ref), status (ref), guiService (copy)
 		if not self.mounted then
 			return Enum.ContextActionResult.Pass
@@ -722,7 +722,7 @@ function t:_setupReskin()
 			return Enum.ContextActionResult.Pass
 		elseif guiService.MenuIsOpen then
 			return Enum.ContextActionResult.Pass
-		elseif p24 == Enum.UserInputState.Begin then
+		elseif p1 == Enum.UserInputState.Begin then
 			self:SetVisibility(not self:GetVisibility())
 			
 			return Enum.ContextActionResult.Sink
@@ -731,12 +731,12 @@ function t:_setupReskin()
 	end, false, Enum.KeyCode.Tab)
 	
 	if fFlagTopBarSignalizeSetCores then
-		self._reskinTopBarEffect = signalsModule.createEffect(function(p25)
+		self._reskinTopBarEffect = signalsModule.createEffect(function(p1)
 			-- upvalues: inExperienceTopBarModule (copy), self (ref)
 			local getTopBarStore = inExperienceTopBarModule.Stores.GetTopBarStore
 			
 			if getTopBarStore then
-				self:SetTopBarEnabled(getTopBarStore(p25).getTopBarCoreGuiEnabled(p25))
+				self:SetTopBarEnabled(getTopBarStore(p1).getTopBarCoreGuiEnabled(p1))
 			end
 		end)
 	end
@@ -762,52 +762,52 @@ function t:GetSetVisibleChangedEvent()
 	return self.SetVisibleChangedEvent
 end
 
-function t:SetVisibility(p26)
+function t:SetVisibility(p1)
 	-- upvalues: fFlagPlayerListReskin (ref), playerContextualMenuStore (ref), playerListVisibilityStore (ref), setPlayerListVisibilityModule (ref)
 	if not fFlagPlayerListReskin then
-		self.store:dispatch(setPlayerListVisibilityModule(p26))
+		self.store:dispatch(setPlayerListVisibilityModule(p1))
 		
 		return
-	elseif not p26 then
+	elseif not p1 then
 		playerContextualMenuStore.closeContextMenu()
 	end
-	playerListVisibilityStore.setVisible(p26)
+	playerListVisibilityStore.setVisible(p1)
 end
 
-function t:HideTemp(p27, p28)
+function t:HideTemp(p1, p2)
 	-- upvalues: fFlagPlayerListReskin (ref), playerContextualMenuStore (ref), playerListVisibilityStore (ref), setTempHideKeyModule (ref)
 	if fFlagPlayerListReskin then
-		if p28 and playerContextualMenuStore.getMenuData(false) ~= nil then
+		if p2 and playerContextualMenuStore.getMenuData(false) ~= nil then
 			playerContextualMenuStore.closeContextMenu()
 		end
-		playerListVisibilityStore.setTempHide(p27, p28)
+		playerListVisibilityStore.setTempHide(p1, p2)
 		
 		return
-	elseif p28 == false then
-		p28 = nil
+	elseif p2 == false then
+		p2 = nil
 	end
-	self.store:dispatch(setTempHideKeyModule(p27, p28))
+	self.store:dispatch(setTempHideKeyModule(p1, p2))
 end
 
-function t:SetTopBarEnabled(p29)
+function t:SetTopBarEnabled(p1)
 	-- upvalues: fFlagPlayerListReskin (ref), leaderboardStoreInstanceManager (ref)
 	if not fFlagPlayerListReskin then
-		self.topBarEnabled = p29
+		self.topBarEnabled = p1
 		self:_updateMounted()
 		
 		return
 	end
-	self.topBarEnabled = p29
-	p29 = self.coreGuiEnabled and p29
+	self.topBarEnabled = p1
+	p1 = self.coreGuiEnabled and p1
 	
-	if p29 and not self.mounted then
+	if p1 and not self.mounted then
 		leaderboardStoreInstanceManager.createLeaderboardStoreInstance()
 		self._reskin.setupVisibilityEffect()
 		self._reskin.mountReskin()
 		self.mounted = true
 		
 		return
-	elseif not p29 and self.mounted then
+	elseif not p1 and self.mounted then
 		self._reskin.unmountReskin()
 		leaderboardStoreInstanceManager.cleanUpInstance()
 		self.mounted = false

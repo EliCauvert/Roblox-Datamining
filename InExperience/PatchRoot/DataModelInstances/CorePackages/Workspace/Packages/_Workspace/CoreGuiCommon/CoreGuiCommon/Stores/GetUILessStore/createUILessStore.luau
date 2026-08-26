@@ -11,27 +11,27 @@ local addUILessModeIxpLayer = game:DefineFastString("AddUILessModeIxpLayer", "")
 
 return function()
 	-- upvalues: createSignal (ref), enableDesktopUILessMode (ref), userInputService (ref), createEffect (ref), logTopBarToggled (ref), IXPServiceWrapper (ref), addUILessModeIxpLayer (ref)
-	local var5, _ = createSignal(enableDesktopUILessMode and userInputService.PreferredInput == Enum.PreferredInput.KeyboardAndMouse)
-	local var6, var7 = createSignal(not var5(false))
-	local var8 = createEffect(function(p0)
-		-- upvalues: var5 (ref), logTopBarToggled (copy), var6 (ref)
-		if var5(false) then
-			logTopBarToggled(var6(p0))
+	local var1, _ = createSignal(enableDesktopUILessMode and userInputService.PreferredInput == Enum.PreferredInput.KeyboardAndMouse)
+	local var2, var3 = createSignal(not var1(false))
+	local var4 = createEffect(function(p1)
+		-- upvalues: var1 (ref), logTopBarToggled (copy), var2 (ref)
+		if var1(false) then
+			logTopBarToggled(var2(p1))
 		end
 	end)
 	
 	local function cleanup()
-		-- upvalues: var8 (ref)
-		var8()
+		-- upvalues: var4 (ref)
+		var4()
 	end
 	
-	if var5(false) then
+	if var1(false) then
 		IXPServiceWrapper:LogFlagLinkedUserLayerExposure(addUILessModeIxpLayer)
 	end
 	return {
-		getUILessModeEnabled = var5,
-		getUIVisible = var6,
-		setUIVisible = var7,
+		getUILessModeEnabled = var1,
+		getUIVisible = var2,
+		setUIVisible = var3,
 		cleanup = cleanup
 	}
 end

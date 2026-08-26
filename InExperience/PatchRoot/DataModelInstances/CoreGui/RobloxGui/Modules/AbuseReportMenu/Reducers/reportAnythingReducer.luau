@@ -3,10 +3,10 @@ local _ = require(abuseReportMenu.Components.Types)
 local constantsModule = require(abuseReportMenu.Components.Constants)
 local reportAnythingActions = constantsModule.ReportAnythingActions
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reportAnythingActions (ref), constantsModule (ref)
-	local cloned = table.clone(p0)
-	local type = p1.type
+	local cloned = table.clone(p1)
+	local type = p2.type
 	
 	if type == reportAnythingActions.ClearAll then
 		cloned = constantsModule.ReportAnythingInitialState
@@ -20,21 +20,21 @@ return function(p0, p1)
 		
 		return cloned
 	elseif type == reportAnythingActions.SetScreenshotId then
-		cloned.screenshotId = p1.screenshotId
+		cloned.screenshotId = p2.screenshotId
 		
 		return cloned
 	elseif type == reportAnythingActions.SetScreenshotContentId then
-		cloned.screenshotContentId = p1.screenshotContentId
+		cloned.screenshotContentId = p2.screenshotContentId
 		
 		return cloned
 	elseif type == reportAnythingActions.SetAnnotationPoints then
-		cloned.annotationPoints = p1.annotationPoints
+		cloned.annotationPoints = p2.annotationPoints
 		cloned.annotationPageSeen = true
 		cloned.annotationOptionSeen = true
 		
 		return cloned
 	elseif type == reportAnythingActions.SetIdentificationResults then
-		cloned.identificationResults = p1.identificationResults
+		cloned.identificationResults = p2.identificationResults
 		
 		return cloned
 	elseif type == reportAnythingActions.CompleteAttachment then
@@ -42,12 +42,12 @@ return function(p0, p1)
 		
 		return cloned
 	elseif type == reportAnythingActions.SetAnnotationCircleRadius then
-		cloned.annotationCircleRadius = p1.radius
+		cloned.annotationCircleRadius = p2.radius
 		
 		return cloned
 	elseif type == reportAnythingActions.SetAnnotationAreaDimensions then
-		cloned.annotationAreaWidth = p1.width
-		cloned.annotationAreaHeight = p1.height
+		cloned.annotationAreaWidth = p2.width
+		cloned.annotationAreaHeight = p2.height
 		
 		return cloned
 	elseif type == reportAnythingActions.SetAnnotationOptionSeen then

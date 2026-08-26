@@ -11,17 +11,17 @@ local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local textFeedbackReasonDialogModule = require(momentsCreation.Components.Dialogs.TextFeedbackReasonDialog)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), text (ref), iconButton (ref), iconName (ref), iconVariant (ref), inputSize (ref), buttonVariant (ref), textFeedbackReasonDialogModule (ref)
-	return if p0.visible then reactModule.createElement(reactModule.Fragment, nil, {
+	return if p1.visible then reactModule.createElement(reactModule.Fragment, nil, {
 		Feedback = reactModule.createElement(view, {
 			tag = "col align-x-center gap-small size-full-0 auto-y",
-			LayoutOrder = p0.layoutOrder
+			LayoutOrder = p1.layoutOrder
 		}, {
 			Disclosure = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-body-small text-align-x-center text-align-y-top content-neutral",
-				Text = p0.disclosureText
+				Text = p1.disclosureText
 			}),
 			Icons = reactModule.createElement(view, {
 				LayoutOrder = 2,
@@ -30,25 +30,25 @@ return function(p0)
 				ThumbsUp = reactModule.createElement(iconButton, {
 					LayoutOrder = 1,
 					testId = "generated-text-feedback-thumbs-up",
-					icon = if p0.selectedAction == "thumbs_up" then { name = iconName.ThumbUp, variant = iconVariant.Filled } else iconName.ThumbUp,
-					onActivated = p0.onThumbsUp,
+					icon = if p1.selectedAction == "thumbs_up" then { name = iconName.ThumbUp, variant = iconVariant.Filled } else iconName.ThumbUp,
+					onActivated = p1.onThumbsUp,
 					size = inputSize.Small,
 					variant = buttonVariant.Utility
 				}),
 				ThumbsDown = reactModule.createElement(iconButton, {
 					LayoutOrder = 2,
 					testId = "generated-text-feedback-thumbs-down",
-					icon = if p0.selectedAction == "thumbs_down" then { name = iconName.ThumbDown, variant = iconVariant.Filled } else iconName.ThumbDown,
-					onActivated = p0.onThumbsDown,
+					icon = if p1.selectedAction == "thumbs_down" then { name = iconName.ThumbDown, variant = iconVariant.Filled } else iconName.ThumbDown,
+					onActivated = p1.onThumbsDown,
 					size = inputSize.Small,
 					variant = buttonVariant.Utility
 				})
 			})
 		}),
-		ReasonDialog = if p0.showReasonDialog then reactModule.createElement(textFeedbackReasonDialogModule, {
-			onNotHelpful = p0.onNotHelpful,
-			onPolicyViolation = p0.onPolicyViolation,
-			onDismiss = p0.onDismissDialog
+		ReasonDialog = if p1.showReasonDialog then reactModule.createElement(textFeedbackReasonDialogModule, {
+			onNotHelpful = p1.onNotHelpful,
+			onPolicyViolation = p1.onPolicyViolation,
+			onDismiss = p1.onDismissDialog
 		}) else nil
 	}) else nil
 end

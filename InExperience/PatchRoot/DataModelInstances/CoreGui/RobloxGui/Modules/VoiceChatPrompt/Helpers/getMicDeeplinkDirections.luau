@@ -4,9 +4,9 @@ local var2 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Wind
 local var3 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.AndroidWithoutDeeplink")
 local var4 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.WindowsWithoutDeeplink")
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: var1 (ref), var3 (ref), var2 (ref), var4 (ref)
-	local platform = p1:GetPlatform()
+	local platform = p2:GetPlatform()
 	
-	return if platform == Enum.Platform.Android then if p0 then var1 else var3 elseif platform == Enum.Platform.Windows then if p0 then var2 else var4 else nil
+	return if platform == Enum.Platform.Android then if p1 then var1 else var3 elseif platform == Enum.Platform.Windows then if p1 then var2 else var4 else nil
 end

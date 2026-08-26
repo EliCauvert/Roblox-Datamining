@@ -18,33 +18,33 @@ local loaderProvider = loaderContextModule.LoaderProvider
 local fFlagAbuseReportInExpPlayerListV3 = sharedFlagsModule.FFlagAbuseReportInExpPlayerListV3
 local fFlagAbuseReportVoiceMute = sharedFlagsModule.FFlagAbuseReportVoiceMute
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAbuseSheetFlowModule (ref), reactModule (ref), arTranslationProvider (ref), abuseReportAnalyticsProvider (ref), layoutSlotsProvider (ref), inlineSlots (ref), overlaidControlsProvider (ref), loaderProvider (ref), abuseReportInlineModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), fFlagAbuseReportVoiceMute (ref), voiceSpeakingSignalsModule (ref)
-	local var8 = useAbuseSheetFlowModule(p0.rawConfig, {
+	local var1 = useAbuseSheetFlowModule(p1.rawConfig, {
 		open = true,
-		abuseVector = p0.abuseVector,
-		targetId = p0.targetId,
-		onClose = p0.onClose,
-		onCustomSubmit = p0.onCustomSubmit,
-		clientActionHandlers = p0.clientActionHandlers,
-		onFinish = p0.onFinish,
-		attemptTrigger = p0.attemptTrigger,
-		inlineAlertController = p0.inlineAlertController
+		abuseVector = p1.abuseVector,
+		targetId = p1.targetId,
+		onClose = p1.onClose,
+		onCustomSubmit = p1.onCustomSubmit,
+		clientActionHandlers = p1.clientActionHandlers,
+		onFinish = p1.onFinish,
+		attemptTrigger = p1.attemptTrigger,
+		inlineAlertController = p1.inlineAlertController
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), p0 (ref)
-		if not var8 then
-			p0.onResolveError()
+		-- upvalues: var1 (ref), p1 (ref)
+		if not var1 then
+			p1.onResolveError()
 		end
-	end, { var8, p0.onResolveError })
+	end, { var1, p1.onResolveError })
 	
-	if not var8 then
+	if not var1 then
 		return nil
 	end
-	local var9 = reactModule.createElement(arTranslationProvider, { translations = var8.config.translations }, reactModule.createElement(abuseReportAnalyticsProvider, { analytics = var8.analytics }, reactModule.createElement(layoutSlotsProvider, { slots = inlineSlots }, reactModule.createElement(overlaidControlsProvider, { value = p0.shouldUseOverlaidControls }, reactModule.createElement(loaderProvider, { open = true, loaders = p0.loaders }, reactModule.createElement(abuseReportInlineModule, {
-		abuseReportFlow = var8,
-		shouldUseOverlaidControls = p0.shouldUseOverlaidControls
+	local var2 = reactModule.createElement(arTranslationProvider, { translations = var1.config.translations }, reactModule.createElement(abuseReportAnalyticsProvider, { analytics = var1.analytics }, reactModule.createElement(layoutSlotsProvider, { slots = inlineSlots }, reactModule.createElement(overlaidControlsProvider, { value = p1.shouldUseOverlaidControls }, reactModule.createElement(loaderProvider, { open = true, loaders = p1.loaders }, reactModule.createElement(abuseReportInlineModule, {
+		abuseReportFlow = var1,
+		shouldUseOverlaidControls = p1.shouldUseOverlaidControls
 	}))))))
 	
-	return if fFlagAbuseReportInExpPlayerListV3 or fFlagAbuseReportVoiceMute then reactModule.createElement(voiceSpeakingSignalsModule.VoiceChatServiceManagerContext.Provider, { value = p0.voiceChatServiceManager }, var9) else var9
+	return if fFlagAbuseReportInExpPlayerListV3 or fFlagAbuseReportVoiceMute then reactModule.createElement(voiceSpeakingSignalsModule.VoiceChatServiceManagerContext.Provider, { value = p1.voiceChatServiceManager }, var2) else var2
 end

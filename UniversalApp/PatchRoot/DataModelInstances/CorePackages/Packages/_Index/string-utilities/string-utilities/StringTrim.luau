@@ -1,29 +1,29 @@
-﻿return function(p0, p1, p2)
-	if not p1 then
-		p1 = "%s"
+﻿return function(p1, p2, p3)
+	if not p2 then
+		p2 = "%s"
 	end
-	if #p1 == 0 then
-		return p0
-	elseif not p2 then
-		p2 = { left = true, right = true }
+	if #p2 == 0 then
+		return p1
+	elseif not p3 then
+		p3 = { left = true, right = true }
 	end
-	local var0 = p0
+	local var1 = p1
 	
-	if p2.left then
-		local matchIndex = string.find(var0, "[^" .. p1 .. "]")
+	if p3.left then
+		local matchIndex = string.find(var1, "[^" .. p1 .. "]")
 		
 		if not matchIndex then
 			return ""
 		end
-		var0 = string.sub(var0, matchIndex)
+		var1 = string.sub(var1, matchIndex)
 	end
-	if p2.right then
-		local matchIndex = string.find(var0, "[" .. p1 .. "]+$")
+	if p3.right then
+		local matchIndex = string.find(var1, "[" .. p1 .. "]+$")
 		
 		if not matchIndex then
-			return var0
+			return var1
 		end
-		var0 = string.sub(var0, 1, matchIndex - 1)
+		var1 = string.sub(var1, 1, matchIndex - 1)
 	end
-	return var0
+	return var1
 end

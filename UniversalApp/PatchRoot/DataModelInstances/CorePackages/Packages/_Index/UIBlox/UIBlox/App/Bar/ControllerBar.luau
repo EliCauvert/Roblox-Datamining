@@ -10,17 +10,17 @@ local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
 local controllerBarHintInternalPadding = require(script.Parent.BarConstants).ControllerBarHintInternalPadding
 local defaultKeyLabelSize = require(parent.Menu.MenuConstants).DefaultKeyLabelSize
 local controllerBar = roactModule.PureComponent:extend("ControllerBar")
-local var7 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	keyCode = tModule.enum(Enum.KeyCode),
 	text = tModule.string
 })
 controllerBar.validateProps = tModule.strictInterface({
-	leftHint = var7,
-	rightHints = tModule.optional(tModule.map(tModule.number, var7))
+	leftHint = var1,
+	rightHints = tModule.optional(tModule.map(tModule.number, var1))
 })
 
-function controllerBar.init(p0)
-	p0.state = {
+function controllerBar.init(p1)
+	p1.state = {
 		controllerBarWidth = 0,
 		hintStringsConcat = nil,
 		requiredSpace = nil,
@@ -30,69 +30,69 @@ end
 
 function controllerBar.calculateHintRatios(p1, p2)
 	-- upvalues: cryoModule (ref), getTextSizeModule (ref), defaultKeyLabelSize (ref), controllerBarHintInternalPadding (ref)
-	local var8 = 84
-	local var9 = ""
+	local var2 = 84
+	local var3 = ""
 	local t = {}
-	local var11 = 0
-	local var12 = cryoModule.List.join({ p1 }, p2 or {})
+	local var4 = 0
+	local var5 = cryoModule.List.join({ p1 }, p2 or {})
 	
-	for i, v in ipairs(var12) do
+	for i, v in ipairs(var5) do
 		t[v.text] = getTextSizeModule(v.text, 17, Enum.Font.ArialBold, Vector2.new(10000, 10000)).X
-		var11 += t[v.text]
-		var8 = var8 + defaultKeyLabelSize + controllerBarHintInternalPadding
-		var9 ..= v.text
+		var4 += t[v.text]
+		var2 = var2 + defaultKeyLabelSize + controllerBarHintInternalPadding
+		var3 ..= v.text
 	end
 	for i_1, v_1 in pairs(t) do
-		t[i_1] = v_1 / var11
+		t[i_1] = v_1 / var4
 	end
-	return t, var8 + math.max(#var12 - 2, 0) * 40, var9
+	return t, var2 + math.max(#var5 - 2, 0) * 40, var3
 end
 
 function controllerBar.getDerivedStateFromProps(p3)
 	-- upvalues: controllerBar (ref)
-	local var13, var14, var15 = controllerBar.calculateHintRatios(p3.leftHint, p3.rightHints)
+	local var6, var7, var8 = controllerBar.calculateHintRatios(p3.leftHint, p3.rightHints)
 	
 	return {
-		hintRatios = var13,
-		requiredSpace = var14,
-		hintStringsConcat = var15
+		hintRatios = var6,
+		requiredSpace = var7,
+		hintStringsConcat = var8
 	}
 end
 
-function controllerBar.calculateHintSize(p4, p5, p6)
+function controllerBar.calculateHintSize(p3, p4, p5)
 	-- upvalues: getTextSizeModule (ref)
-	local var16 = p5 - p4.state.requiredSpace
-	local var17 = p6.Header2.RelativeSize * p6.BaseSize
-	local var18 = p6.Header2.RelativeMinSize * p6.BaseSize
-	local x = getTextSizeModule(p4.state.hintStringsConcat, var18, p6.Header2.Font, Vector2.new(10000, 10000)).X
+	local var6 = p4 - p3.state.requiredSpace
+	local var7 = p5.Header2.RelativeSize * p5.BaseSize
+	local var8 = p5.Header2.RelativeMinSize * p5.BaseSize
+	local x = getTextSizeModule(p3.state.hintStringsConcat, var8, p5.Header2.Font, Vector2.new(10000, 10000)).X
 	
-	if x <= var16 then
-		local x_1 = getTextSizeModule(p4.state.hintStringsConcat, var17, p6.Header2.Font, Vector2.new(10000, 10000)).X
-		local var19 = (var17 - var18) / (x_1 - x)
+	if x <= var6 then
+		local x_1 = getTextSizeModule(p3.state.hintStringsConcat, var7, p5.Header2.Font, Vector2.new(10000, 10000)).X
+		local var9 = (var7 - var8) / (x_1 - x)
 		
-		return nil, math.clamp(var16 * var19 + (var17 - var19 * x_1), var18, var17)
+		return nil, math.clamp(var6 * var9 + (var7 - var9 * x_1), var8, var7)
 	end
 	local t = {}
 	
-	for i, v in pairs(p4.state.hintRatios) do
-		t[i] = v * var16
+	for i, v in pairs(p3.state.hintRatios) do
+		t[i] = v * var6
 	end
 	return t
 end
 
-function controllerBar.render(p7)
+function controllerBar.render(p6)
 	-- upvalues: withStyleModule (ref), cryoModule (ref), roactModule (ref), controllerBarHintModule (ref)
-	return withStyleModule(function(p8)
-		-- upvalues: p7 (ref), cryoModule (copy), roactModule (copy), controllerBarHintModule (copy)
-		local theme = p8.Theme
-		local controllerBarWidth, controllerBarWidth_1 = p7:calculateHintSize(p7.state.controllerBarWidth, p8.Font)
+	return withStyleModule(function(p7)
+		-- upvalues: p6 (ref), cryoModule (copy), roactModule (copy), controllerBarHintModule (copy)
+		local theme = p7.Theme
+		local controllerBarWidth, controllerBarWidth_1 = p6:calculateHintSize(p6.state.controllerBarWidth, p7.Font)
 		
-		local function makeHint(p9, p10)
+		local function makeHint(p8, p9)
 			-- upvalues: cryoModule (copy), controllerBarWidth_1 (ref), controllerBarWidth (ref), roactModule (copy), controllerBarHintModule (copy)
-			return roactModule.createElement(controllerBarHintModule, cryoModule.Dictionary.join(p9, {
-				key = "Hint" .. tostring(p10),
+			return roactModule.createElement(controllerBarHintModule, cryoModule.Dictionary.join(p8, {
+				key = "Hint" .. tostring(p9),
 				hintTextSize = controllerBarWidth_1,
-				maxWidth = if controllerBarWidth then controllerBarWidth[p9.text] else nil
+				maxWidth = if controllerBarWidth then controllerBarWidth[p8.text] else nil
 			}))
 		end
 		
@@ -103,13 +103,13 @@ function controllerBar.render(p7)
 			Size = UDim2.new(1, 0, 0, 72),
 			Position = UDim2.fromScale(0, 1),
 			AnchorPoint = Vector2.new(0, 1),
-			[roactModule.Change.AbsoluteSize] = function(p11)
-				-- upvalues: p7 (copy)
-				p7:setState({ controllerBarWidth = p11.AbsoluteSize.X })
+			[roactModule.Change.AbsoluteSize] = function(p8)
+				-- upvalues: p6 (copy)
+				p6:setState({ controllerBarWidth = p8.AbsoluteSize.X })
 			end,
-			[roactModule.Event.AncestryChanged] = function(p12)
-				-- upvalues: p7 (copy)
-				p7:setState({ controllerBarWidth = p12.AbsoluteSize.X })
+			[roactModule.Event.AncestryChanged] = function(p8)
+				-- upvalues: p6 (copy)
+				p6:setState({ controllerBarWidth = p8.AbsoluteSize.X })
 			end
 		}, {
 			Padding = roactModule.createElement("UIPadding", {
@@ -128,7 +128,7 @@ function controllerBar.render(p7)
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 40)
 				}),
-				makeHint(p7.props.leftHint, "Left")
+				makeHint(p6.props.leftHint, "Left")
 			}),
 			RightFrame = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -143,7 +143,7 @@ function controllerBar.render(p7)
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 40)
 				}),
-				RightHints = if p7.props.rightHints then roactModule.createFragment(cryoModule.List.map(p7.props.rightHints, makeHint)) else nil
+				RightHints = if p6.props.rightHints then roactModule.createFragment(cryoModule.List.map(p6.props.rightHints, makeHint)) else nil
 			})
 		})
 	end)

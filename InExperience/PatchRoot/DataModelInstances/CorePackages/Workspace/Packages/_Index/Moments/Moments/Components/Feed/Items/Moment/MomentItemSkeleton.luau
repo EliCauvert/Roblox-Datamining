@@ -18,27 +18,27 @@ local momentPushedFeedSafeAreaContextModule = require(script.Parent.MomentPushed
 local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
 local getFFlagMomentsPushedFeedSafeAreaModule = require(moments.Flags.GetFFlagMomentsPushedFeedSafeArea)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useFormFactor (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), formFactor (ref), reactModule (ref), momentPushedFeedSafeAreaContextModule (ref), getFFlagMomentsPushedFeedSafeAreaModule (ref), view (ref), skeleton (ref), radius (ref), momentLayoutModule (ref), gradientBackdrop (ref)
-	local var9 = useTokens()
-	local var10 = useFormFactor()
-	local var11 = nil
-	local var12 = nil
+	local var1 = useTokens()
+	local var2 = useFormFactor()
+	local var3 = nil
+	local var4 = nil
 	
 	if fFlagMomentsUseCompositionLibraryModule then
-		var11 = useCompositionLayout()
-		var12 = useDeviceInsets()
+		var3 = useCompositionLayout()
+		var4 = useDeviceInsets()
 	end
-	local var13 = var10 == formFactor.Wide
-	local var14 = if var11 ~= nil then var9.Padding.XLarge else var11.margin
-	local var15, var16 = reactModule.useBinding(UDim2.fromScale(1, 0))
-	local var17 = 2 * var9.Padding.XLarge
-	local var18 = reactModule.useCallback(function(p1)
-		-- upvalues: var16 (ref), var17 (ref)
-		var16(UDim2.new(1, 0, 0, p1.AbsoluteSize.Y + var17))
-	end, { var17 })
-	local var19 = momentPushedFeedSafeAreaContextModule.useMomentPushedFeedSafeArea()
-	local var20 = if getFFlagMomentsPushedFeedSafeAreaModule() and var19 ~= nil then var19 else var12
+	local var5 = var2 == formFactor.Wide
+	local var6 = if var3 ~= nil then var1.Padding.XLarge else var3.margin
+	local var7, var8 = reactModule.useBinding(UDim2.fromScale(1, 0))
+	local var9 = 2 * var1.Padding.XLarge
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: var8 (ref), var9 (ref)
+		var8(UDim2.new(1, 0, 0, p2.AbsoluteSize.Y + var9))
+	end, { var9 })
+	local var11 = momentPushedFeedSafeAreaContextModule.useMomentPushedFeedSafeArea()
+	local var12 = if getFFlagMomentsPushedFeedSafeAreaModule() and var11 ~= nil then var11 else var4
 	local t = {
 		CreatorRow = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -58,19 +58,19 @@ return function(p0)
 		Description = reactModule.createElement(skeleton, {
 			LayoutOrder = 2,
 			radius = radius.Medium,
-			Size = UDim2.fromOffset(if var13 then 280 else 200, 14)
+			Size = UDim2.fromOffset(if var5 then 280 else 200, 14)
 		}),
 		Experience = reactModule.createElement(skeleton, {
 			LayoutOrder = 3,
 			radius = radius.Medium,
-			Size = UDim2.fromOffset(var9.Size.Size_1000, var9.Size.Size_1000)
+			Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000)
 		})
 	}
-	local var22 = if fFlagMomentsUseCompositionLibraryModule then momentLayoutModule.BOTTOM_UI_MAX_SIZE elseif var13 then momentLayoutModule.BOTTOM_UI_MAX_SIZE else nil
+	local var13 = if fFlagMomentsUseCompositionLibraryModule then momentLayoutModule.BOTTOM_UI_MAX_SIZE elseif var5 then momentLayoutModule.BOTTOM_UI_MAX_SIZE else nil
 	
 	return reactModule.createElement(view, {
 		tag = "size-full clip bg-surface-0",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Media = reactModule.createElement(view, { tag = "size-full", ZIndex = 1 }, {
 			Shimmer = reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1) })
@@ -81,33 +81,33 @@ return function(p0)
 		}, {
 			Backdrop = reactModule.createElement(gradientBackdrop, {
 				rotation = 270,
-				color3 = var9.Color.Common.Scrim.Color3,
-				size = var15
+				color3 = var1.Color.Common.Scrim.Color3,
+				size = var7
 			}),
-			InfoFrame = if var20 ~= nil then reactModule.createElement(view, {
+			InfoFrame = if var12 ~= nil then reactModule.createElement(view, {
 				tag = "col align-x-left align-y-bottom gap-medium position-bottom-center anchor-bottom-center size-full-0 auto-y",
 				testId = "--moments-moment-item-skeleton-info-frame",
 				ZIndex = 2,
 				padding = {
-					top = UDim.new(0, var9.Padding.XLarge),
-					left = UDim.new(0, var14),
-					right = UDim.new(0, var14),
-					bottom = UDim.new(0, var9.Padding.XLarge)
+					top = UDim.new(0, var1.Padding.XLarge),
+					left = UDim.new(0, var6),
+					right = UDim.new(0, var6),
+					bottom = UDim.new(0, var1.Padding.XLarge)
 				},
-				sizeConstraint = { MaxSize = var22 },
-				onAbsoluteSizeChanged = var18
+				sizeConstraint = { MaxSize = var13 },
+				onAbsoluteSizeChanged = var10
 			}, t) else reactModule.createElement(view, {
 				tag = "col align-x-left align-y-bottom gap-medium position-bottom-center anchor-bottom-center size-full-0 auto-y",
 				testId = "--moments-moment-item-skeleton-info-frame",
 				ZIndex = 2,
 				padding = {
-					top = UDim.new(0, var9.Padding.XLarge),
-					left = UDim.new(0, math.max(var14, var20.left)),
-					right = UDim.new(0, math.max(var14, var20.right)),
-					bottom = UDim.new(0, math.max(var9.Padding.XLarge, var20.bottom))
+					top = UDim.new(0, var1.Padding.XLarge),
+					left = UDim.new(0, math.max(var6, var12.left)),
+					right = UDim.new(0, math.max(var6, var12.right)),
+					bottom = UDim.new(0, math.max(var1.Padding.XLarge, var12.bottom))
 				},
-				sizeConstraint = { MaxSize = var22 },
-				onAbsoluteSizeChanged = var18
+				sizeConstraint = { MaxSize = var13 },
+				onAbsoluteSizeChanged = var10
 			}, t)
 		})
 	})

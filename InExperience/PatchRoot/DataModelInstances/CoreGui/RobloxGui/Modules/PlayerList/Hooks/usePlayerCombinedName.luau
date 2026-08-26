@@ -2,10 +2,10 @@
 local userProfileStore = require(corePackagesService.Workspace.Packages.UserProfiles).Stores.UserProfileStore
 local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: userProfileStore (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalBinding(userProfileStore.get().fetchNamesByUserIds({ p0 })(false).data[1].names.getInExperienceCombinedName):map(function(p2)
-		-- upvalues: p1 (ref)
-		return if string.len(p2) == 0 then p1 else p2
+	return signalsReactModule.useSignalBinding(userProfileStore.get().fetchNamesByUserIds({ p1 })(false).data[1].names.getInExperienceCombinedName):map(function(p3)
+		-- upvalues: p2 (ref)
+		return if string.len(p3) == 0 then p2 else p3
 	end)
 end

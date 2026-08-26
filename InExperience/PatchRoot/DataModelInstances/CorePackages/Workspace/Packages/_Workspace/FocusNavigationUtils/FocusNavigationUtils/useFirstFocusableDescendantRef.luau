@@ -1,42 +1,42 @@
 ﻿local reactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
 local getFirstFocusableDescendantModule = require(script.Parent.getFirstFocusableDescendant)
 
-local function _(p0)
-	if p0 then
-		p0:Disconnect()
+local function _(p1)
+	if p1 then
+		p1:Disconnect()
 	end
 end
 
 return function(p1)
 	-- upvalues: reactModule (ref), getFirstFocusableDescendantModule (ref)
-	local var2 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: getFirstFocusableDescendantModule (copy), var2 (ref), p1 (ref)
-		local var3 = nil
+		-- upvalues: getFirstFocusableDescendantModule (copy), var1 (ref), p1 (ref)
+		local var2 = nil
 		local descendantAddedConnection = nil
-		local var5 = nil
+		local var3 = nil
 		
 		local function updateFirstFocusable(p2)
-			-- upvalues: var3 (write), var5 (write), getFirstFocusableDescendantModule (copy), updateFirstFocusable (ref), var2 (copy)
+			-- upvalues: var2 (write), var3 (write), getFirstFocusableDescendantModule (copy), updateFirstFocusable (ref), var1 (copy)
+			if var2 then
+				var2:Disconnect()
+			end
 			if var3 then
 				var3:Disconnect()
 			end
-			if var5 then
-				var5:Disconnect()
-			end
-			local var7 = getFirstFocusableDescendantModule(p2)
+			local var4 = getFirstFocusableDescendantModule(p2)
 			
-			if var7 then
-				var3 = var7:GetPropertyChangedSignal("Selectable"):Connect(function()
+			if var4 then
+				var2 = var4:GetPropertyChangedSignal("Selectable"):Connect(function()
 					-- upvalues: updateFirstFocusable (copy), p2 (ref)
 					updateFirstFocusable(p2)
 				end)
-				var5 = var7.AncestryChanged:Connect(function()
+				var3 = var4.AncestryChanged:Connect(function()
 					-- upvalues: updateFirstFocusable (copy), p2 (ref)
 					updateFirstFocusable(p2)
 				end)
 			end
-			var2.current = var7
+			var1.current = var4
 		end
 		
 		if p1 then
@@ -46,21 +46,21 @@ return function(p1)
 				updateFirstFocusable(p1)
 			end)
 		else
-			var2.current = nil
+			var1.current = nil
 		end
 		return function()
-			-- upvalues: var3 (write), descendantAddedConnection (write), var5 (write)
-			if var3 then
-				var3:Disconnect()
+			-- upvalues: var2 (write), descendantAddedConnection (write), var3 (write)
+			if var2 then
+				var2:Disconnect()
 			end
 			if descendantAddedConnection then
 				descendantAddedConnection:Disconnect()
 			end
-			if var5 then
-				var5:Disconnect()
+			if var3 then
+				var3:Disconnect()
 			end
 		end
 	end, { p1 })
 	
-	return var2
+	return var1
 end

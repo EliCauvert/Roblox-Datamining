@@ -38,13 +38,13 @@ local fFlagUseMediaPlayerInCarousel = require(parent_1.SharedFlags).FFlagUseMedi
 local fStringSocialCaptureTakenIXPLayer = require(parent_1.SharedFlags).FStringSocialCaptureTakenIXPLayer
 local uDim2 = UDim2.fromOffset(32, 32)
 
-local function getTitle(p0)
+local function getTitle(p1)
 	-- upvalues: getTimestampFromCaptureModule (ref), localizationService (ref)
-	local var22 = getTimestampFromCaptureModule(p0)
+	local var1 = getTimestampFromCaptureModule(p1)
 	
-	if var22 then
-		assert(typeof(var22) == "number", "Expected timestamp to be a number")
-		local dateTime = DateTime.fromUnixTimestampMillis(var22)
+	if var1 then
+		assert(typeof(var1) == "number", "Expected timestamp to be a number")
+		local dateTime = DateTime.fromUnixTimestampMillis(var1)
 		local robloxLocaleId = localizationService.RobloxLocaleId
 		
 		return `{dateTime:FormatLocalTime("L", robloxLocaleId)} {dateTime:FormatLocalTime("LT", robloxLocaleId)}`
@@ -54,74 +54,74 @@ end
 
 return function(_)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useSelector (ref), constantsModule (ref), useRef (ref), signal (ref), useState (ref), useScreenSize (ref), useEffectOnce (ref), IXPServiceWrapper (ref), fStringSocialCaptureTakenIXPLayer (ref), useEffect (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), useCallback (ref), eventNamesModule (ref), carouselClosedModule (ref), deleteCaptureModule (ref), contextActionService (ref), getTitle (ref), reactModule (ref), fFlagUseMediaPlayerInCarousel (ref), imageSetButton (ref), images (ref), uDim2 (ref), capturesCarouselModule (ref), carouselCTAContainerModule (ref), deleteWarningModalModule (ref), permissionModalModule (ref), toastContainerModule (ref)
-	local var24 = useAnalyticsModule()
-	local var25 = useDispatch()
-	local var26 = useStyle()
-	local var27 = useSelector(function(p1)
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3 = useStyle()
+	local var4 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].Captures
 	end)
-	local var28 = useSelector(function(p2)
+	local var5 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].Carousel.IsOpen
+		return p1[constantsModule.RoduxKey].Carousel.IsOpen
 	end)
-	local var29 = useSelector(function(p3)
+	local var6 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
-		return p3[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex
+		return p1[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex
 	end)
-	local var30 = useSelector(function(p4)
+	local var7 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
-		return p4[constantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
+		return p1[constantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
 	end)
-	local var31 = useRef(signal.new())
-	local var32, var33 = useState(false)
-	local var34, var35 = useState(false)
-	local var36 = useScreenSize()
+	local var8 = useRef(signal.new())
+	local var9, var10 = useState(false)
+	local var11, var12 = useState(false)
+	local var13 = useScreenSize()
 	useEffectOnce(function()
 		-- upvalues: IXPServiceWrapper (copy), fStringSocialCaptureTakenIXPLayer (copy)
 		IXPServiceWrapper:LogUserLayerExposure(fStringSocialCaptureTakenIXPLayer)
-	end, var28)
+	end, var5)
 	useEffect(function()
-		-- upvalues: var25 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
-		var25(toastTriggeredModule(capturesToastTypeModule.None))
-	end, { var28 })
-	local var37 = useCallback(function()
-		-- upvalues: var33 (ref), var24 (ref), eventNamesModule (copy), var25 (ref), carouselClosedModule (copy)
-		var33(false)
-		var24.fireEvent(eventNamesModule.CapturesCarouselClosed)
-		var25(carouselClosedModule())
+		-- upvalues: var2 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
+		var2(toastTriggeredModule(capturesToastTypeModule.None))
+	end, { var5 })
+	local var14 = useCallback(function()
+		-- upvalues: var10 (ref), var1 (ref), eventNamesModule (copy), var2 (ref), carouselClosedModule (copy)
+		var10(false)
+		var1.fireEvent(eventNamesModule.CapturesCarouselClosed)
+		var2(carouselClosedModule())
 	end, {})
-	local var38 = useCallback(function()
-		-- upvalues: var33 (ref), var24 (ref), eventNamesModule (copy), var25 (ref), carouselClosedModule (copy)
-		var33(false)
-		var24.fireEvent(eventNamesModule.CapturesCarouselClosedByKeyboard)
-		var25(carouselClosedModule())
+	local var15 = useCallback(function()
+		-- upvalues: var10 (ref), var1 (ref), eventNamesModule (copy), var2 (ref), carouselClosedModule (copy)
+		var10(false)
+		var1.fireEvent(eventNamesModule.CapturesCarouselClosedByKeyboard)
+		var2(carouselClosedModule())
 	end, {})
-	local var39 = useCallback(function()
-		-- upvalues: var35 (ref)
-		var35(true)
+	local var16 = useCallback(function()
+		-- upvalues: var12 (ref)
+		var12(true)
 	end, {})
-	local var40 = useCallback(function()
-		-- upvalues: var35 (ref)
-		var35(false)
+	local var17 = useCallback(function()
+		-- upvalues: var12 (ref)
+		var12(false)
 	end, {})
-	local var41 = useCallback(function()
-		-- upvalues: var33 (ref), var27 (ref), var29 (ref), var25 (ref), deleteCaptureModule (copy), var31 (ref)
-		var33(true)
-		local var43 = var27[var29]
-		var31.current:fire(function()
-			-- upvalues: var25 (copy), deleteCaptureModule (copy), var43 (ref), var33 (copy)
-			var25(deleteCaptureModule(var43))
-			var33(false)
+	local var18 = useCallback(function()
+		-- upvalues: var10 (ref), var4 (ref), var6 (ref), var2 (ref), deleteCaptureModule (copy), var8 (ref)
+		var10(true)
+		local var19 = var4[var6]
+		var8.current:fire(function()
+			-- upvalues: var2 (copy), deleteCaptureModule (copy), var19 (ref), var10 (copy)
+			var2(deleteCaptureModule(var19))
+			var10(false)
 		end)
-	end, { var27, var29 })
+	end, { var4, var6 })
 	useEffect(function()
-		-- upvalues: var28 (ref), var30 (ref), contextActionService (copy), var38 (ref)
-		if var28 and not var30 then
-			contextActionService:BindCoreAction("CapturesCarouselCloseShortcutAction", function(_, p5)
-				-- upvalues: var38 (copy)
-				if p5 == Enum.UserInputState.End then
-					var38()
+		-- upvalues: var5 (ref), var7 (ref), contextActionService (copy), var15 (ref)
+		if var5 and not var7 then
+			contextActionService:BindCoreAction("CapturesCarouselCloseShortcutAction", function(_, p1)
+				-- upvalues: var15 (copy)
+				if p1 == Enum.UserInputState.End then
+					var15()
 				end
 			end, false, Enum.KeyCode.Escape)
 			
@@ -130,16 +130,16 @@ return function(_)
 				contextActionService:UnbindCoreAction("CapturesCarouselCloseShortcutAction")
 			end
 		end
-	end, { var28, var30, var38 })
+	end, { var5, var7, var15 })
 	
-	if var28 then
-		local var42 = getTitle(var27[var29])
+	if var5 then
+		local var19 = getTitle(var4[var6])
 		
 		return reactModule.createElement("Frame", {
 			Active = true,
 			BorderSizePixel = 0,
-			BackgroundColor3 = var26.Theme.BackgroundContrast.Color,
-			BackgroundTransparency = var26.Theme.BackgroundContrast.Transparency,
+			BackgroundColor3 = var3.Theme.BackgroundContrast.Color,
+			BackgroundTransparency = var3.Theme.BackgroundContrast.Transparency,
 			Position = UDim2.fromOffset(0, 0),
 			Size = UDim2.fromScale(1, 1)
 		}, {
@@ -165,11 +165,11 @@ return function(_)
 						AnchorPoint = Vector2.new(0, 0.5),
 						BackgroundTransparency = 1,
 						Image = images["icons/navigation/close"],
-						ImageColor3 = var26.Theme.IconEmphasis.Color,
-						ImageTransparency = var26.Theme.IconEmphasis.Transparency,
+						ImageColor3 = var3.Theme.IconEmphasis.Color,
+						ImageTransparency = var3.Theme.IconEmphasis.Transparency,
 						Position = UDim2.new(0, 42, 0.5, 0),
 						Size = uDim2,
-						[reactModule.Event.Activated] = var37
+						[reactModule.Event.Activated] = var14
 					}),
 					DropShadow = reactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
@@ -177,22 +177,22 @@ return function(_)
 						ZIndex = 1,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						AutomaticSize = Enum.AutomaticSize.X,
-						Font = var26.Font.Header2.Font,
+						Font = var3.Font.Header2.Font,
 						Position = UDim2.new(0.5, 0, 0.5, 2),
 						Size = UDim2.fromScale(0, 1),
-						Text = var42,
-						TextColor3 = var26.Theme.DropShadow.Color,
-						TextSize = var26.Font.BaseSize * var26.Font.Header2.RelativeSize,
-						TextTransparency = var26.Theme.DropShadow.Transparency,
+						Text = var19,
+						TextColor3 = var3.Theme.DropShadow.Color,
+						TextSize = var3.Font.BaseSize * var3.Font.Header2.RelativeSize,
+						TextTransparency = var3.Theme.DropShadow.Transparency,
 						TextXAlignment = Enum.TextXAlignment.Center,
 						TextYAlignment = Enum.TextYAlignment.Center
 					}, {
 						UIStroke = reactModule.createElement("UIStroke", {
 							Thickness = 1,
 							ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-							Color = var26.Theme.DropShadow.Color,
+							Color = var3.Theme.DropShadow.Color,
 							LineJoinMode = Enum.LineJoinMode.Round,
-							Transparency = var26.Theme.DropShadow.Transparency
+							Transparency = var3.Theme.DropShadow.Transparency
 						})
 					}),
 					Title = reactModule.createElement("TextLabel", {
@@ -201,34 +201,34 @@ return function(_)
 						ZIndex = 2,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						AutomaticSize = Enum.AutomaticSize.X,
-						Font = var26.Font.Header2.Font,
+						Font = var3.Font.Header2.Font,
 						Position = UDim2.fromScale(0.5, 0.5),
 						Size = UDim2.fromScale(0, 1),
-						Text = var42,
-						TextColor3 = var26.Theme.TextEmphasis.Color,
-						TextSize = var26.Font.BaseSize * var26.Font.Header2.RelativeSize,
+						Text = var19,
+						TextColor3 = var3.Theme.TextEmphasis.Color,
+						TextSize = var3.Font.BaseSize * var3.Font.Header2.RelativeSize,
 						TextXAlignment = Enum.TextXAlignment.Center,
 						TextYAlignment = Enum.TextYAlignment.Center
 					})
 				}),
 				CapturesCarousel = reactModule.createElement(capturesCarouselModule, {
 					LayoutOrder = 2,
-					deleteItemSignal = var31.current,
-					isDisabled = var32,
-					maxHeight = var36.Y - 32 - 40 - 8 - 16 - 16,
+					deleteItemSignal = var8.current,
+					isDisabled = var9,
+					maxHeight = var13.Y - 32 - 40 - 8 - 16 - 16,
 					ZIndex = if fFlagUseMediaPlayerInCarousel then 2 else 1
 				}),
 				CTAContainer = reactModule.createElement(carouselCTAContainerModule, {
 					height = 40,
 					LayoutOrder = 3,
-					deleteItem = var41,
-					isDisabled = var32 or var30,
-					openPermissionModal = var39,
+					deleteItem = var18,
+					isDisabled = var9 or var7,
+					openPermissionModal = var16,
 					ZIndex = if fFlagUseMediaPlayerInCarousel then 1 else 2
 				})
 			}),
-			DeleteWarningModal = reactModule.createElement(deleteWarningModalModule, { zIndex = 3, deleteItem = var41 }),
-			PermissionModal = reactModule.createElement(permissionModalModule, { zIndex = 3, closeModal = var40, visible = var34 }),
+			DeleteWarningModal = reactModule.createElement(deleteWarningModalModule, { zIndex = 3, deleteItem = var18 }),
+			PermissionModal = reactModule.createElement(permissionModalModule, { zIndex = 3, closeModal = var17, visible = var11 }),
 			ToastsFrame = reactModule.createElement("Frame", {
 				Active = false,
 				BackgroundTransparency = 1,

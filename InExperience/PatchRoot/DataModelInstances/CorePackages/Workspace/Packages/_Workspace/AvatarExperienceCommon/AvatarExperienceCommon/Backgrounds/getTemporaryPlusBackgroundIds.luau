@@ -1,20 +1,20 @@
 ﻿local fStringAXPlusExclusiveBackgroundIds = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FStringAXPlusExclusiveBackgroundIds
-local var0 = nil
+local var1 = nil
 local frozen = table.freeze({})
 local var2 = false
 
-local function _(p0)
-	return string.match(p0, "^%d+$") ~= nil
+local function _(p1)
+	return string.match(p1, "^%d+$") ~= nil
 end
 
 return function()
-	-- upvalues: fStringAXPlusExclusiveBackgroundIds (ref), var0 (write), frozen (write), var2 (write)
+	-- upvalues: fStringAXPlusExclusiveBackgroundIds (ref), var1 (write), frozen (write), var2 (write)
 	local var3 = fStringAXPlusExclusiveBackgroundIds()
 	
-	if var3 == var0 then
+	if var3 == var1 then
 		return frozen, var2
 	end
-	var0 = var3
+	var1 = var3
 	
 	if string.gsub(var3, "^%s*(.-)%s*$", "%1") == "" then
 		var2 = false

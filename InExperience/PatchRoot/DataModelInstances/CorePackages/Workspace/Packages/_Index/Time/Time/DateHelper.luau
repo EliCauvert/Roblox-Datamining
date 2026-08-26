@@ -130,49 +130,49 @@ local t = {
 			return "None"
 		end
 	}),
-	GetFormattedDayString = function(p0, p1, p2, p3)
+	GetFormattedDayString = function(p1, p2, p3, p4)
 		-- upvalues: timeUnitModule (ref)
-		return p0:GetFormattedString(timeUnitModule.Days, p1, p2, p3)
+		return p1:GetFormattedString(timeUnitModule.Days, p2, p3, p4)
 	end,
-	GetFormattedYearString = function(p4, p5, p6, p7)
+	GetFormattedYearString = function(p1, p2, p3, p4)
 		-- upvalues: timeUnitModule (ref)
-		return p4:GetFormattedString(timeUnitModule.Years, p5, p6, p7)
+		return p1:GetFormattedString(timeUnitModule.Years, p2, p3, p4)
 	end,
-	GetFormattedString = function(p8, p9, p10, p11, p12)
+	GetFormattedString = function(p1, p2, p3, p4, p5)
 		-- upvalues: argCheckModule (ref), timeUnitModule (ref)
-		argCheckModule.isNotNil(p9, "timeUnit passed into DateHelper:GetFormattedString")
-		argCheckModule.isNotNil(p11, "affix passed into DateHelper:GetFormattedString")
-		local string = argCheckModule.isType(tostring(p10), "string", "dateValue passed into DateHelper:GetFormattedString")
-		local var9 = nil
+		argCheckModule.isNotNil(p2, "timeUnit passed into DateHelper:GetFormattedString")
+		argCheckModule.isNotNil(p4, "affix passed into DateHelper:GetFormattedString")
+		local string = argCheckModule.isType(tostring(p3), "string", "dateValue passed into DateHelper:GetFormattedString")
+		local var1 = nil
 		
-		if p9 == timeUnitModule.Days then
-			var9 = p8.DayAffixType[p12]
-		elseif p9 == timeUnitModule.Years then
-			var9 = p8.YearAffixType[p12]
+		if p2 == timeUnitModule.Days then
+			var1 = p1.DayAffixType[p5]
+		elseif p2 == timeUnitModule.Years then
+			var1 = p1.YearAffixType[p5]
 		end
-		return if var9 == "Prefix" then p11 .. string elseif var9 == "Suffix" then string .. p11 else string
+		return if var1 == "Prefix" then p4 .. string elseif var1 == "Suffix" then string .. p11 else string
 	end,
-	GetFormattedFullString = function(p13, p14, p15, p16, p17, p18, p19, p20)
+	GetFormattedFullString = function(p1, p2, p3, p4, p5, p6, p7, p8)
 		-- upvalues: argCheckModule (ref), timeUnitModule (ref)
-		local string = argCheckModule.isType(p14, "string", "localizedMonthString passed into DateHelper:GetFormattedFullString")
-		local string_1 = argCheckModule.isType(p19, "string", "divider passed into DateHelper:GetFormattedFullString")
-		local string_2 = argCheckModule.isType(p20, "string", "localeKey passed into DateHelper:GetFormattedFullString")
-		string_2 = p13.DateTypeOrder[string_2]
-		local var13 = ""
+		local string = argCheckModule.isType(p2, "string", "localizedMonthString passed into DateHelper:GetFormattedFullString")
+		local string_1 = argCheckModule.isType(p7, "string", "divider passed into DateHelper:GetFormattedFullString")
+		local string_2 = argCheckModule.isType(p8, "string", "localeKey passed into DateHelper:GetFormattedFullString")
+		string_2 = p1.DateTypeOrder[string_2]
+		local var1 = ""
 		local t = {
 			[string_2[timeUnitModule.Months]] = string,
-			[string_2[timeUnitModule.Days]] = p13:GetFormattedDayString(p15, p16, string_2),
-			[string_2[timeUnitModule.Years]] = p13:GetFormattedYearString(p17, p18, string_2)
+			[string_2[timeUnitModule.Days]] = p1:GetFormattedDayString(p3, p4, string_2),
+			[string_2[timeUnitModule.Years]] = p1:GetFormattedYearString(p5, p6, string_2)
 		}
 		
 		for i, v in ipairs(t) do
-			var13 ..= v
+			var1 ..= v
 			
 			if i < #t then
-				var13 ..= string_1
+				var1 ..= string_1
 			end
 		end
-		return var13
+		return var1
 	end
 }
 local _ = { Prefix = "Prefix", Suffix = "Suffix", None = "None" }
@@ -204,63 +204,63 @@ local function getCurrentDateWithOffset(value)
 	}
 end
 
-function t.isLeapYear(_, p21)
-	return p21 % 4 == 0 and (if p21 % 100 == 0 then p21 % 400 == 0 else true)
+function t.isLeapYear(_, p9)
+	return p9 % 4 == 0 and (if p9 % 100 == 0 then p9 % 400 == 0 else true)
 end
 
 local t_1 = {}
 
-function t._isFutureDate(_, p22, p23, p24, p25)
+function t._isFutureDate(_, p9, p10, p11, p12)
 	-- upvalues: timeUnitModule (ref)
-	return p22[timeUnitModule.Years] < p25 or (p25 == p22[timeUnitModule.Years] and p22[timeUnitModule.Months] < p23 or p25 == p22[timeUnitModule.Years] and p23 == p22[timeUnitModule.Months] and p22[timeUnitModule.Days] < p24)
+	return p9[timeUnitModule.Years] < p12 or (p12 == p9[timeUnitModule.Years] and p9[timeUnitModule.Months] < p10 or p12 == p9[timeUnitModule.Years] and p10 == p9[timeUnitModule.Months] and p9[timeUnitModule.Days] < p11)
 end
 
-function t.isFutureDate(p26, p27, p28, p29)
+function t.isFutureDate(p9, p10, p11, p12)
 	-- upvalues: getCurrentDate (ref)
-	return p26:_isFutureDate(getCurrentDate(), p27, p28, p29)
+	return p9:_isFutureDate(getCurrentDate(), p10, p11, p12)
 end
 
-function t.isRecentOrFutureDate(p30, p31, p32, p33)
+function t.isRecentOrFutureDate(p9, p10, p11, p12)
 	-- upvalues: getCurrentDateWithOffset (ref)
-	return p30:_isFutureDate(getCurrentDateWithOffset(-172800), p31, p32, p33)
+	return p9:_isFutureDate(getCurrentDateWithOffset(-172800), p10, p11, p12)
 end
 
-function t.getLastDayOfTheMonthInYear(p34, p35, p36)
+function t.getLastDayOfTheMonthInYear(p9, p10, p11)
 	-- upvalues: t_1 (ref)
-	if t_1[p35] and t_1[p35][p36] then
-		return t_1[p35][p36]
+	if t_1[p10] and t_1[p10][p11] then
+		return t_1[p10][p11]
 	end
 	local _ = nil
-	local var17 = if p35 == 2 then if p34:isLeapYear(p36) then 29 else 28 elseif p35 % 2 == 0 and p35 < 7 or p35 % 2 == 1 and p35 > 7 then 30 else 31
+	local var2 = if p10 == 2 then if p9:isLeapYear(p11) then 29 else 28 elseif p10 % 2 == 0 and p10 < 7 or p10 % 2 == 1 and p10 > 7 then 30 else 31
 	
-	if not t_1[p35] then
-		t_1[p35] = {}
+	if not t_1[p10] then
+		t_1[p10] = {}
 	end
-	t_1[p35][p36] = var17
+	t_1[p10][p11] = var2
 	
-	return var17
+	return var2
 end
 
-function t.isInvalidDayOfTheMonth(p37, p38, p39, p40)
-	return p37:getLastDayOfTheMonthInYear(p38, p40) < p39
+function t.isInvalidDayOfTheMonth(p9, p10, p11, p12)
+	return p9:getLastDayOfTheMonthInYear(p10, p12) < p11
 end
 
-function t.isValidDate(p41, p42, p43, p44)
+function t.isValidDate(p9, p10, p11, p12)
 	-- upvalues: getFFlagSignUpBirthdayPickerRequireManualSelection (ref)
-	if getFFlagSignUpBirthdayPickerRequireManualSelection() and (p42 == nil or p43 == nil or p44 == nil) then
-		return false, p41.ReasonDateInvalid.IsIncompleteDate
-	elseif p41:isRecentOrFutureDate(p42, p43, p44) then
-		return false, p41.ReasonDateInvalid.IsFutureDate
-	elseif p41:isInvalidDayOfTheMonth(p42, p43, p44) then
-		return false, p41.ReasonDateInvalid.IsInvalidDayOfMonth
+	if getFFlagSignUpBirthdayPickerRequireManualSelection() and (p10 == nil or p11 == nil or p12 == nil) then
+		return false, p9.ReasonDateInvalid.IsIncompleteDate
+	elseif p9:isRecentOrFutureDate(p10, p11, p12) then
+		return false, p9.ReasonDateInvalid.IsFutureDate
+	elseif p9:isInvalidDayOfTheMonth(p10, p11, p12) then
+		return false, p9.ReasonDateInvalid.IsInvalidDayOfMonth
 	end
 	return true, nil
 end
 
-local function generateCellDatas(p45, p46, p47)
+local function generateCellDatas(p9, p10, p11)
 	local t = {}
 	
-	for i = p45, p46, p47 or 1 do
+	for i = p9, p10, p11 or 1 do
 		table.insert(t, { text = tostring(i), value = i })
 	end
 	return t
@@ -276,9 +276,9 @@ function t.generateDayCellDatas(_)
 	return generateCellDatas(1, 31)
 end
 
-function t.generateYearCellDatas(_, p48, p49)
+function t.generateYearCellDatas(_, p12, p13)
 	-- upvalues: getCurrentDate (ref), timeUnitModule (ref), generateCellDatas (ref)
-	return generateCellDatas(p49 or getCurrentDate()[timeUnitModule.Years], p48 or p49 - 100, -1)
+	return generateCellDatas(p13 or getCurrentDate()[timeUnitModule.Years], p12 or p13 - 100, -1)
 end
 
 return t

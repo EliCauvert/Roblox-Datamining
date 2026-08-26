@@ -6,55 +6,55 @@ local useEffect = reactModule.useEffect
 local useRef = reactModule.useRef
 local usePrevious = roactUtilsModule.Hooks.usePrevious
 
-function ExternalNavigationHandler(p0)
+function ExternalNavigationHandler(p1)
 	-- upvalues: useRef (ref), useEffect (ref), usePrevious (ref)
 	local _ = function()
-		-- upvalues: p0 (ref)
-		return p0.requestId ~= p0.completedRequestId and p0.screen
+		-- upvalues: p1 (ref)
+		return p1.requestId ~= p1.completedRequestId and p1.screen
 	end
 	
-	local var2 = useRef({})
+	local var1 = useRef({})
 	
-	local var3 = function()
-		-- upvalues: p0 (ref), var2 (ref)
-		local screen = p0.screen
-		local var5 = p0.navigationByScreen[screen]
+	local var2 = function()
+		-- upvalues: p1 (ref), var1 (ref)
+		local screen = p1.screen
+		local var3 = p1.navigationByScreen[screen]
 		
-		if var5 then
-			var5(p0.params)
+		if var3 then
+			var3(p1.params)
 		else
-			assert(var2.current, "Queue for ExternalNavigationHandler can't be nil")
-			local var6 = var2.current[screen] or {}
-			table.insert(var6, p0.params)
-			var2.current[screen] = var6
+			assert(var1.current, "Queue for ExternalNavigationHandler can't be nil")
+			local var4 = var1.current[screen] or {}
+			table.insert(var4, p1.params)
+			var1.current[screen] = var4
 		end
-		p0.completeExternalNavigation(p0.requestId)
+		p1.completeExternalNavigation(p1.requestId)
 	end
 	
 	useEffect(function()
-		-- upvalues: p0 (ref), var3 (ref)
-		if p0.requestId ~= p0.completedRequestId and p0.screen then
-			var3()
+		-- upvalues: p1 (ref), var2 (ref)
+		if p1.requestId ~= p1.completedRequestId and p1.screen then
+			var2()
 		end
-	end, { p0.requestId, p0.completedRequestId, p0.screen })
-	local var4 = usePrevious(p0.navigationByScreen)
+	end, { p1.requestId, p1.completedRequestId, p1.screen })
+	local var3 = usePrevious(p1.navigationByScreen)
 	useEffect(function()
-		-- upvalues: var2 (ref), var4 (ref), p0 (ref)
-		assert(var2.current, "Queue for ExternalNavigationHandler can't be nil")
+		-- upvalues: var1 (ref), var3 (ref), p1 (ref)
+		assert(var1.current, "Queue for ExternalNavigationHandler can't be nil")
 		
-		if var4 == nil then return end
-		for i, v in pairs(var2.current) do
-			assert(var4, "")
-			local var7 = p0.navigationByScreen[i]
+		if var3 == nil then return end
+		for i, v in pairs(var1.current) do
+			assert(var3, "")
+			local var4 = p1.navigationByScreen[i]
 			
-			if var4[i] ~= var7 and var7 then
+			if var3[i] ~= var4 and var4 then
 				for i_1, v_1 in ipairs(v) do
-					var7(v_1)
+					var4(v_1)
 				end
-				var2.current[i] = nil
+				var1.current[i] = nil
 			end
 		end
-	end, { p0.navigationByScreen })
+	end, { p1.navigationByScreen })
 	
 	return nil
 end

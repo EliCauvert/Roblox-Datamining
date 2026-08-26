@@ -16,7 +16,7 @@ local screenshotDialogLandscapeModeHeaderModule = require(parent.Components.Scre
 local _ = require(parent.Utility.ReportAnythingAnalytics)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 
-local function PortraitModeFooter(p0)
+local function PortraitModeFooter(p1)
 	-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref), robloxTranslatorModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
@@ -47,8 +47,8 @@ local function PortraitModeFooter(p0)
 						buttonType = buttonType.PrimarySystem,
 						props = {
 							onActivated = function()
-								-- upvalues: p0 (ref)
-								p0.finishAnnotationAction(p0.annotationPoints)
+								-- upvalues: p1 (ref)
+								p1.finishAnnotationAction(p1.annotationPoints)
 							end,
 							text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Next")
 						}
@@ -64,7 +64,7 @@ return function(p1)
 	local theme = useStyle().Theme
 	local instance = virtualKeyboardMonitorModule.getInstance()
 	
-	local var13 = function()
+	local var1 = function()
 		-- upvalues: instance (ref), p1 (ref)
 		warn("OverlayActivated")
 		
@@ -75,48 +75,48 @@ return function(p1)
 		end
 	end
 	
-	local var14, var15 = reactModule.useState(cryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
-	local var16, var17 = reactModule.useState({})
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), var14 (ref)
-		var15(table.clone(var14))
-	end, { var15, var14 })
-	local var19 = reactModule.useCallback(function()
+	local var2, var3 = reactModule.useState(cryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
+	local var4, var5 = reactModule.useState({})
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), var2 (ref)
+		var3(table.clone(var2))
+	end, { var3, var2 })
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.reportAnythingAnalytics.incrementAnnotationBack()
 		p1.backAction()
 	end, { p1.backAction, p1.reportAnythingAnalytics })
-	local var20 = reactModule.useCallback(function(_)
-		-- upvalues: p1 (ref), var18 (ref), var17 (ref)
+	local var8 = reactModule.useCallback(function(_)
+		-- upvalues: p1 (ref), var6 (ref), var5 (ref)
 		p1.reportAnythingAnalytics.incrementAnnotationPlace()
-		var18()
-		var17({})
-	end, { var17, var18, p1.reportAnythingAnalytics })
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var14 (ref), p1 (ref), var16 (ref), var18 (ref)
-		if #var14 > 0 then
+		var6()
+		var5({})
+	end, { var5, var6, p1.reportAnythingAnalytics })
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), p1 (ref), var4 (ref), var6 (ref)
+		if #var2 > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationUndo()
-			table.insert(var16, 1, var14[#var14])
-			table.remove(var14, #var14)
-			var18()
+			table.insert(var4, 1, var2[#var2])
+			table.remove(var2, #var2)
+			var6()
 		end
-	end, { var18, var14, var16, p1.reportAnythingAnalytics })
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref), p1 (ref), var14 (ref), var18 (ref)
-		if #var16 > 0 then
+	end, { var6, var2, var4, p1.reportAnythingAnalytics })
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref), p1 (ref), var2 (ref), var6 (ref)
+		if #var4 > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationRedo()
-			table.insert(var14, var16[1])
-			table.remove(var16, 1)
-			var18()
+			table.insert(var2, var4[1])
+			table.remove(var4, 1)
+			var6()
 		end
-	end, { var18, var14, var16, p1.reportAnythingAnalytics })
-	local var23 = reactModule.useCallback(function(p2)
+	end, { var6, var2, var4, p1.reportAnythingAnalytics })
+	local var11 = reactModule.useCallback(function(p2)
 		-- upvalues: p1 (ref)
 		p1.reportAnythingAnalytics.setAnnotationNext()
 		p1.finishAnnotationAction(p2)
 	end, { p1.finishAnnotationAction, p1.reportAnythingAnalytics })
-	local var24 = #var14 > 0
-	local var25 = #var16 > 0
+	local var12 = #var2 > 0
+	local var13 = #var4 > 0
 	
 	return reactModule.createElement("TextButton", {
 		AutoButtonColor = false,
@@ -128,7 +128,7 @@ return function(p1)
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		ZIndex = 10,
 		Text = "",
-		[reactModule.Event.Activated] = var13
+		[reactModule.Event.Activated] = var1
 	}, {
 		ScreenshotDialog = reactModule.createElement(imageSetButton, {
 			Active = true,
@@ -151,21 +151,21 @@ return function(p1)
 				}),
 				Header = if p1.isSmallPortraitMode then reactModule.createElement(screenshotDialogPortraitModeHeaderModule, {
 					titleText = p1.titleText,
-					backAction = var19,
-					undoAnnotationPoints = var21,
-					redoAnnotationPoints = var22,
-					isRedoEnabled = var25,
-					isUndoEnabled = var24,
-					annotationPoints = var14
+					backAction = var7,
+					undoAnnotationPoints = var9,
+					redoAnnotationPoints = var10,
+					isRedoEnabled = var13,
+					isUndoEnabled = var12,
+					annotationPoints = var2
 				}) else reactModule.createElement(screenshotDialogLandscapeModeHeaderModule, {
 					titleText = p1.titleText,
-					backAction = var19,
-					finishAnnotationAction = var23,
-					undoAnnotationPoints = var21,
-					redoAnnotationPoints = var22,
-					isRedoEnabled = var25,
-					isUndoEnabled = var24,
-					annotationPoints = var14
+					backAction = var7,
+					finishAnnotationAction = var11,
+					undoAnnotationPoints = var9,
+					redoAnnotationPoints = var10,
+					isRedoEnabled = var13,
+					isUndoEnabled = var12,
+					annotationPoints = var2
 				}),
 				Divider = reactModule.createElement(dividerModule, { LayoutOrder = 2 }),
 				ScreenshotAnnotation = reactModule.createElement("Frame", {
@@ -205,8 +205,8 @@ return function(p1)
 							}, {}),
 							Highlighter = reactModule.createElement(screenshotHighlighterModule, {
 								ZIndex = 3,
-								annotationPoints = var14,
-								handleAnnotationPoints = var20,
+								annotationPoints = var2,
+								handleAnnotationPoints = var8,
 								setAnnotationCircleRadius = p1.setAnnotationCircleRadius,
 								setAnnotationAreaDimensions = p1.setAnnotationAreaDimensions
 							}, {})
@@ -214,7 +214,7 @@ return function(p1)
 					})
 				})
 			}),
-			Footer = if p1.isSmallPortraitMode then reactModule.createElement(PortraitModeFooter, { finishAnnotationAction = var23, annotationPoints = var14 }) else nil
+			Footer = if p1.isSmallPortraitMode then reactModule.createElement(PortraitModeFooter, { finishAnnotationAction = var11, annotationPoints = var2 }) else nil
 		})
 	})
 end

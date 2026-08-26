@@ -7,16 +7,16 @@ local influxModule = require(analyticsReporters.Influx)
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: rbxAnalyticsService (ref), diagModule (ref), eventStreamModule (ref), googleAnalyticsModule (ref), influxModule (ref), t (ref)
-	if not p0 then
-		p0 = rbxAnalyticsService
+	if not p1 then
+		p1 = rbxAnalyticsService
 	end
 	local t_1 = {
-		Diag = diagModule.new(p0),
-		EventStream = eventStreamModule.new(p0),
-		GoogleAnalytics = googleAnalyticsModule.new(p0),
-		InfluxDb = influxModule.new(p0)
+		Diag = diagModule.new(p1),
+		EventStream = eventStreamModule.new(p1),
+		GoogleAnalytics = googleAnalyticsModule.new(p1),
+		InfluxDb = influxModule.new(p1)
 	}
 	setmetatable(t_1, t)
 	

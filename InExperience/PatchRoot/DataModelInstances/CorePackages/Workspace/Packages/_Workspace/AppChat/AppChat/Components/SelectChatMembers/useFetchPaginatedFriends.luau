@@ -17,20 +17,20 @@ function useFetchPaginatedFriends()
 	if var2.onlineFriends and var2.offlineFriends then
 		for i, v in var2.onlineFriends do
 			local id = v.id
-			local var4 = convertPresenceTypeToUserPresenceModule(if v.presence then v.presence.userPresenceType else nil)
-			local var5 = nil
+			local var3 = convertPresenceTypeToUserPresenceModule(if v.presence then v.presence.userPresenceType else nil)
+			local var4 = nil
 			
-			if var4 == userModel.PresenceType.ONLINE then
-				var5 = var1.onlinePresenceText
-			elseif var4 == userModel.PresenceType.IN_GAME then
-				var5 = if v.presence then v.presence.lastLocation else ""
-			elseif var4 == userModel.PresenceType.IN_STUDIO then
-				var5 = "Studio"
+			if var3 == userModel.PresenceType.ONLINE then
+				var4 = var1.onlinePresenceText
+			elseif var3 == userModel.PresenceType.IN_GAME then
+				var4 = if v.presence then v.presence.lastLocation else ""
+			elseif var3 == userModel.PresenceType.IN_STUDIO then
+				var4 = "Studio"
 			end
 			table.insert(t, {
 				id = id,
-				presence = var4,
-				presenceText = var5,
+				presence = var3,
+				presenceText = var4,
 				thumbnail = `rbxthumb://type=AvatarHeadShot&id={id}&w=150&h=150`
 			})
 		end

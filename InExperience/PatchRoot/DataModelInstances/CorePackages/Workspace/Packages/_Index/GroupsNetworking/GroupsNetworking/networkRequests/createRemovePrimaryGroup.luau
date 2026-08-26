@@ -1,9 +1,9 @@
 ﻿local GROUPS_URLModule = require(script:FindFirstAncestor("GroupsNetworking").GROUPS_URL)
 
-return function(p0)
+return function(p1)
 	-- upvalues: GROUPS_URLModule (ref)
-	return p0.roduxNetworking.DELETE("RemovePrimaryGroup", function(p1)
+	return p1.roduxNetworking.DELETE("RemovePrimaryGroup", function(p2)
 		-- upvalues: GROUPS_URLModule (copy)
-		return p1(GROUPS_URLModule):path("v1"):path("user"):path("groups"):path("primary")
+		return p2(GROUPS_URLModule):path("v1"):path("user"):path("groups"):path("primary")
 	end)
 end

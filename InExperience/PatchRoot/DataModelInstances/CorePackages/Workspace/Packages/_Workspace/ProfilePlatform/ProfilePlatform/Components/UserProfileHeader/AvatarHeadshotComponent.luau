@@ -30,88 +30,88 @@ local useNavigation = require(parent.Navigation).useNavigation
 local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubscriber
 local getBuilderIconForCurrentPlatform = foundationModule.Utility.getBuilderIconForCurrentPlatform
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useDynamicSizeMarginModule (ref), useLocalUserId (ref), convertToFoundationPresenceEnum (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagAddPlatformNameToProfileHeader (ref), getBuilderIconForCurrentPlatform (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagDisableCopyUsernameOnConsole (ref), responsiveModule (ref), fFlagEnableUserRecentActivityEntryPoint (ref), useCurrentProfileFriendStatusModule (ref), enumsModule (ref), useNavigation (ref), appPage (ref), default (ref), contexts (ref), setCurrentToastMessage (ref), copy (ref), constantsModule (ref), userTile (ref), layoutMode (ref), fFlagUserTileTextTCIndicator (ref)
-	local var19
-	local var9 = useTokens()
-	local var10, var11 = useDynamicSizeMarginModule()
-	local userId = p0.userId
-	local var12 = userId == tostring(useLocalUserId())
-	local var13 = if var12 or not p0.userPresenceType then nil else convertToFoundationPresenceEnum(p0.userPresenceType)
-	local var14 = if p0.username and p0.username ~= "" then if fFlagEnableFontStylisticAlternativesOnSocialScreens then `<font features="zero, ss03">@{p0.username}</font>` else "@" .. p0.username else ""
-	local var15 = useDispatch()
-	local var16 = useLocalization({
+	local var1
+	local var2 = useTokens()
+	local var3, var4 = useDynamicSizeMarginModule()
+	local userId = p1.userId
+	local var5 = userId == tostring(useLocalUserId())
+	local var6 = if var5 or not p1.userPresenceType then nil else convertToFoundationPresenceEnum(p1.userPresenceType)
+	local var7 = if p1.username and p1.username ~= "" then if fFlagEnableFontStylisticAlternativesOnSocialScreens then `<font features="zero, ss03">@{p1.username}</font>` else "@" .. p0.username else ""
+	local var8 = useDispatch()
+	local var9 = useLocalization({
 		usernameCopied = textKeysModule.UsernameCopied,
 		viewRecentActivity = textKeysModule.ViewRecentActivity
 	})
-	local var17 = reactModule.useMemo(function()
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: fFlagAddPlatformNameToProfileHeader (copy), getBuilderIconForCurrentPlatform (copy)
 		return if fFlagAddPlatformNameToProfileHeader then getBuilderIconForCurrentPlatform() else nil
 	end, {})
-	local var18 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(userId) else nil
+	local var11 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(userId) else nil
 	
 	if fFlagDisableCopyUsernameOnConsole then
-		var19 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
-		var19 = nil
+		var1 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
+		var1 = nil
 	else
-		var19 = false
+		var1 = false
 	end
-	local var21
-	local var20 = if fFlagEnableUserRecentActivityEntryPoint then useCurrentProfileFriendStatusModule() else nil
+	local var12
+	local var13 = if fFlagEnableUserRecentActivityEntryPoint then useCurrentProfileFriendStatusModule() else nil
 	
 	if fFlagEnableUserRecentActivityEntryPoint then
-		var21 = var12
+		var12 = var5
 		
-		if not var21 then
-			var21 = var20 == enumsModule.FriendStatus.Friends
-			var21 = nil
+		if not var12 then
+			var12 = var13 == enumsModule.FriendStatus.Friends
+			var12 = nil
 		end
 	else
-		var21 = false
+		var12 = false
 	end
-	local var22 = if fFlagEnableUserRecentActivityEntryPoint then useNavigation() else nil
+	local var14 = if fFlagEnableUserRecentActivityEntryPoint then useNavigation() else nil
 	
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, constantsModule.AVATAR_HEADSHOT_HEIGHT),
-		Position = UDim2.new(0, 0, 0, (-(constantsModule.AVATAR_HEADSHOT_HEIGHT / 2)) - var9.Gap.Large),
-		LayoutOrder = p0.layoutOrder,
+		Position = UDim2.new(0, 0, 0, (-(constantsModule.AVATAR_HEADSHOT_HEIGHT / 2)) - var2.Gap.Large),
+		LayoutOrder = p1.layoutOrder,
 		BackgroundTransparency = 1,
-		[reactModule.Change.AbsoluteSize] = var11
+		[reactModule.Change.AbsoluteSize] = var4
 	}, {
 		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var10),
-			PaddingRight = UDim.new(0, var10)
+			PaddingLeft = UDim.new(0, var3),
+			PaddingRight = UDim.new(0, var3)
 		}),
 		UserTile = reactModule.createElement(userTile, {
 			layoutOrder = 1,
-			userId = p0.userId,
-			title = p0.primaryName,
-			isVerified = p0.isVerified,
-			isPremium = p0.isPremium,
-			isRobloxAdmin = p0.isRobloxAdmin,
-			subtitle = var14,
-			contextualInfo = if fFlagAddPlatformNameToProfileHeader then p0.platformName else nil,
-			contextualInfoIcon = if fFlagAddPlatformNameToProfileHeader then var17 else nil,
+			userId = p1.userId,
+			title = p1.primaryName,
+			isVerified = p1.isVerified,
+			isPremium = p1.isPremium,
+			isRobloxAdmin = p1.isRobloxAdmin,
+			subtitle = var7,
+			contextualInfo = if fFlagAddPlatformNameToProfileHeader then p1.platformName else nil,
+			contextualInfoIcon = if fFlagAddPlatformNameToProfileHeader then var10 else nil,
 			layoutMode = layoutMode.wide,
-			userPresenceType = var13,
-			titleStyle = var9.Typography.HeadingSmall,
-			subtitleStyle = var9.Typography.BodyMedium,
-			onSubtitleClicked = if var19 then nil else reactModule.useCallback(function()
-				-- upvalues: default (copy), contexts (copy), p0 (ref), var15 (ref), setCurrentToastMessage (copy), var16 (ref), copy (copy)
-				default:setClipboardText({ context = contexts.ProfileCard, text = p0.username })
-				var15(setCurrentToastMessage({
+			userPresenceType = var6,
+			titleStyle = var2.Typography.HeadingSmall,
+			subtitleStyle = var2.Typography.BodyMedium,
+			onSubtitleClicked = if var1 then nil else reactModule.useCallback(function()
+				-- upvalues: default (copy), contexts (copy), p1 (ref), var8 (ref), setCurrentToastMessage (copy), var9 (ref), copy (copy)
+				default:setClipboardText({ context = contexts.ProfileCard, text = p1.username })
+				var8(setCurrentToastMessage({
 					isLocalized = true,
-					toastMessage = var16.usernameCopied,
+					toastMessage = var9.usernameCopied,
 					toastIcon = copy
 				}))
 			end),
 			trustedConnectionIndicatorEnabled = if fFlagUserTileTextTCIndicator then true else nil,
-			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var18 else nil,
-			extraInfo = if var21 then var16.viewRecentActivity else nil,
-			onExtraInfoClicked = if var21 then if fFlagEnableUserRecentActivityEntryPoint then reactModule.useCallback(function()
-				-- upvalues: var22 (ref), appPage (copy), p0 (ref)
-				var22.navigate(appPage.UserRecentActivity, { userId = p0.userId, primaryName = p0.primaryName })
-			end, { var22, p0.userId, p0.primaryName }) else nil else nil
+			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var11 else nil,
+			extraInfo = if var12 then var9.viewRecentActivity else nil,
+			onExtraInfoClicked = if var12 then if fFlagEnableUserRecentActivityEntryPoint then reactModule.useCallback(function()
+				-- upvalues: var14 (ref), appPage (copy), p1 (ref)
+				var14.navigate(appPage.UserRecentActivity, { userId = p1.userId, primaryName = p1.primaryName })
+			end, { var14, p1.userId, p1.primaryName }) else nil else nil
 		})
 	})
 end

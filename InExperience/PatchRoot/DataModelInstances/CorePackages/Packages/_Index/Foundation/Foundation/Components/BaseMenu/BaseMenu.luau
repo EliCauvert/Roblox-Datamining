@@ -20,118 +20,118 @@ local t_1 = {
 	[radiusModule.Medium] = "radius-medium"
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: reactModule (ref), t (ref), withDefaultsModule (ref), useBindableModule (ref), useScaledValueModule (ref), useSubmenuHoverModule (ref), flagsModule (ref), declarativeBaseMenuContentModule (ref), t_1 (ref), baseMenuContextModule (ref), baseMenuScrollContainerModule (ref), withCommonPropsModule (ref), viewModule (ref)
-	local var16, var17 = reactModule.useBinding(false)
+	local var1, var2 = reactModule.useBinding(false)
 	local cloned = table.clone(t)
-	cloned.Visible = var16
-	local var19 = withDefaultsModule(p0, cloned)
-	local var20 = useBindableModule(var19.width)
-	local var21 = useBindableModule(var19.maxHeight)
-	local var22 = useScaledValueModule(260)
-	local var23 = useScaledValueModule(320)
-	local var24, var25 = reactModule.useState(false)
-	local var26 = useSubmenuHoverModule()
+	cloned.Visible = var1
+	local var3 = withDefaultsModule(p1, cloned)
+	local var4 = useBindableModule(var3.width)
+	local var5 = useBindableModule(var3.maxHeight)
+	local var6 = useScaledValueModule(260)
+	local var7 = useScaledValueModule(320)
+	local var8, var9 = reactModule.useState(false)
+	local var10 = useSubmenuHoverModule()
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref)
+		-- upvalues: var2 (ref)
 		task.delay(0, function()
-			-- upvalues: var17 (copy)
-			var17(true)
+			-- upvalues: var2 (copy)
+			var2(true)
 		end)
 	end, {})
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: var25 (ref)
-		var25(true)
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var9 (ref)
+		var9(true)
 	end, {})
-	local var28 = reactModule.useMemo(function()
-		-- upvalues: var20 (ref), flagsModule (copy), var22 (ref)
-		return var20:map(function(p2)
-			-- upvalues: flagsModule (copy), var22 (copy)
-			return if p2 then p2.Offset elseif flagsModule.FoundationBaseMenuContentSizing then 0 else var22
+	local var12 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), flagsModule (copy), var6 (ref)
+		return var4:map(function(p3)
+			-- upvalues: flagsModule (copy), var6 (copy)
+			return if p3 then p3.Offset elseif flagsModule.FoundationBaseMenuContentSizing then 0 else var6
 		end)
-	end, { var20, var22 })
-	local var29 = reactModule.useMemo(function()
-		-- upvalues: var20 (ref), flagsModule (copy), var19 (ref), var23 (ref)
-		return var20:map(function(p3)
-			-- upvalues: flagsModule (copy), var19 (copy), var23 (copy)
-			return if flagsModule.FoundationBaseMenuContentSizing then not p3 or var19.couldGrow == true else not p3 or (var19.couldGrow == true and p3.Offset < var23)
+	end, { var4, var6 })
+	local var13 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), flagsModule (copy), var3 (ref), var7 (ref)
+		return var4:map(function(p3)
+			-- upvalues: flagsModule (copy), var3 (copy), var7 (copy)
+			return if flagsModule.FoundationBaseMenuContentSizing then not p3 or var3.couldGrow == true else not p3 or (var3.couldGrow == true and p3.Offset < var7)
 		end)
-	end, { var20, var23, var19.couldGrow })
-	local var30 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var29 (ref), var28 (ref), flagsModule (copy), var23 (ref)
+	end, { var4, var7, var3.couldGrow })
+	local var14 = reactModule.useMemo(function()
+		-- upvalues: reactModule (copy), var13 (ref), var12 (ref), flagsModule (copy), var7 (ref)
 		return {
-			MinSize = reactModule.joinBindings({ var29, var28 }):map(function(p4)
+			MinSize = reactModule.joinBindings({ var13, var12 }):map(function(p3)
 				-- upvalues: flagsModule (copy)
-				local var33 = p4[2]
+				local var15 = p3[2]
 				
-				return if p4[1] then if flagsModule.FoundationBaseMenuContentSizing and var33 == 0 then nil else Vector2.new(var33, 0) else nil
+				return if p3[1] then if flagsModule.FoundationBaseMenuContentSizing and var15 == 0 then nil else Vector2.new(var15, 0) else nil
 			end),
-			MaxSize = if flagsModule.FoundationBaseMenuContentSizing then nil else var29:map(function(p5)
-				-- upvalues: var23 (copy)
-				return if p5 then Vector2.new(var23, 1e999) else nil
+			MaxSize = if flagsModule.FoundationBaseMenuContentSizing then nil else var13:map(function(p3)
+				-- upvalues: var7 (copy)
+				return if p3 then Vector2.new(var7, 1e999) else nil
 			end)
 		}
-	end, { var29, var28, var23 })
-	local children = var19.children
+	end, { var13, var12, var7 })
+	local children = var3.children
 	
-	if not children and var19.items then
-		children = reactModule.createElement(declarativeBaseMenuContentModule, { items = var19.items, size = var19.size })
+	if not children and var3.items then
+		children = reactModule.createElement(declarativeBaseMenuContentModule, { items = var3.items, size = var3.size })
 	end
-	local var31 = if var19.radius ~= nil then "" else t_1[var19.radius]
-	local var32 = reactModule.createElement(baseMenuContextModule.Provider, {
+	local var15 = if var3.radius ~= nil then "" else t_1[var3.radius]
+	local var16 = reactModule.createElement(baseMenuContextModule.Provider, {
 		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
-			-- upvalues: var19 (ref), var24 (ref), var27 (ref), var26 (ref)
+			-- upvalues: var3 (ref), var8 (ref), var11 (ref), var10 (ref)
 			return {
 				depth = 1,
-				onActivated = var19.onActivated,
-				onNestedLeafActivated = var19.onNestedLeafActivated,
-				size = var19.size,
-				hasLeading = var24,
-				setHasLeading = var27,
-				hoverOpenPath = var26.openPath,
-				hoverOpenAtDepth = var26.openAtDepth,
-				hoverCloseAtDepth = var26.closeAtDepth,
-				hoverReset = var26.reset,
-				maxHeight = var19.maxHeight
+				onActivated = var3.onActivated,
+				onNestedLeafActivated = var3.onNestedLeafActivated,
+				size = var3.size,
+				hasLeading = var8,
+				setHasLeading = var11,
+				hoverOpenPath = var10.openPath,
+				hoverOpenAtDepth = var10.openAtDepth,
+				hoverCloseAtDepth = var10.closeAtDepth,
+				hoverReset = var10.reset,
+				maxHeight = var3.maxHeight
 			}
 		end, {
-			var19.onActivated, var19.onNestedLeafActivated, var19.size, var24,
-			var26.openPath, var26.openAtDepth, var26.closeAtDepth, var26.reset,
-			var19.maxHeight
+			var3.onActivated, var3.onNestedLeafActivated, var3.size, var8,
+			var10.openPath, var10.openAtDepth, var10.closeAtDepth, var10.reset,
+			var3.maxHeight
 		}) else nil else {
 			depth = 1,
-			onActivated = var19.onActivated,
-			onNestedLeafActivated = var19.onNestedLeafActivated,
-			size = var19.size,
-			hasLeading = var24,
-			setHasLeading = var27,
-			hoverOpenPath = var26.openPath,
-			hoverOpenAtDepth = var26.openAtDepth,
-			hoverCloseAtDepth = var26.closeAtDepth,
-			hoverReset = var26.reset,
-			maxHeight = var19.maxHeight
+			onActivated = var3.onActivated,
+			onNestedLeafActivated = var3.onNestedLeafActivated,
+			size = var3.size,
+			hasLeading = var8,
+			setHasLeading = var11,
+			hoverOpenPath = var10.openPath,
+			hoverOpenAtDepth = var10.openAtDepth,
+			hoverCloseAtDepth = var10.closeAtDepth,
+			hoverReset = var10.reset,
+			maxHeight = var3.maxHeight
 		}
 	}, children)
 	
-	return if var19.maxHeight then reactModule.createElement(baseMenuScrollContainerModule, {
-		maxHeight = var21,
-		autoSize = var29,
-		width = var20,
-		scrollViewProps = withCommonPropsModule(var19, {
-			ref = p1,
-			sizeConstraint = var30,
-			scrollingFrameRef = var19.scrollingFrameRef,
-			tag = `stroke-standard stroke-default {var31}`
+	return if var3.maxHeight then reactModule.createElement(baseMenuScrollContainerModule, {
+		maxHeight = var5,
+		autoSize = var13,
+		width = var4,
+		scrollViewProps = withCommonPropsModule(var3, {
+			ref = p2,
+			sizeConstraint = var14,
+			scrollingFrameRef = var3.scrollingFrameRef,
+			tag = `stroke-standard stroke-default {var15}`
 		})
-	}, var32) else reactModule.createElement(viewModule, withCommonPropsModule(var19, {
-		tag = `col stroke-standard stroke-default {var31}`,
-		AutomaticSize = var29:map(function(p6)
-			return if p6 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
+	}, var16) else reactModule.createElement(viewModule, withCommonPropsModule(var3, {
+		tag = `col stroke-standard stroke-default {var15}`,
+		AutomaticSize = var13:map(function(p3)
+			return if p3 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
 		end),
-		Size = reactModule.joinBindings({ var29, var20 }):map(function(p7)
-			return if p7[1] then nil else UDim2.new(p7[2], UDim.new())
+		Size = reactModule.joinBindings({ var13, var4 }):map(function(p3)
+			return if p3[1] then nil else UDim2.new(p3[2], UDim.new())
 		end),
-		ref = p1,
-		sizeConstraint = var30
-	}), var32)
+		ref = p2,
+		sizeConstraint = var14
+	}), var16)
 end))

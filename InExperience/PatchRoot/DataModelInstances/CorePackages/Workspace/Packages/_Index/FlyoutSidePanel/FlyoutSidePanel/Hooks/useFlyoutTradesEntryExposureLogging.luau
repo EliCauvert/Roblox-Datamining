@@ -6,11 +6,11 @@ local logFlyoutTradesEntryExposureModule = require(flyoutSidePanel.Utils.logFlyo
 
 return function()
 	-- upvalues: useDrawerVisible (ref), reactModule (ref), logFlyoutTradesEntryExposureModule (ref)
-	local var3 = useDrawerVisible()
+	local var1 = useDrawerVisible()
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), logFlyoutTradesEntryExposureModule (copy)
-		if var3 then
+		-- upvalues: var1 (ref), logFlyoutTradesEntryExposureModule (copy)
+		if var1 then
 			logFlyoutTradesEntryExposureModule()
 		end
-	end, { var3 })
+	end, { var1 })
 end

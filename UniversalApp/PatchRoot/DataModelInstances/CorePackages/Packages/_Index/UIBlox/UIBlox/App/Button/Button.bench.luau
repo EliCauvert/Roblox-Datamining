@@ -7,12 +7,12 @@ local describe = require(parent_2.Dev.JestGlobals).describe
 local benchmarksModule = require(parent_1.Utility.benchmarks)
 local mountComponentTimes = benchmarksModule.mountComponentTimes
 local scrollComponentTimes = benchmarksModule.scrollComponentTimes
-local var3 = reactModule.createElement(buttonModule, {
+local var1 = reactModule.createElement(buttonModule, {
 	text = "Button",
 	onActivated = function() end
 })
 describe("Button", function()
-	-- upvalues: mountComponentTimes (ref), var3 (ref), scrollComponentTimes (ref)
-	mountComponentTimes(var3, 100, "Button")
-	scrollComponentTimes(var3, 100, "Button")
+	-- upvalues: mountComponentTimes (ref), var1 (ref), scrollComponentTimes (ref)
+	mountComponentTimes(var1, 100, "Button")
+	scrollComponentTimes(var1, 100, "Button")
 end)

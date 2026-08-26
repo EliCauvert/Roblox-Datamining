@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChatShared").Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { team = p0 }
+﻿return require(script:FindFirstAncestor("ExpChatShared").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { team = p1 }
 end)

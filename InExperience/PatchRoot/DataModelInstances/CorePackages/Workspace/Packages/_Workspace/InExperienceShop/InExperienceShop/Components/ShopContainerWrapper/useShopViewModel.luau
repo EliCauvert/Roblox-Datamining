@@ -16,59 +16,59 @@ local resolveItemForSelection = shopItemSelectionModule.resolveItemForSelection
 local t = { homeLabel = "CommonUI.Features.Label.Home" }
 local _ = require(script.Parent.ShopView)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: constantsModule (ref)
-	local _, replaced = string.gsub(p0, " ", "")
+	local _, replaced = string.gsub(p1, " ", "")
 	
-	return constantsModule.SEARCH_MIN_LENGTH <= #p0 - replaced
+	return constantsModule.SEARCH_MIN_LENGTH <= #p1 - replaced
 end
 
-local var11 = nil
+local var1 = nil
 
 local function useShopViewModel(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), getFixRobuxTileClickInShopModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), var11 (write), resolveItemForSelection (ref), shopItemSelectionModule (ref), constantsModule (ref), sharedFlagsModule (ref), abuseVectorModule (ref), useShopReportOverflowModule (ref)
-	local var14 = useTokens()
-	local var15 = useLocalization(t)
-	local var16 = getFixRobuxTileClickInShopModule()
-	local var17 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
-	local var18 = signalsReactModule.useSignalState(var17.getCategories)
-	local var19 = signalsReactModule.useSignalState(var17.getSections)
-	local var20 = signalsReactModule.useSignalState(var17.getItemsPerRow)
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: var11 (copy), var18 (ref), var19 (ref)
-		return var11(var18, var19)
-	end, { var18, var19 })
-	local homeLabel = var15.homeLabel
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var21 (ref), homeLabel (ref)
-		local list = table.create(#var21.categories)
+	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), getFixRobuxTileClickInShopModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), var1 (write), resolveItemForSelection (ref), shopItemSelectionModule (ref), constantsModule (ref), sharedFlagsModule (ref), abuseVectorModule (ref), useShopReportOverflowModule (ref)
+	local var2 = useTokens()
+	local var3 = useLocalization(t)
+	local var4 = getFixRobuxTileClickInShopModule()
+	local var5 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
+	local var6 = signalsReactModule.useSignalState(var5.getCategories)
+	local var7 = signalsReactModule.useSignalState(var5.getSections)
+	local var8 = signalsReactModule.useSignalState(var5.getItemsPerRow)
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: var1 (copy), var6 (ref), var7 (ref)
+		return var1(var6, var7)
+	end, { var6, var7 })
+	local homeLabel = var3.homeLabel
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: var9 (ref), homeLabel (ref)
+		local list = table.create(#var9.categories)
 		
-		for i, v in var21.categories do
+		for i, v in var9.categories do
 			list[i] = {
 				id = v.id,
 				text = if v.id == "home" then homeLabel else v.name
 			}
 		end
 		return list
-	end, { var21.categories, homeLabel })
-	local var23, var24 = reactModule.useState(function()
-		-- upvalues: var21 (ref)
-		return if #var21.categories > 0 then var21.categories[1].id else ""
+	end, { var9.categories, homeLabel })
+	local var11, var12 = reactModule.useState(function()
+		-- upvalues: var9 (ref)
+		return if #var9.categories > 0 then var9.categories[1].id else ""
 	end)
-	local var25, var26 = reactModule.useState(function()
+	local var13, var14 = reactModule.useState(function()
 		return nil
 	end)
-	local var27, var28 = reactModule.useState(function()
+	local var15, var16 = reactModule.useState(function()
 		return nil
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var21 (ref), var24 (ref)
-		local categories = var21.categories
+		-- upvalues: var9 (ref), var12 (ref)
+		local categories = var9.categories
 		
 		if #categories == 0 then
 			return
 		end
-		var24(function(p2)
+		var12(function(p2)
 			-- upvalues: categories (ref)
 			for i, v in categories do
 				if v.id == p2 then
@@ -77,94 +77,94 @@ local function useShopViewModel(p1)
 			end
 			return categories[1].id
 		end)
-	end, { var21.categories })
+	end, { var9.categories })
 	reactModule.useEffect(function()
-		-- upvalues: var25 (ref), var27 (ref), resolveItemForSelection (copy), var21 (ref), var16 (ref), var26 (ref), var28 (ref)
-		if var25 == nil or var27 == nil then return end
-		if resolveItemForSelection(var21.sections, var25, var27, var16) == nil then
-			var26(nil)
-			var28(nil)
+		-- upvalues: var13 (ref), var15 (ref), resolveItemForSelection (copy), var9 (ref), var4 (ref), var14 (ref), var16 (ref)
+		if var13 == nil or var15 == nil then return end
+		if resolveItemForSelection(var9.sections, var13, var15, var4) == nil then
+			var14(nil)
+			var16(nil)
 		end
-	end, { var21.sections, var25, var27, var16 })
-	local var29 = reactModule.useMemo(function()
-		-- upvalues: resolveItemForSelection (copy), var21 (ref), var25 (ref), var27 (ref), var16 (ref)
-		return resolveItemForSelection(var21.sections, var25, var27, var16)
-	end, { var21.sections, var25, var27, var16 })
-	local var30 = reactModule.useMemo(function()
-		-- upvalues: shopItemSelectionModule (copy), var21 (ref), var25 (ref), var27 (ref), var16 (ref)
-		return shopItemSelectionModule.isRobuxBonusOnlySelection(var21.sections, var25, var27, var16)
-	end, { var21.sections, var25, var27, var16 })
-	local var31 = reactModule.useCallback(function(p3)
-		-- upvalues: var24 (ref)
-		var24(p3)
+	end, { var9.sections, var13, var15, var4 })
+	local var17 = reactModule.useMemo(function()
+		-- upvalues: resolveItemForSelection (copy), var9 (ref), var13 (ref), var15 (ref), var4 (ref)
+		return resolveItemForSelection(var9.sections, var13, var15, var4)
+	end, { var9.sections, var13, var15, var4 })
+	local var18 = reactModule.useMemo(function()
+		-- upvalues: shopItemSelectionModule (copy), var9 (ref), var13 (ref), var15 (ref), var4 (ref)
+		return shopItemSelectionModule.isRobuxBonusOnlySelection(var9.sections, var13, var15, var4)
+	end, { var9.sections, var13, var15, var4 })
+	local var19 = reactModule.useCallback(function(p2)
+		-- upvalues: var12 (ref)
+		var12(p2)
 	end, {})
-	local var32, var33 = reactModule.useState("")
-	local var34, var35 = reactModule.useState("")
+	local var20, var21 = reactModule.useState("")
+	local var22, var23 = reactModule.useState("")
 	reactModule.useEffect(function()
-		-- upvalues: var32 (ref), constantsModule (copy), var35 (ref)
-		local var46 = var32
-		local _, replaced = string.gsub(var46, " ", "")
+		-- upvalues: var20 (ref), constantsModule (copy), var23 (ref)
+		local var24 = var20
+		local _, replaced = string.gsub(var24, " ", "")
 		
-		if constantsModule.SEARCH_MIN_LENGTH <= #var46 - replaced then
-			local var48 = false
+		if constantsModule.SEARCH_MIN_LENGTH <= #var24 - replaced then
+			local var25 = false
 			task.delay(constantsModule.SEARCH_DEBOUNCE_SECONDS, function()
-				-- upvalues: var48 (write), var35 (copy), var32 (copy)
-				if var48 then
+				-- upvalues: var25 (write), var23 (copy), var20 (copy)
+				if var25 then
 					return
 				end
-				var35(var32)
+				var23(var20)
 			end)
 			
 			return function()
-				-- upvalues: var48 (write)
-				var48 = true
+				-- upvalues: var25 (write)
+				var25 = true
 			end
 		end
-		var35("")
-	end, { var32 })
-	local var36 = reactModule.useCallback(function(p4)
-		-- upvalues: var33 (ref)
-		var33(p4)
+		var23("")
+	end, { var20 })
+	local var24 = reactModule.useCallback(function(p2)
+		-- upvalues: var21 (ref)
+		var21(p2)
 	end, {})
-	local var37 = reactModule.useCallback(function(p5)
-		-- upvalues: var33 (ref), constantsModule (copy), var35 (ref)
-		var33(p5)
-		local _, replaced = string.gsub(p5, " ", "")
+	local var25 = reactModule.useCallback(function(p2)
+		-- upvalues: var21 (ref), constantsModule (copy), var23 (ref)
+		var21(p2)
+		local _, replaced = string.gsub(p2, " ", "")
 		
-		if constantsModule.SEARCH_MIN_LENGTH <= #p5 - replaced then
-			var35(p5)
+		if constantsModule.SEARCH_MIN_LENGTH <= #p2 - replaced then
+			var23(p2)
 			
 			return
 		end
-		var35("")
+		var23("")
 	end, {})
-	local var38 = reactModule.useCallback(function(p6, p7)
-		-- upvalues: resolveItemForSelection (copy), var21 (ref), var16 (ref), var26 (ref), var28 (ref)
-		if p7 == nil then return end
-		if resolveItemForSelection(var21.sections, p6, p7, var16) == nil then
+	local var26 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: resolveItemForSelection (copy), var9 (ref), var4 (ref), var14 (ref), var16 (ref)
+		if p3 == nil then return end
+		if resolveItemForSelection(var9.sections, p2, p3, var4) == nil then
 			return
 		end
-		var26(p6)
-		var28(p7)
-	end, { var21.sections, var16 })
-	local var39 = reactModule.useCallback(function()
-		-- upvalues: var26 (ref), var28 (ref)
-		var26(nil)
-		var28(nil)
+		var14(p2)
+		var16(p3)
+	end, { var9.sections, var4 })
+	local var27 = reactModule.useCallback(function()
+		-- upvalues: var14 (ref), var16 (ref)
+		var14(nil)
+		var16(nil)
 	end, {})
-	local var40, var41 = reactModule.useState(false)
-	local var42 = reactModule.useCallback(function()
-		-- upvalues: var41 (ref)
-		var41(true)
+	local var28, var29 = reactModule.useState(false)
+	local var30 = reactModule.useCallback(function()
+		-- upvalues: var29 (ref)
+		var29(true)
 	end, {})
-	local var43 = reactModule.useCallback(function()
-		-- upvalues: var41 (ref), var33 (ref), var35 (ref)
-		var41(false)
-		var33("")
-		var35("")
+	local var31 = reactModule.useCallback(function()
+		-- upvalues: var29 (ref), var21 (ref), var23 (ref)
+		var29(false)
+		var21("")
+		var23("")
 	end, {})
-	local setItemsPerRow = var17.setItemsPerRow
-	local var44 = useShopReportOverflowModule.useShopReportOverflow({
+	local setItemsPerRow = var5.setItemsPerRow
+	local var32 = useShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
 		buildReportSession = reactModule.useCallback(function()
 			-- upvalues: abuseVectorModule (copy)
@@ -177,59 +177,59 @@ local function useShopViewModel(p1)
 	
 	return {
 		fullScreen = p1.fullScreen,
-		overMediaColor = var14.Color.OverMedia.OverMedia_0.Color3,
-		overMediaTransparency = var14.Color.OverMedia.OverMedia_0.Transparency,
+		overMediaColor = var2.Color.OverMedia.OverMedia_0.Color3,
+		overMediaTransparency = var2.Color.OverMedia.OverMedia_0.Transparency,
 		onClose = p1.toggleWindow,
-		tabs = var22,
-		selectedCategoryId = var23,
-		onCategorySelected = var31,
-		searchQuery = var32,
-		committedQuery = var34,
-		onSearchQueryChanged = var36,
-		onSearchSubmit = var37,
-		isSearchOpen = var40,
-		onSearchOpen = var42,
-		onSearchCancel = var43,
-		sections = var21.sections,
-		selectedItem = var29,
-		selectedItemDisableBuy = var30,
-		onItemActivated = var38,
-		onDetailsClose = var39,
-		itemsPerRow = var20,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p8)
+		tabs = var10,
+		selectedCategoryId = var11,
+		onCategorySelected = var19,
+		searchQuery = var20,
+		committedQuery = var22,
+		onSearchQueryChanged = var24,
+		onSearchSubmit = var25,
+		isSearchOpen = var28,
+		onSearchOpen = var30,
+		onSearchCancel = var31,
+		sections = var9.sections,
+		selectedItem = var17,
+		selectedItemDisableBuy = var18,
+		onItemActivated = var26,
+		onDetailsClose = var27,
+		itemsPerRow = var8,
+		onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
 			-- upvalues: constantsModule (copy), setItemsPerRow (ref)
-			local x = p8.AbsoluteSize.X
+			local x = p2.AbsoluteSize.X
 			
 			if x == 0 then
 				return
 			end
 			setItemsPerRow(math.max(constantsModule.MIN_COLUMNS, math.min(constantsModule.ITEMS_PER_SECTION, math.floor(x / constantsModule.MIN_TILE_WIDTH))))
 		end, { setItemsPerRow }),
-		isReportingEnabled = var44.isReportingEnabled,
-		isOverflowMenuOpen = var44.isOverflowMenuOpen,
-		topBarReportSession = var44.reportSession,
-		onOverflowActivated = var44.onOverflowActivated,
-		onOverflowMenuClosed = var44.onOverflowMenuClosed,
-		onMenuItemActivated = var44.onMenuItemActivated,
-		onTopBarReportClose = var44.onReportClose
+		isReportingEnabled = var32.isReportingEnabled,
+		isOverflowMenuOpen = var32.isOverflowMenuOpen,
+		topBarReportSession = var32.reportSession,
+		onOverflowActivated = var32.onOverflowActivated,
+		onOverflowMenuClosed = var32.onOverflowMenuClosed,
+		onMenuItemActivated = var32.onMenuItemActivated,
+		onTopBarReportClose = var32.onReportClose
 	}
 end
 
-var11 = function(p9, p10)
+var1 = function(p2, p3)
 	local t = {}
 	
-	for i, v in p10 do
+	for i, v in p3 do
 		t[v.id] = true
 	end
-	local var51 = #p10 > 0
+	local var17 = #p3 > 0
 	local t_1 = {}
 	
-	for i_1, v_1 in p9 do
-		if t[v_1.id] or var51 then
+	for i_1, v_1 in p2 do
+		if t[v_1.id] or var17 then
 			table.insert(t_1, v_1)
 		end
 	end
-	return { categories = t_1, sections = p10 }
+	return { categories = t_1, sections = p3 }
 end
 
 return useShopViewModel

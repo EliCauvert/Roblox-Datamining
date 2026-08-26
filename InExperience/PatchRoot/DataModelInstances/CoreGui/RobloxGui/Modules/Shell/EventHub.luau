@@ -1,41 +1,41 @@
 ﻿local t = {}
 
-local function _(p0, p1)
-	return { id = p0, callback = p1 }
+local function _(p1, p2)
+	return { id = p1, callback = p2 }
 end
 
 return {
-	addEventListener = function(_, p2, p3, p4)
+	addEventListener = function(_, p1, p2, p3)
 		-- upvalues: t (ref)
-		if t[p2] == nil then
-			t[p2] = {}
+		if t[p1] == nil then
+			t[p1] = {}
 		end
-		table.insert(t[p2], { id = p3, callback = p4 })
+		table.insert(t[p1], { id = p2, callback = p3 })
 	end,
-	removeEventListener = function(_, p5, p6)
+	removeEventListener = function(_, p1, p2)
 		-- upvalues: t (ref)
-		if t[p5] == nil then return end
-		for i, v in ipairs(t[p5]) do
-			if v ~= nil and v.id == p6 then
-				table.remove(t[p5], i)
+		if t[p1] == nil then return end
+		for i, v in ipairs(t[p1]) do
+			if v ~= nil and v.id == p2 then
+				table.remove(t[p1], i)
 			end
 		end
 	end,
-	removeCallbackFromEvent = function(_, p7, p8, p9)
+	removeCallbackFromEvent = function(_, p3, p4, p5)
 		-- upvalues: t (ref)
-		if t[p7] == nil then return end
-		for i, v in ipairs(t[p7]) do
-			if v ~= nil and v.id == p8 and v.callback == p9 then
-				table.remove(t[p7], i)
+		if t[p3] == nil then return end
+		for i, v in ipairs(t[p3]) do
+			if v ~= nil and v.id == p4 and v.callback == p5 then
+				table.remove(t[p3], i)
 				
 				return
 			end
 		end
 	end,
-	dispatchEvent = function(_, p10, ...)
+	dispatchEvent = function(_, p6, ...)
 		-- upvalues: t (ref)
-		if t[p10] == nil then return end
-		for i, v in ipairs(t[p10]) do
+		if t[p6] == nil then return end
+		for i, v in ipairs(t[p6]) do
 			v.callback(...)
 		end
 	end,

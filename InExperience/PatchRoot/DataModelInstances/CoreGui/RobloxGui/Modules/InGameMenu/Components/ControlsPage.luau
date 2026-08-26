@@ -19,9 +19,9 @@ controlsPage.validateProps = t.strictInterface({
 	canCaptureFocus = t.optional(t.boolean)
 })
 
-function controlsPage.init(p0)
+function controlsPage.init(p1)
 	-- upvalues: roact (ref)
-	p0.closeButtonRef = roact.createRef()
+	p1.closeButtonRef = roact.createRef()
 end
 
 function controlsPage.render(p1)
@@ -46,9 +46,9 @@ function controlsPage.render(p1)
 	}) else nil
 end
 
-return roactRodux.UNSTABLE_connect2(function(p2)
+return roactRodux.UNSTABLE_connect2(function(p1)
 	return {
-		controlLayout = p2.controlLayout,
-		canCaptureFocus = p2.menuPage == "Controls"
+		controlLayout = p1.controlLayout,
+		canCaptureFocus = p1.menuPage == "Controls"
 	}
 end)(controlsPage)

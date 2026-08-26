@@ -1,10 +1,10 @@
 ﻿local constantsModule = require(script.Parent.Parent.Constants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: constantsModule (ref)
-	if not p0:getState()[constantsModule.RoduxKey].IsOverlayFlashActive then return end
+	if not p1:getState()[constantsModule.RoduxKey].IsOverlayFlashActive then return end
 	local currentTime = tick()
-	while p0:getState()[constantsModule.RoduxKey].IsOverlayFlashActive and constantsModule.FlashTimeout >= tick() - currentTime do
+	while p1:getState()[constantsModule.RoduxKey].IsOverlayFlashActive and constantsModule.FlashTimeout >= tick() - currentTime do
 		task.wait()
 	end
 end

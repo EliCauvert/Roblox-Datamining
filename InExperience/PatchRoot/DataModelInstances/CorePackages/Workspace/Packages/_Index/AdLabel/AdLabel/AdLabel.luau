@@ -12,10 +12,10 @@ local whyThisAdModalModule = require(parent.WhyThisAdModal)
 local adDisclosureTelemetryModule = require(parent.AdDisclosureTelemetry)
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), enums (ref), reactModule (ref), adDisclosureTelemetryModule (ref), view (ref), menu (ref), text (ref), icon (ref), whyThisAdModalModule (ref)
 	local createElement_1
-	local var5 = useLocalization({
+	local var1 = useLocalization({
 		adLabel = "Feature.EnhancedVideo.Label.Ad",
 		whyThisAdLabel = "Feature.GameDetails.Action.WhyThisAd",
 		errorAdDisclosureText = "Feature.GameDetails.Message.SponsoredDisclosure.Error"
@@ -24,22 +24,22 @@ return reactModule.memo(function(p0)
 		{
 			id = "whyThisAd",
 			icon = enums.IconName.CircleI,
-			text = var5.whyThisAdLabel
+			text = var1.whyThisAdLabel
 		}
 	}
-	local var7, var8 = reactModule.useState(false)
-	local var9, var10 = reactModule.useState(false)
+	local var2, var3 = reactModule.useState(false)
+	local var4, var5 = reactModule.useState(false)
 	
-	local function _(p1)
-		-- upvalues: adDisclosureTelemetryModule (copy), var8 (ref)
-		adDisclosureTelemetryModule.logAdDisclosureMenuToggled(p1)
-		var8(p1)
+	local function _(p2)
+		-- upvalues: adDisclosureTelemetryModule (copy), var3 (ref)
+		adDisclosureTelemetryModule.logAdDisclosureMenuToggled(p2)
+		var3(p2)
 	end
 	
 	local _ = function(p2)
-		-- upvalues: adDisclosureTelemetryModule (copy), var10 (ref)
+		-- upvalues: adDisclosureTelemetryModule (copy), var5 (ref)
 		adDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(p2)
-		var10(p2)
+		var5(p2)
 	end
 	
 	local createElement = reactModule.createElement
@@ -48,40 +48,40 @@ return reactModule.memo(function(p0)
 		Menu = reactModule.createElement(menu, {
 			AnchorPoint = Vector2.new(1, 1),
 			Position = UDim2.new(1, -10, 1, 0),
-			isOpen = var7,
+			isOpen = var2,
 			items = list,
 			size = enums.InputSize.Medium,
 			align = enums.PopoverAlign.End,
 			width = UDim.new(0, 180),
 			onPressedOutside = function()
-				-- upvalues: adDisclosureTelemetryModule (copy), var8 (ref)
+				-- upvalues: adDisclosureTelemetryModule (copy), var3 (ref)
 				adDisclosureTelemetryModule.logAdDisclosureMenuToggled(false)
-				var8(false)
+				var3(false)
 			end,
-			onActivated = function(p3)
-				-- upvalues: adDisclosureTelemetryModule (copy), var8 (ref), var10 (ref), p0 (ref)
-				if p3 == "whyThisAd" then
+			onActivated = function(p2)
+				-- upvalues: adDisclosureTelemetryModule (copy), var3 (ref), var5 (ref), p1 (ref)
+				if p2 == "whyThisAd" then
 					adDisclosureTelemetryModule.logAdDisclosureMenuToggled(false)
-					var8(false)
+					var3(false)
 					adDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(true)
-					var10(true)
-					p0.sendPauseEvent()
+					var5(true)
+					p1.sendPauseEvent()
 				end
 			end
 		}, {
 			AdLabel = reactModule.createElement(view, {
 				tag = "row align-x-center align-y-center size-1300-600 stroke-standard stroke-default radius-small bg-over-media-100",
 				onActivated = function()
-					-- upvalues: var7 (ref), adDisclosureTelemetryModule (copy), var8 (ref)
-					local var13 = not var7
-					adDisclosureTelemetryModule.logAdDisclosureMenuToggled(var13)
-					var8(var13)
+					-- upvalues: var2 (ref), adDisclosureTelemetryModule (copy), var3 (ref)
+					local var6 = not var2
+					adDisclosureTelemetryModule.logAdDisclosureMenuToggled(var6)
+					var3(var6)
 				end
 			}, {
 				AdText = reactModule.createElement(text, {
 					tag = "size-0-full auto-x text-label-small",
 					LayoutOrder = 1,
-					Text = var5.adLabel
+					Text = var1.adLabel
 				}),
 				TrailingIconWrapper = reactModule.createElement(view, { tag = "auto-xy padding-left-small", LayoutOrder = 2 }, {
 					MoreIcon = reactModule.createElement(icon, {
@@ -93,15 +93,15 @@ return reactModule.memo(function(p0)
 		})
 	}
 	
-	if var9 then
+	if var4 then
 		createElement_1 = reactModule.createElement
 		createElement_1 = createElement_1(whyThisAdModalModule, {
-			adDisclosureBody = if p0.adDisclosureText == nil or p0.adDisclosureText == "" then var5.errorAdDisclosureText else p0.adDisclosureText,
-			showAdPreferencesUrl = p0.showAdPreferencesUrl,
+			adDisclosureBody = if p1.adDisclosureText == nil or p1.adDisclosureText == "" then var1.errorAdDisclosureText else p1.adDisclosureText,
+			showAdPreferencesUrl = p1.showAdPreferencesUrl,
 			onClose = function()
-				-- upvalues: adDisclosureTelemetryModule (copy), var10 (ref)
+				-- upvalues: adDisclosureTelemetryModule (copy), var5 (ref)
 				adDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(false)
-				var10(false)
+				var5(false)
 			end
 		})
 	else

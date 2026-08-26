@@ -1,9 +1,9 @@
-﻿return function(p0, p1)
-	if p1 == nil then
+﻿return function(p1, p2)
+	if p2 == nil then
 		return false
 	end
-	for i, v in p0 do
-		if v == p1 then
+	for i, v in p1 do
+		if v == p2 then
 			return true
 		end
 	end

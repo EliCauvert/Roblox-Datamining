@@ -1,29 +1,29 @@
 ﻿local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
 local getFIntCanHideGuiGroupIdModule = require(game:GetService("CoreGui").RobloxGui.Modules.Flags.GetFIntCanHideGuiGroupId)
 
-return function(_, p0, _)
+return function(_, p1, _)
 	-- upvalues: promiseModule (ref), getFIntCanHideGuiGroupIdModule (ref)
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: p0 (ref), getFIntCanHideGuiGroupIdModule (copy)
+	return promiseModule.new(function(p2, p3)
+		-- upvalues: p1 (ref), getFIntCanHideGuiGroupIdModule (copy)
 		if not game:GetEngineFeature("GuiHidingApiSupport") then
-			p1(false)
+			p2(false)
 			
 			return
-		elseif not p0 then
-			p2("Invalid local player")
+		elseif not p1 then
+			p3("Invalid local player")
 			
 			return
 		end
-		local var2 = false
+		local var1 = false
 		local ok, status = pcall(function()
-			-- upvalues: getFIntCanHideGuiGroupIdModule (copy), var2 (write), p0 (copy)
-			var2 = p0:IsInGroupAsync(getFIntCanHideGuiGroupIdModule())
+			-- upvalues: getFIntCanHideGuiGroupIdModule (copy), var1 (write), p1 (copy)
+			var1 = p1:IsInGroupAsync(getFIntCanHideGuiGroupIdModule())
 		end)
 		
 		if ok then
-			p1(var2)
+			p2(var1)
 		else
-			p2(status)
+			p3(status)
 		end
 	end)
 end

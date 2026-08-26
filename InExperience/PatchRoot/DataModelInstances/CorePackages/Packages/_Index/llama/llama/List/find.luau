@@ -1,9 +1,9 @@
-﻿return function(p0, p1, p2)
-	local var0 = type(p0)
-	assert(var0 == "table", "expected a table for first argument, got " .. var0)
+﻿return function(p1, p2, p3)
+	local var1 = type(p1)
+	assert(var1 == "table", "expected a table for first argument, got " .. var0)
 	
-	for i = p2 or 1, #p0 do
-		if p0[i] ~= p1 then
+	for i = p3 or 1, #p1 do
+		if p1[i] ~= p2 then
 			continue
 		end
 		return i

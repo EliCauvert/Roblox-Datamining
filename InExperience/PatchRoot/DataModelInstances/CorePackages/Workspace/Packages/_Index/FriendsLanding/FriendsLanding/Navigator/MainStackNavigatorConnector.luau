@@ -7,12 +7,12 @@ local isFromConnectionsHubModule = require(friendsLanding.Navigator.isFromConnec
 local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
 local mainStackNavigatorConnector = roact.PureComponent:extend("MainStackNavigatorConnector")
 
-function mainStackNavigatorConnector.render(p0)
+function mainStackNavigatorConnector.render(p1)
 	-- upvalues: fFlagCreateConnectionsHub (ref), isFromConnectionsHubModule (ref), roact (ref), friendsLandingHeaderBarModule (ref), mainStackNavigatorModule (ref)
 	return roact.createFragment({
 		layout = roact.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-		topBar = if fFlagCreateConnectionsHub and (fFlagCreateConnectionsHub and isFromConnectionsHubModule(p0.props.navigation)) then nil else roact.createElement(friendsLandingHeaderBarModule, { navigation = p0.props.navigation }),
-		navigator = roact.createElement(mainStackNavigatorModule, { navigation = p0.props.navigation })
+		topBar = if fFlagCreateConnectionsHub and (fFlagCreateConnectionsHub and isFromConnectionsHubModule(p1.props.navigation)) then nil else roact.createElement(friendsLandingHeaderBarModule, { navigation = p1.props.navigation }),
+		navigator = roact.createElement(mainStackNavigatorModule, { navigation = p1.props.navigation })
 	})
 end
 

@@ -12,8 +12,8 @@ local formatRecommendationContextType = socialLuaAnalyticsModule.Analytics.Forma
 local formatPresence = socialLuaAnalyticsModule.Analytics.Formatters.formatPresence
 local getFIntShowFriendRecommendationsLimitModule = require(parent.Flags.getFIntShowFriendRecommendationsLimit)
 
-local var7 = function(p0)
-	return p0
+local var1 = function(p1)
+	return p1
 end
 
 return {
@@ -24,13 +24,13 @@ return {
 			source = constantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var7,
-			recommendationCount = var7,
+			friendCount = var1,
+			recommendationCount = var1,
 			recommendationLimit = getFIntShowFriendRecommendationsLimitModule,
-			refreshCount = var7,
-			experimentLayerStatus = var7,
-			fetchedRecommendations = var7,
-			recommendationSessionId = var7
+			refreshCount = var1,
+			experimentLayerStatus = var1,
+			fetchedRecommendations = var1,
+			recommendationSessionId = var1
 		}
 	},
 	[eventNamesModule.UserSeen] = {
@@ -40,13 +40,13 @@ return {
 			source = constantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var7,
+			absolutePosition = var1,
 			recommendationContextType = formatRecommendationContextType,
 			friendStatus = formatFriendStatusModule,
-			isRecommendation = var7,
+			isRecommendation = var1,
 			presence = formatPresence,
-			recommendationRank = var7,
-			userId = var7,
+			recommendationRank = var1,
+			userId = var1,
 			universeId = getUniverseIdFromUserModule
 		}
 	},
@@ -58,12 +58,12 @@ return {
 			source = constantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var7,
+			absolutePosition = var1,
 			recommendationContextType = formatRecommendationContextType,
-			friendId = var7,
+			friendId = var1,
 			friendStatus = formatFriendStatusModule,
-			isRecommendation = var7,
-			recommendationRank = var7,
+			isRecommendation = var1,
+			recommendationRank = var1,
 			universeId = getUniverseIdFromUserModule,
 			presence = formatPresence
 		}
@@ -76,10 +76,10 @@ return {
 			source = constantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var7,
+			absolutePosition = var1,
 			recommendationContextType = formatRecommendationContextType,
-			recommendationRank = var7,
-			requestedId = var7
+			recommendationRank = var1,
+			requestedId = var1
 		}
 	},
 	[eventNamesModule.RevokeFriendRequest] = {
@@ -90,10 +90,10 @@ return {
 			source = constantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var7,
+			absolutePosition = var1,
 			recommendationContextType = formatRecommendationContextType,
-			recommendationRank = var7,
-			requestedId = var7
+			recommendationRank = var1,
+			requestedId = var1
 		}
 	},
 	[eventNamesModule.ViewAllFriends] = {
@@ -104,9 +104,9 @@ return {
 			source = constantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var7,
+			friendCount = var1,
 			recommendationLimit = getFIntShowFriendRecommendationsLimitModule,
-			recommendationCount = var7
+			recommendationCount = var1
 		}
 	},
 	[eventNamesModule.ViewAddFriends] = {
@@ -118,11 +118,11 @@ return {
 			source = constantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var7,
+			friendCount = var1,
 			recommendationLimit = getFIntShowFriendRecommendationsLimitModule,
-			recommendationCount = var7,
-			requestCount = var7,
-			showContactImporterModal = var7
+			recommendationCount = var1,
+			requestCount = var1,
+			showContactImporterModal = var1
 		}
 	},
 	[eventNamesModule.CarouselLoadingTime] = {
@@ -132,14 +132,14 @@ return {
 			source = constantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			carouselFetchingStatus = var7,
-			friendsFetchingStatus = var7,
-			recommendationFetchingStatus = var7,
-			loadingTime = var7,
-			reachedThreshold = var7,
-			loadingThreshold = var7,
-			experimentLayerStatus = var7,
-			isLegacyCarousel = var7
+			carouselFetchingStatus = var1,
+			friendsFetchingStatus = var1,
+			recommendationFetchingStatus = var1,
+			loadingTime = var1,
+			reachedThreshold = var1,
+			loadingThreshold = var1,
+			experimentLayerStatus = var1,
+			isLegacyCarousel = var1
 		}
 	},
 	[eventNamesModule.ContactImporterOnAddFriends] = {
@@ -151,11 +151,11 @@ return {
 		context = contexts.HomePage,
 		eventType = eventTypes.LoadingTime,
 		formatRulesForAdditionalInfo = {
-			status = var7,
-			loadingTime = var7,
-			loadingThreshold = var7,
-			nextPage = var7,
-			fetch = var7
+			status = var1,
+			loadingTime = var1,
+			loadingThreshold = var1,
+			nextPage = var1,
+			fetch = var1
 		},
 		additionalInfo = {
 			source = constantsModule.HomepageFriendsCarouselSourceName
@@ -165,11 +165,11 @@ return {
 		context = contexts.HomePage,
 		eventType = eventTypes.LoadingTime,
 		formatRulesForAdditionalInfo = {
-			status = var7,
-			loadingTime = var7,
-			loadingThreshold = var7,
-			nextPage = var7,
-			fetch = var7
+			status = var1,
+			loadingTime = var1,
+			loadingThreshold = var1,
+			nextPage = var1,
+			fetch = var1
 		},
 		additionalInfo = {
 			source = constantsModule.HomepageFriendsCarouselSourceName
@@ -179,11 +179,11 @@ return {
 		context = contexts.HomePage,
 		eventType = eventTypes.LoadingTime,
 		formatRulesForAdditionalInfo = {
-			status = var7,
-			fetch = var7,
-			loadingTime = var7,
-			loadingThreshold = var7,
-			nextPage = var7
+			status = var1,
+			fetch = var1,
+			loadingTime = var1,
+			loadingThreshold = var1,
+			nextPage = var1
 		},
 		additionalInfo = {
 			source = constantsModule.HomepageFriendsCarouselSourceName

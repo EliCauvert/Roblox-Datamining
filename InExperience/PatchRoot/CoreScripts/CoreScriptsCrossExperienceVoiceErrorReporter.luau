@@ -34,46 +34,46 @@ if not game:GetFastFlag("DisableCEVBacktraceReporting") and game:GetFastString("
 		UserAgent = httpService:GetUserAgent(),
 		CoreScriptVersion = runService:GetCoreScriptVersion()
 	}
-	local var12 = piiFilterModule.new({
+	local var1 = piiFilterModule.new({
 		eraseTimeout = game:GetFastInt("CEVBacktracePIIFilterEraseTimeoutSeconds")
 	})
 	local CEVBacktraceRepeatedErrorRateLimitingFastFlag = game:GetFastFlag("CEVBacktraceRepeatedErrorRateLimiting")
-	local var14 = if CEVBacktraceRepeatedErrorRateLimitingFastFlag then rateLimiterModule.new({
+	local var2 = if CEVBacktraceRepeatedErrorRateLimitingFastFlag then rateLimiterModule.new({
 		period = game:GetFastInt("CEVBacktraceRepeatedErrorRateLimitPeriod"),
 		threshold = game:GetFastInt("CEVBacktraceRepeatedErrorRateLimitCount"),
 		processInterval = game:GetFastInt("CEVBacktraceRepeatedErrorRateLimitProcessIntervalTenths") / 10
 	}) else nil
-	local var15 = backtraceReporter.new({
+	local var3 = backtraceReporter.new({
 		httpService = httpService,
 		token = game:GetFastString("CoreScriptBacktraceErrorUploadToken"),
-		processErrorReportMethod = function(p0)
+		processErrorReportMethod = function(p1)
 			-- upvalues: t (ref), playersService (ref), runService (ref)
-			p0:addAttributes(t)
-			p0:addAttributes({
+			p1:addAttributes(t)
+			p1:addAttributes({
 				PlayerCount = #playersService:GetPlayers(),
 				RobloxChannel = runService:GetRobloxClientChannel()
 			})
 			
-			return p0
+			return p1
 		end
 	})
 	
 	local function handleErrorDetailed(p1, p2, p3, p4)
-		-- upvalues: coreGuiService (ref), corePackagesService (ref), var12 (ref), CEVBacktraceRepeatedErrorRateLimitingFastFlag (ref), var14 (write), var15 (ref)
+		-- upvalues: coreGuiService (ref), corePackagesService (ref), var1 (ref), CEVBacktraceRepeatedErrorRateLimitingFastFlag (ref), var2 (write), var3 (ref)
 		if p3 ~= nil and (p3:IsDescendantOf(coreGuiService) or p3:IsDescendantOf(corePackagesService)) then
-			local var17 = var12:cleanPii(p1)
-			local var18 = var12:cleanPii(p2)
+			local var4 = var1:cleanPii(p1)
+			local var5 = var1:cleanPii(p2)
 			
 			if p4 ~= nil then
-				p4 = var12:cleanPii(p4)
+				p4 = var1:cleanPii(p4)
 			end
 			if CEVBacktraceRepeatedErrorRateLimitingFastFlag then
-				local text = var17 .. var18
+				local text = var4 .. var18
 				
-				if var14:isRateLimited(text) then return end
-				var14:increment(text)
+				if var2:isRateLimited(text) then return end
+				var2:increment(text)
 			end
-			var15:reportErrorDeferred(var17, var18, p4)
+			var3:reportErrorDeferred(var4, var5, p4)
 		end
 	end
 	

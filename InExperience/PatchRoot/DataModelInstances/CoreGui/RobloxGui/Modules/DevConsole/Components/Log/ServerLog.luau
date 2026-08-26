@@ -5,10 +5,10 @@ local devConsoleCommandLineModule = require(script.Parent.DevConsoleCommandLine)
 local logOutputModule = require(script.Parent.LogOutput)
 local serverLog = roactModule.Component:extend("ServerLog")
 
-function serverLog.init(p0)
+function serverLog.init(p1)
 	function p0.initServerLogData()
-		-- upvalues: p0 (ref)
-		return p0.props.ServerLogData:getLogData()
+		-- upvalues: p1 (ref)
+		return p1.props.ServerLogData:getLogData()
 	end
 end
 

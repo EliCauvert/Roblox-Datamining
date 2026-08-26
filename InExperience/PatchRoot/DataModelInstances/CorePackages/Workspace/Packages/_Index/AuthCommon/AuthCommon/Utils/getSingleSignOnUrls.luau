@@ -4,10 +4,10 @@ local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePo
 
 return function(value)
 	-- upvalues: getAppFeaturePolicies (ref), urlBuilder (ref)
-	local var0 = value or getAppFeaturePolicies()
-	local urlAuthRoutes = var0.getUrlAuthRoutes()
+	local var1 = value or getAppFeaturePolicies()
+	local urlAuthRoutes = var1.getUrlAuthRoutes()
 	local t = {}
-	local linkedAuthEndpointsEnabled = var0.getLinkedAuthEndpointsEnabled()
+	local linkedAuthEndpointsEnabled = var1.getLinkedAuthEndpointsEnabled()
 	
 	if urlAuthRoutes.account then
 		t.account = urlBuilder.fromString("auth" .. ":" .. urlAuthRoutes.account)
@@ -31,7 +31,7 @@ return function(value)
 		t.signup = urlBuilder.fromString("auth" .. ":" .. urlAuthRoutes.signup)
 	end
 	if linkedAuthEndpointsEnabled then
-		t.linkingPlatform = var0.getLinkingPlatform()
+		t.linkingPlatform = var1.getLinkingPlatform()
 	end
 	return t
 end

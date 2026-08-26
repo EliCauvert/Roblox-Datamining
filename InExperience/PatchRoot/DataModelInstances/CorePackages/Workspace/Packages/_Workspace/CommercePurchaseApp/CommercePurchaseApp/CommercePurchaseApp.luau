@@ -15,27 +15,27 @@ local selectPromptStateModule = require(commercePurchaseApp.Store.Selectors.sele
 
 return function()
 	-- upvalues: reactModule (ref), useSelector (ref), selectPromptStateModule (ref), useBenefitStatusReceivedListenerEffectModule (ref), usePurchaseBrowserClosedListenerEffectModule (ref), useCommerceProductPurchaseRequestListenerEffectModule (ref), commercePurchasePromptStateEnumModule (ref), guiService (ref), screenSizeContext (ref), focusNavigationModalSurface (ref), commercePurchaseErrorContainerModule (ref), toast (ref)
-	local var9, var10 = reactModule.useState(Vector2.new(0, 0))
-	local var11 = useSelector(selectPromptStateModule)
+	local var1, var2 = reactModule.useState(Vector2.new(0, 0))
+	local var3 = useSelector(selectPromptStateModule)
 	useBenefitStatusReceivedListenerEffectModule()
 	usePurchaseBrowserClosedListenerEffectModule()
 	useCommerceProductPurchaseRequestListenerEffectModule()
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), commercePurchasePromptStateEnumModule (copy), guiService (copy)
-		if var11 == commercePurchasePromptStateEnumModule.None then
+		-- upvalues: var3 (ref), commercePurchasePromptStateEnumModule (copy), guiService (copy)
+		if var3 == commercePurchasePromptStateEnumModule.None then
 			guiService.SelectedCoreObject = nil
 		end
-	end, { var11 })
+	end, { var3 })
 	
-	return if var11 == commercePurchasePromptStateEnumModule.None then nil else reactModule.createElement(screenSizeContext.Provider, { value = var9 }, reactModule.createElement("ScreenGui", {
-		[reactModule.Change.AbsoluteSize] = function(p0)
-			-- upvalues: var10 (ref)
-			var10(p0.AbsoluteSize)
+	return if var3 == commercePurchasePromptStateEnumModule.None then nil else reactModule.createElement(screenSizeContext.Provider, { value = var1 }, reactModule.createElement("ScreenGui", {
+		[reactModule.Change.AbsoluteSize] = function(p1)
+			-- upvalues: var2 (ref)
+			var2(p1.AbsoluteSize)
 		end,
 		ScreenInsets = Enum.ScreenInsets.None
 	}, {
 		FocusNavigationEffects = reactModule.createElement(focusNavigationModalSurface, { selectionGroupName = "CommercePurchaseApp" }, {
-			Error = if var11 == commercePurchasePromptStateEnumModule.Error then reactModule.createElement(commercePurchaseErrorContainerModule) else nil,
+			Error = if var3 == commercePurchasePromptStateEnumModule.Error then reactModule.createElement(commercePurchaseErrorContainerModule) else nil,
 			Toast = reactModule.createElement(toast)
 		})
 	}))

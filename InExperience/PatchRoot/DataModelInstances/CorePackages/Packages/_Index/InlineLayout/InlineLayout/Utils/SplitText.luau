@@ -1,7 +1,7 @@
 ﻿local textSplitByModule = require(script:FindFirstAncestor("Utils").Parent.Enums.TextSplitBy)
 
-local function _(p0)
-	return p0:match("%s") ~= nil
+local function _(p1)
+	return p1:match("%s") ~= nil
 end
 
 local _ = function(p1, p2)
@@ -13,19 +13,19 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p3, p4, p5, p6)
+function t.new(p1, p2, p3, p4)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
-	tbl._text = p3
-	tbl._initialGuess = tbl:_guessInitialBreak(p4, p5, p6)
+	tbl._text = p1
+	tbl._initialGuess = tbl:_guessInitialBreak(p2, p3, p4)
 	tbl._index = tbl._initialGuess
 	tbl:setDirection(1)
 	
 	return tbl
 end
 
-function t:_guessInitialBreak(_, p7, p8)
-	return math.max(math.floor(#self._text * p8 / p7), 1)
+function t:_guessInitialBreak(_, p1, p2)
+	return math.max(math.floor(#self._text * p2 / p1), 1)
 end
 
 function t:findPossibleBreak()
@@ -42,31 +42,31 @@ function t:findPossibleBreak()
 	return index
 end
 
-function t:setDirection(p9)
-	self.direction = p9
+function t:setDirection(p1)
+	self.direction = p1
 	
-	if p9 ~= 1 then
+	if p1 ~= 1 then
 		self._index = self._initialGuess
 	end
-	self._step = if p9 == 1 then 1 else -1
+	self._step = if p1 == 1 then 1 else -1
 end
 
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p10, p11, p12, p13)
+function t_1.new(p1, p2, p3, p4)
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
-	tbl._text = p10
-	tbl._initialGuess = tbl:_guessInitialBreak(p11, p12, p13)
+	tbl._text = p1
+	tbl._initialGuess = tbl:_guessInitialBreak(p2, p3, p4)
 	tbl._codepointIndex = tbl._initialGuess
 	tbl._step = 0
 	
 	return tbl
 end
 
-function t_1._guessInitialBreak(_, p14, p15, p16)
-	return math.max(math.floor(p14 * p16 / p15), 1)
+function t_1._guessInitialBreak(_, p1, p2, p3)
+	return math.max(math.floor(p1 * p3 / p2), 1)
 end
 
 function t_1:findPossibleBreak()
@@ -77,62 +77,62 @@ function t_1:findPossibleBreak()
 	return if byteOffset == nil then #text else byteOffset - 1
 end
 
-function t_1:setDirection(p17)
-	self.direction = p17
-	self._step = if p17 == 1 then 1 else -1
+function t_1:setDirection(p1)
+	self.direction = p1
+	self._step = if p1 == 1 then 1 else -1
 end
 
-local function splitWith(p18, p19, p20, p21, p22, p23)
-	local var8 = p18.new(p20, p21, p22, p23)
+local function splitWith(p1, p2, p3, p4, p5, p6)
+	local var1 = p1.new(p3, p4, p5, p6)
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var9 = var8:findPossibleBreak()
-	local var10 = p20:sub(1, var9)
-	local var11 = if p23 < p19(var10) then -1 else 1
-	local var12 = var9
-	var8:setDirection(var11)
-	local var13 = 0
-	while var13 < p21 do
-		var9 = var8:findPossibleBreak()
-		var10 = p20:sub(1, var9)
-		local var14 = if p23 < p19(var10) then -1 else 1
+	local var2 = var1:findPossibleBreak()
+	local var3 = p3:sub(1, var2)
+	local var4 = if p6 < p2(var3) then -1 else 1
+	local var5 = var2
+	var1:setDirection(var4)
+	local var6 = 0
+	while var6 < p4 do
+		var2 = var1:findPossibleBreak()
+		var3 = p3:sub(1, var2)
+		local var7 = if p6 < p2(var3) then -1 else 1
 		
-		if var11 == var14 then
-			var11 = var14
-			var12 = var9
-			var13 += 1
+		if var4 == var7 then
+			var4 = var7
+			var5 = var2
+			var6 += 1
 			continue
 		end
-		if var11 ~= 1 then break end
-		var9 = var12
-		var10 = p20:sub(1, var9)
+		if var4 ~= 1 then break end
+		var2 = var5
+		var3 = p3:sub(1, var2)
 		
-		return var10, var9
+		return var3, var2
 	end
-	return var10, var9
+	return var3, var2
 end
 
-return function(p24, p25, p26, p27)
+return function(p7, p8, p9, p10)
 	-- upvalues: textSplitByModule (ref), t (ref), t_1 (ref), splitWith (ref)
-	local charCount = utf8.len(p26)
+	local charCount = utf8.len(p9)
 	
 	if charCount == nil then
 		warn("Failed to get string length, it is probably malformed or non utf8")
 		
-		return p26
+		return p9
 	end
-	local var16 = p25(p26)
+	local var8 = p8(p9)
 	
-	if var16 <= p27 then
-		return p26
+	if var8 <= p10 then
+		return p9
 	end
-	local var17, var18 = splitWith(if p24 == textSplitByModule.Word then t else t_1, p25, p26, charCount, var16, p27)
+	local var9, var10 = splitWith(if p7 == textSplitByModule.Word then t else t_1, p8, p9, charCount, var8, p10)
 	
-	if var18 == 0 or var18 == #p26 then
-		return p26
+	if var10 == 0 or var10 == #p9 then
+		return p9
 	end
-	return var17, p26:sub(var18 + 1)
+	return var9, p9:sub(var10 + 1)
 end

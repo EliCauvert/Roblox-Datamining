@@ -4,42 +4,42 @@ local parseContentIdsModule = require(parent.util.ParseContentIds)
 local getFFlagUGCValidateEmptySurfaceAppearanceModule = require(parent.flags.getFFlagUGCValidateEmptySurfaceAppearance)
 local t = {}
 
-local function findSurfaceAppearances(p0, p1)
+local function findSurfaceAppearances(p1, p2)
 	-- upvalues: UGCValidationService (ref), parseContentIdsModule (ref), getFFlagUGCValidateEmptySurfaceAppearanceModule (ref)
 	local t = {}
 	local t_1 = {}
-	local descendants = p0:GetDescendants()
-	table.insert(descendants, p0)
+	local descendants = p1:GetDescendants()
+	table.insert(descendants, p1)
 	
 	for i, v in descendants do
 		if v:IsA("SurfaceAppearance") then
-			local var8 = UGCValidationService:GetPropertyValue(v, "TexturePack")
+			local var1 = UGCValidationService:GetPropertyValue(v, "TexturePack")
 			
-			if if var8 then parseContentIdsModule.tryGetAssetIdFromContentId(var8) else nil then
+			if if var1 then parseContentIdsModule.tryGetAssetIdFromContentId(var1) else nil then
 				table.insert(t, v)
 			elseif getFFlagUGCValidateEmptySurfaceAppearanceModule() then
-				local var9
+				local var2
 				if v.ColorMap then
-					var9 = true
+					var2 = true
 					
 					if v.ColorMap == "" then
 						if v.MetalnessMap then
-							var9 = true
+							var2 = true
 							
 							if v.MetalnessMap == "" then
 								if v.NormalMap then
-									var9 = true
+									var2 = true
 									
 									if v.NormalMap == "" then
 										if v.RoughnessMap then
-											var9 = if v.RoughnessMap == "" then v.EmissiveMaskContent and (v.EmissiveMaskContent.SourceType == Enum.ContentSourceType.Uri and (v.EmissiveMaskContent.Uri and v.EmissiveMaskContent.Uri ~= "")) else true
+											var2 = if v.RoughnessMap == "" then v.EmissiveMaskContent and (v.EmissiveMaskContent.SourceType == Enum.ContentSourceType.Uri and (v.EmissiveMaskContent.Uri and v.EmissiveMaskContent.Uri ~= "")) else true
 										end
 									end
 								end
 							end
 						end
 					end
-					if var9 or not p1 then
+					if var2 or not p2 then
 						table.insert(t_1, v)
 					end
 				end
@@ -51,16 +51,16 @@ local function findSurfaceAppearances(p0, p1)
 	return t, t_1
 end
 
-function t.findSurfaceAppearancesMissingTexturePacks(p2, p3)
+function t.findSurfaceAppearancesMissingTexturePacks(p3, p4)
 	-- upvalues: findSurfaceAppearances (ref)
-	local _, var10 = findSurfaceAppearances(p2, p3)
+	local _, var3 = findSurfaceAppearances(p3, p4)
 	
-	return var10
+	return var3
 end
 
-function t.findSurfaceAppearancesWithTexturePacks(p4)
+function t.findSurfaceAppearancesWithTexturePacks(p3)
 	-- upvalues: findSurfaceAppearances (ref)
-	return findSurfaceAppearances(p4, false)
+	return findSurfaceAppearances(p3, false)
 end
 
 return t

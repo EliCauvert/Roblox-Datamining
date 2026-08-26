@@ -15,43 +15,43 @@ local luaInExpSchedulerLookbackUseRingBuffer = game:DefineFastInt("LuaInExpSched
 local luaInExpSchedulerDesiredFrameRate = game:DefineFastInt("LuaInExpSchedulerDesiredFrameRate", -1)
 local luaInExpSchedulerMinimumFrameRate = game:DefineFastInt("LuaInExpSchedulerMinimumFrameRate", -1)
 
-local function buildFlags(p0, p1, p2, p3, p4, p5, p6, p7)
+local function buildFlags(p1, p2, p3, p4, p5, p6, p7, p8)
 	local t = {}
-	local var18 = false
+	local var1 = false
 	
-	if p0 ~= -1 then
-		t.yieldInterval = p0
-		var18 = true
-	end
 	if p1 ~= -1 then
-		t.deferredWork = p1 == 1
-		var18 = true
+		t.yieldInterval = p1
+		var1 = true
 	end
 	if p2 ~= -1 then
-		t.heartbeatFrameMarker = p2 == 1
-		var18 = true
+		t.deferredWork = p2 == 1
+		var1 = true
 	end
 	if p3 ~= -1 then
-		t.targetMsByHeartbeatDelta = p3 == 1
-		var18 = true
+		t.heartbeatFrameMarker = p3 == 1
+		var1 = true
 	end
 	if p4 ~= -1 then
-		t.numberOfLookbackFrames = p4
-		var18 = true
+		t.targetMsByHeartbeatDelta = p4 == 1
+		var1 = true
 	end
 	if p5 ~= -1 then
-		t.lookbackUseRingBuffer = p5 == 1
-		var18 = true
+		t.numberOfLookbackFrames = p5
+		var1 = true
 	end
 	if p6 ~= -1 then
-		t.desiredFrameRate = p6
-		var18 = true
+		t.lookbackUseRingBuffer = p6 == 1
+		var1 = true
 	end
 	if p7 ~= -1 then
-		t.minimumFrameRate = p7
-		var18 = true
+		t.desiredFrameRate = p7
+		var1 = true
 	end
-	return if var18 then t else nil
+	if p8 ~= -1 then
+		t.minimumFrameRate = p8
+		var1 = true
+	end
+	return if var1 then t else nil
 end
 
 return {

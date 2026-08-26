@@ -9,29 +9,29 @@ local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 local constants = UIBloxModule.App.Style.Constants
 local colorMode = require(corePackagesService.Packages.Foundation).Enums.ColorMode
 
-local function dumpInstanceTree(p0, p1)
+local function dumpInstanceTree(p1, p2)
 	-- upvalues: dumpInstanceTree (ref)
-	p1 = p1 or ""
+	p2 = p2 or ""
 	
-	if p0 == nil then
-		print(p1 .. "[nil Instance]")
+	if p1 == nil then
+		print(p2 .. "[nil Instance]")
 		
 		return
 	end
-	print(p1 .. p0.Name)
-	p1 ..= "  "
+	print(p2 .. p0.Name)
+	p2 ..= "  "
 	
-	for i, v in ipairs(p0:GetChildren()) do
-		dumpInstanceTree(v, p1)
+	for i, v in ipairs(p1:GetChildren()) do
+		dumpInstanceTree(v, p2)
 	end
 end
 
-return function(p2, p3, p4, p5, p6)
+return function(p3, p4, p5, p6, p7)
 	-- upvalues: roduxModule (ref), roactModule (ref), roactRoduxModule (ref), appStyleProvider (ref), colorMode (ref), constants (ref), httpService (ref), coreGuiService (ref), dumpInstanceTree (ref)
 	local text = "Test-" .. httpService:GenerateGUID(false)
-	local var9 = roactModule.mount(roactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
-		[tostring(p3)] = roactModule.createElement(roactRoduxModule.StoreProvider, {
-			store = roduxModule.Store.new(p4, p5 or {}, { roduxModule.thunkMiddleware })
+	local var1 = roactModule.mount(roactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
+		[tostring(p4)] = roactModule.createElement(roactRoduxModule.StoreProvider, {
+			store = roduxModule.Store.new(p5, p6 or {}, { roduxModule.thunkMiddleware })
 		}, {
 			AppStyleProvider = roactModule.createElement(appStyleProvider, {
 				style = {
@@ -39,14 +39,14 @@ return function(p2, p3, p4, p5, p6)
 					fontName = constants.FontName.Gotham
 				}
 			}, {
-				Folder = roactModule.createElement("Folder", {}, { Root = roactModule.createElement(p3, p6 or {}) })
+				Folder = roactModule.createElement("Folder", {}, { Root = roactModule.createElement(p4, p7 or {}) })
 			})
 		})
 	}), coreGuiService, text)
-	local var10 = ("game.CoreGui.%s.*[ClassName=Folder].*"):format(text)
+	local var2 = ("game.CoreGui.%s.*[ClassName=Folder].*"):format(text)
 	local ok, status = pcall(function()
-		-- upvalues: p2 (ref), var10 (ref)
-		p2(var10)
+		-- upvalues: p3 (ref), var2 (ref)
+		p3(var2)
 	end)
 	
 	if not ok then
@@ -54,7 +54,7 @@ return function(p2, p3, p4, p5, p6)
 		dumpInstanceTree(coreGuiService:FindFirstChild(text))
 		print()
 	end
-	roactModule.unmount(var9)
+	roactModule.unmount(var1)
 	
 	if not ok then
 		error(status)

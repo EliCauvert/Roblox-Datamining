@@ -2,13 +2,13 @@
 local cryoModule = require(profilePlatform.Parent.Cryo)
 local _ = require(profilePlatform.Common.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref)
-	return if p0 then cryoModule.Dictionary.map(p0, function(p1)
+	return if p1 then cryoModule.Dictionary.map(p1, function(p2)
 		return {
-			id = p1.experienceId,
-			universeId = tonumber(p1.experienceId),
-			placeId = tonumber(p1.rootPlaceId)
+			id = p2.experienceId,
+			universeId = tonumber(p2.experienceId),
+			placeId = tonumber(p2.rootPlaceId)
 		}
 	end) else {}
 end

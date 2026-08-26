@@ -1,9 +1,9 @@
-﻿local function handleNoYieldValidation(p0, p1, ...)
-	if not p1 then
+﻿local function handleNoYieldValidation(p1, p2, ...)
+	if not p2 then
 		local var1 = ...
 		
 		if typeof(var1) == "string" then
-			error(debug.traceback(p0, var1), 2)
+			error(debug.traceback(p1, var1), 2)
 		else
 			error(tostring(var1), 2)
 		end
@@ -14,11 +14,11 @@
 	return ...
 end
 
-return if _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__ then function(p3, ...)
+return if _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__ then function(p1, ...)
 	-- upvalues: handleNoYieldValidation (ref)
-	local thread = coroutine.create(p3)
+	local thread = coroutine.create(p1)
 	
 	return handleNoYieldValidation(thread, coroutine.resume(thread, ...))
-end else function(p2, ...)
-	return p2(...)
+end else function(p1, ...)
+	return p1(...)
 end

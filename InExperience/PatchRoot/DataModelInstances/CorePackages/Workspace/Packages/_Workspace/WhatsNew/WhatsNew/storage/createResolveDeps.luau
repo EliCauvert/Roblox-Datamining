@@ -12,10 +12,10 @@ local function _()
 end
 
 return {
-	createResolveDeps = function(p0)
+	createResolveDeps = function(p1)
 		-- upvalues: playersService (ref), entryStorageModule (ref), constantsModule (ref)
-		p0 = p0 or {}
-		local accountAgeDays = p0.accountAgeDays
+		p1 = p1 or {}
+		local accountAgeDays = p1.accountAgeDays
 		
 		if not accountAgeDays then
 			local localPlayer = playersService.LocalPlayer
@@ -24,7 +24,7 @@ return {
 		return {
 			storage = entryStorageModule.getEntries(),
 			onboardingEligible = accountAgeDays < constantsModule.OnboardingAccountAge,
-			currentTime = p0.currentTime or DateTime.now().UnixTimestamp
+			currentTime = p1.currentTime or DateTime.now().UnixTimestamp
 		}
 	end
 }

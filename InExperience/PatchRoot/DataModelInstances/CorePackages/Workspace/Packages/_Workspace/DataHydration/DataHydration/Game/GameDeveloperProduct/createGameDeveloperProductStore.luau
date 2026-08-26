@@ -14,81 +14,81 @@ local _ = require(script.Parent.GameDeveloperProductStoreTypes)
 local fetchGameDeveloperProductStatusesModule = require(script.Parent.fetchGameDeveloperProductStatuses)
 local fFlagLuaAppUseGameTransactionsApiForReceipts = sharedFlagsModule.FFlagLuaAppUseGameTransactionsApiForReceipts
 
-local function _(p0, p1)
-	return p0 .. "|" .. p1
+local function _(p1, p2)
+	return p1 .. "|" .. p1
 end
 
 return function()
 	-- upvalues: createDataCacheModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagEnableHomeGameItemOwnershipUpdate (ref), createDataResolverModule (ref), logResponseError (ref), fFlagLuaAppUseGameTransactionsApiForReceipts (ref), discoveryEventErrorLogger (ref), promiseModule (ref), fetchGameDeveloperProductStatusesModule (ref)
-	local var7 = createDataCacheModule()
-	local var8 = nil
-	local var9 = nil
+	local var1 = createDataCacheModule()
+	local var2 = nil
+	local var3 = nil
 	
 	if fFlagSduiDevStoreSeeAllSupport or fFlagEnableHomeGameItemOwnershipUpdate then
-		var8 = createDataCacheModule()
-		var9 = createDataResolverModule({
+		var2 = createDataCacheModule()
+		var3 = createDataResolverModule({
 			supportsMultiGet = false,
-			cache = var8,
-			logError = function(p2)
+			cache = var2,
+			logError = function(p1)
 				-- upvalues: logResponseError (copy), fFlagLuaAppUseGameTransactionsApiForReceipts (copy), discoveryEventErrorLogger (copy)
 				logResponseError(if fFlagLuaAppUseGameTransactionsApiForReceipts then "game-transactions/v1/receipts" else "developer-products/v1/game-transactions", {
-					StatusCode = if type(p2) == "table" and p2.StatusCode then p2.StatusCode else nil
+					StatusCode = if type(p1) == "table" and p1.StatusCode then p1.StatusCode else nil
 				})
-				discoveryEventErrorLogger.reportError("GameDeveloperProductStore", "Failed to fetch developer product statuses", { err = tostring(p2) })
+				discoveryEventErrorLogger.reportError("GameDeveloperProductStore", "Failed to fetch developer product statuses", { err = tostring(p1) })
 			end,
-			fetchFn = function(p3, p4)
-				-- upvalues: promiseModule (copy), fetchGameDeveloperProductStatusesModule (copy), var7 (ref)
-				local match, match_1 = string.match(p3, "^(.-)|(.+)$")
+			fetchFn = function(p1, p2)
+				-- upvalues: promiseModule (copy), fetchGameDeveloperProductStatusesModule (copy), var1 (ref)
+				local match, match_1 = string.match(p1, "^(.-)|(.+)$")
 				
-				return if match == nil or match_1 == nil then promiseModule.reject("Invalid developer product statuses key: " .. tostring(p3)) else fetchGameDeveloperProductStatusesModule.fetch(match, match_1):andThen(function(p5)
-					-- upvalues: p4 (ref), var7 (copy)
+				return if match == nil or match_1 == nil then promiseModule.reject("Invalid developer product statuses key: " .. tostring(p1)) else fetchGameDeveloperProductStatusesModule.fetch(match, match_1):andThen(function(p3)
+					-- upvalues: p2 (ref), var1 (copy)
 					local t = {}
 					
-					for i, v in p5.counts do
+					for i, v in p3.counts do
 						t[i] = { pendingReceiptCount = v }
 					end
-					local var13 = p4 and p4.data(false)
+					local var4 = p2 and p2.data(false)
 					
-					if var13 and var13.counts then
-						for i_1 in var13.counts do
-							if p5.counts[i_1] == nil then
+					if var4 and var4.counts then
+						for i_1 in var4.counts do
+							if p3.counts[i_1] == nil then
 								t[i_1] = { pendingReceiptCount = 0 }
 							end
 						end
 					end
 					if next(t) ~= nil then
-						var7.updateItems(t)
+						var1.updateItems(t)
 					end
-					return p5
+					return p3
 				end)
 			end
 		})
 	end
 	return {
-		getGameDeveloperProductInfo = var7.getItem,
-		updateGameDeveloperProductInfos = var7.updateItems,
-		fetchStatuses = function(p6, p7)
-			-- upvalues: var9 (write)
-			if var9 then
-				var9.fetchItem(p6 .. "|" .. p7)
+		getGameDeveloperProductInfo = var1.getItem,
+		updateGameDeveloperProductInfos = var1.updateItems,
+		fetchStatuses = function(p3, p4)
+			-- upvalues: var3 (write)
+			if var3 then
+				var3.fetchItem(p3 .. "|" .. p7)
 			end
 		end,
 		clear = function()
-			-- upvalues: var8 (write), var9 (write), var7 (ref)
-			if var8 then
-				var8.clear()
+			-- upvalues: var2 (write), var3 (write), var1 (ref)
+			if var2 then
+				var2.clear()
 			end
-			if var9 then
-				var9.clear()
+			if var3 then
+				var3.clear()
 			end
-			var7.clear()
+			var1.clear()
 		end,
 		dispose = function()
-			-- upvalues: var9 (write), var7 (ref)
-			if var9 then
-				var9.dispose()
+			-- upvalues: var3 (write), var1 (ref)
+			if var3 then
+				var3.dispose()
 			end
-			var7.dispose()
+			var1.dispose()
 		end
 	}
 end

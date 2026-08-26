@@ -10,25 +10,25 @@ local list = {
 	"socialLinkDisplayType"
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: list (ref), getActionTelemetryFieldValue (ref), sduiErrorType (ref), sendOpenLeavingRobloxModalEvent (ref)
 	local t = {}
 	
 	for i, v in list do
-		if getActionTelemetryFieldValue(p0, p1, v) == nil then
+		if getActionTelemetryFieldValue(p1, p2, v) == nil then
 			table.insert(t, v)
 		end
 	end
 	if #t > 0 then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "LeavingRobloxTelemetryHandler",
 			message = `Missing telemetry fields: {table.concat(t, ", ")}`
-		}, p2.appPage)
+		}, p3.appPage)
 	end
 	sendOpenLeavingRobloxModalEvent({
-		assignment_id = tonumber(getActionTelemetryFieldValue(p0, p1, "assignmentId", 0)) or 0,
-		assignment_type = getActionTelemetryFieldValue(p0, p1, "assignmentType", ""),
-		social_link_type = getActionTelemetryFieldValue(p0, p1, "socialLinkType", ""),
-		social_link_display_type = getActionTelemetryFieldValue(p0, p1, "socialLinkDisplayType", "")
+		assignment_id = tonumber(getActionTelemetryFieldValue(p1, p2, "assignmentId", 0)) or 0,
+		assignment_type = getActionTelemetryFieldValue(p1, p2, "assignmentType", ""),
+		social_link_type = getActionTelemetryFieldValue(p1, p2, "socialLinkType", ""),
+		social_link_display_type = getActionTelemetryFieldValue(p1, p2, "socialLinkDisplayType", "")
 	})
 end

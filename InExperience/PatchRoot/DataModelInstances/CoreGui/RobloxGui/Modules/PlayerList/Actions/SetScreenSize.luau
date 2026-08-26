@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetScreenSize", function(p0, p1)
-	return { sizeX = p0, sizeY = p1 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetScreenSize", function(p1, p2)
+	return { sizeX = p1, sizeY = p2 }
 end)

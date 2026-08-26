@@ -1,11 +1,11 @@
 ﻿local memStorageService = game:GetService("MemStorageService")
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: memStorageService (ref)
-	if p1 == nil then return end
-	if memStorageService:HasItem(p0) then
+	if p2 == nil then return end
+	if memStorageService:HasItem(p1) then
 		return
 	end
-	memStorageService:SetItem(p0, "true")
-	p1()
+	memStorageService:SetItem(p1, "true")
+	p2()
 end

@@ -80,26 +80,26 @@ local function ProgressGradient(p1)
 	local var1 = useTokensModule()
 	
 	return if isIndeterminate and usePreferencesModule().reducedMotion and pulse then reactModule.createElement("UIGradient", {
-		Transparency = pulse:map(function(p1)
+		Transparency = pulse:map(function(p2)
 			-- upvalues: var1 (ref)
-			return NumberSequence.new(math.lerp(var1.Color.Content.Emphasis.Transparency, var1.Color.Shift.Shift_200.Transparency, p1))
+			return NumberSequence.new(math.lerp(var1.Color.Content.Emphasis.Transparency, var1.Color.Shift.Shift_200.Transparency, p2))
 		end),
-		Color = pulse:map(function(p1)
+		Color = pulse:map(function(p2)
 			-- upvalues: var1 (ref)
-			return ColorSequence.new(var1.Color.Content.Emphasis.Color3:Lerp(var1.Color.Shift.Shift_200.Color3, p1))
+			return ColorSequence.new(var1.Color.Content.Emphasis.Color3:Lerp(var1.Color.Shift.Shift_200.Color3, p2))
 		end),
 		Rotation = if side == Enum.HorizontalAlignment.Left then 0 else 180
 	}) else reactModule.createElement("UIGradient", {
 		Transparency = reactModule.useMemo(function()
 			-- upvalues: var1 (ref), isIndeterminate (ref)
 			local transparency = var1.Color.Content.Emphasis.Transparency
-			local var1 = if isIndeterminate then 1 else var1.Color.Shift.Shift_200.Transparency
+			local var2 = if isIndeterminate then 1 else var2.Color.Shift.Shift_200.Transparency
 			
 			return NumberSequence.new({
 				NumberSequenceKeypoint.new(0, transparency),
 				NumberSequenceKeypoint.new(0.4999, transparency),
-				NumberSequenceKeypoint.new(0.5, var1),
-				NumberSequenceKeypoint.new(1, var1)
+				NumberSequenceKeypoint.new(0.5, var2),
+				NumberSequenceKeypoint.new(1, var2)
 			})
 		end, { var1, isIndeterminate }),
 		Color = reactModule.useMemo(function()
@@ -111,9 +111,9 @@ local function ProgressGradient(p1)
 				ColorSequenceKeypoint.new(1, var1.Color.Shift.Shift_200.Color3)
 			})
 		end, { var1 }),
-		Rotation = mapBindableModule(progress, function(p1)
+		Rotation = mapBindableModule(progress, function(p2)
 			-- upvalues: side (ref)
-			return if p1 == nil then 0 else math.clamp(p1 * 360, if side == Enum.HorizontalAlignment.Left then 180 else 0, if side == Enum.HorizontalAlignment.Left then 360 else 180)
+			return if p2 == nil then 0 else math.clamp(p2 * 360, if side == Enum.HorizontalAlignment.Left then 180 else 0, if side == Enum.HorizontalAlignment.Left then 360 else 180)
 		end)
 	})
 end

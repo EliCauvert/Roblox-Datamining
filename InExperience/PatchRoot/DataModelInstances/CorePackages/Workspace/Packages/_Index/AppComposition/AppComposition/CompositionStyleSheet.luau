@@ -8,21 +8,21 @@ local setupCompositionStyleRulesModule = require(appComposition.setupComposition
 
 return function()
 	-- upvalues: reactModule (ref), useStyleSheet (ref), useTokens (ref), setupCompositionStyleRulesModule (ref)
-	local var4 = reactModule.useRef(nil)
-	local var5 = useStyleSheet()
-	local var6 = useTokens()
+	local var1 = reactModule.useRef(nil)
+	local var2 = useStyleSheet()
+	local var3 = useTokens()
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var4 (ref), var5 (ref), setupCompositionStyleRulesModule (copy), var6 (ref)
-		if var4.current and var5 then
-			var4.current:SetDerives({ var5 })
+		-- upvalues: var1 (ref), var2 (ref), setupCompositionStyleRulesModule (copy), var3 (ref)
+		if var1.current and var2 then
+			var1.current:SetDerives({ var2 })
 			
-			return setupCompositionStyleRulesModule(var4.current, var6)
+			return setupCompositionStyleRulesModule(var1.current, var3)
 		end
 		return function() end
-	end, { var4, var5, var6 })
+	end, { var1, var2, var3 })
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		CompositionStyleSheet = reactModule.createElement("StyleSheet", { ref = var4 }),
-		CompositionStyleLink = reactModule.createElement("StyleLink", { StyleSheet = var4.current })
+		CompositionStyleSheet = reactModule.createElement("StyleSheet", { ref = var1 }),
+		CompositionStyleLink = reactModule.createElement("StyleLink", { StyleSheet = var1.current })
 	})
 end

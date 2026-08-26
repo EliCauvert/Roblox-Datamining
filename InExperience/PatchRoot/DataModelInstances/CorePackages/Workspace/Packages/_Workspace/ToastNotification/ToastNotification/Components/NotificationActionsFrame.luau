@@ -22,45 +22,45 @@ local useNotificationCardStateModule = require(context.useNotificationCardState)
 local useNotificationCardDataModule = require(context.useNotificationCardData)
 local useTimeRemainingMapModule = require(hooks.useTimeRemainingMap)
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: typeModule (ref), buttonType (ref)
-	return if p0 == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif p0 == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif p0 == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif p0 == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
+	return if p1 == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif p1 == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif p1 == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif p1 == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
 end
 
-local var8 = function(p1, p2, p3, p4)
+local var1 = function(p1, p2, p3, p4)
 	-- upvalues: useNotificationCardDataModule (ref), getTimerFromCardData (ref), useTimeRemainingMapModule (ref), typeModule (ref), buttonType (ref)
-	local var9 = useNotificationCardDataModule()
+	local var2 = useNotificationCardDataModule()
 	local _ = nil
 	local t = {}
 	
 	for i, v in ipairs(p1) do
 		if v.timer and v.timer.showTimeOnElement then
-			t[v.timer.showTimeOnElement] = getTimerFromCardData(var9, v.timer.showTimeOnElement)
+			t[v.timer.showTimeOnElement] = getTimerFromCardData(var2, v.timer.showTimeOnElement)
 		end
 	end
-	local var11 = useTimeRemainingMapModule(t, var9)
+	local var3 = useTimeRemainingMapModule(t, var2)
 	local t_1 = {}
 	
 	if p1 then
 		for i_1, v_1 in ipairs(p1) do
-			local var13, text
+			local var4, text
 			local _ = nil
 			
 			if v_1 and v_1.timer and v_1.timer.showTimeOnElement then
-				var13 = `{v_1.label.text} ({var11[v_1.timer.showTimeOnElement]}{p2.secondsAbbreviated})`
+				var4 = `{v_1.label.text} ({var3[v_1.timer.showTimeOnElement]}{p2.secondsAbbreviated})`
 				local buttonStyle = v_1.buttonStyle
-				local var14 = if buttonStyle == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
+				local var5 = if buttonStyle == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
 				table.insert(t_1, {
-					buttonType = var14,
+					buttonType = var5,
 					props = {
-						text = var13,
+						text = var4,
 						onActivated = function()
 							-- upvalues: p3 (ref), v_1 (ref)
 							if p3 then
 								p3(v_1)
 							end
 						end,
-						buttonRef = if var14 == buttonType.PrimaryContextual then p4 else nil
+						buttonRef = if var5 == buttonType.PrimaryContextual then p4 else nil
 					}
 				})
 			end
@@ -70,7 +70,7 @@ local var8 = function(p1, p2, p3, p4)
 				if not text then
 					text = ""
 				end
-				var13 = text
+				var4 = text
 			end
 		end
 	end
@@ -78,32 +78,32 @@ local var8 = function(p1, p2, p3, p4)
 end
 
 return function(p5)
-	-- upvalues: useNotificationCardStateModule (ref), useNotificationCardDataModule (ref), useLocalization (ref), reactModule (ref), useFocusGuiObject (ref), var8 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), buttonStack (ref), defaultButtonHeight (ref), defaultContentPadding (ref)
-	local var15 = useNotificationCardStateModule("button")
+	-- upvalues: useNotificationCardStateModule (ref), useNotificationCardDataModule (ref), useLocalization (ref), reactModule (ref), useFocusGuiObject (ref), var1 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), buttonStack (ref), defaultButtonHeight (ref), defaultContentPadding (ref)
+	local var6 = useNotificationCardStateModule("button")
 	local handleActions = useNotificationCardDataModule().handleActions
-	local var16 = useLocalization({
+	local var7 = useLocalization({
 		secondsAbbreviated = "Feature.Notifications.Label.SecondsAbbreviated"
 	})
 	local shouldAutoFocus = p5.shouldAutoFocus
-	local var17 = reactModule.useRef(nil)
-	local var18 = useFocusGuiObject()
+	local var8 = reactModule.useRef(nil)
+	local var9 = useFocusGuiObject()
 	reactModule.useEffect(function()
-		-- upvalues: shouldAutoFocus (ref), var17 (ref), var18 (ref)
+		-- upvalues: shouldAutoFocus (ref), var8 (ref), var9 (ref)
 		if not shouldAutoFocus then return end
-		local current = var17.current
+		local current = var8.current
 		
 		if current then
-			var18(current)
+			var9(current)
 			
 			return function()
-				-- upvalues: var18 (copy)
-				var18(nil)
+				-- upvalues: var9 (copy)
+				var9(nil)
 			end
 		end
-	end, { shouldAutoFocus, var18 })
-	local var19 = var8(var15, var16, handleActions, var17)
+	end, { shouldAutoFocus, var9 })
+	local var10 = var1(var6, var7, handleActions, var8)
 	
-	return if #var19 > 0 then reactModule.createElement("Frame", {
+	return if #var10 > 0 then reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -115,9 +115,9 @@ return function(p5)
 			isFocusable = shouldAutoFocus,
 			isAutoFocusRoot = shouldAutoFocus
 		}, {
-			ActionButtons = var19 and reactModule.createElement(buttonStack, {
+			ActionButtons = var10 and reactModule.createElement(buttonStack, {
 				buttonHeight = defaultButtonHeight,
-				buttons = var19,
+				buttons = var10,
 				marginBetween = defaultContentPadding
 			})
 		})

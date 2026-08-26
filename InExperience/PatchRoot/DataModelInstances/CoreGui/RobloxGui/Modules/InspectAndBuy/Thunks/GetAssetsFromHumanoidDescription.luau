@@ -35,32 +35,32 @@ local function getAssetIds(value)
 	return t
 end
 
-return function(value, p0)
+return function(value, p1)
 	-- upvalues: thunkModule (ref), t (ref), getAssetIds (ref), fFlagAXEnableRegionalFilteringofAssetsModule (ref), batchGetAssetsModule (ref), getProductInfoModule (ref), getAssetBundlesModule (ref), getVersionInfoModule (ref), setAssetsModule (ref), setEquippedAssetsModule (ref)
-	return thunkModule.new(script.Name, t, function(p1, _)
-		-- upvalues: getAssetIds (copy), value (ref), p0 (ref), fFlagAXEnableRegionalFilteringofAssetsModule (copy), batchGetAssetsModule (copy), getProductInfoModule (copy), getAssetBundlesModule (copy), getVersionInfoModule (copy), setAssetsModule (copy), setEquippedAssetsModule (copy)
-		local var13 = getAssetIds(value)
+	return thunkModule.new(script.Name, t, function(p2, _)
+		-- upvalues: getAssetIds (copy), value (ref), p1 (ref), fFlagAXEnableRegionalFilteringofAssetsModule (copy), batchGetAssetsModule (copy), getProductInfoModule (copy), getAssetBundlesModule (copy), getVersionInfoModule (copy), setAssetsModule (copy), setEquippedAssetsModule (copy)
+		local var1 = getAssetIds(value)
 		
-		if p0 then
-			p1:dispatch(setEquippedAssetsModule(var13))
+		if p1 then
+			p2:dispatch(setEquippedAssetsModule(var1))
 			
 			return
 		elseif fFlagAXEnableRegionalFilteringofAssetsModule then
-			p1:dispatch(batchGetAssetsModule(var13))
+			p2:dispatch(batchGetAssetsModule(var1))
 			
 			return
 		end
-		for i, v in ipairs(var13) do
+		for i, v in ipairs(var1) do
 			coroutine.wrap(function()
-				-- upvalues: p1 (ref), getProductInfoModule (copy), v (ref), getAssetBundlesModule (copy), getVersionInfoModule (copy)
-				p1:dispatch(getProductInfoModule(v.assetId))
+				-- upvalues: p2 (ref), getProductInfoModule (copy), v (ref), getAssetBundlesModule (copy), getVersionInfoModule (copy)
+				p2:dispatch(getProductInfoModule(v.assetId))
 				
 				if v.parentBundleId == nil then
-					p1:dispatch(getAssetBundlesModule(v.assetId))
+					p2:dispatch(getAssetBundlesModule(v.assetId))
 				end
-				p1:dispatch(getVersionInfoModule(v.assetId))
+				p2:dispatch(getVersionInfoModule(v.assetId))
 			end)()
 		end
-		p1:dispatch(setAssetsModule(var13))
+		p2:dispatch(setAssetsModule(var1))
 	end)
 end

@@ -6,14 +6,14 @@ local toShopItem = shopItemMappingModule.toShopItem
 local gamePass = Enum.InfoType.GamePass
 
 return {
-	appendBonusItemRequests = function(p0, p1)
+	appendBonusItemRequests = function(p1, p2)
 		-- upvalues: makeRequestKey (ref), gamePass (ref)
 		local t = {}
 		
-		for i, v in ipairs(p0) do
+		for i, v in ipairs(p1) do
 			t[makeRequestKey(v.id, v.infoType)] = true
 		end
-		for i, v_1 in ipairs(p1) do
+		for i, v_1 in ipairs(p2) do
 			local robuxPackages = v_1.robuxPackages
 			
 			if robuxPackages ~= nil then
@@ -21,28 +21,28 @@ return {
 					local bonusItem = v_2.bonusItem
 					
 					if bonusItem ~= nil and bonusItem.type == "GamePass" then
-						local var2 = makeRequestKey(bonusItem.id, gamePass)
+						local var1 = makeRequestKey(bonusItem.id, gamePass)
 						
-						if not t[var2] then
-							t[var2] = true
-							table.insert(p0, { id = bonusItem.id, infoType = gamePass })
+						if not t[var1] then
+							t[var1] = true
+							table.insert(p1, { id = bonusItem.id, infoType = gamePass })
 						end
 					end
 				end
 			end
 		end
-		return p0
+		return p1
 	end,
-	mergeBonusItemDetailsIntoSections = function(p2, p3)
+	mergeBonusItemDetailsIntoSections = function(p3, p4)
 		-- upvalues: makeRequestKey (ref), gamePass (ref), toShopItem (ref)
 		local t = {}
 		
-		for i, v in ipairs(p3) do
+		for i, v in ipairs(p4) do
 			t[makeRequestKey(v.request.id, v.request.infoType)] = v
 		end
-		local list = table.create(#p2)
+		local list = table.create(#p3)
 		
-		for i_1, v_1 in ipairs(p2) do
+		for i_1, v_1 in ipairs(p3) do
 			local robuxPackages = v_1.robuxPackages
 			
 			if robuxPackages == nil or #robuxPackages == 0 then

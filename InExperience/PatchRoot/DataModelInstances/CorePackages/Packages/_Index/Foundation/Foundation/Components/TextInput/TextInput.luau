@@ -20,75 +20,75 @@ local t = {
 	size = inputSizeModule.Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), internalTextInputModule (ref), viewModule (ref), iconModule (ref), iconButtonModule (ref)
-	local var14 = withDefaultsModule(p0, t)
-	local var15 = useTextInputVariantsModule(useTokensModule(), var14.size, var14.variant)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTextInputVariantsModule(useTokensModule(), var1.size, var1.variant)
 	
-	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var14, {
-		width = var14.width,
-		ref = p1,
-		label = var14.label,
-		size = getInputTextSizeModule(var14.size),
-		isRequired = var14.isRequired,
-		isDisabled = var14.isDisabled,
-		hasError = var14.hasError,
-		hint = var14.hint,
-		textBoxRef = var14.textBoxRef,
-		input = function(p2)
-			-- upvalues: reactModule (copy), internalTextInputModule (copy), var14 (ref), var15 (ref), viewModule (copy), iconModule (copy), iconButtonModule (copy)
-			local var17
+	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var1, {
+		width = var1.width,
+		ref = p2,
+		label = var1.label,
+		size = getInputTextSizeModule(var1.size),
+		isRequired = var1.isRequired,
+		isDisabled = var1.isDisabled,
+		hasError = var1.hasError,
+		hint = var1.hint,
+		textBoxRef = var1.textBoxRef,
+		input = function(p3)
+			-- upvalues: reactModule (copy), internalTextInputModule (copy), var1 (ref), var2 (ref), viewModule (copy), iconModule (copy), iconButtonModule (copy)
+			local var3
 			local createElement = reactModule.createElement
 			local t = {
-				ref = p2,
-				inputRef = var14.inputRef,
-				hasError = var14.hasError,
-				isDisabled = var14.isDisabled,
-				hasClearButton = var14.hasClearButton,
-				text = var14.text,
-				textInputType = var14.textInputType,
-				focusBehavior = var14.focusBehavior,
-				size = var14.size,
-				variant = var14.variant,
-				Selectable = var14.Selectable,
-				NextSelectionUp = var14.NextSelectionUp,
-				NextSelectionDown = var14.NextSelectionDown,
-				NextSelectionLeft = var14.NextSelectionLeft,
-				NextSelectionRight = var14.NextSelectionRight,
+				ref = p3,
+				inputRef = var1.inputRef,
+				hasError = var1.hasError,
+				isDisabled = var1.isDisabled,
+				hasClearButton = var1.hasClearButton,
+				text = var1.text,
+				textInputType = var1.textInputType,
+				focusBehavior = var1.focusBehavior,
+				size = var1.size,
+				variant = var1.variant,
+				Selectable = var1.Selectable,
+				NextSelectionUp = var1.NextSelectionUp,
+				NextSelectionDown = var1.NextSelectionDown,
+				NextSelectionLeft = var1.NextSelectionLeft,
+				NextSelectionRight = var1.NextSelectionRight,
 				horizontalPadding = {
-					left = var15.container.horizontalPadding,
-					right = var15.container.horizontalPadding
+					left = var2.container.horizontalPadding,
+					right = var2.container.horizontalPadding
 				},
-				onChanged = var14.onChanged,
-				onFocus = var14.onFocusGained,
-				onFocusLost = var14.onFocusLost,
-				onReturnPressed = var14.onReturnPressed,
-				placeholder = var14.placeholder,
-				leadingElement = if var14.leadingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
-					name = var14.leadingIcon,
-					style = var15.icon.style,
-					size = var15.icon.size
+				onChanged = var1.onChanged,
+				onFocus = var1.onFocusGained,
+				onFocusLost = var1.onFocusLost,
+				onReturnPressed = var1.onReturnPressed,
+				placeholder = var1.placeholder,
+				leadingElement = if var1.leadingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
+					name = var1.leadingIcon,
+					style = var2.icon.style,
+					size = var2.icon.size
 				})) else nil
 			}
 			
-			if var14.iconTrailing then
-				var17 = reactModule.createElement
-				var17 = var17(viewModule, { tag = "row align-y-center size-0-full auto-x" }, if type(var14.iconTrailing) == "table" and var14.iconTrailing.onActivated then reactModule.createElement(iconButtonModule, {
-					onActivated = var14.iconTrailing.onActivated,
-					isDisabled = var14.isDisabled,
-					size = var15.icon.size,
-					icon = var14.iconTrailing.name,
-					testId = `{var14.testId}--trailing-icon-button`
+			if var1.iconTrailing then
+				var3 = reactModule.createElement
+				var3 = var3(viewModule, { tag = "row align-y-center size-0-full auto-x" }, if type(var1.iconTrailing) == "table" and var1.iconTrailing.onActivated then reactModule.createElement(iconButtonModule, {
+					onActivated = var1.iconTrailing.onActivated,
+					isDisabled = var1.isDisabled,
+					size = var2.icon.size,
+					icon = var1.iconTrailing.name,
+					testId = `{var1.testId}--trailing-icon-button`
 				}) else reactModule.createElement(iconModule, {
-					name = if type(var14.iconTrailing) == "table" then var14.iconTrailing.name else var14.iconTrailing,
-					style = var15.icon.style,
-					size = var15.icon.size
+					name = if type(var1.iconTrailing) == "table" then var1.iconTrailing.name else var1.iconTrailing,
+					style = var2.icon.style,
+					size = var2.icon.size
 				}))
 			else
-				var17 = nil
+				var3 = nil
 			end
-			t.trailingElement = var17
-			t.testId = `{var14.testId}--internal-text-input`
+			t.trailingElement = var3
+			t.testId = `{var1.testId}--internal-text-input`
 			
 			return createElement(internalTextInputModule, t)
 		end

@@ -24,72 +24,72 @@ local resolveRefreshedExpectedPriceModule = require(parent.Utils.resolveRefreshe
 local fFlagFixTimedOptionRefreshModule = require(parent.Flags.FFlagFixTimedOptionRefresh)
 local resolveRefreshedProductInfoModule = require(parent.Utils.resolveRefreshedProductInfo)
 
-local function fetchRefreshedPrice(p0, p1, p2, p3)
+local function fetchRefreshedPrice(p1, p2, p3, p4)
 	-- upvalues: promiseModule (ref), getCatalogItemDetailsModule (ref), getResellersModule (ref), fFlagFixTimedOptionRefreshModule (ref), resolveRefreshedProductInfoModule (ref), resolveRefreshedExpectedPriceModule (ref)
-	local collectibleItemId = p3.collectibleItemId
-	local collectibleItemInstanceId = p3.collectibleItemInstanceId
+	local collectibleItemId = p4.collectibleItemId
+	local collectibleItemInstanceId = p4.collectibleItemInstanceId
 	
 	return promiseModule.all({
-		catalogItemDetails = getCatalogItemDetailsModule(p0, p1, p2):catch(function()
+		catalogItemDetails = getCatalogItemDetailsModule(p1, p2, p3):catch(function()
 			return nil
 		end),
-		resellersData = if collectibleItemInstanceId and collectibleItemInstanceId ~= "" and (collectibleItemId and collectibleItemId ~= "") then getResellersModule(p0, collectibleItemId, 10):catch(function()
+		resellersData = if collectibleItemInstanceId and collectibleItemInstanceId ~= "" and (collectibleItemId and collectibleItemId ~= "") then getResellersModule(p1, collectibleItemId, 10):catch(function()
 			return nil
 		end) else promiseModule.resolve(nil)
-	}):andThen(function(p4)
-		-- upvalues: fFlagFixTimedOptionRefreshModule (copy), resolveRefreshedProductInfoModule (copy), collectibleItemInstanceId (ref), p3 (ref), resolveRefreshedExpectedPriceModule (copy)
-		return if fFlagFixTimedOptionRefreshModule then resolveRefreshedProductInfoModule(p4.catalogItemDetails, p4.resellersData, collectibleItemInstanceId, p3.timedOptionDays) else resolveRefreshedExpectedPriceModule(p4.catalogItemDetails, p4.resellersData, collectibleItemInstanceId, p3.timedOptionDays)
+	}):andThen(function(p5)
+		-- upvalues: fFlagFixTimedOptionRefreshModule (copy), resolveRefreshedProductInfoModule (copy), collectibleItemInstanceId (ref), p4 (ref), resolveRefreshedExpectedPriceModule (copy)
+		return if fFlagFixTimedOptionRefreshModule then resolveRefreshedProductInfoModule(p5.catalogItemDetails, p5.resellersData, collectibleItemInstanceId, p4.timedOptionDays) else resolveRefreshedExpectedPriceModule(p5.catalogItemDetails, p5.resellersData, collectibleItemInstanceId, p4.timedOptionDays)
 	end)
 end
 
-return function(p5, p6, p7, p8, p9, p10)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: getAssetInfoModule (ref), getAssetInfoUtilModule (ref), promiseModule (ref), purchaseErrorModule (ref), isCreatorStoreAssetTypeModule (ref), getCreatorStoreProductInfoModule (ref), getCreatorStoreProductInfoUtilModule (ref), fFlagEnableFetchCartPricingDuringInExperience (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), fetchRefreshedPrice (ref), fFlagFixTimedOptionRefreshModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), productTypeEnum (ref), getExperienceProductInfoUtilModule (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), handleLooksProductInfoResultModule (ref), fFlagRefreshLookPriceOnRetryAfterUpsellModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), getFFlagDiscountInfoForSubscriptionPurchaseModalLua (ref)
-	if p7 == Enum.InfoType.Asset then
-		local var18 = getAssetInfoModule(p5, p6):andThen(function(p11)
-			-- upvalues: getAssetInfoUtilModule (copy), promiseModule (copy), purchaseErrorModule (copy), isCreatorStoreAssetTypeModule (copy), getCreatorStoreProductInfoModule (copy), p5 (ref), p6 (ref), getCreatorStoreProductInfoUtilModule (copy), fFlagEnableFetchCartPricingDuringInExperience (copy), p7 (ref), p10 (ref)
-			local var19 = nil
+	if p3 == Enum.InfoType.Asset then
+		local var1 = getAssetInfoModule(p1, p2):andThen(function(p7)
+			-- upvalues: getAssetInfoUtilModule (copy), promiseModule (copy), purchaseErrorModule (copy), isCreatorStoreAssetTypeModule (copy), getCreatorStoreProductInfoModule (copy), p1 (ref), p2 (ref), getCreatorStoreProductInfoUtilModule (copy), fFlagEnableFetchCartPricingDuringInExperience (copy), p3 (ref), p6 (ref)
+			local var2 = nil
 			
-			if p11 and p11.data and p11.data[1] then
-				if not getAssetInfoUtilModule.isAssetValid(p11.data[1]) then
+			if p7 and p7.data and p7.data[1] then
+				if not getAssetInfoUtilModule.isAssetValid(p7.data[1]) then
 					return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
 				end
-				var19 = getAssetInfoUtilModule.fromAsset(p11.data[1])
+				var2 = getAssetInfoUtilModule.fromAsset(p7.data[1])
 			end
-			local var20 = if var19 then var19.type else ""
+			local var3 = if var2 then var2.type else ""
 			
-			return if isCreatorStoreAssetTypeModule(var20) then getCreatorStoreProductInfoModule(p5, p6, var20):andThen(function(p13)
-				-- upvalues: getCreatorStoreProductInfoUtilModule (copy), var19 (write), var20 (ref)
-				local var21 = getCreatorStoreProductInfoUtilModule.fromProduct(p13)
+			return if isCreatorStoreAssetTypeModule(var3) then getCreatorStoreProductInfoModule(p1, p2, var3):andThen(function(p8)
+				-- upvalues: getCreatorStoreProductInfoUtilModule (copy), var2 (write), var3 (ref)
+				local var4 = getCreatorStoreProductInfoUtilModule.fromProduct(p8)
 				
 				return {
 					PriceInRobux = 0,
-					AssetId = var19.id,
-					AssetType = var20,
-					AssetTypeId = var19.typeId,
+					AssetId = var2.id,
+					AssetType = var3,
+					AssetTypeId = var2.typeId,
 					Creator = {
-						CreatorTargetId = var19.creator.targetId,
-						CreatorType = var19.creator.type
+						CreatorTargetId = var2.creator.targetId,
+						CreatorType = var2.creator.type
 					},
-					Description = var19.description,
-					IsFiatPriced = var21.basePrice and (var21.basePrice.quantity and var21.basePrice.quantity.significand ~= 0),
-					IsForSale = var21.purchasable,
-					IsPublicDomain = var19.isPublicDomainEnabled,
-					Name = var19.name,
-					ProductId = var19.id
+					Description = var2.description,
+					IsFiatPriced = var4.basePrice and (var4.basePrice.quantity and var4.basePrice.quantity.significand ~= 0),
+					IsForSale = var4.purchasable,
+					IsPublicDomain = var2.isPublicDomainEnabled,
+					Name = var2.name,
+					ProductId = var2.id
 				}
-			end) elseif fFlagEnableFetchCartPricingDuringInExperience then p5.getProductInfo(p6, p7):andThen(function(p12)
-				-- upvalues: p10 (copy)
-				return if p12.CollectibleItemId and p10 then p10(p12.CollectibleItemId):andThen(function()
-					-- upvalues: p12 (ref)
-					return p12
+			end) elseif fFlagEnableFetchCartPricingDuringInExperience then p1.getProductInfo(p2, p3):andThen(function(p8)
+				-- upvalues: p6 (copy)
+				return if p8.CollectibleItemId and p6 then p6(p8.CollectibleItemId):andThen(function()
+					-- upvalues: p8 (ref)
+					return p8
 				end):catch(function()
-					-- upvalues: p12 (ref)
-					return p12
-				end) else p12
+					-- upvalues: p8 (ref)
+					return p8
+				end) else p8
 			end):catch(function(_)
 				-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 				return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
-			end) else p5.getProductInfo(p6, p7):catch(function(_)
+			end) else p1.getProductInfo(p2, p3):catch(function(_)
 				-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 				return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
 			end)
@@ -98,15 +98,15 @@ return function(p5, p6, p7, p8, p9, p10)
 			return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
 		end)
 		
-		return if fFlagRefreshPriceOnRetryAfterUpsellModule and p9 then promiseModule.all({
-			productInfo = var18,
-			refreshedPrice = fetchRefreshedPrice(p5, p6, "asset", p9)
-		}):andThen(function(p14)
+		return if fFlagRefreshPriceOnRetryAfterUpsellModule and p5 then promiseModule.all({
+			productInfo = var1,
+			refreshedPrice = fetchRefreshedPrice(p1, p2, "asset", p5)
+		}):andThen(function(p7)
 			-- upvalues: fFlagFixTimedOptionRefreshModule (copy)
-			local productInfo = p14.productInfo
+			local productInfo = p7.productInfo
 			
 			if fFlagFixTimedOptionRefreshModule then
-				local refreshedPrice = p14.refreshedPrice
+				local refreshedPrice = p7.refreshedPrice
 				
 				if refreshedPrice == nil then
 					return productInfo
@@ -115,70 +115,70 @@ return function(p5, p6, p7, p8, p9, p10)
 					productInfo[i] = v
 				end
 				return productInfo
-			elseif p14.refreshedPrice ~= nil then
-				productInfo.refreshedExpectedPrice = p14.refreshedPrice
+			elseif p7.refreshedPrice ~= nil then
+				productInfo.refreshedExpectedPrice = p7.refreshedPrice
 			end
-		end) else var18
+		end) else var1
 	end
-	return if fFlagEnableUnifiedProductPurchaseFlow and p7 == productTypeEnum.Experience then p5.getExperienceProductInfo(p6):andThen(function(p17)
-		-- upvalues: p8 (ref), getExperienceProductInfoUtilModule (copy), promiseModule (copy), purchaseErrorModule (copy)
-		if p17 and p17.data and (p17.data[1] and p8.name) and p8.imageUrl then
-			local var24 = getExperienceProductInfoUtilModule.fromProduct(p17.data[1])
+	return if fFlagEnableUnifiedProductPurchaseFlow and p3 == productTypeEnum.Experience then p1.getExperienceProductInfo(p2):andThen(function(p7)
+		-- upvalues: p4 (ref), getExperienceProductInfoUtilModule (copy), promiseModule (copy), purchaseErrorModule (copy)
+		if p7 and p7.data and (p7.data[1] and p4.name) and p4.imageUrl then
+			local var2 = getExperienceProductInfoUtilModule.fromProduct(p7.data[1])
 			
 			return {
-				IsForSale = var24.isForSale,
-				PriceInRobux = var24.price,
-				ProductId = var24.productId,
-				SellerId = var24.sellerId,
-				Name = p8.name,
-				ImageUrl = p8.imageUrl
+				IsForSale = var2.isForSale,
+				PriceInRobux = var2.price,
+				ProductId = var2.productId,
+				SellerId = var2.sellerId,
+				Name = p4.name,
+				ImageUrl = p4.imageUrl
 			}
 		end
 		return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
 	end):catch(function(_)
 		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 		return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
-	end) elseif fFlagEnableUnifiedProductPurchaseFlow and p7 == productTypeEnum.Look then if fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule then p5.GetLookDetailsV2ProductInfo(p6):andThen(function(p16)
-		-- upvalues: handleLooksProductInfoResultModule (copy), p8 (ref), promiseModule (copy), purchaseErrorModule (copy), fFlagRefreshLookPriceOnRetryAfterUpsellModule (copy)
-		local var23 = handleLooksProductInfoResultModule(p16, p8)
+	end) elseif fFlagEnableUnifiedProductPurchaseFlow and p3 == productTypeEnum.Look then if fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule then p1.GetLookDetailsV2ProductInfo(p2):andThen(function(p7)
+		-- upvalues: handleLooksProductInfoResultModule (copy), p4 (ref), promiseModule (copy), purchaseErrorModule (copy), fFlagRefreshLookPriceOnRetryAfterUpsellModule (copy)
+		local var2 = handleLooksProductInfoResultModule(p7, p4)
 		
-		if not var23 then
+		if not var2 then
 			return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
 		elseif fFlagRefreshLookPriceOnRetryAfterUpsellModule then
-			var23.refreshedExpectedPrice = var23.PriceInRobux
+			var2.refreshedExpectedPrice = var2.PriceInRobux
 		end
-		return var23
+		return var2
 	end):catch(function()
 		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 		return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
 	end) else promiseModule.resolve({
 		IsForSale = true,
 		Name = "Looks",
-		PriceInRobux = p8.expectedPrice
-	}) elseif fFlagEnableUnifiedPurchaseFlowForDevSubs and p7 == productTypeEnum.DeveloperSubscription then p5.getSubscriptionProductInfo(p6):andThen(function(p15)
+		PriceInRobux = p4.expectedPrice
+	}) elseif fFlagEnableUnifiedPurchaseFlowForDevSubs and p3 == productTypeEnum.DeveloperSubscription then p1.getSubscriptionProductInfo(p2):andThen(function(p7)
 		-- upvalues: getFFlagDiscountInfoForSubscriptionPurchaseModalLua (copy), productTypeEnum (copy), promiseModule (copy), purchaseErrorModule (copy)
-		if p15 and p15.Name then
-			local var22 = getFFlagDiscountInfoForSubscriptionPurchaseModalLua()
+		if p7 and p7.Name then
+			local var2 = getFFlagDiscountInfoForSubscriptionPurchaseModalLua()
 			
 			return {
-				Name = p15.Name,
-				Description = p15.Description,
-				IconImageAssetId = p15.IconImageAssetId,
-				IsForSale = p15.IsForSale,
-				DisplayPrice = p15.DisplayPrice,
-				SubscriptionProviderName = p15.SubscriptionProviderName,
-				PriceInRobux = p15.PriceInRobux,
-				PriceTier = p15.PriceTier,
+				Name = p7.Name,
+				Description = p7.Description,
+				IconImageAssetId = p7.IconImageAssetId,
+				IsForSale = p7.IsForSale,
+				DisplayPrice = p7.DisplayPrice,
+				SubscriptionProviderName = p7.SubscriptionProviderName,
+				PriceInRobux = p7.PriceInRobux,
+				PriceTier = p7.PriceTier,
 				ProductType = productTypeEnum.DeveloperSubscription,
-				UserBasePriceInRobux = if var22 then p15.UserBasePriceInRobux else nil,
-				PriceDiscountDetails = if var22 then p15.PriceDiscountDetails else nil
+				UserBasePriceInRobux = if var2 then p7.UserBasePriceInRobux else nil,
+				PriceDiscountDetails = if var2 then p7.PriceDiscountDetails else nil
 			}
 		end
 		return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
 	end):catch(function(_)
 		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 		return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
-	end) else p5.getProductInfo(p6, p7):catch(function(_)
+	end) else p1.getProductInfo(p2, p3):catch(function(_)
 		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 		return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)
 	end)

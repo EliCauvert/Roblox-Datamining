@@ -21,34 +21,34 @@ gameIcon.validateProps = t.strictInterface({
 	AnchorPoint = t.optional(t.Vector2)
 })
 
-function gameIcon.render(p0)
+function gameIcon.render(p1)
 	-- upvalues: getGameIconRequestSizeModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref), assetImageModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), images (ref)
-	local var7
-	local iconSize = p0.props.iconSize
-	local var5 = getGameIconRequestSizeModule(iconSize)
-	local gameId = p0.props.gameId
-	local cornerRadius = p0.props.cornerRadius
-	local var6 = ("rbxthumb://type=GameIcon&id=%d&w=%d&h=%d"):format(gameId, var5, var5)
+	local var1
+	local iconSize = p1.props.iconSize
+	local var2 = getGameIconRequestSizeModule(iconSize)
+	local gameId = p1.props.gameId
+	local cornerRadius = p1.props.cornerRadius
+	local var3 = ("rbxthumb://type=GameIcon&id=%d&w=%d&h=%d"):format(gameId, var2, var2)
 	
 	if gameId == 0 then
-		var7 = if iconSize <= 44 then iconSize else 44
+		var1 = if iconSize <= 44 then iconSize else 44
 		
-		return withFoundationOrUIBloxStyle(function(p1)
+		return withFoundationOrUIBloxStyle(function(p2)
 			return {
 				Theme = {
 					PlaceHolder = {
-						Color = p1.Color.Common.Shimmer.Color3,
-						Transparency = p1.Color.Common.Shimmer.Transparency
+						Color = p2.Color.Common.Shimmer.Color3,
+						Transparency = p2.Color.Common.Shimmer.Transparency
 					},
 					UIDefault = {
-						Color = p1.Color.Shift.Shift_200.Color3,
-						Transparency = p1.Color.Shift.Shift_200.Transparency
+						Color = p2.Color.Shift.Shift_200.Color3,
+						Transparency = p2.Color.Shift.Shift_200.Transparency
 					}
 				}
 			}
 		end, function(p2)
-			-- upvalues: roact (copy), assetImageModule (copy), iconSize (ref), p0 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), var7 (write), cornerRadius (ref), imageSetLabel (copy), images (copy)
-			local var14
+			-- upvalues: roact (copy), assetImageModule (copy), iconSize (ref), p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), var1 (write), cornerRadius (ref), imageSetLabel (copy), images (copy)
+			local var4
 			local createElement = roact.createElement
 			local label = assetImageModule.Label
 			local t = {
@@ -56,16 +56,16 @@ function gameIcon.render(p0)
 				Size = UDim2.fromOffset(iconSize, iconSize),
 				ImageColor3 = p2.Theme.PlaceHolder.Color,
 				ImageTransparency = p2.Theme.PlaceHolder.Transparency,
-				LayoutOrder = p0.props.layoutOrder,
-				Position = p0.props.Position,
-				AnchorPoint = p0.props.AnchorPoint
+				LayoutOrder = p1.props.layoutOrder,
+				Position = p1.props.Position,
+				AnchorPoint = p1.props.AnchorPoint
 			}
 			local t_1 = {}
 			
 			if fFlagCoreUiMigrateUIBloxToFoundation then
-				var14 = roact.createElement(image, {
+				var4 = roact.createElement(image, {
 					Image = "icons/imageUnavailable",
-					Size = UDim2.fromOffset(var7, var7),
+					Size = UDim2.fromOffset(var1, var1),
 					Position = UDim2.fromScale(0.5, 0.5),
 					imageStyle = {
 						Color3 = p2.Theme.UIDefault.Color,
@@ -76,11 +76,11 @@ function gameIcon.render(p0)
 				})
 			else
 				local UICorner
-				var14 = roact.createElement
-				local var15 = imageSetLabel
+				var4 = roact.createElement
+				local var5 = imageSetLabel
 				local t_2 = {
 					BackgroundTransparency = 1,
-					Size = UDim2.fromOffset(var7, var7),
+					Size = UDim2.fromOffset(var1, var1),
 					Position = UDim2.fromScale(0.5, 0.5),
 					Image = images["icons/imageUnavailable"],
 					ImageColor3 = p2.Theme.UIDefault.Color,
@@ -93,23 +93,23 @@ function gameIcon.render(p0)
 					UICorner = roact.createElement("UICorner", { CornerRadius = cornerRadius }) or nil
 				end
 				t_3.UICorner = UICorner
-				var14 = var14(var15, t_2, t_3)
+				var4 = var4(var5, t_2, t_3)
 			end
-			t_1.PlaceholderIcon = var14
+			t_1.PlaceholderIcon = var4
 			
 			return createElement(label, t, t_1)
 		end)
 	end
 	local UICorner
-	var7 = roact.createElement
-	local var8 = "ImageLabel"
+	var1 = roact.createElement
+	local var4 = "ImageLabel"
 	local t = {
 		BackgroundTransparency = 1,
-		Image = var6,
+		Image = var3,
 		Size = UDim2.fromOffset(iconSize, iconSize),
-		LayoutOrder = p0.props.layoutOrder,
-		Position = p0.props.Position,
-		AnchorPoint = p0.props.AnchorPoint
+		LayoutOrder = p1.props.layoutOrder,
+		Position = p1.props.Position,
+		AnchorPoint = p1.props.AnchorPoint
 	}
 	local t_1 = {}
 	
@@ -118,7 +118,7 @@ function gameIcon.render(p0)
 	end
 	t_1.UICorner = UICorner
 	
-	return var7(var8, t, t_1)
+	return var1(var4, t, t_1)
 end
 
 return gameIcon

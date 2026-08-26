@@ -1,34 +1,34 @@
 ﻿local messageModule = require(script.Parent.Message)
 
 return {
-	mapTextChatMessage = function(p0, p1)
+	mapTextChatMessage = function(p1, p2)
 		-- upvalues: messageModule (ref)
-		return if p0.TextSource then messageModule.createUserMessageFromTextChatMessage(p0, p1) else messageModule.createSystemMessageFromTextChatMessage(p0)
+		return if p1.TextSource then messageModule.createUserMessageFromTextChatMessage(p1, p2) else messageModule.createSystemMessageFromTextChatMessage(p1)
 	end,
-	mapSendingMessage = function(p2, p3)
+	mapSendingMessage = function(p1, p2)
 		-- upvalues: messageModule (ref)
-		return messageModule.createUserMessageFromTextChatMessage(p2, p3)
+		return messageModule.createUserMessageFromTextChatMessage(p1, p2)
 	end,
-	applyMessage = function(p4, p5)
-		for i, v in p4 do
-			if v.messageId == p5.messageId then
-				local cloned = table.clone(p4)
+	applyMessage = function(p1, p2)
+		for i, v in p1 do
+			if v.messageId == p2.messageId then
+				local cloned = table.clone(p1)
 				
-				if p5.content == "" then
+				if p2.content == "" then
 					table.remove(cloned, i)
 					
 					return cloned
 				end
-				cloned[i] = p5
+				cloned[i] = p2
 				
 				return cloned
 			end
 		end
-		if p5.content == "" then
-			return p4
+		if p2.content == "" then
+			return p1
 		end
-		local cloned = table.clone(p4)
-		table.insert(cloned, p5)
+		local cloned = table.clone(p1)
+		table.insert(cloned, p2)
 		
 		return cloned
 	end

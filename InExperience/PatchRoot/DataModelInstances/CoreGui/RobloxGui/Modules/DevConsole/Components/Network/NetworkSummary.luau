@@ -10,24 +10,24 @@ local cellPadding = constantsModule.NetworkFormatting.CellPadding
 local text = constantsModule.Color.Text
 local cellLabelModule = require(script.Parent.Parent.Parent.Components.CellLabel)
 local headerButtonModule = require(script.Parent.Parent.Parent.Components.HeaderButton)
-local var4 = 0
+local var1 = 0
 
 for i, v in pairs(summaryCellWidths) do
-	var4 += v
+	var1 += v
 end
-local var5 = -var4
+local var2 = -var1
 local t = {}
 local t_1 = {}
 local t_2 = {}
 table.insert(t, UDim2.new(0, cellPadding, 0, 0))
-table.insert(t_1, UDim2.new(1, (-var4) - cellPadding, 0, headerFrameHeight))
-table.insert(t_2, UDim2.new(1, (-var4) - cellPadding, 0, entryFrameHeight))
+table.insert(t_1, UDim2.new(1, (-var1) - cellPadding, 0, headerFrameHeight))
+table.insert(t_2, UDim2.new(1, (-var1) - cellPadding, 0, entryFrameHeight))
 
 for i_1, v_1 in ipairs(summaryCellWidths) do
-	table.insert(t, UDim2.new(1, var5 + cellPadding, 0, 0))
+	table.insert(t, UDim2.new(1, var2 + cellPadding, 0, 0))
 	table.insert(t_1, UDim2.new(0, v_1 - cellPadding, 0, headerFrameHeight))
 	table.insert(t_2, UDim2.new(0, v_1 - cellPadding, 0, entryFrameHeight))
-	var5 += v_1
+	var2 += v_1
 end
 local t_3 = {}
 
@@ -36,11 +36,11 @@ for i_2, v_2 in ipairs(t) do
 end
 local networkSummary = roactModule.Component:extend("NetworkSummary")
 
-function networkSummary.render(p0)
+function networkSummary.render(p1)
 	-- upvalues: roactModule (ref), lineWidth (ref), lineColor (ref), t_3 (ref), headerFrameHeight (ref), summaryHeaderNames (ref), headerButtonModule (ref), t_1 (ref), t (ref), cellLabelModule (ref), entryFrameHeight (ref), text (ref)
-	local width = p0.props.width
-	local httpSummaryTable = p0.props.httpSummaryTable or {}
-	local layoutOrder = p0.props.layoutOrder
+	local width = p1.props.width
+	local httpSummaryTable = p1.props.httpSummaryTable or {}
+	local layoutOrder = p1.props.layoutOrder
 	local t_2 = {
 		UIListLayout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -79,10 +79,10 @@ function networkSummary.render(p0)
 		LayoutOrder = 1,
 		Size = UDim2.new(0, width, 0, headerFrameHeight)
 	}, t_4)
-	local var14 = 0
+	local var3 = 0
 	
 	for i_2, v_1 in pairs(httpSummaryTable) do
-		var14 += 1
+		var3 += 1
 		local t_5 = {
 			RequestType = roactModule.createElement(cellLabelModule, { text = v_1.RequestType, size = t_1[1], pos = t[1] }),
 			RequestCount = roactModule.createElement(cellLabelModule, { text = v_1.RequestCount, size = t_1[2], pos = t[2] }),
@@ -121,10 +121,10 @@ function networkSummary.render(p0)
 		t_2[v_1.RequestType] = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, width, 0, entryFrameHeight),
-			LayoutOrder = var14 + 1
+			LayoutOrder = var3 + 1
 		}, t_5)
 	end
-	if var14 == 0 then
+	if var3 == 0 then
 		t_2.Padding = roactModule.createElement("TextLabel", {
 			Text = "No Summary Data Found",
 			BackgroundTransparency = 1,
@@ -132,13 +132,13 @@ function networkSummary.render(p0)
 			Size = UDim2.new(0, width, 0, entryFrameHeight),
 			TextColor3 = text
 		})
-		var14 = 1
+		var3 = 1
 	end
 	return roactModule.createElement("ScrollingFrame", {
 		ScrollingEnabled = false,
 		ScrollBarThickness = 0,
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, var14 * entryFrameHeight + headerFrameHeight),
+		Size = UDim2.new(1, 0, 0, var3 * entryFrameHeight + headerFrameHeight),
 		LayoutOrder = layoutOrder
 	}, t_2)
 end

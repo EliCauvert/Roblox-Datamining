@@ -8,10 +8,10 @@ local _ = nil
 local tbl = setmetatable({}, { __index = error })
 tbl.__index = tbl
 
-function tbl.new(p0, p1)
+function tbl.new(p1, p2)
 	-- upvalues: error (ref), tbl (write)
-	local aggregateError = setmetatable(error.new(if p1 ~= nil then "" else p1), tbl)
-	aggregateError.errors = p0
+	local aggregateError = setmetatable(error.new(if p2 ~= nil then "" else p2), tbl)
+	aggregateError.errors = p1
 	aggregateError.name = "AggregateError"
 	error.captureStackTrace(aggregateError, tbl.new)
 	
@@ -19,15 +19,15 @@ function tbl.new(p0, p1)
 end
 
 t.AggregateError = setmetatable(tbl, {
-	__call = function(_, p2, p3)
+	__call = function(_, p1, p2)
 		-- upvalues: tbl (write)
-		return tbl.new(p2, p3)
+		return tbl.new(p1, p2)
 	end
 })
 
-function t.isAggregateError(p4)
+function t.isAggregateError(p1)
 	-- upvalues: array (ref), object (ref)
-	return array.indexOf(object.keys(p4), "errors") ~= -1 and array.isArray(p4.errors)
+	return array.indexOf(object.keys(p1), "errors") ~= -1 and array.isArray(p1.errors)
 end
 
 return t

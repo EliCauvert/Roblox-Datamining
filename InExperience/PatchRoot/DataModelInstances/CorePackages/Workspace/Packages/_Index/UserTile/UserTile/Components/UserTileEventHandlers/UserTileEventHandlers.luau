@@ -9,72 +9,72 @@ local t = {
 	secondary = Enum.KeyCode.ButtonX
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), t (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), holdDetector (ref)
-	local tileRef = p0.tileRef
-	local buttons = p0.buttons
-	local onTileActivated = p0.onTileActivated
-	local var4 = reactModule.useRef(false)
-	local var5 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref)
-		var4.current = p1
+	local tileRef = p1.tileRef
+	local buttons = p1.buttons
+	local onTileActivated = p1.onTileActivated
+	local var1 = reactModule.useRef(false)
+	local var2 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref)
+		var1.current = p2
 	end, {})
-	local var6, var7 = reactModule.useMemo(function()
+	local var3, var4 = reactModule.useMemo(function()
 		-- upvalues: buttons (ref)
 		if buttons then
 			return buttons[#buttons], buttons[#buttons - 1]
 		end
 		return nil, nil
 	end, { buttons })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), onTileActivated (ref)
-		if var4.current then
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), onTileActivated (ref)
+		if var1.current then
 			return
 		end
 		onTileActivated()
 	end, { onTileActivated })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref)
-		if var6 and var6.onActivated then
-			var6.onActivated()
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref)
+		if var3 and var3.onActivated then
+			var3.onActivated()
 		end
-	end, { var6 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref)
-		if var7 and var7.onActivated then
-			var7.onActivated()
+	end, { var3 })
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref)
+		if var4 and var4.onActivated then
+			var4.onActivated()
 		end
-	end, { var7 })
-	local var11, var12 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), t (copy), inputHandlersModule (copy), var10 (ref)
-		local var15 = if var7 then var7.focusEventName else nil
+	end, { var4 })
+	local var8, var9 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), t (copy), inputHandlersModule (copy), var7 (ref)
+		local var10 = if var4 then var4.focusEventName else nil
 		
-		if var15 then
-			return { [t.secondary] = var15 }, {
-				[var15] = { handler = inputHandlersModule.onRelease(var10) }
+		if var10 then
+			return { [t.secondary] = var10 }, {
+				[var10] = { handler = inputHandlersModule.onRelease(var7) }
 			}
 		end
 		return {}, {}
-	end, { var7, var10 })
-	local var13 = reactFocusNavigationModule.useEventHandlerMap(var12, reactFocusNavigationModule.useEventMap(var11))
+	end, { var4, var7 })
+	local var10 = reactFocusNavigationModule.useEventHandlerMap(var9, reactFocusNavigationModule.useEventMap(var8))
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), tileRef (ref)
-		if var13 and tileRef then
-			var13(tileRef.current)
+		-- upvalues: var10 (ref), tileRef (ref)
+		if var10 and tileRef then
+			var10(tileRef.current)
 		end
 		return function()
-			-- upvalues: var13 (copy)
-			var13(nil)
+			-- upvalues: var10 (copy)
+			var10(nil)
 		end
-	end, { var13 })
-	local var14 = if var6 then var6.focusEventName else nil
+	end, { var10 })
+	local var11 = if var3 then var3.focusEventName else nil
 	
-	return if tileRef.current and var14 then reactModule.createElement(holdDetector, {
+	return if tileRef.current and var11 then reactModule.createElement(holdDetector, {
 		guiObject = tileRef.current,
-		onHoldDetected = var9,
-		onRegularActivated = var8,
-		setDisabledForHold = var5,
+		onHoldDetected = var6,
+		onRegularActivated = var5,
+		setDisabledForHold = var2,
 		keyCode = t.primary,
-		focusNavigationEventName = var14
+		focusNavigationEventName = var11
 	}) else nil
 end

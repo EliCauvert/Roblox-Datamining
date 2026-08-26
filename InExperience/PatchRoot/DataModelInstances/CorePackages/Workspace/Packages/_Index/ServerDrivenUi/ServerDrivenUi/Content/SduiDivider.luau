@@ -3,15 +3,15 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local fFlagSduiDividerThemeAwareStroke = require(parent.SharedFlags).FFlagSduiDividerThemeAwareStroke
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: fFlagSduiDividerThemeAwareStroke (ref), useTokens (ref), reactModule (ref)
 	local var1 = if fFlagSduiDividerThemeAwareStroke then useTokens() else nil
-	local size = p0.size
-	local layoutOrder = p0.layoutOrder
-	local position = p0.position
-	local anchorPoint = p0.anchorPoint
-	local backgroundColor3 = p0.backgroundColor3
-	local backgroundTransparency = p0.backgroundTransparency
+	local size = p1.size
+	local layoutOrder = p1.layoutOrder
+	local position = p1.position
+	local anchorPoint = p1.anchorPoint
+	local backgroundColor3 = p1.backgroundColor3
+	local backgroundTransparency = p1.backgroundTransparency
 	
 	return reactModule.createElement("Frame", {
 		Size = size or UDim2.new(1, 0, 0, 1),

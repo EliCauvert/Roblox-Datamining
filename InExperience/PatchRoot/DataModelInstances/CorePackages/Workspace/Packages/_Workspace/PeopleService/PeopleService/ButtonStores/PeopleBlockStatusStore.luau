@@ -11,19 +11,19 @@ local getFFlagAddPeoplePageCardLayout = require(peopleService.Flags).GetFFlagAdd
 return (function()
 	-- upvalues: signalsModule (ref), blockingUtilityModule (ref), peopleBlockingModalManagerModule (ref), getFFlagAddPeoplePageCardLayout (ref), constantsModule (ref), playersService (ref), peopleAnalyticsManagerModule (ref)
 	local t = {}
-	local var8 = nil
+	local var1 = nil
 	
-	local function getPlayerBlockStatus(p0)
+	local function getPlayerBlockStatus(p1)
 		-- upvalues: signalsModule (copy), t (write), blockingUtilityModule (copy)
-		if not p0 then
+		if not p1 then
 			return signalsModule.createSignal(false)
-		elseif t[p0] then
-			return t[p0].getter
+		elseif t[p1] then
+			return t[p1].getter
 		end
-		local var14, var15 = signalsModule.createSignal(blockingUtilityModule:IsPlayerBlockedByUserId(p0))
-		t[p0] = { getter = var14, setter = var15 }
+		local var2, var3 = signalsModule.createSignal(blockingUtilityModule:IsPlayerBlockedByUserId(p1))
+		t[p1] = { getter = var2, setter = var3 }
 		
-		return var14
+		return var2
 	end
 	
 	local function onBlockStatusChanged(p1, p2)
@@ -33,54 +33,54 @@ return (function()
 		end
 	end
 	
-	local function blockPlayer(p3, p4)
+	local function blockPlayer(p1, p2)
 		-- upvalues: t (write), peopleBlockingModalManagerModule (copy), getFFlagAddPeoplePageCardLayout (copy), constantsModule (copy)
-		local var16 = peopleBlockingModalManagerModule.openModal(p3, if getFFlagAddPeoplePageCardLayout() then p4 else constantsModule.ANALYTICS.IN_GAME_MENU_NAME, {
+		local var2 = peopleBlockingModalManagerModule.openModal(p1, if getFFlagAddPeoplePageCardLayout() then p2 else constantsModule.ANALYTICS.IN_GAME_MENU_NAME, {
 			onBlockingSuccess = function()
-				-- upvalues: t (copy), p3 (ref)
-				if t[p3.UserId] then
-					t[p3.UserId].setter(true)
+				-- upvalues: t (copy), p1 (ref)
+				if t[p1.UserId] then
+					t[p1.UserId].setter(true)
 				end
 			end
 		})
 		
-		if var16 then
-			var16:catch(function(p5)
-				warn("Block modal promise error:", p5)
+		if var2 then
+			var2:catch(function(p3)
+				warn("Block modal promise error:", p3)
 			end)
 		end
 	end
 	
-	local function unblockPlayer(p6, p7)
+	local function unblockPlayer(p1, p2)
 		-- upvalues: blockingUtilityModule (copy), playersService (copy), peopleAnalyticsManagerModule (copy), getFFlagAddPeoplePageCardLayout (copy), t (write)
-		if not p6 then return end
-		if blockingUtilityModule:UnblockPlayerAsync(p6) then
+		if not p1 then return end
+		if blockingUtilityModule:UnblockPlayerAsync(p1) then
 			local localPlayer = playersService.LocalPlayer
 			
 			if localPlayer then
-				peopleAnalyticsManagerModule:trackUnblockUser(p6.UserId, localPlayer.UserId, if getFFlagAddPeoplePageCardLayout() then p7 else nil)
+				peopleAnalyticsManagerModule:trackUnblockUser(p1.UserId, localPlayer.UserId, if getFFlagAddPeoplePageCardLayout() then p2 else nil)
 			end
-			if t[p6.UserId] then
-				t[p6.UserId].setter(false)
+			if t[p1.UserId] then
+				t[p1.UserId].setter(false)
 			end
 		end
 	end
 	
 	local function _()
-		-- upvalues: blockingUtilityModule (copy), var8 (write), onBlockStatusChanged (ref)
-		var8 = blockingUtilityModule:GetBlockedStatusChangedEvent():Connect(onBlockStatusChanged)
+		-- upvalues: blockingUtilityModule (copy), var1 (write), onBlockStatusChanged (ref)
+		var1 = blockingUtilityModule:GetBlockedStatusChangedEvent():Connect(onBlockStatusChanged)
 	end
 	
 	local function cleanup()
-		-- upvalues: var8 (write), t (write)
-		if var8 then
-			var8:Disconnect()
-			var8 = nil
+		-- upvalues: var1 (write), t (write)
+		if var1 then
+			var1:Disconnect()
+			var1 = nil
 		end
 		t = {}
 	end
 	
-	var8 = blockingUtilityModule:GetBlockedStatusChangedEvent():Connect(onBlockStatusChanged)
+	var1 = blockingUtilityModule:GetBlockedStatusChangedEvent():Connect(onBlockStatusChanged)
 	
 	return {
 		getPlayerBlockStatus = getPlayerBlockStatus,

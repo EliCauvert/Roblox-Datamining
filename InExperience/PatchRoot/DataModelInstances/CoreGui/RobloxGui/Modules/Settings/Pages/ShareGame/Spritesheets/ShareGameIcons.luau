@@ -1,5 +1,5 @@
-﻿local function _(p0, p1)
-	return { offset = p0, size = p1 }
+﻿local function _(p1, p2)
+	return { offset = p1, size = p2 }
 end
 
 local t = {
@@ -17,17 +17,17 @@ local t = {
 }
 
 return {
-	GetFrame = function(_, p2)
+	GetFrame = function(_, p1)
 		-- upvalues: t (ref)
-		return t.frames[p2]
+		return t.frames[p1]
 	end,
 	GetImagePath = function(_)
 		return "rbxasset://textures/ui/Settings/ShareGame/icons.png"
 	end,
-	ApplyImage = function(p3, p4, p5)
-		local var1 = p3:GetFrame(p5)
-		p4.Image = "rbxasset://textures/ui/Settings/ShareGame/icons.png"
-		p4.ImageRectOffset = var1.offset
-		p4.ImageRectSize = var1.size
+	ApplyImage = function(p1, p2, p3)
+		local var1 = p1:GetFrame(p3)
+		p2.Image = "rbxasset://textures/ui/Settings/ShareGame/icons.png"
+		p2.ImageRectOffset = var1.offset
+		p2.ImageRectSize = var1.size
 	end
 }

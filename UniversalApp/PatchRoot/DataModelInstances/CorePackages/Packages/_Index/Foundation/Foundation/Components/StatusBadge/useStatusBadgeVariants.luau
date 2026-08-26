@@ -7,7 +7,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-function variantsFactory(p0)
+function variantsFactory(p1)
 	-- upvalues: statusBadgeVariantModule (ref), statusBadgeShapeModule (ref), statusBadgeSizeModule (ref)
 	return {
 		common = {
@@ -19,7 +19,7 @@ function variantsFactory(p0)
 			dot = { tag = "radius-circle" },
 			text = {
 				tag = "auto-xy text-align-x-left text-truncate-split padding-right-xxsmall",
-				style = p0.Color.Content.Emphasis
+				style = p1.Color.Content.Emphasis
 			}
 		},
 		variants = {
@@ -42,7 +42,7 @@ function variantsFactory(p0)
 			},
 			[statusBadgeSizeModule.Small] = {
 				container = { tag = "size-0-600" },
-				content = { gap = p0.Size.Size_150 },
+				content = { gap = p1.Size.Size_150 },
 				dot = { tag = "size-200" },
 				text = { tag = "text-caption-medium" }
 			}

@@ -1,26 +1,26 @@
 ﻿local createComputed = require(script.Parent.Parent.Signals).createComputed
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: createComputed (ref)
-	local var0 = false
-	local var1 = nil
+	local var1 = false
+	local var2 = nil
 	
 	local function _()
-		-- upvalues: var0 (write), var1 (write), p1 (ref)
-		if not var0 then
-			var0 = true
-			var1 = if typeof(p1) == "function" then p1() else p1
+		-- upvalues: var1 (write), var2 (write), p2 (ref)
+		if not var1 then
+			var1 = true
+			var2 = if typeof(p2) == "function" then p2() else p2
 		end
 	end
 	
-	return createComputed(function(p2)
-		-- upvalues: var0 (write), var1 (write), p1 (ref), p0 (ref)
-		if not var0 then
-			var0 = true
-			var1 = if typeof(p1) == "function" then p1() else p1
+	return createComputed(function(p3)
+		-- upvalues: var1 (write), var2 (write), p2 (ref), p1 (ref)
+		if not var1 then
+			var1 = true
+			var2 = if typeof(p2) == "function" then p2() else p2
 		end
-		var1 = p0(p2, var1)
+		var2 = p1(p3, var2)
 		
-		return var1
+		return var2
 	end)
 end

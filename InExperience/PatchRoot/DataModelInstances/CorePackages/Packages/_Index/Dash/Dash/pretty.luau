@@ -12,129 +12,129 @@ local concat = table.concat
 local insert = table.insert
 local sort = table.sort
 
-local function indentLines(p0, p1)
+local function indentLines(p1, p2)
 	-- upvalues: mapModule (ref)
-	return mapModule(p0, function(p2)
-		-- upvalues: p1 (ref)
-		return p1 .. p2
+	return mapModule(p1, function(p3)
+		-- upvalues: p2 (ref)
+		return p2 .. p2
 	end)
 end
 
-local function _(p3)
+local function _(p1)
 	-- upvalues: keysModule (ref), sort (ref)
-	local var12 = keysModule(p3)
-	sort(var12, function(p4, p5)
-		return if type(p4) == "number" and type(p5) == "number" then p4 < p5 else tostring(p4) < tostring(p5)
+	local var1 = keysModule(p1)
+	sort(var1, function(p2, p3)
+		return if type(p2) == "number" and type(p3) == "number" then p2 < p3 else tostring(p2) < tostring(p3)
 	end)
 	
-	return var12
+	return var1
 end
 
-local function constructValueOptions(p6, p7)
+local function constructValueOptions(p1, p2)
 	-- upvalues: assignModule (ref), cyclesModule (ref)
-	return assignModule({ indent = "\t", depth = 2, visited = {} }, p6, {
-		depth = if p6.depth then p6.depth - 1 else nil,
-		cycles = p6.cycles or cyclesModule(p7, p6.depth, {
+	return assignModule({ indent = "\t", depth = 2, visited = {} }, p1, {
+		depth = if p1.depth then p1.depth - 1 else nil,
+		cycles = p1.cycles or cyclesModule(p2, p1.depth, {
 			nextRef = 0,
 			visited = {},
 			refs = {},
-			depth = p6.depth,
-			omit = p6.omit or {}
+			depth = p1.depth,
+			omit = p1.omit or {}
 		})
 	})
 end
 
-local _ = function(p8, p9, p10)
+local _ = function(p1, p2, p3)
 	-- upvalues: insert (ref)
-	if not p9 then
-		p8[#p8] = ("%s}"):format(p8[#p8])
+	if not p2 then
+		p1[#p1] = ("%s}"):format(p1[#p1])
 		
 		return
-	elseif p10 then
-		p8[#p8] ..= "}"
+	elseif p3 then
+		p1[#p1] ..= "}"
 		
 		return
 	end
-	insert(p8, "}")
+	insert(p1, "}")
 end
 
-local var10 = nil
+local var1 = nil
 
-local function prettyLines(p11, p12)
-	-- upvalues: constructValueOptions (ref), joinModule (ref), keysModule (ref), sort (ref), includesModule (ref), appendModule (ref), indentLines (ref), prettyLines (ref), mapModule (ref), sliceModule (ref), var10 (write), insert (ref)
-	p12 = p12 or {}
+local function prettyLines(p1, p2)
+	-- upvalues: constructValueOptions (ref), joinModule (ref), keysModule (ref), sort (ref), includesModule (ref), appendModule (ref), indentLines (ref), prettyLines (ref), mapModule (ref), sliceModule (ref), var1 (write), insert (ref)
+	p2 = p2 or {}
 	
-	if type(p11) == "table" then
-		local var14 = constructValueOptions(p12, p11)
+	if type(p1) == "table" then
+		local var2 = constructValueOptions(p2, p1)
 		
-		if var14.depth == -1 then
+		if var2.depth == -1 then
 			return { "..." }
-		elseif var14.visited[p11] then
-			return { "&" .. var14.cycles.refs[p11] }
+		elseif var2.visited[p1] then
+			return { "&" .. var14.cycles.refs[p1] }
 		end
-		var14.visited[p11] = true
-		local multiline = var14.multiline
-		local var15 = if multiline then "," else ", "
-		local var16 = var14.cycles.refs[p11]
-		local list = { (var16 and ("<%s>"):format(var16) or "") .. "{" }
-		local var18 = joinModule(var14, { noQuotes = true, multiline = false })
-		local var19 = 0
-		local var20 = true
-		local var21 = keysModule(p11)
-		sort(var21, function(p13, p14)
-			return if type(p13) == "number" and type(p14) == "number" then p13 < p14 else tostring(p13) < tostring(p14)
+		var2.visited[p1] = true
+		local multiline = var2.multiline
+		local var3 = if multiline then "," else ", "
+		local var4 = var2.cycles.refs[p1]
+		local list = { (var4 and ("<%s>"):format(var4) or "") .. "{" }
+		local var5 = joinModule(var2, { noQuotes = true, multiline = false })
+		local var6 = 0
+		local var7 = true
+		local var8 = keysModule(p1)
+		sort(var8, function(p3, p4)
+			return if type(p3) == "number" and type(p4) == "number" then p3 < p4 else tostring(p3) < tostring(p4)
 		end)
-		local var22 = var21
+		local var9 = var8
 		
-		if #p11 > 0 and var14.arrayLength then
-			list[1] = ("#%d %s"):format(#p11, list[1])
+		if #p1 > 0 and var2.arrayLength then
+			list[1] = ("#%d %s"):format(#p1, list[1])
 		end
-		for i, v in ipairs(var22) do
-			if type(v) == "number" and v == var19 + 1 then
-				var19 = v
+		for i, v in ipairs(var9) do
+			if type(v) == "number" and v == var6 + 1 then
+				var6 = v
 			end
-			if not var14.omit or not includesModule(var14.omit, v) then
-				local var24 = p11[v]
-				local var25 = type(v) == "number" and (v >= 1 and v <= var19)
+			if not var2.omit or not includesModule(var2.omit, v) then
+				local var10 = p1[v]
+				local var11 = type(v) == "number" and (v >= 1 and v <= var6)
 				
-				if var20 then
-					var20 = false
+				if var7 then
+					var7 = false
 				else
-					list[#list] ..= var15
+					list[#list] ..= var3
 				end
 				if multiline then
-					if var25 then
-						appendModule(list, indentLines(prettyLines(var24, var14), var14.indent))
+					if var11 then
+						appendModule(list, indentLines(prettyLines(var10, var2), var2.indent))
 					else
-						local indent = var14.indent
-						local var26 = mapModule(prettyLines(v, var18), function(p15)
+						local indent = var2.indent
+						local var12 = mapModule(prettyLines(v, var5), function(p3)
 							-- upvalues: indent (ref)
 							return indent .. p15
 						end)
-						local var27 = prettyLines(var24, var14)
-						local indent_1 = var14.indent
-						local var28 = mapModule(sliceModule(var27, 2), function(p16)
+						local var13 = prettyLines(var10, var2)
+						local indent_1 = var2.indent
+						local var14 = mapModule(sliceModule(var13, 2), function(p3)
 							-- upvalues: indent_1 (ref)
 							return indent_1 .. p16
 						end)
-						var26[#var26] = ("%s = %s"):format(var26[#var26], var27[1])
-						appendModule(list, var26)
-						appendModule(list, var28)
+						var12[#var12] = ("%s = %s"):format(var12[#var12], var13[1])
+						appendModule(list, var12)
+						appendModule(list, var14)
 					end
-				elseif var25 then
-					list[#list] ..= var10(var24, var14)
+				elseif var11 then
+					list[#list] ..= var1(var10, var2)
 				else
-					list[#list] ..= var10(v, var18) .. " = " .. var10(var24, var14)
+					list[#list] ..= var1(v, var5) .. " = " .. var10(var10, var2)
 				end
 			end
 		end
-		local var23 = var20
+		local var15 = var7
 		
 		if not multiline then
 			list[#list] = ("%s}"):format(list[#list])
 			
 			return list
-		elseif var23 then
+		elseif var15 then
 			list[#list] ..= "}"
 			
 			return list
@@ -143,11 +143,11 @@ local function prettyLines(p11, p12)
 		
 		return list
 	else
-		return if type(p11) == "string" and p12 and not p12.noQuotes then { ("\"%s\""):format(p11) } else { tostring(p11) }
+		return if type(p1) == "string" and p2 and not p2.noQuotes then { ("\"%s\""):format(p1) } else { tostring(p1) }
 	end
 end
 
-return function(p17, p18)
+return function(p3, p4)
 	-- upvalues: concat (ref), prettyLines (ref)
-	return concat(prettyLines(p17, p18), "\n")
+	return concat(prettyLines(p3, p4), "\n")
 end

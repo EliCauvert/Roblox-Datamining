@@ -24,9 +24,9 @@ local fFlagEnableFlyoutOnNavRail = require(parent_1.SharedFlags).FFlagEnableFlyo
 local appNavBarGateFooterVisibleOnPlacement = game:DefineFastFlag("AppNavBarGateFooterVisibleOnPlacement", false)
 local appNavBarFooterVisibleWithoutScrollAway = game:DefineFastFlag("AppNavBarFooterVisibleWithoutScrollAway", false)
 
-local function _(p0, p1, p2, p3)
+local function _(p1, p2, p3, p4)
 	-- upvalues: cryoModule (ref)
-	return cryoModule.List.join(p0, p2, p1), p3 + #p0
+	return cryoModule.List.join(p1, p3, p2), p4 + #p1
 end
 
 local t = {
@@ -35,29 +35,29 @@ local t = {
 	clipsDescendants = true
 }
 
-return reactModule.memo(function(p4)
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useAppPolicy (ref), useRoactService (ref), roactServiceTagsModule (ref), reactModule (ref), studioCTAIconModule (ref), webViewRedesignEnabledEngineFeature (ref), constantsModule (ref), fFlagEnableFlyoutOnNavRail (ref), appNavItemModule (ref), fFlagShrinkAppNavBar (ref), getScrollAwayEnabledModule (ref), appNavBarFooterVisibleWithoutScrollAway (ref), visibilityControlModule (ref), appNavBarGateFooterVisibleOnPlacement (ref), placementModule (ref), appNavTelemetryModule (ref), navigationBar (ref), navigationBarAlignment (ref), navigationRailV2 (ref), navigationRailAlignment (ref), fFlagAddGamepadBumperNavigation (ref)
 	local items, selectedIndex
-	local var15 = cryoModule.Dictionary.join(t, p4)
-	local var16 = useAppPolicy(function(p5)
-		return p5.getShowStudioCTA()
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = useAppPolicy(function(p2)
+		return p2.getShowStudioCTA()
 	end)
-	local var17 = useRoactService(roactServiceTagsModule.AppEventIngestService)
-	local var18 = useRoactService(roactServiceTagsModule.AppLinking)
-	local var19 = reactModule.useCallback(function(_, p6)
-		-- upvalues: reactModule (copy), studioCTAIconModule (copy), webViewRedesignEnabledEngineFeature (copy), p4 (ref)
+	local var3 = useRoactService(roactServiceTagsModule.AppEventIngestService)
+	local var4 = useRoactService(roactServiceTagsModule.AppLinking)
+	local var5 = reactModule.useCallback(function(_, p2)
+		-- upvalues: reactModule (copy), studioCTAIconModule (copy), webViewRedesignEnabledEngineFeature (copy), p1 (ref)
 		return reactModule.createElement(studioCTAIconModule, {
-			controlState = p6,
-			showTooltip = if webViewRedesignEnabledEngineFeature then p4.showTooltip else nil
+			controlState = p2,
+			showTooltip = if webViewRedesignEnabledEngineFeature then p1.showTooltip else nil
 		})
 	end, {
-		if webViewRedesignEnabledEngineFeature then p4.showTooltip else nil
+		if webViewRedesignEnabledEngineFeature then p1.showTooltip else nil
 	})
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), constantsModule (copy), var15 (ref), var18 (ref)
-		var17:setRBXEventStream(constantsModule.STUDIO_CTA_EVENT_CONTEXT, constantsModule.STUDIO_CTA_EVENT_NAME_OPEN)
-		var18:openURL(var15.buildCreatorWebNavUrl({ utm_content = "side_bar_blue_icon" }))
-	end, { var17, var18, var15.buildCreatorWebNavUrl })
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), constantsModule (copy), var1 (ref), var4 (ref)
+		var3:setRBXEventStream(constantsModule.STUDIO_CTA_EVENT_CONTEXT, constantsModule.STUDIO_CTA_EVENT_NAME_OPEN)
+		var4:openURL(var1.buildCreatorWebNavUrl({ utm_content = "side_bar_blue_icon" }))
+	end, { var3, var4, var1.buildCreatorWebNavUrl })
 	local _ = nil
 	local _ = nil
 	
@@ -65,120 +65,120 @@ return reactModule.memo(function(p4)
 		local t_1 = {}
 		local t_2 = {}
 		
-		if var15.menuItem ~= nil then
-			table.insert(t_1, var15.menuItem)
+		if var1.menuItem ~= nil then
+			table.insert(t_1, var1.menuItem)
 		end
-		if var16 then
+		if var2 then
 			table.insert(t_2, {
 				isSecondary = true,
-				renderIcon = var19,
-				onActivated = var20
+				renderIcon = var5,
+				onActivated = var6
 			})
 		end
-		items = cryoModule.List.join(t_1, var15.items, t_2)
-		selectedIndex = var15.selectedIndex + #t_1
+		items = cryoModule.List.join(t_1, var1.items, t_2)
+		selectedIndex = var1.selectedIndex + #t_1
 	else
-		items = var15.items
-		selectedIndex = var15.selectedIndex
+		items = var1.items
+		selectedIndex = var1.selectedIndex
 		
-		if var16 then
+		if var2 then
 			items = cryoModule.List.join(items)
 			table.insert(items, {
 				isSecondary = true,
-				renderIcon = var19,
-				onActivated = var20
+				renderIcon = var5,
+				onActivated = var6
 			})
 		end
 	end
-	local var23 = nil
-	local var24 = reactModule.useCallback(function(p7, p8)
-		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var15 (ref)
+	local var7 = nil
+	local var8 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var1 (ref)
 		return reactModule.createElement(appNavItemModule, {
 			isCenterPositioned = true,
 			hasLabel = true,
-			item = p7,
-			isChecked = p8,
-			systemBarLabelTextSizeBinding = if fFlagShrinkAppNavBar then nil else var15.systemBarLabelTextSizeBinding
+			item = p2,
+			isChecked = p3,
+			systemBarLabelTextSizeBinding = if fFlagShrinkAppNavBar then nil else var1.systemBarLabelTextSizeBinding
 		})
-	end, { var15.systemBarLabelTextSizeBinding })
-	local var25 = reactModule.useCallback(function(p9, p10)
-		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var15 (ref)
+	end, { var1.systemBarLabelTextSizeBinding })
+	local var9 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var1 (ref)
 		return reactModule.createElement(appNavItemModule, {
 			isCenterPositioned = false,
 			hasLabel = true,
-			item = p9,
-			isChecked = p10,
-			systemBarLabelTextSizeBinding = if fFlagShrinkAppNavBar then nil else var15.systemBarLabelTextSizeBinding
+			item = p2,
+			isChecked = p3,
+			systemBarLabelTextSizeBinding = if fFlagShrinkAppNavBar then nil else var1.systemBarLabelTextSizeBinding
 		})
-	end, { var15.systemBarLabelTextSizeBinding })
+	end, { var1.systemBarLabelTextSizeBinding })
 	local footerBinding = nil
 	
 	if getScrollAwayEnabledModule() or appNavBarFooterVisibleWithoutScrollAway then
 		footerBinding = visibilityControlModule.getFooterBinding()
 		reactModule.useEffect(function()
-			-- upvalues: appNavBarGateFooterVisibleOnPlacement (copy), var15 (ref), placementModule (copy), visibilityControlModule (copy)
+			-- upvalues: appNavBarGateFooterVisibleOnPlacement (copy), var1 (ref), placementModule (copy), visibilityControlModule (copy)
 			local isVisible
 			if appNavBarGateFooterVisibleOnPlacement then
-				isVisible = var15.isVisible
+				isVisible = var1.isVisible
 				
 				if isVisible then
-					isVisible = var15.placement == placementModule.Bottom
+					isVisible = var1.placement == placementModule.Bottom
 					isVisible = nil
 				end
 			else
-				isVisible = var15.isVisible
+				isVisible = var1.isVisible
 			end
 			visibilityControlModule.setFooterVisible(isVisible)
 		end, {
-			var15.isVisible,
-			if appNavBarGateFooterVisibleOnPlacement then var15.placement else nil
+			var1.isVisible,
+			if appNavBarGateFooterVisibleOnPlacement then var1.placement else nil
 		})
 	end
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableFlyoutOnNavRail (copy), items (write), selectedIndex (write), var15 (ref), appNavTelemetryModule (copy)
-		local var27 = if fFlagEnableFlyoutOnNavRail then items[selectedIndex] else var15.items[var15.selectedIndex]
+		-- upvalues: fFlagEnableFlyoutOnNavRail (copy), items (write), selectedIndex (write), var1 (ref), appNavTelemetryModule (copy)
+		local var10 = if fFlagEnableFlyoutOnNavRail then items[selectedIndex] else var1.items[var1.selectedIndex]
 		
-		if var27 ~= nil and var27.page ~= nil then
-			appNavTelemetryModule.logSwitchTabEnd(var27.page)
+		if var10 ~= nil and var10.page ~= nil then
+			appNavTelemetryModule.logSwitchTabEnd(var10.page)
 		end
-	end, if fFlagEnableFlyoutOnNavRail then { items, selectedIndex } else { var15.items, var15.selectedIndex })
+	end, if fFlagEnableFlyoutOnNavRail then { items, selectedIndex } else { var1.items, var1.selectedIndex })
 	reactModule.useEffect(function()
-		-- upvalues: appNavTelemetryModule (copy), var15 (ref)
-		appNavTelemetryModule.logVisibilityEnd(var15.isVisible)
-	end, { var15.isVisible })
+		-- upvalues: appNavTelemetryModule (copy), var1 (ref)
+		appNavTelemetryModule.logVisibilityEnd(var1.isVisible)
+	end, { var1.isVisible })
 	reactModule.useEffect(function()
-		-- upvalues: appNavTelemetryModule (copy), var15 (ref)
-		appNavTelemetryModule.logPlacement(var15.placement)
-	end, { var15.placement })
+		-- upvalues: appNavTelemetryModule (copy), var1 (ref)
+		appNavTelemetryModule.logPlacement(var1.placement)
+	end, { var1.placement })
 	
-	if var15.placement == placementModule.Bottom then
-		var23 = reactModule.createElement(navigationBar, {
+	if var1.placement == placementModule.Bottom then
+		var7 = reactModule.createElement(navigationBar, {
 			animated = true,
 			active = true,
 			alignment = navigationBarAlignment.EvenlyDistributed,
 			items = items,
-			isVisible = var15.isVisible,
-			size = var15.size,
-			renderItem = var24,
-			position = var15.position,
+			isVisible = var1.isVisible,
+			size = var1.size,
+			renderItem = var8,
+			position = var1.position,
 			selection = selectedIndex,
-			clipsDescendants = var15.clipsDescendants,
+			clipsDescendants = var1.clipsDescendants,
 			visibility = footerBinding
 		})
-	elseif var15.placement == placementModule.Left then
-		var23 = reactModule.createElement(navigationRailV2, {
+	elseif var1.placement == placementModule.Left then
+		var7 = reactModule.createElement(navigationRailV2, {
 			animated = true,
 			alignment = navigationRailAlignment.Justified,
 			items = items,
-			renderItem = var25,
-			size = var15.size,
-			isVisible = var15.isVisible,
-			position = var15.position,
+			renderItem = var9,
+			size = var1.size,
+			isVisible = var1.isVisible,
+			position = var1.position,
 			selection = selectedIndex,
-			clipsDescendants = var15.clipsDescendants,
-			leadingComponent = if fFlagAddGamepadBumperNavigation then var15.leadingComponent else nil,
-			trailingComponent = if fFlagAddGamepadBumperNavigation then var15.trailingComponent else nil
+			clipsDescendants = var1.clipsDescendants,
+			leadingComponent = if fFlagAddGamepadBumperNavigation then var1.leadingComponent else nil,
+			trailingComponent = if fFlagAddGamepadBumperNavigation then var1.trailingComponent else nil
 		})
 	end
-	return var23
+	return var7
 end)

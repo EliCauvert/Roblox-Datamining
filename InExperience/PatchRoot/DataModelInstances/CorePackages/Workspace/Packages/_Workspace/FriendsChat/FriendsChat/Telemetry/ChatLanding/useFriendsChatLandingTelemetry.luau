@@ -14,63 +14,63 @@ local function _()
 	return getFriendsChatSettingsStoreModule(false).getChatEnabled(false)
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), chatLandingTelemetryStateModule (ref), reactModule (ref), getChatLandingSharedCountsModule (ref), chatLandingTelemetryEventsModule (ref), getFriendsChatSettingsStoreModule (ref), getChatLandingConversationInfoModule (ref)
 	local emit = useTelemetryModule(chatLandingTelemetryLayerModule.Context).emit
-	local var8 = chatLandingTelemetryStateModule.useSetState()
-	local var9 = reactModule.useRef(p0.displayedConversations)
-	var9.current = p0.displayedConversations
-	local var10 = reactModule.useRef(p0.isFiltered)
-	var10.current = p0.isFiltered
-	local var11 = reactModule.useRef(emit)
-	var11.current = emit
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: getChatLandingSharedCountsModule (copy), p0 (ref)
-		return getChatLandingSharedCountsModule(p0.conversations)
-	end, { p0.conversations })
+	local var1 = chatLandingTelemetryStateModule.useSetState()
+	local var2 = reactModule.useRef(p1.displayedConversations)
+	var2.current = p1.displayedConversations
+	local var3 = reactModule.useRef(p1.isFiltered)
+	var3.current = p1.isFiltered
+	local var4 = reactModule.useRef(emit)
+	var4.current = emit
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: getChatLandingSharedCountsModule (copy), p1 (ref)
+		return getChatLandingSharedCountsModule(p1.conversations)
+	end, { p1.conversations })
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var12 (ref)
-		var8(function(p1)
-			-- upvalues: var12 (copy)
-			local cloned = table.clone(p1)
-			cloned.chatLandingListCount = var12.chatLandingListCount
-			cloned.pendingConversationCount = var12.pendingConversationCount
-			cloned.unfilteredConversationCount = var12.unfilteredConversationCount
+		-- upvalues: var1 (ref), var5 (ref)
+		var1(function(p2)
+			-- upvalues: var5 (copy)
+			local cloned = table.clone(p2)
+			cloned.chatLandingListCount = var5.chatLandingListCount
+			cloned.pendingConversationCount = var5.pendingConversationCount
+			cloned.unfilteredConversationCount = var5.unfilteredConversationCount
 			
 			return cloned
 		end)
-	end, { var12, var8 })
+	end, { var5, var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), chatLandingTelemetryEventsModule (copy), getFriendsChatSettingsStoreModule (copy)
-		var11.current(chatLandingTelemetryEventsModule.ScreenRendered, {
+		-- upvalues: var4 (ref), chatLandingTelemetryEventsModule (copy), getFriendsChatSettingsStoreModule (copy)
+		var4.current(chatLandingTelemetryEventsModule.ScreenRendered, {
 			isChatEnabled = getFriendsChatSettingsStoreModule(false).getChatEnabled(false)
 		})
 	end, {})
 	
 	return {
 		fireSearchActivatedEvent = reactModule.useCallback(function()
-			-- upvalues: var11 (ref), chatLandingTelemetryEventsModule (copy)
-			var11.current(chatLandingTelemetryEventsModule.ChatLandingSearchBtnClicked, {})
+			-- upvalues: var4 (ref), chatLandingTelemetryEventsModule (copy)
+			var4.current(chatLandingTelemetryEventsModule.ChatLandingSearchBtnClicked, {})
 		end, {}),
 		fireConversationClickedEvent = reactModule.useCallback(function(p2, _, p3)
-			-- upvalues: getChatLandingConversationInfoModule (copy), var9 (ref), var10 (ref), var11 (ref), chatLandingTelemetryEventsModule (copy)
+			-- upvalues: getChatLandingConversationInfoModule (copy), var2 (ref), var3 (ref), var4 (ref), chatLandingTelemetryEventsModule (copy)
 			if p2 == nil or p2.id == nil then
 				return
 			end
-			local var14 = getChatLandingConversationInfoModule(p2, var9.current or {}, var10.current == true)
-			local cloned = table.clone(var14)
+			local var6 = getChatLandingConversationInfoModule(p2, var2.current or {}, var3.current == true)
+			local cloned = table.clone(var6)
 			cloned.osaImpressionId = p3
-			var11.current(chatLandingTelemetryEventsModule.ConversationClicked, cloned)
-			var11.current(chatLandingTelemetryEventsModule.ConversationClickedIndexStat, { statValue = var14.selectedIndex })
+			var4.current(chatLandingTelemetryEventsModule.ConversationClicked, cloned)
+			var4.current(chatLandingTelemetryEventsModule.ConversationClickedIndexStat, { statValue = var6.selectedIndex })
 		end, {}),
-		fireConversationImpressionEvent = reactModule.useCallback(function(p4)
-			-- upvalues: getChatLandingConversationInfoModule (copy), var9 (ref), var10 (ref), var11 (ref), chatLandingTelemetryEventsModule (copy)
-			if p4 == nil or p4.id == nil then
+		fireConversationImpressionEvent = reactModule.useCallback(function(p2)
+			-- upvalues: getChatLandingConversationInfoModule (copy), var2 (ref), var3 (ref), var4 (ref), chatLandingTelemetryEventsModule (copy)
+			if p2 == nil or p2.id == nil then
 				return
 			end
-			local var16 = getChatLandingConversationInfoModule(p4, var9.current or {}, var10.current == true)
-			var11.current(chatLandingTelemetryEventsModule.ConversationCellRendered, var16)
-			var11.current(chatLandingTelemetryEventsModule.ConversationCellRenderedIndexStat, { statValue = var16.selectedIndex })
+			local var6 = getChatLandingConversationInfoModule(p2, var2.current or {}, var3.current == true)
+			var4.current(chatLandingTelemetryEventsModule.ConversationCellRendered, var6)
+			var4.current(chatLandingTelemetryEventsModule.ConversationCellRenderedIndexStat, { statValue = var6.selectedIndex })
 		end, {})
 	}
 end

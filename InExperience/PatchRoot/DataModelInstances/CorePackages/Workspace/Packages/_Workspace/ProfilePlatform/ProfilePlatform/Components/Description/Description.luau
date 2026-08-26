@@ -22,59 +22,59 @@ local useTokens = foundationModule.Hooks.useTokens
 local text = foundationModule.Text
 local view = foundationModule.View
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useScreenSize (ref), useDynamicSizeMarginModule (ref), useProfileWrapperContextModule (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), useAboutSectionHeightModule (ref), fFlagProfilePlatformNewProfileHeader (ref), textService (ref), enumsModule (ref), view (ref), text (ref), horizontalPageMargin (ref), expandableTextArea (ref)
-	local var24
-	local var12 = useTokens()
-	local var13 = useScreenSize()
-	local var14, var15 = useDynamicSizeMarginModule()
-	local var16 = useProfileWrapperContextModule()
-	local bodyMedium = var12.Typography.BodyMedium
-	local var17, var18 = reactModule.useState(var13.X)
-	local profileType = var16.profileType
-	local var19 = useLocalization({
+	local var1
+	local var2 = useTokens()
+	local var3 = useScreenSize()
+	local var4, var5 = useDynamicSizeMarginModule()
+	local var6 = useProfileWrapperContextModule()
+	local bodyMedium = var2.Typography.BodyMedium
+	local var7, var8 = reactModule.useState(var3.X)
+	local profileType = var6.profileType
+	local var9 = useLocalization({
 		moreText = textKeysModule.More,
 		noBioYet = textKeysModule.NoBioYet
 	})
-	local description = p0.description
-	local var20 = useIsSpatial() or usePreferredInput() == responsiveModule.Input.Directional
-	local var21, var22 = useAboutSectionHeightModule(description, var17, var14)
-	local var23 = if fFlagProfilePlatformNewProfileHeader then var22 else reactModule.useMemo(function()
-		-- upvalues: description (write), textService (copy), bodyMedium (ref), var20 (ref)
-		return textService:GetTextSize(string.gsub(description or "", "[\r\n]+", " "), bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999)).Y * (if var20 then 2.6 else 2)
-	end, { description, bodyMedium.FontSize, bodyMedium.Font, var20 })
+	local description = p1.description
+	local var10 = useIsSpatial() or usePreferredInput() == responsiveModule.Input.Directional
+	local var11, var12 = useAboutSectionHeightModule(description, var7, var4)
+	local var13 = if fFlagProfilePlatformNewProfileHeader then var12 else reactModule.useMemo(function()
+		-- upvalues: description (write), textService (copy), bodyMedium (ref), var10 (ref)
+		return textService:GetTextSize(string.gsub(description or "", "[\r\n]+", " "), bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999)).Y * (if var10 then 2.6 else 2)
+	end, { description, bodyMedium.FontSize, bodyMedium.Font, var10 })
 	
 	if fFlagProfilePlatformNewProfileHeader then
-		var24 = var22 < var21
-		var24 = nil
+		var1 = var12 < var11
+		var1 = nil
 	else
-		var24 = nil
+		var1 = nil
 	end
-	local var25 = reactModule.useMemo(function()
-		-- upvalues: var17 (ref), var14 (ref), reactModule (copy), var23 (ref)
-		return reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var17 - var14 * 2, var23) })
-	end, { var23, var17, var14 })
+	local var14 = reactModule.useMemo(function()
+		-- upvalues: var7 (ref), var4 (ref), reactModule (copy), var13 (ref)
+		return reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var7 - var4 * 2, var13) })
+	end, { var13, var7, var4 })
 	
 	if description == nil or description == "" then
 		if fFlagProfilePlatformNewProfileHeader then
 			return nil
 		end
-		description = var19.noBioYet
+		description = var9.noBioYet
 	end
 	return if profileType == enumsModule.ProfileTypes.User or profileType == enumsModule.ProfileTypes.Contact then reactModule.createElement("Frame", {
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		[reactModule.Change.AbsoluteSize] = function(p1)
-			-- upvalues: var15 (ref), var18 (ref)
-			var15(p1)
-			var18(p1.AbsoluteSize.X)
+		[reactModule.Change.AbsoluteSize] = function(p2)
+			-- upvalues: var5 (ref), var8 (ref)
+			var5(p2)
+			var8(p2.AbsoluteSize.X)
 		end
 	}, {
 		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var14),
-			PaddingRight = UDim.new(0, var14)
+			PaddingLeft = UDim.new(0, var4),
+			PaddingRight = UDim.new(0, var4)
 		}),
 		DescriptionContainer = reactModule.createElement(view, { tag = "size-full col gap-xsmall" }, {
 			Description = reactModule.createElement(text, {
@@ -82,32 +82,32 @@ return function(p0)
 				tag = "auto-xy text-wrap text-align-x-left text-align-y-top text-truncate-split",
 				Text = description,
 				fontStyle = bodyMedium
-			}, { UISizeConstraint = var25 }),
-			MoreButton = if fFlagProfilePlatformNewProfileHeader then if var24 then reactModule.createElement(text, {
+			}, { UISizeConstraint = var14 }),
+			MoreButton = if fFlagProfilePlatformNewProfileHeader then if var1 then reactModule.createElement(text, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = "auto-xy text-wrap text-align-x-left text-align-y-top text-truncate-split",
-				Text = `<u>{var19.moreText}</u>`,
-				fontStyle = var12.Typography.TitleMedium,
-				onActivated = p0.onActivateMoreButton
+				Text = `<u>{var9.moreText}</u>`,
+				fontStyle = var2.Typography.TitleMedium,
+				onActivated = p1.onActivateMoreButton
 			}) else nil else reactModule.createElement(text, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = "auto-xy text-wrap text-align-x-left text-align-y-top text-truncate-split",
-				Text = `<u>{var19.moreText}</u>`,
-				fontStyle = var12.Typography.TitleMedium,
-				onActivated = p0.onActivateMoreButton
+				Text = `<u>{var9.moreText}</u>`,
+				fontStyle = var2.Typography.TitleMedium,
+				onActivated = p1.onActivateMoreButton
 			})
 		})
 	}) else reactModule.createElement(horizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
-		layoutOrder = p0.layoutOrder,
+		layoutOrder = p1.layoutOrder,
 		size = UDim2.new(1, 0, 0, 0)
 	}, {
 		Description = reactModule.createElement(expandableTextArea, {
 			compactNumberOfLines = 3,
-			Text = p0.description,
+			Text = p1.description,
 			padding = Vector2.new(0, 0)
 		})
 	})

@@ -14,9 +14,9 @@ return {
 				-- upvalues: default (copy), t (copy)
 				return if p2.status == default.Status.AUTHORIZED then { status = t.Granted } else { status = t.Denied }
 			end)
-		end):catch(function(p0)
+		end):catch(function(p1)
 			-- upvalues: t (copy)
-			return { status = t.Denied, error = tostring(p0) }
+			return { status = t.Denied, error = tostring(p1) }
 		end)
 	end,
 	PermissionStatus = t

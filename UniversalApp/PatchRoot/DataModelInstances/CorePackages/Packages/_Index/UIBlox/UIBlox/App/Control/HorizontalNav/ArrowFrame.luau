@@ -27,17 +27,17 @@ arrowFrame.validateProps = tModule.strictInterface({
 })
 arrowFrame.defaultProps = { ZIndex = 1, isVisibleRight = true, isVisibleLeft = true }
 
-function arrowFrame.init(p0)
-	p0.state = { isHovered = false }
+function arrowFrame.init(p1)
+	p1.state = { isHovered = false }
 	
 	function p0.onMouseEnter()
-		-- upvalues: p0 (ref)
-		p0:setState({ isHovered = true })
+		-- upvalues: p1 (ref)
+		p1:setState({ isHovered = true })
 	end
 	
 	function p0.onMouseLeave()
-		-- upvalues: p0 (ref)
-		p0:setState({ isHovered = false })
+		-- upvalues: p1 (ref)
+		p1:setState({ isHovered = false })
 	end
 end
 

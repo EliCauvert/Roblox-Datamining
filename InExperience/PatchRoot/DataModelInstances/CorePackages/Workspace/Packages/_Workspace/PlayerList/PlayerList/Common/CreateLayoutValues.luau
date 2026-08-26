@@ -5,11 +5,11 @@ local images = require(parent_1.UIBlox).App.ImageSet.Images
 local foundationModule = require(parent_1.Foundation)
 local fFlagPlayerListFoundationSubscriptionIconModule = require(parent.Flags.FFlagPlayerListFoundationSubscriptionIcon)
 
-return memoize(function(p0, p1)
+return memoize(function(p1, p2)
 	-- upvalues: images (ref), fFlagPlayerListFoundationSubscriptionIconModule (ref), foundationModule (ref)
-	local t = { IsTenFoot = p0 }
+	local t = { IsTenFoot = p1 }
 	
-	if p0 then
+	if p1 then
 		t.ContainerPosition = UDim2.new(0.5, 0, 0.5, 0)
 		t.ContainerSize = UDim2.new(0, 350, 0, 720)
 		t.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -96,7 +96,7 @@ return memoize(function(p0, p1)
 		t.ScrollBarOffset = 4
 		t.ScrollBarSize = 8
 	end
-	t.TopBarOffset = p1.TopBarHeight
+	t.TopBarOffset = p2.TopBarHeight
 	t.PlayerDropDownSizeXMobile = 327
 	t.ScrollBarSizeMobile = 2
 	t.PlayerNameSizeXMobile = 194

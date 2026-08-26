@@ -3,9 +3,9 @@ local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceCha
 local _ = require(viewRecycler.Core.Types)
 
 return {
-	hasStructuralChange = function(p0)
+	hasStructuralChange = function(p1)
 		-- upvalues: dataSourceChangeTypeModule (ref)
-		for i, v in p0.changes do
+		for i, v in p1.changes do
 			if v.type ~= dataSourceChangeTypeModule.Update then
 				return true
 			end
@@ -13,30 +13,30 @@ return {
 		return false
 	end,
 	create = function()
+		local var1 = true
 		local var2 = true
-		local var3 = true
 		
 		return {
-			check = function(p1)
-				-- upvalues: var2 (write), var3 (write)
-				if p1.rearmAfterStructureChange then
+			check = function(p2)
+				-- upvalues: var1 (write), var2 (write)
+				if p2.rearmAfterStructureChange then
+					var1 = true
 					var2 = true
-					var3 = true
 				end
-				local var4 = p1.scrollOffset <= p1.startThreshold
-				local atEnd = p1.atEnd
-				local canReachStart = var4 and (var2 and p1.canReachStart)
-				local canReachEnd = atEnd and (var3 and p1.canReachEnd)
+				local var3 = p2.scrollOffset <= p2.startThreshold
+				local atEnd = p2.atEnd
+				local canReachStart = var3 and (var1 and p2.canReachStart)
+				local canReachEnd = atEnd and (var2 and p2.canReachEnd)
 				
 				if canReachStart then
-					var2 = false
-				elseif not var4 then
-					var2 = true
+					var1 = false
+				elseif not var3 then
+					var1 = true
 				end
 				if canReachEnd then
-					var3 = false
+					var2 = false
 				elseif not atEnd then
-					var3 = true
+					var2 = true
 				end
 				return { startReached = canReachStart, endReached = canReachEnd }
 			end

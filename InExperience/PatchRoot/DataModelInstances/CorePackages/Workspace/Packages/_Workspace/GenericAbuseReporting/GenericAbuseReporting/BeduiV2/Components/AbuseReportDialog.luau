@@ -14,30 +14,30 @@ local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local _ = require(genericAbuseReporting.Enums.AbuseVector)
 local useFocusNavigationRefsModule = require(genericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useFocusNavigationRefs)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), sheet (ref), view (ref), iconButton (ref), inputSize (ref), foundationModule (ref), buttonVariant (ref), abuseReportTooltipModule (ref)
-	local abuseReportFlow = p0.abuseReportFlow
+	local abuseReportFlow = p1.abuseReportFlow
 	local config = abuseReportFlow.config
 	local currentPageElement = abuseReportFlow.currentPageElement
 	local canGoBack = abuseReportFlow.canGoBack
-	local var6, var7 = reactModule.useState(if config.display.titleDisclosure then config.display.titleDisclosure.openByDefault else false)
-	local var8 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function()
-		-- upvalues: var7 (ref)
-		var7(false)
+	local var1, var2 = reactModule.useState(if config.display.titleDisclosure then config.display.titleDisclosure.openByDefault else false)
+	local var3 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function()
+		-- upvalues: var2 (ref)
+		var2(false)
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), p0 (ref)
-		if var6 then
-			p0.takeoverFocus(true)
+		-- upvalues: var1 (ref), p1 (ref)
+		if var1 then
+			p1.takeoverFocus(true)
 			
 			return
 		end
-		p0.takeoverFocus(false)
-	end, { p0.takeoverFocus, var6 })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref)
-		var7(function(p1)
-			return not p1
+		p1.takeoverFocus(false)
+	end, { p1.takeoverFocus, var1 })
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref)
+		var2(function(p2)
+			return not p2
 		end)
 	end, {})
 	
@@ -59,15 +59,15 @@ return reactModule.memo(function(p0)
 				tooltipTitle = config.display.titleDisclosure.tooltipTitle,
 				tooltipText = config.display.titleDisclosure.tooltipText,
 				buttonLabel = config.display.titleDisclosure.buttonLabel,
-				isOpen = var6,
-				onClose = var9,
-				ref = var8
+				isOpen = var1,
+				onClose = var4,
+				ref = var3
 			}, reactModule.createElement(iconButton, {
 				LayoutOrder = 3,
 				size = inputSize.Medium,
 				icon = foundationModule.Enums.IconName.CircleI,
 				variant = buttonVariant.Utility,
-				onActivated = var9
+				onActivated = var4
 			})) else nil
 		})),
 		Content = currentPageElement

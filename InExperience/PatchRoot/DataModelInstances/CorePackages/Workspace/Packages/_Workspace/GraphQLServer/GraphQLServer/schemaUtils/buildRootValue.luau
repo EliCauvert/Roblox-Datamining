@@ -1,6 +1,6 @@
 ﻿local object = require(script:FindFirstAncestor("GraphQLServer").Parent.LuauPolyfill).Object
 
-return function(p0)
+return function(p1)
 	-- upvalues: object (ref)
-	return object.assign({}, p0.Query or {}, p0.Mutation or {})
+	return object.assign({}, p1.Query or {}, p1.Mutation or {})
 end

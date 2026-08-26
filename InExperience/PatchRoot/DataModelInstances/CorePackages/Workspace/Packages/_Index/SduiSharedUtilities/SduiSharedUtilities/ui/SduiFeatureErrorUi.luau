@@ -8,9 +8,9 @@ local buttonSize = foundationModule.Enums.ButtonSize
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), text (ref), button (ref), buttonSize (ref), buttonVariant (ref)
-	local var2 = useLocalization({
+	local var1 = useLocalization({
 		errorMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",
 		retryButtonText = "InGame.CommonUI.Button.Retry"
 	})
@@ -31,12 +31,12 @@ return function(p0)
 		ErrorText = reactModule.createElement(text, {
 			tag = "auto-xy text-body-medium content-default text-align-x-center",
 			LayoutOrder = 1,
-			Text = var2.errorMessage
+			Text = var1.errorMessage
 		}),
-		RetryButton = if p0.onRetry then reactModule.createElement(button, {
+		RetryButton = if p1.onRetry then reactModule.createElement(button, {
 			LayoutOrder = 2,
-			text = var2.retryButtonText,
-			onActivated = p0.onRetry,
+			text = var1.retryButtonText,
+			onActivated = p1.onRetry,
 			size = buttonSize.Medium,
 			variant = buttonVariant.Emphasis
 		}) else nil

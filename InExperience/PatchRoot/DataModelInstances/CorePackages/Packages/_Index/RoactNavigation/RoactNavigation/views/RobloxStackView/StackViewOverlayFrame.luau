@@ -3,10 +3,10 @@ local reactModule = require(parent.Parent.React)
 local lerpModule = require(parent.utils.lerp)
 local stackViewOverlayFrame = reactModule.Component:extend("StackViewOverlayFrame")
 
-function stackViewOverlayFrame.init(p0)
+function stackViewOverlayFrame.init(p1)
 	-- upvalues: reactModule (ref)
-	p0._signalDisconnect = nil
-	p0._ref = reactModule.createRef()
+	p1._signalDisconnect = nil
+	p1._ref = reactModule.createRef()
 end
 
 function stackViewOverlayFrame.render(p1)
@@ -22,42 +22,42 @@ function stackViewOverlayFrame.render(p1)
 	})
 end
 
-function stackViewOverlayFrame.didUpdate(p2, p3)
-	local transitionChangedSignal = p2.props.transitionChangedSignal
+function stackViewOverlayFrame.didUpdate(p1, p2)
+	local transitionChangedSignal = p1.props.transitionChangedSignal
 	
-	if transitionChangedSignal ~= p3.transitionChangedSignal then
-		if p2._signalDisconnect then
-			p2._signalDisconnect()
+	if transitionChangedSignal ~= p2.transitionChangedSignal then
+		if p1._signalDisconnect then
+			p1._signalDisconnect()
 		end
-		p2._signalDisconnect = transitionChangedSignal(function(...)
-			-- upvalues: p2 (ref)
-			p2:_transitionChanged(...)
+		p1._signalDisconnect = transitionChangedSignal(function(...)
+			-- upvalues: p1 (ref)
+			p1:_transitionChanged(...)
 		end)
 	end
 end
 
-function stackViewOverlayFrame.didMount(p4)
-	p4._isMounted = true
-	p4._signalDisconnect = p4.props.transitionChangedSignal(function(...)
-		-- upvalues: p4 (ref)
-		p4:_transitionChanged(...)
+function stackViewOverlayFrame.didMount(p1)
+	p1._isMounted = true
+	p1._signalDisconnect = p1.props.transitionChangedSignal(function(...)
+		-- upvalues: p1 (ref)
+		p1:_transitionChanged(...)
 	end)
 end
 
-function stackViewOverlayFrame.willUnmount(p5)
-	p5._isMounted = false
+function stackViewOverlayFrame.willUnmount(p1)
+	p1._isMounted = false
 	
-	if p5._signalDisconnect then
-		p5._signalDisconnect()
-		p5._signalDisconnect = nil
+	if p1._signalDisconnect then
+		p1._signalDisconnect()
+		p1._signalDisconnect = nil
 	end
 end
 
-function stackViewOverlayFrame._transitionChanged(p6, p7)
+function stackViewOverlayFrame._transitionChanged(p1, p2)
 	-- upvalues: lerpModule (ref)
-	if not p6._isMounted then return end
-	if p6._ref.current then
-		p6._ref.current.BackgroundTransparency = lerpModule(1, p6.props.navigationOptions.overlayTransparency, p7)
+	if not p1._isMounted then return end
+	if p1._ref.current then
+		p1._ref.current.BackgroundTransparency = lerpModule(1, p1.props.navigationOptions.overlayTransparency, p2)
 	end
 end
 

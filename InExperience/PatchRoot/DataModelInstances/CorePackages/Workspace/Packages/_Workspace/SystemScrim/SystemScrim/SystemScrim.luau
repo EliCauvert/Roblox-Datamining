@@ -2,25 +2,25 @@
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 
-return function(p0)
+return function(p1)
 	-- upvalues: signalsReactModule (ref), reactModule (ref)
-	local var2 = signalsReactModule.useSignalState(p0.store.autoDismiss)
+	local var1 = signalsReactModule.useSignalState(p1.store.autoDismiss)
 	
-	return if signalsReactModule.useSignalState(p0.store.visible) then reactModule.createElement("TextButton", {
+	return if signalsReactModule.useSignalState(p1.store.visible) then reactModule.createElement("TextButton", {
 		Size = UDim2.fromScale(1, 1),
 		Visible = true,
-		BackgroundTransparency = signalsReactModule.useSignalBinding(p0.store.transparency),
+		BackgroundTransparency = signalsReactModule.useSignalBinding(p1.store.transparency),
 		BackgroundColor3 = Color3.new(0, 0, 0),
 		Text = "",
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
 		[reactModule.Event.Activated] = reactModule.useCallback(function()
-			-- upvalues: p0 (ref), var2 (ref)
-			p0.store.backgroundScrimActivated:Fire()
+			-- upvalues: p1 (ref), var1 (ref)
+			p1.store.backgroundScrimActivated:Fire()
 			
-			if var2 then
-				p0.store.setVisibility(false)
+			if var1 then
+				p1.store.setVisibility(false)
 			end
-		end, { var2 })
+		end, { var1 })
 	}) else nil
 end

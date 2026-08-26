@@ -7,20 +7,20 @@ return function()
 	if var1.current == nil then
 		local t = {}
 		setmetatable(t, {
-			__index = function(_, p0)
+			__index = function(_, p1)
 				-- upvalues: reactModule (copy), t (ref)
-				local var3 = reactModule.createRef()
-				t[p0] = var3
+				local var2 = reactModule.createRef()
+				t[p1] = var2
 				
-				return var3
+				return var2
 			end,
 			__tostring = function(p1)
-				local var4 = "{"
+				local var2 = "{"
 				
 				for i, v in pairs(p1) do
-					var4 = ("%s\n\t%s -> %s"):format(var4, tostring(i), tostring(v))
+					var2 = ("%s\n\t%s -> %s"):format(var2, tostring(i), tostring(v))
 				end
-				return var4 .. "\n}"
+				return var2 .. "\n}"
 			end
 		})
 		var1.current = t

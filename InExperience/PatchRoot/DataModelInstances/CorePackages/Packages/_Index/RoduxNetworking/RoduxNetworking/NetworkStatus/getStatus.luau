@@ -2,18 +2,18 @@
 local getDeepValueModule = require(parent.getDeepValue)
 local enumNetworkStatusModule = require(parent.EnumNetworkStatus)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getDeepValueModule (ref), enumNetworkStatusModule (ref)
-	local keyPath = p0.keyPath
+	local keyPath = p1.keyPath
 	
-	return function(p1, p2)
+	return function(p2, p3)
 		-- upvalues: getDeepValueModule (copy), keyPath (ref), enumNetworkStatusModule (copy)
-		assert(typeof(p1) == "table")
-		assert(typeof(p2) == "string")
-		assert(#p2 > 0)
-		local var2 = getDeepValueModule(p1, keyPath)
-		assert(var2, string.format("Reducer not found for keyPath: %s. Did you forget to call `installReducer`?", keyPath))
+		assert(typeof(p2) == "table")
+		assert(typeof(p3) == "string")
+		assert(#p3 > 0)
+		local var1 = getDeepValueModule(p2, keyPath)
+		assert(var1, string.format("Reducer not found for keyPath: %s. Did you forget to call `installReducer`?", keyPath))
 		
-		return var2[p2] or enumNetworkStatusModule.NotStarted
+		return var1[p3] or enumNetworkStatusModule.NotStarted
 	end
 end

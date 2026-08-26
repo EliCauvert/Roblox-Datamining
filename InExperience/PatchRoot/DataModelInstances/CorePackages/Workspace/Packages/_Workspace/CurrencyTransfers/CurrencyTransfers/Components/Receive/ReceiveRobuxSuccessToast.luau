@@ -15,44 +15,44 @@ local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 
 return function(_)
 	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), signalsReactModule (ref), formatNumberModule (ref), localizationService (ref), reactModule (ref), transferLocaleFormatModule (ref), handleReceiveCompleteModule (ref), snackbar (ref), enums (ref)
-	local var10 = useLocalization(transferLocalizationKeysModule.Presets.ReceiveRobuxSuccessToast)
-	local var11 = useTransferStoreModule()
-	local var12 = signalsReactModule.useSignalState(var11.getRobuxTransfer)
-	local var13 = signalsReactModule.useSignalState(var11.getIsAlreadyAccepted)
-	local var14 = formatNumberModule(localizationService.RobloxLocaleId, if var12 then var12.receivingAmount or var12.transferAmount else 0)
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: var13 (ref), var10 (ref), transferLocaleFormatModule (copy), var14 (ref)
-		return if var13 then var10.AlreadyAcceptedNotification else transferLocaleFormatModule.substituteAmount(var10.SuccessNotification, tostring(var14))
+	local var1 = useLocalization(transferLocalizationKeysModule.Presets.ReceiveRobuxSuccessToast)
+	local var2 = useTransferStoreModule()
+	local var3 = signalsReactModule.useSignalState(var2.getRobuxTransfer)
+	local var4 = signalsReactModule.useSignalState(var2.getIsAlreadyAccepted)
+	local var5 = formatNumberModule(localizationService.RobloxLocaleId, if var3 then var3.receivingAmount or var3.transferAmount else 0)
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var4 (ref), var1 (ref), transferLocaleFormatModule (copy), var5 (ref)
+		return if var4 then var1.AlreadyAcceptedNotification else transferLocaleFormatModule.substituteAmount(var1.SuccessNotification, tostring(var5))
 	end, {
-		var13,
-		var14,
-		var10.SuccessNotification,
-		var10.AlreadyAcceptedNotification
+		var4,
+		var5,
+		var1.SuccessNotification,
+		var1.AlreadyAcceptedNotification
 	})
-	local var16 = reactModule.useRef(nil)
+	local var7 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), handleReceiveCompleteModule (copy), var11 (ref)
-		if var16.current then
-			task.cancel(var16.current)
+		-- upvalues: var7 (ref), handleReceiveCompleteModule (copy), var2 (ref)
+		if var7.current then
+			task.cancel(var7.current)
 		end
-		var16.current = task.delay(5, function()
-			-- upvalues: handleReceiveCompleteModule (copy), var11 (copy)
-			handleReceiveCompleteModule(var11)
+		var7.current = task.delay(5, function()
+			-- upvalues: handleReceiveCompleteModule (copy), var2 (copy)
+			handleReceiveCompleteModule(var2)
 		end)
 		
 		return function()
-			-- upvalues: var16 (copy)
-			if var16.current then
-				task.cancel(var16.current)
-				var16.current = nil
+			-- upvalues: var7 (copy)
+			if var7.current then
+				task.cancel(var7.current)
+				var7.current = nil
 			end
 		end
 	end, {})
 	
 	return reactModule.createElement(snackbar, {
 		ZIndex = 100,
-		title = var15,
-		icon = if not var13 then {
+		title = var6,
+		icon = if not var4 then {
 			name = enums.IconName.CircleCheck,
 			variant = enums.IconVariant.Filled
 		} else nil,
@@ -61,8 +61,8 @@ return function(_)
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		onClose = function()
-			-- upvalues: handleReceiveCompleteModule (copy), var11 (ref)
-			handleReceiveCompleteModule(var11)
+			-- upvalues: handleReceiveCompleteModule (copy), var2 (ref)
+			handleReceiveCompleteModule(var2)
 		end
 	})
 end

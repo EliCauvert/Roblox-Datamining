@@ -99,30 +99,30 @@ local t = {
 	}
 }
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokensModule (ref), cursorTypeModule (ref), reactModule (ref), t (ref), images (ref), getScaledSliceModule (ref), cursorComponentModule (ref)
-	local var7 = useTokensModule()
-	local colorNamespace = p0.colorNamespace
+	local var1 = useTokensModule()
+	local colorNamespace = p1.colorNamespace
 	
-	if p0.cursorType == cursorTypeModule.NavHighlight then
+	if p1.cursorType == cursorTypeModule.NavHighlight then
 		return reactModule.createElement("Frame", {
 			BorderSizePixel = 1,
 			BackgroundTransparency = 0,
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(0, 0, 1, -3),
 			Size = UDim2.new(1, 0, 0, 3),
-			BackgroundColor3 = var7[colorNamespace].Selection.Start.Color3,
-			BorderColor3 = var7[colorNamespace].Selection.Start.Color3,
-			ref = p1
+			BackgroundColor3 = var1[colorNamespace].Selection.Start.Color3,
+			BorderColor3 = var1[colorNamespace].Selection.Start.Color3,
+			ref = p2
 		})
-	elseif p0.cursorType == cursorTypeModule.Invisible then
+	elseif p1.cursorType == cursorTypeModule.Invisible then
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			ref = p1
+			ref = p2
 		})
 	end
-	local cursorType = t[p0.cursorType]
+	local cursorType = t[p1.cursorType]
 	
 	if cursorType.Tag == "FixedSizeImage" then
 		local uDim2 = UDim2.fromOffset(cursorType.Size, cursorType.Size)
@@ -134,27 +134,27 @@ return reactModule.forwardRef(function(p0, p1)
 			ImageRectSize = images[cursorType.Image].ImageRectSize,
 			Size = uDim2,
 			Position = UDim2.new(0.5, -uDim2.X.Offset / 2, 0.5, -uDim2.Y.Offset / 2),
-			ImageColor3 = var7[colorNamespace].Selection.Start.Color3,
-			ImageTransparency = var7[colorNamespace].Selection.Start.Transparency,
-			ref = p1
+			ImageColor3 = var1[colorNamespace].Selection.Start.Color3,
+			ImageTransparency = var1[colorNamespace].Selection.Start.Transparency,
+			ref = p2
 		})
 	elseif cursorType.Tag == "SlicedImage" then
 		local insetAdjustment = cursorType.InsetAdjustment
-		local var9 = getScaledSliceModule(cursorType.SliceCenter)
+		local var2 = getScaledSliceModule(cursorType.SliceCenter)
 		
 		return reactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Image = images[cursorType.Image].Image,
 			ImageRectOffset = images[cursorType.Image].ImageRectOffset,
 			ImageRectSize = images[cursorType.Image].ImageRectSize,
-			SliceCenter = var9.center,
-			SliceScale = var9.scale,
+			SliceCenter = var2.center,
+			SliceScale = var2.scale,
 			ScaleType = Enum.ScaleType.Slice,
 			Size = UDim2.new(1, insetAdjustment.X * 2, 1, insetAdjustment.Y * 2),
 			Position = UDim2.fromOffset(-insetAdjustment.X, -insetAdjustment.Y),
-			ImageColor3 = var7[colorNamespace].Selection.Start.Color3,
-			ImageTransparency = var7[colorNamespace].Selection.Start.Transparency,
-			ref = p1
+			ImageColor3 = var1[colorNamespace].Selection.Start.Color3,
+			ImageTransparency = var1[colorNamespace].Selection.Start.Transparency,
+			ref = p2
 		}, {
 			Padding = if cursorType.Padding then reactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, cursorType.Padding),
@@ -165,11 +165,11 @@ return reactModule.forwardRef(function(p0, p1)
 		})
 	end
 	return if cursorType.Tag == "RoundedImage" then reactModule.createElement(cursorComponentModule, {
-		isVisible = p0.isVisible,
+		isVisible = p1.isVisible,
 		cornerRadius = cursorType.CornerRadius,
 		offset = cursorType.Offset - cursorType.BorderWidth,
 		borderWidth = cursorType.BorderWidth,
-		colorNamespace = p0.colorNamespace,
-		ref = p1
+		colorNamespace = p1.colorNamespace,
+		ref = p2
 	}) else nil
 end)

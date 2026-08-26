@@ -15,18 +15,18 @@ return {
 	conditionalData = {},
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateCageUV),
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: constantsModule (ref), UGCValidationService (ref), getFIntUniqueUVToleranceModule (ref), errorSourceStringsModule (ref)
-		for i, v in p1.outerCagesData do
-			local var5 = constantsModule.WRAP_TARGET_CAGE_MESH_UV_COUNTS[i]
+		for i, v in p2.outerCagesData do
+			local var1 = constantsModule.WRAP_TARGET_CAGE_MESH_UV_COUNTS[i]
 			
-			if var5 then
+			if var1 then
 				local editable = UGCValidationService:CalculateEditableMeshUniqueUVCount(v.editable)
 				
-				if getFIntUniqueUVToleranceModule() < math.abs(editable - var5) then
-					p0:fail(errorSourceStringsModule.Keys.CageUV_IncorrectUVCount, {
+				if getFIntUniqueUVToleranceModule() < math.abs(editable - var1) then
+					p1:fail(errorSourceStringsModule.Keys.CageUV_IncorrectUVCount, {
 						partName = i,
-						requiredUVCount = tostring(var5),
+						requiredUVCount = tostring(var1),
 						actualUVCount = tostring(editable)
 					})
 				end

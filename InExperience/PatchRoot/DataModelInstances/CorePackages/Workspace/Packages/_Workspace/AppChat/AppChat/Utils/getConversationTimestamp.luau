@@ -3,9 +3,9 @@ local parent = script:FindFirstAncestor("AppChat").Parent
 local _ = require(parent.Time).DateTime
 local var1 = require(parent.RobloxAppLocales).Localization.new(localizationService.RobloxLocaleId)
 
-return function(p0)
+return function(p1)
 	-- upvalues: var1 (ref)
-	local var2 = DateTime.now().UnixTimestamp - p0.dateTime.UnixTimestamp
+	local var2 = DateTime.now().UnixTimestamp - p1.dateTime.UnixTimestamp
 	
 	if var2 < 60 then
 		return var1:Format("Feature.Chat.Label.TimestampNow")
@@ -22,7 +22,7 @@ return function(p0)
 		
 		return if floored == 1 then var1:Format("Feature.Chat.Label.TimestampOneDayAbbreviated") else var1:Format("Feature.Chat.Label.TimestampDaysAbbreviatedPlural", { num_days = floored })
 	elseif var2 >= 2592000 then
-		return p0:Format("ll")
+		return p1:Format("ll")
 	end
 	local floored = math.floor(var2 / 604800)
 	

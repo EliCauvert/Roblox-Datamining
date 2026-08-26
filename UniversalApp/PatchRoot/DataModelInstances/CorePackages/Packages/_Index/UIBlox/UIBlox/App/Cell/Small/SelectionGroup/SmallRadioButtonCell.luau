@@ -24,10 +24,10 @@ smallRadioButtonCell.validateProps = tModule.strictInterface({
 })
 smallRadioButtonCell.defaultProps = { text = "", isSelected = false }
 
-function smallRadioButtonCell.init(p0)
+function smallRadioButtonCell.init(p1)
 	function p0.onSetValue()
-		-- upvalues: p0 (ref)
-		p0.props.onActivated(p0.props.id)
+		-- upvalues: p1 (ref)
+		p1.props.onActivated(p1.props.id)
 	end
 end
 
@@ -61,7 +61,7 @@ function smallRadioButtonCell.render(p1)
 	})
 end
 
-return roactModule.forwardRef(function(p2, p3)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), smallRadioButtonCell (ref), cryoModule (ref)
-	return roactModule.createElement(smallRadioButtonCell, cryoModule.Dictionary.join(p2, { controlRef = p3 }))
+	return roactModule.createElement(smallRadioButtonCell, cryoModule.Dictionary.join(p1, { controlRef = p2 }))
 end)

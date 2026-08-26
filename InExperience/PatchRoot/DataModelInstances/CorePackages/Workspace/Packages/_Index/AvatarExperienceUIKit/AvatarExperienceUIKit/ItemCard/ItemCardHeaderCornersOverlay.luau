@@ -3,16 +3,16 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local fFlagAXItemCardComponentsMemo = require(parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo
 
-local function CornerSlot(p0)
+local function CornerSlot(p1)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
-		AnchorPoint = p0.AnchorPoint,
-		Position = p0.Position,
-		ZIndex = p0.ZIndex
-	}, p0.children)
+		AnchorPoint = p1.AnchorPoint,
+		Position = p1.Position,
+		ZIndex = p1.ZIndex
+	}, p1.children)
 end
 
 local function ItemCardHeaderCornersOverlay(p1)

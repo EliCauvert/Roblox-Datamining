@@ -4,10 +4,10 @@ local text = string.format("https://itemconfiguration.%s", APIUtilModule.getBase
 
 return function(value)
 	-- upvalues: APIUtilModule (ref), text (ref), httpService (ref)
-	local var3, var4 = APIUtilModule.requestAndRetryPost(text, httpService:JSONEncode({ assetIds = value }))
+	local var1, var2 = APIUtilModule.requestAndRetryPost(text, httpService:JSONEncode({ assetIds = value }))
 	
-	if var3 then
-		return true, httpService:JSONDecode(var4)
+	if var1 then
+		return true, httpService:JSONDecode(var2)
 	end
-	return false, var4
+	return false, var2
 end

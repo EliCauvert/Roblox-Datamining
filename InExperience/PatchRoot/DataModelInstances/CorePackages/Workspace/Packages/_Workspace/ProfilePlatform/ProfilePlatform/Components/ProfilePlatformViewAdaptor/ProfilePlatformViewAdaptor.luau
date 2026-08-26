@@ -32,118 +32,118 @@ local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagPr
 local fFlagSwitchProfileWidthHookToSocialCommon = require(parent.SharedFlags).FFlagSwitchProfileWidthHookToSocialCommon
 local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMobileGameJoinCard
 local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
-local var23 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
-local var24 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
+local var1 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local var2 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
 local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
-local var25 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneStore else nil
+local var3 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneStore else nil
 local useSignalState = require(parent.SignalsReact).useSignalState
 local t = { skipFetch = true }
 
 return function(_)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileScrollContextModule (ref), useScreenSize (ref), useTopBarHeight (ref), fFlagEnableMobileGameJoinCard (ref), reactModule (ref), useSelector (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagEnableSplitPane (ref), useSignalState (ref), var25 (ref), profilePlatformPageModule (ref), profileTopBarModule (ref), getSafeAreaSize (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var24 (ref), var23 (ref), t (ref), convertPresenceEnumModule (ref), presenceModule (ref), useDispatch (ref), networkingPresenceModule (ref), useShouldShowContextualInformationModule (ref), useProfilePeekViewHeightModule (ref), getPeekViewOpenHeightByProfileTypeModule (ref), profileFullViewModule (ref), profileModalViewModule (ref), profilePeekViewModule (ref)
-	local var27 = useProfileWrapperContextModule()
-	local var28 = useProfileScrollContextModule()
-	local profileType = var27.profileType
-	local previousView = var27.navigateTo.previousView
-	local var29 = useScreenSize()
-	local var30 = useTopBarHeight()
-	local var31 = if fFlagEnableMobileGameJoinCard then var27.mountAsFullView or false else false
-	local var32 = reactModule.useCallback(function()
+	-- upvalues: useProfileWrapperContextModule (ref), useProfileScrollContextModule (ref), useScreenSize (ref), useTopBarHeight (ref), fFlagEnableMobileGameJoinCard (ref), reactModule (ref), useSelector (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagEnableSplitPane (ref), useSignalState (ref), var3 (ref), profilePlatformPageModule (ref), profileTopBarModule (ref), getSafeAreaSize (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var2 (ref), var1 (ref), t (ref), convertPresenceEnumModule (ref), presenceModule (ref), useDispatch (ref), networkingPresenceModule (ref), useShouldShowContextualInformationModule (ref), useProfilePeekViewHeightModule (ref), getPeekViewOpenHeightByProfileTypeModule (ref), profileFullViewModule (ref), profileModalViewModule (ref), profilePeekViewModule (ref)
+	local var4 = useProfileWrapperContextModule()
+	local var5 = useProfileScrollContextModule()
+	local profileType = var4.profileType
+	local previousView = var4.navigateTo.previousView
+	local var6 = useScreenSize()
+	local var7 = useTopBarHeight()
+	local var8 = if fFlagEnableMobileGameJoinCard then var4.mountAsFullView or false else false
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: previousView (ref)
 		previousView(false)
 	end, { previousView })
-	local var33 = reactModule.useCallback(function()
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: previousView (ref)
 		previousView(true)
 	end, { previousView })
-	local var34 = useSelector(function(p0)
-		return p0.GlobalGuiInset
+	local var11 = useSelector(function(p1)
+		return p1.GlobalGuiInset
 	end)
-	local var35 = useProfileFormFactorModule()
-	local var36 = var35.formFactor == enumsModule.ProfileFormFactor.Wide
-	local var37 = if fFlagEnableSplitPane then useSignalState(var25.getStore().getIsSplitEnabled) else false
-	local var38 = reactModule.useCallback(function()
+	local var12 = useProfileFormFactorModule()
+	local var13 = var12.formFactor == enumsModule.ProfileFormFactor.Wide
+	local var14 = if fFlagEnableSplitPane then useSignalState(var3.getStore().getIsSplitEnabled) else false
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy), profilePlatformPageModule (copy)
 		return reactModule.createElement(profilePlatformPageModule, {})
 	end, {})
-	local var37_1 = fFlagEnableSplitPane and var37
-	local var40 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy), profileTopBarModule (copy), var32 (ref), fFlagEnableSplitPane (copy), var37_1 (ref)
+	local var16 = fFlagEnableSplitPane and var14
+	local var17 = reactModule.useCallback(function()
+		-- upvalues: reactModule (copy), profileTopBarModule (copy), var9 (ref), fFlagEnableSplitPane (copy), var16 (ref)
 		return reactModule.createElement(profileTopBarModule, {
 			transparentBackground = true,
 			backgroundTransparency = nil,
-			navigateBack = var32,
-			hideNavigationButton = if fFlagEnableSplitPane then var37_1 else nil
+			navigateBack = var9,
+			hideNavigationButton = if fFlagEnableSplitPane then var16 else nil
 		})
-	end, if fFlagEnableSplitPane then { var32, var37_1 } else {})
-	local var41 = getSafeAreaSize(var29, var34)
-	local var42 = if fFlagProfilePlatformNewProfileHeader then if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var36) else math.min(var41.X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)
-	local var43 = nil
+	end, if fFlagEnableSplitPane then { var9, var16 } else {})
+	local var18 = getSafeAreaSize(var6, var11)
+	local var19 = if fFlagProfilePlatformNewProfileHeader then if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var13) else math.min(var18.X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)
+	local var20 = nil
 	
 	if fFlagProfilePlatformNewProfileHeader then
-		local var47
-		local profileId = var27.profileId
+		local var21
+		local profileId = var4.profileId
 		local _ = nil
 		
 		if fFlagProfilePlatformPresenceStoreMigrationModule then
-			local var46
+			local var22
 			useEffectOnMount(function()
-				-- upvalues: var24 (copy), profileId (ref)
-				var24.RefreshPresenceByUserId(tostring(profileId))
+				-- upvalues: var2 (copy), profileId (ref)
+				var2.RefreshPresenceByUserId(tostring(profileId))
 			end)
-			local var44 = var23(profileId, t)
-			local var45 = if var44 then var44.userPresenceType else presenceModule.Enums.PresenceType.Offline
+			local var23 = var1(profileId, t)
+			local var24 = if var23 then var23.userPresenceType else presenceModule.Enums.PresenceType.Offline
 			
-			if var44 and var44.universeId ~= "" then
-				var46 = tonumber(var44.universeId)
+			if var23 and var23.universeId ~= "" then
+				var22 = tonumber(var23.universeId)
 				
-				if not var46 then
-					var46 = nil
+				if not var22 then
+					var22 = nil
 				end
-				var47 = convertPresenceEnumModule(var45, var46)
+				var21 = convertPresenceEnumModule(var24, var22)
 			end
 		else
-			local var48 = useDispatch()
+			local var25 = useDispatch()
 			useEffectOnMount(function()
-				-- upvalues: var48 (ref), networkingPresenceModule (copy), profileId (ref)
-				var48(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):catch(function(_) end)
+				-- upvalues: var25 (ref), networkingPresenceModule (copy), profileId (ref)
+				var25(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):catch(function(_) end)
 			end)
-			local var49 = useSelector(function(p1)
+			local var26 = useSelector(function(p1)
 				-- upvalues: presenceModule (copy), profileId (ref)
 				return presenceModule.Selectors.getUserPresenceByUserId(p1, profileId) or {
 					lastLocation = "",
 					userPresenceType = presenceModule.Enums.PresenceType.Offline
 				}
 			end)
-			var47 = convertPresenceEnumModule(var49.userPresenceType, var49.universeId)
+			var21 = convertPresenceEnumModule(var26.userPresenceType, var26.universeId)
 		end
-		var43 = useProfilePeekViewHeightModule(var42, useShouldShowContextualInformationModule(var47))
+		var20 = useProfilePeekViewHeightModule(var19, useShouldShowContextualInformationModule(var21))
 	end
 	local _ = nil
 	local _ = nil
-	local var50 = if fFlagProfilePlatformNewProfileHeader and profileType == enumsModule.ProfileTypes.User then var43 else getPeekViewOpenHeightByProfileTypeModule(profileType)
+	local var27 = if fFlagProfilePlatformNewProfileHeader and profileType == enumsModule.ProfileTypes.User then var20 else getPeekViewOpenHeightByProfileTypeModule(profileType)
 	
-	return if var35.isFullView then reactModule.createElement(profileFullViewModule, { renderContent = var38, navigateBack = var32 }) elseif var36 then reactModule.createElement(profileModalViewModule, {
-		renderContent = var38,
-		renderTopBar = var40,
-		topBarHeight = var30,
-		viewWidth = var42,
-		fillPane = var37,
-		navigateBack = var32
+	return if var12.isFullView then reactModule.createElement(profileFullViewModule, { renderContent = var15, navigateBack = var9 }) elseif var13 then reactModule.createElement(profileModalViewModule, {
+		renderContent = var15,
+		renderTopBar = var17,
+		topBarHeight = var7,
+		viewWidth = var19,
+		fillPane = var14,
+		navigateBack = var9
 	}) else reactModule.createElement(profilePeekViewModule, {
 		bottomDockedContainerHeight = 0,
 		onViewStateChanged = nil,
-		briefViewContentHeight = if var41.Y.Offset - var30 < var50 then UDim.new(1, 0) else UDim.new(0, var50),
-		contentSlot = var38(),
+		briefViewContentHeight = if var18.Y.Offset - var7 < var27 then UDim.new(1, 0) else UDim.new(0, var27),
+		contentSlot = var15(),
 		fullViewContentHeight = UDim.new(1, 0),
-		mountAsFullView = var31,
-		onClosed = var33,
-		topBarHeight = var30,
-		topBarSlot = var40(),
-		viewWidth = UDim.new(0, var41.X.Offset),
-		transitionPercentCallback = function(p2)
-			-- upvalues: var28 (ref)
-			var28.setPeekViewOpenPercent(p2)
+		mountAsFullView = var8,
+		onClosed = var10,
+		topBarHeight = var7,
+		topBarSlot = var17(),
+		viewWidth = UDim.new(0, var18.X.Offset),
+		transitionPercentCallback = function(p1)
+			-- upvalues: var5 (ref)
+			var5.setPeekViewOpenPercent(p1)
 		end,
 		profileType = if fFlagProfilePlatformNewProfileHeader then profileType else nil
 	})

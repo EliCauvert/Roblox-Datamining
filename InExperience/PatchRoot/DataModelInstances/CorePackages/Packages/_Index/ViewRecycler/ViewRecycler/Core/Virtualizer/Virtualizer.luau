@@ -19,53 +19,53 @@ local itemViewPresentationModule = require(viewRecycler.Core.Virtualizer.ItemVie
 local _ = require(viewRecycler.Core.RecyclingScope)
 local virtualizerEngineModule = require(viewRecycler.Core.Virtualizer.VirtualizerEngine)
 
-return function(p0)
+return function(p1)
 	-- upvalues: virtualizerEngineModule (ref), itemViewPresentationModule (ref), internal (ref), external (ref), virtualizerEffectTypeModule (ref), signalsModule (ref), virtualizerQueryTypeModule (ref)
-	local var7 = virtualizerEngineModule({
-		dataSource = p0.dataSource,
-		layout = p0.layout,
-		getRecyclableViewType = p0.getItemViewType,
-		overscan = p0.overscan,
-		overscanPolicy = p0.overscanPolicy,
-		dataPrefetch = p0.dataPrefetch,
-		contentAlignment = p0.contentAlignment,
-		endThreshold = p0.endThreshold,
-		preserveScrollPositionOnChange = p0.preserveScrollPositionOnChange,
-		diagnostics = p0.diagnostics,
-		isItemStickyHeader = p0.isItemStickyHeader,
-		pinnedStartItem = p0.pinnedStartItem,
-		pinnedEndItem = p0.pinnedEndItem
+	local var1 = virtualizerEngineModule({
+		dataSource = p1.dataSource,
+		layout = p1.layout,
+		getRecyclableViewType = p1.getItemViewType,
+		overscan = p1.overscan,
+		overscanPolicy = p1.overscanPolicy,
+		dataPrefetch = p1.dataPrefetch,
+		contentAlignment = p1.contentAlignment,
+		endThreshold = p1.endThreshold,
+		preserveScrollPositionOnChange = p1.preserveScrollPositionOnChange,
+		diagnostics = p1.diagnostics,
+		isItemStickyHeader = p1.isItemStickyHeader,
+		pinnedStartItem = p1.pinnedStartItem,
+		pinnedEndItem = p1.pinnedEndItem
 	})
-	local var8 = itemViewPresentationModule({
-		recyclingScope = p0.recyclingScope,
-		prepareDesiredAssignment = p0.prepareItemViewDesiredAssignment,
-		prepareItemViewAssignment = p0.prepareItemViewAssignment,
-		postCommitItemViewAssignment = p0.postCommitItemViewAssignment,
-		presentItemViewAssignment = p0.presentItemViewAssignment,
-		applyItemViewPlacementIntent = p0.applyItemViewPlacementIntent
+	local var2 = itemViewPresentationModule({
+		recyclingScope = p1.recyclingScope,
+		prepareDesiredAssignment = p1.prepareItemViewDesiredAssignment,
+		prepareItemViewAssignment = p1.prepareItemViewAssignment,
+		postCommitItemViewAssignment = p1.postCommitItemViewAssignment,
+		presentItemViewAssignment = p1.presentItemViewAssignment,
+		applyItemViewPlacementIntent = p1.applyItemViewPlacementIntent
 	})
-	local dataSource = p0.dataSource
-	local var9 = nil
-	local var10 = false
-	local var11 = p0.active == nil
-	local var12 = false
-	local var13 = false
-	local var14 = false
+	local dataSource = p1.dataSource
+	local var3 = nil
+	local var4 = false
+	local var5 = p1.active == nil
+	local var6 = false
+	local var7 = false
+	local var8 = false
 	local t = {
 		boundaryDropped = 0,
 		trusted = true,
 		type = internal.SubmitLogicalMeasurements,
 		measurements = {}
 	}
-	local var16 = nil
-	local var17 = nil
+	local var9 = nil
+	local var10 = nil
 	
 	local function _()
-		-- upvalues: var9 (write), var10 (write), var13 (write), dataSource (write), var16 (write), internal (copy)
-		if var9 == nil and var10 and not var13 then
-			var9 = dataSource.subscribe(function(p1)
-				-- upvalues: var16 (copy), internal (copy)
-				var16(nil, { type = internal.ApplyDataSourceChange, changeBatch = p1 })
+		-- upvalues: var3 (write), var4 (write), var7 (write), dataSource (write), var9 (write), internal (copy)
+		if var3 == nil and var4 and not var7 then
+			var3 = dataSource.subscribe(function(p2)
+				-- upvalues: var9 (copy), internal (copy)
+				var9(nil, { type = internal.ApplyDataSourceChange, changeBatch = p2 })
 			end)
 			
 			return
@@ -73,140 +73,140 @@ return function(p0)
 	end
 	
 	local _ = function()
-		-- upvalues: var9 (write)
-		if var9 ~= nil then
-			var9()
-			var9 = nil
+		-- upvalues: var3 (write)
+		if var3 ~= nil then
+			var3()
+			var3 = nil
 		end
 	end
 	
 	local function executeDispatch(p2, p3, p4)
-		-- upvalues: external (copy), dataSource (write), var9 (write), var7 (ref), var10 (write), var13 (write), var16 (write), internal (copy), var11 (write), var8 (ref), var12 (write), virtualizerEffectTypeModule (copy)
+		-- upvalues: external (copy), dataSource (write), var3 (write), var1 (ref), var4 (write), var7 (write), var9 (write), internal (copy), var5 (write), var2 (ref), var6 (write), virtualizerEffectTypeModule (copy)
 		if p2 ~= nil and (p2.type == external.SetDataSource or p2.type == external.SetDataSourceAndLayout) then
 			local dataSource_1 = p2.dataSource
 			
 			if dataSource_1 ~= dataSource then
-				if var9 ~= nil then
-					var9()
-					var9 = nil
+				if var3 ~= nil then
+					var3()
+					var3 = nil
 				end
 				dataSource = dataSource_1
 			end
 		end
-		local var19 = if p4 == nil then {
+		local var11 = if p4 == nil then {
 			result = nil,
 			snapshot = p3,
 			presentation = { assignmentsChanged = false, placementChanged = false },
 			effects = {}
-		} else var7.dispatch(p4)
+		} else var1.dispatch(p4)
 		
 		if p2 ~= nil and p2.type == external.Activate then
-			var10 = true
+			var4 = true
 			
-			if var9 == nil and not var13 then
-				var9 = dataSource.subscribe(function(p5)
-					-- upvalues: var16 (copy), internal (copy)
-					var16(nil, { type = internal.ApplyDataSourceChange, changeBatch = p5 })
+			if var3 == nil and not var7 then
+				var3 = dataSource.subscribe(function(p5)
+					-- upvalues: var9 (copy), internal (copy)
+					var9(nil, { type = internal.ApplyDataSourceChange, changeBatch = p5 })
 				end)
 			end
 		elseif p2 == nil or p2.type ~= external.SetActive then
 			if p2 == nil or p2.type ~= external.Destroy then
-				local var20 = nil
+				local var12 = nil
 				
-				if var11 then
-					local presentation = var19.presentation
-					local snapshot = var19.snapshot
+				if var5 then
+					local presentation = var11.presentation
+					local snapshot = var11.snapshot
 					
-					if not var12 or presentation.assignmentsChanged or (presentation.placementChanged or p3.entries ~= snapshot.entries) or p3.contentStartOffset ~= snapshot.contentStartOffset then
-						var20 = var8.apply(p3, snapshot, presentation)
-						var12 = true
+					if not var6 or presentation.assignmentsChanged or (presentation.placementChanged or p3.entries ~= snapshot.entries) or p3.contentStartOffset ~= snapshot.contentStartOffset then
+						var12 = var2.apply(p3, snapshot, presentation)
+						var6 = true
 					end
 				else
-					var20 = var8.apply(p3, nil, { assignmentsChanged = true, placementChanged = true })
-					var12 = false
+					var12 = var2.apply(p3, nil, { assignmentsChanged = true, placementChanged = true })
+					var6 = false
 				end
-				if var20 ~= nil then
-					for i, v in var20 do
-						table.insert(var19.effects, { type = virtualizerEffectTypeModule.Diagnostic, event = v })
+				if var12 ~= nil then
+					for i, v in var12 do
+						table.insert(var11.effects, { type = virtualizerEffectTypeModule.Diagnostic, event = v })
 					end
 				end
-				if var9 == nil and var9 == nil and var10 then
-					if var13 then
-						return var19
+				if var3 == nil and var3 == nil and var4 then
+					if var7 then
+						return var11
 					end
-					var9 = dataSource.subscribe(function(p6)
-						-- upvalues: var16 (copy), internal (copy)
-						var16(nil, { type = internal.ApplyDataSourceChange, changeBatch = p6 })
+					var3 = dataSource.subscribe(function(p5)
+						-- upvalues: var9 (copy), internal (copy)
+						var9(nil, { type = internal.ApplyDataSourceChange, changeBatch = p5 })
 					end)
 				end
-				return var19
-			elseif var9 ~= nil then
-				var9()
-				var9 = nil
+				return var11
+			elseif var3 ~= nil then
+				var3()
+				var3 = nil
 			end
-			var8.destroy()
-			var13 = true
+			var2.destroy()
+			var7 = true
 			
-			return var19
+			return var11
 		else
-			var11 = p2.active
+			var5 = p2.active
 		end
 	end
 	
-	var16 = function(p7, p8)
-		-- upvalues: external (copy), var8 (ref), t (ref), var17 (write), var14 (write), var13 (write), var7 (ref), executeDispatch (ref), p0 (ref), virtualizerEffectTypeModule (copy)
-		if p8 == nil and p7 ~= nil then
-			if p7.type == external.SubmitMeasurements then
-				local var21, var22 = var8.validateMeasurements(p7.measurements)
-				t.measurements = var21
-				t.boundaryDropped = var22
-				p8 = t
-			elseif p7.type ~= external.SetActive then
-				p8 = p7
+	var9 = function(p5, p6)
+		-- upvalues: external (copy), var2 (ref), t (ref), var10 (write), var8 (write), var7 (write), var1 (ref), executeDispatch (ref), p1 (ref), virtualizerEffectTypeModule (copy)
+		if p6 == nil and p5 ~= nil then
+			if p5.type == external.SubmitMeasurements then
+				local var13, var14 = var2.validateMeasurements(p5.measurements)
+				t.measurements = var13
+				t.boundaryDropped = var14
+				p6 = t
+			elseif p5.type ~= external.SetActive then
+				p6 = p5
 			end
 		end
-		if p7 ~= nil and p7.type == external.Destroy and var17 ~= nil then
-			var17()
-			var17 = nil
+		if p5 ~= nil and p5.type == external.Destroy and var10 ~= nil then
+			var10()
+			var10 = nil
 		end
-		assert(not var14, "Virtualizer: cannot mutate during a transaction")
+		assert(not var8, "Virtualizer: cannot mutate during a transaction")
 		
-		if var13 then
-			assert(p7 ~= nil and p7.type == external.Destroy, "Virtualizer: cannot dispatch after destruction")
+		if var7 then
+			assert(p5 ~= nil and p5.type == external.Destroy, "Virtualizer: cannot dispatch after destruction")
 		end
-		var14 = true
-		local snapshot = var7.getSnapshot()
-		local ok, status = pcall(executeDispatch, p7, snapshot, p8)
-		var14 = false
+		var8 = true
+		local snapshot = var1.getSnapshot()
+		local ok, status = pcall(executeDispatch, p5, snapshot, p6)
+		var8 = false
 		
 		if not ok then
 			error(status, 0)
 		end
-		if p0.diagnostics ~= nil then
+		if p1.diagnostics ~= nil then
 			for i, v in status.effects do
 				if v.type == virtualizerEffectTypeModule.Diagnostic then
-					p0.diagnostics(v.event)
+					p1.diagnostics(v.event)
 				end
 			end
 		end
-		if p0.onUpdate ~= nil then
-			p0.onUpdate(snapshot, status)
+		if p1.onUpdate ~= nil then
+			p1.onUpdate(snapshot, status)
 		end
 		return status
 	end
 	
-	if p0.active ~= nil then
-		var17 = signalsModule.createEffect(function(p9)
-			-- upvalues: var16 (write), external (copy), p0 (ref)
-			var16({ type = external.SetActive, active = p0.active(p9) })
+	if p1.active ~= nil then
+		var10 = signalsModule.createEffect(function(p7)
+			-- upvalues: var9 (write), external (copy), p1 (ref)
+			var9({ type = external.SetActive, active = p1.active(p7) })
 		end)
 	end
 	return {
-		dispatch = var16,
-		getSnapshot = var7.getSnapshot,
-		query = function(p10)
-			-- upvalues: virtualizerQueryTypeModule (copy), var8 (ref), var7 (ref)
-			return if p10.type == virtualizerQueryTypeModule.GetItemViews then var8.getItemViews() elseif p10.type == virtualizerQueryTypeModule.GetPlacementIntent then var8.resolvePlacementIntent(p10.itemView) else var7.query(p10)
+		dispatch = var9,
+		getSnapshot = var1.getSnapshot,
+		query = function(p7)
+			-- upvalues: virtualizerQueryTypeModule (copy), var2 (ref), var1 (ref)
+			return if p7.type == virtualizerQueryTypeModule.GetItemViews then var2.getItemViews() elseif p7.type == virtualizerQueryTypeModule.GetPlacementIntent then var2.resolvePlacementIntent(p7.itemView) else var1.query(p7)
 		end
 	}
 end

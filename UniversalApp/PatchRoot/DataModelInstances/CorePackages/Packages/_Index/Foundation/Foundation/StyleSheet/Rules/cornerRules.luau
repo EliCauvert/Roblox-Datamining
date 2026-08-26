@@ -41,9 +41,9 @@ local function _(p1, p2)
 	return t
 end
 
-local _ = function(p1)
+local _ = function(p3)
 	-- upvalues: uDim (ref), list (ref)
-	local t = { pseudo = "UICorner", priority = 0, tag = p1 }
+	local t = { pseudo = "UICorner", priority = 0, tag = p3 }
 	local t_1 = {}
 	
 	for i, v in list do
@@ -54,13 +54,13 @@ local _ = function(p1)
 	return t
 end
 
-return function(p1, p2)
+return function(p4, p5)
 	-- upvalues: list (ref), t_1 (ref), uDim (ref), t (ref)
 	local t_2 = {}
 	
-	for i, v in p1 do
+	for i, v in p4 do
 		local v_1
-		local var1 = p2(v)
+		local var1 = p5(v)
 		local cornerValue = var1.cornerValue
 		local attributes = var1.attributes
 		local t_3 = {

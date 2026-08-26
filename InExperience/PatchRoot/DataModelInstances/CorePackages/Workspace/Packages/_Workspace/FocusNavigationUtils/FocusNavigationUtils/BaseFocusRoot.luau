@@ -13,12 +13,12 @@ local t_1 = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop
 }
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: cryoModule (ref), t (ref), t_1 (ref), reactModule (ref)
-	local var4 = cryoModule.Dictionary.join(t, p0.frameProps or {}, { ref = p1 })
+	local var1 = cryoModule.Dictionary.join(t, p1.frameProps or {}, { ref = p2 })
 	
-	if p0.isIsolated then
-		var4 = cryoModule.Dictionary.union(t_1, var4)
+	if p1.isIsolated then
+		var1 = cryoModule.Dictionary.union(t_1, var1)
 	end
-	return reactModule.createElement("Frame", var4, p0.children)
+	return reactModule.createElement("Frame", var1, p1.children)
 end)

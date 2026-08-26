@@ -13,8 +13,8 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local iconVariant = foundationModule.Enums.IconVariant
 
-local function _(p0)
-	return p0.gameIcon or `rbxthumb://type=GameIcon&id={p0.universeId}&w=150&h=150`
+local function _(p1)
+	return p1.gameIcon or `rbxthumb://type=GameIcon&id={p1.universeId}&w=150&h=150`
 end
 
 return function(p1)

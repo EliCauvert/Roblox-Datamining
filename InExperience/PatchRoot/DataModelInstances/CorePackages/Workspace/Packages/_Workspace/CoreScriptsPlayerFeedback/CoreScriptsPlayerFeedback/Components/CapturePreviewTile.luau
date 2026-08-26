@@ -9,10 +9,10 @@ local builderIconsModule = require(parent.BuilderIcons)
 local iconVariant = builderIconsModule.IconVariant
 local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), loading (ref), iconSize (ref), icon (ref), builderIconsModule (ref), iconVariant (ref)
-	local var4, var5 = reactModule.useState(false)
-	local var6, var7 = reactModule.useState(false)
+	local var1, var2 = reactModule.useState(false)
+	local var3, var4 = reactModule.useState(false)
 	
 	return reactModule.createElement("ImageButton", {
 		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
@@ -20,27 +20,27 @@ return reactModule.memo(function(p0)
 		BorderSizePixel = 0,
 		ClipsDescendants = false,
 		Image = "",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(0, 80, 0, 80),
 		[reactModule.Event.MouseEnter] = function()
-			-- upvalues: var5 (ref)
-			var5(true)
+			-- upvalues: var2 (ref)
+			var2(true)
 		end,
 		[reactModule.Event.MouseLeave] = function()
-			-- upvalues: var5 (ref)
-			var5(false)
+			-- upvalues: var2 (ref)
+			var2(false)
 		end,
 		[reactModule.Event.SelectionGained] = function()
-			-- upvalues: var7 (ref)
-			var7(true)
+			-- upvalues: var4 (ref)
+			var4(true)
 		end,
 		[reactModule.Event.SelectionLost] = function()
-			-- upvalues: var7 (ref)
-			var7(false)
+			-- upvalues: var4 (ref)
+			var4(false)
 		end
 	}, {
 		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		FailedStroke = if p0.status == "failed" and p0.failureReason ~= Enum.UploadCaptureResult.CaptureModerated then reactModule.createElement("UIStroke", {
+		FailedStroke = if p1.status == "failed" and p1.failureReason ~= Enum.UploadCaptureResult.CaptureModerated then reactModule.createElement("UIStroke", {
 			Thickness = 1,
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 			Color = Color3.fromRGB(220, 50, 50)
@@ -50,13 +50,13 @@ return reactModule.memo(function(p0)
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
 			ZIndex = 1,
-			ImageContent = Content.fromObject(p0.capture),
+			ImageContent = Content.fromObject(p1.capture),
 			ScaleType = Enum.ScaleType.Crop,
 			Size = UDim2.fromScale(1, 1)
 		}, {
 			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 		}),
-		UploadingOverlay = if p0.status == "uploading" then reactModule.createElement("Frame", {
+		UploadingOverlay = if p1.status == "uploading" then reactModule.createElement("Frame", {
 			BackgroundTransparency = 0.45,
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
@@ -72,14 +72,14 @@ return reactModule.memo(function(p0)
 				Position = UDim2.fromScale(0.5, 0.5)
 			})
 		}) else nil,
-		RemoveButton = if var4 or game:GetService("UserInputService").TouchEnabled or var6 then reactModule.createElement("ImageButton", {
+		RemoveButton = if var1 or game:GetService("UserInputService").TouchEnabled or var3 then reactModule.createElement("ImageButton", {
 			AnchorPoint = Vector2.new(1, 0),
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Position = UDim2.new(1, -2, 0, 2),
 			Size = UDim2.new(0, 20, 0, 20),
 			ZIndex = 4,
-			[reactModule.Event.Activated] = p0.onRemove
+			[reactModule.Event.Activated] = p1.onRemove
 		}, {
 			CircleXIcon = reactModule.createElement(icon, {
 				name = builderIconsModule.Icon.CircleX,

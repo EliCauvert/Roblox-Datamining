@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p0)
-	local var0 = false
+local function _(p1)
+	local var1 = false
 	
 	return function()
-		-- upvalues: var0 (write), p0 (ref)
-		if not var0 then
-			var0 = true
-			p0()
+		-- upvalues: var1 (write), p1 (ref)
+		if not var1 then
+			var1 = true
+			p1()
 		end
 	end
 end
@@ -25,18 +25,18 @@ return function(p1)
 			var1 = nil
 			
 			if var2 ~= nil then
-				local var7 = var2
+				local var4 = var2
 				var2 = nil
-				var7()
+				var4()
 			end
 		end
 	end
 	
 	local function constructResource()
 		-- upvalues: var2 (write), var1 (write), p1 (ref)
-		local var8, var9 = p1()
-		var2 = var8
-		var1 = var9
+		local var4, var5 = p1()
+		var2 = var4
+		var1 = var5
 	end
 	
 	local function handleError(p2, ...)
@@ -48,9 +48,9 @@ return function(p1)
 				var1 = nil
 				
 				if var2 ~= nil then
-					local var10 = var2
+					local var4 = var2
 					var2 = nil
-					var10()
+					var4()
 				end
 			end
 			error(...)
@@ -64,12 +64,12 @@ return function(p1)
 		if var3 == 1 then
 			handleError(pcall(constructResource))
 		end
-		local var11 = false
+		local var4 = false
 		
 		return function()
-			-- upvalues: var11 (write), disposeResource (ref)
-			if not var11 then
-				var11 = true
+			-- upvalues: var4 (write), disposeResource (ref)
+			if not var4 then
+				var4 = true
 				disposeResource()
 			end
 		end, var1

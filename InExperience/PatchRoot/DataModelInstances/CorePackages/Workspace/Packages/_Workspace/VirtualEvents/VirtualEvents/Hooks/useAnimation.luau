@@ -6,10 +6,10 @@ local t = {
 	cubic = Enum.EasingStyle.Cubic
 }
 
-local function _(p0)
-	if p0.current then
-		p0.current:Cancel()
-		p0.current = nil
+local function _(p1)
+	if p1.current then
+		p1.current:Cancel()
+		p1.current = nil
 	end
 end
 
@@ -17,64 +17,64 @@ local _ = function(p1, p2)
 	return math.abs(p1 - p2) < 0.001
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: reactModule (ref), t (ref), tweenService (ref)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
+	local var1 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), var4 (ref), t (copy), var3 (ref), tweenService (copy)
-		local startOffset = p3.startOffset
-		local endOffset = p3.endOffset or 0
-		local duration = p3.duration or 0.2
-		local easingStyle = p3.easingStyle or "quadratic"
+		-- upvalues: p1 (ref), var2 (ref), t (copy), var1 (ref), tweenService (copy)
+		local startOffset = p1.startOffset
+		local endOffset = p1.endOffset or 0
+		local duration = p1.duration or 0.2
+		local easingStyle = p1.easingStyle or "quadratic"
 		
 		if math.abs(startOffset - endOffset) < 0.001 then return end
 		local numberValue = Instance.new("NumberValue")
 		numberValue.Value = startOffset
-		var4.current = startOffset
+		var2.current = startOffset
 		local tweenInfo = TweenInfo.new(duration, t[easingStyle] or t.quadratic, Enum.EasingDirection.Out)
 		
-		if var3.current then
-			var3.current:Cancel()
-			var3.current = nil
+		if var1.current then
+			var1.current:Cancel()
+			var1.current = nil
 		end
-		var3.current = tweenService:Create(numberValue, tweenInfo, { Value = endOffset })
-		local var10 = numberValue:GetPropertyChangedSignal("Value"):Connect(function()
-			-- upvalues: numberValue (ref), var4 (copy), p3 (copy)
+		var1.current = tweenService:Create(numberValue, tweenInfo, { Value = endOffset })
+		local var3 = numberValue:GetPropertyChangedSignal("Value"):Connect(function()
+			-- upvalues: numberValue (ref), var2 (copy), p1 (copy)
 			local value = numberValue.Value
 			
-			if var4.current == nil or math.abs(value - var4.current) >= 0.001 then
-				var4.current = value
-				p3.setAnimationOffset(value)
+			if var2.current == nil or math.abs(value - var2.current) >= 0.001 then
+				var2.current = value
+				p1.setAnimationOffset(value)
 			end
 		end)
 		
-		if var3.current then
-			var3.current.Completed:Connect(function()
-				-- upvalues: var10 (ref), numberValue (ref), var3 (copy), var4 (copy)
-				var10:Disconnect()
+		if var1.current then
+			var1.current.Completed:Connect(function()
+				-- upvalues: var3 (ref), numberValue (ref), var1 (copy), var2 (copy)
+				var3:Disconnect()
 				numberValue:Destroy()
-				var3.current = nil
-				var4.current = nil
+				var1.current = nil
+				var2.current = nil
 			end)
-			var3.current:Play()
+			var1.current:Play()
 		end
 		return function()
-			-- upvalues: var10 (ref), var3 (copy), numberValue (ref), var4 (copy)
-			var10:Disconnect()
+			-- upvalues: var3 (ref), var1 (copy), numberValue (ref), var2 (copy)
+			var3:Disconnect()
 			
-			if var3.current then
-				var3.current:Cancel()
-				var3.current = nil
+			if var1.current then
+				var1.current:Cancel()
+				var1.current = nil
 			end
 			numberValue:Destroy()
-			var4.current = nil
+			var2.current = nil
 		end
 	end, {
-		p3.startOffset,
-		p3.endOffset,
-		p3.duration,
-		p3.easingStyle,
-		p3.setAnimationOffset
+		p1.startOffset,
+		p1.endOffset,
+		p1.duration,
+		p1.easingStyle,
+		p1.setAnimationOffset
 	})
 end

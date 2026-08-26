@@ -1,43 +1,43 @@
 ﻿local reactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
 
-return function(p0, p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: reactModule (ref)
-	local var1 = p1 ~= nil
-	local maxValue = math.max(1, p2 or 1)
-	local var3, var4 = reactModule.useState(function()
-		-- upvalues: var1 (ref), p0 (ref), p1 (ref)
-		return if var1 then math.min(math.max(0, p1), p0) else p0
+	local var1 = p2 ~= nil
+	local maxValue = math.max(1, p3 or 1)
+	local var2, var3 = reactModule.useState(function()
+		-- upvalues: var1 (ref), p1 (ref), p2 (ref)
+		return if var1 then math.min(math.max(0, p2), p1) else p1
 	end)
-	local var5 = if var1 then math.min(var3, p0) else p0
-	local var6 = var1 and var5 < p0
+	local var4 = if var1 then math.min(var2, p1) else p1
+	local var5 = var1 and var4 < p1
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var4 (ref), maxValue (ref), p3 (ref)
-		if not var6 then
+		-- upvalues: var5 (ref), var3 (ref), maxValue (ref), p4 (ref)
+		if not var5 then
 			return nil
 		end
-		local var7 = nil
+		local var6 = nil
 		
 		local function advance()
-			-- upvalues: var7 (write), var4 (copy), maxValue (copy)
-			if var7 then
+			-- upvalues: var6 (write), var3 (copy), maxValue (copy)
+			if var6 then
 				return
 			end
-			var4(function(p4)
+			var3(function(p5)
 				-- upvalues: maxValue (copy)
-				return p4 + maxValue
+				return p5 + maxValue
 			end)
 		end
 		
-		if p3 and p3 > 0 then
-			task.delay(p3 / 1000, advance)
+		if p4 and p4 > 0 then
+			task.delay(p4 / 1000, advance)
 		else
 			task.defer(advance)
 		end
 		return function()
-			-- upvalues: var7 (write)
-			var7 = true
+			-- upvalues: var6 (write)
+			var6 = true
 		end
-	end, { var6, maxValue, var3, p3 })
+	end, { var5, maxValue, var2, p4 })
 	
-	return var5, var6
+	return var4, var5
 end

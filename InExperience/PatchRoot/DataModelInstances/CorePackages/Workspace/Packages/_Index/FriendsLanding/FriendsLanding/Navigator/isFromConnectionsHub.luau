@@ -1,12 +1,12 @@
 ﻿local appPage = require(script:FindFirstAncestor("FriendsLanding").Parent.RobloxAppEnums).AppPage
 
-return function(p0)
+return function(p1)
 	-- upvalues: appPage (ref)
-	local var0 = p0._dangerouslyGetParent()
+	local var1 = p1._dangerouslyGetParent()
 	
-	if var0 then
-		local var1 = var0._dangerouslyGetParent()
+	if var1 then
+		local var2 = var1._dangerouslyGetParent()
 		
-		return if var1 then var1.state.routeName == appPage.CoHubMyConnections else false
+		return if var2 then var2.state.routeName == appPage.CoHubMyConnections else false
 	end
 end

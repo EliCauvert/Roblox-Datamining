@@ -6,17 +6,17 @@ local networkingAccountInformationModule = require(parent.NetworkingAccountInfor
 local userPermissionsReducerModule = require(script.Reducers.UserPermissionsReducer)
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: dashModule (ref), networkingUserSettingsModule (ref), roduxNetworkingModule (ref), networkingAccountInformationModule (ref), userPermissionsReducerModule (ref)
-		p0 = dashModule.join(p0, {
+		p1 = dashModule.join(p1, {
 			networkingUserSettings = networkingUserSettingsModule.config({ roduxNetworking = roduxNetworkingModule.mock() }),
 			networkingAccountInformation = networkingAccountInformationModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
 		})
 		
 		return {
 			installReducer = function()
-				-- upvalues: userPermissionsReducerModule (copy), p0 (write)
-				return userPermissionsReducerModule(p0)
+				-- upvalues: userPermissionsReducerModule (copy), p1 (write)
+				return userPermissionsReducerModule(p1)
 			end
 		}
 	end

@@ -12,21 +12,21 @@ local fFlagLuaAppGameDetailEventMobileAdsId = require(parent.SharedFlags).FFlagL
 local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
 local fFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
 local fFlagLuaAppAddSeeAllFlagToGameDetailReferral = require(parent.SharedFlags).FFlagLuaAppAddSeeAllFlagToGameDetailReferral
-local var5 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
+local var1 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
 	eventName = "gameDetailReferral",
 	description = "Fires when the user navigates to game details",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("LuaAppGameDetailReferralEventThrottlingHundredthsPercent", 10000),
 	lastUpdated = { 26, 2, 4 }
 } else nil
-local var6 = if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
+local var2 = if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
 	eventName = "gameDetailReferralShadow",
 	description = "Shadow traffic for gameDetailReferral event recovery percentage",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("LuaAppGameDetailReferralShadowThrottlingHundredthsPercent", 10000),
 	lastUpdated = { 26, 3, 4 }
 } else nil
-local var7 = tModule.strictInterface({
+local var3 = tModule.strictInterface({
 	pg = tModule.string,
 	universeId = tModule.union(tModule.string, tModule.number),
 	navigationUniverseId = tModule.optional(tModule.string),
@@ -67,21 +67,21 @@ local var7 = tModule.strictInterface({
 	seeAllFlag = if fFlagLuaAppAddSeeAllFlagToGameDetailReferral then tModule.optional(tModule.number) else nil
 })
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: appStorageService (ref)
 	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 	
 	if mobileAdvertisingIdItem and mobileAdvertisingIdItem ~= "" then
-		p0.mobileAdvertisingId = mobileAdvertisingIdItem
+		p1.mobileAdvertisingId = mobileAdvertisingIdItem
 	end
 end
 
 return function(p1, p2, p3)
-	-- upvalues: var7 (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGameDetailEventMobileAdsId (ref), appStorageService (ref), cryoModule (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var5 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var6 (write)
-	local var9, var10 = var7(p3)
+	-- upvalues: var3 (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGameDetailEventMobileAdsId (ref), appStorageService (ref), cryoModule (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var1 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var2 (write)
+	local var4, var5 = var3(p3)
 	
-	if not var9 then
-		discoveryEventErrorLogger.reportError("GameDetailReferralInvalidInterface", var10)
+	if not var4 then
+		discoveryEventErrorLogger.reportError("GameDetailReferralInvalidInterface", var5)
 	end
 	if not p3.interactionUuid then
 		p3.interactionUuid = httpService:GenerateGUID(false)
@@ -93,11 +93,11 @@ return function(p1, p2, p3)
 		p3.actionType = "OpenGameDetails"
 	end
 	if fFlagLuaAppGameDetailEventMobileAdsId then
-		local var11 = p3
+		local var6 = p3
 		local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 		
 		if mobileAdvertisingIdItem and mobileAdvertisingIdItem ~= "" then
-			var11.mobileAdvertisingId = mobileAdvertisingIdItem
+			var6.mobileAdvertisingId = mobileAdvertisingIdItem
 		end
 	end
 	if p3.analyticsData then
@@ -106,7 +106,7 @@ return function(p1, p2, p3)
 	if fFlagLuaAppMigrateGameEventsTelemetryService then
 		p3.isSdui = if p3.isSdui == true then "true" elseif p3.isSdui == false then "false" else nil
 		p3.isAd = if p3.isAd == true then "true" elseif p3.isAd == false then "false" else nil
-		telemetryService:LogEvent(var5, {
+		telemetryService:LogEvent(var1, {
 			eventContext = p2,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 			customFields = p3,
@@ -119,7 +119,7 @@ return function(p1, p2, p3)
 		local cloned = table.clone(p3)
 		cloned.isSdui = if cloned.isSdui == true then "true" elseif cloned.isSdui == false then "false" else cloned.isSdui
 		cloned.isAd = if cloned.isAd == true then "true" elseif cloned.isAd == false then "false" else cloned.isAd
-		telemetryService:LogEvent(var6, {
+		telemetryService:LogEvent(var2, {
 			eventContext = p2,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 			customFields = cloned,

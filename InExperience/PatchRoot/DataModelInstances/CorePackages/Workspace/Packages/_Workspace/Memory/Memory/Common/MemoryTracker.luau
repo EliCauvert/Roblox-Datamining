@@ -13,22 +13,22 @@ local function _()
 	return if performanceStats then performanceStats:FindFirstChild("Memory") else nil
 end
 
-local function GetChildValue(p0, p1)
-	if p1 == nil then
-		return tostring(p0:GetValue())
+local function GetChildValue(p1, p2)
+	if p2 == nil then
+		return tostring(p1:GetValue())
 	end
-	local var14 = p0
+	local var1 = p1
 	
-	for i, v in ipairs(string.split(p1, "#")) do
-		local var15 = var14:FindFirstChild(v)
+	for i, v in ipairs(string.split(p2, "#")) do
+		local var2 = var1:FindFirstChild(v)
 		
-		if var15 and var15:IsA("StatsItem") then
-			var14 = var15
+		if var2 and var2:IsA("StatsItem") then
+			var1 = var2
 			continue
 		end
 		return "-1"
 	end
-	return tostring(var14:GetValue())
+	return tostring(var1:GetValue())
 end
 
 local _ = function()
@@ -40,10 +40,10 @@ end
 local function GetCorescriptMemory()
 	-- upvalues: statsService (ref)
 	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
-	local var17 = if not performanceStats then nil else performanceStats:FindFirstChild("Memory")
+	local var3 = if not performanceStats then nil else performanceStats:FindFirstChild("Memory")
 	
-	if var17 then
-		for i, v in var17:GetChildren() do
+	if var3 then
+		for i, v in var3:GetChildren() do
 			if v:IsA("StatsItem") and v.DisplayName == "CoreScriptMemory" then
 				return v:GetValue()
 			end
@@ -80,7 +80,7 @@ local _ = { ACTIVE = 1, PAUSED = 2, STOPPED = 3 }
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p2, p3)
+function t_3.new(p3, p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		memoryMb = 0,
@@ -89,8 +89,8 @@ function t_3.new(p2, p3)
 		sampleCount = 0,
 		status = 2,
 		loggingTask = nil,
-		context = p2,
-		memoryScope = p3
+		context = p3,
+		memoryScope = p4
 	}, t_3)
 end
 
@@ -99,13 +99,13 @@ function t_3:start()
 	self.status = 1
 	self.loggingTask = task.delay(corescriptMemoryPeriodSeconds, function()
 		-- upvalues: GetCorescriptMemory (copy), self (ref)
-		local var18 = GetCorescriptMemory()
+		local var4 = GetCorescriptMemory()
 		
-		if var18 then
-			self.maxMemoryMb = math.max(var18, self.maxMemoryMb)
+		if var4 then
+			self.maxMemoryMb = math.max(var4, self.maxMemoryMb)
 			self.sampleCount += 1
-			self.avgMemoryMb += (var18 - self.avgMemoryMb) / self.sampleCount
-			self:report(self.context, var18)
+			self.avgMemoryMb += (var4 - self.avgMemoryMb) / self.sampleCount
+			self:report(self.context, var4)
 		end
 		if self.status == 1 then
 			self:start()
@@ -142,80 +142,80 @@ function t_3:destroy()
 	end
 end
 
-function t_3:_buildCustomFields(p4)
+function t_3:_buildCustomFields(p3)
 	-- upvalues: deviceTier (ref)
 	return {
 		deviceTier = deviceTier.GetDeviceMemoryTier(),
-		context = p4,
+		context = p3,
 		memoryScope = self.memoryScope
 	}
 end
 
-function t_3:report(p5, p6)
+function t_3:report(p3, p4)
 	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogStat(t, { customFields = self:_buildCustomFields(p5) }, p6)
+	telemetryService:LogStat(t, { customFields = self:_buildCustomFields(p3) }, p4)
 end
 
-function t_3:reportMaxMemoryUsed(b, p7)
+function t_3:reportMaxMemoryUsed(b, p3)
 	-- upvalues: memoryScopeModule (ref), telemetryService (ref), t_1 (ref)
 	if self.memoryScope == memoryScopeModule.UniversalApp then
 		return
 	end
-	telemetryService:LogStat(t_1, { customFields = self:_buildCustomFields(b) }, p7)
+	telemetryService:LogStat(t_1, { customFields = self:_buildCustomFields(b) }, p3)
 end
 
-function t_3:reportAvgMemoryUsed(p8, p9)
+function t_3:reportAvgMemoryUsed(p3, p4)
 	-- upvalues: memoryScopeModule (ref), telemetryService (ref), t_2 (ref)
 	if self.memoryScope == memoryScopeModule.UniversalApp then
 		return
 	end
-	telemetryService:LogStat(t_2, { customFields = self:_buildCustomFields(p8) }, p9)
+	telemetryService:LogStat(t_2, { customFields = self:_buildCustomFields(p3) }, p4)
 end
 
 function t_3.getSnapshot()
 	-- upvalues: statsService (ref), GetChildValue (ref), enableMemorySnapshotCategories (ref)
 	local ok
 	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
-	local var20 = if not performanceStats then nil else performanceStats:FindFirstChild("Memory")
+	local var4 = if not performanceStats then nil else performanceStats:FindFirstChild("Memory")
 	
-	if var20 then
+	if var4 then
 		local t = {}
 		ok, status = pcall(gcinfo)
 		t.luaHeapMb = if ok and status then string.format("%.2f", status / 1024) else "-1"
-		t.totalMemory = tostring(var20:GetValue())
-		t.coreMemory = GetChildValue(var20, "CoreMemory")
-		t.placeMemory = GetChildValue(var20, "PlaceMemory")
-		t.placeLuaHeap = GetChildValue(var20, "PlaceMemory#LuaHeap")
-		t.coreScriptMemory = GetChildValue(var20, "CoreScriptMemory")
-		t.untrackedMemory = GetChildValue(var20, "UntrackedMemory")
+		t.totalMemory = tostring(var4:GetValue())
+		t.coreMemory = GetChildValue(var4, "CoreMemory")
+		t.placeMemory = GetChildValue(var4, "PlaceMemory")
+		t.placeLuaHeap = GetChildValue(var4, "PlaceMemory#LuaHeap")
+		t.coreScriptMemory = GetChildValue(var4, "CoreScriptMemory")
+		t.untrackedMemory = GetChildValue(var4, "UntrackedMemory")
 		
 		if enableMemorySnapshotCategories then
-			t.placeInstances = GetChildValue(var20, "PlaceMemory#Instances")
-			t.placeSignals = GetChildValue(var20, "PlaceMemory#Signals")
-			t.placeScript = GetChildValue(var20, "PlaceMemory#Script")
-			t.placePhysicsCollision = GetChildValue(var20, "PlaceMemory#PhysicsCollision")
-			t.placeGraphicsSolidModels = GetChildValue(var20, "PlaceMemory#GraphicsSolidModels")
-			t.placeGraphicsMeshParts = GetChildValue(var20, "PlaceMemory#GraphicsMeshParts")
-			t.placeGraphicsParticles = GetChildValue(var20, "PlaceMemory#GraphicsParticles")
-			t.placeGraphicsTerrain = GetChildValue(var20, "PlaceMemory#GraphicsTerrain")
-			t.placeGraphicsTexture = GetChildValue(var20, "PlaceMemory#GraphicsTexture")
-			t.placeGraphicsTextureCharacter = GetChildValue(var20, "PlaceMemory#GraphicsTextureCharacter")
-			t.placeSounds = GetChildValue(var20, "PlaceMemory#Sounds")
-			t.placeTerrainVoxels = GetChildValue(var20, "PlaceMemory#TerrainVoxels")
-			t.placeGui = GetChildValue(var20, "PlaceMemory#Gui")
-			t.placeAnimation = GetChildValue(var20, "PlaceMemory#Animation")
-			t.placeNavigation = GetChildValue(var20, "PlaceMemory#Navigation")
-			t.coreRenderTarget = GetChildValue(var20, "CoreMemory#render/target")
-			t.coreRenderGpuGeomMgr = GetChildValue(var20, "CoreMemory#render/gpu_geom_mgr")
-			t.coreRenderTextureLocal = GetChildValue(var20, "CoreMemory#render/texture/local")
-			t.coreRenderFonts = GetChildValue(var20, "CoreMemory#render/fonts")
-			t.coreRenderLightgrid = GetChildValue(var20, "CoreMemory#render/lightgrid")
-			t.coreGuiFontData = GetChildValue(var20, "CoreMemory#gui/FontData")
-			t.coreRenderEnvmap = GetChildValue(var20, "CoreMemory#render/envmap")
-			t.coreRenderShader = GetChildValue(var20, "CoreMemory#render/shader")
-			t.coreRenderSystem = GetChildValue(var20, "CoreMemory#render/system")
-			t.coreDynamicTexture = GetChildValue(var20, "CoreMemory#dynamic/texture")
-			t.coreDynamicMesh = GetChildValue(var20, "CoreMemory#dynamic/mesh")
+			t.placeInstances = GetChildValue(var4, "PlaceMemory#Instances")
+			t.placeSignals = GetChildValue(var4, "PlaceMemory#Signals")
+			t.placeScript = GetChildValue(var4, "PlaceMemory#Script")
+			t.placePhysicsCollision = GetChildValue(var4, "PlaceMemory#PhysicsCollision")
+			t.placeGraphicsSolidModels = GetChildValue(var4, "PlaceMemory#GraphicsSolidModels")
+			t.placeGraphicsMeshParts = GetChildValue(var4, "PlaceMemory#GraphicsMeshParts")
+			t.placeGraphicsParticles = GetChildValue(var4, "PlaceMemory#GraphicsParticles")
+			t.placeGraphicsTerrain = GetChildValue(var4, "PlaceMemory#GraphicsTerrain")
+			t.placeGraphicsTexture = GetChildValue(var4, "PlaceMemory#GraphicsTexture")
+			t.placeGraphicsTextureCharacter = GetChildValue(var4, "PlaceMemory#GraphicsTextureCharacter")
+			t.placeSounds = GetChildValue(var4, "PlaceMemory#Sounds")
+			t.placeTerrainVoxels = GetChildValue(var4, "PlaceMemory#TerrainVoxels")
+			t.placeGui = GetChildValue(var4, "PlaceMemory#Gui")
+			t.placeAnimation = GetChildValue(var4, "PlaceMemory#Animation")
+			t.placeNavigation = GetChildValue(var4, "PlaceMemory#Navigation")
+			t.coreRenderTarget = GetChildValue(var4, "CoreMemory#render/target")
+			t.coreRenderGpuGeomMgr = GetChildValue(var4, "CoreMemory#render/gpu_geom_mgr")
+			t.coreRenderTextureLocal = GetChildValue(var4, "CoreMemory#render/texture/local")
+			t.coreRenderFonts = GetChildValue(var4, "CoreMemory#render/fonts")
+			t.coreRenderLightgrid = GetChildValue(var4, "CoreMemory#render/lightgrid")
+			t.coreGuiFontData = GetChildValue(var4, "CoreMemory#gui/FontData")
+			t.coreRenderEnvmap = GetChildValue(var4, "CoreMemory#render/envmap")
+			t.coreRenderShader = GetChildValue(var4, "CoreMemory#render/shader")
+			t.coreRenderSystem = GetChildValue(var4, "CoreMemory#render/system")
+			t.coreDynamicTexture = GetChildValue(var4, "CoreMemory#dynamic/texture")
+			t.coreDynamicMesh = GetChildValue(var4, "CoreMemory#dynamic/mesh")
 		end
 		return t
 	else
@@ -235,14 +235,14 @@ function t_3.getLuaHeapOnly()
 	return t
 end
 
-local var12 = nil
+local var4 = nil
 
-return function(p10, p11)
-	-- upvalues: fFlagEnableCorescriptMemoryTrackerModule (ref), var12 (write), t_3 (ref)
+return function(p3, p4)
+	-- upvalues: fFlagEnableCorescriptMemoryTrackerModule (ref), var4 (write), t_3 (ref)
 	if not fFlagEnableCorescriptMemoryTrackerModule then
 		return nil
-	elseif not var12 then
-		var12 = t_3.new(p10, p11)
+	elseif not var4 then
+		var4 = t_3.new(p3, p4)
 	end
-	return var12
+	return var4
 end

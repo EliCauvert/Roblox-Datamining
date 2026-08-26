@@ -1,9 +1,9 @@
 ﻿local USERS_URLModule = require(script.Parent.Parent.USERS_URL)
 
-return function(p0)
+return function(p1)
 	-- upvalues: USERS_URLModule (ref)
-	return p0.roduxNetworking.POST({ Name = "GetSkinnyUsersFromUserIds" }, function(p1, p2)
+	return p1.roduxNetworking.POST({ Name = "GetSkinnyUsersFromUserIds" }, function(p2, p3)
 		-- upvalues: USERS_URLModule (copy)
-		return p1(USERS_URLModule):path("v1"):path("users"):body({ userIds = p2 })
+		return p2(USERS_URLModule):path("v1"):path("users"):body({ userIds = p3 })
 	end)
 end

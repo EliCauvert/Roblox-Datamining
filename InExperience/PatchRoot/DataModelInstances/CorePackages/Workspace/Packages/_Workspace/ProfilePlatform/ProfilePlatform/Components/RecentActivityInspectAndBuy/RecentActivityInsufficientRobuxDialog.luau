@@ -15,25 +15,25 @@ local orientation = foundationModule.Enums.Orientation
 local iconName = foundationModule.Enums.IconName
 local getIconRichText = foundationModule.Utility.getIconRichText
 
-local function AmountLine(p0)
+local function AmountLine(p1)
 	-- upvalues: numberLocalization (ref), localizationService (ref), reactModule (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref)
-	local var6 = if p0.isAlert then "text-title-medium content-alert" else "text-body-medium content-default"
+	local var1 = if p1.isAlert then "text-title-medium content-alert" else "text-body-medium content-default"
 	
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-large size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		Label = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill auto-y" }, {
 			Text = reactModule.createElement(text, {
-				Text = p0.label,
-				tag = `auto-xy text-align-x-left {var6}`
+				Text = p1.label,
+				tag = `auto-xy text-align-x-left {var1}`
 			})
 		}),
 		Amount = reactModule.createElement(view, { LayoutOrder = 2, tag = "auto-xy" }, {
 			Text = reactModule.createElement(text, {
 				RichText = true,
-				Text = `{getIconRichText(iconName.Robux)} {numberLocalization.localize(p0.amount, localizationService.RobloxLocaleId)}`,
-				tag = `auto-xy text-align-x-right {var6}`
+				Text = `{getIconRichText(iconName.Robux)} {numberLocalization.localize(p1.amount, localizationService.RobloxLocaleId)}`,
+				tag = `auto-xy text-align-x-right {var1}`
 			})
 		})
 	})
@@ -43,7 +43,7 @@ return function(p1)
 	-- upvalues: useLocalization (ref), useOpenRobuxUpsellModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), view (ref), AmountLine (ref), orientation (ref), buttonVariant (ref)
 	local totalPrice = p1.totalPrice
 	local robuxBalance = p1.robuxBalance
-	local var7 = useLocalization({
+	local var1 = useLocalization({
 		title = "IAPExperience.InsufficientRobux.Title.InsufficientRobux",
 		currentBalance = "IAPExperience.InsufficientRobux.Text.CurrentBalance",
 		missingRobux = "IAPExperience.InsufficientRobux.Text.MissingRobux",
@@ -57,7 +57,7 @@ return function(p1)
 		size = dialogSize.Small,
 		onClose = p1.onClose
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var7.title }),
+		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			PriceBoxPadding = reactModule.createElement(view, { tag = "size-full-0 auto-y padding-xxsmall" }, {
 				PriceBox = reactModule.createElement(view, {
@@ -69,19 +69,19 @@ return function(p1)
 					}, {
 						CurrentBalance = reactModule.createElement(AmountLine, {
 							layoutOrder = 1,
-							label = var7.currentBalance,
+							label = var1.currentBalance,
 							amount = robuxBalance
 						}),
 						MissingRobux = reactModule.createElement(AmountLine, {
 							layoutOrder = 2,
 							isAlert = true,
-							label = var7.missingRobux,
+							label = var1.missingRobux,
 							amount = math.max(totalPrice - robuxBalance, 0)
 						})
 					}),
 					OrderTotal = reactModule.createElement(AmountLine, {
 						layoutOrder = 2,
-						label = var7.orderTotal,
+						label = var1.orderTotal,
 						amount = totalPrice
 					})
 				})
@@ -92,7 +92,7 @@ return function(p1)
 			orientation = orientation.Horizontal,
 			actions = {
 				{
-					text = var7.buyRobux,
+					text = var1.buyRobux,
 					variant = buttonVariant.Emphasis,
 					onActivated = useOpenRobuxUpsellModule(totalPrice, p1.onClose)
 				}

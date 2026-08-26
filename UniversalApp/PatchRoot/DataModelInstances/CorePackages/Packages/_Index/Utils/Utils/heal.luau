@@ -18,13 +18,13 @@ local isListType = graphQLModule.isListType
 local isNonNullType = graphQLModule.isNonNullType
 local map = luauPolyfillModule.Map
 local string = luauPolyfillModule.String
-local var3 = nil
+local var1 = nil
 
-function t.healSchema(p0)
-	-- upvalues: var3 (write)
-	var3(p0:getTypeMap(), p0:getDirectives())
+function t.healSchema(p1)
+	-- upvalues: var1 (write)
+	var1(p1:getTypeMap(), p1:getDirectives())
 	
-	return p0
+	return p1
 end
 
 function t.healTypes(p1, p2)
@@ -64,129 +64,129 @@ function t.healTypes(p1, p2)
 		error(error.new(("Unexpected schema type: %s"):format(tostring(p3))))
 	end
 	
-	healFields = function(p4)
+	healFields = function(p3)
 		-- upvalues: array (copy), healType (write), boolean (copy)
-		local fields = p4:getFields()
+		local fields = p3:getFields()
 		
 		for i, v in fields:entries() do
-			local var18 = v[1]
-			local var19 = v[2]
-			array.filter(array.map(var19.args, function(p5)
+			local var2 = v[1]
+			local var3 = v[2]
+			array.filter(array.map(var3.args, function(p4)
 				-- upvalues: healType (copy)
-				p5.type = healType(p5.type)
+				p4.type = healType(p4.type)
 				
-				return if p5.type == nil then nil else p5
+				return if p4.type == nil then nil else p4
 			end), boolean.toJSBoolean)
-			var19.type = healType(var19.type)
+			var3.type = healType(var3.type)
 			
-			if var19.type == nil then
-				fields[tostring(var18)] = nil
+			if var3.type == nil then
+				fields[tostring(var2)] = nil
 			end
 		end
 	end
 	
-	healInterfaces = function(p6)
+	healInterfaces = function(p4)
 		-- upvalues: array (copy), healType (write), boolean (copy)
-		if p6.getInterfaces ~= nil then
-			local interfaces = p6:getInterfaces()
-			interfaces = array.concat(interfaces, array.filter(array.map(array.splice(interfaces, 1), function(p7)
+		if p4.getInterfaces ~= nil then
+			local interfaces = p4:getInterfaces()
+			interfaces = array.concat(interfaces, array.filter(array.map(array.splice(interfaces, 1), function(p5)
 				-- upvalues: healType (copy)
-				return healType(p7)
+				return healType(p5)
 			end), boolean.toJSBoolean))
 		end
 	end
 	
-	healInputFields = function(p8)
+	healInputFields = function(p4)
 		-- upvalues: healType (write)
-		local fields = p8:getFields()
+		local fields = p4:getFields()
 		
 		for i, v in fields:entries() do
-			local var22 = v[1]
-			local var23 = v[2]
-			var23.type = healType(var23.type)
+			local var4 = v[1]
+			local var5 = v[2]
+			var5.type = healType(var5.type)
 			
-			if var23.type == nil then
-				fields[tostring(var22)] = nil
+			if var5.type == nil then
+				fields[tostring(var4)] = nil
 			end
 		end
 	end
 	
-	healUnderlyingTypes = function(p9)
+	healUnderlyingTypes = function(p5)
 		-- upvalues: array (copy), healType (write), boolean (copy)
-		local types = p9:getTypes()
-		local _ = array.concat(types, array.filter(array.map(array.splice(types, 1), function(p10)
+		local types = p5:getTypes()
+		local _ = array.concat(types, array.filter(array.map(array.splice(types, 1), function(p6)
 			-- upvalues: healType (copy)
-			return healType(p10)
+			return healType(p6)
 		end), boolean.toJSBoolean))
 	end
 	
-	healType = function(p11)
+	healType = function(p5)
 		-- upvalues: boolean (copy), isListType (copy), healType (write), graphQLList (copy), isNonNullType (copy), graphQLNonNull (copy), isNamedType (copy), p1 (ref)
-		if boolean.toJSBoolean(isListType(p11)) then
-			local var25 = healType(p11.ofType)
+		if boolean.toJSBoolean(isListType(p5)) then
+			local var6 = healType(p5.ofType)
 			
-			return if var25 == nil then nil else graphQLList.new(var25)
-		elseif boolean.toJSBoolean(isNonNullType(p11)) then
-			local var26 = healType(p11.ofType)
+			return if var6 == nil then nil else graphQLList.new(var6)
+		elseif boolean.toJSBoolean(isNonNullType(p5)) then
+			local var7 = healType(p5.ofType)
 			
-			return if var26 == nil then nil else graphQLNonNull.new(var26)
-		elseif boolean.toJSBoolean(isNamedType(p11)) then
-			local var28
-			local name = p1:get(p11.name)
+			return if var7 == nil then nil else graphQLNonNull.new(var7)
+		elseif boolean.toJSBoolean(isNamedType(p5)) then
+			local var8
+			local name = p1:get(p5.name)
 			local toJSBoolean = boolean.toJSBoolean
 			
 			if boolean.toJSBoolean(name) then
-				var28 = p11 ~= name
-				var28 = nil
+				var8 = p5 ~= name
+				var8 = nil
 			else
-				var28 = name
+				var8 = name
 			end
-			return if toJSBoolean(var28) then name else p11
+			return if toJSBoolean(var8) then name else p5
 		end
 	end
 	
-	local var10 = map.new()
+	local var6 = map.new()
 	
 	for i, v in p1 do
 		local unpacked = table.unpack(v)
-		local var16 = p1:get(unpacked)
+		local var7 = p1:get(unpacked)
 		
-		if var16 ~= nil and not string.startsWith(unpacked, "__") then
-			local name = var16.name
+		if var7 ~= nil and not string.startsWith(unpacked, "__") then
+			local name = var7.name
 			
 			if not string.startsWith(name, "__") then
-				if var10:get(name) == nil then
-					var10:set(name, var16)
+				if var6:get(name) == nil then
+					var6:set(name, var7)
 				else
 					console.warn(("Duplicate schema type name %s found; keeping the existing one found in the schema"):format(name))
 				end
 			end
 		end
 	end
-	for i, v_1 in var10 do
+	for i, v_1 in var6 do
 		local unpacked = table.unpack(v_1)
-		p1:set(unpacked, var10:get(unpacked))
+		p1:set(unpacked, var6:get(unpacked))
 	end
 	for i, v_2 in p2 do
-		v_2.args = array.filter(v_2.args, function(p12)
+		v_2.args = array.filter(v_2.args, function(p5)
 			-- upvalues: healType (write)
-			p12.type = healType(p12.type)
+			p5.type = healType(p5.type)
 			
-			return p12.type ~= nil
+			return p5.type ~= nil
 		end)
 	end
 	for i, v_3 in p1 do
 		local unpacked = table.unpack(v_3)
-		local var13 = p1:get(unpacked)
+		local var8 = p1:get(unpacked)
 		
-		if not string.startsWith(unpacked, "__") and array.indexOf(var10:keys(), unpacked) ~= -1 and var13 ~= nil then
-			healNamedType(var13)
+		if not string.startsWith(unpacked, "__") and array.indexOf(var6:keys(), unpacked) ~= -1 and var8 ~= nil then
+			healNamedType(var8)
 		end
 	end
 	for i, v_4 in p1 do
 		local unpacked = table.unpack(v_4)
 		
-		if not string.startsWith(unpacked, "__") and array.indexOf(var10:keys(), unpacked) == -1 then
+		if not string.startsWith(unpacked, "__") and array.indexOf(var6:keys(), unpacked) == -1 then
 			p1:set(unpacked, nil)
 		end
 	end

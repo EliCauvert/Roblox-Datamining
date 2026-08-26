@@ -11,7 +11,7 @@ local t = {
 	getParam = function() end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: roact (ref), roactNavigation (ref), t (ref)
-	return roact.createElement(roactNavigation.Provider, { value = t }, { Element = p0 })
+	return roact.createElement(roactNavigation.Provider, { value = t }, { Element = p1 })
 end

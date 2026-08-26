@@ -1,8 +1,8 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiSharedUtilities").SduiIntegrationTypes)
 local t = {}
 
-local function _(p0)
-	return typeof(p0) == "table" and #p0 > 0
+local function _(p1)
+	return typeof(p1) == "table" and #p1 > 0
 end
 
 local _ = function(value, p1)
@@ -25,29 +25,29 @@ local function mergeInto(p4, p5, p6, p7)
 			continue
 		end
 		table.insert(p7, tostring(i))
-		local var2 = if p6 then p6(p7, v, p4[i]) else nil
+		local var1 = if p6 then p6(p7, v, p4[i]) else nil
 		
-		if var2 == "replace" then
+		if var1 == "replace" then
 			p4[i] = v
-		elseif var2 == "merge" then
+		elseif var1 == "merge" then
 			if p4[i] == nil then
 				p4[i] = v
 			else
-				local var3 = p4[i]
+				local var2 = p4[i]
 				
 				for i_1, v_1 in v do
-					var3[i_1] = v_1
+					var2[i_1] = v_1
 				end
 			end
-		elseif var2 ~= "append" then
+		elseif var1 ~= "append" then
 			if p4[i] == nil then
 				p4[i] = {}
 			end
 			if typeof(v) == "table" and #v > 0 then
-				local var6 = p4[i]
+				local var3 = p4[i]
 				
 				for i_1, v_1 in v do
-					table.insert(var6, v_1)
+					table.insert(var3, v_1)
 				end
 			else
 				mergeInto(p4[i], v, p6, p7)
@@ -55,16 +55,16 @@ local function mergeInto(p4, p5, p6, p7)
 		elseif p4[i] == nil then
 			p4[i] = v
 		elseif typeof(v) == "table" and #v > 0 then
-			local var5 = p4[i]
-			
-			for i_1, v_1 in v do
-				table.insert(var5, v_1)
-			end
-		else
 			local var4 = p4[i]
 			
 			for i_1, v_1 in v do
-				var4[i_1] = v_1
+				table.insert(var4, v_1)
+			end
+		else
+			local var5 = p4[i]
+			
+			for i_1, v_1 in v do
+				var5[i_1] = v_1
 			end
 		end
 		table.remove(p7)

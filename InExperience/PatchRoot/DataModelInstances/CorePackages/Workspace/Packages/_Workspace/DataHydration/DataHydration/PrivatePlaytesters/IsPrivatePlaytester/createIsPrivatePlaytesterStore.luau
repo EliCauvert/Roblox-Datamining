@@ -4,21 +4,21 @@ local createSingleEntityResolverModule = require(dataHydration.createSingleEntit
 local fetchIsPrivatePlaytesterModule = require(script.Parent.fetchIsPrivatePlaytester)
 local _ = require(script.Parent.IsPrivatePlaytesterStoreTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createSingleEntityResolverModule (ref), fetchIsPrivatePlaytesterModule (ref)
-	p0 = p0 or {}
-	local t = { network = p0.network, baseUrl = p0.baseUrl }
-	local var5 = createSingleEntityResolverModule(function(p1)
+	p1 = p1 or {}
+	local t = { network = p1.network, baseUrl = p1.baseUrl }
+	local var1 = createSingleEntityResolverModule(function(p2)
 		-- upvalues: fetchIsPrivatePlaytesterModule (copy), t (ref)
-		return fetchIsPrivatePlaytesterModule(p1, t)
+		return fetchIsPrivatePlaytesterModule(p2, t)
 	end)
 	
 	return {
-		get = var5.get,
-		fetch = var5.fetch,
-		getAndFetch = var5.getAndFetch,
-		update = var5.update,
-		clear = var5.clear,
-		dispose = var5.dispose
+		get = var1.get,
+		fetch = var1.fetch,
+		getAndFetch = var1.getAndFetch,
+		update = var1.update,
+		clear = var1.clear,
+		dispose = var1.dispose
 	}
 end

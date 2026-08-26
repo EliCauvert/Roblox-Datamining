@@ -49,50 +49,50 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end
 		return t
 	end, { actions })
-	local var1 = var1.icon and var1.icon ~= ""
-	local var2 = var1.title and var1.title ~= ""
-	local var3 = var1.text and var1.text ~= ""
+	local var5 = var5.icon and var5.icon ~= ""
+	local var6 = var5.title and var5.title ~= ""
+	local var7 = var5.text and var5.text ~= ""
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var5, {
 		tag = "row gap-small auto-y padding-medium radius-medium bg-over-media-0",
-		Size = UDim2.new(var1.width or UDim.new(0, useScaledValueModule(400)), UDim.new()),
+		Size = UDim2.new(var5.width or UDim.new(0, useScaledValueModule(400)), UDim.new()),
 		Position = UDim2.fromScale(0.5, 0.1),
-		selection = { Selectable = false, SelectionImageObject = var3 },
+		selection = { Selectable = false, SelectionImageObject = var7 },
 		ref = p2
 	}), {
-		Media = if var1 then reactModule.createElement(imageModule, {
+		Media = if var5 then reactModule.createElement(imageModule, {
 			LayoutOrder = 1,
 			tag = "size-1200-1200",
-			Image = var1.icon,
-			testId = `{var1.testId}--media`
+			Image = var5.icon,
+			testId = `{var5.testId}--media`
 		}) else nil,
 		Content = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
 			tag = {
 				["fill self-center auto-y"] = true,
-				["col gap-xxsmall"] = var2 or var3
+				["col gap-xxsmall"] = var6 or var7
 			},
-			testId = `{var1.testId}--content`
+			testId = `{var5.testId}--content`
 		}, {
-			Header = if var2 then reactModule.createElement(textModule, {
+			Header = if var6 then reactModule.createElement(textModule, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-small text-align-x-left text-truncate-end content-emphasis",
-				Text = var1.title,
-				testId = `{var1.testId}--header`
+				Text = var5.title,
+				testId = `{var5.testId}--header`
 			}) else nil,
-			Body = if var3 then reactModule.createElement(textModule, {
+			Body = if var7 then reactModule.createElement(textModule, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-default",
-				Text = var1.text,
-				testId = `{var1.testId}--body`
+				Text = var5.text,
+				testId = `{var5.testId}--body`
 			}) else nil,
 			Actions = if actions and #actions > 0 then reactModule.createElement(viewModule, {
 				LayoutOrder = 3,
 				tag = {
 					["row gap-small size-full-0 auto-y"] = true,
-					["padding-top-small"] = var2 or var3
+					["padding-top-small"] = var6 or var7
 				},
-				testId = `{var1.testId}--actions`
+				testId = `{var5.testId}--actions`
 			}, var4) else nil
 		})
 	})

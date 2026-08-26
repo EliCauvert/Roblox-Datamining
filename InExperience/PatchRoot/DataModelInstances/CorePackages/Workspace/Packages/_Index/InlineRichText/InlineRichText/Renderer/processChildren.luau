@@ -11,48 +11,48 @@ local t = {
 	[nodeTypeModule.InlineCustom] = require(nodeRenderers.InlineCustomRenderer)
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: nodeConfigModule (ref), name (ref), cryoModule (ref), t (ref)
 	local t_1 = {}
-	local byNode = nodeConfigModule.getByNode(p0)
+	local byNode = nodeConfigModule.getByNode(p1)
 	
 	if not byNode then
-		name:warning(`Node {p0.name}: No config found for node type {p0.type}`)
+		name:warning(`Node {p1.name}: No config found for node type {p1.type}`)
 		
 		return t_1
 	end
-	for i, v in cryoModule.List.map(p0.children, function(p2)
-		-- upvalues: nodeConfigModule (copy), name (copy), byNode (ref), p0 (ref), t (copy), p1 (ref), cryoModule (copy)
-		local byNode_1 = nodeConfigModule.getByNode(p2)
+	for i, v in cryoModule.List.map(p1.children, function(p3)
+		-- upvalues: nodeConfigModule (copy), name (copy), byNode (ref), p1 (ref), t (copy), p2 (ref), cryoModule (copy)
+		local byNode_1 = nodeConfigModule.getByNode(p3)
 		
 		if not byNode_1 then
-			name:warning(`Node {p2.name}: No config found for node {p2.name} type {p2.type}`)
+			name:warning(`Node {p3.name}: No config found for node {p3.name} type {p3.type}`)
 			
 			return {}
-		elseif not byNode.children[p2.type] then
-			name:warning(`Node {p2.name}: Node type {p2.type} is not a valid child of node {p0.name} type {p0.type}`)
+		elseif not byNode.children[p3.type] then
+			name:warning(`Node {p3.name}: Node type {p3.type} is not a valid child of node {p1.name} type {p1.type}`)
 			
 			return {}
 		end
-		local type = t[p2.type]
+		local type = t[p3.type]
 		
 		if not type then
-			name:warning(`Node {p2.name}: No renderer found for type {p2.type}`)
+			name:warning(`Node {p3.name}: No renderer found for type {p3.type}`)
 			
 			return {}
 		end
-		local var9 = type(p2, p1)
+		local var1 = type(p3, p2)
 		
-		if typeof(var9) ~= "table" then
-			var9 = { var9 }
+		if typeof(var1) ~= "table" then
+			var1 = { var1 }
 		end
-		if cryoModule.List.foldLeft(var9, function(p3, p4)
+		if cryoModule.List.foldLeft(var1, function(p4, p5)
 			-- upvalues: byNode_1 (ref)
-			return p3 and byNode_1.validateRenderResult(p4)
+			return p4 and byNode_1.validateRenderResult(p5)
 		end, true) then
-			return var9
+			return var1
 		end
-		name:warning(`Node {p2.name}: Rendered result is not valid for type {p2.type}`)
+		name:warning(`Node {p3.name}: Rendered result is not valid for type {p3.type}`)
 		
 		return {}
 	end) do

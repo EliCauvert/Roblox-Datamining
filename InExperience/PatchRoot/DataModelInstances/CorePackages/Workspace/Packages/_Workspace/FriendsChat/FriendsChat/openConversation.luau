@@ -5,14 +5,14 @@ local fetchConversationDetailsToSignalsModule = require(parent.AppChat.fetchConv
 local getConversationStoreModule = require(parent.AppChat.GetConversationStore)
 local getFriendsChatNavigationStoreModule = require(friendsChat.Stores.GetFriendsChatNavigationStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fetchConversationDetailsToSignalsModule (ref), getConversationStoreModule (ref), getFriendsChatNavigationStoreModule (ref)
-	return fetchConversationDetailsToSignalsModule(p0):andThen(function()
-		-- upvalues: getConversationStoreModule (copy), p0 (ref), getFriendsChatNavigationStoreModule (copy)
-		if getConversationStoreModule(false).getConversation(p0, false) == nil then
+	return fetchConversationDetailsToSignalsModule(p1):andThen(function()
+		-- upvalues: getConversationStoreModule (copy), p1 (ref), getFriendsChatNavigationStoreModule (copy)
+		if getConversationStoreModule(false).getConversation(p1, false) == nil then
 			return false
 		end
-		getFriendsChatNavigationStoreModule(false).setSelectedConversationId(p0)
+		getFriendsChatNavigationStoreModule(false).setSelectedConversationId(p1)
 		
 		return true
 	end, function()

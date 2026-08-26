@@ -16,166 +16,166 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 		rewardEarned = "Features.OnDemandAds.Reward_Earned"
 	}
 	
-	local function _(p0)
-		return { duration = p0, easingStyle = Enum.EasingStyle.Linear }
+	local function _(p1)
+		return { duration = p1, easingStyle = Enum.EasingStyle.Linear }
 	end
 	
 	return function(p1)
 		-- upvalues: reactModule (ref), reactOtterModule (ref), useTokens (ref), useLocalization (ref), t (ref), view (ref), image (ref), text (ref), radialProgressComponentModule (ref)
-		local var6 = reactModule.useRef(nil)
-		local var7, var8 = reactModule.useState(0)
-		local var9, var10 = reactOtterModule.useAnimatedBinding(0)
-		local var11, var12 = reactOtterModule.useAnimatedBinding(0)
-		local var13 = reactModule.useRef(nil)
-		local var14, var15 = reactModule.useState(0)
-		local var16, var17 = reactOtterModule.useAnimatedBinding(1)
-		local var18, var19 = reactOtterModule.useAnimatedBinding(0)
-		local var20 = useTokens()
-		local var21 = useLocalization(t)
-		local var22, var23 = reactOtterModule.useAnimatedBinding(0)
-		local var24, var25 = reactOtterModule.useAnimatedBinding(1)
-		local var26, var27 = reactOtterModule.useAnimatedBinding(0)
-		local var28, var29 = reactOtterModule.useAnimatedBinding(0)
-		local var30, var31 = reactModule.useState(true)
-		local var32, _ = reactModule.useBinding(1)
+		local var1 = reactModule.useRef(nil)
+		local var2, var3 = reactModule.useState(0)
+		local var4, var5 = reactOtterModule.useAnimatedBinding(0)
+		local var6, var7 = reactOtterModule.useAnimatedBinding(0)
+		local var8 = reactModule.useRef(nil)
+		local var9, var10 = reactModule.useState(0)
+		local var11, var12 = reactOtterModule.useAnimatedBinding(1)
+		local var13, var14 = reactOtterModule.useAnimatedBinding(0)
+		local var15 = useTokens()
+		local var16 = useLocalization(t)
+		local var17, var18 = reactOtterModule.useAnimatedBinding(0)
+		local var19, var20 = reactOtterModule.useAnimatedBinding(1)
+		local var21, var22 = reactOtterModule.useAnimatedBinding(0)
+		local var23, var24 = reactOtterModule.useAnimatedBinding(0)
+		local var25, var26 = reactModule.useState(true)
+		local var27, _ = reactModule.useBinding(1)
 		reactModule.useEffect(function()
-			-- upvalues: var30 (ref), var29 (ref), reactOtterModule (copy)
-			if var30 then
-				var29(reactOtterModule.instant(0))
+			-- upvalues: var25 (ref), var24 (ref), reactOtterModule (copy)
+			if var25 then
+				var24(reactOtterModule.instant(0))
 				
 				return
 			end
-			local var33 = false
+			local var28 = false
 			task.delay(3, function()
-				-- upvalues: var33 (write), var29 (copy), reactOtterModule (copy)
-				if not var33 then
-					var29(reactOtterModule.ease(1))
+				-- upvalues: var28 (write), var24 (copy), reactOtterModule (copy)
+				if not var28 then
+					var24(reactOtterModule.ease(1))
 				end
 			end)
 			
 			return function()
-				-- upvalues: var33 (write)
-				var33 = true
+				-- upvalues: var28 (write)
+				var28 = true
 			end
-		end, { var30 })
+		end, { var25 })
 		reactModule.useEffect(function()
-			-- upvalues: var6 (ref), var8 (ref), var13 (ref), var15 (ref)
-			local current = var6.current
+			-- upvalues: var1 (ref), var3 (ref), var8 (ref), var10 (ref)
+			local current = var1.current
 			
 			if current then
-				var8(current.TextBounds.X)
+				var3(current.TextBounds.X)
 			end
-			local current_1 = var13.current
+			local current_1 = var8.current
 			
 			if current_1 then
-				var15(current_1.TextBounds.X)
+				var10(current_1.TextBounds.X)
 			end
 		end, {})
 		reactModule.useEffect(function()
-			-- upvalues: var30 (ref), var23 (ref), reactOtterModule (copy), var7 (ref), var14 (ref)
-			if var30 then
-				var23(reactOtterModule.instant(24 + var7 + 8 + 20))
+			-- upvalues: var25 (ref), var18 (ref), reactOtterModule (copy), var2 (ref), var9 (ref)
+			if var25 then
+				var18(reactOtterModule.instant(24 + var2 + 8 + 20))
 				
 				return
 			end
-			var23(reactOtterModule.ease(24 + var14 + 8 + 20 - 4, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
-		end, { var30, var7, var14 })
+			var18(reactOtterModule.ease(24 + var9 + 8 + 20 - 4, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
+		end, { var25, var2, var9 })
 		reactModule.useEffect(function()
-			-- upvalues: var30 (ref), var10 (ref), reactOtterModule (copy), var12 (ref), var17 (ref), var19 (ref), var27 (ref), var25 (ref)
-			local var34 = false
+			-- upvalues: var25 (ref), var5 (ref), reactOtterModule (copy), var7 (ref), var12 (ref), var14 (ref), var22 (ref), var20 (ref)
+			local var28 = false
 			
-			if var30 then
-				var10(reactOtterModule.instant(0))
-				var12(reactOtterModule.instant(0))
-				var17(reactOtterModule.instant(1))
-				var19(reactOtterModule.instant(28))
-				var27(reactOtterModule.instant(0))
-				var25(reactOtterModule.instant(1))
+			if var25 then
+				var5(reactOtterModule.instant(0))
+				var7(reactOtterModule.instant(0))
+				var12(reactOtterModule.instant(1))
+				var14(reactOtterModule.instant(28))
+				var22(reactOtterModule.instant(0))
+				var20(reactOtterModule.instant(1))
 			else
-				var12(reactOtterModule.ease(24, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
-				var19(reactOtterModule.ease(0, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
-				var27(reactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
+				var7(reactOtterModule.ease(24, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
+				var14(reactOtterModule.ease(0, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
+				var22(reactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
 				task.delay(0.1, function()
-					-- upvalues: var34 (write), var10 (copy), reactOtterModule (copy), var17 (copy)
-					if not var34 then
-						var10(reactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
-						var17(reactOtterModule.ease(0, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
+					-- upvalues: var28 (write), var5 (copy), reactOtterModule (copy), var12 (copy)
+					if not var28 then
+						var5(reactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
+						var12(reactOtterModule.ease(0, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
 					end
 				end)
 				task.delay(0.4, function()
-					-- upvalues: var34 (write), var25 (copy), reactOtterModule (copy)
-					if not var34 then
-						var25(reactOtterModule.ease(0, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
+					-- upvalues: var28 (write), var20 (copy), reactOtterModule (copy)
+					if not var28 then
+						var20(reactOtterModule.ease(0, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
 					end
 				end)
 			end
 			return function()
-				-- upvalues: var34 (write)
-				var34 = true
+				-- upvalues: var28 (write)
+				var28 = true
 			end
-		end, { var30 })
+		end, { var25 })
 		
 		return reactModule.createElement(view, {
 			tag = "padding-y-xsmall padding-x-medium bg-over-media-300 radius-small clip",
-			Size = var22:map(function(p2)
+			Size = var17:map(function(p2)
 				return UDim2.fromOffset(p2, 32)
 			end),
-			GroupTransparency = var28,
-			Visible = var7 > 0
+			GroupTransparency = var23,
+			Visible = var2 > 0
 		}, {
 			checkIcon = reactModule.createElement(image, {
 				tag = "size-500 anchor-center-left",
 				Image = "rbxassetid://125702125855534",
 				LayoutOrder = 1,
-				imageStyle = { Transparency = var24 },
+				imageStyle = { Transparency = var19 },
 				Position = UDim2.new(0, -4, 0.5, 0),
-				Visible = p1.rewardWaitAlpha:map(function(p3)
-					-- upvalues: var31 (ref)
-					var31(p3 < 1)
+				Visible = p1.rewardWaitAlpha:map(function(p2)
+					-- upvalues: var26 (ref)
+					var26(p2 < 1)
 					
-					return p3 == 1
+					return p2 == 1
 				end)
 			}),
 			getRewardInLabel = reactModule.createElement(text, {
 				tag = "text-label-medium text-align-x-left text-align-y-center",
-				Text = var21.getRewardIn,
-				Size = UDim2.new(0, var7, 1, 0),
-				Position = var11:map(function(p4)
-					return UDim2.new(0, p4, 0, 0)
+				Text = var16.getRewardIn,
+				Size = UDim2.new(0, var2, 1, 0),
+				Position = var6:map(function(p2)
+					return UDim2.new(0, p2, 0, 0)
 				end),
 				textStyle = {
-					Color3 = var20.Color.ActionEmphasis.Foreground.Color3,
-					Transparency = var9
+					Color3 = var15.Color.ActionEmphasis.Foreground.Color3,
+					Transparency = var4
 				},
-				ref = var6
+				ref = var1
 			}),
 			rewardEarnedLabel = reactModule.createElement(text, {
 				tag = "text-label-medium text-align-x-right text-align-y-center anchor-top-right",
-				Text = var21.rewardEarned,
-				Size = UDim2.new(0, var14, 1, 0),
-				Position = var18:map(function(p5)
-					return UDim2.new(1, -p5, 0, 0)
+				Text = var16.rewardEarned,
+				Size = UDim2.new(0, var9, 1, 0),
+				Position = var13:map(function(p2)
+					return UDim2.new(1, -p2, 0, 0)
 				end),
 				textStyle = {
-					Color3 = var20.Color.ActionEmphasis.Foreground.Color3,
-					Transparency = var16
+					Color3 = var15.Color.ActionEmphasis.Foreground.Color3,
+					Transparency = var11
 				},
-				ref = var13
+				ref = var8
 			}),
 			progressContainer = reactModule.createElement(view, {
 				tag = "radius-circle bg-over-media-200 size-500 anchor-center-right position-center-right",
-				GroupTransparency = var26
+				GroupTransparency = var21
 			}, {
 				progressBackground = reactModule.createElement(radialProgressComponentModule, {
 					thickness = 2,
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
-					alpha = var32,
+					alpha = var27,
 					Size = UDim2.fromScale(1, 1),
 					SizeConstraint = Enum.SizeConstraint.RelativeYY,
-					ImageColor3 = var20.Color.Content.Muted.Color3,
-					Visible = p1.rewardWaitAlpha:map(function(p6)
-						return p6 < 1
+					ImageColor3 = var15.Color.Content.Muted.Color3,
+					Visible = p1.rewardWaitAlpha:map(function(p2)
+						return p2 < 1
 					end)
 				}, {
 					radialProgress = reactModule.createElement(radialProgressComponentModule, {
@@ -183,14 +183,14 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 						BackgroundTransparency = 1,
 						alpha = p1.rewardWaitAlpha,
 						Size = UDim2.fromScale(1, 1),
-						ImageColor3 = var20.Color.Extended.White.White_0.Color3
+						ImageColor3 = var15.Color.Extended.White.White_0.Color3
 					}, {
 						timerLabel = reactModule.createElement(text, {
 							tag = "size-full-300 anchor-center-center position-center-center content-emphasis text-caption-small text-align-x-center text-align-y-center",
 							TextScaled = true,
-							Text = p1.rewardWaitAlpha:map(function(p7)
+							Text = p1.rewardWaitAlpha:map(function(p2)
 								-- upvalues: p1 (ref)
-								return tostring(math.ceil(p1.rewardWaitTime - p1.rewardWaitTime * p7))
+								return tostring(math.ceil(p1.rewardWaitTime - p1.rewardWaitTime * p2))
 							end)
 						})
 					})

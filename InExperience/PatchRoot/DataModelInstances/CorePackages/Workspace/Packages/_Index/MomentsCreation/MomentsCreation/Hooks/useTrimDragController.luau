@@ -9,188 +9,188 @@ local validateRefsModule = require(momentsCreation.Utils.validateRefs)
 local dragHandleModule = require(momentsCreation.Enums.DragHandle)
 local _ = require(parent.MomentsTypes)
 
-local function _(p0, p1, p2)
-	return if p0 == nil or p1 <= 0 then p2 else p0 / p1
+local function _(p1, p2, p3)
+	return if p1 == nil or p2 <= 0 then p3 else p1 / p2
 end
 
-return function(value, p3, p4, p5, p6, p7, p8, p9)
+return function(value, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: useRef (ref), useBinding (ref), useCallback (ref), validateRefsModule (ref), dragHandleModule (ref), useEffect (ref)
+	local var1 = useRef(nil)
+	local var2 = useRef(nil)
+	local var3 = useRef(nil)
 	local var4 = useRef(nil)
 	local var5 = useRef(nil)
 	local var6 = useRef(nil)
-	local var7 = useRef(nil)
-	local var8 = useRef(nil)
-	local var9 = useRef(nil)
-	local var10 = if p7 then p7.startTime else nil
-	local var11 = if var10 == nil or p8 <= 0 then 0 else var10 / p8
-	var12, var11 = useBinding(var11)
-	local var13 = if p7 then p7.endTime else nil
-	local var14 = if var13 == nil or p8 <= 0 then 1 else var13 / p8
-	var10, var14 = useBinding(var14)
-	var13 = useRef(nil)
-	local var15 = useRef(nil)
-	local var16 = useRef(nil)
-	local var17 = useRef(nil)
-	local var18 = if p8 > 0 then 1 / p8 else 0
-	local var19 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var5 (ref), var17 (ref), dragHandleModule (copy), var13 (ref), var12 (ref), p4 (ref)
-		if validateRefsModule({ var5 }) and not var17.current then
-			var17.current = dragHandleModule.LeftHandle
-			var13.current = var12:getValue()
-			p4(dragHandleModule.LeftHandle)
+	local var7 = if p5 then p5.startTime else nil
+	local var8 = if var7 == nil or p6 <= 0 then 0 else var7 / p6
+	var12, var11 = useBinding(var8)
+	local var9 = if p5 then p5.endTime else nil
+	local var10 = if var9 == nil or p6 <= 0 then 1 else var9 / p6
+	var7, var14 = useBinding(var10)
+	var9 = useRef(nil)
+	local var11 = useRef(nil)
+	local var12 = useRef(nil)
+	local var13 = useRef(nil)
+	local var14 = if p6 > 0 then 1 / p6 else 0
+	local var15 = useCallback(function()
+		-- upvalues: validateRefsModule (copy), var2 (ref), var13 (ref), dragHandleModule (copy), var9 (ref), var12 (ref), p2 (ref)
+		if validateRefsModule({ var2 }) and not var13.current then
+			var13.current = dragHandleModule.LeftHandle
+			var9.current = var12:getValue()
+			p2(dragHandleModule.LeftHandle)
 			
 			return
 		end
-	end, { p4 })
-	local var20 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var13 (ref), var5 (ref), var10 (ref), var18 (ref), var11 (ref), p9 (ref), dragHandleModule (copy)
-		if not validateRefsModule({ var13, var5 }) then return end
-		local clampedValue = math.clamp(var13.current + var5.current.DragUDim2.X.Scale, 0, var10:getValue() - var18)
-		var11(clampedValue)
+	end, { p2 })
+	local var16 = useCallback(function()
+		-- upvalues: validateRefsModule (copy), var9 (ref), var2 (ref), var7 (ref), var14 (ref), var8 (ref), p7 (ref), dragHandleModule (copy)
+		if not validateRefsModule({ var9, var2 }) then return end
+		local clampedValue = math.clamp(var9.current + var2.current.DragUDim2.X.Scale, 0, var7:getValue() - var14)
+		var8(clampedValue)
 		
-		if p9 then
-			p9(dragHandleModule.LeftHandle, clampedValue, var10:getValue())
+		if p7 then
+			p7(dragHandleModule.LeftHandle, clampedValue, var7:getValue())
 		end
-	end, { var18, p9 })
-	local var21 = useCallback(function()
-		-- upvalues: var17 (ref), dragHandleModule (copy), p5 (ref), var12 (ref), p8 (ref), var13 (ref), p3 (ref)
-		if var17.current == dragHandleModule.LeftHandle then
-			p5(var12:getValue() * p8, nil)
-			var17.current = nil
+	end, { var14, p7 })
+	local var17 = useCallback(function()
+		-- upvalues: var13 (ref), dragHandleModule (copy), p3 (ref), var12 (ref), p6 (ref), var9 (ref), p1 (ref)
+		if var13.current == dragHandleModule.LeftHandle then
+			p3(var12:getValue() * p6, nil)
 			var13.current = nil
-			p3()
+			var9.current = nil
+			p1()
 			
 			return
 		end
-	end, { p3, p5, p8 })
+	end, { p1, p3, p6 })
+	local var18 = useCallback(function()
+		-- upvalues: validateRefsModule (copy), var3 (ref), var13 (ref), dragHandleModule (copy), var11 (ref), var7 (ref), p2 (ref)
+		if validateRefsModule({ var3 }) and not var13.current then
+			var13.current = dragHandleModule.RightHandle
+			var11.current = var7:getValue()
+			p2(dragHandleModule.RightHandle)
+			
+			return
+		end
+	end, { p2 })
+	local var19 = useCallback(function()
+		-- upvalues: validateRefsModule (copy), var11 (ref), var3 (ref), var12 (ref), var14 (ref), var10 (ref), p7 (ref), dragHandleModule (copy)
+		if not validateRefsModule({ var11, var3 }) then return end
+		local clampedValue = math.clamp(var11.current + var3.current.DragUDim2.X.Scale, var12:getValue() + var14, 1)
+		var10(clampedValue)
+		
+		if p7 then
+			p7(dragHandleModule.RightHandle, var12:getValue(), clampedValue)
+		end
+	end, { var14, p7 })
+	local var20 = useCallback(function()
+		-- upvalues: var13 (ref), dragHandleModule (copy), p3 (ref), var7 (ref), p6 (ref), var11 (ref), p1 (ref)
+		if var13.current == dragHandleModule.RightHandle then
+			p3(nil, var7:getValue() * p6)
+			var13.current = nil
+			var11.current = nil
+			p1()
+			
+			return
+		end
+	end, { p1, p3, p6 })
+	local var21 = useCallback(function()
+		-- upvalues: validateRefsModule (copy), var6 (ref), var5 (ref), var13 (ref), dragHandleModule (copy), var12 (ref), p2 (ref)
+		if validateRefsModule({ var6, var5 }) and not var13.current then
+			var13.current = dragHandleModule.Scrubber
+			var12.current = var5.current.Position.X.Scale
+			p2(dragHandleModule.Scrubber)
+			
+			return
+		end
+	end, { p2 })
 	local var22 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var6 (ref), var17 (ref), dragHandleModule (copy), var15 (ref), var10 (ref), p4 (ref)
-		if validateRefsModule({ var6 }) and not var17.current then
-			var17.current = dragHandleModule.RightHandle
-			var15.current = var10:getValue()
-			p4(dragHandleModule.RightHandle)
+		-- upvalues: validateRefsModule (copy), var12 (ref), var6 (ref), p4 (ref)
+		if validateRefsModule({ var12, var6 }) then
+			p4(math.clamp(var12.current + var6.current.DragUDim2.X.Scale, 0, 1))
 			
 			return
 		end
 	end, { p4 })
 	local var23 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var15 (ref), var6 (ref), var12 (ref), var18 (ref), var14 (ref), p9 (ref), dragHandleModule (copy)
-		if not validateRefsModule({ var15, var6 }) then return end
-		local clampedValue = math.clamp(var15.current + var6.current.DragUDim2.X.Scale, var12:getValue() + var18, 1)
-		var14(clampedValue)
-		
-		if p9 then
-			p9(dragHandleModule.RightHandle, var12:getValue(), clampedValue)
+		-- upvalues: var13 (ref), dragHandleModule (copy), var12 (ref), p1 (ref)
+		if var13.current == dragHandleModule.Scrubber then
+			var13.current = nil
+			var12.current = nil
+			p1()
+			
+			return
 		end
-	end, { var18, p9 })
+	end, { p1 })
 	local var24 = useCallback(function()
-		-- upvalues: var17 (ref), dragHandleModule (copy), p5 (ref), var10 (ref), p8 (ref), var15 (ref), p3 (ref)
-		if var17.current == dragHandleModule.RightHandle then
-			p5(nil, var10:getValue() * p8)
-			var17.current = nil
-			var15.current = nil
-			p3()
+		-- upvalues: validateRefsModule (copy), var4 (ref), var13 (ref), dragHandleModule (copy), var9 (ref), var12 (ref), var11 (ref), var7 (ref), p2 (ref)
+		if validateRefsModule({ var4 }) and not var13.current then
+			var13.current = dragHandleModule.Segment
+			var9.current = var12:getValue()
+			var11.current = var7:getValue()
+			p2(dragHandleModule.Segment)
 			
 			return
 		end
-	end, { p3, p5, p8 })
+	end, { p2 })
 	local var25 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var9 (ref), var8 (ref), var17 (ref), dragHandleModule (copy), var16 (ref), p4 (ref)
-		if validateRefsModule({ var9, var8 }) and not var17.current then
-			var17.current = dragHandleModule.Scrubber
-			var16.current = var8.current.Position.X.Scale
-			p4(dragHandleModule.Scrubber)
-			
-			return
-		end
-	end, { p4 })
-	local var26 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var16 (ref), var9 (ref), p6 (ref)
-		if validateRefsModule({ var16, var9 }) then
-			p6(math.clamp(var16.current + var9.current.DragUDim2.X.Scale, 0, 1))
-			
-			return
-		end
-	end, { p6 })
-	local var27 = useCallback(function()
-		-- upvalues: var17 (ref), dragHandleModule (copy), var16 (ref), p3 (ref)
-		if var17.current == dragHandleModule.Scrubber then
-			var17.current = nil
-			var16.current = nil
-			p3()
-			
-			return
-		end
-	end, { p3 })
-	local var28 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var7 (ref), var17 (ref), dragHandleModule (copy), var13 (ref), var12 (ref), var15 (ref), var10 (ref), p4 (ref)
-		if validateRefsModule({ var7 }) and not var17.current then
-			var17.current = dragHandleModule.Segment
-			var13.current = var12:getValue()
-			var15.current = var10:getValue()
-			p4(dragHandleModule.Segment)
-			
-			return
-		end
-	end, { p4 })
-	local var29 = useCallback(function()
-		-- upvalues: validateRefsModule (copy), var7 (ref), var13 (ref), var5 (ref), var15 (ref), var6 (ref), var11 (ref), var14 (ref), p5 (ref), p8 (ref)
+		-- upvalues: validateRefsModule (copy), var4 (ref), var9 (ref), var2 (ref), var11 (ref), var3 (ref), var8 (ref), var10 (ref), p3 (ref), p6 (ref)
 		if not validateRefsModule({
-			var7,
-			var13,
-			var5,
-			var15,
-			var6
+			var4,
+			var9,
+			var2,
+			var11,
+			var3
 		}) then return end
-		local scale = var7.current.DragUDim2.X.Scale
-		local current = var13.current
-		local current_1 = var15.current
+		local scale = var4.current.DragUDim2.X.Scale
+		local current = var9.current
+		local current_1 = var11.current
 		
 		if current <= 0 and current_1 >= 1 then
 			return
 		end
 		local clampedValue = math.clamp(scale, -current, 1 - current_1)
-		local var34 = current + clampedValue
-		local var35 = current_1 + clampedValue
-		var11(var34)
-		var14(var35)
-		p5(var34 * p8, var35 * p8)
-	end, { p5, p8 })
-	local var30 = useCallback(function()
-		-- upvalues: var17 (ref), dragHandleModule (copy), var13 (ref), var15 (ref), p3 (ref)
-		if var17.current == dragHandleModule.Segment then
-			var17.current = nil
+		local var26 = current + clampedValue
+		local var27 = current_1 + clampedValue
+		var8(var26)
+		var10(var27)
+		p3(var26 * p6, var27 * p6)
+	end, { p3, p6 })
+	local var26 = useCallback(function()
+		-- upvalues: var13 (ref), dragHandleModule (copy), var9 (ref), var11 (ref), p1 (ref)
+		if var13.current == dragHandleModule.Segment then
 			var13.current = nil
-			var15.current = nil
-			p3()
+			var9.current = nil
+			var11.current = nil
+			p1()
 			
 			return
 		end
-	end, { p3 })
+	end, { p1 })
 	useEffect(function()
-		-- upvalues: value (ref), var5 (ref), var19 (ref), var20 (ref), var21 (ref), var6 (ref), var22 (ref), var23 (ref), var24 (ref), var9 (ref), var25 (ref), var26 (ref), var27 (ref), var7 (ref), var28 (ref), var29 (ref), var30 (ref)
+		-- upvalues: value (ref), var2 (ref), var15 (ref), var16 (ref), var17 (ref), var3 (ref), var18 (ref), var19 (ref), var20 (ref), var6 (ref), var21 (ref), var22 (ref), var23 (ref), var4 (ref), var24 (ref), var25 (ref), var26 (ref)
 		if not value then return end
 		local t = {}
 		
-		if var5.current then
-			table.insert(t, var5.current.DragStart:Connect(var19))
-			table.insert(t, var5.current.DragContinue:Connect(var20))
-			table.insert(t, var5.current.DragEnd:Connect(var21))
+		if var2.current then
+			table.insert(t, var2.current.DragStart:Connect(var15))
+			table.insert(t, var2.current.DragContinue:Connect(var16))
+			table.insert(t, var2.current.DragEnd:Connect(var17))
+		end
+		if var3.current then
+			table.insert(t, var3.current.DragStart:Connect(var18))
+			table.insert(t, var3.current.DragContinue:Connect(var19))
+			table.insert(t, var3.current.DragEnd:Connect(var20))
 		end
 		if var6.current then
-			table.insert(t, var6.current.DragStart:Connect(var22))
-			table.insert(t, var6.current.DragContinue:Connect(var23))
-			table.insert(t, var6.current.DragEnd:Connect(var24))
+			table.insert(t, var6.current.DragStart:Connect(var21))
+			table.insert(t, var6.current.DragContinue:Connect(var22))
+			table.insert(t, var6.current.DragEnd:Connect(var23))
 		end
-		if var9.current then
-			table.insert(t, var9.current.DragStart:Connect(var25))
-			table.insert(t, var9.current.DragContinue:Connect(var26))
-			table.insert(t, var9.current.DragEnd:Connect(var27))
-		end
-		if var7.current then
-			table.insert(t, var7.current.DragStart:Connect(var28))
-			table.insert(t, var7.current.DragContinue:Connect(var29))
-			table.insert(t, var7.current.DragEnd:Connect(var30))
+		if var4.current then
+			table.insert(t, var4.current.DragStart:Connect(var24))
+			table.insert(t, var4.current.DragContinue:Connect(var25))
+			table.insert(t, var4.current.DragEnd:Connect(var26))
 		end
 		return function()
 			-- upvalues: t (ref)
@@ -199,18 +199,18 @@ return function(value, p3, p4, p5, p6, p7, p8, p9)
 			end
 		end
 	end, {
-		value, var19, var20, var21, var22, var23, var24, var25, var26, var27, var28,
-		var29, var30
+		value, var15, var16, var17, var18, var19, var20, var21, var22, var23, var24,
+		var25, var26
 	})
 	
 	return {
-		dragContainerRef = var4,
-		leftHandleRef = var5,
-		rightHandleRef = var6,
-		scrubberDisplayRef = var8,
-		scrubberRef = var9,
-		segmentRef = var7,
+		dragContainerRef = var1,
+		leftHandleRef = var2,
+		rightHandleRef = var3,
+		scrubberDisplayRef = var5,
+		scrubberRef = var6,
+		segmentRef = var4,
 		leftHandlePosition = var12,
-		rightHandlePosition = var10
+		rightHandlePosition = var7
 	}
 end

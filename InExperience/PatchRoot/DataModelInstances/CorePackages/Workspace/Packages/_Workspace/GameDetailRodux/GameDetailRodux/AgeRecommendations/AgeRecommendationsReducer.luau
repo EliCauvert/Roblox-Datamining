@@ -2,12 +2,12 @@
 local cryoModule = require(gameDetailRodux.Parent.Cryo)
 local setAgeRecommendationModule = require(gameDetailRodux.AgeRecommendations.SetAgeRecommendation)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: setAgeRecommendationModule (ref), cryoModule (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	if p1.type == setAgeRecommendationModule.name then
-		p0 = cryoModule.Dictionary.join(p0, { [p1.universeId] = p1.ageRecommendationDetails })
+	if p2.type == setAgeRecommendationModule.name then
+		p1 = cryoModule.Dictionary.join(p1, { [p2.universeId] = p2.ageRecommendationDetails })
 	end
-	return p0
+	return p1
 end

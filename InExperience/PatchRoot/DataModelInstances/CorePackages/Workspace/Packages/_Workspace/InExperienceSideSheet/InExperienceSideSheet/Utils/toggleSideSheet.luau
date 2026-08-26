@@ -1,6 +1,6 @@
 ﻿local getDrawerVisibleStore = require(script:FindFirstAncestor("InExperienceSideSheet").Parent.Drawer).Stores.GetDrawerVisibleStore
 
-return function(p0)
+return function(p1)
 	-- upvalues: getDrawerVisibleStore (ref)
-	getDrawerVisibleStore(false).setDrawerVisible(p0)
+	getDrawerVisibleStore(false).setDrawerVisible(p1)
 end

@@ -11,28 +11,28 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local fFlagProfilePlatformPeekDraggerContrast = require(parent.SharedFlags).FFlagProfilePlatformPeekDraggerContrast
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local var5 = if fFlagProfilePlatformNewProfileHeader then 0 else 25
+local var1 = if fFlagProfilePlatformNewProfileHeader then 0 else 25
 
-return function(p0)
-	-- upvalues: useSelector (ref), fFlagProfilePlatformNewProfileHeader (ref), useStyle (ref), reactModule (ref), peekViewState (ref), var5 (ref), fFlagProfilePlatformPeekDraggerContrast (ref), enumsModule (ref), view (ref), peekView (ref)
-	local statusBarHeight = p0.statusBarHeight or useSelector(function(p1)
-		return p1.TopBar.statusBarHeight
+return function(p1)
+	-- upvalues: useSelector (ref), fFlagProfilePlatformNewProfileHeader (ref), useStyle (ref), reactModule (ref), peekViewState (ref), var1 (ref), fFlagProfilePlatformPeekDraggerContrast (ref), enumsModule (ref), view (ref), peekView (ref)
+	local statusBarHeight = p1.statusBarHeight or useSelector(function(p2)
+		return p2.TopBar.statusBarHeight
 	end)
-	local var7 = if fFlagProfilePlatformNewProfileHeader then useStyle() else nil
-	local var8 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: peekViewState (copy), p0 (ref)
-		if p2 == peekViewState.Closed and p0.onClosed then
-			p0.onClosed()
+	local var2 = if fFlagProfilePlatformNewProfileHeader then useStyle() else nil
+	local var3 = reactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: peekViewState (copy), p1 (ref)
+		if p2 == peekViewState.Closed and p1.onClosed then
+			p1.onClosed()
 		end
-		if p0.onViewStateChanged then
-			p0.onViewStateChanged(p2, p3, p4)
+		if p1.onViewStateChanged then
+			p1.onViewStateChanged(p2, p3, p4)
 		end
-	end, { p0.onClosed, p0.onViewStateChanged })
-	local var9, var10 = reactModule.useBinding(0)
+	end, { p1.onClosed, p1.onViewStateChanged })
+	local var4, var5 = reactModule.useBinding(0)
 	
 	return reactModule.createElement(view, {
 		tag = "position-top-left",
-		Size = UDim2.new(p0.viewWidth or UDim.new(1, 0), UDim.new(1, 0))
+		Size = UDim2.new(p1.viewWidth or UDim.new(1, 0), UDim.new(1, 0))
 	}, {
 		StatusBarSpace = if fFlagProfilePlatformNewProfileHeader then nil else reactModule.createElement(view, {
 			tag = "position-top-left bg-surface-0",
@@ -41,28 +41,28 @@ return function(p0)
 			Size = UDim2.new(1, 0, 0, statusBarHeight)
 		}),
 		ProfileContent = reactModule.createElement(view, {
-			Size = if fFlagProfilePlatformNewProfileHeader then UDim2.new(1, 0, 1, -statusBarHeight) else UDim2.new(1, 0, 1, -statusBarHeight + var5),
-			Position = if fFlagProfilePlatformNewProfileHeader then UDim2.new(0, 0, 0, statusBarHeight) else UDim2.new(0, 0, 0, statusBarHeight - var5)
+			Size = if fFlagProfilePlatformNewProfileHeader then UDim2.new(1, 0, 1, -statusBarHeight) else UDim2.new(1, 0, 1, -statusBarHeight + var1),
+			Position = if fFlagProfilePlatformNewProfileHeader then UDim2.new(0, 0, 0, statusBarHeight) else UDim2.new(0, 0, 0, statusBarHeight - var1)
 		}, {
 			PeekView = reactModule.createElement(peekView, {
 				hasScrim = true,
-				fullViewContentHeight = p0.fullViewContentHeight,
-				briefViewContentHeight = if p0.briefViewContentHeight then p0.briefViewContentHeight else UDim.new(0.5, 0),
-				bottomDockedContainerHeight = p0.bottomDockedContainerHeight,
-				bottomDockedContainerContent = { PeekViewBottomBar = p0.bottomBarSlot },
-				mountAsFullView = p0.mountAsFullView,
-				mountAnimation = p0.mountAnimation,
-				viewStateChanged = var8,
-				briefToFullTransitionPercent = function(p5)
-					-- upvalues: var10 (ref), p0 (ref)
-					var10(p5)
+				fullViewContentHeight = p1.fullViewContentHeight,
+				briefViewContentHeight = if p1.briefViewContentHeight then p1.briefViewContentHeight else UDim.new(0.5, 0),
+				bottomDockedContainerHeight = p1.bottomDockedContainerHeight,
+				bottomDockedContainerContent = { PeekViewBottomBar = p1.bottomBarSlot },
+				mountAsFullView = p1.mountAsFullView,
+				mountAnimation = p1.mountAnimation,
+				viewStateChanged = var3,
+				briefToFullTransitionPercent = function(p2)
+					-- upvalues: var5 (ref), p1 (ref)
+					var5(p2)
 					
-					if p0.transitionPercentCallback then
-						p0.transitionPercentCallback(p5)
+					if p1.transitionPercentCallback then
+						p1.transitionPercentCallback(p2)
 					end
 				end,
-				hasSolidDragger = if fFlagProfilePlatformNewProfileHeader and p0.profileType == enumsModule.ProfileTypes.User then false else nil,
-				draggerImageStyle = if fFlagProfilePlatformNewProfileHeader and (fFlagProfilePlatformPeekDraggerContrast and p0.profileType == enumsModule.ProfileTypes.User) then var7.Tokens.Color.System.Contrast else nil
+				hasSolidDragger = if fFlagProfilePlatformNewProfileHeader and p1.profileType == enumsModule.ProfileTypes.User then false else nil,
+				draggerImageStyle = if fFlagProfilePlatformNewProfileHeader and (fFlagProfilePlatformPeekDraggerContrast and p1.profileType == enumsModule.ProfileTypes.User) then var2.Tokens.Color.System.Contrast else nil
 			}, {
 				UIListLayout = reactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0, 0),
@@ -70,7 +70,7 @@ return function(p0)
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Top
 				}),
-				Content = p0.contentSlot
+				Content = p1.contentSlot
 			})
 		}),
 		PeekViewTopBar = if fFlagProfilePlatformNewProfileHeader then reactModule.createElement("CanvasGroup", {
@@ -79,8 +79,8 @@ return function(p0)
 			ZIndex = 1000,
 			Position = UDim2.new(0, 0, 0, 0),
 			Size = UDim2.new(1, 0, 0, statusBarHeight + 56),
-			GroupTransparency = var9:map(function(p6)
-				return 1 - p6
+			GroupTransparency = var4:map(function(p2)
+				return 1 - p2
 			end)
 		}, {
 			StatusBarBackground = reactModule.createElement("Frame", {
@@ -88,23 +88,23 @@ return function(p0)
 				BorderSizePixel = 0,
 				Position = UDim2.new(0, 0, 0, 0),
 				Size = UDim2.new(1, 0, 0, statusBarHeight),
-				BackgroundColor3 = var7.Theme.BackgroundDefault.Color
+				BackgroundColor3 = var2.Theme.BackgroundDefault.Color
 			}),
 			TopBarSlotContainer = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Position = UDim2.new(0, 0, 0, statusBarHeight),
 				Size = UDim2.new(1, 0, 0, 56)
-			}, { TopBar = p0.topBarSlot })
+			}, { TopBar = p1.topBarSlot })
 		}) else nil,
 		TransparentTopBarOverlay = if fFlagProfilePlatformNewProfileHeader then nil else reactModule.createElement("CanvasGroup", {
 			BackgroundTransparency = 1,
 			ZIndex = 1000,
 			Size = UDim2.new(1, 0, 0, 56),
 			Position = UDim2.new(0, 0, 0, statusBarHeight),
-			GroupTransparency = var9:map(function(p7)
-				return 1 - p7
+			GroupTransparency = var4:map(function(p2)
+				return 1 - p2
 			end)
-		}, { TopBar = p0.topBarSlot })
+		}, { TopBar = p1.topBarSlot })
 	})
 end

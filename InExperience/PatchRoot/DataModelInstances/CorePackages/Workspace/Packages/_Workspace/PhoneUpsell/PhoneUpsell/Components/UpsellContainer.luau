@@ -19,7 +19,7 @@ local getFFlagDisableVerifyPhoneViewOnSuccessModule = require(phoneUpsell.Flags.
 local getFFlagFixIosOtpAutofillModule = require(phoneUpsell.Flags.GetFFlagFixIosOtpAutofill)
 local fFlagHomePhoneVerificationUpsellNewCopy = require(parent.SharedFlags).FFlagHomePhoneVerificationUpsellNewCopy
 
-local var15 = function() end
+local var1 = function() end
 
 local t = {
 	origin = "",
@@ -32,90 +32,90 @@ local t = {
 	isPhoneNumberTextTypeEnabled = false,
 	alwaysShowAddPhoneLegalText = false,
 	requireAddPhoneLegalTextCheckbox = false,
-	onSuccess = var15,
-	onFailure = var15,
-	onCancelled = var15,
-	onExtraButtonClick = var15,
-	closeUpsell = var15,
+	onSuccess = var1,
+	onFailure = var1,
+	onCancelled = var1,
+	onExtraButtonClick = var1,
+	closeUpsell = var1,
 	showWebpage = function(_) end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: mergePropsModule (ref), t (ref), usePhoneVerificationUpsellPropsModule (ref), reactModule (ref), loading (ref), iconSize (ref), getFFlagPhoneUseParentSizeForScreenSizeModule (ref), roactModule (ref), phoneVerificationUpsellStateModule (ref), entryViewModule (ref), addPhoneViewModule (ref), getFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), verifyPhoneViewModule (ref), getFFlagDisableVerifyPhoneViewOnSuccessModule (ref), getFFlagFixIosOtpAutofillModule (ref), phoneVerificationStatusOverlayModule (ref)
-	local var17 = mergePropsModule(t, p0)
-	local var18 = usePhoneVerificationUpsellPropsModule(var17)
+	local var2 = mergePropsModule(t, p1)
+	local var3 = usePhoneVerificationUpsellPropsModule(var2)
 	
 	return reactModule.createElement(if getFFlagPhoneUseParentSizeForScreenSizeModule() then "Frame" else reactModule.Fragment, if getFFlagPhoneUseParentSizeForScreenSizeModule() then {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		[roactModule.Change.AbsoluteSize] = function(p1)
-			-- upvalues: var18 (ref)
-			var18.setParentSize(p1.AbsoluteSize)
+		[roactModule.Change.AbsoluteSize] = function(p2)
+			-- upvalues: var3 (ref)
+			var3.setParentSize(p2.AbsoluteSize)
 		end
 	} else nil, {
-		Entry = var18.phoneUpsellState == phoneVerificationUpsellStateModule.Entry and (var17.entryConfig and reactModule.createElement(entryViewModule, {
-			screenSize = var18.screenSize,
-			onClose = var18.handleCloseClick,
-			titleKey = var17.entryConfig.titleKey,
-			descriptionKey = var17.entryConfig.descriptionKey,
-			buttonKey = var17.entryConfig.buttonKey,
-			onButtonClick = var18.proceedToAddPhone,
-			extraButtonKey = var17.entryConfig.extraButtonConfig.extraButtonKey,
-			onExtraButtonClick = var17.entryConfig.extraButtonConfig.onExtraButtonClick
+		Entry = var3.phoneUpsellState == phoneVerificationUpsellStateModule.Entry and (var2.entryConfig and reactModule.createElement(entryViewModule, {
+			screenSize = var3.screenSize,
+			onClose = var3.handleCloseClick,
+			titleKey = var2.entryConfig.titleKey,
+			descriptionKey = var2.entryConfig.descriptionKey,
+			buttonKey = var2.entryConfig.buttonKey,
+			onButtonClick = var3.proceedToAddPhone,
+			extraButtonKey = var2.entryConfig.extraButtonConfig.extraButtonKey,
+			onExtraButtonClick = var2.entryConfig.extraButtonConfig.onExtraButtonClick
 		})),
-		AddPhone = var18.phoneUpsellState == phoneVerificationUpsellStateModule.AddPhone and reactModule.createElement(addPhoneViewModule, {
-			screenSize = var18.screenSize,
-			countryCode = var18.countryCode,
-			setCountryCode = var18.setCountryCode,
-			phoneNumber = var18.phoneNumber,
-			errorMessage = var18.addPhoneErrorMessage,
-			isDisabled = var18.isDisabled,
-			onPhoneNumberTextChange = var18.onPhoneNumberTextChange,
-			onSetPhoneNumber = var18.handleSetPhone,
-			onClose = var18.handleCloseClick,
-			onTermsOfUseClick = var18.navigateToSMSTerms,
-			onPrivacyPolicyClick = var18.navigateToPrivacy,
-			onPhoneInputFocus = var18.onPhoneInputFocus,
-			onCountryCodeSelectorClick = var18.onCountryCodeSelectorClick,
-			isKeyboardShowing = var18.isKeyboardShowing,
-			keyboardHeight = var18.onScreenKeyboardHeight,
-			usePhoneNumberTextType = getFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule() and var18.isPhoneNumberTextTypeEnabled,
-			titleKey = var17.addPhoneTitleKey,
-			descriptionKey = var17.addPhoneDescriptionKey,
-			buttonKey = var17.addPhoneButtonKey,
-			legalTextKey = var17.addPhoneLegalTextKey,
-			extraButtonKey = var17.extraButtonTextKey,
-			onExtraButtonClick = var17.onExtraButtonClick,
-			alwaysShowLegalText = var17.alwaysShowAddPhoneLegalText,
-			requireLegalTextCheckbox = var17.requireAddPhoneLegalTextCheckbox,
-			disableLegalText = var17.disableLegalText,
-			shouldShowVerificationText = if fFlagHomePhoneVerificationUpsellNewCopy then var17.shouldShowVerificationText else nil
+		AddPhone = var3.phoneUpsellState == phoneVerificationUpsellStateModule.AddPhone and reactModule.createElement(addPhoneViewModule, {
+			screenSize = var3.screenSize,
+			countryCode = var3.countryCode,
+			setCountryCode = var3.setCountryCode,
+			phoneNumber = var3.phoneNumber,
+			errorMessage = var3.addPhoneErrorMessage,
+			isDisabled = var3.isDisabled,
+			onPhoneNumberTextChange = var3.onPhoneNumberTextChange,
+			onSetPhoneNumber = var3.handleSetPhone,
+			onClose = var3.handleCloseClick,
+			onTermsOfUseClick = var3.navigateToSMSTerms,
+			onPrivacyPolicyClick = var3.navigateToPrivacy,
+			onPhoneInputFocus = var3.onPhoneInputFocus,
+			onCountryCodeSelectorClick = var3.onCountryCodeSelectorClick,
+			isKeyboardShowing = var3.isKeyboardShowing,
+			keyboardHeight = var3.onScreenKeyboardHeight,
+			usePhoneNumberTextType = getFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule() and var3.isPhoneNumberTextTypeEnabled,
+			titleKey = var2.addPhoneTitleKey,
+			descriptionKey = var2.addPhoneDescriptionKey,
+			buttonKey = var2.addPhoneButtonKey,
+			legalTextKey = var2.addPhoneLegalTextKey,
+			extraButtonKey = var2.extraButtonTextKey,
+			onExtraButtonClick = var2.onExtraButtonClick,
+			alwaysShowLegalText = var2.alwaysShowAddPhoneLegalText,
+			requireLegalTextCheckbox = var2.requireAddPhoneLegalTextCheckbox,
+			disableLegalText = var2.disableLegalText,
+			shouldShowVerificationText = if fFlagHomePhoneVerificationUpsellNewCopy then var2.shouldShowVerificationText else nil
 		}),
-		VerifyPhone = var18.phoneUpsellState == phoneVerificationUpsellStateModule.VerifyPhone and reactModule.createElement(verifyPhoneViewModule, {
-			screenSize = var18.screenSize,
-			phoneNumber = var18.phoneNumber,
-			prefix = var18.countryCode.prefix,
-			code = var18.code,
-			errorMessage = var18.verifyPhoneErrorMessage,
-			isDisabled = if getFFlagDisableVerifyPhoneViewOnSuccessModule() then var18.isDisabled else nil,
-			onCodeTextChange = var18.onCodeTextChange,
-			onResendPhoneCode = var18.handleResendCode,
-			onClose = var18.handleCloseClick,
-			returnToAddPhone = var18.returnToAddPhone,
-			onCodeInputFocus = var18.onCodeInputFocus,
-			isKeyboardShowing = var18.isKeyboardShowing,
-			keyboardHeight = var18.onScreenKeyboardHeight,
-			useOTPInputType = if getFFlagFixIosOtpAutofillModule() then var18.isOTPInputTypeEnabled else var17.isOTPInputTypeEnabled,
-			extraButtonKey = var17.verifyPhoneExtraButtonKey,
-			onExtraButtonClick = var17.onVerifyPhoneExtraButtonClick
+		VerifyPhone = var3.phoneUpsellState == phoneVerificationUpsellStateModule.VerifyPhone and reactModule.createElement(verifyPhoneViewModule, {
+			screenSize = var3.screenSize,
+			phoneNumber = var3.phoneNumber,
+			prefix = var3.countryCode.prefix,
+			code = var3.code,
+			errorMessage = var3.verifyPhoneErrorMessage,
+			isDisabled = if getFFlagDisableVerifyPhoneViewOnSuccessModule() then var3.isDisabled else nil,
+			onCodeTextChange = var3.onCodeTextChange,
+			onResendPhoneCode = var3.handleResendCode,
+			onClose = var3.handleCloseClick,
+			returnToAddPhone = var3.returnToAddPhone,
+			onCodeInputFocus = var3.onCodeInputFocus,
+			isKeyboardShowing = var3.isKeyboardShowing,
+			keyboardHeight = var3.onScreenKeyboardHeight,
+			useOTPInputType = if getFFlagFixIosOtpAutofillModule() then var3.isOTPInputTypeEnabled else var2.isOTPInputTypeEnabled,
+			extraButtonKey = var2.verifyPhoneExtraButtonKey,
+			onExtraButtonClick = var2.onVerifyPhoneExtraButtonClick
 		}),
-		LoadingOverlay = var18.isLoading and reactModule.createElement(phoneVerificationStatusOverlayModule, {
+		LoadingOverlay = var3.isLoading and reactModule.createElement(phoneVerificationStatusOverlayModule, {
 			image = reactModule.createElement(loading, {
 				size = iconSize.Large,
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5)
 			}),
-			text = var18.verifyingKey
+			text = var3.verifyingKey
 		})
 	})
 end

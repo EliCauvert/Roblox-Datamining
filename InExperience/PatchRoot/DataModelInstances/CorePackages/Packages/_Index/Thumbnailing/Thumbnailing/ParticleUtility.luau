@@ -1,6 +1,6 @@
 ﻿local t = {
-	InstanceIsAParticleEffect = function(p0)
-		return p0:IsA("ParticleEmitter") or (p0:IsA("Fire") or (p0:IsA("Smoke") or p0:IsA("Sparkles")))
+	InstanceIsAParticleEffect = function(p1)
+		return p1:IsA("ParticleEmitter") or (p1:IsA("Fire") or (p1:IsA("Smoke") or p1:IsA("Sparkles")))
 	end
 }
 
@@ -19,8 +19,8 @@ function t.FastForwardParticles(p2)
 	recurFastForwardParticles(p2)
 end
 
-local function findNearestBasePart(p3)
-	local parent = p3.Parent
+local function findNearestBasePart(p2)
+	local parent = p2.Parent
 	while parent do
 		if not parent:IsA("BasePart") then
 			local handle
@@ -46,29 +46,29 @@ local function findNearestBasePart(p3)
 	return nil
 end
 
-local function recurReparentOrphanedEffects(p4)
+local function recurReparentOrphanedEffects(p3)
 	-- upvalues: t (ref), findNearestBasePart (ref), recurReparentOrphanedEffects (ref)
-	if t.InstanceIsAParticleEffect(p4) then
-		local parent = p4.Parent
+	if t.InstanceIsAParticleEffect(p3) then
+		local parent = p3.Parent
 		
 		if parent and not parent:IsA("BasePart") and not parent:IsA("Attachment") then
-			local var5 = findNearestBasePart(p4)
+			local var1 = findNearestBasePart(p3)
 			
-			if var5 then
-				p4.Parent = var5
+			if var1 then
+				p3.Parent = var1
 			end
 		end
 		return
 	else
-		for i, v in p4:GetChildren() do
+		for i, v in p3:GetChildren() do
 			recurReparentOrphanedEffects(v)
 		end
 	end
 end
 
-function t.ReparentOrphanedParticleEffects(p5)
+function t.ReparentOrphanedParticleEffects(p4)
 	-- upvalues: recurReparentOrphanedEffects (ref)
-	recurReparentOrphanedEffects(p5)
+	recurReparentOrphanedEffects(p4)
 end
 
 return t

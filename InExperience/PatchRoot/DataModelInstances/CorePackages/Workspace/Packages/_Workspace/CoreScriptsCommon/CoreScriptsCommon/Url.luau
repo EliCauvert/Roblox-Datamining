@@ -1,13 +1,13 @@
 ﻿local t = {}
 
-local function _(p0)
-	local _, var4 = p0:find("%.")
-	local var5 = p0:sub(var4 + 1)
+local function _(p1)
+	local _, var1 = p1:find("%.")
+	local var2 = p1:sub(var1 + 1)
 	
-	if var5:sub(-1) ~= "/" then
-		var5 ..= "/"
+	if var2:sub(-1) ~= "/" then
+		var2 ..= "/"
 	end
-	return var5
+	return var2
 end
 
 local baseUrl = game:GetService("ContentProvider").BaseUrl

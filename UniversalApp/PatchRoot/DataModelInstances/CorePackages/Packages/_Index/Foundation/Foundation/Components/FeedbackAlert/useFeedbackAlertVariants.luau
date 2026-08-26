@@ -5,15 +5,15 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function createSeverityStyles(_, p0)
+local function createSeverityStyles(_, p1)
 	return {
-		icon = { style = p0 },
+		icon = { style = p1 },
 		stroke = {
 			Thickness = 1,
-			Color = p0.Color3,
-			Transparency = p0.Transparency
+			Color = p1.Color3,
+			Transparency = p1.Transparency
 		},
-		backgroundStyle = { Transparency = 0.95, Color3 = p0.Color3 }
+		backgroundStyle = { Transparency = 0.95, Color3 = p1.Color3 }
 	}
 end
 
@@ -47,9 +47,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p2, p3)
+return function(p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local feedbackAlert = variantsContextModule.useVariants("FeedbackAlert", variantsFactory, p2)
+	local feedbackAlert = variantsContextModule.useVariants("FeedbackAlert", variantsFactory, p1)
 	
-	return composeStyleVariantModule(feedbackAlert.common, feedbackAlert.severity[p3])
+	return composeStyleVariantModule(feedbackAlert.common, feedbackAlert.severity[p2])
 end

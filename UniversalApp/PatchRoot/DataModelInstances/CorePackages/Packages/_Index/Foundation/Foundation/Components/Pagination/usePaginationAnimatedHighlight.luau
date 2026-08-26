@@ -11,46 +11,46 @@ local instance = wrappersModule.Instance
 local signal = wrappersModule.Signal
 local _ = require(script.Parent.paginationSlotsUtils)
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: useTokensModule (ref), reactOtterModule (ref), reactModule (ref), signal (ref), instance (ref), connection (ref)
 	local time100 = useTokensModule().Time.Time_100
-	local var5, var6 = reactOtterModule.useAnimatedBinding(0)
-	local var7, var8 = reactOtterModule.useAnimatedBinding(0)
-	local var9, var10 = reactModule.useBinding(0)
-	local var11, var12 = reactModule.useBinding(false)
-	local var13 = reactModule.useRef(p0)
-	local var14 = reactModule.useRef(false)
-	local var15 = reactModule.useRef(false)
-	local var16 = reactModule.useRef(nil)
-	local var17 = reactModule.useRef(nil)
+	local var1, var2 = reactOtterModule.useAnimatedBinding(0)
+	local var3, var4 = reactOtterModule.useAnimatedBinding(0)
+	local var5, var6 = reactModule.useBinding(0)
+	local var7, var8 = reactModule.useBinding(false)
+	local var9 = reactModule.useRef(p1)
+	local var10 = reactModule.useRef(false)
+	local var11 = reactModule.useRef(false)
+	local var12 = reactModule.useRef(nil)
+	local var13 = reactModule.useRef(nil)
 	
 	local function _(value)
-		-- upvalues: var16 (ref), var14 (ref), var15 (ref)
-		if var16.current then
-			task.cancel(var16.current)
-			var16.current = nil
+		-- upvalues: var12 (ref), var10 (ref), var11 (ref)
+		if var12.current then
+			task.cancel(var12.current)
+			var12.current = nil
 		end
-		var14.current = false
+		var10.current = false
 		
 		if value then
-			var15.current = false
+			var11.current = false
 		end
 	end
 	
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref), var14 (ref), time100 (ref), var15 (ref), var17 (ref)
-		if var16.current then
-			task.cancel(var16.current)
+	local var14 = reactModule.useCallback(function()
+		-- upvalues: var12 (ref), var10 (ref), time100 (ref), var11 (ref), var13 (ref)
+		if var12.current then
+			task.cancel(var12.current)
 		end
-		var14.current = true
-		var16.current = task.delay(time100, function()
-			-- upvalues: var16 (copy), var14 (copy), var15 (copy), var17 (copy)
-			var16.current = nil
-			var14.current = false
+		var10.current = true
+		var12.current = task.delay(time100, function()
+			-- upvalues: var12 (copy), var10 (copy), var11 (copy), var13 (copy)
+			var12.current = nil
+			var10.current = false
 			
-			if var15.current then
-				var15.current = false
-				local current = var17.current
+			if var11.current then
+				var11.current = false
+				local current = var13.current
 				
 				if current then
 					current()
@@ -58,127 +58,127 @@ return function(p0, p1, p2, p3, p4)
 			end
 		end)
 	end, { time100 })
-	local var19 = reactModule.useCallback(function(p5, p6)
-		-- upvalues: p1 (ref), var12 (ref), var14 (ref), var15 (ref), var8 (ref), reactOtterModule (copy), var6 (ref), var18 (ref), time100 (ref), var10 (ref)
-		if not p5.current or not p1.current then
-			var12(false)
+	local var15 = reactModule.useCallback(function(p6, p7)
+		-- upvalues: p2 (ref), var8 (ref), var10 (ref), var11 (ref), var4 (ref), reactOtterModule (copy), var2 (ref), var14 (ref), time100 (ref), var6 (ref)
+		if not p6.current or not p2.current then
+			var8(false)
 			
 			return false
 		end
-		local var21 = p5.current.AbsolutePosition.X - p1.current.AbsolutePosition.X
-		local x = p5.current.AbsoluteSize.X
-		local y = p5.current.AbsoluteSize.Y
+		local var16 = p6.current.AbsolutePosition.X - p2.current.AbsolutePosition.X
+		local x = p6.current.AbsoluteSize.X
+		local y = p6.current.AbsoluteSize.Y
 		
 		if x <= 0 or y <= 0 then
-			var12(false)
+			var8(false)
 			
 			return false
-		elseif p6 and var14.current then
-			var15.current = true
+		elseif p7 and var10.current then
+			var11.current = true
 			
 			return false
-		elseif p6 then
-			var8(reactOtterModule.instant(x))
-			var6(reactOtterModule.instant(var21))
+		elseif p7 then
+			var4(reactOtterModule.instant(x))
+			var2(reactOtterModule.instant(var16))
 		else
-			var15.current = false
-			var18()
+			var11.current = false
+			var14()
 			local t = {
 				easingStyle = Enum.EasingStyle.Linear,
 				duration = time100
 			}
-			var6(reactOtterModule.ease(var21, t))
-			var8(reactOtterModule.ease(x, t))
+			var2(reactOtterModule.ease(var16, t))
+			var4(reactOtterModule.ease(x, t))
 		end
-		var10(y)
-		var12(true)
+		var6(y)
+		var8(true)
 		
 		return true
-	end, { time100, p1, var18 })
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), p2 (ref), var19 (ref)
-		if p0 then
-			local var23 = p2[p0]
+	end, { time100, p2, var14 })
+	local var16 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), p3 (ref), var15 (ref)
+		if p1 then
+			local var17 = p3[p1]
 			
-			if var23 then
-				var19(var23, true)
+			if var17 then
+				var15(var17, true)
 			end
 		end
-	end, { p0, p2, var19 })
+	end, { p1, p3, var15 })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: p0 (ref), p2 (ref), var13 (ref), var16 (ref), var14 (ref), var15 (ref), p1 (ref), var19 (ref), var12 (ref)
-		if not p0 then
-			var12(false)
-			var13.current = nil
+		-- upvalues: p1 (ref), p3 (ref), var9 (ref), var12 (ref), var10 (ref), var11 (ref), p2 (ref), var15 (ref), var8 (ref)
+		if not p1 then
+			var8(false)
+			var9.current = nil
 			
 			return
 		end
-		local var24 = p2[p0]
-		local var25 = p0 == var13.current
+		local var17 = p3[p1]
+		local var18 = p1 == var9.current
 		
-		if not var25 then
-			if var16.current then
-				task.cancel(var16.current)
-				var16.current = nil
+		if not var18 then
+			if var12.current then
+				task.cancel(var12.current)
+				var12.current = nil
 			end
-			var14.current = false
-			var15.current = false
+			var10.current = false
+			var11.current = false
 		end
-		if var24 and var24.current and p1.current then
-			var19(var24, var25)
+		if var17 and var17.current and p2.current then
+			var15(var17, var18)
 		else
-			var12(false)
+			var8(false)
 		end
-		var13.current = p0
+		var9.current = p1
 	end, {
-		p0,
-		p2,
-		var19,
+		p1,
 		p3,
-		p4
+		var15,
+		p4,
+		p5
 	})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), p2 (ref), p1 (ref), signal (copy), instance (copy), var20 (ref), connection (copy)
-		if p0 then
-			local var26 = p2[p0]
+		-- upvalues: p1 (ref), p3 (ref), p2 (ref), signal (copy), instance (copy), var16 (ref), connection (copy)
+		if p1 then
+			local var17 = p3[p1]
 			
-			if var26 and var26.current and p1.current then
-				local var27 = signal.Connect(instance.GetPropertyChangedSignal(var26.current, "AbsoluteSize"), var20)
-				local var28 = signal.Connect(instance.GetPropertyChangedSignal(var26.current, "AbsolutePosition"), var20)
-				local var29 = signal.Connect(instance.GetPropertyChangedSignal(p1.current, "AbsoluteSize"), var20)
-				local var30 = signal.Connect(instance.GetPropertyChangedSignal(p1.current, "AbsolutePosition"), var20)
+			if var17 and var17.current and p2.current then
+				local var18 = signal.Connect(instance.GetPropertyChangedSignal(var17.current, "AbsoluteSize"), var16)
+				local var19 = signal.Connect(instance.GetPropertyChangedSignal(var17.current, "AbsolutePosition"), var16)
+				local var20 = signal.Connect(instance.GetPropertyChangedSignal(p2.current, "AbsoluteSize"), var16)
+				local var21 = signal.Connect(instance.GetPropertyChangedSignal(p2.current, "AbsolutePosition"), var16)
 				
 				return function()
-					-- upvalues: connection (copy), var27 (ref), var28 (ref), var29 (ref), var30 (ref)
-					connection.Disconnect(var27)
-					connection.Disconnect(var28)
-					connection.Disconnect(var29)
-					connection.Disconnect(var30)
+					-- upvalues: connection (copy), var18 (ref), var19 (ref), var20 (ref), var21 (ref)
+					connection.Disconnect(var18)
+					connection.Disconnect(var19)
+					connection.Disconnect(var20)
+					connection.Disconnect(var21)
 				end
 			end
 		end
 		return function() end
-	end, { p0, p2, var20 })
+	end, { p1, p3, var16 })
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), var20 (ref)
-		var17.current = var20
-	end, { var20 })
+		-- upvalues: var13 (ref), var16 (ref)
+		var13.current = var16
+	end, { var16 })
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref)
+		-- upvalues: var12 (ref)
 		return function()
-			-- upvalues: var16 (copy)
-			if var16.current then
-				task.cancel(var16.current)
-				var16.current = nil
+			-- upvalues: var12 (copy)
+			if var12.current then
+				task.cancel(var12.current)
+				var12.current = nil
 			end
 		end
 	end, {})
 	
 	return {
-		activeItemHeight = var9,
-		highlightPosition = var5,
-		highlightWidth = var7,
-		isVisible = var11,
-		updateHighlight = var19
+		activeItemHeight = var5,
+		highlightPosition = var1,
+		highlightWidth = var3,
+		isVisible = var7,
+		updateHighlight = var15
 	}
 end

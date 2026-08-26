@@ -5,10 +5,10 @@ local function _(value)
 	t = value
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (write)
-	if p0 then
-		t = p0
+	if p1 then
+		t = p1
 	end
 	return t
 end

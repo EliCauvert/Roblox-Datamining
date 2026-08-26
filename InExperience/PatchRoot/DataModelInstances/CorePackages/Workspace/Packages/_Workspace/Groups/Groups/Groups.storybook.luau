@@ -23,8 +23,8 @@ local t = {
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
 local t_1 = {
-	Format = function(_, p0)
-		return p0
+	Format = function(_, p1)
+		return p1
 	end,
 	GetLocale = function()
 		return "en-us"
@@ -41,11 +41,11 @@ return {
 		-- upvalues: t (ref), reactModule (ref), localizationProvider (ref), t_1 (ref), foundationProvider (ref), appStyleProvider (ref), roactRoduxModule (ref), createStore (ref), designTokenProvider (ref)
 		return function(p2)
 			-- upvalues: t (copy), reactModule (copy), localizationProvider (copy), t_1 (copy), foundationProvider (copy), appStyleProvider (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), p1 (ref)
-			local var9 = if p2 then t[p2.theme] else t.Default
+			local var1 = if p2 then t[p2.theme] else t.Default
 			
 			return reactModule.createElement(localizationProvider, { localization = t_1 }, {
-				FoundationProvider = reactModule.createElement(foundationProvider, { device = "Desktop", colorMode = var9.themeName }, {
-					AppStyleProvider = reactModule.createElement(appStyleProvider, { style = var9 }, {
+				FoundationProvider = reactModule.createElement(foundationProvider, { device = "Desktop", colorMode = var1.themeName }, {
+					AppStyleProvider = reactModule.createElement(appStyleProvider, { style = var1 }, {
 						StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
 							DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = reactModule.createElement(p1, p2) })
 						})

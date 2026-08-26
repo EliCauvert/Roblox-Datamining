@@ -14,28 +14,28 @@ local useNavigation = navigationModule.useNavigation
 local useLocalization = localizationModule.Hooks.useLocalization
 local contexts = socialLuaAnalyticsModule.Analytics.Enums.Contexts
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigation (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), appPage (ref), contexts (ref)
-	local var9 = useNavigation()
+	local var1 = useNavigation()
 	local school = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader).school
-	local var10 = useLocalization({ classmates = textKeysModule.Classmates })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: school (ref), var10 (ref)
-		return if if school then school.isSameSchool else nil then var10.classmates else nil
-	end, { school, var10 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), eventNamesModule (copy), var9 (ref), appPage (copy), contexts (copy)
-		p0.fireAnalyticsEvent(eventNamesModule.SchoolButton)
-		var9.navigate(appPage.Schools, { extraProps = { source = contexts.PlayerProfile } })
-	end, { p0, var9 })
+	local var2 = useLocalization({ classmates = textKeysModule.Classmates })
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: school (ref), var2 (ref)
+		return if if school then school.isSameSchool else nil then var2.classmates else nil
+	end, { school, var2 })
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), eventNamesModule (copy), var1 (ref), appPage (copy), contexts (copy)
+		p1.fireAnalyticsEvent(eventNamesModule.SchoolButton)
+		var1.navigate(appPage.Schools, { extraProps = { source = contexts.PlayerProfile } })
+	end, { p1, var1 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var11 (ref), var12 (ref)
-		return if var11 == nil then nil else {
+		-- upvalues: var3 (ref), var4 (ref)
+		return if var3 == nil then nil else {
 			layoutOrder = 0,
 			isDisabled = false,
-			text = var11,
-			onActivated = var12
+			text = var3,
+			onActivated = var4
 		}
-	end, { var11, var12 })
+	end, { var3, var4 })
 end

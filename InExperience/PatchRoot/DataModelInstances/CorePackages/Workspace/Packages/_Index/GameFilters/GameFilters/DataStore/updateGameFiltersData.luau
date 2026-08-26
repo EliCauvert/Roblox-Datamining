@@ -3,15 +3,15 @@ local _ = require(gameFilters.Parent.DiscoveryTypes)
 local gameFilterModelModule = require(gameFilters.DataStore.GameFilterModel)
 local setGameFiltersModule = require(gameFilters.DataStore.SetGameFilters)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: gameFilterModelModule (ref), setGameFiltersModule (ref)
-	if not p2 or #p2 == 0 then
+	if not p3 or #p3 == 0 then
 		warn("Found no filters in this sort")
 	end
 	local t = {}
 	
-	for i, v in p2 do
+	for i, v in p3 do
 		table.insert(t, gameFilterModelModule.fromExploreJsonData(v))
 	end
-	p0:dispatch(setGameFiltersModule(p1, t, tick()))
+	p1:dispatch(setGameFiltersModule(p2, t, tick()))
 end

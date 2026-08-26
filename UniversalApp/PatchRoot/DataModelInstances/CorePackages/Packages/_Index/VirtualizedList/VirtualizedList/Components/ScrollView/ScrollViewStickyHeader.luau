@@ -17,116 +17,116 @@ local t_1 = {
 local reactModule = require(parent_1.React)
 local styleSheetModule = require(parent.StyleSheet.StyleSheet)
 local _ = { OS = "roblox" }
-local var5 = nil
+local var1 = nil
 local scrollViewStickyHeader = reactModule.Component:extend("ScrollViewStickyHeader")
 
-function scrollViewStickyHeader.init(p0, p1)
+function scrollViewStickyHeader.init(p1, p2)
 	-- upvalues: reactModule (ref)
 	warn("ScrollViewStickyHeader not fully implemented")
-	p0.props = p1
-	p0.state = {
+	p1.props = p2
+	p1.state = {
 		measured = false,
 		layoutY = 0,
 		layoutHeight = 0,
 		translateY = nil,
-		nextHeaderLayoutY = p0.props.nextHeaderLayoutY
+		nextHeaderLayoutY = p1.props.nextHeaderLayoutY
 	}
-	p0._translateY = nil
-	p0._shouldRecreateTranslateY = true
-	p0._haveReceivedInitialZeroTranslateY = true
-	p0._debounceTimeout = 64
+	p1._translateY = nil
+	p1._shouldRecreateTranslateY = true
+	p1._haveReceivedInitialZeroTranslateY = true
+	p1._debounceTimeout = 64
 	
-	function p0.setNextHeaderY(_, p2)
-		-- upvalues: p0 (ref)
-		p0._shouldRecreateTranslateY = true
-		p0.setState({ nextHeaderLayoutY = p2 })
+	function p0.setNextHeaderY(_, p3)
+		-- upvalues: p1 (ref)
+		p1._shouldRecreateTranslateY = true
+		p1.setState({ nextHeaderLayoutY = p3 })
 	end
 	
 	function p0._onLayout(_, p3)
-		-- upvalues: p0 (ref), reactModule (copy)
+		-- upvalues: p1 (ref), reactModule (copy)
 		local y = p3.nativeEvent.layout.y
 		local height = p3.nativeEvent.layout.height
 		
-		if y ~= p0.state.layoutY or height ~= p0.state.layoutHeight or p0.state.measured ~= true then
-			p0._shouldRecreateTranslateY = true
+		if y ~= p1.state.layoutY or height ~= p1.state.layoutHeight or p1.state.measured ~= true then
+			p1._shouldRecreateTranslateY = true
 		end
-		p0:setState({ measured = true, layoutY = y, layoutHeight = height })
-		p0.props:onLayout(p3)
-		local var7 = reactModule.Children.only(p0.props.children)
+		p1:setState({ measured = true, layoutY = y, layoutHeight = height })
+		p1.props:onLayout(p3)
+		local var2 = reactModule.Children.only(p1.props.children)
 		
-		if var7.props.onLayout then
-			var7.props:onLayout(p3)
+		if var2.props.onLayout then
+			var2.props:onLayout(p3)
 		end
 	end
 	
-	function p0._setComponentRef(_, p4)
-		-- upvalues: p0 (ref)
-		p0._ref = p4
+	function p0._setComponentRef(_, p3)
+		-- upvalues: p1 (ref)
+		p1._ref = p3
 	end
 end
 
-function scrollViewStickyHeader.componentWillUnmount(p5)
+function scrollViewStickyHeader.componentWillUnmount(p1)
 	-- upvalues: boolean (ref), clearTimeout (ref)
-	if p5._translateY ~= nil and p5._animatedValueListenerId ~= nil then
-		p5._translateY:removeListener(p5._animatedValueListenerId)
+	if p1._translateY ~= nil and p1._animatedValueListenerId ~= nil then
+		p1._translateY:removeListener(p1._animatedValueListenerId)
 	end
-	if boolean.toJSBoolean(p5._timer) then
-		clearTimeout(p5._timer)
-	end
-end
-
-function scrollViewStickyHeader.UNSAFE_componentWillReceiveProps(p6, p7)
-	if p7.scrollViewHeight ~= p6.props.scrollViewHeight or p7.scrollAnimatedValue ~= p6.props.scrollAnimatedValue or p7.inverted ~= p6.props.inverted then
-		p6._shouldRecreateTranslateY = true
+	if boolean.toJSBoolean(p1._timer) then
+		clearTimeout(p1._timer)
 	end
 end
 
-function scrollViewStickyHeader.updateTranslateListener(p8, p9, p10, p11)
+function scrollViewStickyHeader.UNSAFE_componentWillReceiveProps(p1, p2)
+	if p2.scrollViewHeight ~= p1.props.scrollViewHeight or p2.scrollAnimatedValue ~= p1.props.scrollAnimatedValue or p2.inverted ~= p1.props.inverted then
+		p1._shouldRecreateTranslateY = true
+	end
+end
+
+function scrollViewStickyHeader.updateTranslateListener(p1, p2, p3, p4)
 	-- upvalues: boolean (ref), t (ref), clearTimeout (ref), setTimeout (ref)
-	if p8._translateY ~= nil and p8._animatedValueListenerId ~= nil then
-		p8._translateY:removeListener(p8._animatedValueListenerId)
+	if p1._translateY ~= nil and p1._animatedValueListenerId ~= nil then
+		p1._translateY:removeListener(p1._animatedValueListenerId)
 	end
-	p8.translateY = if boolean.toJSBoolean(p11) then t.new(p9, p11) else p9
-	p8._shouldRecreateTranslateY = false
+	p1.translateY = if boolean.toJSBoolean(p4) then t.new(p2, p4) else p2
+	p1._shouldRecreateTranslateY = false
 	
-	if not p10 then return end
-	if not p8._animatedValueListener then
-		function p8._animatedValueListener(p12)
-			-- upvalues: p8 (ref), boolean (copy), clearTimeout (copy), setTimeout (copy)
-			local value = p12.value
+	if not p3 then return end
+	if not p1._animatedValueListener then
+		function p8._animatedValueListener(p5)
+			-- upvalues: p1 (ref), boolean (copy), clearTimeout (copy), setTimeout (copy)
+			local value = p5.value
 			
-			if value == 0 and not p8._haveReceivedInitialZeroTranslateY then
-				p8._haveReceivedInitialZeroTranslateY = true
+			if value == 0 and not p1._haveReceivedInitialZeroTranslateY then
+				p1._haveReceivedInitialZeroTranslateY = true
 				
 				return
-			elseif boolean.toJSBoolean(p8._timer) then
-				clearTimeout(p8._timer)
+			elseif boolean.toJSBoolean(p1._timer) then
+				clearTimeout(p1._timer)
 			end
-			p8._timer = setTimeout(function()
-				-- upvalues: value (ref), p8 (copy)
-				if value ~= p8.state.translateY then
-					p8:setState({ translateY = value })
+			p1._timer = setTimeout(function()
+				-- upvalues: value (ref), p1 (copy)
+				if value ~= p1.state.translateY then
+					p1:setState({ translateY = value })
 				end
-			end, p8._debounceTimeout)
+			end, p1._debounceTimeout)
 		end
 	end
-	if p8.state.translateY ~= 0 and p8.state.translateY ~= nil then
-		p8._haveReceivedInitialZeroTranslateY = false
+	if p1.state.translateY ~= 0 and p1.state.translateY ~= nil then
+		p1._haveReceivedInitialZeroTranslateY = false
 	end
-	p8._animatedValueListenerId = p9:addListener(p8._animatedValueListener)
+	p1._animatedValueListenerId = p2:addListener(p1._animatedValueListener)
 end
 
-function scrollViewStickyHeader.render(p13)
-	-- upvalues: boolean (ref), t_1 (ref), reactModule (ref), var5 (write)
-	local canonical = p13._ref and (p13._ref._internalInstanceHandle and (p13._ref._internalInstanceHandle.stateNode and boolean.toJSBoolean(p13._ref._internalInstanceHandle.stateNode.canonical)))
+function scrollViewStickyHeader.render(p1)
+	-- upvalues: boolean (ref), t_1 (ref), reactModule (ref), var1 (write)
+	local canonical = p1._ref and (p1._ref._internalInstanceHandle and (p1._ref._internalInstanceHandle.stateNode and boolean.toJSBoolean(p1._ref._internalInstanceHandle.stateNode.canonical)))
 	
-	if p13._shouldRecreateTranslateY then
-		local inverted = p13.props.inverted
-		local scrollViewHeight = p13.props.scrollViewHeight
-		local measured = p13.state.measured
-		local layoutHeight = p13.state.layoutHeight
-		local layoutY = p13.state.layoutY
-		local nextHeaderLayoutY = p13.state.nextHeaderLayoutY
+	if p1._shouldRecreateTranslateY then
+		local inverted = p1.props.inverted
+		local scrollViewHeight = p1.props.scrollViewHeight
+		local measured = p1.state.measured
+		local layoutHeight = p1.state.layoutHeight
+		local layoutY = p1.state.layoutY
+		local nextHeaderLayoutY = p1.state.nextHeaderLayoutY
 		local list = { -1, 0 }
 		local list_1 = { 0, 0 }
 		
@@ -134,61 +134,61 @@ function scrollViewStickyHeader.render(p13)
 			if not inverted then
 				table.insert(list, layoutY)
 				table.insert(list_1, 0)
-				local var13 = (nextHeaderLayoutY or 0) - layoutHeight
+				local var2 = (nextHeaderLayoutY or 0) - layoutHeight
 				
-				if layoutY <= var13 then
-					table.insert(list, var13)
-					table.insert(list, var13 + 1)
-					table.insert(list_1, var13 - layoutY)
-					table.insert(list_1, var13 - layoutY)
+				if layoutY <= var2 then
+					table.insert(list, var2)
+					table.insert(list, var2 + 1)
+					table.insert(list_1, var2 - layoutY)
+					table.insert(list_1, var2 - layoutY)
 				else
 					table.insert(list, layoutY + 1)
 					table.insert(list_1, 1)
 				end
 			elseif scrollViewHeight ~= nil then
-				local var11 = layoutY + layoutHeight - scrollViewHeight
+				local var3 = layoutY + layoutHeight - scrollViewHeight
 				
-				if var11 > 0 then
-					table.insert(list, var11)
+				if var3 > 0 then
+					table.insert(list, var3)
 					table.insert(list_1, 0)
-					table.insert(list, var11 + 1)
+					table.insert(list, var3 + 1)
 					table.insert(list_1, 1)
-					local var12 = (nextHeaderLayoutY or 0) - layoutHeight - scrollViewHeight
+					local var4 = (nextHeaderLayoutY or 0) - layoutHeight - scrollViewHeight
 					
-					if var11 < var12 then
-						table.insert(list, var12)
-						table.insert(list, var12 + 1)
-						table.insert(list_1, var12 - var11)
-						table.insert(list_1, var12 - var11)
+					if var3 < var4 then
+						table.insert(list, var4)
+						table.insert(list, var4 + 1)
+						table.insert(list_1, var4 - var3)
+						table.insert(list_1, var4 - var3)
 					end
 				end
 			end
 		end
-		p13:updateTranslateListener(p13.props.scrollAnimatedValue:interpolate({ inputRange = list, outputRange = list_1 }), canonical, if p13.props.hiddenOnScroll then t_1.new(p13.props.scrollAnimatedValue:interpolate({
+		p1:updateTranslateListener(p1.props.scrollAnimatedValue:interpolate({ inputRange = list, outputRange = list_1 }), canonical, if p1.props.hiddenOnScroll then t_1.new(p1.props.scrollAnimatedValue:interpolate({
 			extrapolateLeft = "clamp",
 			inputRange = { layoutY, layoutY + 1 },
 			outputRange = { 0, 1 }
-		}):interpolate({ inputRange = { 0, 1 }, outputRange = { 0, -1 } }), -p13.state.layoutHeight, 0) else nil)
+		}):interpolate({ inputRange = { 0, 1 }, outputRange = { 0, -1 } }), -p1.state.layoutHeight, 0) else nil)
 	end
-	local var14 = reactModule.Children.only(p13.props.children)
+	local var5 = reactModule.Children.only(p1.props.children)
 	
 	return reactModule.createElement("AnimatedView", {
 		collapsable = false,
-		nativeID = p13.props.nativeID,
-		onLayout = p13._onLayout,
-		ref = p13._setComponentRef,
+		nativeID = p1.props.nativeID,
+		onLayout = p1._onLayout,
+		ref = p1._setComponentRef,
 		style = {
-			var14.props.style,
-			var5.header,
-			{ transform = { { translateY = p13._translateY } } }
+			var5.props.style,
+			var1.header,
+			{ transform = { { translateY = p1._translateY } } }
 		},
-		passthroughAnimatedPropExplicitValues = if canonical and p13.state.translateY ~= nil then {
-			style = { transform = { { translateY = p13.state.translateY } } }
+		passthroughAnimatedPropExplicitValues = if canonical and p1.state.translateY ~= nil then {
+			style = { transform = { { translateY = p1.state.translateY } } }
 		} else nil
-	}, reactModule.cloneElement(var14, { onLayout = nil, style = var5.fill }))
+	}, reactModule.cloneElement(var5, { onLayout = nil, style = var1.fill }))
 end
 
-var5 = styleSheetModule.create({
+var1 = styleSheetModule.create({
 	header = { zIndex = 10, position = "relative" },
 	fill = { flex = 1 }
 })

@@ -6,18 +6,18 @@ local performFetch = require(parent.Http).PerformFetch
 
 return {
 	KeyMapper = "luaapp.recorduserseenmodalupsell",
-	Fetch = function(p0)
+	Fetch = function(p1)
 		-- upvalues: performFetch (ref), postRecordUserSeenModalModule (ref), promiseModule (ref)
 		return performFetch.Single("luaapp.recorduserseenmodalupsell", function(_)
-			-- upvalues: postRecordUserSeenModalModule (copy), p0 (ref), promiseModule (copy)
-			return postRecordUserSeenModalModule(p0):andThen(function(p1)
+			-- upvalues: postRecordUserSeenModalModule (copy), p1 (ref), promiseModule (copy)
+			return postRecordUserSeenModalModule(p1):andThen(function(p2)
 				-- upvalues: promiseModule (copy)
-				return if p1.responseBody == nil or p1.responseCode ~= 200 then promiseModule.reject() else promiseModule.resolve()
+				return if p2.responseBody == nil or p2.responseCode ~= 200 then promiseModule.reject() else promiseModule.resolve()
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p2)
+	GetFetchingStatus = function(p1)
 		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p2, "luaapp.recorduserseenmodalupsell")
+		return performFetch.GetStatus(p1, "luaapp.recorduserseenmodalupsell")
 	end
 }

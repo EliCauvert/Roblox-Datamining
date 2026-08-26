@@ -3,25 +3,25 @@ local enumScreensModule = require(appChat.EnumScreens)
 local fFlagAppChatFixBackButtonOnRotationModule = require(appChat.Flags.FFlagAppChatFixBackButtonOnRotation)
 local canPopParentStackModule = require(appChat.Utils.canPopParentStack)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagAppChatFixBackButtonOnRotationModule (ref), canPopParentStackModule (ref), enumScreensModule (ref)
-	local navigateToRootStack = p0.navigateToRootStack
+	local navigateToRootStack = p1.navigateToRootStack
 	
 	return if navigateToRootStack then function()
-		-- upvalues: p0 (ref), fFlagAppChatFixBackButtonOnRotationModule (copy), canPopParentStackModule (copy), enumScreensModule (copy), navigateToRootStack (ref)
-		if p0.closeInputBar then
-			p0.closeInputBar()
+		-- upvalues: p1 (ref), fFlagAppChatFixBackButtonOnRotationModule (copy), canPopParentStackModule (copy), enumScreensModule (copy), navigateToRootStack (ref)
+		if p1.closeInputBar then
+			p1.closeInputBar()
 		end
-		if not p0.isRoot then
-			p0.navigation.pop()
+		if not p1.isRoot then
+			p1.navigation.pop()
 			
 			return
-		elseif fFlagAppChatFixBackButtonOnRotationModule and canPopParentStackModule(p0.navigation) then
-			p0.navigation.pop()
+		elseif fFlagAppChatFixBackButtonOnRotationModule and canPopParentStackModule(p1.navigation) then
+			p1.navigation.pop()
 			
 			return
 		end
-		p0.navigation.navigate(enumScreensModule.EmptyConversation)
+		p1.navigation.navigate(enumScreensModule.EmptyConversation)
 		navigateToRootStack()
-	end else p0.navigation.pop
+	end else p1.navigation.pop
 end

@@ -3,28 +3,28 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local signalsModule = require(parent.Signals)
 local dataHydrationModule = require(parent.DataHydration)
-local var4 = dataHydrationModule.Friends.FriendsStore.get()
+local var1 = dataHydrationModule.Friends.FriendsStore.get()
 local dataStatus = dataHydrationModule.DataStatus
 
-return function(p0)
-	-- upvalues: reactModule (ref), var4 (ref), signalsModule (ref), dataStatus (ref), signalsReactModule (ref)
-	local var5 = if p0 then tostring(p0) else ""
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var4 (copy)
-		return if var5 == "" then nil else var4.GetIsFriendWith(var5)
-	end, { var5 })
+return function(p1)
+	-- upvalues: reactModule (ref), var1 (ref), signalsModule (ref), dataStatus (ref), signalsReactModule (ref)
+	local var2 = if p1 then tostring(p1) else ""
+	local var3 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var1 (copy)
+		return if var2 == "" then nil else var1.GetIsFriendWith(var2)
+	end, { var2 })
 	
 	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var6 (ref)
-		return signalsModule.createComputed(function(p1)
-			-- upvalues: var6 (copy)
-			return if var6 then var6.data(p1) else nil
-		end)
-	end, { var6 })), signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var6 (ref), dataStatus (copy)
+		-- upvalues: signalsModule (copy), var3 (ref)
 		return signalsModule.createComputed(function(p2)
-			-- upvalues: var6 (copy), dataStatus (copy)
-			return if var6 then var6.status(p2) else dataStatus.NotReady
+			-- upvalues: var3 (copy)
+			return if var3 then var3.data(p2) else nil
 		end)
-	end, { var6 }))
+	end, { var3 })), signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var3 (ref), dataStatus (copy)
+		return signalsModule.createComputed(function(p2)
+			-- upvalues: var3 (copy), dataStatus (copy)
+			return if var3 then var3.status(p2) else dataStatus.NotReady
+		end)
+	end, { var3 }))
 end

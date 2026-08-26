@@ -2,9 +2,9 @@
 local appContextModule = require(purchasePrompt.Utils.AppContext)
 local productPurchaseSurface = require(purchasePrompt.Parent.PurchasePromptLite).Enums.ProductPurchaseSurface
 
-return function(p0)
+return function(p1)
 	-- upvalues: appContextModule (ref), productPurchaseSurface (ref)
 	local _ = nil
 	
-	return if p0 and p0.surface then p0.surface elseif appContextModule.get() == appContextModule.Enum.IN_EXPERIENCE then productPurchaseSurface.InExperience else productPurchaseSurface.Unknown
+	return if p1 and p1.surface then p1.surface elseif appContextModule.get() == appContextModule.Enum.IN_EXPERIENCE then productPurchaseSurface.InExperience else productPurchaseSurface.Unknown
 end

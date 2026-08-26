@@ -1,8 +1,8 @@
-﻿return function(p0)
-	local var0 = 0
+﻿return function(p1)
+	local var1 = 0
 	
-	for i in pairs(p0) do
-		var0 += 1
+	for i in pairs(p1) do
+		var1 += 1
 	end
-	return var0
+	return var1
 end

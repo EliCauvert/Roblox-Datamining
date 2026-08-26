@@ -1,23 +1,23 @@
 ﻿local viewRecyclerModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
 
 return {
-	create = function(p0)
+	create = function(p1)
 		-- upvalues: viewRecyclerModule (ref)
-		local itemViewAdapter = p0.itemViewAdapter
+		local itemViewAdapter = p1.itemViewAdapter
 		local var1 = 0
 		local t = {}
 		local t_1 = {}
 		
-		local function _(p1)
-			-- upvalues: p0 (ref)
-			local var7 = if p0.getInstance ~= nil then p1 else p0.getInstance(p1)
-			assert(typeof(var7) == "Instance" and var7:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
+		local function _(p2)
+			-- upvalues: p1 (ref)
+			local var2 = if p1.getInstance ~= nil then p2 else p1.getInstance(p2)
+			assert(typeof(var2) == "Instance" and var2:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
 			
-			return var7
+			return var2
 		end
 		
 		local function flushLifecycle()
-			-- upvalues: t_1 (ref), itemViewAdapter (ref), p0 (ref), t (ref)
+			-- upvalues: t_1 (ref), itemViewAdapter (ref), p1 (ref), t (ref)
 			local t_2 = {}
 			
 			for i, v in t_1 do
@@ -27,12 +27,12 @@ return {
 				itemViewAdapter.onEvicted(table.clone(t_1))
 			end
 			for i, v_1 in t_1 do
-				if p0.destroyItemView == nil then
-					local var10 = if p0.getInstance ~= nil then v_1 else p0.getInstance(v_1)
-					assert(typeof(var10) == "Instance" and var10:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
-					var10:Destroy()
+				if p1.destroyItemView == nil then
+					local var2 = if p1.getInstance ~= nil then v_1 else p1.getInstance(v_1)
+					assert(typeof(var2) == "Instance" and var2:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
+					var2:Destroy()
 				else
-					p0.destroyItemView(v_1)
+					p1.destroyItemView(v_1)
 				end
 			end
 			if #t > 0 and itemViewAdapter.onCreated ~= nil then
@@ -54,37 +54,37 @@ return {
 		local batch = itemViewAdapter.batch or function(p2)
 			p2()
 		end
-		local var6 = viewRecyclerModule.Adapter.createRecyclingScope({
-			maxPoolSize = p0.maxPoolSize,
-			onPoolChanged = if p0.diagnostics == nil then nil else function(p3)
-				-- upvalues: p0 (ref), viewRecyclerModule (copy)
-				p0.diagnostics({
+		local var3 = viewRecyclerModule.Adapter.createRecyclingScope({
+			maxPoolSize = p1.maxPoolSize,
+			onPoolChanged = if p1.diagnostics == nil then nil else function(p2)
+				-- upvalues: p1 (ref), viewRecyclerModule (copy)
+				p1.diagnostics({
 					kind = viewRecyclerModule.Diagnostics.EventKind.PoolChanged,
-					action = p3.action,
-					itemViewType = p3.viewType,
-					occupiedDelta = p3.occupiedDelta,
-					vacantDelta = p3.vacantDelta,
-					totalDelta = p3.totalDelta
+					action = p2.action,
+					itemViewType = p2.viewType,
+					occupiedDelta = p2.occupiedDelta,
+					vacantDelta = p2.vacantDelta,
+					totalDelta = p2.totalDelta
 				})
 			end,
 			adapter = {
-				create = function(p4)
-					-- upvalues: itemViewAdapter (ref), p0 (ref), t (ref)
-					local var11 = itemViewAdapter.create(p4)
-					local var12 = if p0.getInstance ~= nil then var11 else p0.getInstance(var11)
-					assert(typeof(var12) == "Instance" and var12:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
-					table.insert(t, var11)
+				create = function(p2)
+					-- upvalues: itemViewAdapter (ref), p1 (ref), t (ref)
+					local var4 = itemViewAdapter.create(p2)
+					local var5 = if p1.getInstance ~= nil then var4 else p1.getInstance(var4)
+					assert(typeof(var5) == "Instance" and var5:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
+					table.insert(t, var4)
 					
-					return var11
+					return var4
 				end,
-				destroy = function(p5)
+				destroy = function(p2)
 					-- upvalues: t_1 (ref)
-					table.insert(t_1, p5)
+					table.insert(t_1, p2)
 				end,
-				batch = function(p6)
+				batch = function(p2)
 					-- upvalues: var1 (write), batch (ref), flushLifecycle (ref)
 					var1 += 1
-					local ok, status = pcall(batch, p6)
+					local ok, status = pcall(batch, p2)
 					var1 -= 1
 					
 					if var1 == 0 then
@@ -98,26 +98,26 @@ return {
 		})
 		
 		return {
-			exchange = function(p7, p8, p9)
-				-- upvalues: var6 (ref), var1 (write), flushLifecycle (ref)
-				local var13 = var6.exchange(p7, p8, p9)
+			exchange = function(p2, p3, p4)
+				-- upvalues: var3 (ref), var1 (write), flushLifecycle (ref)
+				local var4 = var3.exchange(p2, p3, p4)
 				
 				if var1 == 0 then
 					flushLifecycle()
 				end
-				return var13
+				return var4
 			end,
-			batch = var6.batch,
-			isLeaseCurrent = var6.isLeaseCurrent,
-			setMaxPoolSize = var6.setMaxPoolSize,
-			getScopeInventory = var6.getScopeInventory,
-			getVacantRecords = var6.getVacantRecords,
-			getItemViews = var6.getScopeInventory,
-			getVacantItemViews = var6.getVacantRecords,
+			batch = var3.batch,
+			isLeaseCurrent = var3.isLeaseCurrent,
+			setMaxPoolSize = var3.setMaxPoolSize,
+			getScopeInventory = var3.getScopeInventory,
+			getVacantRecords = var3.getVacantRecords,
+			getItemViews = var3.getScopeInventory,
+			getVacantItemViews = var3.getVacantRecords,
 			updateItemView = itemViewAdapter.update,
 			destroy = function()
-				-- upvalues: var6 (ref)
-				var6.destroy()
+				-- upvalues: var3 (ref)
+				var3.destroy()
 			end
 		}
 	end

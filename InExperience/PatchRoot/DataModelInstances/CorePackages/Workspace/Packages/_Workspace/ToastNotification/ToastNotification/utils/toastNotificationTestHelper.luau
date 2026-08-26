@@ -19,23 +19,23 @@ local t_1 = {
 	SetAlias = { Aliases = { byUserId = { ["1"] = "foo" } } }
 }
 
-local var6 = function(p0, p1)
+local var1 = function(p1, p2)
 	-- upvalues: roduxModule (ref)
-	return roduxModule.Store.new(p1 or function(p2)
-		return p2
-	end, p0 or {}, { roduxModule.thunkMiddleware })
+	return roduxModule.Store.new(p2 or function(p3)
+		return p3
+	end, p1 or {}, { roduxModule.thunkMiddleware })
 end
 
-local var7 = localization.new("en-us")
+local var2 = localization.new("en-us")
 
 return {
-	mockServices = function(p3)
-		-- upvalues: reactModule (ref), roactRoduxModule (ref), var6 (ref), t_1 (ref), foundationProvider (ref), colorMode (ref), appStyleProvider (ref), t (ref), localizationProvider (ref), var7 (ref), roactServices (ref)
+	mockServices = function(p1)
+		-- upvalues: reactModule (ref), roactRoduxModule (ref), var1 (ref), t_1 (ref), foundationProvider (ref), colorMode (ref), appStyleProvider (ref), t (ref), localizationProvider (ref), var2 (ref), roactServices (ref)
 		return reactModule.createElement(roactServices.ServiceProvider, {}, {
-			storeProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var6(t_1) }, {
+			storeProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var1(t_1) }, {
 				foundationProvider = reactModule.createElement(foundationProvider, { colorMode = colorMode.Dark }, {
 					styleProvider = reactModule.createElement(appStyleProvider, { style = t }, {
-						localizationProvider = reactModule.createElement(localizationProvider, { localization = var7 }, p3)
+						localizationProvider = reactModule.createElement(localizationProvider, { localization = var2 }, p1)
 					})
 				})
 			})

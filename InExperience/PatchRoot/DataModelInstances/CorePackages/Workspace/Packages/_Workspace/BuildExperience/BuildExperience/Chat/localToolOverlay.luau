@@ -14,25 +14,25 @@ return function()
 		onPlanAcceptedByToolCallId = {}
 	})
 	
-	local function updateOptimistic(p0)
+	local function updateOptimistic(p1)
 		-- upvalues: var1 (ref), var2 (ref)
-		local var7 = var1(false)
+		local var5 = var1(false)
 		local t = {
-			submittedToolCallIds = table.clone(var7.submittedToolCallIds),
-			askUserByToolCallId = table.clone(var7.askUserByToolCallId),
-			planByToolCallId = table.clone(var7.planByToolCallId)
+			submittedToolCallIds = table.clone(var5.submittedToolCallIds),
+			askUserByToolCallId = table.clone(var5.askUserByToolCallId),
+			planByToolCallId = table.clone(var5.planByToolCallId)
 		}
-		p0(t)
+		p1(t)
 		var2(t)
 	end
 	
 	local function updateActions(p1)
 		-- upvalues: var3 (ref), var4 (ref)
-		local var9 = var3(false)
+		local var5 = var3(false)
 		local t = {
-			onAnswerSelectedByToolCallId = table.clone(var9.onAnswerSelectedByToolCallId),
-			onAnswerConfirmedByToolCallId = table.clone(var9.onAnswerConfirmedByToolCallId),
-			onPlanAcceptedByToolCallId = table.clone(var9.onPlanAcceptedByToolCallId)
+			onAnswerSelectedByToolCallId = table.clone(var5.onAnswerSelectedByToolCallId),
+			onAnswerConfirmedByToolCallId = table.clone(var5.onAnswerConfirmedByToolCallId),
+			onPlanAcceptedByToolCallId = table.clone(var5.onPlanAcceptedByToolCallId)
 		}
 		p1(t)
 		var4(t)
@@ -41,75 +41,75 @@ return function()
 	return {
 		getOptimisticLocalTools = var1,
 		getLocalToolActions = var3,
-		markSubmitted = function(p2)
+		markSubmitted = function(p1)
 			-- upvalues: updateOptimistic (ref)
-			updateOptimistic(function(p3)
-				-- upvalues: p2 (ref)
-				p3.submittedToolCallIds[p2] = true
+			updateOptimistic(function(p2)
+				-- upvalues: p1 (ref)
+				p2.submittedToolCallIds[p1] = true
 			end)
 		end,
 		setAskUserTool = function(value)
 			-- upvalues: updateOptimistic (ref)
-			updateOptimistic(function(p4)
+			updateOptimistic(function(p1)
 				-- upvalues: value (ref)
-				p4.askUserByToolCallId[value.toolCallId] = value
+				p1.askUserByToolCallId[value.toolCallId] = value
 			end)
 		end,
-		removeAskUserTool = function(p5)
+		removeAskUserTool = function(p1)
 			-- upvalues: updateOptimistic (ref)
-			updateOptimistic(function(p6)
-				-- upvalues: p5 (ref)
-				p6.askUserByToolCallId[p5] = nil
+			updateOptimistic(function(p2)
+				-- upvalues: p1 (ref)
+				p2.askUserByToolCallId[p1] = nil
 			end)
 		end,
 		setPlanTool = function(value)
 			-- upvalues: updateOptimistic (ref)
-			updateOptimistic(function(p7)
+			updateOptimistic(function(p1)
 				-- upvalues: value (ref)
-				p7.planByToolCallId[value.toolCallId] = value
+				p1.planByToolCallId[value.toolCallId] = value
 			end)
 		end,
-		removePlanTool = function(p8)
+		removePlanTool = function(p1)
 			-- upvalues: updateOptimistic (ref)
-			updateOptimistic(function(p9)
-				-- upvalues: p8 (ref)
-				p9.planByToolCallId[p8] = nil
+			updateOptimistic(function(p2)
+				-- upvalues: p1 (ref)
+				p2.planByToolCallId[p1] = nil
 			end)
 		end,
-		setAnswerAction = function(value, p10, p11)
+		setAnswerAction = function(value, p1, p2)
 			-- upvalues: updateActions (ref)
-			updateActions(function(p12)
-				-- upvalues: value (ref), p10 (ref), p11 (ref)
-				p12.onAnswerSelectedByToolCallId[value] = p10
+			updateActions(function(p3)
+				-- upvalues: value (ref), p1 (ref), p2 (ref)
+				p3.onAnswerSelectedByToolCallId[value] = p1
 				
-				if p11 == nil then
-					p12.onAnswerConfirmedByToolCallId[value] = nil
+				if p2 == nil then
+					p3.onAnswerConfirmedByToolCallId[value] = nil
 					
 					return
 				end
-				p12.onAnswerConfirmedByToolCallId[value] = p11
+				p3.onAnswerConfirmedByToolCallId[value] = p2
 			end)
 		end,
-		removeAnswerAction = function(p13)
+		removeAnswerAction = function(p1)
 			-- upvalues: updateActions (ref)
-			updateActions(function(p14)
-				-- upvalues: p13 (ref)
-				p14.onAnswerSelectedByToolCallId[p13] = nil
-				p14.onAnswerConfirmedByToolCallId[p13] = nil
+			updateActions(function(p2)
+				-- upvalues: p1 (ref)
+				p2.onAnswerSelectedByToolCallId[p1] = nil
+				p2.onAnswerConfirmedByToolCallId[p1] = nil
 			end)
 		end,
-		setPlanAction = function(value, p15)
+		setPlanAction = function(value, p1)
 			-- upvalues: updateActions (ref)
-			updateActions(function(p16)
-				-- upvalues: value (ref), p15 (ref)
-				p16.onPlanAcceptedByToolCallId[value] = p15
+			updateActions(function(p2)
+				-- upvalues: value (ref), p1 (ref)
+				p2.onPlanAcceptedByToolCallId[value] = p1
 			end)
 		end,
-		removePlanAction = function(p17)
+		removePlanAction = function(p1)
 			-- upvalues: updateActions (ref)
-			updateActions(function(p18)
-				-- upvalues: p17 (ref)
-				p18.onPlanAcceptedByToolCallId[p17] = nil
+			updateActions(function(p2)
+				-- upvalues: p1 (ref)
+				p2.onPlanAcceptedByToolCallId[p1] = nil
 			end)
 		end
 	}

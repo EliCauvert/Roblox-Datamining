@@ -1,21 +1,21 @@
 ﻿local t = {}
 
-local function kind_of(p0)
-	if type(p0) ~= "table" then
-		return type(p0)
+local function kind_of(p1)
+	if type(p1) ~= "table" then
+		return type(p1)
 	end
-	local var3 = 1
+	local var1 = 1
 	
-	for i in pairs(p0) do
-		if p0[var3] ~= nil then
+	for i in pairs(p1) do
+		if p1[var1] ~= nil then
 			return "table"
 		end
-		var3 += 1
+		var1 += 1
 	end
-	return if var3 == 1 then "table" else "array"
+	return if var1 == 1 then "table" else "array"
 end
 
-local function escape_str(p1)
+local function escape_str(p2)
 	local list = {
 		"\\", "\"", "/", "b", "f", "n", "r", "t"
 	}
@@ -23,36 +23,36 @@ local function escape_str(p1)
 	for i, v in ipairs({
 		"\\", "\"", "/", "\b", "\f", "\n", "\r", "\t"
 	}) do
-		p1 = p1:gsub(v, "\\" .. list[i])
+		p2 = p2:gsub(v, "\\" .. list[i])
 	end
-	return p1
+	return p2
 end
 
-function t.stringify(p2, p3)
+function t.stringify(p3, p4)
 	-- upvalues: kind_of (ref), t (ref), escape_str (ref)
 	local t_1 = {}
-	local var6 = kind_of(p2)
+	local var2 = kind_of(p3)
 	
-	if var6 == "array" then
-		if p3 then
+	if var2 == "array" then
+		if p4 then
 			error("Can't encode array as key.")
 		end
 		t_1[#t_1 + 1] = "["
 		
-		for i, v in ipairs(p2) do
+		for i, v in ipairs(p3) do
 			if i > 1 then
 				t_1[#t_1 + 1] = ", "
 			end
 			t_1[#t_1 + 1] = t.stringify(v)
 		end
 		t_1[#t_1 + 1] = "]"
-	elseif var6 == "table" then
-		if p3 then
+	elseif var2 == "table" then
+		if p4 then
 			error("Can't encode table as key.")
 		end
 		t_1[#t_1 + 1] = "{"
 		
-		for i, v in pairs(p2) do
+		for i, v in pairs(p3) do
 			if #t_1 > 1 then
 				t_1[#t_1 + 1] = ", "
 			end
@@ -61,13 +61,13 @@ function t.stringify(p2, p3)
 			t_1[#t_1 + 1] = t.stringify(v)
 		end
 		t_1[#t_1 + 1] = "}"
-	elseif var6 == "string" then
-		return "\"" .. escape_str(p2) .. "\""
-	elseif var6 == "number" then
-		return if p3 then "\"" .. tostring(p2) .. "\"" else tostring(p2)
-	elseif var6 == "boolean" then
-		return tostring(p2)
-	elseif var6 == "nil" then
+	elseif var2 == "string" then
+		return "\"" .. escape_str(p3) .. "\""
+	elseif var2 == "number" then
+		return if p4 then "\"" .. tostring(p3) .. "\"" else tostring(p3)
+	elseif var2 == "boolean" then
+		return tostring(p3)
+	elseif var2 == "nil" then
 		return "null"
 	end
 	error("Unjsonifiable type: " .. var6 .. ".")

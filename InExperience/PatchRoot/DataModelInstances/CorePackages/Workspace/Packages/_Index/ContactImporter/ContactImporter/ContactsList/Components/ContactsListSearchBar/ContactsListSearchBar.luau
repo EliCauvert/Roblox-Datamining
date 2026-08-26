@@ -14,18 +14,18 @@ local useLocalization = dependenciesModule.useLocalization
 local search = images["icons/common/search"]
 local clearSmall = images["icons/actions/edit/clear_small"]
 
-function ContactsListSearchBar(p0)
+function ContactsListSearchBar(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), useStyle (ref), react (ref), roact (ref), imageSetLabel (ref), iconSize (ref), search (ref), callbackInputBox (ref), clearSmall (ref)
-	local var3 = useLocalization({ searchContacts = textKeysModule.SEARCH_CONTACTS })
-	local var4 = useStyle()
-	local var5, var6 = react.useState(false)
+	local var1 = useLocalization({ searchContacts = textKeysModule.SEARCH_CONTACTS })
+	local var2 = useStyle()
+	local var3, var4 = react.useState(false)
 	
 	return roact.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundTransparency = var4.Theme.BackgroundMuted.Transparency,
-		BackgroundColor3 = var4.Theme.BackgroundMuted.Color,
-		Size = UDim2.new(1, 0, 0, p0.height),
-		LayoutOrder = p0.layoutOrder
+		BackgroundTransparency = var2.Theme.BackgroundMuted.Transparency,
+		BackgroundColor3 = var2.Theme.BackgroundMuted.Color,
+		Size = UDim2.new(1, 0, 0, p1.height),
+		LayoutOrder = p1.layoutOrder
 	}, {
 		layout = roact.createElement("UIListLayout", {
 			VerticalAlignment = Enum.VerticalAlignment.Center,
@@ -38,8 +38,8 @@ function ContactsListSearchBar(p0)
 		Border = react.createElement("UIStroke", {
 			Thickness = 1,
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-			Color = if var5 then var4.Theme.SecondaryOnHover.Color else var4.Theme.Divider.Color,
-			Transparency = if var5 then var4.Theme.SecondaryOnHover.Transparency else var4.Theme.Divider.Transparency
+			Color = if var3 then var2.Theme.SecondaryOnHover.Color else var2.Theme.Divider.Color,
+			Transparency = if var3 then var2.Theme.SecondaryOnHover.Transparency else var2.Theme.Divider.Transparency
 		}),
 		padding = roact.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, 13),
@@ -50,27 +50,27 @@ function ContactsListSearchBar(p0)
 			LayoutOrder = 1,
 			Size = UDim2.new(0, iconSize.Small, 0, iconSize.Small),
 			Image = search,
-			ImageColor3 = var4.Theme.IconEmphasis.Color
+			ImageColor3 = var2.Theme.IconEmphasis.Color
 		}),
 		searchBarWrapper = roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(1, -iconSize.Small, 0, p0.height)
+			Size = UDim2.new(1, -iconSize.Small, 0, p1.height)
 		}, {
 			searchBar = roact.createElement(callbackInputBox, {
 				clearButtonDisabled = false,
 				clearIcon = clearSmall,
-				clearIconColor3 = var4.Theme.IconEmphasis.Color,
-				clearIconTransparency = var4.Theme.IconEmphasis.Transparency,
+				clearIconColor3 = var2.Theme.IconEmphasis.Color,
+				clearIconTransparency = var2.Theme.IconEmphasis.Transparency,
 				clearButtonSize = iconSize.Small,
-				focusChangedCallback = var6,
-				inputTextColor3 = var4.Theme.TextEmphasis.Color,
-				inputTextTransparency = var4.Theme.TextEmphasis.Transparency,
-				placeholderText = var3.searchContacts,
-				placeholderTextColor3 = var4.Theme.TextMuted.Color,
-				placeholderTextTransparency = var4.Theme.TextMuted.Transparency,
+				focusChangedCallback = var4,
+				inputTextColor3 = var2.Theme.TextEmphasis.Color,
+				inputTextTransparency = var2.Theme.TextEmphasis.Transparency,
+				placeholderText = var1.searchContacts,
+				placeholderTextColor3 = var2.Theme.TextMuted.Color,
+				placeholderTextTransparency = var2.Theme.TextMuted.Transparency,
 				inputTextXAlignment = Enum.TextXAlignment.Left,
-				textChangedCallback = p0.textChangeCallback
+				textChangedCallback = p1.textChangeCallback
 			})
 		})
 	})

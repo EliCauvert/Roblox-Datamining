@@ -14,21 +14,21 @@ return {
 		"Asset_EF_HeadWithExpandingFacs",
 		"Asset_EF_HeadWithShrinkingFacs"
 	},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: UGCValidationService (ref), UGCValidationMinimumHeadSizePercentAcrossFacs (ref), errorSourceStringsModule (ref), UGCValidationMaximumHeadSizePercentAcrossFacs (ref)
-		local head = p1.renderMeshesData.Head
-		local var5, var6 = unpack(UGCValidationService:GetMinAndMaxMeshSizeAcrossAllFacs(head.editable))
-		local var7 = 100 * var5 / head.originalSize
-		local floored = math.floor(math.min(var7.X, var7.Y, var7.Z))
+		local head = p2.renderMeshesData.Head
+		local var1, var2 = unpack(UGCValidationService:GetMinAndMaxMeshSizeAcrossAllFacs(head.editable))
+		local var3 = 100 * var1 / head.originalSize
+		local floored = math.floor(math.min(var3.X, var3.Y, var3.Z))
 		
 		if floored < UGCValidationMinimumHeadSizePercentAcrossFacs then
-			p0:fail(errorSourceStringsModule.Keys.FacsShrinksHead, { modPercent = floored })
+			p1:fail(errorSourceStringsModule.Keys.FacsShrinksHead, { modPercent = floored })
 		end
-		local var9 = 100 * var6 / head.originalSize
-		local ceiled = math.ceil(math.max(var9.X, var9.Y, var9.Z))
+		local var4 = 100 * var2 / head.originalSize
+		local ceiled = math.ceil(math.max(var4.X, var4.Y, var4.Z))
 		
 		if UGCValidationMaximumHeadSizePercentAcrossFacs < ceiled then
-			p0:fail(errorSourceStringsModule.Keys.FacsExpandsHead, { modPercent = ceiled })
+			p1:fail(errorSourceStringsModule.Keys.FacsExpandsHead, { modPercent = ceiled })
 		end
 	end
 }

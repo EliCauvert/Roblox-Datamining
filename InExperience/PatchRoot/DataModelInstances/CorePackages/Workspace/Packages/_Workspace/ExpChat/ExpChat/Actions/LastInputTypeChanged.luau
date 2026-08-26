@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { lastInputTypeUsed = p0 }
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { lastInputTypeUsed = p1 }
 end)

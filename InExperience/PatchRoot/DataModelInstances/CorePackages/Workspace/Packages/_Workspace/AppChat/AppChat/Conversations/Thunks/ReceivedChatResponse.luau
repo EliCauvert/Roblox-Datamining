@@ -5,23 +5,23 @@ local reportAnalyticsForNewMessagesModule = require(appChat.Utils.reportAnalytic
 local fFlagAppChatNilGuardReceivedChatResponseModule = require(appChat.Flags.FFlagAppChatNilGuardReceivedChatResponse)
 local name = require(appChat.Logger):new(script.Name)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: messageModelModule (ref), reportAnalyticsForNewMessagesModule (ref), fFlagAppChatNilGuardReceivedChatResponseModule (ref), name (ref), receivedMessagesModule (ref)
-	return function(p3)
-		-- upvalues: messageModelModule (copy), p1 (ref), p0 (ref), p2 (ref), reportAnalyticsForNewMessagesModule (copy), fFlagAppChatNilGuardReceivedChatResponseModule (copy), name (copy), receivedMessagesModule (copy)
-		local var6 = messageModelModule.fromSentChannelsApi(p1, p0, p2)
+	return function(p4)
+		-- upvalues: messageModelModule (copy), p2 (ref), p1 (ref), p3 (ref), reportAnalyticsForNewMessagesModule (copy), fFlagAppChatNilGuardReceivedChatResponseModule (copy), name (copy), receivedMessagesModule (copy)
+		local var1 = messageModelModule.fromSentChannelsApi(p2, p1, p3)
 		
-		if not var6 then return end
-		reportAnalyticsForNewMessagesModule(var6, p0)
-		local var7 = p3:getState().ChatAppReducer.Conversations[p0]
+		if not var1 then return end
+		reportAnalyticsForNewMessagesModule(var1, p1)
+		local var2 = p4:getState().ChatAppReducer.Conversations[p1]
 		
-		if fFlagAppChatNilGuardReceivedChatResponseModule and not var7 then
-			name:warning("Dropping ReceivedChatResponse because conversation {} is no longer in state", p0)
+		if fFlagAppChatNilGuardReceivedChatResponseModule and not var2 then
+			name:warning("Dropping ReceivedChatResponse because conversation {} is no longer in state", p1)
 			
 			return
-		elseif var7.messages:Length() > 0 then
-			var6.previousMessageId = var7.messages:Last().id
+		elseif var2.messages:Length() > 0 then
+			var1.previousMessageId = var2.messages:Last().id
 		end
-		p3:dispatch(receivedMessagesModule(p0, { var6 }))
+		p4:dispatch(receivedMessagesModule(p1, { var1 }))
 	end
 end

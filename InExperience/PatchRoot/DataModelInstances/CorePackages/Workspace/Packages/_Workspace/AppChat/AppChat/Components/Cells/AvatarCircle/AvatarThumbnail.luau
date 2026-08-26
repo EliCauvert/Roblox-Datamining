@@ -2,13 +2,13 @@
 local reactModule = require(parent.React)
 local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), loadableImage (ref)
 	return reactModule.createElement(loadableImage, {
 		useShimmerAnimationWhileLoading = true,
 		showFailedStateWhenLoadingFailed = true,
 		Size = UDim2.fromScale(1, 1),
-		Image = p0.thumbnail,
-		cornerRadius = p0.cornerRadius
+		Image = p1.thumbnail,
+		cornerRadius = p1.cornerRadius
 	})
 end

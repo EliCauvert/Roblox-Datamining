@@ -9,13 +9,13 @@ local t = {
 	end
 }
 
-function t.fromData(p0, p1)
+function t.fromData(p1, p2)
 	-- upvalues: t (ref)
-	local var2 = t.new()
-	var2.thumbnailType = p0
-	var2.thumbnailSize = p1
+	local var1 = t.new()
+	var1.thumbnailType = p1
+	var1.thumbnailSize = p2
 	
-	return var2
+	return var1
 end
 
 return t

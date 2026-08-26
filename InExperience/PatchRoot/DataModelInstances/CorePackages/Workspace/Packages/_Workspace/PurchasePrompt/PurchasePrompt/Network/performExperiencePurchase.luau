@@ -26,26 +26,26 @@ local t = {
 }
 local _ = { InsufficientFunds = "InsufficientFunds" }
 
-function t.fromJsonData(p0)
+function t.fromJsonData(p1)
 	-- upvalues: t (ref), argCheckModule (ref)
-	local var7 = t.new()
-	argCheckModule.isType(p0, "table", "PurchaseExperienceProduct.fromJsonData's jsonData")
-	argCheckModule.isType(p0.purchased, "boolean", "PurchaseExperienceProduct.fromJsonData's jsonData.purchased")
-	argCheckModule.isType(p0.productId, "number", "PurchaseExperienceProduct.fromJsonData's jsonData.productId")
-	argCheckModule.isTypeOrNil(p0.reason, "string", "PurchaseExperienceProduct.fromJsonData's jsonData.reason")
-	argCheckModule.isTypeOrNil(p0.title, "string", "PurchaseProduct.fromJsonData's jsonData.title")
-	argCheckModule.isTypeOrNil(p0.showDivId, "string", "PurchaseProduct.fromJsonData's jsonData.showDivId")
-	argCheckModule.isTypeOrNil(p0.shortfallPrice, "number", "PurchaseProduct.fromJsonData's jsonData.shortfallPrice")
-	argCheckModule.isTypeOrNil(p0.statusCode, "number", "PurchaseProduct.fromJsonData's jsonData.statusCode")
-	var7.purchased = p0.purchased == true
-	var7.productId = tonumber(p0.productId)
-	var7.reason = p0.reason
-	var7.title = p0.title
-	var7.showDivId = p0.showDivId
-	var7.shortfallPrice = p0.shortfallPrice
-	var7.statusCode = p0.statusCode
+	local var1 = t.new()
+	argCheckModule.isType(p1, "table", "PurchaseExperienceProduct.fromJsonData's jsonData")
+	argCheckModule.isType(p1.purchased, "boolean", "PurchaseExperienceProduct.fromJsonData's jsonData.purchased")
+	argCheckModule.isType(p1.productId, "number", "PurchaseExperienceProduct.fromJsonData's jsonData.productId")
+	argCheckModule.isTypeOrNil(p1.reason, "string", "PurchaseExperienceProduct.fromJsonData's jsonData.reason")
+	argCheckModule.isTypeOrNil(p1.title, "string", "PurchaseProduct.fromJsonData's jsonData.title")
+	argCheckModule.isTypeOrNil(p1.showDivId, "string", "PurchaseProduct.fromJsonData's jsonData.showDivId")
+	argCheckModule.isTypeOrNil(p1.shortfallPrice, "number", "PurchaseProduct.fromJsonData's jsonData.shortfallPrice")
+	argCheckModule.isTypeOrNil(p1.statusCode, "number", "PurchaseProduct.fromJsonData's jsonData.statusCode")
+	var1.purchased = p1.purchased == true
+	var1.productId = tonumber(p1.productId)
+	var1.reason = p1.reason
+	var1.title = p1.title
+	var1.showDivId = p1.showDivId
+	var1.shortfallPrice = p1.shortfallPrice
+	var1.statusCode = p1.statusCode
 	
-	return var7
+	return var1
 end
 
 return function(p1, p2, p3)
@@ -59,11 +59,11 @@ return function(p1, p2, p3)
 		elseif isEconomicRestrictionResponse(p4) then
 			return promiseModule.reject(p4)
 		end
-		local var8 = t.fromJsonData(p4)
+		local var1 = t.fromJsonData(p4)
 		
-		return if var8.purchased then promiseModule.resolve(var8) elseif var8.reason and var8.reason == "InsufficientFunds" then promiseModule.reject(purchaseErrorModule.NotEnoughRobux) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
-	end, function(p5)
+		return if var1.purchased then promiseModule.resolve(var1) elseif var1.reason and var1.reason == "InsufficientFunds" then promiseModule.reject(purchaseErrorModule.NotEnoughRobux) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
+	end, function(p4)
 		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p5)
+		return promiseModule.reject(p4)
 	end)
 end

@@ -43,69 +43,69 @@ cell.defaultProps = {
 	horizontalPadding = 24
 }
 
-function cell.init(p0)
+function cell.init(p1)
 	-- upvalues: controlStateModule (ref)
-	p0:setState({ controlState = controlStateModule.Initialize })
-	p0.stateStyleMap = {
+	p1:setState({ controlState = controlStateModule.Initialize })
+	p1.stateStyleMap = {
 		[controlStateModule.Default] = "BackgroundDefault",
 		[controlStateModule.Hover] = "BackgroundOnHover",
 		[controlStateModule.Pressed] = "BackgroundOnPress"
 	}
 	
-	function p0.getBackgroundStyle(p1, p2)
-		-- upvalues: p0 (ref), controlStateModule (copy)
-		local var12 = p0.stateStyleMap[p1] or p0.stateStyleMap[controlStateModule.Default]
+	function p0.getBackgroundStyle(p2, p3)
+		-- upvalues: p1 (ref), controlStateModule (copy)
+		local var1 = p1.stateStyleMap[p2] or p1.stateStyleMap[controlStateModule.Default]
 		local t = {
-			Color = p2.Theme[var12].Color,
-			Transparency = p2.Theme[var12].Transparency
+			Color = p3.Theme[var1].Color,
+			Transparency = p3.Theme[var1].Transparency
 		}
 		
-		if p1 == controlStateModule.Disabled then
+		if p2 == controlStateModule.Disabled then
 			t.Transparency = 1
 		end
 		return t
 	end
 	
-	function p0.onStateChanged(p3, p4)
-		-- upvalues: p0 (ref)
-		p0:setState({ controlState = p4 })
+	function p0.onStateChanged(p2, p3)
+		-- upvalues: p1 (ref)
+		p1:setState({ controlState = p3 })
 		
-		if p0.props.onStateChanged then
-			p0.props.onStateChanged(p3, p4)
+		if p1.props.onStateChanged then
+			p1.props.onStateChanged(p2, p3)
 		end
 	end
 end
 
-function cell.render(p5)
+function cell.render(p1)
 	-- upvalues: withStyleModule (ref), withSelectionCursorProviderModule (ref)
-	return withStyleModule(function(p6)
-		-- upvalues: withSelectionCursorProviderModule (copy), p5 (ref)
-		return withSelectionCursorProviderModule(function(p7)
-			-- upvalues: p5 (copy), p6 (ref)
-			return p5:renderWithProviders(p6, p7)
+	return withStyleModule(function(p2)
+		-- upvalues: withSelectionCursorProviderModule (copy), p1 (ref)
+		return withSelectionCursorProviderModule(function(p3)
+			-- upvalues: p1 (copy), p2 (ref)
+			return p1:renderWithProviders(p2, p3)
 		end)
 	end)
 end
 
-function cell.renderWithProviders(p8, p9, _)
+function cell.renderWithProviders(p1, p2, _)
 	-- upvalues: cell (ref), roactModule (ref), interactableModule (ref), controlStateModule (ref)
-	local anchorPoint = p8.props.anchorPoint
-	local layoutOrder = p8.props.layoutOrder
-	local position = p8.props.position
-	local size = p8.props.size or UDim2.fromScale(1, 1)
-	local head = p8.props.head
-	local tail = p8.props.tail
-	local background = p8.props.background
-	local isDisabled = p8.props.isDisabled
-	local var15 = if p8.props.onActivated then function(...)
-		-- upvalues: p8 (ref)
-		if p8.props.tail and p8.props.userInteractionEnabled and p8.props.onActivated then
-			p8.props.onActivated(...)
+	local anchorPoint = p1.props.anchorPoint
+	local layoutOrder = p1.props.layoutOrder
+	local position = p1.props.position
+	local size = p1.props.size or UDim2.fromScale(1, 1)
+	local head = p1.props.head
+	local tail = p1.props.tail
+	local background = p1.props.background
+	local isDisabled = p1.props.isDisabled
+	local var1 = if p1.props.onActivated then function(...)
+		-- upvalues: p1 (ref)
+		if p1.props.tail and p1.props.userInteractionEnabled and p1.props.onActivated then
+			p1.props.onActivated(...)
 		end
-	end else p8.props.onActivated
-	local onTouchTapped = p8.props.onTouchTapped
-	local controlState = p8.props[cell.debugProps.controlState] or p8.state.controlState
-	local backgroundStyle = p8.getBackgroundStyle(controlState, p9)
+	end else p1.props.onActivated
+	local onTouchTapped = p1.props.onTouchTapped
+	local controlState = p1.props[cell.debugProps.controlState] or p1.state.controlState
+	local backgroundStyle = p1.getBackgroundStyle(controlState, p2)
 	
 	return roactModule.createElement(interactableModule, {
 		AnchorPoint = anchorPoint,
@@ -115,14 +115,14 @@ function cell.renderWithProviders(p8, p9, _)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		AutoButtonColor = false,
-		Selectable = p8.props.selectable,
-		SelectionImageObject = p8.props.selectionCursor,
+		Selectable = p1.props.selectable,
+		SelectionImageObject = p1.props.selectionCursor,
 		isDisabled = isDisabled,
-		onStateChanged = p8.onStateChanged,
-		[roactModule.Event.Activated] = var15,
+		onStateChanged = p1.onStateChanged,
+		[roactModule.Event.Activated] = var1,
 		[roactModule.Event.TouchTap] = onTouchTapped,
-		[roactModule.Change.AbsolutePosition] = p8.props[roactModule.Change.AbsolutePosition],
-		[roactModule.Ref] = p8.props.forwardRef
+		[roactModule.Change.AbsolutePosition] = p1.props[roactModule.Change.AbsolutePosition],
+		[roactModule.Ref] = p1.props.forwardRef
 	}, {
 		CellBackground = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -147,11 +147,11 @@ function cell.renderWithProviders(p8, p9, _)
 					FillDirection = Enum.FillDirection.Horizontal,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					HorizontalFlex = Enum.UIFlexAlignment.SpaceBetween,
-					Wraps = p8.props.layoutWraps
+					Wraps = p1.props.layoutWraps
 				}),
 				Padding = roactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, p8.props.horizontalPadding),
-					PaddingRight = UDim.new(0, p8.props.horizontalPadding)
+					PaddingLeft = UDim.new(0, p1.props.horizontalPadding),
+					PaddingRight = UDim.new(0, p1.props.horizontalPadding)
 				}),
 				CellHead = roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -181,9 +181,9 @@ function cell.renderWithProviders(p8, p9, _)
 	})
 end
 
-return roactModule.forwardRef(function(p10, p11)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), cryoModule (ref), roactModule (ref), cell (ref)
 	return roactModule.createElement(cell, cryoModule.Dictionary.join(cryoModule.Dictionary.join({
 		selectionCursor = useCursorByTypeModule(cursorTypeModule.RoundedRectNoInset)
-	}, p10), { forwardRef = p11 }))
+	}, p1), { forwardRef = p2 }))
 end)

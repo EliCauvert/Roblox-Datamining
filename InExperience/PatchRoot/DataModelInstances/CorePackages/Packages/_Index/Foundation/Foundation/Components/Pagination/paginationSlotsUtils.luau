@@ -8,8 +8,8 @@ local t = {
 
 return {
 	NAV_SLOT_IDS = t,
-	getPageSlotId = function(p0)
-		return `page-{p0}`
+	getPageSlotId = function(p1)
+		return `page-{p1}`
 	end,
 	getPaginationSelectableSlotOrder = function(p1)
 		-- upvalues: t (ref), paginationDirectionModule (ref)

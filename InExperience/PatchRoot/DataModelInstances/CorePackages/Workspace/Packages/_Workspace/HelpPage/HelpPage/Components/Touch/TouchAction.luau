@@ -11,28 +11,28 @@ local icon = foundationModule.Icon
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref), constantsModule (ref), icon (ref)
-	local var4 = useTokens()
-	local touchInput = constantsModule.HELP_PAGE.TOUCH_ENUM_TO_ICON[p0.touchInput]
+	local var1 = useTokens()
+	local touchInput = constantsModule.HELP_PAGE.TOUCH_ENUM_TO_ICON[p1.touchInput]
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-center auto-xy col gap-small",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		actionComponent = reactModule.createElement(view, {
 			tag = "auto-xy padding-x-large padding-y-xsmall radius-large",
 			LayoutOrder = 1,
-			backgroundStyle = var4.Color.Extended.Gray.Gray_600
+			backgroundStyle = var1.Color.Extended.Gray.Gray_600
 		}, {
 			InnerAction = reactModule.createElement(text, {
 				tag = "auto-xy text-align-x-center text-title-small",
-				textStyle = var4.Color.Extended.White.White_100,
-				Text = useLocalization({ action = p0.action }).action
+				textStyle = var1.Color.Extended.White.White_100,
+				Text = useLocalization({ action = p1.action }).action
 			})
 		}),
 		iconComponent = touchInput and reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = 2 }, {
-			InnerIcon = touchInput and reactModule.createElement(icon, { name = touchInput, size = var4.Size.Size_1200 })
+			InnerIcon = touchInput and reactModule.createElement(icon, { name = touchInput, size = var1.Size.Size_1200 })
 		}) or nil
 	})
 end

@@ -1,14 +1,14 @@
 ﻿local avatarEditorService = game:GetService("AvatarEditorService")
 local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
+local var1 = nil
 local var2 = nil
-local var3 = nil
 
-local function removeDefaultClothing(p0, p1, p2)
+local function removeDefaultClothing(p1, p2, p3)
 	-- upvalues: avatarEditorService (ref)
 	local avatarRulesAsync = avatarEditorService:GetAvatarRulesAsync()
 	
 	if not avatarRulesAsync.DefaultClothingAssetLists then
-		p2("No default clothing in avatar rules")
+		p3("No default clothing in avatar rules")
 		
 		return
 	end
@@ -16,55 +16,55 @@ local function removeDefaultClothing(p0, p1, p2)
 	local defaultPantAssetIds = avatarRulesAsync.DefaultClothingAssetLists.DefaultPantAssetIds
 	
 	if not defaultShirtAssetIds or not defaultPantAssetIds then
-		p2("No default clothing ids in avatar rules")
+		p3("No default clothing ids in avatar rules")
 		
 		return
 	end
-	local var6 = nil
+	local var3 = nil
 	
 	for i, v in ipairs(defaultShirtAssetIds) do
-		if v == p0.Shirt then
-			var6 = var6 or p0:Clone()
-			var6.Shirt = 0
+		if v == p1.Shirt then
+			var3 = var3 or p1:Clone()
+			var3.Shirt = 0
 		end
 	end
 	for i, v_1 in ipairs(defaultPantAssetIds) do
-		if v_1 == p0.Pants then
-			var6 = var6 or p0:Clone()
-			var6.Pants = 0
+		if v_1 == p1.Pants then
+			var3 = var3 or p1:Clone()
+			var3.Pants = 0
 		end
 	end
-	p1(var6 or p0)
+	p2(var3 or p1)
 end
 
-return function(p3, p4)
-	-- upvalues: var2 (write), promiseModule (ref), var3 (write), removeDefaultClothing (ref), avatarEditorService (ref)
-	return if p3 == var2 then if p4 then promiseModule.resolve(var3) else promiseModule.new(function(p7, p8)
-		-- upvalues: removeDefaultClothing (copy), var3 (copy)
-		removeDefaultClothing(var3, p7, p8)
-	end) else promiseModule.new(function(p5, p6)
-		-- upvalues: avatarEditorService (copy), p3 (ref), var2 (copy), var3 (copy), p4 (ref), removeDefaultClothing (copy)
+return function(p4, p5)
+	-- upvalues: var1 (write), promiseModule (ref), var2 (write), removeDefaultClothing (ref), avatarEditorService (ref)
+	return if p4 == var1 then if p5 then promiseModule.resolve(var2) else promiseModule.new(function(p6, p7)
+		-- upvalues: removeDefaultClothing (copy), var2 (copy)
+		removeDefaultClothing(var2, p6, p7)
+	end) else promiseModule.new(function(p6, p7)
+		-- upvalues: avatarEditorService (copy), p4 (ref), var1 (copy), var2 (copy), p5 (ref), removeDefaultClothing (copy)
 		coroutine.wrap(function()
-			-- upvalues: avatarEditorService (copy), p3 (copy), var2 (copy), var3 (copy), p4 (copy), p5 (ref), removeDefaultClothing (copy), p6 (ref)
+			-- upvalues: avatarEditorService (copy), p4 (copy), var1 (copy), var2 (copy), p5 (copy), p6 (ref), removeDefaultClothing (copy), p7 (ref)
 			local ok, status = pcall(function()
-				-- upvalues: avatarEditorService (copy), p3 (copy)
-				return avatarEditorService:ConformToAvatarRulesAsync(p3)
+				-- upvalues: avatarEditorService (copy), p4 (copy)
+				return avatarEditorService:ConformToAvatarRulesAsync(p4)
 			end)
 			
 			if not ok then
+				p7(status)
+				
+				return
+			end
+			var1 = p4
+			var2 = status
+			
+			if p5 then
 				p6(status)
 				
 				return
 			end
-			var2 = p3
-			var3 = status
-			
-			if p4 then
-				p5(status)
-				
-				return
-			end
-			removeDefaultClothing(status, p5, p6)
+			removeDefaultClothing(status, p6, p7)
 		end)()
 	end)
 end

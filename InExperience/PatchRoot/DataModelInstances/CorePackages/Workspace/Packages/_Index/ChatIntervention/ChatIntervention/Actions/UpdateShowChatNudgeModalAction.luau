@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ChatIntervention").Parent.Rodux).makeActionCreator(script.Name, function(p0)
-	return { isShow = p0 }
+﻿return require(script:FindFirstAncestor("ChatIntervention").Parent.Rodux).makeActionCreator(script.Name, function(p1)
+	return { isShow = p1 }
 end)

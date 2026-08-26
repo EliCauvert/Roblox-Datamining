@@ -27,14 +27,14 @@ IGMControllerBar.validateProps = t.strictInterface({
 	setControllerBarHeight = t.callback
 })
 
-function IGMControllerBar.didMount(p0)
+function IGMControllerBar.didMount(p1)
 	-- upvalues: t_1 (ref), constantsModule (ref)
-	if p0:getHints(t_1) then
-		p0.props.setControllerBarHeight(constantsModule.ControllerBarHeight)
+	if p1:getHints(t_1) then
+		p1.props.setControllerBarHeight(constantsModule.ControllerBarHeight)
 		
 		return
 	end
-	p0.props.setControllerBarHeight(0)
+	p1.props.setControllerBarHeight(0)
 end
 
 function IGMControllerBar.didUpdate(p1)
@@ -47,58 +47,58 @@ function IGMControllerBar.didUpdate(p1)
 	p1.props.setControllerBarHeight(0)
 end
 
-function IGMControllerBar.willUnmount(p2)
-	p2.props.setControllerBarHeight(0)
+function IGMControllerBar.willUnmount(p1)
+	p1.props.setControllerBarHeight(0)
 end
 
-function IGMControllerBar.getHints(p3, p4)
+function IGMControllerBar.getHints(p1, p2)
 	-- upvalues: constantsModule (ref)
-	if p3.props.inputType == constantsModule.InputType.Gamepad then
-		return if p3.props.respawnDialogOpen then {
-			leftHint = { text = p4.cancel, keyCode = Enum.KeyCode.ButtonB },
-			rightHints = { { text = p4.respawn, keyCode = Enum.KeyCode.ButtonA } }
-		} elseif p3.props.isMenuOpen and p3.props.currentPage == "MainPage" then {
-			leftHint = { text = p4.back, keyCode = Enum.KeyCode.ButtonB },
+	if p1.props.inputType == constantsModule.InputType.Gamepad then
+		return if p1.props.respawnDialogOpen then {
+			leftHint = { text = p2.cancel, keyCode = Enum.KeyCode.ButtonB },
+			rightHints = { { text = p2.respawn, keyCode = Enum.KeyCode.ButtonA } }
+		} elseif p1.props.isMenuOpen and p1.props.currentPage == "MainPage" then {
+			leftHint = { text = p2.back, keyCode = Enum.KeyCode.ButtonB },
 			rightHints = {
 				{
-					text = if not p3.props.isMainPageMoreMenuOpen then p4.openMoreMenu else p4.closeMoreMenu,
+					text = if not p1.props.isMainPageMoreMenuOpen then p2.openMoreMenu else p2.closeMoreMenu,
 					keyCode = Enum.KeyCode.ButtonL3
 				},
 				{
-					text = p4.respawnCharacter,
+					text = p2.respawnCharacter,
 					keyCode = Enum.KeyCode.ButtonY
 				},
-				{ text = p4.leave, keyCode = Enum.KeyCode.ButtonX }
+				{ text = p2.leave, keyCode = Enum.KeyCode.ButtonX }
 			}
 		} else nil
 	end
 end
 
-function IGMControllerBar.render(p5)
+function IGMControllerBar.render(p1)
 	-- upvalues: withLocalizationModule (ref), t_1 (ref), roact (ref), controllerBar (ref)
-	return withLocalizationModule(t_1)(function(p6)
-		-- upvalues: p5 (ref), roact (copy), controllerBar (copy)
-		local var7 = p5:getHints(p6)
+	return withLocalizationModule(t_1)(function(p2)
+		-- upvalues: p1 (ref), roact (copy), controllerBar (copy)
+		local var1 = p1:getHints(p2)
 		
-		return if var7 then roact.createElement(controllerBar, var7) else nil
+		return if var1 then roact.createElement(controllerBar, var1) else nil
 	end)
 end
 
-return roactRodux.connect(function(p7, _)
+return roactRodux.connect(function(p1, _)
 	return {
-		isMenuOpen = p7.isMenuOpen,
-		isMainPageMoreMenuOpen = p7.isMainPageMoreMenuOpen,
-		currentPage = p7.menuPage,
-		respawnDialogOpen = p7.respawn.dialogOpen,
-		inputType = p7.displayOptions.inputType,
-		screenSize = p7.screenSize
+		isMenuOpen = p1.isMenuOpen,
+		isMainPageMoreMenuOpen = p1.isMainPageMoreMenuOpen,
+		currentPage = p1.menuPage,
+		respawnDialogOpen = p1.respawn.dialogOpen,
+		inputType = p1.displayOptions.inputType,
+		screenSize = p1.screenSize
 	}
-end, function(p8)
+end, function(p1)
 	-- upvalues: setControllerBarHeightModule (ref)
 	return {
 		setControllerBarHeight = function(value)
-			-- upvalues: p8 (ref), setControllerBarHeightModule (copy)
-			p8(setControllerBarHeightModule(value))
+			-- upvalues: p1 (ref), setControllerBarHeightModule (copy)
+			p1(setControllerBarHeightModule(value))
 		end
 	}
 end)(IGMControllerBar)

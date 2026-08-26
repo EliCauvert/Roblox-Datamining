@@ -4,9 +4,9 @@ local set = luauPolyfillModule.Set
 local map = luauPolyfillModule.Map
 local error = luauPolyfillModule.Error
 local t = {}
-local var2 = newproxy(true)
+local var1 = newproxy(true)
 
-getmetatable(var2).__tostring = function()
+getmetatable(var1).__tostring = function()
 	return "Value.None"
 end
 
@@ -32,45 +32,45 @@ local maybeUnsubscribe = helpersModule.maybeUnsubscribe
 local toArray = helpersModule.toArray
 local t_1 = {}
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: error (ref)
-	if not p0 then
-		error(error.new(p1 or "assertion failure"))
+	if not p1 then
+		error(error.new(p2 or "assertion failure"))
 	end
 end
 
 local _ = require(script.Parent.entryTypes)
 local _ = require(script.Parent.anyEntryTypes)
 
-local _ = function(p2, p3)
-	local p2Count = #p2
+local _ = function(p1, p2)
+	local p2Count = #p1
 	
-	return p2Count > 0 and (p2Count == #p3 and p2[p2Count] == p3[p2Count])
+	return p2Count > 0 and (p2Count == #p2 and p1[p2Count] == p2[p2Count])
 end
 
-local function valueGet(p4)
-	-- upvalues: var2 (ref), error (ref)
-	if p4[2] ~= nil then
-		error(p4[2])
+local function valueGet(p1)
+	-- upvalues: var1 (ref), error (ref)
+	if p1[2] ~= nil then
+		error(p1[2])
 		
 		return
-	elseif p4[1] == nil then
+	elseif p1[1] == nil then
 		error(error.new("unknown value"))
 		
 		return
 	end
-	return if p4[1] == var2 then nil else p4[1]
+	return if p1[1] == var1 then nil else p1[1]
 end
 
-local _ = function(p5)
-	return table.clone(p5)
+local _ = function(p1)
+	return table.clone(p1)
 end
 
 local t_2 = {}
 t_2.__index = t_2
 t_2.count = 0
 
-function t_2.new(p6)
+function t_2.new(p1)
 	-- upvalues: t_2 (ref), set (ref), map (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl.parents = set.new()
@@ -80,7 +80,7 @@ function t_2.new(p6)
 	tbl.recomputing = false
 	tbl.value = {}
 	tbl.deps = nil
-	tbl.fn = p6
+	tbl.fn = p1
 	t_2.count += 1
 	
 	return tbl
@@ -96,14 +96,14 @@ function t_2:peek()
 	return nil
 end
 
-function t_2:recompute(p7)
+function t_2:recompute(p1)
 	-- upvalues: error (ref), rememberParent (write), mightBeDirty (write), reallyRecompute (write), valueGet (ref)
 	if not self.recomputing then
 		error(error.new("already recomputing"))
 	end
 	rememberParent(self)
 	
-	return if mightBeDirty(self) then reallyRecompute(self, p7) else valueGet(self.value)
+	return if mightBeDirty(self) then reallyRecompute(self, p1) else valueGet(self.value)
 end
 
 function t_2:setDirty()
@@ -121,10 +121,10 @@ function t_2:dispose()
 	-- upvalues: forgetChildren (write), eachParent (write), forgetChild (write)
 	self:setDirty()
 	forgetChildren(self)
-	eachParent(self, function(p8, _)
+	eachParent(self, function(p1, _)
 		-- upvalues: forgetChild (copy), self (ref)
-		p8:setDirty()
-		forgetChild(p8, self)
+		p1:setDirty()
+		forgetChild(p1, self)
 		
 		return nil
 	end)
@@ -134,22 +134,22 @@ function t_2:forget()
 	self:dispose()
 end
 
-function t_2:dependOn(p9)
+function t_2:dependOn(p1)
 	-- upvalues: t_1 (ref), set (ref)
-	p9:add(self)
+	p1:add(self)
 	
 	if not self.deps then
 		self.deps = table.remove(t_1) or set.new()
 	end
-	self.deps:add(p9)
+	self.deps:add(p1)
 end
 
 function t_2:forgetDeps()
 	-- upvalues: array (ref), toArray (ref), t_1 (ref)
 	if self.deps then
-		array.forEach(toArray(self.deps), function(p10)
+		array.forEach(toArray(self.deps), function(p1)
 			-- upvalues: self (ref)
-			p10:delete(self)
+			p1:delete(self)
 		end)
 		self.deps:clear()
 		table.insert(t_1, self.deps)
@@ -159,60 +159,60 @@ end
 
 t.Entry = t_2
 
-rememberParent = function(p11)
+rememberParent = function(p1)
 	-- upvalues: parentEntrySlot (ref), mightBeDirty (write), reportDirtyChild (write), reportCleanChild (write)
 	local value = parentEntrySlot:getValue()
 	
 	if not value then
 		return nil
 	end
-	p11.parents:add(value)
+	p1.parents:add(value)
 	
-	if not value.childValues:has(p11) then
-		value.childValues:set(p11, {})
+	if not value.childValues:has(p1) then
+		value.childValues:set(p1, {})
 	end
-	if mightBeDirty(p11) then
-		reportDirtyChild(value, p11)
+	if mightBeDirty(p1) then
+		reportDirtyChild(value, p1)
 		
 		return value
 	end
-	reportCleanChild(value, p11)
+	reportCleanChild(value, p1)
 	
 	return value
 end
 
-reallyRecompute = function(p12, p13)
+reallyRecompute = function(p1, p2)
 	-- upvalues: forgetChildren (write), parentEntrySlot (ref), recomputeNewValue (write), maybeSubscribe (write), setClean (write), valueGet (ref)
-	forgetChildren(p12)
-	parentEntrySlot:withValue(p12, recomputeNewValue, { p12, p13 })
+	forgetChildren(p1)
+	parentEntrySlot:withValue(p1, recomputeNewValue, { p1, p2 })
 	
-	if maybeSubscribe(p12, p13) then
-		setClean(p12)
+	if maybeSubscribe(p1, p2) then
+		setClean(p1)
 	end
-	return valueGet(p12.value)
+	return valueGet(p1.value)
 end
 
-recomputeNewValue = function(_, p14, p15)
-	-- upvalues: var2 (ref)
-	p14.recomputing = true
-	table.clear(p14.value)
-	local ok, status = pcall(p14.fn, table.unpack(p15))
+recomputeNewValue = function(_, p1, p2)
+	-- upvalues: var1 (ref)
+	p1.recomputing = true
+	table.clear(p1.value)
+	local ok, status = pcall(p1.fn, table.unpack(p2))
 	
 	if ok then
-		p14.value[1] = status
+		p1.value[1] = status
 		
-		if p14.value[1] == nil then
-			p14.value[1] = var2
+		if p1.value[1] == nil then
+			p1.value[1] = var1
 		end
 	end
 	if not ok then
-		p14.value[2] = status
+		p1.value[2] = status
 	end
-	p14.recomputing = false
+	p1.recomputing = false
 end
 
-mightBeDirty = function(p16)
-	return p16.dirty or (p16.dirtyChildren ~= nil and p16.dirtyChildren.size > 0)
+mightBeDirty = function(p1)
+	return p1.dirty or (p1.dirtyChildren ~= nil and p1.dirtyChildren.size > 0)
 end
 
 setClean = function(value)
@@ -225,137 +225,137 @@ setClean = function(value)
 	reportClean(value)
 end
 
-reportDirty = function(p17)
+reportDirty = function(p1)
 	-- upvalues: eachParent (write), reportDirtyChild (write)
-	eachParent(p17, reportDirtyChild)
+	eachParent(p1, reportDirtyChild)
 end
 
-reportClean = function(p18)
+reportClean = function(p1)
 	-- upvalues: eachParent (write), reportCleanChild (write)
-	eachParent(p18, reportCleanChild)
+	eachParent(p1, reportCleanChild)
 end
 
-eachParent = function(p19, p20)
+eachParent = function(p1, p2)
 	-- upvalues: toArray (ref)
-	local size = p19.parents.size
+	local size = p1.parents.size
 	
 	if size then
-		local var24 = toArray(p19.parents)
+		local var2 = toArray(p1.parents)
 		
 		for i = 1, size do
-			p20(var24[i], p19)
+			p2(var2[i], p1)
 		end
 	end
 end
 
-reportDirtyChild = function(p21, p22)
+reportDirtyChild = function(p3, p4)
 	-- upvalues: error (ref), mightBeDirty (write), t_1 (ref), set (ref), reportDirty (write)
 	if _G.__DEV__ then
-		local var25, var26 = p21.childValues:has(p22)
+		local var3, var4 = p3.childValues:has(p4)
 		
-		if not var25 then
-			error(error.new(var26 or "assertion failure"))
+		if not var3 then
+			error(error.new(var4 or "assertion failure"))
 		end
-		local var27, var28 = mightBeDirty(p22)
+		local var5, var6 = mightBeDirty(p4)
 		
-		if not var27 then
-			error(error.new(var28 or "assertion failure"))
+		if not var5 then
+			error(error.new(var6 or "assertion failure"))
 		end
 	end
-	local var29 = not mightBeDirty(p21)
+	local var7 = not mightBeDirty(p3)
 	
-	if p21.dirtyChildren then
-		if p21.dirtyChildren:has(p22) then return end
+	if p3.dirtyChildren then
+		if p3.dirtyChildren:has(p4) then return end
 	else
-		p21.dirtyChildren = table.remove(t_1) or set.new()
+		p3.dirtyChildren = table.remove(t_1) or set.new()
 	end
-	p21.dirtyChildren:add(p22)
+	p3.dirtyChildren:add(p4)
 	
-	if var29 then
-		reportDirty(p21)
+	if var7 then
+		reportDirty(p3)
 	end
 end
 
-reportCleanChild = function(p23, p24)
+reportCleanChild = function(p3, p4)
 	-- upvalues: error (ref), mightBeDirty (write), removeDirtyChild (write), reportClean (write)
 	if _G.__DEV__ then
-		local var30, var31 = p23.childValues:has(p24)
+		local var3, var4 = p3.childValues:has(p4)
 		
-		if not var30 then
-			error(error.new(var31 or "assertion failure"))
+		if not var3 then
+			error(error.new(var4 or "assertion failure"))
 		end
-		if not mightBeDirty(p24) then
+		if not mightBeDirty(p4) then
 			error(error.new("assertion failure"))
 		end
 	end
-	local var32 = p23.childValues:get(p24)
+	local var5 = p3.childValues:get(p4)
 	
-	if #var32 == 0 then
-		p23.childValues:set(p24, table.clone(p24.value))
+	if #var5 == 0 then
+		p3.childValues:set(p4, table.clone(p4.value))
 	else
-		local value = p24.value
-		local var32Count = #var32
+		local value = p4.value
+		local var32Count = #var5
 		
-		if not (var32Count > 0 and (var32Count == #value and var32[var32Count] == value[var32Count])) then
-			p23:setDirty()
+		if not (var32Count > 0 and (var32Count == #value and var5[var32Count] == value[var32Count])) then
+			p3:setDirty()
 		end
 	end
-	removeDirtyChild(p23, p24)
+	removeDirtyChild(p3, p4)
 	
-	if mightBeDirty(p23) then
+	if mightBeDirty(p3) then
 		return
 	end
-	reportClean(p23)
+	reportClean(p3)
 end
 
-removeDirtyChild = function(p25, p26)
+removeDirtyChild = function(p3, p4)
 	-- upvalues: t_1 (ref)
-	local dirtyChildren = p25.dirtyChildren
+	local dirtyChildren = p3.dirtyChildren
 	
 	if dirtyChildren ~= nil then
-		dirtyChildren:delete(p26)
+		dirtyChildren:delete(p4)
 		
 		if dirtyChildren.size == 0 then
 			if #t_1 < 100 then
 				table.insert(t_1, dirtyChildren)
 			end
-			p25.dirtyChildren = nil
+			p3.dirtyChildren = nil
 		end
 	end
 end
 
-forgetChildren = function(p27)
+forgetChildren = function(p3)
 	-- upvalues: array (ref), forgetChild (write), error (ref)
-	if p27.childValues.size > 0 then
-		array.forEach(table.clone(p27.childValues:keys()), function(p28)
-			-- upvalues: forgetChild (copy), p27 (ref)
-			forgetChild(p27, p28)
+	if p3.childValues.size > 0 then
+		array.forEach(table.clone(p3.childValues:keys()), function(p4)
+			-- upvalues: forgetChild (copy), p3 (ref)
+			forgetChild(p3, p4)
 		end)
 	end
-	p27:forgetDeps()
+	p3:forgetDeps()
 	
-	if p27.dirtyChildren ~= nil then
+	if p3.dirtyChildren ~= nil then
 		error(error.new("assertion failure"))
 	end
 end
 
-forgetChild = function(p29, p30)
+forgetChild = function(p3, p4)
 	-- upvalues: removeDirtyChild (write)
-	p30.parents:delete(p29)
-	p29.childValues:delete(p30)
-	removeDirtyChild(p29, p30)
+	p4.parents:delete(p3)
+	p3.childValues:delete(p4)
+	removeDirtyChild(p3, p4)
 end
 
-maybeSubscribe = function(p31, p32)
+maybeSubscribe = function(p3, p4)
 	-- upvalues: maybeUnsubscribe (ref)
-	if typeof(p31.subscribe) == "function" and not pcall(function()
-		-- upvalues: maybeUnsubscribe (copy), p31 (ref), p32 (ref)
-		maybeUnsubscribe(p31)
-		p31.unsubscribe = p31.subscribe(table.unpack(p32))
+	if typeof(p3.subscribe) == "function" and not pcall(function()
+		-- upvalues: maybeUnsubscribe (copy), p3 (ref), p4 (ref)
+		maybeUnsubscribe(p3)
+		p3.unsubscribe = p3.subscribe(table.unpack(p4))
 		
 		return nil, false
 	end) then
-		p31:setDirty()
+		p3:setDirty()
 		
 		return false
 	end

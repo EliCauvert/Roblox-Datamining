@@ -1,9 +1,9 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0)
+return function(p1)
 	-- upvalues: httpService (ref)
-	if p0 ~= nil and p0.errors ~= nil and (p0.errors[1] and p0.errors[1].fieldData) then
-		local fieldData = p0.errors[1].fieldData
+	if p1 ~= nil and p1.errors ~= nil and (p1.errors[1] and p1.errors[1].fieldData) then
+		local fieldData = p1.errors[1].fieldData
 		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), fieldData (ref)
 			return httpService:JSONDecode(fieldData)

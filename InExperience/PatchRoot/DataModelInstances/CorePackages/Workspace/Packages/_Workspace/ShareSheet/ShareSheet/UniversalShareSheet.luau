@@ -2,9 +2,9 @@
 local getUniversalShareSheetStoreModule = require(script.Parent.Stores.GetUniversalShareSheetStore)
 
 return {
-	show = function(p0)
+	show = function(p1)
 		-- upvalues: getUniversalShareSheetStoreModule (ref)
-		getUniversalShareSheetStoreModule().show(p0)
+		getUniversalShareSheetStoreModule().show(p1)
 	end,
 	hide = function()
 		-- upvalues: getUniversalShareSheetStoreModule (ref)

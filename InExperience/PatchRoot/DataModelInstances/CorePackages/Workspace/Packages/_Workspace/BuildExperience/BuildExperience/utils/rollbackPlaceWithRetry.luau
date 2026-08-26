@@ -7,15 +7,15 @@ local buildExperienceRollbackPlaceMaxRetries = game:DefineFastInt("BuildExperien
 local buildExperienceRollbackPlaceRetryDelayMs = game:DefineFastInt("BuildExperienceRollbackPlaceRetryDelayMs", 1000)
 local debug = creatorAgentChatModule.debug
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: httpService (ref)
-	if typeof(p0) == "table" then
+	if typeof(p1) == "table" then
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p0 (ref)
-			return httpService:JSONEncode(p0)
+			-- upvalues: httpService (copy), p1 (ref)
+			return httpService:JSONEncode(p1)
 		end)
 		
-		return if ok then status else tostring(p0)
+		return if ok then status else tostring(p1)
 	end
 end
 
@@ -23,129 +23,129 @@ local _ = function(p1)
 	return if p1.title == nil then p1.description ~= nil else true
 end
 
-local _ = function(p2, p3)
-	return `{p2.debugSource or "rollback"} {p3}`
+local _ = function(p1, p2)
+	return `{p1.debugSource or "rollback"} {p2}`
 end
 
-local function copyVersionNoteAfterRollback(p4, p5, p6, p7, p8, p9)
+local function copyVersionNoteAfterRollback(p1, p2, p3, p4, p5, p6)
 	-- upvalues: promiseModule (ref), debug (ref), httpService (ref)
-	if p8.note == nil then
+	if p5.note == nil then
 		return promiseModule.resolve()
-	elseif p7.newVersionNumber == nil then
-		debug.log("info", `{p8.debugSource or "rollback"} note copy skipped`, {
+	elseif p4.newVersionNumber == nil then
+		debug.log("info", `{p5.debugSource or "rollback"} note copy skipped`, {
 			reason = "newVersionNumber_nil",
-			placeId = p5,
-			restoredVersion = p6
+			placeId = p2,
+			restoredVersion = p3
 		})
 		
 		return promiseModule.resolve()
-	elseif p9 == nil then
-		debug.log("info", `{p8.debugSource or "rollback"} note copy skipped`, {
+	elseif p6 == nil then
+		debug.log("info", `{p5.debugSource or "rollback"} note copy skipped`, {
 			reason = "source_notes_not_found",
-			placeId = p5,
-			restoredVersion = p6,
-			newVersion = p7.newVersionNumber
+			placeId = p2,
+			restoredVersion = p3,
+			newVersion = p4.newVersionNumber
 		})
 		
 		return promiseModule.resolve()
-	elseif if p9.title == nil then p9.description ~= nil else true then
-		local var7 = tostring(p7.newVersionNumber)
+	elseif if p6.title == nil then p6.description ~= nil else true then
+		local var1 = tostring(p4.newVersionNumber)
 		
-		return p4.addVersionNote(p5, var7, p9):catch(function(p10)
-			-- upvalues: debug (copy), p8 (ref), p5 (ref), p6 (ref), var7 (ref), p9 (ref), httpService (copy)
-			local var11
+		return p1.addVersionNote(p2, var1, p6):catch(function(p7)
+			-- upvalues: debug (copy), p5 (ref), p2 (ref), p3 (ref), var1 (ref), p6 (ref), httpService (copy)
+			local var2
 			local log = debug.log
-			local var8 = "warn"
-			local var9 = `{p8.debugSource or "rollback"} note copy failed`
+			local var3 = "warn"
+			local var4 = `{p5.debugSource or "rollback"} note copy failed`
 			local t = {
-				placeId = p5,
-				restoredVersion = p6,
-				newVersion = var7,
-				titleLength = if p9.title == nil then nil else #p9.title,
-				descriptionLength = if p9.description == nil then nil else #p9.description
+				placeId = p2,
+				restoredVersion = p3,
+				newVersion = var1,
+				titleLength = if p6.title == nil then nil else #p6.title,
+				descriptionLength = if p6.description == nil then nil else #p6.description
 			}
 			
-			if typeof(p10) == "table" then
+			if typeof(p7) == "table" then
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p10 (ref)
-					return httpService:JSONEncode(p10)
+					-- upvalues: httpService (copy), p7 (ref)
+					return httpService:JSONEncode(p7)
 				end)
-				var11 = if ok then status else tostring(p10)
+				var2 = if ok then status else tostring(p7)
 			end
-			t.error = var11
-			t.rawError = p10
-			log(var8, var9, t)
+			t.error = var2
+			t.rawError = p7
+			log(var3, var4, t)
 			
 			return nil
 		end)
 	end
-	debug.log("info", `{p8.debugSource or "rollback"} note copy skipped`, {
+	debug.log("info", `{p5.debugSource or "rollback"} note copy skipped`, {
 		reason = "source_notes_empty",
-		placeId = p5,
-		restoredVersion = p6,
-		newVersion = p7.newVersionNumber
+		placeId = p2,
+		restoredVersion = p3,
+		newVersion = p4.newVersionNumber
 	})
 	
 	return promiseModule.resolve()
 end
 
-local _ = function(p11, p12)
+local _ = function(p1, p2)
 	-- upvalues: promiseModule (ref)
-	return if p12 == 0 then promiseModule.resolve() else promiseModule.new(function(p13)
-		-- upvalues: p12 (ref), p11 (ref)
-		task.delay(p12 * p11 / 1000, p13)
+	return if p2 == 0 then promiseModule.resolve() else promiseModule.new(function(p3)
+		-- upvalues: p2 (ref), p1 (ref)
+		task.delay(p2 * p1 / 1000, p3)
 	end)
 end
 
-return function(p14, p15, p16)
+return function(p1, p2, p3)
 	-- upvalues: buildExperienceRollbackPlaceMaxRetries (ref), buildExperienceRollbackPlaceRetryDelayMs (ref), placeVersionHistoryModule (ref), promiseModule (ref), copyVersionNoteAfterRollback (ref)
-	p16 = p16 or {}
-	local var13 = if p16.retries ~= nil then buildExperienceRollbackPlaceMaxRetries else p16.retries
-	local var14 = if p16.retryDelayMs ~= nil then buildExperienceRollbackPlaceRetryDelayMs else p16.retryDelayMs
-	local var15 = if p16.published ~= nil then false else p16.published
+	p3 = p3 or {}
+	local var1 = if p3.retries ~= nil then buildExperienceRollbackPlaceMaxRetries else p3.retries
+	local var2 = if p3.retryDelayMs ~= nil then buildExperienceRollbackPlaceRetryDelayMs else p3.retryDelayMs
+	local var3 = if p3.published ~= nil then false else p3.published
 	local placeVersionHistoryStore = placeVersionHistoryModule.getPlaceVersionHistoryStore()
 	
-	local function rollbackWithRetry(p17, p18)
-		-- upvalues: placeVersionHistoryStore (ref), p14 (ref), p15 (ref), var15 (ref), var13 (ref), promiseModule (copy), var14 (ref), rollbackWithRetry (ref)
-		return placeVersionHistoryStore.rollbackPlace(p14, p15, if p18 ~= nil then nil else p18.description, var15):catch(function(p19)
-			-- upvalues: p17 (ref), var13 (copy), promiseModule (copy), var14 (copy), rollbackWithRetry (copy), p18 (ref)
-			if var13 <= p17 then
-				return promiseModule.reject(p19)
+	local function rollbackWithRetry(p4, p5)
+		-- upvalues: placeVersionHistoryStore (ref), p1 (ref), p2 (ref), var3 (ref), var1 (ref), promiseModule (copy), var2 (ref), rollbackWithRetry (ref)
+		return placeVersionHistoryStore.rollbackPlace(p1, p2, if p5 ~= nil then nil else p5.description, var3):catch(function(p6)
+			-- upvalues: p4 (ref), var1 (copy), promiseModule (copy), var2 (copy), rollbackWithRetry (copy), p5 (ref)
+			if var1 <= p4 then
+				return promiseModule.reject(p6)
 			end
-			local var19 = p17 + 1
+			local var4 = p4 + 1
 			
-			return (if var14 == 0 then promiseModule.resolve() else promiseModule.new(function(p20)
-				-- upvalues: var14 (ref), var19 (ref)
-				task.delay(var14 * var19 / 1000, p20)
+			return (if var2 == 0 then promiseModule.resolve() else promiseModule.new(function(p7)
+				-- upvalues: var2 (ref), var4 (ref)
+				task.delay(var2 * var4 / 1000, p7)
 			end)):andThen(function()
-				-- upvalues: rollbackWithRetry (copy), var19 (ref), p18 (copy)
-				return rollbackWithRetry(var19, p18)
+				-- upvalues: rollbackWithRetry (copy), var4 (ref), p5 (copy)
+				return rollbackWithRetry(var4, p5)
 			end)
 		end)
 	end
 	
-	local note = p16.note
-	local var18 = 0
+	local note = p3.note
+	local var4 = 0
 	
-	return placeVersionHistoryStore.rollbackPlace(p14, p15, if note ~= nil then nil else note.description, var15):catch(function(p22)
-		-- upvalues: var18 (ref), var13 (ref), promiseModule (copy), var14 (ref), rollbackWithRetry (ref), note (ref)
-		if var13 <= var18 then
-			return promiseModule.reject(p22)
+	return placeVersionHistoryStore.rollbackPlace(p1, p2, if note ~= nil then nil else note.description, var3):catch(function(p4)
+		-- upvalues: var4 (ref), var1 (ref), promiseModule (copy), var2 (ref), rollbackWithRetry (ref), note (ref)
+		if var1 <= var4 then
+			return promiseModule.reject(p4)
 		end
-		local var19 = var18 + 1
+		local var5 = var4 + 1
 		
-		return (if var14 == 0 then promiseModule.resolve() else promiseModule.new(function(p23)
-			-- upvalues: var14 (ref), var19 (ref)
-			task.delay(var14 * var19 / 1000, p23)
+		return (if var2 == 0 then promiseModule.resolve() else promiseModule.new(function(p5)
+			-- upvalues: var2 (ref), var5 (ref)
+			task.delay(var2 * var5 / 1000, p5)
 		end)):andThen(function()
-			-- upvalues: rollbackWithRetry (copy), var19 (ref), note (copy)
-			return rollbackWithRetry(var19, note)
+			-- upvalues: rollbackWithRetry (copy), var5 (ref), note (copy)
+			return rollbackWithRetry(var5, note)
 		end)
-	end):andThen(function(p21)
-		-- upvalues: copyVersionNoteAfterRollback (copy), placeVersionHistoryStore (ref), p14 (ref), p15 (ref), p16 (ref), note (ref)
-		return copyVersionNoteAfterRollback(placeVersionHistoryStore, p14, p15, p21, p16, note):andThen(function()
-			-- upvalues: p21 (ref)
-			return p21
+	end):andThen(function(p4)
+		-- upvalues: copyVersionNoteAfterRollback (copy), placeVersionHistoryStore (ref), p1 (ref), p2 (ref), p3 (ref), note (ref)
+		return copyVersionNoteAfterRollback(placeVersionHistoryStore, p1, p2, p4, p3, note):andThen(function()
+			-- upvalues: p4 (ref)
+			return p4
 		end)
 	end)
 end

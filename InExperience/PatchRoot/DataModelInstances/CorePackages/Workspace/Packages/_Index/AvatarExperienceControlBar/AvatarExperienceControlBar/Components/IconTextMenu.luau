@@ -10,40 +10,40 @@ local colorTextButtonModule = require(avatarExperienceControlBar.Components.Butt
 local AXDisableControlBarMenuAnimation = game:DefineFastFlag("AXDisableControlBarMenuAnimation", false)
 local t = { dampingRatio = 1, frequency = 5 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useSemanticTokensModule (ref), reactModule (ref), reactOtterModule (ref), t (ref), iconTextButtonModule (ref), colorTextButtonModule (ref), foundationModule (ref), AXDisableControlBarMenuAnimation (ref)
-	local var9 = useSemanticTokensModule()
-	local var10, var11 = reactModule.useBinding(0)
-	local var12, var13 = reactOtterModule.useAnimatedBinding(0)
-	local var14 = #p0.items > 0
+	local var1 = useSemanticTokensModule()
+	local var2, var3 = reactModule.useBinding(0)
+	local var4, var5 = reactOtterModule.useAnimatedBinding(0)
+	local var6 = #p1.items > 0
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "clip",
 		Name = "IconTextMenu-Animation-Container",
-		Size = if AXDisableControlBarMenuAnimation then nil else reactModule.joinBindings({ X = var10, Y = var12 }):map(function(p1)
-			return UDim2.fromOffset(p1.X, math.round(p1.Y))
+		Size = if AXDisableControlBarMenuAnimation then nil else reactModule.joinBindings({ X = var2, Y = var4 }):map(function(p2)
+			return UDim2.fromOffset(p2.X, math.round(p2.Y))
 		end),
 		AutomaticSize = if AXDisableControlBarMenuAnimation then Enum.AutomaticSize.XY else nil,
-		Position = p0.Position,
-		AnchorPoint = p0.AnchorPoint,
-		LayoutOrder = p0.LayoutOrder
+		Position = p1.Position,
+		AnchorPoint = p1.AnchorPoint,
+		LayoutOrder = p1.LayoutOrder
 	}, {
-		MenuContent = if #p0.items > 0 then reactModule.createElement(foundationModule.View, {
+		MenuContent = if #p1.items > 0 then reactModule.createElement(foundationModule.View, {
 			tag = "auto-xy clip col clip padding-xsmall gap-xsmall",
-			backgroundStyle = var9.menuBackgroundStyle,
-			cornerRadius = UDim.new(0, p0.radius or var9.defaultIconTextMenuRadius),
+			backgroundStyle = var1.menuBackgroundStyle,
+			cornerRadius = UDim.new(0, p1.radius or var1.defaultIconTextMenuRadius),
 			ref = reactModule.useRef(nil),
 			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-				-- upvalues: var11 (ref), var13 (ref), reactOtterModule (copy), var14 (ref), t (copy)
+				-- upvalues: var3 (ref), var5 (ref), reactOtterModule (copy), var6 (ref), t (copy)
 				local absoluteSize = p2.AbsoluteSize
-				var11(absoluteSize.X)
-				var13(reactOtterModule.spring(if var14 then absoluteSize.Y else 0, t))
-			end, { var14 })
+				var3(absoluteSize.X)
+				var5(reactOtterModule.spring(if var6 then absoluteSize.Y else 0, t))
+			end, { var6 })
 		}, reactModule.useMemo(function()
-			-- upvalues: p0 (ref), reactModule (copy), iconTextButtonModule (copy), colorTextButtonModule (copy)
+			-- upvalues: p1 (ref), reactModule (copy), iconTextButtonModule (copy), colorTextButtonModule (copy)
 			local t = {}
 			
-			for i, v in p0.items do
+			for i, v in p1.items do
 				if v.type == "icon" then
 					t[`IconTextMenuItem-{v.id}`] = reactModule.createElement(iconTextButtonModule, {
 						icon = v.icon,
@@ -51,9 +51,9 @@ return function(p0)
 						iconSize = v.iconSize,
 						disabled = v.disabled,
 						onActivated = function()
-							-- upvalues: p0 (copy), v (ref)
-							if p0.onItemActivated then
-								p0.onItemActivated(v.id)
+							-- upvalues: p1 (copy), v (ref)
+							if p1.onItemActivated then
+								p1.onItemActivated(v.id)
 							end
 							if v.onActivated then
 								v.onActivated()
@@ -70,9 +70,9 @@ return function(p0)
 						text = v.text,
 						disabled = v.disabled,
 						onActivated = function()
-							-- upvalues: p0 (copy), v (ref)
-							if p0.onItemActivated then
-								p0.onItemActivated(v.id)
+							-- upvalues: p1 (copy), v (ref)
+							if p1.onItemActivated then
+								p1.onItemActivated(v.id)
 							end
 							if v.onActivated then
 								v.onActivated()
@@ -84,6 +84,6 @@ return function(p0)
 				end
 			end
 			return t
-		end, { p0.items, p0.onItemActivated })) else nil
+		end, { p1.items, p1.onItemActivated })) else nil
 	})
 end

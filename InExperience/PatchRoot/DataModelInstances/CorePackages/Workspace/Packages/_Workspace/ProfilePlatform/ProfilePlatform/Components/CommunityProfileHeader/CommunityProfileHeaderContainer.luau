@@ -13,17 +13,17 @@ local fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule = require(profil
 local fFlagEnablePressingCommunityOwnerInPeekViewModule = require(profilePlatform.Flags.FFlagEnablePressingCommunityOwnerInPeekView)
 local communityProfileHeaderModule = require(profilePlatform.Components.CommunityProfileHeader.CommunityProfileHeader)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), verifiedBadgesModule (ref), getDeepValueModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), fFlagEnablePressingCommunityOwnerInPeekViewModule (ref), reactModule (ref), communityProfileHeaderModule (ref), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (ref)
-	local var11 = useProfileJsonComponentModule(enumsModule.Components.CommunityProfileHeader)
+	local var1 = useProfileJsonComponentModule(enumsModule.Components.CommunityProfileHeader)
 	
 	return reactModule.createElement(communityProfileHeaderModule, {
-		layoutOrder = p0.layoutOrder,
-		name = if var11.isVerified then `{var11.name}{verifiedBadgesModule.emoji.verified}` else var11.name,
-		ownerName = if var11.ownerIsVerified then `{var11.ownerName}{verifiedBadgesModule.emoji.verified}` else var11.ownerName,
-		membersCount = getDeepValueModule(var11, "counts.membersCount") or 0,
-		hasSocialModules = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then var11.hasSocialModules else nil,
+		layoutOrder = p1.layoutOrder,
+		name = if var1.isVerified then `{var1.name}{verifiedBadgesModule.emoji.verified}` else var1.name,
+		ownerName = if var1.ownerIsVerified then `{var1.ownerName}{verifiedBadgesModule.emoji.verified}` else var1.ownerName,
+		membersCount = getDeepValueModule(var1, "counts.membersCount") or 0,
+		hasSocialModules = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then var1.hasSocialModules else nil,
 		thumbnail = getRbxthumbWithTypeSizeAndOptions(useProfileWrapperContextModule().profileId, constants.RbxthumbTypes.GroupIcon, 150),
-		ownerUserId = if fFlagEnablePressingCommunityOwnerInPeekViewModule then if fFlagEnablePressingCommunityOwnerInPeekViewModule then var11.ownerUserId else nil else nil
+		ownerUserId = if fFlagEnablePressingCommunityOwnerInPeekViewModule then if fFlagEnablePressingCommunityOwnerInPeekViewModule then var1.ownerUserId else nil else nil
 	})
 end

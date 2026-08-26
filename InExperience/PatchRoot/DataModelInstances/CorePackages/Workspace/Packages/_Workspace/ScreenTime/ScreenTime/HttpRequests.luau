@@ -21,60 +21,60 @@ local t = {
 	},
 	REPORT_EXECUTION = { errorCode = "number" }
 }
-local var2 = urlBuilder.new({
+local var1 = urlBuilder.new({
 	path = "timed-entertainment-allowance/v1/instructions",
 	base = url.APIS_URL
 })()
-local var3 = urlBuilder.new({
+local var2 = urlBuilder.new({
 	path = "timed-entertainment-allowance/v1/reportExecute",
 	base = url.APIS_URL
 })()
-local var4 = urlBuilder.new({ path = "v1/logout", base = url.AUTH_URL })()
+local var3 = urlBuilder.new({ path = "v1/logout", base = url.AUTH_URL })()
 
-local function checkFormat(p0, p1)
-	for i, v in pairs(p0) do
-		assert(p1[i] ~= nil, "Missing key")
-		assert(type(p1[i]) == v, "Wrong type")
+local function checkFormat(p1, p2)
+	for i, v in pairs(p1) do
+		assert(p2[i] ~= nil, "Missing key")
+		assert(type(p2[i]) == v, "Wrong type")
 	end
 end
 
 return {
 	httpService = nil,
-	new = function(p2, p3)
+	new = function(p3, p4)
 		-- upvalues: argCheckModule (ref)
-		argCheckModule.isNotNil(p3, "httpService")
-		local t = { httpService = p3 }
-		setmetatable(t, p2)
-		p2.__index = p2
+		argCheckModule.isNotNil(p4, "httpService")
+		local t = { httpService = p4 }
+		setmetatable(t, p3)
+		p3.__index = p3
 		
 		return t
 	end,
-	getInstructions = function(p4, p5)
-		-- upvalues: argCheckModule (ref), var2 (ref), checkFormat (ref), t (ref), logging (ref)
-		argCheckModule.isNotNil(p4.httpService, "httpService")
-		argCheckModule.isNotNil(p5, "callback")
-		p4.httpService:RequestInternal({ Method = "GET", Url = var2 }):Start(function(p6, p7)
-			-- upvalues: p4 (ref), checkFormat (copy), t (copy), logging (copy), var2 (copy), p5 (ref)
-			local var9, var10
+	getInstructions = function(p3, p4)
+		-- upvalues: argCheckModule (ref), var1 (ref), checkFormat (ref), t (ref), logging (ref)
+		argCheckModule.isNotNil(p3.httpService, "httpService")
+		argCheckModule.isNotNil(p4, "callback")
+		p3.httpService:RequestInternal({ Method = "GET", Url = var1 }):Start(function(p5, p6)
+			-- upvalues: p3 (ref), checkFormat (copy), t (copy), logging (copy), var1 (copy), p4 (ref)
+			local var4, var5
 			local _ = nil
 			local _ = nil
-			local var7 = false
+			local var6 = false
 			local t_1 = {}
 			
-			if not p6 then
-				var9 = false
-				var10 = "Connection error"
-			elseif p7.StatusCode == 401 then
-				var9 = false
-				var7 = true
-				var10 = "Unauthorized"
-			elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then
-				var9 = false
-				var10 = "Status code: " .. p7.StatusCode
+			if not p5 then
+				var4 = false
+				var5 = "Connection error"
+			elseif p6.StatusCode == 401 then
+				var4 = false
+				var6 = true
+				var5 = "Unauthorized"
+			elseif p6.StatusCode < 200 or p6.StatusCode >= 400 then
+				var4 = false
+				var5 = "Status code: " .. p7.StatusCode
 			else
 				local ok, status = pcall(function()
-					-- upvalues: p4 (copy), p7 (ref), checkFormat (copy), t (copy), t_1 (write)
-					local body = p4.httpService:JSONDecode(p7.Body)
+					-- upvalues: p3 (copy), p6 (ref), checkFormat (copy), t (copy), t_1 (write)
+					local body = p3.httpService:JSONDecode(p6.Body)
 					checkFormat(t.GET_INSTRUCTIONS, body)
 					assert(body.errorCode == 0, "Error code is not 0")
 					
@@ -83,69 +83,69 @@ return {
 					end
 					t_1 = body.instructions
 				end)
-				var9 = ok
-				var10 = status
+				var4 = ok
+				var5 = status
 			end
-			if not var9 then
+			if not var4 then
 				logging.warn("HttpRequests" .. " getInstructions failed: " .. var2 .. ", " .. var10)
 			end
-			p5(var9, var7, t_1)
+			p4(var4, var6, t_1)
 		end)
 	end,
-	reportExecution = function(p8, p9, p10, p11)
-		-- upvalues: argCheckModule (ref), var3 (ref), checkFormat (ref), t (ref), logging (ref)
-		argCheckModule.isNotNil(p8.httpService, "httpService")
-		p8.httpService:RequestInternal({
+	reportExecution = function(p5, p6, p7, p8)
+		-- upvalues: argCheckModule (ref), var2 (ref), checkFormat (ref), t (ref), logging (ref)
+		argCheckModule.isNotNil(p5.httpService, "httpService")
+		p5.httpService:RequestInternal({
 			Method = "POST",
-			Url = var3,
+			Url = var2,
 			Headers = { ["Content-Type"] = "application/json" },
-			Body = p8.httpService:JSONEncode({
-				instructionName = p9,
-				serialId = p10,
+			Body = p5.httpService:JSONEncode({
+				instructionName = p6,
+				serialId = p7,
 				execTime = os.date("%Y-%m-%dT%H:%M:%SZ")
 			})
-		}):Start(function(p12, p13)
-			-- upvalues: p8 (ref), checkFormat (copy), t (copy), logging (copy), var3 (copy), p11 (ref)
-			local var12, var13
+		}):Start(function(p9, p10)
+			-- upvalues: p5 (ref), checkFormat (copy), t (copy), logging (copy), var2 (copy), p8 (ref)
+			local var4, var5
 			local _ = nil
 			local _ = nil
 			
-			if not p12 then
-				var12 = false
-				var13 = "Connection error"
-			elseif p13.StatusCode < 200 and p13.StatusCode >= 400 then
-				var12 = false
-				var13 = "Status code: " .. p13.StatusCode
+			if not p9 then
+				var4 = false
+				var5 = "Connection error"
+			elseif p10.StatusCode < 200 and p10.StatusCode >= 400 then
+				var4 = false
+				var5 = "Status code: " .. p13.StatusCode
 			else
 				local ok, status = pcall(function()
-					-- upvalues: p8 (copy), p13 (ref), checkFormat (copy), t (copy)
-					local body = p8.httpService:JSONDecode(p13.Body)
+					-- upvalues: p5 (copy), p10 (ref), checkFormat (copy), t (copy)
+					local body = p5.httpService:JSONDecode(p10.Body)
 					checkFormat(t.REPORT_EXECUTION, body)
 					assert(body.errorCode == 0, "Error code is not 0")
 				end)
-				var12 = ok
-				var13 = status
+				var4 = ok
+				var5 = status
 			end
-			if not var12 then
+			if not var4 then
 				logging.warn("HttpRequests" .. " reportExecution failed: " .. var3 .. ", " .. var13)
 			end
-			if p11 ~= nil then
-				p11(var12)
+			if p8 ~= nil then
+				p8(var4)
 			end
 		end)
 	end,
-	logout = function(p14)
-		-- upvalues: argCheckModule (ref), var4 (ref)
-		argCheckModule.isNotNil(p14.httpService, "httpService")
-		local var15 = p14.httpService:RequestInternal({
+	logout = function(p5)
+		-- upvalues: argCheckModule (ref), var3 (ref)
+		argCheckModule.isNotNil(p5.httpService, "httpService")
+		local var4 = p5.httpService:RequestInternal({
 			Method = "POST",
 			Body = "",
-			Url = var4,
+			Url = var3,
 			Headers = { ["Content-Type"] = "application/json" }
 		})
 		pcall(function()
-			-- upvalues: var15 (ref)
-			var15:Start(function(_, _) end)
+			-- upvalues: var4 (ref)
+			var4:Start(function(_, _) end)
 		end)
 	end
 }

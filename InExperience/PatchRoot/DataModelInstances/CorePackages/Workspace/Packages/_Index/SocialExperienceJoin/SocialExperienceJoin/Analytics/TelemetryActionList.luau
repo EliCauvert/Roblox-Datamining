@@ -13,8 +13,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p0)
-						return p0
+					status = function(p1)
+						return p1
 					end
 				}
 			}

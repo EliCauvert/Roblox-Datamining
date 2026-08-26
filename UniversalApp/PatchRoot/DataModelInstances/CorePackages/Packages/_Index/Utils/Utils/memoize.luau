@@ -2,237 +2,237 @@
 local boolean = luauPolyfillModule.Boolean
 local weakMap = luauPolyfillModule.WeakMap
 local t = {
-	memoize1 = function(p0)
+	memoize1 = function(p1)
 		-- upvalues: weakMap (ref)
-		local var3 = weakMap.new()
+		local var1 = weakMap.new()
 		
-		return function(p1)
-			-- upvalues: var3 (ref), p0 (ref)
-			local var4 = var3:get(p1)
+		return function(p2)
+			-- upvalues: var1 (ref), p1 (ref)
+			local var2 = var1:get(p2)
+			
+			if var2 == nil then
+				local var3 = p1(p2)
+				var1:set(p2, var3)
+				
+				return var3
+			end
+			return var2
+		end
+	end,
+	memoize2 = function(p1)
+		-- upvalues: weakMap (ref), boolean (ref)
+		local var1 = weakMap.new()
+		
+		return function(p2, p3)
+			-- upvalues: var1 (ref), boolean (copy), weakMap (copy), p1 (ref)
+			local var2 = var1:get(p2)
+			
+			if not boolean.toJSBoolean(var2) then
+				var2 = weakMap.new()
+				var1:set(p2, var2)
+				local var3 = p1(p2, p3)
+				var2:set(p3, var3)
+				
+				return var3
+			end
+			local var4 = var2:get(p3)
 			
 			if var4 == nil then
-				local var5 = p0(p1)
-				var3:set(p1, var5)
+				local var5 = p1(p2, p3)
+				var2:set(p3, var5)
 				
 				return var5
 			end
 			return var4
 		end
 	end,
-	memoize2 = function(p2)
+	memoize3 = function(p1)
 		-- upvalues: weakMap (ref), boolean (ref)
-		local var6 = weakMap.new()
+		local var1 = weakMap.new()
 		
-		return function(p3, p4)
-			-- upvalues: var6 (ref), boolean (copy), weakMap (copy), p2 (ref)
-			local var7 = var6:get(p3)
+		return function(p2, p3, p4)
+			-- upvalues: var1 (ref), boolean (copy), weakMap (copy), p1 (ref)
+			local var2 = var1:get(p2)
 			
-			if not boolean.toJSBoolean(var7) then
-				var7 = weakMap.new()
-				var6:set(p3, var7)
-				local var8 = p2(p3, p4)
-				var7:set(p4, var8)
+			if not boolean.toJSBoolean(var2) then
+				var2 = weakMap.new()
+				var1:set(p2, var2)
+				local var3 = weakMap.new()
+				var2:set(p3, var3)
+				local var4 = p1(p2, p3, p4)
+				var3:set(p4, var4)
+				
+				return var4
+			end
+			local var5 = var2:get(p3)
+			
+			if not boolean.toJSBoolean(var5) then
+				var5 = weakMap.new()
+				var2:set(p3, var5)
+				local var6 = p1(p2, p3, p4)
+				var5:set(p4, var6)
+				
+				return var6
+			end
+			local var7 = var5:get(p4)
+			
+			if var7 == nil then
+				local var8 = p1(p2, p3, p4)
+				var5:set(p4, var8)
 				
 				return var8
 			end
-			local var9 = var7:get(p4)
+			return var7
+		end
+	end,
+	memoize4 = function(p1)
+		-- upvalues: weakMap (ref), boolean (ref)
+		local var1 = weakMap.new()
+		
+		return function(p2, p3, p4, p5)
+			-- upvalues: var1 (ref), boolean (copy), weakMap (copy), p1 (ref)
+			local var2 = var1:get(p2)
 			
-			if var9 == nil then
-				local var10 = p2(p3, p4)
-				var7:set(p4, var10)
+			if not boolean.toJSBoolean(var2) then
+				var2 = weakMap.new()
+				var1:set(p2, var2)
+				local var3 = weakMap.new()
+				var2:set(p3, var3)
+				local var4 = weakMap.new()
+				var3:set(p4, var4)
+				local var5 = p1(p2, p3, p4, p5)
+				var4:set(p5, var5)
+				
+				return var5
+			end
+			local var6 = var2:get(p3)
+			
+			if not boolean.toJSBoolean(var6) then
+				var6 = weakMap.new()
+				var2:set(p3, var6)
+				local var7 = weakMap.new()
+				var6:set(p4, var7)
+				local var8 = p1(p2, p3, p4, p5)
+				var7:set(p5, var8)
+				
+				return var8
+			end
+			local var9 = var6:get(p4)
+			
+			if not boolean.toJSBoolean(var9) then
+				var9 = weakMap.new()
+				var6:set(p4, var9)
+				local var10 = p1(p2, p3, p4, p5)
+				var9:set(p5, var10)
 				
 				return var10
 			end
-			return var9
+			local var11 = var9:get(p5)
+			
+			if var11 == nil then
+				local var12 = p1(p2, p3, p4, p5)
+				var9:set(p5, var12)
+				
+				return var12
+			end
+			return var11
 		end
 	end,
-	memoize3 = function(p5)
+	memoize5 = function(p1)
 		-- upvalues: weakMap (ref), boolean (ref)
-		local var11 = weakMap.new()
+		local var1 = weakMap.new()
 		
-		return function(p6, p7, p8)
-			-- upvalues: var11 (ref), boolean (copy), weakMap (copy), p5 (ref)
-			local var12 = var11:get(p6)
+		return function(p2, p3, p4, p5, p6)
+			-- upvalues: var1 (ref), boolean (copy), weakMap (copy), p1 (ref)
+			local var2 = var1:get(p2)
 			
-			if not boolean.toJSBoolean(var12) then
-				var12 = weakMap.new()
-				var11:set(p6, var12)
-				local var13 = weakMap.new()
-				var12:set(p7, var13)
-				local var14 = p5(p6, p7, p8)
-				var13:set(p8, var14)
+			if not boolean.toJSBoolean(var2) then
+				var2 = weakMap.new()
+				var1:set(p2, var2)
+				local var3 = weakMap.new()
+				var2:set(p3, var3)
+				local var4 = weakMap.new()
+				var3:set(p4, var4)
+				local var5 = weakMap.new()
+				var4:set(p5, var5)
+				local var6 = p1(p2, p3, p4, p5, p6)
+				var5:set(p6, var6)
 				
-				return var14
+				return var6
 			end
-			local var15 = var12:get(p7)
+			local var7 = var2:get(p3)
 			
-			if not boolean.toJSBoolean(var15) then
-				var15 = weakMap.new()
-				var12:set(p7, var15)
-				local var16 = p5(p6, p7, p8)
-				var15:set(p8, var16)
+			if not boolean.toJSBoolean(var7) then
+				var7 = weakMap.new()
+				var2:set(p3, var7)
+				local var8 = weakMap.new()
+				var7:set(p4, var8)
+				local var9 = weakMap.new()
+				var8:set(p5, var9)
+				local var10 = p1(p2, p3, p4, p5, p6)
+				var9:set(p6, var10)
 				
-				return var16
+				return var10
 			end
-			local var17 = var15:get(p8)
+			local var11 = var7:get(p4)
 			
-			if var17 == nil then
-				local var18 = p5(p6, p7, p8)
-				var15:set(p8, var18)
+			if not boolean.toJSBoolean(var11) then
+				var11 = weakMap.new()
+				var7:set(p4, var11)
+				local var12 = weakMap.new()
+				var11:set(p5, var12)
+				local var13 = p1(p2, p3, p4, p5, p6)
+				var12:set(p6, var13)
 				
-				return var18
+				return var13
 			end
-			return var17
-		end
-	end,
-	memoize4 = function(p9)
-		-- upvalues: weakMap (ref), boolean (ref)
-		local var19 = weakMap.new()
-		
-		return function(p10, p11, p12, p13)
-			-- upvalues: var19 (ref), boolean (copy), weakMap (copy), p9 (ref)
-			local var20 = var19:get(p10)
+			local var14 = var11:get(p5)
 			
-			if not boolean.toJSBoolean(var20) then
-				var20 = weakMap.new()
-				var19:set(p10, var20)
-				local var21 = weakMap.new()
-				var20:set(p11, var21)
-				local var22 = weakMap.new()
-				var21:set(p12, var22)
-				local var23 = p9(p10, p11, p12, p13)
-				var22:set(p13, var23)
+			if not boolean.toJSBoolean(var14) then
+				var14 = weakMap.new()
+				var11:set(p5, var14)
+				local var15 = p1(p2, p3, p4, p5, p6)
+				var14:set(p6, var15)
 				
-				return var23
+				return var15
 			end
-			local var24 = var20:get(p11)
+			local var16 = var14:get(p6)
 			
-			if not boolean.toJSBoolean(var24) then
-				var24 = weakMap.new()
-				var20:set(p11, var24)
-				local var25 = weakMap.new()
-				var24:set(p12, var25)
-				local var26 = p9(p10, p11, p12, p13)
-				var25:set(p13, var26)
+			if var16 == nil then
+				local var17 = p1(p2, p3, p4, p5, p6)
+				var14:set(p6, var17)
 				
-				return var26
+				return var17
 			end
-			local var27 = var24:get(p12)
-			
-			if not boolean.toJSBoolean(var27) then
-				var27 = weakMap.new()
-				var24:set(p12, var27)
-				local var28 = p9(p10, p11, p12, p13)
-				var27:set(p13, var28)
-				
-				return var28
-			end
-			local var29 = var27:get(p13)
-			
-			if var29 == nil then
-				local var30 = p9(p10, p11, p12, p13)
-				var27:set(p13, var30)
-				
-				return var30
-			end
-			return var29
-		end
-	end,
-	memoize5 = function(p14)
-		-- upvalues: weakMap (ref), boolean (ref)
-		local var31 = weakMap.new()
-		
-		return function(p15, p16, p17, p18, p19)
-			-- upvalues: var31 (ref), boolean (copy), weakMap (copy), p14 (ref)
-			local var32 = var31:get(p15)
-			
-			if not boolean.toJSBoolean(var32) then
-				var32 = weakMap.new()
-				var31:set(p15, var32)
-				local var33 = weakMap.new()
-				var32:set(p16, var33)
-				local var34 = weakMap.new()
-				var33:set(p17, var34)
-				local var35 = weakMap.new()
-				var34:set(p18, var35)
-				local var36 = p14(p15, p16, p17, p18, p19)
-				var35:set(p19, var36)
-				
-				return var36
-			end
-			local var37 = var32:get(p16)
-			
-			if not boolean.toJSBoolean(var37) then
-				var37 = weakMap.new()
-				var32:set(p16, var37)
-				local var38 = weakMap.new()
-				var37:set(p17, var38)
-				local var39 = weakMap.new()
-				var38:set(p18, var39)
-				local var40 = p14(p15, p16, p17, p18, p19)
-				var39:set(p19, var40)
-				
-				return var40
-			end
-			local var41 = var37:get(p17)
-			
-			if not boolean.toJSBoolean(var41) then
-				var41 = weakMap.new()
-				var37:set(p17, var41)
-				local var42 = weakMap.new()
-				var41:set(p18, var42)
-				local var43 = p14(p15, p16, p17, p18, p19)
-				var42:set(p19, var43)
-				
-				return var43
-			end
-			local var44 = var41:get(p18)
-			
-			if not boolean.toJSBoolean(var44) then
-				var44 = weakMap.new()
-				var41:set(p18, var44)
-				local var45 = p14(p15, p16, p17, p18, p19)
-				var44:set(p19, var45)
-				
-				return var45
-			end
-			local var46 = var44:get(p19)
-			
-			if var46 == nil then
-				local var47 = p14(p15, p16, p17, p18, p19)
-				var44:set(p19, var47)
-				
-				return var47
-			end
-			return var46
+			return var16
 		end
 	end
 }
-local var2 = weakMap.new()
+local var1 = weakMap.new()
 
-function t.memoize2of4(p20)
-	-- upvalues: var2 (ref), boolean (ref), weakMap (ref)
-	return function(p21, p22, p23, p24)
-		-- upvalues: var2 (copy), boolean (copy), weakMap (copy), p20 (ref)
-		local var48 = var2:get(p21)
+function t.memoize2of4(p1)
+	-- upvalues: var1 (ref), boolean (ref), weakMap (ref)
+	return function(p2, p3, p4, p5)
+		-- upvalues: var1 (copy), boolean (copy), weakMap (copy), p1 (ref)
+		local var2 = var1:get(p2)
 		
-		if not boolean.toJSBoolean(var48) then
-			var48 = weakMap.new()
-			var2:set(p21, var48)
-			local var49 = p20(p21, p22, p23, p24)
-			var48:set(p22, var49)
+		if not boolean.toJSBoolean(var2) then
+			var2 = weakMap.new()
+			var1:set(p2, var2)
+			local var3 = p1(p2, p3, p4, p5)
+			var2:set(p3, var3)
 			
-			return var49
+			return var3
 		end
-		local var50 = var48:get(p22)
+		local var4 = var2:get(p3)
 		
-		if var50 == nil then
-			local var51 = p20(p21, p22, p23, p24)
-			var48:set(p22, var51)
+		if var4 == nil then
+			local var5 = p1(p2, p3, p4, p5)
+			var2:set(p3, var5)
 			
-			return var51
+			return var5
 		end
-		return var50
+		return var4
 	end
 end
 

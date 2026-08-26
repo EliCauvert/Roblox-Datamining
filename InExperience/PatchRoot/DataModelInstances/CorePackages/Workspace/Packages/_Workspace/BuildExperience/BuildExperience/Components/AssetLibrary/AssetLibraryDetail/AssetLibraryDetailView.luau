@@ -15,14 +15,14 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 local radius = foundationModule.Enums.Radius
 
-local function getAttribution(p0)
+local function getAttribution(p1)
 	local t = {}
 	
-	if p0.creatorName ~= nil and p0.creatorName ~= "" then
-		table.insert(t, p0.creatorName)
+	if p1.creatorName ~= nil and p1.creatorName ~= "" then
+		table.insert(t, p1.creatorName)
 	end
-	if p0.createTime ~= nil and p0.createTime ~= "" then
-		table.insert(t, p0.createTime)
+	if p1.createTime ~= nil and p1.createTime ~= "" then
+		table.insert(t, p1.createTime)
 	end
 	return if #t == 0 then nil else table.concat(t, " \194\183 ")
 end
@@ -30,14 +30,14 @@ end
 return function(value)
 	-- upvalues: reactModule (ref), view (ref), image (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), skeleton (ref), radius (ref), getAttribution (ref), assetLibraryAudioPlayerContainerModule (ref), overflowMenuPageShellModule (ref)
 	local asset = value.asset
-	local var7 = if asset == nil or asset.assetType ~= "Audio" then "" else asset.displayName
-	local var8 = nil
+	local var1 = if asset == nil or asset.assetType ~= "Audio" then "" else asset.displayName
+	local var2 = nil
 	
 	if value.status == "Ready" and asset ~= nil and asset.assetType ~= "Audio" then
 		local createElement_1
 		local assetId = `rbxthumb://type=Asset&id={asset.assetId}&w=420&h=420`
 		local createElement = reactModule.createElement
-		local var10 = view
+		local var3 = view
 		local t = { tag = "size-full clip", testId = "AssetLibrary.Preview" }
 		local t_1 = {
 			Media = reactModule.createElement(image, {
@@ -98,9 +98,9 @@ return function(value)
 		end
 		t_1.SupportingContent = createElement_1
 		
-		return createElement(var10, t, t_1)
+		return createElement(var3, t, t_1)
 	elseif value.status == "Loading" or value.status == "NotReady" then
-		var8 = reactModule.createElement(view, {
+		var2 = reactModule.createElement(view, {
 			tag = "col align-x-center gap-large size-full-0 auto-y padding-y-xlarge",
 			testId = "AssetLibrary.Preview.Skeleton"
 		}, {
@@ -134,17 +134,17 @@ return function(value)
 			})
 		})
 	elseif value.status == "Failed" or asset == nil then
-		var8 = reactModule.createElement(text, {
+		var2 = reactModule.createElement(text, {
 			tag = "size-full-0 auto-y padding-large text-body-medium text-align-x-center content-default",
 			Text = value.strings.assetUnavailable
 		})
 	else
-		local var13 = getAttribution(asset)
+		local var4 = getAttribution(asset)
 		
 		if asset.assetType == "Audio" then
 			local createElement_2
 			local createElement = reactModule.createElement
-			local var14 = view
+			local var5 = view
 			local t = { tag = "col size-full" }
 			local t_1 = {
 				PlayerRegion = reactModule.createElement(view, {
@@ -160,7 +160,7 @@ return function(value)
 				})
 			}
 			
-			if asset.description == nil and var13 == nil then
+			if asset.description == nil and var4 == nil then
 				createElement_2 = nil
 			else
 				createElement_2 = reactModule.createElement
@@ -174,25 +174,25 @@ return function(value)
 						tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 						Text = asset.description
 					}),
-					Attribution = if var13 ~= nil then nil else reactModule.createElement(text, {
+					Attribution = if var4 ~= nil then nil else reactModule.createElement(text, {
 						LayoutOrder = 2,
 						tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-muted",
-						Text = var13
+						Text = var4
 					})
 				})
 			end
 			t_1.SupportingContent = createElement_2
-			var8 = createElement(var14, t, t_1)
+			var2 = createElement(var5, t, t_1)
 		else
 			error("Non-audio ready assets render through the immersive preview")
 		end
 	end
 	return reactModule.createElement(overflowMenuPageShellModule, {
 		testId = "AssetLibrary.Preview",
-		title = var7,
+		title = var1,
 		closeIcon = iconName.ChevronLargeLeft,
 		onClose = value.onBack,
 		disableScrolling = value.status == "Ready",
-		content = var8
+		content = var2
 	})
 end

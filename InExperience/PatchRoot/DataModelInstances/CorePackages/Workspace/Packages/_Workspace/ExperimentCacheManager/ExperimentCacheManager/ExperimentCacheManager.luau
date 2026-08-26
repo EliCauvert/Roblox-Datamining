@@ -13,15 +13,15 @@ local enableAppStorageJsonDecodeCache = game:DefineFastFlag("EnableAppStorageJso
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2)
+function t.new(p1, p2, p3)
 	-- upvalues: IXPService (ref), eventIngest (ref), eventIngestService (ref), getExperimentCacheLayersModule (ref), t (ref)
 	local t_1 = {
 		_loadingStatusChanged = nil,
 		_hasLoggedMissingLayerError = nil,
-		_ixpService = p0 or IXPService,
-		_eventIngest = p1 or eventIngest.new(eventIngestService),
+		_ixpService = p1 or IXPService,
+		_eventIngest = p2 or eventIngest.new(eventIngestService),
 		_cache = {},
-		_layersToCache = p2 or getExperimentCacheLayersModule(),
+		_layersToCache = p3 or getExperimentCacheLayersModule(),
 		_exposureLoggingTable = {}
 	}
 	setmetatable(t_1, t)
@@ -51,12 +51,12 @@ function t._getCachedVariables(_)
 	end
 end
 
-function t._flushToCache(_, p3)
+function t._flushToCache(_, p1)
 	-- upvalues: httpService (ref), appStorageService (ref), localStorageKey (ref)
-	assert(type(p3) == "table", "expected table type for cache to persist")
+	assert(type(p1) == "table", "expected table type for cache to persist")
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p3 (ref)
-		return httpService:JSONEncode(p3)
+		-- upvalues: httpService (copy), p1 (ref)
+		return httpService:JSONEncode(p1)
 	end)
 	
 	if ok then
@@ -83,33 +83,33 @@ function t:_onIXPInitialized()
 		local t = {}
 		
 		for i, v in ipairs(self._layersToCache) do
-			local var11 = nil
+			local var1 = nil
 			pcall(function()
-				-- upvalues: var11 (write), self (ref), v (ref)
-				var11 = self._ixpService:GetUserLayerVariables(v)
+				-- upvalues: var1 (write), self (ref), v (ref)
+				var1 = self._ixpService:GetUserLayerVariables(v)
 			end)
-			t[v] = var11
+			t[v] = var1
 		end
 		self:_flushToCache(t)
 	end
 end
 
-function t:_logCustomExposure(p4)
-	assert(type(p4) == "string", "expected layerName to be a string")
-	self._eventIngest:setRBXEventStream("experimentCacheManager", "exposureLog", { layerName = p4 })
+function t:_logCustomExposure(p1)
+	assert(type(p1) == "string", "expected layerName to be a string")
+	self._eventIngest:setRBXEventStream("experimentCacheManager", "exposureLog", { layerName = p1 })
 end
 
-function t._containsLayer(p5, p6)
+function t._containsLayer(p1, p2)
 	-- upvalues: memoize (ref)
-	return memoize(function(p7)
-		-- upvalues: p5 (ref)
-		for i, v in ipairs(p5._layersToCache) do
-			if v == p7 then
+	return memoize(function(p3)
+		-- upvalues: p1 (ref)
+		for i, v in ipairs(p1._layersToCache) do
+			if v == p3 then
 				return true
 			end
 		end
 		return false
-	end)(p6)
+	end)(p2)
 end
 
 function t:initialize()
@@ -120,23 +120,23 @@ function t:initialize()
 		
 		return
 	end
-	self._loadingStatusChanged = self._ixpService.OnUserLayerLoadingStatusChanged:Connect(function(p8)
+	self._loadingStatusChanged = self._ixpService.OnUserLayerLoadingStatusChanged:Connect(function(p3)
 		-- upvalues: self (ref)
-		if p8 == Enum.IXPLoadingStatus.Initialized then
+		if p3 == Enum.IXPLoadingStatus.Initialized then
 			self:_onIXPInitialized()
 		end
 	end)
 end
 
-function t:getLayerVariables(p9, _)
+function t:getLayerVariables(p3, _)
 	-- upvalues: mutedError (ref)
-	assert(type(p9) == "string", "expected layerName to be a string")
+	assert(type(p3) == "string", "expected layerName to be a string")
 	
-	if not self:_containsLayer(p9) and not self._hasLoggedMissingLayerError then
+	if not self:_containsLayer(p3) and not self._hasLoggedMissingLayerError then
 		self._hasLoggedMissingLayerError = true
 		mutedError("Layer " .. p9 .. " has not been configured to be cached, please add layer to `GetExperimentCacheLayers`")
 	end
-	return self._cache[p9] or nil
+	return self._cache[p3] or nil
 end
 
 function t:clearCache()
@@ -150,15 +150,15 @@ function t:clearCache()
 	end)
 end
 
-function t:sendCustomExposureLog(p10)
-	if self._exposureLoggingTable[p10] == nil then
-		self:_logCustomExposure(p10)
-		self._exposureLoggingTable[p10] = true
+function t:sendCustomExposureLog(p3)
+	if self._exposureLoggingTable[p3] == nil then
+		self:_logCustomExposure(p3)
+		self._exposureLoggingTable[p3] = true
 	end
 end
 
-function t:logLayerExposure(p11)
-	self._ixpService:LogUserLayerExposure(p11)
+function t:logLayerExposure(p3)
+	self._ixpService:LogUserLayerExposure(p3)
 end
 
 t.default = t.new()

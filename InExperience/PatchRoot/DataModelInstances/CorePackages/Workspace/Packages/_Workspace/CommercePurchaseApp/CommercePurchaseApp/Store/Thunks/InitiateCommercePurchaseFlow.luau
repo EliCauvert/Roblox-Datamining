@@ -10,39 +10,39 @@ local toastRoduxModule = require(commercePurchaseApp.Parent.ToastRodux)
 local toastType = toastRoduxModule.Enums.ToastType
 local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 
-local function convertErrorMessageToErrorCode(p0)
+local function convertErrorMessageToErrorCode(p1)
 	-- upvalues: fFlagAddCommerceErrorsModule (ref), errorCodeEnumModule (ref)
-	return if fFlagAddCommerceErrorsModule then if p0 == "DeviceTypeNotAllowed" or p0 == "PurchasePlatformNotSupported" then errorCodeEnumModule.DeviceNotSupported elseif p0 == "UniverseNotAllowed" or p0 == "ProductContentModerated" or p0 == "ProductNotFound" then errorCodeEnumModule.NotPurchasable elseif p0 == "UserNotAllowed" or p0 == "AccountCountryNotSupported" or p0 == "UserAgeNotAllowed" then errorCodeEnumModule.AccountNotSupported else errorCodeEnumModule.Generic elseif p0 == "NotPurchasable" then errorCodeEnumModule.NotPurchasable else errorCodeEnumModule.Generic
+	return if fFlagAddCommerceErrorsModule then if p1 == "DeviceTypeNotAllowed" or p1 == "PurchasePlatformNotSupported" then errorCodeEnumModule.DeviceNotSupported elseif p1 == "UniverseNotAllowed" or p1 == "ProductContentModerated" or p1 == "ProductNotFound" then errorCodeEnumModule.NotPurchasable elseif p1 == "UserNotAllowed" or p1 == "AccountCountryNotSupported" or p1 == "UserAgeNotAllowed" then errorCodeEnumModule.AccountNotSupported else errorCodeEnumModule.Generic elseif p1 == "NotPurchasable" then errorCodeEnumModule.NotPurchasable else errorCodeEnumModule.Generic
 end
 
 local function handleError(p1, p2, p3)
 	-- upvalues: convertErrorMessageToErrorCode (ref), errorCodeEnumModule (ref), setCurrentToastMessage (ref), toastType (ref), commercePurchaseEndedModule (ref), commercePurchaseFailedModule (ref)
-	local var11 = convertErrorMessageToErrorCode(p1)
+	local var1 = convertErrorMessageToErrorCode(p1)
 	
-	if var11 == errorCodeEnumModule.Generic then
+	if var1 == errorCodeEnumModule.Generic then
 		p2:dispatch(setCurrentToastMessage({ toastType = toastType.NetworkingError, toastTitle = p3 }))
 		p2:dispatch(commercePurchaseEndedModule())
 		
 		return
 	end
-	p2:dispatch(commercePurchaseFailedModule(var11))
+	p2:dispatch(commercePurchaseFailedModule(var1))
 end
 
-return function(p4, p5)
+return function(p1, p2)
 	-- upvalues: commercePurchaseStartedModule (ref), commerceService (ref), commercePurchaseCheckoutModule (ref), handleError (ref)
-	return function(p6)
-		-- upvalues: commercePurchaseStartedModule (copy), p4 (ref), commerceService (copy), commercePurchaseCheckoutModule (copy), handleError (copy), p5 (ref)
-		p6:dispatch(commercePurchaseStartedModule(p4))
+	return function(p3)
+		-- upvalues: commercePurchaseStartedModule (copy), p1 (ref), commerceService (copy), commercePurchaseCheckoutModule (copy), handleError (copy), p2 (ref)
+		p3:dispatch(commercePurchaseStartedModule(p1))
 		local ok, status = pcall(function()
-			-- upvalues: commerceService (copy), p4 (copy)
-			return commerceService:PrepareCommerceProductPurchase(p4)
+			-- upvalues: commerceService (copy), p1 (copy)
+			return commerceService:PrepareCommerceProductPurchase(p1)
 		end)
 		
 		if ok then
-			p6:dispatch(commercePurchaseCheckoutModule(status.CheckoutSessionId))
+			p3:dispatch(commercePurchaseCheckoutModule(status.CheckoutSessionId))
 			
 			return
 		end
-		handleError(status, p6, p5)
+		handleError(status, p3, p2)
 	end
 end

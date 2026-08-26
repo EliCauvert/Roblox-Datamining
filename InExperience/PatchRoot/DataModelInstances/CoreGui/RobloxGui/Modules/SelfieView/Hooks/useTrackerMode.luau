@@ -2,53 +2,53 @@
 local videoCaptureService = game:GetService("VideoCaptureService")
 local faceAnimatorService = game:GetService("FaceAnimatorService")
 local faceChatUtilsModule = require(script.Parent.Parent.Utils.FaceChatUtils)
-local var4 = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.SelfView.Analytics).new()
+local var1 = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.SelfView.Analytics).new()
 local trackerMode = Enum.TrackerMode
 local trackerMode_1 = faceChatUtilsModule.getTrackerMode()
-local var6 = if trackerMode_1 ~= trackerMode.Video then trackerMode_1 == trackerMode.AudioVideo else true
-local var7 = if trackerMode_1 ~= trackerMode.Audio then trackerMode_1 == trackerMode.AudioVideo else true
+local var2 = if trackerMode_1 ~= trackerMode.Video then trackerMode_1 == trackerMode.AudioVideo else true
+local var3 = if trackerMode_1 ~= trackerMode.Audio then trackerMode_1 == trackerMode.AudioVideo else true
 
 return function()
-	-- upvalues: reactModule (ref), trackerMode (ref), faceChatUtilsModule (ref), var6 (write), var4 (ref), var7 (write), videoCaptureService (ref), faceAnimatorService (ref)
-	local var8, var9 = reactModule.useState(trackerMode.None)
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: faceChatUtilsModule (copy), trackerMode (copy), var6 (copy), var4 (copy), var7 (copy), var9 (ref)
+	-- upvalues: reactModule (ref), trackerMode (ref), faceChatUtilsModule (ref), var2 (write), var1 (ref), var3 (write), videoCaptureService (ref), faceAnimatorService (ref)
+	local var4, var5 = reactModule.useState(trackerMode.None)
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: faceChatUtilsModule (copy), trackerMode (copy), var2 (copy), var1 (copy), var3 (copy), var5 (ref)
 		local trackerMode_1 = faceChatUtilsModule.getTrackerMode()
-		local var12 = if trackerMode_1 ~= trackerMode.Video then trackerMode_1 == trackerMode.AudioVideo else true
+		local var7 = if trackerMode_1 ~= trackerMode.Video then trackerMode_1 == trackerMode.AudioVideo else true
 		
-		if var12 ~= var6 then
-			var4:reportCamState(var12)
-			var6 = var12
+		if var7 ~= var2 then
+			var1:reportCamState(var7)
+			var2 = var7
 		end
-		local var13 = if trackerMode_1 ~= trackerMode.Audio then trackerMode_1 == trackerMode.AudioVideo else true
+		local var8 = if trackerMode_1 ~= trackerMode.Audio then trackerMode_1 == trackerMode.AudioVideo else true
 		
-		if var13 ~= var7 then
-			var4:reportMicState(var13)
-			var7 = var13
+		if var8 ~= var3 then
+			var1:reportMicState(var8)
+			var3 = var8
 		end
-		var9(trackerMode_1)
+		var5(trackerMode_1)
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: videoCaptureService (copy), var10 (ref), faceAnimatorService (copy)
+		-- upvalues: videoCaptureService (copy), var6 (ref), faceAnimatorService (copy)
 		if videoCaptureService then
-			var10()
-			local startedConnection = videoCaptureService.Started:Connect(var10)
-			local stoppedConnection = videoCaptureService.Stopped:Connect(var10)
-			local devicesChangedConnection = videoCaptureService.DevicesChanged:Connect(var10)
-			local var17 = faceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(var10)
-			local var18 = faceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(var10)
+			var6()
+			local startedConnection = videoCaptureService.Started:Connect(var6)
+			local stoppedConnection = videoCaptureService.Stopped:Connect(var6)
+			local devicesChangedConnection = videoCaptureService.DevicesChanged:Connect(var6)
+			local var7 = faceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(var6)
+			local var8 = faceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(var6)
 			
 			return function()
-				-- upvalues: startedConnection (ref), stoppedConnection (ref), devicesChangedConnection (ref), var17 (ref), var18 (ref)
+				-- upvalues: startedConnection (ref), stoppedConnection (ref), devicesChangedConnection (ref), var7 (ref), var8 (ref)
 				startedConnection:Disconnect()
 				stoppedConnection:Disconnect()
 				devicesChangedConnection:Disconnect()
-				var17:Disconnect()
-				var18:Disconnect()
+				var7:Disconnect()
+				var8:Disconnect()
 			end
 		end
 		return function() end
 	end, {})
 	
-	return var8
+	return var4
 end

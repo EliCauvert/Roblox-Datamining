@@ -5,12 +5,12 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local _ = require(robloxSubscriptionPurchaseApp.types)
 local _ = require(robloxSubscriptionPurchaseApp.Enums.ErrorReason)
 
-function logRobloxSubscriptionUpsellCounter(p0)
+function logRobloxSubscriptionUpsellCounter(p1)
 	-- upvalues: robloxSubscriptionStoreModule (ref), surfaceNameModule (ref), loggingProtocolModule (ref)
-	local var4 = robloxSubscriptionStoreModule.get()
-	local entryContext = var4.getEntryContext()
-	local errorReason = var4.getErrorReason()
-	loggingProtocolModule.default:logRobloxTelemetryCounter(p0, 1, {
+	local var1 = robloxSubscriptionStoreModule.get()
+	local entryContext = var1.getEntryContext()
+	local errorReason = var1.getErrorReason()
+	loggingProtocolModule.default:logRobloxTelemetryCounter(p1, 1, {
 		surface = if entryContext then entryContext.surfaceName else surfaceNameModule.Unspecified,
 		errorReason = errorReason and tostring(errorReason) or nil
 	})

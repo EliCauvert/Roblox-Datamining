@@ -3,8 +3,8 @@ local runService = game:GetService("RunService")
 local _ = script.Parent
 local t_1 = {
 	__ClassName = "TransparencyTweener",
-	__tostring = function(p0)
-		return p0.__ClassName .. ": " .. p0.MemoryLocation
+	__tostring = function(p1)
+		return p1.__ClassName .. ": " .. p0.MemoryLocation
 	end,
 	__metatable = "The metatable is locked"
 }
@@ -21,39 +21,39 @@ function t_1:__index(p1, _)
 	error(p1 .. " is not a valid member of " .. self.__ClassName)
 end
 
-function t_1:__newindex(p2, p3)
-	if p2 == "Transparency" then
-		self.InternalLastTweenPercentage = p3
-		self:SetPropertiesToTweenPercentage(p3)
+function t_1:__newindex(p1, p2)
+	if p1 == "Transparency" then
+		self.InternalLastTweenPercentage = p2
+		self:SetPropertiesToTweenPercentage(p2)
 		
 		return
 	end
-	error(p2 .. " is not a valid member of " .. self.__ClassName)
+	error(p1 .. " is not a valid member of " .. self.__ClassName)
 end
 
-function t_1.Dump(p4)
-	local var3 = tostring(p4)
+function t_1.Dump(p1)
+	local var1 = tostring(p1)
 	
-	for i, v in pairs(p4.TweenObjects) do
-		local var4 = " | "
+	for i, v in pairs(p1.TweenObjects) do
+		local var2 = " | "
 		
 		if type(i) == "table" then
-			var4 ..= "{{" .. i:Dump() .. "}}"
+			var2 ..= "{{" .. i:Dump() .. "}}"
 		elseif type(i) == "userdata" then
-			var4 ..= i.Name .. "/" .. i:GetFullName()
+			var2 ..= i.Name .. "/" .. i:GetFullName()
 		end
 		for i_1, v_1 in pairs(v) do
-			var4 ..= " [" .. i_1 .. "=" .. string.sub(tostring(v_1), 1, 4) .. "]"
+			var2 ..= " [" .. i_1 .. "=" .. string.sub(tostring(v_1), 1, 4) .. "]"
 		end
-		var3 ..= var4
+		var1 ..= var2
 	end
-	return var3
+	return var1
 end
 
-function t_1.OutputTest(p5)
+function t_1.OutputTest(p2)
 	print("Test Output for {={" .. p5:Dump() .. "}=}")
 	
-	for i, v in pairs(p5.TweenObjects) do
+	for i, v in pairs(p2.TweenObjects) do
 		print("TweenObject:", i)
 		
 		for i_1, v_1 in pairs(v) do
@@ -62,84 +62,84 @@ function t_1.OutputTest(p5)
 	end
 end
 
-function t_1.RegisterTweenObjectProperty(p6, p7, p8, p9)
-	p9 = p9 or p7[p8]
+function t_1.RegisterTweenObjectProperty(p3, p4, p5, p6)
+	p6 = p6 or p4[p5]
 	
-	if not p6.TweenObjects[p7] then
-		p6.TweenObjects[p7] = {}
+	if not p3.TweenObjects[p4] then
+		p3.TweenObjects[p4] = {}
 	end
-	p6.TweenObjects[p7][p8] = p9
-	p6:SetObjectPropertyToPercentValue(p7, p8, p9, p6.InternalLastTweenPercentage)
+	p3.TweenObjects[p4][p5] = p6
+	p3:SetObjectPropertyToPercentValue(p4, p5, p6, p3.InternalLastTweenPercentage)
 end
 
-function t_1.UnregisterTweenObject(p10, p11)
-	p10.TweenObjects[p11] = nil
+function t_1.UnregisterTweenObject(p3, p4)
+	p3.TweenObjects[p4] = nil
 end
 
-function t_1.SetObjectPropertyToPercentValue(_, p12, p13, p14, p15)
-	p12[p13] = p14 + (1 - p14) * p15
+function t_1.SetObjectPropertyToPercentValue(_, p3, p4, p5, p6)
+	p3[p4] = p5 + (1 - p5) * p6
 end
 
-function t_1.SetPropertiesToTweenPercentage(value, p16)
+function t_1.SetPropertiesToTweenPercentage(value, p3)
 	for i, v in pairs(value.TweenObjects) do
 		for i_1, v_1 in pairs(v) do
-			value:SetObjectPropertyToPercentValue(i, i_1, v_1, p16)
+			value:SetObjectPropertyToPercentValue(i, i_1, v_1, p3)
 		end
 	end
 end
 
-function t_1.Tween(p17, p18, p19, p20)
+function t_1.Tween(p4, p5, p6, p7)
 	-- upvalues: runService (ref)
-	if p17.Tweening then
-		p17.QueuedTween = { p18, p19, p20 }
-		p17.TweenIsQueued = true
-		p17:CancelTween()
+	if p4.Tweening then
+		p4.QueuedTween = { p5, p6, p7 }
+		p4.TweenIsQueued = true
+		p4:CancelTween()
 		
 		return
 	end
-	p17.Tweening = true
-	local var6 = p20
+	p4.Tweening = true
+	local var3 = p7
 	
-	if var6 then
-		p17:SetPropertiesToTweenPercentage(var6)
+	if var3 then
+		p4:SetPropertiesToTweenPercentage(var3)
 	else
-		var6 = p17.InternalLastTweenPercentage
+		var3 = p4.InternalLastTweenPercentage
 	end
 	local currentTime = tick()
-	local var8 = currentTime + p18
-	local var9 = p19 - var6
-	local var10 = 0
+	local var4 = currentTime + p5
+	local var5 = p6 - var3
+	local var6 = 0
 	spawn(function()
-		-- upvalues: var8 (ref), p17 (ref), var10 (write), currentTime (ref), p18 (ref), var6 (write), var9 (ref), runService (copy), p19 (ref)
+		-- upvalues: var4 (ref), p4 (ref), var6 (write), currentTime (ref), p5 (ref), var3 (write), var5 (ref), runService (copy), p6 (ref)
 		local currentTime_1 = tick()
-		while currentTime_1 < var8 and not p17.Canceled do
-			var10 = math.min(math.max((currentTime_1 - currentTime) / p18, 0), 1)
-			local var12 = var6 + var9 * var10
-			p17.InternalLastTweenPercentage = var12
-			p17:SetPropertiesToTweenPercentage(var12)
+		while currentTime_1 < var4 and not p4.Canceled do
+			var6 = math.min(math.max((currentTime_1 - currentTime) / p5, 0), 1)
+			local var7 = var3 + var5 * var6
+			p4.InternalLastTweenPercentage = var7
+			p4:SetPropertiesToTweenPercentage(var7)
 			runService.RenderStepped:wait()
 			currentTime_1 = tick()
 		end
-		if p17.Canceled then
-			p17.Canceled = false
+		if p4.Canceled then
+			p4.Canceled = false
 			
-			if p17.TweenIsQueued then
-				p17.TweenIsQueued = false
-				p17.Tweening = false
-				p17:Tween(unpack(p17.QueuedTween))
+			if p4.TweenIsQueued then
+				p4.TweenIsQueued = false
+				p4.Tweening = false
+				p4:Tween(unpack(p4.QueuedTween))
 				
 				return
 			end
 		else
-			p17.InternalLastTweenPercentage = p19
-			p17:SetPropertiesToTweenPercentage(p19)
+			p4.InternalLastTweenPercentage = p6
+			p4:SetPropertiesToTweenPercentage(p6)
 		end
-		p17.Tweening = false
+		p4.Tweening = false
 	end)
 end
 
-function t_1.CancelTween(p21)
-	p21.Canceled = true
+function t_1.CancelTween(p8)
+	p8.Canceled = true
 end
 
 function t.new()

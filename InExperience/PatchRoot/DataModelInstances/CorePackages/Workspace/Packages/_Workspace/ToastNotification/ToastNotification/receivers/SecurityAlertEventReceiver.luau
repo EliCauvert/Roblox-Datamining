@@ -14,11 +14,11 @@ return function()
 	-- upvalues: reactModule (ref), lifecycleEventsModule (ref), notificationTypeEnum (ref), getFFlagGenerateLinkWithChannel (ref), urlBuilder (ref), localization (ref), localizationService (ref), webViewServiceWrapperModule (ref), default (ref)
 	reactModule.useEffect(function()
 		-- upvalues: lifecycleEventsModule (copy), notificationTypeEnum (copy), getFFlagGenerateLinkWithChannel (copy), urlBuilder (copy), localization (copy), localizationService (copy), webViewServiceWrapperModule (copy), default (copy)
-		local userAction = lifecycleEventsModule:RegisterCallback(lifecycleEventsModule.ToastEvents.UserAction, notificationTypeEnum.SecurityAlert, function(p0)
+		local userAction = lifecycleEventsModule:RegisterCallback(lifecycleEventsModule.ToastEvents.UserAction, notificationTypeEnum.SecurityAlert, function(p1)
 			-- upvalues: getFFlagGenerateLinkWithChannel (copy), urlBuilder (copy), localization (copy), localizationService (copy), webViewServiceWrapperModule (copy), default (copy)
-			if p0 and p0.notificationData and (p0.notificationData.notificationType and p0.notificationData.clientEventsPayload) and (p0.notificationData.clientEventsPayload.payload and p0.notificationData.clientEventsPayload.username) then
-				local payload = p0.notificationData.clientEventsPayload.payload
-				local username = p0.notificationData.clientEventsPayload.username
+			if p1 and p1.notificationData and (p1.notificationData.notificationType and p1.notificationData.clientEventsPayload) and (p1.notificationData.clientEventsPayload.payload and p1.notificationData.clientEventsPayload.username) then
+				local payload = p1.notificationData.clientEventsPayload.payload
+				local username = p1.notificationData.clientEventsPayload.username
 				webViewServiceWrapperModule.new({
 					title = localization.new(localizationService.RobloxLocaleId):Format("Feature.SecurityFeedback.Header.NewLogin"),
 					url = if getFFlagGenerateLinkWithChannel() then urlBuilder.static.securityAlertWithChannel({
@@ -27,7 +27,7 @@ return function()
 						username = username
 					}) else urlBuilder.static.securityAlert({ payload = payload, username = username })
 				}):open()
-				default:dismissNotification(p0.notificationData.id)
+				default:dismissNotification(p1.notificationData.id)
 				
 				return
 			end

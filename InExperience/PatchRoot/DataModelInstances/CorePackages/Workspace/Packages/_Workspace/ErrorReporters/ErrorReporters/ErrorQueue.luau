@@ -4,25 +4,25 @@ local cryoModule = require(parent.Cryo)
 local tModule = require(parent.t)
 local t = {}
 t.__index = t
-local var4 = tModule.tuple(tModule.callback, tModule.optional(tModule.strictInterface({
+local var1 = tModule.tuple(tModule.callback, tModule.optional(tModule.strictInterface({
 	queueTimeLimit = tModule.optional(tModule.numberPositive),
 	queueErrorLimit = tModule.optional(tModule.numberPositive),
 	queueKeyLimit = tModule.optional(tModule.numberPositive)
 })))
 
-function t.new(p0, p1)
-	-- upvalues: var4 (ref), t (ref)
-	assert(var4(p0, p1))
-	p1 = p1 or {}
+function t.new(p1, p2)
+	-- upvalues: var1 (ref), t (ref)
+	assert(var1(p1, p2))
+	p2 = p2 or {}
 	local t_1 = {
 		_totalErrorCount = 0,
 		_totalKeyCount = 0,
 		_runningTime = 0,
 		_renderSteppedConnection = nil,
-		_reportMethod = p0,
-		_queueTimeLimit = p1.queueTimeLimit or 30,
-		_queueErrorLimit = p1.queueErrorLimit or 30,
-		_queueKeyLimit = p1.queueKeyLimit or 10,
+		_reportMethod = p1,
+		_queueTimeLimit = p2.queueTimeLimit or 30,
+		_queueErrorLimit = p2.queueErrorLimit or 30,
+		_queueKeyLimit = p2.queueKeyLimit or 10,
 		_errors = {}
 	}
 	setmetatable(t_1, t)
@@ -30,16 +30,16 @@ function t.new(p0, p1)
 	return t_1
 end
 
-function t:hasError(p2)
-	return type(p2) == "string" and p2 ~= "" and self._errors[p2] ~= nil
+function t:hasError(p1)
+	return type(p1) == "string" and p1 ~= "" and self._errors[p1] ~= nil
 end
 
-function t:addError(p3, p4)
-	if type(p3) ~= "string" or p3 == "" then return end
-	if self._errors[p3] then
-		self._errors[p3].count += 1
+function t:addError(p1, p2)
+	if type(p1) ~= "string" or p1 == "" then return end
+	if self._errors[p1] then
+		self._errors[p1].count += 1
 	else
-		self._errors[p3] = { count = 1, data = p4 }
+		self._errors[p1] = { count = 1, data = p2 }
 		self._totalKeyCount += 1
 	end
 	self._totalErrorCount += 1
@@ -55,19 +55,19 @@ end
 
 function t:reportAllErrors()
 	-- upvalues: cryoModule (ref)
-	local var7 = cryoModule.Dictionary.join(self._errors, {})
+	local var2 = cryoModule.Dictionary.join(self._errors, {})
 	self._errors = {}
 	self._totalErrorCount = 0
 	self._totalKeyCount = 0
 	self._runningTime = 0
 	
-	for i, v in pairs(var7) do
+	for i, v in pairs(var2) do
 		self._reportMethod(i, v.data, v.count)
 	end
 end
 
-function t:_onRenderStep(p5)
-	self._runningTime += p5
+function t:_onRenderStep(p1)
+	self._runningTime += p1
 	
 	if self:isReadyToReport() then
 		self:reportAllErrors()
@@ -78,9 +78,9 @@ function t:startTimer()
 	-- upvalues: runService (ref)
 	if self._renderSteppedConnection == nil then
 		self._runningTime = 0
-		self._renderSteppedConnection = runService.renderStepped:Connect(function(p6)
+		self._renderSteppedConnection = runService.renderStepped:Connect(function(p1)
 			-- upvalues: self (ref)
-			self:_onRenderStep(p6)
+			self:_onRenderStep(p1)
 		end)
 	end
 end

@@ -4,27 +4,27 @@ local diagEventListModule = require(script.Parent.DiagEventList)
 local eventStreamEventListModule = require(script.Parent.EventStreamEventList)
 local _ = require(script.Parent.Parent.FireEvent.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fireEventStreamModule (ref), eventStreamEventListModule (ref), fireDiagCounterModule (ref), diagEventListModule (ref)
-	local var4 = fireEventStreamModule({
-		eventStreamImpl = p0.analytics.EventStream,
+	local var1 = fireEventStreamModule({
+		eventStreamImpl = p1.analytics.EventStream,
 		eventList = eventStreamEventListModule,
-		loggerImpl = p0.loggerImpl,
-		infoForAllEvents = p0.infoForAllEvents
+		loggerImpl = p1.loggerImpl,
+		infoForAllEvents = p1.infoForAllEvents
 	})
-	local var5 = fireDiagCounterModule({
-		diagImpl = p0.analytics.Diag,
+	local var2 = fireDiagCounterModule({
+		diagImpl = p1.analytics.Diag,
 		eventList = diagEventListModule,
-		loggerImpl = p0.loggerImpl
+		loggerImpl = p1.loggerImpl
 	})
 	
-	return function(p1, p2)
-		-- upvalues: eventStreamEventListModule (copy), var4 (ref), diagEventListModule (copy), var5 (ref)
-		if eventStreamEventListModule[p1] then
-			var4(p1, p2)
+	return function(p2, p3)
+		-- upvalues: eventStreamEventListModule (copy), var1 (ref), diagEventListModule (copy), var2 (ref)
+		if eventStreamEventListModule[p2] then
+			var1(p2, p3)
 		end
-		if diagEventListModule[p1] then
-			var5(p1)
+		if diagEventListModule[p2] then
+			var2(p2)
 		end
 		return DateTime.now()
 	end

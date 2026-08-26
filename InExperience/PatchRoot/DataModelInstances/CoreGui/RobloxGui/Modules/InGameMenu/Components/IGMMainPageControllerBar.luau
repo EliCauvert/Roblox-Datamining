@@ -10,34 +10,34 @@ IGMMainPageControllerBar.validateProps = t.strictInterface({
 	isMainPageMoreMenuOpen = t.boolean
 })
 
-function IGMMainPageControllerBar.render(p0)
+function IGMMainPageControllerBar.render(p1)
 	-- upvalues: withLocalizationModule (ref), VRService (ref), roact (ref), IGMControllerBar2Module (ref)
-	return if p0.props.canCaptureFocus then withLocalizationModule({
+	return if p1.props.canCaptureFocus then withLocalizationModule({
 		openMoreMenu = "CoreScripts.InGameMenu.ControllerBar.OpenMoreMenu",
 		closeMoreMenu = "CoreScripts.InGameMenu.ControllerBar.CloseMoreMenu",
 		back = "CoreScripts.InGameMenu.ControllerBar.Back",
 		respawnCharacter = "CoreScripts.InGameMenu.ControllerBar.RespawnCharacter",
 		leave = "CoreScripts.InGameMenu.ControllerBar.Leave"
-	})(function(p1)
-		-- upvalues: VRService (copy), p0 (ref), roact (copy), IGMControllerBar2Module (copy)
+	})(function(p2)
+		-- upvalues: VRService (copy), p1 (ref), roact (copy), IGMControllerBar2Module (copy)
 		return roact.createElement(IGMControllerBar2Module, {
-			leftHint = { text = p1.back, keyCode = Enum.KeyCode.ButtonB },
+			leftHint = { text = p2.back, keyCode = Enum.KeyCode.ButtonB },
 			rightHints = if not VRService.VREnabled then {
 				{
-					text = if p0.props.isMainPageMoreMenuOpen then p1.closeMoreMenu else p1.openMoreMenu,
+					text = if p1.props.isMainPageMoreMenuOpen then p2.closeMoreMenu else p2.openMoreMenu,
 					keyCode = Enum.KeyCode.ButtonL3
 				},
 				{
-					text = p1.respawnCharacter,
+					text = p2.respawnCharacter,
 					keyCode = Enum.KeyCode.ButtonY
 				},
-				{ text = p1.leave, keyCode = Enum.KeyCode.ButtonX }
+				{ text = p2.leave, keyCode = Enum.KeyCode.ButtonX }
 			} else {
 				{
-					text = p1.respawnCharacter,
+					text = p2.respawnCharacter,
 					keyCode = Enum.KeyCode.ButtonY
 				},
-				{ text = p1.leave, keyCode = Enum.KeyCode.ButtonX }
+				{ text = p2.leave, keyCode = Enum.KeyCode.ButtonX }
 			}
 		})
 	end) else nil

@@ -6,38 +6,38 @@ local constantsModule = require(moments.Constants)
 local useChromeRatioModule = require(moments.Hooks.useChromeRatio)
 local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useChromeRatioModule (ref), reactModule (ref), constantsModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), view (ref)
-	local var5 = useChromeRatioModule()
-	local var6, var7 = reactModule.useBinding(0)
+	local var1 = useChromeRatioModule()
+	local var2, var3 = reactModule.useBinding(0)
 	local t = {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		Position = reactModule.joinBindings({ ratio = var5, height = var6 }):map(function(p1)
-			return UDim2.new(0, 0, 0, (p1.ratio - 1) * p1.height)
+		Position = reactModule.joinBindings({ ratio = var1, height = var2 }):map(function(p2)
+			return UDim2.new(0, 0, 0, (p2.ratio - 1) * p2.height)
 		end),
-		Interactable = var5:map(function(p2)
+		Interactable = var1:map(function(p2)
 			return p2 > 0.01
 		end),
 		ZIndex = constantsModule.DisplayOrder.FeedTopBar,
-		[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p3)
-			-- upvalues: var7 (ref)
-			var7(p3.AbsoluteSize.Y)
+		[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
+			-- upvalues: var3 (ref)
+			var3(p2.AbsoluteSize.Y)
 		end, {}),
 		[reactModule.Tag] = "data-testid=--moments-immersive-header-chrome"
 	}
-	local var9 = "Frame"
+	local var4 = "Frame"
 	
 	if not fFlagMomentsUseCompositionLibraryModule then
-		var9 = "CanvasGroup"
-		t.GroupTransparency = var5:map(function(p4)
-			return 1 - p4
+		var4 = "CanvasGroup"
+		t.GroupTransparency = var1:map(function(p2)
+			return 1 - p2
 		end)
 	end
-	return reactModule.createElement(var9, t, {
-		Header = reactModule.createElement(view, { tag = "size-full-0 auto-y" }, p0.children)
+	return reactModule.createElement(var4, t, {
+		Header = reactModule.createElement(view, { tag = "size-full-0 auto-y" }, p1.children)
 	})
 end

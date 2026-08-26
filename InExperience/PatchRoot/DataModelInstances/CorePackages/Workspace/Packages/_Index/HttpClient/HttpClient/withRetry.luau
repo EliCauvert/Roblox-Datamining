@@ -7,15 +7,15 @@ local _ = {
 }
 local t = { [408] = true, [503] = true, [504] = true }
 
-local function _(p0, p1, p2)
-	return (p1 + math.random() * (p2 - p1)) * math.pow(2, p0 - 1) / 1000
+local function _(p1, p2, p3)
+	return (p2 + math.random() * (p3 - p2)) * math.pow(2, p1 - 1) / 1000
 end
 
-local _ = function(p3, p4)
-	if p4[p3.statusCode] then
+local _ = function(p1, p2)
+	if p2[p1.statusCode] then
 		return true, nil
-	elseif p3.statusCode == 429 and p3.headers ~= nil then
-		local var1 = tonumber(p3.headers["retry-after"])
+	elseif p1.statusCode == 429 and p1.headers ~= nil then
+		local var1 = tonumber(p1.headers["retry-after"])
 		
 		if var1 == nil or var1 > 16 then
 			return false, nil
@@ -25,13 +25,13 @@ local _ = function(p3, p4)
 	end
 end
 
-return function(p5, p6)
+return function(p1, p2)
 	-- upvalues: t (ref), mutedError (ref)
-	p6 = p6 or {}
-	local maxRetryCount = p6.maxRetryCount or 4
-	local retryJitterMinMs = p6.retryJitterMinMs or 0
-	local retryJitterMaxMs = p6.retryJitterMaxMs or 4000
-	local retryOnStatuses = p6.retryOnStatuses or t
+	p2 = p2 or {}
+	local maxRetryCount = p2.maxRetryCount or 4
+	local retryJitterMinMs = p2.retryJitterMinMs or 0
+	local retryJitterMaxMs = p2.retryJitterMaxMs or 4000
+	local retryOnStatuses = p2.retryOnStatuses or t
 	
 	if maxRetryCount < 0 then
 		mutedError(`withRetry: maxRetryCount must be >= 0, got {maxRetryCount}; falling back to default`)
@@ -43,94 +43,94 @@ return function(p5, p6)
 		retryJitterMaxMs = 4000
 	end
 	return {
-		request = function(p7, p8)
-			-- upvalues: p5 (ref), retryOnStatuses (ref), maxRetryCount (write), retryJitterMinMs (write), retryJitterMaxMs (write)
-			local var7 = 0
-			local var8 = false
-			local var9 = nil
-			local var10 = nil
+		request = function(p3, p4)
+			-- upvalues: p1 (ref), retryOnStatuses (ref), maxRetryCount (write), retryJitterMinMs (write), retryJitterMaxMs (write)
+			local var1 = 0
+			local var2 = false
+			local var3 = nil
+			local var4 = nil
 			local _ = nil
 			
-			local var11 = function()
-				-- upvalues: var8 (write), p7 (ref), var7 (write), var9 (write), p5 (copy), retryOnStatuses (copy), maxRetryCount (copy), p8 (ref), var10 (write), retryJitterMinMs (copy), retryJitterMaxMs (copy), var11 (write)
-				if var8 then return end
-				local var12 = p7
+			local var5 = function()
+				-- upvalues: var2 (write), p3 (ref), var1 (write), var3 (write), p1 (copy), retryOnStatuses (copy), maxRetryCount (copy), p4 (ref), var4 (write), retryJitterMinMs (copy), retryJitterMaxMs (copy), var5 (write)
+				if var2 then return end
+				local var6 = p3
 				
-				if var7 > 0 then
-					local var13 = if p7.headers then table.clone(p7.headers) else {}
-					var13["X-Retry-Attempt"] = tostring(var7)
-					var12 = {
-						url = p7.url,
-						method = p7.method,
-						body = p7.body,
-						headers = var13
+				if var1 > 0 then
+					local var7 = if p3.headers then table.clone(p3.headers) else {}
+					var7["X-Retry-Attempt"] = tostring(var1)
+					var6 = {
+						url = p3.url,
+						method = p3.method,
+						body = p3.body,
+						headers = var7
 					}
 				end
-				var9 = p5.request(var12, function(p9, p10)
-					-- upvalues: var9 (copy), var8 (copy), retryOnStatuses (copy), var7 (copy), maxRetryCount (copy), p8 (copy), var10 (copy), retryJitterMinMs (copy), retryJitterMaxMs (copy), var11 (copy)
-					var9 = nil
+				var3 = p1.request(var6, function(p5, p6)
+					-- upvalues: var3 (copy), var2 (copy), retryOnStatuses (copy), var1 (copy), maxRetryCount (copy), p4 (copy), var4 (copy), retryJitterMinMs (copy), retryJitterMaxMs (copy), var5 (copy)
+					var3 = nil
 					
-					if var8 then return end
-					local delay, var16
-					local var14 = nil
+					if var2 then return end
+					local delay, var8
+					local var9 = nil
 					
-					if p9 then
-						local var15
-						if retryOnStatuses[p10.statusCode] then
+					if p5 then
+						local var10
+						if retryOnStatuses[p6.statusCode] then
 							delay = true
-							var15 = nil
-						elseif p10.statusCode == 429 and p10.headers ~= nil then
-							var16 = tonumber(p10.headers["retry-after"])
+							var10 = nil
+						elseif p6.statusCode == 429 and p6.headers ~= nil then
+							var8 = tonumber(p6.headers["retry-after"])
 							
-							if var16 == nil or var16 > 16 then
+							if var8 == nil or var8 > 16 then
 								delay = false
-								var15 = nil
+								var10 = nil
 							else
 								delay = true
-								var15 = var16
+								var10 = var8
 							end
 						end
-						if not delay or var7 >= maxRetryCount then
-							p8(true, p10)
+						if not delay or var1 >= maxRetryCount then
+							p4(true, p6)
 							
 							return
 						end
-						var14 = var15
-					elseif maxRetryCount <= var7 then
-						p8(false, p10)
+						var9 = var10
+					elseif maxRetryCount <= var1 then
+						p4(false, p6)
 						
 						return
 					end
-					var7 += 1
+					var1 += 1
 					delay = task.delay
-					local var17 = var14
+					local var11 = var9
 					
-					if not var17 then
-						var16 = retryJitterMinMs
-						var17 = (var16 + math.random() * (retryJitterMaxMs - var16)) * math.pow(2, var7 - 1) / 1000
+					if not var11 then
+						var8 = retryJitterMinMs
+						var11 = (var8 + math.random() * (retryJitterMaxMs - var8)) * math.pow(2, var1 - 1) / 1000
 					end
-					var10 = delay(var17, function()
-						-- upvalues: var10 (copy), var11 (copy)
-						var10 = nil
-						var11()
+					var4 = delay(var11, function()
+						-- upvalues: var4 (copy), var5 (copy)
+						var4 = nil
+						var5()
 					end)
 				end)
 			end
 			
-			var11()
+			var5()
 			
 			return function()
-				-- upvalues: var8 (write), var10 (write), var9 (write)
-				if var8 then return end
-				var8 = true
+				-- upvalues: var2 (write), var4 (write), var3 (write)
+				if var2 then return end
+				var2 = true
 				
-				if var10 ~= nil then
-					task.cancel(var10)
-					var10 = nil
+				if var4 ~= nil then
+					task.cancel(var4)
+					var4 = nil
 				end
-				if var9 ~= nil then
-					var9()
-					var9 = nil
+				if var3 ~= nil then
+					var3()
+					var3 = nil
 				end
 			end
 		end

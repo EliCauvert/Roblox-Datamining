@@ -8,13 +8,13 @@ local text = constantsModule.Color.Text
 local unselectedGray = constantsModule.Color.UnselectedGray
 local inactiveBox = constantsModule.Color.InactiveBox
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), roactModule (ref), mainWindowHeader_1 (ref), text (ref), mainWindowHeader (ref), unselectedGray (ref), inactiveBox (ref)
-	local text_1 = p0.text
-	local size = p0.size
-	local pos = p0.pos
-	local _ = p0.onClicked
-	local var4 = if typeof(p0.enabled) == "boolean" then p0.enabled else true
+	local text_1 = p1.text
+	local size = p1.size
+	local pos = p1.pos
+	local _ = p1.onClicked
+	local var1 = if typeof(p1.enabled) == "boolean" then p1.enabled else true
 	
 	return roactModule.createElement("TextButton", {
 		Text = text_1,
@@ -23,13 +23,13 @@ return function(p0)
 		Font = mainWindowHeader,
 		Size = size,
 		Position = pos,
-		AutoButtonColor = var4,
-		BackgroundColor3 = if var4 then unselectedGray else inactiveBox,
-		Active = var4,
+		AutoButtonColor = var1,
+		BackgroundColor3 = if var1 then unselectedGray else inactiveBox,
+		Active = var1,
 		BackgroundTransparency = 0,
 		[roactModule.Event.Activated] = reactModule.useCallback(function()
-			-- upvalues: p0 (ref)
-			p0.onClicked(p0.text)
-		end, { p0.onClicked, p0.text })
+			-- upvalues: p1 (ref)
+			p1.onClicked(p1.text)
+		end, { p1.onClicked, p1.text })
 	})
 end

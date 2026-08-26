@@ -14,35 +14,35 @@ return {
 	getIsVisible = function(_)
 		return true
 	end,
-	getMenuItems = function(p0)
+	getMenuItems = function(p1)
 		-- upvalues: cryoModule (ref), userLibModule (ref), verifiedBadgesModule (ref), inExperienceCapabilities (ref)
-		return cryoModule.List.map(p0.playerObjects, function(p1)
+		return cryoModule.List.map(p1.playerObjects, function(p2)
 			-- upvalues: userLibModule (copy), verifiedBadgesModule (copy), inExperienceCapabilities (copy)
 			return {
-				label = p1.DisplayName .. (if userLibModule.Utils.isPlayerVerified(p1) then verifiedBadgesModule.emoji.verified else ""),
+				label = p2.DisplayName .. (if userLibModule.Utils.isPlayerVerified(p2) then verifiedBadgesModule.emoji.verified else ""),
 				subLabel = if inExperienceCapabilities.canDisplayPeoplesUsernames then "[@" .. p1.Name .. "]" else nil,
-				identifier = p1.Name
+				identifier = p2.Name
 			}
 		end)
 	end,
-	getSelectedValue = function(p2)
+	getSelectedValue = function(p1)
 		-- upvalues: inExperienceCapabilities (ref)
-		local allegedAbuser = p2.allegedAbuser
+		local allegedAbuser = p1.allegedAbuser
 		
 		return if allegedAbuser then allegedAbuser.DisplayName .. (if inExperienceCapabilities.canDisplayPeoplesUsernames then "[@" .. allegedAbuser.Name .. "]" else "") else nil
 	end,
-	onUpdateSelectedOption = function(p3, p4, p5, p6)
+	onUpdateSelectedOption = function(p1, p2, p3, p4)
 		-- upvalues: constantsModule (ref)
-		if p3.identifier then
-			local identifier = p3.identifier
+		if p1.identifier then
+			local identifier = p1.identifier
 			
-			for i, v in p4.playerObjects do
+			for i, v in p2.playerObjects do
 				if identifier == v.Name then
 					local userId = v.UserId
-					p6.analyticsDispatch({
+					p4.analyticsDispatch({
 						type = constantsModule.AnalyticsActions.IncrementPersonChanged
 					})
-					p5({
+					p3({
 						type = constantsModule.PlayerMenuActions.UpdateAbuser,
 						abuseId = userId,
 						abuser = v

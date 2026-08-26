@@ -17,195 +17,195 @@ local _ = require(parent.type.definition)
 local t = {}
 local t_1 = { __index = t }
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		_fragments = nil,
-		_ast = p0,
+		_ast = p1,
 		_fragmentSpreads = {},
 		_recursivelyReferencedFragments = {},
-		_onError = p1
+		_onError = p2
 	}, t_1)
 end
 
-function t.reportError(p2, p3)
-	p2._onError(p3)
+function t.reportError(p1, p2)
+	p1._onError(p2)
 end
 
-function t.getDocument(p4)
-	return p4._ast
+function t.getDocument(p1)
+	return p1._ast
 end
 
-function t.getFragment(p5, p6)
+function t.getFragment(p1, p2)
 	-- upvalues: kind (ref)
 	local fragments
 	local _ = nil
 	
-	if p5._fragments then
-		fragments = p5._fragments
+	if p1._fragments then
+		fragments = p1._fragments
 	else
 		fragments = {}
 		
-		for i, v in ipairs(p5:getDocument().definitions) do
+		for i, v in ipairs(p1:getDocument().definitions) do
 			if v.kind == kind.FRAGMENT_DEFINITION then
 				fragments[v.name.value] = v
 			end
 		end
-		p5._fragments = fragments
+		p1._fragments = fragments
 	end
-	return fragments[p6]
+	return fragments[p2]
 end
 
-function t.getFragmentSpreads(p7, p8)
+function t.getFragmentSpreads(p3, p4)
 	-- upvalues: kind (ref)
-	local var8 = p7._fragmentSpreads[p8] or {}
+	local var1 = p3._fragmentSpreads[p4] or {}
 	
-	if not p7._fragmentSpreads[p8] then
-		local list = { p8 }
+	if not p3._fragmentSpreads[p4] then
+		local list = { p4 }
 		while #list ~= 0 do
 			for i, v in ipairs(table.remove(list).selections) do
 				if v.kind == kind.FRAGMENT_SPREAD then
-					table.insert(var8, v)
+					table.insert(var1, v)
 				elseif v.selectionSet then
 					table.insert(list, v.selectionSet)
 				end
 			end
 		end
-		p7._fragmentSpreads[p8] = var8
+		p3._fragmentSpreads[p4] = var1
 	end
-	return var8
+	return var1
 end
 
-function t.getRecursivelyReferencedFragments(p9, p10)
-	local var10 = p9._recursivelyReferencedFragments[p10] or {}
+function t.getRecursivelyReferencedFragments(p5, p6)
+	local var2 = p5._recursivelyReferencedFragments[p6] or {}
 	
-	if not p9._recursivelyReferencedFragments[p10] then
+	if not p5._recursivelyReferencedFragments[p6] then
 		local t = {}
-		local list = { p10.selectionSet }
+		local list = { p6.selectionSet }
 		while #list ~= 0 do
-			for i, v in ipairs(p9:getFragmentSpreads(table.remove(list))) do
+			for i, v in ipairs(p5:getFragmentSpreads(table.remove(list))) do
 				local value = v.name.value
 				
 				if t[value] ~= true then
 					t[value] = true
-					local var13 = p9:getFragment(value)
+					local var3 = p5:getFragment(value)
 					
-					if var13 then
-						table.insert(var10, var13)
-						table.insert(list, var13.selectionSet)
+					if var3 then
+						table.insert(var2, var3)
+						table.insert(list, var3.selectionSet)
 					end
 				end
 			end
 		end
-		p9._recursivelyReferencedFragments[p10] = var10
+		p5._recursivelyReferencedFragments[p6] = var2
 	end
-	return var10
+	return var2
 end
 
 local tbl = setmetatable({}, { __index = t })
 local t_2 = { __index = tbl }
 
-function tbl.new(p11, p12, p13)
+function tbl.new(p7, p8, p9)
 	-- upvalues: t (ref), t_2 (ref)
-	local var14 = t.new(p11, p13)
-	var14._schema = p12
+	local var4 = t.new(p7, p9)
+	var4._schema = p8
 	
-	return setmetatable(var14, t_2)
+	return setmetatable(var4, t_2)
 end
 
-function tbl.getSchema(p14)
-	return p14._schema
+function tbl.getSchema(p7)
+	return p7._schema
 end
 
 local tbl_1 = setmetatable({}, { __index = t })
 local t_3 = { __index = tbl_1 }
 
-function tbl_1.new(p15, p16, p17, p18)
+function tbl_1.new(p7, p8, p9, p10)
 	-- upvalues: t (ref), map (ref), t_3 (ref)
-	local var15 = t.new(p16, p18)
-	var15._schema = p15
-	var15._typeInfo = p17
-	var15._variableUsages = map.new()
-	var15._recursiveVariableUsages = map.new()
+	local var4 = t.new(p8, p10)
+	var4._schema = p7
+	var4._typeInfo = p9
+	var4._variableUsages = map.new()
+	var4._recursiveVariableUsages = map.new()
 	
-	return setmetatable(var15, t_3)
+	return setmetatable(var4, t_3)
 end
 
-function tbl_1.getSchema(p19)
-	return p19._schema
+function tbl_1.getSchema(p7)
+	return p7._schema
 end
 
-function tbl_1.getVariableUsages(p20, p21)
+function tbl_1.getVariableUsages(p7, p8)
 	-- upvalues: typeInfo (ref), visit (ref), visitWithTypeInfo (ref)
-	local var16 = p20._variableUsages[p21]
+	local var4 = p7._variableUsages[p8]
 	
-	if not var16 then
+	if not var4 then
 		local t = {}
-		local var18 = typeInfo.new(p20._schema)
-		visit(p21, visitWithTypeInfo(var18, {
+		local var5 = typeInfo.new(p7._schema)
+		visit(p8, visitWithTypeInfo(var5, {
 			VariableDefinition = function()
 				return false
 			end,
-			Variable = function(_, p22)
-				-- upvalues: t (ref), var18 (ref)
+			Variable = function(_, p9)
+				-- upvalues: t (ref), var5 (ref)
 				table.insert(t, {
-					node = p22,
-					type = var18:getInputType(),
-					defaultValue = var18:getDefaultValue()
+					node = p9,
+					type = var5:getInputType(),
+					defaultValue = var5:getDefaultValue()
 				})
 			end
 		}))
-		var16 = t
-		p20._variableUsages[p21] = var16
+		var4 = t
+		p7._variableUsages[p8] = var4
 	end
-	return var16
+	return var4
 end
 
-function tbl_1.getRecursiveVariableUsages(p23, p24)
+function tbl_1.getRecursiveVariableUsages(p7, p8)
 	-- upvalues: array (ref)
-	local var19 = p23._recursiveVariableUsages[p24]
+	local var4 = p7._recursiveVariableUsages[p8]
 	
-	if not var19 then
-		var19 = p23:getVariableUsages(p24)
+	if not var4 then
+		var4 = p7:getVariableUsages(p8)
 		
-		for i, v in ipairs(p23:getRecursivelyReferencedFragments(p24)) do
-			var19 = array.concat(var19, p23:getVariableUsages(v))
+		for i, v in ipairs(p7:getRecursivelyReferencedFragments(p8)) do
+			var4 = array.concat(var4, p7:getVariableUsages(v))
 		end
-		p23._recursiveVariableUsages[p24] = var19
+		p7._recursiveVariableUsages[p8] = var4
 	end
-	return var19
+	return var4
 end
 
-function tbl_1.getType(p25)
-	return p25._typeInfo:getType()
+function tbl_1.getType(p9)
+	return p9._typeInfo:getType()
 end
 
-function tbl_1.getParentType(p26)
-	return p26._typeInfo:getParentType()
+function tbl_1.getParentType(p9)
+	return p9._typeInfo:getParentType()
 end
 
-function tbl_1.getInputType(p27)
-	return p27._typeInfo:getInputType()
+function tbl_1.getInputType(p9)
+	return p9._typeInfo:getInputType()
 end
 
-function tbl_1.getParentInputType(p28)
-	return p28._typeInfo:getParentInputType()
+function tbl_1.getParentInputType(p9)
+	return p9._typeInfo:getParentInputType()
 end
 
-function tbl_1.getFieldDef(p29)
-	return p29._typeInfo:getFieldDef()
+function tbl_1.getFieldDef(p9)
+	return p9._typeInfo:getFieldDef()
 end
 
-function tbl_1.getDirective(p30)
-	return p30._typeInfo:getDirective()
+function tbl_1.getDirective(p9)
+	return p9._typeInfo:getDirective()
 end
 
-function tbl_1.getArgument(p31)
-	return p31._typeInfo:getArgument()
+function tbl_1.getArgument(p9)
+	return p9._typeInfo:getArgument()
 end
 
-function tbl_1.getEnumValue(p32)
-	return p32._typeInfo:getEnumValue()
+function tbl_1.getEnumValue(p9)
+	return p9._typeInfo:getEnumValue()
 end
 
 return {

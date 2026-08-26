@@ -3,7 +3,7 @@ local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
 local parent = socialTabsPage.Parent
 local dataHydrationModule = require(parent.DataHydration)
 local profileCTAStore = dataHydrationModule.Profile.ProfileCTAStore
-local var3 = dataHydrationModule.Friends.FriendsStore.get()
+local var1 = dataHydrationModule.Friends.FriendsStore.get()
 local friendingErrorCodesModule = require(socialTabsPage.Enums.FriendingErrorCodes)
 local images = require(parent.UIBlox).App.ImageSet.Images
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
@@ -17,9 +17,9 @@ local _ = {
 	TOO_MANY_REQUESTS = 429
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: profileCTAStore (ref)
-	profileCTAStore.get().getCTA(p0, true)
+	profileCTAStore.get().getCTA(p1, true)
 end
 
 local function getErrorToastMessage(p1, p2, p3)
@@ -40,57 +40,57 @@ local function getErrorToastMessage(p1, p2, p3)
 	})[p3] else nil
 end
 
-local function showErrorToast(p4, p5, p6)
+local function showErrorToast(p1, p2, p3)
 	-- upvalues: httpService (ref), getErrorToastMessage (ref), setCurrentToastMessage (ref)
-	local defaultFriendingError = p5.defaultFriendingError
+	local defaultFriendingError = p2.defaultFriendingError
 	
-	if p6 ~= nil then
-		local statusCode = p6.StatusCode
+	if p3 ~= nil then
+		local statusCode = p3.StatusCode
 		local ok, status = pcall(function()
-			-- upvalues: p6 (ref), httpService (copy)
-			return if p6.Body then httpService:JSONDecode(p6.Body) else nil
+			-- upvalues: p3 (ref), httpService (copy)
+			return if p3.Body then httpService:JSONDecode(p3.Body) else nil
 		end)
-		defaultFriendingError = getErrorToastMessage(p5, statusCode, if ok and status and (status.errors and status.errors[1]) and status.errors[1].code then status.errors[1].code else nil) or defaultFriendingError
+		defaultFriendingError = getErrorToastMessage(p2, statusCode, if ok and status and (status.errors and status.errors[1]) and status.errors[1].code then status.errors[1].code else nil) or defaultFriendingError
 	end
-	p4(setCurrentToastMessage({ isLocalized = true, toastMessage = defaultFriendingError }))
+	p1(setCurrentToastMessage({ isLocalized = true, toastMessage = defaultFriendingError }))
 end
 
 return {
-	executeAddFriend = function(p7)
-		-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var3 (ref), networkingFriendsModule (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return (if fFlagMigrateFriendshipStatusesRemainingActions then var3.RequestFriendship(p7.targetUserId, p7.friendshipOriginSourceType) else p7.dispatch(networkingFriendsModule.RequestFriendshipFromUserId.API({
-			currentUserId = p7.currentUserId,
-			targetUserId = p7.targetUserId,
-			friendshipOriginSourceType = p7.friendshipOriginSourceType
+	executeAddFriend = function(p1)
+		-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), networkingFriendsModule (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
+		return (if fFlagMigrateFriendshipStatusesRemainingActions then var1.RequestFriendship(p1.targetUserId, p1.friendshipOriginSourceType) else p1.dispatch(networkingFriendsModule.RequestFriendshipFromUserId.API({
+			currentUserId = p1.currentUserId,
+			targetUserId = p1.targetUserId,
+			friendshipOriginSourceType = p1.friendshipOriginSourceType
 		}))):andThen(function()
-			-- upvalues: p7 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
-			profileCTAStore.get().getCTA(p7.targetUserId, true)
-			p7.dispatch(setCurrentToastMessage({
+			-- upvalues: p1 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
+			profileCTAStore.get().getCTA(p1.targetUserId, true)
+			p1.dispatch(setCurrentToastMessage({
 				isLocalized = true,
-				toastMessage = p7.localized.friendRequestSent,
+				toastMessage = p1.localized.friendRequestSent,
 				toastIcon = friendAdd
 			}))
-		end):catch(function(p8)
-			-- upvalues: showErrorToast (copy), p7 (ref)
-			showErrorToast(p7.dispatch, p7.localized, p8)
+		end):catch(function(p2)
+			-- upvalues: showErrorToast (copy), p1 (ref)
+			showErrorToast(p1.dispatch, p1.localized, p2)
 		end)
 	end,
-	executeAcceptFriendRequest = function(p9)
-		-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var3 (ref), networkingFriendsModule (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return (if fFlagMigrateFriendshipStatusesRemainingActions then var3.AcceptFriendRequest(p9.targetUserId) else p9.dispatch(networkingFriendsModule.AcceptFriendRequestFromUserId.API({
-			currentUserId = p9.currentUserId,
-			targetUserId = p9.targetUserId
+	executeAcceptFriendRequest = function(p1)
+		-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), networkingFriendsModule (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
+		return (if fFlagMigrateFriendshipStatusesRemainingActions then var1.AcceptFriendRequest(p1.targetUserId) else p1.dispatch(networkingFriendsModule.AcceptFriendRequestFromUserId.API({
+			currentUserId = p1.currentUserId,
+			targetUserId = p1.targetUserId
 		}))):andThen(function()
-			-- upvalues: p9 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
-			profileCTAStore.get().getCTA(p9.targetUserId, true)
-			p9.dispatch(setCurrentToastMessage({
+			-- upvalues: p1 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
+			profileCTAStore.get().getCTA(p1.targetUserId, true)
+			p1.dispatch(setCurrentToastMessage({
 				isLocalized = true,
-				toastMessage = p9.localized.friendAdded,
+				toastMessage = p1.localized.friendAdded,
 				toastIcon = friendAdd
 			}))
-		end):catch(function(p10)
-			-- upvalues: showErrorToast (copy), p9 (ref)
-			showErrorToast(p9.dispatch, p9.localized, p10)
+		end):catch(function(p2)
+			-- upvalues: showErrorToast (copy), p1 (ref)
+			showErrorToast(p1.dispatch, p1.localized, p2)
 		end)
 	end
 }

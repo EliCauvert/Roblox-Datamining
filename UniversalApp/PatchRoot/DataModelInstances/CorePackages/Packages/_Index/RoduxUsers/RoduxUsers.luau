@@ -9,17 +9,17 @@ local usersNetworkingModule = require(parent.UsersNetworking)
 local roduxUsersTypesModule = require(script.roduxUsersTypes)
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: cryoModule (ref), usersNetworkingModule (ref), roduxNetworkingModule (ref), friendsNetworkingModule (ref), reducersModule (ref), actionsModule (ref), modelsModule (ref), roduxUsersTypesModule (ref)
-		p0 = cryoModule.Dictionary.join(p0, {
+		p1 = cryoModule.Dictionary.join(p1, {
 			usersNetworking = usersNetworkingModule.config({ roduxNetworking = roduxNetworkingModule.mock() }),
 			friendsNetworking = friendsNetworkingModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
 		})
 		
 		return {
 			installReducer = function()
-				-- upvalues: reducersModule (copy), p0 (write)
-				return reducersModule(p0)
+				-- upvalues: reducersModule (copy), p1 (write)
+				return reducersModule(p1)
 			end,
 			Actions = actionsModule,
 			Models = modelsModule,

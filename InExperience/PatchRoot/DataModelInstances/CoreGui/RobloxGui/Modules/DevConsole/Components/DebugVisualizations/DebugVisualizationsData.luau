@@ -4,17 +4,17 @@ local debugVisualizationsStaticContentModule = require(script.Parent.DebugVisual
 local slimDevConsole2 = game:DefineFastFlag("SlimDevConsole2", false)
 local slimTintContextFilter = game:DefineFastFlag("SlimTintContextFilter", false)
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1)
-		return p0.name < p1.name
+	[chartHeaderNames[1]] = function(p1, p2)
+		return p1.name < p2.name
 	end,
-	[chartHeaderNames[2]] = function(p2, p3)
-		return if p2.settingInfo.Value == p3.settingInfo.Value then p2.name < p3.name else p2.settingInfo.Value
+	[chartHeaderNames[2]] = function(p1, p2)
+		return if p1.settingInfo.Value == p2.settingInfo.Value then p1.name < p2.name else p1.settingInfo.Value
 	end,
-	[chartHeaderNames[3]] = function(p4, p5)
-		return if p4.settingInfo.Type == p5.settingInfo.Type then p4.name < p5.name else p4.settingInfo.Type < p5.settingInfo.Type
+	[chartHeaderNames[3]] = function(p1, p2)
+		return if p1.settingInfo.Type == p2.settingInfo.Type then p1.name < p2.name else p1.settingInfo.Type < p2.settingInfo.Type
 	end,
-	[chartHeaderNames[4]] = function(p6, p7)
-		return p6.name < p7.name
+	[chartHeaderNames[4]] = function(p1, p2)
+		return p1.name < p2.name
 	end
 }
 local t_1 = {}
@@ -34,16 +34,16 @@ function t_1.new()
 	return t
 end
 
-function t_1:setSortType(p8)
+function t_1:setSortType(p1)
 	-- upvalues: t (ref)
-	if t[p8] then
-		self._sortType = p8
+	if t[p1] then
+		self._sortType = p1
 		table.sort(self._sortedVisualizationData, t[self._sortType])
 		self._visualizationsUpdated:Fire(self._sortedVisualizationData)
 		
 		return
 	end
-	error(string.format("attempted to pass invalid sortType: %s", tostring(p8)), 2)
+	error(string.format("attempted to pass invalid sortType: %s", tostring(p1)), 2)
 end
 
 function t_1:getSortType()
@@ -58,31 +58,31 @@ function t_1:getCurrentData()
 	return self._sortedVisualizationData
 end
 
-function t_1:updateDebugVisualizationDataEntry(p9, p10)
-	if p10 == nil then
-		self._visualizationsData[p9] = nil
+function t_1:updateDebugVisualizationDataEntry(p1, p2)
+	if p2 == nil then
+		self._visualizationsData[p1] = nil
 		
 		for i, v in pairs(self._sortedVisualizationData) do
-			if v.name == p9 then
+			if v.name == p1 then
 				table.remove(self._sortedVisualizationData, i)
 				
 				return
 			end
 		end
 		return
-	elseif self._visualizationsData[p9] then
-		self._visualizationsData[p9] = p10
+	elseif self._visualizationsData[p1] then
+		self._visualizationsData[p1] = p2
 		
 		return
 	end
 	self._visualizationCounter += 1
-	self._visualizationsData[p9] = p10
+	self._visualizationsData[p1] = p2
 	table.insert(self._sortedVisualizationData, {
-		name = p9,
-		settingInfo = self._visualizationsData[p9],
-		valueChangeCallback = function(p11, p12)
+		name = p1,
+		settingInfo = self._visualizationsData[p1],
+		valueChangeCallback = function(p3, p4)
 			-- upvalues: self (ref)
-			self:_toggleValue(p11, p12)
+			self:_toggleValue(p3, p4)
 		end,
 		counter = self._visualizationCounter
 	})
@@ -92,15 +92,15 @@ function t_1:isRunning()
 	return self._isRunning
 end
 
-function t_1:_toggleValue(p13, p14)
+function t_1:_toggleValue(p3, p4)
 	-- upvalues: slimDevConsole2 (ref), t (ref)
 	if slimDevConsole2 then
-		local var7 = self._visualizationsData[p13]
+		local var1 = self._visualizationsData[p3]
 		
-		if var7 and var7.Kind == "Dropdown" then
-			local service = settings():GetService(var7.Service)
-			service[var7.Setter](service, p14)
-			var7.Value = p14
+		if var1 and var1.Kind == "Dropdown" then
+			local service = settings():GetService(var1.Service)
+			service[var1.Setter](service, p4)
+			var1.Value = p4
 			table.sort(self._sortedVisualizationData, t[self._sortType])
 			self._visualizationsUpdated:Fire(self._sortedVisualizationData)
 			
@@ -109,8 +109,8 @@ function t_1:_toggleValue(p13, p14)
 	end
 	local physics = settings().Physics
 	
-	if physics[p13] ~= nil then
-		if p14 and self._visualizationsData[p13].Type == "Box" then
+	if physics[p3] ~= nil then
+		if p4 and self._visualizationsData[p3].Type == "Box" then
 			for i, v in pairs(self._visualizationsData) do
 				if v.Type == "Box" and physics[v.Name] ~= nil then
 					physics[v.Name] = false
@@ -118,27 +118,27 @@ function t_1:_toggleValue(p13, p14)
 				end
 			end
 		end
-		physics[p13] = p14
-		self._visualizationsData[p13].Value = p14
+		physics[p3] = p4
+		self._visualizationsData[p3].Value = p4
 		table.sort(self._sortedVisualizationData, t[self._sortType])
 		self._visualizationsUpdated:Fire(self._sortedVisualizationData)
 	end
 end
 
-function _constructInfo(p15, p16)
+function _constructInfo(p5, p6)
 	-- upvalues: slimDevConsole2 (ref), slimTintContextFilter (ref)
-	local var9 = nil
+	local var2 = nil
 	local t = nil
 	local enumItems = nil
 	
-	if slimDevConsole2 and p16.kind == "Dropdown" then
+	if slimDevConsole2 and p6.kind == "Dropdown" then
 		local ok, status = pcall(function()
-			-- upvalues: p16 (ref)
-			return settings():GetService(p16.service)
+			-- upvalues: p6 (ref)
+			return settings():GetService(p6.service)
 		end)
 		
 		if ok and status then
-			var9 = status[p16.getter](status)
+			var2 = status[p6.getter](status)
 			
 			if slimTintContextFilter then
 				local playerAvailableTintModes = status:GetAvailableTintModes(Enum.SlimViewContext.Player, true)
@@ -150,7 +150,7 @@ function _constructInfo(p15, p16)
 					t[i] = v
 				end
 			else
-				enumItems = var9.EnumType:GetEnumItems()
+				enumItems = var2.EnumType:GetEnumItems()
 				t = {}
 				
 				for i, v in ipairs(enumItems) do
@@ -160,29 +160,29 @@ function _constructInfo(p15, p16)
 		end
 	else
 		local physics = settings().Physics
-		var9 = physics[p15] ~= nil and physics[p15]
+		var2 = physics[p5] ~= nil and physics[p5]
 	end
-	local var13 = ""
+	local var3 = ""
 	
-	for i, v in ipairs(p16.tags) do
-		var13 = (var13 .. v) .. (if i ~= #p16.tags then "" else ", ")
+	for i, v in ipairs(p6.tags) do
+		var3 = (var3 .. v) .. (if i ~= #p6.tags then "" else ", ")
 	end
 	local t_1 = {
-		Name = p16.name,
-		Value = var9,
-		Type = p16.type,
-		Kind = if slimDevConsole2 then p16.kind else nil,
-		Tags = p16.tags,
-		Tagstring = var13,
-		Description = p16.description,
-		LearnMoreUrl = if slimDevConsole2 then p16.learnMoreUrl else nil
+		Name = p6.name,
+		Value = var2,
+		Type = p6.type,
+		Kind = if slimDevConsole2 then p6.kind else nil,
+		Tags = p6.tags,
+		Tagstring = var3,
+		Description = p6.description,
+		LearnMoreUrl = if slimDevConsole2 then p6.learnMoreUrl else nil
 	}
 	
-	if slimDevConsole2 and p16.kind == "Dropdown" then
+	if slimDevConsole2 and p6.kind == "Dropdown" then
 		t_1.DropDownList = t
 		t_1.EnumItems = enumItems
-		t_1.Service = p16.service
-		t_1.Setter = p16.setter
+		t_1.Service = p6.service
+		t_1.Setter = p6.setter
 	end
 	return t_1
 end

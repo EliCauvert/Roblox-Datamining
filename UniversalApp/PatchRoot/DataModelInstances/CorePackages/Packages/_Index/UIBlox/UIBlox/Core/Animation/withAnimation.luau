@@ -9,64 +9,64 @@ animatedComponent.validateProps = tModule.strictInterface({
 	options = tModule.optional(tModule.table)
 })
 
-function animatedComponent.update(p0, p1)
+function animatedComponent.update(p1, p2)
 	-- upvalues: roactModule (ref)
 	local t = {}
 	
-	for i, v in pairs(p1) do
+	for i, v in pairs(p2) do
 		if type(i) == "function" then
 			i(v)
 		else
 			t[i] = v
 		end
 	end
-	for i_1, v_1 in pairs(p0.state) do
-		if not p1[i_1] then
+	for i_1, v_1 in pairs(p1.state) do
+		if not p2[i_1] then
 			t[i_1] = roactModule.None
 		end
 	end
 	if next(t) ~= nil then
-		p0:setState(t)
+		p1:setState(t)
 	end
 end
 
-function animatedComponent.init(p2)
+function animatedComponent.init(p3)
 	-- upvalues: otterModule (ref)
-	p2:update(p2.props.values)
-	p2.motor = otterModule.createGroupMotor(p2.props.values)
-	p2.motor:onStep(function(p3)
-		-- upvalues: p2 (ref)
-		p2:update(p3)
+	p3:update(p3.props.values)
+	p3.motor = otterModule.createGroupMotor(p3.props.values)
+	p3.motor:onStep(function(p4)
+		-- upvalues: p3 (ref)
+		p3:update(p4)
 	end)
 end
 
-function animatedComponent.didUpdate(p4, p5)
+function animatedComponent.didUpdate(p3, p4)
 	-- upvalues: otterModule (ref)
-	local values = p4.props.values
-	local options = p4.props.options
+	local values = p3.props.values
+	local options = p3.props.options
 	
-	if values ~= p5.values or options ~= p5.options then
+	if values ~= p4.values or options ~= p4.options then
 		local t = {}
 		
 		for i, v in pairs(values) do
 			t[i] = otterModule.spring(v, options)
 		end
-		p4.motor:setGoal(t)
+		p3.motor:setGoal(t)
 	end
 end
 
-function animatedComponent.render(p6)
-	return p6.props.render(p6.state)
+function animatedComponent.render(p5)
+	return p5.props.render(p5.state)
 end
 
-function animatedComponent.willUnmount(p7)
-	if p7.motor then
-		p7.motor:destroy()
-		p7.motor = nil
+function animatedComponent.willUnmount(p5)
+	if p5.motor then
+		p5.motor:destroy()
+		p5.motor = nil
 	end
 end
 
-return function(p8, p9, p10)
+return function(p5, p6, p7)
 	-- upvalues: roactModule (ref), animatedComponent (ref)
-	return roactModule.createElement(animatedComponent, { values = p8, options = p10, render = p9 })
+	return roactModule.createElement(animatedComponent, { values = p5, options = p7, render = p6 })
 end

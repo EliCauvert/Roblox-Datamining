@@ -1,5 +1,5 @@
-﻿return function(p0, ...)
+﻿return function(p1, ...)
 	for i = 1, select("#", ...) do
-		p0(select(i, ...), i)
+		p1(select(i, ...), i)
 	end
 end

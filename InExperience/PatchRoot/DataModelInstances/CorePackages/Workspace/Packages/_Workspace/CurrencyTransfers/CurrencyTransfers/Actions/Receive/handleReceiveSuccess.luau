@@ -2,7 +2,7 @@
 local _ = require(currencyTransfers.Stores.createTransferStore)
 local promptStateModule = require(currencyTransfers.Enums.PromptState)
 
-return function(p0)
+return function(p1)
 	-- upvalues: promptStateModule (ref)
-	p0.setPromptState(promptStateModule.ReceiveSuccess)
+	p1.setPromptState(promptStateModule.ReceiveSuccess)
 end

@@ -8,16 +8,16 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref)
 	return reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useMemo(function()
-		-- upvalues: inputHandlersModule (copy), p1 (ref)
-		return inputHandlersModule.onRelease(function(p2)
-			-- upvalues: p1 (copy)
-			if p1 then
-				p1()
-				p2:cancel()
+		-- upvalues: inputHandlersModule (copy), p2 (ref)
+		return inputHandlersModule.onRelease(function(p3)
+			-- upvalues: p2 (copy)
+			if p2 then
+				p2()
+				p3:cancel()
 			end
 		end)
-	end, { p1 }), nil, reactFocusNavigationModule.useEventMap(t, p0))
+	end, { p2 }), nil, reactFocusNavigationModule.useEventMap(t, p1))
 end

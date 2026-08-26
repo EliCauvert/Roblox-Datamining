@@ -61,17 +61,17 @@ local t_1 = {
 		CustomMessageComposerFocused = "customMessageComposerFocused",
 		CustomMessageSubmitted = "customMessageSubmitted"
 	},
-	logShareSheetOpened = function(p0)
+	logShareSheetOpened = function(p1)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
-		telemetryService:LogEvent(t.shareSheetOpened, { standardizedFields = list, customFields = p0 })
+		telemetryService:LogEvent(t.shareSheetOpened, { standardizedFields = list, customFields = p1 })
 	end,
 	logShareSheetLinkCopied = function(p1)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogEvent(t.shareSheetLinkCopied, { standardizedFields = list, customFields = p1 })
 	end,
-	logShareSheetMessageSent = function(p2)
+	logShareSheetMessageSent = function(p1)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
-		telemetryService:LogEvent(t.shareSheetMessageSent, { standardizedFields = list, customFields = p2 })
+		telemetryService:LogEvent(t.shareSheetMessageSent, { standardizedFields = list, customFields = p1 })
 	end
 }
 local t_2 = {
@@ -96,21 +96,21 @@ local t_4 = {
 	lastUpdated = { 2026, 8, 3 }
 }
 
-function t_1.logLifecycle(p3)
+function t_1.logLifecycle(p1)
 	-- upvalues: telemetryService (ref), t (ref), list (ref), t_1 (ref), t_2 (ref), t_3 (ref)
-	telemetryService:LogEvent(t.Lifecycle, { standardizedFields = list, customFields = p3 })
-	telemetryService:LogCounter(if p3.lifecycleType == t_1.LifecycleType.Open then t_2 else t_3, {
-		customFields = { context = p3.context, closeReason = p3.closeReason }
+	telemetryService:LogEvent(t.Lifecycle, { standardizedFields = list, customFields = p1 })
+	telemetryService:LogCounter(if p1.lifecycleType == t_1.LifecycleType.Open then t_2 else t_3, {
+		customFields = { context = p1.context, closeReason = p1.closeReason }
 	}, 1)
 end
 
-function t_1.logInteraction(p4)
+function t_1.logInteraction(p1)
 	-- upvalues: telemetryService (ref), t (ref), list (ref), t_4 (ref)
-	telemetryService:LogEvent(t.Interaction, { standardizedFields = list, customFields = p4 })
+	telemetryService:LogEvent(t.Interaction, { standardizedFields = list, customFields = p1 })
 	telemetryService:LogCounter(t_4, {
 		customFields = {
-			context = p4.context,
-			interactionType = p4.interactionType
+			context = p1.context,
+			interactionType = p1.interactionType
 		}
 	}, 1)
 end

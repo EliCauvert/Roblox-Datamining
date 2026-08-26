@@ -10,42 +10,42 @@ local useRef = reactModule.useRef
 local useState = reactModule.useState
 local useEventConnection = reactUtilsModule.useEventConnection
 
-return function(p0)
+return function(p1)
 	-- upvalues: useCurrentCameraModule (ref), useState (ref), enumsModule (ref), useRef (ref), useCallback (ref), useEventConnection (ref), userInputService (ref), useEffect (ref)
-	local var6 = useCurrentCameraModule()
-	local var7, var8 = useState(enumsModule.CameraState.Idle)
-	local var9 = useRef(nil)
-	p0 = p0 or var6
-	local var11 = useCallback(function()
-		-- upvalues: var8 (ref), enumsModule (copy), var9 (ref)
-		var8(function(p1)
+	local var1 = useCurrentCameraModule()
+	local var2, var3 = useState(enumsModule.CameraState.Idle)
+	local var4 = useRef(nil)
+	p1 = p1 or var1
+	local var5 = useCallback(function()
+		-- upvalues: var3 (ref), enumsModule (copy), var4 (ref)
+		var3(function(p2)
 			-- upvalues: enumsModule (copy)
-			return if p1 == enumsModule.CameraState.Moving then p1 else enumsModule.CameraState.Moving
+			return if p2 == enumsModule.CameraState.Moving then p2 else enumsModule.CameraState.Moving
 		end)
 		
-		if var9.current then
-			task.cancel(var9.current)
+		if var4.current then
+			task.cancel(var4.current)
 		end
-		var9.current = task.delay(0.2, function()
-			-- upvalues: var8 (copy), enumsModule (copy)
-			var8(enumsModule.CameraState.Idle)
+		var4.current = task.delay(0.2, function()
+			-- upvalues: var3 (copy), enumsModule (copy)
+			var3(enumsModule.CameraState.Idle)
 		end)
 	end, {})
 	useEventConnection(userInputService.InputChanged, function(p2)
-		-- upvalues: var11 (ref)
+		-- upvalues: var5 (ref)
 		if p2.UserInputType == Enum.UserInputType.MouseWheel then
-			var11()
+			var5()
 		end
-	end, { var11 })
+	end, { var5 })
 	useEffect(function()
-		-- upvalues: p0 (ref), var11 (ref)
-		local var12 = p0:GetPropertyChangedSignal("CFrame"):Connect(var11)
+		-- upvalues: p1 (ref), var5 (ref)
+		local var6 = p1:GetPropertyChangedSignal("CFrame"):Connect(var5)
 		
 		return function()
-			-- upvalues: var12 (ref)
-			var12:Disconnect()
+			-- upvalues: var6 (ref)
+			var6:Disconnect()
 		end
-	end, { p0, var11 })
+	end, { p1, var5 })
 	
-	return var7
+	return var2
 end

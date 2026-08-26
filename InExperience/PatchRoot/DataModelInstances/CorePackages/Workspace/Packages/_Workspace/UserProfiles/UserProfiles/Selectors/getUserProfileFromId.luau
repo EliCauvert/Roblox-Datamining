@@ -1,9 +1,9 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("UserProfiles").Parent.Cryo)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: cryoModule (ref)
-	return p0.userProfiles[cryoModule.List.findWhere(p0.userProfiles, function(p2, _)
-		-- upvalues: p1 (ref)
-		return p2.id == tostring(p1)
+	return p1.userProfiles[cryoModule.List.findWhere(p1.userProfiles, function(p3, _)
+		-- upvalues: p2 (ref)
+		return p3.id == tostring(p2)
 	end)] or {}
 end

@@ -11,9 +11,9 @@ local _ = require(foundation.Providers.Style.Tokens)
 local constantsModule = require(foundation.Constants)
 local getSharedVariantsModule = require(foundation.Components.Button.getSharedVariants)
 
-local var10 = function(p0)
+local var1 = function(p1)
 	-- upvalues: getSharedVariantsModule (ref), inputSizeModule (ref), iconSizeModule (ref), closeAffordanceVariantModule (ref), dashModule (ref), colorNamespaceModule (ref), constantsModule (ref)
-	local var11 = getSharedVariantsModule(p0)
+	local var2 = getSharedVariantsModule(p1)
 	
 	return {
 		common = {
@@ -21,21 +21,21 @@ local var10 = function(p0)
 		},
 		types = {
 			[closeAffordanceVariantModule.OverMedia] = dashModule.map(colorNamespaceModule, function()
-				-- upvalues: p0 (ref)
+				-- upvalues: p1 (ref)
 				return {
 					container = { tag = "bg-over-media-100" },
-					content = { style = p0.Color.Content.Emphasis }
+					content = { style = p1.Color.Content.Emphasis }
 				}
 			end),
-			[closeAffordanceVariantModule.Utility] = dashModule.map(colorNamespaceModule, function(p1)
-				-- upvalues: constantsModule (copy), p0 (ref)
+			[closeAffordanceVariantModule.Utility] = dashModule.map(colorNamespaceModule, function(p2)
+				-- upvalues: constantsModule (copy), p1 (ref)
 				return {
 					container = {
 						stateLayer = {
-							mode = constantsModule.COLOR_NAMESPACE_TO_STATE_LAYER_MODE[false][p1]
+							mode = constantsModule.COLOR_NAMESPACE_TO_STATE_LAYER_MODE[false][p2]
 						}
 					},
-					content = { style = p0[p1].Content.Emphasis }
+					content = { style = p1[p2].Content.Emphasis }
 				}
 			end)
 		},
@@ -43,22 +43,22 @@ local var10 = function(p0)
 			[true] = {
 				[inputSizeModule.XSmall] = {
 					container = {
-						size = UDim2.fromOffset(var11.sizes[inputSizeModule.XSmall].container.height, var11.sizes[inputSizeModule.XSmall].container.height),
-						padding = UDim.new(0, p0.Size.Size_100)
+						size = UDim2.fromOffset(var2.sizes[inputSizeModule.XSmall].container.height, var2.sizes[inputSizeModule.XSmall].container.height),
+						padding = UDim.new(0, p1.Size.Size_100)
 					},
 					content = { iconSize = iconSizeModule.Small }
 				},
 				[inputSizeModule.Small] = {
 					container = {
-						size = UDim2.fromOffset(var11.sizes[inputSizeModule.Small].container.height, var11.sizes[inputSizeModule.Small].container.height),
-						padding = UDim.new(0, p0.Size.Size_150)
+						size = UDim2.fromOffset(var2.sizes[inputSizeModule.Small].container.height, var2.sizes[inputSizeModule.Small].container.height),
+						padding = UDim.new(0, p1.Size.Size_150)
 					},
 					content = { iconSize = iconSizeModule.Medium }
 				},
 				[inputSizeModule.Medium] = {
 					container = {
-						size = UDim2.fromOffset(var11.sizes[inputSizeModule.Medium].container.height, var11.sizes[inputSizeModule.Medium].container.height),
-						padding = UDim.new(0, p0.Size.Size_200)
+						size = UDim2.fromOffset(var2.sizes[inputSizeModule.Medium].container.height, var2.sizes[inputSizeModule.Medium].container.height),
+						padding = UDim.new(0, p1.Size.Size_200)
 					},
 					content = { iconSize = iconSizeModule.Large }
 				}
@@ -70,19 +70,19 @@ local var10 = function(p0)
 			}
 		},
 		padding = {
-			[true] = { container = { radius = p0.Radius.Medium } },
+			[true] = { container = { radius = p1.Radius.Medium } },
 			[false] = { container = { radius = 0 } }
 		},
 		circular = {
-			[true] = { container = { radius = p0.Radius.Circle } },
+			[true] = { container = { radius = p1.Radius.Circle } },
 			[false] = {}
 		}
 	}
 end
 
-return function(p2, p3, p4, p5, p6, p7)
-	-- upvalues: variantsContextModule (ref), var10 (ref), closeAffordanceVariantModule (ref), composeStyleVariantModule (ref), colorNamespaceModule (ref)
-	local closeAffordance = variantsContextModule.useVariants("CloseAffordance", var10, p2)
+return function(p1, p2, p3, p4, p5, p6)
+	-- upvalues: variantsContextModule (ref), var1 (ref), closeAffordanceVariantModule (ref), composeStyleVariantModule (ref), colorNamespaceModule (ref)
+	local closeAffordance = variantsContextModule.useVariants("CloseAffordance", var1, p1)
 	
-	return composeStyleVariantModule(closeAffordance.common, closeAffordance.types[p4][p5 or colorNamespaceModule.Color], closeAffordance.sizes[p6][p3], closeAffordance.padding[p6], closeAffordance.circular[if p4 ~= closeAffordanceVariantModule.OverMedia then p7 else true])
+	return composeStyleVariantModule(closeAffordance.common, closeAffordance.types[p3][p4 or colorNamespaceModule.Color], closeAffordance.sizes[p5][p2], closeAffordance.padding[p5], closeAffordance.circular[if p3 ~= closeAffordanceVariantModule.OverMedia then p6 else true])
 end

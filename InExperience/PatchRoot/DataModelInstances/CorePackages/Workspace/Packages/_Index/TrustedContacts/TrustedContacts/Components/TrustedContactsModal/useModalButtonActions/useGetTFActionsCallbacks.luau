@@ -13,63 +13,63 @@ local eventNames = require(trustedContacts.Analytics).EventNames
 local fFlagTCUpdateProfileCTAButton = require(parent.SharedFlags).FFlagTCUpdateProfileCTAButton
 local fFlagTrustedFriendsLinkVPCModule = require(trustedContacts.Flags.FFlagTrustedFriendsLinkVPC)
 local fFlagTFUpdateAnalyticsModule = require(trustedContacts.Flags.FFlagTFUpdateAnalytics)
-local var7 = require(trustedContacts.Flags.FFlagEnableTrustedFriendsWizardVPCPrologue) and (ampUpsellModule.GetFFlagEnableAmpVPCPrologue() and (ampUpsellModule.GetFFlagEnableReusableVPCPrologue() and ampUpsellModule.GetFFlagEnableAmpWizardVPCNavigationFix()))
+local var1 = require(trustedContacts.Flags.FFlagEnableTrustedFriendsWizardVPCPrologue) and (ampUpsellModule.GetFFlagEnableAmpVPCPrologue() and (ampUpsellModule.GetFFlagEnableReusableVPCPrologue() and ampUpsellModule.GetFFlagEnableAmpWizardVPCNavigationFix()))
 local fStringConnectionGraphCoreAmpNameSpace = require(parent.SharedFlags).FStringConnectionGraphCoreAmpNameSpace
 local _ = require(trustedContacts.Common.Types)
-local var8 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
+local var2 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 
-return function(p0, p1)
-	-- upvalues: useNavigation (ref), useAppPolicy (ref), userProfilesModule (ref), useLocalization (ref), var7 (ref), reactModule (ref), eventNames (ref), fFlagTCUpdateProfileCTAButton (ref), contexts (ref), fStringConnectionGraphCoreAmpNameSpace (ref), appPage (ref), fFlagTFUpdateAnalyticsModule (ref), var8 (ref), fFlagTrustedFriendsLinkVPCModule (ref)
-	local fireAnalyticsEvent = p1.fireAnalyticsEvent
-	local var9 = useNavigation()
-	local var10 = useAppPolicy(function(p2)
-		return p2.getShareSheetEnabled()
+return function(p1, p2)
+	-- upvalues: useNavigation (ref), useAppPolicy (ref), userProfilesModule (ref), useLocalization (ref), var1 (ref), reactModule (ref), eventNames (ref), fFlagTCUpdateProfileCTAButton (ref), contexts (ref), fStringConnectionGraphCoreAmpNameSpace (ref), appPage (ref), fFlagTFUpdateAnalyticsModule (ref), var2 (ref), fFlagTrustedFriendsLinkVPCModule (ref)
+	local fireAnalyticsEvent = p2.fireAnalyticsEvent
+	local var3 = useNavigation()
+	local var4 = useAppPolicy(function(p3)
+		return p3.getShareSheetEnabled()
 	end)
-	local var11 = ""
-	local var12 = userProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = { p0 },
+	local var5 = ""
+	local var6 = userProfilesModule.Hooks.useUserProfilesFetch({
+		userIds = { p1 },
 		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds
 	})
 	
-	if var12 and var12.data then
-		var11 = userProfilesModule.Selectors.getCombinedNameFromId(var12.data, p0) or ""
+	if var6 and var6.data then
+		var5 = userProfilesModule.Selectors.getCombinedNameFromId(var6.data, p1) or ""
 	end
-	local var13 = useLocalization({
+	local var7 = useLocalization({
 		linkCopiedToast = "Feature.Catalog.Toast.LinkCopied",
 		trustedConnectionRequestSentToast = "Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent",
 		isATrustedConnectionNowToast = {
 			"Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow",
-			name = var11
+			name = var5
 		},
-		ask = if var7 then "Feature.Friends.Label.Ask" else nil,
-		askYourParent = if var7 then "Feature.Friends.Label.AskYourParent" else nil,
-		vpcRequired = if var7 then "Feature.Friends.Label.AddFriendVPC" else nil
+		ask = if var1 then "Feature.Friends.Label.Ask" else nil,
+		askYourParent = if var1 then "Feature.Friends.Label.AskYourParent" else nil,
+		vpcRequired = if var1 then "Feature.Friends.Label.AddFriendVPC" else nil
 	})
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), p1 (ref)
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), p2 (ref)
 		fireAnalyticsEvent(eventNames.TrustedFriendsModalOkClicked)
 		
-		if p1.onAcknowledged then
-			p1.onAcknowledged()
+		if p2.onAcknowledged then
+			p2.onAcknowledged()
 		end
-		p1.closeModal()
-	end, { p1.closeModal, p1.onAcknowledged, fireAnalyticsEvent })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), fFlagTCUpdateProfileCTAButton (copy), p1 (ref), var7 (copy), p0 (ref), contexts (copy), fStringConnectionGraphCoreAmpNameSpace (copy), var13 (ref), var9 (ref), appPage (copy)
+		p2.closeModal()
+	end, { p2.closeModal, p2.onAcknowledged, fireAnalyticsEvent })
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), fFlagTCUpdateProfileCTAButton (copy), p2 (ref), var1 (copy), p1 (ref), contexts (copy), fStringConnectionGraphCoreAmpNameSpace (copy), var7 (ref), var3 (ref), appPage (copy)
 		fireAnalyticsEvent(eventNames.TrustedFriendsVPCPrologueOpened)
 		local onRequestAccepted = nil
 		
 		if fFlagTCUpdateProfileCTAButton then
-			if p1.onRequestSent then
-				onRequestAccepted = p1.onRequestSent
-			elseif p1.onRequestAccepted then
-				onRequestAccepted = p1.onRequestAccepted
+			if p2.onRequestSent then
+				onRequestAccepted = p2.onRequestSent
+			elseif p2.onRequestAccepted then
+				onRequestAccepted = p2.onRequestAccepted
 			end
 		end
-		local dismissModal = p1.dismissModal
-		local openAmpWizard = p1.openAmpWizard
+		local dismissModal = p2.dismissModal
+		local openAmpWizard = p2.openAmpWizard
 		
-		if var7 then
+		if var1 then
 			local t = {
 				featureName = "TriggerTrustedFriendVPCRecourse",
 				usePrologue = true,
@@ -79,15 +79,15 @@ return function(p0, p1)
 						onRequestAccepted()
 					end
 				end,
-				recourseData = { targetUserId = p0 },
+				recourseData = { targetUserId = p1 },
 				entryPointEventCtx = contexts.TrustedFriendsVPCPrologue,
-				extraParameters = { { name = "targetUser", type = "UserId", value = p0 } },
+				extraParameters = { { name = "targetUser", type = "UserId", value = p1 } },
 				nameSpace = fStringConnectionGraphCoreAmpNameSpace,
 				prologueOptions = {
 					config = {
-						titleText = var13.askYourParent,
-						bodyText = var13.vpcRequired,
-						confirmText = var13.ask
+						titleText = var7.askYourParent,
+						bodyText = var7.vpcRequired,
+						confirmText = var7.ask
 					},
 					onConfirm = function()
 						-- upvalues: fireAnalyticsEvent (copy), eventNames (copy)
@@ -102,147 +102,147 @@ return function(p0, p1)
 			dismissModal()
 			openAmpWizard(t)
 		else
-			var9.replace(appPage.TrustedFriendsVPCPrologue, { userId = p0, completionCallback = onRequestAccepted })
+			var3.replace(appPage.TrustedFriendsVPCPrologue, { userId = p1, completionCallback = onRequestAccepted })
 		end
 	end, {
-		fireAnalyticsEvent, var9, p0,
-		if fFlagTCUpdateProfileCTAButton then p1.onRequestSent else nil,
-		if fFlagTCUpdateProfileCTAButton then p1.onRequestAccepted else nil,
-		if var7 then p1.dismissModal else nil, if var7 then p1.openAmpWizard else nil,
-		if var7 then var13 else nil
+		fireAnalyticsEvent, var3, p1,
+		if fFlagTCUpdateProfileCTAButton then p2.onRequestSent else nil,
+		if fFlagTCUpdateProfileCTAButton then p2.onRequestAccepted else nil,
+		if var1 then p2.dismissModal else nil, if var1 then p2.openAmpWizard else nil,
+		if var1 then var7 else nil
 	})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), p1 (ref), var13 (ref)
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), p2 (ref), var7 (ref)
 		if fFlagTFUpdateAnalyticsModule then
 			fireAnalyticsEvent(eventNames.TCUpsellIsATrustedConnectionNowToastShown)
 		else
 			fireAnalyticsEvent(eventNames.TCUpsellAcceptTrustedConnectionClicked)
 		end
-		p1.showToast(var13.isATrustedConnectionNowToast)
+		p2.showToast(var7.isATrustedConnectionNowToast)
 	end, {
-		var13.isATrustedConnectionNowToast,
+		var7.isATrustedConnectionNowToast,
 		fireAnalyticsEvent,
-		p1.showToast
+		p2.showToast
 	})
 	
 	return {
-		onOkButtonPress = var14,
-		onOpenVPCProloguePress = var15,
+		onOkButtonPress = var8,
+		onOpenVPCProloguePress = var9,
 		onCancelButtonPress = reactModule.useCallback(function()
-			-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), p1 (ref)
+			-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), p2 (ref)
 			fireAnalyticsEvent(eventNames.TCUpsellCancelClicked)
-			p1.closeModal()
-		end, { p1.closeModal, fireAnalyticsEvent }),
+			p2.closeModal()
+		end, { p2.closeModal, fireAnalyticsEvent }),
 		onAcceptRequestReceived = reactModule.useCallback(function()
-			-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var8 (copy), p0 (ref), var16 (ref), p1 (ref)
+			-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var2 (copy), p1 (ref), var10 (ref), p2 (ref)
 			if fFlagTFUpdateAnalyticsModule then
 				fireAnalyticsEvent(eventNames.TCUpsellAcceptTrustedConnectionClicked)
 			end
-			var8.acceptTrustedConnectionRequest(p0):andThen(function()
-				-- upvalues: var16 (copy)
-				var16()
+			var2.acceptTrustedConnectionRequest(p1):andThen(function()
+				-- upvalues: var10 (copy)
+				var10()
 			end):andThen(function()
-				-- upvalues: p1 (copy)
-				return p1.onRequestAccepted and p1.onRequestAccepted()
+				-- upvalues: p2 (copy)
+				return p2.onRequestAccepted and p2.onRequestAccepted()
 			end):andThen(function()
-				-- upvalues: p1 (copy)
-				p1.closeModal()
+				-- upvalues: p2 (copy)
+				p2.closeModal()
 			end):catch(function()
-				-- upvalues: p1 (copy)
-				p1.showGenericErrorModal()
+				-- upvalues: p2 (copy)
+				p2.showGenericErrorModal()
 			end)
-		end, { p1, p0, var16, fireAnalyticsEvent }),
+		end, { p2, p1, var10, fireAnalyticsEvent }),
 		onAddTrustedFriendFromLink = reactModule.useCallback(function()
-			-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var8 (copy), p0 (ref), p1 (ref), var16 (ref), fFlagTCUpdateProfileCTAButton (copy)
+			-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var2 (copy), p1 (ref), p2 (ref), var10 (ref), fFlagTCUpdateProfileCTAButton (copy)
 			if fFlagTFUpdateAnalyticsModule then
 				fireAnalyticsEvent(eventNames.TCUpsellAcceptTrustedConnectionClicked)
 			end
-			var8.addTrustedFriendFromLink(p0, p1.tokens or {}):andThen(function()
-				-- upvalues: var16 (copy)
-				var16()
+			var2.addTrustedFriendFromLink(p1, p2.tokens or {}):andThen(function()
+				-- upvalues: var10 (copy)
+				var10()
 			end):andThen(if fFlagTCUpdateProfileCTAButton then function()
-				-- upvalues: p1 (copy)
-				return p1.onRequestAccepted and p1.onRequestAccepted()
+				-- upvalues: p2 (copy)
+				return p2.onRequestAccepted and p2.onRequestAccepted()
 			end else nil):andThen(function()
-				-- upvalues: p1 (copy)
-				p1.closeModal()
+				-- upvalues: p2 (copy)
+				p2.closeModal()
 			end):catch(function()
-				-- upvalues: p1 (copy)
-				p1.showGenericErrorModal()
+				-- upvalues: p2 (copy)
+				p2.showGenericErrorModal()
 			end)
-		end, { p1, p0, var16, fireAnalyticsEvent }),
+		end, { p2, p1, var10, fireAnalyticsEvent }),
 		onSendTrustedConnectionRequest = reactModule.useCallback(function()
-			-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var8 (copy), p0 (ref), p1 (ref), var13 (ref)
+			-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var2 (copy), p1 (ref), p2 (ref), var7 (ref)
 			if fFlagTFUpdateAnalyticsModule then
 				fireAnalyticsEvent(eventNames.TCUpsellAddTrustedConnectionClicked)
 			end
-			var8.sendTrustedConnectionRequest(p0, if p1.sentFromQrCode then "qr" else nil):andThen(function()
-				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), p1 (copy), var13 (copy)
+			var2.sendTrustedConnectionRequest(p1, if p2.sentFromQrCode then "qr" else nil):andThen(function()
+				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), p2 (copy), var7 (copy)
 				if not fFlagTFUpdateAnalyticsModule then
 					fireAnalyticsEvent(eventNames.TCUpsellAddTrustedConnectionClicked)
 				end
-				p1.showToast(var13.trustedConnectionRequestSentToast)
+				p2.showToast(var7.trustedConnectionRequestSentToast)
 			end):andThen(function()
-				-- upvalues: p1 (copy)
-				return p1.onRequestSent and p1.onRequestSent()
+				-- upvalues: p2 (copy)
+				return p2.onRequestSent and p2.onRequestSent()
 			end):andThen(function()
-				-- upvalues: p1 (copy)
-				p1.closeModal()
+				-- upvalues: p2 (copy)
+				p2.closeModal()
 			end):catch(function()
-				-- upvalues: p1 (copy)
-				p1.showGenericErrorModal()
+				-- upvalues: p2 (copy)
+				p2.showGenericErrorModal()
 			end)
 		end, {
+			p2,
 			p1,
-			p0,
-			var13,
+			var7,
 			fireAnalyticsEvent,
-			p1.showToast
+			p2.showToast
 		}),
 		onAddViaLinkButtonPress = reactModule.useCallback(function()
-			-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var8 (copy), p0 (ref), p1 (ref), contexts (copy), var10 (ref), var13 (ref)
+			-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var2 (copy), p1 (ref), p2 (ref), contexts (copy), var4 (ref), var7 (ref)
 			fireAnalyticsEvent(eventNames.TCUpsellAddViaLinkClicked)
-			var8.createTrustedFriendLink(p0):andThen(function(p3)
-				-- upvalues: p1 (copy), contexts (copy)
-				p1.shareUrl({
+			var2.createTrustedFriendLink(p1):andThen(function(p3)
+				-- upvalues: p2 (copy), contexts (copy)
+				p2.shareUrl({
 					url = p3.responseBody.link,
 					context = contexts.TCUpsellModal
 				})
 			end):andThen(function()
-				-- upvalues: p1 (copy)
-				return p1.onRequestSent and p1.onRequestSent()
+				-- upvalues: p2 (copy)
+				return p2.onRequestSent and p2.onRequestSent()
 			end):andThen(function()
-				-- upvalues: var10 (copy), p1 (copy), var13 (copy)
-				if not var10 then
-					p1.showToast(var13.linkCopiedToast)
+				-- upvalues: var4 (copy), p2 (copy), var7 (copy)
+				if not var4 then
+					p2.showToast(var7.linkCopiedToast)
 				end
-				p1.closeModal()
+				p2.closeModal()
 			end):catch(function()
-				-- upvalues: p1 (copy)
-				p1.showGenericErrorModal()
-				p1.closeModal()
+				-- upvalues: p2 (copy)
+				p2.showGenericErrorModal()
+				p2.closeModal()
 			end)
 		end, {
-			p1.closeModal, p1.showGenericErrorModal, p1.onRequestSent, fireAnalyticsEvent,
-			p0, var13, var10, p1.shareUrl, p1.showToast
+			p2.closeModal, p2.showGenericErrorModal, p2.onRequestSent, fireAnalyticsEvent,
+			p1, var7, var4, p2.shareUrl, p2.showToast
 		}),
 		onAddTrustedFriendFromLinkWithVPC = if fFlagTrustedFriendsLinkVPCModule then if fFlagTrustedFriendsLinkVPCModule then reactModule.useCallback(function()
-			-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var8 (copy), p0 (ref), p1 (ref), var15 (ref)
+			-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var2 (copy), p1 (ref), p2 (ref), var9 (ref)
 			if fFlagTFUpdateAnalyticsModule then
 				fireAnalyticsEvent(eventNames.TCUpsellAcceptTrustedConnectionClicked)
 			end
-			var8.addTrustedFriendFromLink(p0, p1.tokens or {}):andThen(function()
-				-- upvalues: var15 (copy)
-				var15()
+			var2.addTrustedFriendFromLink(p1, p2.tokens or {}):andThen(function()
+				-- upvalues: var9 (copy)
+				var9()
 			end):catch(function()
-				-- upvalues: p1 (copy)
-				p1.showGenericErrorModal()
+				-- upvalues: p2 (copy)
+				p2.showGenericErrorModal()
 			end)
 		end, {
-			p0,
-			p1.tokens,
-			var15,
-			p1.showGenericErrorModal,
+			p1,
+			p2.tokens,
+			var9,
+			p2.showGenericErrorModal,
 			fireAnalyticsEvent
 		}) else nil else nil
 	}

@@ -12,24 +12,24 @@ local rules = standardBreakpointsModule.rules
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
 	local t = {
 		_hasSizeRules = false,
 		_hasInputRules = false,
 		_currentKey = "Default",
-		_config = p0 or {},
+		_config = p1 or {},
 		_currentRule = { Key = "Default" }
 	}
-	local var9 = false
-	local var10 = false
+	local var1 = false
+	local var2 = false
 	
-	for i, v in p0 do
-		var9 = var9 or (if v.minWidth == nil then if v.maxWidth == nil then if v.minHeight == nil then if v.maxHeight == nil then if v.maxRatio == nil then v.minRatio ~= nil else true else true else true else true else true)
-		var10 = var10 or (if v.preferredInput == nil then v.lastInput ~= nil else true)
+	for i, v in p1 do
+		var1 = var1 or (if v.minWidth == nil then if v.maxWidth == nil then if v.minHeight == nil then if v.maxHeight == nil then if v.maxRatio == nil then v.minRatio ~= nil else true else true else true else true else true)
+		var2 = var2 or (if v.preferredInput == nil then v.lastInput ~= nil else true)
 	end
-	t._hasSizeRules = var9
-	t._hasInputRules = var10
+	t._hasSizeRules = var1
+	t._hasInputRules = var2
 	
 	return setmetatable(t, t_1)
 end
@@ -50,46 +50,46 @@ function t_1:currentKey()
 	return self._currentKey
 end
 
-function t_1:resolve(p1, p2, p3, p4, p5)
-	local var11 = "Default"
+function t_1:resolve(p2, p3, p4, p5, p6)
+	local var3 = "Default"
 	local t = {}
-	local var13 = p1 / p2
+	local var4 = p2 / p3
 	
 	for i, v in self._config do
-		local var14
+		local var5
 		if v.minWidth ~= nil then
-			var14 = false
+			var5 = false
 			
-			if v.minWidth <= p1 then
+			if v.minWidth <= p2 then
 				if v.maxWidth ~= nil then
-					var14 = false
+					var5 = false
 					
-					if p1 <= v.maxWidth then
+					if p2 <= v.maxWidth then
 						if v.minHeight ~= nil then
-							var14 = false
+							var5 = false
 							
-							if v.minHeight <= p2 then
+							if v.minHeight <= p3 then
 								if v.maxHeight ~= nil then
-									var14 = false
+									var5 = false
 									
-									if p2 <= v.maxHeight then
+									if p3 <= v.maxHeight then
 										if v.minRatio ~= nil then
-											var14 = false
+											var5 = false
 											
-											if v.minRatio <= var13 then
+											if v.minRatio <= var4 then
 												if v.maxRatio ~= nil then
-													var14 = false
+													var5 = false
 													
-													if var13 <= v.maxRatio then
+													if var4 <= v.maxRatio then
 														if v.preferredInput ~= nil then
-															var14 = false
+															var5 = false
 															
-															if p3 == v.preferredInput then
+															if p4 == v.preferredInput then
 																if v.lastInput ~= nil then
-																	var14 = false
+																	var5 = false
 																	
-																	if p4 == v.lastInput then
-																		var14 = if v.spatial ~= nil then p5 == v.spatial else true
+																	if p5 == v.lastInput then
+																		var5 = if v.spatial ~= nil then p6 == v.spatial else true
 																	end
 																end
 															end
@@ -105,17 +105,17 @@ function t_1:resolve(p1, p2, p3, p4, p5)
 					end
 				end
 			end
-			if var14 then
+			if var5 then
 				t = v
-				var11 = v.Key
+				var3 = v.Key
 				break
 			end
 		end
 	end
-	if var11 == self._currentKey then
+	if var3 == self._currentKey then
 		return false
 	end
-	self._currentKey = var11
+	self._currentKey = var3
 	self._currentRule = t
 	
 	return true
@@ -182,29 +182,29 @@ function t:destroy()
 	end
 end
 
-function t:connect(p6)
+function t:connect(p7)
 	if self._changed == nil then
 		error("Connecting to dead signal!")
 	end
-	return self._changed:connect(p6)
+	return self._changed:connect(p7)
 end
 
 function t:currentRule(p7)
 	return self._configResolvers[p7 or "default"]:currentRule()
 end
 
-function t:currentKey(p8)
-	return self._configResolvers[p8 or "default"]:currentKey()
+function t:currentKey(p7)
+	return self._configResolvers[p7 or "default"]:currentKey()
 end
 
-function t:updateAbsoluteSize(p9)
+function t:updateAbsoluteSize(p7)
 	-- upvalues: guiService (ref)
-	local absoluteSize = p9.AbsoluteSize
+	local absoluteSize = p7.AbsoluteSize
 	
-	if p9:IsA("LayerCollector") then
+	if p7:IsA("LayerCollector") then
 		local ok, status = pcall(function()
-			-- upvalues: p9 (ref)
-			return p9.IgnoreGuiInset
+			-- upvalues: p7 (ref)
+			return p7.IgnoreGuiInset
 		end)
 		
 		if ok and status then
@@ -226,91 +226,91 @@ function t:resolve()
 	if not self._configResolvers then return end
 	local x = self._absoluteSize.X or 1
 	local y = self._absoluteSize.Y or 1
-	local var20 = inputModeModule.preferred()
-	local var21 = inputModeModule.last()
+	local var6 = inputModeModule.preferred()
+	local var7 = inputModeModule.last()
 	local vrEnabled = self._vrEnabled
-	local var22 = false
+	local var8 = false
 	
 	for i, v in self._configResolvers do
-		if v:resolve(x, y, var20, var21, vrEnabled) then
-			var22 = true
+		if v:resolve(x, y, var6, var7, vrEnabled) then
+			var8 = true
 		end
 	end
-	if var22 then
+	if var8 then
 		self._changed:fire()
 	end
 end
 
-function is_array(p10)
-	return type(p10) == "table" and p10[1] ~= nil
+function is_array(p7)
+	return type(p7) == "table" and p7[1] ~= nil
 end
 
-function t:setConfig(p11)
+function t:setConfig(p7)
 	-- upvalues: t_1 (ref)
-	if is_array(p11) then
-		p11 = { default = p11 }
+	if is_array(p7) then
+		p7 = { default = p7 }
 	end
-	local var23 = false
-	local var24 = false
+	local var9 = false
+	local var10 = false
 	local t = {}
 	
-	if p11 then
-		for i, v in p11 do
+	if p7 then
+		for i, v in p7 do
 			t[i] = t_1.new(v)
-			var23 = var23 or t[i]:hasSizeRules()
-			var24 = var24 or t[i]:hasInputRules()
+			var9 = var9 or t[i]:hasSizeRules()
+			var10 = var10 or t[i]:hasInputRules()
 		end
 	end
-	self._hasInputRules = var24
-	self._hasSizeRules = var23
+	self._hasInputRules = var10
+	self._hasSizeRules = var9
 	self._configResolvers = t
 	self:resolve()
 end
 
-function t:setLocalInstance(p12, p13)
+function t:setLocalInstance(p8, p9)
 	-- upvalues: findFirstAncestorWithTagModule (ref)
-	if typeof(p12) ~= "Instance" then
+	if typeof(p8) ~= "Instance" then
 		error("setLocalInstance arg1 expects Instance")
 		
 		return
 	end
-	local var26 = if typeof(p13) == "string" then findFirstAncestorWithTagModule(p12, p13) or p12 elseif typeof(p13) == "Instance" then p13 else p12:FindFirstAncestorWhichIsA("LayerCollector")
+	local var11 = if typeof(p9) == "string" then findFirstAncestorWithTagModule(p8, p9) or p8 elseif typeof(p9) == "Instance" then p9 else p8:FindFirstAncestorWhichIsA("LayerCollector")
 	
-	if var26 == nil then
-		var26 = p12
+	if var11 == nil then
+		var11 = p8
 	end
 	if self._layerCollectorSizeConnection then
 		self._layerCollectorSizeConnection:Disconnect()
 		self._layerCollectorSizeConnection = nil
 	end
-	if var26 then
-		self._layerCollectorSizeConnection = var26:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			-- upvalues: self (ref), var26 (write)
-			self:updateAbsoluteSize(var26)
+	if var11 then
+		self._layerCollectorSizeConnection = var11:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+			-- upvalues: self (ref), var11 (write)
+			self:updateAbsoluteSize(var11)
 		end)
-		self:updateAbsoluteSize(var26)
+		self:updateAbsoluteSize(var11)
 	end
 end
 
 return {
 	DefaultKey = "Default",
-	bindContainer = function(p14, p15)
+	bindContainer = function(p8, p9)
 		-- upvalues: tbl (ref), t (ref), rules (ref)
-		local var27 = tbl[p14]
-		local var28 = p15 == nil
+		local var11 = tbl[p8]
+		local var12 = p9 == nil
 		
-		if var28 and var27 then
-			var27:incRef()
+		if var12 and var11 then
+			var11:incRef()
 			
-			return var27
+			return var11
 		end
-		local var29 = t.new()
-		var29:setLocalInstance(p14, p14)
-		var29:setConfig(p15 or rules)
+		local var13 = t.new()
+		var13:setLocalInstance(p8, p8)
+		var13:setConfig(p9 or rules)
 		
-		if var28 then
-			tbl[p14] = var29
+		if var12 then
+			tbl[p8] = var13
 		end
-		return var29
+		return var13
 	end
 }

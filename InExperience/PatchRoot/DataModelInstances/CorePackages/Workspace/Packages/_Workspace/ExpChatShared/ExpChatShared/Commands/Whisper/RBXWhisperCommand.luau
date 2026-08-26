@@ -12,31 +12,31 @@ local _ = require(commands.types)
 return {
 	name = script.Name,
 	alias = { "/whisper", "/w" },
-	clientRun = function(p0, p1, p2)
+	clientRun = function(p1, p2, p3)
 		-- upvalues: getNameFromWhisperModule (ref), dictionary (ref), getAutocompletePlayersFromStringModule (ref), whisper (ref), textChatService (ref), robloxReplicatedStorageService (ref), chatInputBarActivatedWhisperModeModule (ref)
-		local var8 = getNameFromWhisperModule(p2, p0:getState().AutoCastCommands[script.Name])
+		local var1 = getNameFromWhisperModule(p3, p1:getState().AutoCastCommands[script.Name])
 		
-		if var8 then
-			local var10
-			local players = p0:getState().Players
-			local var9 = getAutocompletePlayersFromStringModule(dictionary.join(players, {
-				byUserId = dictionary.removeKey(players.byUserId, tostring(p1))
-			}), var8)
+		if var1 then
+			local var2
+			local players = p1:getState().Players
+			local var3 = getAutocompletePlayersFromStringModule(dictionary.join(players, {
+				byUserId = dictionary.removeKey(players.byUserId, tostring(p2))
+			}), var1)
 			
-			if #var9 == 0 then
+			if #var3 == 0 then
 				whisper:debug("Autocomplete: No matches!")
-				var10 = players.byUserId[tostring(p1)]
+				var2 = players.byUserId[tostring(p2)]
 				
-				return if var10 and (var8 == var10.displayName or var8 == "@" .. var10.username) then {
+				return if var2 and (var1 == var2.displayName or var1 == "@" .. var10.username) then {
 					key = "InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf",
 					args = nil,
 					metadata = "Roblox.Whisper.Error.CannotWhisperToSelf"
 				} else {
 					key = "CoreScripts.TextChat.Mute.Error.TargetDoesNotExist",
 					metadata = "Roblox.Whisper.Error.TargetDoesNotExist",
-					args = { RBX_NAME = var8 or "" }
+					args = { RBX_NAME = var1 or "" }
 				}
-			elseif #var9 ~= 1 then
+			elseif #var3 ~= 1 then
 				whisper:debug("Autocomplete: Too many matches!")
 				
 				return {
@@ -44,15 +44,15 @@ return {
 					metadata = "Roblox.Whisper.Error.TooManyMatches"
 				}
 			end
-			var10 = var9[1]
-			local var11 = tonumber(var10.userId)
+			var2 = var3[1]
+			local var4 = tonumber(var2.userId)
 			
-			if not var11 then
+			if not var4 then
 				return { key = "", metadata = "Roblox.Whisper.Error.Unknown" }
 			end
-			local var12 = textChatService:FindFirstChild(string.format("RBXWhisper:%d_%d", if p1 < var11 then p1 else var11, if var11 < p1 then p1 else var11), true)
+			local var5 = textChatService:FindFirstChild(string.format("RBXWhisper:%d_%d", if p2 < var4 then p2 else var4, if var4 < p2 then p2 else var4), true)
 			
-			if not var12 then
+			if not var5 then
 				local experienceChat = robloxReplicatedStorageService:FindFirstChild("ExperienceChat")
 				
 				if not experienceChat then
@@ -67,15 +67,15 @@ return {
 					
 					return { key = "", metadata = "Roblox.Whisper.Error.Unknown" }
 				end
-				var12 = whisperChat:InvokeServer(var10.userId)
+				var5 = whisperChat:InvokeServer(var2.userId)
 				
-				if var12 then
-					p0:dispatch(chatInputBarActivatedWhisperModeModule(nil, var12))
+				if var5 then
+					p1:dispatch(chatInputBarActivatedWhisperModeModule(nil, var5))
 					
 					return {
 						key = "CoreScripts.TextChat.Notification.WhisperChat.Created",
 						metadata = "Roblox.Whisper.Info.Success",
-						args = { RBX_NAME = var8 }
+						args = { RBX_NAME = var1 }
 					}
 				else
 					whisper:error("Could not create whisper channel for some reason.")

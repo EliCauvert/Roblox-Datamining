@@ -1,8 +1,8 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
 
-local function assignIndex(value, p0)
+local function assignIndex(value, p1)
 	-- upvalues: assignIndex (ref)
-	value.index = p0
+	value.index = p1
 	
 	if value.children then
 		for i, v in value.children do
@@ -11,14 +11,14 @@ local function assignIndex(value, p0)
 	end
 end
 
-return function(p1)
+return function(p2)
 	-- upvalues: assignIndex (ref)
-	p1.index = 1
+	p2.index = 1
 	
-	if p1.children then
-		for i, v in p1.children do
+	if p2.children then
+		for i, v in p2.children do
 			assignIndex(v, i)
 		end
 	end
-	return p1
+	return p2
 end

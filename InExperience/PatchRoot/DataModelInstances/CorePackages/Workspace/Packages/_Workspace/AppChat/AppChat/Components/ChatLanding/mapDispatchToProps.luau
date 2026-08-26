@@ -5,37 +5,37 @@ local fetchConversationsByPageModule = require(appChat.Conversations.Thunks.fetc
 local networkingChatModule = require(appChat.Http.NetworkingChat)
 local createConversationModule = require(appChat.Conversations.Thunks.createConversation)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roactPaginator (ref), fetchConversationsByPageModule (ref), promiseModule (ref), networkingChatModule (ref), createConversationModule (ref)
 	return {
 		[roactPaginator.fetchInit] = function()
-			-- upvalues: p0 (ref), fetchConversationsByPageModule (copy)
-			return p0(fetchConversationsByPageModule())
+			-- upvalues: p1 (ref), fetchConversationsByPageModule (copy)
+			return p1(fetchConversationsByPageModule())
 		end,
-		[roactPaginator.fetchWithCursor] = function(p1)
-			-- upvalues: promiseModule (copy), p0 (ref), fetchConversationsByPageModule (copy)
-			return promiseModule.new(function(p2)
-				-- upvalues: p0 (copy), fetchConversationsByPageModule (copy), p1 (ref)
+		[roactPaginator.fetchWithCursor] = function(p2)
+			-- upvalues: promiseModule (copy), p1 (ref), fetchConversationsByPageModule (copy)
+			return promiseModule.new(function(p3)
+				-- upvalues: p1 (copy), fetchConversationsByPageModule (copy), p2 (ref)
 				coroutine.wrap(function()
-					-- upvalues: p0 (copy), fetchConversationsByPageModule (copy), p1 (copy), p2 (ref)
-					local var5, var6, var7 = p0(fetchConversationsByPageModule(p1)):await()
+					-- upvalues: p1 (copy), fetchConversationsByPageModule (copy), p2 (copy), p3 (ref)
+					local var1, var2, var3 = p1(fetchConversationsByPageModule(p2)):await()
 					
-					if var5 then
-						p2(var6, var7)
+					if var1 then
+						p3(var2, var3)
 						
 						return
 					end
-					p2(nil, p1)
+					p3(nil, p2)
 				end)()
 			end)
 		end,
-		startOneToOneConversation = function(p3)
-			-- upvalues: p0 (ref), networkingChatModule (copy)
-			return p0(networkingChatModule.StartOneToOneConversation.API(p3))
+		startOneToOneConversation = function(p2)
+			-- upvalues: p1 (ref), networkingChatModule (copy)
+			return p1(networkingChatModule.StartOneToOneConversation.API(p2))
 		end,
-		createOneToOneConversation = function(p4)
-			-- upvalues: p0 (ref), createConversationModule (copy)
-			return p0(createConversationModule("one_to_one", { p4 }))
+		createOneToOneConversation = function(p2)
+			-- upvalues: p1 (ref), createConversationModule (copy)
+			return p1(createConversationModule("one_to_one", { p2 }))
 		end
 	}
 end

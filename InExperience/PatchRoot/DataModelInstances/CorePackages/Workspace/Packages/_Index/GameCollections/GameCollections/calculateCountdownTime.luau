@@ -1,19 +1,19 @@
-﻿return function(p0)
-	p0 += 59
-	local var0 = 0
+﻿return function(p1)
+	p1 += 59
 	local var1 = 0
 	local var2 = 0
+	local var3 = 0
 	
-	if p0 >= 86400 then
-		var0 = math.floor(p0 / 86400)
-		p0 -= var0 * 86400
+	if p1 >= 86400 then
+		var1 = math.floor(p1 / 86400)
+		p1 -= var1 * 86400
 	end
-	if p0 >= 3600 then
-		var1 = math.floor(p0 / 3600)
-		p0 -= var1 * 3600
+	if p1 >= 3600 then
+		var2 = math.floor(p1 / 3600)
+		p1 -= var2 * 3600
 	end
-	if p0 > 0 then
-		var2 = math.floor(p0 / 60)
+	if p1 > 0 then
+		var3 = math.floor(p1 / 60)
 	end
-	return { days = var0, hours = var1, minutes = var2 }
+	return { days = var1, hours = var2, minutes = var3 }
 end

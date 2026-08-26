@@ -1,7 +1,7 @@
-﻿return require(script:FindFirstAncestor("GameVotesRodux").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2)
-	assert(type(p0) == "string", "SetGameVotes: universeId must be a string")
-	assert(type(p1) == "number", "SetGameVotes: upVotes must be a number")
-	assert(type(p2) == "number", "SetGameVotes: downVotes must be a number")
+﻿return require(script:FindFirstAncestor("GameVotesRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3)
+	assert(type(p1) == "string", "SetGameVotes: universeId must be a string")
+	assert(type(p2) == "number", "SetGameVotes: upVotes must be a number")
+	assert(type(p3) == "number", "SetGameVotes: downVotes must be a number")
 	
-	return { universeId = p0, upVotes = p1, downVotes = p2 }
+	return { universeId = p1, upVotes = p2, downVotes = p3 }
 end)

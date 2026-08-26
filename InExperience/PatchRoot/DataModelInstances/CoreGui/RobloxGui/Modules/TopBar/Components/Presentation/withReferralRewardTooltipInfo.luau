@@ -1,10 +1,10 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local reactModule = require(corePackagesService.Packages.React)
 local httpRequestModule = require(corePackagesService.Packages.HttpRequest)
-local var3 = httpRequestModule.config({
-	requestFunction = function(p0, p1, p2)
+local var1 = httpRequestModule.config({
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: httpRequestModule (ref)
-		return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
+		return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
 	maxRetryCount = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("WithReferralRewardTooltipInfoHttpRetryCount", 4) else nil
 })
@@ -13,44 +13,44 @@ local useLocalization = require(corePackagesService.Workspace.Packages.Localizat
 local cryoModule = require(corePackagesService.Packages.Cryo)
 
 function GetReferralRewardTooltipInfo()
-	-- upvalues: url (ref), var3 (ref)
-	return var3(string.format("%sreferral-reward-metadata/v1/get-reward-metadata?%s", url.APIS_URL, url:makeQueryString({ UniverseId = game.GameId })), "GET")
+	-- upvalues: url (ref), var1 (ref)
+	return var1(string.format("%sreferral-reward-metadata/v1/get-reward-metadata?%s", url.APIS_URL, url:makeQueryString({ UniverseId = game.GameId })), "GET")
 end
 
-function withReferralRewardTooltipInfo(p3)
+function withReferralRewardTooltipInfo(p1)
 	-- upvalues: cryoModule (ref), reactModule (ref), useLocalization (ref)
-	return function(p4)
-		-- upvalues: cryoModule (copy), reactModule (copy), useLocalization (copy), p3 (ref)
-		local var5 = cryoModule.Dictionary.join(p4, { referralRewardTooltipText = "" })
-		local var6, var7 = reactModule.useState("")
+	return function(p2)
+		-- upvalues: cryoModule (copy), reactModule (copy), useLocalization (copy), p1 (ref)
+		local var2 = cryoModule.Dictionary.join(p2, { referralRewardTooltipText = "" })
+		local var3, var4 = reactModule.useState("")
 		reactModule.useEffect(function()
-			-- upvalues: var7 (ref)
-			GetReferralRewardTooltipInfo():andThen(function(p6)
-				-- upvalues: var7 (copy)
-				if p6 and p6.responseBody and p6.responseBody.name then
-					var7(p6.responseBody.name)
+			-- upvalues: var4 (ref)
+			GetReferralRewardTooltipInfo():andThen(function(p3)
+				-- upvalues: var4 (copy)
+				if p3 and p3.responseBody and p3.responseBody.name then
+					var4(p3.responseBody.name)
 					task.delay(4, function()
-						-- upvalues: var7 (copy)
-						var7("")
+						-- upvalues: var4 (copy)
+						var4("")
 					end)
 				end
-			end):catch(function(p5)
-				warn(p5)
+			end):catch(function(p3)
+				warn(p3)
 			end)
 		end, {})
-		local var8 = useLocalization({
+		local var5 = useLocalization({
 			referralRewardTooltipText = {
 				"CoreScripts.TopBar.RobloxMenuReferralRewardTooltip",
-				referralRewardName = var6
+				referralRewardName = var3
 			}
 		})
 		
-		if var6 ~= "" then
-			var5 = cryoModule.Dictionary.join(var5, {
-				referralRewardTooltipText = var8.referralRewardTooltipText
+		if var3 ~= "" then
+			var2 = cryoModule.Dictionary.join(var2, {
+				referralRewardTooltipText = var5.referralRewardTooltipText
 			})
 		end
-		return reactModule.createElement(p3, var5)
+		return reactModule.createElement(p1, var2)
 	end
 end
 

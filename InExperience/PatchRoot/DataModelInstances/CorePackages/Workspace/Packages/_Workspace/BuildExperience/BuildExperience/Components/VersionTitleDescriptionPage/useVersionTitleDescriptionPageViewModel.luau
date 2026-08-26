@@ -8,82 +8,82 @@ local getVersionInformationStoreModule = require(buildExperience.Stores.GetVersi
 local _ = require(script.Parent.VersionTitleDescriptionPageView)
 local dataStatus = dataHydrationModule.DataStatus
 
-return function(p0)
+return function(p1)
 	-- upvalues: getVersionInformationStoreModule (ref), placeVersionHistoryModule (ref), reactModule (ref), signalsReactModule (ref), dataStatus (ref)
-	local var6 = getVersionInformationStoreModule()
+	local var1 = getVersionInformationStoreModule()
 	local placeVersionHistoryStore = placeVersionHistoryModule.getPlaceVersionHistoryStore()
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: placeVersionHistoryStore (ref), p0 (ref)
-		return placeVersionHistoryStore.getAndFetchHistory(p0.placeId)
-	end, { p0.placeId, placeVersionHistoryStore })
-	local var9 = signalsReactModule.useSignalState(var8.data)
-	local var10 = signalsReactModule.useSignalState(var8.status)
-	local var11 = signalsReactModule.useSignalState(var6.getDraft)
-	local var12 = if var11 == nil or var11.placeId ~= p0.placeId then nil else var11
-	local var13 = if var9 ~= nil then nil else var9.placeVersions[1]
-	local var14 = if var12 ~= nil then (if var13 ~= nil then nil else var13.title) or "" else var12.title
-	local var15 = if var12 ~= nil then (if var13 ~= nil then nil else var13.description) or "" else var12.description
-	local var16 = if var12 == nil then if var10 ~= dataStatus.Ready then var10 == dataStatus.Failed else true else true
-	local var17, var18 = reactModule.useBinding("")
-	local var19, var20 = reactModule.useBinding("")
-	local var21 = reactModule.useRef("")
-	local var22 = reactModule.useRef("")
-	local var23, var24 = reactModule.useState(nil)
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: placeVersionHistoryStore (ref), p1 (ref)
+		return placeVersionHistoryStore.getAndFetchHistory(p1.placeId)
+	end, { p1.placeId, placeVersionHistoryStore })
+	local var3 = signalsReactModule.useSignalState(var2.data)
+	local var4 = signalsReactModule.useSignalState(var2.status)
+	local var5 = signalsReactModule.useSignalState(var1.getDraft)
+	local var6 = if var5 == nil or var5.placeId ~= p1.placeId then nil else var5
+	local var7 = if var3 ~= nil then nil else var3.placeVersions[1]
+	local var8 = if var6 ~= nil then (if var7 ~= nil then nil else var7.title) or "" else var6.title
+	local var9 = if var6 ~= nil then (if var7 ~= nil then nil else var7.description) or "" else var6.description
+	local var10 = if var6 == nil then if var4 ~= dataStatus.Ready then var4 == dataStatus.Failed else true else true
+	local var11, var12 = reactModule.useBinding("")
+	local var13, var14 = reactModule.useBinding("")
+	local var15 = reactModule.useRef("")
+	local var16 = reactModule.useRef("")
+	local var17, var18 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), var23 (ref), p0 (ref), var21 (ref), var14 (ref), var22 (ref), var15 (ref), var18 (ref), var20 (ref), var24 (ref)
-		if var16 and var23 ~= p0.placeId then
-			var21.current = var14
-			var22.current = var15
-			var18(var14)
-			var20(var15)
-			var24(p0.placeId)
+		-- upvalues: var10 (ref), var17 (ref), p1 (ref), var15 (ref), var8 (ref), var16 (ref), var9 (ref), var12 (ref), var14 (ref), var18 (ref)
+		if var10 and var17 ~= p1.placeId then
+			var15.current = var8
+			var16.current = var9
+			var12(var8)
+			var14(var9)
+			var18(p1.placeId)
 			
 			return
 		end
 	end, {
-		var15,
-		var14,
-		var23,
-		var16,
-		p0.placeId
+		var9,
+		var8,
+		var17,
+		var10,
+		p1.placeId
 	})
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var23 (ref), p0 (ref), var17 (ref), var19 (ref), var21 (ref), var22 (ref), var6 (ref)
-		if var23 ~= p0.placeId then return end
-		local value = var17:getValue()
-		local value_1 = var19:getValue()
+	local var19 = reactModule.useCallback(function()
+		-- upvalues: var17 (ref), p1 (ref), var11 (ref), var13 (ref), var15 (ref), var16 (ref), var1 (ref)
+		if var17 ~= p1.placeId then return end
+		local value = var11:getValue()
+		local value_1 = var13:getValue()
 		
-		if value == var21.current and value_1 == var22.current then
+		if value == var15.current and value_1 == var16.current then
 			return
 		end
-		var6.setDraft(p0.placeId, value, value_1)
-		var21.current = value
-		var22.current = value_1
+		var1.setDraft(p1.placeId, value, value_1)
+		var15.current = value
+		var16.current = value_1
 	end, {
-		var19,
-		var23,
-		p0.placeId,
+		var13,
 		var17,
-		var6
+		p1.placeId,
+		var11,
+		var1
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var25 (ref)
-		return var25
-	end, { var25 })
+		-- upvalues: var19 (ref)
+		return var19
+	end, { var19 })
 	
 	return {
-		isReady = var23 == p0.placeId,
+		isReady = var17 == p1.placeId,
 		onBack = reactModule.useCallback(function()
-			-- upvalues: var25 (ref), p0 (ref)
-			var25()
-			p0.onBack()
-		end, { p0.onBack, var25 }),
-		onDescriptionChanged = var20,
-		onFocusLost = var25,
-		onTitleChanged = var18,
-		titleText = var17,
-		descriptionText = var19,
-		layoutOrder = p0.layoutOrder,
-		testId = p0.testId
+			-- upvalues: var19 (ref), p1 (ref)
+			var19()
+			p1.onBack()
+		end, { p1.onBack, var19 }),
+		onDescriptionChanged = var14,
+		onFocusLost = var19,
+		onTitleChanged = var12,
+		titleText = var11,
+		descriptionText = var13,
+		layoutOrder = p1.layoutOrder,
+		testId = p1.testId
 	}
 end

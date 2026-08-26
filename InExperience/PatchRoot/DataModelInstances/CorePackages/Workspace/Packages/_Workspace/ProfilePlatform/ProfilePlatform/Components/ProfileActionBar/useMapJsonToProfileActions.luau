@@ -10,7 +10,7 @@ local myRoduxNetworkingModule = require(profilePlatform.Networking.myRoduxNetwor
 local iconName = require(parent.Foundation).Enums.IconName
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var5 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local networkStatus = myRoduxNetworkingModule.Enum.NetworkStatus
 local enumsModule = require(profilePlatform.Common.Enums)
 local useProfileActionsModule = require(profilePlatform.Hooks.useProfileActions)
@@ -28,7 +28,7 @@ local fFlagProfilePlatformEnableEditLookModule = require(profilePlatform.Flags.F
 local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 local fFlagProfilePlatformEnableUnlockChatModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat)
 local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
-local var20 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
+local var2 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
 local dashModule = require(parent.Dash)
 local t = {
 	[enumsModule.ProfileActions.AcceptFriendRequest] = true,
@@ -58,9 +58,9 @@ local t = {
 	[enumsModule.ProfileActions.CurrencyTransfer] = if fFlagProfilePlatformEnableCurrencyTransfer then true else nil
 }
 
-function isJoinExperience(p0)
+function isJoinExperience(p1)
 	-- upvalues: enumsModule (ref)
-	for i, v in p0 do
+	for i, v in p1 do
 		if v.type == enumsModule.ProfileActions.JoinExperience then
 			return true
 		end
@@ -68,41 +68,41 @@ function isJoinExperience(p0)
 	return false
 end
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useSelector (ref), networkingPresenceModule (ref), networkStatus (ref), useProfileActionsModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), reactModule (ref), var20 (ref), useEffectOnce (ref), fFlagProfilePlatformEnableUserProfileButtonsBacktestModule (ref), dashModule (ref), t (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagEnableProfilePlatformDisabledActions (ref), fFlagEnableCommunityVerificationModalModule (ref), fFlagPortEnableCommunityVerificationModalModule (ref), iconName (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateDown (ref), fFlagEnableProfilePlatformDisabledReasonTextModule (ref)
-	local var23 = useDispatch()
+return function(p2)
+	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useSelector (ref), networkingPresenceModule (ref), networkStatus (ref), useProfileActionsModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), reactModule (ref), var2 (ref), useEffectOnce (ref), fFlagProfilePlatformEnableUserProfileButtonsBacktestModule (ref), dashModule (ref), t (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagEnableProfilePlatformDisabledActions (ref), fFlagEnableCommunityVerificationModalModule (ref), fFlagPortEnableCommunityVerificationModalModule (ref), iconName (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fFlagEnableProfilePlatformDisabledReasonTextModule (ref)
+	local var3 = useDispatch()
 	local actions = useProfileJsonComponentModule(enumsModule.Components.Actions) or {}
-	local var25 = if fFlagProfilePlatformPresenceStoreMigrationModule then nil else useSelector(function(p2)
-		-- upvalues: networkingPresenceModule (copy), p1 (ref), networkStatus (copy)
-		return networkingPresenceModule.GetPresencesFromUserIds.getStatus(p2, p1) == networkStatus.NotStarted
+	local var4 = if fFlagProfilePlatformPresenceStoreMigrationModule then nil else useSelector(function(p3)
+		-- upvalues: networkingPresenceModule (copy), p2 (ref), networkStatus (copy)
+		return networkingPresenceModule.GetPresencesFromUserIds.getStatus(p3, p2) == networkStatus.NotStarted
 	end)
-	local var26 = useProfileActionsModule(enumsModule.ButtonSurface.Actions)
+	local var5 = useProfileActionsModule(enumsModule.ButtonSurface.Actions)
 	local t_1 = {}
 	local t_2 = {}
 	local t_3 = {}
 	
 	if fFlagProfilePlatformAddCurrentlyPlayingModule then
 		reactModule.useEffect(function()
-			-- upvalues: actions (ref), fFlagProfilePlatformPresenceStoreMigrationModule (copy), var20 (copy), p1 (ref), var23 (ref), networkingPresenceModule (copy)
+			-- upvalues: actions (ref), fFlagProfilePlatformPresenceStoreMigrationModule (copy), var2 (copy), p2 (ref), var3 (ref), networkingPresenceModule (copy)
 			if isJoinExperience(actions.buttons) then
 				if fFlagProfilePlatformPresenceStoreMigrationModule then
-					var20.RefreshPresenceByUserId(p1)
+					var2.RefreshPresenceByUserId(p2)
 					
 					return
 				end
-				var23(networkingPresenceModule.GetPresencesFromUserIds.API({ p1 }))
+				var3(networkingPresenceModule.GetPresencesFromUserIds.API({ p2 }))
 			end
-		end, { actions.buttons, var23, p1 })
+		end, { actions.buttons, var3, p2 })
 	else
 		useEffectOnce(function()
-			-- upvalues: fFlagProfilePlatformPresenceStoreMigrationModule (copy), var20 (copy), p1 (ref), var23 (ref), networkingPresenceModule (copy)
+			-- upvalues: fFlagProfilePlatformPresenceStoreMigrationModule (copy), var2 (copy), p2 (ref), var3 (ref), networkingPresenceModule (copy)
 			if fFlagProfilePlatformPresenceStoreMigrationModule then
-				var20.RefreshPresenceByUserId(p1)
+				var2.RefreshPresenceByUserId(p2)
 				
 				return
 			end
-			var23(networkingPresenceModule.GetPresencesFromUserIds.API({ p1 }))
-		end, isJoinExperience(actions.buttons) and (if fFlagProfilePlatformPresenceStoreMigrationModule then true else var25))
+			var3(networkingPresenceModule.GetPresencesFromUserIds.API({ p2 }))
+		end, isJoinExperience(actions.buttons) and (if fFlagProfilePlatformPresenceStoreMigrationModule then true else var4))
 	end
 	local buttons = fFlagProfilePlatformEnableUserProfileButtonsBacktestModule and dashModule.find(actions.buttons, function(p3)
 		-- upvalues: enumsModule (copy)
@@ -111,20 +111,20 @@ return function(p1)
 	
 	for i, v in ipairs(actions.buttons) do
 		if not buttons or v.type == enumsModule.ProfileActions.JoinExperience or not t[v.type] then
-			local type = var26[v.type]
+			local type = var5[v.type]
 			
 			if fFlagProfilePlatformEnableEditAppearanceMenuModule and v.subActions then
 				local t_4 = {}
 				
 				for i_1, v_1 in v.subActions do
-					local var32 = var26[v_1]
+					local var6 = var5[v_1]
 					
-					if var32 then
+					if var6 then
 						table.insert(t_4, {
 							id = v_1,
-							text = var32.text,
-							icon = var32.icon,
-							onActivated = var32.onActivated
+							text = var6.text,
+							icon = var6.icon,
+							onActivated = var6.onActivated
 						})
 					end
 				end
@@ -137,13 +137,13 @@ return function(p1)
 					type.icon = if fFlagEnableCommunityVerificationModalModule and fFlagPortEnableCommunityVerificationModalModule then iconName.LockClosed else nil
 					
 					function type.onActivated()
-						-- upvalues: enumsModule (copy), v (ref), fFlagSignalsNavP3Dispatch (copy), var5 (copy), var23 (ref), navigateDown (copy)
+						-- upvalues: enumsModule (copy), v (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var3 (ref), navigateDown (copy)
 						local t = {
 							name = enumsModule.Screens.CommunityVerificationModal,
 							extraProps = { disabledReason = v.disabledReason }
 						}
 						
-						return if fFlagSignalsNavP3Dispatch then var5.down(var5.fromLegacyPage(t)) else var23(navigateDown(t))
+						return if fFlagSignalsNavP3Dispatch then var1.down(var1.fromLegacyPage(t)) else var3(navigateDown(t))
 					end
 				else
 					type.isDisabled = true

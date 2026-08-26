@@ -7,22 +7,22 @@ local buildASTSchema = require(parent.GraphQL).buildASTSchema
 local _ = require(script.Parent.types)
 local getDocumentNodeFromSchema = require(script.Parent["print-schema-with-directives"]).getDocumentNodeFromSchema
 
-local function buildFixedSchema(p0, p1)
+local function buildFixedSchema(p1, p2)
 	-- upvalues: getDocumentNodeFromSchema (ref), buildASTSchema (ref), object (ref), boolean (ref)
-	return buildASTSchema(getDocumentNodeFromSchema(p0), object.assign({}, if boolean.toJSBoolean(p1) then p1 else {}))
+	return buildASTSchema(getDocumentNodeFromSchema(p1), object.assign({}, if boolean.toJSBoolean(p2) then p2 else {}))
 end
 
-function t.fixSchemaAst(p2, p3)
+function t.fixSchemaAst(p1, p2)
 	-- upvalues: boolean (ref), buildFixedSchema (ref)
-	local var3 = if not (boolean.toJSBoolean(p2.astNode) and boolean.toJSBoolean(p2.extensionASTNodes)) then buildFixedSchema(p2, p3) else nil
+	local var1 = if not (boolean.toJSBoolean(p1.astNode) and boolean.toJSBoolean(p1.extensionASTNodes)) then buildFixedSchema(p1, p2) else nil
 	
-	if not boolean.toJSBoolean(p2.astNode) and var3 and boolean.toJSBoolean(var3.astNode) then
-		p2.astNode = var3.astNode
+	if not boolean.toJSBoolean(p1.astNode) and var1 and boolean.toJSBoolean(var1.astNode) then
+		p1.astNode = var1.astNode
 	end
-	if not boolean.toJSBoolean(p2.extensionASTNodes) and var3 and boolean.toJSBoolean(var3.astNode) then
-		p2.extensionASTNodes = var3.extensionASTNodes
+	if not boolean.toJSBoolean(p1.extensionASTNodes) and var1 and boolean.toJSBoolean(var1.astNode) then
+		p1.extensionASTNodes = var1.extensionASTNodes
 	end
-	return p2
+	return p1
 end
 
 return t

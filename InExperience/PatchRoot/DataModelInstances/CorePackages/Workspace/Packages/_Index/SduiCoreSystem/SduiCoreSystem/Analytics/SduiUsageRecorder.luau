@@ -3,28 +3,28 @@ local sduiUsageAnalyticsModule = require(sduiCoreSystem.Analytics.SduiUsageAnaly
 local fFlagSduiUsageTelemetry = require(sduiCoreSystem.Parent.SharedFlags).FFlagSduiUsageTelemetry
 local discoverySduiTypeUsageHundredthsPercent = game:DefineFastInt("DiscoverySduiTypeUsageHundredthsPercent", 0)
 local discoverySduiParamUsageHundredthsPercent = game:DefineFastInt("DiscoverySduiParamUsageHundredthsPercent", 0)
-local var4 = false
-local var5 = false
+local var1 = false
+local var2 = false
 
 if fFlagSduiUsageTelemetry then
-	var4 = math.random(10000) <= discoverySduiTypeUsageHundredthsPercent
-	var5 = math.random(10000) <= discoverySduiParamUsageHundredthsPercent
+	var1 = math.random(10000) <= discoverySduiTypeUsageHundredthsPercent
+	var2 = math.random(10000) <= discoverySduiParamUsageHundredthsPercent
 end
 local t = {}
 local t_1 = {}
 
-local function getOrCreateAccumulator(p0, p1)
+local function getOrCreateAccumulator(p1, p2)
 	-- upvalues: t (write)
-	local var19 = t[p0]
+	local var3 = t[p1]
 	
-	if not var19 then
-		var19 = {}
-		t[p0] = var19
+	if not var3 then
+		var3 = {}
+		t[p1] = var3
 	end
-	local var20 = var19[p1]
+	local var4 = var3[p2]
 	
-	if var20 then
-		return var20
+	if var4 then
+		return var4
 	end
 	local t_1 = {
 		hasRecorded = false,
@@ -33,23 +33,23 @@ local function getOrCreateAccumulator(p0, p1)
 		actionTypes = {},
 		actionParams = {}
 	}
-	var19[p1] = t_1
+	var3[p2] = t_1
 	
 	return t_1
 end
 
-local function getOrCreateGlobalSeen(p2, p3)
+local function getOrCreateGlobalSeen(p1, p2)
 	-- upvalues: t_1 (write)
-	local var22 = t_1[p2]
+	local var3 = t_1[p1]
 	
-	if not var22 then
-		var22 = {}
-		t_1[p2] = var22
+	if not var3 then
+		var3 = {}
+		t_1[p1] = var3
 	end
-	local var23 = var22[p3]
+	local var4 = var3[p2]
 	
-	if var23 then
-		return var23
+	if var4 then
+		return var4
 	end
 	local t = {
 		types = {},
@@ -57,99 +57,99 @@ local function getOrCreateGlobalSeen(p2, p3)
 		actionTypes = {},
 		actionParams = {}
 	}
-	var22[p3] = t
+	var3[p2] = t
 	
 	return t
 end
 
-local function deltaAndCommit(p4, p5)
+local function deltaAndCommit(p1, p2)
 	local t = {}
 	
-	for i, v in p4 do
-		if not p5[i] then
+	for i, v in p1 do
+		if not p2[i] then
 			t[i] = true
-			p5[i] = true
+			p2[i] = true
 		end
 	end
 	return t
 end
 
-local function recordComponentType(p6, p7, p8)
-	-- upvalues: var4 (write), getOrCreateAccumulator (ref)
-	if not var4 or not p8 then return end
-	local var26 = getOrCreateAccumulator(p6, p7)
+local function recordComponentType(p3, p4, p5)
+	-- upvalues: var1 (write), getOrCreateAccumulator (ref)
+	if not var1 or not p5 then return end
+	local var3 = getOrCreateAccumulator(p3, p4)
 	
-	if not var26.types[p8] then
-		var26.types[p8] = true
-		var26.hasRecorded = true
+	if not var3.types[p5] then
+		var3.types[p5] = true
+		var3.hasRecorded = true
 	end
 end
 
-local function recordProp(p9, p10, p11, p12)
-	-- upvalues: var5 (write), getOrCreateAccumulator (ref)
-	if not var5 or not p11 or not p12 then return end
-	local var27 = getOrCreateAccumulator(p9, p10)
-	local var28 = `{p11}.{p12}`
+local function recordProp(p3, p4, p5, p6)
+	-- upvalues: var2 (write), getOrCreateAccumulator (ref)
+	if not var2 or not p5 or not p6 then return end
+	local var3 = getOrCreateAccumulator(p3, p4)
+	local var4 = `{p5}.{p6}`
 	
-	if not var27.props[var28] then
-		var27.props[var28] = true
-		var27.hasRecorded = true
+	if not var3.props[var4] then
+		var3.props[var4] = true
+		var3.hasRecorded = true
 	end
 end
 
-local function recordActionType(p13, p14, p15)
-	-- upvalues: var4 (write), getOrCreateAccumulator (ref)
-	if not var4 or not p15 then return end
-	local var29 = getOrCreateAccumulator(p13, p14)
+local function recordActionType(p3, p4, p5)
+	-- upvalues: var1 (write), getOrCreateAccumulator (ref)
+	if not var1 or not p5 then return end
+	local var3 = getOrCreateAccumulator(p3, p4)
 	
-	if not var29.actionTypes[p15] then
-		var29.actionTypes[p15] = true
-		var29.hasRecorded = true
+	if not var3.actionTypes[p5] then
+		var3.actionTypes[p5] = true
+		var3.hasRecorded = true
 	end
 end
 
-local function recordActionParam(p16, p17, p18, p19)
-	-- upvalues: var5 (write), getOrCreateAccumulator (ref)
-	if not var5 or not p18 or not p19 then return end
-	local var30 = getOrCreateAccumulator(p16, p17)
-	local var31 = `{p18}.{p19}`
+local function recordActionParam(p3, p4, p5, p6)
+	-- upvalues: var2 (write), getOrCreateAccumulator (ref)
+	if not var2 or not p5 or not p6 then return end
+	local var3 = getOrCreateAccumulator(p3, p4)
+	local var4 = `{p5}.{p6}`
 	
-	if not var30.actionParams[var31] then
-		var30.actionParams[var31] = true
-		var30.hasRecorded = true
+	if not var3.actionParams[var4] then
+		var3.actionParams[var4] = true
+		var3.hasRecorded = true
 	end
 end
 
-local function flushPageVersion(p20, p21)
+local function flushPageVersion(p3, p4)
 	-- upvalues: t (write), getOrCreateGlobalSeen (ref), deltaAndCommit (ref), sduiUsageAnalyticsModule (ref)
-	local var32 = t[p20]
-	local var33 = var32 and var32[p21]
+	local var3 = t[p3]
+	local var4 = var3 and var3[p4]
 	
-	if not var33 or not var33.hasRecorded then return end
-	local var34 = getOrCreateGlobalSeen(p20, p21)
-	local var35 = deltaAndCommit(var33.types, var34.types)
-	local var36 = deltaAndCommit(var33.props, var34.props)
-	local var37 = deltaAndCommit(var33.actionTypes, var34.actionTypes)
-	local var38 = deltaAndCommit(var33.actionParams, var34.actionParams)
-	var32[p21] = nil
+	if not var4 or not var4.hasRecorded then return end
+	local var5 = getOrCreateGlobalSeen(p3, p4)
+	local var6 = deltaAndCommit(var4.types, var5.types)
+	local var7 = deltaAndCommit(var4.props, var5.props)
+	local var8 = deltaAndCommit(var4.actionTypes, var5.actionTypes)
+	local var9 = deltaAndCommit(var4.actionParams, var5.actionParams)
+	var3[p4] = nil
 	
-	if next(var32) == nil then
-		t[p20] = nil
+	if next(var3) == nil then
+		t[p3] = nil
 	end
-	if next(var35) ~= nil or next(var37) ~= nil then
+	if next(var6) ~= nil or next(var8) ~= nil then
 		sduiUsageAnalyticsModule.sendTypeUsageEvent({
-			page = p20,
-			version = p21,
-			componentTypes = var35,
-			actionTypes = var37
+			page = p3,
+			version = p4,
+			componentTypes = var6,
+			actionTypes = var8
 		})
 	end
-	if next(var36) ~= nil or next(var38) ~= nil then
+	if next(var7) ~= nil or next(var9) ~= nil then
 		sduiUsageAnalyticsModule.sendParamUsageEvent({
-			page = p20,
-			version = p21,
-			props = var36,
-			actionParams = var38
+			page = p3,
+			version = p4,
+			props = var7,
+			actionParams = var9
 		})
 	end
 end
@@ -168,8 +168,8 @@ local function flushAll()
 	end
 end
 
-local var17 = 1
-local var18 = false
+local var3 = 1
+local var4 = false
 
 return {
 	recordComponentType = recordComponentType,
@@ -177,39 +177,39 @@ return {
 	recordActionType = recordActionType,
 	recordActionParam = recordActionParam,
 	scheduleFlush = function()
-		-- upvalues: var18 (write), var17 (write), flushAll (ref)
-		if var18 then
+		-- upvalues: var4 (write), var3 (write), flushAll (ref)
+		if var4 then
 			return
 		end
-		var18 = true
-		task.delay(var17, function()
-			-- upvalues: var18 (copy), flushAll (copy)
-			var18 = false
+		var4 = true
+		task.delay(var3, function()
+			-- upvalues: var4 (copy), flushAll (copy)
+			var4 = false
 			flushAll()
 		end)
 	end,
 	isTypeSamplingEnabled = function()
-		-- upvalues: var4 (write)
-		return var4
+		-- upvalues: var1 (write)
+		return var1
 	end,
 	isParamSamplingEnabled = function()
-		-- upvalues: var5 (write)
-		return var5
+		-- upvalues: var2 (write)
+		return var2
 	end,
 	_flushAllForTesting = flushAll,
 	_resetAllForTesting = function()
-		-- upvalues: t (write), t_1 (write), var18 (write)
+		-- upvalues: t (write), t_1 (write), var4 (write)
 		t = {}
 		t_1 = {}
-		var18 = false
+		var4 = false
 	end,
-	_setSamplingForTesting = function(value, p22)
-		-- upvalues: var4 (write), var5 (write)
-		var4 = value
-		var5 = p22
+	_setSamplingForTesting = function(value, p3)
+		-- upvalues: var1 (write), var2 (write)
+		var1 = value
+		var2 = p3
 	end,
 	_setFlushDelayForTesting = function(value)
-		-- upvalues: var17 (write)
-		var17 = value
+		-- upvalues: var3 (write)
+		var3 = value
 	end
 }

@@ -5,31 +5,31 @@ local gameJoinCardTTIModule = require(gameJoinCard.Telemetry.GameJoinCardTTI)
 local useGameJoinCardAnalyticsModule = require(script.Parent.useGameJoinCardAnalytics)
 local fFlagJoinCardAgeCheckUpsell = require(parent.SharedFlags).FFlagJoinCardAgeCheckUpsell
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), fFlagJoinCardAgeCheckUpsell (ref), gameJoinCardTTIModule (ref), useGameJoinCardAnalyticsModule (ref)
-	local var4 = reactModule.useRef(tick())
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(false)
-	local var7 = reactModule.useRef(false)
-	local var8 = reactModule.useRef(p0.ctaType)
-	var8.current = p0.ctaType
-	local var9 = reactModule.useRef(p0.wasCached)
-	var9.current = p0.wasCached
+	local var1 = reactModule.useRef(tick())
+	local var2 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(false)
+	local var4 = reactModule.useRef(false)
+	local var5 = reactModule.useRef(p1.ctaType)
+	var5.current = p1.ctaType
+	local var6 = reactModule.useRef(p1.wasCached)
+	var6.current = p1.wasCached
 	reactModule.useEffect(function()
-		-- upvalues: fFlagJoinCardAgeCheckUpsell (copy), var6 (ref), var5 (ref), gameJoinCardTTIModule (copy), var7 (ref), p0 (ref), var4 (ref), useGameJoinCardAnalyticsModule (copy), var8 (ref), var9 (ref)
+		-- upvalues: fFlagJoinCardAgeCheckUpsell (copy), var3 (ref), var2 (ref), gameJoinCardTTIModule (copy), var4 (ref), p1 (ref), var1 (ref), useGameJoinCardAnalyticsModule (copy), var5 (ref), var6 (ref)
 		if not fFlagJoinCardAgeCheckUpsell then return end
-		if not var6.current then
-			var6.current = true
-			var5.current = gameJoinCardTTIModule.consumeMobileCardClickStartMs()
+		if not var3.current then
+			var3.current = true
+			var2.current = gameJoinCardTTIModule.consumeMobileCardClickStartMs()
 		end
-		if var7.current or p0.isLoading then
+		if var4.current or p1.isLoading then
 			return
 		end
-		var7.current = true
+		var4.current = true
 		useGameJoinCardAnalyticsModule.logJoinCardCtaLoadTime({
-			durationMs = tick() * 1000 - (var5.current or var4.current * 1000),
-			ctaType = var8.current,
-			wasCached = var9.current == true
+			durationMs = tick() * 1000 - (var2.current or var1.current * 1000),
+			ctaType = var5.current,
+			wasCached = var6.current == true
 		})
-	end, { p0.isLoading })
+	end, { p1.isLoading })
 end

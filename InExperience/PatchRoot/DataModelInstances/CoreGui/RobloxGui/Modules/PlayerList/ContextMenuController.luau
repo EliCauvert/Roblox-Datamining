@@ -13,252 +13,252 @@ local playerContextualMenuStore = playerListModule.PlayerContextualMenuStore
 local builderIcon = playerListModule.builderIcon
 local buildMenuHeader = playerContextualMenuStore.buildMenuHeader
 local localPlayer = playersService.LocalPlayer
-local var10 = builderIcon("person-plus")
-local var11 = builderIcon("person-trash-can")
-local var12 = builderIcon("circle-slash")
-local var13 = builderIcon("speech-bubble-exclamation")
-local var14 = builderIcon("magnifying-glass-plus")
+local var1 = builderIcon("person-plus")
+local var2 = builderIcon("person-trash-can")
+local var3 = builderIcon("circle-slash")
+local var4 = builderIcon("speech-bubble-exclamation")
+local var5 = builderIcon("magnifying-glass-plus")
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: robloxTranslatorModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: robloxTranslatorModule (copy), p0 (ref)
-		return robloxTranslatorModule:FormatByKey(p0)
+		-- upvalues: robloxTranslatorModule (copy), p1 (ref)
+		return robloxTranslatorModule:FormatByKey(p1)
 	end)
 	
-	return if ok and status and status ~= "" then status else p1
+	return if ok and status and status ~= "" then status else p2
 end
 
-local function getFriendLabelAndIcon(p2)
-	-- upvalues: robloxTranslatorModule (ref), var11 (ref), var10 (ref)
+local function getFriendLabelAndIcon(p1)
+	-- upvalues: robloxTranslatorModule (ref), var2 (ref), var1 (ref)
 	local ok, status
-	if p2 == Enum.FriendStatus.Friend then
-		local var18 = "InGame.PlayerDropDown.Unfriend"
+	if p1 == Enum.FriendStatus.Friend then
+		local var6 = "InGame.PlayerDropDown.Unfriend"
 		ok, status = pcall(function()
-			-- upvalues: robloxTranslatorModule (copy), var18 (ref)
-			return robloxTranslatorModule:FormatByKey(var18)
+			-- upvalues: robloxTranslatorModule (copy), var6 (ref)
+			return robloxTranslatorModule:FormatByKey(var6)
 		end)
 		
-		return if ok and status and status ~= "" then status else "Unfriend", var11
-	elseif p2 == Enum.FriendStatus.FriendRequestSent then
-		local var19 = "InGame.PlayerDropDown.CancelRequest"
+		return if ok and status and status ~= "" then status else "Unfriend", var2
+	elseif p1 == Enum.FriendStatus.FriendRequestSent then
+		local var7 = "InGame.PlayerDropDown.CancelRequest"
 		ok, status = pcall(function()
-			-- upvalues: robloxTranslatorModule (copy), var19 (ref)
-			return robloxTranslatorModule:FormatByKey(var19)
+			-- upvalues: robloxTranslatorModule (copy), var7 (ref)
+			return robloxTranslatorModule:FormatByKey(var7)
 		end)
 		
-		return if ok and status and status ~= "" then status else "Cancel request", var10
-	elseif p2 == Enum.FriendStatus.FriendRequestReceived then
-		local var20 = "InGame.PlayerDropDown.Accept"
+		return if ok and status and status ~= "" then status else "Cancel request", var1
+	elseif p1 == Enum.FriendStatus.FriendRequestReceived then
+		local var8 = "InGame.PlayerDropDown.Accept"
 		ok, status = pcall(function()
-			-- upvalues: robloxTranslatorModule (copy), var20 (ref)
-			return robloxTranslatorModule:FormatByKey(var20)
+			-- upvalues: robloxTranslatorModule (copy), var8 (ref)
+			return robloxTranslatorModule:FormatByKey(var8)
 		end)
 		
-		return if ok and status and status ~= "" then status else "Accept request", var10
+		return if ok and status and status ~= "" then status else "Accept request", var1
 	end
-	local var21 = "InGame.PlayerDropDown.Action.ConnectionRequest"
+	local var9 = "InGame.PlayerDropDown.Action.ConnectionRequest"
 	ok, status = pcall(function()
-		-- upvalues: robloxTranslatorModule (copy), var21 (ref)
-		return robloxTranslatorModule:FormatByKey(var21)
+		-- upvalues: robloxTranslatorModule (copy), var9 (ref)
+		return robloxTranslatorModule:FormatByKey(var9)
 	end)
 	
-	return if ok and status and status ~= "" then status else "Friend request", var10
+	return if ok and status and status ~= "" then status else "Friend request", var1
 end
 
-local _ = function(p3)
-	return if p3 == Enum.FriendStatus.Friend then "friend_remove" elseif p3 == Enum.FriendStatus.FriendRequestSent then "friend_cancel" elseif p3 == Enum.FriendStatus.FriendRequestReceived then "friend_accept" else "friend_send"
+local _ = function(p1)
+	return if p1 == Enum.FriendStatus.Friend then "friend_remove" elseif p1 == Enum.FriendStatus.FriendRequestSent then "friend_cancel" elseif p1 == Enum.FriendStatus.FriendRequestReceived then "friend_accept" else "friend_send"
 end
 
-local function openReportDialog(p4)
+local function openReportDialog(p1)
 	-- upvalues: robloxGui (ref)
 	if require(robloxGui.Modules.isNewInGameMenuEnabled)() then
-		require(robloxGui.Modules.InGameMenuInit).openReportDialog(p4, "PlayerListReskin")
+		require(robloxGui.Modules.InGameMenuInit).openReportDialog(p1, "PlayerListReskin")
 		
 		return
 	end
-	require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuNewContainerPage):ReportPlayer(p4, "PlayerListReskin")
+	require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuNewContainerPage):ReportPlayer(p1, "PlayerListReskin")
 end
 
-local function assembleMenuItems(p5)
-	-- upvalues: getFriendLabelAndIcon (ref), robloxTranslatorModule (ref), var11 (ref), var14 (ref), var12 (ref), var13 (ref)
+local function assembleMenuItems(p1)
+	-- upvalues: getFriendLabelAndIcon (ref), robloxTranslatorModule (ref), var2 (ref), var5 (ref), var3 (ref), var4 (ref)
 	local t = {}
 	
-	if not p5.isSelf and not p5.isBlocked then
-		local ok, status, var27
-		local var23, var24 = getFriendLabelAndIcon(p5.friendStatus)
-		local var25 = p5.friendStatus == Enum.FriendStatus.Friend
+	if not p1.isSelf and not p1.isBlocked then
+		local ok, status, var6
+		local var7, var8 = getFriendLabelAndIcon(p1.friendStatus)
+		local var9 = p1.friendStatus == Enum.FriendStatus.Friend
 		local t_1 = {
 			key = "friend",
-			label = var23,
-			icon = var24,
-			onActivated = p5.actions.onFriend
+			label = var7,
+			icon = var8,
+			onActivated = p1.actions.onFriend
 		}
-		local friendStatus = p5.friendStatus
+		local friendStatus = p1.friendStatus
 		t_1.telemetryAction = if friendStatus == Enum.FriendStatus.Friend then "friend_remove" elseif friendStatus == Enum.FriendStatus.FriendRequestSent then "friend_cancel" elseif friendStatus == Enum.FriendStatus.FriendRequestReceived then "friend_accept" else "friend_send"
-		t_1.requiresConfirm = if var25 then true else nil
+		t_1.requiresConfirm = if var9 then true else nil
 		
-		if var25 then
-			local var28 = "InGame.PlayerDropDown.ConfirmUnfriend"
+		if var9 then
+			local var10 = "InGame.PlayerDropDown.ConfirmUnfriend"
 			ok, status = pcall(function()
-				-- upvalues: robloxTranslatorModule (copy), var28 (ref)
-				return robloxTranslatorModule:FormatByKey(var28)
+				-- upvalues: robloxTranslatorModule (copy), var10 (ref)
+				return robloxTranslatorModule:FormatByKey(var10)
 			end)
-			var27 = if ok and status and status ~= "" then status else "Tap to confirm unfriend"
+			var6 = if ok and status and status ~= "" then status else "Tap to confirm unfriend"
 		else
-			var27 = nil
+			var6 = nil
 		end
 		local ok, status
-		t_1.confirmLabel = var27
+		t_1.confirmLabel = var6
 		table.insert(t, t_1)
 		
-		if p5.friendStatus == Enum.FriendStatus.FriendRequestReceived then
+		if p1.friendStatus == Enum.FriendStatus.FriendRequestReceived then
 			local t_2 = { key = "decline", telemetryAction = "friend_decline" }
-			local var30 = "InGame.PlayerDropDown.Decline"
+			local var11 = "InGame.PlayerDropDown.Decline"
 			ok, status = pcall(function()
-				-- upvalues: robloxTranslatorModule (copy), var30 (ref)
-				return robloxTranslatorModule:FormatByKey(var30)
+				-- upvalues: robloxTranslatorModule (copy), var11 (ref)
+				return robloxTranslatorModule:FormatByKey(var11)
 			end)
 			t_2.label = if ok and status and status ~= "" then status else "Decline"
-			t_2.icon = var11
-			t_2.onActivated = p5.actions.onDecline
+			t_2.icon = var2
+			t_2.onActivated = p1.actions.onDecline
 			table.insert(t, t_2)
 		end
 	end
-	if p5.inspectMenuEnabled then
+	if p1.inspectMenuEnabled then
 		local t_1 = { key = "examine", telemetryAction = "avatar_examine" }
-		local var32 = "InGame.PlayerDropDown.Examine"
+		local var12 = "InGame.PlayerDropDown.Examine"
 		ok, status = pcall(function()
-			-- upvalues: robloxTranslatorModule (copy), var32 (ref)
-			return robloxTranslatorModule:FormatByKey(var32)
+			-- upvalues: robloxTranslatorModule (copy), var12 (ref)
+			return robloxTranslatorModule:FormatByKey(var12)
 		end)
 		t_1.label = if ok and status and status ~= "" then status else "Examine avatar"
-		t_1.icon = var14
-		t_1.onActivated = p5.actions.onExamine
+		t_1.icon = var5
+		t_1.onActivated = p1.actions.onExamine
 		table.insert(t, t_1)
 	end
-	if not p5.isSelf then
-		local var35
+	if not p1.isSelf then
+		local var13
 		local t_1 = { key = "block" }
 		
-		if p5.isBlocked then
-			local var34 = "InGame.PlayerDropDown.UnBlock"
+		if p1.isBlocked then
+			local var14 = "InGame.PlayerDropDown.UnBlock"
 			ok, status = pcall(function()
-				-- upvalues: robloxTranslatorModule (copy), var34 (ref)
-				return robloxTranslatorModule:FormatByKey(var34)
+				-- upvalues: robloxTranslatorModule (copy), var14 (ref)
+				return robloxTranslatorModule:FormatByKey(var14)
 			end)
-			var35 = if ok and status and status ~= "" then status else "Unblock"
+			var13 = if ok and status and status ~= "" then status else "Unblock"
 		else
-			local var36 = "InGame.PlayerDropDown.Block"
+			local var15 = "InGame.PlayerDropDown.Block"
 			ok, status = pcall(function()
-				-- upvalues: robloxTranslatorModule (copy), var36 (ref)
-				return robloxTranslatorModule:FormatByKey(var36)
+				-- upvalues: robloxTranslatorModule (copy), var15 (ref)
+				return robloxTranslatorModule:FormatByKey(var15)
 			end)
-			var35 = if ok and status and status ~= "" then status else "Block"
+			var13 = if ok and status and status ~= "" then status else "Block"
 		end
-		t_1.label = var35
-		t_1.icon = var12
-		t_1.onActivated = p5.actions.onBlock
-		t_1.telemetryAction = if p5.isBlocked then "user_unblock" else "user_block"
+		t_1.label = var13
+		t_1.icon = var3
+		t_1.onActivated = p1.actions.onBlock
+		t_1.telemetryAction = if p1.isBlocked then "user_unblock" else "user_block"
 		table.insert(t, t_1)
 		local t_2 = { key = "report", telemetryAction = "user_report" }
-		local var38 = "InGame.PlayerDropDown.Report"
+		local var16 = "InGame.PlayerDropDown.Report"
 		ok, status = pcall(function()
-			-- upvalues: robloxTranslatorModule (copy), var38 (ref)
-			return robloxTranslatorModule:FormatByKey(var38)
+			-- upvalues: robloxTranslatorModule (copy), var16 (ref)
+			return robloxTranslatorModule:FormatByKey(var16)
 		end)
 		t_2.label = if ok and status and status ~= "" then status else "Report abuse"
-		t_2.icon = var13
-		t_2.onActivated = p5.actions.onReport
+		t_2.icon = var4
+		t_2.onActivated = p1.actions.onReport
 		table.insert(t, t_2)
 	end
 	return t
 end
 
 return {
-	buildMenuData = function(p6, p7, p8)
+	buildMenuData = function(p1, p2, p3)
 		-- upvalues: localPlayer (ref), blockingUtilityModule (ref), assembleMenuItems (ref), guiService (ref), rbxAnalyticsService (ref), requestFriendshipModule (ref), playerContextualMenuStore (ref), playerListVisibilityStore (ref), robloxGui (ref), openReportDialog (ref), buildMenuHeader (ref)
-		local userId = p6.UserId
-		local var39 = localPlayer ~= nil and p6 == localPlayer
-		local var40 = false
+		local userId = p1.UserId
+		local var6 = localPlayer ~= nil and p1 == localPlayer
+		local var7 = false
 		local unknown = Enum.FriendStatus.Unknown
 		
-		if not var39 then
+		if not var6 then
 			pcall(function()
-				-- upvalues: var40 (write), blockingUtilityModule (copy), userId (ref)
-				var40 = blockingUtilityModule:IsPlayerBlockedByUserId(userId)
+				-- upvalues: var7 (write), blockingUtilityModule (copy), userId (ref)
+				var7 = blockingUtilityModule:IsPlayerBlockedByUserId(userId)
 			end)
 			pcall(function()
-				-- upvalues: unknown (write), localPlayer (copy), p6 (ref)
-				unknown = localPlayer:GetFriendStatus(p6)
+				-- upvalues: unknown (write), localPlayer (copy), p1 (ref)
+				unknown = localPlayer:GetFriendStatus(p1)
 			end)
 		end
 		return {
-			player = p6,
-			header = buildMenuHeader(p6),
+			player = p1,
+			header = buildMenuHeader(p1),
 			items = assembleMenuItems({
-				isSelf = var39,
-				isBlocked = var40,
+				isSelf = var6,
+				isBlocked = var7,
 				friendStatus = unknown,
 				inspectMenuEnabled = guiService:GetInspectMenuEnabled(),
 				actions = {
 					onFriend = function()
-						-- upvalues: unknown (write), rbxAnalyticsService (copy), localPlayer (copy), p6 (ref), requestFriendshipModule (copy), p7 (ref)
+						-- upvalues: unknown (write), rbxAnalyticsService (copy), localPlayer (copy), p1 (ref), requestFriendshipModule (copy), p2 (ref)
 						if unknown == Enum.FriendStatus.Friend or unknown == Enum.FriendStatus.FriendRequestSent then
 							rbxAnalyticsService:TrackEvent("Game", "RevokeFriendship", "PlayerDropDown")
-							localPlayer:RevokeFriendship(p6)
+							localPlayer:RevokeFriendship(p1)
 						elseif unknown == Enum.FriendStatus.FriendRequestReceived then
-							requestFriendshipModule(p6, true)()
+							requestFriendshipModule(p1, true)()
 						else
-							requestFriendshipModule(p6)()
+							requestFriendshipModule(p1)()
 						end
-						p7()
+						p2()
 					end,
 					onDecline = function()
-						-- upvalues: rbxAnalyticsService (copy), localPlayer (copy), p6 (ref), p7 (ref)
+						-- upvalues: rbxAnalyticsService (copy), localPlayer (copy), p1 (ref), p2 (ref)
 						rbxAnalyticsService:TrackEvent("Game", "DeclineFriendship", "PlayerDropDown")
-						localPlayer:RevokeFriendship(p6)
-						p7()
+						localPlayer:RevokeFriendship(p1)
+						p2()
 					end,
 					onExamine = function()
-						-- upvalues: p8 (ref), playerContextualMenuStore (copy), playerListVisibilityStore (copy), guiService (copy), userId (ref), p7 (ref)
-						if p8 then
+						-- upvalues: p3 (ref), playerContextualMenuStore (copy), playerListVisibilityStore (copy), guiService (copy), userId (ref), p2 (ref)
+						if p3 then
 							playerContextualMenuStore.setSuppressNextDismissRestore(true)
 							playerListVisibilityStore.setVisible(false)
 						end
 						guiService:InspectPlayerFromUserIdWithCtx(userId, "leaderBoard")
-						p7()
+						p2()
 					end,
 					onBlock = function()
-						-- upvalues: p8 (ref), var40 (write), playerContextualMenuStore (copy), playerListVisibilityStore (copy), blockingUtilityModule (copy), p6 (ref), robloxGui (copy), p7 (ref)
-						if p8 and not var40 then
+						-- upvalues: p3 (ref), var7 (write), playerContextualMenuStore (copy), playerListVisibilityStore (copy), blockingUtilityModule (copy), p1 (ref), robloxGui (copy), p2 (ref)
+						if p3 and not var7 then
 							playerContextualMenuStore.setSuppressNextDismissRestore(true)
 							playerListVisibilityStore.setVisible(false)
 						end
-						if var40 then
+						if var7 then
 							coroutine.wrap(function()
-								-- upvalues: blockingUtilityModule (copy), p6 (copy)
-								blockingUtilityModule:UnblockPlayerAsync(p6)
+								-- upvalues: blockingUtilityModule (copy), p1 (copy)
+								blockingUtilityModule:UnblockPlayerAsync(p1)
 							end)()
 						else
-							require(robloxGui.Modules.Settings.onBlockButtonActivated)(p6, nil, "PlayerListReskin", {})
+							require(robloxGui.Modules.Settings.onBlockButtonActivated)(p1, nil, "PlayerListReskin", {})
 						end
-						p7()
+						p2()
 					end,
 					onReport = function()
-						-- upvalues: p8 (ref), playerContextualMenuStore (copy), playerListVisibilityStore (copy), openReportDialog (copy), p6 (ref), p7 (ref)
-						if p8 then
+						-- upvalues: p3 (ref), playerContextualMenuStore (copy), playerListVisibilityStore (copy), openReportDialog (copy), p1 (ref), p2 (ref)
+						if p3 then
 							playerContextualMenuStore.setSuppressNextDismissRestore(true)
 							playerListVisibilityStore.setVisible(false)
 						end
-						openReportDialog(p6)
-						p7()
+						openReportDialog(p1)
+						p2()
 					end
 				}
 			}),
 			telemetry = {
-				isSelf = var39,
-				friendStatus = if var39 then nil else unknown.Name
+				isSelf = var6,
+				friendStatus = if var6 then nil else unknown.Name
 			}
 		}
 	end,

@@ -4,9 +4,9 @@ local promiseModule = require(parent.Promise)
 local url = require(parent.Http).Url
 local myHttpRequestModule = require(dataHydration.Friends.Networking.myHttpRequest)
 
-return function(p0)
+return function(p1)
 	-- upvalues: promiseModule (ref), url (ref), myHttpRequestModule (ref)
-	return if p0 == nil or tostring(p0) == "" then promiseModule.reject("GetFriendsCountFromUserId called with nil userId") else myHttpRequestModule(string.format("%s/users/%s/friends/count", url.FRIEND_URL, tostring(p0)), "GET"):andThen(function(p1)
-		return if p1 then p1.responseBody else nil
+	return if p1 == nil or tostring(p1) == "" then promiseModule.reject("GetFriendsCountFromUserId called with nil userId") else myHttpRequestModule(string.format("%s/users/%s/friends/count", url.FRIEND_URL, tostring(p1)), "GET"):andThen(function(p2)
+		return if p2 then p2.responseBody else nil
 	end)
 end

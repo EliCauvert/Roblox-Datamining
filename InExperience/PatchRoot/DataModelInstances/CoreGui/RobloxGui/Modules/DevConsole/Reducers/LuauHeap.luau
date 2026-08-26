@@ -11,35 +11,35 @@ local t = {
 	server = { active = 0, compare = 0, snapshots = {} }
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref), setLuauHeapStateModule (ref), immutableModule (ref), setLuauHeapProfileTargetModule (ref), setLuauHeapActiveSnapshotModule (ref), setLuauHeapCompareSnapshotModule (ref)
-	p0 = p0 or t
+	p1 = p1 or t
 	
-	if p1.type == setLuauHeapStateModule.name then
-		return immutableModule.JoinDictionaries(p0, if p1.isClientState then { client = p1.sessionState } else { server = p1.sessionState })
-	elseif p1.type == setLuauHeapProfileTargetModule.name then
-		return immutableModule.JoinDictionaries(p0, { isClientView = p1.isClientView })
-	elseif p1.type == setLuauHeapActiveSnapshotModule.name then
-		if p0.isClientView then
-			local cloned = table.clone(p0.client)
-			cloned.active = p1.active
+	if p2.type == setLuauHeapStateModule.name then
+		return immutableModule.JoinDictionaries(p1, if p2.isClientState then { client = p2.sessionState } else { server = p2.sessionState })
+	elseif p2.type == setLuauHeapProfileTargetModule.name then
+		return immutableModule.JoinDictionaries(p1, { isClientView = p2.isClientView })
+	elseif p2.type == setLuauHeapActiveSnapshotModule.name then
+		if p1.isClientView then
+			local cloned = table.clone(p1.client)
+			cloned.active = p2.active
 			
-			return immutableModule.JoinDictionaries(p0, { client = cloned })
+			return immutableModule.JoinDictionaries(p1, { client = cloned })
 		end
-		local cloned = table.clone(p0.server)
-		cloned.active = p1.active
+		local cloned = table.clone(p1.server)
+		cloned.active = p2.active
 		
-		return immutableModule.JoinDictionaries(p0, { server = cloned })
-	elseif p1.type ~= setLuauHeapCompareSnapshotModule.name then
-		return p0
-	elseif p0.isClientView then
-		local cloned = table.clone(p0.client)
-		cloned.compare = p1.compare
+		return immutableModule.JoinDictionaries(p1, { server = cloned })
+	elseif p2.type ~= setLuauHeapCompareSnapshotModule.name then
+		return p1
+	elseif p1.isClientView then
+		local cloned = table.clone(p1.client)
+		cloned.compare = p2.compare
 		
-		return immutableModule.JoinDictionaries(p0, { client = cloned })
+		return immutableModule.JoinDictionaries(p1, { client = cloned })
 	end
-	local cloned = table.clone(p0.server)
-	cloned.compare = p1.compare
+	local cloned = table.clone(p1.server)
+	cloned.compare = p2.compare
 	
-	return immutableModule.JoinDictionaries(p0, { server = cloned })
+	return immutableModule.JoinDictionaries(p1, { server = cloned })
 end

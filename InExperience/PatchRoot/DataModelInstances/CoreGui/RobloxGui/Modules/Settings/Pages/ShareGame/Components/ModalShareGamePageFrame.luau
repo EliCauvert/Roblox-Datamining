@@ -22,66 +22,66 @@ local color = Color3.fromRGB(41, 41, 41)
 local modalShareGamePageFrame = roactModule.PureComponent:extend("ModalShareGamePageFrame")
 modalShareGamePageFrame.defaultProps = { isVisible = true }
 
-function modalShareGamePageFrame.init(p0)
+function modalShareGamePageFrame.init(p1)
 	-- upvalues: constantsModule (ref), themeModule (ref), text (ref), roactModule (ref)
-	p0.state = { promptMessageFitsFrame = true }
+	p1.state = { promptMessageFitsFrame = true }
 	
-	function p0.onCustomTextAreaSizeChange(p1)
-		-- upvalues: p0 (ref), constantsModule (copy), themeModule (copy), text (copy)
-		local promptMessage = p0.props.promptMessage
-		p0:setState({
-			promptMessageFitsFrame = promptMessage and text.GetTextWidth(promptMessage, themeModule.font(Enum.Font.SourceSans), themeModule.textSize(constantsModule.LayoutSpecific[p0.props.deviceLayout].PAGE_TITLE_TEXT_SIZE)) < p1.AbsoluteSize.X
+	function p0.onCustomTextAreaSizeChange(p2)
+		-- upvalues: p1 (ref), constantsModule (copy), themeModule (copy), text (copy)
+		local promptMessage = p1.props.promptMessage
+		p1:setState({
+			promptMessageFitsFrame = promptMessage and text.GetTextWidth(promptMessage, themeModule.font(Enum.Font.SourceSans), themeModule.textSize(constantsModule.LayoutSpecific[p1.props.deviceLayout].PAGE_TITLE_TEXT_SIZE)) < p2.AbsoluteSize.X
 		})
 	end
 	
-	p0.customTextAreaRef = roactModule.createRef()
+	p1.customTextAreaRef = roactModule.createRef()
 	
 	function p0.onClosePage()
-		-- upvalues: p0 (ref)
-		p0.props.closePage()
+		-- upvalues: p1 (ref)
+		p1.props.closePage()
 		
-		if p0.props.onAfterClosePage then
-			p0.props.onAfterClosePage()
+		if p1.props.onAfterClosePage then
+			p1.props.onAfterClosePage()
 		end
 	end
 end
 
-function modalShareGamePageFrame.didMount(p2)
+function modalShareGamePageFrame.didMount(p1)
 	-- upvalues: getFFlagEnableNewInviteMenuModule (ref), getFFlagEnableNewInviteSendEndpointModule (ref), constantsModule (ref), gameInviteEvents (ref)
-	if getFFlagEnableNewInviteMenuModule() and p2.customTextAreaRef.current then
-		p2.onCustomTextAreaSizeChange(p2.customTextAreaRef.current)
+	if getFFlagEnableNewInviteMenuModule() and p1.customTextAreaRef.current then
+		p1.onCustomTextAreaSizeChange(p1.customTextAreaRef.current)
 	end
-	if getFFlagEnableNewInviteSendEndpointModule() and p2.props.promptMessage and p2.props.analytics then
-		p2.props.analytics:sendEvent(constantsModule.Triggers.DeveloperMultiple, gameInviteEvents.CustomTextShown)
+	if getFFlagEnableNewInviteSendEndpointModule() and p1.props.promptMessage and p1.props.analytics then
+		p1.props.analytics:sendEvent(constantsModule.Triggers.DeveloperMultiple, gameInviteEvents.CustomTextShown)
 	end
 end
 
-function modalShareGamePageFrame.render(p3)
+function modalShareGamePageFrame.render(p1)
 	-- upvalues: getFFlagEnableNewInviteMenuModule (ref), uDim_2 (ref), uDim (ref), constantsModule (ref), uDim_1 (ref), themeModule (ref), roactModule (ref), color (ref), coreGuiService (ref), errorToasterModule (ref), headerModule (ref), backButtonModule (ref), conversationListModule (ref)
-	local analytics = p3.props.analytics
-	local deviceLayout = p3.props.deviceLayout
-	local zIndex = p3.props.zIndex
-	local searchAreaActive = p3.props.searchAreaActive
-	local searchText = p3.props.searchText
-	local isVisible = p3.props.isVisible
-	local var18 = getFFlagEnableNewInviteMenuModule()
-	local var19 = if var18 then uDim_2 else uDim
-	local var20 = var18 and (p3.props.deviceInfo and p3.props.deviceInfo.DeviceLayout == constantsModule.DeviceLayout.PHONE_LANDSCAPE)
+	local analytics = p1.props.analytics
+	local deviceLayout = p1.props.deviceLayout
+	local zIndex = p1.props.zIndex
+	local searchAreaActive = p1.props.searchAreaActive
+	local searchText = p1.props.searchText
+	local isVisible = p1.props.isVisible
+	local var1 = getFFlagEnableNewInviteMenuModule()
+	local var2 = if var1 then uDim_2 else uDim
+	local var3 = var1 and (p1.props.deviceInfo and p1.props.deviceInfo.DeviceLayout == constantsModule.DeviceLayout.PHONE_LANDSCAPE)
 	local vector2 = Vector2.new(0.5, 0.5)
-	local uDim2 = UDim2.new(var19.Scale, 0, uDim_1.Scale, 0)
-	local vector2_1 = Vector2.new(var19.Offset, uDim_1.Offset)
+	local uDim2 = UDim2.new(var2.Scale, 0, uDim_1.Scale, 0)
+	local vector2_1 = Vector2.new(var2.Offset, uDim_1.Offset)
 	local uDim2_1 = UDim2.new(0.5, 0, 0.425, 0)
 	
-	if var20 then
+	if var3 then
 		vector2 = Vector2.new(0.5, 1)
-		uDim2 = UDim2.new(var19.Scale, 0, 1, 0)
-		vector2_1 = Vector2.new(var19.Offset, 1e999)
+		uDim2 = UDim2.new(var2.Scale, 0, 1, 0)
+		vector2_1 = Vector2.new(var2.Offset, 1e999)
 		uDim2_1 = UDim2.new(0.5, 0, 1, 4)
 	end
-	local promptMessage = p3.props.promptMessage
-	local var25 = themeModule.textSize(constantsModule.LayoutSpecific[deviceLayout].PAGE_TITLE_TEXT_SIZE)
-	local promptMessageFitsFrame = var18 and (promptMessage and p3.state.promptMessageFitsFrame)
-	local var27 = if promptMessageFitsFrame then var25 + 10 else 10
+	local promptMessage = p1.props.promptMessage
+	local var4 = themeModule.textSize(constantsModule.LayoutSpecific[deviceLayout].PAGE_TITLE_TEXT_SIZE)
+	local promptMessageFitsFrame = var1 and (promptMessage and p1.state.promptMessageFitsFrame)
+	local var5 = if promptMessageFitsFrame then var4 + 10 else 10
 	
 	return roactModule.createElement("ImageButton", {
 		BackgroundTransparency = 1,
@@ -109,27 +109,27 @@ function modalShareGamePageFrame.render(p3)
 		}, {
 			toasterPortal = roactModule.createElement(roactModule.Portal, { target = coreGuiService }, { Toaster = roactModule.createElement(errorToasterModule) }),
 			Layout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-			Padding = if var18 then roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }) else nil,
+			Padding = if var1 then roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }) else nil,
 			Header = roactModule.createElement(headerModule, {
 				layoutOrder = 0,
 				toggleSearchIcon = true,
 				deviceLayout = deviceLayout,
-				size = UDim2.new(1, 0, 0, if var18 then 40 else 60),
+				size = UDim2.new(1, 0, 0, if var1 then 40 else 60),
 				zIndex = zIndex,
-				closePage = p3.onClosePage,
+				closePage = p1.onClosePage,
 				searchAreaActive = searchAreaActive,
 				iconType = backButtonModule.IconType.Cross
 			}),
-			CustomText = var18 and roactModule.createElement("TextLabel", {
-				Size = UDim2.new(1, 0, 0, var27),
+			CustomText = var1 and roactModule.createElement("TextLabel", {
+				Size = UDim2.new(1, 0, 0, var5),
 				TextYAlignment = Enum.TextYAlignment.Top,
-				TextSize = var25,
+				TextSize = var4,
 				TextColor3 = constantsModule.Color.WHITE,
 				Font = themeModule.font(Enum.Font.SourceSans),
 				BackgroundTransparency = 1,
 				Text = if promptMessageFitsFrame then promptMessage else "",
-				[roactModule.Change.AbsoluteSize] = p3.onCustomTextAreaSizeChange,
-				[roactModule.Ref] = p3.customTextAreaRef
+				[roactModule.Change.AbsoluteSize] = p1.onCustomTextAreaSizeChange,
+				[roactModule.Ref] = p1.customTextAreaRef
 			}),
 			ConversationList = roactModule.createElement(conversationListModule, {
 				topPadding = 10,
@@ -137,18 +137,18 @@ function modalShareGamePageFrame.render(p3)
 				entryHeight = 62,
 				entryPadding = 18,
 				analytics = analytics,
-				size = UDim2.new(1, 0, 1, -(if var18 then 40 + var27 else 60)),
+				size = UDim2.new(1, 0, 1, -(if var1 then 40 + var5 else 60)),
 				zIndex = zIndex,
 				searchText = searchText,
 				isVisible = isVisible,
 				trigger = constantsModule.Triggers.DeveloperMultiple,
-				inviteMessageId = p3.props.inviteMessageId,
-				launchData = p3.props.launchData
+				inviteMessageId = p1.props.inviteMessageId,
+				launchData = p1.props.launchData
 			})
 		})
 	})
 end
 
-return roactRoduxModule.connect(function(p4)
-	return { deviceInfo = p4.DeviceInfo }
+return roactRoduxModule.connect(function(p1)
+	return { deviceInfo = p1.DeviceInfo }
 end)(modalShareGamePageFrame)

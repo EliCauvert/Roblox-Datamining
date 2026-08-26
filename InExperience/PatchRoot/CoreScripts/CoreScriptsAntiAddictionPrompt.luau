@@ -17,10 +17,10 @@ end
 
 local t = { Warning = 1, Lockout = 2 }
 
-local _ = function(p0)
+local _ = function(p1)
 	return {
-		State = p0.response.state.type,
-		Messages = p0.response.state.messages
+		State = p1.response.state.type,
+		Messages = p1.response.state.messages
 	}
 end
 
@@ -34,37 +34,37 @@ local t_1 = {
 	displayMessageCallback = nil,
 	pendingResolveMessage = {},
 	resolvedMessage = {},
-	update = function(p2, p3)
-		for i, v in pairs(p3) do
-			table.insert(p2.pendingResolveMessage, { id = v.id, message = v.text })
+	update = function(p1, p2)
+		for i, v in pairs(p2) do
+			table.insert(p1.pendingResolveMessage, { id = v.id, message = v.text })
 		end
-		p2:processNext()
+		p1:processNext()
 	end,
-	processNext = function(p4)
+	processNext = function(p3)
 		-- upvalues: url (ref), httpRbxApiService (ref)
-		if p4.displaying then return end
-		local removed = table.remove(p4.pendingResolveMessage, 1)
+		if p3.displaying then return end
+		local removed = table.remove(p3.pendingResolveMessage, 1)
 		
 		if not removed then return end
-		if p4.resolvedMessage[removed.id] then
-			p4:processNext()
+		if p3.resolvedMessage[removed.id] then
+			p3:processNext()
 			
 			return
 		end
-		p4.displaying = removed
+		p3.displaying = removed
 		
-		if p4.displayMessageCallback then
-			p4.displayMessageCallback(removed.message)
+		if p3.displayMessageCallback then
+			p3.displayMessageCallback(removed.message)
 		end
 		spawn(function()
 			-- upvalues: removed (ref), url (copy), httpRbxApiService (copy)
 			local _, _ = pcall(httpRbxApiService.GetAsyncFullUrl, httpRbxApiService, url.RCS_URL .. "screen-time-api/v1/messages/mark-read" .. "?" .. ("mesasgeId=" .. removed.id))
 		end)
 	end,
-	resolve = function(p5)
-		p5.resolvedMessage[p5.displaying.id] = p5.displaying.message
-		p5.displaying = nil
-		p5:processNext()
+	resolve = function(p3)
+		p3.resolvedMessage[p3.displaying.id] = p3.displaying.message
+		p3.displaying = nil
+		p3:processNext()
 	end
 }
 local default = errorPromptModule.new("Default", {
@@ -87,9 +87,9 @@ local list = {
 	}
 }
 
-function t_1.displayMessage(p6)
+function t_1.displayMessage(p3)
 	-- upvalues: default (ref)
-	default:_open(p6)
+	default:_open(p3)
 end
 
 default:updateButtons(list)
@@ -119,11 +119,11 @@ if default then
 end
 x_1 = nil
 
-local _ = function(p7)
+local _ = function(p3)
 	-- upvalues: x_1 (write), guiService (ref), t_1 (ref)
 	local t = {
-		State = p7.response.state.type,
-		Messages = p7.response.state.messages
+		State = p3.response.state.type,
+		Messages = p3.response.state.messages
 	}
 	
 	if t.State == 2 then
@@ -136,10 +136,10 @@ local _ = function(p7)
 	t_1:update(t.Messages)
 end
 
-x_1 = notificationService.RobloxEventReceived:Connect(function(p8)
+x_1 = notificationService.RobloxEventReceived:Connect(function(p3)
 	-- upvalues: httpService (ref), t (ref), x_1 (write), guiService (ref), t_1 (ref)
-	if p8.namespace == "AntiAddictionNotifications" then
-		local detail = httpService:JSONDecode(p8.detail)
+	if p3.namespace == "AntiAddictionNotifications" then
+		local detail = httpService:JSONDecode(p3.detail)
 		local t_2 = {
 			State = detail.response.state.type,
 			Messages = detail.response.state.messages

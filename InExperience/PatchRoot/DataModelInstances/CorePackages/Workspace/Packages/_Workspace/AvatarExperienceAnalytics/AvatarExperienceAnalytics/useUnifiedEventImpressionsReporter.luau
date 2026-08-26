@@ -17,50 +17,50 @@ local fFlagAXUnifiedImpressionsOnThumbnail = avatarExperienceFlagsModule.FFlagAX
 local fFlagAXFixSelectedItemIndexBleed = avatarExperienceFlagsModule.FFlagAXFixSelectedItemIndexBleed
 local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 
-local function selectAnalyticsMetadata(p0)
-	return p0.AvatarExperience.AnalyticsMetadata
+local function selectAnalyticsMetadata(p1)
+	return p1.AvatarExperience.AnalyticsMetadata
 end
 
 return function(p1)
 	-- upvalues: useAvatarRoute (ref), useSelectorSignal (ref), selectSearchKeyword (ref), selectAnalyticsMetadata (ref), reactModule (ref), avatarScreenProperties (ref), unifiedEventLoggingUtilsModule (ref), unifiedEventLogEnumsModule (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), unifiedEventLogConstantsModule (ref), unifiedLoggingSurface (ref), fFlagAXFixSelectedItemIndexBleed (ref), cryoModule (ref), sendUnifiedEventLogForInstanceModule (ref)
-	local var11 = useAvatarRoute()
-	local var12 = useSelectorSignal(selectSearchKeyword)
-	local var13 = useSelectorSignal(selectAnalyticsMetadata)
+	local var1 = useAvatarRoute()
+	local var2 = useSelectorSignal(selectSearchKeyword)
+	local var3 = useSelectorSignal(selectAnalyticsMetadata)
 	
 	return reactModule.useCallback(function(p2)
-		-- upvalues: avatarScreenProperties (copy), var11 (ref), unifiedEventLoggingUtilsModule (copy), unifiedEventLogEnumsModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), p1 (ref), var12 (ref), unifiedEventLogConstantsModule (copy), unifiedLoggingSurface (copy), var13 (ref), fFlagAXFixSelectedItemIndexBleed (copy), cryoModule (copy), sendUnifiedEventLogForInstanceModule (copy)
+		-- upvalues: avatarScreenProperties (copy), var1 (ref), unifiedEventLoggingUtilsModule (copy), unifiedEventLogEnumsModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), p1 (ref), var2 (ref), unifiedEventLogConstantsModule (copy), unifiedLoggingSurface (copy), var3 (ref), fFlagAXFixSelectedItemIndexBleed (copy), cryoModule (copy), sendUnifiedEventLogForInstanceModule (copy)
 		local v
 		local visibleInstance = p2.visibleInstance
-		local name = avatarScreenProperties[var11.opaque.name]
-		local var14 = nil
+		local name = avatarScreenProperties[var1.opaque.name]
+		local var4 = nil
 		
 		for i, v in visibleInstance:GetAttributes() do
 			if unifiedEventLoggingUtilsModule.isUnifiedLoggingAttribute(i) and unifiedEventLoggingUtilsModule.getUnifiedLoggingFieldName(i) == "action" then
 				if v == unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_IMPRESSION then
-					var14 = true
+					var4 = true
 				end
 				if v == unifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT or v == unifiedEventLogEnumsModule.MarketplaceUnifiedAction.UI_ELEMENT_CLICK then return end
 			end
 		end
 		if fFlagAXUnifiedImpressionsOnThumbnail then
-			local var15 = avatarScreenProperties[p1 or var11.opaque.name]
+			local var5 = avatarScreenProperties[p1 or var1.opaque.name]
 			local t = {
-				action = if var14 then unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_IMPRESSION else unifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_IMPRESSION,
-				keyword = var12(false)
+				action = if var4 then unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_IMPRESSION else unifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_IMPRESSION,
+				keyword = var2(false)
 			}
 			
 			if visibleInstance:GetAttribute(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface") == nil then
-				t.surface = if var15 and var15.analyticsData then var15.analyticsData.unifiedLoggingSurface else nil
+				t.surface = if var5 and var5.analyticsData then var5.analyticsData.unifiedLoggingSurface else nil
 			end
 			if (t.surface or visibleInstance:GetAttribute(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")) ~= unifiedLoggingSurface.SEARCH_RESULTS then
 				t.keyword = nil
 			end
-			local var17 = var13(false)
+			local var6 = var3(false)
 			
 			if fFlagAXFixSelectedItemIndexBleed then
-				var17 = cryoModule.Dictionary.join(var17, { selectedItemIndex = cryoModule.None })
+				var6 = cryoModule.Dictionary.join(var6, { selectedItemIndex = cryoModule.None })
 			end
-			sendUnifiedEventLogForInstanceModule(visibleInstance, cryoModule.Dictionary.union(var17, t), {
+			sendUnifiedEventLogForInstanceModule(visibleInstance, cryoModule.Dictionary.union(var6, t), {
 				includeScreenSize = true,
 				includeElementSizeAndPosition = true
 			})
@@ -68,19 +68,19 @@ return function(p1)
 			return
 		else
 			v = {
-				action = if var14 then unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_IMPRESSION else unifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_IMPRESSION,
+				action = if var4 then unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_IMPRESSION else unifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_IMPRESSION,
 				surface = if name and name.analyticsData then name.analyticsData.unifiedLoggingSurface else nil,
-				keyword = var12(false)
+				keyword = var2(false)
 			}
-			sendUnifiedEventLogForInstanceModule(visibleInstance, cryoModule.Dictionary.join(var13(false), v), {
+			sendUnifiedEventLogForInstanceModule(visibleInstance, cryoModule.Dictionary.join(var3(false), v), {
 				includeScreenSize = true,
 				includeElementSizeAndPosition = true
 			})
 		end
 	end, {
-		var11,
-		var12,
-		var13,
+		var1,
+		var2,
+		var3,
 		if fFlagAXUnifiedImpressionsOnThumbnail then p1 else nil
 	})
 end

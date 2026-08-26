@@ -4,10 +4,10 @@ local makeActionCreator = require(corePackagesService.Packages.Rodux).makeAction
 local tModule = require(corePackagesService.Packages.t)
 local maybeAssertModule = require(robloxGui.Modules.VoiceChat.Helpers.maybeAssert)
 
-return makeActionCreator(script.Name, function(p0, p1)
+return makeActionCreator(script.Name, function(p1, p2)
 	-- upvalues: maybeAssertModule (ref), tModule (ref)
-	maybeAssertModule(tonumber(p0) ~= nil)
-	maybeAssertModule(tModule.string(p1))
+	maybeAssertModule(tonumber(p1) ~= nil)
+	maybeAssertModule(tModule.string(p2))
 	
-	return { userId = tostring(p0), newState = p1 }
+	return { userId = tostring(p1), newState = p2 }
 end)

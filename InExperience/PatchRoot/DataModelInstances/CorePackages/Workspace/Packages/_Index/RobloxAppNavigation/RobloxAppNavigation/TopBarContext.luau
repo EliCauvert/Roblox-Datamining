@@ -1,5 +1,5 @@
 ﻿return require(script:FindFirstAncestor("RobloxAppNavigation").Parent.React).createContext({
-	render = function(p0)
-		return p0
+	render = function(p1)
+		return p1
 	end
 })

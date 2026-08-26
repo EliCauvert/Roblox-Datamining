@@ -2,9 +2,9 @@
 local dashModule = require(parent.Dash)
 local reactIsModule = require(parent.ReactIs)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: reactIsModule (ref)
-	return type(p0) == "table" and not reactIsModule.isBinding(p0)
+	return type(p1) == "table" and not reactIsModule.isBinding(p1)
 end
 
 local function deepJoin(p1, p2)
@@ -13,9 +13,9 @@ local function deepJoin(p1, p2)
 	
 	for i, v in p2 do
 		if type(v) == "table" and not reactIsModule.isBinding(v) then
-			local var4 = cloned[i]
+			local var1 = cloned[i]
 			
-			if type(var4) == "table" and not reactIsModule.isBinding(var4) then
+			if type(var1) == "table" and not reactIsModule.isBinding(var1) then
 				cloned[i] = deepJoin(cloned[i], v)
 			else
 				cloned[i] = v

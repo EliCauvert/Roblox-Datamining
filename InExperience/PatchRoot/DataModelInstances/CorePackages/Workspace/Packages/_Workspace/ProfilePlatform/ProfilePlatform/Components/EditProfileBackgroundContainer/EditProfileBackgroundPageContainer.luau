@@ -12,8 +12,8 @@ local analytics = require(parent.EditProfileBackground).Analytics
 
 return function(_)
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), refreshProfilePlatformUserInfoModule (ref), analytics (ref), defaultAnalyticsService (ref), editProfileBackgroundModule (ref)
-	local var6 = useDispatch()
-	local var7 = useLocalUserId()
+	local var1 = useDispatch()
+	local var2 = useLocalUserId()
 	
 	return reactModule.createElement(analytics.Context.Provider, {
 		value = {
@@ -22,14 +22,14 @@ return function(_)
 					EventStream = defaultAnalyticsService.EventStream,
 					Telemetry = defaultAnalyticsService.Telemetry
 				},
-				infoForAllEvents = { uid = tostring(var7) }
+				infoForAllEvents = { uid = tostring(var2) }
 			})
 		}
 	}, {
 		reactModule.createElement(editProfileBackgroundModule.EditProfileBackgroundPage, {
 			onBackgroundChanged = reactModule.useCallback(function()
-				-- upvalues: var6 (ref), refreshProfilePlatformUserInfoModule (copy), var7 (ref)
-				var6(refreshProfilePlatformUserInfoModule(tostring(var7)))
+				-- upvalues: var1 (ref), refreshProfilePlatformUserInfoModule (copy), var2 (ref)
+				var1(refreshProfilePlatformUserInfoModule(tostring(var2)))
 			end),
 			profileBackgroundData = useProfileJsonComponentModule(enumsModule.Components.ProfileBackground)
 		})

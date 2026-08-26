@@ -6,7 +6,7 @@ return require(purchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer(fal
 		-- upvalues: purchaseFlowModule (ref)
 		return purchaseFlowModule.None
 	end,
-	[require(purchasePrompt.Actions.SetPurchaseFlow).name] = function(_, p0)
-		return p0.purchaseFlow
+	[require(purchasePrompt.Actions.SetPurchaseFlow).name] = function(_, p1)
+		return p1.purchaseFlow
 	end
 })

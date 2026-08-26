@@ -13,13 +13,13 @@ end
 
 return {
 	Skeleton = reactModule.memo(ExperienceDetailsBannerImageSkeleton),
-	Error = reactModule.memo(function(p0)
+	Error = reactModule.memo(function(p1)
 		-- upvalues: useGameInfoModule (ref), useExperienceBannerImageModule (ref), reactModule (ref), ExperienceDetailsBannerImageSkeleton (ref), image (ref)
-		local var5 = useGameInfoModule(p0.universeId)
-		local var6 = useExperienceBannerImageModule(p0.universeId)
+		local var1 = useGameInfoModule(p1.universeId)
+		local var2 = useExperienceBannerImageModule(p1.universeId)
 		
-		return if var5 and var5.isUnavailable == true or not (var6.status == "Success" and var6.url) then reactModule.createElement(ExperienceDetailsBannerImageSkeleton) else reactModule.createElement(image, {
-			Image = var6.url,
+		return if var1 and var1.isUnavailable == true or not (var2.status == "Success" and var2.url) then reactModule.createElement(ExperienceDetailsBannerImageSkeleton) else reactModule.createElement(image, {
+			Image = var2.url,
 			Size = UDim2.fromScale(1, 1),
 			ScaleType = Enum.ScaleType.Crop
 		})

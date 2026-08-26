@@ -15,27 +15,27 @@ local _ = require(profilePlatform.Components.CTARow.Types)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
-local var9 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
+local var1 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 
 return {
-	[enumsModule.ProfileActions.RemoveTrustedConnection] = function(p0)
-		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), var9 (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
+	[enumsModule.ProfileActions.RemoveTrustedConnection] = function(p1)
+		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), var1 (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
 		return {
-			text = p0.localized[enumsModule.ProfileActions.RemoveTrustedConnection],
+			text = p1.localized[enumsModule.ProfileActions.RemoveTrustedConnection],
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p0 (ref), eventNamesModule (copy), var9 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
-					p0.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonRemoveTrustedConnection, { buttonSurface = p0.buttonSurface })
+					-- upvalues: p1 (ref), eventNamesModule (copy), var1 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonRemoveTrustedConnection, { buttonSurface = p1.buttonSurface })
 					
-					return var9.removeTrustedConnectionRequest(p0.profileId):andThen(function()
-						-- upvalues: p0 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
-						p0.dispatch(setCurrentToastMessage({
+					return var1.removeTrustedConnectionRequest(p1.profileId):andThen(function()
+						-- upvalues: p1 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
+						p1.dispatch(setCurrentToastMessage({
 							isLocalized = true,
-							toastMessage = p0.localized.trustedConnectionRemovedToast,
+							toastMessage = p1.localized.trustedConnectionRemovedToast,
 							toastIcon = images["icons/actions/friends/friendRemove"]
 						}))
 						
-						return p0.dispatch(refreshProfilePlatformActionInfoModule(p0.profileId, p0.actionsComponentRequest))
+						return p1.dispatch(refreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
 					end)
 				end
 			}
@@ -63,25 +63,25 @@ return {
 			}
 		}
 	end else nil,
-	[enumsModule.ProfileActions.AddTrustedConnectionViaLink] = function(p2)
+	[enumsModule.ProfileActions.AddTrustedConnectionViaLink] = function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), sources (ref), appPage (ref), refreshProfilePlatformActionInfoModule (ref)
 		return {
-			text = p2.localized[enumsModule.ProfileActions.AddTrustedConnection],
+			text = p1.localized[enumsModule.ProfileActions.AddTrustedConnection],
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p2 (ref), eventNamesModule (copy), sources (copy), appPage (copy), refreshProfilePlatformActionInfoModule (copy)
-					p2.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonAddTrustedConnection, {
-						buttonSurface = p2.buttonSurface,
+					-- upvalues: p1 (ref), eventNamesModule (copy), sources (copy), appPage (copy), refreshProfilePlatformActionInfoModule (copy)
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonAddTrustedConnection, {
+						buttonSurface = p1.buttonSurface,
 						modalVariantOverride = sources.ShareLinkSender
 					})
-					p2.navigation.push(appPage.TrustedContactsModal, {
+					p1.navigation.push(appPage.TrustedContactsModal, {
 						props = {
-							userId = p2.profileId,
+							userId = p1.profileId,
 							source = sources.ProfilePlatform,
 							modalVariantOverride = sources.ShareLinkSender,
 							onRequestSent = function()
-								-- upvalues: p2 (copy), refreshProfilePlatformActionInfoModule (copy)
-								return p2.dispatch(refreshProfilePlatformActionInfoModule(p2.profileId, p2.actionsComponentRequest))
+								-- upvalues: p1 (copy), refreshProfilePlatformActionInfoModule (copy)
+								return p1.dispatch(refreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
 							end
 						}
 					})
@@ -89,20 +89,20 @@ return {
 			}
 		}
 	end,
-	[enumsModule.ProfileActions.AddIncomingTrustedConnection] = if fFlagProfilePlatformAddTC then function(p3)
+	[enumsModule.ProfileActions.AddIncomingTrustedConnection] = if fFlagProfilePlatformAddTC then function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), appPage (ref), refreshProfilePlatformActionInfoModule (ref)
 		return {
-			text = p3.localized[enumsModule.ProfileActions.AddIncomingTrustedConnection],
+			text = p1.localized[enumsModule.ProfileActions.AddIncomingTrustedConnection],
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p3 (ref), eventNamesModule (copy), appPage (copy), refreshProfilePlatformActionInfoModule (copy)
-					p3.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonAddIncomingTrustedConnection, { buttonSurface = p3.buttonSurface })
-					p3.navigation.push(appPage.TrustedContactsModal, {
+					-- upvalues: p1 (ref), eventNamesModule (copy), appPage (copy), refreshProfilePlatformActionInfoModule (copy)
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonAddIncomingTrustedConnection, { buttonSurface = p1.buttonSurface })
+					p1.navigation.push(appPage.TrustedContactsModal, {
 						props = {
-							userId = p3.profileId,
+							userId = p1.profileId,
 							onRequestAccepted = function()
-								-- upvalues: p3 (copy), refreshProfilePlatformActionInfoModule (copy)
-								return p3.dispatch(refreshProfilePlatformActionInfoModule(p3.profileId, p3.actionsComponentRequest))
+								-- upvalues: p1 (copy), refreshProfilePlatformActionInfoModule (copy)
+								return p1.dispatch(refreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
 							end
 						}
 					})
@@ -110,19 +110,19 @@ return {
 			}
 		}
 	end else nil,
-	[enumsModule.ProfileActions.PendingTrustedConnection] = if fFlagProfilePlatformAddTC then function(p4)
+	[enumsModule.ProfileActions.PendingTrustedConnection] = if fFlagProfilePlatformAddTC then function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref)
 		return {
 			isDisabled = true,
-			text = p4.localized[enumsModule.ProfileActions.AddTrustedConnection],
+			text = p1.localized[enumsModule.ProfileActions.AddTrustedConnection],
 			onActivated = { [profileTypes.User] = function() end }
 		}
 	end else nil,
-	[enumsModule.ProfileActions.PendingIncomingTrustedConnection] = if require(profilePlatform.Flags.FFlagPendingIncomingTrustedConnection) then function(p5)
+	[enumsModule.ProfileActions.PendingIncomingTrustedConnection] = if require(profilePlatform.Flags.FFlagPendingIncomingTrustedConnection) then function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref)
 		return {
 			isDisabled = true,
-			text = p5.localized[enumsModule.ProfileActions.AddIncomingTrustedConnection],
+			text = p1.localized[enumsModule.ProfileActions.AddIncomingTrustedConnection],
 			onActivated = { [profileTypes.User] = function() end }
 		}
 	end else nil

@@ -1,8 +1,8 @@
 ﻿local _ = require(script.Parent.types)
 local array = require(script:FindFirstAncestor("Navigation").Parent.LuauPolyfill).Array
 
-local function _(p0)
-	return p0.index ~= nil and (p0.routes ~= nil and p0.isTransitioning ~= nil)
+local function _(p1)
+	return p1.index ~= nil and (p1.routes ~= nil and p1.isTransitioning ~= nil)
 end
 
 local function getActiveRoutes(p1)

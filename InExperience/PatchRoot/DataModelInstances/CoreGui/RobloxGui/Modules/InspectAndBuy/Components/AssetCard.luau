@@ -15,9 +15,9 @@ local getFFlagDisplayCollectiblesIconModule = require(parent.Flags.GetFFlagDispl
 local getFFlagIBEnableCollectiblesSystemSupportModule = require(parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
 local assetCard = roactModule.Component:extend("AssetCard")
 
-function assetCard.init(p0)
+function assetCard.init(p1)
 	-- upvalues: getSelectionImageObjectRegularModule (ref)
-	p0.selectedImage = getSelectionImageObjectRegularModule()
+	p1.selectedImage = getSelectionImageObjectRegularModule()
 end
 
 function assetCard.render(p1)
@@ -28,24 +28,24 @@ function assetCard.render(p1)
 	local openDetails = p1.props.openDetails
 	local assetCardSizeX = p1.props.assetCardSizeX
 	local limited = images["icons/status/item/limited"]
-	local var13 = if limited then limited.ImageRectSize / images.ImagesResolutionScale else Vector2.new(0, 0)
+	local var1 = if limited then limited.ImageRectSize / images.ImagesResolutionScale else Vector2.new(0, 0)
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
 		render = function(p2)
-			-- upvalues: view (ref), getFFlagDisplayCollectiblesIconModule (copy), utilityFunctionsModule (copy), assetInfo (ref), getFFlagIBEnableCollectiblesSystemSupportModule (copy), constantsModule (copy), var13 (ref), roactModule (copy), colorsModule (copy), p1 (ref), openDetails (ref), assetCardSizeX (ref), appFonts (copy), equipped (ref), limitedLabelModule (copy)
-			local var14 = p2[view]
-			local var15 = getFFlagDisplayCollectiblesIconModule() and utilityFunctionsModule.isCollectibles(assetInfo)
-			local var16 = nil
-			local var17 = nil
+			-- upvalues: view (ref), getFFlagDisplayCollectiblesIconModule (copy), utilityFunctionsModule (copy), assetInfo (ref), getFFlagIBEnableCollectiblesSystemSupportModule (copy), constantsModule (copy), var1 (ref), roactModule (copy), colorsModule (copy), p1 (ref), openDetails (ref), assetCardSizeX (ref), appFonts (copy), equipped (ref), limitedLabelModule (copy)
+			local var2 = p2[view]
+			local var3 = getFFlagDisplayCollectiblesIconModule() and utilityFunctionsModule.isCollectibles(assetInfo)
+			local var4 = nil
+			local var5 = nil
 			local uDim2 = nil
 			
 			if getFFlagIBEnableCollectiblesSystemSupportModule() then
-				var16 = utilityFunctionsModule.hasLimitedQuantity(assetInfo)
-				var17 = utilityFunctionsModule.isLimited1Point0_LimitedUnique(assetInfo) or utilityFunctionsModule.isLimited2Point0_Or_LimitedCollectible(assetInfo)
-				uDim2 = UDim2.new(0, var13.X + (if var17 then constantsModule.LimitedIconFrameSizeXOffset * 2 else constantsModule.LimitedIconFrameSizeXOffset), 0, var13.Y + constantsModule.LimitedIconFrameSizeYOffset)
+				var4 = utilityFunctionsModule.hasLimitedQuantity(assetInfo)
+				var5 = utilityFunctionsModule.isLimited1Point0_LimitedUnique(assetInfo) or utilityFunctionsModule.isLimited2Point0_Or_LimitedCollectible(assetInfo)
+				uDim2 = UDim2.new(0, var1.X + (if var5 then constantsModule.LimitedIconFrameSizeXOffset * 2 else constantsModule.LimitedIconFrameSizeXOffset), 0, var1.Y + constantsModule.LimitedIconFrameSizeYOffset)
 			end
 			local createElement = roactModule.createElement
-			local var19 = "ImageButton"
+			local var6 = "ImageButton"
 			local t = {
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
@@ -91,7 +91,7 @@ function assetCard.render(p1)
 						Font = appFonts.default:getDefault(),
 						TextColor3 = Color3.new(1, 1, 1)
 					}, {
-						UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = var14.AssetTextMaxSize })
+						UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = var2.AssetTextMaxSize })
 					})
 				}),
 				EquippedFrame = roactModule.createElement("ImageLabel", {
@@ -114,39 +114,39 @@ function assetCard.render(p1)
 					ImageColor3 = colorsModule.Green
 				})
 			}
-			local var22 = if getFFlagIBEnableCollectiblesSystemSupportModule() then var16 else var15
+			local var7 = if getFFlagIBEnableCollectiblesSystemSupportModule() then var4 else var3
 			
-			if var22 then
-				var22 = roactModule.createElement
-				var22 = var22(limitedLabelModule, {
-					frameSize = if getFFlagIBEnableCollectiblesSystemSupportModule() then uDim2 else UDim2.new(0, var13.X + 18, 0, var13.Y + 4),
-					framePosition = UDim2.new(0, 16, 0, assetCardSizeX - var13.Y - 20),
-					imageSize = UDim2.new(0, var13.X, 0, var13.Y),
+			if var7 then
+				var7 = roactModule.createElement
+				var7 = var7(limitedLabelModule, {
+					frameSize = if getFFlagIBEnableCollectiblesSystemSupportModule() then uDim2 else UDim2.new(0, var1.X + 18, 0, var1.Y + 4),
+					framePosition = UDim2.new(0, 16, 0, assetCardSizeX - var1.Y - 20),
+					imageSize = UDim2.new(0, var1.X, 0, var1.Y),
 					imagePosition = UDim2.new(0, 5, 0, 2),
-					textSize = UDim2.new(0, var13.X, 0, var13.Y),
-					textPosition = UDim2.new(0, 5 + var13.X, 0, 2),
-					text = if getFFlagIBEnableCollectiblesSystemSupportModule() and not var17 then nil else "#"
+					textSize = UDim2.new(0, var1.X, 0, var1.Y),
+					textPosition = UDim2.new(0, 5 + var1.X, 0, 2),
+					text = if getFFlagIBEnableCollectiblesSystemSupportModule() and not var5 then nil else "#"
 				})
 			end
-			t_1.LimitedLabel = var22
+			t_1.LimitedLabel = var7
 			
-			return createElement(var19, t, t_1)
+			return createElement(var6, t, t_1)
 		end
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p3, p4)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, p2)
 	return {
-		view = p3.view,
-		equipped = p3.equippedAssets[p4.assetInfo.assetId] == true,
-		locale = p3.locale
+		view = p1.view,
+		equipped = p1.equippedAssets[p2.assetInfo.assetId] == true,
+		locale = p1.locale
 	}
-end, function(p5)
+end, function(p1)
 	-- upvalues: setDetailsInformationModule (ref)
 	return {
-		openDetails = function(p6)
-			-- upvalues: p5 (ref), setDetailsInformationModule (copy)
-			p5(setDetailsInformationModule(true, p6))
+		openDetails = function(p2)
+			-- upvalues: p1 (ref), setDetailsInformationModule (copy)
+			p1(setDetailsInformationModule(true, p2))
 		end
 	}
 end)(assetCard)

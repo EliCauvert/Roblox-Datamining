@@ -1,14 +1,14 @@
-﻿return function(p0, p1, p2)
-	if not p0 then
+﻿return function(p1, p2, p3)
+	if not p1 then
 		return false
 	end
-	local p0Count = #p0
+	local p0Count = #p1
 	
-	if p2 then
+	if p3 then
 		p0Count -= 1
 	end
 	for i = 1, p0Count do
-		if p0[i].name ~= p1 then
+		if p1[i].name ~= p2 then
 			continue
 		end
 		return true

@@ -25,7 +25,7 @@ local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuil
 local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(buildExperience.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
 local fFlagEnableBuildOverflowMenuForNewGamesModule = require(buildExperience.Flags.FFlagEnableBuildOverflowMenuForNewGames)
-local var20 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
+local var1 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
 local divider = foundationModule.Divider
 local iconButton = foundationModule.IconButton
 local scrollView = foundationModule.ScrollView
@@ -37,21 +37,21 @@ local inputSize = foundationModule.Enums.InputSize
 local useTokens = foundationModule.Hooks.useTokens
 local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
 
-local function _(p0, p1)
-	if p0 == nil or p1 == nil then
+local function _(p1, p2)
+	if p1 == nil or p2 == nil then
 		return nil
 	end
-	for i, v in p0.groups do
-		if v.name == p1 then
+	for i, v in p1.groups do
+		if v.name == p2 then
 			return v
 		end
 	end
 	return nil
 end
 
-local _ = function(p2)
+local _ = function(p3)
 	-- upvalues: subagentTaskStatus (ref)
-	return if p2.isLoading then subagentTaskStatus.InProgress elseif p2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
+	return if p3.isLoading then subagentTaskStatus.InProgress elseif p3.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
 end
 
 local function toTodoItems(p3)
@@ -72,34 +72,34 @@ local function toTodoItems(p3)
 end
 
 return function(p4)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var20 (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), pushNotificationsUpsellCardModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), iconButton (ref), iconName (ref), inputSize (ref), text (ref), chatConstantsModule (ref), playButtonModule (ref), buttonVariant (ref), agentDetailMenuModule (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), scrollView (ref), foundationModule (ref), divider (ref), toTodoItems (ref)
-	local var23 = if fFlagBuildLocalization then useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var1 (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), pushNotificationsUpsellCardModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), iconButton (ref), iconName (ref), inputSize (ref), text (ref), chatConstantsModule (ref), playButtonModule (ref), buttonVariant (ref), agentDetailMenuModule (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), scrollView (ref), foundationModule (ref), divider (ref), toTodoItems (ref)
+	local var2 = if fFlagBuildLocalization then useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
 	}) else nil
-	local var24 = useTokens()
-	local var25 = reactModule.useRef(nil)
+	local var3 = useTokens()
+	local var4 = reactModule.useRef(nil)
 	
 	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
-		var20("LuaApp_Build_Chat_Scroll", var25)
+		var1("LuaApp_Build_Chat_Scroll", var4)
 	end
-	local var27, v
-	local var26 = reactModule.useCallback(function(p5)
-		-- upvalues: var25 (ref), p4 (ref)
-		var25.current = p5
+	local var5, v
+	local var6 = reactModule.useCallback(function(p5)
+		-- upvalues: var4 (ref), p4 (ref)
+		var4.current = p5
 		p4.scrollingFrameRef(p5)
 	end, { p4.scrollingFrameRef })
 	local taskState = p4.taskState
 	local selectedChipGroupName = p4.selectedChipGroupName
 	
 	if taskState == nil or selectedChipGroupName == nil then
-		var27 = nil
+		var5 = nil
 	else
 		for i, v in taskState.groups do
 			if v.name == selectedChipGroupName then
-				var27 = v
+				var5 = v
 			end
 		end
-		var27 = nil
+		var5 = nil
 	end
 	taskState = chatMessageListModule({
 		messages = p4.messages,
@@ -132,7 +132,7 @@ return function(p4)
 	
 	if not fFlagBuildExperienceAssetLibraryModule and p4.taskState ~= nil then
 		for v, v_2 in p4.taskState.groups do
-			local var29 = if v_2.isLoading then subagentTaskStatus.InProgress elseif v_2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
+			local var7 = if v_2.isLoading then subagentTaskStatus.InProgress elseif v_2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
 			t[`Group{v}`] = reactModule.createElement(subagentStatusModule.Root, {
 				layoutOrder = v,
 				text = v_2.name,
@@ -143,14 +143,14 @@ return function(p4)
 				end,
 				testId = `BuildChatPage.SubagentStatus.{v_2.name}`
 			}, {
-				Indicator = if var29 ~= subagentTaskStatus.Pending then nil else reactModule.createElement(subagentStatusModule.LoadingIndicator, {
-					status = var29,
+				Indicator = if var7 ~= subagentTaskStatus.Pending then nil else reactModule.createElement(subagentStatusModule.LoadingIndicator, {
+					status = var7,
 					testId = `BuildChatPage.SubagentStatus.{v_2.name}.Indicator`
 				})
 			})
 		end
 	end
-	local var30 = reactModule.createElement(view, {
+	local var8 = reactModule.createElement(view, {
 		testId = "BuildChatPage.ActionBody",
 		LayoutOrder = if fFlagBuildDesktopReadinessModule then nil else 3,
 		tag = {
@@ -172,7 +172,7 @@ return function(p4)
 			composerText = p4.composerText,
 			composerErrorText = p4.composerErrorText,
 			onComposerChanged = p4.onComposerChanged,
-			placeholder = if fFlagBuildLocalization then var23.composerPlaceholder else localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
+			placeholder = if fFlagBuildLocalization then var2.composerPlaceholder else localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
 			textBoxRef = p4.textBoxRef,
 			isAssistantResponding = p4.isAssistantResponding,
 			canStopAssistantResponse = p4.canStopAssistantResponse,
@@ -267,7 +267,7 @@ return function(p4)
 		}),
 		Messages = reactModule.createElement(scrollView, {
 			LayoutOrder = 2,
-			scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var26 else p4.scrollingFrameRef,
+			scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var6 else p4.scrollingFrameRef,
 			onAbsoluteCanvasSizeChanged = p4.onChatViewportChanged,
 			onAbsoluteWindowSizeChanged = p4.onChatViewportChanged,
 			tag = {
@@ -284,7 +284,7 @@ return function(p4)
 				testId = "BuildChatPage.MessageBody",
 				layout = {
 					FillDirection = Enum.FillDirection.Vertical,
-					Padding = UDim.new(0, var24.Size.Size_800)
+					Padding = UDim.new(0, var3.Size.Size_800)
 				},
 				tag = {
 					["composition-content-body"] = true,
@@ -300,11 +300,11 @@ return function(p4)
 				["composition-layout-detail"] = true,
 				["size-full-0 auto-y"] = true
 			}
-		}, { ActionBody = var30 }) else var30,
+		}, { ActionBody = var8 }) else var8,
 		TodoBottomSheet = reactModule.createElement(subagentStatusModule.TodoBottomSheet, {
-			title = if var27 ~= nil then "" else var27.name,
-			items = toTodoItems(var27),
-			isOpen = var27 ~= nil,
+			title = if var5 ~= nil then "" else var5.name,
+			items = toTodoItems(var5),
+			isOpen = var5 ~= nil,
 			onClose = p4.onChipBottomSheetClose
 		})
 	})

@@ -8,30 +8,30 @@ local view = foundationModule.View
 local chatHistoryLoadingStateModule = require(script.Parent.ChatHistoryLoadingState)
 local chatMessageItemModule = require(script.Parent.ChatMessageItem)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), reactModule (ref), chatHistoryLoadingStateModule (ref), view (ref), chatMessageItemModule (ref)
 	local t = {}
 	
-	if #p0.messages == 0 then
-		local var7 = if fFlagBuildExperienceChatHistoryLoadingSkeletonModule and p0.isHistoryLoading then reactModule.createElement(chatHistoryLoadingStateModule) else p0.emptyState
+	if #p1.messages == 0 then
+		local var1 = if fFlagBuildExperienceChatHistoryLoadingSkeletonModule and p1.isHistoryLoading then reactModule.createElement(chatHistoryLoadingStateModule) else p1.emptyState
 		
-		if var7 ~= nil then
+		if var1 ~= nil then
 			t.EmptyState = reactModule.createElement(view, {
 				LayoutOrder = 0,
 				tag = "col align-x-center align-y-center padding-large",
 				Size = UDim2.fromScale(1, 1)
-			}, var7)
+			}, var1)
 		end
 		return t
 	else
-		for i, v in p0.messages do
+		for i, v in p1.messages do
 			t[v.id or `Message{i}`] = reactModule.createElement(chatMessageItemModule, {
 				message = v,
 				LayoutOrder = i,
-				clockBinding = p0.clockBinding,
-				localToolActions = p0.localToolActions,
-				onPlaytest = p0.onPlaytest,
-				isPlaytestLoading = p0.isPlaytestLoading
+				clockBinding = p1.clockBinding,
+				localToolActions = p1.localToolActions,
+				onPlaytest = p1.onPlaytest,
+				isPlaytestLoading = p1.isPlaytestLoading
 			})
 		end
 		return t

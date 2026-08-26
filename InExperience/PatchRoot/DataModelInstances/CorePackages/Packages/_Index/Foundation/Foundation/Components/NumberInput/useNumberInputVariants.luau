@@ -7,20 +7,20 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function computeProps(p0)
-	local var9 = if p0.width and p0.horizontalPadding then UDim.new(0, (p0.buttonWidth - p0.horizontalPadding) / 2) else nil
+local function computeProps(p1)
+	local var1 = if p1.width and p1.horizontalPadding then UDim.new(0, (p1.buttonWidth - p1.horizontalPadding) / 2) else nil
 	
 	return {
-		container = { width = p0.width },
+		container = { width = p1.width },
 		button = {
 			tag = "fill size-full",
-			width = p0.buttonWidth,
-			padding = if var9 then { left = var9, right = var9 } else nil
+			width = p1.buttonWidth,
+			padding = if var1 then { left = var1, right = var1 } else nil
 		},
-		upButton = { tag = p0.upButtonTag },
-		downButton = { tag = p0.downButtonTag },
-		splitButton = { size = p0.splitButtonSize, tag = p0.splitButtonTag },
-		icon = { tag = p0.iconTag }
+		upButton = { tag = p1.upButtonTag },
+		downButton = { tag = p1.downButtonTag },
+		splitButton = { size = p1.splitButtonSize, tag = p1.splitButtonTag },
+		icon = { tag = p1.iconTag }
 	}
 end
 
@@ -115,9 +115,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p2, p3, p4)
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), composeStyleVariantModule (ref)
-	local numberInput = variantsContextModule.useVariants("NumberInput", variantsFactory, p2)
+	local numberInput = variantsContextModule.useVariants("NumberInput", variantsFactory, p1)
 	
-	return if flagsModule.FoundationNumberInputBeta then composeStyleVariantModule(numberInput.common, numberInput.sizes[p3]) else composeStyleVariantModule(numberInput.common, numberInput.sizes[p3], numberInput.controlVariants[p4])
+	return if flagsModule.FoundationNumberInputBeta then composeStyleVariantModule(numberInput.common, numberInput.sizes[p2]) else composeStyleVariantModule(numberInput.common, numberInput.sizes[p2], numberInput.controlVariants[p3])
 end

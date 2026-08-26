@@ -13,35 +13,35 @@ local fetchPrompts = serverTriggeredModalsModule.fetchPrompts
 
 return function()
 	-- upvalues: reactModule (ref), createProfileCompletionPromptsConfig (ref), fetchPrompts (ref), profileCompletionResolveLatestSduiEntry (ref), getSduiApiStore (ref), enumsModule (ref), signalsReactModule (ref)
-	local var7 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: createProfileCompletionPromptsConfig (copy)
 		return createProfileCompletionPromptsConfig()
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: fetchPrompts (copy), var7 (ref)
-		fetchPrompts(var7, true)
-	end, { var7 })
+		-- upvalues: fetchPrompts (copy), var1 (ref)
+		fetchPrompts(var1, true)
+	end, { var1 })
 	
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p0)
+	return signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
 		-- upvalues: profileCompletionResolveLatestSduiEntry (copy), getSduiApiStore (copy), enumsModule (copy)
 		if not profileCompletionResolveLatestSduiEntry then
-			return getSduiApiStore().getRootConfig(enumsModule.Components.ProfileCompletion, p0)
+			return getSduiApiStore().getRootConfig(enumsModule.Components.ProfileCompletion, p1)
 		end
-		local var8 = getSduiApiStore().getData(enumsModule.Components.ProfileCompletion).data(p0)
+		local var2 = getSduiApiStore().getData(enumsModule.Components.ProfileCompletion).data(p1)
 		
-		if not var8 then
+		if not var2 then
 			return nil
 		end
 		local config = nil
-		local var9 = 0
+		local var3 = 0
 		
-		for i, v in var8 do
+		for i, v in var2 do
 			if v and v.config then
 				local dataUpdatedTimestamp = v.dataUpdatedTimestamp or 0
 				
-				if not config or var9 < dataUpdatedTimestamp then
+				if not config or var3 < dataUpdatedTimestamp then
 					config = v.config
-					var9 = dataUpdatedTimestamp
+					var3 = dataUpdatedTimestamp
 				end
 			end
 		end

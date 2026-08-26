@@ -3,19 +3,19 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local dataHydrationModule = require(parent.DataHydration)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), dataHydrationModule (ref), signalsReactModule (ref)
-	local var3 = tostring(p0)
+	local var1 = tostring(p1)
 	
 	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: dataHydrationModule (copy), var3 (ref), p1 (ref)
-		local gameIcon = dataHydrationModule.Game.getGameIconStore(false).getGameIcon(var3, p1)
+		-- upvalues: dataHydrationModule (copy), var1 (ref), p2 (ref)
+		local gameIcon = dataHydrationModule.Game.getGameIconStore(false).getGameIcon(var1, p2)
 		
-		return function(p2)
+		return function(p3)
 			-- upvalues: gameIcon (ref)
-			local var5 = gameIcon.data(p2)
+			local var2 = gameIcon.data(p3)
 			
-			return if var5 then var5.url else nil
+			return if var2 then var2.url else nil
 		end
-	end, { var3, p1 }))
+	end, { var1, p2 }))
 end

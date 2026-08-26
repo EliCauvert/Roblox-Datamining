@@ -28,12 +28,12 @@ t.prereqTests = {
 local list = {
 	"Head", "UpperTorso", "LeftFoot", "RightFoot", "LeftHand", "RightHand"
 }
-local var8 = nil
+local var1 = nil
 
 local function getParentMap()
-	-- upvalues: var8 (write), list (ref), r15plusUtilsModule (ref)
-	if var8 then
-		return var8
+	-- upvalues: var1 (write), list (ref), r15plusUtilsModule (ref)
+	if var1 then
+		return var1
 	end
 	local t = {}
 	
@@ -43,25 +43,25 @@ local function getParentMap()
 		for i_1, v_1 in schemaFlatHierarchyList do
 			if v_1.ClassName == "Bone" then
 				local path = v_1.path
-				local var12 = path[#path - 1]
-				local var13 = schemaFlatHierarchyList[var12]
+				local var2 = path[#path - 1]
+				local var3 = schemaFlatHierarchyList[var2]
 				
-				if var13 and var13.ClassName == "Bone" then
-					t[i_1] = var12
+				if var3 and var3.ClassName == "Bone" then
+					t[i_1] = var2
 				end
 			end
 		end
 	end
-	var8 = t
+	var1 = t
 	
 	return t
 end
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getParentMap (ref), curveAnimBoneHierarchyUtilsModule (ref), errorSourceStringsModule (ref)
-	local var14 = getParentMap()
+	local var4 = getParentMap()
 	
-	for i, v in p1.curveAnimations do
+	for i, v in p2.curveAnimations do
 		local t = {}
 		
 		for i_1, v_1 in v:GetDescendants() do
@@ -70,10 +70,10 @@ function t.run(p0, p1)
 			end
 		end
 		for i_1 in t do
-			local var16 = var14[i_1]
+			local var5 = var4[i_1]
 			
-			if var16 ~= nil and not t[var16] then
-				p0:fail(errorSourceStringsModule.Keys.CurveAnim_BoneRequiresParent, { boneName = i_1, parentBoneName = var16 })
+			if var5 ~= nil and not t[var5] then
+				p1:fail(errorSourceStringsModule.Keys.CurveAnim_BoneRequiresParent, { boneName = i_1, parentBoneName = var5 })
 			end
 		end
 	end

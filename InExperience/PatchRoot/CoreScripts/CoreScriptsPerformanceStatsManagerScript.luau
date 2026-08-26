@@ -6,19 +6,19 @@ local statsAggregatorManagerModule = require(coreGuiService.RobloxGui.Modules.St
 local statsButtonModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsButton)
 local statsUtilsModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsUtils)
 local statsViewerModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsViewer)
-local var7 = require(coreGuiService.RobloxGui.Modules.Flags.GetFFlagLazyPerfStatsInit)()
+local var1 = require(coreGuiService.RobloxGui.Modules.Flags.GetFFlagLazyPerfStatsInit)()
 local performanceStats = nil
 local singleton = nil
-local var10 = nil
+local var2 = nil
 local t = {}
-local var12 = nil
-local var13 = nil
+local var3 = nil
+local var4 = nil
 
-if not var7 then
+if not var1 then
 	performanceStats = Instance.new("Frame")
 	performanceStats.Name = "PerformanceStats"
 	singleton = statsAggregatorManagerModule.getSingleton()
-	var10 = statsViewerModule.new()
+	var2 = statsViewerModule.new()
 	
 	for i, v in ipairs(statsUtilsModule.AllStatTypes) do
 		t[v] = statsButtonModule.new(v)
@@ -54,66 +54,66 @@ function ConfigureStatButtonsInMasterFrame()
 	end
 end
 
-function OnButtonToggled(p0)
-	-- upvalues: t (write), var12 (write)
-	var12 = if t[p0]._isSelected then p0 else nil
+function OnButtonToggled(p1)
+	-- upvalues: t (write), var3 (write)
+	var3 = if t[p1]._isSelected then p1 else nil
 	UpdateButtonSelectedStates()
 	UpdateViewerVisibility()
 end
 
 function UpdateButtonSelectedStates()
-	-- upvalues: statsUtilsModule (ref), t (write), var12 (write)
+	-- upvalues: statsUtilsModule (ref), t (write), var3 (write)
 	for i, v in ipairs(statsUtilsModule.AllStatTypes) do
-		t[v]:SetIsSelected(v == var12)
+		t[v]:SetIsSelected(v == var3)
 	end
 end
 
 function UpdateViewerVisibility()
-	-- upvalues: var12 (write), var10 (write), singleton (write), rbxAnalyticsService (ref)
-	if var12 == nil then
-		if var10:GetIsVisible() then
-			var10:SetVisible(false)
-			var10:SetStatsAggregator(nil)
+	-- upvalues: var3 (write), var2 (write), singleton (write), rbxAnalyticsService (ref)
+	if var3 == nil then
+		if var2:GetIsVisible() then
+			var2:SetVisible(false)
+			var2:SetStatsAggregator(nil)
 			
 			return
 		end
 	else
-		local var14 = false
+		local var5 = false
 		
-		if not var10:GetIsVisible() then
-			var14 = true
-			var10:SetVisible(true)
+		if not var2:GetIsVisible() then
+			var5 = true
+			var2:SetVisible(true)
 		end
-		if var12 ~= var10:GetStatType() then
-			var10:SetStatType(var12)
-			var10:SetStatsAggregator(singleton:GetAggregator(var12))
-			var14 = true
+		if var3 ~= var2:GetStatType() then
+			var2:SetStatType(var3)
+			var2:SetStatsAggregator(singleton:GetAggregator(var3))
+			var5 = true
 		end
-		if var14 then
-			rbxAnalyticsService:TrackEvent("Game", "Enlarge PerfStat", var12, 0)
+		if var5 then
+			rbxAnalyticsService:TrackEvent("Game", "Enlarge PerfStat", var3, 0)
 		end
 	end
 end
 
 function AddButton(p1, p2)
 	-- upvalues: t (write), performanceStats (write), singleton (write), statsUtilsModule (ref)
-	local var15 = t[p1]
-	var15:SetParent(performanceStats)
-	var15:SetStatsAggregator(singleton:GetAggregator(p1))
-	local var16 = 1 / statsUtilsModule.NumButtonTypes
-	var15:SetSizeAndPosition(UDim2.new(var16, 0, 0, statsUtilsModule.ButtonHeight), UDim2.new(var16 * (p2 - 1), 0, 0, 0))
-	var15:SetToggleCallbackFunction(OnButtonToggled)
+	local var5 = t[p1]
+	var5:SetParent(performanceStats)
+	var5:SetStatsAggregator(singleton:GetAggregator(p1))
+	local var6 = 1 / statsUtilsModule.NumButtonTypes
+	var5:SetSizeAndPosition(UDim2.new(var6, 0, 0, statsUtilsModule.ButtonHeight), UDim2.new(var6 * (p2 - 1), 0, 0, 0))
+	var5:SetToggleCallbackFunction(OnButtonToggled)
 end
 
 function ConfigureStatViewerInMasterFrame()
-	-- upvalues: var10 (write), performanceStats (write), statsUtilsModule (ref)
-	var10:SetParent(performanceStats)
-	var10:SetSizeAndPosition(UDim2.new(0, statsUtilsModule.ViewerWidth, 0, statsUtilsModule.ViewerHeight), UDim2.new(1, -statsUtilsModule.ViewerWidth, 0, statsUtilsModule.ButtonHeight + statsUtilsModule.ViewerTopMargin))
+	-- upvalues: var2 (write), performanceStats (write), statsUtilsModule (ref)
+	var2:SetParent(performanceStats)
+	var2:SetSizeAndPosition(UDim2.new(0, statsUtilsModule.ViewerWidth, 0, statsUtilsModule.ViewerHeight), UDim2.new(1, -statsUtilsModule.ViewerWidth, 0, statsUtilsModule.ButtonHeight + statsUtilsModule.ViewerTopMargin))
 end
 
-if var7 then
+if var1 then
 	function CreatePerformanceStatsUI()
-		-- upvalues: singleton (write), statsAggregatorManagerModule (ref), performanceStats (write), t (write), statsUtilsModule (ref), statsButtonModule (ref), var10 (write), statsViewerModule (ref), var12 (write)
+		-- upvalues: singleton (write), statsAggregatorManagerModule (ref), performanceStats (write), t (write), statsUtilsModule (ref), statsButtonModule (ref), var2 (write), statsViewerModule (ref), var3 (write)
 		singleton = statsAggregatorManagerModule.getSingleton()
 		singleton:StartListening()
 		performanceStats = Instance.new("Frame")
@@ -123,8 +123,8 @@ if var7 then
 		for i, v in statsUtilsModule.AllStatTypes do
 			t[v] = statsButtonModule.new(v)
 		end
-		var10 = statsViewerModule.new()
-		var12 = nil
+		var2 = statsViewerModule.new()
+		var3 = nil
 		ConfigureMasterFrame()
 		ConfigureStatButtonsInMasterFrame()
 		ConfigureStatViewerInMasterFrame()
@@ -134,24 +134,24 @@ if var7 then
 	end
 	
 	function DestroyPerformanceStatsUI()
-		-- upvalues: var10 (write), statsUtilsModule (ref), t (write), performanceStats (write), var12 (write), singleton (write)
-		if var10 then
-			var10:OnPerformanceStatsShouldBeVisibleChanged()
+		-- upvalues: var2 (write), statsUtilsModule (ref), t (write), performanceStats (write), var3 (write), singleton (write)
+		if var2 then
+			var2:OnPerformanceStatsShouldBeVisibleChanged()
 		end
 		for i, v in ipairs(statsUtilsModule.AllStatTypes) do
-			local var17 = t[v]
+			local var5 = t[v]
 			
-			if var17 then
-				var17:OnPerformanceStatsShouldBeVisibleChanged()
+			if var5 then
+				var5:OnPerformanceStatsShouldBeVisibleChanged()
 			end
 		end
 		if performanceStats then
 			performanceStats:Destroy()
 			performanceStats = nil
 		end
-		var10 = nil
+		var2 = nil
 		t = {}
-		var12 = nil
+		var3 = nil
 		
 		if singleton then
 			singleton:StopListening()
@@ -159,57 +159,57 @@ if var7 then
 	end
 	
 	function UpdatePerformanceStatsVisibility()
-		-- upvalues: statsUtilsModule (ref), performanceStats (write), rbxAnalyticsService (ref), var13 (write)
-		local var18 = statsUtilsModule.PerformanceStatsShouldBeVisible()
+		-- upvalues: statsUtilsModule (ref), performanceStats (write), rbxAnalyticsService (ref), var4 (write)
+		local var6 = statsUtilsModule.PerformanceStatsShouldBeVisible()
 		
-		if var18 == (performanceStats ~= nil) then return end
-		if var18 then
+		if var6 == (performanceStats ~= nil) then return end
+		if var6 then
 			CreatePerformanceStatsUI()
 		else
 			DestroyPerformanceStatsUI()
 		end
-		rbxAnalyticsService:TrackEvent("Game", if var18 then "Show PerfStats" else "Hide PerfStats", "", 0)
+		rbxAnalyticsService:TrackEvent("Game", if var6 then "Show PerfStats" else "Hide PerfStats", "", 0)
 		
-		if var18 then
-			var13 = time()
+		if var6 then
+			var4 = time()
 			rbxAnalyticsService:ReportCounter("OpenPerformanceProfiler", 1)
 			
 			return
-		elseif var13 then
-			rbxAnalyticsService:ReportStats("TimeOpenPerformanceProfiler", time() - var13)
+		elseif var4 then
+			rbxAnalyticsService:ReportStats("TimeOpenPerformanceProfiler", time() - var4)
 		end
 	end
 else
 	function UpdatePerformanceStatsVisibility()
-		-- upvalues: statsUtilsModule (ref), performanceStats (write), var10 (write), t (write), rbxAnalyticsService (ref), var13 (write)
-		local var19 = statsUtilsModule.PerformanceStatsShouldBeVisible()
+		-- upvalues: statsUtilsModule (ref), performanceStats (write), var2 (write), t (write), rbxAnalyticsService (ref), var4 (write)
+		local var6 = statsUtilsModule.PerformanceStatsShouldBeVisible()
 		
-		if var19 == performanceStats.Visible then return end
-		if var19 then
+		if var6 == performanceStats.Visible then return end
+		if var6 then
 			ShowMasterFrame()
 		else
 			HideMasterFrame()
 		end
-		var10:OnPerformanceStatsShouldBeVisibleChanged()
+		var2:OnPerformanceStatsShouldBeVisibleChanged()
 		
 		for i, v in ipairs(statsUtilsModule.AllStatTypes) do
 			t[v]:OnPerformanceStatsShouldBeVisibleChanged()
 		end
-		rbxAnalyticsService:TrackEvent("Game", if var19 then "Show PerfStats" else "Hide PerfStats", "", 0)
+		rbxAnalyticsService:TrackEvent("Game", if var6 then "Show PerfStats" else "Hide PerfStats", "", 0)
 		
-		if var19 then
-			var13 = time()
+		if var6 then
+			var4 = time()
 			rbxAnalyticsService:ReportCounter("OpenPerformanceProfiler", 1)
 			
 			return
-		elseif var13 then
-			rbxAnalyticsService:ReportStats("TimeOpenPerformanceProfiler", time() - var13)
+		elseif var4 then
+			rbxAnalyticsService:ReportStats("TimeOpenPerformanceProfiler", time() - var4)
 		end
 	end
 end
 gameSettings.PerformanceStatsVisibleChanged:connect(UpdatePerformanceStatsVisibility)
 
-if not var7 then
+if not var1 then
 	ConfigureMasterFrame()
 	ConfigureStatButtonsInMasterFrame()
 	ConfigureStatViewerInMasterFrame()

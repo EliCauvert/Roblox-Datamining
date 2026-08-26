@@ -3,20 +3,20 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.SendSystemMessageToSelf(_, p0, p1, p2)
+function t_1.SendSystemMessageToSelf(_, p1, p2, p3)
 	-- upvalues: chatConstantsModule (ref)
-	p1:AddMessageToChannel({
+	p2:AddMessageToChannel({
 		ID = -1,
 		FromSpeaker = nil,
 		SpeakerUserId = 0,
 		IsFiltered = true,
-		OriginalChannel = p1.Name,
-		MessageLength = string.len(p0),
-		MessageLengthUtf8 = utf8.len(utf8.nfcnormalize(p0)),
-		Message = p0,
+		OriginalChannel = p2.Name,
+		MessageLength = string.len(p1),
+		MessageLengthUtf8 = utf8.len(utf8.nfcnormalize(p1)),
+		Message = p1,
 		MessageType = chatConstantsModule.MessageTypeSystem,
 		Time = os.time(),
-		ExtraData = p2
+		ExtraData = p3
 	})
 end
 

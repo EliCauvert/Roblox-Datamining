@@ -1,27 +1,27 @@
 ﻿local constantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Constants)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: constantsModule (ref)
-	local var1 = if p0 and p0.InviteUser ~= 0 then p0.InviteUser else nil
-	local var2, var3 = p1(if var1 then constantsModule.Triggers.DeveloperSingle else constantsModule.Triggers.DeveloperMultiple, var1)
+	local var1 = if p1 and p1.InviteUser ~= 0 then p1.InviteUser else nil
+	local var2, var3 = p2(if var1 then constantsModule.Triggers.DeveloperSingle else constantsModule.Triggers.DeveloperMultiple, var1)
 	
 	if not var2 then
 		return nil
 	end
 	local t = {}
 	
-	if var3 and p0 then
-		if p0.InviteMessageId ~= "" then
-			t.inviteMessageId = p0.InviteMessageId
+	if var3 and p1 then
+		if p1.InviteMessageId ~= "" then
+			t.inviteMessageId = p1.InviteMessageId
 		end
-		if p0.InviteUser ~= 0 then
-			t.inviteUserId = p0.InviteUser
+		if p1.InviteUser ~= 0 then
+			t.inviteUserId = p1.InviteUser
 		end
-		if p0.PromptMessage ~= "" then
-			t.promptMessage = p0.PromptMessage
+		if p1.PromptMessage ~= "" then
+			t.promptMessage = p1.PromptMessage
 		end
-		if p0.LaunchData ~= "" then
-			t.launchData = p0.LaunchData
+		if p1.LaunchData ~= "" then
+			t.launchData = p1.LaunchData
 		end
 	end
 	return t

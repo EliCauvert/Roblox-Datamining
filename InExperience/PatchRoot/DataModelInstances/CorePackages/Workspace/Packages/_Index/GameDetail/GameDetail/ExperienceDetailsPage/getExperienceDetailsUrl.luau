@@ -5,12 +5,12 @@ local sduiCapabilities = require(parent.SduiSharedUtilities).SduiCapabilities
 local fFlagSduiCapabilityBindings = require(parent.SharedFlags).FFlagSduiCapabilityBindings
 local fFlagSduiEdpClientTemplateCache = require(parent.SharedFlags).FFlagSduiEdpClientTemplateCache
 
-return function(p0)
+return function(p1)
 	-- upvalues: urlBuilder (ref), url (ref), fFlagSduiCapabilityBindings (ref), fFlagSduiEdpClientTemplateCache (ref), parent (ref), sduiCapabilities (ref)
-	local var0 = urlBuilder.new({
+	local var1 = urlBuilder.new({
 		path = "experience-details-api/v2/universes/{universeId}/experience-details",
 		base = url.APIS_URL
-	})({ universeId = p0 })
+	})({ universeId = p1 })
 	
 	if fFlagSduiCapabilityBindings and not fFlagSduiEdpClientTemplateCache then
 		local _ = require(parent.ServiceContractsProto)
@@ -25,8 +25,8 @@ return function(p0)
 		})
 		
 		if next(t) ~= nil then
-			var0 = urlBuilder.addQueryString(var0, t)
+			var1 = urlBuilder.addQueryString(var1, t)
 		end
 	end
-	return var0
+	return var1
 end

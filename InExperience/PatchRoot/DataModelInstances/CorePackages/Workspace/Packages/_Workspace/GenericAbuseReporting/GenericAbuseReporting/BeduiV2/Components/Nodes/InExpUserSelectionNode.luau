@@ -12,16 +12,16 @@ local recentlyLeftSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Si
 local voiceSpeakingIconModule = require(genericAbuseReporting.BeduiV2.Components.Shared.VoiceSpeakingIcon)
 local voiceSpeakingSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Signals.voiceSpeakingSignals)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: dashModule (ref), voiceSpeakingSignalsModule (ref), signalsReactModule (ref), recentlyLeftSignalsModule (ref), reactModule (ref), voiceSpeakingIconModule (ref), recentlyLeftBadgeModule (ref), view (ref), listNodeV2Module (ref)
-	local trailingAccessories = p0.trailingAccessories
-	local var10 = dashModule.join(p0, { trailingAccessories = dashModule.None })
-	local var11 = voiceSpeakingSignalsModule.useVoiceSpeakingStore()
-	local var12 = signalsReactModule.useSignalState(recentlyLeftSignalsModule.getRecentlyLeftIds())
+	local trailingAccessories = p1.trailingAccessories
+	local var1 = dashModule.join(p1, { trailingAccessories = dashModule.None })
+	local var2 = voiceSpeakingSignalsModule.useVoiceSpeakingStore()
+	local var3 = signalsReactModule.useSignalState(recentlyLeftSignalsModule.getRecentlyLeftIds())
 	
-	return reactModule.createElement(listNodeV2Module, dashModule.join(var10, {
-		renderTrailingAccessory = reactModule.useCallback(function(p1)
-			-- upvalues: trailingAccessories (ref), reactModule (copy), voiceSpeakingIconModule (copy), var11 (ref), var12 (ref), recentlyLeftBadgeModule (copy), view (copy)
+	return reactModule.createElement(listNodeV2Module, dashModule.join(var1, {
+		renderTrailingAccessory = reactModule.useCallback(function(p2)
+			-- upvalues: trailingAccessories (ref), reactModule (copy), voiceSpeakingIconModule (copy), var2 (ref), var3 (ref), recentlyLeftBadgeModule (copy), view (copy)
 			if not trailingAccessories or #trailingAccessories == 0 then
 				return nil
 			end
@@ -30,14 +30,14 @@ return reactModule.memo(function(p0)
 			for i, v in trailingAccessories do
 				if v.type == "voiceSpeakingIndicator" then
 					table.insert(t, reactModule.createElement(voiceSpeakingIconModule, {
-						isSpeakingSignal = var11.getIsSpeaking(p1.id),
+						isSpeakingSignal = var2.getIsSpeaking(p2.id),
 						layoutOrder = i
 					}))
-				elseif v.type == "recentlyLeftIndicator" and var12[p1.id] then
+				elseif v.type == "recentlyLeftIndicator" and var3[p2.id] then
 					table.insert(t, reactModule.createElement(recentlyLeftBadgeModule, { text = v.text, layoutOrder = i }))
 				end
 			end
 			return if next(t) == nil then nil else reactModule.createElement(view, { tag = "row align-y-center gap-small auto-xy" }, t)
-		end, { trailingAccessories, var11, var12 })
+		end, { trailingAccessories, var2, var3 })
 	}))
 end)

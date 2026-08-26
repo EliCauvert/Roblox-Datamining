@@ -6,11 +6,11 @@ local useEventConnection = reactUtilsModule.useEventConnection
 
 return function()
 	-- upvalues: reactModule (ref), guiService (ref), useEventConnection (ref)
-	local var3, var4 = reactModule.useState(guiService.TopbarInset)
+	local var1, var2 = reactModule.useState(guiService.TopbarInset)
 	useEventConnection(guiService:GetPropertyChangedSignal("TopbarInset"), function()
-		-- upvalues: var4 (ref), guiService (copy)
-		var4(guiService.TopbarInset)
+		-- upvalues: var2 (ref), guiService (copy)
+		var2(guiService.TopbarInset)
 	end)
 	
-	return var3
+	return var1
 end

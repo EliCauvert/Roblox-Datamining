@@ -6,39 +6,39 @@ local _ = require(parent.App.Style.Fonts)
 local _ = require(parent.App.Style.StyleTypes)
 local setDefaultModule = require(parent.Utility.setDefault)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyleModule (ref), useTextSizeOffsetModule (ref), setDefaultModule (ref), reactModule (ref)
-	local var9, var10, var11, var12
-	local var4 = useStyleModule()
-	local var5 = useTextSizeOffsetModule()
-	local var6 = if var4.Settings.ReducedMotion then 6 else 8
-	local contentTitle = p0.contentTitle
-	local contentFooter = p0.contentFooter
-	local var7 = setDefaultModule(p0.textLineCount, 2)
-	local var8 = setDefaultModule(p0.hasSidePadding, true)
+	local var1, var2, var3, var4
+	local var5 = useStyleModule()
+	local var6 = useTextSizeOffsetModule()
+	local var7 = if var5.Settings.ReducedMotion then 6 else 8
+	local contentTitle = p1.contentTitle
+	local contentFooter = p1.contentFooter
+	local var8 = setDefaultModule(p1.textLineCount, 2)
+	local var9 = setDefaultModule(p1.hasSidePadding, true)
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	
-	if p0.outerPadding == nil or type(p0.outerPadding) == "number" then
-		local var13 = setDefaultModule(p0.outerPadding, var6)
-		var9 = var13
-		var10 = var13
-		var11 = var13
-		var12 = var13
+	if p1.outerPadding == nil or type(p1.outerPadding) == "number" then
+		local var10 = setDefaultModule(p1.outerPadding, var7)
+		var1 = var10
+		var2 = var10
+		var3 = var10
+		var4 = var10
 	else
-		var9 = setDefaultModule(p0.outerPadding.Left, var6)
-		var10 = setDefaultModule(p0.outerPadding.Right, var6)
-		var11 = setDefaultModule(p0.outerPadding.Top, var6)
-		var12 = setDefaultModule(p0.outerPadding.Bottom, var6)
+		var1 = setDefaultModule(p1.outerPadding.Left, var7)
+		var2 = setDefaultModule(p1.outerPadding.Right, var7)
+		var3 = setDefaultModule(p1.outerPadding.Top, var7)
+		var4 = setDefaultModule(p1.outerPadding.Bottom, var7)
 	end
-	local var14 = setDefaultModule(p0.titlePadding, var6)
-	local panelHeight = p0.panelHeight
-	local footerHeight = p0.footerHeight
-	local font = var4.Font
-	local var15 = setDefaultModule(p0.titleFont, font.Header2)
-	local textEmphasis = var4.Theme.TextEmphasis
+	local var11 = setDefaultModule(p1.titlePadding, var7)
+	local panelHeight = p1.panelHeight
+	local footerHeight = p1.footerHeight
+	local font = var5.Font
+	local var12 = setDefaultModule(p1.titleFont, font.Header2)
+	local textEmphasis = var5.Theme.TextEmphasis
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -47,23 +47,23 @@ return function(p0)
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var14)
+			Padding = UDim.new(0, var11)
 		}),
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingLeft = if var8 then UDim.new(0, var9) else nil,
-			PaddingRight = if var8 then UDim.new(0, var10) else nil,
-			PaddingTop = UDim.new(0, var11),
-			PaddingBottom = UDim.new(0, var12)
+			PaddingLeft = if var9 then UDim.new(0, var1) else nil,
+			PaddingRight = if var9 then UDim.new(0, var2) else nil,
+			PaddingTop = UDim.new(0, var3),
+			PaddingBottom = UDim.new(0, var4)
 		}),
-		TitleText = if var7 > 0 and contentTitle and string.len(contentTitle) > 0 then reactModule.createElement("TextLabel", {
+		TitleText = if var8 > 0 and contentTitle and string.len(contentTitle) > 0 then reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Text = contentTitle,
-			Font = var15.Font,
-			TextSize = font.BaseSize * var15.RelativeSize,
+			Font = var12.Font,
+			TextSize = font.BaseSize * var12.RelativeSize,
 			TextTransparency = textEmphasis.Transparency,
 			TextColor3 = textEmphasis.Color,
 			TextTruncate = Enum.TextTruncate.AtEnd,
@@ -71,7 +71,7 @@ return function(p0)
 			TextYAlignment = Enum.TextYAlignment.Top
 		}, {
 			UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-				MaxSize = Vector2.new(1e999, (font.BaseSize + var5) * var15.RelativeSize * var7)
+				MaxSize = Vector2.new(1e999, (font.BaseSize + var6) * var12.RelativeSize * var8)
 			})
 		}) else nil,
 		ContentFooter = if contentFooter then reactModule.createElement("Frame", {

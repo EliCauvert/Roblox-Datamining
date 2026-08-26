@@ -5,9 +5,9 @@ local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention
 
 return {
 	configName = "ChatToastNudge",
-	shouldTriggerVisualTreatment = function(p0)
+	shouldTriggerVisualTreatment = function(p1)
 		-- upvalues: constants (ref)
-		return p0.type == constants.NotificationDialogType.ChatNudge and (p0.modalType == constants.NotificationModalType.Toast and p0.abuseVector == constants.AbuseVectorType.ExperienceChat)
+		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Toast and p1.abuseVector == constants.AbuseVectorType.ExperienceChat)
 	end,
 	shouldTriggerBehavioralTreatment = function(_)
 		return false
@@ -16,18 +16,18 @@ return {
 		-- upvalues: constants (ref)
 		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Toast and p1.abuseVector == constants.AbuseVectorType.ExperienceChat)
 	end,
-	onTriggerVisualTreatment = function(p2, p3)
+	onTriggerVisualTreatment = function(p1, p2)
 		-- upvalues: constants (ref)
-		p2({
+		p1({
 			isShown = true,
 			type = constants.UIStateActions.ToggleNotificationDialog,
 			treatmentType = constants.TreatmentType.ChatNudgeToast,
-			detail = p3
+			detail = p2
 		})
 	end,
 	onTriggerBehavioralTreatment = function(_) end,
-	onTriggerEventReceived = function(p4)
+	onTriggerEventReceived = function(p1)
 		-- upvalues: inExperienceInterventionAnalyticsModule (ref)
-		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ToastMessageReceived, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, DateTime.now().UnixTimestampMillis, p4.decisionEventId, p4.evidence, p4.timeoutDurationSeconds)
+		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ToastMessageReceived, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, DateTime.now().UnixTimestampMillis, p1.decisionEventId, p1.evidence, p1.timeoutDurationSeconds)
 	end
 }

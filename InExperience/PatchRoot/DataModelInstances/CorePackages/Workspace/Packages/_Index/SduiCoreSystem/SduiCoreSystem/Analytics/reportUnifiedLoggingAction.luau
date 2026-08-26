@@ -7,26 +7,26 @@ local _ = require(sduiCoreSystem.SduiConfigTypes)
 local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local fFlagSduiErrorCleanup = require(parent.SharedFlags).FFlagSduiErrorCleanup
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: fFlagSduiErrorCleanup (ref), sduiCollectionAnalyticsBuilderModule (ref), sduiErrorsModule (ref), unifiedLoggingModule (ref)
-	local var4 = if fFlagSduiErrorCleanup then p2.getCollectionData and p2.getCollectionData() or nil else nil
-	local var5 = sduiCollectionAnalyticsBuilderModule.buildAndValidateItemAnalyticsData(p0, p2.analyticsData, p2.ancestorAnalyticsData, nil, p1.actionType, function(_)
-		-- upvalues: fFlagSduiErrorCleanup (copy), var4 (write), p0 (ref), sduiErrorsModule (copy), p1 (ref)
-		if not fFlagSduiErrorCleanup or var4 ~= nil then
-			p0.dependencies.logger.reportCounter(sduiErrorsModule.SduiCounterName.LogActionInvalidItemData, { name = p1.actionType })
+	local var1 = if fFlagSduiErrorCleanup then p3.getCollectionData and p3.getCollectionData() or nil else nil
+	local var2 = sduiCollectionAnalyticsBuilderModule.buildAndValidateItemAnalyticsData(p1, p3.analyticsData, p3.ancestorAnalyticsData, nil, p2.actionType, function(_)
+		-- upvalues: fFlagSduiErrorCleanup (copy), var1 (write), p1 (ref), sduiErrorsModule (copy), p2 (ref)
+		if not fFlagSduiErrorCleanup or var1 ~= nil then
+			p1.dependencies.logger.reportCounter(sduiErrorsModule.SduiCounterName.LogActionInvalidItemData, { name = p2.actionType })
 		end
 	end)
-	assert(var5, "itemAnalyticsData must exist")
+	assert(var2, "itemAnalyticsData must exist")
 	
 	if not fFlagSduiErrorCleanup then
-		var4 = p2.getCollectionData and p2.getCollectionData() or nil
+		var1 = p3.getCollectionData and p3.getCollectionData() or nil
 	end
-	if not var4 then
+	if not var1 then
 		if not fFlagSduiErrorCleanup then
-			p0.dependencies.logger.reportCounter(sduiErrorsModule.SduiCounterName.LogActionMissingCollectionData, { name = p1.actionType })
+			p1.dependencies.logger.reportCounter(sduiErrorsModule.SduiCounterName.LogActionMissingCollectionData, { name = p2.actionType })
 		end
-		var4 = sduiCollectionAnalyticsBuilderModule.DUMMY_COLLECTION_DATA
+		var1 = sduiCollectionAnalyticsBuilderModule.DUMMY_COLLECTION_DATA
 	end
-	assert(var4, "collectionAnalyticsData must exist")
-	unifiedLoggingModule.SendItemActionEvent.sendFromServerDrivenUi(p0.dependencies.eventIngest, var5, var5.itemPosition, var4, p0.appPage, var4.collectionId, var4.contentType, var4.itemsPerRow, var4.collectionPosition, var4.totalNumberOfItems, nil, p1.actionType, p1.actionParams, var4.startRowNumber)
+	assert(var1, "collectionAnalyticsData must exist")
+	unifiedLoggingModule.SendItemActionEvent.sendFromServerDrivenUi(p1.dependencies.eventIngest, var2, var2.itemPosition, var1, p1.appPage, var1.collectionId, var1.contentType, var1.itemsPerRow, var1.collectionPosition, var1.totalNumberOfItems, nil, p2.actionType, p2.actionParams, var1.startRowNumber)
 end

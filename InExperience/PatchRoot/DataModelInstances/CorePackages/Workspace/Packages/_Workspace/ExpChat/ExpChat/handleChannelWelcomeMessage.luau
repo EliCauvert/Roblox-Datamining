@@ -3,18 +3,18 @@ local set = require(expChat.Parent.llama).Set
 local getOtherDisplayNameInWhisperChannelModule = require(expChat.getOtherDisplayNameInWhisperChannel)
 local t = {}
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: set (ref), t (write), getOtherDisplayNameInWhisperChannelModule (ref)
-	if p0.TextChannel and string.find(p0.TextChannel.Name, "^RBXWhisper") and not set.has(t, p0.TextChannel) then
-		local var3 = getOtherDisplayNameInWhisperChannelModule(p0.TextChannel, p1)
+	if p1.TextChannel and string.find(p1.TextChannel.Name, "^RBXWhisper") and not set.has(t, p1.TextChannel) then
+		local var1 = getOtherDisplayNameInWhisperChannelModule(p1.TextChannel, p2)
 		
-		if var3 then
-			t = set.add(t, p0.TextChannel)
+		if var1 then
+			t = set.add(t, p1.TextChannel)
 			
 			return {
 				key = "CoreScripts.TextChat.Notification.WhisperChat.Created",
 				metadata = "Roblox.Whisper.Welcome.Sent",
-				args = { RBX_NAME = var3 }
+				args = { RBX_NAME = var1 }
 			}
 		end
 	end

@@ -18,9 +18,9 @@ local prefetchOnJoinFiredFallbackPathCounterModule = require(inExperienceShop.Ev
 local prefetchOnJoinFiredPrimaryPathCounterModule = require(inExperienceShop.Events.PrefetchOnJoinFiredPrimaryPathCounter)
 local prefetchOnJoinRetriedCounterModule = require(inExperienceShop.Events.PrefetchOnJoinRetriedCounter)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: constantsModule (ref)
-	for i, v in p0 do
+	for i, v in p1 do
 		if v.id ~= constantsModule.HOME_CATEGORY_ID then
 			return true
 		end
@@ -28,128 +28,128 @@ local function _(p0)
 	return false
 end
 
-local _ = function(p1)
+local _ = function(p2)
 	-- upvalues: getInExperienceShopStoreModule (ref), signalsModule (ref)
-	local var19 = getInExperienceShopStoreModule(false)
-	local var20 = false
-	local var21 = nil
-	var21 = signalsModule.createEffect(function(p2)
-		-- upvalues: var20 (write), var19 (ref), p1 (ref), var21 (write)
-		if var20 then return end
-		if var19.getLoading(p2) then
+	local var1 = getInExperienceShopStoreModule(false)
+	local var2 = false
+	local var3 = nil
+	var3 = signalsModule.createEffect(function(p3)
+		-- upvalues: var2 (write), var1 (ref), p2 (ref), var3 (write)
+		if var2 then return end
+		if var1.getLoading(p3) then
 			return
 		end
-		local categories = var19.getCategories(p2)
-		local error = var19.getError(p2)
-		var20 = true
+		local categories = var1.getCategories(p3)
+		local error = var1.getError(p3)
+		var2 = true
 		task.spawn(function()
-			-- upvalues: p1 (copy), error (ref), categories (ref)
-			p1(error, categories)
+			-- upvalues: p2 (copy), error (ref), categories (ref)
+			p2(error, categories)
 		end)
 		task.defer(function()
-			-- upvalues: var21 (copy)
-			if var21 then
-				var21()
+			-- upvalues: var3 (copy)
+			if var3 then
+				var3()
 			end
 		end)
 	end)
 end
 
-local function triggerPrefetch(p3, p4)
+local function triggerPrefetch(p2, p3)
 	-- upvalues: shopDebugLoggerModule (ref), logCounterModule (ref), prefetchOnJoinFiredPrimaryPathCounterModule (ref), prefetchOnJoinFiredFallbackPathCounterModule (ref), getInExperienceShopStoreModule (ref), fFlagEnableShopProductInfoRefreshModule (ref), fFlagShopPrefetchProductInfoModule (ref), fIntShopPrefetchMaxRetriesModule (ref), fIntShopPrefetchRetryBackoffMsModule (ref), constantsModule (ref), prefetchOnJoinRetriedCounterModule (ref), scheduleRetryModule (ref), signalsModule (ref)
 	shopDebugLoggerModule.logLazy(function()
-		-- upvalues: p3 (ref)
+		-- upvalues: p2 (ref)
 		return "prefetchShopDataOnGameJoin: triggerPrefetch path=" .. p3
 	end)
 	
-	if p3 == "primary" then
+	if p2 == "primary" then
 		logCounterModule(prefetchOnJoinFiredPrimaryPathCounterModule)
 	else
 		logCounterModule(prefetchOnJoinFiredFallbackPathCounterModule)
 	end
-	local var24 = getInExperienceShopStoreModule(false)
-	local var25 = shopDebugLoggerModule.startTimer()
+	local var1 = getInExperienceShopStoreModule(false)
+	local var2 = shopDebugLoggerModule.startTimer()
 	
 	local _ = function()
-		-- upvalues: fFlagEnableShopProductInfoRefreshModule (copy), fFlagShopPrefetchProductInfoModule (copy), shopDebugLoggerModule (copy), var24 (ref)
+		-- upvalues: fFlagEnableShopProductInfoRefreshModule (copy), fFlagShopPrefetchProductInfoModule (copy), shopDebugLoggerModule (copy), var1 (ref)
 		if fFlagEnableShopProductInfoRefreshModule and not fFlagShopPrefetchProductInfoModule then
 			shopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting prefetchWidgetsOnly")
-			var24.prefetchWidgetsOnly()
+			var1.prefetchWidgetsOnly()
 			
 			return
 		end
 		shopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting fetchAllShopData")
-		var24.fetchAllShopData()
+		var1.fetchAllShopData()
 	end
 	
-	if p4 then
-		local var26 = fIntShopPrefetchRetryBackoffMsModule / 1000
-		local var27 = fIntShopPrefetchMaxRetriesModule
+	if p3 then
+		local var3 = fIntShopPrefetchRetryBackoffMsModule / 1000
+		local var4 = fIntShopPrefetchMaxRetriesModule
 		
 		local function tryFetch()
-			-- upvalues: shopDebugLoggerModule (copy), fIntShopPrefetchMaxRetriesModule (ref), var27 (write), fFlagEnableShopProductInfoRefreshModule (copy), fFlagShopPrefetchProductInfoModule (copy), var24 (ref), constantsModule (copy), var26 (ref), logCounterModule (copy), prefetchOnJoinRetriedCounterModule (copy), scheduleRetryModule (copy), tryFetch (ref), var25 (ref), p4 (ref), getInExperienceShopStoreModule (copy), signalsModule (copy)
+			-- upvalues: shopDebugLoggerModule (copy), fIntShopPrefetchMaxRetriesModule (ref), var4 (write), fFlagEnableShopProductInfoRefreshModule (copy), fFlagShopPrefetchProductInfoModule (copy), var1 (ref), constantsModule (copy), var3 (ref), logCounterModule (copy), prefetchOnJoinRetriedCounterModule (copy), scheduleRetryModule (copy), tryFetch (ref), var2 (ref), p3 (ref), getInExperienceShopStoreModule (copy), signalsModule (copy)
 			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: fIntShopPrefetchMaxRetriesModule (copy), var27 (copy)
-				return "prefetchShopDataOnGameJoin: attempt=" .. fIntShopPrefetchMaxRetriesModule - var27 + 1 .. " of " .. fIntShopPrefetchMaxRetriesModule + 1
+				-- upvalues: fIntShopPrefetchMaxRetriesModule (copy), var4 (copy)
+				return "prefetchShopDataOnGameJoin: attempt=" .. fIntShopPrefetchMaxRetriesModule - var4 + 1 .. " of " .. fIntShopPrefetchMaxRetriesModule + 1
 			end)
 			
 			if fFlagEnableShopProductInfoRefreshModule and not fFlagShopPrefetchProductInfoModule then
 				shopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting prefetchWidgetsOnly")
-				var24.prefetchWidgetsOnly()
+				var1.prefetchWidgetsOnly()
 			else
 				shopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting fetchAllShopData")
-				var24.fetchAllShopData()
+				var1.fetchAllShopData()
 			end
-			local var29 = function(p5, p6)
-				-- upvalues: constantsModule (copy), var27 (copy), shopDebugLoggerModule (copy), var26 (copy), logCounterModule (copy), prefetchOnJoinRetriedCounterModule (copy), scheduleRetryModule (copy), tryFetch (copy), var25 (copy), p4 (copy)
-				local var33 = false
+			local var5 = function(p4, p5)
+				-- upvalues: constantsModule (copy), var4 (copy), shopDebugLoggerModule (copy), var3 (copy), logCounterModule (copy), prefetchOnJoinRetriedCounterModule (copy), scheduleRetryModule (copy), tryFetch (copy), var2 (copy), p3 (copy)
+				local var6 = false
 				
-				if p5 == nil then
-					for i, v in p6 do
+				if p4 == nil then
+					for i, v in p5 do
 						if v.id ~= constantsModule.HOME_CATEGORY_ID then
-							var33 = true
+							var6 = true
 						end
 					end
-					var33 = false
+					var6 = false
 				end
-				if p5 ~= nil and var27 > 0 then
-					var27 -= 1
+				if p4 ~= nil and var4 > 0 then
+					var4 -= 1
 					shopDebugLoggerModule.logLazy(function()
-						-- upvalues: var27 (copy), var26 (copy)
+						-- upvalues: var4 (copy), var3 (copy)
 						return "prefetchShopDataOnGameJoin: error, retrying attemptsRemaining=" .. var27 .. " backoffSeconds=" .. var26
 					end)
 					logCounterModule(prefetchOnJoinRetriedCounterModule)
-					scheduleRetryModule(var26, tryFetch)
+					scheduleRetryModule(var3, tryFetch)
 					
 					return
 				end
 				shopDebugLoggerModule.logElapsedLazy(function()
-					-- upvalues: var33 (ref)
-					return "prefetchShopDataOnGameJoin: settled hasItems=" .. tostring(var33)
-				end, var25)
-				p4(var33)
+					-- upvalues: var6 (ref)
+					return "prefetchShopDataOnGameJoin: settled hasItems=" .. tostring(var6)
+				end, var2)
+				p3(var6)
 			end
 			
-			local var30 = getInExperienceShopStoreModule(false)
-			local var31 = false
-			local var32 = nil
-			var32 = signalsModule.createEffect(function(p7)
-				-- upvalues: var31 (write), var30 (ref), var29 (ref), var32 (write)
-				if var31 then return end
-				if var30.getLoading(p7) then
+			local var7 = getInExperienceShopStoreModule(false)
+			local var8 = false
+			local var9 = nil
+			var9 = signalsModule.createEffect(function(p6)
+				-- upvalues: var8 (write), var7 (ref), var5 (ref), var9 (write)
+				if var8 then return end
+				if var7.getLoading(p6) then
 					return
 				end
-				local categories = var30.getCategories(p7)
-				local error = var30.getError(p7)
+				local categories = var7.getCategories(p6)
+				local error = var7.getError(p6)
 				var20 = true
 				task.spawn(function()
-					-- upvalues: var29 (copy), error (ref), categories (ref)
-					var29(error, categories)
+					-- upvalues: var5 (copy), error (ref), categories (ref)
+					var5(error, categories)
 				end)
 				task.defer(function()
-					-- upvalues: var32 (copy)
-					if var32 then
-						var32()
+					-- upvalues: var9 (copy)
+					if var9 then
+						var9()
 					end
 				end)
 			end)
@@ -160,33 +160,33 @@ local function triggerPrefetch(p3, p4)
 		return
 	elseif fFlagEnableShopProductInfoRefreshModule and not fFlagShopPrefetchProductInfoModule then
 		shopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting prefetchWidgetsOnly")
-		var24.prefetchWidgetsOnly()
+		var1.prefetchWidgetsOnly()
 		
 		return
 	end
 	shopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting fetchAllShopData")
-	var24.fetchAllShopData()
+	var1.fetchAllShopData()
 end
 
-return function(p8)
+return function(p4)
 	-- upvalues: fFlagEnableShopPrefetchModule (ref), shopDebugLoggerModule (ref), whenJoinSettlesModule (ref), fIntShopPrefetchDelayMsModule (ref), triggerPrefetch (ref), schedulePrefetchDelayModule (ref)
 	if fFlagEnableShopPrefetchModule then
 		shopDebugLoggerModule.log("prefetchShopDataOnGameJoin: waiting for join to settle")
-		whenJoinSettlesModule(function(p9)
-			-- upvalues: shopDebugLoggerModule (copy), fIntShopPrefetchDelayMsModule (copy), triggerPrefetch (copy), p8 (ref), schedulePrefetchDelayModule (copy)
+		whenJoinSettlesModule(function(p5)
+			-- upvalues: shopDebugLoggerModule (copy), fIntShopPrefetchDelayMsModule (copy), triggerPrefetch (copy), p4 (ref), schedulePrefetchDelayModule (copy)
 			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p9 (ref)
+				-- upvalues: p5 (ref)
 				return "prefetchShopDataOnGameJoin: join settled path=" .. p9
 			end)
 			
 			if fIntShopPrefetchDelayMsModule <= 0 then
-				triggerPrefetch(p9, p8)
+				triggerPrefetch(p5, p4)
 				
 				return
 			end
 			schedulePrefetchDelayModule(fIntShopPrefetchDelayMsModule / 1000, function()
-				-- upvalues: triggerPrefetch (copy), p9 (ref), p8 (copy)
-				triggerPrefetch(p9, p8)
+				-- upvalues: triggerPrefetch (copy), p5 (ref), p4 (copy)
+				triggerPrefetch(p5, p4)
 			end)
 		end)
 		

@@ -3,14 +3,14 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local roduxModule = require(corePackagesService.Packages.Rodux)
 local actions = script.Parent.Parent.Actions
 
-local function createCurrentEmotes(p0, p1)
+local function createCurrentEmotes(p1, p2)
 	local t = {}
 	
-	for i, v in ipairs(p1) do
+	for i, v in ipairs(p2) do
 		local slot = v.Slot
 		local name = v.Name
 		
-		if slot and name and p0[name] then
+		if slot and name and p1[name] then
 			t[slot] = name
 		end
 	end
@@ -23,22 +23,22 @@ return roduxModule.createReducer({
 	equippedEmotes = {},
 	currentEmotes = {}
 }, {
-	[require(actions.EmotesChanged).name] = function(p2, p3)
+	[require(actions.EmotesChanged).name] = function(p3, p4)
 		-- upvalues: cryoModule (ref), createCurrentEmotes (ref)
-		return cryoModule.Dictionary.join(p2, {
-			emotesInfo = p3.emotes,
-			currentEmotes = createCurrentEmotes(p3.emotes, p2.equippedEmotes)
+		return cryoModule.Dictionary.join(p3, {
+			emotesInfo = p4.emotes,
+			currentEmotes = createCurrentEmotes(p4.emotes, p3.equippedEmotes)
 		})
 	end,
-	[require(actions.EquippedEmotesChanged).name] = function(p4, p5)
+	[require(actions.EquippedEmotesChanged).name] = function(p3, p4)
 		-- upvalues: cryoModule (ref), createCurrentEmotes (ref)
-		return cryoModule.Dictionary.join(p4, {
-			equippedEmotes = p5.equippedEmotes,
-			currentEmotes = createCurrentEmotes(p4.emotesInfo, p5.equippedEmotes)
+		return cryoModule.Dictionary.join(p3, {
+			equippedEmotes = p4.equippedEmotes,
+			currentEmotes = createCurrentEmotes(p3.emotesInfo, p4.equippedEmotes)
 		})
 	end,
-	[require(actions.NumberEmotesLoadedChanged).name] = function(p6, p7)
+	[require(actions.NumberEmotesLoadedChanged).name] = function(p3, p4)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p6, { numberEmotesLoaded = p7.numberEmotesLoaded })
+		return cryoModule.Dictionary.join(p3, { numberEmotesLoaded = p4.numberEmotesLoaded })
 	end
 })

@@ -13,7 +13,7 @@ local t = {
 	[statusCodes.GATEWAY_TIMEOUT] = "Feature.Toast.NetworkingError.Timeout"
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref)
-	return if p0 == Enum.HttpError.DnsResolve or p0 == Enum.HttpError.ConnectFail or (p0 == Enum.HttpError.NetFail or p0 == Enum.HttpError.SslConnectFail) then "Feature.Toast.NetworkingError.UnableToConnect" elseif p0 == Enum.HttpError.TimedOut then "Feature.Toast.NetworkingError.Timeout" elseif p0 == Enum.HttpError.Aborted then nil elseif p0 == Enum.HttpError.OK and p1 ~= nil and t[p1] ~= nil then t[p1] else "Feature.Toast.NetworkingError.SomethingIsWrong"
+	return if p1 == Enum.HttpError.DnsResolve or p1 == Enum.HttpError.ConnectFail or (p1 == Enum.HttpError.NetFail or p1 == Enum.HttpError.SslConnectFail) then "Feature.Toast.NetworkingError.UnableToConnect" elseif p1 == Enum.HttpError.TimedOut then "Feature.Toast.NetworkingError.Timeout" elseif p1 == Enum.HttpError.Aborted then nil elseif p1 == Enum.HttpError.OK and p2 ~= nil and t[p2] ~= nil then t[p2] else "Feature.Toast.NetworkingError.SomethingIsWrong"
 end

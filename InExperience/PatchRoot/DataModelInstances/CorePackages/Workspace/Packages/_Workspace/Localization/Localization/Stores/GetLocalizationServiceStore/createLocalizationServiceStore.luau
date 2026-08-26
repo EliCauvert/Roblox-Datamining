@@ -4,14 +4,14 @@ local signalsModule = require(script:FindFirstAncestor("Localization").Parent.Si
 return function()
 	-- upvalues: signalsModule (ref), localizationService (ref)
 	local t = {}
-	local var3, var4 = signalsModule.createSignal(localizationService.RobloxLocaleId)
+	local var1, var2 = signalsModule.createSignal(localizationService.RobloxLocaleId)
 	t.robloxLocaleId = localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
-		-- upvalues: var4 (ref), localizationService (copy)
-		var4(localizationService.RobloxLocaleId)
+		-- upvalues: var2 (ref), localizationService (copy)
+		var2(localizationService.RobloxLocaleId)
 	end)
 	
 	return {
-		getRobloxLocaleId = var3,
+		getRobloxLocaleId = var1,
 		cleanUp = function()
 			-- upvalues: t (write)
 			for i, v in t do

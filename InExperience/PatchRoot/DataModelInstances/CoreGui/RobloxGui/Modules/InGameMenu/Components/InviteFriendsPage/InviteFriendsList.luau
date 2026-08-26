@@ -18,7 +18,7 @@ local rootedConnectionModule = require(parent.Components.Connection.RootedConnec
 local constantsModule = require(parent.Resources.Constants)
 local inviteStatus = constantsModule.InviteStatus
 local inviteUserToPlaceIdModule = require(parent.Thunks.InviteUserToPlaceId)
-local var15 = tostring(game.PlaceId)
+local var1 = tostring(game.PlaceId)
 local inviteFriendsList = roact.PureComponent:extend("InviteFriendsList")
 inviteFriendsList.validateProps = t.strictInterface({
 	friends = t.array(t.strictInterface({
@@ -34,33 +34,33 @@ inviteFriendsList.validateProps = t.strictInterface({
 	searchBoxRef = t.table
 })
 
-function inviteFriendsList.init(p0)
+function inviteFriendsList.init(p1)
 	-- upvalues: roactGamepadModule (ref)
-	p0.playerRefs = roactGamepadModule.createRefCache()
-	p0.state = { searchText = "" }
-	p0.inviteAnimationInProgress = {}
+	p1.playerRefs = roactGamepadModule.createRefCache()
+	p1.state = { searchText = "" }
+	p1.inviteAnimationInProgress = {}
 end
 
 function inviteFriendsList.renderListEntries(p1)
-	-- upvalues: roact (ref), playerSearchPredicateModule (ref), playerLabelV2Module (ref), inviteStatus (ref), var15 (ref), sendInviteButtonModule (ref), dividerModule (ref)
+	-- upvalues: roact (ref), playerSearchPredicateModule (ref), playerLabelV2Module (ref), inviteStatus (ref), var1 (ref), sendInviteButtonModule (ref), dividerModule (ref)
 	local friends = p1.props.friends
 	local friendsCount = #friends
-	local var18 = 1
+	local var2 = 1
 	local t = {
 		ListLayout = roact.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right
 		})
 	}
-	local var20 = 0
+	local var3 = 0
 	
 	for i, v in pairs(friends) do
-		local var21 = tostring(v.Id)
-		local var22 = p1.props.invitesState[var21]
-		local var23 = playerSearchPredicateModule(p1.state.searchText, v.Username, v.DisplayName)
+		local var4 = tostring(v.Id)
+		local var5 = p1.props.invitesState[var4]
+		local var6 = playerSearchPredicateModule(p1.state.searchText, v.Username, v.DisplayName)
 		
-		if var23 then
-			var20 += 1
+		if var6 then
+			var3 += 1
 		end
 		t["friend_" .. i] = roact.createElement(playerLabelV2Module, {
 			username = v.Username,
@@ -68,21 +68,21 @@ function inviteFriendsList.renderListEntries(p1)
 			userId = v.Id,
 			isOnline = v.IsOnline,
 			isSelected = false,
-			LayoutOrder = var18,
-			Visible = var23,
+			LayoutOrder = var2,
+			Visible = var6,
 			[roact.Ref] = p1.playerRefs[i],
 			onActivated = function()
-				-- upvalues: var22 (ref), inviteStatus (copy), p1 (ref), v (ref), var21 (ref), var15 (copy)
-				if not (var22 == inviteStatus.Pending) and not (var22 == inviteStatus.Success) and not p1.inviteAnimationInProgress[v.Id] then
-					p1.props.dispatchInviteUserToPlaceId(var21, var15)
+				-- upvalues: var5 (ref), inviteStatus (copy), p1 (ref), v (ref), var4 (ref), var1 (copy)
+				if not (var5 == inviteStatus.Pending) and not (var5 == inviteStatus.Success) and not p1.inviteAnimationInProgress[v.Id] then
+					p1.props.dispatchInviteUserToPlaceId(var4, var1)
 				end
 			end
 		}, {
 			InviteButton = roact.createElement(sendInviteButtonModule, {
-				userInviteStatus = var22,
+				userInviteStatus = var5,
 				onActivated = function()
-					-- upvalues: p1 (ref), var21 (ref), var15 (copy)
-					p1.props.dispatchInviteUserToPlaceId(var21, var15)
+					-- upvalues: p1 (ref), var4 (ref), var1 (copy)
+					p1.props.dispatchInviteUserToPlaceId(var4, var1)
 				end,
 				animationBegun = function()
 					-- upvalues: p1 (ref), v (ref)
@@ -94,23 +94,23 @@ function inviteFriendsList.renderListEntries(p1)
 				end
 			})
 		})
-		var18 += 1
+		var2 += 1
 		
 		if i < friendsCount then
 			t["divider_" .. var18] = roact.createElement(dividerModule, {
-				LayoutOrder = var18,
+				LayoutOrder = var2,
 				Size = UDim2.new(1, -104, 0, 1),
-				Visible = var23
+				Visible = var6
 			})
-			var18 += 1
+			var2 += 1
 		end
 	end
-	return t, var20
+	return t, var3
 end
 
 function inviteFriendsList.render(p2)
 	-- upvalues: roact (ref), searchBoxModule (ref), guiService (ref), barOnTopScrollingFrameModule (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), rootedConnectionModule (ref), focusHandlerModule (ref)
-	local var24, var25 = p2:renderListEntries()
+	local var7, var8 = p2:renderListEntries()
 	local frame = roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		SearchBox = roact.createElement(searchBoxModule, {
 			Size = UDim2.new(1, -48, 0, 36),
@@ -133,20 +133,20 @@ function inviteFriendsList.render(p2)
 		List = roact.createElement(barOnTopScrollingFrameModule, {
 			Position = UDim2.new(0, 0, 0, 64),
 			Size = UDim2.new(1, 0, 1, -64),
-			CanvasSize = UDim2.new(1, 0, 0, var25 * 72)
-		}, var24)
+			CanvasSize = UDim2.new(1, 0, 0, var8 * 72)
+		}, var7)
 	})
-	local var27 = if getFFlagIGMGamepadSelectionHistoryModule() then p2.props.shouldForgetPreviousSelection else nil
+	local var9 = if getFFlagIGMGamepadSelectionHistoryModule() then p2.props.shouldForgetPreviousSelection else nil
 	
 	return roact.createElement(rootedConnectionModule, {
-		render = function(p4)
-			-- upvalues: roact (copy), focusHandlerModule (copy), p2 (ref), var27 (write), getFFlagIGMGamepadSelectionHistoryModule (copy), guiService (copy), frame (ref)
+		render = function(p3)
+			-- upvalues: roact (copy), focusHandlerModule (copy), p2 (ref), var9 (write), getFFlagIGMGamepadSelectionHistoryModule (copy), guiService (copy), frame (ref)
 			return roact.createElement(focusHandlerModule, {
-				isFocused = p2.props.canCaptureFocus and p4,
-				shouldForgetPreviousSelection = var27,
-				didFocus = if getFFlagIGMGamepadSelectionHistoryModule() then function(p5)
+				isFocused = p2.props.canCaptureFocus and p3,
+				shouldForgetPreviousSelection = var9,
+				didFocus = if getFFlagIGMGamepadSelectionHistoryModule() then function(p4)
 					-- upvalues: guiService (copy), p2 (copy)
-					guiService.SelectedCoreObject = p5 or (p2:getFirstVisiblePlayerRef() or p2.props.searchBoxRef:getValue())
+					guiService.SelectedCoreObject = p4 or (p2:getFirstVisiblePlayerRef() or p2.props.searchBoxRef:getValue())
 				end else function()
 					-- upvalues: guiService (copy), p2 (copy)
 					guiService.SelectedCoreObject = p2:getFirstVisiblePlayerRef() or p2.props.searchBoxRef:getValue()
@@ -156,33 +156,33 @@ function inviteFriendsList.render(p2)
 	})
 end
 
-function inviteFriendsList.getFirstVisiblePlayerRef(p6)
+function inviteFriendsList.getFirstVisiblePlayerRef(p2)
 	-- upvalues: playerSearchPredicateModule (ref)
-	for i, v in pairs(p6.props.friends) do
-		if playerSearchPredicateModule(p6.state.searchText, v.Username, v.DisplayName) then
-			return p6.playerRefs[i]:getValue()
+	for i, v in pairs(p2.props.friends) do
+		if playerSearchPredicateModule(p2.state.searchText, v.Username, v.DisplayName) then
+			return p2.playerRefs[i]:getValue()
 		end
 	end
 	return nil
 end
 
-return roactRodux.UNSTABLE_connect2(function(p7, _)
+return roactRodux.UNSTABLE_connect2(function(p3, _)
 	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), constantsModule (ref)
-	local var28 = nil
+	local var7 = nil
 	
 	if getFFlagIGMGamepadSelectionHistoryModule() then
-		var28 = if p7.menuPage ~= constantsModule.MainPagePageKey then p7.currentZone == 0 else true
+		var7 = if p3.menuPage ~= constantsModule.MainPagePageKey then p3.currentZone == 0 else true
 	end
 	return {
-		invitesState = p7.invites,
-		shouldForgetPreviousSelection = var28
+		invitesState = p3.invites,
+		shouldForgetPreviousSelection = var7
 	}
-end, function(p8)
+end, function(p3)
 	-- upvalues: inviteUserToPlaceIdModule (ref)
 	return {
-		dispatchInviteUserToPlaceId = function(p9, p10)
-			-- upvalues: p8 (ref), inviteUserToPlaceIdModule (copy)
-			p8(inviteUserToPlaceIdModule(p9, p10))
+		dispatchInviteUserToPlaceId = function(p4, p5)
+			-- upvalues: p3 (ref), inviteUserToPlaceIdModule (copy)
+			p3(inviteUserToPlaceIdModule(p4, p5))
 		end
 	}
 end)(inviteFriendsList)

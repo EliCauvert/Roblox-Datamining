@@ -18,11 +18,11 @@ local getStandardSizeAvatarHeadShotRbxthumb = userLibModule.Utils.getStandardSiz
 local getFFlagLuaAppEnableOpenTypeSupport = require(parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
 local dropshadow568 = images["component_assets/dropshadow_56_8"]
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalUserId (ref), useLocalUserInfoModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), reactModule (ref), lightTheme (ref), displayQRCode (ref), QRCodeDisplayModule (ref), imageSetLabel (ref), dropshadow568 (ref), styledTextLabel (ref), fFlagProfileQrCodeDeprecateUserReduxModule (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
-	local var7 = useLocalUserId()
-	local var8 = useLocalUserInfoModule(var7)
-	local var9 = useStyle()
+	local var1 = useLocalUserId()
+	local var2 = useLocalUserInfoModule(var1)
+	local var3 = useStyle()
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -37,21 +37,21 @@ return function(p0)
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, if p0.isSmallScreen then p0.padding / 2 else p0.padding),
-			PaddingRight = UDim.new(0, p0.padding),
-			PaddingBottom = UDim.new(0, if p0.isSmallScreen then p0.padding / 2 else p0.padding),
-			PaddingLeft = UDim.new(0, p0.padding)
+			PaddingTop = UDim.new(0, if p1.isSmallScreen then p1.padding / 2 else p1.padding),
+			PaddingRight = UDim.new(0, p1.padding),
+			PaddingBottom = UDim.new(0, if p1.isSmallScreen then p1.padding / 2 else p1.padding),
+			PaddingLeft = UDim.new(0, p1.padding)
 		}),
 		QRCodeWrapper = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UDim2.new(0, p0.qrCodeLength, 0, p0.qrCodeLength)
+			Size = UDim2.new(0, p1.qrCodeLength, 0, p1.qrCodeLength)
 		}, {
 			QRCode = reactModule.createElement(displayQRCode, {
 				qrCodeRotation = 15,
-				toEncode = p0.url,
+				toEncode = p1.url,
 				ecLevel = QRCodeDisplayModule.ECLevels.EC_LEVEL_4,
-				sideLength = p0.qrCodeLength,
+				sideLength = p1.qrCodeLength,
 				pixelColor = lightTheme.UIEmphasis.Color
 			}),
 			PlayerAvatar = reactModule.createElement("Frame", {
@@ -77,7 +77,7 @@ return function(p0)
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						BackgroundColor3 = lightTheme.BackgroundUIDefault.Color,
 						BackgroundTransparency = lightTheme.BackgroundUIDefault.Transparency,
-						Image = if var7 then getStandardSizeAvatarHeadShotRbxthumb(var7) else nil,
+						Image = if var1 then getStandardSizeAvatarHeadShotRbxthumb(var1) else nil,
 						Position = UDim2.fromScale(0.5, 0.5),
 						Size = UDim2.fromOffset(60, 60)
 					})
@@ -97,8 +97,8 @@ return function(p0)
 				Image = dropshadow568,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(28, 28, 29, 29),
-				ImageColor3 = var9.Theme.DropShadow.Color,
-				ImageTransparency = var9.Theme.DropShadow.Transparency
+				ImageColor3 = var3.Theme.DropShadow.Color,
+				ImageTransparency = var3.Theme.DropShadow.Transparency
 			})
 		}),
 		Spacer1 = reactModule.createElement("Frame", {
@@ -112,8 +112,8 @@ return function(p0)
 			lineHeight = 1,
 			fluidSizing = false,
 			richText = false,
-			text = var8.displayName,
-			fontStyle = var9.Font.SubHeader1,
+			text = var2.displayName,
+			fontStyle = var3.Font.SubHeader1,
 			colorStyle = lightTheme.TextEmphasis,
 			automaticSize = Enum.AutomaticSize.Y,
 			textTruncate = Enum.TextTruncate.AtEnd,
@@ -127,8 +127,8 @@ return function(p0)
 			fluidSizing = false,
 			richText = false,
 			size = UDim2.new(1, 0, 0, 0),
-			text = "@" .. (if fFlagProfileQrCodeDeprecateUserReduxModule then var8.username or "" else var8.username),
-			fontStyle = var9.Font.CaptionBody,
+			text = "@" .. (if fFlagProfileQrCodeDeprecateUserReduxModule then var2.username or "" else var2.username),
+			fontStyle = var3.Font.CaptionBody,
 			automaticSize = Enum.AutomaticSize.Y,
 			colorStyle = lightTheme.TextEmphasis,
 			textTruncate = Enum.TextTruncate.AtEnd,

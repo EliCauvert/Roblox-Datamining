@@ -8,25 +8,25 @@ local fStringAppChatFriendsTabIxpLayerModule = require(appChat.Flags.FStringAppC
 local getFriendsChatSettingsStoreModule = require(appChat.Stores.GetFriendsChatSettingsStore)
 local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
 local fFlagExpChatFriendsTabUsePolicy = sharedFlagsModule.FFlagExpChatFriendsTabUsePolicy
-local var8 = if fFlagExpChatFriendsTabUsePolicy then require(parent.UniversalAppPolicy).GetAppPolicyStore else nil
-local var9 = IXPNavigationUtilsModule.createExposureHandler(fStringAppChatFriendsTabIxpLayerModule)
+local var1 = if fFlagExpChatFriendsTabUsePolicy then require(parent.UniversalAppPolicy).GetAppPolicyStore else nil
+local var2 = IXPNavigationUtilsModule.createExposureHandler(fStringAppChatFriendsTabIxpLayerModule)
 
 return function()
-	-- upvalues: getFriendsChatSettingsStoreModule (ref), reactModule (ref), signalsModule (ref), fFlagExpChatFriendsTabUsePolicy (ref), var8 (write), signalsReactModule (ref), var9 (ref)
-	local var10 = getFriendsChatSettingsStoreModule(false)
-	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), fFlagExpChatFriendsTabUsePolicy (copy), var8 (copy), var10 (ref)
-		return signalsModule.createComputed(function(p0)
-			-- upvalues: fFlagExpChatFriendsTabUsePolicy (copy), var8 (copy), var10 (copy)
-			return (not fFlagExpChatFriendsTabUsePolicy or var8(false).getAppPolicy(p0).getCanSeeFriendsTab()) and (var10.getChatEnabled(p0) and var10.getChatUserMessagesEnabled(p0) ~= false)
+	-- upvalues: getFriendsChatSettingsStoreModule (ref), reactModule (ref), signalsModule (ref), fFlagExpChatFriendsTabUsePolicy (ref), var1 (write), signalsReactModule (ref), var2 (ref)
+	local var3 = getFriendsChatSettingsStoreModule(false)
+	local var4 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), fFlagExpChatFriendsTabUsePolicy (copy), var1 (copy), var3 (ref)
+		return signalsModule.createComputed(function(p1)
+			-- upvalues: fFlagExpChatFriendsTabUsePolicy (copy), var1 (copy), var3 (copy)
+			return (not fFlagExpChatFriendsTabUsePolicy or var1(false).getAppPolicy(p1).getCanSeeFriendsTab()) and (var3.getChatEnabled(p1) and var3.getChatUserMessagesEnabled(p1) ~= false)
 		end)
-	end, { var10 }))
+	end, { var3 }))
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var9 (copy)
-		if var11 then
-			var9()
+		-- upvalues: var4 (ref), var2 (copy)
+		if var4 then
+			var2()
 		end
-	end, { var11 })
+	end, { var4 })
 	
 	return nil
 end

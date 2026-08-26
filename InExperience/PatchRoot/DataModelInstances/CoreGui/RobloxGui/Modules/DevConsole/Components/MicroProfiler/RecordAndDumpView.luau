@@ -20,18 +20,18 @@ local t = {
 	lastUpdated = { 2025, 11, 24 }
 }
 
-function recordAndDumpView.logRecordAndDumpAction(p0, p1)
+function recordAndDumpView.logRecordAndDumpAction(p1, p2)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogCounter(t, {
 		customFields = {
-			context = p1,
-			secondsToDelay = p0.state[`{p1}SecondsToDelay`],
-			framesToRecord = p0.state[`{p1}FramesToRecord`]
+			context = p2,
+			secondsToDelay = p1.state[`{p2}SecondsToDelay`],
+			framesToRecord = p1.state[`{p2}FramesToRecord`]
 		}
 	}, 1)
 end
 
-function recordAndDumpView.numericInputRow(_, p2)
+function recordAndDumpView.numericInputRow(_, p1)
 	-- upvalues: roactModule (ref), constantsModule (ref), numberInputModule (ref)
 	return {
 		UIListLayout = roactModule.createElement("UIListLayout", {
@@ -49,7 +49,7 @@ function recordAndDumpView.numericInputRow(_, p2)
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Font = constantsModule.Font.MainWindow,
-			Text = p2.Text,
+			Text = p1.Text,
 			TextColor3 = Color3.fromRGB(255, 255, 255),
 			TextSize = constantsModule.MicroProfilerFormatting.OptionTextSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -61,10 +61,10 @@ function recordAndDumpView.numericInputRow(_, p2)
 		NumberInput = roactModule.createElement(numberInputModule, {
 			LayoutOrder = 3,
 			Size = UDim2.new(0, 72, 1, 0),
-			OnNumberInputChanged = p2.OnNumberInputChanged,
-			Range = p2.Range,
-			DefaultValue = p2.DefaultValue,
-			IntegerOnly = p2.IntegerOnly
+			OnNumberInputChanged = p1.OnNumberInputChanged,
+			Range = p1.Range,
+			DefaultValue = p1.DefaultValue,
+			IntegerOnly = p1.IntegerOnly
 		}),
 		NumberLimitsHint = roactModule.createElement("TextLabel", {
 			TextSize = 12,
@@ -73,7 +73,7 @@ function recordAndDumpView.numericInputRow(_, p2)
 			BorderSizePixel = 0,
 			LayoutOrder = 2,
 			Font = constantsModule.Font.Log,
-			Text = `({p2.Range.Min}-{p2.Range.Max})`,
+			Text = `({p1.Range.Min}-{p1.Range.Max})`,
 			TextColor3 = Color3.fromRGB(255, 255, 255),
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 			BorderColor3 = Color3.fromRGB(0, 0, 0),
@@ -83,43 +83,43 @@ function recordAndDumpView.numericInputRow(_, p2)
 	}
 end
 
-function recordAndDumpView.recordAndDumpRows(p3, p4)
+function recordAndDumpView.recordAndDumpRows(p1, p2)
 	-- upvalues: gameSettings (ref), roactModule (ref), boxButtonModule (ref)
-	local isClient = p4.Context == "Client"
+	local isClient = p2.Context == "Client"
 	
 	return {
-		p3:numericInputRow({
+		p1:numericInputRow({
 			Text = "Number of frames to record",
 			IntegerOnly = true,
-			Context = p4.Context,
-			DefaultValue = if isClient then p3.state.ClientFramesToRecord else p3.state.ServerFramesToRecord,
+			Context = p2.Context,
+			DefaultValue = if isClient then p1.state.ClientFramesToRecord else p1.state.ServerFramesToRecord,
 			Range = NumberRange.new(1, 60),
-			OnNumberInputChanged = function(p5)
-				-- upvalues: isClient (ref), p3 (ref), gameSettings (copy)
+			OnNumberInputChanged = function(p3)
+				-- upvalues: isClient (ref), p1 (ref), gameSettings (copy)
 				if isClient then
-					p3:setState({ ClientFramesToRecord = p5 })
+					p1:setState({ ClientFramesToRecord = p3 })
 					
 					return
 				end
-				gameSettings.RCCProfilerRecordFrameRate = p5
-				p3:setState({ ServerFramesToRecord = p5 })
+				gameSettings.RCCProfilerRecordFrameRate = p3
+				p1:setState({ ServerFramesToRecord = p3 })
 			end
 		}),
-		p3:numericInputRow({
+		p1:numericInputRow({
 			Text = "Seconds to delay",
 			IntegerOnly = true,
-			Context = p4.Context,
-			DefaultValue = if isClient then p3.state.ClientSecondsToDelay else p3.state.ServerSecondsToDelay,
+			Context = p2.Context,
+			DefaultValue = if isClient then p1.state.ClientSecondsToDelay else p1.state.ServerSecondsToDelay,
 			Range = NumberRange.new(1, 4),
-			OnNumberInputChanged = function(p6)
-				-- upvalues: isClient (ref), p3 (ref), gameSettings (copy)
+			OnNumberInputChanged = function(p3)
+				-- upvalues: isClient (ref), p1 (ref), gameSettings (copy)
 				if isClient then
-					p3:setState({ ClientSecondsToDelay = p6 })
+					p1:setState({ ClientSecondsToDelay = p3 })
 					
 					return
 				end
-				gameSettings.RCCProfilerRecordTimeFrame = p6
-				p3:setState({ ServerSecondsToDelay = p6 })
+				gameSettings.RCCProfilerRecordTimeFrame = p3
+				p1:setState({ ServerSecondsToDelay = p3 })
 			end
 		}),
 		{
@@ -130,83 +130,83 @@ function recordAndDumpView.recordAndDumpRows(p3, p4)
 				PaddingTop = UDim.new(0, 2)
 			}),
 			Button = roactModule.createElement(boxButtonModule, {
-				text = if isClient then if p3.state.IsClientRecording then p4.RecordButtonText.Recording else p4.RecordButtonText.Idle elseif p3.props.IsServerRecording then p4.RecordButtonText.Recording else p4.RecordButtonText.Idle,
+				text = if isClient then if p1.state.IsClientRecording then p2.RecordButtonText.Recording else p2.RecordButtonText.Idle elseif p1.props.IsServerRecording then p2.RecordButtonText.Recording else p2.RecordButtonText.Idle,
 				size = UDim2.fromScale(1, 1),
 				pos = UDim2.new(0, 0, 0, 0),
-				onClicked = p4.OnRecordButtonClicked,
-				enabled = if isClient then not p3.state.IsClientRecording else not p3.props.IsServerRecording
+				onClicked = p2.OnRecordButtonClicked,
+				enabled = if isClient then not p1.state.IsClientRecording else not p1.props.IsServerRecording
 			})
 		}
 	}
 end
 
-function recordAndDumpView.init(p7)
+function recordAndDumpView.init(p1)
 	-- upvalues: gameSettings (ref)
-	p7.state = {
+	p1.state = {
 		IsClientRecording = false,
 		ClientFramesToRecord = 32,
 		ClientSecondsToDelay = 1,
 		ServerFramesToRecord = gameSettings.RCCProfilerRecordFrameRate,
 		ServerSecondsToDelay = gameSettings.RCCProfilerRecordTimeFrame
 	}
-	p7.RecordingTasks = { Client = nil }
+	p1.RecordingTasks = { Client = nil }
 end
 
-function recordAndDumpView.willUnmount(p8)
-	if p8.RecordingTasks.Client and coroutine.status(p8.RecordingTasks.Client) ~= "dead" then
-		task.cancel(p8.RecordingTasks.Client)
+function recordAndDumpView.willUnmount(p1)
+	if p1.RecordingTasks.Client and coroutine.status(p1.RecordingTasks.Client) ~= "dead" then
+		task.cancel(p1.RecordingTasks.Client)
 	end
 end
 
-function recordAndDumpView.render(p9)
+function recordAndDumpView.render(p1)
 	-- upvalues: roactModule (ref), microProfilerPanelModule (ref), microProfilerService (ref), getClientReplicatorModule (ref)
 	return roactModule.createElement(microProfilerPanelModule, {
 		Title = "Record and dump",
-		LayoutOrder = p9.props.LayoutOrder,
+		LayoutOrder = p1.props.LayoutOrder,
 		Sections = {
 			{
 				Name = "Client",
-				Rows = p9:recordAndDumpRows({
+				Rows = p1:recordAndDumpRows({
 					Context = "Client",
 					RecordButtonText = {
 						Idle = "Begin client recording",
 						Recording = "Recording client..."
 					},
 					OnRecordButtonClicked = function()
-						-- upvalues: p9 (ref), microProfilerService (copy)
-						if p9.state.IsClientRecording then
+						-- upvalues: p1 (ref), microProfilerService (copy)
+						if p1.state.IsClientRecording then
 							return
 						end
-						p9:logRecordAndDumpAction("Client")
-						p9:setState({ IsClientRecording = true })
-						p9.RecordingTasks.Client = task.spawn(function()
-							-- upvalues: microProfilerService (copy), p9 (copy)
-							p9.props.dispatchAppendRecentDumpPath(microProfilerService:DumpToFileAsync(p9.state.ClientSecondsToDelay, p9.state.ClientFramesToRecord))
-							p9:setState(function(_)
+						p1:logRecordAndDumpAction("Client")
+						p1:setState({ IsClientRecording = true })
+						p1.RecordingTasks.Client = task.spawn(function()
+							-- upvalues: microProfilerService (copy), p1 (copy)
+							p1.props.dispatchAppendRecentDumpPath(microProfilerService:DumpToFileAsync(p1.state.ClientSecondsToDelay, p1.state.ClientFramesToRecord))
+							p1:setState(function(_)
 								return { IsClientRecording = false }
 							end)
-							p9.RecordingTasks.Client = nil
+							p1.RecordingTasks.Client = nil
 						end)
 					end
 				})
 			},
 			{
 				Name = "Server",
-				Rows = p9:recordAndDumpRows({
+				Rows = p1:recordAndDumpRows({
 					Context = "Server",
 					RecordButtonText = {
 						Idle = "Begin server recording",
 						Recording = "Recording server..."
 					},
 					OnRecordButtonClicked = function()
-						-- upvalues: p9 (ref), getClientReplicatorModule (copy)
-						if p9.props.IsServerRecording then return end
-						local var15 = getClientReplicatorModule()
+						-- upvalues: p1 (ref), getClientReplicatorModule (copy)
+						if p1.props.IsServerRecording then return end
+						local var1 = getClientReplicatorModule()
 						
-						if var15 then
-							p9:logRecordAndDumpAction("Server")
-							var15:RequestRCCProfilerData(p9.state.ServerFramesToRecord, p9.state.ServerSecondsToDelay)
-							p9.props.dispatchSetRCCProfilerState(true)
+						if var1 then
+							p1:logRecordAndDumpAction("Server")
+							var1:RequestRCCProfilerData(p1.state.ServerFramesToRecord, p1.state.ServerSecondsToDelay)
+							p1.props.dispatchSetRCCProfilerState(true)
 							
 							return
 						end
@@ -217,20 +217,20 @@ function recordAndDumpView.render(p9)
 	})
 end
 
-return roactRoduxModule.connect(function(p10, _)
+return roactRoduxModule.connect(function(p1, _)
 	return {
-		IsServerRecording = p10.MicroProfiler.waitingForRecording
+		IsServerRecording = p1.MicroProfiler.waitingForRecording
 	}
-end, function(p11)
+end, function(p1)
 	-- upvalues: appendRecentDumpPathModule (ref), setRCCProfilerStateModule (ref)
 	return {
-		dispatchAppendRecentDumpPath = function(p12)
-			-- upvalues: p11 (ref), appendRecentDumpPathModule (copy)
-			p11(appendRecentDumpPathModule(p12))
+		dispatchAppendRecentDumpPath = function(p2)
+			-- upvalues: p1 (ref), appendRecentDumpPathModule (copy)
+			p1(appendRecentDumpPathModule(p2))
 		end,
-		dispatchSetRCCProfilerState = function(value, p13)
-			-- upvalues: p11 (ref), setRCCProfilerStateModule (copy)
-			p11(setRCCProfilerStateModule(value, p13))
+		dispatchSetRCCProfilerState = function(value, p2)
+			-- upvalues: p1 (ref), setRCCProfilerStateModule (copy)
+			p1(setRCCProfilerStateModule(value, p2))
 		end
 	}
 end)(recordAndDumpView)

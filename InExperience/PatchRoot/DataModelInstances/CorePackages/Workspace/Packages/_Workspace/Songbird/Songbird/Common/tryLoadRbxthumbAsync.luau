@@ -1,20 +1,20 @@
 ﻿local contentProviderService = game:GetService("ContentProvider")
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: contentProviderService (ref)
-	p1 = p1 or 5
+	p2 = p2 or 5
 	
-	if contentProviderService:GetAssetFetchStatus(p0) == Enum.AssetFetchStatus.Success then
-		return p0
+	if contentProviderService:GetAssetFetchStatus(p1) == Enum.AssetFetchStatus.Success then
+		return p1
 	end
-	contentProviderService:PreloadAsync({ p0 })
-	local var2 = 0
-	while contentProviderService:GetAssetFetchStatus(p0) ~= Enum.AssetFetchStatus.Success do
-		var2 += task.wait()
+	contentProviderService:PreloadAsync({ p1 })
+	local var1 = 0
+	while contentProviderService:GetAssetFetchStatus(p1) ~= Enum.AssetFetchStatus.Success do
+		var1 += task.wait()
 		
-		if p1 < var2 then
-			error(`timed out after {p1} seconds when loading {p0}`)
+		if p2 < var1 then
+			error(`timed out after {p2} seconds when loading {p1}`)
 		end
 	end
-	return p0
+	return p1
 end

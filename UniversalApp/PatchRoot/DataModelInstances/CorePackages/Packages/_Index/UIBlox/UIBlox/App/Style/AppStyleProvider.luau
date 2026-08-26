@@ -6,7 +6,7 @@ local cryoModule = require(parent_2.Cryo)
 local reactModule = require(parent_2.React)
 local roactModule = require(parent_2.Roact)
 local packages = parent_1:FindFirstAncestor("Packages") or parent_1:FindFirstAncestor("CorePackages")
-local var5 = if packages and packages:FindFirstChild("Dev") and packages.Dev:FindFirstChild("JestGlobals") then pcall(require, packages.Dev.JestGlobals) else false
+local var1 = if packages and packages:FindFirstChild("Dev") and packages.Dev:FindFirstChild("JestGlobals") then pcall(require, packages.Dev.JestGlobals) else false
 local foundationModule = require(parent_2.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
 local useTokens = foundationModule.Hooks.useTokens
@@ -34,75 +34,75 @@ local t_1 = {
 	settings = constantsModule.DefaultSettings
 }
 
-return function(p0)
-	-- upvalues: object (ref), t_1 (ref), reactModule (ref), getTokens (ref), getThemeFromNameModule (ref), useTokens (ref), getFoundationTokens (ref), cryoModule (ref), mappers (ref), getFontFromNameModule (ref), constantsModule (ref), getTextSizeOffsetModule (ref), UIBloxConfigModule (ref), styleContextModule (ref), foundationSurfaceTokensDifferModule (ref), roactModule (ref), var5 (ref), loggerModule (ref), foundationProvider (ref), t (ref)
-	local var17 = object.assign({}, t_1, p0.style)
-	local var18, var19 = reactModule.useState(var17.themeName)
-	local var20 = getTokens(var17.deviceType, var18, var17.settings and var17.settings.scale)
-	local var21, var22 = reactModule.useState(0)
-	local var23 = getThemeFromNameModule(var18)
-	local var24 = useTokens()
-	local var25 = var24.Config ~= nil
-	local var26 = getFoundationTokens(var17.deviceType, var18)
-	local var27 = mappers.addFoundationFlatKeys(mappers.mapColorTokensToFoundation(var20, if var25 then cryoModule.Dictionary.join(var26, var24) else var26), if var25 then var24 else var26)
+return function(p1)
+	-- upvalues: object (ref), t_1 (ref), reactModule (ref), getTokens (ref), getThemeFromNameModule (ref), useTokens (ref), getFoundationTokens (ref), cryoModule (ref), mappers (ref), getFontFromNameModule (ref), constantsModule (ref), getTextSizeOffsetModule (ref), UIBloxConfigModule (ref), styleContextModule (ref), foundationSurfaceTokensDifferModule (ref), roactModule (ref), var1 (ref), loggerModule (ref), foundationProvider (ref), t (ref)
+	local var2 = object.assign({}, t_1, p1.style)
+	local var3, var4 = reactModule.useState(var2.themeName)
+	local var5 = getTokens(var2.deviceType, var3, var2.settings and var2.settings.scale)
+	local var6, var7 = reactModule.useState(0)
+	local var8 = getThemeFromNameModule(var3)
+	local var9 = useTokens()
+	local var10 = var9.Config ~= nil
+	local var11 = getFoundationTokens(var2.deviceType, var3)
+	local var12 = mappers.addFoundationFlatKeys(mappers.mapColorTokensToFoundation(var5, if var10 then cryoModule.Dictionary.join(var11, var9) else var11), if var10 then var9 else var11)
 	local t_2 = {
-		Font = getFontFromNameModule(var17.fontName, var27),
-		Theme = mappers.mapThemeToFoundation(var23, if var25 then var24 else var26),
-		Tokens = var27,
-		Settings = if var17.settings then {
-			PreferredTransparency = var17.settings.preferredTransparency,
-			ReducedMotion = var17.settings.reducedMotion,
-			PreferredTextSize = var17.settings.preferredTextSize,
-			Scale = var17.settings.scale
+		Font = getFontFromNameModule(var2.fontName, var12),
+		Theme = mappers.mapThemeToFoundation(var8, if var10 then var9 else var11),
+		Tokens = var12,
+		Settings = if var2.settings then {
+			PreferredTransparency = var2.settings.preferredTransparency,
+			ReducedMotion = var2.settings.reducedMotion,
+			PreferredTextSize = var2.settings.preferredTextSize,
+			Scale = var2.settings.scale
 		} else constantsModule.DefaultSettings
 	}
-	local var29 = reactModule.useRef(false)
+	local var13 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var29 (ref), var19 (ref), var17 (ref)
-		var29.current = true
-		var19(var17.themeName)
+		-- upvalues: var13 (ref), var4 (ref), var2 (ref)
+		var13.current = true
+		var4(var2.themeName)
 		
 		return function()
-			-- upvalues: var29 (copy)
-			var29.current = false
+			-- upvalues: var13 (copy)
+			var13.current = false
 		end
-	end, { var29, var17.themeName, var19 })
+	end, { var13, var2.themeName, var4 })
 	reactModule.useEffect(function()
-		-- upvalues: getTextSizeOffsetModule (copy), UIBloxConfigModule (copy), var27 (ref), var22 (ref)
-		local var31, var32 = getTextSizeOffsetModule(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var27.Typography.BodyLarge.Font else var27.Semantic.Typography.Body.Font)
+		-- upvalues: getTextSizeOffsetModule (copy), UIBloxConfigModule (copy), var12 (ref), var7 (ref)
+		local var14, var15 = getTextSizeOffsetModule(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var12.Typography.BodyLarge.Font else var12.Semantic.Typography.Body.Font)
 		
-		if var31 then
-			var22(var32)
+		if var14 then
+			var7(var15)
 		end
-	end, { var17.settings.preferredTextSize })
-	local var30 = reactModule.createElement(styleContextModule.Provider, {
+	end, { var2.settings.preferredTextSize })
+	local var14 = reactModule.createElement(styleContextModule.Provider, {
 		value = {
 			style = t_2,
-			updateTheme = reactModule.useCallback(function(_, p1)
-				-- upvalues: var29 (ref), var19 (ref)
-				if var29.current then
-					var19(p1)
+			updateTheme = reactModule.useCallback(function(_, p2)
+				-- upvalues: var13 (ref), var4 (ref)
+				if var13.current then
+					var4(p2)
 				end
-			end, { var29, var19 }),
-			derivedValues = { textSizeOffset = var21 },
+			end, { var13, var4 }),
+			derivedValues = { textSizeOffset = var6 },
 			styleMetadata = {
 				ThemeName = reactModule.useMemo(function()
-					-- upvalues: var18 (ref), constantsModule (copy)
-					return if var18:lower() == constantsModule.ThemeName.Dark:lower() then constantsModule.ThemeName.Dark elseif var18:lower() == constantsModule.ThemeName.Light:lower() then constantsModule.ThemeName.Light else constantsModule.DefaultThemeName
-				end, { var18 }),
-				HasSurfaceOverrides = if var25 then foundationSurfaceTokensDifferModule(var26, var24) else false
+					-- upvalues: var3 (ref), constantsModule (copy)
+					return if var3:lower() == constantsModule.ThemeName.Dark:lower() then constantsModule.ThemeName.Dark elseif var3:lower() == constantsModule.ThemeName.Light:lower() then constantsModule.ThemeName.Light else constantsModule.DefaultThemeName
+				end, { var3 }),
+				HasSurfaceOverrides = if var10 then foundationSurfaceTokensDifferModule(var11, var9) else false
 			}
 		}
-	}, roactModule.oneChild(p0.children))
+	}, roactModule.oneChild(p1.children))
 	
-	if var25 then
-		return var30
-	elseif not var5 and _G.__DEV__ then
+	if var10 then
+		return var14
+	elseif not var1 and _G.__DEV__ then
 		loggerModule:warning(debug.traceback("FoundationProvider not found. Please ensure that the FoundationProvider is present in the component tree."))
 	end
 	return reactModule.createElement(foundationProvider, {
-		theme = t[var18:lower()],
-		device = var17.deviceType,
-		preferences = var17.settings
-	}, var30)
+		theme = t[var3:lower()],
+		device = var2.deviceType,
+		preferences = var2.settings
+	}, var14)
 end

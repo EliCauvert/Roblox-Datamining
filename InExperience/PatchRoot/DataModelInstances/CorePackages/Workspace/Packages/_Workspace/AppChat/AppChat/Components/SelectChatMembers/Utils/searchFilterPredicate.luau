@@ -1,11 +1,11 @@
-﻿return function(p0, p1)
-	if not p0 or p0 == "" then
+﻿return function(p1, p2)
+	if not p1 or p1 == "" then
 		return true
 	end
-	local displayName = p1.displayName
+	local displayName = p2.displayName
 	
-	if p1.alias ~= nil then
-		displayName ..= p1.alias
+	if p2.alias ~= nil then
+		displayName ..= p2.alias
 	end
-	return string.find(string.lower(displayName), string.lower(p0), 1, true) ~= nil
+	return string.find(string.lower(displayName), string.lower(p1), 1, true) ~= nil
 end

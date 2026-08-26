@@ -1,11 +1,11 @@
 ﻿local slotGeometryModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").RobloxAdapter.SlotGeometry)
 local guiService = game:GetService("GuiService")
 local t = {
-	clearSelection = function(p0)
+	clearSelection = function(p1)
 		-- upvalues: guiService (ref)
 		local selectedObject = guiService.SelectedObject
 		
-		if selectedObject ~= nil and (selectedObject == p0 or selectedObject:IsDescendantOf(p0)) then
+		if selectedObject ~= nil and (selectedObject == p1 or selectedObject:IsDescendantOf(p1)) then
 			guiService.SelectedObject = nil
 		end
 	end,
@@ -19,24 +19,24 @@ local t = {
 		
 		return frame
 	end,
-	place = function(p2, p3)
+	place = function(p1, p2)
 		-- upvalues: slotGeometryModule (ref)
-		p2.AutomaticSize = p3.automaticSize
-		p2.Size = slotGeometryModule.getHostSize(p3.automaticSize)
-		p2.Parent = p3.placeholder
+		p1.AutomaticSize = p2.automaticSize
+		p1.Size = slotGeometryModule.getHostSize(p2.automaticSize)
+		p1.Parent = p2.placeholder
 	end
 }
 
-function t.detach(p4)
+function t.detach(p1)
 	-- upvalues: t (ref)
-	t.clearSelection(p4)
-	p4.Parent = nil
+	t.clearSelection(p1)
+	p1.Parent = nil
 end
 
-function t.destroy(p5)
+function t.destroy(p1)
 	-- upvalues: t (ref)
-	t.detach(p5)
-	p5:Destroy()
+	t.detach(p1)
+	p1:Destroy()
 end
 
 return t

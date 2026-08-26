@@ -1,11 +1,11 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes)
 
-local function decodeEmoji(p0)
-	return if type(p0) == "table" then if not (type(p0.id) ~= "string" or p0.id == "") then if type(p0.name) == "string" and p0.name ~= "" then {
-		id = p0.id,
-		name = p0.name,
-		assetSource = if type(p0.asset_source) == "string" then p0.asset_source else nil,
-		unicode = if type(p0.unicode) == "string" then p0.unicode else nil
+local function decodeEmoji(p1)
+	return if type(p1) == "table" then if not (type(p1.id) ~= "string" or p1.id == "") then if type(p1.name) == "string" and p1.name ~= "" then {
+		id = p1.id,
+		name = p1.name,
+		assetSource = if type(p1.asset_source) == "string" then p1.asset_source else nil,
+		unicode = if type(p1.unicode) == "string" then p1.unicode else nil
 	} else nil else nil else nil
 end
 
@@ -22,10 +22,10 @@ local function decodeEmojiSet(value)
 	
 	if type(value.emoji_page) == "table" then
 		for i, v in value.emoji_page do
-			local var3 = decodeEmoji(v)
+			local var1 = decodeEmoji(v)
 			
-			if var3 ~= nil then
-				table.insert(t, var3)
+			if var1 ~= nil then
+				table.insert(t, var1)
 			end
 		end
 	end
@@ -45,10 +45,10 @@ return {
 		
 		if type(value) == "table" and type(value.emoji_sets) == "table" then
 			for i, v in value.emoji_sets do
-				local var5 = decodeEmojiSet(v)
+				local var2 = decodeEmojiSet(v)
 				
-				if var5 ~= nil then
-					table.insert(t, var5)
+				if var2 ~= nil then
+					table.insert(t, var2)
 				end
 			end
 		end

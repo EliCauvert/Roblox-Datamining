@@ -2,13 +2,13 @@
 local universal_app_contact_importer_storage_keysEngineFeature = game:GetEngineFeature(constantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
 
 return {
-	clearLocalStorage = function(_, p0)
+	clearLocalStorage = function(_, p1)
 		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
 		if universal_app_contact_importer_storage_keysEngineFeature then
 			pcall(function()
-				-- upvalues: p0 (ref), constantsModule (copy)
-				p0:SetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, "")
-				p0:Flush()
+				-- upvalues: p1 (ref), constantsModule (copy)
+				p1:SetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, "")
+				p1:Flush()
 			end)
 			
 			return
@@ -26,21 +26,21 @@ return {
 			local t = { [1] = p2 }
 			
 			if status ~= nil and status ~= "" then
-				local var3 = #t + 1
+				local var1 = #t + 1
 				
 				for i in string.gmatch(status, "([^,]+)") do
 					if i ~= p2 then
-						t[var3] = i
-						var3 += 1
+						t[var1] = i
+						var1 += 1
 						continue
 					end
 					return
 				end
 			end
-			local var4 = table.concat(t, ","):gsub("%s+", "")
+			local var2 = table.concat(t, ","):gsub("%s+", "")
 			pcall(function()
-				-- upvalues: p1 (ref), constantsModule (copy), var4 (write)
-				p1:SetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, var4)
+				-- upvalues: p1 (ref), constantsModule (copy), var2 (write)
+				p1:SetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, var2)
 				p1:Flush()
 			end)
 		end

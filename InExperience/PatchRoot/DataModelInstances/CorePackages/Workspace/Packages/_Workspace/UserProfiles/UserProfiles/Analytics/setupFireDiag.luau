@@ -6,26 +6,26 @@ local fFlagUserProfilesLogErrorCodesModule = require(parent.Flags.FFlagUserProfi
 local diagCountersListModule = require(script.Parent.DiagCountersList)
 local _ = require(script.Parent.EventNames)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagUserProfilesLogErrorCodesModule (ref), fireDiag (ref), diagCountersListModule (ref), fireDiagCounter (ref)
 	if fFlagUserProfilesLogErrorCodesModule then
-		local var3 = fireDiag({
-			diagImpl = p0.analytics.Diag,
+		local var1 = fireDiag({
+			diagImpl = p1.analytics.Diag,
 			eventList = diagCountersListModule
 		})
 		
-		return function(p1, p2)
-			-- upvalues: diagCountersListModule (copy), var3 (ref)
-			return if diagCountersListModule[p1] then var3(p1, p2) else p1
+		return function(p2, p3)
+			-- upvalues: diagCountersListModule (copy), var1 (ref)
+			return if diagCountersListModule[p2] then var1(p2, p3) else p2
 		end
 	end
-	local var4 = fireDiagCounter({
-		diagImpl = p0.analytics.Diag,
+	local var2 = fireDiagCounter({
+		diagImpl = p1.analytics.Diag,
 		eventList = diagCountersListModule
 	})
 	
-	return function(p3)
-		-- upvalues: diagCountersListModule (copy), var4 (ref)
-		return if diagCountersListModule[p3] then var4(p3) else p3
+	return function(p2)
+		-- upvalues: diagCountersListModule (copy), var2 (ref)
+		return if diagCountersListModule[p2] then var2(p2) else p2
 	end
 end

@@ -17,25 +17,25 @@ local t = {
 	size = avatarIconSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useAvatarIconVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref)
-	local var14 = withDefaultsModule(p0, t)
-	local var15 = useAvatarIconVariantsModule(useTokensModule(), var14.size, var14.backplateStyle)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useAvatarIconVariantsModule(useTokensModule(), var1.size, var1.backplateStyle)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var14, {
-		tag = var15.container.tag,
-		ref = p1,
-		stroke = var15.container.stroke,
-		backgroundStyle = var14.backplateStyle,
-		Size = UDim2.fromOffset(var15.container.size, var15.container.size)
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		tag = var2.container.tag,
+		ref = p2,
+		stroke = var2.container.stroke,
+		backgroundStyle = var1.backplateStyle,
+		Size = UDim2.fromOffset(var2.container.size, var2.container.size)
 	}), {
 		Image = reactModule.createElement(imageModule, {
-			Image = mapBindableModule(var14.userId, function(p2)
+			Image = mapBindableModule(var1.userId, function(p3)
 				-- upvalues: getRbxThumbModule (copy), thumbnailTypeModule (copy), thumbnailSizeModule (copy)
-				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p2, thumbnailSizeModule.Medium)
+				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p3, thumbnailSizeModule.Medium)
 			end),
-			tag = var15.avatar.tag,
-			backgroundStyle = var14.backgroundStyle
+			tag = var2.avatar.tag,
+			backgroundStyle = var1.backgroundStyle
 		})
 	})
 end))

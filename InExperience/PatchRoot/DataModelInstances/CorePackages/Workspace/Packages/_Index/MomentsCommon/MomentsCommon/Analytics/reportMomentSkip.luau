@@ -9,26 +9,26 @@ local t = {
 	lastUpdated = { 2026, 7, 7 }
 }
 
-local function defaultEmit(p0, p1, p2)
+local function defaultEmit(p1, p2, p3)
 	-- upvalues: loggingProtocolModule (ref)
-	loggingProtocolModule.default:logRobloxTelemetryCounter(p0, p1, p2)
+	loggingProtocolModule.default:logRobloxTelemetryCounter(p1, p2, p3)
 end
 
-return function(p3, p4, p5, p6)
+return function(p1, p2, p3, p4)
 	-- upvalues: getFFlagMomentsAnalyticsSchemaIdentityModule (ref), defaultEmit (ref), t (ref)
 	if not getFFlagMomentsAnalyticsSchemaIdentityModule() then return end
-	local t_1 = { surface = p3, reason = p4 }
+	local t_1 = { surface = p1, reason = p2 }
 	
-	if p5 then
-		if p5.entry ~= nil then
-			t_1.entry = p5.entry
+	if p3 then
+		if p3.entry ~= nil then
+			t_1.entry = p3.entry
 		end
-		if p5.action ~= nil then
-			t_1.action = p5.action
+		if p3.action ~= nil then
+			t_1.action = p3.action
 		end
-		if p5.parentEntity ~= nil then
-			t_1.parentEntity = p5.parentEntity
+		if p3.parentEntity ~= nil then
+			t_1.parentEntity = p3.parentEntity
 		end
 	end;
-	(p6 or defaultEmit)(t, 1, t_1)
+	(p4 or defaultEmit)(t, 1, t_1)
 end

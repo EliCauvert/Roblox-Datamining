@@ -12,77 +12,77 @@ local constantsModule = require(parent.Resources.Constants)
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 local sessionUtilityModule = require(parent.Utility.SessionUtility)
 
-function sendAnalytics(p0, p1, p2, p3)
+function sendAnalytics(p1, p2, p3, p4)
 	-- upvalues: sendAnalyticsModule (ref), constantsModule (ref)
-	sendAnalyticsModule(p0, constantsModule.Analytics.ReportSubmittedName, {
-		reportType = p0,
-		reportedEntityId = tostring(p1),
+	sendAnalyticsModule(p1, constantsModule.Analytics.ReportSubmittedName, {
+		reportType = p1,
+		reportedEntityId = tostring(p2),
 		reportSource = constantsModule.Analytics.ReportSourceInGame,
-		reason = p2,
-		abuseVector = p3
+		reason = p3,
+		abuseVector = p4
 	})
 end
 
-function getAbuseVectorFromReportCategory(p4)
+function getAbuseVectorFromReportCategory(p1)
 	-- upvalues: constantsModule (ref)
-	return if p4 == constantsModule.Category.Voice then "voice" elseif p4 == constantsModule.Category.Text then "chat" else "other"
+	return if p1 == constantsModule.Category.Voice then "voice" elseif p1 == constantsModule.Category.Text then "chat" else "other"
 end
 
-function submitUserAbuseReport(p5, p6)
+function submitUserAbuseReport(p1, p2)
 	-- upvalues: constantsModule (ref), playersService (ref), createVoiceAbuseReportRequestModule (ref), default (ref), url (ref), httpRbxApiService (ref), sessionUtilityModule (ref)
-	local var9 = p5.reportCategory == constantsModule.Category.Voice
+	local var1 = p1.reportCategory == constantsModule.Category.Voice
 	local localPlayer = playersService.LocalPlayer
 	
 	if localPlayer then
 		pcall(function()
-			-- upvalues: p5 (ref), var9 (ref), createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), localPlayer (ref), url (copy), httpRbxApiService (copy), constantsModule (copy), sessionUtilityModule (copy), p6 (ref)
+			-- upvalues: p1 (ref), var1 (ref), createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), localPlayer (ref), url (copy), httpRbxApiService (copy), constantsModule (copy), sessionUtilityModule (copy), p2 (ref)
 			coroutine.wrap(function()
-				-- upvalues: p5 (copy), var9 (copy), createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), localPlayer (copy), url (copy), httpRbxApiService (copy), constantsModule (copy), sessionUtilityModule (copy), p6 (copy)
-				local var10 = getAbuseVectorFromReportCategory(p5.reportCategory)
+				-- upvalues: p1 (copy), var1 (copy), createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), localPlayer (copy), url (copy), httpRbxApiService (copy), constantsModule (copy), sessionUtilityModule (copy), p2 (copy)
+				local var2 = getAbuseVectorFromReportCategory(p1.reportCategory)
 				
-				if var9 then
-					local var11 = createVoiceAbuseReportRequestModule(playersService, default, {
+				if var1 then
+					local var3 = createVoiceAbuseReportRequestModule(playersService, default, {
 						localUserId = localPlayer.UserId,
-						abuserUserId = p5.abusingPlayer.UserId,
-						abuseComment = p5.comment,
-						abuseReason = p5.reason,
-						inExpMenuOpenedUnixMilli = math.floor(p5.beginningTimestamp * 1000),
-						sortedPlayerListUserIds = p5.sortedUserIds,
-						abuseVector = var10
+						abuserUserId = p1.abusingPlayer.UserId,
+						abuseComment = p1.comment,
+						abuseReason = p1.reason,
+						inExpMenuOpenedUnixMilli = math.floor(p1.beginningTimestamp * 1000),
+						sortedPlayerListUserIds = p1.sortedUserIds,
+						abuseVector = var2
 					})
 					
 					if game:GetEngineFeature("AbuseReportV3") then
-						playersService:ReportAbuseV3(localPlayer, var11)
+						playersService:ReportAbuseV3(localPlayer, var3)
 					else
-						httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "/abuse-reporting/v2/abuse-report", var11)
+						httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "/abuse-reporting/v2/abuse-report", var3)
 					end
 				else
-					playersService:ReportAbuse(p5.abusingPlayer, p5.reason, p5.comment)
+					playersService:ReportAbuse(p1.abusingPlayer, p1.reason, p1.comment)
 				end
-				sendAnalytics(constantsModule.Analytics.ReportTypeUser, p5.abusingPlayer.UserId, p5.reason, var10)
+				sendAnalytics(constantsModule.Analytics.ReportTypeUser, p1.abusingPlayer.UserId, p1.reason, var2)
 				sessionUtilityModule.endAbuseReportSession()
 				
-				if p6 then
-					p6()
+				if p2 then
+					p2()
 				end
 			end)()
 		end)
 	end
 end
 
-function submitPlaceAbuseReport(p7, p8)
+function submitPlaceAbuseReport(p1, p2)
 	-- upvalues: runService (ref), playersService (ref), constantsModule (ref), sessionUtilityModule (ref)
-	if p7.placeName ~= "" then
+	if p1.placeName ~= "" then
 		coroutine.wrap(function()
-			-- upvalues: runService (copy), p7 (ref), playersService (copy), constantsModule (copy), sessionUtilityModule (copy), p8 (ref)
+			-- upvalues: runService (copy), p1 (ref), playersService (copy), constantsModule (copy), sessionUtilityModule (copy), p2 (ref)
 			if not runService:IsStudio() then
-				playersService:ReportAbuse(nil, p7.reason, string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p7.comment, p7.placeName, tostring(p7.placeId), p7.placeDescription))
+				playersService:ReportAbuse(nil, p1.reason, string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p1.comment, p1.placeName, tostring(p1.placeId), p1.placeDescription))
 			end
-			sendAnalytics(constantsModule.Analytics.ReportTypeGame, p7.placeId, p7.reason)
+			sendAnalytics(constantsModule.Analytics.ReportTypeGame, p1.placeId, p1.reason)
 			sessionUtilityModule.endAbuseReportSession()
 			
-			if p8 then
-				p8()
+			if p2 then
+				p2()
 			end
 		end)()
 	end

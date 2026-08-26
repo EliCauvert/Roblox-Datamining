@@ -19,154 +19,154 @@ end
 
 return function()
 	-- upvalues: createProxy (ref), arraySetModule (ref), cryoModule (ref)
-	local var3 = createProxy({})
-	local var4 = createProxy({})
+	local var1 = createProxy({})
+	local var2 = createProxy({})
 	
-	local function _(p0)
-		-- upvalues: var3 (ref), arraySetModule (copy)
-		local var8 = var3[p0]
+	local function _(p1)
+		-- upvalues: var1 (ref), arraySetModule (copy)
+		local var3 = var1[p1]
 		
-		return if var8 == nil then { messageIds = arraySetModule.new({}) } else var8
+		return if var3 == nil then { messageIds = arraySetModule.new({}) } else var3
 	end
 	
 	local _ = function(p1)
-		-- upvalues: var4 (ref)
-		local var9 = var4[p1]
+		-- upvalues: var2 (ref)
+		local var3 = var2[p1]
 		
-		return if var9 == nil then {
+		return if var3 == nil then {
 			nextPageCursor = nil,
 			isLoading = false,
 			fetchedOldest = false
-		} else var9
+		} else var3
 	end
 	
-	local function prependMessages(p2, p3)
-		-- upvalues: var3 (ref), arraySetModule (copy)
-		local var10 = var3[p2]
-		local var11 = if var10 ~= nil then { messageIds = arraySetModule.new({}) } else var10
+	local function prependMessages(p1, p2)
+		-- upvalues: var1 (ref), arraySetModule (copy)
+		local var3 = var1[p1]
+		local var4 = if var3 ~= nil then { messageIds = arraySetModule.new({}) } else var3
 		
-		if var11.messageIds:prependAll(p3) then
-			var3[p2] = table.clone(var11)
+		if var4.messageIds:prependAll(p2) then
+			var1[p1] = table.clone(var4)
 			
 			return
 		end
 	end
 	
-	local function appendMessages(p4, p5)
-		-- upvalues: var3 (ref), arraySetModule (copy)
-		local var12 = var3[p4]
-		local var13 = if var12 ~= nil then { messageIds = arraySetModule.new({}) } else var12
-		local var14 = false
+	local function appendMessages(p1, p2)
+		-- upvalues: var1 (ref), arraySetModule (copy)
+		local var3 = var1[p1]
+		local var4 = if var3 ~= nil then { messageIds = arraySetModule.new({}) } else var3
+		local var5 = false
 		
-		for i, v in p5 do
-			if var13.messageIds:add(v) then
-				var14 = true
+		for i, v in p2 do
+			if var4.messageIds:add(v) then
+				var5 = true
 			end
 		end
-		if var14 then
-			var3[p4] = table.clone(var13)
+		if var5 then
+			var1[p1] = table.clone(var4)
 			
 			return
 		end
 	end
 	
-	local function updatePagination(p6, p7, p8)
-		-- upvalues: var4 (ref), cryoModule (copy)
-		local var15 = var4[p6]
-		local var16 = if var15 ~= nil then {
+	local function updatePagination(p3, p4, p5)
+		-- upvalues: var2 (ref), cryoModule (copy)
+		local var6 = var2[p3]
+		local var7 = if var6 ~= nil then {
 			nextPageCursor = nil,
 			isLoading = false,
 			fetchedOldest = false
-		} else var15
-		var4[p6] = cryoModule.Dictionary.union(var16, {
+		} else var6
+		var2[p3] = cryoModule.Dictionary.union(var7, {
 			isLoading = false,
-			nextPageCursor = if p7 and p7 ~= "" then p7 else var16.nextPageCursor,
-			fetchedOldest = p8
+			nextPageCursor = if p4 and p4 ~= "" then p4 else var7.nextPageCursor,
+			fetchedOldest = p5
 		})
 	end
 	
 	return {
-		conversations = var3,
-		metadata = var4,
+		conversations = var1,
+		metadata = var2,
 		prependMessages = prependMessages,
 		appendMessages = appendMessages,
-		removeMessage = function(p9, p10)
-			-- upvalues: var3 (ref)
-			local var17 = var3[p9]
+		removeMessage = function(p3, p4)
+			-- upvalues: var1 (ref)
+			local var6 = var1[p3]
 			
-			if var17 == nil then return end
-			if var17.messageIds:remove(p10) then
-				var3[p9] = table.clone(var17)
+			if var6 == nil then return end
+			if var6.messageIds:remove(p4) then
+				var1[p3] = table.clone(var6)
 				
 				return
 			end
 		end,
-		setLoading = function(value, p11)
-			-- upvalues: var4 (ref), cryoModule (copy)
-			local var18 = var4[value]
-			var4[value] = cryoModule.Dictionary.union(if var18 ~= nil then {
+		setLoading = function(value, p3)
+			-- upvalues: var2 (ref), cryoModule (copy)
+			local var6 = var2[value]
+			var2[value] = cryoModule.Dictionary.union(if var6 ~= nil then {
 				nextPageCursor = nil,
 				isLoading = false,
 				fetchedOldest = false
-			} else var18, { isLoading = p11 })
+			} else var6, { isLoading = p3 })
 		end,
 		updatePagination = updatePagination,
-		receivePage = function(p12, p13, p14)
+		receivePage = function(p3, p4, p5)
 			-- upvalues: appendMessages (ref), updatePagination (ref)
-			appendMessages(p12, p13)
-			updatePagination(p12, p14, if p14 ~= nil then p14 == "" else true)
+			appendMessages(p3, p4)
+			updatePagination(p3, p5, if p5 ~= nil then p5 == "" else true)
 		end,
-		clearConversation = function(p15)
-			-- upvalues: var3 (ref), var4 (ref)
-			var3[p15] = nil
-			var4[p15] = nil
+		clearConversation = function(p3)
+			-- upvalues: var1 (ref), var2 (ref)
+			var1[p3] = nil
+			var2[p3] = nil
 		end,
 		clear = function()
-			-- upvalues: var3 (ref), var4 (ref)
-			for i in var3 do
-				var3[i] = nil
+			-- upvalues: var1 (ref), var2 (ref)
+			for i in var1 do
+				var1[i] = nil
 			end
-			for i_1 in var4 do
-				var4[i_1] = nil
+			for i_1 in var2 do
+				var2[i_1] = nil
 			end
 		end,
-		getIndex = function(p16, p17, p18)
-			-- upvalues: var3 (ref)
-			local var19 = var3(p18)[p16]
+		getIndex = function(p3, p4, p5)
+			-- upvalues: var1 (ref)
+			local var6 = var1(p5)[p3]
 			
-			return if var19 == nil then nil else var19.messageIds:indexOf(p17)
+			return if var6 == nil then nil else var6.messageIds:indexOf(p4)
 		end,
-		getOrderedIds = function(p19, p20)
-			-- upvalues: var3 (ref)
-			local var20 = var3(p20)[p19]
+		getOrderedIds = function(p3, p4)
+			-- upvalues: var1 (ref)
+			local var6 = var1(p4)[p3]
 			
-			return if var20 == nil then {} else var20.messageIds:values()
+			return if var6 == nil then {} else var6.messageIds:values()
 		end,
-		getPrevId = function(p21, p22, p23)
-			-- upvalues: var3 (ref)
-			local var21 = var3(p23)[p21]
+		getPrevId = function(p3, p4, p5)
+			-- upvalues: var1 (ref)
+			local var6 = var1(p5)[p3]
 			
-			if var21 == nil then
+			if var6 == nil then
 				return nil
 			end
-			local var22 = var21.messageIds:indexOf(p22)
+			local var7 = var6.messageIds:indexOf(p4)
 			
-			return if var22 == nil or var22 <= 1 then nil else var21.messageIds:at(var22 - 1)
+			return if var7 == nil or var7 <= 1 then nil else var6.messageIds:at(var7 - 1)
 		end,
-		getNextId = function(p24, p25, p26)
-			-- upvalues: var3 (ref)
-			local var23 = var3(p26)[p24]
+		getNextId = function(p3, p4, p5)
+			-- upvalues: var1 (ref)
+			local var6 = var1(p5)[p3]
 			
-			if var23 == nil then
+			if var6 == nil then
 				return nil
 			end
-			local var24 = var23.messageIds:indexOf(p25)
+			local var7 = var6.messageIds:indexOf(p4)
 			
-			return if var24 == nil or var23.messageIds:size() <= var24 then nil else var23.messageIds:at(var24 + 1)
+			return if var7 == nil or var6.messageIds:size() <= var7 then nil else var6.messageIds:at(var7 + 1)
 		end,
-		getMetadata = function(p27, p28)
-			-- upvalues: var4 (ref)
-			return var4(p28)[p27]
+		getMetadata = function(p3, p4)
+			-- upvalues: var2 (ref)
+			return var2(p4)[p3]
 		end
 	}
 end

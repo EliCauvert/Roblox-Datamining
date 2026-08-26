@@ -11,68 +11,68 @@ local promise = dependenciesModule.Promise
 local useAnalyticsModule = require(contactImporter.Analytics.useAnalytics)
 local eventNamesModule = require(contactImporter.Analytics.Enums.EventNames)
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: promise (ref)
-	return function(p1)
-		-- upvalues: p0 (ref), promise (copy)
-		return p0.smsProtocol:supportsSMS():andThen(function(p2)
-			-- upvalues: p0 (copy), p1 (ref), promise (copy)
-			return if p2 then p0.smsProtocol:sendSMS({ address = p0.address, message = p1 }) else promise.reject()
+	return function(p2)
+		-- upvalues: p1 (ref), promise (copy)
+		return p1.smsProtocol:supportsSMS():andThen(function(p3)
+			-- upvalues: p1 (copy), p2 (ref), promise (copy)
+			return if p3 then p1.smsProtocol:sendSMS({ address = p1.address, message = p2 }) else promise.reject()
 		end)
 	end
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: useDispatch (ref), react (ref), useAnalyticsModule (ref), eventNamesModule (ref), useLocalization (ref), textKeysModule (ref), shareLinksNetworking (ref), shareLinksRodux (ref), promise (ref), roduxContacts (ref)
-	local var5 = useDispatch()
-	local var6, var7 = react.useState(false)
+	local var1 = useDispatch()
+	local var2, var3 = react.useState(false)
 	
-	local var8 = function()
-		-- upvalues: var7 (ref)
-		var7(false)
+	local var4 = function()
+		-- upvalues: var3 (ref)
+		var3(false)
 	end
 	
-	local var9 = useAnalyticsModule()
-	local var10 = nil
+	local var5 = useAnalyticsModule()
+	local var6 = nil
 	
-	local var11 = function()
-		-- upvalues: var9 (ref), eventNamesModule (copy), var10 (write), var7 (ref)
-		var9.fireAnalyticsEvent(eventNamesModule.InviteContact, { offNetworkFriendRequestLinkId = var10 })
-		var7(false)
+	local var7 = function()
+		-- upvalues: var5 (ref), eventNamesModule (copy), var6 (write), var3 (ref)
+		var5.fireAnalyticsEvent(eventNamesModule.InviteContact, { offNetworkFriendRequestLinkId = var6 })
+		var3(false)
 	end
 	
-	local var12 = useLocalization({ rootMessage = textKeysModule.SMS_DEFAULT_MESSAGE })
+	local var8 = useLocalization({ rootMessage = textKeysModule.SMS_DEFAULT_MESSAGE })
 	
-	local _ = function(p4)
-		-- upvalues: var10 (write)
-		return function(p5)
-			-- upvalues: var10 (copy), p4 (ref)
-			var10 = p5.responseBody.linkId
+	local _ = function(p2)
+		-- upvalues: var6 (write)
+		return function(p3)
+			-- upvalues: var6 (copy), p2 (ref)
+			var6 = p3.responseBody.linkId
 			
-			return p5.responseBody.shortUrl .. "\n\n" .. p4.rootMessage
+			return p3.responseBody.shortUrl .. "\n\n" .. p4.rootMessage
 		end
 	end
 	
 	return {
 		sendInvite = function()
-			-- upvalues: var7 (ref), var5 (ref), shareLinksNetworking (copy), shareLinksRodux (copy), var12 (ref), var10 (write), p3 (ref), promise (copy), roduxContacts (copy), var11 (ref), var8 (ref)
-			var7(true)
+			-- upvalues: var3 (ref), var1 (ref), shareLinksNetworking (copy), shareLinksRodux (copy), var8 (ref), var6 (write), p1 (ref), promise (copy), roduxContacts (copy), var7 (ref), var4 (ref)
+			var3(true)
 			
-			return var5(shareLinksNetworking.GenerateLink.API({
+			return var1(shareLinksNetworking.GenerateLink.API({
 				linkType = shareLinksRodux.Enums.LinkType.FriendInvite.rawValue()
-			})):andThen(function(p8)
-				-- upvalues: var10 (copy), var12 (ref)
-				var10 = p8.responseBody.linkId
+			})):andThen(function(p2)
+				-- upvalues: var6 (copy), var8 (ref)
+				var6 = p2.responseBody.linkId
 				
-				return p8.responseBody.shortUrl .. "\n\n" .. var12.rootMessage
-			end):andThen(function(p6)
-				-- upvalues: p3 (ref), promise (copy)
-				return p3.smsProtocol:supportsSMS():andThen(function(p7)
-					-- upvalues: p3 (copy), p6 (ref), promise (copy)
-					return if p7 then p3.smsProtocol:sendSMS({ address = p3.address, message = p6 }) else promise.reject()
+				return p2.responseBody.shortUrl .. "\n\n" .. var12.rootMessage
+			end):andThen(function(p2)
+				-- upvalues: p1 (ref), promise (copy)
+				return p1.smsProtocol:supportsSMS():andThen(function(p3)
+					-- upvalues: p1 (copy), p2 (ref), promise (copy)
+					return if p3 then p1.smsProtocol:sendSMS({ address = p1.address, message = p2 }) else promise.reject()
 				end)
-			end):andThen(var5(roduxContacts.Actions.RequestSent({ id = p3.deviceContactId }))):andThen(var11):catch(var8)
+			end):andThen(var1(roduxContacts.Actions.RequestSent({ id = p1.deviceContactId }))):andThen(var7):catch(var4)
 		end,
-		isLoading = var6
+		isLoading = var2
 	}
 end

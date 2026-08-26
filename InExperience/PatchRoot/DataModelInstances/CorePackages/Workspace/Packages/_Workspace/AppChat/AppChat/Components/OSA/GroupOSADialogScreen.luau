@@ -11,39 +11,39 @@ local appChatGroupOsaDisablePortal = game:DefineFastFlag("AppChatGroupOsaDisable
 
 return function()
 	-- upvalues: useNavigation (ref), useDispatch (ref), reactModule (ref), API (ref), enumScreensModule (ref), removedConversationModule (ref), groupOSADialogModule (ref), appChatGroupOsaDisablePortal (ref)
-	local var6 = useNavigation()
-	local var7 = useDispatch()
-	local conversationId = var6.getParam("conversationId", nil)
+	local var1 = useNavigation()
+	local var2 = useDispatch()
+	local conversationId = var1.getParam("conversationId", nil)
 	
 	return reactModule.createElement(groupOSADialogModule, {
 		conversationId = conversationId,
 		onClose = reactModule.useCallback(function()
-			-- upvalues: var6 (ref)
-			if var6.isFocused() then
-				var6.goBack()
+			-- upvalues: var1 (ref)
+			if var1.isFocused() then
+				var1.goBack()
 			end
-		end, { var6 }),
+		end, { var1 }),
 		onJoin = reactModule.useCallback(function()
-			-- upvalues: conversationId (ref), var7 (ref), API (copy), var6 (ref), enumScreensModule (copy)
+			-- upvalues: conversationId (ref), var2 (ref), API (copy), var1 (ref), enumScreensModule (copy)
 			if conversationId then
-				var7(API(conversationId))
+				var2(API(conversationId))
 			end
-			var6.navigate(enumScreensModule.ChatConversation, {
+			var1.navigate(enumScreensModule.ChatConversation, {
 				isNavigatedFromGroupOSAJoin = true,
 				conversationId = conversationId
 			})
-		end, { var6, conversationId, var7 }),
+		end, { var1, conversationId, var2 }),
 		onDecline = reactModule.useCallback(function()
-			-- upvalues: conversationId (ref), var7 (ref), removedConversationModule (copy), var6 (ref)
+			-- upvalues: conversationId (ref), var2 (ref), removedConversationModule (copy), var1 (ref)
 			if conversationId then
-				var7(removedConversationModule(conversationId))
+				var2(removedConversationModule(conversationId))
 			end
-			if var6.isFocused() then
-				var6.goBack()
+			if var1.isFocused() then
+				var1.goBack()
 			end
-		end, { var6, var7, conversationId }),
+		end, { var1, var2, conversationId }),
 		disablePortal = appChatGroupOsaDisablePortal,
-		impressionId = var6.getParam("impressionId", nil),
-		modalVariant = var6.getParam("modalVariant", nil)
+		impressionId = var1.getParam("impressionId", nil),
+		modalVariant = var1.getParam("modalVariant", nil)
 	})
 end

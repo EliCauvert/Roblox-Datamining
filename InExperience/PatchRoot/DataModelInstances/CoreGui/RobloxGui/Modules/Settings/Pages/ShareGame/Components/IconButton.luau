@@ -1,21 +1,21 @@
 ﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local iconButton = roactModule.PureComponent:extend("IconButton")
 
-function iconButton.render(p0)
+function iconButton.render(p1)
 	-- upvalues: roactModule (ref)
-	local visible = p0.props.visible
-	local anchorPoint = p0.props.anchorPoint
-	local position = p0.props.position
-	local size = p0.props.size
-	local zIndex = p0.props.zIndex
-	local onClick = p0.props.onClick
-	local iconHorizontalAlignment = p0.props.iconHorizontalAlignment or Enum.HorizontalAlignment.Center
-	local iconVerticalAlignment = p0.props.iconVerticalAlignment or Enum.VerticalAlignment.Center
-	local iconSpritePath = p0.props.iconSpritePath
-	local iconSpriteFrame = p0.props.iconSpriteFrame
-	local horizontalInset = p0.props.horizontalInset or 12
-	local var5 = 0
-	local var6 = 1
+	local visible = p1.props.visible
+	local anchorPoint = p1.props.anchorPoint
+	local position = p1.props.position
+	local size = p1.props.size
+	local zIndex = p1.props.zIndex
+	local onClick = p1.props.onClick
+	local iconHorizontalAlignment = p1.props.iconHorizontalAlignment or Enum.HorizontalAlignment.Center
+	local iconVerticalAlignment = p1.props.iconVerticalAlignment or Enum.VerticalAlignment.Center
+	local iconSpritePath = p1.props.iconSpritePath
+	local iconSpriteFrame = p1.props.iconSpriteFrame
+	local horizontalInset = p1.props.horizontalInset or 12
+	local var1 = 0
+	local var2 = 1
 	
 	if iconHorizontalAlignment == Enum.HorizontalAlignment.Center then
 		horizontalInset = 0
@@ -23,8 +23,8 @@ function iconButton.render(p0)
 		position = UDim2.new(position.X.Scale, position.X.Offset - horizontalInset, position.Y.Scale, position.Y.Offset)
 	elseif iconHorizontalAlignment == Enum.HorizontalAlignment.Right then
 		position = UDim2.new(position.X.Scale, position.X.Offset + horizontalInset, position.Y.Scale, position.Y.Offset)
-		var5 = 1
-		var6 = 0
+		var1 = 1
+		var2 = 0
 	end
 	return roactModule.createElement("ImageButton", {
 		Visible = visible,
@@ -44,7 +44,7 @@ function iconButton.render(p0)
 		}),
 		Offset = roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			LayoutOrder = var5,
+			LayoutOrder = var1,
 			Size = UDim2.new(0, horizontalInset, 0, 0)
 		}),
 		BackIcon = roactModule.createElement("ImageLabel", {
@@ -55,7 +55,7 @@ function iconButton.render(p0)
 			ImageRectOffset = iconSpriteFrame.offset,
 			ImageRectSize = iconSpriteFrame.size,
 			ZIndex = zIndex,
-			LayoutOrder = var6
+			LayoutOrder = var2
 		})
 	})
 end

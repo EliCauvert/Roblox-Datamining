@@ -2,10 +2,10 @@
 	new = function()
 		return {}
 	end,
-	fromWeb = function(p0)
-		p0 = p0 or {}
-		p0.placeId = tostring(p0.placeId)
+	fromWeb = function(p1)
+		p1 = p1 or {}
+		p1.placeId = tostring(p1.placeId)
 		
-		return p0
+		return p1
 	end
 }

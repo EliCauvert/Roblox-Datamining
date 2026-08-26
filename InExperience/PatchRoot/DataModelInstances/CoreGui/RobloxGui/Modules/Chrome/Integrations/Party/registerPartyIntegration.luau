@@ -14,16 +14,16 @@ local reactModule = require(corePackagesService.Packages.React)
 local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
 local symbol = require(corePackagesService.Workspace.Packages.AppCommonLib).Symbol
 local sideSheetPlacement = chromeModule.Enums.SideSheetPlacement
-local var11 = mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function()
+local var1 = mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function()
 	-- upvalues: inExperienceAppChatModalModule (ref)
 	return inExperienceAppChatModalModule:getVisible()
 end)
 
-return function(p0, p1)
-	-- upvalues: serviceModule (ref), sideSheetPlacement (ref), inExperienceAppChatModalModule (ref), chromeIntegrationUtilsModule (ref), responsiveModule (ref), focusUtils (ref), localStoreModule (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), var11 (ref), reactModule (ref), partyIconModule (ref), symbol (ref), mouseIconOverrideService (ref)
-	local var12 = serviceModule:register({
+return function(p1, p2)
+	-- upvalues: serviceModule (ref), sideSheetPlacement (ref), inExperienceAppChatModalModule (ref), chromeIntegrationUtilsModule (ref), responsiveModule (ref), focusUtils (ref), localStoreModule (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), var1 (ref), reactModule (ref), partyIconModule (ref), symbol (ref), mouseIconOverrideService (ref)
+	local var2 = serviceModule:register({
 		label = "Feature.Squads.Label.Party",
-		id = p0,
+		id = p1,
 		sideSheetPlacement = sideSheetPlacement.None,
 		activated = function()
 			-- upvalues: inExperienceAppChatModalModule (copy), chromeIntegrationUtilsModule (copy), responsiveModule (copy), focusUtils (copy), localStoreModule (copy), getFStringConnectTooltipLocalStorageKeyModule (copy)
@@ -40,14 +40,14 @@ return function(p0, p1)
 			end
 			localStoreModule.storeForLocalPlayer(getFStringConnectTooltipLocalStorageKeyModule(), true)
 		end,
-		isActivated = var11,
+		isActivated = var1,
 		components = {
-			Icon = function(p2)
-				-- upvalues: reactModule (copy), partyIconModule (copy), p0 (ref)
-				return reactModule.createElement(partyIconModule, { integrationId = p0, isIconVisible = p2.visible })
+			Icon = function(p3)
+				-- upvalues: reactModule (copy), partyIconModule (copy), p1 (ref)
+				return reactModule.createElement(partyIconModule, { integrationId = p1, isIconVisible = p3.visible })
 			end
 		},
-		initialAvailability = p1
+		initialAvailability = p2
 	})
 	local inExperienceRobloxParty = symbol.named("InExperienceRobloxParty")
 	inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p3)
@@ -60,5 +60,5 @@ return function(p0, p1)
 		mouseIconOverrideService.pop(inExperienceRobloxParty)
 	end)
 	
-	return var12
+	return var2
 end

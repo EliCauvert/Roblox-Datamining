@@ -3,9 +3,9 @@ local dashModule = require(parent.Dash)
 local baseTextElementModule = require(script:FindFirstAncestor("InlineLayoutElements").BaseTextElement)
 local text = require(parent.Foundation).Text
 local t = {
-	new = function(p0)
+	new = function(p1)
 		-- upvalues: baseTextElementModule (ref), text (ref)
-		return baseTextElementModule.new(text, p0, mapProps)
+		return baseTextElementModule.new(text, p1, mapProps)
 	end
 }
 

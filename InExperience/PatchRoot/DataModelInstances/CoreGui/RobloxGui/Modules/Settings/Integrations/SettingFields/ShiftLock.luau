@@ -17,16 +17,16 @@ local t = {
 
 local function _()
 	-- upvalues: t (ref), gameSettings (ref), valueChangedSignal (ref)
-	local var9 = valueChangedSignal.new(t[gameSettings.ControlMode])
-	var9:connect(function(p0)
+	local var1 = valueChangedSignal.new(t[gameSettings.ControlMode])
+	var1:connect(function(p1)
 		-- upvalues: t (copy), gameSettings (copy)
-		if t[gameSettings.ControlMode] == p0 then
+		if t[gameSettings.ControlMode] == p1 then
 			return
 		end
-		gameSettings.ControlMode = if p0 then Enum.ControlMode.MouseLockSwitch else Enum.ControlMode.Classic
+		gameSettings.ControlMode = if p1 then Enum.ControlMode.MouseLockSwitch else Enum.ControlMode.Classic
 	end)
 	
-	return var9
+	return var1
 end
 
 local function ShiftLockAvailability(_, p1)
@@ -36,8 +36,8 @@ local function ShiftLockAvailability(_, p1)
 		return userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true))
 	end
 	
-	local var10 = availabilitySignal.new(userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true)))
-	var10:connect(function(p2)
+	local var1 = availabilitySignal.new(userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true)))
+	var1:connect(function(p2)
 		-- upvalues: p1 (ref)
 		if p2 then
 			p1:set(p2)
@@ -45,40 +45,40 @@ local function ShiftLockAvailability(_, p1)
 	end, true)
 	
 	if localPlayer then
-		localPlayer.Changed:Connect(function(p3)
-			-- upvalues: var10 (ref), localPlayer (copy), userInputService (copy)
-			if p3 == "DevEnableMouseLock" then
-				var10:set(userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true)))
+		localPlayer.Changed:Connect(function(p2)
+			-- upvalues: var1 (ref), localPlayer (copy), userInputService (copy)
+			if p2 == "DevEnableMouseLock" then
+				var1:set(userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true)))
 			end
 		end)
 	end
-	userInputService.Changed:Connect(function(p4)
-		-- upvalues: var10 (ref), localPlayer (copy), userInputService (copy)
-		if p4 == "MouseEnabled" or p4 == "KeyboardEnabled" then
-			var10:set(userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true)))
+	userInputService.Changed:Connect(function(p2)
+		-- upvalues: var1 (ref), localPlayer (copy), userInputService (copy)
+		if p2 == "MouseEnabled" or p2 == "KeyboardEnabled" then
+			var1:set(userInputService.MouseEnabled and (userInputService.KeyboardEnabled and (if localPlayer then localPlayer.DevEnableMouseLock else true)))
 		end
 	end)
 	
-	return var10
+	return var1
 end
 
-local var7 = valueChangedSignal.new(t[gameSettings.ControlMode])
-var7:connect(function(p5)
+local var1 = valueChangedSignal.new(t[gameSettings.ControlMode])
+var1:connect(function(p1)
 	-- upvalues: t (ref), gameSettings (ref)
-	if t[gameSettings.ControlMode] == p5 then
+	if t[gameSettings.ControlMode] == p1 then
 		return
 	end
-	gameSettings.ControlMode = if p5 then Enum.ControlMode.MouseLockSwitch else Enum.ControlMode.Classic
+	gameSettings.ControlMode = if p1 then Enum.ControlMode.MouseLockSwitch else Enum.ControlMode.Classic
 end)
-local var8 = visibilitySignal.new(true)
+local var2 = visibilitySignal.new(true)
 
 return {
 	id = "shift-lock",
 	label = "CoreScripts.InGameMenu.GameSettings.ShiftLock",
 	alreadyLocalized = false,
 	field_type = settingEnum.Toggle,
-	onChanged = var7,
-	availability = ShiftLockAvailability(var7, var8),
-	visibility = var8,
+	onChanged = var1,
+	availability = ShiftLockAvailability(var1, var2),
+	visibility = var2,
 	layoutOrder = LAYOUT_ORDER.ShiftLockFrame
 }

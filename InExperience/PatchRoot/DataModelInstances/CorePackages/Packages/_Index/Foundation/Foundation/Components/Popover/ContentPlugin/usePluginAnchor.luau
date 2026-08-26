@@ -8,86 +8,86 @@ local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
 local useUniqueWidgetModule = require(foundation.Providers.StudioWidgets.useUniqueWidget)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), overlayContextModule (ref), useUniqueWidgetModule (ref), viewModule (ref), reactRobloxModule (ref)
-	local var6 = reactModule.useContext(overlayContextModule)
-	local var7 = p0 ~= nil and typeof(p0) ~= "Instance"
-	local var8 = reactModule.useRef(nil)
+	local var1 = reactModule.useContext(overlayContextModule)
+	local var2 = p1 ~= nil and typeof(p1) ~= "Instance"
+	local var3 = reactModule.useRef(nil)
 	
-	if not var7 and typeof(p0) == "Instance" then
-		var8.current = p0
+	if not var2 and typeof(p1) == "Instance" then
+		var3.current = p1
 	end
-	local var9, var10 = reactModule.useState(nil)
-	local var11 = reactModule.useRef(nil)
-	var11.current = var9
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: var10 (ref)
-		var10(p2)
-	end, { var10 })
-	local var13 = useUniqueWidgetModule({ forwardRef = if var7 then var11 else var8 })
-	local var14, var15 = reactModule.useState(Vector2.zero)
-	local var16, var17 = reactModule.useState(Vector2.one)
-	local var18, var19 = reactModule.useState(Vector2.zero)
+	local var4, var5 = reactModule.useState(nil)
+	local var6 = reactModule.useRef(nil)
+	var6.current = var4
+	local var7 = reactModule.useCallback(function(p3)
+		-- upvalues: var5 (ref)
+		var5(p3)
+	end, { var5 })
+	local var8 = useUniqueWidgetModule({ forwardRef = if var2 then var6 else var3 })
+	local var9, var10 = reactModule.useState(Vector2.zero)
+	local var11, var12 = reactModule.useState(Vector2.one)
+	local var13, var14 = reactModule.useState(Vector2.zero)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var7 (ref), p0 (ref), var15 (ref), var17 (ref)
-		if var7 and p0 ~= nil then
+		-- upvalues: var2 (ref), p1 (ref), var10 (ref), var12 (ref)
+		if var2 and p1 ~= nil then
 			local function updateFromAnchor()
-				-- upvalues: var15 (copy), p0 (ref), var17 (copy)
-				var15(p0.AbsolutePosition)
-				var17(p0.AbsoluteSize)
+				-- upvalues: var10 (copy), p1 (ref), var12 (copy)
+				var10(p1.AbsolutePosition)
+				var12(p1.AbsoluteSize)
 			end
 			
-			var15(p0.AbsolutePosition)
-			var17(p0.AbsoluteSize)
-			local var21 = p0:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateFromAnchor)
-			local var22 = p0:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateFromAnchor)
+			var10(p1.AbsolutePosition)
+			var12(p1.AbsoluteSize)
+			local var15 = p1:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateFromAnchor)
+			local var16 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateFromAnchor)
 			
 			return function()
-				-- upvalues: var21 (ref), var22 (ref)
-				var21:Disconnect()
-				var22:Disconnect()
+				-- upvalues: var15 (ref), var16 (ref)
+				var15:Disconnect()
+				var16:Disconnect()
 			end
 		end
-	end, { p0, var7 })
+	end, { p1, var2 })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var7 (ref), var6 (ref)
-		if var7 then
-			var6.requestOverlay()
+		-- upvalues: var2 (ref), var1 (ref)
+		if var2 then
+			var1.requestOverlay()
 		end
-	end, { var6.requestOverlay, var7 })
+	end, { var1.requestOverlay, var2 })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var7 (ref), var6 (ref), var19 (ref)
-		if not var7 then return end
-		local instance = var6.instance
+		-- upvalues: var2 (ref), var1 (ref), var14 (ref)
+		if not var2 then return end
+		local instance = var1.instance
 		
 		if instance == nil or not instance:IsA("GuiObject") then
-			var19(Vector2.zero)
+			var14(Vector2.zero)
 			
 			return
 		end
 		local function updateOffset()
-			-- upvalues: var19 (copy), instance (ref)
-			var19(instance.AbsolutePosition)
+			-- upvalues: var14 (copy), instance (ref)
+			var14(instance.AbsolutePosition)
 		end
 		
-		var19(instance.AbsolutePosition)
-		local var24 = instance:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateOffset)
+		var14(instance.AbsolutePosition)
+		local var15 = instance:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateOffset)
 		
 		return function()
-			-- upvalues: var24 (ref)
-			var24:Disconnect()
+			-- upvalues: var15 (ref)
+			var15:Disconnect()
 		end
-	end, { var6.instance, var7 })
+	end, { var1.instance, var2 })
 	
 	return {
-		uri = if p1 ~= nil then var13.uri else p1,
-		element = if var7 and var6.instance then reactRobloxModule.createPortal(reactModule.createElement(viewModule, {
+		uri = if p2 ~= nil then var8.uri else p2,
+		element = if var2 and var1.instance then reactRobloxModule.createPortal(reactModule.createElement(viewModule, {
 			Visible = true,
-			Position = UDim2.fromOffset(var14.X - var18.X, var14.Y - var18.Y),
-			Size = UDim2.fromOffset(var16.X, var16.Y),
-			ref = var12
-		}), var6.instance) else nil,
-		isVirtual = var7,
-		isReady = if p1 ~= nil then p0 ~= nil and (not var7 or var6.instance ~= nil) else true
+			Position = UDim2.fromOffset(var9.X - var13.X, var9.Y - var13.Y),
+			Size = UDim2.fromOffset(var11.X, var11.Y),
+			ref = var7
+		}), var1.instance) else nil,
+		isVirtual = var2,
+		isReady = if p2 ~= nil then p1 ~= nil and (not var2 or var1.instance ~= nil) else true
 	}
 end

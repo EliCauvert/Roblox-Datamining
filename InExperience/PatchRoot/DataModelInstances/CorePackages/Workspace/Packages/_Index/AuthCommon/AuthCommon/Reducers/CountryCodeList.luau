@@ -1,12 +1,12 @@
 ﻿local setCountryCodeListModule = require(script:FindFirstAncestor("AuthCommon").Actions.SetCountryCodeList)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: setCountryCodeListModule (ref)
-	p0 = p0 or {}
-	assert(p0, "")
+	p1 = p1 or {}
+	assert(p1, "")
 	
-	if p1.type == setCountryCodeListModule.name then
-		p0 = p1.countryCodeList
+	if p2.type == setCountryCodeListModule.name then
+		p1 = p2.countryCodeList
 	end
-	return p0
+	return p1
 end

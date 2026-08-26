@@ -11,20 +11,20 @@ local itemDetailsLocalizationKeys = constantsModule.ItemDetailsLocalizationKeys
 local cryoModule = require(parent.Cryo)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), itemTypeEnum (ref), bundleLocalizationKeys (ref), assetLocalizationKeys (ref), cryoModule (ref), priceStatusLocalizationKeys (ref), itemDetailsLocalizationKeys (ref), useLocalization (ref)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref), itemTypeEnum (copy), bundleLocalizationKeys (copy), assetLocalizationKeys (copy)
-		return if p0 and p0.itemType == itemTypeEnum.Bundle then bundleLocalizationKeys else assetLocalizationKeys
-	end, { p0 })
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), itemTypeEnum (copy), bundleLocalizationKeys (copy), assetLocalizationKeys (copy)
+		return if p1 and p1.itemType == itemTypeEnum.Bundle then bundleLocalizationKeys else assetLocalizationKeys
+	end, { p1 })
 	
 	return useLocalization(reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var4 (ref), priceStatusLocalizationKeys (copy), itemDetailsLocalizationKeys (copy), p0 (ref)
-		return cryoModule.Dictionary.join(var4, priceStatusLocalizationKeys, itemDetailsLocalizationKeys, {
+		-- upvalues: cryoModule (copy), var1 (ref), priceStatusLocalizationKeys (copy), itemDetailsLocalizationKeys (copy), p1 (ref)
+		return cryoModule.Dictionary.join(var1, priceStatusLocalizationKeys, itemDetailsLocalizationKeys, {
 			ownedItems = {
 				itemDetailsLocalizationKeys.ownedItems,
-				QUANTITY = if p0 and p0.collectibleItemDetails then p0.collectibleItemDetails.resellableCount else 0
+				QUANTITY = if p1 and p1.collectibleItemDetails then p1.collectibleItemDetails.resellableCount else 0
 			}
 		})
-	end, { var4, p0 }))
+	end, { var1, p1 }))
 end

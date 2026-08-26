@@ -3,35 +3,35 @@ local appCommonLibModule = require(whatsNew.Parent.AppCommonLib)
 local _ = require(whatsNew.Types)
 local appStorageService = game:GetService("AppStorageService")
 local httpService = game:GetService("HttpService")
-local var4 = appCommonLibModule.Utils.AppStorageJsonCacheUtils.new(appStorageService)
+local var1 = appCommonLibModule.Utils.AppStorageJsonCacheUtils.new(appStorageService)
 
-local function _(p0, p1)
-	local var9 = p0[p1]
+local function _(p1, p2)
+	local var2 = p1[p2]
 	
-	if type(var9) ~= "table" then
-		var9 = {}
-		p0[p1] = var9
+	if type(var2) ~= "table" then
+		var2 = {}
+		p1[p2] = var2
 	end
-	return var9
+	return var2
 end
 
 local _ = function()
 	return { entries = {} }
 end
 
-local _ = function(p2)
-	if type(p2.entries) ~= "table" then
-		p2.entries = {}
+local _ = function(p1)
+	if type(p1.entries) ~= "table" then
+		p1.entries = {}
 	end
-	return p2
+	return p1
 end
 
-local function deepClone(p3)
+local function deepClone(p1)
 	-- upvalues: deepClone (ref)
 	local t = {}
 	
-	if type(p3) == "table" then
-		for i, v in p3 do
+	if type(p1) == "table" then
+		for i, v in p1 do
 			if type(v) == "table" then
 				t[i] = deepClone(v)
 			else
@@ -43,15 +43,15 @@ local function deepClone(p3)
 end
 
 local _ = function()
-	-- upvalues: var4 (ref)
-	local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
+	-- upvalues: var1 (ref)
+	local whatsNewEntriesCachedJsonForKey = var1:getCachedJsonForKey("WhatsNewEntries")
 	
 	return if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
 end
 
-local _ = function(p4)
+local _ = function(p2)
 	-- upvalues: deepClone (ref)
-	local t = { entries = deepClone(p4.entries) }
+	local t = { entries = deepClone(p2.entries) }
 	
 	if type(t.entries) ~= "table" then
 		t.entries = {}
@@ -59,11 +59,11 @@ local _ = function(p4)
 	return t
 end
 
-local function writeDeviceData(p5)
-	-- upvalues: httpService (ref), appStorageService (ref), var4 (ref)
+local function writeDeviceData(p2)
+	-- upvalues: httpService (ref), appStorageService (ref), var1 (ref)
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p5 (ref)
-		return httpService:JSONEncode(p5)
+		-- upvalues: httpService (copy), p2 (ref)
+		return httpService:JSONEncode(p2)
 	end)
 	
 	if not ok or type(status) ~= "string" then
@@ -78,7 +78,7 @@ local function writeDeviceData(p5)
 	end)
 	
 	if ok_1 then
-		var4:getCachedJsonForKey("WhatsNewEntries", true)
+		var1:getCachedJsonForKey("WhatsNewEntries", true)
 		
 		return true
 	end
@@ -88,14 +88,14 @@ local function writeDeviceData(p5)
 end
 
 local _ = function()
-	-- upvalues: var4 (ref), deepClone (ref)
-	local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
-	local var14 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
+	-- upvalues: var1 (ref), deepClone (ref)
+	local whatsNewEntriesCachedJsonForKey = var1:getCachedJsonForKey("WhatsNewEntries")
+	local var2 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
 	
-	if var14 == nil then
+	if var2 == nil then
 		return { entries = {} }
 	end
-	local t = { entries = deepClone(var14.entries) }
+	local t = { entries = deepClone(var2.entries) }
 	
 	if type(t.entries) ~= "table" then
 		t.entries = {}
@@ -103,14 +103,14 @@ local _ = function()
 	return t
 end
 
-local function updateDeviceData(p6)
-	-- upvalues: var4 (ref), deepClone (ref), writeDeviceData (ref)
+local function updateDeviceData(p2)
+	-- upvalues: var1 (ref), deepClone (ref), writeDeviceData (ref)
 	local t
-	local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
-	local var17 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
+	local whatsNewEntriesCachedJsonForKey = var1:getCachedJsonForKey("WhatsNewEntries")
+	local var2 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
 	
-	if var17 then
-		local t_1 = { entries = deepClone(var17.entries) }
+	if var2 then
+		local t_1 = { entries = deepClone(var2.entries) }
 		
 		if type(t_1.entries) ~= "table" then
 			t_1.entries = {}
@@ -122,22 +122,22 @@ local function updateDeviceData(p6)
 	if type(t.entries) ~= "table" then
 		t.entries = {}
 	end
-	local var20 = p6(t)
+	local var3 = p2(t)
 	
-	if var20 == nil then return end
-	if type(var20.entries) ~= "table" then
-		var20.entries = {}
+	if var3 == nil then return end
+	if type(var3.entries) ~= "table" then
+		var3.entries = {}
 	end
-	writeDeviceData(var20)
+	writeDeviceData(var3)
 end
 
-local function toSnapshot(p7)
+local function toSnapshot(p2)
 	local t = {}
 	
-	if type(p7) ~= "table" then
+	if type(p2) ~= "table" then
 		return t
 	end
-	for i, v in p7 do
+	for i, v in p2 do
 		if type(v) == "table" then
 			t[i] = { optOutCount = 0, adopted = false, seen = v.seen }
 		end
@@ -148,24 +148,24 @@ end
 return {
 	STORAGE_KEY = "WhatsNewEntries",
 	clearJsonCacheForTests = function()
-		-- upvalues: var4 (ref)
-		var4._jsonDecodeCache = {}
+		-- upvalues: var1 (ref)
+		var1._jsonDecodeCache = {}
 	end,
 	clearForTests = function()
-		-- upvalues: writeDeviceData (ref), var4 (ref)
+		-- upvalues: writeDeviceData (ref), var1 (ref)
 		writeDeviceData({ entries = {} })
-		var4._jsonDecodeCache = {}
+		var1._jsonDecodeCache = {}
 	end,
 	getEntries = function()
-		-- upvalues: var4 (ref), deepClone (ref), toSnapshot (ref)
+		-- upvalues: var1 (ref), deepClone (ref), toSnapshot (ref)
 		local t
-		local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
-		local var23 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
+		local whatsNewEntriesCachedJsonForKey = var1:getCachedJsonForKey("WhatsNewEntries")
+		local var2 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
 		
-		if var23 == nil then
+		if var2 == nil then
 			t = { entries = {} }
 		else
-			local t_1 = { entries = deepClone(var23.entries) }
+			local t_1 = { entries = deepClone(var2.entries) }
 			
 			if type(t_1.entries) ~= "table" then
 				t_1.entries = {}
@@ -174,20 +174,20 @@ return {
 		end
 		return toSnapshot(t.entries)
 	end,
-	markSeen = function(p8, p9)
+	markSeen = function(p3, p4)
 		-- upvalues: updateDeviceData (ref)
-		updateDeviceData(function(p10)
-			-- upvalues: p8 (ref), p9 (ref)
-			local entries = p10.entries
-			local var26 = entries[p8]
+		updateDeviceData(function(p5)
+			-- upvalues: p3 (ref), p4 (ref)
+			local entries = p5.entries
+			local var2 = entries[p3]
 			
-			if type(var26) ~= "table" then
-				var26 = {}
-				entries[p8] = var26
+			if type(var2) ~= "table" then
+				var2 = {}
+				entries[p3] = var2
 			end
-			var26.seen = p9
+			var2.seen = p4
 			
-			return p10
+			return p5
 		end)
 	end
 }

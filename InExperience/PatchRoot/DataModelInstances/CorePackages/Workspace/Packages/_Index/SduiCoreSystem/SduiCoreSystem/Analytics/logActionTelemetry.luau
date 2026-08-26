@@ -8,31 +8,31 @@ local getSduiTelemetryHandlerNameRegistryModule = require(sduiCoreSystem.getSdui
 local reportUnifiedLoggingActionModule = require(sduiCoreSystem.Analytics.reportUnifiedLoggingAction)
 local fFlagSduiActionSkipUnifiedLogging = require(parent.SharedFlags).FFlagSduiActionSkipUnifiedLogging
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: getSduiTelemetryHandlerNameRegistryModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiActionSkipUnifiedLogging (ref), reportUnifiedLoggingActionModule (ref)
-	if p0 and p0 ~= "" then
-		local telemetryHandler = getSduiTelemetryHandlerNameRegistryModule().getTelemetryHandler(p0)
+	if p1 and p1 ~= "" then
+		local telemetryHandler = getSduiTelemetryHandlerNameRegistryModule().getTelemetryHandler(p1)
 		
 		if telemetryHandler then
-			telemetryHandler(p2, p3, p4)
+			telemetryHandler(p3, p4, p5)
 		else
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.InvalidActionParams, {
-				message = `Unknown telemetry handler name: {p0}`,
-				name = p2.actionType
-			}, p4.appPage)
+				message = `Unknown telemetry handler name: {p1}`,
+				name = p3.actionType
+			}, p5.appPage)
 		end
-	elseif p1.telemetryHandler then
-		p1.telemetryHandler(p2, p3, p4)
+	elseif p2.telemetryHandler then
+		p2.telemetryHandler(p3, p4, p5)
 	end
-	if not (if fFlagSduiActionSkipUnifiedLogging then p1.skipUnifiedLogging or p2.skipUnifiedLogging else p1.skipUnifiedLogging) then
-		if p3 == nil then
+	if not (if fFlagSduiActionSkipUnifiedLogging then p2.skipUnifiedLogging or p3.skipUnifiedLogging else p2.skipUnifiedLogging) then
+		if p4 == nil then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.NilAnalyticsContext, {
-				message = `Could not reportUnifiedLoggingAction. Missing analyticsContext {p2.actionType}`,
-				name = p2.actionType
-			}, p4.appPage)
+				message = `Could not reportUnifiedLoggingAction. Missing analyticsContext {p3.actionType}`,
+				name = p3.actionType
+			}, p5.appPage)
 			
 			return
 		end
-		reportUnifiedLoggingActionModule(p4, p2, p3)
+		reportUnifiedLoggingActionModule(p5, p3, p4)
 	end
 end

@@ -8,35 +8,35 @@ local view = foundationModule.View
 local iconSize = foundationModule.Enums.IconSize
 local inputSize = foundationModule.Enums.InputSize
 
-local function GameConfigurationListItem(p0)
+local function GameConfigurationListItem(p1)
 	-- upvalues: reactModule (ref), icon (ref), iconSize (ref), list (ref)
-	local row = p0.row
-	local var3 = row.isDisabled == true
+	local row = p1.row
+	local var1 = row.isDisabled == true
 	local onActivated = row.onActivated
 	local createElement = reactModule.createElement
 	createElement = createElement(list.Item, {
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		title = row.title,
 		description = row.description,
 		trailing = if row.trailingIcon then reactModule.createElement(icon, {
 			tag = "auto-xy content-default",
 			name = row.trailingIcon,
 			size = iconSize.Large,
-			testId = `{p0.testId}-trailing-icon`
+			testId = `{p1.testId}-trailing-icon`
 		}) else nil,
-		onActivated = if onActivated == nil or var3 then nil else reactModule.useCallback(function()
+		onActivated = if onActivated == nil or var1 then nil else reactModule.useCallback(function()
 			-- upvalues: onActivated (ref)
 			if onActivated ~= nil then
 				onActivated()
 			end
 		end, { onActivated }),
-		testId = p0.testId
+		testId = p1.testId
 	})
 	
-	return if var3 then reactModule.createElement("CanvasGroup", {
+	return if var1 then reactModule.createElement("CanvasGroup", {
 		BackgroundTransparency = 1,
 		GroupTransparency = 0.5,
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, { Item = createElement }) else createElement

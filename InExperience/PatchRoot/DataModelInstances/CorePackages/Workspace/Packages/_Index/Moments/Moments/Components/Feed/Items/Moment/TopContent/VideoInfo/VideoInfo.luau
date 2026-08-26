@@ -13,7 +13,7 @@ local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionC
 local view = foundationModule.View
 local useSignalState = signalsReactModule.useSignalState
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: momentContextModule (ref), useSignalState (ref), useMomentsSession (ref), reactModule (ref), debugInfoModule (ref), creatorAttributionModule (ref), descriptionModule (ref), reactionsModule (ref), statusChipModule (ref), view (ref)
 	local isExperience = useSignalState(momentContextModule.useMoment().store.getData).kind == "experience"
 	local t = {}
@@ -27,6 +27,6 @@ return reactModule.memo(function(p0)
 	end
 	return reactModule.createElement(view, {
 		tag = "col align-x-left align-y-bottom grow gap-small auto-y",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, t)
 end)

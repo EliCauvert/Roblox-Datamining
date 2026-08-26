@@ -10,8 +10,8 @@ local ingestBatchModule = require(script.Parent.ingestBatch)
 local ingestOperationModule = require(script.Parent.IngestOperation)
 local fFlagAppChatIngestConversationMessagesModule = require(appChat.Flags.FFlagAppChatIngestConversationMessages)
 
-local function _(p0)
-	return if p0 ~= nil then p0 == "" else true
+local function _(p1)
+	return if p1 ~= nil then p1 == "" else true
 end
 
 local function upsertConversationResponse(p1, p2)
@@ -20,69 +20,69 @@ local function upsertConversationResponse(p1, p2)
 	if p2.source == conversationChannelsModule.Source.Channels and p2.type == conversationChannelsModule.Type.OneToOne and p2.participant_user_ids ~= nil then
 		p1.removeConversation(conversationChannelsModule.getFriendConversationId(p2.participant_user_ids))
 	end
-	local var9 = conversationChannelsModule.fromChannelsApi(p2)
-	p1.upsertConversation(var9)
+	local var1 = conversationChannelsModule.fromChannelsApi(p2)
+	p1.upsertConversation(var1)
 	
 	if fFlagAppChatIngestConversationMessagesModule then
-		local var10 = buildValidMessagesModule(var9.id, p2.messages or {})
+		local var2 = buildValidMessagesModule(var1.id, p2.messages or {})
 		
-		if #var10 > 0 then
-			ingestBatchModule(var9.id, var10, ingestOperationModule.Prepend)
+		if #var2 > 0 then
+			ingestBatchModule(var1.id, var2, ingestOperationModule.Prepend)
 		end
 	end
 end
 
 return {
-	beginFetch = function(p3, p4)
+	beginFetch = function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		p3.setListStatus({
+		p1.setListStatus({
 			isFetchingConversations = true,
-			isFetchingNextPage = not (if p4 ~= nil then p4 == "" else true),
+			isFetchingNextPage = not (if p2 ~= nil then p2 == "" else true),
 			error = cryoModule.None
 		})
 	end,
-	ingestSuccess = function(p5, p6, p7)
+	ingestSuccess = function(p1, p2, p3)
 		-- upvalues: getResponseBodyModule (ref), upsertConversationResponse (ref), cryoModule (ref)
-		local var11 = getResponseBodyModule(p7)
-		local var12 = if var11 ~= nil then nil else var11.next_cursor
-		local var13 = if var11 == nil or var11.conversations == nil then 0 else #var11.conversations
-		local var14 = if var12 ~= nil then var12 == "" else true
-		local listStatus = p5.getListStatus(false)
+		local var1 = getResponseBodyModule(p3)
+		local var2 = if var1 ~= nil then nil else var1.next_cursor
+		local var3 = if var1 == nil or var1.conversations == nil then 0 else #var1.conversations
+		local var4 = if var2 ~= nil then var2 == "" else true
+		local listStatus = p1.getListStatus(false)
 		
-		if var11 ~= nil and var11.conversations ~= nil then
-			for i, v in var11.conversations do
-				upsertConversationResponse(p5, v)
+		if var1 ~= nil and var1.conversations ~= nil then
+			for i, v in var1.conversations do
+				upsertConversationResponse(p1, v)
 			end
 		end
-		p5.setListStatus({
+		p1.setListStatus({
 			isFetchingConversations = false,
 			isFetchingNextPage = false,
-			hasFetchedInitialPage = if if p6 ~= nil then p6 == "" else true then true else listStatus.hasFetchedInitialPage,
-			oldestConversationIsFetched = var14,
-			isExhausted = var14,
-			nextCursor = if var14 then cryoModule.None else var12,
+			hasFetchedInitialPage = if if p2 ~= nil then p2 == "" else true then true else listStatus.hasFetchedInitialPage,
+			oldestConversationIsFetched = var4,
+			isExhausted = var4,
+			nextCursor = if var4 then cryoModule.None else var2,
 			error = cryoModule.None
 		})
 		
 		return {
-			cursor = p6,
-			nextCursor = var12,
-			conversationCount = var13,
-			responseBody = var11
+			cursor = p2,
+			nextCursor = var2,
+			conversationCount = var3,
+			responseBody = var1
 		}
 	end,
-	ingestFailure = function(p8, p9)
-		p8.setListStatus({
+	ingestFailure = function(p4, p5)
+		p4.setListStatus({
 			isFetchingConversations = false,
 			isFetchingNextPage = false,
-			error = p9
+			error = p5
 		})
 	end,
-	ingestConversationResponses = function(p10, p11)
+	ingestConversationResponses = function(p4, p5)
 		-- upvalues: upsertConversationResponse (ref)
-		if p11 == nil or p11.conversations == nil then return end
-		for i, v in p11.conversations do
-			upsertConversationResponse(p10, v)
+		if p5 == nil or p5.conversations == nil then return end
+		for i, v in p5.conversations do
+			upsertConversationResponse(p4, v)
 		end
 	end,
 	ingestConversationDetails = upsertConversationResponse

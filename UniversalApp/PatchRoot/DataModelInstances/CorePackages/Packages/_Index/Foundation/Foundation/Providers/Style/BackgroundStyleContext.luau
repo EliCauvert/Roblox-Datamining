@@ -2,16 +2,16 @@
 local reactModule = require(foundation.Parent.React)
 local _ = require(foundation.Components.Types)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
-local var3 = reactModule.createContext(nil)
+local var1 = reactModule.createContext(nil)
 
 function useBackgroundStyle()
-	-- upvalues: reactModule (ref), var3 (ref), useTokensModule (ref)
-	local var4 = reactModule.useContext(var3)
+	-- upvalues: reactModule (ref), var1 (ref), useTokensModule (ref)
+	local var2 = reactModule.useContext(var1)
 	
-	return if var4 == nil then useTokensModule().Color.Surface.Surface_0 else var4
+	return if var2 == nil then useTokensModule().Color.Surface.Surface_0 else var2
 end
 
 return {
 	useBackgroundStyle = useBackgroundStyle,
-	Provider = var3.Provider
+	Provider = var1.Provider
 }

@@ -9,29 +9,29 @@ local sduiActionType = sduiCoreSystemModule.SduiActionType
 
 local function noopCompletion(_, _) end
 
-return function(p0, _, p1, _)
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagLuaAppDismissUnlockUpsell (ref), onAmpWizardCompletionModule (ref), noopCompletion (ref), openAmpWizardContainer (ref)
-	local var4 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
-	if var4 == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if var1 == nil then
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.OpenAmpWizard
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	assert(var4, "actionParams must exist")
-	local featureName = var4.featureName
+	assert(var1, "actionParams must exist")
+	local featureName = var1.featureName
 	
 	if featureName == nil then
-		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: featureName",
 			propName = "featureName",
 			name = sduiActionType.OpenAmpWizard
-		}, p1.appPage)
+		}, p2.appPage)
 		
 		return
 	end
-	p1.dependencies.dispatch(openAmpWizardContainer(featureName, if fFlagLuaAppDismissUnlockUpsell then onAmpWizardCompletionModule else noopCompletion, nil, var4.entryPointEventCtx, nil, var4.nameSpace, var4.skipFacialAgeEstimationWebLinkModal))
+	p2.dependencies.dispatch(openAmpWizardContainer(featureName, if fFlagLuaAppDismissUnlockUpsell then onAmpWizardCompletionModule else noopCompletion, nil, var1.entryPointEventCtx, nil, var1.nameSpace, var1.skipFacialAgeEstimationWebLinkModal))
 end

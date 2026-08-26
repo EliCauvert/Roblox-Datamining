@@ -23,38 +23,38 @@ local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local var8 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+local var1 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 
-function ChatTimeoutCustomDialog(p0)
-	-- upvalues: useLayerCollector (ref), reactModule (ref), useTokens (ref), useStyle (ref), useLocalization (ref), constants (ref), useProperty (ref), inExperienceInterventionAnalyticsModule (ref), partialPageModal (ref), scrollView (ref), scrollBarVisibility (ref), reactFocusNavigationModule (ref), var8 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref), interventionContestFeedbackFooterModule (ref)
-	local var9 = useLayerCollector()
-	local var10 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
-	local var11 = reactModule.useRef(nil)
-	local var12, var13 = reactModule.useState(0)
-	local var14 = useTokens()
-	local var15 = useStyle()
-	local var16 = useLocalization(constants.localizationKeys)
-	local var17 = useProperty(var11, "AbsoluteSize")
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var10 (ref), p0 (ref)
-		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, var10.current, p0.eventId, p0.violatingChatLine, p0.duration)
-		p0.onDismiss()
-	end, { var10 })
+function ChatTimeoutCustomDialog(p1)
+	-- upvalues: useLayerCollector (ref), reactModule (ref), useTokens (ref), useStyle (ref), useLocalization (ref), constants (ref), useProperty (ref), inExperienceInterventionAnalyticsModule (ref), partialPageModal (ref), scrollView (ref), scrollBarVisibility (ref), reactFocusNavigationModule (ref), var1 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref), interventionContestFeedbackFooterModule (ref)
+	local var2 = useLayerCollector()
+	local var3 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
+	local var4 = reactModule.useRef(nil)
+	local var5, var6 = reactModule.useState(0)
+	local var7 = useTokens()
+	local var8 = useStyle()
+	local var9 = useLocalization(constants.localizationKeys)
+	local var10 = useProperty(var4, "AbsoluteSize")
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var3 (ref), p1 (ref)
+		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, var3.current, p1.eventId, p1.violatingChatLine, p1.duration)
+		p1.onDismiss()
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var10 (ref), p0 (ref)
-		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, var10.current, p0.eventId, p0.violatingChatLine, p0.duration)
-	end, { var10 })
+		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var3 (ref), p1 (ref)
+		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, var3.current, p1.eventId, p1.violatingChatLine, p1.duration)
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), var9 (ref), constants (copy), var13 (ref)
-		var13(math.min(var9.absoluteSize.Y - constants.UNIBAR_HEIGHT - constants.DIALOG_HEADER_HEIGHT, if var17 then var17.Y else 0))
-	end, { var9.absoluteSize.Y, var17 })
+		-- upvalues: var10 (ref), var2 (ref), constants (copy), var6 (ref)
+		var6(math.min(var2.absoluteSize.Y - constants.UNIBAR_HEIGHT - constants.DIALOG_HEADER_HEIGHT, if var10 then var10.Y else 0))
+	end, { var2.absoluteSize.Y, var10 })
 	
 	return reactModule.createElement(partialPageModal, {
-		title = var16.TextChatSuspensionText,
-		screenSize = var9.absoluteSize
+		title = var9.TextChatSuspensionText,
+		screenSize = var2.absoluteSize
 	}, {
 		ScrollView = reactModule.createElement(scrollView, {
-			Size = UDim2.new(1, 0, 0, var12),
+			Size = UDim2.new(1, 0, 0, var5),
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 1, 0),
@@ -62,7 +62,7 @@ function ChatTimeoutCustomDialog(p0)
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
 		}, {
-			FocusNavigationCoreScriptsProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var8 }, {
+			FocusNavigationCoreScriptsProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
 				FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
 					isIsolated = true,
 					isAutoFocusRoot = true,
@@ -74,21 +74,21 @@ function ChatTimeoutCustomDialog(p0)
 				}, {
 					InnerContent = reactModule.createElement(view, {
 						tag = "col gap-large align-x-center align-y-center padding-x-small padding-top-large",
-						ref = var11,
+						ref = var4,
 						Size = UDim2.new(1, -constants.SCROLL_BAR_WIDTH, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
 						ChatDisabledText = reactModule.createElement(text, {
 							LayoutOrder = 1,
 							TextWrapped = true,
-							Text = if p0.duration <= 60 then var16.CannotSend1MinText else useLocalization({
+							Text = if p1.duration <= 60 then var9.CannotSend1MinText else useLocalization({
 								value = {
 									constants.localizationKeys.CannotSendText,
-									number = math.ceil(p0.duration / 60)
+									number = math.ceil(p1.duration / 60)
 								}
 							}).value,
-							textStyle = var15.Theme.TextEmphasis,
-							fontStyle = var14.Typography.LabelLarge,
+							textStyle = var8.Theme.TextEmphasis,
+							fontStyle = var7.Typography.LabelLarge,
 							Size = UDim2.new(1, 0, 0, 0),
 							TextXAlignment = Enum.TextXAlignment.Center,
 							TextYAlignment = Enum.TextYAlignment.Center,
@@ -98,7 +98,7 @@ function ChatTimeoutCustomDialog(p0)
 							LayoutOrder = 2,
 							tag = "padding-small size-full-800 text-wrap",
 							TextWrapped = true,
-							Text = var16.MayLoseAccessText,
+							Text = var9.MayLoseAccessText,
 							AutomaticSize = Enum.AutomaticSize.Y
 						}),
 						UnderstandButtonFrame = reactModule.createElement(view, {
@@ -107,9 +107,9 @@ function ChatTimeoutCustomDialog(p0)
 							AutomaticSize = Enum.AutomaticSize.Y
 						}, {
 							UnderstandButton = reactModule.createElement(button, {
-								text = var16.IUnderstandText,
+								text = var9.IUnderstandText,
 								variant = buttonVariant.Standard,
-								onActivated = var18,
+								onActivated = var11,
 								fillBehavior = fillBehavior.Fill,
 								FillDirection = Enum.FillDirection.Horizontal
 							})
@@ -120,12 +120,12 @@ function ChatTimeoutCustomDialog(p0)
 							AutomaticSize = Enum.AutomaticSize.Y
 						}, {
 							FeedbackFooter = reactModule.createElement(interventionContestFeedbackFooterModule, {
-								onDismiss = p0.onDismiss,
-								renderTimestamp = var10.current,
+								onDismiss = p1.onDismiss,
+								renderTimestamp = var3.current,
 								interventionType = inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout,
-								eventId = p0.eventId,
-								violatingChatLine = p0.violatingChatLine,
-								duration = p0.duration
+								eventId = p1.eventId,
+								violatingChatLine = p1.violatingChatLine,
+								duration = p1.duration
 							})
 						})
 					})

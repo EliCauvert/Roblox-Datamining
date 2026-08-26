@@ -4,28 +4,28 @@ local _ = require(viewRecycler.Core.Layout.LayoutRuntime)
 local typesModule = require(viewRecycler.Core.Types)
 local staticPartsModule = require(viewRecycler.Core.Layout.staticParts)
 
-local function _(p0, p1)
-	if p1 < 0 or p1 >= 1e999 then
-		assert(false, `Layout.masonry: {p0} must be finite and non-negative`)
+local function _(p1, p2)
+	if p2 < 0 or p2 >= 1e999 then
+		assert(false, `Layout.masonry: {p1} must be finite and non-negative`)
 	end
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: typesModule (ref), dataSourceChangeTypeModule (ref), staticPartsModule (ref)
-	assert(type(p2.getItemLength) == "function", "Layout.masonry: getItemLength must be a function")
-	assert(p2.crossAxisCount ~= nil ~= (p2.crossAxisItemLength ~= nil), "Layout.masonry: provide exactly one of crossAxisCount or crossAxisItemLength")
+	assert(type(p1.getItemLength) == "function", "Layout.masonry: getItemLength must be a function")
+	assert(p1.crossAxisCount ~= nil ~= (p1.crossAxisItemLength ~= nil), "Layout.masonry: provide exactly one of crossAxisCount or crossAxisItemLength")
 	
-	if p2.crossAxisCount ~= nil then
-		assert(p2.crossAxisCount > 0 and p2.crossAxisCount % 1 == 0, "Layout.masonry: crossAxisCount must be a positive integer")
+	if p1.crossAxisCount ~= nil then
+		assert(p1.crossAxisCount > 0 and p1.crossAxisCount % 1 == 0, "Layout.masonry: crossAxisCount must be a positive integer")
 	end
-	if p2.crossAxisItemLength ~= nil then
-		assert(p2.crossAxisItemLength > 0 and p2.crossAxisItemLength < 1e999, "Layout.masonry: crossAxisItemLength must be finite and positive")
+	if p1.crossAxisItemLength ~= nil then
+		assert(p1.crossAxisItemLength > 0 and p1.crossAxisItemLength < 1e999, "Layout.masonry: crossAxisItemLength must be finite and positive")
 	end
-	local getItemLength = p2.getItemLength
-	local spacing = p2.spacing or 0
-	local crossAxisSpacing = p2.crossAxisSpacing or 0
-	local paddingBefore = p2.paddingBefore or 0
-	local paddingAfter = p2.paddingAfter or 0
+	local getItemLength = p1.getItemLength
+	local spacing = p1.spacing or 0
+	local crossAxisSpacing = p1.crossAxisSpacing or 0
+	local paddingBefore = p1.paddingBefore or 0
+	local paddingAfter = p1.paddingAfter or 0
 	
 	if spacing < 0 or spacing >= 1e999 then
 		assert(false, "Layout.masonry: spacing must be finite and non-negative")
@@ -39,21 +39,21 @@ return function(p2)
 	if paddingAfter < 0 or paddingAfter >= 1e999 then
 		assert(false, "Layout.masonry: paddingAfter must be finite and non-negative")
 	end
-	local crossAxisCount = p2.crossAxisCount or 1
+	local crossAxisCount = p1.crossAxisCount or 1
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
-	local var12 = 0
-	local var13 = true
+	local var1 = 0
+	local var2 = true
 	
 	local function _()
-		-- upvalues: var13 (write)
-		var13 = true
+		-- upvalues: var2 (write)
+		var2 = true
 	end
 	
 	local function rebuildGeometry()
-		-- upvalues: var13 (write), t_1 (ref), t_2 (ref), crossAxisCount (write), paddingBefore (ref), t (write), getItemLength (ref), crossAxisSpacing (ref), spacing (ref), var12 (write), paddingAfter (ref)
-		if not var13 then return end
+		-- upvalues: var2 (write), t_1 (ref), t_2 (ref), crossAxisCount (write), paddingBefore (ref), t (write), getItemLength (ref), crossAxisSpacing (ref), spacing (ref), var1 (write), paddingAfter (ref)
+		if not var2 then return end
 		table.clear(t_1)
 		table.clear(t_2)
 		local list = table.create(crossAxisCount, paddingBefore)
@@ -62,83 +62,83 @@ return function(p2)
 			list[i] = paddingBefore
 			t_2[i] = {}
 		end
-		local var17
+		local var3
 		for i_2 = 1, #t do
-			var17 = getItemLength(i_2)
+			var3 = getItemLength(i_2)
 			
-			if type(var17) ~= "number" or var17 <= 0 or var17 >= 1e999 then
+			if type(var3) ~= "number" or var3 <= 0 or var3 >= 1e999 then
 				assert(false, `Layout.masonry: getItemLength({i_2}) must return a finite positive number`)
 			end
-			local var18 = 1
-			local var19 = list[1]
+			local var4 = 1
+			local var5 = list[1]
 			
 			for i_1 = 2, crossAxisCount do
-				local var20 = list[i_1]
+				local var6 = list[i_1]
 				
-				if var20 < var19 then
-					var18 = i_1
-					var19 = var20
+				if var6 < var5 then
+					var4 = i_1
+					var5 = var6
 				end
 			end
 			t_1[i_2] = {
-				startOffset = var19,
-				length = var17,
-				crossAxisIndex = var18,
+				startOffset = var5,
+				length = var3,
+				crossAxisIndex = var4,
 				crossAxisCount = crossAxisCount,
 				crossAxisSpacing = crossAxisSpacing
 			}
-			table.insert(t_2[var18], i_2)
-			list[var18] = var19 + var17 + spacing
+			table.insert(t_2[var4], i_2)
+			list[var4] = var5 + var3 + spacing
 		end
 		if #t == 0 then
-			var12 = 0
-			var13 = false
+			var1 = 0
+			var2 = false
 			
 			return
 		end
-		local var21 = paddingBefore
+		local var7 = paddingBefore
 		
-		for var17 = 1, crossAxisCount do
-			var21 = math.max(var21, list[var17])
+		for var3 = 1, crossAxisCount do
+			var7 = math.max(var7, list[var3])
 		end
-		var12 = var21 - spacing + paddingAfter
-		var13 = false
+		var1 = var7 - spacing + paddingAfter
+		var2 = false
 	end
 	
-	local function firstIntersectingInColumn(p3, p4, p5)
+	local function firstIntersectingInColumn(p2, p3, p4)
 		-- upvalues: t_1 (ref)
-		if #p3 == 0 then
+		if #p2 == 0 then
 			return nil, nil
 		end
-		local var22 = 1
-		local p3Count = #p3
-		while var22 < p3Count do
-			local var24 = (var22 + p3Count) // 2
-			local var25 = t_1[p3[var24]]
+		local var8 = 1
+		local p3Count = #p2
+		while var8 < p3Count do
+			local var9 = (var8 + p3Count) // 2
+			local var10 = t_1[p2[var9]]
 			
-			if p4 < var25.startOffset + var25.length then
-				p3Count = var24
+			if p3 < var10.startOffset + var10.length then
+				p3Count = var9
 			else
-				var22 = var24 + 1
+				var8 = var9 + 1
 			end
 		end
-		local var26 = t_1[p3[var22]]
+		local var11 = t_1[p2[var8]]
 		
-		if var26.startOffset + var26.length <= p4 or p5 <= var26.startOffset then
+		if var11.startOffset + var11.length <= p3 or p4 <= var11.startOffset then
 			return nil, nil
 		end
-		var22 = var22
-		local p3Count_1 = #p3
-		while var22 < p3Count_1 do
-			local var28 = (var22 + p3Count_1 + 1) // 2
+		var8 = var8
+		local p3Count_1 = #p2
+		while var8 < p3Count_1 do
+			local var12 = (var8 + p3Count_1 + 1) // 2
 			
-			if t_1[p3[var28]].startOffset < p5 then
-				var22 = var28
+			if t_1[p2[var12]].startOffset < p4 then
+				var8 = var12
 			else
-				p3Count_1 = var28 - 1
+				p3Count_1 = var12 - 1
 			end
 		end
-		return p3[var22], p3[var22]
+		return p2[var8], p2[var8]
 	end
 	
 	return {
@@ -147,83 +147,83 @@ return function(p2)
 			return #t
 		end,
 		getContentLength = function()
-			-- upvalues: rebuildGeometry (ref), var12 (write)
+			-- upvalues: rebuildGeometry (ref), var1 (write)
 			rebuildGeometry()
 			
-			return var12
+			return var1
 		end,
-		getIntersectingIndexRange = function(p6, p7)
+		getIntersectingIndexRange = function(p5, p6)
 			-- upvalues: rebuildGeometry (ref), t (write), typesModule (copy), crossAxisCount (write), firstIntersectingInColumn (ref), t_2 (ref)
 			rebuildGeometry()
 			
-			if #t == 0 or p7 <= p6 then
+			if #t == 0 or p6 <= p5 then
 				return typesModule.EMPTY_INDEX_RANGE
 			end
-			local var29 = nil
-			local var30 = nil
+			local var13 = nil
+			local var14 = nil
 			
 			for i = 1, crossAxisCount do
-				local var31, var32 = firstIntersectingInColumn(t_2[i], p6, p7)
+				local var15, var16 = firstIntersectingInColumn(t_2[i], p5, p6)
 				
-				if var31 ~= nil then
-					var29 = if var29 == nil then var31 else math.min(var29, var31)
-					var30 = if var30 == nil then var32 else math.max(var30, var32)
+				if var15 ~= nil then
+					var13 = if var13 == nil then var15 else math.min(var13, var15)
+					var14 = if var14 == nil then var16 else math.max(var14, var16)
 				end
 			end
-			return if var29 == nil then typesModule.EMPTY_INDEX_RANGE else { firstIndex = var29, lastIndex = var30 }
+			return if var13 == nil then typesModule.EMPTY_INDEX_RANGE else { firstIndex = var13, lastIndex = var14 }
 		end,
-		expandIndexRange = function(p8, p9, p10)
+		expandIndexRange = function(p7, p8, p9)
 			-- upvalues: staticPartsModule (copy), t (write)
-			return staticPartsModule.expandItemRange(p8, p9, p10 or p9, #t)
+			return staticPartsModule.expandItemRange(p7, p8, p9 or p8, #t)
 		end,
-		getItemLayout = function(p11)
+		getItemLayout = function(p7)
 			-- upvalues: rebuildGeometry (ref), t_1 (ref)
 			rebuildGeometry()
-			local var33 = t_1[p11]
+			local var17 = t_1[p7]
 			
-			if var33 == nil then
-				assert(false, `Layout.masonry: item index {p11} is out of bounds`)
+			if var17 == nil then
+				assert(false, `Layout.masonry: item index {p7} is out of bounds`)
 			end
-			return var33
+			return var17
 		end,
 		updateItemMeasurement = staticPartsModule.updateItemMeasurementNoop,
 		requiresItemMeasurement = staticPartsModule.requiresItemMeasurementFalse,
-		applyDataSourceChange = function(p12)
-			-- upvalues: dataSourceChangeTypeModule (copy), t (write), var13 (write)
-			if p12.type == dataSourceChangeTypeModule.Reset then
-				t = table.clone(p12.keys)
-			elseif p12.type == dataSourceChangeTypeModule.Insert then
-				for i, v in p12.keys do
-					table.insert(t, p12.index + i - 1, v)
+		applyDataSourceChange = function(p7)
+			-- upvalues: dataSourceChangeTypeModule (copy), t (write), var2 (write)
+			if p7.type == dataSourceChangeTypeModule.Reset then
+				t = table.clone(p7.keys)
+			elseif p7.type == dataSourceChangeTypeModule.Insert then
+				for i, v in p7.keys do
+					table.insert(t, p7.index + i - 1, v)
 				end
-			elseif p12.type == dataSourceChangeTypeModule.Remove then
-				for i, v in p12.keys do
-					assert(t[p12.index] == v, "Layout.masonry: remove keys do not match current order")
-					table.remove(t, p12.index)
+			elseif p7.type == dataSourceChangeTypeModule.Remove then
+				for i, v in p7.keys do
+					assert(t[p7.index] == v, "Layout.masonry: remove keys do not match current order")
+					table.remove(t, p7.index)
 				end
-			elseif p12.type == dataSourceChangeTypeModule.Move then
-				assert(t[p12.fromIndex] == p12.key, "Layout.masonry: move key does not match current order")
-				table.remove(t, p12.fromIndex)
-				table.insert(t, p12.toIndex, p12.key)
-			elseif p12.type == dataSourceChangeTypeModule.Reorder then
-				t = table.clone(p12.keys)
+			elseif p7.type == dataSourceChangeTypeModule.Move then
+				assert(t[p7.fromIndex] == p7.key, "Layout.masonry: move key does not match current order")
+				table.remove(t, p7.fromIndex)
+				table.insert(t, p7.toIndex, p7.key)
+			elseif p7.type == dataSourceChangeTypeModule.Reorder then
+				t = table.clone(p7.keys)
 			end
-			var13 = true
+			var2 = true
 			
 			return true
 		end,
 		setViewportCrossAxisLength = function(vectorA)
-			-- upvalues: p2 (ref), crossAxisSpacing (ref), crossAxisCount (write), var13 (write)
-			if p2.crossAxisItemLength == nil then
+			-- upvalues: p1 (ref), crossAxisSpacing (ref), crossAxisCount (write), var2 (write)
+			if p1.crossAxisItemLength == nil then
 				return false
 			end
-			local maxValue = math.max(1, (vectorA + crossAxisSpacing) // (p2.crossAxisItemLength + crossAxisSpacing))
+			local maxValue = math.max(1, (vectorA + crossAxisSpacing) // (p1.crossAxisItemLength + crossAxisSpacing))
 			
 			if maxValue == crossAxisCount then
 				return false
 			end
 			crossAxisCount = maxValue
-			var13 = true
+			var2 = true
 			
 			return true
 		end,

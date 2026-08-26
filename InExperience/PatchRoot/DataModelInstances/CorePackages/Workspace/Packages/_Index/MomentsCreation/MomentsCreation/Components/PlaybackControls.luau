@@ -23,32 +23,32 @@ local useSignalBinding = signalsReactModule.useSignalBinding
 local useSignalState = signalsReactModule.useSignalState
 local getFormatTimeModule = require(momentsCreation.Utils.getFormatTime)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), signalsModule (ref), useSignalBinding (ref), getFormatTimeModule (ref), useSignalState (ref), view (ref), gradientBackdrop (ref), slider (ref), foundationModule (ref), iconButton (ref), pauseLarge (ref), playLarge (ref), speakerSlash (ref), speaker (ref), text (ref), twoArrowsFromCenter (ref), twoArrowsToCenter (ref)
-	local var8 = useDeviceInsets()
-	local var9 = useTokens()
-	local playback = p0.preview.playback
-	local var10, var11 = reactModule.useBinding(UDim2.fromScale(1, 0))
-	local var12 = reactModule.useRef(false)
-	local onSeek = p0.onSeek
+	local var1 = useDeviceInsets()
+	local var2 = useTokens()
+	local playback = p1.preview.playback
+	local var3, var4 = reactModule.useBinding(UDim2.fromScale(1, 0))
+	local var5 = reactModule.useRef(false)
+	local onSeek = p1.onSeek
 	
-	return reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = p0.layoutOrder }, {
+	return reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, {
 		GradientBackdrop = reactModule.createElement(gradientBackdrop, {
 			rotation = 270,
-			color3 = var9.Color.Common.Scrim.Color3,
-			size = var10
+			color3 = var2.Color.Common.Scrim.Color3,
+			size = var3
 		}),
 		Controls = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = "col gap-xxsmall size-full-0 auto-y",
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
-				-- upvalues: var11 (ref)
-				var11(UDim2.new(0, p1.AbsoluteSize.X, 1, 0))
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
+				-- upvalues: var4 (ref)
+				var4(UDim2.new(0, p2.AbsoluteSize.X, 1, 0))
 			end, {}),
 			padding = {
-				bottom = UDim.new(0, var9.Padding.Medium),
-				left = UDim.new(0, math.max(var8.left, var9.Padding.Large)),
-				right = UDim.new(0, math.max(var8.right, var9.Padding.Large))
+				bottom = UDim.new(0, var2.Padding.Medium),
+				left = UDim.new(0, math.max(var1.left, var2.Padding.Large)),
+				right = UDim.new(0, math.max(var1.right, var2.Padding.Large))
 			}
 		}, {
 			Slider = reactModule.createElement(slider, {
@@ -65,28 +65,28 @@ return function(p0)
 				size = foundationModule.Enums.InputSize.XSmall,
 				knobVisibility = foundationModule.Enums.Visibility.None,
 				variant = foundationModule.Enums.SliderVariant.Standard,
-				onValueChanged = reactModule.useCallback(function(p3)
+				onValueChanged = reactModule.useCallback(function(p2)
 					-- upvalues: playback (ref), onSeek (ref)
-					local var14 = p3 * playback.getDuration(false)
-					playback.seek(var14)
+					local var6 = p2 * playback.getDuration(false)
+					playback.seek(var6)
 					
 					if onSeek then
-						onSeek(var14)
+						onSeek(var6)
 					end
 				end, { playback, onSeek }),
 				onDragStarted = reactModule.useCallback(function()
-					-- upvalues: playback (ref), var12 (ref)
+					-- upvalues: playback (ref), var5 (ref)
 					if playback.getIsPlaying(false) then
-						var12.current = true
+						var5.current = true
 						playback.toggle()
 					end
 				end, { playback }),
 				onDragEnded = reactModule.useCallback(function()
-					-- upvalues: var12 (ref), playback (ref)
-					if var12.current and not playback.getIsPlaying(false) then
+					-- upvalues: var5 (ref), playback (ref)
+					if var5.current and not playback.getIsPlaying(false) then
 						playback.toggle()
 					end
-					var12.current = false
+					var5.current = false
 				end, { playback })
 			}),
 			ControlBar = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
@@ -118,9 +118,9 @@ return function(p0)
 					tag = "position-center-center anchor-center-center auto-xy text-body-medium content-emphasis",
 					Text = useSignalBinding(reactModule.useMemo(function()
 						-- upvalues: signalsModule (copy), getFormatTimeModule (copy), playback (ref)
-						return signalsModule.createComputed(function(p4)
+						return signalsModule.createComputed(function(p2)
 							-- upvalues: getFormatTimeModule (copy), playback (copy)
-							return `{getFormatTimeModule(playback.getPosition(p4))} / {getFormatTimeModule(playback.getDuration(p4))}`
+							return `{getFormatTimeModule(playback.getPosition(p2))} / {getFormatTimeModule(playback.getDuration(p2))}`
 						end)
 					end, { playback }))
 				}),
@@ -130,8 +130,8 @@ return function(p0)
 				}, {
 					FitModeToggle = reactModule.createElement(iconButton, {
 						LayoutOrder = 1,
-						icon = if p0.isFitMode then twoArrowsFromCenter else twoArrowsToCenter,
-						onActivated = p0.toggleFitMode,
+						icon = if p1.isFitMode then twoArrowsFromCenter else twoArrowsToCenter,
+						onActivated = p1.toggleFitMode,
 						size = foundationModule.Enums.InputSize.Small
 					})
 				})

@@ -31,27 +31,27 @@ return ixpUtilsModule.defineIXPTest({
 		return false
 	end,
 	variables = {
-		VrAppPanelWidthMultiplier = function(p0, _)
+		VrAppPanelWidthMultiplier = function(p1, _)
 			-- upvalues: fFlagVRPanelWidthIXPLocalOverrideEnabled (ref), fIntVrAppPanelWidthMultiplierPercentageOverride (ref)
 			if fFlagVRPanelWidthIXPLocalOverrideEnabled then
 				return fIntVrAppPanelWidthMultiplierPercentageOverride / 100
 			end
-			local var11 = tonumber(p0.vr_app_panel_width_multiplier_percentage)
+			local var1 = tonumber(p1.vr_app_panel_width_multiplier_percentage)
 			
-			return if var11 then var11 / 100 else nil
+			return if var1 then var1 / 100 else nil
 		end,
 		VrAppPanelCurvature = function(p1, _)
 			-- upvalues: fFlagVRPanelWidthIXPLocalOverrideEnabled (ref), fIntVrAppPanelCurvatureOverride (ref)
 			return if fFlagVRPanelWidthIXPLocalOverrideEnabled then fIntVrAppPanelCurvatureOverride else tonumber(p1.vr_app_panel_curvature) or nil
 		end,
-		VrAvatarPanelsSpreadMultiplier = function(p2, _)
+		VrAvatarPanelsSpreadMultiplier = function(p1, _)
 			-- upvalues: fFlagVRPanelWidthIXPLocalOverrideEnabled (ref), vrAvatarPanelsSpreadMultiplierPercentageOverrideFastInt (ref)
 			if fFlagVRPanelWidthIXPLocalOverrideEnabled then
 				return vrAvatarPanelsSpreadMultiplierPercentageOverrideFastInt / 100
 			end
-			local var12 = tonumber(p2.vr_avatar_panels_spread_multiplier_percentage)
+			local var1 = tonumber(p1.vr_avatar_panels_spread_multiplier_percentage)
 			
-			return if var12 then var12 / 100 else nil
+			return if var1 then var1 / 100 else nil
 		end,
 		VrAvatarPanelsDistanceOffset = function(value, _)
 			-- upvalues: fFlagVRPanelWidthIXPLocalOverrideEnabled (ref), vrAvatarPanelsDistanceOffsetOverrideFastString (ref)
@@ -69,14 +69,14 @@ return ixpUtilsModule.defineIXPTest({
 			-- upvalues: fFlagVRPanelWidthIXPLocalOverrideEnabled (ref), fStringVrSystemBarZOffSetOverride (ref)
 			return if fFlagVRPanelWidthIXPLocalOverrideEnabled then tonumber(fStringVrSystemBarZOffSetOverride) else tonumber(value.vr_system_bar_z_offset) or nil
 		end,
-		SystemBarHeightMultiplier = function(p3, _)
+		SystemBarHeightMultiplier = function(p1, _)
 			-- upvalues: fFlagVRPanelWidthIXPLocalOverrideEnabled (ref), systemBarHeightMultiplierPercentageOverrideFastInt (ref)
 			if fFlagVRPanelWidthIXPLocalOverrideEnabled then
 				return systemBarHeightMultiplierPercentageOverrideFastInt / 100
 			end
-			local var13 = tonumber(p3.system_bar_height_percentage)
+			local var1 = tonumber(p1.system_bar_height_percentage)
 			
-			return if var13 then var13 / 100 else nil
+			return if var1 then var1 / 100 else nil
 		end
 	}
 })

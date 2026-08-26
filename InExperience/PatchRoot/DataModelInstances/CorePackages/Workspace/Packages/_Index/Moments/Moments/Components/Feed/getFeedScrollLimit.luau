@@ -1,8 +1,8 @@
-﻿return function(p0, p1, p2)
-	if p0 and not p1 then
+﻿return function(p1, p2, p3)
+	if p1 and not p2 then
 		return nil
 	end
-	local var0 = p2()
+	local var1 = p3()
 	
-	return if var0.getIsInfiniteScrollEnabled(false) then nil else var0.getMaxMomentsBeforeEndState(false)
+	return if var1.getIsInfiniteScrollEnabled(false) then nil else var1.getMaxMomentsBeforeEndState(false)
 end

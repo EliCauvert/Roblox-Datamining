@@ -4,11 +4,11 @@ local presenceContextModule = require(script.Parent.PresenceContext)
 return {
 	useIsPresent = function()
 		-- upvalues: reactModule (ref), presenceContextModule (ref)
-		local var2 = reactModule.useContext(presenceContextModule)
+		local var1 = reactModule.useContext(presenceContextModule)
 		
-		return var2 == nil or var2.isPresent
+		return var1 == nil or var1.isPresent
 	end,
-	isPresent = function(p0)
-		return p0 == nil or p0.isPresent
+	isPresent = function(p1)
+		return p1 == nil or p1.isPresent
 	end
 }

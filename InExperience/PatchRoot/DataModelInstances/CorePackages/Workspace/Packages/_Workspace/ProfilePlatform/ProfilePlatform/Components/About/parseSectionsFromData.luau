@@ -22,16 +22,16 @@ local list = {
 }
 local list_1 = { "description" }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: enumsModule (ref), list_1 (ref), list (ref), t (ref), reactModule (ref)
 	local t_1 = {}
 	
-	for i, v in ipairs(if p1 == enumsModule.ProfileTypes.Contact then list_1 else list) do
-		local var8 = t[v]
-		local var9 = p0[v]
+	for i, v in ipairs(if p2 == enumsModule.ProfileTypes.Contact then list_1 else list) do
+		local var1 = t[v]
+		local var2 = p1[v]
 		
-		if var8 then
-			table.insert(t_1, reactModule.createElement(var8, { layoutOrder = i, [v] = var9, name = p2 }))
+		if var1 then
+			table.insert(t_1, reactModule.createElement(var1, { layoutOrder = i, [v] = var2, name = p3 }))
 		end
 	end
 	return t_1

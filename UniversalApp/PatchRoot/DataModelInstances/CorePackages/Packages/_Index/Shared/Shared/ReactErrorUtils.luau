@@ -1,63 +1,63 @@
 ﻿local invariantModule = require(script.Parent.invariant)
 local invokeGuardedCallbackImplModule = require(script.Parent.invokeGuardedCallbackImpl)
-local var2 = nil
-local var3 = false
-local var4 = nil
-local var5 = false
-local var6 = nil
+local var1 = nil
+local var2 = false
+local var3 = nil
+local var4 = false
+local var5 = nil
 local t = {
-	onError = function(p0)
-		-- upvalues: var3 (write), var4 (write)
-		var3 = true
-		var4 = p0
+	onError = function(p1)
+		-- upvalues: var2 (write), var3 (write)
+		var2 = true
+		var3 = p1
 	end
 }
 local t_1 = {
 	invokeGuardedCallback = function(...)
-		-- upvalues: var3 (write), var4 (write), invokeGuardedCallbackImplModule (ref), t (ref)
-		var3 = false
-		var4 = nil
+		-- upvalues: var2 (write), var3 (write), invokeGuardedCallbackImplModule (ref), t (ref)
+		var2 = false
+		var3 = nil
 		invokeGuardedCallbackImplModule(t, ...)
 	end
 }
 
 function t_1.invokeGuardedCallbackAndCatchFirstError(...)
-	-- upvalues: t_1 (ref), var3 (write), var2 (write), var5 (write), var6 (write)
+	-- upvalues: t_1 (ref), var2 (write), var1 (write), var4 (write), var5 (write)
 	t_1.invokeGuardedCallback(...)
 	
-	if var3 then
-		local var9 = var2()
+	if var2 then
+		local var6 = var1()
 		
-		if not var5 then
-			var5 = true
-			var6 = var9
+		if not var4 then
+			var4 = true
+			var5 = var6
 		end
 	end
 end
 
 function t_1.rethrowCaughtError()
-	-- upvalues: var5 (write), var6 (write)
-	if var5 then
-		local var10 = var6
-		var5 = false
-		var6 = nil
-		error(var10)
+	-- upvalues: var4 (write), var5 (write)
+	if var4 then
+		local var6 = var5
+		var4 = false
+		var5 = nil
+		error(var6)
 	end
 end
 
 function t_1.hasCaughtError()
-	-- upvalues: var3 (write)
-	return var3
+	-- upvalues: var2 (write)
+	return var2
 end
 
 function t_1.clearCaughtError()
-	-- upvalues: var3 (write), var4 (write), invariantModule (ref)
-	if var3 then
-		local var11 = var4
-		var3 = false
-		var4 = nil
+	-- upvalues: var2 (write), var3 (write), invariantModule (ref)
+	if var2 then
+		local var6 = var3
+		var2 = false
+		var3 = nil
 		
-		return var11
+		return var6
 	end
 	invariantModule(false, "clearCaughtError was called but no error was captured. This error is likely caused by a bug in React. Please file an issue.")
 	

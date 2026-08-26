@@ -37,27 +37,27 @@ local orientation = foundationModule.Enums.Orientation
 local iconName = foundationModule.Enums.IconName
 local getIconRichText = foundationModule.Utility.getIconRichText
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigation (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useProfileWrapperContextModule (ref), reactModule (ref), avatarSaveContext (ref), robloxAppHooksModule (ref), enumsModule (ref), useLocalization (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (ref), eventNamesModule (ref), purchaseBulkItemsModule (ref), handlePurchaseItemsSuccessModule (ref), getIsInsufficientRobuxError (ref), setCurrentToastMessage (ref), numberLocalization (ref), localizationService (ref), getIconRichText (ref), iconName (ref), view (ref), text (ref), fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (ref), inputHandlersModule (ref), fFlagProfileInspectAndBuyAutoFocusModule (ref), reactFocusNavigationModule (ref), dialog (ref), dialogSize (ref), checkbox (ref), inputSize (ref), orientation (ref), buttonVariant (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref)
-	local var15 = useNavigation()
-	local var16 = useProfileAnalyticsContextModule()
-	local var17 = useDispatch()
-	local var18 = useProfileWrapperContextModule()
-	local var19 = reactModule.useContext(avatarSaveContext)
-	local params = p0.navigation.state.params or {}
+	local var1 = useNavigation()
+	local var2 = useProfileAnalyticsContextModule()
+	local var3 = useDispatch()
+	local var4 = useProfileWrapperContextModule()
+	local var5 = reactModule.useContext(avatarSaveContext)
+	local params = p1.navigation.state.params or {}
 	local totalPrice = params.totalPrice or 0
 	local purchasableLineItems = params.purchasableLineItems or {}
 	local userId = params.userId or ""
 	local purchasedWearIds = params.purchasedWearIds or {}
 	local ownedAssetIds = params.ownedAssetIds or {}
 	local wearTypeMap = params.wearTypeMap or {}
-	local var27 = robloxAppHooksModule.useLocalRobuxBalance()
-	local var28 = if var27 ~= nil then params.robuxBalance or 0 else var27
-	local var29 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), enumsModule (copy), totalPrice (ref), var28 (ref)
-		var15.navigate(enumsModule.Screens.InsufficientRobuxDialog, { totalPrice = totalPrice, robuxBalance = var28 })
-	end, { var15, totalPrice, var28 })
-	local var30 = useLocalization({
+	local var6 = robloxAppHooksModule.useLocalRobuxBalance()
+	local var7 = if var6 ~= nil then params.robuxBalance or 0 else var6
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), enumsModule (copy), totalPrice (ref), var7 (ref)
+		var1.navigate(enumsModule.Screens.InsufficientRobuxDialog, { totalPrice = totalPrice, robuxBalance = var7 })
+	end, { var1, totalPrice, var7 })
+	local var9 = useLocalization({
 		buyTitle = "IAPExperience.PurchasePrompt.Header.BuyAvatar",
 		buyAction = "IAPExperience.PurchasePrompt.Action.Buy",
 		totalPrice = "IAPExperience.PurchasePrompt.Label.TotalPriceV2",
@@ -73,74 +73,74 @@ return function(p0)
 			numItems = #purchasableLineItems
 		}
 	})
-	local var31 = reactModule.useMemo(function()
-		-- upvalues: var30 (ref)
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: var9 (ref)
 		return {
-			purchaseSuccessSingular = var30.purchaseSuccessSingular,
-			purchaseSuccessPlural = var30.purchaseSuccessPlural,
-			purchasePartialFailure = var30.purchasePartialFailure
+			purchaseSuccessSingular = var9.purchaseSuccessSingular,
+			purchaseSuccessPlural = var9.purchaseSuccessPlural,
+			purchasePartialFailure = var9.purchasePartialFailure
 		}
 	end, {
-		var30.purchaseSuccessSingular,
-		var30.purchaseSuccessPlural,
-		var30.purchasePartialFailure
+		var9.purchaseSuccessSingular,
+		var9.purchaseSuccessPlural,
+		var9.purchasePartialFailure
 	})
-	local var32, var33 = reactModule.useState(false)
-	local var34, var35 = reactModule.useState(true)
-	local var36 = reactModule.useCallback(function()
-		-- upvalues: var32 (ref), var15 (ref)
-		if var32 then
+	local var11, var12 = reactModule.useState(false)
+	local var13, var14 = reactModule.useState(true)
+	local var15 = reactModule.useCallback(function()
+		-- upvalues: var11 (ref), var1 (ref)
+		if var11 then
 			return
 		end
-		var15.goBack()
-	end, { var32, var15 })
-	local var37 = reactModule.useCallback(function()
-		-- upvalues: var32 (ref), purchasableLineItems (ref), var33 (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (copy), var16 (ref), eventNamesModule (copy), var18 (ref), purchaseBulkItemsModule (copy), userId (ref), handlePurchaseItemsSuccessModule (copy), var34 (ref), purchasedWearIds (ref), ownedAssetIds (ref), wearTypeMap (ref), var19 (ref), var17 (ref), var31 (ref), var15 (ref), getIsInsufficientRobuxError (copy), var29 (ref), setCurrentToastMessage (copy), var30 (ref)
-		if var32 or #purchasableLineItems == 0 then return end
-		var33(true)
+		var1.goBack()
+	end, { var11, var1 })
+	local var16 = reactModule.useCallback(function()
+		-- upvalues: var11 (ref), purchasableLineItems (ref), var12 (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (copy), var2 (ref), eventNamesModule (copy), var4 (ref), purchaseBulkItemsModule (copy), userId (ref), handlePurchaseItemsSuccessModule (copy), var13 (ref), purchasedWearIds (ref), ownedAssetIds (ref), wearTypeMap (ref), var5 (ref), var3 (ref), var10 (ref), var1 (ref), getIsInsufficientRobuxError (copy), var8 (ref), setCurrentToastMessage (copy), var9 (ref)
+		if var11 or #purchasableLineItems == 0 then return end
+		var12(true)
 		
 		if fFlagSocialEnableProfileInspectAndBuyAnalytics then
-			var16.fireAnalyticsEvent(eventNamesModule.InspectAvatarPurchaseConfirmed, { profileSessionId = var18.profileSessionId })
+			var2.fireAnalyticsEvent(eventNamesModule.InspectAvatarPurchaseConfirmed, { profileSessionId = var4.profileSessionId })
 		else
-			var16.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, { btnContext = "InspectAvatarBuyAll" })
+			var2.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, { btnContext = "InspectAvatarBuyAll" })
 		end
 		purchaseBulkItemsModule({ userId = userId, lineItems = purchasableLineItems }):andThen(function(p2)
-			-- upvalues: handlePurchaseItemsSuccessModule (copy), var34 (copy), purchasedWearIds (copy), ownedAssetIds (copy), wearTypeMap (copy), var18 (copy), var19 (copy), var17 (copy), var31 (copy), var15 (copy)
+			-- upvalues: handlePurchaseItemsSuccessModule (copy), var13 (copy), purchasedWearIds (copy), ownedAssetIds (copy), wearTypeMap (copy), var4 (copy), var5 (copy), var3 (copy), var10 (copy), var1 (copy)
 			handlePurchaseItemsSuccessModule({
 				result = p2,
-				isWearAfterPurchaseChecked = var34,
+				isWearAfterPurchaseChecked = var13,
 				purchasedWearIds = purchasedWearIds,
 				ownedAssetIds = ownedAssetIds,
 				wearTypeMap = wearTypeMap,
-				profileWrapperContext = var18,
-				avatarSaveContext = var19,
-				dispatch = var17,
-				localized = var31
+				profileWrapperContext = var4,
+				avatarSaveContext = var5,
+				dispatch = var3,
+				localized = var10
 			})
-			var15.goBack()
-		end):catch(function(p1)
-			-- upvalues: getIsInsufficientRobuxError (copy), var29 (copy), var17 (copy), setCurrentToastMessage (copy), var30 (copy), var15 (copy)
-			if getIsInsufficientRobuxError(p1) then
-				var29()
+			var1.goBack()
+		end):catch(function(p2)
+			-- upvalues: getIsInsufficientRobuxError (copy), var8 (copy), var3 (copy), setCurrentToastMessage (copy), var9 (copy), var1 (copy)
+			if getIsInsufficientRobuxError(p2) then
+				var8()
 				
 				return
 			end
-			var17(setCurrentToastMessage({
+			var3(setCurrentToastMessage({
 				isLocalized = true,
 				toastType = "PurchaseMessage",
-				toastMessage = var30.purchaseFailed
+				toastMessage = var9.purchaseFailed
 			}))
-			var15.goBack()
+			var1.goBack()
 		end):finally(function()
-			-- upvalues: var33 (copy)
-			var33(false)
+			-- upvalues: var12 (copy)
+			var12(false)
 		end)
 	end, {
-		var32, purchasableLineItems, userId, purchasedWearIds, ownedAssetIds,
-		wearTypeMap, var34, var16, var15, var17, var31, var18, var19, var29,
-		var30.purchaseFailed
+		var11, purchasableLineItems, userId, purchasedWearIds, ownedAssetIds,
+		wearTypeMap, var13, var2, var1, var3, var10, var4, var5, var8,
+		var9.purchaseFailed
 	})
-	local var38 = reactModule.createElement(view, {
+	local var17 = reactModule.createElement(view, {
 		LayoutOrder = 1,
 		tag = "size-full-1300 padding-left-xxsmall padding-right-xxsmall padding-top-small padding-bottom-large"
 	}, {
@@ -155,7 +155,7 @@ return function(p0)
 				Label = reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "auto-xy text-title-medium content-default text-align-x-left padding-y-xsmall",
-					Text = var30.totalPrice
+					Text = var9.totalPrice
 				})
 			}),
 			RightSide = reactModule.createElement(view, {
@@ -175,42 +175,42 @@ return function(p0)
 			})
 		})
 	})
-	local var39 = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.useMemo(function()
-		-- upvalues: inputHandlersModule (copy), var36 (ref)
-		return inputHandlersModule.onRelease(function(p3)
-			-- upvalues: var36 (copy)
-			p3:cancel()
-			var36()
+	local var18 = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.useMemo(function()
+		-- upvalues: inputHandlersModule (copy), var15 (ref)
+		return inputHandlersModule.onRelease(function(p2)
+			-- upvalues: var15 (copy)
+			p2:cancel()
+			var15()
 		end)
-	end, { var36 }) else nil
-	local var40 = nil
-	local var41 = nil
+	end, { var15 }) else nil
+	local var19 = nil
+	local var20 = nil
 	
 	if fFlagProfileInspectAndBuyAutoFocusModule then
-		local var42, var43 = reactFocusNavigationModule.useDefaultFocusBehavior()
-		var40 = var42
-		var41 = var43
+		local var21, var22 = reactFocusNavigationModule.useDefaultFocusBehavior()
+		var19 = var21
+		var20 = var22
 	end
-	local var44 = reactModule.createElement(dialog.Root, {
+	local var23 = reactModule.createElement(dialog.Root, {
 		size = dialogSize.Small,
-		onClose = var36,
-		ref = if fFlagProfileInspectAndBuyAutoFocusModule then var41 else nil,
+		onClose = var15,
+		ref = if fFlagProfileInspectAndBuyAutoFocusModule then var20 else nil,
 		hasBackdrop = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then true else nil
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var30.buyTitle }),
+		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var9.buyTitle }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			Body = reactModule.createElement(view, { tag = "col gap-medium auto-y size-full-0 align-x-left" }, {
-				PriceTotal = var38,
+				PriceTotal = var17,
 				WearCheckbox = reactModule.createElement(checkbox, {
 					LayoutOrder = 2,
-					label = var30.wearAfterPurchase,
+					label = var9.wearAfterPurchase,
 					size = inputSize.XSmall,
-					isChecked = var34,
+					isChecked = var13,
 					onActivated = function()
-						-- upvalues: var35 (ref), var34 (ref)
-						var35(not var34)
+						-- upvalues: var14 (ref), var13 (ref)
+						var14(not var13)
 					end,
-					isDisabled = var32
+					isDisabled = var11
 				})
 			})
 		}),
@@ -219,10 +219,10 @@ return function(p0)
 			orientation = orientation.Horizontal,
 			actions = {
 				{
-					text = var30.buyAction,
+					text = var9.buyAction,
 					variant = buttonVariant.Emphasis,
-					onActivated = var37,
-					ref = if fFlagProfileInspectAndBuyAutoFocusModule then var40 else nil
+					onActivated = var16,
+					ref = if fFlagProfileInspectAndBuyAutoFocusModule then var19 else nil
 				}
 			}
 		})
@@ -233,7 +233,7 @@ return function(p0)
 		isIsolated = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay,
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = { handler = var39 }
+			[focusNavigationEventNameEnum.NavigateBack] = { handler = var18 }
 		}
-	}, { Dialog = var44 }) else var44
+	}, { Dialog = var23 }) else var23
 end

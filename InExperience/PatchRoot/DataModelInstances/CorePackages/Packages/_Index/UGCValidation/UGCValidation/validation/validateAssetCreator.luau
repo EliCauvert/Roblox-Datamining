@@ -16,65 +16,65 @@ local getFStringUGCValidationReferenceMeshIdWhitelistForIECModule = require(pare
 local function getWhitelistIds()
 	-- upvalues: getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref)
 	local t = {}
-	local var12 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule()
+	local var1 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule()
 	
-	if #var12 == 0 then
+	if #var1 == 0 then
 		return t
 	end
-	for i in string.gmatch(var12, "([^,%s]+)") do
+	for i in string.gmatch(var1, "([^,%s]+)") do
 		t[i] = true
 	end
 	return t
 end
 
-local function _(p0, p1, p2, p3, p4)
+local function _(p1, p2, p3, p4, p5)
 	-- upvalues: promiseModule (ref), httpService (ref), constantsModule (ref)
-	return if #p1 == 0 then promiseModule.resolve() else promiseModule.new(function(p5, p6)
-		-- upvalues: httpService (copy), p1 (ref), p2 (ref), p4 (ref), p0 (ref), constantsModule (copy), p3 (ref)
+	return if #p2 == 0 then promiseModule.resolve() else promiseModule.new(function(p6, p7)
+		-- upvalues: httpService (copy), p2 (ref), p3 (ref), p5 (ref), p1 (ref), constantsModule (copy), p4 (ref)
 		httpService:RequestInternal({
 			Method = "POST",
-			Url = p0,
-			Body = httpService:JSONEncode({ assetIds = p1, restrictedEntities = p2, universeId = p4 }),
+			Url = p1,
+			Body = httpService:JSONEncode({ assetIds = p2, restrictedEntities = p3, universeId = p5 }),
 			Headers = {
-				[constantsModule.ExperienceAuthHeaderKey] = p3,
+				[constantsModule.ExperienceAuthHeaderKey] = p4,
 				[constantsModule.ContentType] = constantsModule.ApplicationJson
 			}
-		}):Start(function(p7, p8)
-			-- upvalues: httpService (copy), p5 (ref), p6 (ref)
-			if p7 and p8.StatusCode == 200 then
-				p5(httpService:JSONDecode(p8.Body))
+		}):Start(function(p8, p9)
+			-- upvalues: httpService (copy), p6 (ref), p7 (ref)
+			if p8 and p9.StatusCode == 200 then
+				p6(httpService:JSONDecode(p9.Body))
 				
 				return
 			end
-			p6()
+			p7()
 		end)
 	end)
 end
 
-return function(value, p9)
+return function(value, p1)
 	-- upvalues: formattedText (ref), failureReasonsAccumulatorModule (ref), UGCValidationMaxAssetSizeAllowedFastInt (ref), analyticsModule (ref), UGCValidationCanPublishRequestPageSizeFastInt (ref), promiseModule (ref), httpService (ref), constantsModule (ref), getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref), getWhitelistIds (ref)
-	local isServer = p9.isServer
-	local var13 = if p9.restrictedUserIds then p9.restrictedUserIds else {}
-	local token = p9.token
-	local universeId = p9.universeId
+	local isServer = p1.isServer
+	local var2 = if p1.restrictedUserIds then p1.restrictedUserIds else {}
+	local token = p1.token
+	local universeId = p1.universeId
 	local text = formattedText .. (if isServer then "packages-api/v1/rcc/canPublish" else "packages-api/v1/canPublish")
 	local t = { User = {}, Group = {} }
-	local var16 = failureReasonsAccumulatorModule.new()
+	local var3 = failureReasonsAccumulatorModule.new()
 	local t_1 = {}
 	local t_2 = {}
-	local var19 = 0
+	local var4 = 0
 	
-	for i, v in ipairs(var13) do
+	for i, v in ipairs(var2) do
 		t[v.creatorType][tonumber(v.id)] = true
 	end
 	for i_1, v_1 in value do
 		if not t_1[i_1] then
-			var19 += 1
+			var4 += 1
 			t_1[i_1] = true
 		end
 	end
-	if UGCValidationMaxAssetSizeAllowedFastInt < var19 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateAssetCreator_TooManyDependencies, nil, p9)
+	if UGCValidationMaxAssetSizeAllowedFastInt < var4 then
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateAssetCreator_TooManyDependencies, nil, p1)
 		
 		return false, {
 			"Upload of model has too many children assets (Meshes, Textures, etc.) and cannot be processed as is. You need to rearrange the model."
@@ -86,86 +86,86 @@ return function(value, p9)
 		table.insert(t_3, i_2)
 		
 		if UGCValidationCanPublishRequestPageSizeFastInt <= #t_3 then
-			table.insert(t_2, if #t_3 == 0 then promiseModule.resolve() else promiseModule.new(function(p10, p11)
-				-- upvalues: httpService (copy), t_3 (ref), var13 (ref), universeId (ref), text (ref), constantsModule (copy), token (ref)
+			table.insert(t_2, if #t_3 == 0 then promiseModule.resolve() else promiseModule.new(function(p2, p3)
+				-- upvalues: httpService (copy), t_3 (ref), var2 (ref), universeId (ref), text (ref), constantsModule (copy), token (ref)
 				httpService:RequestInternal({
 					Method = "POST",
 					Url = text,
 					Body = httpService:JSONEncode({
 						assetIds = t_3,
-						restrictedEntities = var13,
+						restrictedEntities = var2,
 						universeId = universeId
 					}),
 					Headers = {
 						[constantsModule.ExperienceAuthHeaderKey] = token,
 						[constantsModule.ContentType] = constantsModule.ApplicationJson
 					}
-				}):Start(function(p12, p13)
-					-- upvalues: httpService (copy), p10 (ref), p11 (ref)
-					if p12 and p13.StatusCode == 200 then
-						p10(httpService:JSONDecode(p13.Body))
+				}):Start(function(p4, p5)
+					-- upvalues: httpService (copy), p2 (ref), p3 (ref)
+					if p4 and p5.StatusCode == 200 then
+						p2(httpService:JSONDecode(p5.Body))
 						
 						return
 					end
-					p11()
+					p3()
 				end)
 			end))
 			t_3 = {}
 		end
 	end
 	if #t_3 > 0 then
-		table.insert(t_2, if #t_3 == 0 then promiseModule.resolve() else promiseModule.new(function(p14, p15)
-			-- upvalues: httpService (copy), t_3 (ref), var13 (ref), universeId (ref), text (ref), constantsModule (copy), token (ref)
+		table.insert(t_2, if #t_3 == 0 then promiseModule.resolve() else promiseModule.new(function(p2, p3)
+			-- upvalues: httpService (copy), t_3 (ref), var2 (ref), universeId (ref), text (ref), constantsModule (copy), token (ref)
 			httpService:RequestInternal({
 				Method = "POST",
 				Url = text,
 				Body = httpService:JSONEncode({
 					assetIds = t_3,
-					restrictedEntities = var13,
+					restrictedEntities = var2,
 					universeId = universeId
 				}),
 				Headers = {
 					[constantsModule.ExperienceAuthHeaderKey] = token,
 					[constantsModule.ContentType] = constantsModule.ApplicationJson
 				}
-			}):Start(function(p16, p17)
-				-- upvalues: httpService (copy), p14 (ref), p15 (ref)
-				if p16 and p17.StatusCode == 200 then
-					p14(httpService:JSONDecode(p17.Body))
+			}):Start(function(p4, p5)
+				-- upvalues: httpService (copy), p2 (ref), p3 (ref)
+				if p4 and p5.StatusCode == 200 then
+					p2(httpService:JSONDecode(p5.Body))
 					
 					return
 				end
-				p15()
+				p3()
 			end)
 		end))
 	end
-	local var21, var22 = promiseModule.all(t_2):await()
+	local var5, var6 = promiseModule.all(t_2):await()
 	
-	if not var21 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateAssetCreator_FailedToLoad, nil, p9)
+	if not var5 then
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateAssetCreator_FailedToLoad, nil, p1)
 		
 		return false, {
 			"Failed to load detailed information for model assets. Make sure all model assets exist and try again."
 		}
 	end
-	local var23 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule() ~= ""
-	local var24 = if var23 then getWhitelistIds() else {}
+	local var7 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule() ~= ""
+	local var8 = if var7 then getWhitelistIds() else {}
 	
-	for i_3, v_3 in var22 do
+	for i_3, v_3 in var6 do
 		for i_4, v_4 in pairs(v_3.result) do
-			local var25 = v_4
+			local var9 = v_4
 			
-			if var23 then
-				var25 = v_4 or var24[i_4]
+			if var7 then
+				var9 = v_4 or var8[i_4]
 			end
-			if not var25 then
-				analyticsModule.reportFailure(analyticsModule.ErrorType.validateAssetCreator_DependencyNotOwnedByCreator, nil, p9)
+			if not var9 then
+				analyticsModule.reportFailure(analyticsModule.ErrorType.validateAssetCreator_DependencyNotOwnedByCreator, nil, p1)
 			end
-			local var26 = value[i_4]
-			var16:updateReasons(var25, {
-				string.format("%s.%s ( %s ) being used is not owned by the experience creator or player. You can only publish assets that you own.", var26.instance:GetFullName(), var26.fieldName, i_4)
+			local var10 = value[i_4]
+			var3:updateReasons(var9, {
+				string.format("%s.%s ( %s ) being used is not owned by the experience creator or player. You can only publish assets that you own.", var10.instance:GetFullName(), var10.fieldName, i_4)
 			})
 		end
 	end
-	return var16:getFinalResults()
+	return var3:getFinalResults()
 end

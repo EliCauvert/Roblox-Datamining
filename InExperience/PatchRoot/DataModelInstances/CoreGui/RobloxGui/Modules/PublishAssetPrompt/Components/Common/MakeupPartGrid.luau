@@ -16,89 +16,89 @@ local t = {
 	[Enum.AvatarAssetType.EyelashAccessory] = "Eyelash"
 }
 
-local function getItemsFromFolder(p0, p1, p2, p3)
+local function getItemsFromFolder(p1, p2, p3, p4)
 	-- upvalues: getFFlagUploadMakeupSupportModule (ref), t (ref)
 	local t_1 = {}
 	
-	for i, v in ipairs(p0:GetChildren()) do
+	for i, v in ipairs(p1:GetChildren()) do
 		if v:IsA("Decal") or v:IsA("Accessory") then
-			local var10 = nil
-			local var11 = p1
-			local var12 = if p2 and p2[i] then p2[i].assetType else nil
+			local var1 = nil
+			local var2 = p2
+			local var3 = if p3 and p3[i] then p3[i].assetType else nil
 			
-			if p3 then
+			if p4 then
 				if getFFlagUploadMakeupSupportModule() then
-					var11 = p1 .. " - " .. (if var12 and t[var12] then t[var12] else v.Name)
+					var2 = p2 .. " - " .. (if var3 and t[var3] then t[var3] else v.Name)
 				else
-					var10 = p1
-					var11 = if var12 and t[var12] then t[var12] else v.Name
+					var1 = p2
+					var2 = if var3 and t[var3] then t[var3] else v.Name
 				end
 			end
 			table.insert(t_1, {
 				asset = v,
-				assetType = var12,
-				bodyName = var10,
-				partName = var11,
-				LayoutOrder = if p2 and p2[i] and p2[i].sortOrder then p2[i].sortOrder else i
+				assetType = var3,
+				bodyName = var1,
+				partName = var2,
+				LayoutOrder = if p3 and p3[i] and p3[i].sortOrder then p3[i].sortOrder else i
 			})
 		end
 	end
-	table.sort(t_1, function(p4, p5)
-		return (p4.LayoutOrder or 0) < (p5.LayoutOrder or 0)
+	table.sort(t_1, function(p5, p6)
+		return (p5.LayoutOrder or 0) < (p6.LayoutOrder or 0)
 	end)
 	
 	return t_1
 end
 
-return function(p6)
+return function(p5)
 	-- upvalues: reactModule (ref), getItemsFromFolder (ref), t (ref), getFFlagUploadMakeupSupportModule (ref), constantsModule (ref), avatarItemCardModule (ref), itemTile (ref), defaultMetricsGridView (ref), gridMetrics (ref), vector2 (ref)
-	local var13, var14 = reactModule.useState({})
-	local var15 = p6.showAssetTypeInLabel == nil or p6.showAssetTypeInLabel
+	local var4, var5 = reactModule.useState({})
+	local var6 = p5.showAssetTypeInLabel == nil or p5.showAssetTypeInLabel
 	reactModule.useEffect(function()
-		-- upvalues: p6 (ref), var14 (ref), getItemsFromFolder (copy), var15 (ref), t (copy)
-		if p6.makeupFolder then
-			var14(getItemsFromFolder(p6.makeupFolder, p6.name, p6.makeupEntries, var15))
+		-- upvalues: p5 (ref), var5 (ref), getItemsFromFolder (copy), var6 (ref), t (copy)
+		if p5.makeupFolder then
+			var5(getItemsFromFolder(p5.makeupFolder, p5.name, p5.makeupEntries, var6))
 			
 			return
-		elseif not p6.singleDecal then
-			var14({ [1] = {}, [2] = {} })
+		elseif not p5.singleDecal then
+			var5({ [1] = {}, [2] = {} })
 			
 			return
 		end
 		local name = nil
-		local name_1 = p6.name
-		local singleAssetType = p6.singleAssetType
+		local name_1 = p5.name
+		local singleAssetType = p5.singleAssetType
 		
-		if var15 then
-			name = p6.name
-			name_1 = if singleAssetType and t[singleAssetType] then t[singleAssetType] else p6.singleDecal.Name
+		if var6 then
+			name = p5.name
+			name_1 = if singleAssetType and t[singleAssetType] then t[singleAssetType] else p5.singleDecal.Name
 		end
-		var14({
+		var5({
 			{
 				LayoutOrder = 1,
-				asset = p6.singleDecal,
+				asset = p5.singleDecal,
 				assetType = singleAssetType,
 				bodyName = name,
 				partName = name_1
 			}
 		})
-	end, { p6.makeupFolder, p6.singleDecal })
+	end, { p5.makeupFolder, p5.singleDecal })
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), getFFlagUploadMakeupSupportModule (copy), var15 (ref), t (copy), p6 (ref), var14 (ref)
-		if var13[1] and var13[1].asset then
+		-- upvalues: var4 (ref), getFFlagUploadMakeupSupportModule (copy), var6 (ref), t (copy), p5 (ref), var5 (ref)
+		if var4[1] and var4[1].asset then
 			local t_1 = {}
 			
-			for i, v in var13 do
+			for i, v in var4 do
 				local bodyName = v.bodyName
 				local partName = v.partName
 				
 				if getFFlagUploadMakeupSupportModule() then
-					partName = if var15 then p6.name .. " - " .. (if v.assetType then t[v.assetType] else "") else p6.name
+					partName = if var6 then p5.name .. " - " .. (if v.assetType then t[v.assetType] else "") else p5.name
 					bodyName = nil
-				elseif var15 then
-					bodyName = p6.name
+				elseif var6 then
+					bodyName = p5.name
 				else
-					partName = p6.name
+					partName = p5.name
 				end
 				t_1[i] = {
 					asset = v.asset,
@@ -108,34 +108,34 @@ return function(p6)
 					LayoutOrder = v.LayoutOrder
 				}
 			end
-			var14(t_1)
+			var5(t_1)
 		end
-	end, { p6.name })
-	local var16 = if p6.screenSize.X < p6.screenSize.Y then constantsModule.ItemCardWidthPortrait else constantsModule.ItemCardWidthLandscape
+	end, { p5.name })
+	local var7 = if p5.screenSize.X < p5.screenSize.Y then constantsModule.ItemCardWidthPortrait else constantsModule.ItemCardWidthLandscape
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p6.LayoutOrder
+		LayoutOrder = p5.LayoutOrder
 	}, {
 		Grid = reactModule.createElement(defaultMetricsGridView, {
-			getItemHeight = function(p7)
-				return p7 * 1.333333333333
+			getItemHeight = function(p6)
+				return p6 * 1.333333333333
 			end,
-			getItemMetrics = gridMetrics.makeCustomMetricsGetter({ minimumItemsPerRow = 2, minimumItemWidth = var16 }),
-			renderItem = reactModule.useCallback(function(p8)
-				-- upvalues: reactModule (copy), avatarItemCardModule (copy), var16 (ref), itemTile (copy)
-				return if p8.asset then reactModule.createElement(avatarItemCardModule, {
-					asset = p8.asset,
-					assetType = p8.assetType,
-					bodyName = p8.bodyName,
-					partName = p8.partName,
-					viewportSize = var16
+			getItemMetrics = gridMetrics.makeCustomMetricsGetter({ minimumItemsPerRow = 2, minimumItemWidth = var7 }),
+			renderItem = reactModule.useCallback(function(p6)
+				-- upvalues: reactModule (copy), avatarItemCardModule (copy), var7 (ref), itemTile (copy)
+				return if p6.asset then reactModule.createElement(avatarItemCardModule, {
+					asset = p6.asset,
+					assetType = p6.assetType,
+					bodyName = p6.bodyName,
+					partName = p6.partName,
+					viewportSize = var7
 				}) else reactModule.createElement(itemTile)
-			end, { var16, p6.name }),
+			end, { var7, p5.name }),
 			itemPadding = vector2,
-			items = var13
+			items = var4
 		})
 	})
 end

@@ -11,31 +11,31 @@ local t = {
 	cancel = "Feature.Moments.Action.Cancel"
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref)
-	local var4 = useLocalization(t)
+	local var1 = useLocalization(t)
 	
 	return reactModule.createElement(dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
 		size = foundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var4.title }),
+		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var4.body })
+			DialogText = reactModule.createElement(dialog.Text, { Text = var1.body })
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var4.delete,
+					text = var1.delete,
 					variant = foundationModule.Enums.ButtonVariant.Emphasis,
-					onActivated = p0.onConfirm
+					onActivated = p1.onConfirm
 				},
 				{
-					text = var4.cancel,
+					text = var1.cancel,
 					variant = foundationModule.Enums.ButtonVariant.Standard,
-					onActivated = p0.onCancel
+					onActivated = p1.onCancel
 				}
 			}
 		})

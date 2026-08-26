@@ -5,7 +5,7 @@ local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
 local corePackagesService = game:GetService("CorePackages")
 local roactModule = require(corePackagesService.Packages.Roact)
 local enabled = require(corePackagesService.Workspace.Packages.Chrome).Enabled
-local var6 = if enabled() then require(robloxGui.Modules.Chrome.Service) else nil
+local var1 = if enabled() then require(robloxGui.Modules.Chrome.Service) else nil
 local _ = require(abuseReportMenu.Components.Types)
 local constantsModule = require(abuseReportMenu.Components.Constants)
 local screenshotFlowStepHandlerContainerModule = require(abuseReportMenu.ReportAnything.Components.ScreenshotFlowStepHandlerContainer)
@@ -18,9 +18,9 @@ local t = {
 }
 
 local function unmountAnnotationPage()
-	-- upvalues: fFlagEnableConsoleExpControls (ref), enabled (ref), var6 (ref), t (ref), roactModule (ref)
+	-- upvalues: fFlagEnableConsoleExpControls (ref), enabled (ref), var1 (ref), t (ref), roactModule (ref)
 	if fFlagEnableConsoleExpControls and (if fFlagEnableConsoleExpControls then enabled() else enabled) then
-		var6:setHideShortcutBar("AnnotationModal", false)
+		var1:setHideShortcutBar("AnnotationModal", false)
 	end
 	if t.annotationPageHandle ~= nil then
 		roactModule.unmount(t.annotationPageHandle)
@@ -34,10 +34,10 @@ local function unmountAnnotationPage()
 end
 
 return {
-	mountAnnotationPage = function(p0, p1, p2, p3, p4)
-		-- upvalues: fFlagEnableConsoleExpControls (ref), enabled (ref), var6 (ref), guiService (ref), t (ref), coreGuiService (ref), constantsModule (ref), roactModule (ref), screenshotFlowStepHandlerContainerModule (ref), unmountAnnotationPage (ref)
+	mountAnnotationPage = function(p1, p2, p3, p4, p5)
+		-- upvalues: fFlagEnableConsoleExpControls (ref), enabled (ref), var1 (ref), guiService (ref), t (ref), coreGuiService (ref), constantsModule (ref), roactModule (ref), screenshotFlowStepHandlerContainerModule (ref), unmountAnnotationPage (ref)
 		if fFlagEnableConsoleExpControls and (if fFlagEnableConsoleExpControls then enabled() else enabled) then
-			var6:setHideShortcutBar("AnnotationModal", true)
+			var1:setHideShortcutBar("AnnotationModal", true)
 		end
 		local guiInset, _ = guiService:GetGuiInset()
 		
@@ -56,10 +56,10 @@ return {
 			frame.Parent = t.annotationPageScreenGui
 			t.annotationPageFrame = frame
 		end
-		local var14 = roactModule.createElement(screenshotFlowStepHandlerContainerModule, {
+		local var2 = roactModule.createElement(screenshotFlowStepHandlerContainerModule, {
 			initialPageNumber = 1,
-			screenshot = p3.screenshotContentId,
-			entryPoint = p0,
+			screenshot = p4.screenshotContentId,
+			entryPoint = p1,
 			backAction = function()
 				-- upvalues: unmountAnnotationPage (copy)
 				unmountAnnotationPage()
@@ -68,53 +68,53 @@ return {
 				-- upvalues: unmountAnnotationPage (copy)
 				unmountAnnotationPage()
 			end,
-			finishAnnotationAction = function(p5)
-				-- upvalues: unmountAnnotationPage (copy), p4 (ref), constantsModule (copy)
+			finishAnnotationAction = function(p6)
+				-- upvalues: unmountAnnotationPage (copy), p5 (ref), constantsModule (copy)
 				unmountAnnotationPage()
-				p4({
+				p5({
 					type = constantsModule.ReportAnythingActions.SetAnnotationPoints,
-					annotationPoints = p5
+					annotationPoints = p6
 				})
-				p4({
+				p5({
 					type = constantsModule.ReportAnythingActions.CompleteAttachment
 				})
 			end,
 			restartAction = function()
-				-- upvalues: unmountAnnotationPage (copy), p4 (ref), constantsModule (copy), p1 (ref)
+				-- upvalues: unmountAnnotationPage (copy), p5 (ref), constantsModule (copy), p2 (ref)
 				unmountAnnotationPage()
-				p4({ type = constantsModule.ReportAnythingActions.ClearAll })
-				p1()
+				p5({ type = constantsModule.ReportAnythingActions.ClearAll })
+				p2()
 			end,
 			skipAnnotationAction = function()
-				-- upvalues: unmountAnnotationPage (copy), p4 (ref), constantsModule (copy)
+				-- upvalues: unmountAnnotationPage (copy), p5 (ref), constantsModule (copy)
 				unmountAnnotationPage()
-				p4({
+				p5({
 					type = constantsModule.ReportAnythingActions.CompleteAttachment
 				})
 			end,
 			setAnnotationCircleRadius = function(value)
-				-- upvalues: p4 (ref), constantsModule (copy)
-				p4({
+				-- upvalues: p5 (ref), constantsModule (copy)
+				p5({
 					type = constantsModule.ReportAnythingActions.SetAnnotationCircleRadius,
 					radius = value
 				})
 			end,
 			setAnnotationAreaDimensions = function(value, p6)
-				-- upvalues: p4 (ref), constantsModule (copy)
-				p4({
+				-- upvalues: p5 (ref), constantsModule (copy)
+				p5({
 					type = constantsModule.ReportAnythingActions.SetAnnotationAreaDimensions,
 					width = value,
 					height = p6
 				})
 			end,
 			initialAnnotationPoints = {},
-			viewportInfo = p3.identificationResults.avatarIDStats.viewportInfo,
-			reportAnythingAnalytics = p2
+			viewportInfo = p4.identificationResults.avatarIDStats.viewportInfo,
+			reportAnythingAnalytics = p3
 		})
-		p4({
+		p5({
 			type = constantsModule.ReportAnythingActions.SetAnnotationOptionSeen
 		})
-		t.annotationPageHandle = roactModule.mount(var14, t.annotationPageFrame, "AnnotationFlow")
+		t.annotationPageHandle = roactModule.mount(var2, t.annotationPageFrame, "AnnotationFlow")
 	end,
 	unmountAnnotationPage = unmountAnnotationPage
 }

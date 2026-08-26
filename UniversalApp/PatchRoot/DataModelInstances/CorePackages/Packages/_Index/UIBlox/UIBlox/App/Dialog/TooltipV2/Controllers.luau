@@ -6,21 +6,21 @@ local _ = require(parent.Types)
 local tooltipControllerModule = require(parent.TooltipController)
 local hoverControllerModule = require(parent.HoverController)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: luauPolyfillModule (ref), reactModule (ref)
-	return function(p1, p2, p3)
-		-- upvalues: luauPolyfillModule (copy), reactModule (copy), p0 (ref)
-		return reactModule.createElement(p0, luauPolyfillModule.Object.assign({}, p2, { tooltipProps = p1, renderTriggerPoint = p3 }))
+	return function(p2, p3, p4)
+		-- upvalues: luauPolyfillModule (copy), reactModule (copy), p1 (ref)
+		return reactModule.createElement(p1, luauPolyfillModule.Object.assign({}, p3, { tooltipProps = p2, renderTriggerPoint = p4 }))
 	end
 end
 
 return {
-	withTooltip = function(p4, p5, p6)
+	withTooltip = function(p1, p2, p3)
 		-- upvalues: luauPolyfillModule (ref), reactModule (ref), tooltipControllerModule (ref)
-		return reactModule.createElement(tooltipControllerModule, luauPolyfillModule.Object.assign({}, p5, { tooltipProps = p4, renderTriggerPoint = p6 }))
+		return reactModule.createElement(tooltipControllerModule, luauPolyfillModule.Object.assign({}, p2, { tooltipProps = p1, renderTriggerPoint = p3 }))
 	end,
-	withHoverTooltip = function(p7, p8, p9)
+	withHoverTooltip = function(p1, p2, p3)
 		-- upvalues: luauPolyfillModule (ref), reactModule (ref), hoverControllerModule (ref)
-		return reactModule.createElement(hoverControllerModule, luauPolyfillModule.Object.assign({}, p8, { tooltipProps = p7, renderTriggerPoint = p9 }))
+		return reactModule.createElement(hoverControllerModule, luauPolyfillModule.Object.assign({}, p2, { tooltipProps = p1, renderTriggerPoint = p3 }))
 	end
 }

@@ -16,33 +16,33 @@ local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFl
 
 return function()
 	-- upvalues: useProfileWrapperContextModule (ref), getDeepValueModule (ref), useAreWebViewsSupportedModule (ref), useIsProfileQrCodeEnabledModule (ref), useCanRenderTransferOnProfileModule (ref), useCanSeeChatTabModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), useLocalUserId (ref), reactModule (ref), buildUserActionsComponentModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref)
-	local var17
-	local var10 = useProfileWrapperContextModule()
-	local var11 = getDeepValueModule(var10, "sourceInfo.contextualInfoType")
-	local var12 = useAreWebViewsSupportedModule()
-	local var13 = useIsProfileQrCodeEnabledModule()
-	local var14 = useCanRenderTransferOnProfileModule()
-	local var15 = useCanSeeChatTabModule()
-	local var16 = if fFlagProfilePlatformCTAsRefactorModule then useLocalUserId() else nil
+	local var1
+	local var2 = useProfileWrapperContextModule()
+	local var3 = getDeepValueModule(var2, "sourceInfo.contextualInfoType")
+	local var4 = useAreWebViewsSupportedModule()
+	local var5 = useIsProfileQrCodeEnabledModule()
+	local var6 = useCanRenderTransferOnProfileModule()
+	local var7 = useCanSeeChatTabModule()
+	local var8 = if fFlagProfilePlatformCTAsRefactorModule then useLocalUserId() else nil
 	
 	if fFlagProfilePlatformCTAsRefactorModule then
-		var17 = tostring(var10.profileId) == tostring(var16)
-		var17 = nil
+		var1 = tostring(var2.profileId) == tostring(var8)
+		var1 = nil
 	else
-		var17 = false
+		var1 = false
 	end
 	return reactModule.useMemo(function()
-		-- upvalues: buildUserActionsComponentModule (copy), var11 (ref), var12 (ref), var13 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var14 (ref), var15 (ref), fFlagProfilePlatformCTAsRefactorModule (copy), var17 (ref)
-		return buildUserActionsComponentModule(var11, {
-			areWebViewsSupported = var12,
-			isProfileQrCodeEnabled = var13,
-			canRenderTransferInProfile = if fFlagProfilePlatformEnableCurrencyTransfer then var14 else false,
-			canSeeChatTab = var15,
-			isSelfView = if fFlagProfilePlatformCTAsRefactorModule then var17 else nil
+		-- upvalues: buildUserActionsComponentModule (copy), var3 (ref), var4 (ref), var5 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var6 (ref), var7 (ref), fFlagProfilePlatformCTAsRefactorModule (copy), var1 (ref)
+		return buildUserActionsComponentModule(var3, {
+			areWebViewsSupported = var4,
+			isProfileQrCodeEnabled = var5,
+			canRenderTransferInProfile = if fFlagProfilePlatformEnableCurrencyTransfer then var6 else false,
+			canSeeChatTab = var7,
+			isSelfView = if fFlagProfilePlatformCTAsRefactorModule then var1 else nil
 		})
 	end, {
-		var11, var12, var13,
-		if fFlagProfilePlatformEnableCurrencyTransfer then var14 else nil, var15,
-		if fFlagProfilePlatformCTAsRefactorModule then var17 else nil
+		var3, var4, var5,
+		if fFlagProfilePlatformEnableCurrencyTransfer then var6 else nil, var7,
+		if fFlagProfilePlatformCTAsRefactorModule then var1 else nil
 	})
 end

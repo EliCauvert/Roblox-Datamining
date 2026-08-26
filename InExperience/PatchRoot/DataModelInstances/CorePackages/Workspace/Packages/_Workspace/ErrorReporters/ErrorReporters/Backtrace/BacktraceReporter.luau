@@ -5,11 +5,11 @@ local tModule = require(parent.t)
 local backtraceReportModule = require(script.Parent.BacktraceReport)
 local errorQueueModule = require(script.Parent.Parent.ErrorQueue)
 local fFlagLuaAppEnableBacktraceSessionInfoModule = require(script.Parent.Flags.FFlagLuaAppEnableBacktraceSessionInfo)
-local var6 = runService:IsStudio()
+local var1 = runService:IsStudio()
 local fIntOldestUAVersionToReportErrorsModule = require(script.Parent.Parent.FIntOldestUAVersionToReportErrors)
 local t = {}
 t.__index = t
-local var9 = tModule.strictInterface({
+local var2 = tModule.strictInterface({
 	httpService = tModule.some(tModule.instanceOf("HttpService"), tModule.interface({
 		JSONEncode = tModule.callback,
 		JSONDecode = tModule.callback,
@@ -22,25 +22,25 @@ local var9 = tModule.strictInterface({
 	logIntervalInSeconds = tModule.optional(tModule.numberPositive)
 })
 
-function t.new(p0)
-	-- upvalues: var9 (ref), var6 (ref), t (ref), errorQueueModule (ref)
-	local var10, var11 = var9(p0)
+function t.new(p1)
+	-- upvalues: var2 (ref), var1 (ref), t (ref), errorQueueModule (ref)
+	local var3, var4 = var2(p1)
 	local t_1 = nil
 	
-	if var10 then
+	if var3 then
 		t_1 = {
 			_isEnabled = true,
 			_errorQueue = nil,
 			_lastLogTime = 0,
-			_httpService = p0.httpService,
+			_httpService = p1.httpService,
 			_reportUrl = game:GetFastString("ErrorUploadToBacktraceBaseUrl") .. "token=" .. p0.token,
-			_processErrorReportMethod = p0.processErrorReportMethod,
+			_processErrorReportMethod = p1.processErrorReportMethod,
 			_sharedAttributes = {},
 			_sharedAnnotations = {},
-			_generateLogMethod = p0.generateLogMethod,
-			_logIntervalInSeconds = p0.logIntervalInSeconds or 60
+			_generateLogMethod = p1.generateLogMethod,
+			_logIntervalInSeconds = p1.logIntervalInSeconds or 60
 		}
-	elseif var6 or _G.__DEV__ then
+	elseif var1 or _G.__DEV__ then
 		error("invalid arguments for BacktraceReporter: " .. var11)
 	else
 		t_1 = { _isEnabled = false }
@@ -51,7 +51,7 @@ function t.new(p0)
 		t_1._errorQueue = errorQueueModule.new(function(...)
 			-- upvalues: t_1 (write)
 			t_1:_reportErrorFromErrorQueue(...)
-		end, p0.queueOptions)
+		end, p1.queueOptions)
 		t_1._errorQueue:startTimer()
 	end
 	return t_1
@@ -59,16 +59,16 @@ end
 
 function t.isTooOldToReportErrors(_)
 	-- upvalues: runService (ref), fIntOldestUAVersionToReportErrorsModule (ref)
-	local var13 = tonumber(string.match(runService:GetRobloxVersion(), ".(%d+)."))
+	local var3 = tonumber(string.match(runService:GetRobloxVersion(), ".(%d+)."))
 	
-	return if var13 then var13 < fIntOldestUAVersionToReportErrorsModule else false
+	return if var3 then var3 < fIntOldestUAVersionToReportErrorsModule else false
 end
 
 function t:sendErrorReport(p1, p2)
-	-- upvalues: var6 (ref)
+	-- upvalues: var1 (ref)
 	if not self._isEnabled then return end
 	if self:isTooOldToReportErrors() then return end
-	if var6 or _G.__DEV__ then
+	if var1 or _G.__DEV__ then
 		assert(p1:validate())
 	end
 	local ok, status = pcall(function()
@@ -104,15 +104,15 @@ function t:sendErrorReport(p1, p2)
 	warn("Cannot convert report to Json")
 end
 
-function t._sendLogToReport(p4, p5, p6)
-	if type(p6) == "string" and #p6 ~= 0 then
+function t._sendLogToReport(p1, p2, p3)
+	if type(p3) == "string" and #p3 ~= 0 then
 		pcall(function()
-			-- upvalues: p4 (ref), p5 (ref), p6 (ref)
-			p4._httpService:RequestInternal({
+			-- upvalues: p1 (ref), p2 (ref), p3 (ref)
+			p1._httpService:RequestInternal({
 				Method = "POST",
-				Url = p4._reportUrl .. "&object=" .. p5 .. "&attachment_name=log.txt",
+				Url = p1._reportUrl .. "&object=" .. p5 .. "&attachment_name=log.txt",
 				Headers = { ["Content-Type"] = "text/plain" },
-				Body = p6
+				Body = p3
 			}):Start(function(_, _) end)
 		end)
 		
@@ -132,87 +132,87 @@ function t:_generateLog()
 	end
 end
 
-function t:_generateErrorReport(p7, p8, p9, p10)
+function t:_generateErrorReport(p1, p2, p3, p4)
 	-- upvalues: backtraceReportModule (ref), fFlagLuaAppEnableBacktraceSessionInfoModule (ref)
-	local var14 = if type(p9) == "table" then backtraceReportModule.fromDetails(p9) else backtraceReportModule.fromMessageAndStack(p7, p8)
+	local var3 = if type(p3) == "table" then backtraceReportModule.fromDetails(p3) else backtraceReportModule.fromMessageAndStack(p1, p2)
 	
-	if fFlagLuaAppEnableBacktraceSessionInfoModule and p10 ~= nil then
-		var14:addAttributes(p10)
+	if fFlagLuaAppEnableBacktraceSessionInfoModule and p4 ~= nil then
+		var3:addAttributes(p4)
 	end
-	var14:addAttributes(self._sharedAttributes)
-	var14:addAnnotations(self._sharedAnnotations)
+	var3:addAttributes(self._sharedAttributes)
+	var3:addAnnotations(self._sharedAnnotations)
 	
-	if type(p9) == "string" and p9 ~= "" then
-		var14:addAnnotations({ stackDetails = p9 })
+	if type(p3) == "string" and p3 ~= "" then
+		var3:addAnnotations({ stackDetails = p3 })
 	end
-	return var14
+	return var3
 end
 
-function t:reportErrorImmediately(p11, p12, p13, p14)
+function t:reportErrorImmediately(p1, p2, p3, p4)
 	if not self._isEnabled then return end
-	local var15 = self:_generateErrorReport(p11, p12, p13, p14)
+	local var3 = self:_generateErrorReport(p1, p2, p3, p4)
 	
 	if self._processErrorReportMethod ~= nil then
-		var15 = self._processErrorReportMethod(var15)
+		var3 = self._processErrorReportMethod(var3)
 	end
-	self:sendErrorReport(var15, self:_generateLog())
+	self:sendErrorReport(var3, self:_generateLog())
 end
 
-function t:reportErrorDeferred(p15, p16, p17, p18)
+function t:reportErrorDeferred(p1, p2, p3, p4)
 	if not self._isEnabled then return end
-	local formattedText = string.format("%s | %s", p15, p16)
+	local formattedText = string.format("%s | %s", p1, p2)
 	local t = {}
 	
 	if not self._errorQueue:hasError(formattedText) then
-		local var18 = self:_generateErrorReport(p15, p16, p17, p18)
+		local var3 = self:_generateErrorReport(p1, p2, p3, p4)
 		
 		if self._processErrorReportMethod ~= nil then
-			var18 = self._processErrorReportMethod(var18)
+			var3 = self._processErrorReportMethod(var3)
 		end
-		t = { backtraceReport = var18, log = self:_generateLog() }
+		t = { backtraceReport = var3, log = self:_generateLog() }
 	end
 	self._errorQueue:addError(formattedText, t)
 end
 
-function t:_reportErrorFromErrorQueue(_, p19, p20)
-	local backtraceReport = p19.backtraceReport
-	local log = p19.log
-	backtraceReport:addAttributes({ ErrorCount = p20 })
+function t:_reportErrorFromErrorQueue(_, p1, p2)
+	local backtraceReport = p1.backtraceReport
+	local log = p1.log
+	backtraceReport:addAttributes({ ErrorCount = p2 })
 	self:sendErrorReport(backtraceReport, log)
 end
 
 local iAttributes = backtraceReportModule.IAttributes
 
-function t:updateSharedAttributes(p21)
-	-- upvalues: cryoModule (ref), iAttributes (ref), var6 (ref)
-	local var19 = cryoModule.Dictionary.join(self._sharedAttributes, p21)
-	local var20, var21 = iAttributes(var19)
+function t:updateSharedAttributes(p1)
+	-- upvalues: cryoModule (ref), iAttributes (ref), var1 (ref)
+	local var3 = cryoModule.Dictionary.join(self._sharedAttributes, p1)
+	local var4, var5 = iAttributes(var3)
 	
-	if not var20 then
-		if var6 or _G.__DEV__ then
-			assert(var20, var21)
+	if not var4 then
+		if var1 or _G.__DEV__ then
+			assert(var4, var5)
 		else
 			return
 		end
 	end
-	self._sharedAttributes = var19
+	self._sharedAttributes = var3
 end
 
 local iAnnotations = backtraceReportModule.IAnnotations
 
-function t:updateSharedAnnotations(p22)
-	-- upvalues: cryoModule (ref), iAnnotations (ref), var6 (ref)
-	local var22 = cryoModule.Dictionary.join(self._sharedAnnotations, p22)
-	local var23, var24 = iAnnotations(var22)
+function t:updateSharedAnnotations(p1)
+	-- upvalues: cryoModule (ref), iAnnotations (ref), var1 (ref)
+	local var3 = cryoModule.Dictionary.join(self._sharedAnnotations, p1)
+	local var4, var5 = iAnnotations(var3)
 	
-	if not var23 then
-		if var6 or _G.__DEV__ then
-			assert(var23, var24)
+	if not var4 then
+		if var1 or _G.__DEV__ then
+			assert(var4, var5)
 		else
 			return
 		end
 	end
-	self._sharedAnnotations = var22
+	self._sharedAnnotations = var3
 end
 
 function t:reportAllErrors()

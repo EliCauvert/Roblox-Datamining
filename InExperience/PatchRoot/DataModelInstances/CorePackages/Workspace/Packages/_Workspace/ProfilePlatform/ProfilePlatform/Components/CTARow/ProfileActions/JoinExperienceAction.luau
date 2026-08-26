@@ -5,17 +5,17 @@ local _ = require(profilePlatform.Components.CTARow.Types)
 local profileTypes = enumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.JoinExperience] = function(p0)
+	[enumsModule.ProfileActions.JoinExperience] = function(p1)
 		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref)
 		return {
 			variant = buttonVariant.Emphasis,
-			isLoading = p0.experienceUtilities.isLoading,
-			isDisabled = not p0.experienceUtilities.isInExperience,
-			text = p0.localized[enumsModule.ProfileActions.JoinExperience],
+			isLoading = p1.experienceUtilities.isLoading,
+			isDisabled = not p1.experienceUtilities.isInExperience,
+			text = p1.localized[enumsModule.ProfileActions.JoinExperience],
 			onActivated = {
 				[profileTypes.User] = function()
-					-- upvalues: p0 (ref)
-					p0.experienceUtilities.joinExperience()
+					-- upvalues: p1 (ref)
+					p1.experienceUtilities.joinExperience()
 				end
 			}
 		}

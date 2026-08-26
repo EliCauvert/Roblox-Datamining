@@ -1,9 +1,9 @@
 ﻿local GAMES_URLModule = require(script.Parent.Parent.GAMES_URL)
 
-return function(p0)
+return function(p1)
 	-- upvalues: GAMES_URLModule (ref)
-	return p0.roduxNetworking.GET({ Name = "GetExperienceMedia" }, function(p1, p2)
+	return p1.roduxNetworking.GET({ Name = "GetExperienceMedia" }, function(p2, p3)
 		-- upvalues: GAMES_URLModule (copy)
-		return p1(GAMES_URLModule):path("v2"):path("games"):id(p2):path("media")
+		return p2(GAMES_URLModule):path("v2"):path("games"):id(p3):path("media")
 	end)
 end

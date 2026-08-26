@@ -16,12 +16,12 @@ local t_1 = {
 	STATE_ARCHIVED = "Archived"
 }
 
-local function decodeSearchResponse(p0)
+local function decodeSearchResponse(p1)
 	-- upvalues: t (ref), t_1 (ref)
-	assert(type(p0) == "table", "Creator Inventory response must be a table")
+	assert(type(p1) == "table", "Creator Inventory response must be a table")
 	local t_2 = {}
 	
-	for i, v in p0.items or {} do
+	for i, v in p1.items or {} do
 		local cloned = table.clone(v)
 		local assetItem = v.assetItem
 		
@@ -42,33 +42,33 @@ local function decodeSearchResponse(p0)
 		end
 		t_2[i] = cloned
 	end
-	return { items = t_2, nextPageToken = p0.nextPageToken }
+	return { items = t_2, nextPageToken = p1.nextPageToken }
 end
 
-return function(p1, p2)
+return function(p2, p3)
 	-- upvalues: urlBase (ref), urlBuilderModule (ref), fetch (ref), decodeSearchResponse (ref), asPromise (ref)
-	p2 = p2 or {}
-	local baseUrl = p2.baseUrl or urlBase.APIS
+	p3 = p3 or {}
+	local baseUrl = p3.baseUrl or urlBase.APIS
 	local t = {
-		query = p1.query,
-		filter = `assetTypes={p1.assetType};universeIds={p1.universeId}`
+		query = p2.query,
+		filter = `assetTypes={p2.assetType};universeIds={p2.universeId}`
 	}
 	
-	if p1.maxPageSize ~= nil then
-		t.maxPageSize = p1.maxPageSize
+	if p2.maxPageSize ~= nil then
+		t.maxPageSize = p2.maxPageSize
 	end
-	if p1.pageToken ~= nil then
-		t.pageToken = p1.pageToken
+	if p2.pageToken ~= nil then
+		t.pageToken = p2.pageToken
 	end
 	local replaced = string.gsub(urlBuilderModule.UrlBuilder.addQueryString(baseUrl .. "/creator-inventory-api/v1/-/creator-inventory-items:search", t), "creator%-inventory%-items%%3Asearch", "creator-inventory-items:search", 1)
 	
-	if p1.query == "" then
+	if p2.query == "" then
 		replaced ..= "&query="
 	end
 	return asPromise(fetch({
 		method = "GET",
 		analyticsKey = "creator-inventory.search",
-		network = p2.network,
+		network = p3.network,
 		url = replaced,
 		decode = decodeSearchResponse
 	}))

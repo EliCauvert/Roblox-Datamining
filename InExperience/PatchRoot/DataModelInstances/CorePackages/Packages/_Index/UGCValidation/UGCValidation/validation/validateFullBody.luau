@@ -21,40 +21,40 @@ local parseContentIdsModule = require(parent.util.ParseContentIds)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getFFlagDebugAllowHRDUploadOnBundleBackendModule = require(parent.flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
 
-local function _(p0, p1)
-	for i, v in p0 do
-		if v.Name == p1 then
+local function _(p1, p2)
+	for i, v in p1 do
+		if v.Name == p2 then
 			return v
 		end
 	end
 	return nil
 end
 
-local function validateAllAssetsWithSchema(value, p2, p3)
+local function validateAllAssetsWithSchema(value, p3, p4)
 	-- upvalues: validateSingleInstanceModule (ref), validateWithSchemaModule (ref), createDynamicHeadMeshPartSchemaModule (ref), createLimbsAndTorsoSchemaModule (ref)
 	for i, v in value do
 		if Enum.AssetType.DynamicHead == v.assetTypeEnum then
-			if validateSingleInstanceModule(v.allSelectedInstances, p3) then
-				if not validateWithSchemaModule(createDynamicHeadMeshPartSchemaModule(p3), v.allSelectedInstances[1], p3).success then
+			if validateSingleInstanceModule(v.allSelectedInstances, p4) then
+				if not validateWithSchemaModule(createDynamicHeadMeshPartSchemaModule(p4), v.allSelectedInstances[1], p4).success then
 					return false
 				end
 			end
 			return false
 		else
-			for i_1, v_1 in p2 do
-				local var26
+			for i_1, v_1 in p3 do
+				local var1
 				for i_2, v_2 in v.allSelectedInstances do
 					if v_2.Name == v_1 then
-						var26 = v_2
-						if var26 then
-							if not validateWithSchemaModule(createLimbsAndTorsoSchemaModule(v.assetTypeEnum, v_1, p3), var26, p3).success then
+						var1 = v_2
+						if var1 then
+							if not validateWithSchemaModule(createLimbsAndTorsoSchemaModule(v.assetTypeEnum, v_1, p4), var1, p4).success then
 								return false
 							end
 						end
 						return false
 					end
 				end
-				var26 = nil
+				var1 = nil
 			end
 		end
 	end
@@ -65,53 +65,53 @@ local function validateCorrectAssetTypesExist(value)
 	-- upvalues: constantsInterfaceModule (ref)
 	local t = {}
 	local count = #constantsInterfaceModule.getBodyPartAssets()
-	local var29 = 0
+	local var2 = 0
 	
 	for i, v in value do
 		if constantsInterfaceModule.isBodyPart(v.assetTypeEnum) then
 			if not t[v.assetTypeEnum] then
 				t[v.assetTypeEnum] = true
-				var29 += 1
+				var2 += 1
 				continue
 			end
 			return false
 		end
 		return false
 	end
-	return var29 == count
+	return var2 == count
 end
 
-local function createAllBodyPartsTable(p4, p5)
+local function createAllBodyPartsTable(p5, p6)
 	local t = {}
 	
-	for i, v in p5 do
+	for i, v in p6 do
 		if Enum.AssetType.DynamicHead == v.assetTypeEnum then
 			t[v.allSelectedInstances[1].Name] = v.allSelectedInstances[1]
 			continue
 		end
-		local var31
+		local var3
 		for i_1, v_1 in v.allSelectedInstances do
-			if v_1.Name == p4 then
-				var31 = v_1
-				for i_2, i_1 in var31:GetChildren() do
+			if v_1.Name == p5 then
+				var3 = v_1
+				for i_2, i_1 in var3:GetChildren() do
 					t[i_1.Name] = i_1
 				end
 			end
 		end
-		var31 = nil
+		var3 = nil
 	end
 	return t
 end
 
-local function validateMeshIds(p6, p7)
+local function validateMeshIds(p7, p8)
 	-- upvalues: parseContentIdsModule (ref), analyticsModule (ref)
 	local t = { MeshPart = { "MeshId" } }
 	local t_1 = { MeshPart = { MeshId = true } }
 	
-	for i, v in p6 do
+	for i, v in p7 do
 		for i_1, v_1 in v.allSelectedInstances do
-			if not parseContentIdsModule.parseWithErrorCheck({}, {}, v_1, t, t_1, p7) then
-				analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_MeshIdsMissing, nil, p7)
+			if not parseContentIdsModule.parseWithErrorCheck({}, {}, v_1, t, t_1, p8) then
+				analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_MeshIdsMissing, nil, p8)
 				
 				return false, {
 					"Unable to run full body validation due to previous errors detected while processing individual body parts"
@@ -122,28 +122,28 @@ local function validateMeshIds(p6, p7)
 	return true
 end
 
-local function validateInstanceHierarchy(p8, p9, p10)
+local function validateInstanceHierarchy(p9, p10, p11)
 	-- upvalues: validateCorrectAssetTypesExist (ref), analyticsModule (ref), validateAllAssetsWithSchema (ref), validateMeshIds (ref)
-	local var34 = if p10 then p10.isServer else nil
+	local var4 = if p11 then p11.isServer else nil
 	
-	if validateCorrectAssetTypesExist(p8) then
-		if not validateAllAssetsWithSchema(p8, p9, p10) then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_InstancesMissing, nil, p10)
+	if validateCorrectAssetTypesExist(p9) then
+		if not validateAllAssetsWithSchema(p9, p10, p11) then
+			analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_InstancesMissing, nil, p11)
 			
 			return false, {
 				"Unable to run full body validation due to previous errors detected while processing individual body parts."
 			}
 		end
-		local var35, var36 = validateMeshIds(p8, p10)
+		local var5, var6 = validateMeshIds(p9, p11)
 		
-		if var35 then
+		if var5 then
 			return true
 		end
-		return false, var36
+		return false, var6
 	else
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_IncorrectAssetTypeSet, nil, p10)
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_IncorrectAssetTypeSet, nil, p11)
 		
-		if var34 then
+		if var4 then
 			error("Full body check did not receive the correct set of body part Asset Types (i.e. Head, Torso, LeftArm, RightArm, LeftLeg, RightLeg). Make sure the body model is valid and try again.")
 		end
 		return false, {
@@ -155,53 +155,53 @@ end
 local function resetAllPhysicsData(value)
 	-- upvalues: resetPhysicsDataModule (ref)
 	for i, v in value.fullBodyData do
-		local var37, var38 = resetPhysicsDataModule(v.allSelectedInstances, value)
+		local var4, var5 = resetPhysicsDataModule(v.allSelectedInstances, value)
 		
-		if not var37 then
-			return false, { var38 }
+		if not var4 then
+			return false, { var5 }
 		end
 	end
 	return true
 end
 
-return function(p11)
+return function(p9)
 	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), constantsModule (ref), validateInstanceHierarchy (ref), resetAllPhysicsData (ref), failureReasonsAccumulatorModule (ref), createAllBodyPartsTable (ref), getFFlagUGCValidateMigratePoseBlockingModule (ref), validateBodyBlockingTestsModule (ref), analyticsModule (ref), getFFlagUGCValidateMigrateCageGeometryModule (ref), validateAssetBodyPartCagesModule (ref), getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validateAssetBoundsModule (ref), getFFlagUGCValidateLegFullBodySeparationModule (ref), validateLegsSeparationModule (ref)
-	assert(p11.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBody")
-	local fullBodyData = p11.fullBodyData
-	local requireAllFolders = p11.requireAllFolders
+	assert(p9.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBody")
+	local fullBodyData = p9.fullBodyData
+	local requireAllFolders = p9.requireAllFolders
 	
 	if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
-		r15plusUtilsModule.setIsBackendBundleUpload(p11.isBackendBundleUpload == true)
+		r15plusUtilsModule.setIsBackendBundleUpload(p9.isBackendBundleUpload == true)
 	end
 	local list = { constantsModule.FOLDER_NAMES.R15ArtistIntent }
 	
 	if requireAllFolders then
 		table.insert(list, constantsModule.FOLDER_NAMES.R15Fixed)
 	end
-	local var40, var41 = validateInstanceHierarchy(fullBodyData, list, p11)
+	local var6, var7 = validateInstanceHierarchy(fullBodyData, list, p9)
 	
-	if var40 then
-		local var42, var43 = resetAllPhysicsData(p11)
+	if var6 then
+		local var8, var9 = resetAllPhysicsData(p9)
 		
-		if var42 then
-			local var44 = failureReasonsAccumulatorModule.new()
+		if var8 then
+			local var10 = failureReasonsAccumulatorModule.new()
 			
 			for i, v in list do
-				local var45 = createAllBodyPartsTable(v, fullBodyData)
-				assert(var45)
+				local var11 = createAllBodyPartsTable(v, fullBodyData)
+				assert(var11)
 				
-				if getFFlagUGCValidateMigratePoseBlockingModule() or validateBodyBlockingTestsModule.validateAll(var45, p11) then
+				if getFFlagUGCValidateMigratePoseBlockingModule() or validateBodyBlockingTestsModule.validateAll(var11, p9) then
 					if not getFFlagUGCValidateMigrateCageGeometryModule() then
-						var44:updateReasons(validateAssetBodyPartCagesModule.validateFullBody(var45, p11))
+						var10:updateReasons(validateAssetBodyPartCagesModule.validateFullBody(var11, p9))
 					end
 					if not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-						var44:updateReasons(validateAssetBoundsModule(var45, nil, p11))
+						var10:updateReasons(validateAssetBoundsModule(var11, nil, p9))
 					end
 					if not getFFlagUGCValidateMigratePoseBlockingModule() and getFFlagUGCValidateLegFullBodySeparationModule() then
-						var44:updateReasons(validateLegsSeparationModule.validateFullBody(var45, p11))
+						var10:updateReasons(validateLegsSeparationModule.validateFullBody(var11, p9))
 					end
 				end
-				analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_ZeroMeshSize, nil, p11)
+				analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_ZeroMeshSize, nil, p9)
 				
 				if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
 					r15plusUtilsModule.setIsBackendBundleUpload(false)
@@ -213,13 +213,13 @@ return function(p11)
 			if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
 				r15plusUtilsModule.setIsBackendBundleUpload(false)
 			end
-			return var44:getFinalResults()
+			return var10:getFinalResults()
 		elseif getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
 			r15plusUtilsModule.setIsBackendBundleUpload(false)
 		end
-		return false, var43
+		return false, var9
 	elseif getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
 		r15plusUtilsModule.setIsBackendBundleUpload(false)
 	end
-	return false, var41
+	return false, var7
 end

@@ -22,9 +22,9 @@ return function()
 			
 			return var3
 		end,
-		completeNavigation = function(p0)
+		completeNavigation = function(p1)
 			-- upvalues: var1 (ref), var4 (write), var2 (ref)
-			if var1(false) and p0 == var4 then
+			if var1(false) and p1 == var4 then
 				var4 = nil
 				var2(false)
 			end

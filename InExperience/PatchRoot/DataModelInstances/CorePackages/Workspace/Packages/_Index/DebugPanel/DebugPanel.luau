@@ -4,16 +4,16 @@ local function NoopComponent()
 	return nil
 end
 
-local var2 = function() end
+local var1 = function() end
 
 local function noopRegisterSection(_)
-	-- upvalues: var2 (ref)
-	return var2
+	-- upvalues: var1 (ref)
+	return var1
 end
 
 local function noopRegisterSections(_)
-	-- upvalues: var2 (ref)
-	return var2
+	-- upvalues: var1 (ref)
+	return var1
 end
 
 local function noopGetRootSignal()

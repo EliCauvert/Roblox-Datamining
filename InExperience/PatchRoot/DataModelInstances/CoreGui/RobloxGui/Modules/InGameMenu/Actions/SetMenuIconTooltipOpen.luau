@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("SET_MENU_ICON_TOOLTIP_OPEN", function(p0)
-	return { menuIconTooltipOpen = p0 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("SET_MENU_ICON_TOOLTIP_OPEN", function(p1)
+	return { menuIconTooltipOpen = p1 }
 end)

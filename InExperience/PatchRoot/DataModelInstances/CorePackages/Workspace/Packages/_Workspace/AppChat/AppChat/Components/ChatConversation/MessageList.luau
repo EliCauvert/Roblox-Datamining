@@ -22,7 +22,7 @@ local appChatMessageInitialFetchMinMessages = game:DefineFastInt("AppChatMessage
 local appChatInitialMessageFetchLimit = game:DefineFastInt("AppChatInitialMessageFetchLimit", 10)
 local appChatOsaAutoScrollDelayMs = game:DefineFastInt("AppChatOsaAutoScrollDelayMs", 100)
 local fFlagAppChatConversationLoadingSkeletonModule = require(appChat.Flags.FFlagAppChatConversationLoadingSkeleton)
-local var19 = if fFlagAppChatConversationLoadingSkeletonModule then require(script.Parent.ConversationMessageSkeletonList) else nil
+local var1 = if fFlagAppChatConversationLoadingSkeletonModule then require(script.Parent.ConversationMessageSkeletonList) else nil
 local fFlagAppChatEnableAutotranslationModule = require(appChat.Flags.FFlagAppChatEnableAutotranslation)
 local fFlagAppChatAutotranslationRespectsExperienceChatSettingModule = require(appChat.Flags.FFlagAppChatAutotranslationRespectsExperienceChatSetting)
 local appChatPerfChatConversationPaginationWindowSize = game:DefineFastInt("AppChatPerfChatConversationPaginationWindowSize", 2)
@@ -61,337 +61,337 @@ messageList.defaultProps = {
 	closeKeyboard = function() end
 }
 
-local function compareItemData(p0, p1)
-	local var29
-	if p0 == nil or p1 == nil then
+local function compareItemData(p1, p2)
+	local var2
+	if p1 == nil or p2 == nil then
 		return false
-	elseif p0.stable_key ~= nil then
-		var29 = true
+	elseif p1.stable_key ~= nil then
+		var2 = true
 		
-		if p0.stable_key ~= p1.stable_key then
-			var29 = p0.messageId ~= nil and p0.messageId == p1.messageId
+		if p1.stable_key ~= p2.stable_key then
+			var2 = p1.messageId ~= nil and p1.messageId == p2.messageId
 		end
-		return var29
+		return var2
 	end
 end
 
-function messageList.init(p2)
+function messageList.init(p1)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref), messageModelModule (ref), enumMessageTypesModule (ref), roactModule (ref), fFlagAppChatAutotranslationRespectsExperienceChatSettingModule (ref), getLastMessageWithFilterModule (ref), isIncomingChatMessage (ref), customMessageEntryContainerModule (ref), systemMessageContainerModule (ref), getFFlagEnableSocialCards (ref), fFlagAppChatEnableAutotranslationModule (ref), chatMessageModule (ref), messageModelModule_1 (ref), systemMessageModule (ref), createScrollIntervalTrackerModule (ref), appChatPerfTrackerModule (ref), focusNavigationService (ref), coreGui (ref)
-	p2.state = {
+	p1.state = {
 		width = 0,
 		startIndex = 1,
-		firstItem = p2.props.itemList[1]
+		firstItem = p1.props.itemList[1]
 	}
-	p2.focusIndex = p2.props.initialFocusIndex
+	p1.focusIndex = p1.props.initialFocusIndex
 	
 	if fFlagAppChatPerfTrackingModule then
-		p2._scrollIntervalTracker = nil
+		p1._scrollIntervalTracker = nil
 	end
-	function p2.isValidMessageAndSenderType(p3, p4)
+	function p2.isValidMessageAndSenderType(p2, p3)
 		-- upvalues: messageModelModule (copy), enumMessageTypesModule (copy)
-		return if p4 == messageModelModule.SenderTypes.System then p3 == enumMessageTypesModule.System elseif p4 == messageModelModule.SenderTypes.User then if p3 ~= enumMessageTypesModule.PlainText then p3 == enumMessageTypesModule.Link else true else p3 == enumMessageTypesModule.Custom
+		return if p3 == messageModelModule.SenderTypes.System then p2 == enumMessageTypesModule.System elseif p3 == messageModelModule.SenderTypes.User then if p2 ~= enumMessageTypesModule.PlainText then p2 == enumMessageTypesModule.Link else true else p2 == enumMessageTypesModule.Custom
 	end
 	
-	p2.ref = p2.props.messageListRef or roactModule.createRef()
-	local var30 = if fFlagAppChatAutotranslationRespectsExperienceChatSettingModule then game:GetService("TextChatService").ChatTranslationEnabled else false
-	p2.lastIncomingChatMessageId = nil
+	p1.ref = p1.props.messageListRef or roactModule.createRef()
+	local var2 = if fFlagAppChatAutotranslationRespectsExperienceChatSettingModule then game:GetService("TextChatService").ChatTranslationEnabled else false
+	p1.lastIncomingChatMessageId = nil
 	
-	if p2.props.itemList then
-		p2.lastIncomingChatMessageId = getLastMessageWithFilterModule(p2.props.itemList, isIncomingChatMessage)
+	if p1.props.itemList then
+		p1.lastIncomingChatMessageId = getLastMessageWithFilterModule(p1.props.itemList, isIncomingChatMessage)
 	end
-	function p2.renderItem(p5)
-		-- upvalues: p2 (ref), roactModule (copy), enumMessageTypesModule (copy), customMessageEntryContainerModule (copy), systemMessageContainerModule (copy), getFFlagEnableSocialCards (copy), fFlagAppChatEnableAutotranslationModule (copy), fFlagAppChatAutotranslationRespectsExperienceChatSettingModule (copy), var30 (ref), chatMessageModule (copy), messageModelModule_1 (copy), systemMessageModule (copy)
-		if not p2.isValidMessageAndSenderType(p5.messageType, p5.senderType) then
-			return roactModule.createElement(systemMessageModule, { Text = p2.props.invalidMessageTypeText })
+	function p2.renderItem(p2)
+		-- upvalues: p1 (ref), roactModule (copy), enumMessageTypesModule (copy), customMessageEntryContainerModule (copy), systemMessageContainerModule (copy), getFFlagEnableSocialCards (copy), fFlagAppChatEnableAutotranslationModule (copy), fFlagAppChatAutotranslationRespectsExperienceChatSettingModule (copy), var2 (ref), chatMessageModule (copy), messageModelModule_1 (copy), systemMessageModule (copy)
+		if not p1.isValidMessageAndSenderType(p2.messageType, p2.senderType) then
+			return roactModule.createElement(systemMessageModule, { Text = p1.props.invalidMessageTypeText })
 		end
-		local stringValue = p2.props.isDebugEnabled and roactModule.createElement("StringValue", { Value = tostring(p5.messageId) })
+		local stringValue = p1.props.isDebugEnabled and roactModule.createElement("StringValue", { Value = tostring(p2.messageId) })
 		
-		if p5.messageType == enumMessageTypesModule.Custom then
+		if p2.messageType == enumMessageTypesModule.Custom then
 			return roactModule.createElement(customMessageEntryContainerModule, {
-				openViewProfile = p2.props.openViewProfile,
-				customEntryType = p5.customEntryType,
-				conversationId = p2.props.conversationId
+				openViewProfile = p1.props.openViewProfile,
+				customEntryType = p2.customEntryType,
+				conversationId = p1.props.conversationId
 			})
-		elseif p5.messageType == enumMessageTypesModule.System then
+		elseif p2.messageType == enumMessageTypesModule.System then
 			return roactModule.createElement(systemMessageContainerModule, {
-				cards = if getFFlagEnableSocialCards() then p5.cards else nil,
-				text = p5.content,
-				parentWidth = p2.state.width,
-				sent = p5.sent,
-				showDateTime = p5.showDateTime,
-				messageId = p5.messageId,
-				senderTargetId = if getFFlagEnableSocialCards() then p5.senderTargetId else nil,
+				cards = if getFFlagEnableSocialCards() then p2.cards else nil,
+				text = p2.content,
+				parentWidth = p1.state.width,
+				sent = p2.sent,
+				showDateTime = p2.showDateTime,
+				messageId = p2.messageId,
+				senderTargetId = if getFFlagEnableSocialCards() then p2.senderTargetId else nil,
 				debugElement = stringValue
 			})
 		end
-		local additionalProps = p5.additionalProps
+		local additionalProps = p2.additionalProps
 		
 		if additionalProps then
-			additionalProps.onDetailsOpened = p2.props.onDetailsOpened
+			additionalProps.onDetailsOpened = p1.props.onDetailsOpened
 		end
 		additionalProps = additionalProps or {}
-		additionalProps.openGameDetailsPage = p2.props.openGameDetailsPage
-		additionalProps.openMomentsDeepLink = p2.props.openMomentsDeepLink
-		additionalProps.shareLink = p5.shareLink
+		additionalProps.openGameDetailsPage = p1.props.openGameDetailsPage
+		additionalProps.openMomentsDeepLink = p1.props.openMomentsDeepLink
+		additionalProps.shareLink = p2.shareLink
 		
 		return roactModule.createElement(chatMessageModule, {
 			additionalProps = additionalProps,
-			content = p5.content,
+			content = p2.content,
 			debugElement = stringValue,
-			failed = p5.failed,
-			filteredForReceivers = p5.filteredForReceivers,
-			isIncoming = p5.isIncoming,
-			isNewSender = p5.isNewSender,
-			isSending = p5.isSending,
-			isUnfiltered = p5.moderationType == messageModelModule_1.ModerationTypes.TrustedComms,
-			isLastMessageInMessageGroup = p5.isLastMessageInMessageGroup,
-			isLastIncomingChatMessage = p5.messageId == p2.lastIncomingChatMessageId,
-			messageDefaultNoticeText = p2.props.messageDefaultNoticeText,
-			conversationId = p2.props.conversationId,
-			messageId = p5.messageId,
-			messageModeratedNoticeText = p2.props.messageModeratedNoticeText,
-			messageHiddenNoticeText = p2.props.messageHiddenNoticeText,
-			messageType = p5.messageType,
-			moderated = p5.moderated,
-			openViewProfile = p2.props.openViewProfile,
-			parentWidth = p2.state.width,
+			failed = p2.failed,
+			filteredForReceivers = p2.filteredForReceivers,
+			isIncoming = p2.isIncoming,
+			isNewSender = p2.isNewSender,
+			isSending = p2.isSending,
+			isUnfiltered = p2.moderationType == messageModelModule_1.ModerationTypes.TrustedComms,
+			isLastMessageInMessageGroup = p2.isLastMessageInMessageGroup,
+			isLastIncomingChatMessage = p2.messageId == p1.lastIncomingChatMessageId,
+			messageDefaultNoticeText = p1.props.messageDefaultNoticeText,
+			conversationId = p1.props.conversationId,
+			messageId = p2.messageId,
+			messageModeratedNoticeText = p1.props.messageModeratedNoticeText,
+			messageHiddenNoticeText = p1.props.messageHiddenNoticeText,
+			messageType = p2.messageType,
+			moderated = p2.moderated,
+			openViewProfile = p1.props.openViewProfile,
+			parentWidth = p1.state.width,
 			readingMessagesIsEnabled = true,
-			senderUserId = p5.senderTargetId,
-			sent = p5.sent,
-			showDateTime = p5.showDateTime,
-			showDisplayName = p5.showDisplayName,
-			shouldShowName = p5.sender.shouldShowName,
-			thumbnail = p5.sender.thumbnail,
-			wideMode = p2.props.wideMode,
-			unknownUserText = p2.props.unknownUserText,
-			viewProfileOnAvatarPressed = p2.props.viewProfileOnAvatarPressed,
-			closeKeyboard = p2.props.closeKeyboard,
-			inputBoxRef = p2.props.inputBoxRef,
-			repliesTo = p5.repliesTo,
-			visibility = p5.visibility,
-			translatedText = if fFlagAppChatEnableAutotranslationModule then if fFlagAppChatAutotranslationRespectsExperienceChatSettingModule then if var30 then p5.contentToDisplay else nil else p5.contentToDisplay else nil
+			senderUserId = p2.senderTargetId,
+			sent = p2.sent,
+			showDateTime = p2.showDateTime,
+			showDisplayName = p2.showDisplayName,
+			shouldShowName = p2.sender.shouldShowName,
+			thumbnail = p2.sender.thumbnail,
+			wideMode = p1.props.wideMode,
+			unknownUserText = p1.props.unknownUserText,
+			viewProfileOnAvatarPressed = p1.props.viewProfileOnAvatarPressed,
+			closeKeyboard = p1.props.closeKeyboard,
+			inputBoxRef = p1.props.inputBoxRef,
+			repliesTo = p2.repliesTo,
+			visibility = p2.visibility,
+			translatedText = if fFlagAppChatEnableAutotranslationModule then if fFlagAppChatAutotranslationRespectsExperienceChatSettingModule then if var2 then p2.contentToDisplay else nil else p2.contentToDisplay else nil
 		})
 	end
 	
-	function p2.updateWidth(p6)
-		-- upvalues: p2 (ref)
-		if p6.AbsoluteSize.X ~= p2.state.width then
-			p2:setState({ width = p6.AbsoluteSize.X })
+	function p2.updateWidth(p2)
+		-- upvalues: p1 (ref)
+		if p2.AbsoluteSize.X ~= p1.state.width then
+			p1:setState({ width = p2.AbsoluteSize.X })
 		end
 	end
 	
-	function p2.changeFocus(p7)
-		-- upvalues: p2 (ref)
-		p2.isNearBottom = p7.anchorIndex <= p2.props.autoScrollMaxIndex + 1
-		p2.focusIndex = if p2.isNearBottom then 1 else p7.anchorIndex + 1
+	function p2.changeFocus(p2)
+		-- upvalues: p1 (ref)
+		p1.isNearBottom = p2.anchorIndex <= p1.props.autoScrollMaxIndex + 1
+		p1.focusIndex = if p1.isNearBottom then 1 else p2.anchorIndex + 1
 		
-		if p7.anchorIndex == 1 and not p2.props.itemList[1].read then
-			p2.props.markAsRead()
+		if p2.anchorIndex == 1 and not p1.props.itemList[1].read then
+			p1.props.markAsRead()
 		end
 	end
 	
-	function p2.identifier(p8)
-		return p8.messageId .. "|" .. (p8.position or "")
+	function p2.identifier(p2)
+		return p2.messageId .. "|" .. (p2.position or "")
 	end
 	
 	function p2.getScrollRef()
-		-- upvalues: p2 (ref)
-		if p2.ref.current == nil then
+		-- upvalues: p1 (ref)
+		if p1.ref.current == nil then
 			return nil
 		end
-		local nativeScrollRef = p2.ref.current._listRef._scrollRef.getNativeScrollRef()
+		local nativeScrollRef = p1.ref.current._listRef._scrollRef.getNativeScrollRef()
 		
 		return if nativeScrollRef == nil then nil else nativeScrollRef._nativeRef.current
 	end
 	
-	function p2.calculateScrollOffset(p9)
-		return p9.AbsoluteCanvasSize.Y - p9.CanvasPosition.Y - p9.AbsoluteWindowSize.Y
+	function p2.calculateScrollOffset(p2)
+		return p2.AbsoluteCanvasSize.Y - p2.CanvasPosition.Y - p2.AbsoluteWindowSize.Y
 	end
 	
-	function p2.onScroll(p10)
-		-- upvalues: fFlagAppChatPerfTrackingModule (copy), p2 (ref), createScrollIntervalTrackerModule (copy), appChatPerfTrackerModule (copy)
+	function p2.onScroll(p2)
+		-- upvalues: fFlagAppChatPerfTrackingModule (copy), p1 (ref), createScrollIntervalTrackerModule (copy), appChatPerfTrackerModule (copy)
 		if fFlagAppChatPerfTrackingModule then
-			if p2._scrollIntervalTracker == nil then
-				local scrollRef = p2.getScrollRef()
+			if p1._scrollIntervalTracker == nil then
+				local scrollRef = p1.getScrollRef()
 				
 				if scrollRef ~= nil then
-					p2._scrollIntervalTracker = createScrollIntervalTrackerModule(appChatPerfTrackerModule.Events.ScrollMessageList, scrollRef, { conversationId = p2.props.conversationId })
+					p1._scrollIntervalTracker = createScrollIntervalTrackerModule(appChatPerfTrackerModule.Events.ScrollMessageList, scrollRef, { conversationId = p1.props.conversationId })
 				end
 			end
-			if p2._scrollIntervalTracker then
-				p2._scrollIntervalTracker.onScrollTick()
+			if p1._scrollIntervalTracker then
+				p1._scrollIntervalTracker.onScrollTick()
 			end
 		end
-		local var34 = p2.calculateScrollOffset(p10)
+		local var3 = p1.calculateScrollOffset(p2)
 		
-		if var34 < 512 then
-			p2:setState(function(_, p11)
-				return { firstItem = p11.itemList[1] }
+		if var3 < 512 then
+			p1:setState(function(_, p3)
+				return { firstItem = p3.itemList[1] }
 			end)
 		end
-		if var34 < 64 then
-			p2.props.markAsRead()
+		if var3 < 64 then
+			p1.props.markAsRead()
 		end
-		p2.isNearBottom = var34 < 64
+		p1.isNearBottom = var3 < 64
 	end
 	
-	p2.initialFetchesAttempted = 0
-	p2.focusNavigationService = focusNavigationService.new(coreGui)
+	p1.initialFetchesAttempted = 0
+	p1.focusNavigationService = focusNavigationService.new(coreGui)
 end
 
-function messageList.getDerivedStateFromProps(p12, p13)
-	if p13.firstItem == nil then
+function messageList.getDerivedStateFromProps(p1, p2)
+	if p2.firstItem == nil then
 		return { startIndex = 1 }
 	end
-	local var35 = 1
-	while var35 <= #p12.itemList do
-		local var37
-		local var36 = p12.itemList[var35]
-		local firstItem = p13.firstItem
+	local var2 = 1
+	while var2 <= #p1.itemList do
+		local var3
+		local var4 = p1.itemList[var2]
+		local firstItem = p2.firstItem
 		
-		if var36 == nil or firstItem == nil then
-			var37 = false
-		elseif var36.stable_key ~= nil then
-			var37 = true
+		if var4 == nil or firstItem == nil then
+			var3 = false
+		elseif var4.stable_key ~= nil then
+			var3 = true
 			
-			if var36.stable_key ~= firstItem.stable_key then
-				var37 = var36.messageId ~= nil and var36.messageId == firstItem.messageId
+			if var4.stable_key ~= firstItem.stable_key then
+				var3 = var4.messageId ~= nil and var4.messageId == firstItem.messageId
 			end
 		end
-		if var37 then break end
-		var35 += 1
+		if var3 then break end
+		var2 += 1
 	end
-	return if #p12.itemList < var35 then { startIndex = 1 } else { startIndex = var35 }
+	return if #p1.itemList < var2 then { startIndex = 1 } else { startIndex = var2 }
 end
 
-function messageList.didUpdate(p14, p15, _)
+function messageList.didUpdate(p3, p4, _)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), appChatInitialMessageFetchLimit (ref), appChatMessageInitialFetchMinMessages (ref), appChatOsaAutoScrollDelayMs (ref), getLastMessageWithFilterModule (ref), isIncomingChatMessage (ref)
-	if fFlagAppChatPerfTrackingModule and #p15.itemList < #p14.props.itemList then
-		appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.PaginationMessageList, { conversationId = p14.props.conversationId })
+	if fFlagAppChatPerfTrackingModule and #p4.itemList < #p3.props.itemList then
+		appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.PaginationMessageList, { conversationId = p3.props.conversationId })
 	end
-	if p14.props.itemList and #p14.props.itemList == 0 and (p15.itemList and #p15.itemList > 0) then
-		p14.initialFetchesAttempted = 0
+	if p3.props.itemList and #p3.props.itemList == 0 and (p4.itemList and #p4.itemList > 0) then
+		p3.initialFetchesAttempted = 0
 	end
-	if p14.props.itemList and p14.props.itemList ~= p15.itemList and (p14.initialFetchesAttempted < appChatInitialMessageFetchLimit and #p14.props.itemList < appChatMessageInitialFetchMinMessages) and p14.props.loadNext then
-		p14.initialFetchesAttempted += 1
-		p14.props.loadNext()
+	if p3.props.itemList and p3.props.itemList ~= p4.itemList and (p3.initialFetchesAttempted < appChatInitialMessageFetchLimit and #p3.props.itemList < appChatMessageInitialFetchMinMessages) and p3.props.loadNext then
+		p3.initialFetchesAttempted += 1
+		p3.props.loadNext()
 	end
-	if p15.conversationId ~= p14.props.conversationId then
-		p14.isNearBottom = true
+	if p4.conversationId ~= p3.props.conversationId then
+		p3.isNearBottom = true
 	end
-	local scrollRef = p14.getScrollRef()
+	local scrollRef = p3.getScrollRef()
 	
-	if (if scrollRef ~= nil then 0 else p14.calculateScrollOffset(scrollRef)) < 64 then
-		p14.isNearBottom = true
+	if (if scrollRef ~= nil then 0 else p3.calculateScrollOffset(scrollRef)) < 64 then
+		p3.isNearBottom = true
 		
-		if #p14.props.itemList > 0 then
-			p14.props.markAsRead()
+		if #p3.props.itemList > 0 then
+			p3.props.markAsRead()
 		end
 	end
-	if p15.readingMessagesIsEnabled ~= p14.props.readingMessagesIsEnabled and p14.props.readingMessagesIsEnabled and p14.isNearBottom then
-		p14.props.markAsRead()
+	if p4.readingMessagesIsEnabled ~= p3.props.readingMessagesIsEnabled and p3.props.readingMessagesIsEnabled and p3.isNearBottom then
+		p3.props.markAsRead()
 	end
-	if p14.props.scrollToTopOnInitialOsaLoad and not p15.scrollToTopOnInitialOsaLoad and #p14.props.itemList > 0 then
-		local current = p14.ref and p14.ref.current
+	if p3.props.scrollToTopOnInitialOsaLoad and not p4.scrollToTopOnInitialOsaLoad and #p3.props.itemList > 0 then
+		local current = p3.ref and p3.ref.current
 		
 		if current and current.scrollToEnd then
 			task.delay(appChatOsaAutoScrollDelayMs / 1000, function()
-				-- upvalues: current (ref), p14 (ref)
-				current:scrollToIndex({ animated = false, index = #p14.props.itemList })
+				-- upvalues: current (ref), p3 (ref)
+				current:scrollToIndex({ animated = false, index = #p3.props.itemList })
 			end)
 		end
 	end
-	if p14.props.itemList and not p14.lastIncomingChatMessageId then
-		p14.lastIncomingChatMessageId = getLastMessageWithFilterModule(p14.props.itemList, isIncomingChatMessage)
+	if p3.props.itemList and not p3.lastIncomingChatMessageId then
+		p3.lastIncomingChatMessageId = getLastMessageWithFilterModule(p3.props.itemList, isIncomingChatMessage)
 	end
 end
 
-function messageList.didMount(p16)
+function messageList.didMount(p3)
 	-- upvalues: appChatMessageInitialFetchMinMessages (ref)
-	if #p16.props.itemList < appChatMessageInitialFetchMinMessages and p16.props.loadNext then
-		p16.props.loadNext()
+	if #p3.props.itemList < appChatMessageInitialFetchMinMessages and p3.props.loadNext then
+		p3.props.loadNext()
 	end
-	p16.isNearBottom = true
-	local scrollRef = p16.getScrollRef()
+	p3.isNearBottom = true
+	local scrollRef = p3.getScrollRef()
 	
 	if scrollRef ~= nil then
 		scrollRef.Selectable = false
 	end
 end
 
-function messageList.willUnmount(p17)
+function messageList.willUnmount(p3)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref)
-	if fFlagAppChatPerfTrackingModule and p17._scrollIntervalTracker then
-		p17._scrollIntervalTracker.cleanup()
+	if fFlagAppChatPerfTrackingModule and p3._scrollIntervalTracker then
+		p3._scrollIntervalTracker.cleanup()
 	end
-	p17.focusNavigationService:teardown()
+	p3.focusNavigationService:teardown()
 end
 
-function messageList.renderScrollingFrame(p18)
+function messageList.renderScrollingFrame(p3)
 	-- upvalues: roactModule (ref), bidirectionalFlatList (ref), appChatPerfChatConversationPaginationWindowSize (ref), appChatPerfChatConversationPaginationInitialRender (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), promiseModule (ref), appChatPerfChatConversationPaginationOnEndReached (ref), appChatPerfChatConversationPaginationOnStartReached (ref), compareItemData (ref)
 	local t = {}
-	local startIndex = p18.state.startIndex
+	local startIndex = p3.state.startIndex
 	
 	if startIndex ~= 1 then
-		local scrollRef = p18.getScrollRef()
+		local scrollRef = p3.getScrollRef()
 		
-		if (if scrollRef ~= nil then 0 else p18.calculateScrollOffset(scrollRef)) < 128 then
+		if (if scrollRef ~= nil then 0 else p3.calculateScrollOffset(scrollRef)) < 128 then
 			startIndex = 1
 		end
 	end
 	if startIndex ~= 1 then
-		local var44
-		local var43 = p18.props.itemList[1]
-		local firstItem = p18.state.firstItem
+		local var5
+		local var6 = p3.props.itemList[1]
+		local firstItem = p3.state.firstItem
 		
-		if var43 == nil or firstItem == nil then
-			var44 = false
-		elseif var43.stable_key ~= nil then
-			var44 = true
+		if var6 == nil or firstItem == nil then
+			var5 = false
+		elseif var6.stable_key ~= nil then
+			var5 = true
 			
-			if var43.stable_key ~= firstItem.stable_key then
-				var44 = var43.messageId ~= nil and var43.messageId == firstItem.messageId
+			if var6.stable_key ~= firstItem.stable_key then
+				var5 = var6.messageId ~= nil and var6.messageId == firstItem.messageId
 			end
 		end
-		if var44 then
-			t = p18.props.itemList
+		if var5 then
+			t = p3.props.itemList
 		else
-			table.move(p18.props.itemList, startIndex, #p18.props.itemList, 1, t)
+			table.move(p3.props.itemList, startIndex, #p3.props.itemList, 1, t)
 		end
 		return roactModule.createElement(bidirectionalFlatList, {
 			data = t,
-			renderItem = function(p19)
-				-- upvalues: p18 (ref)
-				return p18.renderItem(p19.item)
+			renderItem = function(p4)
+				-- upvalues: p3 (ref)
+				return p3.renderItem(p4.item)
 			end,
 			inverted = true,
-			Size = p18.props.Size,
+			Size = p3.props.Size,
 			style = {
 				BackgroundTransparency = 1,
 				ScrollBarThickness = 0,
 				Name = "MessageList"
 			},
 			contentContainerStyle = { BackgroundTransparency = 1 },
-			keyExtractor = function(p20, p21)
-				return p20.stable_key or (p20.messageId or p21)
+			keyExtractor = function(p4, p5)
+				return p4.stable_key or (p4.messageId or p5)
 			end,
 			windowSize = appChatPerfChatConversationPaginationWindowSize,
-			initialNumToRender = if p18.props.scrollToTopOnInitialOsaLoad then #t else appChatPerfChatConversationPaginationInitialRender,
-			onScroll = p18.onScroll,
+			initialNumToRender = if p3.props.scrollToTopOnInitialOsaLoad then #t else appChatPerfChatConversationPaginationInitialRender,
+			onScroll = p3.onScroll,
 			onEndReached = function()
-				-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), p18 (ref), promiseModule (copy)
+				-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), p3 (ref), promiseModule (copy)
 				if fFlagAppChatPerfTrackingModule then
-					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.PaginationMessageList, { conversationId = p18.props.conversationId })
+					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.PaginationMessageList, { conversationId = p3.props.conversationId })
 				end
-				p18.props.loadNext()
+				p3.props.loadNext()
 				
 				return promiseModule.resolve()
 			end,
 			onEndReachedThreshold = appChatPerfChatConversationPaginationOnEndReached,
 			onStartReachedThreshold = appChatPerfChatConversationPaginationOnStartReached,
 			compareItemData = compareItemData,
-			scrollEventThrottle = p18.props.scrollEventThrottle or 75,
-			[roactModule.Ref] = p18.ref,
+			scrollEventThrottle = p3.props.scrollEventThrottle or 75,
+			[roactModule.Ref] = p3.ref,
 			autoscrollToTopThreshold = 33,
 			enableAutoscrollToTop = true,
 			ListHeaderComponent = function()
@@ -402,9 +402,9 @@ function messageList.renderScrollingFrame(p18)
 				})
 			end,
 			showDefaultLoadingIndicators = false,
-			onContentSizeChange = function(p22, _)
-				-- upvalues: p18 (ref)
-				p18:setState({ width = p22 })
+			onContentSizeChange = function(p4, _)
+				-- upvalues: p3 (ref)
+				p3:setState({ width = p4 })
 			end,
 			optimizeInvertedCanvasResize = true,
 			UNSTABLE_forceSiblingLayoutUpdate = true
@@ -412,14 +412,14 @@ function messageList.renderScrollingFrame(p18)
 	end
 end
 
-function messageList.renderEmptyMessageList(p23)
+function messageList.renderEmptyMessageList(p3)
 	-- upvalues: roactModule (ref)
-	return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = p23.props.Size })
+	return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = p3.props.Size })
 end
 
-function messageList.render(p24)
-	-- upvalues: fFlagAppChatConversationLoadingSkeletonModule (ref), roactModule (ref), var19 (ref)
-	return if fFlagAppChatConversationLoadingSkeletonModule and p24.props.isInitialMessageLoading then roactModule.createElement(var19, { size = p24.props.Size }) elseif #p24.props.itemList == 0 then p24:renderEmptyMessageList() else p24:renderScrollingFrame()
+function messageList.render(p3)
+	-- upvalues: fFlagAppChatConversationLoadingSkeletonModule (ref), roactModule (ref), var1 (ref)
+	return if fFlagAppChatConversationLoadingSkeletonModule and p3.props.isInitialMessageLoading then roactModule.createElement(var1, { size = p3.props.Size }) elseif #p3.props.itemList == 0 then p3:renderEmptyMessageList() else p3:renderScrollingFrame()
 end
 
 return messageList

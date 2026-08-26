@@ -4,10 +4,10 @@ local refreshQrSessionModule = require(profileQRCode.Networking.refreshQrSession
 
 return function()
 	-- upvalues: useDispatch (ref), refreshQrSessionModule (ref)
-	local var2 = useDispatch()
+	local var1 = useDispatch()
 	
 	return function()
-		-- upvalues: var2 (ref), refreshQrSessionModule (copy)
-		return var2(refreshQrSessionModule.API()):catch(function() end)
+		-- upvalues: var1 (ref), refreshQrSessionModule (copy)
+		return var1(refreshQrSessionModule.API()):catch(function() end)
 	end
 end

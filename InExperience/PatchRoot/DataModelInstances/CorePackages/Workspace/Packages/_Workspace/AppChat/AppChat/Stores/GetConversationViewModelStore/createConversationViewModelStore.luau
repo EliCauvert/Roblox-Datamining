@@ -15,15 +15,15 @@ local localization = require(parent.RobloxAppLocales).Localization
 local messageType = enumsModule.MessageType
 local messageVisibility = enumsModule.MessageVisibility
 
-local function _(p0)
-	return if not (type(p0) ~= "table" or type(p0[1]) ~= "table") then if type(p0[1].alt_text) == "string" then p0[1].alt_text else nil else nil
+local function _(p1)
+	return if not (type(p1) ~= "table" or type(p1[1]) ~= "table") then if type(p1[1].alt_text) == "string" then p1[1].alt_text else nil else nil
 end
 
 local _ = function(p1)
 	if type(p1) == "string" then
-		local var10 = p1:split("\n")
+		local var1 = p1:split("\n")
 		
-		return if var10 then var10[1] else ""
+		return if var1 then var1[1] else ""
 	end
 	return ""
 end
@@ -33,297 +33,297 @@ local _ = function()
 	return localization.new(localizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable")
 end
 
-local _ = function(p2)
-	return if p2 == nil then nil elseif typeof(p2) == "DateTime" then p2.UnixTimestamp elseif type(p2) == "table" and p2.GetUnixTimestamp ~= nil then p2:GetUnixTimestamp() else nil
+local _ = function(p1)
+	return if p1 == nil then nil elseif typeof(p1) == "DateTime" then p1.UnixTimestamp elseif type(p1) == "table" and p1.GetUnixTimestamp ~= nil then p1:GetUnixTimestamp() else nil
 end
 
-local function getSubtitle(p3, p4)
+local function getSubtitle(p1, p2)
 	-- upvalues: messageVisibility (ref), localization (ref), localizationService (ref), messageType (ref)
 	local cards
-	if p4 == nil then
-		cards = p3.previewContent
+	if p2 == nil then
+		cards = p1.previewContent
 		
 		if type(cards) == "string" then
-			local var14 = cards:split("\n")
+			local var1 = cards:split("\n")
 			
-			return if var14 then var14[1] else ""
+			return if var1 then var1[1] else ""
 		end
 		return ""
 	else
-		local var11 = if p4.visibility == messageVisibility.Hidden then localization.new(localizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable") else p4.preview_content or (p4.content_to_display or p4.content)
+		local var2 = if p2.visibility == messageVisibility.Hidden then localization.new(localizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable") else p2.preview_content or (p2.content_to_display or p2.content)
 		
-		if var11 == nil and p4.type == messageType.System then
-			cards = p4.cards
-			var11 = if type(cards) == "table" and type(cards[1]) == "table" then if type(cards[1].alt_text) == "string" then cards[1].alt_text else nil else nil
+		if var2 == nil and p2.type == messageType.System then
+			cards = p2.cards
+			var2 = if type(cards) == "table" and type(cards[1]) == "table" then if type(cards[1].alt_text) == "string" then cards[1].alt_text else nil else nil
 		end
-		local var12 = var11
+		local var3 = var2
 		
-		if type(var12) == "string" then
-			local var13 = var12:split("\n")
+		if type(var3) == "string" then
+			local var4 = var3:split("\n")
 			
-			return if var13 then var13[1] else ""
+			return if var4 then var4[1] else ""
 		end
 		return ""
 	end
 end
 
-local _ = function(p5)
+local _ = function(p1)
 	-- upvalues: getConversationTitleModule (ref)
-	return getConversationTitleModule(p5) or ""
+	return getConversationTitleModule(p1) or ""
 end
 
-local _ = function(p6)
+local _ = function(p1)
 	-- upvalues: getConversationTitleModule (ref)
-	return p6.title or (getConversationTitleModule(p6) or "")
+	return p1.title or (getConversationTitleModule(p1) or "")
 end
 
-local _ = function(p7, p8, p9, p10)
+local _ = function(p1, p2, p3, p4)
 	-- upvalues: signalsModule (ref)
-	local var15 = p7[p8]
+	local var1 = p1[p2]
 	
-	if var15 then
-		local var16 = var15[p9]
+	if var1 then
+		local var2 = var1[p3]
 		
-		if var16 == nil then
-			local var17 = signalsModule.createComputed(p10)
-			var15[p9] = var17
+		if var2 == nil then
+			local var3 = signalsModule.createComputed(p4)
+			var1[p3] = var3
 			
-			return var17
+			return var3
 		else
-			return var16
+			return var2
 		end
 	else
-		var15 = {}
-		p7[p8] = var15
+		var1 = {}
+		p1[p2] = var1
 	end
 end
 
-return function(p11, p12)
+return function(p1, p2)
 	-- upvalues: getConversationTitleModule (ref), signalsModule (ref), getSubtitle (ref), useIsUserPendingModule (ref), shouldShowOSAForConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref), domLocatorsModule (ref)
 	local t = {}
 	
 	return {
-		getTitle = function(p13)
-			-- upvalues: t (ref), p11 (ref), getConversationTitleModule (copy), signalsModule (copy)
-			local var19 = function(p14)
-				-- upvalues: p11 (copy), p13 (ref), getConversationTitleModule (copy)
-				local conversation = p11.getConversation(p13, p14)
+		getTitle = function(p3)
+			-- upvalues: t (ref), p1 (ref), getConversationTitleModule (copy), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref), getConversationTitleModule (copy)
+				local conversation = p1.getConversation(p3, p4)
 				
 				return if conversation == nil then nil else getConversationTitleModule(conversation) or ""
 			end
 			
-			local var20 = t[p13]
+			local var2 = t[p3]
 			
-			if var20 then
-				local title = var20.title
+			if var2 then
+				local title = var2.title
 				
 				if title == nil then
-					local var21 = signalsModule.createComputed(var19)
-					var20.title = var21
+					local var3 = signalsModule.createComputed(var1)
+					var2.title = var3
 					
-					return var21
+					return var3
 				else
 					return title
 				end
 			else
-				var20 = {}
-				t[p13] = var20
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getSubtitle = function(p15)
-			-- upvalues: t (ref), p11 (ref), p12 (ref), getSubtitle (copy), signalsModule (copy)
-			local var23 = function(p16)
-				-- upvalues: p11 (copy), p15 (ref), p12 (copy), getSubtitle (copy)
-				local conversation = p11.getConversation(p15, p16)
+		getSubtitle = function(p3)
+			-- upvalues: t (ref), p1 (ref), p2 (ref), getSubtitle (copy), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref), p2 (copy), getSubtitle (copy)
+				local conversation = p1.getConversation(p3, p4)
 				
-				return if conversation == nil then "" else getSubtitle(conversation, if conversation.previewMessageId ~= nil then nil else p12.getMessage(conversation.previewMessageId, p16))
+				return if conversation == nil then "" else getSubtitle(conversation, if conversation.previewMessageId ~= nil then nil else p2.getMessage(conversation.previewMessageId, p4))
 			end
 			
-			local var24 = t[p15]
+			local var2 = t[p3]
 			
-			if var24 then
-				local subtitle = var24.subtitle
+			if var2 then
+				local subtitle = var2.subtitle
 				
 				if subtitle == nil then
-					local var25 = signalsModule.createComputed(var23)
-					var24.subtitle = var25
+					local var3 = signalsModule.createComputed(var1)
+					var2.subtitle = var3
 					
-					return var25
+					return var3
 				else
 					return subtitle
 				end
 			else
-				var24 = {}
-				t[p15] = var24
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getIsSubtitlePending = function(p17)
-			-- upvalues: t (ref), p11 (ref), useIsUserPendingModule (copy), signalsModule (copy)
-			local var27 = function(p18)
-				-- upvalues: p11 (copy), p17 (ref), useIsUserPendingModule (copy)
-				local conversation = p11.getConversation(p17, p18)
+		getIsSubtitlePending = function(p3)
+			-- upvalues: t (ref), p1 (ref), useIsUserPendingModule (copy), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref), useIsUserPendingModule (copy)
+				local conversation = p1.getConversation(p3, p4)
 				
 				return if conversation == nil then false else useIsUserPendingModule(conversation)
 			end
 			
-			local var28 = t[p17]
+			local var2 = t[p3]
 			
-			if var28 then
-				local isSubtitlePending = var28.isSubtitlePending
+			if var2 then
+				local isSubtitlePending = var2.isSubtitlePending
 				
 				if isSubtitlePending == nil then
-					local var29 = signalsModule.createComputed(var27)
-					var28.isSubtitlePending = var29
+					local var3 = signalsModule.createComputed(var1)
+					var2.isSubtitlePending = var3
 					
-					return var29
+					return var3
 				else
 					return isSubtitlePending
 				end
 			else
-				var28 = {}
-				t[p17] = var28
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getHasUnreadMessages = function(p19)
-			-- upvalues: t (ref), p11 (ref), signalsModule (copy)
-			local var31 = function(p20)
-				-- upvalues: p11 (copy), p19 (ref)
-				local conversation = p11.getConversation(p19, p20)
+		getHasUnreadMessages = function(p3)
+			-- upvalues: t (ref), p1 (ref), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref)
+				local conversation = p1.getConversation(p3, p4)
 				
 				return conversation ~= nil and conversation.hasUnreadMessages == true
 			end
 			
-			local var32 = t[p19]
+			local var2 = t[p3]
 			
-			if var32 then
-				local hasUnreadMessages = var32.hasUnreadMessages
+			if var2 then
+				local hasUnreadMessages = var2.hasUnreadMessages
 				
 				if hasUnreadMessages == nil then
-					local var33 = signalsModule.createComputed(var31)
-					var32.hasUnreadMessages = var33
+					local var3 = signalsModule.createComputed(var1)
+					var2.hasUnreadMessages = var3
 					
-					return var33
+					return var3
 				else
 					return hasUnreadMessages
 				end
 			else
-				var32 = {}
-				t[p19] = var32
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getHasGroupUp = function(p21)
-			-- upvalues: t (ref), p11 (ref), signalsModule (copy)
-			local var35 = function(p22)
-				-- upvalues: p11 (copy), p21 (ref)
-				local conversation = p11.getConversation(p21, p22)
+		getHasGroupUp = function(p3)
+			-- upvalues: t (ref), p1 (ref), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref)
+				local conversation = p1.getConversation(p3, p4)
 				
 				return conversation ~= nil and conversation.hasGroupUp == true
 			end
 			
-			local var36 = t[p21]
+			local var2 = t[p3]
 			
-			if var36 then
-				local hasGroupUp = var36.hasGroupUp
+			if var2 then
+				local hasGroupUp = var2.hasGroupUp
 				
 				if hasGroupUp == nil then
-					local var37 = signalsModule.createComputed(var35)
-					var36.hasGroupUp = var37
+					local var3 = signalsModule.createComputed(var1)
+					var2.hasGroupUp = var3
 					
-					return var37
+					return var3
 				else
 					return hasGroupUp
 				end
 			else
-				var36 = {}
-				t[p21] = var36
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getShouldShowOSA = function(p23)
-			-- upvalues: t (ref), p11 (ref), shouldShowOSAForConversationModule (copy), signalsModule (copy)
-			local var39 = function(p24)
-				-- upvalues: p11 (copy), p23 (ref), shouldShowOSAForConversationModule (copy)
-				local conversation = p11.getConversation(p23, p24)
+		getShouldShowOSA = function(p3)
+			-- upvalues: t (ref), p1 (ref), shouldShowOSAForConversationModule (copy), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref), shouldShowOSAForConversationModule (copy)
+				local conversation = p1.getConversation(p3, p4)
 				
 				return conversation ~= nil and shouldShowOSAForConversationModule(conversation) == true
 			end
 			
-			local var40 = t[p23]
+			local var2 = t[p3]
 			
-			if var40 then
-				local shouldShowOSA = var40.shouldShowOSA
+			if var2 then
+				local shouldShowOSA = var2.shouldShowOSA
 				
 				if shouldShowOSA == nil then
-					local var41 = signalsModule.createComputed(var39)
-					var40.shouldShowOSA = var41
+					local var3 = signalsModule.createComputed(var1)
+					var2.shouldShowOSA = var3
 					
-					return var41
+					return var3
 				else
 					return shouldShowOSA
 				end
 			else
-				var40 = {}
-				t[p23] = var40
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getShouldShowU13ChatOptIn = function(p25)
-			-- upvalues: t (ref), p11 (ref), shouldShowU13ChatOptInForConversationModule (copy), signalsModule (copy)
-			local var43 = function(p26)
-				-- upvalues: p11 (copy), p25 (ref), shouldShowU13ChatOptInForConversationModule (copy)
-				local conversation = p11.getConversation(p25, p26)
+		getShouldShowU13ChatOptIn = function(p3)
+			-- upvalues: t (ref), p1 (ref), shouldShowU13ChatOptInForConversationModule (copy), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref), shouldShowU13ChatOptInForConversationModule (copy)
+				local conversation = p1.getConversation(p3, p4)
 				
 				return conversation ~= nil and shouldShowU13ChatOptInForConversationModule(conversation) == true
 			end
 			
-			local var44 = t[p25]
+			local var2 = t[p3]
 			
-			if var44 then
-				local shouldShowU13ChatOptIn = var44.shouldShowU13ChatOptIn
+			if var2 then
+				local shouldShowU13ChatOptIn = var2.shouldShowU13ChatOptIn
 				
 				if shouldShowU13ChatOptIn == nil then
-					local var45 = signalsModule.createComputed(var43)
-					var44.shouldShowU13ChatOptIn = var45
+					local var3 = signalsModule.createComputed(var1)
+					var2.shouldShowU13ChatOptIn = var3
 					
-					return var45
+					return var3
 				else
 					return shouldShowU13ChatOptIn
 				end
 			else
-				var44 = {}
-				t[p25] = var44
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getConversationType = function(p27)
-			-- upvalues: t (ref), p11 (ref), signalsModule (copy)
-			local var47 = function(p28)
-				-- upvalues: p11 (copy), p27 (ref)
-				local conversation = p11.getConversation(p27, p28)
+		getConversationType = function(p3)
+			-- upvalues: t (ref), p1 (ref), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref)
+				local conversation = p1.getConversation(p3, p4)
 				
 				return if conversation == nil then nil else conversation.conversationType
 			end
 			
-			local var48 = t[p27]
+			local var2 = t[p3]
 			
-			if var48 then
-				local conversationType = var48.conversationType
+			if var2 then
+				local conversationType = var2.conversationType
 				
 				if conversationType == nil then
-					local var49 = signalsModule.createComputed(var47)
-					var48.conversationType = var49
+					local var3 = signalsModule.createComputed(var1)
+					var2.conversationType = var3
 					
-					return var49
+					return var3
 				else
 					return conversationType
 				end
 			else
-				var48 = {}
-				t[p27] = var48
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getUnixTime = function(p29)
-			-- upvalues: t (ref), p11 (ref), signalsModule (copy)
-			local var51 = function(p30)
-				-- upvalues: p11 (copy), p29 (ref)
-				local conversation = p11.getConversation(p29, p30)
+		getUnixTime = function(p3)
+			-- upvalues: t (ref), p1 (ref), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref)
+				local conversation = p1.getConversation(p3, p4)
 				
 				if conversation == nil then
 					return nil
@@ -333,57 +333,57 @@ return function(p11, p12)
 				return if lastUpdated == nil then nil elseif typeof(lastUpdated) == "DateTime" then lastUpdated.UnixTimestamp elseif type(lastUpdated) == "table" and lastUpdated.GetUnixTimestamp ~= nil then lastUpdated:GetUnixTimestamp() else nil
 			end
 			
-			local var52 = t[p29]
+			local var2 = t[p3]
 			
-			if var52 then
-				local unixTime = var52.unixTime
+			if var2 then
+				local unixTime = var2.unixTime
 				
 				if unixTime == nil then
-					local var53 = signalsModule.createComputed(var51)
-					var52.unixTime = var53
+					local var3 = signalsModule.createComputed(var1)
+					var2.unixTime = var3
 					
-					return var53
+					return var3
 				else
 					return unixTime
 				end
 			else
-				var52 = {}
-				t[p29] = var52
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getTestId = function(p31)
-			-- upvalues: t (ref), p11 (ref), domLocatorsModule (copy), getConversationTitleModule (copy), signalsModule (copy)
-			local var55 = function(p32)
-				-- upvalues: p11 (copy), p31 (ref), domLocatorsModule (copy), getConversationTitleModule (copy)
-				local conversation = p11.getConversation(p31, p32)
+		getTestId = function(p3)
+			-- upvalues: t (ref), p1 (ref), domLocatorsModule (copy), getConversationTitleModule (copy), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref), domLocatorsModule (copy), getConversationTitleModule (copy)
+				local conversation = p1.getConversation(p3, p4)
 				
 				return if conversation == nil then nil else domLocatorsModule.chatLandingConversationEntry(conversation.title or (getConversationTitleModule(conversation) or ""))
 			end
 			
-			local var56 = t[p31]
+			local var2 = t[p3]
 			
-			if var56 then
-				local testId = var56.testId
+			if var2 then
+				local testId = var2.testId
 				
 				if testId == nil then
-					local var57 = signalsModule.createComputed(var55)
-					var56.testId = var57
+					local var3 = signalsModule.createComputed(var1)
+					var2.testId = var3
 					
-					return var57
+					return var3
 				else
 					return testId
 				end
 			else
-				var56 = {}
-				t[p31] = var56
+				var2 = {}
+				t[p3] = var2
 			end
 		end,
-		getLocatorTitle = function(p33)
-			-- upvalues: t (ref), p11 (ref), getConversationTitleModule (copy), signalsModule (copy)
-			local var59 = function(p34)
-				-- upvalues: p11 (copy), p33 (ref), getConversationTitleModule (copy)
+		getLocatorTitle = function(p3)
+			-- upvalues: t (ref), p1 (ref), getConversationTitleModule (copy), signalsModule (copy)
+			local var1 = function(p4)
+				-- upvalues: p1 (copy), p3 (ref), getConversationTitleModule (copy)
 				local title
-				local conversation = p11.getConversation(p33, p34)
+				local conversation = p1.getConversation(p3, p4)
 				
 				if conversation == nil then
 					title = nil
@@ -394,22 +394,22 @@ return function(p11, p12)
 				end
 			end
 			
-			local var60 = t[p33]
+			local var2 = t[p3]
 			
-			if var60 then
-				local locatorTitle = var60.locatorTitle
+			if var2 then
+				local locatorTitle = var2.locatorTitle
 				
 				if locatorTitle == nil then
-					local var61 = signalsModule.createComputed(var59)
-					var60.locatorTitle = var61
+					local var3 = signalsModule.createComputed(var1)
+					var2.locatorTitle = var3
 					
-					return var61
+					return var3
 				else
 					return locatorTitle
 				end
 			else
-				var60 = {}
-				t[p33] = var60
+				var2 = {}
+				t[p3] = var2
 			end
 		end
 	}

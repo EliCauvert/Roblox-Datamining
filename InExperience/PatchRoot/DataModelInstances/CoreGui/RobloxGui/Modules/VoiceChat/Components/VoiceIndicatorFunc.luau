@@ -16,21 +16,21 @@ local voiceIndicatorPerformanceOptimizationsV2 = game:DefineFastFlag("VoiceIndic
 local micTalkingUpdateFrequency = game:DefineFastInt("MicTalkingUpdateFrequency", 3)
 local uDim2 = UDim2.fromOffset(28, 28)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: reactModule (ref), roactModule (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: roactModule (copy), p0 (ref), p1 (ref)
-		return roactModule.joinBindings({ p0, p1 })
-	end, { p0, p1 })
+		-- upvalues: roactModule (copy), p1 (ref), p2 (ref)
+		return roactModule.joinBindings({ p1, p2 })
+	end, { p1, p2 })
 end
 
-local _ = function(p2, p3)
+local _ = function(p1, p2)
 	-- upvalues: constantsModule (ref), default (ref)
-	return function(p4)
-		-- upvalues: constantsModule (copy), default (copy), p2 (ref), p3 (ref)
-		local var17 = p4[1]
+	return function(p3)
+		-- upvalues: constantsModule (copy), default (copy), p1 (ref), p2 (ref)
+		local var1 = p3[1]
 		
-		return if var17 == constantsModule.VOICE_STATE.MUTED or var17 == constantsModule.VOICE_STATE.LOCAL_MUTED then default:GetIcon("Muted", p2) elseif var17 == constantsModule.VOICE_STATE.CONNECTING or var17 == constantsModule.VOICE_STATE.HIDDEN then if p3 and p2 == "MicLight" then default:GetIcon("Connecting", "MicDark") else default:GetIcon("Connecting", p2) elseif var17 == constantsModule.VOICE_STATE.INACTIVE then default:GetIcon("Unmuted0", p2) elseif var17 == constantsModule.VOICE_STATE.TALKING then default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * p4[2]) * 20), p2) else default:GetIcon("Error", p2)
+		return if var1 == constantsModule.VOICE_STATE.MUTED or var1 == constantsModule.VOICE_STATE.LOCAL_MUTED then default:GetIcon("Muted", p1) elseif var1 == constantsModule.VOICE_STATE.CONNECTING or var1 == constantsModule.VOICE_STATE.HIDDEN then if p2 and p1 == "MicLight" then default:GetIcon("Connecting", "MicDark") else default:GetIcon("Connecting", p1) elseif var1 == constantsModule.VOICE_STATE.INACTIVE then default:GetIcon("Unmuted0", p1) elseif var1 == constantsModule.VOICE_STATE.TALKING then default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * p3[2]) * 20), p1) else default:GetIcon("Error", p1)
 	end
 end
 
@@ -44,55 +44,55 @@ local function GenerateGUID()
 	return httpService:GenerateGUID()
 end
 
-local function createTweenShimmeringEffect(p5)
+local function createTweenShimmeringEffect(p1)
 	-- upvalues: tweenService (ref)
-	return tweenService:Create(p5:getValue(), TweenInfo.new(1, Enum.EasingStyle.Circular, Enum.EasingDirection.Out, -1), { Offset = Vector2.new(1, 0) })
+	return tweenService:Create(p1:getValue(), TweenInfo.new(1, Enum.EasingStyle.Circular, Enum.EasingDirection.Out, -1), { Offset = Vector2.new(1, 0) })
 end
 
-return function(p6)
+return function(p1)
 	-- upvalues: useVoiceStateModule (ref), reactModule (ref), roactModule (ref), GenerateGUID (ref), constantsModule (ref), createTweenShimmeringEffect (ref), voiceIndicatorPerformanceOptimizationsV2 (ref), runService (ref), micTalkingUpdateFrequency (ref), t (ref), reactIsModule (ref), default (ref), useSelectionCursor (ref), cursorKind (ref), uDim2 (ref)
-	local var18 = useVoiceStateModule(p6.userId, p6.disable or false)
-	local var19, var20 = reactModule.useBinding(0)
-	local var21 = p6.selectable ~= nil or p6.selectable
-	local var22, var23 = reactModule.useBinding(var18)
-	local var24 = reactModule.useMemo(function()
-		-- upvalues: roactModule (copy), var22 (ref), var19 (ref)
-		return roactModule.joinBindings({ var22, var19 })
-	end, { var22, var19 })
+	local var1 = useVoiceStateModule(p1.userId, p1.disable or false)
+	local var2, var3 = reactModule.useBinding(0)
+	local var4 = p1.selectable ~= nil or p1.selectable
+	local var5, var6 = reactModule.useBinding(var1)
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: roactModule (copy), var5 (ref), var2 (ref)
+		return roactModule.joinBindings({ var5, var2 })
+	end, { var5, var2 })
 	local current = reactModule.useRef(GenerateGUID()).current or ""
-	var23(var18)
-	local var26 = var18 == constantsModule.VOICE_STATE.TALKING
-	local var27 = var18 == constantsModule.VOICE_STATE.CONNECTING
-	local var28 = p6.showConnectingShimmer == true
-	local var29 = reactModule.useRef(nil)
+	var6(var1)
+	local var8 = var1 == constantsModule.VOICE_STATE.TALKING
+	local var9 = var1 == constantsModule.VOICE_STATE.CONNECTING
+	local var10 = p1.showConnectingShimmer == true
+	local var11 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var28 (ref), var27 (ref), var29 (ref), createTweenShimmeringEffect (copy)
-		if var28 and var27 and var29.current then
-			local var34 = createTweenShimmeringEffect(var29)
-			var34:Play()
+		-- upvalues: var10 (ref), var9 (ref), var11 (ref), createTweenShimmeringEffect (copy)
+		if var10 and var9 and var11.current then
+			local var12 = createTweenShimmeringEffect(var11)
+			var12:Play()
 			
 			return function()
-				-- upvalues: var34 (ref)
-				var34:Cancel()
+				-- upvalues: var12 (ref)
+				var12:Cancel()
 			end
 		end
 		return function() end
-	end, { var27, var28 })
+	end, { var9, var10 })
 	
 	if voiceIndicatorPerformanceOptimizationsV2 then
-		local var30 = reactModule.useRef(false)
-		var30.current = var18 == constantsModule.VOICE_STATE.TALKING
+		local var12 = reactModule.useRef(false)
+		var12.current = var1 == constantsModule.VOICE_STATE.TALKING
 		reactModule.useEffect(function()
-			-- upvalues: runService (copy), current (ref), var30 (ref), micTalkingUpdateFrequency (copy), var20 (ref)
-			local var35 = 0
+			-- upvalues: runService (copy), current (ref), var12 (ref), micTalkingUpdateFrequency (copy), var3 (ref)
+			local var13 = 0
 			runService:BindToRenderStep(current, 1, function()
-				-- upvalues: var30 (copy), var35 (write), micTalkingUpdateFrequency (copy), var20 (copy)
-				if not var30.current then return end
-				var35 += 1
+				-- upvalues: var12 (copy), var13 (write), micTalkingUpdateFrequency (copy), var3 (copy)
+				if not var12.current then return end
+				var13 += 1
 				
-				if micTalkingUpdateFrequency <= var35 then
-					var35 = 0
-					var20(math.random())
+				if micTalkingUpdateFrequency <= var13 then
+					var13 = 0
+					var3(math.random())
 				end
 			end)
 			
@@ -103,62 +103,62 @@ return function(p6)
 		end, { current })
 	else
 		reactModule.useEffect(function()
-			-- upvalues: var26 (ref), runService (copy), current (ref), var20 (ref)
-			if var26 then
+			-- upvalues: var8 (ref), runService (copy), current (ref), var3 (ref)
+			if var8 then
 				runService:BindToRenderStep(current, 1, function()
-					-- upvalues: var20 (copy)
-					var20(math.random())
+					-- upvalues: var3 (copy)
+					var3(math.random())
 				end)
 			end
 			return function()
-				-- upvalues: var26 (copy), runService (copy), current (copy)
-				if var26 then
+				-- upvalues: var8 (copy), runService (copy), current (copy)
+				if var8 then
 					runService:UnbindFromRenderStep(current)
 				end
 			end
-		end, { var26, current })
+		end, { var8, current })
 	end
-	local var31 = not (p6.hideOnError and (not var18 or t[var18]))
-	local var32 = if var18 == constantsModule.VOICE_STATE.LOCAL_MUTED then 0.5 else 0
+	local var13 = not (p1.hideOnError and (not var1 or t[var1]))
+	local var14 = if var1 == constantsModule.VOICE_STATE.LOCAL_MUTED then 0.5 else 0
 	
-	if p6.iconTransparency then
-		local var33 = var32
-		var32 = if reactIsModule.isBinding(p6.iconTransparency) then p6.iconTransparency:map(function(p7)
-			-- upvalues: var33 (ref)
-			return 1 - (1 - p7) * (1 - var33)
-		end) else 1 - (1 - p6.iconTransparency) * (1 - var33)
+	if p1.iconTransparency then
+		local var15 = var14
+		var14 = if reactIsModule.isBinding(p1.iconTransparency) then p1.iconTransparency:map(function(p2)
+			-- upvalues: var15 (ref)
+			return 1 - (1 - p2) * (1 - var15)
+		end) else 1 - (1 - p1.iconTransparency) * (1 - var15)
 	end
 	return roactModule.createElement("ImageButton", {
-		Size = p6.size or uDim2,
+		Size = p1.size or uDim2,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Image = reactModule.useMemo(function()
-			-- upvalues: var24 (ref), p6 (ref), var28 (ref), constantsModule (copy), default (copy)
-			local iconStyle = p6.iconStyle
+			-- upvalues: var7 (ref), p1 (ref), var10 (ref), constantsModule (copy), default (copy)
+			local iconStyle = p1.iconStyle
 			
-			return var24:map(function(p8)
-				-- upvalues: constantsModule (copy), default (copy), iconStyle (ref), var28 (ref)
-				local var17 = p8[1]
+			return var7:map(function(p2)
+				-- upvalues: constantsModule (copy), default (copy), iconStyle (ref), var10 (ref)
+				local var16 = p2[1]
 				
-				return if var17 == constantsModule.VOICE_STATE.MUTED or var17 == constantsModule.VOICE_STATE.LOCAL_MUTED then default:GetIcon("Muted", iconStyle) elseif var17 == constantsModule.VOICE_STATE.CONNECTING or var17 == constantsModule.VOICE_STATE.HIDDEN then if var28 and iconStyle == "MicLight" then default:GetIcon("Connecting", "MicDark") else default:GetIcon("Connecting", iconStyle) elseif var17 == constantsModule.VOICE_STATE.INACTIVE then default:GetIcon("Unmuted0", iconStyle) elseif var17 == constantsModule.VOICE_STATE.TALKING then default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * p8[2]) * 20), iconStyle) else default:GetIcon("Error", iconStyle)
+				return if var16 == constantsModule.VOICE_STATE.MUTED or var16 == constantsModule.VOICE_STATE.LOCAL_MUTED then default:GetIcon("Muted", iconStyle) elseif var16 == constantsModule.VOICE_STATE.CONNECTING or var16 == constantsModule.VOICE_STATE.HIDDEN then if var10 and iconStyle == "MicLight" then default:GetIcon("Connecting", "MicDark") else default:GetIcon("Connecting", iconStyle) elseif var16 == constantsModule.VOICE_STATE.INACTIVE then default:GetIcon("Unmuted0", iconStyle) elseif var16 == constantsModule.VOICE_STATE.TALKING then default:GetIcon("Unmuted" .. tostring(math.floor(0.5 + 5 * p2[2]) * 20), iconStyle) else default:GetIcon("Error", iconStyle)
 			end)
-		end, { p6.iconStyle, var28 }),
-		ImageTransparency = var32,
-		Selectable = var21,
+		end, { p1.iconStyle, var10 }),
+		ImageTransparency = var14,
+		Selectable = var4,
 		SelectionImageObject = useSelectionCursor(cursorKind.RoundedRectNoInset),
-		Visible = var31,
-		[roactModule.Event.Activated] = p6.onClicked
+		Visible = var13,
+		[roactModule.Event.Activated] = p1.onClicked
 	}, {
-		ShimmerGradient = if var28 then roactModule.createElement("UIGradient", {
+		ShimmerGradient = if var10 then roactModule.createElement("UIGradient", {
 			Color = ColorSequence.new({
 				ColorSequenceKeypoint.new(0, Color3.new(0.6, 0.6, 0.6)),
 				ColorSequenceKeypoint.new(0.5, Color3.new(0.8, 0.8, 0.8)),
 				ColorSequenceKeypoint.new(1, Color3.new(0.6, 0.6, 0.6))
 			}),
-			Enabled = var27,
+			Enabled = var9,
 			Rotation = -45,
 			Offset = Vector2.new(-1, 0),
-			[roactModule.Ref] = var29
+			[roactModule.Ref] = var11
 		}) else nil
 	})
 end

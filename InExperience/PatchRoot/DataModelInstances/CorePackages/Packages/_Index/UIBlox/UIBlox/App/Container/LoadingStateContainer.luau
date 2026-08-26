@@ -15,24 +15,24 @@ loadingStateContainer.validateProps = tModule.strictInterface({
 	renderOnEmpty = tModule.optional(tModule.callback)
 })
 
-function loadingStateContainer.init(p0)
+function loadingStateContainer.init(p1)
 	-- upvalues: retrievalStatusModule (ref), roactModule (ref), loadingStatePageModule (ref), failedStatePageModule (ref)
-	p0.statePages = {
+	p1.statePages = {
 		[retrievalStatusModule.NotStarted] = function()
-			-- upvalues: p0 (ref), roactModule (copy), loadingStatePageModule (copy)
-			return if p0.props.renderOnEmpty then p0.props.renderOnEmpty() elseif p0.props.renderOnLoading then p0.props.renderOnLoading() else roactModule.createElement(loadingStatePageModule)
+			-- upvalues: p1 (ref), roactModule (copy), loadingStatePageModule (copy)
+			return if p1.props.renderOnEmpty then p1.props.renderOnEmpty() elseif p1.props.renderOnLoading then p1.props.renderOnLoading() else roactModule.createElement(loadingStatePageModule)
 		end,
 		[retrievalStatusModule.Fetching] = function()
-			-- upvalues: p0 (ref), roactModule (copy), loadingStatePageModule (copy)
-			return if p0.props.renderOnLoading then p0.props.renderOnLoading() else roactModule.createElement(loadingStatePageModule)
+			-- upvalues: p1 (ref), roactModule (copy), loadingStatePageModule (copy)
+			return if p1.props.renderOnLoading then p1.props.renderOnLoading() else roactModule.createElement(loadingStatePageModule)
 		end,
 		[retrievalStatusModule.Failed] = function()
-			-- upvalues: p0 (ref), roactModule (copy), failedStatePageModule (copy)
-			return if p0.props.renderOnFailed then p0.props.renderOnFailed() else roactModule.createElement(failedStatePageModule, { onRetry = p0.props.onRetry })
+			-- upvalues: p1 (ref), roactModule (copy), failedStatePageModule (copy)
+			return if p1.props.renderOnFailed then p1.props.renderOnFailed() else roactModule.createElement(failedStatePageModule, { onRetry = p1.props.onRetry })
 		end,
 		[retrievalStatusModule.Done] = function()
-			-- upvalues: p0 (ref)
-			return p0.props.renderOnLoaded()
+			-- upvalues: p1 (ref)
+			return p1.props.renderOnLoaded()
 		end
 	}
 end

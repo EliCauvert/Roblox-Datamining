@@ -14,17 +14,17 @@ local t = {
 
 return function()
 	-- upvalues: fFlagMomentsImmersiveChromeModule (ref), getImmersiveChromeStoreModule (ref), reactOtterModule (ref), reactModule (ref), signalsModule (ref), t (ref)
-	local var7 = getImmersiveChromeStoreModule(false)
-	local var8, var9 = reactOtterModule.useAnimatedBinding(1)
+	local var1 = getImmersiveChromeStoreModule(false)
+	local var2, var3 = reactOtterModule.useAnimatedBinding(1)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagMomentsImmersiveChromeModule (ref), signalsModule (copy), var7 (ref), var9 (ref), reactOtterModule (copy), t (copy)
+		-- upvalues: fFlagMomentsImmersiveChromeModule (ref), signalsModule (copy), var1 (ref), var3 (ref), reactOtterModule (copy), t (copy)
 		if fFlagMomentsImmersiveChromeModule then
-			return signalsModule.createEffect(function(p0)
-				-- upvalues: var7 (copy), var9 (copy), reactOtterModule (copy), t (copy)
-				var9(reactOtterModule.spring(if var7.getChromeVisible(p0) then 1 else 0, t))
+			return signalsModule.createEffect(function(p1)
+				-- upvalues: var1 (copy), var3 (copy), reactOtterModule (copy), t (copy)
+				var3(reactOtterModule.spring(if var1.getChromeVisible(p1) then 1 else 0, t))
 			end)
 		end
-	end, { fFlagMomentsImmersiveChromeModule, var7 })
+	end, { fFlagMomentsImmersiveChromeModule, var1 })
 	
-	return var8
+	return var2
 end

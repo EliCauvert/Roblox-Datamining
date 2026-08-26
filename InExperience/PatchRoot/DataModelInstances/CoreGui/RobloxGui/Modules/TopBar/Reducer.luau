@@ -18,12 +18,12 @@ local t = {
 
 if getFFlagEnableCrossExpVoice() then
 	local crossExperienceVoice = nil
-	local var5 = createPersistenceMiddleware({
+	local var1 = createPersistenceMiddleware({
 		storeKey = crossExperienceModule.Constants.STORAGE_CEV_STORE_KEY
 	}).restore()
 	
-	if var5 and var5.Squad and var5.Squad.CrossExperienceVoice then
-		crossExperienceVoice = var5.Squad.CrossExperienceVoice
+	if var1 and var1.Squad and var1.Squad.CrossExperienceVoice then
+		crossExperienceVoice = var1.Squad.CrossExperienceVoice
 	end
 	t.Squad = roduxModule.combineReducers({
 		CrossExperienceVoice = crossExperienceVoiceModule.installReducer(crossExperienceVoice)

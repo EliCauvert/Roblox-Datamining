@@ -14,8 +14,8 @@ local t_2 = {
 	MainUIGroup = "MainUIGroup",
 	WristUIGroup = "WristUIGroup"
 }
-local var3 = Vector2.new(0.1365, 0.1995) * 3.333333333333
-local var4 = Vector2.new(0.532, 0.3395) * 3.333333333333
+local var1 = Vector2.new(0.1365, 0.1995) * 3.333333333333
+local var2 = Vector2.new(0.532, 0.3395) * 3.333333333333
 
 return {
 	VR_PANEL_RESOLUTION_MULTIPLIER = 800,
@@ -31,8 +31,8 @@ return {
 				name = "ExperienceChat",
 				faceCamera = true,
 				lerp = true,
-				partSize = var3,
-				virtualScreenSize = var3 * 800
+				partSize = var1,
+				virtualScreenSize = var1 * 800
 			}
 		},
 		[t_1.RobloxGui] = {
@@ -42,7 +42,7 @@ return {
 				faceCamera = true,
 				lerp = true,
 				transparency = 0.5,
-				partSize = var4
+				partSize = var2
 			}
 		}
 	},
@@ -50,7 +50,7 @@ return {
 		[t_1.Chat] = {
 			uiGroup = t_2.MainUIGroup,
 			cameraFixedPanelProp = {
-				uiGroupElementOffset = CFrame.new(var4.X * 0.5 + var3.X * 0.5 + 0.066666666667, (var4.Y - var3.Y) / 2, 0)
+				uiGroupElementOffset = CFrame.new(var2.X * 0.5 + var1.X * 0.5 + 0.066666666667, (var2.Y - var1.Y) / 2, 0)
 			}
 		},
 		[t_1.RobloxGui] = {
@@ -63,7 +63,7 @@ return {
 		[t_1.MoreMenu] = t_2.MainUIGroup
 	},
 	ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP = {
-		[t_1.BottomBar] = CFrame.new(0, -var4.Y * 0.5 - 0.075 - 0.033333333333, 0) * CFrame.Angles(0, 3.14159265359, 0),
+		[t_1.BottomBar] = CFrame.new(0, -var2.Y * 0.5 - 0.075 - 0.033333333333, 0) * CFrame.Angles(0, 3.14159265359, 0),
 		[t_1.MoreMenu] = CFrame.new(0.4, -0.36, 0) * CFrame.Angles(0, 3.14159265359, 0)
 	}
 }

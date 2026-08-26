@@ -13,105 +13,105 @@ local t = {
 	[statusCodes.GATEWAY_TIMEOUT] = true
 }
 
-local function createHttpFetchWithRetry(p0)
+local function createHttpFetchWithRetry(p1)
 	-- upvalues: signalsModule (ref), httpSignalsModule (ref), t (ref), statusCodes (ref)
-	local maxRetryCount = p0.MaxRetryCount or 4
-	local retryJitterMinMs = p0.RetryJitterMinMs or 0
-	local retryJitterMaxMs = p0.RetryJitterMaxMs or 4000
-	local var9 = nil
-	local var10 = nil
-	local var11, var12 = signalsModule.createSignal(0)
-	local var13, var14 = signalsModule.createSignal(false)
+	local maxRetryCount = p1.MaxRetryCount or 4
+	local retryJitterMinMs = p1.RetryJitterMinMs or 0
+	local retryJitterMaxMs = p1.RetryJitterMaxMs or 4000
+	local var1 = nil
+	local var2 = nil
+	local var3, var4 = signalsModule.createSignal(0)
+	local var5, var6 = signalsModule.createSignal(false)
 	
 	local function _()
-		-- upvalues: var9 (write), var10 (write)
-		if var9 ~= nil then
-			task.cancel(var9)
-			var9 = nil
+		-- upvalues: var1 (write), var2 (write)
+		if var1 ~= nil then
+			task.cancel(var1)
+			var1 = nil
 		end
-		if var10 ~= nil then
-			var10()
-			var10 = nil
+		if var2 ~= nil then
+			var2()
+			var2 = nil
 		end
 	end
 	
 	local function dispose()
-		-- upvalues: var14 (ref), var9 (write), var10 (write)
-		var14(true)
+		-- upvalues: var6 (ref), var1 (write), var2 (write)
+		var6(true)
 		
-		if var9 ~= nil then
-			task.cancel(var9)
-			var9 = nil
+		if var1 ~= nil then
+			task.cancel(var1)
+			var1 = nil
 		end
-		if var10 ~= nil then
-			var10()
-			var10 = nil
+		if var2 ~= nil then
+			var2()
+			var2 = nil
 		end
 	end
 	
-	local function scheduleRetry(p1)
-		-- upvalues: var9 (write), var11 (ref), retryJitterMaxMs (ref), retryJitterMinMs (ref), var12 (ref)
-		if var9 ~= nil then return end
-		local var18 = p1
+	local function scheduleRetry(p2)
+		-- upvalues: var1 (write), var3 (ref), retryJitterMaxMs (ref), retryJitterMinMs (ref), var4 (ref)
+		if var1 ~= nil then return end
+		local var7 = p2
 		
-		if var18 == nil or var18 > 16 then
-			var18 = math.max(math.pow(2, var11() + 1) + (retryJitterMinMs + math.random() * (retryJitterMaxMs - retryJitterMinMs)) / 1000, 0)
+		if var7 == nil or var7 > 16 then
+			var7 = math.max(math.pow(2, var3() + 1) + (retryJitterMinMs + math.random() * (retryJitterMaxMs - retryJitterMinMs)) / 1000, 0)
 		end
-		var9 = task.delay(var18, function()
-			-- upvalues: var9 (copy), var12 (copy)
-			var9 = nil
-			var12(function(p2)
-				return p2 + 1
+		var1 = task.delay(var7, function()
+			-- upvalues: var1 (copy), var4 (copy)
+			var1 = nil
+			var4(function(p3)
+				return p3 + 1
 			end)
 		end)
 	end
 	
-	local var17 = signalsModule.createComputed(function(p3)
-		-- upvalues: var11 (ref), p0 (ref), var9 (write), var10 (write), httpSignalsModule (copy)
-		local var19 = var11(p3)
-		local var20 = p0
+	local var7 = signalsModule.createComputed(function(p2)
+		-- upvalues: var3 (ref), p1 (ref), var1 (write), var2 (write), httpSignalsModule (copy)
+		local var8 = var3(p2)
+		local var9 = p1
 		
-		if var19 > 0 then
-			var20 = table.clone(p0)
-			local var21 = if p0.Headers then table.clone(p0.Headers) else {}
-			var21["X-Retry-Attempt"] = tostring(var19)
-			var20.Headers = var21
+		if var8 > 0 then
+			var9 = table.clone(p1)
+			local var10 = if p1.Headers then table.clone(p1.Headers) else {}
+			var10["X-Retry-Attempt"] = tostring(var8)
+			var9.Headers = var10
 		end
-		if var9 ~= nil then
-			task.cancel(var9)
-			var9 = nil
+		if var1 ~= nil then
+			task.cancel(var1)
+			var1 = nil
 		end
-		if var10 ~= nil then
-			var10()
-			var10 = nil
+		if var2 ~= nil then
+			var2()
+			var2 = nil
 		end
-		local var22, var23 = httpSignalsModule.fetch(var20)
-		var10 = var23
+		local var11, var12 = httpSignalsModule.fetch(var9)
+		var2 = var12
 		
-		return var22
+		return var11
 	end)
 	
-	return signalsModule.createComputed(function(p4)
-		-- upvalues: var13 (ref), var17 (ref), var11 (ref), maxRetryCount (ref), t (copy), scheduleRetry (ref), statusCodes (copy)
-		if var13(p4) then
+	return signalsModule.createComputed(function(p2)
+		-- upvalues: var5 (ref), var7 (ref), var3 (ref), maxRetryCount (ref), t (copy), scheduleRetry (ref), statusCodes (copy)
+		if var5(p2) then
 			return {
 				status = "error",
 				error = { HttpError = Enum.HttpError.Aborted }
 			}
 		end
-		local var24 = var17(p4)(p4)
+		local var8 = var7(p2)(p2)
 		
-		if var24.status == "pending" then
-			return var24
-		elseif var24.status == "success" then
-			local data = var24.data
+		if var8.status == "pending" then
+			return var8
+		elseif var8.status == "success" then
+			local data = var8.data
 			local statusCode = data.StatusCode
 			
 			if data.Stats and data.Stats.WasRequestRetried then
-				return var24
+				return var8
 			elseif statusCode >= 200 and statusCode < 400 then
-				return var24
-			elseif var11() < maxRetryCount then
+				return var8
+			elseif var3() < maxRetryCount then
 				if t[statusCode] then
 					scheduleRetry()
 					
@@ -121,44 +121,44 @@ local function createHttpFetchWithRetry(p0)
 					
 					return { status = "pending" }
 				elseif statusCode == statusCodes.TOO_MANY_REQUESTS and data.Headers["Retry-After"] then
-					local var25 = tonumber(data.Headers["Retry-After"])
+					local var9 = tonumber(data.Headers["Retry-After"])
 					
-					if var25 == nil or var25 > 16 then
-						return var24
+					if var9 == nil or var9 > 16 then
+						return var8
 					else
-						scheduleRetry(var25)
+						scheduleRetry(var9)
 						
 						return { status = "pending" }
 					end
 				end
 			end
-		elseif var24.status ~= "error" then
-			return var24
-		elseif var11() < maxRetryCount then
+		elseif var8.status ~= "error" then
+			return var8
+		elseif var3() < maxRetryCount then
 			scheduleRetry()
 			
 			return { status = "pending" }
 		end
-		return var24
+		return var8
 	end), dispose
 end
 
-return function(p5)
+return function(p1)
 	-- upvalues: mrRouterHeaders (ref), createHttpFetchWithRetry (ref), createParsedResponseModule (ref)
-	if p5.MaxRetryCount ~= nil and p5.MaxRetryCount < 0 then
-		error(`MaxRetryCount must be >= 0, was provided: {p5.MaxRetryCount}`)
+	if p1.MaxRetryCount ~= nil and p1.MaxRetryCount < 0 then
+		error(`MaxRetryCount must be >= 0, was provided: {p1.MaxRetryCount}`)
 	end
-	if p5.RetryJitterMinMs ~= nil and p5.RetryJitterMaxMs ~= nil and p5.RetryJitterMaxMs <= p5.RetryJitterMinMs then
+	if p1.RetryJitterMinMs ~= nil and p1.RetryJitterMaxMs ~= nil and p1.RetryJitterMaxMs <= p1.RetryJitterMinMs then
 		error("RetryJitterMinMs must be smaller than RetryJitterMaxMs if both are provided")
 	end
-	local var26 = p5
-	local var27 = mrRouterHeaders.injectMrRouterHeaders(p5.Headers)
+	local var1 = p1
+	local var2 = mrRouterHeaders.injectMrRouterHeaders(p1.Headers)
 	
-	if var27 ~= p5.Headers then
-		var26 = table.clone(p5)
-		var26.Headers = var27
+	if var2 ~= p1.Headers then
+		var1 = table.clone(p1)
+		var1.Headers = var2
 	end
-	local var28, var29 = createHttpFetchWithRetry(var26)
+	local var3, var4 = createHttpFetchWithRetry(var1)
 	
-	return createParsedResponseModule(var28, var26), var29
+	return createParsedResponseModule(var3, var1), var4
 end

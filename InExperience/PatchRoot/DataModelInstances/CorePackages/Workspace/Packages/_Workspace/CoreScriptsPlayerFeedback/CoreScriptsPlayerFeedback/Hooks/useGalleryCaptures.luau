@@ -5,15 +5,15 @@ local fetchGalleryCapturesModule = require(coreScriptsPlayerFeedback.Utils.fetch
 
 return function()
 	-- upvalues: reactModule (ref), fetchGalleryCapturesModule (ref)
-	local var3, var4 = reactModule.useState({})
-	local var5, var6 = reactModule.useState(false)
-	local var7 = reactModule.useRef(false)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef({})
-	local var10, var11 = reactModule.useState(true)
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref), var4 (ref)
-		local current = var9.current
+	local var1, var2 = reactModule.useState({})
+	local var3, var4 = reactModule.useState(false)
+	local var5 = reactModule.useRef(false)
+	local var6 = reactModule.useRef(nil)
+	local var7 = reactModule.useRef({})
+	local var8, var9 = reactModule.useState(true)
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), var2 (ref)
+		local current = var7.current
 		
 		if #current == 0 then return end
 		local t = {}
@@ -26,10 +26,10 @@ return function()
 		for i_1 = 31, #current do
 			table.insert(t_1, current[i_1])
 		end
-		var9.current = t_1
-		var4(function(p0)
+		var7.current = t_1
+		var2(function(p1)
 			-- upvalues: t (ref)
-			local cloned = table.clone(p0)
+			local cloned = table.clone(p1)
 			
 			for i, v in t do
 				table.insert(cloned, v)
@@ -37,92 +37,92 @@ return function()
 			return cloned
 		end)
 	end, {})
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), var11 (ref), var6 (ref), var9 (ref), var12 (ref)
-		local current = var8.current
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), var9 (ref), var4 (ref), var7 (ref), var10 (ref)
+		local current = var6.current
 		
 		if current == nil or current.IsFinished then
-			var11(false)
-			var6(false)
+			var9(false)
+			var4(false)
 			
 			return
 		end
-		var6(true)
+		var4(true)
 		task.spawn(function()
-			-- upvalues: var9 (copy), current (ref), var6 (copy), var11 (copy), var12 (copy)
+			-- upvalues: var7 (copy), current (ref), var4 (copy), var9 (copy), var10 (copy)
 			local gameId = game.GameId
 			repeat
-				if #var9.current ~= 0 then break end
+				if #var7.current ~= 0 then break end
 				if pcall(function()
 					-- upvalues: current (copy)
 					current:AdvanceToNextPageAsync()
 				end) then
 					for i, v in current:GetCurrentPage() do
 						if gameId == 0 or v.SourceUniverseId == gameId then
-							table.insert(var9.current, v)
+							table.insert(var7.current, v)
 						end
 					end
 				end
-				var6(false)
-				var11(false)
+				var4(false)
+				var9(false)
 				
 				return
 			until current.IsFinished
-			var12()
-			var11(if #var9.current <= 0 then not current.IsFinished else true)
-			var6(false)
+			var10()
+			var9(if #var7.current <= 0 then not current.IsFinished else true)
+			var4(false)
 		end)
-	end, { var12 })
+	end, { var10 })
 	
 	return {
-		captures = var3,
-		isLoading = var5,
-		hasMore = var10,
+		captures = var1,
+		isLoading = var3,
+		hasMore = var8,
 		load = reactModule.useCallback(function()
-			-- upvalues: var7 (ref), var5 (ref), var6 (ref), fetchGalleryCapturesModule (copy), var11 (ref), var8 (ref), var9 (ref), var12 (ref)
-			if var7.current or var5 then
+			-- upvalues: var5 (ref), var3 (ref), var4 (ref), fetchGalleryCapturesModule (copy), var9 (ref), var6 (ref), var7 (ref), var10 (ref)
+			if var5.current or var3 then
 				return
 			end
-			var7.current = true
-			var6(true)
+			var5.current = true
+			var4(true)
 			task.spawn(function()
-				-- upvalues: fetchGalleryCapturesModule (copy), var6 (copy), var11 (copy), var8 (copy), var9 (copy), var12 (copy)
-				local var17 = fetchGalleryCapturesModule()
+				-- upvalues: fetchGalleryCapturesModule (copy), var4 (copy), var9 (copy), var6 (copy), var7 (copy), var10 (copy)
+				local var12 = fetchGalleryCapturesModule()
 				
-				if var17 == nil then
-					var6(false)
-					var11(false)
+				if var12 == nil then
+					var4(false)
+					var9(false)
 					
 					return
 				end
-				var8.current = var17
+				var6.current = var12
 				local gameId = game.GameId
 				repeat
-					for i, v in var17:GetCurrentPage() do
+					for i, v in var12:GetCurrentPage() do
 						if gameId == 0 or v.SourceUniverseId == gameId then
-							table.insert(var9.current, v)
+							table.insert(var7.current, v)
 						end
 					end
-				until #var9.current >= 30 or var17.IsFinished or not pcall(function()
-					-- upvalues: var17 (ref)
-					var17:AdvanceToNextPageAsync()
+				until #var7.current >= 30 or var12.IsFinished or not pcall(function()
+					-- upvalues: var12 (ref)
+					var12:AdvanceToNextPageAsync()
 				end)
-				var12()
-				var11(if #var9.current <= 0 then not var17.IsFinished else true)
-				var6(false)
+				var10()
+				var9(if #var7.current <= 0 then not var12.IsFinished else true)
+				var4(false)
 			end)
-		end, { var5, var12 }),
+		end, { var3, var10 }),
 		loadMore = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), var9 (ref), var12 (ref), var8 (ref), var11 (ref), var13 (ref)
-			if var5 then return end
-			if #var9.current <= 0 then
-				var13()
+			-- upvalues: var3 (ref), var7 (ref), var10 (ref), var6 (ref), var9 (ref), var11 (ref)
+			if var3 then return end
+			if #var7.current <= 0 then
+				var11()
 				
 				return
 			end
-			var12()
-			local current = var8.current
-			var11(if #var9.current <= 0 then current ~= nil and not current.IsFinished else true)
-		end, { var5, var12, var13 })
+			var10()
+			local current = var6.current
+			var9(if #var7.current <= 0 then current ~= nil and not current.IsFinished else true)
+		end, { var3, var10, var11 })
 	}
 end

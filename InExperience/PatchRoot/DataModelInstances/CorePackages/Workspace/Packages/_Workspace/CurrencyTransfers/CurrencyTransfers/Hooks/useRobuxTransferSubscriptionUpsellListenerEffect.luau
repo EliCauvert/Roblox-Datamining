@@ -7,17 +7,17 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
 local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), sharedFlagsModule (ref), marketplaceService (ref), loggingProtocolModule (ref), currencyTransferTelemetryModule (ref), transferOriginationModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: sharedFlagsModule (copy), marketplaceService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferOriginationModule (copy), p0 (ref)
+		-- upvalues: sharedFlagsModule (copy), marketplaceService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferOriginationModule (copy), p1 (ref)
 		if sharedFlagsModule.GetEngineFeatureEnablePromptRobuxTransferDedicatedUpsellEvent() then
 			local promptRobuxTransferSubscriptionUpsellRequestedConnection = marketplaceService.PromptRobuxTransferSubscriptionUpsellRequested:Connect(function()
-				-- upvalues: loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferOriginationModule (copy), p0 (copy)
+				-- upvalues: loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferOriginationModule (copy), p1 (copy)
 				loggingProtocolModule.default:logRobloxTelemetryCounter(currencyTransferTelemetryModule.CurrencyTransferEngineUpsellSignalReceivedCounter, 1, {
 					transferOrigination = tostring(transferOriginationModule.InExperience)
 				})
-				p0()
+				p1()
 			end)
 			
 			return function()
@@ -29,5 +29,5 @@ return function(p0)
 			end
 		end
 		return function() end
-	end, { p0 })
+	end, { p1 })
 end

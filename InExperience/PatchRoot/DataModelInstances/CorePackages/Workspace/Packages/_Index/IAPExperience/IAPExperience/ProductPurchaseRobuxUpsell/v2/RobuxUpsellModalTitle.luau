@@ -10,9 +10,9 @@ local localizationService = game:GetService("LocalizationService")
 local useLocalization = require(parent_1.Localization).Hooks.useLocalization
 local formatNumberModule = require(parent.Utility.formatNumber)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref), iconButton (ref), iconSize (ref)
-	local var4 = useLocalization({
+	local var1 = useLocalization({
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
 		CurrentBalance = "IAPExperience.InsufficientRobux.Text.CurrentBalance"
 	})
@@ -26,19 +26,19 @@ return function(p0)
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small content-emphasis",
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = var4.NeedMoreRobux
+				Text = var1.NeedMoreRobux
 			}),
 			SubTitle = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium content-default",
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = var4.CurrentBalance .. " " .. utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p0.balanceAmount)
+				Text = var1.CurrentBalance .. " " .. utf8.char(57346) .. formatNumberModule(localizationService.RobloxLocaleId, p1.balanceAmount)
 			})
 		}),
 		CloseButton = reactModule.createElement(iconButton, {
 			icon = "icons/navigation/close",
 			size = iconSize.Medium,
-			onActivated = p0.cancelPurchaseActivated
+			onActivated = p1.cancelPurchaseActivated
 		})
 	})
 end

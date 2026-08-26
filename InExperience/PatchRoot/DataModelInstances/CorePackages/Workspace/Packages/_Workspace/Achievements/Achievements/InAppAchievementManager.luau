@@ -8,75 +8,75 @@ local loggerModule = require(achievements.Logger)
 local loginStatus = require(parent.RobloxAppEnums).LoginStatus
 local httpRequestModule = require(parent.HttpRequest)
 local fFlagUseSignalsForAuthenticationStatus = require(parent.SharedFlags).FFlagUseSignalsForAuthenticationStatus
-local var7 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
+local var1 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 local getXboxLoginConsecutiveDaysModule = require(achievements.Requests.GetXboxLoginConsecutiveDays)
 local voteCountRefresherModule = require(achievements.AchievementDataRefresher.VoteCountRefresher)
 local fixOneNameManyFacesDisconnectCrash = game:DefineFastFlag("FixOneNameManyFacesDisconnectCrash", false)
-local var11 = httpRequestModule.config({
-	requestFunction = function(p0, p1, p2)
+local var2 = httpRequestModule.config({
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: httpRequestModule (ref)
-		return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
+		return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
 	maxRetryCount = if require(parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InAppAchievementManagerHttpRetryCount", 4) else nil
 })
-local var12 = nil
+local var3 = nil
 pcall(function()
-	-- upvalues: var12 (write)
-	var12 = game:GetService("PlatformCloudStorageService")
+	-- upvalues: var3 (write)
+	var3 = game:GetService("PlatformCloudStorageService")
 end)
-local var13 = nil
+local var4 = nil
 pcall(function()
-	-- upvalues: var13 (write)
-	var13 = game:GetService("AchievementService")
+	-- upvalues: var4 (write)
+	var4 = game:GetService("AchievementService")
 end)
 local t = {
-	startUp = function(p3)
+	startUp = function(p1)
 		task.spawn(function()
-			-- upvalues: p3 (ref)
-			p3:initAchievements()
+			-- upvalues: p1 (ref)
+			p1:initAchievements()
 		end)
 	end,
-	initAchievements = function(p4)
+	initAchievements = function(p1)
 		-- upvalues: signalModule (ref), voteCountRefresherModule (ref), achievementModule (ref)
-		local var15, var16 = signalModule.createReadableSignal(0)
-		local var17, var18 = signalModule.createReadableSignal(0)
-		local var19, var20 = signalModule.createReadableSignal(false)
-		voteCountRefresherModule:init(var16, p4.store, p4.requestImpl, p4.platformCloudStorageService)
-		p4.achievementPollster = achievementModule.newWithRefresher(achievementModule.NAMES.ACHIEVEMENT_POLLSTER, var15, voteCountRefresherModule, p4.achievementService)
-		p4.achievement3DayRoll = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_3_DAY_ROLL, var17, p4.achievementService)
-		p4.achievement10DayRoll = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_10_DAY_ROLL, var17, p4.achievementService)
-		p4.achievement20DayRoll = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_20_DAY_ROLL, var17, p4.achievementService)
-		p4.achievementOneNameManyFaces = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_ONE_NAME_MANY_FACES, var19, p4.achievementService)
-		p4:setupAchievements(var18, var20)
+		local var5, var6 = signalModule.createReadableSignal(0)
+		local var7, var8 = signalModule.createReadableSignal(0)
+		local var9, var10 = signalModule.createReadableSignal(false)
+		voteCountRefresherModule:init(var6, p1.store, p1.requestImpl, p1.platformCloudStorageService)
+		p1.achievementPollster = achievementModule.newWithRefresher(achievementModule.NAMES.ACHIEVEMENT_POLLSTER, var5, voteCountRefresherModule, p1.achievementService)
+		p1.achievement3DayRoll = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_3_DAY_ROLL, var7, p1.achievementService)
+		p1.achievement10DayRoll = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_10_DAY_ROLL, var7, p1.achievementService)
+		p1.achievement20DayRoll = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_20_DAY_ROLL, var7, p1.achievementService)
+		p1.achievementOneNameManyFaces = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_ONE_NAME_MANY_FACES, var9, p1.achievementService)
+		p1:setupAchievements(var8, var10)
 	end,
-	setupAchievements = function(value, p5, p6)
+	setupAchievements = function(value, p1, p2)
 		-- upvalues: getXboxLoginConsecutiveDaysModule (ref), loggerModule (ref), fixOneNameManyFacesDisconnectCrash (ref)
 		if value.achievement3DayRoll.hasAchieved == false or value.achievement10DayRoll.hasAchieved == false or value.achievement20DayRoll.hasAchieved == false then
-			getXboxLoginConsecutiveDaysModule(value.requestImpl):andThen(function(p8)
-				-- upvalues: loggerModule (copy), p5 (ref)
-				if p8.responseBody == nil then
+			getXboxLoginConsecutiveDaysModule(value.requestImpl):andThen(function(p3)
+				-- upvalues: loggerModule (copy), p1 (ref)
+				if p3.responseBody == nil then
 					loggerModule:warning("Response body is empty.")
 					
 					return
 				end
-				local count = p8.responseBody.count
+				local count = p3.responseBody.count
 				
 				if count == nil then
 					loggerModule:warning("Day count is missing.")
 					
 					return
 				end
-				p5(count)
-			end):catch(function(p7)
+				p1(count)
+			end):catch(function(p3)
 				-- upvalues: loggerModule (copy)
-				loggerModule:warning(p7)
+				loggerModule:warning(p3)
 			end)
 		end
 		if value.achievementOneNameManyFaces.hasAchieved == false then
-			value.saveAvatarCompletedConnection = value.avatarEditorService.PromptSaveAvatarCompleted:Connect(function(p9)
-				-- upvalues: p6 (ref), fixOneNameManyFacesDisconnectCrash (copy), value (ref)
-				if p9 == Enum.AvatarPromptResult.Success then
-					p6(true)
+			value.saveAvatarCompletedConnection = value.avatarEditorService.PromptSaveAvatarCompleted:Connect(function(p3)
+				-- upvalues: p2 (ref), fixOneNameManyFacesDisconnectCrash (copy), value (ref)
+				if p3 == Enum.AvatarPromptResult.Success then
+					p2(true)
 					
 					if fixOneNameManyFacesDisconnectCrash then
 						if value.saveAvatarCompletedConnection and value.saveAvatarCompletedConnection.Connected then
@@ -93,37 +93,37 @@ local t = {
 			end)
 		end
 	end,
-	shutDown = function(p10)
+	shutDown = function(p1)
 		-- upvalues: voteCountRefresherModule (ref)
-		p10.achievementPollster = nil
-		p10.achievement3DayRoll = nil
-		p10.achievement10DayRoll = nil
-		p10.achievement20DayRoll = nil
+		p1.achievementPollster = nil
+		p1.achievement3DayRoll = nil
+		p1.achievement10DayRoll = nil
+		p1.achievement20DayRoll = nil
 		voteCountRefresherModule:stop()
 		
-		if p10.saveAvatarCompletedConnection and p10.saveAvatarCompletedConnection.Connected then
-			p10.saveAvatarCompletedConnection:Disconnect()
-			p10.saveAvatarCompletedConnection = nil
+		if p1.saveAvatarCompletedConnection and p1.saveAvatarCompletedConnection.Connected then
+			p1.saveAvatarCompletedConnection:Disconnect()
+			p1.saveAvatarCompletedConnection = nil
 		end
 	end
 }
 
-function t.new(p11, p12, p13, p14, p15)
-	-- upvalues: var11 (ref), avatarEditorService (ref), var12 (write), var13 (write), t (ref), fFlagUseSignalsForAuthenticationStatus (ref), signalsModule (ref), var7 (ref), loginStatus (ref)
+function t.new(p1, p2, p3, p4, p5)
+	-- upvalues: var2 (ref), avatarEditorService (ref), var3 (write), var4 (write), t (ref), fFlagUseSignalsForAuthenticationStatus (ref), signalsModule (ref), var1 (ref), loginStatus (ref)
 	local tbl = setmetatable({
-		store = p11,
-		requestImpl = p12 or var11,
-		avatarEditorService = p13 or avatarEditorService,
-		platformCloudStorageService = p14 or var12,
-		achievementService = p15 or var13
+		store = p1,
+		requestImpl = p2 or var2,
+		avatarEditorService = p3 or avatarEditorService,
+		platformCloudStorageService = p4 or var3,
+		achievementService = p5 or var4
 	}, { __index = t })
 	
 	if fFlagUseSignalsForAuthenticationStatus then
 		tbl._authStatusInitialized = false
 		tbl._lastAuthStatus = nil
-		tbl._disposeAuthStatus = signalsModule.createEffect(function(p16)
-			-- upvalues: var7 (copy), tbl (ref), loginStatus (copy)
-			local status = var7(false).getStatus(p16)
+		tbl._disposeAuthStatus = signalsModule.createEffect(function(p6)
+			-- upvalues: var1 (copy), tbl (ref), loginStatus (copy)
+			local status = var1(false).getStatus(p6)
 			
 			if not tbl._authStatusInitialized then
 				tbl._authStatusInitialized = true
@@ -145,16 +145,16 @@ function t.new(p11, p12, p13, p14, p15)
 		
 		return tbl
 	end
-	p11.changed:connect(function(p17, p18)
+	p1.changed:connect(function(p6, p7)
 		-- upvalues: loginStatus (copy), tbl (ref)
-		local var23 = if p17.AuthenticationStatus then p17.AuthenticationStatus.status else loginStatus.UNKNOWN
+		local var5 = if p6.AuthenticationStatus then p6.AuthenticationStatus.status else loginStatus.UNKNOWN
 		
-		if var23 ~= (if p18.AuthenticationStatus then p18.AuthenticationStatus.status else loginStatus.UNKNOWN) then
-			if var23 == loginStatus.LOGGED_IN then
+		if var5 ~= (if p7.AuthenticationStatus then p7.AuthenticationStatus.status else loginStatus.UNKNOWN) then
+			if var5 == loginStatus.LOGGED_IN then
 				tbl:startUp()
 				
 				return
-			elseif var23 == loginStatus.LOGGED_OUT then
+			elseif var5 == loginStatus.LOGGED_OUT then
 				tbl:shutDown()
 			end
 		end

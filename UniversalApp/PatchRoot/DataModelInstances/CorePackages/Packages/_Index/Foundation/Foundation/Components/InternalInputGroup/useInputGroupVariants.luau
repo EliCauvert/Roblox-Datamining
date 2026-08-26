@@ -35,9 +35,9 @@ local function variantsFactory(_)
 	}
 end
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local inputGroup = variantsContextModule.useVariants("InputGroup", variantsFactory, p0)
+	local inputGroup = variantsContextModule.useVariants("InputGroup", variantsFactory, p1)
 	
-	return composeStyleVariantModule(inputGroup.common, inputGroup.sizes[p1])
+	return composeStyleVariantModule(inputGroup.common, inputGroup.sizes[p2])
 end

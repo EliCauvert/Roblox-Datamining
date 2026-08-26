@@ -1,11 +1,11 @@
-﻿return function(p0, p1)
-	if p0 == nil or p1 == nil then
+﻿return function(p1, p2)
+	if p1 == nil or p2 == nil then
 		return nil
 	end
-	for i, v in pairs(p0) do
+	for i, v in pairs(p1) do
 		local locale = v.locale
 		
-		if locale and locale.language and locale.language.languageCode == p1 then
+		if locale and locale.language and locale.language.languageCode == p2 then
 			return locale.language.name
 		end
 	end

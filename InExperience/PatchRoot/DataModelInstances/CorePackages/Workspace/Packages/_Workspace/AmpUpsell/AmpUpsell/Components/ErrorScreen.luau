@@ -9,8 +9,8 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local sendButtonClickEventModule = require(ampUpsell.Analytics.sendButtonClickEvent)
 
-local function selectScreenSize(p0)
-	return p0.ScreenSize
+local function selectScreenSize(p1)
+	return p1.ScreenSize
 end
 
 return function(p1)
@@ -18,20 +18,20 @@ return function(p1)
 	local onRetry = p1.onRetry
 	local onCancel = p1.onCancel
 	local featureName = p1.featureName
-	local var6 = useLocalization({
+	local var1 = useLocalization({
 		title = "Amp.ErrorScreen.Title",
 		bodyText = "Amp.ErrorScreen.BodyText",
 		buttonRetry = "Amp.ErrorScreen.Retry",
 		buttonCancel = "Amp.ErrorScreen.Cancel"
 	})
-	local var7 = if p1.analyticsService then p1.analyticsService else analyticsServiceModule.EventStream
+	local var2 = if p1.analyticsService then p1.analyticsService else analyticsServiceModule.EventStream
 	
 	return reactModule.createElement(interactiveAlert, {
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
 		screenSize = useSelector(selectScreenSize),
-		title = var6.title,
-		bodyText = var6.bodyText,
+		title = var1.title,
+		bodyText = var1.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
@@ -39,11 +39,11 @@ return function(p1)
 					props = {
 						isDisabled = false,
 						onActivated = function()
-							-- upvalues: sendButtonClickEventModule (copy), var7 (ref), featureName (ref), onCancel (ref)
-							sendButtonClickEventModule(var7, "AmpErrorScreen", featureName, "Cancel")
+							-- upvalues: sendButtonClickEventModule (copy), var2 (ref), featureName (ref), onCancel (ref)
+							sendButtonClickEventModule(var2, "AmpErrorScreen", featureName, "Cancel")
 							onCancel()
 						end,
-						text = var6.buttonCancel
+						text = var1.buttonCancel
 					}
 				},
 				{
@@ -51,11 +51,11 @@ return function(p1)
 					props = {
 						isDisabled = false,
 						onActivated = function()
-							-- upvalues: sendButtonClickEventModule (copy), var7 (ref), featureName (ref), onRetry (ref)
-							sendButtonClickEventModule(var7, "AmpErrorScreen", featureName, "Retry")
+							-- upvalues: sendButtonClickEventModule (copy), var2 (ref), featureName (ref), onRetry (ref)
+							sendButtonClickEventModule(var2, "AmpErrorScreen", featureName, "Retry")
 							onRetry()
 						end,
-						text = var6.buttonRetry
+						text = var1.buttonRetry
 					}
 				}
 			}

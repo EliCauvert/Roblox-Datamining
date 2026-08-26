@@ -109,14 +109,14 @@ if fFlagBuildExperienceClientDataModelTools then
 		running = "Searching client DataModel"
 	}
 end
-local function formatCampaignDate(p0)
+local function formatCampaignDate(p1)
 	-- upvalues: localizationService (ref)
 	local robloxLocaleId = localizationService.RobloxLocaleId
 	
 	if robloxLocaleId == "" then
 		robloxLocaleId = "en-us"
 	end
-	return DateTime.fromUnixTimestampMillis(p0):FormatLocalTime("MMM D", robloxLocaleId)
+	return DateTime.fromUnixTimestampMillis(p1):FormatLocalTime("MMM D", robloxLocaleId)
 end
 
 local t_1 = {
@@ -352,88 +352,88 @@ local t_1 = {
 	formatBuildGreeting = function(p1)
 		return if p1 == "" then "Hi" else `Hi, {p1}`
 	end,
-	formatChatRevertConfirmationDescription = function(p2)
-		return `Confirm to revert the latest change and go back to {if p2 < 10 then `v0{p2}` else `v{p2}`}.`
+	formatChatRevertConfirmationDescription = function(p1)
+		return `Confirm to revert the latest change and go back to {if p1 < 10 then `v0{p1}` else `v{p1}`}.`
 	end,
-	formatGameSharedWithTarget = function(p3)
-		return if p3 == "" then "Game shared" else `Game shared with {p3}`
+	formatGameSharedWithTarget = function(p2)
+		return if p2 == "" then "Game shared" else `Game shared with {p2}`
 	end,
-	formatShareExperience = function(p4)
-		return `Share {p4}`
+	formatShareExperience = function(p2)
+		return `Share {p2}`
 	end,
-	formatChatFailedTool = function(p5)
-		return `Failed {p5}`
+	formatChatFailedTool = function(p2)
+		return `Failed {p2}`
 	end,
-	formatChatFinishedTool = function(p6)
-		return `Finished {p6}`
+	formatChatFinishedTool = function(p2)
+		return `Finished {p2}`
 	end,
-	formatChatRunningTool = function(p7)
-		return `Running {p7}`
+	formatChatRunningTool = function(p2)
+		return `Running {p2}`
 	end,
-	formatChatTaskCount = function(p8)
-		return if p8 == 1 then "1 task completed" else `{p8} tasks completed`
+	formatChatTaskCount = function(p2)
+		return if p2 == 1 then "1 task completed" else `{p2} tasks completed`
 	end,
-	formatChatThinkingDuration = function(p9)
-		return `Thinking for {math.max(0, math.floor(p9))}s`
+	formatChatThinkingDuration = function(p2)
+		return `Thinking for {math.max(0, math.floor(p2))}s`
 	end,
-	formatChatTurnFailureMessage = function(p10, p11)
-		return if p11 == nil then p10 else `({p11}) {p10}`
+	formatChatTurnFailureMessage = function(p3, p4)
+		return if p4 == nil then p3 else `({p4}) {p3}`
 	end,
-	formatChatWorkedDuration = function(p12)
-		local maxValue = math.max(0, math.floor(p12 + 0.5))
+	formatChatWorkedDuration = function(p3)
+		local maxValue = math.max(0, math.floor(p3 + 0.5))
 		
 		return if maxValue < 60 then `Worked for {maxValue}s` else `Worked for {math.floor(maxValue / 60)}m{maxValue % 60}s`
 	end,
-	getChatToolActivityLabel = function(p13, p14)
+	getChatToolActivityLabel = function(p4, p5)
 		-- upvalues: t (ref)
-		local var7 = t[p13]
+		local var1 = t[p4]
 		
-		return if var7 == nil then nil elseif p14 == "completed" then var7.completed elseif p14 == "failed" then var7.failed else var7.running
+		return if var1 == nil then nil elseif p5 == "completed" then var1.completed elseif p5 == "failed" then var1.failed else var1.running
 	end,
-	formatMyCreationsUniverseName = function(p15)
-		return `Universe {p15}`
+	formatMyCreationsUniverseName = function(p4)
+		return `Universe {p4}`
 	end,
-	formatPrivateInvitesCount = function(p16, p17)
-		return `{p16}/{p17}`
+	formatPrivateInvitesCount = function(p4, p5)
+		return `{p4}/{p5}`
 	end,
-	formatPrivateInvitesSent = function(p18, p19)
-		return `{p18} of {p19} playtesters added`
+	formatPrivateInvitesSent = function(p4, p5)
+		return `{p4} of {p5} playtesters added`
 	end,
-	formatPrivateInvitesSubtitle = function(p20)
-		return `Choose up to {p20} friends, then share the link to the game.`
+	formatPrivateInvitesSubtitle = function(p4)
+		return `Choose up to {p4} friends, then share the link to the game.`
 	end,
-	formatSubagentStatusCompletedTasks = function(p21)
-		return `{p21} completed tasks`
+	formatSubagentStatusCompletedTasks = function(p4)
+		return `{p4} completed tasks`
 	end,
-	formatUserPickerUsername = function(p22)
-		return `@{p22}`
+	formatUserPickerUsername = function(p4)
+		return `@{p4}`
 	end,
-	formatVersionHistoryCreatedDate = function(p23, p24, p25)
-		return `{p23} {p24}, {p25}`
+	formatVersionHistoryCreatedDate = function(p4, p5, p6)
+		return `{p4} {p5}, {p6}`
 	end,
-	formatVersionHistoryRestoredBadge = function(p26)
-		return `Restored {if p26 < 10 then `v0{p26}` else `v{p26}`}`
+	formatVersionHistoryRestoredBadge = function(p4)
+		return `Restored {if p4 < 10 then `v0{p4}` else `v{p4}`}`
 	end,
-	formatVersionHistoryVersionLabel = function(p27, p28)
-		return `{if p27 < 10 then `v0{p27}` else `v{p27}`} \194\183 {p28}`
+	formatVersionHistoryVersionLabel = function(p5, p6)
+		return `{if p5 < 10 then `v0{p5}` else `v{p5}`} \194\183 {p6}`
 	end,
-	formatVersionHistoryVersionNumber = function(p29)
-		return if p29 < 10 then `v0{p29}` else `v{p29}`
+	formatVersionHistoryVersionNumber = function(p7)
+		return if p7 < 10 then `v0{p7}` else `v{p7}`
 	end,
-	formatVersionHistoryVersionTitle = function(p30)
-		return `Version {p30}`
+	formatVersionHistoryVersionTitle = function(p7)
+		return `Version {p7}`
 	end,
-	formatCreatorCreditAdditionalUsed = function(p31, p32)
-		return `{p31} of {p32} used`
+	formatCreatorCreditAdditionalUsed = function(p7, p8)
+		return `{p7} of {p8} used`
 	end,
-	formatCreatorCreditAdditionalUsedNoLimit = function(p33)
-		return `{p33} used \226\128\162 No limit`
+	formatCreatorCreditAdditionalUsedNoLimit = function(p7)
+		return `{p7} used \226\128\162 No limit`
 	end,
-	formatCreatorCreditLimitBelowSpend = function(p34)
+	formatCreatorCreditLimitBelowSpend = function(p7)
 		return `Limit can't be below the {p34} Robux already spent today.`
 	end,
-	formatCreatorCreditPercentUsed = function(p35)
-		local floored = math.floor(p35 + 0.5)
+	formatCreatorCreditPercentUsed = function(p7)
+		local floored = math.floor(p7 + 0.5)
 		
 		if floored < 0 then
 			floored = 0
@@ -443,11 +443,11 @@ local t_1 = {
 		end
 		return `{floored}% used`
 	end,
-	formatCreatorCreditRobuxUsage = function(p36, p37)
-		return `{p36}/{p37}`
+	formatCreatorCreditRobuxUsage = function(p7, p8)
+		return `{p7}/{p8}`
 	end,
-	formatCreatorCreditRobuxUsageUnlimited = function(p38)
-		return `{p38} used`
+	formatCreatorCreditRobuxUsageUnlimited = function(p7)
+		return `{p7} used`
 	end,
 	formatCreatorCreditResetHours = function(value)
 		return if value == 1 then "Resets in 1 hour" else `Resets in {value} hours`
@@ -827,14 +827,14 @@ if fFlagBuildLocalization then
 		AD_CAMPAIGN_CARD_DESC_FREE = "Feature.Build.Description.BoostAudienceForPlays",
 		AD_CAMPAIGN_CARD_ACTIVE_DESC = "Feature.Build.Description.CampaignRunDates",
 		AD_CAMPAIGN_CARD_VIEW = "Feature.Build.Action.View",
-		getChatToolActivityLocalizationKey = function(p39, p40)
+		getChatToolActivityLocalizationKey = function(p7, p8)
 			-- upvalues: t_2 (ref)
-			if p39 == nil then
+			if p7 == nil then
 				return nil
 			end
-			local var9 = t_2[p39]
+			local var1 = t_2[p7]
 			
-			return if var9 == nil then nil elseif p40 == "completed" then var9.completed elseif p40 == "failed" then var9.failed else var9.running
+			return if var1 == nil then nil elseif p8 == "completed" then var1.completed elseif p8 == "failed" then var1.failed else var1.running
 		end,
 		formatCampaignDate = formatCampaignDate
 	}

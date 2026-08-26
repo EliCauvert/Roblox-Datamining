@@ -12,10 +12,10 @@ end
 expChat:setContext({ prefix = "[{loggerName} ({level})] - " })
 expChat:addSink({
 	maxLevel = expChat.Levels.fromString(status.level),
-	log = function(_, p0, _)
+	log = function(_, p1, _)
 		-- upvalues: status (write)
-		if string.match(p0, status.pattern) then
-			print(p0)
+		if string.match(p1, status.pattern) then
+			print(p1)
 		end
 	end
 })

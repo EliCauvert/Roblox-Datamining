@@ -14,23 +14,23 @@ local t = {
 
 return function(value)
 	-- upvalues: reactModule (ref), fFlagEnableConfirmSignifierOnSignUpPage (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
-	local var5 = reactModule.useCallback(function(p0)
+	local var1 = reactModule.useCallback(function(p1)
 		-- upvalues: value (ref)
-		p0:cancel()
+		p1:cancel()
 		
-		if p0.eventData and p0.eventData.KeyCode == Enum.KeyCode.None then return end
+		if p1.eventData and p1.eventData.KeyCode == Enum.KeyCode.None then return end
 		if value then
 			value()
 		end
 	end, if value then { value } else {})
 	
 	return if fFlagEnableConfirmSignifierOnSignUpPage then reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), var5 (ref), inputHandlersModule (copy)
+		-- upvalues: focusNavigationEventNameEnum (copy), var1 (ref), inputHandlersModule (copy)
 		return {
-			[focusNavigationEventNameEnum.NavigateBack] = { handler = var5 },
+			[focusNavigationEventNameEnum.NavigateBack] = { handler = var1 },
 			[focusNavigationEventNameEnum.Confirm] = {
 				handler = inputHandlersModule.onRelease(function() end)
 			}
 		}
-	end, {}), reactFocusNavigationModule.useEventMap(t)) else reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, var5)
+	end, {}), reactFocusNavigationModule.useEventMap(t)) else reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, var1)
 end

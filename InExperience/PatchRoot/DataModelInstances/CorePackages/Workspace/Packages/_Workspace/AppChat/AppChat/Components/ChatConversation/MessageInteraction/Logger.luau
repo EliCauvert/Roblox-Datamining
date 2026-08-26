@@ -1,4 +1,4 @@
-﻿local var0 = require(script:FindFirstAncestor("AppChat").Logger):new(script:GetFullName() .. ":MessageInteraction")
-var0:setContext({ screen = "MessageContextMenuScreen" })
+﻿local var1 = require(script:FindFirstAncestor("AppChat").Logger):new(script:GetFullName() .. ":MessageInteraction")
+var1:setContext({ screen = "MessageContextMenuScreen" })
 
-return var0
+return var1

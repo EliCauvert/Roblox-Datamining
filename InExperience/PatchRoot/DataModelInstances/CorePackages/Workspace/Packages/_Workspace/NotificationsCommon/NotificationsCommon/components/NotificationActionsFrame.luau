@@ -13,12 +13,12 @@ local defaultButtonHeight = constantsModule.DefaultButtonHeight
 local useNotificationCardStateModule = require(context.useNotificationCardState)
 local useNotificationCardDataModule = require(context.useNotificationCardData)
 
-local _ = function(p0)
+local _ = function(p1)
 	-- upvalues: typeModule (ref), buttonType (ref)
-	return if p0 == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif p0 == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif p0 == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif p0 == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
+	return if p1 == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif p1 == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif p1 == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif p1 == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
 end
 
-local var5 = function(p1, p2, p3)
+local var1 = function(p1, p2, p3)
 	-- upvalues: useStyle (ref), typeModule (ref), buttonType (ref)
 	local captionHeader = useStyle().Font.CaptionHeader
 	local t = {}
@@ -45,20 +45,20 @@ local var5 = function(p1, p2, p3)
 end
 
 return function()
-	-- upvalues: useNotificationCardStateModule (ref), useNotificationCardDataModule (ref), var5 (ref), react (ref), defaultContentPadding (ref), buttonStack (ref), defaultButtonHeight (ref)
-	local var8 = useNotificationCardDataModule()
-	local var9 = var5(useNotificationCardStateModule("button"), var8.handleActions, var8.notificationPayload)
+	-- upvalues: useNotificationCardStateModule (ref), useNotificationCardDataModule (ref), var1 (ref), react (ref), defaultContentPadding (ref), buttonStack (ref), defaultButtonHeight (ref)
+	local var2 = useNotificationCardDataModule()
+	local var3 = var1(useNotificationCardStateModule("button"), var2.handleActions, var2.notificationPayload)
 	
-	return if #var9 > 0 then react.createElement("Frame", {
+	return if #var3 > 0 then react.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
 		UIPadding = react.createElement("UIPadding", { PaddingTop = UDim.new(0, defaultContentPadding) }),
-		ActionButtons = var9 and react.createElement(buttonStack, {
+		ActionButtons = var3 and react.createElement(buttonStack, {
 			buttonHeight = defaultButtonHeight,
-			buttons = var9,
+			buttons = var3,
 			marginBetween = defaultContentPadding
 		})
 	}) else nil

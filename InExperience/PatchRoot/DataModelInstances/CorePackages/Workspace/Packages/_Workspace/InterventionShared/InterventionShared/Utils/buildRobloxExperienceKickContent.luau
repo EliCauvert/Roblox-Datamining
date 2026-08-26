@@ -17,17 +17,17 @@ local list = {
 	}
 }
 
-local function parseErrorDetails(p0)
-	return if p0 == nil then {
+local function parseErrorDetails(p1)
+	return if p1 == nil then {
 		beginTimestamp = "",
 		endTimestamp = "",
 		labelTranslationKey = "",
 		durationSeconds = nil
 	} else {
-		beginTimestamp = p0.beginTimestamp or "",
-		endTimestamp = p0.endTimestamp or "",
-		labelTranslationKey = p0.labelTranslationKey or "",
-		durationSeconds = tonumber(p0.durationSeconds)
+		beginTimestamp = p1.beginTimestamp or "",
+		endTimestamp = p1.endTimestamp or "",
+		labelTranslationKey = p1.labelTranslationKey or "",
+		durationSeconds = tonumber(p1.durationSeconds)
 	}
 end
 
@@ -54,38 +54,38 @@ local function buildModerationDetail(p1, p2)
 	}
 end
 
-local function pickTitleAndBody(p3, p4)
+local function pickTitleAndBody(p1, p2)
 	-- upvalues: list (ref)
-	if p4 == nil or p4 <= 0 then
+	if p2 == nil or p2 <= 0 then
 		return {
-			title = p3("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned"),
-			body = p3("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned")
+			title = p1("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned"),
+			body = p1("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned")
 		}
 	end
 	for i, v in list do
-		if v.unitInSeconds <= p4 then
-			local ceiled = math.ceil(p4 / v.unitInSeconds)
+		if v.unitInSeconds <= p2 then
+			local ceiled = math.ceil(p2 / v.unitInSeconds)
 			
 			return {
-				title = p3(if ceiled == 1 then v.singularKey else v.pluralKey, { number = ceiled }),
-				body = p3("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended")
+				title = p1(if ceiled == 1 then v.singularKey else v.pluralKey, { number = ceiled }),
+				body = p1("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended")
 			}
 		end
 	end
 	return {
-		title = p3(list[3].singularKey, { number = 1 }),
-		body = p3("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended")
+		title = p1(list[3].singularKey, { number = 1 }),
+		body = p1("Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended")
 	}
 end
 
-return function(p5, p6, p7)
+return function(p3, p4, p5)
 	-- upvalues: parseErrorDetails (ref), buildModerationDetail (ref), pickTitleAndBody (ref), abuseVectorModule (ref)
-	local var6 = parseErrorDetails(p6)
-	local var7 = pickTitleAndBody(p7, var6.durationSeconds)
+	local var1 = parseErrorDetails(p4)
+	local var2 = pickTitleAndBody(p5, var1.durationSeconds)
 	
 	return {
 		abuseVector = abuseVectorModule.RobloxExperienceKick,
-		moderationDetail = buildModerationDetail(p5, var6),
-		options = { titleOverride = var7.title, bodyOverride = var7.body }
+		moderationDetail = buildModerationDetail(p3, var1),
+		options = { titleOverride = var2.title, bodyOverride = var2.body }
 	}
 end

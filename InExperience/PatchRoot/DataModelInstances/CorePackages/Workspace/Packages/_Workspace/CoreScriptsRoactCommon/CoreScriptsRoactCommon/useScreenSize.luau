@@ -21,14 +21,14 @@ return function()
 		-- upvalues: var3 (ref), var2 (ref)
 		if var3 then
 			var2(var3.ViewportSize)
-			local var6 = var3:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+			local var5 = var3:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 				-- upvalues: var2 (copy), var3 (copy)
 				var2(var3.ViewportSize)
 			end)
 			
 			return function()
-				-- upvalues: var6 (ref)
-				var6:Disconnect()
+				-- upvalues: var5 (ref)
+				var5:Disconnect()
 			end
 		end
 	end, { var3 })

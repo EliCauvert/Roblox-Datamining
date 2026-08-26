@@ -5,11 +5,11 @@ local createSignalMap = require(parent_1.CoreScriptsRoactCommon).Utilities.creat
 local _ = require(parent.LeaderboardStoreTypes)
 local leaderboardStoreModule = require(parent.LeaderboardStore)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: leaderboardStoreModule (ref), createSignalMap (ref)
 	return function()
-		-- upvalues: p0 (ref), p1 (ref), leaderboardStoreModule (copy), createSignalMap (copy)
-		local var1 = leaderboardStoreModule.new(p0 or game:GetService("Teams"), p1 or game:GetService("Players"))
+		-- upvalues: p1 (ref), p2 (ref), leaderboardStoreModule (copy), createSignalMap (copy)
+		local var1 = leaderboardStoreModule.new(p1 or game:GetService("Teams"), p2 or game:GetService("Players"))
 		
 		return {
 			getGameStatsList = function()
@@ -20,13 +20,13 @@ return function(p0, p1)
 				-- upvalues: var1 (write), createSignalMap (copy)
 				return if var1 then var1:getTeamList() else createSignalMap()
 			end,
-			getTeamPlayerList = function(p2, p3)
+			getTeamPlayerList = function(p3, p4)
 				-- upvalues: var1 (write), createSignalMap (copy)
-				return if var1 then var1:getTeamPlayerList(p2, p3) else createSignalMap()
+				return if var1 then var1:getTeamPlayerList(p3, p4) else createSignalMap()
 			end,
-			getPlayerEntry = function(p4, p5)
+			getPlayerEntry = function(p3, p4)
 				-- upvalues: var1 (write)
-				return if var1 then var1:getPlayerEntry(p4, p5) else nil
+				return if var1 then var1:getPlayerEntry(p3, p4) else nil
 			end,
 			cleanUp = function()
 				-- upvalues: var1 (write)

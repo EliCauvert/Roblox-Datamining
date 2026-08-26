@@ -13,23 +13,23 @@ local layerCollectorProvider = require(parent.UIBlox).Core.Layout.LayerCollector
 local fFlagChatLineReportingFocusFixesEnabled = require(parent.SharedFlags).FFlagChatLineReportingFocusFixesEnabled
 local chatLineReportStepHandlerModule = require(chatLineReporting.Components.ChatLineReportStepHandler)
 local foundationProvider = require(parent.Foundation).FoundationProvider
-local var7 = nil
-local var8 = nil
+local var1 = nil
+local var2 = nil
 
-local var9 = function()
-	-- upvalues: var8 (write), roactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), var7 (write)
-	if var8 then
-		roactModule.unmount(var8)
+local var3 = function()
+	-- upvalues: var2 (write), roactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), var1 (write)
+	if var2 then
+		roactModule.unmount(var2)
 		
 		if fFlagChatLineReportingFocusFixesEnabled then
-			var7:teardown()
+			var1:teardown()
 		end
 	end
 end
 
 return {
-	initialize = function(p0)
-		-- upvalues: reactModule (ref), layerCollectorProvider (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationProvider (ref), styleProviderWithDefaultTheme (ref), chatLineReportStepHandlerModule (ref), var9 (ref), fFlagChatLineReportingFocusFixesEnabled (ref), var7 (write), reactFocusNavigationModule (ref), var8 (write), provider (ref), coreGuiService (ref)
+	initialize = function(p1)
+		-- upvalues: reactModule (ref), layerCollectorProvider (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationProvider (ref), styleProviderWithDefaultTheme (ref), chatLineReportStepHandlerModule (ref), var3 (ref), fFlagChatLineReportingFocusFixesEnabled (ref), var1 (write), reactFocusNavigationModule (ref), var2 (write), provider (ref), coreGuiService (ref)
 		local screenGui = reactModule.createElement("ScreenGui", {
 			IgnoreGuiInset = true,
 			OnTopOfCoreBlur = false,
@@ -41,7 +41,7 @@ return {
 				}, {
 					FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
 						StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true }, {
-							ChatLineReportStepHandler = reactModule.createElement(chatLineReportStepHandlerModule, { unmount = var9, messages = p0 })
+							ChatLineReportStepHandler = reactModule.createElement(chatLineReportStepHandlerModule, { unmount = var3, messages = p1 })
 						})
 					})
 				})
@@ -49,13 +49,13 @@ return {
 		})
 		
 		if fFlagChatLineReportingFocusFixesEnabled then
-			var7 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
-			var8 = roactModule.mount(reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var7 }, {
+			var1 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+			var2 = roactModule.mount(reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
 				FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, { ChatLineReportRoot = screenGui })
 			}), coreGuiService, "ChatLineReportRoot")
 			
 			return
 		end
-		var8 = roactModule.mount(screenGui, coreGuiService, "ChatLineReportRoot")
+		var2 = roactModule.mount(screenGui, coreGuiService, "ChatLineReportRoot")
 	end
 }

@@ -20,7 +20,7 @@ local t = {
 	end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), roactNavigationModule (ref), t (ref), roactServices (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), dynamicReportContainerModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -40,9 +40,9 @@ return function(p0)
 						surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
 					}, {
 						DynamicReport = reactModule.createElement(dynamicReportContainerModule, {
-							abuseVector = p0.abuseVector,
-							targetId = p0.targetId,
-							onClose = p0.onClose
+							abuseVector = p1.abuseVector,
+							targetId = p1.targetId,
+							onClose = p1.onClose
 						})
 					})
 				})

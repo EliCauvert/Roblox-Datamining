@@ -2,12 +2,12 @@
 local immutable = require(playabilityRodux.Parent.AppCommonLib).Immutable
 local setPlayabilityStatusModule = require(playabilityRodux.PlayabilityStatus.SetPlayabilityStatus)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: setPlayabilityStatusModule (ref), immutable (ref)
-	p0 = p0 or {}
+	p1 = p1 or {}
 	
-	if p1.type == setPlayabilityStatusModule.name then
-		p0 = immutable.JoinDictionaries(p0, p1.playabilityStatus)
+	if p2.type == setPlayabilityStatusModule.name then
+		p1 = immutable.JoinDictionaries(p1, p2.playabilityStatus)
 	end
-	return p0
+	return p1
 end

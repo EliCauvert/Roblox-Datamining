@@ -8,7 +8,7 @@ local setPlayabilityStatusModule = require(playabilityRodux.PlayabilityStatus.Se
 local playabilityStatusModelModule = require(playabilityRodux.PlayabilityStatus.PlayabilityStatusModel)
 local loggerModule = require(playabilityRodux.Logger)
 
-local function keyMapper(p0)
+local function keyMapper(p1)
 	return "luaapp.gamesapi.playabilitystatus." .. p0
 end
 
@@ -37,9 +37,9 @@ return {
 					local t_1 = {}
 					
 					for i_1, v_1 in pairs(responseBody) do
-						playabilityStatusModelModule.fromJsonData(v_1):match(function(p7)
+						playabilityStatusModelModule.fromJsonData(v_1):match(function(p6)
 							-- upvalues: t_1 (ref), t (ref), v_1 (ref), resultModule (copy)
-							t_1[p7.universeId] = p7
+							t_1[p6.universeId] = p6
 							t["luaapp.gamesapi.playabilitystatus." .. tostring(v_1.universeId)] = resultModule.new(true, nil)
 						end):matchError(function(p6)
 							warn(p6)
@@ -61,8 +61,8 @@ return {
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p8, p9)
+	GetFetchingStatus = function(p6, p7)
 		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p8, "luaapp.gamesapi.playabilitystatus." .. p9)
+		return performFetch.GetStatus(p6, "luaapp.gamesapi.playabilitystatus." .. p9)
 	end
 }

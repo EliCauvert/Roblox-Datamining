@@ -12,88 +12,88 @@ local buildSduiFeedChildrenModule = require(sduiSharedContent.Components.buildSd
 local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local sduiStickyHeaderDividerLayoutOrderConstant = game:DefineFastFlag("SduiStickyHeaderDividerLayoutOrderConstant", false)
 
-local function buildWrappedItems(p0)
+local function buildWrappedItems(p1)
 	-- upvalues: buildSduiFeedChildrenModule (ref)
 	return buildSduiFeedChildrenModule({
 		componentType = "StickyHeader",
 		negateImpressionIndex = true,
-		configs = p0.stickyItems,
-		sduiContext = p0.sduiContext,
-		debugName = p0.debugName or "StickyHeader",
-		extraLocalProps = p0.extraLocalProps,
-		impressionsTag = p0.impressionsTag,
-		selectionBehaviorLeft = p0.selectionBehaviorLeft,
-		selectionBehaviorRight = p0.selectionBehaviorRight
+		configs = p1.stickyItems,
+		sduiContext = p1.sduiContext,
+		debugName = p1.debugName or "StickyHeader",
+		extraLocalProps = p1.extraLocalProps,
+		impressionsTag = p1.impressionsTag,
+		selectionBehaviorLeft = p1.selectionBehaviorLeft,
+		selectionBehaviorRight = p1.selectionBehaviorRight
 	})
 end
 
-return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p2)
+return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p1)
 	-- upvalues: buildWrappedItems (ref), reactModule (ref), useScrollAwayHeaderPosition (ref), view (ref), divider (ref), orientation (ref)
-	local var7 = buildWrappedItems(p2)
-	local var8, var9 = reactModule.useBinding(UDim2.new(1, 0, 0, 0))
-	local scrollAway = p2.sduiContext.scrollAway
-	local var10 = if scrollAway then scrollAway.scrollAwayHeight else nil
-	local var11 = useScrollAwayHeaderPosition({
+	local var1 = buildWrappedItems(p1)
+	local var2, var3 = reactModule.useBinding(UDim2.new(1, 0, 0, 0))
+	local scrollAway = p1.sduiContext.scrollAway
+	local var4 = if scrollAway then scrollAway.scrollAwayHeight else nil
+	local var5 = useScrollAwayHeaderPosition({
 		enabled = scrollAway ~= nil,
-		scrollAwayHeight = var10,
+		scrollAwayHeight = var4,
 		headerHeightBinding = if scrollAway then scrollAway.headerHeightBinding else nil
 	})
-	local var12 = reactModule.useCallback(function(p3)
-		-- upvalues: var9 (ref)
-		var9(UDim2.new(1, 0, 0, p3.AbsoluteSize.Y))
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref)
+		var3(UDim2.new(1, 0, 0, p2.AbsoluteSize.Y))
 	end, {})
-	local var13 = if var10 then math.max(0, var10) else 0
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var13 (ref)
-		return var8:map(function(p4)
-			-- upvalues: var13 (copy)
-			return UDim2.new(1, 0, 0, p4.Y.Offset + var13)
+	local var7 = if var4 then math.max(0, var4) else 0
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var7 (ref)
+		return var2:map(function(p2)
+			-- upvalues: var7 (copy)
+			return UDim2.new(1, 0, 0, p2.Y.Offset + var7)
 		end)
-	end, { var8, var13 })
+	end, { var2, var7 })
 	
-	if next(var7) == nil then
+	if next(var1) == nil then
 		return nil
 	end
-	local backgroundStyle = p2.backgroundStyle
+	local backgroundStyle = p1.backgroundStyle
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = false,
-		Size = var8,
-		LayoutOrder = p2.layoutOrder or 1,
-		ZIndex = p2.zIndex or 1
+		Size = var2,
+		LayoutOrder = p1.layoutOrder or 1,
+		ZIndex = p1.zIndex or 1
 	}, {
 		Translation = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ClipsDescendants = false,
-			Size = var8,
-			Position = var11
+			Size = var2,
+			Position = var5
 		}, {
 			Background = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				ZIndex = 0,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.new(0, 0, 1, 0),
-				Size = var14,
+				Size = var8,
 				BackgroundColor3 = if backgroundStyle then backgroundStyle.Color3 else nil,
 				BackgroundTransparency = if backgroundStyle and backgroundStyle.Transparency ~= nil then backgroundStyle.Transparency else 0
 			}),
 			Content = reactModule.createElement(view, {
-				tag = p2.contentTag,
+				tag = p1.contentTag,
 				Size = UDim2.fromScale(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				onAbsoluteSizeChanged = var12,
+				onAbsoluteSizeChanged = var6,
 				layout = {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}
 			}, {
-				TopSpacer = if p2.paddingTop and p2.paddingTop > 0 then reactModule.createElement("Frame", {
+				TopSpacer = if p1.paddingTop and p1.paddingTop > 0 then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, p2.paddingTop)
+					Size = UDim2.new(1, 0, 0, p1.paddingTop)
 				}) else nil,
 				StickyContent = reactModule.createElement(view, {
 					tag = "size-full-0 auto-y",
@@ -101,13 +101,13 @@ return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p
 					layout = {
 						FillDirection = Enum.FillDirection.Vertical,
 						SortOrder = Enum.SortOrder.LayoutOrder,
-						Padding = UDim.new(0, p2.gapBetweenItems)
+						Padding = UDim.new(0, p1.gapBetweenItems)
 					}
-				}, var7),
-				BottomSpacer = if p2.paddingBottom and p2.paddingBottom > 0 then reactModule.createElement("Frame", {
+				}, var1),
+				BottomSpacer = if p1.paddingBottom and p1.paddingBottom > 0 then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
-					Size = UDim2.new(1, 0, 0, p2.paddingBottom)
+					Size = UDim2.new(1, 0, 0, p1.paddingBottom)
 				}) else nil,
 				StickyDivider = reactModule.createElement(divider, { LayoutOrder = 4, orientation = orientation.Horizontal })
 			})
@@ -115,8 +115,8 @@ return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p
 	})
 end else function(p1)
 	-- upvalues: buildWrappedItems (ref), reactModule (ref), divider (ref), orientation (ref), sduiStickyHeaderDividerLayoutOrderConstant (ref), view (ref)
-	local var6 = buildWrappedItems(p1)
-	var6.StickyDivider = reactModule.createElement(divider, {
+	local var1 = buildWrappedItems(p1)
+	var1.StickyDivider = reactModule.createElement(divider, {
 		orientation = orientation.Horizontal,
 		LayoutOrder = if sduiStickyHeaderDividerLayoutOrderConstant then 1000000 else 1e999
 	})
@@ -149,7 +149,7 @@ end else function(p1)
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					Padding = UDim.new(0, p1.gapBetweenItems)
 				}
-			}, var6),
+			}, var1),
 			BottomSpacer = if p1.paddingBottom and p1.paddingBottom > 0 then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,

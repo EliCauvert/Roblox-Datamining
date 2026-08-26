@@ -5,39 +5,39 @@ local guiService = wrappersModule.Services.GuiService
 local userInputService = wrappersModule.Services.UserInputService
 local reactModule = require(parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), userInputService (ref), guiService (ref)
-	local var3, var4 = reactModule.useBinding(UDim2.fromScale(1, 1))
+	local var1, var2 = reactModule.useBinding(UDim2.fromScale(1, 1))
 	reactModule.useLayoutEffect(function()
-		-- upvalues: p0 (ref), userInputService (copy), var4 (ref), guiService (copy), var3 (ref)
-		if p0 then
+		-- upvalues: p1 (ref), userInputService (copy), var2 (ref), guiService (copy), var1 (ref)
+		if p1 then
 			local function updateSafeAreaSize()
-				-- upvalues: userInputService (copy), var4 (copy), guiService (copy), p0 (copy), var3 (copy)
+				-- upvalues: userInputService (copy), var2 (copy), guiService (copy), p1 (copy), var1 (copy)
 				if not userInputService.OnScreenKeyboardVisible then
-					var4(UDim2.fromScale(1, 1))
+					var2(UDim2.fromScale(1, 1))
 					
 					return
 				end
-				local uDim2 = UDim2.new(1, 0, 1, -(p0.AbsolutePosition.Y + p0.AbsoluteSize.Y - (userInputService.OnScreenKeyboardPosition.Y - guiService:GetGuiInset().Y)))
+				local uDim2 = UDim2.new(1, 0, 1, -(p1.AbsolutePosition.Y + p1.AbsoluteSize.Y - (userInputService.OnScreenKeyboardPosition.Y - guiService:GetGuiInset().Y)))
 				
-				if var3:getValue() ~= uDim2 then
-					var4(uDim2)
+				if var1:getValue() ~= uDim2 then
+					var2(uDim2)
 				end
 			end
 			
 			updateSafeAreaSize()
-			local var6 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(updateSafeAreaSize)
-			local var7 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateSafeAreaSize)
-			local var8 = p0:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSafeAreaSize)
+			local var3 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(updateSafeAreaSize)
+			local var4 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateSafeAreaSize)
+			local var5 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSafeAreaSize)
 			
 			return function()
-				-- upvalues: var6 (ref), var7 (ref), var8 (ref)
-				var6:Disconnect()
-				var7:Disconnect()
-				var8:Disconnect()
+				-- upvalues: var3 (ref), var4 (ref), var5 (ref)
+				var3:Disconnect()
+				var4:Disconnect()
+				var5:Disconnect()
 			end
 		end
-	end, { p0 })
+	end, { p1 })
 	
-	return var3
+	return var1
 end

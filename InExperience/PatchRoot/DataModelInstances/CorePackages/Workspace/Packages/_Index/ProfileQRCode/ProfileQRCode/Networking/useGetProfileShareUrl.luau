@@ -4,10 +4,10 @@ local useDispatch = require(profileQRCode.Parent.RoactUtils).Hooks.RoactRodux.us
 
 return function()
 	-- upvalues: useDispatch (ref), createOrGetProfileShareUrlModule (ref)
-	local var2 = useDispatch()
+	local var1 = useDispatch()
 	
 	return function()
-		-- upvalues: var2 (ref), createOrGetProfileShareUrlModule (copy)
-		return var2(createOrGetProfileShareUrlModule.API()):catch(function() end)
+		-- upvalues: var1 (ref), createOrGetProfileShareUrlModule (copy)
+		return var1(createOrGetProfileShareUrlModule.API()):catch(function() end)
 	end
 end

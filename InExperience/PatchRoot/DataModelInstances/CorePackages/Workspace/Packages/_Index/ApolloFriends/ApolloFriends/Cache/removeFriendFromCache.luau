@@ -1,10 +1,10 @@
-﻿return function(p0, p1)
-	p0.cache:evict({
-		id = p0.cache:identify({
+﻿return function(p1, p2)
+	p1.cache:evict({
+		id = p1.cache:identify({
 			__typename = "Friend",
-			id = p1.userId,
-			targetUserId = p1.targetUserId
+			id = p2.userId,
+			targetUserId = p2.targetUserId
 		})
 	})
-	p0.cache:gc()
+	p1.cache:gc()
 end

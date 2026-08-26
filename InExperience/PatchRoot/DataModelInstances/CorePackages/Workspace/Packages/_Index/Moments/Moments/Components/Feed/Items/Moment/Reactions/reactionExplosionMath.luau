@@ -6,29 +6,29 @@ local _ = function(startValue, endValue, alpha)
 	return startValue + (endValue - startValue) * alpha
 end
 
-local _ = function(p0)
-	return 1 - (1 - p0) ^ 5
+local _ = function(p1)
+	return 1 - (1 - p1) ^ 5
 end
 
 local _ = function(p1)
 	return 1 - (1 - p1) ^ 2
 end
 
-local _ = function(p2)
-	return p2 * p2
+local _ = function(p1)
+	return p1 * p1
 end
 
-local _ = function(p3)
-	return if p3 <= 0 then 0 elseif p3 < 0.15 then (1 - (1 - p3 / 0.15) ^ 2) * 1.15 + 0 elseif p3 < 0.35 then (p3 - 0.15) / 0.2 * -0.15 + 1.15 else 1
+local _ = function(p1)
+	return if p1 <= 0 then 0 elseif p1 < 0.15 then (1 - (1 - p1 / 0.15) ^ 2) * 1.15 + 0 elseif p1 < 0.35 then (p1 - 0.15) / 0.2 * -0.15 + 1.15 else 1
 end
 
-local _ = function(p4)
-	if p4 <= 0.55 then
+local _ = function(p1)
+	if p1 <= 0.55 then
 		return 0
 	end
-	local var0 = (p4 - 0.55) / 0.45
+	local var1 = (p1 - 0.55) / 0.45
 	
-	return math.max(0, math.min(1, var0 * var0))
+	return math.max(0, math.min(1, var1 * var1))
 end
 
 return {
@@ -49,25 +49,25 @@ return {
 	MAX_PARTICLES = 16,
 	FADE_START = 0.55,
 	OVERSHOOT = 1.15,
-	solveParticle = function(p5, p6)
-		local var5
-		local maxValue = math.max(0, math.min(1, p5))
-		local var2 = p6.reach * (1 - (1 - maxValue) ^ 5)
-		local var3 = math.sin(p6.angle) * var2
+	solveParticle = function(p1, p2)
+		local var1
+		local maxValue = math.max(0, math.min(1, p1))
+		local var2 = p2.reach * (1 - (1 - maxValue) ^ 5)
+		local var3 = math.sin(p2.angle) * var2
 		local t = {
-			x = math.cos(p6.angle) * var2 * 1.4,
+			x = math.cos(p2.angle) * var2 * 1.4,
 			y = var3 * (if var3 >= 0 then 1.5 else 0.6) + maxValue * 170 * maxValue,
-			rotation = p6.spin * maxValue,
-			scale = p6.sizeScale * (if maxValue <= 0 then 0 elseif maxValue < 0.15 then (1 - (1 - maxValue / 0.15) ^ 2) * 1.15 + 0 elseif maxValue < 0.35 then (maxValue - 0.15) / 0.2 * -0.15 + 1.15 else 1)
+			rotation = p2.spin * maxValue,
+			scale = p2.sizeScale * (if maxValue <= 0 then 0 elseif maxValue < 0.15 then (1 - (1 - maxValue / 0.15) ^ 2) * 1.15 + 0 elseif maxValue < 0.35 then (maxValue - 0.15) / 0.2 * -0.15 + 1.15 else 1)
 		}
 		
 		if maxValue <= 0.55 then
-			var5 = 0
+			var1 = 0
 		else
-			local var6 = (maxValue - 0.55) / 0.45
-			var5 = math.max(0, math.min(1, var6 * var6))
+			local var4 = (maxValue - 0.55) / 0.45
+			var1 = math.max(0, math.min(1, var4 * var4))
 		end
-		t.transparency = var5
+		t.transparency = var1
 		
 		return t
 	end

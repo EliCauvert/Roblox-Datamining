@@ -199,8 +199,8 @@ t.COMPARISON_METHODS = {
 	FOUND_IN = "one of the following:"
 }
 setmetatable(t.COMPARISON_METHODS, {
-	__index = function(_, p1)
-		return error("Invalid COMPARISON_METHOD " .. tostring(p1))
+	__index = function(_, p2)
+		return error("Invalid COMPARISON_METHOD " .. tostring(p2))
 	end
 })
 t.INCLUSION_METHODS = {
@@ -209,8 +209,8 @@ t.INCLUSION_METHODS = {
 	EXCLUSION_LIST = "EXCLUSION_LIST"
 }
 setmetatable(t.INCLUSION_METHODS, {
-	__index = function(_, p1)
-		return error("Invalid INCLUSION_METHOD " .. tostring(p1))
+	__index = function(_, p2)
+		return error("Invalid INCLUSION_METHOD " .. tostring(p2))
 	end
 })
 t.PROPERTIES = {

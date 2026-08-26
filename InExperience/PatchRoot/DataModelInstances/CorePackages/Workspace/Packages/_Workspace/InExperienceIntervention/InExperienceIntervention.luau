@@ -19,12 +19,12 @@ local t = {}
 local inExperienceInterventionDisplayOrder = game:DefineFastInt("InExperienceInterventionDisplayOrder", 6)
 
 if game:DefineFastFlag("FFlagTimeoutRemoteEvent", false) then
-	robloxReplicatedStorageService:WaitForChild("TimeoutChatAttempt", 1e999).OnClientEvent:Connect(function(p0, p1)
+	robloxReplicatedStorageService:WaitForChild("TimeoutChatAttempt", 1e999).OnClientEvent:Connect(function(p1, p2)
 		-- upvalues: notificationModalsManagerModule (ref), images (ref)
 		notificationModalsManagerModule.SetUIBloxToast({
 			toastTitle = "Test Chat Timeout RemoteEvent",
 			iconImage = images["icons/status/error_large"],
-			toastSubtitle = `startTime: {p0}, duration: {p1}`,
+			toastSubtitle = `startTime: {p1}, duration: {p2}`,
 			sequenceNumber = DateTime.now().UnixTimestamp,
 			iconSize = Vector2.new(36, 36)
 		})

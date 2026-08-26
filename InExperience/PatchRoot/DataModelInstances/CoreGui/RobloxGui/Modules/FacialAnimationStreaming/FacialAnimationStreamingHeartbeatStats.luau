@@ -7,11 +7,11 @@ local getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule = require(r
 local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local avatarChatHeartbeatStatsModule = require(script.Parent.RobloxTelemetryConfigs.AvatarChatHeartbeatStats)
 local t = {}
-local var8 = false
+local var1 = false
 local t_1 = { None = 0, AudioOnly = 1, VideoOnly = 2, AudioVideo = 3 }
 local none = t_1.None
 local t_2 = {}
-local var11 = nil
+local var2 = nil
 local t_3 = {}
 local _ = {
 	VideoAnimationEnabled = "videoAnimationEnabled",
@@ -19,18 +19,18 @@ local _ = {
 }
 
 local function _()
-	-- upvalues: var11 (write), t_2 (ref), none (write)
+	-- upvalues: var2 (write), t_2 (ref), none (write)
 	local processTime = os.clock()
 	local _ = 0
 	
-	if var11 then
-		t_2[none] += processTime - var11
+	if var2 then
+		t_2[none] += processTime - var2
 	end
-	var11 = processTime
+	var2 = processTime
 end
 
 local function reportHeartbeat()
-	-- upvalues: rbxAnalyticsService (ref), playersService (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), none (write), var11 (write), t_2 (ref), default (ref), avatarChatHeartbeatStatsModule (ref)
+	-- upvalues: rbxAnalyticsService (ref), playersService (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), none (write), var2 (write), t_2 (ref), default (ref), avatarChatHeartbeatStatsModule (ref)
 	local t = {
 		pid = tostring(game.PlaceId),
 		sessionid = rbxAnalyticsService:GetSessionId(),
@@ -45,10 +45,10 @@ local function reportHeartbeat()
 	local processTime = os.clock()
 	local _ = 0
 	
-	if var11 then
-		t_2[none] += processTime - var11
+	if var2 then
+		t_2[none] += processTime - var2
 	end
-	var11 = processTime
+	var2 = processTime
 	
 	for i, v in t_2 do
 		t[tostring(i)] = v
@@ -58,31 +58,31 @@ local function reportHeartbeat()
 end
 
 local _ = function()
-	-- upvalues: getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (ref), var8 (write), reportHeartbeat (ref)
-	local var17 = getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule()
+	-- upvalues: getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (ref), var1 (write), reportHeartbeat (ref)
+	local var3 = getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule()
 	
-	if var17 > 0 and not var8 then
-		var8 = true
+	if var3 > 0 and not var1 then
+		var1 = true
 		task.spawn(function()
-			-- upvalues: var8 (copy), reportHeartbeat (copy), var17 (ref)
-			while var8 do
+			-- upvalues: var1 (copy), reportHeartbeat (copy), var3 (ref)
+			while var1 do
 				reportHeartbeat()
-				task.wait(var17)
+				task.wait(var3)
 			end
-			var8 = false
+			var1 = false
 		end)
 	end
 end
 
 local _ = function()
-	-- upvalues: var11 (write), t_2 (ref), none (write), faceAnimatorService (ref), t_1 (ref)
+	-- upvalues: var2 (write), t_2 (ref), none (write), faceAnimatorService (ref), t_1 (ref)
 	local processTime = os.clock()
 	local _ = 0
 	
-	if var11 then
-		t_2[none] += processTime - var11
+	if var2 then
+		t_2[none] += processTime - var2
 	end
-	var11 = processTime
+	var2 = processTime
 	
 	if faceAnimatorService.VideoAnimationEnabled and faceAnimatorService.AudioAnimationEnabled then
 		none = t_1.AudioVideo
@@ -101,20 +101,20 @@ local _ = function()
 end
 
 function t.Initialize()
-	-- upvalues: getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (ref), t_1 (ref), t_2 (ref), t_3 (ref), faceAnimatorService (ref), var11 (write), none (write), var8 (write), reportHeartbeat (ref)
+	-- upvalues: getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (ref), t_1 (ref), t_2 (ref), t_3 (ref), faceAnimatorService (ref), var2 (write), none (write), var1 (write), reportHeartbeat (ref)
 	if getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule() <= 0 then return end
 	for i, v in t_1 do
 		t_2[v] = 0
 	end
 	t_3.videoAnimationEnabled = faceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(function()
-		-- upvalues: var11 (copy), t_2 (copy), none (copy), faceAnimatorService (copy), t_1 (copy)
+		-- upvalues: var2 (copy), t_2 (copy), none (copy), faceAnimatorService (copy), t_1 (copy)
 		local processTime = os.clock()
 		local _ = 0
 		
-		if var11 then
-			t_2[none] += processTime - var11
+		if var2 then
+			t_2[none] += processTime - var2
 		end
-		var11 = processTime
+		var2 = processTime
 		
 		if faceAnimatorService.VideoAnimationEnabled and faceAnimatorService.AudioAnimationEnabled then
 			none = t_1.AudioVideo
@@ -132,14 +132,14 @@ function t.Initialize()
 		none = t_1.None
 	end)
 	t_3.audioAnimationEnabled = faceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(function()
-		-- upvalues: var11 (copy), t_2 (copy), none (copy), faceAnimatorService (copy), t_1 (copy)
+		-- upvalues: var2 (copy), t_2 (copy), none (copy), faceAnimatorService (copy), t_1 (copy)
 		local processTime = os.clock()
 		local _ = 0
 		
-		if var11 then
-			t_2[none] += processTime - var11
+		if var2 then
+			t_2[none] += processTime - var2
 		end
-		var11 = processTime
+		var2 = processTime
 		
 		if faceAnimatorService.VideoAnimationEnabled and faceAnimatorService.AudioAnimationEnabled then
 			none = t_1.AudioVideo
@@ -159,30 +159,30 @@ function t.Initialize()
 	local processTime = os.clock()
 	local _ = 0
 	
-	if var11 then
-		t_2[none] += processTime - var11
+	if var2 then
+		t_2[none] += processTime - var2
 	end
-	var11 = processTime
+	var2 = processTime
 	none = if faceAnimatorService.VideoAnimationEnabled and faceAnimatorService.AudioAnimationEnabled then t_1.AudioVideo elseif faceAnimatorService.VideoAnimationEnabled then t_1.VideoOnly elseif faceAnimatorService.AudioAnimationEnabled then t_1.AudioOnly else t_1.None
-	local var20 = getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule()
+	local var4 = getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule()
 	
-	if var20 > 0 and not var8 then
-		var8 = true
+	if var4 > 0 and not var1 then
+		var1 = true
 		task.spawn(function()
-			-- upvalues: var8 (copy), reportHeartbeat (copy), var20 (ref)
+			-- upvalues: var1 (copy), reportHeartbeat (copy), var4 (ref)
 			while true do
-				while var8 do
+				while var1 do
 					reportHeartbeat()
-					task.wait(var20)
+					task.wait(var4)
 				end
-				var8 = false
+				var1 = false
 			end
 		end)
 	end
 end
 
 function t.Cleanup()
-	-- upvalues: getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (ref), t_3 (ref), var8 (write)
+	-- upvalues: getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (ref), t_3 (ref), var1 (write)
 	if getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule() <= 0 then return end
 	for i, v in pairs(t_3) do
 		if v then
@@ -190,7 +190,7 @@ function t.Cleanup()
 		end
 	end
 	table.clear(t_3)
-	var8 = false
+	var1 = false
 end
 
 return t

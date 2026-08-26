@@ -3,11 +3,11 @@ local byGameIdModule = require(script.Presence.byGameId)
 local byGameInstanceIdModule = require(script.Presence.byGameInstanceId)
 local byPlaceIdModule = require(script.Presence.byPlaceId)
 
-return function(p0)
+return function(p1)
 	-- upvalues: byUserIdModule (ref), byGameInstanceIdModule (ref), byGameIdModule (ref), byPlaceIdModule (ref)
-	return function(p1, p2)
-		-- upvalues: byUserIdModule (copy), p0 (ref), byGameInstanceIdModule (copy), byGameIdModule (copy), byPlaceIdModule (copy)
-		p1 = p1 or {
+	return function(p2, p3)
+		-- upvalues: byUserIdModule (copy), p1 (ref), byGameInstanceIdModule (copy), byGameIdModule (copy), byPlaceIdModule (copy)
+		p2 = p2 or {
 			byUserId = {},
 			byGameInstanceId = {},
 			byGameId = {},
@@ -15,10 +15,10 @@ return function(p0)
 		}
 		
 		return {
-			byUserId = byUserIdModule(p0)(p1.byUserId, p2),
-			byGameInstanceId = byGameInstanceIdModule(p0)(p1, p2),
-			byGameId = byGameIdModule(p0)(p1, p2),
-			byPlaceId = byPlaceIdModule(p0)(p1, p2)
+			byUserId = byUserIdModule(p1)(p2.byUserId, p3),
+			byGameInstanceId = byGameInstanceIdModule(p1)(p2, p3),
+			byGameId = byGameIdModule(p1)(p2, p3),
+			byPlaceId = byPlaceIdModule(p1)(p2, p3)
 		}
 	end
 end

@@ -8,8 +8,8 @@ return function()
 		getRefreshTick = var1,
 		bumpRefreshTick = function()
 			-- upvalues: var2 (ref)
-			var2(function(p0)
-				return p0 + 1
+			var2(function(p1)
+				return p1 + 1
 			end)
 		end
 	}

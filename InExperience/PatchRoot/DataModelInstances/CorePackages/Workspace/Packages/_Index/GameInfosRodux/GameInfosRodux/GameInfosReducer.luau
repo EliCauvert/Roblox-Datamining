@@ -3,30 +3,30 @@ local addGamesModule = require(script.Parent.AddGames)
 local cryoModule = require(parent.Cryo)
 local _ = require(parent.DiscoveryTypes)
 
-local function getMergedState(p0, p1)
+local function getMergedState(p1, p2)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		if p0[i] then
-			t[i] = cryoModule.Dictionary.join(p0[i], p1[i])
+	for i, v in pairs(p2) do
+		if p1[i] then
+			t[i] = cryoModule.Dictionary.join(p1[i], p2[i])
 		else
-			t[i] = p1[i]
+			t[i] = p2[i]
 		end
 	end
-	return cryoModule.Dictionary.join(p0, t)
+	return cryoModule.Dictionary.join(p1, t)
 end
 
 return {
 	key = "GameInfosKey",
-	reducer = function(p2, p3)
+	reducer = function(p3, p4)
 		-- upvalues: addGamesModule (ref), getMergedState (ref)
-		p2 = p2 or {}
-		assert(p2, "")
+		p3 = p3 or {}
+		assert(p3, "")
 		
-		if p3.type == addGamesModule.name then
-			p2 = getMergedState(p2, p3.games)
+		if p4.type == addGamesModule.name then
+			p3 = getMergedState(p3, p4.games)
 		end
-		return p2
+		return p3
 	end
 }

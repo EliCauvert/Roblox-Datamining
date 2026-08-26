@@ -7,9 +7,9 @@ local var2, var3 = signalsModule.createSignal(false)
 return (function()
 	-- upvalues: var1 (write), fFlagIEMFocusNavPeoplePageToButtons (ref), var2 (ref), var3 (ref)
 	return {
-		register = function(p0)
+		register = function(p1)
 			-- upvalues: var1 (copy)
-			var1 = p0
+			var1 = p1
 		end,
 		hubRef = function()
 			-- upvalues: var1 (copy)

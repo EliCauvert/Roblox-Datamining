@@ -15,16 +15,16 @@ local usePreferredInputModule = require(script.Hooks.usePreferredInput)
 local getVirtualResolutionScaleModule = require(script.getVirtualResolutionScale)
 local getIsCompactTouchModule = require(script.getIsCompactTouch)
 
-function breakpointCompare(p0, p1)
+function breakpointCompare(p1, p2)
 	-- upvalues: standardBreakpointsModule (ref), responsiveModule (ref)
 	local keyIndex = standardBreakpointsModule.keyIndex
 	
-	return if p0 == responsiveModule.DefaultKey or p1 == responsiveModule.DefaultKey or (keyIndex[p0] == nil or keyIndex[p1] == nil) then false else keyIndex[p1] <= keyIndex[p0]
+	return if p1 == responsiveModule.DefaultKey or p2 == responsiveModule.DefaultKey or (keyIndex[p1] == nil or keyIndex[p2] == nil) then false else keyIndex[p2] <= keyIndex[p1]
 end
 
-function ResponsiveProvider(p2)
+function ResponsiveProvider(p1)
 	-- upvalues: reactModule (ref), containerRefModule (ref)
-	return reactModule.createElement(containerRefModule.Provider, { value = reactModule.useRef(nil) }, p2.children)
+	return reactModule.createElement(containerRefModule.Provider, { value = reactModule.useRef(nil) }, p1.children)
 end
 
 return {
@@ -36,57 +36,57 @@ return {
 	DefaultKey = responsiveModule.DefaultKey,
 	ContainerRef = containerRefModule,
 	ResponsiveProvider = ResponsiveProvider,
-	ResponsiveContainerFrame = function(p3)
+	ResponsiveContainerFrame = function(p1)
 		-- upvalues: reactModule (ref), containerRefModule (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Visible = false,
-			ZIndex = if p3 and p3.ZIndex then p3.ZIndex else -100,
-			Size = if p3 and p3.Size then p3.Size else UDim2.new(1, 0, 1, 0),
+			ZIndex = if p1 and p1.ZIndex then p1.ZIndex else -100,
+			Size = if p1 and p1.Size then p1.Size else UDim2.new(1, 0, 1, 0),
 			ref = reactModule.useContext(containerRefModule)
 		})
 	end,
 	FindFirstAncestorWithTag = findFirstAncestorWithTagModule,
 	useBreakpointX = useResponsiveImplModule,
-	useBreakpointXOrLarger = function(p4)
+	useBreakpointXOrLarger = function(p1)
 		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(function(p5)
-			-- upvalues: p4 (ref)
-			return breakpointCompare(p5, p4)
+		return useResponsiveImplModule(function(p2)
+			-- upvalues: p1 (ref)
+			return breakpointCompare(p2, p1)
 		end, nil)
 	end,
-	useBreakpointXOrSmaller = function(p6)
+	useBreakpointXOrSmaller = function(p1)
 		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(function(p7)
-			-- upvalues: p6 (ref)
-			return breakpointCompare(p6, p7)
+		return useResponsiveImplModule(function(p2)
+			-- upvalues: p1 (ref)
+			return breakpointCompare(p1, p2)
 		end, nil)
 	end,
 	useBreakpointY = function()
 		-- upvalues: useResponsiveImplModule (ref)
 		return useResponsiveImplModule(nil, nil, "Y")
 	end,
-	useBreakpointYOrLarger = function(p8)
+	useBreakpointYOrLarger = function(p1)
 		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(function(p9)
-			-- upvalues: p8 (ref)
-			return breakpointCompare(p9, p8)
+		return useResponsiveImplModule(function(p2)
+			-- upvalues: p1 (ref)
+			return breakpointCompare(p2, p1)
 		end, nil, "Y")
 	end,
-	useBreakpointYOrSmaller = function(p10)
+	useBreakpointYOrSmaller = function(p1)
 		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(function(p11)
-			-- upvalues: p10 (ref)
-			return breakpointCompare(p10, p11)
+		return useResponsiveImplModule(function(p2)
+			-- upvalues: p1 (ref)
+			return breakpointCompare(p1, p2)
 		end, nil, "Y")
 	end,
 	useOrientation = function()
 		-- upvalues: useResponsiveImplModule (ref)
 		return useResponsiveImplModule(nil, nil, "Orientation")
 	end,
-	useResponsive = function(p12)
+	useResponsive = function(p1)
 		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(nil, p12)
+		return useResponsiveImplModule(nil, p1)
 	end,
 	usePreferredInput = usePreferredInputModule,
 	useLastInput = useLastInputModule,

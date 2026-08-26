@@ -5,9 +5,9 @@ local stringify = require(parent.GraphQL).stringify
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	local t_1 = { body = p0 }
+	local t_1 = { body = p1 }
 	setmetatable(t_1, t)
 	
 	return t_1

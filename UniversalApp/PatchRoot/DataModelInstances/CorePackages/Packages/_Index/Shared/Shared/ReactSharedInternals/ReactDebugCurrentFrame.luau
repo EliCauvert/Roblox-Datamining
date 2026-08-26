@@ -1,11 +1,11 @@
 ﻿local reactGlobalsModule = require(script.Parent.Parent.Parent.ReactGlobals)
 local t = {}
-local var2 = nil
+local var1 = nil
 
 function t.setExtraStackFrame(value)
-	-- upvalues: reactGlobalsModule (ref), var2 (write)
+	-- upvalues: reactGlobalsModule (ref), var1 (write)
 	if reactGlobalsModule.__DEV__ then
-		var2 = value
+		var1 = value
 	end
 end
 
@@ -13,18 +13,18 @@ if reactGlobalsModule.__DEV__ then
 	t.getCurrentStack = nil
 	
 	function t.getStackAddendum()
-		-- upvalues: var2 (write), t (ref)
-		local var3 = ""
+		-- upvalues: var1 (write), t (ref)
+		local var2 = ""
 		
-		if var2 then
-			var3 ..= var2
+		if var1 then
+			var2 ..= var1
 		end
 		local getCurrentStack = t.getCurrentStack
 		
 		if getCurrentStack then
-			var3 ..= getCurrentStack() or ""
+			var2 ..= getCurrentStack() or ""
 		end
-		return var3
+		return var2
 	end
 end
 return t

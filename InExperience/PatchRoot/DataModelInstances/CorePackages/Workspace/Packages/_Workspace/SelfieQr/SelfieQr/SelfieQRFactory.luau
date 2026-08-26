@@ -9,28 +9,28 @@ local roactServices = require(parent.RoactServices).RoactServices
 local selfieQRConnectionModule = require(selfieQr.SelfieQRConnection)
 local requestInternalWrapper = require(parent.Http).NetworkLayers.requestInternalWrapper
 local t = {}
-local var6 = false
+local var1 = false
 
-local var7 = function(p0, p1)
+local var2 = function(p1, p2)
 	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), roactServices (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), roactModule (ref)
 	return roactModule.mount(reactModule.createElement("Folder", nil, reactModule.createElement(coreScriptsRootProvider, {}, {
 		RoactServicesProvider = reactModule.createElement(roactServices.ServiceProvider, {
 			services = { [roactNetworking] = requestInternalWrapper(httpService) }
-		}, p1)
-	})), p0, "SelfieQRRoot")
+		}, p2)
+	})), p1, "SelfieQRRoot")
 end
 
 function t.createFactory()
-	-- upvalues: var6 (write), var7 (ref), reactModule (ref), selfieQRConnectionModule (ref)
+	-- upvalues: var1 (write), var2 (ref), reactModule (ref), selfieQRConnectionModule (ref)
 	local t = {}
 	
-	function t.mountCoreUI(p2)
-		-- upvalues: var6 (copy), t (ref), var7 (copy), reactModule (copy), selfieQRConnectionModule (copy)
-		if var6 then
+	function t.mountCoreUI(p1)
+		-- upvalues: var1 (copy), t (ref), var2 (copy), reactModule (copy), selfieQRConnectionModule (copy)
+		if var1 then
 			return
 		end
-		var6 = true
-		t._coreUiHandle = var7(p2, {
+		var1 = true
+		t._coreUiHandle = var2(p1, {
 			SelfieQR = reactModule.createElement(selfieQRConnectionModule, {})
 		})
 	end

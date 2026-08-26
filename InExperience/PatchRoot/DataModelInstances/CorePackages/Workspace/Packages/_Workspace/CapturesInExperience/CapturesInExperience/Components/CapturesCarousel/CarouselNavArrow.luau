@@ -20,87 +20,87 @@ local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 local cycleLeft = images["icons/actions/cycleLeft"]
 local cycleRight = images["icons/actions/cycleRight"]
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), reactModule (ref), constantsModule (ref), cycleLeft (ref), cycleRight (ref), inputUtilities (ref), eventNamesModule (ref), carouselNavigatedModule (ref), runService (ref), useEventConnection (ref), userInputService (ref), imageSetLabel (ref)
-	local var11 = useAnalyticsModule()
-	local var12 = useDispatch()
-	local var13 = useStyle()
-	local var14 = reactModule.useRef(nil)
-	local var15 = p0.direction == constantsModule.CarouselDirection.Left
-	local var16 = if var15 then Vector2.new(0, 0.5) else Vector2.new(1, 0.5)
-	local var17 = if var15 then cycleLeft else cycleRight
-	local var18 = if var15 then UDim2.fromScale(0, 0.5) else UDim2.fromScale(1, 0.5)
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3 = useStyle()
+	local var4 = reactModule.useRef(nil)
+	local var5 = p1.direction == constantsModule.CarouselDirection.Left
+	local var6 = if var5 then Vector2.new(0, 0.5) else Vector2.new(1, 0.5)
+	local var7 = if var5 then cycleLeft else cycleRight
+	local var8 = if var5 then UDim2.fromScale(0, 0.5) else UDim2.fromScale(1, 0.5)
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref)
+		-- upvalues: var4 (ref)
 		return function()
-			-- upvalues: var14 (copy)
-			if var14.current then
-				var14.current:Disconnect()
-				var14.current = nil
+			-- upvalues: var4 (copy)
+			if var4.current then
+				var4.current:Disconnect()
+				var4.current = nil
 			end
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var14 (ref)
-		if p0.isDisabled and var14.current then
-			var14.current:Disconnect()
-			var14.current = nil
+		-- upvalues: p1 (ref), var4 (ref)
+		if p1.isDisabled and var4.current then
+			var4.current:Disconnect()
+			var4.current = nil
 		end
-	end, { p0.isDisabled })
-	local var19 = reactModule.useCallback(function(_, p1)
-		-- upvalues: p0 (ref), inputUtilities (copy), var14 (ref), var11 (ref), eventNamesModule (copy), var12 (ref), carouselNavigatedModule (copy), runService (copy)
-		if p0.isDisabled then return end
-		if p1.UserInputState ~= Enum.UserInputState.Begin then return end
-		if not inputUtilities.isActivationInput(p1) then return end
-		if var14.current then
-			var14.current:Disconnect()
-			var14.current = nil
+	end, { p1.isDisabled })
+	local var9 = reactModule.useCallback(function(_, p2)
+		-- upvalues: p1 (ref), inputUtilities (copy), var4 (ref), var1 (ref), eventNamesModule (copy), var2 (ref), carouselNavigatedModule (copy), runService (copy)
+		if p1.isDisabled then return end
+		if p2.UserInputState ~= Enum.UserInputState.Begin then return end
+		if not inputUtilities.isActivationInput(p2) then return end
+		if var4.current then
+			var4.current:Disconnect()
+			var4.current = nil
 		end
-		var11.fireEvent(eventNamesModule.CapturesCarouselNavigated, { direction = p0.direction })
-		var12(carouselNavigatedModule(p0.direction))
+		var1.fireEvent(eventNamesModule.CapturesCarouselNavigated, { direction = p1.direction })
+		var2(carouselNavigatedModule(p1.direction))
 		local currentTime = tick()
-		local var22 = currentTime
-		var14.current = runService.RenderStepped:Connect(function(_)
-			-- upvalues: var22 (ref), currentTime (write), var11 (copy), eventNamesModule (copy), p0 (copy), var12 (copy), carouselNavigatedModule (copy)
-			if math.max(0.5 / (tick() - var22), 0.15) < tick() - currentTime then
-				var11.fireEvent(eventNamesModule.CapturesCarouselNavigated, { direction = p0.direction })
-				var12(carouselNavigatedModule(p0.direction))
+		local var10 = currentTime
+		var4.current = runService.RenderStepped:Connect(function(_)
+			-- upvalues: var10 (ref), currentTime (write), var1 (copy), eventNamesModule (copy), p1 (copy), var2 (copy), carouselNavigatedModule (copy)
+			if math.max(0.5 / (tick() - var10), 0.15) < tick() - currentTime then
+				var1.fireEvent(eventNamesModule.CapturesCarouselNavigated, { direction = p1.direction })
+				var2(carouselNavigatedModule(p1.direction))
 				currentTime = tick()
 			end
 		end)
-	end, { p0.isDisabled })
-	local var20 = reactModule.useCallback(function(_, p2)
-		-- upvalues: inputUtilities (copy), var14 (ref)
-		if inputUtilities.isActivationInput(p2) and var14.current then
-			var14.current:Disconnect()
-			var14.current = nil
+	end, { p1.isDisabled })
+	local var10 = reactModule.useCallback(function(_, p2)
+		-- upvalues: inputUtilities (copy), var4 (ref)
+		if inputUtilities.isActivationInput(p2) and var4.current then
+			var4.current:Disconnect()
+			var4.current = nil
 		end
 	end, {})
-	useEventConnection(userInputService.InputEnded, function(p3)
-		-- upvalues: inputUtilities (copy), var14 (ref)
-		if inputUtilities.isActivationInput(p3) and var14.current then
-			var14.current:Disconnect()
-			var14.current = nil
+	useEventConnection(userInputService.InputEnded, function(p2)
+		-- upvalues: inputUtilities (copy), var4 (ref)
+		if inputUtilities.isActivationInput(p2) and var4.current then
+			var4.current:Disconnect()
+			var4.current = nil
 		end
 	end)
 	
 	return reactModule.createElement("TextButton", {
-		AnchorPoint = var16,
+		AnchorPoint = var6,
 		BackgroundTransparency = 1,
-		Position = var18,
-		Size = p0.Size,
+		Position = var8,
+		Size = p1.Size,
 		Text = "",
-		ZIndex = p0.ZIndex,
-		Visible = not p0.isDisabled,
-		[reactModule.Event.InputBegan] = var19,
-		[reactModule.Event.InputEnded] = var20
+		ZIndex = p1.ZIndex,
+		Visible = not p1.isDisabled,
+		[reactModule.Event.InputBegan] = var9,
+		[reactModule.Event.InputEnded] = var10
 	}, {
 		Arrow = reactModule.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Image = var17,
-			ImageColor3 = var13.Theme.IconEmphasis.Color,
-			ImageTransparency = var13.Theme.IconEmphasis.Transparency,
+			Image = var7,
+			ImageColor3 = var3.Theme.IconEmphasis.Color,
+			ImageTransparency = var3.Theme.IconEmphasis.Transparency,
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromOffset(36, 36)
 		})

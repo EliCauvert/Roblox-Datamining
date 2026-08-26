@@ -1,13 +1,13 @@
 ﻿local dataModelTraversalOptionsModule = require(script:FindFirstAncestor("SceneUnderstanding").options.DataModelTraversalOptions)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: dataModelTraversalOptionsModule (ref)
-	local var1 = dataModelTraversalOptionsModule.new(p2)
+	local var1 = dataModelTraversalOptionsModule.new(p3)
 	local var2 = false
 	local t = {}
-	local var4 = 0
+	local var3 = 0
 	local t_1 = {}
-	local var6 = nil
+	local var4 = nil
 	local t_2 = {}
 	local t_3 = {}
 	
@@ -16,10 +16,10 @@ return function(p0, p1, p2)
 		return math.min(#t_2, var1.instanceProcessingLimit)
 	end
 	
-	local function onAncestryChanged(p3)
+	local function onAncestryChanged(p4)
 		-- upvalues: t (ref)
-		if p3.Parent == nil then
-			local index = table.find(t, p3)
+		if p4.Parent == nil then
+			local index = table.find(t, p4)
 			
 			if index then
 				table.remove(t, index)
@@ -28,7 +28,7 @@ return function(p0, p1, p2)
 	end
 	
 	local function processStack()
-		-- upvalues: t_2 (ref), var1 (ref), p1 (ref), t (ref), t_1 (ref), onAncestryChanged (ref), var4 (write), t_3 (write), var2 (write)
+		-- upvalues: t_2 (ref), var1 (ref), p2 (ref), t (ref), t_1 (ref), onAncestryChanged (ref), var3 (write), t_3 (write), var2 (write)
 		local removed
 		local minValue = math.min(#t_2, var1.instanceProcessingLimit)
 		
@@ -38,7 +38,7 @@ return function(p0, p1, p2)
 			if not removed then
 				continue
 			end
-			if not p1 or p1(removed) then
+			if not p2 or p2(removed) then
 				table.insert(t, removed)
 				table.insert(t_1, removed.AncestryChanged:Connect(onAncestryChanged))
 			end
@@ -46,7 +46,7 @@ return function(p0, p1, p2)
 				table.insert(t_2, v)
 			end
 		end
-		var4 += minValue
+		var3 += minValue
 		
 		for removed in t_3 do
 			task.spawn(function()
@@ -58,8 +58,8 @@ return function(p0, p1, p2)
 			var2 = false
 			
 			return false
-		elseif var1.instanceProcessingLimit <= var4 then
-			var4 = 0
+		elseif var1.instanceProcessingLimit <= var3 then
+			var3 = 0
 			
 			return true
 		end
@@ -67,13 +67,13 @@ return function(p0, p1, p2)
 	end
 	
 	local _ = function()
-		-- upvalues: var2 (write), t_2 (ref), var1 (ref), processStack (ref), var6 (write)
+		-- upvalues: var2 (write), t_2 (ref), var1 (ref), processStack (ref), var4 (write)
 		if var2 or math.min(#t_2, var1.instanceProcessingLimit) == 0 then
 			return
 		end
 		var2 = true
 		processStack()
-		var6 = task.spawn(function()
+		var4 = task.spawn(function()
 			-- upvalues: var2 (copy), processStack (copy)
 			task.wait()
 			while var2 do
@@ -85,14 +85,14 @@ return function(p0, p1, p2)
 	end
 	
 	local function onDescendantAdded(p4)
-		-- upvalues: t_2 (ref), var2 (write), var1 (ref), processStack (ref), var6 (write)
+		-- upvalues: t_2 (ref), var2 (write), var1 (ref), processStack (ref), var4 (write)
 		table.insert(t_2, p4)
 		
 		if not var2 and not var2 then
 			if math.min(#t_2, var1.instanceProcessingLimit) == 0 then return end
 			var2 = true
 			processStack()
-			var6 = task.spawn(function()
+			var4 = task.spawn(function()
 				-- upvalues: var2 (copy), processStack (copy)
 				task.wait()
 				while true do
@@ -108,14 +108,14 @@ return function(p0, p1, p2)
 	
 	return {
 		setInstancesProcessedPerFrame = function(value)
-			-- upvalues: var1 (ref), var2 (write), t_2 (ref), processStack (ref), var6 (write)
+			-- upvalues: var1 (ref), var2 (write), t_2 (ref), processStack (ref), var4 (write)
 			var1.instanceProcessingLimit = math.clamp(value, 0, 1e999)
 			
 			if not var2 then
 				if math.min(#t_2, var1.instanceProcessingLimit) == 0 then return end
 				var2 = true
 				processStack()
-				var6 = task.spawn(function()
+				var4 = task.spawn(function()
 					-- upvalues: var2 (copy), processStack (copy)
 					task.wait()
 					while true do
@@ -129,8 +129,8 @@ return function(p0, p1, p2)
 			end
 		end,
 		listen = function()
-			-- upvalues: p0 (ref), t_1 (ref), onDescendantAdded (ref), t_2 (ref), var2 (write), var1 (ref), processStack (ref), var6 (write)
-			for i, v in p0 do
+			-- upvalues: p1 (ref), t_1 (ref), onDescendantAdded (ref), t_2 (ref), var2 (write), var1 (ref), processStack (ref), var4 (write)
+			for i, v in p1 do
 				table.insert(t_1, v.DescendantAdded:Connect(onDescendantAdded))
 				
 				for i_1, v_1 in v:GetChildren() do
@@ -141,7 +141,7 @@ return function(p0, p1, p2)
 				if math.min(#t_2, var1.instanceProcessingLimit) == 0 then return end
 				var2 = true
 				processStack()
-				var6 = task.spawn(function()
+				var4 = task.spawn(function()
 					-- upvalues: var2 (copy), processStack (copy)
 					task.wait()
 					while true do
@@ -159,7 +159,7 @@ return function(p0, p1, p2)
 			return t
 		end,
 		destroy = function()
-			-- upvalues: var2 (write), t_1 (ref), t_3 (write), var6 (write)
+			-- upvalues: var2 (write), t_1 (ref), t_3 (write), var4 (write)
 			var2 = false
 			
 			for i, v in t_1 do
@@ -167,8 +167,8 @@ return function(p0, p1, p2)
 			end
 			t_3 = {}
 			
-			if var6 then
-				task.cancel(var6)
+			if var4 then
+				task.cancel(var4)
 			end
 		end,
 		onStepped = function(p5)

@@ -8,14 +8,14 @@ local getKnobSizeModule = require(script.Parent.getKnobSize)
 local iconSizeModule = require(foundation.Enums.IconSize)
 local flagsModule = require(foundation.Utility.Flags)
 
-local function computeProps(p0)
-	local var9 = p0.size.X.Offset + p0.shadowPadding * 2
+local function computeProps(p1)
+	local var1 = p1.size.X.Offset + p1.shadowPadding * 2
 	
 	return {
-		knob = { size = p0.size, iconSize = p0.iconSize },
+		knob = { size = p1.size, iconSize = p1.iconSize },
 		knobShadow = {
-			size = UDim2.fromOffset(var9, var9),
-			padding = p0.shadowPadding
+			size = UDim2.fromOffset(var1, var1),
+			padding = p1.shadowPadding
 		}
 	}
 end
@@ -64,9 +64,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p2, p3, p4)
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local knob = variantsContextModule.useVariants("Knob", variantsFactory, p2)
+	local knob = variantsContextModule.useVariants("Knob", variantsFactory, p1)
 	
-	return composeStyleVariantModule(knob.common, knob.sizes[p3], knob.isInverse[p4])
+	return composeStyleVariantModule(knob.common, knob.sizes[p2], knob.isInverse[p3])
 end

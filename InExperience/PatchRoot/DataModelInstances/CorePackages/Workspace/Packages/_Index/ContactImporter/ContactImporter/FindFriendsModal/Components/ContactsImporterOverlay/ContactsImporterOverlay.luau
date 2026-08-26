@@ -24,7 +24,7 @@ contactsImporterOverlay.validateProps = t.strictInterface({
 	isFromSignup = t.optional(t.boolean)
 })
 
-function contactsImporterOverlay.render(p0)
+function contactsImporterOverlay.render(p1)
 	-- upvalues: withLocalization (ref), textKeysModule (ref), withStyle (ref), buttonType (ref), roact (ref), partialPageModal (ref), imageSetLabel (ref), images (ref), iconSize (ref), styledTextLabel (ref)
 	return withLocalization({
 		connectWithFriends = textKeysModule.CONTACTS_LIST_TITLE,
@@ -34,13 +34,13 @@ function contactsImporterOverlay.render(p0)
 		closeModal = textKeysModule.CLOSE_MODAL,
 		goToAddFriends = textKeysModule.NOT_NOW,
 		learnMore = textKeysModule.LEARN_MORE
-	})(function(p1)
-		-- upvalues: withStyle (copy), p0 (ref), buttonType (copy), roact (copy), partialPageModal (copy), imageSetLabel (copy), images (copy), iconSize (copy), styledTextLabel (copy)
-		return withStyle(function(p2)
-			-- upvalues: p0 (copy), buttonType (copy), p1 (ref), roact (copy), partialPageModal (copy), imageSetLabel (copy), images (copy), iconSize (copy), styledTextLabel (copy)
-			local theme = p2.Theme
-			local font = p2.Font
-			local props = p0.props
+	})(function(p2)
+		-- upvalues: withStyle (copy), p1 (ref), buttonType (copy), roact (copy), partialPageModal (copy), imageSetLabel (copy), images (copy), iconSize (copy), styledTextLabel (copy)
+		return withStyle(function(p3)
+			-- upvalues: p1 (copy), buttonType (copy), p2 (ref), roact (copy), partialPageModal (copy), imageSetLabel (copy), images (copy), iconSize (copy), styledTextLabel (copy)
+			local theme = p3.Theme
+			local font = p3.Font
+			local props = p1.props
 			local t = {}
 			
 			if props.isFromAddFriendsPage or props.isFromSignup then
@@ -48,7 +48,7 @@ function contactsImporterOverlay.render(p0)
 					buttonType = buttonType.Secondary,
 					props = {
 						onActivated = props.onCloseClicked,
-						text = p1.goToAddFriends
+						text = p2.goToAddFriends
 					}
 				})
 			else
@@ -56,7 +56,7 @@ function contactsImporterOverlay.render(p0)
 					buttonType = buttonType.Secondary,
 					props = {
 						onActivated = props.onAddFriendsActivated,
-						text = p1.goToAddFriends
+						text = p2.goToAddFriends
 					}
 				})
 			end
@@ -64,12 +64,12 @@ function contactsImporterOverlay.render(p0)
 				buttonType = buttonType.PrimarySystem,
 				props = {
 					onActivated = props.onConnectContacts,
-					text = p1.getStarted
+					text = p2.getStarted
 				}
 			})
 			
 			return roact.createElement(partialPageModal, {
-				title = p1.connectWithFriends,
+				title = p2.connectWithFriends,
 				screenSize = props.screenSize,
 				onCloseClicked = props.onCloseClicked,
 				buttonStackProps = {
@@ -110,7 +110,7 @@ function contactsImporterOverlay.render(p0)
 					}),
 					Header = roact.createElement(styledTextLabel, {
 						layoutOrder = 2,
-						text = p1.connectWithFriendsBody,
+						text = p2.connectWithFriendsBody,
 						fontStyle = font.Body,
 						colorStyle = theme.TextEmphasis,
 						size = UDim2.fromScale(1, 0),
@@ -121,7 +121,7 @@ function contactsImporterOverlay.render(p0)
 					}),
 					Description = roact.createElement(styledTextLabel, {
 						layoutOrder = 3,
-						text = p1.connectWithFriendsCaption,
+						text = p2.connectWithFriendsCaption,
 						fontStyle = font.CaptionBody,
 						colorStyle = theme.TextDefault,
 						size = UDim2.fromScale(1, 0),
@@ -133,9 +133,9 @@ function contactsImporterOverlay.render(p0)
 					LearnMore = roact.createElement("TextButton", {
 						AutomaticSize = Enum.AutomaticSize.Y,
 						BackgroundTransparency = 1,
-						Font = p2.Font.CaptionBody.Font,
+						Font = p3.Font.CaptionBody.Font,
 						Size = UDim2.fromScale(1, 0),
-						Text = p1.learnMore,
+						Text = p2.learnMore,
 						TextColor3 = theme.TextEmphasis.Color,
 						TextSize = font.CaptionBody.RelativeSize * font.BaseSize,
 						TextTransparency = theme.TextEmphasis.Transparency,

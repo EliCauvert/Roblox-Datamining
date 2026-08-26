@@ -13,7 +13,7 @@ local temporaryAvatarKickWarningDialogModule = require(parent.InterventionShared
 local universalFeatureRestrictionDialog = require(parent.InterventionShared).Components.UniversalFeatureRestrictionDialog
 local cursorProvider = require(parent.UIBlox).App.SelectionCursor.CursorProvider
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local var10 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+local var1 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
 local constants = require(parent.InterventionShared).Utils.Constants
 local _ = require(inExperienceIntervention.Utils.Types)
@@ -21,18 +21,18 @@ local getFFlagGameJoinTimeoutChatAttemptEnabled = require(parent.SharedFlags).Ge
 local fFlagTemporaryAvatarKickWarningDialogModule = require(parent.InterventionShared.FFlagTemporaryAvatarKickWarningDialog)
 local fFlagUniversalFeatureRestrictionReceivers = require(parent.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
-local var13 = reactModule.memo(function(p0)
-	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), var10 (ref), provider (ref), cursorProvider (ref)
-	return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var10 }, {
+local var2 = reactModule.memo(function(p1)
+	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), var1 (ref), provider (ref), cursorProvider (ref)
+	return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
 		RegistryProvider = reactModule.createElement(provider, nil, {
-			CursorProvider = reactModule.createElement(cursorProvider, {}, p0.children)
+			CursorProvider = reactModule.createElement(cursorProvider, {}, p1.children)
 		})
 	})
 end)
 
 function InExperienceInterventionDialogManager(p1)
-	-- upvalues: reactModule (ref), constants (ref), fFlagUniversalFeatureRestrictionReceivers (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), SSUIMetaLuaEngineFeature (ref), chatNudgeCustomDialogModule (ref), chatTimeoutCustomDialogModule (ref), chatNudgeToastModule (ref), chatTimeoutToastModule (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), var13 (ref), partyChatNudgeCustomDialog (ref), partyChatTimeoutCustomDialog (ref), chatTimeoutCustomDialogV2Module (ref), chatNudgeCustomDialogV2Module (ref), universalFeatureRestrictionDialog (ref), temporaryAvatarKickWarningDialogModule (ref)
-	local var14 = reactModule.useCallback(function()
+	-- upvalues: reactModule (ref), constants (ref), fFlagUniversalFeatureRestrictionReceivers (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), SSUIMetaLuaEngineFeature (ref), chatNudgeCustomDialogModule (ref), chatTimeoutCustomDialogModule (ref), chatNudgeToastModule (ref), chatTimeoutToastModule (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), var2 (ref), partyChatNudgeCustomDialog (ref), partyChatTimeoutCustomDialog (ref), chatTimeoutCustomDialogV2Module (ref), chatNudgeCustomDialogV2Module (ref), universalFeatureRestrictionDialog (ref), temporaryAvatarKickWarningDialogModule (ref)
+	local var3 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), constants (copy)
 		p1.uiStateDispatch({
 			isShown = false,
@@ -43,8 +43,8 @@ function InExperienceInterventionDialogManager(p1)
 	local uiState = p1.uiState
 	local treatmentType = uiState.treatmentType
 	local detail = uiState.detail
-	local var15 = if fFlagUniversalFeatureRestrictionReceivers and detail then detail.options else nil
-	local var16 = if fFlagTemporaryAvatarKickWarningDialogModule and detail then detail.extras else nil
+	local var4 = if fFlagUniversalFeatureRestrictionReceivers and detail then detail.options else nil
+	local var5 = if fFlagTemporaryAvatarKickWarningDialogModule and detail then detail.extras else nil
 	reactModule.useEffect(function()
 		-- upvalues: SSUIMetaLuaEngineFeature (copy), uiState (ref)
 		if SSUIMetaLuaEngineFeature then
@@ -65,11 +65,11 @@ function InExperienceInterventionDialogManager(p1)
 	if uiState.isShown then
 		return if treatmentType == constants.TreatmentType.ChatNudgeDialog then reactModule.createElement(chatNudgeCustomDialogModule, {
 			violatingChatLine = detail.evidence,
-			onDismiss = var14,
+			onDismiss = var3,
 			eventId = detail.decisionEventId
 		}) elseif treatmentType == constants.TreatmentType.ChatTimeoutDialog and (detail.timeoutDurationSeconds or 0) > 0 then reactModule.createElement(chatTimeoutCustomDialogModule, {
 			duration = detail.timeoutDurationSeconds,
-			onDismiss = var14,
+			onDismiss = var3,
 			eventId = detail.decisionEventId,
 			violatingChatLine = detail.evidence
 		}) elseif treatmentType == constants.TreatmentType.ChatNudgeToast then reactModule.createElement(chatNudgeToastModule, {
@@ -83,47 +83,47 @@ function InExperienceInterventionDialogManager(p1)
 			endTime = uiState.endTime,
 			treatmentType = constants.TreatmentType.ChatTimeoutGameJoin,
 			dispatchTimestamp = uiState.dispatchTimestamp
-		}) elseif treatmentType == constants.TreatmentType.PartyChatNudgeDialog then reactModule.createElement(var13, {}, {
+		}) elseif treatmentType == constants.TreatmentType.PartyChatNudgeDialog then reactModule.createElement(var2, {}, {
 			dialog = reactModule.createElement(partyChatNudgeCustomDialog, {
 				evidence = detail.evidence,
 				eventId = detail.decisionEventId,
-				onDismiss = var14
+				onDismiss = var3
 			})
-		}) elseif treatmentType == constants.TreatmentType.PartyChatTimeoutDialog then reactModule.createElement(var13, {}, {
+		}) elseif treatmentType == constants.TreatmentType.PartyChatTimeoutDialog then reactModule.createElement(var2, {}, {
 			reactModule.createElement(partyChatTimeoutCustomDialog, {
 				endTimestamp = uiState.endTime,
 				evidence = detail.evidence,
 				eventId = detail.decisionEventId,
 				durationForAnalytics = detail.timeoutDurationSeconds,
-				onDismiss = var14
+				onDismiss = var3
 			})
-		}) elseif treatmentType == constants.TreatmentType.ChatTimeoutDialogV2 and detail.moderationDetail then reactModule.createElement(var13, {}, {
+		}) elseif treatmentType == constants.TreatmentType.ChatTimeoutDialogV2 and detail.moderationDetail then reactModule.createElement(var2, {}, {
 			reactModule.createElement(chatTimeoutCustomDialogV2Module, {
-				onDismiss = var14,
+				onDismiss = var3,
 				moderationDetail = detail.moderationDetail
 			})
-		}) elseif treatmentType == constants.TreatmentType.ChatNudgeDialogV2 and detail.moderationDetail then reactModule.createElement(var13, {}, {
+		}) elseif treatmentType == constants.TreatmentType.ChatNudgeDialogV2 and detail.moderationDetail then reactModule.createElement(var2, {}, {
 			reactModule.createElement(chatNudgeCustomDialogV2Module, {
-				onDismiss = var14,
+				onDismiss = var3,
 				moderationDetail = detail.moderationDetail
 			})
-		}) elseif fFlagUniversalFeatureRestrictionReceivers and treatmentType == constants.TreatmentType.UniversalFeatureRestriction and detail.moderationDetail then reactModule.createElement(var13, {}, {
+		}) elseif fFlagUniversalFeatureRestrictionReceivers and treatmentType == constants.TreatmentType.UniversalFeatureRestriction and detail.moderationDetail then reactModule.createElement(var2, {}, {
 			reactModule.createElement(universalFeatureRestrictionDialog, {
-				onDismiss = var14,
+				onDismiss = var3,
 				moderationDetail = detail.moderationDetail,
 				abuseVector = detail.abuseVector,
-				onDismissCallback = var15 and var15.onDismiss,
-				titleOverride = var15 and var15.titleOverride,
-				bodyOverride = var15 and var15.bodyOverride,
-				onAppeal = var15 and var15.onAppeal,
-				onShownCallback = var15 and var15.onShown
+				onDismissCallback = var4 and var4.onDismiss,
+				titleOverride = var4 and var4.titleOverride,
+				bodyOverride = var4 and var4.bodyOverride,
+				onAppeal = var4 and var4.onAppeal,
+				onShownCallback = var4 and var4.onShown
 			})
-		}) elseif fFlagTemporaryAvatarKickWarningDialogModule and treatmentType == constants.TreatmentType.TemporaryAvatarKickWarning then reactModule.createElement(var13, {}, {
+		}) elseif fFlagTemporaryAvatarKickWarningDialogModule and treatmentType == constants.TreatmentType.TemporaryAvatarKickWarning then reactModule.createElement(var2, {}, {
 			reactModule.createElement(temporaryAvatarKickWarningDialogModule, {
-				avatarEntityId = var16 and var16.avatarEntityId,
-				violationType = var16 and var16.violationType,
-				placeId = var16 and var16.placeId,
-				onDismiss = var14
+				avatarEntityId = var5 and var5.avatarEntityId,
+				violationType = var5 and var5.violationType,
+				placeId = var5 and var5.placeId,
+				onDismiss = var3
 			})
 		}) else nil
 	end

@@ -11,46 +11,46 @@ local socialNetworksInEditProfileIXPModule = require(editProfile.Flags.SocialNet
 local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
 local callbackInputBox = require(parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.CallbackInputBox
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useStyle (ref), useScreenSize (ref), socialNetworksInEditProfileIXPModule (ref), userInputService (ref), imageSetLabel (ref), images (ref), callbackInputBox (ref), iconSize (ref)
-	local var5 = reactModule.useRef(nil)
-	local var6 = useStyle()
-	local font = var6.Font
-	local theme = var6.Theme
-	local var7 = font.BaseSize * font.Body.RelativeSize
-	local var8 = useScreenSize()
-	local var9 = socialNetworksInEditProfileIXPModule.useGetExperimentVariant({ isExposureEnabled = true })
-	local var10 = if var9 then var9 == socialNetworksInEditProfileIXPModule.Variants.VisibilityFirst and p0.isVisibilityNoOne else nil
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: userInputService (copy), var5 (ref), p0 (ref)
+	local var1 = reactModule.useRef(nil)
+	local var2 = useStyle()
+	local font = var2.Font
+	local theme = var2.Theme
+	local var3 = font.BaseSize * font.Body.RelativeSize
+	local var4 = useScreenSize()
+	local var5 = socialNetworksInEditProfileIXPModule.useGetExperimentVariant({ isExposureEnabled = true })
+	local var6 = if var5 then var5 == socialNetworksInEditProfileIXPModule.Variants.VisibilityFirst and p1.isVisibilityNoOne else nil
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: userInputService (copy), var1 (ref), p1 (ref)
 		if userInputService.OnScreenKeyboardVisible then
-			if not var5.current or not var5.current:IsFocused() then return end
-			local var12 = userInputService.OnScreenKeyboardPosition.Y - (var5.current.AbsolutePosition.Y + var5.current.AbsoluteSize.Y)
+			if not var1.current or not var1.current:IsFocused() then return end
+			local var8 = userInputService.OnScreenKeyboardPosition.Y - (var1.current.AbsolutePosition.Y + var1.current.AbsoluteSize.Y)
 			
-			if var12 < 0 then
-				p0.setKeyboardOffset(var12)
+			if var8 < 0 then
+				p1.setKeyboardOffset(var8)
 				
 				return
 			end
-			p0.setKeyboardOffset(0)
+			p1.setKeyboardOffset(0)
 			
 			return
 		else
-			p0.setKeyboardOffset(0)
+			p1.setKeyboardOffset(0)
 		end
-	end, { var8, p0.setKeyboardOffset })
+	end, { var4, p1.setKeyboardOffset })
 	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var11 (ref), p0 (ref), var5 (ref)
+		-- upvalues: userInputService (copy), var7 (ref), p1 (ref), var1 (ref)
 		local list = {
-			userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(var11),
-			userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(var11)
+			userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(var7),
+			userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(var7)
 		}
 		
-		if p0.focusOn then
+		if p1.focusOn then
 			task.spawn(function()
-				-- upvalues: var5 (copy)
-				if var5 and var5.current then
-					var5.current:captureFocus()
+				-- upvalues: var1 (copy)
+				if var1 and var1.current then
+					var1.current:captureFocus()
 				end
 			end)
 		end
@@ -60,14 +60,14 @@ return function(p0)
 				v:Disconnect()
 			end
 		end
-	end, { var11 })
+	end, { var7 })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p0.layoutOrder,
-		Interactable = not var10
+		LayoutOrder = p1.layoutOrder,
+		Interactable = not var6
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -75,23 +75,23 @@ return function(p0)
 			Padding = UDim.new(0, 12)
 		}),
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = if var9 == socialNetworksInEditProfileIXPModule.Variants.VisibilityFirst then UDim.new(0, 12) else nil,
-			PaddingBottom = if var9 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then UDim.new(0, 12) else nil
+			PaddingTop = if var5 == socialNetworksInEditProfileIXPModule.Variants.VisibilityFirst then UDim.new(0, 12) else nil,
+			PaddingBottom = if var5 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then UDim.new(0, 12) else nil
 		}),
 		NetworkLabel = reactModule.createElement("TextLabel", {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			RichText = true,
 			Font = font.Body.Font,
-			Text = p0.networkTitle,
-			TextSize = var7,
+			Text = p1.networkTitle,
+			TextSize = var3,
 			TextColor3 = theme.TextDefault.Color,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}),
 		InputBackground = reactModule.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
-			Size = UDim2.new(1, 0, 0, var7 + 20),
+			Size = UDim2.new(1, 0, 0, var3 + 20),
 			Image = images["component_assets/circle_21"],
 			ImageColor3 = theme.UIMuted.Color,
 			ImageTransparency = theme.UIMuted.Transparency,
@@ -101,7 +101,7 @@ return function(p0)
 			InputBorder = reactModule.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var7 + 20),
+				Size = UDim2.new(1, 0, 0, var3 + 20),
 				Image = images["component_assets/circle_21_stroke_1"],
 				ImageColor3 = theme.Divider.Color,
 				ScaleType = Enum.ScaleType.Slice,
@@ -113,21 +113,21 @@ return function(p0)
 				}),
 				TextBox = reactModule.createElement(callbackInputBox, {
 					clearButtonDisabled = false,
-					captureFocusOnMount = p0.focusOn,
+					captureFocusOnMount = p1.focusOn,
 					clearButtonSize = iconSize.Small,
 					clearIcon = images["icons/actions/edit/clear_small"],
 					clearIconColor3 = theme.IconEmphasis.Color,
-					clearIconTransparency = if var10 then theme.PlaceHolder.Transparency else nil,
-					initialInputText = p0.initialText,
-					inputBoxRef = var5,
+					clearIconTransparency = if var6 then theme.PlaceHolder.Transparency else nil,
+					initialInputText = p1.initialText,
+					inputBoxRef = var1,
 					inputTextColor3 = theme.TextDefault.Color,
-					inputTextSize = var7,
-					inputTextTransparency = if var10 then theme.PlaceHolder.Transparency else theme.TextDefault.Transparency,
+					inputTextSize = var3,
+					inputTextTransparency = if var6 then theme.PlaceHolder.Transparency else theme.TextDefault.Transparency,
 					inputTextXAlignment = Enum.TextXAlignment.Left,
-					placeholderText = p0.placeholderText,
+					placeholderText = p1.placeholderText,
 					placeholderTextColor3 = theme.TextDefault.Color,
-					placeholderTextTransparency = if var10 then theme.PlaceHolder.Transparency else nil,
-					textChangedCallback = p0.textChanged
+					placeholderTextTransparency = if var6 then theme.PlaceHolder.Transparency else nil,
+					textChangedCallback = p1.textChanged
 				})
 			})
 		})

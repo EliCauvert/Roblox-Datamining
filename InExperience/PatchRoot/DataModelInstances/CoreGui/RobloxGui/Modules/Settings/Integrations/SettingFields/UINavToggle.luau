@@ -10,27 +10,27 @@ local LAYOUT_ORDER = require(settings.Integrations.Constants).GAMESETTINGS.LAYOU
 
 local function _()
 	-- upvalues: valueChangedSignal (ref), gameSettings (ref)
-	local var7 = valueChangedSignal.new(gameSettings.UiNavigationKeyBindEnabled)
-	var7:connect(function(p0)
+	local var1 = valueChangedSignal.new(gameSettings.UiNavigationKeyBindEnabled)
+	var1:connect(function(p1)
 		-- upvalues: gameSettings (copy)
-		if gameSettings.UiNavigationKeyBindEnabled == p0 then
+		if gameSettings.UiNavigationKeyBindEnabled == p1 then
 			return
 		end
-		gameSettings.UiNavigationKeyBindEnabled = p0
+		gameSettings.UiNavigationKeyBindEnabled = p1
 	end)
 	
-	return var7
+	return var1
 end
 
 local _ = function()
 	-- upvalues: availabilitySignal (ref), userInputService (ref)
-	local var8 = availabilitySignal.new(userInputService.KeyboardEnabled)
+	local var1 = availabilitySignal.new(userInputService.KeyboardEnabled)
 	userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
-		-- upvalues: var8 (ref), userInputService (copy)
-		var8:set(userInputService.KeyboardEnabled)
+		-- upvalues: var1 (ref), userInputService (copy)
+		var1:set(userInputService.KeyboardEnabled)
 	end)
 	
-	return var8
+	return var1
 end
 
 local t = {
@@ -40,21 +40,21 @@ local t = {
 	alreadyLocalized = false,
 	field_type = settingEnum.Toggle
 }
-local var5 = valueChangedSignal.new(gameSettings.UiNavigationKeyBindEnabled)
-var5:connect(function(p1)
+local var1 = valueChangedSignal.new(gameSettings.UiNavigationKeyBindEnabled)
+var1:connect(function(p1)
 	-- upvalues: gameSettings (ref)
 	if gameSettings.UiNavigationKeyBindEnabled == p1 then
 		return
 	end
 	gameSettings.UiNavigationKeyBindEnabled = p1
 end)
-t.onChanged = var5
-local var6 = availabilitySignal.new(userInputService.KeyboardEnabled)
+t.onChanged = var1
+local var2 = availabilitySignal.new(userInputService.KeyboardEnabled)
 userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
-	-- upvalues: var6 (ref), userInputService (ref)
-	var6:set(userInputService.KeyboardEnabled)
+	-- upvalues: var2 (ref), userInputService (ref)
+	var2:set(userInputService.KeyboardEnabled)
 end)
-t.availability = var6
+t.availability = var2
 t.layoutOrder = LAYOUT_ORDER.UiNavigationKeyBindEnabledFrame
 
 return t

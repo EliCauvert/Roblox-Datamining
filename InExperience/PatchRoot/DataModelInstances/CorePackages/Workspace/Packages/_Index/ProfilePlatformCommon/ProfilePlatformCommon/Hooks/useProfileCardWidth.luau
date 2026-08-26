@@ -10,17 +10,17 @@ local fixIsWideModeCheck = game:DefineFastFlag("FixIsWideModeCheck", false)
 
 return function()
 	-- upvalues: useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), fixIsWideModeCheck (ref), getDisplayStore (ref), useNavBarSize (ref), fFlagProfilePlatformNewProfileHeader (ref)
-	local var3
-	local var2 = getSafeAreaSize(useScreenSize(), useSelector(function(p0)
-		return p0.GlobalGuiInset
+	local var1
+	local var2 = getSafeAreaSize(useScreenSize(), useSelector(function(p1)
+		return p1.GlobalGuiInset
 	end))
 	local _ = nil
 	
 	if fixIsWideModeCheck then
-		var3 = var2.Y.Offset < var2.X.Offset
-		var3 = nil
+		var1 = var2.Y.Offset < var2.X.Offset
+		var1 = nil
 	else
-		var3 = getDisplayStore(false).getDisplaySize(false) ~= Enum.DisplaySize.Small
+		var1 = getDisplayStore(false).getDisplaySize(false) ~= Enum.DisplaySize.Small
 	end
-	return if fFlagProfilePlatformNewProfileHeader then if var3 then math.max(456, math.floor((var2.X.Offset - useNavBarSize()) / 3)) else math.min(var2.X.Offset, 640) else math.min(var2.X.Offset, 640)
+	return if fFlagProfilePlatformNewProfileHeader then if var1 then math.max(456, math.floor((var2.X.Offset - useNavBarSize()) / 3)) else math.min(var2.X.Offset, 640) else math.min(var2.X.Offset, 640)
 end

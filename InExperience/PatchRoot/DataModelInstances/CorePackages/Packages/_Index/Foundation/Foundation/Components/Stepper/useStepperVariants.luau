@@ -7,7 +7,7 @@ local variantsContextModule = require(foundation.Providers.Style.VariantsContext
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Components.Types)
 
-local function variantsFactory(p0)
+local function variantsFactory(p1)
 	-- upvalues: inputSizeModule (ref), iconSizeModule (ref), stepperStepStateModule (ref)
 	return {
 		common = {
@@ -25,13 +25,13 @@ local function variantsFactory(p0)
 				content = {
 					tag = "size-0-800",
 					padding = {
-						left = UDim.new(0, p0.Padding.XSmall),
-						right = UDim.new(0, p0.Padding.Small),
-						top = UDim.new(0, p0.Size.Size_250),
-						bottom = UDim.new(0, p0.Size.Size_250)
+						left = UDim.new(0, p1.Padding.XSmall),
+						right = UDim.new(0, p1.Padding.Small),
+						top = UDim.new(0, p1.Size.Size_250),
+						bottom = UDim.new(0, p1.Size.Size_250)
 					}
 				},
-				textColumn = { padding = { left = UDim.new(0, p0.Size.Size_250) } },
+				textColumn = { padding = { left = UDim.new(0, p1.Size.Size_250) } },
 				indicatorInner = { tag = "size-300-300" },
 				index = { tag = "text-caption-small" },
 				label = { tag = "text-label-small" },
@@ -42,13 +42,13 @@ local function variantsFactory(p0)
 				content = {
 					tag = "size-0-1000",
 					padding = {
-						left = UDim.new(0, p0.Size.Size_150),
-						right = UDim.new(0, p0.Size.Size_300),
-						top = UDim.new(0, p0.Size.Size_300),
-						bottom = UDim.new(0, p0.Size.Size_300)
+						left = UDim.new(0, p1.Size.Size_150),
+						right = UDim.new(0, p1.Size.Size_300),
+						top = UDim.new(0, p1.Size.Size_300),
+						bottom = UDim.new(0, p1.Size.Size_300)
 					}
 				},
-				textColumn = { padding = { left = UDim.new(0, p0.Gap.Medium) } },
+				textColumn = { padding = { left = UDim.new(0, p1.Gap.Medium) } },
 				indicatorInner = { tag = "size-400-400" },
 				index = { tag = "text-caption-medium" },
 				label = { tag = "text-label-small" },
@@ -59,13 +59,13 @@ local function variantsFactory(p0)
 				content = {
 					tag = "size-0-1200",
 					padding = {
-						left = UDim.new(0, p0.Padding.Small),
-						right = UDim.new(0, p0.Padding.Large),
-						top = UDim.new(0, p0.Size.Size_350),
-						bottom = UDim.new(0, p0.Size.Size_350)
+						left = UDim.new(0, p1.Padding.Small),
+						right = UDim.new(0, p1.Padding.Large),
+						top = UDim.new(0, p1.Size.Size_350),
+						bottom = UDim.new(0, p1.Size.Size_350)
 					}
 				},
-				textColumn = { padding = { left = UDim.new(0, p0.Gap.Medium) } },
+				textColumn = { padding = { left = UDim.new(0, p1.Gap.Medium) } },
 				indicatorInner = { tag = "size-500-500" },
 				index = { tag = "text-caption-large" },
 				label = { tag = "text-label-medium" },

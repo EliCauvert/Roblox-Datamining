@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return string.gsub(p0, "\n\n*", "\n")
+﻿return function(p1)
+	return string.gsub(p1, "\n\n*", "\n")
 end

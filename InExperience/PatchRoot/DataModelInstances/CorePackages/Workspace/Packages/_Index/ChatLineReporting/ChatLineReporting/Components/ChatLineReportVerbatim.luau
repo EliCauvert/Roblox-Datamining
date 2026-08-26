@@ -7,16 +7,16 @@ local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
 local text = foundationModule.Text
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), getMessageTextModule (ref), view (ref), constantsModule (ref), text (ref)
-	local var5, var6 = reactModule.useState(nil)
-	local var7 = getMessageTextModule(p0.selectedMessage.useTranslation, p0.selectedMessage.translation, p0.selectedMessage.text)
-	local var5_1 = var5 or (p0.selectedMessage.prefixText or "")
-	local userId = p0.selectedMessage.userId
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = getMessageTextModule(p1.selectedMessage.useTranslation, p1.selectedMessage.translation, p1.selectedMessage.text)
+	local var4 = var1 or (p1.selectedMessage.prefixText or "")
+	local userId = p1.selectedMessage.userId
 	
 	if userId and userId.data then
 		local names = userId.data.userProfiles[1].names
-		var6(string.gsub(var5_1, names.displayName, names.combinedName))
+		var2(string.gsub(var4, names.displayName, names.combinedName))
 	end
 	return reactModule.createElement(view, {
 		tag = "radius-medium padding-left-medium padding-right-medium stroke-neutral stroke-standard",
@@ -27,7 +27,7 @@ return function(p0)
 				TextScaled = false,
 				RichText = true,
 				tag = "auto-xy content-muted",
-				Text = `{var5_1} {var7}`,
+				Text = `{var4} {var3}`,
 				TextTruncate = Enum.TextTruncate.SplitWord,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})

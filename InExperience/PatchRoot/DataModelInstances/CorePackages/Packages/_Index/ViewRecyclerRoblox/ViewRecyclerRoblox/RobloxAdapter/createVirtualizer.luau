@@ -6,145 +6,145 @@ local _ = viewRecyclerModule.Layout
 local scrollListHostRuntimeModule = require(viewRecyclerRoblox.RobloxAdapter.ScrollListHostRuntime)
 local _ = require(viewRecyclerRoblox.RobloxAdapter.createRecyclingScope)
 
-return function(p0)
+return function(p1)
 	-- upvalues: axis (ref), viewRecyclerModule (ref), scrollListHostRuntimeModule (ref)
-	assert(if p0.axis ~= axis.X then p0.axis == axis.Y else true, "createVirtualizer: invalid axis")
-	local scrollingFrame = p0.scrollingFrame
-	local axis_1 = p0.axis
-	local dataSource = p0.dataSource
-	local recyclingScope = p0.recyclingScope
-	local var3 = false
+	assert(if p1.axis ~= axis.X then p1.axis == axis.Y else true, "createVirtualizer: invalid axis")
+	local scrollingFrame = p1.scrollingFrame
+	local axis_1 = p1.axis
+	local dataSource = p1.dataSource
+	local recyclingScope = p1.recyclingScope
+	local var1 = false
 	
-	local function getInstance(p1)
-		-- upvalues: p0 (ref)
-		local var13 = if p0.getInstance ~= nil then p1 else p0.getInstance(p1)
-		assert(typeof(var13) == "Instance" and var13:IsA("GuiObject"), "createVirtualizer: ItemView host must be a GuiObject")
+	local function getInstance(p2)
+		-- upvalues: p1 (ref)
+		local var2 = if p1.getInstance ~= nil then p2 else p1.getInstance(p2)
+		assert(typeof(var2) == "Instance" and var2:IsA("GuiObject"), "createVirtualizer: ItemView host must be a GuiObject")
 		
-		return var13
+		return var2
 	end
 	
-	local layout = p0.layout
-	local var5 = nil
-	local var6 = nil
+	local layout = p1.layout
+	local var2 = nil
+	local var3 = nil
 	
 	local function scrollToOffset(value)
-		-- upvalues: var5 (write), viewRecyclerModule (copy)
-		return var5.dispatch({
+		-- upvalues: var2 (write), viewRecyclerModule (copy)
+		return var2.dispatch({
 			type = viewRecyclerModule.VirtualizerCommandType.ScrollToOffset,
 			offset = value
 		}).result
 	end
 	
 	local function scrollBy(p2)
-		-- upvalues: var5 (write), viewRecyclerModule (copy)
-		return var5.dispatch({
+		-- upvalues: var2 (write), viewRecyclerModule (copy)
+		return var2.dispatch({
 			type = viewRecyclerModule.VirtualizerCommandType.ScrollBy,
 			delta = p2
 		}).result
 	end
 	
-	local function restoreScrollSnapshot(p3)
-		-- upvalues: var5 (write), viewRecyclerModule (copy)
-		return var5.dispatch({
+	local function restoreScrollSnapshot(p2)
+		-- upvalues: var2 (write), viewRecyclerModule (copy)
+		return var2.dispatch({
 			type = viewRecyclerModule.VirtualizerCommandType.RestoreScrollSnapshot,
-			snapshot = p3
+			snapshot = p2
 		}).result
 	end
 	
-	local getItemViewType = p0.getItemViewType
+	local getItemViewType = p1.getItemViewType
 	local t = {
-		overscan = p0.overscan,
-		overscanPolicy = p0.overscanPolicy,
-		dataPrefetch = p0.dataPrefetch,
-		contentAlignment = p0.contentAlignment,
-		endThreshold = p0.endReachedThreshold,
+		overscan = p1.overscan,
+		overscanPolicy = p1.overscanPolicy,
+		dataPrefetch = p1.dataPrefetch,
+		contentAlignment = p1.contentAlignment,
+		endThreshold = p1.endReachedThreshold,
 		pinnedItems = {
-			isItemStickyHeader = p0.isItemStickyHeader,
-			pinnedStartItem = p0.pinnedStartItem,
-			pinnedEndItem = p0.pinnedEndItem
+			isItemStickyHeader = p1.isItemStickyHeader,
+			pinnedStartItem = p1.pinnedStartItem,
+			pinnedEndItem = p1.pinnedEndItem
 		},
-		preserveScrollPositionOnChange = p0.preserveScrollPositionOnChange ~= false
+		preserveScrollPositionOnChange = p1.preserveScrollPositionOnChange ~= false
 	}
 	
 	local function getListHostConfiguration()
-		-- upvalues: axis_1 (ref), dataSource (write), layout (write), p0 (ref)
+		-- upvalues: axis_1 (ref), dataSource (write), layout (write), p1 (ref)
 		return {
 			axis = axis_1,
 			dataSource = dataSource,
 			layout = layout,
-			initialScrollAlignment = p0.initialScrollAlignment,
-			autoScrollOnChange = p0.autoScrollOnChange,
-			startReachedThreshold = p0.startReachedThreshold,
-			onStartReached = p0.onStartReached,
-			onEndReached = p0.onEndReached,
-			onViewportChanged = p0.onViewportChanged,
-			onScrollOffsetChanged = p0.onScrollOffsetChanged,
-			onContentLengthChanged = p0.onContentLengthChanged,
-			onVisibleRangeChanged = p0.onVisibleRangeChanged,
-			onMountedRangeChanged = p0.onMountedRangeChanged,
-			onDataPrefetchRequested = p0.onDataPrefetchRequested
+			initialScrollAlignment = p1.initialScrollAlignment,
+			autoScrollOnChange = p1.autoScrollOnChange,
+			startReachedThreshold = p1.startReachedThreshold,
+			onStartReached = p1.onStartReached,
+			onEndReached = p1.onEndReached,
+			onViewportChanged = p1.onViewportChanged,
+			onScrollOffsetChanged = p1.onScrollOffsetChanged,
+			onContentLengthChanged = p1.onContentLengthChanged,
+			onVisibleRangeChanged = p1.onVisibleRangeChanged,
+			onMountedRangeChanged = p1.onMountedRangeChanged,
+			onDataPrefetchRequested = p1.onDataPrefetchRequested
 		}
 	end
 	
 	local function commitConfiguration()
-		-- upvalues: var6 (write), getListHostConfiguration (ref), scrollingFrame (ref), p0 (ref), t (write)
-		var6.update({
+		-- upvalues: var3 (write), getListHostConfiguration (ref), scrollingFrame (ref), p1 (ref), t (write)
+		var3.update({
 			hostConfiguration = getListHostConfiguration(),
 			hostTarget = {
 				scrollingFrame = scrollingFrame,
-				viewportOverlay = p0.viewportOverlay
+				viewportOverlay = p1.viewportOverlay
 			},
 			corePolicy = t
 		})
 	end
 	
-	local function _(p4)
+	local function _(p2)
 		-- upvalues: t (write), commitConfiguration (ref)
 		local cloned = table.clone(t)
-		p4(cloned)
+		p2(cloned)
 		t = cloned
 		commitConfiguration()
 	end
 	
-	var6 = scrollListHostRuntimeModule.newForGuiObjects({
+	var3 = scrollListHostRuntimeModule.newForGuiObjects({
 		prepareItemViewAssignment = nil,
 		onItemViewPresentationChanged = nil,
 		initialHostConfiguration = getListHostConfiguration(),
 		initialHostTarget = {
 			scrollingFrame = scrollingFrame,
-			viewportOverlay = p0.viewportOverlay
+			viewportOverlay = p1.viewportOverlay
 		},
 		initialCorePolicy = t,
 		getGuiObject = getInstance,
 		core = {
 			recyclingScope = recyclingScope,
 			getItemViewType = getItemViewType,
-			diagnostics = p0.diagnostics
+			diagnostics = p1.diagnostics
 		},
 		onItemViewAssignmentChanged = recyclingScope.updateItemView
 	})
-	var5 = var6
-	var5.dispatch({
+	var2 = var3
+	var2.dispatch({
 		type = viewRecyclerModule.VirtualizerCommandType.Activate
 	})
-	var6.connect()
+	var3.connect()
 	
 	return {
 		setScrollOffset = function(value)
-			-- upvalues: var5 (write), viewRecyclerModule (copy)
-			var5.dispatch({
+			-- upvalues: var2 (write), viewRecyclerModule (copy)
+			var2.dispatch({
 				type = viewRecyclerModule.VirtualizerCommandType.SetScrollOffset,
 				offset = value
 			})
 		end,
 		scrollToOffset = scrollToOffset,
 		scrollBy = scrollBy,
-		scrollToIndex = function(p5, p6)
-			-- upvalues: var5 (write), viewRecyclerModule (copy)
-			var5.dispatch({
+		scrollToIndex = function(p2, p3)
+			-- upvalues: var2 (write), viewRecyclerModule (copy)
+			var2.dispatch({
 				type = viewRecyclerModule.VirtualizerCommandType.ScrollToIndex,
-				index = p5,
-				alignment = p6 and p6.alignment
+				index = p2,
+				alignment = p3 and p3.alignment
 			})
 		end,
 		setDataSource = function(value)
@@ -157,18 +157,18 @@ return function(p0)
 			layout = value
 			commitConfiguration()
 		end,
-		setDataSourceAndLayout = function(value, p7)
+		setDataSourceAndLayout = function(value, p2)
 			-- upvalues: dataSource (write), layout (write), commitConfiguration (ref)
 			dataSource = value
-			layout = p7
+			layout = p2
 			commitConfiguration()
 		end,
 		setOverscan = function(value)
 			-- upvalues: t (write), commitConfiguration (ref)
-			local _ = function(p8)
+			local _ = function(p2)
 				-- upvalues: value (ref)
-				p8.overscan = value
-				p8.overscanPolicy = nil
+				p2.overscan = value
+				p2.overscanPolicy = nil
 			end
 			
 			local cloned = table.clone(t)
@@ -179,9 +179,9 @@ return function(p0)
 		end,
 		setOverscanPolicy = function(value)
 			-- upvalues: t (write), commitConfiguration (ref)
-			local _ = function(p9)
+			local _ = function(p2)
 				-- upvalues: value (ref)
-				p9.overscanPolicy = value
+				p2.overscanPolicy = value
 			end
 			
 			local cloned = table.clone(t)
@@ -191,9 +191,9 @@ return function(p0)
 		end,
 		setDataPrefetch = function(value)
 			-- upvalues: t (write), commitConfiguration (ref)
-			local _ = function(p10)
+			local _ = function(p2)
 				-- upvalues: value (ref)
-				p10.dataPrefetch = value
+				p2.dataPrefetch = value
 			end
 			
 			local cloned = table.clone(t)
@@ -203,9 +203,9 @@ return function(p0)
 		end,
 		setContentAlignment = function(value)
 			-- upvalues: t (write), commitConfiguration (ref)
-			local _ = function(p11)
+			local _ = function(p2)
 				-- upvalues: value (ref)
-				p11.contentAlignment = value
+				p2.contentAlignment = value
 			end
 			
 			local cloned = table.clone(t)
@@ -215,9 +215,9 @@ return function(p0)
 		end,
 		setPinnedItems = function(value)
 			-- upvalues: t (write), commitConfiguration (ref)
-			local _ = function(p12)
+			local _ = function(p2)
 				-- upvalues: value (ref)
-				p12.pinnedItems = table.clone(value)
+				p2.pinnedItems = table.clone(value)
 			end
 			
 			local cloned = table.clone(t)
@@ -231,9 +231,9 @@ return function(p0)
 		end,
 		setPreserveScrollPositionOnChange = function(value)
 			-- upvalues: t (write), commitConfiguration (ref)
-			local _ = function(p13)
+			local _ = function(p2)
 				-- upvalues: value (ref)
-				p13.preserveScrollPositionOnChange = value
+				p2.preserveScrollPositionOnChange = value
 			end
 			
 			local cloned = table.clone(t)
@@ -242,37 +242,37 @@ return function(p0)
 			commitConfiguration()
 		end,
 		refreshItemViews = function()
-			-- upvalues: var5 (write), viewRecyclerModule (copy)
-			var5.dispatch({ type = viewRecyclerModule.VirtualizerCommandType.Refresh })
+			-- upvalues: var2 (write), viewRecyclerModule (copy)
+			var2.dispatch({ type = viewRecyclerModule.VirtualizerCommandType.Refresh })
 		end,
 		getVisibleRange = function()
-			-- upvalues: var5 (write)
-			return var5.getSnapshot().visibleRange
+			-- upvalues: var2 (write)
+			return var2.getSnapshot().visibleRange
 		end,
 		getMountedRange = function()
-			-- upvalues: var5 (write)
-			return var5.getSnapshot().mountedRange
+			-- upvalues: var2 (write)
+			return var2.getSnapshot().mountedRange
 		end,
 		getScrollState = function()
-			-- upvalues: var5 (write), viewRecyclerModule (copy)
-			return var5.query({
+			-- upvalues: var2 (write), viewRecyclerModule (copy)
+			return var2.query({
 				type = viewRecyclerModule.VirtualizerQueryType.GetScrollState
 			})
 		end,
 		captureScrollSnapshot = function()
-			-- upvalues: var5 (write), viewRecyclerModule (copy)
-			return var5.query({
+			-- upvalues: var2 (write), viewRecyclerModule (copy)
+			return var2.query({
 				type = viewRecyclerModule.VirtualizerQueryType.CaptureScrollSnapshot
 			})
 		end,
 		restoreScrollSnapshot = restoreScrollSnapshot,
 		destroy = function()
-			-- upvalues: var3 (write), var6 (write)
-			if var3 then
+			-- upvalues: var1 (write), var3 (write)
+			if var1 then
 				return
 			end
-			var3 = true
-			var6.destroy()
+			var1 = true
+			var3.destroy()
 		end
 	}
 end

@@ -1,28 +1,28 @@
 ﻿local httpService = game:GetService("HttpService")
 local squadPromptTypeModule = require(script:FindFirstAncestor("SquadsCore").Enums.SquadPromptType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: httpService (ref), squadPromptTypeModule (ref)
-	return function(p1)
-		-- upvalues: p0 (ref), httpService (copy), squadPromptTypeModule (copy)
-		p1:dispatch(p0.squadContext.createConversation(p0.conversationType, p0.userIds, nil, p0.source)):andThen(function(p3)
-			-- upvalues: p0 (copy)
-			if p0.onSuccessCallback then
-				p0.onSuccessCallback(p3.id)
+	return function(p2)
+		-- upvalues: p1 (ref), httpService (copy), squadPromptTypeModule (copy)
+		p2:dispatch(p1.squadContext.createConversation(p1.conversationType, p1.userIds, nil, p1.source)):andThen(function(p3)
+			-- upvalues: p1 (copy)
+			if p1.onSuccessCallback then
+				p1.onSuccessCallback(p3.id)
 			end
-		end):catch(function(p2)
-			-- upvalues: httpService (copy), p0 (copy), p1 (ref), squadPromptTypeModule (copy)
+		end):catch(function(p3)
+			-- upvalues: httpService (copy), p1 (copy), p2 (ref), squadPromptTypeModule (copy)
 			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), p2 (ref)
-				return httpService:JSONDecode(p2.Body)
+				-- upvalues: httpService (copy), p3 (ref)
+				return httpService:JSONDecode(p3.Body)
 			end)
-			p0.squadContext.setSquadPrompt(p1, {
+			p1.squadContext.setSquadPrompt(p2, {
 				hideCancelButton = true,
 				promptType = if ok and status and status.reason_code == "participant_chat_disabled" then squadPromptTypeModule.ParticipantChatDisabled else squadPromptTypeModule.Error
 			})
 			
-			if p0.onErrorCallback then
-				p0.onErrorCallback()
+			if p1.onErrorCallback then
+				p1.onErrorCallback()
 			end
 		end)
 	end

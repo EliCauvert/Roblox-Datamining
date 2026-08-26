@@ -8,26 +8,26 @@ local playerFeedbackPromptsModule = require(coreScriptsPlayerFeedback.Components
 local getFFlagEnablePlayerSupportPromptModule = require(coreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)
 local coreGuiService = game:GetService("CoreGui")
 local robloxGui = coreGuiService:FindFirstChild("RobloxGui") or coreGuiService:WaitForChild("RobloxGui")
-local var7 = getFFlagEnablePlayerSupportPromptModule()
+local var1 = getFFlagEnablePlayerSupportPromptModule()
 local _ = nil
 local ok, status = pcall(function()
 	-- upvalues: robloxGui (ref)
 	return if robloxGui then require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider) else nil
 end)
-local var8 = if ok and status then status else function(p0)
-	return p0.App
+local var2 = if ok and status then status else function(p1)
+	return p1.App
 end
 
 return function(p1)
-	-- upvalues: var8 (write), var7 (ref), reactRobloxModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), playerFeedbackPromptsModule (ref)
-	p1 = p1 or var8
+	-- upvalues: var2 (write), var1 (ref), reactRobloxModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), playerFeedbackPromptsModule (ref)
+	p1 = p1 or var2
 	local screenGui = Instance.new("ScreenGui")
-	screenGui.IgnoreGuiInset = if var7 then false else true
+	screenGui.IgnoreGuiInset = if var1 then false else true
 	screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	screenGui.AutoLocalize = false
 	screenGui.DisplayOrder = -1
-	local var11 = reactRobloxModule.createRoot(screenGui)
-	var11:render(p1({
+	local var3 = reactRobloxModule.createRoot(screenGui)
+	var3:render(p1({
 		App = reactModule.createElement(localizationProvider, {
 			localization = localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 		}, {
@@ -38,8 +38,8 @@ return function(p1)
 	return {
 		instance = screenGui,
 		unmount = function()
-			-- upvalues: var11 (ref)
-			var11:unmount()
+			-- upvalues: var3 (ref)
+			var3:unmount()
 		end
 	}
 end

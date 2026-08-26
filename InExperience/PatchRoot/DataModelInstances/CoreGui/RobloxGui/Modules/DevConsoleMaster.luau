@@ -157,7 +157,7 @@ end
 
 function t_4:SetupDevConsole()
 	-- upvalues: userInputService (ref), t_5 (ref), mainViewModule (ref), setTabListModule (ref), t_2 (ref), devConsoleAnalyticsModule (ref), roduxModule (ref), devConsoleReducerModule (ref), roactModule (ref), roactRoduxModule (ref), dataProviderModule (ref), devConsoleWindowModule (ref), constantsModule (ref), RCCProfilerDataCompleteListenerModule (ref)
-	local var46 = t_5[userInputService:GetPlatform()]
+	local var1 = t_5[userInputService:GetPlatform()]
 	self.store = roduxModule.Store.new(devConsoleReducerModule, {
 		MainView = mainViewModule(nil, setTabListModule(t_2, "Log"))
 	}, { devConsoleAnalyticsModule })
@@ -167,14 +167,14 @@ function t_4:SetupDevConsole()
 				DevConsoleWindow = roactModule.createElement(devConsoleWindowModule, {
 					isDeveloperView = false,
 					isMinimized = false,
-					formFactor = var46,
+					formFactor = var1,
 					isVisible = self.store:getState().DisplayOptions.isVisible,
 					position = constantsModule.MainWindowInit.Position,
 					size = constantsModule.MainWindowInit.Size,
 					tabList = t_2,
-					onCloseCallback = function(p0)
+					onCloseCallback = function(p1)
 						-- upvalues: self (ref)
-						self:SetServerStatsConnection(p0)
+						self:SetServerStatsConnection(p1)
 					end
 				}),
 				RCCProfilerDataCompleteListener = roactModule.createElement(RCCProfilerDataCompleteListenerModule)
@@ -185,7 +185,7 @@ function t_4:SetupDevConsole()
 	self.waitForStartBindable:Fire()
 end
 
-local var43 = t_4.new()
+local var1 = t_4.new()
 
 function t_4:refreshTabList()
 	-- upvalues: setTabListModule (ref), getAdminTabList (ref), t (ref)
@@ -206,7 +206,7 @@ function t_4:Start()
 		end
 		self.init = true
 		self.element = roactModule.mount(self.root, coreGuiService, "DevConsoleMaster")
-		local var47 = getClientReplicatorModule()
+		local var2 = getClientReplicatorModule()
 		task.spawn(function()
 			-- upvalues: devConsoleAdminSeesDevTabs (copy), playerPermissionsModule (copy), playersService (copy), self (ref), setTabListModule (copy), t_1 (copy)
 			if devConsoleAdminSeesDevTabs then
@@ -221,8 +221,8 @@ function t_4:Start()
 			end
 		end)
 		
-		if var47 then
-			self._statsConnector = var47.StatsReceived:connect(function(_)
+		if var2 then
+			self._statsConnector = var2.StatsReceived:connect(function(_)
 				-- upvalues: self (ref), devConsoleAdminSeesDevTabs (copy), setTabListModule (copy), t (copy)
 				if not self._statsConnector then return end
 				self._statsConnector:Disconnect()
@@ -242,9 +242,9 @@ function t_4:Start()
 end
 
 function t_4:ToggleVisibility()
-	-- upvalues: var43 (ref)
+	-- upvalues: var1 (ref)
 	if not self.init then
-		var43:Start()
+		var1:Start()
 	end
 	self:SetVisibility(not self.store:getState().DisplayOptions.isVisible)
 end
@@ -260,34 +260,34 @@ end
 
 function t_4.SetServerStatsConnection(_, p1)
 	-- upvalues: getClientReplicatorModule (ref)
-	local var49 = getClientReplicatorModule()
+	local var2 = getClientReplicatorModule()
 	
-	if var49 then
-		var49:RequestServerStats(p1)
+	if var2 then
+		var2:RequestServerStats(p1)
 	end
 end
 
-function t_4:SetVisibility(p2)
-	-- upvalues: var43 (ref), setDevConsoleVisibilityModule (ref)
-	if type(p2) == "boolean" then
-		if not self.init and p2 then
-			var43:Start()
+function t_4:SetVisibility(p1)
+	-- upvalues: var1 (ref), setDevConsoleVisibilityModule (ref)
+	if type(p1) == "boolean" then
+		if not self.init and p1 then
+			var1:Start()
 		end
-		self:SetServerStatsConnection(p2)
-		self.store:dispatch(setDevConsoleVisibilityModule(p2))
+		self:SetServerStatsConnection(p1)
+		self.store:dispatch(setDevConsoleVisibilityModule(p1))
 	end
 end
 
 starterGuiService:RegisterGetCore("DevConsoleVisible", function()
-	-- upvalues: var43 (ref)
-	return var43:GetVisibility()
+	-- upvalues: var1 (ref)
+	return var1:GetVisibility()
 end)
-starterGuiService:RegisterSetCore("DevConsoleVisible", function(p3)
-	-- upvalues: var43 (ref)
-	if type(p3) ~= "boolean" then
+starterGuiService:RegisterSetCore("DevConsoleVisible", function(p1)
+	-- upvalues: var1 (ref)
+	if type(p1) ~= "boolean" then
 		error("DevConsoleVisible must be given a boolean value.")
 	end
-	var43:SetVisibility(p3)
+	var1:SetVisibility(p1)
 end)
 
-return var43
+return var1

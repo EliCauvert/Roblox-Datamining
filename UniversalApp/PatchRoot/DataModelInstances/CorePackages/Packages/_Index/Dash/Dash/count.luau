@@ -1,16 +1,16 @@
-﻿local var0 = function()
+﻿local var1 = function()
 	return true
 end
 
-return function(p0, p1)
-	-- upvalues: var0 (ref)
-	local var1 = 0
-	p1 = p1 or var0
+return function(p1, p2)
+	-- upvalues: var1 (ref)
+	local var2 = 0
+	p2 = p2 or var1
 	
-	for i, v in p0 do
-		if p1(v, i) then
-			var1 += 1
+	for i, v in p1 do
+		if p2(v, i) then
+			var2 += 1
 		end
 	end
-	return var1
+	return var2
 end

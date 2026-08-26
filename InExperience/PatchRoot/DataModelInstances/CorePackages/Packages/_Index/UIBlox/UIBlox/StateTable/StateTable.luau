@@ -2,85 +2,85 @@
 local t = {}
 t.__index = t
 
-local function _(p0, p1)
-	local var2 = typeof(p0)
-	assert(if var2 ~= "string" then var2 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", p1, tostring(p0), var2))
+local function _(p1, p2)
+	local var1 = typeof(p1)
+	assert(if var1 ~= "string" then var1 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", p2, tostring(p1), var1))
 end
 
-function t.new(p2, p3, p4, p5)
+function t.new(p1, p2, p3, p4)
 	-- upvalues: t (ref)
-	assert(typeof(p2) == "string", "name must be a string")
-	assert(#p2 > 0, "name must not be an empty string")
-	local var3 = typeof(p3)
-	assert(if var3 ~= "string" then var3 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "initialState", tostring(p3), var3))
-	assert(if p4 ~= nil then typeof(p4) == "table" else true, "initialContext must be a table or nil")
-	assert(typeof(p5) == "table", "transitionTable must be a table")
-	assert(typeof(p5[p3]) == "table", "initialState must be present in transitionTable")
+	assert(typeof(p1) == "string", "name must be a string")
+	assert(#p1 > 0, "name must not be an empty string")
+	local var1 = typeof(p2)
+	assert(if var1 ~= "string" then var1 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "initialState", tostring(p2), var1))
+	assert(if p3 ~= nil then typeof(p3) == "table" else true, "initialContext must be a table or nil")
+	assert(typeof(p4) == "table", "transitionTable must be a table")
+	assert(typeof(p4[p2]) == "table", "initialState must be present in transitionTable")
 	local t_1 = {}
 	setmetatable(t_1, t)
-	t_1.name = p2
-	t_1.currentState = p3
-	t_1.currentContext = p4 or {}
+	t_1.name = p1
+	t_1.currentState = p2
+	t_1.currentContext = p3 or {}
 	t_1.transitionTable = {}
 	t_1.events = {}
 	
-	for i, v in pairs(p5) do
-		local var5 = typeof(i)
-		assert(if var5 ~= "string" then var5 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "state", tostring(i), var5))
+	for i, v in pairs(p4) do
+		local var2 = typeof(i)
+		assert(if var2 ~= "string" then var2 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "state", tostring(i), var2))
 		assert(typeof(v) == "table", string.format("state '%s' must map to a table", tostring(i)))
 		local t_2 = {}
 		
 		for i_1, v_1 in pairs(v) do
-			local var7 = typeof(i_1)
-			assert(if var7 ~= "string" then var7 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(i_1), var7))
+			local var3 = typeof(i_1)
+			assert(if var3 ~= "string" then var3 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(i_1), var3))
 			assert(typeof(v_1) == "table", string.format("event '%s' must map to a table", tostring(i_1)))
 			local nextState = v_1.nextState
 			local action = v_1.action
 			
 			if nextState ~= nil then
-				local var8 = typeof(nextState)
-				assert(if var8 ~= "string" then var8 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "nextState", tostring(nextState), var8))
-				assert(p5[nextState] ~= nil, string.format("nextState '%s' does not exist in transitionTable", tostring(nextState)))
+				local var4 = typeof(nextState)
+				assert(if var4 ~= "string" then var4 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "nextState", tostring(nextState), var4))
+				assert(p4[nextState] ~= nil, string.format("nextState '%s' does not exist in transitionTable", tostring(nextState)))
 			end
 			assert(if action ~= nil then typeof(action) == "function" else true, "action must be a function")
 			t_2[i_1] = v_1
 			
 			if t_1.events[i_1] == nil then
-				t_1.events[i_1] = function(p6)
+				t_1.events[i_1] = function(p5)
 					-- upvalues: t_1 (ref), i_1 (ref)
-					return t_1:handleEvent(i_1, p6)
+					return t_1:handleEvent(i_1, p5)
 				end
 			end
 		end
 		t_1.transitionTable[i] = t_2
 	end
 	setmetatable(t_1.events, {
-		__index = function(_, p7)
+		__index = function(_, p5)
 			-- upvalues: t_1 (ref)
-			error(string.format("'%s' is not a valid event in StateTable '%s'", tostring(p7), t_1.name), 2)
+			error(string.format("'%s' is not a valid event in StateTable '%s'", tostring(p5), t_1.name), 2)
 		end
 	})
 	
 	return t_1
 end
 
-function t:handleEvent(p8, p9)
+function t:handleEvent(p5, p6)
 	-- upvalues: cryoModule (ref)
-	local var9 = typeof(p8)
-	assert(if var9 ~= "string" then var9 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(p8), var9))
-	assert(if p9 ~= nil then typeof(p9) == "table" else true, "args must be nil or valid table")
+	local var5 = typeof(p5)
+	assert(if var5 ~= "string" then var5 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(p5), var5))
+	assert(if p6 ~= nil then typeof(p6) == "table" else true, "args must be nil or valid table")
 	local currentState = self.currentState
-	local var10 = self.transitionTable[currentState]
-	assert(var10 ~= nil, "no transition events for current state")
+	local var6 = self.transitionTable[currentState]
+	assert(var6 ~= nil, "no transition events for current state")
 	
-	if var10[p8] ~= nil then
-		local var11 = var10[p8]
-		local nextState = var11.nextState or currentState
-		local action = var11.action
+	if var6[p5] ~= nil then
+		local var7 = var6[p5]
+		local nextState = var7.nextState or currentState
+		local action = var7.action
 		local currentContext = self.currentContext
 		
 		if action ~= nil then
-			currentContext = cryoModule.Dictionary.join(self.currentContext, action(currentState, nextState, p9, self.currentContext) or {})
+			currentContext = cryoModule.Dictionary.join(self.currentContext, action(currentState, nextState, p6, self.currentContext) or {})
 			self.currentContext = currentContext
 		end
 		self.currentState = nextState
@@ -91,9 +91,9 @@ function t:handleEvent(p8, p9)
 	end
 end
 
-function t:onStateChange(p10)
-	assert(if p10 ~= nil then typeof(p10) == "function" else true, "stateChangeHandler must be nil or a function")
-	self.stateChangeHandler = p10
+function t:onStateChange(p5)
+	assert(if p5 ~= nil then typeof(p5) == "function" else true, "stateChangeHandler must be nil or a function")
+	self.stateChangeHandler = p5
 end
 
 return t

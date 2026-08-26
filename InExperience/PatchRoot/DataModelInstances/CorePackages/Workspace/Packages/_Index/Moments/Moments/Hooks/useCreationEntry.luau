@@ -7,67 +7,67 @@ local createGalleryCaptureSourceModule = require(moments.Capture.createGalleryCa
 local isStudioModule = require(parent.MomentsCommon.isStudio)
 local hasGalleryApiModule = require(moments.Capture.hasGalleryApi)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useDispatch (ref), isStudioModule (ref), hasGalleryApiModule (ref), createGalleryCaptureSourceModule (ref), setTabBarVisible (ref)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(false)
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useRef(false)
-	local var11 = useDispatch()
-	local var12 = if p0 ~= nil then p0.manageTabBarVisibility ~= false else true
-	local var13 = isStudioModule() or not hasGalleryApiModule()
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref), var6 (ref), var10 (ref), var9 (ref), createGalleryCaptureSourceModule (copy), var8 (ref)
-		if var13 then
-			var6(true)
+	local var1, var2 = reactModule.useState(false)
+	local var3, var4 = reactModule.useState(false)
+	local var5 = reactModule.useRef(nil)
+	local var6 = reactModule.useRef(false)
+	local var7 = useDispatch()
+	local var8 = if p1 ~= nil then p1.manageTabBarVisibility ~= false else true
+	local var9 = isStudioModule() or not hasGalleryApiModule()
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var9 (ref), var2 (ref), var6 (ref), var5 (ref), createGalleryCaptureSourceModule (copy), var4 (ref)
+		if var9 then
+			var2(true)
 			
 			return
-		elseif var10.current then
+		elseif var6.current then
 			return
 		end
-		var10.current = true
+		var6.current = true
 		task.spawn(function()
-			-- upvalues: var9 (copy), createGalleryCaptureSourceModule (copy), var10 (copy), var8 (copy), var6 (copy)
-			var9.current = createGalleryCaptureSourceModule(nil, function(p1, p2)
-				-- upvalues: var10 (copy), var8 (copy), var6 (copy)
-				var10.current = false
+			-- upvalues: var5 (copy), createGalleryCaptureSourceModule (copy), var6 (copy), var4 (copy), var2 (copy)
+			var5.current = createGalleryCaptureSourceModule(nil, function(p2, p3)
+				-- upvalues: var6 (copy), var4 (copy), var2 (copy)
+				var6.current = false
 				
-				if p2 and #p1 == 0 then
-					var8(true)
+				if p3 and #p2 == 0 then
+					var4(true)
 					
 					return
 				end
-				var6(true)
+				var2(true)
 			end)
 		end)
-	end, { var13 })
+	end, { var9 })
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), var5 (ref), var11 (ref), setTabBarVisible (copy)
-		if var12 and var5 then
-			var11(setTabBarVisible(false))
+		-- upvalues: var8 (ref), var1 (ref), var7 (ref), setTabBarVisible (copy)
+		if var8 and var1 then
+			var7(setTabBarVisible(false))
 		end
 		return function()
-			-- upvalues: var12 (copy), var5 (copy), var11 (copy), setTabBarVisible (copy)
-			if var12 and var5 then
-				var11(setTabBarVisible(true))
+			-- upvalues: var8 (copy), var1 (copy), var7 (copy), setTabBarVisible (copy)
+			if var8 and var1 then
+				var7(setTabBarVisible(true))
 			end
 		end
-	end, { var5, var11, var12 })
+	end, { var1, var7, var8 })
 	
 	return {
-		isCreating = var5,
-		showFtux = if var13 then false else var7,
-		captureSource = if var13 then nil else var9.current,
-		onCreatePressed = var14,
+		isCreating = var1,
+		showFtux = if var9 then false else var3,
+		captureSource = if var9 then nil else var5.current,
+		onCreatePressed = var10,
 		onExitCreation = reactModule.useCallback(function()
-			-- upvalues: var9 (ref), var6 (ref)
-			var9.current = nil
-			var6(false)
+			-- upvalues: var5 (ref), var2 (ref)
+			var5.current = nil
+			var2(false)
 		end, {}),
 		onExitFtux = reactModule.useCallback(function()
-			-- upvalues: var9 (ref), var8 (ref)
-			var9.current = nil
-			var8(false)
+			-- upvalues: var5 (ref), var4 (ref)
+			var5.current = nil
+			var4(false)
 		end, {})
 	}
 end

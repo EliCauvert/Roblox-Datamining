@@ -19,9 +19,9 @@ return {
 	name = "ContactImporter",
 	storyRoot = parent,
 	roact = roact,
-	mapDefinition = function(p0)
+	mapDefinition = function(p1)
 		-- upvalues: llama (ref), t_1 (ref)
-		return llama.Dictionary.join(p0, { controls = llama.Dictionary.join(t_1, p0.controls or {}) })
+		return llama.Dictionary.join(p1, { controls = llama.Dictionary.join(t_1, p1.controls or {}) })
 	end,
 	mapStory = function(p1)
 		-- upvalues: roact (ref), appStyleProvider (ref), t (ref), mockLocale (ref)

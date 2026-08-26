@@ -22,7 +22,7 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
 local enabled = require(corePackagesService.Workspace.Packages.Chrome).Enabled
-local var17 = if enabled() then require(robloxGui.Modules.Chrome.Service) else nil
+local var1 = if enabled() then require(robloxGui.Modules.Chrome.Service) else nil
 local fFlagEnableConsoleExpControls = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
 local parent = script.Parent.Parent
 local setDetailsInformationModule = require(parent.Actions.SetDetailsInformation)
@@ -45,7 +45,7 @@ local setLocaleModule = require(parent.Actions.SetLocale)
 local setItemBeingPurchasedModule = require(parent.Actions.SetItemBeingPurchased)
 local setIsSubjectToChinaPoliciesModule = require(parent.Actions.SetIsSubjectToChinaPolicies)
 local updateStoreIdModule = require(parent.Actions.UpdateStoreId)
-local var38 = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then require(parent.Thunks.GetAssetsFromHumanoidDescriptionV2) else require(parent.Thunks.GetAssetsFromHumanoidDescription)
+local var2 = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then require(parent.Thunks.GetAssetsFromHumanoidDescriptionV2) else require(parent.Thunks.GetAssetsFromHumanoidDescription)
 local updateOwnedStatusModule = require(parent.Thunks.UpdateOwnedStatus)
 local getCharacterModelFromUserIdModule = require(parent.Thunks.GetCharacterModelFromUserId)
 local getPlayerNameModule = require(parent.Thunks.GetPlayerName)
@@ -78,22 +78,22 @@ function inspectAndBuy.popMouseIconOverride(_)
 	mouseIconOverrideService.pop(overrideCursorInspectMenu)
 end
 
-function inspectAndBuy.configureInputType(p0, p1)
+function inspectAndBuy.configureInputType(p1, p2)
 	-- upvalues: userInputService (ref), setGamepadEnabledModule (ref)
-	if (p1 or userInputService:GetLastInputType()).Name:find("Gamepad") then
-		p0.state.store:dispatch(setGamepadEnabledModule(true))
+	if (p2 or userInputService:GetLastInputType()).Name:find("Gamepad") then
+		p1.state.store:dispatch(setGamepadEnabledModule(true))
 		
 		return
 	end
-	p0.state.store:dispatch(setGamepadEnabledModule(false))
+	p1.state.store:dispatch(setGamepadEnabledModule(false))
 end
 
-function inspectAndBuy.updateView(p2)
+function inspectAndBuy.updateView(p1)
 	-- upvalues: fFlagAXEnableNewInspectAndBuyContainerModule (ref), setViewModule (ref), getViewType (ref), constantsModule (ref)
 	local viewportSize = workspace.CurrentCamera.ViewportSize
 	
 	if fFlagAXEnableNewInspectAndBuyContainerModule then
-		p2.state.store:dispatch(setViewModule(getViewType(viewportSize)))
+		p1.state.store:dispatch(setViewModule(getViewType(viewportSize)))
 		
 		return
 	end
@@ -104,24 +104,24 @@ function inspectAndBuy.updateView(p2)
 	elseif viewportSize.Y < viewportSize.X and viewportSize.X < 800 then
 		wide = constantsModule.View.WideLandscape
 	end
-	p2.state.store:dispatch(setViewModule(wide))
+	p1.state.store:dispatch(setViewModule(wide))
 end
 
-function inspectAndBuy.init(p3)
-	-- upvalues: networkModule (ref), fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), analyticsModule (ref), fFlagEnableInspectAndBuyV2RootFlag (ref), inspectAndBuyVersion (ref), roduxModule (ref), inspectAndBuyReducerModule (ref), thunkModule (ref), constantsModule (ref), compactViewModule (ref), wideViewModule (ref), wideLandscapeViewModule (ref), updateStoreIdModule (ref), setPlayerNameModule (ref), setLocaleModule (ref), localizationService (ref), setPlayerIdModule (ref), var38 (ref), updateOwnedStatusModule (ref), setItemBeingPurchasedModule (ref)
-	local playerId = p3.props.playerId
-	local playerName = p3.props.playerName
-	local ctx = p3.props.ctx
-	p3.connections = {}
-	p3.network = p3.props.network or networkModule.new()
-	p3.analytics = if fFlagAXEnableInspectAndBuyVersionAnalyticsModule then analyticsModule.new(playerId, ctx, if fFlagEnableInspectAndBuyV2RootFlag then inspectAndBuyVersion.Version2 else inspectAndBuyVersion.Version1) else analyticsModule.new(playerId, ctx)
-	p3.humanoidDescription = p3.props.humanoidDescription
-	p3.analytics.reportOpenInspectMenu()
-	p3.state = {
+function inspectAndBuy.init(p1)
+	-- upvalues: networkModule (ref), fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), analyticsModule (ref), fFlagEnableInspectAndBuyV2RootFlag (ref), inspectAndBuyVersion (ref), roduxModule (ref), inspectAndBuyReducerModule (ref), thunkModule (ref), constantsModule (ref), compactViewModule (ref), wideViewModule (ref), wideLandscapeViewModule (ref), updateStoreIdModule (ref), setPlayerNameModule (ref), setLocaleModule (ref), localizationService (ref), setPlayerIdModule (ref), var2 (ref), updateOwnedStatusModule (ref), setItemBeingPurchasedModule (ref)
+	local playerId = p1.props.playerId
+	local playerName = p1.props.playerName
+	local ctx = p1.props.ctx
+	p1.connections = {}
+	p1.network = p1.props.network or networkModule.new()
+	p1.analytics = if fFlagAXEnableInspectAndBuyVersionAnalyticsModule then analyticsModule.new(playerId, ctx, if fFlagEnableInspectAndBuyV2RootFlag then inspectAndBuyVersion.Version2 else inspectAndBuyVersion.Version1) else analyticsModule.new(playerId, ctx)
+	p1.humanoidDescription = p1.props.humanoidDescription
+	p1.analytics.reportOpenInspectMenu()
+	p1.state = {
 		store = roduxModule.Store.new(inspectAndBuyReducerModule, {}, {
 			thunkModule.middleware({
-				[networkModule] = p3.network,
-				[analyticsModule] = p3.analytics
+				[networkModule] = p1.network,
+				[analyticsModule] = p1.analytics
 			})
 		}),
 		views = {
@@ -130,173 +130,173 @@ function inspectAndBuy.init(p3)
 			[constantsModule.View.WideLandscape] = wideLandscapeViewModule
 		}
 	}
-	p3.state.store:dispatch(updateStoreIdModule())
-	p3.state.store:dispatch(setPlayerNameModule(playerName))
-	p3.state.store:dispatch(setLocaleModule(localizationService.RobloxLocaleId))
+	p1.state.store:dispatch(updateStoreIdModule())
+	p1.state.store:dispatch(setPlayerNameModule(playerName))
+	p1.state.store:dispatch(setLocaleModule(localizationService.RobloxLocaleId))
 	
 	if playerId then
-		p3.state.store:dispatch(setPlayerIdModule(playerId))
+		p1.state.store:dispatch(setPlayerIdModule(playerId))
 	end
-	if p3.humanoidDescription then
-		p3.state.store:dispatch(var38(p3.humanoidDescription, false))
+	if p1.humanoidDescription then
+		p1.state.store:dispatch(var2(p1.humanoidDescription, false))
 	end
-	function p3.onPromptPurchaseFinished(_, p4, p5)
-		-- upvalues: p3 (ref), constantsModule (copy), updateOwnedStatusModule (copy), setItemBeingPurchasedModule (copy)
-		local itemBeingPurchased = p3.state.store:getState().itemBeingPurchased
-		p3.analytics.sendCounter(constantsModule.Counters.PurchaseFinished)
+	function p3.onPromptPurchaseFinished(_, p2, p3)
+		-- upvalues: p1 (ref), constantsModule (copy), updateOwnedStatusModule (copy), setItemBeingPurchasedModule (copy)
+		local itemBeingPurchased = p1.state.store:getState().itemBeingPurchased
+		p1.analytics.sendCounter(constantsModule.Counters.PurchaseFinished)
 		
-		if p5 and tostring(p4) == itemBeingPurchased.itemId then
-			p3.analytics.reportPurchaseSuccess(itemBeingPurchased.itemType, itemBeingPurchased.itemId)
-			p3.state.store:dispatch(updateOwnedStatusModule(itemBeingPurchased.itemId, itemBeingPurchased.itemType))
+		if p3 and tostring(p2) == itemBeingPurchased.itemId then
+			p1.analytics.reportPurchaseSuccess(itemBeingPurchased.itemType, itemBeingPurchased.itemId)
+			p1.state.store:dispatch(updateOwnedStatusModule(itemBeingPurchased.itemId, itemBeingPurchased.itemType))
 			
 			if itemBeingPurchased.itemType == constantsModule.ItemType.Asset then
-				p3.analytics.sendCounter(constantsModule.Counters.PurchaseSucceededAsset)
+				p1.analytics.sendCounter(constantsModule.Counters.PurchaseSucceededAsset)
 			elseif itemBeingPurchased.itemType == constantsModule.ItemType.Bundle then
-				p3.analytics.sendCounter(constantsModule.Counters.PurchaseSucceededBundle)
+				p1.analytics.sendCounter(constantsModule.Counters.PurchaseSucceededBundle)
 			else
-				p3.analytics.sendCounter(constantsModule.Counters.PurchaseSucceededOther)
+				p1.analytics.sendCounter(constantsModule.Counters.PurchaseSucceededOther)
 			end
 		end
-		p3.state.store:dispatch(setItemBeingPurchasedModule(nil, nil))
+		p1.state.store:dispatch(setItemBeingPurchasedModule(nil, nil))
 	end
 end
 
-function inspectAndBuy.didMount(p6)
-	-- upvalues: AXEnableInspectAndBuyExposureLogging (ref), ixpUtilsModule (ref), AXInspectAndBuyLayerName (ref), fFlagEnableConsoleExpControls (ref), enabled (ref), var17 (ref), userInputService (ref), localizationService (ref), setLocaleModule (ref), guiService (ref), cachedPolicyServiceModule (ref), setIsSubjectToChinaPoliciesModule (ref), marketplaceService (ref), playersService (ref), getCharacterModelFromUserIdModule (ref), var38 (ref), getPlayerNameModule (ref)
-	local playerId = p6.props.playerId
-	p6.isMounted = true
-	p6:updateView()
-	p6:bindButtonB()
-	p6:configureInputType()
-	p6:pushMouseIconOverride()
+function inspectAndBuy.didMount(p1)
+	-- upvalues: AXEnableInspectAndBuyExposureLogging (ref), ixpUtilsModule (ref), AXInspectAndBuyLayerName (ref), fFlagEnableConsoleExpControls (ref), enabled (ref), var1 (ref), userInputService (ref), localizationService (ref), setLocaleModule (ref), guiService (ref), cachedPolicyServiceModule (ref), setIsSubjectToChinaPoliciesModule (ref), marketplaceService (ref), playersService (ref), getCharacterModelFromUserIdModule (ref), var2 (ref), getPlayerNameModule (ref)
+	local playerId = p1.props.playerId
+	p1.isMounted = true
+	p1:updateView()
+	p1:bindButtonB()
+	p1:configureInputType()
+	p1:pushMouseIconOverride()
 	
 	if AXEnableInspectAndBuyExposureLogging then
 		ixpUtilsModule.logLayerExposure(AXInspectAndBuyLayerName)
 	end
 	if fFlagEnableConsoleExpControls and enabled() then
-		var17:setHideShortcutBar("InspectAndBuy", true)
+		var1:setHideShortcutBar("InspectAndBuy", true)
 	end
-	local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p7)
-		-- upvalues: p6 (ref)
-		p6:configureInputType(p7)
+	local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p2)
+		-- upvalues: p1 (ref)
+		p1:configureInputType(p2)
 	end)
-	local var52 = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-		-- upvalues: p6 (ref)
-		p6:updateView()
+	local var3 = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+		-- upvalues: p1 (ref)
+		p1:updateView()
 	end)
-	local var53 = localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
-		-- upvalues: p6 (ref), setLocaleModule (copy), localizationService (copy)
-		p6.state.store:dispatch(setLocaleModule(localizationService.RobloxLocaleId))
+	local var4 = localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
+		-- upvalues: p1 (ref), setLocaleModule (copy), localizationService (copy)
+		p1.state.store:dispatch(setLocaleModule(localizationService.RobloxLocaleId))
 	end)
 	local menuOpenedConnection = guiService.MenuOpened:Connect(function()
-		-- upvalues: p6 (ref), guiService (copy)
-		p6:popMouseIconOverride()
+		-- upvalues: p1 (ref), guiService (copy)
+		p1:popMouseIconOverride()
 		guiService.SelectedCoreObject = nil
 	end)
 	local menuClosedConnection = guiService.MenuClosed:Connect(function()
-		-- upvalues: p6 (ref)
-		p6:pushMouseIconOverride()
+		-- upvalues: p1 (ref)
+		p1:pushMouseIconOverride()
 	end)
 	coroutine.wrap(function()
-		-- upvalues: cachedPolicyServiceModule (copy), p6 (ref), setIsSubjectToChinaPoliciesModule (copy)
-		p6.state.store:dispatch(setIsSubjectToChinaPoliciesModule(cachedPolicyServiceModule:IsSubjectToChinaPolicies()))
+		-- upvalues: cachedPolicyServiceModule (copy), p1 (ref), setIsSubjectToChinaPoliciesModule (copy)
+		p1.state.store:dispatch(setIsSubjectToChinaPoliciesModule(cachedPolicyServiceModule:IsSubjectToChinaPolicies()))
 	end)()
-	local promptPurchaseFinishedConnection = marketplaceService.PromptPurchaseFinished:Connect(p6.onPromptPurchaseFinished)
-	local promptBundlePurchaseFinishedConnection = marketplaceService.PromptBundlePurchaseFinished:Connect(p6.onPromptPurchaseFinished)
-	local changedConnection = p6.state.store.changed:connect(function(p8, p9)
-		-- upvalues: p6 (ref)
-		p6:update(p8, p9)
+	local promptPurchaseFinishedConnection = marketplaceService.PromptPurchaseFinished:Connect(p1.onPromptPurchaseFinished)
+	local promptBundlePurchaseFinishedConnection = marketplaceService.PromptBundlePurchaseFinished:Connect(p1.onPromptPurchaseFinished)
+	local changedConnection = p1.state.store.changed:connect(function(p2, p3)
+		-- upvalues: p1 (ref)
+		p1:update(p2, p3)
 	end)
-	table.insert(p6.connections, var52)
-	table.insert(p6.connections, var53)
-	table.insert(p6.connections, menuOpenedConnection)
-	table.insert(p6.connections, menuClosedConnection)
-	table.insert(p6.connections, lastInputTypeChangedConnection)
-	table.insert(p6.connections, promptPurchaseFinishedConnection)
-	table.insert(p6.connections, promptBundlePurchaseFinishedConnection)
-	table.insert(p6.connections, changedConnection)
-	p6.state.store:dispatch(getCharacterModelFromUserIdModule(playersService.LocalPlayer.UserId, true, function(p10)
-		-- upvalues: p6 (ref), var38 (copy)
-		if p6 and p6.isMounted then
-			p6.localPlayerModel = p10
-			local humanoidDescription = p10.Humanoid.HumanoidDescription
+	table.insert(p1.connections, var3)
+	table.insert(p1.connections, var4)
+	table.insert(p1.connections, menuOpenedConnection)
+	table.insert(p1.connections, menuClosedConnection)
+	table.insert(p1.connections, lastInputTypeChangedConnection)
+	table.insert(p1.connections, promptPurchaseFinishedConnection)
+	table.insert(p1.connections, promptBundlePurchaseFinishedConnection)
+	table.insert(p1.connections, changedConnection)
+	p1.state.store:dispatch(getCharacterModelFromUserIdModule(playersService.LocalPlayer.UserId, true, function(p2)
+		-- upvalues: p1 (ref), var2 (copy)
+		if p1 and p1.isMounted then
+			p1.localPlayerModel = p2
+			local humanoidDescription = p2.Humanoid.HumanoidDescription
 			
 			if humanoidDescription then
-				p6.state.store:dispatch(var38(humanoidDescription, true))
+				p1.state.store:dispatch(var2(humanoidDescription, true))
 			end
-			p6:setState({ obtainedLocalPlayerModel = true })
+			p1:setState({ obtainedLocalPlayerModel = true })
 		end
 	end))
 	
 	if playerId then
-		p6.state.store:dispatch(getCharacterModelFromUserIdModule(playerId, false, function(p11)
-			-- upvalues: p6 (ref), var38 (copy)
-			if p6 and p6.isMounted then
-				p6.playerModel = p11
-				local humanoidDescription = p6.playerModel.Humanoid.HumanoidDescription
+		p1.state.store:dispatch(getCharacterModelFromUserIdModule(playerId, false, function(p2)
+			-- upvalues: p1 (ref), var2 (copy)
+			if p1 and p1.isMounted then
+				p1.playerModel = p2
+				local humanoidDescription = p1.playerModel.Humanoid.HumanoidDescription
 				
 				if humanoidDescription then
-					p6.state.store:dispatch(var38(humanoidDescription, false))
+					p1.state.store:dispatch(var2(humanoidDescription, false))
 				end
-				p6:setState({ obtainedPlayerModel = true })
+				p1:setState({ obtainedPlayerModel = true })
 			end
 		end))
-		p6.state.store:dispatch(getPlayerNameModule(playerId))
+		p1.state.store:dispatch(getPlayerNameModule(playerId))
 	end
 end
 
-function inspectAndBuy.update(p12, p13, p14)
+function inspectAndBuy.update(p1, p2, p3)
 	-- upvalues: contextActionService (ref)
-	if not p13.visible and p14.visible then
+	if not p2.visible and p3.visible then
 		contextActionService:UnbindCoreAction("BackButtonInspectMenu")
 		
 		return
-	elseif p13.visible and not p14.visible then
-		p12:bindButtonB()
+	elseif p2.visible and not p3.visible then
+		p1:bindButtonB()
 	end
 end
 
-function inspectAndBuy.willUnmount(p15)
-	-- upvalues: contextActionService (ref), fFlagEnableConsoleExpControls (ref), enabled (ref), var17 (ref)
-	p15.isMounted = false
+function inspectAndBuy.willUnmount(p1)
+	-- upvalues: contextActionService (ref), fFlagEnableConsoleExpControls (ref), enabled (ref), var1 (ref)
+	p1.isMounted = false
 	
-	for i, v in pairs(p15.connections) do
+	for i, v in pairs(p1.connections) do
 		v:disconnect()
 	end
 	contextActionService:UnbindCoreAction("BackButtonInspectMenu")
-	p15:popMouseIconOverride()
+	p1:popMouseIconOverride()
 	
 	if fFlagEnableConsoleExpControls and enabled() then
-		var17:setHideShortcutBar("InspectAndBuy", false)
+		var1:setHideShortcutBar("InspectAndBuy", false)
 	end
 end
 
-function inspectAndBuy.render(p16)
+function inspectAndBuy.render(p2)
 	-- upvalues: fFlagAXEnableNewInspectAndBuyContainerModule (ref), roactModule (ref), coreScriptsRootProvider (ref), fFlagAXEnableInspectAndBuyFocusNavigation (ref), roactRoduxModule (ref), inspectAndBuyBaseContainerModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), inspectAndBuyContextModule (ref), renderWithCoreScriptsStyleProviderModule (ref), selectionCursorProvider (ref), containerModule (ref)
-	local localPlayerModel = p16.localPlayerModel
+	local localPlayerModel = p2.localPlayerModel
 	
 	return if fFlagAXEnableNewInspectAndBuyContainerModule then roactModule.createElement("Folder", { Name = "InspectAndBuyApp" }, {
 		CoreScriptsRootProvider = roactModule.createElement(coreScriptsRootProvider, {}, if fFlagAXEnableInspectAndBuyFocusNavigation then {
-			StoreProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = p16.state.store }, {
+			StoreProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = p2.state.store }, {
 				Container = roactModule.createElement(inspectAndBuyBaseContainerModule, {
 					localPlayerModel = localPlayerModel,
-					analytics = p16.analytics
+					analytics = p2.analytics
 				})
 			})
 		} else {
 			FocusNavigationWrapper = roactModule.createElement(focusRoot, {
 				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
 			}, {
-				StoreProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = p16.state.store }, {
+				StoreProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = p2.state.store }, {
 					Container = roactModule.createElement(inspectAndBuyBaseContainerModule, {
 						localPlayerModel = localPlayerModel,
-						analytics = p16.analytics
+						analytics = p2.analytics
 					})
 				})
 			})
 		})
-	}) else roactModule.createElement(inspectAndBuyContextModule.Provider, { value = p16.state.views }, {
-		StoreProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = p16.state.store }, {
+	}) else roactModule.createElement(inspectAndBuyContextModule.Provider, { value = p2.state.views }, {
+		StoreProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = p2.state.store }, {
 			ThemeProvider = renderWithCoreScriptsStyleProviderModule({
 				CursorProvider = roactModule.createElement(selectionCursorProvider, {}, {
 					Container = roactModule.createElement(containerModule, { localPlayerModel = localPlayerModel })
@@ -306,23 +306,23 @@ function inspectAndBuy.render(p16)
 	})
 end
 
-function inspectAndBuy.bindButtonB(p17)
+function inspectAndBuy.bindButtonB(p2)
 	-- upvalues: contextActionService (ref), closeOverlayModule (ref), setDetailsInformationModule (ref), setTryingOnInfoModule (ref), guiService (ref)
-	contextActionService:BindCoreAction("BackButtonInspectMenu", function(_, p18, p19)
-		-- upvalues: p17 (ref), closeOverlayModule (copy), setDetailsInformationModule (copy), setTryingOnInfoModule (copy), guiService (copy)
-		if p18 == Enum.UserInputState.End and p19.KeyCode == Enum.KeyCode.ButtonB then
-			local state = p17.state.store:getState()
+	contextActionService:BindCoreAction("BackButtonInspectMenu", function(_, p3, p4)
+		-- upvalues: p2 (ref), closeOverlayModule (copy), setDetailsInformationModule (copy), setTryingOnInfoModule (copy), guiService (copy)
+		if p3 == Enum.UserInputState.End and p4.KeyCode == Enum.KeyCode.ButtonB then
+			local state = p2.state.store:getState()
 			local viewingDetails = state.detailsInformation.viewingDetails
 			
 			if state.overlay and state.overlay.overlay ~= nil then
-				p17.state.store:dispatch(closeOverlayModule())
+				p2.state.store:dispatch(closeOverlayModule())
 			elseif viewingDetails then
-				p17.state.store:dispatch(setDetailsInformationModule(false, nil))
-				p17.state.store:dispatch(setTryingOnInfoModule(false, nil))
+				p2.state.store:dispatch(setDetailsInformationModule(false, nil))
+				p2.state.store:dispatch(setTryingOnInfoModule(false, nil))
 			else
 				guiService:CloseInspectMenu()
 			end
-		elseif p18 == Enum.UserInputState.Begin and p19.KeyCode == Enum.KeyCode.Escape or p19.KeyCode == Enum.KeyCode.ButtonStart then
+		elseif p3 == Enum.UserInputState.Begin and p4.KeyCode == Enum.KeyCode.Escape or p4.KeyCode == Enum.KeyCode.ButtonStart then
 			guiService:CloseInspectMenu()
 			
 			return Enum.ContextActionResult.Pass

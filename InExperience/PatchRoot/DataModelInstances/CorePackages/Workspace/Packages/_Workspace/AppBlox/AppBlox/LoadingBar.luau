@@ -4,9 +4,9 @@ local roactModule = require(script:FindFirstAncestor("AppBlox").Parent.Roact)
 local rect = Rect.new(1, 0, 2, 3)
 local loadingBar = roactModule.Component:extend("LoadingBar")
 
-function loadingBar.init(p0)
+function loadingBar.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.barRef = roactModule.createRef()
+	p1.barRef = roactModule.createRef()
 end
 
 function loadingBar.render(p1)
@@ -22,20 +22,20 @@ function loadingBar.render(p1)
 	})
 end
 
-function loadingBar.didMount(p2)
+function loadingBar.didMount(p1)
 	-- upvalues: runService (ref), workspaceService (ref)
-	p2.connection = runService.RenderStepped:Connect(function()
-		-- upvalues: workspaceService (copy), p2 (ref)
+	p1.connection = runService.RenderStepped:Connect(function()
+		-- upvalues: workspaceService (copy), p1 (ref)
 		local distributedGameTime = workspaceService.DistributedGameTime
-		local current = p2.barRef.current
-		local var5 = (1 - math.cos(2 * distributedGameTime * 5.026548245744)) * 7.5
-		current.Size = UDim2.new(0, var5 + 4, 0, 4)
-		current.Position = UDim2.new(0.5, math.cos(distributedGameTime * 5.026548245744) * 40 - var5 / 2 - 2, 0.5, 0)
+		local current = p1.barRef.current
+		local var1 = (1 - math.cos(2 * distributedGameTime * 5.026548245744)) * 7.5
+		current.Size = UDim2.new(0, var1 + 4, 0, 4)
+		current.Position = UDim2.new(0.5, math.cos(distributedGameTime * 5.026548245744) * 40 - var1 / 2 - 2, 0.5, 0)
 	end)
 end
 
-function loadingBar.willUnmount(p3)
-	p3.connection:Disconnect()
+function loadingBar.willUnmount(p1)
+	p1.connection:Disconnect()
 end
 
 return loadingBar

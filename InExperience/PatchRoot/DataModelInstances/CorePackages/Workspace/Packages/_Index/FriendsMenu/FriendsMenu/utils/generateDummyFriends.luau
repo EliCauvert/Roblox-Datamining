@@ -4,7 +4,7 @@ local _ = require(friendsMenu.friendsMenuModalType)
 local constantsModule = require(friendsMenu.Constants)
 local getFFlagFriendsMenuDummyLoadingFriendsFix = require(parent.SharedFlags).GetFFlagFriendsMenuDummyLoadingFriendsFix
 
-local var2 = function(p0)
+local var1 = function(p1)
 	-- upvalues: getFFlagFriendsMenuDummyLoadingFriendsFix (ref), constantsModule (ref)
 	return {
 		displayName = "",
@@ -15,19 +15,19 @@ local var2 = function(p0)
 		name = "",
 		presence = "",
 		isLoadingPlaceholder = true,
-		friendFrequentRank = p0,
-		friendRank = p0,
-		id = if getFFlagFriendsMenuDummyLoadingFriendsFix() then constantsModule.DummyFriendsPrefix .. tostring(p0) else tostring(p0),
+		friendFrequentRank = p1,
+		friendRank = p1,
+		id = if getFFlagFriendsMenuDummyLoadingFriendsFix() then constantsModule.DummyFriendsPrefix .. tostring(p1) else tostring(p1),
 		lastOnline = DateTime.now()
 	}
 end
 
 return function(p1)
-	-- upvalues: var2 (ref)
+	-- upvalues: var1 (ref)
 	local t = {}
 	
 	for i = 1, p1 do
-		t[i] = var2(i)
+		t[i] = var1(i)
 	end
 	return t
 end

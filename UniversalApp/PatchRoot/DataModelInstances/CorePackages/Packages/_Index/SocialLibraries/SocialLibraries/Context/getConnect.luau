@@ -2,20 +2,20 @@
 local roact = dependenciesModule.Roact
 local llama = dependenciesModule.llama
 
-return function(p0)
+return function(p1)
 	-- upvalues: roact (ref), llama (ref)
-	return function(p1)
-		-- upvalues: roact (copy), p0 (ref), llama (copy)
-		return function(p2)
-			-- upvalues: roact (copy), p0 (copy), llama (copy), p1 (ref)
-			local var1 = roact.Component:extend("Connected-" .. tostring(p2))
+	return function(p2)
+		-- upvalues: roact (copy), p1 (ref), llama (copy)
+		return function(p3)
+			-- upvalues: roact (copy), p1 (copy), llama (copy), p2 (ref)
+			local var1 = roact.Component:extend("Connected-" .. tostring(p3))
 			
-			function var1.render(p3)
-				-- upvalues: roact (copy), p0 (copy), p2 (ref), llama (copy), p1 (copy)
-				return roact.createElement(p0.Consumer, {
-					render = function(p4)
-						-- upvalues: roact (copy), p2 (copy), llama (copy), p3 (ref), p1 (copy)
-						return roact.createElement(p2, llama.Dictionary.join(p3.props, p1(p4)))
+			function var1.render(p4)
+				-- upvalues: roact (copy), p1 (copy), p3 (ref), llama (copy), p2 (copy)
+				return roact.createElement(p1.Consumer, {
+					render = function(p5)
+						-- upvalues: roact (copy), p3 (copy), llama (copy), p4 (ref), p2 (copy)
+						return roact.createElement(p3, llama.Dictionary.join(p4.props, p2(p5)))
 					end
 				})
 			end

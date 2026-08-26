@@ -14,26 +14,26 @@ local fFlagProfileInspectAvatarBuyAllModule = require(profilePlatform.Flags.FFla
 local _ = require(profilePlatform.Common.Types)
 local itemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), itemDisplayHelpersModule (ref), useLocalization (ref), reactModule (ref), view (ref), fFlagProfileInspectAvatarBuyAllModule (ref), checkbox (ref), inputSize (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), getPriceLineContent (ref)
-	local var5 = useTokens()
-	local asset = p0.asset
+	local var1 = useTokens()
+	local asset = p1.asset
 	local id = asset.id
 	
 	return reactModule.createElement(view, {
 		tag = "row align-y-top gap-medium",
-		Size = UDim2.new(1, 0, 0, p0.rowHeight),
-		LayoutOrder = p0.index
+		Size = UDim2.new(1, 0, 0, p1.rowHeight),
+		LayoutOrder = p1.index
 	}, {
 		ItemCheckbox = if fFlagProfileInspectAvatarBuyAllModule then nil else reactModule.createElement(checkbox, {
 			label = "",
 			LayoutOrder = 1,
-			isChecked = p0.isPurchasable and p0.isChecked,
-			isDisabled = not p0.isPurchasable,
+			isChecked = p1.isPurchasable and p1.isChecked,
+			isDisabled = not p1.isPurchasable,
 			size = inputSize.Small,
 			onActivated = function(_)
-				-- upvalues: p0 (ref), id (ref)
-				p0.onToggleItem(id)
+				-- upvalues: p1 (ref), id (ref)
+				p1.onToggleItem(id)
 			end
 		}),
 		ItemCard = reactModule.createElement(view, { tag = "fill size-0-full", LayoutOrder = 2 }, {
@@ -45,20 +45,20 @@ return function(p0)
 					name = asset.creator.creatorName,
 					verified = asset.creator.creatorHasVerifiedBadge
 				} else nil,
-				itemSubType = itemDisplayHelpersModule.getItemTypeDisplayName(asset, p0.localizedStrings),
+				itemSubType = itemDisplayHelpersModule.getItemTypeDisplayName(asset, p1.localizedStrings),
 				bundlePartsText = useLocalization(if itemDisplayHelpersModule.shouldShowBundleParts(asset) then {
 					bundleParts = {
 						"Feature.Catalog.Label.UsingBundleParts",
 						count = asset.bundlePartsCount
 					}
 				} else {}).bundleParts,
-				priceLineContent = getPriceLineContent(asset, var5, p0.priceStatusLocalized, { isShopContext = true }),
-				headerSize = UDim2.fromOffset(p0.rowHeight, p0.rowHeight),
+				priceLineContent = getPriceLineContent(asset, var1, p1.priceStatusLocalized, { isShopContext = true }),
+				headerSize = UDim2.fromOffset(p1.rowHeight, p1.rowHeight),
 				footerSize = UDim2.fromScale(0, 1),
 				footerAutomaticSize = Enum.AutomaticSize.X,
 				onActivated = function()
-					-- upvalues: p0 (ref), id (ref), asset (ref)
-					p0.openItemDetails(id, asset.itemType or "Asset", p0.index)
+					-- upvalues: p1 (ref), id (ref), asset (ref)
+					p1.openItemDetails(id, asset.itemType or "Asset", p1.index)
 				end
 			})
 		})

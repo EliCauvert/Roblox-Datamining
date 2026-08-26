@@ -9,10 +9,10 @@ return function()
 	local t = {}
 	
 	for i, v in ipairs(string.split(PCGDKFilteredNotificationTypesFastString, ",")) do
-		local var2 = v:match("^%s*(.-)%s*$")
+		local var1 = v:match("^%s*(.-)%s*$")
 		
-		if var2 ~= "" then
-			t[var2] = true
+		if var1 ~= "" then
+			t[var1] = true
 		end
 	end
 	return t

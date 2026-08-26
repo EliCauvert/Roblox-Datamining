@@ -37,11 +37,11 @@ responsiveRow.defaultProps = {
 	kind = "default",
 	multiLine = false,
 	data = {},
-	getItem = function(p0, p1, _)
-		return if type(p0) == "table" then p0[p1] else nil
+	getItem = function(p1, p2, _)
+		return if type(p1) == "table" then p1[p2] else nil
 	end,
-	renderItem = function(p2, _)
-		return p2
+	renderItem = function(p1, _)
+		return p1
 	end,
 	getCellColspan = function(_, _)
 		return nil
@@ -54,247 +54,247 @@ responsiveRow.defaultProps = {
 	end
 }
 
-local function countItems(p3, p4)
+local function countItems(p1, p2)
 	-- upvalues: responsiveRow (ref)
-	if p3.getItemCount then
-		return p3.getItemCount(p3.data, p4)
-	elseif p3.getItem == responsiveRow.defaultProps.getItem then
-		return #p3.data
+	if p1.getItemCount then
+		return p1.getItemCount(p1.data, p2)
+	elseif p1.getItem == responsiveRow.defaultProps.getItem then
+		return #p1.data
 	end
-	for i = 1, p4.columns do
-		if p3.getItem(p3.data, i, p4) ~= nil then
+	for i = 1, p2.columns do
+		if p1.getItem(p1.data, i, p2) ~= nil then
 			continue
 		end
 		return i - 1
 	end
-	return p4.columns
+	return p2.columns
 end
 
-local function _(p5, p6, p7, p8)
-	if p5 then
-		local var11 = p5(p6, p7)
+local function _(p3, p4, p5, p6)
+	if p3 then
+		local var1 = p3(p4, p5)
 		
-		if var11 ~= nil then
-			if type(var11) ~= table then
-				return var11
+		if var1 ~= nil then
+			if type(var1) ~= table then
+				return var1
 			end
-			local breakpoint = p7.breakpoint or "default"
+			local breakpoint = p5.breakpoint or "default"
 			
-			return if var11[breakpoint] == nil then if var11.default == nil then p8 else var11.default else var11[breakpoint]
+			return if var1[breakpoint] == nil then if var1.default == nil then p6 else var1.default else var1[breakpoint]
 		end
 	end
 end
 
-local function addPaddingCells(p9, p10)
+local function addPaddingCells(p3, p4)
 	-- upvalues: array (ref), object (ref)
 	local t = {}
 	
-	local function _(p11)
-		-- upvalues: p10 (ref), t (ref)
-		local floored = math.floor(p11 / p10.columns)
+	local function _(p5)
+		-- upvalues: p4 (ref), t (ref)
+		local floored = math.floor(p5 / p4.columns)
 		
-		return t[string.format("%d,%d", p11 - floored * p10.columns, floored)]
+		return t[string.format("%d,%d", p5 - floored * p4.columns, floored)]
 	end
 	
-	local function setSkip(value, p12, p13)
-		-- upvalues: p10 (ref), t (ref)
-		local floored = math.floor(value / p10.columns)
-		local var17 = value - floored * p10.columns
+	local function setSkip(value, p5, p6)
+		-- upvalues: p4 (ref), t (ref)
+		local floored = math.floor(value / p4.columns)
+		local var1 = value - floored * p4.columns
 		
-		for i_1 = var17, var17 + p12 - 1 do
-			for i = floored, floored + p13 - 1 do
+		for i_1 = var1, var1 + p5 - 1 do
+			for i = floored, floored + p6 - 1 do
 				t[string.format("%d,%d", i_1, i)] = true
 			end
 		end
 	end
 	
-	return array.reduce(p9, function(p14, p15)
-		-- upvalues: p10 (ref), t (ref), setSkip (ref), object (copy)
+	return array.reduce(p3, function(p7, p8)
+		-- upvalues: p4 (ref), t (ref), setSkip (ref), object (copy)
 		while true do
-			local p14Count = #p14
-			local floored = math.floor(p14Count / p10.columns)
-			if not t[string.format("%d,%d", p14Count - floored * p10.columns, floored)] then break end
-			table.insert(p14, { order = #p14 + 1 })
+			local p14Count = #p7
+			local floored = math.floor(p14Count / p4.columns)
+			if not t[string.format("%d,%d", p14Count - floored * p4.columns, floored)] then break end
+			table.insert(p7, { order = #p7 + 1 })
 		end
-		if p15.colspan > 1 or p15.rowspan > 1 then
-			setSkip(#p14, p15.colspan, p15.rowspan)
+		if p8.colspan > 1 or p8.rowspan > 1 then
+			setSkip(#p7, p8.colspan, p8.rowspan)
 		end
-		table.insert(p14, object.assign({}, p15, { order = #p14 + 1 }))
+		table.insert(p7, object.assign({}, p8, { order = #p7 + 1 }))
 		
-		return p14
+		return p7
 	end, {})
 end
 
-local _ = function(p16, p17)
-	return string.format("ResponsiveRowCell%0" .. math.floor(math.log10(p17) + 1) .. "d", p16)
+local _ = function(p7, p8)
+	return string.format("ResponsiveRowCell%0" .. math.floor(math.log10(p8) + 1) .. "d", p7)
 end
 
-function filterDisplayedCells(p18, p19, p20)
+function filterDisplayedCells(p7, p8, p9)
 	-- upvalues: array (ref), object (ref)
-	local var20 = (p20.Min - 1) * p19.columns + 1
-	local var21 = p20.Max * p19.columns
-	local var22 = (p20.Max - p20.Min + 1) * p19.columns
+	local var2 = (p9.Min - 1) * p8.columns + 1
+	local var3 = p9.Max * p8.columns
+	local var4 = (p9.Max - p9.Min + 1) * p8.columns
 	
-	return array.map(array.filter(p18, function(_, p21)
-		-- upvalues: var20 (ref), var21 (ref)
-		return var20 <= p21 and p21 <= var21
-	end), function(p22, _)
-		-- upvalues: object (copy), var22 (ref)
-		return object.assign({}, p22, {
-			key = string.format("ResponsiveRowCell%0" .. math.floor(math.log10(var22) + 1) .. "d", (p22.order - 1) % var22 + 1)
+	return array.map(array.filter(p7, function(_, p10)
+		-- upvalues: var2 (ref), var3 (ref)
+		return var2 <= p10 and p10 <= var3
+	end), function(p10, _)
+		-- upvalues: object (copy), var4 (ref)
+		return object.assign({}, p10, {
+			key = string.format("ResponsiveRowCell%0" .. math.floor(math.log10(var4) + 1) .. "d", (p10.order - 1) % var4 + 1)
 		})
 	end)
 end
 
-function responsiveRow.init(p23)
-	p23.itemCache = {}
+function responsiveRow.init(p7)
+	p7.itemCache = {}
 end
 
-function responsiveRow.renderChildren(p24, p25)
+function responsiveRow.renderChildren(p7, p8)
 	-- upvalues: countItems (ref), array (ref), addPaddingCells (ref), UIBloxConfigModule (ref), roactModule (ref), responsiveCellModule (ref)
 	local t = {}
 	local t_1 = {}
-	local var25 = 1
-	local var26 = 1
+	local var2 = 1
+	local var3 = 1
 	
-	for i = 1, countItems(p24.props, p25) do
-		local item = p24.props.getItem(p24.props.data, i, p25)
-		local var28 = nil
-		local var29 = nil
+	for i = 1, countItems(p7.props, p8) do
+		local item = p7.props.getItem(p7.props.data, i, p8)
+		local var4 = nil
+		local var5 = nil
 		
-		if p24.props.keyExtractor then
-			var28 = p24.props.keyExtractor(item, i, p25)
+		if p7.props.keyExtractor then
+			var4 = p7.props.keyExtractor(item, i, p8)
 		end
-		if var28 and p24.itemCache[var28] then
-			var29 = p24.itemCache[var28]
+		if var4 and p7.itemCache[var4] then
+			var5 = p7.itemCache[var4]
 		end
-		var29 = var29 or p24.props.renderItem(item, p25)
+		var5 = var5 or p7.props.renderItem(item, p8)
 		
-		if var28 then
-			t_1[var28] = var29
+		if var4 then
+			t_1[var4] = var5
 		end
-		local var31, var33
+		local var6, var7
 		local t_2 = {}
-		local getCellColspan = p24.props.getCellColspan
+		local getCellColspan = p7.props.getCellColspan
 		
 		if getCellColspan then
-			var31 = getCellColspan(item, p25)
+			var6 = getCellColspan(item, p8)
 			
-			if var31 ~= nil then
-				if type(var31) == table then
-					local breakpoint = p25.breakpoint or "default"
-					var33 = if var31[breakpoint] ~= nil then if var31.default == nil then 1 else var31.default else var31[breakpoint]
+			if var6 ~= nil then
+				if type(var6) == table then
+					local breakpoint = p8.breakpoint or "default"
+					var7 = if var6[breakpoint] ~= nil then if var6.default == nil then 1 else var6.default else var6[breakpoint]
 				else
-					var33 = var31
+					var7 = var6
 				end
 			end
 		end
-		local var35
-		t_2.colspan = var33
-		getCellColspan = p24.props.getCellRowspan
+		local var8
+		t_2.colspan = var7
+		getCellColspan = p7.props.getCellRowspan
 		
 		if getCellColspan then
-			var31 = getCellColspan(item, p25)
+			var6 = getCellColspan(item, p8)
 			
-			if var31 ~= nil then
-				if type(var31) == table then
-					local breakpoint = p25.breakpoint or "default"
-					var35 = if var31[breakpoint] ~= nil then if var31.default == nil then 1 else var31.default else var31[breakpoint]
+			if var6 ~= nil then
+				if type(var6) == table then
+					local breakpoint = p8.breakpoint or "default"
+					var8 = if var6[breakpoint] ~= nil then if var6.default == nil then 1 else var6.default else var6[breakpoint]
 				else
-					var35 = var31
+					var8 = var6
 				end
 			end
 		end
-		local var37
-		t_2.rowspan = var35
-		getCellColspan = p24.props.getCellOrder
+		local var9
+		t_2.rowspan = var8
+		getCellColspan = p7.props.getCellOrder
 		
 		if getCellColspan then
-			var31 = getCellColspan(item, p25)
+			var6 = getCellColspan(item, p8)
 			
-			if var31 ~= nil then
-				if type(var31) == table then
-					local breakpoint = p25.breakpoint or "default"
-					var37 = if var31[breakpoint] ~= nil then if var31.default == nil then i else var31.default else var31[breakpoint]
+			if var6 ~= nil then
+				if type(var6) == table then
+					local breakpoint = p8.breakpoint or "default"
+					var9 = if var6[breakpoint] ~= nil then if var6.default == nil then i else var6.default else var6[breakpoint]
 				else
-					var37 = var31
+					var9 = var6
 				end
 			end
 		end
-		t_2.order = var37
-		t_2.cell = var29
+		t_2.order = var9
+		t_2.cell = var5
 		table.insert(t, t_2)
 	end
-	p24.itemCache = t_1
+	p7.itemCache = t_1
 	
-	if p24.props.multiLine then
-		array.sort(t, function(p26, p27)
-			return p26.order - p27.order
+	if p7.props.multiLine then
+		array.sort(t, function(p9, p10)
+			return p9.order - p10.order
 		end)
-		t = addPaddingCells(t, p25)
-		var25 = math.ceil(#t / p25.columns)
+		t = addPaddingCells(t, p8)
+		var2 = math.ceil(#t / p8.columns)
 		
-		if p24.props.displayLines then
-			t = filterDisplayedCells(t, p25, p24.props.displayLines)
+		if p7.props.displayLines then
+			t = filterDisplayedCells(t, p8, p7.props.displayLines)
 		end
-	elseif p24.props.scrollable then
-		var26 = array.reduce(t, function(p28, p29)
-			return p28 + p29.colspan
-		end, 0) / p25.columns
+	elseif p7.props.scrollable then
+		var3 = array.reduce(t, function(p9, p10)
+			return p9 + p10.colspan
+		end, 0) / p8.columns
 	end
 	if UIBloxConfigModule.setZIndexOnGridCells then
 		for i_1 = 1, #t do
 			t[i_1].zIndex = #t + 2 - i_1
 		end
 	end
-	return array.map(t, function(p30, p31)
+	return array.map(t, function(p9, p10)
 		-- upvalues: roactModule (copy), responsiveCellModule (copy), t (write)
 		return roactModule.createElement(responsiveCellModule, {
-			key = p30.key or string.format("ResponsiveRowCell%0" .. math.floor(math.log10(#t) + 1) .. "d", p31),
-			colspan = p30.colspan,
-			rowspan = p30.rowspan,
-			order = p30.order,
-			zIndex = p30.zIndex
-		}, { ResponsiveItem = p30.cell })
-	end), var26, var25
+			key = p9.key or string.format("ResponsiveRowCell%0" .. math.floor(math.log10(#t) + 1) .. "d", p10),
+			colspan = p9.colspan,
+			rowspan = p9.rowspan,
+			order = p9.order,
+			zIndex = p9.zIndex
+		}, { ResponsiveItem = p9.cell })
+	end), var3, var2
 end
 
-function responsiveRow.render(p32)
+function responsiveRow.render(p9)
 	-- upvalues: roactModule (ref), responsiveLayoutContextModule (ref), object (ref), responsiveLayoutConfigReaderModule (ref), responsiveBaseRowModule (ref)
 	return roactModule.createElement(responsiveLayoutContextModule.Consumer, {
-		render = function(p33)
-			-- upvalues: object (copy), p32 (ref), responsiveLayoutConfigReaderModule (copy), roactModule (copy), responsiveBaseRowModule (copy)
-			local var38 = object.assign({}, p33, { kind = p32.props.kind or object.None })
-			local var39, var40, var41 = p32:renderChildren({
-				breakpoint = var38.breakpoint,
-				kind = var38.kind,
-				width = responsiveLayoutConfigReaderModule.getValue(var38, "width") or 1,
-				columns = responsiveLayoutConfigReaderModule.getValue(var38, "columns") or 1,
-				margin = responsiveLayoutConfigReaderModule.getValue(var38, "margin") or 1,
-				gutter = responsiveLayoutConfigReaderModule.getValue(var38, "gutter") or 1,
-				verticalGutter = responsiveLayoutConfigReaderModule.getValue(var38, "verticalGutter")
+		render = function(p10)
+			-- upvalues: object (copy), p9 (ref), responsiveLayoutConfigReaderModule (copy), roactModule (copy), responsiveBaseRowModule (copy)
+			local var10 = object.assign({}, p10, { kind = p9.props.kind or object.None })
+			local var11, var12, var13 = p9:renderChildren({
+				breakpoint = var10.breakpoint,
+				kind = var10.kind,
+				width = responsiveLayoutConfigReaderModule.getValue(var10, "width") or 1,
+				columns = responsiveLayoutConfigReaderModule.getValue(var10, "columns") or 1,
+				margin = responsiveLayoutConfigReaderModule.getValue(var10, "margin") or 1,
+				gutter = responsiveLayoutConfigReaderModule.getValue(var10, "gutter") or 1,
+				verticalGutter = responsiveLayoutConfigReaderModule.getValue(var10, "verticalGutter")
 			})
 			
 			return roactModule.createElement(responsiveBaseRowModule, {
-				kind = p32.props.kind,
-				layoutOrder = p32.props.layoutOrder,
-				zIndex = p32.props.zIndex,
-				scrollable = p32.props.scrollable,
-				clipsDescendants = p32.props.clipsDescendants,
-				selectable = p32.props.selectable,
-				pages = var40,
-				multiLine = p32.props.multiLine,
-				lines = var41,
-				paddingTopLines = if p32.props.multiLine and p32.props.displayLines then math.max(p32.props.displayLines.Min - 1, 0) else nil,
-				relativeHeight = p32.props.relativeHeight,
-				scrollingFrameRef = p32.props.scrollingFrameRef,
-				[roactModule.Ref] = p32.props.forwardedRef
-			}, var39)
+				kind = p9.props.kind,
+				layoutOrder = p9.props.layoutOrder,
+				zIndex = p9.props.zIndex,
+				scrollable = p9.props.scrollable,
+				clipsDescendants = p9.props.clipsDescendants,
+				selectable = p9.props.selectable,
+				pages = var12,
+				multiLine = p9.props.multiLine,
+				lines = var13,
+				paddingTopLines = if p9.props.multiLine and p9.props.displayLines then math.max(p9.props.displayLines.Min - 1, 0) else nil,
+				relativeHeight = p9.props.relativeHeight,
+				scrollingFrameRef = p9.props.scrollingFrameRef,
+				[roactModule.Ref] = p9.props.forwardedRef
+			}, var11)
 		end
 	})
 end
 
-return roactModule.forwardRef(function(p34, p35)
+return roactModule.forwardRef(function(p9, p10)
 	-- upvalues: roactModule (ref), responsiveRow (ref), object (ref)
-	return roactModule.createElement(responsiveRow, object.assign({}, p34, { forwardedRef = p35 }))
+	return roactModule.createElement(responsiveRow, object.assign({}, p9, { forwardedRef = p10 }))
 end)

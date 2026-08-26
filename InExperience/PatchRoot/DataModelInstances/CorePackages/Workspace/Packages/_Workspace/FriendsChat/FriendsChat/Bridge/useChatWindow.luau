@@ -3,10 +3,10 @@ local friendsChatDependencyContextModule = require(script.Parent.FriendsChatDepe
 
 return function()
 	-- upvalues: reactModule (ref), friendsChatDependencyContextModule (ref)
-	local var2 = reactModule.useContext(friendsChatDependencyContextModule)
+	local var1 = reactModule.useContext(friendsChatDependencyContextModule)
 	
-	if var2 == nil then
+	if var1 == nil then
 		error("useChatWindow must be used within a FriendsChatDependencyBridge")
 	end
-	return var2.ChatWindow
+	return var1.ChatWindow
 end

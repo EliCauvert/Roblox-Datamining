@@ -5,17 +5,17 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local drawerModule = require(script.Parent.Drawer)
 local _ = require(script.Parent.Parent.Types)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactRobloxModule (ref), reactModule (ref), drawerModule (ref), coreGuiService (ref)
 	return reactRobloxModule.createPortal({
 		Drawer = reactModule.createElement("ScreenGui", {
 			ClipToDeviceSafeArea = false,
 			IgnoreGuiInset = true,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-			DisplayOrder = p0.displayOrder,
+			DisplayOrder = p1.displayOrder,
 			ScreenInsets = Enum.ScreenInsets.None
 		}, {
-			DrawerContent = reactModule.createElement(drawerModule, p0)
+			DrawerContent = reactModule.createElement(drawerModule, p1)
 		})
 	}, coreGuiService)
 end)

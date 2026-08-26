@@ -2,14 +2,14 @@
 local hardBreakElementModule = require(parent.Components.InlineLayout.InlineLayoutElements.HardBreakElement)
 local inlineElementTypeModule = require(parent.Utils.InlineElementType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: hardBreakElementModule (ref), inlineElementTypeModule (ref)
-	if p0 == hardBreakElementModule then
+	if p1 == hardBreakElementModule then
 		return true
-	elseif type(p0) ~= "table" then
+	elseif type(p1) ~= "table" then
 		return false
 	end
-	local var2 = getmetatable(p0)
+	local var1 = getmetatable(p1)
 	
-	return var2 ~= nil and var2.__type == inlineElementTypeModule
+	return var1 ~= nil and var1.__type == inlineElementTypeModule
 end

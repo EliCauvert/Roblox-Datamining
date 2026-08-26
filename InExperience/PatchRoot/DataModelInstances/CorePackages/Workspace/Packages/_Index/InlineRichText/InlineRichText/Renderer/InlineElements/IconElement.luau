@@ -4,9 +4,9 @@ local renderableInlineElement = require(parent.InlineLayout).Components.InlineLa
 local icon = require(parent.Foundation).Icon
 local t = {}
 
-local function mapProps(p0)
+local function mapProps(p1)
 	-- upvalues: cryoModule (ref)
-	return cryoModule.Dictionary.omit(p0, "id", "Size")
+	return cryoModule.Dictionary.omit(p1, "id", "Size")
 end
 
 function t.new(p1)

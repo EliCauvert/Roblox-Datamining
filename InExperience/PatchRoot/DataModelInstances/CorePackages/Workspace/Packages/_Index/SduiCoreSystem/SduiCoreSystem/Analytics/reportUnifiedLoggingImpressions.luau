@@ -9,30 +9,30 @@ local getSduiImpressionHandlerRegistryModule = require(sduiCoreSystem.getSduiImp
 local _ = require(sduiCoreSystem.SduiImpressionEventType)
 local fFlagSduiEdpStoreImpressionsLogging = require(parent.SharedFlags).FFlagSduiEdpStoreImpressionsLogging
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7)
+return function(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: sduiErrorsModule (ref), sduiCollectionAnalyticsBuilderModule (ref), getSduiImpressionHandlerRegistryModule (ref), fFlagSduiEdpStoreImpressionsLogging (ref), unifiedLoggingModule (ref)
-	if not p3 then
-		p0.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.LogImpressionsMissingCollectionData, {}, p0.appPage)
+	if not p4 then
+		p1.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.LogImpressionsMissingCollectionData, {}, p1.appPage)
 	end
-	p3 = p3 or sduiCollectionAnalyticsBuilderModule.DUMMY_COLLECTION_DATA
-	assert(p3, "collectionAnalyticsData must exist")
+	p4 = p4 or sduiCollectionAnalyticsBuilderModule.DUMMY_COLLECTION_DATA
+	assert(p4, "collectionAnalyticsData must exist")
 	local impressionHandlerConfig = nil
 	
-	if p5 then
-		impressionHandlerConfig = getSduiImpressionHandlerRegistryModule().getImpressionHandlerConfig(p5)
+	if p6 then
+		impressionHandlerConfig = getSduiImpressionHandlerRegistryModule().getImpressionHandlerConfig(p6)
 		
 		if not impressionHandlerConfig then
-			unifiedLoggingModule.SendItemImpressions.sendFromServerDrivenUi(p0.dependencies.eventIngest, p1, p2, p3, p0.appPage, p3.collectionId, p3.contentType, p3.itemsPerRow, p3.collectionPosition, p4, p5)
+			unifiedLoggingModule.SendItemImpressions.sendFromServerDrivenUi(p1.dependencies.eventIngest, p2, p3, p4, p1.appPage, p4.collectionId, p4.contentType, p4.itemsPerRow, p4.collectionPosition, p5, p6)
 		elseif impressionHandlerConfig.handler then
-			impressionHandlerConfig.handler(p0, p1, p2, p3, p4, if fFlagSduiEdpStoreImpressionsLogging then p7 else nil)
+			impressionHandlerConfig.handler(p1, p2, p3, p4, p5, if fFlagSduiEdpStoreImpressionsLogging then p8 else nil)
 		end
 	end
-	if p6 == nil then
+	if p7 == nil then
 		if impressionHandlerConfig and impressionHandlerConfig.skipItemImpressionsLog then
 			return
 		end
-	elseif p6 then
+	elseif p7 then
 		return
 	end
-	unifiedLoggingModule.SendItemImpressions.sendFromServerDrivenUi(p0.dependencies.eventIngest, p1, p2, p3, p0.appPage, p3.collectionId, p3.contentType, p3.itemsPerRow, p3.collectionPosition, p4)
+	unifiedLoggingModule.SendItemImpressions.sendFromServerDrivenUi(p1.dependencies.eventIngest, p2, p3, p4, p1.appPage, p4.collectionId, p4.contentType, p4.itemsPerRow, p4.collectionPosition, p5)
 end

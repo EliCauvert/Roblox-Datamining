@@ -1,6 +1,6 @@
-﻿return function(p0)
-	if p0:IsA("Accessory") then
-		local handle = p0:FindFirstChild("Handle")
+﻿return function(p1)
+	if p1:IsA("Accessory") then
+		local handle = p1:FindFirstChild("Handle")
 		
 		return handle and handle:IsA("MeshPart")
 	end

@@ -5,16 +5,16 @@ local chatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
 local foundationModule = require(parent.Foundation)
 local t = { isIncoming = false }
 
-function RepliedToMarker(p0)
+function RepliedToMarker(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), foundationModule (ref), chatBubbleEnumModule (ref)
-	local var5 = cryoModule.Dictionary.union(t, p0)
+	local var1 = cryoModule.Dictionary.union(t, p1)
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "bg-shift-400 self-stretch",
 		BorderSizePixel = 0,
 		Size = UDim2.new(0, chatBubbleEnumModule.REPLIED_TO_MARKER_WIDTH, 0, 0),
-		AnchorPoint = if var5.isIncoming then Vector2.new(0, 0) else Vector2.new(1, 0),
-		LayoutOrder = var5.layoutOrder
+		AnchorPoint = if var1.isIncoming then Vector2.new(0, 0) else Vector2.new(1, 0),
+		LayoutOrder = var1.layoutOrder
 	}, {
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 	})

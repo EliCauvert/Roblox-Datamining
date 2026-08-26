@@ -481,12 +481,12 @@ local t_3 = {
 		slots = {}
 	}
 }
-local var11 = if fFlagAXInventoryDurablesExpiredFilter then { [inventoryFiltersModule.Expired] = 2 } else nil
+local var1 = if fFlagAXInventoryDurablesExpiredFilter then { [inventoryFiltersModule.Expired] = 2 } else nil
 t.Categories = categoriesModule
 t.SlotEditorCategories = t_3
 t.Icons = t_1
 t.BodyAssetTypes = list
-t.InventoryFilterToAvailabilityStatus = var11
+t.InventoryFilterToAvailabilityStatus = var1
 t.ActionBarHeight = 64
 
 return t

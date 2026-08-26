@@ -30,14 +30,14 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFFlagUGCValidateCurveAnimMinTimeFixModule (ref), getFStringUGCValidateCurveAnimationMinLengthModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), errorSourceStringsModule (ref)
-	local animLength = p1.curveAnimComputedFrames.animLength
-	local var8 = if getFFlagUGCValidateCurveAnimMinTimeFixModule() then getFStringUGCValidateCurveAnimationMinLengthModule.asNumber() else 0
+	local animLength = p2.curveAnimComputedFrames.animLength
+	local var1 = if getFFlagUGCValidateCurveAnimMinTimeFixModule() then getFStringUGCValidateCurveAnimationMinLengthModule.asNumber() else 0
 	
-	if animLength <= var8 or getFStringUGCValidationMaxAnimationLengthModule.asNumber() < animLength then
-		p0:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidLength, {
-			minLength = tostring(var8),
+	if animLength <= var1 or getFStringUGCValidationMaxAnimationLengthModule.asNumber() < animLength then
+		p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidLength, {
+			minLength = tostring(var1),
 			maxLength = getFStringUGCValidationMaxAnimationLengthModule.asString()
 		})
 	end

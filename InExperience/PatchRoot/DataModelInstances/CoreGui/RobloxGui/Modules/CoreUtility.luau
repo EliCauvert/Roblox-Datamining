@@ -2,31 +2,31 @@
 local waitForChildOfClassTimeout = game:DefineFastInt("WaitForChildOfClassTimeout", 0)
 
 if waitForChildOfClassTimeout > 0 then
-	function t.waitForChildOfClass(p0, p1)
+	function t.waitForChildOfClass(p1, p2)
 		-- upvalues: waitForChildOfClassTimeout (ref)
-		local var2 = p0:FindFirstChildOfClass(p1)
-		local var3 = tick() + waitForChildOfClassTimeout
-		while not var2 and tick() < var3 do
+		local var1 = p1:FindFirstChildOfClass(p2)
+		local var2 = tick() + waitForChildOfClassTimeout
+		while not var1 and tick() < var2 do
 			task.wait()
-			var2 = p0:FindFirstChildOfClass(p1)
+			var1 = p1:FindFirstChildOfClass(p2)
 		end
-		return var2
+		return var1
 	end
 else
-	function t.waitForChildOfClass(p2, p3)
-		local var4 = p2:FindFirstChildOfClass(p3)
-		while not var4 or var4.ClassName ~= p3 do
-			var4 = p2.ChildAdded:Wait()
+	function t.waitForChildOfClass(p3, p4)
+		local var3 = p3:FindFirstChildOfClass(p4)
+		while not var3 or var3.ClassName ~= p4 do
+			var3 = p3.ChildAdded:Wait()
 		end
-		return var4
+		return var3
 	end
 end
-function t.waitForChildWhichIsA(p4, p5)
-	local var5 = p4:FindFirstChildWhichIsA(p5)
-	while not var5 or not var5:IsA(p5) do
-		var5 = p4.ChildAdded:Wait()
+function t.waitForChildWhichIsA(p3, p4)
+	local var3 = p3:FindFirstChildWhichIsA(p4)
+	while not var3 or not var3:IsA(p4) do
+		var3 = p3.ChildAdded:Wait()
 	end
-	return var5
+	return var3
 end
 
 return t

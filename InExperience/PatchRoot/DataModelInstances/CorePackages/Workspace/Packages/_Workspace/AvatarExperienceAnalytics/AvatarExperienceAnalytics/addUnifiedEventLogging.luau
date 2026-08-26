@@ -10,27 +10,27 @@ local t = {
 	boolean = true
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: collectionService (ref), unifiedEventLogConstantsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), t (ref)
-	if not p0.current then return end
-	collectionService:AddTag(p0.current, unifiedEventLogConstantsModule.TAG_NAME)
+	if not p1.current then return end
+	collectionService:AddTag(p1.current, unifiedEventLogConstantsModule.TAG_NAME)
 	
-	if p2 and p2.hasDeferredActions then
-		p0.current:SetAttribute(unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION, true)
+	if p3 and p3.hasDeferredActions then
+		p1.current:SetAttribute(unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION, true)
 	end
-	if fFlagAXMISEnableMultiShoppingUnifiedEvents and p2 and p2.isSelected ~= nil then
-		p0.current:SetAttribute(unifiedEventLogConstantsModule.IS_SELECTED, p2.isSelected)
+	if fFlagAXMISEnableMultiShoppingUnifiedEvents and p3 and p3.isSelected ~= nil then
+		p1.current:SetAttribute(unifiedEventLogConstantsModule.IS_SELECTED, p3.isSelected)
 	end
-	if p2 and p2.sessionTagName then
-		p0.current:SetAttribute(unifiedEventLogConstantsModule.SESSION_TAG_NAME, p2.sessionTagName)
+	if p3 and p3.sessionTagName then
+		p1.current:SetAttribute(unifiedEventLogConstantsModule.SESSION_TAG_NAME, p3.sessionTagName)
 	end
-	if fFlagAXUnifiedImpressionsOnThumbnail and p2 and p2.skipImpressionDetection then
-		p0.current:SetAttribute(unifiedEventLogConstantsModule.SKIP_IMPRESSION_DETECTION, true)
+	if fFlagAXUnifiedImpressionsOnThumbnail and p3 and p3.skipImpressionDetection then
+		p1.current:SetAttribute(unifiedEventLogConstantsModule.SKIP_IMPRESSION_DETECTION, true)
 	end
-	if p1 then
-		for i, v in p1 do
-			if t[type(p1[i])] then
-				p0.current:SetAttribute(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i, if type(p1[i]) == "table" then table.concat(p1[i], ",") else p1[i])
+	if p2 then
+		for i, v in p2 do
+			if t[type(p2[i])] then
+				p1.current:SetAttribute(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i, if type(p2[i]) == "table" then table.concat(p2[i], ",") else p2[i])
 			end
 		end
 	end

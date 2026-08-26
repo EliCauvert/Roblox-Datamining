@@ -6,22 +6,22 @@ local t = {
 
 return function()
 	-- upvalues: robloxAppLocalesModule (ref), t (ref)
-	local var2 = robloxAppLocalesModule.Localization.new("en-us")
+	local var1 = robloxAppLocalesModule.Localization.new("en-us")
 	
-	function var2.Format(_, p0, p1)
+	function var2.Format(_, p1, p2)
 		-- upvalues: t (copy)
-		local var3 = t[p0] or p0
+		local var2 = t[p1] or p1
 		
-		if p1 ~= nil then
-			var3 = string.gsub(var3, "{(%w+)}", function(p2)
-				-- upvalues: p1 (ref)
-				local var4 = p1[p2]
+		if p2 ~= nil then
+			var2 = string.gsub(var2, "{(%w+)}", function(p3)
+				-- upvalues: p2 (ref)
+				local var3 = p2[p3]
 				
-				return if var4 == nil then "{" .. p2 .. "}" else tostring(var4)
+				return if var3 == nil then "{" .. p2 .. "}" else tostring(var3)
 			end)
 		end
-		return var3
+		return var2
 	end
 	
-	return var2
+	return var1
 end

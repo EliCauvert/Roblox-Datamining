@@ -16,79 +16,79 @@ local fIntVoiceChatTooltipDelayModule = require(robloxGui.Modules.Flags.FIntVoic
 local constantsModule = require(robloxGui.Modules.TopBar.Constants)
 local topBarHeight = constantsModule.TopBarHeight
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), guiService (ref), fIntVoiceChatTooltipDelayModule (ref), utilityModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), topBarHeight (ref), constantsModule (ref), roactModule (ref), styledTextLabel (ref), coreGuiService (ref), tooltipOrientation (ref), withTooltip (ref)
-	local var11 = useStyle()
-	local var12 = reactModule.useRef(nil)
-	local onClose = p0.onClose
+	local var1 = useStyle()
+	local var2 = reactModule.useRef(nil)
+	local onClose = p1.onClose
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var12 (ref), guiService (copy), onClose (ref), fIntVoiceChatTooltipDelayModule (copy)
-		if p0.showPrompt then
-			var12.current = guiService.MenuOpened:Connect(function()
-				-- upvalues: var12 (copy), onClose (copy)
-				if var12.current then
-					var12.current:Disconnect()
-					var12.current = nil
+		-- upvalues: p1 (ref), var2 (ref), guiService (copy), onClose (ref), fIntVoiceChatTooltipDelayModule (copy)
+		if p1.showPrompt then
+			var2.current = guiService.MenuOpened:Connect(function()
+				-- upvalues: var2 (copy), onClose (copy)
+				if var2.current then
+					var2.current:Disconnect()
+					var2.current = nil
 					onClose()
 				end
 			end)
 			task.delay(fIntVoiceChatTooltipDelayModule, function()
-				-- upvalues: var12 (copy), p0 (copy), onClose (copy)
-				if var12.current then
-					var12.current:Disconnect()
-					var12.current = nil
+				-- upvalues: var2 (copy), p1 (copy), onClose (copy)
+				if var2.current then
+					var2.current:Disconnect()
+					var2.current = nil
 				end
-				if p0.showPrompt then
+				if p1.showPrompt then
 					onClose()
 				end
 			end)
 		end
 		return function()
-			-- upvalues: var12 (copy)
-			if var12.current then
-				var12.current:Disconnect()
-				var12.current = nil
+			-- upvalues: var2 (copy)
+			if var2.current then
+				var2.current:Disconnect()
+				var2.current = nil
 			end
 		end
-	end, { p0.showPrompt })
+	end, { p1.showPrompt })
 	local _ = 38
-	local var13 = if utilityModule:IsSmallTouchScreen() then 64 else 64
+	local var3 = if utilityModule:IsSmallTouchScreen() then 64 else 64
 	
 	if getFFlagEnableConnectDisconnectInSettingsAndChromeModule() then
 		local _ = topBarHeight
 	end
-	local var14 = constantsModule.useDisplayScaleState(topBarHeight)
+	local var4 = constantsModule.useDisplayScaleState(topBarHeight)
 	
 	return withTooltip({
 		minContentWidth = 240,
-		headerText = p0.titleText,
+		headerText = p1.titleText,
 		renderCustomComponents = function(_)
-			-- upvalues: roactModule (copy), styledTextLabel (copy), p0 (ref), var11 (ref)
+			-- upvalues: roactModule (copy), styledTextLabel (copy), p1 (ref), var1 (ref)
 			return roactModule.createElement(styledTextLabel, {
 				layoutOrder = 0,
-				text = p0.subtitleText,
+				text = p1.subtitleText,
 				textTruncate = Enum.TextTruncate.None,
 				textXAlignment = Enum.TextXAlignment.Left,
-				fontStyle = var11.Font.CaptionSmall,
-				colorStyle = var11.Theme.TextDefault,
+				fontStyle = var1.Font.CaptionSmall,
+				colorStyle = var1.Theme.TextDefault,
 				automaticSize = Enum.AutomaticSize.XY
 			})
 		end,
 		onClose = onClose,
-		backgroundColor = var11.Theme.BackgroundUIDefault.Color,
-		backgroundTransparency = var11.Theme.BackgroundUIDefault.Transparency
+		backgroundColor = var1.Theme.BackgroundUIDefault.Color,
+		backgroundTransparency = var1.Theme.BackgroundUIDefault.Transparency
 	}, {
 		DisplayOrder = 10,
 		guiTarget = coreGuiService,
-		active = p0.showPrompt,
+		active = p1.showPrompt,
 		preferredOrientation = tooltipOrientation.Bottom
-	}, function(p1)
-		-- upvalues: roactModule (copy), var13 (ref), var14 (write), reactModule (copy)
+	}, function(p2)
+		-- upvalues: roactModule (copy), var3 (ref), var4 (write), reactModule (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, var13, 0, var14),
-			[reactModule.Change.AbsoluteSize] = p1,
-			[reactModule.Change.AbsolutePosition] = p1
+			Size = UDim2.new(0, var3, 0, var4),
+			[reactModule.Change.AbsoluteSize] = p2,
+			[reactModule.Change.AbsolutePosition] = p2
 		})
 	end)
 end

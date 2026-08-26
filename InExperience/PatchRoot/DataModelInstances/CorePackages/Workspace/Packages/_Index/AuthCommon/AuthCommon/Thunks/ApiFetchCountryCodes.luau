@@ -8,36 +8,36 @@ local setCountryCodeListModule = require(authCommon.Actions.SetCountryCodeList)
 local fFlagUseSignalsForCountryCodeList = require(parent.SharedFlags).FFlagUseSignalsForCountryCodeList
 local getCountryCodeListStoreModule = require(authCommon.Stores.GetCountryCodeListStore)
 local t = {
-	_updateStoreWithCountryCodes = function(p0, p1)
+	_updateStoreWithCountryCodes = function(p1, p2)
 		-- upvalues: countryCodeModule (ref), fFlagUseSignalsForCountryCodeList (ref), getCountryCodeListStoreModule (ref), setCountryCodeListModule (ref), promiseModule (ref)
 		local t = {}
 		
-		for i, v in pairs(p1.responseBody) do
+		for i, v in pairs(p2.responseBody) do
 			t[i] = countryCodeModule.fromJSON(v)
 		end
 		if fFlagUseSignalsForCountryCodeList then
 			getCountryCodeListStoreModule(false).setCountryCodeList(t)
 		else
-			p0:dispatch(setCountryCodeListModule(t))
+			p1:dispatch(setCountryCodeListModule(t))
 		end
 		return promiseModule.resolve()
 	end
 }
 
-function t.Fetch(p2)
+function t.Fetch(p3)
 	-- upvalues: performFetch (ref), getCountryCodesModule (ref), t (ref), promiseModule (ref)
-	return performFetch.Single("luaapp.countriesapi.countrycodes", function(p3)
-		-- upvalues: getCountryCodesModule (copy), p2 (ref), t (copy), promiseModule (copy)
-		return getCountryCodesModule(p2):andThen(function(p4)
-			-- upvalues: t (copy), p3 (ref), promiseModule (copy)
-			return if p4 and p4.responseBody then t._updateStoreWithCountryCodes(p3, p4) else promiseModule.reject()
+	return performFetch.Single("luaapp.countriesapi.countrycodes", function(p4)
+		-- upvalues: getCountryCodesModule (copy), p3 (ref), t (copy), promiseModule (copy)
+		return getCountryCodesModule(p3):andThen(function(p5)
+			-- upvalues: t (copy), p4 (ref), promiseModule (copy)
+			return if p5 and p5.responseBody then t._updateStoreWithCountryCodes(p4, p5) else promiseModule.reject()
 		end)
 	end)
 end
 
-function t.GetFetchingStatus(p5)
+function t.GetFetchingStatus(p3)
 	-- upvalues: performFetch (ref)
-	return performFetch.GetStatus(p5, "luaapp.countriesapi.countrycodes")
+	return performFetch.GetStatus(p3, "luaapp.countriesapi.countrycodes")
 end
 
 return t

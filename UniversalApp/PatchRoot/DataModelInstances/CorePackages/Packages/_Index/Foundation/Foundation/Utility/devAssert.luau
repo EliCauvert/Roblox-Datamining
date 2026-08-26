@@ -1,5 +1,5 @@
-﻿return function(p0, p1)
+﻿return function(p1, p2)
 	if _G.__DEV__ == true then
-		assert(p0, p1)
+		assert(p1, p2)
 	end
 end

@@ -169,11 +169,11 @@ local function tokenizeTextSpan(p1, p2, p3, p4)
 	return postProcessTokensModule(t_2)
 end
 
-return function(p1, p2)
+return function(p5, p6)
 	-- upvalues: tokenizeTextSpan (ref), t_2 (ref), insert (ref)
 	local t = {}
 	
-	for i, v in tokenizeTextSpan(p1, 0, false, p2) do
+	for i, v in tokenizeTextSpan(p5, 0, false, p6) do
 		local name = t_2[v.name]
 		
 		if name then
@@ -181,18 +181,18 @@ return function(p1, p2)
 				{
 					name = name.startToken,
 					offset = v.offset,
-					text = string.sub(p1, v.offset, v.offset + name.textStartOffset - 1),
+					text = string.sub(p5, v.offset, v.offset + name.textStartOffset - 1),
 					capture = v.capture
 				}
 			}
-			local var1 = name.mapToText(v)
-			local var2 = tokenizeTextSpan(var1, v.offset + name.textStartOffset, true, p2)
-			table.move(var2, 1, #var2, 2, list)
-			local var3 = v.offset + name.textStartOffset + #var1
+			local var11 = name.mapToText(v)
+			local var12 = tokenizeTextSpan(var11, v.offset + name.textStartOffset, true, p6)
+			table.move(var12, 1, #var12, 2, list)
+			local var13 = v.offset + name.textStartOffset + #var11
 			insert(list, {
 				name = name.endToken,
-				offset = var3,
-				text = string.sub(p1, var3, v.offset + #v.text - 1)
+				offset = var13,
+				text = string.sub(p5, var13, v.offset + #v.text - 1)
 			})
 			table.move(list, 1, #list, #t + 1, t)
 		else

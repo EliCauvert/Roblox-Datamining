@@ -9,22 +9,22 @@ local serviceModule = require(chrome.Service)
 local commonIconModule = require(chrome.Integrations.CommonIcon)
 local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
 local UIManager = require(corePackagesService.Workspace.Packages.VrSpatialUi).UIManager
-local var6 = if isSpatial() then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable
-local var7 = signal.new()
-local var8 = mappedSignal.new(var7, function()
+local var1 = if isSpatial() then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable
+local var2 = signal.new()
+local var3 = mappedSignal.new(var2, function()
 	-- upvalues: VRHub (ref)
 	return VRHub.ShowTopBar
 end)
 VRHub.ShowTopBarChanged.Event:Connect(function()
-	-- upvalues: var7 (ref)
-	var7:fire()
+	-- upvalues: var2 (ref)
+	var2:fire()
 end)
 
 return serviceModule:register({
 	id = "vr_toggle_button",
 	label = "Feature.Catalog.Label.Filter.Hide",
-	initialAvailability = var6,
-	isActivated = var8,
+	initialAvailability = var1,
+	isActivated = var3,
 	activated = function()
 		-- upvalues: VRHub (ref), UIManager (ref), settingsHubModule (ref), rbxAnalyticsService (ref)
 		if VRHub.ShowTopBar then
@@ -41,8 +41,8 @@ return serviceModule:register({
 	end,
 	components = {
 		Icon = function()
-			-- upvalues: commonIconModule (ref), var8 (ref)
-			return commonIconModule("rbxasset://textures/ui/MenuBar/icon_maximize.png", "rbxasset://textures/ui/MenuBar/icon_minimize.png", var8)
+			-- upvalues: commonIconModule (ref), var3 (ref)
+			return commonIconModule("rbxasset://textures/ui/MenuBar/icon_maximize.png", "rbxasset://textures/ui/MenuBar/icon_minimize.png", var3)
 		end
 	}
 })

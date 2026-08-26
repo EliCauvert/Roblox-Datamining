@@ -1,8 +1,8 @@
 ﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.Foundation)
 local font = Font.new("rbxasset://fonts/families/BuilderMono.json", Enum.FontWeight.Regular)
 
-local function _(p0)
-	return `#{p0.Color3:ToHex()}`
+local function _(p1)
+	return `#{p1.Color3:ToHex()}`
 end
 
 local function typographyToTextStyles(p1, p2)
@@ -27,34 +27,34 @@ local function typographyToTextStyles(p1, p2)
 	return t
 end
 
-local _ = function(p3)
-	return p3.FontSize
+local _ = function(p1)
+	return p1.FontSize
 end
 
-local _ = function(p4)
-	return p4.LineHeight
+local _ = function(p1)
+	return p1.LineHeight
 end
 
-local _ = function(p5)
-	return p5.Color3
+local _ = function(p1)
+	return p1.Color3
 end
 
-local _ = function(p6)
-	return p6.Transparency
+local _ = function(p1)
+	return p1.Transparency
 end
 
-local _ = function(p7)
-	return p7
+local _ = function(p1)
+	return p1
 end
 
-return function(p8, p9)
+return function(p1, p2)
 	-- upvalues: typographyToTextStyles (ref), font (ref)
-	local typography = p8.Typography
-	local content = p8.Color.Content
-	local surface = p8.DarkMode.Surface
+	local typography = p1.Typography
+	local content = p1.Color.Content
+	local surface = p1.DarkMode.Surface
 	
 	return {
-		textStyles = typographyToTextStyles(typography.BodyMedium, p9),
+		textStyles = typographyToTextStyles(typography.BodyMedium, p2),
 		headerStyles = {
 			typographyToTextStyles(typography.HeadingLarge, content.Emphasis),
 			typographyToTextStyles(typography.HeadingMedium, content.Emphasis),
@@ -76,7 +76,7 @@ return function(p8, p9)
 		},
 		linkStyles = { linkColor = `#{content.Link.Color3:ToHex()}` },
 		imageStyles = {
-			size = UDim2.fromOffset(p8.Size.Size_400, p8.Size.Size_400)
+			size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
 		}
 	}
 end

@@ -6,31 +6,31 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
 local profileScrollContextModule = require(script.Parent.ProfileScrollContext)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useProfileFormFactorModule (ref), reactModule (ref), enumsModule (ref), useTopBarHeight (ref), profileScrollContextModule (ref)
-	local var5 = useProfileFormFactorModule()
-	local var6, var7 = reactModule.useState(if var5.formFactor == enumsModule.ProfileFormFactor.PeekView then 0 else 1)
-	local var8, var9 = reactModule.useState(0)
-	local var10 = useTopBarHeight()
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var10 (ref), enumsModule (copy), var8 (ref)
-		local var12 = if var5.isFullView then 0 else var10
+	local var1 = useProfileFormFactorModule()
+	local var2, var3 = reactModule.useState(if var1.formFactor == enumsModule.ProfileFormFactor.PeekView then 0 else 1)
+	local var4, var5 = reactModule.useState(0)
+	local var6 = useTopBarHeight()
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), var6 (ref), enumsModule (copy), var4 (ref)
+		local var8 = if var1.isFullView then 0 else var6
 		
-		if var5.formFactor == enumsModule.ProfileFormFactor.PeekView and not var5.isFullView then
-			var12 += 25
+		if var1.formFactor == enumsModule.ProfileFormFactor.PeekView and not var1.isFullView then
+			var8 += 25
 		end
-		return math.max(var12 - var8, 0)
-	end, { var10, var8, var5 })
+		return math.max(var8 - var4, 0)
+	end, { var6, var4, var1 })
 	
 	return reactModule.createElement(profileScrollContextModule.Provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: var11 (ref), var9 (ref), var6 (ref), var7 (ref)
+			-- upvalues: var7 (ref), var5 (ref), var2 (ref), var3 (ref)
 			return {
-				scrollY = var11,
-				setAbsoluteYPosition = var9,
-				peekViewOpenPercent = var6,
-				setPeekViewOpenPercent = var7
+				scrollY = var7,
+				setAbsoluteYPosition = var5,
+				peekViewOpenPercent = var2,
+				setPeekViewOpenPercent = var3
 			}
-		end, { var11, var9, var6, var7 })
-	}, p0.children)
+		end, { var7, var5, var2, var3 })
+	}, p1.children)
 end

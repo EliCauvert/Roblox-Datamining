@@ -7,9 +7,9 @@ local learnMorePartialModalContainerModule = require(script.Parent.LearnMorePart
 local loggerModule = require(script.Parent.Logger)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useEffectOnMount (ref), loggerModule (ref), useCallback (ref), reactModule (ref), learnMorePartialModalContainerModule (ref)
-	local navigation = cryoModule.Dictionary.union(t, p0).navigation
+	local navigation = cryoModule.Dictionary.union(t, p1).navigation
 	assert(type(navigation) ~= "nil", "LearnMorePartialModalScreen should be wrapped with React Navigation")
 	local conversationId = navigation and (navigation.getParam and navigation.getParam("conversationId", nil))
 	useEffectOnMount(function()

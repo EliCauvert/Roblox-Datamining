@@ -15,13 +15,13 @@ local noResultSearchStr = constantsModule.GeneralFormatting.NoResultSearchStr
 local t = {}
 local t_1 = {}
 local t_2 = {}
-local var8 = 0
+local var1 = 0
 
 for i, v in ipairs(chartCellWidths) do
-	table.insert(t, UDim2.new(var8, cellPadding, 0, 0))
+	table.insert(t, UDim2.new(var1, cellPadding, 0, 0))
 	table.insert(t_1, UDim2.new(v, -cellPadding, 0, headerFrameHeight))
 	table.insert(t_2, UDim2.new(v, -cellPadding, 0, entryFrameHeight))
-	var8 += v
+	var1 += v
 end
 local t_3 = {}
 
@@ -30,7 +30,7 @@ for i_1, v_1 in ipairs(t) do
 end
 local serverScripts = roactModule.Component:extend("ServerScripts")
 
-local function constructHeader(p0)
+local function constructHeader(p1)
 	-- upvalues: chartHeaderNames (ref), roactModule (ref), headerButtonModule (ref), t_1 (ref), t (ref), lineWidth (ref), lineColor (ref), t_3 (ref), headerFrameHeight (ref)
 	local t_2 = {}
 	
@@ -39,7 +39,7 @@ local function constructHeader(p0)
 			text = chartHeaderNames[i],
 			size = t_1[i],
 			pos = t[i],
-			sortfunction = p0
+			sortfunction = p1
 		})
 	end
 	t_2.upperHorizontalLine = roactModule.createElement("Frame", {
@@ -73,103 +73,103 @@ local function constructHeader(p0)
 	}, t_2)
 end
 
-local function getX(p1)
-	return p1.time
+local function getX(p2)
+	return p2.time
 end
 
 local function getActivity(p2)
 	return p2.data[1]
 end
 
-local function getRate(p3)
-	return p3.data[2]
+local function getRate(p2)
+	return p2.data[2]
 end
 
-local function formatScriptsData(p4)
-	return string.format("%.3f", p4)
+local function formatScriptsData(p2)
+	return string.format("%.3f", p2)
 end
 
-function serverScripts.init(p5, p6)
+function serverScripts.init(p2, p3)
 	-- upvalues: roactModule (ref)
-	local currentData = p6.ServerScriptsData:getCurrentData()
+	local currentData = p3.ServerScriptsData:getCurrentData()
 	
-	function p5.onSortChanged(p7)
-		-- upvalues: p6 (ref), p5 (ref)
-		if p7 == p6.ServerScriptsData:getSortType() then
-			p5:setState({ reverseSort = not p5.state.reverseSort })
+	function p5.onSortChanged(p4)
+		-- upvalues: p3 (ref), p2 (ref)
+		if p4 == p3.ServerScriptsData:getSortType() then
+			p2:setState({ reverseSort = not p2.state.reverseSort })
 			
 			return
 		end
-		p6.ServerScriptsData:setSortType(p7)
-		p5:setState({ reverseSort = false })
+		p3.ServerScriptsData:setSortType(p4)
+		p2:setState({ reverseSort = false })
 	end
 	
-	function p5.getOnButtonPress(p8)
-		-- upvalues: p5 (ref)
+	function p5.getOnButtonPress(p4)
+		-- upvalues: p2 (ref)
 		return function(_, _)
-			-- upvalues: p5 (copy), p8 (ref)
-			p5:setState({ expandIndex = p5.state.expandIndex ~= p8 and p8 })
+			-- upvalues: p2 (copy), p4 (ref)
+			p2:setState({ expandIndex = p2.state.expandIndex ~= p4 and p4 })
 		end
 	end
 	
 	function p5.onCanvasPosChanged()
-		-- upvalues: p5 (ref)
-		local canvasPosition = p5.scrollingRef.current.CanvasPosition
+		-- upvalues: p2 (ref)
+		local canvasPosition = p2.scrollingRef.current.CanvasPosition
 		
-		if p5.state.canvasPos ~= canvasPosition then
-			p5:setState({
-				absScrollSize = p5.scrollingRef.current.AbsoluteSize,
+		if p2.state.canvasPos ~= canvasPosition then
+			p2:setState({
+				absScrollSize = p2.scrollingRef.current.AbsoluteSize,
 				canvasPos = canvasPosition
 			})
 		end
 	end
 	
-	p5.scrollingRef = roactModule.createRef()
-	p5.state = { expandIndex = nil, serverScriptsData = currentData }
+	p2.scrollingRef = roactModule.createRef()
+	p2.state = { expandIndex = nil, serverScriptsData = currentData }
 end
 
-function serverScripts.willUpdate(p9)
-	if p9.canvasPosConnector then
-		p9.canvasPosConnector:Disconnect()
+function serverScripts.willUpdate(p2)
+	if p2.canvasPosConnector then
+		p2.canvasPosConnector:Disconnect()
 	end
 end
 
-function serverScripts.didUpdate(p10)
-	if p10.scrollingRef.current then
-		p10.canvasPosConnector = p10.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p10.onCanvasPosChanged)
+function serverScripts.didUpdate(p2)
+	if p2.scrollingRef.current then
+		p2.canvasPosConnector = p2.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p2.onCanvasPosChanged)
 	end
 end
 
-function serverScripts.didMount(p11)
-	p11.statsConnector = p11.props.ServerScriptsData:Signal():Connect(function(p12)
-		-- upvalues: p11 (ref)
-		p11:setState({ serverScriptsData = p12 })
+function serverScripts.didMount(p2)
+	p2.statsConnector = p2.props.ServerScriptsData:Signal():Connect(function(p3)
+		-- upvalues: p2 (ref)
+		p2:setState({ serverScriptsData = p3 })
 	end)
 	
-	if p11.scrollingRef.current then
-		p11.canvasPosConnector = p11.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p11.onCanvasPosChanged)
-		p11:setState({
-			absScrollSize = p11.scrollingRef.current.AbsoluteSize,
-			canvasPos = p11.scrollingRef.current.CanvasPosition
+	if p2.scrollingRef.current then
+		p2.canvasPosConnector = p2.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p2.onCanvasPosChanged)
+		p2:setState({
+			absScrollSize = p2.scrollingRef.current.AbsoluteSize,
+			canvasPos = p2.scrollingRef.current.CanvasPosition
 		})
 	end
 end
 
-function serverScripts.willUnmount(p13)
-	p13.statsConnector:Disconnect()
-	p13.statsConnector = nil
+function serverScripts.willUnmount(p2)
+	p2.statsConnector:Disconnect()
+	p2.statsConnector = nil
 end
 
-function serverScripts.render(p14)
+function serverScripts.render(p2)
 	-- upvalues: roactModule (ref), constantsModule (ref), entryFrameHeight (ref), lineGraphHeight (ref), serverScriptsEntryModule (ref), t_2 (ref), t (ref), t_3 (ref), formatScriptsData (ref), getX (ref), getActivity (ref), getRate (ref), noResultSearchStr (ref), constructHeader (ref), headerFrameHeight (ref)
-	local searchTerm = p14.props.searchTerm
-	local scriptFilters = p14.props.scriptFilters
-	local layoutOrder = p14.props.layoutOrder
-	local size = p14.props.size
-	local serverScriptsData = p14.state.serverScriptsData
-	local reverseSort = p14.state.reverseSort
-	local absScrollSize = p14.state.absScrollSize
-	local canvasPos = p14.state.canvasPos
+	local searchTerm = p2.props.searchTerm
+	local scriptFilters = p2.props.scriptFilters
+	local layoutOrder = p2.props.layoutOrder
+	local size = p2.props.size
+	local serverScriptsData = p2.state.serverScriptsData
+	local reverseSort = p2.state.reverseSort
+	local absScrollSize = p2.state.absScrollSize
+	local canvasPos = p2.state.canvasPos
 	local t_1 = {}
 	local serverScriptsDataCount = #serverScriptsData
 	
@@ -183,43 +183,43 @@ function serverScripts.render(p14)
 			LayoutOrder = layoutOrder
 		})
 	end
-	local var20 = 0
-	local var21 = -1
-	local var22 = 0
-	local var23 = 0
+	local var2 = 0
+	local var3 = -1
+	local var4 = 0
+	local var5 = 0
 	
 	if canvasPos and absScrollSize then
 		for i, v in pairs(serverScriptsData) do
 			if not searchTerm or string.find(v.name:lower(), searchTerm:lower()) ~= nil then
-				var23 += 1
-				local var24 = true
+				var5 += 1
+				local var6 = true
 				local active = scriptFilters.Active
 				local inactive = scriptFilters.Inactive
-				local var25 = v.dataStats.dataSet:back()
+				local var7 = v.dataStats.dataSet:back()
 				
 				if active ~= inactive then
-					if var25.data[1] > 0 and inactive then
-						var24 = false
-					elseif var25.data[1] == 0 and active then
-						var24 = false
+					if var7.data[1] > 0 and inactive then
+						var6 = false
+					elseif var7.data[1] == 0 and active then
+						var6 = false
 					end
 				end
-				if var24 then
-					local var26 = p14.state.expandIndex == v.name
-					local var27 = if var26 then entryFrameHeight + 2 * lineGraphHeight else entryFrameHeight
+				if var6 then
+					local var8 = p2.state.expandIndex == v.name
+					local var9 = if var8 then entryFrameHeight + 2 * lineGraphHeight else entryFrameHeight
 					
-					if canvasPos.Y <= var20 + var27 then
-						if var22 < absScrollSize.Y then
+					if canvasPos.Y <= var2 + var9 then
+						if var4 < absScrollSize.Y then
 							t_1[i] = roactModule.createElement(serverScriptsEntryModule, {
 								scriptData = v,
-								frameHeight = var27,
-								showGraph = var26,
+								frameHeight = var9,
+								showGraph = var8,
 								layoutOrder = if reverseSort then serverScriptsDataCount - i else i,
-								activityBoxColor = if var25.data[1] > 0 then constantsModule.Color.ActiveBox else constantsModule.Color.InactiveBox,
+								activityBoxColor = if var7.data[1] > 0 then constantsModule.Color.ActiveBox else constantsModule.Color.InactiveBox,
 								entryCellSize = t_2,
 								cellOffset = t,
 								verticalOffsets = t_3,
-								onButtonPress = p14.getOnButtonPress(v.name),
+								onButtonPress = p2.getOnButtonPress(v.name),
 								formatScriptsData = formatScriptsData,
 								getX = getX,
 								getActivity = getActivity,
@@ -227,21 +227,21 @@ function serverScripts.render(p14)
 								stringFormatY = formatScriptsData
 							})
 						end
-						if var21 < 0 then
-							var21 = var20
+						if var3 < 0 then
+							var3 = var2
 						else
-							var22 += var27
+							var4 += var9
 						end
 					end
-					var20 += var27
+					var2 += var9
 				end
 			end
 		end
-		if var23 > 0 then
+		if var5 > 0 then
 			t_1.WindowingPadding = roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var21)
+				Size = UDim2.new(1, 0, 0, var3)
 			})
 		else
 			t_1.emptySearch = roactModule.createElement("TextLabel", {
@@ -263,15 +263,15 @@ function serverScripts.render(p14)
 		Size = size,
 		LayoutOrder = layoutOrder
 	}, {
-		Header = constructHeader(p14.onSortChanged),
+		Header = constructHeader(p2.onSortChanged),
 		Entries = roactModule.createElement("ScrollingFrame", {
 			Position = UDim2.new(0, 0, 0, headerFrameHeight),
 			Size = UDim2.new(1, 0, 1, -headerFrameHeight),
 			BackgroundTransparency = 1,
 			VerticalScrollBarInset = 1,
 			ScrollBarThickness = 5,
-			CanvasSize = UDim2.new(1, 0, 0, var20),
-			[roactModule.Ref] = p14.scrollingRef
+			CanvasSize = UDim2.new(1, 0, 0, var2),
+			[roactModule.Ref] = p2.scrollingRef
 		}, t_1)
 	})
 end

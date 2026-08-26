@@ -16,53 +16,53 @@ local getFFlagMomentsAnalyticsSchemaIdentity = momentsCommonModule.Flags.GetFFla
 
 return reactModule.memo(function()
 	-- upvalues: getExperienceDetailsSheetStoreModule (ref), useSignalState (ref), useJoinExperienceModule (ref), useMomentsSession (ref), useHideTabBarWhileOpenModule (ref), reactModule (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), fireAnalyticsEvent (ref), eventNames (ref), analytics (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), inExperienceDetailsPromptContainerModule (ref)
-	local var8 = getExperienceDetailsSheetStoreModule(false)
-	local var9 = useSignalState(var8.getIsOpen)
-	local var10 = useSignalState(var8.getContext)
-	local var11 = useJoinExperienceModule()
-	local var12 = useMomentsSession()
-	useHideTabBarWhileOpenModule(var9)
+	local var1 = getExperienceDetailsSheetStoreModule(false)
+	local var2 = useSignalState(var1.getIsOpen)
+	local var3 = useSignalState(var1.getContext)
+	local var4 = useJoinExperienceModule()
+	local var5 = useMomentsSession()
+	useHideTabBarWhileOpenModule(var2)
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var10 (ref), getFFlagMomentsAnalyticsSchemaIdentity (copy), fireAnalyticsEvent (copy), eventNames (copy), analytics (copy), var12 (ref)
-		if var9 and var10 then
+		-- upvalues: var2 (ref), var3 (ref), getFFlagMomentsAnalyticsSchemaIdentity (copy), fireAnalyticsEvent (copy), eventNames (copy), analytics (copy), var5 (ref)
+		if var2 and var3 then
 			if getFFlagMomentsAnalyticsSchemaIdentity() then
-				if var10.feedItemId == nil or var10.feedItemId == "" then
-					analytics.reportMomentSkip("feed_action", if var10.feedItemId == nil then "nil" else "empty", { action = "edp" })
+				if var3.feedItemId == nil or var3.feedItemId == "" then
+					analytics.reportMomentSkip("feed_action", if var3.feedItemId == nil then "nil" else "empty", { action = "edp" })
 					
 					return
 				end
 				fireAnalyticsEvent(eventNames.ExperienceDetailsOpened, {
-					feedItemId = var10.feedItemId,
-					feedSessionId = var10.tracingId or "",
-					placeId = tostring(var10.placeId),
-					universeId = tostring(var10.universeId)
+					feedItemId = var3.feedItemId,
+					feedSessionId = var3.tracingId or "",
+					placeId = tostring(var3.placeId),
+					universeId = tostring(var3.universeId)
 				})
 				
 				return
 			else
 				fireAnalyticsEvent(eventNames.ExperienceDetailsOpened, {
-					moments_session_id = var12.getMomentsSessionId(false),
-					item_id = var10.itemId or "",
-					tracing_id = var10.tracingId or "",
-					universe_id = tostring(var10.universeId),
-					place_id = tostring(var10.placeId)
+					moments_session_id = var5.getMomentsSessionId(false),
+					item_id = var3.itemId or "",
+					tracing_id = var3.tracingId or "",
+					universe_id = tostring(var3.universeId),
+					place_id = tostring(var3.placeId)
 				})
 			end
 		end
-	end, { var9, var10, var12.getMomentsSessionId })
+	end, { var2, var3, var5.getMomentsSessionId })
 	
-	return if var9 and var10 ~= nil then reactModule.createElement(inExperienceDetailsPromptContainerModule, {
-		universeId = tostring(var10.universeId),
-		onClose = var8.close,
-		onJoin = reactModule.useCallback(function(p0)
-			-- upvalues: var10 (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var11 (ref), var8 (ref)
-			if var10 then
-				if fFlagMomentsFixRecommendationImpressionLifecycleModule and var10.onBeforeJoin ~= nil then
-					var10.onBeforeJoin()
+	return if var2 and var3 ~= nil then reactModule.createElement(inExperienceDetailsPromptContainerModule, {
+		universeId = tostring(var3.universeId),
+		onClose = var1.close,
+		onJoin = reactModule.useCallback(function(p1)
+			-- upvalues: var3 (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var4 (ref), var1 (ref)
+			if var3 then
+				if fFlagMomentsFixRecommendationImpressionLifecycleModule and var3.onBeforeJoin ~= nil then
+					var3.onBeforeJoin()
 				end
-				var11(var10, p0)
+				var4(var3, p1)
 			end
-			var8.close()
-		end, { var11, var10, var8.close })
+			var1.close()
+		end, { var4, var3, var1.close })
 	}) else nil
 end)

@@ -4,11 +4,11 @@ return function(...)
 	local list = { ... }
 	
 	return {
-		onDescendantFocusChanged = function(p0)
+		onDescendantFocusChanged = function(p1)
 			-- upvalues: list (ref)
 			for i, v in list do
 				if v.onDescendantFocusChanged then
-					v.onDescendantFocusChanged(p0)
+					v.onDescendantFocusChanged(p1)
 				end
 			end
 		end,

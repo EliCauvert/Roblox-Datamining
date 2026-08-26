@@ -11,8 +11,8 @@ return function()
 	return {
 		tokens = var1,
 		topBarHeight = 56 * var1.Config.UI.Scale,
-		shouldIncludeBottomBar = useNavBarPlacement() == appNavBarModule.Placement.Bottom and useSelector(function(p0)
-			return p0.TabBarVisible
+		shouldIncludeBottomBar = useNavBarPlacement() == appNavBarModule.Placement.Bottom and useSelector(function(p1)
+			return p1.TabBarVisible
 		end) ~= false
 	}
 end

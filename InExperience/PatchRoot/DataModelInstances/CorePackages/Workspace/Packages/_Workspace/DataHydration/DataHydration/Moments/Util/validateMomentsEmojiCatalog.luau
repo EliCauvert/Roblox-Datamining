@@ -7,16 +7,16 @@ local list = {
 	reactionType.Wow, reactionType.Cry, reactionType.Fire, reactionType.Skull
 }
 
-local function isValidMomentsEmojiCatalog(p0)
+local function isValidMomentsEmojiCatalog(p1)
 	-- upvalues: list (ref), resolveEmoteIdModule (ref)
-	if #p0 == 0 then
+	if #p1 == 0 then
 		return false
 	end
 	for i = 1, #list do
-		local var5 = list[i]
-		local var6 = resolveEmoteIdModule.resolveEmoteIdForReaction(p0, var5)
+		local var1 = list[i]
+		local var2 = resolveEmoteIdModule.resolveEmoteIdForReaction(p1, var1)
 		
-		if var6 ~= var5 and string.find(var6, "-", 1, true) ~= nil then
+		if var2 ~= var1 and string.find(var2, "-", 1, true) ~= nil then
 			continue
 		end
 		return false
@@ -34,7 +34,7 @@ return {
 		-- upvalues: isValidMomentsEmojiCatalog (ref), decodeEmojiSetsModule (ref)
 		return if value == nil then false else isValidMomentsEmojiCatalog(decodeEmojiSetsModule.flattenEmojis(value))
 	end,
-	isUuidLikeEmoteId = function(p1)
-		return string.find(p1, "-", 1, true) ~= nil
+	isUuidLikeEmoteId = function(p2)
+		return string.find(p2, "-", 1, true) ~= nil
 	end
 }

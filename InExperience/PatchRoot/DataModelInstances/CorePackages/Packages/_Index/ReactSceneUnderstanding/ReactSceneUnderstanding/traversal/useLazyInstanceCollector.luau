@@ -9,32 +9,32 @@ local useMemo = reactModule.useMemo
 local useState = reactModule.useState
 local usePrevious = reactUtilsModule.usePrevious
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: dataModelTraversalOptions (ref), usePrevious (ref), useMemo (ref), sceneUnderstandingModule (ref), cryoModule (ref), useState (ref), useEffect (ref)
-	local var5 = dataModelTraversalOptions.new(p2)
-	local var6 = usePrevious(p2)
-	local var7 = useMemo(function()
-		-- upvalues: sceneUnderstandingModule (copy), p0 (ref), p1 (ref), p2 (ref)
-		return sceneUnderstandingModule.createLazyInstanceCollector(p0, p1, p2)
-	end, cryoModule.List.join(p0, { p1 }))
-	local var8, var9 = useState({})
+	local var1 = dataModelTraversalOptions.new(p3)
+	local var2 = usePrevious(p3)
+	local var3 = useMemo(function()
+		-- upvalues: sceneUnderstandingModule (copy), p1 (ref), p2 (ref), p3 (ref)
+		return sceneUnderstandingModule.createLazyInstanceCollector(p1, p2, p3)
+	end, cryoModule.List.join(p1, { p2 }))
+	local var4, var5 = useState({})
 	
-	if p2 and var6 and p2.instanceProcessingLimit ~= var6.instanceProcessingLimit then
-		var7.setInstancesProcessedPerFrame(var5.instanceProcessingLimit)
+	if p3 and var2 and p3.instanceProcessingLimit ~= var2.instanceProcessingLimit then
+		var3.setInstancesProcessedPerFrame(var1.instanceProcessingLimit)
 	end
 	useEffect(function()
-		-- upvalues: var7 (ref), var9 (ref)
-		var7.onStepped(function(p3)
-			-- upvalues: var9 (copy)
-			var9(table.clone(p3))
+		-- upvalues: var3 (ref), var5 (ref)
+		var3.onStepped(function(p4)
+			-- upvalues: var5 (copy)
+			var5(table.clone(p4))
 		end)
-		var7.listen()
+		var3.listen()
 		
 		return function()
-			-- upvalues: var7 (copy)
-			var7.destroy()
+			-- upvalues: var3 (copy)
+			var3.destroy()
 		end
-	end, { var7 })
+	end, { var3 })
 	
-	return var8
+	return var4
 end

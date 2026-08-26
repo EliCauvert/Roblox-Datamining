@@ -5,31 +5,31 @@ local useRef = reactModule.useRef
 local studioUriModule = require(foundation.Utility.Plugin.StudioUri)
 local useWidgetsContextModule = require(script.Parent.useWidgetsContext)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: useWidgetsContextModule (ref), useRef (ref), studioUriModule (ref), useEffect (ref)
-	local var4 = useWidgetsContextModule()
-	p1 = p1 or useRef(nil)
+	local var1 = useWidgetsContextModule()
+	p2 = p2 or useRef(nil)
 	useEffect(function()
-		-- upvalues: p1 (ref), p0 (ref), var4 (ref)
-		local current = p1.current
+		-- upvalues: p2 (ref), p1 (ref), var1 (ref)
+		local current = p2.current
 		
 		if not current then return end
-		if p0 and typeof(current) == "Instance" then
-			var4.register(p0, current)
+		if p1 and typeof(current) == "Instance" then
+			var1.register(p1, current)
 			
 			return function()
-				-- upvalues: var4 (copy), p0 (copy), current (ref)
-				var4.deregister(p0, current)
+				-- upvalues: var1 (copy), p1 (copy), current (ref)
+				var1.deregister(p1, current)
 			end
 		end
 		return nil
 	end, {
-		studioUriModule.toString(p0),
-		p1.current,
-		p0,
-		var4.register,
-		var4.deregister
+		studioUriModule.toString(p1),
+		p2.current,
+		p1,
+		var1.register,
+		var1.deregister
 	})
 	
-	return p1
+	return p2
 end

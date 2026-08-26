@@ -6,54 +6,54 @@ local cursorType = foundationModule.Enums.CursorType
 local useCursor = foundationModule.Hooks.useCursor
 local fFlagAXResetAvatarButton = avatarExperienceFlagsModule.FFlagAXResetAvatarButton
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: foundationModule (ref), useCursor (ref), cursorType (ref), reactModule (ref), fFlagAXResetAvatarButton (ref)
-	local var3 = foundationModule.Hooks.useTokens()
-	local var4 = useCursor(cursorType.SmallPill)
-	local var5, var6 = reactModule.useBinding(false)
+	local var1 = foundationModule.Hooks.useTokens()
+	local var2 = useCursor(cursorType.SmallPill)
+	local var3, var4 = reactModule.useBinding(false)
 	
 	return reactModule.createElement(foundationModule.View, {
 		testId = "RobuxBalance",
 		tag = if fFlagAXResetAvatarButton then "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1000" else "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1100",
-		ref = p1,
-		onActivated = p0.onActivated,
-		onStateChanged = reactModule.useCallback(function(p2)
-			-- upvalues: foundationModule (copy), var6 (ref)
-			if p2 == foundationModule.Enums.ControlState.Default then
-				var6(false)
+		ref = p2,
+		onActivated = p1.onActivated,
+		onStateChanged = reactModule.useCallback(function(p3)
+			-- upvalues: foundationModule (copy), var4 (ref)
+			if p3 == foundationModule.Enums.ControlState.Default then
+				var4(false)
 				
 				return
-			elseif p2 == foundationModule.Enums.ControlState.Hover then
-				var6(true)
+			elseif p3 == foundationModule.Enums.ControlState.Hover then
+				var4(true)
 			end
 		end, {}),
-		backgroundStyle = var5:map(function(p3)
-			-- upvalues: var3 (ref)
-			return if p3 then var3.Color.Shift.Shift_200 else var3.Color.Surface.Surface_0
+		backgroundStyle = var3:map(function(p3)
+			-- upvalues: var1 (ref)
+			return if p3 then var1.Color.Shift.Shift_200 else var1.Color.Surface.Surface_0
 		end),
 		stateLayer = {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		},
 		selection = {
 			Selectable = true,
-			SelectionImageObject = var4,
-			NextSelectionLeft = p0.NextSelectionLeft
+			SelectionImageObject = var2,
+			NextSelectionLeft = p1.NextSelectionLeft
 		}
 	}, {
 		RobuxBalanceIcon = reactModule.createElement(foundationModule.Icon, {
 			name = "robux",
 			LayoutOrder = 1,
 			testId = "RobuxBalanceIcon",
-			style = var3.Color.ActionStandard.Foreground,
+			style = var1.Color.ActionStandard.Foreground,
 			size = foundationModule.Enums.IconSize.Small
 		}),
 		RobuxBalanceText = reactModule.createElement(foundationModule.Text, {
 			tag = "auto-xy",
 			testId = "RobuxBalanceText",
 			LayoutOrder = 2,
-			Text = p0.text,
-			textStyle = var3.Color.Content.Emphasis,
-			fontStyle = var3.Typography.LabelMedium,
+			Text = p1.text,
+			textStyle = var1.Color.Content.Emphasis,
+			fontStyle = var1.Typography.LabelMedium,
 			selection = { Selectable = false }
 		})
 	})

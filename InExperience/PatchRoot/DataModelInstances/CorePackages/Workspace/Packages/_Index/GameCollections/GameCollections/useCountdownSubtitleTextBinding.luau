@@ -3,65 +3,65 @@ local gameCollections = script:FindFirstAncestor("GameCollections")
 local reactModule = require(gameCollections.Parent.React)
 local calculateCountdownTimeModule = require(gameCollections.calculateCountdownTime)
 
-local function _(p0)
-	return if p0.days < 0 then false elseif p0.hours < 0 or p0.hours > 23 then false else p0.minutes < 0 or p0.minutes > 59
+local function _(p1)
+	return if p1.days < 0 then false elseif p1.hours < 0 or p1.hours > 23 then false else p1.minutes < 0 or p1.minutes > 59
 end
 
 local _ = function(p1)
 	return if p1 < 15 then 1 else 15
 end
 
-return function(p2, p3, p4)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), calculateCountdownTimeModule (ref), runService (ref)
-	local var4, var5 = reactModule.useState("")
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p4 (ref), p2 (ref), p3 (ref), calculateCountdownTimeModule (copy), var5 (ref)
-		if p4 == nil or p4 == "" or (p2 == nil or p3 == nil) or p3 == "" then
+	local var1, var2 = reactModule.useState("")
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: p3 (ref), p1 (ref), p2 (ref), calculateCountdownTimeModule (copy), var2 (ref)
+		if p3 == nil or p3 == "" or (p1 == nil or p2 == nil) or p2 == "" then
 			return 0
 		end
-		local var10
-		local var7 = p4
-		local var8 = p2 - DateTime.now().UnixTimestamp
-		local var9 = calculateCountdownTimeModule(var8)
+		local var4
+		local var5 = p3
+		local var6 = p1 - DateTime.now().UnixTimestamp
+		local var7 = calculateCountdownTimeModule(var6)
 		
-		if var9.days < 0 then
-			var10 = false
-		elseif var9.hours < 0 or var9.hours > 23 then
-			var10 = false
-		elseif var9.minutes >= 0 then
-			var10 = var9.minutes <= 59
+		if var7.days < 0 then
+			var4 = false
+		elseif var7.hours < 0 or var7.hours > 23 then
+			var4 = false
+		elseif var7.minutes >= 0 then
+			var4 = var7.minutes <= 59
 		end
-		if var10 then
-			var7 = if var9.days > 0 then p4 else p3:gsub("{hours}", tostring(var9.hours)):gsub("{minutes}", tostring(var9.minutes))
+		if var4 then
+			var5 = if var7.days > 0 then p3 else p2:gsub("{hours}", tostring(var7.hours)):gsub("{minutes}", tostring(var7.minutes))
 		end
-		var5(var7)
+		var2(var5)
 		
-		return var8
-	end, { p4, p2, p3 })
+		return var6
+	end, { p3, p1, p2 })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref)
-		var6()
-	end, { var6 })
+		-- upvalues: var3 (ref)
+		var3()
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), p2 (ref), p3 (ref), runService (copy), var6 (ref)
+		-- upvalues: p3 (ref), p1 (ref), p2 (ref), runService (copy), var3 (ref)
 		local heartbeatConnection = nil
 		
-		if p4 ~= nil and p4 ~= "" and (p2 ~= nil and p3 ~= nil) and p3 ~= "" then
-			local var12 = p2 - DateTime.now().UnixTimestamp
+		if p3 ~= nil and p3 ~= "" and (p1 ~= nil and p2 ~= nil) and p2 ~= "" then
+			local var4 = p1 - DateTime.now().UnixTimestamp
 			
-			if var12 > 0 then
-				local var13 = 0
-				local var14 = if var12 < 15 then 1 else 15
+			if var4 > 0 then
+				local var5 = 0
+				local var6 = if var4 < 15 then 1 else 15
 				heartbeatConnection = runService.Heartbeat:Connect(function()
-					-- upvalues: var13 (write), var14 (write), var12 (write), var6 (copy), heartbeatConnection (write)
+					-- upvalues: var5 (write), var6 (write), var4 (write), var3 (copy), heartbeatConnection (write)
 					local processTime = os.clock()
 					
-					if processTime - var13 < var14 then return end
-					var13 = processTime
-					var12 = var6()
-					var14 = if var12 < 15 then 1 else 15
+					if processTime - var5 < var6 then return end
+					var5 = processTime
+					var4 = var3()
+					var6 = if var4 < 15 then 1 else 15
 					
-					if var12 <= 0 and heartbeatConnection then
+					if var4 <= 0 and heartbeatConnection then
 						heartbeatConnection:Disconnect()
 						heartbeatConnection = nil
 					end
@@ -75,7 +75,7 @@ return function(p2, p3, p4)
 				heartbeatConnection = nil
 			end
 		end
-	end, { p2, var6 })
+	end, { p1, var3 })
 	
-	return var4
+	return var1
 end

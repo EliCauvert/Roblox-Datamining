@@ -9,14 +9,14 @@ local view = foundationModule.View
 local musicNote = builderIconsModule.Icon.MusicNote
 local useMusicInfoModule = require(momentsCreation.Hooks.useMusicInfo)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useMusicInfoModule (ref), reactModule (ref), view (ref), icon (ref), musicNote (ref), foundationModule (ref), text (ref)
-	local var5 = useMusicInfoModule(p0.musicAssetId)
+	local var1 = useMusicInfoModule(p1.musicAssetId)
 	
 	return reactModule.createElement(view, {
 		tag = "row align-x-center align-y-center gap-medium size-0-800 auto-x padding-x-medium padding-y-xsmall radius-circle bg-over-media-0",
 		LayoutOrder = 1,
-		onActivated = p0.onActivated
+		onActivated = p1.onActivated
 	}, {
 		Icon = reactModule.createElement(icon, {
 			LayoutOrder = 1,
@@ -27,7 +27,7 @@ return function(p0)
 			tag = "auto-xy text-caption-medium text-align-x-left text-align-y-center text-truncate-split content-action-standard",
 			LayoutOrder = 2,
 			sizeConstraint = { MaxSize = Vector2.new(100, 1e999) },
-			Text = if var5 then var5.Title else ""
+			Text = if var1 then var1.Title else ""
 		})
 	})
 end

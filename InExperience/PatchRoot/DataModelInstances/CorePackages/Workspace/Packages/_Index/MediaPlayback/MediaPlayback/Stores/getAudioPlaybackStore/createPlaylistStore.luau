@@ -7,11 +7,11 @@ return function()
 	local var1, var2 = createSignal({})
 	local var3, var4 = createSignal({})
 	
-	local function _(p0, p1)
+	local function _(p1, p2)
 		-- upvalues: var3 (ref), var1 (ref)
-		local var5 = var3(false)[tostring(p0)]
+		local var5 = var3(false)[tostring(p1)]
 		
-		return if var5 then var1(false)[var5 + p1] else nil
+		return if var5 then var1(false)[var5 + p2] else nil
 	end
 	
 	return {
@@ -26,17 +26,17 @@ return function()
 			end
 			var4(t)
 		end,
-		getNext = function(p2)
+		getNext = function(p1)
 			-- upvalues: var3 (ref), var1 (ref)
-			local var7 = var3(false)[tostring(p2)]
+			local var5 = var3(false)[tostring(p1)]
 			
-			return if var7 then var1(false)[var7 + 1] else nil
+			return if var5 then var1(false)[var5 + 1] else nil
 		end,
-		getPrev = function(p3)
+		getPrev = function(p1)
 			-- upvalues: var3 (ref), var1 (ref)
-			local var8 = var3(false)[tostring(p3)]
+			local var5 = var3(false)[tostring(p1)]
 			
-			return if var8 then var1(false)[var8 + -1] else nil
+			return if var5 then var1(false)[var5 + -1] else nil
 		end
 	}
 end

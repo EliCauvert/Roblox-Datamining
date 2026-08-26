@@ -1,5 +1,5 @@
-﻿local function _(p0)
-	return p0:match("^(%w+)[-_]")
+﻿local function _(p1)
+	return p1:match("^(%w+)[-_]")
 end
 
 local t = {}
@@ -13,37 +13,37 @@ function t.new(p1)
 	return t_1
 end
 
-function t:addTranslations(p2)
-	self._translations = p2
+function t:addTranslations(p1)
+	self._translations = p1
 end
 
 function t:getRelevantLanguages()
 	local t = {}
 	table.insert(t, self)
-	local var3 = self:match("^(%w+)[-_]")
+	local var1 = self:match("^(%w+)[-_]")
 	
-	if var3 then
-		table.insert(t, var3)
+	if var1 then
+		table.insert(t, var1)
 	end
 	table.insert(t, "en-us")
 	
 	return t
 end
 
-function t:_getSourceString(p3, p4)
-	local var4 = self._translations[p3]
+function t:_getSourceString(p1, p2)
+	local var1 = self._translations[p1]
 	
-	return if var4 then var4[p4] else nil
+	return if var1 then var1[p2] else nil
 end
 
-function t:getString(p5, p6, p7)
-	local var5 = p5:match("^(%w+)[-_]")
-	local var6 = self:_getSourceString(p5, p6) or ((if var5 then self:_getSourceString(var5, p6) else nil) or self:_getSourceString("en-us", p6))
+function t:getString(p1, p2, p3)
+	local var1 = p1:match("^(%w+)[-_]")
+	local var2 = self:_getSourceString(p1, p2) or ((if var1 then self:_getSourceString(var1, p2) else nil) or self:_getSourceString("en-us", p2))
 	
-	if not var6 then
-		error(("Couldn't find value for translation key %q!\nTried these languages: %s, %s, %s"):format(p6, p5, var5, "en-us"), 2)
+	if not var2 then
+		error(("Couldn't find value for translation key %q!\nTried these languages: %s, %s, %s"):format(p2, p1, var1, "en-us"), 2)
 	end
-	return if p7 then var6:gsub("{(.-)}", p7) else var6
+	return if p3 then var2:gsub("{(.-)}", p3) else var2
 end
 
 return t

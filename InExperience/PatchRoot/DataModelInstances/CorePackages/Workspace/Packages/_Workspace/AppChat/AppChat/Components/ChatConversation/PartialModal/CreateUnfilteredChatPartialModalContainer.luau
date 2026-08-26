@@ -31,80 +31,80 @@ local t = {
 	navigateToToast = function(_) end
 }
 
-return memo(function(p0)
+return memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useScreenSize (ref), useLayerCollector (ref), useState (ref), useDispatch (ref), useAnalyticsModule (ref), useIsLocalPlayerPartyVoiceEligible (ref), useEffectOnMount (ref), eventNamesModule (ref), useLocalization (ref), useCallback (ref), appChatNetworkingModule (ref), reactModule (ref), partialModalModule (ref)
-	local var9 = cryoModule.Dictionary.union(t, p0)
-	local var10 = useStyle()
-	local var11 = useScreenSize()
-	local var12 = useLayerCollector()
+	local var1 = cryoModule.Dictionary.union(t, p1)
+	local var2 = useStyle()
+	local var3 = useScreenSize()
+	local var4 = useLayerCollector()
 	
-	if var12 and var12.absoluteSize then
-		var11 = var12.absoluteSize
+	if var4 and var4.absoluteSize then
+		var3 = var4.absoluteSize
 	end
-	local var13, var14 = useState(false)
-	local var15 = useDispatch()
-	local var16 = useAnalyticsModule()
-	local var17 = useIsLocalPlayerPartyVoiceEligible()
+	local var5, var6 = useState(false)
+	local var7 = useDispatch()
+	local var8 = useAnalyticsModule()
+	local var9 = useIsLocalPlayerPartyVoiceEligible()
 	useEffectOnMount(function()
-		-- upvalues: var16 (ref), eventNamesModule (copy), var9 (ref)
-		if var16 then
-			var16.fireAnalyticsEvent(eventNamesModule.ConversationUpgradeDialogRendered, { conversationId = var9.conversationId })
+		-- upvalues: var8 (ref), eventNamesModule (copy), var1 (ref)
+		if var8 then
+			var8.fireAnalyticsEvent(eventNamesModule.ConversationUpgradeDialogRendered, { conversationId = var1.conversationId })
 		end
 	end)
-	local var18 = useLocalization({
-		networkErrorText = var9.networkErrorTextKey,
-		titleText = var9.titleKey,
-		bodyText = var9.bodyKey,
-		bodyTextWithVoice = var9.bodyKeyWithVoice,
-		actionText = var9.actionKey,
-		cancelAlertText = var9.cancelAlertKey
+	local var10 = useLocalization({
+		networkErrorText = var1.networkErrorTextKey,
+		titleText = var1.titleKey,
+		bodyText = var1.bodyKey,
+		bodyTextWithVoice = var1.bodyKeyWithVoice,
+		actionText = var1.actionKey,
+		cancelAlertText = var1.cancelAlertKey
 	})
-	local var19 = useCallback(function()
-		-- upvalues: var9 (ref), var18 (ref)
-		var9.navigateToToast(var18.networkErrorText)
-	end, { var9.navigateToToast, var18.networkErrorText })
+	local var11 = useCallback(function()
+		-- upvalues: var1 (ref), var10 (ref)
+		var1.navigateToToast(var10.networkErrorText)
+	end, { var1.navigateToToast, var10.networkErrorText })
 	
 	return reactModule.createElement(partialModalModule, {
-		titleText = var18.titleText,
-		bodyText = if var17 then var18.bodyTextWithVoice else var18.bodyText,
-		actionText = var18.actionText,
-		cancelAlertText = var18.cancelAlertText,
-		isButtonDisabled = var13,
-		screenSize = var11,
+		titleText = var10.titleText,
+		bodyText = if var9 then var10.bodyTextWithVoice else var10.bodyText,
+		actionText = var10.actionText,
+		cancelAlertText = var10.cancelAlertText,
+		isButtonDisabled = var5,
+		screenSize = var3,
 		onActivated = useCallback(function()
-			-- upvalues: var16 (ref), eventNamesModule (copy), var9 (ref), var14 (ref), var15 (ref), appChatNetworkingModule (copy), var19 (ref)
-			if var16 then
-				var16.fireAnalyticsEvent(eventNamesModule.ConversationUpgradeDialogActionClicked, { conversationId = var9.conversationId })
+			-- upvalues: var8 (ref), eventNamesModule (copy), var1 (ref), var6 (ref), var7 (ref), appChatNetworkingModule (copy), var11 (ref)
+			if var8 then
+				var8.fireAnalyticsEvent(eventNamesModule.ConversationUpgradeDialogActionClicked, { conversationId = var1.conversationId })
 			end
-			var14(true)
-			var15(appChatNetworkingModule.rodux.DuplicateConversation.API(var9.conversationId, "trusted_comms")):andThen(function(p1)
-				-- upvalues: var9 (copy), var19 (copy)
-				local responseBody = p1.responseBody
+			var6(true)
+			var7(appChatNetworkingModule.rodux.DuplicateConversation.API(var1.conversationId, "trusted_comms")):andThen(function(p2)
+				-- upvalues: var1 (copy), var11 (copy)
+				local responseBody = p2.responseBody
 				local id = responseBody and (responseBody.conversations and (responseBody.conversations[1] and responseBody.conversations[1].id))
 				
 				if id then
-					var9.navigateToConversation(id)
+					var1.navigateToConversation(id)
 					
 					return
 				end
-				var19()
+				var11()
 			end):catch(function()
-				-- upvalues: var19 (copy)
-				var19()
+				-- upvalues: var11 (copy)
+				var11()
 			end):finally(function()
-				-- upvalues: var14 (copy)
-				var14(false)
+				-- upvalues: var6 (copy)
+				var6(false)
 			end)
 		end, {
-			var15, var14, var19, var9.navigateToConversation, var9.conversationId, var16
+			var7, var6, var11, var1.navigateToConversation, var1.conversationId, var8
 		}),
 		onDismissed = useCallback(function()
-			-- upvalues: var16 (ref), eventNamesModule (copy), var9 (ref)
-			if var16 then
-				var16.fireAnalyticsEvent(eventNamesModule.ConversationUpgradeDialogDismissed, { conversationId = var9.conversationId })
+			-- upvalues: var8 (ref), eventNamesModule (copy), var1 (ref)
+			if var8 then
+				var8.fireAnalyticsEvent(eventNamesModule.ConversationUpgradeDialogDismissed, { conversationId = var1.conversationId })
 			end
-			var9.onDismissed()
-		end, { var9.onDismissed, var16, var9.conversationId }),
-		style = var10
+			var1.onDismissed()
+		end, { var1.onDismissed, var8, var1.conversationId }),
+		style = var2
 	})
 end)

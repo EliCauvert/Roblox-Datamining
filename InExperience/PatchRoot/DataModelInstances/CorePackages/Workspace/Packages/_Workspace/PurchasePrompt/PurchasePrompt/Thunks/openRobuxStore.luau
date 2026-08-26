@@ -7,10 +7,10 @@ local list = { platformInterfaceModule }
 
 return function()
 	-- upvalues: thunkModule (ref), list (ref), platformInterfaceModule (ref), setPromptStateModule (ref), promptStateModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1)
+	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: platformInterfaceModule (copy), setPromptStateModule (copy), promptStateModule (copy)
-		local var5 = p1[platformInterfaceModule]
-		p0:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
-		var5.openRobuxStore()
+		local var1 = p2[platformInterfaceModule]
+		p1:dispatch(setPromptStateModule(promptStateModule.UpsellInProgress))
+		var1.openRobuxStore()
 	end)
 end

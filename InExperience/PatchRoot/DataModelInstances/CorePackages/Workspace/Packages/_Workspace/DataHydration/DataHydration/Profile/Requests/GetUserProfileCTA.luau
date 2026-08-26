@@ -1,21 +1,21 @@
 ﻿local dataHydration = script:FindFirstAncestor("DataHydration")
 local parent = dataHydration.Parent
 local myHttpRequestModule = require(dataHydration.Profile.Networking.myHttpRequest)
-local var2 = require(parent.UrlBuilder).UrlBuilder.new({
+local var1 = require(parent.UrlBuilder).UrlBuilder.new({
 	path = "profile-platform-api/v1/profiles/batch/get",
 	base = require(parent.Http).Url.APIS_URL
 })()
 
-return function(p0)
-	-- upvalues: myHttpRequestModule (ref), var2 (ref)
-	return myHttpRequestModule(var2, "POST", {
+return function(p1)
+	-- upvalues: myHttpRequestModule (ref), var1 (ref)
+	return myHttpRequestModule(var1, "POST", {
 		postBody = {
 			profileType = "User",
 			excludeContextualActions = true,
-			profileIds = p0,
+			profileIds = p1,
 			components = { { component = "Actions" } }
 		}
-	}):catch(function(p1)
-		error(p1)
+	}):catch(function(p2)
+		error(p2)
 	end)
 end

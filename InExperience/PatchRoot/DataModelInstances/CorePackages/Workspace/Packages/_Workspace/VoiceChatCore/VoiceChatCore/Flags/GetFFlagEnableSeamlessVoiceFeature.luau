@@ -31,18 +31,18 @@ local t = {
 	end
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref)
-	if type(p0) == "string" then
-		p0 = { p0 }
+	if type(p1) == "string" then
+		p1 = { p1 }
 	end
-	if p0 == nil or #p0 == 0 or not game:GetFastFlag("EnableSeamlessVoiceFeature") then
+	if p1 == nil or #p1 == 0 or not game:GetFastFlag("EnableSeamlessVoiceFeature") then
 		return game:GetFastFlag("EnableSeamlessVoiceFeature")
 	end
-	for i, v in pairs(p0) do
-		local var2 = t[v]
+	for i, v in pairs(p1) do
+		local var1 = t[v]
 		
-		if not var2 or not var2() then
+		if not var1 or not var1() then
 			return false
 		end
 	end

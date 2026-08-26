@@ -10,8 +10,8 @@
 			{
 				type = require(script:FindFirstAncestor("SetAlias").Parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = {
-					status = function(p0)
-						return p0
+					status = function(p1)
+						return p1
 					end
 				}
 			}

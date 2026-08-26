@@ -5,15 +5,15 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local fFlagLuaAppSduiEventDetailsEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
 
-return function(p0, p1, p2, _)
+return function(p1, p2, p3, _)
 	-- upvalues: sduiErrorType (ref), fFlagLuaAppSduiEventDetailsEnabled (ref), navigateToEventDetails (ref), appPage (ref)
-	local var1 = if p0 then p0.actionParams else nil
+	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "OpenEventDetails",
 			message = "Missing actionParams"
-		}, p2.appPage)
+		}, p3.appPage)
 		
 		return
 	end
@@ -21,16 +21,16 @@ return function(p0, p1, p2, _)
 	local eventId = var1.eventId
 	
 	if eventId == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			name = "OpenEventDetails",
 			message = "Missing eventId",
 			propName = "eventId"
-		}, p2.appPage)
+		}, p3.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId or p1 and (p1.analyticsData and p1.analyticsData.universeId)
-	local navigation = p2.dependencies.getNavigation()
+	local universeId = var1.universeId or p2 and (p2.analyticsData and p2.analyticsData.universeId)
+	local navigation = p3.dependencies.getNavigation()
 	
 	if fFlagLuaAppSduiEventDetailsEnabled then
 		navigateToEventDetails(navigation, tostring(eventId), if universeId then tostring(universeId) else nil)

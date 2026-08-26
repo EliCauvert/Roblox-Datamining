@@ -11,17 +11,17 @@ local t = {
 	enableTestingTheme = false
 }
 
-function SquadVoiceChangerOverlay(p0)
+function SquadVoiceChangerOverlay(p1)
 	-- upvalues: cryoModule (ref), t (ref), useNavigation (ref), reactModule (ref), foundationModule (ref), squadVoiceChangersModule (ref)
-	local var7 = cryoModule.Dictionary.join(t, p0)
-	local var8 = useNavigation()
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref)
-		if var8 and var8.pop then
-			var8.pop()
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = useNavigation()
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref)
+		if var2 and var2.pop then
+			var2.pop()
 		end
-	end, { var8 })
-	local wideMode = var8.getScreenProps("wideMode", false)
+	end, { var2 })
+	local wideMode = var2.getScreenProps("wideMode", false)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		AbsorbInput = reactModule.createElement(foundationModule.View, {
@@ -30,13 +30,13 @@ function SquadVoiceChangerOverlay(p0)
 			ZIndex = 1,
 			tag = {
 				["size-full anchor-center-center position-center-center"] = true,
-				["bg-action-subtle"] = not var7.enableTestingTheme,
-				["bg-action-soft-emphasis"] = var7.enableTestingTheme
+				["bg-action-subtle"] = not var1.enableTestingTheme,
+				["bg-action-soft-emphasis"] = var1.enableTestingTheme
 			},
 			stateLayer = {
 				affordance = foundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = var9
+			onActivated = var3
 		}),
 		OverlayContainer = reactModule.createElement(foundationModule.View, {
 			BorderSizePixel = 0,
@@ -51,9 +51,9 @@ function SquadVoiceChangerOverlay(p0)
 			onActivated = function() end
 		}, {
 			SquadVoiceChangers = reactModule.createElement(squadVoiceChangersModule, {
-				closeSquadVoiceChangers = var9,
-				fillListWithExtraVoicePacks = var7.fillListWithExtraVoicePacks,
-				enableTestingTheme = var7.enableTestingTheme
+				closeSquadVoiceChangers = var3,
+				fillListWithExtraVoicePacks = var1.fillListWithExtraVoicePacks,
+				enableTestingTheme = var1.enableTestingTheme
 			})
 		})
 	})

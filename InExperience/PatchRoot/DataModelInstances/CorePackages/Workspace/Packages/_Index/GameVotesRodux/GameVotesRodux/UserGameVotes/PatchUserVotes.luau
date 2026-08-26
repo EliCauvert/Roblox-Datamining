@@ -13,47 +13,47 @@ local setGameVotesModule = require(gameVotesRodux.GameVotes.SetGameVotes)
 local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
 local performFetch = require(parent.Http).PerformFetch
 
-local function getNewGameVotes(p0, p1, p2)
+local function getNewGameVotes(p1, p2, p3)
 	-- upvalues: voteStatusModule (ref)
-	if p1 == p2 then
-		return p0
+	if p2 == p3 then
+		return p1
 	end
-	local upVotes = p0 and p0.upVotes
-	local downVotes = p0 and p0.downVotes
+	local upVotes = p1 and p1.upVotes
+	local downVotes = p1 and p1.downVotes
 	
-	if p2 == voteStatusModule.VotedUp then
+	if p3 == voteStatusModule.VotedUp then
 		upVotes += 1
 		
-		if p1 == voteStatusModule.VotedDown then
+		if p2 == voteStatusModule.VotedDown then
 			downVotes -= 1
 		end
-	elseif p2 == voteStatusModule.VotedDown then
+	elseif p3 == voteStatusModule.VotedDown then
 		downVotes += 1
 		
-		if p1 == voteStatusModule.VotedUp then
+		if p2 == voteStatusModule.VotedUp then
 			upVotes -= 1
 		end
-	elseif p2 == voteStatusModule.NotVoted then
-		if p1 == voteStatusModule.VotedUp then
+	elseif p3 == voteStatusModule.NotVoted then
+		if p2 == voteStatusModule.VotedUp then
 			upVotes -= 1
-		elseif p1 == voteStatusModule.VotedDown then
+		elseif p2 == voteStatusModule.VotedDown then
 			downVotes -= 1
 		end
 	end
 	return { upVotes = upVotes, downVotes = downVotes }
 end
 
-local function _(p3)
+local function _(p1)
 	-- upvalues: statusCodes (ref)
-	return p3 and (p3.HttpError == Enum.HttpError.OK and p3.StatusCode == statusCodes.TOO_MANY_REQUESTS)
+	return p1 and (p1.HttpError == Enum.HttpError.OK and p1.StatusCode == statusCodes.TOO_MANY_REQUESTS)
 end
 
-local function isPlayGameError(p4)
+local function isPlayGameError(p1)
 	-- upvalues: statusCodes (ref), httpService (ref)
-	if p4 and p4.HttpError == Enum.HttpError.OK and p4.StatusCode == statusCodes.FORBIDDEN then
+	if p1 and p1.HttpError == Enum.HttpError.OK and p1.StatusCode == statusCodes.FORBIDDEN then
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p4 (ref)
-			return httpService:JSONDecode(p4.Body)
+			-- upvalues: httpService (copy), p1 (ref)
+			return httpService:JSONDecode(p1.Body)
 		end)
 		
 		if ok and status and status.errors then
@@ -67,54 +67,54 @@ local function isPlayGameError(p4)
 	return false
 end
 
-local _ = function(p5)
+local _ = function(p2)
 	return "luaapp.gamesapi.patch-user-votes" .. p5
 end
 
 return {
 	getNewGameVotes = getNewGameVotes,
-	Patch = function(p6, p7, p8, p9)
+	Patch = function(p2, p3, p4, p5)
 		-- upvalues: promiseModule (ref), performFetch (ref), gamesPatchUserVotesModule (ref), getNewGameVotes (ref), setGameVotesModule (ref), setUserGameVotesModule (ref), statusCodes (ref), reasonForNotVoteableModule (ref), setCurrentToastMessage (ref), toastType (ref), isPlayGameError (ref), setNetworkingErrorToast (ref)
-		assert(type(p7) == "string", string.format("PatchUserVotes thunk expects universeId to be a string, was %s", type(p7)))
-		assert(type(p8) == "string", string.format("PatchUserVotes thunk expects vote to be a string, was %s", type(p8)))
-		assert(type(p9) == "string", string.format("PatchUserVotes thunk expects curVote to be a string, was %s", type(p9)))
+		assert(type(p3) == "string", string.format("PatchUserVotes thunk expects universeId to be a string, was %s", type(p3)))
+		assert(type(p4) == "string", string.format("PatchUserVotes thunk expects vote to be a string, was %s", type(p4)))
+		assert(type(p5) == "string", string.format("PatchUserVotes thunk expects curVote to be a string, was %s", type(p5)))
 		
-		return if p8 == p9 then promiseModule.resolve() else performFetch.Single("luaapp.gamesapi.patch-user-votes" .. p7, function(p10)
-			-- upvalues: gamesPatchUserVotesModule (copy), p6 (ref), p7 (ref), p8 (ref), getNewGameVotes (copy), p9 (ref), setGameVotesModule (copy), setUserGameVotesModule (copy), promiseModule (copy), statusCodes (copy), reasonForNotVoteableModule (copy), setCurrentToastMessage (copy), toastType (copy), isPlayGameError (copy), setNetworkingErrorToast (copy)
-			return gamesPatchUserVotesModule(p6, p7, p8):andThen(function(p11)
-				-- upvalues: p10 (ref), p7 (copy), getNewGameVotes (copy), p9 (copy), p8 (copy), setGameVotesModule (copy), setUserGameVotesModule (copy), promiseModule (copy)
-				local var12 = getNewGameVotes(p10:getState().GameVotes[p7], p9, p8)
-				p10:dispatch(setGameVotesModule(p7, var12.upVotes, var12.downVotes))
-				p10:dispatch(setUserGameVotesModule(p7, true, p8, ""))
+		return if p4 == p5 then promiseModule.resolve() else performFetch.Single("luaapp.gamesapi.patch-user-votes" .. p7, function(p6)
+			-- upvalues: gamesPatchUserVotesModule (copy), p2 (ref), p3 (ref), p4 (ref), getNewGameVotes (copy), p5 (ref), setGameVotesModule (copy), setUserGameVotesModule (copy), promiseModule (copy), statusCodes (copy), reasonForNotVoteableModule (copy), setCurrentToastMessage (copy), toastType (copy), isPlayGameError (copy), setNetworkingErrorToast (copy)
+			return gamesPatchUserVotesModule(p2, p3, p4):andThen(function(p7)
+				-- upvalues: p6 (ref), p3 (copy), getNewGameVotes (copy), p5 (copy), p4 (copy), setGameVotesModule (copy), setUserGameVotesModule (copy), promiseModule (copy)
+				local var1 = getNewGameVotes(p6:getState().GameVotes[p3], p5, p4)
+				p6:dispatch(setGameVotesModule(p3, var1.upVotes, var1.downVotes))
+				p6:dispatch(setUserGameVotesModule(p3, true, p4, ""))
 				
-				return promiseModule.resolve(p11)
-			end, function(p12)
-				-- upvalues: statusCodes (copy), p10 (ref), setUserGameVotesModule (copy), p7 (copy), p9 (copy), reasonForNotVoteableModule (copy), setCurrentToastMessage (copy), toastType (copy), promiseModule (copy), isPlayGameError (copy), setNetworkingErrorToast (copy)
-				if p12 and (p12.HttpError == Enum.HttpError.OK and p12.StatusCode == statusCodes.TOO_MANY_REQUESTS) then
-					p10:dispatch(setUserGameVotesModule(p7, false, p9, reasonForNotVoteableModule.FloodCheckThresholdMet))
-					p10:dispatch(setCurrentToastMessage({
+				return promiseModule.resolve(p7)
+			end, function(p7)
+				-- upvalues: statusCodes (copy), p6 (ref), setUserGameVotesModule (copy), p3 (copy), p5 (copy), reasonForNotVoteableModule (copy), setCurrentToastMessage (copy), toastType (copy), promiseModule (copy), isPlayGameError (copy), setNetworkingErrorToast (copy)
+				if p7 and (p7.HttpError == Enum.HttpError.OK and p7.StatusCode == statusCodes.TOO_MANY_REQUESTS) then
+					p6:dispatch(setUserGameVotesModule(p3, false, p5, reasonForNotVoteableModule.FloodCheckThresholdMet))
+					p6:dispatch(setCurrentToastMessage({
 						toastMessage = "Feature.Toast.VoteError.FloodCheckThresholdMet",
 						toastType = toastType.NetworkingError
 					}))
 					
-					return promiseModule.reject(p12)
-				elseif isPlayGameError(p12) then
-					p10:dispatch(setUserGameVotesModule(p7, false, p9, reasonForNotVoteableModule.PlayGame))
-					p10:dispatch(setCurrentToastMessage({
+					return promiseModule.reject(p7)
+				elseif isPlayGameError(p7) then
+					p6:dispatch(setUserGameVotesModule(p3, false, p5, reasonForNotVoteableModule.PlayGame))
+					p6:dispatch(setCurrentToastMessage({
 						toastMessage = "Feature.Toast.VoteError.PlayGame",
 						toastType = toastType.NetworkingError
 					}))
 					
-					return promiseModule.reject(p12)
+					return promiseModule.reject(p7)
 				end
-				p10:dispatch(setNetworkingErrorToast(p12))
+				p6:dispatch(setNetworkingErrorToast(p7))
 				
-				return promiseModule.reject(p12)
+				return promiseModule.reject(p7)
 			end)
 		end)
 	end,
-	GetPatchingStatus = function(p13, p14)
+	GetPatchingStatus = function(p2, p3)
 		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p13, "luaapp.gamesapi.patch-user-votes" .. p14)
+		return performFetch.GetStatus(p2, "luaapp.gamesapi.patch-user-votes" .. p14)
 	end
 }

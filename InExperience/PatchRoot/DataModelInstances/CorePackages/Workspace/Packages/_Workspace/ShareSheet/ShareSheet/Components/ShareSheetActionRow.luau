@@ -11,82 +11,82 @@ local copyLinkModule = require(shareSheet.copyLink)
 local shareLinkModule = require(shareSheet.shareLink)
 local iconName = foundationModule.Enums.IconName
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), useLocalization (ref), copyLinkModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetTelemetryModule (ref), shareLinkModule (ref), shareSheetRowModule (ref), shareSheetItemContainerModule (ref), iconName (ref)
-	local var9, var10 = reactModule.useState(false)
-	local var11 = reactModule.useRef(nil)
-	local var12 = useLocalization({
+	local var1, var2 = reactModule.useState(false)
+	local var3 = reactModule.useRef(nil)
+	local var4 = useLocalization({
 		copyLink = "Feature.SocialShare.Action.CopyLink",
 		share = "Feature.SocialShare.Action.Share"
 	})
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var11 (ref)
-		var10(true)
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref), var3 (ref)
+		var2(true)
 		
-		if var11.current then
-			task.cancel(var11.current)
+		if var3.current then
+			task.cancel(var3.current)
 		end
-		var11.current = task.delay(2, function()
-			-- upvalues: var11 (copy), var10 (copy)
-			var11.current = nil
-			var10(false)
+		var3.current = task.delay(2, function()
+			-- upvalues: var3 (copy), var2 (copy)
+			var3.current = nil
+			var2(false)
 		end)
 	end, {})
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: copyLinkModule (copy), p0 (ref), var13 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
-		copyLinkModule({ context = p0.context, url = p0.url })
-		var13()
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: copyLinkModule (copy), p1 (ref), var5 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
+		copyLinkModule({ context = p1.context, url = p1.url })
+		var5()
 		
 		if fFlagShareSheetTelemetryRefactorModule then
 			shareSheetTelemetryModule.logInteraction({
-				context = p0.context,
-				telemetryId = p0.telemetryId or "",
+				context = p1.context,
+				telemetryId = p1.telemetryId or "",
 				interactionType = shareSheetTelemetryModule.InteractionType.CopyLink
 			})
 			
 			return
 		end
 		shareSheetTelemetryModule.logShareSheetLinkCopied({
-			context = p0.context,
-			url = p0.url,
-			telemetryId = p0.telemetryId or ""
+			context = p1.context,
+			url = p1.url,
+			telemetryId = p1.telemetryId or ""
 		})
-	end, { p0.context, p0.telemetryId, p0.url, var13 })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: shareLinkModule (copy), p0 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
-		shareLinkModule({ context = p0.context, url = p0.url })
+	end, { p1.context, p1.telemetryId, p1.url, var5 })
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: shareLinkModule (copy), p1 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
+		shareLinkModule({ context = p1.context, url = p1.url })
 		
 		if fFlagShareSheetTelemetryRefactorModule then
 			shareSheetTelemetryModule.logInteraction({
-				context = p0.context,
-				telemetryId = p0.telemetryId or "",
+				context = p1.context,
+				telemetryId = p1.telemetryId or "",
 				interactionType = shareSheetTelemetryModule.InteractionType.NativeShare
 			})
 		end
-	end, { p0.context, p0.telemetryId, p0.url })
+	end, { p1.context, p1.telemetryId, p1.url })
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref)
+		-- upvalues: var3 (ref)
 		return function()
-			-- upvalues: var11 (copy)
-			if var11.current then
-				task.cancel(var11.current)
+			-- upvalues: var3 (copy)
+			if var3.current then
+				task.cancel(var3.current)
 			end
 		end
 	end, {})
 	
-	return reactModule.createElement(shareSheetRowModule, { LayoutOrder = p0.LayoutOrder }, {
+	return reactModule.createElement(shareSheetRowModule, { LayoutOrder = p1.LayoutOrder }, {
 		CopyLink = reactModule.createElement(shareSheetItemContainerModule, {
 			LayoutOrder = 1,
-			icon = if var9 then iconName.Check else iconName.ChainLink,
-			label = if var9 then "Copied" else var12.copyLink,
-			onActivated = var14,
-			shouldAnimate = var9
+			icon = if var1 then iconName.Check else iconName.ChainLink,
+			label = if var1 then "Copied" else var4.copyLink,
+			onActivated = var6,
+			shouldAnimate = var1
 		}),
-		Share = if p0.canShare then reactModule.createElement(shareSheetItemContainerModule, {
+		Share = if p1.canShare then reactModule.createElement(shareSheetItemContainerModule, {
 			LayoutOrder = 2,
 			icon = iconName.ArrowUpFromLandscapeRectangle,
-			label = var12.share,
-			onActivated = var15
+			label = var4.share,
+			onActivated = var7
 		}) else nil
 	})
 end

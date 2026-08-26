@@ -4,15 +4,15 @@ local gameDetailsContextModule = require(parent.GameDetailsContext)
 local reactModule = require(parent_1.Parent.React)
 local _ = require(parent_1.gameInviteModalType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), gameDetailsContextModule (ref)
 	return reactModule.createElement(gameDetailsContextModule.Provider, {
 		value = {
-			gameDetails = p0.gameDetails or {},
-			serverType = p0.serverType or "",
-			promptMessage = p0.promptMessage or "",
-			trigger = p0.trigger or "",
-			isCoreScript = p0.isCoreScript or false
+			gameDetails = p1.gameDetails or {},
+			serverType = p1.serverType or "",
+			promptMessage = p1.promptMessage or "",
+			trigger = p1.trigger or "",
+			isCoreScript = p1.isCoreScript or false
 		}
-	}, p0.children)
+	}, p1.children)
 end

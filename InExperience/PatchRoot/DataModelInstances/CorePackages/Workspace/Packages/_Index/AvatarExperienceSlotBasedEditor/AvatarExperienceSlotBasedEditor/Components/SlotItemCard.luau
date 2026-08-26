@@ -13,94 +13,94 @@ local fFlagAXSlotBasedEditorCategoryTooltip = require(parent.AvatarExperienceFla
 local AXSlotBasedEditorCategoryTooltipKey = game:DefineFastString("AXSlotBasedEditorCategoryTooltipKey", "SlotEditorSecondCategory")
 local t = { dampingRatio = 1, frequency = 1 }
 
-return reactModule.forwardRef(function(p0, p1)
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), foundationModule (ref), t (ref), fFlagAXSlotBasedEditorCategoryTooltip (ref), itemCard (ref), itemCardHeader (ref), view (ref), AXTooltip (ref), AXSlotBasedEditorCategoryTooltipKey (ref), slotItemCardFooterModule (ref)
-	local var7 = useTokens()
-	local var8, var9 = reactOtterModule.useAnimatedBinding(1)
-	local var10, var11 = reactModule.useState(false)
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: foundationModule (copy), var11 (ref)
-		if p2 == foundationModule.Enums.ControlState.Default then
-			var11(false)
+	local var1 = useTokens()
+	local var2, var3 = reactOtterModule.useAnimatedBinding(1)
+	local var4, var5 = reactModule.useState(false)
+	local var6 = reactModule.useCallback(function(p3)
+		-- upvalues: foundationModule (copy), var5 (ref)
+		if p3 == foundationModule.Enums.ControlState.Default then
+			var5(false)
 			
 			return
-		elseif p2 == foundationModule.Enums.ControlState.Hover then
-			var11(true)
+		elseif p3 == foundationModule.Enums.ControlState.Hover then
+			var5(true)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var7 (ref), var9 (ref), reactOtterModule (copy), t (copy)
-		var9(reactOtterModule.spring(if var10 then var7.Color.Stroke.Emphasis.Transparency else 1, t))
-	end, { var10 })
-	local var13 = nil
-	local var14 = nil
+		-- upvalues: var4 (ref), var1 (ref), var3 (ref), reactOtterModule (copy), t (copy)
+		var3(reactOtterModule.spring(if var4 then var1.Color.Stroke.Emphasis.Transparency else 1, t))
+	end, { var4 })
+	local var7 = nil
+	local var8 = nil
 	
 	if fFlagAXSlotBasedEditorCategoryTooltip then
-		var13 = reactModule.createRef()
-		var14 = reactModule.useCallback(function()
-			-- upvalues: var13 (write), p0 (ref)
-			if var13.current then
-				var13.current()
+		var7 = reactModule.createRef()
+		var8 = reactModule.useCallback(function()
+			-- upvalues: var7 (write), p1 (ref)
+			if var7.current then
+				var7.current()
 			end
-			if p0.onActivated then
-				p0.onActivated()
+			if p1.onActivated then
+				p1.onActivated()
 			end
-		end, { p0.onActivated })
+		end, { p1.onActivated })
 	end
 	return reactModule.createElement(itemCard, {
-		Size = p0.Size or UDim2.fromOffset(var7.Size.Size_2500, 0),
-		LayoutOrder = p0.LayoutOrder,
+		Size = p1.Size or UDim2.fromOffset(var1.Size.Size_2500, 0),
+		LayoutOrder = p1.LayoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		onActivated = if fFlagAXSlotBasedEditorCategoryTooltip then var14 else p0.onActivated,
-		ref = p1,
+		onActivated = if fFlagAXSlotBasedEditorCategoryTooltip then var8 else p1.onActivated,
+		ref = p2,
 		headerSlot = reactModule.createElement(itemCardHeader, { LayoutOrder = 1, BackgroundTransparency = 1 }, reactModule.createElement(view, {
-			onStateChanged = var12,
+			onStateChanged = var6,
 			stateLayer = {
 				affordance = foundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = if fFlagAXSlotBasedEditorCategoryTooltip then var14 else p0.onActivated,
+			onActivated = if fFlagAXSlotBasedEditorCategoryTooltip then var8 else p1.onActivated,
 			Size = UDim2.fromScale(1, 1),
 			backgroundStyle = { Transparency = 1 },
 			selection = { Selectable = false },
 			padding = {
-				top = UDim.new(0, var7.Padding.XXSmall),
-				bottom = UDim.new(0, var7.Padding.XXSmall),
-				left = UDim.new(0, var7.Padding.XXSmall),
-				right = UDim.new(0, var7.Padding.XXSmall)
+				top = UDim.new(0, var1.Padding.XXSmall),
+				bottom = UDim.new(0, var1.Padding.XXSmall),
+				left = UDim.new(0, var1.Padding.XXSmall),
+				right = UDim.new(0, var1.Padding.XXSmall)
 			}
 		}, {
-			CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var7.Radius.Medium) }),
-			HeaderSlot = p0.renderHeaderSlot(),
+			CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Medium) }),
+			HeaderSlot = p1.renderHeaderSlot(),
 			HoverFrame = reactModule.createElement("Frame", {
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1),
-				BackgroundTransparency = var8
+				BackgroundTransparency = var2
 			}, {
-				CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var7.Radius.Medium) })
+				CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Medium) })
 			}),
 			BorderFrame = reactModule.createElement("Frame", {
 				Size = UDim2.fromScale(1, 1),
-				BackgroundColor3 = var7.Color.Surface.Surface_200.Color3,
-				BackgroundTransparency = p0.BackgroundTransparency or 0
+				BackgroundColor3 = var1.Color.Surface.Surface_200.Color3,
+				BackgroundTransparency = p1.BackgroundTransparency or 0
 			}, {
-				CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var7.Radius.Medium) }),
+				CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Medium) }),
 				Stroke = reactModule.createElement("UIStroke", {
-					Color = var7.Color.Stroke.Default.Color3,
-					Transparency = if p0.isActive then var7.Color.Selection.End.Transparency else var7.Color.State.Press.Transparency,
-					Thickness = var7.Stroke.Thick
+					Color = var1.Color.Stroke.Default.Color3,
+					Transparency = if p1.isActive then var1.Color.Selection.End.Transparency else var1.Color.State.Press.Transparency,
+					Thickness = var1.Stroke.Thick
 				})
 			}),
 			AXTooltip = fFlagAXSlotBasedEditorCategoryTooltip and reactModule.createElement(AXTooltip, {
 				popoverSide = "Top",
 				tooltipLocalizationKey = "Feature.Avatar.Tooltip.CustomizeOverhaulSubcategories",
 				tooltipStorageKey = AXSlotBasedEditorCategoryTooltipKey,
-				dismissTooltipRef = var13,
-				showTooltip = p0.showSecondCategoryTooltip
+				dismissTooltipRef = var7,
+				showTooltip = p1.showSecondCategoryTooltip
 			})
 		})),
 		footerSlot = reactModule.createElement(slotItemCardFooterModule, {
 			LayoutOrder = 2,
-			title = p0.title,
+			title = p1.title,
 			TextXAlignment = Enum.TextXAlignment.Center
 		})
 	})

@@ -30,9 +30,9 @@ function t:getIXPVariant()
 	if self._layer_data == nil then
 		self._layer_data = experimentCacheManager.default:getLayerVariables(luaAppIECVRLayerName) or {}
 	end
-	local var15 = self._layer_data[luaAppIECVRVariantKey] or nil
+	local var1 = self._layer_data[luaAppIECVRVariantKey] or nil
 	
-	return if var15 == nil then luaAppIECVRVariantNoSpatialUI else tonumber(var15)
+	return if var1 == nil then luaAppIECVRVariantNoSpatialUI else tonumber(var1)
 end
 
 function t.isDependencyFlagsEnabled()

@@ -1,6 +1,6 @@
-﻿return function(value, p0, p1)
-	if value[p0] == nil then
-		value[p0] = p1(value, p0)
+﻿return function(value, p1, p2)
+	if value[p1] == nil then
+		value[p1] = p2(value, p1)
 	end
-	return value[p0]
+	return value[p1]
 end

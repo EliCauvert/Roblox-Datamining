@@ -4,136 +4,136 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0)
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
-		id = if p0 == nil or p0.id == nil then "" else p0.id,
-		name = if p0 == nil or p0.name == nil then "" else p0.name,
-		creator_name = if p0 == nil or p0.creator_name == nil then "" else p0.creator_name,
-		creator_has_verified_badge = if p0 == nil or p0.creator_has_verified_badge == nil then false else p0.creator_has_verified_badge,
-		asset_type = if p0 == nil or p0.asset_type == nil then "" else p0.asset_type,
-		price = if p0 == nil or p0.price == nil then 0 else p0.price
+		id = if p1 == nil or p1.id == nil then "" else p1.id,
+		name = if p1 == nil or p1.name == nil then "" else p1.name,
+		creator_name = if p1 == nil or p1.creator_name == nil then "" else p1.creator_name,
+		creator_has_verified_badge = if p1 == nil or p1.creator_has_verified_badge == nil then false else p1.creator_has_verified_badge,
+		asset_type = if p1 == nil or p1.asset_type == nil then "" else p1.asset_type,
+		price = if p1 == nil or p1.price == nil then 0 else p1.price
 	}, t_1)
 end
 
 function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var5 = 0
+	local var1 = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var6, var7 = protoModule.writeTag(buff, var5, 1, protoModule.wireTypes.lengthDelimited)
-		var6, var7 = protoModule.writeString(var6, var7, self.id)
-		buff = var6
-		var5 = var7
+		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
+		var2, var7 = protoModule.writeString(var2, var3, self.id)
+		buff = var2
+		var1 = var3
 	end
 	if self.name ~= nil and self.name ~= "" then
-		local var8, var9 = protoModule.writeTag(buff, var5, 2, protoModule.wireTypes.lengthDelimited)
-		var8, var9 = protoModule.writeString(var8, var9, self.name)
-		buff = var8
-		var5 = var9
+		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
+		var4, var9 = protoModule.writeString(var4, var5, self.name)
+		buff = var4
+		var1 = var5
 	end
 	if self.creator_name ~= nil and self.creator_name ~= "" then
-		local var10, var11 = protoModule.writeTag(buff, var5, 3, protoModule.wireTypes.lengthDelimited)
-		var10, var11 = protoModule.writeString(var10, var11, self.creator_name)
-		buff = var10
-		var5 = var11
+		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
+		var6, var11 = protoModule.writeString(var6, var7, self.creator_name)
+		buff = var6
+		var1 = var7
 	end
 	if self.creator_has_verified_badge then
-		local var12, var13 = protoModule.writeTag(buff, var5, 4, protoModule.wireTypes.varint)
-		var12, var13 = protoModule.writeVarInt(var12, var13, if self.creator_has_verified_badge then 1 else 0)
-		buff = var12
-		var5 = var13
+		local var8, var9 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.varint)
+		var8, var13 = protoModule.writeVarInt(var8, var9, if self.creator_has_verified_badge then 1 else 0)
+		buff = var8
+		var1 = var9
 	end
 	if self.asset_type ~= nil and self.asset_type ~= "" then
-		local var14, var15 = protoModule.writeTag(buff, var5, 5, protoModule.wireTypes.lengthDelimited)
-		var14, var15 = protoModule.writeString(var14, var15, self.asset_type)
-		buff = var14
-		var5 = var15
+		local var10, var11 = protoModule.writeTag(buff, var1, 5, protoModule.wireTypes.lengthDelimited)
+		var10, var15 = protoModule.writeString(var10, var11, self.asset_type)
+		buff = var10
+		var1 = var11
 	end
 	if self.price ~= nil and self.price ~= 0 then
-		local var16, var17 = protoModule.writeTag(buff, var5, 6, protoModule.wireTypes.varint)
-		var16, var17 = protoModule.writeVarInt(var16, var17, self.price)
-		buff = var16
-		var5 = var17
+		local var12, var13 = protoModule.writeTag(buff, var1, 6, protoModule.wireTypes.varint)
+		var12, var17 = protoModule.writeVarInt(var12, var13, self.price)
+		buff = var12
+		var1 = var13
 	end
-	local buff_1 = buffer.create(var5)
-	buffer.copy(buff_1, 0, buff, 0, var5)
+	local buff_1 = buffer.create(var1)
+	buffer.copy(buff_1, 0, buff, 0, var1)
 	
 	return buff_1
 end
 
 function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
-	local var19 = t_1.new()
-	local var20 = 0
-	while var20 < buffer.len(p1) do
+	local var1 = t_1.new()
+	local var2 = 0
+	while var2 < buffer.len(p1) do
 		local _ = nil
-		local var21 = nil
-		local var22, var23, var24 = protoModule.readTag(p1, var20)
-		local var25 = var22
-		var21 = var23
-		var20 = var24
+		local var3 = nil
+		local var4, var5, var6 = protoModule.readTag(p1, var2)
+		local var7 = var4
+		var3 = var5
+		var2 = var6
 		
-		if var21 == protoModule.wireTypes.varint then
-			if var25 == 4 then
+		if var3 == protoModule.wireTypes.varint then
+			if var7 == 4 then
 				local _ = nil
-				local var26, var27 = protoModule.readVarInt(p1, var20)
-				var20 = var27
-				var19.creator_has_verified_badge = var26 ~= 0
-			elseif var25 == 6 then
+				local var8, var9 = protoModule.readVarInt(p1, var2)
+				var2 = var9
+				var1.creator_has_verified_badge = var8 ~= 0
+			elseif var7 == 6 then
 				local _ = nil
-				local var28, var29 = protoModule.readVarIntI64(p1, var20)
-				var20 = var29
-				var19.price = var28
+				local var10, var11 = protoModule.readVarIntI64(p1, var2)
+				var2 = var11
+				var1.price = var10
 			else
 				local _ = nil
-				local var30, var31 = protoModule.readVarInt(p1, var20)
-				local _ = var30
-				var20 = var31
+				local var12, var13 = protoModule.readVarInt(p1, var2)
+				local _ = var12
+				var2 = var13
 			end
 		end
-		if var21 == protoModule.wireTypes.lengthDelimited then
-			if var25 == 1 then
+		if var3 == protoModule.wireTypes.lengthDelimited then
+			if var7 == 1 then
 				local _ = nil
-				local var32, var33 = protoModule.readBuffer(p1, var20)
-				var20 = var33
-				var19.id = buffer.tostring(var32)
-			elseif var25 == 2 then
+				local var14, var15 = protoModule.readBuffer(p1, var2)
+				var2 = var15
+				var1.id = buffer.tostring(var14)
+			elseif var7 == 2 then
 				local _ = nil
-				local var34, var35 = protoModule.readBuffer(p1, var20)
-				var20 = var35
-				var19.name = buffer.tostring(var34)
-			elseif var25 == 3 then
+				local var16, var17 = protoModule.readBuffer(p1, var2)
+				var2 = var17
+				var1.name = buffer.tostring(var16)
+			elseif var7 == 3 then
 				local _ = nil
-				local var36, var37 = protoModule.readBuffer(p1, var20)
-				var20 = var37
-				var19.creator_name = buffer.tostring(var36)
-			elseif var25 == 5 then
+				local var18, var19 = protoModule.readBuffer(p1, var2)
+				var2 = var19
+				var1.creator_name = buffer.tostring(var18)
+			elseif var7 == 5 then
 				local _ = nil
-				local var38, var39 = protoModule.readBuffer(p1, var20)
-				var20 = var39
-				var19.asset_type = buffer.tostring(var38)
+				local var20, var21 = protoModule.readBuffer(p1, var2)
+				var2 = var21
+				var1.asset_type = buffer.tostring(var20)
 			else
 				local _ = nil
-				local var40, var41 = protoModule.readVarInt(p1, var20)
-				var20 = var41 + var40
+				local var22, var23 = protoModule.readVarInt(p1, var2)
+				var2 = var23 + var22
 			end
-		elseif var21 == protoModule.wireTypes.i32 then
+		elseif var3 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var42, var43 = protoModule.readFixed32(p1, var20)
-			local _ = var42
-			var20 = var43
-		elseif var21 == protoModule.wireTypes.i64 then
+			local var24, var25 = protoModule.readFixed32(p1, var2)
+			local _ = var24
+			var2 = var25
+		elseif var3 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var44, var45 = protoModule.readFixed64(p1, var20)
-			local _ = var44
-			var20 = var45
+			local var26, var27 = protoModule.readFixed64(p1, var2)
+			local _ = var26
+			var2 = var27
 		else
 			error("Unsupported wire type: " .. var21)
 		end
 	end
-	return var19
+	return var1
 end
 
 function t_1:jsonEncode()
@@ -162,36 +162,36 @@ end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
-	local var47 = t_1.new()
+	local var28 = t_1.new()
 	
 	if self.id ~= nil then
-		var47.id = self.id
+		var28.id = self.id
 	end
 	if self.name ~= nil then
-		var47.name = self.name
+		var28.name = self.name
 	end
 	if self.creator_name ~= nil then
-		var47.creator_name = self.creator_name
+		var28.creator_name = self.creator_name
 	end
 	if self.creatorName ~= nil then
-		var47.creator_name = self.creatorName
+		var28.creator_name = self.creatorName
 	end
 	if self.creator_has_verified_badge ~= nil then
-		var47.creator_has_verified_badge = self.creator_has_verified_badge
+		var28.creator_has_verified_badge = self.creator_has_verified_badge
 	end
 	if self.creatorHasVerifiedBadge ~= nil then
-		var47.creator_has_verified_badge = self.creatorHasVerifiedBadge
+		var28.creator_has_verified_badge = self.creatorHasVerifiedBadge
 	end
 	if self.asset_type ~= nil then
-		var47.asset_type = self.asset_type
+		var28.asset_type = self.asset_type
 	end
 	if self.assetType ~= nil then
-		var47.asset_type = self.assetType
+		var28.asset_type = self.assetType
 	end
 	if self.price ~= nil then
-		var47.price = self.price
+		var28.price = self.price
 	end
-	return var47
+	return var28
 end
 
 t_1.descriptor = {

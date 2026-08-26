@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if typeof(p0) == "table" and p0.assetId ~= nil then Content.fromUri(`rbxthumb://type=Asset&id={p0.assetId}&w=420&h=420`) else Content.fromObject(p0)
+﻿return function(p1)
+	return if typeof(p1) == "table" and p1.assetId ~= nil then Content.fromUri(`rbxthumb://type=Asset&id={p1.assetId}&w=420&h=420`) else Content.fromObject(p1)
 end

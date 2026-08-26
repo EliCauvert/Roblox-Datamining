@@ -28,88 +28,88 @@ local t_1 = {
 	items = {}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: object (ref), t_1 (ref), useStyleModule (ref), foundationModule (ref), UIBloxConfigModule (ref), reactModule (ref), useInputTypeModule (ref), reactOtterModule (ref), useDelayedActionHandler (ref), t (ref), utilitiesModule (ref), useEventConnection (ref), userInputService (ref), shortcutModule (ref)
-	local var12 = object.assign({}, t_1, p0)
-	local var13 = useStyleModule()
-	local var14 = foundationModule.Hooks.useTokens()
+	local var1 = object.assign({}, t_1, p1)
+	local var2 = useStyleModule()
+	local var3 = foundationModule.Hooks.useTokens()
 	local spacingTop = nil
 	local spacingTrailing = nil
 	local spacingBottom = nil
 	local spacingLeading = nil
 	local itemsGap = nil
 	local itemIconLabelGap = nil
-	local var21 = nil
+	local var4 = nil
 	
 	if UIBloxConfigModule.useTokenizedShortcutBar then
-		spacingTop = p0.spacingTop or var14.Padding.Small
-		spacingTrailing = p0.spacingTrailing or var14.Padding.XLarge
-		spacingBottom = p0.spacingBottom or var14.Padding.Small
-		spacingLeading = p0.spacingLeading or var14.Padding.Medium
-		itemsGap = p0.itemsGap or var14.Gap.Large
-		itemIconLabelGap = p0.itemIconLabelGap or var14.Gap.XSmall
-		var21 = p0.actionTextSpacingLeading or var14.Padding.Small
+		spacingTop = p1.spacingTop or var3.Padding.Small
+		spacingTrailing = p1.spacingTrailing or var3.Padding.XLarge
+		spacingBottom = p1.spacingBottom or var3.Padding.Small
+		spacingLeading = p1.spacingLeading or var3.Padding.Medium
+		itemsGap = p1.itemsGap or var3.Gap.Large
+		itemIconLabelGap = p1.itemIconLabelGap or var3.Gap.XSmall
+		var4 = p1.actionTextSpacingLeading or var3.Padding.Small
 	end
 	local t_2 = {
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, spacingTop or var12.spacingTop),
-			PaddingRight = UDim.new(0, spacingTrailing or var12.spacingTrailing),
-			PaddingBottom = UDim.new(0, spacingBottom or var12.spacingBottom),
-			PaddingLeft = UDim.new(0, spacingLeading or var12.spacingLeading)
+			PaddingTop = UDim.new(0, spacingTop or var1.spacingTop),
+			PaddingRight = UDim.new(0, spacingTrailing or var1.spacingTrailing),
+			PaddingBottom = UDim.new(0, spacingBottom or var1.spacingBottom),
+			PaddingLeft = UDim.new(0, spacingLeading or var1.spacingLeading)
 		}),
 		ListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, itemsGap or var12.itemsGap)
+			Padding = UDim.new(0, itemsGap or var1.itemsGap)
 		})
 	}
-	local var23 = useInputTypeModule()
-	local var24, var25 = reactOtterModule.useAnimatedBinding(0)
-	local var26 = useDelayedActionHandler(if var12.transitionDelaySeconds then var12.transitionDelaySeconds else 0, 0.1, function()
-		-- upvalues: var25 (ref), reactOtterModule (copy), t (copy)
-		var25(reactOtterModule.spring(0, t))
+	local var5 = useInputTypeModule()
+	local var6, var7 = reactOtterModule.useAnimatedBinding(0)
+	local var8 = useDelayedActionHandler(if var1.transitionDelaySeconds then var1.transitionDelaySeconds else 0, 0.1, function()
+		-- upvalues: var7 (ref), reactOtterModule (copy), t (copy)
+		var7(reactOtterModule.spring(0, t))
 	end)
 	
 	local function onInputChanged()
-		-- upvalues: var12 (ref), var25 (ref), reactOtterModule (copy), t (copy), var26 (ref)
-		if var12.transitionDelaySeconds then
-			var25(reactOtterModule.spring(1, t))
-			var26()
+		-- upvalues: var1 (ref), var7 (ref), reactOtterModule (copy), t (copy), var8 (ref)
+		if var1.transitionDelaySeconds then
+			var7(reactOtterModule.spring(1, t))
+			var8()
 		end
 	end
 	
-	local var28, var29 = reactModule.useState(utilitiesModule.filterItems(var12.items, var23))
+	local var9, var10 = reactModule.useState(utilitiesModule.filterItems(var1.items, var5))
 	useEventConnection(userInputService.InputChanged, onInputChanged)
 	reactModule.useEffect(function()
-		-- upvalues: var29 (ref), utilitiesModule (copy), var12 (ref), var23 (ref)
-		var29(utilitiesModule.filterItems(var12.items, var23))
-	end, { var23, var12.items })
+		-- upvalues: var10 (ref), utilitiesModule (copy), var1 (ref), var5 (ref)
+		var10(utilitiesModule.filterItems(var1.items, var5))
+	end, { var5, var1.items })
 	
-	for i, v in ipairs(var28) do
+	for i, v in ipairs(var9) do
 		t_2["Item" .. tostring(i)] = reactModule.createElement(shortcutModule, {
 			index = i,
-			iconLabelGap = itemIconLabelGap or var12.itemIconLabelGap,
-			actionTextSpacingLeading = var21 or var12.actionTextSpacingLeading,
+			iconLabelGap = itemIconLabelGap or var1.itemIconLabelGap,
+			actionTextSpacingLeading = var4 or var1.actionTextSpacingLeading,
 			publicProps = v
 		})
 	end
-	if #var28 > 0 then
-		local var30 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var13.Tokens.Color.OverMedia.OverMedia_0 else var13.Tokens.Semantic.Color.BackgroundUi.Contrast
+	if #var9 > 0 then
+		local var11 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Color.OverMedia.OverMedia_0 else var2.Tokens.Semantic.Color.BackgroundUi.Contrast
 		
 		return reactModule.createElement("CanvasGroup", {
 			BackgroundTransparency = 1,
-			Position = var12.position,
-			AnchorPoint = var12.anchorPoint,
-			GroupTransparency = if var12.transitionDelaySeconds then var24 else 0,
+			Position = var1.position,
+			AnchorPoint = var1.anchorPoint,
+			GroupTransparency = if var1.transitionDelaySeconds then var6 else 0,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
 			ShortcutBarComponent = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.fromOffset(0, 0),
-				BackgroundColor3 = var30.Color3,
-				BackgroundTransparency = var30.Transparency,
+				BackgroundColor3 = var11.Color3,
+				BackgroundTransparency = var11.Transparency,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, t_2)
 		})

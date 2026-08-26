@@ -2,27 +2,27 @@
 local appPage = require(parent.RobloxAppEnums).AppPage
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var0 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0, p1, p2, p3)
-	-- upvalues: appPage (ref), fFlagSignalsNavP3Dispatch (ref), var0 (ref), navigateDown (ref)
-	return function(p4)
-		-- upvalues: appPage (copy), p0 (ref), p1 (ref), p2 (ref), p3 (ref), fFlagSignalsNavP3Dispatch (copy), var0 (copy), navigateDown (copy)
+return function(p1, p2, p3, p4)
+	-- upvalues: appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	return function(p5)
+		-- upvalues: appPage (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
 		local t = {
 			name = appPage.GameFilterMenuPeekView,
 			extraProps = {
-				filter = p0,
-				onFilterApplied = p1,
-				onFilterMenuClosed = p2,
-				sendFilterClick = p3
+				filter = p1,
+				onFilterApplied = p2,
+				onFilterMenuClosed = p3,
+				sendFilterClick = p4
 			}
 		}
 		
 		if fFlagSignalsNavP3Dispatch then
-			var0.down(var0.fromLegacyPage(t))
+			var1.down(var1.fromLegacyPage(t))
 			
 			return
 		end
-		p4:dispatch(navigateDown(t))
+		p5:dispatch(navigateDown(t))
 	end
 end

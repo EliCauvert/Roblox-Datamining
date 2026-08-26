@@ -6,9 +6,9 @@ function t.new()
 	local bindableEvent = Instance.new("BindableEvent")
 	local t_1 = {
 		FullscreenChanged = {
-			Connect = function(_, p0)
+			Connect = function(_, p1)
 				-- upvalues: bindableEvent (ref)
-				return bindableEvent.Event:Connect(p0)
+				return bindableEvent.Event:Connect(p1)
 			end,
 			GoFullscreen = function()
 				-- upvalues: bindableEvent (ref)

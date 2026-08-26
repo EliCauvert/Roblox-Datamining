@@ -5,15 +5,15 @@ local getFFlagEnableARFlowSessionModule = require(parent.Flags.GetFFlagEnableARF
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 
 return {
-	startAbuseReportSession = function(p0)
+	startAbuseReportSession = function(p1)
 		-- upvalues: getFFlagEnableARFlowSessionModule (ref), sessionService (ref), constantsModule (ref), sendAnalyticsModule (ref)
 		if getFFlagEnableARFlowSessionModule() then
 			if not sessionService:SessionExists(constantsModule.Session.StructuralIdentifier.AbuseReport) then
 				sessionService:SetSession(constantsModule.Session.StructuralIdentifier.Level1, constantsModule.Session.StructuralIdentifier.AbuseReport, constantsModule.Session.StructuralIdentifier.AbuseReport)
 			end
-			sessionService:SetMetadata(constantsModule.Session.StructuralIdentifier.AbuseReport, constantsModule.Session.Metadata.EntryPoint, p0)
+			sessionService:SetMetadata(constantsModule.Session.StructuralIdentifier.AbuseReport, constantsModule.Session.Metadata.EntryPoint, p1)
 			sessionService:SetMetadata(constantsModule.Session.StructuralIdentifier.AbuseReport, constantsModule.Session.Metadata.DeleteOnGameLeave, "True")
-			sendAnalyticsModule(constantsModule.Analytics.ReportFlowOpened, constantsModule.Analytics.ReportFlowOpened, { source = p0 })
+			sendAnalyticsModule(constantsModule.Analytics.ReportFlowOpened, constantsModule.Analytics.ReportFlowOpened, { source = p1 })
 		end
 	end,
 	endAbuseReportSession = function()

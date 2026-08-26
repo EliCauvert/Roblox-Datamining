@@ -3,62 +3,62 @@ local name = require(inlineRichText.Logger):new(script.Name)
 local cryoModule = require(inlineRichText.Parent.Cryo)
 local t = {}
 
-local function _(p0, p1)
-	return `${p0}___${p1}`
+local function _(p1, p2)
+	return `${p1}___${p2}`
 end
 
-local _ = function(p2, p3, p4)
+local _ = function(p1, p2, p3)
 	-- upvalues: t (ref)
-	return t[p2][`${p3}___${p4}`]
+	return t[p1][`${p2}___${p3}`]
 end
 
-local _ = function(value, p5, p6, p7)
+local _ = function(value, p1, p2, p3)
 	-- upvalues: t (ref)
-	t[value][`${p5}___${p6}`] = p7
+	t[value][`${p1}___${p2}`] = p3
 end
 
-return function(p8, p9, p10, p11)
+return function(p1, p2, p3, p4)
 	-- upvalues: t (ref), name (ref), cryoModule (ref)
-	if not t[p9] then
-		t[p9] = {}
+	if not t[p2] then
+		t[p2] = {}
 	end
 	local t_1 = {}
 	
-	local function dfs(p12)
-		-- upvalues: t_1 (ref), p9 (ref), p11 (ref), t (copy), p8 (ref), name (copy), cryoModule (copy), dfs (ref)
-		t_1[p12] = true
-		local var6 = t[p9][`${p12}___${p11}`]
+	local function dfs(p5)
+		-- upvalues: t_1 (ref), p2 (ref), p4 (ref), t (copy), p1 (ref), name (copy), cryoModule (copy), dfs (ref)
+		t_1[p5] = true
+		local var1 = t[p2][`${p5}___${p4}`]
 		
-		if var6 ~= nil then
-			return var6
+		if var1 ~= nil then
+			return var1
 		end
-		local var7 = p8[p12]
+		local var2 = p1[p5]
 		
-		if not var7 then
-			name:error(`Node {p12} not found in graph`)
-			t[p9][`${p12}___${p11}`] = false
+		if not var2 then
+			name:error(`Node {p5} not found in graph`)
+			t[p2][`${p5}___${p4}`] = false
 			
 			return false
-		elseif var7.children[p11] then
-			t[p9][`${p12}___${p11}`] = true
+		elseif var2.children[p4] then
+			t[p2][`${p5}___${p4}`] = true
 			
 			return true
 		end
-		local var8 = false
+		local var3 = false
 		
-		for i, v in cryoModule.List.filter(cryoModule.Dictionary.keys(var7.children), function(p13)
-			-- upvalues: t_1 (copy), var7 (ref)
-			return t_1[p13] or not var7.children[p13]
+		for i, v in cryoModule.List.filter(cryoModule.Dictionary.keys(var2.children), function(p6)
+			-- upvalues: t_1 (copy), var2 (ref)
+			return t_1[p6] or not var2.children[p6]
 		end) do
 			if dfs(v) then
-				var8 = true
+				var3 = true
 				break
 			end
 		end
-		t[p9][`${p12}___${p11}`] = var8
+		t[p2][`${p5}___${p4}`] = var3
 		
-		return var8
+		return var3
 	end
 	
-	return dfs(p10)
+	return dfs(p3)
 end

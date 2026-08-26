@@ -4,29 +4,29 @@ local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), iconSize (ref)
-	local var2 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-xy row align-x-center align-y-center bg-surface-300 radius-circle padding-small gap-xsmall",
 		BorderSizePixel = 0,
 		Text = "",
-		LayoutOrder = p0.LayoutOrder,
-		onActivated = p0.onActivated
+		LayoutOrder = p1.LayoutOrder,
+		onActivated = p1.onActivated
 	}, {
 		Icon = reactModule.createElement(foundationModule.Icon, {
 			LayoutOrder = 1,
-			name = p0.icon,
-			variant = p0.iconVariant,
+			name = p1.icon,
+			variant = p1.iconVariant,
 			size = iconSize.Medium,
-			style = var2.Color.Content.Default
+			style = var1.Color.Content.Default
 		}),
-		Text = if p0.text then reactModule.createElement(foundationModule.Text, {
+		Text = if p1.text then reactModule.createElement(foundationModule.Text, {
 			tag = "text-caption-large content-emphasis text-align-x-left auto-xy text-truncate-none",
 			LayoutOrder = 2,
-			Text = p0.text,
-			textStyle = var2.Color.Content.Default
+			Text = p1.text,
+			textStyle = var1.Color.Content.Default
 		}) else nil
 	})
 end

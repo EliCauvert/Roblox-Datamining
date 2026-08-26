@@ -3,7 +3,7 @@ local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
 
 return function()
 	-- upvalues: promiseModule (ref), playersService (ref)
-	return promiseModule.new(function(p0, p1)
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: playersService (copy)
 		local ok, status = pcall(function()
 			-- upvalues: playersService (copy)
@@ -11,10 +11,10 @@ return function()
 		end)
 		
 		if ok then
-			p0(status)
+			p1(status)
 			
 			return
 		end
-		p1()
+		p2()
 	end)
 end

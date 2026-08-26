@@ -22,27 +22,27 @@ end
 
 local t = {}
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), sduiBuilderModule (ref), compareSduiAnalyticsContextModule (ref), t (ref), parsePropsModule (ref), sduiBuilderProcessingPhase (ref), cryoModule (ref), sduiErrorType (ref), SduiErrorComponent (ref)
-	local componentConfig = p0.componentConfig
+	local componentConfig = p1.componentConfig
 	local componentType = componentConfig.componentType
-	local sduiContext = p0.sduiContext
-	local debugName = p0.debugName
-	local parentAnalyticsContext = p0.parentAnalyticsContext
-	local localAnalyticsData = p0.localAnalyticsData
-	local extraLocalProps = p0.extraLocalProps
-	local var10 = reactModule.useRef(nil)
+	local sduiContext = p1.sduiContext
+	local debugName = p1.debugName
+	local parentAnalyticsContext = p1.parentAnalyticsContext
+	local localAnalyticsData = p1.localAnalyticsData
+	local extraLocalProps = p1.extraLocalProps
+	local var1 = reactModule.useRef(nil)
 	
-	if var10.current == nil then
-		var10.current = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
+	if var1.current == nil then
+		var1.current = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
 	else
-		local var11 = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
+		local var2 = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
 		
-		if not compareSduiAnalyticsContextModule(var10.current, var11) then
-			var10.current = var11
+		if not compareSduiAnalyticsContextModule(var1.current, var2) then
+			var1.current = var2
 		end
 	end
-	local current = var10.current
+	local current = var1.current
 	local cloned = table.clone(componentConfig.props or t)
 	parsePropsModule(componentType, cloned, debugName, sduiContext, current, nil, sduiBuilderProcessingPhase.Render)
 	
@@ -53,12 +53,12 @@ return reactModule.memo(function(p0)
 	cloned.sduiContext = sduiContext
 	cloned.debugName = debugName
 	cloned.analyticsContext = current
-	local var13 = sduiContext.componentDefinitions:getComponent(componentType)
+	local var3 = sduiContext.componentDefinitions:getComponent(componentType)
 	
-	if var13 == nil then
+	if var3 == nil then
 		sduiContext.dependencies.logger.reportError(sduiErrorType.NoComponentRegistered, { componentType = componentType, name = debugName }, sduiContext.appPage)
 		
 		return reactModule.createElement(SduiErrorComponent)
 	end
-	return reactModule.createElement(var13, cloned)
+	return reactModule.createElement(var3, cloned)
 end, compareSduiPropsModule)

@@ -2,13 +2,13 @@
 
 return function()
 	-- upvalues: createSignal (ref)
-	local var0, var1 = createSignal(false)
-	local var2, var3 = createSignal(false)
+	local var1, var2 = createSignal(false)
+	local var3, var4 = createSignal(false)
 	
 	return {
-		getEnabled = var0,
-		setEnabled = var1,
-		getStatusIndicatorEnabled = var2,
-		setStatusIndicatorEnabled = var3
+		getEnabled = var1,
+		setEnabled = var2,
+		getStatusIndicatorEnabled = var3,
+		setStatusIndicatorEnabled = var4
 	}
 end

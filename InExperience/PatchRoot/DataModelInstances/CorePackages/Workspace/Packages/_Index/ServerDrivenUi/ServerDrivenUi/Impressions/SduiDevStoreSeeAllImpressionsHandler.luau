@@ -12,43 +12,43 @@ local sduiMarketplaceItemImpressionsHandlerModule = require(serverDrivenUi.Impre
 local marketplaceUnifiedItemType = unifiedEventLogEnums.MarketplaceUnifiedItemType
 local tbl = setmetatable({}, { __mode = "k" })
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: findAnalyticsFieldInAncestors (ref), marketplaceUnifiedItemType (ref), sduiMarketplaceItemImpressionsHandlerModule (ref), sduiLogger (ref), sduiErrors (ref), tbl (ref), edpStoreAnalyticsLogger (ref), storeEnums (ref)
-	if #p1 == 0 then return end
-	local t = { analyticsData = p3 }
-	local var6 = findAnalyticsFieldInAncestors("itemType", t)
+	if #p2 == 0 then return end
+	local t = { analyticsData = p4 }
+	local var1 = findAnalyticsFieldInAncestors("itemType", t)
 	
-	if if var6 ~= nil then nil else marketplaceUnifiedItemType[var6] then
-		sduiMarketplaceItemImpressionsHandlerModule(p0, p1, p2, p3, p4, p5)
+	if if var1 ~= nil then nil else marketplaceUnifiedItemType[var1] then
+		sduiMarketplaceItemImpressionsHandlerModule(p1, p2, p3, p4, p5, p6)
 	end
-	local var7 = findAnalyticsFieldInAncestors("experienceStoreProductType", t)
+	local var2 = findAnalyticsFieldInAncestors("experienceStoreProductType", t)
 	
-	if not var7 then
+	if not var2 then
 		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogExperienceStoreImpressions, {
 			name = "SduiDevStoreSeeAllImpressionsHandler",
 			message = "Missing experienceStoreProductType on collectionAnalyticsData"
-		}, p0.appPage)
+		}, p1.appPage)
 		
 		return
 	end
-	local var8 = tostring(var7)
-	local var9 = tbl[p0]
+	local var3 = tostring(var2)
+	local var4 = tbl[p1]
 	
-	if not var9 then
-		var9 = {}
-		tbl[p0] = var9
+	if not var4 then
+		var4 = {}
+		tbl[p1] = var4
 	end
-	if var9[var8] then
+	if var4[var3] then
 		return
 	end
-	var9[var8] = true
-	local var10 = findAnalyticsFieldInAncestors("universeId", t)
+	var4[var3] = true
+	local var5 = findAnalyticsFieldInAncestors("universeId", t)
 	edpStoreAnalyticsLogger.logImpression({
 		layoutOrder = 1,
 		actionType = storeEnums.ActionType.Impression,
-		productType = var7,
+		productType = var2,
 		locationType = findAnalyticsFieldInAncestors("edpLocationType", t),
-		universeId = if var10 ~= nil then nil else tonumber(tostring(var10))
+		universeId = if var5 ~= nil then nil else tonumber(tostring(var5))
 	})
 	edpStoreAnalyticsLogger.logExperienceStoreExposure()
 end

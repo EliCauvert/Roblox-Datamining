@@ -10,8 +10,8 @@ local friendRequestDeclinedModule = require(actions.FriendRequestDeclined)
 local _ = require(parent.roduxFriendsTypes)
 local t = {}
 
-local function _(p0)
-	return if p0 == "NotFriends" then Enum.FriendStatus.NotFriend elseif p0 == "Friends" then Enum.FriendStatus.Friend elseif p0 == "RequestSent" then Enum.FriendStatus.FriendRequestSent elseif p0 == "RequestReceived" then Enum.FriendStatus.FriendRequestReceived else Enum.FriendStatus.Unknown
+local function _(p1)
+	return if p1 == "NotFriends" then Enum.FriendStatus.NotFriend elseif p1 == "Friends" then Enum.FriendStatus.Friend elseif p1 == "RequestSent" then Enum.FriendStatus.FriendRequestSent elseif p1 == "RequestReceived" then Enum.FriendStatus.FriendRequestReceived else Enum.FriendStatus.Unknown
 end
 
 local function difference(p1, p2)
@@ -24,12 +24,12 @@ local function difference(p1, p2)
 		t[v_1] = nil
 	end
 	local t_1 = {}
-	local var10 = 0
+	local var1 = 0
 	
 	for i_2, v_2 in pairs(p1) do
 		if t[v_2] then
-			var10 += 1
-			t_1[var10] = v_2
+			var1 += 1
+			t_1[var1] = v_2
 		end
 	end
 	return t_1
@@ -62,109 +62,109 @@ return function(p3)
 		end,
 		[friendsNetworking.GetExtendedFriendshipStatus.Succeeded.name] = function(p8, p9)
 			-- upvalues: llamaModule (copy)
-			local var13 = tostring(p9.ids[1])
+			local var2 = tostring(p9.ids[1])
 			local join = llamaModule.Dictionary.join
 			local t = {}
 			local status = p9.responseBody.status
-			t[var13] = if status == "NotFriends" then Enum.FriendStatus.NotFriend elseif status == "Friends" then Enum.FriendStatus.Friend elseif status == "RequestSent" then Enum.FriendStatus.FriendRequestSent elseif status == "RequestReceived" then Enum.FriendStatus.FriendRequestReceived else Enum.FriendStatus.Unknown
+			t[var2] = if status == "NotFriends" then Enum.FriendStatus.NotFriend elseif status == "Friends" then Enum.FriendStatus.Friend elseif status == "RequestSent" then Enum.FriendStatus.FriendRequestSent elseif status == "RequestReceived" then Enum.FriendStatus.FriendRequestReceived else Enum.FriendStatus.Unknown
 			
 			return join(p8, t)
 		end,
-		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p10, p11)
+		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p8, p9)
 			-- upvalues: llamaModule (copy), difference (copy)
-			local var15 = llamaModule.Dictionary.keys(llamaModule.Dictionary.filter(p10, function(p12)
-				return p12 == Enum.FriendStatus.Friend
+			local var2 = llamaModule.Dictionary.keys(llamaModule.Dictionary.filter(p8, function(p10)
+				return p10 == Enum.FriendStatus.Friend
 			end))
-			local var16 = llamaModule.List.map(llamaModule.Dictionary.values(p11.responseBody.data), function(p13)
-				return tostring(p13.id)
+			local var3 = llamaModule.List.map(llamaModule.Dictionary.values(p9.responseBody.data), function(p10)
+				return tostring(p10.id)
 			end)
-			local var17 = difference(var15, var16)
+			local var4 = difference(var2, var3)
 			
-			for i, v in pairs(difference(var16, var15)) do
-				p10 = llamaModule.Dictionary.join(p10, { [v] = Enum.FriendStatus.Friend })
+			for i, v in pairs(difference(var3, var2)) do
+				p8 = llamaModule.Dictionary.join(p8, { [v] = Enum.FriendStatus.Friend })
 			end
-			for i, v_1 in pairs(var17) do
-				p10 = llamaModule.Dictionary.join(p10, { [v_1] = Enum.FriendStatus.Unknown })
+			for i, v_1 in pairs(var4) do
+				p8 = llamaModule.Dictionary.join(p8, { [v_1] = Enum.FriendStatus.Unknown })
 			end
-			return p10
+			return p8
 		end,
-		[friendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p14, p15)
+		[friendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p10, p11)
 			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p14, {
-				[tostring(p15.namedIds.users)] = Enum.FriendStatus.NotFriend
+			return llamaModule.Dictionary.join(p10, {
+				[tostring(p11.namedIds.users)] = Enum.FriendStatus.NotFriend
 			})
 		end,
-		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p16, p17)
+		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p10, p11)
 			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p16, { [tostring(p17.ids[1])] = Enum.FriendStatus.Friend })
+			return llamaModule.Dictionary.join(p10, { [tostring(p11.ids[1])] = Enum.FriendStatus.Friend })
 		end,
-		[friendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p18, p19)
+		[friendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p10, p11)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
-			for i, v in pairs(p19.ids) do
+			for i, v in pairs(p11.ids) do
 				t[tostring(v)] = Enum.FriendStatus.NotFriend
 			end
-			return llamaModule.Dictionary.join(p18, t)
+			return llamaModule.Dictionary.join(p10, t)
 		end,
-		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p20, p21)
+		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p12, p13)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
-			for i, v in pairs(p21.responseBody.data) do
+			for i, v in pairs(p13.responseBody.data) do
 				t[tostring(v.id)] = Enum.FriendStatus.FriendRequestReceived
 			end
-			return llamaModule.Dictionary.join(p20, t)
+			return llamaModule.Dictionary.join(p12, t)
 		end,
-		[friendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function(p22)
+		[friendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function(p14)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
-			for i, v in pairs(p22) do
+			for i, v in pairs(p14) do
 				if v == Enum.FriendStatus.FriendRequestReceived then
 					t[tostring(i)] = Enum.FriendStatus.NotFriend
 				end
 			end
-			return llamaModule.Dictionary.join(p22, t)
+			return llamaModule.Dictionary.join(p14, t)
 		end,
-		[friendsNetworking.RequestFriendshipFromUserId.Succeeded.name] = function(p23, p24)
+		[friendsNetworking.RequestFriendshipFromUserId.Succeeded.name] = function(p15, p16)
 			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p23, {
-				[tostring(p24.namedIds.users)] = Enum.FriendStatus.FriendRequestSent
+			return llamaModule.Dictionary.join(p15, {
+				[tostring(p16.namedIds.users)] = Enum.FriendStatus.FriendRequestSent
 			})
 		end,
-		[friendsNetworking.RequestFriendshipFromContactId.Succeeded.name] = function(p25, p26)
+		[friendsNetworking.RequestFriendshipFromContactId.Succeeded.name] = function(p15, p16)
 			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p25, {
-				[tostring(p26.namedIds.contacts)] = Enum.FriendStatus.FriendRequestSent
+			return llamaModule.Dictionary.join(p15, {
+				[tostring(p16.namedIds.contacts)] = Enum.FriendStatus.FriendRequestSent
 			})
 		end,
-		[friendshipDestroyedModule.name] = function(p27, p28)
+		[friendshipDestroyedModule.name] = function(p15, p16)
 			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p27, {
-				[tostring(p28.payload.userId1)] = Enum.FriendStatus.NotFriend
+			return llamaModule.Dictionary.join(p15, {
+				[tostring(p16.payload.userId1)] = Enum.FriendStatus.NotFriend
 			})
 		end,
-		[friendshipCreatedModule.name] = function(p29, p30)
+		[friendshipCreatedModule.name] = function(p15, p16)
 			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p29, {
-				[tostring(p30.payload.userId1)] = Enum.FriendStatus.Friend
+			return llamaModule.Dictionary.join(p15, {
+				[tostring(p16.payload.userId1)] = Enum.FriendStatus.Friend
 			})
 		end,
-		[friendRequestCreatedModule.name] = function(p31, p32)
+		[friendRequestCreatedModule.name] = function(p15, p16)
 			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p31, {
-				[tostring(p32.requesteeId)] = Enum.FriendStatus.FriendRequestReceived
+			return llamaModule.Dictionary.join(p15, {
+				[tostring(p16.requesteeId)] = Enum.FriendStatus.FriendRequestReceived
 			})
 		end,
-		[friendRequestDeclinedModule.name] = function(p33, p34)
+		[friendRequestDeclinedModule.name] = function(p15, p16)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
-			for i, v in pairs(p34.ids) do
+			for i, v in pairs(p16.ids) do
 				t[tostring(v)] = Enum.FriendStatus.NotFriend
 			end
-			return llamaModule.Dictionary.join(p33, t)
+			return llamaModule.Dictionary.join(p15, t)
 		end
 	})
 end

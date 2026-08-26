@@ -10,16 +10,16 @@ local focusHandlerModule = require(script.Parent.FocusHandler)
 local focusHighlightManager = roact.PureComponent:extend("FocusHighlightManager")
 focusHighlightManager.validateProps = t.strictInterface({ menuOpen = t.boolean, inputType = t.string })
 
-function focusHighlightManager.render(p0)
+function focusHighlightManager.render(p1)
 	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), roact (ref), focusHandlerModule (ref), inputType (ref), guiService (ref)
 	return if getFFlagIGMGamepadSelectionHistoryModule() then roact.createElement(focusHandlerModule, {
-		isFocused = not p0.props.menuOpen or p0.props.inputType ~= inputType.Gamepad,
+		isFocused = not p1.props.menuOpen or p1.props.inputType ~= inputType.Gamepad,
 		didFocus = function()
 			-- upvalues: guiService (copy)
 			guiService.SelectedCoreObject = nil
 		end
 	}) else roact.createElement(focusHandlerModule, {
-		isFocused = p0.props.menuOpen and p0.props.inputType == inputType.Gamepad,
+		isFocused = p1.props.menuOpen and p1.props.inputType == inputType.Gamepad,
 		didBlur = function()
 			-- upvalues: guiService (copy)
 			guiService.SelectedCoreObject = nil

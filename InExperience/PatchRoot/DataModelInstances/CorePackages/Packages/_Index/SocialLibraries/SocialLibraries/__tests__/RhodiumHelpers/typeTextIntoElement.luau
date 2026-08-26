@@ -1,6 +1,6 @@
-﻿return function(p0, p1)
-	for i = 1, #p1 do
-		p0:sendText(p1:sub(i, i))
+﻿return function(p1, p2)
+	for i = 1, #p2 do
+		p1:sendText(p2:sub(i, i))
 	end
 	wait(0)
 end

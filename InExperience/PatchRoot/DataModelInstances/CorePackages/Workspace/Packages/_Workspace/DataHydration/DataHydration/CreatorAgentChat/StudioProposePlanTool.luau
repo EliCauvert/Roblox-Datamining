@@ -15,9 +15,9 @@ local t_1 = {
 	}
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref)
-	return typeof(p0) == "string" and t[string.lower(p0)] == true
+	return typeof(p1) == "string" and t[string.lower(p1)] == true
 end
 
 local function getRawInputContent(p1)
@@ -31,25 +31,25 @@ local function getRawInputContent(p1)
 	if typeof(content) ~= "string" or content == "" then
 		return nil, nil, nil
 	end
-	local var9 = if typeof(p1.title) == "string" and p1.title ~= "" then p1.title else nil
+	local var1 = if typeof(p1.title) == "string" and p1.title ~= "" then p1.title else nil
 	
 	if typeof(p1.summary) == "string" and p1.summary ~= "" then
-		return content, var9, p1.summary
+		return content, var1, p1.summary
 	end
-	return content, var9, nil
+	return content, var1, nil
 end
 
-local _ = function(p2)
+local _ = function(p1)
 	-- upvalues: t (ref)
-	local kind = p2.kind
+	local kind = p1.kind
 	
 	if not (typeof(kind) == "string" and t[string.lower(kind)] == true) then
-		kind = p2.title
+		kind = p1.title
 		
 		if typeof(kind) == "string" and t[string.lower(kind)] == true then
 			return true
 		end
-		local rawInput = p2.rawInput
+		local rawInput = p1.rawInput
 		
 		if typeof(rawInput) ~= "table" then
 			return false
@@ -65,40 +65,40 @@ local _ = function(p2)
 	end
 end
 
-local function extractPlanFromToolCall(p3)
+local function extractPlanFromToolCall(p1)
 	-- upvalues: t (ref), getRawInputContent (ref)
-	local var10
-	local kind = p3.kind
+	local var1
+	local kind = p1.kind
 	
 	if not (typeof(kind) == "string" and t[string.lower(kind)] == true) then
-		kind = p3.title
+		kind = p1.title
 		
 		if typeof(kind) == "string" and t[string.lower(kind)] == true then
-			var10 = true
+			var1 = true
 		else
-			local rawInput = p3.rawInput
+			local rawInput = p1.rawInput
 			
 			if typeof(rawInput) == "table" then
 				kind = rawInput.name
-				var10 = typeof(kind) == "string" and t[string.lower(kind)] == true
+				var1 = typeof(kind) == "string" and t[string.lower(kind)] == true
 				
-				if not var10 then
+				if not var1 then
 					kind = rawInput.toolName
-					var10 = false
+					var1 = false
 					
 					if typeof(kind) == "string" then
-						var10 = t[string.lower(kind)] == true
-						var10 = nil
+						var1 = t[string.lower(kind)] == true
+						var1 = nil
 					end
 				end
 			else
-				var10 = false
+				var1 = false
 			end
 		end
-		if not var10 then
+		if not var1 then
 			return nil
 		end
-		var11, var12, kind = getRawInputContent(p3.rawInput)
+		var11, var12, kind = getRawInputContent(p1.rawInput)
 		
 		return if var11 == nil then nil else {
 			title = var12 or "Proposed Plan",
@@ -108,30 +108,30 @@ local function extractPlanFromToolCall(p3)
 	end
 end
 
-local _ = function(p4)
+local _ = function(p1)
 	-- upvalues: httpService (ref)
-	local ok, status = pcall(httpService.JSONDecode, httpService, p4)
+	local ok, status = pcall(httpService.JSONDecode, httpService, p1)
 	
 	return if not (not ok or typeof(status) ~= "table") then if typeof(status.text) == "string" then status.text else nil else nil
 end
 
-local function getPersistedToolResultText(p5)
+local function getPersistedToolResultText(p1)
 	-- upvalues: httpService (ref)
-	if p5.content == nil then
+	if p1.content == nil then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p5.content do
+	for i, v in p1.content do
 		if v.type == "content" and v.content ~= nil then
 			local content = v.content
 			
 			if content.type == "text" and typeof(content.text) == "string" then
 				local ok, status = pcall(httpService.JSONDecode, httpService, content.text)
-				local var14 = if ok and typeof(status) == "table" then if typeof(status.text) == "string" then status.text else nil else nil
+				local var1 = if ok and typeof(status) == "table" then if typeof(status.text) == "string" then status.text else nil else nil
 				
-				if var14 ~= nil and var14 ~= "" then
-					table.insert(t, var14)
+				if var1 ~= nil and var1 ~= "" then
+					table.insert(t, var1)
 				end
 			end
 		end
@@ -139,61 +139,61 @@ local function getPersistedToolResultText(p5)
 	return if #t > 0 then table.concat(t) else nil
 end
 
-local function findPlanInTurnState(p6, p7)
+local function findPlanInTurnState(p2, p3)
 	-- upvalues: fFlagCreatorAgentChatFilterTerminalClientToolsModule (ref), getPersistedToolResultText (ref), t (ref), getRawInputContent (ref)
 	local t_1 = {}
 	
-	for i in p6.toolCalls do
+	for i in p2.toolCalls do
 		table.insert(t_1, i)
 	end
 	table.sort(t_1)
 	
 	for i_1, v in t_1 do
-		if not p7 or not p7[v] then
-			local var16 = p6.toolCalls[v]
+		if not p3 or not p3[v] then
+			local var2 = p2.toolCalls[v]
 			
-			if (not fFlagCreatorAgentChatFilterTerminalClientToolsModule or var16.status ~= "completed" and var16.status ~= "failed" and var16.status ~= "cancelled") and getPersistedToolResultText(var16) == nil then
-				local var17
-				local kind = var16.kind
+			if (not fFlagCreatorAgentChatFilterTerminalClientToolsModule or var2.status ~= "completed" and var2.status ~= "failed" and var2.status ~= "cancelled") and getPersistedToolResultText(var2) == nil then
+				local var3
+				local kind = var2.kind
 				
 				if not (typeof(kind) == "string" and t[string.lower(kind)] == true) then
-					kind = var16.title
+					kind = var2.title
 					
 					if typeof(kind) == "string" and t[string.lower(kind)] == true then
-						var17 = true
+						var3 = true
 					else
-						local rawInput = var16.rawInput
+						local rawInput = var2.rawInput
 						
 						if typeof(rawInput) == "table" then
 							kind = rawInput.name
-							var17 = typeof(kind) == "string" and t[string.lower(kind)] == true
+							var3 = typeof(kind) == "string" and t[string.lower(kind)] == true
 							
-							if not var17 then
-								local var18
+							if not var3 then
+								local var4
 								kind = rawInput.toolName
-								var17 = false
+								var3 = false
 								
 								if typeof(kind) == "string" then
-									var17 = t[string.lower(kind)] == true
-									var17 = nil
+									var3 = t[string.lower(kind)] == true
+									var3 = nil
 								end
 							end
 						else
-							var17 = false
+							var3 = false
 						end
 					end
-					if var17 then
-						var17, var19, kind = getRawInputContent(var16.rawInput)
-						var18 = if var17 == nil then nil else {
+					if var3 then
+						var3, var19, kind = getRawInputContent(var2.rawInput)
+						var4 = if var3 == nil then nil else {
 							title = var19 or "Proposed Plan",
-							textContent = var17,
+							textContent = var3,
 							summary = kind
 						}
 					else
-						var18 = nil
+						var4 = nil
 					end
-					if var18 ~= nil then
-						return var18, v, var16.rawInput, var16.turnId, var16.referenceId
+					if var4 ~= nil then
+						return var4, v, var2.rawInput, var2.turnId, var2.referenceId
 					end
 				end
 			end
@@ -202,32 +202,32 @@ local function findPlanInTurnState(p6, p7)
 	return nil, nil, nil, nil, nil
 end
 
-local function getToolCallOrder(p8, p9)
-	if p8.activityItems ~= nil then
-		for i, v in p8.activityItems do
-			if v.kind == "tool_call" and v.toolCallId == p9 then
+local function getToolCallOrder(p4, p5)
+	if p4.activityItems ~= nil then
+		for i, v in p4.activityItems do
+			if v.kind == "tool_call" and v.toolCallId == p5 then
 				return i
 			end
 		end
 	end
 	local t = {}
 	
-	for v in p8.toolCalls do
+	for v in p4.toolCalls do
 		table.insert(t, v)
 	end
 	table.sort(t)
 	
 	for v, v_1 in t do
-		if v_1 == p9 then
+		if v_1 == p5 then
 			return v
 		end
 	end
 	return 0
 end
 
-local _ = function(p10)
+local _ = function(p6)
 	-- upvalues: httpService (ref)
-	local ok, status = pcall(httpService.JSONDecode, httpService, p10)
+	local ok, status = pcall(httpService.JSONDecode, httpService, p6)
 	
 	return if not (not ok or typeof(status) ~= "table") then if typeof(status.accepted) == "boolean" then if status.feedbackText == nil or typeof(status.feedbackText) == "string" then status else nil else nil else nil
 end
@@ -237,75 +237,75 @@ return {
 	LOCAL_TOOL_DEFINITION = t_1,
 	extractPlanFromToolCall = extractPlanFromToolCall,
 	findPlanInTurnState = findPlanInTurnState,
-	getCompletedPlansFromTurnState = function(p11)
+	getCompletedPlansFromTurnState = function(p6)
 		-- upvalues: t (ref), getRawInputContent (ref), getPersistedToolResultText (ref), httpService (ref), getToolCallOrder (ref)
 		local t_1 = {}
 		local t_2 = {}
 		
-		for i in p11.toolCalls do
+		for i in p6.toolCalls do
 			table.insert(t_2, i)
 		end
 		table.sort(t_2)
 		
 		for i_1, v in t_2 do
-			local var24
-			local var23 = p11.toolCalls[v]
-			local ok = var23.kind
+			local var5
+			local var6 = p6.toolCalls[v]
+			local ok = var6.kind
 			
 			if not (typeof(ok) == "string" and t[string.lower(ok)] == true) then
-				ok = var23.title
+				ok = var6.title
 				
 				if typeof(ok) == "string" and t[string.lower(ok)] == true then
-					var24 = true
+					var5 = true
 				else
-					local rawInput = var23.rawInput
+					local rawInput = var6.rawInput
 					
 					if typeof(rawInput) == "table" then
 						ok = rawInput.name
-						var24 = typeof(ok) == "string" and t[string.lower(ok)] == true
+						var5 = typeof(ok) == "string" and t[string.lower(ok)] == true
 						
-						if not var24 then
-							local var25
+						if not var5 then
+							local var7
 							ok = rawInput.toolName
-							var24 = false
+							var5 = false
 							
 							if typeof(ok) == "string" then
-								var24 = t[string.lower(ok)] == true
-								var24 = nil
+								var5 = t[string.lower(ok)] == true
+								var5 = nil
 							end
 						end
 					else
-						var24 = false
+						var5 = false
 					end
 				end
-				if var24 then
-					var24, var26, ok = getRawInputContent(var23.rawInput)
-					var25 = if var24 == nil then nil else {
+				if var5 then
+					var5, var26, ok = getRawInputContent(var6.rawInput)
+					var7 = if var5 == nil then nil else {
 						title = var26 or "Proposed Plan",
-						textContent = var24,
+						textContent = var5,
 						summary = ok
 					}
 				else
-					var25 = nil
+					var7 = nil
 				end
-				local var28
-				local var27 = getPersistedToolResultText(var23)
+				local var8
+				local var9 = getPersistedToolResultText(var6)
 				
-				if var27 == nil then
-					var28 = nil
+				if var9 == nil then
+					var8 = nil
 				else
-					ok, status = pcall(httpService.JSONDecode, httpService, var27)
-					var28 = if not ok or typeof(status) ~= "table" then if typeof(status.accepted) ~= "boolean" then if status.feedbackText == nil or typeof(status.feedbackText) == "string" then status else nil else nil else nil
+					ok, status = pcall(httpService.JSONDecode, httpService, var9)
+					var8 = if not ok or typeof(status) ~= "table" then if typeof(status.accepted) ~= "boolean" then if status.feedbackText == nil or typeof(status.feedbackText) == "string" then status else nil else nil else nil
 				end
-				if var25 ~= nil and var28 ~= nil then
+				if var7 ~= nil and var8 ~= nil then
 					table.insert(t_1, {
-						title = var25.title,
-						textContent = var25.textContent,
-						summary = var25.summary,
+						title = var7.title,
+						textContent = var7.textContent,
+						summary = var7.summary,
 						toolCallId = v,
-						callOrder = getToolCallOrder(p11, v),
-						isAccepted = var28.accepted,
-						feedbackText = var28.feedbackText
+						callOrder = getToolCallOrder(p6, v),
+						isAccepted = var8.accepted,
+						feedbackText = var8.feedbackText
 					})
 				end
 			end
@@ -316,10 +316,10 @@ return {
 		-- upvalues: httpService (ref)
 		return { text = httpService:JSONEncode({ accepted = true }) }
 	end,
-	formatFeedbackContent = function(p12)
+	formatFeedbackContent = function(p7)
 		-- upvalues: httpService (ref)
 		return {
-			text = httpService:JSONEncode({ accepted = false, feedbackText = p12 })
+			text = httpService:JSONEncode({ accepted = false, feedbackText = p7 })
 		}
 	end
 }

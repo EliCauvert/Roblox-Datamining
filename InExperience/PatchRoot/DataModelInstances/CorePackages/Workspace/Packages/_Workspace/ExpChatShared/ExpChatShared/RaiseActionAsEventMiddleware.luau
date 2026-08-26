@@ -1,10 +1,10 @@
 ﻿local actionBindableEventModule = require(script.Parent.ActionBindableEvent)
 
-return function(p0, _)
+return function(p1, _)
 	-- upvalues: actionBindableEventModule (ref)
-	return function(p1)
-		-- upvalues: actionBindableEventModule (copy), p0 (ref)
-		actionBindableEventModule:Fire(p1)
-		p0(p1)
+	return function(p2)
+		-- upvalues: actionBindableEventModule (copy), p1 (ref)
+		actionBindableEventModule:Fire(p2)
+		p1(p2)
 	end
 end

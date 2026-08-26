@@ -22,24 +22,24 @@ local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local baseMenu = UIBloxModule.App.Menu.BaseMenu
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), reactModule (ref), enumStreamNotificationsDisplayStateModule (ref), marshalStreamNotificationData (ref), constantsModule (ref), notificationCardProvider (ref), notificationCard (ref), constants (ref), imageSetLabel (ref), iconButton (ref), iconSize (ref), baseMenu (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
-	local var8 = useStyle()
-	local activeNotification = p0.activeNotification
-	local displayState = p0.displayState
-	local isSmallScreen = p0.isSmallScreen
-	local handleActions = p0.handleActions
-	local closeNotificationDisplay = p0.closeNotificationDisplay
-	local var9 = reactModule.useRef(nil)
+	local var1 = useStyle()
+	local activeNotification = p1.activeNotification
+	local displayState = p1.displayState
+	local isSmallScreen = p1.isSmallScreen
+	local handleActions = p1.handleActions
+	local closeNotificationDisplay = p1.closeNotificationDisplay
+	local var2 = reactModule.useRef(nil)
 	
 	if displayState ~= enumStreamNotificationsDisplayStateModule.MetaActions then
 		return nil
 	end
-	local var10 = marshalStreamNotificationData(activeNotification)
+	local var3 = marshalStreamNotificationData(activeNotification)
 	local t = {}
 	
-	if var10 then
-		for i, v in ipairs(var10.state.visualItems.metaAction) do
+	if var3 then
+		for i, v in ipairs(var3.state.visualItems.metaAction) do
 			table.insert(t, {
 				icon = constantsModule.MetaActions.ActionIcons[v.actionIcon] or constantsModule.MetaActions.ActionIcons.default,
 				text = v.label.text,
@@ -55,13 +55,13 @@ return function(p0)
 	return reactModule.createElement(focusNavigableSurfaceWrapper, {
 		isIsolated = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
-		frameProps = { ref = var9 },
+		frameProps = { ref = var2 },
 		customEventHandlers = {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p1)
+				handler = inputHandlersModule.onRelease(function(p2)
 					-- upvalues: closeNotificationDisplay (ref)
 					closeNotificationDisplay()
-					p1:cancel()
+					p2:cancel()
 				end)
 			}
 		}
@@ -71,7 +71,7 @@ return function(p0)
 		}),
 		MetaActions = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			ref = var9,
+			ref = var2,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -99,7 +99,7 @@ return function(p0)
 					readOnly = false,
 					openMetaActions = nil,
 					notificationPayload = activeNotification,
-					state = var10 and var10.state,
+					state = var3 and var3.state,
 					handleActions = handleActions
 				}, {
 					NotificationCard = reactModule.createElement(notificationCard, { isHover = false, layoutOrder = 1 })
@@ -119,7 +119,7 @@ return function(p0)
 						Position = UDim2.fromScale(0.5, 0.5),
 						Size = UDim2.fromOffset(constantsModule.MetaActions.CloseIconSize, constantsModule.MetaActions.CloseIconSize),
 						Image = constantsModule.Modal.CloseIcon,
-						ImageColor3 = var8.Theme.UIEmphasis.Color
+						ImageColor3 = var1.Theme.UIEmphasis.Color
 					}),
 					CloseButton = reactModule.createElement(iconButton, {
 						layoutOrder = 1,

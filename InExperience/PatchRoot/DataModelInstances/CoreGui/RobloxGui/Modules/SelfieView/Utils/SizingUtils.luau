@@ -1,5 +1,5 @@
-﻿local function _(p0)
-	return p0 * 0.659649122807
+﻿local function _(p1)
+	return p1 * 0.659649122807
 end
 
 return {

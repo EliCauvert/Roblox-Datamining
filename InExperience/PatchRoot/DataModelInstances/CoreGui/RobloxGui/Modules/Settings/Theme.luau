@@ -1,7 +1,7 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local userInputService = game:GetService("UserInputService")
 local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local var3 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
+local var1 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
 local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
 local darkTheme = require(corePackagesService.Workspace.Packages.Style).Themes.DarkTheme
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
@@ -53,10 +53,10 @@ local t_2 = {
 		RelativeSize = t[Enum.FontSize.Size24]
 	},
 	Username = {
-		RelativeSize = if var3 then t[Enum.FontSize.Size24] else t[Enum.FontSize.Size18]
+		RelativeSize = if var1 then t[Enum.FontSize.Size24] else t[Enum.FontSize.Size18]
 	},
 	DisplayName = {
-		RelativeSize = if var3 then Enum.FontSize.Size24 else Enum.FontSize.Size18,
+		RelativeSize = if var1 then Enum.FontSize.Size24 else Enum.FontSize.Size18,
 		Font = appFonts.default:getMedium()
 	},
 	Settings_Font = { Font = appFonts.default:getDefault() },
@@ -84,16 +84,16 @@ local t_2 = {
 	Utility_Row_Small_Font = { TextSize = 12.704, Font = appFonts.default:getDefault() },
 	Utility_Row_Font = {
 		Font = appFonts.default:getMedium(),
-		TextSize = if increaseUtilityRowTextSizeConsole and var3 then 19.056 else 12.704
+		TextSize = if increaseUtilityRowTextSizeConsole and var1 then 19.056 else 12.704
 	},
 	Back_Button_Font = { TextSize = 19.056, Font = appFonts.default:getSemibold() },
 	Semibold_Font = { Font = appFonts.default:getSemibold() },
 	Bold_Font = { Font = appFonts.default:getMedium() }
 }
 setmetatable(t_1, {
-	__index = function(_, p0)
+	__index = function(_, p1)
 		-- upvalues: darkTheme (ref)
-		return darkTheme[p0]
+		return darkTheme[p1]
 	end
 })
 local t_3 = {
@@ -151,8 +151,8 @@ local function getViewportSize()
 	return if _G.__TESTEZ_RUNNING_TEST__ then Vector2.new(1024, 1024) elseif workspace.CurrentCamera then if workspace.CurrentCamera.ViewportSize == Vector2.new(0, 0) or workspace.CurrentCamera.ViewportSize == Vector2.new(1, 1) then nil else workspace.CurrentCamera.ViewportSize else nil
 end
 
-local var15 = getViewportSize()
-local var16 = var15 and (userInputService.TouchEnabled and (if var15.Y >= 500 then var15.X < 700 else true))
+local var2 = getViewportSize()
+local var3 = var2 and (userInputService.TouchEnabled and (if var2.Y >= 500 then var2.X < 700 else true))
 local t_4 = {
 	PaddingTop = UDim.new(0, 0),
 	PaddingLeft = UDim.new(0, 20),
@@ -191,35 +191,35 @@ return {
 	DefaultCornerRadius = UDim.new(0, 8),
 	MenuContainerCornerRadius = UDim.new(0, 10),
 	AlwaysShowBottomBar = function()
-		-- upvalues: var16 (write)
-		return not var16
+		-- upvalues: var3 (write)
+		return not var3
 	end,
 	UseInspectAndBuyPanel = function()
-		-- upvalues: var16 (write)
-		return var16
+		-- upvalues: var3 (write)
+		return var3
 	end,
 	HubPadding = function()
-		-- upvalues: fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), getViewportSize (ref), userInputService (ref), t_5 (ref), t_4 (ref), var16 (write)
+		-- upvalues: fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), getViewportSize (ref), userInputService (ref), t_5 (ref), t_4 (ref), var3 (write)
 		if fFlagRelocateMobileMenuButtonsModule and fIntRelocateMobileMenuButtonsVariantModule ~= 0 then
 			local _ = function()
 				-- upvalues: getViewportSize (copy), userInputService (copy)
-				local var22 = getViewportSize()
+				local var4 = getViewportSize()
 				
-				return var22 and (userInputService.TouchEnabled and (if var22.Y >= 500 then var22.X < 700 else true))
+				return var4 and (userInputService.TouchEnabled and (if var4.Y >= 500 then var4.X < 700 else true))
 			end
 			
-			local var21 = getViewportSize()
+			local var4 = getViewportSize()
 			
-			return if var21 and (userInputService.TouchEnabled and (if var21.Y >= 500 then var21.X < 700 else true)) then t_5 else t_4
+			return if var4 and (userInputService.TouchEnabled and (if var4.Y >= 500 then var4.X < 700 else true)) then t_5 else t_4
 		end
-		return if var16 then t_5 else t_4
+		return if var3 then t_5 else t_4
 	end,
 	MenuContainerPosition = function(p1)
-		-- upvalues: isInExperienceUIVREnabled (ref), var16 (write), t_7 (ref), t_6 (ref)
+		-- upvalues: isInExperienceUIVREnabled (ref), var3 (write), t_7 (ref), t_6 (ref)
 		if isInExperienceUIVREnabled and p1 then
 			local menuContainerPositionOverride = p1:getMenuContainerPositionOverride()
 			
-			return menuContainerPositionOverride or (if var16 then t_7 else t_6)
+			return menuContainerPositionOverride or (if var3 then t_7 else t_6)
 		end
 	end,
 	Images = images,
@@ -227,68 +227,68 @@ return {
 	IconSize = iconSize,
 	SHIELD_INACTIVE_POSITION = UDim2.new(0, 0, 1, 36),
 	viewportResized = function()
-		-- upvalues: var15 (write), getViewportSize (ref), var16 (write), userInputService (ref)
-		var15 = getViewportSize()
-		var16 = var15 and (userInputService.TouchEnabled and (if var15.Y >= 500 then var15.X < 700 else true))
+		-- upvalues: var2 (write), getViewportSize (ref), var3 (write), userInputService (ref)
+		var2 = getViewportSize()
+		var3 = var2 and (userInputService.TouchEnabled and (if var2.Y >= 500 then var2.X < 700 else true))
 	end,
-	color = function(p2, p3)
+	color = function(p1, p2)
 		-- upvalues: t_3 (ref), t_1 (ref), color (ref)
-		p2 = t_3[p2] or p2
+		p1 = t_3[p1] or p1
 		
-		return if t_1[p2] then t_1[p2].Color else p3 or color
+		return if t_1[p1] then t_1[p1].Color else p2 or color
 	end,
-	transparency = function(p4, p5)
+	transparency = function(p1, p2)
 		-- upvalues: t_3 (ref), t_1 (ref)
-		p4 = t_3[p4] or p4
+		p1 = t_3[p1] or p1
 		
-		return if t_1[p4] then t_1[p4].Transparency else p5 or 0
+		return if t_1[p1] then t_1[p1].Transparency else p2 or 0
 	end,
-	font = function(p6, p7)
+	font = function(p1, p2)
 		-- upvalues: default (ref), t_3 (ref), t_2 (ref)
-		if not p7 then
+		if not p2 then
 			return default
 		end
-		p7 = t_3[p7] or p7
+		p2 = t_3[p2] or p2
 		
-		return if t_2[p7] then t_2[p7].Font else p6 or default
+		return if t_2[p2] then t_2[p2].Font else p1 or default
 	end,
-	fontSize = function(p8, p9)
+	fontSize = function(p1, p2)
 		-- upvalues: t (ref), t_3 (ref), t_2 (ref), size24 (ref)
-		if not p9 then
-			return t[p8]
+		if not p2 then
+			return t[p1]
 		end
-		p9 = t_3[p9] or p9
+		p2 = t_3[p2] or p2
 		
-		return if t_2[p9] then t_2[p9].RelativeSize else p8 or size24
+		return if t_2[p2] then t_2[p2].RelativeSize else p1 or size24
 	end,
-	textSize = function(p10, p11)
-		-- upvalues: getUIScale (ref), var16 (write), t_3 (ref), t_2 (ref)
-		local var24 = getUIScale(false)
+	textSize = function(p1, p2)
+		-- upvalues: getUIScale (ref), var3 (write), t_3 (ref), t_2 (ref)
+		local var4 = getUIScale(false)
 		
-		if not p11 then
-			return p10 * 0.794 * var24
-		elseif var16 and p11 == "UtilityRow" then
-			p11 = "UtilityRowSmall"
-		elseif var16 and p11 == "UtilityText" then
-			p11 = "UtilityTextSmall"
+		if not p2 then
+			return p1 * 0.794 * var4
+		elseif var3 and p2 == "UtilityRow" then
+			p2 = "UtilityRowSmall"
+		elseif var3 and p2 == "UtilityText" then
+			p2 = "UtilityTextSmall"
 		end
-		p11 = t_3[p11] or p11
+		p2 = t_3[p2] or p2
 		
-		return if p10 == nil then if t_2[p11] and t_2[p11].TextSize then t_2[p11].TextSize else p10 * 0.794 or 19 elseif t_2[p11] and t_2[p11].TextSize then t_2[p11].TextSize * var24 else p10 * 0.794 * var24
+		return if p1 == nil then if t_2[p2] and t_2[p2].TextSize then t_2[p2].TextSize else p1 * 0.794 or 19 elseif t_2[p2] and t_2[p2].TextSize then t_2[p2].TextSize * var4 else p1 * 0.794 * var4
 	end,
-	hydrateLabel = function(p12, p13, p14)
+	hydrateLabel = function(p1, p2, p3)
 		-- upvalues: t_3 (ref), t_1 (ref), t_2 (ref)
-		p13 = t_3[p13] or p13
+		p2 = t_3[p2] or p2
 		
-		if t_1[p13] then
-			local var25 = t_1[p13]
-			p12.TextColor3 = var25.Color
-			p12.TextTransparency = var25.Transparency
+		if t_1[p2] then
+			local var4 = t_1[p2]
+			p1.TextColor3 = var4.Color
+			p1.TextTransparency = var4.Transparency
 		end
-		if t_2[p14] then
-			local var26 = t_2[p13]
-			p12.Font = var26.RelativeSize * 19.2
-			p12.TextSize = var26.TextSize
+		if t_2[p3] then
+			local var5 = t_2[p2]
+			p1.Font = var5.RelativeSize * 19.2
+			p1.TextSize = var5.TextSize
 		end
 	end,
 	platformNameIconSize = UDim2.fromOffset(36, 36),

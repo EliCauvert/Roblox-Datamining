@@ -7,78 +7,78 @@ local getPartNamesInHierarchyOrderModule = require(parent.util.getPartNamesInHie
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
 local t = {
-	calculateBounds = function(p0, p1, p2, p3, p4)
+	calculateBounds = function(p1, p2, p3, p4, p5)
 		-- upvalues: getExpectedPartSizeModule (ref), calculateMinMaxModule (ref), constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref)
-		if p4 then
-			local var9 = getExpectedPartSizeModule(p1, p4)
-			local var10, var11 = calculateMinMaxModule(p3.minMeshCorner, p3.maxMeshCorner, p2:PointToWorldSpace(-(var9 / 2)), p2:PointToWorldSpace(-(var9 / 2)))
-			p3.minMeshCorner = var10
-			p3.maxMeshCorner = var11
-			local var12, var13 = calculateMinMaxModule(p3.minMeshCorner, p3.maxMeshCorner, p2:PointToWorldSpace(var9 / 2), p2:PointToWorldSpace(var9 / 2))
-			p3.minMeshCorner = var12
-			p3.maxMeshCorner = var13
+		if p5 then
+			local var1 = getExpectedPartSizeModule(p2, p5)
+			local var2, var3 = calculateMinMaxModule(p4.minMeshCorner, p4.maxMeshCorner, p3:PointToWorldSpace(-(var1 / 2)), p3:PointToWorldSpace(-(var1 / 2)))
+			p4.minMeshCorner = var2
+			p4.maxMeshCorner = var3
+			local var4, var5 = calculateMinMaxModule(p4.minMeshCorner, p4.maxMeshCorner, p3:PointToWorldSpace(var1 / 2), p3:PointToWorldSpace(var1 / 2))
+			p4.minMeshCorner = var4
+			p4.maxMeshCorner = var5
 		else
-			local var14, var15 = calculateMinMaxModule(p3.minMeshCorner, p3.maxMeshCorner, p2:PointToWorldSpace(-(p1.Size / 2)), p2:PointToWorldSpace(-(p1.Size / 2)))
-			p3.minMeshCorner = var14
-			p3.maxMeshCorner = var15
-			local var16, var17 = calculateMinMaxModule(p3.minMeshCorner, p3.maxMeshCorner, p2:PointToWorldSpace(p1.Size / 2), p2:PointToWorldSpace(p1.Size / 2))
-			p3.minMeshCorner = var16
-			p3.maxMeshCorner = var17
+			local var6, var7 = calculateMinMaxModule(p4.minMeshCorner, p4.maxMeshCorner, p3:PointToWorldSpace(-(p2.Size / 2)), p3:PointToWorldSpace(-(p2.Size / 2)))
+			p4.minMeshCorner = var6
+			p4.maxMeshCorner = var7
+			local var8, var9 = calculateMinMaxModule(p4.minMeshCorner, p4.maxMeshCorner, p3:PointToWorldSpace(p2.Size / 2), p3:PointToWorldSpace(p2.Size / 2))
+			p4.minMeshCorner = var8
+			p4.maxMeshCorner = var9
 		end
-		for i, v in constantsInterfaceModule.getAttachments(p0, p1.Name) do
-			local var22 = p1:FindFirstChild(v, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-			assert(var22)
+		for i, v in constantsInterfaceModule.getAttachments(p1, p2.Name) do
+			local var10 = p2:FindFirstChild(v, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+			assert(var10)
 			
-			if string.match(var22.Name, "RigAttachment$") ~= nil then
-				local var23 = p2 * getAttachmentCFrameInPartSpaceModule(var22)
-				local var24, var25 = calculateMinMaxModule(p3.minRigAttachment, p3.maxRigAttachment, var23.Position, var23.Position)
-				p3.minRigAttachment = var24
-				p3.maxRigAttachment = var25
+			if string.match(var10.Name, "RigAttachment$") ~= nil then
+				local var11 = p3 * getAttachmentCFrameInPartSpaceModule(var10)
+				local var12, var13 = calculateMinMaxModule(p4.minRigAttachment, p4.maxRigAttachment, var11.Position, var11.Position)
+				p4.minRigAttachment = var12
+				p4.maxRigAttachment = var13
 			end
 		end
-		local var18, var19 = calculateMinMaxModule(p3.minOverall, p3.maxOverall, p3.minMeshCorner, p3.maxMeshCorner)
-		p3.minOverall = var18
-		p3.maxOverall = var19
-		local var20, var21 = calculateMinMaxModule(p3.minOverall, p3.maxOverall, p3.minRigAttachment, p3.maxRigAttachment)
-		p3.minOverall = var20
-		p3.maxOverall = var21
+		local var14, var15 = calculateMinMaxModule(p4.minOverall, p4.maxOverall, p4.minMeshCorner, p4.maxMeshCorner)
+		p4.minOverall = var14
+		p4.maxOverall = var15
+		local var16, var17 = calculateMinMaxModule(p4.minOverall, p4.maxOverall, p4.minRigAttachment, p4.maxRigAttachment)
+		p4.minOverall = var16
+		p4.maxOverall = var17
 	end
 }
 
-function t.traverseHierarchy(p5, p6, p7, p8, p9, p10, p11, p12, p13)
+function t.traverseHierarchy(p6, p7, p8, p9, p10, p11, p12, p13, p14)
 	-- upvalues: constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), t (ref)
 	local cFrame
-	assert(p5 ~= nil ~= ((p6 and p7) ~= nil))
-	local var26 = if p5 then p5[p10] else p6:FindFirstChild(p10)
-	assert(var26)
+	assert(p6 ~= nil ~= ((p7 and p8) ~= nil))
+	local var18 = if p6 then p6[p11] else p7:FindFirstChild(p11)
+	assert(var18)
 	
-	if p8 then
-		local var28 = if p5 then p5[p8] else p6:FindFirstChild(p8)
-		assert(var28)
-		local rigAttachmentToParent = constantsInterfaceModule.getRigAttachmentToParent(p7, p10)
-		local var30 = var28:FindFirstChild(rigAttachmentToParent, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-		assert(var30)
-		local var31 = var26:FindFirstChild(rigAttachmentToParent, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-		assert(var31)
-		cFrame = p9 * getAttachmentCFrameInPartSpaceModule(var30) * getAttachmentCFrameInPartSpaceModule(var31):Inverse()
+	if p9 then
+		local var19 = if p6 then p6[p9] else p7:FindFirstChild(p9)
+		assert(var19)
+		local rigAttachmentToParent = constantsInterfaceModule.getRigAttachmentToParent(p8, p11)
+		local var20 = var19:FindFirstChild(rigAttachmentToParent, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+		assert(var20)
+		local var21 = var18:FindFirstChild(rigAttachmentToParent, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+		assert(var21)
+		cFrame = p10 * getAttachmentCFrameInPartSpaceModule(var20) * getAttachmentCFrameInPartSpaceModule(var21):Inverse()
 	else
 		cFrame = CFrame.new()
 	end
-	t.calculateBounds(p7, var26, cFrame, p12, p13)
+	t.calculateBounds(p8, var18, cFrame, p13, p14)
 	
-	if p11.children then
-		for i, v in p11.children do
-			t.traverseHierarchy(p5, p6, p7, p10, cFrame, i, v, p12, p13)
+	if p12.children then
+		for i, v in p12.children do
+			t.traverseHierarchy(p6, p7, p8, p11, cFrame, i, v, p13, p14)
 		end
 	end
 end
 
-local var7 = nil
+local var22 = nil
 
 local function initRigParentToChild()
-	-- upvalues: var7 (write), getPartNamesInHierarchyOrderModule (ref)
-	if var7 then return end
-	var7 = {}
+	-- upvalues: var22 (write), getPartNamesInHierarchyOrderModule (ref)
+	if var22 then return end
+	var22 = {}
 	
 	for i, v in {
 		Enum.AssetType.LeftArm,
@@ -86,20 +86,20 @@ local function initRigParentToChild()
 		Enum.AssetType.LeftLeg,
 		Enum.AssetType.RightLeg
 	} do
-		local var32 = getPartNamesInHierarchyOrderModule(v)
-		var7[v] = {}
+		local var23 = getPartNamesInHierarchyOrderModule(v)
+		var22[v] = {}
 		
-		for i_1 = 1, #var32 - 1 do
-			var7[v][var32[i_1]] = var32[i_1 + 1]
+		for i_1 = 1, #var23 - 1 do
+			var22[v][var23[i_1]] = var23[i_1 + 1]
 		end
 	end
 end
 
-function t.getAssetRigChild(value, p14)
-	-- upvalues: initRigParentToChild (ref), var7 (write)
+function t.getAssetRigChild(value, p15)
+	-- upvalues: initRigParentToChild (ref), var22 (write)
 	initRigParentToChild()
 	
-	return assert(var7[value], "Invalid asset type")[p14]
+	return assert(var22[value], "Invalid asset type")[p15]
 end
 
 t.assetHierarchy = {

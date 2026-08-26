@@ -3,15 +3,15 @@ local cryoModule = require(virtualEventsState.Parent.Cryo)
 local roduxModule = require(virtualEventsState.Parent.Rodux)
 local _ = require(virtualEventsState.Models.ExperienceMediaModel)
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), cryoModule (ref)
 	return roduxModule.createReducer({}, {
-		[p0.GetExperienceMedia.Succeeded.name] = function(p1, p2)
+		[p1.GetExperienceMedia.Succeeded.name] = function(p2, p3)
 			-- upvalues: cryoModule (copy)
-			return cryoModule.Dictionary.join(p1, { [p2.ids[1]] = p2.responseBody.data })
+			return cryoModule.Dictionary.join(p2, { [p3.ids[1]] = p3.responseBody.data })
 		end,
-		[p0.GetExperienceMedia.Failed.name] = function(p3, _)
-			return p3
+		[p1.GetExperienceMedia.Failed.name] = function(p2, _)
+			return p2
 		end
 	})
 end

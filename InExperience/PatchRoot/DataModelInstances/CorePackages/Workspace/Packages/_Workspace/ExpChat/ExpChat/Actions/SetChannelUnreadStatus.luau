@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1)
-	return { channelName = p0, hasUnreadMessages = p1 }
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
+	return { channelName = p1, hasUnreadMessages = p2 }
 end)

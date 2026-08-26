@@ -23,9 +23,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		-- upvalues: var1 (ref), hasHeader (ref)
 		assert(not (var1.sticky and hasHeader:getValue()), "Sheet.FullBleed with sticky=true is unsupported when used with Sheet.Header")
 	end, { var1.sticky, hasHeader })
-	local var3 = reactModule.useCallback(function(p1)
+	local var3 = reactModule.useCallback(function(p3)
 		-- upvalues: setFullBleedHeight (ref)
-		setFullBleedHeight(p1.AbsoluteSize.Y)
+		setFullBleedHeight(p3.AbsoluteSize.Y)
 	end, {})
 	reactModule.useEffect(function()
 		-- upvalues: setFullBleedHeight (ref)
@@ -40,8 +40,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	if var1.sticky then
 		var4 = uDim2
 	elseif innerScrollY and fullBleedHeight then
-		var4 = reactModule.joinBindings({ scrollY = innerScrollY, height = fullBleedHeight }):map(function(p1)
-			return if p1.height == 0 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, math.max(0, p1.height - p1.scrollY))
+		var4 = reactModule.joinBindings({ scrollY = innerScrollY, height = fullBleedHeight }):map(function(p3)
+			return if p3.height == 0 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, math.max(0, p3.height - p3.scrollY))
 		end)
 	end
 	local t_1 = {

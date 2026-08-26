@@ -23,43 +23,43 @@ local function createSignalTracker()
 	return setmetatable({ _totalCount = 0, _payload = {}, _counts = {} }, t_1)
 end
 
-function t_1.recordSignal(value, p0, p1, p2)
+function t_1.recordSignal(value, p1, p2, p3)
 	-- upvalues: t (ref)
-	local var3 = t[p1]
+	local var1 = t[p2]
 	
-	if var3 == nil then return end
+	if var1 == nil then return end
 	local payload = value._payload
 	local counts = value._counts
-	local ids = var3.ids
-	local var4 = payload[ids]
+	local ids = var1.ids
+	local var2 = payload[ids]
 	
-	if not var4 then
-		var4 = {}
-		payload[ids] = var4
+	if not var2 then
+		var2 = {}
+		payload[ids] = var2
 	end
-	local values = var3.values
-	local var5 = if values then payload[values] else nil
+	local values = var1.values
+	local var3 = if values then payload[values] else nil
 	
-	if values and not var5 then
-		var5 = {}
-		payload[values] = var5
+	if values and not var3 then
+		var3 = {}
+		payload[values] = var3
 	end
-	local var6 = counts[ids] or 0
+	local var4 = counts[ids] or 0
 	
-	if var6 >= 25 then
-		table.remove(var4, 1)
+	if var4 >= 25 then
+		table.remove(var2, 1)
 		
-		if var5 then
-			table.remove(var5, 1)
+		if var3 then
+			table.remove(var3, 1)
 		end
 	else
-		counts[ids] = var6 + 1
+		counts[ids] = var4 + 1
 		value._totalCount += 1
 	end
-	table.insert(var4, p0)
+	table.insert(var2, p1)
 	
-	if var5 then
-		table.insert(var5, p2 or "")
+	if var3 then
+		table.insert(var3, p3 or "")
 	end
 end
 

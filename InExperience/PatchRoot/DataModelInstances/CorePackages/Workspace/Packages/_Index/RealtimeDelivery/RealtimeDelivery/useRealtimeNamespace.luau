@@ -5,16 +5,16 @@ local reactModule = require(parent.React)
 local _ = require(realtimeDelivery.RealtimeTypes)
 local useRobloxEventReceiverModule = require(script.Parent.useRobloxEventReceiver)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: useRobloxEventReceiverModule (ref), reactModule (ref), list (ref)
-	local var3 = useRobloxEventReceiverModule()
+	local var1 = useRobloxEventReceiverModule()
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p0 (ref), p1 (ref)
-		local var4 = var3:observeEvent(p0, p1)
+		-- upvalues: var1 (ref), p1 (ref), p2 (ref)
+		local var2 = var1:observeEvent(p1, p2)
 		
 		return function()
-			-- upvalues: var4 (ref)
-			var4:disconnect()
+			-- upvalues: var2 (ref)
+			var2:disconnect()
 		end
-	end, list.join({ p0, var3 }, p2))
+	end, list.join({ p1, var1 }, p3))
 end

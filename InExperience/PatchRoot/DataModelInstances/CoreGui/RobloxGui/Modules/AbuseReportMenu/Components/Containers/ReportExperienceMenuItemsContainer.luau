@@ -9,26 +9,26 @@ local constantsModule = require(abuseReportMenu.Components.Constants)
 local cryoModule = require(corePackagesService.Packages.Cryo)
 local reportExperienceUIStateReducerModule = require(abuseReportMenu.Reducers.reportExperienceUIStateReducer)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getMenuItemSizingsModule (ref), reactModule (ref), reportExperienceUIStateReducerModule (ref), constantsModule (ref), getMenuItemsFromConfigsModule (ref), reportExperienceMenuItemConfigListModule (ref), cryoModule (ref)
-	local var9 = getMenuItemSizingsModule()
-	local var10, var11 = reactModule.useReducer(reportExperienceUIStateReducerModule, constantsModule.InitExperienceUIState)
+	local var1 = getMenuItemSizingsModule()
+	local var2, var3 = reactModule.useReducer(reportExperienceUIStateReducerModule, constantsModule.InitExperienceUIState)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), constantsModule (copy)
-		if p0.utilityProps.isReportTabVisible then
-			p0.utilityProps.analyticsDispatch({
+		-- upvalues: p1 (ref), constantsModule (copy)
+		if p1.utilityProps.isReportTabVisible then
+			p1.utilityProps.analyticsDispatch({
 				type = constantsModule.AnalyticsActions.SwitchToExperienceInitialSelections
 			})
 		end
-	end, { p0.utilityProps.isReportTabVisible })
+	end, { p1.utilityProps.isReportTabVisible })
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		MenuItems = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, cryoModule.Dictionary.join({
 			Layout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var9.ItemPadding)
+				Padding = UDim.new(0, var1.ItemPadding)
 			})
-		}, getMenuItemsFromConfigsModule(var10, var11, p0.utilityProps, reportExperienceMenuItemConfigListModule, p0.isSmallPortraitViewport)))
+		}, getMenuItemsFromConfigsModule(var2, var3, p1.utilityProps, reportExperienceMenuItemConfigListModule, p1.isSmallPortraitViewport)))
 	})
 end

@@ -10,77 +10,77 @@ local preloadFastIntsModule = require(momentsCommon.Media.Preload.preloadFastInt
 
 return {
 	kind = "screenshot",
-	create = function(p0, p1)
+	create = function(p1, p2)
 		-- upvalues: preloadFastIntsModule (ref), signalsModule (ref), reactModule (ref), view (ref)
-		local image = p0.image
+		local image = p1.image
 		assert(image ~= nil, "createScreenshotNode: spec.image (the screenshot content URI) is required")
-		local poster = p0.poster
-		local durationSeconds = p0.durationSeconds or preloadFastIntsModule.getScreenshotDurationSeconds()
+		local poster = p1.poster
+		local durationSeconds = p1.durationSeconds or preloadFastIntsModule.getScreenshotDurationSeconds()
 		local content = Content.fromUri(image)
-		local var7 = if poster ~= nil then nil else Content.fromUri(poster)
-		local var8, var9 = signalsModule.createSignal(0)
-		local var10, var11 = signalsModule.createSignal(false)
-		local var12, var13 = signalsModule.createSignal(nil)
-		local var14 = false
-		local var15 = false
-		local heartbeatConnection = p1.runService.Heartbeat:Connect(function(p2)
-			-- upvalues: var15 (write), var14 (write), var8 (ref), durationSeconds (ref), var9 (ref)
-			if var15 or not var14 then return end
-			local var19 = var8(false) + p2
+		local var1 = if poster ~= nil then nil else Content.fromUri(poster)
+		local var2, var3 = signalsModule.createSignal(0)
+		local var4, var5 = signalsModule.createSignal(false)
+		local var6, var7 = signalsModule.createSignal(nil)
+		local var8 = false
+		local var9 = false
+		local heartbeatConnection = p2.runService.Heartbeat:Connect(function(p3)
+			-- upvalues: var9 (write), var8 (write), var2 (ref), durationSeconds (ref), var3 (ref)
+			if var9 or not var8 then return end
+			local var10 = var2(false) + p3
 			
-			if durationSeconds <= var19 then
-				var19 %= durationSeconds
+			if durationSeconds <= var10 then
+				var10 %= durationSeconds
 			end
-			var9(var19)
+			var3(var10)
 		end)
-		local var17 = p1.contentProvider:GetAssetFetchStatusChangedSignal(image):Connect(function()
-			-- upvalues: p1 (ref), image (ref), var11 (ref), var13 (ref)
-			local var20 = p1.contentProvider:GetAssetFetchStatus(image)
-			var11(var20 == Enum.AssetFetchStatus.Success)
-			var13(if var20 == Enum.AssetFetchStatus.Failure then `screenshot load failed: {var20.Name}` else nil)
+		local var10 = p2.contentProvider:GetAssetFetchStatusChangedSignal(image):Connect(function()
+			-- upvalues: p2 (ref), image (ref), var5 (ref), var7 (ref)
+			local var11 = p2.contentProvider:GetAssetFetchStatus(image)
+			var5(var11 == Enum.AssetFetchStatus.Success)
+			var7(if var11 == Enum.AssetFetchStatus.Failure then `screenshot load failed: {var11.Name}` else nil)
 		end)
-		local var18 = p1.contentProvider:GetAssetFetchStatus(image)
-		var11(var18 == Enum.AssetFetchStatus.Success)
-		var13(if var18 == Enum.AssetFetchStatus.Failure then `screenshot load failed: {var18.Name}` else nil)
+		local var11 = p2.contentProvider:GetAssetFetchStatus(image)
+		var5(var11 == Enum.AssetFetchStatus.Success)
+		var7(if var11 == Enum.AssetFetchStatus.Failure then `screenshot load failed: {var11.Name}` else nil)
 		
 		return {
 			kind = "screenshot",
 			usesDecoder = false,
 			zIndex = 0,
-			id = p0.id,
+			id = p1.id,
 			assets = function()
-				-- upvalues: var7 (ref), content (ref)
-				return if var7 == nil then { content } else { content, var7 }
+				-- upvalues: var1 (ref), content (ref)
+				return if var1 == nil then { content } else { content, var1 }
 			end,
 			download = function()
-				-- upvalues: var15 (write), var7 (ref), content (ref), p1 (ref)
-				if var15 then return end
-				local list, var23, var24
+				-- upvalues: var9 (write), var1 (ref), content (ref), p2 (ref)
+				if var9 then return end
+				local list, var12, var13
 				local t = {}
 				
-				if var7 == nil then
+				if var1 == nil then
 					list = { content }
-					var23 = nil
-					var24 = nil
+					var12 = nil
+					var13 = nil
 				else
-					list = { content, var7 }
-					var23 = nil
-					var24 = nil
+					list = { content, var1 }
+					var12 = nil
+					var13 = nil
 				end
-				for i, v in list, var23, var24 do
+				for i, v in list, var12, var13 do
 					table.insert(t, v.Uri)
 				end
-				p1.contentProvider:PreloadAsync(t)
+				p2.contentProvider:PreloadAsync(t)
 			end,
 			render = function(p3)
-				-- upvalues: reactModule (copy), view (copy), var7 (ref), content (ref)
+				-- upvalues: reactModule (copy), view (copy), var1 (ref), content (ref)
 				return reactModule.createElement(view, { tag = "size-full", ZIndex = 0 }, {
-					Poster = if var7 ~= nil then nil else reactModule.createElement("ImageLabel", {
+					Poster = if var1 ~= nil then nil else reactModule.createElement("ImageLabel", {
 						BackgroundTransparency = 1,
 						ZIndex = 1,
 						Size = UDim2.fromScale(1, 1),
 						ScaleType = p3.scaleType or Enum.ScaleType.Crop,
-						ImageContent = var7
+						ImageContent = var1
 					}),
 					Base = reactModule.createElement("ImageLabel", {
 						BackgroundTransparency = 1,
@@ -93,34 +93,34 @@ return {
 				})
 			end,
 			play = function()
-				-- upvalues: var14 (write)
-				var14 = true
+				-- upvalues: var8 (write)
+				var8 = true
 			end,
 			pause = function()
-				-- upvalues: var14 (write)
-				var14 = false
+				-- upvalues: var8 (write)
+				var8 = false
 			end,
-			seek = function(p4)
-				-- upvalues: var9 (ref), durationSeconds (ref)
-				var9(math.clamp(p4, 0, durationSeconds))
+			seek = function(p3)
+				-- upvalues: var3 (ref), durationSeconds (ref)
+				var3(math.clamp(p3, 0, durationSeconds))
 			end,
 			dispose = function()
-				-- upvalues: var15 (write), var14 (write), heartbeatConnection (ref), var17 (ref)
-				if var15 then
+				-- upvalues: var9 (write), var8 (write), heartbeatConnection (ref), var10 (ref)
+				if var9 then
 					return
 				end
-				var15 = true
-				var14 = false
+				var9 = true
+				var8 = false
 				heartbeatConnection:Disconnect()
-				var17:Disconnect()
+				var10:Disconnect()
 			end,
-			getPosition = var8,
+			getPosition = var2,
 			getDuration = function()
 				-- upvalues: durationSeconds (ref)
 				return durationSeconds
 			end,
-			getIsImageLoaded = var10,
-			getFailureReason = var12
+			getIsImageLoaded = var4,
+			getFailureReason = var6
 		}
 	end
 }

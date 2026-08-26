@@ -1,12 +1,12 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
-	t_1._id = p0
-	t_1._parent = p1
+	t_1._id = p1
+	t_1._parent = p2
 	t_1._children = {}
 	
 	return t_1
@@ -32,22 +32,22 @@ function t:getStackDepth()
 	return if self._parent == nil then 0 else 1 + self._parent:getStackDepth()
 end
 
-function t:setLabelAndValue(p2, p3)
-	self._label = p2
-	self._value = p3
+function t:setLabelAndValue(p1, p2)
+	self._label = p1
+	self._value = p2
 end
 
-function t:getOrMakeChildById(p4)
+function t:getOrMakeChildById(p1)
 	-- upvalues: t (ref)
 	for i, v in ipairs(self._children) do
-		if v:getId() == p4 then
+		if v:getId() == p1 then
 			return v
 		end
 	end
-	local var2 = t.new(p4, self)
-	table.insert(self._children, var2)
+	local var1 = t.new(p1, self)
+	table.insert(self._children, var1)
 	
-	return var2
+	return var1
 end
 
 function t:removeChildren()
@@ -61,9 +61,9 @@ function t:removeChildren()
 	self._children = nil
 end
 
-function t:removeChild(p5)
+function t:removeChild(p2)
 	for i, v in ipairs(self._children) do
-		if v:getId() == p5 then
+		if v:getId() == p2 then
 			v:removeChildren()
 			
 			return

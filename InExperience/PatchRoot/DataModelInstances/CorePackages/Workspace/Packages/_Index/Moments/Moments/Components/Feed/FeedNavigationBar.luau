@@ -4,20 +4,20 @@ local signalsReactModule = require(parent.SignalsReact)
 local _ = require(script.Parent.FeedTypes)
 local navigationBarModule = require(script.Parent.NavigationBar)
 
-return function(p0)
+return function(p1)
 	-- upvalues: signalsReactModule (ref), reactModule (ref), navigationBarModule (ref)
-	local var3 = signalsReactModule.useSignalState(p0.pager.getItems)
-	local var4 = signalsReactModule.useSignalState(p0.pager.getCurrentIndex)
-	local var3Count = #var3
-	local var6 = var3[var3Count]
-	local var7 = if var6 == nil or var6.kind ~= "skeleton" then var3Count else var3Count - 1
+	local var1 = signalsReactModule.useSignalState(p1.pager.getItems)
+	local var2 = signalsReactModule.useSignalState(p1.pager.getCurrentIndex)
+	local var3Count = #var1
+	local var3 = var1[var3Count]
+	local var4 = if var3 == nil or var3.kind ~= "skeleton" then var3Count else var3Count - 1
 	
 	return reactModule.createElement(navigationBarModule, {
-		active = p0.active,
-		currentIndex = math.min(var4, math.max(var7, 1)),
-		numItems = var7,
-		onScrollToNext = p0.onScrollToNext,
-		onScrollToPrevious = p0.onScrollToPrevious,
-		zIndex = p0.zIndex
+		active = p1.active,
+		currentIndex = math.min(var2, math.max(var4, 1)),
+		numItems = var4,
+		onScrollToNext = p1.onScrollToNext,
+		onScrollToPrevious = p1.onScrollToPrevious,
+		zIndex = p1.zIndex
 	})
 end

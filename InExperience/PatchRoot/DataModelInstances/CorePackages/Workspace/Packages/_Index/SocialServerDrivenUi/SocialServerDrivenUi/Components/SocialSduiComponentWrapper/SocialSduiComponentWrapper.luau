@@ -4,25 +4,25 @@ local _ = require(parent.AppCommonLib)
 local getSduiComponentWrapper = require(parent.SduiCoreSystem).getSduiComponentWrapper
 local view = require(parent.Foundation).View
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: getSduiComponentWrapper (ref), reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder,
-		onAbsoluteSizeChanged = p0.onFrameResized
+		LayoutOrder = p1.layoutOrder,
+		onAbsoluteSizeChanged = p1.onFrameResized
 	}, {
-		SocialSduiComponentWrapper = reactModule.createElement(getSduiComponentWrapper(p0.sduiComponentConfig), {
-			debugName = p0.debugName,
-			componentConfig = p0.sduiComponentConfig,
-			sduiContext = p0.sduiContext,
+		SocialSduiComponentWrapper = reactModule.createElement(getSduiComponentWrapper(p1.sduiComponentConfig), {
+			debugName = p1.debugName,
+			componentConfig = p1.sduiComponentConfig,
+			sduiContext = p1.sduiContext,
 			extraLocalProps = {
-				index = p0.layoutOrder,
-				pageSideMargin = p0.pageSideMargin,
-				verticalScrollingFrameRef = p0.verticalScrollingFrameRef,
-				scrollViewPositionChangedSignal = p0.scrollViewPositionChangedSignal,
-				testId = p0.testId
+				index = p1.layoutOrder,
+				pageSideMargin = p1.pageSideMargin,
+				verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
+				scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
+				testId = p1.testId
 			},
-			localAnalyticsData = p0.analyticsContext
+			localAnalyticsData = p1.analyticsContext
 		})
 	})
 end)

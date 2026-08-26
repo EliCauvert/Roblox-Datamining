@@ -1,5 +1,5 @@
-﻿local function _(p0, p1)
-	return "(" .. p1 .. (if type(p0) == "string" then p0 else table.concat(p0, "|")) .. ")"
+﻿local function _(p1, p2)
+	return "(" .. p1 .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
 end
 
 return {
@@ -14,38 +14,38 @@ return {
 	NON_WHITESPACE = "\\S",
 	WHITESPACE = "\\s",
 	ALPHANUMERIC = "\\w",
-	oneOf = function(p2)
-		return "(" .. "?:" .. (if type(p2) == "string" then p2 else table.concat(p2, "|")) .. ")"
+	oneOf = function(p1)
+		return "(" .. "?:" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
 	end,
-	capture = function(p3)
-		return "(" .. "" .. (if type(p3) == "string" then p3 else table.concat(p3, "|")) .. ")"
+	capture = function(p1)
+		return "(" .. "" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
 	end,
-	zeroOrOneOf = function(p4)
-		return ("(" .. "?:" .. (if type(p4) == "string" then p4 else table.concat(p4, "|")) .. ")") .. "?"
+	zeroOrOneOf = function(p1)
+		return ("(" .. "?:" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")") .. "?"
 	end,
-	zeroOrMore = function(p5)
-		return ("(" .. "?:" .. (if type(p5) == "string" then p5 else table.concat(p5, "|")) .. ")") .. "*"
+	zeroOrMore = function(p1)
+		return ("(" .. "?:" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")") .. "*"
 	end,
-	oneOrMore = function(p6)
-		return ("(" .. "?:" .. (if type(p6) == "string" then p6 else table.concat(p6, "|")) .. ")") .. "+"
+	oneOrMore = function(p1)
+		return ("(" .. "?:" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")") .. "+"
 	end,
-	lookahead = function(p7)
-		return "(" .. "?=" .. (if type(p7) == "string" then p7 else table.concat(p7, "|")) .. ")"
+	lookahead = function(p1)
+		return "(" .. "?=" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
 	end,
-	lookbehind = function(p8)
-		return "(" .. "?<=" .. (if type(p8) == "string" then p8 else table.concat(p8, "|")) .. ")"
+	lookbehind = function(p1)
+		return "(" .. "?<=" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
 	end,
-	negativeLookahead = function(p9)
-		return "(" .. "?!" .. (if type(p9) == "string" then p9 else table.concat(p9, "|")) .. ")"
+	negativeLookahead = function(p1)
+		return "(" .. "?!" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
 	end,
-	negativeLookbehind = function(p10)
-		return "(" .. "?<!" .. (if type(p10) == "string" then p10 else table.concat(p10, "|")) .. ")"
+	negativeLookbehind = function(p1)
+		return "(" .. "?<!" .. (if type(p1) == "string" then p1 else table.concat(p1, "|")) .. ")"
 	end,
-	matchWhole = function(p11)
+	matchWhole = function(p1)
 		return "^" .. p11 .. "$"
 	end,
-	regexOr = function(p12, p13)
-		return p12 .. "|" .. p13
+	regexOr = function(p1, p2)
+		return p1 .. "|" .. p13
 	end,
 	set = function(value)
 		return "[" .. value .. "]"

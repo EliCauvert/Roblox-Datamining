@@ -32,9 +32,9 @@ local t_2 = {
 	[Enum.KeyCode.Right] = "NextSelectionRight"
 }
 
-local function _(p0)
+local function _(p1)
 	return {
-		KeyCode = p0,
+		KeyCode = p1,
 		Delta = Vector3.new(),
 		Position = Vector3.new(),
 		UserInputType = Enum.UserInputType.Gamepad1,
@@ -69,48 +69,48 @@ function t.new()
 			tbl.__mockSelected = value
 			tbl.__selectionChangedSignal:fire()
 		end,
-		getGamepadConnected = function(p2)
+		getGamepadConnected = function(p1)
 			-- upvalues: tbl (ref)
-			return tbl.__connectedGamepads[p2] or false
+			return tbl.__connectedGamepads[p1] or false
 		end,
-		getGamepadState = function(p3)
+		getGamepadState = function(p1)
 			-- upvalues: tbl (ref)
-			if tbl.__gamepadStates[p3] == nil then
-				tbl:__initializeGamepadState(p3)
+			if tbl.__gamepadStates[p1] == nil then
+				tbl:__initializeGamepadState(p1)
 			end
-			return tbl.__gamepadStates[p3]
+			return tbl.__gamepadStates[p1]
 		end,
 		getNavigationGamepads = function(_)
 			-- upvalues: cryoModule (copy), tbl (ref)
 			return cryoModule.Dictionary.keys(tbl.__connectedGamepads)
 		end,
-		subscribeToSelectionChanged = function(p4)
+		subscribeToSelectionChanged = function(p1)
 			-- upvalues: tbl (ref)
-			return { Disconnect = tbl.__selectionChangedSignal:subscribe(p4) }
+			return { Disconnect = tbl.__selectionChangedSignal:subscribe(p1) }
 		end,
-		subscribeToInputBegan = function(p5)
+		subscribeToInputBegan = function(p1)
 			-- upvalues: tbl (ref)
-			return { Disconnect = tbl.__inputSignal:subscribe(p5) }
+			return { Disconnect = tbl.__inputSignal:subscribe(p1) }
 		end,
-		subscribeToInputChanged = function(p6)
+		subscribeToInputChanged = function(p1)
 			-- upvalues: tbl (ref)
-			return { Disconnect = tbl.__inputSignal:subscribe(p6) }
+			return { Disconnect = tbl.__inputSignal:subscribe(p1) }
 		end,
-		subscribeToInputEnded = function(p7)
+		subscribeToInputEnded = function(p1)
 			-- upvalues: tbl (ref)
-			return { Disconnect = tbl.__inputSignal:subscribe(p7) }
+			return { Disconnect = tbl.__inputSignal:subscribe(p1) }
 		end,
-		subscribeToRenderStepped = function(p8)
+		subscribeToRenderStepped = function(p1)
 			-- upvalues: tbl (ref)
-			return { Disconnect = tbl.__renderStepped:subscribe(p8) }
+			return { Disconnect = tbl.__renderStepped:subscribe(p1) }
 		end,
-		subscribeToGamepadConnected = function(p9)
+		subscribeToGamepadConnected = function(p1)
 			-- upvalues: tbl (ref)
-			return { Disconnect = tbl.__gamepadConnected:subscribe(p9) }
+			return { Disconnect = tbl.__gamepadConnected:subscribe(p1) }
 		end,
-		subscribeToGamepadDisconnected = function(p10)
+		subscribeToGamepadDisconnected = function(p1)
 			-- upvalues: tbl (ref)
-			return { Disconnect = tbl.__gamepadDisconnected:subscribe(p10) }
+			return { Disconnect = tbl.__gamepadDisconnected:subscribe(p1) }
 		end
 	}
 	tbl.__interface = t_1
@@ -118,11 +118,11 @@ function t.new()
 	return tbl, t_1
 end
 
-function t:__initializeGamepadState(p11)
+function t:__initializeGamepadState(p1)
 	-- upvalues: cryoModule (ref), list (ref)
-	self.__gamepadStates[p11] = cryoModule.List.map(list, function(p12)
+	self.__gamepadStates[p1] = cryoModule.List.map(list, function(p2)
 		return {
-			KeyCode = p12,
+			KeyCode = p2,
 			Delta = Vector3.new(),
 			Position = Vector3.new(),
 			UserInputType = Enum.UserInputType.Gamepad1,
@@ -131,66 +131,66 @@ function t:__initializeGamepadState(p11)
 	end)
 end
 
-function t:simulateSelectionChanged(p13)
-	self.__mockSelected = p13
+function t:simulateSelectionChanged(p1)
+	self.__mockSelected = p1
 	self.__selectionChangedSignal:fire()
 end
 
-function t:simulateInput(p14)
+function t:simulateInput(p1)
 	-- upvalues: cryoModule (ref), t_1 (ref), t_2 (ref)
-	local var8 = cryoModule.Dictionary.join({
+	local var1 = cryoModule.Dictionary.join({
 		Delta = Vector3.new(),
 		Position = Vector3.new(),
 		UserInputType = Enum.UserInputType.Gamepad1
-	}, p14)
-	assert(typeof(var8.KeyCode) == "EnumItem" and var8.KeyCode.EnumType == Enum.KeyCode, "Invalid inputObject.KeyCode: expected a member of Enum.KeyCode")
-	assert(t_1[var8.UserInputType], "Invalid inputObject.UserInputType")
-	var8 = var8.KeyCode
-	local var9 = t_2[var8]
+	}, p1)
+	assert(typeof(var1.KeyCode) == "EnumItem" and var1.KeyCode.EnumType == Enum.KeyCode, "Invalid inputObject.KeyCode: expected a member of Enum.KeyCode")
+	assert(t_1[var1.UserInputType], "Invalid inputObject.UserInputType")
+	var1 = var1.KeyCode
+	local var2 = t_2[var1]
 	
-	if var9 ~= nil and self.__interface.getSelection() ~= nil then
-		self.__interface.setSelection(self.__interface.getSelection()[var9])
+	if var2 ~= nil and self.__interface.getSelection() ~= nil then
+		self.__interface.setSelection(self.__interface.getSelection()[var2])
 	end
-	if var8.UserInputType ~= Enum.UserInputType.Keyboard then
-		local userInputType = var8.UserInputType
+	if var1.UserInputType ~= Enum.UserInputType.Keyboard then
+		local userInputType = var1.UserInputType
 		
 		if not self.__connectedGamepads[userInputType] then
 			self:connectGamepad(userInputType)
 		end
-		local var10 = self.__gamepadStates[userInputType]
-		local var11 = cryoModule.List.findWhere(var10, function(p15)
-			-- upvalues: var8 (ref)
-			return p15.KeyCode == var8
+		local var3 = self.__gamepadStates[userInputType]
+		local var4 = cryoModule.List.findWhere(var3, function(p2)
+			-- upvalues: var1 (ref)
+			return p2.KeyCode == var1
 		end)
 		
-		if var11 == nil then
-			error(("Invalid InputObject: KeyCode %s is not possible on %s"):format(tostring(var8), tostring(userInputType)), 2)
+		if var4 == nil then
+			error(("Invalid InputObject: KeyCode %s is not possible on %s"):format(tostring(var1), tostring(userInputType)), 2)
 		end
-		for i, v in pairs(var8) do
-			var10[var11][i] = v
+		for i, v in pairs(var1) do
+			var3[var4][i] = v
 		end
 	end
-	self.__inputSignal:fire(var8)
+	self.__inputSignal:fire(var1)
 end
 
-function t:renderStep(p16)
-	if p16 == nil then
-		p16 = 0.033333333333
+function t:renderStep(p2)
+	if p2 == nil then
+		p2 = 0.033333333333
 	end
-	self.__renderStepped:fire(p16)
+	self.__renderStepped:fire(p2)
 end
 
-function t:connectGamepad(p17)
-	assert(typeof(p17) == "EnumItem" and p17.EnumType == Enum.UserInputType, "Invalid argument #1: expected a member of Enum.UserInputType")
-	self.__connectedGamepads[p17] = true
-	self:__initializeGamepadState(p17)
-	self.__gamepadConnected:fire(p17)
+function t:connectGamepad(p2)
+	assert(typeof(p2) == "EnumItem" and p2.EnumType == Enum.UserInputType, "Invalid argument #1: expected a member of Enum.UserInputType")
+	self.__connectedGamepads[p2] = true
+	self:__initializeGamepadState(p2)
+	self.__gamepadConnected:fire(p2)
 end
 
-function t:disconnectGamepad(p18)
-	assert(typeof(p18) == "EnumItem" and p18.EnumType == Enum.UserInputType, "Invalid argument #1: expected a member of Enum.UserInputType")
-	self.__connectedGamepads[p18] = nil
-	self.__gamepadDisconnected:fire(p18)
+function t:disconnectGamepad(p2)
+	assert(typeof(p2) == "EnumItem" and p2.EnumType == Enum.UserInputType, "Invalid argument #1: expected a member of Enum.UserInputType")
+	self.__connectedGamepads[p2] = nil
+	self.__gamepadDisconnected:fire(p2)
 end
 
 return t

@@ -11,38 +11,38 @@ pageNavigationWatcher.validateProps = t.strictInterface({
 	menuOpen = t.boolean
 })
 
-function pageNavigationWatcher.init(p0, p1)
-	p0:setState({ lastPage = p1.currentPage, lastMenuOpen = p1.menuOpen })
+function pageNavigationWatcher.init(p1, p2)
+	p1:setState({ lastPage = p2.currentPage, lastMenuOpen = p2.menuOpen })
 end
 
-function pageNavigationWatcher.render(p2)
+function pageNavigationWatcher.render(p1)
 	-- upvalues: roact (ref)
-	return roact.createFragment(p2.props[roact.Children])
+	return roact.createFragment(p1.props[roact.Children])
 end
 
-function pageNavigationWatcher.didUpdate(p3)
-	local lastPage = p3.state.lastPage
-	local lastMenuOpen = p3.state.lastMenuOpen
-	local currentPage = p3.props.currentPage
-	local menuOpen = p3.props.menuOpen
+function pageNavigationWatcher.didUpdate(p1)
+	local lastPage = p1.state.lastPage
+	local lastMenuOpen = p1.state.lastMenuOpen
+	local currentPage = p1.props.currentPage
+	local menuOpen = p1.props.menuOpen
 	
 	if lastPage ~= currentPage or lastMenuOpen ~= menuOpen then
-		p3:setState({ lastPage = currentPage, lastMenuOpen = menuOpen })
+		p1:setState({ lastPage = currentPage, lastMenuOpen = menuOpen })
 		
-		if currentPage == p3.props.desiredPage and menuOpen and p3.props.onNavigateTo ~= nil then
-			p3.props.onNavigateTo()
+		if currentPage == p1.props.desiredPage and menuOpen and p1.props.onNavigateTo ~= nil then
+			p1.props.onNavigateTo()
 			
 			return
-		elseif lastPage == p3.props.desiredPage and lastMenuOpen and p3.props.onNavigateAway ~= nil then
-			p3.props.onNavigateAway()
+		elseif lastPage == p1.props.desiredPage and lastMenuOpen and p1.props.onNavigateAway ~= nil then
+			p1.props.onNavigateAway()
 			
 			return
-		elseif lastMenuOpen and not menuOpen and p3.props.onNavigateAway ~= nil then
-			p3.props.onNavigateAway()
+		elseif lastMenuOpen and not menuOpen and p1.props.onNavigateAway ~= nil then
+			p1.props.onNavigateAway()
 		end
 	end
 end
 
-return roactRodux.UNSTABLE_connect2(function(p4)
-	return { currentPage = p4.menuPage, menuOpen = p4.isMenuOpen }
+return roactRodux.UNSTABLE_connect2(function(p1)
+	return { currentPage = p1.menuPage, menuOpen = p1.isMenuOpen }
 end)(pageNavigationWatcher)

@@ -5,30 +5,30 @@ local peoplePageVirtualizedGridBuffer = game:DefineFastInt("PeoplePageVirtualize
 
 return function()
 	-- upvalues: signalsModule (ref), peoplePageVirtualizedGridBuffer (ref), fFlagFixVirtualizedGridNumItems (ref)
-	local var2, var3 = signalsModule.createSignal(1)
-	local var4, var5 = signalsModule.createSignal(0)
+	local var1, var2 = signalsModule.createSignal(1)
+	local var3, var4 = signalsModule.createSignal(0)
 	
 	return {
-		getMinVirtualizedIndex = var2,
-		getMaxVirtualizedIndex = var4,
-		getNumVirtualizedItems = signalsModule.createComputed(function(p0)
-			-- upvalues: var4 (ref), var2 (ref)
-			return var4(p0) - var2(p0) + 1
+		getMinVirtualizedIndex = var1,
+		getMaxVirtualizedIndex = var3,
+		getNumVirtualizedItems = signalsModule.createComputed(function(p1)
+			-- upvalues: var3 (ref), var1 (ref)
+			return var3(p1) - var1(p1) + 1
 		end),
 		calculateVirtualizedGridLimits = function(p1, p2, _, p3, p4, p5)
-			-- upvalues: peoplePageVirtualizedGridBuffer (copy), fFlagFixVirtualizedGridNumItems (copy), var3 (ref), var5 (ref)
-			local var6 = math.floor((p1 - peoplePageVirtualizedGridBuffer) / (p3 + p5)) * p4 + 1
+			-- upvalues: peoplePageVirtualizedGridBuffer (copy), fFlagFixVirtualizedGridNumItems (copy), var2 (ref), var4 (ref)
+			local var5 = math.floor((p1 - peoplePageVirtualizedGridBuffer) / (p3 + p5)) * p4 + 1
 			
 			if not fFlagFixVirtualizedGridNumItems then
-				var6 = math.max(1, var6)
+				var5 = math.max(1, var5)
 			end
-			local var7 = var6 + math.ceil((p2 + 2 * peoplePageVirtualizedGridBuffer) / (p3 + p5)) * p4 - 1
+			local var6 = var5 + math.ceil((p2 + 2 * peoplePageVirtualizedGridBuffer) / (p3 + p5)) * p4 - 1
 			
 			if fFlagFixVirtualizedGridNumItems then
-				var6 = math.max(1, var6)
+				var5 = math.max(1, var5)
 			end
-			var3(var6)
-			var5(var7)
+			var2(var5)
+			var4(var6)
 		end
 	}
 end

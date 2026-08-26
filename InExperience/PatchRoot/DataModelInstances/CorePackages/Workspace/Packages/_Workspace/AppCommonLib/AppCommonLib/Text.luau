@@ -1,91 +1,91 @@
 ﻿local textService = game:GetService("TextService")
 local t = { PADDING = Vector2.new(2, 2) }
 
-function t.GetTextBounds(p0, p1, p2, p3)
+function t.GetTextBounds(p1, p2, p3, p4)
 	-- upvalues: textService (ref), t (ref)
-	return textService:GetTextSize(p0, p2, p1, p3) + t.PADDING
+	return textService:GetTextSize(p1, p3, p2, p4) + t.PADDING
 end
 
-function t.GetTextWidth(p4, p5, p6)
+function t.GetTextWidth(p1, p2, p3)
 	-- upvalues: t (ref)
-	return t.GetTextBounds(p4, p5, p6, Vector2.new(10000, 10000)).X
+	return t.GetTextBounds(p1, p2, p3, Vector2.new(10000, 10000)).X
 end
 
-function t.GetTextHeight(p7, p8, p9, p10)
+function t.GetTextHeight(p1, p2, p3, p4)
 	-- upvalues: t (ref)
-	return t.GetTextBounds(p7, p8, p9, Vector2.new(p10, 10000)).Y
+	return t.GetTextBounds(p1, p2, p3, Vector2.new(p4, 10000)).Y
 end
 
-function t.Truncate(p11, p12, p13, p14, p15)
+function t.Truncate(p1, p2, p3, p4, p5)
 	-- upvalues: t (ref)
-	p15 = p15 or ""
+	p5 = p5 or ""
 	
-	if p14 >= t.GetTextWidth(p11, p12, p13) then
-		return p11
+	if p4 >= t.GetTextWidth(p1, p2, p3) then
+		return p1
 	end
-	local var2 = ""
+	local var1 = ""
 	
-	for i, v in utf8.graphemes(p11) do
-		local text = string.sub(p11, 1, v) .. p15
+	for i, v in utf8.graphemes(p1) do
+		local text = string.sub(p1, 1, v) .. p15
 		
-		if p14 >= t.GetTextWidth(text, p12, p13) then
-			var2 = text
+		if p4 >= t.GetTextWidth(text, p2, p3) then
+			var1 = text
 			continue
 		end
-		return var2
+		return var1
 	end
 	return ""
 end
 
-function t.TruncateTextLabel(p16, p17)
+function t.TruncateTextLabel(p6, p7)
 	-- upvalues: t (ref)
-	p16.Text = t.Truncate(p16.Text, p16.Font, p16.TextSize, p16.AbsoluteSize.X, p17)
+	p6.Text = t.Truncate(p6.Text, p6.Font, p6.TextSize, p6.AbsoluteSize.X, p7)
 end
 
-function t.Trim(p18)
-	if type(p18) ~= "string" then
-		error(string.format("Text.Trim called on non-string type %s.", type(p18)), 2)
+function t.Trim(p6)
+	if type(p6) ~= "string" then
+		error(string.format("Text.Trim called on non-string type %s.", type(p6)), 2)
 	end
-	return p18:gsub("^%s*(.-)%s*$", "%1")
+	return p6:gsub("^%s*(.-)%s*$", "%1")
 end
 
-function t.RightTrim(p19)
-	if type(p19) ~= "string" then
-		error(string.format("Text.RightTrim called on non-string type %s.", type(p19)), 2)
+function t.RightTrim(p6)
+	if type(p6) ~= "string" then
+		error(string.format("Text.RightTrim called on non-string type %s.", type(p6)), 2)
 	end
-	return p19:gsub("%s+$", "")
+	return p6:gsub("%s+$", "")
 end
 
-function t.LeftTrim(p20)
-	if type(p20) ~= "string" then
-		error(string.format("Text.LeftTrim called on non-string type %s.", type(p20)), 2)
+function t.LeftTrim(p6)
+	if type(p6) ~= "string" then
+		error(string.format("Text.LeftTrim called on non-string type %s.", type(p6)), 2)
 	end
-	return p20:gsub("^%s+", "")
+	return p6:gsub("^%s+", "")
 end
 
-function t.SpaceNormalize(p21)
-	if type(p21) ~= "string" then
-		error(string.format("Text.SpaceNormalize called on non-string type %s.", type(p21)), 2)
+function t.SpaceNormalize(p6)
+	if type(p6) ~= "string" then
+		error(string.format("Text.SpaceNormalize called on non-string type %s.", type(p6)), 2)
 	end
-	return p21:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
+	return p6:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
 end
 
-function t.Split(p22, p23)
-	if type(p22) ~= "string" then
-		error(string.format("Text.Split called on non-string type %s.", type(p22)), 2)
-	elseif type(p23) ~= "string" then
-		error(string.format("Text.Split called with a pattern that is non-string type %s.", type(p23)), 2)
-	elseif p23 == "" then
+function t.Split(p6, p7)
+	if type(p6) ~= "string" then
+		error(string.format("Text.Split called on non-string type %s.", type(p6)), 2)
+	elseif type(p7) ~= "string" then
+		error(string.format("Text.Split called with a pattern that is non-string type %s.", type(p7)), 2)
+	elseif p7 == "" then
 		error("Text.Split called with an empty pattern.", 2)
 	end
 	local t = {}
-	local var5 = 1
+	local var2 = 1
 	while true do
-		local matchIndex, matchIndex_1 = string.find(p22, p23, var5, true)
+		local matchIndex, matchIndex_1 = string.find(p6, p7, var2, true)
 		if not matchIndex or not matchIndex_1 then break end
-		table.insert(t, string.sub(p22, var5, matchIndex - 1))
-		var5 = matchIndex_1 + 1
-		table.insert(t, string.sub(p22, var5, string.len(p22)))
+		table.insert(t, string.sub(p6, var2, matchIndex - 1))
+		var2 = matchIndex_1 + 1
+		table.insert(t, string.sub(p6, var2, string.len(p6)))
 		
 		return t
 	end

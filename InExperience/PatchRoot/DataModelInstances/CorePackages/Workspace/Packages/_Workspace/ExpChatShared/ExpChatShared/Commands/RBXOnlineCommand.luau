@@ -7,11 +7,11 @@ local fFlagExpChatUseUpdatedUserCountStringsModule = require(expChatShared.Flags
 return {
 	name = script.Name,
 	alias = { "/online" },
-	clientRun = function(_, p0, _, _)
+	clientRun = function(_, p1, _, _)
 		-- upvalues: textChatService (ref), online (ref), fFlagExpChatUseUpdatedUserCountStringsModule (ref)
 		local ok, status = pcall(function()
-			-- upvalues: textChatService (copy), p0 (ref)
-			return textChatService:GetChatableUserCountAsync(p0, "local")
+			-- upvalues: textChatService (copy), p1 (ref)
+			return textChatService:GetChatableUserCountAsync(p1, "local")
 		end)
 		
 		if ok then

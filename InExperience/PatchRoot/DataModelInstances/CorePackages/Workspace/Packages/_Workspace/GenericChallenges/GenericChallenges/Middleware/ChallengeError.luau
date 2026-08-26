@@ -4,14 +4,14 @@ local luauPolyfillModule = require(genericChallenges.Parent.LuauPolyfill)
 local t = {}
 t.__index = t
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: t (ref)
-	return setmetatable({ kind = p0, data = p1 }, t)
+	return setmetatable({ kind = p1, data = p2 }, t)
 end
 
-function t.match(p2)
+function t.match(p1)
 	-- upvalues: luauPolyfillModule (ref), t (ref)
-	return luauPolyfillModule.instanceof(p2, t)
+	return luauPolyfillModule.instanceof(p1, t)
 end
 
 function t:matchAbandoned()

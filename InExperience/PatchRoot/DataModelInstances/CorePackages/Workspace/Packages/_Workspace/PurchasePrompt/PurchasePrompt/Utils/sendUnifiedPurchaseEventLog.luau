@@ -2,13 +2,13 @@
 local default = require(purchasePrompt.Parent.LoggingProtocol).default
 local unifiedPurchaseTelemetryModule = require(purchasePrompt.Events.UnifiedPurchaseTelemetry)
 
-function sendUnifiedPurchaseEventLog(p0)
+function sendUnifiedPurchaseEventLog(p1)
 	-- upvalues: default (ref), unifiedPurchaseTelemetryModule (ref)
 	default:logRobloxTelemetryEvent(unifiedPurchaseTelemetryModule.UnifiedProductPurchaseFlowEvent, {
 		default.StandardizedFields.addOsInfo,
 		default.StandardizedFields.addSessionId,
 		"addSessionInfo"
-	}, p0)
+	}, p1)
 end
 
 return sendUnifiedPurchaseEventLog

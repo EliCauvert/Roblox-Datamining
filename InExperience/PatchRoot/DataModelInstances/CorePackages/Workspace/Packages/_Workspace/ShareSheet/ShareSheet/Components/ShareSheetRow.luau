@@ -5,16 +5,16 @@ local scrollView = foundationModule.ScrollView
 local visibility = foundationModule.Enums.Visibility
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), scrollView (ref), visibility (ref)
-	local var2 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(scrollView, {
 		tag = "size-full-0 auto-y",
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		padding = {
-			left = UDim.new(0, var2.Padding.XLarge),
-			right = UDim.new(0, var2.Padding.XLarge)
+			left = UDim.new(0, var1.Padding.XLarge),
+			right = UDim.new(0, var1.Padding.XLarge)
 		},
 		scroll = {
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -26,7 +26,7 @@ return function(p0)
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
-			Padding = UDim.new(0, var2.Padding.Medium)
+			Padding = UDim.new(0, var1.Padding.Medium)
 		}
-	}, p0.children)
+	}, p1.children)
 end

@@ -6,46 +6,46 @@ local view = require(parent_1.Foundation).View
 local fFlagAddNewPlayerListFocusNavModule = require(parent.Flags.FFlagAddNewPlayerListFocusNav)
 local fFlagRemoveNewPlayerListOverlayModule = require(parent.Flags.FFlagRemoveNewPlayerListOverlay)
 
-local function EntryFrameView(p0)
+local function EntryFrameView(p1)
 	-- upvalues: reactModule (ref), view (ref), fFlagRemoveNewPlayerListOverlayModule (ref), fFlagAddNewPlayerListFocusNavModule (ref)
 	return reactModule.createElement(view, {
-		Size = p0.size,
+		Size = p1.size,
 		BackgroundTransparency = if fFlagRemoveNewPlayerListOverlayModule then nil else 1,
 		AutoButtonColor = if fFlagRemoveNewPlayerListOverlayModule then nil else false,
 		backgroundStyle = if fFlagRemoveNewPlayerListOverlayModule then {
-			Color3 = p0.backgroundStyle.Color,
-			Transparency = p0.backgroundStyle.Transparency
+			Color3 = p1.backgroundStyle.Color,
+			Transparency = p1.backgroundStyle.Transparency
 		} else nil,
 		Text = if fFlagRemoveNewPlayerListOverlayModule then nil else "",
 		AutoLocalize = if fFlagRemoveNewPlayerListOverlayModule then nil else false,
-		Selectable = not p0.isTeamFrame,
-		Active = if fFlagRemoveNewPlayerListOverlayModule then nil else not p0.isTeamFrame,
-		onActivated = p0.onActivated,
-		onStateChanged = p0.onStateChanged,
-		ref = if fFlagAddNewPlayerListFocusNavModule then p0.forwardRef else p0.firstPlayerRef
-	}, if fFlagRemoveNewPlayerListOverlayModule then p0.children else {
+		Selectable = not p1.isTeamFrame,
+		Active = if fFlagRemoveNewPlayerListOverlayModule then nil else not p1.isTeamFrame,
+		onActivated = p1.onActivated,
+		onStateChanged = p1.onStateChanged,
+		ref = if fFlagAddNewPlayerListFocusNavModule then p1.forwardRef else p1.firstPlayerRef
+	}, if fFlagRemoveNewPlayerListOverlayModule then p1.children else {
 		BackgroundFrame = reactModule.createElement("Frame", {
 			ZIndex = 0,
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = p0.backgroundStyle.Transparency,
-			BackgroundColor3 = p0.backgroundStyle.Color
+			BackgroundTransparency = p1.backgroundStyle.Transparency,
+			BackgroundColor3 = p1.backgroundStyle.Color
 		}),
 		DoubleOverLay = reactModule.createElement("Frame", {
 			ZIndex = 1,
 			BorderSizePixel = 0,
-			Visible = p0.doubleOverlay,
+			Visible = p1.doubleOverlay,
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = p0.overlayStyle and p0.overlayStyle.Transparency,
-			BackgroundColor3 = p0.overlayStyle and p0.overlayStyle.Color
+			BackgroundTransparency = p1.overlayStyle and p1.overlayStyle.Transparency,
+			BackgroundColor3 = p1.overlayStyle and p1.overlayStyle.Color
 		}),
 		OverlayFrame = reactModule.createElement("Frame", {
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = p0.overlayStyle and p0.overlayStyle.Transparency,
-			BackgroundColor3 = p0.overlayStyle and p0.overlayStyle.Color
-		}, p0.children)
+			BackgroundTransparency = p1.overlayStyle and p1.overlayStyle.Transparency,
+			BackgroundColor3 = p1.overlayStyle and p1.overlayStyle.Color
+		}, p1.children)
 	})
 end
 

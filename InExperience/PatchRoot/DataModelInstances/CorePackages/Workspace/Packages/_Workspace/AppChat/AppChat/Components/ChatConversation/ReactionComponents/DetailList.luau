@@ -8,36 +8,36 @@ local reactionListModule = require(script.Parent.ReactionList)
 local white = colors.White
 local arialBold = Enum.Font.ArialBold
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactionListModule (ref), reactModule (ref), cryoModule (ref), roactModule (ref), white (ref), arialBold (ref), reactionMapModule (ref)
 	local _ = {}
 	local t = {}
 	
-	if p0.emoji == "All" then
-		local var6 = 1
+	if p1.emoji == "All" then
+		local var1 = 1
 		
 		for i in reactionListModule do
-			if p0.reactionData[reactionListModule[i]] ~= nil then
-				for i_1 in p0.reactionData[reactionListModule[i]] do
-					t[var6] = {
-						p0.reactionData[reactionListModule[i]][i_1],
+			if p1.reactionData[reactionListModule[i]] ~= nil then
+				for i_1 in p1.reactionData[reactionListModule[i]] do
+					t[var1] = {
+						p1.reactionData[reactionListModule[i]][i_1],
 						reactionListModule[i]
 					}
-					var6 += 1
+					var1 += 1
 				end
 			end
 		end
 	else
-		local var7 = 1
+		local var2 = 1
 		
-		for i in p0.reactionData[p0.emoji] do
-			t[var7] = { p0.reactionData[p0.emoji][i], p0.emoji }
-			var7 += 1
+		for i in p1.reactionData[p1.emoji] do
+			t[var2] = { p1.reactionData[p1.emoji][i], p1.emoji }
+			var2 += 1
 		end
 	end
-	local var8 = reactModule.useMemo(function()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), t (ref), roactModule (copy), white (copy), arialBold (copy), reactionMapModule (copy)
-		return cryoModule.List.map(t, function(p1, _)
+		return cryoModule.List.map(t, function(p2, _)
 			-- upvalues: roactModule (copy), white (copy), arialBold (copy), reactionMapModule (copy)
 			return roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
@@ -61,7 +61,7 @@ return function(p0)
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0.5, 0, 0, 36),
 					TextColor3 = white,
-					Text = p1[1],
+					Text = p2[1],
 					Font = arialBold,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Position = UDim2.new(0, 56, 0, 0)
@@ -70,22 +70,22 @@ return function(p0)
 					BorderSizePixel = 0,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0, 25, 0, 25),
-					Image = reactionMapModule[p1[2]],
+					Image = reactionMapModule[p2[2]],
 					ScaleType = Enum.ScaleType.Fit,
 					Position = UDim2.new(1, -25, 0.5, -12.5)
 				})
 			})
 		end)
-	end, { p0.reactionData, p0.emoji })
+	end, { p1.reactionData, p1.emoji })
 	
 	return roactModule.createElement("ScrollingFrame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		ScrollBarThickness = 0,
 		Size = UDim2.new(1, 0, 0, 285),
-		CanvasSize = UDim2.new(0, 0, 0, #var8 * 53 - 17 + 5),
-		LayoutOrder = p0.LayoutOrder
+		CanvasSize = UDim2.new(0, 0, 0, #var3 * 53 - 17 + 5),
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		layout = roactModule.createElement("UIListLayout", { Padding = UDim.new(0, 17) })
-	}, var8)
+	}, var3)
 end

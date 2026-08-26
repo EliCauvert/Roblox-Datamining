@@ -15,11 +15,11 @@ local withLocalization = require(corePackagesService.Workspace.Packages.Localiza
 local onboardingModal = roactModule.PureComponent:extend("OnboardingModal")
 local fFlagTopBarSignalizeScreenSize = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
 
-function onboardingModal.init(p0)
+function onboardingModal.init(p1)
 	-- upvalues: experienceStateCaptureService (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
 	function p0.onDismiss()
-		-- upvalues: p0 (ref)
-		p0.props.showOnboardingModal(false)
+		-- upvalues: p1 (ref)
+		p1.props.showOnboardingModal(false)
 	end
 	
 	function p0.onCancel()
@@ -29,49 +29,49 @@ function onboardingModal.init(p0)
 	
 	if fFlagTopBarSignalizeScreenSize then
 		local getViewportSize = displayModule.GetDisplayStore(false).getViewportSize
-		p0.disposeScreenSize = signalsModule.createEffect(function(p1)
-			-- upvalues: p0 (ref), getViewportSize (ref)
-			p0:setState({ screenSize = getViewportSize(p1) })
+		p1.disposeScreenSize = signalsModule.createEffect(function(p2)
+			-- upvalues: p1 (ref), getViewportSize (ref)
+			p1:setState({ screenSize = getViewportSize(p2) })
 		end)
 	end
 end
 
-function onboardingModal.willUnmount(p2)
+function onboardingModal.willUnmount(p1)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	if fFlagTopBarSignalizeScreenSize then
-		p2.disposeScreenSize()
+		p1.disposeScreenSize()
 	end
 end
 
-function onboardingModal.render(p3)
+function onboardingModal.render(p1)
 	-- upvalues: withLocalization (ref), roactModule (ref), modalDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref), buttonStack (ref), buttonType (ref), themedTextLabelModule (ref)
 	return withLocalization({
 		mainHeader = "CoreScripts.Feedback.Onboarding.MainHeader",
 		instructionLabel = "CoreScripts.Feedback.Onboarding.Instructions",
 		cancel = "CoreScripts.Feedback.Onboarding.Cancel",
 		start = "CoreScripts.Feedback.Onboarding.Start"
-	})(function(p4)
-		-- upvalues: roactModule (copy), modalDialogModule (copy), p3 (ref), fFlagTopBarSignalizeScreenSize (copy), buttonStack (copy), buttonType (copy), themedTextLabelModule (copy)
+	})(function(p2)
+		-- upvalues: roactModule (copy), modalDialogModule (copy), p1 (ref), fFlagTopBarSignalizeScreenSize (copy), buttonStack (copy), buttonType (copy), themedTextLabelModule (copy)
 		return roactModule.createElement(modalDialogModule, {
 			maxHeight = 200,
 			maxWidth = 540,
 			showCloseButton = true,
-			visible = p3.props.visible,
-			screenSize = if fFlagTopBarSignalizeScreenSize then p3.state.screenSize else p3.props.screenSize,
-			titleText = p4.mainHeader,
+			visible = p1.props.visible,
+			screenSize = if fFlagTopBarSignalizeScreenSize then p1.state.screenSize else p1.props.screenSize,
+			titleText = p2.mainHeader,
 			actionButtons = roactModule.createElement(buttonStack, {
 				buttonHeight = 36,
 				buttons = {
 					{
 						buttonType = buttonType.Secondary,
-						props = { onActivated = p3.onCancel, text = p4.cancel }
+						props = { onActivated = p1.onCancel, text = p2.cancel }
 					},
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
 							isDisabled = false,
-							onActivated = p3.onDismiss,
-							text = p4.start
+							onActivated = p1.onDismiss,
+							text = p2.start
 						}
 					}
 				}
@@ -95,27 +95,27 @@ function onboardingModal.render(p3)
 					AnchorPoint = Vector2.new(0, 0.5),
 					Position = UDim2.new(0, 76, 0.5, 0),
 					Size = UDim2.new(1, 0, 0.4, 36),
-					Text = p4.instructionLabel,
+					Text = p2.instructionLabel,
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			}),
-			onDismiss = p3.onDismiss
+			onDismiss = p1.onDismiss
 		})
 	end)
 end
 
-return roactRoduxModule.connect(function(p5)
+return roactRoduxModule.connect(function(p1)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	return {
-		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p5.displayOptions.screenSize,
-		visible = p5.common.showOnboardingModal
+		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
+		visible = p1.common.showOnboardingModal
 	}
-end, function(p6)
+end, function(p1)
 	-- upvalues: showOnboardingModalThunkModule (ref)
 	return {
-		showOnboardingModal = function(p7)
-			-- upvalues: p6 (ref), showOnboardingModalThunkModule (copy)
-			p6(showOnboardingModalThunkModule(p7))
+		showOnboardingModal = function(p2)
+			-- upvalues: p1 (ref), showOnboardingModalThunkModule (copy)
+			p1(showOnboardingModalThunkModule(p2))
 		end
 	}
 end)(onboardingModal)

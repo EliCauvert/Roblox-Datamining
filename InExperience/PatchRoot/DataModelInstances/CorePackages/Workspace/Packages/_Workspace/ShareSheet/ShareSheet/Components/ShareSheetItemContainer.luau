@@ -7,19 +7,19 @@ local shareSheetItemViewModule = require(script.Parent.ShareSheetItemView)
 local useGetPresenceByUserId = friendsCommonModule.Hooks.useGetPresenceByUserId
 local convertToFoundationPresenceEnum = socialCommonModule.Utils.convertToFoundationPresenceEnum
 
-return function(p0)
+return function(p1)
 	-- upvalues: useGetPresenceByUserId (ref), convertToFoundationPresenceEnum (ref), foundationModule (ref), reactModule (ref), shareSheetItemViewModule (ref)
-	local var5 = useGetPresenceByUserId(p0.primaryUserId)
+	local var1 = useGetPresenceByUserId(p1.primaryUserId)
 	
 	return reactModule.createElement(shareSheetItemViewModule, {
-		icon = p0.icon,
-		isSelected = p0.isSelected,
-		primaryUserId = p0.primaryUserId,
-		secondUserId = p0.secondUserId,
-		label = p0.label,
-		onActivated = p0.onActivated,
-		shouldAnimate = p0.shouldAnimate,
-		userPresence = if var5 and var5.userPresenceType then convertToFoundationPresenceEnum(var5.userPresenceType) else foundationModule.Enums.UserPresence.None,
-		LayoutOrder = p0.LayoutOrder
+		icon = p1.icon,
+		isSelected = p1.isSelected,
+		primaryUserId = p1.primaryUserId,
+		secondUserId = p1.secondUserId,
+		label = p1.label,
+		onActivated = p1.onActivated,
+		shouldAnimate = p1.shouldAnimate,
+		userPresence = if var1 and var1.userPresenceType then convertToFoundationPresenceEnum(var1.userPresenceType) else foundationModule.Enums.UserPresence.None,
+		LayoutOrder = p1.LayoutOrder
 	})
 end

@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if p0 == nil then nil elseif p0 ~= "true" then if p0 ~= "True" then p0 == "1" else true else true
+﻿return function(p1)
+	return if p1 == nil then nil elseif p1 ~= "true" then if p1 ~= "True" then p1 == "1" else true else true
 end

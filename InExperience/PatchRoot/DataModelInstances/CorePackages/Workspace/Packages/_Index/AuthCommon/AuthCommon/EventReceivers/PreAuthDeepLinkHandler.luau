@@ -4,14 +4,14 @@ local default = require(authCommon.Parent.LinkingProtocol).LinkingProtocol.defau
 local preAuthDeepLinkMapModule = require(script.Parent.PreAuthDeepLinkMap)
 local fFlagEnablePreAuthDeepLinkHandlerModule = require(authCommon.Flags.FFlagEnablePreAuthDeepLinkHandler)
 
-local function parseQueryParams(p0)
+local function parseQueryParams(p1)
 	local t = {}
-	local _, matchIndex = string.find(p0, "?")
+	local _, matchIndex = string.find(p1, "?")
 	
 	if not matchIndex then
 		return t
 	end
-	for i in string.gmatch(string.sub(p0, matchIndex + 1), "[^&]+") do
+	for i in string.gmatch(string.sub(p1, matchIndex + 1), "[^&]+") do
 		local match, match_1 = string.match(i, "([^=]+)=?(.*)")
 		
 		if match then
@@ -21,8 +21,8 @@ local function parseQueryParams(p0)
 	return t
 end
 
-local function _(p1, p2)
-	return string.match(p2, p1) ~= nil
+local function _(p2, p3)
+	return string.match(p3, p2) ~= nil
 end
 
 local _ = function()
@@ -30,12 +30,12 @@ local _ = function()
 	return userModule.fromLocalStorage().userId ~= -1
 end
 
-local function isPreauthDeeplink(p3)
+local function isPreauthDeeplink(p2)
 	-- upvalues: preAuthDeepLinkMapModule (ref)
-	if not p3 or p3 == "" then
+	if not p2 or p2 == "" then
 		return false
 	end
-	local lowerText = string.lower(p3)
+	local lowerText = string.lower(p2)
 	
 	for i, v in ipairs(preAuthDeepLinkMapModule) do
 		if string.match(lowerText, v.regexPattern) ~= nil then
@@ -45,17 +45,17 @@ local function isPreauthDeeplink(p3)
 	return false
 end
 
-local function firePreauthDeeplink(p4, p5)
+local function firePreauthDeeplink(p3, p4)
 	-- upvalues: userModule (ref), preAuthDeepLinkMapModule (ref), parseQueryParams (ref)
-	if not p4 or p4 == "" then
+	if not p3 or p3 == "" then
 		return nil
 	end
-	local lowerText = string.lower(p4)
-	local var14 = userModule.fromLocalStorage().userId ~= -1
+	local lowerText = string.lower(p3)
+	local var1 = userModule.fromLocalStorage().userId ~= -1
 	
 	for i, v in ipairs(preAuthDeepLinkMapModule) do
 		if string.match(lowerText, v.regexPattern) ~= nil then
-			return if v.preauthOnly and var14 then nil else v.handler(parseQueryParams(p4), p5)
+			return if v.preauthOnly and var1 then nil else v.handler(parseQueryParams(p3), p4)
 		end
 	end
 	return nil

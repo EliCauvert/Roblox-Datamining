@@ -30,47 +30,47 @@ local fFlagLuaAppTextOnlyPlayButton = sharedFlagsModule.FFlagLuaAppTextOnlyPlayB
 local fFlagLuaAppIconTextPlayButton = sharedFlagsModule.FFlagLuaAppIconTextPlayButton
 local fFlagLuaAppUpdatePlayButtonText = sharedFlagsModule.FFlagLuaAppUpdatePlayButtonText
 local fFlagLuaAppUseTokenHeightForPlayButton = sharedFlagsModule.FFlagLuaAppUseTokenHeightForPlayButton
-local var5 = if fFlagLuaAppIconPlayButton then "play-xlarge" else nil
+local var1 = if fFlagLuaAppIconPlayButton then "play-xlarge" else nil
 local play = images["icons/common/play"]
 local truncationCollapse = images["icons/actions/truncationCollapse"]
 local truncationExpand = images["icons/actions/truncationExpand"]
 
-local var6 = function() end
+local var2 = function() end
 
 local buttonHeightSizeKeyByInputSizeModule = require(script.Parent.ButtonHeightSizeKeyByInputSize)
 
-return reactModule.memo(function(p0)
-	-- upvalues: inputSize (ref), fFlagLuaAppUseTokenHeightForPlayButton (ref), buttonHeightSizeKeyByInputSizeModule (ref), fillBehavior (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingSkeleton (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), reactModule (ref), skeleton (ref), radius (ref), buttonVariant (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppJoinTextPlayableButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), var5 (ref), fFlagLuaAppIconPlayButton (ref), getFFlagIsSquadEnabled (ref), play (ref), comboButton (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), truncationExpand (ref), truncationCollapse (ref), buttonType (ref), images (ref), button (ref), var6 (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref), iconButton (ref), button_1 (ref), fFlagSduiExperienceDetailsSupport (ref)
-	local tokens = p0.tokens
-	local playButtonState = p0.playButtonState
-	local localized = p0.localized
-	local var8 = false
-	local var9 = false
-	local var10 = false
-	local buttonSize = p0.buttonSize or inputSize.Medium
-	local var12 = nil
+return reactModule.memo(function(p1)
+	-- upvalues: inputSize (ref), fFlagLuaAppUseTokenHeightForPlayButton (ref), buttonHeightSizeKeyByInputSizeModule (ref), fillBehavior (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingSkeleton (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), reactModule (ref), skeleton (ref), radius (ref), buttonVariant (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppJoinTextPlayableButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), var1 (ref), fFlagLuaAppIconPlayButton (ref), getFFlagIsSquadEnabled (ref), play (ref), comboButton (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), truncationExpand (ref), truncationCollapse (ref), buttonType (ref), images (ref), button (ref), var2 (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref), iconButton (ref), button_1 (ref), fFlagSduiExperienceDetailsSupport (ref)
+	local tokens = p1.tokens
+	local playButtonState = p1.playButtonState
+	local localized = p1.localized
+	local var3 = false
+	local var4 = false
+	local var5 = false
+	local buttonSize = p1.buttonSize or inputSize.Medium
+	local var6 = nil
 	
 	if fFlagLuaAppUseTokenHeightForPlayButton then
-		local var13 = buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"
-		var12 = if tokens and tokens.Size[var13] then tokens.Size[var13] else 40
+		local var7 = buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"
+		var6 = if tokens and tokens.Size[var7] then tokens.Size[var7] else 40
 	end
-	local var14 = if p0.width then fillBehavior.Fill else p0.fillBehavior
+	local var8 = if p1.width then fillBehavior.Fill else p1.fillBehavior
 	local subtle = nil
-	local var15 = nil
-	local var16 = nil
+	local var9 = nil
+	local var10 = nil
 	local textButton = nil
-	local var18 = nil
+	local var11 = nil
 	
 	if playButtonState == playButtonStatesModule.Loading then
-		if p0.hideIfLoading then
+		if p1.hideIfLoading then
 			return nil
-		elseif fFlagLuaAppPlayButtonLoadingSkeleton and (not p0.useUIBloxButton and (not fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or p0.hasPlayButtonLoadingSkeletonIxp)) then
+		elseif fFlagLuaAppPlayButtonLoadingSkeleton and (not p1.useUIBloxButton and (not fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or p1.hasPlayButtonLoadingSkeletonIxp)) then
 			local _ = nil
-			local var19 = if fFlagLuaAppUseTokenHeightForPlayButton then var12 else tokens and tokens.Size[buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"]
-			var18 = if var14 == "Fill" then UDim.new(1, 0) else UDim.new(0, var19)
-			local uDim2 = UDim2.new(var18, UDim.new(0, var19))
-			local fFlagLuaAppUnifyPlayButtonAllSurfacesIxp_1 = fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or (p0.shouldLaunchWhenLoading or p0.shouldLaunchOnReleaseAfterUnmount)
-			local var22 = reactModule.createElement(skeleton, {
+			local var12 = if fFlagLuaAppUseTokenHeightForPlayButton then var6 else tokens and tokens.Size[buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"]
+			var11 = if var8 == "Fill" then UDim.new(1, 0) else UDim.new(0, var12)
+			local uDim2 = UDim2.new(var11, UDim.new(0, var12))
+			local fFlagLuaAppUnifyPlayButtonAllSurfacesIxp_1 = fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or (p1.shouldLaunchWhenLoading or p1.shouldLaunchOnReleaseAfterUnmount)
+			local var13 = reactModule.createElement(skeleton, {
 				ZIndex = 2,
 				Size = if fFlagLuaAppUnifyPlayButtonAllSurfacesIxp_1 then UDim2.fromScale(1, 1) else uDim2,
 				radius = radius.Medium
@@ -82,170 +82,170 @@ return reactModule.memo(function(p0)
 				Text = "",
 				AutoButtonColor = false,
 				ZIndex = 2,
-				ref = p0.loadingCaptureRef,
-				[reactModule.Event.Activated] = p0.onPlayButtonActivated
-			}, { Skeleton = var22 }) else var22
-			var10 = true
+				ref = p1.loadingCaptureRef,
+				[reactModule.Event.Activated] = p1.onPlayButtonActivated
+			}, { Skeleton = var13 }) else var13
+			var5 = true
 		end
 		subtle = buttonVariant.Emphasis
 	elseif playButtonState == playButtonStatesModule.Playable then
 		subtle = buttonVariant.Emphasis
 		
-		if fFlagLuaAppIconTextPlayButton or (fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppJoinTextPlayableButton and (not fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or p0.hasJoinTextPlayableButtonIxp)) then
-			var16 = p0.playableText or (if fFlagLuaAppUpdatePlayButtonText then localized.play else localized.join)
+		if fFlagLuaAppIconTextPlayButton or (fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppJoinTextPlayableButton and (not fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or p1.hasJoinTextPlayableButtonIxp)) then
+			var10 = p1.playableText or (if fFlagLuaAppUpdatePlayButtonText then localized.play else localized.join)
 			
-			if fFlagLuaAppIconTextPlayButton and not p0.hidePlayableIcon then
-				var15 = var5
+			if fFlagLuaAppIconTextPlayButton and not p1.hidePlayableIcon then
+				var9 = var1
 			end
-		elseif not fFlagLuaAppIconPlayButton and not p0.hidePlayableIcon then
-			var15 = "icons/common/play"
+		elseif not fFlagLuaAppIconPlayButton and not p1.hidePlayableIcon then
+			var9 = "icons/common/play"
 		end
-		var16 = p0.playableText
+		var10 = p1.playableText
 		
-		if fFlagLuaAppIconPlayButton and not p0.hidePlayableIcon then
-			var15 = if var16 and var16 ~= "" then "icons/common/play" else var5
+		if fFlagLuaAppIconPlayButton and not p1.hidePlayableIcon then
+			var9 = if var10 and var10 ~= "" then "icons/common/play" else var1
 		end
 	elseif getFFlagIsSquadEnabled() and playButtonState == playButtonStatesModule.PlayableWithParty then
-		var15 = play
-		var16 = if p0.hideOptionalText then nil else localized.joinWithParty
-		var8 = true
+		var9 = play
+		var10 = if p1.hideOptionalText then nil else localized.joinWithParty
+		var3 = true
 	elseif getFFlagIsSquadEnabled() and playButtonState == playButtonStatesModule.WaitingForParty then
-		var15 = play
-		var16 = if p0.hideOptionalText then nil else localized.waitingForParty
-		var10 = true
-		var9 = true
-		var8 = true
+		var9 = play
+		var10 = if p1.hideOptionalText then nil else localized.waitingForParty
+		var5 = true
+		var4 = true
+		var3 = true
 	elseif playButtonState == playButtonStatesModule.PaidAccess then
-		var16 = tostring(if p0.gameProductInfo then p0.gameProductInfo.price else 0)
+		var10 = tostring(if p1.gameProductInfo then p1.gameProductInfo.price else 0)
 		subtle = buttonVariant.Emphasis
-		var15 = "icons/common/robux"
+		var9 = "icons/common/robux"
 	elseif playButtonState == playButtonStatesModule.FiatPaidAccess then
 		subtle = buttonVariant.Emphasis
-		var16 = p0.fiatText or (if p0.gameProductInfo then p0.gameProductInfo.localizedFiatPrice else "")
+		var10 = p1.fiatText or (if p1.gameProductInfo then p1.gameProductInfo.localizedFiatPrice else "")
 	elseif playButtonState == playButtonStatesModule.DemoMode then
 		subtle = buttonVariant.SubEmphasis
-		var16 = localized.playDemo
+		var10 = localized.playDemo
 	elseif playButtonState == playButtonStatesModule.ActionNeeded then
 		subtle = buttonVariant.Emphasis
-		var16 = localized.unlock
+		var10 = localized.unlock
 	elseif playButtonState == playButtonStatesModule.UnplayableOther then
-		if p0.hideIfUnplayable then
+		if p1.hideIfUnplayable then
 			return nil
 		end
 		subtle = buttonVariant.Subtle
-		var15 = "icons/status/unavailable"
-		var16 = if p0.hideOptionalText then nil else localized.unavailable
-		var10 = true
+		var9 = "icons/status/unavailable"
+		var10 = if p1.hideOptionalText then nil else localized.unavailable
+		var5 = true
 	else
 		error("invalid play button state!")
 	end
-	local var24, var31
+	local var14, var15
 	local _ = nil
 	
-	if var8 then
+	if var3 then
 		if not fFlagLuaAppUseTokenHeightForPlayButton then
-			local var23 = buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"
-			var12 = if tokens and tokens.Size[var23] then tokens.Size[var23] else 40
+			local var16 = buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"
+			var6 = if tokens and tokens.Size[var16] then tokens.Size[var16] else 40
 		end
-		var24 = reactModule.createElement(comboButton, {
-			size = UDim2.new(1, 0, 0, var12),
+		var14 = reactModule.createElement(comboButton, {
+			size = UDim2.new(1, 0, 0, var6),
 			button = {
-				icon = var15,
-				text = var16,
-				isDisabled = var10,
-				onActivated = if not var10 then p0.onPlayButtonActivated else function() end
+				icon = var9,
+				text = var10,
+				isDisabled = var5,
+				onActivated = if not var5 then p1.onPlayButtonActivated else function() end
 			},
 			overflow = {
-				icon = if fFlagLuaAppUnifiedPlayButtonSquadMenuDirection and p0.squadButtonMenuDirection == menuDirection.Down then truncationExpand else truncationCollapse,
-				isDisabled = var9,
-				onActivated = if not var9 then p0.onPlaySquadButtonActivated else function() end
+				icon = if fFlagLuaAppUnifiedPlayButtonSquadMenuDirection and p1.squadButtonMenuDirection == menuDirection.Down then truncationExpand else truncationCollapse,
+				isDisabled = var4,
+				onActivated = if not var4 then p1.onPlaySquadButtonActivated else function() end
 			},
-			testId = p0.testId
+			testId = p1.testId
 		})
-	elseif p0.useUIBloxButton then
+	elseif p1.useUIBloxButton then
 		if not fFlagLuaAppUseTokenHeightForPlayButton then
-			local var25 = buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"
-			var12 = if tokens and tokens.Size[var25] then tokens.Size[var25] else 40
+			local var17 = buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"
+			var6 = if tokens and tokens.Size[var17] then tokens.Size[var17] else 40
 		end
-		local isFit = var14 == "Fit"
-		local var27 = if isFit then UDim2.new(0, 0, 0, var12) else UDim2.new(1, 0, 0, var12)
-		local var28 = playButtonState == playButtonStatesModule.Loading
-		local var29 = if subtle == buttonVariant.SubEmphasis then buttonType.PrimarySystem elseif subtle == buttonVariant.Subtle then buttonType.Secondary else buttonType.PrimaryContextual
-		local var30 = if var15 == var5 then play else var15
+		local isFit = var8 == "Fit"
+		local var18 = if isFit then UDim2.new(0, 0, 0, var6) else UDim2.new(1, 0, 0, var6)
+		local var19 = playButtonState == playButtonStatesModule.Loading
+		local var20 = if subtle == buttonVariant.SubEmphasis then buttonType.PrimarySystem elseif subtle == buttonVariant.Subtle then buttonType.Secondary else buttonType.PrimaryContextual
+		local var21 = if var9 == var1 then play else var9
 		
-		if type(var30) == "string" then
-			var30 = images[var30]
+		if type(var21) == "string" then
+			var21 = images[var21]
 		end
-		var24 = reactModule.createElement(button, {
-			size = var27,
+		var14 = reactModule.createElement(button, {
+			size = var18,
 			fitContent = isFit,
-			buttonType = var29,
-			icon = var30,
-			text = var16,
-			isLoading = var28,
-			isDisabled = var10 or var28,
-			userInteractionEnabled = not (var10 or var28),
-			onActivated = if var10 or var28 then var6 else p0.onPlayButtonActivated,
-			ref = p0.playButtonCaptureRef,
-			[reactModule.Tag] = if p0.testId then `data-testid={p0.testId}` else nil,
+			buttonType = var20,
+			icon = var21,
+			text = var10,
+			isLoading = var19,
+			isDisabled = var5 or var19,
+			userInteractionEnabled = not (var5 or var19),
+			onActivated = if var5 or var19 then var2 else p1.onPlayButtonActivated,
+			ref = p1.playButtonCaptureRef,
+			[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil,
 			DO_NOT_USE_useUIBloxButton = if getFFlagUIBloxUseFoundationButton() or fFlagLuaAppPlayButtonOptOutFoundationButton then true else nil
 		})
 		
-		if (fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or p0.shouldLaunchWhenLoading or p0.shouldLaunchOnReleaseAfterUnmount) and var28 then
+		if (fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or p1.shouldLaunchWhenLoading or p1.shouldLaunchOnReleaseAfterUnmount) and var19 then
 			textButton = reactModule.createElement("TextButton", {
-				Size = var27,
+				Size = var18,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Text = "",
 				AutoButtonColor = false,
 				ZIndex = 2,
-				ref = p0.loadingCaptureRef,
-				[reactModule.Event.Activated] = p0.onPlayButtonActivated
+				ref = p1.loadingCaptureRef,
+				[reactModule.Event.Activated] = p1.onPlayButtonActivated
 			})
 		end
 	elseif fFlagLuaAppIconPlayButton then
-		if var16 ~= nil then
-			var31 = false
+		if var10 ~= nil then
+			var15 = false
 			
-			if var16 == "" then
-				local _ = var15 ~= nil
+			if var10 == "" then
+				local _ = var9 ~= nil
 			end
 		end
 	else
-		var31 = nil
+		var15 = nil
 	end
-	var24 = if fFlagLuaAppIconPlayButton and (not fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or p0.hasIconPlayButtonIxp) and var31 then reactModule.createElement(iconButton, {
-		icon = var15,
+	var14 = if fFlagLuaAppIconPlayButton and (not fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or p1.hasIconPlayButtonIxp) and var15 then reactModule.createElement(iconButton, {
+		icon = var9,
 		variant = subtle,
 		size = buttonSize,
-		width = if fFlagLuaAppPlayButtonLoadingSkeleton and playButtonState == playButtonStatesModule.Loading then var18 else nil,
-		fillBehavior = var14,
-		isDisabled = var10,
-		onActivated = if not var10 then p0.onPlayButtonActivated else var6,
-		ref = p0.playButtonCaptureRef,
-		testId = p0.testId
+		width = if fFlagLuaAppPlayButtonLoadingSkeleton and playButtonState == playButtonStatesModule.Loading then var11 else nil,
+		fillBehavior = var8,
+		isDisabled = var5,
+		onActivated = if not var5 then p1.onPlayButtonActivated else var2,
+		ref = p1.playButtonCaptureRef,
+		testId = p1.testId
 	}) else reactModule.createElement(button_1, {
-		icon = var15,
-		text = var16,
+		icon = var9,
+		text = var10,
 		variant = subtle,
 		size = buttonSize,
-		width = if fFlagLuaAppPlayButtonLoadingSkeleton and playButtonState == playButtonStatesModule.Loading then var18 else nil,
-		fillBehavior = var14,
-		isDisabled = var10,
-		onActivated = if not var10 then p0.onPlayButtonActivated else var6,
-		ref = p0.playButtonCaptureRef,
-		testId = p0.testId
+		width = if fFlagLuaAppPlayButtonLoadingSkeleton and playButtonState == playButtonStatesModule.Loading then var11 else nil,
+		fillBehavior = var8,
+		isDisabled = var5,
+		onActivated = if not var5 then p1.onPlayButtonActivated else var2,
+		ref = p1.playButtonCaptureRef,
+		testId = p1.testId
 	})
 	return reactModule.createElement("Frame", {
-		LayoutOrder = p0.LayoutOrder,
-		Position = p0.Position,
-		Size = if fFlagLuaAppUseTokenHeightForPlayButton then UDim2.new(if p0.width then p0.width elseif var14 == "Fill" then UDim.new(1, 0) else UDim.new(0, 0), UDim.new(0, var12)) elseif p0.width then UDim2.new(p0.width, UDim.new(0, 0)) elseif var14 == "Fill" then UDim2.new(1, 0, 1, 0) else nil,
-		AutomaticSize = if fFlagLuaAppUseTokenHeightForPlayButton then if var14 == "Fill" then nil else Enum.AutomaticSize.X elseif var14 == "Fill" then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
+		LayoutOrder = p1.LayoutOrder,
+		Position = p1.Position,
+		Size = if fFlagLuaAppUseTokenHeightForPlayButton then UDim2.new(if p1.width then p1.width elseif var8 == "Fill" then UDim.new(1, 0) else UDim.new(0, 0), UDim.new(0, var6)) elseif p1.width then UDim2.new(p1.width, UDim.new(0, 0)) elseif var8 == "Fill" then UDim2.new(1, 0, 1, 0) else nil,
+		AutomaticSize = if fFlagLuaAppUseTokenHeightForPlayButton then if var8 == "Fill" then nil else Enum.AutomaticSize.X elseif var8 == "Fill" then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Tag] = if fFlagSduiExperienceDetailsSupport then p0.tag else nil
+		[reactModule.Tag] = if fFlagSduiExperienceDetailsSupport then p1.tag else nil
 	}, {
 		LoadingSkeleton = if playButtonState == playButtonStatesModule.Loading then textButton else nil,
-		PlayButton = var24
+		PlayButton = var14
 	})
 end)

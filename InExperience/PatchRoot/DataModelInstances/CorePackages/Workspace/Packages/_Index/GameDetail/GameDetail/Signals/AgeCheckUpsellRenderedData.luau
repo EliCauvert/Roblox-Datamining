@@ -2,16 +2,16 @@
 local ageCheckUpsellDismissedDataModule = require(script.Parent.AgeCheckUpsellDismissedData)
 local t = {}
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: t (ref), signalsModule (ref)
-	local var3 = t[p0]
+	local var1 = t[p1]
 	
-	if not var3 then
-		local var4, var5 = signalsModule.createSignal(false)
-		var3 = { get = var4, set = var5 }
-		t[p0] = var3
+	if not var1 then
+		local var2, var3 = signalsModule.createSignal(false)
+		var1 = { get = var2, set = var3 }
+		t[p1] = var1
 	end
-	return var3
+	return var1
 end
 
 return {
@@ -22,25 +22,25 @@ return {
 		elseif ageCheckUpsellDismissedDataModule.getIsAgeCheckUpsellDismissed(p1) then
 			return false
 		end
-		local var6 = t[p2]
+		local var1 = t[p2]
 		
-		if not var6 then
-			local var7, var8 = signalsModule.createSignal(false)
-			var6 = { get = var7, set = var8 }
-			t[p2] = var6
+		if not var1 then
+			local var2, var3 = signalsModule.createSignal(false)
+			var1 = { get = var2, set = var3 }
+			t[p2] = var1
 		end
-		return var6.get(p1)
+		return var1.get(p1)
 	end,
-	setAgeCheckUpsellRendered = function(value, p3)
+	setAgeCheckUpsellRendered = function(value, p1)
 		-- upvalues: t (ref), signalsModule (ref)
 		if value == nil or value == "" then return end
-		local var9 = t[value]
+		local var1 = t[value]
 		
-		if not var9 then
-			local var10, var11 = signalsModule.createSignal(false)
-			var9 = { get = var10, set = var11 }
-			t[value] = var9
+		if not var1 then
+			local var2, var3 = signalsModule.createSignal(false)
+			var1 = { get = var2, set = var3 }
+			t[value] = var1
 		end
-		var9.set(p3)
+		var1.set(p1)
 	end
 }

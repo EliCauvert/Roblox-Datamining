@@ -6,25 +6,25 @@ local flaggedMutedError = require(parent.Loggers).flaggedMutedError
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local hapticTriggerAttemptThrottleHundredthsPercent = game:DefineFastInt("HapticTriggerAttemptThrottleHundredthsPercent", 0)
 local fFlagLuaAppFixExplicitFeedbackTelemetry = require(parent.SharedFlags).FFlagLuaAppFixExplicitFeedbackTelemetry
-local var4 = tModule.interface({
+local var1 = tModule.interface({
 	hapticType = tModule.string,
 	contextKey = tModule.string,
 	interactionType = tModule.string,
 	ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else tModule.string
 })
 
-return function(p0, p1)
-	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var4 (ref), flaggedMutedError (ref), hapticTriggerAttemptThrottleHundredthsPercent (ref), userGameSettingsService (ref), telemetryService (ref)
-	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p1 then
+return function(p1, p2)
+	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var1 (ref), flaggedMutedError (ref), hapticTriggerAttemptThrottleHundredthsPercent (ref), userGameSettingsService (ref), telemetryService (ref)
+	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p2 then
 		discoveryEventErrorLogger.reportError("HapticTriggerAttemptInvalidInterface", "event is missing context")
 	end
-	local var5, var6 = var4(p0)
+	local var2, var3 = var1(p1)
 	
-	if not var5 then
+	if not var2 then
 		if fFlagLuaAppFixExplicitFeedbackTelemetry then
-			discoveryEventErrorLogger.reportError("HapticTriggerAttemptInvalidInterface", var6)
+			discoveryEventErrorLogger.reportError("HapticTriggerAttemptInvalidInterface", var3)
 		else
-			flaggedMutedError("HapticTriggerAttemptInvalidInterface", var6)
+			flaggedMutedError("HapticTriggerAttemptInvalidInterface", var3)
 		end
 	end
 	local t = {
@@ -36,11 +36,11 @@ return function(p0, p1)
 	}
 	local list = { "addOSInfo", "addSessionInfo" }
 	local hapticStrength = userGameSettingsService.HapticStrength
-	p0.hapticEnabledByUser = hapticStrength > 0
-	p0.hapticStrength = hapticStrength
+	p1.hapticEnabledByUser = hapticStrength > 0
+	p1.hapticStrength = hapticStrength
 	telemetryService:LogEvent(t, {
-		eventContext = if fFlagLuaAppFixExplicitFeedbackTelemetry then p1 else nil,
+		eventContext = if fFlagLuaAppFixExplicitFeedbackTelemetry then p2 else nil,
 		standardizedFields = list,
-		customFields = p0
+		customFields = p1
 	})
 end

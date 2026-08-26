@@ -21,30 +21,30 @@ local validationContextModule = require(parent.ValidationContext)
 local SDLValidationContext = validationContextModule.SDLValidationContext
 local validationContext = validationContextModule.ValidationContext
 local t = {
-	validate = function(p0, p1, p2, p3, p4)
+	validate = function(p1, p2, p3, p4, p5)
 		-- upvalues: specifiedRules (ref), typeInfo (ref), devAssert (ref), assertValidSchema (ref), validationContext (ref), graphQLError (ref), visitInParallel (ref), array (ref), visit (ref), visitWithTypeInfo (ref)
-		local var6 = p2 or specifiedRules
-		local var7 = p3 or { maxErrors = nil }
-		local var8 = p4 or typeInfo.new(p0)
-		devAssert(p1, "Must provide document.")
-		assertValidSchema(p0)
+		local var1 = p3 or specifiedRules
+		local var2 = p4 or { maxErrors = nil }
+		local var3 = p5 or typeInfo.new(p1)
+		devAssert(p2, "Must provide document.")
+		assertValidSchema(p1)
 		local t = {}
 		local t_1 = {}
-		local var11 = validationContext.new(p0, p1, var8, function(p5)
-			-- upvalues: var7 (ref), t_1 (ref), graphQLError (copy), t (ref)
-			if var7.maxErrors ~= nil and var7.maxErrors <= #t_1 then
+		local var4 = validationContext.new(p1, p2, var3, function(p6)
+			-- upvalues: var2 (ref), t_1 (ref), graphQLError (copy), t (ref)
+			if var2.maxErrors ~= nil and var2.maxErrors <= #t_1 then
 				table.insert(t_1, graphQLError.new("Too many validation errors, error limit reached. Validation aborted."))
 				error(t)
 			end
-			table.insert(t_1, p5)
+			table.insert(t_1, p6)
 		end)
-		local var12 = visitInParallel(array.map(var6, function(p6)
-			-- upvalues: var11 (ref)
-			return p6(var11)
+		local var5 = visitInParallel(array.map(var1, function(p6)
+			-- upvalues: var4 (ref)
+			return p6(var4)
 		end))
 		local ok, status = pcall(function()
-			-- upvalues: visit (copy), p1 (ref), visitWithTypeInfo (copy), var8 (ref), var12 (ref)
-			visit(p1, visitWithTypeInfo(var8, var12))
+			-- upvalues: visit (copy), p2 (ref), visitWithTypeInfo (copy), var3 (ref), var5 (ref)
+			visit(p2, visitWithTypeInfo(var3, var5))
 		end)
 		
 		if not ok and status ~= t then
@@ -52,41 +52,41 @@ local t = {
 		end
 		return t_1
 	end,
-	validateSDL = function(p7, p8, p9)
+	validateSDL = function(p1, p2, p3)
 		-- upvalues: specifiedSDLRules (ref), SDLValidationContext (ref), array (ref), visit (ref), visitInParallel (ref)
-		local var13 = p9 or specifiedSDLRules
+		local var1 = p3 or specifiedSDLRules
 		local t = {}
-		local var15 = SDLValidationContext.new(p7, p8, function(p10)
+		local var2 = SDLValidationContext.new(p1, p2, function(p4)
 			-- upvalues: t (ref)
-			table.insert(t, p10)
+			table.insert(t, p4)
 		end)
-		visit(p7, visitInParallel(array.map(var13, function(p11)
-			-- upvalues: var15 (ref)
-			return p11(var15)
+		visit(p1, visitInParallel(array.map(var1, function(p4)
+			-- upvalues: var2 (ref)
+			return p4(var2)
 		end)))
 		
 		return t
 	end
 }
 
-function t.assertValidSDL(p12)
+function t.assertValidSDL(p1)
 	-- upvalues: t (ref), error (ref), array (ref)
-	local var16 = t.validateSDL(p12)
+	local var1 = t.validateSDL(p1)
 	
-	if #var16 ~= 0 then
-		error(error.new(table.concat(array.map(var16, function(p13)
-			return p13.message
+	if #var1 ~= 0 then
+		error(error.new(table.concat(array.map(var1, function(p2)
+			return p2.message
 		end), "\n\n")))
 	end
 end
 
-function t.assertValidSDLExtension(p14, p15)
+function t.assertValidSDLExtension(p1, p2)
 	-- upvalues: t (ref), error (ref), array (ref)
-	local var17 = t.validateSDL(p14, p15)
+	local var1 = t.validateSDL(p1, p2)
 	
-	if #var17 ~= 0 then
-		error(error.new(table.concat(array.map(var17, function(p16)
-			return if typeof(p16) == "string" then p16 else p16.message
+	if #var1 ~= 0 then
+		error(error.new(table.concat(array.map(var1, function(p3)
+			return if typeof(p3) == "string" then p3 else p3.message
 		end), "\n\n")))
 	end
 end

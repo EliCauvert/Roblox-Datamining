@@ -21,48 +21,48 @@ local function _(value)
 	return if value.uploadEnum and value.uploadEnum.assetType then value.uploadEnum.assetType else nil
 end
 
-local function buildEditableMeshesFromSharedData(p0)
+local function buildEditableMeshesFromSharedData(p1)
 	local t = {}
 	
-	for i, v in p0.renderMeshesData do
-		local var7 = p0.rootInstance:FindFirstChild(i, true)
+	for i, v in p1.renderMeshesData do
+		local var1 = p1.rootInstance:FindFirstChild(i, true)
 		
-		if not var7 and p0.rootInstance.Name == i then
-			var7 = p0.rootInstance
+		if not var1 and p1.rootInstance.Name == i then
+			var1 = p1.rootInstance
 		end
-		if var7 and v.editable then
-			t[var7] = { MeshId = { created = false, instance = v.editable } }
+		if var1 and v.editable then
+			t[var1] = { MeshId = { created = false, instance = v.editable } }
 		end
 	end
 	return t
 end
 
-function t.run(p1, p2)
+function t.run(p2, p3)
 	-- upvalues: buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), accurateBoundingBoxRasterUtilModule (ref), bodyAssetMasksRendererModule (ref), errorSourceStringsModule (ref)
-	local var8 = if p2.uploadEnum and p2.uploadEnum.assetType then p2.uploadEnum.assetType else nil
+	local var2 = if p3.uploadEnum and p3.uploadEnum.assetType then p3.uploadEnum.assetType else nil
 	
-	if not var8 then return end
-	local rootInstance = p2.rootInstance
+	if not var2 then return end
+	local rootInstance = p3.rootInstance
 	local t = {
 		shouldYield = false,
-		assetTypeEnum = var8,
-		isServer = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
-		editableMeshes = buildEditableMeshesFromSharedData(p2)
+		assetTypeEnum = var2,
+		isServer = p3.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+		editableMeshes = buildEditableMeshesFromSharedData(p3)
 	}
-	local var10, var11 = bodyAssetMasksRendererModule.new(rootInstance, accurateBoundingBoxRasterUtilModule.getBoundsViewsForAssetType(var8), t)
+	local var3, var4 = bodyAssetMasksRendererModule.new(rootInstance, accurateBoundingBoxRasterUtilModule.getBoundsViewsForAssetType(var2), t)
 	
-	if var10 then
-		local var12, var13 = accurateBoundingBoxRasterUtilModule.validate(rootInstance, var11, t)
+	if var3 then
+		local var5, var6 = accurateBoundingBoxRasterUtilModule.validate(rootInstance, var4, t)
 		
-		if not var12 and var13 then
-			for i, v in var13 do
-				p1:fail(errorSourceStringsModule.Keys.BoundingBox_ValidationFailed, { reason = v })
+		if not var5 and var6 then
+			for i, v in var6 do
+				p2:fail(errorSourceStringsModule.Keys.BoundingBox_ValidationFailed, { reason = v })
 			end
 		end
 		return
-	elseif var11 then
-		for i, v in var11 do
-			p1:fail(errorSourceStringsModule.Keys.BoundingBox_ValidationFailed, { reason = v })
+	elseif var4 then
+		for i, v in var4 do
+			p2:fail(errorSourceStringsModule.Keys.BoundingBox_ValidationFailed, { reason = v })
 		end
 	end
 end

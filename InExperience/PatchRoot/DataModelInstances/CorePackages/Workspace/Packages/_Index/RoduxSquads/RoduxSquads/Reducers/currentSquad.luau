@@ -10,95 +10,95 @@ local createPersistReducer = require(roduxSquads.Persists.PersistReducer).create
 local _ = require(script.Parent.Parent.RoduxSquadsTypes)
 local fFlagEnableSquadRegroupExperimentation = require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentation
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), fFlagEnableSquadRegroupExperimentation (ref), createPersistReducer (ref), persistStorageModule (ref), roduxModule (ref), squadModel (ref), currentSquadUpdated (ref), selfPermissionUpdated (ref)
-	local networkingSquads = p0.NetworkingSquads
+	local networkingSquads = p1.NetworkingSquads
 	
-	local var4 = function(p1, p2)
+	local var1 = function(p2, p3)
 		-- upvalues: cryoModule (copy), fFlagEnableSquadRegroupExperimentation (copy)
-		if p1 == nil or p1.squadId ~= p2.squadId then
-			if p2.deletedAtTime and p2.deletedAtTime ~= "" then
-				return p1
-			elseif p1 and p1.parentChannelId == p2.parentChannelId then
-				if p1.createdAtTime < p2.createdAtTime then
-					return p2
+		if p2 == nil or p2.squadId ~= p3.squadId then
+			if p3.deletedAtTime and p3.deletedAtTime ~= "" then
+				return p2
+			elseif p2 and p2.parentChannelId == p3.parentChannelId then
+				if p2.createdAtTime < p3.createdAtTime then
+					return p3
 				end
 			else
-				return p2
+				return p3
 			end
-		elseif p2.deletedAtTime and p2.deletedAtTime ~= "" then
+		elseif p3.deletedAtTime and p3.deletedAtTime ~= "" then
 			return nil
-		elseif p1.updatedAtTime < p2.updatedAtTime then
-			return p2
-		elseif p1.updatedAtTime == p2.updatedAtTime then
-			if p1.parentChannelId ~= p2.parentChannelId then
-				return p2
-			elseif not cryoModule.List.equals(cryoModule.List.sort(cryoModule.List.map(p1.members, function(p3)
-				return p3.userId
-			end)), cryoModule.List.sort(cryoModule.List.map(p2.members, function(p4)
+		elseif p2.updatedAtTime < p3.updatedAtTime then
+			return p3
+		elseif p2.updatedAtTime == p3.updatedAtTime then
+			if p2.parentChannelId ~= p3.parentChannelId then
+				return p3
+			elseif not cryoModule.List.equals(cryoModule.List.sort(cryoModule.List.map(p2.members, function(p4)
 				return p4.userId
-			end))) or not cryoModule.List.equals(cryoModule.List.sort(cryoModule.List.map(p1.invitees, function(p5)
-				return tostring(p5.userId) .. tostring(p5.invitedAtTimestampMs)
-			end)), cryoModule.List.sort(cryoModule.List.map(p2.invitees, function(p6)
-				return tostring(p6.userId) .. tostring(p6.invitedAtTimestampMs)
+			end)), cryoModule.List.sort(cryoModule.List.map(p3.members, function(p4)
+				return p4.userId
+			end))) or not cryoModule.List.equals(cryoModule.List.sort(cryoModule.List.map(p2.invitees, function(p4)
+				return tostring(p4.userId) .. tostring(p4.invitedAtTimestampMs)
+			end)), cryoModule.List.sort(cryoModule.List.map(p3.invitees, function(p4)
+				return tostring(p4.userId) .. tostring(p4.invitedAtTimestampMs)
 			end))) then
-				return p2
+				return p3
 			elseif fFlagEnableSquadRegroupExperimentation then
-				local selfPermissions = p1.selfPermissions
-				local selfPermissions_1 = p2.selfPermissions
+				local selfPermissions = p2.selfPermissions
+				local selfPermissions_1 = p3.selfPermissions
 				
-				return if selfPermissions == nil == (selfPermissions_1 == nil) then if selfPermissions and selfPermissions_1 and not cryoModule.Dictionary.equals(selfPermissions, selfPermissions_1) then p2 else p1 else p2
+				return if selfPermissions == nil == (selfPermissions_1 == nil) then if selfPermissions and selfPermissions_1 and not cryoModule.Dictionary.equals(selfPermissions, selfPermissions_1) then p3 else p2 else p3
 			end
 		end
 	end
 	
-	return createPersistReducer(cryoModule.Dictionary.join({ storage = persistStorageModule.new("currentSquadStore") }, p0.currentSquad or {}), roduxModule.createReducer(nil, {
-		[networkingSquads.CreateOrJoinSquad.Succeeded.name] = function(p7, p8)
-			-- upvalues: var4 (ref), squadModel (copy)
-			return var4(p7, squadModel.format(p8.responseBody.groupUp))
+	return createPersistReducer(cryoModule.Dictionary.join({ storage = persistStorageModule.new("currentSquadStore") }, p1.currentSquad or {}), roduxModule.createReducer(nil, {
+		[networkingSquads.CreateOrJoinSquad.Succeeded.name] = function(p2, p3)
+			-- upvalues: var1 (ref), squadModel (copy)
+			return var1(p2, squadModel.format(p3.responseBody.groupUp))
 		end,
-		[networkingSquads.GetSquadActive.Succeeded.name] = function(p9, p10)
-			-- upvalues: var4 (ref), squadModel (copy)
-			local groupUp = p10.responseBody.groupUp
+		[networkingSquads.GetSquadActive.Succeeded.name] = function(p2, p3)
+			-- upvalues: var1 (ref), squadModel (copy)
+			local groupUp = p3.responseBody.groupUp
 			
-			return if groupUp then var4(p9, squadModel.format(groupUp)) else nil
+			return if groupUp then var1(p2, squadModel.format(groupUp)) else nil
 		end,
-		[networkingSquads.GetSquadFromSquadId.Succeeded.name] = function(p11, p12)
-			-- upvalues: var4 (ref), squadModel (copy)
-			local groupUp = p12.responseBody.groupUp
+		[networkingSquads.GetSquadFromSquadId.Succeeded.name] = function(p2, p3)
+			-- upvalues: var1 (ref), squadModel (copy)
+			local groupUp = p3.responseBody.groupUp
 			
-			return if groupUp and groupUp.groupUpId == (p11 and p11.squadId) then var4(p11, squadModel.format(groupUp)) else p11
+			return if groupUp and groupUp.groupUpId == (p2 and p2.squadId) then var1(p2, squadModel.format(groupUp)) else p2
 		end,
-		[networkingSquads.JoinSquad.Succeeded.name] = function(p13, p14)
-			-- upvalues: var4 (ref), squadModel (copy)
-			return var4(p13, squadModel.format(p14.responseBody.groupUp))
+		[networkingSquads.JoinSquad.Succeeded.name] = function(p2, p3)
+			-- upvalues: var1 (ref), squadModel (copy)
+			return var1(p2, squadModel.format(p3.responseBody.groupUp))
 		end,
-		[networkingSquads.LeaveSquad.Succeeded.name] = function(p15, p16)
-			return if p15 and p15.squadId == p16.postBody.groupUpId then nil else p15
+		[networkingSquads.LeaveSquad.Succeeded.name] = function(p2, p3)
+			return if p2 and p2.squadId == p3.postBody.groupUpId then nil else p2
 		end,
-		[networkingSquads.ActOnPartyNudge.Succeeded.name] = function(p17, p18)
-			-- upvalues: var4 (ref), squadModel (copy)
-			local groupUp = p18.responseBody.groupUp
+		[networkingSquads.ActOnPartyNudge.Succeeded.name] = function(p2, p3)
+			-- upvalues: var1 (ref), squadModel (copy)
+			local groupUp = p3.responseBody.groupUp
 			
-			return if groupUp then var4(p17, squadModel.format(groupUp)) else p17
+			return if groupUp then var1(p2, squadModel.format(groupUp)) else p2
 		end,
-		[currentSquadUpdated.name] = function(p19, p20)
-			-- upvalues: var4 (ref), squadModel (copy)
-			local squad = p20.payload.squad
+		[currentSquadUpdated.name] = function(p2, p3)
+			-- upvalues: var1 (ref), squadModel (copy)
+			local squad = p3.payload.squad
 			
-			return if squad then var4(p19, squadModel.format(squad)) else nil
+			return if squad then var1(p2, squadModel.format(squad)) else nil
 		end,
-		[selfPermissionUpdated.name] = function(p21, p22)
+		[selfPermissionUpdated.name] = function(p2, p3)
 			-- upvalues: fFlagEnableSquadRegroupExperimentation (copy), cryoModule (copy)
 			if not fFlagEnableSquadRegroupExperimentation then
-				return p21
-			elseif p21 == nil then
-				return p21
+				return p2
+			elseif p2 == nil then
+				return p2
 			end
-			local selfPermissions = p22.payload and p22.payload.selfPermissions
+			local selfPermissions = p3.payload and p3.payload.selfPermissions
 			
-			return if selfPermissions == nil then p21 else cryoModule.Dictionary.join(p21, {
-				selfPermissions = cryoModule.Dictionary.join(p21.selfPermissions or {}, selfPermissions)
+			return if selfPermissions == nil then p2 else cryoModule.Dictionary.join(p2, {
+				selfPermissions = cryoModule.Dictionary.join(p2.selfPermissions or {}, selfPermissions)
 			})
 		end
 	}))

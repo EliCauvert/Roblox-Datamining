@@ -4,10 +4,10 @@ local text = string.format("https://apis.%s", APIUtilModule.getBaseDomain()) .. 
 
 return function(value)
 	-- upvalues: text (ref), APIUtilModule (ref), httpService (ref)
-	local var3, var4 = APIUtilModule.requestAndRetryGet(string.format(text, value))
+	local var1, var2 = APIUtilModule.requestAndRetryGet(string.format(text, value))
 	
-	if var3 then
-		return true, httpService:JSONDecode(var4)
+	if var1 then
+		return true, httpService:JSONDecode(var2)
 	end
-	return false, var4
+	return false, var2
 end

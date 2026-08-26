@@ -38,20 +38,20 @@ local t = {
 	}
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), t (ref)
-	local padding = p0.padding or 0
+	local padding = p1.padding or 0
 	
 	return reactModule.createElement("Frame", {
-		LayoutOrder = p0.layoutOrder,
-		AnchorPoint = p0.anchorPoint,
-		AutomaticSize = p0.automaticSize,
-		Size = p0.size or UDim2.new(1, 0, 1, 0),
-		Position = p0.position,
+		LayoutOrder = p1.layoutOrder,
+		AnchorPoint = p1.anchorPoint,
+		AutomaticSize = p1.automaticSize,
+		Size = p1.size or UDim2.new(1, 0, 1, 0),
+		Position = p1.position,
 		BackgroundTransparency = 1,
 		[reactModule.Tag] = "data-testid=--sdui-slot-overlay"
 	}, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), padding (ref), t (copy), p0 (ref)
+		-- upvalues: reactModule (copy), padding (ref), t (copy), p1 (ref)
 		local t_1 = {
 			UIPadding = reactModule.createElement("UIPadding", {
 				PaddingLeft = UDim.new(0, padding),
@@ -62,7 +62,7 @@ return reactModule.memo(function(p0)
 		}
 		
 		for i, v in t do
-			if p0[i] ~= nil then
+			if p1[i] ~= nil then
 				t_1[i] = reactModule.createElement("Frame", {
 					AnchorPoint = v.AnchorPoint,
 					AutomaticSize = Enum.AutomaticSize.XY,
@@ -70,13 +70,13 @@ return reactModule.memo(function(p0)
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0, 0, 0, 0),
 					[reactModule.Tag] = `data-testid=--sdui-slot-{i}`
-				}, { item = p0[i] })
+				}, { item = p1[i] })
 			end
 		end
 		return t_1
 	end, {
-		p0.topLeftSlot, p0.topMiddleSlot, p0.topRightSlot, p0.centerLeftSlot,
-		p0.centerMiddleSlot, p0.centerRightSlot, p0.bottomLeftSlot,
-		p0.bottomMiddleSlot, p0.bottomRightSlot, padding
+		p1.topLeftSlot, p1.topMiddleSlot, p1.topRightSlot, p1.centerLeftSlot,
+		p1.centerMiddleSlot, p1.centerRightSlot, p1.bottomLeftSlot,
+		p1.bottomMiddleSlot, p1.bottomRightSlot, padding
 	}))
 end)

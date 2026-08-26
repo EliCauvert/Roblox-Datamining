@@ -11,11 +11,11 @@ local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), iconName (ref), reactModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref)
 	local PUBLISH_CONTENT_BODY, PUBLISH_CONTENT_MATURITY, PUBLISH_CONTENT_TITLE, GAME_CONFIGURATION_GAME_DETAILS, GAME_CONFIGURATION_GAME_DETAILS_BODY, GAME_CONFIGURATION_ICON_AND_THUMBNAILS, GAME_CONFIGURATION_TITLE_AND_DESCRIPTION, PUBLISH_VERSION_INFORMATION_BODY, PUBLISH_VERSION_INFORMATION_TITLE, VERSION_HISTORY_TITLE, PUBLISH_VERSION_TITLE_DESCRIPTION
-	local testId = p0.testId or "game-configuration-content"
-	local var8 = if fFlagBuildLocalization then useLocalization({
+	local testId = p1.testId or "game-configuration-content"
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		contentBody = localizationStringsModule.PUBLISH_CONTENT_BODY,
 		contentMaturity = localizationStringsModule.PUBLISH_CONTENT_MATURITY,
 		contentTitle = localizationStringsModule.PUBLISH_CONTENT_TITLE,
@@ -41,17 +41,17 @@ return function(p0)
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		PUBLISH_CONTENT_BODY = var8.contentBody
-		PUBLISH_CONTENT_MATURITY = var8.contentMaturity
-		PUBLISH_CONTENT_TITLE = var8.contentTitle
-		GAME_CONFIGURATION_GAME_DETAILS = var8.gameDetails
-		GAME_CONFIGURATION_GAME_DETAILS_BODY = var8.gameDetailsBody
-		GAME_CONFIGURATION_ICON_AND_THUMBNAILS = var8.iconAndThumbnails
-		GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = var8.titleAndDescription
-		PUBLISH_VERSION_INFORMATION_BODY = var8.versionInformationBody
-		PUBLISH_VERSION_INFORMATION_TITLE = var8.versionInformationTitle
-		VERSION_HISTORY_TITLE = var8.versionHistory
-		PUBLISH_VERSION_TITLE_DESCRIPTION = var8.versionTitleDescription
+		PUBLISH_CONTENT_BODY = var1.contentBody
+		PUBLISH_CONTENT_MATURITY = var1.contentMaturity
+		PUBLISH_CONTENT_TITLE = var1.contentTitle
+		GAME_CONFIGURATION_GAME_DETAILS = var1.gameDetails
+		GAME_CONFIGURATION_GAME_DETAILS_BODY = var1.gameDetailsBody
+		GAME_CONFIGURATION_ICON_AND_THUMBNAILS = var1.iconAndThumbnails
+		GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = var1.titleAndDescription
+		PUBLISH_VERSION_INFORMATION_BODY = var1.versionInformationBody
+		PUBLISH_VERSION_INFORMATION_TITLE = var1.versionInformationTitle
+		VERSION_HISTORY_TITLE = var1.versionHistory
+		PUBLISH_VERSION_TITLE_DESCRIPTION = var1.versionTitleDescription
 	else
 		PUBLISH_CONTENT_BODY = localizationStringsModule.PUBLISH_CONTENT_BODY
 		PUBLISH_CONTENT_MATURITY = localizationStringsModule.PUBLISH_CONTENT_MATURITY
@@ -69,41 +69,41 @@ return function(p0)
 		{
 			id = "icon-thumbnails",
 			title = GAME_CONFIGURATION_ICON_AND_THUMBNAILS,
-			onActivated = p0.onOpenIconAndThumbnails
+			onActivated = p1.onOpenIconAndThumbnails
 		},
 		{
 			id = "title-description",
 			title = GAME_CONFIGURATION_TITLE_AND_DESCRIPTION,
-			onActivated = p0.onOpenTitleDescriptionPage
+			onActivated = p1.onOpenTitleDescriptionPage
 		}
 	}
 	local list_1 = {
 		{
 			id = "content-rating",
 			title = PUBLISH_CONTENT_MATURITY,
-			description = p0.contentMaturityText,
+			description = p1.contentMaturityText,
 			trailingIcon = iconName.ArrowUpRightFromSquare,
-			onActivated = p0.onOpenContentMaturity
+			onActivated = p1.onOpenContentMaturity
 		}
 	}
 	local t = {}
 	
-	if p0.showVersionTitleDescription then
+	if p1.showVersionTitleDescription then
 		table.insert(t, {
 			id = "version-title-description",
 			title = PUBLISH_VERSION_TITLE_DESCRIPTION,
-			onActivated = p0.onOpenVersionTitleDescriptionPage
+			onActivated = p1.onOpenVersionTitleDescriptionPage
 		})
 	end
 	table.insert(t, {
 		id = "version-history",
 		title = VERSION_HISTORY_TITLE,
-		onActivated = p0.onOpenVersionHistory
+		onActivated = p1.onOpenVersionHistory
 	})
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-large size-full-0 auto-y",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		testId = testId
 	}, {
 		VersionInformation = reactModule.createElement(gameConfigurationListModule, {
@@ -132,7 +132,7 @@ return function(p0)
 				rows = list_1,
 				testId = `{testId}-content`
 			}),
-			BuildMaturityBanner = if p0.buildMaturityBannerText ~= nil then nil else reactModule.createElement(buildMaturityBannerModule, { text = p0.buildMaturityBannerText })
+			BuildMaturityBanner = if p1.buildMaturityBannerText ~= nil then nil else reactModule.createElement(buildMaturityBannerModule, { text = p1.buildMaturityBannerText })
 		})
 	})
 end

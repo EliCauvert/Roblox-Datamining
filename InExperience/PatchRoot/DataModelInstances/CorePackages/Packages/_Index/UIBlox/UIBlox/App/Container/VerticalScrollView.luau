@@ -51,146 +51,146 @@ verticalScrollView.defaultProps = {
 	scrollBarType = scrollBarTypeModule.Compact
 }
 
-function verticalScrollView.init(p0)
+function verticalScrollView.init(p1)
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref), userInputService (ref), runService (ref)
-	p0.parentFrameRef = roactModule.createRef()
-	p0.mainCanvasRef = roactModule.createRef()
-	local var15, var16 = roactModule.createBinding(0)
-	p0.scrollPosition = var15
-	p0.updateScroll = var16
-	local var17, var18 = roactModule.createBinding(Vector2.new(0, 0))
-	p0.mainCanvasSize = var17
-	p0.updateCanvasSize = var18
-	p0:setState({ scrollingWithTouch = false })
-	local var19, var20 = roactModule.createBinding(1)
-	p0.scrollBarImageTransparency = var19
-	p0.updateScrollBarImageTransparency = var20
-	p0.scrollBarImageTransparencyMotor = otterModule.createSingleMotor(0)
-	p0.scrollBarImageTransparencyMotor:onStep(p0.updateScrollBarImageTransparency)
-	p0.lastTimeCanvasPositionChanged = tick()
-	p0.waitToHideSidebarConnection = nil
+	p1.parentFrameRef = roactModule.createRef()
+	p1.mainCanvasRef = roactModule.createRef()
+	local var1, var2 = roactModule.createBinding(0)
+	p1.scrollPosition = var1
+	p1.updateScroll = var2
+	local var3, var4 = roactModule.createBinding(Vector2.new(0, 0))
+	p1.mainCanvasSize = var3
+	p1.updateCanvasSize = var4
+	p1:setState({ scrollingWithTouch = false })
+	local var5, var6 = roactModule.createBinding(1)
+	p1.scrollBarImageTransparency = var5
+	p1.updateScrollBarImageTransparency = var6
+	p1.scrollBarImageTransparencyMotor = otterModule.createSingleMotor(0)
+	p1.scrollBarImageTransparencyMotor:onStep(p1.updateScrollBarImageTransparency)
+	p1.lastTimeCanvasPositionChanged = tick()
+	p1.waitToHideSidebarConnection = nil
 	
 	function p0.waitToHideSidebar()
-		-- upvalues: p0 (ref), otterModule (copy), t (copy)
-		if tick() - p0.lastTimeCanvasPositionChanged > 0.7 then
-			p0.scrollBarImageTransparencyMotor:setGoal(otterModule.spring(1, t))
-			p0.disconnectWaitToHideSidebar()
+		-- upvalues: p1 (ref), otterModule (copy), t (copy)
+		if tick() - p1.lastTimeCanvasPositionChanged > 0.7 then
+			p1.scrollBarImageTransparencyMotor:setGoal(otterModule.spring(1, t))
+			p1.disconnectWaitToHideSidebar()
 		end
 	end
 	
 	function p0.disconnectWaitToHideSidebar()
-		-- upvalues: p0 (ref)
-		if p0.waitToHideSidebarConnection then
-			p0.waitToHideSidebarConnection:Disconnect()
-			p0.waitToHideSidebarConnection = nil
+		-- upvalues: p1 (ref)
+		if p1.waitToHideSidebarConnection then
+			p1.waitToHideSidebarConnection:Disconnect()
+			p1.waitToHideSidebarConnection = nil
 		end
 	end
 	
-	function p0.inputBegan(_, p1)
-		-- upvalues: p0 (ref), otterModule (copy)
-		if not p0.props.scrollingEnabled then return end
-		if p1.UserInputType == Enum.UserInputType.MouseMovement then
-			p0.disconnectWaitToHideSidebar()
-			p0.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(0))
+	function p0.inputBegan(_, p2)
+		-- upvalues: p1 (ref), otterModule (copy)
+		if not p1.props.scrollingEnabled then return end
+		if p2.UserInputType == Enum.UserInputType.MouseMovement then
+			p1.disconnectWaitToHideSidebar()
+			p1.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(0))
 		end
 	end
 	
 	function p0.inputEnded(_, p2)
-		-- upvalues: p0 (ref), otterModule (copy)
-		if not p0.props.scrollingEnabled then return end
+		-- upvalues: p1 (ref), otterModule (copy)
+		if not p1.props.scrollingEnabled then return end
 		if p2.UserInputType == Enum.UserInputType.MouseMovement then
-			p0.disconnectWaitToHideSidebar()
-			p0.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(1))
+			p1.disconnectWaitToHideSidebar()
+			p1.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(1))
 		end
 	end
 	
-	function p0.canvasPosition(p3)
-		-- upvalues: p0 (ref), userInputService (copy), otterModule (copy), runService (copy), roactModule (copy)
-		p0.lastTimeCanvasPositionChanged = tick()
+	function p0.canvasPosition(p2)
+		-- upvalues: p1 (ref), userInputService (copy), otterModule (copy), runService (copy), roactModule (copy)
+		p1.lastTimeCanvasPositionChanged = tick()
 		
-		if not p0.waitToHideSidebarConnection and userInputService:GetLastInputType() == Enum.UserInputType.Touch then
-			p0.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(0))
-			p0.waitToHideSidebarConnection = runService.Heartbeat:Connect(p0.waitToHideSidebar)
+		if not p1.waitToHideSidebarConnection and userInputService:GetLastInputType() == Enum.UserInputType.Touch then
+			p1.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(0))
+			p1.waitToHideSidebarConnection = runService.Heartbeat:Connect(p1.waitToHideSidebar)
 		end
-		p0.updateScroll(p3.CanvasPosition.Y)
+		p1.updateScroll(p2.CanvasPosition.Y)
 		
-		if p0.props[roactModule.Change.CanvasPosition] then
-			p0.props[roactModule.Change.CanvasPosition](p3)
+		if p1.props[roactModule.Change.CanvasPosition] then
+			p1.props[roactModule.Change.CanvasPosition](p2)
 		end
 	end
 	
 	function p0.onGamepadFocused()
-		-- upvalues: p0 (ref), otterModule (copy)
-		p0.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(0))
+		-- upvalues: p1 (ref), otterModule (copy)
+		p1.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(0))
 	end
 	
 	function p0.onGamepadFocusLost()
-		-- upvalues: p0 (ref), otterModule (copy)
-		p0.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(1))
+		-- upvalues: p1 (ref), otterModule (copy)
+		p1.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(1))
 	end
 	
 	function p0.getMainCanvasPosition()
-		-- upvalues: p0 (ref)
-		return p0.scrollPosition:map(function(p4)
-			return Vector2.new(0, p4)
+		-- upvalues: p1 (ref)
+		return p1.scrollPosition:map(function(p2)
+			return Vector2.new(0, p2)
 		end)
 	end
 	
-	function p0.onMainCanvasSizeChange(p5)
-		-- upvalues: p0 (ref)
-		p0.updateCanvasSize(p5.AbsoluteCanvasSize)
+	function p0.onMainCanvasSizeChange(p2)
+		-- upvalues: p1 (ref)
+		p1.updateCanvasSize(p2.AbsoluteCanvasSize)
 	end
 	
 	function p0.getMainCanvasSize()
-		-- upvalues: p0 (ref)
-		return p0.mainCanvasSize:map(function(p6)
-			return UDim2.new(0, 2, 0, p6.Y)
+		-- upvalues: p1 (ref)
+		return p1.mainCanvasSize:map(function(p2)
+			return UDim2.new(0, 2, 0, p2.Y)
 		end)
 	end
 	
-	local var21, var22 = roactModule.createBinding(Vector2.new(0, 0))
-	p0.viewSize = var21
-	p0.updateViewSize = var22
-	local var23, var24 = roactModule.createBinding(Vector2.new(0, 0))
-	p0.mainCanvasPosition = var23
-	p0.updateMainCanvasPosition = var24
+	local var7, var8 = roactModule.createBinding(Vector2.new(0, 0))
+	p1.viewSize = var7
+	p1.updateViewSize = var8
+	local var9, var10 = roactModule.createBinding(Vector2.new(0, 0))
+	p1.mainCanvasPosition = var9
+	p1.updateMainCanvasPosition = var10
 	
-	function p0.onScrollBarDragging(p7)
-		-- upvalues: p0 (ref)
-		p0.updateMainCanvasPosition(Vector2.new(0, p7))
+	function p0.onScrollBarDragging(p2)
+		-- upvalues: p1 (ref)
+		p1.updateMainCanvasPosition(Vector2.new(0, p2))
 	end
 	
-	function p0.onViewSizeChange(p8)
-		-- upvalues: p0 (ref)
-		p0.updateViewSize(p8.AbsoluteSize)
+	function p0.onViewSizeChange(p2)
+		-- upvalues: p1 (ref)
+		p1.updateViewSize(p2.AbsoluteSize)
 	end
 	
-	function p0.onSelectionChanged(p9, p10, _, p11)
-		-- upvalues: p0 (ref)
-		if not p10 and p11 == nil then
-			p0.onGamepadFocusLost()
+	function p0.onSelectionChanged(p2, p3, _, p4)
+		-- upvalues: p1 (ref)
+		if not p3 and p4 == nil then
+			p1.onGamepadFocusLost()
 			
 			return
-		elseif p10 or p11:IsDescendantOf(p9) then
-			p0.onGamepadFocused()
+		elseif p3 or p4:IsDescendantOf(p2) then
+			p1.onGamepadFocused()
 			
 			return
 		end
-		p0.onGamepadFocusLost()
+		p1.onGamepadFocusLost()
 	end
 end
 
-function verticalScrollView.getScrollBarStyleProps(_, p12, p13)
+function verticalScrollView.getScrollBarStyleProps(_, p1, p2)
 	-- upvalues: scrollBarTypeModule (ref), UIBloxConfigModule (ref), imagesModule (ref)
-	local tokens = p12.Tokens
+	local tokens = p1.Tokens
 	
-	return if p13 == scrollBarTypeModule.Wide then {
+	return if p2 == scrollBarTypeModule.Wide then {
 		userInteractionEnabled = true,
 		marginRight = 0,
 		width = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_400 else tokens.Global.Size_200,
 		handleWidth = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100,
 		paddingStartEnd = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50
-	} elseif p13 == scrollBarTypeModule.Gamepad then {
+	} elseif p2 == scrollBarTypeModule.Gamepad then {
 		userInteractionEnabled = false,
 		width = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_400 else tokens.Global.Space_200,
 		handleWidth = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100,
@@ -211,44 +211,44 @@ function verticalScrollView.getScrollBarStyleProps(_, p12, p13)
 	}
 end
 
-function verticalScrollView.renderScrollBar(p14, p15)
+function verticalScrollView.renderScrollBar(p1, p2)
 	-- upvalues: roactModule (ref), scrollBarModule (ref), UIBloxConfigModule (ref)
-	local tokens = p15.Tokens
-	local var25 = p14:getScrollBarStyleProps(p15, p14.props.scrollBarType)
+	local tokens = p2.Tokens
+	local var1 = p1:getScrollBarStyleProps(p2, p1.props.scrollBarType)
 	
 	return roactModule.createElement(scrollBarModule, {
 		zIndex = 2,
-		userInteractionEnabled = var25.userInteractionEnabled,
-		width = var25.width,
+		userInteractionEnabled = var1.userInteractionEnabled,
+		width = var1.width,
 		anchorPoint = Vector2.new(1, 0),
-		position = UDim2.new(1, -var25.marginRight, 0, 0),
-		transparency = p14.scrollBarImageTransparency,
-		backgroundColor = var25.backgroundColor,
-		paddingStartEnd = var25.paddingStartEnd,
-		handleWidth = var25.handleWidth,
+		position = UDim2.new(1, -var1.marginRight, 0, 0),
+		transparency = p1.scrollBarImageTransparency,
+		backgroundColor = var1.backgroundColor,
+		paddingStartEnd = var1.paddingStartEnd,
+		handleWidth = var1.handleWidth,
 		handleColor = {
 			Color = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Shift.Shift_400.Color3 else tokens.Semantic.Color.Ui.Emphasis.Color3,
 			Transparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Shift.Shift_400.Transparency else tokens.Semantic.Color.Ui.Emphasis.Transparency
 		},
 		handleCornerRadius = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Radius.Circle else tokens.Semantic.Radius.Circle,
-		handleIcon = var25.handleIcon,
-		handleIconColor = var25.handleIconColor,
-		handleIconSize = var25.handleIconSize,
-		onDragging = p14.onScrollBarDragging,
-		viewSize = p14.viewSize,
-		canvasSize = p14.mainCanvasSize,
-		canvasPosition = p14.getMainCanvasPosition()
+		handleIcon = var1.handleIcon,
+		handleIconColor = var1.handleIconColor,
+		handleIconSize = var1.handleIconSize,
+		onDragging = p1.onScrollBarDragging,
+		viewSize = p1.viewSize,
+		canvasSize = p1.mainCanvasSize,
+		canvasPosition = p1.getMainCanvasPosition()
 	})
 end
 
-function verticalScrollView.renderWithProviders(p16, p17, _, p18)
+function verticalScrollView.renderWithProviders(p1, p2, _, p3)
 	-- upvalues: roactModule (ref), focusable (ref)
-	local position = p16.props.position
-	local size = p16.props.size
-	local layoutOrder = p16.props.layoutOrder
-	local canvasSizeY = p16.props.canvasSizeY
-	local automaticSize = p16.props.automaticSize
-	local isGamepadFocusable = p16.props.isGamepadFocusable
+	local position = p1.props.position
+	local size = p1.props.size
+	local layoutOrder = p1.props.layoutOrder
+	local canvasSizeY = p1.props.canvasSizeY
+	local automaticSize = p1.props.automaticSize
+	local isGamepadFocusable = p1.props.isGamepadFocusable
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -257,7 +257,7 @@ function verticalScrollView.renderWithProviders(p16, p17, _, p18)
 		AutomaticSize = automaticSize,
 		LayoutOrder = layoutOrder,
 		ClipsDescendants = true,
-		[roactModule.Ref] = p16.parentFrameRef
+		[roactModule.Ref] = p1.parentFrameRef
 	}, {
 		MainCanvas = roactModule.createElement(if isGamepadFocusable then focusable.ScrollingFrame else "ScrollingFrame", {
 			Active = false,
@@ -265,51 +265,51 @@ function verticalScrollView.renderWithProviders(p16, p17, _, p18)
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
-			ElasticBehavior = p16.props.elasticBehavior,
+			ElasticBehavior = p1.props.elasticBehavior,
 			CanvasSize = UDim2.new(UDim.new(1, 0), canvasSizeY),
-			AutomaticCanvasSize = if p16.props.useAutomaticCanvasSize then Enum.AutomaticSize.Y else nil,
-			CanvasPosition = p16.mainCanvasPosition,
-			ScrollingEnabled = p16.props.scrollingEnabled,
+			AutomaticCanvasSize = if p1.props.useAutomaticCanvasSize then Enum.AutomaticSize.Y else nil,
+			CanvasPosition = p1.mainCanvasPosition,
+			ScrollingEnabled = p1.props.scrollingEnabled,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
 			ScrollBarImageTransparency = 1,
 			ScrollBarThickness = 0,
-			Selectable = p16.props.selectable,
-			SelectionImageObject = p18,
-			onFocusGained = if isGamepadFocusable then p16.onGamepadFocused else nil,
-			onFocusLost = if isGamepadFocusable then p16.onGamepadFocusLost else nil,
-			NextSelectionLeft = p16.props.NextSelectionLeft,
-			NextSelectionRight = p16.props.NextSelectionRight,
-			NextSelectionUp = p16.props.NextSelectionUp,
-			NextSelectionDown = p16.props.NextSelectionDown,
-			[roactModule.Event.InputBegan] = p16.inputBegan,
-			[roactModule.Event.InputEnded] = p16.inputEnded,
-			[roactModule.Change.CanvasPosition] = p16.canvasPosition,
-			[roactModule.Change.AbsoluteCanvasSize] = p16.onMainCanvasSizeChange,
-			[roactModule.Change.CanvasSize] = p16.props[roactModule.Change.CanvasSize],
-			[roactModule.Ref] = p16.props.scrollingFrameRef,
-			[roactModule.Change.AbsoluteSize] = p16.onViewSizeChange,
-			[roactModule.Event.SelectionChanged] = if isGamepadFocusable then p16.onSelectionChanged else nil
-		}, p16.props[roactModule.Children]),
-		ScrollBar = p16:renderScrollBar(p17)
+			Selectable = p1.props.selectable,
+			SelectionImageObject = p3,
+			onFocusGained = if isGamepadFocusable then p1.onGamepadFocused else nil,
+			onFocusLost = if isGamepadFocusable then p1.onGamepadFocusLost else nil,
+			NextSelectionLeft = p1.props.NextSelectionLeft,
+			NextSelectionRight = p1.props.NextSelectionRight,
+			NextSelectionUp = p1.props.NextSelectionUp,
+			NextSelectionDown = p1.props.NextSelectionDown,
+			[roactModule.Event.InputBegan] = p1.inputBegan,
+			[roactModule.Event.InputEnded] = p1.inputEnded,
+			[roactModule.Change.CanvasPosition] = p1.canvasPosition,
+			[roactModule.Change.AbsoluteCanvasSize] = p1.onMainCanvasSizeChange,
+			[roactModule.Change.CanvasSize] = p1.props[roactModule.Change.CanvasSize],
+			[roactModule.Ref] = p1.props.scrollingFrameRef,
+			[roactModule.Change.AbsoluteSize] = p1.onViewSizeChange,
+			[roactModule.Event.SelectionChanged] = if isGamepadFocusable then p1.onSelectionChanged else nil
+		}, p1.props[roactModule.Children]),
+		ScrollBar = p1:renderScrollBar(p2)
 	})
 end
 
-function verticalScrollView.render(p19)
+function verticalScrollView.render(p1)
 	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p20)
-		-- upvalues: p19 (ref)
-		return p19:renderWithProviders(p20, nil, p19.props.cursor)
+	return withStyleModule(function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderWithProviders(p2, nil, p1.props.cursor)
 	end)
 end
 
-function verticalScrollView.willUnmount(p21)
-	p21.disconnectWaitToHideSidebar()
+function verticalScrollView.willUnmount(p1)
+	p1.disconnectWaitToHideSidebar()
 end
 
-return roactModule.forwardRef(function(p22, p23)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), verticalScrollView (ref), cryoModule (ref)
-	return roactModule.createElement(verticalScrollView, cryoModule.Dictionary.join(p22, {
-		scrollingFrameRef = p23,
+	return roactModule.createElement(verticalScrollView, cryoModule.Dictionary.join(p1, {
+		scrollingFrameRef = p2,
 		cursor = useCursorByTypeModule(cursorTypeModule.RoundedRect)
 	}))
 end)

@@ -12,17 +12,17 @@ local colorMode = foundationModule.Enums.ColorMode
 local useTokens = foundationModule.Hooks.useTokens
 local t = { withUiModeSupport = true, withDarkTheme = true }
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), reactModule (ref), uiModeStyleProviderModule (ref), appStyleProvider (ref), colorMode (ref), constants (ref), foundationProvider (ref)
-	local var7 = cryoModule.Dictionary.join(t, p0)
-	local var8 = reactModule.createElement(if p0.withUiModeSupport then uiModeStyleProviderModule else appStyleProvider, {
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = reactModule.createElement(if p1.withUiModeSupport then uiModeStyleProviderModule else appStyleProvider, {
 		style = {
-			themeName = if var7.withDarkTheme then colorMode.Dark else colorMode.Light,
+			themeName = if var1.withDarkTheme then colorMode.Dark else colorMode.Light,
 			fontName = constants.FontName.Gotham
 		}
-	}, var7.children)
+	}, var1.children)
 	
-	return if p0.withUiModeSupport or useTokens().Config ~= nil then var8 else reactModule.createElement(foundationProvider, {
-		colorMode = if var7.withDarkTheme then colorMode.Dark else colorMode.Light
-	}, var8)
+	return if p1.withUiModeSupport or useTokens().Config ~= nil then var2 else reactModule.createElement(foundationProvider, {
+		colorMode = if var1.withDarkTheme then colorMode.Dark else colorMode.Light
+	}, var2)
 end

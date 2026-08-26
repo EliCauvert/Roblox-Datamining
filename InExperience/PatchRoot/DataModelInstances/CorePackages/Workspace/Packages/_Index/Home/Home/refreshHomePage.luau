@@ -4,14 +4,14 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
 local fetchHomePageModule = require(home.fetchHomePage)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref)
-	local var3 = sduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(appPage.Home)
-	var3.start("refresh")
+	local var1 = sduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(appPage.Home)
+	var1.start("refresh")
 	
-	return fetchHomePageModule(var3, {
+	return fetchHomePageModule(var1, {
 		forceRefresh = true,
-		requestIntent = p0,
-		contextualFeatures = p1
+		requestIntent = p1,
+		contextualFeatures = p2
 	})
 end

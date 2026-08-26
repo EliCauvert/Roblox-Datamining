@@ -9,13 +9,13 @@ local overlayModule = require(script.App.Dialog.Overlay.Overlay)
 local controlStateModule = require(script.Core.Control.Enum.ControlState)
 local _ = require(script.Parent.React)
 
-return makeConfigurableModule(function(p0)
+return makeConfigurableModule(function(p1)
 	-- upvalues: createLazyComponentModule (ref), controlStateModule (ref), overlayModule (ref)
 	local strictModule = require(script.Utility.strict)
 	
-	local function _(p1)
+	local function _(p2)
 		-- upvalues: createLazyComponentModule (copy)
-		return createLazyComponentModule(p1)
+		return createLazyComponentModule(p2)
 	end
 	
 	local t = {
@@ -466,7 +466,7 @@ return makeConfigurableModule(function(p0)
 		local usageTrackerModule = require(script.Parent.UsageTracker)
 		t = usageTrackerModule.trackMemberAccess("UIBlox", t, usageTrackerModule.isReactComponent)
 	end
-	if p0.enableTraceLevelLog then
+	if p1.enableTraceLevelLog then
 		require(script.Logger):enableTraceLog()
 	end
 	return t

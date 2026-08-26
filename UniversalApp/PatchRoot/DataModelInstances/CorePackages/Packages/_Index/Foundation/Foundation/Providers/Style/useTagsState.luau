@@ -13,20 +13,20 @@ return function()
 				table.insert(t, v_1)
 			end
 		end
-		var2(function(p0)
+		var2(function(p1)
 			-- upvalues: t (ref)
-			local var4 = false
+			local var3 = false
 			
 			for i, v in t do
-				if p0[v] ~= true then
-					var4 = true
+				if p1[v] ~= true then
+					var3 = true
 					break
 				end
 			end
-			if not var4 then
-				return p0
+			if not var3 then
+				return p1
 			end
-			local cloned = table.clone(p0)
+			local cloned = table.clone(p1)
 			
 			for v, v_1 in t do
 				cloned[v_1] = true

@@ -3,15 +3,15 @@ local reactModule = require(parent.Parent.Parent.Parent.React)
 local emojiModule = require(parent.Enum.Emoji)
 local constantsModule = require(parent.constants)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: emojiModule (ref), constantsModule (ref)
-	return if emojiModule.isEnumValue(p0) then constantsModule[p0.rawValue()] else ""
+	return if emojiModule.isEnumValue(p1) then constantsModule[p1.rawValue()] else ""
 end
 
 return function(p1)
 	-- upvalues: reactModule (ref), emojiModule (ref), constantsModule (ref)
 	local createElement = reactModule.createElement
-	local var3 = if p1.onActivated then "TextButton" else "TextLabel"
+	local var1 = if p1.onActivated then "TextButton" else "TextLabel"
 	local t = { Size = UDim2.fromScale(0, 1) }
 	local emoji = p1.emoji
 	t.Text = if emojiModule.isEnumValue(emoji) then constantsModule[emoji.rawValue()] else ""
@@ -23,5 +23,5 @@ return function(p1)
 	t.BackgroundTransparency = 1
 	t[reactModule.Event.Activated] = p1.onActivated
 	
-	return createElement(var3, t)
+	return createElement(var1, t)
 end

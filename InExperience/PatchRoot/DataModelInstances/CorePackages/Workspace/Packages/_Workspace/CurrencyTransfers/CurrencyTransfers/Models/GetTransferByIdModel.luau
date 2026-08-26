@@ -3,13 +3,13 @@ local _ = require(currencyTransfers.types)
 local tModule = require(currencyTransfers.Parent.t)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -37,14 +37,14 @@ function t.mock(p1)
 	})
 end
 
-local function formatRobuxTransfer(p2)
+local function formatRobuxTransfer(p1)
 	-- upvalues: currencyTransfers (ref)
 	local transferStatusModule = require(currencyTransfers.Enums.TransferStatus)
-	local sender = p2.sender
-	local recipient = p2.recipient
+	local sender = p1.sender
+	local recipient = p1.recipient
 	
 	return {
-		transferId = p2.transferId,
+		transferId = p1.transferId,
 		sender = {
 			type = sender.type,
 			targetId = sender.targetId,
@@ -57,16 +57,16 @@ local function formatRobuxTransfer(p2)
 			targetName = recipient.targetName,
 			targetDisplayName = recipient.targetDisplayName
 		},
-		transferAmount = p2.transferAmount,
-		creationTime = p2.creationTime,
-		requireRecipientAction = p2.requireRecipientAction,
-		status = transferStatusModule.fromValue(p2.status) or transferStatusModule.Completed
+		transferAmount = p1.transferAmount,
+		creationTime = p1.creationTime,
+		requireRecipientAction = p1.requireRecipientAction,
+		status = transferStatusModule.fromValue(p1.status) or transferStatusModule.Completed
 	}
 end
 
-function t.format(p3)
+function t.format(p1)
 	-- upvalues: t (ref), formatRobuxTransfer (ref)
-	local transfer = p3.transfer
+	local transfer = p1.transfer
 	
 	if not transfer then
 		error("GetTransferByIdModel.format: transfer is missing from response")

@@ -1,17 +1,17 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
-		appsflyer = function(p1, p2)
-			-- upvalues: p0 (ref)
-			local t = { linkId = p1, linkType = p2 }
+		appsflyer = function(p2, p3)
+			-- upvalues: p1 (ref)
+			local t = { linkId = p2, linkType = p3 }
 			
-			return p0.fromString("appsflyer:Ebh5?pid=share&is_retargeting=true&af_dp={mobileUrl}&af_web_dp={webUrl}")({
-				mobileUrl = p0.fromString("mobilenav:share_links?code={linkId}&type={linkType}")(t),
-				webUrl = p0.fromString("www:share-links?code={linkId}&type={linkType}")(t)
+			return p1.fromString("appsflyer:Ebh5?pid=share&is_retargeting=true&af_dp={mobileUrl}&af_web_dp={webUrl}")({
+				mobileUrl = p1.fromString("mobilenav:share_links?code={linkId}&type={linkType}")(t),
+				webUrl = p1.fromString("www:share-links?code={linkId}&type={linkType}")(t)
 			})
 		end,
-		shortUrl = function(p3)
-			-- upvalues: p0 (ref)
-			return p0.fromString("www:share?code={linkId}&type={type}&stamp={stamp|}")(p3)
+		shortUrl = function(p2)
+			-- upvalues: p1 (ref)
+			return p1.fromString("www:share?code={linkId}&type={type}&stamp={stamp|}")(p2)
 		end
 	}
 end

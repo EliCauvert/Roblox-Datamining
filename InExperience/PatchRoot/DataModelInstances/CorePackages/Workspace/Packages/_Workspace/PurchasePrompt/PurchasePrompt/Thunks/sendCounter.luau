@@ -10,18 +10,18 @@ local selectedRobuxPackageModule = require(parent.Utils.SelectedRobuxPackage)
 local thunkModule = require(parent.Thunk)
 local list = { analyticsModule, externalSettingsModule }
 
-return function(p0)
+return function(p1)
 	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), externalSettingsModule (ref), counterModule (ref), purchaseFlowModule (ref), selectedRobuxPackageModule (ref), getPaymentPlatformModule (ref), paymentPlatformModule (ref), getCounterCombinationsModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: analyticsModule (copy), externalSettingsModule (copy), counterModule (copy), p0 (ref), purchaseFlowModule (copy), selectedRobuxPackageModule (copy), getPaymentPlatformModule (copy), paymentPlatformModule (copy), getCounterCombinationsModule (copy)
-		local var10 = p2[analyticsModule]
-		local var11 = p2[externalSettingsModule]
-		local var12 = counterModule.toRawValue(p0)
-		local state = p1:getState()
+	return thunkModule.new(script.Name, list, function(p2, p3)
+		-- upvalues: analyticsModule (copy), externalSettingsModule (copy), counterModule (copy), p1 (ref), purchaseFlowModule (copy), selectedRobuxPackageModule (copy), getPaymentPlatformModule (copy), paymentPlatformModule (copy), getCounterCombinationsModule (copy)
+		local var1 = p3[analyticsModule]
+		local var2 = p3[externalSettingsModule]
+		local var3 = counterModule.toRawValue(p1)
+		local state = p2:getState()
 		local purchaseFlow = state.purchaseFlow
 		
-		for i, v in getCounterCombinationsModule("PurchasePrompt", var12, paymentPlatformModule.toRawValue(getPaymentPlatformModule(var11.getPlatform())), if purchaseFlow ~= nil then nil else purchaseFlowModule.toRawValue(purchaseFlow), selectedRobuxPackageModule.getRobuxPurchaseAmount(state)) do
-			var10.sendCounter(v)
+		for i, v in getCounterCombinationsModule("PurchasePrompt", var3, paymentPlatformModule.toRawValue(getPaymentPlatformModule(var2.getPlatform())), if purchaseFlow ~= nil then nil else purchaseFlowModule.toRawValue(purchaseFlow), selectedRobuxPackageModule.getRobuxPurchaseAmount(state)) do
+			var1.sendCounter(v)
 		end
 	end)
 end

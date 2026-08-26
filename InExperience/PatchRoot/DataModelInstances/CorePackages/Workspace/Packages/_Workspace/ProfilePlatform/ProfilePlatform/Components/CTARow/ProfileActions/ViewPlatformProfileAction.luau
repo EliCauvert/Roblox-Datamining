@@ -9,18 +9,18 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.ViewPlatformProfile] = if fFlagEnablePlatformProfileContextualMenuOption then function(p0)
+	[enumsModule.ProfileActions.ViewPlatformProfile] = if fFlagEnablePlatformProfileContextualMenuOption then function(p1)
 		-- upvalues: fFlagPPVEnabledOnConsole (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), getPlatformFriendsServiceModule (ref)
 		if fFlagPPVEnabledOnConsole then
-			local profilePlatformId = p0.profileWrapperContext.profilePlatformId
+			local profilePlatformId = p1.profileWrapperContext.profilePlatformId
 			
 			return if profilePlatformId and profilePlatformId ~= "" then {
-				text = p0.localized[enumsModule.ProfileActions.ViewPlatformProfile],
+				text = p1.localized[enumsModule.ProfileActions.ViewPlatformProfile],
 				onActivated = {
 					[profileTypes.User] = function()
-						-- upvalues: p0 (ref), eventNamesModule (copy), getPlatformFriendsServiceModule (copy)
-						p0.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonViewPlatformProfile, { buttonSurface = p0.buttonSurface })
-						getPlatformFriendsServiceModule:ShowProfile(p0.profileWrapperContext.profilePlatformId)
+						-- upvalues: p1 (ref), eventNamesModule (copy), getPlatformFriendsServiceModule (copy)
+						p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonViewPlatformProfile, { buttonSurface = p1.buttonSurface })
+						getPlatformFriendsServiceModule:ShowProfile(p1.profileWrapperContext.profilePlatformId)
 					end
 				}
 			} else nil

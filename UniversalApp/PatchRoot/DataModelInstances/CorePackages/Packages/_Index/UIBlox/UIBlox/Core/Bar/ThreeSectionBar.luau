@@ -39,64 +39,64 @@ threeSectionBar.defaultProps = {
 	end
 }
 
-function threeSectionBar.init(p0)
+function threeSectionBar.init(p1)
 	-- upvalues: roactModule (ref)
+	local var1, var2 = roactModule.createBinding(0)
+	p1.leftWidth = var1
+	p1.updateLeftWidth = var2
+	local var3, var4 = roactModule.createBinding(0)
+	p1.rightWidth = var3
+	p1.updateRightWidth = var4
 	local var5, var6 = roactModule.createBinding(0)
-	p0.leftWidth = var5
-	p0.updateLeftWidth = var6
-	local var7, var8 = roactModule.createBinding(0)
-	p0.rightWidth = var7
-	p0.updateRightWidth = var8
-	local var9, var10 = roactModule.createBinding(0)
-	p0.fullWidth = var9
-	p0.updateFullWidth = var10
+	p1.fullWidth = var5
+	p1.updateFullWidth = var6
 	
-	function p0.computeCenteredSize(p1)
-		-- upvalues: p0 (ref)
-		local maxValue = math.max(p1[1], p1[2])
+	function p0.computeCenteredSize(p2)
+		-- upvalues: p1 (ref)
+		local maxValue = math.max(p2[1], p2[2])
 		
-		return if p0.props.renderLeft and p0.props.renderRight then UDim2.new(0, (Vector2.new(p1[3] / 2, 0) - Vector2.new(maxValue, 0)).magnitude * 2, 1, 0) else UDim2.new(1, -maxValue, 1, 0)
+		return if p1.props.renderLeft and p1.props.renderRight then UDim2.new(0, (Vector2.new(p2[3] / 2, 0) - Vector2.new(maxValue, 0)).magnitude * 2, 1, 0) else UDim2.new(1, -maxValue, 1, 0)
 	end
 	
 	function p0.computeBumpedPosition(p2)
-		local var12 = p2[1]
+		local var7 = p2[1]
 		
-		return UDim2.new(0, var12 + (p2[3] - var12 - p2[2]) / 2, 0.5, 0)
+		return UDim2.new(0, var7 + (p2[3] - var7 - p2[2]) / 2, 0.5, 0)
 	end
 	
-	function p0.computeBumpedSize(p3)
-		return UDim2.new(1, (-p3[1]) - p3[2], 1, 0)
+	function p0.computeBumpedSize(p2)
+		return UDim2.new(1, (-p2[1]) - p2[2], 1, 0)
 	end
 end
 
-function threeSectionBar.didUpdate(p4)
-	if not p4.props.renderLeft then
-		p4.updateLeftWidth(0)
+function threeSectionBar.didUpdate(p1)
+	if not p1.props.renderLeft then
+		p1.updateLeftWidth(0)
 	end
-	if not p4.props.renderRight then
-		p4.updateRightWidth(0)
+	if not p1.props.renderRight then
+		p1.updateRightWidth(0)
 	end
 end
 
-function threeSectionBar.render(p5)
+function threeSectionBar.render(p1)
 	-- upvalues: roactModule (ref), fitFrameModule (ref), cryoModule (ref)
 	local vector2 = Vector2.new(0.5, 0.5)
 	local _ = nil
-	local var14 = if not p5.props.renderLeft and p5.props.renderRight then if p5.props.renderLeft and not p5.props.renderRight then UDim2.fromScale(1, 0.5) else UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0, 0.5)
+	local var1 = if not p1.props.renderLeft and p1.props.renderRight then if p1.props.renderLeft and not p1.props.renderRight then UDim2.fromScale(1, 0.5) else UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0, 0.5)
 	
 	return roactModule.createElement("Frame", {
-		Size = UDim2.new(1, 0, 0, p5.props.barHeight),
-		BackgroundColor3 = p5.props.BackgroundColor3,
-		BackgroundTransparency = p5.props.BackgroundTransparency,
+		Size = UDim2.new(1, 0, 0, p1.props.barHeight),
+		BackgroundColor3 = p1.props.BackgroundColor3,
+		BackgroundTransparency = p1.props.BackgroundTransparency,
 		BorderSizePixel = 0,
-		AutomaticSize = if p5.props.automaticHeight then Enum.AutomaticSize.Y else nil,
-		[roactModule.Change.AbsoluteSize] = function(p6)
-			-- upvalues: p5 (ref)
-			p5.props.onWidthChange(p6.AbsoluteSize.X)
-			p5.updateFullWidth(p6.AbsoluteSize.X)
+		AutomaticSize = if p1.props.automaticHeight then Enum.AutomaticSize.Y else nil,
+		[roactModule.Change.AbsoluteSize] = function(p2)
+			-- upvalues: p1 (ref)
+			p1.props.onWidthChange(p2.AbsoluteSize.X)
+			p1.updateFullWidth(p2.AbsoluteSize.X)
 		end
 	}, {
-		leftFrame = p5.props.renderLeft and roactModule.createElement(fitFrameModule.FitFrameHorizontal, {
+		leftFrame = p1.props.renderLeft and roactModule.createElement(fitFrameModule.FitFrameHorizontal, {
 			AnchorPoint = Vector2.new(0, 0),
 			Position = UDim2.fromScale(0, 0),
 			BackgroundTransparency = 1,
@@ -104,56 +104,56 @@ function threeSectionBar.render(p5)
 			height = UDim.new(1, 0),
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			contentPadding = p5.props.contentPaddingLeft,
+			contentPadding = p1.props.contentPaddingLeft,
 			margin = {
 				top = 0,
 				bottom = 0,
-				left = p5.props.marginLeft,
-				right = p5.props.sectionSpacing
+				left = p1.props.marginLeft,
+				right = p1.props.sectionSpacing
 			},
-			[roactModule.Change.AbsoluteSize] = function(p7)
-				-- upvalues: p5 (ref)
-				p5.updateLeftWidth(p7.AbsoluteSize.X)
+			[roactModule.Change.AbsoluteSize] = function(p2)
+				-- upvalues: p1 (ref)
+				p1.updateLeftWidth(p2.AbsoluteSize.X)
 			end
 		}, {
-			leftContent = p5.props.renderLeft(cryoModule.Dictionary.join(p5.props, {
+			leftContent = p1.props.renderLeft(cryoModule.Dictionary.join(p1.props, {
 				[roactModule.Children] = {
 					sizeConstraint = roactModule.createElement("UISizeConstraint", {
-						MaxSize = roactModule.joinBindings({ p5.leftWidth, p5.rightWidth, p5.fullWidth }):map(function(p8)
-							-- upvalues: p5 (ref)
-							local _ = p8[1]
+						MaxSize = roactModule.joinBindings({ p1.leftWidth, p1.rightWidth, p1.fullWidth }):map(function(p2)
+							-- upvalues: p1 (ref)
+							local _ = p2[1]
 							
-							return Vector2.new(math.max(0, p8[3] - p8[2] - p5.props.marginLeft), 1e999)
+							return Vector2.new(math.max(0, p2[3] - p2[2] - p1.props.marginLeft), 1e999)
 						end)
 					})
 				}
 			}))
 		}),
-		centerFrame = p5.props.renderCenter and roactModule.createElement("Frame", {
+		centerFrame = p1.props.renderCenter and roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = vector2,
-			Position = roactModule.joinBindings({ p5.leftWidth, p5.rightWidth, p5.fullWidth }):map(function(p9)
-				-- upvalues: p5 (ref), var14 (write)
-				return if math.abs(p5.computeCenteredSize(p9).X.Offset) <= p5.props.estimatedCenterWidth then p5.computeBumpedPosition(p9) else var14
+			Position = roactModule.joinBindings({ p1.leftWidth, p1.rightWidth, p1.fullWidth }):map(function(p2)
+				-- upvalues: p1 (ref), var1 (write)
+				return if math.abs(p1.computeCenteredSize(p2).X.Offset) <= p1.props.estimatedCenterWidth then p1.computeBumpedPosition(p2) else var1
 			end),
-			Size = roactModule.joinBindings({ p5.leftWidth, p5.rightWidth, p5.fullWidth }):map(function(p10)
-				-- upvalues: p5 (ref)
-				local var15 = p5.computeCenteredSize(p10)
+			Size = roactModule.joinBindings({ p1.leftWidth, p1.rightWidth, p1.fullWidth }):map(function(p2)
+				-- upvalues: p1 (ref)
+				local var2 = p1.computeCenteredSize(p2)
 				
-				return if math.abs(var15.X.Offset) <= p5.props.estimatedCenterWidth then p5.computeBumpedSize(p10) else var15
+				return if math.abs(var2.X.Offset) <= p1.props.estimatedCenterWidth then p1.computeBumpedSize(p2) else var2
 			end)
 		}, {
 			UIPadding = roactModule.createElement("UIPadding", {
-				PaddingLeft = p5.props.renderLeft and UDim.new(0, 0) or UDim.new(0, p5.props.marginLeft),
-				PaddingRight = p5.props.renderRight and UDim.new(0, 0) or UDim.new(0, p5.props.marginRight)
+				PaddingLeft = p1.props.renderLeft and UDim.new(0, 0) or UDim.new(0, p1.props.marginLeft),
+				PaddingRight = p1.props.renderRight and UDim.new(0, 0) or UDim.new(0, p1.props.marginRight)
 			}),
 			["$layout"] = roactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			centerContent = p5.props.renderCenter(p5.props)
+			centerContent = p1.props.renderCenter(p1.props)
 		}),
-		rightFrame = p5.props.renderRight and roactModule.createElement(fitFrameModule.FitFrameHorizontal, {
+		rightFrame = p1.props.renderRight and roactModule.createElement(fitFrameModule.FitFrameHorizontal, {
 			AnchorPoint = Vector2.new(1, 0),
 			Position = UDim2.fromScale(1, 0),
 			BackgroundTransparency = 1,
@@ -162,18 +162,18 @@ function threeSectionBar.render(p5)
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			contentPadding = p5.props.contentPaddingRight,
+			contentPadding = p1.props.contentPaddingRight,
 			margin = {
 				top = 0,
 				bottom = 0,
-				left = p5.props.sectionSpacing,
-				right = p5.props.marginRight
+				left = p1.props.sectionSpacing,
+				right = p1.props.marginRight
 			},
-			[roactModule.Change.AbsoluteSize] = function(p11)
-				-- upvalues: p5 (ref)
-				p5.updateRightWidth(p11.AbsoluteSize.X)
+			[roactModule.Change.AbsoluteSize] = function(p2)
+				-- upvalues: p1 (ref)
+				p1.updateRightWidth(p2.AbsoluteSize.X)
 			end
-		}, { rightContent = p5.props.renderRight(p5.props) })
+		}, { rightContent = p1.props.renderRight(p1.props) })
 	})
 end
 

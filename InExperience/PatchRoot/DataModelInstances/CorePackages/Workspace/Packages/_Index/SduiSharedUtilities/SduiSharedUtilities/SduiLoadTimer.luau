@@ -23,56 +23,56 @@ local _ = {
 }
 
 return {
-	createLoadTimer = function(p0, p1)
+	createLoadTimer = function(p1, p2)
 		-- upvalues: fFlagLuaAppSduiStreamingFirstDataTiming (ref), fFlagSduiGameIconSupport (ref), sduiPageAnalyticsModule (ref)
+		local var1 = nil
 		local var2 = nil
-		local var3 = nil
 		local t = {}
+		local var3 = nil
+		local var4 = "NotStarted"
 		local var5 = nil
-		local var6 = "NotStarted"
-		local var7 = nil
-		local var8 = nil
+		local var6 = nil
 		
-		local function _(p2, p3)
+		local function _(p3, p4)
 			-- upvalues: t (ref)
-			local var11 = t[p2]
-			local var12 = t[p3]
+			local var7 = t[p3]
+			local var8 = t[p4]
 			
-			return if var11 and var12 then (var12 - var11) * 1000 else nil
+			return if var7 and var8 then (var8 - var7) * 1000 else nil
 		end
 		
-		local function start(p4)
-			-- upvalues: var2 (write), var6 (write), var8 (write)
-			var2 = os.clock()
-			var6 = "Running"
-			var8 = p4
+		local function start(p3)
+			-- upvalues: var1 (write), var4 (write), var6 (write)
+			var1 = os.clock()
+			var4 = "Running"
+			var6 = p3
 		end
 		
 		local function finish()
-			-- upvalues: var6 (write), var2 (write), var3 (write), fFlagLuaAppSduiStreamingFirstDataTiming (copy), t (ref), var5 (write), var7 (write), p0 (ref), var8 (write), fFlagSduiGameIconSupport (copy), p1 (ref), sduiPageAnalyticsModule (copy)
-			if var6 ~= "Running" or var2 == nil then return end
-			local uiRequestQueued, var14, uiRequestQueued_1, var15
-			var6 = "Finished"
-			var3 = os.clock()
-			local var13 = (var3 - var2) * 1000
+			-- upvalues: var4 (write), var1 (write), var2 (write), fFlagLuaAppSduiStreamingFirstDataTiming (copy), t (ref), var3 (write), var5 (write), p1 (ref), var6 (write), fFlagSduiGameIconSupport (copy), p2 (ref), sduiPageAnalyticsModule (copy)
+			if var4 ~= "Running" or var1 == nil then return end
+			local uiRequestQueued, var7, uiRequestQueued_1, var8
+			var4 = "Finished"
+			var2 = os.clock()
+			local var9 = (var2 - var1) * 1000
 			local _ = nil
 			
 			if fFlagLuaAppSduiStreamingFirstDataTiming then
 				uiRequestQueued = t.UiRequestQueued
 				local uiStreamChunkReceived = t.UiStreamChunkReceived
-				var14 = if uiRequestQueued and uiStreamChunkReceived then (uiStreamChunkReceived - uiRequestQueued) * 1000 else nil
+				var7 = if uiRequestQueued and uiStreamChunkReceived then (uiStreamChunkReceived - uiRequestQueued) * 1000 else nil
 				uiRequestQueued_1 = t.UiRequestQueued
 				local uiResponseReceived = t.UiResponseReceived
 				uiRequestQueued = if uiRequestQueued_1 and uiResponseReceived then (uiResponseReceived - uiRequestQueued_1) * 1000 else nil
-				var15 = if var14 and uiRequestQueued then math.min(var14, uiRequestQueued) else var14 or uiRequestQueued
+				var8 = if var7 and uiRequestQueued then math.min(var7, uiRequestQueued) else var7 or uiRequestQueued
 			else
-				var14 = t.UiRequestQueued
+				var7 = t.UiRequestQueued
 				local uiResponseReceived = t.UiResponseReceived
-				var15 = if var14 and uiResponseReceived then (uiResponseReceived - var14) * 1000 else nil
+				var8 = if var7 and uiResponseReceived then (uiResponseReceived - var7) * 1000 else nil
 			end
 			uiRequestQueued = t.ResponseDecodeBegin
 			uiRequestQueued_1 = t.ResponseDecodeEnd
-			var14 = if uiRequestQueued and uiRequestQueued_1 then (uiRequestQueued_1 - uiRequestQueued) * 1000 else nil
+			var7 = if uiRequestQueued and uiRequestQueued_1 then (uiRequestQueued_1 - uiRequestQueued) * 1000 else nil
 			uiRequestQueued_1 = t.ResponseDataUpdateBegin
 			local responseDataUpdateEnd = t.ResponseDataUpdateEnd
 			uiRequestQueued = if uiRequestQueued_1 and responseDataUpdateEnd then (responseDataUpdateEnd - uiRequestQueued_1) * 1000 else nil
@@ -80,16 +80,16 @@ return {
 			local sduiTreeBuildEnd = t.SduiTreeBuildEnd
 			uiRequestQueued_1 = if sduiTreeBuildBegin and sduiTreeBuildEnd then (sduiTreeBuildEnd - sduiTreeBuildBegin) * 1000 else nil
 			local t_1 = {
-				totalDurationMs = var13,
-				uiRequestDurationMs = var15,
-				responseDecodeDurationMs = var14,
+				totalDurationMs = var9,
+				uiRequestDurationMs = var8,
+				responseDecodeDurationMs = var7,
 				sduiTreeBuildDurationMs = uiRequestQueued_1,
 				dataUpdateDurationMs = uiRequestQueued,
-				netRoundTripTimeMs = var5 and (var5.RoundTripTime and var5.RoundTripTime * 1000),
-				netDurationReceiveResponseMs = var5 and (var5.DurationReceiveResponse and var5.DurationReceiveResponse * 1000),
-				requestStatus = var7,
-				pageKey = p0,
-				startSource = var8 or "unknown"
+				netRoundTripTimeMs = var3 and (var3.RoundTripTime and var3.RoundTripTime * 1000),
+				netDurationReceiveResponseMs = var3 and (var3.DurationReceiveResponse and var3.DurationReceiveResponse * 1000),
+				requestStatus = var5,
+				pageKey = p1,
+				startSource = var6 or "unknown"
 			}
 			
 			if fFlagSduiGameIconSupport then
@@ -97,36 +97,36 @@ return {
 				local sduiClientHintsEnd = t.SduiClientHintsEnd
 				t_1.clientHintsDurationMs = if sduiClientHintsBegin and sduiClientHintsEnd then (sduiClientHintsEnd - sduiClientHintsBegin) * 1000 else nil
 			end
-			if p1 then
-				p1(t_1)
+			if p2 then
+				p2(t_1)
 				
 				return
 			end
 			sduiPageAnalyticsModule.sendLoadTimerEvent(t_1)
 		end
 		
-		local _ = function(p5)
+		local _ = function(p3)
 			-- upvalues: t (ref)
-			t[p5] = os.clock()
+			t[p3] = os.clock()
 		end
 		
 		return {
 			start = start,
 			logUiRequestQueued = function()
-				-- upvalues: var6 (write), var2 (write), var8 (write), t (ref)
-				if var6 == "NotStarted" then
-					var2 = os.clock()
-					var6 = "Running"
-					var8 = "UiRequestQueued"
+				-- upvalues: var4 (write), var1 (write), var6 (write), t (ref)
+				if var4 == "NotStarted" then
+					var1 = os.clock()
+					var4 = "Running"
+					var6 = "UiRequestQueued"
 				end
 				t.UiRequestQueued = os.clock()
 			end,
 			logUiRequestSent = function()
-				-- upvalues: var6 (write), var2 (write), var8 (write), t (ref)
-				if var6 == "NotStarted" then
-					var2 = os.clock()
-					var6 = "Running"
-					var8 = "UiRequestSent"
+				-- upvalues: var4 (write), var1 (write), var6 (write), t (ref)
+				if var4 == "NotStarted" then
+					var1 = os.clock()
+					var4 = "Running"
+					var6 = "UiRequestSent"
 				end
 				t.UiRequestSent = os.clock()
 			end,
@@ -178,28 +178,28 @@ return {
 				t.SduiComponentMounted = os.clock()
 			end,
 			logComponentReady = function()
-				-- upvalues: t (ref), var6 (write), finish (ref)
+				-- upvalues: t (ref), var4 (write), finish (ref)
 				t.SduiComponentReady = os.clock()
 				
-				if var6 == "Running" then
+				if var4 == "Running" then
 					finish()
 				end
 			end,
 			logRefreshComplete = function()
-				-- upvalues: t (ref), var6 (write), finish (ref)
+				-- upvalues: t (ref), var4 (write), finish (ref)
 				t.RefreshComplete = os.clock()
 				
-				if var6 == "Running" then
+				if var4 == "Running" then
 					finish()
 				end
 			end,
-			logNetRequestStats = function(p6)
-				-- upvalues: var5 (write)
-				var5 = p6
+			logNetRequestStats = function(p3)
+				-- upvalues: var3 (write)
+				var3 = p3
 			end,
-			updateRequestStatus = function(p7)
-				-- upvalues: var7 (write)
-				var7 = p7
+			updateRequestStatus = function(p3)
+				-- upvalues: var5 (write)
+				var5 = p3
 			end,
 			finish = finish
 		}

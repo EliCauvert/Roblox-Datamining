@@ -4,19 +4,19 @@ local surfaceNameModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceNam
 local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
 local _ = require(robloxSubscriptionPurchaseApp.types)
 
-function logRobloxSubscriptionUpsellTelemetryEvent(p0, p1)
+function logRobloxSubscriptionUpsellTelemetryEvent(p1, p2)
 	-- upvalues: robloxSubscriptionStoreModule (ref), surfaceNameModule (ref), loggingProtocolModule (ref)
 	local entryContext = robloxSubscriptionStoreModule.get().getEntryContext()
 	local t = {
 		surface = if entryContext then entryContext.surfaceName else surfaceNameModule.Unspecified
 	}
 	
-	if p1 then
-		for i, v in p1 do
+	if p2 then
+		for i, v in p2 do
 			t[i] = v
 		end
 	end
-	loggingProtocolModule.default:logRobloxTelemetryEvent(p0, {}, t)
+	loggingProtocolModule.default:logRobloxTelemetryEvent(p1, {}, t)
 end
 
 return logRobloxSubscriptionUpsellTelemetryEvent

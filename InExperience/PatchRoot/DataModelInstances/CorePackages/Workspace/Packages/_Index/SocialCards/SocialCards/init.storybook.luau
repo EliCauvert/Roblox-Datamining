@@ -20,19 +20,19 @@ return {
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
 	storyRoot = socialCards,
-	mapStory = function(p0)
+	mapStory = function(p1)
 		-- upvalues: t (ref), reactModule (ref), foundationModule (ref), t_1 (ref), appStyleProvider (ref)
-		return function(p1)
-			-- upvalues: t (copy), reactModule (copy), foundationModule (copy), t_1 (copy), appStyleProvider (copy), p0 (ref)
-			local var6 = if p1 then t[p1.theme] else t.Default
+		return function(p2)
+			-- upvalues: t (copy), reactModule (copy), foundationModule (copy), t_1 (copy), appStyleProvider (copy), p1 (ref)
+			local var1 = if p2 then t[p2.theme] else t.Default
 			
 			return reactModule.createElement(foundationModule.FoundationProvider, {
-				colorMode = var6,
-				device = if p1 then t_1[p1.platform] else "Desktop"
+				colorMode = var1,
+				device = if p2 then t_1[p2.platform] else "Desktop"
 			}, {
 				AppStyleProvider = reactModule.createElement(appStyleProvider, {
-					style = { fontName = "Gotham", themeName = var6.themeName }
-				}, { Child = reactModule.createElement(p0, p1) })
+					style = { fontName = "Gotham", themeName = var1.themeName }
+				}, { Child = reactModule.createElement(p1, p2) })
 			})
 		end
 	end

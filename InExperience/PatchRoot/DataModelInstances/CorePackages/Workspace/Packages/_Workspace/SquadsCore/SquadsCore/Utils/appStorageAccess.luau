@@ -2,11 +2,11 @@
 local appStorageService = game:GetService("AppStorageService")
 
 return {
-	getTableAppStorageKey = function(p0)
+	getTableAppStorageKey = function(p1)
 		-- upvalues: appStorageService (ref), httpService (ref)
 		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy), p0 (ref)
-			return appStorageService:GetItem(p0)
+			-- upvalues: appStorageService (copy), p1 (ref)
+			return appStorageService:GetItem(p1)
 		end)
 		
 		return if ok and status ~= nil then httpService:JSONDecode(status) else {}

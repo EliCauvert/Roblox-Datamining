@@ -4,10 +4,10 @@ local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
 local constantsModule = require(script.Parent.Parent.Constants)
 local selectionEffect = roactModule.PureComponent:extend("SelectionEffect")
 
-function selectionEffect.render(p0)
+function selectionEffect.render(p1)
 	-- upvalues: constantsModule (ref), roactModule (ref)
-	local layout = constantsModule.Layouts[p0.props.layout]
-	local focusedSegmentIndex = p0.props.emotesWheel.focusedSegmentIndex
+	local layout = constantsModule.Layouts[p1.props.layout]
+	local focusedSegmentIndex = p1.props.emotesWheel.focusedSegmentIndex
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

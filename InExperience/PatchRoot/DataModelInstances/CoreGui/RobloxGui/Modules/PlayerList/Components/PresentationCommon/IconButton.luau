@@ -18,8 +18,8 @@ iconButton.validateProps = tModule.strictInterface({
 	onActivated = tModule.optional(tModule.callback)
 })
 
-function iconButton.init(p0)
-	p0.state = { isHovered = false, isPressed = false }
+function iconButton.init(p1)
+	p1.state = { isHovered = false, isPressed = false }
 end
 
 function iconButton.render(p1)
@@ -43,23 +43,23 @@ function iconButton.render(p1)
 					}
 				}
 			}
-		end, function(p4)
+		end, function(p3)
 			-- upvalues: p1 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), p2 (ref), foundationModule (copy), iconSize (copy), imageSetLabel (copy)
 			local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
 			
 			if p1.props.onActivated then
 				if p1.state.isPressed then
-					t = p4.Theme.BackgroundOnPress
+					t = p3.Theme.BackgroundOnPress
 				elseif p1.state.isHovered then
-					t = p4.Theme.BackgroundOnHover
+					t = p3.Theme.BackgroundOnHover
 				end
 			end
-			local var7
+			local var1
 			local _ = nil
 			
 			if fFlagCoreUiMigrateUIBloxToFoundation then
 				local icon = p1.props.icon
-				var7 = if typeof(icon) == "string" then roactModule.createElement("Frame", {
+				var1 = if typeof(icon) == "string" then roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
 					Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -70,8 +70,8 @@ function iconButton.render(p1)
 						name = icon,
 						size = iconSize.Medium,
 						style = {
-							Color3 = p4.Theme.IconEmphasis.Color,
-							Transparency = p4.Theme.IconEmphasis.Transparency
+							Color3 = p3.Theme.IconEmphasis.Color,
+							Transparency = p3.Theme.IconEmphasis.Transparency
 						},
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -83,14 +83,14 @@ function iconButton.render(p1)
 					imageRect = { offset = icon.ImageRectOffset, size = icon.ImageRectSize },
 					Size = UDim2.new(0, p2.DropDownIconSize, 0, p2.DropDownIconSize),
 					imageStyle = {
-						Color3 = p4.Theme.IconEmphasis.Color,
-						Transparency = p4.Theme.IconEmphasis.Transparency
+						Color3 = p3.Theme.IconEmphasis.Color,
+						Transparency = p3.Theme.IconEmphasis.Transparency
 					},
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 0)
 				})
 			else
-				var7 = roactModule.createElement(imageSetLabel, {
+				var1 = roactModule.createElement(imageSetLabel, {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
 					Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -131,7 +131,7 @@ function iconButton.render(p1)
 					BackgroundTransparency = t.Transparency,
 					BackgroundColor3 = t.Color
 				}),
-				ImageButton = var7
+				ImageButton = var1
 			})
 		end)
 	end)

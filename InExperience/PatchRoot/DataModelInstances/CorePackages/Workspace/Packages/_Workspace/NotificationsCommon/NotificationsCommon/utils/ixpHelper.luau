@@ -1,11 +1,11 @@
 ﻿local IXPService = game:GetService("IXPService")
 
 return {
-	getIxpLayerData = function(p0)
+	getIxpLayerData = function(p1)
 		-- upvalues: IXPService (ref)
 		local ok, status = pcall(function()
-			-- upvalues: IXPService (copy), p0 (ref)
-			return IXPService:GetUserLayerVariables(p0)
+			-- upvalues: IXPService (copy), p1 (ref)
+			return IXPService:GetUserLayerVariables(p1)
 		end)
 		
 		return if ok then status else nil

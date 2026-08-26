@@ -15,36 +15,36 @@ local t = {
 	end
 }
 
-local function requestAndRetry(p0, p1)
+local function requestAndRetry(p1, p2)
 	-- upvalues: requestAndRetry (ref)
-	if p1 == nil then
-		p1 = 0
+	if p2 == nil then
+		p2 = 0
 	end
-	local ok, status = pcall(p0)
+	local ok, status = pcall(p1)
 	
 	if ok then
 		return true, status
-	elseif p1 >= 2 then
+	elseif p2 >= 2 then
 		return false, status
 	end
-	wait(2 ^ (p1 - 1))
+	wait(2 ^ (p2 - 1))
 	
-	return requestAndRetry(p0, p1 + 1)
+	return requestAndRetry(p1, p2 + 1)
 end
 
-function t.requestAndRetryPost(p2, p3)
+function t.requestAndRetryPost(p1, p2)
 	-- upvalues: requestAndRetry (ref), httpRbxApiService (ref)
 	return requestAndRetry(function()
-		-- upvalues: httpRbxApiService (copy), p2 (ref), p3 (ref)
-		return httpRbxApiService:PostAsyncFullUrl(p2, p3)
+		-- upvalues: httpRbxApiService (copy), p1 (ref), p2 (ref)
+		return httpRbxApiService:PostAsyncFullUrl(p1, p2)
 	end)
 end
 
-function t.requestAndRetryGet(p4)
+function t.requestAndRetryGet(p1)
 	-- upvalues: requestAndRetry (ref), httpRbxApiService (ref)
 	return requestAndRetry(function()
-		-- upvalues: httpRbxApiService (copy), p4 (ref)
-		return httpRbxApiService:GetAsyncFullUrl(p4)
+		-- upvalues: httpRbxApiService (copy), p1 (ref)
+		return httpRbxApiService:GetAsyncFullUrl(p1)
 	end)
 end
 

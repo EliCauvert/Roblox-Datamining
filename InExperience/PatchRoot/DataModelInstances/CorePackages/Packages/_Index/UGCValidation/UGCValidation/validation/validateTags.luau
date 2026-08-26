@@ -3,10 +3,10 @@ local parent = script.Parent.Parent
 local analyticsModule = require(parent.Analytics)
 local _ = require(parent.util.Types)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: collectionService (ref), analyticsModule (ref)
-	local descendants = p0:GetDescendants()
-	table.insert(descendants, p0)
+	local descendants = p1:GetDescendants()
+	table.insert(descendants, p1)
 	local t = {}
 	
 	for i, v in ipairs(descendants) do
@@ -15,7 +15,7 @@ return function(p0, p1)
 		end
 	end
 	if #t > 0 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateTags, nil, p1)
+		analyticsModule.reportFailure(analyticsModule.ErrorType.validateTags, nil, p2)
 		
 		return false, {}
 	end

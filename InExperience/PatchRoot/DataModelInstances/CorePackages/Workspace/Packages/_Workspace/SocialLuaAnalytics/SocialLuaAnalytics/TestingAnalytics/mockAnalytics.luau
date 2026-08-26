@@ -1,11 +1,11 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
-		Diag = { reportCounter = p0.fn(), reportStats = p0.fn() },
-		EventStream = { setRBXEventStream = p0.fn(), sendEventDeferred = p0.fn() },
+		Diag = { reportCounter = p1.fn(), reportStats = p1.fn() },
+		EventStream = { setRBXEventStream = p1.fn(), sendEventDeferred = p1.fn() },
 		Telemetry = {
-			logRobloxTelemetryCounter = p0.fn(),
-			logRobloxTelemetryEvent = p0.fn(),
-			logRobloxTelemetryStat = p0.fn(),
+			logRobloxTelemetryCounter = p1.fn(),
+			logRobloxTelemetryEvent = p1.fn(),
+			logRobloxTelemetryStat = p1.fn(),
 			TelemetryBackends = {
 				Points = "Points",
 				Stats = "RobloxTelemetryStat",

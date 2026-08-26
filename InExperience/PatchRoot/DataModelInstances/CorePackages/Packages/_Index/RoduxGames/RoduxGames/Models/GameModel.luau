@@ -2,13 +2,13 @@
 local creatorModelModule = require(script.Parent.CreatorModel)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -27,17 +27,17 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: t (ref), creatorModelModule (ref)
 	return t.new({
-		experienceId = tostring(p2.id),
-		name = p2.name,
-		description = p2.description or "",
-		price = p2.price or 0,
-		rootPlaceId = tostring(p2.rootPlaceId),
-		creator = creatorModelModule.format(p2.creator),
-		maxPlayers = p2.maxPlayers,
-		playing = p2.playing
+		experienceId = tostring(p1.id),
+		name = p1.name,
+		description = p1.description or "",
+		price = p1.price or 0,
+		rootPlaceId = tostring(p1.rootPlaceId),
+		creator = creatorModelModule.format(p1.creator),
+		maxPlayers = p1.maxPlayers,
+		playing = p1.playing
 	})
 end
 

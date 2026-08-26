@@ -10,19 +10,19 @@ local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLu
 local luaAppWrapChartsFilterOptionLabels = game:DefineFastFlag("LuaAppWrapChartsFilterOptionLabels", false)
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), radioGroup (ref), view (ref), text (ref), luaAppWrapChartsFilterOptionLabels (ref), badge (ref), foundationModule (ref)
-	local var3 = useTokens()
-	local XXLarge = var3.Padding.XXLarge
+	local var1 = useTokens()
+	local XXLarge = var1.Padding.XXLarge
 	local t = {
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var3.Padding.Medium),
-			PaddingBottom = UDim.new(0, var3.Padding.Medium)
+			PaddingTop = UDim.new(0, var1.Padding.Medium),
+			PaddingBottom = UDim.new(0, var1.Padding.Medium)
 		}),
 		SizeConstraint = if fFlagLuaAppChartsFilterOptionTextTag then nil else reactModule.createElement("UISizeConstraint", {
-			MaxSize = p0.containerMaxWidthBinding:map(function(p1)
+			MaxSize = p1.containerMaxWidthBinding:map(function(p2)
 				-- upvalues: XXLarge (ref)
-				return Vector2.new(p1 - 3 * XXLarge, 1e999)
+				return Vector2.new(p2 - 3 * XXLarge, 1e999)
 			end)
 		}),
 		Layout = if fFlagLuaAppChartsFilterOptionTextTag then reactModule.createElement("UIListLayout", {
@@ -31,16 +31,16 @@ return function(p0)
 		}) else nil
 	}
 	
-	for i, v in p0.options do
-		local var5
+	for i, v in p1.options do
+		local var2
 		if fFlagLuaAppChartsFilterOptionTextTag then
-			var5 = false
+			var2 = false
 			
 			if v.optionContextTag ~= nil then
 				local _ = v.optionContextTag ~= ""
 			end
 		else
-			var5 = nil
+			var2 = nil
 		end
 		table.insert(t, if fFlagLuaAppChartsFilterOptionTextTag then reactModule.createElement(radioGroup.Item, {
 			value = v.optionId,
@@ -55,25 +55,25 @@ return function(p0)
 						["text-wrap"] = luaAppWrapChartsFilterOptionLabels
 					},
 					Text = v.optionDisplayName,
-					textStyle = if p0.selectedOptionId == v.optionId then var3.Color.Content.Emphasis else var3.Color.Content.Default
+					textStyle = if p1.selectedOptionId == v.optionId then var1.Color.Content.Emphasis else var1.Color.Content.Default
 				}, {
-					SizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var3.Size.Size_3000 * 3, 1e999) })
+					SizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var1.Size.Size_3000 * 3, 1e999) })
 				}),
-				ContextTag = var5 and reactModule.createElement(view, { tag = "auto-xy size-0", LayoutOrder = 2 }, {
+				ContextTag = var2 and reactModule.createElement(view, { tag = "auto-xy size-0", LayoutOrder = 2 }, {
 					Badge = reactModule.createElement(badge, {
 						variant = foundationModule.Enums.BadgeVariant.Neutral,
 						text = v.optionContextTag
 					}),
-					SizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var3.Size.Size_3000, 1e999) })
+					SizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var1.Size.Size_3000, 1e999) })
 				}) or nil
 			})
 		}) else reactModule.createElement(radioGroup.Item, { value = v.optionId, label = v.optionDisplayName }))
 	end
 	return if fFlagLuaAppChartsFilterOptionTextTag then reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		AutomaticSize = Enum.AutomaticSize.X,
-		Size = p0.Size
+		Size = p1.Size
 	}, {
 		Padding = reactModule.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, XXLarge),
@@ -91,11 +91,11 @@ return function(p0)
 			Selectable = false,
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = UDim2.fromScale(1, 1),
-			[reactModule.Change.AbsoluteCanvasSize] = p0.onCanvasSizeChanged
+			[reactModule.Change.AbsoluteCanvasSize] = p1.onCanvasSizeChanged
 		}, {
 			RadioGroup = reactModule.createElement(radioGroup.Root, {
-				value = p0.selectedOptionId,
-				onValueChanged = p0.onSelectedOptionChanged
+				value = p1.selectedOptionId,
+				onValueChanged = p1.onSelectedOptionChanged
 			}, t),
 			Layout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
@@ -111,16 +111,16 @@ return function(p0)
 		AutomaticCanvasSize = Enum.AutomaticSize.Y,
 		CanvasSize = UDim2.fromScale(1, 0),
 		ElasticBehavior = Enum.ElasticBehavior.Always,
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		ScrollingDirection = Enum.ScrollingDirection.Y,
-		Size = p0.Size
+		Size = p1.Size
 	}, {
 		MenuFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			[reactModule.Change.AbsoluteSize] = function(p2)
-				-- upvalues: p0 (ref)
-				p0.onCanvasSizeChanged(p2.AbsoluteSize)
+				-- upvalues: p1 (ref)
+				p1.onCanvasSizeChanged(p2.AbsoluteSize)
 			end
 		}, {
 			Padding = reactModule.createElement("UIPadding", {
@@ -128,8 +128,8 @@ return function(p0)
 				PaddingRight = UDim.new(0, XXLarge)
 			}),
 			RadioGroup = reactModule.createElement(radioGroup.Root, {
-				value = p0.selectedOptionId,
-				onValueChanged = p0.onSelectedOptionChanged
+				value = p1.selectedOptionId,
+				onValueChanged = p1.onSelectedOptionChanged
 			}, t)
 		})
 	})

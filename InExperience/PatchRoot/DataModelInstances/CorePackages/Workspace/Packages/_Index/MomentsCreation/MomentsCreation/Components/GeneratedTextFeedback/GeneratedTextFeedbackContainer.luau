@@ -2,7 +2,7 @@
 local generatedTextFeedbackViewModule = require(script.Parent.GeneratedTextFeedbackView)
 local useGeneratedTextFeedbackViewModelModule = require(script.Parent.useGeneratedTextFeedbackViewModel)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useGeneratedTextFeedbackViewModelModule (ref), reactModule (ref), generatedTextFeedbackViewModule (ref)
-	return reactModule.createElement(generatedTextFeedbackViewModule, useGeneratedTextFeedbackViewModelModule(p0))
+	return reactModule.createElement(generatedTextFeedbackViewModule, useGeneratedTextFeedbackViewModelModule(p1))
 end

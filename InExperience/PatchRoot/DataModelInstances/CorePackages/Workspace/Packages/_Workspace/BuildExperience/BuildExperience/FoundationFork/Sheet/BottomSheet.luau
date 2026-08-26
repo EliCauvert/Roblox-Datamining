@@ -32,50 +32,50 @@ local t = { defaultSnapPointIndex = 1, testId = "--foundation-sheet" }
 local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-local function _(p0, p1, p2, p3)
-	local var29 = p0 - p2
-	local var30 = 25.132741228718 * p3
-	local expValue = math.exp(-var30)
-	local var32 = p1 + 25.132741228718 * var29
+local function _(p1, p2, p3, p4)
+	local var1 = p1 - p3
+	local var2 = 25.132741228718 * p4
+	local expValue = math.exp(-var2)
+	local var3 = p2 + 25.132741228718 * var1
 	
-	return p2 + (var29 + var32 * p3) * expValue, (p1 - var32 * var30) * expValue
+	return p3 + (var1 + var3 * p4) * expValue, (p2 - var3 * var2) * expValue
 end
 
-local function useStableGuiHeight(p4)
+local function useStableGuiHeight(p1)
 	-- upvalues: reactModule (ref), foundationBottomSheetIOSInsetWorkaroundDelayMs (ref)
-	local var33 = if p4 then p4.AbsoluteSize.Y else 0
-	local var34, var35 = reactModule.useState(var33)
-	local var36 = reactModule.useRef(var33)
-	local var37 = reactModule.useRef(0)
-	local var38 = reactModule.useCallback(function(p5)
-		-- upvalues: var36 (ref), var35 (ref)
-		if var36.current == p5 then
+	local var1 = if p1 then p1.AbsoluteSize.Y else 0
+	local var2, var3 = reactModule.useState(var1)
+	local var4 = reactModule.useRef(var1)
+	local var5 = reactModule.useRef(0)
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref), var3 (ref)
+		if var4.current == p2 then
 			return
 		end
-		var36.current = p5
-		var35(p5)
+		var4.current = p2
+		var3(p2)
 	end, {})
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var37 (ref), p4 (ref), var38 (ref), var36 (ref), foundationBottomSheetIOSInsetWorkaroundDelayMs (copy)
-		var37.current += 1
+		-- upvalues: var5 (ref), p1 (ref), var6 (ref), var4 (ref), foundationBottomSheetIOSInsetWorkaroundDelayMs (copy)
+		var5.current += 1
 		
-		if p4 then
+		if p1 then
 			local function updateHeight()
-				-- upvalues: p4 (copy), var36 (copy), var37 (copy), var38 (copy), foundationBottomSheetIOSInsetWorkaroundDelayMs (copy)
-				local y = p4.AbsoluteSize.Y
+				-- upvalues: p1 (copy), var4 (copy), var5 (copy), var6 (copy), foundationBottomSheetIOSInsetWorkaroundDelayMs (copy)
+				local y = p1.AbsoluteSize.Y
 				
-				if var36.current <= 0 or y <= var36.current then
-					var37.current += 1
-					var38(y)
+				if var4.current <= 0 or y <= var4.current then
+					var5.current += 1
+					var6(y)
 					
 					return
 				end
-				var37.current += 1
-				local current = var37.current
+				var5.current += 1
+				local current = var5.current
 				task.delay(foundationBottomSheetIOSInsetWorkaroundDelayMs / 1000, function()
-					-- upvalues: var37 (copy), current (ref), p4 (copy), y (ref), var38 (copy)
-					if var37.current == current and p4.AbsoluteSize.Y == y then
-						var38(y)
+					-- upvalues: var5 (copy), current (ref), p1 (copy), y (ref), var6 (copy)
+					if var5.current == current and p1.AbsoluteSize.Y == y then
+						var6(y)
 						
 						return
 					end
@@ -83,23 +83,23 @@ local function useStableGuiHeight(p4)
 			end
 			
 			updateHeight()
-			local var40 = p4:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateHeight)
+			local var7 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateHeight)
 			
 			return function()
-				-- upvalues: var37 (copy), var40 (ref)
-				var37.current += 1
-				var40:Disconnect()
+				-- upvalues: var5 (copy), var7 (ref)
+				var5.current += 1
+				var7:Disconnect()
 			end
 		end
-		var38(0)
+		var6(0)
 		
 		return function()
-			-- upvalues: var37 (copy)
-			var37.current += 1
+			-- upvalues: var5 (copy)
+			var5.current += 1
 		end
-	end, { p4, var38 })
+	end, { p1, var6 })
 	
-	return var34
+	return var2
 end
 
 local _ = function()
@@ -107,41 +107,41 @@ local _ = function()
 	return useStableGuiHeight(useScreenModule())
 end
 
-local function useStableBottomSafeAreaPadding(p6)
+local function useStableBottomSafeAreaPadding(p1)
 	-- upvalues: getHardwareSafeAreaInsetsModule (ref), reactModule (ref), foundationBottomSheetIOSInsetWorkaroundDelayMs (ref)
 	local bottom = getHardwareSafeAreaInsetsModule().bottom
-	local var41, var42 = reactModule.useState(bottom)
-	local var43 = reactModule.useRef(bottom)
-	local var44 = reactModule.useRef(0)
-	local var45 = reactModule.useCallback(function(p7)
-		-- upvalues: var43 (ref), var42 (ref)
-		if var43.current == p7 then
+	local var1, var2 = reactModule.useState(bottom)
+	local var3 = reactModule.useRef(bottom)
+	local var4 = reactModule.useRef(0)
+	local var5 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), var2 (ref)
+		if var3.current == p2 then
 			return
 		end
-		var43.current = p7
-		var42(p7)
+		var3.current = p2
+		var2(p2)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var44 (ref), p6 (ref), getHardwareSafeAreaInsetsModule (copy), var43 (ref), var45 (ref), foundationBottomSheetIOSInsetWorkaroundDelayMs (copy)
-		var44.current += 1
+		-- upvalues: var4 (ref), p1 (ref), getHardwareSafeAreaInsetsModule (copy), var3 (ref), var5 (ref), foundationBottomSheetIOSInsetWorkaroundDelayMs (copy)
+		var4.current += 1
 		
-		if p6 then
+		if p1 then
 			local function updateBottomInset()
-				-- upvalues: getHardwareSafeAreaInsetsModule (copy), var43 (copy), var44 (copy), var45 (copy), foundationBottomSheetIOSInsetWorkaroundDelayMs (copy)
+				-- upvalues: getHardwareSafeAreaInsetsModule (copy), var3 (copy), var4 (copy), var5 (copy), foundationBottomSheetIOSInsetWorkaroundDelayMs (copy)
 				local bottom = getHardwareSafeAreaInsetsModule().bottom
 				
-				if var43.current <= bottom then
-					var44.current += 1
-					var45(bottom)
+				if var3.current <= bottom then
+					var4.current += 1
+					var5(bottom)
 					
 					return
 				end
-				var44.current += 1
-				local current = var44.current
+				var4.current += 1
+				local current = var4.current
 				task.delay(foundationBottomSheetIOSInsetWorkaroundDelayMs / 1000, function()
-					-- upvalues: getHardwareSafeAreaInsetsModule (copy), var44 (copy), current (ref), bottom (ref), var45 (copy)
-					if var44.current == current and getHardwareSafeAreaInsetsModule().bottom == bottom then
-						var45(bottom)
+					-- upvalues: getHardwareSafeAreaInsetsModule (copy), var4 (copy), current (ref), bottom (ref), var5 (copy)
+					if var4.current == current and getHardwareSafeAreaInsetsModule().bottom == bottom then
+						var5(bottom)
 						
 						return
 					end
@@ -149,21 +149,21 @@ local function useStableBottomSafeAreaPadding(p6)
 			end
 			
 			updateBottomInset()
-			local var47 = p6:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateBottomInset)
+			local var6 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateBottomInset)
 			
 			return function()
-				-- upvalues: var44 (copy), var47 (ref)
-				var44.current += 1
-				var47:Disconnect()
+				-- upvalues: var4 (copy), var6 (ref)
+				var4.current += 1
+				var6:Disconnect()
 			end
 		end
 		return function()
-			-- upvalues: var44 (copy)
-			var44.current += 1
+			-- upvalues: var4 (copy)
+			var4.current += 1
 		end
-	end, { p6, var45 })
+	end, { p1, var5 })
 	
-	return var41
+	return var1
 end
 
 local _ = function(value)
@@ -171,283 +171,283 @@ local _ = function(value)
 	return useStableGuiHeight(useScreenModule()), useStableGuiHeight(value), useStableBottomSafeAreaPadding(value)
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p8, p9)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useOverlayModule (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), usePreferencesModule (ref), foundationBottomSheetIOSInsetWorkaround (ref), useScreenModule (ref), useStableGuiHeight (ref), useStableBottomSafeAreaPadding (ref), useScreenHeightModule (ref), reactModule (ref), useHardwareInsetsModule (ref), useAnimatedBinding (ref), childrenHasFullBleedModule (ref), otterModule (ref), reactUtilsModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), reactRobloxModule (ref), typesModule (ref), dashModule (ref), sheetContextModule (ref), elevationOwnerScope (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref)
-	local var56, var57
-	local var48 = withDefaultsModule(p8, t)
-	local var49 = useOverlayModule()
-	local var50 = useTokensModule()
-	local var51 = useElevationModule(elevationLayerModule.Sheet, { stackAboveOwner = false })
+	local var1, var2
+	local var3 = withDefaultsModule(p1, t)
+	local var4 = useOverlayModule()
+	local var5 = useTokensModule()
+	local var6 = useElevationModule(elevationLayerModule.Sheet, { stackAboveOwner = false })
 	local reducedMotion = usePreferencesModule().reducedMotion
 	local _ = nil
 	local _ = nil
-	local var52 = nil
+	local var7 = nil
 	local bottom = nil
 	
 	if foundationBottomSheetIOSInsetWorkaround then
-		local var53 = useStableGuiHeight(useScreenModule())
-		local var54 = useStableGuiHeight(var49)
-		local var55 = useStableBottomSafeAreaPadding(var49)
-		var56 = var53
-		var57 = var54
-		bottom = var55
+		local var8 = useStableGuiHeight(useScreenModule())
+		local var9 = useStableGuiHeight(var4)
+		local var10 = useStableBottomSafeAreaPadding(var4)
+		var1 = var8
+		var2 = var9
+		bottom = var10
 	else
-		var56 = useScreenHeightModule()
-		local var58, var59 = reactModule.useState(if var49 then var49.AbsoluteSize.Y else 0)
-		var57 = var58
-		var52 = var59
+		var1 = useScreenHeightModule()
+		local var11, var12 = reactModule.useState(if var4 then var4.AbsoluteSize.Y else 0)
+		var2 = var11
+		var7 = var12
 	end
-	local var60, var61 = reactModule.useState(0)
-	local snapPoints = var48.snapPoints or reactModule.useMemo(function()
-		-- upvalues: var60 (ref)
-		return { var60 }
-	end, { var60 })
-	local var63 = reactModule.useCallback(function(p10)
-		-- upvalues: var56 (write)
-		return if p10 > 1 then p10 else p10 * var56
-	end, { var56 })
-	local var64 = 0
+	local var13, var14 = reactModule.useState(0)
+	local snapPoints = var3.snapPoints or reactModule.useMemo(function()
+		-- upvalues: var13 (ref)
+		return { var13 }
+	end, { var13 })
+	local var15 = reactModule.useCallback(function(p3)
+		-- upvalues: var1 (write)
+		return if p3 > 1 then p3 else p3 * var1
+	end, { var1 })
+	local var16 = 0
 	
 	for i, v in snapPoints do
-		local var106 = var63(v)
+		local var17 = var15(v)
 		
-		if var64 < var106 then
-			var64 = var106
+		if var16 < var17 then
+			var16 = var17
 		end
 	end
-	var64 = math.min(var64, var56)
+	var16 = math.min(var16, var1)
 	
-	if var57 > 0 then
-		var64 = math.min(var64, var57)
+	if var2 > 0 then
+		var16 = math.min(var16, var2)
 	end
 	if not foundationBottomSheetIOSInsetWorkaround then
-		bottom = useHardwareInsetsModule(var49).bottom
+		bottom = useHardwareInsetsModule(var4).bottom
 		reactModule.useLayoutEffect(function()
-			-- upvalues: var49 (ref), var52 (write)
-			if var49 then
+			-- upvalues: var4 (ref), var7 (write)
+			if var4 then
 				local function updateOverlayAvailableHeight()
-					-- upvalues: var52 (copy), var49 (copy)
-					var52(var49.AbsoluteSize.Y)
+					-- upvalues: var7 (copy), var4 (copy)
+					var7(var4.AbsoluteSize.Y)
 				end
 				
-				var52(var49.AbsoluteSize.Y)
-				local var108 = var49:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateOverlayAvailableHeight)
+				var7(var4.AbsoluteSize.Y)
+				local var18 = var4:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateOverlayAvailableHeight)
 				
 				return function()
-					-- upvalues: var108 (ref)
-					var108:Disconnect()
+					-- upvalues: var18 (ref)
+					var18:Disconnect()
 				end
 			end
-			var52(0)
-		end, { var49 })
+			var7(0)
+		end, { var4 })
 	end
-	local var65 = reactModule.useRef(0)
-	local var66 = reactModule.useRef(false)
-	local var67, var68 = useAnimatedBinding(1, function()
-		-- upvalues: var66 (ref), var48 (ref)
-		if var66.current then
-			var48.onClose()
+	local var18 = reactModule.useRef(0)
+	local var19 = reactModule.useRef(false)
+	local var20, var21 = useAnimatedBinding(1, function()
+		-- upvalues: var19 (ref), var3 (ref)
+		if var19.current then
+			var3.onClose()
 		end
 	end)
-	local var69, var70 = reactModule.useBinding(-bottom)
-	local var71, var72 = reactModule.useBinding(0)
-	local var73, var74 = reactModule.useBinding(false)
-	local var75, var76 = reactModule.useBinding(false)
-	local var77 = childrenHasFullBleedModule(var48.children)
-	local var78, var79 = reactModule.useBinding(0)
-	local var80 = reactModule.useRef(0)
-	local var81 = reactModule.useRef(nil)
-	local var82, var83 = reactModule.useBinding(0)
-	local var84, var85 = reactModule.useBinding(false)
-	local var86 = reactModule.useRef(false)
-	local var87 = reactModule.useRef(0)
-	local var88 = reactModule.useRef(nil)
-	local var89 = reactModule.useRef(false)
-	local var90 = reactModule.useRef(0)
-	local var91 = reactModule.useCallback(function()
-		-- upvalues: var88 (ref), var87 (ref), var89 (ref)
-		if var88.current then
-			var88.current:Disconnect()
-			var88.current = nil
+	local var22, var23 = reactModule.useBinding(-bottom)
+	local var24, var25 = reactModule.useBinding(0)
+	local var26, var27 = reactModule.useBinding(false)
+	local var28, var29 = reactModule.useBinding(false)
+	local var30 = childrenHasFullBleedModule(var3.children)
+	local var31, var32 = reactModule.useBinding(0)
+	local var33 = reactModule.useRef(0)
+	local var34 = reactModule.useRef(nil)
+	local var35, var36 = reactModule.useBinding(0)
+	local var37, var38 = reactModule.useBinding(false)
+	local var39 = reactModule.useRef(false)
+	local var40 = reactModule.useRef(0)
+	local var41 = reactModule.useRef(nil)
+	local var42 = reactModule.useRef(false)
+	local var43 = reactModule.useRef(0)
+	local var44 = reactModule.useCallback(function()
+		-- upvalues: var41 (ref), var40 (ref), var42 (ref)
+		if var41.current then
+			var41.current:Disconnect()
+			var41.current = nil
 		end
-		var87.current = 0
-		var89.current = false
+		var40.current = 0
+		var42.current = false
 	end, {})
-	local var92 = reactModule.useCallback(function(p11)
-		-- upvalues: var91 (ref), var89 (ref), var81 (ref), var88 (ref), var90 (ref)
-		var91()
-		var89.current = true
+	local var45 = reactModule.useCallback(function(p3)
+		-- upvalues: var44 (ref), var42 (ref), var34 (ref), var41 (ref), var43 (ref)
+		var44()
+		var42.current = true
 		
-		if var81.current then
-			var81.current:ResetScrollVelocity()
+		if var34.current then
+			var34.current:ResetScrollVelocity()
 		end
-		var88.current = game:GetService("RunService").Heartbeat:Connect(function(p12)
-			-- upvalues: var81 (copy), var89 (copy), var91 (copy), var90 (copy), p11 (ref)
-			if not var81.current or not var89.current then
-				var91()
+		var41.current = game:GetService("RunService").Heartbeat:Connect(function(p4)
+			-- upvalues: var34 (copy), var42 (copy), var44 (copy), var43 (copy), p3 (ref)
+			if not var34.current or not var42.current then
+				var44()
 				
 				return
 			end
-			local current = var90.current
-			local var109 = var81.current.CanvasPosition.Y - p11
-			local var110 = 25.132741228718 * p12
-			local expValue = math.exp(-var110)
-			local var112 = current + 25.132741228718 * var109
-			local var113 = p11 + (var109 + var112 * p12) * expValue
-			var90.current = (current - var112 * var110) * expValue
-			var81.current.CanvasPosition = Vector2.new(0, var113)
+			local current = var43.current
+			local var46 = var34.current.CanvasPosition.Y - p3
+			local var47 = 25.132741228718 * p4
+			local expValue = math.exp(-var47)
+			local var48 = current + 25.132741228718 * var46
+			local var49 = p3 + (var46 + var48 * p4) * expValue
+			var43.current = (current - var48 * var47) * expValue
+			var34.current.CanvasPosition = Vector2.new(0, var49)
 			
-			if math.abs(p11 - var81.current.CanvasPosition.Y) < 0.5 and math.abs(var90.current) < 1 then
-				var81.current.CanvasPosition = Vector2.new(0, p11)
-				var91()
+			if math.abs(p3 - var34.current.CanvasPosition.Y) < 0.5 and math.abs(var43.current) < 1 then
+				var34.current.CanvasPosition = Vector2.new(0, p3)
+				var44()
 			end
 		end)
-	end, { var91 })
-	local var93 = reactModule.useCallback(function(p13)
-		-- upvalues: var63 (ref), var64 (write), bottom (write)
-		return math.min(var63(p13), var64) + bottom
-	end, { bottom, var63, var64 })
-	local var94 = reactModule.useCallback(function(p14)
-		-- upvalues: var65 (ref), var92 (ref), var93 (ref), snapPoints (ref)
-		var65.current = p14
-		var92(var93(snapPoints[p14]))
-	end, { var93, snapPoints })
-	local var95 = reactModule.useCallback(function(p15)
-		-- upvalues: var91 (ref), var65 (ref), var81 (ref), var93 (ref), snapPoints (ref)
-		var91()
-		var65.current = p15
+	end, { var44 })
+	local var46 = reactModule.useCallback(function(p3)
+		-- upvalues: var15 (ref), var16 (write), bottom (write)
+		return math.min(var15(p3), var16) + bottom
+	end, { bottom, var15, var16 })
+	local var47 = reactModule.useCallback(function(p3)
+		-- upvalues: var18 (ref), var45 (ref), var46 (ref), snapPoints (ref)
+		var18.current = p3
+		var45(var46(snapPoints[p3]))
+	end, { var46, snapPoints })
+	local var48 = reactModule.useCallback(function(p3)
+		-- upvalues: var44 (ref), var18 (ref), var34 (ref), var46 (ref), snapPoints (ref)
+		var44()
+		var18.current = p3
 		
-		if var81.current then
-			var81.current.CanvasPosition = Vector2.new(0, var93(snapPoints[p15]))
+		if var34.current then
+			var34.current.CanvasPosition = Vector2.new(0, var46(snapPoints[p3]))
 		end
-	end, { var91, var93, snapPoints })
-	local var96 = reactModule.useRef(0)
+	end, { var44, var46, snapPoints })
+	local var49 = reactModule.useRef(0)
 	reactModule.useEffect(function()
-		-- upvalues: var49 (ref), var96 (ref), var57 (write), var65 (ref), snapPoints (ref), var48 (ref), reducedMotion (ref), var95 (ref), var94 (ref)
-		if not var49 then return end
-		local current = var96.current
-		var96.current = var57
+		-- upvalues: var4 (ref), var49 (ref), var2 (write), var18 (ref), snapPoints (ref), var3 (ref), reducedMotion (ref), var48 (ref), var47 (ref)
+		if not var4 then return end
+		local current = var49.current
+		var49.current = var2
 		
-		if current <= 0 or current == var57 then return end
-		local current_1 = var65.current
+		if current <= 0 or current == var2 then return end
+		local current_1 = var18.current
 		
 		if current_1 <= 0 or #snapPoints < current_1 then
-			current_1 = var48.defaultSnapPointIndex
+			current_1 = var3.defaultSnapPointIndex
 		end
 		if reducedMotion then
-			var95(current_1)
+			var48(current_1)
 			
 			return
 		end
-		var94(current_1)
+		var47(current_1)
 	end, {
-		var49, var57, var94, var95, reducedMotion, var48.defaultSnapPointIndex,
+		var4, var2, var47, var48, reducedMotion, var3.defaultSnapPointIndex,
 		snapPoints
 	})
-	local var97 = reactModule.useCallback(function(p16)
-		-- upvalues: var66 (ref), reducedMotion (ref), var91 (ref), var81 (ref), var68 (ref), otterModule (copy), var90 (ref), var87 (ref), var92 (ref), var50 (ref)
-		if var66.current then return end
-		if not reducedMotion or p16 then
-			var90.current = -var87.current
-			var92(0)
-			var68(otterModule.ease(1, { duration = var50.Time.Time_100 }))
-			var66.current = true
+	local var50 = reactModule.useCallback(function(p3)
+		-- upvalues: var19 (ref), reducedMotion (ref), var44 (ref), var34 (ref), var21 (ref), otterModule (copy), var43 (ref), var40 (ref), var45 (ref), var5 (ref)
+		if var19.current then return end
+		if not reducedMotion or p3 then
+			var43.current = -var40.current
+			var45(0)
+			var21(otterModule.ease(1, { duration = var5.Time.Time_100 }))
+			var19.current = true
 			
 			return
 		end
-		var66.current = true
-		var91()
+		var19.current = true
+		var44()
 		
-		if var81.current then
-			var81.current.CanvasPosition = Vector2.new(0, 0)
+		if var34.current then
+			var34.current.CanvasPosition = Vector2.new(0, 0)
 		end
-		var68(otterModule.instant(1))
-	end, { var92, var91, reducedMotion })
-	local var98 = reactModule.useCallback(function()
-		-- upvalues: var82 (ref), var80 (ref), var64 (write), bottom (write), var87 (ref), var86 (ref), var85 (ref)
-		local var114 = math.floor(var64 + bottom) <= var80.current
+		var21(otterModule.instant(1))
+	end, { var45, var44, reducedMotion })
+	local var51 = reactModule.useCallback(function()
+		-- upvalues: var35 (ref), var33 (ref), var16 (write), bottom (write), var40 (ref), var39 (ref), var38 (ref)
+		local var52 = math.floor(var16 + bottom) <= var33.current
 		
-		if var87.current > 0 and var82:getValue() <= 0 and var86.current then
-			var85(false)
+		if var40.current > 0 and var35:getValue() <= 0 and var39.current then
+			var38(false)
 			
 			return
-		elseif var87.current <= 0 and var114 then
-			var85(true)
+		elseif var40.current <= 0 and var52 then
+			var38(true)
 		end
-	end, { var64, bottom })
-	local var99 = reactModule.useCallback(function()
-		-- upvalues: var87 (ref), var80 (ref), snapPoints (ref), var93 (ref), var86 (ref), var90 (ref), var97 (ref), var94 (ref)
-		local current = var87.current
-		local var115 = var80.current - current / 2.35
+	end, { var16, bottom })
+	local var52 = reactModule.useCallback(function()
+		-- upvalues: var40 (ref), var33 (ref), snapPoints (ref), var46 (ref), var39 (ref), var43 (ref), var50 (ref), var47 (ref)
+		local current = var40.current
+		local var53 = var33.current - current / 2.35
 		local list = { { index = 0, position = 0 } }
 		
 		for i, v in snapPoints do
-			table.insert(list, { index = i, position = var93(v) })
+			table.insert(list, { index = i, position = var46(v) })
 		end
-		table.sort(list, function(p17, p18)
-			-- upvalues: var115 (ref)
-			return math.abs(p17.position - var115) < math.abs(p18.position - var115)
+		table.sort(list, function(p3, p4)
+			-- upvalues: var53 (ref)
+			return math.abs(p3.position - var53) < math.abs(p4.position - var53)
 		end)
-		local var117 = list[1]
+		local var54 = list[1]
 		
-		if not var86.current then
-			var90.current = -current
+		if not var39.current then
+			var43.current = -current
 			
-			if var117.index == 0 then
-				var97(true)
+			if var54.index == 0 then
+				var50(true)
 				
 				return
 			end
-			var94(var117.index)
+			var47(var54.index)
 		end
-	end, { snapPoints, var94, var93, var97 })
+	end, { snapPoints, var47, var46, var50 })
 	reactModule.useEffect(function()
-		-- upvalues: var49 (ref), reducedMotion (ref), var95 (ref), var48 (ref), var68 (ref), otterModule (copy), var94 (ref), var50 (ref), var63 (ref), snapPoints (ref), var64 (write), var85 (ref), var91 (ref)
-		if var49 then
+		-- upvalues: var4 (ref), reducedMotion (ref), var48 (ref), var3 (ref), var21 (ref), otterModule (copy), var47 (ref), var5 (ref), var15 (ref), snapPoints (ref), var16 (write), var38 (ref), var44 (ref)
+		if var4 then
 			if reducedMotion then
-				var95(var48.defaultSnapPointIndex)
-				var68(otterModule.instant(0))
+				var48(var3.defaultSnapPointIndex)
+				var21(otterModule.instant(0))
 			else
-				var94(var48.defaultSnapPointIndex)
-				var68(otterModule.ease(0, { duration = var50.Time.Time_100 }))
+				var47(var3.defaultSnapPointIndex)
+				var21(otterModule.ease(0, { duration = var5.Time.Time_100 }))
 			end
-			if math.min(var63(snapPoints[var48.defaultSnapPointIndex]), var64) == var64 then
-				var85(true)
+			if math.min(var15(snapPoints[var3.defaultSnapPointIndex]), var16) == var16 then
+				var38(true)
 			end
 		end
 		return function()
-			-- upvalues: var91 (copy)
-			var91()
+			-- upvalues: var44 (copy)
+			var44()
 		end
 	end, {
-		var49, snapPoints, var48.defaultSnapPointIndex, var94, var63, var95,
+		var4, snapPoints, var3.defaultSnapPointIndex, var47, var15, var48,
 		reducedMotion
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var87 (ref), var98 (ref), var86 (ref), var91 (ref), var81 (ref), var80 (ref), var64 (write), bottom (write), var66 (ref), var85 (ref), var99 (ref)
-		local touchPanConnection = game:GetService("UserInputService").TouchPan:Connect(function(_, _, p19, _)
-			-- upvalues: var87 (copy), var98 (copy)
-			var87.current = p19.Y
-			var98()
+		-- upvalues: var40 (ref), var51 (ref), var39 (ref), var44 (ref), var34 (ref), var33 (ref), var16 (write), bottom (write), var19 (ref), var38 (ref), var52 (ref)
+		local touchPanConnection = game:GetService("UserInputService").TouchPan:Connect(function(_, _, p3, _)
+			-- upvalues: var40 (copy), var51 (copy)
+			var40.current = p3.Y
+			var51()
 		end)
 		local inputBeganConnection = game:GetService("UserInputService").InputBegan:Connect(function()
-			-- upvalues: var86 (copy), var87 (copy), var91 (copy)
-			var86.current = true
-			var87.current = 0
-			var91()
+			-- upvalues: var39 (copy), var40 (copy), var44 (copy)
+			var39.current = true
+			var40.current = 0
+			var44()
 		end)
 		local inputEndedConnection = game:GetService("UserInputService").InputEnded:Connect(function()
-			-- upvalues: var86 (copy), var87 (copy), var81 (copy), var80 (copy), var64 (copy), bottom (copy), var66 (copy), var85 (copy), var99 (copy)
-			if var86.current == false then return end
-			var86.current = false
-			var87.current = if var81.current then var81.current:GetScrollVelocity().Y else 0
+			-- upvalues: var39 (copy), var40 (copy), var34 (copy), var33 (copy), var16 (copy), bottom (copy), var19 (copy), var38 (copy), var52 (copy)
+			if var39.current == false then return end
+			var39.current = false
+			var40.current = if var34.current then var34.current:GetScrollVelocity().Y else 0
 			
-			if if math.floor(var64 + bottom) > var80.current then var66.current else true then
-				var85(true)
+			if if math.floor(var16 + bottom) > var33.current then var19.current else true then
+				var38(true)
 				
 				return
 			end
-			var99()
+			var52()
 		end)
 		
 		return function()
@@ -456,94 +456,94 @@ return reactModule.memo(reactModule.forwardRef(function(p8, p9)
 			inputBeganConnection:Disconnect()
 			inputEndedConnection:Disconnect()
 		end
-	end, { var49, var99, var98, var91 })
-	local var100 = reactModule.useRef(nil)
-	local var101, var102 = reactModule.useState(nil)
-	local var103, var104 = reactModule.useState(nil)
-	local var105 = reactUtilsModule.useComposedRef(p9, var104)
-	reactModule.useImperativeHandle(var48.sheetRef, function()
-		-- upvalues: var97 (ref)
-		return { close = var97 }
+	end, { var4, var52, var51, var44 })
+	local var55 = reactModule.useRef(nil)
+	local var56, var57 = reactModule.useState(nil)
+	local var58, var59 = reactModule.useState(nil)
+	local var60 = reactUtilsModule.useComposedRef(p2, var59)
+	reactModule.useImperativeHandle(var3.sheetRef, function()
+		-- upvalues: var50 (ref)
+		return { close = var50 }
 	end, {})
 	
-	return var49 and reactRobloxModule.createPortal(reactModule.createElement(viewModule, {
-		ZIndex = var51.zIndex,
-		ref = var105,
+	return var4 and reactRobloxModule.createPortal(reactModule.createElement(viewModule, {
+		ZIndex = var6.zIndex,
+		ref = var60,
 		selection = typesModule.nonSelectable,
 		selectionGroup = typesModule.isolatedSelectionGroup,
-		Size = if foundationBottomSheetIOSInsetWorkaround then UDim2.new(1, 0, 0, var57) else nil,
+		Size = if foundationBottomSheetIOSInsetWorkaround then UDim2.new(1, 0, 0, var2) else nil,
 		tag = if foundationBottomSheetIOSInsetWorkaround then nil else "size-full",
-		testId = `{var48.testId}--surface`
+		testId = `{var3.testId}--surface`
 	}, reactModule.createElement("ScrollingFrame", {
-		Size = if foundationBottomSheetIOSInsetWorkaround then UDim2.new(1, 0, 0, var57) else UDim2.fromScale(1, 1),
-		CanvasSize = UDim2.new(1, 0, 1, var64 + bottom),
+		Size = if foundationBottomSheetIOSInsetWorkaround then UDim2.new(1, 0, 0, var2) else UDim2.fromScale(1, 1),
+		CanvasSize = UDim2.new(1, 0, 1, var16 + bottom),
 		ClipsDescendants = false,
 		BackgroundTransparency = 1,
 		ScrollingDirection = Enum.ScrollingDirection.Y,
 		ScrollBarThickness = 0,
-		ref = var81,
-		[reactModule.Change.CanvasPosition] = function(p20)
-			-- upvalues: var80 (ref), var70 (ref), bottom (write), var50 (ref), var98 (ref), var97 (ref)
-			var80.current = p20.CanvasPosition.Y
-			var70(var80.current - bottom - var50.Margin.Small)
-			var98()
+		ref = var34,
+		[reactModule.Change.CanvasPosition] = function(p3)
+			-- upvalues: var33 (ref), var23 (ref), bottom (write), var5 (ref), var51 (ref), var50 (ref)
+			var33.current = p3.CanvasPosition.Y
+			var23(var33.current - bottom - var5.Margin.Small)
+			var51()
 			
-			if var80.current <= 0 then
-				var97()
+			if var33.current <= 0 then
+				var50()
 			end
 		end
 	}, {
 		SheetContainer = reactModule.createElement(viewModule, {
 			ZIndex = 3,
-			Size = UDim2.new(1, 0, 1, 200 - var64 - bottom),
-			Position = UDim2.new(0, 0, 1, -var64)
+			Size = UDim2.new(1, 0, 1, 200 - var16 - bottom),
+			Position = UDim2.new(0, 0, 1, -var16)
 		}, {
 			Sheet = reactModule.createElement(viewModule, {
-				Size = if var48.snapPoints == nil then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 0, var64 + 200),
-				AutomaticSize = if var48.snapPoints == nil then Enum.AutomaticSize.Y else nil,
-				onAbsoluteSizeChanged = if var48.snapPoints == nil then function(p21)
-					-- upvalues: var61 (ref)
-					var61(p21.AbsoluteSize.Y - 200)
+				Size = if var3.snapPoints == nil then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 0, var16 + 200),
+				AutomaticSize = if var3.snapPoints == nil then Enum.AutomaticSize.Y else nil,
+				onAbsoluteSizeChanged = if var3.snapPoints == nil then function(p3)
+					-- upvalues: var14 (ref)
+					var14(p3.AbsoluteSize.Y - 200)
 				end else nil,
 				stateLayer = { affordance = stateLayerAffordanceModule.None },
 				onActivated = dashModule.noop,
-				testId = var48.testId,
+				testId = var3.testId,
 				tag = {
 					["col items-center radius-large clip bg-surface-100"] = true,
-					["padding-top-medium"] = not var77
+					["padding-top-medium"] = not var30
 				}
 			}, {
 				GripperContainer = reactModule.createElement("Folder", nil, {
 					Gripper = reactModule.createElement(viewModule, {
 						ZIndex = 3,
 						tag = "align-y-center size-1000-100 padding-y-small radius-small",
-						backgroundStyle = var50.Color.Content.Muted,
-						Position = UDim2.new(0.5, 0, 0, if var77 then var50.Padding.Small else -var50.Padding.XSmall),
+						backgroundStyle = var5.Color.Content.Muted,
+						Position = UDim2.new(0.5, 0, 0, if var30 then var5.Padding.Small else -var5.Padding.XSmall),
 						AnchorPoint = Vector2.new(0.5, 0),
-						testId = `{var48.testId}--gripper`
+						testId = `{var3.testId}--gripper`
 					}, {
 						TouchTarget = reactModule.createElement(viewModule, {
 							tag = "size-1000-600",
 							stateLayer = { affordance = stateLayerAffordanceModule.None },
 							onActivated = function()
-								-- upvalues: var86 (ref), snapPoints (ref), var65 (ref), reducedMotion (ref), var95 (ref), var94 (ref), var63 (ref), var64 (write), var85 (ref), var97 (ref)
-								var86.current = false
+								-- upvalues: var39 (ref), snapPoints (ref), var18 (ref), reducedMotion (ref), var48 (ref), var47 (ref), var15 (ref), var16 (write), var38 (ref), var50 (ref)
+								var39.current = false
 								
 								if #snapPoints > 1 then
-									local var121 = var65.current % #snapPoints + 1
+									local var61 = var18.current % #snapPoints + 1
 									
 									if reducedMotion then
-										var95(var121)
+										var48(var61)
 									else
-										var94(var121)
+										var47(var61)
 									end
-									if math.min(var63(snapPoints[var121]), var64) == var64 then
-										var85(true)
+									if math.min(var15(snapPoints[var61]), var16) == var16 then
+										var38(true)
 										
 										return
 									end
 								else
-									var97()
+									var50()
 								end
 							end
 						})
@@ -551,71 +551,71 @@ return reactModule.memo(reactModule.forwardRef(function(p8, p9)
 				}),
 				Content = reactModule.createElement(sheetContextModule.Provider, {
 					value = reactModule.useMemo(function()
-						-- upvalues: var71 (ref), var72 (ref), var73 (ref), var74 (ref), var69 (ref), var70 (ref), bottom (write), var84 (ref), var82 (ref), var83 (ref), var98 (ref), var75 (ref), var76 (ref), var77 (ref), var78 (ref), var79 (ref), var97 (ref), sheetTypeModule (copy), var103 (ref), var48 (ref), var100 (ref), var101 (ref), var102 (ref)
+						-- upvalues: var24 (ref), var25 (ref), var26 (ref), var27 (ref), var22 (ref), var23 (ref), bottom (write), var37 (ref), var35 (ref), var36 (ref), var51 (ref), var28 (ref), var29 (ref), var30 (ref), var31 (ref), var32 (ref), var50 (ref), sheetTypeModule (copy), var58 (ref), var3 (ref), var55 (ref), var56 (ref), var57 (ref)
 						return {
 							bottomPadding = 200,
 							hasRadius = true,
-							actionsHeight = var71,
-							setActionsHeight = var72,
-							hasActionsDivider = var73,
-							setHasActionsDivider = var74,
-							sheetHeightAvailable = var69,
-							setSheetHeightAvailable = var70,
+							actionsHeight = var24,
+							setActionsHeight = var25,
+							hasActionsDivider = var26,
+							setHasActionsDivider = var27,
+							sheetHeightAvailable = var22,
+							setSheetHeightAvailable = var23,
 							safeAreaPadding = bottom,
-							innerScrollingEnabled = var84,
-							innerScrollY = var82,
+							innerScrollingEnabled = var37,
+							innerScrollY = var35,
 							setInnerScrollY = function(value)
-								-- upvalues: var83 (copy), var98 (copy)
-								var83(value)
-								var98()
+								-- upvalues: var36 (copy), var51 (copy)
+								var36(value)
+								var51()
 							end,
-							hasHeader = var75,
-							setHasHeader = var76,
-							hasFullBleed = var77,
-							fullBleedHeight = var78,
-							setFullBleedHeight = var79,
-							closeSheet = var97,
+							hasHeader = var28,
+							setHasHeader = var29,
+							hasFullBleed = var30,
+							fullBleedHeight = var31,
+							setFullBleedHeight = var32,
+							closeSheet = var50,
 							sheetType = sheetTypeModule.Bottom,
-							innerSurface = var103,
-							testId = var48.testId,
-							closeAffordanceRef = var100,
-							contentStartRef = var101,
-							setContentStartRef = var102
+							innerSurface = var58,
+							testId = var3.testId,
+							closeAffordanceRef = var55,
+							contentStartRef = var56,
+							setContentStartRef = var57
 						}
 					end, {
-						var48.testId, var97, bottom, var98, var103, var100, var101, var77
+						var3.testId, var50, bottom, var51, var58, var55, var56, var30
 					})
-				}, reactModule.createElement(elevationOwnerScope, { owner = var51 }, var48.children))
+				}, reactModule.createElement(elevationOwnerScope, { owner = var6 }, var3.children))
 			})
 		}),
 		Shadow = reactModule.createElement(imageModule, {
 			ZIndex = 2,
 			Image = SHADOW_IMAGE,
-			Size = UDim2.new(1, SHADOW_SIZE * 2, 0, var64 + 200 + SHADOW_SIZE * 2),
-			Position = UDim2.new(-SHADOW_SIZE, 0, 1, (-var64) - SHADOW_SIZE),
+			Size = UDim2.new(1, SHADOW_SIZE * 2, 0, var16 + 200 + SHADOW_SIZE * 2),
+			Position = UDim2.new(-SHADOW_SIZE, 0, 1, (-var16) - SHADOW_SIZE),
 			slice = {
 				scale = 2,
 				center = Rect.new(SHADOW_SIZE, SHADOW_SIZE, SHADOW_SIZE + 1, SHADOW_SIZE + 1)
 			},
-			imageStyle = var50.Color.Extended.Black.Black_10
+			imageStyle = var5.Color.Extended.Black.Black_10
 		}),
 		Backdrop = reactModule.createElement(viewModule, {
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 2),
 			Position = UDim2.fromScale(0, -0.5),
 			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			backgroundStyle = var67:map(function(p22)
-				-- upvalues: var50 (ref)
+			backgroundStyle = var20:map(function(p3)
+				-- upvalues: var5 (ref)
 				return {
-					Color3 = var50.Color.Common.Backdrop.Color3,
-					Transparency = math.lerp(var50.Color.Common.Backdrop.Transparency, 1, p22)
+					Color3 = var5.Color.Common.Backdrop.Color3,
+					Transparency = math.lerp(var5.Color.Common.Backdrop.Transparency, 1, p3)
 				}
 			end),
 			onActivated = function()
-				-- upvalues: var97 (ref)
-				var97()
+				-- upvalues: var50 (ref)
+				var50()
 			end,
-			testId = `{var48.testId}--backdrop`
+			testId = `{var3.testId}--backdrop`
 		})
-	})), var49)
+	})), var4)
 end))

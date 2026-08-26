@@ -11,9 +11,9 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshIslandVolume),
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: getFFlagUGCValidateAQMeshQualityBlockUploadModule (ref), errorSourceStringsModule (ref), UGCValidationMeshIslandVolumeMaxComponents (ref)
-		local measureMeshIslandVolume = p1.aqsSummaryData.Measure_Mesh_Island_Volume
+		local measureMeshIslandVolume = p2.aqsSummaryData.Measure_Mesh_Island_Volume
 		
 		if measureMeshIslandVolume == nil then
 			if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
@@ -21,7 +21,7 @@ return {
 				
 				return
 			end
-			p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Mesh_Island_Volume" })
+			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Mesh_Island_Volume" })
 			
 			return
 		else
@@ -38,9 +38,9 @@ return {
 							}
 							
 							if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
-								p0:fail(errorSourceStringsModule.Keys.AQSFail_TooManyDisconnectedComponents, t)
+								p1:fail(errorSourceStringsModule.Keys.AQSFail_TooManyDisconnectedComponents, t)
 							else
-								p0:warn(errorSourceStringsModule.Keys.AQSFail_TooManyDisconnectedComponents, t)
+								p1:warn(errorSourceStringsModule.Keys.AQSFail_TooManyDisconnectedComponents, t)
 							end
 						end
 						if tonumber(v.score) ~= 100 then
@@ -52,13 +52,13 @@ return {
 							}
 							
 							if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
-								p0:fail(errorSourceStringsModule.Keys.AQSWarn_MeshIslandVolume, t)
+								p1:fail(errorSourceStringsModule.Keys.AQSWarn_MeshIslandVolume, t)
 							else
-								p0:warn(errorSourceStringsModule.Keys.AQSWarn_MeshIslandVolume, t)
+								p1:warn(errorSourceStringsModule.Keys.AQSWarn_MeshIslandVolume, t)
 							end
 						end
 					end
-					p0:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Mesh_Island_Volume" })
+					p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Mesh_Island_Volume" })
 					
 					return
 				end

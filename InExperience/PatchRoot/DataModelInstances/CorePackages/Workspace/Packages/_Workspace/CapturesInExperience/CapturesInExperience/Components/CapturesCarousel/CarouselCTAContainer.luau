@@ -26,55 +26,55 @@ local uDim = UDim.new(0.12, 0)
 local uDim2 = UDim2.fromOffset(36, 36)
 local uDim_1 = UDim.new(0, 8)
 
-return capturesPolicyModule.connect(function(p2)
-	return { enableShareCaptureCTA = p2.enableShareCaptureCTA() }
-end)(function(p0)
+return capturesPolicyModule.connect(function(p1)
+	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
+end)(function(p1)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useRef (ref), useSelector (ref), constantsModule (ref), reactModule (ref), getSaveToStoragePermissionModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), eventNamesModule (ref), socialStopwatchModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref), getIsDeleteWarningModalOptedOutModule (ref), deleteWarningModalOpenedModule (ref), uDim_1 (ref), uDim (ref), iconButton (ref), images (ref), uDim2 (ref)
-	local var18 = useAnalyticsModule()
-	local var19 = useDispatch()
-	local var20 = useStyle()
-	local var21 = useRef(0)
-	local var22 = useSelector(function(p1)
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3 = useStyle()
+	local var4 = useRef(0)
+	local var5 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].Captures[p1[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex]
+		return p2[constantsModule.RoduxKey].Captures[p2[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex]
 	end)
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), var21 (ref)
-		return if p0.isDisabled then true else DateTime.now().UnixTimestampMillis - var21.current < 500
-	end, { p0.isDisabled })
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: var21 (ref)
-		var21.current = DateTime.now().UnixTimestampMillis
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), var4 (ref)
+		return if p1.isDisabled then true else DateTime.now().UnixTimestampMillis - var4.current < 500
+	end, { p1.isDisabled })
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref)
+		var4.current = DateTime.now().UnixTimestampMillis
 	end, {})
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var23 (ref), getSaveToStoragePermissionModule (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var22 (ref), p0 (ref), var19 (ref), var24 (ref), captureTypeModule (copy), var18 (ref), eventNamesModule (copy)
-		if var23() then return end
-		local var26
-		getSaveToStoragePermissionModule(if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then { var22 } else var22, p0.openPermissionModal, var19)
-		var24()
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), getSaveToStoragePermissionModule (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var5 (ref), p1 (ref), var2 (ref), var7 (ref), captureTypeModule (copy), var1 (ref), eventNamesModule (copy)
+		if var6() then return end
+		local var9
+		getSaveToStoragePermissionModule(if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then { var5 } else var5, p1.openPermissionModal, var2)
+		var7()
 		
 		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-			var26 = var22.CaptureType == Enum.CaptureType.Video
-			var26 = nil
+			var9 = var5.CaptureType == Enum.CaptureType.Video
+			var9 = nil
 		else
-			var26 = var22.type == captureTypeModule.Video
+			var9 = var5.type == captureTypeModule.Video
 		end
-		if var26 then
-			var18.fireEvent(eventNamesModule.CapturesCarouselVideoSaveToExternalStorageActivated)
+		if var9 then
+			var1.fireEvent(eventNamesModule.CapturesCarouselVideoSaveToExternalStorageActivated)
 			
 			return
 		end
-		var18.fireEvent(eventNamesModule.CapturesCarouselSaveToExternalStorageActivated)
-	end, { var22, var23, var24, p0.openPermissionModal })
+		var1.fireEvent(eventNamesModule.CapturesCarouselSaveToExternalStorageActivated)
+	end, { var5, var6, var7, p1.openPermissionModal })
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.None,
-		BackgroundColor3 = var20.Theme.BackgroundContrast.Color,
-		BackgroundTransparency = var20.Theme.BackgroundContrast.Transparency,
-		LayoutOrder = p0.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, p0.height),
-		ZIndex = p0.ZIndex
+		BackgroundColor3 = var3.Theme.BackgroundContrast.Color,
+		BackgroundTransparency = var3.Theme.BackgroundContrast.Transparency,
+		LayoutOrder = p1.LayoutOrder,
+		Size = UDim2.new(1, 0, 0, p1.height),
+		ZIndex = p1.ZIndex
 	}, {
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = uDim_1 }),
 		UIPadding = reactModule.createElement("UIPadding", {
@@ -91,45 +91,45 @@ end)(function(p0)
 		SaveButton = if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then reactModule.createElement(iconButton, {
 			layoutOrder = 1,
 			showBackground = false,
-			backgroundColor = var20.Theme.BackgroundUIContrast,
+			backgroundColor = var3.Theme.BackgroundUIContrast,
 			icon = images["icons/actions/download_medium"],
-			onActivated = var25,
+			onActivated = var8,
 			size = uDim2
 		}) else reactModule.createElement(iconButton, {
 			layoutOrder = 1,
 			showBackground = false,
-			backgroundColor = var20.Theme.BackgroundUIContrast,
+			backgroundColor = var3.Theme.BackgroundUIContrast,
 			icon = images["icons/actions/download_medium"],
-			onActivated = var25,
+			onActivated = var8,
 			size = uDim2
 		}),
-		ShareButton = p0.enableShareCaptureCTA and reactModule.createElement(iconButton, {
+		ShareButton = p1.enableShareCaptureCTA and reactModule.createElement(iconButton, {
 			layoutOrder = 2,
 			showBackground = false,
-			backgroundColor = var20.Theme.BackgroundUIContrast,
+			backgroundColor = var3.Theme.BackgroundUIContrast,
 			icon = images["icons/actions/share"],
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: var23 (ref), var24 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var22 (ref), captureTypeModule (copy), var18 (ref), eventNamesModule (copy), socialStopwatchModule (copy), var19 (ref), shareCaptureModule (copy), externalShareSourceTypeModule (copy)
-				if var23() then return end
-				local var27
-				var24()
+				-- upvalues: var6 (ref), var7 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var5 (ref), captureTypeModule (copy), var1 (ref), eventNamesModule (copy), socialStopwatchModule (copy), var2 (ref), shareCaptureModule (copy), externalShareSourceTypeModule (copy)
+				if var6() then return end
+				local var9
+				var7()
 				
 				if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-					var27 = var22.CaptureType == Enum.CaptureType.Video
-					var27 = nil
+					var9 = var5.CaptureType == Enum.CaptureType.Video
+					var9 = nil
 				else
-					var27 = var22.type == captureTypeModule.Video
+					var9 = var5.type == captureTypeModule.Video
 				end
-				if var27 then
-					var18.fireEvent(eventNamesModule.CapturesCarouselVideoShareActivated)
+				if var9 then
+					var1.fireEvent(eventNamesModule.CapturesCarouselVideoShareActivated)
 				else
-					var18.fireEvent(eventNamesModule.CapturesCarouselShareActivated)
+					var1.fireEvent(eventNamesModule.CapturesCarouselShareActivated)
 				end
 				if socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CaptureShared) == nil then
 					socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CaptureShared)
 				end
-				var19(shareCaptureModule(var22, externalShareSourceTypeModule.CapturesCarousel))
-			end, { var22, p0.isDisabled, var23, var24 }),
+				var2(shareCaptureModule(var5, externalShareSourceTypeModule.CapturesCarousel))
+			end, { var5, p1.isDisabled, var6, var7 }),
 			size = uDim2
 		}),
 		DeleteButton = reactModule.createElement(iconButton, {
@@ -137,35 +137,35 @@ end)(function(p0)
 			showBackground = false,
 			icon = images["icons/actions/edit/delete"],
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: var23 (ref), var24 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var22 (ref), captureTypeModule (copy), var18 (ref), eventNamesModule (copy), getIsDeleteWarningModalOptedOutModule (copy), p0 (ref), var19 (ref), deleteWarningModalOpenedModule (copy)
-				if var23() then return end
-				local var28
-				var24()
+				-- upvalues: var6 (ref), var7 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var5 (ref), captureTypeModule (copy), var1 (ref), eventNamesModule (copy), getIsDeleteWarningModalOptedOutModule (copy), p1 (ref), var2 (ref), deleteWarningModalOpenedModule (copy)
+				if var6() then return end
+				local var9
+				var7()
 				
 				if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-					var28 = var22.CaptureType == Enum.CaptureType.Video
-					var28 = nil
+					var9 = var5.CaptureType == Enum.CaptureType.Video
+					var9 = nil
 				else
-					var28 = var22.type == captureTypeModule.Video
+					var9 = var5.type == captureTypeModule.Video
 				end
-				if var28 then
-					var18.fireEvent(eventNamesModule.CapturesVideoDeleteActivatedInCarousel)
+				if var9 then
+					var1.fireEvent(eventNamesModule.CapturesVideoDeleteActivatedInCarousel)
 				else
-					var18.fireEvent(eventNamesModule.CapturesDeleteActivatedInCarousel)
+					var1.fireEvent(eventNamesModule.CapturesDeleteActivatedInCarousel)
 				end
 				if getIsDeleteWarningModalOptedOutModule() then
-					assert(p0.deleteItem ~= nil, "props.deleteItem should not be nil")
-					p0.deleteItem()
+					assert(p1.deleteItem ~= nil, "props.deleteItem should not be nil")
+					p1.deleteItem()
 					
 					return
 				end
-				var19(deleteWarningModalOpenedModule())
+				var2(deleteWarningModalOpenedModule())
 			end, {
-				var22,
-				p0.deleteItem,
-				p0.isDisabled,
-				var23,
-				var24
+				var5,
+				p1.deleteItem,
+				p1.isDisabled,
+				var6,
+				var7
 			}),
 			size = uDim2
 		})

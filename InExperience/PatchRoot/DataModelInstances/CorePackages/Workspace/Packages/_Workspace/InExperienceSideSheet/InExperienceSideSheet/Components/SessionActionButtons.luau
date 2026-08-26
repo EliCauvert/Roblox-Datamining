@@ -4,14 +4,14 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local view = require(parent.Foundation).View
 local fFlagEnableWhatsNew = require(parent.SharedFlags).FFlagEnableWhatsNew
-local var3 = if fFlagEnableWhatsNew then require(parent.WhatsNew).WhatsNewAnchor else nil
+local var1 = if fFlagEnableWhatsNew then require(parent.WhatsNew).WhatsNewAnchor else nil
 local shortcutButtonModule = require(inExperienceSideSheet.Components.ShortcutButton)
 local getSideSheetConfigStoreModule = require(inExperienceSideSheet.Stores.GetSideSheetConfigStore)
 local getSessionActionButtonsStoreModule = require(inExperienceSideSheet.Stores.GetSessionActionButtonsStore)
 
-local function getIsHeightSmall(p0)
+local function getIsHeightSmall(p1)
 	-- upvalues: getSideSheetConfigStoreModule (ref)
-	return getSideSheetConfigStoreModule(p0).getIsHeightSmall(p0)
+	return getSideSheetConfigStoreModule(p1).getIsHeightSmall(p1)
 end
 
 local function getSessionActionButtonConfigs(p1)
@@ -19,9 +19,9 @@ local function getSessionActionButtonConfigs(p1)
 	return getSessionActionButtonsStoreModule(p1).sessionActionButtonConfigs
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: signalsReactModule (ref), getIsHeightSmall (ref), getSessionActionButtonConfigs (ref), reactModule (ref), shortcutButtonModule (ref), view (ref), fFlagEnableWhatsNew (ref), var3 (ref)
-	local var9 = signalsReactModule.useSignalState(getIsHeightSmall)
+return reactModule.memo(function(p1)
+	-- upvalues: signalsReactModule (ref), getIsHeightSmall (ref), getSessionActionButtonConfigs (ref), reactModule (ref), shortcutButtonModule (ref), view (ref), fFlagEnableWhatsNew (ref), var1 (ref)
+	local var2 = signalsReactModule.useSignalState(getIsHeightSmall)
 	local t = {}
 	
 	for i, v in signalsReactModule.useSignalState(getSessionActionButtonConfigs) do
@@ -31,14 +31,14 @@ return reactModule.memo(function(p2)
 			getOnActivated = v.getOnActivated,
 			getIsEnabled = v.getIsEnabled,
 			isEmphasis = v.isEmphasis,
-			isSmall = var9,
+			isSmall = var2,
 			layoutOrder = i
 		})
 	end
-	local var11 = reactModule.createElement(view, {
+	local var3 = reactModule.createElement(view, {
 		tag = "size-full-0 auto-y row gap-small",
-		LayoutOrder = p2.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, t)
 	
-	return if fFlagEnableWhatsNew then reactModule.createElement(var3, { anchorId = "LeaveRespawn", LayoutOrder = p2.layoutOrder }, { SessionActions = var11 }) else var11
+	return if fFlagEnableWhatsNew then reactModule.createElement(var1, { anchorId = "LeaveRespawn", LayoutOrder = p1.layoutOrder }, { SessionActions = var3 }) else var3
 end)

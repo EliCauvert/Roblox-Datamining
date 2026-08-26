@@ -17,39 +17,39 @@ local localizationProvider = require(parent.Localization).LocalizationProvider
 local providerContainer = require(parent.RoactUtils).Components.ProviderContainer
 local robloxSubscriptionContainerModule = require(robloxSubscriptionPurchaseApp.Components.RobloxSubscriptionContainer)
 local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local var10 = nil
+local var1 = nil
 local list = { roduxModule.thunkMiddleware }
 
 local function close()
-	-- upvalues: var10 (write)
-	if var10 then
-		var10()
-		var10 = nil
+	-- upvalues: var1 (write)
+	if var1 then
+		var1()
+		var1 = nil
 	end
 end
 
-local function ThemedOverlay(p0)
+local function ThemedOverlay(p1)
 	-- upvalues: useSelectedTheme (ref), reactModule (ref), roduxModule (ref), list (ref), roactRoduxModule (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), localization (ref), localizationService (ref), selectionCursorProvider (ref), cursorProvider (ref), foundationProvider (ref), providerContainer (ref), robloxSubscriptionContainerModule (ref)
-	local var14 = useSelectedTheme()
-	local var15 = reactModule.useMemo(function()
+	local var2 = useSelectedTheme()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: roduxModule (copy), list (copy)
 		return roduxModule.Store.new(roduxModule.combineReducers({}), nil, list)
 	end, {})
 	
-	return reactModule.createElement(foundationProvider, { colorMode = if var14 == "light" then "Light" else "Dark" }, {
+	return reactModule.createElement(foundationProvider, { colorMode = if var2 == "light" then "Light" else "Dark" }, {
 		Providers = reactModule.createElement(providerContainer, {
 			providers = reactModule.useMemo(function()
-				-- upvalues: roactRoduxModule (copy), var15 (ref), styleProviderWithDefaultTheme (copy), var14 (ref), localizationProvider (copy), localization (copy), localizationService (copy), selectionCursorProvider (copy), cursorProvider (copy)
+				-- upvalues: roactRoduxModule (copy), var3 (ref), styleProviderWithDefaultTheme (copy), var2 (ref), localizationProvider (copy), localization (copy), localizationService (copy), selectionCursorProvider (copy), cursorProvider (copy)
 				local t = {}
 				table.insert(t, {
 					class = roactRoduxModule.StoreProvider,
-					props = { store = var15 }
+					props = { store = var3 }
 				})
 				table.insert(t, {
 					class = styleProviderWithDefaultTheme,
 					props = {
 						withUiModeSupport = false,
-						withDarkTheme = var14 ~= "light"
+						withDarkTheme = var2 ~= "light"
 					}
 				})
 				table.insert(t, {
@@ -62,12 +62,12 @@ local function ThemedOverlay(p0)
 				table.insert(t, { class = cursorProvider, props = {} })
 				
 				return t
-			end, { var14, var15 })
+			end, { var2, var3 })
 		}, {
 			Sheet = reactModule.createElement(robloxSubscriptionContainerModule, {
-				title = if p0.params then p0.params.title else nil,
-				message = if p0.params then p0.params.message else nil,
-				onClose = p0.onClose
+				title = if p1.params then p1.params.title else nil,
+				message = if p1.params then p1.params.message else nil,
+				onClose = p1.onClose
 			})
 		})
 	})
@@ -75,23 +75,23 @@ end
 
 return {
 	render = function(p1)
-		-- upvalues: robloxSubscriptionStoreModule (ref), reactRobloxModule (ref), reactModule (ref), ThemedOverlay (ref), close (ref), var10 (write)
-		local var17 = robloxSubscriptionStoreModule.get()
-		var17.triggerUnmountUI()
+		-- upvalues: robloxSubscriptionStoreModule (ref), reactRobloxModule (ref), reactModule (ref), ThemedOverlay (ref), close (ref), var1 (write)
+		local var2 = robloxSubscriptionStoreModule.get()
+		var2.triggerUnmountUI()
 		local robloxSubscriptionPurchaseOverlay = Instance.new("Folder")
 		robloxSubscriptionPurchaseOverlay.Name = "RobloxSubscriptionPurchaseOverlay"
 		robloxSubscriptionPurchaseOverlay.Parent = game:GetService("CoreGui")
-		local var19 = reactRobloxModule.createRoot(robloxSubscriptionPurchaseOverlay)
-		var19:render(reactModule.createElement(ThemedOverlay, { params = p1, onClose = close }))
+		local var3 = reactRobloxModule.createRoot(robloxSubscriptionPurchaseOverlay)
+		var3:render(reactModule.createElement(ThemedOverlay, { params = p1, onClose = close }))
 		
 		local function cleanup()
-			-- upvalues: var19 (ref), robloxSubscriptionPurchaseOverlay (ref)
-			var19:unmount()
+			-- upvalues: var3 (ref), robloxSubscriptionPurchaseOverlay (ref)
+			var3:unmount()
 			robloxSubscriptionPurchaseOverlay:Destroy()
 		end
 		
-		var10 = cleanup
-		var17.setOnUnmountUI(cleanup)
+		var1 = cleanup
+		var2.setOnUnmountUI(cleanup)
 		
 		return cleanup
 	end,

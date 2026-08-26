@@ -15,8 +15,8 @@ local list = {
 	reactionType.Wow, reactionType.Cry, reactionType.Fire, reactionType.Skull
 }
 
-local function _(p0)
-	local replaced = string.gsub(string.lower(p0), "%-", "")
+local function _(p1)
+	local replaced = string.gsub(string.lower(p1), "%-", "")
 	
 	return if replaced == "crying" then "cry" else replaced
 end
@@ -28,10 +28,10 @@ return {
 		
 		for i, v in p1 do
 			local replaced = string.gsub(string.lower(v.name), "%-", "")
-			local var5 = if replaced == "crying" then "cry" else replaced
+			local var1 = if replaced == "crying" then "cry" else replaced
 			
-			if t[var5] then
-				table.insert(t_1, var5)
+			if t[var1] then
+				table.insert(t_1, var1)
 			end
 		end
 		return if #t_1 == 0 then list else t_1

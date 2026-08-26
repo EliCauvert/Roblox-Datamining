@@ -3,33 +3,33 @@ local cryoModule = require(parent.Cryo)
 local createSignal = require(parent.Signals).createSignal
 local fFlagPlayerSearchEnableOnlineFrequents = require(parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
 
-local function createProfileInsight(p0, p1)
+local function createProfileInsight(p1, p2)
 	-- upvalues: cryoModule (ref), fFlagPlayerSearchEnableOnlineFrequents (ref)
 	local t = {
 		targetUserId = "",
 		isOfflineFrequents = false,
-		userId = p0,
+		userId = p1,
 		mutualFriends = {}
 	}
 	
-	if not p1 or type(p1) ~= "table" then
+	if not p2 or type(p2) ~= "table" then
 		return t
-	elseif p1.targetUser then
-		t.targetUserId = tostring(p1.targetUser)
+	elseif p2.targetUser then
+		t.targetUserId = tostring(p2.targetUser)
 	end
-	for i, v in p1.profileInsights do
+	for i, v in p2.profileInsights do
 		if v.mutualFriendInsight and v.mutualFriendInsight.mutualFriends then
 			local mutualFriends = v.mutualFriendInsight.mutualFriends
-			t.mutualFriends = cryoModule.List.foldLeft(cryoModule.Dictionary.keys(mutualFriends), function(p2, p3)
+			t.mutualFriends = cryoModule.List.foldLeft(cryoModule.Dictionary.keys(mutualFriends), function(p3, p4)
 				-- upvalues: mutualFriends (ref)
-				local var3 = mutualFriends[p3]
-				table.insert(p2, {
-					id = p3,
-					username = var3.username,
-					displayName = var3.displayName
+				local var1 = mutualFriends[p4]
+				table.insert(p3, {
+					id = p4,
+					username = var1.username,
+					displayName = var1.displayName
 				})
 				
-				return p2
+				return p3
 			end, {})
 		end
 		if v.offlineFrequentsInsight then
@@ -67,18 +67,18 @@ end
 return {
 	createProfileInsightsSignalList = function()
 		-- upvalues: createSignal (ref)
-		local var4, var5 = createSignal({})
+		local var1, var2 = createSignal({})
 		
-		return { getProfileInsights = var4, setProfileInsights = var5 }
+		return { getProfileInsights = var1, setProfileInsights = var2 }
 	end,
-	createProfileInsightsList = function(p4)
+	createProfileInsightsList = function(p3)
 		-- upvalues: createProfileInsight (ref)
 		local t = {}
 		
-		if not p4 or type(p4) ~= "table" then
+		if not p3 or type(p3) ~= "table" then
 			return t
 		end
-		for i, v in p4 do
+		for i, v in p3 do
 			table.insert(t, createProfileInsight(v.targetUser, v))
 		end
 		return t

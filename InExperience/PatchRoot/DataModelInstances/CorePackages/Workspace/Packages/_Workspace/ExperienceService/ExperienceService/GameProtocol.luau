@@ -21,8 +21,8 @@ local t = {
 			referredByPlayerId = tModule.optional(tModule.number),
 			joinAttemptOrigin = tModule.optional(tModule.string),
 			joinAttemptId = tModule.string
-		}), function(p0)
-			return p0.placeId or p0.userId
+		}), function(p1)
+			return p1.placeId or p1.userId
 		end)
 	}
 }
@@ -41,19 +41,19 @@ function t:launchGame(p1, p2, p3)
 	if type(p1.userId) == "string" then
 		p1.userId = tonumber(p1.userId)
 	end
-	local var5 = if p1.joinAttemptId ~= nil then httpService:GenerateGUID(false) else p1.joinAttemptId
-	local var6 = cryoModule.Dictionary.join(p1, {
-		joinAttemptId = var5,
+	local var1 = if p1.joinAttemptId ~= nil then httpService:GenerateGUID(false) else p1.joinAttemptId
+	local var2 = cryoModule.Dictionary.join(p1, {
+		joinAttemptId = var1,
 		joinAttemptOrigin = if p2 ~= nil then p1.joinAttemptOrigin else p2
 	})
 	
 	if p3 then
-		p3(var5)
+		p3(var1)
 	end
 	if getFFlagMoveLuaExpLaunchBeginModule() then
 		default:logEvent("experience_launch_begin")
 	end
-	messageBus.publish(self.GAME_LAUNCH_DESCRIPTOR, var6)
+	messageBus.publish(self.GAME_LAUNCH_DESCRIPTOR, var2)
 end
 
 t.default = t.new()

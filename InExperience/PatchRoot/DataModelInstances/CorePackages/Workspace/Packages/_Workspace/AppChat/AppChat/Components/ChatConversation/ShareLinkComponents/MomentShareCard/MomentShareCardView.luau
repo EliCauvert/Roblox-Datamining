@@ -17,8 +17,8 @@ local fFlagAppChatMomentShareCardUseFoundationImageModule_1 = fFlagAppChatNative
 local gameCardErrorModule = require(script.Parent.Parent.GameCardComponents.GameCardError)
 local momentDetailsStatusModule = require(script.Parent.MomentDetailsStatus)
 
-local function _(p0)
-	return if type(p0) == "number" then UDim.new(0, p0) else p0
+local function _(p1)
+	return if type(p1) == "number" then UDim.new(0, p1) else p1
 end
 
 local function roundedCorner(value)
@@ -27,7 +27,7 @@ local function roundedCorner(value)
 		return nil
 	end
 	local createElement = reactModule.createElement
-	local var10 = "UICorner"
+	local var1 = "UICorner"
 	local t = {}
 	local topLeft = value.topLeft
 	t.TopLeftRadius = if type(topLeft) == "number" then UDim.new(0, topLeft) else topLeft
@@ -38,7 +38,7 @@ local function roundedCorner(value)
 	local bottomRight = value.bottomRight
 	t.BottomRightRadius = if type(bottomRight) == "number" then UDim.new(0, bottomRight) else bottomRight
 	
-	return createElement(var10, t)
+	return createElement(var1, t)
 end
 
 return reactModule.memo(function(p1)
@@ -46,7 +46,7 @@ return reactModule.memo(function(p1)
 	if p1.status == momentDetailsStatusModule.Error then
 		return reactModule.createElement(gameCardErrorModule)
 	end
-	local var16
+	local var1
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "col auto-y",
@@ -135,8 +135,8 @@ return reactModule.memo(function(p1)
 	}
 	
 	if p1.metadataText or fFlagAppChatMomentShareCardLoadingSkeletonsModule and p1.isMetadataLoading then
-		var16 = reactModule.createElement
-		var16 = var16(view, {
+		var1 = reactModule.createElement
+		var1 = var1(view, {
 			tag = "row align-y-center gap-xsmall size-full-500",
 			testId = "MomentShareMetadata",
 			LayoutOrder = 2
@@ -159,9 +159,9 @@ return reactModule.memo(function(p1)
 			})
 		})
 	else
-		var16 = nil
+		var1 = nil
 	end
-	t_3.Metadata = var16
+	t_3.Metadata = var1
 	t_1.Footer = createElement_1(view, t_2, t_3)
 	
 	return createElement(view, t, t_1)

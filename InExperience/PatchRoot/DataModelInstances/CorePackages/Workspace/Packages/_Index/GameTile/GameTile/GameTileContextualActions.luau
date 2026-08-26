@@ -10,31 +10,31 @@ local tileOverflowMenuItems = require(gameTile.GameTileConstants).TileOverflowMe
 local iconName = foundationModule.Enums.IconName
 local useLastInput = responsiveModule.useLastInput
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: tileOverflowMenuItems (ref)
-	local var7 = 0
+	local var1 = 0
 	
 	for i, v in tileOverflowMenuItems do
-		if p0[v] then
-			var7 += 1
+		if p1[v] then
+			var1 += 1
 		end
 	end
-	return var7
+	return var1
 end
 
-return function(p1)
+return function(p2)
 	-- upvalues: useLastInput (ref), tileOverflowMenuItems (ref), responsiveModule (ref), reactModule (ref), gameTileDirectActionModule (ref), cryoModule (ref), iconName (ref), gameTileOverflowMenuModule (ref)
-	local var8 = useLastInput()
-	local availableMenuItems = p1.availableMenuItems
-	local var9 = 0
+	local var2 = useLastInput()
+	local availableMenuItems = p2.availableMenuItems
+	local var3 = 0
 	
 	for i, v in tileOverflowMenuItems do
 		if availableMenuItems[v] then
-			var9 += 1
+			var3 += 1
 		end
 	end
-	return if var8 == responsiveModule.Input.Pointer and not p1.menuOpen and (var9 == 1 and p1.availableMenuItems[tileOverflowMenuItems.NotInterested]) then reactModule.createElement(gameTileDirectActionModule, cryoModule.Dictionary.join(p1, {
+	return if var2 == responsiveModule.Input.Pointer and not p2.menuOpen and (var3 == 1 and p2.availableMenuItems[tileOverflowMenuItems.NotInterested]) then reactModule.createElement(gameTileDirectActionModule, cryoModule.Dictionary.join(p2, {
 		actionId = tileOverflowMenuItems.NotInterested,
 		iconOverride = { name = iconName.X }
-	})) else reactModule.createElement(gameTileOverflowMenuModule, p1)
+	})) else reactModule.createElement(gameTileOverflowMenuModule, p2)
 end

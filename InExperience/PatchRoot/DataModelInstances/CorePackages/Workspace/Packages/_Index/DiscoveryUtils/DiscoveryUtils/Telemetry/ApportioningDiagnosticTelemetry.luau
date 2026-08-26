@@ -10,11 +10,11 @@ local t = {
 local list = { "addOSInfo", "addSessionInfo", "addSessionId" }
 
 return {
-	log = function(p0, p1)
+	log = function(p1, p2)
 		-- upvalues: cryoModule (ref), telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogEvent(t, {
 			standardizedFields = list,
-			customFields = cryoModule.Dictionary.join(p1 or {}, { eventKind = p0 })
+			customFields = cryoModule.Dictionary.join(p2 or {}, { eventKind = p1 })
 		})
 	end
 }

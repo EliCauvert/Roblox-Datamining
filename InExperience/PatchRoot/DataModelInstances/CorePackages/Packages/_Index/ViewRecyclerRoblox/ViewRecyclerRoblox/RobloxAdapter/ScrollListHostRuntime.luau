@@ -15,32 +15,32 @@ local frozen = table.freeze({
 	"onScrollOffsetChanged", "onContentLengthChanged"
 })
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: record (ref), frozen (ref)
-	return not record.containsEqual(p0, p1, frozen)
+	return not record.containsEqual(p1, p2, frozen)
 end
 
-local function samePinnedItems(p2, p3)
+local function samePinnedItems(p1, p2)
 	-- upvalues: record (ref)
-	local var9 = true
+	local var1 = true
 	
-	if p2 ~= p3 then
-		var9 = false
+	if p1 ~= p2 then
+		var1 = false
 		
-		if p2.isItemStickyHeader == p3.isItemStickyHeader then
-			var9 = record.equal(p2.pinnedStartItem or {}, p3.pinnedStartItem or {})
+		if p1.isItemStickyHeader == p2.isItemStickyHeader then
+			var1 = record.equal(p1.pinnedStartItem or {}, p2.pinnedStartItem or {})
 			
-			if var9 then
-				var9 = record.equal
-				var9 = var9(p2.pinnedEndItem or {}, p3.pinnedEndItem or {})
+			if var1 then
+				var1 = record.equal
+				var1 = var1(p1.pinnedEndItem or {}, p2.pinnedEndItem or {})
 			end
 		end
 	end
-	return var9
+	return var1
 end
 
-local _ = function(p4)
-	local cloned = table.clone(p4)
+local _ = function(p1)
+	local cloned = table.clone(p1)
 	
 	if cloned.overscanPolicy ~= nil then
 		cloned.overscan = nil
@@ -48,18 +48,18 @@ local _ = function(p4)
 	return cloned
 end
 
-local function applyCorePolicy(p5, p6, p7)
+local function applyCorePolicy(p1, p2, p3)
 	-- upvalues: samePinnedItems (ref), record (ref), viewRecyclerModule (ref)
-	local cloned = table.clone(p7)
+	local cloned = table.clone(p3)
 	
 	if cloned.overscanPolicy ~= nil then
 		cloned.overscan = nil
 	end
-	if p6 ~= nil and samePinnedItems(p6.pinnedItems, cloned.pinnedItems) then
-		cloned.pinnedItems = p6.pinnedItems
+	if p2 ~= nil and samePinnedItems(p2.pinnedItems, cloned.pinnedItems) then
+		cloned.pinnedItems = p2.pinnedItems
 	end
-	if p6 == nil or not record.equal(p6, cloned) then
-		p5({
+	if p2 == nil or not record.equal(p2, cloned) then
+		p1({
 			type = viewRecyclerModule.VirtualizerCommandType.SetPolicy,
 			policy = cloned
 		})
@@ -67,31 +67,31 @@ local function applyCorePolicy(p5, p6, p7)
 	return cloned
 end
 
-local function createRuntime(p8, p9, p10)
+local function createRuntime(p1, p2, p3)
 	-- upvalues: t (ref), viewRecyclerModule (ref), applyCorePolicy (ref), record (ref), frozen (ref)
-	p10 = p10 or t
-	local initialHostConfiguration = p8.initialHostConfiguration
-	local initialHostTarget = p8.initialHostTarget
-	local core = p8.core
-	local var13 = false
-	local var14 = false
-	local var15 = nil
-	local cloned = table.clone(p8.initialCorePolicy)
+	p3 = p3 or t
+	local initialHostConfiguration = p1.initialHostConfiguration
+	local initialHostTarget = p1.initialHostTarget
+	local core = p1.core
+	local var1 = false
+	local var2 = false
+	local var3 = nil
+	local cloned = table.clone(p1.initialCorePolicy)
 	
 	if cloned.overscanPolicy ~= nil then
 		cloned.overscan = nil
 	end
-	local var17 = cloned
-	local var18 = nil
-	local var19 = nil
-	local var20 = false
+	local var4 = cloned
+	local var5 = nil
+	local var6 = nil
+	local var7 = false
 	
-	local function handleUpdate(p11, p12)
-		-- upvalues: var19 (write), var20 (write), viewRecyclerModule (copy), initialHostConfiguration (write)
-		if var19 ~= nil then
-			var19.handleUpdate(p11, p12)
+	local function handleUpdate(p4, p5)
+		-- upvalues: var6 (write), var7 (write), viewRecyclerModule (copy), initialHostConfiguration (write)
+		if var6 ~= nil then
+			var6.handleUpdate(p4, p5)
 		end
-		for i, v in if var20 then p12.effects else {} do
+		for i, v in if var7 then p5.effects else {} do
 			local _ = nil
 			
 			if v.type == viewRecyclerModule.VirtualizerEffectType.VisibleRangeChanged then
@@ -116,14 +116,14 @@ local function createRuntime(p8, p9, p10)
 		end
 	end
 	
-	local function dispatch(p13)
-		-- upvalues: viewRecyclerModule (copy), var20 (write), var18 (write), initialHostConfiguration (write)
-		local var26 = var18.dispatch(p13)
+	local function dispatch(p6)
+		-- upvalues: viewRecyclerModule (copy), var7 (write), var5 (write), initialHostConfiguration (write)
+		local var8 = var5.dispatch(p6)
 		
-		if p13.type == viewRecyclerModule.VirtualizerCommandType.Activate and not var20 then
-			var20 = true
+		if p6.type == viewRecyclerModule.VirtualizerCommandType.Activate and not var7 then
+			var7 = true
 			
-			for i, v in var26.effects do
+			for i, v in var8.effects do
 				if v.type == viewRecyclerModule.VirtualizerEffectType.DataPrefetchRequested then
 					local onDataPrefetchRequested = initialHostConfiguration.onDataPrefetchRequested
 					
@@ -133,56 +133,56 @@ local function createRuntime(p8, p9, p10)
 				end
 			end
 		end
-		return var26
+		return var8
 	end
 	
-	local var23 = p10.createCanvasRuntime({
+	local var9 = p3.createCanvasRuntime({
 		container = initialHostTarget.scrollingFrame,
 		viewportContainer = initialHostTarget.viewportOverlay,
 		axis = initialHostConfiguration.axis,
 		selfSizing = initialHostConfiguration.layout.requiresItemMeasurement(),
-		onItemMeasurements = function(p14)
+		onItemMeasurements = function(p7)
 			-- upvalues: dispatch (ref), viewRecyclerModule (copy)
 			dispatch({
 				type = viewRecyclerModule.VirtualizerCommandType.SubmitMeasurements,
-				measurements = p14
+				measurements = p7
 			})
 		end,
-		onItemViewPresentationChanged = function(p15, p16)
-			-- upvalues: p8 (ref)
-			local onItemViewPresentationChanged = p8.onItemViewPresentationChanged
+		onItemViewPresentationChanged = function(p7, p8)
+			-- upvalues: p1 (ref)
+			local onItemViewPresentationChanged = p1.onItemViewPresentationChanged
 			
 			if onItemViewPresentationChanged ~= nil then
-				onItemViewPresentationChanged(p15, p16)
+				onItemViewPresentationChanged(p7, p8)
 			end
 		end
 	})
-	local var24 = p9(var23, p8)
+	local var10 = p2(var9, p1)
 	local cloned_1 = table.clone(core)
 	cloned_1.dataSource = initialHostConfiguration.dataSource
 	cloned_1.layout = initialHostConfiguration.layout
-	cloned_1.prepareItemViewAssignment = var24.prepare
-	cloned_1.postCommitItemViewAssignment = var24.postCommit
-	cloned_1.presentItemViewAssignment = var24.present
-	cloned_1.applyItemViewPlacementIntent = var23.applyPlacementIntent
-	cloned_1.overscan = var17.overscan
-	cloned_1.overscanPolicy = var17.overscanPolicy
-	cloned_1.dataPrefetch = var17.dataPrefetch
-	cloned_1.contentAlignment = var17.contentAlignment
-	cloned_1.endThreshold = var17.endThreshold
-	cloned_1.isItemStickyHeader = var17.pinnedItems.isItemStickyHeader
-	cloned_1.pinnedStartItem = var17.pinnedItems.pinnedStartItem
-	cloned_1.pinnedEndItem = var17.pinnedItems.pinnedEndItem
-	cloned_1.preserveScrollPositionOnChange = var17.preserveScrollPositionOnChange
+	cloned_1.prepareItemViewAssignment = var10.prepare
+	cloned_1.postCommitItemViewAssignment = var10.postCommit
+	cloned_1.presentItemViewAssignment = var10.present
+	cloned_1.applyItemViewPlacementIntent = var9.applyPlacementIntent
+	cloned_1.overscan = var4.overscan
+	cloned_1.overscanPolicy = var4.overscanPolicy
+	cloned_1.dataPrefetch = var4.dataPrefetch
+	cloned_1.contentAlignment = var4.contentAlignment
+	cloned_1.endThreshold = var4.endThreshold
+	cloned_1.isItemStickyHeader = var4.pinnedItems.isItemStickyHeader
+	cloned_1.pinnedStartItem = var4.pinnedItems.pinnedStartItem
+	cloned_1.pinnedEndItem = var4.pinnedItems.pinnedEndItem
+	cloned_1.preserveScrollPositionOnChange = var4.preserveScrollPositionOnChange
 	cloned_1.onUpdate = handleUpdate
-	var18 = p10.createCoreVirtualizer(cloned_1)
-	var19 = p10.createScrollHostCoordinator({
+	var5 = p3.createCoreVirtualizer(cloned_1)
+	var6 = p3.createScrollHostCoordinator({
 		dispatch = dispatch,
-		getSnapshot = var18.getSnapshot,
-		query = var18.query,
+		getSnapshot = var5.getSnapshot,
+		query = var5.query,
 		getInstance = function()
-			-- upvalues: var13 (write), initialHostTarget (write)
-			return if var13 then nil else initialHostTarget.scrollingFrame
+			-- upvalues: var1 (write), initialHostTarget (write)
+			return if var1 then nil else initialHostTarget.scrollingFrame
 		end,
 		getConfiguration = function()
 			-- upvalues: initialHostConfiguration (write)
@@ -192,53 +192,53 @@ local function createRuntime(p8, p9, p10)
 	
 	return {
 		dispatch = dispatch,
-		getSnapshot = var18.getSnapshot,
-		query = var18.query,
+		getSnapshot = var5.getSnapshot,
+		query = var5.query,
 		connect = function()
-			-- upvalues: var13 (write), var14 (write), var19 (write), var15 (write)
-			assert(not var13, "ScrollListHostRuntime: cannot connect after destroy")
-			assert(not var14, "ScrollListHostRuntime: already connected")
-			var14 = true
-			local var27 = var19.connect()
-			local var28 = false
+			-- upvalues: var1 (write), var2 (write), var6 (write), var3 (write)
+			assert(not var1, "ScrollListHostRuntime: cannot connect after destroy")
+			assert(not var2, "ScrollListHostRuntime: already connected")
+			var2 = true
+			local var11 = var6.connect()
+			local var12 = false
 			
 			local function disconnectRuntime()
-				-- upvalues: var28 (write), var14 (copy), var15 (copy), var27 (ref)
-				if var28 then
+				-- upvalues: var12 (write), var2 (copy), var3 (copy), var11 (ref)
+				if var12 then
 					return
 				end
-				var28 = true
-				var14 = false
-				var15 = nil
-				var27()
+				var12 = true
+				var2 = false
+				var3 = nil
+				var11()
 			end
 			
-			var15 = disconnectRuntime
+			var3 = disconnectRuntime
 			
 			return disconnectRuntime
 		end,
-		update = function(p17)
-			-- upvalues: var13 (write), initialHostConfiguration (write), initialHostTarget (write), var23 (ref), dispatch (ref), viewRecyclerModule (copy), var17 (write), applyCorePolicy (copy), record (copy), frozen (copy), var19 (write)
-			if var13 then return end
-			local hostConfiguration = p17.hostConfiguration
-			local hostTarget = p17.hostTarget
-			local var30 = hostConfiguration.dataSource ~= initialHostConfiguration.dataSource
-			local var31 = hostConfiguration.layout ~= initialHostConfiguration.layout
-			local var32 = hostTarget.scrollingFrame ~= initialHostTarget.scrollingFrame
-			local var32_1 = var32 or (if hostTarget.viewportOverlay == initialHostTarget.viewportOverlay then if hostConfiguration.axis == initialHostConfiguration.axis then var31 else true else true)
+		update = function(p7)
+			-- upvalues: var1 (write), initialHostConfiguration (write), initialHostTarget (write), var9 (ref), dispatch (ref), viewRecyclerModule (copy), var4 (write), applyCorePolicy (copy), record (copy), frozen (copy), var6 (write)
+			if var1 then return end
+			local hostConfiguration = p7.hostConfiguration
+			local hostTarget = p7.hostTarget
+			local var11 = hostConfiguration.dataSource ~= initialHostConfiguration.dataSource
+			local var12 = hostConfiguration.layout ~= initialHostConfiguration.layout
+			local var13 = hostTarget.scrollingFrame ~= initialHostTarget.scrollingFrame
+			local var14 = var13 or (if hostTarget.viewportOverlay == initialHostTarget.viewportOverlay then if hostConfiguration.axis == initialHostConfiguration.axis then var12 else true else true)
 			initialHostConfiguration = hostConfiguration
 			initialHostTarget = hostTarget
 			
-			if var30 or var31 then
-				var23.cancelPendingMeasurements()
+			if var11 or var12 then
+				var9.cancelPendingMeasurements()
 				
-				if var30 and var31 then
+				if var11 and var12 then
 					dispatch({
 						type = viewRecyclerModule.VirtualizerCommandType.SetDataSourceAndLayout,
 						dataSource = hostConfiguration.dataSource,
 						layout = hostConfiguration.layout
 					})
-				elseif var30 then
+				elseif var11 then
 					dispatch({
 						type = viewRecyclerModule.VirtualizerCommandType.SetDataSource,
 						dataSource = hostConfiguration.dataSource
@@ -250,149 +250,149 @@ local function createRuntime(p8, p9, p10)
 					})
 				end
 			end
-			if var32_1 then
-				var23.setConfiguration({
+			if var14 then
+				var9.setConfiguration({
 					container = hostTarget.scrollingFrame,
 					viewportContainer = hostTarget.viewportOverlay,
 					axis = hostConfiguration.axis,
 					selfSizing = hostConfiguration.layout.requiresItemMeasurement()
 				})
 			end
-			var17 = applyCorePolicy(dispatch, var17, p17.corePolicy)
+			var4 = applyCorePolicy(dispatch, var4, p7.corePolicy)
 			
 			if record.containsEqual(initialHostConfiguration, hostConfiguration, frozen) then
-				var19.configurationChanged()
+				var6.configurationChanged()
 			end
-			if var32 then
-				var19.hostChanged()
+			if var13 then
+				var6.hostChanged()
 			end
 		end,
-		isHostReady = var19.isHostReady,
+		isHostReady = var6.isHostReady,
 		destroy = function()
-			-- upvalues: var13 (write), var15 (write), dispatch (ref), viewRecyclerModule (copy), var23 (ref)
-			if var13 then return end
-			var13 = true
+			-- upvalues: var1 (write), var3 (write), dispatch (ref), viewRecyclerModule (copy), var9 (ref)
+			if var1 then return end
+			var1 = true
 			
-			if var15 ~= nil then
-				var15()
-				var15 = nil
+			if var3 ~= nil then
+				var3()
+				var3 = nil
 			end
 			dispatch({ type = viewRecyclerModule.VirtualizerCommandType.Destroy })
-			var23.destroy()
+			var9.destroy()
 		end
 	}
 end
 
-function t_1.newForRecyclableViewRecords(p18, p19)
+function t_1.newForRecyclableViewRecords(p6, p7)
 	-- upvalues: createRuntime (ref)
-	return createRuntime(p18, function(p20, p21)
+	return createRuntime(p6, function(p8, p9)
 		local tbl = setmetatable({}, { __mode = "k" })
 		
-		local function _(p22)
-			-- upvalues: tbl (ref), p20 (ref)
-			local var35 = tbl[p22]
+		local function _(p10)
+			-- upvalues: tbl (ref), p8 (ref)
+			local var8 = tbl[p10]
 			
-			if var35 == nil then
-				var35 = {
-					apply = function(p23)
-						-- upvalues: p20 (copy), p22 (ref)
-						p20.applyHostState(p22, p23)
+			if var8 == nil then
+				var8 = {
+					apply = function(p11)
+						-- upvalues: p8 (copy), p10 (ref)
+						p8.applyHostState(p10, p11)
 					end
 				}
-				tbl[p22] = var35
+				tbl[p10] = var8
 			end
-			return var35
+			return var8
 		end
 		
 		return {
 			present = nil,
-			prepare = function(p24, p25)
-				-- upvalues: tbl (ref), p20 (ref)
-				if p25 == nil then
-					p24.bindPlacement(nil, nil)
+			prepare = function(p10, p11)
+				-- upvalues: tbl (ref), p8 (ref)
+				if p11 == nil then
+					p10.bindPlacement(nil, nil)
 					
 					return
 				end
-				local bindPlacement = p24.bindPlacement
-				local var36 = "list"
-				local var37 = tbl[p24]
+				local bindPlacement = p10.bindPlacement
+				local var8 = "list"
+				local var9 = tbl[p10]
 				
-				if var37 == nil then
-					var37 = {
-						apply = function(p26)
-							-- upvalues: p20 (copy), p24 (ref)
-							p20.applyHostState(p24, p26)
+				if var9 == nil then
+					var9 = {
+						apply = function(p12)
+							-- upvalues: p8 (copy), p10 (ref)
+							p8.applyHostState(p10, p12)
 						end
 					}
-					tbl[p24] = var37
+					tbl[p10] = var9
 				end
-				bindPlacement(var36, var37)
+				bindPlacement(var8, var9)
 			end,
-			postCommit = function(p27, p28)
-				-- upvalues: p21 (ref)
-				local set = p27.set
+			postCommit = function(p10, p11)
+				-- upvalues: p9 (ref)
+				local set = p10.set
 				
 				if set ~= nil then
-					set(p28)
+					set(p11)
 				end
-				local prepareItemViewAssignment = p21.prepareItemViewAssignment
+				local prepareItemViewAssignment = p9.prepareItemViewAssignment
 				
 				if prepareItemViewAssignment ~= nil then
-					prepareItemViewAssignment(p27, p28)
+					prepareItemViewAssignment(p10, p11)
 				end
-				local onItemViewAssignmentChanged = p21.onItemViewAssignmentChanged
+				local onItemViewAssignmentChanged = p9.onItemViewAssignmentChanged
 				
 				if onItemViewAssignmentChanged ~= nil then
-					onItemViewAssignmentChanged(p27, p28)
+					onItemViewAssignmentChanged(p10, p11)
 				end
 			end
 		}
-	end, p19)
+	end, p7)
 end
 
-function t_1.newForGuiObjects(p29, p30)
+function t_1.newForGuiObjects(p6, p7)
 	-- upvalues: createRuntime (ref)
-	return createRuntime(p29, function(p31, p32)
-		-- upvalues: p29 (ref)
+	return createRuntime(p6, function(p8, p9)
+		-- upvalues: p6 (ref)
 		return {
-			prepare = function(p33, p34)
-				-- upvalues: p31 (ref), p29 (copy)
-				if p34 == nil then
-					p31.applyHostState(p33, nil)
+			prepare = function(p10, p11)
+				-- upvalues: p8 (ref), p6 (copy)
+				if p11 == nil then
+					p8.applyHostState(p10, nil)
 					
 					return
 				end
-				p31.applyHostState(p33, {
+				p8.applyHostState(p10, {
 					phase = "hidden",
 					visible = false,
-					host = p29.getGuiObject(p33),
-					assignment = p34
+					host = p6.getGuiObject(p10),
+					assignment = p11
 				})
 			end,
-			postCommit = function(p35, p36)
-				-- upvalues: p32 (ref)
-				local prepareItemViewAssignment = p32.prepareItemViewAssignment
+			postCommit = function(p10, p11)
+				-- upvalues: p9 (ref)
+				local prepareItemViewAssignment = p9.prepareItemViewAssignment
 				
 				if prepareItemViewAssignment ~= nil then
-					prepareItemViewAssignment(p35, p36)
+					prepareItemViewAssignment(p10, p11)
 				end
-				local onItemViewAssignmentChanged = p32.onItemViewAssignmentChanged
+				local onItemViewAssignmentChanged = p9.onItemViewAssignmentChanged
 				
 				if onItemViewAssignmentChanged ~= nil then
-					onItemViewAssignmentChanged(p35, p36)
+					onItemViewAssignmentChanged(p10, p11)
 				end
 			end,
-			present = function(p37, p38)
-				-- upvalues: p31 (ref), p29 (copy)
-				p31.applyHostState(p37, {
+			present = function(p10, p11)
+				-- upvalues: p8 (ref), p6 (copy)
+				p8.applyHostState(p10, {
 					phase = "presented",
 					visible = true,
-					host = p29.getGuiObject(p37),
-					assignment = p38
+					host = p6.getGuiObject(p10),
+					assignment = p11
 				})
 			end
 		}
-	end, p30)
+	end, p7)
 end
 
 return t_1

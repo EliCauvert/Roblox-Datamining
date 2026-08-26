@@ -14,16 +14,16 @@ local t = {
 	[Enum.KeyCode.RightBracket] = focusNavigationEventNameEnum.ScrollDown
 }
 
-local function _(p0)
-	return if p0 == nil then nil elseif p0:IsA("ScrollingFrame") then p0 else p0:FindFirstAncestorWhichIsA("ScrollingFrame")
+local function _(p1)
+	return if p1 == nil then nil elseif p1:IsA("ScrollingFrame") then p1 else p1:FindFirstAncestorWhichIsA("ScrollingFrame")
 end
 
 local _ = function(p1, p2)
 	if p1 ~= nil then
-		local var3 = p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y
+		local var1 = p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y
 		
-		if p2 > 0 and var3 - 350 <= p1.CanvasPosition.Y then
-			p1.CanvasPosition = Vector2.new(0, var3)
+		if p2 > 0 and var1 - 350 <= p1.CanvasPosition.Y then
+			p1.CanvasPosition = Vector2.new(0, var1)
 			
 			return
 		elseif p2 < 0 and p1.CanvasPosition.Y <= 350 then
@@ -35,58 +35,58 @@ local _ = function(p1, p2)
 	end
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: useFocusedGuiObject (ref), useMemo (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), t (ref)
-	local var4 = useFocusedGuiObject()
-	local var5 = if var4 == nil then nil elseif var4:IsA("ScrollingFrame") then var4 else var4:FindFirstAncestorWhichIsA("ScrollingFrame")
+	local var1 = useFocusedGuiObject()
+	local var2 = if var1 == nil then nil elseif var1:IsA("ScrollingFrame") then var1 else var1:FindFirstAncestorWhichIsA("ScrollingFrame")
 	
 	return useFocusRoot({
-		surfaceIdentifier = p3.surfaceIdentifier,
-		isAutoFocusRoot = p3.isAutoFocusRoot == nil or p3.isAutoFocusRoot,
+		surfaceIdentifier = p1.surfaceIdentifier,
+		isAutoFocusRoot = p1.isAutoFocusRoot == nil or p1.isAutoFocusRoot,
 		eventMap = t,
 		eventHandlers = useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var5 (ref)
+			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var2 (ref)
 			local t = {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onPress(function(p4)
-						p4:cancel()
+					handler = inputHandlersModule.onPress(function(p2)
+						p2:cancel()
 					end)
 				}
 			}
 			
-			if var5 then
+			if var2 then
 				t[focusNavigationEventNameEnum.ScrollDown] = {
 					handler = inputHandlersModule.onRelease(function(_)
-						-- upvalues: var5 (copy)
-						if var5 ~= nil then
-							local var7 = var5.AbsoluteCanvasSize.Y - var5.AbsoluteWindowSize.Y
+						-- upvalues: var2 (copy)
+						if var2 ~= nil then
+							local var3 = var2.AbsoluteCanvasSize.Y - var2.AbsoluteWindowSize.Y
 							
-							if var7 - 350 <= var5.CanvasPosition.Y then
-								var5.CanvasPosition = Vector2.new(0, var7)
+							if var3 - 350 <= var2.CanvasPosition.Y then
+								var2.CanvasPosition = Vector2.new(0, var3)
 								
 								return
 							end
-							var5.CanvasPosition += Vector2.new(0, 300)
+							var2.CanvasPosition += Vector2.new(0, 300)
 						end
 					end)
 				}
 				t[focusNavigationEventNameEnum.ScrollUp] = {
 					handler = inputHandlersModule.onRelease(function(_)
-						-- upvalues: var5 (copy)
-						if var5 ~= nil then
-							local _ = var5.AbsoluteCanvasSize.Y - var5.AbsoluteWindowSize.Y
+						-- upvalues: var2 (copy)
+						if var2 ~= nil then
+							local _ = var2.AbsoluteCanvasSize.Y - var2.AbsoluteWindowSize.Y
 							
-							if var5.CanvasPosition.Y <= 350 then
-								var5.CanvasPosition = Vector2.new(0, 0)
+							if var2.CanvasPosition.Y <= 350 then
+								var2.CanvasPosition = Vector2.new(0, 0)
 								
 								return
 							end
-							var5.CanvasPosition += Vector2.new(0, -300)
+							var2.CanvasPosition += Vector2.new(0, -300)
 						end
 					end)
 				}
 			end
 			return t
-		end, { var5 })
+		end, { var2 })
 	})
 end

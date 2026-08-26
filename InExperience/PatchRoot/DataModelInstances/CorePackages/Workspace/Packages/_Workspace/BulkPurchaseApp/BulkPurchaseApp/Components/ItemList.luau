@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local catalogRowItemCard = require(parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogRowItemCard
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), catalogRowItemCard (ref)
 	local var1 = useTokens()
 	local t = {
@@ -16,7 +16,7 @@ return function(p0)
 	}
 	local size1200 = var1.Size.Size_1200
 	
-	for i, v in p0.items do
+	for i, v in p1.items do
 		t[v.id] = reactModule.createElement(catalogRowItemCard, {
 			LayoutOrder = i,
 			title = v.title,
@@ -30,7 +30,7 @@ return function(p0)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, t)

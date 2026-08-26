@@ -10,33 +10,33 @@ local compositionTags = require(parent.AppComposition).CompositionTags
 local fetchDevStoreSeeAllPageIfNeededModule = require(devStore.DevStoreSeeAllPage.fetchDevStoreSeeAllPageIfNeeded)
 local getDevStoreSeeAllPageKeyModule = require(devStore.DevStoreSeeAllPage.getDevStoreSeeAllPageKey)
 
-local function _(p0, p1)
-	return p0[p1] or p0.navigation and p0.navigation.getParam(p1)
+local function _(p1, p2)
+	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-return reactModule.memo(function(p2)
+return reactModule.memo(function(p1)
 	-- upvalues: getDevStoreSeeAllPageKeyModule (ref), useLocalization (ref), reactModule (ref), sduiLoadTimer (ref), fetchDevStoreSeeAllPageIfNeededModule (ref), sduiPageEntryPoint (ref), compositionTags (ref)
-	local universeId = p2.universeId or p2.navigation and p2.navigation.getParam("universeId")
-	local var6 = getDevStoreSeeAllPageKeyModule(universeId)
-	local var7 = useLocalization({ pageTitle = "Feature.GameDetails.Label.Store" })
-	local pageTimer = p2.pageTimer or p2.navigation and p2.navigation.getParam("pageTimer")
-	local var9 = reactModule.useMemo(function()
+	local universeId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
+	local var1 = getDevStoreSeeAllPageKeyModule(universeId)
+	local var2 = useLocalization({ pageTitle = "Feature.GameDetails.Label.Store" })
+	local pageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: pageTimer (ref), sduiLoadTimer (copy)
 		return pageTimer or sduiLoadTimer.createLoadTimer("DevStoreSeeAll")
-	end, { var6, pageTimer })
+	end, { var1, pageTimer })
 	reactModule.useEffect(function()
-		-- upvalues: universeId (ref), fetchDevStoreSeeAllPageIfNeededModule (copy), var9 (ref)
+		-- upvalues: universeId (ref), fetchDevStoreSeeAllPageIfNeededModule (copy), var3 (ref)
 		if universeId then
-			fetchDevStoreSeeAllPageIfNeededModule(universeId, var9)
+			fetchDevStoreSeeAllPageIfNeededModule(universeId, var3)
 		end
-	end, { universeId, var9 })
+	end, { universeId, var3 })
 	
 	return if universeId == nil then nil else reactModule.createElement(sduiPageEntryPoint, {
 		appPage = "DevStoreSeeAll",
 		includeNavigationHeaderBar = true,
-		configKey = var6,
-		pageTimer = var9,
-		pageTitle = var7.pageTitle,
+		configKey = var1,
+		pageTimer = var3,
+		pageTitle = var2.pageTitle,
 		refresh = reactModule.useCallback(function()
 			-- upvalues: universeId (ref), sduiLoadTimer (copy), fetchDevStoreSeeAllPageIfNeededModule (copy)
 			if universeId then

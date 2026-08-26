@@ -61,179 +61,179 @@ genericSlider.defaultProps = {
 	customKnobBorderColor = Color3.new(0, 0, 0)
 }
 
-function genericSlider.init(p0)
+function genericSlider.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.rootRef = p0.props.imageButtonRef or roactModule.createRef()
-	p0.lowerKnobRef = roactModule.createRef()
-	p0.upperKnobRef = roactModule.createRef()
-	p0.moveDirection = 0
-	p0.lowerKnobDrag = false
-	p0.upperKnobDrag = false
-	p0.totalMoveTime = 0
-	p0.isFirstMove = true
-	p0.unhandledTime = 0
-	p0.state = { lowerKnobIsSelected = false, upperKnobIsSelected = false }
+	p1.rootRef = p1.props.imageButtonRef or roactModule.createRef()
+	p1.lowerKnobRef = roactModule.createRef()
+	p1.upperKnobRef = roactModule.createRef()
+	p1.moveDirection = 0
+	p1.lowerKnobDrag = false
+	p1.upperKnobDrag = false
+	p1.totalMoveTime = 0
+	p1.isFirstMove = true
+	p1.unhandledTime = 0
+	p1.state = { lowerKnobIsSelected = false, upperKnobIsSelected = false }
 end
 
 function genericSlider.getKnobVisibleHeight(p1)
 	return if p1.props.customKnobHeight then (44 - p1.props.knobImagePadding * 2) / 44 * p1.props.customKnobHeight else 44 - p1.props.knobImagePadding * 2
 end
 
-function genericSlider.getKnobHeight(p2)
-	return if p2.props.customKnobHeight then 44 / (44 - p2.props.knobImagePadding * 2) * p2.props.customKnobHeight else 44
+function genericSlider.getKnobHeight(p1)
+	return if p1.props.customKnobHeight then 44 / (44 - p1.props.knobImagePadding * 2) * p1.props.customKnobHeight else 44
 end
 
-function genericSlider.onMoveStep(p3, p4, p5)
-	if not p3.state.lowerKnobIsSelected and not p3.state.upperKnobIsSelected then return end
-	local var13, var14, var15
-	local position = p4[Enum.KeyCode.Thumbstick1].Position
-	local var11 = position.Magnitude > 0.2
-	local var12 = 0
+function genericSlider.onMoveStep(p1, p2, p3)
+	if not p1.state.lowerKnobIsSelected and not p1.state.upperKnobIsSelected then return end
+	local var1, var2, var3
+	local position = p2[Enum.KeyCode.Thumbstick1].Position
+	local var4 = position.Magnitude > 0.2
+	local var5 = 0
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	p3.totalMoveTime += p5
+	p1.totalMoveTime += p3
 	
-	if var11 then
-		var13 = if position.x > 0 then 1 else -1
-		var14 = 0.2
-		var15 = 12
+	if var4 then
+		var1 = if position.x > 0 then 1 else -1
+		var2 = 0.2
+		var3 = 12
 	else
-		var13 = (if p4[Enum.KeyCode.DPadLeft].UserInputState == Enum.UserInputState.Begin then -1 else 0) + (if p4[Enum.KeyCode.DPadRight].UserInputState == Enum.UserInputState.Begin then 1 else 0)
-		var14 = 0.5
-		var15 = 8
+		var1 = (if p2[Enum.KeyCode.DPadLeft].UserInputState == Enum.UserInputState.Begin then -1 else 0) + (if p2[Enum.KeyCode.DPadRight].UserInputState == Enum.UserInputState.Begin then 1 else 0)
+		var2 = 0.5
+		var3 = 8
 	end
-	if var13 == 0 then
-		p3.totalMoveTime = 0
-		p3.isFirstMove = true
-	elseif p3.isFirstMove then
-		p3.isFirstMove = false
-		p3.totalMoveTime = 0
-		p3.unhandledTime = 0
-		var12 = 1
-	elseif var14 < p3.totalMoveTime then
-		local var16 = p5 - math.max(var14 - p3.totalMoveTime - p5, 0) + p3.unhandledTime
-		var12 = math.floor(var15 * var16)
-		p3.unhandledTime = var16 - var12 / var15
+	if var1 == 0 then
+		p1.totalMoveTime = 0
+		p1.isFirstMove = true
+	elseif p1.isFirstMove then
+		p1.isFirstMove = false
+		p1.totalMoveTime = 0
+		p1.unhandledTime = 0
+		var5 = 1
+	elseif var2 < p1.totalMoveTime then
+		local var6 = p3 - math.max(var2 - p1.totalMoveTime - p3, 0) + p1.unhandledTime
+		var5 = math.floor(var3 * var6)
+		p1.unhandledTime = var6 - var5 / var3
 	else
-		var12 = 0
-		p3.unhandledTime = 0
+		var5 = 0
+		p1.unhandledTime = 0
 	end
-	if var12 > 0 then
-		p3:processGamepadInput(var13, var12)
+	if var5 > 0 then
+		p1:processGamepadInput(var1, var5)
 	end
 end
 
-function genericSlider.processGamepadInput(p6, p7, p8)
-	if p6:hasTwoKnobs() then
-		p6:processTwoKnobGamepadInput(p7, p8)
+function genericSlider.processGamepadInput(p1, p2, p3)
+	if p1:hasTwoKnobs() then
+		p1:processTwoKnobGamepadInput(p2, p3)
 		
 		return
 	end
-	p6:processOneKnobGamepadInput(p7, p8)
+	p1:processOneKnobGamepadInput(p2, p3)
 end
 
-function genericSlider.processTwoKnobGamepadInput(p9, p10, p11)
-	local var17 = p9.props.stepInterval * p10
-	local lowerValue = p9.props.lowerValue
-	local upperValue = p9.props.upperValue
+function genericSlider.processTwoKnobGamepadInput(p1, p2, p3)
+	local var1 = p1.props.stepInterval * p2
+	local lowerValue = p1.props.lowerValue
+	local upperValue = p1.props.upperValue
 	
-	if lowerValue == upperValue and not p9.state.processingGamepad then
-		if p9.state.lowerKnobIsSelected and p10 == 1 and lowerValue ~= p9.props.max then
-			p9:setState({
+	if lowerValue == upperValue and not p1.state.processingGamepad then
+		if p1.state.lowerKnobIsSelected and p2 == 1 and lowerValue ~= p1.props.max then
+			p1:setState({
 				lowerKnobIsSelected = false,
 				upperKnobIsSelected = true,
 				processingGamepad = true
 			})
-			p9.props.focusController.moveFocusTo(p9.upperKnobRef)
-		elseif p9.state.upperKnobIsSelected and p10 == -1 and upperValue ~= p9.props.min then
-			p9:setState({
+			p1.props.focusController.moveFocusTo(p1.upperKnobRef)
+		elseif p1.state.upperKnobIsSelected and p2 == -1 and upperValue ~= p1.props.min then
+			p1:setState({
 				lowerKnobIsSelected = true,
 				upperKnobIsSelected = false,
 				processingGamepad = true
 			})
-			p9.props.focusController.moveFocusTo(p9.lowerKnobRef)
+			p1.props.focusController.moveFocusTo(p1.lowerKnobRef)
 		end
-	elseif not p9.state.processingGamepad then
-		p9:setState({ processingGamepad = true })
+	elseif not p1.state.processingGamepad then
+		p1:setState({ processingGamepad = true })
 	end
-	if p9.state.lowerKnobIsSelected then
-		local maxValue = math.max(math.min(lowerValue + var17 * p11, p9.props.max), p9.props.min)
+	if p1.state.lowerKnobIsSelected then
+		local maxValue = math.max(math.min(lowerValue + var1 * p3, p1.props.max), p1.props.min)
 		lowerValue = if maxValue <= upperValue then maxValue else upperValue
-	elseif p9.state.upperKnobIsSelected then
-		local maxValue = math.max(math.min(upperValue + var17 * p11, p9.props.max), p9.props.min)
+	elseif p1.state.upperKnobIsSelected then
+		local maxValue = math.max(math.min(upperValue + var1 * p3, p1.props.max), p1.props.min)
 		upperValue = if lowerValue <= maxValue then maxValue else lowerValue
 	end
-	if upperValue ~= p9.props.upperValue or lowerValue ~= p9.props.lowerValue then
-		p9.props.onValueChanged(lowerValue, upperValue)
+	if upperValue ~= p1.props.upperValue or lowerValue ~= p1.props.lowerValue then
+		p1.props.onValueChanged(lowerValue, upperValue)
 	end
 end
 
-function genericSlider.processOneKnobGamepadInput(p12, p13, p14)
-	local var20 = p12.props.stepInterval * p13
-	local lowerValue = p12.props.lowerValue
+function genericSlider.processOneKnobGamepadInput(p1, p2, p3)
+	local var1 = p1.props.stepInterval * p2
+	local lowerValue = p1.props.lowerValue
 	
-	if p12.state.lowerKnobIsSelected then
-		lowerValue = math.max(math.min(lowerValue + var20 * p14, p12.props.max), p12.props.min)
+	if p1.state.lowerKnobIsSelected then
+		lowerValue = math.max(math.min(lowerValue + var1 * p3, p1.props.max), p1.props.min)
 	end
-	if lowerValue ~= p12.props.lowerValue then
-		p12.props.onValueChanged(lowerValue)
+	if lowerValue ~= p1.props.lowerValue then
+		p1.props.onValueChanged(lowerValue)
 	end
 end
 
-function genericSlider.renderTrack(p15, p16, p17, p18)
+function genericSlider.renderTrack(p1, p2, p3, p4)
 	-- upvalues: roactModule (ref), imageSetComponentModule (ref)
-	return if p15.props.customTrack then p15.props.customTrack else roactModule.createElement(imageSetComponentModule.Label, {
+	return if p1.props.customTrack then p1.props.customTrack else roactModule.createElement(imageSetComponentModule.Label, {
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		ImageColor3 = p15.props.trackColor,
-		ImageTransparency = p15.props.trackTransparency,
-		Image = p15.props.trackImage,
+		ImageColor3 = p1.props.trackColor,
+		ImageTransparency = p1.props.trackTransparency,
+		Image = p1.props.trackImage,
 		Size = UDim2.new(1, 0, 0, 4),
 		Position = UDim2.fromScale(0.5, 0.5),
 		ScaleType = Enum.ScaleType.Slice,
-		SliceCenter = p15.props.trackSliceCenter
+		SliceCenter = p1.props.trackSliceCenter
 	}, {
 		TrackFill = roactModule.createElement(imageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
-			ImageColor3 = p15.props.trackFillColor,
-			ImageTransparency = p15.props.trackFillTransparency,
-			Image = p15.props.trackFillImage,
-			Size = p16,
-			Position = p17 and UDim2.new(p18, 0, 0, 0) or UDim2.new(0, 0, 0, 0),
+			ImageColor3 = p1.props.trackFillColor,
+			ImageTransparency = p1.props.trackFillTransparency,
+			Image = p1.props.trackFillImage,
+			Size = p2,
+			Position = p3 and UDim2.new(p4, 0, 0, 0) or UDim2.new(0, 0, 0, 0),
 			ScaleType = Enum.ScaleType.Slice,
-			SliceCenter = p15.props.trackFillSliceCenter
+			SliceCenter = p1.props.trackFillSliceCenter
 		})
 	})
 end
 
-function genericSlider.wrapKnobWithBorder(p19, p20, p21)
+function genericSlider.wrapKnobWithBorder(p1, p2, p3)
 	-- upvalues: roactModule (ref)
-	local var21 = if p19.props.customKnobHeight then p19.props.customKnobHeight else p19:getKnobVisibleHeight()
+	local var1 = if p1.props.customKnobHeight then p1.props.customKnobHeight else p1:getKnobVisibleHeight()
 	
 	return roactModule.createElement("Frame", {
 		ZIndex = 3,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Size = UDim2.fromOffset(var21, var21),
-		Position = p21,
-		BackgroundColor3 = p19.props.customKnobBorderColor
+		Size = UDim2.fromOffset(var1, var1),
+		Position = p3,
+		BackgroundColor3 = p1.props.customKnobBorderColor
 	}, {
 		UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
-		KnobContent = p20
+		KnobContent = p2
 	})
 end
 
-function genericSlider.renderUpperKnob(p22, p23, p24, p25, _)
+function genericSlider.renderUpperKnob(p1, p2, p3, p4, _)
 	-- upvalues: roactModule (ref), roactGamepadModule (ref), imageSetComponentModule (ref)
-	if not p25 then
+	if not p4 then
 		return nil
 	end
-	local knobHeight = p22:getKnobHeight()
-	local var23 = p23
+	local knobHeight = p1:getKnobHeight()
+	local var1 = p2
 	
-	if p22.props.customKnobBorderSize and p22.props.customKnobBorderSize > 0 then
-		knobHeight -= 2 * (p22.props.customKnobBorderSize + 2)
-		var23 = UDim2.fromScale(0.5, 0.5)
+	if p1.props.customKnobBorderSize and p1.props.customKnobBorderSize > 0 then
+		knobHeight -= 2 * (p1.props.customKnobBorderSize + 2)
+		var1 = UDim2.fromScale(0.5, 0.5)
 	end
 	local lowerKnobRef
 	local createElement = roactModule.createElement
@@ -241,64 +241,64 @@ function genericSlider.renderUpperKnob(p22, p23, p24, p25, _)
 	local t = {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		BackgroundTransparency = 1,
-		ImageColor3 = p22.props.knobColorUpper,
-		ImageTransparency = p22.props.knobTransparency,
-		Image = p22.props.knobImage,
+		ImageColor3 = p1.props.knobColorUpper,
+		ImageTransparency = p1.props.knobTransparency,
+		Image = p1.props.knobImage,
 		Size = UDim2.fromOffset(knobHeight, knobHeight),
-		Position = var23,
+		Position = var1,
 		ZIndex = 3
 	}
 	
-	if not p24 and p22.props.upperValue ~= p22.props.lowerValue then
-		lowerKnobRef = p22.lowerKnobRef or nil
+	if not p3 and p1.props.upperValue ~= p1.props.lowerValue then
+		lowerKnobRef = p1.lowerKnobRef or nil
 	end
 	t.NextSelectionLeft = lowerKnobRef
-	t.NextSelectionRight = if p24 then p22.upperKnobRef else nil
-	t.NextSelectionUp = if p24 then p22.upperKnobRef else nil
-	t.NextSelectionDown = if p24 then p22.upperKnobRef else nil
-	t.SelectionImageObject = if p24 then p22.props.selectedCursor else p22.props.unselectedCursor
-	t[roactModule.Ref] = p22.upperKnobRef
+	t.NextSelectionRight = if p3 then p1.upperKnobRef else nil
+	t.NextSelectionUp = if p3 then p1.upperKnobRef else nil
+	t.NextSelectionDown = if p3 then p1.upperKnobRef else nil
+	t.SelectionImageObject = if p3 then p1.props.selectedCursor else p1.props.unselectedCursor
+	t[roactModule.Ref] = p1.upperKnobRef
 	
-	t[roactModule.Event.InputBegan] = function(_, p26)
-		-- upvalues: p22 (ref)
-		if p22.props.isDisabled then
+	t[roactModule.Event.InputBegan] = function(_, p5)
+		-- upvalues: p1 (ref)
+		if p1.props.isDisabled then
 			return
 		end
-		p22:onInputBegan(p26, true)
+		p1:onInputBegan(p5, true)
 	end
 	
 	t.inputBindings = {
-		OnMoveStep = roactGamepadModule.Input.onMoveStep(function(p27, p28)
-			-- upvalues: p22 (ref)
-			p22:onMoveStep(p27, p28)
+		OnMoveStep = roactGamepadModule.Input.onMoveStep(function(p5, p6)
+			-- upvalues: p1 (ref)
+			p1:onMoveStep(p5, p6)
 		end),
 		SelectUpperKnob = roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function()
-			-- upvalues: p22 (ref)
-			p22:setState(function(p29)
+			-- upvalues: p1 (ref)
+			p1:setState(function(p5)
 				return {
 					processingGamepad = false,
-					upperKnobIsSelected = not p29.upperKnobIsSelected
+					upperKnobIsSelected = not p5.upperKnobIsSelected
 				}
 			end)
 		end),
-		UnselectUpperKnob = p24 and roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonB, function()
-			-- upvalues: p22 (ref)
-			p22:setState({ upperKnobIsSelected = false, processingGamepad = false })
+		UnselectUpperKnob = p3 and roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonB, function()
+			-- upvalues: p1 (ref)
+			p1:setState({ upperKnobIsSelected = false, processingGamepad = false })
 		end) or nil
 	}
 	createElement = createElement(button, t)
 	
-	return if p22.props.customKnobBorderSize and p22.props.customKnobBorderSize > 0 then p22:wrapKnobWithBorder(createElement, p23) else createElement
+	return if p1.props.customKnobBorderSize and p1.props.customKnobBorderSize > 0 then p1:wrapKnobWithBorder(createElement, p2) else createElement
 end
 
-function genericSlider.renderLowerKnob(p30, p31, p32, p33, _)
+function genericSlider.renderLowerKnob(p1, p2, p3, p4, _)
 	-- upvalues: roactModule (ref), roactGamepadModule (ref), imageSetComponentModule (ref)
-	local knobHeight = p30:getKnobHeight()
-	local var27 = p31
+	local knobHeight = p1:getKnobHeight()
+	local var1 = p2
 	
-	if p30.props.customKnobBorderSize and p30.props.customKnobBorderSize > 0 then
-		knobHeight -= 2 * (p30.props.customKnobBorderSize + 2)
-		var27 = UDim2.fromScale(0.5, 0.5)
+	if p1.props.customKnobBorderSize and p1.props.customKnobBorderSize > 0 then
+		knobHeight -= 2 * (p1.props.customKnobBorderSize + 2)
+		var1 = UDim2.fromScale(0.5, 0.5)
 	end
 	local upperKnobRef
 	local createElement = roactModule.createElement
@@ -306,126 +306,126 @@ function genericSlider.renderLowerKnob(p30, p31, p32, p33, _)
 	local t = {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		BackgroundTransparency = 1,
-		ImageColor3 = p30.props.knobColorLower,
-		ImageTransparency = p30.props.knobTransparency,
-		Image = p30.props.knobImage,
+		ImageColor3 = p1.props.knobColorLower,
+		ImageTransparency = p1.props.knobTransparency,
+		Image = p1.props.knobImage,
 		Size = UDim2.fromOffset(knobHeight, knobHeight),
-		Position = var27,
+		Position = var1,
 		ZIndex = 3,
 		inputBindings = {
-			OnMoveStep = roactGamepadModule.Input.onMoveStep(function(p34, p35)
-				-- upvalues: p30 (ref)
-				p30:onMoveStep(p34, p35)
+			OnMoveStep = roactGamepadModule.Input.onMoveStep(function(p5, p6)
+				-- upvalues: p1 (ref)
+				p1:onMoveStep(p5, p6)
 			end),
 			SelectLowerKnob = roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function()
-				-- upvalues: p30 (ref)
-				p30:setState(function(p36)
+				-- upvalues: p1 (ref)
+				p1:setState(function(p5)
 					return {
 						processingGamepad = false,
-						lowerKnobIsSelected = not p36.lowerKnobIsSelected
+						lowerKnobIsSelected = not p5.lowerKnobIsSelected
 					}
 				end)
 			end),
-			UnselectLowerKnob = p32 and roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonB, function()
-				-- upvalues: p30 (ref)
-				p30:setState({ lowerKnobIsSelected = false, processingGamepad = false })
+			UnselectLowerKnob = p3 and roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonB, function()
+				-- upvalues: p1 (ref)
+				p1:setState({ lowerKnobIsSelected = false, processingGamepad = false })
 			end) or nil
 		},
-		NextSelectionLeft = if p32 then p30.lowerKnobRef else nil
+		NextSelectionLeft = if p3 then p1.lowerKnobRef else nil
 	}
 	
-	if p33 and not p32 and p30.props.upperValue ~= p30.props.lowerValue then
-		upperKnobRef = p30.upperKnobRef or nil
+	if p4 and not p3 and p1.props.upperValue ~= p1.props.lowerValue then
+		upperKnobRef = p1.upperKnobRef or nil
 	end
 	t.NextSelectionRight = upperKnobRef
-	t.NextSelectionUp = if p32 then p30.lowerKnobRef else nil
-	t.NextSelectionDown = if p32 then p30.lowerKnobRef else nil
-	t.SelectionImageObject = if p32 then p30.props.selectedCursor else p30.props.unselectedCursor
-	t[roactModule.Ref] = p30.lowerKnobRef
+	t.NextSelectionUp = if p3 then p1.lowerKnobRef else nil
+	t.NextSelectionDown = if p3 then p1.lowerKnobRef else nil
+	t.SelectionImageObject = if p3 then p1.props.selectedCursor else p1.props.unselectedCursor
+	t[roactModule.Ref] = p1.lowerKnobRef
 	
-	t[roactModule.Event.InputBegan] = function(_, p37)
-		-- upvalues: p30 (ref)
-		if p30.props.isDisabled then
+	t[roactModule.Event.InputBegan] = function(_, p5)
+		-- upvalues: p1 (ref)
+		if p1.props.isDisabled then
 			return
 		end
-		p30:onInputBegan(p37, true)
+		p1:onInputBegan(p5, true)
 	end
 	
 	createElement = createElement(button, t)
 	
-	return if p30.props.customKnobBorderSize and p30.props.customKnobBorderSize > 0 then p30:wrapKnobWithBorder(createElement, p31) else createElement
+	return if p1.props.customKnobBorderSize and p1.props.customKnobBorderSize > 0 then p1:wrapKnobWithBorder(createElement, p2) else createElement
 end
 
-function genericSlider.renderKnobShadow(p38, p39, p40)
+function genericSlider.renderKnobShadow(p1, p2, p3)
 	-- upvalues: roactModule (ref), imageSetComponentModule (ref)
 	return roactModule.createElement(imageSetComponentModule.Label, {
 		BackgroundTransparency = 1,
 		ZIndex = 2,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		ImageTransparency = p39,
-		Image = p38.props.knobShadowImage,
-		Size = UDim2.fromOffset(p38:getKnobHeight(), p38:getKnobHeight()),
-		Position = p40
+		ImageTransparency = p2,
+		Image = p1.props.knobShadowImage,
+		Size = UDim2.fromOffset(p1:getKnobHeight(), p1:getKnobHeight()),
+		Position = p3
 	})
 end
 
-function genericSlider.render(p41)
+function genericSlider.render(p1)
 	-- upvalues: lerpModule (ref), withSelectionCursorProviderModule (ref), roactModule (ref), roactGamepadModule (ref), imageSetComponentModule (ref)
-	local lowerKnobIsSelected = p41.state.lowerKnobIsSelected or p41.state.upperKnobIsSelected
-	local var31 = p41:hasTwoKnobs()
-	local var32 = (p41.props.lowerValue - p41.props.min) / (p41.props.max - p41.props.min)
-	local var33 = if var31 then (p41.props.upperValue - p41.props.min) / (p41.props.max - p41.props.min) else nil
-	local knobVisibleHeight = p41:getKnobVisibleHeight()
-	local uDim2 = UDim2.new(var32, lerpModule(knobVisibleHeight / 2, -knobVisibleHeight / 2, var32), 0.5, 0)
-	local var36 = var31 and UDim2.new(var33, var31 and lerpModule(knobVisibleHeight / 2, -knobVisibleHeight / 2, var33) or nil, 0.5, 0) or nil
-	local var37 = var31 and UDim2.fromScale(var33 - var32, 1) or UDim2.fromScale(var32, 1)
-	local lowerKnobIsSelected_1 = p41.state.lowerKnobIsSelected or p41.state.upperKnobIsSelected
+	local lowerKnobIsSelected = p1.state.lowerKnobIsSelected or p1.state.upperKnobIsSelected
+	local var1 = p1:hasTwoKnobs()
+	local var2 = (p1.props.lowerValue - p1.props.min) / (p1.props.max - p1.props.min)
+	local var3 = if var1 then (p1.props.upperValue - p1.props.min) / (p1.props.max - p1.props.min) else nil
+	local knobVisibleHeight = p1:getKnobVisibleHeight()
+	local uDim2 = UDim2.new(var2, lerpModule(knobVisibleHeight / 2, -knobVisibleHeight / 2, var2), 0.5, 0)
+	local var4 = var1 and UDim2.new(var3, var1 and lerpModule(knobVisibleHeight / 2, -knobVisibleHeight / 2, var3) or nil, 0.5, 0) or nil
+	local var5 = var1 and UDim2.fromScale(var3 - var2, 1) or UDim2.fromScale(var2, 1)
+	local lowerKnobIsSelected_1 = p1.state.lowerKnobIsSelected or p1.state.upperKnobIsSelected
 	
-	return withSelectionCursorProviderModule(function(p42)
-		-- upvalues: roactModule (copy), roactGamepadModule (copy), imageSetComponentModule (copy), p41 (ref), lowerKnobIsSelected_1 (ref), var37 (ref), var31 (ref), var32 (ref), uDim2 (ref), lowerKnobIsSelected (ref), var36 (ref)
+	return withSelectionCursorProviderModule(function(p2)
+		-- upvalues: roactModule (copy), roactGamepadModule (copy), imageSetComponentModule (copy), p1 (ref), lowerKnobIsSelected_1 (ref), var5 (ref), var1 (ref), var2 (ref), uDim2 (ref), lowerKnobIsSelected (ref), var4 (ref)
 		return roactModule.createElement(roactGamepadModule.Focusable[imageSetComponentModule.Button], {
 			BackgroundTransparency = 1,
-			AnchorPoint = p41.props.anchorPoint,
-			Size = UDim2.new(p41.props.width.Scale, p41.props.width.Offset, 0, 36),
-			LayoutOrder = p41.props.layoutOrder,
-			Position = p41.props.position,
-			[roactModule.Event.InputBegan] = function(_, p43)
-				-- upvalues: p41 (copy)
-				if p41.props.isDisabled then
+			AnchorPoint = p1.props.anchorPoint,
+			Size = UDim2.new(p1.props.width.Scale, p1.props.width.Offset, 0, 36),
+			LayoutOrder = p1.props.layoutOrder,
+			Position = p1.props.position,
+			[roactModule.Event.InputBegan] = function(_, p3)
+				-- upvalues: p1 (copy)
+				if p1.props.isDisabled then
 					return
 				end
-				p41:onInputBegan(p43, false)
+				p1:onInputBegan(p3, false)
 			end,
-			[roactModule.Ref] = p41.rootRef,
-			NextSelectionLeft = if lowerKnobIsSelected_1 then p41.rootRef else nil,
-			NextSelectionRight = if lowerKnobIsSelected_1 then p41.rootRef else nil,
-			NextSelectionUp = if not lowerKnobIsSelected_1 then p41.props.NextSelectionUp else p41.rootRef,
-			NextSelectionDown = if not lowerKnobIsSelected_1 then p41.props.NextSelectionDown else p41.rootRef,
-			defaultChild = if p41.props.upperValue ~= p41.props.min then p41.lowerKnobRef else p41.upperKnobRef or nil,
+			[roactModule.Ref] = p1.rootRef,
+			NextSelectionLeft = if lowerKnobIsSelected_1 then p1.rootRef else nil,
+			NextSelectionRight = if lowerKnobIsSelected_1 then p1.rootRef else nil,
+			NextSelectionUp = if not lowerKnobIsSelected_1 then p1.props.NextSelectionUp else p1.rootRef,
+			NextSelectionDown = if not lowerKnobIsSelected_1 then p1.props.NextSelectionDown else p1.rootRef,
+			defaultChild = if p1.props.upperValue ~= p1.props.min then p1.lowerKnobRef else p1.upperKnobRef or nil,
 			onFocusLost = function()
-				-- upvalues: p41 (copy)
-				if p41.state.lowerKnobIsSelected or p41.state.upperKnobIsSelected then
-					p41:setState({ lowerKnobIsSelected = false, upperKnobIsSelected = false })
+				-- upvalues: p1 (copy)
+				if p1.state.lowerKnobIsSelected or p1.state.upperKnobIsSelected then
+					p1:setState({ lowerKnobIsSelected = false, upperKnobIsSelected = false })
 				end
 			end
 		}, {
-			Track = p41:renderTrack(var37, var31, var32),
-			LowerKnob = p41:renderLowerKnob(uDim2, lowerKnobIsSelected, var31, p42),
-			LowerKnobShadow = p41:renderKnobShadow(p41.props.knobShadowTransparencyLower, uDim2),
-			UpperKnob = p41:renderUpperKnob(var36, lowerKnobIsSelected, var31, p42),
-			UpperKnobShadow = var31 and p41:renderKnobShadow(p41.props.knobShadowTransparencyUpper, var36) or nil
+			Track = p1:renderTrack(var5, var1, var2),
+			LowerKnob = p1:renderLowerKnob(uDim2, lowerKnobIsSelected, var1, p2),
+			LowerKnobShadow = p1:renderKnobShadow(p1.props.knobShadowTransparencyLower, uDim2),
+			UpperKnob = p1:renderUpperKnob(var4, lowerKnobIsSelected, var1, p2),
+			UpperKnobShadow = var1 and p1:renderKnobShadow(p1.props.knobShadowTransparencyUpper, var4) or nil
 		})
 	end)
 end
 
-function genericSlider.didMount(p44)
-	local current = p44.rootRef.current
+function genericSlider.didMount(p1)
+	local current = p1.rootRef.current
 	local ancestryChangedConnection = nil
 	ancestryChangedConnection = current.AncestryChanged:Connect(function()
-		-- upvalues: current (ref), ancestryChangedConnection (write), p44 (ref)
+		-- upvalues: current (ref), ancestryChangedConnection (write), p1 (ref)
 		if current:IsDescendantOf(game) then
 			ancestryChangedConnection:Disconnect()
-			p44.canUseUserInputService = current:FindFirstAncestorWhichIsA("PluginGui") == nil
+			p1.canUseUserInputService = current:FindFirstAncestorWhichIsA("PluginGui") == nil
 			
 			return
 		end
@@ -433,83 +433,83 @@ function genericSlider.didMount(p44)
 	
 	if current:IsDescendantOf(game) then
 		ancestryChangedConnection:Disconnect()
-		p44.canUseUserInputService = current:FindFirstAncestorWhichIsA("PluginGui") == nil
+		p1.canUseUserInputService = current:FindFirstAncestorWhichIsA("PluginGui") == nil
 	end
 end
 
-function genericSlider.didUpdate(p45, _, p46)
-	if p45.props.disabled then
-		p45:stopListeningForDrag()
+function genericSlider.didUpdate(p1, _, p2)
+	if p1.props.disabled then
+		p1:stopListeningForDrag()
 	end
-	if p45.props.onDragEnd ~= nil and (p46.lowerKnobIsSelected and not p45.state.lowerKnobIsSelected or p46.upperKnobIsSelected and not p45.state.upperKnobIsSelected) then
-		p45.props.onDragEnd()
+	if p1.props.onDragEnd ~= nil and (p2.lowerKnobIsSelected and not p1.state.lowerKnobIsSelected or p2.upperKnobIsSelected and not p1.state.upperKnobIsSelected) then
+		p1.props.onDragEnd()
 		
 		return
-	elseif p45.props.onDragStartLower ~= nil and not p46.lowerKnobIsSelected and p45.state.lowerKnobIsSelected then
-		p45.props.onDragStartLower()
+	elseif p1.props.onDragStartLower ~= nil and not p2.lowerKnobIsSelected and p1.state.lowerKnobIsSelected then
+		p1.props.onDragStartLower()
 		
 		return
-	elseif p45.props.onDragStartUpper ~= nil and not p46.upperKnobIsSelected and p45.state.upperKnobIsSelected then
-		p45.props.onDragStartUpper()
+	elseif p1.props.onDragStartUpper ~= nil and not p2.upperKnobIsSelected and p1.state.upperKnobIsSelected then
+		p1.props.onDragStartUpper()
 	end
 end
 
-function genericSlider.willUnmount(p47)
-	p47:stopListeningForDrag()
+function genericSlider.willUnmount(p1)
+	p1:stopListeningForDrag()
 end
 
-function genericSlider.onInputBegan(p48, p49, p50)
-	if p48.props.disabled then return end
-	if p49.UserInputState ~= Enum.UserInputState.Begin then return end
-	local userInputType = p49.UserInputType
+function genericSlider.onInputBegan(p1, p2, p3)
+	if p1.props.disabled then return end
+	if p2.UserInputState ~= Enum.UserInputState.Begin then return end
+	local userInputType = p2.UserInputType
 	
 	if userInputType ~= Enum.UserInputType.MouseButton1 and userInputType ~= Enum.UserInputType.Touch then return end
-	if userInputType == Enum.UserInputType.Touch and not p50 then
+	if userInputType == Enum.UserInputType.Touch and not p3 then
 		return
 	end
-	p48:processDrag(p49.Position.X)
-	p48:startListeningForDrag()
+	p1:processDrag(p2.Position.X)
+	p1:startListeningForDrag()
 end
 
-function genericSlider.startListeningForDrag(p51)
+function genericSlider.startListeningForDrag(p1)
 	-- upvalues: userInputService (ref)
-	local current = p51.rootRef.current
+	local current = p1.rootRef.current
 	
 	if current == nil then return end
-	if p51.dragging then return end
-	if p51.canUseUserInputService then
-		local var40 = function(p52)
-			-- upvalues: p51 (ref)
-			if not p51.dragging then return end
-			local userInputType = p52.UserInputType
+	if p1.dragging then return end
+	if p1.canUseUserInputService then
+		local var1 = function(p2)
+			-- upvalues: p1 (ref)
+			if not p1.dragging then return end
+			local userInputType = p2.UserInputType
 			
 			if userInputType ~= Enum.UserInputType.MouseMovement and userInputType ~= Enum.UserInputType.Touch then return end
-			if p52.UserInputState == Enum.UserInputState.Change then
-				p51:processDrag(p52.Position.X)
+			if p2.UserInputState == Enum.UserInputState.Change then
+				p1:processDrag(p2.Position.X)
 				
 				return
 			end
 		end
 		
-		if p51.props.containerRef then
-			p51.moveConnection = p51.props.containerRef.current.InputChanged:Connect(var40)
+		if p1.props.containerRef then
+			p1.moveConnection = p1.props.containerRef.current.InputChanged:Connect(var1)
 		else
-			p51.moveConnection = userInputService.InputChanged:Connect(var40)
+			p1.moveConnection = userInputService.InputChanged:Connect(var1)
 		end
-		p51.releaseConnection = userInputService.InputEnded:Connect(function(p53)
-			-- upvalues: p51 (ref)
-			local userInputType = p53.UserInputType
+		p1.releaseConnection = userInputService.InputEnded:Connect(function(p2)
+			-- upvalues: p1 (ref)
+			local userInputType = p2.UserInputType
 			
 			if userInputType ~= Enum.UserInputType.MouseButton1 and userInputType ~= Enum.UserInputType.Touch then return end
-			p51:stopListeningForDrag()
+			p1:stopListeningForDrag()
 			
-			if not p51.props.containerRef then
-				p51:processOneKnobDrag(p53.Position.X)
+			if not p1.props.containerRef then
+				p1:processOneKnobDrag(p2.Position.X)
 			end
 		end)
-		p51.focusLostConnection = userInputService.WindowFocusReleased:Connect(function()
-			-- upvalues: p51 (ref)
-			p51:stopListeningForDrag()
+		p1.focusLostConnection = userInputService.WindowFocusReleased:Connect(function()
+			-- upvalues: p1 (ref)
+			p1:stopListeningForDrag()
 		end)
 	else
 		local pluginGui = current:FindFirstAncestorWhichIsA("PluginGui")
@@ -519,134 +519,134 @@ function genericSlider.startListeningForDrag(p51)
 		sliderPluginGuiInputCapturer.Name = "SliderPluginGuiInputCapturer"
 		sliderPluginGuiInputCapturer.Size = UDim2.new(1, 0, 1, 0)
 		sliderPluginGuiInputCapturer.ZIndex = 100000
-		p51.moveConnection = sliderPluginGuiInputCapturer.MouseMoved:Connect(function(p54)
-			-- upvalues: p51 (ref)
-			p51:processDrag(p54)
+		p1.moveConnection = sliderPluginGuiInputCapturer.MouseMoved:Connect(function(p2)
+			-- upvalues: p1 (ref)
+			p1:processDrag(p2)
 		end)
-		p51.releaseConnection = sliderPluginGuiInputCapturer.MouseButton1Up:Connect(function(p55)
-			-- upvalues: p51 (ref)
-			p51:stopListeningForDrag()
-			p51:processOneKnobDrag(p55)
+		p1.releaseConnection = sliderPluginGuiInputCapturer.MouseButton1Up:Connect(function(p2)
+			-- upvalues: p1 (ref)
+			p1:stopListeningForDrag()
+			p1:processOneKnobDrag(p2)
 		end)
-		p51.focusLostConnection = sliderPluginGuiInputCapturer.MouseLeave:Connect(function(p56)
-			-- upvalues: p51 (ref)
-			p51:stopListeningForDrag()
-			p51:processOneKnobDrag(p56)
+		p1.focusLostConnection = sliderPluginGuiInputCapturer.MouseLeave:Connect(function(p2)
+			-- upvalues: p1 (ref)
+			p1:stopListeningForDrag()
+			p1:processOneKnobDrag(p2)
 		end)
 		sliderPluginGuiInputCapturer.Parent = pluginGui
-		p51.inputCapturerButton = sliderPluginGuiInputCapturer
+		p1.inputCapturerButton = sliderPluginGuiInputCapturer
 	end
-	p51.dragging = true
+	p1.dragging = true
 	
-	if p51.lowerKnobDrag and p51.props.onDragStartLower ~= nil then
-		p51.props.onDragStartLower()
+	if p1.lowerKnobDrag and p1.props.onDragStartLower ~= nil then
+		p1.props.onDragStartLower()
 	end
-	if p51.upperKnobDrag and p51.props.onDragStartUpper ~= nil then
-		p51.props.onDragStartUpper()
+	if p1.upperKnobDrag and p1.props.onDragStartUpper ~= nil then
+		p1.props.onDragStartUpper()
 	end
 end
 
-function genericSlider.getSteppedValue(p57, p58)
-	local current = p57.rootRef.current
+function genericSlider.getSteppedValue(p1, p2)
+	local current = p1.rootRef.current
 	
 	if current == nil then
 		return 0
 	end
-	local min = p57.props.min
-	local max = p57.props.max
-	local stepInterval = p57.props.stepInterval
+	local min = p1.props.min
+	local max = p1.props.max
+	local stepInterval = p1.props.stepInterval
 	local x = current.AbsoluteSize.X
 	
-	return math.floor((math.clamp(p58 - current.AbsolutePosition.X, 0, x) / x * (max - min) + min) / stepInterval + 0.5) * stepInterval
+	return math.floor((math.clamp(p2 - current.AbsolutePosition.X, 0, x) / x * (max - min) + min) / stepInterval + 0.5) * stepInterval
 end
 
-function genericSlider.processDrag(p59, p60)
-	if p59:hasTwoKnobs() then
-		p59:processTwoKnobDrag(p60)
+function genericSlider.processDrag(p1, p2)
+	if p1:hasTwoKnobs() then
+		p1:processTwoKnobDrag(p2)
 		
 		return
 	end
-	p59:processOneKnobDrag(p60)
+	p1:processOneKnobDrag(p2)
 end
 
-function genericSlider.processOneKnobDrag(p61, p62)
-	if p61:hasTwoKnobs() then return end
-	local var43 = p61:getSteppedValue(p62)
-	p61.lowerKnobDrag = true
+function genericSlider.processOneKnobDrag(p1, p2)
+	if p1:hasTwoKnobs() then return end
+	local var1 = p1:getSteppedValue(p2)
+	p1.lowerKnobDrag = true
 	
-	if var43 ~= p61.props.lowerValue then
-		p61.props.onValueChanged(var43)
+	if var1 ~= p1.props.lowerValue then
+		p1.props.onValueChanged(var1)
 	end
 end
 
-function genericSlider.processTwoKnobDrag(p63, p64)
-	local var44 = p63:getSteppedValue(p64)
-	local lowerValue = p63.props.lowerValue
-	local upperValue = p63.props.upperValue
+function genericSlider.processTwoKnobDrag(p1, p2)
+	local var1 = p1:getSteppedValue(p2)
+	local lowerValue = p1.props.lowerValue
+	local upperValue = p1.props.upperValue
 	
-	if not p63.lowerKnobDrag and not p63.upperKnobDrag then
-		if var44 == lowerValue then
-			p63.lowerKnobDrag = true
+	if not p1.lowerKnobDrag and not p1.upperKnobDrag then
+		if var1 == lowerValue then
+			p1.lowerKnobDrag = true
 		end
-		if var44 == upperValue then
-			p63.upperKnobDrag = true
+		if var1 == upperValue then
+			p1.upperKnobDrag = true
 		end
-	elseif p63.lowerKnobDrag and p63.upperKnobDrag then
-		if upperValue <= var44 - p63.props.stepInterval then
-			p63.upperKnobDrag = true
-			p63.lowerKnobDrag = false
-			upperValue = var44
-		elseif var44 + p63.props.stepInterval <= lowerValue then
-			p63.upperKnobDrag = false
-			p63.lowerKnobDrag = true
-			lowerValue = var44
+	elseif p1.lowerKnobDrag and p1.upperKnobDrag then
+		if upperValue <= var1 - p1.props.stepInterval then
+			p1.upperKnobDrag = true
+			p1.lowerKnobDrag = false
+			upperValue = var1
+		elseif var1 + p1.props.stepInterval <= lowerValue then
+			p1.upperKnobDrag = false
+			p1.lowerKnobDrag = true
+			lowerValue = var1
 		end
-	elseif p63.lowerKnobDrag then
-		if var44 <= upperValue then
-			lowerValue = var44
+	elseif p1.lowerKnobDrag then
+		if var1 <= upperValue then
+			lowerValue = var1
 		end
-	elseif p63.upperKnobDrag and lowerValue <= var44 then
-		upperValue = var44
+	elseif p1.upperKnobDrag and lowerValue <= var1 then
+		upperValue = var1
 	end
-	if upperValue ~= p63.props.upperValue or lowerValue ~= p63.props.lowerValue then
-		p63.props.onValueChanged(lowerValue, upperValue)
+	if upperValue ~= p1.props.upperValue or lowerValue ~= p1.props.lowerValue then
+		p1.props.onValueChanged(lowerValue, upperValue)
 	end
 end
 
-function genericSlider.stopListeningForDrag(p65)
-	if p65.moveConnection ~= nil then
-		p65.moveConnection:Disconnect()
-		p65.moveConnection = nil
+function genericSlider.stopListeningForDrag(p1)
+	if p1.moveConnection ~= nil then
+		p1.moveConnection:Disconnect()
+		p1.moveConnection = nil
 	end
-	if p65.releaseConnection ~= nil then
-		p65.releaseConnection:Disconnect()
-		p65.releaseConnection = nil
+	if p1.releaseConnection ~= nil then
+		p1.releaseConnection:Disconnect()
+		p1.releaseConnection = nil
 	end
-	if p65.focusLostConnection ~= nil then
-		p65.focusLostConnection:Disconnect()
-		p65.focusLostConnection = nil
+	if p1.focusLostConnection ~= nil then
+		p1.focusLostConnection:Disconnect()
+		p1.focusLostConnection = nil
 	end
-	if p65.inputCapturerButton ~= nil then
-		p65.inputCapturerButton:Destroy()
-		p65.inputCapturerButton = nil
+	if p1.inputCapturerButton ~= nil then
+		p1.inputCapturerButton:Destroy()
+		p1.inputCapturerButton = nil
 	end
-	p65.dragging = false
-	p65.lowerKnobDrag = false
-	p65.upperKnobDrag = false
+	p1.dragging = false
+	p1.lowerKnobDrag = false
+	p1.upperKnobDrag = false
 	
-	if p65.props.onDragEnd ~= nil then
-		p65.props.onDragEnd()
+	if p1.props.onDragEnd ~= nil then
+		p1.props.onDragEnd()
 	end
 end
 
-function genericSlider.hasTwoKnobs(p66)
-	return p66.props.upperValue ~= nil
+function genericSlider.hasTwoKnobs(p1)
+	return p1.props.upperValue ~= nil
 end
 
-return roactModule.forwardRef(function(p67, p68)
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), cryoModule (ref), roactModule (ref), genericSlider (ref)
-	return roactModule.createElement(genericSlider, cryoModule.Dictionary.join(cryoModule.Dictionary.join(p67, {
+	return roactModule.createElement(genericSlider, cryoModule.Dictionary.join(cryoModule.Dictionary.join(p1, {
 		selectedCursor = useCursorByTypeModule(cursorTypeModule.SelectedKnob),
 		unselectedCursor = useCursorByTypeModule(cursorTypeModule.UnselectedKnob)
-	}), { imageButtonRef = p68 }))
+	}), { imageButtonRef = p2 }))
 end)

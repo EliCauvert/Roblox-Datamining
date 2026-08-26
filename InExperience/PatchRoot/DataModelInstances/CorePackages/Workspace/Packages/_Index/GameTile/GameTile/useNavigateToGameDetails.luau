@@ -14,9 +14,9 @@ return function()
 	local var2 = useNavigation()
 	local var3 = if fFlagSduiEdpPrefetchPlayability and fFlagLuaAppSduiEdpEnabled then useRoactService(roactNetworking) else nil
 	
-	return reactModule.useCallback(function(p0, p1)
+	return reactModule.useCallback(function(p1, p2)
 		-- upvalues: var1 (ref), openGameDetails (copy), var2 (ref), fFlagSduiEdpPrefetchPlayability (copy), fFlagLuaAppSduiEdpEnabled (copy), var3 (write)
-		var1(openGameDetails(p0, var2, p1, if fFlagSduiEdpPrefetchPlayability and fFlagLuaAppSduiEdpEnabled then var3 else nil))
+		var1(openGameDetails(p1, var2, p2, if fFlagSduiEdpPrefetchPlayability and fFlagLuaAppSduiEdpEnabled then var3 else nil))
 	end, {
 		var1,
 		var2,

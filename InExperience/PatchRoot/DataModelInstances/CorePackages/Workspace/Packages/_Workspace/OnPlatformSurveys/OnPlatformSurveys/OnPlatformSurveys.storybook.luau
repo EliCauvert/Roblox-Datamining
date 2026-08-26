@@ -9,11 +9,11 @@ local device = foundationModule.Enums.Device
 local mockProvidersModule = require(onPlatformSurveys.MockProviders)
 local t = { Dark = colorMode.Dark, Light = colorMode.Light }
 
-local function _(p0, p1)
-	local cloned = table.clone(p0)
+local function _(p1, p2)
+	local cloned = table.clone(p1)
 	
-	if p1 then
-		for i, v in p1 do
+	if p2 then
+		for i, v in p2 do
 			cloned[i] = v
 		end
 	end
@@ -23,25 +23,25 @@ end
 return {
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p2)
+	mapStory = function(p3)
 		-- upvalues: reactModule (ref), mockProvidersModule (ref), foundationProvider (ref), t (ref), colorMode (ref), device (ref)
-		return function(p3)
-			-- upvalues: reactModule (copy), mockProvidersModule (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p2 (ref)
-			local var7 = if p3.definition then p3.definition.props else {}
-			local cloned = table.clone(p3)
+		return function(p4)
+			-- upvalues: reactModule (copy), mockProvidersModule (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p3 (ref)
+			local var1 = if p4.definition then p4.definition.props else {}
+			local cloned = table.clone(p4)
 			
-			if var7 then
-				for i, v in var7 do
+			if var1 then
+				for i, v in var1 do
 					cloned[i] = v
 				end
 			end
 			return reactModule.createElement(mockProvidersModule, {}, {
 				FoundationProvider = reactModule.createElement(foundationProvider, {
-					colorMode = t[p3.theme] or colorMode.Dark,
-					device = device[p3.platform] or device.Phone,
-					preferences = p3.settings,
-					overlayGui = p3.focus
-				}, { story = reactModule.createElement(p2, cloned) })
+					colorMode = t[p4.theme] or colorMode.Dark,
+					device = device[p4.platform] or device.Phone,
+					preferences = p4.settings,
+					overlayGui = p4.focus
+				}, { story = reactModule.createElement(p3, cloned) })
 			})
 		end
 	end,

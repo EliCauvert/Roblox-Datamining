@@ -12,7 +12,7 @@ local COLORS = require(corePackagesService.Workspace.Packages.CoreScriptsCommon)
 local constantsModule = require(shareGame.Constants)
 local gameInviteEvents = require(corePackagesService.Workspace.Packages.GameInvite).GameInviteEvents
 local inviteStatus = constantsModule.InviteStatus
-local var9 = require(shareGame.getTranslator)()
+local var1 = require(shareGame.getTranslator)()
 local httpRequestModule = require(modules.Common.httpRequest)
 local inviteUserIdToPlaceIdModule = require(shareGame.Thunks.InviteUserIdToPlaceId)
 local retrievalStatus = require(corePackagesService.Workspace.Packages.Http).Enum.RetrievalStatus
@@ -31,73 +31,73 @@ local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local useStyle = UIBloxModule.Core.Style.useStyle
 local color = Color3.fromRGB(41, 41, 41)
 
-local var22 = function(p0)
-	-- upvalues: useStyle (ref), reactModule (ref), constantsModule (ref), gameInviteEvents (ref), inviteStatus (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), playersService (ref), getFFlagSingleUserInvitePageKeybindModule (ref), contextActionService (ref), getFFlagThrottleInviteSendEndpointModule (ref), throttleFunctionCallModule (ref), getFIntThrottleInviteSendEndpointDelayModule (ref), retrievalStatus (ref), color (ref), styledTextLabel (ref), var9 (ref), COLORS (ref), singleUserThumbnailModule (ref), button (ref), buttonType (ref)
-	local inviteUserId = p0.friends[tostring(p0.inviteUserId)]
-	local id = inviteUserId and p0.invites[inviteUserId.id]
-	local var24 = useStyle()
-	local var25, var26 = reactModule.useState(false)
+local var2 = function(p1)
+	-- upvalues: useStyle (ref), reactModule (ref), constantsModule (ref), gameInviteEvents (ref), inviteStatus (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), playersService (ref), getFFlagSingleUserInvitePageKeybindModule (ref), contextActionService (ref), getFFlagThrottleInviteSendEndpointModule (ref), throttleFunctionCallModule (ref), getFIntThrottleInviteSendEndpointDelayModule (ref), retrievalStatus (ref), color (ref), styledTextLabel (ref), var1 (ref), COLORS (ref), singleUserThumbnailModule (ref), button (ref), buttonType (ref)
+	local inviteUserId = p1.friends[tostring(p1.inviteUserId)]
+	local id = inviteUserId and p1.invites[inviteUserId.id]
+	local var3 = useStyle()
+	local var4, var5 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), constantsModule (copy), gameInviteEvents (copy)
-		if p0.promptMessage and p0.analytics then
-			p0.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CustomTextShown)
+		-- upvalues: p1 (ref), constantsModule (copy), gameInviteEvents (copy)
+		if p1.promptMessage and p1.analytics then
+			p1.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CustomTextShown)
 		end
 	end, {})
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.closePage()
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		p1.closePage()
 		
-		if p0.onAfterClosePage then
-			p0.onAfterClosePage()
+		if p1.onAfterClosePage then
+			p1.onAfterClosePage()
 		end
-	end, { p0.closePage, p0.onAfterClosePage })
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), constantsModule (copy), gameInviteEvents (copy), var27 (ref)
-		p0.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CancelInvite)
-		var27()
-	end, { var27 })
-	local var29 = reactModule.useCallback(function()
-		-- upvalues: var26 (ref), p0 (ref), id (ref), inviteStatus (copy), constantsModule (copy), gameInviteEvents (copy), inviteUserId (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), playersService (copy), var27 (ref)
-		var26(true)
-		local inviteUser = p0.inviteUser
-		local analytics = p0.analytics
+	end, { p1.closePage, p1.onAfterClosePage })
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), constantsModule (copy), gameInviteEvents (copy), var6 (ref)
+		p1.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CancelInvite)
+		var6()
+	end, { var6 })
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref), p1 (ref), id (ref), inviteStatus (copy), constantsModule (copy), gameInviteEvents (copy), inviteUserId (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), playersService (copy), var6 (ref)
+		var5(true)
+		local inviteUser = p1.inviteUser
+		local analytics = p1.analytics
 		
 		if id and id ~= inviteStatus.Failed then return end
 		analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.SendInvite, {
 			recipient = inviteUserId.id,
-			isLaunchDataProvided = if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then p0.launchData ~= nil and p0.launchData ~= "" else nil
+			isLaunchDataProvided = if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then p1.launchData ~= nil and p1.launchData ~= "" else nil
 		})
-		inviteUser(tostring(inviteUserId.id), analytics, p0.inviteMessageId, p0.launchData):andThen(function(p1)
-			-- upvalues: var26 (copy), inviteUserId (copy), playersService (copy), analytics (ref), var27 (copy)
-			var26(false)
+		inviteUser(tostring(inviteUserId.id), analytics, p1.inviteMessageId, p1.launchData):andThen(function(p2)
+			-- upvalues: var5 (copy), inviteUserId (copy), playersService (copy), analytics (ref), var6 (copy)
+			var5(false)
 			
-			if not p1 then return end
+			if not p2 then return end
 			local list = { inviteUserId.id }
 			
-			if playersService.LocalPlayer and p1.conversationId then
-				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p1.conversationId, list)
+			if playersService.LocalPlayer and p2.conversationId then
+				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p2.conversationId, list)
 			end
-			var27()
-		end, var27)
+			var6()
+		end, var6)
 	end, {
-		p0.inviteUser, p0.inviteMessageId, p0.launchData, p0.analytics, var26, id,
-		inviteUserId, var27
+		p1.inviteUser, p1.inviteMessageId, p1.launchData, p1.analytics, var5, id,
+		inviteUserId, var6
 	})
 	
 	if getFFlagSingleUserInvitePageKeybindModule() then
 		reactModule.useEffect(function()
-			-- upvalues: p0 (ref), contextActionService (copy), var29 (write), var28 (ref)
-			if p0.isVisible then
+			-- upvalues: p1 (ref), contextActionService (copy), var8 (write), var7 (ref)
+			if p1.isVisible then
 				contextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, p2, _)
-					-- upvalues: var29 (copy)
+					-- upvalues: var8 (copy)
 					if p2 == Enum.UserInputState.Begin then
-						var29()
+						var8()
 					end
 				end, false, Enum.KeyCode.ButtonA)
-				contextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, p3, _)
-					-- upvalues: var28 (copy)
-					if p3 == Enum.UserInputState.Begin then
-						var28()
+				contextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, p2, _)
+					-- upvalues: var7 (copy)
+					if p2 == Enum.UserInputState.Begin then
+						var7()
 					end
 				end, false, Enum.KeyCode.ButtonB)
 				
@@ -108,13 +108,13 @@ local var22 = function(p0)
 				end
 			end
 			return nil
-		end, { p0.isVisible, var29, var28 })
+		end, { p1.isVisible, var8, var7 })
 	end
 	if getFFlagThrottleInviteSendEndpointModule() then
-		var29 = reactModule.useCallback(throttleFunctionCallModule(getFIntThrottleInviteSendEndpointDelayModule(), var29), { var29 })
+		var8 = reactModule.useCallback(throttleFunctionCallModule(getFIntThrottleInviteSendEndpointDelayModule(), var8), { var8 })
 	end
 	if inviteUserId then
-		local var30 = id and id ~= inviteStatus.Failed
+		local var9 = id and id ~= inviteStatus.Failed
 		
 		return reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -136,9 +136,9 @@ local var22 = function(p0)
 				PaddingBottom = UDim.new(0, 24)
 			}),
 			Header = reactModule.createElement(styledTextLabel, {
-				fontStyle = var24.Font.Header1,
-				colorStyle = var24.Theme.TextEmphasis,
-				text = var9:FormatByKey("Feature.SettingsHub.Heading.InviteUser", { DisplayName = inviteUserId.displayName }),
+				fontStyle = var3.Font.Header1,
+				colorStyle = var3.Theme.TextEmphasis,
+				text = var1:FormatByKey("Feature.SettingsHub.Heading.InviteUser", { DisplayName = inviteUserId.displayName }),
 				size = UDim2.new(1, 0, 0, 48),
 				textXAlignment = Enum.TextXAlignment.Center
 			}),
@@ -169,9 +169,9 @@ local var22 = function(p0)
 				}),
 				TextBody = reactModule.createElement(styledTextLabel, {
 					layoutOrder = 2,
-					fontStyle = var24.Font.Header2,
-					colorStyle = var24.Theme.TextEmphasis,
-					text = p0.promptMessage or var9:FormatByKey("Feature.SettingsHub.Label.DefaultInviteMessage", { DisplayName = inviteUserId.displayName }),
+					fontStyle = var3.Font.Header2,
+					colorStyle = var3.Theme.TextEmphasis,
+					text = p1.promptMessage or var1:FormatByKey("Feature.SettingsHub.Label.DefaultInviteMessage", { DisplayName = inviteUserId.displayName }),
 					textXAlignment = Enum.TextXAlignment.Center,
 					automaticSize = Enum.AutomaticSize.Y,
 					size = UDim2.new(1, 0, 0, 0)
@@ -184,46 +184,46 @@ local var22 = function(p0)
 					CancelButton = reactModule.createElement(button, {
 						buttonType = buttonType.Secondary,
 						size = UDim2.new(0.5, -12, 1, 0),
-						text = var9:FormatByKey("Feature.SettingsHub.Action.Cancel"),
-						onActivated = var28,
-						isDisabled = var25
+						text = var1:FormatByKey("Feature.SettingsHub.Action.Cancel"),
+						onActivated = var7,
+						isDisabled = var4
 					}),
 					InviteButton = reactModule.createElement(button, {
 						buttonType = buttonType.PrimarySystem,
 						size = UDim2.new(0.5, -12, 1, 0),
 						position = UDim2.new(0.5, 12, 0, 0),
-						text = var9:FormatByKey(if var30 then "Feature.SettingsHub.Label.Invited" else "Feature.SettingsHub.Action.InviteFriend"),
-						onActivated = var29,
-						isLoading = var25,
-						isDisabled = var30
+						text = var1:FormatByKey(if var9 then "Feature.SettingsHub.Label.Invited" else "Feature.SettingsHub.Action.InviteFriend"),
+						onActivated = var8,
+						isLoading = var4,
+						isDisabled = var9
 					})
 				})
 			})
 		})
-	elseif p0.friendsRetrievalStatus == retrievalStatus.Done or p0.friendsRetrievalStatus == retrievalStatus.Failed then
-		var27()
+	elseif p1.friendsRetrievalStatus == retrievalStatus.Done or p1.friendsRetrievalStatus == retrievalStatus.Failed then
+		var6()
 	end
 end
 
-return roactRoduxModule.connect(function(p5)
+return roactRoduxModule.connect(function(p1)
 	-- upvalues: playersService (ref)
 	return {
-		friends = p5.Users,
-		friendsRetrievalStatus = playersService.LocalPlayer and p5.Friends.retrievalStatus[tostring(playersService.LocalPlayer.UserId)],
-		invites = p5.Invites
+		friends = p1.Users,
+		friendsRetrievalStatus = playersService.LocalPlayer and p1.Friends.retrievalStatus[tostring(playersService.LocalPlayer.UserId)],
+		invites = p1.Invites
 	}
-end, function(p6)
+end, function(p1)
 	-- upvalues: httpRequestModule (ref), httpRbxApiService (ref), getFFlagEnableNewInviteSendEndpointModule (ref), inviteUserIdToPlaceIdCustomizedModule (ref), constantsModule (ref), inviteUserIdToPlaceIdModule (ref)
 	return {
-		inviteUser = function(p7, p8, p9, p10)
-			-- upvalues: httpRequestModule (copy), httpRbxApiService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), p6 (ref), inviteUserIdToPlaceIdCustomizedModule (copy), constantsModule (copy), inviteUserIdToPlaceIdModule (copy)
-			local var32 = httpRequestModule(httpRbxApiService)
-			local var33 = tostring(game.PlaceId)
+		inviteUser = function(p2, p3, p4, p5)
+			-- upvalues: httpRequestModule (copy), httpRbxApiService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), p1 (ref), inviteUserIdToPlaceIdCustomizedModule (copy), constantsModule (copy), inviteUserIdToPlaceIdModule (copy)
+			local var3 = httpRequestModule(httpRbxApiService)
+			local var4 = tostring(game.PlaceId)
 			
-			return if getFFlagEnableNewInviteSendEndpointModule() then p6(inviteUserIdToPlaceIdCustomizedModule(var32, p7, var33, p8, constantsModule.Triggers.DeveloperSingle, p9, p10)) else p6(inviteUserIdToPlaceIdModule(var32, p7, var33))
+			return if getFFlagEnableNewInviteSendEndpointModule() then p1(inviteUserIdToPlaceIdCustomizedModule(var3, p2, var4, p3, constantsModule.Triggers.DeveloperSingle, p4, p5)) else p1(inviteUserIdToPlaceIdModule(var3, p2, var4))
 		end
 	}
-end)(function(p4)
-	-- upvalues: renderWithCoreScriptsStyleProviderModule (ref), reactModule (ref), var22 (ref)
-	return renderWithCoreScriptsStyleProviderModule({ SingleUserInvite = reactModule.createElement(var22, p4) })
+end)(function(p1)
+	-- upvalues: renderWithCoreScriptsStyleProviderModule (ref), reactModule (ref), var2 (ref)
+	return renderWithCoreScriptsStyleProviderModule({ SingleUserInvite = reactModule.createElement(var2, p1) })
 end)

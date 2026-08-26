@@ -21,24 +21,24 @@ local function _()
 	return if userId <= 0 then nil else tostring(userId)
 end
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: playersService (ref), getBadgeDetailsUrlModule (ref), parent (ref), getSduiApiStore (ref), sduiResponseType (ref), appPage (ref), getBadgeDetailsPageKeyModule (ref), fFlagSduiUniversalPageEntry (ref)
-	local var5
+	local var1
 	local localPlayer = playersService.LocalPlayer
 	
 	if localPlayer then
 		local userId = localPlayer.UserId
-		var5 = if userId <= 0 then nil else tostring(userId)
+		var1 = if userId <= 0 then nil else tostring(userId)
 	else
-		var5 = nil
+		var1 = nil
 	end
 	local badgeDetailsPage = require(parent.ServiceContractsProto).apppageplatform.badges.badge_details_page
 	getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.Protobuf,
-		url = getBadgeDetailsUrlModule(p0, var5),
+		url = getBadgeDetailsUrlModule(p1, var1),
 		surfaceKey = appPage.BadgeDetails,
-		configKey = getBadgeDetailsPageKeyModule(p0),
-		loadTimer = p1,
+		configKey = getBadgeDetailsPageKeyModule(p1),
+		loadTimer = p2,
 		apiProto = if fFlagSduiUniversalPageEntry then badgeDetailsPage.BadgeDetailsPageV2Response else badgeDetailsPage.BadgeDetailsPageResponse
 	})
 end

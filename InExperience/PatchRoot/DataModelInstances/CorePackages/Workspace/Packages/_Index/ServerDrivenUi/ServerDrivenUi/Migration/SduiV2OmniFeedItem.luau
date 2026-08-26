@@ -7,43 +7,43 @@ local sduiFeatureEntryPoint = require(parent.SduiSharedUtilities).SduiFeatureEnt
 local fIntLuaAppDelayImpressionsMaxUpdates = require(parent.SharedFlags).FIntLuaAppDelayImpressionsMaxUpdates
 local sduiV2OmniFeedConstantsModule = require(serverDrivenUi.Migration.SduiV2OmniFeedConstants)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: omniFeedPropsKey (ref), argCheckModule (ref), reactModule (ref), fIntLuaAppDelayImpressionsMaxUpdates (ref), sduiFeatureEntryPoint (ref), sduiV2OmniFeedConstantsModule (ref)
-	local var4 = p0[omniFeedPropsKey]
-	local appPage = var4.appPage
+	local var1 = p1[omniFeedPropsKey]
+	local appPage = var1.appPage
 	argCheckModule.assert(appPage ~= nil, "appPage must exist")
-	argCheckModule.assert(p0.sortIndex ~= nil, "sortIndex must exist")
-	argCheckModule.assert(p0.feedItemKey ~= nil and p0.feedItemKey ~= "", "feedItemKey must exist for V2 SDUI omni feed item")
+	argCheckModule.assert(p1.sortIndex ~= nil, "sortIndex must exist")
+	argCheckModule.assert(p1.feedItemKey ~= nil and p1.feedItemKey ~= "", "feedItemKey must exist for V2 SDUI omni feed item")
 	
 	return reactModule.createElement(sduiFeatureEntryPoint, {
 		shouldDisplayError = false,
 		shouldDisplayLoading = false,
 		appPage = appPage,
 		configKey = sduiV2OmniFeedConstantsModule.HomeConfigKey,
-		identifier = p0.feedItemKey,
+		identifier = p1.feedItemKey,
 		additionalAnalyticsData = reactModule.useMemo(function()
-			-- upvalues: p0 (ref)
-			return { collectionPosition = p0.sortIndex }
-		end, { p0.sortIndex }),
+			-- upvalues: p1 (ref)
+			return { collectionPosition = p1.sortIndex }
+		end, { p1.sortIndex }),
 		extraLocalProps = reactModule.useMemo(function()
-			-- upvalues: var4 (ref), fIntLuaAppDelayImpressionsMaxUpdates (copy), p0 (ref)
+			-- upvalues: var1 (ref), fIntLuaAppDelayImpressionsMaxUpdates (copy), p1 (ref)
 			return {
-				scrollViewPositionChangedSignal = var4.scrollViewPositionChangedSignal,
-				verticalScrollingFrameRef = var4.verticalScrollingFrameRef,
-				startRow = var4.feedItemStartRow,
+				scrollViewPositionChangedSignal = var1.scrollViewPositionChangedSignal,
+				verticalScrollingFrameRef = var1.verticalScrollingFrameRef,
+				startRow = var1.feedItemStartRow,
 				numUpdatesToDelayImpressions = fIntLuaAppDelayImpressionsMaxUpdates,
-				selectionOrderBase = var4.selectionOrderBase,
-				onTileImageLoaded = var4.onTileImageLoaded,
-				videoPlaybackContext = var4.videoPlaybackContext,
-				index = p0.sortIndex,
-				collectionPosition = p0.sortIndex
+				selectionOrderBase = var1.selectionOrderBase,
+				onTileImageLoaded = var1.onTileImageLoaded,
+				videoPlaybackContext = var1.videoPlaybackContext,
+				index = p1.sortIndex,
+				collectionPosition = p1.sortIndex
 			}
 		end, {
-			var4.scrollViewPositionChangedSignal, var4.verticalScrollingFrameRef,
-			var4.feedItemStartRow, var4.selectionOrderBase, var4.onTileImageLoaded,
-			var4.videoPlaybackContext, p0.sortIndex
+			var1.scrollViewPositionChangedSignal, var1.verticalScrollingFrameRef,
+			var1.feedItemStartRow, var1.selectionOrderBase, var1.onTileImageLoaded,
+			var1.videoPlaybackContext, p1.sortIndex
 		}),
-		appCompositionEnabledOverride = var4.appCompositionEnabled == true,
-		LayoutOrder = p0.sortIndex
+		appCompositionEnabledOverride = var1.appCompositionEnabled == true,
+		LayoutOrder = p1.sortIndex
 	})
 end)

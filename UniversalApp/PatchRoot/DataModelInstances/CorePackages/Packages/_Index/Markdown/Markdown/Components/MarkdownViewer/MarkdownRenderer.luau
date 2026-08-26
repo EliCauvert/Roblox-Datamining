@@ -56,115 +56,115 @@ local function render(p1, p2)
 		
 		return nil
 	end
-	local var1 = name(p1, p2)
-	local var2 = getNodeTypeConfigModule(p1)
+	local var2 = name(p1, p2)
+	local var3 = getNodeTypeConfigModule(p1)
 	
-	if var2 and not var2.validateRenderResult(var1) then
+	if var3 and not var3.validateRenderResult(var2) then
 		warn(`Invalid render result for node: {p1.name} {p1.text} of type: {p1.type}`)
 	end
-	return var1
+	return var2
 end
 
-local function processChildren(p1, p2)
+local function processChildren(p3, p4)
 	-- upvalues: getNodeTypeConfigModule (ref), render (ref)
-	local children = p1.children
+	local children = p3.children
 	
 	if not children then
 		return {}
 	end
-	local var1 = getNodeTypeConfigModule(p1)
-	local var2 = if var1 then var1.children else {}
+	local var4 = getNodeTypeConfigModule(p3)
+	local var5 = if var4 then var4.children else {}
 	local t = {}
 	
 	for i, v in children do
 		local type = v.type
 		
-		if not var2[type] then
-			warn(`Invalid child node type. Parent node: {p1.name} {p1.text} of type: {p1.type} has invalid child node: {v.name} {v.text} of type: {type}`)
+		if not var5[type] then
+			warn(`Invalid child node type. Parent node: {p3.name} {p3.text} of type: {p3.type} has invalid child node: {v.name} {v.text} of type: {type}`)
 		end
-		local var3 = render(v, p2)
+		local var6 = render(v, p4)
 		
-		if var3 then
-			if #var3 > 0 then
-				for i_1, v_1 in var3 do
+		if var6 then
+			if #var6 > 0 then
+				for i_1, v_1 in var6 do
 					table.insert(t, v_1)
 				end
 			else
-				table.insert(t, var3)
+				table.insert(t, var6)
 			end
 		end
 	end
 	return t
 end
 
-local function renderRoot(p1, p2)
+local function renderRoot(p5, p6)
 	-- upvalues: reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col",
 		BorderSizePixel = 0,
 		backgroundStyle = { Transparency = 1 }
-	}, p2.processChildren(p1, p2))
+	}, p6.processChildren(p5, p6))
 end
 
-local function renderHeading(p1, p2)
+local function renderHeading(p5, p6)
 	-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref), mergeContextsModule (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
-		key = tostring(p1.index),
-		LayoutOrder = p1.index
+		key = tostring(p5.index),
+		LayoutOrder = p5.index
 	}, {
-		UIPadding = p1.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 20) }),
-		InlineLayout = renderInlineModule(p1, mergeContextsModule(p2, {
-			textStyles = p2.headerStyles[math.clamp(if p1.attributes and type(p1.attributes.depth) == "number" then p1.attributes.depth else 1, 1, #p2.headerStyles)]
+		UIPadding = p5.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 20) }),
+		InlineLayout = renderInlineModule(p5, mergeContextsModule(p6, {
+			textStyles = p6.headerStyles[math.clamp(if p5.attributes and type(p5.attributes.depth) == "number" then p5.attributes.depth else 1, 1, #p6.headerStyles)]
 		}))
 	})
 end
 
-local function renderParagraph(p1, p2)
+local function renderParagraph(p5, p6)
 	-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
-		key = tostring(p1.index),
-		LayoutOrder = p1.index
+		key = tostring(p5.index),
+		LayoutOrder = p5.index
 	}, {
-		UIPadding = p1.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
-		InlineLayout = renderInlineModule(p1, p2)
+		UIPadding = p5.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
+		InlineLayout = renderInlineModule(p5, p6)
 	})
 end
 
-local function computeLineNumbers(p1)
-	local p13Count = #p1
+local function computeLineNumbers(p5)
+	local p13Count = #p5
 	local t = {}
-	local var1 = 1
-	local var2 = 0
-	while var2 <= p13Count do
-		local matchIndex = string.find(p1, "\n", var2, true)
+	local var7 = 1
+	local var8 = 0
+	while var8 <= p13Count do
+		local matchIndex = string.find(p5, "\n", var8, true)
 		
 		if not matchIndex then break end
-		t[var1] = tostring(var1)
-		var1 += 1
-		var2 = matchIndex + 1
+		t[var7] = tostring(var7)
+		var7 += 1
+		var8 = matchIndex + 1
 	end
-	t[var1] = tostring(var1)
+	t[var7] = tostring(var7)
 	
 	return table.concat(t, "\n")
 end
 
-local _ = function(p1)
+local _ = function(p6)
 	-- upvalues: messageBusService (ref)
 	pcall(function()
-		-- upvalues: messageBusService (copy), p1 (ref)
-		return messageBusService:Publish(messageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p1 })
+		-- upvalues: messageBusService (copy), p6 (ref)
+		return messageBusService:Publish(messageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p6 })
 	end)
 end
 
-local var3 = dashModule.memoize(function(p1)
+local var9 = dashModule.memoize(function(p6)
 	-- upvalues: messageBusService (ref)
 	return function()
-		-- upvalues: p1 (ref), messageBusService (copy)
+		-- upvalues: p6 (ref), messageBusService (copy)
 		pcall(function()
-			-- upvalues: messageBusService (copy), p1 (ref)
-			return messageBusService:Publish(messageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p1 })
+			-- upvalues: messageBusService (copy), p6 (ref)
+			return messageBusService:Publish(messageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p6 })
 		end)
 	end
 end)
@@ -178,26 +178,26 @@ t.defaultRenderers = {
 	ROOT = renderRoot,
 	HEADING = renderHeading,
 	PARAGRAPH = renderParagraph,
-	CODE_BLOCK = function(p1, p2)
-		-- upvalues: highlighter (ref), getCodeTextStyles (ref), code (ref), computeLineNumbers (ref), reactModule (ref), view (ref), foundationModule (ref), var3 (ref), text (ref), dashModule (ref)
-		local text_1 = p1.text
-		local var1 = if (if p1.attributes then p1.attributes.language else nil) == "lua" then highlighter.highlight(text_1, p2.colorScheme) else text_1
+	CODE_BLOCK = function(p6, p7)
+		-- upvalues: highlighter (ref), getCodeTextStyles (ref), code (ref), computeLineNumbers (ref), reactModule (ref), view (ref), foundationModule (ref), var9 (ref), text (ref), dashModule (ref)
+		local text_1 = p6.text
+		local var10 = if (if p6.attributes then p6.attributes.language else nil) == "lua" then highlighter.highlight(text_1, p7.colorScheme) else text_1
 		local _ = nil
-		local var2 = getCodeTextStyles(p2)
+		local var11 = getCodeTextStyles(p7)
 		local t = {
 			TextWrapped = false,
 			tag = "auto-xy padding-small align-y-top",
 			fontStyle = {
-				FontSize = var2.textSize,
-				Font = if var2.fontFace then var2.fontFace elseif var2.font then Font.fromEnum(var2.font) else Font.fromEnum(code),
-				LineHeight = var2.lineHeight
+				FontSize = var11.textSize,
+				Font = if var11.fontFace then var11.fontFace elseif var11.font then Font.fromEnum(var11.font) else Font.fromEnum(code),
+				LineHeight = var11.lineHeight
 			},
 			TextXAlignment = Enum.TextXAlignment.Left
 		}
 		local t_1 = {
 			RichText = true,
 			ZIndex = 1,
-			Text = var1,
+			Text = var10,
 			textStyle = { Color3 = highlighter.getTokenColor("iden") }
 		}
 		local t_2 = {
@@ -209,34 +209,34 @@ t.defaultRenderers = {
 				Color3 = highlighter.getTokenColor("iden")
 			}
 		}
-		local codeBackgroundStyles = p2.codeBackgroundStyles or {}
+		local codeBackgroundStyles = p7.codeBackgroundStyles or {}
 		local backgroundColor3 = codeBackgroundStyles.backgroundColor3 or highlighter.getTokenColor("background")
 		local backgroundTransparency = codeBackgroundStyles.backgroundTransparency or 0
-		local var3 = nil
-		local showLineNumbers = p2.codeSettings and p2.codeSettings.showLineNumbers
+		local var12 = nil
+		local showLineNumbers = p7.codeSettings and p7.codeSettings.showLineNumbers
 		
 		if showLineNumbers then
-			var3 = computeLineNumbers(text_1)
+			var12 = computeLineNumbers(text_1)
 		end
 		return reactModule.createElement(view, {
 			tag = "size-full-0 auto-y col",
 			BorderSizePixel = 0,
-			key = tostring(p1.index),
-			LayoutOrder = p1.index,
+			key = tostring(p6.index),
+			LayoutOrder = p6.index,
 			backgroundStyle = { Transparency = 1 }
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = if p1.offset ~= 0 then UDim.new(0, 10) else nil,
+				PaddingTop = if p6.offset ~= 0 then UDim.new(0, 10) else nil,
 				PaddingBottom = UDim.new(0, 10)
 			}),
-			TitleBar = if p2.codeSettings and p2.codeSettings.showCopyButton then reactModule.createElement(foundationModule.View, {
+			TitleBar = if p7.codeSettings and p7.codeSettings.showCopyButton then reactModule.createElement(foundationModule.View, {
 				tag = "size-full-0 auto-y row align-x-right bg-shift-300 radius-small",
 				LayoutOrder = 1
 			}, {
 				CopyToClipboardButton = reactModule.createElement(foundationModule.IconButton, {
 					size = foundationModule.Enums.InputSize.Small,
 					icon = { name = foundationModule.Enums.IconName.TwoStackedSquares },
-					onActivated = var3(text_1)
+					onActivated = var12(text_1)
 				})
 			}) else nil,
 			CodeWrapper = reactModule.createElement(foundationModule.View, {
@@ -249,7 +249,7 @@ t.defaultRenderers = {
 				LineNumbers = if showLineNumbers then reactModule.createElement(foundationModule.Text, {
 					LayoutOrder = 1,
 					tag = "size-0-0 auto-xy text-align-x-right text-align-y-center padding-small bg-shift-100 content-emphasis",
-					Text = var3,
+					Text = var12,
 					fontStyle = t.fontStyle
 				}) else nil,
 				ScrollFrameWrapper = reactModule.createElement(foundationModule.View, {
@@ -283,7 +283,7 @@ t.defaultRenderers = {
 								ZIndex = t_2.ZIndex,
 								Size = UDim2.fromScale(0, 0),
 								AutomaticSize = Enum.AutomaticSize.XY,
-								LineHeight = p2.codeStyles.lineHeight
+								LineHeight = p7.codeStyles.lineHeight
 							})
 						})
 					})
@@ -291,86 +291,86 @@ t.defaultRenderers = {
 			})
 		})
 	end,
-	STYLED_TEXT = function(p1, p2)
+	STYLED_TEXT = function(p6, p7)
 		-- upvalues: dashModule (ref), mergeContextsModule (ref)
-		local var1 = if p1.attributes and p1.attributes.style then p1.attributes.style else nil
+		local var10 = if p6.attributes and p6.attributes.style then p6.attributes.style else nil
 		local t = {}
 		
-		if var1 == "BOLD" or var1 == "BOLD_2" then
+		if var10 == "BOLD" or var10 == "BOLD_2" then
 			t.bold = true
-		elseif var1 == "ITALIC" or var1 == "ITALIC_2" then
+		elseif var10 == "ITALIC" or var10 == "ITALIC_2" then
 			t.italic = true
-		elseif var1 == "STRIKE" then
+		elseif var10 == "STRIKE" then
 			t.strike = true
-		elseif var1 == "INLINE_CODE" then
-			t = dashModule.joinDeep(p2.codeStyles, { selectable = true })
+		elseif var10 == "INLINE_CODE" then
+			t = dashModule.joinDeep(p7.codeStyles, { selectable = true })
 		end
-		return p2.processChildren(p1, mergeContextsModule(p2, { textStyles = t }))
+		return p7.processChildren(p6, mergeContextsModule(p7, { textStyles = t }))
 	end,
-	TEXT = function(p1, p2)
+	TEXT = function(p6, p7)
 		-- upvalues: processSoftBreaksModule (ref), getBaseTextElementEngineTags (ref), builderSans (ref), selectableTextElement (ref), textElement (ref)
 		local t = {
-			LayoutOrder = p1.index,
-			Text = processSoftBreaksModule(p1.text),
-			EngineTags = getBaseTextElementEngineTags(p2.textStyles)
+			LayoutOrder = p6.index,
+			Text = processSoftBreaksModule(p6.text),
+			EngineTags = getBaseTextElementEngineTags(p7.textStyles)
 		}
 		local t_1 = {}
-		local textStyles = p2.textStyles
+		local textStyles = p7.textStyles
 		t_1.Font = if textStyles.fontFace then textStyles.fontFace elseif textStyles.font then Font.fromEnum(textStyles.font) else Font.fromEnum(builderSans)
-		t_1.FontSize = p2.textStyles.textSize
+		t_1.FontSize = p7.textStyles.textSize
 		t.fontStyle = t_1
 		t.textStyle = {
-			Color3 = if typeof(p2.textStyles.color) == "string" then Color3.fromHex(p2.textStyles.color) else p2.textStyles.color,
-			Transparency = p2.textStyles.transparency
+			Color3 = if typeof(p7.textStyles.color) == "string" then Color3.fromHex(p7.textStyles.color) else p7.textStyles.color,
+			Transparency = p7.textStyles.transparency
 		}
-		t.viewTags = p2.textStyles.viewTags
+		t.viewTags = p7.textStyles.viewTags
 		
-		return if p2.textStyles.selectable then selectableTextElement.new(t) else textElement.new(t)
+		return if p7.textStyles.selectable then selectableTextElement.new(t) else textElement.new(t)
 	end,
-	LINK = function(p1, p2)
+	LINK = function(p6, p7)
 		-- upvalues: mergeContextsModule (ref), dashModule (ref), isInlineElement (ref), hardBreakElement (ref), linkElement (ref)
-		local var1 = if p1.attributes then p1.attributes.url else p1.url or ""
+		local var10 = if p6.attributes then p6.attributes.url else p6.url or ""
 		
-		return linkElement.new(dashModule.filter(p2.processChildren(p1, mergeContextsModule(p2, { textStyles = { color = p2.linkStyles.linkColor } })), function(p1)
+		return linkElement.new(dashModule.filter(p7.processChildren(p6, mergeContextsModule(p7, { textStyles = { color = p7.linkStyles.linkColor } })), function(p8)
 			-- upvalues: isInlineElement (copy), hardBreakElement (copy)
-			return isInlineElement(p1) and p1 ~= hardBreakElement
+			return isInlineElement(p8) and p8 ~= hardBreakElement
 		end), {
 			onActivated = function()
-				-- upvalues: p2 (ref), var1 (ref)
-				p2.linkCallback(var1)
+				-- upvalues: p7 (ref), var10 (ref)
+				p7.linkCallback(var10)
 			end
 		})
 	end,
-	LIST = function(p1, p2)
+	LIST = function(p6, p7)
 		-- upvalues: reactModule (ref), view (ref), render (ref), dashModule (ref), bulletList (ref), builderSans (ref)
-		local var1
+		local var10
 		local t = {}
-		local var2 = nil
+		local var11 = nil
 		
-		for i = #p1.children, 1, -1 do
-			var1 = p1.children[i]
+		for i = #p6.children, 1, -1 do
+			var10 = p6.children[i]
 			
-			if var1.name == "LIST" then
-				var2 = var1
+			if var10.name == "LIST" then
+				var11 = var10
 				continue
 			end
-			if var2 then
+			if var11 then
 				table.insert(t, 1, {
-					Prefix = if var1.attributes then var1.attributes.prefix else nil,
+					Prefix = if var10.attributes then var10.attributes.prefix else nil,
 					Item = reactModule.createElement(view, {
 						tag = "size-full-0 auto-y col",
 						BorderSizePixel = 0,
 						backgroundStyle = { Transparency = 1 }
 					}, {
-						Item = render(dashModule.join(var1, { index = 1 }), p2),
-						List = render(dashModule.join(var2, { index = 2 }), p2)
+						Item = render(dashModule.join(var10, { index = 1 }), p7),
+						List = render(dashModule.join(var11, { index = 2 }), p7)
 					})
 				})
-				var2 = nil
+				var11 = nil
 			else
 				table.insert(t, 1, {
-					Prefix = if var1.attributes then var1.attributes.prefix else nil,
-					Item = render(var1, p2)
+					Prefix = if var10.attributes then var10.attributes.prefix else nil,
+					Item = render(var10, p7)
 				})
 			end
 		end
@@ -378,47 +378,47 @@ t.defaultRenderers = {
 		local t_1 = {
 			TextWrapped = true,
 			tag = "size-full-0 auto-y",
-			key = tostring(p1.index),
-			LayoutOrder = p1.index,
+			key = tostring(p6.index),
+			LayoutOrder = p6.index,
 			Items = t
 		}
-		var1 = {}
-		local textStyles = p2.textStyles
-		var1.Font = if textStyles.fontFace then textStyles.fontFace elseif textStyles.font then Font.fromEnum(textStyles.font) else Font.fromEnum(builderSans)
-		var1.TextColor = if typeof(p2.textStyles.color) == "string" then Color3.fromHex(p2.textStyles.color) else p2.textStyles.color
-		var1.TextSize = p2.textStyles.textSize
-		var1.LineHeight = p2.textStyles.textSize
-		t_1.ListStyle = var1
+		var10 = {}
+		local textStyles = p7.textStyles
+		var10.Font = if textStyles.fontFace then textStyles.fontFace elseif textStyles.font then Font.fromEnum(textStyles.font) else Font.fromEnum(builderSans)
+		var10.TextColor = if typeof(p7.textStyles.color) == "string" then Color3.fromHex(p7.textStyles.color) else p7.textStyles.color
+		var10.TextSize = p7.textStyles.textSize
+		var10.LineHeight = p7.textStyles.textSize
+		t_1.ListStyle = var10
 		
 		return createElement(bulletList, t_1, {
-			UIPadding = p1.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) })
+			UIPadding = p6.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) })
 		})
 	end,
-	LIST_ITEM = function(p1, p2)
+	LIST_ITEM = function(p8, p9)
 		-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref)
 		return reactModule.createElement(view, {
 			tag = "size-full-0 auto-y",
-			key = tostring(p1.index),
-			LayoutOrder = p1.index
-		}, { InlineLayout = renderInlineModule(p1, p2) })
+			key = tostring(p8.index),
+			LayoutOrder = p8.index
+		}, { InlineLayout = renderInlineModule(p8, p9) })
 	end,
-	DIVIDER = function(p1)
+	DIVIDER = function(p8)
 		-- upvalues: reactModule (ref), view (ref), divider (ref)
 		return reactModule.createElement(view, {
 			tag = "size-full-0 auto-y",
-			key = tostring(p1.index),
-			LayoutOrder = p1.index
+			key = tostring(p8.index),
+			LayoutOrder = p8.index
 		}, {
-			UIPadding = p1.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
+			UIPadding = p8.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
 			Divider = reactModule.createElement(divider)
 		})
 	end,
-	QUOTE = function(p1, p2)
+	QUOTE = function(p8, p9)
 		-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref), mergeContextsModule (ref)
 		return reactModule.createElement(view, {
 			tag = "size-full-0 auto-y padding-small",
-			key = tostring(p1.index),
-			LayoutOrder = p1.index,
+			key = tostring(p8.index),
+			LayoutOrder = p8.index,
 			backgroundStyle = { Transparency = 1 }
 		}, {
 			InlineLayoutWrapper = reactModule.createElement(view, {
@@ -428,24 +428,24 @@ t.defaultRenderers = {
 					Color3 = Color3.fromRGB(163, 162, 165)
 				}
 			}, {
-				InlineLayout = renderInlineModule(p1, mergeContextsModule(p2, { textStyles = { italic = true, transparency = 0.5 } }))
+				InlineLayout = renderInlineModule(p8, mergeContextsModule(p9, { textStyles = { italic = true, transparency = 0.5 } }))
 			})
 		})
 	end,
-	IMAGE = function(p1, p2)
+	IMAGE = function(p8, p9)
 		-- upvalues: imageElement (ref)
 		return imageElement.new({
-			LayoutOrder = p1.index,
-			Image = if p1.attributes then p1.attributes.url else p1.url or nil,
-			Size = p2.imageStyles.size,
+			LayoutOrder = p8.index,
+			Image = if p8.attributes then p8.attributes.url else p8.url or nil,
+			Size = p9.imageStyles.size,
 			backgroundStyle = {
-				Transparency = p2.imageStyles.backgroundTransparency,
-				Color3 = p2.imageStyles.backgroundColor3
+				Transparency = p9.imageStyles.backgroundTransparency,
+				Color3 = p9.imageStyles.backgroundColor3
 			},
-			imageStyle = { Transparency = p2.imageStyles.transparency },
-			ScaleType = p2.imageStyles.scaleType,
-			ResampleMode = p2.imageStyles.resampleMode,
-			tag = p2.imageStyles.tags
+			imageStyle = { Transparency = p9.imageStyles.transparency },
+			ScaleType = p9.imageStyles.scaleType,
+			ResampleMode = p9.imageStyles.resampleMode,
+			tag = p9.imageStyles.tags
 		})
 	end,
 	TAG = renderTagModule,
@@ -453,10 +453,10 @@ t.defaultRenderers = {
 	LINE_BREAK = renderHardBreak
 }
 
-function t.render(p1, p2)
-	-- upvalues: t (ref), dashModule (ref), builderSans (ref), code (ref), uDim2 (ref), var1 (ref), processChildren (ref), render (ref)
-	t.renderers = p2.userRenderers
-	local var1 = dashModule.joinDeep({
+function t.render(p8, p9)
+	-- upvalues: t (ref), dashModule (ref), builderSans (ref), code (ref), uDim2 (ref), var10 (ref), processChildren (ref), render (ref)
+	t.renderers = p9.userRenderers
+	local var12 = dashModule.joinDeep({
 		isInline = false,
 		textStyles = { textSize = 18, font = builderSans },
 		codeStyles = { textSize = 18, lineHeight = 1.111, font = code },
@@ -468,15 +468,15 @@ function t.render(p1, p2)
 		},
 		imageStyles = { size = uDim2 },
 		linkStyles = {
-			linkColor = `#{p2.tokens.Color.Content.Link.Color3:ToHex()}`
+			linkColor = `#{p9.tokens.Color.Content.Link.Color3:ToHex()}`
 		},
-		linkCallback = p2.linkCallback or var1,
-		colorScheme = p2.colorScheme,
+		linkCallback = p9.linkCallback or var12,
+		colorScheme = p9.colorScheme,
 		processChildren = processChildren
-	}, table.clone(p2.markdownRendererProps or {}))
-	table.freeze(var1)
+	}, table.clone(p9.markdownRendererProps or {}))
+	table.freeze(var12)
 	
-	return render(p1, var1)
+	return render(p8, var12)
 end
 
 return t

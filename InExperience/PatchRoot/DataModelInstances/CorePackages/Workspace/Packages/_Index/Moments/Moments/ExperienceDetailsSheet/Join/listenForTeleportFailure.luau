@@ -1,7 +1,7 @@
 ﻿local playersService = game:GetService("Players")
 local teleportService = game:GetService("TeleportService")
 
-return function(p0)
+return function(p1)
 	-- upvalues: playersService (ref), teleportService (ref)
 	local localPlayer = playersService.LocalPlayer
 	local teleportInitFailedConnection = nil
@@ -14,14 +14,14 @@ return function(p0)
 		end
 	end
 	
-	teleportInitFailedConnection = teleportService.TeleportInitFailed:Connect(function(p1)
-		-- upvalues: localPlayer (ref), teleportInitFailedConnection (write), p0 (ref)
-		if p1 == localPlayer then
+	teleportInitFailedConnection = teleportService.TeleportInitFailed:Connect(function(p2)
+		-- upvalues: localPlayer (ref), teleportInitFailedConnection (write), p1 (ref)
+		if p2 == localPlayer then
 			if teleportInitFailedConnection ~= nil then
 				teleportInitFailedConnection:Disconnect()
 				teleportInitFailedConnection = nil
 			end
-			p0()
+			p1()
 		end
 	end)
 	

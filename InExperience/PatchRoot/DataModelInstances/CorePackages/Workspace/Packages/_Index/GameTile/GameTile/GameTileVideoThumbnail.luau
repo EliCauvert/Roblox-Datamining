@@ -9,50 +9,50 @@ local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppVideoTileDisableActivation = require(parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
 local fFlagLuaAppVideoTileHideCenterPlayButton = require(parent.SharedFlags).FFlagLuaAppVideoTileHideCenterPlayButton
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), videoPlaybackCoordinator (ref), videoPlayer (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), fFlagLuaAppVideoTileDisableActivation (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref)
 	return reactModule.createElement(videoPlayer, {
 		muted = true,
-		video = p0.video,
-		thumbnail = p0.image,
-		shouldStartPlayback = p0.playing,
-		looped = p0.looped,
-		Size = p0.Size,
-		ScaleType = if p0.isTileContained then Enum.ScaleType.Tile else nil,
-		ZIndex = p0.ZIndex,
-		cornerRadius = p0.cornerRadius,
+		video = p1.video,
+		thumbnail = p1.image,
+		shouldStartPlayback = p1.playing,
+		looped = p1.looped,
+		Size = p1.Size,
+		ScaleType = if p1.isTileContained then Enum.ScaleType.Tile else nil,
+		ZIndex = p1.ZIndex,
+		cornerRadius = p1.cornerRadius,
 		hideCenterPlayButton = if fFlagLuaAppVideoTileHideCenterPlayButton then true else nil,
 		disableActivation = if fFlagLuaAppVideoTileDisableActivation then true else nil,
-		onVideoLoaded = reactModule.useCallback(function(p1, p2)
-			-- upvalues: p0 (ref), videoPlaybackCoordinator (copy)
-			if p0.videoAnalytics then
-				p0.videoAnalytics.reportVideoLoad(p0.itemIndex, if p0.videoPlaybackCoordinator then p0.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId, p1, p2)
+		onVideoLoaded = reactModule.useCallback(function(p2, p3)
+			-- upvalues: p1 (ref), videoPlaybackCoordinator (copy)
+			if p1.videoAnalytics then
+				p1.videoAnalytics.reportVideoLoad(p1.itemIndex, if p1.videoPlaybackCoordinator then p1.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId, p2, p3)
 			end
 		end, {
-			p0.itemIndex,
-			p0.videoAnalytics,
-			p0.videoPlaybackCoordinator
+			p1.itemIndex,
+			p1.videoAnalytics,
+			p1.videoPlaybackCoordinator
 		}),
 		onVideoLooped = reactModule.useCallback(function()
-			-- upvalues: p0 (ref), videoPlaybackCoordinator (copy)
-			if p0.videoAnalytics then
-				p0.videoAnalytics.reportVideoLoop(p0.itemIndex, if p0.videoPlaybackCoordinator then p0.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId)
+			-- upvalues: p1 (ref), videoPlaybackCoordinator (copy)
+			if p1.videoAnalytics then
+				p1.videoAnalytics.reportVideoLoop(p1.itemIndex, if p1.videoPlaybackCoordinator then p1.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId)
 			end
 		end, {
-			p0.itemIndex,
-			p0.videoAnalytics,
-			p0.videoPlaybackCoordinator
+			p1.itemIndex,
+			p1.videoAnalytics,
+			p1.videoPlaybackCoordinator
 		}),
-		onVideoPlayerActivated = if fFlagLuaAppVideoTileDisableActivation then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen then p0.onActivated else nil,
+		onVideoPlayerActivated = if fFlagLuaAppVideoTileDisableActivation then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen then p1.onActivated else nil,
 		videoAnalyticsContext = reactModule.useMemo(function()
-			-- upvalues: p0 (ref), videoPlaybackCoordinator (copy)
+			-- upvalues: p1 (ref), videoPlaybackCoordinator (copy)
 			return {
-				videoAnalyticsData = { source = "universe", sourceId = p0.universeId },
+				videoAnalyticsData = { source = "universe", sourceId = p1.universeId },
 				getPlaybackSessionId = function()
-					-- upvalues: p0 (copy), videoPlaybackCoordinator (copy)
-					return if p0.videoPlaybackCoordinator then p0.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId
+					-- upvalues: p1 (copy), videoPlaybackCoordinator (copy)
+					return if p1.videoPlaybackCoordinator then p1.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId
 				end
 			}
-		end, { p0.universeId, p0.videoPlaybackCoordinator })
+		end, { p1.universeId, p1.videoPlaybackCoordinator })
 	})
 end

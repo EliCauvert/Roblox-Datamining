@@ -8,58 +8,58 @@ local utilModule = require(timeToInteractiveTracker.Utils.Util)
 local getMemoryMbModule = require(timeToInteractiveTracker.Utils.getMemoryMb)
 local fFlagTTITrackerMemoryTrackingModule = require(timeToInteractiveTracker.Utils.FFlagTTITrackerMemoryTracking)
 
-return function(p0)
+return function(p1)
 	-- upvalues: name (ref), nowModule (ref), mergeTTIEventMetadataModule (ref), utilModule (ref), fFlagTTITrackerMemoryTrackingModule (ref), getMemoryMbModule (ref), sendTTIStatModule (ref)
-	return function(p1, p2)
-		-- upvalues: p0 (ref), name (copy), nowModule (copy), mergeTTIEventMetadataModule (copy), utilModule (copy), fFlagTTITrackerMemoryTrackingModule (copy), getMemoryMbModule (copy), sendTTIStatModule (copy)
-		local var8 = nil
-		local var9 = nil
-		local var10 = nil
-		local var11 = false
-		local var12 = if p2 and p2.cleanupAfterSend ~= nil then p2.cleanupAfterSend else true
-		local var13 = if p2 then p2.samplingRateOverride else nil
-		p0(function(p3)
-			-- upvalues: p1 (ref), name (copy), nowModule (copy), var8 (write), var11 (write), var9 (write), mergeTTIEventMetadataModule (copy), var10 (write), var12 (ref), utilModule (copy)
-			local var15 = p3[p1]
+	return function(p2, p3)
+		-- upvalues: p1 (ref), name (copy), nowModule (copy), mergeTTIEventMetadataModule (copy), utilModule (copy), fFlagTTITrackerMemoryTrackingModule (copy), getMemoryMbModule (copy), sendTTIStatModule (copy)
+		local var1 = nil
+		local var2 = nil
+		local var3 = nil
+		local var4 = false
+		local var5 = if p3 and p3.cleanupAfterSend ~= nil then p3.cleanupAfterSend else true
+		local var6 = if p3 then p3.samplingRateOverride else nil
+		p1(function(p4)
+			-- upvalues: p2 (ref), name (copy), nowModule (copy), var1 (write), var4 (write), var2 (write), mergeTTIEventMetadataModule (copy), var3 (write), var5 (ref), utilModule (copy)
+			local var7 = p4[p2]
 			
-			if var15 == nil then
-				name:warning(`called before trackStart for eventName={p1}`)
+			if var7 == nil then
+				name:warning(`called before trackStart for eventName={p2}`)
 				
-				return p3
-			elseif var15.startTime == nil then
-				name:warning(`called before trackStart for eventName={p1}`)
+				return p4
+			elseif var7.startTime == nil then
+				name:warning(`called before trackStart for eventName={p2}`)
 				
-				return p3
+				return p4
 			end
-			local var16 = nowModule()
-			var8 = (var16 - var15.startTime) * 1000
-			var11 = var15.sent ~= true
+			local var8 = nowModule()
+			var1 = (var8 - var7.startTime) * 1000
+			var4 = var7.sent ~= true
 			
-			if var11 then
-				var9 = mergeTTIEventMetadataModule(var15.metadata, {
-					startTime = var15.startTime,
-					endTime = var16,
-					deltaMs = var8
+			if var4 then
+				var2 = mergeTTIEventMetadataModule(var7.metadata, {
+					startTime = var7.startTime,
+					endTime = var8,
+					deltaMs = var1
 				})
 				
-				if var15.milestones then
-					var10 = var15.milestones
+				if var7.milestones then
+					var3 = var7.milestones
 				end
 			end
-			local cloned = table.clone(p3)
+			local cloned = table.clone(p4)
 			
-			if var11 and var12 then
-				cloned[p1] = nil
+			if var4 and var5 then
+				cloned[p2] = nil
 				
 				return cloned
 			end
-			cloned[p1] = {
+			cloned[p2] = {
 				sent = true,
-				startTime = var15.startTime,
-				endTime = var16,
-				deltaMs = var8,
-				metadata = table.clone(var15.metadata),
-				milestones = if var15.milestones then utilModule.deepCloneMilestones(var15.milestones) else nil
+				startTime = var7.startTime,
+				endTime = var8,
+				deltaMs = var1,
+				metadata = table.clone(var7.metadata),
+				milestones = if var7.milestones then utilModule.deepCloneMilestones(var7.milestones) else nil
 			}
 			
 			return cloned

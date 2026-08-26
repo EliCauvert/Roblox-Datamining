@@ -1,5 +1,5 @@
 ﻿return {
-	isNonNullObject = function(p0)
-		return p0 ~= nil and type(p0) == "table"
+	isNonNullObject = function(p1)
+		return p1 ~= nil and type(p1) == "table"
 	end
 }

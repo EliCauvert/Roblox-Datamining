@@ -7,51 +7,51 @@ local useEffect = reactModule.useEffect
 local useRef = reactModule.useRef
 local useToggleStateModule = require(momentsCommon.Hooks.useToggleState)
 
-return function(_, p0)
+return function(_, p1)
 	-- upvalues: useRef (ref), signalModule (ref), useToggleStateModule (ref), useEffect (ref), contentProviderService (ref), useCallback (ref)
-	local var5 = useRef(nil)
-	local var6 = useRef(nil)
-	local var7 = useRef(false)
-	local var8 = useRef(signalModule.new())
-	local var9 = useToggleStateModule(false)
+	local var1 = useRef(nil)
+	local var2 = useRef(nil)
+	local var3 = useRef(false)
+	local var4 = useRef(signalModule.new())
+	local var5 = useToggleStateModule(false)
 	useEffect(function()
-		-- upvalues: var5 (ref), p0 (ref), var7 (ref), var6 (ref), contentProviderService (copy), var8 (ref)
-		local current = var5.current
+		-- upvalues: var1 (ref), p1 (ref), var3 (ref), var2 (ref), contentProviderService (copy), var4 (ref)
+		local current = var1.current
 		
 		if not current then return end
-		if p0 then
-			var7.current = false
+		if p1 then
+			var3.current = false
 			
-			if p0.SourceType == Enum.ContentSourceType.Uri then
-				var6.current = p0.Uri
+			if p1.SourceType == Enum.ContentSourceType.Uri then
+				var2.current = p1.Uri
 				task.spawn(function()
-					-- upvalues: contentProviderService (copy), p0 (copy), var6 (copy), var7 (copy), var8 (copy)
-					contentProviderService:PreloadAsync({ p0.Uri }, function(_, p1)
-						-- upvalues: var6 (copy), p0 (copy), var7 (copy), var8 (copy)
-						if var6.current ~= p0.Uri then return end
-						if p1 == Enum.AssetFetchStatus.Success then
-							var7.current = true
-							var8.current:fire()
+					-- upvalues: contentProviderService (copy), p1 (copy), var2 (copy), var3 (copy), var4 (copy)
+					contentProviderService:PreloadAsync({ p1.Uri }, function(_, p2)
+						-- upvalues: var2 (copy), p1 (copy), var3 (copy), var4 (copy)
+						if var2.current ~= p1.Uri then return end
+						if p2 == Enum.AssetFetchStatus.Success then
+							var3.current = true
+							var4.current:fire()
 						end
 					end)
 				end)
 			end
-			if p0.SourceType == Enum.ContentSourceType.Object then
-				var7.current = true
-				var8.current:fire()
+			if p1.SourceType == Enum.ContentSourceType.Object then
+				var3.current = true
+				var4.current:fire()
 			end
-			current.ImageContent = p0
+			current.ImageContent = p1
 		end
-	end, { var9.enabled, p0 })
+	end, { var5.enabled, p1 })
 	
 	return {
-		isLoadedRef = var7,
-		onImageLoadedSignalRef = var8,
-		ref = var5,
+		isLoadedRef = var3,
+		onImageLoadedSignalRef = var4,
+		ref = var1,
 		updateRef = useCallback(function(p2)
-			-- upvalues: var9 (ref), var5 (ref)
-			var9.toggle()
-			var5.current = p2
-		end, { var9.toggle })
+			-- upvalues: var5 (ref), var1 (ref)
+			var5.toggle()
+			var1.current = p2
+		end, { var5.toggle })
 	}
 end

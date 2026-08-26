@@ -14,53 +14,53 @@ local t = {
 	placement = require(foundation.Enums.InputPlacement).Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), internalInputGroupModule (ref), withCommonPropsModule (ref), radioGroupContextModule (ref), viewModule (ref)
-	local var9 = withDefaultsModule(p0, t)
-	local var10, var11 = reactModule.useState(var9.value)
+	local var1 = withDefaultsModule(p1, t)
+	local var2, var3 = reactModule.useState(var1.value)
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var11 (ref)
-		if var9.value ~= nil then
-			var11(var9.value)
+		-- upvalues: var1 (ref), var3 (ref)
+		if var1.value ~= nil then
+			var3(var1.value)
 		end
-	end, { var9.value })
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: var11 (ref), var9 (ref)
-		var11(p2)
-		var9.onValueChanged(p2)
-	end, { var11, var9.onValueChanged })
-	local var13 = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
-		-- upvalues: var10 (ref), var12 (ref), var9 (ref)
+	end, { var1.value })
+	local var4 = reactModule.useCallback(function(p3)
+		-- upvalues: var3 (ref), var1 (ref)
+		var3(p3)
+		var1.onValueChanged(p3)
+	end, { var3, var1.onValueChanged })
+	local var5 = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var4 (ref), var1 (ref)
 		return {
-			value = var10,
-			onValueChanged = var12,
-			Selectable = var9.Selectable,
-			testId = var9.testId
+			value = var2,
+			onValueChanged = var4,
+			Selectable = var1.Selectable,
+			testId = var1.testId
 		}
-	end, { var10, var12, var9.Selectable, var9.testId }) else nil
+	end, { var2, var4, var1.Selectable, var1.testId }) else nil
 	
-	return if flagsModule.FoundationInputGroup then reactModule.createElement(internalInputGroupModule, withCommonPropsModule(var9, {
-		size = var9.size,
-		placement = var9.placement,
-		legend = var9.legend,
-		ref = p1
+	return if flagsModule.FoundationInputGroup then reactModule.createElement(internalInputGroupModule, withCommonPropsModule(var1, {
+		size = var1.size,
+		placement = var1.placement,
+		legend = var1.legend,
+		ref = p2
 	}), {
 		RadioGroupContext = reactModule.createElement(radioGroupContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then var13 else {
-				value = var10,
-				onValueChanged = var12,
-				Selectable = var9.Selectable,
-				testId = var9.testId
+			value = if flagsModule.FoundationStableContextValues then var5 else {
+				value = var2,
+				onValueChanged = var4,
+				Selectable = var1.Selectable,
+				testId = var1.testId
 			}
-		}, var9.children)
-	}) else reactModule.createElement(viewModule, withCommonPropsModule(var9, { tag = "col gap-medium auto-xy", ref = p1 }), {
+		}, var1.children)
+	}) else reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "col gap-medium auto-xy", ref = p2 }), {
 		RadioGroupContext = reactModule.createElement(radioGroupContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then var13 else {
-				value = var10,
-				onValueChanged = var12,
-				Selectable = var9.Selectable,
-				testId = var9.testId
+			value = if flagsModule.FoundationStableContextValues then var5 else {
+				value = var2,
+				onValueChanged = var4,
+				Selectable = var1.Selectable,
+				testId = var1.testId
 			}
-		}, var9.children)
+		}, var1.children)
 	})
 end))

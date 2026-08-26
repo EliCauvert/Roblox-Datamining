@@ -8,7 +8,7 @@ local t = {
 	[presenceType.Online] = presenceTypes.Online.rawValue()
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref)
-	return t[p0]
+	return t[p1]
 end

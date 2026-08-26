@@ -6,111 +6,111 @@ local _ = require(parent.ReactOtter)
 local signal = require(parent.AppCommonLib).Signal
 local _ = require(mediaGallery.MediaGalleryTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), signal (ref), otterModule (ref)
-	local var3, var4 = reactModule.useState(p0.targetIndex or 1)
-	local var5 = reactModule.useRef(var3)
-	var5.current = var3
-	local var6, var7 = reactModule.useBinding(Vector2.new(0, 0))
+	local var1, var2 = reactModule.useState(p1.targetIndex or 1)
+	local var3 = reactModule.useRef(var1)
+	var3.current = var1
+	local var4, var5 = reactModule.useBinding(Vector2.new(0, 0))
+	local var6 = reactModule.useRef(nil)
+	local var7 = reactModule.useRef(false)
 	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(false)
-	local var10 = reactModule.useRef(nil)
-	local var11 = reactModule.useCallback(function(p1)
-		-- upvalues: var6 (ref), p0 (ref)
-		return if p1 == 1 then Vector2.new(0, 0) else Vector2.new(var6:getValue().X + p0.itemPadding, 0)
-	end, { p0.itemPadding })
-	local var12, var13 = reactModule.useBinding(var11(var3))
+	local var9 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref), p1 (ref)
+		return if p2 == 1 then Vector2.new(0, 0) else Vector2.new(var4:getValue().X + p1.itemPadding, 0)
+	end, { p1.itemPadding })
+	local var10, var11 = reactModule.useBinding(var9(var1))
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var13 (ref), var11 (ref), var3 (ref)
-		if var6:getValue().X > 0 then
-			var13(var11(var3))
+		-- upvalues: var4 (ref), var11 (ref), var9 (ref), var1 (ref)
+		if var4:getValue().X > 0 then
+			var11(var9(var1))
 		end
-	end, { var11, var3 })
-	local var14 = reactModule.useRef(signal.new())
-	local var15 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var9 (ref), var12 (ref), var6 (ref), p0 (ref), var5 (ref), var14 (ref), var10 (ref), otterModule (copy), var13 (ref), var4 (ref)
-		if var9.current then return end
-		local var19, var20
-		local value = var12:getValue()
-		local var18 = var6:getValue().X + p0.itemPadding
-		local current = var5.current
+	end, { var9, var1 })
+	local var12 = reactModule.useRef(signal.new())
+	local var13 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var7 (ref), var10 (ref), var4 (ref), p1 (ref), var3 (ref), var12 (ref), var8 (ref), otterModule (copy), var11 (ref), var2 (ref)
+		if var7.current then return end
+		local var14, var15
+		local value = var10:getValue()
+		local var16 = var4:getValue().X + p1.itemPadding
+		local current = var3.current
 		local _ = nil
 		local _ = nil
 		
 		if p2 == "Right" then
-			var19 = current + 1
-			var20 = value + Vector2.new(var18, 0)
+			var14 = current + 1
+			var15 = value + Vector2.new(var16, 0)
 		else
-			var19 = current - 1
-			var20 = value - Vector2.new(var18, 0)
+			var14 = current - 1
+			var15 = value - Vector2.new(var16, 0)
 		end
-		if var19 < 1 or p0.itemCount < var19 then return end
-		var9.current = true
-		var14.current:fire(var19)
+		if var14 < 1 or p1.itemCount < var14 then return end
+		var7.current = true
+		var12.current:fire(var14)
 		
-		if var10.current then
-			var10.current:destroy()
+		if var8.current then
+			var8.current:destroy()
 		end
-		local var21 = otterModule.createSingleMotor(0)
-		var10.current = var21
-		var21:onStep(function(p4)
-			-- upvalues: var13 (copy), value (ref), var20 (write)
-			var13(value:Lerp(var20, p4))
+		local var17 = otterModule.createSingleMotor(0)
+		var8.current = var17
+		var17:onStep(function(p4)
+			-- upvalues: var11 (copy), value (ref), var15 (write)
+			var11(value:Lerp(var15, p4))
 		end)
-		var21:onComplete(function()
-			-- upvalues: var9 (copy), var10 (copy), var5 (copy), var19 (write), var4 (copy), p0 (copy), p3 (ref)
-			var9.current = false
-			var10.current = nil
-			var5.current = var19
-			var4(var19)
+		var17:onComplete(function()
+			-- upvalues: var7 (copy), var8 (copy), var3 (copy), var14 (write), var2 (copy), p1 (copy), p3 (ref)
+			var7.current = false
+			var8.current = nil
+			var3.current = var14
+			var2(var14)
 			
-			if p0.onScrollComplete then
-				p0.onScrollComplete(var19, p3)
+			if p1.onScrollComplete then
+				p1.onScrollComplete(var14, p3)
 			end
 		end)
 		
-		if p0.springConfig then
-			var21:setGoal(otterModule.spring(1, p0.springConfig))
+		if p1.springConfig then
+			var17:setGoal(otterModule.spring(1, p1.springConfig))
 		else
-			var21:setGoal(otterModule.instant(1))
+			var17:setGoal(otterModule.instant(1))
 		end
 	end, {
-		p0.itemCount,
-		p0.itemPadding,
-		p0.springConfig,
-		p0.onScrollComplete,
-		var12
+		p1.itemCount,
+		p1.itemPadding,
+		p1.springConfig,
+		p1.onScrollComplete,
+		var10
 	})
-	local var16 = reactModule.useCallback(function(p5)
-		-- upvalues: var7 (ref), var9 (ref), var13 (ref), var11 (ref), var5 (ref)
-		var7(p5.AbsoluteSize)
+	local var14 = reactModule.useCallback(function(p2)
+		-- upvalues: var5 (ref), var7 (ref), var11 (ref), var9 (ref), var3 (ref)
+		var5(p2.AbsoluteSize)
 		
-		if not var9.current then
-			var13(var11(var5.current))
+		if not var7.current then
+			var11(var9(var3.current))
 		end
-	end, { var11 })
+	end, { var9 })
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), p0 (ref)
-		var4(p0.targetIndex or 1)
-	end, { p0.targetIndex })
+		-- upvalues: var2 (ref), p1 (ref)
+		var2(p1.targetIndex or 1)
+	end, { p1.targetIndex })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref)
+		-- upvalues: var8 (ref)
 		return function()
-			-- upvalues: var10 (copy)
-			if var10.current then
-				var10.current:destroy()
-				var10.current = nil
+			-- upvalues: var8 (copy)
+			if var8.current then
+				var8.current:destroy()
+				var8.current = nil
 			end
 		end
 	end, {})
 	
 	return {
-		currentIndex = var3,
-		canvasPosition = var12,
-		scrolledSignal = var14.current,
-		scrollingFrameRef = var8,
-		absoluteSizeBinding = var6,
-		scrollInDirection = var15,
-		onAbsoluteSizeChanged = var16
+		currentIndex = var1,
+		canvasPosition = var10,
+		scrolledSignal = var12.current,
+		scrollingFrameRef = var6,
+		absoluteSizeBinding = var4,
+		scrollInDirection = var13,
+		onAbsoluteSizeChanged = var14
 	}
 end

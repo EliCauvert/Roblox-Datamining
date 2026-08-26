@@ -14,60 +14,60 @@ local badgeShape = foundationModule.Enums.BadgeShape
 local badgeSize = foundationModule.Enums.BadgeSize
 local badgeVariant = foundationModule.Enums.BadgeVariant
 local inputSize = foundationModule.Enums.InputSize
-local var6 = reactModule.memo(function(p0)
+local var1 = reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), badge (ref), badgeShape (ref), badgeSize (ref), badgeVariant (ref), list (ref)
 	return reactModule.createElement(list.Item, {
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		leading = reactModule.useMemo(function()
-			-- upvalues: p0 (ref)
-			return { type = nil, iconVariant = nil, iconName = p0.gameIcon }
-		end, { p0.gameIcon }),
-		title = p0.experienceName,
-		description = p0.description,
-		testId = `{p0.testIdPrefix}.ExperienceRow.{p0.universeId}`,
+			-- upvalues: p1 (ref)
+			return { type = nil, iconVariant = nil, iconName = p1.gameIcon }
+		end, { p1.gameIcon }),
+		title = p1.experienceName,
+		description = p1.description,
+		testId = `{p1.testIdPrefix}.ExperienceRow.{p1.universeId}`,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: p0 (ref)
-			p0.onOpenChat({
-				universeId = p0.universeId,
-				placeId = p0.placeId,
-				sessionId = p0.sessionId,
-				experienceName = p0.experienceName,
-				creatorName = p0.creatorName,
-				gameIcon = p0.gameIcon
+			-- upvalues: p1 (ref)
+			p1.onOpenChat({
+				universeId = p1.universeId,
+				placeId = p1.placeId,
+				sessionId = p1.sessionId,
+				experienceName = p1.experienceName,
+				creatorName = p1.creatorName,
+				gameIcon = p1.gameIcon
 			})
 		end, {
-			p0.creatorName, p0.experienceName, p0.gameIcon, p0.onOpenChat, p0.placeId,
-			p0.sessionId, p0.universeId
+			p1.creatorName, p1.experienceName, p1.gameIcon, p1.onOpenChat, p1.placeId,
+			p1.sessionId, p1.universeId
 		}),
 		trailing = reactModule.useMemo(function()
-			-- upvalues: p0 (ref), reactModule (copy), view (copy), badge (copy), badgeShape (copy), badgeSize (copy), badgeVariant (copy)
-			return if p0.visibilityLabel == nil then nil else reactModule.createElement(view, { tag = "row align-y-center auto-xy" }, {
+			-- upvalues: p1 (ref), reactModule (copy), view (copy), badge (copy), badgeShape (copy), badgeSize (copy), badgeVariant (copy)
+			return if p1.visibilityLabel == nil then nil else reactModule.createElement(view, { tag = "row align-y-center auto-xy" }, {
 				VisibilityBadge = reactModule.createElement(badge, {
-					text = p0.visibilityLabel,
+					text = p1.visibilityLabel,
 					shape = badgeShape.Box,
 					size = badgeSize.Small,
 					variant = badgeVariant.Neutral,
-					testId = `{p0.testIdPrefix}.VisibilityBadge.{p0.universeId}`
+					testId = `{p1.testIdPrefix}.VisibilityBadge.{p1.universeId}`
 				})
 			})
-		end, { p0.testIdPrefix, p0.universeId, p0.visibilityLabel })
+		end, { p1.testIdPrefix, p1.universeId, p1.visibilityLabel })
 	})
 end)
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagBuildExperienceMyCreationsUseUniverseListModule (ref), fFlagBuildExperienceStableMyCreationsListItemsModule (ref), reactModule (ref), var6 (ref), list (ref), view (ref), badge (ref), badgeShape (ref), badgeSize (ref), badgeVariant (ref), experienceResultsLoadingSkeletonModule (ref), inputSize (ref)
+	-- upvalues: fFlagBuildExperienceMyCreationsUseUniverseListModule (ref), fFlagBuildExperienceStableMyCreationsListItemsModule (ref), reactModule (ref), var1 (ref), list (ref), view (ref), badge (ref), badgeShape (ref), badgeSize (ref), badgeVariant (ref), experienceResultsLoadingSkeletonModule (ref), inputSize (ref)
 	local testIdPrefix = p1.testIdPrefix or "MyCreationsTab"
 	local firstResultLayoutOrder = p1.firstResultLayoutOrder or 1
 	local cloned = table.clone(p1.leadingItems or {})
 	
 	if p1.hasDisplayedResult and p1.hasDisplayedItems then
 		for i_1, v in p1.items do
-			local var10 = if fFlagBuildExperienceMyCreationsUseUniverseListModule then "U" .. v.universeId else "S" .. v.sessionId
-			local var11 = i_1 + firstResultLayoutOrder - 1
+			local var2 = if fFlagBuildExperienceMyCreationsUseUniverseListModule then "U" .. v.universeId else "S" .. v.sessionId
+			local var3 = i_1 + firstResultLayoutOrder - 1
 			
 			if fFlagBuildExperienceStableMyCreationsListItemsModule then
-				cloned[var10] = reactModule.createElement(var6, {
-					LayoutOrder = var11,
+				cloned[var2] = reactModule.createElement(var1, {
+					LayoutOrder = var3,
 					sessionId = v.sessionId,
 					universeId = v.universeId,
 					placeId = v.placeId,
@@ -84,8 +84,8 @@ return reactModule.memo(function(p1)
 				local gameIcon = v.gameIcon
 				local placeId = v.placeId
 				local visibilityLabel = v.visibilityLabel
-				cloned[var10] = reactModule.createElement(list.Item, {
-					LayoutOrder = var11,
+				cloned[var2] = reactModule.createElement(list.Item, {
+					LayoutOrder = var3,
 					leading = { iconName = gameIcon },
 					title = experienceName,
 					description = v.description,

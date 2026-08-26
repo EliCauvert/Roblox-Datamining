@@ -13,39 +13,39 @@ local useFormFactor = momentsCommonModule.Hooks.useFormFactor
 local formFactor = momentsCommonModule.Enums.FormFactor
 local usePreferences = foundationModule.Hooks.usePreferences
 
-return function(p0)
+return function(p1)
 	-- upvalues: mediaPreloadProvider (ref), usePreferredInputModule (ref), useFormFactor (ref), usePreferences (ref), formFactor (ref), reactModule (ref), useImmersiveChromeModule (ref)
-	local pager = p0.pager
-	local var6 = mediaPreloadProvider.useMediaControllerProvider()
+	local pager = p1.pager
+	local var1 = mediaPreloadProvider.useMediaControllerProvider()
 	useImmersiveChromeModule({
 		pager = pager,
-		active = p0.active,
+		active = p1.active,
 		getActiveIsPlaying = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), pager (ref)
-			return function(p1)
-				-- upvalues: var6 (copy), pager (copy)
-				if var6 == nil then
+			-- upvalues: var1 (ref), pager (ref)
+			return function(p2)
+				-- upvalues: var1 (copy), pager (copy)
+				if var1 == nil then
 					return true
 				end
-				local currentItem = pager.getCurrentItem(p1)
+				local currentItem = pager.getCurrentItem(p2)
 				
 				if currentItem == nil or currentItem.kind ~= "moment" then
 					return true
 				end
-				local momentId = var6.getControllerMap(p1)[currentItem.moment.momentId]
+				local momentId = var1.getControllerMap(p2)[currentItem.moment.momentId]
 				
-				return momentId == nil or momentId.getState(p1).isPlaying
+				return momentId == nil or momentId.getState(p2).isPlaying
 			end
-		end, { pager, var6 }),
+		end, { pager, var1 }),
 		getIsScrolling = reactModule.useMemo(function()
-			-- upvalues: p0 (ref)
+			-- upvalues: p1 (ref)
 			return function(p2)
-				-- upvalues: p0 (copy)
-				local current = p0.controllerRef.current
+				-- upvalues: p1 (copy)
+				local current = p1.controllerRef.current
 				
 				return if current == nil then false else current.getScrollState(p2) ~= "Idle"
 			end
-		end, { p0.controllerRef }),
+		end, { p1.controllerRef }),
 		inputAllowed = usePreferredInputModule() == Enum.PreferredInput.Touch and useFormFactor() == formFactor.MobilePortrait,
 		reducedMotion = usePreferences().reducedMotion
 	})

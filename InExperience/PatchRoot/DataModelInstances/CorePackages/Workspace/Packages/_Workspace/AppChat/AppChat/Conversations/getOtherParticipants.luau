@@ -1,9 +1,9 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: cryoModule (ref)
-	return if p0 and p0.participants then cryoModule.List.filter(p0.participants, function(p2)
-		-- upvalues: p1 (ref)
-		return tostring(p2) ~= tostring(p1)
+	return if p1 and p1.participants then cryoModule.List.filter(p1.participants, function(p3)
+		-- upvalues: p2 (ref)
+		return tostring(p3) ~= tostring(p2)
 	end) else {}
 end

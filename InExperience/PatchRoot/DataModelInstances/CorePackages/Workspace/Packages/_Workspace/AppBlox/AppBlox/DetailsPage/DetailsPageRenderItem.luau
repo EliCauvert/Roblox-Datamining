@@ -6,9 +6,9 @@ local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local _ = require(script.Parent.Types)
 local reactModule = require(parent.React)
 
-local function onSelectionGained(p0)
+local function onSelectionGained(p1)
 	-- upvalues: guiService (ref)
-	guiService:Select(p0)
+	guiService:Select(p1)
 end
 
 return function(p1)
@@ -16,11 +16,11 @@ return function(p1)
 	local item = p1.item
 	local safeArea = p1.safeArea
 	local itemPadding = p1.itemPadding
-	local var4 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: item (ref)
 		return item.renderComponent()
 	end, { item.renderComponent })
-	local var5, var6 = reactModule.useBinding(0)
+	local var2, var3 = reactModule.useBinding(0)
 	
 	return reactModule.createElement("CanvasGroup", {
 		key = item.key,
@@ -28,23 +28,23 @@ return function(p1)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		ref = reactModule.useRef(nil),
 		[reactModule.Change.AbsolutePosition] = reactModule.useCallback(function(p2)
-			-- upvalues: safeArea (ref), itemPadding (ref), var6 (ref)
+			-- upvalues: safeArea (ref), itemPadding (ref), var3 (ref)
 			local scrollingFrame = p2:FindFirstAncestorOfClass("ScrollingFrame")
 			
 			if scrollingFrame == nil then
 				return nil
 			end
-			local var8 = p2.AbsolutePosition.Y - scrollingFrame.AbsolutePosition.Y - safeArea.Y
-			local var9 = -(p2.AbsoluteSize.Y + itemPadding)
+			local var4 = p2.AbsolutePosition.Y - scrollingFrame.AbsolutePosition.Y - safeArea.Y
+			local var5 = -(p2.AbsoluteSize.Y + itemPadding)
 			
-			if var8 < 1 and var9 < var8 + safeArea.Y + 1 then
-				var6(var8 / var9)
+			if var4 < 1 and var5 < var4 + safeArea.Y + 1 then
+				var3(var4 / var5)
 			else
-				var6(0)
+				var3(0)
 			end
 			return nil
 		end, { safeArea, itemPadding }),
-		GroupTransparency = var5,
+		GroupTransparency = var2,
 		BackgroundTransparency = 1,
 		Selectable = item.useSelectionBumper,
 		SelectionImageObject = useSelectionCursor(cursorKind.Invisible),
@@ -54,6 +54,6 @@ return function(p1)
 			PaddingLeft = UDim.new(0, safeArea.X),
 			PaddingRight = UDim.new(0, safeArea.X)
 		}),
-		View = var4
+		View = var1
 	})
 end

@@ -8,9 +8,9 @@ local image = foundationModule.Image
 local playerVerifiedBadgeModule = require(parent.Components.Presentation.PlayerVerifiedBadge)
 local constantsModule = require(parent.Common.Constants)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), text (ref), playerVerifiedBadgeModule (ref), view (ref), constantsModule (ref), image (ref)
-	local header = p0.header
+	local header = p1.header
 	local t = {
 		DisplayNameText = reactModule.createElement(text, {
 			tag = "shrink auto-xy text-title-medium text-wrap text-align-x-left text-truncate-end content-emphasis",
@@ -19,12 +19,12 @@ return reactModule.memo(function(p0)
 		})
 	}
 	
-	if p0.player ~= nil then
-		t.VerifiedBadge = reactModule.createElement(playerVerifiedBadgeModule, { layoutOrder = 2, player = p0.player })
+	if p1.player ~= nil then
+		t.VerifiedBadge = reactModule.createElement(playerVerifiedBadgeModule, { layoutOrder = 2, player = p1.player })
 	end
 	return reactModule.createElement(view, {
 		tag = "row align-x-left align-y-center gap-medium size-full-1600 auto-y",
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		selection = constantsModule.NOT_SELECTABLE
 	}, {
 		Avatar = reactModule.createElement(view, {

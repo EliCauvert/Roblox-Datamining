@@ -9,9 +9,9 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
 local uDim2 = UDim2.new(0, 150, 0, 210)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), useLocalization (ref), useTextSizeOffset (ref), uDim2 (ref), reactModule (ref), styledTextLabel (ref), skeleton (ref), experienceTileV3 (ref)
-	local var4 = useStyle()
+	local var1 = useStyle()
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -25,26 +25,26 @@ return function(p0)
 			layoutOrder = 0,
 			text = useLocalization({ header = "Feature.VirtualEvents.DescriptionLabel" }).header,
 			automaticSize = Enum.AutomaticSize.XY,
-			fontStyle = var4.Font.Header1,
-			colorStyle = var4.Theme.TextEmphasis
+			fontStyle = var1.Font.Header1,
+			colorStyle = var1.Theme.TextEmphasis
 		}),
-		Description = if p0.description then reactModule.createElement(styledTextLabel, {
+		Description = if p1.description then reactModule.createElement(styledTextLabel, {
 			layoutOrder = 1,
-			text = p0.description,
+			text = p1.description,
 			automaticSize = Enum.AutomaticSize.XY,
-			fontStyle = var4.Font.Body,
-			colorStyle = var4.Theme.TextDefault
-		}) else reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, var4.Font.BaseSize) }),
+			fontStyle = var1.Font.Body,
+			colorStyle = var1.Theme.TextDefault
+		}) else reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, var1.Font.BaseSize) }),
 		ExperienceTileWrapper = reactModule.createElement("Frame", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Size = uDim2 + UDim2.fromOffset(0, useTextSizeOffset() * 2)
 		}, {
 			ExperienceTile = reactModule.createElement(experienceTileV3, {
-				experienceName = p0.experienceName,
-				thumbnail = p0.experienceThumbnail,
-				onActivated = p0.onExperienceTileActivated,
-				styleProps = { overlayColors = { Hover = var4.Theme.BackgroundOnHover } }
+				experienceName = p1.experienceName,
+				thumbnail = p1.experienceThumbnail,
+				onActivated = p1.onExperienceTileActivated,
+				styleProps = { overlayColors = { Hover = var1.Theme.BackgroundOnHover } }
 			})
 		})
 	})

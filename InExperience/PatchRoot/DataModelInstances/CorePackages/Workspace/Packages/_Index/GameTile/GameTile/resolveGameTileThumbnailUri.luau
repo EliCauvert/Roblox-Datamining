@@ -3,12 +3,12 @@ local formatExperienceIconModule = require(gameTile.formatExperienceIcon)
 local formatExperienceThumbnailModule = require(gameTile.formatExperienceThumbnail)
 local resolveWideAssetIdModule = require(gameTile.resolveWideAssetId)
 
-return function(p0)
+return function(p1)
 	-- upvalues: resolveWideAssetIdModule (ref), formatExperienceThumbnailModule (ref), formatExperienceIconModule (ref)
-	if p0.useGridTile then
-		local var4 = resolveWideAssetIdModule(p0.perEntryWideAssetId, p0.game, p0.topicId)
+	if p1.useGridTile then
+		local var1 = resolveWideAssetIdModule(p1.perEntryWideAssetId, p1.game, p1.topicId)
 		
-		return if var4 or p0.placeId then formatExperienceThumbnailModule(var4, p0.placeId, p0.isEmphasized) else nil
+		return if var1 or p1.placeId then formatExperienceThumbnailModule(var1, p1.placeId, p1.isEmphasized) else nil
 	end
-	return if p0.universeId then formatExperienceIconModule(p0.iconUrl, p0.universeId) else p0.iconUrl
+	return if p1.universeId then formatExperienceIconModule(p1.iconUrl, p1.universeId) else p1.iconUrl
 end

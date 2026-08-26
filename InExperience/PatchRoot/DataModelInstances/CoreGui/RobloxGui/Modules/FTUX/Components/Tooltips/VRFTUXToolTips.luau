@@ -12,13 +12,13 @@ local function onRenderStepped(_)
 	if isVRAppBuild() then
 		for i, v in pairs(t) do
 			local controllerControllerModel = VRHub:GetControllerModel(v.Button.Controller)
-			local var8 = if controllerControllerModel then controllerControllerModel:getButtonPosition(v.Button.ButtonKeycode) else nil
+			local var1 = if controllerControllerModel then controllerControllerModel:getButtonPosition(v.Button.ButtonKeycode) else nil
 			
 			if v.Part then
-				if controllerControllerModel == nil or var8 == nil then
+				if controllerControllerModel == nil or var1 == nil then
 					v.Part.Position = Vector3.new(-99999, -99999, -99999)
 				else
-					v.Part.Position = var8
+					v.Part.Position = var1
 				end
 			end
 		end
@@ -44,17 +44,17 @@ function spawnTooltipPart()
 	return tooltipPart
 end
 
-function showTooltipText(p0)
-	for i, v in ipairs(p0.Part:GetDescendants()) do
+function showTooltipText(p1)
+	for i, v in ipairs(p1.Part:GetDescendants()) do
 		if v:IsA("TextLabel") and v.Name == "Body" then
 			v.ZIndex = 10
 		end
 	end
 end
 
-function Tooltips(p1)
+function Tooltips(p2)
 	-- upvalues: t (ref), reactModule (ref), runService (ref), onRenderStepped (ref), luauPolyfillModule (ref), toolTipModule (ref)
-	for i, v in pairs(p1.tooltipButtons) do
+	for i, v in pairs(p2.tooltipButtons) do
 		t[i] = { Button = v, Part = spawnTooltipPart() }
 	end
 	reactModule.useEffect(function()
@@ -65,11 +65,11 @@ function Tooltips(p1)
 	end, {})
 	runService.RenderStepped:Connect(onRenderStepped)
 	
-	return reactModule.createElement("Frame", {}, luauPolyfillModule.Array.map(t, function(p2, p3)
-		-- upvalues: reactModule (copy), toolTipModule (copy), p1 (ref)
+	return reactModule.createElement("Frame", {}, luauPolyfillModule.Array.map(t, function(p3, p4)
+		-- upvalues: reactModule (copy), toolTipModule (copy), p2 (ref)
 		return reactModule.createElement(toolTipModule, {
-			controllerPart = p2.Part,
-			tooltipText = p1.tooltipButtons[p3].Text
+			controllerPart = p3.Part,
+			tooltipText = p2.tooltipButtons[p4].Text
 		})
 	end))
 end

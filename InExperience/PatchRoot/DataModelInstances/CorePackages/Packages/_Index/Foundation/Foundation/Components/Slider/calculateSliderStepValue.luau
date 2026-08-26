@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	return if p1 > 0 then math.clamp(p2.Min + math.floor((p0 - p2.Min) / p1 + 0.5) * p1, p2.Min, p2.Max) else p0
+﻿return function(p1, p2, p3)
+	return if p2 > 0 then math.clamp(p3.Min + math.floor((p1 - p3.Min) / p2 + 0.5) * p2, p3.Min, p3.Max) else p1
 end

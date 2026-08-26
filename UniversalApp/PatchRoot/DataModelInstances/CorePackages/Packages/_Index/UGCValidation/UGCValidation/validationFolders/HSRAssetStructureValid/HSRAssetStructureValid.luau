@@ -12,16 +12,16 @@ return {
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref)
-		if p1.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC or p1.consumerConfig.source == "AutoSetup" then return end
-		local rootInstance = p1.rootInstance
+		if p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC or p2.consumerConfig.source == "AutoSetup" then return end
+		local rootInstance = p2.rootInstance
 		local descendants = rootInstance:GetDescendants()
 		table.insert(descendants, rootInstance)
 		
 		for i, v in descendants do
 			if v:IsA("BaseWrap") and not v:IsHSRReady() then
-				p0:fail(errorSourceStringsModule.Keys.HSRDataNotReady, { InstancePath = v:GetFullName() })
+				p1:fail(errorSourceStringsModule.Keys.HSRDataNotReady, { InstancePath = v:GetFullName() })
 			end
 		end
 	end

@@ -1,13 +1,13 @@
-﻿local var0 = require(script:FindFirstAncestor("FriendsCommon").Parent.DataHydration).Friends.FriendsStore.get()
+﻿local var1 = require(script:FindFirstAncestor("FriendsCommon").Parent.DataHydration).Friends.FriendsStore.get()
 
-return function(p0)
-	-- upvalues: var0 (ref)
-	if p0.friendshipUpdate.removedUserId then
-		var0.UpdateIsFriendsWith(p0.friendshipUpdate.removedUserId, false)
+return function(p1)
+	-- upvalues: var1 (ref)
+	if p1.friendshipUpdate.removedUserId then
+		var1.UpdateIsFriendsWith(p1.friendshipUpdate.removedUserId, false)
 		
 		return
-	elseif p0.friendshipUpdate.addedUserId then
-		var0.RefetchOnlineFriends()
-		var0.UpdateIsFriendsWith(p0.friendshipUpdate.addedUserId, true)
+	elseif p1.friendshipUpdate.addedUserId then
+		var1.RefetchOnlineFriends()
+		var1.UpdateIsFriendsWith(p1.friendshipUpdate.addedUserId, true)
 	end
 end

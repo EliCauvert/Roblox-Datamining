@@ -5,25 +5,25 @@ local signalsReactModule = require(parent.SignalsReact)
 local createGroupsListStoreModule = require(groups.Stores.createGroupsListStore)
 local _ = require(groups.Common.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), createGroupsListStoreModule (ref), signalsReactModule (ref)
-	local var4 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: createGroupsListStoreModule (copy)
 		return createGroupsListStoreModule()
 	end, {})
-	local var5 = signalsReactModule.useSignalState(var4.getState)
+	local var2 = signalsReactModule.useSignalState(var1.getState)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var4 (ref)
-		if p0 and p0 ~= "" then
-			var4.fetchGroups(p0)
+		-- upvalues: p1 (ref), var1 (ref)
+		if p1 and p1 ~= "" then
+			var1.fetchGroups(p1)
 			
 			return function()
-				-- upvalues: var4 (copy)
-				var4.reset()
+				-- upvalues: var1 (copy)
+				var1.reset()
 			end
 		end
-		var4.reset()
-	end, { var4, p0 })
+		var1.reset()
+	end, { var1, p1 })
 	
-	return var5
+	return var2
 end

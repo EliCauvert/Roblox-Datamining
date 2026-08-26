@@ -1,33 +1,33 @@
 ﻿local foundationModule = require(script:FindFirstAncestor("ExpChat").Parent.Foundation)
 
 return {
-	deriveMicSendButton = function(p0, p1)
+	deriveMicSendButton = function(p1, p2)
 		-- upvalues: foundationModule (ref)
-		local idleSendIcon = p1.idleSendIcon
-		local idleSendVariant = p1.idleSendVariant
-		local idleSendActivated = p1.idleSendActivated
-		local idleSendDisabled = p1.idleSendDisabled or false
-		local var2 = false
+		local idleSendIcon = p2.idleSendIcon
+		local idleSendVariant = p2.idleSendVariant
+		local idleSendActivated = p2.idleSendActivated
+		local idleSendDisabled = p2.idleSendDisabled or false
+		local var1 = false
 		
-		if p0.isRecording then
-			idleSendActivated = p0.onMicTap
+		if p1.isRecording then
+			idleSendActivated = p1.onMicTap
 			idleSendDisabled = false
-		elseif p0.isTranscribing then
+		elseif p1.isTranscribing then
 			idleSendDisabled = true
-		elseif p0.isListening then
+		elseif p1.isListening then
 			idleSendIcon = foundationModule.Enums.IconName.X
 			idleSendVariant = foundationModule.Enums.ButtonVariant.Standard
-			idleSendActivated = p0.dictation.cancel
+			idleSendActivated = p1.dictation.cancel
 			idleSendDisabled = false
-		elseif p1.hasEmptyInputText and p0.isDictationEligible then
-			if p1.isTextBoxFocused then
+		elseif p2.hasEmptyInputText and p1.isDictationEligible then
+			if p2.isTextBoxFocused then
 				idleSendDisabled = true
 			else
 				idleSendIcon = foundationModule.Enums.IconName.Microphone
 				idleSendVariant = foundationModule.Enums.ButtonVariant.Utility
-				idleSendActivated = p0.onMicTap
+				idleSendActivated = p1.onMicTap
 				idleSendDisabled = false
-				var2 = true
+				var1 = true
 			end
 		end
 		return {
@@ -35,19 +35,19 @@ return {
 			variant = idleSendVariant,
 			isDisabled = idleSendDisabled,
 			onActivated = idleSendActivated,
-			useLongPressOverlay = var2 and p0.micGestureHandlers ~= nil
+			useLongPressOverlay = var1 and p1.micGestureHandlers ~= nil
 		}
 	end,
-	deriveBackgroundColors = function(value, p2)
+	deriveBackgroundColors = function(value, p1)
 		return if value.isListening then {
-			color3 = p2.listeningColor3,
-			baseTransparency = p2.listeningTransparency
+			color3 = p1.listeningColor3,
+			baseTransparency = p1.listeningTransparency
 		} else {
-			color3 = p2.defaultColor3,
-			baseTransparency = p2.defaultTransparency
+			color3 = p1.defaultColor3,
+			baseTransparency = p1.defaultTransparency
 		}
 	end,
-	shouldPreventFade = function(p3)
-		return p3.isRecording or (p3.isTranscribing or p3.isListening)
+	shouldPreventFade = function(p1)
+		return p1.isRecording or (p1.isTranscribing or p1.isListening)
 	end
 }

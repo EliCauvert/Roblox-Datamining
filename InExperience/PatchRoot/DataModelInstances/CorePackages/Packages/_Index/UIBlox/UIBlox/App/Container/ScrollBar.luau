@@ -6,97 +6,97 @@ local _ = require(parent.Style.StyleTypes)
 local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
 local _ = require(parent.ImageSet.ImagesTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), userInputService (ref), imageSetComponentModule (ref)
-	local userInteractionEnabled = p0.userInteractionEnabled
-	local width = p0.width
-	local anchorPoint = p0.anchorPoint
-	local position = p0.position
-	local zIndex = p0.zIndex
-	local transparency = p0.transparency
-	local backgroundColor = p0.backgroundColor
-	local paddingStartEnd = p0.paddingStartEnd
-	local handleWidth = p0.handleWidth
-	local handleColor = p0.handleColor
-	local handleCornerRadius = p0.handleCornerRadius
-	local handleIcon = p0.handleIcon
-	local handleIconSize = p0.handleIconSize
-	local handleIconColor = p0.handleIconColor
-	local onDragging = p0.onDragging
-	local viewSize = p0.viewSize
-	local canvasSize = p0.canvasSize
-	local canvasPosition = p0.canvasPosition
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useBinding(0)
-	local var7, var8 = reactModule.useState(false)
-	local var9 = reactModule.useRef(0)
-	local var10 = reactModule.useRef(0)
-	local var11 = reactModule.useCallback(function(p1)
-		-- upvalues: var6 (ref)
-		var6(p1.AbsoluteSize.Y)
-	end, { var6 })
-	local var12 = reactModule.useCallback(function(p2)
+	local userInteractionEnabled = p1.userInteractionEnabled
+	local width = p1.width
+	local anchorPoint = p1.anchorPoint
+	local position = p1.position
+	local zIndex = p1.zIndex
+	local transparency = p1.transparency
+	local backgroundColor = p1.backgroundColor
+	local paddingStartEnd = p1.paddingStartEnd
+	local handleWidth = p1.handleWidth
+	local handleColor = p1.handleColor
+	local handleCornerRadius = p1.handleCornerRadius
+	local handleIcon = p1.handleIcon
+	local handleIconSize = p1.handleIconSize
+	local handleIconColor = p1.handleIconColor
+	local onDragging = p1.onDragging
+	local viewSize = p1.viewSize
+	local canvasSize = p1.canvasSize
+	local canvasPosition = p1.canvasPosition
+	local var1, var2 = reactModule.useState(false)
+	local var3, var4 = reactModule.useBinding(0)
+	local var5, var6 = reactModule.useState(false)
+	local var7 = reactModule.useRef(0)
+	local var8 = reactModule.useRef(0)
+	local var9 = reactModule.useCallback(function(p2)
 		-- upvalues: var4 (ref)
+		var4(p2.AbsoluteSize.Y)
+	end, { var4 })
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref)
 		local parent = p2.Parent
 		
 		if parent == nil or math.ceil(p2.AbsoluteSize.Y) >= parent.AbsoluteSize.Y then
-			var4(false)
+			var2(false)
 			
 			return
 		end
-		var4(true)
-	end, { var4 })
-	local var13 = reactModule.useMemo(function()
+		var2(true)
+	end, { var2 })
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), viewSize (ref), canvasSize (ref), handleWidth (ref)
-		return reactModule.joinBindings({ viewSize = viewSize, canvasSize = canvasSize }):map(function(p3)
+		return reactModule.joinBindings({ viewSize = viewSize, canvasSize = canvasSize }):map(function(p2)
 			-- upvalues: handleWidth (copy)
-			return UDim2.new(0, handleWidth, math.clamp(p3.viewSize.Y / p3.canvasSize.Y, 0, 1), 0)
+			return UDim2.new(0, handleWidth, math.clamp(p2.viewSize.Y / p2.canvasSize.Y, 0, 1), 0)
 		end)
 	end, { handleWidth, viewSize, canvasSize })
-	local var14 = reactModule.useMemo(function()
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), canvasPosition (ref), canvasSize (ref)
-		return reactModule.joinBindings({ canvasPosition = canvasPosition, canvasSize = canvasSize }):map(function(p4)
-			return UDim2.fromScale(0.5, p4.canvasPosition.Y / p4.canvasSize.Y)
+		return reactModule.joinBindings({ canvasPosition = canvasPosition, canvasSize = canvasSize }):map(function(p2)
+			return UDim2.fromScale(0.5, p2.canvasPosition.Y / p2.canvasSize.Y)
 		end)
 	end, { canvasSize, canvasPosition })
-	local var15 = reactModule.useCallback(function(_, p5)
-		-- upvalues: var3 (ref), userInteractionEnabled (ref), var7 (ref), var9 (ref), var10 (ref), canvasPosition (ref), var8 (ref)
-		if not var3 or not userInteractionEnabled or var7 then return end
-		if p5 and p5.UserInputType == Enum.UserInputType.MouseButton1 then
-			var9.current = p5.Position.Y
-			var10.current = canvasPosition:getValue().Y
-			var8(true)
+	local var13 = reactModule.useCallback(function(_, p2)
+		-- upvalues: var1 (ref), userInteractionEnabled (ref), var5 (ref), var7 (ref), var8 (ref), canvasPosition (ref), var6 (ref)
+		if not var1 or not userInteractionEnabled or var5 then return end
+		if p2 and p2.UserInputType == Enum.UserInputType.MouseButton1 then
+			var7.current = p2.Position.Y
+			var8.current = canvasPosition:getValue().Y
+			var6(true)
 		end
 	end, {
-		var3, userInteractionEnabled, var7, var9, var10, canvasPosition, var8
+		var1, userInteractionEnabled, var5, var7, var8, canvasPosition, var6
 	})
-	local var16 = reactModule.useCallback(function(p6)
-		-- upvalues: userInteractionEnabled (ref), var7 (ref), var9 (ref), var5 (ref), paddingStartEnd (ref), viewSize (ref), var10 (ref), canvasSize (ref), onDragging (ref)
-		if not userInteractionEnabled or not var7 then return end
-		if p6.UserInputType == Enum.UserInputType.MouseMovement then
+	local var14 = reactModule.useCallback(function(p2)
+		-- upvalues: userInteractionEnabled (ref), var5 (ref), var7 (ref), var3 (ref), paddingStartEnd (ref), viewSize (ref), var8 (ref), canvasSize (ref), onDragging (ref)
+		if not userInteractionEnabled or not var5 then return end
+		if p2.UserInputType == Enum.UserInputType.MouseMovement then
 			local y = canvasSize:getValue().Y
-			onDragging(math.clamp(var10.current + (p6.Position.Y - var9.current) / (var5:getValue() - paddingStartEnd) * y, 0, y - viewSize:getValue().Y))
+			onDragging(math.clamp(var8.current + (p2.Position.Y - var7.current) / (var3:getValue() - paddingStartEnd) * y, 0, y - viewSize:getValue().Y))
 			
 			return
 		end
 	end, {
-		userInteractionEnabled, var7, var9, var5, paddingStartEnd, viewSize, var10,
+		userInteractionEnabled, var5, var7, var3, paddingStartEnd, viewSize, var8,
 		canvasSize, onDragging
 	})
-	local var17 = reactModule.useCallback(function(p7)
-		-- upvalues: userInteractionEnabled (ref), var7 (ref), var8 (ref)
-		if not userInteractionEnabled or not var7 then return end
-		if p7 and p7.UserInputType ~= Enum.UserInputType.MouseButton1 then
+	local var15 = reactModule.useCallback(function(p2)
+		-- upvalues: userInteractionEnabled (ref), var5 (ref), var6 (ref)
+		if not userInteractionEnabled or not var5 then return end
+		if p2 and p2.UserInputType ~= Enum.UserInputType.MouseButton1 then
 			return
 		end
-		var8(false)
-	end, { userInteractionEnabled, var7, var8 })
+		var6(false)
+	end, { userInteractionEnabled, var5, var6 })
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var7 (ref), userInputService (copy), var16 (ref), var17 (ref)
-		if var3 and var7 then
-			local inputChangedConnection = userInputService.InputChanged:Connect(var16)
-			local inputEndedConnection = userInputService.InputEnded:Connect(var17)
-			local windowFocusReleasedConnection = userInputService.WindowFocusReleased:Connect(var17)
+		-- upvalues: var1 (ref), var5 (ref), userInputService (copy), var14 (ref), var15 (ref)
+		if var1 and var5 then
+			local inputChangedConnection = userInputService.InputChanged:Connect(var14)
+			local inputEndedConnection = userInputService.InputEnded:Connect(var15)
+			local windowFocusReleasedConnection = userInputService.WindowFocusReleased:Connect(var15)
 			
 			return function()
 				-- upvalues: inputChangedConnection (ref), inputEndedConnection (ref), windowFocusReleasedConnection (ref)
@@ -106,13 +106,13 @@ return function(p0)
 			end
 		end
 		return function() end
-	end, { var3, var7, var16, var17 })
-	local var18 = transparency
+	end, { var1, var5, var14, var15 })
+	local var16 = transparency
 	
-	if not var3 then
-		var18 = 1
-	elseif var7 then
-		var18 = 0
+	if not var1 then
+		var16 = 1
+	elseif var5 then
+		var16 = 0
 	end
 	return reactModule.createElement("CanvasGroup", {
 		Selectable = false,
@@ -120,7 +120,7 @@ return function(p0)
 		Size = UDim2.new(0, width, 1, 0),
 		AnchorPoint = anchorPoint,
 		Position = position,
-		GroupTransparency = var18,
+		GroupTransparency = var16,
 		BackgroundColor3 = if backgroundColor then backgroundColor.Color else nil,
 		BackgroundTransparency = if backgroundColor then backgroundColor.Transparency else 1,
 		ZIndex = zIndex
@@ -135,20 +135,20 @@ return function(p0)
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
-			[reactModule.Change.AbsoluteSize] = var11
+			[reactModule.Change.AbsoluteSize] = var9
 		}, {
 			TrackUICorner = if handleCornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, handleCornerRadius) }) else nil,
 			Handle = reactModule.createElement("Frame", {
-				Active = var3 and userInteractionEnabled,
+				Active = var1 and userInteractionEnabled,
 				Selectable = false,
-				Size = var13,
+				Size = var11,
 				AnchorPoint = Vector2.new(0.5, 0),
-				Position = var14,
+				Position = var12,
 				BackgroundColor3 = if handleColor then handleColor.Color else nil,
 				BackgroundTransparency = if handleColor then handleColor.Transparency else 0,
 				BorderSizePixel = 0,
-				[reactModule.Change.AbsoluteSize] = var12,
-				[reactModule.Event.InputBegan] = var15
+				[reactModule.Change.AbsoluteSize] = var10,
+				[reactModule.Event.InputBegan] = var13
 			}, {
 				HandleUICorner = if handleCornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, handleCornerRadius) }) else nil,
 				Icon = if handleIcon then reactModule.createElement(imageSetComponentModule.Label, {

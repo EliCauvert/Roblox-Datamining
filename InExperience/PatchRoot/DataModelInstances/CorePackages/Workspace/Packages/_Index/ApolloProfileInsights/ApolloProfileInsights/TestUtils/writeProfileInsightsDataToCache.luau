@@ -3,11 +3,11 @@ local cryoModule = require(parent.Cryo)
 local _ = require(parent.ApolloClient)
 local queries = require(parent.ApolloLocalState).queries
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: queries (ref), cryoModule (ref)
-	local var1 = if p2 and p2.query then p2.query else queries.profilesInsightsByUserIds
+	local var1 = if p3 and p3.query then p3.query else queries.profilesInsightsByUserIds
 	
-	for i, v in p1 do
+	for i, v in p2 do
 		local t = {}
 		
 		for i_1, v_1 in v.mutualFriends or {} do
@@ -18,7 +18,7 @@ return function(p0, p1, p2)
 				displayName = v_1.displayName or ""
 			}, v_1))
 		end
-		p0:writeQuery({
+		p1:writeQuery({
 			variables = { userIds = i },
 			query = var1,
 			data = {

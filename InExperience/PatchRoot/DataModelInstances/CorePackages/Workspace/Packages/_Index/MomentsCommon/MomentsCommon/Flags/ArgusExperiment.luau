@@ -10,15 +10,15 @@ game:DefineFastString("ArgusInfluencerUploadsKey", "influencerUploads")
 local argusInfluencerUploadsKeyFastString = game:GetFastString("ArgusInfluencerUploadsKey")
 local t = { platformIntegration = false, influencerUploads = false }
 
-local function getExperimentConfig(p0)
+local function getExperimentConfig(p1)
 	-- upvalues: argusExperimentLayerFastString (ref), argusEntryTypeKeyFastString (ref), t (ref), argusPlatformIntegrationKeyFastString (ref), argusInfluencerUploadsKeyFastString (ref)
-	local var7 = (p0 or {})[argusExperimentLayerFastString] or {}
-	local var8 = var7[argusEntryTypeKeyFastString]
+	local var1 = (p1 or {})[argusExperimentLayerFastString] or {}
+	local var2 = var1[argusEntryTypeKeyFastString]
 	
-	return if var8 == "flyout" or var8 == "tab" then {
-		entryType = var8,
-		platformIntegration = var7[argusPlatformIntegrationKeyFastString] == true,
-		influencerUploads = var7[argusInfluencerUploadsKeyFastString] == true
+	return if var2 == "flyout" or var2 == "tab" then {
+		entryType = var2,
+		platformIntegration = var1[argusPlatformIntegrationKeyFastString] == true,
+		influencerUploads = var1[argusInfluencerUploadsKeyFastString] == true
 	} else t
 end
 

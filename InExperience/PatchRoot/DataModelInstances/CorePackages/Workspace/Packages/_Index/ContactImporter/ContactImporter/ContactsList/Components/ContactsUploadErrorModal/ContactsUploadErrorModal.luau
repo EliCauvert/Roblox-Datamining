@@ -9,11 +9,11 @@ local contactsUploadErrorModal = roact.PureComponent:extend("ContactsUploadError
 
 function contactsUploadErrorModal.render(_)
 	-- upvalues: withLocalization (ref), textKeysModule (ref), roact (ref), contactsInformationModalModule (ref), images (ref)
-	return withLocalization({ hasUploadError = textKeysModule.UPLOAD_CONTACTS_FAILURE })(function(p0)
+	return withLocalization({ hasUploadError = textKeysModule.UPLOAD_CONTACTS_FAILURE })(function(p1)
 		-- upvalues: roact (copy), contactsInformationModalModule (copy), images (copy)
 		return roact.createElement(contactsInformationModalModule, {
 			image = images["icons/status/error_large"],
-			text = p0.hasUploadError
+			text = p1.hasUploadError
 		})
 	end)
 end

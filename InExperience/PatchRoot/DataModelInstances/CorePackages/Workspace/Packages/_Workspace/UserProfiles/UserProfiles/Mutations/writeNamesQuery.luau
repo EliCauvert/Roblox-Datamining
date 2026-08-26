@@ -1,10 +1,10 @@
 ﻿local _ = require(script:FindFirstAncestor("UserProfiles").Parent.ApolloClient)
 
-return function(p0)
-	local client = p0.client
-	local query = p0.query
-	local userId = p0.userId
-	local names = p0.names
+return function(p1)
+	local client = p1.client
+	local query = p1.query
+	local userId = p1.userId
+	local names = p1.names
 	client:writeQuery({
 		variables = { userIds = { userId } },
 		query = query,

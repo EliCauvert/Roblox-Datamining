@@ -87,28 +87,28 @@ local t = {
 	size = UDim2.new(1, 0, 1, 0)
 }
 
-return memo(function(p0)
+return memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useCallback (ref), reactModule (ref), pendingShimmerBubbleModule (ref), bidirectionalFlatList (ref)
-	local var5 = cryoModule.Dictionary.join(t, p0)
-	local style = var5.style or useStyle()
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local style = var1.style or useStyle()
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundColor3 = style.Theme.BackgroundDefault.Color,
-		Size = var5.size,
+		Size = var1.size,
 		Transparency = style.Tokens.Color.None.Transparency,
-		LayoutOrder = var5.layoutOrder
+		LayoutOrder = var1.layoutOrder
 	}, {
 		ShimmerMessageList = reactModule.createElement(bidirectionalFlatList, {
 			inverted = true,
 			optimizeInvertedCanvasResize = true,
-			data = var5.itemList,
-			renderItem = useCallback(function(p1)
-				-- upvalues: var5 (ref), reactModule (copy), pendingShimmerBubbleModule (copy), cryoModule (copy)
-				return reactModule.createElement(pendingShimmerBubbleModule, cryoModule.Dictionary.join(p1.item, {
-					backgroundTransparency = var5.maxTransparency - (var5.maxTransparency - var5.minTransparency) * (p1.index - 1) / math.max(1, #var5.itemList)
+			data = var1.itemList,
+			renderItem = useCallback(function(p2)
+				-- upvalues: var1 (ref), reactModule (copy), pendingShimmerBubbleModule (copy), cryoModule (copy)
+				return reactModule.createElement(pendingShimmerBubbleModule, cryoModule.Dictionary.join(p2.item, {
+					backgroundTransparency = var1.maxTransparency - (var1.maxTransparency - var1.minTransparency) * (p2.index - 1) / math.max(1, #var1.itemList)
 				}))
-			end, { #var5.itemList }),
+			end, { #var1.itemList }),
 			style = {
 				BackgroundTransparency = 1,
 				ScrollBarThickness = 0,

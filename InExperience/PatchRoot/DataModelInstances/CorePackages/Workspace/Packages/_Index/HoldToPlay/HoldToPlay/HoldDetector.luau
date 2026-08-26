@@ -9,93 +9,93 @@ local useButtonHold = focusNavigationUtilsModule.useButtonHold
 local buttonHoldStateEnum = focusNavigationUtilsModule.ButtonHoldStateEnum
 local constantsModule = require(holdToPlay.Constants)
 
-local function HoldDetectorForSelectedObject(p0)
+local function HoldDetectorForSelectedObject(p1)
 	-- upvalues: reactModule (ref), useButtonHold (ref), constantsModule (ref), appShortcutBarContext (ref), buttonHoldStateEnum (ref), reactFocusNavigationModule (ref)
-	local var6, var7 = reactModule.useState(nil)
-	local var8, var9 = reactModule.useState(nil)
-	local var6_1 = var6 or p0.keyCode
-	local var8_1 = var8 or p0.focusNavigationEventName
-	local var12 = reactModule.useRef(false)
-	local var13 = reactModule.useRef(false)
-	local var14 = useButtonHold(constantsModule.SIGNAL_HOLD_INTENT_SECONDS, constantsModule.SIGNAL_HOLD_COMPLETE_SECONDS, true)
-	local var15 = appShortcutBarContext.useDispatchButtonHoldStarted()
-	local var16 = appShortcutBarContext.useDispatchButtonHoldEnded()
-	local var17 = if var14.holdState ~= buttonHoldStateEnum.HOLDING then if var14.holdState ~= buttonHoldStateEnum.JUST_PRESSED then var14.holdState == buttonHoldStateEnum.COMPLETED else true else true
+	local var1, var2 = reactModule.useState(nil)
+	local var3, var4 = reactModule.useState(nil)
+	local var5 = var1 or p1.keyCode
+	local var6 = var3 or p1.focusNavigationEventName
+	local var7 = reactModule.useRef(false)
+	local var8 = reactModule.useRef(false)
+	local var9 = useButtonHold(constantsModule.SIGNAL_HOLD_INTENT_SECONDS, constantsModule.SIGNAL_HOLD_COMPLETE_SECONDS, true)
+	local var10 = appShortcutBarContext.useDispatchButtonHoldStarted()
+	local var11 = appShortcutBarContext.useDispatchButtonHoldEnded()
+	local var12 = if var9.holdState ~= buttonHoldStateEnum.HOLDING then if var9.holdState ~= buttonHoldStateEnum.JUST_PRESSED then var9.holdState == buttonHoldStateEnum.COMPLETED else true else true
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), p0 (ref)
-		if not var17 and p0.setDisabledForHold then
-			p0.setDisabledForHold(false)
+		-- upvalues: var12 (ref), p1 (ref)
+		if not var12 and p1.setDisabledForHold then
+			p1.setDisabledForHold(false)
 		end
 		return function()
-			-- upvalues: p0 (copy)
-			if p0.setDisabledForHold then
-				p0.setDisabledForHold(false)
+			-- upvalues: p1 (copy)
+			if p1.setDisabledForHold then
+				p1.setDisabledForHold(false)
 			end
 		end
-	end, { var17, p0.setDisabledForHold })
+	end, { var12, p1.setDisabledForHold })
 	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), var17 (ref), p0 (ref), var15 (ref), var14 (ref), var7 (ref), var9 (ref), var8_1 (ref), var16 (ref), var13 (ref)
-		if var12.current or not var17 then
-			if var12.current and not var17 then
-				if var8_1 then
-					var16(var8_1)
+		-- upvalues: var7 (ref), var12 (ref), p1 (ref), var10 (ref), var9 (ref), var2 (ref), var4 (ref), var6 (ref), var11 (ref), var8 (ref)
+		if var7.current or not var12 then
+			if var7.current and not var12 then
+				if var6 then
+					var11(var6)
 				end
-				var7(nil)
-				var9(nil)
-				var12.current = false
+				var2(nil)
+				var4(nil)
+				var7.current = false
 				
-				if var13.current then
-					var13.current = false
+				if var8.current then
+					var8.current = false
 				end
 			end
 			return
 		else
-			var12.current = true
+			var7.current = true
 			
-			if p0.focusNavigationEventName then
-				var15(p0.focusNavigationEventName, var14.holdProgress)
+			if p1.focusNavigationEventName then
+				var10(p1.focusNavigationEventName, var9.holdProgress)
 			end
-			var7(p0.keyCode)
-			var9(p0.focusNavigationEventName)
+			var2(p1.keyCode)
+			var4(p1.focusNavigationEventName)
 		end
 	end, {
-		var17, var14.holdProgress, var15, var16, p0.focusNavigationEventName,
-		p0.keyCode, var8_1, var6_1
+		var12, var9.holdProgress, var10, var11, p1.focusNavigationEventName,
+		p1.keyCode, var6, var5
 	})
-	local var18 = var14.holdState == buttonHoldStateEnum.COMPLETED and var13.current == false
+	local var13 = var9.holdState == buttonHoldStateEnum.COMPLETED and var8.current == false
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), p0 (ref), var13 (ref)
-		if var18 and p0.onHoldDetected then
-			var13.current = true
+		-- upvalues: var13 (ref), p1 (ref), var8 (ref)
+		if var13 and p1.onHoldDetected then
+			var8.current = true
 			
-			if p0.setDisabledForHold then
-				p0.setDisabledForHold(true)
+			if p1.setDisabledForHold then
+				p1.setDisabledForHold(true)
 			end
-			p0.onHoldDetected(p0.guiObject)
+			p1.onHoldDetected(p1.guiObject)
 		end
 	end, {
-		var18,
-		p0.onHoldDetected,
-		p0.guiObject,
-		p0.setDisabledForHold
+		var13,
+		p1.onHoldDetected,
+		p1.guiObject,
+		p1.setDisabledForHold
 	})
-	local var19 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: var8_1 (ref), var14 (ref)
-		return if var8_1 then { [var8_1] = { handler = var14.eventHandler } } else {}
-	end, { var14.eventHandler, var8_1 }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function()
-		-- upvalues: var6_1 (ref), var8_1 (ref)
-		return if var6_1 and var8_1 then { [var6_1] = var8_1 } else {}
-	end, { var6_1, var8_1 })))
+	local var14 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
+		-- upvalues: var6 (ref), var9 (ref)
+		return if var6 then { [var6] = { handler = var9.eventHandler } } else {}
+	end, { var9.eventHandler, var6 }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function()
+		-- upvalues: var5 (ref), var6 (ref)
+		return if var5 and var6 then { [var5] = var6 } else {}
+	end, { var5, var6 })))
 	reactModule.useEffect(function()
-		-- upvalues: var19 (ref), p0 (ref)
-		if var19 then
-			var19(p0.guiObject)
+		-- upvalues: var14 (ref), p1 (ref)
+		if var14 then
+			var14(p1.guiObject)
 		end
 		return function()
-			-- upvalues: var19 (copy)
-			var19(nil)
+			-- upvalues: var14 (copy)
+			var14(nil)
 		end
-	end, { var19, p0.guiObject })
+	end, { var14, p1.guiObject })
 	
 	return nil
 end

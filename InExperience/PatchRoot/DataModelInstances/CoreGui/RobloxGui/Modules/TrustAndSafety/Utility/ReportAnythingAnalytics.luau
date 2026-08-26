@@ -29,14 +29,14 @@ local t_1 = {
 	abandonedForRetake = false,
 	isPortraitMode = false
 }
-local var5 = nil
+local var1 = nil
 
 local _ = function()
-	-- upvalues: var5 (write), eventIngest (ref), eventIngestService (ref)
-	if not var5 then
-		var5 = eventIngest.new(eventIngestService)
+	-- upvalues: var1 (write), eventIngest (ref), eventIngestService (ref)
+	if not var1 then
+		var1 = eventIngest.new(eventIngestService)
 	end
-	return var5
+	return var1
 end
 
 return {
@@ -72,14 +72,14 @@ return {
 		-- upvalues: t_1 (write)
 		return t_1
 	end,
-	emitAvatarsIdentifiedStats = function(p0)
-		-- upvalues: cryoModule (ref), var5 (write), eventIngest (ref), eventIngestService (ref), t (ref)
-		local var6 = cryoModule.Dictionary.join(p0, { duration = p0.duration * 1000000 })
+	emitAvatarsIdentifiedStats = function(p1)
+		-- upvalues: cryoModule (ref), var1 (write), eventIngest (ref), eventIngestService (ref), t (ref)
+		local var2 = cryoModule.Dictionary.join(p1, { duration = p1.duration * 1000000 })
 		
-		if not var5 then
-			var5 = eventIngest.new(eventIngestService)
+		if not var1 then
+			var1 = eventIngest.new(eventIngestService)
 		end
-		var5:sendEventDeferred(t.Context.LegacyMenu, t.EventType.AvatarsIdentified, var6)
+		var1:sendEventDeferred(t.Context.LegacyMenu, t.EventType.AvatarsIdentified, var2)
 	end,
 	clear = function()
 		-- upvalues: t_1 (write)

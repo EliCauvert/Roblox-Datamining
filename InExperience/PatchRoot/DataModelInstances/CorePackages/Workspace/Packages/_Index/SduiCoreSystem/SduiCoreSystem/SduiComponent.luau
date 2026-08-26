@@ -22,7 +22,7 @@ local sduiUsageRecorderModule = require(sduiCoreSystem.Analytics.SduiUsageRecord
 local recordV1ComponentUsageModule = require(sduiCoreSystem.Analytics.recordV1ComponentUsage)
 local fFlagSduiUsageTelemetry = require(parent.SharedFlags).FFlagSduiUsageTelemetry
 local t = {}
-local var16 = nil
+local var1 = nil
 
 local function SduiErrorComponent(_)
 	-- upvalues: reactModule (ref)
@@ -32,31 +32,31 @@ local function SduiErrorComponent(_)
 	})
 end
 
-local var18 = reactModule.memo(function(p0)
-	-- upvalues: sduiBuilderProcessingPhase (ref), reactModule (ref), sduiBuilderModule (ref), compareSduiAnalyticsContextModule (ref), sduiErrorType (ref), SduiErrorComponent (ref), cryoModule (ref), t (ref), mapServerBindingProps (ref), serverBindingPropMap (ref), parsePropsModule (ref), validateInterfaceModule (ref), var16 (write)
-	local processed = p0.componentConfig.__processed
-	local var19 = if processed then sduiBuilderProcessingPhase.Render else sduiBuilderProcessingPhase.Lazy
-	local componentConfig = p0.componentConfig
-	local sduiContext = p0.sduiContext
-	local debugName = p0.debugName
-	local parentAnalyticsContext = p0.parentAnalyticsContext
-	local localAnalyticsData = p0.localAnalyticsData
-	local extraLocalProps = p0.extraLocalProps
-	local conditionalProps = p0.conditionalProps
+local var2 = reactModule.memo(function(p1)
+	-- upvalues: sduiBuilderProcessingPhase (ref), reactModule (ref), sduiBuilderModule (ref), compareSduiAnalyticsContextModule (ref), sduiErrorType (ref), SduiErrorComponent (ref), cryoModule (ref), t (ref), mapServerBindingProps (ref), serverBindingPropMap (ref), parsePropsModule (ref), validateInterfaceModule (ref), var1 (write)
+	local processed = p1.componentConfig.__processed
+	local var3 = if processed then sduiBuilderProcessingPhase.Render else sduiBuilderProcessingPhase.Lazy
+	local componentConfig = p1.componentConfig
+	local sduiContext = p1.sduiContext
+	local debugName = p1.debugName
+	local parentAnalyticsContext = p1.parentAnalyticsContext
+	local localAnalyticsData = p1.localAnalyticsData
+	local extraLocalProps = p1.extraLocalProps
+	local conditionalProps = p1.conditionalProps
 	local instrumentation = sduiContext.dependencies.instrumentation
 	instrumentation:startTimerFlow("BuildPropsAndChildren")
-	local var20 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef(nil)
 	
-	if var20.current == nil then
-		var20.current = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
+	if var4.current == nil then
+		var4.current = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
 	else
-		local var21 = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
+		local var5 = sduiBuilderModule.buildAnalyticsContext(componentConfig, parentAnalyticsContext, localAnalyticsData)
 		
-		if not compareSduiAnalyticsContextModule(var20.current, var21) then
-			var20.current = var21
+		if not compareSduiAnalyticsContextModule(var4.current, var5) then
+			var4.current = var5
 		end
 	end
-	local current = var20.current
+	local current = var4.current
 	local componentType = sduiBuilderModule.getComponentType(componentConfig, sduiContext)
 	
 	if componentType == nil then
@@ -68,9 +68,9 @@ local var18 = reactModule.memo(function(p0)
 		
 		return reactModule.createElement(SduiErrorComponent)
 	end
-	local var23 = sduiContext.componentDefinitions:getComponent(componentType)
+	local var6 = sduiContext.componentDefinitions:getComponent(componentType)
 	
-	if var23 == nil then
+	if var6 == nil then
 		sduiContext.dependencies.logger.reportError(sduiErrorType.NoComponentRegistered, { componentType = componentType, name = debugName }, sduiContext.appPage)
 		instrumentation:stopTimerFlow("BuildPropsAndChildren", sduiContext, true)
 		
@@ -78,46 +78,46 @@ local var18 = reactModule.memo(function(p0)
 	end
 	local _ = nil
 	instrumentation:startTimerFlow("ParseProps")
-	local var24 = cryoModule.Dictionary.join(componentConfig.props or t, conditionalProps or t)
+	local var7 = cryoModule.Dictionary.join(componentConfig.props or t, conditionalProps or t)
 	
 	if not processed then
-		local var25, var26 = mapServerBindingProps(var24, serverBindingPropMap)
+		local var8, var9 = mapServerBindingProps(var7, serverBindingPropMap)
 		
-		if var25 then
-			for i, v in var25 do
-				var24[i] = v
+		if var8 then
+			for i, v in var8 do
+				var7[i] = v
 			end
 		end
-		if var26 then
+		if var9 then
 			sduiContext.dependencies.logger.reportError(sduiErrorType.UnmappedServerBindingProp, {
 				componentType = componentType,
 				name = debugName,
-				message = `Unmapped PascalCase props detected: {table.concat(var26, ", ")}. These props will not reach the camelCase component.`
+				message = `Unmapped PascalCase props detected: {table.concat(var9, ", ")}. These props will not reach the camelCase component.`
 			}, sduiContext.appPage)
 		end
 	end
-	parsePropsModule(componentType, var24, debugName, sduiContext, current, nil, var19)
+	parsePropsModule(componentType, var7, debugName, sduiContext, current, nil, var3)
 	
 	if extraLocalProps then
-		var24 = cryoModule.Dictionary.join(var24, extraLocalProps)
+		var7 = cryoModule.Dictionary.join(var7, extraLocalProps)
 	end
-	var24.componentConfig = componentConfig
-	var24.sduiContext = sduiContext
-	var24.debugName = debugName
-	var24.analyticsContext = current
+	var7.componentConfig = componentConfig
+	var7.sduiContext = sduiContext
+	var7.debugName = debugName
+	var7.analyticsContext = current
 	
 	if not processed then
-		local var27 = sduiContext.componentDefinitions:getPropInterface(componentType)
+		local var10 = sduiContext.componentDefinitions:getPropInterface(componentType)
 		
-		if var27 then
-			local var28, var29 = validateInterfaceModule(var24, var27)
+		if var10 then
+			local var11, var12 = validateInterfaceModule(var7, var10)
 			
-			if not var28 then
+			if not var11 then
 				instrumentation:stopTimerFlow("ParseProps", sduiContext, true)
 				sduiContext.dependencies.logger.reportError(sduiErrorType.InvalidProps, {
 					componentType = componentType,
 					name = debugName,
-					message = var29
+					message = var12
 				}, sduiContext.appPage)
 				
 				return reactModule.createElement(SduiErrorComponent)
@@ -125,14 +125,14 @@ local var18 = reactModule.memo(function(p0)
 		end
 	end
 	instrumentation:stopTimerFlow("ParseProps", sduiContext)
-	local var30 = if componentConfig.children then {} else nil
+	local var13 = if componentConfig.children then {} else nil
 	
 	if componentConfig.children then
-		assert(var30, "reactChildren must exist")
+		assert(var13, "reactChildren must exist")
 		
 		for i, v in componentConfig.children do
 			local componentType_1 = `{v.componentType}_{i}`
-			var30[componentType_1] = reactModule.createElement(var16, {
+			var13[componentType_1] = reactModule.createElement(var1, {
 				componentConfig = v,
 				sduiContext = sduiContext,
 				parentAnalyticsContext = current,
@@ -143,41 +143,41 @@ local var18 = reactModule.memo(function(p0)
 	end
 	instrumentation:stopTimerFlow("BuildPropsAndChildren", sduiContext)
 	
-	return reactModule.createElement(var23, var24, var30)
+	return reactModule.createElement(var6, var7, var13)
 end, compareSduiPropsModule)
 
-return reactModule.memo(function(p1)
-	-- upvalues: sduiErrorType (ref), reactModule (ref), SduiErrorComponent (ref), validateInterfaceModule (ref), uiComponentInterface (ref), sduiErrorsModule (ref), fFlagSduiUsageTelemetry (ref), recordV1ComponentUsageModule (ref), sduiUsageRecorderModule (ref), sduiConditionalPropWrapperModule (ref), var18 (ref)
-	if not p1.componentConfig then
-		p1.sduiContext.dependencies.logger.reportError(sduiErrorType.NilComponentConfig, { name = p1.debugName }, p1.sduiContext.appPage)
+return reactModule.memo(function(p2)
+	-- upvalues: sduiErrorType (ref), reactModule (ref), SduiErrorComponent (ref), validateInterfaceModule (ref), uiComponentInterface (ref), sduiErrorsModule (ref), fFlagSduiUsageTelemetry (ref), recordV1ComponentUsageModule (ref), sduiUsageRecorderModule (ref), sduiConditionalPropWrapperModule (ref), var2 (ref)
+	if not p2.componentConfig then
+		p2.sduiContext.dependencies.logger.reportError(sduiErrorType.NilComponentConfig, { name = p2.debugName }, p2.sduiContext.appPage)
 		
 		return reactModule.createElement(SduiErrorComponent)
-	elseif not p1.componentConfig.__processed then
-		if p1.sduiContext.templateRegistry:shouldResolveTemplate(p1.componentConfig) then
-			p1.sduiContext.templateRegistry:resolveTemplateForConfig(p1.componentConfig, p1.sduiContext)
+	elseif not p2.componentConfig.__processed then
+		if p2.sduiContext.templateRegistry:shouldResolveTemplate(p2.componentConfig) then
+			p2.sduiContext.templateRegistry:resolveTemplateForConfig(p2.componentConfig, p2.sduiContext)
 		end
-		local var32, var33 = validateInterfaceModule(p1.componentConfig, uiComponentInterface, false)
+		local var14, var15 = validateInterfaceModule(p2.componentConfig, uiComponentInterface, false)
 		
-		if not var32 then
-			p1.sduiContext.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidComponentConfig, {
-				message = `Invalid config for component. err: {var33}`,
-				componentType = p1.componentConfig.componentType,
-				name = p1.debugName
-			}, p1.sduiContext.appPage)
+		if not var14 then
+			p2.sduiContext.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.InvalidComponentConfig, {
+				message = `Invalid config for component. err: {var15}`,
+				componentType = p2.componentConfig.componentType,
+				name = p2.debugName
+			}, p2.sduiContext.appPage)
 		end
 	end
-	if fFlagSduiUsageTelemetry and not p1.componentConfig.__usageRecorded then
-		recordV1ComponentUsageModule(p1.sduiContext.appPage, p1.componentConfig)
-		p1.componentConfig.__usageRecorded = true
+	if fFlagSduiUsageTelemetry and not p2.componentConfig.__usageRecorded then
+		recordV1ComponentUsageModule(p2.sduiContext.appPage, p2.componentConfig)
+		p2.componentConfig.__usageRecorded = true
 		sduiUsageRecorderModule.scheduleFlush()
 	end
-	return if p1.componentConfig.conditionalProps then reactModule.createElement(sduiConditionalPropWrapperModule, {
-		wrappedComponent = var18,
-		sduiContext = p1.sduiContext,
-		parentAnalyticsContext = p1.parentAnalyticsContext,
-		extraLocalProps = p1.extraLocalProps,
-		componentConfig = p1.componentConfig,
-		debugName = p1.debugName,
-		localAnalyticsData = p1.localAnalyticsData
-	}) else reactModule.createElement(var18, p1)
+	return if p2.componentConfig.conditionalProps then reactModule.createElement(sduiConditionalPropWrapperModule, {
+		wrappedComponent = var2,
+		sduiContext = p2.sduiContext,
+		parentAnalyticsContext = p2.parentAnalyticsContext,
+		extraLocalProps = p2.extraLocalProps,
+		componentConfig = p2.componentConfig,
+		debugName = p2.debugName,
+		localAnalyticsData = p2.localAnalyticsData
+	}) else reactModule.createElement(var2, p2)
 end, compareSduiPropsModule)

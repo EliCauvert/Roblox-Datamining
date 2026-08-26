@@ -4,12 +4,12 @@ local reactModule = require(parent_1.React)
 local iconName = require(parent_1.Foundation).Enums.IconName
 local _ = require(parent.ProductPurchase.PricingTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), iconName (ref)
-	local itemPrice = p0.itemPrice
-	local hasSubscriptionDiscount = p0.hasSubscriptionDiscount
-	local blackbirdSummaryText = p0.blackbirdSummaryText
-	local savingsSummary = p0.savingsSummary
+	local itemPrice = p1.itemPrice
+	local hasSubscriptionDiscount = p1.hasSubscriptionDiscount
+	local blackbirdSummaryText = p1.blackbirdSummaryText
+	local savingsSummary = p1.savingsSummary
 	
 	return {
 		showAccordion = itemPrice.priceInRobux < itemPrice.basePriceInRobux and (hasSubscriptionDiscount or #itemPrice.discounts >= 2),

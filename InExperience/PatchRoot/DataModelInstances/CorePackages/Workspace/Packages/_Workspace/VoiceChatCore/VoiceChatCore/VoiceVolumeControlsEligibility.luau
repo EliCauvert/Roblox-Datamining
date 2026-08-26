@@ -2,9 +2,9 @@
 local voiceVolumeControlsEnableCreatorVoiceVolumeOptOutEngineFeature = game:GetEngineFeature("VoiceVolumeControlsEnableCreatorVoiceVolumeOptOut")
 local voiceVolumeControlsCreatorVoiceVolumeOptOutDefaultBehaviorIsEnabledEngineFeature = game:GetEngineFeature("VoiceVolumeControlsCreatorVoiceVolumeOptOutDefaultBehaviorIsEnabled")
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: voiceVolumeControlsCreatorVoiceVolumeOptOutDefaultBehaviorIsEnabledEngineFeature (ref)
-	return p0 == Enum.RolloutState.Enabled or (if p0 == Enum.RolloutState.Disabled then false else voiceVolumeControlsCreatorVoiceVolumeOptOutDefaultBehaviorIsEnabledEngineFeature)
+	return p1 == Enum.RolloutState.Enabled or (if p1 == Enum.RolloutState.Disabled then false else voiceVolumeControlsCreatorVoiceVolumeOptOutDefaultBehaviorIsEnabledEngineFeature)
 end
 
 return {
@@ -19,20 +19,20 @@ return {
 	end,
 	isVoiceChatVolumeSliderVisible = function(p1, p2)
 		-- upvalues: voiceVolumeControlsEnableCreatorVoiceVolumeOptOutEngineFeature (ref), voiceChatService (ref), voiceVolumeControlsCreatorVoiceVolumeOptOutDefaultBehaviorIsEnabledEngineFeature (ref)
-		local var3 = p1
+		local var1 = p1
 		
-		if var3 then
-			var3 = p2
+		if var1 then
+			var1 = p2
 			
-			if var3 then
+			if var1 then
 				if voiceVolumeControlsEnableCreatorVoiceVolumeOptOutEngineFeature then
 					local enableVoiceVolumeControls = voiceChatService.EnableVoiceVolumeControls
 					
 					return enableVoiceVolumeControls == Enum.RolloutState.Enabled or (if enableVoiceVolumeControls == Enum.RolloutState.Disabled then false else voiceVolumeControlsCreatorVoiceVolumeOptOutDefaultBehaviorIsEnabledEngineFeature)
 				end
-				var3 = true
+				var1 = true
 			end
 		end
-		return var3
+		return var1
 	end
 }

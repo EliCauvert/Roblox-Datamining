@@ -16,26 +16,26 @@ local t_2 = {
 	[Enum.KeyCode.RightBracket] = focusNavigationEventNameEnum.ScrollDown
 }
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: scrollFrameUtilsModule (ref), guiService (ref)
-	if p1 == nil then
+	if p2 == nil then
 		return
 	end
-	scrollFrameUtilsModule.scrollByIncrement(scrollFrameUtilsModule.resolveScrollTarget(guiService.SelectedCoreObject, p1), p0)
+	scrollFrameUtilsModule.scrollByIncrement(scrollFrameUtilsModule.resolveScrollTarget(guiService.SelectedCoreObject, p2), p1)
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: reactModule (ref), t_2 (ref), t (ref), t_1 (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), scrollFrameUtilsModule (ref), guiService (ref), reactFocusNavigationModule (ref), useThumbstickScrollModule (ref)
-	local var10 = reactModule.useRef(nil)
-	local var11 = p2 == nil or p2.includeDiscreteScroll == nil or p2.includeDiscreteScroll
-	local var12 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: var11 (ref), t_1 (copy), focusNavigationEventNameEnum (copy), inputHandlersModule (copy), scrollFrameUtilsModule (copy), var10 (ref), guiService (copy)
-		return if var11 then {
+	local var1 = reactModule.useRef(nil)
+	local var2 = p1 == nil or p1.includeDiscreteScroll == nil or p1.includeDiscreteScroll
+	local var3 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
+		-- upvalues: var2 (ref), t_1 (copy), focusNavigationEventNameEnum (copy), inputHandlersModule (copy), scrollFrameUtilsModule (copy), var1 (ref), guiService (copy)
+		return if var2 then {
 			[focusNavigationEventNameEnum.ScrollDown] = {
 				handler = inputHandlersModule.onRelease(function(_)
-					-- upvalues: scrollFrameUtilsModule (copy), var10 (copy), guiService (copy)
+					-- upvalues: scrollFrameUtilsModule (copy), var1 (copy), guiService (copy)
 					local SCROLL_INCREMENT = scrollFrameUtilsModule.SCROLL_INCREMENT
-					local current = var10.current
+					local current = var1.current
 					
 					if current == nil then
 						return
@@ -45,22 +45,22 @@ return function(p2)
 			},
 			[focusNavigationEventNameEnum.ScrollUp] = {
 				handler = inputHandlersModule.onRelease(function(_)
-					-- upvalues: scrollFrameUtilsModule (copy), var10 (copy), guiService (copy)
-					local var13 = -scrollFrameUtilsModule.SCROLL_INCREMENT
-					local current = var10.current
+					-- upvalues: scrollFrameUtilsModule (copy), var1 (copy), guiService (copy)
+					local var4 = -scrollFrameUtilsModule.SCROLL_INCREMENT
+					local current = var1.current
 					
 					if current == nil then
 						return
 					end
-					scrollFrameUtilsModule.scrollByIncrement(scrollFrameUtilsModule.resolveScrollTarget(guiService.SelectedCoreObject, current), var13)
+					scrollFrameUtilsModule.scrollByIncrement(scrollFrameUtilsModule.resolveScrollTarget(guiService.SelectedCoreObject, current), var4)
 				end)
 			}
 		} else t_1
-	end, { var11 }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function()
-		-- upvalues: var11 (ref), t_2 (copy), t (copy)
-		return if var11 then t_2 else t
-	end, { var11 }), var10))
-	useThumbstickScrollModule({ enabled = true, containerRef = var10 })
+	end, { var2 }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function()
+		-- upvalues: var2 (ref), t_2 (copy), t (copy)
+		return if var2 then t_2 else t
+	end, { var2 }), var1))
+	useThumbstickScrollModule({ enabled = true, containerRef = var1 })
 	
-	return var12
+	return var3
 end

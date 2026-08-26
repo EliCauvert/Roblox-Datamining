@@ -6,15 +6,15 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention.InExperienceInterventionAnalytics)
 local chatInterventionGenericToastModule = require(inExperienceIntervention.Components.ChatInterventionGenericToast)
 
-function ChatNudgeToast(p0)
+function ChatNudgeToast(p1)
 	-- upvalues: useLocalization (ref), constants (ref), reactModule (ref), chatInterventionGenericToastModule (ref), inExperienceInterventionAnalyticsModule (ref)
-	local var4 = useLocalization(constants.localizationKeys)
+	local var1 = useLocalization(constants.localizationKeys)
 	
 	return reactModule.createElement(chatInterventionGenericToastModule, {
-		eventId = p0.eventId,
-		violatingChatLine = p0.violatingChatLine,
-		toastTitle = var4.ChatBreaksRulesText,
-		toastBody = var4.TextChatMayBeSuspendedText,
+		eventId = p1.eventId,
+		violatingChatLine = p1.violatingChatLine,
+		toastTitle = var1.ChatBreaksRulesText,
+		toastBody = var1.TextChatMayBeSuspendedText,
 		interventionType = inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge,
 		toastAppearEventName = inExperienceInterventionAnalyticsModule.Constants.EventTypes.NudgeToastAppeared,
 		toastDismissEventName = inExperienceInterventionAnalyticsModule.Constants.EventTypes.NudgeToastDismissed

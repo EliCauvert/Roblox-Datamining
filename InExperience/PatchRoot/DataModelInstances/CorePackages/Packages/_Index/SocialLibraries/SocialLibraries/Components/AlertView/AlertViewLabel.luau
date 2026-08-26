@@ -9,20 +9,20 @@ alertViewLabel.defaultProps = {
 	TextXAlignment = Enum.TextXAlignment.Center
 }
 
-function alertViewLabel.render(p0)
+function alertViewLabel.render(p1)
 	-- upvalues: UIBlox (ref), roact (ref)
-	return UIBlox.Style.withStyle(function(p1)
-		-- upvalues: p0 (ref), roact (copy)
+	return UIBlox.Style.withStyle(function(p2)
+		-- upvalues: p1 (ref), roact (copy)
 		return roact.createElement("TextLabel", {
 			TextWrapped = true,
-			BackgroundTransparency = p0.props.BackgroundTransparency,
-			Font = p0.props.Font or p1.Font.Body.Font,
-			LayoutOrder = p0.props.LayoutOrder,
-			Size = p0.props.Size,
-			Text = p0.props.Text,
-			TextColor3 = p0.props.TextColor3 or p1.Theme.TextDefault.Color,
-			TextSize = p0.props.TextSize or p1.Font.Body.RelativeSize * p1.Font.BaseSize,
-			TextXAlignment = p0.props.TextXAlignment
+			BackgroundTransparency = p1.props.BackgroundTransparency,
+			Font = p1.props.Font or p2.Font.Body.Font,
+			LayoutOrder = p1.props.LayoutOrder,
+			Size = p1.props.Size,
+			Text = p1.props.Text,
+			TextColor3 = p1.props.TextColor3 or p2.Theme.TextDefault.Color,
+			TextSize = p1.props.TextSize or p2.Font.Body.RelativeSize * p2.Font.BaseSize,
+			TextXAlignment = p1.props.TextXAlignment
 		})
 	end)
 end

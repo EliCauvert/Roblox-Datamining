@@ -19,11 +19,11 @@ return function()
 		blocktargetAlreadyBlockedToast = "Feature.Friends.Error.TargetAlreadyBlockedError"
 	})
 	
-	return reactModule.useCallback(function(p0)
+	return reactModule.useCallback(function(p1)
 		-- upvalues: var1 (ref), setCurrentToastMessage (copy), var2 (ref)
 		local body
-		if p0 then
-			body = p0.Body and (tonumber(p0.Body) or nil)
+		if p1 then
+			body = p1.Body and (tonumber(p1.Body) or nil)
 		end
 		if body == 1 then
 			var1(setCurrentToastMessage({

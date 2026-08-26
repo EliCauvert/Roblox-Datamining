@@ -14,65 +14,65 @@ local fFlagAXMakeupEquipping = avatarExperienceFlagsModule.FFlagAXMakeupEquippin
 local fFlagAXOutfitPageRevamp = avatarExperienceFlagsModule.FFlagAXOutfitPageRevamp
 local getHumanoidDescriptionFromStateForOutfitTypeModule = require(avatarExperienceCommon.Utils.Humanoid.getHumanoidDescriptionFromStateForOutfitType)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagAXOutfitPageRevamp (ref), getHumanoidDescriptionFromStateForOutfitTypeModule (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), createHumanoidDescriptionAccessoryInfoModule (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), fFlagAXMakeupEquipping (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref), HUMANOID_DESCRIPTION_SCALE_TO_NAME (ref), setHumanoidDescriptionColorsFromBodyColor3sModule (ref)
-	local var7
+	local var1
 	local _ = nil
 	
 	if fFlagAXOutfitPageRevamp then
-		var7 = getHumanoidDescriptionFromStateForOutfitTypeModule(p0, nil)
+		var1 = getHumanoidDescriptionFromStateForOutfitTypeModule(p1, nil)
 	else
-		var7 = Instance.new("HumanoidDescription")
-		local equippedAssets = p0.AvatarEditor.Character.EquippedAssets
-		local avatarScales = p0.AvatarEditor.Character.AvatarScales
+		var1 = Instance.new("HumanoidDescription")
+		local equippedAssets = p1.AvatarEditor.Character.EquippedAssets
+		local avatarScales = p1.AvatarEditor.Character.AvatarScales
 		
 		if equippedAssets then
 			local t = {}
 			
 			for i, v in equippedAssets do
 				local t_1 = {}
-				local var10 = ASSET_TYPE_TO_ACCESSORY_TYPE[i]
+				local var2 = ASSET_TYPE_TO_ACCESSORY_TYPE[i]
 				
 				for i_1, v_1 in v do
-					if var10 then
+					if var2 then
 						table.insert(t, createHumanoidDescriptionAccessoryInfoModule(i, i_1, v_1))
 					else
 						table.insert(t_1, i_1)
 					end
 				end
-				if var10 == nil and #t_1 > 0 then
-					local var11 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[i]
+				if var2 == nil and #t_1 > 0 then
+					local var3 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[i]
 					local joined = table.concat(t_1, ",")
 					
-					if var11 then
-						var7[var11] = joined
+					if var3 then
+						var1[var3] = joined
 					elseif i ~= ASSET_TYPE_NAME_TO_ID_STRING.Gear and (not fFlagAXMakeupEquipping or not isMakeupAssetTypeModule(i)) then
 						mutedError(string.format("assetTypeId: %s not recognized as member of humanoidDescription", tostring(i)))
 					end
 				end
 			end
-			var7:SetAccessories(t, true)
+			var1:SetAccessories(t, true)
 			
 			if fFlagAXMakeupEquipping then
-				setMakeupDescriptionsModule(var7, equippedAssets)
+				setMakeupDescriptionsModule(var1, equippedAssets)
 			end
 		end
 		if avatarScales then
 			for i, v in avatarScales do
-				var7[HUMANOID_DESCRIPTION_SCALE_TO_NAME[i]] = v
+				var1[HUMANOID_DESCRIPTION_SCALE_TO_NAME[i]] = v
 			end
 		end
-		setHumanoidDescriptionColorsFromBodyColor3sModule(var7, p0.AvatarEditor.Character.BodyColor3s)
+		setHumanoidDescriptionColorsFromBodyColor3sModule(var1, p1.AvatarEditor.Character.BodyColor3s)
 	end
 	local t = {}
 	local t_1 = {}
 	
-	for i, v in p0.AvatarEditor.EquippedEmotes.slotInfo do
+	for i, v in p1.AvatarEditor.EquippedEmotes.slotInfo do
 		t[tostring(v.assetId)] = { tonumber(v.assetId) }
 		table.insert(t_1, { Slot = v.position, Name = tostring(v.assetId) })
 	end
-	var7:SetEmotes(t)
-	var7:SetEquippedEmotes(t_1)
+	var1:SetEmotes(t)
+	var1:SetEquippedEmotes(t_1)
 	
-	return var7
+	return var1
 end

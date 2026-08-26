@@ -10,72 +10,72 @@ local virtualizedSectionListModule = require(script.Parent.VirtualizedSectionLis
 local _ = require(parent.Components.ScrollView.ScrollView)
 local sectionList = reactModule.PureComponent:extend("SectionList")
 
-function sectionList.init(p0, p1)
-	p0.props = p1
+function sectionList.init(p1, p2)
+	p1.props = p2
 	
-	function p0._captureRef(p2)
-		-- upvalues: p0 (ref)
-		p0._wrapperListRef = p2
+	function p0._captureRef(p3)
+		-- upvalues: p1 (ref)
+		p1._wrapperListRef = p3
 	end
 end
 
-function sectionList.scrollToLocation(p3, p4)
-	if p3._wrapperListRef ~= nil then
-		p3._wrapperListRef:scrollToLocation(p4)
+function sectionList.scrollToLocation(p1, p2)
+	if p1._wrapperListRef ~= nil then
+		p1._wrapperListRef:scrollToLocation(p2)
 	end
 end
 
-function sectionList.recordInteraction(p5)
-	local var5 = if p5._wrapperListRef then p5._wrapperListRef:getListRef() else p5._wrapperListRef
+function sectionList.recordInteraction(p1)
+	local var1 = if p1._wrapperListRef then p1._wrapperListRef:getListRef() else p1._wrapperListRef
 	
-	if var5 then
-		var5:recordInteraction()
+	if var1 then
+		var1:recordInteraction()
 	end
 end
 
-function sectionList.flashScrollIndicators(p6)
-	local var6 = if p6._wrapperListRef then p6._wrapperListRef:getListRef() else p6._wrapperListRef
+function sectionList.flashScrollIndicators(p1)
+	local var1 = if p1._wrapperListRef then p1._wrapperListRef:getListRef() else p1._wrapperListRef
 	
-	if var6 then
-		var6:flashScrollIndicators()
+	if var1 then
+		var1:flashScrollIndicators()
 	end
 end
 
-function sectionList.getScrollResponder(p7)
+function sectionList.getScrollResponder(p1)
 	-- upvalues: boolean (ref)
-	local var7 = if p7._wrapperListRef then p7._wrapperListRef:getListRef() else p7._wrapperListRef
+	local var1 = if p1._wrapperListRef then p1._wrapperListRef:getListRef() else p1._wrapperListRef
 	
-	return if boolean.toJSBoolean(var7) then var7:getScrollResponder() else nil
+	return if boolean.toJSBoolean(var1) then var1:getScrollResponder() else nil
 end
 
-function sectionList.getScrollableNode(p8)
+function sectionList.getScrollableNode(p1)
 	-- upvalues: boolean (ref)
-	local var8 = if p8._wrapperListRefthen then p8._wrapperListRef:getListRef() else p8._wrapperListRef
+	local var1 = if p1._wrapperListRefthen then p1._wrapperListRef:getListRef() else p1._wrapperListRef
 	
-	return if boolean.toJSBoolean(var8) then var8:getScrollableNode() else nil
+	return if boolean.toJSBoolean(var1) then var1:getScrollableNode() else nil
 end
 
-function sectionList.setNativeProps(value, p9)
+function sectionList.setNativeProps(value, p1)
 	-- upvalues: boolean (ref)
-	local var9 = if value._wrapperListRef then value._wrapperListRef:getListRef() else value._wrapperListRef
+	local var1 = if value._wrapperListRef then value._wrapperListRef:getListRef() else value._wrapperListRef
 	
-	if boolean.toJSBoolean(var9) then
-		var9:setNativeProps(p9)
+	if boolean.toJSBoolean(var1) then
+		var1:setNativeProps(p1)
 	end
 end
 
-function sectionList.render(p10)
+function sectionList.render(p1)
 	-- upvalues: object (ref), reactModule (ref), virtualizedSectionListModule (ref)
-	local stickySectionHeadersEnabled = p10.props.stickySectionHeadersEnabled
+	local stickySectionHeadersEnabled = p1.props.stickySectionHeadersEnabled
 	
-	return reactModule.createElement(virtualizedSectionListModule, object.assign({}, object.assign({}, p10.props, { stickySectionHeadersEnabled = object.None }), {
+	return reactModule.createElement(virtualizedSectionListModule, object.assign({}, object.assign({}, p1.props, { stickySectionHeadersEnabled = object.None }), {
 		stickySectionHeadersEnabled = if stickySectionHeadersEnabled ~= nil then false else stickySectionHeadersEnabled,
-		ref = p10._captureRef,
-		getItemCount = function(p11)
-			return #p11
+		ref = p1._captureRef,
+		getItemCount = function(p2)
+			return #p2
 		end,
-		getItem = function(p12, p13)
-			return p12[p13]
+		getItem = function(p2, p3)
+			return p2[p3]
 		end
 	}))
 end

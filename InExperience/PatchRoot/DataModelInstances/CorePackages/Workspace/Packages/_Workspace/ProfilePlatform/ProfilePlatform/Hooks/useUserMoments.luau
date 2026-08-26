@@ -9,89 +9,89 @@ local getDeletedMomentsStoreModule = require(parent.Moments.GetDeletedMomentsSto
 local fFlagMomentsRemoveDeletedFromProfile = sharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
 local fFlagMomentsRefreshOwnMomentsAfterPublish = sharedFlagsModule.FFlagMomentsRefreshOwnMomentsAfterPublish
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (ref), signalsReactModule (ref), momentsGetMomentsUserStoreModule (ref), cryoModule (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref)
-	local var6, var7 = reactModule.useState({})
-	local var8, var9 = reactModule.useState(nil)
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useState(false)
-	local var14, var15 = reactModule.useState(false)
+	local var1, var2 = reactModule.useState({})
+	local var3, var4 = reactModule.useState(nil)
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
+	local var9, var10 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), momentsGetMomentsUserStoreModule (copy), var13 (ref), var7 (ref), var9 (ref), var11 (ref)
-		local var19 = if p0 ~= nil then nil else tonumber(p0)
+		-- upvalues: p1 (ref), momentsGetMomentsUserStoreModule (copy), var8 (ref), var2 (ref), var4 (ref), var6 (ref)
+		local var11 = if p1 ~= nil then nil else tonumber(p1)
 		
-		if var19 == nil then
+		if var11 == nil then
 			return
 		end
-		local var20 = false
-		momentsGetMomentsUserStoreModule(false).getUserMoments(var19):andThen(function(p1)
-			-- upvalues: var20 (write), var13 (copy), var7 (copy), var9 (copy), var11 (copy)
-			if not var20 then
-				var13(false)
-				var7(p1.moments)
-				var9(p1.nextCursor)
-				var11(p1.nextCursor ~= nil)
+		local var12 = false
+		momentsGetMomentsUserStoreModule(false).getUserMoments(var11):andThen(function(p2)
+			-- upvalues: var12 (write), var8 (copy), var2 (copy), var4 (copy), var6 (copy)
+			if not var12 then
+				var8(false)
+				var2(p2.moments)
+				var4(p2.nextCursor)
+				var6(p2.nextCursor ~= nil)
 			end
 		end):catch(function()
-			-- upvalues: var20 (write), var13 (copy)
-			if not var20 then
-				var13(true)
+			-- upvalues: var12 (write), var8 (copy)
+			if not var12 then
+				var8(true)
 			end
 		end)
 		
 		return function()
-			-- upvalues: var20 (write)
-			var20 = true
+			-- upvalues: var12 (write)
+			var12 = true
 		end
 	end, {
-		p0,
+		p1,
 		if fFlagMomentsRefreshOwnMomentsAfterPublish then signalsReactModule.useSignalState(momentsGetMomentsUserStoreModule(false).getUserMomentsVersion) else 0
 	})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), var8 (ref), var10 (ref), var14 (ref), var15 (ref), momentsGetMomentsUserStoreModule (copy), var7 (ref), cryoModule (copy), var11 (ref), var9 (ref)
-		local var21 = if p0 ~= nil then nil else tonumber(p0)
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), var3 (ref), var5 (ref), var9 (ref), var10 (ref), momentsGetMomentsUserStoreModule (copy), var2 (ref), cryoModule (copy), var6 (ref), var4 (ref)
+		local var12 = if p1 ~= nil then nil else tonumber(p1)
 		
-		if var21 == nil or var8 == nil or (not var10 or var14) then
+		if var12 == nil or var3 == nil or (not var5 or var9) then
 			return
 		end
-		var15(true)
-		momentsGetMomentsUserStoreModule(false).getUserMoments(var21, var8):andThen(function(p2)
-			-- upvalues: var7 (copy), cryoModule (copy), var11 (copy), var8 (copy), var9 (copy)
-			var7(function(p3)
+		var10(true)
+		momentsGetMomentsUserStoreModule(false).getUserMoments(var12, var3):andThen(function(p2)
+			-- upvalues: var2 (copy), cryoModule (copy), var6 (copy), var3 (copy), var4 (copy)
+			var2(function(p3)
 				-- upvalues: cryoModule (copy), p2 (ref)
 				return cryoModule.List.join(p3, p2.moments)
 			end)
-			var11(p2.nextCursor ~= nil and p2.nextCursor ~= var8)
-			var9(p2.nextCursor)
+			var6(p2.nextCursor ~= nil and p2.nextCursor ~= var3)
+			var4(p2.nextCursor)
 		end):catch(function() end):finally(function()
-			-- upvalues: var15 (copy)
-			var15(false)
+			-- upvalues: var10 (copy)
+			var10(false)
 		end)
-	end, { p0, var8, var10, var14 })
-	local var17 = var6
+	end, { p1, var3, var5, var9 })
+	local var12 = var1
 	
 	if fFlagMomentsRemoveDeletedFromProfile then
-		local var18 = signalsReactModule.useSignalState(getDeletedMomentsStoreModule(false).getDeletedIds)
-		var17 = reactModule.useMemo(function()
-			-- upvalues: var18 (ref), var6 (ref)
-			if #var18 == 0 then
-				return var6
+		local var13 = signalsReactModule.useSignalState(getDeletedMomentsStoreModule(false).getDeletedIds)
+		var12 = reactModule.useMemo(function()
+			-- upvalues: var13 (ref), var1 (ref)
+			if #var13 == 0 then
+				return var1
 			end
 			local t = {}
 			
-			for i, v in var6 do
-				if not table.find(var18, v.momentId) then
+			for i, v in var1 do
+				if not table.find(var13, v.momentId) then
 					table.insert(t, v)
 				end
 			end
 			return t
-		end, { var6, var18 })
+		end, { var1, var13 })
 	end
 	return {
-		moments = var17,
-		hasMore = var10,
-		hasFailed = var12,
-		isLoadingMore = var14,
-		loadMore = var16
+		moments = var12,
+		hasMore = var5,
+		hasFailed = var7,
+		isLoadingMore = var9,
+		loadMore = var11
 	}
 end

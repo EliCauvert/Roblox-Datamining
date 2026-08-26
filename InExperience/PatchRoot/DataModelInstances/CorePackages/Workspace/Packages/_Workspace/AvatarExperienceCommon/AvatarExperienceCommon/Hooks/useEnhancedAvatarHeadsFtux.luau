@@ -13,41 +13,41 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage = avatarExperienceFlagsModule.FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage
 local fIntAXEnhancedAvatarHeadsFtuxDelay = avatarExperienceFlagsModule.FIntAXEnhancedAvatarHeadsFtuxDelay
 
-local var6 = function(p0)
-	return p0.ScreenSize
+local var1 = function(p1)
+	return p1.ScreenSize
 end
 
 return function()
-	-- upvalues: useNavigation (ref), useAvatarRoute (ref), useSelector (ref), var6 (ref), reactModule (ref), safeAppStorageServiceModule (ref), fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (ref), useIsSpatial (ref), avatarScreen (ref), fIntAXEnhancedAvatarHeadsFtuxDelay (ref)
-	local var7 = useNavigation()
-	local var8 = useAvatarRoute()
-	local var9 = useSelector(var6)
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref)
-		return var8 and (var8.opaque and var8.opaque.name)
-	end, { var8 })
-	local var11 = reactModule.useCallback(function()
+	-- upvalues: useNavigation (ref), useAvatarRoute (ref), useSelector (ref), var1 (ref), reactModule (ref), safeAppStorageServiceModule (ref), fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (ref), useIsSpatial (ref), avatarScreen (ref), fIntAXEnhancedAvatarHeadsFtuxDelay (ref)
+	local var2 = useNavigation()
+	local var3 = useAvatarRoute()
+	local var4 = useSelector(var1)
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref)
+		return var3 and (var3.opaque and var3.opaque.name)
+	end, { var3 })
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: safeAppStorageServiceModule (copy), fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (copy)
 		return safeAppStorageServiceModule.getItem("AXEnhancedAvatarHeadsFtux", fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage)
 	end, {})
-	local var12 = reactModule.useCallback(function()
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: safeAppStorageServiceModule (copy), fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (copy)
 		safeAppStorageServiceModule.setItem("AXEnhancedAvatarHeadsFtux", "true", fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage)
 		safeAppStorageServiceModule.flush()
 	end, {})
-	local var13 = useIsSpatial()
+	local var8 = useIsSpatial()
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var11 (ref), var10 (ref), avatarScreen (copy), fIntAXEnhancedAvatarHeadsFtuxDelay (copy), var7 (ref), var9 (ref), var12 (ref)
-		if var13 then return end
-		if var11() == "true" then return end
-		if var10 == avatarScreen.AvatarEditor then
+		-- upvalues: var8 (ref), var6 (ref), var5 (ref), avatarScreen (copy), fIntAXEnhancedAvatarHeadsFtuxDelay (copy), var2 (ref), var4 (ref), var7 (ref)
+		if var8 then return end
+		if var6() == "true" then return end
+		if var5 == avatarScreen.AvatarEditor then
 			local delayedThread = task.delay(fIntAXEnhancedAvatarHeadsFtuxDelay / 1000, function()
-				-- upvalues: var7 (copy), avatarScreen (copy), var9 (copy), var12 (copy)
-				var7.navigate(avatarScreen.EnhancedAvatarHeadsFtuxPrompt, {
-					screenSize = var9,
+				-- upvalues: var2 (copy), avatarScreen (copy), var4 (copy), var7 (copy)
+				var2.navigate(avatarScreen.EnhancedAvatarHeadsFtuxPrompt, {
+					screenSize = var4,
 					onConfirm = function()
-						-- upvalues: var12 (copy)
-						var12()
+						-- upvalues: var7 (copy)
+						var7()
 					end
 				})
 			end)
@@ -60,6 +60,6 @@ return function()
 			end
 		end
 	end, {
-		var11, var12, var10, var9, var7, var13
+		var6, var7, var5, var4, var2, var8
 	})
 end

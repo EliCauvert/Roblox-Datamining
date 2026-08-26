@@ -23,8 +23,8 @@ local t_1 = {
 playerContext.validateProps = tModule.strictInterface({
 	text = tModule.optional(tModule.string),
 	icon = tModule.optional(tModule.union(tModule.string, tModule.table)),
-	iconSize = tModule.optional(tModule.intersection(tModule.UDim2, function(p0)
-		if p0.X.Scale == 0 and p0.Y.Scale == 0 then
+	iconSize = tModule.optional(tModule.intersection(tModule.UDim2, function(p1)
+		if p1.X.Scale == 0 and p1.Y.Scale == 0 then
 			return true
 		end
 		return false, "Only Offset values are allowed"
@@ -59,34 +59,34 @@ function playerContext.init(p1)
 	p1.state = {}
 end
 
-function playerContext.render(p2)
+function playerContext.render(p1)
 	-- upvalues: withStyleModule (ref), getContentStyleModule (ref), t_1 (ref), t (ref), roactModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref)
-	local controlState = p2.state.controlState
-	local text = p2.props.text
-	local icon = p2.props.icon
-	local iconSize = p2.props.iconSize
-	local horizontalAlignment = p2.props.horizontalAlignment
-	local onActivated = p2.props.onActivated
+	local controlState = p1.state.controlState
+	local text = p1.props.text
+	local icon = p1.props.icon
+	local iconSize = p1.props.iconSize
+	local horizontalAlignment = p1.props.horizontalAlignment
+	local onActivated = p1.props.onActivated
 	
-	return withStyleModule(function(p3)
-		-- upvalues: getContentStyleModule (copy), t_1 (copy), controlState (ref), t (copy), onActivated (ref), p2 (ref), iconSize (ref), roactModule (copy), horizontalAlignment (ref), icon (ref), imageSetComponentModule (copy), text (ref), genericTextLabelModule (copy)
-		local var16 = getContentStyleModule(t_1, controlState, p3)
-		local var17 = getContentStyleModule(t, controlState, p3)
-		local var18 = if onActivated then var16 else var17
-		local var19 = if not p2.props.iconTransparency then if p2.props.iconColor then 0 else var18.Transparency else p2.props.iconTransparency
-		local var20 = if not p2.props.iconColor then var18.Color else p2.props.iconColor
-		local textHeight = p2.props.textHeight
-		local textColorStyle = p2.props.textColorStyle or (if onActivated then var16 else var17)
-		local iconPadding = p2.props.iconPadding
-		local iconTextSpacing = p2.props.iconTextSpacing
-		local var22 = iconSize.X.Offset + iconPadding * 2
+	return withStyleModule(function(p2)
+		-- upvalues: getContentStyleModule (copy), t_1 (copy), controlState (ref), t (copy), onActivated (ref), p1 (ref), iconSize (ref), roactModule (copy), horizontalAlignment (ref), icon (ref), imageSetComponentModule (copy), text (ref), genericTextLabelModule (copy)
+		local var1 = getContentStyleModule(t_1, controlState, p2)
+		local var2 = getContentStyleModule(t, controlState, p2)
+		local var3 = if onActivated then var1 else var2
+		local var4 = if not p1.props.iconTransparency then if p1.props.iconColor then 0 else var3.Transparency else p1.props.iconTransparency
+		local var5 = if not p1.props.iconColor then var3.Color else p1.props.iconColor
+		local textHeight = p1.props.textHeight
+		local textColorStyle = p1.props.textColorStyle or (if onActivated then var1 else var2)
+		local iconPadding = p1.props.iconPadding
+		local iconTextSpacing = p1.props.iconTextSpacing
+		local var6 = iconSize.X.Offset + iconPadding * 2
 		
 		return roactModule.createElement("ImageButton", {
 			Size = UDim2.new(1, 0, 0, textHeight),
 			BackgroundTransparency = 1,
-			Selectable = p2.props.Selectable,
+			Selectable = p1.props.Selectable,
 			Active = if onActivated then true else false,
-			LayoutOrder = p2.props.layoutOrder,
+			LayoutOrder = p1.props.layoutOrder,
 			[roactModule.Event.Activated] = onActivated
 		}, {
 			UIListLayout = roactModule.createElement("UIListLayout", {
@@ -98,7 +98,7 @@ function playerContext.render(p2)
 			}),
 			IconFrame = icon and roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(var22, iconSize.Y.Offset + iconPadding * 2)
+				Size = UDim2.fromOffset(var6, iconSize.Y.Offset + iconPadding * 2)
 			}, {
 				layout = roactModule.createElement("UIListLayout", {
 					VerticalAlignment = Enum.VerticalAlignment.Center,
@@ -109,18 +109,18 @@ function playerContext.render(p2)
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Size = iconSize,
 					Image = icon,
-					ImageColor3 = var20,
-					ImageTransparency = var19
+					ImageColor3 = var5,
+					ImageTransparency = var4
 				})
 			}),
 			Text = text and roactModule.createElement(genericTextLabelModule, {
 				TextWrapped = true,
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = UDim2.new(1, if icon then -(var22 + iconTextSpacing) else 0, 0, 0),
+				Size = UDim2.new(1, if icon then -(var6 + iconTextSpacing) else 0, 0, 0),
 				Text = text,
-				TextXAlignment = p2.props.textXAlignment,
-				fontStyle = p2.props.fontStyle or p3.Font.CaptionHeader,
+				TextXAlignment = p1.props.textXAlignment,
+				fontStyle = p1.props.fontStyle or p2.Font.CaptionHeader,
 				colorStyle = textColorStyle,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			})

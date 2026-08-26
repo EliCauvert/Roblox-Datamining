@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	return if p0 == nil or p1 == nil then false else p0.UserInputType == Enum.UserInputType.Touch and p1 ~= p0
+﻿return function(p1, p2)
+	return if p1 == nil or p2 == nil then false else p1.UserInputType == Enum.UserInputType.Touch and p2 ~= p1
 end

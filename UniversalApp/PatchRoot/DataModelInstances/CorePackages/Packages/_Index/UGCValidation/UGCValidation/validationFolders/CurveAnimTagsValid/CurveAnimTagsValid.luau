@@ -18,8 +18,8 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-local function _(p0)
-	return if #p0 > 30 then false else string.match(p0, "^[0-9]+$") ~= nil
+local function _(p1)
+	return if #p1 > 30 then false else string.match(p1, "^[0-9]+$") ~= nil
 end
 
 function t.run(p1, p2)
@@ -41,12 +41,12 @@ function t.run(p1, p2)
 				return
 			end
 		end
-		local var5 = collectionService:GetTags(v)
-		local var5Count = #var5
+		local var1 = collectionService:GetTags(v)
+		local var5Count = #var1
 		
 		if var5Count > 0 then
 			if var5Count <= 1 then
-				i_1 = var5[1]
+				i_1 = var1[1]
 				
 				if not (if #i_1 > 30 then false else string.match(i_1, "^[0-9]+$") ~= nil) then
 					p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidTags)

@@ -1,12 +1,12 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
 	return setmetatable({
-		levels = { table.create(p0) },
+		levels = { table.create(p1) },
 		weightedSketch = { totalWeight = 0, cached = false, weightTuples = {} },
-		maxSize = if p0 % 2 == 0 then p0 else p0 - 1
+		maxSize = if p1 % 2 == 0 then p1 else p1 - 1
 	}, t)
 end
 
@@ -40,34 +40,34 @@ end
 
 function t:generateWeightedSketch()
 	local t = {}
-	local var4 = 1
-	local var5 = 0
+	local var2 = 1
+	local var3 = 0
 	
 	for i, v in self.levels do
 		for i_1, v_1 in v do
-			table.insert(t, { value = v_1, weight = var4 })
-			var5 += var4
+			table.insert(t, { value = v_1, weight = var2 })
+			var3 += var2
 		end
-		var4 *= 2
+		var2 *= 2
 	end
 	table.sort(t, function(p4, p5)
 		return p4.value < p5.value
 	end)
-	self.weightedSketch = { cached = true, weightTuples = t, totalWeight = var5 }
+	self.weightedSketch = { cached = true, weightTuples = t, totalWeight = var3 }
 end
 
-function t:getPercentile(p6)
+function t:getPercentile(p4)
 	if not self.weightedSketch.cached then
 		self:generateWeightedSketch()
 	end
 	if #self.weightedSketch.weightTuples > 0 then
-		local floored = math.floor(p6 / 100 * self.weightedSketch.totalWeight)
-		local var7 = 0
+		local floored = math.floor(p4 / 100 * self.weightedSketch.totalWeight)
+		local var4 = 0
 		
 		for i, v in self.weightedSketch.weightTuples do
-			var7 += v.weight
+			var4 += v.weight
 			
-			if floored <= var7 then
+			if floored <= var4 then
 				return v.value
 			end
 		end

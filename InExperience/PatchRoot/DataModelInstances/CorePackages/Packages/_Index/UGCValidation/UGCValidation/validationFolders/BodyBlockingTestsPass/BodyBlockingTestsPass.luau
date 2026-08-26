@@ -17,7 +17,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function validateMeshMin(a, b, p0)
+local function validateMeshMin(a, b, p1)
 	-- upvalues: floatEqualsModule (ref), errorSourceStringsModule (ref)
 	local t = {}
 	
@@ -27,14 +27,14 @@ local function validateMeshMin(a, b, p0)
 		end
 	end
 	if #t > 0 then
-		a:fail(errorSourceStringsModule.Keys.BodyBlocking_ZeroMeshSize, { meshName = p0, details = table.concat(t, ". ") })
+		a:fail(errorSourceStringsModule.Keys.BodyBlocking_ZeroMeshSize, { meshName = p1, details = table.concat(t, ". ") })
 	end
 end
 
-function t.run(p1, p2)
+function t.run(p2, p3)
 	-- upvalues: validateMeshMin (ref)
-	for i, v in p2.renderMeshesData do
-		validateMeshMin(p1, v.originalSize, i)
+	for i, v in p3.renderMeshesData do
+		validateMeshMin(p2, v.originalSize, i)
 	end
 end
 

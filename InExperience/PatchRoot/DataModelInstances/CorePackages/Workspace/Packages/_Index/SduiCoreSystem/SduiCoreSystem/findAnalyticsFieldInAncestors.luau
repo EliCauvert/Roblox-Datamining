@@ -1,10 +1,10 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiCoreSystem").SduiBuilderTypes)
 
-return function(p0, p1, p2)
-	if not p1 then
+return function(p1, p2, p3)
+	if not p2 then
 		return nil
 	end
-	assert(p1, "analyticsContext must exist")
+	assert(p2, "analyticsContext must exist")
 	
-	return if p1.analyticsData and p1.analyticsData[p0] ~= nil then p1.analyticsData[p0] elseif p1.ancestorAnalyticsData and p1.ancestorAnalyticsData[p0] ~= nil then p1.ancestorAnalyticsData[p0] elseif p2 == nil then nil else p2
+	return if p2.analyticsData and p2.analyticsData[p1] ~= nil then p2.analyticsData[p1] elseif p2.ancestorAnalyticsData and p2.ancestorAnalyticsData[p1] ~= nil then p2.ancestorAnalyticsData[p1] elseif p3 == nil then nil else p3
 end

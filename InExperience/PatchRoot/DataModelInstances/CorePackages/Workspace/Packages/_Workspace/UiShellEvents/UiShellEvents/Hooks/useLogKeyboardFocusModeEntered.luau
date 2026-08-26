@@ -18,13 +18,13 @@ local t_1 = {
 
 return function()
 	-- upvalues: focusNavigationUtilsModule (ref), reactModule (ref), telemetryService (ref), t_1 (ref), t (ref)
-	local var5 = focusNavigationUtilsModule.useLastInputMode()
-	local var6 = focusNavigationUtilsModule.useLastInputMethod()
-	local var7 = reactModule.useRef(false)
+	local var1 = focusNavigationUtilsModule.useLastInputMode()
+	local var2 = focusNavigationUtilsModule.useLastInputMethod()
+	local var3 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var5 (ref), var6 (ref), telemetryService (copy), t_1 (copy), t (copy)
-		if not var7.current and var5 == "Focus" and var6 == "Keyboard" then
-			var7.current = true
+		-- upvalues: var3 (ref), var1 (ref), var2 (ref), telemetryService (copy), t_1 (copy), t (copy)
+		if not var3.current and var1 == "Focus" and var2 == "Keyboard" then
+			var3.current = true
 			telemetryService:LogEvent(t_1, {
 				customFields = {},
 				standardizedFields = { "addSessionId", "addOSInfo", "addSessionInfo" }
@@ -34,5 +34,5 @@ return function()
 				standardizedFields = { "addSessionId", "addOSInfo", "addSessionInfo" }
 			})
 		end
-	end, { var5, var6 })
+	end, { var1, var2 })
 end

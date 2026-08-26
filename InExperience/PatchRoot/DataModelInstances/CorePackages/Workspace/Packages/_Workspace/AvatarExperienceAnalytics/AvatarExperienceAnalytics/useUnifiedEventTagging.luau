@@ -4,20 +4,20 @@ local cryoModule = require(parent.Cryo)
 local addUnifiedEventLoggingModule = require(script.Parent.addUnifiedEventLogging)
 local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), cryoModule (ref), unifiedEventLogConstantsModule (ref), addUnifiedEventLoggingModule (ref)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), unifiedEventLogConstantsModule (copy), p0 (ref)
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: cryoModule (copy), unifiedEventLogConstantsModule (copy), p1 (ref)
 		return cryoModule.Dictionary.join({
 			hasDeferredActions = true,
 			sessionTagName = unifiedEventLogConstantsModule.L2_SESSION_TAG_NAME
-		}, p0.options or {})
-	end, { p0.options })
+		}, p1.options or {})
+	end, { p1.options })
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), addUnifiedEventLoggingModule (copy), var4 (ref)
-		if p0.isReady == false then
+		-- upvalues: p1 (ref), addUnifiedEventLoggingModule (copy), var1 (ref)
+		if p1.isReady == false then
 			return
 		end
-		addUnifiedEventLoggingModule(p0.ref, p0.payload, var4)
-	end, { p0.ref, p0.payload, p0.isReady, var4 })
+		addUnifiedEventLoggingModule(p1.ref, p1.payload, var1)
+	end, { p1.ref, p1.payload, p1.isReady, var1 })
 end

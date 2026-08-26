@@ -18,31 +18,31 @@ end
 return function(value)
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), httpClientModule (ref), getEmojiSetsModule (ref), validateMomentsEmojiCatalogModule (ref), promiseModule (ref), shouldRefreshCachedEmojiSets (ref), resolveMomentsEmojiCatalogModule (ref)
 	local value_1 = value or {}
-	local var10 = createDataResolverModule({
+	local var1 = createDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = createDataCacheModule(),
 		fetchFn = function(_, _)
 			-- upvalues: httpClientModule (copy), getEmojiSetsModule (copy), value_1 (ref), validateMomentsEmojiCatalogModule (copy), promiseModule (copy)
-			return httpClientModule.asPromise(getEmojiSetsModule(value_1.network)):andThen(function(p0)
+			return httpClientModule.asPromise(getEmojiSetsModule(value_1.network)):andThen(function(p1)
 				-- upvalues: validateMomentsEmojiCatalogModule (copy), promiseModule (copy)
-				return if validateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p0) then p0 else promiseModule.reject("Moments emoji-api returned an invalid or empty catalog")
+				return if validateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p1) then p1 else promiseModule.reject("Moments emoji-api returned an invalid or empty catalog")
 			end)
 		end
 	})
 	
 	return {
 		getAndFetchEmojiSets = function()
-			-- upvalues: var10 (ref), shouldRefreshCachedEmojiSets (copy)
-			return var10.getAndFetchItem("emoji-sets", shouldRefreshCachedEmojiSets)
+			-- upvalues: var1 (ref), shouldRefreshCachedEmojiSets (copy)
+			return var1.getAndFetchItem("emoji-sets", shouldRefreshCachedEmojiSets)
 		end,
 		getEmojis = function(p1)
-			-- upvalues: var10 (ref), resolveMomentsEmojiCatalogModule (copy)
-			return resolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog(var10.getCachedItem("emoji-sets").data(p1)).emojis
+			-- upvalues: var1 (ref), resolveMomentsEmojiCatalogModule (copy)
+			return resolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog(var1.getCachedItem("emoji-sets").data(p1)).emojis
 		end,
 		dispose = function()
-			-- upvalues: var10 (ref)
-			var10.dispose()
+			-- upvalues: var1 (ref)
+			var1.dispose()
 		end
 	}
 end

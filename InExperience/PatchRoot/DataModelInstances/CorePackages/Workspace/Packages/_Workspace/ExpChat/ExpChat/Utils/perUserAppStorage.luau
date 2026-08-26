@@ -9,11 +9,11 @@ local function _()
 	return if localPlayer == nil then "" else tostring(localPlayer.UserId)
 end
 
-local function readLookup(p0)
+local function readLookup(p1)
 	-- upvalues: appStorageService (ref), httpService (ref)
 	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy), p0 (ref)
-		return appStorageService:GetItem(p0)
+		-- upvalues: appStorageService (copy), p1 (ref)
+		return appStorageService:GetItem(p1)
 	end)
 	
 	if not ok or type(status) ~= "string" or status == "" then
@@ -42,32 +42,32 @@ local function writeLookup(p1, p2)
 end
 
 return {
-	getEntry = function(p3)
+	getEntry = function(p1)
 		-- upvalues: playersService (ref), readLookup (ref)
 		local localPlayer = playersService.LocalPlayer
-		local var5 = if localPlayer == nil then "" else tostring(localPlayer.UserId)
+		local var1 = if localPlayer == nil then "" else tostring(localPlayer.UserId)
 		
-		if var5 == "" then
+		if var1 == "" then
 			return {}
 		end
-		local var6 = readLookup(p3)[var5]
+		local var2 = readLookup(p1)[var1]
 		
-		return if type(var6) == "table" then var6 else {}
+		return if type(var2) == "table" then var2 else {}
 	end,
-	updateEntry = function(p4, p5)
+	updateEntry = function(p1, p2)
 		-- upvalues: playersService (ref), readLookup (ref), writeLookup (ref)
 		local localPlayer = playersService.LocalPlayer
-		local var7 = if localPlayer == nil then "" else tostring(localPlayer.UserId)
+		local var1 = if localPlayer == nil then "" else tostring(localPlayer.UserId)
 		
-		if var7 == "" then return end
-		local var8 = readLookup(p4)
-		local var9 = var8[var7]
-		local var10 = p5(if type(var9) == "table" then var9 else {})
+		if var1 == "" then return end
+		local var2 = readLookup(p1)
+		local var3 = var2[var1]
+		local var4 = p2(if type(var3) == "table" then var3 else {})
 		
-		if var10 == nil then
+		if var4 == nil then
 			return
 		end
-		var8[var7] = var10
-		writeLookup(p4, var8)
+		var2[var1] = var4
+		writeLookup(p1, var2)
 	end
 }

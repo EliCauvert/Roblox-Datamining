@@ -5,7 +5,7 @@ local getDeviceType = require(parent.AppCommonLib).getDeviceType
 
 return function()
 	-- upvalues: useSelector (ref), getDeviceType (ref)
-	return getDeviceType(useSelector(function(p0)
-		return p0.DeviceOrientation
+	return getDeviceType(useSelector(function(p1)
+		return p1.DeviceOrientation
 	end))
 end

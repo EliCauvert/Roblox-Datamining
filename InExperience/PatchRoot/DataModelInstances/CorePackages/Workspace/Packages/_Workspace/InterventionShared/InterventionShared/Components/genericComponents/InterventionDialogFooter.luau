@@ -9,28 +9,28 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local text = foundationModule.Text
 local view = foundationModule.View
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), inlineAppealLinkModule (ref), button (ref), buttonVariant (ref), buttonSize (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "col no-flex gap-medium size-full-0 auto-y",
 		testId = "intervention-dialog-footer",
 		LayoutOrder = 3
 	}, {
-		AppealLink = p0.isAppealable and reactModule.createElement(inlineAppealLinkModule, { LayoutOrder = 1, onActivated = p0.onAppealActivated }),
+		AppealLink = p1.isAppealable and reactModule.createElement(inlineAppealLinkModule, { LayoutOrder = 1, onActivated = p1.onAppealActivated }),
 		Cta = reactModule.createElement(button, {
 			testId = "intervention-dialog-footer-cta",
 			LayoutOrder = 2,
 			variant = buttonVariant.Emphasis,
 			size = buttonSize.Medium,
-			text = p0.ctaText,
-			onActivated = p0.onCtaActivated,
+			text = p1.ctaText,
+			onActivated = p1.onCtaActivated,
 			width = UDim.new(1, 0)
 		}),
-		DsaMessage = p0.dsaMessage and (p0.dsaMessage ~= "" and reactModule.createElement(text, {
+		DsaMessage = p1.dsaMessage and (p1.dsaMessage ~= "" and reactModule.createElement(text, {
 			tag = "auto-xy text-caption-small text-wrap text-align-x-left content-default",
 			testId = "intervention-dialog-footer-dsa-message",
 			LayoutOrder = 3,
-			Text = p0.dsaMessage
+			Text = p1.dsaMessage
 		}))
 	})
 end)

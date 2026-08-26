@@ -2,7 +2,7 @@
 
 return function()
 	-- upvalues: useAppPolicy (ref)
-	return useAppPolicy(function(p0)
-		return p0.getCanSeeChatTab()
+	return useAppPolicy(function(p1)
+		return p1.getCanSeeChatTab()
 	end)
 end

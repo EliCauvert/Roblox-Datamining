@@ -8,18 +8,18 @@ local t = {
 	lastUpdated = { 2026, 7, 23 }
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: httpService (ref), telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t, {
 		standardizedFields = { "addUserId", "addSessionId" },
 		customFields = {
-			eventType = p0,
-			universeId = p1.universeId,
-			placeId = p1.placeId,
-			conversationId = p1.conversationId,
-			messageId = p1.messageId,
-			turnId = p1.turnId,
-			parameters = if p2 then httpService:JSONEncode(p2) else nil
+			eventType = p1,
+			universeId = p2.universeId,
+			placeId = p2.placeId,
+			conversationId = p2.conversationId,
+			messageId = p2.messageId,
+			turnId = p2.turnId,
+			parameters = if p3 then httpService:JSONEncode(p3) else nil
 		}
 	})
 end

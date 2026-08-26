@@ -2,11 +2,11 @@
 local var1 = policyProviderModule.GetPolicyImplementations.MemStorageService("app-policy")
 local var2 = policyProviderModule.withGetPolicyImplementation(var1)
 
-function var2.Mapper(p0)
+function var2.Mapper(p1)
 	return {
 		eligibleForSelfieViewFeature = function()
-			-- upvalues: p0 (ref)
-			return p0.EligibleForSelfieViewFeature or false
+			-- upvalues: p1 (ref)
+			return p1.EligibleForSelfieViewFeature or false
 		end
 	}
 end

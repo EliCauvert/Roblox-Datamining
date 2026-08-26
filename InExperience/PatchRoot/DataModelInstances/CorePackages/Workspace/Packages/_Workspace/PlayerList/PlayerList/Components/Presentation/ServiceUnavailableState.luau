@@ -9,35 +9,35 @@ local iconSize = foundationModule.Enums.IconSize
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
-local var4 = function() end
+local var1 = function() end
 
-return reactModule.memo(function(p0)
-	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), empty (ref), iconSize (ref), var4 (ref)
+return reactModule.memo(function(p1)
+	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), empty (ref), iconSize (ref), var1 (ref)
 	local body, retry
-	local var5 = useLegacyAndTransparencyAwarePanelStyleModule(p0.useLegacyPanelStyling)
+	local var2 = useLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
 	local _ = nil
 	local _ = nil
 	
 	if fFlagPlayerListLocalizeGameTextModule then
-		local var6 = useLocalization({
+		local var3 = useLocalization({
 			body = "InGame.PlayerList.LeaderboardUnavailable",
 			retry = "InGame.PlayerList.Retry"
 		})
-		body = var6.body
-		retry = var6.retry
+		body = var3.body
+		retry = var3.retry
 	else
 		body = "Leaderboard unavailable. Please try again later."
 		retry = "Retry"
 	end
 	return reactModule.createElement(view, {
-		tag = var5.panelTag,
-		LayoutOrder = p0.layoutOrder,
-		backgroundStyle = var5.backgroundStyle
+		tag = var2.panelTag,
+		LayoutOrder = p1.layoutOrder,
+		backgroundStyle = var2.backgroundStyle
 	}, {
 		Content = reactModule.createElement(empty, {
 			icon = { name = "triangle-exclamation", size = iconSize.Large },
 			text = body,
-			button = { text = retry, onActivated = p0.onRetry or var4 }
+			button = { text = retry, onActivated = p1.onRetry or var1 }
 		})
 	})
 end)

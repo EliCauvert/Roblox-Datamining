@@ -37,53 +37,53 @@ local t_5 = { [controlStateModule.Default] = "PlaceHolder" }
 local t_6 = { [controlStateModule.Default] = "PlaceHolder" }
 local t_7 = { [controlStateModule.Default] = "TextEmphasis" }
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), controlStateModule (ref), useStyleModule (ref), getContentStyleModule (ref), t_1 (ref), t (ref), t_3 (ref), t_2 (ref), t_7 (ref), t_5 (ref), t_4 (ref), t_6 (ref), interactableModule (ref), imageSetComponentModule (ref), circle9 (ref), circle9Stroke1 (ref), getIconSizeModule (ref), iconSizeModule (ref), genericTextLabelModule (ref), skeleton (ref)
-	local var19, var20 = reactModule.useState(controlStateModule.Initialize)
-	local var21, var22 = reactModule.useState(false)
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.onActivated(p0.index)
-	end, { p0.onActivated, p0.index })
-	local var24 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var20 (ref), controlStateModule (copy), var22 (ref), p0 (ref)
-		var20(p2)
+	local var1, var2 = reactModule.useState(controlStateModule.Initialize)
+	local var3, var4 = reactModule.useState(false)
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		p1.onActivated(p1.index)
+	end, { p1.onActivated, p1.index })
+	local var6 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var2 (ref), controlStateModule (copy), var4 (ref), p1 (ref)
+		var2(p3)
 		
-		if p2 == controlStateModule.Hover then
-			var22(true)
+		if p3 == controlStateModule.Hover then
+			var4(true)
 		else
-			var22(false)
+			var4(false)
 		end
-		if p0.onStateChanged then
-			p0.onStateChanged(p1, p2)
+		if p1.onStateChanged then
+			p1.onStateChanged(p2, p3)
 		end
-	end, { p0.onStateChanged })
-	local var25 = useStyleModule()
-	local isDisabled = p0.isDisabled
-	local isLoading = p0.isLoading
-	local var26 = if isDisabled then controlStateModule.Disabled else var19
-	local isSelected = p0.isSelected
-	local var21_1 = var21 or isSelected
-	local var28 = isSelected and getContentStyleModule(t_1, var26, var25) or getContentStyleModule(t, var26, var25)
-	local var29 = isSelected and getContentStyleModule(t_3, var26, var25) or getContentStyleModule(t_2, var26, var25)
-	local var30 = getContentStyleModule(t_7, var26, var25)
-	local var31 = isSelected and getContentStyleModule(t_5, var26, var25) or getContentStyleModule(t_4, var26, var25)
-	local var32 = getContentStyleModule(t_6, var26, var25)
-	local subHeader1 = var25.Font.SubHeader1
-	local thumbnail = p0.thumbnail
-	local var33 = p0.thumbnail ~= nil
-	local var34 = p0.displayText ~= nil
+	end, { p1.onStateChanged })
+	local var7 = useStyleModule()
+	local isDisabled = p1.isDisabled
+	local isLoading = p1.isLoading
+	local var8 = if isDisabled then controlStateModule.Disabled else var1
+	local isSelected = p1.isSelected
+	local var9 = var3 or isSelected
+	local var10 = isSelected and getContentStyleModule(t_1, var8, var7) or getContentStyleModule(t, var8, var7)
+	local var11 = isSelected and getContentStyleModule(t_3, var8, var7) or getContentStyleModule(t_2, var8, var7)
+	local var12 = getContentStyleModule(t_7, var8, var7)
+	local var13 = isSelected and getContentStyleModule(t_5, var8, var7) or getContentStyleModule(t_4, var8, var7)
+	local var14 = getContentStyleModule(t_6, var8, var7)
+	local subHeader1 = var7.Font.SubHeader1
+	local thumbnail = p1.thumbnail
+	local var15 = p1.thumbnail ~= nil
+	local var16 = p1.displayText ~= nil
 	local isDisabled_1 = isDisabled or isLoading
 	
 	if isDisabled_1 then
-		var21_1 = false
+		var9 = false
 	end
 	return reactModule.createElement(interactableModule, {
 		Size = UDim2.fromOffset(48, 48),
-		Position = p0.position or UDim2.fromScale(0, 0),
+		Position = p1.position or UDim2.fromScale(0, 0),
 		BackgroundTransparency = 1,
-		onStateChanged = var24,
-		[reactModule.Event.Activated] = if not isDisabled_1 then var23 else nil
+		onStateChanged = var6,
+		[reactModule.Event.Activated] = if not isDisabled_1 then var5 else nil
 	}, {
 		Button = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 			Background = reactModule.createElement(imageSetComponentModule.Label, {
@@ -92,19 +92,19 @@ return function(p0)
 				Size = UDim2.fromScale(1, 1),
 				Position = UDim2.fromScale(0, 0),
 				Image = circle9,
-				ImageColor3 = if var34 then var31.Color else var32.Color,
-				ImageTransparency = if var34 then var31.Transparency else var32.Transparency,
+				ImageColor3 = if var16 then var13.Color else var14.Color,
+				ImageTransparency = if var16 then var13.Transparency else var14.Transparency,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(4, 4, 5, 5)
 			}),
-			Border = if var21_1 then reactModule.createElement(imageSetComponentModule.Label, {
+			Border = if var9 then reactModule.createElement(imageSetComponentModule.Label, {
 				BackgroundTransparency = 1,
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1),
 				Position = UDim2.fromScale(0, 0),
 				Image = circle9Stroke1,
-				ImageColor3 = var28.Color,
-				ImageTransparency = var28.Transparency,
+				ImageColor3 = var10.Color,
+				ImageTransparency = var10.Transparency,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(4, 4, 5, 5)
 			}) else nil,
@@ -114,25 +114,25 @@ return function(p0)
 				Size = UDim2.fromScale(1, 1),
 				Position = UDim2.fromScale(0, 0)
 			}, {
-				Thumbnail = if isLoading or not var33 then nil else reactModule.createElement(imageSetComponentModule.Label, {
+				Thumbnail = if isLoading or not var15 then nil else reactModule.createElement(imageSetComponentModule.Label, {
 					BackgroundTransparency = 1,
 					ZIndex = 3,
 					Size = UDim2.fromOffset(getIconSizeModule(iconSizeModule.Medium), getIconSizeModule(iconSizeModule.Medium)),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
 					Image = thumbnail,
-					ImageColor3 = var30.Color,
-					ImageTransparency = var30.Transparency
+					ImageColor3 = var12.Color,
+					ImageTransparency = var12.Transparency
 				}),
-				Text = if isLoading or not var34 then nil else reactModule.createElement(genericTextLabelModule, {
+				Text = if isLoading or not var16 then nil else reactModule.createElement(genericTextLabelModule, {
 					BackgroundTransparency = 1,
 					ZIndex = 3,
 					Size = UDim2.new(1, -24, 1, -24),
-					Text = p0.displayText,
+					Text = p1.displayText,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
 					fontStyle = subHeader1,
-					colorStyle = var29
+					colorStyle = var11
 				}),
 				LoadingShimmer = if isLoading then reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1) }) else nil
 			})

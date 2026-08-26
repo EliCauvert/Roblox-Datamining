@@ -3,19 +3,19 @@ local reactModule = require(parent.React)
 local _ = require(parent.SduiCompat)
 local badge = require(parent.Foundation).Badge
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), badge (ref)
 	return reactModule.createElement(badge, {
-		text = p0.text,
-		icon = p0.icon,
-		variant = p0.variant,
-		testId = p0.testId,
-		onAbsoluteSizeChanged = p0.onAbsoluteSizeChanged,
-		onAbsolutePositionChanged = p0.onAbsolutePositionChanged,
-		AnchorPoint = p0.anchorPoint,
-		LayoutOrder = p0.layoutOrder,
-		Position = p0.position,
-		Visible = p0.visible,
-		ZIndex = p0.zIndex
+		text = p1.text,
+		icon = p1.icon,
+		variant = p1.variant,
+		testId = p1.testId,
+		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
+		onAbsolutePositionChanged = p1.onAbsolutePositionChanged,
+		AnchorPoint = p1.anchorPoint,
+		LayoutOrder = p1.layoutOrder,
+		Position = p1.position,
+		Visible = p1.visible,
+		ZIndex = p1.zIndex
 	})
 end)

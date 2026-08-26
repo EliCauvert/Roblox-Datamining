@@ -12,58 +12,58 @@ local t = {
 
 return function(vectorA)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), reactOtterModule (ref)
-	local var4 = cryoModule.Dictionary.join(t, vectorA)
-	local itemsCount = #var4.items
-	local var6 = useStyle()
-	local var7, var8 = reactOtterModule.useAnimatedBinding(0, reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		if var4.crossAnim.isCrossFade then
-			var4.crossAnim.setCrossFade(false)
-			var4.crossAnim.setCurrentIndex(var4.crossAnim.nextIndex)
+	local var1 = cryoModule.Dictionary.join(t, vectorA)
+	local itemsCount = #var1.items
+	local var2 = useStyle()
+	local var3, var4 = reactOtterModule.useAnimatedBinding(0, reactModule.useCallback(function()
+		-- upvalues: var1 (ref)
+		if var1.crossAnim.isCrossFade then
+			var1.crossAnim.setCrossFade(false)
+			var1.crossAnim.setCurrentIndex(var1.crossAnim.nextIndex)
 		end
 	end, {
-		var4.crossAnim.isCrossFade,
-		var4.crossAnim.nextIndex,
-		var4.crossAnim.setCrossFade,
-		var4.crossAnim.setCurrentIndex
+		var1.crossAnim.isCrossFade,
+		var1.crossAnim.nextIndex,
+		var1.crossAnim.setCrossFade,
+		var1.crossAnim.setCurrentIndex
 	}))
 	reactModule.useEffect(function()
-		-- upvalues: itemsCount (ref), var4 (ref), var8 (ref), reactOtterModule (copy)
+		-- upvalues: itemsCount (ref), var1 (ref), var4 (ref), reactOtterModule (copy)
 		if itemsCount < 2 then return end
-		if var4.crossAnim.isCrossFade then
-			var8(reactOtterModule.spring(1, var4.animationConfig))
+		if var1.crossAnim.isCrossFade then
+			var4(reactOtterModule.spring(1, var1.animationConfig))
 			
 			return
 		end
-		var8(reactOtterModule.instant(0))
+		var4(reactOtterModule.instant(0))
 	end, {
-		var4.crossAnim.isCrossFade,
-		var4.crossAnim.nextIndex,
-		var4.animationConfig
+		var1.crossAnim.isCrossFade,
+		var1.crossAnim.nextIndex,
+		var1.animationConfig
 	})
 	
 	return reactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = var4.zIndex,
-		Image = var4.items[var4.crossAnim.currentIndex].imageId,
+		ZIndex = var1.zIndex,
+		Image = var1.items[var1.crossAnim.currentIndex].imageId,
 		ScaleType = Enum.ScaleType.Crop,
-		ImageTransparency = var7
+		ImageTransparency = var3
 	}, {
 		NextImage = if itemsCount >= 2 then reactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Position = UDim2.fromOffset(0, 0),
 			Size = UDim2.fromScale(1, 1),
-			Image = var4.items[var4.crossAnim.nextIndex].imageId,
+			Image = var1.items[var1.crossAnim.nextIndex].imageId,
 			ScaleType = Enum.ScaleType.Crop,
-			ImageTransparency = var7:map(function(p0)
-				return 1 - p0
+			ImageTransparency = var3:map(function(p1)
+				return 1 - p1
 			end)
 		}) else nil,
 		Overlay = reactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 1),
-			BackgroundTransparency = var4.overlayTransparency,
-			BackgroundColor3 = var6.Theme.Overlay.Color
+			BackgroundTransparency = var1.overlayTransparency,
+			BackgroundColor3 = var2.Theme.Overlay.Color
 		})
 	})
 end

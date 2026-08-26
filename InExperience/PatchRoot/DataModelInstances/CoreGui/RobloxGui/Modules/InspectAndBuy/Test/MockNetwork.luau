@@ -84,29 +84,29 @@ local t_6 = {
 }
 local t_7 = { name = "fakename", id = 13, rootPlaceId = 17 }
 
-local function getRobloxProductInfo(p0)
+local function getRobloxProductInfo(p1)
 	-- upvalues: cryoModule (ref), t_3 (ref), promiseModule (ref)
-	return promiseModule.resolve(cryoModule.Dictionary.join(t_3, { AssetId = p0 }))
+	return promiseModule.resolve(cryoModule.Dictionary.join(t_3, { AssetId = p1 }))
 end
 
 local function getProductInfo(p1)
 	-- upvalues: cryoModule (ref), t_3 (ref), promiseModule (ref)
-	local var36 = cryoModule.Dictionary.join(t_3, { AssetId = p1 })
-	var36.Creator.Id = 2
+	local var1 = cryoModule.Dictionary.join(t_3, { AssetId = p1 })
+	var1.Creator.Id = 2
 	
-	return promiseModule.resolve(var36)
+	return promiseModule.resolve(var1)
 end
 
-local function getItemDetails(p2, p3)
+local function getItemDetails(p1, p2)
 	-- upvalues: cryoModule (ref), t_4 (ref), promiseModule (ref)
-	return promiseModule.resolve(cryoModule.Dictionary.join(t_4, { Id = p2, ItemType = p3 }))
+	return promiseModule.resolve(cryoModule.Dictionary.join(t_4, { Id = p1, ItemType = p2 }))
 end
 
-local function getBatchItemDetails(p4)
+local function getBatchItemDetails(p1)
 	-- upvalues: cryoModule (ref), t_4 (ref), promiseModule (ref)
 	local t = {}
 	
-	for i, v in ipairs(p4) do
+	for i, v in ipairs(p1) do
 		table.insert(t, cryoModule.Dictionary.join(t_4, { Id = v }))
 	end
 	return promiseModule.resolve(t)
@@ -114,19 +114,19 @@ end
 
 local t_8 = { data = { { assetId = 17, creatingUniverseId = 13 } } }
 
-local function getVersionInfo(p5)
+local function getVersionInfo(p2)
 	-- upvalues: cryoModule (ref), t_8 (ref), promiseModule (ref)
-	return promiseModule.resolve(cryoModule.Dictionary.join(t_8, { AssetId = p5 }))
+	return promiseModule.resolve(cryoModule.Dictionary.join(t_8, { AssetId = p2 }))
 end
 
-local function getExperiencePlayability(p6)
+local function getExperiencePlayability(p2)
 	-- upvalues: cryoModule (ref), t_6 (ref), promiseModule (ref)
-	return promiseModule.resolve({ cryoModule.Dictionary.join(t_6, { universeId = p6 }) })
+	return promiseModule.resolve({ cryoModule.Dictionary.join(t_6, { universeId = p2 }) })
 end
 
-local function getExperienceInfo(p7)
+local function getExperienceInfo(p2)
 	-- upvalues: cryoModule (ref), t_7 (ref), promiseModule (ref)
-	return promiseModule.resolve({ data = { cryoModule.Dictionary.join(t_7, { id = p7 }) } })
+	return promiseModule.resolve({ data = { cryoModule.Dictionary.join(t_7, { id = p2 }) } })
 end
 
 local function getAssetBundles(_)
@@ -174,9 +174,9 @@ local function getFavoriteForAsset(value)
 	return if value == "GetFavoriteModel" then promiseModule.resolve(t_2) else promiseModule.resolve("null")
 end
 
-local function getFavoriteForBundle(p8)
+local function getFavoriteForBundle(p2)
 	-- upvalues: promiseModule (ref), t_2 (ref)
-	return if p8 == "GetFavoriteModel" then promiseModule.resolve(t_2) else promiseModule.resolve("null")
+	return if p2 == "GetFavoriteModel" then promiseModule.resolve(t_2) else promiseModule.resolve("null")
 end
 
 local function getEconomyProductInfo(_)
@@ -197,9 +197,9 @@ end
 local t_9 = {}
 t_9.__index = t_9
 
-function t_9.new(p9, p10)
+function t_9.new(p2, p3)
 	-- upvalues: networkFailure (ref), getProductInfo (ref), getRobloxProductInfo (ref), getPlayerName (ref), getAssetBundles (ref), createFavoriteForAsset (ref), createFavoriteForBundle (ref), deleteFavoriteForAsset (ref), deleteFavoriteForBundle (ref), getAssetFavoriteCount (ref), getBundleFavoriteCount (ref), getFavoriteForAsset (ref), getFavoriteForBundle (ref), getEconomyProductInfo (ref), getModelFromUserId (ref), getVersionInfo (ref), getExperiencePlayability (ref), getExperienceInfo (ref), getItemDetails (ref), getBatchItemDetails (ref)
-	local var38 = if p9 then {
+	local var1 = if p2 then {
 		getProductInfo = networkFailure,
 		getPlayerName = networkFailure,
 		getAssetBundles = networkFailure,
@@ -219,7 +219,7 @@ function t_9.new(p9, p10)
 		getItemDetails = networkFailure,
 		getBatchItemDetails = networkFailure
 	} else {
-		getProductInfo = if p10 then getProductInfo else getRobloxProductInfo,
+		getProductInfo = if p3 then getProductInfo else getRobloxProductInfo,
 		getPlayerName = getPlayerName,
 		getAssetBundles = getAssetBundles,
 		createFavoriteForAsset = createFavoriteForAsset,
@@ -238,13 +238,13 @@ function t_9.new(p9, p10)
 		getItemDetails = getItemDetails,
 		getBatchItemDetails = getBatchItemDetails
 	}
-	setmetatable(var38, {
+	setmetatable(var1, {
 		__tostring = function()
 			return "MockService(Network)"
 		end
 	})
 	
-	return var38
+	return var1
 end
 
 function t_9.GetMockAssetData()

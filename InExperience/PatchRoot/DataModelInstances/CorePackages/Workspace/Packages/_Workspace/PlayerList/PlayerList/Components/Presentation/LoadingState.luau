@@ -7,14 +7,14 @@ local loading = foundationModule.Loading
 local iconSize = foundationModule.Enums.IconSize
 local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), reactModule (ref), view (ref), loading (ref), iconSize (ref)
-	local var3 = useLegacyAndTransparencyAwarePanelStyleModule(p0.useLegacyPanelStyling)
+	local var1 = useLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
 	
 	return reactModule.createElement(view, {
-		tag = var3.panelTag,
-		LayoutOrder = p0.layoutOrder,
-		backgroundStyle = var3.backgroundStyle
+		tag = var1.panelTag,
+		LayoutOrder = p1.layoutOrder,
+		backgroundStyle = var1.backgroundStyle
 	}, {
 		Spinner = reactModule.createElement(loading, { size = iconSize.XLarge })
 	})

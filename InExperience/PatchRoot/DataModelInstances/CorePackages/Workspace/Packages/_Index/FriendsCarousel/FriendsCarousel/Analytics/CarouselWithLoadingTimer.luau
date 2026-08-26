@@ -8,38 +8,38 @@ local analyticsSetupModule = require(script.Parent.AnalyticsSetup)
 local eventNamesModule = require(script.Parent.EventNames)
 local UILoadingEventsModule = require(script.Parent.UILoadingEvents)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalUserId (ref), useLoadingTimers (ref), reactModule (ref), analyticsSetupModule (ref), eventNamesModule (ref), retrievalStatus (ref), UILoadingEventsModule (ref)
-	local var5 = useLocalUserId()
-	local var6 = useLoadingTimers({})
-	local var7 = reactModule.useRef({})
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: analyticsSetupModule (copy), var5 (ref)
+	local var1 = useLocalUserId()
+	local var2 = useLoadingTimers({})
+	local var3 = reactModule.useRef({})
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: analyticsSetupModule (copy), var1 (ref)
 		return analyticsSetupModule({
-			infoForAllEvents = { uid = if var5 then tostring(var5) else nil }
+			infoForAllEvents = { uid = if var1 then tostring(var1) else nil }
 		})
-	end, { var5 })
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref)
-		var6.start("carouselLoadingTime")
+		-- upvalues: var2 (ref)
+		var2.start("carouselLoadingTime")
 	end, {})
 	
-	local var9 = function(p1, p2)
-		-- upvalues: var8 (ref), eventNamesModule (copy), retrievalStatus (copy)
-		var8.fireAnalyticsEvent(eventNamesModule.FriendsCarouselUILoadingTime, {
-			loadingTime = if p2 and typeof(p2) == "number" and p2 >= 0 then p2 else 0,
-			fetch = p1,
+	local var5 = function(p2, p3)
+		-- upvalues: var4 (ref), eventNamesModule (copy), retrievalStatus (copy)
+		var4.fireAnalyticsEvent(eventNamesModule.FriendsCarouselUILoadingTime, {
+			loadingTime = if p3 and typeof(p3) == "number" and p3 >= 0 then p3 else 0,
+			fetch = p2,
 			status = retrievalStatus.Done.rawValue()
 		})
 	end
 	
-	return p0.renderComponent({
-		onSuccessfulRender = function(p3)
-			-- upvalues: var7 (ref), UILoadingEventsModule (copy), var6 (ref), var9 (ref)
-			if var7.current[UILoadingEventsModule.EmptyHint] or var7.current[`{UILoadingEventsModule.EmptyHint}{UILoadingEventsModule.ExperimentSuffix}`] then return end
-			if p3 and not var7.current[p3] then
-				var7.current[p3] = true
-				var9(p3, var6.getTime("carouselLoadingTime"))
+	return p1.renderComponent({
+		onSuccessfulRender = function(p2)
+			-- upvalues: var3 (ref), UILoadingEventsModule (copy), var2 (ref), var5 (ref)
+			if var3.current[UILoadingEventsModule.EmptyHint] or var3.current[`{UILoadingEventsModule.EmptyHint}{UILoadingEventsModule.ExperimentSuffix}`] then return end
+			if p2 and not var3.current[p2] then
+				var3.current[p2] = true
+				var5(p2, var2.getTime("carouselLoadingTime"))
 				
 				return
 			end

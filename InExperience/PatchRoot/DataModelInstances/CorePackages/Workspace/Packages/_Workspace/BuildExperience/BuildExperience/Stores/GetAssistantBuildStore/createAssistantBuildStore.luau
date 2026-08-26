@@ -4,18 +4,18 @@ local signalsModule = require(parent.Signals)
 
 return function()
 	-- upvalues: signalsModule (ref), displayModule (ref)
-	local var2 = signalsModule.createComputed(function(p0)
+	local var1 = signalsModule.createComputed(function(p1)
 		-- upvalues: displayModule (copy)
-		local displayStore = displayModule.GetDisplayStore(p0)
-		local viewportSize = displayStore.getViewportSize(p0)
+		local displayStore = displayModule.GetDisplayStore(p1)
+		local viewportSize = displayStore.getViewportSize(p1)
 		
-		return displayStore.getDisplaySize(p0) == Enum.DisplaySize.Small and viewportSize.Y < viewportSize.X
+		return displayStore.getDisplaySize(p1) == Enum.DisplaySize.Small and viewportSize.Y < viewportSize.X
 	end)
-	local var3, var4 = signalsModule.createSignal(false)
+	local var2, var3 = signalsModule.createSignal(false)
 	
 	return {
-		getIsDisabled = var2,
-		getIsDisabledTooltipOpen = var3,
-		setIsDisabledTooltipOpen = var4
+		getIsDisabled = var1,
+		getIsDisabledTooltipOpen = var2,
+		setIsDisabledTooltipOpen = var3
 	}
 end

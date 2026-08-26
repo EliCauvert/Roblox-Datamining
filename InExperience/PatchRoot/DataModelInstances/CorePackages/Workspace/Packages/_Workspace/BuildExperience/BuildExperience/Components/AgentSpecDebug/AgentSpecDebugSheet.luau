@@ -4,7 +4,7 @@ local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local buildAppStorageModule = require(buildExperience.Storage.BuildAppStorage)
-local var5 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
+local var1 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
 local button = foundationModule.Button
 local text = foundationModule.Text
 local textInput = foundationModule.TextInput
@@ -12,41 +12,41 @@ local textInput = foundationModule.TextInput
 if creatorAgentChatModule.experimentOverride.isEnabled() then
 	creatorAgentChatModule.experimentOverride.set(buildAppStorageModule.getAgentSpecVersion())
 end
-return function(p0)
-	-- upvalues: reactModule (ref), creatorAgentChatModule (ref), var5 (ref), text (ref), textInput (ref), button (ref), foundationModule (ref), buildAppStorageModule (ref)
-	local var6, var7 = reactModule.useState(creatorAgentChatModule.experimentOverride.get() or "")
+return function(p1)
+	-- upvalues: reactModule (ref), creatorAgentChatModule (ref), var1 (ref), text (ref), textInput (ref), button (ref), foundationModule (ref), buildAppStorageModule (ref)
+	local var2, var3 = reactModule.useState(creatorAgentChatModule.experimentOverride.get() or "")
 	
-	return reactModule.createElement(var5.Root, {
+	return reactModule.createElement(var1.Root, {
 		isOpen = true,
 		preferCenterSheet = true,
-		onClose = p0.onClose
+		onClose = p1.onClose
 	}, {
-		Header = reactModule.createElement(var5.Header, { hasCloseAffordance = true }, {
+		Header = reactModule.createElement(var1.Header, { hasCloseAffordance = true }, {
 			Title = reactModule.createElement(text, {
 				Text = "Agent Spec",
 				tag = "auto-xy text-heading-small content-emphasis"
 			})
 		}),
-		Content = reactModule.createElement(var5.Content, nil, {
+		Content = reactModule.createElement(var1.Content, nil, {
 			Input = reactModule.createElement(textInput, {
 				label = "specVersion",
 				placeholder = "Leave empty for latest",
-				text = var6,
+				text = var2,
 				width = UDim.new(1, 0),
-				onChanged = var7
+				onChanged = var3
 			})
 		}),
-		Actions = reactModule.createElement(var5.Actions, nil, {
+		Actions = reactModule.createElement(var1.Actions, nil, {
 			Save = reactModule.createElement(button, {
 				text = "Save",
 				size = foundationModule.Enums.InputSize.Large,
 				variant = foundationModule.Enums.ButtonVariant.Emphasis,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fill,
 				onActivated = function()
-					-- upvalues: creatorAgentChatModule (copy), var6 (ref), buildAppStorageModule (copy), p0 (ref)
-					creatorAgentChatModule.experimentOverride.set(var6)
+					-- upvalues: creatorAgentChatModule (copy), var2 (ref), buildAppStorageModule (copy), p1 (ref)
+					creatorAgentChatModule.experimentOverride.set(var2)
 					buildAppStorageModule.setAgentSpecVersion(creatorAgentChatModule.experimentOverride.get())
-					p0.onClose()
+					p1.onClose()
 				end
 			})
 		})

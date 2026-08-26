@@ -1,3 +1,3 @@
-﻿return function(p0)
-	return if p0 == nil then nil else p0.responseBody or p0
+﻿return function(p1)
+	return if p1 == nil then nil else p1.responseBody or p1
 end

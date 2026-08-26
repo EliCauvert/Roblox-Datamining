@@ -18,10 +18,10 @@ local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableProvisionalRatingModule = require(buildExperience.Flags.FFlagEnableProvisionalRating)
 local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 
-return function(p0)
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), experienceGuidelinesModule (ref), reactModule (ref), signalsReactModule (ref), fFlagEnableProvisionalRatingModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationLabelsModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), fFlagMyStatsMediaSelector (ref)
 	local GAME_CONFIGURATION_CREATOR_HUB, GAME_CONFIGURATION_LOADING, GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
-	local var13 = if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
 		loading = localizationStringsModule.GAME_CONFIGURATION_LOADING,
 		questionnaireRequiredBanner = localizationStringsModule.GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
@@ -31,58 +31,58 @@ return function(p0)
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		GAME_CONFIGURATION_CREATOR_HUB = var13.creatorHub
-		GAME_CONFIGURATION_LOADING = var13.loading
-		GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER = var13.questionnaireRequiredBanner
+		GAME_CONFIGURATION_CREATOR_HUB = var1.creatorHub
+		GAME_CONFIGURATION_LOADING = var1.loading
+		GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER = var1.questionnaireRequiredBanner
 	else
 		GAME_CONFIGURATION_CREATOR_HUB = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
 		GAME_CONFIGURATION_LOADING = localizationStringsModule.GAME_CONFIGURATION_LOADING
 		GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER = localizationStringsModule.GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
 	end
-	local var14 = useOpenWebView()
+	local var2 = useOpenWebView()
 	local experienceGuidelinesStore = experienceGuidelinesModule.getExperienceGuidelinesStore()
-	local var16 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: experienceGuidelinesStore (ref), p0 (ref)
-		return experienceGuidelinesStore.getAndFetchDetailedGuidelines(p0.universeId)
-	end, { experienceGuidelinesStore, p0.universeId }).data)
-	local var17 = nil
-	local var18 = nil
-	local var19 = false
+	local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: experienceGuidelinesStore (ref), p1 (ref)
+		return experienceGuidelinesStore.getAndFetchDetailedGuidelines(p1.universeId)
+	end, { experienceGuidelinesStore, p1.universeId }).data)
+	local var4 = nil
+	local var5 = nil
+	local var6 = false
 	
 	if fFlagEnableProvisionalRatingModule then
 		local universeActivationStore = universeActivationModule.getUniverseActivationStore()
-		local var21 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: universeActivationStore (ref), p0 (ref)
-			return universeActivationStore.getAndFetchEligibility(p0.universeId)
-		end, { universeActivationStore, p0.universeId }).data)
-		local var22 = contentMaturityUtilsModule.isContentUnrated(p0.universeId)
-		local var23 = contentMaturityUtilsModule.isSealBroken(p0.universeId)
-		var18 = if var21 then var21.provisionalRating else nil
-		var19 = var22 and (not fFlagBuildRehydrateOnPublishModule or not var23)
+		local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+			-- upvalues: universeActivationStore (ref), p1 (ref)
+			return universeActivationStore.getAndFetchEligibility(p1.universeId)
+		end, { universeActivationStore, p1.universeId }).data)
+		local var8 = contentMaturityUtilsModule.isContentUnrated(p1.universeId)
+		local var9 = contentMaturityUtilsModule.isSealBroken(p1.universeId)
+		var5 = if var7 then var7.provisionalRating else nil
+		var6 = var8 and (not fFlagBuildRehydrateOnPublishModule or not var9)
 		
-		if var23 and var22 then
-			var17 = GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
+		if var9 and var8 then
+			var4 = GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
 		end
 	end
 	return {
-		buildMaturityBannerText = var17,
-		contentMaturityText = gameConfigurationLabelsModule.getContentMaturityText(var16, var18, var19) or GAME_CONFIGURATION_LOADING,
-		onOpenIconAndThumbnails = if fFlagMyStatsMediaSelector then p0.onOpenMediaSelectionPage else reactModule.useCallback(function()
-			-- upvalues: var14 (ref), gameConfigurationActionsModule (copy), p0 (ref), GAME_CONFIGURATION_CREATOR_HUB (write)
-			var14(gameConfigurationActionsModule.getCreatorHubConfigureUrl(p0.universeId), GAME_CONFIGURATION_CREATOR_HUB)
-		end, { GAME_CONFIGURATION_CREATOR_HUB, var14, p0.universeId }),
-		onOpenTitleDescriptionPage = p0.onOpenTitleDescriptionPage,
+		buildMaturityBannerText = var4,
+		contentMaturityText = gameConfigurationLabelsModule.getContentMaturityText(var3, var5, var6) or GAME_CONFIGURATION_LOADING,
+		onOpenIconAndThumbnails = if fFlagMyStatsMediaSelector then p1.onOpenMediaSelectionPage else reactModule.useCallback(function()
+			-- upvalues: var2 (ref), gameConfigurationActionsModule (copy), p1 (ref), GAME_CONFIGURATION_CREATOR_HUB (write)
+			var2(gameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), GAME_CONFIGURATION_CREATOR_HUB)
+		end, { GAME_CONFIGURATION_CREATOR_HUB, var2, p1.universeId }),
+		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 		onOpenContentMaturity = reactModule.useCallback(function()
-			-- upvalues: var14 (ref), gameConfigurationActionsModule (copy), p0 (ref), GAME_CONFIGURATION_CREATOR_HUB (write), refreshPublishEligibilityModule (copy)
-			var14(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p0.universeId), GAME_CONFIGURATION_CREATOR_HUB, function()
-				-- upvalues: refreshPublishEligibilityModule (copy), p0 (copy)
-				refreshPublishEligibilityModule(p0.universeId)
+			-- upvalues: var2 (ref), gameConfigurationActionsModule (copy), p1 (ref), GAME_CONFIGURATION_CREATOR_HUB (write), refreshPublishEligibilityModule (copy)
+			var2(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p1.universeId), GAME_CONFIGURATION_CREATOR_HUB, function()
+				-- upvalues: refreshPublishEligibilityModule (copy), p1 (copy)
+				refreshPublishEligibilityModule(p1.universeId)
 			end)
-		end, { GAME_CONFIGURATION_CREATOR_HUB, var14, p0.universeId }),
-		onOpenVersionTitleDescriptionPage = p0.onOpenVersionTitleDescriptionPage,
-		onOpenVersionHistory = p0.onOpenVersionHistory,
+		end, { GAME_CONFIGURATION_CREATOR_HUB, var2, p1.universeId }),
+		onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,
+		onOpenVersionHistory = p1.onOpenVersionHistory,
 		showVersionTitleDescription = fFlagEnableProvisionalRatingModule,
-		layoutOrder = p0.layoutOrder,
-		testId = p0.testId
+		layoutOrder = p1.layoutOrder,
+		testId = p1.testId
 	}
 end

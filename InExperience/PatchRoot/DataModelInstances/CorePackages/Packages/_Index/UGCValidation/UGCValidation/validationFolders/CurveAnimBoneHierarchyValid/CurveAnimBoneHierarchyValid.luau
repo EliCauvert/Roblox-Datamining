@@ -29,29 +29,29 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-local function buildAcceptableForFolder(p0, p1)
+local function buildAcceptableForFolder(p1, p2)
 	-- upvalues: curveAnimBoneHierarchyUtilsModule (ref), curveAnimationHierarchyUtilsModule (ref)
-	if curveAnimBoneHierarchyUtilsModule.isBoneFolderName(p0.Name) then
+	if curveAnimBoneHierarchyUtilsModule.isBoneFolderName(p1.Name) then
 		local t = {}
-		local childBoneNames = curveAnimBoneHierarchyUtilsModule.getChildBoneNames(p0.Name)
+		local childBoneNames = curveAnimBoneHierarchyUtilsModule.getChildBoneNames(p1.Name)
 		
 		for i, v in childBoneNames do
 			table.insert(t, { ClassName = "Folder", Name = v })
 		end
-		local var16 = false
+		local var1 = false
 		
 		if #childBoneNames == 1 then
-			local var17 = childBoneNames[1]
+			local var2 = childBoneNames[1]
 			
-			for i_1, v_1 in p0:GetChildren() do
-				if v_1:IsA("Folder") and v_1.Name == var17 then
-					var16 = true
+			for i_1, v_1 in p1:GetChildren() do
+				if v_1:IsA("Folder") and v_1.Name == var2 then
+					var1 = true
 					break
 				end
 			end
 		end
-		if not var16 then
-			for i_1, v_1 in curveAnimationHierarchyUtilsModule.calculateAcceptableChildBodyPartFolders(p1) do
+		if not var1 then
+			for i_1, v_1 in curveAnimationHierarchyUtilsModule.calculateAcceptableChildBodyPartFolders(p2) do
 				table.insert(t, v_1)
 			end
 		end
@@ -60,67 +60,67 @@ local function buildAcceptableForFolder(p0, p1)
 		
 		return t
 	else
-		local var18 = curveAnimationHierarchyUtilsModule.calculateAcceptableChildBodyPartFolders(p0.Name)
+		local var3 = curveAnimationHierarchyUtilsModule.calculateAcceptableChildBodyPartFolders(p1.Name)
 		
-		for i, v in curveAnimBoneHierarchyUtilsModule.getRootBoneNamesForBodyPart(p0.Name) do
-			table.insert(var18, { ClassName = "Folder", Name = v })
+		for i, v in curveAnimBoneHierarchyUtilsModule.getRootBoneNamesForBodyPart(p1.Name) do
+			table.insert(var3, { ClassName = "Folder", Name = v })
 		end
-		if p0.Name == curveAnimationHierarchyUtilsModule.humanoidRootPartName then
-			return var18
+		if p1.Name == curveAnimationHierarchyUtilsModule.humanoidRootPartName then
+			return var3
 		end
-		table.insert(var18, { ClassName = "Vector3Curve", Name = "Position" })
-		table.insert(var18, { ClassName = "EulerRotationCurve", Name = "Rotation" })
+		table.insert(var3, { ClassName = "Vector3Curve", Name = "Position" })
+		table.insert(var3, { ClassName = "EulerRotationCurve", Name = "Rotation" })
 		
-		if p0.Name == "Head" then
-			table.insert(var18, {
+		if p1.Name == "Head" then
+			table.insert(var3, {
 				ClassName = "Folder",
 				Name = curveAnimationHierarchyUtilsModule.FaceControlsName
 			})
 		end
-		return var18
+		return var3
 	end
 end
 
-local function getFirstUnacceptableChildDetail(p2, p3)
-	if not p2 then
+local function getFirstUnacceptableChildDetail(p3, p4)
+	if not p3 then
 		return nil
 	end
-	local var19
-	for i, v in p2:GetChildren() do
-		var19 = false
+	local var4
+	for i, v in p3:GetChildren() do
+		var4 = false
 		
-		for i_1, v_1 in p3 do
+		for i_1, v_1 in p4 do
 			if v_1.ClassName == v.ClassName and v_1.Name == v.Name then
-				table.remove(p3, i_1)
-				var19 = true
+				table.remove(p4, i_1)
+				var4 = true
 				break
 			end
 		end
-		if not var19 then
+		if not var4 then
 			return `unexpected {v.ClassName} '{v.Name}'`
 		end
 	end
 	return nil
 end
 
-local function validateFolderStructure(p4, p5, p6)
+local function validateFolderStructure(p5, p6, p7)
 	-- upvalues: buildAcceptableForFolder (ref), getFirstUnacceptableChildDetail (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateRestrictNumFaceControlsModule (ref), getFIntUGCValidateMaxTotalFaceControlsModule (ref)
-	local var20 = getFirstUnacceptableChildDetail(p4, buildAcceptableForFolder(p4, p6))
+	local var5 = getFirstUnacceptableChildDetail(p5, buildAcceptableForFolder(p5, p7))
 	
-	if var20 then
-		return `{var20} under '{p5}'`
+	if var5 then
+		return `{var5} under '{p5}'`
 	end
-	local position = p4:FindFirstChild("Position")
+	local position = p5:FindFirstChild("Position")
 	
 	if not curveAnimationHierarchyUtilsModule.areChildrenAcceptable(position, curveAnimationHierarchyUtilsModule.calculateAcceptableCurveChildrenArray()) then
 		return `unexpected child under '{p5}/Position'`
 	end
-	local rotation = p4:FindFirstChild("Rotation")
+	local rotation = p5:FindFirstChild("Rotation")
 	
 	if not curveAnimationHierarchyUtilsModule.areChildrenAcceptable(rotation, curveAnimationHierarchyUtilsModule.calculateAcceptableCurveChildrenArray()) then
 		return `unexpected child under '{p5}/Rotation'`
 	end
-	local faceControlsName = p4:FindFirstChild(curveAnimationHierarchyUtilsModule.FaceControlsName)
+	local faceControlsName = p5:FindFirstChild(curveAnimationHierarchyUtilsModule.FaceControlsName)
 	
 	if faceControlsName then
 		local children = faceControlsName:GetChildren()
@@ -137,25 +137,25 @@ local function validateFolderStructure(p4, p5, p6)
 	return if curveAnimationHierarchyUtilsModule.containsGrandChildren(position) then `'{p5}/Position' contains unexpected grandchildren` elseif curveAnimationHierarchyUtilsModule.containsGrandChildren(rotation) then `'{p5}/Rotation' contains unexpected grandchildren` elseif curveAnimationHierarchyUtilsModule.containsGrandChildren(faceControlsName) then `'{p5}/FaceControls' contains unexpected grandchildren` else nil
 end
 
-local function validateHierarchyTree(p7, p8, p9, p10)
+local function validateHierarchyTree(p8, p9, p10, p11)
 	-- upvalues: validateFolderStructure (ref), errorSourceStringsModule (ref), curveAnimationHierarchyUtilsModule (ref), curveAnimBoneHierarchyUtilsModule (ref), validateHierarchyTree (ref)
-	local var25 = validateFolderStructure(p7, p8, p9)
+	local var6 = validateFolderStructure(p8, p9, p10)
 	
-	if var25 then
-		p10:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBodyPartHierarchyDetail, { folderName = p7.Name, detail = var25 })
+	if var6 then
+		p11:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBodyPartHierarchyDetail, { folderName = p8.Name, detail = var6 })
 		
 		return
 	end
-	for i, v in p7:GetChildren() do
+	for i, v in p8:GetChildren() do
 		if v:IsA("Folder") and v.Name ~= curveAnimationHierarchyUtilsModule.FaceControlsName then
-			validateHierarchyTree(v, `{p8}/{v.Name}`, if curveAnimBoneHierarchyUtilsModule.isBoneFolderName(v.Name) then p9 else v.Name, p10)
+			validateHierarchyTree(v, `{p9}/{v.Name}`, if curveAnimBoneHierarchyUtilsModule.isBoneFolderName(v.Name) then p10 else v.Name, p11)
 		end
 	end
 end
 
-function t.run(p11, p12)
+function t.run(p12, p13)
 	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), curveAnimationHierarchyUtilsModule (ref), validateHierarchyTree (ref)
-	for i, v in p12.curveAnimations do
+	for i, v in p13.curveAnimations do
 		local t = {}
 		
 		if getFFlagUGCValidateDuplicatesInAnimationModule() then
@@ -173,7 +173,7 @@ function t.run(p11, p12)
 		end
 		for i_1, v_1 in t do
 			if curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) then
-				validateHierarchyTree(v_1, v_1.Name, v_1.Name, p11)
+				validateHierarchyTree(v_1, v_1.Name, v_1.Name, p12)
 			end
 		end
 	end

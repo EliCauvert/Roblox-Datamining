@@ -1,14 +1,14 @@
 ﻿local argCheckModule = require(script:FindFirstAncestor("AppChat").Parent.ArgCheck)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: argCheckModule (ref)
-	argCheckModule.isType(p0, "table", "addMessage.messages")
-	argCheckModule.isType(p1, "string", "addMessage.value")
+	argCheckModule.isType(p1, "table", "addMessage.messages")
+	argCheckModule.isType(p2, "string", "addMessage.value")
 	
-	if p1 == "" then
-		return p0
+	if p2 == "" then
+		return p1
 	end
-	table.insert(p0, if p2 then { placeId = p1 } else { content = p1 })
+	table.insert(p1, if p3 then { placeId = p2 } else { content = p2 })
 	
-	return p0
+	return p1
 end

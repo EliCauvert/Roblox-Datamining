@@ -12,53 +12,53 @@ local print = graphQLModule.print
 local createGraphQLError = require(script.Parent.errors).createGraphQLError
 local inspect = require(script.Parent.inspect).inspect
 
-function t.getArgumentValues(p0, p1, p2)
+function t.getArgumentValues(p1, p2, p3)
 	-- upvalues: array (ref), object (ref), boolean (ref), isNonNullType (ref), createGraphQLError (ref), inspect (ref), kind (ref), valueFromAST (ref), print (ref)
-	local var3 = if p2 ~= nil then {} else p2
-	local var4 = array.reduce(object.entries(var3), function(p3, p4)
+	local var1 = if p3 ~= nil then {} else p3
+	local var2 = array.reduce(object.entries(var1), function(p4, p5)
 		-- upvalues: object (copy)
-		local unpacked, unpacked_1 = table.unpack(p4, 1, 2)
+		local unpacked, unpacked_1 = table.unpack(p5, 1, 2)
 		
-		return object.assign({}, p3, { [tostring(unpacked)] = unpacked_1 })
+		return object.assign({}, p4, { [tostring(unpacked)] = unpacked_1 })
 	end, {})
 	local t = {}
-	local var6 = array.reduce(if p1.arguments ~= nil then {} else p1.arguments, function(p5, p6)
+	local var3 = array.reduce(if p2.arguments ~= nil then {} else p2.arguments, function(p4, p5)
 		-- upvalues: object (copy)
-		return object.assign({}, p5, { [tostring(p6.name.value)] = p6 })
+		return object.assign({}, p4, { [tostring(p5.name.value)] = p5 })
 	end, {})
 	
-	for i, v in p0.args do
+	for i, v in p1.args do
 		local name = v.name
 		local type = v.type
 		local defaultValue = v.defaultValue
-		local var7 = var6[tostring(name)]
+		local var4 = var3[tostring(name)]
 		
-		if not boolean.toJSBoolean(var7) then
+		if not boolean.toJSBoolean(var4) then
 			if defaultValue ~= nil then
 				t[tostring(name)] = defaultValue
 			elseif boolean.toJSBoolean(isNonNullType(type)) then
-				error(createGraphQLError(("Argument \"%s\" of required type \"%s\" "):format(tostring(name), tostring(inspect(type))) .. "was not provided.", { nodes = { p1 } }))
+				error(createGraphQLError(("Argument \"%s\" of required type \"%s\" "):format(tostring(name), tostring(inspect(type))) .. "was not provided.", { nodes = { p2 } }))
 			end
 		end
 		local value_1
-		local value = var7.value
-		local var8 = value.kind == kind.NULL
+		local value = var4.value
+		local var5 = value.kind == kind.NULL
 		
 		if value.kind == kind.VARIABLE then
 			value_1 = value.name.value
 			
-			if var3 ~= nil and var4[tostring(value_1)] ~= nil then
-				var8 = var3[tostring(value_1)] == nil
+			if var1 ~= nil and var2[tostring(value_1)] ~= nil then
+				var5 = var1[tostring(value_1)] == nil
 			elseif defaultValue ~= nil then
 				t[tostring(name)] = defaultValue
 			elseif boolean.toJSBoolean(isNonNullType(type)) then
 				error(createGraphQLError(("Argument \"%s\" of required type \"%s\" "):format(tostring(name), tostring(inspect(type))) .. ("was provided the variable \"$%s\" which was not provided a runtime value."):format(tostring(value_1)), { nodes = { value } }))
 			end
 		end
-		if var8 and isNonNullType(type) then
+		if var5 and isNonNullType(type) then
 			error(createGraphQLError(("Argument \"%s\" of non-null type \"%s\" "):format(tostring(name), tostring(inspect(type))) .. "must not be null.", { nodes = { value } }))
 		end
-		value_1 = valueFromAST(value, type, var3)
+		value_1 = valueFromAST(value, type, var1)
 		
 		if value_1 == nil then
 			error(createGraphQLError(("Argument \"%s\" has invalid value %s."):format(tostring(name), tostring(print(value))), { nodes = { value } }))

@@ -8,12 +8,12 @@ local playerContext = UIBloxModule.App.Indicator.PlayerContext
 local textKeysModule = require(profilePlatform.Common.TextKeys)
 local enumsModule = require(profilePlatform.Common.Enums)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), enumsModule (ref), textKeysModule (ref), images (ref), reactModule (ref), playerContext (ref)
-	local contextualType = p0.contextualType
+	local contextualType = p1.contextualType
 	
 	return reactModule.createElement(playerContext, {
-		text = p0.textOverride or useLocalization({
+		text = p1.textOverride or useLocalization({
 			[enumsModule.ContextualTypes.AccountDeleted] = textKeysModule.AccountDeleted,
 			[enumsModule.ContextualTypes.IsYourself] = textKeysModule.ThisIsYou,
 			[enumsModule.ContextualTypes.PreviousUsername] = textKeysModule.Previously,
@@ -24,9 +24,9 @@ return function(p0)
 			[enumsModule.ContextualTypes.SentFromQrCode] = textKeysModule.FromQRCode,
 			[enumsModule.ContextualTypes.SentFromExperience] = {
 				textKeysModule.SentFromWithContext,
-				gameName = p0.experienceName
+				gameName = p1.experienceName
 			}
 		})[contextualType],
-		icon = p0.iconOverride or (if contextualType == enumsModule.ContextualTypes.YouAreFollowing or contextualType == enumsModule.ContextualTypes.FollowsYou then images["icons/status/player/following"] else nil)
+		icon = p1.iconOverride or (if contextualType == enumsModule.ContextualTypes.YouAreFollowing or contextualType == enumsModule.ContextualTypes.FollowsYou then images["icons/status/player/following"] else nil)
 	})
 end

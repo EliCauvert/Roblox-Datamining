@@ -4,28 +4,28 @@ local squadEnablePartyCoordinationUiVariant = game:DefineFastString("SquadEnable
 local forceEnablePartyCoordinationUiChanges3 = game:DefineFastFlag("ForceEnablePartyCoordinationUiChanges3", false)
 local partyCoordinationUIExposureEnabled = game:DefineFastFlag("PartyCoordinationUIExposureEnabled", false)
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: experimentCacheManager (ref), squadCoordinationUiExperimentLayer (ref)
-	local var4 = experimentCacheManager.default:getLayerVariables(squadCoordinationUiExperimentLayer)
+	local var1 = experimentCacheManager.default:getLayerVariables(squadCoordinationUiExperimentLayer)
 	
-	return if var4 and var4[p0] ~= nil then var4[p0] else false
+	return if var1 and var1[p1] ~= nil then var1[p1] else false
 end
 
 return {
 	getPartyCoordinationUiChangesEnabled = function()
 		-- upvalues: forceEnablePartyCoordinationUiChanges3 (ref), squadEnablePartyCoordinationUiVariant (ref), experimentCacheManager (ref), squadCoordinationUiExperimentLayer (ref)
-		local var5 = forceEnablePartyCoordinationUiChanges3
+		local var1 = forceEnablePartyCoordinationUiChanges3
 		
-		if not var5 then
-			local var6 = squadEnablePartyCoordinationUiVariant
-			local var7 = experimentCacheManager.default:getLayerVariables(squadCoordinationUiExperimentLayer)
+		if not var1 then
+			local var2 = squadEnablePartyCoordinationUiVariant
+			local var3 = experimentCacheManager.default:getLayerVariables(squadCoordinationUiExperimentLayer)
 			
-			if var7 and var7[var6] ~= nil then
-				return var7[var6]
+			if var3 and var3[var2] ~= nil then
+				return var3[var2]
 			end
-			var5 = false
+			var1 = false
 		end
-		return var5
+		return var1
 	end,
 	logExposure = function()
 		-- upvalues: partyCoordinationUIExposureEnabled (ref), experimentCacheManager (ref), squadCoordinationUiExperimentLayer (ref)

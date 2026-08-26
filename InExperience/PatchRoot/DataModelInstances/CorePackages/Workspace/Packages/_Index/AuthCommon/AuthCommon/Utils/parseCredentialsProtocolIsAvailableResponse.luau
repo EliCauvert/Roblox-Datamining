@@ -1,34 +1,34 @@
 ﻿local getFFlagLuaAppSignupPasskeyAvailabilityPreflight = require(script:FindFirstAncestor("AuthCommon").Parent.SharedFlags).GetFFlagLuaAppSignupPasskeyAvailabilityPreflight
 
-return function(p0)
+return function(p1)
 	-- upvalues: getFFlagLuaAppSignupPasskeyAvailabilityPreflight (ref)
 	local isAvailable_1, supportsDeviceBoundOnly
 	local _ = false
 	local _ = false
-	local var0 = true
+	local var1 = true
 	local isAvailable = false
-	local var1 = false
+	local var2 = false
 	
-	if p0.FIDO2 == nil then
-		isAvailable_1 = p0.isAvailable or false
-		supportsDeviceBoundOnly = p0.supportsDeviceBoundOnly or false
+	if p1.FIDO2 == nil then
+		isAvailable_1 = p1.isAvailable or false
+		supportsDeviceBoundOnly = p1.supportsDeviceBoundOnly or false
 	else
-		isAvailable_1 = p0.FIDO2.isAvailable
-		supportsDeviceBoundOnly = p0.FIDO2.supportsDeviceBoundOnly
+		isAvailable_1 = p1.FIDO2.isAvailable
+		supportsDeviceBoundOnly = p1.FIDO2.supportsDeviceBoundOnly
 		
 		if getFFlagLuaAppSignupPasskeyAvailabilityPreflight() then
-			var0 = p0.FIDO2.supportsPasskeyCreationOnDevice ~= false
+			var1 = p1.FIDO2.supportsPasskeyCreationOnDevice ~= false
 		end
-		var1 = true
+		var2 = true
 	end
-	if p0.password ~= nil then
-		isAvailable = p0.password.isAvailable
+	if p1.password ~= nil then
+		isAvailable = p1.password.isAvailable
 	end
 	return {
 		fido2Available = isAvailable_1,
 		fido2SupportsDeviceBoundOnly = supportsDeviceBoundOnly,
-		fido2SupportsPasskeyCreationOnDevice = var0,
+		fido2SupportsPasskeyCreationOnDevice = var1,
 		passwordsAvailable = isAvailable,
-		v2InterfaceSupported = var1
+		v2InterfaceSupported = var2
 	}
 end

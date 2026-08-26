@@ -35,9 +35,9 @@ return function(p1)
 		Controls = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = "auto-y col gap-xxsmall size-full-0",
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
 				-- upvalues: var4 (ref)
-				var4(UDim2.new(0, p1.AbsoluteSize.X, 1, 0))
+				var4(UDim2.new(0, p2.AbsoluteSize.X, 1, 0))
 			end, {})
 		}, {
 			Padding = reactModule.createElement("UIPadding", {
@@ -51,9 +51,9 @@ return function(p1)
 				size = foundationModule.Enums.InputSize.XSmall,
 				knobVisibility = foundationModule.Enums.Visibility.None,
 				variant = foundationModule.Enums.SliderVariant.Standard,
-				onValueChanged = reactModule.useCallback(function(p1)
-					-- upvalues: p1 (ref)
-					p1.playbackController.timeline.seek(p1 * p1.playbackController.timeline.duration)
+				onValueChanged = reactModule.useCallback(function(p2)
+					-- upvalues: p2 (ref)
+					p2.playbackController.timeline.seek(p2 * p2.playbackController.timeline.duration)
 				end, {
 					p1.playbackController.timeline.duration,
 					p1.playbackController.timeline.seek

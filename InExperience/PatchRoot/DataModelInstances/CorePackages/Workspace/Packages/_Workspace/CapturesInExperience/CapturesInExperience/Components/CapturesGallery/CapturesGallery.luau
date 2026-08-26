@@ -21,32 +21,32 @@ local galleryGridViewModule = require(parent.Components.CapturesGallery.GalleryG
 local fFlagUseCaptureCommonComponentsModule = require(parent.Flags.FFlagUseCaptureCommonComponents)
 local fFlagCapturesGalleryDespawnOnMenuCloseModule = require(parent.Flags.FFlagCapturesGalleryDespawnOnMenuClose)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useSystemMenuDetectionModule (ref), useSelector (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), eventNamesModule (ref), carouselOpenedModule (ref), fFlagCapturesGalleryDespawnOnMenuCloseModule (ref), fFlagUseCaptureCommonComponentsModule (ref), captureGridView (ref), galleryActionContainerModule (ref), captureItem (ref), galleryGridViewModule (ref)
-	local var14 = useAnalyticsModule()
-	local var15 = useDispatch()
-	local var16 = useStyle()
-	local var17 = useSystemMenuDetectionModule()
-	local var18 = useSelector(function(p1)
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3 = useStyle()
+	local var4 = useSystemMenuDetectionModule()
+	local var5 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].Captures
+		return p2[constantsModule.RoduxKey].Captures
 	end)
-	local var19 = next(var18) == nil
-	local var20 = reactModule.useCallback(function(p2)
-		-- upvalues: var14 (ref), eventNamesModule (copy), var15 (ref), carouselOpenedModule (copy)
+	local var6 = next(var5) == nil
+	local var7 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref), eventNamesModule (copy), var2 (ref), carouselOpenedModule (copy)
 		return function()
-			-- upvalues: var14 (copy), eventNamesModule (copy), var15 (copy), carouselOpenedModule (copy), p2 (ref)
-			var14.fireEvent(eventNamesModule.CapturesCarouselOpened)
-			var15(carouselOpenedModule(p2))
+			-- upvalues: var1 (copy), eventNamesModule (copy), var2 (copy), carouselOpenedModule (copy), p2 (ref)
+			var1.fireEvent(eventNamesModule.CapturesCarouselOpened)
+			var2(carouselOpenedModule(p2))
 		end
 	end, {})
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundColor3 = var16.Theme.BackgroundDefault.Color,
-		BackgroundTransparency = var16.Theme.BackgroundDefault.Transparency,
-		LayoutOrder = p0.LayoutOrder,
-		Size = p0.Size or UDim2.fromScale(1, 1)
+		BackgroundColor3 = var3.Theme.BackgroundDefault.Color,
+		BackgroundTransparency = var3.Theme.BackgroundDefault.Transparency,
+		LayoutOrder = p1.LayoutOrder,
+		Size = p1.Size or UDim2.fromScale(1, 1)
 	}, {
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
 		Layout = reactModule.createElement("UIListLayout", {
@@ -56,30 +56,30 @@ return function(p0)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top
 		}),
-		NothingHereYet = var19 and reactModule.createElement("TextLabel", {
+		NothingHereYet = var6 and reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Font = var16.Font.CaptionBody.Font,
+			Font = var3.Font.CaptionBody.Font,
 			Size = UDim2.new(1, -12, 1, 12),
 			Text = useLocalization({
 				nothingHereYet = "Feature.Captures.Label.NothingHereYet",
 				title = "Feature.Captures.Title.Gallery"
 			}).nothingHereYet,
-			TextColor3 = var16.Theme.TextMuted.Color,
-			TextSize = var16.Font.BaseSize * var16.Font.CaptionBody.RelativeSize,
-			TextTransparency = var16.Theme.TextMuted.Transparency,
+			TextColor3 = var3.Theme.TextMuted.Color,
+			TextSize = var3.Font.BaseSize * var3.Font.CaptionBody.RelativeSize,
+			TextTransparency = var3.Theme.TextMuted.Transparency,
 			TextXAlignment = Enum.TextXAlignment.Center
 		}, {
 			MaxSize = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(312, 1e999) })
 		}),
-		GalleryGridView = if if fFlagCapturesGalleryDespawnOnMenuCloseModule then var17 and not var19 else not var19 then if fFlagUseCaptureCommonComponentsModule then reactModule.createElement(captureGridView, {
+		GalleryGridView = if if fFlagCapturesGalleryDespawnOnMenuCloseModule then var4 and not var6 else not var6 then if fFlagUseCaptureCommonComponentsModule then reactModule.createElement(captureGridView, {
 			shouldShowShowMoreButton = true,
-			captures = var18,
-			header = reactModule.createElement(galleryActionContainerModule, { isDisabled = false, LayoutOrder = 1, itemCount = #var18 }),
-			renderItem = function(p3, p4)
-				-- upvalues: reactModule (copy), captureItem (copy), var20 (ref)
-				return reactModule.createElement(captureItem, { capture = p3, onActivated = var20(p4) })
+			captures = var5,
+			header = reactModule.createElement(galleryActionContainerModule, { isDisabled = false, LayoutOrder = 1, itemCount = #var5 }),
+			renderItem = function(p2, p3)
+				-- upvalues: reactModule (copy), captureItem (copy), var7 (ref)
+				return reactModule.createElement(captureItem, { capture = p2, onActivated = var7(p3) })
 			end
-		}) else reactModule.createElement(galleryGridViewModule, { captures = var18, Size = UDim2.new(1, -12, 1, -12) }) else nil
+		}) else reactModule.createElement(galleryGridViewModule, { captures = var5, Size = UDim2.new(1, -12, 1, -12) }) else nil
 	})
 end

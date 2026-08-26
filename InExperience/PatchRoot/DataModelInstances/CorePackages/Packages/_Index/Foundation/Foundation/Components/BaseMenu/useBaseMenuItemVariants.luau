@@ -6,14 +6,14 @@ local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(foundation.Components.Types)
 local iconSizeModule = require(foundation.Enums.IconSize)
 
-local function variantsMap(p0)
+local function variantsMap(p1)
 	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
 			container = { tag = "" },
 			icon = {
 				tag = "radius-small content-emphasis",
-				style = p0.Color.Content.Emphasis
+				style = p1.Color.Content.Emphasis
 			},
 			text = {
 				tag = "fill auto-xy text-align-x-left text-truncate-end content-emphasis"
@@ -23,7 +23,7 @@ local function variantsMap(p0)
 			},
 			check = {
 				tag = "content-emphasis",
-				style = p0.Color.Content.Emphasis
+				style = p1.Color.Content.Emphasis
 			},
 			slotAlign = { tag = "align-x-center align-y-center" },
 			submenuContent = { tag = "stroke-standard stroke-default radius-medium" }
@@ -33,73 +33,73 @@ local function variantsMap(p0)
 				container = {
 					tag = "size-full-600 radius-small",
 					paddingLeftWithCheck = 0,
-					paddingLeftWithoutCheck = p0.Padding.Small,
-					paddingRight = p0.Padding.Small
+					paddingLeftWithoutCheck = p1.Padding.Small,
+					paddingRight = p1.Padding.Small
 				},
-				wrapper = { gap = p0.Size.Size_150 },
+				wrapper = { gap = p1.Size.Size_150 },
 				icon = { tag = "size-400", size = iconSizeModule.XSmall },
 				text = { tag = "text-body-small" },
 				title = {
 					tag = "text-caption-small",
-					checkColumnWidth = p0.Size.Size_500
+					checkColumnWidth = p1.Size.Size_500
 				},
-				check = { tag = "size-500-400", size = p0.Size.Size_400 },
+				check = { tag = "size-500-400", size = p1.Size.Size_400 },
 				chevron = { size = iconSizeModule.Small },
-				groupPadding = { size = p0.Padding.XSmall }
+				groupPadding = { size = p1.Padding.XSmall }
 			},
 			[inputSizeModule.Small] = {
 				container = {
 					tag = "size-full-800 radius-small",
 					paddingLeftWithCheck = 0,
-					paddingLeftWithoutCheck = p0.Padding.Small,
-					paddingRight = p0.Padding.Small
+					paddingLeftWithoutCheck = p1.Padding.Small,
+					paddingRight = p1.Padding.Small
 				},
-				wrapper = { gap = p0.Size.Size_150 },
+				wrapper = { gap = p1.Size.Size_150 },
 				icon = { tag = "size-500", size = iconSizeModule.Small },
 				text = { tag = "text-body-small" },
 				title = {
 					tag = "text-caption-small",
-					checkColumnWidth = p0.Size.Size_600
+					checkColumnWidth = p1.Size.Size_600
 				},
-				check = { tag = "size-600-400", size = p0.Size.Size_400 },
+				check = { tag = "size-600-400", size = p1.Size.Size_400 },
 				chevron = { size = iconSizeModule.Small },
-				groupPadding = { size = p0.Padding.Small }
+				groupPadding = { size = p1.Padding.Small }
 			},
 			[inputSizeModule.Medium] = {
 				container = {
 					tag = "size-full-1000 radius-medium",
 					paddingLeftWithCheck = 0,
-					paddingLeftWithoutCheck = p0.Size.Size_250,
-					paddingRight = p0.Size.Size_250
+					paddingLeftWithoutCheck = p1.Size.Size_250,
+					paddingRight = p1.Size.Size_250
 				},
-				wrapper = { gap = p0.Size.Size_150 },
+				wrapper = { gap = p1.Size.Size_150 },
 				icon = { tag = "size-500", size = iconSizeModule.Medium },
 				text = { tag = "text-body-medium" },
 				title = {
 					tag = "text-caption-medium",
-					checkColumnWidth = p0.Size.Size_700
+					checkColumnWidth = p1.Size.Size_700
 				},
-				check = { tag = "size-700-500", size = p0.Size.Size_500 },
+				check = { tag = "size-700-500", size = p1.Size.Size_500 },
 				chevron = { size = iconSizeModule.Medium },
-				groupPadding = { size = p0.Padding.Small }
+				groupPadding = { size = p1.Padding.Small }
 			},
 			[inputSizeModule.Large] = {
 				container = {
 					tag = "size-full-1200 radius-medium",
 					paddingLeftWithCheck = 0,
-					paddingLeftWithoutCheck = p0.Size.Size_350,
-					paddingRight = p0.Size.Size_350
+					paddingLeftWithoutCheck = p1.Size.Size_350,
+					paddingRight = p1.Size.Size_350
 				},
-				wrapper = { gap = p0.Padding.Small },
+				wrapper = { gap = p1.Padding.Small },
 				icon = { tag = "size-600", size = iconSizeModule.Large },
 				text = { tag = "text-body-large" },
 				title = {
 					tag = "text-caption-large",
-					checkColumnWidth = p0.Size.Size_800
+					checkColumnWidth = p1.Size.Size_800
 				},
-				check = { tag = "size-800-600", size = p0.Size.Size_600 },
+				check = { tag = "size-800-600", size = p1.Size.Size_600 },
 				chevron = { size = iconSizeModule.Large },
-				groupPadding = { size = p0.Padding.Small }
+				groupPadding = { size = p1.Padding.Small }
 			}
 		},
 		isScrollable = {

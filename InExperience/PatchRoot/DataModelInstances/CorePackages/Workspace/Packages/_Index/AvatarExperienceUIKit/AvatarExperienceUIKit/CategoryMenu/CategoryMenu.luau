@@ -32,13 +32,13 @@ local t_1 = {
 }
 local t_2 = { FlexMode = Enum.UIFlexMode.Fill }
 
-local function CategoryMenuButtonGroup(p0)
+local function CategoryMenuButtonGroup(p1)
 	-- upvalues: AXCategoryMenuBadgePositionTokens2 (ref), foundationModule (ref), reactModule (ref), fFlagAXMigrateAllTabToSduiDev (ref), iconVariant (ref), view (ref), iconButton (ref), inputSize (ref), badge (ref), badgeVariant (ref)
-	local var11 = if AXCategoryMenuBadgePositionTokens2 then foundationModule.Hooks.useTokens() else nil
-	local backgroundColor3 = p0.BackgroundColor3
-	local backgroundTransparency = p0.BackgroundTransparency
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), p0 (ref), AXCategoryMenuBadgePositionTokens2 (copy), fFlagAXMigrateAllTabToSduiDev (copy), iconVariant (copy), view (copy), iconButton (copy), inputSize (copy), backgroundColor3 (ref), backgroundTransparency (ref), badge (copy), badgeVariant (copy), var11 (ref)
+	local var1 = if AXCategoryMenuBadgePositionTokens2 then foundationModule.Hooks.useTokens() else nil
+	local backgroundColor3 = p1.BackgroundColor3
+	local backgroundTransparency = p1.BackgroundTransparency
+	local var2 = reactModule.useMemo(function()
+		-- upvalues: reactModule (copy), p1 (ref), AXCategoryMenuBadgePositionTokens2 (copy), fFlagAXMigrateAllTabToSduiDev (copy), iconVariant (copy), view (copy), iconButton (copy), inputSize (copy), backgroundColor3 (ref), backgroundTransparency (ref), badge (copy), badgeVariant (copy), var1 (ref)
 		local t = {
 			FlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.None }),
 			Layout = reactModule.createElement("UIListLayout", {
@@ -49,8 +49,8 @@ local function CategoryMenuButtonGroup(p0)
 			})
 		}
 		
-		if p0.buttons then
-			for i, v in p0.buttons do
+		if p1.buttons then
+			for i, v in p1.buttons do
 				local id = `Button-{v.id}`
 				
 				if AXCategoryMenuBadgePositionTokens2 then
@@ -72,7 +72,7 @@ local function CategoryMenuButtonGroup(p0)
 							text = if badgeCount > 99 then "99+" else tostring(badgeCount),
 							variant = badgeVariant.Contrast,
 							AnchorPoint = Vector2.new(1, 0),
-							Position = if var11 then UDim2.new(1, var11.Gap.XXSmall, 0, -var11.Gap.XXSmall) else UDim2.new(1, 0, 0, -4)
+							Position = if var1 then UDim2.new(1, var1.Gap.XXSmall, 0, -var1.Gap.XXSmall) else UDim2.new(1, 0, 0, -4)
 						}) else nil
 					})
 				else
@@ -90,101 +90,101 @@ local function CategoryMenuButtonGroup(p0)
 		end
 		return t
 	end, {
-		p0.buttons,
+		p1.buttons,
 		backgroundColor3,
 		backgroundTransparency,
-		var11
+		var1
 	})
-	local var13 = nil
+	local var3 = nil
 	
 	if AXCategoryMenuBadgePositionTokens2 then
-		local paddingRight = p0.paddingRight
-		var13 = reactModule.useMemo(function()
+		local paddingRight = p1.paddingRight
+		var3 = reactModule.useMemo(function()
 			-- upvalues: paddingRight (ref)
 			return if paddingRight then { right = paddingRight } else nil
 		end, { paddingRight })
 	end
 	return reactModule.createElement(view, {
 		AutomaticSize = Enum.AutomaticSize.XY,
-		LayoutOrder = p0.LayoutOrder,
-		padding = var13
-	}, var12)
+		LayoutOrder = p1.LayoutOrder,
+		padding = var3
+	}, var2)
 end
 
-return reactModule.forwardRef(function(p1, p2)
+return reactModule.forwardRef(function(p2, p3)
 	-- upvalues: reactModule (ref), foundationModule (ref), fFlagAXCategoryMenuVisualFixes (ref), categoryMenuButtonsLocationEnumModule (ref), AXCategoryMenuBadgePositionTokens2 (ref), view (ref), t_1 (ref), t (ref), CategoryMenuButtonGroup (ref), t_2 (ref), tabGroupModule (ref), coachmark (ref), popoverSide (ref), popoverAlign (ref)
-	local var16 = reactModule.useRef(nil)
-	local var17 = foundationModule.Hooks.useTokens()
-	local var18 = nil
+	local var3 = reactModule.useRef(nil)
+	local var4 = foundationModule.Hooks.useTokens()
+	local var5 = nil
 	
 	if fFlagAXCategoryMenuVisualFixes then
-		local var19 = reactModule.useRef(nil)
-		var18 = var19
-		local var20 = reactModule.useRef(false)
+		local var6 = reactModule.useRef(nil)
+		var5 = var6
+		local var7 = reactModule.useRef(false)
 		reactModule.useEffect(function()
-			-- upvalues: var20 (ref), var19 (ref)
-			if not var20.current then
-				var20.current = true
+			-- upvalues: var7 (ref), var6 (ref)
+			if not var7.current then
+				var7.current = true
 				
 				return
 			end
-			local current = var19.current
+			local current = var6.current
 			
 			if current then
 				current.setOffset(0)
 			end
-		end, { p1.activeCategoryId })
+		end, { p2.activeCategoryId })
 	end
-	local var26
-	local activeTooltipIdx = p1.activeTooltipIdx
-	local tooltips = p1.tooltips
-	local var21 = if activeTooltipIdx and tooltips then tooltips[activeTooltipIdx] else nil
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var21 (ref), p1 (ref), var16 (ref)
+	local var8
+	local activeTooltipIdx = p2.activeTooltipIdx
+	local tooltips = p2.tooltips
+	local var9 = if activeTooltipIdx and tooltips then tooltips[activeTooltipIdx] else nil
+	local var10 = reactModule.useMemo(function()
+		-- upvalues: var9 (ref), p2 (ref), var3 (ref)
 		local t = {}
 		
-		if not var21 then
-			return p1.categories
+		if not var9 then
+			return p2.categories
 		end
-		for i, v in p1.categories do
-			if v.id == var21.anchorId then
+		for i, v in p2.categories do
+			if v.id == var9.anchorId then
 				local cloned = table.clone(v)
-				cloned.ref = var16
+				cloned.ref = var3
 				table.insert(t, cloned)
 			else
 				table.insert(t, v)
 			end
 		end
 		return t
-	end, { p1.categories, var21 })
-	local var23 = if p1.categoryBackgroundStyle then p1.categoryBackgroundStyle else var17.Color.Common.NavigationBar
-	local var24 = if p1.subcategoryBackgroundStyle then p1.subcategoryBackgroundStyle else var17.Color.Common.NavigationBar
-	local var25 = if p1.buttonsLocation then p1.buttonsLocation else categoryMenuButtonsLocationEnumModule.SubcategoriesStart
+	end, { p2.categories, var9 })
+	local var11 = if p2.categoryBackgroundStyle then p2.categoryBackgroundStyle else var4.Color.Common.NavigationBar
+	local var12 = if p2.subcategoryBackgroundStyle then p2.subcategoryBackgroundStyle else var4.Color.Common.NavigationBar
+	local var13 = if p2.buttonsLocation then p2.buttonsLocation else categoryMenuButtonsLocationEnumModule.SubcategoriesStart
 	
-	if p1.buttons then
-		var26 = #p1.buttons > 0
-		var26 = nil
+	if p2.buttons then
+		var8 = #p2.buttons > 0
+		var8 = nil
 	else
-		var26 = false
+		var8 = false
 	end
-	local var28
-	local var27 = if AXCategoryMenuBadgePositionTokens2 then UDim.new(0, var17.Padding.Medium) else nil
-	local subcategories = p1.subcategories
+	local var14
+	local var15 = if AXCategoryMenuBadgePositionTokens2 then UDim.new(0, var4.Padding.Medium) else nil
+	local subcategories = p2.subcategories
 	
 	if subcategories then
-		var28 = #subcategories > 0
-		var28 = nil
+		var14 = #subcategories > 0
+		var14 = nil
 	else
-		var28 = false
+		var14 = false
 	end
-	local var32
-	local var28_1 = var28 or var26
+	local var16
+	local var17 = var14 or var8
 	local createElement = reactModule.createElement
 	local t_3 = {
-		ref = p2,
-		Position = p1.Position,
-		LayoutOrder = p1.LayoutOrder,
-		ZIndex = p1.ZIndex,
+		ref = p3,
+		Position = p2.Position,
+		LayoutOrder = p2.LayoutOrder,
+		ZIndex = p2.ZIndex,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		layout = t_1
@@ -196,11 +196,11 @@ return reactModule.forwardRef(function(p1, p2)
 			AutomaticSize = Enum.AutomaticSize.Y,
 			layout = t
 		}, {
-			ButtonsStart = if var26 and var25 == categoryMenuButtonsLocationEnumModule.CategoriesStart then reactModule.createElement(CategoryMenuButtonGroup, {
+			ButtonsStart = if var8 and var13 == categoryMenuButtonsLocationEnumModule.CategoriesStart then reactModule.createElement(CategoryMenuButtonGroup, {
 				LayoutOrder = 1,
-				buttons = p1.buttons,
-				BackgroundColor3 = var23.Color3,
-				BackgroundTransparency = var23.Transparency
+				buttons = p2.buttons,
+				BackgroundColor3 = var11.Color3,
+				BackgroundTransparency = var11.Transparency
 			}) else nil,
 			Categories = reactModule.createElement(view, {
 				LayoutOrder = 2,
@@ -209,42 +209,42 @@ return reactModule.forwardRef(function(p1, p2)
 				flexItem = t_2
 			}, {
 				TabGroup = reactModule.createElement(tabGroupModule, {
-					items = var22,
-					activeTabId = p1.activeCategoryId,
-					onTabActivated = p1.onCategoryActivated,
-					tabFontStyle = p1.categoryFontStyle,
-					tabPadding = p1.categoryPadding,
-					tabTextStyle = p1.categoryTextStyle,
-					tabActiveTextStyle = p1.categoryActiveTextStyle,
-					BackgroundColor3 = var23.Color3,
-					BackgroundTransparency = var23.Transparency
+					items = var10,
+					activeTabId = p2.activeCategoryId,
+					onTabActivated = p2.onCategoryActivated,
+					tabFontStyle = p2.categoryFontStyle,
+					tabPadding = p2.categoryPadding,
+					tabTextStyle = p2.categoryTextStyle,
+					tabActiveTextStyle = p2.categoryActiveTextStyle,
+					BackgroundColor3 = var11.Color3,
+					BackgroundTransparency = var11.Transparency
 				})
 			}),
-			ButtonsEnd = if var26 and var25 == categoryMenuButtonsLocationEnumModule.CategoriesEnd then reactModule.createElement(CategoryMenuButtonGroup, {
+			ButtonsEnd = if var8 and var13 == categoryMenuButtonsLocationEnumModule.CategoriesEnd then reactModule.createElement(CategoryMenuButtonGroup, {
 				LayoutOrder = 3,
-				buttons = p1.buttons,
-				BackgroundColor3 = var23.Color3,
-				BackgroundTransparency = var23.Transparency,
-				paddingRight = var27
+				buttons = p2.buttons,
+				BackgroundColor3 = var11.Color3,
+				BackgroundTransparency = var11.Transparency,
+				paddingRight = var15
 			}) else nil
 		})
 	}
 	
-	if var28_1 then
-		var32 = reactModule.createElement
-		var32 = var32(view, {
+	if var17 then
+		var16 = reactModule.createElement
+		var16 = var16(view, {
 			LayoutOrder = 2,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			layout = t
 		}, {
-			ButtonsStart = if var26 and var25 == categoryMenuButtonsLocationEnumModule.SubcategoriesStart then reactModule.createElement(CategoryMenuButtonGroup, {
+			ButtonsStart = if var8 and var13 == categoryMenuButtonsLocationEnumModule.SubcategoriesStart then reactModule.createElement(CategoryMenuButtonGroup, {
 				LayoutOrder = 1,
-				buttons = p1.buttons,
-				BackgroundColor3 = var24.Color3,
-				BackgroundTransparency = var24.Transparency
+				buttons = p2.buttons,
+				BackgroundColor3 = var12.Color3,
+				BackgroundTransparency = var12.Transparency
 			}) else nil,
-			Subcategories = if var28 then reactModule.createElement(view, {
+			Subcategories = if var14 then reactModule.createElement(view, {
 				LayoutOrder = 2,
 				Size = UDim2.new(0, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -252,39 +252,39 @@ return reactModule.forwardRef(function(p1, p2)
 			}, {
 				TabGroup = reactModule.createElement(tabGroupModule, {
 					items = subcategories or {},
-					activeTabId = p1.activeSubcategoryId,
-					onTabActivated = p1.onSubcategoryActivated,
-					tabFontStyle = p1.subcategoryFontStyle,
-					tabPadding = p1.subcategoryPadding,
-					tabTextStyle = p1.subcategoryTextStyle,
-					tabActiveTextStyle = p1.subcategoryActiveTextStyle,
-					BackgroundColor3 = var24.Color3,
-					BackgroundTransparency = var24.Transparency,
-					controllerRef = var18
+					activeTabId = p2.activeSubcategoryId,
+					onTabActivated = p2.onSubcategoryActivated,
+					tabFontStyle = p2.subcategoryFontStyle,
+					tabPadding = p2.subcategoryPadding,
+					tabTextStyle = p2.subcategoryTextStyle,
+					tabActiveTextStyle = p2.subcategoryActiveTextStyle,
+					BackgroundColor3 = var12.Color3,
+					BackgroundTransparency = var12.Transparency,
+					controllerRef = var5
 				})
 			}) else nil,
-			ButtonsEnd = if var26 and var25 == categoryMenuButtonsLocationEnumModule.SubcategoriesEnd then reactModule.createElement(CategoryMenuButtonGroup, {
+			ButtonsEnd = if var8 and var13 == categoryMenuButtonsLocationEnumModule.SubcategoriesEnd then reactModule.createElement(CategoryMenuButtonGroup, {
 				LayoutOrder = 3,
-				buttons = p1.buttons,
-				BackgroundColor3 = var24.Color3,
-				BackgroundTransparency = var24.Transparency,
-				paddingRight = var27
+				buttons = p2.buttons,
+				BackgroundColor3 = var12.Color3,
+				BackgroundTransparency = var12.Transparency,
+				paddingRight = var15
 			}) else nil
 		})
 	else
-		var32 = nil
+		var16 = nil
 	end
-	t_4.SubcategoryRow = var32
-	t_4.ToolTip = if var21 then reactModule.createElement(coachmark, {
+	t_4.SubcategoryRow = var16
+	t_4.ToolTip = if var9 then reactModule.createElement(coachmark, {
 		LayoutOrder = 3,
-		title = var21.title,
-		text = var21.text,
-		isOpen = var21.isOpen,
-		side = var21.side or popoverSide.Bottom,
-		align = var21.align or popoverAlign.Center,
-		anchorRef = var16,
-		onClose = var21.onClose,
-		actions = var21.actions
+		title = var9.title,
+		text = var9.text,
+		isOpen = var9.isOpen,
+		side = var9.side or popoverSide.Bottom,
+		align = var9.align or popoverAlign.Center,
+		anchorRef = var3,
+		onClose = var9.onClose,
+		actions = var9.actions
 	}) else nil
 	
 	return createElement(view, t_3, t_4)

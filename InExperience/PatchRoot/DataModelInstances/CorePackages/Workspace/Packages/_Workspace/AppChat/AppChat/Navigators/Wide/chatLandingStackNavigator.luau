@@ -12,9 +12,9 @@ local getFFlagAppChatRemoveDynamicRequiresModule = require(appChat.Flags.getFFla
 local fFlagEnablePartyQuickStartButton = require(parent.SharedFlags).FFlagEnablePartyQuickStartButton
 local fFlagAppChatDisableAbsorbInputSelectableModule = require(appChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: createOverlayTopBarStackNavigatorWithFocusModule (ref)
-	return createOverlayTopBarStackNavigatorWithFocusModule({ { [p0] = p1 } })
+	return createOverlayTopBarStackNavigatorWithFocusModule({ { [p1] = p2 } })
 end
 
 local t = {

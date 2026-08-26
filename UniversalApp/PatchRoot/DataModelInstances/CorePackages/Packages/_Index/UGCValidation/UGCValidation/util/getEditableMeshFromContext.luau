@@ -2,9 +2,9 @@
 local _ = require(parent.util.Types)
 local getEditableInstanceFromContextModule = require(parent.util.getEditableInstanceFromContext)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: getEditableInstanceFromContextModule (ref)
-	local var1, var2 = getEditableInstanceFromContextModule(p0, p1, p2.editableMeshes, p2)
+	local var1, var2 = getEditableInstanceFromContextModule(p1, p2, p3.editableMeshes, p3)
 	
 	if var1 then
 		return true, var2

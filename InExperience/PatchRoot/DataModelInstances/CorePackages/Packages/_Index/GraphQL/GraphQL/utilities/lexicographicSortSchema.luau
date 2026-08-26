@@ -31,9 +31,9 @@ local sortObjMap = nil
 local sortByName = nil
 local sortBy = nil
 
-local function lexicographicSortSchema(p0)
+local function lexicographicSortSchema(p1)
 	-- upvalues: isListType (ref), graphQLList (ref), isNonNullType (ref), graphQLNonNull (ref), graphQLDirective (ref), object (ref), sortBy (write), sortObjMap (write), array (ref), sortByName (write), isScalarType (ref), isIntrospectionType (ref), isObjectType (ref), graphQLObjectType (ref), isInterfaceType (ref), graphQLInterfaceType (ref), isUnionType (ref), graphQLUnionType (ref), isEnumType (ref), graphQLEnumType (ref), isInputObjectType (ref), graphQLInputObjectType (ref), invariant (ref), inspect (ref), keyValMap (ref), graphQLSchema (ref)
-	local var6 = nil
+	local var1 = nil
 	local replaceNamedType = nil
 	local _ = nil
 	local _ = nil
@@ -42,161 +42,161 @@ local function lexicographicSortSchema(p0)
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var9 = p0:toConfig()
+	local var2 = p1:toConfig()
 	
-	local function replaceType(p1)
+	local function replaceType(p2)
 		-- upvalues: isListType (copy), graphQLList (copy), replaceType (ref), isNonNullType (copy), graphQLNonNull (copy), replaceNamedType (write)
-		return if isListType(p1) then graphQLList.new(replaceType(p1.ofType)) elseif isNonNullType(p1) then graphQLNonNull.new(replaceType(p1.ofType)) else replaceNamedType(p1)
+		return if isListType(p2) then graphQLList.new(replaceType(p2.ofType)) elseif isNonNullType(p2) then graphQLNonNull.new(replaceType(p2.ofType)) else replaceNamedType(p2)
 	end
 	
 	replaceNamedType = function(p2)
-		-- upvalues: var6 (write)
-		return var6[p2.name]
+		-- upvalues: var1 (write)
+		return var1[p2.name]
 	end
 	
-	local function replaceMaybeType(p3)
+	local function replaceMaybeType(p2)
 		-- upvalues: replaceNamedType (write)
-		return if p3 then replaceNamedType(p3) else nil
+		return if p2 then replaceNamedType(p2) else nil
 	end
 	
-	local function sortDirective(p4)
+	local function sortDirective(p2)
 		-- upvalues: graphQLDirective (copy), object (copy), sortBy (copy), sortArgs (write)
-		local var16 = p4:toConfig()
+		local var3 = p2:toConfig()
 		
-		return graphQLDirective.new(object.assign({}, var16, {
-			locations = sortBy(var16.locations, function(p5)
-				return p5
+		return graphQLDirective.new(object.assign({}, var3, {
+			locations = sortBy(var3.locations, function(p3)
+				return p3
 			end),
-			args = sortArgs(var16.args)
+			args = sortArgs(var3.args)
 		}))
 	end
 	
-	sortArgs = function(p6)
+	sortArgs = function(p2)
 		-- upvalues: sortObjMap (copy), object (copy), replaceType (ref)
-		return sortObjMap(p6, function(p7)
+		return sortObjMap(p2, function(p3)
 			-- upvalues: object (copy), replaceType (copy)
-			return object.assign({}, p7, { type = replaceType(p7.type) })
+			return object.assign({}, p3, { type = replaceType(p3.type) })
 		end)
 	end
 	
-	local function sortFields(p8)
+	local function sortFields(p2)
 		-- upvalues: sortObjMap (copy), object (copy), replaceType (ref), sortArgs (write)
-		return sortObjMap(p8, function(p9)
+		return sortObjMap(p2, function(p3)
 			-- upvalues: object (copy), replaceType (copy), sortArgs (copy)
-			return object.assign({}, p9, {
-				type = replaceType(p9.type),
-				args = if p9.args then sortArgs(p9.args) else nil
+			return object.assign({}, p3, {
+				type = replaceType(p3.type),
+				args = if p3.args then sortArgs(p3.args) else nil
 			})
 		end)
 	end
 	
-	local function sortInputFields(p10)
+	local function sortInputFields(p2)
 		-- upvalues: sortObjMap (copy), object (copy), replaceType (ref)
-		return sortObjMap(p10, function(p11)
+		return sortObjMap(p2, function(p3)
 			-- upvalues: object (copy), replaceType (copy)
-			return object.assign({}, p11, { type = replaceType(p11.type) })
+			return object.assign({}, p3, { type = replaceType(p3.type) })
 		end)
 	end
 	
-	local function sortTypes(p12)
+	local function sortTypes(p2)
 		-- upvalues: array (copy), sortByName (copy), replaceNamedType (write)
-		return array.map(sortByName(p12), replaceNamedType)
+		return array.map(sortByName(p2), replaceNamedType)
 	end
 	
-	return graphQLSchema.new(object.assign({}, var9, {
-		types = keyValMap(sortByName(var9.types), function(p13)
-			return p13.name
-		end, function(p14)
+	return graphQLSchema.new(object.assign({}, var2, {
+		types = keyValMap(sortByName(var2.types), function(p2)
+			return p2.name
+		end, function(p2)
 			-- upvalues: isScalarType (copy), isIntrospectionType (copy), isObjectType (copy), graphQLObjectType (copy), object (copy), sortTypes (write), sortFields (write), isInterfaceType (copy), graphQLInterfaceType (copy), isUnionType (copy), graphQLUnionType (copy), isEnumType (copy), graphQLEnumType (copy), sortObjMap (copy), isInputObjectType (copy), graphQLInputObjectType (copy), sortInputFields (write), invariant (copy), inspect (copy)
-			if isScalarType(p14) or isIntrospectionType(p14) then
-				return p14
-			elseif isObjectType(p14) then
-				local var17 = p14:toConfig()
+			if isScalarType(p2) or isIntrospectionType(p2) then
+				return p2
+			elseif isObjectType(p2) then
+				local var3 = p2:toConfig()
 				
-				return graphQLObjectType.new(object.assign({}, var17, {
+				return graphQLObjectType.new(object.assign({}, var3, {
 					interfaces = function()
-						-- upvalues: sortTypes (copy), var17 (ref)
-						return sortTypes(var17.interfaces)
+						-- upvalues: sortTypes (copy), var3 (ref)
+						return sortTypes(var3.interfaces)
 					end,
 					fields = function()
-						-- upvalues: sortFields (copy), var17 (ref)
-						return sortFields(var17.fields)
+						-- upvalues: sortFields (copy), var3 (ref)
+						return sortFields(var3.fields)
 					end
 				}))
-			elseif isInterfaceType(p14) then
-				local var18 = p14:toConfig()
+			elseif isInterfaceType(p2) then
+				local var4 = p2:toConfig()
 				
-				return graphQLInterfaceType.new(object.assign({}, var18, {
+				return graphQLInterfaceType.new(object.assign({}, var4, {
 					interfaces = function()
-						-- upvalues: sortTypes (copy), var18 (ref)
-						return sortTypes(var18.interfaces)
+						-- upvalues: sortTypes (copy), var4 (ref)
+						return sortTypes(var4.interfaces)
 					end,
 					fields = function()
-						-- upvalues: sortFields (copy), var18 (ref)
-						return sortFields(var18.fields)
+						-- upvalues: sortFields (copy), var4 (ref)
+						return sortFields(var4.fields)
 					end
 				}))
-			elseif isUnionType(p14) then
-				local var19 = p14:toConfig()
+			elseif isUnionType(p2) then
+				local var5 = p2:toConfig()
 				
-				return graphQLUnionType.new(object.assign({}, var19, {
+				return graphQLUnionType.new(object.assign({}, var5, {
 					types = function()
-						-- upvalues: sortTypes (copy), var19 (ref)
-						return sortTypes(var19.types)
+						-- upvalues: sortTypes (copy), var5 (ref)
+						return sortTypes(var5.types)
 					end
 				}))
-			elseif isEnumType(p14) then
-				local var20 = p14:toConfig()
+			elseif isEnumType(p2) then
+				local var6 = p2:toConfig()
 				
-				return graphQLEnumType.new(object.assign({}, var20, {
-					values = sortObjMap(var20.values, function(p15)
-						return p15
+				return graphQLEnumType.new(object.assign({}, var6, {
+					values = sortObjMap(var6.values, function(p3)
+						return p3
 					end)
 				}))
-			elseif isInputObjectType(p14) then
-				local var21 = p14:toConfig()
+			elseif isInputObjectType(p2) then
+				local var7 = p2:toConfig()
 				
-				return graphQLInputObjectType.new(object.assign({}, var21, {
+				return graphQLInputObjectType.new(object.assign({}, var7, {
 					fields = function()
-						-- upvalues: sortInputFields (copy), var21 (ref)
-						return sortInputFields(var21.fields)
+						-- upvalues: sortInputFields (copy), var7 (ref)
+						return sortInputFields(var7.fields)
 					end
 				}))
 			end
-			invariant(false, "Unexpected type: " .. inspect(p14))
-			error("Unexpected type: " .. inspect(p14))
+			invariant(false, "Unexpected type: " .. inspect(p2))
+			error("Unexpected type: " .. inspect(p2))
 		end):values(),
-		directives = array.map(sortByName(var9.directives), sortDirective),
-		query = replaceMaybeType(var9.query),
-		mutation = replaceMaybeType(var9.mutation),
-		subscription = replaceMaybeType(var9.subscription)
+		directives = array.map(sortByName(var2.directives), sortDirective),
+		query = replaceMaybeType(var2.query),
+		mutation = replaceMaybeType(var2.mutation),
+		subscription = replaceMaybeType(var2.subscription)
 	}))
 end
 
-sortObjMap = function(p16, p17)
+sortObjMap = function(p1, p2)
 	-- upvalues: map (ref), sortBy (write)
-	local var22 = map.new()
+	local var1 = map.new()
 	
-	for i, v in ipairs(sortBy(p16:keys(), function(p18)
-		return p18
+	for i, v in ipairs(sortBy(p1:keys(), function(p3)
+		return p3
 	end)) do
-		var22[v] = p17(p16[v])
+		var1[v] = p2(p1[v])
 	end
-	return var22
+	return var1
 end
 
-sortByName = function(p19)
+sortByName = function(p3)
 	-- upvalues: sortBy (write)
-	return sortBy(p19, function(p20)
-		return p20.name
+	return sortBy(p3, function(p4)
+		return p4.name
 	end)
 end
 
-sortBy = function(p21, p22)
+sortBy = function(p3, p4)
 	-- upvalues: array (ref), naturalCompare (ref)
-	return array.sort(array.slice(p21), function(p23, p24)
-		-- upvalues: p22 (ref), naturalCompare (copy)
-		return naturalCompare(p22(p23), p22(p24))
+	return array.sort(array.slice(p3), function(p5, p6)
+		-- upvalues: p4 (ref), naturalCompare (copy)
+		return naturalCompare(p4(p5), p4(p6))
 	end)
 end
 

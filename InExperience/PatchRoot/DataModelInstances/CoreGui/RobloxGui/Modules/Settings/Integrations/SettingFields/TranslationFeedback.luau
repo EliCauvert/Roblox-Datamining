@@ -9,13 +9,13 @@ local settingsServiceModule = require(corePackagesService.Workspace.Packages.Set
 local valueChangedSignal = settingsServiceModule.ValueChangedSignal
 local availabilitySignal = settingsServiceModule.AvailabilitySignal
 local settingEnum = settingsServiceModule.SettingEnum
-local var8 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
+local var1 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
 local LAYOUT_ORDER = constantsModule.GAMESETTINGS.LAYOUT_ORDER
 
 local function _()
 	-- upvalues: valueChangedSignal (ref), experienceStateCaptureService (ref), safetyService (ref)
-	local var11 = valueChangedSignal.new()
-	var11:connect(function()
+	local var2 = valueChangedSignal.new()
+	var2:connect(function()
 		-- upvalues: experienceStateCaptureService (copy), safetyService (copy)
 		if game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not experienceStateCaptureService:CanEnterCaptureMode() then return end
 		local settingsHubModule = require(script.Parent.Parent.Parent.SettingsHub)
@@ -31,21 +31,21 @@ local function _()
 		end
 	end)
 	
-	return var11
+	return var2
 end
 
 local _ = function()
-	-- upvalues: availabilitySignal (ref), runService (ref), var8 (ref)
-	local var13 = availabilitySignal.new(true)
+	-- upvalues: availabilitySignal (ref), runService (ref), var1 (ref)
+	local var2 = availabilitySignal.new(true)
 	
-	if runService:IsStudio() or game:GetEngineFeature("CaptureModeEnabled") == false or var8 then
-		var13:set(false)
+	if runService:IsStudio() or game:GetEngineFeature("CaptureModeEnabled") == false or var1 then
+		var2:set(false)
 	end
-	return var13
+	return var2
 end
 
-local var9 = valueChangedSignal.new()
-var9:connect(function()
+local var2 = valueChangedSignal.new()
+var2:connect(function()
 	-- upvalues: experienceStateCaptureService (ref), safetyService (ref)
 	if game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not experienceStateCaptureService:CanEnterCaptureMode() then return end
 	local settingsHubModule = require(script.Parent.Parent.Parent.SettingsHub)
@@ -60,10 +60,10 @@ var9:connect(function()
 		experienceStateCaptureService:ToggleCaptureMode()
 	end
 end)
-local var10 = availabilitySignal.new(true)
+local var3 = availabilitySignal.new(true)
 
-if runService:IsStudio() or game:GetEngineFeature("CaptureModeEnabled") == false or var8 then
-	var10:set(false)
+if runService:IsStudio() or game:GetEngineFeature("CaptureModeEnabled") == false or var1 then
+	var3:set(false)
 end
 return {
 	id = "translation-feedback",
@@ -71,7 +71,7 @@ return {
 	text = "CoreScripts.InGameMenu.GameSettings.GiveFeedback",
 	alreadyLocalized = false,
 	field_type = settingEnum.TextButton,
-	onActivated = var9,
+	onActivated = var2,
 	layoutOrder = LAYOUT_ORDER.FeedbackModeButton,
-	availability = var10
+	availability = var3
 }

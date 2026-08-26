@@ -13,28 +13,28 @@ local t = {
 	width = UDim.new(1, 0)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), accordionContextModule (ref)
-	local var8 = withDefaultsModule(p0, t)
+	local var1 = withDefaultsModule(p1, t)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var8, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
 		tag = "col flex-y-evenly auto-y",
-		Size = UDim2.new(var8.width, UDim.new(0, 0)),
-		ref = p1
+		Size = UDim2.new(var1.width, UDim.new(0, 0)),
+		ref = p2
 	}), {
 		AccordionContext = reactModule.createElement(accordionContextModule.Provider, {
 			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
-				-- upvalues: var8 (ref)
+				-- upvalues: var1 (ref)
 				return {
-					onAccordionItemActivated = var8.onActivated,
-					itemSize = var8.size,
-					testId = var8.testId
+					onAccordionItemActivated = var1.onActivated,
+					itemSize = var1.size,
+					testId = var1.testId
 				}
-			end, { var8.onActivated, var8.size, var8.testId }) else nil else {
-				onAccordionItemActivated = var8.onActivated,
-				itemSize = var8.size,
-				testId = var8.testId
+			end, { var1.onActivated, var1.size, var1.testId }) else nil else {
+				onAccordionItemActivated = var1.onActivated,
+				itemSize = var1.size,
+				testId = var1.testId
 			}
-		}, var8.children)
+		}, var1.children)
 	})
 end))

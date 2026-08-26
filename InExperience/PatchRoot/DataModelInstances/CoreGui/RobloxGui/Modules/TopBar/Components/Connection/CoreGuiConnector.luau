@@ -16,44 +16,44 @@ local fFlagTopBarSignalizeHealthBar = require(corePackagesService.Workspace.Pack
 local coreGuiConnector = roactModule.PureComponent:extend("CoreGuiConnector")
 coreGuiConnector.validateProps = tModule.strictInterface({ updateCoreGuiEnabled = tModule.callback })
 
-function coreGuiConnector.didMount(p0)
+function coreGuiConnector.didMount(p1)
 	-- upvalues: fFlagMountCoreGuiBackpackModule (ref), fFlagTopBarSignalizeHealthBar (ref), starterGuiService (ref)
 	for i, v in ipairs(Enum.CoreGuiType:GetEnumItems()) do
 		if (not fFlagMountCoreGuiBackpackModule or v ~= Enum.CoreGuiType.Backpack) and (not fFlagTopBarSignalizeHealthBar or v ~= Enum.CoreGuiType.Health) and v ~= Enum.CoreGuiType.All then
-			p0.props.updateCoreGuiEnabled(v, starterGuiService:GetCoreGuiEnabled(v))
+			p1.props.updateCoreGuiEnabled(v, starterGuiService:GetCoreGuiEnabled(v))
 		end
 	end
 end
 
-function coreGuiConnector.render(p1)
+function coreGuiConnector.render(p2)
 	-- upvalues: roactModule (ref), eventConnectionModule (ref), starterGuiService (ref), fFlagMountCoreGuiBackpackModule (ref)
 	return roactModule.createFragment({
 		CoreGuiChangedConnection = roactModule.createElement(eventConnectionModule, {
 			event = starterGuiService.CoreGuiChangedSignal,
-			callback = function(p2, p3)
-				-- upvalues: fFlagMountCoreGuiBackpackModule (copy), p1 (ref)
+			callback = function(p3, p4)
+				-- upvalues: fFlagMountCoreGuiBackpackModule (copy), p2 (ref)
 				if fFlagMountCoreGuiBackpackModule then
-					if p2 == Enum.CoreGuiType.Backpack then
+					if p3 == Enum.CoreGuiType.Backpack then
 						return
 					else
-						p1.props.updateCoreGuiEnabled(p2, p3)
+						p2.props.updateCoreGuiEnabled(p3, p4)
 						
 						return
 					end
 				else
-					p1.props.updateCoreGuiEnabled(p2, p3)
+					p2.props.updateCoreGuiEnabled(p3, p4)
 				end
 			end
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p4)
+return roactRoduxModule.UNSTABLE_connect2(nil, function(p2)
 	-- upvalues: updateCoreGuiEnabledModule (ref)
 	return {
-		updateCoreGuiEnabled = function(p5, p6)
-			-- upvalues: p4 (ref), updateCoreGuiEnabledModule (copy)
-			return p4(updateCoreGuiEnabledModule(p5, p6))
+		updateCoreGuiEnabled = function(p3, p4)
+			-- upvalues: p2 (ref), updateCoreGuiEnabledModule (copy)
+			return p2(updateCoreGuiEnabledModule(p3, p4))
 		end
 	}
 end)(coreGuiConnector)

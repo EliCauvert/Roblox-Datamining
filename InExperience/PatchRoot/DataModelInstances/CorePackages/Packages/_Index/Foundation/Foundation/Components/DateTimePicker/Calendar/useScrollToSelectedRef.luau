@@ -2,64 +2,64 @@
 local reactModule = require(foundation.Parent.React)
 local _ = require(foundation.Components.Dropdown)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		if var2.current then
-			for i, v in var2.current do
+	local var1 = reactModule.useRef(nil)
+	local var2 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref)
+		if var1.current then
+			for i, v in var1.current do
 				v:Disconnect()
 			end
-			var2.current = nil
+			var1.current = nil
 		end
 	end, {})
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), p0 (ref), p1 (ref), var2 (ref)
-		var3()
+	local var3 = reactModule.useCallback(function(p3)
+		-- upvalues: var2 (ref), p1 (ref), p2 (ref), var1 (ref)
+		var2()
 		
-		if not p2 then return end
+		if not p3 then return end
 		local function scrollToSelected()
-			-- upvalues: p0 (copy), p2 (ref), p1 (copy)
-			local p0Count = #p0
-			local y = p2.AbsoluteCanvasSize.Y
-			local y_1 = p2.AbsoluteWindowSize.Y
+			-- upvalues: p1 (copy), p3 (ref), p2 (copy)
+			local p0Count = #p1
+			local y = p3.AbsoluteCanvasSize.Y
+			local y_1 = p3.AbsoluteWindowSize.Y
 			
 			if p0Count == 0 or y_1 <= 0 or y <= y_1 then
 				return false
 			end
-			local var8 = y / p0Count
-			local var9 = 0
+			local var4 = y / p0Count
+			local var5 = 0
 			
-			for i, v in p0 do
-				if v.id == p1 then
-					var9 = i - 1
+			for i, v in p1 do
+				if v.id == p2 then
+					var5 = i - 1
 					break
 				end
 			end
-			p2.CanvasPosition = Vector2.new(0, math.clamp(var9 * var8 - y_1 / 2 + var8 / 2, 0, y - y_1))
+			p3.CanvasPosition = Vector2.new(0, math.clamp(var5 * var4 - y_1 / 2 + var4 / 2, 0, y - y_1))
 			
 			return true
 		end
 		
 		if not scrollToSelected() then
 			local function onSizeChanged()
-				-- upvalues: scrollToSelected (ref), var3 (copy)
+				-- upvalues: scrollToSelected (ref), var2 (copy)
 				if scrollToSelected() then
-					var3()
+					var2()
 				end
 			end
 			
-			var2.current = {
-				p2:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(onSizeChanged),
-				p2:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(onSizeChanged)
+			var1.current = {
+				p3:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(onSizeChanged),
+				p3:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(onSizeChanged)
 			}
 		end
-	end, { p0, p1, var3 })
+	end, { p1, p2, var2 })
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
-		return var3
-	end, { var3 })
+		-- upvalues: var2 (ref)
+		return var2
+	end, { var2 })
 	
-	return var4
+	return var3
 end

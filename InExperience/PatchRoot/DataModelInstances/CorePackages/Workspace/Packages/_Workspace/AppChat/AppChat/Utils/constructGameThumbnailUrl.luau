@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	return `rbxthumb://type=GameThumbnail&id={p0}&w={p1}&h={p2}`
+﻿return function(p1, p2, p3)
+	return `rbxthumb://type=GameThumbnail&id={p1}&w={p2}&h={p3}`
 end

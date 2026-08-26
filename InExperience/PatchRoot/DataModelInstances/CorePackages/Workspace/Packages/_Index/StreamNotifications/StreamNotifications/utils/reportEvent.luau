@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	p0:sendEventDeferred("StreamNotification", "StreamNotificationClientEvent", p1)
+﻿return function(p1, p2)
+	p1:sendEventDeferred("StreamNotification", "StreamNotificationClientEvent", p2)
 end

@@ -26,61 +26,61 @@ local fFlagEnableFlyoutUncheckedBadge = sharedFlagsModule.FFlagEnableFlyoutUnche
 local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
 local fFlagFlyoutSidePanelUseProfileFrameThumbnailModule = require(flyoutSidePanel.Flags.FFlagFlyoutSidePanelUseProfileFrameThumbnail)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), fFlagEnableFlyoutUncheckedBadge (ref), useLocalization (ref), useAppPolicy (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnailModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), foundationModule (ref), fFlagEnableDrawerFocusNav (ref), loadableImage (ref), text (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconName (ref), badge (ref), badgeVariant (ref), chevronSmallDownButtonModule (ref)
-	local var19
-	local var9 = useTokens()
-	local var10 = if fFlagEnableFlyoutUncheckedBadge then useLocalization({ Unchecked = "CommonUI.Features.Label.Unchecked" }) else nil
-	local var11 = if fFlagEnableFlyoutUncheckedBadge then useAppPolicy(function(p1)
-		return p1.getShowUncheckedBadge()
+	local var1
+	local var2 = useTokens()
+	local var3 = if fFlagEnableFlyoutUncheckedBadge then useLocalization({ Unchecked = "CommonUI.Features.Label.Unchecked" }) else nil
+	local var4 = if fFlagEnableFlyoutUncheckedBadge then useAppPolicy(function(p2)
+		return p2.getShowUncheckedBadge()
 	end) else nil
-	local var12 = useRoactService(appEventIngestService)
-	local localUserModel = p0.localUserModel
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), localUserModel (ref), flyoutAnalyticsModule (copy), var12 (ref)
-		p0.closeDrawer()
+	local var5 = useRoactService(appEventIngestService)
+	local localUserModel = p1.localUserModel
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), localUserModel (ref), flyoutAnalyticsModule (copy), var5 (ref)
+		p1.closeDrawer()
 		
-		if p0.onProfileActivated then
-			p0.onProfileActivated()
-			flyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(var12, "Profile", if localUserModel then localUserModel.id else "")
+		if p1.onProfileActivated then
+			p1.onProfileActivated()
+			flyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(var5, "Profile", if localUserModel then localUserModel.id else "")
 		end
 	end, {
 		localUserModel,
-		p0.onProfileActivated,
-		p0.closeDrawer,
-		var12
+		p1.onProfileActivated,
+		p1.closeDrawer,
+		var5
 	})
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		p0.closeDrawer()
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		p1.closeDrawer()
 		
-		if p0.onSwitchAccountActivated then
-			p0.onSwitchAccountActivated()
+		if p1.onSwitchAccountActivated then
+			p1.onSwitchAccountActivated()
 		end
-	end, { p0.onSwitchAccountActivated, p0.closeDrawer })
-	local var15 = reactModule.useMemo(function()
+	end, { p1.onSwitchAccountActivated, p1.closeDrawer })
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: localUserModel (ref), getStandardSizeAvatarHeadShotRbxthumb (copy), fFlagFlyoutSidePanelUseProfileFrameThumbnailModule (copy)
 		return if localUserModel and localUserModel.id then getStandardSizeAvatarHeadShotRbxthumb(localUserModel.id, fFlagFlyoutSidePanelUseProfileFrameThumbnailModule) else nil
 	end, { localUserModel })
-	local var16 = reactModule.useMemo(function()
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: localUserModel (ref)
 		return localUserModel and localUserModel.membership == Enum.MembershipType.Premium
 	end, { localUserModel })
-	local var17 = if localUserModel then localUserModel.name else ""
-	local var18 = if localUserModel then localUserModel.displayName else ""
+	local var10 = if localUserModel then localUserModel.name else ""
+	local var11 = if localUserModel then localUserModel.displayName else ""
 	
 	if fFlagEnableBlackbirdCheck then
-		var19 = p0.isRobloxSubscriber == true
-		var19 = nil
+		var1 = p1.isRobloxSubscriber == true
+		var1 = nil
 	else
-		var19 = false
+		var1 = false
 	end
 	return reactModule.createElement(foundationModule.View, {
 		tag = {
 			["auto-y size-full-0"] = true,
 			["row align-y-center gap-small"] = fFlagEnableFlyoutUncheckedBadge
 		},
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		ProfileCardButton = reactModule.createElement("TextButton", {
 			AutoButtonColor = false,
@@ -89,25 +89,25 @@ return function(p0)
 			Text = "",
 			AutomaticSize = if fFlagEnableFlyoutUncheckedBadge then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 			LayoutOrder = if fFlagEnableFlyoutUncheckedBadge then 1 else nil,
-			[reactModule.Event.Activated] = var13
+			[reactModule.Event.Activated] = var6
 		}, {
-			UIPadding = if fFlagEnableDrawerFocusNav then reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var9.Padding.Small) }) else nil,
+			UIPadding = if fFlagEnableDrawerFocusNav then reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var2.Padding.Small) }) else nil,
 			UIFlexItem = if fFlagEnableFlyoutUncheckedBadge then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var9.Gap.Medium)
+				Padding = UDim.new(0, var2.Gap.Medium)
 			}),
 			UserAvatar = reactModule.createElement(loadableImage, {
 				useShimmerAnimationWhileLoading = true,
 				shouldHandleReloads = true,
 				LayoutOrder = 1,
-				Size = UDim2.new(0, var9.Size.Size_1600, 0, var9.Size.Size_1600),
-				BackgroundColor3 = var9.Color.Common.Shimmer.Color3,
-				BackgroundTransparency = var9.Color.Common.Shimmer.Transparency,
-				Image = var15,
+				Size = UDim2.new(0, var2.Size.Size_1600, 0, var2.Size.Size_1600),
+				BackgroundColor3 = var2.Color.Common.Shimmer.Color3,
+				BackgroundTransparency = var2.Color.Common.Shimmer.Transparency,
+				Image = var8,
 				cornerRadius = UDim.new(0.5, 0)
 			}),
 			UserInfoContainer = reactModule.createElement(foundationModule.View, {
@@ -132,17 +132,17 @@ return function(p0)
 							["auto-xy text-title-medium content-emphasis text-align-x-left"] = true,
 							["shrink text-truncate-split"] = fFlagEnableFlyoutUncheckedBadge
 						},
-						Text = var18
+						Text = var11
 					}),
-					PremiumIcon = if if fFlagHidePremiumIconography then false else var16 and not var19 then reactModule.createElement(icon, {
+					PremiumIcon = if if fFlagHidePremiumIconography then false else var9 and not var1 then reactModule.createElement(icon, {
 						LayoutOrder = 2,
-						style = var9.Color.Content.Emphasis,
+						style = var2.Color.Content.Emphasis,
 						name = builderIconsModule.Icon.Premium,
 						size = iconSize.Small
 					}) else nil,
-					SubscriberBadge = if var19 then reactModule.createElement(icon, {
+					SubscriberBadge = if var1 then reactModule.createElement(icon, {
 						LayoutOrder = 3,
-						style = var9.Color.Content.Emphasis,
+						style = var2.Color.Content.Emphasis,
 						name = iconName.RobloxPlus,
 						size = iconSize.Small
 					}) else nil
@@ -158,13 +158,13 @@ return function(p0)
 				})
 			})
 		}),
-		UncheckedBadge = if fFlagEnableFlyoutUncheckedBadge and var11 then reactModule.createElement(badge, {
+		UncheckedBadge = if fFlagEnableFlyoutUncheckedBadge and var4 then reactModule.createElement(badge, {
 			LayoutOrder = 2,
-			text = var10.Unchecked,
+			text = var3.Unchecked,
 			variant = badgeVariant.Neutral
 		}) else nil,
-		SwitchAccountButton = if p0.onSwitchAccountActivated then reactModule.createElement(chevronSmallDownButtonModule, {
-			onActivated = var14,
+		SwitchAccountButton = if p1.onSwitchAccountActivated then reactModule.createElement(chevronSmallDownButtonModule, {
+			onActivated = var7,
 			layoutOrder = if fFlagEnableFlyoutUncheckedBadge then 3 else nil
 		}) else nil
 	})

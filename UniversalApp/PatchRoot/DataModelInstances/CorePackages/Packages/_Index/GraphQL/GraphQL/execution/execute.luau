@@ -60,9 +60,9 @@ local assertValidExecutionArguments = nil
 local buildExecutionContext = nil
 local collectFields = nil
 local buildResolveInfo = nil
-local var12 = nil
-local var13 = nil
-local var14 = nil
+local var1 = nil
+local var2 = nil
+local var3 = nil
 local buildResponse = nil
 local executeOperation = nil
 local executeFieldsSerially = nil
@@ -81,432 +81,432 @@ local completeObjectValue = nil
 local invalidReturnTypeError = nil
 local collectAndExecuteSubfields = nil
 local _ = nil
-local var32 = nil
+local var4 = nil
 
-local function execute(p0)
+local function execute(p1)
 	-- upvalues: assertValidExecutionArguments (write), buildExecutionContext (write), array (ref), executeOperation (write), buildResponse (write)
-	local schema = p0.schema
-	local document = p0.document
-	local rootValue = p0.rootValue
-	local contextValue = p0.contextValue
-	local variableValues = p0.variableValues
-	local operationName = p0.operationName
-	local fieldResolver = p0.fieldResolver
-	local typeResolver = p0.typeResolver
+	local schema = p1.schema
+	local document = p1.document
+	local rootValue = p1.rootValue
+	local contextValue = p1.contextValue
+	local variableValues = p1.variableValues
+	local operationName = p1.operationName
+	local fieldResolver = p1.fieldResolver
+	local typeResolver = p1.typeResolver
 	assertValidExecutionArguments(schema, document, variableValues)
-	local var35 = buildExecutionContext(schema, document, rootValue, contextValue, variableValues, operationName, fieldResolver, typeResolver)
+	local var5 = buildExecutionContext(schema, document, rootValue, contextValue, variableValues, operationName, fieldResolver, typeResolver)
 	
-	return if array.isArray(var35) or not var35.schema then { errors = var35 } else buildResponse(var35, executeOperation(var35, var35.operation, rootValue))
+	return if array.isArray(var5) or not var5.schema then { errors = var5 } else buildResponse(var5, executeOperation(var5, var5.operation, rootValue))
 end
 
 local function executeSync(p1)
 	-- upvalues: execute (write), isPromise (ref), error_1 (ref)
-	local var36 = execute(p1)
+	local var5 = execute(p1)
 	
-	if isPromise(var36) then
+	if isPromise(var5) then
 		error(error_1.new("GraphQL execution failed to complete synchronously."))
 	end
-	return var36
+	return var5
 end
 
-buildResponse = function(p2, p3)
+buildResponse = function(p1, p2)
 	-- upvalues: isPromise (ref), buildResponse (write)
-	return if isPromise(p3) then p3:andThen(function(p4)
-		-- upvalues: buildResponse (copy), p2 (ref)
-		return buildResponse(p2, p4)
-	end) elseif #p2.errors == 0 then { data = p3 } else { errors = p2.errors, data = p3 }
+	return if isPromise(p2) then p2:andThen(function(p3)
+		-- upvalues: buildResponse (copy), p1 (ref)
+		return buildResponse(p1, p3)
+	end) elseif #p1.errors == 0 then { data = p2 } else { errors = p1.errors, data = p2 }
 end
 
-assertValidExecutionArguments = function(p5, p6, p7)
+assertValidExecutionArguments = function(p1, p2, p3)
 	-- upvalues: devAssert (ref), assertValidSchema (ref), isObjectLike (ref)
-	devAssert(p6, "Must provide document.")
-	assertValidSchema(p5)
-	devAssert(if p7 ~= nil then isObjectLike(p7) else true, "Variables must be provided as an Object where each property is a variable value. Perhaps look to see if an unparsed JSON string was provided.")
+	devAssert(p2, "Must provide document.")
+	assertValidSchema(p1)
+	devAssert(if p3 ~= nil then isObjectLike(p3) else true, "Variables must be provided as an Object where each property is a variable value. Perhaps look to see if an unparsed JSON string was provided.")
 end
 
-buildExecutionContext = function(p8, p9, p10, p11, p12, p13, p14, p15)
-	-- upvalues: kind (ref), graphQLError (ref), getVariableValues (ref), var13 (write), var12 (write)
-	local var37 = nil
+buildExecutionContext = function(p1, p2, p3, p4, p5, p6, p7, p8)
+	-- upvalues: kind (ref), graphQLError (ref), getVariableValues (ref), var2 (write), var1 (write)
+	local var5 = nil
 	local t = {}
 	
-	for i, v in ipairs(p9.definitions) do
+	for i, v in ipairs(p2.definitions) do
 		if v.kind == kind.OPERATION_DEFINITION then
-			if p13 == nil then
-				if var37 == nil then
-					var37 = v
+			if p6 == nil then
+				if var5 == nil then
+					var5 = v
 					continue
 				end
 				return {
 					graphQLError.new("Must provide operation name if query contains multiple operations.")
 				}
-			elseif (v.name and v.name.value) == p13 then
-				var37 = v
+			elseif (v.name and v.name.value) == p6 then
+				var5 = v
 			end
 		elseif v.kind == kind.FRAGMENT_DEFINITION then
 			t[v.name.value] = v
 		end
 	end
-	if var37 then
-		local var39 = getVariableValues(p8, var37.variableDefinitions or {}, p12 or {}, { maxErrors = 50 })
+	if var5 then
+		local var6 = getVariableValues(p1, var5.variableDefinitions or {}, p5 or {}, { maxErrors = 50 })
 		
-		return if var39.errors then var39.errors else {
-			schema = p8,
+		return if var6.errors then var6.errors else {
+			schema = p1,
 			fragments = t,
-			rootValue = p10,
-			contextValue = p11,
-			operation = var37,
-			variableValues = var39.coerced,
-			fieldResolver = p14 or var13,
-			typeResolver = p15 or var12,
+			rootValue = p3,
+			contextValue = p4,
+			operation = var5,
+			variableValues = var6.coerced,
+			fieldResolver = p7 or var2,
+			typeResolver = p8 or var1,
 			errors = {}
 		}
 	end
-	return if p13 == nil then { graphQLError.new("Must provide an operation.") } else {
-		graphQLError.new(("Unknown operation named \"%s\"."):format(p13))
+	return if p6 == nil then { graphQLError.new("Must provide an operation.") } else {
+		graphQLError.new(("Unknown operation named \"%s\"."):format(p6))
 	}
 end
 
-executeOperation = function(p16, p17, p18)
+executeOperation = function(p9, p10, p11)
 	-- upvalues: getOperationRootType (ref), collectFields (write), map (ref), executeFieldsSerially (write), executeFields (write), isPromise (ref), promiseModule (ref), nullModule (ref)
-	local var42, var43
-	local var40 = getOperationRootType(p16.schema, p17)
-	local var41 = collectFields(p16, var40, p17.selectionSet, map.new(), {})
+	local var7, var8
+	local var9 = getOperationRootType(p9.schema, p10)
+	local var10 = collectFields(p9, var9, p10.selectionSet, map.new(), {})
 	local _ = nil
 	local _ = nil
 	
-	if p17.operation == "mutation" then
-		local ok, status = pcall(executeFieldsSerially, p16, var40, p18, nil, var41)
-		var42 = ok
-		var43 = status
+	if p10.operation == "mutation" then
+		local ok, status = pcall(executeFieldsSerially, p9, var9, p11, nil, var10)
+		var7 = ok
+		var8 = status
 	else
-		local ok, status = pcall(executeFields, p16, var40, p18, nil, var41)
-		var42 = ok
-		var43 = status
+		local ok, status = pcall(executeFields, p9, var9, p11, nil, var10)
+		var7 = ok
+		var8 = status
 	end
-	if isPromise(var43) then
-		return var43:andThen(nil, function(p19)
-			-- upvalues: p16 (ref), promiseModule (copy), nullModule (copy)
-			table.insert(p16.errors, p19)
+	if isPromise(var8) then
+		return var8:andThen(nil, function(p12)
+			-- upvalues: p9 (ref), promiseModule (copy), nullModule (copy)
+			table.insert(p9.errors, p12)
 			
 			return promiseModule.resolve(nullModule)
 		end)
-	elseif var42 then
-		return var43
+	elseif var7 then
+		return var8
 	end
-	table.insert(p16.errors, var43)
+	table.insert(p9.errors, var8)
 	
 	return nullModule
 end
 
-executeFieldsSerially = function(p20, p21, p22, p23, p24)
+executeFieldsSerially = function(p9, p10, p11, p12, p13)
 	-- upvalues: promiseReduce (ref), addPath (ref), resolveField (write), isPromise (ref)
-	return promiseReduce(p24:keys(), function(p25, p26)
-		-- upvalues: p24 (ref), addPath (copy), p23 (ref), p21 (ref), resolveField (copy), p20 (ref), p22 (ref), isPromise (copy)
-		local var44 = resolveField(p20, p21, p22, p24[p26], addPath(p23, p26, p21.name))
+	return promiseReduce(p13:keys(), function(p14, p15)
+		-- upvalues: p13 (ref), addPath (copy), p12 (ref), p10 (ref), resolveField (copy), p9 (ref), p11 (ref), isPromise (copy)
+		local var7 = resolveField(p9, p10, p11, p13[p15], addPath(p12, p15, p10.name))
 		
-		if var44 == nil then
-			return p25
-		elseif isPromise(var44) then
-			return var44:andThen(function(p27)
-				-- upvalues: p25 (ref), p26 (ref)
-				p25[p26] = p27
+		if var7 == nil then
+			return p14
+		elseif isPromise(var7) then
+			return var7:andThen(function(p16)
+				-- upvalues: p14 (ref), p15 (ref)
+				p14[p15] = p16
 				
-				return p25
+				return p14
 			end)
 		end
-		p25[p26] = var44
+		p14[p15] = var7
 		
-		return p25
+		return p14
 	end, {})
 end
 
-executeFields = function(p28, p29, p30, p31, p32)
+executeFields = function(p9, p10, p11, p12, p13)
 	-- upvalues: addPath (ref), resolveField (write), isPromise (ref), promiseForObject (ref)
 	local t = {}
-	local var46 = false
+	local var7 = false
 	
-	for i, v in ipairs(p32:keys()) do
-		local var47 = resolveField(p28, p29, p30, p32[v], addPath(p31, v, p29.name))
+	for i, v in ipairs(p13:keys()) do
+		local var8 = resolveField(p9, p10, p11, p13[v], addPath(p12, v, p10.name))
 		
-		if var47 ~= nil then
-			t[v] = var47
+		if var8 ~= nil then
+			t[v] = var8
 			
-			if isPromise(var47) then
-				var46 = true
+			if isPromise(var8) then
+				var7 = true
 			end
 		end
 	end
-	return if var46 then promiseForObject(t) else t
+	return if var7 then promiseForObject(t) else t
 end
 
-collectFields = function(p33, p34, p35, p36, p37)
+collectFields = function(p14, p15, p16, p17, p18)
 	-- upvalues: kind (ref), shouldIncludeNode (write), getFieldEntryKey (write), doesFragmentConditionMatch (write), collectFields (write)
-	for i, v in ipairs(p35.selections) do
+	for i, v in ipairs(p16.selections) do
 		if v.kind == kind.FIELD then
-			if shouldIncludeNode(p33, v) then
-				local var48 = getFieldEntryKey(v)
+			if shouldIncludeNode(p14, v) then
+				local var9 = getFieldEntryKey(v)
 				
-				if not p36[var48] then
-					p36[var48] = {}
+				if not p17[var9] then
+					p17[var9] = {}
 				end
-				table.insert(p36[var48], v)
+				table.insert(p17[var9], v)
 			end
 		elseif v.kind == kind.INLINE_FRAGMENT then
-			if shouldIncludeNode(p33, v) and doesFragmentConditionMatch(p33, v, p34) then
-				collectFields(p33, p34, v.selectionSet, p36, p37)
+			if shouldIncludeNode(p14, v) and doesFragmentConditionMatch(p14, v, p15) then
+				collectFields(p14, p15, v.selectionSet, p17, p18)
 			end
 		elseif v.kind == kind.FRAGMENT_SPREAD then
 			local value = v.name.value
 			
-			if not p37[value] and shouldIncludeNode(p33, v) then
-				p37[value] = true
-				local var49 = p33.fragments[value]
+			if not p18[value] and shouldIncludeNode(p14, v) then
+				p18[value] = true
+				local var10 = p14.fragments[value]
 				
-				if var49 and doesFragmentConditionMatch(p33, var49, p34) then
-					collectFields(p33, p34, var49.selectionSet, p36, p37)
+				if var10 and doesFragmentConditionMatch(p14, var10, p15) then
+					collectFields(p14, p15, var10.selectionSet, p17, p18)
 				end
 			end
 		end
 	end
-	return p36
+	return p17
 end
 
-shouldIncludeNode = function(p38, p39)
+shouldIncludeNode = function(p19, p20)
 	-- upvalues: getDirectiveValues (ref), graphQLSkipDirective (ref), graphQLIncludeDirective (ref)
-	local var50 = getDirectiveValues(graphQLSkipDirective, p39, p38.variableValues)
+	local var11 = getDirectiveValues(graphQLSkipDirective, p20, p19.variableValues)
 	
-	if (var50 and var50["if"]) == true then
+	if (var11 and var11["if"]) == true then
 		return false
 	end
-	local var51 = getDirectiveValues(graphQLIncludeDirective, p39, p38.variableValues)
+	local var12 = getDirectiveValues(graphQLIncludeDirective, p20, p19.variableValues)
 	
-	return (var51 and var51["if"]) ~= false
+	return (var12 and var12["if"]) ~= false
 end
 
-doesFragmentConditionMatch = function(p40, p41, p42)
+doesFragmentConditionMatch = function(p19, p20, p21)
 	-- upvalues: typeFromAST (ref), isAbstractType (ref)
-	local typeCondition = p41.typeCondition
+	local typeCondition = p20.typeCondition
 	
 	if not typeCondition then
 		return true
 	end
-	local var52 = typeFromAST(p40.schema, typeCondition)
+	local var11 = typeFromAST(p19.schema, typeCondition)
 	
-	return var52 == p42 or (if isAbstractType(var52) then p40.schema:isSubType(var52, p42) else false)
+	return var11 == p21 or (if isAbstractType(var11) then p19.schema:isSubType(var11, p21) else false)
 end
 
-getFieldEntryKey = function(p43)
-	return if p43.alias then p43.alias.value else p43.name.value
+getFieldEntryKey = function(p19)
+	return if p19.alias then p19.alias.value else p19.name.value
 end
 
-resolveField = function(p44, p45, p46, p47, p48)
-	-- upvalues: var14 (write), buildResolveInfo (write), getArgumentValues (ref), isPromise (ref), completeValue (write), locatedError (ref), pathToArray (ref), handleFieldError (write)
-	local var53 = var14(p44.schema, p45, p47[1].name.value)
+resolveField = function(p19, p20, p21, p22, p23)
+	-- upvalues: var3 (write), buildResolveInfo (write), getArgumentValues (ref), isPromise (ref), completeValue (write), locatedError (ref), pathToArray (ref), handleFieldError (write)
+	local var11 = var3(p19.schema, p20, p22[1].name.value)
 	
-	if not var53 then return end
-	local type = var53.type
-	local var54 = if var53.resolve then var53.resolve else p44.fieldResolver
-	local var55 = buildResolveInfo(p44, var53, p47, p45, p48)
+	if not var11 then return end
+	local type = var11.type
+	local var12 = if var11.resolve then var11.resolve else p19.fieldResolver
+	local var13 = buildResolveInfo(p19, var11, p22, p20, p23)
 	local ok, status = pcall(function()
-		-- upvalues: getArgumentValues (copy), var53 (ref), p47 (ref), p44 (ref), var54 (ref), p46 (ref), var55 (ref), isPromise (copy), completeValue (copy), type (ref), p48 (ref), locatedError (copy), pathToArray (copy), handleFieldError (copy)
-		local var56 = var54(p46, getArgumentValues(var53, p47[1], p44.variableValues), p44.contextValue, var55)
-		local var57 = if isPromise(var56) then var56:andThen(function(p49)
-			-- upvalues: completeValue (copy), p44 (copy), type (copy), p47 (copy), var55 (copy), p48 (copy)
-			return completeValue(p44, type, p47, var55, p48, p49)
-		end) else completeValue(p44, type, p47, var55, p48, var56)
+		-- upvalues: getArgumentValues (copy), var11 (ref), p22 (ref), p19 (ref), var12 (ref), p21 (ref), var13 (ref), isPromise (copy), completeValue (copy), type (ref), p23 (ref), locatedError (copy), pathToArray (copy), handleFieldError (copy)
+		local var14 = var12(p21, getArgumentValues(var11, p22[1], p19.variableValues), p19.contextValue, var13)
+		local var15 = if isPromise(var14) then var14:andThen(function(p24)
+			-- upvalues: completeValue (copy), p19 (copy), type (copy), p22 (copy), var13 (copy), p23 (copy)
+			return completeValue(p19, type, p22, var13, p23, p24)
+		end) else completeValue(p19, type, p22, var13, p23, var14)
 		
-		return if isPromise(var57) then var57:andThen(nil, function(p50)
-			-- upvalues: locatedError (copy), p47 (copy), pathToArray (copy), p48 (copy), handleFieldError (copy), type (copy), p44 (copy)
-			return handleFieldError(locatedError(p50, p47, pathToArray(p48)), type, p44)
-		end) else var57
+		return if isPromise(var15) then var15:andThen(nil, function(p24)
+			-- upvalues: locatedError (copy), p22 (copy), pathToArray (copy), p23 (copy), handleFieldError (copy), type (copy), p19 (copy)
+			return handleFieldError(locatedError(p24, p22, pathToArray(p23)), type, p19)
+		end) else var15
 	end)
 	
-	return if ok then status else handleFieldError(locatedError(status, p47, pathToArray(p48)), type, p44)
+	return if ok then status else handleFieldError(locatedError(status, p22, pathToArray(p23)), type, p19)
 end
 
-buildResolveInfo = function(p51, p52, p53, p54, p55)
+buildResolveInfo = function(p19, p20, p21, p22, p23)
 	return {
-		fieldName = p52.name,
-		fieldNodes = p53,
-		returnType = p52.type,
-		parentType = p54,
-		path = p55,
-		schema = p51.schema,
-		fragments = p51.fragments,
-		rootValue = p51.rootValue,
-		operation = p51.operation,
-		variableValues = p51.variableValues
+		fieldName = p20.name,
+		fieldNodes = p21,
+		returnType = p20.type,
+		parentType = p22,
+		path = p23,
+		schema = p19.schema,
+		fragments = p19.fragments,
+		rootValue = p19.rootValue,
+		operation = p19.operation,
+		variableValues = p19.variableValues
 	}
 end
 
-handleFieldError = function(p56, p57, p58)
+handleFieldError = function(p19, p20, p21)
 	-- upvalues: isNonNullType (ref), nullModule (ref)
-	if isNonNullType(p57) then
-		error(p56)
+	if isNonNullType(p20) then
+		error(p19)
 	end
-	table.insert(p58.errors, p56)
+	table.insert(p21.errors, p19)
 	
 	return nullModule
 end
 
-completeValue = function(p59, p60, p61, p62, p63, p64)
+completeValue = function(p19, p20, p21, p22, p23, p24)
 	-- upvalues: instanceof (ref), error_1 (ref), isNonNullType (ref), completeValue (write), isNillish (ref), nullModule (ref), isListType (ref), completeListValue (write), isLeafType (ref), completeLeafValue (write), isAbstractType (ref), completeAbstractValue (write), isObjectType (ref), completeObjectValue (write), invariant (ref), inspect (ref)
-	if instanceof(p64, error_1) then
-		error(p64)
+	if instanceof(p24, error_1) then
+		error(p24)
 	end
-	if isNonNullType(p60) then
-		local var58 = completeValue(p59, p60.ofType, p61, p62, p63, p64)
+	if isNonNullType(p20) then
+		local var11 = completeValue(p19, p20.ofType, p21, p22, p23, p24)
 		
-		if isNillish(var58) then
-			error(error_1.new(("Cannot return null for non-nullable field %s.%s."):format(p62.parentType.name, p62.fieldName)))
+		if isNillish(var11) then
+			error(error_1.new(("Cannot return null for non-nullable field %s.%s."):format(p22.parentType.name, p22.fieldName)))
 		end
-		return var58
-	elseif isNillish(p64) then
+		return var11
+	elseif isNillish(p24) then
 		return nullModule
-	elseif isListType(p60) then
-		return completeListValue(p59, p60, p61, p62, p63, p64)
-	elseif isLeafType(p60) then
-		return completeLeafValue(p60, p64)
-	elseif isAbstractType(p60) then
-		return completeAbstractValue(p59, p60, p61, p62, p63, p64)
-	elseif isObjectType(p60) then
-		return completeObjectValue(p59, p60, p61, p62, p63, p64)
+	elseif isListType(p20) then
+		return completeListValue(p19, p20, p21, p22, p23, p24)
+	elseif isLeafType(p20) then
+		return completeLeafValue(p20, p24)
+	elseif isAbstractType(p20) then
+		return completeAbstractValue(p19, p20, p21, p22, p23, p24)
+	elseif isObjectType(p20) then
+		return completeObjectValue(p19, p20, p21, p22, p23, p24)
 	end
-	invariant(false, "Cannot complete value of unexpected output type: " .. inspect(p60))
-	assert(false, "Cannot complete value of unexpected output type: " .. inspect(p60))
+	invariant(false, "Cannot complete value of unexpected output type: " .. inspect(p20))
+	assert(false, "Cannot complete value of unexpected output type: " .. inspect(p20))
 end
 
-completeListValue = function(p65, p66, p67, p68, p69, p70)
+completeListValue = function(p19, p20, p21, p22, p23, p24)
 	-- upvalues: instanceof (ref), set (ref), isIteratableObject (ref), graphQLError (ref), array (ref), addPath (ref), isPromise (ref), completeValue (write), locatedError (ref), pathToArray (ref), handleFieldError (write), promiseModule (ref)
-	if instanceof(p70, set) then
+	if instanceof(p24, set) then
 		local t = {}
 		
-		for i, v in p70 do
+		for i, v in p24 do
 			table.insert(t, v)
 		end
-		p70 = t
+		p24 = t
 	end
-	if not isIteratableObject(p70) then
-		error(graphQLError.new(("Expected Iterable, but did not find one for field \"%s.%s\"."):format(p68.parentType.name, p68.fieldName)))
+	if not isIteratableObject(p24) then
+		error(graphQLError.new(("Expected Iterable, but did not find one for field \"%s.%s\"."):format(p22.parentType.name, p22.fieldName)))
 	end
-	local ofType = p66.ofType
-	local var60 = false
-	local var61 = false
-	local var62 = array.from(p70, function(p71, p72)
-		-- upvalues: addPath (copy), p69 (ref), isPromise (copy), completeValue (copy), p65 (ref), ofType (ref), p67 (ref), p68 (ref), var60 (write), locatedError (copy), pathToArray (copy), handleFieldError (copy), var61 (write)
-		local var64 = addPath(p69, p72, nil)
+	local ofType = p20.ofType
+	local var11 = false
+	local var12 = false
+	local var13 = array.from(p24, function(p25, p26)
+		-- upvalues: addPath (copy), p23 (ref), isPromise (copy), completeValue (copy), p19 (ref), ofType (ref), p21 (ref), p22 (ref), var11 (write), locatedError (copy), pathToArray (copy), handleFieldError (copy), var12 (write)
+		local var14 = addPath(p23, p26, nil)
 		local ok, status = pcall(function()
-			-- upvalues: isPromise (copy), p71 (ref), completeValue (copy), p65 (copy), ofType (copy), p67 (copy), p68 (copy), var64 (ref), var60 (copy), locatedError (copy), pathToArray (copy), handleFieldError (copy), var61 (copy)
-			local var65 = if isPromise(p71) then p71:andThen(function(p73)
-				-- upvalues: completeValue (copy), p65 (copy), ofType (copy), p67 (copy), p68 (copy), var64 (copy)
-				return completeValue(p65, ofType, p67, p68, var64, p73)
-			end) else completeValue(p65, ofType, p67, p68, var64, p71)
+			-- upvalues: isPromise (copy), p25 (ref), completeValue (copy), p19 (copy), ofType (copy), p21 (copy), p22 (copy), var14 (ref), var11 (copy), locatedError (copy), pathToArray (copy), handleFieldError (copy), var12 (copy)
+			local var15 = if isPromise(p25) then p25:andThen(function(p27)
+				-- upvalues: completeValue (copy), p19 (copy), ofType (copy), p21 (copy), p22 (copy), var14 (copy)
+				return completeValue(p19, ofType, p21, p22, var14, p27)
+			end) else completeValue(p19, ofType, p21, p22, var14, p25)
 			
-			if isPromise(var65) then
-				var60 = true
+			if isPromise(var15) then
+				var11 = true
 				
-				return var65:andThen(nil, function(p74)
-					-- upvalues: locatedError (copy), p67 (copy), pathToArray (copy), var64 (copy), handleFieldError (copy), ofType (copy), p65 (copy)
-					return handleFieldError(locatedError(p74, p67, pathToArray(var64)), ofType, p65)
+				return var15:andThen(nil, function(p27)
+					-- upvalues: locatedError (copy), p21 (copy), pathToArray (copy), var14 (copy), handleFieldError (copy), ofType (copy), p19 (copy)
+					return handleFieldError(locatedError(p27, p21, pathToArray(var14)), ofType, p19)
 				end)
 			end
-			var61 = true
+			var12 = true
 			
-			return var65
+			return var15
 		end)
 		
-		return if ok then status else handleFieldError(locatedError(status, p67, pathToArray(var64)), ofType, p65)
+		return if ok then status else handleFieldError(locatedError(status, p21, pathToArray(var14)), ofType, p19)
 	end)
-	local var63 = var62
-	return var63
+	local var14 = var13
+	return var14
 end
 
-completeLeafValue = function(p75, p76)
+completeLeafValue = function(p25, p26)
 	-- upvalues: error_1 (ref), inspect (ref)
-	local var66 = p75:serialize(p76)
+	local var15 = p25:serialize(p26)
 	
-	if var66 == nil then
-		error(error_1.new(("Expected a value of type \"%s\" but "):format(inspect(p75)) .. ("received: %s"):format(inspect(p76))))
+	if var15 == nil then
+		error(error_1.new(("Expected a value of type \"%s\" but "):format(inspect(p25)) .. ("received: %s"):format(inspect(p26))))
 	end
-	return var66
+	return var15
 end
 
-completeAbstractValue = function(value, p77, p78, p79, p80, p81)
+completeAbstractValue = function(value, p25, p26, p27, p28, p29)
 	-- upvalues: isPromise (ref), completeObjectValue (write), ensureValidRuntimeType (write)
-	local var67 = (if p77.resolveType then p77.resolveType else value.typeResolver)(p81, value.contextValue, p79, p77)
+	local var15 = (if p25.resolveType then p25.resolveType else value.typeResolver)(p29, value.contextValue, p27, p25)
 	
-	return if isPromise(var67) then var67:andThen(function(p82)
-		-- upvalues: completeObjectValue (copy), value (ref), ensureValidRuntimeType (copy), p77 (ref), p78 (ref), p79 (ref), p81 (ref), p80 (ref)
-		return completeObjectValue(value, ensureValidRuntimeType(p82, value, p77, p78, p79, p81), p78, p79, p80, p81)
-	end) else completeObjectValue(value, ensureValidRuntimeType(var67, value, p77, p78, p79, p81), p78, p79, p80, p81)
+	return if isPromise(var15) then var15:andThen(function(p30)
+		-- upvalues: completeObjectValue (copy), value (ref), ensureValidRuntimeType (copy), p25 (ref), p26 (ref), p27 (ref), p29 (ref), p28 (ref)
+		return completeObjectValue(value, ensureValidRuntimeType(p30, value, p25, p26, p27, p29), p26, p27, p28, p29)
+	end) else completeObjectValue(value, ensureValidRuntimeType(var15, value, p25, p26, p27, p29), p26, p27, p28, p29)
 end
 
-ensureValidRuntimeType = function(p83, p84, p85, p86, p87, p88)
+ensureValidRuntimeType = function(p25, p26, p27, p28, p29, p30)
 	-- upvalues: graphQLError (ref), isObjectType (ref), inspect (ref)
-	if p83 == nil then
-		error(graphQLError.new(("Abstract type \"%s\" must resolve to an Object type at runtime for field \"%s.%s\". Either the \"%s\" type should provide a \"resolveType\" function or each possible type should provide an \"isTypeOf\" function."):format(p85.name, p87.parentType.name, p87.fieldName, p85.name), p86))
+	if p25 == nil then
+		error(graphQLError.new(("Abstract type \"%s\" must resolve to an Object type at runtime for field \"%s.%s\". Either the \"%s\" type should provide a \"resolveType\" function or each possible type should provide an \"isTypeOf\" function."):format(p27.name, p29.parentType.name, p29.fieldName, p27.name), p28))
 	end
-	if isObjectType(p83) then
+	if isObjectType(p25) then
 		error(graphQLError.new("Support for returning GraphQLObjectType from resolveType was removed in graphql-js@16.0.0 please return type name instead."))
 	end
-	if typeof(p83) ~= "string" then
-		error(graphQLError.new(("Abstract type \"%s\" must resolve to an Object type at runtime for field \"%s.%s\" with "):format(p85.name, p87.parentType.name, p87.fieldName) .. ("value %s, received \"%s\"."):format(inspect(p88), inspect(p83))))
+	if typeof(p25) ~= "string" then
+		error(graphQLError.new(("Abstract type \"%s\" must resolve to an Object type at runtime for field \"%s.%s\" with "):format(p27.name, p29.parentType.name, p29.fieldName) .. ("value %s, received \"%s\"."):format(inspect(p30), inspect(p25))))
 	end
-	local var68 = p84.schema:getType(p83)
+	local var15 = p26.schema:getType(p25)
 	
-	if var68 == nil then
-		error(graphQLError.new(("Abstract type \"%s\" was resolve to a type \"%s\" that does not exist inside schema."):format(p85.name, p83), p86))
+	if var15 == nil then
+		error(graphQLError.new(("Abstract type \"%s\" was resolve to a type \"%s\" that does not exist inside schema."):format(p27.name, p25), p28))
 	end
-	if not isObjectType(var68) then
-		error(graphQLError.new(("Abstract type \"%s\" was resolve to a non-object type \"%s\"."):format(p85.name, p83), p86))
+	if not isObjectType(var15) then
+		error(graphQLError.new(("Abstract type \"%s\" was resolve to a non-object type \"%s\"."):format(p27.name, p25), p28))
 	end
-	if not p84.schema:isSubType(p85, var68) then
-		error(graphQLError.new(("Runtime Object type \"%s\" is not a possible type for \"%s\"."):format(var68.name, p85.name), p86))
+	if not p26.schema:isSubType(p27, var15) then
+		error(graphQLError.new(("Runtime Object type \"%s\" is not a possible type for \"%s\"."):format(var15.name, p27.name), p28))
 	end
-	return var68
+	return var15
 end
 
-completeObjectValue = function(p89, p90, p91, p92, p93, p94)
+completeObjectValue = function(p25, p26, p27, p28, p29, p30)
 	-- upvalues: isPromise (ref), invalidReturnTypeError (write), collectAndExecuteSubfields (write)
-	if p90.isTypeOf ~= nil then
-		local var69 = p90:isTypeOf(p94, p89.contextValue, p92)
+	if p26.isTypeOf ~= nil then
+		local var15 = p26:isTypeOf(p30, p25.contextValue, p28)
 		
-		if isPromise(var69) then
-			return var69:andThen(function(p95)
-				-- upvalues: invalidReturnTypeError (copy), p90 (ref), p94 (ref), p91 (ref), collectAndExecuteSubfields (copy), p89 (ref), p93 (ref)
-				if not p95 then
-					error(invalidReturnTypeError(p90, p94, p91))
+		if isPromise(var15) then
+			return var15:andThen(function(p31)
+				-- upvalues: invalidReturnTypeError (copy), p26 (ref), p30 (ref), p27 (ref), collectAndExecuteSubfields (copy), p25 (ref), p29 (ref)
+				if not p31 then
+					error(invalidReturnTypeError(p26, p30, p27))
 				end
-				return collectAndExecuteSubfields(p89, p90, p91, p93, p94)
+				return collectAndExecuteSubfields(p25, p26, p27, p29, p30)
 			end)
-		elseif not var69 then
-			error(invalidReturnTypeError(p90, p94, p91))
+		elseif not var15 then
+			error(invalidReturnTypeError(p26, p30, p27))
 		end
 	end
-	return collectAndExecuteSubfields(p89, p90, p91, p93, p94)
+	return collectAndExecuteSubfields(p25, p26, p27, p29, p30)
 end
 
-invalidReturnTypeError = function(p96, p97, p98)
+invalidReturnTypeError = function(p25, p26, p27)
 	-- upvalues: graphQLError (ref), inspect (ref)
-	return graphQLError.new(("Expected value of type \"%s\" but got: %s."):format(p96.name, inspect(p97)), p98)
+	return graphQLError.new(("Expected value of type \"%s\" but got: %s."):format(p25.name, inspect(p26)), p27)
 end
 
-collectAndExecuteSubfields = function(p99, p100, p101, p102, p103)
-	-- upvalues: var32 (write), executeFields (write)
-	return executeFields(p99, p100, p103, p102, var32(p99, p100, p101))
+collectAndExecuteSubfields = function(p25, p26, p27, p28, p29)
+	-- upvalues: var4 (write), executeFields (write)
+	return executeFields(p25, p26, p29, p28, var4(p25, p26, p27))
 end
 
-var32 = memoize3(function(p104, p105, p106)
+var4 = memoize3(function(p25, p26, p27)
 	-- upvalues: map (ref), collectFields (write)
-	local var70 = map.new()
+	local var15 = map.new()
 	local t = {}
 	
-	for i, v in ipairs(p106) do
+	for i, v in ipairs(p27) do
 		if v.selectionSet then
-			var70 = collectFields(p104, p105, v.selectionSet, var70, t)
+			var15 = collectFields(p25, p26, v.selectionSet, var15, t)
 		end
 	end
-	return var70
+	return var15
 end)
 
 return {
@@ -516,49 +516,49 @@ return {
 	buildExecutionContext = buildExecutionContext,
 	collectFields = collectFields,
 	buildResolveInfo = buildResolveInfo,
-	getFieldDef = function(p107, p108, p109)
+	getFieldDef = function(p28, p29, p30)
 		-- upvalues: schemaMetaFieldDef (ref), typeMetaFieldDef (ref), typeNameMetaFieldDef (ref)
-		return if p109 == schemaMetaFieldDef.name and p107:getQueryType() == p108 then schemaMetaFieldDef elseif p109 == typeMetaFieldDef.name and p107:getQueryType() == p108 then typeMetaFieldDef elseif p109 == typeNameMetaFieldDef.name then typeNameMetaFieldDef else p108:getFields():get(p109)
+		return if p30 == schemaMetaFieldDef.name and p28:getQueryType() == p29 then schemaMetaFieldDef elseif p30 == typeMetaFieldDef.name and p28:getQueryType() == p29 then typeMetaFieldDef elseif p30 == typeNameMetaFieldDef.name then typeNameMetaFieldDef else p29:getFields():get(p30)
 	end,
-	defaultFieldResolver = function(p110, p111, p112, p113)
+	defaultFieldResolver = function(p28, p29, p30, p31)
 		-- upvalues: isObjectLike (ref)
-		if not isObjectLike(p110) and typeof(p110) ~= "function" then
+		if not isObjectLike(p28) and typeof(p28) ~= "function" then
 			return nil
 		end
-		local fieldName = p110[p113.fieldName]
+		local fieldName = p28[p31.fieldName]
 		
-		return if typeof(fieldName) == "function" then p110[p113.fieldName](p110, p111, p112, p113) else fieldName
+		return if typeof(fieldName) == "function" then p28[p31.fieldName](p28, p29, p30, p31) else fieldName
 	end,
-	defaultTypeResolver = function(p114, p115, p116, p117)
+	defaultTypeResolver = function(p28, p29, p30, p31)
 		-- upvalues: isObjectLike (ref), isPromise (ref), promiseModule (ref)
-		if isObjectLike(p114) and typeof(p114.__typename) == "string" then
-			return p114.__typename
+		if isObjectLike(p28) and typeof(p28.__typename) == "string" then
+			return p28.__typename
 		end
-		local var72 = p116.schema:getPossibleTypes(p117)
+		local var16 = p30.schema:getPossibleTypes(p31)
 		local t = {}
 		
-		for i = 1, #var72 do
-			local var74 = var72[i]
+		for i = 1, #var16 do
+			local var17 = var16[i]
 			
-			if not var74.isTypeOf then
+			if not var17.isTypeOf then
 				continue
 			end
-			local var75 = var74:isTypeOf(p114, p115, p116)
+			local var18 = var17:isTypeOf(p28, p29, p30)
 			
-			if isPromise(var75) then
-				t[i] = var75
-			elseif not var75 then
+			if isPromise(var18) then
+				t[i] = var18
+			elseif not var18 then
 				continue
 			end
-			return var74.name
+			return var17.name
 		end
-		return if #t > 0 then promiseModule.all(t):andThen(function(p118)
-			-- upvalues: var72 (ref)
-			for i = 1, #p118 do
-				if not p118[i] then
+		return if #t > 0 then promiseModule.all(t):andThen(function(p32)
+			-- upvalues: var16 (ref)
+			for i = 1, #p32 do
+				if not p32[i] then
 					continue
 				end
-				return var72[i].name
+				return var16[i].name
 			end
 			return nil
 		end) else nil

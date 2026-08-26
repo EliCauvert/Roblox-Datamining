@@ -7,12 +7,12 @@ local function toWarnWith(_, p1, p2)
 	-- upvalues: jest (ref), expect (ref)
 	local var1 = false
 	local var2 = ""
-	local var3 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p1)
+	local var3 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p3)
 		-- upvalues: expect (copy), p2 (ref), var1 (write), var2 (write)
-		print("WARN", p1)
+		print("WARN", p3)
 		local ok, status = pcall(function()
-			-- upvalues: expect (copy), p1 (ref), p2 (copy)
-			expect(p1).toEqual(p2)
+			-- upvalues: expect (copy), p3 (ref), p2 (copy)
+			expect(p3).toEqual(p2)
 		end)
 		
 		if ok then
@@ -41,9 +41,9 @@ end
 local function toWarn(_, p1)
 	-- upvalues: jest (ref)
 	local var1 = 0
-	local var2 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p1)
+	local var2 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p2)
 		-- upvalues: var1 (write)
-		print("WARN", p1)
+		print("WARN", p2)
 		var1 += 1
 	end)
 	local ok, status = pcall(p1)

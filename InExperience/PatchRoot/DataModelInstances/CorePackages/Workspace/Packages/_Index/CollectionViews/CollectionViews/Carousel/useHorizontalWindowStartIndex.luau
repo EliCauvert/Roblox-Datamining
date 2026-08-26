@@ -4,48 +4,48 @@ local reactModule = require(parent.React)
 local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
 local _ = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: reactModule (ref), fFlagCollectionViewMathChanges (ref)
-	local var2, var3 = reactModule.useState(1)
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: p3 (ref), p0 (ref), fFlagCollectionViewMathChanges (copy), p4 (ref), p5 (ref), p1 (ref), p2 (ref), var3 (ref)
-		if p3 then
-			if p0.current == nil or fFlagCollectionViewMathChanges and p4 <= 0 then return end
-			local x = p0.current.CanvasPosition.X
-			local var5 = if fFlagCollectionViewMathChanges then p5:getValue().stride else p1:getValue().X + p2
+	local var1, var2 = reactModule.useState(1)
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: p4 (ref), p1 (ref), fFlagCollectionViewMathChanges (copy), p5 (ref), p6 (ref), p2 (ref), p3 (ref), var2 (ref)
+		if p4 then
+			if p1.current == nil or fFlagCollectionViewMathChanges and p5 <= 0 then return end
+			local x = p1.current.CanvasPosition.X
+			local var4 = if fFlagCollectionViewMathChanges then p6:getValue().stride else p2:getValue().X + p3
 			
-			if var5 > 0 then
-				var3(math.max(1, math.floor(x / var5)))
+			if var4 > 0 then
+				var2(math.max(1, math.floor(x / var4)))
 				
 				return
 			end
-			var3(1)
+			var2(1)
 			
 			return
 		else
-			var3(1)
+			var2(1)
 		end
 	end, {
-		p3,
-		p0,
-		if fFlagCollectionViewMathChanges then p5 else p1,
-		if fFlagCollectionViewMathChanges then p4 else p2
+		p4,
+		p1,
+		if fFlagCollectionViewMathChanges then p6 else p2,
+		if fFlagCollectionViewMathChanges then p5 else p3
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
-		var4()
-	end, { var4 })
+		-- upvalues: var3 (ref)
+		var3()
+	end, { var3 })
 	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), p0 (ref), var4 (ref)
-		if not p3 then
+		-- upvalues: p4 (ref), p1 (ref), var3 (ref)
+		if not p4 then
 			return nil
 		end
 		local t = {}
 		
-		if p0.current ~= nil then
-			var4()
-			table.insert(t, p0.current:GetPropertyChangedSignal("CanvasPosition"):Connect(var4))
-			table.insert(t, p0.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(var4))
+		if p1.current ~= nil then
+			var3()
+			table.insert(t, p1.current:GetPropertyChangedSignal("CanvasPosition"):Connect(var3))
+			table.insert(t, p1.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(var3))
 		end
 		return function()
 			-- upvalues: t (ref)
@@ -53,7 +53,7 @@ return function(p0, p1, p2, p3, p4, p5)
 				v:Disconnect()
 			end
 		end
-	end, { p0, var4, p3 })
+	end, { p1, var3, p4 })
 	
-	return var2
+	return var1
 end

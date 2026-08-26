@@ -4,14 +4,14 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local contextProvidersModule = require(avatarSwitcher.Internal.ContextProviders)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactRobloxModule (ref), reactModule (ref), contextProvidersModule (ref)
 	local frame = Instance.new("Frame")
-	local var5 = reactRobloxModule.createRoot(frame)
+	local var1 = reactRobloxModule.createRoot(frame)
 	reactRobloxModule.act(function()
-		-- upvalues: var5 (ref), reactModule (copy), contextProvidersModule (copy), p0 (ref), p1 (ref)
-		var5:render(reactModule.createElement(contextProvidersModule, { theme = "Dark" }, { Child = reactModule.createElement(p0, p1) }))
+		-- upvalues: var1 (ref), reactModule (copy), contextProvidersModule (copy), p1 (ref), p2 (ref)
+		var1:render(reactModule.createElement(contextProvidersModule, { theme = "Dark" }, { Child = reactModule.createElement(p1, p2) }))
 	end)
 	
-	return frame, var5
+	return frame, var1
 end

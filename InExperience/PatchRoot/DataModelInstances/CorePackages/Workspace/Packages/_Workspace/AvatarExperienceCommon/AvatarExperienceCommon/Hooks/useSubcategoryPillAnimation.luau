@@ -2,42 +2,42 @@
 local reactModule = require(avatarExperienceCommon.Parent.React)
 local animationConstantsModule = require(avatarExperienceCommon.AnimationConstants)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), animationConstantsModule (ref)
-	local var3, var4 = reactModule.useState({})
-	local var5 = reactModule.useRef(nil)
-	local var6, var7 = reactModule.useState(false)
+	local var1, var2 = reactModule.useState({})
+	local var3 = reactModule.useRef(nil)
+	local var4, var5 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref)
+		-- upvalues: var3 (ref)
 		return function()
-			-- upvalues: var5 (copy)
-			if var5.current then
-				task.cancel(var5.current)
+			-- upvalues: var3 (copy)
+			if var3.current then
+				task.cancel(var3.current)
 			end
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: p0 (ref), var5 (ref), var4 (ref), var7 (ref), animationConstantsModule (copy)
-		local var8 = if p0 and p0.Subcategories then p0.Subcategories else {}
+		-- upvalues: p1 (ref), var3 (ref), var2 (ref), var5 (ref), animationConstantsModule (copy)
+		local var6 = if p1 and p1.Subcategories then p1.Subcategories else {}
 		
-		if var5.current then
-			task.cancel(var5.current)
+		if var3.current then
+			task.cancel(var3.current)
 		end
-		if next(var8) then
-			var4(var8)
-			var7(false)
+		if next(var6) then
+			var2(var6)
+			var5(false)
 		else
-			var7(true)
+			var5(true)
 		end
-		var5.current = task.delay(animationConstantsModule.FIntAXSubcategoryPillFadeAnimationDurationMs / 1000, function()
-			-- upvalues: var8 (ref), var4 (copy), var7 (copy), var5 (copy)
-			if not next(var8) then
-				var4({})
+		var3.current = task.delay(animationConstantsModule.FIntAXSubcategoryPillFadeAnimationDurationMs / 1000, function()
+			-- upvalues: var6 (ref), var2 (copy), var5 (copy), var3 (copy)
+			if not next(var6) then
+				var2({})
 			end
-			var7(false)
-			var5.current = nil
+			var5(false)
+			var3.current = nil
 		end)
-	end, { p0 })
+	end, { p1 })
 	
-	return { subcategoriesState = var3, isFadingOut = var6 }
+	return { subcategoriesState = var1, isFadingOut = var4 }
 end

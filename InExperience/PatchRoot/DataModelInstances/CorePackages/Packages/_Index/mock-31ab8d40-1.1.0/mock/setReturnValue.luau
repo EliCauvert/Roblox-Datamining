@@ -1,6 +1,6 @@
 ﻿local symbolsModule = require(script.Parent.symbols)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: symbolsModule (ref)
-	getmetatable(p0)[symbolsModule.ReturnValue] = { p1 }
+	getmetatable(p1)[symbolsModule.ReturnValue] = { p2 }
 end

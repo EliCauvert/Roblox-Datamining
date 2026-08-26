@@ -17,8 +17,8 @@ local t = {
 }
 setmetatable(t, {
 	__newindex = function(_, _, _) end,
-	__index = function(_, p0)
-		error("Colors table has no value: " .. tostring(p0))
+	__index = function(_, p1)
+		error("Colors table has no value: " .. tostring(p1))
 	end
 })
 

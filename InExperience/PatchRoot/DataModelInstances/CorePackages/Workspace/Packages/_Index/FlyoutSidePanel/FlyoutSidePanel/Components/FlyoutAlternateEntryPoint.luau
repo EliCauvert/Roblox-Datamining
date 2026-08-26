@@ -9,28 +9,28 @@ local getStandardSizeAvatarHeadShotRbxthumb = require(parent.UserLib).Utils.getS
 
 return function()
 	-- upvalues: useTokens (ref), useSelector (ref), reactModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), foundationModule (ref), builderIconsModule (ref), loadableImage (ref)
-	local var3 = useTokens()
-	local var4 = useSelector(function(p0)
-		return p0.Users[p0.LocalUserId]
+	local var1 = useTokens()
+	local var2 = useSelector(function(p1)
+		return p1.Users[p1.LocalUserId]
 	end)
 	
 	return reactModule.createElement(foundationModule.Icon, {
 		tag = "position-center-center anchor-center-center content-emphasis align-y-center",
 		name = builderIconsModule.Icon.ThreeHorizontalBarsWrappingRight,
-		size = var3.Size.Size_800
+		size = var1.Size.Size_800
 	}, {
 		UserAvatar = reactModule.createElement(loadableImage, {
 			useShimmerAnimationWhileLoading = true,
 			shouldHandleReloads = true,
 			AnchorPoint = Vector2.new(0, 0.5),
-			Position = UDim2.new(0, var3.Size.Size_50, 0.5, 0),
-			Size = UDim2.new(0, var3.Size.Size_400, 0, var3.Size.Size_400),
-			BackgroundColor3 = var3.Color.Common.Shimmer.Color3,
-			BackgroundTransparency = var3.Color.Common.Shimmer.Transparency,
+			Position = UDim2.new(0, var1.Size.Size_50, 0.5, 0),
+			Size = UDim2.new(0, var1.Size.Size_400, 0, var1.Size.Size_400),
+			BackgroundColor3 = var1.Color.Common.Shimmer.Color3,
+			BackgroundTransparency = var1.Color.Common.Shimmer.Transparency,
 			Image = reactModule.useMemo(function()
-				-- upvalues: var4 (ref), getStandardSizeAvatarHeadShotRbxthumb (copy)
-				return if var4 and var4.id then getStandardSizeAvatarHeadShotRbxthumb(var4.id) else nil
-			end, { var4 }),
+				-- upvalues: var2 (ref), getStandardSizeAvatarHeadShotRbxthumb (copy)
+				return if var2 and var2.id then getStandardSizeAvatarHeadShotRbxthumb(var2.id) else nil
+			end, { var2 }),
 			cornerRadius = UDim.new(0.5, 0)
 		})
 	})

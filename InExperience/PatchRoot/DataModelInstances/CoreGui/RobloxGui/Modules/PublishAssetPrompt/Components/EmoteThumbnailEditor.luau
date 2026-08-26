@@ -29,81 +29,81 @@ emoteThumbnailEditor.validateProps = tModule.strictInterface({
 	updateThumbnailCallback = tModule.callback
 })
 
-function emoteThumbnailEditor.init(p0)
+function emoteThumbnailEditor.init(p1)
 	-- upvalues: emoteThumbnailParametersModule (ref), roactModule (ref)
-	p0:setState({
-		thumbnailParameters = p0.props.initialThumbnailParameters or emoteThumbnailParametersModule.defaultParameters
+	p1:setState({
+		thumbnailParameters = p1.props.initialThumbnailParameters or emoteThumbnailParametersModule.defaultParameters
 	})
 	
 	function p0.onCancelPressed()
-		-- upvalues: p0 (ref)
-		p0.props.closePromptCallback()
+		-- upvalues: p1 (ref)
+		p1.props.closePromptCallback()
 	end
 	
 	function p0.onUpdatePressed()
-		-- upvalues: p0 (ref)
-		p0.props.updateThumbnailCallback(p0.state.thumbnailParameters)
-		p0.props.closePromptCallback()
+		-- upvalues: p1 (ref)
+		p1.props.updateThumbnailCallback(p1.state.thumbnailParameters)
+		p1.props.closePromptCallback()
 	end
 	
-	function p0.onRotateChanged(p1)
-		-- upvalues: p0 (ref)
-		local cloned = table.clone(p0.state.thumbnailParameters)
-		cloned.thumbnailCharacterRotation = p1
-		p0:updateThumbnailParameters(cloned)
+	function p0.onRotateChanged(p2)
+		-- upvalues: p1 (ref)
+		local cloned = table.clone(p1.state.thumbnailParameters)
+		cloned.thumbnailCharacterRotation = p2
+		p1:updateThumbnailParameters(cloned)
 	end
 	
 	function p0.onKeyframeOrTimeChanged(p2)
-		-- upvalues: p0 (ref)
-		local cloned = table.clone(p0.state.thumbnailParameters)
+		-- upvalues: p1 (ref)
+		local cloned = table.clone(p1.state.thumbnailParameters)
 		cloned.thumbnailTime = p2
 		cloned.thumbnailKeyframe = p2
-		p0:updateThumbnailParameters(cloned)
+		p1:updateThumbnailParameters(cloned)
 	end
 	
-	p0.rotationSliderRef = roactModule.createRef()
-	p0.timeSliderRef = roactModule.createRef()
-	p0:updateSliderValuesForAnimationClip()
+	p1.rotationSliderRef = roactModule.createRef()
+	p1.timeSliderRef = roactModule.createRef()
+	p1:updateSliderValuesForAnimationClip()
 end
 
-function emoteThumbnailEditor.updateSliderValuesForAnimationClip(p3)
+function emoteThumbnailEditor.updateSliderValuesForAnimationClip(p1)
 	-- upvalues: emoteUtility (ref)
-	local props = p3.props
-	local var13 = nil
-	local var14 = nil
-	local var15 = nil
+	local props = p1.props
+	local var1 = nil
+	local var2 = nil
+	local var3 = nil
 	
 	if props.animationClip:IsA("KeyframeSequence") then
-		var13 = 1
-		var14 = #props.animationClip:GetKeyframes()
-		var15 = 1
+		var1 = 1
+		var2 = #props.animationClip:GetKeyframes()
+		var3 = 1
 	elseif props.animationClip:IsA("CurveAnimation") then
-		var13 = 0
-		var14 = math.floor(emoteUtility.GetCurveAnimationTimeLength(props.animationClip) / 0.01) * 0.01
-		var15 = 0.01
+		var1 = 0
+		var2 = math.floor(emoteUtility.GetCurveAnimationTimeLength(props.animationClip) / 0.01) * 0.01
+		var3 = 0.01
 	else
 		error("Unsupported animation type:", props.animationClip.ClassName)
 	end
-	p3:setState({
-		timeSliderMin = var13,
-		timeSliderMax = var14,
-		timeSliderStepInterval = var15
+	p1:setState({
+		timeSliderMin = var1,
+		timeSliderMax = var2,
+		timeSliderStepInterval = var3
 	})
 end
 
-function emoteThumbnailEditor.updateThumbnailParameters(p4, p5)
-	p4:setState({ thumbnailParameters = p5 })
+function emoteThumbnailEditor.updateThumbnailParameters(p1, p2)
+	p1:setState({ thumbnailParameters = p2 })
 end
 
-function emoteThumbnailEditor.renderMiddle(p6, p7)
+function emoteThumbnailEditor.renderMiddle(p1, p2)
 	-- upvalues: withStyle (ref), roactModule (ref), roactGamepadModule (ref), emoteThumbnailViewModule (ref), systemSlider (ref), t (ref)
-	return withStyle(function(p8)
-		-- upvalues: p6 (ref), roactModule (copy), roactGamepadModule (copy), emoteThumbnailViewModule (copy), p7 (ref), systemSlider (copy), t (copy)
-		local font = p8.Font
-		local theme = p8.Theme
+	return withStyle(function(p3)
+		-- upvalues: p1 (ref), roactModule (copy), roactGamepadModule (copy), emoteThumbnailViewModule (copy), p2 (ref), systemSlider (copy), t (copy)
+		local font = p3.Font
+		local theme = p3.Theme
 		local t_1 = {}
 		
-		if p6.props.screenSize.Y > 481 then
+		if p1.props.screenSize.Y > 481 then
 			t_1.contentSize = UDim2.new(1, 0, 0, 262)
 			t_1.thumbnailPosition = UDim2.new(0.5, 0, 0, 0)
 			t_1.thumbnailAnchorPoint = Vector2.new(0.5, 0)
@@ -116,12 +116,12 @@ function emoteThumbnailEditor.renderMiddle(p6, p7)
 			t_1.leversPosition = UDim2.new(0, 160, 0, 0)
 			t_1.leversSize = UDim2.new(1, -160, 0, 102)
 		end
-		local thumbnailParameters = p6.state.thumbnailParameters
+		local thumbnailParameters = p1.state.thumbnailParameters
 		local thumbnailKeyframe = thumbnailParameters.thumbnailKeyframe
 		local thumbnailCharacterRotation = thumbnailParameters.thumbnailCharacterRotation
 		
-		local function _(p9)
-			return (p9.Range.Max - p9.Range.Min) / (p9.Increments - 1)
+		local function _(p4)
+			return (p4.Range.Max - p4.Range.Min) / (p4.Increments - 1)
 		end
 		
 		local createElement = roactModule.createElement
@@ -130,11 +130,11 @@ function emoteThumbnailEditor.renderMiddle(p6, p7)
 			Size = t_1.contentSize,
 			BackgroundColor3 = Color3.new(1, 0, 1),
 			BackgroundTransparency = 1,
-			[roactModule.Ref] = p6.middleContentRef
+			[roactModule.Ref] = p1.middleContentRef
 		}
 		local t_3 = {}
 		local createElement_1 = roactModule.createElement
-		local var19 = "Frame"
+		local var1 = "Frame"
 		local t_4 = { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }
 		local t_5 = {
 			ThumbnailViewParent = roactModule.createElement("Frame", {
@@ -148,13 +148,13 @@ function emoteThumbnailEditor.renderMiddle(p6, p7)
 				EmoteThumbnailView = roactModule.createElement(emoteThumbnailViewModule, {
 					position = UDim2.new(0.5, 0, 0.5, 0),
 					anchorPoint = Vector2.new(0.5, 0.5),
-					animationClip = p6.props.animationClip,
-					thumbnailParameters = p6.state.thumbnailParameters
+					animationClip = p1.props.animationClip,
+					thumbnailParameters = p1.state.thumbnailParameters
 				})
 			})
 		}
 		local createElement_2 = roactModule.createElement
-		local var22 = "Frame"
+		local var2 = "Frame"
 		local t_6 = {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
@@ -175,22 +175,22 @@ function emoteThumbnailEditor.renderMiddle(p6, p7)
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 15),
 				Font = font.Body.Font,
-				Text = p7.timeLabelText,
+				Text = p2.timeLabelText,
 				TextColor3 = theme.TextDefault.Color,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
 			TimeSlider = roactModule.createElement(systemSlider, {
 				layoutOrder = 1,
-				min = p6.state.timeSliderMin,
-				max = p6.state.timeSliderMax,
-				stepInterval = p6.state.timeSliderStepInterval,
+				min = p1.state.timeSliderMin,
+				max = p1.state.timeSliderMax,
+				stepInterval = p1.state.timeSliderStepInterval,
 				value = thumbnailKeyframe,
-				onValueChanged = p6.onKeyframeOrTimeChanged,
+				onValueChanged = p1.onKeyframeOrTimeChanged,
 				width = UDim.new(1, 0),
 				position = UDim2.new(0, 0, 0.5, 0),
 				anchorPoint = Vector2.new(0, 0.5),
-				NextSelectionDown = p6.rotationSliderRef,
-				[roactModule.Ref] = p6.timeSliderRef
+				NextSelectionDown = p1.rotationSliderRef,
+				[roactModule.Ref] = p1.timeSliderRef
 			}),
 			RotationDescriptionLabel = roactModule.createElement("TextLabel", {
 				LayoutOrder = 2,
@@ -198,7 +198,7 @@ function emoteThumbnailEditor.renderMiddle(p6, p7)
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 15),
 				Font = font.Body.Font,
-				Text = p7.rotationLabelText,
+				Text = p2.rotationLabelText,
 				TextColor3 = theme.TextDefault.Color,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})
@@ -212,50 +212,50 @@ function emoteThumbnailEditor.renderMiddle(p6, p7)
 		local rotation = t.Rotation
 		t_8.stepInterval = (rotation.Range.Max - rotation.Range.Min) / (rotation.Increments - 1)
 		t_8.value = thumbnailCharacterRotation
-		t_8.onValueChanged = p6.onRotateChanged
+		t_8.onValueChanged = p1.onRotateChanged
 		t_8.width = UDim.new(1, 0)
 		t_8.position = UDim2.new(0, 0, 0.5, 0)
 		t_8.anchorPoint = Vector2.new(0, 0.5)
-		t_8.NextSelectionUp = p6.timeSliderRef
-		t_8[roactModule.Ref] = p6.rotationSliderRef
+		t_8.NextSelectionUp = p1.timeSliderRef
+		t_8[roactModule.Ref] = p1.rotationSliderRef
 		t_7.RotationSlider = createElement_3(systemSlider, t_8)
-		t_5.Levers = createElement_2(var22, t_6, t_7)
-		t_3.TopSection = createElement_1(var19, t_4, t_5)
+		t_5.Levers = createElement_2(var2, t_6, t_7)
+		t_3.TopSection = createElement_1(var1, t_4, t_5)
 		
 		return createElement(frame, t_2, t_3)
 	end)
 end
 
-function emoteThumbnailEditor.renderAlertLocalized(p10, p11)
+function emoteThumbnailEditor.renderAlertLocalized(p1, p2)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), buttonType (ref)
 	return roactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = true,
-		title = p11.titleText or "",
+		title = p2.titleText or "",
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
-						onActivated = p10.onCancelPressed,
-						text = p11.cancelButtonText
+						onActivated = p1.onCancelPressed,
+						text = p2.cancelButtonText
 					}
 				},
 				{
 					isDefaultChild = false,
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = p10.onUpdatePressed,
-						text = p11.updateButtonText
+						onActivated = p1.onUpdatePressed,
+						text = p2.updateButtonText
 					}
 				}
 			}
 		},
 		middleContent = function()
-			-- upvalues: p10 (ref), p11 (ref)
-			return p10:renderMiddle(p11)
+			-- upvalues: p1 (ref), p2 (ref)
+			return p1:renderMiddle(p2)
 		end,
-		screenSize = p10.props.screenSize,
-		defaultChildRef = p10.props.defaultChildRef
+		screenSize = p1.props.screenSize,
+		defaultChildRef = p1.props.defaultChildRef
 	})
 end
 
@@ -270,9 +270,9 @@ local function GetLocalizedStrings()
 	}
 end
 
-function emoteThumbnailEditor.render(p12)
+function emoteThumbnailEditor.render(p1)
 	-- upvalues: GetLocalizedStrings (ref)
-	return p12:renderAlertLocalized(GetLocalizedStrings())
+	return p1:renderAlertLocalized(GetLocalizedStrings())
 end
 
 return emoteThumbnailEditor

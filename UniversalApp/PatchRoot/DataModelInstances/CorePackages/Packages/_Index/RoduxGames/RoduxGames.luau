@@ -8,16 +8,16 @@ local modelsModule = require(script.Models)
 local enumsModule = require(script.Enums)
 
 return {
-	config = function(p0)
+	config = function(p1)
 		-- upvalues: dashModule (ref), networkingGamesModule (ref), roduxNetworkingModule (ref), reducersModule (ref), actionsModule (ref), modelsModule (ref), enumsModule (ref)
-		p0 = dashModule.join(p0, {
+		p1 = dashModule.join(p1, {
 			networkingGames = networkingGamesModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
 		})
 		
 		return {
 			installReducer = function()
-				-- upvalues: reducersModule (copy), p0 (write)
-				return reducersModule(p0)
+				-- upvalues: reducersModule (copy), p1 (write)
+				return reducersModule(p1)
 			end,
 			Actions = actionsModule,
 			Models = modelsModule,

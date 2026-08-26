@@ -15,7 +15,7 @@ return {
 	conditionalData = {},
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateCageUV),
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), UGCValidationService (ref), getFIntUGCValidateCageDuplicateUVThresholdModule (ref), errorSourceStringsModule (ref)
 		local t = {}
 		
@@ -24,22 +24,22 @@ return {
 				table.insert(t, v_1)
 			end
 		end
-		local function checkCage(p2, p3)
-			-- upvalues: UGCValidationService (copy), t (ref), getFIntUGCValidateCageDuplicateUVThresholdModule (copy), p0 (ref), errorSourceStringsModule (copy)
-			for i, v in p2 do
-				local var7 = UGCValidationService:ValidateEditableMeshUVDuplicates(t, v.editable)
+		local function checkCage(p3, p4)
+			-- upvalues: UGCValidationService (copy), t (ref), getFIntUGCValidateCageDuplicateUVThresholdModule (copy), p1 (ref), errorSourceStringsModule (copy)
+			for i, v in p3 do
+				local var1 = UGCValidationService:ValidateEditableMeshUVDuplicates(t, v.editable)
 				
-				if getFIntUGCValidateCageDuplicateUVThresholdModule() < var7 then
-					p0:fail(errorSourceStringsModule.Keys.CageUV_ExtraDuplicateUVs, {
-						count = tostring(var7),
-						cageType = if p3 then "inner" else "outer",
+				if getFIntUGCValidateCageDuplicateUVThresholdModule() < var1 then
+					p1:fail(errorSourceStringsModule.Keys.CageUV_ExtraDuplicateUVs, {
+						count = tostring(var1),
+						cageType = if p4 then "inner" else "outer",
 						partName = i
 					})
 				end
 			end
 		end
 		
-		checkCage(p1.innerCagesData, true)
-		checkCage(p1.outerCagesData, false)
+		checkCage(p2.innerCagesData, true)
+		checkCage(p2.outerCagesData, false)
 	end
 }

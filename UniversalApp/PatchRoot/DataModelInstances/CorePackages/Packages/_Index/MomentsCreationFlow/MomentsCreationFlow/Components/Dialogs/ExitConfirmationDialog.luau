@@ -6,9 +6,9 @@ local dialog = foundationModule.Dialog
 local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), creationFlowContextModule (ref), dialog (ref), foundationModule (ref), creationFlowLocalizationModule (ref)
-	local var5 = reactModule.useContext(creationFlowContextModule)
+	local var1 = reactModule.useContext(creationFlowContextModule)
 	
 	return reactModule.createElement(dialog.Root, {
 		disablePortal = false,
@@ -17,25 +17,25 @@ return function(p0)
 	}, {
 		DialogTitle = reactModule.createElement(dialog.Title, {
 			LayoutOrder = 1,
-			text = var5.getLocalization(creationFlowLocalizationModule.LeaveMomentCreationTitle)
+			text = var1.getLocalization(creationFlowLocalizationModule.LeaveMomentCreationTitle)
 		}),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			DialogText = reactModule.createElement(dialog.Text, {
-				Text = var5.getLocalization(creationFlowLocalizationModule.LeaveMomentCreationBody)
+				Text = var1.getLocalization(creationFlowLocalizationModule.LeaveMomentCreationBody)
 			})
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var5.getLocalization(creationFlowLocalizationModule.GeneralCtaLeave),
+					text = var1.getLocalization(creationFlowLocalizationModule.GeneralCtaLeave),
 					variant = foundationModule.Enums.ButtonVariant.Emphasis,
-					onActivated = p0.onConfirm
+					onActivated = p1.onConfirm
 				},
 				{
-					text = var5.getLocalization(creationFlowLocalizationModule.GeneralCtaCancel),
+					text = var1.getLocalization(creationFlowLocalizationModule.GeneralCtaCancel),
 					variant = foundationModule.Enums.ButtonVariant.Standard,
-					onActivated = p0.onCancel
+					onActivated = p1.onCancel
 				}
 			}
 		})

@@ -21,29 +21,29 @@ local default = require(parent_1.LoggingProtocol).default
 local tooExpensiveUnifiedUpsellShownCounter = require(parent.Generic.Events.TooExpensiveUpsellCounter).TooExpensiveUnifiedUpsellShownCounter
 local useFocusNavigationRefsModule = require(parent.Generic.Hooks.useFocusNavigationRefs)
 
-local function UnifiedRobuxUpsellModalTooExpensiveV2(p0)
+local function UnifiedRobuxUpsellModalTooExpensiveV2(p1)
 	-- upvalues: useLocalization (ref), useFocusNavigationRefsModule (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), tooExpensiveUnifiedUpsellShownCounter (ref), dialog (ref), dialogSize (ref), view (ref), unifiedPurchaseModalTypeEnumModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), orientation (ref), buttonVariant (ref), foundationModule (ref)
-	local var11 = useLocalization({
+	local var1 = useLocalization({
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
 		ButtonCancel = "IAPExperience.InsufficientRobux.Action.Cancel",
 		BuyRobux = "IAPExperience.InsufficientRobux.Action.BuyRobux"
 	})
 	local _ = nil
 	local _ = nil
-	local var12, var13 = useFocusNavigationRefsModule(p0.buttons.cancelPurchaseActivated, nil)
+	local var2, var3 = useFocusNavigationRefsModule(p1.buttons.cancelPurchaseActivated, nil)
 	reactModule.useEffect(function()
-		-- upvalues: loggerModule (copy), p0 (ref), getAppContextModule (copy), default (copy), tooExpensiveUnifiedUpsellShownCounter (copy)
+		-- upvalues: loggerModule (copy), p1 (ref), getAppContextModule (copy), default (copy), tooExpensiveUnifiedUpsellShownCounter (copy)
 		loggerModule.debug({
 			message = "Too Expensive Unified Upsell Modal Shown (Dialog)",
-			screenHeight = p0.screenSize.Y,
-			screenWidth = p0.screenSize.X,
-			portrait = p0.screenSize.X < p0.screenSize.Y,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y,
 			appContext = getAppContextModule()
 		})
 		default:logRobloxTelemetryCounter(tooExpensiveUnifiedUpsellShownCounter, 1, {
-			screenHeight = p0.screenSize.Y,
-			screenWidth = p0.screenSize.X,
-			portrait = p0.screenSize.X < p0.screenSize.Y,
+			screenHeight = p1.screenSize.Y,
+			screenWidth = p1.screenSize.X,
+			portrait = p1.screenSize.X < p1.screenSize.Y,
 			appContext = getAppContextModule()
 		})
 	end, {})
@@ -51,21 +51,21 @@ local function UnifiedRobuxUpsellModalTooExpensiveV2(p0)
 	return reactModule.createElement(dialog.Root, {
 		disablePortal = false,
 		size = dialogSize.Medium,
-		onClose = p0.buttons.cancelPurchaseActivated,
-		ref = var12
+		onClose = p1.buttons.cancelPurchaseActivated,
+		ref = var2
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var11.NeedMoreRobux }),
+		DialogTitle = reactModule.createElement(dialog.Title, { text = var1.NeedMoreRobux }),
 		DialogContent = reactModule.createElement(dialog.Content, nil, {
 			ContentView = reactModule.createElement(view, {
 				tag = "col gap-medium auto-y size-full-0 align-x-center align-y-start padding-bottom-medium"
 			}, {
-				ProductDetails = if p0.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then reactModule.createElement(priceSummaryModule, { amount = p0.product.itemRobuxCost }) else reactModule.createElement(unifiedProductDetailsModule, {
+				ProductDetails = if p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then reactModule.createElement(priceSummaryModule, { amount = p1.product.itemRobuxCost }) else reactModule.createElement(unifiedProductDetailsModule, {
 					layoutOrder = 1,
-					isPortrait = p0.screenSize.X < p0.screenSize.Y,
-					model = p0.product.model,
-					itemIcon = p0.product.itemIcon,
-					itemName = p0.product.itemName,
-					itemRobuxCost = p0.product.itemRobuxCost
+					isPortrait = p1.screenSize.X < p1.screenSize.Y,
+					model = p1.product.model,
+					itemIcon = p1.product.itemIcon,
+					itemName = p1.product.itemName,
+					itemRobuxCost = p1.product.itemRobuxCost
 				})
 			})
 		}),
@@ -75,11 +75,11 @@ local function UnifiedRobuxUpsellModalTooExpensiveV2(p0)
 			actions = {
 				{
 					isDisabled = false,
-					text = var11.BuyRobux,
-					onActivated = p0.buttons.buyItemActivated,
+					text = var1.BuyRobux,
+					onActivated = p1.buttons.buyItemActivated,
 					variant = buttonVariant.Emphasis,
 					icon = foundationModule.Enums.IconName.ArrowUpRightFromSquare,
-					ref = var13
+					ref = var3
 				}
 			}
 		})

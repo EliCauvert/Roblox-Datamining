@@ -11,12 +11,12 @@ return function(p1, p2)
 	-- upvalues: pcallDeferredModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), analyticsModule (ref), getFIntFacsJointMaximumDistRatioDirectModule (ref), getFIntFacsJointMaximumDistRatioAccumulatedModule (ref)
 	local var1, var2 = pcallDeferredModule(function()
 		-- upvalues: getEditableMeshFromContextModule (copy), p1 (ref), p2 (ref), UGCValidationService (copy)
-		local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p2)
+		local var3, var4 = getEditableMeshFromContextModule(p1, "MeshId", p2)
 		
-		if not var1 then
+		if not var3 then
 			error("Failed to retrieve MeshContent")
 		end
-		return UGCValidationService:GetMaximalJointDistancesWithinFacs(var2)
+		return UGCValidationService:GetMaximalJointDistancesWithinFacs(var4)
 	end, p2)
 	
 	if not var1 then

@@ -24,7 +24,7 @@ return {
 			experienceStateRecordingService:SetPlaybackMode(Enum.ExperienceStateRecordingPlaybackMode.Stopped)
 		end
 		
-		function value.ControlButtons(p0)
+		function value.ControlButtons(p1)
 			-- upvalues: value (ref), createButtonsTimeModule (copy), replicatedStorageService (copy), experienceStateRecordingService (copy)
 			value.StopButton.ImageColor3 = createButtonsTimeModule.regularColor
 			value.StopButton:SetAttribute("useHoverColor", true)
@@ -32,10 +32,10 @@ return {
 			value.ReverseButton:SetAttribute("useHoverColor", true)
 			value.state.Reversing = false
 			
-			if p0 ~= value.PlayButton then
+			if p1 ~= value.PlayButton then
 				value.PlayButton.ImageColor3 = createButtonsTimeModule.regularColor
 			end
-			if p0 == value.PlayButton then
+			if p1 == value.PlayButton then
 				if value.state.Playing then
 					value.SetPaused()
 					
@@ -44,7 +44,7 @@ return {
 				value.SetPlaying()
 				
 				return
-			elseif p0 == value.StopButton then
+			elseif p1 == value.StopButton then
 				value.StopButton:SetAttribute("useHoverColor", false)
 				value.StopButton.ImageColor3 = createButtonsTimeModule.clickColor
 				value.LoadingOverlay.Visible = true
@@ -53,7 +53,7 @@ return {
 				replicatedStorageService:WaitForChild("TeleportRequest"):FireServer()
 				
 				return
-			elseif p0 == value.ReverseButton then
+			elseif p1 == value.ReverseButton then
 				value.state.Reversing = true
 				value.SetPaused()
 				value.ReverseButton:SetAttribute("useHoverColor", false)

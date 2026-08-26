@@ -6,70 +6,70 @@ local setupIsRolloutEnabledForUser = dependenciesModule.SocialLibraries.ReleaseH
 local getFStringSocialFriendsLayer = dependenciesModule.getFStringSocialFriendsLayer
 local useUserExperiment = dependenciesModule.useUserExperiment
 local IXPVariantsModule = require(contactImporter.Common.IXPVariants)
-local var3 = require(script.Parent.getFStringOffPlatformIXPName)()
+local var1 = require(script.Parent.getFStringOffPlatformIXPName)()
 local fFlagContactImporterIXPCleanup = require(parent.SharedFlags).FFlagContactImporterIXPCleanup
 
-local var4 = function()
+local var2 = function()
 	return game:GetFastInt("OffPlatformFriendRequestsRolloutEnabled")
 end
 
-local _ = function(p0)
-	-- upvalues: var3 (ref)
-	return if p0 then p0[var3] else nil
+local _ = function(p1)
+	-- upvalues: var1 (ref)
+	return if p1 then p1[var1] else nil
 end
+
+local var3 = function(p1)
+	-- upvalues: getFStringSocialFriendsLayer (ref), var1 (ref)
+	local var4 = if p1 then p1[getFStringSocialFriendsLayer()] else nil
+	
+	return if var4 then var4[var1] else nil
+end
+
+local var4 = setupIsRolloutEnabledForUser(var2)
 
 local var5 = function(p1)
-	-- upvalues: getFStringSocialFriendsLayer (ref), var3 (ref)
-	local var8 = if p1 then p1[getFStringSocialFriendsLayer()] else nil
+	-- upvalues: getFStringSocialFriendsLayer (ref), var1 (ref), IXPVariantsModule (ref), var4 (ref)
+	local var6 = if p1 then p1[getFStringSocialFriendsLayer()] else nil
+	local var7 = if var6 then var6[var1] else nil
+	local var8 = false
 	
-	return if var8 then var8[var3] else nil
-end
-
-local var6 = setupIsRolloutEnabledForUser(var4)
-
-local var7 = function(p2)
-	-- upvalues: getFStringSocialFriendsLayer (ref), var3 (ref), IXPVariantsModule (ref), var6 (ref)
-	local var9 = if p2 then p2[getFStringSocialFriendsLayer()] else nil
-	local var10 = if var9 then var9[var3] else nil
-	local var11 = false
-	
-	if var10 then
-		var10 = true
+	if var7 then
+		var7 = true
 		
-		if var10 ~= IXPVariantsModule.INVITES_ONLY then
-			var10 = var10 == IXPVariantsModule.BLENDED
+		if var7 ~= IXPVariantsModule.INVITES_ONLY then
+			var7 = var7 == IXPVariantsModule.BLENDED
 		end
-		var11 = var10
+		var8 = var7
 	end
-	return var11 or var6()
+	return var8 or var4()
 end
 
 return if fFlagContactImporterIXPCleanup then nil else {
-	experimentOrRolloutEnabled = var7,
+	experimentOrRolloutEnabled = var5,
 	IXPVariants = IXPVariantsModule,
 	useOffPlatformFriendRequestsVariant = function()
+		-- upvalues: useUserExperiment (ref), getFStringSocialFriendsLayer (ref), var3 (ref)
+		return useUserExperiment({ getFStringSocialFriendsLayer() }, var3)
+	end,
+	useOffPlatformFriendRequestsEnabled = function()
 		-- upvalues: useUserExperiment (ref), getFStringSocialFriendsLayer (ref), var5 (ref)
 		return useUserExperiment({ getFStringSocialFriendsLayer() }, var5)
 	end,
-	useOffPlatformFriendRequestsEnabled = function()
-		-- upvalues: useUserExperiment (ref), getFStringSocialFriendsLayer (ref), var7 (ref)
-		return useUserExperiment({ getFStringSocialFriendsLayer() }, var7)
-	end,
-	getExperimentVariant = var5,
-	isRolloutEnabled = function(p3)
-		-- upvalues: getFStringSocialFriendsLayer (ref), var3 (ref), IXPVariantsModule (ref), var6 (ref)
-		local var12 = if p3 then p3[getFStringSocialFriendsLayer()] else nil
-		local var13 = if var12 then var12[var3] else nil
-		local var14 = false
+	getExperimentVariant = var3,
+	isRolloutEnabled = function(p1)
+		-- upvalues: getFStringSocialFriendsLayer (ref), var1 (ref), IXPVariantsModule (ref), var4 (ref)
+		local var6 = if p1 then p1[getFStringSocialFriendsLayer()] else nil
+		local var7 = if var6 then var6[var1] else nil
+		local var8 = false
 		
-		if var13 then
-			var13 = true
+		if var7 then
+			var7 = true
 			
-			if var13 ~= IXPVariantsModule.INVITES_ONLY then
-				var13 = var13 == IXPVariantsModule.BLENDED
+			if var7 ~= IXPVariantsModule.INVITES_ONLY then
+				var7 = var7 == IXPVariantsModule.BLENDED
 			end
-			var14 = var13
+			var8 = var7
 		end
-		return if var14 or var6() then IXPVariantsModule.BLENDED else IXPVariantsModule.CONTROL
+		return if var8 or var4() then IXPVariantsModule.BLENDED else IXPVariantsModule.CONTROL
 	end
 }

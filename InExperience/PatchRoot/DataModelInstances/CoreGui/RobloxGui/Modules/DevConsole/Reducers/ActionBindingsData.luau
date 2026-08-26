@@ -1,9 +1,9 @@
 ﻿local immutableModule = require(script.Parent.Parent.Immutable)
 local actionBindingsUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ActionBindingsUpdateSearchFilter)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: actionBindingsUpdateSearchFilterModule (ref), immutableModule (ref)
-	p0 = p0 or { bindingsSearchTerm = "" }
+	p1 = p1 or { bindingsSearchTerm = "" }
 	
-	return if p1.type == actionBindingsUpdateSearchFilterModule.name then immutableModule.Set(p0, "bindingsSearchTerm", p1.searchTerm) else p0
+	return if p2.type == actionBindingsUpdateSearchFilterModule.name then immutableModule.Set(p1, "bindingsSearchTerm", p2.searchTerm) else p1
 end

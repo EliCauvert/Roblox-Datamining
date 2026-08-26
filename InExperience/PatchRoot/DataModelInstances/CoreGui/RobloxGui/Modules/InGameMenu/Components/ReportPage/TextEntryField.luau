@@ -9,8 +9,8 @@ local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packag
 local images = UIBlox.App.ImageSet.Images
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var4 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var5 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local parent = script.Parent.Parent.Parent
 local assetsModule = require(parent.Resources.Assets)
 local fillCircleModule = require(script.Parent.FillCircle)
@@ -32,10 +32,10 @@ textEntryField.validateProps = t.strictInterface({
 	textBoxRef = t.optional(t.table)
 })
 
-function textEntryField.init(p0)
+function textEntryField.init(p1)
 	-- upvalues: roact (ref)
-	p0.textBoxRef = p0.props.textBoxRef or roact.createRef()
-	p0.state = {
+	p1.textBoxRef = p1.props.textBoxRef or roact.createRef()
+	p1.state = {
 		textBoxWidth = 100,
 		scrollingFrameHeight = 100,
 		canvasPosition = 0,
@@ -50,43 +50,43 @@ function textEntryField.calculateNeedsRescroll(p1, p2, p3)
 		if p4.cursorPosition == -1 then
 			return nil
 		end
-		local var10 = p3.RelativeSize * p2.Font.BaseSize
-		local var11 = textService:GetTextSize(p5.text:sub(1, p4.cursorPosition - 1), var10, p3.Font, Vector2.new(p5.textBoxWidth, 10000))
+		local var3 = p3.RelativeSize * p2.Font.BaseSize
+		local var4 = textService:GetTextSize(p5.text:sub(1, p4.cursorPosition - 1), var3, p3.Font, Vector2.new(p5.textBoxWidth, 10000))
 		
-		return if p4.scrollingFrameHeight + p4.canvasPosition < var11.Y then { canvasPosition = var11.Y - p4.scrollingFrameHeight } elseif var11.Y - var10 < p4.canvasPosition then { canvasPosition = var11.Y - var10 } else nil
+		return if p4.scrollingFrameHeight + p4.canvasPosition < var4.Y then { canvasPosition = var4.Y - p4.scrollingFrameHeight } elseif var4.Y - var3 < p4.canvasPosition then { canvasPosition = var4.Y - var3 } else nil
 	end)
 end
 
-function textEntryField.renderWithSelectionCursor(p6, p7)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), circle17 (ref), roact (ref), var5 (ref), themedTextLabelModule (ref), images (ref), fillCircleModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref)
-	return withFoundationOrUIBloxStyle(function(p8)
+function textEntryField.renderWithSelectionCursor(p1, p2)
+	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), circle17 (ref), roact (ref), var2 (ref), themedTextLabelModule (ref), images (ref), fillCircleModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref)
+	return withFoundationOrUIBloxStyle(function(p3)
 		return {
 			Theme = {
 				TextDefault = {
-					Color = p8.Color.Content.Default.Color3,
-					Transparency = p8.Color.Content.Default.Transparency
+					Color = p3.Color.Content.Default.Color3,
+					Transparency = p3.Color.Content.Default.Transparency
 				},
 				BackgroundMuted = {
-					Color = p8.Color.Surface.Surface_200.Color3,
-					Transparency = p8.Color.Surface.Surface_200.Transparency
+					Color = p3.Color.Surface.Surface_200.Color3,
+					Transparency = p3.Color.Surface.Surface_200.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				Body = {
-					Font = p8.Typography.BodyLarge.Font,
-					RelativeSize = p8.Typography.BodyLarge.FontSize
+					Font = p3.Typography.BodyLarge.Font,
+					RelativeSize = p3.Typography.BodyLarge.FontSize
 				}
 			}
 		}
-	end, function(p9)
-		-- upvalues: textService (copy), p6 (ref), circle17 (copy), roact (copy), p7 (ref), var5 (copy), themedTextLabelModule (copy), images (copy), fillCircleModule (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy)
-		local textDefault = p9.Theme.TextDefault
-		local body = p9.Font.Body
-		local textTextSize = textService:GetTextSize(p6.props.text, body.RelativeSize * p9.Font.BaseSize, body.Font, Vector2.new(p6.state.textBoxWidth, 10000))
+	end, function(p3)
+		-- upvalues: textService (copy), p1 (ref), circle17 (copy), roact (copy), p2 (ref), var2 (copy), themedTextLabelModule (copy), images (copy), fillCircleModule (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy)
+		local textDefault = p3.Theme.TextDefault
+		local body = p3.Font.Body
+		local textTextSize = textService:GetTextSize(p1.props.text, body.RelativeSize * p3.Font.BaseSize, body.Font, Vector2.new(p1.state.textBoxWidth, 10000))
 		local imageRectOffset = circle17.ImageRectOffset
 		local x = circle17.ImageRectSize.X
-		local var13 = x / 2
+		local var3 = x / 2
 		local t = {
 			ScrollingFrame = roact.createElement("ScrollingFrame", {
 				Size = UDim2.new(1, -24, 1, -44),
@@ -97,17 +97,17 @@ function textEntryField.renderWithSelectionCursor(p6, p7)
 				CanvasSize = UDim2.new(1, -24, 0, textTextSize.Y),
 				ScrollBarThickness = 8,
 				VerticalScrollBarInset = Enum.ScrollBarInset.Always,
-				CanvasPosition = Vector2.new(0, p6.state.canvasPosition),
+				CanvasPosition = Vector2.new(0, p1.state.canvasPosition),
 				Selectable = false,
-				[roact.Change.CanvasPosition] = function(p10)
-					-- upvalues: p6 (copy)
-					p6:setState({ canvasPosition = p10.CanvasPosition.Y })
+				[roact.Change.CanvasPosition] = function(p4)
+					-- upvalues: p1 (copy)
+					p1:setState({ canvasPosition = p4.CanvasPosition.Y })
 				end,
-				[roact.Change.AbsoluteSize] = function(p11)
-					-- upvalues: p6 (copy), p9 (ref), body (ref)
-					p6:setState({ scrollingFrameHeight = p11.AbsoluteSize.Y }, function()
-						-- upvalues: p6 (copy), p9 (copy), body (copy)
-						p6:calculateNeedsRescroll(p9, body)
+				[roact.Change.AbsoluteSize] = function(p4)
+					-- upvalues: p1 (copy), p3 (ref), body (ref)
+					p1:setState({ scrollingFrameHeight = p4.AbsoluteSize.Y }, function()
+						-- upvalues: p1 (copy), p3 (copy), body (copy)
+						p1:calculateNeedsRescroll(p3, body)
 					end)
 				end
 			}, {
@@ -115,44 +115,44 @@ function textEntryField.renderWithSelectionCursor(p6, p7)
 					Size = UDim2.new(1, -2, 1, 0),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 0),
-					Text = p6.props.text,
+					Text = p1.props.text,
 					ClearTextOnFocus = false,
-					TextEditable = p6.props.enabled,
+					TextEditable = p1.props.enabled,
 					BackgroundTransparency = 1,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
 					TextColor3 = textDefault.Color,
 					TextTransparency = textDefault.Transparency,
 					Font = body.Font,
-					TextSize = body.RelativeSize * p9.Font.BaseSize,
+					TextSize = body.RelativeSize * p3.Font.BaseSize,
 					TextWrapped = true,
-					SelectionImageObject = p7(var5.InputFields),
-					[roact.Ref] = p6.textBoxRef,
-					[roact.Change.Text] = function(p12)
-						-- upvalues: p6 (copy), p9 (ref), body (ref)
-						if p6.props.maxTextLength < utf8.len(utf8.nfcnormalize(p12.Text)) then
-							p12.Text = string.sub(p12.Text, 1, utf8.offset(p12.Text, p6.props.maxTextLength + 1) - 1)
+					SelectionImageObject = p2(var2.InputFields),
+					[roact.Ref] = p1.textBoxRef,
+					[roact.Change.Text] = function(p4)
+						-- upvalues: p1 (copy), p3 (ref), body (ref)
+						if p1.props.maxTextLength < utf8.len(utf8.nfcnormalize(p4.Text)) then
+							p4.Text = string.sub(p4.Text, 1, utf8.offset(p4.Text, p1.props.maxTextLength + 1) - 1)
 							
 							return
 						end
-						p6.props.textChanged(p12.Text)
-						p6:setState({ cursorPosition = p12.CursorPosition }, function()
-							-- upvalues: p6 (copy), p9 (copy), body (copy)
-							p6:calculateNeedsRescroll(p9, body)
+						p1.props.textChanged(p4.Text)
+						p1:setState({ cursorPosition = p4.CursorPosition }, function()
+							-- upvalues: p1 (copy), p3 (copy), body (copy)
+							p1:calculateNeedsRescroll(p3, body)
 						end)
 					end,
-					[roact.Change.AbsoluteSize] = function(p13)
-						-- upvalues: p6 (copy), p9 (ref), body (ref)
-						p6:setState({ textBoxWidth = p13.AbsoluteSize.X }, function()
-							-- upvalues: p6 (copy), p9 (copy), body (copy)
-							p6:calculateNeedsRescroll(p9, body)
+					[roact.Change.AbsoluteSize] = function(p4)
+						-- upvalues: p1 (copy), p3 (ref), body (ref)
+						p1:setState({ textBoxWidth = p4.AbsoluteSize.X }, function()
+							-- upvalues: p1 (copy), p3 (copy), body (copy)
+							p1:calculateNeedsRescroll(p3, body)
 						end)
 					end,
-					[roact.Change.CursorPosition] = function(p14)
-						-- upvalues: p6 (copy), p9 (ref), body (ref)
-						p6:setState({ cursorPosition = p14.CursorPosition }, function()
-							-- upvalues: p6 (copy), p9 (copy), body (copy)
-							p6:calculateNeedsRescroll(p9, body)
+					[roact.Change.CursorPosition] = function(p4)
+						-- upvalues: p1 (copy), p3 (ref), body (ref)
+						p1:setState({ cursorPosition = p4.CursorPosition }, function()
+							-- upvalues: p1 (copy), p3 (copy), body (copy)
+							p1:calculateNeedsRescroll(p3, body)
 						end)
 					end
 				}, {
@@ -160,12 +160,12 @@ function textEntryField.renderWithSelectionCursor(p6, p7)
 						themeKey = "TextDefault",
 						fontKey = "Body",
 						TextTransparency = 0.5,
-						Text = p6.props.PlaceholderText,
+						Text = p1.props.PlaceholderText,
 						Size = UDim2.new(1, 0, 1, 0),
 						Position = UDim2.new(0, 0, 0, 0),
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Top,
-						Visible = p6.props.text == ""
+						Visible = p1.props.text == ""
 					})
 				})
 			}),
@@ -173,15 +173,15 @@ function textEntryField.renderWithSelectionCursor(p6, p7)
 				BackgroundTransparency = 1,
 				ImageTransparency = 0,
 				Image = circle17.Image,
-				ImageColor3 = p9.Theme.BackgroundMuted.Color,
+				ImageColor3 = p3.Theme.BackgroundMuted.Color,
 				ScaleType = Enum.ScaleType.Slice,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.new(0, 0, 1, 0),
 				Size = UDim2.new(1, 0, 0, 32),
-				SliceCenter = Rect.new(var13 - 1, 0, var13 + 1, 1),
+				SliceCenter = Rect.new(var3 - 1, 0, var3 + 1, 1),
 				SliceScale = 1 / images.ImagesResolutionScale,
-				ImageRectSize = Vector2.new(x, var13),
-				ImageRectOffset = imageRectOffset + Vector2.new(0, var13)
+				ImageRectSize = Vector2.new(x, var3),
+				ImageRectOffset = imageRectOffset + Vector2.new(0, var3)
 			}, {
 				TextAmmountIndicator = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -193,10 +193,10 @@ function textEntryField.renderWithSelectionCursor(p6, p7)
 						popCircleFraction = 1,
 						Position = UDim2.new(0.5, 0, 0.5, 0),
 						AnchorPoint = Vector2.new(0.5, 0.5),
-						fillFraction = utf8.len(utf8.nfcnormalize(p6.props.text)) / (p6.props.maxTextLength - 10),
-						largerCircleFraction = (p6.props.maxTextLength - 20) / p6.props.maxTextLength,
-						shakeCircleFraction = p6.props.maxTextLength / (p6.props.maxTextLength - 10),
-						BackgroundColor = p9.Theme.BackgroundMuted.Color
+						fillFraction = utf8.len(utf8.nfcnormalize(p1.props.text)) / (p1.props.maxTextLength - 10),
+						largerCircleFraction = (p1.props.maxTextLength - 20) / p1.props.maxTextLength,
+						shakeCircleFraction = p1.props.maxTextLength / (p1.props.maxTextLength - 10),
+						BackgroundColor = p3.Theme.BackgroundMuted.Color
 					})
 				})
 			})
@@ -205,48 +205,48 @@ function textEntryField.renderWithSelectionCursor(p6, p7)
 		return if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
 			Image = assetsModule.Images.RoundedRectImageKey,
 			imageStyle = {
-				Color3 = p9.Theme.BackgroundMuted.Color,
-				Transparency = p9.Theme.BackgroundMuted.Transparency
+				Color3 = p3.Theme.BackgroundMuted.Color,
+				Transparency = p3.Theme.BackgroundMuted.Transparency
 			},
-			Position = p6.props.Position,
-			Size = p6.props.Size,
-			LayoutOrder = p6.props.LayoutOrder,
+			Position = p1.props.Position,
+			Size = p1.props.Size,
+			LayoutOrder = p1.props.LayoutOrder,
 			slice = { center = Rect.new(8, 8, 9, 9) }
 		}, t) else roact.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
 			Image = assetsModule.Images.RoundedRect.Image,
-			ImageColor3 = p9.Theme.BackgroundMuted.Color,
-			ImageTransparency = p9.Theme.BackgroundMuted.Transparency,
-			Position = p6.props.Position,
+			ImageColor3 = p3.Theme.BackgroundMuted.Color,
+			ImageTransparency = p3.Theme.BackgroundMuted.Transparency,
+			Position = p1.props.Position,
 			ScaleType = assetsModule.Images.RoundedRect.ScaleType,
-			Size = p6.props.Size,
+			Size = p1.props.Size,
 			SliceCenter = assetsModule.Images.RoundedRect.SliceCenter,
-			LayoutOrder = p6.props.LayoutOrder
+			LayoutOrder = p1.props.LayoutOrder
 		}, t)
 	end)
 end
 
-function textEntryField.render(p15)
-	-- upvalues: var4 (ref)
-	return var4(function(p16)
-		-- upvalues: p15 (ref)
-		return p15:renderWithSelectionCursor(p16)
+function textEntryField.render(p1)
+	-- upvalues: var1 (ref)
+	return var1(function(p2)
+		-- upvalues: p1 (ref)
+		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-function textEntryField.didUpdate(p17, p18, _)
-	if not p17.props.enabled and p18.enabled then
-		if p17.textBoxRef.current and p17.textBoxRef.current:IsFocused() then
-			p17.textBoxRef.current:ReleaseFocus()
+function textEntryField.didUpdate(p1, p2, _)
+	if not p1.props.enabled and p2.enabled then
+		if p1.textBoxRef.current and p1.textBoxRef.current:IsFocused() then
+			p1.textBoxRef.current:ReleaseFocus()
 			
 			return
 		end
-	elseif p17.props.enabled and not p18.enabled and (p17.props.autoFocusOnEnabled and p17.textBoxRef.current) then
-		p17.textBoxRef.current:CaptureFocus()
+	elseif p1.props.enabled and not p2.enabled and (p1.props.autoFocusOnEnabled and p1.textBoxRef.current) then
+		p1.textBoxRef.current:CaptureFocus()
 	end
 end
 
-return roact.forwardRef(function(p19, p20)
+return roact.forwardRef(function(p1, p2)
 	-- upvalues: roact (ref), textEntryField (ref), cryo (ref)
-	return roact.createElement(textEntryField, cryo.Dictionary.join(p19, { textBoxRef = p20 }))
+	return roact.createElement(textEntryField, cryo.Dictionary.join(p1, { textBoxRef = p2 }))
 end)

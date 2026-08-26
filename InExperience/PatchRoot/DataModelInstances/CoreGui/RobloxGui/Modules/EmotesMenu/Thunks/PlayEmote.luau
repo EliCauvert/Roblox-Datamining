@@ -12,41 +12,41 @@ local maybeSendEmoteFailureAnalyticsFromPlayerModule = require(coreGuiService.Ro
 local hideMenuModule = require(actions.HideMenu)
 local hideErrorModule = require(actions.HideError)
 local showErrorModule = require(actions.ShowError)
-local var10 = analyticsModule.new():withEventStream(eventStream.new(rbxAnalyticsService))
+local var1 = analyticsModule.new():withEventStream(eventStream.new(rbxAnalyticsService))
 
-local function handlePlayFailure(p0, p1, p2, p3)
-	-- upvalues: var10 (ref), constantsModule (ref), robloxTranslatorModule (ref), showErrorModule (ref), hideErrorModule (ref), hideMenuModule (ref)
-	if p1 then
-		var10:onEmoteFailed(p2, p3, p1)
-		p0:dispatch(showErrorModule(robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.ErrorMessages[p1], p0:getState().locale)))
+local function handlePlayFailure(p1, p2, p3, p4)
+	-- upvalues: var1 (ref), constantsModule (ref), robloxTranslatorModule (ref), showErrorModule (ref), hideErrorModule (ref), hideMenuModule (ref)
+	if p2 then
+		var1:onEmoteFailed(p3, p4, p2)
+		p1:dispatch(showErrorModule(robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.ErrorMessages[p2], p1:getState().locale)))
 		delay(constantsModule.ErrorDisplayTimeSeconds, function()
-			-- upvalues: p0 (ref), hideErrorModule (copy)
-			p0:dispatch(hideErrorModule())
+			-- upvalues: p1 (ref), hideErrorModule (copy)
+			p1:dispatch(hideErrorModule())
 		end)
 	end
-	p0:dispatch(hideMenuModule())
+	p1:dispatch(hideMenuModule())
 end
 
-return function(_, p4, p5, _, _)
-	-- upvalues: localPlayer (ref), maybeSendEmoteFailureAnalyticsFromPlayerModule (ref), handlePlayFailure (ref), hideMenuModule (ref), var10 (ref), constantsModule (ref)
-	return function(p6)
-		-- upvalues: localPlayer (copy), maybeSendEmoteFailureAnalyticsFromPlayerModule (copy), handlePlayFailure (copy), p4 (ref), p5 (ref), hideMenuModule (copy), var10 (copy), constantsModule (copy)
-		if maybeSendEmoteFailureAnalyticsFromPlayerModule(localPlayer, function(p7)
-			-- upvalues: handlePlayFailure (copy), p6 (ref), p4 (copy), p5 (copy)
-			handlePlayFailure(p6, p7, p4, p5)
+return function(_, p1, p2, _, _)
+	-- upvalues: localPlayer (ref), maybeSendEmoteFailureAnalyticsFromPlayerModule (ref), handlePlayFailure (ref), hideMenuModule (ref), var1 (ref), constantsModule (ref)
+	return function(p3)
+		-- upvalues: localPlayer (copy), maybeSendEmoteFailureAnalyticsFromPlayerModule (copy), handlePlayFailure (copy), p1 (ref), p2 (ref), hideMenuModule (copy), var1 (copy), constantsModule (copy)
+		if maybeSendEmoteFailureAnalyticsFromPlayerModule(localPlayer, function(p4)
+			-- upvalues: handlePlayFailure (copy), p3 (ref), p1 (copy), p2 (copy)
+			handlePlayFailure(p3, p4, p1, p2)
 		end) then return end
-		p6:dispatch(hideMenuModule())
+		p3:dispatch(hideMenuModule())
 		local humanoid = localPlayer.Character:FindFirstChildOfClass("Humanoid")
 		local ok, status, _ = pcall(function()
-			-- upvalues: humanoid (ref), p5 (copy)
-			return humanoid:PlayEmoteAndGetAnimTrackById(p5)
+			-- upvalues: humanoid (ref), p2 (copy)
+			return humanoid:PlayEmoteAndGetAnimTrackById(p2)
 		end)
 		
 		if ok and status then
-			var10:onEmotePlayed(p4, p5)
+			var1:onEmotePlayed(p1, p2)
 			
 			return
 		end
-		handlePlayFailure(p6, constantsModule.ErrorTypes.TemporarilyUnavailable, p4, p5)
+		handlePlayFailure(p3, constantsModule.ErrorTypes.TemporarilyUnavailable, p1, p2)
 	end
 end

@@ -10,27 +10,27 @@ local t = {
 	throttlingPercentage = game:DefineFastInt("LuaAppInvalidPlayIntentThrottlingHundredthsPercent", 10000),
 	lastUpdated = { 26, 3, 18 }
 }
-local var3 = tModule.strictInterface({
+local var1 = tModule.strictInterface({
 	universeId = tModule.string,
 	playButtonState = tModule.string,
 	playabilityStatus = tModule.optional(tModule.string),
 	pageName = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then tModule.optional(tModule.string) else nil
 })
 
-return function(p0, p1)
-	-- upvalues: var3 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref)
-	local var4, var5 = var3(p1)
+return function(p1, p2)
+	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref)
+	local var2, var3 = var1(p2)
 	
-	if not var4 then
-		discoveryEventErrorLogger.reportError("InvalidPlayIntentInvalidInterface", var5)
+	if not var2 then
+		discoveryEventErrorLogger.reportError("InvalidPlayIntentInvalidInterface", var3)
 	end
 	telemetryService:LogEvent(t, {
-		eventContext = p0,
+		eventContext = p1,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-		customFields = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then p1 else {
-			universeId = p1.universeId,
-			playButtonState = p1.playButtonState,
-			playabilityStatus = p1.playabilityStatus
+		customFields = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then p2 else {
+			universeId = p2.universeId,
+			playButtonState = p2.playButtonState,
+			playabilityStatus = p2.playabilityStatus
 		}
 	})
 end

@@ -4,12 +4,12 @@ local reactModule = require(songbird.Parent.React)
 local createNextOrder = require(songbird.Parent.ReactUtils).createNextOrder
 local getFFlagSongbirdMusicIconThumbnailModule = require(songbird.Flags.getFFlagSongbirdMusicIconThumbnail)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createNextOrder (ref), foundationModule (ref), getFFlagSongbirdMusicIconThumbnailModule (ref), reactModule (ref)
-	local var4 = createNextOrder()
-	local var5 = foundationModule.Hooks.useTokens()
-	local size900 = var5.Size.Size_900
-	local thumbnailUrl = getFFlagSongbirdMusicIconThumbnailModule() and p0.thumbnailUrl
+	local var1 = createNextOrder()
+	local var2 = foundationModule.Hooks.useTokens()
+	local size900 = var2.Size.Size_900
+	local thumbnailUrl = getFFlagSongbirdMusicIconThumbnailModule() and p1.thumbnailUrl
 	
 	return reactModule.createElement(foundationModule.View, {
 		Size = UDim2.fromOffset(size900, size900),
@@ -17,21 +17,21 @@ return function(p0)
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		ClipsDescendants = if thumbnailUrl then true else nil,
 		backgroundStyle = if not thumbnailUrl then { Transparency = 0, Color3 = Color3.fromRGB(43, 45, 50) } else nil,
-		cornerRadius = UDim.new(0, var5.Radius.Medium),
-		LayoutOrder = if getFFlagSongbirdMusicIconThumbnailModule() then p0.layoutOrder else nil,
-		ZIndex = var4()
+		cornerRadius = UDim.new(0, var2.Radius.Medium),
+		LayoutOrder = if getFFlagSongbirdMusicIconThumbnailModule() then p1.layoutOrder else nil,
+		ZIndex = var1()
 	}, {
 		Thumbnail = if thumbnailUrl then reactModule.createElement(foundationModule.Image, {
 			tag = "size-full",
-			Image = p0.thumbnailUrl,
-			ZIndex = var4()
+			Image = p1.thumbnailUrl,
+			ZIndex = var1()
 		}) else nil,
 		Icon = if not thumbnailUrl then reactModule.createElement(foundationModule.Icon, {
 			name = "icons/common/music",
 			size = foundationModule.Enums.IconSize.Medium,
 			Position = UDim2.new(0.5, -1, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			ZIndex = var4()
+			ZIndex = var1()
 		}) else nil
 	})
 end

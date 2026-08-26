@@ -1,8 +1,8 @@
-﻿return function(p0, p1, p2)
+﻿return function(p1, p2, p3)
 	local ok, status = pcall(function()
-		-- upvalues: p0 (ref), p1 (ref)
-		return p0[p1]
+		-- upvalues: p1 (ref), p2 (ref)
+		return p1[p2]
 	end)
 	
-	return if ok then status else p2
+	return if ok then status else p3
 end

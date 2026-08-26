@@ -11,13 +11,13 @@ local fFlagSignalsNavP2NavigationPrimitives = require(parent.SharedFlags).FFlagS
 local dEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
 local _ = require(script.Parent.types)
 
-local function _(p0, p1, p2)
+local function _(p1, p2, p3)
 	-- upvalues: events (ref)
 	return table.freeze({
 		type = events.Action,
-		action = p0,
-		state = p1,
-		lastState = p2
+		action = p1,
+		state = p2,
+		lastState = p3
 	})
 end
 
@@ -25,19 +25,19 @@ return function(value)
 	-- upvalues: createSignal (ref), fFlagSignalsNavP2NavigationPrimitives (ref), actions (ref), events (ref), dEV (ref), signalsExperimentalModule (ref), createComputed (ref), getNavigation (ref)
 	local t = {}
 	local t_1 = {}
-	local var6, var7 = createSignal(false)
+	local var1, var2 = createSignal(false)
 	
-	local function _(p3)
+	local function _(p1)
 		-- upvalues: t (ref)
 		for i in t do
-			task.spawn(i, p3)
+			task.spawn(i, p1)
 		end
 	end
 	
 	local function notifyEvents()
-		-- upvalues: fFlagSignalsNavP2NavigationPrimitives (copy), var7 (ref), t_1 (write), t (ref)
+		-- upvalues: fFlagSignalsNavP2NavigationPrimitives (copy), var2 (ref), t_1 (write), t (ref)
 		if fFlagSignalsNavP2NavigationPrimitives then
-			var7(false)
+			var2(false)
 		end
 		t_1 = {}
 		
@@ -48,41 +48,41 @@ return function(value)
 		end
 	end
 	
-	local var9, var10 = createSignal(function()
+	local var3, var4 = createSignal(function()
 		-- upvalues: actions (copy), value (ref), events (copy), t_1 (write)
-		local var14 = actions.init()
-		local stateForAction = value.getStateForAction(var14)
+		local var5 = actions.init()
+		local stateForAction = value.getStateForAction(var5)
 		table.insert(t_1, table.freeze({
 			lastState = nil,
 			type = events.Action,
-			action = var14,
+			action = var5,
 			state = stateForAction
 		}))
 		
 		return stateForAction
 	end)
 	
-	local function dispatch(p4)
-		-- upvalues: dEV (copy), fFlagSignalsNavP2NavigationPrimitives (copy), var7 (ref), var10 (ref), value (ref), actions (copy), var9 (ref), events (copy), t (ref), t_1 (write), signalsExperimentalModule (copy)
-		if dEV and p4.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
+	local function dispatch(p2)
+		-- upvalues: dEV (copy), fFlagSignalsNavP2NavigationPrimitives (copy), var2 (ref), var4 (ref), value (ref), actions (copy), var3 (ref), events (copy), t (ref), t_1 (write), signalsExperimentalModule (copy)
+		if dEV and p2.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
 			if fFlagSignalsNavP2NavigationPrimitives then
-				var7(false)
+				var2(false)
 			end
-			var10(value.getStateForAction(actions.init()))
+			var4(value.getStateForAction(actions.init()))
 			
 			return true
 		else
-			local var16 = var9(false)
-			local stateForAction = value.getStateForAction(p4, var16)
-			local stateForAction_1 = stateForAction or var16
+			local var5 = var3(false)
+			local stateForAction = value.getStateForAction(p2, var5)
+			local stateForAction_1 = stateForAction or var5
 			local frozen = table.freeze({
 				type = events.Action,
-				action = p4,
+				action = p2,
 				state = stateForAction_1,
-				lastState = var16
+				lastState = var5
 			})
 			
-			if stateForAction == nil or stateForAction_1 == var16 then
+			if stateForAction == nil or stateForAction_1 == var5 then
 				for i in t do
 					task.spawn(i, frozen)
 				end
@@ -92,38 +92,38 @@ return function(value)
 				
 				if fFlagSignalsNavP2NavigationPrimitives then
 					signalsExperimentalModule.batch(function()
-						-- upvalues: var7 (copy), var10 (copy), stateForAction_1 (ref)
-						var7(true)
-						var10(stateForAction_1)
+						-- upvalues: var2 (copy), var4 (copy), stateForAction_1 (ref)
+						var2(true)
+						var4(stateForAction_1)
 					end)
 				else
-					var10(stateForAction_1)
+					var4(stateForAction_1)
 				end
 				return true
 			end
 		end
 	end
 	
-	local var12 = function()
+	local var6 = function()
 		return nil
 	end
 	
-	local var13 = createComputed(function(p5)
-		-- upvalues: var9 (ref), getNavigation (copy), value (ref), dispatch (ref), t (ref), var12 (write)
-		return getNavigation(value, var9(p5), dispatch, t, function(_, p6)
-			return p6
+	local var7 = createComputed(function(p3)
+		-- upvalues: var3 (ref), getNavigation (copy), value (ref), dispatch (ref), t (ref), var6 (write)
+		return getNavigation(value, var3(p3), dispatch, t, function(_, p4)
+			return p4
 		end, function()
-			-- upvalues: var12 (copy)
-			return var12()
+			-- upvalues: var6 (copy)
+			return var6()
 		end)
 	end)
-	var12 = var13
+	var6 = var7
 	
 	return {
 		dispatch = dispatch,
 		notifyEvents = notifyEvents,
-		getState = var9,
-		getNavigation = var13,
-		getIsNavigating = var6
+		getState = var3,
+		getNavigation = var7,
+		getIsNavigating = var1
 	}
 end

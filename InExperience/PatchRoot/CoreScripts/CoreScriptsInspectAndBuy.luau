@@ -5,7 +5,7 @@ local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreG
 local inspectAndBuy = robloxGui.Modules.InspectAndBuy
 local roactModule = require(corePackagesService.Packages.Roact)
 local inspectAndBuyModule = require(inspectAndBuy.Components.InspectAndBuy)
-local var5 = nil
+local var1 = nil
 local renderWithCoreScriptsStyleProviderModule = require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider)
 local fFlagAXEnableNewInspectAndBuyContainerModule = require(inspectAndBuy.Flags.FFlagAXEnableNewInspectAndBuyContainer)
 local topBarModule = require(robloxGui.Modules.TopBar)
@@ -22,30 +22,30 @@ if isInExperienceUIVREnabled then
 	UIManager = vrSpatialUiModule.UIManager
 	panelType = vrSpatialUiModule.Constants.PanelType
 end
-local function mount(p0, p1, p2, p3)
-	-- upvalues: var5 (write), roactModule (ref), renderWithCoreScriptsStyleProviderModule (ref), inspectAndBuyModule (ref), fFlagAXEnableNewInspectAndBuyContainerModule (ref), inspectAndBuyFixStyleLink (ref), isInExperienceUIVREnabled (ref), isSpatial (write), UIManager (write), panelType (write), robloxGui (ref), guiService (ref), fFlagTopBarSignalizeMenuOpen (ref), coreGuiCommonModule (ref), topBarModule (ref)
-	if var5 then
-		roactModule.unmount(var5)
-		var5 = nil
+local function mount(p1, p2, p3, p4)
+	-- upvalues: var1 (write), roactModule (ref), renderWithCoreScriptsStyleProviderModule (ref), inspectAndBuyModule (ref), fFlagAXEnableNewInspectAndBuyContainerModule (ref), inspectAndBuyFixStyleLink (ref), isInExperienceUIVREnabled (ref), isSpatial (write), UIManager (write), panelType (write), robloxGui (ref), guiService (ref), fFlagTopBarSignalizeMenuOpen (ref), coreGuiCommonModule (ref), topBarModule (ref)
+	if var1 then
+		roactModule.unmount(var1)
+		var1 = nil
 	end
-	local var13 = if fFlagAXEnableNewInspectAndBuyContainerModule then roactModule.createElement(inspectAndBuyModule, {
-		humanoidDescription = p0,
-		playerName = p1,
-		playerId = p2,
-		ctx = p3
+	local var2 = if fFlagAXEnableNewInspectAndBuyContainerModule then roactModule.createElement(inspectAndBuyModule, {
+		humanoidDescription = p1,
+		playerName = p2,
+		playerId = p3,
+		ctx = p4
 	}) else renderWithCoreScriptsStyleProviderModule({
 		inspectAndBuy = roactModule.createElement(inspectAndBuyModule, {
-			humanoidDescription = p0,
-			playerName = p1,
-			playerId = p2,
-			ctx = p3
+			humanoidDescription = p1,
+			playerName = p2,
+			playerId = p3,
+			ctx = p4
 		})
 	})
 	
 	if inspectAndBuyFixStyleLink then
-		var13 = roactModule.createElement("Folder", nil, var13)
+		var2 = roactModule.createElement("Folder", nil, var2)
 	end
-	var5 = if isInExperienceUIVREnabled and isSpatial() then roactModule.mount(var13, UIManager.getInstance():getPanelObject(panelType.MoreMenu), "InspectAndBuy") else roactModule.mount(var13, robloxGui, "InspectAndBuy")
+	var1 = if isInExperienceUIVREnabled and isSpatial() then roactModule.mount(var2, UIManager.getInstance():getPanelObject(panelType.MoreMenu), "InspectAndBuy") else roactModule.mount(var2, robloxGui, "InspectAndBuy")
 	guiService:SetMenuIsOpen(true, "InspectMenu")
 	
 	if fFlagTopBarSignalizeMenuOpen then
@@ -57,10 +57,10 @@ local function mount(p0, p1, p2, p3)
 end
 
 local function unmountInspectAndBuy()
-	-- upvalues: var5 (write), roactModule (ref), guiService (ref), fFlagTopBarSignalizeMenuOpen (ref), coreGuiCommonModule (ref), topBarModule (ref)
-	if var5 then
-		roactModule.unmount(var5)
-		var5 = nil
+	-- upvalues: var1 (write), roactModule (ref), guiService (ref), fFlagTopBarSignalizeMenuOpen (ref), coreGuiCommonModule (ref), topBarModule (ref)
+	if var1 then
+		roactModule.unmount(var1)
+		var1 = nil
 		guiService:SetMenuIsOpen(false, "InspectMenu")
 		
 		if fFlagTopBarSignalizeMenuOpen then
@@ -72,33 +72,33 @@ local function unmountInspectAndBuy()
 	end
 end
 
-local function _(p4, p5, p6)
+local function _(p1, p2, p3)
 	-- upvalues: mount (ref)
-	mount(p4, p5, nil, p6)
+	mount(p1, p2, nil, p3)
 end
 
-local _ = function(p7, p8)
+local _ = function(p1, p2)
 	-- upvalues: mount (ref)
-	mount(nil, nil, p7, p8)
+	mount(nil, nil, p1, p2)
 end
 
-guiService.InspectPlayerFromHumanoidDescriptionRequest:Connect(function(p9, p10)
+guiService.InspectPlayerFromHumanoidDescriptionRequest:Connect(function(p1, p2)
 	-- upvalues: mount (ref)
-	mount(p9, p10, nil, "developerThroughHumanoidDescription")
+	mount(p1, p2, nil, "developerThroughHumanoidDescription")
 end)
-guiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function(p11, p12)
+guiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function(p1, p2)
 	-- upvalues: mount (ref)
-	mount(nil, nil, p11, p12)
+	mount(nil, nil, p1, p2)
 end)
 guiService.CloseInspectMenuRequest:Connect(function()
-	-- upvalues: var5 (write), unmountInspectAndBuy (ref)
-	if var5 then
+	-- upvalues: var1 (write), unmountInspectAndBuy (ref)
+	if var1 then
 		unmountInspectAndBuy()
 	end
 end)
-guiService.InspectMenuEnabledChangedSignal:Connect(function(p13)
-	-- upvalues: var5 (write), unmountInspectAndBuy (ref)
-	if not p13 and var5 then
+guiService.InspectMenuEnabledChangedSignal:Connect(function(p1)
+	-- upvalues: var1 (write), unmountInspectAndBuy (ref)
+	if not p1 and var1 then
 		unmountInspectAndBuy()
 	end
 end)

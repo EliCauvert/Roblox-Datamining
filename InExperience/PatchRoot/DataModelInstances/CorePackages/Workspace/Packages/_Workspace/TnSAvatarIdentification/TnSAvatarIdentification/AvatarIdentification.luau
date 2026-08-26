@@ -7,44 +7,44 @@ local parent = tnSAvatarIdentification.Parent
 local getFFlagGetHumanoidDescriptionUpdatesV2E = require(parent.SharedFlags).GetFFlagGetHumanoidDescriptionUpdatesV2E
 local getHumanoidDescriptionModule = require(parent.GetHumanoidDescription)
 local identificationUtilsModule = require(script.Parent.IdentificationUtils)
-local var7 = getFIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundredthsModule() / 100
-local var8 = getFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModule() / 100
-local var9 = getFIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercentModule() / 100
+local var1 = getFIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundredthsModule() / 100
+local var2 = getFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModule() / 100
+local var3 = getFIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercentModule() / 100
 local t = {
-	getAvatarsForRegion = function(p0, p1, p2, p3, p4)
+	getAvatarsForRegion = function(p1, p2, p3, p4, p5)
 		local t = {}
-		local var15 = p4 < p3
-		local var16 = if var15 then p3 / p4 else p4 / p3
-		local var17 = if var15 then Vector2.new(var16, 1) else Vector2.new(1, var16)
+		local var4 = p5 < p4
+		local var5 = if var4 then p4 / p5 else p5 / p4
+		local var6 = if var4 then Vector2.new(var5, 1) else Vector2.new(1, var5)
 		
-		for i, v in pairs(p0) do
-			if intersectCircleBox(p1 * var17, p2 * var16, v.boundingBox.min * var17, v.boundingBox.max * var17, var17) and #v.convexHull >= 3 and intersectCirclePolygon(p1 * var17, p2 * var16, v.convexHull, var17) then
+		for i, v in pairs(p1) do
+			if intersectCircleBox(p2 * var6, p3 * var5, v.boundingBox.min * var6, v.boundingBox.max * var6, var6) and #v.convexHull >= 3 and intersectCirclePolygon(p2 * var6, p3 * var5, v.convexHull, var6) then
 				t[v.player.UserId] = v.player
 			end
 		end
 		return t
 	end,
-	getAvatarsForPoint = function(p5, p6)
+	getAvatarsForPoint = function(p6, p7)
 		local t = {}
 		
-		for i, v in pairs(p5) do
+		for i, v in pairs(p6) do
 			local boundingBox = v.boundingBox
 			
-			if p6.X >= boundingBox.min.X and p6.Y >= boundingBox.min.Y and (boundingBox.max.X >= p6.X and boundingBox.max.Y >= p6.Y) then
+			if p7.X >= boundingBox.min.X and p7.Y >= boundingBox.min.Y and (boundingBox.max.X >= p7.X and boundingBox.max.Y >= p7.Y) then
 				local convexHull = v.convexHull
 				
 				if #convexHull >= 3 then
-					local var19 = convexHull[#convexHull]
-					local var20 = true
-					local var21 = true
+					local var7 = convexHull[#convexHull]
+					local var8 = true
+					local var9 = true
 					
 					for i_1, v_1 in ipairs(convexHull) do
-						local var22 = (v_1 - var19):Cross(p6 - var19)
-						var21 = var21 and var22 <= 0
-						var20 = var20 and var22 >= 0
-						var19 = v_1
+						local var10 = (v_1 - var7):Cross(p7 - var7)
+						var9 = var9 and var10 <= 0
+						var8 = var8 and var10 >= 0
+						var7 = v_1
 					end
-					if var20 or var21 then
+					if var8 or var9 then
 						t[v.player.UserId] = v.player
 					end
 				end
@@ -52,7 +52,7 @@ local t = {
 		end
 		return t
 	end,
-	getVisibleAvatars = function(p7, p8)
+	getVisibleAvatars = function(p8, p9)
 		-- upvalues: playersService (ref), identificationUtilsModule (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), getHumanoidDescriptionModule (ref)
 		local players = playersService:GetPlayers()
 		local t = { totalPlayers = 0, checkedPlayers = 0, duration = 0 }
@@ -66,21 +66,21 @@ local t = {
 		if not localPlayer then
 			return {}, t
 		end
-		local var27
+		local var11
 		local character = localPlayer.Character
 		local _ = nil
-		local var25 = nil
+		local var12 = nil
 		local t_1 = {}
 		
 		if character then
-			var27 = identificationUtilsModule.getLocalCharacterPosition(character) or currentCamera.CFrame.Position
+			var11 = identificationUtilsModule.getLocalCharacterPosition(character) or currentCamera.CFrame.Position
 			
 			if identificationUtilsModule.shouldIgnoreLocalCharacter(character) then
 				t_1[#t_1 + 1] = character
 			end
 		else
-			var27 = currentCamera.CFrame.Position
-			var25 = false
+			var11 = currentCamera.CFrame.Position
+			var12 = false
 		end
 		local viewportInfo = identificationUtilsModule.getViewportInfo()
 		t.viewportInfo = viewportInfo
@@ -96,21 +96,21 @@ local t = {
 		end
 		
 		local _ = function()
-			-- upvalues: p8 (ref), processTime (ref)
-			return (p8 or 0.5) < os.clock() - processTime
+			-- upvalues: p9 (ref), processTime (ref)
+			return (p9 or 0.5) < os.clock() - processTime
 		end
 		
-		if var27 then
-			table.sort(players, function(p9, p10)
-				-- upvalues: var27 (write)
-				return p9:DistanceFromCharacter(var27) < p10:DistanceFromCharacter(var27)
+		if var11 then
+			table.sort(players, function(p10, p11)
+				-- upvalues: var11 (write)
+				return p10:DistanceFromCharacter(var11) < p11:DistanceFromCharacter(var11)
 			end)
 		end
 		for i, v in ipairs(players) do
-			if (v ~= localPlayer or p7) and v.Character then
-				if (p8 or 0.5) >= os.clock() - processTime then
+			if (v ~= localPlayer or p8) and v.Character then
+				if (p9 or 0.5) >= os.clock() - processTime then
 					local boundingBox, boundingBox_1 = v.Character:GetBoundingBox()
-					local magnitude = (boundingBox.Position - var27).Magnitude
+					local magnitude = (boundingBox.Position - var11).Magnitude
 					
 					if getDistanceAlongCamLookVector(boundingBox, currentCamera) < 0 then
 						t.checkedPlayers += 1
@@ -120,42 +120,42 @@ local t = {
 						if viewportCorners_1.X == 0 or viewportCorners_1.Y == 0 then
 							t.checkedPlayers += 1
 						else
-							local var36, var37 = getVisibleParts(currentCamera, v, t_1)
+							local var13, var14 = getVisibleParts(currentCamera, v, t_1)
 							
-							if (p8 or 0.5) >= os.clock() - processTime then
-								local var39 = #var37 / var36
-								local var40, var41 = getCoveringPolygon(var37, currentCamera, viewportInfo)
-								local var42 = nil
-								local var43 = nil
+							if (p9 or 0.5) >= os.clock() - processTime then
+								local var15 = #var14 / var13
+								local var16, var17 = getCoveringPolygon(var14, currentCamera, viewportInfo)
+								local var18 = nil
+								local var19 = nil
 								
 								if getFFlagGetHumanoidDescriptionUpdatesV2E() then
 									local humanoidDescription, humanoidDescription_1 = getHumanoidDescriptionModule.getHumanoidDescription(v.UserId)
-									var42 = humanoidDescription
-									var43 = humanoidDescription_1
+									var18 = humanoidDescription
+									var19 = humanoidDescription_1
 								end
 								t_2[v.UserId] = {
 									player = v,
 									distance = magnitude,
 									boundingBox = { min = viewportCorners, max = viewportCorners_1 },
-									hitRate = var39,
-									convexHull = var40,
-									pointProcessingStats = var41,
-									humanoidDescription = var42,
-									humanoidDescriptionStatus = var43
+									hitRate = var15,
+									convexHull = var16,
+									pointProcessingStats = var17,
+									humanoidDescription = var18,
+									humanoidDescriptionStatus = var19
 								}
 								t.checkedPlayers += 1
 							end
-							local var38 = t_2
+							local var20 = t_2
 							t.duration = os.clock() - processTime
 							
-							return var38, t
+							return var20, t
 						end
 					end
 				end
-				local var31 = t_2
+				local var21 = t_2
 				t.duration = os.clock() - processTime
 				
-				return var31, t
+				return var21, t
 			end
 		end
 		t.duration = os.clock() - processTime
@@ -164,34 +164,34 @@ local t = {
 	end
 }
 
-function getBBCorners(p11, p12)
+function getBBCorners(p10, p11)
 	local list = table.create(8)
-	local xVector = p11.XVector
-	local yVector = p11.YVector
-	local zVector = p11.ZVector
-	local var47 = 1
+	local xVector = p10.XVector
+	local yVector = p10.YVector
+	local zVector = p10.ZVector
+	local var22 = 1
 	
 	for i_2 = -0.5, 0.5 do
-		local var48 = xVector * i_2 * p12.X
+		local var23 = xVector * i_2 * p11.X
 		
 		for i_1 = -0.5, 0.5 do
-			local var49 = yVector * i_1 * p12.Y
+			local var24 = yVector * i_1 * p11.Y
 			
 			for i = -0.5, 0.5 do
-				list[var47] = p11.Position + var48 + var49 + zVector * i * p12.Z
-				var47 += 1
+				list[var22] = p10.Position + var23 + var24 + zVector * i * p11.Z
+				var22 += 1
 			end
 		end
 	end
 	return list
 end
 
-local var11 = var8 + 1
-local var12 = -var8
+local var25 = var2 + 1
+local var26 = -var2
 
-local _ = function(p13)
-	-- upvalues: var11 (ref), var12 (ref)
-	return if var11 >= p13.Y then if p13.Y >= var12 then if var11 >= p13.X then p13.X < var12 else true else true else true
+local _ = function(p12)
+	-- upvalues: var25 (ref), var26 (ref)
+	return if var25 >= p12.Y then if p12.Y >= var26 then if var25 >= p12.X then p12.X < var26 else true else true else true
 end
 
 local t_1 = {
@@ -201,14 +201,14 @@ local t_1 = {
 	wasSkipped = false
 }
 
-function getCoveringPolygon(p14, p15, p16)
-	-- upvalues: t_1 (ref), identificationUtilsModule (ref), var7 (ref), var11 (ref), var12 (ref), var9 (ref)
-	if #p14 == 0 then
+function getCoveringPolygon(p12, p13, p14)
+	-- upvalues: t_1 (ref), identificationUtilsModule (ref), var1 (ref), var25 (ref), var26 (ref), var3 (ref)
+	if #p12 == 0 then
 		return {}, t_1
 	end
 	local t = {}
 	
-	for i, v in ipairs(p14) do
+	for i, v in ipairs(p12) do
 		local target = v.target
 		
 		for i_1, v_1 in getBBCorners(target.ExtentsCFrame, target.ExtentsSize) do
@@ -216,31 +216,31 @@ function getCoveringPolygon(p14, p15, p16)
 		end
 	end
 	local t_2 = {}
-	local var52 = 0
-	local var53 = 0
-	assert(p16, "getCoveringPolygon requires viewportInfo")
+	local var27 = 0
+	local var28 = 0
+	assert(p14, "getCoveringPolygon requires viewportInfo")
 	
 	for i_1, v_1 in ipairs(t) do
-		local var55, var56, _ = identificationUtilsModule.worldToFullViewportPointNormalized(v_1, p15, p16)
+		local var29, var30, _ = identificationUtilsModule.worldToFullViewportPointNormalized(v_1, p13, p14)
 		
-		if var56 < var7 then
-			var52 += 1
+		if var30 < var1 then
+			var27 += 1
 			continue
 		end
-		if if var11 >= var55.Y then if var55.Y >= var12 then if var11 >= var55.X then var55.X < var12 else true else true else true then
-			var53 += 1
+		if if var25 >= var29.Y then if var29.Y >= var26 then if var25 >= var29.X then var29.X < var26 else true else true else true then
+			var28 += 1
 		else
-			t_2[#t_2 + 1] = var55
+			t_2[#t_2 + 1] = var29
 		end
 	end
 	local t_3 = {
 		wasSkipped = false,
 		total = #t,
-		offScreenDiscardCount = var53,
-		tooCloseDiscardCount = var52
+		offScreenDiscardCount = var28,
+		tooCloseDiscardCount = var27
 	}
 	
-	if var9 < (var52 + var53) / #t then
+	if var3 < (var27 + var28) / #t then
 		t_3.wasSkipped = true
 		
 		return {}, t_3
@@ -248,15 +248,15 @@ function getCoveringPolygon(p14, p15, p16)
 	return getConvexHull(t_2), t_3
 end
 
-function getDistanceAlongCamLookVector(p17, p18)
-	local cFrame = p18.CFrame
+function getDistanceAlongCamLookVector(p15, p16)
+	local cFrame = p16.CFrame
 	
-	return (p17.Position - cFrame.Position):Dot(cFrame.LookVector)
+	return (p15.Position - cFrame.Position):Dot(cFrame.LookVector)
 end
 
-function getVisibleParts(p19, p20, p21)
-	local position = p19.CFrame.Position
-	local character = p20.Character
+function getVisibleParts(p15, p16, p17)
+	local position = p15.CFrame.Position
+	local character = p16.Character
 	
 	if not character or not character.Parent then
 		return 0, {}
@@ -264,77 +264,77 @@ function getVisibleParts(p19, p20, p21)
 	local children = character:GetChildren()
 	local raycastParams = RaycastParams.new()
 	raycastParams.FilterType = Enum.RaycastFilterType.Exclude
-	raycastParams.FilterDescendantsInstances = p21
+	raycastParams.FilterDescendantsInstances = p17
 	raycastParams.IgnoreWater = true
-	local var59 = 0
+	local var31 = 0
 	local t = {}
 	
 	for i, v in ipairs(children) do
 		if v:IsA("BasePart") then
-			var59 += 1
-			local var61 = workspace:Raycast(position, v.CFrame.Position - position, raycastParams)
+			var31 += 1
+			local var32 = workspace:Raycast(position, v.CFrame.Position - position, raycastParams)
 			
-			if var61 and var61.Instance:IsDescendantOf(character) then
-				table.insert(t, { result = var61, target = v })
+			if var32 and var32.Instance:IsDescendantOf(character) then
+				table.insert(t, { result = var32, target = v })
 			end
 		end
 	end
-	return var59, t
+	return var31, t
 end
 
-local function _(p22, p23, p24)
-	return (p23 - p22):Cross(p24 - p23)
+local function _(p18, p19, p20)
+	return (p19 - p18):Cross(p20 - p19)
 end
 
-function getConvexHull(p25)
-	if #p25 <= 2 then
+function getConvexHull(p18)
+	if #p18 <= 2 then
 		return {}
 	end
-	local var65
+	local var33
 	local t = {}
-	local var63 = p25[1]
+	local var34 = p18[1]
 	local t_1 = {}
 	
-	for i = 2, #p25 do
-		var65 = p25[i]
+	for i = 2, #p18 do
+		var33 = p18[i]
 		
-		if var65.Y < var63.Y or var65.Y == var63.Y and var65.X < var63.X then
-			var63 = var65
+		if var33.Y < var34.Y or var33.Y == var34.Y and var33.X < var34.X then
+			var34 = var33
 		end
 	end
-	table.insert(t, var63)
+	table.insert(t, var34)
 	
 	local function _(vectorA)
-		-- upvalues: var63 (write)
-		local var71 = vectorA - var63
+		-- upvalues: var34 (write)
+		local var35 = vectorA - var34
 		
-		return math.atan2(var71.Y, var71.X)
+		return math.atan2(var35.Y, var35.X)
 	end
 	
-	for i_1, v in ipairs(p25) do
-		if v ~= var63 then
-			local var70 = v - var63
-			table.insert(t_1, Vector3.new(v.X, v.Y, math.atan2(var70.Y, var70.X)))
+	for i_1, v in ipairs(p18) do
+		if v ~= var34 then
+			local var35 = v - var34
+			table.insert(t_1, Vector3.new(v.X, v.Y, math.atan2(var35.Y, var35.X)))
 		end
 	end
 	table.sort(t_1, function(vectorA, vectorB)
-		-- upvalues: var63 (write)
-		return if vectorA.Z == vectorB.Z then (Vector2.new(vectorA.X, vectorA.Y) - var63).Magnitude < (Vector2.new(vectorB.X, vectorB.Y) - var63).Magnitude else vectorA.Z < vectorB.Z
+		-- upvalues: var34 (write)
+		return if vectorA.Z == vectorB.Z then (Vector2.new(vectorA.X, vectorA.Y) - var34).Magnitude < (Vector2.new(vectorB.X, vectorB.Y) - var34).Magnitude else vectorA.Z < vectorB.Z
 	end)
 	local t_2 = {}
-	var65 = t_1[1]
+	var33 = t_1[1]
 	
 	for i_2 = 2, #t_1 do
-		local var67 = t_1[i_2]
+		local var36 = t_1[i_2]
 		
-		if var65.Z == var67.Z then
-			var65 = var67
+		if var33.Z == var36.Z then
+			var33 = var36
 		else
-			table.insert(t_2, Vector2.new(var65.X, var65.Y))
-			var65 = var67
+			table.insert(t_2, Vector2.new(var33.X, var33.Y))
+			var33 = var36
 		end
 	end
-	table.insert(t_2, Vector2.new(var65.X, var65.Y))
+	table.insert(t_2, Vector2.new(var33.X, var33.Y))
 	
 	if #t_2 == 1 then
 		return {}
@@ -343,104 +343,104 @@ function getConvexHull(p25)
 	table.insert(t, t_2[2])
 	
 	for i_1 = 3, #t_2 do
-		local var68 = t_2[i_1]
+		local var37 = t_2[i_1]
 	end
 	return t
 end
 
-function projectVertices(p26, p27, p28)
-	local var72 = 1e999
-	local var73 = -1e999
+function projectVertices(p19, p20, p21)
+	local var38 = 1e999
+	local var39 = -1e999
 	
-	for i, v in ipairs(p26) do
-		local var74 = (v * p28):Dot(p27)
+	for i, v in ipairs(p19) do
+		local var40 = (v * p21):Dot(p20)
 		
-		if var74 < var72 then
-			var72 = var74
+		if var40 < var38 then
+			var38 = var40
 		end
-		if var73 < var74 then
-			var73 = var74
-		end
-	end
-	return var72, var73
-end
-
-function projectCircle(p29, p30, p31)
-	local var75 = p31.Unit * p30
-	local var76 = (p29 + var75):Dot(p31)
-	local var77 = (p29 - var75):Dot(p31)
-	
-	if var77 < var76 then
-		local var78 = var76
-		var76 = var77
-		var77 = var78
-	end
-	return var76, var77
-end
-
-function getClosestPoint(p32, p33, p34)
-	local var79 = -1
-	local var80 = 1e999
-	
-	for i, v in ipairs(p33) do
-		v *= p34
-		local squareRoot = math.sqrt(math.pow(v.X - p32.X, 2) + math.pow(v.Y - p32.Y, 2))
-		
-		if squareRoot < var80 then
-			var80 = squareRoot
-			var79 = i
+		if var39 < var40 then
+			var39 = var40
 		end
 	end
-	return var79
+	return var38, var39
 end
 
-function intersectCirclePolygon(p35, p36, p37, p38)
-	for i, v in ipairs(p37) do
-		local var87 = p37[i % #p37 + 1] * p38 - p37[i] * p38
-		local unit = Vector2.new(var87.Y, -var87.X).Unit
-		local var88, var89 = projectVertices(p37, unit, p38)
-		local var90, var91 = projectCircle(p35, p36, unit)
+function projectCircle(p22, p23, p24)
+	local var41 = p24.Unit * p23
+	local var42 = (p22 + var41):Dot(p24)
+	local var43 = (p22 - var41):Dot(p24)
+	
+	if var43 < var42 then
+		local var44 = var42
+		var42 = var43
+		var43 = var44
+	end
+	return var42, var43
+end
+
+function getClosestPoint(p22, p23, p24)
+	local var41 = -1
+	local var42 = 1e999
+	
+	for i, v in ipairs(p23) do
+		v *= p24
+		local squareRoot = math.sqrt(math.pow(v.X - p22.X, 2) + math.pow(v.Y - p22.Y, 2))
 		
-		if var91 <= var88 or var89 <= var90 then
+		if squareRoot < var42 then
+			var42 = squareRoot
+			var41 = i
+		end
+	end
+	return var41
+end
+
+function intersectCirclePolygon(p25, p26, p27, p28)
+	for i, v in ipairs(p27) do
+		local var43 = p27[i % #p27 + 1] * p28 - p27[i] * p28
+		local unit = Vector2.new(var43.Y, -var43.X).Unit
+		local var44, var45 = projectVertices(p27, unit, p28)
+		local var46, var47 = projectCircle(p25, p26, unit)
+		
+		if var47 <= var44 or var45 <= var46 then
 			return false
 		end
 	end
-	local var82 = getClosestPoint(p35, p37, p38)
+	local var48 = getClosestPoint(p25, p27, p28)
 	
-	if var82 == -1 then
+	if var48 == -1 then
 		return false
 	end
-	local unit = (p37[var82] - p35).Unit
-	local var83, var84 = projectVertices(p37, unit, p38)
-	local var85, var86 = projectCircle(p35, p36, unit)
+	local unit = (p27[var48] - p25).Unit
+	local var49, var50 = projectVertices(p27, unit, p28)
+	local var51, var52 = projectCircle(p25, p26, unit)
 	
-	return var86 <= var83 or var84 <= var85
+	return var52 <= var49 or var50 <= var51
 end
 
-function intersectCircleBox(p39, p40, p41, p42, _)
-	local x = p39.X
-	local y = p39.Y
-	local var92 = x
-	local var93 = y
-	local x_1 = p41.X
-	local y_1 = p41.Y
-	local var94 = p42.X - p41.X
-	local var95 = p42.Y - p41.Y
+function intersectCircleBox(p29, p30, p31, p32, _)
+	local x = p29.X
+	local y = p29.Y
+	local var53 = x
+	local var54 = y
+	local x_1 = p31.X
+	local y_1 = p31.Y
+	local var55 = p32.X - p31.X
+	local var56 = p32.Y - p31.Y
 	
 	if x < x_1 then
-		var92 = x_1
-	elseif x_1 + var94 < x then
-		var92 = x_1 + var94
+		var53 = x_1
+	elseif x_1 + var55 < x then
+		var53 = x_1 + var55
 	end
 	if y < y_1 then
-		var93 = y_1
-	elseif y_1 + var95 < y then
-		var93 = y_1 + var95
+		var54 = y_1
+	elseif y_1 + var56 < y then
+		var54 = y_1 + var56
 	end
-	local var96 = x - var92
-	local var97 = y - var93
+	local var57 = x - var53
+	local var58 = y - var54
 	
-	return math.sqrt(var96 * var96 + var97 * var97) <= p40
+	return math.sqrt(var57 * var57 + var58 * var58) <= p30
 end
 
 return t

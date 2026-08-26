@@ -5,21 +5,21 @@ local iconButton = require(parent.Foundation).IconButton
 
 local var1 = function() end
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), iconButton (ref), var1 (ref)
-	return if p0.icon and p0.icon.name then reactModule.createElement(iconButton, {
-		icon = p0.icon,
-		isCircular = p0.isCircular,
-		width = p0.width,
-		size = p0.size,
-		variant = p0.variant,
-		onActivated = p0.onActivated or var1,
-		LayoutOrder = p0.layoutOrder,
-		AnchorPoint = p0.anchorPoint,
-		Position = p0.position,
-		Visible = p0.visible,
-		ZIndex = p0.zIndex,
-		isDisabled = p0.isDisabled,
-		testId = p0.testId
+	return if p1.icon and p1.icon.name then reactModule.createElement(iconButton, {
+		icon = p1.icon,
+		isCircular = p1.isCircular,
+		width = p1.width,
+		size = p1.size,
+		variant = p1.variant,
+		onActivated = p1.onActivated or var1,
+		LayoutOrder = p1.layoutOrder,
+		AnchorPoint = p1.anchorPoint,
+		Position = p1.position,
+		Visible = p1.visible,
+		ZIndex = p1.zIndex,
+		isDisabled = p1.isDisabled,
+		testId = p1.testId
 	}) else nil
 end)

@@ -2,30 +2,30 @@
 local t = {}
 t.__index = t
 
-function t.new(p0, p1)
+function t.new(p1, p2)
 	-- upvalues: invariantModule (ref), t (ref)
-	invariantModule(type(p0) == "string", "pageName should be string")
-	invariantModule(typeof(p1) == "userdata", "event should be RoactNavigation.Event")
-	local t_1 = { event = p1, pageName = p0 }
+	invariantModule(type(p1) == "string", "pageName should be string")
+	invariantModule(typeof(p2) == "userdata", "event should be RoactNavigation.Event")
+	local t_1 = { event = p2, pageName = p1 }
 	setmetatable(t_1, t)
 	
 	return t_1
 end
 
-function t.isPageNavigationEvent(p2)
+function t.isPageNavigationEvent(p1)
 	-- upvalues: t (ref)
-	return getmetatable(p2).__index == t
+	return getmetatable(p1).__index == t
 end
 
 function t:__tostring()
 	return string.format("%-15s - %s", tostring(self.event), self.pageName)
 end
 
-function t:equalTo(p3)
+function t:equalTo(p1)
 	-- upvalues: invariantModule (ref), t (ref)
-	invariantModule(t.isPageNavigationEvent(p3), "should be PageNavigationEvent")
+	invariantModule(t.isPageNavigationEvent(p1), "should be PageNavigationEvent")
 	
-	return self.pageName == p3.pageName and self.event == p3.event
+	return self.pageName == p1.pageName and self.event == p1.event
 end
 
 return t

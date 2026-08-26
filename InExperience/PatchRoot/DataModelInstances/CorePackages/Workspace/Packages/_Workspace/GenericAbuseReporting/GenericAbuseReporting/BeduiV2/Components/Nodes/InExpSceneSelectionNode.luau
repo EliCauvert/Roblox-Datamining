@@ -13,31 +13,31 @@ local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReport
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), getIsInExpSceneSelectionAvailableModule (ref), telemetryEventType (ref), inExpSceneSelectionAdapterModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), textWithTranslationModule (ref)
-	local var9, var10 = reactModule.useState(p0.loadingText)
+	local var1, var2 = reactModule.useState(p1.loadingText)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
-	local var11 = useLayoutSlots()
-	local layout = var11.Layout
-	local title = var11.Title
-	local var12 = reactModule.useRef(p0)
-	var12.current = p0
-	local var13 = reactModule.useRef(sendEvent)
-	var13.current = sendEvent
+	local var3 = useLayoutSlots()
+	local layout = var3.Layout
+	local title = var3.Title
+	local var4 = reactModule.useRef(p1)
+	var4.current = p1
+	local var5 = reactModule.useRef(sendEvent)
+	var5.current = sendEvent
 	reactModule.useEffect(function()
-		-- upvalues: getIsInExpSceneSelectionAvailableModule (copy), var13 (ref), telemetryEventType (copy), var12 (ref), var10 (ref), inExpSceneSelectionAdapterModule (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
+		-- upvalues: getIsInExpSceneSelectionAvailableModule (copy), var5 (ref), telemetryEventType (copy), var4 (ref), var2 (ref), inExpSceneSelectionAdapterModule (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
 		if getIsInExpSceneSelectionAvailableModule() then
-			local var14 = nil
-			var14 = inExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p1)
-				-- upvalues: var14 (write), var13 (copy), telemetryEventType (copy), var12 (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
-				var14 = nil
-				var13.current({
+			local var6 = nil
+			var6 = inExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p2)
+				-- upvalues: var6 (write), var5 (copy), telemetryEventType (copy), var4 (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
+				var6 = nil
+				var5.current({
 					sub_event_type = telemetryEventType.SceneCaptureResult,
-					scene_capture_detail = { exit_reason = p1.reason, success = p1.reason == "submit" }
+					scene_capture_detail = { exit_reason = p2.reason, success = p2.reason == "submit" }
 				})
-				local current = var12.current
+				local current = var4.current
 				
-				if p1.reason == "submit" then
+				if p2.reason == "submit" then
 					if fFlagAbuseReportSceneSelectionSubmitTrackingModule and current.onExternalSubmit then
 						current.onExternalSubmit(submitSource.SceneSelection)
 					end
@@ -52,53 +52,53 @@ return reactModule.memo(function(p0)
 			end)
 			
 			if not pcall(inExpSceneSelectionAdapterModule.start) then
-				var13.current({
+				var5.current({
 					sub_event_type = telemetryEventType.SceneCaptureResult,
 					scene_capture_detail = { exit_reason = "start_failed", success = false }
 				})
 				
-				if var14 then
-					var14:Disconnect()
-					var14 = nil
+				if var6 then
+					var6:Disconnect()
+					var6 = nil
 				end
-				local current = var12.current
+				local current = var4.current
 				
 				if current.onFailure then
 					current.onFailure()
 				else
-					var10(current.errorText)
+					var2(current.errorText)
 				end
 			end
 			return function()
-				-- upvalues: var14 (write)
-				if var14 then
-					var14:Disconnect()
-					var14 = nil
+				-- upvalues: var6 (write)
+				if var6 then
+					var6:Disconnect()
+					var6 = nil
 				end
 			end
 		else
-			var13.current({
+			var5.current({
 				sub_event_type = telemetryEventType.SceneCaptureResult,
 				scene_capture_detail = { exit_reason = "unavailable", success = false }
 			})
-			local current = var12.current
+			local current = var4.current
 			
 			if current.onFailure then
 				current.onFailure()
 				
 				return
 			end
-			var10(current.errorText)
+			var2(current.errorText)
 		end
 	end, {})
 	
 	return reactModule.createElement(layout, {
 		body = reactModule.createElement(reactModule.Fragment, nil, {
-			Title = reactModule.createElement(title, { layoutOrder = 1, input = p0.title }),
-			Message = if var9 then reactModule.createElement(textWithTranslationModule, {
+			Title = reactModule.createElement(title, { layoutOrder = 1, input = p1.title }),
+			Message = if var1 then reactModule.createElement(textWithTranslationModule, {
 				tag = "size-full-0 auto-y text-body-small",
 				layoutOrder = 2,
-				input = var9
+				input = var1
 			}) else nil
 		})
 	})

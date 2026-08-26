@@ -6,12 +6,12 @@ local shareLinkClassificationModule = require(script.Parent.ShareLinkClassificat
 local fFlagMomentsPassFeedItemIdToBackendApis = require(parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), httpService (ref), shareLinkTargetIdType (ref)
-	if not fFlagMomentsPassFeedItemIdToBackendApis or p0 == "" then
+	if not fFlagMomentsPassFeedItemIdToBackendApis or p1 == "" then
 		return nil
 	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, p0)
+	local ok, status = pcall(httpService.JSONDecode, httpService, p1)
 	
 	return if ok and type(status) == "table" and status.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
 end
@@ -23,7 +23,7 @@ return function(p1)
 	elseif p1.linkType ~= "Moments" then
 		return { type = shareLinkClassificationModule.Unhandled }
 	end
-	local var4
+	local var1
 	local t = {
 		type = shareLinkClassificationModule.Moment,
 		momentId = p1.targetId
@@ -32,11 +32,11 @@ return function(p1)
 	
 	if fFlagMomentsPassFeedItemIdToBackendApis and customData ~= "" then
 		local ok, status = pcall(httpService.JSONDecode, httpService, customData)
-		var4 = if ok and type(status) == "table" and status.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
+		var1 = if ok and type(status) == "table" and status.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
 	else
-		var4 = nil
+		var1 = nil
 	end
-	t.targetIdType = var4
+	t.targetIdType = var1
 	
 	return t
 end

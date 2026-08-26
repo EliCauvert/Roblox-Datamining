@@ -27,13 +27,13 @@ local t_1 = {
 	end
 }
 
-local function _(p0)
+local function _(p1)
 	return {
-		query = p0.query,
-		assetType = p0.assetType,
-		universeId = p0.universeId,
-		maxPageSize = p0.maxPageSize,
-		pageToken = p0.pageToken
+		query = p1.query,
+		assetType = p1.assetType,
+		universeId = p1.universeId,
+		maxPageSize = p1.maxPageSize,
+		pageToken = p1.pageToken
 	}
 end
 
@@ -48,35 +48,35 @@ local _ = function(p1)
 	})
 end
 
-local _ = function(value, p2)
-	return `{value}:{p2}`
+local _ = function(value, p1)
+	return `{value}:{p1}`
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: getLocalPlayerUserId (ref), createDataCacheModule (ref), createDataResolverModule (ref), fetchCreatorInventorySearchModule (ref), httpService (ref), t (ref), t_1 (ref)
-	p3 = p3 or {}
+	p1 = p1 or {}
 	
 	local function _()
-		-- upvalues: p3 (ref), getLocalPlayerUserId (copy)
-		return if p3.getLocalPlayerUserId == nil then getLocalPlayerUserId() else p3.getLocalPlayerUserId()
+		-- upvalues: p1 (ref), getLocalPlayerUserId (copy)
+		return if p1.getLocalPlayerUserId == nil then getLocalPlayerUserId() else p1.getLocalPlayerUserId()
 	end
 	
 	local t_2 = {}
-	local var10 = false
-	local var11 = nil
+	local var1 = false
+	local var2 = nil
 	
-	local function normalizeResponse(p4, p5, p6)
+	local function normalizeResponse(p2, p3, p4)
 		local t = {}
 		local t_1 = {}
 		
-		for i, v in p6.items do
+		for i, v in p4.items do
 			local assetItem = v.assetItem
 			
 			if assetItem ~= nil then
 				local asset = assetItem.asset
 				local assetId = asset.assetId
 				table.insert(t, assetId)
-				t_1[`{p5}:{assetId}`] = {
+				t_1[`{p3}:{assetId}`] = {
 					assetId = assetId,
 					displayName = asset.displayName,
 					description = asset.description,
@@ -91,33 +91,33 @@ return function(p3)
 				}
 			end
 		end
-		p4.replaceItems(t_1)
+		p2.replaceItems(t_1)
 		
-		return { assetIds = t, nextPageToken = p6.nextPageToken }
+		return { assetIds = t, nextPageToken = p4.nextPageToken }
 	end
 	
-	local var13 = nil
-	local var14 = nil
+	local var3 = nil
+	local var4 = nil
 	
 	local function createGeneration()
-		-- upvalues: var11 (write), createDataCacheModule (copy), createDataResolverModule (copy), t_2 (write), p3 (ref), getLocalPlayerUserId (copy), fetchCreatorInventorySearchModule (copy), normalizeResponse (ref), var13 (write), var14 (write)
+		-- upvalues: var2 (write), createDataCacheModule (copy), createDataResolverModule (copy), t_2 (write), p1 (ref), getLocalPlayerUserId (copy), fetchCreatorInventorySearchModule (copy), normalizeResponse (ref), var3 (write), var4 (write)
 		local t = {}
-		var11 = t
-		local var19 = createDataCacheModule()
-		var13 = var19
-		var14 = createDataResolverModule({
+		var2 = t
+		local var5 = createDataCacheModule()
+		var3 = var5
+		var4 = createDataResolverModule({
 			supportsMultiGet = false,
 			replaceItems = true,
 			cache = createDataCacheModule(),
-			fetchFn = function(p7, _)
-				-- upvalues: t_2 (copy), p3 (copy), getLocalPlayerUserId (copy), fetchCreatorInventorySearchModule (copy), var11 (copy), t (ref), normalizeResponse (copy), var19 (ref)
-				local var20 = t_2[p7]
-				assert(var20 ~= nil, `Missing Creator Inventory params for {p7}`)
-				local var21 = if p3.getLocalPlayerUserId ~= nil then getLocalPlayerUserId() else p3.getLocalPlayerUserId()
+			fetchFn = function(p5, _)
+				-- upvalues: t_2 (copy), p1 (copy), getLocalPlayerUserId (copy), fetchCreatorInventorySearchModule (copy), var2 (copy), t (ref), normalizeResponse (copy), var5 (ref)
+				local var6 = t_2[p5]
+				assert(var6 ~= nil, `Missing Creator Inventory params for {p5}`)
+				local var7 = if p1.getLocalPlayerUserId ~= nil then getLocalPlayerUserId() else p1.getLocalPlayerUserId()
 				
-				return fetchCreatorInventorySearchModule(var20, { network = p3.network, baseUrl = p3.baseUrl }):andThen(function(p8)
-					-- upvalues: var11 (copy), t (copy), var21 (ref), p3 (copy), getLocalPlayerUserId (copy), normalizeResponse (copy), var19 (copy), var20 (ref)
-					return if var11 == t and var21 == (if p3.getLocalPlayerUserId ~= nil then getLocalPlayerUserId() else p3.getLocalPlayerUserId()) then normalizeResponse(var19, var20.universeId, p8) else { nextPageToken = nil, assetIds = {} }
+				return fetchCreatorInventorySearchModule(var6, { network = p1.network, baseUrl = p1.baseUrl }):andThen(function(p6)
+					-- upvalues: var2 (copy), t (copy), var7 (ref), p1 (copy), getLocalPlayerUserId (copy), normalizeResponse (copy), var5 (copy), var6 (ref)
+					return if var2 == t and var7 == (if p1.getLocalPlayerUserId ~= nil then getLocalPlayerUserId() else p1.getLocalPlayerUserId()) then normalizeResponse(var5, var6.universeId, p6) else { nextPageToken = nil, assetIds = {} }
 				end)
 			end
 		})
@@ -126,153 +126,153 @@ return function(p3)
 	createGeneration()
 	
 	local _ = function()
-		-- upvalues: var11 (write), var14 (write), var13 (write)
-		var11 = nil
-		var14.clear()
-		var14.dispose()
-		var13.dispose()
+		-- upvalues: var2 (write), var4 (write), var3 (write)
+		var2 = nil
+		var4.clear()
+		var4.dispose()
+		var3.dispose()
 	end
 	
-	local _ = function(p9)
+	local _ = function(p5)
 		-- upvalues: httpService (copy), t_2 (write)
-		local var22 = httpService:JSONEncode({
-			query = p9.query,
-			assetType = p9.assetType,
-			universeId = p9.universeId,
-			maxPageSize = p9.maxPageSize,
-			pageToken = p9.pageToken
+		local var6 = httpService:JSONEncode({
+			query = p5.query,
+			assetType = p5.assetType,
+			universeId = p5.universeId,
+			maxPageSize = p5.maxPageSize,
+			pageToken = p5.pageToken
 		})
-		t_2[var22] = {
-			query = p9.query,
-			assetType = p9.assetType,
-			universeId = p9.universeId,
-			maxPageSize = p9.maxPageSize,
-			pageToken = p9.pageToken
+		t_2[var6] = {
+			query = p5.query,
+			assetType = p5.assetType,
+			universeId = p5.universeId,
+			maxPageSize = p5.maxPageSize,
+			pageToken = p5.pageToken
 		}
 		
-		return var22
+		return var6
 	end
 	
 	return {
-		getSearch = function(p10)
-			-- upvalues: var10 (write), t (copy), var14 (write), httpService (copy), t_2 (write)
-			if var10 then
+		getSearch = function(p5)
+			-- upvalues: var1 (write), t (copy), var4 (write), httpService (copy), t_2 (write)
+			if var1 then
 				return t
 			end
-			local getCachedItem = var14.getCachedItem
-			local var23 = httpService:JSONEncode({
-				query = p10.query,
-				assetType = p10.assetType,
-				universeId = p10.universeId,
-				maxPageSize = p10.maxPageSize,
-				pageToken = p10.pageToken
+			local getCachedItem = var4.getCachedItem
+			local var6 = httpService:JSONEncode({
+				query = p5.query,
+				assetType = p5.assetType,
+				universeId = p5.universeId,
+				maxPageSize = p5.maxPageSize,
+				pageToken = p5.pageToken
 			})
-			t_2[var23] = {
-				query = p10.query,
-				assetType = p10.assetType,
-				universeId = p10.universeId,
-				maxPageSize = p10.maxPageSize,
-				pageToken = p10.pageToken
+			t_2[var6] = {
+				query = p5.query,
+				assetType = p5.assetType,
+				universeId = p5.universeId,
+				maxPageSize = p5.maxPageSize,
+				pageToken = p5.pageToken
 			}
 			
-			return getCachedItem(var23)
+			return getCachedItem(var6)
 		end,
-		fetchSearch = function(p11)
-			-- upvalues: var10 (write), t (copy), var14 (write), httpService (copy), t_2 (write)
-			if var10 then
+		fetchSearch = function(p5)
+			-- upvalues: var1 (write), t (copy), var4 (write), httpService (copy), t_2 (write)
+			if var1 then
 				return t
 			end
-			local fetchItem = var14.fetchItem
-			local var24 = httpService:JSONEncode({
-				query = p11.query,
-				assetType = p11.assetType,
-				universeId = p11.universeId,
-				maxPageSize = p11.maxPageSize,
-				pageToken = p11.pageToken
+			local fetchItem = var4.fetchItem
+			local var6 = httpService:JSONEncode({
+				query = p5.query,
+				assetType = p5.assetType,
+				universeId = p5.universeId,
+				maxPageSize = p5.maxPageSize,
+				pageToken = p5.pageToken
 			})
-			t_2[var24] = {
-				query = p11.query,
-				assetType = p11.assetType,
-				universeId = p11.universeId,
-				maxPageSize = p11.maxPageSize,
-				pageToken = p11.pageToken
+			t_2[var6] = {
+				query = p5.query,
+				assetType = p5.assetType,
+				universeId = p5.universeId,
+				maxPageSize = p5.maxPageSize,
+				pageToken = p5.pageToken
 			}
 			
-			return fetchItem(var24)
+			return fetchItem(var6)
 		end,
-		getAndFetchSearch = function(p12)
-			-- upvalues: var10 (write), t (copy), var14 (write), httpService (copy), t_2 (write)
-			if var10 then
+		getAndFetchSearch = function(p5)
+			-- upvalues: var1 (write), t (copy), var4 (write), httpService (copy), t_2 (write)
+			if var1 then
 				return t
 			end
-			local getAndFetchItem = var14.getAndFetchItem
-			local var25 = httpService:JSONEncode({
-				query = p12.query,
-				assetType = p12.assetType,
-				universeId = p12.universeId,
-				maxPageSize = p12.maxPageSize,
-				pageToken = p12.pageToken
+			local getAndFetchItem = var4.getAndFetchItem
+			local var6 = httpService:JSONEncode({
+				query = p5.query,
+				assetType = p5.assetType,
+				universeId = p5.universeId,
+				maxPageSize = p5.maxPageSize,
+				pageToken = p5.pageToken
 			})
-			t_2[var25] = {
-				query = p12.query,
-				assetType = p12.assetType,
-				universeId = p12.universeId,
-				maxPageSize = p12.maxPageSize,
-				pageToken = p12.pageToken
+			t_2[var6] = {
+				query = p5.query,
+				assetType = p5.assetType,
+				universeId = p5.universeId,
+				maxPageSize = p5.maxPageSize,
+				pageToken = p5.pageToken
 			}
 			
-			return getAndFetchItem(var25)
+			return getAndFetchItem(var6)
 		end,
-		getAsset = function(value, p13)
-			-- upvalues: var10 (write), t_1 (copy), var13 (write)
-			return if var10 then t_1 else var13.getItem(`{value}:{p13}`)
+		getAsset = function(value, p5)
+			-- upvalues: var1 (write), t_1 (copy), var3 (write)
+			return if var1 then t_1 else var3.getItem(`{value}:{p5}`)
 		end,
-		getAssets = function(value, p14)
-			-- upvalues: var10 (write), t_1 (copy), var13 (write)
-			if var10 then
+		getAssets = function(value, p5)
+			-- upvalues: var1 (write), t_1 (copy), var3 (write)
+			if var1 then
 				local t = {}
 				
-				for i, v in p14 do
+				for i, v in p5 do
 					t[tostring(v)] = t_1
 				end
 				return t
 			else
-				local list = table.create(#p14)
+				local list = table.create(#p5)
 				
-				for i, v in p14 do
+				for i, v in p5 do
 					list[i] = `{value}:{v}`
 				end
-				local items = var13.getItems(list)
+				local items = var3.getItems(list)
 				local t = {}
 				
-				for i_1, v_1 in p14 do
+				for i_1, v_1 in p5 do
 					t[tostring(v_1)] = items[`{value}:{v_1}`]
 				end
 				return t
 			end
 		end,
 		invalidateAll = function()
-			-- upvalues: var10 (write), var11 (write), var14 (write), var13 (write), t_2 (write), createGeneration (ref)
-			if var10 then
+			-- upvalues: var1 (write), var2 (write), var4 (write), var3 (write), t_2 (write), createGeneration (ref)
+			if var1 then
 				return
 			end
-			var11 = nil
-			var14.clear()
-			var14.dispose()
-			var13.dispose()
+			var2 = nil
+			var4.clear()
+			var4.dispose()
+			var3.dispose()
 			t_2 = {}
 			createGeneration()
 		end,
 		dispose = function()
-			-- upvalues: var10 (write), var11 (write), var14 (write), var13 (write), t_2 (write)
-			if var10 then
+			-- upvalues: var1 (write), var2 (write), var4 (write), var3 (write), t_2 (write)
+			if var1 then
 				return
 			end
-			var10 = true
-			var11 = nil
-			var14.clear()
-			var14.dispose()
-			var13.dispose()
+			var1 = true
+			var2 = nil
+			var4.clear()
+			var4.dispose()
+			var3.dispose()
 			t_2 = {}
 		end
 	}

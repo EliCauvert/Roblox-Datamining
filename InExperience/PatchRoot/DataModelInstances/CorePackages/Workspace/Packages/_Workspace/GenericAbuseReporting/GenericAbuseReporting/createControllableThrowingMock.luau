@@ -14,17 +14,17 @@ return function()
 			-- upvalues: t (ref)
 			t.mode = value
 		end,
-		wrap = function(p0)
+		wrap = function(p1)
 			-- upvalues: t (ref), reactModule (copy)
-			return function(p1)
-				-- upvalues: t (copy), reactModule (copy), p0 (ref)
+			return function(p2)
+				-- upvalues: t (copy), reactModule (copy), p1 (ref)
 				t.renderCount += 1
 				local renderCount = t.renderCount
-				local _, var2 = reactModule.useState(0)
+				local _, var1 = reactModule.useState(0)
 				reactModule.useEffect(function()
-					-- upvalues: t (copy), renderCount (ref), var2 (ref)
+					-- upvalues: t (copy), renderCount (ref), var1 (ref)
 					if t.mode == "afterFirst" and renderCount == 1 then
-						var2(1)
+						var1(1)
 					end
 				end, { renderCount })
 				
@@ -33,7 +33,7 @@ return function()
 				elseif t.mode == "afterFirst" and renderCount > 1 then
 					error("simulated render error (post-handle)")
 				end
-				return p0(p1)
+				return p1(p2)
 			end
 		end
 	}

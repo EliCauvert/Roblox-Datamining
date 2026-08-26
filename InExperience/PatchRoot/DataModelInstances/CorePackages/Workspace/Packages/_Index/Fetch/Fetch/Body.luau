@@ -5,16 +5,16 @@ local _ = require(parent.LuauPolyfill)
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
-	if type(p0) == "string" then
-		t_1.body = p0
-	elseif p0 == nil then
+	if type(p1) == "string" then
+		t_1.body = p1
+	elseif p1 == nil then
 		t_1.body = nil
 	else
-		error(string.format("Expected string or nil as the first argument to Body.new(), but got: %s", type(p0)))
+		error(string.format("Expected string or nil as the first argument to Body.new(), but got: %s", type(p1)))
 	end
 	t_1.bodyUsed = false
 	setmetatable(t_1, t)
@@ -31,47 +31,47 @@ end
 
 function t.blob(_)
 	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(_, p2)
-		p2("blob not implemented")
+	return promiseModule.new(function(_, p1)
+		p1("blob not implemented")
 	end)
 end
 
 function t.formData(_)
 	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(_, p3)
-		p3("formData not implemented")
+	return promiseModule.new(function(_, p1)
+		p1("formData not implemented")
 	end)
 end
 
-function t.json(p4)
+function t.json(p1)
 	-- upvalues: promiseModule (ref), httpService (ref)
-	return promiseModule.new(function(p5, p6)
-		-- upvalues: p4 (ref), httpService (copy)
-		if p4._json then
-			p5(p4._json)
+	return promiseModule.new(function(p2, p3)
+		-- upvalues: p1 (ref), httpService (copy)
+		if p1._json then
+			p2(p1._json)
 			
 			return
 		end
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p4 (copy)
-			return httpService:JSONDecode(p4.body)
+			-- upvalues: httpService (copy), p1 (copy)
+			return httpService:JSONDecode(p1.body)
 		end)
 		
 		if ok then
-			p4._json = status
-			p5(status)
+			p1._json = status
+			p2(status)
 			
 			return
 		end
-		p6("Failed to decode response body as JSON. JSON decoding is only supported for Content-Type = application/json")
+		p3("Failed to decode response body as JSON. JSON decoding is only supported for Content-Type = application/json")
 	end)
 end
 
-function t.text(p7)
+function t.text(p1)
 	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p8, _)
-		-- upvalues: p7 (ref)
-		p8(p7.body or "")
+	return promiseModule.new(function(p2, _)
+		-- upvalues: p1 (ref)
+		p2(p1.body or "")
 	end)
 end
 

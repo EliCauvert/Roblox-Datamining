@@ -10,17 +10,17 @@ local UGCValidatePoseArmMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCVali
 local UGCValidatePoseLegMinDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseLegMinDegFromXVectorOnXYPlane", -93)
 local UGCValidatePoseLegMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseLegMaxDegFromXVectorOnXYPlane", -60)
 
-local function validateAngleFromXYPlane(vectorA, vectorB, p0)
+local function validateAngleFromXYPlane(vectorA, vectorB, p1)
 	-- upvalues: failureReasonsAccumulatorModule (ref), UGCValidatePoseDegFromXYPlane (ref)
-	local var11 = failureReasonsAccumulatorModule.new()
-	local degrees = math.deg(math.acos(vectorB:Dot(p0)))
+	local var1 = failureReasonsAccumulatorModule.new()
+	local degrees = math.deg(math.acos(vectorB:Dot(p1)))
 	
 	if UGCValidatePoseDegFromXYPlane < degrees then
-		var11:updateReasons(false, {
+		var1:updateReasons(false, {
 			string.format("%s is at a %d degree angle from the X,Y plane, it must be within %d degrees. Make sure the character is in I pose, A pose, or T pose", vectorA.Name, degrees, UGCValidatePoseDegFromXYPlane)
 		})
 	end
-	return var11:getFinalResults()
+	return var1:getFinalResults()
 end
 
 local function validateAngleFromWorldXVectorOnXYPlane(vectorA, vectorB, p1, p2, p3)
@@ -30,54 +30,54 @@ local function validateAngleFromWorldXVectorOnXYPlane(vectorA, vectorB, p1, p2, 
 	if vectorB.Y <= 0 then
 		degrees = -degrees
 	end
-	local var14 = failureReasonsAccumulatorModule.new()
+	local var1 = failureReasonsAccumulatorModule.new()
 	
 	if degrees < p2 or p3 < degrees then
-		var14:updateReasons(false, {
+		var1:updateReasons(false, {
 			string.format("%s is at a %d angle of the [%s] vector on the X,Y plane, it must be between %d and %d degrees. Make sure the character is in I pose, A pose, or T pose", vectorA.Name, degrees, prettyPrintVector3Module(p1), p2, p3)
 		})
 	end
-	return var14:getFinalResults()
+	return var1:getFinalResults()
 end
 
-return function(p4, p5)
+return function(p1, p2)
 	-- upvalues: assetCalculatorModule (ref), canBeNormalizedModule (ref), failureReasonsAccumulatorModule (ref), validateAngleFromXYPlane (ref), UGCValidatePoseArmMinDegFromXVectorOnXYPlane (ref), UGCValidatePoseArmMaxDegFromXVectorOnXYPlane (ref), UGCValidatePoseLegMinDegFromXVectorOnXYPlane (ref), UGCValidatePoseLegMaxDegFromXVectorOnXYPlane (ref), validateAngleFromWorldXVectorOnXYPlane (ref)
-	local assetTypeEnum = p5.assetTypeEnum
+	local assetTypeEnum = p2.assetTypeEnum
 	assert(assetTypeEnum)
 	
 	if assetTypeEnum ~= Enum.AssetType.LeftArm and assetTypeEnum ~= Enum.AssetType.RightArm and (assetTypeEnum ~= Enum.AssetType.LeftLeg and assetTypeEnum ~= Enum.AssetType.RightLeg) then
 		return true
 	end
-	local var15 = assetCalculatorModule.calculateAssetCFrame(assetTypeEnum, p4)
+	local var1 = assetCalculatorModule.calculateAssetCFrame(assetTypeEnum, p1)
 	
-	if not var15 then
+	if not var1 then
 		return false, {
 			string.format("Failed to calculate %s asset CFrame. Make sure the character is in I pose, A pose, or T pose, and the parts are not all in the same position", assetTypeEnum.Name)
 		}
 	end
-	local var16 = var15.YVector.Unit - Vector3.new(0, 0, 1) * var15.YVector.Unit:Dot(Vector3.new(0, 0, 1))
+	local var2 = var1.YVector.Unit - Vector3.new(0, 0, 1) * var1.YVector.Unit:Dot(Vector3.new(0, 0, 1))
 	
-	if not canBeNormalizedModule(var16) then
+	if not canBeNormalizedModule(var2) then
 		return false, {
 			string.format("%s is pointing along the world Z vector. Make sure the character is in I pose, A pose, or T pose", assetTypeEnum.Name)
 		}
 	end
-	local var20, var21
-	local var17 = -var16.Unit
-	local var18 = failureReasonsAccumulatorModule.new()
-	var18:updateReasons(validateAngleFromXYPlane(assetTypeEnum, var17, -var15.YVector.Unit))
-	local var19 = if assetTypeEnum == Enum.AssetType.RightArm or assetTypeEnum == Enum.AssetType.RightLeg then Vector3.new(1, 0, 0) else Vector3.new(-1, 0, 0)
+	local var3, var4
+	local var5 = -var2.Unit
+	local var6 = failureReasonsAccumulatorModule.new()
+	var6:updateReasons(validateAngleFromXYPlane(assetTypeEnum, var5, -var1.YVector.Unit))
+	local var7 = if assetTypeEnum == Enum.AssetType.RightArm or assetTypeEnum == Enum.AssetType.RightLeg then Vector3.new(1, 0, 0) else Vector3.new(-1, 0, 0)
 	local _ = nil
 	local _ = nil
 	
 	if assetTypeEnum == Enum.AssetType.RightArm or assetTypeEnum == Enum.AssetType.LeftArm then
-		var20 = UGCValidatePoseArmMinDegFromXVectorOnXYPlane
-		var21 = UGCValidatePoseArmMaxDegFromXVectorOnXYPlane
+		var3 = UGCValidatePoseArmMinDegFromXVectorOnXYPlane
+		var4 = UGCValidatePoseArmMaxDegFromXVectorOnXYPlane
 	else
-		var20 = UGCValidatePoseLegMinDegFromXVectorOnXYPlane
-		var21 = UGCValidatePoseLegMaxDegFromXVectorOnXYPlane
+		var3 = UGCValidatePoseLegMinDegFromXVectorOnXYPlane
+		var4 = UGCValidatePoseLegMaxDegFromXVectorOnXYPlane
 	end
-	var18:updateReasons(validateAngleFromWorldXVectorOnXYPlane(assetTypeEnum, var17, var19, var20, var21))
+	var6:updateReasons(validateAngleFromWorldXVectorOnXYPlane(assetTypeEnum, var5, var7, var3, var4))
 	
-	return var18:getFinalResults()
+	return var6:getFinalResults()
 end

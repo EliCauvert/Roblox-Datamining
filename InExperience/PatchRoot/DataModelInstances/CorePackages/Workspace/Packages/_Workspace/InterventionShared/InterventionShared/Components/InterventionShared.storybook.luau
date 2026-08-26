@@ -11,7 +11,7 @@ local foundationProvider = require(parent.Foundation).FoundationProvider
 local layerCollectorProvider = UIBloxModule.Core.Layout.LayerCollector.LayerCollectorProvider
 local signal = require(parent.AppCommonLib).Signal
 
-local function MockProviders(p0)
+local function MockProviders(p1)
 	-- upvalues: foundationProvider (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), signal (ref), layerCollectorProvider (ref), reactModule (ref), providerContainer (ref)
 	local t = {}
 	table.insert(t, { class = foundationProvider, props = {} })
@@ -23,8 +23,8 @@ local function MockProviders(p0)
 		class = localizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p1)
-					return p1
+				Format = function(_, p2)
+					return p2
 				end,
 				changed = signal.new()
 			}
@@ -32,21 +32,21 @@ local function MockProviders(p0)
 	})
 	table.insert(t, { class = layerCollectorProvider, props = {} })
 	
-	return reactModule.createElement(providerContainer, { providers = t }, p0.children)
+	return reactModule.createElement(providerContainer, { providers = t }, p1.children)
 end
 
 return {
 	roact = roactModule,
-	mapStory = function(p2)
+	mapStory = function(p1)
 		-- upvalues: roactModule (ref), MockProviders (ref), cryoModule (ref)
-		return function(p3)
-			-- upvalues: roactModule (copy), MockProviders (copy), p2 (ref), cryoModule (copy)
+		return function(p2)
+			-- upvalues: roactModule (copy), MockProviders (copy), p1 (ref), cryoModule (copy)
 			local props
-			if p3 then
-				props = p3.definition and (p3.definition.props or {})
+			if p2 then
+				props = p2.definition and (p2.definition.props or {})
 			end
 			return roactModule.createElement(MockProviders, {}, {
-				story = roactModule.createElement(p2, cryoModule.Dictionary.union(props, p3))
+				story = roactModule.createElement(p1, cryoModule.Dictionary.union(props, p2))
 			})
 		end
 	end

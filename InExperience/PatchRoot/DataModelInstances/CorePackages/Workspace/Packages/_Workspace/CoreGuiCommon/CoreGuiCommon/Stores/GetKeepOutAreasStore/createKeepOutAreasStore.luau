@@ -8,50 +8,50 @@ local createEffect = signalsModule.createEffect
 
 return function()
 	-- upvalues: createSignal (ref), cryoModule (ref), guiService (ref), displayModule (ref), createEffect (ref)
-	local var4, var5 = createSignal({}, cryoModule.Dictionary.equals)
+	local var1, var2 = createSignal({}, cryoModule.Dictionary.equals)
 	
-	local var6 = function(p0, p1, p2)
+	local var3 = function(p1, p2, p3)
 		local t = {}
-		local x = p0.X
-		local y = p0.Y
-		local x_1 = p1.X
-		local var10 = p1.Y - y
-		local var11 = x
-		local var12 = 0
+		local x = p1.X
+		local y = p1.Y
+		local x_1 = p2.X
+		local var4 = p2.Y - y
+		local var5 = x
+		local var6 = 0
 		
-		for i, v in ipairs(p2) do
-			local var14 = var11 + var12
+		for i, v in ipairs(p3) do
+			local var7 = var5 + var6
 			table.insert(t, {
-				Position = { X = var14, Y = y },
-				Size = { X = v.position.X - var14, Y = var10 }
+				Position = { X = var7, Y = y },
+				Size = { X = v.position.X - var7, Y = var4 }
 			})
-			var11 = v.position.X
-			var12 = v.size.X
+			var5 = v.position.X
+			var6 = v.size.X
 		end
-		local var13 = var11 + var12
+		local var8 = var5 + var6
 		table.insert(t, {
-			Position = { X = var13, Y = y },
-			Size = { X = x_1 - var13, Y = var10 }
+			Position = { X = var8, Y = y },
+			Size = { X = x_1 - var8, Y = var4 }
 		})
 		
 		return t
 	end
 	
-	local var7 = function(p3)
-		-- upvalues: guiService (copy), displayModule (copy), var6 (ref)
+	local var9 = function(p4)
+		-- upvalues: guiService (copy), displayModule (copy), var3 (ref)
 		local _ = {}
 		local t = {}
 		
-		for i, v in pairs(p3) do
+		for i, v in pairs(p4) do
 			table.insert(t, { id = v.id, size = v.size, position = v.position })
 		end
-		table.sort(t, function(p4, p5)
-			return p4.position.X < p5.position.X and p4.position.X + p4.size.X < p5.size.X + p5.position.X
+		table.sort(t, function(p5, p6)
+			return p5.position.X < p6.position.X and p5.position.X + p5.size.X < p6.size.X + p6.position.X
 		end)
 		local guiInset, _ = guiService:GetGuiInset()
 		local rect = nil
 		
-		for i_1, v_1 in ipairs(var6(Vector2.new(0, 0), Vector2.new(displayModule.GetDisplayStore(false).getViewportSize(false).X, guiInset.Y), t)) do
+		for i_1, v_1 in ipairs(var3(Vector2.new(0, 0), Vector2.new(displayModule.GetDisplayStore(false).getViewportSize(false).X, guiInset.Y), t)) do
 			if not rect or rect.Width < v_1.Size.X then
 				rect = Rect.new(v_1.Position.X, v_1.Position.Y, v_1.Position.X + v_1.Size.X, v_1.Position.Y + v_1.Size.Y)
 			end
@@ -59,31 +59,31 @@ return function()
 		return rect
 	end
 	
-	local var8 = createEffect(function(p6)
-		-- upvalues: displayModule (copy), var7 (ref), var4 (ref), guiService (copy)
-		local _ = displayModule.GetDisplayStore(p6).getViewportSize(p6)
-		local var18 = var7(var4(p6))
+	local var10 = createEffect(function(p5)
+		-- upvalues: displayModule (copy), var9 (ref), var1 (ref), guiService (copy)
+		local _ = displayModule.GetDisplayStore(p5).getViewportSize(p5)
+		local var11 = var9(var1(p5))
 		
-		if var18 then
-			guiService:SetTopbarInset(var18)
+		if var11 then
+			guiService:SetTopbarInset(var11)
 		end
 	end)
 	
 	return {
-		getKeepOutAreas = var4,
-		setKeepOutArea = function(value, p7, p8)
-			-- upvalues: var5 (ref), cryoModule (copy), var4 (ref)
-			var5(cryoModule.Dictionary.join(var4(false), { [value] = { id = value, position = p7, size = p8 } }))
+		getKeepOutAreas = var1,
+		setKeepOutArea = function(value, p5, p6)
+			-- upvalues: var2 (ref), cryoModule (copy), var1 (ref)
+			var2(cryoModule.Dictionary.join(var1(false), { [value] = { id = value, position = p5, size = p6 } }))
 		end,
-		removeKeepOutArea = function(p9)
-			-- upvalues: var4 (ref), var5 (ref)
-			local var19 = var4(false)
-			var19[p9] = nil
-			var5(var19)
+		removeKeepOutArea = function(p5)
+			-- upvalues: var1 (ref), var2 (ref)
+			local var11 = var1(false)
+			var11[p5] = nil
+			var2(var11)
 		end,
 		cleanup = function()
-			-- upvalues: var8 (ref)
-			var8()
+			-- upvalues: var10 (ref)
+			var10()
 		end
 	}
 end

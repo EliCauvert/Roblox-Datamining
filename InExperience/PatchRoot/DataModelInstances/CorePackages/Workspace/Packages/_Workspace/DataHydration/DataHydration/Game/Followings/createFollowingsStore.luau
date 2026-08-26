@@ -16,24 +16,24 @@ local fFlagLuaAppDataHydrationUpdateItem = require(parent.SharedFlags).FFlagLuaA
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), followingsUrlBuilderModule (ref), fetchFollowingModule (ref), followingsStoreTypesModule (ref), discoveryEventErrorLogger (ref), signalsModule (ref), requestUpdateFollowingModule (ref), fFlagLuaAppDataHydrationUpdateItem (ref)
-	local var9 = createDataCacheModule()
-	local var10 = nil
-	local var11 = createDataResolverModule({
+	local var1 = createDataCacheModule()
+	local var2 = nil
+	local var3 = createDataResolverModule({
 		supportsMultiGet = false,
-		cache = var9,
-		logError = function(p0)
+		cache = var1,
+		logError = function(p1)
 			-- upvalues: logResponseError (copy), followingsUrlBuilderModule (copy)
-			logResponseError(followingsUrlBuilderModule.FOLLOWING_STATUS_URL, p0)
+			logResponseError(followingsUrlBuilderModule.FOLLOWING_STATUS_URL, p1)
 		end,
 		onClear = function()
-			-- upvalues: var10 (write)
-			var10 = nil
+			-- upvalues: var2 (write)
+			var2 = nil
 		end,
 		fetchFn = function(p1, _)
-			-- upvalues: fetchFollowingModule (copy), followingsStoreTypesModule (copy), discoveryEventErrorLogger (copy), var10 (write)
-			return fetchFollowingModule(p1):andThen(function(p3)
-				-- upvalues: followingsStoreTypesModule (copy), discoveryEventErrorLogger (copy), var10 (copy)
-				local responseBody = p3.responseBody
+			-- upvalues: fetchFollowingModule (copy), followingsStoreTypesModule (copy), discoveryEventErrorLogger (copy), var2 (write)
+			return fetchFollowingModule(p1):andThen(function(p2)
+				-- upvalues: followingsStoreTypesModule (copy), discoveryEventErrorLogger (copy), var2 (copy)
+				local responseBody = p2.responseBody
 				
 				if not followingsStoreTypesModule.followingResponseValidator(responseBody) then
 					discoveryEventErrorLogger.reportError("createFollowingsStore", "Invalid following response", {
@@ -42,10 +42,10 @@ return function()
 						userId = responseBody.UserId,
 						canFollow = responseBody.CanFollow
 					})
-					error({ StatusCode = p3.responseCode })
+					error({ StatusCode = p2.responseCode })
 				end
 				if responseBody.FollowingCountByType and responseBody.FollowingLimitByType then
-					var10 = {
+					var2 = {
 						followingCountByType = responseBody.FollowingCountByType,
 						followingLimitByType = responseBody.FollowingLimitByType
 					}
@@ -72,91 +72,91 @@ return function()
 	})
 	
 	return {
-		fetchFollowing = var11.fetchItem,
-		fetchFollowings = var11.fetchItems,
-		getFollowing = var11.getCachedItem,
-		getFollowings = var11.getCachedItems,
-		getAndFetchFollowing = var11.getAndFetchItem,
-		getAndFetchFollowings = var11.getAndFetchItems,
-		updateFollowing = function(p4, p5)
-			-- upvalues: signalsModule (copy), var9 (ref), var10 (write), requestUpdateFollowingModule (copy), discoveryEventErrorLogger (copy), logResponseError (copy), followingsUrlBuilderModule (copy)
-			local var12, var13 = signalsModule.createSignal(nil)
-			local item = var9.getItem(p4)
-			local var15 = item and item.data(false)
-			local var16 = if var15 then var15.isFollowing else nil
+		fetchFollowing = var3.fetchItem,
+		fetchFollowings = var3.fetchItems,
+		getFollowing = var3.getCachedItem,
+		getFollowings = var3.getCachedItems,
+		getAndFetchFollowing = var3.getAndFetchItem,
+		getAndFetchFollowings = var3.getAndFetchItems,
+		updateFollowing = function(p1, p2)
+			-- upvalues: signalsModule (copy), var1 (ref), var2 (write), requestUpdateFollowingModule (copy), discoveryEventErrorLogger (copy), logResponseError (copy), followingsUrlBuilderModule (copy)
+			local var4, var5 = signalsModule.createSignal(nil)
+			local item = var1.getItem(p1)
+			local var6 = item and item.data(false)
+			local var7 = if var6 then var6.isFollowing else nil
 			
-			if p5 and var10 and var10.followingLimitByType <= var10.followingCountByType then
-				var13({
+			if p2 and var2 and var2.followingLimitByType <= var2.followingCountByType then
+				var5({
 					type = "error",
 					errorType = "LimitReached",
 					statusCode = nil,
 					statusMessage = nil
 				})
 				
-				return var12
+				return var4
 			end
-			var9.updateItem(p4, { isFollowing = p5 })
+			var1.updateItem(p1, { isFollowing = p2 })
 			
-			if var10 then
-				var10 = {
-					followingCountByType = (if var10 then var10.followingCountByType else 0) + (if p5 then 1 else -1),
-					followingLimitByType = var10.followingLimitByType
+			if var2 then
+				var2 = {
+					followingCountByType = (if var2 then var2.followingCountByType else 0) + (if p2 then 1 else -1),
+					followingLimitByType = var2.followingLimitByType
 				}
 			end
-			requestUpdateFollowingModule(p4, p5):andThen(function()
-				-- upvalues: var13 (ref), p5 (ref)
-				var13({ type = "success", isFollowing = p5 })
-			end):catch(function(p6)
-				-- upvalues: var9 (copy), p4 (ref), var16 (ref), var10 (ref), var10 (copy), var13 (ref), discoveryEventErrorLogger (copy), p5 (ref), logResponseError (copy), followingsUrlBuilderModule (copy)
-				var9.updateItem(p4, { isFollowing = var16 })
+			requestUpdateFollowingModule(p1, p2):andThen(function()
+				-- upvalues: var5 (ref), p2 (ref)
+				var5({ type = "success", isFollowing = p2 })
+			end):catch(function(p3)
+				-- upvalues: var1 (copy), p1 (ref), var7 (ref), var2 (ref), var2 (copy), var5 (ref), discoveryEventErrorLogger (copy), p2 (ref), logResponseError (copy), followingsUrlBuilderModule (copy)
+				var1.updateItem(p1, { isFollowing = var7 })
 				
-				if var10 then
-					var10 = var10
+				if var2 then
+					var2 = var2
 				end
-				local var17 = type(p6) == "table" and p6.ClientError ~= nil
-				local var18 = if var17 then p6.message or p6.ClientError else nil
-				local var19 = if type(p6) == "table" and p6.StatusCode then p6.StatusCode else nil
-				local var20 = if type(p6) == "table" and p6.StatusMessage then p6.StatusMessage else nil
-				var13({
+				local var8 = type(p3) == "table" and p3.ClientError ~= nil
+				local var9 = if var8 then p3.message or p3.ClientError else nil
+				local var10 = if type(p3) == "table" and p3.StatusCode then p3.StatusCode else nil
+				local var11 = if type(p3) == "table" and p3.StatusMessage then p3.StatusMessage else nil
+				var5({
 					type = "error",
-					errorType = if var17 then "ClientError" elseif var19 == 400 then "LimitReached" else "NetworkError",
-					statusCode = var19,
-					statusMessage = var18 or var20
+					errorType = if var8 then "ClientError" elseif var10 == 400 then "LimitReached" else "NetworkError",
+					statusCode = var10,
+					statusMessage = var9 or var11
 				})
 				
-				if var17 then
+				if var8 then
 					discoveryEventErrorLogger.reportError("updateFollowing", "Client validation error updating following", {
-						universeId = p4,
-						method = if p5 then "POST" else "DELETE",
-						clientError = var18
+						universeId = p1,
+						method = if p2 then "POST" else "DELETE",
+						clientError = var9
 					})
 					
 					return
 				end
-				logResponseError(followingsUrlBuilderModule.FOLLOWING_UPDATE_URL, { StatusCode = var19 })
+				logResponseError(followingsUrlBuilderModule.FOLLOWING_UPDATE_URL, { StatusCode = var10 })
 				discoveryEventErrorLogger.reportError("updateFollowing", "Error updating following", {
-					universeId = p4,
-					statusCode = var19,
-					method = if p5 then "POST" else "DELETE",
-					statusMessage = var20
+					universeId = p1,
+					statusCode = var10,
+					method = if p2 then "POST" else "DELETE",
+					statusMessage = var11
 				})
 			end)
 			
-			return var12
+			return var4
 		end,
-		updateItem = if fFlagLuaAppDataHydrationUpdateItem then var9.updateItem else nil,
-		updateUserFollowingLimits = if fFlagLuaAppDataHydrationUpdateItem then function(p7)
-			-- upvalues: var10 (write)
-			var10 = p7
+		updateItem = if fFlagLuaAppDataHydrationUpdateItem then var1.updateItem else nil,
+		updateUserFollowingLimits = if fFlagLuaAppDataHydrationUpdateItem then function(p1)
+			-- upvalues: var2 (write)
+			var2 = p1
 		end else nil,
 		clear = function()
-			-- upvalues: var10 (write), var11 (ref)
-			var10 = nil
-			var11.clear()
+			-- upvalues: var2 (write), var3 (ref)
+			var2 = nil
+			var3.clear()
 		end,
 		dispose = function()
-			-- upvalues: var11 (ref)
-			var11.dispose()
+			-- upvalues: var3 (ref)
+			var3.dispose()
 		end
 	}
 end

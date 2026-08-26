@@ -4,11 +4,11 @@ local setIsSubjectToChinaPoliciesModule = require(experienceLoadingScript.Action
 
 return function()
 	-- upvalues: cachedPolicyServiceModule (ref), setIsSubjectToChinaPoliciesModule (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: cachedPolicyServiceModule (copy), setIsSubjectToChinaPoliciesModule (copy)
 		coroutine.wrap(function()
-			-- upvalues: cachedPolicyServiceModule (copy), p0 (ref), setIsSubjectToChinaPoliciesModule (copy)
-			p0:dispatch(setIsSubjectToChinaPoliciesModule(cachedPolicyServiceModule:IsSubjectToChinaPolicies()))
+			-- upvalues: cachedPolicyServiceModule (copy), p1 (ref), setIsSubjectToChinaPoliciesModule (copy)
+			p1:dispatch(setIsSubjectToChinaPoliciesModule(cachedPolicyServiceModule:IsSubjectToChinaPolicies()))
 		end)()
 	end
 end

@@ -5,55 +5,55 @@ local view = require(parent.Foundation).View
 local fFlagEnablePeopleListLazyRender = require(parent.PeopleService).getService("Flags").FFlagEnablePeopleListLazyRender
 local peoplePageLazyRenderThreshold = game:DefineFastInt("PeoplePageLazyRenderThreshold", 100)
 
-function LazyScrollingComponent(p0)
+function LazyScrollingComponent(p1)
 	-- upvalues: reactModule (ref), peoplePageLazyRenderThreshold (ref), signalsModule (ref), view (ref), fFlagEnablePeopleListLazyRender (ref)
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useCallback(function(p1, p2, p3)
+	local var1, var2 = reactModule.useState(false)
+	local var3 = reactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: peoplePageLazyRenderThreshold (copy)
-		return p1 < p2 + p3 + peoplePageLazyRenderThreshold
+		return p2 < p3 + p4 + peoplePageLazyRenderThreshold
 	end, {})
-	local var6 = reactModule.useRef(nil)
+	local var4 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var6 (ref), var4 (ref), var5 (ref), p0 (ref), signalsModule (copy)
-		if var3 or not var6.current then
+		-- upvalues: var1 (ref), var4 (ref), var2 (ref), var3 (ref), p1 (ref), signalsModule (copy)
+		if var1 or not var4.current then
 			return
 		end
-		var4(var5(var6.current.AbsolutePosition.Y, p0.scrollingFrameAbsolutePositionY(false), p0.scrollingFrameAbsoluteSizeY(false)))
-		local var7 = var6.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-			-- upvalues: var6 (copy), var4 (copy), var5 (copy), p0 (copy)
-			if var6.current then
-				var4(var5(var6.current.AbsolutePosition.Y, p0.scrollingFrameAbsolutePositionY(false), p0.scrollingFrameAbsoluteSizeY(false)))
+		var2(var3(var4.current.AbsolutePosition.Y, p1.scrollingFrameAbsolutePositionY(false), p1.scrollingFrameAbsoluteSizeY(false)))
+		local var5 = var4.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
+			-- upvalues: var4 (copy), var2 (copy), var3 (copy), p1 (copy)
+			if var4.current then
+				var2(var3(var4.current.AbsolutePosition.Y, p1.scrollingFrameAbsolutePositionY(false), p1.scrollingFrameAbsoluteSizeY(false)))
 				
 				return
 			end
 		end)
-		local var8 = signalsModule.createEffect(function(p4)
-			-- upvalues: p0 (copy), var6 (copy), var4 (copy), var5 (copy)
-			local _ = p0.scrollingFrameCanvasPositionY(p4)
-			local var9 = p0.scrollingFrameAbsolutePositionY(p4)
-			local var10 = p0.scrollingFrameAbsoluteSizeY(p4)
+		local var6 = signalsModule.createEffect(function(p2)
+			-- upvalues: p1 (copy), var4 (copy), var2 (copy), var3 (copy)
+			local _ = p1.scrollingFrameCanvasPositionY(p2)
+			local var7 = p1.scrollingFrameAbsolutePositionY(p2)
+			local var8 = p1.scrollingFrameAbsoluteSizeY(p2)
 			
-			if var6.current then
-				var4(var5(var6.current.AbsolutePosition.Y, var9, var10))
+			if var4.current then
+				var2(var3(var4.current.AbsolutePosition.Y, var7, var8))
 				
 				return
 			end
 		end)
 		
 		return function()
-			-- upvalues: var7 (ref), var8 (ref)
-			if var7 then
-				var7:Disconnect()
+			-- upvalues: var5 (ref), var6 (ref)
+			if var5 then
+				var5:Disconnect()
 			end
-			var8()
+			var6()
 		end
-	end, { var3 })
+	end, { var1 })
 	
-	return if var3 then p0.children else reactModule.createElement(view, {
+	return if var1 then p1.children else reactModule.createElement(view, {
 		tag = if fFlagEnablePeopleListLazyRender then "size-full-0 auto-xy" else "auto-xy",
-		ref = var6,
-		LayoutOrder = p0.placeholderLayoutOrder
-	}, { Placeholder = p0.placeholder })
+		ref = var4,
+		LayoutOrder = p1.placeholderLayoutOrder
+	}, { Placeholder = p1.placeholder })
 end
 
 return reactModule.memo(LazyScrollingComponent)

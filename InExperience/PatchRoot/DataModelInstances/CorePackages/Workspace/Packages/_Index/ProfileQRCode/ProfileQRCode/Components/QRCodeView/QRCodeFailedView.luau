@@ -16,9 +16,9 @@ local color3 = Color3.new(1, 1, 1)
 local refresh = images["icons/common/refresh"]
 local errorXlarge = images["icons/graphic/error_xlarge"]
 
-return function(p0)
+return function(p1)
 	-- upvalues: useStyle (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), color3 (ref), iconSize (ref), imageSetLabel (ref), errorXlarge (ref), styledTextLabel (ref), button (ref), buttonType (ref), standardButtonSize (ref), refresh (ref)
-	local var5 = useStyle()
+	local var1 = useStyle()
 	
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		Layout = reactModule.createElement("UIListLayout", {
@@ -66,8 +66,8 @@ return function(p0)
 				richText = false,
 				size = UDim2.new(1, 0, 0, 0),
 				text = useLocalization({ failedToLoadMessage = textKeysModule.FailedToLoad }).failedToLoadMessage,
-				fontStyle = var5.Font.CaptionBody,
-				colorStyle = var5.Theme.TextMuted,
+				fontStyle = var1.Font.CaptionBody,
+				colorStyle = var1.Theme.TextMuted,
 				automaticSize = Enum.AutomaticSize.Y,
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Center,
@@ -84,7 +84,7 @@ return function(p0)
 				buttonType = buttonType.Secondary,
 				standardSize = standardButtonSize.Regular,
 				icon = refresh,
-				onActivated = p0.onActivated
+				onActivated = p1.onActivated
 			})
 		})
 	})

@@ -13,9 +13,9 @@ function t.new()
 end
 
 function t:getCurrentProgress()
-	local var3 = os.clock() - self.lastInputTimeSec
+	local var1 = os.clock() - self.lastInputTimeSec
 	
-	return if var3 < self.dwellTimeSec then 1 elseif var3 < self.dwellTimeSec + self.fadeDurationSec then 1 - (var3 - self.dwellTimeSec) / self.fadeDurationSec else 0
+	return if var1 < self.dwellTimeSec then 1 elseif var1 < self.dwellTimeSec + self.fadeDurationSec then 1 - (var1 - self.dwellTimeSec) / self.fadeDurationSec else 0
 end
 
 function t:inProgress()
@@ -23,9 +23,9 @@ function t:inProgress()
 end
 
 function t:isFading()
-	local var4 = os.clock() - self.lastInputTimeSec
+	local var1 = os.clock() - self.lastInputTimeSec
 	
-	return self.dwellTimeSec <= var4 and var4 < self.dwellTimeSec + self.fadeDurationSec
+	return self.dwellTimeSec <= var1 and var1 < self.dwellTimeSec + self.fadeDurationSec
 end
 
 function t:updateLastInputTime()
@@ -42,9 +42,9 @@ function t:zeroOut()
 	self.lastInputTimeSec = -1
 end
 
-function t:subscribe(p0)
+function t:subscribe(p1)
 	-- upvalues: runService (ref)
-	table.insert(self.subscriptions, p0)
+	table.insert(self.subscriptions, p1)
 	
 	if not self.heartbeatConnection then
 		self.heartbeatConnection = runService.RenderStepped:Connect(function()
@@ -62,9 +62,9 @@ function t:subscribe(p0)
 	end
 end
 
-function t:unsubscribe(p1)
+function t:unsubscribe(p2)
 	for i, v in ipairs(self.subscriptions) do
-		if v == p1 then
+		if v == p2 then
 			table.remove(self.subscriptions, i)
 			break
 		end

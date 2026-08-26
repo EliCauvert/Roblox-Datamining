@@ -1,15 +1,15 @@
 ﻿local debugFlagsModule = require(script:FindFirstAncestor("ultimate-list").DebugFlags)
 
-return function(p0)
+return function(p1)
 	-- upvalues: debugFlagsModule (ref)
-	return function(p1, ...)
-		-- upvalues: debugFlagsModule (copy), p0 (ref)
+	return function(p2, ...)
+		-- upvalues: debugFlagsModule (copy), p1 (ref)
 		if not debugFlagsModule.shouldLog then return end
-		if typeof(p1) == "string" then
-			print(`[{p0}] {string.format(p1, ...)}`)
+		if typeof(p2) == "string" then
+			print(`[{p1}] {string.format(p2, ...)}`)
 			
 			return
 		end
-		print(`[{p0}]`, p1(...))
+		print(`[{p1}]`, p2(...))
 	end
 end

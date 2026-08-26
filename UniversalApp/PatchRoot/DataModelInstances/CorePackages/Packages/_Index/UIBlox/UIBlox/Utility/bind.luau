@@ -1,6 +1,6 @@
-﻿return function(p0, p1)
-	return function(p2, ...)
-		-- upvalues: p1 (ref), p0 (ref)
-		return if p2 == p1 then p0(p1, ...) else p0(p1, p2, ...)
+﻿return function(p1, p2)
+	return function(p3, ...)
+		-- upvalues: p2 (ref), p1 (ref)
+		return if p3 == p2 then p1(p2, ...) else p1(p2, p3, ...)
 	end
 end

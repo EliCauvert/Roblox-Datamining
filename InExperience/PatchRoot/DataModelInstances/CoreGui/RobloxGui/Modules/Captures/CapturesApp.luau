@@ -3,7 +3,7 @@ local corePackagesService = game:GetService("CorePackages")
 local robloxGui = coreGuiService:WaitForChild("RobloxGui")
 local enabled = require(corePackagesService.Workspace.Packages.Chrome).Enabled
 local capturesInExperienceModule = require(corePackagesService.Workspace.Packages.CapturesInExperience)
-local var4 = capturesInExperienceModule.App.createApp()
+local var1 = capturesInExperienceModule.App.createApp()
 local screenshotsCarousel = Instance.new("ScreenGui")
 screenshotsCarousel.DisplayOrder = capturesInExperienceModule.Constants.CarouselDisplayOrder
 screenshotsCarousel.Name = "ScreenshotsCarousel"
@@ -30,10 +30,10 @@ momentsCreationFlow.ResetOnSpawn = false
 momentsCreationFlow.ScreenInsets = Enum.ScreenInsets.None
 momentsCreationFlow.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 momentsCreationFlow.Parent = coreGuiService
-var4.mountCaptureManager(captureManager)
-var4.mountCarousel(screenshotsCarousel)
-var4.mountCoreUI(robloxGui, enabled())
-var4.mountCaptureOverlay(screenGui_2)
-var4.mountMomentsCreationFlow(momentsCreationFlow)
+var1.mountCaptureManager(captureManager)
+var1.mountCarousel(screenshotsCarousel)
+var1.mountCoreUI(robloxGui, enabled())
+var1.mountCaptureOverlay(screenGui_2)
+var1.mountMomentsCreationFlow(momentsCreationFlow)
 
-return var4
+return var1

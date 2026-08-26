@@ -29,13 +29,13 @@ function t.isPrivateVoiceFocused(_)
 	return fFlagEnableCrossExpVoice and default_1:getCurrentAudioContext() == AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
 end
 
-function t:MuteAll(p0)
+function t:MuteAll(p1)
 	-- upvalues: fFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref), default (ref)
 	if self:isPrivateVoiceFocused() and fFlagEnableCrossExperienceVoiceCaptureMute then
-		default_1:muteAll(p0)
+		default_1:muteAll(p1)
 	end
 	if self:isPublicVoiceFocused() and default:UserVoiceEnabled() and default:IsInitialized() then
-		default:MuteAll(true, p0)
+		default:MuteAll(true, p1)
 	end
 end
 

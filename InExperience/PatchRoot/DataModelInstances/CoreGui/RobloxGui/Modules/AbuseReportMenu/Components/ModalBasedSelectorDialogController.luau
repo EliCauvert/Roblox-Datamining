@@ -24,7 +24,7 @@ local t = {
 }
 
 return {
-	mountModalSelector = function(p0, p1, p2, p3, p4, p5)
+	mountModalSelector = function(p1, p2, p3, p4, p5, p6)
 		-- upvalues: guiService (ref), isInExperienceUIVREnabled (ref), isSpatial (write), UIManager (write), panelType (write), t (ref), coreGuiService (ref), constantsModule (ref), fFlagHideShortcutsOnReportDropdownModule (ref), roactModule (ref), modalBaseSelectorDialogModule (ref)
 		local guiInset, _ = guiService:GetGuiInset()
 		
@@ -52,16 +52,16 @@ return {
 			frame.Parent = t.modalSelectorScreenGui
 			t.modalSelectorFrame = frame
 		end
-		if fFlagHideShortcutsOnReportDropdownModule and p5 ~= nil then
-			p5()
+		if fFlagHideShortcutsOnReportDropdownModule and p6 ~= nil then
+			p6()
 		end
 		t.modalSelectorHandle = roactModule.mount(roactModule.createElement(modalBaseSelectorDialogModule, {
 			isShown = true,
-			cellData = p2,
-			viewportHeight = p0,
-			viewportWidth = p1,
-			onSelect = p3,
-			onClose = p4
+			cellData = p3,
+			viewportHeight = p1,
+			viewportWidth = p2,
+			onSelect = p4,
+			onClose = p5
 		}), t.modalSelectorFrame, "ModalSelectorDialog")
 	end,
 	unmountModalSelector = function()

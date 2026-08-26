@@ -22,31 +22,31 @@ local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLua
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = sharedFlagsModule.FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 
-local function PersistentActionBarContextualMessage(p0)
+local function PersistentActionBarContextualMessage(p1)
 	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useTokens (ref), reactModule (ref), usePlayButtonState (ref), usePlayButtonContextualMessage (ref), view (ref), text (ref), playButtonContextualMessageImpressionsDetector (ref), appPage (ref)
-	local var8 = useRoactService(roactServiceTagsModule.RoactNetworking)
-	local var9 = useTokens()
-	local var10 = reactModule.useRef(nil)
-	local var11 = usePlayButtonState(var8, p0.universeId)
-	local var12 = usePlayButtonContextualMessage(p0.universeId, var11.playButtonState, var11.playabilityStatus)
+	local var1 = useRoactService(roactServiceTagsModule.RoactNetworking)
+	local var2 = useTokens()
+	local var3 = reactModule.useRef(nil)
+	local var4 = usePlayButtonState(var1, p1.universeId)
+	local var5 = usePlayButtonContextualMessage(p1.universeId, var4.playButtonState, var4.playabilityStatus)
 	
-	return if var12 == nil or var12 == "" then nil else reactModule.createElement(view, {
+	return if var5 == nil or var5 == "" then nil else reactModule.createElement(view, {
 		tag = "size-full-0 auto-xy",
 		LayoutOrder = 2,
 		testId = "--edp-persistent-action-bar-contextual-message"
 	}, {
 		Text = reactModule.createElement(text, {
 			tag = "auto-xy text-body-medium text-wrap text-align-x-left",
-			textStyle = var9.Color.Content.Emphasis,
-			Text = var12,
-			ref = var10
+			textStyle = var2.Color.Content.Emphasis,
+			Text = var5,
+			ref = var3
 		}),
 		ImpressionsDetector = reactModule.createElement(playButtonContextualMessageImpressionsDetector, {
 			scrollViewPositionChangedSignal = nil,
-			containerRef = var10,
-			universeId = p0.universeId,
-			playabilityStatus = var11.playabilityStatus,
-			contextualMessage = var12,
+			containerRef = var3,
+			universeId = p1.universeId,
+			playabilityStatus = var4.playabilityStatus,
+			contextualMessage = var5,
 			pageContext = appPage.GameDetail
 		})
 	})

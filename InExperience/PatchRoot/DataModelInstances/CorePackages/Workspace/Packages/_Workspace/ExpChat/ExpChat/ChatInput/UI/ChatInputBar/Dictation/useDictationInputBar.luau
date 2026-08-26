@@ -50,63 +50,63 @@ local _ = function()
 	return if fFlagExpChatLongPressContinuousDictation then dictationModeModule.Continuous else nil
 end
 
-local _ = function(p0, p1)
+local _ = function(p1, p2)
 	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref)
-	return if getFFlagTextChatEnableUniverseChatTabs() and p1 then "RBXGlobal" elseif p0 then p0.Name else "RBXGeneral"
+	return if getFFlagTextChatEnableUniverseChatTabs() and p2 then "RBXGlobal" elseif p1 then p1.Name else "RBXGeneral"
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatDictationFTUXModule (ref), useDispatch (ref), useDictationTelemetryModule (ref), expChatDictationMicToastAnalytics (ref), useDictationEligibilityModule (ref), useIsLocalUserUnder13Module (ref), u13PolicyToastStorageModule (ref), useAsync (ref), linkingResumeOnDataModelThread (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), localizationModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), universeChatSystemMessageAddedModule (ref), dictationErrorReason (ref), dictationAnalyticsModule (ref), setUIBloxToast (ref), useTranscribedSamplesModule (ref), dictationModeModule (ref), fFlagExpChatDictationU13PolicyToastModule (ref), permissionStatus (ref), useDictation (ref), signalsReactModule (ref), dictationState (ref), fFlagExpChatLongPressContinuousDictation (ref), fFlagExpChatContinuousDictation (ref), useDictationFTUXModule (ref), useLongPressModule (ref)
-	local var25 = foundationModule.Hooks.useTokens()
-	local var26 = foundationModule.Hooks.useCursor({
-		radius = UDim.new(0, var25.Radius.Circle),
-		offset = var25.Size.Size_150,
-		borderWidth = var25.Stroke.Thicker
+	local var1 = foundationModule.Hooks.useTokens()
+	local var2 = foundationModule.Hooks.useCursor({
+		radius = UDim.new(0, var1.Radius.Circle),
+		offset = var1.Size.Size_150,
+		borderWidth = var1.Stroke.Thicker
 	})
-	local var27 = reactModule.useRef(false)
-	local var28 = reactModule.useRef(nil)
-	local var29 = if fFlagExpChatDictationFTUXModule then reactModule.useRef(nil) else nil
-	local var30 = if fFlagExpChatDictationFTUXModule then reactModule.useRef(false) else nil
-	local var31 = useDispatch()
-	local var32 = useDictationTelemetryModule()
-	local var33 = if expChatDictationMicToastAnalytics then reactModule.useRef(nil) else nil
-	local var34 = if expChatDictationMicToastAnalytics then reactModule.useCallback(function()
-		-- upvalues: var32 (ref), var33 (ref)
-		var32.logMicToastActivated(var33.current, false)
-	end, { var32.logMicToastActivated }) else nil
-	local var35 = useDictationEligibilityModule()
-	local var36 = useIsLocalUserUnder13Module()
-	local var37 = reactModule.useRef(u13PolicyToastStorageModule.hasBeenShown())
-	local var38 = useAsync(function()
+	local var3 = reactModule.useRef(false)
+	local var4 = reactModule.useRef(nil)
+	local var5 = if fFlagExpChatDictationFTUXModule then reactModule.useRef(nil) else nil
+	local var6 = if fFlagExpChatDictationFTUXModule then reactModule.useRef(false) else nil
+	local var7 = useDispatch()
+	local var8 = useDictationTelemetryModule()
+	local var9 = if expChatDictationMicToastAnalytics then reactModule.useRef(nil) else nil
+	local var10 = if expChatDictationMicToastAnalytics then reactModule.useCallback(function()
+		-- upvalues: var8 (ref), var9 (ref)
+		var8.logMicToastActivated(var9.current, false)
+	end, { var8.logMicToastActivated }) else nil
+	local var11 = useDictationEligibilityModule()
+	local var12 = useIsLocalUserUnder13Module()
+	local var13 = reactModule.useRef(u13PolicyToastStorageModule.hasBeenShown())
+	local var14 = useAsync(function()
 		-- upvalues: linkingResumeOnDataModelThread (copy), fFlagEnableRetryForLinkingProtocolFetch (copy), fIntLinkingProtocolFetchRetries (copy), default (copy), settingsRoute (copy), fIntLinkingProtocolFetchTimeoutMS (copy)
-		local var64, var65
+		local var15, var16
 		if not linkingResumeOnDataModelThread then
 			return false
 		elseif not fFlagEnableRetryForLinkingProtocolFetch then
-			var64, var65 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
+			var15, var65 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
 			
-			return var64 and var65 == true
+			return var15 and var16 == true
 		end
-		var64 = false
-		var65 = nil
+		var15 = false
+		var16 = nil
 		
 		for _ = 0, fIntLinkingProtocolFetchRetries do
 			local thread = task.spawn(function()
-				-- upvalues: var64 (write), var65 (write), default (copy), settingsRoute (copy)
-				local var67, var68 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
-				var64 = var67
-				var65 = var68
+				-- upvalues: var15 (write), var16 (write), default (copy), settingsRoute (copy)
+				local var17, var18 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
+				var15 = var17
+				var16 = var18
 			end)
 			task.wait(fIntLinkingProtocolFetchTimeoutMS / 1000)
 			
 			if coroutine.status(thread) ~= "dead" then
 				task.cancel(thread)
 			end
-			if var65 ~= nil then break end
+			if var16 ~= nil then break end
 		end
-		return var64 and var65 == true
+		return var15 and var16 == true
 	end, {})
-	local var39 = localizationModule.useLocalization({
+	local var17 = localizationModule.useLocalization({
 		transcriptionFailedText = "CoreScripts.TextChat.ChatWindow.TranscriptionFailed",
 		transcriptionLanguageUnsupportedText = "CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported",
 		noMicAccessToastHeader = "CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader",
@@ -116,53 +116,53 @@ return function(p2)
 		u13MicAccessToastHeader = "CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader",
 		u13MicAccessToastBody = "CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody"
 	})
-	local var40 = if var39.transcriptionFailedText and var39.transcriptionFailedText ~= "" then var39.transcriptionFailedText else "Sorry did not get that! Try to speak again."
-	local var41 = if var39.transcriptionLanguageUnsupportedText and var39.transcriptionLanguageUnsupportedText ~= "" then var39.transcriptionLanguageUnsupportedText else "Sorry, that language isn't supported yet."
-	local var42 = if var39.noMicAccessToastHeader and var39.noMicAccessToastHeader ~= "" then var39.noMicAccessToastHeader else "Microphone access needed"
-	local var43 = if var39.noMicAccessToastBody and var39.noMicAccessToastBody ~= "" then var39.noMicAccessToastBody else "Enable microphone access in your device settings to use voice input."
-	local var44 = if var39.u13PolicyToastHeader and var39.u13PolicyToastHeader ~= "" then var39.u13PolicyToastHeader else "You've enabled voice to text chat"
-	local var45 = if var39.u13PolicyToastBody and var39.u13PolicyToastBody ~= "" then var39.u13PolicyToastBody else "To send messages with your voice, we'll process your audio and delete it right away, per our privacy policy."
-	local var46 = if var39.u13MicAccessToastHeader and var39.u13MicAccessToastHeader ~= "" then var39.u13MicAccessToastHeader else "Microphone enabled"
-	local var47 = if var39.u13MicAccessToastBody and var39.u13MicAccessToastBody ~= "" then var39.u13MicAccessToastBody else "Your voice is converted to text and never shared with other players."
-	local var48 = reactModule.useCallback(function(p3)
-		-- upvalues: p2 (ref)
-		local var69 = if p2.customTextBoxRef.current then p2.customTextBoxRef.current else p2.textBoxRef.current
+	local var18 = if var17.transcriptionFailedText and var17.transcriptionFailedText ~= "" then var17.transcriptionFailedText else "Sorry did not get that! Try to speak again."
+	local var19 = if var17.transcriptionLanguageUnsupportedText and var17.transcriptionLanguageUnsupportedText ~= "" then var17.transcriptionLanguageUnsupportedText else "Sorry, that language isn't supported yet."
+	local var20 = if var17.noMicAccessToastHeader and var17.noMicAccessToastHeader ~= "" then var17.noMicAccessToastHeader else "Microphone access needed"
+	local var21 = if var17.noMicAccessToastBody and var17.noMicAccessToastBody ~= "" then var17.noMicAccessToastBody else "Enable microphone access in your device settings to use voice input."
+	local var22 = if var17.u13PolicyToastHeader and var17.u13PolicyToastHeader ~= "" then var17.u13PolicyToastHeader else "You've enabled voice to text chat"
+	local var23 = if var17.u13PolicyToastBody and var17.u13PolicyToastBody ~= "" then var17.u13PolicyToastBody else "To send messages with your voice, we'll process your audio and delete it right away, per our privacy policy."
+	local var24 = if var17.u13MicAccessToastHeader and var17.u13MicAccessToastHeader ~= "" then var17.u13MicAccessToastHeader else "Microphone enabled"
+	local var25 = if var17.u13MicAccessToastBody and var17.u13MicAccessToastBody ~= "" then var17.u13MicAccessToastBody else "Your voice is converted to text and never shared with other players."
+	local var26 = reactModule.useCallback(function(p2)
+		-- upvalues: p1 (ref)
+		local var27 = if p1.customTextBoxRef.current then p1.customTextBoxRef.current else p1.textBoxRef.current
 		
-		if var69 == nil then
+		if var27 == nil then
 			return false
 		end
-		var69.Text = p3
-		p2.setInputText(p3)
+		var27.Text = p2
+		p1.setInputText(p2)
 		
 		return true
 	end, {
-		p2.setInputText,
-		p2.customTextBoxRef,
-		p2.textBoxRef,
-		p2.chatInputBarSettings.TextBox
+		p1.setInputText,
+		p1.customTextBoxRef,
+		p1.textBoxRef,
+		p1.chatInputBarSettings.TextBox
 	})
-	local var49 = reactModule.useCallback(function(p4)
-		-- upvalues: p2 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), var31 (ref), universeChatSystemMessageAddedModule (copy)
-		local targetTextChannel = p2.targetTextChannel
-		local var70 = if getFFlagTextChatEnableUniverseChatTabs() and p2.isGlobalChatTabActive then "RBXGlobal" elseif targetTextChannel then targetTextChannel.Name else "RBXGeneral"
+	local var27 = reactModule.useCallback(function(p2)
+		-- upvalues: p1 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), var7 (ref), universeChatSystemMessageAddedModule (copy)
+		local targetTextChannel = p1.targetTextChannel
+		local var28 = if getFFlagTextChatEnableUniverseChatTabs() and p1.isGlobalChatTabActive then "RBXGlobal" elseif targetTextChannel then targetTextChannel.Name else "RBXGeneral"
 		
 		if fFlagExpChatUseMessagesStore then
-			getMessagesStoreModule(false).addSystemMessage(p4, var70, "Roblox.Dictation.Error", nil, true)
+			getMessagesStoreModule(false).addSystemMessage(p2, var28, "Roblox.Dictation.Error", nil, true)
 			
 			return
 		end
-		var31(universeChatSystemMessageAddedModule(p4, var70, "Roblox.Dictation.Error", true))
-	end, { var31, p2.targetTextChannel, p2.isGlobalChatTabActive })
-	local var50 = reactModule.useCallback(function(p5, p6)
-		-- upvalues: var27 (ref), dictationErrorReason (copy), var42 (ref), var43 (ref), linkingResumeOnDataModelThread (copy), var38 (ref), default (copy), settingsRoute (copy), expChatDictationMicToastAnalytics (copy), var33 (ref), var32 (ref), var34 (ref), dictationAnalyticsModule (copy), setUIBloxToast (copy), var49 (ref), var41 (ref), var40 (ref)
-		var27.current = false
+		var7(universeChatSystemMessageAddedModule(p2, var28, "Roblox.Dictation.Error", true))
+	end, { var7, p1.targetTextChannel, p1.isGlobalChatTabActive })
+	local var28 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var3 (ref), dictationErrorReason (copy), var20 (ref), var21 (ref), linkingResumeOnDataModelThread (copy), var14 (ref), default (copy), settingsRoute (copy), expChatDictationMicToastAnalytics (copy), var9 (ref), var8 (ref), var10 (ref), dictationAnalyticsModule (copy), setUIBloxToast (copy), var27 (ref), var19 (ref), var18 (ref)
+		var3.current = false
 		
-		if p6 == dictationErrorReason.PermissionDenied then
+		if p3 == dictationErrorReason.PermissionDenied then
 			local t = {
-				toastTitle = var42,
-				toastSubtitle = var43,
+				toastTitle = var20,
+				toastSubtitle = var21,
 				sequenceNumber = if linkingResumeOnDataModelThread then DateTime.now().UnixTimestamp else nil,
-				onActivated = if linkingResumeOnDataModelThread and var38.status == "ok" and var38.value then function()
+				onActivated = if linkingResumeOnDataModelThread and var14.status == "ok" and var14.value then function()
 					-- upvalues: default (copy), settingsRoute (copy)
 					default:switchToSettingsApp(settingsRoute.Microphone)
 				end else nil
@@ -170,239 +170,239 @@ return function(p2)
 			
 			if expChatDictationMicToastAnalytics then
 				local onActivated = t.onActivated
-				var33.current = p5
+				var9.current = p2
 				
 				if onActivated then
 					function t.onActivated()
-						-- upvalues: var32 (copy), p5 (ref), onActivated (ref)
-						var32.logMicToastActivated(p5, true)
+						-- upvalues: var8 (copy), p2 (ref), onActivated (ref)
+						var8.logMicToastActivated(p2, true)
 						onActivated()
 					end
 				else
-					t.onActivated = var34
+					t.onActivated = var10
 				end
 				function t.onAppeared()
-					-- upvalues: var32 (copy), p5 (ref), onActivated (ref)
-					var32.logMicToastShown(p5, onActivated ~= nil)
+					-- upvalues: var8 (copy), p2 (ref), onActivated (ref)
+					var8.logMicToastShown(p2, onActivated ~= nil)
 				end
 				
-				local var72 = false
+				local var29 = false
 				
 				function t.onTouchSwipeUp()
-					-- upvalues: var72 (write), var32 (copy), p5 (ref), dictationAnalyticsModule (copy)
-					if var72 then
+					-- upvalues: var29 (write), var8 (copy), p2 (ref), dictationAnalyticsModule (copy)
+					if var29 then
 						return
 					end
-					var72 = true
-					var32.logMicToastDismissed(p5, dictationAnalyticsModule.DismissReasons.UserInteraction)
+					var29 = true
+					var8.logMicToastDismissed(p2, dictationAnalyticsModule.DismissReasons.UserInteraction)
 				end
 			end
 			setUIBloxToast(t)
 			
 			return
 		else
-			var32.logTranscriptionFailed(p5)
+			var8.logTranscriptionFailed(p2)
 			
-			if p6 == dictationErrorReason.LanguageUnsupported then
-				var49(var41)
+			if p3 == dictationErrorReason.LanguageUnsupported then
+				var27(var19)
 				
 				return
 			end
-			var49(var40)
+			var27(var18)
 		end
 	end, {
-		var49,
-		var40,
-		var41,
-		var42,
-		var43,
-		var38,
-		var32.logTranscriptionFailed,
+		var27,
+		var18,
+		var19,
+		var20,
+		var21,
+		var14,
+		var8.logTranscriptionFailed,
 		table.unpack(if expChatDictationMicToastAnalytics then {
-			var32.logMicToastShown,
-			var32.logMicToastActivated,
-			var32.logMicToastDismissed,
-			var34
+			var8.logMicToastShown,
+			var8.logMicToastActivated,
+			var8.logMicToastDismissed,
+			var10
 		} else {})
 	})
-	local var51 = useTranscribedSamplesModule()
-	local var52 = reactModule.useRef(nil)
-	local var53 = reactModule.useCallback(function(p7, _)
-		-- upvalues: var52 (ref)
-		var52.current = p7
+	local var29 = useTranscribedSamplesModule()
+	local var30 = reactModule.useRef(nil)
+	local var31 = reactModule.useCallback(function(p2, _)
+		-- upvalues: var30 (ref)
+		var30.current = p2
 	end, {})
-	local var54 = reactModule.useRef(false)
-	local var55 = useDictation({
-		onTranscription = reactModule.useCallback(function(p8, p9)
-			-- upvalues: dictationModeModule (copy), var52 (ref), var51 (ref), var48 (ref), var32 (ref), p2 (ref), dictationAnalyticsModule (copy), var27 (ref)
-			if p9 == dictationModeModule.Continuous then
-				if var52.current ~= nil then
-					var51.commit(var52.current)
+	local var32 = reactModule.useRef(false)
+	local var33 = useDictation({
+		onTranscription = reactModule.useCallback(function(p2, p3)
+			-- upvalues: dictationModeModule (copy), var30 (ref), var29 (ref), var26 (ref), var8 (ref), p1 (ref), dictationAnalyticsModule (copy), var3 (ref)
+			if p3 == dictationModeModule.Continuous then
+				if var30.current ~= nil then
+					var29.commit(var30.current)
 				end
-				local var73 = var48(p8)
-				var32.logTranscription(p8, p9, var73)
+				local var34 = var26(p2)
+				var8.logTranscription(p2, p3, var34)
 				
-				if var73 then
-					p2.onSendRecordingTap({
+				if var34 then
+					p1.onSendRecordingTap({
 						mode = dictationAnalyticsModule.Modes.Continuous,
 						outcome = dictationAnalyticsModule.Outcomes.Full,
-						textStt = p8,
-						textSent = p8
+						textStt = p2,
+						textSent = p2
 					})
 				end
 				return
-			elseif not var27.current and p2.onTranscriptionStaged ~= nil then
-				p2.onTranscriptionStaged(p8, dictationAnalyticsModule.Modes.Standard)
+			elseif not var3.current and p1.onTranscriptionStaged ~= nil then
+				p1.onTranscriptionStaged(p2, dictationAnalyticsModule.Modes.Standard)
 			end
-			local var74 = var48(p8)
-			var32.logTranscription(p8, p9, var74)
+			local var35 = var26(p2)
+			var8.logTranscription(p2, p3, var35)
 			
-			if var74 and var27.current then
-				var27.current = false
-				p2.onSendRecordingTap({
+			if var35 and var3.current then
+				var3.current = false
+				p1.onSendRecordingTap({
 					mode = dictationAnalyticsModule.Modes.Standard,
 					outcome = dictationAnalyticsModule.Outcomes.Full,
-					textStt = p8,
-					textSent = p8
+					textStt = p2,
+					textSent = p2
 				})
 			end
 		end, {
-			var48,
-			p2.onSendRecordingTap,
-			p2.onTranscriptionStaged,
-			var51,
-			var32.logTranscription
+			var26,
+			p1.onSendRecordingTap,
+			p1.onTranscriptionStaged,
+			var29,
+			var8.logTranscription
 		}),
-		onSpeechStarted = reactModule.useCallback(function(p10)
-			-- upvalues: dictationModeModule (copy), var52 (ref), var51 (ref), var32 (ref)
-			if p10 ~= dictationModeModule.Continuous then return end
-			if var52.current ~= nil then
-				var51.begin(var52.current)
+		onSpeechStarted = reactModule.useCallback(function(p2)
+			-- upvalues: dictationModeModule (copy), var30 (ref), var29 (ref), var8 (ref)
+			if p2 ~= dictationModeModule.Continuous then return end
+			if var30.current ~= nil then
+				var29.begin(var30.current)
 			end
-			var32.logSpeechStarted()
-		end, { var51, var32.logSpeechStarted }),
-		onActivityChanged = reactModule.useCallback(function(p11)
-			-- upvalues: fFlagExpChatDictationFTUXModule (copy), var29 (ref), var30 (ref), fFlagExpChatDictationU13PolicyToastModule (copy), var36 (ref), var37 (ref), u13PolicyToastStorageModule (copy), setUIBloxToast (copy), var44 (ref), var45 (ref), var52 (ref), var51 (ref), p2 (ref)
-			if p11 then
-				if fFlagExpChatDictationFTUXModule and var29.current and var30.current then
-					var30.current = false
-					var29.current.markUsed()
+			var8.logSpeechStarted()
+		end, { var29, var8.logSpeechStarted }),
+		onActivityChanged = reactModule.useCallback(function(p2)
+			-- upvalues: fFlagExpChatDictationFTUXModule (copy), var5 (ref), var6 (ref), fFlagExpChatDictationU13PolicyToastModule (copy), var12 (ref), var13 (ref), u13PolicyToastStorageModule (copy), setUIBloxToast (copy), var22 (ref), var23 (ref), var30 (ref), var29 (ref), p1 (ref)
+			if p2 then
+				if fFlagExpChatDictationFTUXModule and var5.current and var6.current then
+					var6.current = false
+					var5.current.markUsed()
 				end
-				if fFlagExpChatDictationU13PolicyToastModule and var36 and not var37.current then
-					var37.current = true
+				if fFlagExpChatDictationU13PolicyToastModule and var12 and not var13.current then
+					var13.current = true
 					u13PolicyToastStorageModule.markShown()
 					setUIBloxToast({
 						duration = 5,
-						toastTitle = var44,
-						toastSubtitle = var45,
+						toastTitle = var22,
+						toastSubtitle = var23,
 						onActivated = function() end
 					})
 				end
 			else
-				var52.current = nil
-				var51.reset()
+				var30.current = nil
+				var29.reset()
 			end
-			local onDictationActivityChanged = p2.onDictationActivityChanged
+			local onDictationActivityChanged = p1.onDictationActivityChanged
 			
 			if onDictationActivityChanged ~= nil then
-				onDictationActivityChanged(p11)
+				onDictationActivityChanged(p2)
 			end
 		end, {
-			var36,
-			p2.onDictationActivityChanged,
-			var51,
-			var45,
-			var44
+			var12,
+			p1.onDictationActivityChanged,
+			var29,
+			var23,
+			var22
 		}),
-		onPermissionResolved = reactModule.useCallback(function(p12, p13)
-			-- upvalues: var32 (ref), fFlagExpChatDictationU13PolicyToastModule (copy), permissionStatus (copy), var54 (ref), var36 (ref), var37 (ref), setUIBloxToast (copy), var46 (ref), var47 (ref)
-			var32.logPermissionResolved(p13, p12)
+		onPermissionResolved = reactModule.useCallback(function(p2, p3)
+			-- upvalues: var8 (ref), fFlagExpChatDictationU13PolicyToastModule (copy), permissionStatus (copy), var32 (ref), var12 (ref), var13 (ref), setUIBloxToast (copy), var24 (ref), var25 (ref)
+			var8.logPermissionResolved(p3, p2)
 			
-			if fFlagExpChatDictationU13PolicyToastModule and p12 == permissionStatus.Granted and (not var54.current and var36) then
-				var54.current = true
-				var37.current = true
-				setUIBloxToast({ toastTitle = var46, toastSubtitle = var47 })
+			if fFlagExpChatDictationU13PolicyToastModule and p2 == permissionStatus.Granted and (not var32.current and var12) then
+				var32.current = true
+				var13.current = true
+				setUIBloxToast({ toastTitle = var24, toastSubtitle = var25 })
 				
 				return
 			end
-		end, { var32.logPermissionResolved, var36, var46, var47 }),
-		onRecordingStart = var32.logRecordingStart,
-		onRecordingStop = var32.logRecordingStop,
-		onError = var50
+		end, { var8.logPermissionResolved, var12, var24, var25 }),
+		onRecordingStart = var8.logRecordingStart,
+		onRecordingStop = var8.logRecordingStop,
+		onError = var28
 	})
-	local var56 = signalsReactModule.useSignalState(var55.getDictationState)
-	local var57 = var56 == dictationState.Recording
-	local var58 = var56 == dictationState.Transcribing
-	local var59 = var56 == dictationState.Listening
-	local startDictation = var55.startDictation
-	local stopDictation = var55.stopDictation
-	local var60 = if fFlagExpChatLongPressContinuousDictation then dictationModeModule.Standard elseif fFlagExpChatContinuousDictation then dictationModeModule.Continuous else dictationModeModule.Standard
-	local var61 = if fFlagExpChatLongPressContinuousDictation then dictationModeModule.Continuous else nil
-	local var62 = if fFlagExpChatDictationFTUXModule and fFlagExpChatLongPressContinuousDictation then useDictationFTUXModule({
-		isEligible = var35,
-		isComposing = p2.inputText ~= "",
-		isActive = var56 ~= dictationState.Idle
+	local var34 = signalsReactModule.useSignalState(var33.getDictationState)
+	local var35 = var34 == dictationState.Recording
+	local var36 = var34 == dictationState.Transcribing
+	local var37 = var34 == dictationState.Listening
+	local startDictation = var33.startDictation
+	local stopDictation = var33.stopDictation
+	local var38 = if fFlagExpChatLongPressContinuousDictation then dictationModeModule.Standard elseif fFlagExpChatContinuousDictation then dictationModeModule.Continuous else dictationModeModule.Standard
+	local var39 = if fFlagExpChatLongPressContinuousDictation then dictationModeModule.Continuous else nil
+	local var40 = if fFlagExpChatDictationFTUXModule and fFlagExpChatLongPressContinuousDictation then useDictationFTUXModule({
+		isEligible = var11,
+		isComposing = p1.inputText ~= "",
+		isActive = var34 ~= dictationState.Idle
 	}) else nil
 	
-	if var29 then
-		var29.current = var62
+	if var5 then
+		var5.current = var40
 	end
-	local var63 = reactModule.useCallback(function()
-		-- upvalues: var55 (ref), dictationState (copy), var27 (ref), stopDictation (ref), var32 (ref), var60 (ref), dictationAnalyticsModule (copy), fFlagExpChatDictationFTUXModule (copy), var62 (ref), var30 (ref), startDictation (ref)
-		if var55.getDictationState(false) == dictationState.Recording then
-			var27.current = true
+	local var41 = reactModule.useCallback(function()
+		-- upvalues: var33 (ref), dictationState (copy), var3 (ref), stopDictation (ref), var8 (ref), var38 (ref), dictationAnalyticsModule (copy), fFlagExpChatDictationFTUXModule (copy), var40 (ref), var6 (ref), startDictation (ref)
+		if var33.getDictationState(false) == dictationState.Recording then
+			var3.current = true
 			stopDictation()
 			
 			return
 		end
-		var27.current = false
-		var32.logMicClick(var60, dictationAnalyticsModule.EntryPoints.Tap)
+		var3.current = false
+		var8.logMicClick(var38, dictationAnalyticsModule.EntryPoints.Tap)
 		
-		if fFlagExpChatDictationFTUXModule and var62 and var62.shouldShow then
-			var62.dismiss()
-		elseif var30 then
-			var30.current = true
+		if fFlagExpChatDictationFTUXModule and var40 and var40.shouldShow then
+			var40.dismiss()
+		elseif var6 then
+			var6.current = true
 		end
-		startDictation(var60)
+		startDictation(var38)
 	end, {
-		var60, startDictation, stopDictation, var62, var55.getDictationState, var30,
-		var32.logMicClick
+		var38, startDictation, stopDictation, var40, var33.getDictationState, var6,
+		var8.logMicClick
 	})
 	
 	return {
-		state = var56,
-		isRecording = var57,
-		isTranscribing = var58,
-		isListening = var59,
-		isDictationEligible = var35,
-		dictation = var55,
-		onMicTap = var63,
+		state = var34,
+		isRecording = var35,
+		isTranscribing = var36,
+		isListening = var37,
+		isDictationEligible = var11,
+		dictation = var33,
+		onMicTap = var41,
 		micGestureHandlers = useLongPressModule({
-			onLongPress = if var61 == dictationModeModule.Continuous then reactModule.useCallback(function()
-				-- upvalues: var55 (ref), dictationState (copy), var32 (ref), dictationModeModule (copy), dictationAnalyticsModule (copy), fFlagExpChatDictationFTUXModule (copy), var62 (ref), startDictation (ref)
-				if var55.getDictationState(false) == dictationState.Idle then
-					var32.logMicClick(dictationModeModule.Continuous, dictationAnalyticsModule.EntryPoints.LongPress)
+			onLongPress = if var39 == dictationModeModule.Continuous then reactModule.useCallback(function()
+				-- upvalues: var33 (ref), dictationState (copy), var8 (ref), dictationModeModule (copy), dictationAnalyticsModule (copy), fFlagExpChatDictationFTUXModule (copy), var40 (ref), startDictation (ref)
+				if var33.getDictationState(false) == dictationState.Idle then
+					var8.logMicClick(dictationModeModule.Continuous, dictationAnalyticsModule.EntryPoints.LongPress)
 					
-					if fFlagExpChatDictationFTUXModule and var62 and var62.shouldShow then
-						var62.dismiss()
+					if fFlagExpChatDictationFTUXModule and var40 and var40.shouldShow then
+						var40.dismiss()
 					end
 					startDictation(dictationModeModule.Continuous)
 				end
 			end, {
-				var55.getDictationState,
+				var33.getDictationState,
 				startDictation,
-				var62,
-				var32.logMicClick
+				var40,
+				var8.logMicClick
 			}) else nil,
-			onTap = var63
+			onTap = var41
 		}),
-		micCursor = var26,
-		ftux = var62,
-		micButtonSlotRef = var28,
-		onWaveformSample = var53,
-		transcribedSamplesBinding = var51.binding,
-		chatInputBarSettings = p2.chatInputBarSettings,
-		customTextBoxRef = p2.customTextBoxRef,
-		textBoxRef = p2.textBoxRef
+		micCursor = var2,
+		ftux = var40,
+		micButtonSlotRef = var4,
+		onWaveformSample = var31,
+		transcribedSamplesBinding = var29.binding,
+		chatInputBarSettings = p1.chatInputBarSettings,
+		customTextBoxRef = p1.customTextBoxRef,
+		textBoxRef = p1.textBoxRef
 	}
 end

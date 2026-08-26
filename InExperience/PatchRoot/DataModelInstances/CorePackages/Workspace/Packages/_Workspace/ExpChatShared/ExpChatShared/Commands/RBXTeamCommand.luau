@@ -6,10 +6,10 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/team", "/t", "%%" },
-	clientRun = function(p0, _, _)
+	clientRun = function(p1, _, _)
 		-- upvalues: chatInputBarActivatedTeamModeModule (ref), team (ref)
-		if p0:getState().LocalTeam then
-			p0:dispatch(chatInputBarActivatedTeamModeModule())
+		if p1:getState().LocalTeam then
+			p1:dispatch(chatInputBarActivatedTeamModeModule())
 			
 			return { key = "", metadata = "Roblox.Team.Info.Success" }
 		end

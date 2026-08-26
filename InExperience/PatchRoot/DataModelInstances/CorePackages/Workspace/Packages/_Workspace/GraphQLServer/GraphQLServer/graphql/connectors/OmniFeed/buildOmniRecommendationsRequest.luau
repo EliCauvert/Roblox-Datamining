@@ -3,12 +3,12 @@ local makeOmniRecommendationsRequest = require(parent.GraphQlShared).MakeOmniRec
 local _ = require(parent.LuauPolyfill)
 local _ = require(parent.Fetch)
 
-local function _(p0)
-	return function(p1, _, p2)
-		-- upvalues: p0 (ref)
-		return p0(p1, {
+local function _(p1)
+	return function(p2, _, p3)
+		-- upvalues: p1 (ref)
+		return p1(p2, {
 			method = "POST",
-			body = p2.postBody,
+			body = p3.postBody,
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
@@ -17,13 +17,13 @@ local function _(p0)
 	end
 end
 
-return function(p3)
+return function(p1)
 	-- upvalues: makeOmniRecommendationsRequest (ref)
-	local var0 = function(p4, _, p5)
-		-- upvalues: p3 (ref)
-		return p3(p4, {
+	local var1 = function(p2, _, p3)
+		-- upvalues: p1 (ref)
+		return p1(p2, {
 			method = "POST",
-			body = p5.postBody,
+			body = p3.postBody,
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
@@ -31,8 +31,8 @@ return function(p3)
 		})
 	end
 	
-	return function(p6, p7, p8, p9)
-		-- upvalues: makeOmniRecommendationsRequest (copy), var0 (ref)
-		return makeOmniRecommendationsRequest(var0, p6, p7, p8, p9)
+	return function(p2, p3, p4, p5)
+		-- upvalues: makeOmniRecommendationsRequest (copy), var1 (ref)
+		return makeOmniRecommendationsRequest(var1, p2, p3, p4, p5)
 	end
 end

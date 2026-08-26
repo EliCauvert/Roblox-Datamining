@@ -8,14 +8,14 @@ local t = {
 if require(parent.SharedFlags).FFlagAppIaHomeSubTab then
 	t[navigationRoduxModule.Constants.HomeContainerName] = true
 end
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref)
-	if not p0 then
+	if not p1 then
 		return nil
 	end
-	local var2 = p0
-	while t[var2.routeName] and (var2.routes and var2.index) do
-		var2 = var2.routes[var2.index]
+	local var1 = p1
+	while t[var1.routeName] and (var1.routes and var1.index) do
+		var1 = var1.routes[var1.index]
 	end
-	return var2.routeName
+	return var1.routeName
 end

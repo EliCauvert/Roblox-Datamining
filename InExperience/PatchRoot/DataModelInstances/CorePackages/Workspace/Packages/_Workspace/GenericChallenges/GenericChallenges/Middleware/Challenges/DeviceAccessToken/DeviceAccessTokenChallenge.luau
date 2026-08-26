@@ -16,71 +16,71 @@ local deviceAccessChallengeEventModule = require(script.Parent.DeviceAccessChall
 local challengeEventConstantsModule = require(genericChallenges.Utils.ChallengeEventConstants)
 local getFFlagLuaAppChallengeMoreTelemetryEnabledModule = require(genericChallenges.Middleware.Flags.GetFFlagLuaAppChallengeMoreTelemetryEnabled)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useRoactService (ref), appLogging (ref), httpService (ref), getFFlagLuaAppChallengeMoreTelemetryEnabledModule (ref), useState (ref), useEffect (ref), deviceAccessChallengeEventModule (ref), challengeEventConstantsModule (ref), useSelector (ref), roactModule (ref), loading (ref), iconSize (ref), roactNavigationModule (ref)
-	local var9 = useRoactService(appLogging)
-	local var10 = nil
-	local var11 = nil
-	local var12 = nil
-	local var13 = nil
-	local challengeMetadata = httpService:JSONDecode(p0.challengeMetadata)
+	local var1 = useRoactService(appLogging)
+	local var2 = nil
+	local var3 = nil
+	local var4 = nil
+	local var5 = nil
+	local challengeMetadata = httpService:JSONDecode(p1.challengeMetadata)
 	
 	if getFFlagLuaAppChallengeMoreTelemetryEnabledModule() then
-		local var15, var16 = useState(false)
-		var10 = var15
-		var11 = var16
-		local var17, var18 = useState(false)
-		var12 = var17
-		var13 = var18
+		local var6, var7 = useState(false)
+		var2 = var6
+		var3 = var7
+		local var8, var9 = useState(false)
+		var4 = var8
+		var5 = var9
 	end
 	useEffect(function()
-		-- upvalues: var9 (ref), deviceAccessChallengeEventModule (copy), challengeEventConstantsModule (copy), p0 (ref), challengeMetadata (ref), httpService (copy), getFFlagLuaAppChallengeMoreTelemetryEnabledModule (copy), var11 (write), var13 (write)
-		var9:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {
+		-- upvalues: var1 (ref), deviceAccessChallengeEventModule (copy), challengeEventConstantsModule (copy), p1 (ref), challengeMetadata (ref), httpService (copy), getFFlagLuaAppChallengeMoreTelemetryEnabledModule (copy), var3 (write), var5 (write)
+		var1:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInitialized,
-			challengeId = p0.challengeId,
+			challengeId = p1.challengeId,
 			tokenType = challengeMetadata.tokenType
 		})
-		local accountService = p0.accountService
+		local accountService = p1.accountService
 		local errorCode = nil
 		
 		if accountService and accountService:DeviceAccessTokenAvailable() then
-			local var20 = httpService:JSONDecode(accountService:GetDeviceAccessToken())
-			errorCode = var20.errorCode
+			local var10 = httpService:JSONDecode(accountService:GetDeviceAccessToken())
+			errorCode = var10.errorCode
 			
 			if errorCode == nil or errorCode == "" then
-				var20.accessToken.tokenType = challengeMetadata.tokenType
+				var10.accessToken.tokenType = challengeMetadata.tokenType
 				
 				if getFFlagLuaAppChallengeMoreTelemetryEnabledModule() then
-					var11(true)
+					var3(true)
 				end
-				p0.onChallengeCompleted(httpService:JSONEncode(var20.accessToken))
-				var9:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {
+				p1.onChallengeCompleted(httpService:JSONEncode(var10.accessToken))
+				var1:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {
 					context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeCompleted,
-					challengeId = p0.challengeId,
+					challengeId = p1.challengeId,
 					tokenType = challengeMetadata.tokenType
 				})
 				
 				return
 			elseif getFFlagLuaAppChallengeMoreTelemetryEnabledModule() then
-				var13(true)
+				var5(true)
 			end
-			p0.onChallengeFailed(errorCode)
-			var9:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {
+			p1.onChallengeFailed(errorCode)
+			var1:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {
 				context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInvalidated,
-				challengeId = p0.challengeId,
+				challengeId = p1.challengeId,
 				tokenType = challengeMetadata.tokenType,
 				errorCode = errorCode
 			})
 		end
 	end, {})
-	local var19 = useSelector(function(p1)
-		return { screenSize = p1.ScreenSize }
+	local var10 = useSelector(function(p2)
+		return { screenSize = p2.ScreenSize }
 	end)
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 0.2,
 		Active = true,
-		Size = UDim2.fromOffset(var19.screenSize.X, var19.screenSize.Y)
+		Size = UDim2.fromOffset(var10.screenSize.X, var10.screenSize.Y)
 	}, {
 		Spinner = roactModule.createElement(loading, {
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -89,11 +89,11 @@ return function(p0)
 		}),
 		NavigationEvents = if getFFlagLuaAppChallengeMoreTelemetryEnabledModule() then roactModule.createElement(roactNavigationModule.NavigationEvents, {
 			onWillBlur = function()
-				-- upvalues: var10 (write), var12 (write), var9 (ref), deviceAccessChallengeEventModule (copy), challengeEventConstantsModule (copy), p0 (ref), challengeMetadata (ref)
-				if not var10 and not var12 then
-					var9:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {
+				-- upvalues: var2 (write), var4 (write), var1 (ref), deviceAccessChallengeEventModule (copy), challengeEventConstantsModule (copy), p1 (ref), challengeMetadata (ref)
+				if not var2 and not var4 then
+					var1:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {
 						context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeAbandoned,
-						challengeId = p0.challengeId,
+						challengeId = p1.challengeId,
 						tokenType = challengeMetadata.tokenType
 					})
 				end

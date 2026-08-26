@@ -16,9 +16,9 @@ local groups_url = `{url.GROUPS_URL}v1/groups/`
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), signalsModule (ref), requestJoinCommunityModule (ref), logResponseError (ref), groups_url (ref), discoveryEventErrorLogger (ref)
-	local var8 = createDataCacheModule()
-	local var9 = createDataResolverModule({
-		cache = var8,
+	local var1 = createDataCacheModule()
+	local var2 = createDataResolverModule({
+		cache = var1,
 		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
@@ -26,68 +26,68 @@ return function()
 		supportsMutations = fFlagLuaAppDataHydrationOptimisticMutationLayer
 	})
 	
-	local function applyOptimisticMembership(p0)
-		-- upvalues: signalsModule (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var9 (ref), var8 (ref)
-		local var11, var12 = signalsModule.createSignal(nil)
+	local function applyOptimisticMembership(p1)
+		-- upvalues: signalsModule (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var2 (ref), var1 (ref)
+		local var3, var4 = signalsModule.createSignal(nil)
 		local canJoin = nil
 		
 		if fFlagLuaAppDataHydrationOptimisticMutationLayer then
-			var9.setMutation(p0, { canJoin = false })
+			var2.setMutation(p1, { canJoin = false })
 		else
-			local item = var8.getItem(p0)
-			local var15 = item and item.data(false)
-			canJoin = var15 and var15.canJoin
-			var8.updateItem(p0, { canJoin = false })
+			local item = var1.getItem(p1)
+			local var5 = item and item.data(false)
+			canJoin = var5 and var5.canJoin
+			var1.updateItem(p1, { canJoin = false })
 		end
-		return var11, function(p1)
-			-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var9 (copy), p0 (ref), var8 (copy), canJoin (write), var12 (ref)
-			local var16 = p1 and p1.type == "error"
+		return var3, function(p2)
+			-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var2 (copy), p1 (ref), var1 (copy), canJoin (write), var4 (ref)
+			local var6 = p2 and p2.type == "error"
 			
 			if fFlagLuaAppDataHydrationOptimisticMutationLayer then
-				if var16 then
-					var9.clearMutation(p0)
+				if var6 then
+					var2.clearMutation(p1)
 				else
-					var9.commitMutation(p0)
+					var2.commitMutation(p1)
 				end
-			elseif var16 then
-				var8.updateItem(p0, { canJoin = canJoin })
+			elseif var6 then
+				var1.updateItem(p1, { canJoin = canJoin })
 			end
-			var12(p1)
+			var4(p2)
 		end
 	end
 	
 	return {
-		getMembership = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var9.getOptimisticCachedItem else var9.getCachedItem,
-		getMemberships = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var9.getOptimisticCachedItems else var9.getCachedItems,
-		updateMembership = var8.updateItem,
-		updateMemberships = var8.updateItems,
-		joinCommunity = function(p2)
+		getMembership = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var2.getOptimisticCachedItem else var2.getCachedItem,
+		getMemberships = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var2.getOptimisticCachedItems else var2.getCachedItems,
+		updateMembership = var1.updateItem,
+		updateMemberships = var1.updateItems,
+		joinCommunity = function(p1)
 			-- upvalues: applyOptimisticMembership (ref), requestJoinCommunityModule (copy), logResponseError (copy), groups_url (copy), discoveryEventErrorLogger (copy)
-			local var17, var18 = applyOptimisticMembership(p2)
-			requestJoinCommunityModule(p2):andThen(function()
-				-- upvalues: var18 (ref)
-				var18({ type = "success" })
-			end):catch(function(p3)
-				-- upvalues: var18 (ref), logResponseError (copy), groups_url (copy), discoveryEventErrorLogger (copy), p2 (ref)
-				local var19 = if type(p3) == "table" and p3.StatusCode then p3.StatusCode else nil
-				local var20 = if type(p3) == "table" and p3.StatusMessage then p3.StatusMessage elseif type(p3) == "string" then p3 else nil
-				var18({
+			local var3, var4 = applyOptimisticMembership(p1)
+			requestJoinCommunityModule(p1):andThen(function()
+				-- upvalues: var4 (ref)
+				var4({ type = "success" })
+			end):catch(function(p2)
+				-- upvalues: var4 (ref), logResponseError (copy), groups_url (copy), discoveryEventErrorLogger (copy), p1 (ref)
+				local var5 = if type(p2) == "table" and p2.StatusCode then p2.StatusCode else nil
+				local var6 = if type(p2) == "table" and p2.StatusMessage then p2.StatusMessage elseif type(p2) == "string" then p2 else nil
+				var4({
 					type = "error",
-					statusCode = var19,
-					statusMessage = var20
+					statusCode = var5,
+					statusMessage = var6
 				})
-				logResponseError(groups_url, { StatusCode = var19 })
+				logResponseError(groups_url, { StatusCode = var5 })
 				discoveryEventErrorLogger.reportError("joinCommunity", "Error joining community", {
 					method = "POST",
-					communityId = p2,
-					statusCode = var19,
-					statusMessage = var20
+					communityId = p1,
+					statusCode = var5,
+					statusMessage = var6
 				})
 			end)
 			
-			return var17
+			return var3
 		end,
-		clear = var9.clear,
-		dispose = var9.dispose
+		clear = var2.clear,
+		dispose = var2.dispose
 	}
 end

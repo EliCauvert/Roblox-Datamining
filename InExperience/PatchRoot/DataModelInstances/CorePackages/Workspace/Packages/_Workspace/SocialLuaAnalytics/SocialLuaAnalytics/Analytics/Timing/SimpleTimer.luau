@@ -1,17 +1,17 @@
 ﻿local loggerModule = require(script.Parent.Parent.Logger)
 
-local _ = function(p0, p1)
-	return (p0.UnixTimestampMillis - p1.UnixTimestampMillis) / 1000
+local _ = function(p1, p2)
+	return (p1.UnixTimestampMillis - p2.UnixTimestampMillis) / 1000
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: loggerModule (ref)
 	local var1 = nil
 	local var2 = nil
 	local var3 = nil
 	local var4 = nil
-	local var5 = if p2 then p2.timeoutThreshold else nil
-	local var6 = if p2 then p2.onReachingThreshold else nil
+	local var5 = if p1 then p1.timeoutThreshold else nil
+	local var6 = if p1 then p1.onReachingThreshold else nil
 	
 	local _ = function()
 		-- upvalues: var1 (write), var2 (write)
@@ -53,24 +53,24 @@ return function(p2)
 	end
 	
 	return {
-		start = function(p3)
+		start = function(p2)
 			-- upvalues: var1 (write), var3 (write), var5 (ref), var6 (ref), var4 (write), loggerModule (copy)
 			if var1 then
 				loggerModule:warning("Timer has been already started")
 			else
 				var1 = os.clock()
-				var3 = p3 or DateTime.now()
+				var3 = p2 or DateTime.now()
 				
-				if p3 then
+				if p2 then
 					var1 = (var3.UnixTimestampMillis - DateTime.now().UnixTimestampMillis) / 1000
 				end
 				if not var5 then return end
 				if var6 then
-					local var9 = var6
+					local var8 = var6
 					var4 = task.delay(var5, function()
-						-- upvalues: var4 (copy), var9 (ref)
+						-- upvalues: var4 (copy), var8 (ref)
 						var4 = nil
-						var9()
+						var8()
 					end)
 					
 					return

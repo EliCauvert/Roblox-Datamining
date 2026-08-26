@@ -9,23 +9,23 @@ local useProperty = require(parent_1.GuiObjectUtils).useProperty
 
 return function()
 	-- upvalues: useProperty (ref), playersService (ref), reactModule (ref), lifecycleEventsModule (ref), notificationTypeEnum (ref), httpService (ref)
-	local var4 = useProperty(playersService, "LocalPlayer")
+	local var1 = useProperty(playersService, "LocalPlayer")
 	reactModule.useEffect(function()
-		-- upvalues: lifecycleEventsModule (copy), notificationTypeEnum (copy), httpService (copy), var4 (ref), playersService (copy)
-		local userAction = lifecycleEventsModule:RegisterCallback(lifecycleEventsModule.ToastEvents.UserAction, notificationTypeEnum.FriendRequestReceived, function(p0)
-			-- upvalues: httpService (copy), var4 (copy), playersService (copy)
-			if p0 and p0.userActionType == "click" and (p0.notificationData and p0.visualItem) then
-				local senderUserId = httpService:JSONDecode(p0.visualItem.actionEventParams).senderUserId
+		-- upvalues: lifecycleEventsModule (copy), notificationTypeEnum (copy), httpService (copy), var1 (ref), playersService (copy)
+		local userAction = lifecycleEventsModule:RegisterCallback(lifecycleEventsModule.ToastEvents.UserAction, notificationTypeEnum.FriendRequestReceived, function(p1)
+			-- upvalues: httpService (copy), var1 (copy), playersService (copy)
+			if p1 and p1.userActionType == "click" and (p1.notificationData and p1.visualItem) then
+				local senderUserId = httpService:JSONDecode(p1.visualItem.actionEventParams).senderUserId
 				
-				if senderUserId and var4 then
-					local var6 = playersService:GetPlayerByUserId(tonumber(senderUserId))
+				if senderUserId and var1 then
+					local var2 = playersService:GetPlayerByUserId(tonumber(senderUserId))
 					
-					if p0.visualItem.eventName == "AcceptFriend" then
-						var4:RequestFriendship(var6)
+					if p1.visualItem.eventName == "AcceptFriend" then
+						var1:RequestFriendship(var2)
 						
 						return
-					elseif p0.visualItem.eventName == "IgnoreFriend" then
-						var4:RevokeFriendship(var6)
+					elseif p1.visualItem.eventName == "IgnoreFriend" then
+						var1:RevokeFriendship(var2)
 					end
 				end
 			end
@@ -35,5 +35,5 @@ return function()
 			-- upvalues: userAction (ref)
 			userAction()
 		end
-	end, { var4 })
+	end, { var1 })
 end

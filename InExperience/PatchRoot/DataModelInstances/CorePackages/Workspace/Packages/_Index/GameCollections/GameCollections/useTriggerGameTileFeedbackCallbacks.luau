@@ -7,9 +7,9 @@ return function()
 	local var1 = useTriggerFeedback()
 	local var2 = reactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p0)
+	return reactModule.useCallback(function(p1)
 		-- upvalues: var2 (ref), var1 (ref)
-		local guiState = p0.GuiState
+		local guiState = p1.GuiState
 		
 		if var2.current == Enum.GuiState.Press then
 			var1("Default", "Release")

@@ -11,9 +11,9 @@ toast_1.validateProps = tModule.strictInterface({
 	toastSubtitle = tModule.optional(tModule.string)
 })
 
-function toast_1.render(p0)
+function toast_1.render(p1)
 	-- upvalues: roactModule (ref), toast (ref), images (ref)
-	return if p0.props.toastTitle then roactModule.createElement("Frame", {
+	return if p1.props.toastTitle then roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 100,
 		Size = UDim2.fromScale(1, 1)
@@ -22,8 +22,8 @@ function toast_1.render(p0)
 			duration = 3,
 			toastContent = {
 				iconImage = images["icons/status/success"],
-				toastTitle = p0.props.toastTitle,
-				toastSubtitle = p0.props.toastSubtitle
+				toastTitle = p1.props.toastTitle,
+				toastSubtitle = p1.props.toastSubtitle
 			}
 		})
 	}) else nil

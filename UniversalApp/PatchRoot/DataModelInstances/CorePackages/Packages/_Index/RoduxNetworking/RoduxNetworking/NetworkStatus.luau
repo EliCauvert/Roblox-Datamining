@@ -1,8 +1,8 @@
-﻿return function(p0)
+﻿return function(p1)
 	return {
-		getStatus = require(script.getStatus)(p0),
-		setStatus = require(script.setStatus)(p0),
-		installReducer = require(script.installReducer)(p0),
+		getStatus = require(script.getStatus)(p1),
+		setStatus = require(script.setStatus)(p1),
+		installReducer = require(script.installReducer)(p1),
 		Enum = { Status = require(script.EnumNetworkStatus) }
 	}
 end

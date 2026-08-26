@@ -15,34 +15,34 @@ local t = {
 	try = "Feature.Catalog.Action.Try"
 }
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), button (ref), buttonVariant (ref), inputSize (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref)
-	local var6 = useLocalization(t)
+	local var1 = useLocalization(t)
 	
-	return if p0.isOwned or false then reactModule.createElement(button, {
+	return if p1.isOwned or false then reactModule.createElement(button, {
 		isDisabled = true,
-		text = var6.owned,
+		text = var1.owned,
 		variant = buttonVariant.Standard,
 		size = inputSize.Small,
 		width = UDim.new(1, 0),
-		LayoutOrder = p0.LayoutOrder,
+		LayoutOrder = p1.LayoutOrder,
 		onActivated = function() end
-	}) elseif fFlagLuaAppEnableGamePassFreeTrialsModule and p0.showTry then reactModule.createElement(button, {
-		text = var6.try,
+	}) elseif fFlagLuaAppEnableGamePassFreeTrialsModule and p1.showTry then reactModule.createElement(button, {
+		text = var1.try,
 		variant = buttonVariant.Standard,
 		size = inputSize.Small,
 		width = UDim.new(1, 0),
 		onActivated = function() end,
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}) else reactModule.createElement(button, {
-		text = var6.buy,
+		text = var1.buy,
 		variant = buttonVariant.Standard,
 		size = inputSize.Small,
 		width = UDim.new(1, 0),
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: initiateShopItemPurchaseModule (copy), p0 (ref)
-			initiateShopItemPurchaseModule(p0.itemId, p0.itemType, p0.shopPageType)
-		end, { p0.itemId, p0.itemType, p0.shopPageType }),
-		LayoutOrder = p0.LayoutOrder
+			-- upvalues: initiateShopItemPurchaseModule (copy), p1 (ref)
+			initiateShopItemPurchaseModule(p1.itemId, p1.itemType, p1.shopPageType)
+		end, { p1.itemId, p1.itemType, p1.shopPageType }),
+		LayoutOrder = p1.LayoutOrder
 	})
 end)

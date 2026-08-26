@@ -29,9 +29,9 @@ end
 local function createNetworkImpl()
 	-- upvalues: httpRequestModule (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p0, p1, p2)
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
+			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
 		maxRetryCount = game:DefineFastInt("CommercePurchaseMaxHttpRequestRetries", 2),
 		maxWaitTime = game:DefineFastInt("CommercePurchaseMaxHttpRequestWaitTime", 1)
@@ -48,8 +48,8 @@ return function()
 	local commercePurchaseApp = Instance.new("Folder")
 	commercePurchaseApp.Name = "CommercePurchaseApp"
 	commercePurchaseApp.Parent = coreGuiService
-	local var15 = reactRobloxModule.createRoot(commercePurchaseApp)
-	var15:render(reactModule.createElement(localizationProvider, {
+	local var1 = reactRobloxModule.createRoot(commercePurchaseApp)
+	var1:render(reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		reactModule.createElement(appStyleProvider, { style = t }, {
@@ -75,5 +75,5 @@ return function()
 		})
 	}))
 	
-	return var15
+	return var1
 end

@@ -20,10 +20,10 @@ local t = {
 }
 local _ = require(bulkPurchaseApp.Store.Types)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), t (ref), useDiscountSummaryPropsModule (ref), reactModule (ref), view (ref), priceBoxLineModule (ref), priceBoxLineVariantEnumModule (ref), discountSummary (ref), foundationModule (ref), fFlagAddTimerToBulkPurchaseBuyButtonModule (ref), fIntBulkPurchaseEnabledCountdownMSModule (ref)
-	local var9 = useLocalization(t)
-	local var10 = useDiscountSummaryPropsModule(p0.discountInformation, p0.totalCost)
+	local var1 = useLocalization(t)
+	local var2 = useDiscountSummaryPropsModule(p1.discountInformation, p1.totalCost)
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center gap-xxlarge size-full-0 auto-y padding-xxlarge radius-medium bg-surface-100"
@@ -38,36 +38,36 @@ return function(p0)
 			}, {
 				PriceBoxCurrentBalance = reactModule.createElement(priceBoxLineModule, {
 					LayoutOrder = 1,
-					text = var9.currentBalanceLine,
-					amount = p0.currentBalance
+					text = var1.currentBalanceLine,
+					amount = p1.currentBalance
 				}),
 				PriceBoxProjectedBalance = reactModule.createElement(priceBoxLineModule, {
 					LayoutOrder = 2,
-					text = if p0.missingRobux then var9.missingRobuxLine else var9.projectedBalanceLine,
-					amount = math.abs(p0.totalCost - p0.currentBalance),
-					variant = if p0.missingRobux then priceBoxLineVariantEnumModule.Danger else nil
+					text = if p1.missingRobux then var1.missingRobuxLine else var1.projectedBalanceLine,
+					amount = math.abs(p1.totalCost - p1.currentBalance),
+					variant = if p1.missingRobux then priceBoxLineVariantEnumModule.Danger else nil
 				})
 			}),
-			DiscountSummary = if var10 then reactModule.createElement(view, { LayoutOrder = 2, tag = "size-full-0 auto-y" }, {
-				Content = reactModule.createElement(discountSummary, var10)
+			DiscountSummary = if var2 then reactModule.createElement(view, { LayoutOrder = 2, tag = "size-full-0 auto-y" }, {
+				Content = reactModule.createElement(discountSummary, var2)
 			}) else nil,
 			PriceBoxHeader = reactModule.createElement(priceBoxLineModule, {
 				LayoutOrder = 3,
-				text = var9.heading,
-				amount = p0.totalCost,
-				originalPrice = if p0.discountInformation then p0.discountInformation.originalPrice else nil,
+				text = var1.heading,
+				amount = p1.totalCost,
+				originalPrice = if p1.discountInformation then p1.discountInformation.originalPrice else nil,
 				variant = priceBoxLineVariantEnumModule.Highlight
 			})
 		}),
 		PriceBoxConfirmButton = reactModule.createElement(foundationModule.Button, {
 			LayoutOrder = 2,
-			text = if p0.missingRobux then var9.buyRobuxCTA else var9.confirmCTA,
-			onActivated = p0.onAccept or function() end,
+			text = if p1.missingRobux then var1.buyRobuxCTA else var1.confirmCTA,
+			onActivated = p1.onAccept or function() end,
 			variant = foundationModule.Enums.ButtonVariant.Emphasis,
 			size = foundationModule.Enums.InputSize.Medium,
 			width = UDim.new(1, 0),
-			ref = p0.buttonRef,
-			isDisabled = p0.isDisabled,
+			ref = p1.buttonRef,
+			isDisabled = p1.isDisabled,
 			inputDelay = if fFlagAddTimerToBulkPurchaseBuyButtonModule then math.max(0, fIntBulkPurchaseEnabledCountdownMSModule) / 1000 else nil
 		})
 	})

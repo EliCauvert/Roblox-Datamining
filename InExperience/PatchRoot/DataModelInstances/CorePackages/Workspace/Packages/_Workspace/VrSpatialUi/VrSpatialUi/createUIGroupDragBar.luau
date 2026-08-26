@@ -3,11 +3,11 @@ local dragBarModule = require(vrSpatialUi.DragBar)
 local constantsModule = require(vrSpatialUi.Constants)
 local coreGuiService = game:GetService("CoreGui")
 
-return function(p0)
+return function(p1)
 	-- upvalues: coreGuiService (ref), constantsModule (ref), dragBarModule (ref)
 	local part = Instance.new("Part")
-	part.Size = if p0.dragBarPartSize then Vector3.new(p0.dragBarPartSize.X, p0.dragBarPartSize.Y, 0.00001) else Vector3.new(0.600000023842, 0.119999997318, 0.00001)
-	part.Name = p0.name .. "_DragBar"
+	part.Size = if p1.dragBarPartSize then Vector3.new(p1.dragBarPartSize.X, p1.dragBarPartSize.Y, 0.00001) else Vector3.new(0.600000023842, 0.119999997318, 0.00001)
+	part.Name = p1.name .. "_DragBar"
 	part.Color = Color3.new(1, 1, 1)
 	part.Parent = workspace.CurrentCamera
 	part.Anchored = true
@@ -45,14 +45,14 @@ return function(p0)
 	imageLabel.ImageColor3 = Color3.new(1, 1, 1)
 	dragDetector.RunLocally = true
 	
-	if p0.dragFunction then
-		dragDetector.DragContinue:Connect(p0.dragFunction)
+	if p1.dragFunction then
+		dragDetector.DragContinue:Connect(p1.dragFunction)
 	end
-	if p0.dragStartFunction then
-		dragDetector.DragStart:Connect(p0.dragStartFunction)
+	if p1.dragStartFunction then
+		dragDetector.DragStart:Connect(p1.dragStartFunction)
 	end
-	if p0.dragEndFunction then
-		dragDetector.DragEnd:Connect(p0.dragEndFunction)
+	if p1.dragEndFunction then
+		dragDetector.DragEnd:Connect(p1.dragEndFunction)
 	end
 	return dragBarModule.new(part, imageLabel)
 end

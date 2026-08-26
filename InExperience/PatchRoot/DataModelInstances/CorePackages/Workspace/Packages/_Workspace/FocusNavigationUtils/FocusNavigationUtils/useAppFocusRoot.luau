@@ -8,15 +8,15 @@ local useDefaultAppEventHandlersModule = require(focusNavigationUtils.useDefault
 local focusNavigationDefaultEventMapModule = require(focusNavigationUtils.FocusNavigationDefaultEventMap)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), navigationModule (ref), useDefaultAppEventHandlersModule (ref), cryoModule (ref), focusNavigationDefaultEventMapModule (ref), useFocusRootModule (ref)
-	local var7 = navigationModule.useNavigationFocus()
+	local var1 = navigationModule.useNavigationFocus()
 	
-	return useFocusRootModule(cryoModule.Dictionary.union(p0, {
+	return useFocusRootModule(cryoModule.Dictionary.union(p1, {
 		customEventHandlers = cryoModule.None,
-		eventHandlers = cryoModule.Dictionary.union(useDefaultAppEventHandlersModule(), p0.customEventHandlers or t),
-		eventMap = cryoModule.Dictionary.union(focusNavigationDefaultEventMapModule, p0.customEventMap or t),
-		isFocusable = (p0.isFocusable == nil or p0.isFocusable) and (var7 == nil or var7),
-		isAutoFocusRoot = if p0.isAutoFocusRoot == nil then false else p0.isAutoFocusRoot
+		eventHandlers = cryoModule.Dictionary.union(useDefaultAppEventHandlersModule(), p1.customEventHandlers or t),
+		eventMap = cryoModule.Dictionary.union(focusNavigationDefaultEventMapModule, p1.customEventMap or t),
+		isFocusable = (p1.isFocusable == nil or p1.isFocusable) and (var1 == nil or var1),
+		isAutoFocusRoot = if p1.isAutoFocusRoot == nil then false else p1.isAutoFocusRoot
 	}))
 end

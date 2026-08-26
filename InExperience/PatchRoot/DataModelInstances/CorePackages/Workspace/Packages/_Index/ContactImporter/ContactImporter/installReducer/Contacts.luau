@@ -2,7 +2,7 @@
 local llama = dependenciesModule.llama
 local var1 = dependenciesModule.RoduxContacts.installReducer()
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: llama (ref), var1 (ref)
-	return llama.List.reduce({ p1 }, var1, p0)
+	return llama.List.reduce({ p2 }, var1, p1)
 end

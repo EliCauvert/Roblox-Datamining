@@ -8,7 +8,7 @@ local videoEventInterfaceKeyModule = require(script.Parent.VideoEventInterfaceKe
 local discoveryVideoLoopEventHundredthsPercent = game:DefineFastInt("DiscoveryVideoLoopEventHundredthsPercent", 0)
 local fFlagLuaAppBroadenVideoAnalytics = require(parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
-local var5 = if fFlagLuaAppBroadenVideoAnalytics then nil else tModule.strictInterface({
+local var1 = if fFlagLuaAppBroadenVideoAnalytics then nil else tModule.strictInterface({
 	videoAssetId = tModule.string,
 	videoPlaybackSessionId = tModule.string,
 	universeId = tModule.string,
@@ -16,7 +16,7 @@ local var5 = if fFlagLuaAppBroadenVideoAnalytics then nil else tModule.strictInt
 	gameSetTypeId = tModule.optional(tModule.string),
 	sortPos = tModule.optional(tModule.number)
 })
-local var6 = if fFlagLuaAppBroadenVideoAnalytics then {
+local var2 = if fFlagLuaAppBroadenVideoAnalytics then {
 	[videoEventInterfaceKeyModule.DefaultGameTile] = if fFlagLuaAppBroadenVideoAnalytics then tModule.strictInterface({
 		videoAssetId = tModule.string,
 		videoPlaybackSessionId = tModule.string,
@@ -61,30 +61,30 @@ local t = {
 	lastUpdated = { 25, 4, 23 }
 }
 
-return function(p0, p1)
-	-- upvalues: fFlagLuaAppBroadenVideoAnalytics (ref), getVideoEventParamsValidatorModule (ref), var6 (ref), discoveryEventErrorLogger (ref), var5 (ref), mutedError (ref), loggingProtocolModule (ref), t (ref)
+return function(p1, p2)
+	-- upvalues: fFlagLuaAppBroadenVideoAnalytics (ref), getVideoEventParamsValidatorModule (ref), var2 (ref), discoveryEventErrorLogger (ref), var1 (ref), mutedError (ref), loggingProtocolModule (ref), t (ref)
 	if fFlagLuaAppBroadenVideoAnalytics then
-		local var8 = getVideoEventParamsValidatorModule(p1)
-		local var9 = var6 and var6[var8]
+		local var3 = getVideoEventParamsValidatorModule(p2)
+		local var4 = var2 and var2[var3]
 		
-		if var9 == nil then
-			discoveryEventErrorLogger.reportError("DiscoveryVideoLoopEventMissingInterface", "No validator registered for video event interface key", { interfaceKey = var8 })
+		if var4 == nil then
+			discoveryEventErrorLogger.reportError("DiscoveryVideoLoopEventMissingInterface", "No validator registered for video event interface key", { interfaceKey = var3 })
 		else
-			local var10, var11 = var9(p1)
+			local var5, var6 = var4(p2)
 			
-			if not var10 then
-				discoveryEventErrorLogger.reportError("DiscoveryVideoLoopEventInvalidInterface", var11)
+			if not var5 then
+				discoveryEventErrorLogger.reportError("DiscoveryVideoLoopEventInvalidInterface", var6)
 			end
 		end
 	else
-		local var12, var13 = var5(p1)
+		local var7, var8 = var1(p2)
 		
-		if not var12 then
-			mutedError(var13)
+		if not var7 then
+			mutedError(var8)
 		end
 	end
 	loggingProtocolModule.default:logRobloxTelemetryEvent(t, {
 		"addSessionInfo",
 		loggingProtocolModule.StandardizedFields.addOsInfo
-	}, p1, p0)
+	}, p2, p1)
 end

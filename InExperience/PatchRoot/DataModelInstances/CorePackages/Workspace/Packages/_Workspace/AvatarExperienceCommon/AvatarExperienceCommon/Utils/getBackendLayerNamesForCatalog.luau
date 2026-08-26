@@ -2,14 +2,14 @@
 
 return function()
 	-- upvalues: fStringAXBackendDrivenCatalogLayersNames (ref)
-	local var0 = fStringAXBackendDrivenCatalogLayersNames()
+	local var1 = fStringAXBackendDrivenCatalogLayersNames()
 	
-	if not var0 or var0 == "" then
+	if not var1 or var1 == "" then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in string.split(var0, ",") do
+	for i, v in string.split(var1, ",") do
 		local replaced = string.gsub(v, "^%s*(.-)%s*$", "%1")
 		
 		if replaced ~= "" and string.len(replaced) <= 200 then

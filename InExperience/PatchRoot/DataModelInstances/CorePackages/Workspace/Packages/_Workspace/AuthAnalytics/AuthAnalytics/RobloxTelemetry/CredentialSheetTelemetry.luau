@@ -13,16 +13,16 @@ local t = {
 }
 
 return {
-	report = function(p0, p1)
+	report = function(p1, p2)
 		-- upvalues: default (ref), luaAppCredentialSheetEventStream (ref), t (ref)
-		default:logRobloxTelemetryCounter(p0, 1, p1)
+		default:logRobloxTelemetryCounter(p1, 1, p2)
 		
 		if not luaAppCredentialSheetEventStream then return end
-		local eventName = t[p0.eventName]
+		local eventName = t[p1.eventName]
 		
 		if eventName == nil then
 			return
 		end
-		default:logRobloxTelemetryEvent(eventName, nil, p1)
+		default:logRobloxTelemetryEvent(eventName, nil, p2)
 	end
 }

@@ -65,16 +65,16 @@ local t_1 = {
 	end
 }
 
-function t.asString(p0)
+function t.asString(p1)
 	-- upvalues: t_1 (ref), getFallbackValue (ref)
-	local var4 = t_1[p0]
+	local var1 = t_1[p1]
 	
-	if not var4 then
+	if not var1 then
 		return getFallbackValue()
 	end
-	local var5 = var4()
+	local var2 = var1()
 	
-	return if #var5 == 0 then getFallbackValue() else var5
+	return if #var2 == 0 then getFallbackValue() else var2
 end
 
 function t.asNumber(p1)

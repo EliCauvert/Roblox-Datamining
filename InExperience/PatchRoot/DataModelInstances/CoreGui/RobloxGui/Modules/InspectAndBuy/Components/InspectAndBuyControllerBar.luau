@@ -22,7 +22,7 @@ inspectAndBuyControllerBar.validateProps = tModule.strictInterface({
 	isFavorited = tModule.boolean
 })
 
-function inspectAndBuyControllerBar.render(p0)
+function inspectAndBuyControllerBar.render(p1)
 	-- upvalues: robloxTranslatorModule (ref), tryOn (ref), favorite (ref), roactModule (ref), coreGuiService (ref), controllerBar (ref)
 	local list = {
 		{
@@ -31,15 +31,15 @@ function inspectAndBuyControllerBar.render(p0)
 		}
 	}
 	
-	if p0.props.showTryOn then
+	if p1.props.showTryOn then
 		table.insert(list, 1, {
-			text = p0.props.tryingOn and robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.TakeOff") or robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.TryOn"),
+			text = p1.props.tryingOn and robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.TakeOff") or robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.TryOn"),
 			keyCode = tryOn
 		})
 	end
-	if p0.props.showFavorite then
+	if p1.props.showFavorite then
 		table.insert(list, 1, {
-			text = p0.props.isFavorited and robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Unfavorite") or robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Favorite"),
+			text = p1.props.isFavorited and robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Unfavorite") or robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Favorite"),
 			keyCode = favorite
 		})
 	end

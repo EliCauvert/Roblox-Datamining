@@ -4,9 +4,9 @@ local _ = require(parent.Types)
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: signal (ref), t (ref)
-	return setmetatable({ _value = p0, _changeSignal = signal.new() }, t)
+	return setmetatable({ _value = p1, _changeSignal = signal.new() }, t)
 end
 
 function t:get()
@@ -24,11 +24,11 @@ function t:signal()
 	return self._changeSignal
 end
 
-function t:connect(p2, p3)
-	local changeSignalConnection = self._changeSignal:connect(p2)
+function t:connect(p1, p2)
+	local changeSignalConnection = self._changeSignal:connect(p1)
 	
-	if p3 == true then
-		p2(self._value)
+	if p2 == true then
+		p1(self._value)
 	end
 	return changeSignalConnection
 end

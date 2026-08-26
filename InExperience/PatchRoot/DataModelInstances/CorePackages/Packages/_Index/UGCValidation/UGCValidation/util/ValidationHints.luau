@@ -10,53 +10,53 @@ local t = {}
 local t_1 = { MeshPart = { "MeshId" } }
 local t_2 = { MeshPart = { MeshId = true } }
 
-local function validateMeshIds(p0, p1)
+local function validateMeshIds(p1, p2)
 	-- upvalues: parseContentIdsModule (ref), t_1 (ref), t_2 (ref)
-	if parseContentIdsModule.parseWithErrorCheck({}, {}, p0, t_1, t_2, p1) then
+	if parseContentIdsModule.parseWithErrorCheck({}, {}, p1, t_1, t_2, p2) then
 		return true
 	end
-	return false, { p0.Name .. " does not have a MeshId" }
+	return false, { p1.Name .. " does not have a MeshId" }
 end
 
-local function validateAllMeshParts(p2, p3)
+local function validateAllMeshParts(p1, p2)
 	-- upvalues: constantsModule (ref), validateMeshIds (ref)
-	local t, var20
+	local t, var1
 	for i, v in constantsModule.ASSET_TYPE_INFO do
 		if v.isBodyPart then
 			for i_1, v_1 in pairs(v.subParts) do
-				local var15 = p2[i_1]
+				local var2 = p1[i_1]
 				
-				if var15 and var15.ClassName == "MeshPart" then
-					if var15.Name == i_1 then
-						local var16, var17 = validateMeshIds(var15, p3)
+				if var2 and var2.ClassName == "MeshPart" then
+					if var2.Name == i_1 then
+						local var3, var4 = validateMeshIds(var2, p2)
 						
-						if var16 then
+						if var3 then
 							t = { [v_1.rigAttachmentToParent.name] = 0 }
-							local var19 = 1
+							local var5 = 1
 							
 							for i_2 in v_1.otherAttachments do
 								if string.find(i_2, "RigAttachment$") ~= nil then
 									t[i_2] = 0
-									var19 += 1
+									var5 += 1
 								end
 							end
-							var20 = 0
+							var1 = 0
 							
-							for i_3, v_2 in var15:GetChildren() do
+							for i_3, v_2 in var2:GetChildren() do
 								if v_2.ClassName == "Attachment" and t[v_2.Name] then
 									if t[v_2.Name] ~= 1 then
 										t[v_2.Name] += 1
-										var20 += 1
+										var1 += 1
 										continue
 									end
 									return false, { i_1 .. " has duplicate rig attachments: " .. v_2.Name }
 								end
 							end
-							if var20 ~= var19 then
+							if var1 ~= var5 then
 								return false, { "Missing rig attachments" }
 							end
 						end
-						return false, var17
+						return false, var4
 					end
 					return false, { i_1 .. " input data is incorrectly set-up" }
 				end
@@ -67,27 +67,27 @@ local function validateAllMeshParts(p2, p3)
 	return true
 end
 
-local function _(p4, p5)
-	return p4 <= p5
+local function _(p3, p4)
+	return p3 <= p4
 end
 
 local list = { "X", "Y", "Z" }
 
-local function calculateScalingWindow(p6, p7)
+local function calculateScalingWindow(p3, p4)
 	-- upvalues: boundsDataUtilsModule (ref), list (ref)
 	local t = {}
-	local var22, _, var23 = boundsDataUtilsModule.calculateBoundsDimensions(p6)
-	t.meshSize = var22
-	t.overallSize = var23
+	local var6, _, var7 = boundsDataUtilsModule.calculateBoundsDimensions(p3)
+	t.meshSize = var6
+	t.overallSize = var7
 	t.scaleTypes = {}
 	
-	for i, v in p7 do
+	for i, v in p4 do
 		local t_1 = { max = 1e999, min = -1e999 }
 		
 		for i_1, v_1 in list do
 			t_1[v_1] = {
-				min = 0.00005 + v.minSize[v_1] / var22[v_1],
-				max = v.maxSize[v_1] / var23[v_1] - 0.00005
+				min = 0.00005 + v.minSize[v_1] / var6[v_1],
+				max = v.maxSize[v_1] / var7[v_1] - 0.00005
 			}
 			t_1[v_1].ok = t_1[v_1].min <= t_1[v_1].max
 			t_1.max = math.min(t_1.max, t_1[v_1].max)
@@ -99,10 +99,10 @@ local function calculateScalingWindow(p6, p7)
 	return t
 end
 
-local function combineScalingWindows(p8)
+local function combineScalingWindows(p5)
 	local t = {}
 	
-	for i, v in p8 do
+	for i, v in p5 do
 		for i_1, v_1 in v.scaleTypes do
 			t[i_1] = t[i_1] or { max = 1e999, min = -1e999 }
 			t[i_1].max = math.min(t[i_1].max, v_1.max)
@@ -112,11 +112,11 @@ local function combineScalingWindows(p8)
 	return t
 end
 
-local function createFinalResults(p9)
+local function createFinalResults(p6)
 	-- upvalues: list (ref)
-	local t = { meshSize = p9.meshSize, overallSize = p9.overallSize }
+	local t = { meshSize = p6.meshSize, overallSize = p6.overallSize }
 	
-	for i, v in p9.scaleTypes do
+	for i, v in p6.scaleTypes do
 		local t_1 = {}
 		
 		for i_1, v_1 in list do
@@ -130,61 +130,61 @@ local function createFinalResults(p9)
 	return t
 end
 
-function t.preprocessDataAsync(p10, p11)
+function t.preprocessDataAsync(p7, p8)
 	-- upvalues: validateAllMeshParts (ref), constantsModule (ref), getMeshInfoModule (ref), getMeshVertsModule (ref)
-	local var28, var29 = validateAllMeshParts(p10, p11)
+	local var8, var9 = validateAllMeshParts(p7, p8)
 	
-	if not var28 then
-		return { ok = false, errors = var29 }
+	if not var8 then
+		return { ok = false, errors = var9 }
 	end
 	local t = {}
 	
 	for i, v in constantsModule.ASSET_TYPE_INFO do
 		if v.isBodyPart then
 			for i_1 in v.subParts do
-				assert(p10[i_1].ClassName == "MeshPart")
-				local var31 = p10[i_1]
-				local var32 = nil
+				assert(p7[i_1].ClassName == "MeshPart")
+				local var10 = p7[i_1]
+				local var11 = nil
 				local _ = nil
 				local _ = nil
-				local var33, var34, var35 = getMeshInfoModule(var31, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p11)
-				local var36 = var35
+				local var12, var13, var14 = getMeshInfoModule(var10, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p8)
+				local var15 = var14
 				
-				if var33 then
-					var33 = var36
-					t[var31.MeshId] = {}
-					local meshId = t[var31.MeshId]
+				if var12 then
+					var12 = var15
+					t[var10.MeshId] = {}
+					local meshId = t[var10.MeshId]
 					local _ = nil
-					local var37, var38, var39 = getMeshVertsModule(var33, p11)
-					var32 = var37
-					local var40 = var38
-					local var41 = var39
+					local var16, var17, var18 = getMeshVertsModule(var12, p8)
+					var11 = var16
+					local var19 = var17
+					local var20 = var18
 					
-					if var32 then
-						meshId.verts = var41
+					if var11 then
+						meshId.verts = var20
 						continue
 					end
-					return { ok = false, errors = var40 }
+					return { ok = false, errors = var19 }
 				end
-				return { ok = false, errors = var34 }
+				return { ok = false, errors = var13 }
 			end
 		end
 	end
 	return { ok = true, cache = { meshData = t } }
 end
 
-function t.isPreprocessDataCached(p12, p13)
+function t.isPreprocessDataCached(p9, p10)
 	-- upvalues: constantsModule (ref)
-	local meshData = p13.meshData
+	local meshData = p10.meshData
 	
 	for i, v in constantsModule.ASSET_TYPE_INFO do
 		if v.isBodyPart then
 			for i_1 in pairs(v.subParts) do
-				local var42 = p12[i_1]
+				local var21 = p9[i_1]
 				
-				if var42 and var42.ClassName == "MeshPart" and var42.MeshId ~= "" then
+				if var21 and var21.ClassName == "MeshPart" and var21.MeshId ~= "" then
 					if meshData then
-						local meshId = meshData[var42.MeshId]
+						local meshId = meshData[var21.MeshId]
 						
 						if meshId then
 							if not meshId.verts then
@@ -201,24 +201,24 @@ function t.isPreprocessDataCached(p12, p13)
 	return true
 end
 
-function t.calculateScaleToValidateBoundsAsync(p14, p15, p16)
+function t.calculateScaleToValidateBoundsAsync(p11, p12, p13)
 	-- upvalues: validateAllMeshParts (ref), boundsCalculatorModule (ref), boundsDataUtilsModule (ref), calculateScalingWindow (ref), constantsModule (ref), combineScalingWindows (ref), createFinalResults (ref)
-	local var43, var44 = validateAllMeshParts(p14, p15)
+	local var22, var23 = validateAllMeshParts(p11, p12)
 	
-	if not var43 then
-		return { ok = false, errors = var44 }
+	if not var22 then
+		return { ok = false, errors = var23 }
 	end
-	local var45, var46, var47 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(p14, p15, p16, true)
+	local var24, var25, var26 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(p11, p12, p13, true)
 	
-	if not var45 then
+	if not var24 then
 		return {
 			ok = false,
-			errors = var46 or { "Errors calculating parts metrics" }
+			errors = var25 or { "Errors calculating parts metrics" }
 		}
 	end
 	local t = {}
 	
-	for i, v in var47 do
+	for i, v in var26 do
 		t = boundsDataUtilsModule.combineBounds(t, v.boundsData)
 	end
 	local t_1 = {
@@ -230,32 +230,32 @@ function t.calculateScaleToValidateBoundsAsync(p14, p15, p16)
 			local t_2 = {}
 			
 			for i_2 in v_1.subParts do
-				t_2 = boundsDataUtilsModule.combineBounds(t_2, var47[i_2].boundsData)
+				t_2 = boundsDataUtilsModule.combineBounds(t_2, var26[i_2].boundsData)
 			end
 			t_1[i_1.Name] = calculateScalingWindow(t_2, constantsModule.ASSET_TYPE_INFO[i_1].bounds)
 		end
 	end
-	local var50 = nil
-	local var51 = nil
+	local var27 = nil
+	local var28 = nil
 	
 	for i_2, v_2 in combineScalingWindows(t_1) do
 		if v_2.min <= v_2.max then
 			if v_2.min <= 1 and v_2.max >= 1 then
-				var50 = 1
-				var51 = i_2
+				var27 = 1
+				var28 = i_2
 				break
 			end
-			local var53 = if math.abs(1 - v_2.min) < math.abs(1 - v_2.max) then v_2.min else v_2.max
+			local var29 = if math.abs(1 - v_2.min) < math.abs(1 - v_2.max) then v_2.min else v_2.max
 			
-			if not var50 or math.abs(1 - var53) < math.abs(1 - var50) then
-				var50 = var53
-				var51 = i_2
+			if not var27 or math.abs(1 - var29) < math.abs(1 - var27) then
+				var27 = var29
+				var28 = i_2
 			end
 		end
 	end
 	local t_2 = {
 		ok = true,
-		Overall = { ok = var50 ~= nil, scale = var50, scaleType = var51 }
+		Overall = { ok = var27 ~= nil, scale = var27, scaleType = var28 }
 	}
 	
 	for v_2, v_3 in t_1 do

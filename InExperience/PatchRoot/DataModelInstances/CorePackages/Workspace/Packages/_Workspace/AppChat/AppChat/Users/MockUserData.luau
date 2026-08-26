@@ -86,28 +86,28 @@ local t = {
 	}
 }
 
-function createMockUserProfile(p0)
+function createMockUserProfile(p1)
 	-- upvalues: signalsModule (ref)
 	local createSignal = signalsModule.createSignal
-	local var4, _ = createSignal(p0.username or "")
-	local var5, _ = createSignal(p0.displayName or "")
-	local var6, _ = createSignal(p0.combinedName or "")
-	local var7, _ = createSignal(p0.combinedName or "")
-	local var8, _ = createSignal(p0.combinedName or "")
-	local var9, _ = createSignal(p0.alias or "")
-	local var10, _ = createSignal("")
+	local var1, _ = createSignal(p1.username or "")
+	local var2, _ = createSignal(p1.displayName or "")
+	local var3, _ = createSignal(p1.combinedName or "")
+	local var4, _ = createSignal(p1.combinedName or "")
+	local var5, _ = createSignal(p1.combinedName or "")
+	local var6, _ = createSignal(p1.alias or "")
+	local var7, _ = createSignal("")
 	
 	return {
-		userId = p0.id,
+		userId = p1.id,
 		names = {
-			getUsername = var4,
-			getDisplayName = var5,
-			getCombinedName = var6,
-			getInExperienceCombinedName = var7,
-			getPlatformName = var8,
-			getAlias = var9
+			getUsername = var1,
+			getDisplayName = var2,
+			getCombinedName = var3,
+			getInExperienceCombinedName = var4,
+			getPlatformName = var5,
+			getAlias = var6
 		},
-		getPlatformProfileId = var10
+		getPlatformProfileId = var7
 	}
 end
 
@@ -125,13 +125,13 @@ function createMockUserProfileStore()
 				status = "success",
 				data = cryoModule.List.filterMap(p1, function(p2)
 					-- upvalues: t_1 (copy), t (copy)
-					local var12 = t_1[p2]
+					local var1 = t_1[p2]
 					
-					if not var12 and t[p2] then
-						var12 = createMockUserProfile(t[p2])
-						t_1[p2] = var12
+					if not var1 and t[p2] then
+						var1 = createMockUserProfile(t[p2])
+						t_1[p2] = var1
 					end
-					return var12
+					return var1
 				end)
 			})
 		end,
@@ -170,8 +170,8 @@ end
 
 function getUserProfilesFetchData()
 	-- upvalues: cryoModule (ref), t (ref)
-	return cryoModule.List.map(t, function(p3)
-		return p3
+	return cryoModule.List.map(t, function(p1)
+		return p1
 	end)
 end
 

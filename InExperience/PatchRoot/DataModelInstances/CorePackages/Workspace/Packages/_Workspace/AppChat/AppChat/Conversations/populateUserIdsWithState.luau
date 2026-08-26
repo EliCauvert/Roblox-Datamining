@@ -2,7 +2,7 @@
 local populateListFromIds = require(appChat.SocialLibraries).populate.populateListFromIds
 local getDeepValueModule = require(appChat.Utils.getDeepValue)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getDeepValueModule (ref), populateListFromIds (ref)
-	return populateListFromIds(p1, getDeepValueModule(p0, "Users") or {})
+	return populateListFromIds(p2, getDeepValueModule(p1, "Users") or {})
 end

@@ -2,28 +2,28 @@
 local roactModule = require(parent.Roact)
 local tModule = require(parent.t)
 local localeRoactContextModule = require(script.Parent.LocaleRoactContext)
-local var3 = tModule.strictInterface({ keys = tModule.table, render = tModule.callback })
-local var4 = tModule.strictInterface({
+local var1 = tModule.strictInterface({ keys = tModule.table, render = tModule.callback })
+local var2 = tModule.strictInterface({
 	key = tModule.string,
 	params = tModule.optional(tModule.table)
 })
 
-return function(p0)
-	-- upvalues: var3 (ref), var4 (ref), roactModule (ref), localeRoactContextModule (ref)
-	assert(var3(p0))
+return function(p1)
+	-- upvalues: var1 (ref), var2 (ref), roactModule (ref), localeRoactContextModule (ref)
+	assert(var1(p1))
 	
-	for i, v in pairs(p0.keys) do
-		assert(var4(v))
+	for i, v in pairs(p1.keys) do
+		assert(var2(v))
 	end
-	local render = p0.render
+	local render = p1.render
 	
 	return roactModule.createElement(localeRoactContextModule.Consumer, {
-		render = function(p1)
-			-- upvalues: p0 (ref), render (ref)
+		render = function(p2)
+			-- upvalues: p1 (ref), render (ref)
 			local t = {}
 			
-			for i, v in pairs(p0.keys) do
-				t[i] = p1:Format(v.key, v.params)
+			for i, v in pairs(p1.keys) do
+				t[i] = p2:Format(v.key, v.params)
 			end
 			return render(t)
 		end

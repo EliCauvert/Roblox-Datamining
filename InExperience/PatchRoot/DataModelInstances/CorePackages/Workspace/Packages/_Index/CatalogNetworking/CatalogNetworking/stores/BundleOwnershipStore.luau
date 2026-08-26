@@ -4,50 +4,50 @@ local signalsModule = require(parent.Signals)
 local promiseModule = require(parent.Promise)
 local dashModule = require(parent.Dash)
 local fetchBundleOwnershipModule = require(catalogNetworking.networkRequests.fetchBundleOwnership)
-local var5, var6 = signalsModule.createSignal({})
+local var1, var2 = signalsModule.createSignal({})
 
 return {
-	getCache = var5,
-	fetchAndCache = function(p0, p1)
-		-- upvalues: var5 (ref), promiseModule (ref), dashModule (ref), fetchBundleOwnershipModule (ref), var6 (ref)
-		local var7 = var5(false)
+	getCache = var1,
+	fetchAndCache = function(p1, p2)
+		-- upvalues: var1 (ref), promiseModule (ref), dashModule (ref), fetchBundleOwnershipModule (ref), var2 (ref)
+		local var3 = var1(false)
 		local t = {}
 		
-		for i, v in p1 do
-			if var7[tostring(v)] == nil then
+		for i, v in p2 do
+			if var3[tostring(v)] == nil then
 				table.insert(t, v)
 			end
 		end
 		return if #t == 0 then promiseModule.resolve() else promiseModule.all(dashModule.map(t, function(p3)
-			-- upvalues: fetchBundleOwnershipModule (copy), p0 (ref)
-			return fetchBundleOwnershipModule(p0, p3)
-		end)):andThen(function(p2)
-			-- upvalues: var5 (copy), var6 (copy)
-			local cloned = table.clone(var5(false))
+			-- upvalues: fetchBundleOwnershipModule (copy), p1 (ref)
+			return fetchBundleOwnershipModule(p1, p3)
+		end)):andThen(function(p3)
+			-- upvalues: var1 (copy), var2 (copy)
+			local cloned = table.clone(var1(false))
 			
-			for i, v in p2 do
+			for i, v in p3 do
 				if v then
 					cloned[v.id] = v.owned
 				end
 			end
-			var6(cloned)
+			var2(cloned)
 		end)
 	end,
-	isOwned = function(p4)
-		-- upvalues: var5 (ref)
-		return var5(false)[p4]
+	isOwned = function(p3)
+		-- upvalues: var1 (ref)
+		return var1(false)[p3]
 	end,
 	clear = function()
-		-- upvalues: var6 (ref)
-		var6({})
+		-- upvalues: var2 (ref)
+		var2({})
 	end,
-	markOwned = function(p5)
-		-- upvalues: var5 (ref), var6 (ref)
-		local cloned = table.clone(var5(false))
+	markOwned = function(p3)
+		-- upvalues: var1 (ref), var2 (ref)
+		local cloned = table.clone(var1(false))
 		
-		for i, v in p5 do
+		for i, v in p3 do
 			cloned[v] = true
 		end
-		var6(cloned)
+		var2(cloned)
 	end
 }

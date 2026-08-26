@@ -16,23 +16,23 @@ local t = {
 	[Enum.Platform.None] = platformBucketsModule.None
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: getUserInputServiceModule (ref), platformSpecificityModule (ref), isVRAppBuild (ref), platformBucketsModule (ref), t (ref)
-	local var4 = getUserInputServiceModule()
-	local var5 = nil
+	local var1 = getUserInputServiceModule()
+	local var2 = nil
 	pcall(function()
-		-- upvalues: var5 (write), var4 (ref)
-		var5 = var4:GetPlatform() or Enum.Platform.None
+		-- upvalues: var2 (write), var1 (ref)
+		var2 = var1:GetPlatform() or Enum.Platform.None
 	end)
 	
-	if p0 == platformSpecificityModule.All then
+	if p1 == platformSpecificityModule.All then
 		if isVRAppBuild() then
 			return platformBucketsModule.Quest
 		end
-		local var6 = tostring(var5):match(".*%.(.*)")
+		local var3 = tostring(var2):match(".*%.(.*)")
 		
-		return var6 or platformBucketsModule.None
+		return var3 or platformBucketsModule.None
 	else
-		return if p0 == platformSpecificityModule.BucketsOnly then if isVRAppBuild() then platformBucketsModule.Quest else t[var5] or platformBucketsModule.None else ""
+		return if p1 == platformSpecificityModule.BucketsOnly then if isVRAppBuild() then platformBucketsModule.Quest else t[var2] or platformBucketsModule.None else ""
 	end
 end

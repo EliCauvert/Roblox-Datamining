@@ -9,10 +9,10 @@ local thumbnailSize = foundationModule.Enums.ThumbnailSize
 
 return function()
 	-- upvalues: getUniverseIdModule (ref), reactModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref)
-	local var4 = getUniverseIdModule()
+	local var1 = getUniverseIdModule()
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var4 (ref), getRbxThumb (copy), thumbnailType (copy), thumbnailSize (copy)
-		return if var4 then getRbxThumb(thumbnailType.GameIcon, var4, thumbnailSize.Small) else nil
-	end, { var4 })
+		-- upvalues: var1 (ref), getRbxThumb (copy), thumbnailType (copy), thumbnailSize (copy)
+		return if var1 then getRbxThumb(thumbnailType.GameIcon, var1, thumbnailSize.Small) else nil
+	end, { var1 })
 end

@@ -2,72 +2,72 @@
 local naturalCompare = require(script.Parent.naturalCompare).naturalCompare
 local t = {}
 
-local function suggestionList(p0, p1)
+local function suggestionList(p1, p2)
 	-- upvalues: t (ref), object (ref), naturalCompare (ref)
 	local t_1 = {}
-	local var4 = t.new(p0)
-	local var5 = math.floor(p0:len() * 0.4) + 1
+	local var1 = t.new(p1)
+	local var2 = math.floor(p1:len() * 0.4) + 1
 	
-	for i = 1, #p1 do
-		local var6 = p1[i]
-		local var7 = var4:measure(var6, var5)
+	for i = 1, #p2 do
+		local var3 = p2[i]
+		local var4 = var1:measure(var3, var2)
 		
-		if var7 ~= nil then
-			t_1[var6] = var7
+		if var4 ~= nil then
+			t_1[var3] = var4
 		end
 	end
-	local var8 = object.keys(t_1)
-	table.sort(var8, function(p2, p3)
+	local var5 = object.keys(t_1)
+	table.sort(var5, function(p3, p4)
 		-- upvalues: t_1 (ref), naturalCompare (copy)
-		local var9 = t_1[p2] - t_1[p3]
+		local var6 = t_1[p3] - t_1[p4]
 		
-		return if var9 == 0 then naturalCompare(p2, p3) < 0 else var9 < 0
+		return if var6 == 0 then naturalCompare(p3, p4) < 0 else var6 < 0
 	end)
 	
-	return var8
+	return var5
 end
 
 local stringToArray = nil
 t.__index = t
 
-function t.new(p4)
+function t.new(p3)
 	-- upvalues: t (ref), stringToArray (write)
 	local tbl = setmetatable({}, t)
-	tbl._input = p4
-	tbl._inputLowerCase = p4:lower()
+	tbl._input = p3
+	tbl._inputLowerCase = p3:lower()
 	tbl._inputArray = stringToArray(tbl._inputLowerCase)
-	local var11 = p4:len()
+	local var6 = p3:len()
 	tbl._rows = {
-		table.create(var11 + 1, 0),
-		table.create(var11 + 1, 0),
-		table.create(var11 + 1, 0)
+		table.create(var6 + 1, 0),
+		table.create(var6 + 1, 0),
+		table.create(var6 + 1, 0)
 	}
 	
 	return tbl
 end
 
-function t:measure(p5, p6)
+function t:measure(p3, p4)
 	-- upvalues: stringToArray (write)
-	if self._input == p5 then
+	if self._input == p3 then
 		return 0
 	end
-	local var12 = p5:lower()
+	local var6 = p3:lower()
 	
-	if self._inputLowerCase == var12 then
+	if self._inputLowerCase == var6 then
 		return 1
 	end
-	local var13 = stringToArray(var12)
+	local var7 = stringToArray(var6)
 	local inputArray = self._inputArray
 	
-	if #var13 < #inputArray then
-		local var14 = var13
-		var13 = inputArray
-		inputArray = var14
+	if #var7 < #inputArray then
+		local var8 = var7
+		var7 = inputArray
+		inputArray = var8
 	end
-	local var13Count = #var13
+	local var13Count = #var7
 	local inputArrayCount = #inputArray
 	
-	if p6 < var13Count - inputArrayCount then
+	if p4 < var13Count - inputArrayCount then
 		return nil
 	end
 	local rows = self._rows
@@ -76,37 +76,37 @@ function t:measure(p5, p6)
 		rows[1][i + 1] = i
 	end
 	for i_2 = 1, var13Count do
-		local var17 = rows[(i_2 - 1) % 3 + 1]
-		local var18 = rows[i_2 % 3 + 1]
-		var18[1] = i_2
-		local var19 = i_2
+		local var9 = rows[(i_2 - 1) % 3 + 1]
+		local var10 = rows[i_2 % 3 + 1]
+		var10[1] = i_2
+		local var11 = i_2
 		
 		for i_1 = 1, inputArrayCount do
-			local minValue = math.min(var17[i_1 + 1] + 1, var18[i_1] + 1, var17[i_1] + (if var13[i_2] == inputArray[i_1] then 0 else 1))
+			local minValue = math.min(var9[i_1 + 1] + 1, var10[i_1] + 1, var9[i_1] + (if var7[i_2] == inputArray[i_1] then 0 else 1))
 			
-			if i_2 > 1 and i_1 > 1 and (var13[i_2] == inputArray[i_1 - 1] and var13[i_2 - 1] == inputArray[i_1]) then
+			if i_2 > 1 and i_1 > 1 and (var7[i_2] == inputArray[i_1 - 1] and var7[i_2 - 1] == inputArray[i_1]) then
 				minValue = math.min(minValue, rows[(i_2 - 2) % 3 + 1][i_1 - 1] + 1)
 			end
-			if minValue < var19 then
-				var19 = minValue
+			if minValue < var11 then
+				var11 = minValue
 			end
-			var18[i_1 + 1] = minValue
+			var10[i_1 + 1] = minValue
 		end
-		if p6 >= var19 then
+		if p4 >= var11 then
 			continue
 		end
 		return nil
 	end
-	local var21 = rows[var13Count % 3 + 1][inputArrayCount + 1]
+	local var12 = rows[var13Count % 3 + 1][inputArrayCount + 1]
 	
-	return if var21 <= p6 then var21 else nil
+	return if var12 <= p4 then var12 else nil
 end
 
-stringToArray = function(p7)
+stringToArray = function(p5)
 	local t = {}
 	
-	for i = 1, p7:len() do
-		t[i] = p7:byte(i)
+	for i = 1, p5:len() do
+		t[i] = p5:byte(i)
 	end
 	return t
 end

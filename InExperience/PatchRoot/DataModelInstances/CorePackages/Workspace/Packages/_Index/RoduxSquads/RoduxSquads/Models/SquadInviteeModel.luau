@@ -1,13 +1,13 @@
 ﻿local tModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
 local t = {}
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	assert(t.isValid(p0))
+	assert(t.isValid(p1))
 	t.__index = t
-	setmetatable(p0, t)
+	setmetatable(p1, t)
 	
-	return p0
+	return p1
 end
 
 function t.mock(p1)
@@ -20,11 +20,11 @@ function t.mock(p1)
 	})
 end
 
-function t.format(p2)
+function t.format(p1)
 	-- upvalues: t (ref)
 	return t.new({
-		invitedAtTimestampMs = p2.invitedAtTimestampMs,
-		userId = p2.userId
+		invitedAtTimestampMs = p1.invitedAtTimestampMs,
+		userId = p1.userId
 	})
 end
 

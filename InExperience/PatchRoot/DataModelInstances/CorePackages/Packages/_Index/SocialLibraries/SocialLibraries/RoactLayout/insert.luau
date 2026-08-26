@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	return { size = p0, element = p1 }
+﻿return function(p1, p2)
+	return { size = p1, element = p2 }
 end

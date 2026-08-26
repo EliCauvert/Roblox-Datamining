@@ -18,9 +18,9 @@ local fFlagPlayerListTwoTabsOnLegacy = playerListModule.Flags.FFlagPlayerListTwo
 local platformLeaderboardContainer = playerListModule.Container.PlatformLeaderboardContainer
 local playerListSwitcher = roactModule.PureComponent:extend("PlayerListSwitcher")
 
-function playerListSwitcher.didMount(p0)
+function playerListSwitcher.didMount(p1)
 	-- upvalues: playerListInitialVisibleStateModule (ref)
-	p0.props.setPlayerListVisible(playerListInitialVisibleStateModule())
+	p1.props.setPlayerListVisible(playerListInitialVisibleStateModule())
 end
 
 function playerListSwitcher.wrapWithUiModeStyleProvider(p1, p2)
@@ -35,35 +35,35 @@ function playerListSwitcher.wrapWithUiModeStyleProvider(p1, p2)
 	}
 end
 
-function playerListSwitcher.render(p3)
+function playerListSwitcher.render(p1)
 	-- upvalues: roactModule (ref), provider (ref), createLayoutValuesModule (ref), fFlagEnableMobilePlayerListOnConsole (ref), tenFootInterfaceModule (ref), playerListAppModule_1 (ref), playerListAppModule (ref), fFlagPlayerListTwoTabsOnLegacy (ref), platformLeaderboardContainer (ref)
-	local var12 = roactModule.createElement(provider, {
+	local var1 = roactModule.createElement(provider, {
 		layoutValues = createLayoutValuesModule(if fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled())
-	}, p3:wrapWithUiModeStyleProvider({
-		PlayerListApp = p3.props.isSmallTouchDevice and roactModule.createElement(playerListAppModule_1, {
-			setLayerCollectorEnabled = p3.props.setLayerCollectorEnabled
+	}, p1:wrapWithUiModeStyleProvider({
+		PlayerListApp = p1.props.isSmallTouchDevice and roactModule.createElement(playerListAppModule_1, {
+			setLayerCollectorEnabled = p1.props.setLayerCollectorEnabled
 		}) or roactModule.createElement(playerListAppModule, {
-			setLayerCollectorEnabled = p3.props.setLayerCollectorEnabled
+			setLayerCollectorEnabled = p1.props.setLayerCollectorEnabled
 		})
 	}))
 	
-	return if fFlagPlayerListTwoTabsOnLegacy then roactModule.createElement(platformLeaderboardContainer, {}, var12) else var12
+	return if fFlagPlayerListTwoTabsOnLegacy then roactModule.createElement(platformLeaderboardContainer, {}, var1) else var1
 end
 
-function playerListSwitcher.didUpdate(p4)
-	p4.props.setPlayerListVisible(not p4.props.isSmallTouchDevice)
+function playerListSwitcher.didUpdate(p1)
+	p1.props.setPlayerListVisible(not p1.props.isSmallTouchDevice)
 end
 
-return roactRoduxModule.connect(function(p5)
+return roactRoduxModule.connect(function(p1)
 	return {
-		isSmallTouchDevice = p5.displayOptions.isSmallTouchDevice
+		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice
 	}
-end, function(p6)
+end, function(p1)
 	-- upvalues: setPlayerListVisibilityModule (ref)
 	return {
 		setPlayerListVisible = function(value)
-			-- upvalues: p6 (ref), setPlayerListVisibilityModule (copy)
-			return p6(setPlayerListVisibilityModule(value))
+			-- upvalues: p1 (ref), setPlayerListVisibilityModule (copy)
+			return p1(setPlayerListVisibilityModule(value))
 		end
 	}
 end)(playerListSwitcher)

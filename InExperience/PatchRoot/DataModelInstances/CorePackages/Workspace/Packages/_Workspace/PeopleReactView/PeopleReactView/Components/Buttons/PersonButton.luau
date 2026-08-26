@@ -18,129 +18,129 @@ local flags = peopleServiceModule.getService("Flags")
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local getFFlagNewPeoplePageIcons = flags.GetFFlagNewPeoplePageIcons
 
-local function useIconName(p0, p1, p2)
+local function useIconName(p1, p2, p3)
 	-- upvalues: reactModule (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: p0 (ref), p1 (ref), p2 (ref)
-		return if p0.animatedIcon then p1 elseif p0.icon then if not (not p0.icon.off or not p0.buttonState) then if p2 then p0.icon.off else p0.icon.on else p0.icon.on else ""
+		-- upvalues: p1 (ref), p2 (ref), p3 (ref)
+		return if p1.animatedIcon then p2 elseif p1.icon then if not (not p1.icon.off or not p1.buttonState) then if p3 then p1.icon.off else p1.icon.on else p1.icon.on else ""
 	end, {
-		p1,
 		p2,
-		p0.icon,
-		p0.animatedIcon,
-		p0.buttonState
+		p3,
+		p1.icon,
+		p1.animatedIcon,
+		p1.buttonState
 	})
 end
 
-local function _(value, p3)
+local function _(value, p1)
 	-- upvalues: reactModule (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: value (ref), p3 (ref)
-		return if value then p3.Color.Common.Shadow.Transparency else nil
+		-- upvalues: value (ref), p1 (ref)
+		return if value then p1.Color.Common.Shadow.Transparency else nil
 	end, { value })
 end
 
-local _ = function(p4, p5)
+local _ = function(p1, p2)
 	-- upvalues: reactModule (ref), getFFlagNewPeoplePageIcons (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: p4 (ref), getFFlagNewPeoplePageIcons (copy), p5 (ref)
-		return if p4 then if getFFlagNewPeoplePageIcons() then UDim2.fromOffset(p5.Size.Size_1800 * 2, p5.Size.Size_1000) else UDim2.new(0, p5.Size.Size_1800 * 2, 1, 0) else UDim2.fromOffset(p5.Size.Size_1000, p5.Size.Size_1000)
-	end, { p4 })
+		-- upvalues: p1 (ref), getFFlagNewPeoplePageIcons (copy), p2 (ref)
+		return if p1 then if getFFlagNewPeoplePageIcons() then UDim2.fromOffset(p2.Size.Size_1800 * 2, p2.Size.Size_1000) else UDim2.new(0, p2.Size.Size_1800 * 2, 1, 0) else UDim2.fromOffset(p2.Size.Size_1000, p2.Size.Size_1000)
+	end, { p1 })
 end
 
-local function MemoizedIconElement(p6)
+local function MemoizedIconElement(p1)
 	-- upvalues: useTokens (ref), useSignalState (ref), signalsModule (ref), useIconName (ref), reactModule (ref), iconButton (ref), iconSize (ref), buttonVariant (ref), icon (ref)
-	local var8 = useTokens()
-	local var9 = useSignalState(p6.isGrayedOut or signalsModule.createSignal(false))
-	local var10 = useIconName(p6, useSignalState(p6.animatedIcon or signalsModule.createSignal("")), useSignalState(p6.buttonState or signalsModule.createSignal(false)))
-	local var11 = if p6.isBuilderIcon then nil else reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var8 (ref)
-		return if var9 then var8.Color.Common.Shadow.Transparency else nil
-	end, { var9 })
+	local var1 = useTokens()
+	local var2 = useSignalState(p1.isGrayedOut or signalsModule.createSignal(false))
+	local var3 = useIconName(p1, useSignalState(p1.animatedIcon or signalsModule.createSignal("")), useSignalState(p1.buttonState or signalsModule.createSignal(false)))
+	local var4 = if p1.isBuilderIcon then nil else reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var1 (ref)
+		return if var2 then var1.Color.Common.Shadow.Transparency else nil
+	end, { var2 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var10 (ref), p6 (ref), reactModule (copy), iconButton (copy), iconSize (copy), buttonVariant (copy), var9 (ref), icon (copy), var11 (ref)
-		return if not (not var10 or var10 == "") then if p6.isBuilderIcon then reactModule.createElement(iconButton, {
+		-- upvalues: var3 (ref), p1 (ref), reactModule (copy), iconButton (copy), iconSize (copy), buttonVariant (copy), var2 (ref), icon (copy), var4 (ref)
+		return if not (not var3 or var3 == "") then if p1.isBuilderIcon then reactModule.createElement(iconButton, {
 			Selectable = false,
-			icon = var10,
+			icon = var3,
 			size = iconSize.Medium,
-			LayoutOrder = p6.LayoutOrder,
+			LayoutOrder = p1.LayoutOrder,
 			variant = buttonVariant.Utility,
-			isDisabled = var9,
-			onActivated = p6.onActivated,
-			ref = p6.onMount
+			isDisabled = var2,
+			onActivated = p1.onActivated,
+			ref = p1.onMount
 		}) else reactModule.createElement(icon, {
-			name = var10,
+			name = var3,
 			size = iconSize.Medium,
-			LayoutOrder = p6.LayoutOrder,
-			style = { Transparency = var11 }
+			LayoutOrder = p1.LayoutOrder,
+			style = { Transparency = var4 }
 		}) else nil
 	end, {
-		p6.isBuilderIcon, var10, p6.LayoutOrder, var9, p6.onActivated, p6.onMount,
-		var11
+		p1.isBuilderIcon, var3, p1.LayoutOrder, var2, p1.onActivated, p1.onMount,
+		var4
 	})
 end
 
-local _ = function(p7, p8, p9, p10, p11)
+local _ = function(p1, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref)
-	return if p7 then reactModule.createElement(button, {
+	return if p1 then reactModule.createElement(button, {
 		Selectable = false,
-		text = p7,
+		text = p1,
 		fillBehavior = fillBehavior.Fill,
-		variant = if p8 then buttonVariant.Text else p9,
-		onActivated = p10,
-		LayoutOrder = p11
+		variant = if p2 then buttonVariant.Text else p3,
+		onActivated = p4,
+		LayoutOrder = p5
 	}) else nil
 end
 
-return function(p12)
+return function(p1)
 	-- upvalues: useTokens (ref), useSignalState (ref), signalsModule (ref), reactModule (ref), getFFlagNewPeoplePageIcons (ref), useCursor (ref), button (ref), fillBehavior (ref), buttonVariant (ref), view (ref), getFFlagAddPeoplePageCardLayout (ref), MemoizedIconElement (ref)
-	local var12 = useTokens()
-	local var13 = useSignalState(p12.isDisabled or signalsModule.createSignal(false))
-	local var14 = useSignalState(if type(p12.text) == "function" then p12.text else signalsModule.createSignal(p12.text))
-	local var15 = p12.text ~= nil
+	local var1 = useTokens()
+	local var2 = useSignalState(p1.isDisabled or signalsModule.createSignal(false))
+	local var3 = useSignalState(if type(p1.text) == "function" then p1.text else signalsModule.createSignal(p1.text))
+	local var4 = p1.text ~= nil
 	
 	return reactModule.createElement(view, {
 		tag = if getFFlagAddPeoplePageCardLayout() then {
 			["radius-medium row align-y-center align-x-center"] = true,
-			["bg-action-standard"] = not p12.text and not p12.isBackgroundTransparent
+			["bg-action-standard"] = not p1.text and not p1.isBackgroundTransparent
 		} else {
-			["radius-medium row align-y-center align-x-center"] = p12.text ~= nil,
-			["radius-medium row align-y-center align-x-center bg-action-standard"] = p12.text == nil
+			["radius-medium row align-y-center align-x-center"] = p1.text ~= nil,
+			["radius-medium row align-y-center align-x-center bg-action-standard"] = p1.text == nil
 		},
 		Size = reactModule.useMemo(function()
-			-- upvalues: var15 (ref), getFFlagNewPeoplePageIcons (copy), var12 (ref)
-			return if var15 then if getFFlagNewPeoplePageIcons() then UDim2.fromOffset(var12.Size.Size_1800 * 2, var12.Size.Size_1000) else UDim2.new(0, var12.Size.Size_1800 * 2, 1, 0) else UDim2.fromOffset(var12.Size.Size_1000, var12.Size.Size_1000)
-		end, { var15 }),
-		LayoutOrder = p12.LayoutOrder,
-		onActivated = p12.onActivated,
-		isDisabled = var13,
+			-- upvalues: var4 (ref), getFFlagNewPeoplePageIcons (copy), var1 (ref)
+			return if var4 then if getFFlagNewPeoplePageIcons() then UDim2.fromOffset(var1.Size.Size_1800 * 2, var1.Size.Size_1000) else UDim2.new(0, var1.Size.Size_1800 * 2, 1, 0) else UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000)
+		end, { var4 }),
+		LayoutOrder = p1.LayoutOrder,
+		onActivated = p1.onActivated,
+		isDisabled = var2,
 		selection = {
 			SelectionImageObject = useCursor({
-				radius = UDim.new(0, var12.Radius.Medium),
-				offset = var12.Size.Size_150,
-				borderWidth = var12.Stroke.Thicker
+				radius = UDim.new(0, var1.Radius.Medium),
+				offset = var1.Size.Size_150,
+				borderWidth = var1.Stroke.Thicker
 			})
 		},
-		ref = p12.onMount
+		ref = p1.onMount
 	}, {
 		Icon = reactModule.createElement(MemoizedIconElement, {
-			icon = p12.icon,
-			animatedIcon = p12.animatedIcon,
-			buttonState = p12.buttonState,
-			LayoutOrder = p12.LayoutOrder,
-			isGrayedOut = p12.isGrayedOut,
-			isBuilderIcon = p12.isBuilderIcon,
-			onActivated = p12.onActivated,
-			onMount = p12.onMount
+			icon = p1.icon,
+			animatedIcon = p1.animatedIcon,
+			buttonState = p1.buttonState,
+			LayoutOrder = p1.LayoutOrder,
+			isGrayedOut = p1.isGrayedOut,
+			isBuilderIcon = p1.isBuilderIcon,
+			onActivated = p1.onActivated,
+			onMount = p1.onMount
 		}),
-		Text = if not var14 then nil else reactModule.createElement(button, {
+		Text = if not var3 then nil else reactModule.createElement(button, {
 			Selectable = false,
 			LayoutOrder = 2,
-			text = var14,
+			text = var3,
 			fillBehavior = fillBehavior.Fill,
-			variant = if var13 then buttonVariant.Text else useSignalState(if type(p12.buttonVariant) == "function" then p12.buttonVariant else signalsModule.createSignal(p12.buttonVariant)),
-			onActivated = p12.onActivated
+			variant = if var2 then buttonVariant.Text else useSignalState(if type(p1.buttonVariant) == "function" then p1.buttonVariant else signalsModule.createSignal(p1.buttonVariant)),
+			onActivated = p1.onActivated
 		})
 	})
 end

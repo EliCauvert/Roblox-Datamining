@@ -1,10 +1,10 @@
 ﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local getAvatarEventCounterNameWithPlatformModule = require(script.Parent.getAvatarEventCounterNameWithPlatform)
 
-return function(p0)
+return function(p1)
 	-- upvalues: rbxAnalyticsService (ref), getAvatarEventCounterNameWithPlatformModule (ref)
-	if p0 then
-		rbxAnalyticsService:ReportCounter(getAvatarEventCounterNameWithPlatformModule(p0), 1)
+	if p1 then
+		rbxAnalyticsService:ReportCounter(getAvatarEventCounterNameWithPlatformModule(p1), 1)
 		
 		return
 	end

@@ -96,9 +96,9 @@ local t_3 = {
 		textKey = t_2[t.Inventory],
 		icon = builderIconsModule.Icon.Backpack,
 		context = {
-			urlGenerator = function(p0)
+			urlGenerator = function(p1)
 				-- upvalues: urlBuilder (ref)
-				return p0 and urlBuilder.user.inventory({ userId = p0 }) or nil
+				return p1 and urlBuilder.user.inventory({ userId = p1 }) or nil
 			end
 		}
 	},
@@ -177,9 +177,9 @@ local t_3 = {
 		textKey = t_2[t.GiftCards],
 		icon = builderIconsModule.Icon.GiftCard,
 		context = {
-			urlGenerator = function(p2)
+			urlGenerator = function(p1)
 				-- upvalues: urlBuilder (ref)
-				return urlBuilder.static.giftCards(p2)
+				return urlBuilder.static.giftCards(p1)
 			end
 		}
 	},
@@ -207,14 +207,14 @@ local t_3 = {
 		itemType = t.Terms,
 		textKey = t_2[t.Terms],
 		context = {
-			urlGenerator = function(_, p3)
+			urlGenerator = function(_, p1)
 				-- upvalues: urlBuilder (ref)
-				local var14 = if p3 then p3.getTermsOfUseLink() else nil
+				local var1 = if p1 then p1.getTermsOfUseLink() else nil
 				
-				if var14 == nil or var14 == "" then
-					var14 = urlBuilder.static.about.terms({ useGameQQUrls = true })
+				if var1 == nil or var1 == "" then
+					var1 = urlBuilder.static.about.terms({ useGameQQUrls = true })
 				end
-				return var14
+				return var1
 			end
 		}
 	},
@@ -222,14 +222,14 @@ local t_3 = {
 		itemType = t.Privacy,
 		textKey = t_2[t.Privacy],
 		context = {
-			urlGenerator = function(_, p4)
+			urlGenerator = function(_, p1)
 				-- upvalues: urlBuilder (ref)
-				local var15 = if p4 then p4.getPrivacyPolicyLink() else nil
+				local var1 = if p1 then p1.getPrivacyPolicyLink() else nil
 				
-				if var15 == nil or var15 == "" then
-					var15 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
+				if var1 == nil or var1 == "" then
+					var1 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
 				end
-				return var15
+				return var1
 			end
 		}
 	}

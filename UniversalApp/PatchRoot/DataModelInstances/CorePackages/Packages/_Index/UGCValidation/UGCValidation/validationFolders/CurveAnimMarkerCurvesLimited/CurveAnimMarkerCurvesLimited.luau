@@ -18,19 +18,19 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: getFIntUGCValidateMaxTotalMarkerCurvesModule (ref), errorSourceStringsModule (ref)
-	local var5 = getFIntUGCValidateMaxTotalMarkerCurvesModule()
+	local var1 = getFIntUGCValidateMaxTotalMarkerCurvesModule()
 	
-	for i, v in p1.curveAnimations do
-		local var6 = 0
+	for i, v in p2.curveAnimations do
+		local var2 = 0
 		
 		for i_1, v_1 in v:GetDescendants() do
 			if v_1:IsA("MarkerCurve") then
-				var6 += 1
+				var2 += 1
 				
-				if var5 < var6 then
-					p0:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyMarkerCurves, { maxAllowed = tostring(var5) })
+				if var1 < var2 then
+					p1:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyMarkerCurves, { maxAllowed = tostring(var1) })
 					
 					return
 				end

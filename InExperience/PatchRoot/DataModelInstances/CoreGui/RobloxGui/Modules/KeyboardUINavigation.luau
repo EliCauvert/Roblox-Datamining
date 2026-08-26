@@ -6,21 +6,21 @@ local corePackagesService = game:GetService("CorePackages")
 local gameSettings = UserSettings().GameSettings
 local sendNotificationInfo = coreGuiService:WaitForChild("RobloxGui"):WaitForChild("SendNotificationInfo")
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local var7 = nil
+local var1 = nil
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: robloxTranslatorModule (ref)
 	pcall(function()
-		-- upvalues: p1 (write), robloxTranslatorModule (copy), p0 (ref)
-		p1 = robloxTranslatorModule:FormatByKey(p0)
+		-- upvalues: p2 (write), robloxTranslatorModule (copy), p1 (ref)
+		p2 = robloxTranslatorModule:FormatByKey(p1)
 	end)
 	
-	return p1
+	return p2
 end
 
-local function ScrollSelectedElement(_, p2, p3)
+local function ScrollSelectedElement(_, p1, p2)
 	-- upvalues: guiService (ref)
-	if p2 ~= Enum.UserInputState.Begin then
+	if p1 ~= Enum.UserInputState.Begin then
 		return Enum.ContextActionResult.Pass
 	end
 	local selectedObject = guiService.SelectedObject
@@ -28,45 +28,45 @@ local function ScrollSelectedElement(_, p2, p3)
 	if selectedObject == nil then
 		return Enum.ContextActionResult.Pass
 	end
-	local var11 = nil
+	local var2 = nil
 	
 	if selectedObject.ClassName == "ScrollingFrame" then
-		var11 = selectedObject
+		var2 = selectedObject
 	else
 		local scrollingFrame = selectedObject:FindFirstAncestorOfClass("ScrollingFrame")
 		
 		if scrollingFrame ~= nil then
-			var11 = scrollingFrame
+			var2 = scrollingFrame
 		end
 	end
-	if var11 == nil then
+	if var2 == nil then
 		return Enum.ContextActionResult.Pass
 	end
-	local var13 = 0
+	local var3 = 0
 	
-	if p3.KeyCode == Enum.KeyCode.PageUp or p3.KeyCode == Enum.KeyCode.Home then
-		var13 = -100
-	elseif p3.KeyCode == Enum.KeyCode.PageDown or p3.KeyCode == Enum.KeyCode.End then
-		var13 = 100
+	if p2.KeyCode == Enum.KeyCode.PageUp or p2.KeyCode == Enum.KeyCode.Home then
+		var3 = -100
+	elseif p2.KeyCode == Enum.KeyCode.PageDown or p2.KeyCode == Enum.KeyCode.End then
+		var3 = 100
 	end
-	local x = var11.CanvasPosition.X
-	local y = var11.CanvasPosition.Y
+	local x = var2.CanvasPosition.X
+	local y = var2.CanvasPosition.Y
 	
-	if p3.KeyCode == Enum.KeyCode.PageUp or p3.KeyCode == Enum.KeyCode.PageDown then
-		y = math.max(0, math.min(y + var13, var11.AbsoluteCanvasSize.Y))
-	elseif p3.KeyCode == Enum.KeyCode.Home or p3.KeyCode == Enum.KeyCode.End then
-		x = math.max(0, math.min(x + var13, var11.AbsoluteCanvasSize.X))
+	if p2.KeyCode == Enum.KeyCode.PageUp or p2.KeyCode == Enum.KeyCode.PageDown then
+		y = math.max(0, math.min(y + var3, var2.AbsoluteCanvasSize.Y))
+	elseif p2.KeyCode == Enum.KeyCode.Home or p2.KeyCode == Enum.KeyCode.End then
+		x = math.max(0, math.min(x + var3, var2.AbsoluteCanvasSize.X))
 	end
-	var11.CanvasPosition = Vector2.new(x, y)
+	var2.CanvasPosition = Vector2.new(x, y)
 	
 	return Enum.ContextActionResult.Pass
 end
 
-local function EnableKeyboardNavigation(_, p4, _)
-	-- upvalues: gameSettings (ref), guiService (ref), var7 (write), playersService (ref), robloxTranslatorModule (ref), sendNotificationInfo (ref)
+local function EnableKeyboardNavigation(_, p1, _)
+	-- upvalues: gameSettings (ref), guiService (ref), var1 (write), playersService (ref), robloxTranslatorModule (ref), sendNotificationInfo (ref)
 	if not gameSettings.UiNavigationKeyBindEnabled then
 		return Enum.ContextActionResult.Pass
-	elseif p4 ~= Enum.UserInputState.Begin then
+	elseif p1 ~= Enum.UserInputState.Begin then
 		return Enum.ContextActionResult.Pass
 	elseif not guiService.AutoSelectGuiEnabled then
 		return Enum.ContextActionResult.Pass
@@ -74,26 +74,26 @@ local function EnableKeyboardNavigation(_, p4, _)
 		guiService.SelectedObject = nil
 		
 		return Enum.ContextActionResult.Sink
-	elseif var7 == nil then
-		var7 = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
+	elseif var1 == nil then
+		var1 = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
 	end
-	guiService:Select(var7)
+	guiService:Select(var1)
 	
 	if guiService.SelectedObject then
-		local var14 = nil
-		local var15 = "InGame.NotificationScript2.UINavigation.Title"
+		local var2 = nil
+		local var3 = "InGame.NotificationScript2.UINavigation.Title"
 		pcall(function()
-			-- upvalues: var14 (write), robloxTranslatorModule (copy), var15 (ref)
-			p1 = robloxTranslatorModule:FormatByKey(var15)
+			-- upvalues: var2 (write), robloxTranslatorModule (copy), var3 (ref)
+			p1 = robloxTranslatorModule:FormatByKey(var3)
 		end)
-		local var16 = var14
-		local var17 = nil
-		local var18 = "InGame.NotificationScript2.UINavigation.Text"
+		local var4 = var2
+		local var5 = nil
+		local var6 = "InGame.NotificationScript2.UINavigation.Text"
 		pcall(function()
-			-- upvalues: var17 (write), robloxTranslatorModule (copy), var18 (ref)
-			p1 = robloxTranslatorModule:FormatByKey(var18)
+			-- upvalues: var5 (write), robloxTranslatorModule (copy), var6 (ref)
+			p1 = robloxTranslatorModule:FormatByKey(var6)
 		end)
-		sendNotificationInfo:Fire({ Duration = 3, Title = var16, Text = var17 })
+		sendNotificationInfo:Fire({ Duration = 3, Title = var4, Text = var5 })
 	end
 	return Enum.ContextActionResult.Sink
 end

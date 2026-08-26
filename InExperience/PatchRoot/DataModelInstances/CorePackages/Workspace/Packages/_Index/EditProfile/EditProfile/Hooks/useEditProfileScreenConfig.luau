@@ -20,48 +20,48 @@ local t = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: t (ref), useNavigation (ref), useRealNamesInDisplayNamesEnabledModule (ref), reactModule (ref), profileRefreshSignal (ref), promiseModule (ref), enumsModule (ref), textKeysModule (ref)
-	local var9 = t[p0]
-	local var10 = useNavigation()
-	local var11 = useRealNamesInDisplayNamesEnabledModule()
-	local var12 = reactModule.useRef(nil)
-	local var13, var14 = reactModule.useState(false)
-	local var15, var16 = reactModule.useState(false)
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: profileRefreshSignal (copy), var10 (ref)
+	local var1 = t[p1]
+	local var2 = useNavigation()
+	local var3 = useRealNamesInDisplayNamesEnabledModule()
+	local var4 = reactModule.useRef(nil)
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: profileRefreshSignal (copy), var2 (ref)
 		profileRefreshSignal.notifyProfileRefresh()
-		var10.goBack()
-	end, { var10 })
+		var2.goBack()
+	end, { var2 })
 	
 	return {
-		component = var9.component,
-		titleKey = if p0 == enumsModule.Screens.EditDisplayName then if var11 then textKeysModule.EditAgedUpDisplayName else textKeysModule.EditDisplayName else var9.titleKey,
+		component = var1.component,
+		titleKey = if p1 == enumsModule.Screens.EditDisplayName then if var3 then textKeysModule.EditAgedUpDisplayName else textKeysModule.EditDisplayName else var1.titleKey,
 		saveKey = textKeysModule.SaveButtonText,
-		onClose = var17,
+		onClose = var9,
 		onSave = reactModule.useCallback(function()
-			-- upvalues: var12 (ref), var15 (ref), var14 (ref), promiseModule (copy), var17 (ref)
-			if var12.current and not var15 then
-				var14(true)
-				promiseModule.resolve(var12.current()):andThen(function()
-					-- upvalues: var14 (copy), var17 (copy)
-					var14(false)
-					var17()
+			-- upvalues: var4 (ref), var7 (ref), var6 (ref), promiseModule (copy), var9 (ref)
+			if var4.current and not var7 then
+				var6(true)
+				promiseModule.resolve(var4.current()):andThen(function()
+					-- upvalues: var6 (copy), var9 (copy)
+					var6(false)
+					var9()
 				end):catch(function(_)
-					-- upvalues: var14 (copy)
-					var14(false)
+					-- upvalues: var6 (copy)
+					var6(false)
 				end)
 			end
-		end, { var15 }),
-		isLoading = var13,
-		registerSaveHandler = reactModule.useCallback(function(p1)
-			-- upvalues: var12 (ref)
-			var12.current = p1
+		end, { var7 }),
+		isLoading = var5,
+		registerSaveHandler = reactModule.useCallback(function(p2)
+			-- upvalues: var4 (ref)
+			var4.current = p2
 		end, {}),
 		updateErrorState = reactModule.useCallback(function(p2)
-			-- upvalues: var16 (ref)
-			var16(p2)
+			-- upvalues: var8 (ref)
+			var8(p2)
 		end, {}),
-		hasError = var15
+		hasError = var7
 	}
 end

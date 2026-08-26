@@ -7,50 +7,50 @@ local icon = foundationModule.Icon
 local enums = foundationModule.Enums
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-local var2 = function() end
+local var1 = function() end
 
 local t = { affordance = enums.StateLayerAffordance.None }
 
-return reactModule.memo(function(p0)
-	-- upvalues: fFlagSduiExperienceDetailsSupport (ref), reactModule (ref), view (ref), var2 (ref), t (ref), divider (ref), icon (ref), enums (ref)
-	local var4 = (p0.numColumns or 1) == 1
-	local var5 = nil
-	local var6 = nil
+return reactModule.memo(function(p1)
+	-- upvalues: fFlagSduiExperienceDetailsSupport (ref), reactModule (ref), view (ref), var1 (ref), t (ref), divider (ref), icon (ref), enums (ref)
+	local var2 = (p1.numColumns or 1) == 1
+	local var3 = nil
+	local var4 = nil
 	
 	if fFlagSduiExperienceDetailsSupport then
-		var5 = p0.selectable ~= false
-		var6 = reactModule.useMemo(function()
-			-- upvalues: var5 (write), p0 (ref)
-			return if var5 then { Selectable = true, SelectionOrder = p0.selectionOrder } else nil
-		end, { var5, p0.selectionOrder })
+		var3 = p1.selectable ~= false
+		var4 = reactModule.useMemo(function()
+			-- upvalues: var3 (write), p1 (ref)
+			return if var3 then { Selectable = true, SelectionOrder = p1.selectionOrder } else nil
+		end, { var3, p1.selectionOrder })
 	end
 	return reactModule.createElement(view, {
 		tag = "col size-full-0 auto-y",
-		onActivated = if fFlagSduiExperienceDetailsSupport then p0.onActivated or (if var5 then var2 else nil) else p0.onActivated,
-		selection = if fFlagSduiExperienceDetailsSupport then var6 else nil,
-		stateLayer = if fFlagSduiExperienceDetailsSupport and var5 and not p0.onActivated then t else nil,
-		testId = p0.testId
+		onActivated = if fFlagSduiExperienceDetailsSupport then p1.onActivated or (if var3 then var1 else nil) else p1.onActivated,
+		selection = if fFlagSduiExperienceDetailsSupport then var4 else nil,
+		stateLayer = if fFlagSduiExperienceDetailsSupport and var3 and not p1.onActivated then t else nil,
+		testId = p1.testId
 	}, {
-		TopDivider = if not var4 then reactModule.createElement(divider, { LayoutOrder = 1 }) else nil,
+		TopDivider = if not var2 then reactModule.createElement(divider, { LayoutOrder = 1 }) else nil,
 		LabelValueContainer = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = {
-				["row size-full-0 auto-y flex-x-between gap-medium padding-y-large"] = var4,
-				["col size-full-0 auto-y padding-y-medium"] = not var4
+				["row size-full-0 auto-y flex-x-between gap-medium padding-y-large"] = var2,
+				["col size-full-0 auto-y padding-y-medium"] = not var2
 			}
 		}, {
-			Label = p0.labelComponent,
+			Label = p1.labelComponent,
 			ValueContainer = reactModule.createElement(view, {
 				LayoutOrder = 2,
 				tag = {
-					["row size-0-full auto-xy fill align-x-right"] = var4,
-					["row size-full-0 auto-y"] = not var4
+					["row size-0-full auto-xy fill align-x-right"] = var2,
+					["row size-full-0 auto-y"] = not var2
 				}
 			}, {
-				Value = p0.valueComponent,
-				ChevronIcon = if p0.onActivated then reactModule.createElement(icon, { name = enums.IconName.ChevronSmallRight }) else nil
+				Value = p1.valueComponent,
+				ChevronIcon = if p1.onActivated then reactModule.createElement(icon, { name = enums.IconName.ChevronSmallRight }) else nil
 			})
 		}),
-		BottomDivider = if p0.isLastInSingleColumn or not var4 then nil else reactModule.createElement(divider, { LayoutOrder = 3 })
+		BottomDivider = if p1.isLastInSingleColumn or not var2 then nil else reactModule.createElement(divider, { LayoutOrder = 3 })
 	})
 end)

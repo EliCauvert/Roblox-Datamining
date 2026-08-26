@@ -1,12 +1,12 @@
-﻿local var0 = require(script:FindFirstAncestor("ServerDrivenUi").Parent.AppCommonLib).Signal.new()
+﻿local var1 = require(script:FindFirstAncestor("ServerDrivenUi").Parent.AppCommonLib).Signal.new()
 
 return {
-	switchTab = function(p0, p1)
-		-- upvalues: var0 (ref)
-		var0:fire(p0, p1)
+	switchTab = function(p1, p2)
+		-- upvalues: var1 (ref)
+		var1:fire(p1, p2)
 	end,
-	connect = function(p2)
-		-- upvalues: var0 (ref)
-		return var0:connect(p2)
+	connect = function(p1)
+		-- upvalues: var1 (ref)
+		return var1:connect(p1)
 	end
 }

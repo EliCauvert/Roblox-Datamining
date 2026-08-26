@@ -14,9 +14,9 @@ local _ = {
 	TOO_MANY_REQUESTS = 429
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: profileCTAStore (ref)
-	profileCTAStore.get().getCTA(p0, true)
+	profileCTAStore.get().getCTA(p1, true)
 end
 
 local function getErrorToastMessage(p1, p2, p3)
@@ -37,53 +37,53 @@ local function getErrorToastMessage(p1, p2, p3)
 	})[p3] else nil
 end
 
-local function showErrorToast(p4, p5, p6)
+local function showErrorToast(p1, p2, p3)
 	-- upvalues: getErrorToastMessage (ref), setCurrentToastMessage (ref)
-	p4(setCurrentToastMessage({
+	p1(setCurrentToastMessage({
 		isLocalized = true,
-		toastMessage = getErrorToastMessage(p5, if type(p6) == "table" then p6.statusCode else nil, if type(p6) == "table" then p6.firstErrorCode else nil) or p5.defaultFriendingError
+		toastMessage = getErrorToastMessage(p2, if type(p3) == "table" then p3.statusCode else nil, if type(p3) == "table" then p3.firstErrorCode else nil) or p2.defaultFriendingError
 	}))
 end
 
 return {
-	executeAddFriend = function(p7)
+	executeAddFriend = function(p1)
 		-- upvalues: requests (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return requests.RequestFriendshipFromUserId(p7.targetUserId, p7.friendshipOriginSourceType):andThen(function()
-			-- upvalues: p7 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
-			profileCTAStore.get().getCTA(p7.targetUserId, true)
-			p7.dispatch(setCurrentToastMessage({
+		return requests.RequestFriendshipFromUserId(p1.targetUserId, p1.friendshipOriginSourceType):andThen(function()
+			-- upvalues: p1 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
+			profileCTAStore.get().getCTA(p1.targetUserId, true)
+			p1.dispatch(setCurrentToastMessage({
 				isLocalized = true,
-				toastMessage = p7.localized.friendRequestSent,
+				toastMessage = p1.localized.friendRequestSent,
 				toastIcon = friendAdd
 			}))
-		end):catch(function(p8)
-			-- upvalues: showErrorToast (copy), p7 (ref)
-			showErrorToast(p7.dispatch, p7.localized, p8)
+		end):catch(function(p2)
+			-- upvalues: showErrorToast (copy), p1 (ref)
+			showErrorToast(p1.dispatch, p1.localized, p2)
 		end)
 	end,
-	executeAcceptFriendRequest = function(p9)
+	executeAcceptFriendRequest = function(p1)
 		-- upvalues: friendsStore (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return friendsStore.get().AcceptFriendRequest(p9.targetUserId):andThen(function()
-			-- upvalues: p9 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
-			profileCTAStore.get().getCTA(p9.targetUserId, true)
-			p9.dispatch(setCurrentToastMessage({
+		return friendsStore.get().AcceptFriendRequest(p1.targetUserId):andThen(function()
+			-- upvalues: p1 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
+			profileCTAStore.get().getCTA(p1.targetUserId, true)
+			p1.dispatch(setCurrentToastMessage({
 				isLocalized = true,
-				toastMessage = p9.localized.friendAdded,
+				toastMessage = p1.localized.friendAdded,
 				toastIcon = friendAdd
 			}))
-		end):catch(function(p10)
-			-- upvalues: showErrorToast (copy), p9 (ref)
-			showErrorToast(p9.dispatch, p9.localized, p10)
+		end):catch(function(p2)
+			-- upvalues: showErrorToast (copy), p1 (ref)
+			showErrorToast(p1.dispatch, p1.localized, p2)
 		end)
 	end,
-	executeDeclineFriendRequest = function(p11)
+	executeDeclineFriendRequest = function(p1)
 		-- upvalues: friendsStore (ref), profileCTAStore (ref), showErrorToast (ref)
-		return friendsStore.get().DeclineFriendRequest(p11.targetUserId):andThen(function()
-			-- upvalues: p11 (ref), profileCTAStore (copy)
-			profileCTAStore.get().getCTA(p11.targetUserId, true)
-		end):catch(function(p12)
-			-- upvalues: showErrorToast (copy), p11 (ref)
-			showErrorToast(p11.dispatch, p11.localized, p12)
+		return friendsStore.get().DeclineFriendRequest(p1.targetUserId):andThen(function()
+			-- upvalues: p1 (ref), profileCTAStore (copy)
+			profileCTAStore.get().getCTA(p1.targetUserId, true)
+		end):catch(function(p2)
+			-- upvalues: showErrorToast (copy), p1 (ref)
+			showErrorToast(p1.dispatch, p1.localized, p2)
 		end)
 	end
 }

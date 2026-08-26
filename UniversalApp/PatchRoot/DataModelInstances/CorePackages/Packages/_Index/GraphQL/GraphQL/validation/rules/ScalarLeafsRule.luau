@@ -6,24 +6,24 @@ local getNamedType = definitionModule.getNamedType
 local isLeafType = definitionModule.isLeafType
 
 return {
-	ScalarLeafsRule = function(p0)
+	ScalarLeafsRule = function(p1)
 		-- upvalues: isLeafType (ref), getNamedType (ref), inspect (ref), graphQLError (ref)
 		return {
-			Field = function(_, p1)
-				-- upvalues: p0 (ref), isLeafType (copy), getNamedType (copy), inspect (copy), graphQLError (copy)
-				local type = p0:getType()
-				local selectionSet = p1.selectionSet
+			Field = function(_, p2)
+				-- upvalues: p1 (ref), isLeafType (copy), getNamedType (copy), inspect (copy), graphQLError (copy)
+				local type = p1:getType()
+				local selectionSet = p2.selectionSet
 				
 				if type then
 					if isLeafType(getNamedType(type)) then
 						if selectionSet then
-							p0:reportError(graphQLError.new(("Field \"%s\" must not have a selection since type \"%s\" has no subfields."):format(p1.name.value, inspect(type)), selectionSet))
+							p1:reportError(graphQLError.new(("Field \"%s\" must not have a selection since type \"%s\" has no subfields."):format(p2.name.value, inspect(type)), selectionSet))
 							
 							return
 						end
 					elseif not selectionSet then
-						local value = p1.name.value
-						p0:reportError(graphQLError.new(("Field \"%s\" of type \"%s\" must have a selection of subfields. Did you mean \"%s { ... }\"?"):format(value, inspect(type), value), p1))
+						local value = p2.name.value
+						p1:reportError(graphQLError.new(("Field \"%s\" of type \"%s\" must have a selection of subfields. Did you mean \"%s { ... }\"?"):format(value, inspect(type), value), p2))
 					end
 				end
 			end

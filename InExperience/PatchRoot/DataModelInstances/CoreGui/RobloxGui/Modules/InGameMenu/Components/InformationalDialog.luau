@@ -39,57 +39,57 @@ informationalDialog.defaultProps = {
 	iconSize = 64
 }
 
-function informationalDialog.init(p0)
+function informationalDialog.init(p1)
 	-- upvalues: roact (ref)
-	p0.state = { isRooted = false, show = true }
+	p1.state = { isRooted = false, show = true }
 	
-	function p0.onAncestryChanged(p1)
-		-- upvalues: p0 (ref)
-		if p1:IsDescendantOf(game) then
-			p0:setState({ isRooted = true })
+	function p0.onAncestryChanged(p2)
+		-- upvalues: p1 (ref)
+		if p2:IsDescendantOf(game) then
+			p1:setState({ isRooted = true })
 		end
 	end
 	
-	p0.confirmButtonRef = roact.createRef()
-	p0.buttonContainerRef = roact.createRef()
+	p1.confirmButtonRef = roact.createRef()
+	p1.buttonContainerRef = roact.createRef()
 end
 
-function informationalDialog.render(p2)
+function informationalDialog.render(p1)
 	-- upvalues: withStyle (ref), textService (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), roact (ref), coreGuiService (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), button (ref), buttonType (ref), runService (ref), focusHandlerModule (ref), constantsModule (ref), guiService (ref)
-	local props = p2.props
+	local props = p1.props
 	
-	return withStyle(function(p3)
-		-- upvalues: props (ref), textService (copy), getFFlagIGMGamepadSelectionHistoryModule (copy), p2 (ref), roact (copy), coreGuiService (copy), imageSetLabel (copy), assetsModule (copy), themedTextLabelModule (copy), button (copy), buttonType (copy), runService (copy), focusHandlerModule (copy), constantsModule (copy), guiService (copy)
-		local font = p3.Font.Body.Font
-		local var13 = p3.Font.Body.RelativeSize * p3.Font.BaseSize
-		local var14 = math.max(textService:GetTextSize(props.bodyText, var13, font, Vector2.new(295, 1e999)).Y, var13 * 2) + 20
-		local var15 = math.max(textService:GetTextSize(props.subBodyText, var13, font, Vector2.new(295, 1e999)).Y, var13 * 2) + 20
+	return withStyle(function(p2)
+		-- upvalues: props (ref), textService (copy), getFFlagIGMGamepadSelectionHistoryModule (copy), p1 (ref), roact (copy), coreGuiService (copy), imageSetLabel (copy), assetsModule (copy), themedTextLabelModule (copy), button (copy), buttonType (copy), runService (copy), focusHandlerModule (copy), constantsModule (copy), guiService (copy)
+		local font = p2.Font.Body.Font
+		local var1 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
+		local var2 = math.max(textService:GetTextSize(props.bodyText, var1, font, Vector2.new(295, 1e999)).Y, var1 * 2) + 20
+		local var3 = math.max(textService:GetTextSize(props.subBodyText, var1, font, Vector2.new(295, 1e999)).Y, var1 * 2) + 20
 		
 		return roact.createElement(roact.Portal, { target = coreGuiService }, {
 			InGameMenuInformationalDialog = roact.createElement("ScreenGui", {
 				DisplayOrder = 8,
 				IgnoreGuiInset = true,
 				OnTopOfCoreBlur = props.blurBackground,
-				Enabled = props.visible and p2.state.show,
+				Enabled = props.visible and p1.state.show,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 			}, {
 				Overlay = roact.createElement("TextButton", {
 					AutoButtonColor = false,
 					BorderSizePixel = 0,
 					Text = "",
-					BackgroundColor3 = p3.Theme.Overlay.Color,
-					BackgroundTransparency = p3.Theme.Overlay.Transparency,
+					BackgroundColor3 = p2.Theme.Overlay.Color,
+					BackgroundTransparency = p2.Theme.Overlay.Transparency,
 					Size = UDim2.new(1, 0, 1, 0)
 				}),
 				DialogMainFrame = roact.createElement(imageSetLabel, {
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Image = assetsModule.Images.RoundedRect.Image,
-					ImageColor3 = p3.Theme.BackgroundUIDefault.Color,
-					ImageTransparency = p3.Theme.BackgroundUIDefault.Transparency,
+					ImageColor3 = p2.Theme.BackgroundUIDefault.Color,
+					ImageTransparency = p2.Theme.BackgroundUIDefault.Transparency,
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					ScaleType = assetsModule.Images.RoundedRect.ScaleType,
-					Size = UDim2.new(0, 335, 0, var14 + 49 + var15 + 36 + 70 + props.iconSize),
+					Size = UDim2.new(0, 335, 0, var2 + 49 + var3 + 36 + 70 + props.iconSize),
 					SliceCenter = assetsModule.Images.RoundedRect.SliceCenter
 				}, {
 					Padding = roact.createElement("UIPadding", {
@@ -122,8 +122,8 @@ function informationalDialog.render(p2)
 					Divider = roact.createElement("Frame", {
 						BorderSizePixel = 0,
 						LayoutOrder = 3,
-						BackgroundColor3 = p3.Theme.Divider.Color,
-						BackgroundTransparency = p3.Theme.Divider.Transparency,
+						BackgroundColor3 = p2.Theme.Divider.Color,
+						BackgroundTransparency = p2.Theme.Divider.Transparency,
 						Size = UDim2.new(0.8, 0, 0, 1)
 					}),
 					SpaceContainer = roact.createElement("Frame", {
@@ -134,7 +134,7 @@ function informationalDialog.render(p2)
 					BodyTextContainer = roact.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 5,
-						Size = UDim2.new(1, 0, 0, var14)
+						Size = UDim2.new(1, 0, 0, var2)
 					}, {
 						BodyText = roact.createElement(themedTextLabelModule, {
 							TextWrapped = true,
@@ -145,7 +145,7 @@ function informationalDialog.render(p2)
 					SubBodyTextContainer = roact.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 6,
-						Size = UDim2.new(1, 0, 0, var15)
+						Size = UDim2.new(1, 0, 0, var3)
 					}, {
 						BodyText = roact.createElement(themedTextLabelModule, {
 							TextWrapped = true,
@@ -162,8 +162,8 @@ function informationalDialog.render(p2)
 						BackgroundTransparency = 1,
 						LayoutOrder = 8,
 						Size = UDim2.new(1, 0, 0, 36),
-						[roact.Ref] = p2.buttonContainerRef,
-						[roact.Event.AncestryChanged] = p2.onAncestryChanged
+						[roact.Ref] = p1.buttonContainerRef,
+						[roact.Event.AncestryChanged] = p1.onAncestryChanged
 					}, {
 						Layout = roact.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Horizontal,
@@ -178,48 +178,48 @@ function informationalDialog.render(p2)
 							size = UDim2.new(1, -5, 1, 0),
 							text = props.confirmText,
 							onActivated = function()
-								-- upvalues: p2 (copy), runService (copy)
-								p2:setState({ show = false })
+								-- upvalues: p1 (copy), runService (copy)
+								p1:setState({ show = false })
 								
-								if p2.props.onContinueFunc then
-									p2.props.onContinueFunc()
+								if p1.props.onContinueFunc then
+									p1.props.onContinueFunc()
 								end
 								runService:SetRobloxGuiFocused(false)
 							end,
-							[roact.Ref] = p2.confirmButtonRef
+							[roact.Ref] = p1.confirmButtonRef
 						})
 					})
 				})
 			}),
 			FocusHandler = roact.createElement(focusHandlerModule, {
-				isFocused = p2.state.isRooted and (p2.props.visible and p2.props.inputType == constantsModule.InputType.Gamepad),
-				shouldForgetPreviousSelection = if getFFlagIGMGamepadSelectionHistoryModule() then not p2.props.visible else nil,
+				isFocused = p1.state.isRooted and (p1.props.visible and p1.props.inputType == constantsModule.InputType.Gamepad),
+				shouldForgetPreviousSelection = if getFFlagIGMGamepadSelectionHistoryModule() then not p1.props.visible else nil,
 				didFocus = function()
-					-- upvalues: guiService (copy), p2 (copy)
+					-- upvalues: guiService (copy), p1 (copy)
 					guiService:RemoveSelectionGroup("InGameMenuModalButtonsSelectionParent")
-					guiService:AddSelectionParent("InGameMenuModalButtonsSelectionParent", p2.buttonContainerRef:getValue())
-					guiService.SelectedCoreObject = p2.confirmButtonRef:getValue()
+					guiService:AddSelectionParent("InGameMenuModalButtonsSelectionParent", p1.buttonContainerRef:getValue())
+					guiService.SelectedCoreObject = p1.confirmButtonRef:getValue()
 				end
 			})
 		})
 	end)
 end
 
-function informationalDialog.updateBlur(p4)
+function informationalDialog.updateBlur(p1)
 	-- upvalues: runService (ref)
-	runService:SetRobloxGuiFocused(p4.props.blurBackground and p4.props.visible)
+	runService:SetRobloxGuiFocused(p1.props.blurBackground and p1.props.visible)
 end
 
-function informationalDialog.bindActions(p5)
+function informationalDialog.bindActions(p1)
 	-- upvalues: contextActionService (ref)
-	local function confirmFunc(_, p6, _)
-		-- upvalues: p5 (ref)
-		if p6 == Enum.UserInputState.Begin then
-			p5.props.onConfirm()
+	local function confirmFunc(_, p2, _)
+		-- upvalues: p1 (ref)
+		if p2 == Enum.UserInputState.Begin then
+			p1.props.onConfirm()
 		end
 	end
 	
-	if p5.props.bindReturnToConfirm then
+	if p1.props.bindReturnToConfirm then
 		contextActionService:BindCoreAction("InGameMenuModalConfirm", confirmFunc, false, Enum.KeyCode.Return)
 	end
 end
@@ -229,31 +229,31 @@ function informationalDialog.unbindActions(_)
 	contextActionService:UnbindCoreAction("InGameMenuModalConfirm")
 end
 
-function informationalDialog.didMount(p7)
-	p7:updateBlur()
+function informationalDialog.didMount(p1)
+	p1:updateBlur()
 	
-	if p7.props.visible then
-		p7:bindActions()
+	if p1.props.visible then
+		p1:bindActions()
 	end
 end
 
-function informationalDialog.didUpdate(p8)
-	p8:updateBlur()
+function informationalDialog.didUpdate(p1)
+	p1:updateBlur()
 	
-	if p8.props.visible then
-		p8:bindActions()
+	if p1.props.visible then
+		p1:bindActions()
 		
 		return
 	end
-	p8:unbindActions()
+	p1:unbindActions()
 end
 
-function informationalDialog.willUnmount(p9)
+function informationalDialog.willUnmount(p1)
 	-- upvalues: runService (ref)
-	if p9.props.blurBackground then
+	if p1.props.blurBackground then
 		runService:SetRobloxGuiFocused(false)
 	end
-	p9:unbindActions()
+	p1:unbindActions()
 end
 
 return informationalDialog

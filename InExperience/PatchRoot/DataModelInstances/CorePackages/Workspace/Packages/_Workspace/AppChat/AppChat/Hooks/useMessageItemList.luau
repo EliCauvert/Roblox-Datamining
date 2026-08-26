@@ -16,14 +16,14 @@ local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local messageStatus = enumsModule.MessageStatus
 local messageType = enumsModule.MessageType
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: dateTime (ref)
-	if p0 == nil or p0 == "" then
+	if p1 == nil or p1 == "" then
 		return nil
 	end
 	local ok, status = pcall(function()
-		-- upvalues: dateTime (copy), p0 (ref)
-		return dateTime.fromIsoDate(p0)
+		-- upvalues: dateTime (copy), p1 (ref)
+		return dateTime.fromIsoDate(p1)
 	end)
 	
 	return if ok then status else nil
@@ -40,7 +40,7 @@ local function buildLegacyRepliesTo(p1, p2)
 	local id = p2[repliesTo.id]
 	
 	if id == nil then
-		local var19
+		local var1
 		local t = {
 			id = repliesTo.id,
 			content = repliesTo.content,
@@ -50,209 +50,209 @@ local function buildLegacyRepliesTo(p1, p2)
 		local createdAt = repliesTo.created_at
 		
 		if createdAt == nil or createdAt == "" then
-			var19 = nil
+			var1 = nil
 		else
 			ok, status = pcall(function()
 				-- upvalues: dateTime (copy), createdAt (ref)
 				return dateTime.fromIsoDate(createdAt)
 			end)
-			var19 = if ok then status else nil
+			var1 = if ok then status else nil
 		end
-		t.sent = var19
+		t.sent = var1
 		
 		return t
 	else
-		local var17
+		local var2
 		local join = cryoModule.Dictionary.join
-		local var15 = id
+		local var3 = id
 		local t = { senderTargetId = tostring(id.sender_user_id) }
 		status = id.created_at
 		
 		if status == nil or status == "" then
-			var17 = nil
+			var2 = nil
 		else
 			local ok, status = pcall(function()
 				-- upvalues: dateTime (copy), status (ref)
 				return dateTime.fromIsoDate(status)
 			end)
-			var17 = if ok then status else nil
+			var2 = if ok then status else nil
 		end
-		t.sent = var17
+		t.sent = var2
 		t.messageType = if id.type == messageType.System then "System" else "PlainText"
 		
-		return join(var15, t)
+		return join(var3, t)
 	end
 end
 
-local function toLegacyMessage(p3, p4)
+local function toLegacyMessage(p1, p2)
 	-- upvalues: messageType (ref), cryoModule (ref), dateTime (ref), messageStatus (ref), buildLegacyRepliesTo (ref)
-	local var21
+	local var1
 	local join = cryoModule.Dictionary.join
 	local t = {
-		senderTargetId = tostring(p3.sender_user_id),
-		senderType = p3.type,
-		messageType = p3.messageType or (if p3.type == messageType.System then "System" else "PlainText")
+		senderTargetId = tostring(p1.sender_user_id),
+		senderType = p1.type,
+		messageType = p1.messageType or (if p1.type == messageType.System then "System" else "PlainText")
 	}
-	local createdAt = p3.created_at
+	local createdAt = p1.created_at
 	
 	if createdAt == nil or createdAt == "" then
-		var21 = nil
+		var1 = nil
 	else
 		local ok, status = pcall(function()
 			-- upvalues: dateTime (copy), createdAt (ref)
 			return dateTime.fromIsoDate(createdAt)
 		end)
-		var21 = if ok then status else nil
+		var1 = if ok then status else nil
 	end
-	t.sent = var21
-	t.moderationType = p3.moderation_type
-	t.moderated = p3.status == messageStatus.Moderated
-	t.failed = p3.status == messageStatus.Failed
-	t.isSending = p3.status == messageStatus.Pending
-	t.filteredForReceivers = p3.filtered_for_receivers
-	t.contentToDisplay = p3.content_to_display
-	t.repliesTo = buildLegacyRepliesTo(p3, p4)
+	t.sent = var1
+	t.moderationType = p1.moderation_type
+	t.moderated = p1.status == messageStatus.Moderated
+	t.failed = p1.status == messageStatus.Failed
+	t.isSending = p1.status == messageStatus.Pending
+	t.filteredForReceivers = p1.filtered_for_receivers
+	t.contentToDisplay = p1.content_to_display
+	t.repliesTo = buildLegacyRepliesTo(p1, p2)
 	
-	return join(p3, t)
+	return join(p1, t)
 end
 
-local _ = function(p5, p6)
+local _ = function(p1, p2)
 	-- upvalues: enumsModule (ref)
-	if p6 == nil then
-		return p5
+	if p2 == nil then
+		return p1
 	end
 	local groupedMessageVariant = enumsModule.GroupedMessageVariant
 	
-	if p6 == groupedMessageVariant.Single then
-		p5.isNewSender = true
-		p5.isLastMessageInMessageGroup = true
+	if p2 == groupedMessageVariant.Single then
+		p1.isNewSender = true
+		p1.isLastMessageInMessageGroup = true
 		
-		return p5
-	elseif p6 == groupedMessageVariant.First then
-		p5.isNewSender = true
-		p5.isLastMessageInMessageGroup = false
+		return p1
+	elseif p2 == groupedMessageVariant.First then
+		p1.isNewSender = true
+		p1.isLastMessageInMessageGroup = false
 		
-		return p5
-	elseif p6 == groupedMessageVariant.Middle then
-		p5.isNewSender = false
-		p5.isLastMessageInMessageGroup = false
+		return p1
+	elseif p2 == groupedMessageVariant.Middle then
+		p1.isNewSender = false
+		p1.isLastMessageInMessageGroup = false
 		
-		return p5
-	elseif p6 == groupedMessageVariant.Last then
-		p5.isNewSender = false
-		p5.isLastMessageInMessageGroup = true
+		return p1
+	elseif p2 == groupedMessageVariant.Last then
+		p1.isNewSender = false
+		p1.isLastMessageInMessageGroup = true
 	end
-	return p5
+	return p1
 end
 
-local function buildPopulatedMessage(p7, p8, p9, p10, p11, p12, p13, p14)
+local function buildPopulatedMessage(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: populateMessageWithStateModule (ref), enumsModule (ref)
-	local var22 = populateMessageWithStateModule({ Users = p12, LocalUserId = p13 }, p7, p7.id, p11, p9, p7.isSending == true, p10)
+	local var1 = populateMessageWithStateModule({ Users = p6, LocalUserId = p7 }, p1, p1.id, p5, p3, p1.isSending == true, p4)
 	
-	if p8 == nil then
-		var22 = var22
+	if p2 == nil then
+		var1 = var1
 	else
 		local groupedMessageVariant = enumsModule.GroupedMessageVariant
 		
-		if p8 == groupedMessageVariant.Single then
-			var22.isNewSender = true
-			var22.isLastMessageInMessageGroup = true
-		elseif p8 == groupedMessageVariant.First then
-			var22.isNewSender = true
-			var22.isLastMessageInMessageGroup = false
-		elseif p8 == groupedMessageVariant.Middle then
-			var22.isNewSender = false
-			var22.isLastMessageInMessageGroup = false
-		elseif p8 == groupedMessageVariant.Last then
-			var22.isNewSender = false
-			var22.isLastMessageInMessageGroup = true
+		if p2 == groupedMessageVariant.Single then
+			var1.isNewSender = true
+			var1.isLastMessageInMessageGroup = true
+		elseif p2 == groupedMessageVariant.First then
+			var1.isNewSender = true
+			var1.isLastMessageInMessageGroup = false
+		elseif p2 == groupedMessageVariant.Middle then
+			var1.isNewSender = false
+			var1.isLastMessageInMessageGroup = false
+		elseif p2 == groupedMessageVariant.Last then
+			var1.isNewSender = false
+			var1.isLastMessageInMessageGroup = true
 		end
-		var22 = var22
+		var1 = var1
 	end
-	var22.stable_key = `{var22.stableKey or var22.messageId}_{p14}`
+	var1.stable_key = `{var1.stableKey or var1.messageId}_{p8}`
 	
-	return var22
+	return var1
 end
 
-local function buildMessageItemList(p15, p16, p17, p18, p19, p20)
+local function buildMessageItemList(p1, p2, p3, p4, p5, p6)
 	-- upvalues: cryoModule (ref), toLegacyMessage (ref), filterForLinksWithPolicyModule (ref), buildPopulatedMessage (ref)
-	if #p15 == 0 or p18 == nil then
+	if #p1 == 0 or p4 == nil then
 		return {}
 	end
-	local var23 = cryoModule.List.filterMap(p15, function(p21)
-		-- upvalues: p16 (ref), toLegacyMessage (copy)
-		local var31 = p16[p21]
+	local var1 = cryoModule.List.filterMap(p1, function(p7)
+		-- upvalues: p2 (ref), toLegacyMessage (copy)
+		local var2 = p2[p7]
 		
-		return if var31 == nil then nil else toLegacyMessage(var31, p16)
+		return if var2 == nil then nil else toLegacyMessage(var2, p2)
 	end)
 	local t = {}
-	local var25 = nil
+	local var2 = nil
 	
-	for i_1 = #var23, 1, -1 do
-		local var26 = var23[i_1]
-		local var27 = filterForLinksWithPolicyModule(var26)
-		local var28 = if i_1 > 1 then var23[i_1 - 1] else nil
-		local var29 = p17(var26.id)
+	for i_1 = #var1, 1, -1 do
+		local var3 = var1[i_1]
+		local var4 = filterForLinksWithPolicyModule(var3)
+		local var5 = if i_1 > 1 then var1[i_1 - 1] else nil
+		local var6 = p3(var3.id)
 		
-		for i, v in var27 do
-			local var30 = buildPopulatedMessage(v, if #var27 == 1 then var29 else nil, var25, var27[i + 1] or var28, p18, p19, p20, i)
-			table.insert(t, var30)
-			var25 = var30
+		for i, v in var4 do
+			local var7 = buildPopulatedMessage(v, if #var4 == 1 then var6 else nil, var2, var4[i + 1] or var5, p4, p5, p6, i)
+			table.insert(t, var7)
+			var2 = var7
 		end
 	end
 	return cryoModule.List.reverse(t)
 end
 
 return {
-	useMessageItemList = function(p22, p23, p24, p25)
+	useMessageItemList = function(p7, p8, p9, p10)
 		-- upvalues: reactModule (ref), getConversationMessageViewModelStoreModule (ref), signalsModule (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), buildMessageItemList (ref), useSignalState (ref)
-		local var32 = reactModule.useMemo(function()
+		local var8 = reactModule.useMemo(function()
 			-- upvalues: getConversationMessageViewModelStoreModule (copy)
 			return getConversationMessageViewModelStoreModule(false)
 		end, {})
-		local conversationMessageStore = var32.conversationMessageStore
-		local conversationMessageListStore = var32.conversationMessageListStore
-		local var33 = reactModule.useRef(p25)
-		var33.current = p25
-		local var34 = reactModule.useRef(p23)
-		var34.current = p23
+		local conversationMessageStore = var8.conversationMessageStore
+		local conversationMessageListStore = var8.conversationMessageListStore
+		local var9 = reactModule.useRef(p10)
+		var9.current = p10
+		local var10 = reactModule.useRef(p8)
+		var10.current = p8
 		
 		return useSignalState(reactModule.useMemo(function()
-			-- upvalues: p22 (ref), signalsModule (copy), conversationMessageListStore (ref), conversationMessageStore (ref), p24 (ref), var33 (ref), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), buildMessageItemList (copy), var32 (ref), var34 (ref)
-			return if p22 == nil then signalsModule.createComputed(function()
+			-- upvalues: p7 (ref), signalsModule (copy), conversationMessageListStore (ref), conversationMessageStore (ref), p9 (ref), var9 (ref), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), buildMessageItemList (copy), var8 (ref), var10 (ref)
+			return if p7 == nil then signalsModule.createComputed(function()
 				return {}
-			end) else signalsModule.createComputed(function(p26)
-				-- upvalues: conversationMessageListStore (copy), p22 (copy), conversationMessageStore (copy), p24 (copy), var33 (copy), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), buildMessageItemList (copy), var32 (copy), var34 (copy)
-				local orderedIds = conversationMessageListStore.getOrderedIds(p22, p26)
-				local var36 = conversationMessageStore.messages(p26)
-				local var37 = tostring(p24 or "")
+			end) else signalsModule.createComputed(function(p11)
+				-- upvalues: conversationMessageListStore (copy), p7 (copy), conversationMessageStore (copy), p9 (copy), var9 (copy), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), buildMessageItemList (copy), var8 (copy), var10 (copy)
+				local orderedIds = conversationMessageListStore.getOrderedIds(p7, p11)
+				local var11 = conversationMessageStore.messages(p11)
+				local var12 = tostring(p9 or "")
 				
-				if var33.current == nil then
+				if var9.current == nil then
 					return {}
 				end
-				local chatConversationTTI = fFlagAppChatPerfTrackingModule and (fFlagAppChatMessageTTIMilestonesModule and appChatPerfTrackerModule.isActive(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = p22 }))
+				local chatConversationTTI = fFlagAppChatPerfTrackingModule and (fFlagAppChatMessageTTIMilestonesModule and appChatPerfTrackerModule.isActive(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = p7 }))
 				
 				if chatConversationTTI then
-					local t = { conversationId = p22 }
+					local t = { conversationId = p7 }
 					appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.DataProcessingStarted.Name, t)
 					appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.DataProcessingStarted.Name, appChatPerfTrackerModule.Milestone.DataProcessingStarted.Subphase.DataUpdate, t)
 				end
-				local var40 = buildMessageItemList(orderedIds, var36, function(p27)
-					-- upvalues: var32 (copy), p22 (copy), p26 (ref)
-					return var32.getGroupedVariant(p27, p22)(p26)
-				end, var33.current, var34.current, var37)
+				local var13 = buildMessageItemList(orderedIds, var11, function(p12)
+					-- upvalues: var8 (copy), p7 (copy), p11 (ref)
+					return var8.getGroupedVariant(p12, p7)(p11)
+				end, var9.current, var10.current, var12)
 				
 				if chatConversationTTI then
-					local t = { conversationId = p22 }
+					local t = { conversationId = p7 }
 					appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.DataProcessingCompleted.Name, t)
 					appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.DataProcessingCompleted.Name, appChatPerfTrackerModule.Milestone.DataProcessingCompleted.Subphase.DataUpdate, t)
 				end
-				return var40
+				return var13
 			end)
 		end, {
-			p22,
-			p24,
-			var32,
+			p7,
+			p9,
+			var8,
 			conversationMessageStore,
 			conversationMessageListStore
 		}))

@@ -15,72 +15,72 @@ local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTr
 local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p0)
+return function(p1)
 	-- upvalues: logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), handleReceiveErrorModule (ref), promptStateModule (ref), acceptTransferRequestModule (ref), handleReceiveSuccessModule (ref), failureReasonModule (ref), handleReceiveBlockModule (ref), transferRetryOriginModule (ref)
-	local networkImpl = p0.getNetworkImpl()
-	local setPromptState = p0.setPromptState
-	local setRobuxTransfer = p0.setRobuxTransfer
-	local setIsAlreadyAccepted = p0.setIsAlreadyAccepted
-	local transferRequestId = p0.getTransferRequestId(false)
+	local networkImpl = p1.getNetworkImpl()
+	local setPromptState = p1.setPromptState
+	local setRobuxTransfer = p1.setRobuxTransfer
+	local setIsAlreadyAccepted = p1.setIsAlreadyAccepted
+	local transferRequestId = p1.getTransferRequestId(false)
 	
 	if transferRequestId then
 		setPromptState(promptStateModule.ReceiveRequested)
 		local t = { transferRequestId = transferRequestId }
-		logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferAcceptAttemptedCounter)
+		logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferAcceptAttemptedCounter)
 		
 		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.accept_attempted)
+			logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.accept_attempted)
 		end
 		return acceptTransferRequestModule(t, nil, networkImpl):andThen(function(p2)
-			-- upvalues: setPromptState (ref), promptStateModule (copy), setRobuxTransfer (ref), setIsAlreadyAccepted (ref), logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), handleReceiveSuccessModule (copy), handleReceiveErrorModule (copy)
+			-- upvalues: setPromptState (ref), promptStateModule (copy), setRobuxTransfer (ref), setIsAlreadyAccepted (ref), logCurrencyTransferCounterModule (copy), p1 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), handleReceiveSuccessModule (copy), handleReceiveErrorModule (copy)
 			setPromptState(promptStateModule.ReceiveStarted)
 			
 			if p2 and p2.robuxTransfer then
 				setRobuxTransfer(p2.robuxTransfer)
 				setIsAlreadyAccepted(p2.isAlreadyAccepted == true)
-				logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferAcceptSucceededCounter)
+				logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferAcceptSucceededCounter)
 				
 				if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-					logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.accept_succeeded)
+					logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.accept_succeeded)
 				end
 				if sharedFlagsModule.FFlagSduiOpenIncomingTransferUpsellAction then
-					p0.triggerOnPromptDismissCommitted()
+					p1.triggerOnPromptDismissCommitted()
 				end
-				handleReceiveSuccessModule(p0)
+				handleReceiveSuccessModule(p1)
 				
 				return
 			else
-				logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
+				logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
 				
 				if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-					logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.accept_failed)
+					logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.accept_failed)
 				end
-				handleReceiveErrorModule(p0, nil)
+				handleReceiveErrorModule(p1, nil)
 			end
-		end):catch(function(p1)
-			-- upvalues: logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleReceiveBlockModule (copy), transferRetryOriginModule (copy), handleReceiveErrorModule (copy)
-			logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
+		end):catch(function(p2)
+			-- upvalues: logCurrencyTransferCounterModule (copy), p1 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleReceiveBlockModule (copy), transferRetryOriginModule (copy), handleReceiveErrorModule (copy)
+			logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
 			
 			if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-				logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.accept_failed)
+				logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.accept_failed)
 			end
-			if typeof(p1) ~= "table" or not p1.errorMessage then
-				handleReceiveErrorModule(p0, nil)
+			if typeof(p2) ~= "table" or not p2.errorMessage then
+				handleReceiveErrorModule(p1, nil)
 				
 				return
-			elseif p1.failureReason == failureReasonModule.AmpRecourseAvailable and p1.ampRecourseActions and p1.ampFeatureCheck then
-				handleReceiveBlockModule(p0, p1.ampRecourseActions, p1.ampFeatureCheck, transferRetryOriginModule.AcceptTransfer)
+			elseif p2.failureReason == failureReasonModule.AmpRecourseAvailable and p2.ampRecourseActions and p2.ampFeatureCheck then
+				handleReceiveBlockModule(p1, p2.ampRecourseActions, p2.ampFeatureCheck, transferRetryOriginModule.AcceptTransfer)
 				
 				return
 			end
-			handleReceiveErrorModule(p0, p1)
+			handleReceiveErrorModule(p1, p2)
 		end)
 	else
-		logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
+		logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
 		
 		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.accept_failed)
+			logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.accept_failed)
 		end
-		handleReceiveErrorModule(p0, nil)
+		handleReceiveErrorModule(p1, nil)
 	end
 end

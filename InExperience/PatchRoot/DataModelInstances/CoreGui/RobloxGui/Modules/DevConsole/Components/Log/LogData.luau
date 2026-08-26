@@ -7,7 +7,7 @@ local maxStringSize = constantsModule.LogFormatting.MaxStringSize
 local enumToMsgTypeName = constantsModule.EnumToMsgTypeName
 local circularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
 local signalModule = require(script.Parent.Parent.Parent.Signal)
-local var5 = tonumber(settings():GetFVariable("NewDevConsoleMaxLogCount"))
+local var1 = tonumber(settings():GetFVariable("NewDevConsoleMaxLogCount"))
 local list = {
 	"ClassDescriptor failed to learn",
 	"EventDescriptor failed to learn",
@@ -17,106 +17,106 @@ local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertT
 local t = {}
 t.__index = t
 
-local function messageEntry(p0, p1, p2, p3)
+local function messageEntry(p1, p2, p3, p4)
 	-- upvalues: maxStringSize (ref), textService (ref), mainWindow (ref), log (ref)
 	local _ = nil
-	local p0Count = #p0
-	local var14 = if p0Count < maxStringSize then string.format("%s -- %s", p1, p0) else string.format("%s -- %s", p1, string.sub(p0, 1, maxStringSize))
-	local var15 = textService:GetTextSize(var14, mainWindow, log, Vector2.new())
+	local p0Count = #p1
+	local var2 = if p0Count < maxStringSize then string.format("%s -- %s", p2, p1) else string.format("%s -- %s", p2, string.sub(p1, 1, maxStringSize))
+	local var3 = textService:GetTextSize(var2, mainWindow, log, Vector2.new())
 	
-	if p3 and next(p3) == nil then
-		p3 = nil
+	if p4 and next(p4) == nil then
+		p4 = nil
 	end
 	return {
 		Expanded = false,
-		Message = var14,
+		Message = var2,
 		CharCount = p0Count,
-		Type = p2,
-		Dims = var15,
-		Context = p3
+		Type = p3,
+		Dims = var3,
+		Context = p4
 	}
 end
 
-local function ignoreWarningMessageOnAdd(p4)
+local function ignoreWarningMessageOnAdd(p1)
 	-- upvalues: list (ref)
-	if p4.Type ~= Enum.MessageType.MessageWarning.Value then
+	if p1.Type ~= Enum.MessageType.MessageWarning.Value then
 		return false
 	end
-	local var16 = false
+	local var2 = false
 	
 	for i, v in ipairs(list) do
-		if string.find(p4.Message, v) ~= nil then
-			var16 = true
+		if string.find(p1.Message, v) ~= nil then
+			var2 = true
 			
-			return var16
+			return var2
 		end
 	end
-	return var16
+	return var2
 end
 
-local function isMessageFiltered(p5, p6, p7)
+local function isMessageFiltered(p2, p3, p4)
 	-- upvalues: enumToMsgTypeName (ref)
-	return if #p7 == 0 and not next(p6) then false elseif next(p6) and not p6[enumToMsgTypeName[p5.Type]] then false else #p7 > 0 and string.find(p5.Message:lower(), p7:lower()) == nil
+	return if #p4 == 0 and not next(p3) then false elseif next(p3) and not p3[enumToMsgTypeName[p2.Type]] then false else #p4 > 0 and string.find(p2.Message:lower(), p4:lower()) == nil
 end
 
-local function _(p8)
-	local var17 = false
+local function _(p2)
+	local var3 = false
 	
-	for i, v in pairs(p8) do
-		var17 = var17 or v
+	for i, v in pairs(p2) do
+		var3 = var3 or v
 	end
-	return var17
+	return var3
 end
 
-local function filterMessages(p9, p10, p11, p12)
+local function filterMessages(p3, p4, p5, p6)
 	-- upvalues: isMessageFiltered (ref), messageEntry (ref)
-	p9:reset()
-	local var18 = false
+	p3:reset()
+	local var4 = false
 	
-	for i, v in pairs(p11) do
-		var18 = var18 or v
+	for i, v in pairs(p5) do
+		var4 = var4 or v
 	end
-	if #p12 == 0 and not var18 then return end
-	local var19 = 0
-	local var20 = p10:next()
-	while var20 do
-		if isMessageFiltered(var20, p11, p12) then
-			var19 += 1
-			p9:push_back(var20)
+	if #p6 == 0 and not var4 then return end
+	local var5 = 0
+	local var6 = p4:next()
+	while var6 do
+		if isMessageFiltered(var6, p5, p6) then
+			var5 += 1
+			p3:push_back(var6)
 		end
-		var20 = p10:next()
+		var6 = p4:next()
 	end
-	if var19 == 0 then
-		if #p12 > 0 then
-			p9:push_back(messageEntry(string.format("\"%s\" was not found", p12), "", 0))
+	if var5 == 0 then
+		if #p6 > 0 then
+			p3:push_back(messageEntry(string.format("\"%s\" was not found", p6), "", 0))
 			
 			return
 		end
-		p9:push_back(messageEntry("No Messages were found", "", 0))
+		p3:push_back(messageEntry("No Messages were found", "", 0))
 	end
 end
 
-function t:checkErrorWarningCounter(p13)
-	if p13 == Enum.MessageType.MessageWarning.Value then
+function t:checkErrorWarningCounter(p7)
+	if p7 == Enum.MessageType.MessageWarning.Value then
 		self._warningCount += 1
 		self._errorWarningSignal:Fire(self._errorCount, self._warningCount)
 		
 		return
-	elseif p13 == Enum.MessageType.MessageError.Value then
+	elseif p7 == Enum.MessageType.MessageError.Value then
 		self._errorCount += 1
 		self._errorWarningSignal:Fire(self._errorCount, self._warningCount)
 	end
 end
 
-function t.new(p14)
-	-- upvalues: t (ref), circularBufferModule (ref), var5 (ref), enumToMsgTypeName (ref), signalModule (ref)
+function t.new(p7)
+	-- upvalues: t (ref), circularBufferModule (ref), var1 (ref), enumToMsgTypeName (ref), signalModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
 	t_1._initialized = false
 	t_1._isRunning = false
-	t_1._isClient = p14
-	t_1._logData = circularBufferModule.new(var5)
-	t_1._logDataSearched = circularBufferModule.new(var5)
+	t_1._isClient = p7
+	t_1._logData = circularBufferModule.new(var1)
+	t_1._logDataSearched = circularBufferModule.new(var1)
 	t_1._searchTerm = ""
 	t_1._commandLineHistory = circularBufferModule.new(100)
 	t_1._commandLineIndex = 0
@@ -125,10 +125,10 @@ function t.new(p14)
 	for i, v in pairs(enumToMsgTypeName) do
 		t_1._filters[v] = true
 	end
-	t_1._errorCount = p14 and 0
-	t_1._warningCount = p14 and 0
+	t_1._errorCount = p7 and 0
+	t_1._warningCount = p7 and 0
 	t_1._logDataUpdate = signalModule.new()
-	t_1._errorWarningSignal = p14 and signalModule.new()
+	t_1._errorWarningSignal = p7 and signalModule.new()
 	t_1._filterUpdated = signalModule.new()
 	
 	return t_1
@@ -146,10 +146,10 @@ function t:filterUpdatedSignal()
 	return self._filterUpdated
 end
 
-function t:setSearchTerm(p15)
+function t:setSearchTerm(p8)
 	-- upvalues: filterMessages (ref)
-	if self._searchTerm ~= p15 then
-		self._searchTerm = p15
+	if self._searchTerm ~= p8 then
+		self._searchTerm = p8
 		
 		if self._searchTerm == "" then
 			self._logDataSearched:reset()
@@ -174,42 +174,42 @@ function t:getCommandLineIndex()
 	return self._commandLineIndex
 end
 
-function t:setCommandLineIndex(p16)
-	self._commandLineIndex = p16
+function t:setCommandLineIndex(p8)
+	self._commandLineIndex = p8
 end
 
 function t:getFilters()
 	return self._filters
 end
 
-function t:setFilter(p17, p18)
+function t:setFilter(p8, p9)
 	-- upvalues: filterMessages (ref)
-	local var22 = self._filters[p17]
-	self._filters[p17] = p18
-	local var23 = false
+	local var7 = self._filters[p8]
+	self._filters[p8] = p9
+	local var8 = false
 	
 	for i, v in pairs(self._filters) do
-		var23 = var23 or v
+		var8 = var8 or v
 	end
-	if var23 then
+	if var8 then
 		filterMessages(self._logDataSearched, self._logData:iterator(), self._filters, self._searchTerm)
 		self._logDataUpdate:Fire(self._logDataSearched)
 		self._filterUpdated:Fire()
 		
 		return
 	end
-	self._filters[p17] = var22
+	self._filters[p8] = var7
 end
 
-function t:setFilters(p19)
+function t:setFilters(p10)
 	-- upvalues: filterMessages (ref)
-	self._filters = p19
-	local var24 = false
+	self._filters = p10
+	local var9 = false
 	
-	for i, v in pairs(p19) do
-		var24 = var24 or v
+	for i, v in pairs(p10) do
+		var9 = var9 or v
 	end
-	if var24 then
+	if var9 then
 		filterMessages(self._logDataSearched, self._logData:iterator(), self._filters, self._searchTerm)
 		self._logDataUpdate:Fire(self._logDataSearched)
 		self._filterUpdated:Fire()
@@ -240,26 +240,26 @@ function t:start()
 			
 			if #{} == 0 then
 				for i, v in ipairs(logService:GetLogHistory()) do
-					local var25 = messageEntry(v.message or "[DevConsole Error 1]", convertTimeStampModule(v.timestamp), v.messageType.Value, v.context)
+					local var10 = messageEntry(v.message or "[DevConsole Error 1]", convertTimeStampModule(v.timestamp), v.messageType.Value, v.context)
 					
-					if not ignoreWarningMessageOnAdd(var25) then
+					if not ignoreWarningMessageOnAdd(var10) then
 						self:checkErrorWarningCounter(v.messageType.Value)
-						self._logData:push_back(var25)
+						self._logData:push_back(var10)
 					end
 				end
 			end
 		end
-		self._connection = logService.MessageOut:connect(function(p20, p21, p22)
+		self._connection = logService.MessageOut:connect(function(p11, p12, p13)
 			-- upvalues: messageEntry (copy), convertTimeStampModule (copy), ignoreWarningMessageOnAdd (copy), self (ref), isMessageFiltered (copy)
-			local var26 = messageEntry(p20 or "[DevConsole Error 2]", convertTimeStampModule(os.time()), p21.Value, p22)
+			local var11 = messageEntry(p11 or "[DevConsole Error 2]", convertTimeStampModule(os.time()), p12.Value, p13)
 			
-			if not ignoreWarningMessageOnAdd(var26) then
-				self:checkErrorWarningCounter(p21.Value)
-				self._logData:push_back(var26)
+			if not ignoreWarningMessageOnAdd(var11) then
+				self:checkErrorWarningCounter(p12.Value)
+				self._logData:push_back(var11)
 				
 				if #self._logDataSearched:getData() > 0 then
-					if isMessageFiltered(var26, self._filters, self._searchTerm) then
-						self._logDataSearched:push_back(var26)
+					if isMessageFiltered(var11, self._filters, self._searchTerm) then
+						self._logDataSearched:push_back(var11)
 						self._logDataUpdate:Fire(self._logDataSearched)
 						
 						return
@@ -270,16 +270,16 @@ function t:start()
 			end
 		end)
 	else
-		self._connection = logService.ServerMessageOut:connect(function(p23, p24, p25, p26)
+		self._connection = logService.ServerMessageOut:connect(function(p11, p12, p13, p14)
 			-- upvalues: messageEntry (copy), convertTimeStampModule (copy), ignoreWarningMessageOnAdd (copy), self (ref), isMessageFiltered (copy)
-			local var27 = messageEntry(p23 or "[DevConsole Error 3]", convertTimeStampModule(p25), p24.Value, p26)
+			local var11 = messageEntry(p11 or "[DevConsole Error 3]", convertTimeStampModule(p13), p12.Value, p14)
 			
-			if not ignoreWarningMessageOnAdd(var27) then
-				self._logData:push_back(var27)
+			if not ignoreWarningMessageOnAdd(var11) then
+				self._logData:push_back(var11)
 				
 				if #self._logDataSearched:getData() > 0 then
-					if isMessageFiltered(var27, self._filters, self._searchTerm) then
-						self._logDataSearched:push_back(var27)
+					if isMessageFiltered(var11, self._filters, self._searchTerm) then
+						self._logDataSearched:push_back(var11)
 						self._logDataUpdate:Fire(self._logDataSearched)
 						
 						return
@@ -291,17 +291,17 @@ function t:start()
 		end)
 		pcall(function()
 			-- upvalues: self (ref), logService (copy), messageEntry (copy), convertTimeStampModule (copy), ignoreWarningMessageOnAdd (copy), isMessageFiltered (copy)
-			self._variantConnection = logService.ServerContextOut:connect(function(p27)
+			self._variantConnection = logService.ServerContextOut:connect(function(p11)
 				-- upvalues: messageEntry (copy), convertTimeStampModule (copy), ignoreWarningMessageOnAdd (copy), self (copy), isMessageFiltered (copy)
-				if type(p27) == "table" and p27._structuredContext then
-					local var28 = messageEntry(p27._message or "", convertTimeStampModule(p27._timestamp or 0), p27._messageType or 0, p27._structuredContext)
+				if type(p11) == "table" and p11._structuredContext then
+					local var11 = messageEntry(p11._message or "", convertTimeStampModule(p11._timestamp or 0), p11._messageType or 0, p11._structuredContext)
 					
-					if not ignoreWarningMessageOnAdd(var28) then
-						self._logData:push_back(var28)
+					if not ignoreWarningMessageOnAdd(var11) then
+						self._logData:push_back(var11)
 						
 						if #self._logDataSearched:getData() > 0 then
-							if isMessageFiltered(var28, self._filters, self._searchTerm) then
-								self._logDataSearched:push_back(var28)
+							if isMessageFiltered(var11, self._filters, self._searchTerm) then
+								self._logDataSearched:push_back(var11)
 								self._logDataUpdate:Fire(self._logDataSearched)
 								
 								return

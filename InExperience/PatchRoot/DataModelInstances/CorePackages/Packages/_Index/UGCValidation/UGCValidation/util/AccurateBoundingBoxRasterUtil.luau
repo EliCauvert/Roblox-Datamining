@@ -5,8 +5,8 @@ return {
 		-- upvalues: validateAccurateBoundingBoxRasterMethodModule (ref)
 		return validateAccurateBoundingBoxRasterMethodModule.getBoundsViewsForAssetType(value)
 	end,
-	validate = function(p0, p1, p2)
+	validate = function(p1, p2, p3)
 		-- upvalues: validateAccurateBoundingBoxRasterMethodModule (ref)
-		return validateAccurateBoundingBoxRasterMethodModule.validate(p0, p1, p2)
+		return validateAccurateBoundingBoxRasterMethodModule.validate(p1, p2, p3)
 	end
 }

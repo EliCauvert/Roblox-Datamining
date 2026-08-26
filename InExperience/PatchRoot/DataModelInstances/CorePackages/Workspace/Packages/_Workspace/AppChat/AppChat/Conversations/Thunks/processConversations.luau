@@ -6,19 +6,19 @@ local userModel = require(parent.UserLib).Models.UserModel
 local addUsers = require(parent.UserLib).Actions.AddUsers
 local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
 
-local function extractConversationsAndUsers(p0, p1)
+local function extractConversationsAndUsers(p1, p2)
 	-- upvalues: userModel (ref), llama (ref)
 	local t = {}
 	local t_1 = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		local v_1
 		table.insert(t, v.id)
 		
 		if not v.participant_user_ids then
 			for i_1, v_1 in ipairs(v.participants) do
 				if not t_1[tostring(v_1.targetId)] then
-					local targetId = p1[tostring(v_1.targetId)] or userModel.fromDataTable({
+					local targetId = p2[tostring(v_1.targetId)] or userModel.fromDataTable({
 						isFriend = false,
 						id = v_1.targetId,
 						name = v_1.name,
@@ -35,17 +35,17 @@ local function extractConversationsAndUsers(p0, p1)
 				local userData = v.user_data
 				
 				if userData then
-					local var6 = userData[v_1]
+					local var1 = userData[v_1]
 					
-					if var6 then
-						local var7 = p1[v_1]
-						local var8 = userModel.fromDataTable({
-							id = var6.id,
-							name = var6.name,
-							displayName = if var7 then var7.displayName else var6.display_name,
-							isFriend = if var7 then var7.isFriend else false
+					if var1 then
+						local var2 = p2[v_1]
+						local var3 = userModel.fromDataTable({
+							id = var1.id,
+							name = var1.name,
+							displayName = if var2 then var2.displayName else var1.display_name,
+							isFriend = if var2 then var2.isFriend else false
 						})
-						t_1[var8.id] = var8
+						t_1[var3.id] = var3
 					end
 				end
 			end
@@ -54,17 +54,17 @@ local function extractConversationsAndUsers(p0, p1)
 	return t, t_1, llama.Dictionary.keys(t_1)
 end
 
-return function(p2)
+return function(p3)
 	-- upvalues: extractConversationsAndUsers (ref), addUsers (ref), fFlagAppChatPresenceStoreMigrationModule (ref), networkingPresenceModule (ref)
-	return function(p3)
-		-- upvalues: p2 (ref), extractConversationsAndUsers (copy), addUsers (copy), fFlagAppChatPresenceStoreMigrationModule (copy), networkingPresenceModule (copy)
-		if not p2 then return end
-		local _, var10, var11 = extractConversationsAndUsers(p2, p3:getState().Users or {})
-		p3:dispatch(addUsers(var10))
+	return function(p4)
+		-- upvalues: p3 (ref), extractConversationsAndUsers (copy), addUsers (copy), fFlagAppChatPresenceStoreMigrationModule (copy), networkingPresenceModule (copy)
+		if not p3 then return end
+		local _, var4, var5 = extractConversationsAndUsers(p3, p4:getState().Users or {})
+		p4:dispatch(addUsers(var4))
 		
 		if not fFlagAppChatPresenceStoreMigrationModule then
-			p3:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(var11)):catch(function(p4)
-				warn("NetworkingPresence failure in processConversations, Status: " .. tostring(p4))
+			p4:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(var5)):catch(function(p5)
+				warn("NetworkingPresence failure in processConversations, Status: " .. tostring(p5))
 			end)
 		end
 	end

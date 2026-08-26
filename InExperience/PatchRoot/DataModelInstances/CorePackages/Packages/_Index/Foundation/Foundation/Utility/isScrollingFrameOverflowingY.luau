@@ -1,3 +1,3 @@
-﻿return function(p0, p1)
-	return p0.AbsoluteWindowSize.Y + (if p1 ~= nil then 1 else p1) < p0.AbsoluteCanvasSize.Y
+﻿return function(p1, p2)
+	return p1.AbsoluteWindowSize.Y + (if p2 ~= nil then 1 else p2) < p1.AbsoluteCanvasSize.Y
 end

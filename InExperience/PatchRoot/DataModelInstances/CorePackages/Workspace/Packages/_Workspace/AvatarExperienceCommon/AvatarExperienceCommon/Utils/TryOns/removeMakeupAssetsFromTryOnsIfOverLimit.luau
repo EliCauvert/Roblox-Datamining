@@ -4,18 +4,18 @@ local _ = require(avatarExperienceCommon.Enums.ItemTypeEnum)
 
 function removeMakeupAssetsFromTryOnsIfOverLimit(value)
 	-- upvalues: constantsModule (ref)
-	local var2 = 0
-	local var3 = 1e999
+	local var1 = 0
+	local var2 = 1e999
 	
 	for i, v in value do
 		if constantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE[v.itemSubType] then
-			var2 += 1
-			var3 = math.min(v.itemRecency, var3)
+			var1 += 1
+			var2 = math.min(v.itemRecency, var2)
 		end
 	end
-	if constantsModule.MAX_MAKEUP_LAYERS < var2 then
+	if constantsModule.MAX_MAKEUP_LAYERS < var1 then
 		for i_1, v_1 in value do
-			if v_1.itemRecency == var3 then
+			if v_1.itemRecency == var2 then
 				value[i_1] = nil
 			end
 		end

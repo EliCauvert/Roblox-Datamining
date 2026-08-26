@@ -5,17 +5,17 @@ local viewModule = require(foundation.Components.View)
 local _ = require(foundation.Enums.PaginationSize)
 local paginationUtilsModule = require(script.Parent.Parent.paginationUtils)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), viewModule (ref), paginationUtilsModule (ref), textModule (ref)
 	return reactModule.createElement(viewModule, {
-		LayoutOrder = p0.LayoutOrder,
-		tag = paginationUtilsModule.getCircularSlotTag(p0.slotSize),
-		testId = p0.testId
+		LayoutOrder = p1.LayoutOrder,
+		tag = paginationUtilsModule.getCircularSlotTag(p1.slotSize),
+		testId = p1.testId
 	}, {
 		Text = reactModule.createElement(textModule, {
 			Text = "...",
 			LayoutOrder = 1,
-			tag = paginationUtilsModule.getPageLabelTag(p0.slotSize)
+			tag = paginationUtilsModule.getPageLabelTag(p1.slotSize)
 		})
 	})
 end)

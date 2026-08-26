@@ -14,61 +14,61 @@ local useMappedSignal = chromeModule.Hooks.useMappedSignal
 local keepSideSheetOpenFromGrid = game:DefineFastFlag("KeepSideSheetOpenFromGrid", false)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), keepSideSheetOpenFromGrid (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), useMappedSignal (ref), view (ref), iconHostModule (ref), text (ref)
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref), keepSideSheetOpenFromGrid (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
-		p0.onActivated()
+	local var1 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref), keepSideSheetOpenFromGrid (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
+		p1.onActivated()
 		
 		if not keepSideSheetOpenFromGrid then
 			toggleSideSheetModule(false)
 			sidesheetAnalyticsModule.logSidesheetClosed(analyticsConstantsModule.Source.ItemSelected)
 		end
-	end, { p0.onActivated })
-	local var11 = if fFlagSideSheetFocusNav then reactModule.useRef(nil) else nil
-	local var12 = useMappedSignal(p0.isActivated)
+	end, { p1.onActivated })
+	local var2 = if fFlagSideSheetFocusNav then reactModule.useRef(nil) else nil
+	local var3 = useMappedSignal(p1.isActivated)
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center gap-xsmall size-1400 auto-y",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		IconCircle = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = {
 				["size-1400 radius-circle"] = true,
-				["bg-shift-100"] = not var12,
-				["bg-shift-400"] = var12
+				["bg-shift-100"] = not var3,
+				["bg-shift-400"] = var3
 			},
 			selection = if fFlagSideSheetFocusNav then { Selectable = false } else nil
 		}, {
 			IconHost = reactModule.createElement(iconHostModule, {
 				centerPosition = true,
-				icon = p0.icon,
-				notification = p0.notification
+				icon = p1.icon,
+				notification = p1.notification
 			}),
 			ActivationOverlay = reactModule.createElement(view, {
 				tag = "size-full radius-circle",
 				ZIndex = 10,
-				onActivated = var10,
-				selection = if fFlagSideSheetFocusNav and p0.disableGamepadDirections then {
+				onActivated = var1,
+				selection = if fFlagSideSheetFocusNav and p1.disableGamepadDirections then {
 					Selectable = true,
-					NextSelectionRight = if p0.disableGamepadDirections and p0.disableGamepadDirections.right then var11 else nil
+					NextSelectionRight = if p1.disableGamepadDirections and p1.disableGamepadDirections.right then var2 else nil
 				} else nil,
-				ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p1)
-					-- upvalues: var11 (ref), p0 (ref)
-					if var11 then
-						var11.current = p1
+				ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p2)
+					-- upvalues: var2 (ref), p1 (ref)
+					if var2 then
+						var2.current = p2
 					end
-					if p1 and p0.firstIntegrationToFocusCallback then
-						p0.firstIntegrationToFocusCallback(p1)
+					if p2 and p1.firstIntegrationToFocusCallback then
+						p1.firstIntegrationToFocusCallback(p2)
 					end
-				end, { p0.firstIntegrationToFocusCallback }) else nil else nil
+				end, { p1.firstIntegrationToFocusCallback }) else nil else nil
 			})
 		}),
 		Label = reactModule.createElement(text, {
 			tag = "size-full-700 text-label-small text-wrap text-align-x-center text-align-y-top text-truncate-end content-default",
 			LayoutOrder = 2,
-			Text = p0.label
+			Text = p1.label
 		})
 	})
 end)

@@ -63,57 +63,57 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.init(p0)
+function name.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.contentRef = roactModule.createRef()
-	p0.footerRef = roactModule.createRef()
-	p0.state = {
+	p1.contentRef = roactModule.createRef()
+	p1.footerRef = roactModule.createRef()
+	p1.state = {
 		contentSize = Vector2.new(0, 0),
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p0.changeContentSize(p1)
-		-- upvalues: p0 (ref)
-		if p0.state.contentSize ~= p1.AbsoluteSize then
-			p0:setState({ contentSize = p1.AbsoluteSize })
+	function p0.changeContentSize(p2)
+		-- upvalues: p1 (ref)
+		if p1.state.contentSize ~= p2.AbsoluteSize then
+			p1:setState({ contentSize = p2.AbsoluteSize })
 		end
 	end
 	
 	function p0.changeFooterSize(p2)
-		-- upvalues: p0 (ref)
-		if p0.state.footerSize ~= p2.AbsoluteSize then
-			p0:setState({ footerSize = p2.AbsoluteSize })
+		-- upvalues: p1 (ref)
+		if p1.state.footerSize ~= p2.AbsoluteSize then
+			p1:setState({ footerSize = p2.AbsoluteSize })
 		end
 	end
 end
 
-function name.render(p3)
+function name.render(p1)
 	-- upvalues: shouldShowNewUpsellModalExperimentModule (ref), desktopUpsellExperimentModule (ref), roactModule (ref), productPurchaseModalModule (ref), multiTextLocalizerModule (ref)
 	return if shouldShowNewUpsellModalExperimentModule() or desktopUpsellExperimentModule.shouldShowNewModal() then roactModule.createElement(productPurchaseModalModule, {
 		product = {
-			itemIcon = p3.props.itemIcon,
-			itemName = p3.props.itemName,
-			itemRobuxCost = p3.props.itemRobuxCost
+			itemIcon = p1.props.itemIcon,
+			itemName = p1.props.itemName,
+			itemRobuxCost = p1.props.itemRobuxCost
 		},
-		balanceAmount = p3.props.currentBalance,
-		balanceAmountValid = p3.props.currentBalanceValid,
+		balanceAmount = p1.props.currentBalance,
+		balanceAmountValid = p1.props.currentBalanceValid,
 		buttons = {
-			buyItemActivated = p3.props.buyItemActivated,
-			buyItemControllerIcon = p3.props.buyItemControllerIcon,
-			buyItemIsDelayedInput = p3.props.isDelayedInput,
-			buyItemEnableInputDelayed = p3.props.enableInputDelayed,
-			cancelActivated = p3.props.cancelPurchaseActivated,
-			isDisabled = p3.props.isDisabled
+			buyItemActivated = p1.props.buyItemActivated,
+			buyItemControllerIcon = p1.props.buyItemControllerIcon,
+			buyItemIsDelayedInput = p1.props.isDelayedInput,
+			buyItemEnableInputDelayed = p1.props.enableInputDelayed,
+			cancelActivated = p1.props.cancelPurchaseActivated,
+			isDisabled = p1.props.isDisabled
 		},
-		screenSize = p3.props.screenSize
+		screenSize = p1.props.screenSize
 	}) else roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
 			BuyItemTitle = {
-				key = if p3.props.isGamePass then "IAPExperience.PurchasePrompt.Title.BuyGamepass" else "IAPExperience.PurchasePrompt.Title.BuyItem"
+				key = if p1.props.isGamePass then "IAPExperience.PurchasePrompt.Title.BuyGamepass" else "IAPExperience.PurchasePrompt.Title.BuyItem"
 			},
 			BuyItemQuestion = {
-				key = if p3.props.isLuobu then "IAPExperience.PurchasePrompt.Text.BuyItemQuestionIncludingWarning" else "IAPExperience.PurchasePrompt.Text.BuyItemQuestion",
-				params = { name = p3.props.itemName }
+				key = if p1.props.isLuobu then "IAPExperience.PurchasePrompt.Text.BuyItemQuestionIncludingWarning" else "IAPExperience.PurchasePrompt.Text.BuyItemQuestion",
+				params = { name = p1.props.itemName }
 			},
 			RemainingBalance = {
 				key = "IAPExperience.PurchasePrompt.Text.RemainingBalance"
@@ -122,16 +122,16 @@ function name.render(p3)
 			ButtonCancel = { key = "IAPExperience.PurchasePrompt.Action.Cancel" },
 			LoadingText = { key = "IAPExperience.PurchasePrompt.Text.Loading" }
 		},
-		render = function(p4)
-			-- upvalues: p3 (ref)
-			return p3:renderAlert(p4)
+		render = function(p2)
+			-- upvalues: p1 (ref)
+			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function name.renderAlert(p5, p6)
+function name.renderAlert(p1, p2)
 	-- upvalues: loggerModule (ref), getAppContextModule (ref), default (ref), purchaseModalV1ShownCounter (ref), withStyle (ref), char (ref), roactModule (ref), modelViewportModule (ref), imageSetLabel (ref), interactiveAlert (ref), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), fitFrameVertical (ref), fitTextLabel (ref), buttonType (ref), robux (ref)
-	local props = p5.props
+	local props = p1.props
 	loggerModule.debug({
 		message = "Purchase Modal V1 Shown",
 		screenHeight = props.screenSize.Y,
@@ -146,16 +146,16 @@ function name.renderAlert(p5, p6)
 		appContext = getAppContextModule()
 	})
 	
-	return withStyle(function(p7)
-		-- upvalues: p5 (ref), p6 (ref), char (copy), roactModule (copy), modelViewportModule (copy), imageSetLabel (copy), interactiveAlert (copy), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), fitFrameVertical (copy), fitTextLabel (copy), buttonType (copy), robux (copy)
-		local theme = p7.Theme
-		local font = p7.Font
+	return withStyle(function(p3)
+		-- upvalues: p1 (ref), p2 (ref), char (copy), roactModule (copy), modelViewportModule (copy), imageSetLabel (copy), interactiveAlert (copy), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), fitFrameVertical (copy), fitTextLabel (copy), buttonType (copy), robux (copy)
+		local theme = p3.Theme
+		local font = p3.Font
 		local color = theme.IconEmphasis.Color
-		local var16 = p5.state.contentSize.X * 0.85
-		local formattedText = string.format("%s <font color=\"%s\">%s</font>%d", p6.RemainingBalance, string.format("rgb(%d,%d,%d)", math.round(color.R * 255), math.round(color.G * 255), math.round(color.B * 255)), char, p5.props.currentBalance - p5.props.itemRobuxCost)
-		local var18 = if p5.props.model then roactModule.createElement(modelViewportModule, {
+		local var1 = p1.state.contentSize.X * 0.85
+		local formattedText = string.format("%s <font color=\"%s\">%s</font>%d", p2.RemainingBalance, string.format("rgb(%d,%d,%d)", math.round(color.R * 255), math.round(color.G * 255), math.round(color.B * 255)), char, p1.props.currentBalance - p1.props.itemRobuxCost)
+		local var2 = if p1.props.model then roactModule.createElement(modelViewportModule, {
 			LayoutOrder = 1,
-			model = p5.props.model,
+			model = p1.props.model,
 			Size = UDim2.fromOffset(85, 85),
 			Position = UDim2.fromOffset(5, 5)
 		}) else roactModule.createElement(imageSetLabel, {
@@ -165,17 +165,17 @@ function name.renderAlert(p5, p6)
 			Position = UDim2.new(0, 5, 0, 5),
 			Size = UDim2.new(0, 85, 0, 85),
 			ScaleType = Enum.ScaleType.Stretch,
-			Image = p5.props.itemIcon
+			Image = p1.props.itemIcon
 		})
 		
 		return roactModule.createElement(interactiveAlert, {
-			defaultChildRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then p5.props.containerRef else nil,
-			screenSize = p5.props.screenSize,
-			position = p5.props.position,
-			anchorPoint = p5.props.anchorPoint,
-			title = p6.BuyItemTitle,
+			defaultChildRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then p1.props.containerRef else nil,
+			screenSize = p1.props.screenSize,
+			position = p1.props.position,
+			anchorPoint = p1.props.anchorPoint,
+			title = p2.BuyItemTitle,
 			middleContent = function()
-				-- upvalues: roactModule (copy), fitFrameVertical (copy), p5 (copy), var18 (ref), fitTextLabel (copy), font (ref), p6 (copy), theme (ref)
+				-- upvalues: roactModule (copy), fitFrameVertical (copy), p1 (copy), var2 (ref), fitTextLabel (copy), font (ref), p2 (copy), theme (ref)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
@@ -183,18 +183,18 @@ function name.renderAlert(p5, p6)
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					contentPadding = UDim.new(0, 24),
-					[roactModule.Ref] = p5.contentRef,
-					[roactModule.Change.AbsoluteSize] = p5.changeContentSize
+					[roactModule.Ref] = p1.contentRef,
+					[roactModule.Change.AbsoluteSize] = p1.changeContentSize
 				}, {
-					ItemIcon = var18,
+					ItemIcon = var2,
 					ItemName = roactModule.createElement(fitTextLabel, {
 						LayoutOrder = 2,
 						BackgroundTransparency = 1,
 						TextWrapped = true,
 						width = fitTextLabel.Width.FitToText,
-						maximumWidth = p5.state.contentSize.X,
+						maximumWidth = p1.state.contentSize.X,
 						Font = font.Footer.Font,
-						Text = p6.BuyItemQuestion,
+						Text = p2.BuyItemQuestion,
 						TextSize = font.BaseSize * font.Body.RelativeSize,
 						TextColor3 = theme.TextDefault.Color
 					})
@@ -205,47 +205,47 @@ function name.renderAlert(p5, p6)
 				buttons = {
 					{
 						props = {
-							isDisabled = p5.props.isDisabled or p5.props.isLoading,
-							onActivated = p5.props.cancelPurchaseActivated,
-							text = p6.ButtonCancel,
-							inputIcon = p5.props.cancelControllerIcon
+							isDisabled = p1.props.isDisabled or p1.props.isLoading,
+							onActivated = p1.props.cancelPurchaseActivated,
+							text = p2.ButtonCancel,
+							inputIcon = p1.props.cancelControllerIcon
 						}
 					},
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
 							delayInputSeconds = 3,
-							isLoading = p5.props.isLoading,
-							isDisabled = p5.props.isDisabled,
-							isDelayedInput = p5.props.isDelayedInput,
-							enableInputDelayed = p5.props.enableInputDelayed,
-							onActivated = p5.props.buyItemActivated,
+							isLoading = p1.props.isLoading,
+							isDisabled = p1.props.isDisabled,
+							isDelayedInput = p1.props.isDelayedInput,
+							enableInputDelayed = p1.props.enableInputDelayed,
+							onActivated = p1.props.buyItemActivated,
 							icon = robux,
-							text = tostring(p5.props.itemRobuxCost),
-							inputIcon = p5.props.buyItemControllerIcon,
-							buttonRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then p5.props.defaultFocusRef else nil
+							text = tostring(p1.props.itemRobuxCost),
+							inputIcon = p1.props.buyItemControllerIcon,
+							buttonRef = if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then p1.props.defaultFocusRef else nil
 						}
 					}
 				}
 			},
 			footerContent = function()
-				-- upvalues: p5 (copy), roactModule (copy), fitFrameVertical (copy), var16 (ref), font (ref), formattedText (ref), theme (ref), fitTextLabel (copy), p6 (copy)
-				return if p5.props.currentBalanceValid then if p5.props.testPurchase then roactModule.createElement(fitFrameVertical, {
+				-- upvalues: p1 (copy), roactModule (copy), fitFrameVertical (copy), var1 (ref), font (ref), formattedText (ref), theme (ref), fitTextLabel (copy), p2 (copy)
+				return if p1.props.currentBalanceValid then if p1.props.testPurchase then roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					contentPadding = UDim.new(0, 2),
-					[roactModule.Ref] = p5.footerRef,
-					[roactModule.Change.AbsoluteSize] = p5.changeFooterSize
+					[roactModule.Ref] = p1.footerRef,
+					[roactModule.Change.AbsoluteSize] = p1.changeFooterSize
 				}, {
 					TestPurchaseTest = roactModule.createElement(fitTextLabel, {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
 						width = fitTextLabel.Width.FitToText,
 						Font = font.Footer.Font,
-						Text = p6.TestPurchaseText,
+						Text = p2.TestPurchaseText,
 						TextSize = font.BaseSize * font.Footer.RelativeSize,
 						TextColor3 = theme.TextDefault.Color
 					})
@@ -256,8 +256,8 @@ function name.renderAlert(p5, p6)
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					contentPadding = UDim.new(0, 2),
-					[roactModule.Ref] = p5.footerRef,
-					[roactModule.Change.AbsoluteSize] = p5.changeFooterSize
+					[roactModule.Ref] = p1.footerRef,
+					[roactModule.Change.AbsoluteSize] = p1.changeFooterSize
 				}, {
 					RemainingBalanceText = roactModule.createElement("TextLabel", {
 						LayoutOrder = 1,
@@ -265,7 +265,7 @@ function name.renderAlert(p5, p6)
 						RichText = true,
 						TextWrapped = true,
 						Position = UDim2.fromScale(0, 0.5),
-						Size = UDim2.fromOffset(var16, 0),
+						Size = UDim2.fromOffset(var1, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Font = font.Footer.Font,
 						Text = formattedText,
@@ -279,13 +279,13 @@ function name.renderAlert(p5, p6)
 end
 
 if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
-	local var15 = name
+	local var1 = name
 	
-	name = function(p8)
-		-- upvalues: useDefaultFocusBehavior (ref), roactModule (ref), var15 (ref), cryoModule (ref)
-		local var19, var20 = useDefaultFocusBehavior()
+	name = function(p1)
+		-- upvalues: useDefaultFocusBehavior (ref), roactModule (ref), var1 (ref), cryoModule (ref)
+		local var2, var3 = useDefaultFocusBehavior()
 		
-		return roactModule.createElement(var15, cryoModule.Dictionary.join(p8, { defaultFocusRef = var19, containerRef = var20 }))
+		return roactModule.createElement(var1, cryoModule.Dictionary.join(p1, { defaultFocusRef = var2, containerRef = var3 }))
 	end
 end
 return name

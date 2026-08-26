@@ -290,7 +290,7 @@ if not localPlayer then
 	playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
 	localPlayer = playersService.LocalPlayer
 end
-local var8 = nil
+local var1 = nil
 local currentCamera = workspaceService.CurrentCamera
 workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 	-- upvalues: workspaceService (ref), currentCamera (write)
@@ -300,12 +300,12 @@ workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 		currentCamera = currentCamera_1
 	end
 end)
-local var9 = nil
-local var10 = nil
-local var11 = nil
-local var12 = nil
-local var13 = nil
-local var14 = nil
+local var2 = nil
+local var3 = nil
+local var4 = nil
+local var5 = nil
+local var6 = nil
+local var7 = nil
 local t_1 = {
 	DepthOfField = {
 		Enabled = false,
@@ -334,8 +334,8 @@ local t_1 = {
 		TonemapperPreset = Enum.TonemapperPreset.Default
 	}
 }
-local var16 = nil
-local var17 = nil
+local var8 = nil
+local var9 = nil
 local t_2 = nil
 local _ = nil
 local ok_1, status_2 = pcall(function()
@@ -362,12 +362,12 @@ local ok_5, status_6 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamIASRefactor3")
 end)
 local status_6_1 = ok_5 and status_6
-local var24 = false
-local var25, var26 = (function(p1, p2)
+local var10 = false
+local var11, var12 = (function(p1, p2)
 	-- upvalues: currentCamera (write), lightingService (ref)
 	local t = {}
-	local var91 = nil
-	local var92 = nil
+	local var13 = nil
+	local var14 = nil
 	
 	local function _(p3)
 		-- upvalues: p1 (ref), p2 (ref), t (write)
@@ -378,7 +378,7 @@ local var25, var26 = (function(p1, p2)
 	end
 	
 	return function()
-		-- upvalues: t (write), currentCamera (copy), p1 (ref), p2 (ref), lightingService (copy), var91 (write), var92 (write)
+		-- upvalues: t (write), currentCamera (copy), p1 (ref), p2 (ref), lightingService (copy), var13 (write), var14 (write)
 		t = {}
 		
 		for i, v in ipairs(currentCamera:GetChildren()) do
@@ -393,107 +393,107 @@ local var25, var26 = (function(p1, p2)
 				v_1.Enabled = false
 			end
 		end
-		var91 = currentCamera.ChildAdded:Connect(function(p4)
+		var13 = currentCamera.ChildAdded:Connect(function(p3)
 			-- upvalues: p1 (copy), p2 (copy), t (copy)
-			if p4:IsA(p1) and p4.Enabled and (not p2 or not p2(p4)) then
-				t[#t + 1] = p4
-				p4.Enabled = false
+			if p3:IsA(p1) and p3.Enabled and (not p2 or not p2(p3)) then
+				t[#t + 1] = p3
+				p3.Enabled = false
 			end
 		end)
-		var92 = lightingService.ChildAdded:Connect(function(p5)
+		var14 = lightingService.ChildAdded:Connect(function(p3)
 			-- upvalues: p1 (copy), p2 (copy), t (copy)
-			if p5:IsA(p1) and p5.Enabled and (not p2 or not p2(p5)) then
-				t[#t + 1] = p5
-				p5.Enabled = false
+			if p3:IsA(p1) and p3.Enabled and (not p2 or not p2(p3)) then
+				t[#t + 1] = p3
+				p3.Enabled = false
 			end
 		end)
 	end, function()
-		-- upvalues: t (write), var91 (write), var92 (write)
+		-- upvalues: t (write), var13 (write), var14 (write)
 		for i, v in ipairs(t) do
 			if v.Parent then
 				v.Enabled = true
 			end
 		end
-		if var91 then
-			var91:Disconnect()
-			var91 = nil
+		if var13 then
+			var13:Disconnect()
+			var13 = nil
 		end
-		if var92 then
-			var92:Disconnect()
-			var92 = nil
+		if var14 then
+			var14:Disconnect()
+			var14 = nil
 		end
 		t = {}
 	end
-end)("PostEffect", function(p0)
-	return p0.Name:sub(1, 7) == "Freecam"
+end)("PostEffect", function(p3)
+	return p3.Name:sub(1, 7) == "Freecam"
 end)
 local list = nil
 
 local function doToggleMasterEffects()
-	-- upvalues: var24 (write), var25 (ref), var26 (ref), list (write)
-	var24 = not var24
+	-- upvalues: var10 (write), var11 (ref), var12 (ref), list (write)
+	var10 = not var10
 	
-	if var24 then
-		var25()
+	if var10 then
+		var11()
 		
 		return
 	end
-	var26()
+	var12()
 	
 	for i, v in ipairs(list) do
-		local var93 = v.get()
+		local var15 = v.get()
 		
-		if var93 then
-			var93.Enabled = false
+		if var15 then
+			var15.Enabled = false
 		end
 	end
 end
 
 local function doToggleDoF()
-	-- upvalues: status_3_1 (write), var24 (write), var9 (write)
-	if status_3_1 and not var24 then return end
-	if var9 then
-		var9.Enabled = not var9.Enabled
+	-- upvalues: status_3_1 (write), var10 (write), var2 (write)
+	if status_3_1 and not var10 then return end
+	if var2 then
+		var2.Enabled = not var2.Enabled
 	end
 end
 
 local function doToggleBloom()
-	-- upvalues: status_3_1 (write), var24 (write), var10 (write)
-	if status_3_1 and not var24 then return end
-	if var10 then
-		var10.Enabled = not var10.Enabled
+	-- upvalues: status_3_1 (write), var10 (write), var3 (write)
+	if status_3_1 and not var10 then return end
+	if var3 then
+		var3.Enabled = not var3.Enabled
 	end
 end
 
 local function doToggleBlur()
-	-- upvalues: status_3_1 (write), var24 (write), var11 (write)
-	if status_3_1 and not var24 then return end
-	if var11 then
-		var11.Enabled = not var11.Enabled
+	-- upvalues: status_3_1 (write), var10 (write), var4 (write)
+	if status_3_1 and not var10 then return end
+	if var4 then
+		var4.Enabled = not var4.Enabled
 	end
 end
 
 local function doToggleColorCorrection()
-	-- upvalues: status_3_1 (write), var24 (write), var12 (write)
-	if status_3_1 and not var24 then return end
-	if var12 then
-		var12.Enabled = not var12.Enabled
+	-- upvalues: status_3_1 (write), var10 (write), var5 (write)
+	if status_3_1 and not var10 then return end
+	if var5 then
+		var5.Enabled = not var5.Enabled
 	end
 end
 
 local function doToggleSunRays()
-	-- upvalues: status_3_1 (write), var24 (write), var13 (write)
-	if status_3_1 and not var24 then return end
-	if var13 then
-		var13.Enabled = not var13.Enabled
+	-- upvalues: status_3_1 (write), var10 (write), var6 (write)
+	if status_3_1 and not var10 then return end
+	if var6 then
+		var6.Enabled = not var6.Enabled
 	end
 end
 
 local function doToggleColorGrading()
-	-- upvalues: status_3_1 (write), var24 (write), var14 (write)
-	if status_3_1 and not var24 then return end
-	if var14 then
-		var14.Enabled = not var14.Enabled
+	-- upvalues: status_3_1 (write), var10 (write), var7 (write)
+	if status_3_1 and not var10 then return end
+	if var7 then
+		var7.Enabled = not var7.Enabled
 	end
 end
 
@@ -502,12 +502,12 @@ list = {
 		key = "DepthOfField",
 		class = "DepthOfFieldEffect",
 		get = function()
-			-- upvalues: var9 (write)
-			return var9
+			-- upvalues: var2 (write)
+			return var2
 		end,
 		set = function(value)
-			-- upvalues: var9 (write)
-			var9 = value
+			-- upvalues: var2 (write)
+			var2 = value
 		end,
 		props = {
 			"FarIntensity",
@@ -520,12 +520,12 @@ list = {
 		key = "Bloom",
 		class = "BloomEffect",
 		get = function()
-			-- upvalues: var10 (write)
-			return var10
+			-- upvalues: var3 (write)
+			return var3
 		end,
 		set = function(value)
-			-- upvalues: var10 (write)
-			var10 = value
+			-- upvalues: var3 (write)
+			var3 = value
 		end,
 		props = { "Intensity", "Size", "Threshold" }
 	},
@@ -533,12 +533,12 @@ list = {
 		key = "Blur",
 		class = "BlurEffect",
 		get = function()
-			-- upvalues: var11 (write)
-			return var11
+			-- upvalues: var4 (write)
+			return var4
 		end,
 		set = function(value)
-			-- upvalues: var11 (write)
-			var11 = value
+			-- upvalues: var4 (write)
+			var4 = value
 		end,
 		props = { "Size" }
 	},
@@ -546,12 +546,12 @@ list = {
 		key = "ColorCorrection",
 		class = "ColorCorrectionEffect",
 		get = function()
-			-- upvalues: var12 (write)
-			return var12
+			-- upvalues: var5 (write)
+			return var5
 		end,
 		set = function(value)
-			-- upvalues: var12 (write)
-			var12 = value
+			-- upvalues: var5 (write)
+			var5 = value
 		end,
 		props = { "Brightness", "Contrast", "Saturation", "TintColor" }
 	},
@@ -559,12 +559,12 @@ list = {
 		key = "SunRays",
 		class = "SunRaysEffect",
 		get = function()
-			-- upvalues: var13 (write)
-			return var13
+			-- upvalues: var6 (write)
+			return var6
 		end,
 		set = function(value)
-			-- upvalues: var13 (write)
-			var13 = value
+			-- upvalues: var6 (write)
+			var6 = value
 		end,
 		props = { "Intensity", "Spread" }
 	},
@@ -573,112 +573,112 @@ list = {
 		class = "ColorGradingEffect",
 		parent = if status_4_1 then lightingService else nil,
 		get = function()
-			-- upvalues: var14 (write)
-			return var14
+			-- upvalues: var7 (write)
+			return var7
 		end,
 		set = function(value)
-			-- upvalues: var14 (write)
-			var14 = value
+			-- upvalues: var7 (write)
+			var7 = value
 		end,
 		props = { "TonemapperPreset" }
 	}
 }
-local var35 = nil
-local var36 = nil
-local var37 = nil
-local var38 = false
+local var16 = nil
+local var17 = nil
+local var18 = nil
+local var19 = false
 local defaultZoom = t.PlayerLock.DefaultZoom
 local defaultHeight = t.PlayerLock.DefaultHeight
 local t_3 = {}
-local var40 = 1
-local var41 = nil
-local var42 = false
-local var43 = false
-local var44 = -1e999
-local var45 = -1e999
+local var20 = 1
+local var21 = nil
+local var22 = false
+local var23 = false
+local var24 = -1e999
+local var25 = -1e999
 local t_4 = {
 	movement = t.Movement.Stiffness,
 	pan = t.Pan.Stiffness,
 	fov = t.Fov.Stiffness,
 	roll = t.Roll.Stiffness
 }
-local var47 = nil
+local var26 = nil
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p6, p7)
+function t_5.new(p3, p4)
 	-- upvalues: t_5 (ref)
 	local tbl = setmetatable({}, t_5)
-	tbl.f = p6
-	tbl.p = p7
-	tbl.v = p7 * 0
+	tbl.f = p3
+	tbl.p = p4
+	tbl.v = p4 * 0
 	
 	return tbl
 end
 
-function t_5:Update(p8, p9)
+function t_5:Update(p3, p4)
 	-- upvalues: exp (ref)
-	local var95 = self.f * 2 * 3.14159265359
+	local var27 = self.f * 2 * 3.14159265359
 	local v = self.v
-	local var96 = p9 - self.p
-	local var97 = exp(-var95 * p8)
-	local var98 = p9 + (v * p8 - var96 * (var95 * p8 + 1)) * var97
-	local var99 = (var95 * p8 * (var96 * var95 - v) + v) * var97
-	self.p = var98
-	self.v = var99
+	local var28 = p4 - self.p
+	local var29 = exp(-var27 * p3)
+	local var30 = p4 + (v * p3 - var28 * (var27 * p3 + 1)) * var29
+	local var31 = (var27 * p3 * (var28 * var27 - v) + v) * var29
+	self.p = var30
+	self.v = var31
 	
-	return var98
+	return var30
 end
 
-function t_5:SetFreq(p10)
-	self.f = p10
+function t_5:SetFreq(p3)
+	self.f = p3
 end
 
-function t_5:Reset(p11)
-	self.p = p11
-	self.v = p11 * 0
+function t_5:Reset(p3)
+	self.p = p3
+	self.v = p3 * 0
 end
 
 local vector3 = Vector3.new()
 local vector3_1 = Vector3.new()
-local var51 = 0
-local var52 = t_5.new(t_4.movement, Vector3.new())
-local var53 = t_5.new(t_4.pan, Vector2.new())
-local var54 = t_5.new(t_4.fov, 0)
-local var55 = t_5.new(t_4.roll, 0)
+local var27 = 0
+local var28 = t_5.new(t_4.movement, Vector3.new())
+local var29 = t_5.new(t_4.pan, Vector2.new())
+local var30 = t_5.new(t_4.fov, 0)
+local var31 = t_5.new(t_4.roll, 0)
 local t_6 = {}
 local t_7 = {}
 local t_8 = { movement = 1, pan = 1, fov = 1, roll = 1 }
-local var59 = false
+local var32 = false
 local t_9 = nil
-local var61 = false
-local var62 = 1
+local var33 = false
+local var34 = 1
 local t_10 = {}
-local var64 = false
-local var65 = false
+local var35 = false
+local var36 = false
 
-local function findPlayerLockRootPart(p12)
-	-- upvalues: t_3 (write), var40 (write), var38 (write)
+local function findPlayerLockRootPart(p3)
+	-- upvalues: t_3 (write), var20 (write), var19 (write)
 	if not t_3 or #t_3 < 1 then
 		return nil
 	end
 	for _ = 1, #t_3 do
-		var40 = (var40 - 1 + p12) % #t_3 + 1
-		local var100 = t_3[var40]
-		local character = var100 and var100.Character
+		var20 = (var20 - 1 + p3) % #t_3 + 1
+		local var37 = t_3[var20]
+		local character = var37 and var37.Character
 		
 		if character then
 			local humanoid = character:FindFirstChildOfClass("Humanoid")
 			
 			if not humanoid or not humanoid.RootPart then
-				if p12 == 0 then
-					p12 = 1
+				if p3 == 0 then
+					p3 = 1
 				end
 			end
 			return humanoid.RootPart
 		end
 	end
-	var38 = false
+	var19 = false
 	
 	return nil
 end
@@ -697,55 +697,55 @@ local list_1 = {
 	{ name = "Orange", color = Color3.fromRGB(255, 140, 0) },
 	{ name = "Purple", color = Color3.fromRGB(128, 0, 255) }
 }
-local var68 = 1
+local var38 = 1
 local color3 = Color3.new(1, 1, 1)
 
 local function doTogglePlayerLock()
-	-- upvalues: var38 (write), defaultZoom (write), t (ref), defaultHeight (write), var41 (write), findPlayerLockRootPart (ref)
-	var38 = not var38
+	-- upvalues: var19 (write), defaultZoom (write), t (ref), defaultHeight (write), var21 (write), findPlayerLockRootPart (ref)
+	var19 = not var19
 	
-	if var38 then
+	if var19 then
 		defaultZoom = t.PlayerLock.DefaultZoom
 		defaultHeight = t.PlayerLock.DefaultHeight
-		var41 = findPlayerLockRootPart(0)
+		var21 = findPlayerLockRootPart(0)
 	end
 end
 
 local function doToggleScreenGuis()
-	-- upvalues: var42 (write), t_2 (write), var8 (write)
-	var42 = not var42
+	-- upvalues: var22 (write), t_2 (write), var1 (write)
+	var22 = not var22
 	
 	if t_2 then
 		for i, v in pairs(t_2.getScreenGuis()) do
-			if v.Parent and v ~= var8 then
-				v.Enabled = var42
+			if v.Parent and v ~= var1 then
+				v.Enabled = var22
 			end
 		end
 	end
 end
 
 local function doToggleLeaderboard()
-	-- upvalues: var43 (write), starterGuiService (ref)
-	var43 = not var43
-	starterGuiService:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, var43)
+	-- upvalues: var23 (write), starterGuiService (ref)
+	var23 = not var23
+	starterGuiService:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, var23)
 end
 
-local function makeEffectGroup(p13, p14, p15, p16, p17)
+local function makeEffectGroup(p4, p5, p6, p7, p8)
 	local list = {
 		{
 			type = "toggle",
 			name = "Enable",
-			toggle = p14,
+			toggle = p5,
 			isEnabled = function()
-				-- upvalues: p15 (ref)
-				local var104 = p15()
+				-- upvalues: p6 (ref)
+				local var39 = p6()
 				
-				return var104 and var104.Enabled
+				return var39 and var39.Enabled
 			end
 		}
 	}
 	
-	for i, v in ipairs(p16 or {}) do
+	for i, v in ipairs(p7 or {}) do
 		list[#list + 1] = {
 			type = "axis",
 			name = v.name,
@@ -753,29 +753,29 @@ local function makeEffectGroup(p13, p14, p15, p16, p17)
 			min = v.adjCfg.Min,
 			max = v.adjCfg.Max,
 			get = function()
-				-- upvalues: p15 (ref), v (ref)
-				local var105 = p15()
+				-- upvalues: p6 (ref), v (ref)
+				local var39 = p6()
 				
-				return if var105 then var105[v.prop] else 0
+				return if var39 then var39[v.prop] else 0
 			end,
 			set = function(value)
-				-- upvalues: p15 (ref), v (ref)
-				local var106 = p15()
+				-- upvalues: p6 (ref), v (ref)
+				local var39 = p6()
 				
-				if var106 then
-					var106[v.prop] = value
+				if var39 then
+					var39[v.prop] = value
 				end
 			end
 		}
 	end
-	for i, v_1 in ipairs(p17 or {}) do
+	for i, v_1 in ipairs(p8 or {}) do
 		list[#list + 1] = v_1
 	end
-	return { type = "group", name = p13, modes = list }
+	return { type = "group", name = p4, modes = list }
 end
 
-local function makeTintChannel(p18)
-	-- upvalues: status_5_1 (write), var12 (write), color3 (write), var68 (write)
+local function makeTintChannel(p9)
+	-- upvalues: status_5_1 (write), var5 (write), color3 (write), var38 (write)
 	return if status_5_1 then {
 		type = "axis",
 		adj = 64,
@@ -784,28 +784,28 @@ local function makeTintChannel(p18)
 		format = "%.0f",
 		name = "Tint " .. p18,
 		get = function()
-			-- upvalues: var12 (copy), color3 (copy), p18 (ref)
-			return (if var12 then var12.TintColor else color3)[p18] * 255
+			-- upvalues: var5 (copy), color3 (copy), p9 (ref)
+			return (if var5 then var5.TintColor else color3)[p9] * 255
 		end,
 		set = function(value)
-			-- upvalues: var12 (copy), color3 (copy), p18 (ref), var68 (copy)
-			local var107 = if var12 then var12.TintColor else color3
-			local r = var107.R
-			local g = var107.G
-			local b = var107.B
+			-- upvalues: var5 (copy), color3 (copy), p9 (ref), var38 (copy)
+			local var39 = if var5 then var5.TintColor else color3
+			local r = var39.R
+			local g = var39.G
+			local b = var39.B
 			
-			if p18 == "R" then
+			if p9 == "R" then
 				r = value / 255
-			elseif p18 == "G" then
+			elseif p9 == "G" then
 				g = value / 255
 			else
 				b = value / 255
 			end
 			color3 = Color3.new(r, g, b)
-			var68 = 1
+			var38 = 1
 			
-			if var12 then
-				var12.TintColor = color3
+			if var5 then
+				var5.TintColor = color3
 			end
 		end
 	} else {
@@ -815,67 +815,67 @@ local function makeTintChannel(p18)
 		max = 1,
 		name = "Tint " .. p18,
 		get = function()
-			-- upvalues: color3 (copy), p18 (ref)
-			return color3[p18]
+			-- upvalues: color3 (copy), p9 (ref)
+			return color3[p9]
 		end,
 		set = function(value)
-			-- upvalues: color3 (copy), p18 (ref), var68 (copy), var12 (copy)
+			-- upvalues: color3 (copy), p9 (ref), var38 (copy), var5 (copy)
 			local r = color3.R
 			local g = color3.G
 			local b = color3.B
 			
-			if p18 == "R" then
+			if p9 == "R" then
 				r = value
-			elseif p18 == "G" then
+			elseif p9 == "G" then
 				g = value
 			else
 				b = value
 			end
 			color3 = Color3.new(r, g, b)
-			var68 = 1
+			var38 = 1
 			
-			if var12 then
-				var12.TintColor = color3
+			if var5 then
+				var5.TintColor = color3
 			end
 		end
 	}
 end
 
-local function makeSpeedStiffnessGroup(p19, p20, p21, p22, p23)
+local function makeSpeedStiffnessGroup(p9, p10, p11, p12, p13)
 	-- upvalues: t_8 (ref), t_4 (ref)
 	return {
 		type = "group",
-		name = p19,
+		name = p9,
 		modes = {
 			{
 				type = "axis",
 				name = "Speed",
-				adj = p20.AdjSpeed,
-				min = p20.MinSpeed,
-				max = p20.MaxSpeed,
+				adj = p10.AdjSpeed,
+				min = p10.MinSpeed,
+				max = p10.MaxSpeed,
 				get = function()
-					-- upvalues: t_8 (copy), p21 (ref)
-					return t_8[p21]
+					-- upvalues: t_8 (copy), p11 (ref)
+					return t_8[p11]
 				end,
 				set = function(value)
-					-- upvalues: t_8 (copy), p21 (ref)
-					t_8[p21] = value
+					-- upvalues: t_8 (copy), p11 (ref)
+					t_8[p11] = value
 				end
 			},
 			{
 				type = "axis",
 				name = "Stiffness",
-				adj = p20.AdjStiffness,
-				min = p20.MinStiffness,
-				max = p20.MaxStiffness,
+				adj = p10.AdjStiffness,
+				min = p10.MinStiffness,
+				max = p10.MaxStiffness,
 				get = function()
-					-- upvalues: t_4 (copy), p22 (ref)
-					return t_4[p22]
+					-- upvalues: t_4 (copy), p12 (ref)
+					return t_4[p12]
 				end,
 				set = function(value)
-					-- upvalues: t_4 (copy), p22 (ref), p23 (ref)
-					t_4[p22] = value
-					p23:SetFreq(value)
+					-- upvalues: t_4 (copy), p12 (ref), p13 (ref)
+					t_4[p12] = value
+					p13:SetFreq(value)
 				end
 			}
 		}
@@ -884,7 +884,7 @@ end
 
 local list_2 = {
 	(function()
-		-- upvalues: doToggleMasterEffects (ref), var24 (write), makeEffectGroup (ref), doToggleDoF (ref), var9 (write), t (ref), doToggleBloom (ref), var10 (write), doToggleBlur (ref), var11 (write), doToggleColorCorrection (ref), var12 (write), list_1 (ref), var68 (write), color3 (write), status_5_1 (write), makeTintChannel (ref), doToggleSunRays (ref), var13 (write), doToggleColorGrading (ref), var14 (write), status_3_1 (write)
+		-- upvalues: doToggleMasterEffects (ref), var10 (write), makeEffectGroup (ref), doToggleDoF (ref), var2 (write), t (ref), doToggleBloom (ref), var3 (write), doToggleBlur (ref), var4 (write), doToggleColorCorrection (ref), var5 (write), list_1 (ref), var38 (write), color3 (write), status_5_1 (write), makeTintChannel (ref), doToggleSunRays (ref), var6 (write), doToggleColorGrading (ref), var7 (write), status_3_1 (write)
 		local t_1 = {
 			type = "group",
 			name = "Custom Post Processing",
@@ -894,13 +894,13 @@ local list_2 = {
 					name = "Enable",
 					toggle = doToggleMasterEffects,
 					isEnabled = function()
-						-- upvalues: var24 (copy)
-						return var24
+						-- upvalues: var10 (copy)
+						return var10
 					end
 				},
 				makeEffectGroup("Depth of Field", doToggleDoF, function()
-					-- upvalues: var9 (copy)
-					return var9
+					-- upvalues: var2 (copy)
+					return var2
 				end, {
 					{
 						name = "Far",
@@ -924,8 +924,8 @@ local list_2 = {
 					}
 				}),
 				makeEffectGroup("Bloom", doToggleBloom, function()
-					-- upvalues: var10 (copy)
-					return var10
+					-- upvalues: var3 (copy)
+					return var3
 				end, {
 					{
 						name = "Intensity",
@@ -940,12 +940,12 @@ local list_2 = {
 					}
 				}),
 				makeEffectGroup("Blur", doToggleBlur, function()
-					-- upvalues: var11 (copy)
-					return var11
+					-- upvalues: var4 (copy)
+					return var4
 				end, { { name = "Size", prop = "Size", adjCfg = t.Blur.Size } }),
 				makeEffectGroup("Color Correction", doToggleColorCorrection, function()
-					-- upvalues: var12 (copy)
-					return var12
+					-- upvalues: var5 (copy)
+					return var5
 				end, {
 					{
 						name = "Brightness",
@@ -971,29 +971,29 @@ local list_2 = {
 							return list_1
 						end,
 						getIndex = function()
-							-- upvalues: var68 (copy)
-							return var68
+							-- upvalues: var38 (copy)
+							return var38
 						end,
 						setIndex = function(value)
-							-- upvalues: var68 (copy), var12 (copy), color3 (copy), list_1 (copy), status_5_1 (copy)
-							var68 = value
+							-- upvalues: var38 (copy), var5 (copy), color3 (copy), list_1 (copy), status_5_1 (copy)
+							var38 = value
 							
-							if var12 then
+							if var5 then
 								if value == 1 then
-									var12.TintColor = color3
+									var5.TintColor = color3
 									
 									return
 								end
 								local color = list_1[value].color
-								var12.TintColor = color
+								var5.TintColor = color
 								
 								if not status_5_1 then
 									color3 = color
 								end
 							end
 						end,
-						displayItem = function(p24)
-							return p24.name
+						displayItem = function(p9)
+							return p9.name
 						end
 					},
 					makeTintChannel("R"),
@@ -1001,8 +1001,8 @@ local list_2 = {
 					makeTintChannel("B")
 				}),
 				makeEffectGroup("Sun Rays", doToggleSunRays, function()
-					-- upvalues: var13 (copy)
-					return var13
+					-- upvalues: var6 (copy)
+					return var6
 				end, {
 					{
 						name = "Intensity",
@@ -1016,8 +1016,8 @@ local list_2 = {
 					}
 				}),
 				makeEffectGroup("Color Grading", doToggleColorGrading, function()
-					-- upvalues: var14 (copy)
-					return var14
+					-- upvalues: var7 (copy)
+					return var7
 				end, nil, {
 					{
 						type = "cycle",
@@ -1029,20 +1029,20 @@ local list_2 = {
 							}
 						end,
 						getIndex = function()
-							-- upvalues: var14 (copy)
-							return if var14 and var14.TonemapperPreset == Enum.TonemapperPreset.Retro then 2 else 1
+							-- upvalues: var7 (copy)
+							return if var7 and var7.TonemapperPreset == Enum.TonemapperPreset.Retro then 2 else 1
 						end,
 						setIndex = function(value)
-							-- upvalues: var14 (copy)
-							if var14 then
-								var14.TonemapperPreset = ({
+							-- upvalues: var7 (copy)
+							if var7 then
+								var7.TonemapperPreset = ({
 									Enum.TonemapperPreset.Default,
 									Enum.TonemapperPreset.Retro
 								})[value]
 							end
 						end,
-						displayItem = function(p25)
-							return p25.Name
+						displayItem = function(p9)
+							return p9.Name
 						end
 					}
 				})
@@ -1052,8 +1052,8 @@ local list_2 = {
 		if status_3_1 then
 			for i = 2, #t_1.modes do
 				t_1.modes[i].disabled = function()
-					-- upvalues: var24 (copy)
-					return not var24
+					-- upvalues: var10 (copy)
+					return not var10
 				end
 			end
 		end
@@ -1068,8 +1068,8 @@ local list_2 = {
 				name = "Enable",
 				toggle = doTogglePlayerLock,
 				isEnabled = function()
-					-- upvalues: var38 (write)
-					return var38
+					-- upvalues: var19 (write)
+					return var19
 				end
 			},
 			{
@@ -1080,25 +1080,25 @@ local list_2 = {
 					return t_3
 				end,
 				getIndex = function()
-					-- upvalues: var40 (write)
-					return var40
+					-- upvalues: var20 (write)
+					return var20
 				end,
 				setIndex = function(value)
-					-- upvalues: var40 (write), t_3 (write), var41 (write)
-					var40 = value
-					local var109 = t_3[value]
-					local character = var109 and var109.Character
+					-- upvalues: var20 (write), t_3 (write), var21 (write)
+					var20 = value
+					local var39 = t_3[value]
+					local character = var39 and var39.Character
 					
 					if character then
 						local humanoid = character:FindFirstChildOfClass("Humanoid")
-						var41 = if humanoid then humanoid.RootPart else nil
+						var21 = if humanoid then humanoid.RootPart else nil
 						
 						return
 					end
-					var41 = nil
+					var21 = nil
 				end,
-				displayItem = function(p26)
-					return p26.Name
+				displayItem = function(p9)
+					return p9.Name
 				end
 			}
 		}
@@ -1112,8 +1112,8 @@ local list_2 = {
 				name = "Screen GUIs",
 				toggle = doToggleScreenGuis,
 				isEnabled = function()
-					-- upvalues: var42 (write)
-					return var42
+					-- upvalues: var22 (write)
+					return var22
 				end
 			},
 			{
@@ -1121,16 +1121,16 @@ local list_2 = {
 				name = "Leaderboard",
 				toggle = doToggleLeaderboard,
 				isEnabled = function()
-					-- upvalues: var43 (write)
-					return var43
+					-- upvalues: var23 (write)
+					return var23
 				end
 			}
 		}
 	},
-	makeSpeedStiffnessGroup("Movement", t.Movement, "movement", "movement", var52),
-	makeSpeedStiffnessGroup("Field of View", t.Fov, "fov", "fov", var54),
-	makeSpeedStiffnessGroup(if status_6_1 then "Roll" else "Tilt", t.Roll, "roll", "roll", var55),
-	makeSpeedStiffnessGroup(if status_6_1 then "Rotation" else "Pan", t.Pan, "pan", "pan", var53)
+	makeSpeedStiffnessGroup("Movement", t.Movement, "movement", "movement", var28),
+	makeSpeedStiffnessGroup("Field of View", t.Fov, "fov", "fov", var30),
+	makeSpeedStiffnessGroup(if status_6_1 then "Roll" else "Tilt", t.Roll, "roll", "roll", var31),
+	makeSpeedStiffnessGroup(if status_6_1 then "Rotation" else "Pan", t.Pan, "pan", "pan", var29)
 }
 
 if status_6_1 then
@@ -1142,110 +1142,110 @@ local isDisabled = nil
 local nextEnabledIndex = nil
 
 if status_3_1 then
-	isDisabled = function(p27)
-		return p27.disabled and p27.disabled()
+	isDisabled = function(p9)
+		return p9.disabled and p9.disabled()
 	end
 	
-	nextEnabledIndex = function(p28, p29, p30)
+	nextEnabledIndex = function(p9, p10, p11)
 		-- upvalues: isDisabled (write)
-		local p28Count = #p28
+		local p28Count = #p9
 		
 		for _ = 1, p28Count do
-			p29 = (p29 - 1 + p30) % p28Count + 1
+			p10 = (p10 - 1 + p11) % p28Count + 1
 			
-			if isDisabled(p28[p29]) then
+			if isDisabled(p9[p10]) then
 				continue
 			end
-			return p29
+			return p10
 		end
-		return p29
+		return p10
 	end
 end
 local function _()
-	-- upvalues: t_10 (write), list_2 (write), var62 (write)
+	-- upvalues: t_10 (write), list_2 (write), var34 (write)
 	if #t_10 > 0 then
-		local var113 = t_10[#t_10]
+		local var39 = t_10[#t_10]
 		
-		return var113.modes[var113.index]
+		return var39.modes[var39.index]
 	end
-	return list_2[var62]
+	return list_2[var34]
 end
 
-local function createBinding(p31, p32)
+local function createBinding(p9, p10)
 	local inputBinding = Instance.new("InputBinding")
 	
-	if p32.keyCode then
-		inputBinding.KeyCode = p32.keyCode
+	if p10.keyCode then
+		inputBinding.KeyCode = p10.keyCode
 	end
-	if p32.up then
-		inputBinding.Up = p32.up
+	if p10.up then
+		inputBinding.Up = p10.up
 	end
-	if p32.down then
-		inputBinding.Down = p32.down
+	if p10.down then
+		inputBinding.Down = p10.down
 	end
-	if p32.left then
-		inputBinding.Left = p32.left
+	if p10.left then
+		inputBinding.Left = p10.left
 	end
-	if p32.right then
-		inputBinding.Right = p32.right
+	if p10.right then
+		inputBinding.Right = p10.right
 	end
-	if p32.scale then
-		inputBinding.Scale = p32.scale
+	if p10.scale then
+		inputBinding.Scale = p10.scale
 	end
-	if p32.vector2Scale then
-		inputBinding.Vector2Scale = p32.vector2Scale
+	if p10.vector2Scale then
+		inputBinding.Vector2Scale = p10.vector2Scale
 	end
-	if p32.responseCurve then
-		inputBinding.ResponseCurve = p32.responseCurve
+	if p10.responseCurve then
+		inputBinding.ResponseCurve = p10.responseCurve
 	end
-	if p32.primaryModifier then
-		inputBinding.PrimaryModifier = p32.primaryModifier
+	if p10.primaryModifier then
+		inputBinding.PrimaryModifier = p10.primaryModifier
 	end
-	inputBinding.Parent = p31
+	inputBinding.Parent = p9
 	
 	return inputBinding
 end
 
-local function createAction(p33, p34)
+local function createAction(p9, p10)
 	-- upvalues: createBinding (ref)
 	local inputAction = Instance.new("InputAction")
-	inputAction.Name = p34.name
-	inputAction.Type = p34.type
-	inputAction.Parent = p33
+	inputAction.Name = p10.name
+	inputAction.Type = p10.type
+	inputAction.Parent = p9
 	
-	for i, v in ipairs(p34.bindings) do
+	for i, v in ipairs(p10.bindings) do
 		createBinding(inputAction, v)
 	end
 	return inputAction
 end
 
-local _ = function(p35, p36, p37)
-	local var116 = nil
-	local var117 = 0
+local _ = function(p11, p12, p13)
+	local var39 = nil
+	local var40 = 0
 	
-	return function(p38)
-		-- upvalues: var116 (write), p35 (ref), var117 (write), p36 (ref), p37 (ref)
-		if math.abs(p38) > 0.01 then
+	return function(p14)
+		-- upvalues: var39 (write), p11 (ref), var40 (write), p12 (ref), p13 (ref)
+		if math.abs(p14) > 0.01 then
 			local processTime = os.clock()
 			
-			if var116 == nil or processTime - var116 > p35 then
-				var116 = processTime
-			elseif p36 <= processTime - var117 then
-				p37()
-				var117 = processTime
+			if var39 == nil or processTime - var39 > p11 then
+				var39 = processTime
+			elseif p12 <= processTime - var40 then
+				p13()
+				var40 = processTime
 			end
-			var116 = nil
+			var39 = nil
 			
 			return
 		end
 	end, function()
-		-- upvalues: var116 (write)
-		var116 = nil
+		-- upvalues: var39 (write)
+		var39 = nil
 	end
 end
 
 ;(function()
-	-- upvalues: t (ref), var47 (write), createAction (ref), t_6 (ref), t_7 (ref), t_9 (write), vector3_1 (write), var55 (ref), var59 (write), status_3_1 (write), var61 (write), var65 (write), t_10 (write), nextEnabledIndex (write), list_2 (write), var62 (write), var64 (write), isDisabled (write)
+	-- upvalues: t (ref), var26 (write), createAction (ref), t_6 (ref), t_7 (ref), t_9 (write), vector3_1 (write), var31 (ref), var32 (write), status_3_1 (write), var33 (write), var36 (write), t_10 (write), nextEnabledIndex (write), list_2 (write), var34 (write), var35 (write), isDisabled (write)
 	local actions = t.Actions
 	local freecamToggleContext = Instance.new("InputContext")
 	freecamToggleContext.Name = "FreecamToggleContext"
@@ -1253,7 +1253,7 @@ end
 	freecamToggleContext.Sink = false
 	freecamToggleContext.Enabled = true
 	freecamToggleContext.Parent = script
-	var47 = createAction(freecamToggleContext, actions.Toggle)
+	var26 = createAction(freecamToggleContext, actions.Toggle)
 	local freecamInputContext = Instance.new("InputContext")
 	freecamInputContext.Name = "FreecamInputContext"
 	freecamInputContext.Priority = 2000
@@ -1266,72 +1266,72 @@ end
 	t_7.MovementElevate = createAction(freecamInputContext, actions.MovementElevate)
 	t_7.Fov = createAction(freecamInputContext, actions.Fov)
 	t_7.Shift = createAction(freecamInputContext, actions.Shift)
-	local var121 = createAction(freecamInputContext, actions.Tilt)
-	t_7.Tilt = var121
+	local var39 = createAction(freecamInputContext, actions.Tilt)
+	t_7.Tilt = var39
 	local _ = nil
 	local threshold = t.DoubleTap.Threshold
 	local debounce = t.DoubleTap.Debounce
 	
-	local var122 = function()
-		-- upvalues: vector3_1 (copy), var55 (copy), var59 (copy)
+	local var40 = function()
+		-- upvalues: vector3_1 (copy), var31 (copy), var32 (copy)
 		vector3_1 = Vector3.new(vector3_1.x, vector3_1.y, 0)
-		var55:Reset(0)
-		var59 = true
+		var31:Reset(0)
+		var32 = true
 	end
 	
-	local var123 = nil
-	local var124 = 0
+	local var41 = nil
+	local var42 = 0
 	
 	t_9 = function()
-		-- upvalues: var123 (write)
+		-- upvalues: var41 (write)
 		var116 = nil
 	end
 	
-	local function detect(p39)
-		-- upvalues: var123 (write), threshold (ref), var124 (write), debounce (ref), var122 (ref)
-		if math.abs(p39) > 0.01 then
+	local function detect(p11)
+		-- upvalues: var41 (write), threshold (ref), var42 (write), debounce (ref), var40 (ref)
+		if math.abs(p11) > 0.01 then
 			local processTime = os.clock()
 			
-			if var123 == nil or processTime - var123 > threshold then
-				var123 = processTime
-			elseif debounce <= processTime - var124 then
-				var122()
-				var124 = processTime
+			if var41 == nil or processTime - var41 > threshold then
+				var41 = processTime
+			elseif debounce <= processTime - var42 then
+				var40()
+				var42 = processTime
 			end
-			var123 = nil
+			var41 = nil
 			
 			return
 		end
 	end
 	
-	var121.StateChanged:Connect(function(p40)
-		-- upvalues: var59 (copy), detect (write)
-		if not var59 then
-			detect(p40)
+	var39.StateChanged:Connect(function(p11)
+		-- upvalues: var32 (copy), detect (write)
+		if not var32 then
+			detect(p11)
 			
 			return
-		elseif math.abs(p40) < 0.01 then
-			var59 = false
+		elseif math.abs(p11) < 0.01 then
+			var32 = false
 		end
 	end)
-	createAction(freecamInputContext, actions.ModeToggle).StateChanged:Connect(function(p41)
-		-- upvalues: status_3_1 (copy), var61 (copy), var65 (copy), t_10 (copy), nextEnabledIndex (copy), list_2 (copy), var62 (copy), var64 (copy)
-		if not p41 then return end
+	createAction(freecamInputContext, actions.ModeToggle).StateChanged:Connect(function(p11)
+		-- upvalues: status_3_1 (copy), var33 (copy), var36 (copy), t_10 (copy), nextEnabledIndex (copy), list_2 (copy), var34 (copy), var35 (copy)
+		if not p11 then return end
 		if status_3_1 then
-			if not var61 then
-				var61 = true
+			if not var33 then
+				var33 = true
 				
 				return
-			elseif var65 then
-				var65 = false
+			elseif var36 then
+				var36 = false
 				
 				return
 			elseif #t_10 > 0 then
-				local var127 = t_10[#t_10]
-				local var128 = nextEnabledIndex(var127.modes, var127.index, -1)
+				local var43 = t_10[#t_10]
+				local var44 = nextEnabledIndex(var43.modes, var43.index, -1)
 				
-				if var128 < var127.index then
-					var127.index = var128
+				if var44 < var43.index then
+					var43.index = var44
 					
 					return
 				end
@@ -1339,23 +1339,23 @@ end
 				
 				return
 			else
-				local var129 = nextEnabledIndex(list_2, var62, -1)
+				local var45 = nextEnabledIndex(list_2, var34, -1)
 				
-				if var129 < var62 then
-					var62 = var129
+				if var45 < var34 then
+					var34 = var45
 					
 					return
 				end
-				var61 = false
+				var33 = false
 				
 				return
 			end
-		elseif not var61 then
-			var61 = true
+		elseif not var33 then
+			var33 = true
 			
 			return
-		elseif var64 then
-			var64 = false
+		elseif var35 then
+			var35 = false
 			
 			return
 		elseif #t_10 > 0 then
@@ -1363,90 +1363,90 @@ end
 			
 			return
 		end
-		var61 = false
+		var33 = false
 	end)
-	createAction(freecamInputContext, actions.ModeNext).StateChanged:Connect(function(p42)
-		-- upvalues: status_3_1 (copy), var61 (copy), var65 (copy), t_10 (copy), nextEnabledIndex (copy), var62 (copy), list_2 (copy), var64 (copy)
-		if not p42 then return end
+	createAction(freecamInputContext, actions.ModeNext).StateChanged:Connect(function(p11)
+		-- upvalues: status_3_1 (copy), var33 (copy), var36 (copy), t_10 (copy), nextEnabledIndex (copy), var34 (copy), list_2 (copy), var35 (copy)
+		if not p11 then return end
 		if status_3_1 then
-			if not var61 then
-				var61 = true
+			if not var33 then
+				var33 = true
 				
 				return
-			elseif var65 then
-				var65 = false
+			elseif var36 then
+				var36 = false
 				
 				return
 			elseif #t_10 > 0 then
-				local var130 = t_10[#t_10]
-				var130.index = nextEnabledIndex(var130.modes, var130.index, 1)
+				local var43 = t_10[#t_10]
+				var43.index = nextEnabledIndex(var43.modes, var43.index, 1)
 				
 				return
 			end
-			var62 = nextEnabledIndex(list_2, var62, 1)
+			var34 = nextEnabledIndex(list_2, var34, 1)
 			
 			return
-		elseif not var61 then return end
-		if var64 then return end
+		elseif not var33 then return end
+		if var35 then return end
 		if #t_10 > 0 then
-			local var131 = t_10[#t_10]
-			var131.index = var131.index % #var131.modes + 1
+			local var44 = t_10[#t_10]
+			var44.index = var44.index % #var44.modes + 1
 			
 			return
 		end
-		local var132 = list_2[var62]
+		local var45 = list_2[var34]
 		
-		if var132.type == "group" then
-			table.insert(t_10, { index = 1, modes = var132.modes, groupName = var132.name })
+		if var45.type == "group" then
+			table.insert(t_10, { index = 1, modes = var45.modes, groupName = var45.name })
 			
 			return
-		elseif var132.type == "toggle" then
-			var132.toggle()
+		elseif var45.type == "toggle" then
+			var45.toggle()
 			
 			return
-		elseif var132.type == "cycle" then
-			local var133 = var132.items()
+		elseif var45.type == "cycle" then
+			local var46 = var45.items()
 			
-			if #var133 > 0 then
-				var132.setIndex(var132.getIndex() % #var133 + 1)
+			if #var46 > 0 then
+				var45.setIndex(var45.getIndex() % #var46 + 1)
 				
 				return
 			end
-		elseif var132.type == "action" then
-			var132.action()
+		elseif var45.type == "action" then
+			var45.action()
 			
 			return
-		elseif var132.type == "axis" then
-			var64 = true
+		elseif var45.type == "axis" then
+			var35 = true
 		end
 	end)
-	local var126 = createAction(freecamInputContext, actions.ModeAxis)
-	var126.StateChanged:Connect(function(p43)
-		-- upvalues: var61 (copy), status_3_1 (copy), t_10 (copy), list_2 (copy), var62 (copy), var65 (copy), isDisabled (copy), var64 (copy)
+	local var43 = createAction(freecamInputContext, actions.ModeAxis)
+	var43.StateChanged:Connect(function(p11)
+		-- upvalues: var33 (copy), status_3_1 (copy), t_10 (copy), list_2 (copy), var34 (copy), var36 (copy), isDisabled (copy), var35 (copy)
 		local index
-		if not var61 or p43 == 0 then return end
+		if not var33 or p11 == 0 then return end
 		if status_3_1 then
 			if #t_10 > 0 then
-				local var134 = t_10[#t_10]
-				index = var134.modes[var134.index]
+				local var44 = t_10[#t_10]
+				index = var44.modes[var44.index]
 			else
-				index = list_2[var62]
+				index = list_2[var34]
 			end
-			if var65 then
+			if var36 then
 				if index.type == "toggle" then
 					index.toggle()
 					
 					return
 				elseif index.type == "cycle" then
-					local var135 = index.items()
+					local var45 = index.items()
 					
-					if #var135 <= 0 then return end
-					if p43 > 0 then
-						index.setIndex(index.getIndex() % #var135 + 1)
+					if #var45 <= 0 then return end
+					if p11 > 0 then
+						index.setIndex(index.getIndex() % #var45 + 1)
 						
 						return
 					end
-					index.setIndex((index.getIndex() - 2) % #var135 + 1)
+					index.setIndex((index.getIndex() - 2) % #var45 + 1)
 					
 					return
 				elseif index.type == "action" then
@@ -1456,7 +1456,7 @@ end
 				elseif index.type == "axis" then
 					return
 				end
-			elseif p43 > 0 then
+			elseif p11 > 0 then
 				if isDisabled(index) then return end
 				if index.type == "group" then
 					table.insert(t_10, { index = 1, modes = index.modes, groupName = index.name })
@@ -1467,27 +1467,27 @@ end
 					
 					return
 				end
-				var65 = true
+				var36 = true
 				
 				return
-			elseif p43 >= 0 then return end
-			var65 = false
+			elseif p11 >= 0 then return end
+			var36 = false
 			
 			if #t_10 > 0 then
 				t_10[#t_10] = nil
 				
 				return
 			end
-			var61 = false
+			var33 = false
 			
 			return
-		elseif var64 then return end
+		elseif var35 then return end
 		if #t_10 > 0 then
 			if #t_10 > 0 then
-				local var136 = t_10[#t_10]
-				index = var136.modes[var136.index]
+				local var46 = t_10[#t_10]
+				index = var46.modes[var46.index]
 			else
-				index = list_2[var62]
+				index = list_2[var34]
 			end
 			if index.type == "group" then
 				table.insert(t_10, { index = 1, modes = index.modes, groupName = index.name })
@@ -1498,15 +1498,15 @@ end
 				
 				return
 			elseif index.type == "cycle" then
-				local var137 = index.items()
+				local var47 = index.items()
 				
-				if #var137 == 0 then return end
-				if p43 > 0 then
-					index.setIndex(index.getIndex() % #var137 + 1)
+				if #var47 == 0 then return end
+				if p11 > 0 then
+					index.setIndex(index.getIndex() % #var47 + 1)
 					
 					return
-				elseif p43 < 0 then
-					index.setIndex((index.getIndex() - 2) % #var137 + 1)
+				elseif p11 < 0 then
+					index.setIndex((index.getIndex() - 2) % #var47 + 1)
 					
 					return
 				end
@@ -1515,15 +1515,15 @@ end
 				
 				return
 			end
-		elseif p43 > 0 then
-			var62 = var62 % #list_2 + 1
+		elseif p11 > 0 then
+			var34 = var34 % #list_2 + 1
 			
 			return
-		elseif p43 < 0 then
-			var62 = (var62 - 2) % #list_2 + 1
+		elseif p11 < 0 then
+			var34 = (var34 - 2) % #list_2 + 1
 		end
 	end)
-	t_7.ModeAxis = var126
+	t_7.ModeAxis = var43
 end)()
 
 function t_6.Movement()
@@ -1546,28 +1546,28 @@ function t_6.Fov()
 end
 
 function t_6.Roll()
-	-- upvalues: var59 (write), t_7 (ref), t_8 (ref)
-	return (if var59 then 0 else t_7.Tilt:GetState()) * t_8.roll
+	-- upvalues: var32 (write), t_7 (ref), t_8 (ref)
+	return (if var32 then 0 else t_7.Tilt:GetState()) * t_8.roll
 end
 
-function t_6.ModeControl(p44)
-	-- upvalues: var61 (write), status_3_1 (write), var65 (write), t_10 (write), var64 (write), list_2 (write), var62 (write), t_7 (ref), clamp (ref)
+function t_6.ModeControl(p11)
+	-- upvalues: var33 (write), status_3_1 (write), var36 (write), t_10 (write), var35 (write), list_2 (write), var34 (write), t_7 (ref), clamp (ref)
 	local index
-	if not var61 then return end
+	if not var33 then return end
 	if status_3_1 then
-		if not var65 then return end
-	elseif #t_10 == 0 and not var64 then return end
+		if not var36 then return end
+	elseif #t_10 == 0 and not var35 then return end
 	if #t_10 > 0 then
-		local var140 = t_10[#t_10]
-		index = var140.modes[var140.index]
+		local var39 = t_10[#t_10]
+		index = var39.modes[var39.index]
 	else
-		index = list_2[var62]
+		index = list_2[var34]
 	end
 	if index.type ~= "axis" then return end
-	local var141 = t_7.ModeAxis:GetState() * index.adj * p44
+	local var40 = t_7.ModeAxis:GetState() * index.adj * p11
 	
-	if var141 ~= 0 then
-		index.set(clamp(index.get() + var141, index.min, index.max))
+	if var40 ~= 0 then
+		index.set(clamp(index.get() + var40, index.min, index.max))
 	end
 end
 
@@ -1577,37 +1577,37 @@ function t_6.StartCapture()
 end
 
 function t_6.StopCapture()
-	-- upvalues: t_6 (ref), var59 (write), t_9 (write), var61 (write), status_3_1 (write), t_10 (write), var65 (write), var64 (write)
+	-- upvalues: t_6 (ref), var32 (write), t_9 (write), var33 (write), status_3_1 (write), t_10 (write), var36 (write), var35 (write)
 	t_6._sinkContext.Enabled = false
-	var59 = false
+	var32 = false
 	
 	if t_9 then
 		t_9()
 	end
-	var61 = false
+	var33 = false
 	
 	if status_3_1 then
 		table.clear(t_10)
-		var65 = false
+		var36 = false
 	else
 		t_10 = {}
 	end
-	var64 = false
+	var35 = false
 end
 
 function t_6.getModeActive()
-	-- upvalues: var61 (write)
-	return var61
+	-- upvalues: var33 (write)
+	return var33
 end
 
 function t_6.getModeName()
-	-- upvalues: t_10 (write), list_2 (write), var62 (write)
+	-- upvalues: t_10 (write), list_2 (write), var34 (write)
 	local index
 	if #t_10 > 0 then
-		local var142 = t_10[#t_10]
-		index = var142.modes[var142.index]
+		local var39 = t_10[#t_10]
+		index = var39.modes[var39.index]
 	else
-		index = list_2[var62]
+		index = list_2[var34]
 	end
 	return index.name
 end
@@ -1626,13 +1626,13 @@ function t_6.getModeBreadcrumb()
 end
 
 function t_6.getModeDisplay()
-	-- upvalues: t_10 (write), list_2 (write), var62 (write), status_5_1 (write)
+	-- upvalues: t_10 (write), list_2 (write), var34 (write), status_5_1 (write)
 	local index
 	if #t_10 > 0 then
-		local var144 = t_10[#t_10]
-		index = var144.modes[var144.index]
+		local var39 = t_10[#t_10]
+		index = var39.modes[var39.index]
 	else
-		index = list_2[var62]
+		index = list_2[var34]
 	end
 	if index.type == "group" then
 		return ""
@@ -1641,70 +1641,70 @@ function t_6.getModeDisplay()
 	elseif index.type == "toggle" then
 		return if index.isEnabled() then "ON" else "OFF"
 	elseif index.type == "cycle" then
-		local var145 = index.items()
+		local var40 = index.items()
 		
-		if #var145 == 0 then
+		if #var40 == 0 then
 			return "None"
 		end
-		local var146 = var145[index.getIndex()]
+		local var41 = var40[index.getIndex()]
 		
-		return var146 and index.displayItem(var146) or "None"
+		return var41 and index.displayItem(var41) or "None"
 	else
 		return if index.type == "action" then "(fire)" else ""
 	end
 end
 
 function t_6.getModeHint()
-	-- upvalues: list_2 (write), var62 (write), t_10 (write), var64 (write)
-	local var147 = list_2[var62]
+	-- upvalues: list_2 (write), var34 (write), t_10 (write), var35 (write)
+	local var39 = list_2[var34]
 	
-	local function _(p45)
-		return if p45 == "axis" then "Hold to adjust" elseif p45 == "toggle" then "Tap to flip" elseif p45 == "cycle" then "Tap to cycle" elseif p45 == "action" then "Tap to fire" elseif p45 == "group" then "Enter" else nil
+	local function _(p11)
+		return if p11 == "axis" then "Hold to adjust" elseif p11 == "toggle" then "Tap to flip" elseif p11 == "cycle" then "Tap to cycle" elseif p11 == "action" then "Tap to fire" elseif p11 == "group" then "Enter" else nil
 	end
 	
 	if #t_10 > 0 then
 		local index
-		local var148 = t_10[#t_10]
-		local text = "[\226\134\145] Back  [\226\134\147] " .. var148.modes[var148.index % #var148.modes + 1].name
+		local var40 = t_10[#t_10]
+		local text = "[\226\134\145] Back  [\226\134\147] " .. var148.modes[var40.index % #var40.modes + 1].name
 		
 		if #t_10 > 0 then
-			local var150 = t_10[#t_10]
-			index = var150.modes[var150.index]
+			local var41 = t_10[#t_10]
+			index = var41.modes[var41.index]
 		else
-			index = list_2[var62]
+			index = list_2[var34]
 		end
 		index = index.type
-		local var151 = if index == "axis" then "Hold to adjust" elseif index == "toggle" then "Tap to flip" elseif index == "cycle" then "Tap to cycle" elseif index == "action" then "Tap to fire" elseif index == "group" then "Enter" else nil
+		local var42 = if index == "axis" then "Hold to adjust" elseif index == "toggle" then "Tap to flip" elseif index == "cycle" then "Tap to cycle" elseif index == "action" then "Tap to fire" elseif index == "group" then "Enter" else nil
 		
 		return {
 			nav = text,
-			action = if var151 then "[\226\134\144][\226\134\146] " .. var151 else ""
+			action = if var42 then "[\226\134\144][\226\134\146] " .. var151 else ""
 		}
-	elseif var64 then
-		local type = var147.type
-		local var152 = if type == "axis" then "Hold to adjust" elseif type == "toggle" then "Tap to flip" elseif type == "cycle" then "Tap to cycle" elseif type == "action" then "Tap to fire" elseif type == "group" then "Enter" else nil
+	elseif var35 then
+		local type = var39.type
+		local var43 = if type == "axis" then "Hold to adjust" elseif type == "toggle" then "Tap to flip" elseif type == "cycle" then "Tap to cycle" elseif type == "action" then "Tap to fire" elseif type == "group" then "Enter" else nil
 		
 		return {
 			nav = "[\226\134\145] Back",
-			action = if var152 then "[\226\134\144][\226\134\146] " .. var152 else ""
+			action = if var43 then "[\226\134\144][\226\134\146] " .. var152 else ""
 		}
 	end
-	local type = var147.type
+	local type = var39.type
 	
 	return {
 		nav = "[\226\134\145] Close  [\226\134\147] " .. (if type == "group" then "Enter" elseif type == "toggle" then "Flip" elseif type == "cycle" then "Cycle" elseif type == "action" then "Fire" elseif type == "axis" then "Adjust" else "Select"),
-		action = "[\226\134\144] " .. list_2[(var62 - 2) % #list_2 + 1].name .. "  [\226\134\146] " .. list_2[var62 % #list_2 + 1].name
+		action = "[\226\134\144] " .. list_2[(var34 - 2) % #list_2 + 1].name .. "  [\226\134\146] " .. list_2[var34 % #list_2 + 1].name
 	}
 end
 
 function t_6.getTintColorName()
-	-- upvalues: var68 (write), list_1 (ref)
-	return if var68 >= 1 and var68 <= #list_1 then list_1[var68].name else "Custom"
+	-- upvalues: var38 (write), list_1 (ref)
+	return if var38 >= 1 and var38 <= #list_1 then list_1[var38].name else "Custom"
 end
 
 function t_6.getActiveGroupName()
-	-- upvalues: var61 (write), t_10 (write)
-	return if var61 and #t_10 ~= 0 then t_10[1].groupName else nil
+	-- upvalues: var33 (write), t_10 (write)
+	return if var33 and #t_10 ~= 0 then t_10[1].groupName else nil
 end
 
 if status_3_1 then
@@ -1712,13 +1712,13 @@ if status_3_1 then
 	t_6._modes = list_2
 	
 	function t_6._getModeIndex()
-		-- upvalues: var62 (write)
-		return var62
+		-- upvalues: var34 (write)
+		return var34
 	end
 	
 	function t_6._isMonitorItemSelected()
-		-- upvalues: var65 (write)
-		return var65
+		-- upvalues: var36 (write)
+		return var36
 	end
 end
 local list_3 = {
@@ -1726,93 +1726,93 @@ local list_3 = {
 		key = "bloom",
 		group = "Custom Post Processing",
 		get = function()
-			-- upvalues: var10 (write)
-			return var10
+			-- upvalues: var3 (write)
+			return var3
 		end,
-		fmt = function(p46)
-			return string.format("Intensity: %.2f  Size: %.1f\nThreshold: %.2f", p46.Intensity, p46.Size, p46.Threshold)
+		fmt = function(p11)
+			return string.format("Intensity: %.2f  Size: %.1f\nThreshold: %.2f", p11.Intensity, p11.Size, p11.Threshold)
 		end
 	},
 	{
 		key = "blur",
 		group = "Custom Post Processing",
 		get = function()
-			-- upvalues: var11 (write)
-			return var11
+			-- upvalues: var4 (write)
+			return var4
 		end,
-		fmt = function(p47)
-			return string.format("Size: %.1f", p47.Size)
+		fmt = function(p11)
+			return string.format("Size: %.1f", p11.Size)
 		end
 	},
 	{
 		key = "cc",
 		group = "Custom Post Processing",
 		get = function()
-			-- upvalues: var12 (write)
-			return var12
+			-- upvalues: var5 (write)
+			return var5
 		end,
-		fmt = function(p48)
+		fmt = function(p11)
 			-- upvalues: t_6 (ref)
-			return string.format("Brightness: %.2f  Contrast: %.2f\nSaturation: %.2f  Tint: %s", p48.Brightness, p48.Contrast, p48.Saturation, t_6.getTintColorName())
+			return string.format("Brightness: %.2f  Contrast: %.2f\nSaturation: %.2f  Tint: %s", p11.Brightness, p11.Contrast, p11.Saturation, t_6.getTintColorName())
 		end
 	},
 	{
 		key = "sunrays",
 		group = "Custom Post Processing",
 		get = function()
-			-- upvalues: var13 (write)
-			return var13
+			-- upvalues: var6 (write)
+			return var6
 		end,
-		fmt = function(p49)
-			return string.format("Intensity: %.2f  Spread: %.2f", p49.Intensity, p49.Spread)
+		fmt = function(p11)
+			return string.format("Intensity: %.2f  Spread: %.2f", p11.Intensity, p11.Spread)
 		end
 	},
 	{
 		key = "colorgrading",
 		group = "Custom Post Processing",
 		get = function()
-			-- upvalues: var14 (write)
-			return var14
+			-- upvalues: var7 (write)
+			return var7
 		end,
-		fmt = function(p50)
-			return string.format("Color Grading: %s", p50.TonemapperPreset.Name)
+		fmt = function(p11)
+			return string.format("Color Grading: %s", p11.TonemapperPreset.Name)
 		end
 	},
 	{
 		key = "dof",
 		group = "Custom Post Processing",
 		get = function()
-			-- upvalues: var9 (write)
-			return var9
+			-- upvalues: var2 (write)
+			return var2
 		end,
-		fmt = function(p51)
-			return string.format("Far: %.2f  Near: %.2f\nDistance: %.1f  Radius: %.1f", p51.FarIntensity, p51.NearIntensity, p51.FocusDistance, p51.InFocusRadius)
+		fmt = function(p11)
+			return string.format("Far: %.2f  Near: %.2f\nDistance: %.1f  Radius: %.1f", p11.FarIntensity, p11.NearIntensity, p11.FocusDistance, p11.InFocusRadius)
 		end
 	}
 }
 
-local _ = function(value, p52)
-	value.bubble.Visible = p52 ~= ""
+local _ = function(value, p11)
+	value.bubble.Visible = p11 ~= ""
 	
-	if p52 ~= "" then
-		value.label.Text = p52
+	if p11 ~= "" then
+		value.label.Text = p11
 	end
 end
 
-var59 = nil
+var32 = nil
 t_9 = nil
-var61 = nil
-var62 = nil
+var33 = nil
+var34 = nil
 t_10 = nil
-var64 = nil
-var65 = nil
+var35 = nil
+var36 = nil
 
 if status_3_1 then
 	t_9 = {}
-	var61 = 12
+	var33 = 12
 	
-	var62 = function(p53)
-		-- upvalues: t_9 (write), var61 (write), var59 (write)
+	var34 = function(p11)
+		-- upvalues: t_9 (write), var33 (write), var32 (write)
 		local freecamMonitorPanel = Instance.new("Frame")
 		freecamMonitorPanel.Name = "FreecamMonitorPanel"
 		freecamMonitorPanel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -1850,7 +1850,7 @@ if status_3_1 then
 		breadcrumb.Parent = freecamMonitorPanel
 		t_9 = {}
 		
-		for i = 1, var61 do
+		for i = 1, var33 do
 			local frame_1 = Instance.new("Frame")
 			frame_1.Name = "Row" .. i
 			frame_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1897,46 +1897,46 @@ if status_3_1 then
 		hint.TextSize = 12
 		hint.TextXAlignment = Enum.TextXAlignment.Left
 		hint.Size = UDim2.new(1, 0, 0, 20)
-		hint.LayoutOrder = var61 + 1
+		hint.LayoutOrder = var33 + 1
 		hint.Parent = freecamMonitorPanel
-		freecamMonitorPanel.Parent = p53
-		var59 = {
+		freecamMonitorPanel.Parent = p11
+		var32 = {
 			panel = freecamMonitorPanel,
 			breadcrumb = breadcrumb,
 			hint = hint
 		}
 	end
 	
-	t_10 = function(p54)
+	t_10 = function(p12)
 		-- upvalues: status_5_1 (write)
-		if p54.type == "group" then
+		if p12.type == "group" then
 			return "\226\128\186"
-		elseif p54.type == "toggle" then
-			return if p54.isEnabled() then "On" else "Off"
-		elseif p54.type == "axis" then
-			return string.format(if status_5_1 then p54.format else "%.2f", p54.get())
-		elseif p54.type == "cycle" then
-			local var164 = p54.items()
+		elseif p12.type == "toggle" then
+			return if p12.isEnabled() then "On" else "Off"
+		elseif p12.type == "axis" then
+			return string.format(if status_5_1 then p12.format else "%.2f", p12.get())
+		elseif p12.type == "cycle" then
+			local var39 = p12.items()
 			
-			if #var164 == 0 then
+			if #var39 == 0 then
 				return "--"
 			end
-			local var165 = var164[p54.getIndex()]
+			local var40 = var39[p12.getIndex()]
 			
-			return var165 and p54.displayItem(var165) or "--"
+			return var40 and p12.displayItem(var40) or "--"
 		else
-			return if p54.type == "action" then "" else ""
+			return if p12.type == "action" then "" else ""
 		end
 	end
 	
-	var64 = function(p55, p56, p57)
-		return if p55.type == "toggle" then if p55.isEnabled() then Color3.fromRGB(0, 176, 111) else Color3.fromRGB(150, 150, 150) elseif p56 and p57 then Color3.new(1, 1, 1) else Color3.fromRGB(180, 180, 180)
+	var35 = function(p12, p13, p14)
+		return if p12.type == "toggle" then if p12.isEnabled() then Color3.fromRGB(0, 176, 111) else Color3.fromRGB(150, 150, 150) elseif p13 and p14 then Color3.new(1, 1, 1) else Color3.fromRGB(180, 180, 180)
 	end
 	
-	var65 = function()
-		-- upvalues: var59 (write), t_6 (ref), var61 (write), t_9 (write), t_10 (write), var64 (write), status_6_1 (write)
-		if not var59 then return end
-		local panel = var59.panel
+	var36 = function()
+		-- upvalues: var32 (write), t_6 (ref), var33 (write), t_9 (write), t_10 (write), var35 (write), status_6_1 (write)
+		if not var32 then return end
+		local panel = var32.panel
 		
 		if not t_6.getModeActive() then
 			panel.Visible = false
@@ -1949,81 +1949,81 @@ if status_3_1 then
 		local _ = nil
 		
 		if #t_6._navigationStack > 0 then
-			local var166 = t_6._navigationStack[#t_6._navigationStack]
-			modes = var166.modes
-			index = var166.index
+			local var39 = t_6._navigationStack[#t_6._navigationStack]
+			modes = var39.modes
+			index = var39.index
 		else
 			modes = t_6._modes
 			index = t_6._getModeIndex()
 		end
-		local var170
+		local var40
 		local modeBreadcrumb = t_6.getModeBreadcrumb()
-		var59.breadcrumb.Text = modeBreadcrumb
-		var59.breadcrumb.Visible = modeBreadcrumb ~= ""
-		local var168 = t_6._isMonitorItemSelected()
-		local minValue = math.min(#modes, var61)
+		var32.breadcrumb.Text = modeBreadcrumb
+		var32.breadcrumb.Visible = modeBreadcrumb ~= ""
+		local var41 = t_6._isMonitorItemSelected()
+		local minValue = math.min(#modes, var33)
 		
-		for i = 1, var61 do
-			var170 = t_9[i]
+		for i = 1, var33 do
+			var40 = t_9[i]
 			
 			if i > minValue then
-				var170.frame.Visible = false
+				var40.frame.Visible = false
 				continue
 			end
-			local var171 = modes[i]
-			local var172 = i == index
-			local var173 = var171.disabled and var171.disabled()
-			var170.frame.Visible = true
+			local var42 = modes[i]
+			local var43 = i == index
+			local var44 = var42.disabled and var42.disabled()
+			var40.frame.Visible = true
 			
-			if var172 and not var173 then
-				var170.nameLabel.Text = "> " .. var171.name
-				var170.nameLabel.TextColor3 = Color3.new(1, 1, 1)
-				var170.nameLabel.Font = Enum.Font.GothamMedium
-				var170.frame.BackgroundTransparency = if var168 then 0.88 else 1
-			elseif var173 then
-				var170.nameLabel.Text = "  " .. var171.name
-				var170.nameLabel.TextColor3 = Color3.fromRGB(80, 80, 80)
-				var170.nameLabel.Font = Enum.Font.GothamMedium
-				var170.frame.BackgroundTransparency = 1
+			if var43 and not var44 then
+				var40.nameLabel.Text = "> " .. var171.name
+				var40.nameLabel.TextColor3 = Color3.new(1, 1, 1)
+				var40.nameLabel.Font = Enum.Font.GothamMedium
+				var40.frame.BackgroundTransparency = if var41 then 0.88 else 1
+			elseif var44 then
+				var40.nameLabel.Text = "  " .. var171.name
+				var40.nameLabel.TextColor3 = Color3.fromRGB(80, 80, 80)
+				var40.nameLabel.Font = Enum.Font.GothamMedium
+				var40.frame.BackgroundTransparency = 1
 			else
-				var170.nameLabel.Text = "  " .. var171.name
-				var170.nameLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-				var170.nameLabel.Font = Enum.Font.GothamMedium
-				var170.frame.BackgroundTransparency = 1
+				var40.nameLabel.Text = "  " .. var171.name
+				var40.nameLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+				var40.nameLabel.Font = Enum.Font.GothamMedium
+				var40.frame.BackgroundTransparency = 1
 			end
-			var170.valueLabel.Text = t_10(var171)
-			var170.valueLabel.TextColor3 = var173 and Color3.fromRGB(60, 60, 60) or var64(var171, var172, var168)
+			var40.valueLabel.Text = t_10(var42)
+			var40.valueLabel.TextColor3 = var44 and Color3.fromRGB(60, 60, 60) or var35(var42, var43, var41)
 		end
-		if not var168 then
-			var59.hint.Text = "\226\134\145\226\134\147 Navigate   \226\134\146 Select   \226\134\144 Back"
+		if not var41 then
+			var32.hint.Text = "\226\134\145\226\134\147 Navigate   \226\134\146 Select   \226\134\144 Back"
 			
 			return
 		elseif status_6_1 then
-			var59.hint.Text = "\226\134\145\226\134\147 Exit selection   \226\134\144\226\134\146 Adjust"
+			var32.hint.Text = "\226\134\145\226\134\147 Exit selection   \226\134\144\226\134\146 Adjust"
 			
 			return
 		end
-		var59.hint.Text = "\226\134\144\226\134\146 Adjust   \226\134\145\226\134\147 Exit selection"
+		var32.hint.Text = "\226\134\144\226\134\146 Adjust   \226\134\145\226\134\147 Exit selection"
 	end
 end
-local function StepFreecam(p58)
-	-- upvalues: t_6 (ref), var52 (ref), var53 (ref), var54 (ref), var55 (ref), var51 (write), rad (ref), tan (ref), sqrt (ref), t (ref), clamp (ref), var44 (write), var45 (write), vector3_1 (write), vector3 (write), var38 (write), var41 (write), defaultZoom (write), defaultHeight (write), status_3_1 (write), var65 (write), var16 (write), var17 (write), var8 (write), t_3 (write), var40 (write), list_3 (ref), currentCamera (write)
-	t_6.ModeControl(p58)
-	local var174 = var52:Update(p58, t_6.Movement())
-	local var175 = var53:Update(p58, t_6.Pan())
-	local var176 = var54:Update(p58, t_6.Fov())
-	local var177 = var55:Update(p58, t_6.Roll())
-	local var178 = sqrt(0.70020753821 / tan(rad(var51 / 2)))
-	var51 = clamp(var51 + var176 * t.Fov.Gain * (p58 / var178), 1, 120)
+local function StepFreecam(p12)
+	-- upvalues: t_6 (ref), var28 (ref), var29 (ref), var30 (ref), var31 (ref), var27 (write), rad (ref), tan (ref), sqrt (ref), t (ref), clamp (ref), var24 (write), var25 (write), vector3_1 (write), vector3 (write), var19 (write), var21 (write), defaultZoom (write), defaultHeight (write), status_3_1 (write), var36 (write), var8 (write), var9 (write), var1 (write), t_3 (write), var20 (write), list_3 (ref), currentCamera (write)
+	t_6.ModeControl(p12)
+	local var39 = var28:Update(p12, t_6.Movement())
+	local var40 = var29:Update(p12, t_6.Pan())
+	local var41 = var30:Update(p12, t_6.Fov())
+	local var42 = var31:Update(p12, t_6.Roll())
+	local var43 = sqrt(0.70020753821 / tan(rad(var27 / 2)))
+	var27 = clamp(var27 + var41 * t.Fov.Gain * (p12 / var43), 1, 120)
 	
-	if math.abs(var51 - var51) > 0.01 then
-		var44 = os.clock()
+	if math.abs(var27 - var27) > 0.01 then
+		var24 = os.clock()
 	end
-	if var174.Magnitude > 0.05 or var175.Magnitude > 0.0005 or (math.abs(var177) > 0.0005 or math.abs(var176) > 0.0005) then
-		var45 = os.clock()
+	if var39.Magnitude > 0.05 or var40.Magnitude > 0.0005 or (math.abs(var42) > 0.0005 or math.abs(var41) > 0.0005) then
+		var25 = os.clock()
 	end
-	local var179 = var175 * t.Pan.Gain * (p58 / var178)
-	vector3_1 += Vector3.new(var179.X, var179.Y, var177 * t.Roll.Gain * (p58 / var178))
+	local var44 = var40 * t.Pan.Gain * (p12 / var43)
+	vector3_1 += Vector3.new(var44.X, var44.Y, var42 * t.Roll.Gain * (p12 / var43))
 	
 	local function _(vectorA)
 		vectorA %= 6.28318530718
@@ -2031,41 +2031,41 @@ local function StepFreecam(p58)
 		return if vectorA > 3.14159265359 then vectorA - 6.28318530718 else vectorA
 	end
 	
-	local var180 = vector3_1.x % 6.28318530718
-	local var181 = if var180 > 3.14159265359 then var180 - 6.28318530718 else var180
-	local var182 = vector3_1.y % 6.28318530718
-	local var183 = vector3_1.z % 6.28318530718
-	vector3_1 = Vector3.new(var181, if var182 > 3.14159265359 then var182 - 6.28318530718 else var182, if var183 > 3.14159265359 then var183 - 6.28318530718 else var183)
-	local var184 = CFrame.new(vector3) * CFrame.fromOrientation(vector3_1.x, vector3_1.y, vector3_1.z) * CFrame.new(Vector3.new(var174.X, var174.Y, -var174.Z) * t.Movement.Gain * p58)
+	local var45 = vector3_1.x % 6.28318530718
+	local var46 = if var45 > 3.14159265359 then var45 - 6.28318530718 else var45
+	local var47 = vector3_1.y % 6.28318530718
+	local var48 = vector3_1.z % 6.28318530718
+	vector3_1 = Vector3.new(var46, if var47 > 3.14159265359 then var47 - 6.28318530718 else var47, if var48 > 3.14159265359 then var48 - 6.28318530718 else var48)
+	local var49 = CFrame.new(vector3) * CFrame.fromOrientation(vector3_1.x, vector3_1.y, vector3_1.z) * CFrame.new(Vector3.new(var39.X, var39.Y, -var39.Z) * t.Movement.Gain * p12)
 	
-	if var38 and var41 and var41.Parent then
+	if var19 and var21 and var21.Parent then
 		local playerLock = t.PlayerLock
-		defaultZoom = clamp(defaultZoom + -var174.Z * t.Movement.Gain.Z * p58, playerLock.MinZoom, playerLock.MaxZoom)
-		defaultHeight = clamp(defaultHeight + var174.Y * t.Movement.Gain.Y * p58, -playerLock.HeightRange, playerLock.HeightRange)
-		var184 = CFrame.new(var41.Position + Vector3.new(0, defaultHeight, 0)) * CFrame.fromOrientation(vector3_1.x, vector3_1.y, vector3_1.z) * CFrame.new(0, 0, defaultZoom)
+		defaultZoom = clamp(defaultZoom + -var39.Z * t.Movement.Gain.Z * p12, playerLock.MinZoom, playerLock.MaxZoom)
+		defaultHeight = clamp(defaultHeight + var39.Y * t.Movement.Gain.Y * p12, -playerLock.HeightRange, playerLock.HeightRange)
+		var49 = CFrame.new(var21.Position + Vector3.new(0, defaultHeight, 0)) * CFrame.fromOrientation(vector3_1.x, vector3_1.y, vector3_1.z) * CFrame.new(0, 0, defaultZoom)
 	end
 	if status_3_1 then
-		var65()
-	elseif var16 and var16.Parent and (var17 and var8) and var8.Parent then
-		local mode = var17.mode
+		var36()
+	elseif var8 and var8.Parent and (var9 and var1) and var1.Parent then
+		local mode = var9.mode
 		
 		if t_6.getModeActive() then
-			if os.clock() - var45 < 2 then
+			if os.clock() - var25 < 2 then
 				local t_1 = {}
 				t_1[#t_1 + 1] = string.format("X: %.0f  Y: %.0f  Z: %.0f", vector3.X, vector3.Y, vector3.Z)
 				t_1[#t_1 + 1] = string.format("Pitch: %.1f\194\176  Yaw: %.1f\194\176  Roll: %.1f\194\176", math.deg(vector3_1.X), math.deg(vector3_1.Y), math.deg(vector3_1.Z))
 				
-				if os.clock() - var44 < 2 then
-					t_1[#t_1 + 1] = string.format("Field of View: %.1f", var51)
+				if os.clock() - var24 < 2 then
+					t_1[#t_1 + 1] = string.format("Field of View: %.1f", var27)
 				end
-				if p58 > 0 then
-					local var186 = (var184.p - vector3).Magnitude / p58
+				if p12 > 0 then
+					local var50 = (var49.p - vector3).Magnitude / p12
 					
-					if var186 > 0.5 then
-						t_1[#t_1 + 1] = string.format("Speed: %.1f", var186)
+					if var50 > 0.5 then
+						t_1[#t_1 + 1] = string.format("Speed: %.1f", var50)
 					end
 				end
-				local status = var17.status
+				local status = var9.status
 				local joined = table.concat(t_1, "\n")
 				status.bubble.Visible = joined ~= ""
 				
@@ -2073,34 +2073,34 @@ local function StepFreecam(p58)
 					status.label.Text = joined
 				end
 			else
-				var17.status.bubble.Visible = false
+				var9.status.bubble.Visible = false
 			end
-			if var38 and #t_3 > 0 and t_6.getActiveGroupName() ~= "Player Lock" then
-				local lock = var17.lock
-				local formattedText = string.format("Lock: %s", t_3[var40].Name)
+			if var19 and #t_3 > 0 and t_6.getActiveGroupName() ~= "Player Lock" then
+				local lock = var9.lock
+				local formattedText = string.format("Lock: %s", t_3[var20].Name)
 				lock.bubble.Visible = formattedText ~= ""
 				
 				if formattedText ~= "" then
 					lock.label.Text = formattedText
 				end
 			else
-				var17.lock.bubble.Visible = false
+				var9.lock.bubble.Visible = false
 			end
 			local activeGroupName = t_6.getActiveGroupName()
 			
 			for i, v in ipairs(list_3) do
-				local var194 = v.get()
+				local var51 = v.get()
 				
-				if var194 and var194.Enabled and activeGroupName ~= v.group then
-					local key = var17[v.key]
-					local var195 = v.fmt(var194)
-					key.bubble.Visible = var195 ~= ""
+				if var51 and var51.Enabled and activeGroupName ~= v.group then
+					local key = var9[v.key]
+					local var52 = v.fmt(var51)
+					key.bubble.Visible = var52 ~= ""
 					
-					if var195 ~= "" then
-						key.label.Text = var195
+					if var52 ~= "" then
+						key.label.Text = var52
 					end
 				else
-					var17[v.key].bubble.Visible = false
+					var9[v.key].bubble.Visible = false
 				end
 			end
 			mode.bubble.Visible = true
@@ -2115,23 +2115,23 @@ local function StepFreecam(p58)
 			mode.nav.Visible = modeHint.nav ~= ""
 			mode.action.Text = modeHint.action
 			mode.action.Visible = modeHint.action ~= ""
-			var16.Visible = true
+			var8.Visible = true
 		else
-			var16.Visible = false
+			var8.Visible = false
 		end
 	end
-	vector3 = var184.p
-	currentCamera.CFrame = var184
-	currentCamera.Focus = var184
-	currentCamera.FieldOfView = var51
+	vector3 = var49.p
+	currentCamera.CFrame = var49
+	currentCamera.Focus = var49
+	currentCamera.FieldOfView = var27
 end
 
 t_2 = {}
 local removePlayerFromList = nil
-var68 = nil
+var38 = nil
 color3 = nil
 local StopFreecam = nil
-local var85 = nil
+local var53 = nil
 local ToggleFreecam = nil
 local t_11 = {}
 local t_12 = {
@@ -2146,7 +2146,7 @@ local t_13 = {
 }
 
 function t_2.Push()
-	-- upvalues: t_12 (ref), starterGuiService (ref), t_13 (ref), localPlayer (write), t_11 (write), var35 (write), var42 (write), ToggleFreecam (write), currentCamera (write), color3 (write), var85 (write), StopFreecam (write), var68 (write), userInputService (ref), removePlayerFromList (write)
+	-- upvalues: t_12 (ref), starterGuiService (ref), t_13 (ref), localPlayer (write), t_11 (write), var16 (write), var22 (write), ToggleFreecam (write), currentCamera (write), color3 (write), var53 (write), StopFreecam (write), var38 (write), userInputService (ref), removePlayerFromList (write)
 	for i in pairs(t_12) do
 		t_12[i] = starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType[i])
 		starterGuiService:SetCoreGuiEnabled(Enum.CoreGuiType[i], false)
@@ -2164,11 +2164,11 @@ function t_2.Push()
 				v.Enabled = false
 			end
 		end
-		var35 = playerGui.ChildAdded:Connect(function(p59)
-			-- upvalues: t_11 (copy), var42 (copy)
-			if p59:IsA("ScreenGui") and p59.Enabled then
-				t_11[#t_11 + 1] = p59
-				p59.Enabled = var42
+		var16 = playerGui.ChildAdded:Connect(function(p13)
+			-- upvalues: t_11 (copy), var22 (copy)
+			if p13:IsA("ScreenGui") and p13.Enabled then
+				t_11[#t_11 + 1] = p13
+				p13.Enabled = var22
 			end
 		end)
 	end
@@ -2176,16 +2176,16 @@ function t_2.Push()
 	currentCamera.FieldOfView = 70
 	color3 = currentCamera.CameraType
 	currentCamera.CameraType = Enum.CameraType.Custom
-	var85 = currentCamera.CFrame
+	var53 = currentCamera.CFrame
 	StopFreecam = currentCamera.Focus
-	var68 = userInputService.MouseIconEnabled
+	var38 = userInputService.MouseIconEnabled
 	userInputService.MouseIconEnabled = false
 	removePlayerFromList = Enum.MouseBehavior.Default
 	userInputService.MouseBehavior = Enum.MouseBehavior.Default
 end
 
 function t_2.Pop()
-	-- upvalues: t_12 (ref), starterGuiService (ref), t_13 (ref), t_11 (write), var8 (write), var35 (write), currentCamera (write), ToggleFreecam (write), color3 (write), var85 (write), StopFreecam (write), userInputService (ref), var68 (write), removePlayerFromList (write)
+	-- upvalues: t_12 (ref), starterGuiService (ref), t_13 (ref), t_11 (write), var1 (write), var16 (write), currentCamera (write), ToggleFreecam (write), color3 (write), var53 (write), StopFreecam (write), userInputService (ref), var38 (write), removePlayerFromList (write)
 	for i, v in pairs(t_12) do
 		starterGuiService:SetCoreGuiEnabled(Enum.CoreGuiType[i], v)
 	end
@@ -2193,25 +2193,25 @@ function t_2.Pop()
 		starterGuiService:SetCore(i_1, v_1)
 	end
 	for i_2, v_2 in pairs(t_11) do
-		if v_2.Parent and v_2 ~= var8 then
+		if v_2.Parent and v_2 ~= var1 then
 			v_2.Enabled = true
 		end
 	end
-	if var35 then
-		var35:Disconnect()
-		var35 = nil
+	if var16 then
+		var16:Disconnect()
+		var16 = nil
 	end
 	t_11 = {}
 	currentCamera.FieldOfView = ToggleFreecam
 	ToggleFreecam = nil
 	currentCamera.CameraType = color3
 	color3 = nil
-	currentCamera.CFrame = var85
-	var85 = nil
+	currentCamera.CFrame = var53
+	var53 = nil
 	currentCamera.Focus = StopFreecam
 	StopFreecam = nil
-	userInputService.MouseIconEnabled = var68
-	var68 = nil
+	userInputService.MouseIconEnabled = var38
+	var38 = nil
 	userInputService.MouseBehavior = removePlayerFromList
 	removePlayerFromList = nil
 end
@@ -2221,62 +2221,62 @@ function t_2.getScreenGuis()
 	return t_11
 end
 
-removePlayerFromList = function(p60)
-	-- upvalues: t_3 (write), var40 (write), var38 (write)
+removePlayerFromList = function(p13)
+	-- upvalues: t_3 (write), var20 (write), var19 (write)
 	for i, v in ipairs(t_3) do
-		if v == p60 then
+		if v == p13 then
 			table.remove(t_3, i)
 			
-			if var40 == i and var38 then
-				var38 = false
-				var40 = 1
+			if var20 == i and var19 then
+				var19 = false
+				var20 = 1
 			end
-			if i < var40 then
-				var40 -= 1
+			if i < var20 then
+				var20 -= 1
 			end
-			if #t_3 >= var40 and var40 >= 1 then break end
-			var40 = 1
+			if #t_3 >= var20 and var20 >= 1 then break end
+			var20 = 1
 			
 			return
 		end
 	end
 end
 
-var68 = function()
-	-- upvalues: t_3 (write), playersService (ref), localPlayer (write), var40 (write), var36 (write), var37 (write), removePlayerFromList (ref)
+var38 = function()
+	-- upvalues: t_3 (write), playersService (ref), localPlayer (write), var20 (write), var17 (write), var18 (write), removePlayerFromList (ref)
 	t_3 = playersService:GetPlayers()
 	
 	for i, v in ipairs(t_3) do
 		if v == localPlayer then
-			var40 = i
+			var20 = i
 			break
 		end
 	end
-	var36 = playersService.PlayerAdded:Connect(function(p61)
+	var17 = playersService.PlayerAdded:Connect(function(p14)
 		-- upvalues: t_3 (copy)
-		table.insert(t_3, p61)
+		table.insert(t_3, p14)
 	end)
-	var37 = playersService.PlayerRemoving:Connect(removePlayerFromList)
+	var18 = playersService.PlayerRemoving:Connect(removePlayerFromList)
 end
 
 color3 = function()
-	-- upvalues: var68 (ref), currentCamera (write), vector3_1 (write), vector3 (write), var51 (write), var52 (ref), var53 (ref), var54 (ref), var55 (ref), var8 (write), localPlayer (write), status_3_1 (write), var59 (write), var62 (write), var16 (write), var17 (write), t_2 (write), list (write), t_1 (ref), status_4_1 (write), runService (ref), StepFreecam (ref), t_6 (ref)
-	var68()
+	-- upvalues: var38 (ref), currentCamera (write), vector3_1 (write), vector3 (write), var27 (write), var28 (ref), var29 (ref), var30 (ref), var31 (ref), var1 (write), localPlayer (write), status_3_1 (write), var32 (write), var34 (write), var8 (write), var9 (write), t_2 (write), list (write), t_1 (ref), status_4_1 (write), runService (ref), StepFreecam (ref), t_6 (ref)
+	var38()
 	local cFrame = currentCamera.CFrame
 	vector3_1 = Vector3.new(cFrame:toEulerAnglesYXZ())
 	vector3 = cFrame.p
-	var51 = currentCamera.FieldOfView
-	var52:Reset(Vector3.new())
-	var53:Reset(Vector2.new())
-	var54:Reset(0)
-	var55:Reset(0)
-	var8 = localPlayer:WaitForChild("PlayerGui"):WaitForChild("Freecam")
+	var27 = currentCamera.FieldOfView
+	var28:Reset(Vector3.new())
+	var29:Reset(Vector2.new())
+	var30:Reset(0)
+	var31:Reset(0)
+	var1 = localPlayer:WaitForChild("PlayerGui"):WaitForChild("Freecam")
 	
 	if status_3_1 then
-		if not var59 then
-			var62(var8)
+		if not var32 then
+			var34(var1)
 		end
-	elseif not var16 or not var16.Parent then
+	elseif not var8 or not var8.Parent then
 		local freecamCustomGui = Instance.new("Frame")
 		freecamCustomGui.Name = "FreecamCustomGui"
 		freecamCustomGui.BackgroundTransparency = 1
@@ -2293,16 +2293,16 @@ color3 = function()
 		UIListLayout.Padding = UDim.new(0, 6)
 		UIListLayout.Parent = freecamCustomGui
 		
-		local function makeBubble(p62, p63)
+		local function makeBubble(p14, p15)
 			-- upvalues: freecamCustomGui (ref)
 			local frame = Instance.new("Frame")
-			frame.Name = p62
+			frame.Name = p14
 			frame.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
 			frame.BackgroundTransparency = 0.4
 			frame.BorderSizePixel = 0
 			frame.AutomaticSize = Enum.AutomaticSize.XY
 			frame.Size = UDim2.new(0, 0, 0, 0)
-			frame.LayoutOrder = p63
+			frame.LayoutOrder = p15
 			frame.Visible = false
 			local UICorner = Instance.new("UICorner")
 			UICorner.CornerRadius = UDim.new(0, 8)
@@ -2328,14 +2328,14 @@ color3 = function()
 			return frame, label
 		end
 		
-		local var200, var201 = makeBubble("BloomBubble", 1)
-		local var202, var203 = makeBubble("BlurBubble", 2)
-		local var204, var205 = makeBubble("CCBubble", 3)
-		local var206, var207 = makeBubble("SunRaysBubble", 4)
-		local var208, var209 = makeBubble("ColorGradingBubble", 5)
-		local var210, var211 = makeBubble("DofBubble", 6)
-		local var212, var213 = makeBubble("LockBubble", 7)
-		local var214, var215 = makeBubble("StatusBubble", 8)
+		local var54, var55 = makeBubble("BloomBubble", 1)
+		local var56, var57 = makeBubble("BlurBubble", 2)
+		local var58, var59 = makeBubble("CCBubble", 3)
+		local var60, var61 = makeBubble("SunRaysBubble", 4)
+		local var62, var63 = makeBubble("ColorGradingBubble", 5)
+		local var64, var65 = makeBubble("DofBubble", 6)
+		local var66, var67 = makeBubble("LockBubble", 7)
+		local var68, var69 = makeBubble("StatusBubble", 8)
 		local modeBubble = Instance.new("Frame")
 		modeBubble.Name = "ModeBubble"
 		modeBubble.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
@@ -2360,174 +2360,174 @@ color3 = function()
 		UIListLayout_1.Padding = UDim.new(0, 2)
 		UIListLayout_1.Parent = modeBubble
 		
-		local function makeModeLabel(p64, p65, p66, p67, p68)
+		local function makeModeLabel(p14, p15, p16, p17, p18)
 			-- upvalues: modeBubble (ref)
 			local textLabel = Instance.new("TextLabel")
-			textLabel.Name = p64
+			textLabel.Name = p14
 			textLabel.BackgroundTransparency = 1
-			textLabel.TextColor3 = p68
-			textLabel.Font = p66
-			textLabel.TextSize = p67
+			textLabel.TextColor3 = p18
+			textLabel.Font = p16
+			textLabel.TextSize = p17
 			textLabel.TextXAlignment = Enum.TextXAlignment.Left
 			textLabel.AutomaticSize = Enum.AutomaticSize.XY
 			textLabel.Size = UDim2.new(0, 0, 0, 0)
-			textLabel.LayoutOrder = p65
+			textLabel.LayoutOrder = p15
 			textLabel.Parent = modeBubble
 			
 			return textLabel
 		end
 		
-		local var221 = makeModeLabel("Breadcrumb", 1, Enum.Font.Gotham, 11, Color3.fromRGB(100, 100, 100))
-		local var222 = makeModeLabel("Title", 2, Enum.Font.GothamBold, 14, Color3.new(1, 1, 1))
-		local var223 = makeModeLabel("NavHint", 3, Enum.Font.Gotham, 12, Color3.fromRGB(120, 120, 120))
-		local var224 = makeModeLabel("ActionHint", 4, Enum.Font.GothamMedium, 12, Color3.fromRGB(200, 200, 200))
+		local var70 = makeModeLabel("Breadcrumb", 1, Enum.Font.Gotham, 11, Color3.fromRGB(100, 100, 100))
+		local var71 = makeModeLabel("Title", 2, Enum.Font.GothamBold, 14, Color3.new(1, 1, 1))
+		local var72 = makeModeLabel("NavHint", 3, Enum.Font.Gotham, 12, Color3.fromRGB(120, 120, 120))
+		local var73 = makeModeLabel("ActionHint", 4, Enum.Font.GothamMedium, 12, Color3.fromRGB(200, 200, 200))
 		modeBubble.Parent = freecamCustomGui
-		var16 = freecamCustomGui
-		var17 = {
-			bloom = { bubble = var200, label = var201 },
-			blur = { bubble = var202, label = var203 },
-			cc = { bubble = var204, label = var205 },
-			sunrays = { bubble = var206, label = var207 },
-			colorgrading = { bubble = var208, label = var209 },
-			dof = { bubble = var210, label = var211 },
-			lock = { bubble = var212, label = var213 },
-			status = { bubble = var214, label = var215 },
+		var8 = freecamCustomGui
+		var9 = {
+			bloom = { bubble = var54, label = var55 },
+			blur = { bubble = var56, label = var57 },
+			cc = { bubble = var58, label = var59 },
+			sunrays = { bubble = var60, label = var61 },
+			colorgrading = { bubble = var62, label = var63 },
+			dof = { bubble = var64, label = var65 },
+			lock = { bubble = var66, label = var67 },
+			status = { bubble = var68, label = var69 },
 			mode = {
 				bubble = modeBubble,
-				breadcrumb = var221,
-				title = var222,
-				nav = var223,
-				action = var224
+				breadcrumb = var70,
+				title = var71,
+				nav = var72,
+				action = var73
 			}
 		}
-		freecamCustomGui.Parent = var8
+		freecamCustomGui.Parent = var1
 	end
 	t_2.Push()
-	var8.Enabled = true
+	var1.Enabled = true
 	
-	local function _(p69, p70)
+	local function _(p14, p15)
 		-- upvalues: currentCamera (copy)
-		local var232 = Instance.new(p69)
-		var232.Name = p70
-		var232.Parent = currentCamera
+		local var74 = Instance.new(p14)
+		var74.Name = p15
+		var74.Parent = currentCamera
 		
-		return var232
+		return var74
 	end
 	
 	for i, v in ipairs(list) do
 		local key = t_1[v.key]
-		local var225 = Instance.new(v.class)
-		var225.Name = "Freecam" .. v.key
-		var225.Parent = currentCamera
-		local var226 = var225
+		local var74 = Instance.new(v.class)
+		var74.Name = "Freecam" .. v.key
+		var74.Parent = currentCamera
+		local var75 = var74
 		
 		if status_4_1 and v.parent then
-			var226.Parent = v.parent
+			var75.Parent = v.parent
 		end
 		for i_1, v_1 in ipairs(v.props) do
-			var226[v_1] = key[v_1]
+			var75[v_1] = key[v_1]
 		end
-		var226.Enabled = key.Enabled
-		v.set(var226)
+		var75.Enabled = key.Enabled
+		v.set(var75)
 	end
 	runService:BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, StepFreecam)
 	t_6.StartCapture()
 end
 
 StopFreecam = function()
-	-- upvalues: var36 (write), var37 (write), var38 (write), var40 (write), t_3 (write), var26 (ref), var24 (write), list (write), t_1 (ref), status_3_1 (write), var59 (write), var8 (write), var42 (write), var43 (write), t_6 (ref), runService (ref), t_2 (write)
-	if var36 then
-		var36:Disconnect()
-		var36 = nil
+	-- upvalues: var17 (write), var18 (write), var19 (write), var20 (write), t_3 (write), var12 (ref), var10 (write), list (write), t_1 (ref), status_3_1 (write), var32 (write), var1 (write), var22 (write), var23 (write), t_6 (ref), runService (ref), t_2 (write)
+	if var17 then
+		var17:Disconnect()
+		var17 = nil
 	end
-	if var37 then
-		var37:Disconnect()
-		var37 = nil
+	if var18 then
+		var18:Disconnect()
+		var18 = nil
 	end
-	var38 = false
-	var40 = 1
+	var19 = false
+	var20 = 1
 	t_3 = {}
-	var26()
-	var24 = false
+	var12()
+	var10 = false
 	
 	for i, v in ipairs(list) do
-		local var233 = v.get()
+		local var76 = v.get()
 		
-		if var233 then
+		if var76 then
 			local key = t_1[v.key]
-			key.Enabled = var233.Enabled
+			key.Enabled = var76.Enabled
 			
 			for i_1, v_1 in ipairs(v.props) do
-				key[v_1] = var233[v_1]
+				key[v_1] = var76[v_1]
 			end
-			var233:Destroy()
+			var76:Destroy()
 			v.set(nil)
 		end
 	end
-	if status_3_1 and var59 then
-		var59.panel.Visible = false
+	if status_3_1 and var32 then
+		var32.panel.Visible = false
 	end
-	if var8 and var8.Parent then
-		var8.Enabled = false
+	if var1 and var1.Parent then
+		var1.Enabled = false
 	end
-	var42 = false
-	var43 = false
+	var22 = false
+	var23 = false
 	t_6.StopCapture()
 	runService:UnbindFromRenderStep("Freecam")
 	t_2.Pop()
 end
 
-var85 = false
+var53 = false
 
 ToggleFreecam = function()
-	-- upvalues: var85 (write), StopFreecam (ref), color3 (ref), status_2_1 (write), t (ref)
-	if var85 then
+	-- upvalues: var53 (write), StopFreecam (ref), color3 (ref), status_2_1 (write), t (ref)
+	if var53 then
 		StopFreecam()
 	else
 		color3()
 	end
-	var85 = not var85
+	var53 = not var53
 	
 	if status_2_1 then
-		script:SetAttribute(t.AttributeName, var85)
+		script:SetAttribute(t.AttributeName, var53)
 	end
 end
 
-var47.StateChanged:Connect(function(p71)
-	-- upvalues: var85 (write), StopFreecam (ref), color3 (ref), status_2_1 (write), t (ref)
-	if p71 then
-		if var85 then
+var26.StateChanged:Connect(function(p14)
+	-- upvalues: var53 (write), StopFreecam (ref), color3 (ref), status_2_1 (write), t (ref)
+	if p14 then
+		if var53 then
 			StopFreecam()
 		else
 			color3()
 		end
-		var85 = not var85
+		var53 = not var53
 		
 		if status_2_1 then
-			script:SetAttribute(t.AttributeName, var85)
+			script:SetAttribute(t.AttributeName, var53)
 		end
 	end
 end)
 
 if status_2_1 then
-	script:SetAttribute(t.AttributeName, var85)
+	script:SetAttribute(t.AttributeName, var53)
 	script:GetAttributeChangedSignal(t.AttributeName):Connect(function()
-		-- upvalues: t (ref), var85 (write), color3 (ref), StopFreecam (ref)
+		-- upvalues: t (ref), var53 (write), color3 (ref), StopFreecam (ref)
 		local attributeNameAttribute = script:GetAttribute(t.AttributeName)
 		
 		if typeof(attributeNameAttribute) ~= "boolean" then
-			script:SetAttribute(t.AttributeName, var85)
+			script:SetAttribute(t.AttributeName, var53)
 			
 			return
-		elseif attributeNameAttribute ~= var85 then
+		elseif attributeNameAttribute ~= var53 then
 			if attributeNameAttribute then
 				color3()
-				var85 = true
+				var53 = true
 				
 				return
 			end
 			StopFreecam()
-			var85 = false
+			var53 = false
 		end
 	end)
 end

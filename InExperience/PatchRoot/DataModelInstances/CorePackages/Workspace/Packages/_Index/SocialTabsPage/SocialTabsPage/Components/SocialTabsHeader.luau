@@ -13,7 +13,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 
 return function(value)
 	-- upvalues: useSocialTabsContextModule (ref), useNavigation (ref), reactModule (ref), view (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref)
-	local var4 = useNavigation()
+	local var1 = useNavigation()
 	
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-x-xlarge bg-surface-0",
@@ -25,9 +25,9 @@ return function(value)
 			size = iconSize.Medium,
 			variant = buttonVariant.Utility,
 			onActivated = reactModule.useCallback(function()
-				-- upvalues: var4 (ref)
-				var4.goBack()
-			end, { var4 })
+				-- upvalues: var1 (ref)
+				var1.goBack()
+			end, { var1 })
 		}),
 		Title = reactModule.createElement(text, {
 			tag = "fill auto-y text-heading-medium text-align-x-left text-truncate-end content-emphasis",

@@ -13,30 +13,30 @@ local usePrevious = reactUtilsModule.usePrevious
 
 return function()
 	-- upvalues: sceneAnalysisContextModule (ref), useAudioSourcesModule (ref), useCameraStateModule (ref), usePrevious (ref), useCallback (ref), sortByAudibleVolumeModule (ref), useTimedLoopModule (ref), useEffect (ref), enumsModule (ref)
-	local var9 = sceneAnalysisContextModule.use()
-	local var10 = useAudioSourcesModule()
-	local var11 = useCameraStateModule()
-	local var12 = usePrevious(var11)
-	local var13 = useCallback(function()
-		-- upvalues: var9 (ref), sortByAudibleVolumeModule (copy), var10 (ref)
-		var9.setAudibleSounds(sortByAudibleVolumeModule(var10))
-	end, { var10, var9.setAudibleSounds })
+	local var1 = sceneAnalysisContextModule.use()
+	local var2 = useAudioSourcesModule()
+	local var3 = useCameraStateModule()
+	local var4 = usePrevious(var3)
+	local var5 = useCallback(function()
+		-- upvalues: var1 (ref), sortByAudibleVolumeModule (copy), var2 (ref)
+		var1.setAudibleSounds(sortByAudibleVolumeModule(var2))
+	end, { var2, var1.setAudibleSounds })
 	useTimedLoopModule(1, function()
-		-- upvalues: var13 (ref)
-		var13()
+		-- upvalues: var5 (ref)
+		var5()
 	end)
 	useEffect(function()
-		-- upvalues: var9 (ref), var10 (ref), var13 (ref)
-		if #var9.audibleSounds == 0 and #var10 > 0 then
-			var13()
+		-- upvalues: var1 (ref), var2 (ref), var5 (ref)
+		if #var1.audibleSounds == 0 and #var2 > 0 then
+			var5()
 		end
-	end, { #var9.audibleSounds, #var10, var13 })
+	end, { #var1.audibleSounds, #var2, var5 })
 	useEffect(function()
-		-- upvalues: var11 (ref), var12 (ref), enumsModule (copy), var13 (ref)
-		if var11 ~= var12 and var11 == enumsModule.CameraState.Idle then
-			var13()
+		-- upvalues: var3 (ref), var4 (ref), enumsModule (copy), var5 (ref)
+		if var3 ~= var4 and var3 == enumsModule.CameraState.Idle then
+			var5()
 		end
-	end, { var11, var12, var13 })
+	end, { var3, var4, var5 })
 	
-	return var9.audibleSounds
+	return var1.audibleSounds
 end

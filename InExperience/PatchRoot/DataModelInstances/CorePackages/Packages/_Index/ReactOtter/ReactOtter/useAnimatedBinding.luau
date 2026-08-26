@@ -3,9 +3,9 @@ local reactModule = require(parent.React)
 local _ = require(parent.Otter)
 local useMotorModule = require(script.Parent.useMotor)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reactModule (ref), useMotorModule (ref)
-	local var2, var3 = reactModule.useBinding(p0)
+	local var1, var2 = reactModule.useBinding(p1)
 	
-	return var2, useMotorModule(p0, var3, p1)
+	return var1, useMotorModule(p1, var2, p2)
 end

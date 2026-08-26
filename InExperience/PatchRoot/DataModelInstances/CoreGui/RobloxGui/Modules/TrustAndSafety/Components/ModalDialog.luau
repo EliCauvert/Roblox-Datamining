@@ -27,16 +27,16 @@ modalDialog.validateProps = tModule.strictInterface({
 	onBackButtonActivated = tModule.optional(tModule.callback)
 })
 
-function modalDialog.init(p0)
+function modalDialog.init(p1)
 	-- upvalues: virtualKeyboardMonitorModule (ref)
-	p0.virtualKeyboardMonitor = virtualKeyboardMonitorModule.getInstance()
+	p1.virtualKeyboardMonitor = virtualKeyboardMonitorModule.getInstance()
 	
 	function p0.onOverlayActivated()
-		-- upvalues: p0 (ref)
-		if p0.virtualKeyboardMonitor:isKeyboardJustOff() then
+		-- upvalues: p1 (ref)
+		if p1.virtualKeyboardMonitor:isKeyboardJustOff() then
 			return
 		end
-		p0.props.onDismiss()
+		p1.props.onDismiss()
 	end
 end
 
@@ -62,10 +62,10 @@ function modalDialog.renderHeaderBarRight(_)
 	end
 end
 
-function modalDialog.render(p2)
+function modalDialog.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetButton (ref), assetsModule (ref), headerBar (ref), dividerModule (ref)
 	local vector2_1, uDim2
-	local props = p2.props
+	local props = p1.props
 	local vector2 = Vector2.new(math.min(props.screenSize.X, 540), math.min(props.screenSize.Y, 375))
 	local _ = nil
 	local _ = nil
@@ -82,8 +82,8 @@ function modalDialog.render(p2)
 	if not props.actionButtons then
 		minValue += 96
 	end
-	return withStyle(function(p3)
-		-- upvalues: roactModule (copy), props (ref), p2 (ref), imageSetButton (copy), vector2_1 (write), assetsModule (copy), uDim2 (write), vector2 (ref), headerBar (copy), dividerModule (copy), minValue (write)
+	return withStyle(function(p2)
+		-- upvalues: roactModule (copy), props (ref), p1 (ref), imageSetButton (copy), vector2_1 (write), assetsModule (copy), uDim2 (write), vector2 (ref), headerBar (copy), dividerModule (copy), minValue (write)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
@@ -91,21 +91,21 @@ function modalDialog.render(p2)
 		}, {
 			Overlay = roactModule.createElement("TextButton", {
 				AutoButtonColor = false,
-				BackgroundColor3 = p3.Theme.Overlay.Color,
-				BackgroundTransparency = p3.Theme.Overlay.Transparency,
+				BackgroundColor3 = p2.Theme.Overlay.Color,
+				BackgroundTransparency = p2.Theme.Overlay.Transparency,
 				BorderSizePixel = 0,
 				Size = UDim2.fromScale(1, 1),
 				Text = "",
 				ZIndex = -10,
-				[roactModule.Event.Activated] = p2.onOverlayActivated
+				[roactModule.Event.Activated] = p1.onOverlayActivated
 			}),
 			Dialog = roactModule.createElement(imageSetButton, {
 				Active = true,
 				BackgroundTransparency = 1,
 				AnchorPoint = vector2_1,
 				Image = assetsModule.Images.RoundedRect.Image,
-				ImageColor3 = p3.Theme.BackgroundUIDefault.Color,
-				ImageTransparency = p3.Theme.BackgroundUIDefault.Transparency,
+				ImageColor3 = p2.Theme.BackgroundUIDefault.Color,
+				ImageTransparency = p2.Theme.BackgroundUIDefault.Transparency,
 				Position = uDim2,
 				ScaleType = assetsModule.Images.RoundedRect.ScaleType,
 				Size = UDim2.fromOffset(vector2.X, vector2.Y),
@@ -124,8 +124,8 @@ function modalDialog.render(p2)
 					Bar = props.headerBar or (roactModule.createElement(headerBar, {
 						backgroundTransparency = 1,
 						barHeight = 48,
-						renderLeft = p2:renderHeaderBarLeft(),
-						renderRight = p2:renderHeaderBarRight(),
+						renderLeft = p1:renderHeaderBarLeft(),
+						renderRight = p1:renderHeaderBarRight(),
 						title = props.titleText
 					}) or nil)
 				}),
@@ -154,12 +154,12 @@ function modalDialog.render(p2)
 	end)
 end
 
-function modalDialog.bindActions(p4)
+function modalDialog.bindActions(p1)
 	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("ModalDialogDismiss", function(_, p5, _)
-		-- upvalues: p4 (ref)
-		if p5 == Enum.UserInputState.Begin then
-			p4.props.onDismiss()
+	contextActionService:BindCoreAction("ModalDialogDismiss", function(_, p2, _)
+		-- upvalues: p1 (ref)
+		if p2 == Enum.UserInputState.Begin then
+			p1.props.onDismiss()
 		end
 	end, false, Enum.KeyCode.Escape)
 end
@@ -169,23 +169,23 @@ function modalDialog.unbindActions(_)
 	contextActionService:UnbindCoreAction("ModalDialogDismiss")
 end
 
-function modalDialog.didMount(p6)
-	if p6.props.visible then
-		p6:bindActions()
+function modalDialog.didMount(p1)
+	if p1.props.visible then
+		p1:bindActions()
 	end
 end
 
-function modalDialog.didUpdate(p7)
-	if p7.props.visible then
-		p7:bindActions()
+function modalDialog.didUpdate(p1)
+	if p1.props.visible then
+		p1:bindActions()
 		
 		return
 	end
-	p7:unbindActions()
+	p1:unbindActions()
 end
 
-function modalDialog.willUnmount(p8)
-	p8:unbindActions()
+function modalDialog.willUnmount(p1)
+	p1:unbindActions()
 end
 
 return modalDialog

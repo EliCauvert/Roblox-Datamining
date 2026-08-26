@@ -27,27 +27,27 @@ function t.new()
 	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		tbl._defaultProps.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	function tbl._sendEvent(p0, p1)
+	function tbl._sendEvent(p1, p2)
 		-- upvalues: cryoModule (copy), tbl (ref), rbxAnalyticsService (copy)
-		rbxAnalyticsService:SendEventDeferred(tbl._target, tbl._context, p0, cryoModule.Dictionary.join(tbl._defaultProps, p1 or {}))
+		rbxAnalyticsService:SendEventDeferred(tbl._target, tbl._context, p1, cryoModule.Dictionary.join(tbl._defaultProps, p2 or {}))
 		
 		return nil
 	end
 	
-	function tbl._onButtonActivated(p2, p3)
+	function tbl._onButtonActivated(p1, p2)
 		-- upvalues: tbl (ref), constantsModule (copy)
 		return tbl._sendEvent(constantsModule.Analytics.EventNameTopBarButtonActivated, {
-			button = p2,
-			status = if p3 then constantsModule.Analytics.StatusActive else constantsModule.Analytics.StatusInactive
+			button = p1,
+			status = if p2 then constantsModule.Analytics.StatusActive else constantsModule.Analytics.StatusInactive
 		})
 	end
 	
 	return tbl
 end
 
-function t:onChatButtonActivated(p4)
+function t:onChatButtonActivated(p1)
 	-- upvalues: constantsModule (ref)
-	return self._onButtonActivated(constantsModule.Analytics.ChatButtonName, p4)
+	return self._onButtonActivated(constantsModule.Analytics.ChatButtonName, p1)
 end
 
 function t:onMoreMenuActivated()
@@ -55,19 +55,19 @@ function t:onMoreMenuActivated()
 	return self._onButtonActivated(constantsModule.Analytics.MoreMenuButtonName, true)
 end
 
-function t:onInventoryActivated(p5)
+function t:onInventoryActivated(p1)
 	-- upvalues: constantsModule (ref)
-	return self._onButtonActivated(constantsModule.Analytics.InventoryButtonName, p5)
+	return self._onButtonActivated(constantsModule.Analytics.InventoryButtonName, p1)
 end
 
-function t:onLeaderboardActivated(p6)
+function t:onLeaderboardActivated(p1)
 	-- upvalues: constantsModule (ref)
-	return self._onButtonActivated(constantsModule.Analytics.LeaderboardButtonName, p6)
+	return self._onButtonActivated(constantsModule.Analytics.LeaderboardButtonName, p1)
 end
 
-function t:onEmotesActivated(p7)
+function t:onEmotesActivated(p1)
 	-- upvalues: constantsModule (ref)
-	return self._onButtonActivated(constantsModule.Analytics.EmotesButtonName, p7)
+	return self._onButtonActivated(constantsModule.Analytics.EmotesButtonName, p1)
 end
 
 function t:onShowGamepadNavigationDialog()

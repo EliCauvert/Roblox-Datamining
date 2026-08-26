@@ -19,48 +19,48 @@ local function waitForFirst(...)
 end
 
 return {
-	registerHumanoidReady = function(p0)
+	registerHumanoidReady = function(p1)
 		-- upvalues: waitForFirst (ref), playersService (ref)
-		local function characterAdded(p1, p2)
-			-- upvalues: waitForFirst (copy), p0 (ref)
-			if not p2.Parent then
-				waitForFirst(p2.AncestryChanged, p1.CharacterAdded)
+		local function characterAdded(p2, p3)
+			-- upvalues: waitForFirst (copy), p1 (ref)
+			if not p3.Parent then
+				waitForFirst(p3.AncestryChanged, p2.CharacterAdded)
 			end
-			if p1.Character ~= p2 or not p2.Parent then return end
-			local humanoid = p2:FindFirstChildOfClass("Humanoid")
-			while p2:IsDescendantOf(game) and not humanoid do
-				waitForFirst(p2.ChildAdded, p2.AncestryChanged, p1.CharacterAdded)
-				humanoid = p2:FindFirstChildOfClass("Humanoid")
+			if p2.Character ~= p3 or not p3.Parent then return end
+			local humanoid = p3:FindFirstChildOfClass("Humanoid")
+			while p3:IsDescendantOf(game) and not humanoid do
+				waitForFirst(p3.ChildAdded, p3.AncestryChanged, p2.CharacterAdded)
+				humanoid = p3:FindFirstChildOfClass("Humanoid")
 			end
-			if p1.Character ~= p2 or not p2:IsDescendantOf(game) then return end
-			local humanoidRootPart = p2:FindFirstChild("HumanoidRootPart")
-			while p2:IsDescendantOf(game) and not humanoidRootPart do
-				waitForFirst(p2.ChildAdded, p2.AncestryChanged, humanoid.AncestryChanged, p1.CharacterAdded)
-				humanoidRootPart = p2:FindFirstChild("HumanoidRootPart")
+			if p2.Character ~= p3 or not p3:IsDescendantOf(game) then return end
+			local humanoidRootPart = p3:FindFirstChild("HumanoidRootPart")
+			while p3:IsDescendantOf(game) and not humanoidRootPart do
+				waitForFirst(p3.ChildAdded, p3.AncestryChanged, humanoid.AncestryChanged, p2.CharacterAdded)
+				humanoidRootPart = p3:FindFirstChild("HumanoidRootPart")
 			end
-			if humanoidRootPart and humanoid:IsDescendantOf(game) and (p2:IsDescendantOf(game) and p1.Character == p2) then
-				p0(p1, p2, humanoid)
+			if humanoidRootPart and humanoid:IsDescendantOf(game) and (p3:IsDescendantOf(game) and p2.Character == p3) then
+				p1(p2, p3, humanoid)
 			end
 		end
 		
-		local function playerAdded(p3)
+		local function playerAdded(p4)
 			-- upvalues: characterAdded (ref)
-			local characterAddedConnection = p3.CharacterAdded:Connect(function(p4)
-				-- upvalues: characterAdded (copy), p3 (ref)
-				characterAdded(p3, p4)
+			local characterAddedConnection = p4.CharacterAdded:Connect(function(p5)
+				-- upvalues: characterAdded (copy), p4 (ref)
+				characterAdded(p4, p5)
 			end)
 			local ancestryChangedConnection = nil
-			ancestryChangedConnection = p3.AncestryChanged:Connect(function(_, p5)
+			ancestryChangedConnection = p4.AncestryChanged:Connect(function(_, p5)
 				-- upvalues: ancestryChangedConnection (write), characterAddedConnection (ref)
 				if not game:IsAncestorOf(p5) then
 					ancestryChangedConnection:Disconnect()
 					characterAddedConnection:Disconnect()
 				end
 			end)
-			local character = p3.Character
+			local character = p4.Character
 			
 			if character then
-				characterAdded(p3, character)
+				characterAdded(p4, character)
 			end
 		end
 		

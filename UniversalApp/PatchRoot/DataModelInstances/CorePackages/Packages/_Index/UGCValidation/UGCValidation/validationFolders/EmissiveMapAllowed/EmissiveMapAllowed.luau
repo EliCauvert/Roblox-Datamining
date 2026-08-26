@@ -21,8 +21,8 @@ local t = {
 	expectedFailures = {}
 }
 
-local function _(p0)
-	for i, v in p0 do
+local function _(p1)
+	for i, v in p1 do
 		if v.EmissiveMask then
 			return true
 		end
@@ -30,19 +30,19 @@ local function _(p0)
 	return false
 end
 
-local function checkEmissivePermission(p1)
+local function checkEmissivePermission(p2)
 	-- upvalues: APIUtilModule (ref), httpService (ref)
-	if not p1.assetType then
+	if not p2.assetType then
 		return false, "Unable to determine asset type for emissive permission check"
 	end
-	local var6, var7 = APIUtilModule.requestAndRetryGet(string.format("https://itemconfiguration.%s/v1/permissions/action-allowed-for-item-type?action=1&assetType=%s", APIUtilModule.getBaseDomain(), tostring(p1.assetType.Value)))
+	local var1, var2 = APIUtilModule.requestAndRetryGet(string.format("https://itemconfiguration.%s/v1/permissions/action-allowed-for-item-type?action=1&assetType=%s", APIUtilModule.getBaseDomain(), tostring(p2.assetType.Value)))
 	
-	if not var6 then
-		return false, "Failed to check emissive map permission: " .. tostring(var7)
+	if not var1 then
+		return false, "Failed to check emissive map permission: " .. tostring(var2)
 	end
 	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), var7 (ref)
-		return httpService:JSONDecode(var7)
+		-- upvalues: httpService (copy), var2 (ref)
+		return httpService:JSONDecode(var2)
 	end)
 	
 	if not ok then
@@ -58,11 +58,11 @@ end
 
 function t.run(p2, p3)
 	-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref), checkEmissivePermission (ref)
-	local var8
+	local var1
 	for i, v in p3.meshTextures do
 		if v.EmissiveMask then
-			var8 = true
-			if not var8 then return end
+			var1 = true
+			if not var1 then return end
 			local consumerEnv = p3.consumerConfig.consumerEnv
 			
 			if consumerEnv == validationEnumsModule.ConsumerEnv.IEC then
@@ -75,19 +75,19 @@ function t.run(p2, p3)
 				end
 				return
 			else
-				local var9, var10 = checkEmissivePermission(p3.uploadEnum)
+				local var2, var3 = checkEmissivePermission(p3.uploadEnum)
 				
-				if var10 then
-					p2:forceError(var10)
+				if var3 then
+					p2:forceError(var3)
 				end
-				if not var9 then
+				if not var2 then
 					p2:fail(errorSourceStringsModule.Keys.EmissiveMap_NotAllowed)
 				end
 				return
 			end
 		end
 	end
-	var8 = false
+	var1 = false
 end
 
 return t

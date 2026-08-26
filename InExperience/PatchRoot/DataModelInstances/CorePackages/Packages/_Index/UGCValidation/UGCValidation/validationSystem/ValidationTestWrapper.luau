@@ -20,101 +20,101 @@ local t = {
 	lastUpdated = { 25, 9, 24 }
 }
 
-local function reportSingleResult(p0, p1, p2, p3, p4)
+local function reportSingleResult(p1, p2, p3, p4, p5)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t, {
 		customFields = {
-			validationJobId = p1.jobId,
-			validationSource = p1.consumerConfig.source,
-			validationEnum = p0,
-			status = p2,
-			durationMs = p4,
-			additional_info = p3
+			validationJobId = p2.jobId,
+			validationSource = p2.consumerConfig.source,
+			validationEnum = p1,
+			status = p3,
+			durationMs = p5,
+			additional_info = p4
 		}
 	})
 end
 
-local function getMissingData(p5, p6)
+local function getMissingData(p1, p2)
 	-- upvalues: fetchAllDesiredDataModule (ref)
 	local t = {}
 	
-	for i, v in p6 do
-		if p5[v] == nil or p5[v] == fetchAllDesiredDataModule.DATA_FETCH_FAILURE then
+	for i, v in p2 do
+		if p1[v] == nil or p1[v] == fetchAllDesiredDataModule.DATA_FETCH_FAILURE then
 			table.insert(t, v)
 		end
 	end
 	return t
 end
 
-local function _(p7, p8, p9)
+local function _(p3, p4, p5)
 	-- upvalues: reportSingleResult (ref)
-	local var14 = p9:complete()
-	reportSingleResult(p7, p8, var14.status, var14.telemetryContext, var14.duration)
+	local var1 = p5:complete()
+	reportSingleResult(p3, p4, var1.status, var1.telemetryContext, var1.duration)
 	
-	return var14
+	return var1
 end
 
-return function(p10, p11, p12)
+return function(p3, p4, p5)
 	-- upvalues: validationModuleLoaderModule (ref), validationReporterModule (ref), validationEnumsModule (ref), reportSingleResult (ref), getMissingData (ref), validationConstantsModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), getFFlagUGCValidationFetchErrorMethodModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
 	local v
-	local validationModule = validationModuleLoaderModule.getValidationModule(p10)
-	local var16 = validationReporterModule.new(p10, p11)
+	local validationModule = validationModuleLoaderModule.getValidationModule(p3)
+	local var1 = validationReporterModule.new(p3, p4)
 	
 	for i, v in validationModule.prereqTests do
-		if p12[v] ~= validationEnumsModule.Status.PASS then
-			local var22 = var16:complete()
-			reportSingleResult(p10, p11, var22.status, var22.telemetryContext, var22.duration)
+		if p5[v] ~= validationEnumsModule.Status.PASS then
+			local var2 = var1:complete()
+			reportSingleResult(p3, p4, var2.status, var2.telemetryContext, var2.duration)
 			
-			return var22
+			return var2
 		end
 	end
 	local status
-	local var17 = getMissingData(p11, validationModule.requiredData)
+	local var3 = getMissingData(p4, validationModule.requiredData)
 	
-	if #var17 > 0 then
-		var16:err(`Missing required data: {table.concat(var17, ", ")}`)
-		local var18 = var16:complete()
-		reportSingleResult(p10, p11, var18.status, var18.telemetryContext, var18.duration)
+	if #var3 > 0 then
+		var1:err(`Missing required data: {table.concat(var3, ", ")}`)
+		local var4 = var1:complete()
+		reportSingleResult(p3, p4, var4.status, var4.telemetryContext, var4.duration)
 		
-		return var18
+		return var4
 	elseif validationModule.isAssetQualityModule then
-		local var19 = p11.aqsSummaryData[p10]
+		local var5 = p4.aqsSummaryData[p3]
 		
-		if var19 and var19.Error then
+		if var5 and var5.Error then
 			status = false
 			
-			for i_1, v_1 in var19.Error do
+			for i_1, v_1 in var5.Error do
 				if validationModule.knownAqsUserErrors[v_1] == nil then
 					if table.find(validationConstantsModule.AQSInternalErrorEnum, v_1) ~= nil and status == false then
-						var16:fail(errorSourceStringsModule.Keys.AQSInternalError)
+						var1:fail(errorSourceStringsModule.Keys.AQSInternalError)
 						status = true
 						continue
 					end
-					var16:err(`Unexpected error enum {v_1}`)
-					local var21 = var16:complete()
-					reportSingleResult(p10, p11, var21.status, var21.telemetryContext, var21.duration)
+					var1:err(`Unexpected error enum {v_1}`)
+					local var6 = var1:complete()
+					reportSingleResult(p3, p4, var6.status, var6.telemetryContext, var6.duration)
 					
-					return var21
+					return var6
 				else
-					var16:fail(validationModule.knownAqsUserErrors[v_1])
+					var1:fail(validationModule.knownAqsUserErrors[v_1])
 				end
 			end
-			v = var16:complete()
-			reportSingleResult(p10, p11, v.status, v.telemetryContext, v.duration)
+			v = var1:complete()
+			reportSingleResult(p3, p4, v.status, v.telemetryContext, v.duration)
 			
 			return v
 		else
-			var16:begin()
+			var1:begin()
 			
-			if #getMissingData(p11, validationModule.conditionalData) > 0 then
-				status = var16:complete()
-				reportSingleResult(p10, p11, status.status, status.telemetryContext, status.duration)
+			if #getMissingData(p4, validationModule.conditionalData) > 0 then
+				status = var1:complete()
+				reportSingleResult(p3, p4, status.status, status.telemetryContext, status.duration)
 				
 				return status
 			end
 			ok, status = pcall(function()
-				-- upvalues: validationModule (ref), var16 (ref), p11 (ref)
-				validationModule.run(var16, p11)
+				-- upvalues: validationModule (ref), var1 (ref), p4 (ref)
+				validationModule.run(var1, p4)
 			end)
 			
 			if not ok then
@@ -122,23 +122,23 @@ return function(p10, p11, p12)
 					error(status.message, 0)
 				end
 				if getFFlagUGCValidationFetchErrorMethodModule() and type(status) == "table" and status.__fetchError then
-					if p11.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+					if p4.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
 						error(status.message, 0)
 					end
-					var16:err(status.message)
-					v = var16:complete()
-					reportSingleResult(p10, p11, v.status, v.telemetryContext, v.duration)
+					var1:err(status.message)
+					v = var1:complete()
+					reportSingleResult(p3, p4, v.status, v.telemetryContext, v.duration)
 					
 					return v
 				elseif getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
 					print("Validation error:", status)
 					print("As this is in debug mode, we will re-call the function for a full error trace: ")
-					validationModule.run(var16, p11)
+					validationModule.run(var1, p4)
 				end
-				var16:err(status)
+				var1:err(status)
 			end
-			v = var16:complete()
-			reportSingleResult(p10, p11, v.status, v.telemetryContext, v.duration)
+			v = var1:complete()
+			reportSingleResult(p3, p4, v.status, v.telemetryContext, v.duration)
 			
 			return v
 		end

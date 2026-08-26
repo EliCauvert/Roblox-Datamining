@@ -14,11 +14,11 @@ local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDef
 local localization = require(parent.RobloxAppLocales).Localization
 local unitTestContainer = roact.Component:extend("UnitTestContainer")
 
-function unitTestContainer.init(p0)
+function unitTestContainer.init(p1)
 	-- upvalues: layoutValuesModule (ref), rodux (ref), reducerModule (ref), localizationService (ref), localization (ref)
-	p0.layoutValues = layoutValuesModule.new(false).layout
-	p0.store = p0.props.overrideStore or rodux.Store.new(reducerModule, {})
-	p0.localizationContext = localization.new(p0.props.overrideLocale or localizationService.RobloxLocaleId)
+	p1.layoutValues = layoutValuesModule.new(false).layout
+	p1.store = p1.props.overrideStore or rodux.Store.new(reducerModule, {})
+	p1.localizationContext = localization.new(p1.props.overrideLocale or localizationService.RobloxLocaleId)
 end
 
 function unitTestContainer.render(p1)

@@ -22,7 +22,7 @@ local list = {
 	if fFlagLuaAppAddVideoIneligiblePlayabilityStatus then playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser else nil
 }
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), cryoModule (ref), list (ref)
-	return if fFlagLuaAppUsePrevalidatedVideoGamePlayability and p2 then true else not (not p0 or p1 == nil) and (p1.isPlayable == true or cryoModule.List.find(list, p1.playabilityStatus) == nil)
+	return if fFlagLuaAppUsePrevalidatedVideoGamePlayability and p3 then true else not (not p1 or p2 == nil) and (p2.isPlayable == true or cryoModule.List.find(list, p2.playabilityStatus) == nil)
 end

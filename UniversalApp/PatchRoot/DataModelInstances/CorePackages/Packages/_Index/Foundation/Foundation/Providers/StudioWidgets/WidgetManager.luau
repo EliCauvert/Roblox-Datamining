@@ -76,14 +76,14 @@ function t:_flushWith(p1, p2)
 		end)
 	end
 	local var1 = if flagsModule.FoundationWidgetManagerSnapshotFlush then {} else nil
-	local var2 = filter(values(p2), function(p1)
+	local var2 = filter(values(p2), function(p3)
 		-- upvalues: flagsModule (copy), var1 (ref)
-		local var1 = p1.Widget:FindFirstAncestorWhichIsA("LayerCollector") ~= nil
+		local var3 = p3.Widget:FindFirstAncestorWhichIsA("LayerCollector") ~= nil
 		
-		if flagsModule.FoundationWidgetManagerSnapshotFlush and not var1 then
-			table.insert(var1, p1)
+		if flagsModule.FoundationWidgetManagerSnapshotFlush and not var3 then
+			table.insert(var3, p3)
 		end
-		return var1
+		return var3
 	end)
 	
 	if flagsModule.FoundationWidgetManagerSnapshotFlush then
@@ -91,21 +91,21 @@ function t:_flushWith(p1, p2)
 			local var3 = studioUriModule.toString(v_1.Uri)
 			
 			if not self._deferredAncestrySignals[var3] then
-				self._deferredAncestrySignals[var3] = v_1.Widget.AncestryChanged:Connect(function(_, p1)
+				self._deferredAncestrySignals[var3] = v_1.Widget.AncestryChanged:Connect(function(_, p3)
 					-- upvalues: self (ref), var3 (ref), v_1 (ref)
-					if p1 == nil then
-						local var1 = self._deferredAncestrySignals[var3]
+					if p3 == nil then
+						local var4 = self._deferredAncestrySignals[var3]
 						
-						if var1 then
-							var1:Disconnect()
+						if var4 then
+							var4:Disconnect()
 							self._deferredAncestrySignals[var3] = nil
 						end
 						return
 					elseif v_1.Widget:FindFirstAncestorWhichIsA("LayerCollector") then
-						local var2 = self._deferredAncestrySignals[var3]
+						local var5 = self._deferredAncestrySignals[var3]
 						
-						if var2 then
-							var2:Disconnect()
+						if var5 then
+							var5:Disconnect()
 							self._deferredAncestrySignals[var3] = nil
 						end
 						self:register(v_1.Uri, v_1.Widget)
@@ -150,9 +150,9 @@ function t:_flushWith(p1, p2)
 				-- upvalues: self (ref), v_1 (ref)
 				self:register(v_1.Uri, v_1.Widget)
 			end),
-			AncestryChanged = v_1.Widget.AncestryChanged:Connect(function(_, p1)
+			AncestryChanged = v_1.Widget.AncestryChanged:Connect(function(_, p3)
 				-- upvalues: self (ref), v_1 (ref)
-				if not p1 then
+				if not p3 then
 					self:deregister(v_1.Uri)
 				end
 			end)
@@ -181,48 +181,48 @@ function t:_run()
 	end)
 end
 
-function t:register(p1, p2)
+function t:register(p3, p4)
 	-- upvalues: studioUriModule (ref), flagsModule (ref)
-	local pluginGui = p2:FindFirstAncestorWhichIsA("PluginGui")
-	local var1 = pluginGui or p2:FindFirstAncestorWhichIsA("ScreenGui")
+	local pluginGui = p4:FindFirstAncestorWhichIsA("PluginGui")
+	local var6 = pluginGui or p4:FindFirstAncestorWhichIsA("ScreenGui")
 	
-	if var1 then
-		local var2 = studioUriModule.toString(p1)
+	if var6 then
+		local var7 = studioUriModule.toString(p3)
 		
 		if flagsModule.FoundationWidgetManagerSnapshotFlush then
-			local var3 = self._deferredAncestrySignals[var2]
+			local var8 = self._deferredAncestrySignals[var7]
 			
-			if var3 then
-				var3:Disconnect()
-				self._deferredAncestrySignals[var2] = nil
+			if var8 then
+				var8:Disconnect()
+				self._deferredAncestrySignals[var7] = nil
 			end
 		end
-		self._registeredWidgets[var2] = p2
-		self._pendingRegisters[var2] = { Uri = p1, Widget = p2, DEPRECATED_PluginGui = var1 }
-		self._pendingDeregisters[var2] = nil
+		self._registeredWidgets[var7] = p4
+		self._pendingRegisters[var7] = { Uri = p3, Widget = p4, DEPRECATED_PluginGui = var6 }
+		self._pendingDeregisters[var7] = nil
 		self:_run()
 	end
 end
 
-function t:refreshAsync(p1)
+function t:refreshAsync(p3)
 	-- upvalues: studioUriModule (ref)
-	local var1 = self._registeredWidgets[studioUriModule.toString(p1)]
+	local var6 = self._registeredWidgets[studioUriModule.toString(p3)]
 	
-	if not var1 then
+	if not var6 then
 		return false
 	end
-	local pluginGui = var1:FindFirstAncestorWhichIsA("PluginGui")
-	local var2 = pluginGui or var1:FindFirstAncestorWhichIsA("ScreenGui")
+	local pluginGui = var6:FindFirstAncestorWhichIsA("PluginGui")
+	local var7 = pluginGui or var6:FindFirstAncestorWhichIsA("ScreenGui")
 	
-	if var2 then
+	if var7 then
 		self._widgetsApi:RegisterAsync({
 			{
-				Uri = p1,
-				Widget = var1,
-				DEPRECATED_PluginGui = var2,
-				Position = var1.AbsolutePosition,
-				Size = var1.AbsoluteSize,
-				Visible = var1:GetStyled("Visible")
+				Uri = p3,
+				Widget = var6,
+				DEPRECATED_PluginGui = var7,
+				Position = var6.AbsolutePosition,
+				Size = var6.AbsoluteSize,
+				Visible = var6:GetStyled("Visible")
 			}
 		})
 		
@@ -231,31 +231,31 @@ function t:refreshAsync(p1)
 	return false
 end
 
-function t:deregister(p1, p2)
+function t:deregister(p3, p4)
 	-- upvalues: studioUriModule (ref), flagsModule (ref), loggerModule (ref)
-	local var1 = studioUriModule.toString(p1)
-	self._pendingDeregisters[var1] = p1
+	local var6 = studioUriModule.toString(p3)
+	self._pendingDeregisters[var6] = p3
 	
 	if flagsModule.FoundationWidgetManagerSnapshotFlush then
-		self._pendingRegisters[var1] = nil
-		local var2 = self._deferredAncestrySignals[var1]
+		self._pendingRegisters[var6] = nil
+		local var7 = self._deferredAncestrySignals[var6]
 		
-		if var2 then
-			var2:Disconnect()
-			self._deferredAncestrySignals[var1] = nil
+		if var7 then
+			var7:Disconnect()
+			self._deferredAncestrySignals[var6] = nil
 		end
 	end
-	local var3 = self._signals[var1]
+	local var8 = self._signals[var6]
 	
-	if var3 then
-		if p2 == nil or var3.Widget == p2 then
-			var3.PositionChanged:Disconnect()
-			var3.SizeChanged:Disconnect()
-			var3.VisibleChanged:Disconnect()
-			var3.AncestryChanged:Disconnect()
-			self._signals[var1] = nil
+	if var8 then
+		if p4 == nil or var8.Widget == p4 then
+			var8.PositionChanged:Disconnect()
+			var8.SizeChanged:Disconnect()
+			var8.VisibleChanged:Disconnect()
+			var8.AncestryChanged:Disconnect()
+			self._signals[var6] = nil
 		else
-			loggerModule:warning(`WidgetManager:deregister called with mismatched widget for uri {var1}`)
+			loggerModule:warning(`WidgetManager:deregister called with mismatched widget for uri {var6}`)
 		end
 	end
 	self:_run()

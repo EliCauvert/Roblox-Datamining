@@ -22,71 +22,71 @@ local t = {
 
 function t.mock()
 	-- upvalues: t (ref), topicContentsEntryModelModule (ref)
-	local var5 = t.new()
-	var5.entries = { topicContentsEntryModelModule.mock() }
-	var5.rowsRequested = 1
-	var5.hasMoreRows = false
-	var5.nextPageExclusiveStartId = 0
-	var5.updatedTimestamp = nil
-	var5.nextPageToken = ""
+	local var1 = t.new()
+	var1.entries = { topicContentsEntryModelModule.mock() }
+	var1.rowsRequested = 1
+	var1.hasMoreRows = false
+	var1.nextPageExclusiveStartId = 0
+	var1.updatedTimestamp = nil
+	var1.nextPageToken = ""
 	
-	return var5
+	return var1
 end
 
-function t.fromData(p0)
+function t.fromData(p1)
 	return {
-		entries = p0.entries,
-		rowsRequested = p0.rowsRequested,
-		hasMoreRows = p0.hasMoreRows,
-		nextPageExclusiveStartId = p0.nextPageExclusiveStartId,
-		updatedTimestamp = p0.updatedTimestamp,
-		nextPageToken = if p0.nextPageToken then p0.nextPageToken else ""
+		entries = p1.entries,
+		rowsRequested = p1.rowsRequested,
+		hasMoreRows = p1.hasMoreRows,
+		nextPageExclusiveStartId = p1.nextPageExclusiveStartId,
+		updatedTimestamp = p1.updatedTimestamp,
+		nextPageToken = if p1.nextPageToken then p1.nextPageToken else ""
 	}
 end
 
 function t.fromContentList(p1, p2, p3, p4)
 	-- upvalues: t (ref), topicContentsEntryModelModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameCollectionItemType (ref), discoveryEventErrorLogger (ref), omniRecommendationsContentType (ref)
-	local var6 = t.new()
-	var6.updatedTimestamp = p4
-	var6.entries = {}
-	var6.hasMoreRows = false
+	local var1 = t.new()
+	var1.updatedTimestamp = p4
+	var1.entries = {}
+	var1.hasMoreRows = false
 	
 	if p1 then
 		for i, v in ipairs(p1) do
-			if not var6.hasMoreRows then
-				topicContentsEntryModelModule.fromOmniRecommendations(v):match(function(p6)
-					-- upvalues: fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameCollectionItemType (copy), discoveryEventErrorLogger (copy), omniRecommendationsContentType (copy), var6 (ref), v (ref), p2 (ref), p3 (ref)
-					if fFlagLuaAppEnableHomepageOneByTwoTile and p6.componentType == gameCollectionItemType.OneByTwoTile and (not p6.primaryVideoAssetId or not p6.primaryImageAssetId) then
+			if not var1.hasMoreRows then
+				topicContentsEntryModelModule.fromOmniRecommendations(v):match(function(p5)
+					-- upvalues: fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameCollectionItemType (copy), discoveryEventErrorLogger (copy), omniRecommendationsContentType (copy), var1 (ref), v (ref), p2 (ref), p3 (ref)
+					if fFlagLuaAppEnableHomepageOneByTwoTile and p5.componentType == gameCollectionItemType.OneByTwoTile and (not p5.primaryVideoAssetId or not p5.primaryImageAssetId) then
 						discoveryEventErrorLogger.reportError("TopicContentsModel_OneByTwoTileMissingAssets", "OneByTwoTile entry dropped: missing primaryVideoAssetId or primaryImageAssetId", {
-							contentType = tostring(p6.contentType),
-							hasVideo = p6.primaryVideoAssetId ~= nil,
-							hasImage = p6.primaryImageAssetId ~= nil
+							contentType = tostring(p5.contentType),
+							hasVideo = p5.primaryVideoAssetId ~= nil,
+							hasImage = p5.primaryImageAssetId ~= nil
 						})
 						
 						return
-					elseif fFlagLuaAppEnableHomepageOneByTwoTile and p6.contentType == omniRecommendationsContentType.AdLink then
-						if not p6.clickoutUrl or p6.clickoutUrl == "" then
+					elseif fFlagLuaAppEnableHomepageOneByTwoTile and p5.contentType == omniRecommendationsContentType.AdLink then
+						if not p5.clickoutUrl or p5.clickoutUrl == "" then
 							discoveryEventErrorLogger.reportError("TopicContentsModel_AdLinkMissingClickoutUrl", "AdLink entry dropped: missing clickoutUrl")
 							
 							return
-						elseif p6.universeId ~= nil then
+						elseif p5.universeId ~= nil then
 							discoveryEventErrorLogger.reportError("TopicContentsModel_AdLinkUnexpectedUniverseId", "AdLink entry unexpectedly has universe ID")
 						end
-						table.insert(var6.entries, p6)
+						table.insert(var1.entries, p5)
 						
 						return
 					else
-						local var7 = p2(v.contentType)
+						local var2 = p2(v.contentType)
 						
-						if var7 ~= nil then
-							local var8 = p3(p6, var7)
+						if var2 ~= nil then
+							local var3 = p3(p5, var2)
 							
-							if var8 ~= nil then
-								table.insert(var6.entries, var8)
+							if var3 ~= nil then
+								table.insert(var1.entries, var3)
 								
 								return
 							end
-							var6.hasMoreRows = true
+							var1.hasMoreRows = true
 						end
 					end
 				end):matchError(function(p5)
@@ -94,10 +94,10 @@ function t.fromContentList(p1, p2, p3, p4)
 				end)
 				continue
 			end
-			return var6
+			return var1
 		end
 	end
-	return var6
+	return var1
 end
 
 return t

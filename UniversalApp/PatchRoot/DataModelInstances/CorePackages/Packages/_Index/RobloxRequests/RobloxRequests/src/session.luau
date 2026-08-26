@@ -6,24 +6,24 @@ local cookiesModule = require(src.cookies)
 local ratelimitModule = require(src.ratelimit)
 local utilModule = require(src.util)
 
-local function randomString(p0)
-	local var6 = ""
+local function randomString(p1)
+	local var1 = ""
 	
-	for _ = 1, p0 do
-		var6 ..= string.char(math.random(97, 122))
+	for _ = 1, p1 do
+		var1 ..= string.char(math.random(97, 122))
 	end
-	return var6
+	return var1
 end
 
 local t = {}
 t.__index = t
 
-function t.new(p1)
+function t.new(p2)
 	-- upvalues: t (ref), cookiesModule (ref)
 	local tbl = setmetatable({}, t)
 	tbl.headers = {}
 	tbl.cookies = cookiesModule.new()
-	tbl.base_url = p1 or ""
+	tbl.base_url = p2 or ""
 	tbl._ratelimit = nil
 	tbl.ignore_ratelimit = false
 	tbl.before_request = nil
@@ -55,58 +55,58 @@ function t:disable_ratelimit()
 	end
 end
 
-function t:set_headers(p4)
-	for i, v in pairs(p4) do
+function t:set_headers(p2)
+	for i, v in pairs(p2) do
 		self.headers[i] = v
 	end
 	return self
 end
 
-function t:Request(p5, p6, p7)
+function t:Request(p3, p4, p5)
 	-- upvalues: requestModule (ref)
-	p7 = p7 or {}
+	p5 = p5 or {}
 	
-	if p6:sub(1, 7) ~= "http://" and p6:sub(1, 8) ~= "https://" then
-		p6 = self.base_url .. p6
+	if p4:sub(1, 7) ~= "http://" and p4:sub(1, 8) ~= "https://" then
+		p4 = self.base_url .. p6
 	end
-	p7 = self.log
+	p5 = self.log
 	
-	if p7.log ~= nil then
-		p7 = p7.log
+	if p5.log ~= nil then
+		p5 = p5.log
 	end
-	local var9 = requestModule.new(p5, p6, {
+	local var2 = requestModule.new(p3, p4, {
 		headers = self.headers,
-		query = p7.query,
-		data = p7.data,
-		log = p7,
-		cookies = p7.cookies or self.cookies,
-		ignore_ratelimit = p7.ignore_ratelimit or self.ignore_ratelimit,
+		query = p5.query,
+		data = p5.data,
+		log = p5,
+		cookies = p5.cookies or self.cookies,
+		ignore_ratelimit = p5.ignore_ratelimit or self.ignore_ratelimit,
 		no_stats = self.no_stats or false
 	})
 	
 	if self._ratelimit then
-		table.insert(var9._ratelimits, self._ratelimit)
+		table.insert(var2._ratelimits, self._ratelimit)
 	end
-	var9:set_headers(p7.headers or {})
+	var2:set_headers(p5.headers or {})
 	
-	function var9._callback(p8)
+	function var9._callback(p6)
 		-- upvalues: self (ref)
-		for i, v in ipairs(p8.cookies.cookies) do
+		for i, v in ipairs(p6.cookies.cookies) do
 			table.insert(self.cookies.cookies, v)
 		end
 	end
 	
-	return var9
+	return var2
 end
 
-function t:request(p9, p10, p11)
-	return self:Request(p9, p10, p11 or {}):send()
+function t:request(p6, p7, p8)
+	return self:Request(p6, p7, p8 or {}):send()
 end
 
 t.send = utilModule.deprecate(t.request, "0.5", "Session:send")
 
-function t:promise_request(p12, p13, p14)
-	return self:Request(p12, p13, p14 or {}):send(true)
+function t:promise_request(p6, p7, p8)
+	return self:Request(p6, p7, p8 or {}):send(true)
 end
 
 t.promise_send = utilModule.deprecate(t.promise_request, "0.5", "Session:promise_send")
@@ -114,14 +114,14 @@ t.promise_send = utilModule.deprecate(t.promise_request, "0.5", "Session:promise
 for i, v in pairs({
 	"GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE", "PATCH"
 }) do
-	t[v:lower()] = function(p15, p16, p17)
+	t[v:lower()] = function(p6, p7, p8)
 		-- upvalues: v (ref)
-		return p15:send(v, p16, p17)
+		return p6:send(v, p7, p8)
 	end
 	
-	t["promise_" .. v:lower()] = function(p18, p19, p20)
+	t["promise_" .. v:lower()] = function(p6, p7, p8)
 		-- upvalues: v (ref)
-		return p18:promise_send(v, p19, p20)
+		return p6:promise_send(v, p7, p8)
 	end
 end
 return t

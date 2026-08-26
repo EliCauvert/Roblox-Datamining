@@ -23,47 +23,47 @@ local t = {
 	}
 }
 
-return function(p0)
+return function(p1)
 	-- upvalues: object (ref), t (ref), controlStateModule (ref), useStyleModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), constantsModule (ref), horizontalContainerModule (ref), reactModule (ref), label (ref), placementModule (ref), genericTextLabelModule (ref)
-	local var11 = object.assign({}, t, p0)
-	local item = var11.item
-	local var12 = var11.controlState == controlStateModule.SelectedPressed
-	local selected = var11.selected
-	local var13 = useStyleModule()
-	local var14 = if selected then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var13.Tokens.Color.Content.Emphasis else var13.Tokens.Semantic.Color.Icon.Emphasis elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var13.Tokens.Color.Content.Default else var13.Tokens.Semantic.Color.Icon.Default
-	local var15 = getIconSizeModule(iconSizeModule.Medium, var13)
-	local var16 = constantsModule.ICON_TAB_HEIGHT - constantsModule.ICON_TAB_PADDING * 2
+	local var1 = object.assign({}, t, p1)
+	local item = var1.item
+	local var2 = var1.controlState == controlStateModule.SelectedPressed
+	local selected = var1.selected
+	local var3 = useStyleModule()
+	local var4 = if selected then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var3.Tokens.Color.Content.Emphasis else var3.Tokens.Semantic.Color.Icon.Emphasis elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var3.Tokens.Color.Content.Default else var3.Tokens.Semantic.Color.Icon.Default
+	local var5 = getIconSizeModule(iconSizeModule.Medium, var3)
+	local var6 = constantsModule.ICON_TAB_HEIGHT - constantsModule.ICON_TAB_PADDING * 2
 	assert(if item.icon ~= nil then item.iconComponent == nil else true, "icon or iconComponent cannot be assigned at same time")
 	
 	return horizontalContainerModule({
 		size = UDim2.new(0, 0, 0, constantsModule.ICON_TAB_HEIGHT),
 		automaticSize = Enum.AutomaticSize.X,
-		roundedBackgroundSize = UDim2.new(1, -(constantsModule.ICON_TAB_PADDING * 2), 0, var16),
+		roundedBackgroundSize = UDim2.new(1, -(constantsModule.ICON_TAB_PADDING * 2), 0, var6),
 		roundedBackgroundPosition = UDim2.fromOffset(constantsModule.ICON_TAB_PADDING, constantsModule.ICON_TAB_PADDING),
-		roundedBackgroundColor = var13.Theme.Divider.Color,
+		roundedBackgroundColor = var3.Theme.Divider.Color,
 		roundedBackgroundTransparency = constantsModule.ICON_TAB_SELECTED_TRANSPARENCY,
 		spacing = if item.icon == nil and item.iconComponent == nil then 0 else constantsModule.ICON_TAB_ITEM_ICON_TITLE_SPACING,
-		padding = var11.padding,
+		padding = var1.padding,
 		showRoundedBackground = if item.showRoundedBackground ~= nil then selected else item.showRoundedBackground,
-		showOverlay = if item.showOverlay ~= nil then var12 else item.showOverlay
+		showOverlay = if item.showOverlay ~= nil then var2 else item.showOverlay
 	}, {
 		Icon = if item.icon ~= nil then if item.iconComponent ~= nil then nil else reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UDim2.new(0, var15, 0, var15)
+			Size = UDim2.new(0, var5, 0, var5)
 		}, reactModule.createElement(item.iconComponent, {
 			hovered = false,
 			placement = placementModule.Bottom,
 			selected = selected,
-			pressed = var12
+			pressed = var2
 		})) else reactModule.createElement(label, {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, var15, 0, var15),
+			Size = UDim2.new(0, var5, 0, var5),
 			Image = item.icon,
 			ScaleType = Enum.ScaleType.Fit,
-			ImageColor3 = var14.Color3,
-			ImageTransparency = var14.Transparency
+			ImageColor3 = var4.Color3,
+			ImageTransparency = var4.Transparency
 		}),
 		Title = reactModule.createElement(genericTextLabelModule, {
 			LayoutOrder = 2,
@@ -76,9 +76,9 @@ return function(p0)
 			TextXAlignment = Enum.TextXAlignment.Left,
 			colorStyle = {
 				Transparency = 0,
-				Color = if selected then var13.Theme.TextEmphasis.Color else var13.Theme.TextDefault.Color
+				Color = if selected then var3.Theme.TextEmphasis.Color else var3.Theme.TextDefault.Color
 			},
-			fontStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var13.Tokens.Typography.HeadingSmall else var13.Tokens.Semantic.Typography.Header,
+			fontStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var3.Tokens.Typography.HeadingSmall else var3.Tokens.Semantic.Typography.Header,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		})
 	})

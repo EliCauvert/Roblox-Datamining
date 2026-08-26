@@ -1,11 +1,11 @@
 ﻿local localizationService = game:GetService("LocalizationService")
 
-return function(p0)
+return function(p1)
 	-- upvalues: localizationService (ref)
-	if p0 == nil or p0 == "" then
+	if p1 == nil or p1 == "" then
 		return nil
 	end
-	local dateTime = DateTime.fromIsoDate(p0)
+	local dateTime = DateTime.fromIsoDate(p1)
 	
-	return if dateTime == nil then p0 else dateTime:FormatLocalTime("ll", localizationService.RobloxLocaleId)
+	return if dateTime == nil then p1 else dateTime:FormatLocalTime("ll", localizationService.RobloxLocaleId)
 end

@@ -8,34 +8,34 @@ local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspect
 local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemTypeEnum
 
 return roduxModule.createReducer({}, {
-	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p0, p1)
+	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p1, p2)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p0, { totalPrice = p0.totalPrice - p1.result.RobuxSpent })
+		return cryoModule.Dictionary.join(p1, { totalPrice = p1.totalPrice - p2.result.RobuxSpent })
 	end else nil,
-	[setAvatarPreviewDetailsModule.name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p2, p3)
+	[setAvatarPreviewDetailsModule.name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p1, p2)
 		-- upvalues: cryoModule (ref), itemTypeEnum (ref)
 		local t = {}
 		local totalPrice = nil
 		local totalValue = nil
 		
-		if p3.avatarPreviewDetails and p3.avatarPreviewDetails.look then
-			local look = p3.avatarPreviewDetails.look
+		if p2.avatarPreviewDetails and p2.avatarPreviewDetails.look then
+			local look = p2.avatarPreviewDetails.look
 			totalPrice = look.totalPrice
 			totalValue = look.totalValue
 			
 			if look.items then
-				t = cryoModule.List.map(look.items, function(p4)
+				t = cryoModule.List.map(look.items, function(p3)
 					-- upvalues: itemTypeEnum (copy)
 					return {
-						id = tostring(p4.id),
-						itemType = if p4.itemType == itemTypeEnum.Asset then itemTypeEnum.Asset else itemTypeEnum.Bundle,
-						noPriceStatus = p4.noPriceStatus,
-						quantityOwned = p4.quantityOwned
+						id = tostring(p3.id),
+						itemType = if p3.itemType == itemTypeEnum.Asset then itemTypeEnum.Asset else itemTypeEnum.Bundle,
+						noPriceStatus = p3.noPriceStatus,
+						quantityOwned = p3.quantityOwned
 					}
 				end)
 			end
 		end
-		return cryoModule.Dictionary.join(p2, {
+		return cryoModule.Dictionary.join(p1, {
 			totalPrice = totalPrice,
 			totalValue = totalValue,
 			items = t

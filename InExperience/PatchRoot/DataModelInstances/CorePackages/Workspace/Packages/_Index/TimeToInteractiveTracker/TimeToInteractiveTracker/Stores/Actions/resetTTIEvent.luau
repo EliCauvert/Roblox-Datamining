@@ -1,22 +1,22 @@
 ﻿local _ = require(script.Parent.Parent.types)
 
-return function(p0)
-	return function(p1)
-		-- upvalues: p0 (ref)
-		p0(function(p2)
-			-- upvalues: p1 (ref)
-			local var0 = p2[p1]
+return function(p1)
+	return function(p2)
+		-- upvalues: p1 (ref)
+		p1(function(p3)
+			-- upvalues: p2 (ref)
+			local var1 = p3[p2]
 			
-			if var0 == nil then
-				return p2
+			if var1 == nil then
+				return p3
 			end
-			local cloned = table.clone(p2)
-			cloned[p1] = {
+			local cloned = table.clone(p3)
+			cloned[p2] = {
 				startTime = nil,
 				endTime = nil,
 				deltaMs = nil,
 				sent = nil,
-				metadata = table.clone(var0.metadata)
+				metadata = table.clone(var1.metadata)
 			}
 			
 			return cloned

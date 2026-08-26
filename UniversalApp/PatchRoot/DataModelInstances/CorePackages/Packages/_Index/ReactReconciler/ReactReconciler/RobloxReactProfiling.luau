@@ -35,13 +35,13 @@ local var4 = if status >= 5 then {
 	end
 } else { profilebegin = noop, profileend = noop }
 
-function startTimerSampling(p0)
+function startTimerSampling(p1)
 	-- upvalues: var1 (write), var2 (write)
 	if var1 then
 		warn("RobloxReactProfiling Timer Sampling already running.")
 	end
 	var1 = true
-	var2 = p0
+	var2 = p1
 end
 
 function endTimerSampling()
@@ -66,20 +66,20 @@ function startTimer(p2)
 	end
 end
 
-function endTimer(p3)
+function endTimer(p2)
 	-- upvalues: var1 (write), var2 (write)
 	if var1 then
-		p3.endTime = os.clock()
+		p2.endTime = os.clock()
 		
 		if var2 then
-			var2(p3)
+			var2(p2)
 		end
 	end
 end
 
-function profileRootBeforeUnitOfWork(p4)
+function profileRootBeforeUnitOfWork(p2)
 	-- upvalues: var4 (ref)
-	local current = p4.current
+	local current = p2.current
 	local var5 = nil
 	
 	if current then
@@ -111,44 +111,44 @@ function profileRootBeforeUnitOfWork(p4)
 	return t
 end
 
-function profileRootAfterYielding(p5)
+function profileRootAfterYielding(p2)
 	-- upvalues: var4 (ref)
-	if p5 then
-		endTimer(p5)
+	if p2 then
+		endTimer(p2)
 		var4.profileend()
 	end
 end
 
-function profileUnitOfWorkBefore(p6)
+function profileUnitOfWorkBefore(p2)
 	-- upvalues: getComponentName (ref), reactWorkTagsModule (ref), var4 (ref)
-	local var8 = getComponentName(p6.type)
+	local var5 = getComponentName(p2.type)
 	
-	if p6.key then
-		var8 = tostring(p6.key) .. "=" .. (var8 or "?")
+	if p2.key then
+		var5 = tostring(p2.key) .. "=" .. (var5 or "?")
 	end
 	local text = nil
 	
-	if p6.stateNode and (p6.tag == reactWorkTagsModule.HostComponent or p6.tag == reactWorkTagsModule.HostText) then
-		local layerCollector = p6.stateNode:FindFirstAncestorWhichIsA("LayerCollector")
+	if p2.stateNode and (p2.tag == reactWorkTagsModule.HostComponent or p2.tag == reactWorkTagsModule.HostText) then
+		local layerCollector = p2.stateNode:FindFirstAncestorWhichIsA("LayerCollector")
 		
 		if layerCollector then
 			text = "[" .. layerCollector:GetFullName() .. "] "
 		end
 	end
 	if text then
-		var8 = text .. " : " .. (var8 or "?")
+		var5 = text .. " : " .. (var5 or "?")
 	end
-	if var8 == nil then
+	if var5 == nil then
 		return false
 	end
-	var4.profilebegin(var8)
+	var4.profilebegin(var5)
 	
 	return true
 end
 
-function profileUnitOfWorkAfter(p7)
+function profileUnitOfWorkAfter(p2)
 	-- upvalues: var4 (ref)
-	if p7 then
+	if p2 then
 		var4.profileend()
 	end
 end

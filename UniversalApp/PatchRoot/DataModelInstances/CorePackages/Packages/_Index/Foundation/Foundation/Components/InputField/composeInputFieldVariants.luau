@@ -6,10 +6,10 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local getInputVariantsFactoryModule = require(script.Parent.getInputVariantsFactory)
 local _ = require(foundation.Providers.Style.Tokens)
 
-return function(p0, p1, p2, p3, p4, p5, p6)
+return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref)
-	local var4 = getInputVariantsFactoryModule(p0)
-	local var5 = var4.variants[p2 or inputVariantModule.Standard]
+	local var1 = getInputVariantsFactoryModule(p1)
+	local var2 = var1.variants[p3 or inputVariantModule.Standard]
 	
-	return composeStyleVariantModule(var4.common, var4.sizes[p1], if p2 ~= inputVariantModule.Utility then {} else var5, if p3 then var4.radius[p3] else var4.defaultRadius[p1], if p5 ~= nil then {} else var4.hoverState[p5], if p4 ~= nil then {} else var4.focusedState[p4], if p6 ~= nil then {} else var4.errorState[p6], if p2 == inputVariantModule.Utility then var5 else {})
+	return composeStyleVariantModule(var1.common, var1.sizes[p2], if p3 ~= inputVariantModule.Utility then {} else var2, if p4 then var1.radius[p4] else var1.defaultRadius[p2], if p6 ~= nil then {} else var1.hoverState[p6], if p5 ~= nil then {} else var1.focusedState[p5], if p7 ~= nil then {} else var1.errorState[p7], if p3 == inputVariantModule.Utility then var2 else {})
 end

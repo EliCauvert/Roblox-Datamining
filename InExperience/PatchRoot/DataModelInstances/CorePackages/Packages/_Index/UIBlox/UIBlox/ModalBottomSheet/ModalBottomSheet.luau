@@ -23,11 +23,11 @@ modalBottomSheet.defaultProps = {
 	sheetContentXPosition = UDim.new(0, 0)
 }
 
-function modalBottomSheet.init(p0)
+function modalBottomSheet.init(p1)
 	-- upvalues: otterModule (ref), roactModule (ref)
-	p0.motor = otterModule.createSingleMotor(0)
-	p0.ref = roactModule.createRef()
-	p0.active = true
+	p1.motor = otterModule.createSingleMotor(0)
+	p1.ref = roactModule.createRef()
+	p1.active = true
 end
 
 function modalBottomSheet.render(p1)
@@ -66,7 +66,7 @@ function modalBottomSheet.render(p1)
 		SortOrder = Enum.SortOrder.LayoutOrder
 	})
 	
-	return withStyleModule(function(p3)
+	return withStyleModule(function(p2)
 		-- upvalues: roactModule (copy), p1 (ref), otterModule (copy), t (copy), sheetContentXSize (ref), sheetContentXPosition (ref), t_1 (ref)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -76,8 +76,8 @@ function modalBottomSheet.render(p1)
 			Background = roactModule.createElement("TextButton", {
 				ZIndex = 0,
 				AutoButtonColor = false,
-				BackgroundColor3 = p3.Theme.Overlay.Color,
-				BackgroundTransparency = p3.Theme.Overlay.Transparency,
+				BackgroundColor3 = p2.Theme.Overlay.Color,
+				BackgroundTransparency = p2.Theme.Overlay.Transparency,
 				BorderSizePixel = 0,
 				Selectable = false,
 				Size = UDim2.new(1, 0, 1, 0),
@@ -102,27 +102,27 @@ function modalBottomSheet.render(p1)
 	end)
 end
 
-function modalBottomSheet.didMount(p4)
+function modalBottomSheet.didMount(p2)
 	-- upvalues: otterModule (ref), t (ref)
-	local sheetContentXPosition = p4.props.sheetContentXPosition
-	p4.motor:onStep(function(p5)
-		-- upvalues: p4 (ref), sheetContentXPosition (ref)
-		if p4.ref.current then
-			p4.ref.current.Position = UDim2.new(sheetContentXPosition.Scale, sheetContentXPosition.Offset, 1, -(p4.sheetHeight + p4.props.bottomGap) * p5)
+	local sheetContentXPosition = p2.props.sheetContentXPosition
+	p2.motor:onStep(function(p3)
+		-- upvalues: p2 (ref), sheetContentXPosition (ref)
+		if p2.ref.current then
+			p2.ref.current.Position = UDim2.new(sheetContentXPosition.Scale, sheetContentXPosition.Offset, 1, -(p2.sheetHeight + p2.props.bottomGap) * p3)
 		end
 	end)
-	p4.motor:setGoal(otterModule.spring(1, t))
-	p4.motor:onComplete(function()
-		-- upvalues: p4 (ref)
-		if not p4.active then
-			p4.props.onDismiss()
+	p2.motor:setGoal(otterModule.spring(1, t))
+	p2.motor:onComplete(function()
+		-- upvalues: p2 (ref)
+		if not p2.active then
+			p2.props.onDismiss()
 		end
 	end)
-	p4.motor:start()
+	p2.motor:start()
 end
 
-function modalBottomSheet.willUnmount(p6)
-	p6.motor:destroy()
+function modalBottomSheet.willUnmount(p2)
+	p2.motor:destroy()
 end
 
 return modalBottomSheet

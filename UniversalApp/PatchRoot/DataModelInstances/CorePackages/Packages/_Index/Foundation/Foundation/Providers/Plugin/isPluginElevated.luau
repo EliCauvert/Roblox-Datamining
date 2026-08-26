@@ -1,6 +1,6 @@
-﻿return function(p0)
+﻿return function(p1)
 	return pcall(function()
-		-- upvalues: p0 (ref)
-		return p0:GetPluginComponent("Panels")
+		-- upvalues: p1 (ref)
+		return p1:GetPluginComponent("Panels")
 	end)
 end

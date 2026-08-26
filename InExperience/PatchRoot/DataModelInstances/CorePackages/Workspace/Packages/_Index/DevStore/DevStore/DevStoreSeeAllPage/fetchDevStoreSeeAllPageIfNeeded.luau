@@ -8,17 +8,17 @@ local getDevStoreSeeAllUrlModule = require(devStore.DevStoreSeeAllPage.getDevSto
 local getDevStoreSeeAllPageKeyModule = require(devStore.DevStoreSeeAllPage.getDevStoreSeeAllPageKey)
 local fFlagSduiProtobufJsonDecode = require(parent.SharedFlags).FFlagSduiProtobufJsonDecode
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: getDevStoreSeeAllUrlModule (ref), getDevStoreSeeAllPageKeyModule (ref), parent (ref), getSduiApiStore (ref), fFlagSduiProtobufJsonDecode (ref), sduiResponseType (ref), appPage (ref)
-	local var4 = getDevStoreSeeAllUrlModule(p0)
+	local var1 = getDevStoreSeeAllUrlModule(p1)
 	getSduiApiStore().fetchIfNeeded({
 		responseType = if fFlagSduiProtobufJsonDecode then sduiResponseType.Protobuf else nil,
-		url = var4,
+		url = var1,
 		surfaceKey = appPage.DevStoreSeeAll,
-		configKey = getDevStoreSeeAllPageKeyModule(p0),
-		loadTimer = p1,
+		configKey = getDevStoreSeeAllPageKeyModule(p1),
+		loadTimer = p2,
 		apiProto = require(parent.ServiceContractsProto).apppageplatform.devstore.dev_store_see_all.DevStoreSeeAllResponse
-	}, p2)
+	}, p3)
 	
-	return var4
+	return var1
 end

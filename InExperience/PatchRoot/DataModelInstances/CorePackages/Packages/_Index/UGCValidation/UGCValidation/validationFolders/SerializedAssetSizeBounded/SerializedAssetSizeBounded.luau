@@ -21,16 +21,16 @@ local t_1 = {
 	[validationEnumsModule.UploadCategory.RIGID_ACCESSORY] = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesRigidAccessory)
 }
 
-function t.run(p0, p1)
+function t.run(p1, p2)
 	-- upvalues: validationEnumsModule (ref), serializationService (ref), t_1 (ref), getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule (ref), errorSourceStringsModule (ref)
-	if p1.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.Backend then return end
-	local byteLength = buffer.len(serializationService:SerializeInstancesAsync(p1.entrypointInput))
-	local var8 = (t_1[p1.uploadCategory] or getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule)()
+	if p2.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.Backend then return end
+	local byteLength = buffer.len(serializationService:SerializeInstancesAsync(p2.entrypointInput))
+	local var1 = (t_1[p2.uploadCategory] or getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule)()
 	
-	if var8 < byteLength then
-		p0:fail(errorSourceStringsModule.Keys.SerializedAssetTooLarge, {
+	if var1 < byteLength then
+		p1:fail(errorSourceStringsModule.Keys.SerializedAssetTooLarge, {
 			sizeBytes = tostring(byteLength),
-			maxSizeBytes = tostring(var8)
+			maxSizeBytes = tostring(var1)
 		})
 	end
 end

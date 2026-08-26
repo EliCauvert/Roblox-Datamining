@@ -3,11 +3,11 @@ local overlayContextModule = require(script.Parent.OverlayContext)
 
 return function()
 	-- upvalues: reactModule (ref), overlayContextModule (ref)
-	local var2 = reactModule.useContext(overlayContextModule)
+	local var1 = reactModule.useContext(overlayContextModule)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref)
-		var2.requestOverlay()
-	end, { var2.requestOverlay })
+		-- upvalues: var1 (ref)
+		var1.requestOverlay()
+	end, { var1.requestOverlay })
 	
-	return var2.screen
+	return var1.screen
 end

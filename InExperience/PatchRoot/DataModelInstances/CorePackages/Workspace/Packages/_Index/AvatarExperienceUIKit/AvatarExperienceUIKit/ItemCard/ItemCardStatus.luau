@@ -4,20 +4,20 @@ local foundationModule = require(parent.Foundation)
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), text (ref)
-	local var2 = useTokens()
+	local var1 = useTokens()
 	
 	return reactModule.createElement(text, {
-		textStyle = var2.Inverse.Content.Emphasis,
-		fontStyle = var2.Typography.LabelSmall,
-		LayoutOrder = p0.LayoutOrder,
-		Text = p0.text,
+		textStyle = var1.Inverse.Content.Emphasis,
+		fontStyle = var1.Typography.LabelSmall,
+		LayoutOrder = p1.LayoutOrder,
+		Text = p1.text,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		Size = UDim2.fromScale(0, 0),
 		AutomaticSize = Enum.AutomaticSize.XY,
-		backgroundStyle = var2.Color.System.Contrast,
-		padding = var2.Padding.Small,
+		backgroundStyle = var1.Color.System.Contrast,
+		padding = var1.Padding.Small,
 		cornerRadius = UDim.new(0.5, 0)
 	})
 end

@@ -3,60 +3,60 @@ local promiseModule = require((nil).Promise)
 local t = {}
 local _ = require((nil).Dev.JestGlobals).expect
 
-local function defaultAsyncIteratorReturn(p0)
+local function defaultAsyncIteratorReturn(p1)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve():andThen(function()
-		-- upvalues: p0 (ref)
-		return { done = true, value = p0 }
+		-- upvalues: p1 (ref)
+		return { done = true, value = p1 }
 	end)
 end
 
-local var3 = require(script.Parent["memoize.js"]).memoize2(function(p1, p2)
+local var1 = require(script.Parent["memoize.js"]).memoize2(function(p1, p2)
 	return function(...)
 		-- upvalues: p2 (ref), p1 (ref)
 		return Reflect:apply(p2, p1, { ... })
 	end
 end)
 
-local function getAsyncIteratorWithCancel(p3, p4)
-	-- upvalues: boolean (ref), defaultAsyncIteratorReturn (ref), promiseModule (ref), var3 (ref)
-	return Proxy.new(p3, {
-		has = function(_, p5, p6)
-			return p6 == "return" or Reflect:has(p5, p6)
+local function getAsyncIteratorWithCancel(p1, p2)
+	-- upvalues: boolean (ref), defaultAsyncIteratorReturn (ref), promiseModule (ref), var1 (ref)
+	return Proxy.new(p1, {
+		has = function(_, p3, p4)
+			return p4 == "return" or Reflect:has(p3, p4)
 		end,
-		get = function(_, p7, p8, p9)
-			-- upvalues: boolean (copy), defaultAsyncIteratorReturn (copy), promiseModule (copy), p4 (ref), var3 (copy)
-			local var6 = Reflect:get(p7, p8, p9)
+		get = function(_, p3, p4, p5)
+			-- upvalues: boolean (copy), defaultAsyncIteratorReturn (copy), promiseModule (copy), p2 (ref), var1 (copy)
+			local var2 = Reflect:get(p3, p4, p5)
 			
-			if p8 == "return" then
-				local var7 = if boolean.toJSBoolean(var6) then var6 else defaultAsyncIteratorReturn
+			if p4 == "return" then
+				local var3 = if boolean.toJSBoolean(var2) then var2 else defaultAsyncIteratorReturn
 				
-				return function(p10)
-					-- upvalues: promiseModule (copy), p4 (copy), var7 (ref), p7 (ref)
+				return function(p6)
+					-- upvalues: promiseModule (copy), p2 (copy), var3 (ref), p3 (ref)
 					return promiseModule.resolve():andThen(function()
-						-- upvalues: p4 (copy), p10 (ref), var7 (copy), p7 (copy)
-						return Reflect:apply(var7, p7, { p4(p10):expect() })
+						-- upvalues: p2 (copy), p6 (ref), var3 (copy), p3 (copy)
+						return Reflect:apply(var3, p3, { p2(p6):expect() })
 					end)
 				end
 			end
-			return if typeof(var6) == "function" then var3(p7, var6) else var6
+			return if typeof(var2) == "function" then var1(p3, var2) else var2
 		end
 	})
 end
 
 t.getAsyncIteratorWithCancel = getAsyncIteratorWithCancel
 
-local function getAsyncIterableWithCancel(p11, p12)
-	-- upvalues: getAsyncIteratorWithCancel (ref), var3 (ref)
-	return Proxy.new(p11, {
-		get = function(_, p13, p14, p15)
-			-- upvalues: getAsyncIteratorWithCancel (copy), p12 (ref), var3 (copy)
-			local var8 = Reflect:get(p13, p14, p15)
+local function getAsyncIterableWithCancel(p1, p2)
+	-- upvalues: getAsyncIteratorWithCancel (ref), var1 (ref)
+	return Proxy.new(p1, {
+		get = function(_, p3, p4, p5)
+			-- upvalues: getAsyncIteratorWithCancel (copy), p2 (ref), var1 (copy)
+			local var2 = Reflect:get(p3, p4, p5)
 			
-			return if Symbol.asyncIterator == p14 then function()
-				-- upvalues: var8 (ref), p13 (ref), getAsyncIteratorWithCancel (copy), p12 (copy)
-				return getAsyncIteratorWithCancel(Reflect:apply(var8, p13, {}), p12)
-			end elseif typeof(var8) == "function" then var3(p13, var8) else var8
+			return if Symbol.asyncIterator == p4 then function()
+				-- upvalues: var2 (ref), p3 (ref), getAsyncIteratorWithCancel (copy), p2 (copy)
+				return getAsyncIteratorWithCancel(Reflect:apply(var2, p3, {}), p2)
+			end elseif typeof(var2) == "function" then var1(p3, var2) else var2
 		end
 	})
 end

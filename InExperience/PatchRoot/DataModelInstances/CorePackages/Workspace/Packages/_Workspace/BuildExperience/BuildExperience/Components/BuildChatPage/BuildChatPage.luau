@@ -2,7 +2,7 @@
 local buildChatPageViewModule = require(script.Parent.BuildChatPageView)
 local useBuildChatPageViewModelModule = require(script.Parent.useBuildChatPageViewModel)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useBuildChatPageViewModelModule (ref), reactModule (ref), buildChatPageViewModule (ref)
-	return reactModule.createElement(buildChatPageViewModule, useBuildChatPageViewModelModule(p0))
+	return reactModule.createElement(buildChatPageViewModule, useBuildChatPageViewModelModule(p1))
 end

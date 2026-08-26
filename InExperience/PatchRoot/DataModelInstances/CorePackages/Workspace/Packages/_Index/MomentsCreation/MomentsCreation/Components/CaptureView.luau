@@ -18,29 +18,29 @@ local useCreationMusicSyncModule = require(momentsCreation.Hooks.useCreationMusi
 local getFFlagMomentsScreenshotMusicScrubberModule = require(momentsCreation.Flags.GetFFlagMomentsScreenshotMusicScrubber)
 local getFFlagMomentsCreationGalleryPreviewSwapFixModule = require(momentsCreation.Flags.GetFFlagMomentsCreationGalleryPreviewSwapFix)
 
-local function VideoPreviewSurface(p0)
+local function VideoPreviewSurface(p1)
 	-- upvalues: reactModule (ref), signalsModule (ref), useCreationMusicSyncModule (ref), getCaptureVideoContentModule (ref), runService (ref), view (ref), getFitSize (ref), getCropSize (ref)
-	local preview = p0.preview
-	local capture = p0.capture
-	local timeLength = p0.timeLength
-	local var15 = reactModule.useRef(nil)
-	local var16, var17 = reactModule.useState(Vector2.new(0, 0))
-	local var18, var19 = reactModule.useState(Vector2.new(0, 0))
-	local var20, var21 = reactModule.useState(preview.playback.getRegion(false))
+	local preview = p1.preview
+	local capture = p1.capture
+	local timeLength = p1.timeLength
+	local var1 = reactModule.useRef(nil)
+	local var2, var3 = reactModule.useState(Vector2.new(0, 0))
+	local var4, var5 = reactModule.useState(Vector2.new(0, 0))
+	local var6, var7 = reactModule.useState(preview.playback.getRegion(false))
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var21 (ref), preview (ref)
-		return signalsModule.createEffect(function(p1)
-			-- upvalues: var21 (copy), preview (copy)
-			var21(preview.playback.getRegion(p1))
+		-- upvalues: signalsModule (copy), var7 (ref), preview (ref)
+		return signalsModule.createEffect(function(p2)
+			-- upvalues: var7 (copy), preview (copy)
+			var7(preview.playback.getRegion(p2))
 		end)
 	end, { preview })
-	local var22 = useCreationMusicSyncModule(preview, if var20 ~= nil then timeLength else math.max(0, var20.endTime - var20.startTime))
-	local audio = var22.audio
-	local music = var22.music
-	local userMuted = var22.userMuted
-	local var23 = reactModule.useRef(nil)
+	local var8 = useCreationMusicSyncModule(preview, if var6 ~= nil then timeLength else math.max(0, var6.endTime - var6.startTime))
+	local audio = var8.audio
+	local music = var8.music
+	local userMuted = var8.userMuted
+	local var9 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var23 (ref), music (ref), audio (ref)
+		-- upvalues: var9 (ref), music (ref), audio (ref)
 		function var23.current()
 			-- upvalues: music (copy), audio (copy)
 			if music ~= nil then
@@ -49,23 +49,23 @@ local function VideoPreviewSurface(p0)
 		end
 	end, { audio.timeline.seek, music })
 	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), music (ref), userMuted (ref)
-		local current = var15.current
+		-- upvalues: var1 (ref), music (ref), userMuted (ref)
+		local current = var1.current
 		
 		if current ~= nil then
 			current.Volume = if music == nil and not userMuted then 1 else 0
 		end
 	end, { music, userMuted })
 	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), capture (ref), getCaptureVideoContentModule (copy), preview (ref), timeLength (ref), runService (copy), var23 (ref)
-		local current = var15.current
+		-- upvalues: var1 (ref), capture (ref), getCaptureVideoContentModule (copy), preview (ref), timeLength (ref), runService (copy), var9 (ref)
+		local current = var1.current
 		
 		if current == nil then return end
 		if typeof(capture) == "table" then
-			local var24 = getCaptureVideoContentModule(capture)
+			local var10 = getCaptureVideoContentModule(capture)
 			
-			if var24 ~= nil then
-				current.Video = var24.Uri
+			if var10 ~= nil then
+				current.Video = var10.Uri
 			end
 		else
 			local ok, status = pcall(Content.fromObject, capture)
@@ -78,7 +78,7 @@ local function VideoPreviewSurface(p0)
 		preview.setDuration(timeLength)
 		preview.setTimeLength(timeLength)
 		preview.setReadiness("Ready")
-		local var25 = false
+		local var11 = false
 		preview.bindEngine({
 			play = function()
 				-- upvalues: current (ref)
@@ -95,8 +95,8 @@ local function VideoPreviewSurface(p0)
 		})
 		local list = {
 			current.Loaded:Connect(function()
-				-- upvalues: var25 (write), current (ref), preview (copy)
-				var25 = true
+				-- upvalues: var11 (write), current (ref), preview (copy)
+				var11 = true
 				
 				if current.TimeLength > 0 then
 					preview.setDuration(current.TimeLength)
@@ -106,18 +106,18 @@ local function VideoPreviewSurface(p0)
 				preview.setIsPlaying(true)
 			end),
 			current.Played:Connect(function()
-				-- upvalues: var25 (write), preview (copy)
-				var25 = true
+				-- upvalues: var11 (write), preview (copy)
+				var11 = true
 				preview.setIsPlaying(true)
 			end),
 			current.Paused:Connect(function()
-				-- upvalues: var25 (write), preview (copy)
-				if var25 then
+				-- upvalues: var11 (write), preview (copy)
+				if var11 then
 					preview.setIsPlaying(false)
 				end
 			end),
 			runService.RenderStepped:Connect(function()
-				-- upvalues: preview (copy), current (ref), var23 (copy)
+				-- upvalues: preview (copy), current (ref), var9 (copy)
 				preview.setPosition(current.TimePosition)
 				local region = preview.playback.getRegion(false)
 				
@@ -127,8 +127,8 @@ local function VideoPreviewSurface(p0)
 				if region.endTime - 0.05 <= timePosition or timePosition < region.startTime - 0.05 then
 					current.TimePosition = region.startTime
 					
-					if var23.current ~= nil then
-						var23.current()
+					if var9.current ~= nil then
+						var9.current()
 					end
 				end
 			end)
@@ -147,8 +147,8 @@ local function VideoPreviewSurface(p0)
 		tag = "size-full",
 		ClipsDescendants = true,
 		onAbsoluteSizeChanged = function(value)
-			-- upvalues: var17 (ref)
-			var17(value.AbsoluteSize)
+			-- upvalues: var3 (ref)
+			var3(value.AbsoluteSize)
 		end
 	}, {
 		Media = reactModule.createElement("VideoFrame", {
@@ -157,29 +157,29 @@ local function VideoPreviewSurface(p0)
 			InternalVideoUsage = Enum.InternalVideoUsage.WatchPage,
 			Looped = true,
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = if p0.scaleType == Enum.ScaleType.Fit then getFitSize(var16, var18) else getCropSize(var16, var18),
-			Visible = var18.X > 0 and var18.Y > 0,
-			ref = var15,
-			[reactModule.Change.Resolution] = function(p3)
-				-- upvalues: var19 (ref), p0 (ref)
-				var19(p3.Resolution)
+			Size = if p1.scaleType == Enum.ScaleType.Fit then getFitSize(var2, var4) else getCropSize(var2, var4),
+			Visible = var4.X > 0 and var4.Y > 0,
+			ref = var1,
+			[reactModule.Change.Resolution] = function(p2)
+				-- upvalues: var5 (ref), p1 (ref)
+				var5(p2.Resolution)
 				
-				if p0.onResolutionChanged ~= nil then
-					p0.onResolutionChanged(p3.Resolution)
+				if p1.onResolutionChanged ~= nil then
+					p1.onResolutionChanged(p2.Resolution)
 				end
 			end
 		}),
-		Overlay = reactModule.createElement(view, { tag = "size-full", ZIndex = 2 }, p0.children)
+		Overlay = reactModule.createElement(view, { tag = "size-full", ZIndex = 2 }, p1.children)
 	})
 end
 
-local function ScreenshotPreviewSurface(p4)
+local function ScreenshotPreviewSurface(p2)
 	-- upvalues: useCreationMusicSyncModule (ref), constantsModule (ref), reactModule (ref), getFFlagMomentsScreenshotMusicScrubberModule (ref), view (ref), getCaptureContentModule (ref)
-	local preview = p4.preview
-	local capture = p4.capture
-	local var28 = useCreationMusicSyncModule(preview, constantsModule.ScreenshotMusicDuration)
-	local music = var28.music
-	local elapsed = var28.audio.timeline.elapsed
+	local preview = p2.preview
+	local capture = p2.capture
+	local var10 = useCreationMusicSyncModule(preview, constantsModule.ScreenshotMusicDuration)
+	local music = var10.music
+	local elapsed = var10.audio.timeline.elapsed
 	reactModule.useEffect(function()
 		-- upvalues: preview (ref), constantsModule (copy)
 		preview.bindEngine(nil)
@@ -199,100 +199,100 @@ local function ScreenshotPreviewSurface(p4)
 	
 	return reactModule.createElement(view, {
 		tag = "size-full",
-		onAbsoluteSizeChanged = p4.onAbsoluteSizeChanged
+		onAbsoluteSizeChanged = p2.onAbsoluteSizeChanged
 	}, {
-		Overlay = reactModule.createElement(reactModule.Fragment, {}, p4.children),
+		Overlay = reactModule.createElement(reactModule.Fragment, {}, p2.children),
 		Media = reactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
-			ImageContent = getCaptureContentModule(p4.capture),
-			ScaleType = p4.scaleType,
+			ImageContent = getCaptureContentModule(p2.capture),
+			ScaleType = p2.scaleType,
 			Size = UDim2.fromScale(1, 1)
 		})
 	})
 end
 
-return function(p5)
+return function(p2)
 	-- upvalues: useTokens (ref), reactModule (ref), getFFlagMomentsCreationGalleryPreviewSwapFixModule (ref), signalsModule (ref), view (ref), icon (ref), builderIconsModule (ref), VideoPreviewSurface (ref), ScreenshotPreviewSurface (ref)
-	local var29 = useTokens()
-	local var30, var31 = reactModule.useState(p5.preview.getCapture(false))
+	local var10 = useTokens()
+	local var11, var12 = reactModule.useState(p2.preview.getCapture(false))
 	reactModule.useEffect(function()
-		-- upvalues: p5 (ref), getFFlagMomentsCreationGalleryPreviewSwapFixModule (copy), signalsModule (copy), var31 (ref)
-		local preview = p5.preview
+		-- upvalues: p2 (ref), getFFlagMomentsCreationGalleryPreviewSwapFixModule (copy), signalsModule (copy), var12 (ref)
+		local preview = p2.preview
 		
 		if getFFlagMomentsCreationGalleryPreviewSwapFixModule() then
-			local var32 = nil
-			local var33 = nil
-			local var34 = false
+			local var13 = nil
+			local var14 = nil
+			local var15 = false
 			
 			local function onWindowElapsed()
-				-- upvalues: var34 (write), var33 (write), var31 (copy), var32 (write), onWindowElapsed (ref)
-				if var34 then
-					var34 = false
-					local var37 = var33
-					var33 = nil
-					var31(var37)
-					var32 = task.delay(0.2, onWindowElapsed)
+				-- upvalues: var15 (write), var14 (write), var12 (copy), var13 (write), onWindowElapsed (ref)
+				if var15 then
+					var15 = false
+					local var16 = var14
+					var14 = nil
+					var12(var16)
+					var13 = task.delay(0.2, onWindowElapsed)
 					
 					return
 				end
-				var32 = nil
+				var13 = nil
 			end
 			
-			local var36 = signalsModule.createEffect(function(p6)
-				-- upvalues: preview (ref), var32 (write), var31 (copy), onWindowElapsed (ref), var33 (write), var34 (write)
-				local capture = preview.getCapture(p6)
+			local var16 = signalsModule.createEffect(function(p3)
+				-- upvalues: preview (ref), var13 (write), var12 (copy), onWindowElapsed (ref), var14 (write), var15 (write)
+				local capture = preview.getCapture(p3)
 				
-				if var32 == nil then
-					var31(capture)
-					var32 = task.delay(0.2, onWindowElapsed)
+				if var13 == nil then
+					var12(capture)
+					var13 = task.delay(0.2, onWindowElapsed)
 					
 					return
 				end
-				var33 = capture
-				var34 = true
+				var14 = capture
+				var15 = true
 			end)
 			
 			return function()
-				-- upvalues: var32 (write), var36 (ref)
-				if var32 ~= nil then
-					task.cancel(var32)
-					var32 = nil
+				-- upvalues: var13 (write), var16 (ref)
+				if var13 ~= nil then
+					task.cancel(var13)
+					var13 = nil
 				end
-				var36()
+				var16()
 			end
 		end
-		return signalsModule.createEffect(function(p7)
-			-- upvalues: var31 (copy), preview (ref)
-			var31(preview.getCapture(p7))
+		return signalsModule.createEffect(function(p3)
+			-- upvalues: var12 (copy), preview (ref)
+			var12(preview.getCapture(p3))
 		end)
-	end, { p5.preview })
+	end, { p2.preview })
 	
-	return if var30 == nil then reactModule.createElement(view, {
+	return if var11 == nil then reactModule.createElement(view, {
 		tag = "size-full radius-large bg-shift-200",
-		onAbsoluteSizeChanged = p5.onAbsoluteSizeChanged
+		onAbsoluteSizeChanged = p2.onAbsoluteSizeChanged
 	}, {
 		EmptyState = reactModule.createElement(icon, {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			name = builderIconsModule.Icon.Image,
 			Position = UDim2.fromScale(0.5, 0.5),
-			size = var29.Size.Size_1200,
-			style = var29.Color.Shift.Shift_400
+			size = var10.Size.Size_1200,
+			style = var10.Color.Shift.Shift_400
 		})
-	}) elseif var30.CaptureType == Enum.CaptureType.Video then reactModule.createElement(view, {
+	}) elseif var11.CaptureType == Enum.CaptureType.Video then reactModule.createElement(view, {
 		tag = "size-full",
-		onAbsoluteSizeChanged = p5.onAbsoluteSizeChanged
+		onAbsoluteSizeChanged = p2.onAbsoluteSizeChanged
 	}, {
 		Preview = reactModule.createElement(VideoPreviewSurface, {
-			preview = p5.preview,
-			capture = var30,
-			scaleType = p5.scaleType,
-			timeLength = var30.TimeLength or 0,
-			onResolutionChanged = p5.onResolutionChanged
-		}, p5.children)
+			preview = p2.preview,
+			capture = var11,
+			scaleType = p2.scaleType,
+			timeLength = var11.TimeLength or 0,
+			onResolutionChanged = p2.onResolutionChanged
+		}, p2.children)
 	}) else reactModule.createElement(ScreenshotPreviewSurface, {
-		preview = p5.preview,
-		capture = var30,
-		scaleType = p5.scaleType,
-		onAbsoluteSizeChanged = p5.onAbsoluteSizeChanged
-	}, p5.children)
+		preview = p2.preview,
+		capture = var11,
+		scaleType = p2.scaleType,
+		onAbsoluteSizeChanged = p2.onAbsoluteSizeChanged
+	}, p2.children)
 end

@@ -42,18 +42,18 @@ if t.unitTestScreenSize ~= nil then
 	loggerModule:error("Default unit test screen size must ALWAYS BE NIL!")
 	error("Default unit test screen size was not nil.")
 end
-function MessageContextMenu(p0)
+function MessageContextMenu(p1)
 	-- upvalues: cryoModule (ref), t (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), useReplyingToMessageDispatchModule (ref), useStyle (ref), reactModule (ref), signal (ref), useLayerCollector (ref), useNavigation (ref), useDeviceType (ref), useAnalyticsModule (ref), useLocalization (ref), peekViewState (ref), eventNamesModule (ref), deviceType (ref), default (ref), getFFlagAppChatEnableManualTranslationModule (ref), useDispatch (ref), appChatNetworkingModule (ref), loggerModule (ref), images (ref), contextualMenu (ref), menuDirection (ref), peekView (ref)
-	local var13 = cryoModule.Dictionary.union(t, p0)
-	local var14 = if fFlagAppChatSignalsReplyStoreModule then getReplyingToStoreModule(false) else nil
-	local var15 = useReplyingToMessageDispatchModule()
+	local var1 = cryoModule.Dictionary.union(t, p1)
+	local var2 = if fFlagAppChatSignalsReplyStoreModule then getReplyingToStoreModule(false) else nil
+	local var3 = useReplyingToMessageDispatchModule()
 	local tokens = useStyle().Tokens
-	local var16 = reactModule.useRef(signal.new())
-	local unitTestScreenSize = var13.unitTestScreenSize or useLayerCollector().absoluteSize
-	local var18 = useNavigation()
-	local unitTestDeviceType = var13.unitTestDeviceType or useDeviceType()
-	local var20 = useAnalyticsModule()
-	local var21 = useLocalization({
+	local var4 = reactModule.useRef(signal.new())
+	local unitTestScreenSize = var1.unitTestScreenSize or useLayerCollector().absoluteSize
+	local var5 = useNavigation()
+	local unitTestDeviceType = var1.unitTestDeviceType or useDeviceType()
+	local var6 = useAnalyticsModule()
+	local var7 = useLocalization({
 		replyText = "Feature.Chat.Action.Reply",
 		copyText = "Feature.Chat.Action.Copy",
 		editText = "Feature.Chat.Action.Edit",
@@ -61,132 +61,132 @@ function MessageContextMenu(p0)
 		reportText = "Feature.Chat.Action.Report",
 		translateText = "Feature.Chat.Action.Translate"
 	})
-	local var22 = reactModule.useCallback(function(p1)
-		-- upvalues: var20 (ref), var13 (ref)
-		if var20 then
-			var20.fireAnalyticsEvent(p1, {
-				conversationId = if var13.message then var13.message.conversationId else nil,
-				targetMessageSenderId = if var13.message then var13.message.senderTargetId else nil,
-				targetMessageId = if var13.message then var13.message.id else nil,
-				targetMessageSentAt = if var13.message and var13.message.sent then tostring(var13.message.sent.dateTime) else nil,
-				targetMessageLength = if var13.message and var13.message.content then #var13.message.content else nil
+	local var8 = reactModule.useCallback(function(p2)
+		-- upvalues: var6 (ref), var1 (ref)
+		if var6 then
+			var6.fireAnalyticsEvent(p2, {
+				conversationId = if var1.message then var1.message.conversationId else nil,
+				targetMessageSenderId = if var1.message then var1.message.senderTargetId else nil,
+				targetMessageId = if var1.message then var1.message.id else nil,
+				targetMessageSentAt = if var1.message and var1.message.sent then tostring(var1.message.sent.dateTime) else nil,
+				targetMessageLength = if var1.message and var1.message.content then #var1.message.content else nil
 			})
 		end
-	end, { var13.message })
-	local var23 = reactModule.useRef(false)
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref)
-		if var13.inputBoxRef and var13.inputBoxRef.current then
-			var13.inputBoxRef.current:CaptureFocus()
+	end, { var1.message })
+	local var9 = reactModule.useRef(false)
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref)
+		if var1.inputBoxRef and var1.inputBoxRef.current then
+			var1.inputBoxRef.current:CaptureFocus()
 		end
-	end, { var13.inputBoxRef })
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var18 (ref)
-		var18.goBack()
-	end, { var18 and var18.goBack })
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref)
-		var16.current:fire()
-	end, { var16.current })
-	local var27 = reactModule.useCallback(function(p2, _)
-		-- upvalues: peekViewState (copy), var25 (ref)
+	end, { var1.inputBoxRef })
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var5 (ref)
+		var5.goBack()
+	end, { var5 and var5.goBack })
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: var4 (ref)
+		var4.current:fire()
+	end, { var4.current })
+	local var13 = reactModule.useCallback(function(p2, _)
+		-- upvalues: peekViewState (copy), var11 (ref)
 		if p2 == peekViewState.Closed then
-			var25()
+			var11()
 		end
-	end, { var25 })
+	end, { var11 })
 	reactModule.useEffect(function()
-		-- upvalues: var22 (ref), eventNamesModule (copy), var13 (ref), var23 (ref)
-		var22(eventNamesModule.ChatMessageMenuOpened)
+		-- upvalues: var8 (ref), eventNamesModule (copy), var1 (ref), var9 (ref)
+		var8(eventNamesModule.ChatMessageMenuOpened)
 		
-		if var13.inputBoxRef and var13.inputBoxRef.current then
-			var23.current = var13.inputBoxRef.current:IsFocused()
+		if var1.inputBoxRef and var1.inputBoxRef.current then
+			var9.current = var1.inputBoxRef.current:IsFocused()
 		end
 	end, {})
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: unitTestDeviceType (ref), deviceType (copy), var26 (ref), var25 (ref)
+	local var14 = reactModule.useCallback(function()
+		-- upvalues: unitTestDeviceType (ref), deviceType (copy), var12 (ref), var11 (ref)
 		if unitTestDeviceType == deviceType.Phone then
-			var26()
+			var12()
 			
 			return
 		end
-		var25()
-	end, { unitTestDeviceType, var26, var25 })
-	local var29 = reactModule.useCallback(function()
-		-- upvalues: var28 (ref), var23 (ref), var24 (ref)
-		var28()
+		var11()
+	end, { unitTestDeviceType, var12, var11 })
+	local var15 = reactModule.useCallback(function()
+		-- upvalues: var14 (ref), var9 (ref), var10 (ref)
+		var14()
 		
-		if var23.current then
-			var24()
+		if var9.current then
+			var10()
 		end
-	end, { var28, var23.current, var24 })
-	local var30 = reactModule.useCallback(function()
-		-- upvalues: var22 (ref), eventNamesModule (copy), var28 (ref), fFlagAppChatSignalsReplyStoreModule (copy), var14 (ref), var13 (ref), var15 (ref), var24 (ref)
-		var22(eventNamesModule.ChatMessageMenuReplyBtnActivated)
-		var28()
+	end, { var14, var9.current, var10 })
+	local var16 = reactModule.useCallback(function()
+		-- upvalues: var8 (ref), eventNamesModule (copy), var14 (ref), fFlagAppChatSignalsReplyStoreModule (copy), var2 (ref), var1 (ref), var3 (ref), var10 (ref)
+		var8(eventNamesModule.ChatMessageMenuReplyBtnActivated)
+		var14()
 		
-		if fFlagAppChatSignalsReplyStoreModule and var14 then
-			var14.setReplyingTo(var13.message.id)
+		if fFlagAppChatSignalsReplyStoreModule and var2 then
+			var2.setReplyingTo(var1.message.id)
 		else
-			var15(var13.message)
+			var3(var1.message)
 		end
-		var24()
+		var10()
 	end, {
-		var22, var28, if fFlagAppChatSignalsReplyStoreModule then var14 else nil,
-		var15, var13.message, var24
+		var8, var14, if fFlagAppChatSignalsReplyStoreModule then var2 else nil,
+		var3, var1.message, var10
 	})
-	local var31 = reactModule.useCallback(function()
-		-- upvalues: var22 (ref), eventNamesModule (copy), var28 (ref), default (copy), var13 (ref)
-		var22(eventNamesModule.ChatMessageMenuCopyBtnActivated)
-		var28()
+	local var17 = reactModule.useCallback(function()
+		-- upvalues: var8 (ref), eventNamesModule (copy), var14 (ref), default (copy), var1 (ref)
+		var8(eventNamesModule.ChatMessageMenuCopyBtnActivated)
+		var14()
 		default:shareText({
 			context = "AppChat-ChatConversation-MessageContextMenu",
-			text = var13.message.content
+			text = var1.message.content
 		})
-	end, { var22, var28, var13.message })
-	local var32 = reactModule.useCallback(function() end)
-	local var33 = reactModule.useCallback(function() end)
-	local var34 = nil
+	end, { var8, var14, var1.message })
+	local var18 = reactModule.useCallback(function() end)
+	local var19 = reactModule.useCallback(function() end)
+	local var20 = nil
 	
 	if getFFlagAppChatEnableManualTranslationModule() then
-		local var35 = useDispatch()
-		var34 = reactModule.useCallback(function()
-			-- upvalues: var28 (ref), var35 (ref), appChatNetworkingModule (copy), var13 (ref), loggerModule (copy)
-			var28()
-			var35(appChatNetworkingModule.rodux.TranslateUserMessage.API(var13.message.conversationId, var13.message.id)):catch(function(p3)
+		local var21 = useDispatch()
+		var20 = reactModule.useCallback(function()
+			-- upvalues: var14 (ref), var21 (ref), appChatNetworkingModule (copy), var1 (ref), loggerModule (copy)
+			var14()
+			var21(appChatNetworkingModule.rodux.TranslateUserMessage.API(var1.message.conversationId, var1.message.id)):catch(function(p2)
 				-- upvalues: loggerModule (copy)
-				loggerModule:error("Error translating message: ", p3)
+				loggerModule:error("Error translating message: ", p2)
 			end)
-		end, { var13.message, var28, var35 })
+		end, { var1.message, var14, var21 })
 	end
-	local var39, vector2, vector2_1, uDim, uDim_1
-	local var36 = reactModule.useCallback(function() end)
-	local var37 = reactModule.useMemo(function()
-		-- upvalues: images (copy), var21 (ref), var30 (ref), var31 (ref), var13 (ref), var32 (ref), tokens (ref), var33 (ref), getFFlagAppChatEnableManualTranslationModule (copy), var34 (write), var36 (ref)
+	local var22, vector2, vector2_1, uDim, uDim_1
+	local var23 = reactModule.useCallback(function() end)
+	local var24 = reactModule.useMemo(function()
+		-- upvalues: images (copy), var7 (ref), var16 (ref), var17 (ref), var1 (ref), var18 (ref), tokens (ref), var19 (ref), getFFlagAppChatEnableManualTranslationModule (copy), var20 (write), var23 (ref)
 		local list = {
 			{
 				icon = images["icons/placeholder/placeholderOff"],
-				text = var21.replyText,
-				onActivated = var30
+				text = var7.replyText,
+				onActivated = var16
 			},
 			{
 				icon = images["icons/actions/edit/copy"],
-				text = var21.copyText,
-				onActivated = var31
+				text = var7.copyText,
+				onActivated = var17
 			}
 		}
 		
-		if var13.userOwnsMessage then
+		if var1.userOwnsMessage then
 			table.insert(list, {
 				icon = images["icons/actions/edit/edit"],
-				text = var21.editText,
-				onActivated = var32
+				text = var7.editText,
+				onActivated = var18
 			})
 			table.insert(list, {
 				icon = images["icons/actions/edit/delete"],
 				iconColorOverride = tokens.Color.System.Alert.Color3,
-				text = var21.deleteText,
+				text = var7.deleteText,
 				textColorOverride = tokens.Color.System.Alert.Color3,
-				onActivated = var33
+				onActivated = var19
 			})
 			
 			return list
@@ -194,25 +194,25 @@ function MessageContextMenu(p0)
 			table.insert(list, {
 				text = "Translate",
 				icon = images["icons/placeholder/placeholderOff"],
-				onActivated = var34
+				onActivated = var20
 			})
 		end
 		table.insert(list, {
 			icon = images["icons/placeholder/placeholderOff"],
 			iconColorOverride = tokens.Color.System.Alert.Color3,
-			text = var21.reportText,
+			text = var7.reportText,
 			textColorOverride = tokens.Color.System.Alert.Color3,
-			onActivated = var36
+			onActivated = var23
 		})
 		
 		return list
 	end, {
-		var21.replyText, var21.copyText, var21.editText, var21.deleteText,
-		var21.reportText, var21.translateText, var30, var31, var32, var33,
-		if getFFlagAppChatEnableManualTranslationModule() then var34 else nil, var36,
-		var13.userOwnsMessage
+		var7.replyText, var7.copyText, var7.editText, var7.deleteText,
+		var7.reportText, var7.translateText, var16, var17, var18, var19,
+		if getFFlagAppChatEnableManualTranslationModule() then var20 else nil, var23,
+		var1.userOwnsMessage
 	})
-	local var38 = #var37 * 56
+	local var25 = #var24 * 56
 	local _ = nil
 	local _ = nil
 	local _ = nil
@@ -220,19 +220,19 @@ function MessageContextMenu(p0)
 	local _ = nil
 	
 	if unitTestDeviceType == deviceType.Desktop or unitTestDeviceType == deviceType.Tablet then
-		var39 = 20
+		var22 = 20
 		vector2 = unitTestScreenSize
 		vector2_1 = Vector2.new(0.5, 0.5)
 		uDim = UDim.new(0.5, 0)
 		uDim_1 = UDim.new(0.5, 0)
 	else
-		var39 = 0
+		var22 = 0
 		vector2 = Vector2.new(0, 0)
 		vector2_1 = Vector2.new(0.5, 1)
-		uDim = UDim.new(0, var38)
+		uDim = UDim.new(0, var25)
 		uDim_1 = UDim.new(1, 0)
 	end
-	local var44 = reactModule.createElement(contextualMenu, {
+	local var26 = reactModule.createElement(contextualMenu, {
 		isElementBackgroundVisible = true,
 		isElementDividerVisible = true,
 		open = true,
@@ -242,25 +242,25 @@ function MessageContextMenu(p0)
 		anchorPointOverride = vector2_1,
 		horizontalAlignment = Enum.HorizontalAlignment.Center,
 		contextMenuWidthOverride = uDim_1,
-		borderCornerRadius = var39,
-		buttonProps = var37,
-		onDismiss = var29
+		borderCornerRadius = var22,
+		buttonProps = var24,
+		onDismiss = var15
 	})
 	
-	return if unitTestDeviceType == deviceType.Desktop or unitTestDeviceType == deviceType.Tablet then var44 else reactModule.createElement("ImageButton", {
+	return if unitTestDeviceType == deviceType.Desktop or unitTestDeviceType == deviceType.Tablet then var26 else reactModule.createElement("ImageButton", {
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
-		[reactModule.Event.Activated] = var29
+		[reactModule.Event.Activated] = var15
 	}, {
 		PeekView = reactModule.createElement(peekView, {
 			mountAsFullView = false,
 			mountAnimation = true,
 			showDraggerInClosedState = false,
-			briefViewContentHeight = UDim.new(0, var38),
-			fullViewContentHeight = UDim.new(1, -var38),
-			closeSignal = var16.current,
-			viewStateChanged = var27
-		}, { var44 })
+			briefViewContentHeight = UDim.new(0, var25),
+			fullViewContentHeight = UDim.new(1, -var25),
+			closeSignal = var4.current,
+			viewStateChanged = var13
+		}, { var26 })
 	})
 end
 

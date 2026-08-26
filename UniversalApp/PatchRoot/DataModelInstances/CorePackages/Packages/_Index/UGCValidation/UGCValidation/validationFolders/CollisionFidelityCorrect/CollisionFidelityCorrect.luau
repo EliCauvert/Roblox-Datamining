@@ -12,9 +12,9 @@ return {
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: UGCValidationBodyPartCollisionFidelity (ref), errorSourceStringsModule (ref)
-		local rootInstance = p1.rootInstance
+		local rootInstance = p2.rootInstance
 		local default = Enum.CollisionFidelity.Default
 		pcall(function()
 			-- upvalues: default (write), UGCValidationBodyPartCollisionFidelity (copy)
@@ -25,7 +25,7 @@ return {
 		
 		for i, v in descendants do
 			if v:IsA("MeshPart") and v.CollisionFidelity ~= default then
-				p0:fail(errorSourceStringsModule.Keys.CollisionFidelityWrong, {
+				p1:fail(errorSourceStringsModule.Keys.CollisionFidelityWrong, {
 					InstancePath = v:GetFullName(),
 					ExpectedFidelity = default.Name
 				})

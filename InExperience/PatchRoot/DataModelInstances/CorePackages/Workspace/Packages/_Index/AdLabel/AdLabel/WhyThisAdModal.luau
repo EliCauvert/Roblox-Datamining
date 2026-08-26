@@ -15,31 +15,31 @@ local fStringLuaAppAdPreferencesUrl = require(parent_1.SharedFlags).FStringLuaAp
 local getFFlagEnableUnifiedWebViews = require(parent_1.SharedFlags).GetFFlagEnableUnifiedWebViews
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), dialog (ref), view (ref), text (ref), adDisclosureTelemetryModule (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), fStringLuaAppAdPreferencesUrl (ref), httpService (ref), browserService (ref)
-	local var7 = useLocalization({
+	local var1 = useLocalization({
 		whyThisAd = "Feature.GameDetails.Label.WhyThisAd",
 		adPreferences = "Feature.GameDetails.Message.AdPreferences"
 	})
-	local var8 = useTokens()
+	local var2 = useTokens()
 	
 	return reactModule.createElement(dialog.Root, {
 		hasBackdrop = true,
 		disablePortal = false,
-		onClose = p0.onClose
+		onClose = p1.onClose
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var7.whyThisAd }),
+		DialogTitle = reactModule.createElement(dialog.Title, { text = var1.whyThisAd }),
 		DialogContent = reactModule.createElement(dialog.Content, {}, {
 			ContentView = reactModule.createElement(view, { tag = "col auto-xy gap-small" }, {
-				DialogText = reactModule.createElement(dialog.Text, { LayoutOrder = 1, Text = p0.adDisclosureBody }),
-				AdPreferences = if p0.showAdPreferencesUrl then reactModule.createElement(text, {
+				DialogText = reactModule.createElement(dialog.Text, { LayoutOrder = 1, Text = p1.adDisclosureBody }),
+				AdPreferences = if p1.showAdPreferencesUrl then reactModule.createElement(text, {
 					tag = "auto-xy",
 					LayoutOrder = 2,
-					Text = var7.adPreferences,
-					textStyle = var8.Color.Content.Link,
-					fontStyle = var8.Typography.BodyMedium,
+					Text = var1.adPreferences,
+					textStyle = var2.Color.Content.Link,
+					fontStyle = var2.Typography.BodyMedium,
 					onActivated = function()
-						-- upvalues: adDisclosureTelemetryModule (copy), getFFlagEnableUnifiedWebViews (copy), webViewService (copy), fStringLuaAppAdPreferencesUrl (copy), var7 (ref), httpService (copy), browserService (copy)
+						-- upvalues: adDisclosureTelemetryModule (copy), getFFlagEnableUnifiedWebViews (copy), webViewService (copy), fStringLuaAppAdPreferencesUrl (copy), var1 (ref), httpService (copy), browserService (copy)
 						adDisclosureTelemetryModule.logAdPreferencesLinkClicked()
 						
 						if getFFlagEnableUnifiedWebViews() then
@@ -53,7 +53,7 @@ return reactModule.memo(function(p0)
 									onWindowClosedConnection = nil
 								end
 							end)
-							webViewService:OpenWindow(fStringLuaAppAdPreferencesUrl, var7.adPreferences, true)
+							webViewService:OpenWindow(fStringLuaAppAdPreferencesUrl, var1.adPreferences, true)
 							
 							return
 						end
@@ -62,7 +62,7 @@ return reactModule.memo(function(p0)
 							visible = true,
 							isGenericWebview = true,
 							url = fStringLuaAppAdPreferencesUrl,
-							title = var7.adPreferences
+							title = var1.adPreferences
 						}))
 					end
 				}) else nil

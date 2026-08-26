@@ -5,15 +5,15 @@ local dashModule = require(parent.Dash)
 local gameMediaModelModule = require(roduxGames.Models.GameMediaModel)
 local t = {}
 
-return function(p0)
+return function(p1)
 	-- upvalues: roduxModule (ref), t (ref), dashModule (ref), gameMediaModelModule (ref)
 	return roduxModule.createReducer(t, {
-		[p0.networkingGames.GetExperienceMedia.Succeeded.name] = function(p1, p2)
+		[p1.networkingGames.GetExperienceMedia.Succeeded.name] = function(p2, p3)
 			-- upvalues: dashModule (copy), gameMediaModelModule (copy)
-			return dashModule.join(p1, {
-				[tostring(p2.ids[1])] = dashModule.map(p2.responseBody.data, function(p3)
+			return dashModule.join(p2, {
+				[tostring(p3.ids[1])] = dashModule.map(p3.responseBody.data, function(p4)
 					-- upvalues: gameMediaModelModule (copy)
-					return gameMediaModelModule.format(p3)
+					return gameMediaModelModule.format(p4)
 				end)
 			})
 		end

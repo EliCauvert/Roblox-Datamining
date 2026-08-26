@@ -18,14 +18,14 @@ local useEffect = reactModule.useEffect
 local useRef = reactModule.useRef
 local useState = reactModule.useState
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: useEffect (ref), guiService (ref), contextActionService (ref)
 	useEffect(function()
-		-- upvalues: p0 (ref), guiService (copy), contextActionService (copy)
-		if p0 then
-			contextActionService:BindCoreAction("UnfocusMusicWindow", function(_, p1)
+		-- upvalues: p1 (ref), guiService (copy), contextActionService (copy)
+		if p1 then
+			contextActionService:BindCoreAction("UnfocusMusicWindow", function(_, p2)
 				-- upvalues: guiService (copy)
-				if p1 == Enum.UserInputState.End then
+				if p2 == Enum.UserInputState.End then
 					guiService.SelectedCoreObject = nil
 					
 					return Enum.ContextActionResult.Sink
@@ -39,7 +39,7 @@ local function _(p0)
 			end
 		end
 		return nil
-	end, { p0 })
+	end, { p1 })
 end
 
 local t = {
@@ -49,41 +49,41 @@ local t = {
 	onToggleSubMenu = function() end
 }
 
-return function(p2)
+return function(p1)
 	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useRef (ref), responsiveModule (ref), getFFlagChromeMusicWindowTopbarReappearsOnGamepad (ref), usePrevious (ref), getFFlagSongbirdPopoverSubmenuModule (ref), constantsModule (ref), createNextOrder (ref), useState (ref), useCallback (ref), useEffect (ref), runService (ref), guiService (ref), contextActionService (ref), reactModule (ref), collapsibleFrameModule (ref)
-	local var13 = cryoModule.Dictionary.join(t, p2)
-	local var14 = foundationModule.Hooks.useTokens()
-	local var15 = useRef(nil)
-	local var16 = useRef(nil)
-	local var17 = responsiveModule.useLastInput()
-	local var18 = if getFFlagChromeMusicWindowTopbarReappearsOnGamepad() then usePrevious(var17) else nil
-	local var19 = if not (getFFlagSongbirdPopoverSubmenuModule() or typeof(var13.overflowButtonRef) ~= "table" or not var13.overflowButtonRef.current) then (var13.overflowButtonRef.current.AbsolutePosition + Vector2.new(var14.Gap.Small + constantsModule.SUBMENU_WIDTH, 0)).X < var13.overflowButtonRef.current:FindFirstAncestorOfClass("ScreenGui").AbsoluteSize.X else true
-	local var20 = createNextOrder()
-	local var21 = useRef(nil)
-	local var22, var23 = useState(true)
-	local var24 = useCallback(function()
-		-- upvalues: var13 (ref)
-		if var13.onClose then
-			var13.onClose()
+	local var1 = cryoModule.Dictionary.join(t, p1)
+	local var2 = foundationModule.Hooks.useTokens()
+	local var3 = useRef(nil)
+	local var4 = useRef(nil)
+	local var5 = responsiveModule.useLastInput()
+	local var6 = if getFFlagChromeMusicWindowTopbarReappearsOnGamepad() then usePrevious(var5) else nil
+	local var7 = if not (getFFlagSongbirdPopoverSubmenuModule() or typeof(var1.overflowButtonRef) ~= "table" or not var1.overflowButtonRef.current) then (var1.overflowButtonRef.current.AbsolutePosition + Vector2.new(var2.Gap.Small + constantsModule.SUBMENU_WIDTH, 0)).X < var1.overflowButtonRef.current:FindFirstAncestorOfClass("ScreenGui").AbsoluteSize.X else true
+	local var8 = createNextOrder()
+	local var9 = useRef(nil)
+	local var10, var11 = useState(true)
+	local var12 = useCallback(function()
+		-- upvalues: var1 (ref)
+		if var1.onClose then
+			var1.onClose()
 		end
-	end, { var13.onClose })
-	local var25 = useCallback(function(p3)
-		-- upvalues: var21 (ref), var23 (ref), foundationModule (copy)
-		var21.current = nil
-		var23(true)
+	end, { var1.onClose })
+	local var13 = useCallback(function(p2)
+		-- upvalues: var9 (ref), var11 (ref), foundationModule (copy)
+		var9.current = nil
+		var11(true)
 		
-		if p3 == foundationModule.Enums.ControlState.Default then
-			var21.current = os.time()
+		if p2 == foundationModule.Enums.ControlState.Default then
+			var9.current = os.time()
 		end
 	end, {})
 	useEffect(function()
-		-- upvalues: var17 (ref), responsiveModule (copy), var13 (ref), runService (copy), var21 (ref), var23 (ref)
-		if var17 ~= responsiveModule.Input.Pointer then return end
-		if var13.autoCollapseSeconds and var13.autoCollapseSeconds > 0 then
+		-- upvalues: var5 (ref), responsiveModule (copy), var1 (ref), runService (copy), var9 (ref), var11 (ref)
+		if var5 ~= responsiveModule.Input.Pointer then return end
+		if var1.autoCollapseSeconds and var1.autoCollapseSeconds > 0 then
 			local heartbeatConnection = runService.Heartbeat:Connect(function()
-				-- upvalues: var21 (copy), var13 (copy), var23 (copy)
-				if var21.current and var13.autoCollapseSeconds <= os.time() - var21.current then
-					var23(false)
+				-- upvalues: var9 (copy), var1 (copy), var11 (copy)
+				if var9.current and var1.autoCollapseSeconds <= os.time() - var9.current then
+					var11(false)
 				end
 			end)
 			
@@ -93,21 +93,21 @@ return function(p2)
 			end
 		end
 		return nil
-	end, { var13.autoCollapseSeconds, var17 })
-	local var26, var27 = useState(Vector2.new(1e999, 1e999))
-	local var28 = useCallback(function(p4)
-		-- upvalues: var27 (ref)
-		var27(p4.AbsoluteSize)
+	end, { var1.autoCollapseSeconds, var5 })
+	local var14, var15 = useState(Vector2.new(1e999, 1e999))
+	local var16 = useCallback(function(p2)
+		-- upvalues: var15 (ref)
+		var15(p2.AbsoluteSize)
 	end, {})
 	useEffect(function()
-		-- upvalues: var16 (ref), var13 (ref)
-		local current = var16.current
+		-- upvalues: var4 (ref), var1 (ref)
+		local current = var4.current
 		
 		if current then
-			local selectionChangedConnection = current.SelectionChanged:Connect(function(_, _, p5)
-				-- upvalues: current (ref), var13 (copy)
-				if not current:IsAncestorOf(p5) and var13.onUnfocus then
-					var13.onUnfocus()
+			local selectionChangedConnection = current.SelectionChanged:Connect(function(_, _, p2)
+				-- upvalues: current (ref), var1 (copy)
+				if not current:IsAncestorOf(p2) and var1.onUnfocus then
+					var1.onUnfocus()
 				end
 			end)
 			
@@ -117,20 +117,20 @@ return function(p2)
 			end
 		end
 		return nil
-	end, { var13.onUnfocus })
+	end, { var1.onUnfocus })
 	useEffect(function()
-		-- upvalues: var13 (ref), guiService (copy), var15 (ref)
-		if var13.isFocused then
-			guiService.SelectedCoreObject = var15.current
+		-- upvalues: var1 (ref), guiService (copy), var3 (ref)
+		if var1.isFocused then
+			guiService.SelectedCoreObject = var3.current
 		end
-	end, { var13.isFocused })
-	local isFocused = var13.isFocused
+	end, { var1.isFocused })
+	local isFocused = var1.isFocused
 	useEffect(function()
 		-- upvalues: isFocused (ref), guiService (copy), contextActionService (copy)
 		if isFocused then
-			contextActionService:BindCoreAction("UnfocusMusicWindow", function(_, p6)
+			contextActionService:BindCoreAction("UnfocusMusicWindow", function(_, p2)
 				-- upvalues: guiService (copy)
-				if p6 == Enum.UserInputState.End then
+				if p2 == Enum.UserInputState.End then
 					guiService.SelectedCoreObject = nil
 					
 					return Enum.ContextActionResult.Sink
@@ -148,15 +148,15 @@ return function(p2)
 	
 	if getFFlagChromeMusicWindowTopbarReappearsOnGamepad() then
 		useEffect(function()
-			-- upvalues: var18 (ref), var17 (ref), responsiveModule (copy), var23 (ref)
-			if var18 and var17 ~= var18 and var17 ~= responsiveModule.Input.Pointer then
-				var23(true)
+			-- upvalues: var6 (ref), var5 (ref), responsiveModule (copy), var11 (ref)
+			if var6 and var5 ~= var6 and var5 ~= responsiveModule.Input.Pointer then
+				var11(true)
 			end
-		end, { var17, var18 })
+		end, { var5, var6 })
 	end
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-xy",
-		sizeConstraint = { MaxSize = if var13.maxSize then var13.maxSize else nil },
+		sizeConstraint = { MaxSize = if var1.maxSize then var1.maxSize else nil },
 		stateLayer = {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		},
@@ -166,81 +166,81 @@ return function(p2)
 			SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop
 		},
-		onStateChanged = var25,
-		ref = if getFFlagSongbirdPopoverSubmenuModule() then var16 else nil
+		onStateChanged = var13,
+		ref = if getFFlagSongbirdPopoverSubmenuModule() then var4 else nil
 	}, {
 		WindowFrame = reactModule.createElement(foundationModule.View, {
 			tag = "size-full-0 auto-y bg-over-media-100 radius-medium col gap-xxsmall stroke-emphasis"
 		}, {
-			CollapsibleTitleBar = reactModule.createElement(collapsibleFrameModule, { isCollapsed = not var22, LayoutOrder = var20() }, {
+			CollapsibleTitleBar = reactModule.createElement(collapsibleFrameModule, { isCollapsed = not var10, LayoutOrder = var8() }, {
 				TitleBar = reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y row flex-between items-center" }, {
 					Actions = reactModule.createElement(foundationModule.View, {
 						tag = "auto-xy row",
-						LayoutOrder = var20(),
-						onAbsoluteSizeChanged = var28
+						LayoutOrder = var8(),
+						onAbsoluteSizeChanged = var16
 					}, {
 						CloseButton = reactModule.createElement(foundationModule.IconButton, {
 							icon = foundationModule.Enums.IconName.X,
-							layoutOrder = var20(),
+							layoutOrder = var8(),
 							size = foundationModule.Enums.IconSize.Medium,
-							onActivated = var24,
-							ref = var15
+							onActivated = var12,
+							ref = var3
 						})
 					}),
-					CenterAlignedTitle = reactModule.createElement(foundationModule.View, { tag = "size-full-0 shrink auto-y", LayoutOrder = var20() }, {
+					CenterAlignedTitle = reactModule.createElement(foundationModule.View, { tag = "size-full-0 shrink auto-y", LayoutOrder = var8() }, {
 						Title = reactModule.createElement(foundationModule.Text, {
 							tag = "size-full-0 text-title-medium content-emphasis",
-							Text = var13.title,
-							fontStyle = var14.Typography.TitleMedium,
-							Position = UDim2.new(0, -var26.X / 2, 0, 0)
+							Text = var1.title,
+							fontStyle = var2.Typography.TitleMedium,
+							Position = UDim2.new(0, -var14.X / 2, 0, 0)
 						})
 					})
 				})
 			}),
-			Divider = if var22 then reactModule.createElement(foundationModule.View, {
-				backgroundStyle = var14.Color.Stroke.Emphasis,
+			Divider = if var10 then reactModule.createElement(foundationModule.View, {
+				backgroundStyle = var2.Color.Stroke.Emphasis,
 				Size = UDim2.new(1, 0, 0, 1),
-				LayoutOrder = var20()
+				LayoutOrder = var8()
 			}) else nil,
 			Content = reactModule.createElement(foundationModule.View, {
 				tag = "size-full-0 auto-y row flex-between items-center padding-left-small padding-y-small",
-				LayoutOrder = var20()
+				LayoutOrder = var8()
 			}, {
 				Body = reactModule.createElement(foundationModule.View, {
 					tag = "size-full-0 auto-y shrink clip",
-					LayoutOrder = var20()
-				}, var13.children),
+					LayoutOrder = var8()
+				}, var1.children),
 				Actions = reactModule.createElement(foundationModule.View, {
 					tag = "auto-xy row flex-between items-center",
-					LayoutOrder = var20()
+					LayoutOrder = var8()
 				}, {
-					CustomActions = if var13.actions then reactModule.createElement(foundationModule.View, { tag = "row auto-xy", LayoutOrder = var20() }, var13.actions) else nil,
-					OverflowButton = if getFFlagSongbirdPopoverSubmenuModule() then if var13.menuItems and var17 ~= responsiveModule.Input.Directional then reactModule.createElement(foundationModule.IconButton, {
+					CustomActions = if var1.actions then reactModule.createElement(foundationModule.View, { tag = "row auto-xy", LayoutOrder = var8() }, var1.actions) else nil,
+					OverflowButton = if getFFlagSongbirdPopoverSubmenuModule() then if var1.menuItems and var5 ~= responsiveModule.Input.Directional then reactModule.createElement(foundationModule.IconButton, {
 						icon = "icons/common/overflow",
 						size = foundationModule.Enums.IconSize.Medium,
-						onActivated = var13.onToggleSubMenu,
-						LayoutOrder = var20()
-					}) else nil elseif var13.submenu and var17 ~= responsiveModule.Input.Directional then reactModule.createElement(foundationModule.IconButton, {
+						onActivated = var1.onToggleSubMenu,
+						LayoutOrder = var8()
+					}) else nil elseif var1.submenu and var5 ~= responsiveModule.Input.Directional then reactModule.createElement(foundationModule.IconButton, {
 						icon = "icons/common/overflow",
 						size = foundationModule.Enums.IconSize.Medium,
-						onActivated = var13.onToggleSubMenu,
-						LayoutOrder = var20(),
-						ref = var13.overflowButtonRef
+						onActivated = var1.onToggleSubMenu,
+						LayoutOrder = var8(),
+						ref = var1.overflowButtonRef
 					}) else nil
 				})
 			})
 		}),
-		SubMenu = if getFFlagSongbirdPopoverSubmenuModule() then nil elseif var13.submenu and var13.isSubMenuOpen then reactModule.createElement(foundationModule.View, {
+		SubMenu = if getFFlagSongbirdPopoverSubmenuModule() then nil elseif var1.submenu and var1.isSubMenuOpen then reactModule.createElement(foundationModule.View, {
 			tag = "auto-xy bg-over-media-200 radius-medium padding-small",
-			Position = if var19 then UDim2.fromScale(1, 0) + UDim2.fromOffset(var14.Gap.Small, 0) else UDim2.new(1, (-constantsModule.SUBMENU_WIDTH) - constantsModule.ICON_BUTTON_WIDTH / 2, 1, 0) + UDim2.fromOffset(var14.Gap.Small / 2, var14.Gap.Small)
-		}, var13.submenu) else nil,
-		OverflowMenu = if getFFlagSongbirdPopoverSubmenuModule() and var13.menuItems then reactModule.createElement(foundationModule.Menu, {
-			isOpen = var13.isSubMenuOpen,
-			items = var13.menuItems,
+			Position = if var7 then UDim2.fromScale(1, 0) + UDim2.fromOffset(var2.Gap.Small, 0) else UDim2.new(1, (-constantsModule.SUBMENU_WIDTH) - constantsModule.ICON_BUTTON_WIDTH / 2, 1, 0) + UDim2.fromOffset(var2.Gap.Small / 2, var2.Gap.Small)
+		}, var1.submenu) else nil,
+		OverflowMenu = if getFFlagSongbirdPopoverSubmenuModule() and var1.menuItems then reactModule.createElement(foundationModule.Menu, {
+			isOpen = var1.isSubMenuOpen,
+			items = var1.menuItems,
 			side = foundationModule.Enums.PopoverSide.Right,
 			align = foundationModule.Enums.PopoverAlign.Center,
-			anchorRef = var16,
-			onPressedOutside = var13.onToggleSubMenu
+			anchorRef = var4,
+			onPressedOutside = var1.onToggleSubMenu
 		}) else nil
 	})
 end

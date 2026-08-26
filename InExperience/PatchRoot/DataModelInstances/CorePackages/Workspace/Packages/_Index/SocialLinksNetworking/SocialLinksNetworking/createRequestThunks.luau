@@ -3,11 +3,11 @@ local createGetSocialLinksModule = require(networkRequests.createGetSocialLinks)
 local createGetSelfSocialLinksModule = require(networkRequests.createGetSelfSocialLinks)
 local createSetSocialLinksModule = require(networkRequests.createSetSocialLinks)
 
-return function(p0)
+return function(p1)
 	-- upvalues: createGetSocialLinksModule (ref), createGetSelfSocialLinksModule (ref), createSetSocialLinksModule (ref)
 	return {
-		GetSocialLinks = createGetSocialLinksModule(p0),
-		GetSelfSocialLinks = createGetSelfSocialLinksModule(p0),
-		SetSocialLinks = createSetSocialLinksModule(p0)
+		GetSocialLinks = createGetSocialLinksModule(p1),
+		GetSelfSocialLinks = createGetSelfSocialLinksModule(p1),
+		SetSocialLinks = createSetSocialLinksModule(p1)
 	}
 end

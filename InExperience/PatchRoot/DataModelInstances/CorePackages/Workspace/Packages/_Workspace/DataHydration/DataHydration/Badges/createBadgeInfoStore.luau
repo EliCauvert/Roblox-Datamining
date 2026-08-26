@@ -14,9 +14,9 @@ local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
 
 return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), signalsModule (ref), requestRemoveBadgeModule (ref), logResponseError (ref), badgesUrlBuilderModule (ref), discoveryEventErrorLogger (ref)
-	local var8 = createDataCacheModule()
-	local var9 = createDataResolverModule({
-		cache = var8,
+	local var1 = createDataCacheModule()
+	local var2 = createDataResolverModule({
+		cache = var1,
 		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
@@ -24,46 +24,46 @@ return function()
 	})
 	
 	return {
-		getBadgeInfo = var9.getCachedItem,
-		getBadgeInfos = var9.getCachedItems,
-		updateBadges = var8.updateItems,
-		removeBadge = function(p0)
-			-- upvalues: signalsModule (copy), var8 (ref), requestRemoveBadgeModule (copy), logResponseError (copy), badgesUrlBuilderModule (copy), discoveryEventErrorLogger (copy)
-			local var10, var11 = signalsModule.createSignal(nil)
-			local var12 = var8.getItem(p0).data(false)
-			local var13 = if var12 then var12.isEarnedByUser else nil
+		getBadgeInfo = var2.getCachedItem,
+		getBadgeInfos = var2.getCachedItems,
+		updateBadges = var1.updateItems,
+		removeBadge = function(p1)
+			-- upvalues: signalsModule (copy), var1 (ref), requestRemoveBadgeModule (copy), logResponseError (copy), badgesUrlBuilderModule (copy), discoveryEventErrorLogger (copy)
+			local var3, var4 = signalsModule.createSignal(nil)
+			local var5 = var1.getItem(p1).data(false)
+			local var6 = if var5 then var5.isEarnedByUser else nil
 			
-			if var13 == true then
-				var8.updateItem(p0, { isEarnedByUser = false })
+			if var6 == true then
+				var1.updateItem(p1, { isEarnedByUser = false })
 			end
-			requestRemoveBadgeModule(p0):andThen(function()
-				-- upvalues: var11 (ref)
-				var11({ type = "success" })
-			end):catch(function(p1)
-				-- upvalues: var12 (ref), var8 (copy), p0 (ref), var13 (ref), var11 (ref), logResponseError (copy), badgesUrlBuilderModule (copy), discoveryEventErrorLogger (copy)
-				if var12 then
-					var8.updateItem(p0, { isEarnedByUser = var13 })
+			requestRemoveBadgeModule(p1):andThen(function()
+				-- upvalues: var4 (ref)
+				var4({ type = "success" })
+			end):catch(function(p2)
+				-- upvalues: var5 (ref), var1 (copy), p1 (ref), var6 (ref), var4 (ref), logResponseError (copy), badgesUrlBuilderModule (copy), discoveryEventErrorLogger (copy)
+				if var5 then
+					var1.updateItem(p1, { isEarnedByUser = var6 })
 				end
-				local var14 = if type(p1) == "table" and p1.StatusCode then p1.StatusCode else nil
-				local var15 = if type(p1) == "table" and p1.StatusMessage then p1.StatusMessage elseif type(p1) == "string" then p1 else nil
-				var11({
+				local var7 = if type(p2) == "table" and p2.StatusCode then p2.StatusCode else nil
+				local var8 = if type(p2) == "table" and p2.StatusMessage then p2.StatusMessage elseif type(p2) == "string" then p2 else nil
+				var4({
 					type = "error",
 					errorType = "NetworkError",
-					statusCode = var14,
-					statusMessage = var15
+					statusCode = var7,
+					statusMessage = var8
 				})
-				logResponseError(badgesUrlBuilderModule.BADGE_REMOVE_URL, { StatusCode = var14 })
+				logResponseError(badgesUrlBuilderModule.BADGE_REMOVE_URL, { StatusCode = var7 })
 				discoveryEventErrorLogger.reportError("removeBadge", "Error removing badge", {
 					method = "DELETE",
-					badgeId = p0,
-					statusCode = var14,
-					statusMessage = var15
+					badgeId = p1,
+					statusCode = var7,
+					statusMessage = var8
 				})
 			end)
 			
-			return var10
+			return var3
 		end,
-		clear = var9.clear,
-		dispose = var9.dispose
+		clear = var2.clear,
+		dispose = var2.dispose
 	}
 end

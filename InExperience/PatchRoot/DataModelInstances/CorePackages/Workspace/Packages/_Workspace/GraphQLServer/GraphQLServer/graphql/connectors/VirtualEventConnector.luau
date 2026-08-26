@@ -9,147 +9,147 @@ local fetch = fetchModule.fetch
 local response = fetchModule.Response
 local urlBuilder = require(graphQLServer.Parent.UrlBuilder).UrlBuilder
 local t = {}
-local var5 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}")
-local var6 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}/rsvps")
-local var7 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}/rsvps/counters")
-local var8 = urlBuilder.fromString("apis:virtual-events/v1/universes/{id}/virtual-events?cursor={cursor}&limit={limit}&fromUtc={fromUtc}")
-local var9 = urlBuilder.fromString("apis:virtual-events/v1/notifications/modal-history")
-local var10 = urlBuilder.fromString("apis:virtual-events/v1/notifications/preferences")
+local var1 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}")
+local var2 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}/rsvps")
+local var3 = urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}/rsvps/counters")
+local var4 = urlBuilder.fromString("apis:virtual-events/v1/universes/{id}/virtual-events?cursor={cursor}&limit={limit}&fromUtc={fromUtc}")
+local var5 = urlBuilder.fromString("apis:virtual-events/v1/notifications/modal-history")
+local var6 = urlBuilder.fromString("apis:virtual-events/v1/notifications/preferences")
 
-function t.findVirtualEventById(p0, p1)
-	-- upvalues: fetch (ref), promiseModule (ref), var5 (ref), response (ref), graphQLError (ref)
-	local var11 = p1 or fetch
+function t.findVirtualEventById(p1, p2)
+	-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), response (ref), graphQLError (ref)
+	local var7 = p2 or fetch
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: var5 (copy), p0 (ref), var11 (ref), response (copy), graphQLError (copy)
-		local var12 = var11(var5({ id = p0 }), { method = "GET" }):catch(function()
+	return promiseModule.new(function(p3, p4)
+		-- upvalues: var1 (copy), p1 (ref), var7 (ref), response (copy), graphQLError (copy)
+		local var8 = var7(var1({ id = p1 }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
-		if not var12.ok then
-			p3(graphQLError.new(string.format("Failed to find VirtualEvent matching id: %s.", p0)))
+		if not var8.ok then
+			p4(graphQLError.new(string.format("Failed to find VirtualEvent matching id: %s.", p1)))
 			
 			return
 		end
-		local var13 = var12:json():catch(function()
+		local var9 = var8:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var13 then
-			p2(var13)
+		if var9 then
+			p3(var9)
 			
 			return
 		end
-		p3(graphQLError.new(string.format("Failed to decode HTTP response as JSON for VirtualEvent matching id: %s.", p0)))
+		p4(graphQLError.new(string.format("Failed to decode HTTP response as JSON for VirtualEvent matching id: %s.", p1)))
 	end)
 end
 
-function t.findVirtualEventsByUniverseId(p4, p5, p6)
-	-- upvalues: fetch (ref), promiseModule (ref), var8 (ref), response (ref), graphQLError (ref)
-	local var14 = p6 or fetch
+function t.findVirtualEventsByUniverseId(p1, p2, p3)
+	-- upvalues: fetch (ref), promiseModule (ref), var4 (ref), response (ref), graphQLError (ref)
+	local var7 = p3 or fetch
 	
-	return promiseModule.new(function(p7, p8)
-		-- upvalues: var8 (copy), p4 (ref), p5 (ref), var14 (ref), response (copy), graphQLError (copy)
+	return promiseModule.new(function(p4, p5)
+		-- upvalues: var4 (copy), p1 (ref), p2 (ref), var7 (ref), response (copy), graphQLError (copy)
 		local t = {
-			id = p4,
-			cursor = if p5 and p5.cursor then p5.cursor else "",
-			limit = if p5 and p5.limit then p5.limit else 25,
-			fromUtc = if p5 and p5.fromUtc then p5.fromUtc else ""
+			id = p1,
+			cursor = if p2 and p2.cursor then p2.cursor else "",
+			limit = if p2 and p2.limit then p2.limit else 25,
+			fromUtc = if p2 and p2.fromUtc then p2.fromUtc else ""
 		}
-		t = var14(var8(t), { method = "GET" }):catch(function()
+		t = var7(var4(t), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
 		if not t.ok then
-			p8(graphQLError.new(string.format("Failed to find experience matching universeId: %i", p4)))
+			p5(graphQLError.new(string.format("Failed to find experience matching universeId: %i", p1)))
 			
 			return
 		end
-		local var16 = t:json():catch(function()
+		local var8 = t:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var16 then
-			p7({
-				cursor = var16.nextPageCursor,
-				virtualEvents = var16.data
+		if var8 then
+			p4({
+				cursor = var8.nextPageCursor,
+				virtualEvents = var8.data
 			})
 			
 			return
 		end
-		p8(graphQLError.new(string.format("Failed to decode HTTP response as JSON for experience matching universeId: %i", p4)))
+		p5(graphQLError.new(string.format("Failed to decode HTTP response as JSON for experience matching universeId: %i", p1)))
 	end)
 end
 
-function t.findRsvpsByVirtualEventId(p9, p10)
-	-- upvalues: fetch (ref), promiseModule (ref), var6 (ref), response (ref), graphQLError (ref)
-	local var17 = p10 or fetch
+function t.findRsvpsByVirtualEventId(p1, p2)
+	-- upvalues: fetch (ref), promiseModule (ref), var2 (ref), response (ref), graphQLError (ref)
+	local var7 = p2 or fetch
 	
-	return promiseModule.new(function(p11, p12)
-		-- upvalues: var6 (copy), p9 (ref), var17 (ref), response (copy), graphQLError (copy)
-		local var18 = var17(var6({ id = p9 }), { method = "GET" }):catch(function()
+	return promiseModule.new(function(p3, p4)
+		-- upvalues: var2 (copy), p1 (ref), var7 (ref), response (copy), graphQLError (copy)
+		local var8 = var7(var2({ id = p1 }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
-		if not var18.ok then
-			p12(graphQLError.new(string.format("Failed to find RSVPs matching VirtualEvent id: %s.", p9)))
+		if not var8.ok then
+			p4(graphQLError.new(string.format("Failed to find RSVPs matching VirtualEvent id: %s.", p1)))
 			
 			return
 		end
-		local var19 = var18:json():catch(function()
+		local var9 = var8:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var19 then
-			p11(var19.data)
+		if var9 then
+			p3(var9.data)
 			
 			return
 		end
-		p12(graphQLError.new(string.format("Failed to decode HTTP response as JSON for RSVPs matching VirtualEvent id: %s.", p9)))
+		p4(graphQLError.new(string.format("Failed to decode HTTP response as JSON for RSVPs matching VirtualEvent id: %s.", p1)))
 	end)
 end
 
-function t.findRsvpCountersByVirtualEventId(p13, p14)
-	-- upvalues: fetch (ref), promiseModule (ref), var7 (ref), response (ref), graphQLError (ref)
-	local var20 = p14 or fetch
+function t.findRsvpCountersByVirtualEventId(p1, p2)
+	-- upvalues: fetch (ref), promiseModule (ref), var3 (ref), response (ref), graphQLError (ref)
+	local var7 = p2 or fetch
 	
-	return promiseModule.new(function(p15, p16)
-		-- upvalues: var7 (copy), p13 (ref), var20 (ref), response (copy), graphQLError (copy)
-		local var21 = var20(var7({ id = p13 }), { method = "GET" }):catch(function()
+	return promiseModule.new(function(p3, p4)
+		-- upvalues: var3 (copy), p1 (ref), var7 (ref), response (copy), graphQLError (copy)
+		local var8 = var7(var3({ id = p1 }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
-		if not var21.ok then
-			p16(graphQLError.new(string.format("Failed to find RSVP counters matching VirtualEvent id: %s.", p13)))
+		if not var8.ok then
+			p4(graphQLError.new(string.format("Failed to find RSVP counters matching VirtualEvent id: %s.", p1)))
 			
 			return
 		end
-		local var22 = var21:json():catch(function()
+		local var9 = var8:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var22 then
-			p15(var22.counters)
+		if var9 then
+			p3(var9.counters)
 			
 			return
 		end
-		p16(graphQLError.new(string.format("Failed to decode HTTP response as JSON for RSVP counters matching VirtualEvent id: %s.", p13)))
+		p4(graphQLError.new(string.format("Failed to decode HTTP response as JSON for RSVP counters matching VirtualEvent id: %s.", p1)))
 	end)
 end
 
-function t.updateRsvpStatus(p17, p18, p19)
-	-- upvalues: fetch (ref), promiseModule (ref), var6 (ref), httpService (ref), response (ref), graphQLError (ref)
-	local var23 = p19 or fetch
+function t.updateRsvpStatus(p1, p2, p3)
+	-- upvalues: fetch (ref), promiseModule (ref), var2 (ref), httpService (ref), response (ref), graphQLError (ref)
+	local var7 = p3 or fetch
 	
-	return promiseModule.new(function(p20, p21)
-		-- upvalues: var6 (copy), p17 (ref), var23 (ref), httpService (copy), p18 (ref), response (copy), graphQLError (copy)
-		local var24 = var23(var6({ id = p17 }), {
+	return promiseModule.new(function(p4, p5)
+		-- upvalues: var2 (copy), p1 (ref), var7 (ref), httpService (copy), p2 (ref), response (copy), graphQLError (copy)
+		local var8 = var7(var2({ id = p1 }), {
 			method = "POST",
-			body = httpService:JSONEncode({ rsvpStatus = p18 }),
+			body = httpService:JSONEncode({ rsvpStatus = p2 }),
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
@@ -159,52 +159,52 @@ function t.updateRsvpStatus(p17, p18, p19)
 			return response.error()
 		end):expect()
 		
-		if not var24.ok then
-			p21(graphQLError.new(string.format("Failed to set RSVP status matching VirtualEvent id: %s.", p17)))
+		if not var8.ok then
+			p5(graphQLError.new(string.format("Failed to set RSVP status matching VirtualEvent id: %s.", p1)))
 			
 			return
 		end
-		local var25 = var24:json():catch(function()
+		local var9 = var8:json():catch(function()
 			return nil
 		end):expect()
 		
-		if var25 then
-			p20({
-				shouldSeeNotificationsUpsellModal = var25.shouldSeeNotificationsUpsellModal,
-				virtualEvent = { id = p17, userRsvpStatus = var25.rsvpStatus }
+		if var9 then
+			p4({
+				shouldSeeNotificationsUpsellModal = var9.shouldSeeNotificationsUpsellModal,
+				virtualEvent = { id = p1, userRsvpStatus = var9.rsvpStatus }
 			})
 			
 			return
 		end
-		p21(graphQLError.new(string.format("Failed to decode HTTP response as JSON for RSVP status matching VirtualEvent id: %s.", p17)))
+		p5(graphQLError.new(string.format("Failed to decode HTTP response as JSON for RSVP status matching VirtualEvent id: %s.", p1)))
 	end)
 end
 
-function t.neverShowNotificationModalAgain(p22)
-	-- upvalues: fetch (ref), promiseModule (ref), var9 (ref), response (ref), graphQLError (ref)
-	local var26 = p22 or fetch
+function t.neverShowNotificationModalAgain(p1)
+	-- upvalues: fetch (ref), promiseModule (ref), var5 (ref), response (ref), graphQLError (ref)
+	local var7 = p1 or fetch
 	
-	return promiseModule.new(function(p23, p24)
-		-- upvalues: var9 (copy), var26 (ref), response (copy), graphQLError (copy)
-		if var26(var9(), { method = "POST" }):catch(function()
+	return promiseModule.new(function(p2, p3)
+		-- upvalues: var5 (copy), var7 (ref), response (copy), graphQLError (copy)
+		if var7(var5(), { method = "POST" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect().ok then
-			p23(true)
+			p2(true)
 			
 			return
 		end
-		p24(graphQLError.new("Failed to update modal history"))
+		p3(graphQLError.new("Failed to update modal history"))
 	end)
 end
 
-function t.enablePushNotifications(p25)
-	-- upvalues: fetch (ref), promiseModule (ref), var10 (ref), httpService (ref), response (ref), graphQLError (ref)
-	local var27 = p25 or fetch
+function t.enablePushNotifications(p1)
+	-- upvalues: fetch (ref), promiseModule (ref), var6 (ref), httpService (ref), response (ref), graphQLError (ref)
+	local var7 = p1 or fetch
 	
-	return promiseModule.new(function(p26, p27)
-		-- upvalues: var10 (copy), var27 (ref), httpService (copy), response (copy), graphQLError (copy)
-		if var27(var10(), {
+	return promiseModule.new(function(p2, p3)
+		-- upvalues: var6 (copy), var7 (ref), httpService (copy), response (copy), graphQLError (copy)
+		if var7(var6(), {
 			method = "POST",
 			body = httpService:JSONEncode({ isEnabled = true }),
 			headers = {
@@ -215,11 +215,11 @@ function t.enablePushNotifications(p25)
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect().ok then
-			p26(true)
+			p2(true)
 			
 			return
 		end
-		p27(graphQLError.new("Failed to update notification preferences"))
+		p3(graphQLError.new("Failed to update notification preferences"))
 	end)
 end
 

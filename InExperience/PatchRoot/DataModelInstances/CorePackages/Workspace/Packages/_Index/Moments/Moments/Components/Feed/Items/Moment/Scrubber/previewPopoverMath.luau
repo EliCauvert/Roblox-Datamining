@@ -1,16 +1,16 @@
 ﻿return {
 	getCenterOffsetX = function(value)
-		local var0 = value.containerPosition + value.ratio * value.containerWidth
-		local var1 = value.insetLeft + value.margin
-		local var2 = value.screenWidth - value.insetRight - value.margin
-		local var3 = var2 - var1
+		local var1 = value.containerPosition + value.ratio * value.containerWidth
+		local var2 = value.insetLeft + value.margin
+		local var3 = value.screenWidth - value.insetRight - value.margin
+		local var4 = var3 - var2
 		
-		if var3 <= 0 or value.popoverWidth <= 0 then
-			return var0 - value.containerPosition
+		if var4 <= 0 or value.popoverWidth <= 0 then
+			return var1 - value.containerPosition
 		end
-		local var4 = var1 + value.popoverWidth / 2
-		local var5 = var2 - value.popoverWidth / 2
+		local var5 = var2 + value.popoverWidth / 2
+		local var6 = var3 - value.popoverWidth / 2
 		
-		return (if var5 < var4 then var1 + var3 / 2 else math.clamp(var0, var4, var5)) - value.containerPosition
+		return (if var6 < var5 then var2 + var4 / 2 else math.clamp(var1, var5, var6)) - value.containerPosition
 	end
 }

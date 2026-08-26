@@ -5,8 +5,8 @@ local _ = require(momentsCreation.Types.CreationFlowTypes)
 
 return function()
 	-- upvalues: reactModule (ref), creationControllerContextModule (ref)
-	local var3 = reactModule.useContext(creationControllerContextModule)
-	assert(var3 ~= nil, "useCreationController must be used within a CreationControllerProvider")
+	local var1 = reactModule.useContext(creationControllerContextModule)
+	assert(var1 ~= nil, "useCreationController must be used within a CreationControllerProvider")
 	
-	return var3
+	return var1
 end

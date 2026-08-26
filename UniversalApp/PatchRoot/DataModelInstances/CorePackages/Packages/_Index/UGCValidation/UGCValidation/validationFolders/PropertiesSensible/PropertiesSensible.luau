@@ -35,17 +35,17 @@ local function walkInstanceTree(p1, p2, p3)
 	end
 end
 
-function t.run(p1, p2)
+function t.run(p4, p5)
 	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), getFIntUGCValidateMaxHSRDataLenModule (ref), walkInstanceTree (ref)
 	if not getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then return end
 	local t = {
 		HiddenSurfaceRemovalAsset = { HSRData = getFIntUGCValidateMaxHSRDataLenModule() }
 	}
-	walkInstanceTree(p1, p2.rootInstance, t)
+	walkInstanceTree(p4, p5.rootInstance, t)
 	
-	for i, v in p2.hsrAssets do
+	for i, v in p5.hsrAssets do
 		for i_1, v_1 in v do
-			walkInstanceTree(p1, v_1, t)
+			walkInstanceTree(p4, v_1, t)
 		end
 	end
 end

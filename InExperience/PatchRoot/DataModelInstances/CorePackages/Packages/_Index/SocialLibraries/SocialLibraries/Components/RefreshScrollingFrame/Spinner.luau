@@ -21,48 +21,48 @@ spinner.validateProps = t.interface({
 	forwardRef = t.optional(t.table)
 })
 
-function spinner.init(p0)
-	function p0.renderSteppedCallback(p1)
-		-- upvalues: p0 (ref)
-		local spinSpeed = p0.props.spinSpeed
+function spinner.init(p1)
+	function p0.renderSteppedCallback(p2)
+		-- upvalues: p1 (ref)
+		local spinSpeed = p1.props.spinSpeed
 		
-		if p0.props.isSpinning and p0.ref.current then
-			p0.ref.current.Rotation += spinSpeed * p1
+		if p1.props.isSpinning and p1.ref.current then
+			p1.ref.current.Rotation += spinSpeed * p2
 		end
 	end
 end
 
-function spinner.render(p2)
+function spinner.render(p1)
 	-- upvalues: roact (ref), withStyle (ref), imageSetLabel (ref), images (ref), externalEventConnectionModule (ref), runService (ref)
-	local size = p2.props.Size
-	local position = p2.props.Position
-	local anchorPoint = p2.props.AnchorPoint
-	local imageColor3 = p2.props.ImageColor3
-	local imageTransparency = p2.props.ImageTransparency
-	local isSpinning = p2.props.isSpinning
-	p2.ref = p2.props.forwardRef or (p2.ref or roact.createRef())
+	local size = p1.props.Size
+	local position = p1.props.Position
+	local anchorPoint = p1.props.AnchorPoint
+	local imageColor3 = p1.props.ImageColor3
+	local imageTransparency = p1.props.ImageTransparency
+	local isSpinning = p1.props.isSpinning
+	p1.ref = p1.props.forwardRef or (p1.ref or roact.createRef())
 	
-	return withStyle(function(p3)
-		-- upvalues: roact (copy), imageSetLabel (copy), size (ref), position (ref), anchorPoint (ref), images (copy), imageColor3 (ref), imageTransparency (ref), p2 (ref), isSpinning (ref), externalEventConnectionModule (copy), runService (copy)
+	return withStyle(function(p2)
+		-- upvalues: roact (copy), imageSetLabel (copy), size (ref), position (ref), anchorPoint (ref), images (copy), imageColor3 (ref), imageTransparency (ref), p1 (ref), isSpinning (ref), externalEventConnectionModule (copy), runService (copy)
 		return roact.createElement(imageSetLabel, {
 			Size = size,
 			Position = position,
 			AnchorPoint = anchorPoint,
 			BackgroundTransparency = 1,
 			Image = images["icons/common/refresh"],
-			ImageColor3 = imageColor3 or p3.Theme.SystemPrimaryDefault.Color,
-			ImageTransparency = imageTransparency or p3.Theme.SystemPrimaryDefault.Transparency,
-			[roact.Ref] = p2.ref
+			ImageColor3 = imageColor3 or p2.Theme.SystemPrimaryDefault.Color,
+			ImageTransparency = imageTransparency or p2.Theme.SystemPrimaryDefault.Transparency,
+			[roact.Ref] = p1.ref
 		}, {
 			renderStepped = isSpinning and roact.createElement(externalEventConnectionModule, {
 				event = runService.renderStepped,
-				callback = p2.renderSteppedCallback
+				callback = p1.renderSteppedCallback
 			})
 		})
 	end)
 end
 
-return roact.forwardRef(function(p4, p5)
+return roact.forwardRef(function(p1, p2)
 	-- upvalues: roact (ref), spinner (ref), cryo (ref)
-	return roact.createElement(spinner, cryo.Dictionary.join(p4, { forwardRef = p5 }))
+	return roact.createElement(spinner, cryo.Dictionary.join(p1, { forwardRef = p2 }))
 end)

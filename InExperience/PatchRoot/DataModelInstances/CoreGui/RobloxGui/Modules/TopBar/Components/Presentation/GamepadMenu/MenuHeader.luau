@@ -16,17 +16,17 @@ menuHeader.validateProps = tModule.strictInterface({
 	height = tModule.numberPositive
 })
 
-function menuHeader.render(p0)
+function menuHeader.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), circle17 (ref), rect (ref), imageUnavailable (ref)
-	return withStyle(function(p1)
-		-- upvalues: roactModule (copy), imageSetLabel (copy), circle17 (copy), rect (copy), imageUnavailable (copy), p0 (ref)
-		local theme = p1.Theme
-		local font = p1.Font
+	return withStyle(function(p2)
+		-- upvalues: roactModule (copy), imageSetLabel (copy), circle17 (copy), rect (copy), imageUnavailable (copy), p1 (ref)
+		local theme = p2.Theme
+		local font = p2.Font
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = p0.props.layoutOrder,
-			Size = UDim2.new(1, 0, 0, p0.props.height)
+			LayoutOrder = p1.props.layoutOrder,
+			Size = UDim2.new(1, 0, 0, p1.props.height)
 		}, {
 			ContentsFrame = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 				Layout = roactModule.createElement("UIListLayout", {
@@ -46,16 +46,16 @@ function menuHeader.render(p0)
 					SliceCenter = rect,
 					ScaleType = Enum.ScaleType.Slice,
 					Size = UDim2.fromOffset(80, 80),
-					ImageColor3 = p1.Theme.PlaceHolder.Color,
-					ImageTransparency = p1.Theme.PlaceHolder.Transparency
+					ImageColor3 = p2.Theme.PlaceHolder.Color,
+					ImageTransparency = p2.Theme.PlaceHolder.Transparency
 				}, {
 					PlaceholderIcon = roactModule.createElement(imageSetLabel, {
 						BackgroundTransparency = 1,
 						Size = UDim2.fromOffset(44, 44),
 						Position = UDim2.fromScale(0.5, 0.5),
 						Image = imageUnavailable,
-						ImageColor3 = p1.Theme.UIDefault.Color,
-						ImageTransparency = p1.Theme.UIDefault.Transparency,
+						ImageColor3 = p2.Theme.UIDefault.Color,
+						ImageTransparency = p2.Theme.UIDefault.Transparency,
 						AnchorPoint = Vector2.new(0.5, 0.5)
 					})
 				}) else roactModule.createElement("ImageLabel", {
@@ -75,7 +75,7 @@ function menuHeader.render(p0)
 						Size = UDim2.new(1, 0, 1, -45),
 						Position = UDim2.fromOffset(0, 25),
 						Font = font.Header1.Font,
-						Text = p0.props.gameName,
+						Text = p1.props.gameName,
 						TextSize = font.BaseSize * font.Header1.RelativeSize,
 						TextColor3 = theme.TextEmphasis.Color,
 						TextTransparency = theme.TextEmphasis.TextTransparency,
@@ -97,6 +97,6 @@ function menuHeader.render(p0)
 	end)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2)
-	return { gameName = p2.gameInfo.name }
+return roactRoduxModule.UNSTABLE_connect2(function(p1)
+	return { gameName = p1.gameInfo.name }
 end, nil)(menuHeader)

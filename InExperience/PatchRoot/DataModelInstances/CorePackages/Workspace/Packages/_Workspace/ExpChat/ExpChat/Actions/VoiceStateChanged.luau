@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1)
-	return { userId = tostring(p0), newState = p1 }
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
+	return { userId = tostring(p1), newState = p2 }
 end)

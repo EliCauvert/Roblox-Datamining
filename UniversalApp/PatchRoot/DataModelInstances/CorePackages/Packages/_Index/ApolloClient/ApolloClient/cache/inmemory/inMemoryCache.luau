@@ -41,18 +41,18 @@ local t_1 = {
 local tbl = setmetatable({}, { __index = apolloCache })
 tbl.__index = tbl
 
-function tbl.new(p0)
+function tbl.new(p1)
 	-- upvalues: apolloCache (ref), tbl (ref), set (ref), map (ref), makeVar (ref), object (ref), t_1 (ref), policies (ref)
 	local tbl_1 = setmetatable(apolloCache.new(), tbl)
 	
-	if p0 == nil then
-		p0 = {}
+	if p1 == nil then
+		p1 = {}
 	end
 	tbl_1.watches = set.new()
 	tbl_1.typenameDocumentCache = map.new(nil)
 	tbl_1.makeVar = makeVar
 	tbl_1.txCount = 0
-	tbl_1.config = object.assign({}, t_1, p0)
+	tbl_1.config = object.assign({}, t_1, p1)
 	tbl_1.addTypename = tbl_1.config.addTypename
 	tbl_1.policies = policies.new({
 		cache = tbl_1,
@@ -90,49 +90,49 @@ function tbl:resetResultCache(p1)
 		return self:broadcastWatch(p2, p3)
 	end, {
 		max = self.config.resultCacheMaxSize,
-		makeCacheKey = function(_, p4)
+		makeCacheKey = function(_, p2)
 			-- upvalues: self (write), supportsResultCaching (copy), canonicalStringify (copy)
-			local var11 = if p4.optimistic then self.optimisticData else self.data
+			local var1 = if p2.optimistic then self.optimisticData else self.data
 			
-			if supportsResultCaching(var11) then
-				return var11:makeCacheKey(p4.query, p4.callback, canonicalStringify({
-					optimistic = p4.optimistic,
-					rootId = p4.rootId,
-					variables = p4.variables
+			if supportsResultCaching(var1) then
+				return var1:makeCacheKey(p2.query, p2.callback, canonicalStringify({
+					optimistic = p2.optimistic,
+					rootId = p2.rootId,
+					variables = p2.variables
 				}))
 			end
 		end
 	}, self)
-	set.new({ self.data.group, self.optimisticData.group }):forEach(function(p5)
-		return p5:resetCaching()
+	set.new({ self.data.group, self.optimisticData.group }):forEach(function(p2)
+		return p2:resetCaching()
 	end)
 end
 
-function tbl:restore(p6)
+function tbl:restore(p1)
 	self:init()
 	
-	if p6 then
-		self.data:replace(p6)
+	if p1 then
+		self.data:replace(p1)
 	end
 	return self
 end
 
-function tbl:extract(p7)
-	if p7 == nil then
-		p7 = false
+function tbl:extract(p1)
+	if p1 == nil then
+		p1 = false
 	end
-	return if p7 then self.optimisticData:extract() else self.data:extract()
+	return if p1 then self.optimisticData:extract() else self.data:extract()
 end
 
-function tbl.read(p8, p9)
+function tbl.read(p1, p2)
 	-- upvalues: object (ref), NULL (ref), instanceof (ref), missingFieldError (ref)
-	local var12 = if p9.returnPartialData == nil then false else p9.returnPartialData
+	local var1 = if p2.returnPartialData == nil then false else p2.returnPartialData
 	local ok, status = pcall(function()
-		-- upvalues: p8 (ref), object (copy), p9 (ref), var12 (write), NULL (copy)
-		return p8.storeReader:diffQueryAgainstStore(object.assign({}, p9, {
-			store = if p9.optimistic then p8.optimisticData else p8.data,
-			config = p8.config,
-			returnPartialData = var12
+		-- upvalues: p1 (ref), object (copy), p2 (ref), var1 (write), NULL (copy)
+		return p1.storeReader:diffQueryAgainstStore(object.assign({}, p2, {
+			store = if p2.optimistic then p1.optimisticData else p1.data,
+			config = p1.config,
+			returnPartialData = var1
 		})).result or NULL
 	end)
 	
@@ -145,16 +145,16 @@ function tbl.read(p8, p9)
 	return status
 end
 
-function tbl:write(p10)
+function tbl:write(p1)
 	local ok, status = pcall(function()
-		-- upvalues: self (write), p10 (ref)
+		-- upvalues: self (write), p1 (ref)
 		self.txCount += 1
 		
-		return self.storeWriter:writeToStore(self.data, p10)
+		return self.storeWriter:writeToStore(self.data, p1)
 	end)
 	self.txCount -= 1
 	
-	if self.txCount == 0 and p10.broadcast ~= false then
+	if self.txCount == 0 and p1.broadcast ~= false then
 		self:broadcastWatches()
 	end
 	if not ok then
@@ -163,21 +163,21 @@ function tbl:write(p10)
 	return status
 end
 
-function tbl:modify(p11)
+function tbl:modify(p1)
 	-- upvalues: hasOwn (ref)
-	if hasOwn(p11, "id") and not p11.id then
+	if hasOwn(p1, "id") and not p1.id then
 		return false
 	end
-	local var13 = if p11.optimistic then self.optimisticData else self.data
+	local var1 = if p1.optimistic then self.optimisticData else self.data
 	local ok, status = pcall(function()
-		-- upvalues: self (write), var13 (write), p11 (ref)
+		-- upvalues: self (write), var1 (write), p1 (ref)
 		self.txCount += 1
 		
-		return var13:modify(p11.id or "ROOT_QUERY", p11.fields)
+		return var1:modify(p1.id or "ROOT_QUERY", p1.fields)
 	end)
 	self.txCount -= 1
 	
-	if self.txCount == 0 and p11.broadcast ~= false then
+	if self.txCount == 0 and p1.broadcast ~= false then
 		self:broadcastWatches()
 	end
 	if not ok then
@@ -186,81 +186,81 @@ function tbl:modify(p11)
 	return status
 end
 
-function tbl:diff(p12)
+function tbl:diff(p1)
 	-- upvalues: object (ref)
-	return self.storeReader:diffQueryAgainstStore(object.assign({}, p12, {
-		store = if p12.optimistic then self.optimisticData else self.data,
-		rootId = p12.id or "ROOT_QUERY",
+	return self.storeReader:diffQueryAgainstStore(object.assign({}, p1, {
+		store = if p1.optimistic then self.optimisticData else self.data,
+		rootId = p1.id or "ROOT_QUERY",
 		config = self.config
 	}))
 end
 
-function tbl:watch(p13)
+function tbl:watch(p1)
 	-- upvalues: recallCache (ref), forgetCache (ref)
 	if self.watches.size == 0 then
 		recallCache(self)
 	end
-	self.watches:add(p13)
+	self.watches:add(p1)
 	
-	if p13.immediate then
-		self:maybeBroadcastWatch(p13)
+	if p1.immediate then
+		self:maybeBroadcastWatch(p1)
 	end
 	return function()
-		-- upvalues: self (write), p13 (ref), forgetCache (copy)
-		if self.watches:delete(p13) and self.watches.size == 0 then
+		-- upvalues: self (write), p1 (ref), forgetCache (copy)
+		if self.watches:delete(p1) and self.watches.size == 0 then
 			forgetCache(self)
 		end
-		self.maybeBroadcastWatch:forget(p13)
+		self.maybeBroadcastWatch:forget(p1)
 	end
 end
 
-function tbl:gc(p14)
+function tbl:gc(p1)
 	-- upvalues: canonicalStringify (ref)
 	canonicalStringify:reset()
-	local var14 = self.optimisticData:gc()
+	local var1 = self.optimisticData:gc()
 	
-	if p14 and self.txCount == 0 then
-		if p14.resetResultCache then
-			self:resetResultCache(p14.resetResultIdentities)
+	if p1 and self.txCount == 0 then
+		if p1.resetResultCache then
+			self:resetResultCache(p1.resetResultIdentities)
 			
-			return var14
-		elseif p14.resetResultIdentities then
+			return var1
+		elseif p1.resetResultIdentities then
 			self.storeReader:resetCanon()
 		end
 	end
-	return var14
+	return var1
 end
 
-function tbl:retain(p15, p16)
-	return if p16 then self.optimisticData:retain(p15) else self.data:retain(p15)
+function tbl:retain(p1, p2)
+	return if p2 then self.optimisticData:retain(p1) else self.data:retain(p1)
 end
 
-function tbl:release(p17, p18)
-	return if p18 then self.optimisticData:release(p17) else self.data:release(p17)
+function tbl:release(p1, p2)
+	return if p2 then self.optimisticData:release(p1) else self.data:release(p1)
 end
 
-function tbl:identify(p19)
+function tbl:identify(p1)
 	-- upvalues: isReference (ref)
-	return if isReference(p19) then p19.__ref else self.policies:identify(p19)[1]
+	return if isReference(p1) then p1.__ref else self.policies:identify(p1)[1]
 end
 
-function tbl:evict(p20)
+function tbl:evict(p1)
 	-- upvalues: hasOwn (ref), object (ref)
-	if not p20.id then
-		if hasOwn(p20, "id") then
+	if not p1.id then
+		if hasOwn(p1, "id") then
 			return false
 		end
-		p20 = object.assign(table.clone(p20), { id = "ROOT_QUERY" })
+		p1 = object.assign(table.clone(p1), { id = "ROOT_QUERY" })
 	end
 	local ok, status = pcall(function()
-		-- upvalues: self (write), p20 (write)
+		-- upvalues: self (write), p1 (write)
 		self.txCount += 1
 		
-		return self.optimisticData:evict(p20)
+		return self.optimisticData:evict(p1)
 	end)
 	self.txCount -= 1
 	
-	if self.txCount == 0 and p20.broadcast ~= false then
+	if self.txCount == 0 and p1.broadcast ~= false then
 		self:broadcastWatches()
 	end
 	if not ok then
@@ -278,32 +278,32 @@ function tbl:reset()
 	return promiseModule.delay(0)
 end
 
-function tbl:removeOptimistic(p21)
-	local var15 = self.optimisticData:removeLayer(p21)
+function tbl:removeOptimistic(p1)
+	local var1 = self.optimisticData:removeLayer(p1)
 	
-	if var15 ~= self.optimisticData then
-		self.optimisticData = var15
+	if var1 ~= self.optimisticData then
+		self.optimisticData = var1
 		self:broadcastWatches()
 	end
 end
 
-function tbl:batch(p22)
+function tbl:batch(p1)
 	-- upvalues: set (ref), object (ref)
-	local var16 = p22.optimistic == nil or p22.optimistic
-	local removeOptimistic = p22.removeOptimistic
-	local onWatchUpdated = p22.onWatchUpdated
+	local var1 = p1.optimistic == nil or p1.optimistic
+	local removeOptimistic = p1.removeOptimistic
+	local onWatchUpdated = p1.onWatchUpdated
 	
-	local function perform(p23)
-		-- upvalues: self (write), p22 (ref)
+	local function perform(p2)
+		-- upvalues: self (write), p1 (ref)
 		local data = self.data
 		local optimisticData = self.optimisticData
 		self.txCount += 1
 		
-		if p23 then
-			self.optimisticData = p23
+		if p2 then
+			self.optimisticData = p2
 			self.data = self.optimisticData
 		end
-		local ok, status = pcall(p22.update, p22, self)
+		local ok, status = pcall(p1.update, p1, self)
 		self.txCount -= 1
 		self.data = data
 		self.optimisticData = optimisticData
@@ -313,21 +313,21 @@ function tbl:batch(p22)
 		end
 	end
 	
-	local var18 = set.new()
+	local var2 = set.new()
 	
 	if onWatchUpdated and self.txCount == 0 then
-		self:broadcastWatches(object.assign(table.clone(p22), {
-			onWatchUpdated = function(_, p24)
-				-- upvalues: var18 (ref)
-				var18:add(p24)
+		self:broadcastWatches(object.assign(table.clone(p1), {
+			onWatchUpdated = function(_, p2)
+				-- upvalues: var2 (ref)
+				var2:add(p2)
 				
 				return false
 			end
 		}))
 	end
-	if typeof(var16) == "string" then
-		self.optimisticData = self.optimisticData:addLayer(var16, perform)
-	elseif var16 == false then
+	if typeof(var1) == "string" then
+		self.optimisticData = self.optimisticData:addLayer(var1, perform)
+	elseif var1 == false then
 		perform(self.data)
 	else
 		perform()
@@ -335,85 +335,85 @@ function tbl:batch(p22)
 	if typeof(removeOptimistic) == "string" then
 		self.optimisticData = self.optimisticData:removeLayer(removeOptimistic)
 	end
-	if onWatchUpdated and var18.size > 0 then
-		self:broadcastWatches(object.assign(table.clone(p22), {
-			onWatchUpdated = function(p25, p26, p27)
-				-- upvalues: onWatchUpdated (ref), var18 (ref)
-				local var19 = onWatchUpdated(p25, p26, p27)
+	if onWatchUpdated and var2.size > 0 then
+		self:broadcastWatches(object.assign(table.clone(p1), {
+			onWatchUpdated = function(p2, p3, p4)
+				-- upvalues: onWatchUpdated (ref), var2 (ref)
+				local var3 = onWatchUpdated(p2, p3, p4)
 				
-				if var19 ~= false then
-					var18:delete(p26)
+				if var3 ~= false then
+					var2:delete(p3)
 				end
-				return var19
+				return var3
 			end
 		}))
 		
-		if var18.size > 0 then
-			var18:forEach(function(p28)
+		if var2.size > 0 then
+			var2:forEach(function(p2)
 				-- upvalues: self (write)
-				return self.maybeBroadcastWatch:dirty(p28)
+				return self.maybeBroadcastWatch:dirty(p2)
 			end)
 		end
 	else
-		self:broadcastWatches(p22)
+		self:broadcastWatches(p1)
 	end
 end
 
-function tbl:performTransaction(p29, p30)
+function tbl:performTransaction(p1, p2)
 	-- upvalues: NULL (ref)
 	return self:batch({
 		update = function(_, ...)
-			-- upvalues: p29 (ref)
-			return p29(...)
+			-- upvalues: p1 (ref)
+			return p1(...)
 		end,
-		optimistic = p30 or p30 ~= NULL
+		optimistic = p2 or p2 ~= NULL
 	})
 end
 
-function tbl:transformDocument(p31)
+function tbl:transformDocument(p1)
 	-- upvalues: addTypenameToDocument (ref)
 	if not self.addTypename then
-		return p31
+		return p1
 	end
-	local var20 = self.typenameDocumentCache:get(p31)
+	local var1 = self.typenameDocumentCache:get(p1)
 	
-	if not var20 then
-		var20 = addTypenameToDocument(p31)
-		self.typenameDocumentCache:set(p31, var20)
-		self.typenameDocumentCache:set(var20, var20)
+	if not var1 then
+		var1 = addTypenameToDocument(p1)
+		self.typenameDocumentCache:set(p1, var1)
+		self.typenameDocumentCache:set(var1, var1)
 	end
-	return var20
+	return var1
 end
 
-function tbl:broadcastWatches(p32)
+function tbl:broadcastWatches(p1)
 	if self.txCount == 0 then
-		self.watches:forEach(function(p33)
-			-- upvalues: self (ref), p32 (ref)
-			return self:maybeBroadcastWatch(p33, p32)
+		self.watches:forEach(function(p2)
+			-- upvalues: self (ref), p1 (ref)
+			return self:maybeBroadcastWatch(p2, p1)
 		end)
 	end
 end
 
-function tbl:broadcastWatch(p34, p35)
+function tbl:broadcastWatch(p1, p2)
 	-- upvalues: equalModule (ref)
-	local lastDiff = p34.lastDiff
-	local var21 = self:diff({
-		query = p34.query,
-		variables = p34.variables,
-		optimistic = p34.optimistic
+	local lastDiff = p1.lastDiff
+	local var1 = self:diff({
+		query = p1.query,
+		variables = p1.variables,
+		optimistic = p1.optimistic
 	})
 	
-	if p35 then
-		if p34.optimistic and typeof(p35.optimistic) == "string" then
-			var21.fromOptimisticTransaction = true
+	if p2 then
+		if p1.optimistic and typeof(p2.optimistic) == "string" then
+			var1.fromOptimisticTransaction = true
 		end
-		local onWatchUpdated = p35.onWatchUpdated
+		local onWatchUpdated = p2.onWatchUpdated
 		
-		if onWatchUpdated and onWatchUpdated(self, p34, var21, lastDiff) == false then return end
+		if onWatchUpdated and onWatchUpdated(self, p1, var1, lastDiff) == false then return end
 	end
-	if not lastDiff or not equalModule(lastDiff.result, var21.result) then
-		p34.lastDiff = var21
-		p34:callback(p34.lastDiff, lastDiff)
+	if not lastDiff or not equalModule(lastDiff.result, var1.result) then
+		p1.lastDiff = var1
+		p1:callback(p1.lastDiff, lastDiff)
 	end
 end
 

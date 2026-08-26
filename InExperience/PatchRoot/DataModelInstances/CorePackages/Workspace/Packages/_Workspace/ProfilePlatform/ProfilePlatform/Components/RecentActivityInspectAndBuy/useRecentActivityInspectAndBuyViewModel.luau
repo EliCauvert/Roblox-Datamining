@@ -5,10 +5,10 @@ local _ = require(profilePlatform.Common.Types)
 local useInspectAvatarDataModule = require(profilePlatform.Components.InspectAvatar.useInspectAvatarData)
 local useRecentActivityPurchaseModule = require(script.Parent.useRecentActivityPurchase)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), enumsModule (ref), useInspectAvatarDataModule (ref), useRecentActivityPurchaseModule (ref)
-	local assetIds = p0.assetIds
-	local var5 = useInspectAvatarDataModule(reactModule.useMemo(function()
+	local assetIds = p1.assetIds
+	local var1 = useInspectAvatarDataModule(reactModule.useMemo(function()
 		-- upvalues: assetIds (ref), enumsModule (copy)
 		local t = {}
 		
@@ -17,28 +17,28 @@ return function(p0)
 		end
 		return t
 	end, { assetIds }))
-	local displayItems = var5.displayItems
-	local var6 = useRecentActivityPurchaseModule({
+	local displayItems = var1.displayItems
+	local var2 = useRecentActivityPurchaseModule({
 		displayItems = displayItems,
-		localUserId = var5.localUserId,
-		onClose = p0.onClose
+		localUserId = var1.localUserId,
+		onClose = p1.onClose
 	})
 	
 	return {
 		displayItems = displayItems,
-		selectedItems = var6.selectedItems,
-		isLoading = var5.isLoading,
-		purchaseSummary = var6.purchaseSummary,
-		isPurchasing = var6.isPurchasing,
-		isConfirmingPurchase = var6.isConfirmingPurchase,
-		isShowingInsufficientRobux = var6.isShowingInsufficientRobux,
-		robuxBalance = var6.robuxBalance,
-		onToggleItem = var6.onToggleItem,
-		onBuyAll = var6.onBuyAll,
-		onConfirmPurchase = var6.onConfirmPurchase,
-		onCancelPurchase = var6.onCancelPurchase,
-		onDismissInsufficientRobux = var6.onDismissInsufficientRobux,
-		onClose = p0.onClose,
+		selectedItems = var2.selectedItems,
+		isLoading = var1.isLoading,
+		purchaseSummary = var2.purchaseSummary,
+		isPurchasing = var2.isPurchasing,
+		isConfirmingPurchase = var2.isConfirmingPurchase,
+		isShowingInsufficientRobux = var2.isShowingInsufficientRobux,
+		robuxBalance = var2.robuxBalance,
+		onToggleItem = var2.onToggleItem,
+		onBuyAll = var2.onBuyAll,
+		onConfirmPurchase = var2.onConfirmPurchase,
+		onCancelPurchase = var2.onCancelPurchase,
+		onDismissInsufficientRobux = var2.onDismissInsufficientRobux,
+		onClose = p1.onClose,
 		openItemDetails = reactModule.useCallback(function(_, _, _) end, {})
 	}
 end

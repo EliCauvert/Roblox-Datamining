@@ -1,6 +1,6 @@
 ﻿local viewerRelationshipUtilsModule = require(script.Parent.viewerRelationshipUtils)
 
-return function(p0)
+return function(p1)
 	-- upvalues: viewerRelationshipUtilsModule (ref)
-	return viewerRelationshipUtilsModule.mapViewerRelationshipAndContextToAnalyticsFriendStatus(viewerRelationshipUtilsModule.getViewerRelationshipFromProfileResponse(p0), viewerRelationshipUtilsModule.getContextualInformationFromProfileResponse(p0))
+	return viewerRelationshipUtilsModule.mapViewerRelationshipAndContextToAnalyticsFriendStatus(viewerRelationshipUtilsModule.getViewerRelationshipFromProfileResponse(p1), viewerRelationshipUtilsModule.getContextualInformationFromProfileResponse(p1))
 end

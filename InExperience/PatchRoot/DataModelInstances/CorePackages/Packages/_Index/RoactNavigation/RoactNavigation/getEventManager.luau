@@ -1,47 +1,47 @@
-﻿return function(p0)
+﻿return function(p1)
 	local t = {}
 	
-	local function _(p1, p2)
-		-- upvalues: t (ref), p0 (ref)
-		local var1 = t[p1]
-		local var2 = if var1 then var1[p0] else nil
+	local function _(p2, p3)
+		-- upvalues: t (ref), p1 (ref)
+		local var1 = t[p2]
+		local var2 = if var1 then var1[p1] else nil
 		
 		if var2 then
-			table.remove(var2, table.find(var2, p2))
+			table.remove(var2, table.find(var2, p3))
 			
 			return
 		end
 	end
 	
 	return {
-		addListener = function(p3, p4)
-			-- upvalues: t (ref), p0 (ref)
-			t[p3] = t[p3] or {}
-			t[p3][p0] = t[p3][p0] or {}
-			table.insert(t[p3][p0], p4)
+		addListener = function(p2, p3)
+			-- upvalues: t (ref), p1 (ref)
+			t[p2] = t[p2] or {}
+			t[p2][p1] = t[p2][p1] or {}
+			table.insert(t[p2][p1], p3)
 			
 			return {
 				remove = function()
-					-- upvalues: p3 (ref), p4 (ref), t (copy), p0 (copy)
-					local var3 = t[p3]
-					local var4 = if var3 then var3[p0] else nil
+					-- upvalues: p2 (ref), p3 (ref), t (copy), p1 (copy)
+					local var1 = t[p2]
+					local var2 = if var1 then var1[p1] else nil
 					
-					if var4 then
-						table.remove(var4, table.find(var4, p4))
+					if var2 then
+						table.remove(var2, table.find(var2, p3))
 						
 						return
 					end
 				end
 			}
 		end,
-		emit = function(p5, p6)
-			-- upvalues: t (ref), p0 (ref)
-			local var5 = t[p5] or {}
-			local var6 = if var5[p0] then table.clone(var5[p0]) else nil
+		emit = function(p2, p3)
+			-- upvalues: t (ref), p1 (ref)
+			local var1 = t[p2] or {}
+			local var2 = if var1[p1] then table.clone(var1[p1]) else nil
 			
-			if var6 then
-				for i, v in var6 do
-					v(p6)
+			if var2 then
+				for i, v in var2 do
+					v(p3)
 				end
 			end
 		end

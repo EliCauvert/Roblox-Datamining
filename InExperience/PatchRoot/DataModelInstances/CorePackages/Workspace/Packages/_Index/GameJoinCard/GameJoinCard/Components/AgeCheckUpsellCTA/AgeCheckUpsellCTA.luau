@@ -15,16 +15,16 @@ local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), divider (ref), dividerVariant (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var3 = useLocalization({
+	local var1 = useLocalization({
 		unlock = "Feature.ExperienceDetails.PlayButtonText.Unlock",
 		bodyText = "Feature.FAE.CheckIfYouCanJoinGame"
 	})
 	
 	return reactModule.createElement(view, {
 		tag = "col size-full-0 auto-y",
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		Banner = reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 1 }, {
 			TopDivider = reactModule.createElement(divider, { LayoutOrder = 1, variant = dividerVariant.Default }),
@@ -40,14 +40,14 @@ return function(p0)
 				}),
 				BannerText = reactModule.createElement(text, {
 					tag = "shrink auto-xy text-wrap text-align-x-left text-body-medium content-emphasis",
-					Text = var3.bodyText
+					Text = var1.bodyText
 				})
 			})
 		}),
 		UnlockButton = reactModule.createElement(button, {
 			LayoutOrder = 2,
-			text = var3.unlock,
-			onActivated = p0.onUnlockPressed,
+			text = var1.unlock,
+			onActivated = p1.onUnlockPressed,
 			variant = buttonVariant.Emphasis,
 			inputSize = inputSize.Medium,
 			width = UDim.new(1, 0)

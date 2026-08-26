@@ -1,13 +1,13 @@
-﻿return function(p0)
+﻿return function(p1)
 	local t = {}
 	
-	for i, v in p0 do
+	for i, v in p1 do
 		t[v] = true
 	end
-	return function(p1, p2)
+	return function(p2, p3)
 		-- upvalues: t (ref)
-		for i, v in p1 do
-			local var1 = p2[i]
+		for i, v in p2 do
+			local var1 = p3[i]
 			
 			if not t[i] then
 				if v ~= var1 then
@@ -28,8 +28,8 @@
 			end
 			return false
 		end
-		for i, v in p2 do
-			if p1[i] == nil then
+		for i, v in p3 do
+			if p2[i] == nil then
 				return false
 			end
 		end

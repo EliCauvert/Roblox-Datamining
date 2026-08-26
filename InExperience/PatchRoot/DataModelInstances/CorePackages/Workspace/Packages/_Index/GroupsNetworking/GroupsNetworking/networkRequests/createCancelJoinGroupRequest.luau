@@ -1,9 +1,9 @@
 ﻿local GROUPS_URLModule = require(script:FindFirstAncestor("GroupsNetworking").GROUPS_URL)
 
-return function(p0)
+return function(p1)
 	-- upvalues: GROUPS_URLModule (ref)
-	return p0.roduxNetworking.DELETE("CancelJoinGroupRequest", function(p1, p2)
+	return p1.roduxNetworking.DELETE("CancelJoinGroupRequest", function(p2, p3)
 		-- upvalues: GROUPS_URLModule (copy)
-		return p1(GROUPS_URLModule):path("v1"):path("groups"):id(p2.groupId):path("join-requests"):path("users"):id(p2.userId)
+		return p2(GROUPS_URLModule):path("v1"):path("groups"):id(p3.groupId):path("join-requests"):path("users"):id(p3.userId)
 	end)
 end

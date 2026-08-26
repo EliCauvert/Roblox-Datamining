@@ -9,57 +9,57 @@ local currentExperienceInviteReceived = require(roduxSquads.Actions).CurrentExpe
 local experienceInviteModel = require(roduxSquads.Models).ExperienceInviteModel
 local _ = require(script.Parent.Parent.RoduxSquadsTypes)
 
-return function(p0)
+return function(p1)
 	-- upvalues: cryoModule (ref), roduxModule (ref), loggerModule (ref), experienceInviteModel (ref), currentExperienceInviteUpdated (ref), currentExperienceInviteReceived (ref), currentExperienceInviteDismissed (ref)
-	local networkingSquads = p0.NetworkingSquads
+	local networkingSquads = p1.NetworkingSquads
 	
-	local var4 = function(p1, p2)
+	local var1 = function(p2, p3)
 		-- upvalues: cryoModule (copy)
-		return if p1 and p1.notification.experienceInviteId == p2.experienceInviteId and (p1.model == nil or p1.model.versionId < p2.versionId) then cryoModule.Dictionary.join(p1, { model = p2 }) else p1
+		return if p2 and p2.notification.experienceInviteId == p3.experienceInviteId and (p2.model == nil or p2.model.versionId < p3.versionId) then cryoModule.Dictionary.join(p2, { model = p3 }) else p2
 	end
 	
 	return roduxModule.createReducer(nil, {
-		[networkingSquads.CreateExperienceInvite.Succeeded.name] = function(p3, p4)
+		[networkingSquads.CreateExperienceInvite.Succeeded.name] = function(p2, p3)
 			-- upvalues: loggerModule (copy)
-			loggerModule:debug("Create experience invite success. ExperienceInviteId: {}", p4.responseBody.experienceInviteId)
+			loggerModule:debug("Create experience invite success. ExperienceInviteId: {}", p3.responseBody.experienceInviteId)
 			
-			return p3
+			return p2
 		end,
-		[networkingSquads.GetExperienceInvite.Succeeded.name] = function(p5, p6)
-			-- upvalues: var4 (ref), experienceInviteModel (copy)
-			local responseBody = p6.responseBody
+		[networkingSquads.GetExperienceInvite.Succeeded.name] = function(p2, p3)
+			-- upvalues: var1 (ref), experienceInviteModel (copy)
+			local responseBody = p3.responseBody
 			assert(responseBody, "Experience invite must exist.")
 			
-			return var4(p5, experienceInviteModel.format(responseBody))
+			return var1(p2, experienceInviteModel.format(responseBody))
 		end,
-		[networkingSquads.VoteForExperienceInvite.Succeeded.name] = function(p7, p8)
-			-- upvalues: loggerModule (copy), var4 (ref), experienceInviteModel (copy)
-			local responseBody = p8.responseBody
+		[networkingSquads.VoteForExperienceInvite.Succeeded.name] = function(p2, p3)
+			-- upvalues: loggerModule (copy), var1 (ref), experienceInviteModel (copy)
+			local responseBody = p3.responseBody
 			loggerModule:debug("Vote experience invite success. ExperienceInviteId: {}", responseBody.experienceInviteId)
 			
-			return var4(p7, experienceInviteModel.format(responseBody))
+			return var1(p2, experienceInviteModel.format(responseBody))
 		end,
-		[currentExperienceInviteUpdated.name] = function(p9, p10)
-			-- upvalues: var4 (ref), experienceInviteModel (copy)
-			local experienceInvite = p10.payload.experienceInvite
+		[currentExperienceInviteUpdated.name] = function(p2, p3)
+			-- upvalues: var1 (ref), experienceInviteModel (copy)
+			local experienceInvite = p3.payload.experienceInvite
 			assert(experienceInvite, "Experience invite must exist.")
 			
-			return var4(p9, experienceInviteModel.format(experienceInvite))
+			return var1(p2, experienceInviteModel.format(experienceInvite))
 		end,
-		[currentExperienceInviteReceived.name] = function(p11, p12)
-			local experienceInviteId = p12.payload.experienceInviteId
+		[currentExperienceInviteReceived.name] = function(p2, p3)
+			local experienceInviteId = p3.payload.experienceInviteId
 			
-			return if p11 == nil or p11.notification.experienceInviteId ~= experienceInviteId then {
+			return if p2 == nil or p2.notification.experienceInviteId ~= experienceInviteId then {
 				notification = {
 					experienceInviteId = experienceInviteId,
-					membershipEntityId = p12.payload.membershipEntityId,
-					notificationId = p12.payload.notificationId,
-					isInviter = p12.payload.isInviter
+					membershipEntityId = p3.payload.membershipEntityId,
+					notificationId = p3.payload.notificationId,
+					isInviter = p3.payload.isInviter
 				}
-			} else p11
+			} else p2
 		end,
-		[currentExperienceInviteDismissed.name] = function(p13, p14)
-			return if p13 and p13.notification.notificationId == p14.payload.notificationId then nil else p13
+		[currentExperienceInviteDismissed.name] = function(p2, p3)
+			return if p2 and p2.notification.notificationId == p3.payload.notificationId then nil else p2
 		end
 	})
 end

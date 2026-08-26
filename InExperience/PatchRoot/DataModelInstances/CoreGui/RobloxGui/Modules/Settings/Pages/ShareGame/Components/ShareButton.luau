@@ -1,17 +1,17 @@
 ﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local themeModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.Theme)
 local semibold = themeModule.font(Enum.Font.SourceSansSemibold, "Semibold")
-local var3 = themeModule.textSize(19)
+local var1 = themeModule.textSize(19)
 local color = Color3.fromRGB(222, 225, 227)
 local color_1 = Color3.fromRGB(255, 255, 255)
 local shareButton = roactModule.PureComponent:extend("ShareButton")
 
-function shareButton.init(p0)
-	p0.state = { isHovering = false }
+function shareButton.init(p1)
+	p1.state = { isHovering = false }
 end
 
 function shareButton.render(p1)
-	-- upvalues: roactModule (ref), color (ref), color_1 (ref), themeModule (ref), var3 (ref), semibold (ref)
+	-- upvalues: roactModule (ref), color (ref), color_1 (ref), themeModule (ref), var1 (ref), semibold (ref)
 	local size = p1.props.size
 	local layoutOrder = p1.props.layoutOrder
 	local onShare = p1.props.onShare
@@ -21,7 +21,7 @@ function shareButton.render(p1)
 		LayoutOrder = layoutOrder,
 		Size = size,
 		Text = p1.props.text,
-		TextSize = var3,
+		TextSize = var1,
 		Font = semibold,
 		AutoButtonColor = false,
 		BackgroundColor3 = if p1.state.isHovering and isEnabled then color else color_1,

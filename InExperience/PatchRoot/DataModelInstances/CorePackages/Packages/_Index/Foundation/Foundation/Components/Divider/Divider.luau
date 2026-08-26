@@ -14,20 +14,20 @@ local t = {
 	orientation = orientationModule.Horizontal
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useDividerVariantsModule (ref), dividerVariantModule (ref), orientationModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var10 = withDefaultsModule(p0, t)
-	local var11 = useDividerVariantsModule(useTokensModule(), var10.variant, var10.orientation)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useDividerVariantsModule(useTokensModule(), var1.variant, var1.orientation)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var10, { tag = var11.container.tag, ref = p1 }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = var2.container.tag, ref = p2 }), {
 		DividerStroke = reactModule.createElement(viewModule, {
-			Size = var11.stroke.Size,
-			backgroundStyle = var11.stroke.backgroundStyle
+			Size = var2.stroke.Size,
+			backgroundStyle = var2.stroke.backgroundStyle
 		}),
-		DividerLine = if var10.variant == dividerVariantModule.Heavy and var10.orientation ~= orientationModule.Vertical then reactModule.createElement(viewModule, {
-			tag = var11.line.tag,
-			Position = var11.line.position,
-			backgroundStyle = var11.line.backgroundStyle
+		DividerLine = if var1.variant == dividerVariantModule.Heavy and var1.orientation ~= orientationModule.Vertical then reactModule.createElement(viewModule, {
+			tag = var2.line.tag,
+			Position = var2.line.position,
+			backgroundStyle = var2.line.backgroundStyle
 		}) else nil
 	})
 end))

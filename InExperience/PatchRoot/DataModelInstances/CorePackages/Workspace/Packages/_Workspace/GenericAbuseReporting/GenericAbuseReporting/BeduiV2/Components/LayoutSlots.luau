@@ -11,19 +11,19 @@ local sheet = foundationModule.Sheet
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 local useIsSlideAnimating = slideTransitionContextModule.useIsSlideAnimating
-local var6 = reactModule.createContext(false)
+local var1 = reactModule.createContext(false)
 
-local var7 = function(p0)
-	-- upvalues: reactModule (ref), var6 (ref)
-	return reactModule.createElement(var6.Provider, { value = p0.value }, p0.children)
+local var2 = function(p1)
+	-- upvalues: reactModule (ref), var1 (ref)
+	return reactModule.createElement(var1.Provider, { value = p1.value }, p1.children)
 end
 
-local var8 = function()
-	-- upvalues: reactModule (ref), var6 (ref)
-	return reactModule.useContext(var6)
+local var3 = function()
+	-- upvalues: reactModule (ref), var1 (ref)
+	return reactModule.useContext(var1)
 end
 
-local var9 = reactModule.forwardRef(function(p1, _)
+local var4 = reactModule.forwardRef(function(p1, _)
 	-- upvalues: reactModule (ref), view (ref), textWithTranslationModule (ref), subtitleModule (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-xsmall size-full-0 auto-y",
@@ -41,46 +41,46 @@ local var9 = reactModule.forwardRef(function(p1, _)
 	})
 end)
 local t = {
-	Body = reactModule.forwardRef(function(p2, p3)
+	Body = reactModule.forwardRef(function(p1, p2)
 		-- upvalues: reactModule (ref), sheet (ref)
-		return reactModule.createElement(sheet.Content, { ref = p3 }, p2.children)
+		return reactModule.createElement(sheet.Content, { ref = p2 }, p1.children)
 	end),
-	Actions = reactModule.forwardRef(function(p4, p5)
+	Actions = reactModule.forwardRef(function(p1, p2)
 		-- upvalues: reactModule (ref), sheet (ref)
-		return reactModule.createElement(sheet.Actions, { ref = p5 }, p4.children)
+		return reactModule.createElement(sheet.Actions, { ref = p2 }, p1.children)
 	end),
-	Title = reactModule.forwardRef(function(p6, _)
+	Title = reactModule.forwardRef(function(p1, _)
 		-- upvalues: reactModule (ref), textWithTranslationModule (ref)
 		return reactModule.createElement(textWithTranslationModule, {
-			input = p6.input,
-			tag = `size-full-0 auto-y text-heading-medium {p6.tag or ""}`,
-			layoutOrder = p6.layoutOrder
+			input = p1.input,
+			tag = `size-full-0 auto-y text-heading-medium {p1.tag or ""}`,
+			layoutOrder = p1.layoutOrder
 		})
 	end),
-	Layout = reactModule.forwardRef(function(p7, p8)
+	Layout = reactModule.forwardRef(function(p1, p2)
 		-- upvalues: reactModule (ref), sheet (ref)
 		return reactModule.createElement(reactModule.Fragment, nil, {
-			Content = reactModule.createElement(sheet.Content, { ref = p8, isContentFullBleed = p7.isContentFullBleed }, p7.body),
-			Actions = if p7.actions ~= nil then nil else reactModule.createElement(sheet.Actions, nil, p7.actions)
+			Content = reactModule.createElement(sheet.Content, { ref = p2, isContentFullBleed = p1.isContentFullBleed }, p1.body),
+			Actions = if p1.actions ~= nil then nil else reactModule.createElement(sheet.Actions, nil, p1.actions)
 		})
 	end),
-	ContentInset = reactModule.forwardRef(function(p9, _)
+	ContentInset = reactModule.forwardRef(function(p1, _)
 		-- upvalues: reactModule (ref), view (ref)
 		return reactModule.createElement(view, {
 			tag = "col gap-medium size-full-0 auto-y padding-x-xlarge",
-			LayoutOrder = p9.layoutOrder
-		}, p9.children)
+			LayoutOrder = p1.layoutOrder
+		}, p1.children)
 	end)
 }
-local var11 = reactModule.createContext(t)
+local var5 = reactModule.createContext(t)
 
 return {
 	INLINE_LANDSCAPE_WIDTH = 468,
 	sheetSlots = t,
 	inlineSlots = {
-		Body = reactModule.forwardRef(function(p10, p11)
+		Body = reactModule.forwardRef(function(p1, p2)
 			-- upvalues: useIsSlideAnimating (ref), reactModule (ref), view (ref)
-			return reactModule.createElement(view, { tag = "fill size-full-0", ref = p11 }, reactModule.createElement("ScrollingFrame", {
+			return reactModule.createElement(view, { tag = "fill size-full-0", ref = p2 }, reactModule.createElement("ScrollingFrame", {
 				ZIndex = 2,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -90,29 +90,29 @@ return {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				ScrollBarImageTransparency = useIsSlideAnimating():map(function(p12)
-					return if p12 then 1 else 0
+				ScrollBarImageTransparency = useIsSlideAnimating():map(function(p3)
+					return if p3 then 1 else 0
 				end)
 			}, reactModule.createElement(view, {
 				tag = "align-x-center size-full-0 auto-y margin-bottom-medium"
-			}, reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, p10.children))))
+			}, reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, p1.children))))
 		end),
-		Actions = reactModule.forwardRef(function(p13, p14)
+		Actions = reactModule.forwardRef(function(p1, p2)
 			-- upvalues: reactModule (ref), view (ref)
 			return reactModule.createElement(view, {
 				tag = "size-full-0 auto-y align-x-center padding-bottom-small",
-				ref = p14
+				ref = p2
 			}, reactModule.createElement(view, {
 				tag = "row size-full-0 auto-y gap-medium position-bottom-center",
 				ZIndex = 2
-			}, p13.children))
+			}, p1.children))
 		end),
-		Title = var9,
-		Layout = reactModule.forwardRef(function(p15, p16)
-			-- upvalues: reactModule (ref), var6 (ref), useTokens (ref), useIsSlideAnimating (ref), view (ref)
-			local var12 = reactModule.useContext(var6)
+		Title = var4,
+		Layout = reactModule.forwardRef(function(p1, p2)
+			-- upvalues: reactModule (ref), var1 (ref), useTokens (ref), useIsSlideAnimating (ref), view (ref)
+			local var6 = reactModule.useContext(var1)
 			
-			return reactModule.createElement(view, { tag = "col size-full", ref = p16 }, {
+			return reactModule.createElement(view, { tag = "col size-full", ref = p2 }, {
 				BodyWrapper = reactModule.createElement(view, { tag = "fill size-full-0", LayoutOrder = 1 }, reactModule.createElement("ScrollingFrame", {
 					ZIndex = 2,
 					BackgroundTransparency = 1,
@@ -123,52 +123,52 @@ return {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.new(1, 0, 0, 0),
 					ScrollingDirection = Enum.ScrollingDirection.Y,
-					ScrollBarImageTransparency = useIsSlideAnimating():map(function(p17)
-						return if p17 then 1 else 0
+					ScrollBarImageTransparency = useIsSlideAnimating():map(function(p3)
+						return if p3 then 1 else 0
 					end)
 				}, reactModule.createElement(view, {
 					tag = {
 						["align-x-center size-full-0 auto-y margin-bottom-medium"] = true,
-						["padding-top-large"] = var12
+						["padding-top-large"] = var6
 					}
 				}, reactModule.createElement(view, {
-					Size = if var12 then UDim2.new(0, 468 * useTokens().Config.UI.Scale, 0, 0) else nil,
+					Size = if var6 then UDim2.new(0, 468 * useTokens().Config.UI.Scale, 0, 0) else nil,
 					tag = {
 						["col gap-medium auto-y"] = true,
-						["size-full-0"] = not var12
+						["size-full-0"] = not var6
 					}
 				}, {
-					Body = p15.body,
-					LandscapeActions = if var12 and p15.actions ~= nil then reactModule.createElement(view, {
+					Body = p1.body,
+					LandscapeActions = if var6 and p1.actions ~= nil then reactModule.createElement(view, {
 						tag = "auto-xy padding-bottom-small padding-top-small",
 						LayoutOrder = 1000
-					}, p15.actions) else nil
+					}, p1.actions) else nil
 				})))),
-				PortraitActionsWrapper = if var12 or p15.actions == nil then nil else reactModule.createElement(view, {
+				PortraitActionsWrapper = if var6 or p1.actions == nil then nil else reactModule.createElement(view, {
 					tag = "align-x-center size-full-0 auto-y padding-bottom-small",
 					LayoutOrder = 2
 				}, reactModule.createElement(view, {
 					tag = "row gap-medium position-bottom-center size-full-0 auto-y",
 					ZIndex = 2
-				}, p15.actions))
+				}, p1.actions))
 			})
 		end),
-		ContentInset = reactModule.forwardRef(function(p18, _)
+		ContentInset = reactModule.forwardRef(function(p1, _)
 			-- upvalues: reactModule (ref), view (ref)
 			return reactModule.createElement(view, {
 				tag = "col gap-medium size-full-0 auto-y",
-				LayoutOrder = p18.layoutOrder
-			}, p18.children)
+				LayoutOrder = p1.layoutOrder
+			}, p1.children)
 		end)
 	},
-	LayoutSlotsProvider = function(p19)
-		-- upvalues: reactModule (ref), var11 (ref)
-		return reactModule.createElement(var11.Provider, { value = p19.slots }, p19.children)
+	LayoutSlotsProvider = function(p1)
+		-- upvalues: reactModule (ref), var5 (ref)
+		return reactModule.createElement(var5.Provider, { value = p1.slots }, p1.children)
 	end,
 	useLayoutSlots = function()
-		-- upvalues: reactModule (ref), var11 (ref)
-		return reactModule.useContext(var11)
+		-- upvalues: reactModule (ref), var5 (ref)
+		return reactModule.useContext(var5)
 	end,
-	OverlaidControlsProvider = var7,
-	useShouldUseOverlaidControls = var8
+	OverlaidControlsProvider = var2,
+	useShouldUseOverlaidControls = var3
 }

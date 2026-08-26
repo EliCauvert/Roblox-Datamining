@@ -1,5 +1,5 @@
 ﻿return {
-	new = function(p0)
+	new = function(p1)
 		local t = {}
 		setmetatable(t, {
 			__tostring = function()
@@ -8,8 +8,8 @@
 		})
 		
 		function t.getWindowStateChangedBindable()
-			-- upvalues: p0 (ref)
-			return p0.windowStateChangedBindable
+			-- upvalues: p1 (ref)
+			return p1.windowStateChangedBindable
 		end
 		
 		return t

@@ -126,148 +126,148 @@ local t_18 = {
 	lastUpdated = { 25, 9, 24 }
 }
 
-local function _(p0, p1, p2, p3)
+local function _(p1, p2, p3, p4)
 	return {
-		action = p0,
-		playWithRewardFlowId = p1,
-		universeId = p2,
-		productId = p3
+		action = p1,
+		playWithRewardFlowId = p2,
+		universeId = p3,
+		productId = p4
 	}
 end
 
 return {
-	logPlayWithRewardAdRequested = function(p4, p5)
+	logPlayWithRewardAdRequested = function(p1, p2)
 		-- upvalues: telemetryService (ref), t (ref), list (ref), t_10 (ref), list_1 (ref)
 		telemetryService:LogEvent(t, {
 			standardizedFields = list,
-			customFields = { playWithRewardFlowId = p4, universeId = p5 }
+			customFields = { playWithRewardFlowId = p1, universeId = p2 }
 		})
 		telemetryService:LogCounter(t_10, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardAdReceived = function(p6, p7, p8, p9, p10, p11)
+	logPlayWithRewardAdReceived = function(p1, p2, p3, p4, p5, p6)
 		-- upvalues: telemetryService (ref), t_1 (ref), list (ref), t_11 (ref), list_1 (ref), t_18 (ref)
 		telemetryService:LogEvent(t_1, {
 			standardizedFields = list,
 			customFields = {
-				playWithRewardFlowId = p6,
-				universeId = p7,
-				isSuccessful = p8,
-				adAvailabilityResult = p9,
-				fetchLatencyMs = p10,
-				productId = p11
+				playWithRewardFlowId = p1,
+				universeId = p2,
+				isSuccessful = p3,
+				adAvailabilityResult = p4,
+				fetchLatencyMs = p5,
+				productId = p6
 			}
 		})
 		telemetryService:LogCounter(t_11, {
 			standardizedFields = list_1,
-			customFields = { isSuccessful = p8, adAvailabilityResult = p9 }
+			customFields = { isSuccessful = p3, adAvailabilityResult = p4 }
 		}, 1)
 		
-		if p8 then
+		if p3 then
 			telemetryService:LogStat(t_18, {
 				standardizedFields = list_1,
-				customFields = { adAvailabilityResult = p9 }
-			}, p10)
+				customFields = { adAvailabilityResult = p4 }
+			}, p5)
 		end
 	end,
-	logPlayWithRewardBannerShown = function(p12, p13, p14, p15, p16)
+	logPlayWithRewardBannerShown = function(p1, p2, p3, p4, p5)
 		-- upvalues: telemetryService (ref), t_2 (ref), list (ref), t_12 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_2, {
 			standardizedFields = list,
 			customFields = {
-				playWithRewardFlowId = p12,
-				universeId = p13,
-				showState = p14,
-				productId = p15,
-				experimentUiVariant = p16
+				playWithRewardFlowId = p1,
+				universeId = p2,
+				showState = p3,
+				productId = p4,
+				experimentUiVariant = p5
 			}
 		})
 		telemetryService:LogCounter(t_12, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardButtonClicked = function(p17, p18, p19)
+	logPlayWithRewardButtonClicked = function(p1, p2, p3)
 		-- upvalues: telemetryService (ref), t_3 (ref), list (ref), t_13 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_3, {
 			standardizedFields = list,
 			customFields = {
-				playWithRewardFlowId = p17,
-				universeId = p18,
-				productId = p19
+				playWithRewardFlowId = p1,
+				universeId = p2,
+				productId = p3
 			}
 		})
 		telemetryService:LogCounter(t_13, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardAdPlaybackAttempted = function(p20, p21, p22)
+	logPlayWithRewardAdPlaybackAttempted = function(p1, p2, p3)
 		-- upvalues: telemetryService (ref), t_4 (ref), list (ref), t_14 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_4, {
 			standardizedFields = list,
 			customFields = {
-				playWithRewardFlowId = p20,
-				universeId = p21,
-				productId = p22
+				playWithRewardFlowId = p1,
+				universeId = p2,
+				productId = p3
 			}
 		})
 		telemetryService:LogCounter(t_14, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardAdPlaybackStopped = function(p23, p24, p25, p26)
+	logPlayWithRewardAdPlaybackStopped = function(p1, p2, p3, p4)
 		-- upvalues: telemetryService (ref), t_5 (ref), list (ref), t_15 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_5, {
 			standardizedFields = list,
 			customFields = {
-				playWithRewardFlowId = p23,
-				universeId = p24,
-				adPlaybackStatus = p25,
-				productId = p26
+				playWithRewardFlowId = p1,
+				universeId = p2,
+				adPlaybackStatus = p3,
+				productId = p4
 			}
 		})
 		telemetryService:LogCounter(t_15, {
 			standardizedFields = list_1,
-			customFields = { adPlaybackStatus = p25 }
+			customFields = { adPlaybackStatus = p3 }
 		}, 1)
 	end,
-	logPlayWithRewardGameJoinInitiated = function(p27, p28, p29)
+	logPlayWithRewardGameJoinInitiated = function(p1, p2, p3)
 		-- upvalues: telemetryService (ref), t_6 (ref), list (ref), t_16 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_6, {
 			standardizedFields = list,
 			customFields = {
-				playWithRewardFlowId = p27,
-				universeId = p28,
-				productId = p29
+				playWithRewardFlowId = p1,
+				universeId = p2,
+				productId = p3
 			}
 		})
 		telemetryService:LogCounter(t_16, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardBlackoutCurtainAction = function(p30, p31, p32, p33)
+	logPlayWithRewardBlackoutCurtainAction = function(p1, p2, p3, p4)
 		-- upvalues: telemetryService (ref), t_7 (ref), list (ref)
 		telemetryService:LogEvent(t_7, {
 			standardizedFields = list,
 			customFields = {
-				playWithRewardFlowId = p30,
-				universeId = p31,
-				action = p32,
-				productId = p33
+				playWithRewardFlowId = p1,
+				universeId = p2,
+				action = p3,
+				productId = p4
 			}
 		})
 	end,
-	logPlayWithRewardShimmerShown = function(p34, p35)
+	logPlayWithRewardShimmerShown = function(p1, p2)
 		-- upvalues: telemetryService (ref), t_8 (ref), list (ref)
 		telemetryService:LogEvent(t_8, {
 			standardizedFields = list,
-			customFields = { playWithRewardFlowId = p34, universeId = p35 }
+			customFields = { playWithRewardFlowId = p1, universeId = p2 }
 		})
 	end,
-	logPlayWithRewardCoachmark = function(p36, p37, p38, p39)
+	logPlayWithRewardCoachmark = function(p1, p2, p3, p4)
 		-- upvalues: telemetryService (ref), t_9 (ref), list (ref), t_17 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_9, {
 			standardizedFields = list,
 			customFields = {
-				action = p36,
-				playWithRewardFlowId = p37,
-				universeId = p38,
-				productId = p39
+				action = p1,
+				playWithRewardFlowId = p2,
+				universeId = p3,
+				productId = p4
 			}
 		})
 		telemetryService:LogCounter(t_17, {
 			standardizedFields = list_1,
-			customFields = { action = p36 }
+			customFields = { action = p1 }
 		}, 1)
 	end
 }

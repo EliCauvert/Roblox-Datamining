@@ -14,58 +14,58 @@ local chipVariant = foundationModule.Enums.ChipVariant
 local iconName = foundationModule.Enums.IconName
 local useAiOverviewExpansionModule = require(script.Parent.useAiOverviewExpansion)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), usePreferences (ref), useLocalization (ref), reactModule (ref), cryoModule (ref), useAiOverviewExpansionModule (ref), view (ref), divider (ref), chip (ref), iconName (ref), chipSize (ref), chipVariant (ref)
-	local var4 = useTokens()
-	local var5 = usePreferences()
-	local var6 = useLocalization({ expandButtonText = "CommonUI.Controls.Action.ShowMore" })
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref)
+	local var1 = useTokens()
+	local var2 = usePreferences()
+	local var3 = useLocalization({ expandButtonText = "CommonUI.Controls.Action.ShowMore" })
+	local var4 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref)
 		return {
-			index = p0.index,
-			scrollViewPositionChangedSignal = p0.scrollViewPositionChangedSignal,
-			verticalScrollingFrameRef = p0.verticalScrollingFrameRef,
-			startRow = p0.startRow or p0.index
+			index = p1.index,
+			scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
+			verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
+			startRow = p1.startRow or p1.index
 		}
 	end, {
-		p0.index,
-		p0.scrollViewPositionChangedSignal,
-		p0.verticalScrollingFrameRef,
-		p0.startRow
+		p1.index,
+		p1.scrollViewPositionChangedSignal,
+		p1.verticalScrollingFrameRef,
+		p1.startRow
 	})
-	local var8 = reactModule.useCallback(function(p1)
-		-- upvalues: reactModule (copy), cryoModule (copy), var7 (ref)
-		if not p1 or typeof(p1) ~= "table" then
-			return p1
+	local var5 = reactModule.useCallback(function(p2)
+		-- upvalues: reactModule (copy), cryoModule (copy), var4 (ref)
+		if not p2 or typeof(p2) ~= "table" then
+			return p2
 		end
 		local t = {}
 		
-		for i, v in p1 do
+		for i, v in p2 do
 			t[i] = reactModule.cloneElement(v, {
-				extraLocalProps = cryoModule.Dictionary.join(if v.props then v.props.extraLocalProps else {}, var7)
+				extraLocalProps = cryoModule.Dictionary.join(if v.props then v.props.extraLocalProps else {}, var4)
 			})
 		end
 		return t
-	end, { var7 })
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), p0 (ref)
-		return var8(p0.content)
-	end, { p0.content, var8 })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), p0 (ref)
-		return var8(p0.footer)
-	end, { p0.footer, var8 })
-	local headerGap = p0.headerGap or var4.Gap.Small
-	local sectionGap = p0.sectionGap or var4.Gap.Large
-	local var13 = if p0.titleComponent == nil then p0.descriptionComponent ~= nil else true
-	local var14 = if p0.content == nil then p0.footer ~= nil else true
-	local var15 = useAiOverviewExpansionModule({
-		buttonHeight = var4.Size.Size_1000,
-		compactHeight = p0.compactHeight,
-		hasHeader = var13,
-		hasExpandableBody = var14,
+	end, { var4 })
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref), p1 (ref)
+		return var5(p1.content)
+	end, { p1.content, var5 })
+	local var7 = reactModule.useMemo(function()
+		-- upvalues: var5 (ref), p1 (ref)
+		return var5(p1.footer)
+	end, { p1.footer, var5 })
+	local headerGap = p1.headerGap or var1.Gap.Small
+	local sectionGap = p1.sectionGap or var1.Gap.Large
+	local var8 = if p1.titleComponent == nil then p1.descriptionComponent ~= nil else true
+	local var9 = if p1.content == nil then p1.footer ~= nil else true
+	local var10 = useAiOverviewExpansionModule({
+		buttonHeight = var1.Size.Size_1000,
+		compactHeight = p1.compactHeight,
+		hasHeader = var8,
+		hasExpandableBody = var9,
 		sectionGap = sectionGap,
-		reducedMotion = var5.reducedMotion
+		reducedMotion = var2.reducedMotion
 	})
 	
 	return reactModule.createElement(view, {
@@ -75,12 +75,12 @@ return reactModule.memo(function(p0)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, sectionGap)
 		},
-		backgroundStyle = p0.backgroundStyle,
-		LayoutOrder = p0.layoutOrder,
-		sizeConstraint = if var15.shouldReserveCompactHeight then { MinSize = Vector2.new(0, p0.compactHeight) } else nil,
-		testId = p0.testId or "--sdui-ai-overview"
+		backgroundStyle = p1.backgroundStyle,
+		LayoutOrder = p1.layoutOrder,
+		sizeConstraint = if var10.shouldReserveCompactHeight then { MinSize = Vector2.new(0, p1.compactHeight) } else nil,
+		testId = p1.testId or "--sdui-ai-overview"
 	}, {
-		Header = if var13 then reactModule.createElement(view, {
+		Header = if var8 then reactModule.createElement(view, {
 			tag = "size-full-0 auto-y",
 			LayoutOrder = 1,
 			layout = {
@@ -88,29 +88,29 @@ return reactModule.memo(function(p0)
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, headerGap)
 			},
-			onAbsoluteSizeChanged = var15.onHeaderAbsoluteSizeChanged
+			onAbsoluteSizeChanged = var10.onHeaderAbsoluteSizeChanged
 		}, {
-			Title = if p0.titleComponent then reactModule.createElement(view, {
+			Title = if p1.titleComponent then reactModule.createElement(view, {
 				tag = "size-full-0 auto-y",
 				LayoutOrder = 1,
 				testId = "--sdui-ai-overview-title"
-			}, { Slot = p0.titleComponent }) else nil,
-			Description = if p0.descriptionComponent then reactModule.createElement(view, {
+			}, { Slot = p1.titleComponent }) else nil,
+			Description = if p1.descriptionComponent then reactModule.createElement(view, {
 				tag = "size-full-0 auto-y",
 				LayoutOrder = 2,
 				testId = "--sdui-ai-overview-description"
-			}, { Slot = p0.descriptionComponent }) else nil
+			}, { Slot = p1.descriptionComponent }) else nil
 		}) else nil,
-		Body = if var14 then reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, {
+		Body = if var9 then reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, {
 			Inner = reactModule.createElement(view, {
 				tag = {
-					clip = var15.useCompactViewport,
-					["no-clip"] = not var15.useCompactViewport,
-					["auto-none"] = var15.useCompactViewport,
-					["auto-y"] = not var15.useCompactViewport
+					clip = var10.useCompactViewport,
+					["no-clip"] = not var10.useCompactViewport,
+					["auto-none"] = var10.useCompactViewport,
+					["auto-y"] = not var10.useCompactViewport
 				},
-				Size = if var15.useCompactViewport then var15.animatedViewportHeight:map(function(p2)
-					return UDim2.new(1, 0, 0, math.ceil(p2))
+				Size = if var10.useCompactViewport then var10.animatedViewportHeight:map(function(p3)
+					return UDim2.new(1, 0, 0, math.ceil(p3))
 				end) else UDim2.fromScale(1, 0)
 			}, {
 				Content = reactModule.createElement(view, {
@@ -120,9 +120,9 @@ return reactModule.memo(function(p0)
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						Padding = UDim.new(0, sectionGap)
 					},
-					onAbsoluteSizeChanged = var15.onContentAbsoluteSizeChanged
+					onAbsoluteSizeChanged = var10.onContentAbsoluteSizeChanged
 				}, {
-					Content = if var9 then reactModule.createElement(view, {
+					Content = if var6 then reactModule.createElement(view, {
 						tag = "size-full-0 auto-y",
 						LayoutOrder = 3,
 						testId = "--sdui-ai-overview-content",
@@ -131,8 +131,8 @@ return reactModule.memo(function(p0)
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							Padding = UDim.new(0, sectionGap)
 						}
-					}, var9) else nil,
-					Footer = if var10 then reactModule.createElement(view, {
+					}, var6) else nil,
+					Footer = if var7 then reactModule.createElement(view, {
 						tag = "size-full-0 auto-y",
 						LayoutOrder = 4,
 						testId = "--sdui-ai-overview-footer",
@@ -141,13 +141,13 @@ return reactModule.memo(function(p0)
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							Padding = UDim.new(0, sectionGap)
 						}
-					}, var10) else nil
+					}, var7) else nil
 				}),
-				FadeOverlay = if var15.isCompact then reactModule.createElement(view, {
+				FadeOverlay = if var10.isCompact then reactModule.createElement(view, {
 					tag = "position-bottom-left anchor-bottom-left",
 					ZIndex = 2,
-					backgroundStyle = p0.backgroundStyle or var4.Color.Surface.Surface_0,
-					Size = var15.animatedViewportHeight:map(function(p3)
+					backgroundStyle = p1.backgroundStyle or var1.Color.Surface.Surface_0,
+					Size = var10.animatedViewportHeight:map(function(p3)
 						return UDim2.new(1, 0, 0, math.ceil(p3 * 0.25))
 					end)
 				}, {
@@ -161,7 +161,7 @@ return reactModule.memo(function(p0)
 				}) else nil
 			})
 		}) else nil,
-		ToggleButton = if var15.isCompact then reactModule.createElement(view, {
+		ToggleButton = if var10.isCompact then reactModule.createElement(view, {
 			tag = "row align-y-center gap-xsmall size-full-0 auto-y",
 			LayoutOrder = 3
 		}, {
@@ -172,11 +172,11 @@ return reactModule.memo(function(p0)
 			}, {
 				Chip = reactModule.createElement(chip, {
 					testId = "--sdui-ai-overview-toggle",
-					text = p0.expandButtonText or var6.expandButtonText,
+					text = p1.expandButtonText or var3.expandButtonText,
 					trailing = iconName.ChevronLargeDown,
 					size = chipSize.Large,
 					variant = chipVariant.Utility,
-					onActivated = var15.onExpand
+					onActivated = var10.onExpand
 				})
 			}),
 			TrailingLine = reactModule.createElement(view, { tag = "grow", LayoutOrder = 3 }, { Divider = reactModule.createElement(divider) })

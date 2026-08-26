@@ -23,68 +23,68 @@ fullPageModal.validateProps = tModule.strictInterface({
 })
 fullPageModal.defaultProps = { marginSize = 24, distanceFromTop = 0 }
 
-function fullPageModal.init(p0)
+function fullPageModal.init(p1)
 	-- upvalues: modalTitleModule (ref), UIBloxConfigModule (ref), roactModule (ref)
-	p0.state = {
+	p1.state = {
 		buttonFrameSize = Vector2.new(0, 0),
 		footerContentSize = Vector2.new(0, 0),
 		titleContainerSize = Vector2.new(0, modalTitleModule:GetHeight())
 	}
-	p0.buttonFrameRef = if UIBloxConfigModule.didMountUpdateFullPageModal then roactModule.createRef() else nil
+	p1.buttonFrameRef = if UIBloxConfigModule.didMountUpdateFullPageModal then roactModule.createRef() else nil
 	
-	function p0.changeButtonFrameSize(p1)
-		-- upvalues: p0 (ref)
-		if p0.state.buttonFrameSize ~= p1.AbsoluteSize then
-			p0:setState({ buttonFrameSize = p1.AbsoluteSize })
+	function p0.changeButtonFrameSize(p2)
+		-- upvalues: p1 (ref)
+		if p1.state.buttonFrameSize ~= p2.AbsoluteSize then
+			p1:setState({ buttonFrameSize = p2.AbsoluteSize })
 		end
 	end
 	
-	p0.footerContentRef = if UIBloxConfigModule.didMountUpdateFullPageModal then roactModule.createRef() else nil
+	p1.footerContentRef = if UIBloxConfigModule.didMountUpdateFullPageModal then roactModule.createRef() else nil
 	
 	function p0.changeFooterContentSize(p2)
-		-- upvalues: p0 (ref)
-		if p0.state.footerContentSize ~= p2.AbsoluteSize then
-			p0:setState({ footerContentSize = p2.AbsoluteSize })
+		-- upvalues: p1 (ref)
+		if p1.state.footerContentSize ~= p2.AbsoluteSize then
+			p1:setState({ footerContentSize = p2.AbsoluteSize })
 		end
 	end
 	
-	function p0.changeTitleContainerSize(p3)
-		-- upvalues: p0 (ref)
-		if p0.state.titleContainerSize ~= p3.AbsoluteSize then
-			p0:setState({ titleContainerSize = p3.AbsoluteSize })
+	function p0.changeTitleContainerSize(p2)
+		-- upvalues: p1 (ref)
+		if p1.state.titleContainerSize ~= p2.AbsoluteSize then
+			p1:setState({ titleContainerSize = p2.AbsoluteSize })
 		end
 	end
 end
 
 if UIBloxConfigModule.didMountUpdateFullPageModal then
-	function fullPageModal.didMount(p4)
-		if p4.buttonFrameRef.current then
-			p4:setState({ buttonFrameSize = p4.buttonFrameRef.current.AbsoluteSize })
+	function fullPageModal.didMount(p1)
+		if p1.buttonFrameRef.current then
+			p1:setState({ buttonFrameSize = p1.buttonFrameRef.current.AbsoluteSize })
 		end
-		if p4.footerContentRef.current then
-			p4:setState({
-				footerContentSize = p4.footerContentRef.current.AbsoluteSize
+		if p1.footerContentRef.current then
+			p1:setState({
+				footerContentSize = p1.footerContentRef.current.AbsoluteSize
 			})
 		end
 	end
 end
-function fullPageModal.render(p5)
+function fullPageModal.render(p1)
 	-- upvalues: roactModule (ref), modalWindowModule (ref), modalTitleModule (ref), fitFrameVertical (ref), UIBloxConfigModule (ref), buttonStackModule (ref)
 	return roactModule.createElement(modalWindowModule, {
 		isFullHeight = true,
-		screenSize = p5.props.screenSize,
-		position = p5.props.position,
-		distanceFromTop = p5.props.distanceFromTop
+		screenSize = p1.props.screenSize,
+		position = p1.props.position,
+		distanceFromTop = p1.props.distanceFromTop
 	}, {
 		TitleContainer = roactModule.createElement(modalTitleModule, {
-			title = p5.props.title,
-			onCloseClicked = p5.props.onCloseClicked,
-			onTitleSizeChanged = p5.changeTitleContainerSize
+			title = p1.props.title,
+			onCloseClicked = p1.props.onCloseClicked,
+			onTitleSizeChanged = p1.changeTitleContainerSize
 		}),
 		Content = roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 1, -p5.state.titleContainerSize.Y),
-			Position = UDim2.new(0, 0, 0, p5.state.titleContainerSize.Y)
+			Size = UDim2.new(1, 0, 1, -p1.state.titleContainerSize.Y),
+			Position = UDim2.new(0, 0, 0, p1.state.titleContainerSize.Y)
 		}, {
 			roactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
@@ -100,35 +100,35 @@ function fullPageModal.render(p5)
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				ZIndex = 2,
-				Size = UDim2.new(1, -2 * p5.props.marginSize, 1, -(p5.state.buttonFrameSize.Y + p5.state.footerContentSize.Y))
-			}, p5.props[roactModule.Children]),
-			Buttons = p5.props.buttonStackProps and roactModule.createElement(fitFrameVertical, {
+				Size = UDim2.new(1, -2 * p1.props.marginSize, 1, -(p1.state.buttonFrameSize.Y + p1.state.footerContentSize.Y))
+			}, p1.props[roactModule.Children]),
+			Buttons = p1.props.buttonStackProps and roactModule.createElement(fitFrameVertical, {
 				BackgroundTransparency = 1,
 				width = UDim.new(1, 0),
 				LayoutOrder = 2,
-				[roactModule.Change.AbsoluteSize] = p5.changeButtonFrameSize,
-				[roactModule.Ref] = if UIBloxConfigModule.didMountUpdateFullPageModal then p5.buttonFrameRef else nil
+				[roactModule.Change.AbsoluteSize] = p1.changeButtonFrameSize,
+				[roactModule.Ref] = if UIBloxConfigModule.didMountUpdateFullPageModal then p1.buttonFrameRef else nil
 			}, {
 				Padding = roactModule.createElement("UIPadding", {
 					PaddingLeft = UDim.new(0, 24),
 					PaddingRight = UDim.new(0, 24)
 				}),
-				roactModule.createElement(buttonStackModule, p5.props.buttonStackProps)
+				roactModule.createElement(buttonStackModule, p1.props.buttonStackProps)
 			}),
-			BottomFrame = if p5.props.footerContent then roactModule.createElement("Frame", {
-				Size = UDim2.new(1, -2 * p5.props.marginSize, 0, 0),
+			BottomFrame = if p1.props.footerContent then roactModule.createElement("Frame", {
+				Size = UDim2.new(1, -2 * p1.props.marginSize, 0, 0),
 				LayoutOrder = 3,
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				[roactModule.Change.AbsoluteSize] = p5.changeFooterContentSize,
-				[roactModule.Ref] = if UIBloxConfigModule.didMountUpdateFullPageModal then p5.footerContentRef else nil
+				[roactModule.Change.AbsoluteSize] = p1.changeFooterContentSize,
+				[roactModule.Ref] = if UIBloxConfigModule.didMountUpdateFullPageModal then p1.footerContentRef else nil
 			}, {
 				ContentPadding = roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 24) }),
 				ListLayout = roactModule.createElement("UIListLayout", {
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				FooterContent = p5.props.footerContent()
+				FooterContent = p1.props.footerContent()
 			}) else nil
 		})
 	})

@@ -8,39 +8,39 @@ local doTypesOverlap = require(utilities.typeComparators).doTypesOverlap
 local t = {}
 local getFragmentType = nil
 
-function t.PossibleFragmentSpreadsRule(p0)
+function t.PossibleFragmentSpreadsRule(p1)
 	-- upvalues: isCompositeType (ref), doTypesOverlap (ref), inspect (ref), graphQLError (ref), getFragmentType (write)
 	return {
-		InlineFragment = function(_, p1)
-			-- upvalues: p0 (ref), isCompositeType (copy), doTypesOverlap (copy), inspect (copy), graphQLError (copy)
-			local type = p0:getType()
-			local parentType = p0:getParentType()
+		InlineFragment = function(_, p2)
+			-- upvalues: p1 (ref), isCompositeType (copy), doTypesOverlap (copy), inspect (copy), graphQLError (copy)
+			local type = p1:getType()
+			local parentType = p1:getParentType()
 			
-			if isCompositeType(type) and isCompositeType(parentType) and not doTypesOverlap(p0:getSchema(), type, parentType) then
-				p0:reportError(graphQLError.new(("Fragment cannot be spread here as objects of type \"%s\" can never be of type \"%s\"."):format(inspect(parentType), inspect(type)), p1))
+			if isCompositeType(type) and isCompositeType(parentType) and not doTypesOverlap(p1:getSchema(), type, parentType) then
+				p1:reportError(graphQLError.new(("Fragment cannot be spread here as objects of type \"%s\" can never be of type \"%s\"."):format(inspect(parentType), inspect(type)), p2))
 			end
 		end,
 		FragmentSpread = function(_, p2)
-			-- upvalues: getFragmentType (copy), p0 (ref), doTypesOverlap (copy), inspect (copy), graphQLError (copy)
+			-- upvalues: getFragmentType (copy), p1 (ref), doTypesOverlap (copy), inspect (copy), graphQLError (copy)
 			local value = p2.name.value
-			local var4 = getFragmentType(p0, value)
-			local parentType = p0:getParentType()
+			local var1 = getFragmentType(p1, value)
+			local parentType = p1:getParentType()
 			
-			if var4 and parentType and not doTypesOverlap(p0:getSchema(), var4, parentType) then
-				p0:reportError(graphQLError.new(("Fragment \"%s\" cannot be spread here as objects of type \"%s\" can never be of type \"%s\"."):format(value, inspect(parentType), inspect(var4)), p2))
+			if var1 and parentType and not doTypesOverlap(p1:getSchema(), var1, parentType) then
+				p1:reportError(graphQLError.new(("Fragment \"%s\" cannot be spread here as objects of type \"%s\" can never be of type \"%s\"."):format(value, inspect(parentType), inspect(var1)), p2))
 			end
 		end
 	}
 end
 
-getFragmentType = function(p3, p4)
+getFragmentType = function(p1, p2)
 	-- upvalues: typeFromAST (ref), isCompositeType (ref)
-	local var6 = p3:getFragment(p4)
+	local var1 = p1:getFragment(p2)
 	
-	if var6 then
-		local var7 = typeFromAST(p3:getSchema(), var6.typeCondition)
+	if var1 then
+		local var2 = typeFromAST(p1:getSchema(), var1.typeCondition)
 		
-		return if isCompositeType(var7) then var7 else nil
+		return if isCompositeType(var2) then var2 else nil
 	end
 end
 

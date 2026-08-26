@@ -18,180 +18,180 @@ local fFlagLuaAppGameDetailsAttributionFix = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local t = {}
 
-local function _(p0, p1)
+local function _(p1, p2)
 	-- upvalues: cryoModule (ref), t (ref)
-	if not p0 and not p1 then
+	if not p1 and not p2 then
 		return nil
 	end
-	local var4 = cryoModule.Dictionary.join(p0 or t, p1 or t)
+	local var1 = cryoModule.Dictionary.join(p1 or t, p2 or t)
 	
-	return if next(var4) then var4 else nil
+	return if next(var1) then var1 else nil
 end
 
-local var3 = if fFlagLuaAppLogGameAttributionError then { GameDetail = "GameDetail", PlayIntent = "PlayIntent" } else nil
+local var1 = if fFlagLuaAppLogGameAttributionError then { GameDetail = "GameDetail", PlayIntent = "PlayIntent" } else nil
 
-local _ = function(value, p2, p3)
-	return if value == nil then nil elseif p2 or p3 then value.topicId else value.gameSetTypeId
+local _ = function(value, p1, p2)
+	return if value == nil then nil elseif p1 or p2 then value.topicId else value.gameSetTypeId
 end
 
-local _ = function(value, p4)
-	return if p4 or value == nil then nil else value.gameSetTargetId
+local _ = function(value, p1)
+	return if p1 or value == nil then nil else value.gameSetTargetId
 end
 
-local _ = function(p5, p6)
-	return if p6 or not p5 then nil else p5.appliedFilters
+local _ = function(p1, p2)
+	return if p2 or not p1 then nil else p1.appliedFilters
 end
 
-return function(p7, p8, p9, p10, p11, p12, p13, p14)
-	-- upvalues: useStore (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), appEventIngestService (ref), appPage (ref), gameSortLoadSource (ref), reactModule (ref), fFlagLuaAppGameDetailsAttributionFix (ref), reportGameAttributionError (ref), var3 (ref), mutedError (ref), calculateRowPositionFields (ref), cryoModule (ref), t (ref), gameCollectionItemTypes (ref), fFlagLuaAppLogGameAttributionError (ref), gamePlayIntent (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), feedScroll (ref)
-	local var5 = useStore()
-	local var6 = useRoactService(roactAnalyticsCommonGameEvents)
-	local var7 = useRoactService(appEventIngestService)
-	local var8 = if p7 == nil then nil elseif p8 or p10 == appPage.SearchPage then p7.topicId else p7.gameSetTypeId
-	local var9 = if p8 or p7 == nil then nil else p7.gameSetTargetId
-	local var10 = if p8 or not p7 then nil else p7.appliedFilters
-	local var11 = if p10 == appPage.Home and p7 and p7.topicId then gameSortLoadSource.getSortLoadSource(p7.topicId) else nil
-	local var12 = if p7 then p7.sortSubId else nil
-	local var13 = if p7 then p7.analyticsData else nil
+return function(p1, p2, p3, p4, p5, p6, p7, p8)
+	-- upvalues: useStore (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), appEventIngestService (ref), appPage (ref), gameSortLoadSource (ref), reactModule (ref), fFlagLuaAppGameDetailsAttributionFix (ref), reportGameAttributionError (ref), var1 (ref), mutedError (ref), calculateRowPositionFields (ref), cryoModule (ref), t (ref), gameCollectionItemTypes (ref), fFlagLuaAppLogGameAttributionError (ref), gamePlayIntent (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), feedScroll (ref)
+	local var2 = useStore()
+	local var3 = useRoactService(roactAnalyticsCommonGameEvents)
+	local var4 = useRoactService(appEventIngestService)
+	local var5 = if p1 == nil then nil elseif p2 or p4 == appPage.SearchPage then p1.topicId else p1.gameSetTypeId
+	local var6 = if p2 or p1 == nil then nil else p1.gameSetTargetId
+	local var7 = if p2 or not p1 then nil else p1.appliedFilters
+	local var8 = if p4 == appPage.Home and p1 and p1.topicId then gameSortLoadSource.getSortLoadSource(p1.topicId) else nil
+	local var9 = if p1 then p1.sortSubId else nil
+	local var10 = if p1 then p1.analyticsData else nil
 	
-	return reactModule.useCallback(function(p15, p16)
-		-- upvalues: fFlagLuaAppGameDetailsAttributionFix (copy), p12 (ref), reportGameAttributionError (copy), p10 (ref), var3 (copy), var8 (ref), var9 (ref), p9 (ref), mutedError (copy), calculateRowPositionFields (copy), p13 (ref), p14 (ref), var13 (ref), cryoModule (copy), t (copy), var6 (ref), var10 (ref), var11 (ref), gameCollectionItemTypes (copy), var12 (ref)
+	return reactModule.useCallback(function(p9, p10)
+		-- upvalues: fFlagLuaAppGameDetailsAttributionFix (copy), p6 (ref), reportGameAttributionError (copy), p4 (ref), var1 (copy), var5 (ref), var6 (ref), p3 (ref), mutedError (copy), calculateRowPositionFields (copy), p7 (ref), p8 (ref), var10 (ref), cryoModule (copy), t (copy), var3 (ref), var7 (ref), var8 (ref), gameCollectionItemTypes (copy), var9 (ref)
 		if fFlagLuaAppGameDetailsAttributionFix then
-			local var15
+			local var11
 			local _ = nil
-			local var14 = nil
+			local var12 = nil
 			
-			if p15 and p12 then
-				var14 = p12[p15]
-				var15 = if var14 then var14.universeId ~= p16 else not var14
+			if p9 and p6 then
+				var12 = p6[p9]
+				var11 = if var12 then var12.universeId ~= p10 else not var12
 			else
-				var15 = true
+				var11 = true
 			end
-			if var15 then
-				reportGameAttributionError(p10, {
-					errorType = var3.GameDetail,
-					clickedUniverseId = p16,
-					universeId = if var14 then var14.universeId else nil,
-					gameSetTypeId = var8,
-					gameSetTargetId = var9,
-					sortIndex = p9,
-					sortEntryIndex = p15 or nil
+			if var11 then
+				reportGameAttributionError(p4, {
+					errorType = var1.GameDetail,
+					clickedUniverseId = p10,
+					universeId = if var12 then var12.universeId else nil,
+					gameSetTypeId = var5,
+					gameSetTargetId = var6,
+					sortIndex = p3,
+					sortEntryIndex = p9 or nil
 				})
 			end
 		end
-		if p15 ~= nil and p12 ~= nil then
-			local var16 = p12[p15]
+		if p9 ~= nil and p6 ~= nil then
+			local var13 = p6[p9]
 			
-			if not var16 then
+			if not var13 then
 				mutedError("reportGameDetailOpened requires a valid entry")
 			end
-			local var18
-			local var17 = calculateRowPositionFields(p15, p13, p14)
-			local analyticsData = var16.analyticsData
+			local var14
+			local var15 = calculateRowPositionFields(p9, p7, p8)
+			local analyticsData = var13.analyticsData
 			
-			if var13 or analyticsData then
-				local var19 = cryoModule.Dictionary.join(var13 or t, analyticsData or t)
-				var18 = if next(var19) then var19 else nil
+			if var10 or analyticsData then
+				local var16 = cryoModule.Dictionary.join(var10 or t, analyticsData or t)
+				var14 = if next(var16) then var16 else nil
 			else
-				var18 = nil
+				var14 = nil
 			end
-			var6.reportOpenGameDetailWithId(var16.placeIdOverride or var16.placeId, var8, var9, p9, p15, #p12, var16.isSponsored, var16.adId, var16.universeId, p10, p16, var10, var16.topicContentsIndex or p15, nil, var17.positionInRow, var17.rowInSort, var17.rowOnPage, nil, var11, var16.tileType or gameCollectionItemTypes.GameCollectionItemType.GameTile, var12, var18)
+			var3.reportOpenGameDetailWithId(var13.placeIdOverride or var13.placeId, var5, var6, p3, p9, #p6, var13.isSponsored, var13.adId, var13.universeId, p4, p10, var7, var13.topicContentsIndex or p9, nil, var15.positionInRow, var15.rowInSort, var15.rowOnPage, nil, var8, var13.tileType or gameCollectionItemTypes.GameCollectionItemType.GameTile, var9, var14)
 		end
 	end, {
-		var6, p9, p10, var8, var9, p12, p13, p14, var11, var12, var13
-	}), reactModule.useCallback(function(p17, p18, _, p19, p20, p21)
-		-- upvalues: fFlagLuaAppLogGameAttributionError (copy), p12 (ref), reportGameAttributionError (copy), var3 (copy), var8 (ref), var9 (ref), p9 (ref), calculateRowPositionFields (copy), p13 (ref), p14 (ref), var13 (ref), cryoModule (copy), t (copy), gamePlayIntent (copy), var7 (ref), var10 (ref), p10 (ref), var11 (ref), var12 (ref), gameCollectionItemTypes (copy), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
+		var3, p3, p4, var5, var6, p6, p7, p8, var8, var9, var10
+	}), reactModule.useCallback(function(p9, p10, _, p11, p12, p13)
+		-- upvalues: fFlagLuaAppLogGameAttributionError (copy), p6 (ref), reportGameAttributionError (copy), var1 (copy), var5 (ref), var6 (ref), p3 (ref), calculateRowPositionFields (copy), p7 (ref), p8 (ref), var10 (ref), cryoModule (copy), t (copy), gamePlayIntent (copy), var4 (ref), var7 (ref), p4 (ref), var8 (ref), var9 (ref), gameCollectionItemTypes (copy), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
 		if fFlagLuaAppLogGameAttributionError then
-			local var21
+			local var11
 			local _ = nil
-			local var20 = nil
+			local var12 = nil
 			
-			if p20 and p12 then
-				var20 = p12[p20]
-				var21 = if var20 then var20.universeId ~= p17.universeId else not var20
+			if p12 and p6 then
+				var12 = p6[p12]
+				var11 = if var12 then var12.universeId ~= p9.universeId else not var12
 			else
-				var21 = true
+				var11 = true
 			end
-			if var21 then
-				reportGameAttributionError(p19, {
-					errorType = var3.PlayIntent,
-					clickedUniverseId = p17.universeId,
-					universeId = if var20 then var20.universeId else nil,
-					gameSetTypeId = var8,
-					gameSetTargetId = var9,
-					sortIndex = p9,
-					sortEntryIndex = p20 or nil
+			if var11 then
+				reportGameAttributionError(p11, {
+					errorType = var1.PlayIntent,
+					clickedUniverseId = p9.universeId,
+					universeId = if var12 then var12.universeId else nil,
+					gameSetTypeId = var5,
+					gameSetTargetId = var6,
+					sortIndex = p3,
+					sortEntryIndex = p12 or nil
 				})
 			end
 		end
-		local var23
-		local var22 = calculateRowPositionFields(p20, p13, p14)
-		local analyticsData = p17.analyticsData
+		local var13
+		local var14 = calculateRowPositionFields(p12, p7, p8)
+		local analyticsData = p9.analyticsData
 		
-		if var13 or analyticsData then
-			local var24 = cryoModule.Dictionary.join(var13 or t, analyticsData or t)
-			var23 = if next(var24) then var24 else nil
+		if var10 or analyticsData then
+			local var15 = cryoModule.Dictionary.join(var10 or t, analyticsData or t)
+			var13 = if next(var15) then var15 else nil
 		else
-			var23 = nil
+			var13 = nil
 		end
-		gamePlayIntent(var7, p19, {
-			placeId = p17.placeIdOverride or p17.placeId,
-			rootPlaceId = tonumber(p17.placeId),
-			universeId = p17.universeId,
-			sortIndex = tostring(p9),
-			sortEntryIndex = if p20 then tostring(p20) else nil,
-			referralSource = p18,
-			gameSetTypeId = var8,
-			gameSetTargetId = var9,
-			appliedFilters = var10,
-			topicDataPosition = p17.topicContentsIndex or p20,
-			nativeAdData = p17.adId,
-			pageName = p10,
-			positionInRow = var22.positionInRow,
-			rowNumber = var22.rowInSort,
-			feedRowNumber = var22.rowOnPage,
-			loadSource = var11,
-			launchData = p17.launchDataOverride,
-			sortSubId = var12,
-			tileType = p17.tileType or gameCollectionItemTypes.GameCollectionItemType.GameTile,
-			analyticsData = var23,
-			actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p21 else nil
+		gamePlayIntent(var4, p11, {
+			placeId = p9.placeIdOverride or p9.placeId,
+			rootPlaceId = tonumber(p9.placeId),
+			universeId = p9.universeId,
+			sortIndex = tostring(p3),
+			sortEntryIndex = if p12 then tostring(p12) else nil,
+			referralSource = p10,
+			gameSetTypeId = var5,
+			gameSetTargetId = var6,
+			appliedFilters = var7,
+			topicDataPosition = p9.topicContentsIndex or p12,
+			nativeAdData = p9.adId,
+			pageName = p4,
+			positionInRow = var14.positionInRow,
+			rowNumber = var14.rowInSort,
+			feedRowNumber = var14.rowOnPage,
+			loadSource = var8,
+			launchData = p9.launchDataOverride,
+			sortSubId = var9,
+			tileType = p9.tileType or gameCollectionItemTypes.GameCollectionItemType.GameTile,
+			analyticsData = var13,
+			actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p13 else nil
 		})
 	end, {
-		p9, var7, var8, var9, if fFlagLuaAppLogGameAttributionError then p12 else nil,
-		p10, p13, p14, var11, var12, var13
+		p3, var4, var5, var6, if fFlagLuaAppLogGameAttributionError then p6 else nil,
+		p4, p7, p8, var8, var9, var10
 	}), reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var8 (ref), var9 (ref), p9 (ref)
-		var6.reportSeeAllWithId(var8, var9, p9)
-	end, { var6, var8, var9, p9 }), reactModule.useCallback(function(p22, p23, p24)
-		-- upvalues: p11 (ref), mutedError (copy), var5 (ref), p9 (ref), var8 (ref), var9 (ref), feedScroll (copy), var7 (ref), p10 (ref)
-		if p11 and p11.current ~= nil then
-			local scrollingDirection = p11.current.ScrollingDirection
-			local var25 = 0
+		-- upvalues: var3 (ref), var5 (ref), var6 (ref), p3 (ref)
+		var3.reportSeeAllWithId(var5, var6, p3)
+	end, { var3, var5, var6, p3 }), reactModule.useCallback(function(p9, p10, p11)
+		-- upvalues: p5 (ref), mutedError (copy), var2 (ref), p3 (ref), var5 (ref), var6 (ref), feedScroll (copy), var4 (ref), p4 (ref)
+		if p5 and p5.current ~= nil then
+			local scrollingDirection = p5.current.ScrollingDirection
+			local var11 = 0
 			
 			if scrollingDirection == Enum.ScrollingDirection.X then
-				var25 = p11.current.AbsoluteSize.X
+				var11 = p5.current.AbsoluteSize.X
 			elseif scrollingDirection == Enum.ScrollingDirection.Y then
-				var25 = p11.current.AbsoluteSize.Y
+				var11 = p5.current.AbsoluteSize.Y
 			else
 				mutedError(`Direction {scrollingDirection.Name} is an unsupported option for feedScroll event`)
 			end
-			local screenSize = var5:getState().ScreenSize
-			feedScroll(var7, p10, scrollingDirection, {
-				distance = p22,
+			local screenSize = var2:getState().ScreenSize
+			feedScroll(var4, p4, scrollingDirection, {
+				distance = p9,
 				screenSizeX = screenSize.X,
 				screenSizeY = screenSize.Y,
-				scrollAreaSize = var25,
-				scrollDepth = if var25 > 0 then p22 / var25 else nil,
-				startDepth = if var25 > 0 then p24 / var25 else nil,
-				startPos = p24,
-				scrollDuration = p23,
-				sortPos = p9,
-				gameSetTypeId = var8,
-				gameSetTargetId = var9
+				scrollAreaSize = var11,
+				scrollDepth = if var11 > 0 then p9 / var11 else nil,
+				startDepth = if var11 > 0 then p11 / var11 else nil,
+				startPos = p11,
+				scrollDuration = p10,
+				sortPos = p3,
+				gameSetTypeId = var5,
+				gameSetTargetId = var6
 			})
 		end
 	end, {
-		var7, p9, p10, p11, var8, var9, var5
+		var4, p3, p4, p5, var5, var6, var2
 	})
 end

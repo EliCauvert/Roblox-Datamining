@@ -1,16 +1,16 @@
 ﻿local API_URLModule = require(script.Parent.Parent.API_URL)
 
-return function(p0)
+return function(p1)
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.POST("SetSocialLinks", function(p1, p2)
+	return p1.roduxNetworking.POST("SetSocialLinks", function(p2, p3)
 		-- upvalues: API_URLModule (copy)
-		return p1(API_URLModule):path("v1"):path("promotion-channels"):body({
-			promotionChannelsVisibilityPrivacy = p2.promotionChannelsVisibilityPrivacy,
-			facebook = p2.facebook,
-			twitter = p2.twitter,
-			youtube = p2.youtube,
-			twitch = p2.twitch,
-			guilded = p2.guilded
+		return p2(API_URLModule):path("v1"):path("promotion-channels"):body({
+			promotionChannelsVisibilityPrivacy = p3.promotionChannelsVisibilityPrivacy,
+			facebook = p3.facebook,
+			twitter = p3.twitter,
+			youtube = p3.youtube,
+			twitch = p3.twitch,
+			guilded = p3.guilded
 		})
 	end)
 end

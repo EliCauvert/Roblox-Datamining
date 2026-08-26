@@ -8,14 +8,14 @@ local useSelector = dependenciesModule.useSelector
 local useDispatch = dependenciesModule.useDispatch
 local autoSyncContactsModule = require(parent.Networking.AutoSyncContacts)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useDispatch (ref), useSelector (ref), autoSyncContactsModule (ref), contactsProtocol (ref), appStorageService (ref), reactModule (ref)
-	local var4 = useDispatch()
-	local var5 = useSelector(function(p1)
-		return p1.LocalUserId
+	local var1 = useDispatch()
+	local var2 = useSelector(function(p2)
+		return p2.LocalUserId
 	end)
-	reactModule.useEffect(p0 or function()
-		-- upvalues: var4 (ref), autoSyncContactsModule (copy), var5 (ref), contactsProtocol (copy), appStorageService (copy)
-		var4(autoSyncContactsModule(var5, contactsProtocol.default, appStorageService))
+	reactModule.useEffect(p1 or function()
+		-- upvalues: var1 (ref), autoSyncContactsModule (copy), var2 (ref), contactsProtocol (copy), appStorageService (copy)
+		var1(autoSyncContactsModule(var2, contactsProtocol.default, appStorageService))
 	end, {})
 end

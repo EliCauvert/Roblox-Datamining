@@ -4,13 +4,13 @@ local isSearchTypeInOmniSearch = require(parent.DiscoveryUtils).isSearchTypeInOm
 local _ = require(parent.SduiCoreSystem)
 
 return {
-	resolveSearchQuery = function(p0)
-		local var0 = if p0 then p0.actionParams else nil
+	resolveSearchQuery = function(p1)
+		local var1 = if p1 then p1.actionParams else nil
 		
-		if var0 == nil then
+		if var1 == nil then
 			return nil
 		end
-		local searchQuery = var0.searchQuery
+		local searchQuery = var1.searchQuery
 		
 		return if typeof(searchQuery) == "string" and searchQuery ~= "" then searchQuery else nil
 	end,

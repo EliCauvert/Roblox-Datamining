@@ -7,38 +7,38 @@ local REACT_FORWARD_REF_TYPE = reactSymbols.REACT_FORWARD_REF_TYPE
 local REACT_MEMO_TYPE = reactSymbols.REACT_MEMO_TYPE
 
 return {
-	forwardRef = function(p0)
+	forwardRef = function(p1)
 		-- upvalues: reactGlobalsModule (ref), REACT_MEMO_TYPE (ref), console (ref), REACT_FORWARD_REF_TYPE (ref)
 		if reactGlobalsModule.__DEV__ then
-			if typeof(p0) == "table" and p0["$$typeof"] == REACT_MEMO_TYPE then
+			if typeof(p1) == "table" and p1["$$typeof"] == REACT_MEMO_TYPE then
 				console.error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).")
-			elseif typeof(p0) == "function" then
-				local debugInfo, _ = debug.info(p0, "a")
+			elseif typeof(p1) == "function" then
+				local debugInfo, _ = debug.info(p1, "a")
 				
 				if debugInfo ~= 0 and debugInfo ~= 2 then
 					console.error("forwardRef render functions accept exactly two parameters: props and ref. %s", if debugInfo == 1 then "Did you forget to use the ref parameter?" else "Any additional parameter will be undefined.")
 				end
 			else
-				console.error("forwardRef requires a render function but was given %s.", typeof(p0))
+				console.error("forwardRef requires a render function but was given %s.", typeof(p1))
 			end
 		end
-		local t = { ["$$typeof"] = REACT_FORWARD_REF_TYPE, render = p0 }
+		local t = { ["$$typeof"] = REACT_FORWARD_REF_TYPE, render = p1 }
 		
 		if reactGlobalsModule.__DEV__ then
-			local var3 = nil
+			local var1 = nil
 			setmetatable(t, {
-				__index = function(p1, p2)
-					-- upvalues: var3 (write)
-					return if p2 == "displayName" then var3 else rawget(p1, p2)
+				__index = function(p2, p3)
+					-- upvalues: var1 (write)
+					return if p3 == "displayName" then var1 else rawget(p2, p3)
 				end,
-				__newindex = function(p3, p4, p5)
-					-- upvalues: var3 (write)
-					if p4 == "displayName" then
-						var3 = p5
+				__newindex = function(p2, p3, p4)
+					-- upvalues: var1 (write)
+					if p3 == "displayName" then
+						var1 = p4
 						
 						return
 					end
-					rawset(p3, p4, p5)
+					rawset(p2, p3, p4)
 				end
 			})
 		end

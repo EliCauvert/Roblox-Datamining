@@ -14,31 +14,31 @@ local t = {
 	[avatarScreen.ColorAdjustment] = true
 }
 
-local function _(p0)
+local function _(p1)
 	-- upvalues: getRouteIsFocused (ref), appPage (ref)
-	return getRouteIsFocused(p0, appPage.AvatarExperienceRoot)
+	return getRouteIsFocused(p1, appPage.AvatarExperienceRoot)
 end
 
 local _ = function(p1)
 	-- upvalues: getCurrentNavigationState (ref), t (ref)
-	local var4 = getCurrentNavigationState(p1.state)
-	local var5 = if var4 then var4.routeName else nil
+	local var1 = getCurrentNavigationState(p1.state)
+	local var2 = if var1 then var1.routeName else nil
 	
-	return if var5 then t[var5] else false
+	return if var2 then t[var2] else false
 end
 
 return function()
 	-- upvalues: useLastInputMethodModule (ref), useNavigation (ref), getRouteIsFocused (ref), appPage (ref), getCurrentNavigationState (ref), t (ref), useSelector (ref)
-	local var6 = useLastInputMethodModule()
-	local var7 = useNavigation()
-	local var8 = getRouteIsFocused(var7.state, appPage.AvatarExperienceRoot)
+	local var1 = useLastInputMethodModule()
+	local var2 = useNavigation()
+	local var3 = getRouteIsFocused(var2.state, appPage.AvatarExperienceRoot)
 	
-	if var8 then
-		local var9 = getCurrentNavigationState(var7.state)
-		local var10 = if var9 then var9.routeName else nil
-		var8 = not (if var10 then t[var10] else false)
+	if var3 then
+		local var4 = getCurrentNavigationState(var2.state)
+		local var5 = if var4 then var4.routeName else nil
+		var3 = not (if var5 then t[var5] else false)
 	end
-	return var8 and (not useSelector(function(p2)
-		return p2.CentralOverlay.OverlayType ~= nil
-	end) and var6 == "Gamepad")
+	return var3 and (not useSelector(function(p1)
+		return p1.CentralOverlay.OverlayType ~= nil
+	end) and var1 == "Gamepad")
 end

@@ -17,9 +17,9 @@ function AccountSettingsUpsell(value)
 	local onCloseModal = value.onCloseModal
 	local onCloseModal_1 = value.onCloseModal
 	local featureName = value.featureName
-	local var7 = useLocalization(value.localizationStrings)
-	local var8 = useStyle()
-	local var9 = if value.analyticsService then value.analyticsService else analyticsServiceModule.EventStream
+	local var1 = useLocalization(value.localizationStrings)
+	local var2 = useStyle()
+	local var3 = if value.analyticsService then value.analyticsService else analyticsServiceModule.EventStream
 	
 	return reactModule.createElement("ImageButton", {
 		AutoButtonColor = false,
@@ -35,11 +35,11 @@ function AccountSettingsUpsell(value)
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
 			Content = reactModule.createElement(partialPageModal, {
-				title = var7.title,
+				title = var1.title,
 				screenSize = value.screenSize,
 				onCloseClicked = function()
-					-- upvalues: sendButtonClickEventModule (copy), var9 (ref), appScreensModule (copy), featureName (ref), onCloseModal (ref)
-					sendButtonClickEventModule(var9, appScreensModule.AccountSettingsUpsell, featureName, "CloseModal")
+					-- upvalues: sendButtonClickEventModule (copy), var3 (ref), appScreensModule (copy), featureName (ref), onCloseModal (ref)
+					sendButtonClickEventModule(var3, appScreensModule.AccountSettingsUpsell, featureName, "CloseModal")
 					onCloseModal()
 				end,
 				buttonStackProps = {
@@ -51,11 +51,11 @@ function AccountSettingsUpsell(value)
 							props = {
 								isDisabled = false,
 								onActivated = function()
-									-- upvalues: sendButtonClickEventModule (copy), var9 (ref), appScreensModule (copy), featureName (ref), onCloseModal_1 (ref)
-									sendButtonClickEventModule(var9, appScreensModule.AccountSettingsUpsell, featureName, "Cancelled")
+									-- upvalues: sendButtonClickEventModule (copy), var3 (ref), appScreensModule (copy), featureName (ref), onCloseModal_1 (ref)
+									sendButtonClickEventModule(var3, appScreensModule.AccountSettingsUpsell, featureName, "Cancelled")
 									onCloseModal_1()
 								end,
-								text = var7.buttonCancel
+								text = var1.buttonCancel
 							}
 						},
 						{
@@ -63,11 +63,11 @@ function AccountSettingsUpsell(value)
 							props = {
 								isDisabled = false,
 								onActivated = function()
-									-- upvalues: sendButtonClickEventModule (copy), var9 (ref), appScreensModule (copy), featureName (ref), value (ref), var7 (ref)
-									sendButtonClickEventModule(var9, appScreensModule.AccountSettingsUpsell, featureName, "OpenAccountSettings")
-									value.openAccountSettings(var7.buttonSettings)
+									-- upvalues: sendButtonClickEventModule (copy), var3 (ref), appScreensModule (copy), featureName (ref), value (ref), var1 (ref)
+									sendButtonClickEventModule(var3, appScreensModule.AccountSettingsUpsell, featureName, "OpenAccountSettings")
+									value.openAccountSettings(var1.buttonSettings)
 								end,
-								text = var7.buttonSettings
+								text = var1.buttonSettings
 							}
 						}
 					}
@@ -83,13 +83,13 @@ function AccountSettingsUpsell(value)
 					}),
 					Text = reactModule.createElement(styledTextLabel, {
 						fluidSizing = false,
-						fontStyle = var8.Font.Body,
-						colorStyle = var8.Theme.TextEmphasis,
+						fontStyle = var2.Font.Body,
+						colorStyle = var2.Theme.TextEmphasis,
 						size = UDim2.new(1, 0, 0, 0),
 						textXAlignment = Enum.TextXAlignment.Left,
 						textYAlignment = Enum.TextYAlignment.Center,
 						automaticSize = Enum.AutomaticSize.Y,
-						text = var7.message
+						text = var1.message
 					})
 				})
 			})
@@ -97,8 +97,8 @@ function AccountSettingsUpsell(value)
 	})
 end
 
-AccountSettingsUpsell = roactRoduxModule.connect(function(p0, _)
-	return { screenSize = p0.ScreenSize }
+AccountSettingsUpsell = roactRoduxModule.connect(function(p1, _)
+	return { screenSize = p1.ScreenSize }
 end)(AccountSettingsUpsell)
 
 return AccountSettingsUpsell

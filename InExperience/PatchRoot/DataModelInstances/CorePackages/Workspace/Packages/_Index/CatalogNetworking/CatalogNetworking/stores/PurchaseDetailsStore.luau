@@ -5,50 +5,50 @@ local promiseModule = require(parent.Promise)
 local dashModule = require(parent.Dash)
 local _ = require(catalogNetworking.Types)
 local fetchPurchaseDetailsModule = require(catalogNetworking.networkRequests.fetchPurchaseDetails)
-local var5, var6 = signalsModule.createSignal({})
+local var1, var2 = signalsModule.createSignal({})
 
-local function mergeResponse(p0)
-	-- upvalues: var5 (ref), var6 (ref)
-	if p0 and p0.look and p0.look.items then
-		local cloned = table.clone(var5(false))
+local function mergeResponse(p1)
+	-- upvalues: var1 (ref), var2 (ref)
+	if p1 and p1.look and p1.look.items then
+		local cloned = table.clone(var1(false))
 		
-		for i, v in p0.look.items do
+		for i, v in p1.look.items do
 			cloned[tostring(v.id)] = v
 		end
-		var6(cloned)
+		var2(cloned)
 	end
-	return p0
+	return p1
 end
 
 return {
-	getCache = var5,
-	fetchAndCache = function(p1, p2)
-		-- upvalues: var5 (ref), dashModule (ref), promiseModule (ref), fetchPurchaseDetailsModule (ref), mergeResponse (ref)
-		local var9 = var5(false)
-		local var10 = dashModule.filter(p2, function(p3)
-			-- upvalues: var9 (ref)
-			return not var9[tostring(p3.id)]
+	getCache = var1,
+	fetchAndCache = function(p2, p3)
+		-- upvalues: var1 (ref), dashModule (ref), promiseModule (ref), fetchPurchaseDetailsModule (ref), mergeResponse (ref)
+		local var3 = var1(false)
+		local var4 = dashModule.filter(p3, function(p4)
+			-- upvalues: var3 (ref)
+			return not var3[tostring(p4.id)]
 		end)
 		
-		return if #var10 == 0 then promiseModule.resolve() else fetchPurchaseDetailsModule(p1, var10):andThen(mergeResponse)
+		return if #var4 == 0 then promiseModule.resolve() else fetchPurchaseDetailsModule(p2, var4):andThen(mergeResponse)
 	end,
-	fetchAll = function(p4, p5)
+	fetchAll = function(p2, p3)
 		-- upvalues: fetchPurchaseDetailsModule (ref), mergeResponse (ref)
-		return fetchPurchaseDetailsModule(p4, p5):andThen(mergeResponse)
+		return fetchPurchaseDetailsModule(p2, p3):andThen(mergeResponse)
 	end,
-	getItem = function(p6)
-		-- upvalues: var5 (ref)
-		return var5(false)[p6]
+	getItem = function(p2)
+		-- upvalues: var1 (ref)
+		return var1(false)[p2]
 	end,
 	clear = function()
-		-- upvalues: var6 (ref)
-		var6({})
+		-- upvalues: var2 (ref)
+		var2({})
 	end,
-	markItemsOwned = function(p7)
-		-- upvalues: var5 (ref), var6 (ref)
-		local cloned = table.clone(var5(false))
+	markItemsOwned = function(p2)
+		-- upvalues: var1 (ref), var2 (ref)
+		local cloned = table.clone(var1(false))
 		
-		for i, v in p7 do
+		for i, v in p2 do
 			if cloned[v] then
 				local cloned_1 = table.clone(cloned[v])
 				cloned_1.quantityOwned = (cloned_1.quantityOwned or 0) + 1
@@ -56,6 +56,6 @@ return {
 				cloned[v] = cloned_1
 			end
 		end
-		var6(cloned)
+		var2(cloned)
 	end
 }

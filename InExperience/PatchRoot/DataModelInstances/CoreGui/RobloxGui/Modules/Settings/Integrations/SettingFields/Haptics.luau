@@ -20,15 +20,15 @@ return {
 			return gameSettings.HapticStrength ~= 0
 		end
 		
-		local var4 = valueChangedSignal.new(if gameSettings.HapticStrength == t_1.MIN then t.OFF else t.ON)
-		var4:connect(function(p0)
+		local var1 = valueChangedSignal.new(if gameSettings.HapticStrength == t_1.MIN then t.OFF else t.ON)
+		var1:connect(function(p1)
 			-- upvalues: gameSettings (copy), t_1 (copy), t (copy)
-			if (if gameSettings.HapticStrength == t_1.MIN then t.OFF else t.ON) == p0 then
+			if (if gameSettings.HapticStrength == t_1.MIN then t.OFF else t.ON) == p1 then
 				return
 			end
-			gameSettings.HapticStrength = if p0 == true then 1 else 0
+			gameSettings.HapticStrength = if p1 == true then 1 else 0
 		end)
 		
-		return var4
+		return var1
 	end)()
 }

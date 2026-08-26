@@ -5,12 +5,12 @@ local view = foundationModule.View
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref)
-	local var3 = reactModule.useContext(detailsPageLayoutContextModule)
-	local setHasActions = var3.setHasActions
-	local setActionBarHeight = var3.setActionBarHeight
-	local testId = var3.testId
+	local var1 = reactModule.useContext(detailsPageLayoutContextModule)
+	local setHasActions = var1.setHasActions
+	local setActionBarHeight = var1.setActionBarHeight
+	local testId = var1.testId
 	assert(setHasActions and (setActionBarHeight and testId), "DetailsPageLayout.Actions must be used within DetailsPageLayout.Root")
 	reactModule.useEffect(function()
 		-- upvalues: setHasActions (ref), setActionBarHeight (ref)
@@ -34,6 +34,6 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 		onActivated = function() end,
 		selection = { Selectable = false },
 		stateLayer = { affordance = stateLayerAffordance.None },
-		ref = p1
-	}, p0.children)
+		ref = p2
+	}, p1.children)
 end))

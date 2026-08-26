@@ -13,9 +13,9 @@ local orientation = foundationModule.Enums.Orientation
 local iconName = foundationModule.Enums.IconName
 local getIconRichText = foundationModule.Utility.getIconRichText
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), numberLocalization (ref), localizationService (ref), getIconRichText (ref), iconName (ref), dialog (ref), dialogSize (ref), view (ref), text (ref), orientation (ref), buttonVariant (ref)
-	local var3 = useLocalization({
+	local var1 = useLocalization({
 		buyTitle = "IAPExperience.PurchasePrompt.Header.BuyAvatar",
 		buyAction = "IAPExperience.PurchasePrompt.Action.Buy",
 		totalPrice = "IAPExperience.PurchasePrompt.Label.TotalPriceV2"
@@ -26,14 +26,14 @@ return function(p0)
 		disablePortal = false,
 		size = dialogSize.Small,
 		onClose = reactModule.useCallback(function()
-			-- upvalues: p0 (ref)
-			if p0.isPurchasing then
+			-- upvalues: p1 (ref)
+			if p1.isPurchasing then
 				return
 			end
-			p0.onCancel()
-		end, { p0.isPurchasing, p0.onCancel })
+			p1.onCancel()
+		end, { p1.isPurchasing, p1.onCancel })
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var3.buyTitle }),
+		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.buyTitle }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			PriceTotal = reactModule.createElement(view, {
 				tag = "size-full-1300 padding-bottom-large padding-left-xxsmall padding-right-xxsmall padding-top-small"
@@ -49,7 +49,7 @@ return function(p0)
 						Label = reactModule.createElement(text, {
 							LayoutOrder = 1,
 							tag = "auto-xy padding-y-xsmall text-title-medium text-align-x-left content-default",
-							Text = var3.totalPrice
+							Text = var1.totalPrice
 						})
 					}),
 					RightSide = reactModule.createElement(view, {
@@ -62,9 +62,9 @@ return function(p0)
 							tag = "auto-xy padding-y-xsmall text-title-medium text-align-x-right content-emphasis",
 							RichText = true,
 							Text = reactModule.useMemo(function()
-								-- upvalues: numberLocalization (copy), p0 (ref), localizationService (copy), getIconRichText (copy), iconName (copy)
-								return `{getIconRichText(iconName.Robux)} {numberLocalization.localize(p0.totalPrice, localizationService.RobloxLocaleId)}`
-							end, { p0.totalPrice, localizationService.RobloxLocaleId })
+								-- upvalues: numberLocalization (copy), p1 (ref), localizationService (copy), getIconRichText (copy), iconName (copy)
+								return `{getIconRichText(iconName.Robux)} {numberLocalization.localize(p1.totalPrice, localizationService.RobloxLocaleId)}`
+							end, { p1.totalPrice, localizationService.RobloxLocaleId })
 						})
 					})
 				})
@@ -75,9 +75,9 @@ return function(p0)
 			orientation = orientation.Horizontal,
 			actions = {
 				{
-					text = var3.buyAction,
+					text = var1.buyAction,
 					variant = buttonVariant.Emphasis,
-					onActivated = p0.onConfirm
+					onActivated = p1.onConfirm
 				}
 			}
 		})

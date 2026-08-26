@@ -3,31 +3,31 @@ local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceCha
 local _ = require(viewRecycler.Core.Types)
 local translatedDataSourceModule = require(script.Parent.TranslatedDataSource)
 
-local function _(p0)
-	local list = table.create(#p0)
+local function _(p1)
+	local list = table.create(#p1)
 	
-	for i, v in p0 do
-		list[#p0 - i + 1] = v
+	for i, v in p1 do
+		list[#p1 - i + 1] = v
 	end
 	return list
 end
 
-return function(p1)
+return function(p2)
 	-- upvalues: translatedDataSourceModule (ref), dataSourceChangeTypeModule (ref)
-	return translatedDataSourceModule(p1.getItemCount, function(p2)
-		-- upvalues: p1 (ref)
-		return p1.getItem(p1.getItemCount() - p2 + 1)
+	return translatedDataSourceModule(p2.getItemCount, function(p3)
+		-- upvalues: p2 (ref)
+		return p2.getItem(p2.getItemCount() - p3 + 1)
 	end, function(p3)
-		-- upvalues: p1 (ref)
-		return p1.getItemKey(p1.getItemCount() - p3 + 1)
-	end, function(p4)
-		-- upvalues: p1 (ref), dataSourceChangeTypeModule (copy)
-		return p1.subscribe(function(p5)
-			-- upvalues: dataSourceChangeTypeModule (copy), p4 (ref)
-			local previousItemCount = p5.previousItemCount
+		-- upvalues: p2 (ref)
+		return p2.getItemKey(p2.getItemCount() - p3 + 1)
+	end, function(p3)
+		-- upvalues: p2 (ref), dataSourceChangeTypeModule (copy)
+		return p2.subscribe(function(p4)
+			-- upvalues: dataSourceChangeTypeModule (copy), p3 (ref)
+			local previousItemCount = p4.previousItemCount
 			local t = {}
 			
-			for i, v in p5.changes do
+			for i, v in p4.changes do
 				if v.type ~= dataSourceChangeTypeModule.Insert then
 					if v.type == dataSourceChangeTypeModule.Remove then
 						local t_1 = {
@@ -70,9 +70,9 @@ return function(p1)
 						for i_3, v_3 in keys do
 							list[#keys - i_3 + 1] = v_3
 						end
-						local var11 = list
-						table.insert(t, { type = dataSourceChangeTypeModule.Reset, keys = var11 })
-						previousItemCount = #var11
+						local var1 = list
+						table.insert(t, { type = dataSourceChangeTypeModule.Reset, keys = var1 })
+						previousItemCount = #var1
 					end
 				end
 				local t_1 = {
@@ -89,10 +89,10 @@ return function(p1)
 				table.insert(t, t_1)
 				previousItemCount += #v.keys
 			end
-			p4({
+			p3({
 				changes = t,
-				previousItemCount = p5.previousItemCount,
-				itemCount = p5.itemCount
+				previousItemCount = p4.previousItemCount,
+				itemCount = p4.itemCount
 			})
 		end)
 	end)

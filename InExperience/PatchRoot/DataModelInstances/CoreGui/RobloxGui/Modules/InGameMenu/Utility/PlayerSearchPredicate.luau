@@ -1,3 +1,3 @@
-﻿return function(p0, p1, p2)
-	return p0 == nil or p0 == "" or (if p2 and string.find(utf8.nfdnormalize(p2):lower(), utf8.nfdnormalize(p0):lower(), 1, true) ~= nil then true else string.find(p1:lower(), p0:lower(), 1, true) ~= nil)
+﻿return function(p1, p2, p3)
+	return p1 == nil or p1 == "" or (if p3 and string.find(utf8.nfdnormalize(p3):lower(), utf8.nfdnormalize(p1):lower(), 1, true) ~= nil then true else string.find(p2:lower(), p1:lower(), 1, true) ~= nil)
 end

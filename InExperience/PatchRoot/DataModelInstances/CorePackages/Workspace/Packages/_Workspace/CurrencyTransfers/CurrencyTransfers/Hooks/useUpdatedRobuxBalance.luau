@@ -6,40 +6,40 @@ local promiseModule = require(parent.Promise)
 local getBalanceRequestModule = require(currencyTransfers.NetworkRequests.getBalanceRequest)
 local _ = require(currencyTransfers.Hooks.useTransferStore)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), getBalanceRequestModule (ref), promiseModule (ref), signalsReactModule (ref)
-	local setRobuxBalanceAmount = p0.setRobuxBalanceAmount
-	local setBalanceReceivedFromApi = p0.setBalanceReceivedFromApi
+	local setRobuxBalanceAmount = p1.setRobuxBalanceAmount
+	local setBalanceReceivedFromApi = p1.setBalanceReceivedFromApi
 	reactModule.useEffect(function()
-		-- upvalues: getBalanceRequestModule (copy), p0 (ref), setRobuxBalanceAmount (ref), setBalanceReceivedFromApi (ref), promiseModule (copy)
-		local var5 = false
-		getBalanceRequestModule(nil, p0.getNetworkImpl()):andThen(function(p1)
-			-- upvalues: var5 (write), setRobuxBalanceAmount (copy), setBalanceReceivedFromApi (copy), promiseModule (copy), getBalanceRequestModule (copy), p0 (copy)
-			if var5 then
+		-- upvalues: getBalanceRequestModule (copy), p1 (ref), setRobuxBalanceAmount (ref), setBalanceReceivedFromApi (ref), promiseModule (copy)
+		local var1 = false
+		getBalanceRequestModule(nil, p1.getNetworkImpl()):andThen(function(p2)
+			-- upvalues: var1 (write), setRobuxBalanceAmount (copy), setBalanceReceivedFromApi (copy), promiseModule (copy), getBalanceRequestModule (copy), p1 (copy)
+			if var1 then
 				return
 			end
-			setRobuxBalanceAmount(p1)
+			setRobuxBalanceAmount(p2)
 			setBalanceReceivedFromApi(true)
 			promiseModule.delay(0.5):andThen(function()
-				-- upvalues: var5 (copy), getBalanceRequestModule (copy), p0 (copy), setRobuxBalanceAmount (copy)
-				if var5 then
+				-- upvalues: var1 (copy), getBalanceRequestModule (copy), p1 (copy), setRobuxBalanceAmount (copy)
+				if var1 then
 					return
 				end
-				return getBalanceRequestModule(nil, p0.getNetworkImpl()):andThen(function(p2)
-					-- upvalues: var5 (copy), setRobuxBalanceAmount (copy)
-					if var5 then
+				return getBalanceRequestModule(nil, p1.getNetworkImpl()):andThen(function(p3)
+					-- upvalues: var1 (copy), setRobuxBalanceAmount (copy)
+					if var1 then
 						return
 					end
-					setRobuxBalanceAmount(p2)
+					setRobuxBalanceAmount(p3)
 				end):catch(function() end)
 			end):catch(function() end)
 		end):catch(function() end)
 		
 		return function()
-			-- upvalues: var5 (write)
-			var5 = true
+			-- upvalues: var1 (write)
+			var1 = true
 		end
 	end, { setRobuxBalanceAmount, setBalanceReceivedFromApi })
 	
-	return signalsReactModule.useSignalState(p0.getRobuxBalanceAmount) or 0
+	return signalsReactModule.useSignalState(p1.getRobuxBalanceAmount) or 0
 end

@@ -7,20 +7,20 @@ local t = {
 	[constantsModule.RbxthumbTypes.Outfit] = sharedFlagsModule.FFlagAXBackgroundsInOutfitThumbnails
 }
 
-return function(p0, p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: t (ref), constantsModule (ref)
-	local formattedText = string.format("rbxthumb://type=%s&id=%s&w=%d&h=%d", p1, tostring(p0), p2, p2)
+	local formattedText = string.format("rbxthumb://type=%s&id=%s&w=%d&h=%d", p2, tostring(p1), p3, p3)
 	
-	if p3 then
+	if p4 then
 		formattedText ..= "&filters=circular"
 	end
-	if p4 then
+	if p5 then
 		formattedText ..= "&timestamp=" .. os.time()
 	end
-	if t[p1] then
+	if t[p2] then
 		formattedText ..= "&includeBackground=true"
 	end
-	if p5 and p1 == constantsModule.RbxthumbTypes.AvatarHeadShot then
+	if p6 and p2 == constantsModule.RbxthumbTypes.AvatarHeadShot then
 		formattedText ..= "&includeprofileframe=true"
 	end
 	return formattedText

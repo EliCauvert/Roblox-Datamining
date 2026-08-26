@@ -10,30 +10,30 @@ return roduxModule.createReducer({
 	autocompleteType = "none",
 	results = {}
 }, {
-	[require(actions.AutocompleteDropdownActivated).name] = function(p0, p1)
+	[require(actions.AutocompleteDropdownActivated).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p0, { activated = p1.activated })
+		return dictionary.join(p1, { activated = p2.activated })
 	end,
-	[require(actions.AutocompleteDropdownResultsChanged).name] = function(p2, p3)
+	[require(actions.AutocompleteDropdownResultsChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p2, { selectedIndex = 1, results = p3.results })
+		return dictionary.join(p1, { selectedIndex = 1, results = p2.results })
 	end,
-	[require(actions.AutocompleteDropdownSelectionChanged).name] = function(p4, p5)
+	[require(actions.AutocompleteDropdownSelectionChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p4, { selectedIndex = p5.selectedIndex })
+		return dictionary.join(p1, { selectedIndex = p2.selectedIndex })
 	end,
-	[require(actions.AutocompleteDropdownTypeChanged).name] = function(p6, p7)
+	[require(actions.AutocompleteDropdownTypeChanged).name] = function(p1, p2)
 		-- upvalues: dictionary (ref)
-		return if p7.autocompleteType == p6.autocompleteType then p6 else dictionary.join(p6, {
+		return if p2.autocompleteType == p1.autocompleteType then p1 else dictionary.join(p1, {
 			activated = false,
 			selectedIndex = 1,
-			autocompleteType = p7.autocompleteType,
+			autocompleteType = p2.autocompleteType,
 			results = {}
 		})
 	end,
-	[require(actions.AutocompleteDropdownDeactivated).name] = function(p8, _)
+	[require(actions.AutocompleteDropdownDeactivated).name] = function(p1, _)
 		-- upvalues: dictionary (ref)
-		return dictionary.join(p8, {
+		return dictionary.join(p1, {
 			autocompleteType = "none",
 			activated = false,
 			selectedIndex = 1,

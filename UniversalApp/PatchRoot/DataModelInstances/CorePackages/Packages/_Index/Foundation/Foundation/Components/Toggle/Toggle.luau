@@ -39,31 +39,31 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var6 = if var3 then 1 else 0
 	local var7, var8 = reactModule.useBinding(var6)
 	local var9 = reactModule.useRef(nil)
-	local var10 = var7:map(function(p1)
+	local var10 = var7:map(function(p3)
 		-- upvalues: var2 (ref)
-		return var2.knob.offPosition:Lerp(var2.knob.onPosition, p1)
+		return var2.knob.offPosition:Lerp(var2.knob.onPosition, p3)
 	end)
 	reactModule.useEffect(function()
 		-- upvalues: otterModule (copy), var6 (ref), var9 (ref), var8 (ref)
-		local var1 = otterModule.createSingleMotor(var6)
-		var9.current = var1
-		var1:start()
-		var1:onStep(function(p1)
+		local var11 = otterModule.createSingleMotor(var6)
+		var9.current = var11
+		var11:start()
+		var11:onStep(function(p3)
 			-- upvalues: var8 (copy)
-			var8(p1)
+			var8(p3)
 		end)
 		
 		return function()
-			-- upvalues: var1 (ref)
-			var1:destroy()
+			-- upvalues: var11 (ref)
+			var11:destroy()
 		end
 	end, {})
 	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), var9 (ref), otterModule (copy), t (copy)
-		local var1 = if var3 then 1 else 0
+		local var11 = if var3 then 1 else 0
 		
 		if var9.current then
-			var9.current:setGoal(otterModule.spring(var1, t))
+			var9.current:setGoal(otterModule.spring(var11, t))
 		end
 	end, { var3 })
 	

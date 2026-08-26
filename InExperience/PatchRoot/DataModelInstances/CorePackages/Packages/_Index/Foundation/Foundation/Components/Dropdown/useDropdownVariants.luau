@@ -59,9 +59,9 @@ local function variantsFactory()
 			}
 		},
 		states = t,
-		placeholderStates = dashModule.map(t, function(p0)
+		placeholderStates = dashModule.map(t, function(p1)
 			-- upvalues: dashModule (copy)
-			return dashModule.join(p0, { text = { tag = "content-muted" } })
+			return dashModule.join(p1, { text = { tag = "content-muted" } })
 		end)
 	}
 end
@@ -70,7 +70,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref)
 	local dropdown = variantsContextModule.useVariants("Dropdown", variantsFactory, p1)
 	local inputField = variantsContextModule.useVariants("InputField", getInputVariantsFactoryModule, p1)
-	local var13 = inputField.variants[p3 or inputVariantModule.Standard]
+	local var1 = inputField.variants[p3 or inputVariantModule.Standard]
 	
-	return composeStyleVariantModule(inputField.common, dropdown.common, inputField.sizes[p2], dropdown.sizes[p2], if p3 ~= inputVariantModule.Utility then {} else var13, inputField.hoverState[p8], inputField.focusedState[p7], inputField.errorState[p6], if p5 then dropdown.placeholderStates[p4] else dropdown.states[p4], if p3 == inputVariantModule.Utility then var13 else {})
+	return composeStyleVariantModule(inputField.common, dropdown.common, inputField.sizes[p2], dropdown.sizes[p2], if p3 ~= inputVariantModule.Utility then {} else var1, inputField.hoverState[p8], inputField.focusedState[p7], inputField.errorState[p6], if p5 then dropdown.placeholderStates[p4] else dropdown.states[p4], if p3 == inputVariantModule.Utility then var1 else {})
 end

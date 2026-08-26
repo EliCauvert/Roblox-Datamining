@@ -17,31 +17,31 @@ local streamNotificationSettingsExperimentationModule = require(streamNotificati
 local streamNotificationSettingsActivationModule = require(streamNotifications.StreamNotificationSettingsActivation)
 local fFlagStreamNotificationUXSettingsHeader = require(parent.SharedFlags).FFlagStreamNotificationUXSettingsHeader
 
-local function _(value, p0)
-	return value - p0 * 2
+local function _(value, p1)
+	return value - p1 * 2
 end
 
 return function(p1)
 	-- upvalues: useStyle (ref), userInputService (ref), useLocalization (ref), constantsModule (ref), streamNotificationDropdownExperimentationModule (ref), fFlagStreamNotificationUXSettingsHeader (ref), useDispatch (ref), streamNotificationSettingsExperimentationModule (ref), streamNotificationSettingsActivationModule (ref), reactModule (ref), iconButton (ref), iconSize (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref)
-	local var9 = useStyle()
-	local font = var9.Font
+	local var1 = useStyle()
+	local font = var1.Font
 	local font_1 = font.Header1.Font
-	local var10 = font.BaseSize * font.Header1.RelativeSize
-	local var11 = if userInputService.StatusBarSize and p1.isSmallScreen then userInputService.StatusBarSize.Y else 0
-	local var12 = useLocalization({ headerText = constantsModule.Text.HeaderKey })
+	local var2 = font.BaseSize * font.Header1.RelativeSize
+	local var3 = if userInputService.StatusBarSize and p1.isSmallScreen then userInputService.StatusBarSize.Y else 0
+	local var4 = useLocalization({ headerText = constantsModule.Text.HeaderKey })
 	local dropdownEnabled = streamNotificationDropdownExperimentationModule.getDropdownEnabled()
 	local _ = nil
 	local settingsGearEnabled = false
 	
-	local var15 = function() end
+	local var5 = function() end
 	
 	if fFlagStreamNotificationUXSettingsHeader then
 		settingsGearEnabled = streamNotificationSettingsExperimentationModule.getSettingsGearEnabled()
-		var15 = streamNotificationSettingsActivationModule.createOnSettingsActivated(settingsGearEnabled, dropdownEnabled, p1.displayStream, useDispatch())
+		var5 = streamNotificationSettingsActivationModule.createOnSettingsActivated(settingsGearEnabled, dropdownEnabled, p1.displayStream, useDispatch())
 	end
 	if dropdownEnabled then
 		local headerMinHeight = constantsModule.Dropdown.HeaderMinHeight
-		local var16 = headerMinHeight - constantsModule.DefaultPadding * 2
+		local var6 = headerMinHeight - constantsModule.DefaultPadding * 2
 		
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -50,27 +50,27 @@ return function(p1)
 		}, {
 			HeaderText = reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Text = var12 and var12.headerText,
+				Text = var4 and var4.headerText,
 				Font = font_1,
-				TextSize = var10,
-				TextColor3 = var9.Theme.TextEmphasis.Color,
+				TextSize = var2,
+				TextColor3 = var1.Theme.TextEmphasis.Color,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Size = UDim2.new(1, -(if settingsGearEnabled then var16 else 0), 1, 0)
+				Size = UDim2.new(1, -(if settingsGearEnabled then var6 else 0), 1, 0)
 			}),
 			SettingsButton = if fFlagStreamNotificationUXSettingsHeader and settingsGearEnabled then reactModule.createElement(iconButton, {
 				anchorPoint = Vector2.new(1, 0.5),
 				iconSize = iconSize.Medium,
 				icon = constantsModule.Modal.SettingsIcon,
 				position = UDim2.new(1, 0, 0.5, 0),
-				size = UDim2.fromOffset(var16, var16),
-				onActivated = var15
+				size = UDim2.fromOffset(var6, var6),
+				onActivated = var5
 			}) else nil
 		})
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, constantsModule.Modal.HeaderHeight + var11)
+		Size = UDim2.new(1, 0, 0, constantsModule.Modal.HeaderHeight + var3)
 	}, {
 		HeaderFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -95,10 +95,10 @@ return function(p1)
 			}),
 			HeaderText = reactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Text = var12 and var12.headerText,
+				Text = var4 and var4.headerText,
 				Font = font_1,
-				TextSize = var10,
-				TextColor3 = var9.Theme.TextEmphasis.Color,
+				TextSize = var2,
+				TextColor3 = var1.Theme.TextEmphasis.Color,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				Size = UDim2.new(1, 0, 0, constantsModule.Modal.HeaderHeight)
@@ -109,7 +109,7 @@ return function(p1)
 				icon = constantsModule.Modal.SettingsIcon,
 				position = UDim2.new(1, -constantsModule.Modal.Padding, 0, constantsModule.Modal.Padding),
 				size = UDim2.fromOffset(constantsModule.Modal.HeaderHeight - constantsModule.Modal.Padding * 2, constantsModule.Modal.HeaderHeight - constantsModule.Modal.Padding * 2),
-				onActivated = var15
+				onActivated = var5
 			}) else nil
 		})
 	})

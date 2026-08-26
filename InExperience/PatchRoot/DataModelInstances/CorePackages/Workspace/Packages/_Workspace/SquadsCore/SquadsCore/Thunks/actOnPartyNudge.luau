@@ -13,36 +13,36 @@ local fFlagEnableSquadCoplayAnalytic = sharedFlagsModule.FFlagEnableSquadCoplayA
 local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 local fixPartyNudgeNilThunkWhenLeave = game:DefineFastFlag("FixPartyNudgeNilThunkWhenLeave", false)
 
-local _ = function(p0, p1, p2, p3, p4, p5, p6)
+local _ = function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: networkingSquadsModule (ref), fFlagEnableSquadCoplayAnalytic (ref), constantsModule (ref), squadCoplayJoinModule (ref), logInExpCoplayTelemetryModule (ref), squadPromptTypeModule (ref)
-	return function(p7)
-		-- upvalues: networkingSquadsModule (copy), p0 (ref), p1 (ref), p5 (ref), p4 (ref), p6 (ref), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p3 (ref), p2 (ref), squadPromptTypeModule (copy)
-		local var10 = p7:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
+	return function(p8)
+		-- upvalues: networkingSquadsModule (copy), p1 (ref), p2 (ref), p6 (ref), p5 (ref), p7 (ref), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p4 (ref), p3 (ref), squadPromptTypeModule (copy)
+		local var1 = p8:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
 			leaveExisting = true,
-			action = p0,
-			nudgeId = p1,
-			partyAttemptId = p5,
-			squadLocation = p4,
-			parentChannelId = p6
+			action = p1,
+			nudgeId = p2,
+			partyAttemptId = p6,
+			squadLocation = p5,
+			parentChannelId = p7
 		}))
 		
 		if fFlagEnableSquadCoplayAnalytic then
-			var10 = var10:andThen(function(p8)
-				-- upvalues: p0 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p4 (copy), p3 (copy)
-				if if p0 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then p0 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
-					local groupUpId = p8.responseBody.groupUp.groupUpId
-					local members = p8.responseBody.groupUp.members
+			var1 = var1:andThen(function(p9)
+				-- upvalues: p1 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p5 (copy), p4 (copy)
+				if if p1 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
+					local groupUpId = p9.responseBody.groupUp.groupUpId
+					local members = p9.responseBody.groupUp.members
 					
 					if groupUpId and members then
-						logInExpCoplayTelemetryModule(groupUpId, members, p4, if p0 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, p3)
+						logInExpCoplayTelemetryModule(groupUpId, members, p5, if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, p4)
 					end
 				end
 			end)
 		end
-		return var10:catch(function(_)
-			-- upvalues: p0 (copy), constantsModule (copy), p2 (copy), p7 (ref), squadPromptTypeModule (copy)
-			if p0 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p0 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
-				p2(p7, {
+		return var1:catch(function(_)
+			-- upvalues: p1 (copy), constantsModule (copy), p3 (copy), p8 (ref), squadPromptTypeModule (copy)
+			if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
+				p3(p8, {
 					hideCancelButton = true,
 					promptType = squadPromptTypeModule.Error
 				})
@@ -51,127 +51,127 @@ local _ = function(p0, p1, p2, p3, p4, p5, p6)
 	end
 end
 
-return function(p9, p10, p11, p12, p13, p14, p15, p16, p17)
+return function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: networkingSquadsModule (ref), fFlagEnableSquadCoplayAnalytic (ref), constantsModule (ref), squadCoplayJoinModule (ref), logInExpCoplayTelemetryModule (ref), squadPromptTypeModule (ref), fixPartyNudgeNilThunkWhenLeave (ref), promiseModule (ref), leaveSquadModule (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref)
-	return function(p18)
-		-- upvalues: p11 (ref), p9 (ref), p10 (ref), p12 (ref), p13 (ref), p14 (ref), p16 (ref), p17 (ref), networkingSquadsModule (copy), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), squadPromptTypeModule (copy), fixPartyNudgeNilThunkWhenLeave (copy), promiseModule (copy), leaveSquadModule (copy), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), p15 (ref)
-		local state = p18:getState()
+	return function(p10)
+		-- upvalues: p3 (ref), p1 (ref), p2 (ref), p4 (ref), p5 (ref), p6 (ref), p8 (ref), p9 (ref), networkingSquadsModule (copy), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), squadPromptTypeModule (copy), fixPartyNudgeNilThunkWhenLeave (copy), promiseModule (copy), leaveSquadModule (copy), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), p7 (ref)
+		local state = p10:getState()
 		local squadId = state.Squad and (state.Squad.Squad and (state.Squad.Squad.currentSquad and state.Squad.Squad.currentSquad.squadId))
 		
-		if squadId and squadId ~= "" and p11 then
-			return if fixPartyNudgeNilThunkWhenLeave then promiseModule.new(function(p21, p22)
-				-- upvalues: p18 (ref), leaveSquadModule (copy), squadPromptTypeModule (copy), p12 (copy), p9 (copy), p10 (copy), p13 (copy), p14 (copy), p16 (copy), p17 (copy), networkingSquadsModule (copy), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), p15 (copy)
-				p18:dispatch(leaveSquadModule(squadPromptTypeModule.JoinAnotherSquad, p12, function()
-					-- upvalues: p18 (copy), p9 (copy), p10 (copy), p12 (copy), p13 (copy), p14 (copy), p16 (copy), p17 (copy), networkingSquadsModule (copy), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), squadPromptTypeModule (copy), p21 (ref), p22 (ref)
-					p18:dispatch(function(p23)
-						-- upvalues: networkingSquadsModule (copy), p9 (ref), p10 (ref), p16 (ref), p14 (ref), p17 (ref), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p13 (ref), p12 (ref), squadPromptTypeModule (copy)
-						local var10 = p23:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
+		if squadId and squadId ~= "" and p3 then
+			return if fixPartyNudgeNilThunkWhenLeave then promiseModule.new(function(p11, p12)
+				-- upvalues: p10 (ref), leaveSquadModule (copy), squadPromptTypeModule (copy), p4 (copy), p1 (copy), p2 (copy), p5 (copy), p6 (copy), p8 (copy), p9 (copy), networkingSquadsModule (copy), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), p7 (copy)
+				p10:dispatch(leaveSquadModule(squadPromptTypeModule.JoinAnotherSquad, p4, function()
+					-- upvalues: p10 (copy), p1 (copy), p2 (copy), p4 (copy), p5 (copy), p6 (copy), p8 (copy), p9 (copy), networkingSquadsModule (copy), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), squadPromptTypeModule (copy), p11 (ref), p12 (ref)
+					p10:dispatch(function(p13)
+						-- upvalues: networkingSquadsModule (copy), p1 (ref), p2 (ref), p8 (ref), p6 (ref), p9 (ref), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p5 (ref), p4 (ref), squadPromptTypeModule (copy)
+						local var1 = p13:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
 							leaveExisting = true,
-							action = p9,
-							nudgeId = p10,
-							partyAttemptId = p16,
-							squadLocation = p14,
-							parentChannelId = p17
+							action = p1,
+							nudgeId = p2,
+							partyAttemptId = p8,
+							squadLocation = p6,
+							parentChannelId = p9
 						}))
 						
 						if fFlagEnableSquadCoplayAnalytic then
-							var10 = var10:andThen(function(p24)
-								-- upvalues: p9 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p14 (copy), p13 (copy)
-								if if p9 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then p9 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
-									local groupUpId = p24.responseBody.groupUp.groupUpId
-									local members = p24.responseBody.groupUp.members
+							var1 = var1:andThen(function(p14)
+								-- upvalues: p1 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p6 (copy), p5 (copy)
+								if if p1 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
+									local groupUpId = p14.responseBody.groupUp.groupUpId
+									local members = p14.responseBody.groupUp.members
 									
 									if groupUpId and members then
-										logInExpCoplayTelemetryModule(groupUpId, members, p14, if p9 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, p13)
+										logInExpCoplayTelemetryModule(groupUpId, members, p6, if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, p5)
 									end
 								end
 							end)
 						end
-						return var10:catch(function(_)
-							-- upvalues: p9 (copy), constantsModule (copy), p12 (copy), p23 (ref), squadPromptTypeModule (copy)
-							if p9 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p9 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
-								p12(p23, {
+						return var1:catch(function(_)
+							-- upvalues: p1 (copy), constantsModule (copy), p4 (copy), p13 (ref), squadPromptTypeModule (copy)
+							if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
+								p4(p13, {
 									hideCancelButton = true,
 									promptType = squadPromptTypeModule.Error
 								})
 							end
 						end)
-					end):andThen(p21):catch(p22)
-				end, p14, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then p15 else true))
-			end) else p18:dispatch(leaveSquadModule(squadPromptTypeModule.JoinAnotherSquad, p12, function()
-				-- upvalues: p18 (ref), p9 (copy), p10 (copy), p12 (copy), p13 (copy), p14 (copy), p16 (copy), p17 (copy), networkingSquadsModule (copy), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), squadPromptTypeModule (copy)
-				p18:dispatch(function(p19)
-					-- upvalues: networkingSquadsModule (copy), p9 (ref), p10 (ref), p16 (ref), p14 (ref), p17 (ref), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p13 (ref), p12 (ref), squadPromptTypeModule (copy)
-					local var10 = p19:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
+					end):andThen(p11):catch(p12)
+				end, p6, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then p7 else true))
+			end) else p10:dispatch(leaveSquadModule(squadPromptTypeModule.JoinAnotherSquad, p4, function()
+				-- upvalues: p10 (ref), p1 (copy), p2 (copy), p4 (copy), p5 (copy), p6 (copy), p8 (copy), p9 (copy), networkingSquadsModule (copy), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), squadPromptTypeModule (copy)
+				p10:dispatch(function(p11)
+					-- upvalues: networkingSquadsModule (copy), p1 (ref), p2 (ref), p8 (ref), p6 (ref), p9 (ref), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p5 (ref), p4 (ref), squadPromptTypeModule (copy)
+					local var1 = p11:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
 						leaveExisting = true,
-						action = p9,
-						nudgeId = p10,
-						partyAttemptId = p16,
-						squadLocation = p14,
-						parentChannelId = p17
+						action = p1,
+						nudgeId = p2,
+						partyAttemptId = p8,
+						squadLocation = p6,
+						parentChannelId = p9
 					}))
 					
 					if fFlagEnableSquadCoplayAnalytic then
-						var10 = var10:andThen(function(p20)
-							-- upvalues: p9 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p14 (copy), p13 (copy)
-							if if p9 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then p9 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
-								local groupUpId = p20.responseBody.groupUp.groupUpId
-								local members = p20.responseBody.groupUp.members
+						var1 = var1:andThen(function(p12)
+							-- upvalues: p1 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), p6 (copy), p5 (copy)
+							if if p1 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
+								local groupUpId = p12.responseBody.groupUp.groupUpId
+								local members = p12.responseBody.groupUp.members
 								
 								if groupUpId and members then
-									logInExpCoplayTelemetryModule(groupUpId, members, p14, if p9 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, p13)
+									logInExpCoplayTelemetryModule(groupUpId, members, p6, if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, p5)
 								end
 							end
 						end)
 					end
-					return var10:catch(function(_)
-						-- upvalues: p9 (copy), constantsModule (copy), p12 (copy), p19 (ref), squadPromptTypeModule (copy)
-						if p9 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p9 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
-							p12(p19, {
+					return var1:catch(function(_)
+						-- upvalues: p1 (copy), constantsModule (copy), p4 (copy), p11 (ref), squadPromptTypeModule (copy)
+						if p1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or p1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
+							p4(p11, {
 								hideCancelButton = true,
 								promptType = squadPromptTypeModule.Error
 							})
 						end
 					end)
 				end)
-			end, p14, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then p15 else true))
+			end, p6, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then p7 else true))
 		end
-		local var13 = p9
-		local var14 = p10
-		local var15 = p12
-		local var16 = p13
-		local var17 = p14
-		local var18 = p16
-		local var19 = p17
+		local var1 = p1
+		local var2 = p2
+		local var3 = p4
+		local var4 = p5
+		local var5 = p6
+		local var6 = p8
+		local var7 = p9
 		
-		return p18:dispatch(function(p25)
-			-- upvalues: networkingSquadsModule (copy), var13 (ref), var14 (ref), var18 (ref), var17 (ref), var19 (ref), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), var16 (ref), var15 (ref), squadPromptTypeModule (copy)
-			local var10 = p25:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
+		return p10:dispatch(function(p11)
+			-- upvalues: networkingSquadsModule (copy), var1 (ref), var2 (ref), var6 (ref), var5 (ref), var7 (ref), fFlagEnableSquadCoplayAnalytic (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), var4 (ref), var3 (ref), squadPromptTypeModule (copy)
+			local var8 = p11:dispatch(networkingSquadsModule.ActOnPartyNudge.API({
 				leaveExisting = true,
-				action = var13,
-				nudgeId = var14,
-				partyAttemptId = var18,
-				squadLocation = var17,
-				parentChannelId = var19
+				action = var1,
+				nudgeId = var2,
+				partyAttemptId = var6,
+				squadLocation = var5,
+				parentChannelId = var7
 			}))
 			
 			if fFlagEnableSquadCoplayAnalytic then
-				var10 = var10:andThen(function(p26)
-					-- upvalues: var13 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), var17 (copy), var16 (copy)
-					if if var13 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then var13 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
-						local groupUpId = p26.responseBody.groupUp.groupUpId
-						local members = p26.responseBody.groupUp.members
+				var8 = var8:andThen(function(p12)
+					-- upvalues: var1 (copy), constantsModule (copy), squadCoplayJoinModule (copy), logInExpCoplayTelemetryModule (copy), var5 (copy), var4 (copy)
+					if if var1 ~= constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then var1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION else true then
+						local groupUpId = p12.responseBody.groupUp.groupUpId
+						local members = p12.responseBody.groupUp.members
 						
 						if groupUpId and members then
-							logInExpCoplayTelemetryModule(groupUpId, members, var17, if var13 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, var16)
+							logInExpCoplayTelemetryModule(groupUpId, members, var5, if var1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION then squadCoplayJoinModule.SquadNudgeCreation else squadCoplayJoinModule.SquadNudgeJoin, var4)
 						end
 					end
 				end)
 			end
-			return var10:catch(function(_)
-				-- upvalues: var13 (copy), constantsModule (copy), var15 (copy), p25 (ref), squadPromptTypeModule (copy)
-				if var13 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or var13 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
-					var15(p25, {
+			return var8:catch(function(_)
+				-- upvalues: var1 (copy), constantsModule (copy), var3 (copy), p11 (ref), squadPromptTypeModule (copy)
+				if var1 == constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION or var1 == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
+					var3(p11, {
 						hideCancelButton = true,
 						promptType = squadPromptTypeModule.Error
 					})

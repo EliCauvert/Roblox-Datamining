@@ -5,17 +5,17 @@ local getUniversalShareSheetStoreModule = require(shareSheet.Stores.GetUniversal
 
 return function()
 	-- upvalues: getUniversalShareSheetStoreModule (ref), signalsReactModule (ref)
-	local var3 = getUniversalShareSheetStoreModule()
-	local var4 = signalsReactModule.useSignalState(var3.getRequest)
+	local var1 = getUniversalShareSheetStoreModule()
+	local var2 = signalsReactModule.useSignalState(var1.getRequest)
 	
-	return if var4 == nil then nil else {
+	return if var2 == nil then nil else {
 		isOpen = true,
-		context = var4.context,
-		formatSuccessSnackbarText = var4.formatSuccessSnackbarText,
-		messagePlaceholder = var4.messagePlaceholder,
-		onClose = var3.hide,
-		onCloseWithReason = var3.hide,
-		telemetryId = var4.telemetryId,
-		url = var4.url
+		context = var2.context,
+		formatSuccessSnackbarText = var2.formatSuccessSnackbarText,
+		messagePlaceholder = var2.messagePlaceholder,
+		onClose = var1.hide,
+		onCloseWithReason = var1.hide,
+		telemetryId = var2.telemetryId,
+		url = var2.url
 	}
 end

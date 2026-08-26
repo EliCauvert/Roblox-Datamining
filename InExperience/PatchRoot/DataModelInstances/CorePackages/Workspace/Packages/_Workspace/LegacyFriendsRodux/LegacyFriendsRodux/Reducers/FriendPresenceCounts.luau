@@ -2,7 +2,7 @@
 local cryoModule = require(legacyFriendsRodux.Parent.Cryo)
 local updateFriendPresenceCounts = require(legacyFriendsRodux.Actions).UpdateFriendPresenceCounts
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: updateFriendPresenceCounts (ref), cryoModule (ref)
-	return if p1.type == updateFriendPresenceCounts.name then cryoModule.Dictionary.join({}, p1.presenceCounts) else p0 or {}
+	return if p2.type == updateFriendPresenceCounts.name then cryoModule.Dictionary.join({}, p2.presenceCounts) else p1 or {}
 end

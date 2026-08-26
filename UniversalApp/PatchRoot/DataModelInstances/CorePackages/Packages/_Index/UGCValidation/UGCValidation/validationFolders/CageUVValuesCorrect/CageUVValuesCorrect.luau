@@ -14,13 +14,13 @@ return {
 	conditionalData = {},
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateCageUV),
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
-		for i, v in p1.outerCagesData do
-			local var4 = wrapTargetCageUVReferenceValuesModule[i]
+		for i, v in p2.outerCagesData do
+			local var1 = wrapTargetCageUVReferenceValuesModule[i]
 			
-			if var4 and not UGCValidationService:ValidateEditableMeshUVValuesInReference(var4, v.editable) then
-				p0:fail(errorSourceStringsModule.Keys.CageUV_InvalidUVValue, { partName = i })
+			if var1 and not UGCValidationService:ValidateEditableMeshUVValuesInReference(var1, v.editable) then
+				p1:fail(errorSourceStringsModule.Keys.CageUV_InvalidUVValue, { partName = i })
 			end
 		end
 	end

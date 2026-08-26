@@ -12,123 +12,123 @@ local _ = require(script.Parent.Types)
 return function()
 	-- upvalues: timers (ref), loggingProtocolModule (ref), eventRegisterModule (ref), stopwatchTelemetryConfigModule (ref), eventModesModule (ref), httpService (ref)
 	local t = {}
-	local var7 = timers()
+	local var1 = timers()
 	local default = loggingProtocolModule.default
 	
-	local _ = function(p0)
+	local _ = function(p1)
 		-- upvalues: eventRegisterModule (copy)
-		local var12 = eventRegisterModule[p0]
+		local var2 = eventRegisterModule[p1]
 		
-		if not var12 then
+		if not var2 then
 			error("Event not registered: " .. p0)
 		end
-		return var12
+		return var2
 	end
 	
 	local _ = function(p1)
-		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), eventModesModule (copy), var7 (ref)
+		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), eventModesModule (copy), var1 (ref)
 		return function(p2)
-			-- upvalues: eventRegisterModule (copy), t (copy), default (copy), stopwatchTelemetryConfigModule (copy), p1 (ref), eventModesModule (copy), var7 (copy)
-			local var13 = eventRegisterModule[p2]
+			-- upvalues: eventRegisterModule (copy), t (copy), default (copy), stopwatchTelemetryConfigModule (copy), p1 (ref), eventModesModule (copy), var1 (copy)
+			local var2 = eventRegisterModule[p2]
 			
-			if not var13 then
+			if not var2 then
 				error("Event not registered: " .. p2)
 			end
-			local var14 = t[p2]
+			local var3 = t[p2]
 			
-			if not var14 then
+			if not var3 then
 				default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{p1}{p2}` })
 				
-				if var13.mode == eventModesModule.Strict then
+				if var2.mode == eventModesModule.Strict then
 					error(`Cannot {p1} an event that has not been started: {p2}`)
 				end
 			end
-			return if var14 and var7.getStartTimestamp(var14) then {
-				startTime = var7.getStartTimestamp(var14),
-				id = var14,
-				timeElapsed = var7.getTime(var14)
+			return if var3 and var1.getStartTimestamp(var3) then {
+				startTime = var1.getStartTimestamp(var3),
+				id = var3,
+				timeElapsed = var1.getTime(var3)
 			} else nil
 		end
 	end
 	
-	local var8 = "Get"
+	local var2 = "Get"
 	
-	local var9 = function(p3)
-		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), var8 (ref), eventModesModule (copy), var7 (ref)
-		local var13 = eventRegisterModule[p3]
+	local var3 = function(p1)
+		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), var2 (ref), eventModesModule (copy), var1 (ref)
+		local var4 = eventRegisterModule[p1]
 		
-		if not var13 then
+		if not var4 then
 			error("Event not registered: " .. p3)
 		end
-		local var14 = t[p3]
+		local var5 = t[p1]
 		
-		if not var14 then
-			default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{var8}{p3}` })
+		if not var5 then
+			default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{var2}{p1}` })
 			
-			if var13.mode == eventModesModule.Strict then
-				error(`Cannot {var8} an event that has not been started: {p3}`)
+			if var4.mode == eventModesModule.Strict then
+				error(`Cannot {var2} an event that has not been started: {p1}`)
 			end
 		end
-		return if var14 and var7.getStartTimestamp(var14) then {
-			startTime = var7.getStartTimestamp(var14),
-			id = var14,
-			timeElapsed = var7.getTime(var14)
+		return if var5 and var1.getStartTimestamp(var5) then {
+			startTime = var1.getStartTimestamp(var5),
+			id = var5,
+			timeElapsed = var1.getTime(var5)
 		} else nil
 	end
 	
-	local var10 = "Stop"
+	local var4 = "Stop"
 	
-	local var11 = function(p4)
-		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), var10 (ref), eventModesModule (copy), var7 (ref)
-		local var13 = eventRegisterModule[p4]
+	local var5 = function(p1)
+		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), var4 (ref), eventModesModule (copy), var1 (ref)
+		local var6 = eventRegisterModule[p1]
 		
-		if not var13 then
+		if not var6 then
 			error("Event not registered: " .. p4)
 		end
-		local var14 = t[p4]
+		local var7 = t[p1]
 		
-		if not var14 then
-			default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{var10}{p4}` })
+		if not var7 then
+			default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{var4}{p1}` })
 			
-			if var13.mode == eventModesModule.Strict then
-				error(`Cannot {var10} an event that has not been started: {p4}`)
+			if var6.mode == eventModesModule.Strict then
+				error(`Cannot {var4} an event that has not been started: {p1}`)
 			end
 		end
-		return if var14 and var7.getStartTimestamp(var14) then {
-			startTime = var7.getStartTimestamp(var14),
-			id = var14,
-			timeElapsed = var7.getTime(var14)
+		return if var7 and var1.getStartTimestamp(var7) then {
+			startTime = var1.getStartTimestamp(var7),
+			id = var7,
+			timeElapsed = var1.getTime(var7)
 		} else nil
 	end
 	
 	return {
-		start = function(p5, p6)
-			-- upvalues: eventRegisterModule (copy), var7 (ref), httpService (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), eventModesModule (copy)
-			local var15 = eventRegisterModule[p5]
+		start = function(p1, p2)
+			-- upvalues: eventRegisterModule (copy), var1 (ref), httpService (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), eventModesModule (copy)
+			local var6 = eventRegisterModule[p1]
 			
-			if not var15 then
+			if not var6 then
 				error("Event not registered: " .. p5)
 			end
-			local var16 = var7.start(httpService:GenerateGUID(false), p6)
+			local var7 = var1.start(httpService:GenerateGUID(false), p2)
 			
-			if t[p5] then
-				default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOnStart{p5}` })
+			if t[p1] then
+				default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOnStart{p1}` })
 				
-				if var15.mode == eventModesModule.Strict then
+				if var6.mode == eventModesModule.Strict then
 					error("Cannot start event twice: " .. p5)
 				end
 			end
-			t[p5] = var16
+			t[p1] = var7
 			
-			return { startTime = var7.getStartTimestamp(var16), id = var16 }
+			return { startTime = var1.getStartTimestamp(var7), id = var7 }
 		end,
-		get = var9,
-		stop = function(p7)
-			-- upvalues: var11 (ref), t (write)
-			local var17 = var11(p7)
-			t[p7] = nil
+		get = var3,
+		stop = function(p1)
+			-- upvalues: var5 (ref), t (write)
+			local var6 = var5(p1)
+			t[p1] = nil
 			
-			return var17
+			return var6
 		end,
 		_unsafeClearEventLog = function()
 			-- upvalues: t (write)

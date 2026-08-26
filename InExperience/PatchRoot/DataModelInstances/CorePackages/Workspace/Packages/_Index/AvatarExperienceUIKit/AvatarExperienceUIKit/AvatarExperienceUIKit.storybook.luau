@@ -16,8 +16,8 @@ local localizationProvider = require(parent.Localization).LocalizationProvider
 
 local function createLocalization()
 	return {
-		Format = function(_, p0)
-			return p0
+		Format = function(_, p1)
+			return p1
 		end,
 		GetLocale = function()
 			return "locale"

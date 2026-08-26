@@ -18,8 +18,8 @@ local dialog = foundationModule.Dialog
 local dialogSize = foundationModule.Enums.DialogSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-local function selectScreenSize(p0)
-	return p0.ScreenSize
+local function selectScreenSize(p1)
+	return p1.ScreenSize
 end
 
 return function(p1)
@@ -30,48 +30,48 @@ return function(p1)
 	local onCancel = p1.onCancel
 	local onSuccess = p1.onSuccess
 	local retryNum = p1.retryNum
-	local var8 = useSelector(selectScreenSize)
-	local var9 = if p1.disablePortal then p1.disablePortal else false
-	local var10 = getShouldUseFoundationUIVPCUpsellModule(if p1.isInExperienceEntry then p1.isInExperienceEntry else false)
-	local var11 = getRetryBehaviorFromErrorCodeAndRetryNum(errorCode, retryNum)
-	local var12 = getStringsFromErrorCodeAndRetryNum(errorCode, retryNum)
-	local var13 = useLocalization(cryoModule.Dictionary.join(vpcErrorScreenStrings, { titleText = var12.title, bodyText = var12.body }))
+	local var1 = useSelector(selectScreenSize)
+	local var2 = if p1.disablePortal then p1.disablePortal else false
+	local var3 = getShouldUseFoundationUIVPCUpsellModule(if p1.isInExperienceEntry then p1.isInExperienceEntry else false)
+	local var4 = getRetryBehaviorFromErrorCodeAndRetryNum(errorCode, retryNum)
+	local var5 = getStringsFromErrorCodeAndRetryNum(errorCode, retryNum)
+	local var6 = useLocalization(cryoModule.Dictionary.join(vpcErrorScreenStrings, { titleText = var5.title, bodyText = var5.body }))
 	local t = {}
 	local t_1 = {}
 	
-	if var11 == VPCRetryBehaviorEnum.RetryVPC or var11 == VPCRetryBehaviorEnum.RetryAMP then
-		local var16 = if var11 == VPCRetryBehaviorEnum.RetryVPC then onRetryVPC else onRetryAmp
+	if var4 == VPCRetryBehaviorEnum.RetryVPC or var4 == VPCRetryBehaviorEnum.RetryAMP then
+		local var7 = if var4 == VPCRetryBehaviorEnum.RetryVPC then onRetryVPC else onRetryAmp
 		
-		if var10 then
+		if var3 then
 			t_1 = {
 				{
-					text = var13.cancelButton,
+					text = var6.cancelButton,
 					variant = buttonVariant.Standard,
 					onActivated = onCancel
 				},
 				{
-					text = var13.retryButton,
+					text = var6.retryButton,
 					variant = buttonVariant.Emphasis,
-					onActivated = var16
+					onActivated = var7
 				}
 			}
 		else
 			t = {
 				{
 					buttonType = buttonType.Secondary,
-					props = { onActivated = onCancel, text = var13.cancelButton }
+					props = { onActivated = onCancel, text = var6.cancelButton }
 				},
 				{
 					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = var16, text = var13.retryButton }
+					props = { onActivated = var7, text = var6.retryButton }
 				}
 			}
 		end
-	elseif var11 == VPCRetryBehaviorEnum.Success then
-		if var10 then
+	elseif var4 == VPCRetryBehaviorEnum.Success then
+		if var3 then
 			t_1 = {
 				{
-					text = var13.okButton,
+					text = var6.okButton,
 					variant = buttonVariant.Standard,
 					onActivated = onSuccess
 				}
@@ -80,14 +80,14 @@ return function(p1)
 			t = {
 				{
 					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = onSuccess, text = var13.okButton }
+					props = { onActivated = onSuccess, text = var6.okButton }
 				}
 			}
 		end
-	elseif var10 then
+	elseif var3 then
 		t_1 = {
 			{
-				text = var13.okButton,
+				text = var6.okButton,
 				variant = buttonVariant.Standard,
 				onActivated = onCancel
 			}
@@ -96,27 +96,27 @@ return function(p1)
 		t = {
 			{
 				buttonType = buttonType.PrimarySystem,
-				props = { onActivated = onCancel, text = var13.okButton }
+				props = { onActivated = onCancel, text = var6.okButton }
 			}
 		}
 	end
-	return if var10 then reactModule.createElement(dialog.Root, {
+	return if var3 then reactModule.createElement(dialog.Root, {
 		size = dialogSize.Small,
 		onClose = onCancel,
-		disablePortal = var9,
+		disablePortal = var2,
 		hasBackdrop = if getFFlagEnableVPCUpsellFoundationDialogHardeningModule() then true else false
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var13.titleText }),
+		DialogTitle = reactModule.createElement(dialog.Title, { text = var6.titleText }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var13.bodyText })
+			DialogText = reactModule.createElement(dialog.Text, { Text = var6.bodyText })
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, { LayoutOrder = 3, actions = t_1 })
 	}) else reactModule.createElement(interactiveAlert, {
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		screenSize = var8,
-		title = var13.titleText,
-		bodyText = var13.bodyText,
+		screenSize = var1,
+		title = var6.titleText,
+		bodyText = var6.bodyText,
 		buttonStackInfo = { buttons = t }
 	})
 end

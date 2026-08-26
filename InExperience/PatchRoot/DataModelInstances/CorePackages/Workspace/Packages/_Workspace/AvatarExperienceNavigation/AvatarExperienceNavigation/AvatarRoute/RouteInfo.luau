@@ -12,9 +12,9 @@ t.Interface = tModule.strictInterface({
 	params = tModule.table
 })
 
-function t.new(p0, p1, p2)
+function t.new(p1, p2, p3)
 	-- upvalues: t (ref)
-	local t_1 = { name = p0, key = p1, params = p2 or {} }
+	local t_1 = { name = p1, key = p2, params = p3 or {} }
 	setmetatable(t_1, t)
 	
 	return t_1
@@ -26,9 +26,9 @@ function t:__tostring()
 	return string.format("%s(key=%s)", self.name, tostring(self.key))
 end
 
-function t:__eq(p3)
+function t:__eq(p1)
 	-- upvalues: tutilsModule (ref)
-	return if rawequal(self, p3) then true else self.key == p3.key and (self.name == p3.name and tutilsModule.shallowEqual(self.params, p3.params, nil))
+	return if rawequal(self, p1) then true else self.key == p1.key and (self.name == p1.name and tutilsModule.shallowEqual(self.params, p1.params, nil))
 end
 
 return t

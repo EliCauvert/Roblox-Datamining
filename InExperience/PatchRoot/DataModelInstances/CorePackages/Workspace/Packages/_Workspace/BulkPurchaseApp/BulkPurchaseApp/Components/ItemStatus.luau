@@ -7,26 +7,26 @@ local styledTextLabel = require(parent.UIBlox).App.Text.StyledTextLabel
 local itemStatusToItemStatusKeyModule = require(bulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
 local itemStatusKeyToLocalizationKeyModule = require(bulkPurchaseApp.Enums.ItemStatusKeyToLocalizationKey)
 
-local function mapTokens(p0)
+local function mapTokens(p1)
 	return {
-		successColor = p0.Color.System.Success,
-		failureColor = p0.Color.System.Alert,
-		fontStyle = p0.Typography.BodySmall
+		successColor = p1.Color.System.Success,
+		failureColor = p1.Color.System.Alert,
+		fontStyle = p1.Typography.BodySmall
 	}
 end
 
 return function(p1)
 	-- upvalues: useDesignTokens (ref), mapTokens (ref), useLocalization (ref), itemStatusKeyToLocalizationKeyModule (ref), itemStatusToItemStatusKeyModule (ref), reactModule (ref), styledTextLabel (ref)
-	local var5 = useDesignTokens(mapTokens)
+	local var1 = useDesignTokens(mapTokens)
 	
 	return reactModule.createElement(styledTextLabel, {
 		textWrapped = true,
-		fontStyle = var5.fontStyle,
-		colorStyle = if p1.status == Enum.MarketplaceItemPurchaseStatus.Success then var5.successColor else var5.failureColor,
+		fontStyle = var1.fontStyle,
+		colorStyle = if p1.status == Enum.MarketplaceItemPurchaseStatus.Success then var1.successColor else var1.failureColor,
 		text = useLocalization(itemStatusKeyToLocalizationKeyModule)[itemStatusToItemStatusKeyModule[p1.status]],
 		size = UDim2.fromScale(1, 1),
 		textXAlignment = Enum.TextXAlignment.Right,
 		textYAlignment = Enum.TextYAlignment.Top,
-		lineHeight = var5.fontStyle.LineHeight
+		lineHeight = var1.fontStyle.LineHeight
 	})
 end

@@ -6,8 +6,8 @@ local useLocalization = require(virtualEvents.Parent.Localization).Hooks.useLoca
 local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
 local emptyState = UIBloxModule.App.Indicator.EmptyState
 
-local function selectScreenSize(p0)
-	return p0.ScreenSize
+local function selectScreenSize(p1)
+	return p1.ScreenSize
 end
 
 return function(p1)

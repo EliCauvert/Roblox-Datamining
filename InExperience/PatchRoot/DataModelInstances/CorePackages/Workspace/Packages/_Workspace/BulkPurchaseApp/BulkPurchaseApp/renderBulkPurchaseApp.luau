@@ -29,9 +29,9 @@ end
 local function createNetworkImpl()
 	-- upvalues: httpRequestModule (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p0, p1, p2)
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
+			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
 		maxRetryCount = game:DefineFastInt("BulkPurchaseMaxHttpRequestRetries", 2),
 		maxWaitTime = game:DefineFastInt("BulkPurchaseMaxHttpRequestWaitTime", 1)
@@ -48,8 +48,8 @@ return function()
 	local bulkPurchaseApp = Instance.new("Folder")
 	bulkPurchaseApp.Name = "BulkPurchaseApp"
 	bulkPurchaseApp.Parent = coreGuiService
-	local var15 = reactRobloxModule.createRoot(bulkPurchaseApp)
-	var15:render(reactModule.createElement(localizationProvider, {
+	local var1 = reactRobloxModule.createRoot(bulkPurchaseApp)
+	var1:render(reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		StyleProvider = reactModule.createElement(appStyleProvider, { style = t }, {
@@ -75,5 +75,5 @@ return function()
 		})
 	}))
 	
-	return var15
+	return var1
 end

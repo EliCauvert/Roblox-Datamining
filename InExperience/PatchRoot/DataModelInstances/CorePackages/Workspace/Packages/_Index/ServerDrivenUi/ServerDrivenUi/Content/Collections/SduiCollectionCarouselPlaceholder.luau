@@ -14,80 +14,80 @@ local luaAppSduiCarouselPlaceholderHeaderMinWidthPct = game:DefineFastInt("LuaAp
 local luaAppSduiCarouselPlaceholderHeaderMaxWidthPct = game:DefineFastInt("LuaAppSduiCarouselPlaceholderHeaderMaxWidthPct", 60)
 local uDim = UDim.new(1, 72)
 
-local function SduiCollectionCarouselItemPlaceholderRow(p0)
+local function SduiCollectionCarouselItemPlaceholderRow(p1)
 	-- upvalues: reactModule (ref)
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: p0 (ref)
-		return p0.itemSizeBinding:map(function(p1)
-			return UDim2.new(0, p1.X, 0, p1.Y)
+	local var1 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref)
+		return p1.itemSizeBinding:map(function(p2)
+			return UDim2.new(0, p2.X, 0, p2.Y)
 		end)
-	end, { p0.itemSizeBinding })
+	end, { p1.itemSizeBinding })
 	local t = {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, p0.gutter)
+			Padding = UDim.new(0, p1.gutter)
 		})
 	}
 	
-	for i = 1, if p0.carouselPeek > 0 then p0.itemsPerRow + 1 else p0.itemsPerRow do
+	for i = 1, if p1.carouselPeek > 0 then p1.itemsPerRow + 1 else p1.itemsPerRow do
 		t[`Item{i}`] = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = i,
-			Size = var8
+			Size = var1
 		}, {
-			ItemPlaceholder = reactModule.cloneElement(p0.itemPlaceholderComponent, { transparencyBinding = p0.transparencyBinding })
+			ItemPlaceholder = reactModule.cloneElement(p1.itemPlaceholderComponent, { transparencyBinding = p1.transparencyBinding })
 		})
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
-		LayoutOrder = p0.layoutOrder,
-		Size = p0.rowSizeBinding
+		LayoutOrder = p1.layoutOrder,
+		Size = p1.rowSizeBinding
 	}, t)
 end
 
 return reactModule.memo(function(p2)
 	-- upvalues: useTokens (ref), useCollectionLayout (ref), signalsReactModule (ref), uDim (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), reactModule (ref), calculateItemWidth (ref), luaAppSduiCarouselPlaceholderHeaderMinWidthPct (ref), luaAppSduiCarouselPlaceholderHeaderMaxWidthPct (ref), sduiPlaceholder (ref), fIntLuaAppSduiCarouselPlaceholderHeaderHeightPx (ref), SduiCollectionCarouselItemPlaceholderRow (ref)
-	local var15
-	local var10 = useTokens()
-	local scale = var10.Config.UI.Scale
-	local var11 = useCollectionLayout(p2.collectionItemSize)
-	local var12 = signalsReactModule.useSignalBinding(var11.getContainerWidth)
+	local var2
+	local var3 = useTokens()
+	local scale = var3.Config.UI.Scale
+	local var4 = useCollectionLayout(p2.collectionItemSize)
+	local var5 = signalsReactModule.useSignalBinding(var4.getContainerWidth)
 	local itemHeightFromWidth = p2.itemHeightFromWidth or uDim
-	local var14 = nil
+	local var6 = nil
 	local _ = nil
 	
 	if fFlagSduiCollectionCarouselPlaceholderItem then
-		var14 = reactModule.useMemo(function()
-			-- upvalues: var12 (ref), calculateItemWidth (copy), var11 (ref), itemHeightFromWidth (ref), scale (ref)
-			return var12:map(function(p3)
-				-- upvalues: calculateItemWidth (copy), var11 (copy), itemHeightFromWidth (copy), scale (copy)
-				local var16 = calculateItemWidth(var11.itemsPerRow, var11.gutter, var11.margin, p3, 0, var11.carouselPeek)
+		var6 = reactModule.useMemo(function()
+			-- upvalues: var5 (ref), calculateItemWidth (copy), var4 (ref), itemHeightFromWidth (ref), scale (ref)
+			return var5:map(function(p3)
+				-- upvalues: calculateItemWidth (copy), var4 (copy), itemHeightFromWidth (copy), scale (copy)
+				local var7 = calculateItemWidth(var4.itemsPerRow, var4.gutter, var4.margin, p3, 0, var4.carouselPeek)
 				
-				return Vector2.new(var16, math.max(var16 * itemHeightFromWidth.Scale + itemHeightFromWidth.Offset * scale, 0))
+				return Vector2.new(var7, math.max(var7 * itemHeightFromWidth.Scale + itemHeightFromWidth.Offset * scale, 0))
 			end)
 		end, {
-			var12, var11.itemsPerRow, var11.gutter, var11.margin, var11.carouselPeek,
+			var5, var4.itemsPerRow, var4.gutter, var4.margin, var4.carouselPeek,
 			itemHeightFromWidth, scale
 		})
-		var15 = reactModule.useMemo(function()
-			-- upvalues: var14 (write)
-			return var14:map(function(p4)
-				return UDim2.new(1, 0, 0, p4.Y)
+		var2 = reactModule.useMemo(function()
+			-- upvalues: var6 (write)
+			return var6:map(function(p3)
+				return UDim2.new(1, 0, 0, p3.Y)
 			end)
-		end, { var14 })
+		end, { var6 })
 	else
-		var15 = reactModule.useMemo(function()
-			-- upvalues: var12 (ref), calculateItemWidth (copy), var11 (ref), itemHeightFromWidth (ref), scale (ref)
-			return var12:map(function(p5)
-				-- upvalues: calculateItemWidth (copy), var11 (copy), itemHeightFromWidth (copy), scale (copy)
-				return UDim2.new(1, 0, 0, math.max(calculateItemWidth(var11.itemsPerRow, var11.gutter, var11.margin, p5, 0, var11.carouselPeek) * itemHeightFromWidth.Scale + itemHeightFromWidth.Offset * scale, 0))
+		var2 = reactModule.useMemo(function()
+			-- upvalues: var5 (ref), calculateItemWidth (copy), var4 (ref), itemHeightFromWidth (ref), scale (ref)
+			return var5:map(function(p3)
+				-- upvalues: calculateItemWidth (copy), var4 (copy), itemHeightFromWidth (copy), scale (copy)
+				return UDim2.new(1, 0, 0, math.max(calculateItemWidth(var4.itemsPerRow, var4.gutter, var4.margin, p3, 0, var4.carouselPeek) * itemHeightFromWidth.Scale + itemHeightFromWidth.Offset * scale, 0))
 			end)
 		end, {
-			var12, var11.itemsPerRow, var11.gutter, var11.margin, var11.carouselPeek,
+			var5, var4.itemsPerRow, var4.gutter, var4.margin, var4.carouselPeek,
 			itemHeightFromWidth, scale
 		})
 	end
@@ -106,7 +106,7 @@ return reactModule.memo(function(p2)
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if fFlagSduiCollectionCarouselPlaceholderItem and p2.hideHeader then 0 else var10.Padding.Medium)
+			Padding = UDim.new(0, if fFlagSduiCollectionCarouselPlaceholderItem and p2.hideHeader then 0 else var3.Padding.Medium)
 		}),
 		Header = if fFlagSduiCollectionCarouselPlaceholderItem and p2.hideHeader then nil else reactModule.createElement(sduiPlaceholder, {
 			layoutOrder = 1,
@@ -114,26 +114,26 @@ return reactModule.memo(function(p2)
 			cornerRadius = p2.cornerRadius,
 			size = UDim2.new(reactModule.useMemo(function()
 				-- upvalues: luaAppSduiCarouselPlaceholderHeaderMinWidthPct (copy), luaAppSduiCarouselPlaceholderHeaderMaxWidthPct (copy)
-				local var17 = luaAppSduiCarouselPlaceholderHeaderMinWidthPct / 100
+				local var7 = luaAppSduiCarouselPlaceholderHeaderMinWidthPct / 100
 				
-				return var17 + math.random() * (luaAppSduiCarouselPlaceholderHeaderMaxWidthPct / 100 - var17)
+				return var7 + math.random() * (luaAppSduiCarouselPlaceholderHeaderMaxWidthPct / 100 - var7)
 			end, {}), 0, 0, fIntLuaAppSduiCarouselPlaceholderHeaderHeightPx * scale),
 			transparencyBinding = p2.transparencyBinding
 		}),
 		Row = if fFlagSduiCollectionCarouselPlaceholderItem and p2.itemPlaceholderComponent then reactModule.createElement(SduiCollectionCarouselItemPlaceholderRow, {
 			layoutOrder = 2,
-			carouselPeek = var11.carouselPeek,
-			gutter = var11.gutter,
+			carouselPeek = var4.carouselPeek,
+			gutter = var4.gutter,
 			itemPlaceholderComponent = p2.itemPlaceholderComponent,
-			itemSizeBinding = var14,
-			itemsPerRow = var11.itemsPerRow,
-			rowSizeBinding = var15,
+			itemSizeBinding = var6,
+			itemsPerRow = var4.itemsPerRow,
+			rowSizeBinding = var2,
 			transparencyBinding = p2.transparencyBinding
 		}) else reactModule.createElement(sduiPlaceholder, {
 			layoutOrder = 2,
 			backgroundStyle = p2.backgroundStyle,
 			cornerRadius = p2.cornerRadius,
-			size = var15,
+			size = var2,
 			transparencyBinding = p2.transparencyBinding
 		})
 	})

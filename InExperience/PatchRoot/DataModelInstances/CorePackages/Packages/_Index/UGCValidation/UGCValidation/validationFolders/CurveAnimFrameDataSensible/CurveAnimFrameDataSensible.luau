@@ -21,8 +21,8 @@ t.prereqTests = {
 }
 
 local function areNumbersGood(...)
-	local function _(p0)
-		return p0 ~= p0
+	local function _(p1)
+		return p1 ~= p1
 	end
 	
 	local _ = function(p1)
@@ -40,14 +40,14 @@ local function areNumbersGood(...)
 	return true
 end
 
-function t.run(p2, p3)
+function t.run(p1, p2)
 	-- upvalues: areNumbersGood (ref), errorSourceStringsModule (ref)
-	local curveAnimComputedFrames = p3.curveAnimComputedFrames
+	local curveAnimComputedFrames = p2.curveAnimComputedFrames
 	
 	for i, v in curveAnimComputedFrames.animFrames do
 		for i_2, v_2 in v do
 			if not areNumbersGood(v_2:GetComponents()) then
-				p2:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
+				p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
 				
 				return
 			end
@@ -56,7 +56,7 @@ function t.run(p2, p3)
 	for i, v_1 in curveAnimComputedFrames.positionMagnitudeFrames do
 		for i_2, v_2 in v_1 do
 			if not areNumbersGood(v_2) then
-				p2:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
+				p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
 				
 				return
 			end

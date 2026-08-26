@@ -4,14 +4,14 @@ local promptStateModule = require(currencyTransfers.Enums.PromptState)
 local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
 local _ = require(currencyTransfers.Models.ErrorTransferModel)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: transferDirectionModule (ref), promptStateModule (ref)
-	local setPromptState = p0.setPromptState
-	local setErrorTransferModel = p0.setErrorTransferModel
-	local getDirection = p0.getDirection
+	local setPromptState = p1.setPromptState
+	local setErrorTransferModel = p1.setErrorTransferModel
+	local getDirection = p1.getDirection
 	
-	if p1 then
-		setErrorTransferModel(p1)
+	if p2 then
+		setErrorTransferModel(p2)
 	else
 		setErrorTransferModel(nil)
 	end

@@ -4,10 +4,10 @@ local loggerModule = require(script.Parent.Logger)
 local editChatGroupNameDialogScreen = roactModule.PureComponent:extend("EditChatGroupNameDialogScreen")
 editChatGroupNameDialogScreen.defaultProps = { navigation = nil }
 
-function editChatGroupNameDialogScreen.init(p0)
+function editChatGroupNameDialogScreen.init(p1)
 	function p0.onEditChatGroupNameDialogClose()
-		-- upvalues: p0 (ref)
-		p0.props.navigation.goBack()
+		-- upvalues: p1 (ref)
+		p1.props.navigation.goBack()
 	end
 end
 

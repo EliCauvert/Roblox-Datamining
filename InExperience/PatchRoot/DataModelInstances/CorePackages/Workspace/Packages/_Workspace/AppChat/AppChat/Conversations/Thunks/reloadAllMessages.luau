@@ -3,8 +3,8 @@ local reloadMessagesForConversationsModule = require(script.Parent.reloadMessage
 
 return function()
 	-- upvalues: reloadMessagesForConversationsModule (ref), cryoModule (ref)
-	return function(p0)
+	return function(p1)
 		-- upvalues: reloadMessagesForConversationsModule (copy), cryoModule (copy)
-		return p0:dispatch(reloadMessagesForConversationsModule(cryoModule.Dictionary.keys(p0:getState().ChatAppReducer.Conversations)))
+		return p1:dispatch(reloadMessagesForConversationsModule(cryoModule.Dictionary.keys(p1:getState().ChatAppReducer.Conversations)))
 	end
 end

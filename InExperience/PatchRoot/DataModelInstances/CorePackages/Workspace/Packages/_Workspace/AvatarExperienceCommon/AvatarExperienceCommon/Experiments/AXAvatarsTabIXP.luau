@@ -9,8 +9,8 @@ return IXPUtilsModule.defineIXPTest({
 	name = "AvatarExperience.UA.MarketplaceView.AvatarsTab",
 	recordExposure = false,
 	layer = appUserLayers.AvatarExperienceUAMarketplaceView,
-	getIsUserInExperiment = function(p0)
-		return p0.IsAvatarsTabEnabled ~= nil
+	getIsUserInExperiment = function(p1)
+		return p1.IsAvatarsTabEnabled ~= nil
 	end,
 	getDependentFlagsEnabled = function()
 		return true

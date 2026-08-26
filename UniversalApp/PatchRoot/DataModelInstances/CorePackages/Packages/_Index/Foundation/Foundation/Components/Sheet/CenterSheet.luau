@@ -43,10 +43,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var6 = useScaledValueModule(600)
 	local size800 = var3.Size.Size_800
 	local var7, var8 = reactModule.useBinding(var6)
-	local var9 = if var7 then var7:map(function(p1)
+	local var9 = if var7 then var7:map(function(p3)
 		-- upvalues: var1 (ref)
 		if var1.centerSheetHeight then
-			return if var1.centerSheetHeight > 0 and var1.centerSheetHeight <= 1 then p1 * var1.centerSheetHeight elseif var1.centerSheetHeight > 1 then math.min(var1.centerSheetHeight, p1) else nil
+			return if var1.centerSheetHeight > 0 and var1.centerSheetHeight <= 1 then p3 * var1.centerSheetHeight elseif var1.centerSheetHeight > 1 then math.min(var1.centerSheetHeight, p3) else nil
 		end
 	end) else nil
 	local var1, var2 = reactModule.useState(true)
@@ -89,10 +89,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			var24:Destroy()
 		end
 	end, {})
-	local var25 = reactModule.useCallback(function(p1)
+	local var25 = reactModule.useCallback(function(p3)
 		-- upvalues: var24 (ref)
-		if p1 then
-			var24.Parent = p1
+		if p3 then
+			var24.Parent = p3
 			
 			return
 		end
@@ -138,12 +138,12 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	createElement = createElement(viewModule, {
 		ClipsDescendants = true,
 		ZIndex = 2,
-		Size = if var1.centerSheetHeight and var9 then var9:map(function(p1)
-			return if p1 then UDim2.new(1, 0, 0, p1) else nil
+		Size = if var1.centerSheetHeight and var9 then var9:map(function(p3)
+			return if p3 then UDim2.new(1, 0, 0, p3) else nil
 		end) else nil,
 		sizeConstraint = if var1.centerSheetHeight and var7 then {
-			MaxSize = var7:map(function(p1)
-				return Vector2.new(1e999, p1)
+			MaxSize = var7:map(function(p3)
+				return Vector2.new(1e999, p3)
 			end)
 		} else nil,
 		stateLayer = { affordance = stateLayerAffordanceModule.None },
@@ -163,8 +163,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	}, {
 		Content = reactModule.createElement(viewModule, {
 			tag = "col items-center size-full-0 auto-y clip",
-			Size = if var1.centerSheetHeight and var9 then var9:map(function(p1)
-				return if p1 then UDim2.new(1, 0, 0, p1) else nil
+			Size = if var1.centerSheetHeight and var9 then var9:map(function(p3)
+				return if p3 then UDim2.new(1, 0, 0, p3) else nil
 			end) else nil
 		}, reactModule.createElement(sheetContextModule.Provider, {
 			value = reactModule.useMemo(function()
@@ -207,8 +207,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			variant = if var12 then closeAffordanceVariantModule.OverMedia else closeAffordanceVariantModule.Utility,
 			Position = UDim2.new(1, -var3.Margin.Small, 0, var3.Margin.Small),
 			AnchorPoint = Vector2.new(1, 0),
-			Visible = var10:map(function(p1)
-				return not p1
+			Visible = var10:map(function(p3)
+				return not p3
 			end),
 			testId = `{var1.testId}--close-affordance`
 		})
@@ -217,9 +217,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		ZIndex = 1,
 		tag = "anchor-center-left",
 		Image = SHADOW_IMAGE,
-		Size = var19:map(function(p1)
+		Size = var19:map(function(p3)
 			-- upvalues: SHADOW_SIZE (copy)
-			return UDim2.new(1, SHADOW_SIZE * 2, 0, p1 + SHADOW_SIZE * 2)
+			return UDim2.new(1, SHADOW_SIZE * 2, 0, p3 + SHADOW_SIZE * 2)
 		end),
 		Position = UDim2.new(0, -SHADOW_SIZE, 0.5, 0),
 		slice = {
@@ -243,17 +243,17 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					tag = "col align-y-center anchor-center-center size-full padding-medium",
 					ref = var25,
 					sizeConstraint = { MaxSize = Vector2.new(var5, var6) },
-					Position = var6:map(function(p1)
-						return UDim2.new(0.5, 0, 0.5, p1)
+					Position = var6:map(function(p3)
+						return UDim2.new(0.5, 0, 0.5, p3)
 					end),
 					testId = `{var1.testId}--center-sheet-container`,
-					GroupTransparency = if var1 then var6:map(function(p1)
+					GroupTransparency = if var1 then var6:map(function(p3)
 						-- upvalues: size800 (ref)
-						return p1 / size800
+						return p3 / size800
 					end) else nil,
-					onAbsoluteSizeChanged = if var1.centerSheetHeight and var8 then function(p1)
+					onAbsoluteSizeChanged = if var1.centerSheetHeight and var8 then function(p3)
 						-- upvalues: var3 (ref), var8 (ref), var6 (ref)
-						var8(math.min(p1.AbsoluteSize.Y - var3.Margin.Medium * 2, var6))
+						var8(math.min(p3.AbsoluteSize.Y - var3.Margin.Medium * 2, var6))
 					end else nil
 				}, nil),
 				Backdrop = reactModule.createElement(viewModule, {
@@ -261,11 +261,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					Size = UDim2.fromScale(2, 2),
 					Position = UDim2.fromScale(-0.5, -0.5),
 					stateLayer = { affordance = stateLayerAffordanceModule.None },
-					backgroundStyle = var4:map(function(p1)
+					backgroundStyle = var4:map(function(p3)
 						-- upvalues: var3 (ref)
 						return {
 							Color3 = var3.Color.Common.Backdrop.Color3,
-							Transparency = math.lerp(var3.Color.Common.Backdrop.Transparency, 1, p1)
+							Transparency = math.lerp(var3.Color.Common.Backdrop.Transparency, 1, p3)
 						}
 					end),
 					onActivated = var26,

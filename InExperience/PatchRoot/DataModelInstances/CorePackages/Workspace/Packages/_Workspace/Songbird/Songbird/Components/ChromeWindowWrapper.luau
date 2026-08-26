@@ -7,31 +7,31 @@ local useSongAlbumArtModule = require(songbird.Hooks.useSongAlbumArt)
 local useCallback = reactModule.useCallback
 local useMemo = reactModule.useMemo
 
-return function(p0)
+return function(p1)
 	-- upvalues: useCurrentSongModule (ref), useMemo (ref), getFFlagSongbirdMusicIconThumbnailModule (ref), useSongAlbumArtModule (ref), useCallback (ref), reactModule (ref), chromeWindowModule (ref)
-	local var6 = useCurrentSongModule()
-	local meetsCriteria = getFFlagSongbirdMusicIconThumbnailModule() and (var6 and var6.meetsCriteria)
+	local var1 = useCurrentSongModule()
+	local meetsCriteria = getFFlagSongbirdMusicIconThumbnailModule() and (var1 and var1.meetsCriteria)
 	
 	return reactModule.createElement(chromeWindowModule, {
-		song = if var6 then {
-			title = var6.metadata.Title,
-			artists = { var6.metadata.Artist },
-			isLiked = var6.isFavorited,
-			meetsCriteria = var6.meetsCriteria,
+		song = if var1 then {
+			title = var1.metadata.Title,
+			artists = { var1.metadata.Artist },
+			isLiked = var1.isFavorited,
+			meetsCriteria = var1.meetsCriteria,
 			thumbnailUrl = if meetsCriteria then useSongAlbumArtModule(if meetsCriteria then useMemo(function()
-				-- upvalues: var6 (ref)
-				return if var6 then tonumber(var6.metadata.AssetId) else nil
-			end, { var6 }) else nil).value else nil
+				-- upvalues: var1 (ref)
+				return if var1 then tonumber(var1.metadata.AssetId) else nil
+			end, { var1 }) else nil).value else nil
 		} else nil,
-		isFocused = p0.isFocused,
-		maxSize = p0.maxSize,
+		isFocused = p1.isFocused,
+		maxSize = p1.maxSize,
 		onToggleLike = useCallback(function()
-			-- upvalues: var6 (ref)
-			if var6 then
-				var6.toggleFavorite()
+			-- upvalues: var1 (ref)
+			if var1 then
+				var1.toggleFavorite()
 			end
-		end, { var6 }),
-		onClose = p0.onClose,
-		onUnfocus = p0.onUnfocus
+		end, { var1 }),
+		onClose = p1.onClose,
+		onUnfocus = p1.onUnfocus
 	})
 end

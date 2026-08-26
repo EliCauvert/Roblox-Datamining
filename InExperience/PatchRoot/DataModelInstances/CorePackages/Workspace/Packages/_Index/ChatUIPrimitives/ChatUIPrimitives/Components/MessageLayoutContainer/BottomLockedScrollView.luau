@@ -4,37 +4,37 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(chatUIPrimitives.Types)
 
-local function _(p0)
-	local y = p0.AbsoluteWindowSize.Y
-	local y_1 = p0.AbsoluteCanvasSize.Y
+local function _(p1)
+	local y = p1.AbsoluteWindowSize.Y
+	local y_1 = p1.AbsoluteCanvasSize.Y
 	
-	return y_1 <= y or p0.CanvasPosition.Y / (y_1 - y) >= 0.9
+	return y_1 <= y or p1.CanvasPosition.Y / (y_1 - y) >= 0.9
 end
 
 return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(true)
+	local var1 = reactModule.useRef(nil)
+	local var2 = reactModule.useRef(true)
 	local onScroll = p1.onScroll
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), onScroll (ref)
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref), onScroll (ref)
 		local y = p2.AbsoluteWindowSize.Y
 		local y_1 = p2.AbsoluteCanvasSize.Y
-		var4.current = y_1 <= y or p2.CanvasPosition.Y / (y_1 - y) >= 0.9
+		var2.current = y_1 <= y or p2.CanvasPosition.Y / (y_1 - y) >= 0.9
 		
-		if onScroll and not var4.current then
+		if onScroll and not var2.current then
 			onScroll()
 		end
 	end, { onScroll })
-	local var6 = reactModule.useCallback(function(p3)
-		-- upvalues: var4 (ref)
-		if var4.current then
-			p3.CanvasPosition = Vector2.new(0, 9007199254740992)
+	local var4 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref)
+		if var2.current then
+			p2.CanvasPosition = Vector2.new(0, 9007199254740992)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
-		local current = var3.current
+		-- upvalues: var1 (ref)
+		local current = var1.current
 		
 		if current then
 			current.CanvasPosition = Vector2.new(0, 9007199254740992)
@@ -45,13 +45,13 @@ return reactModule.memo(function(p1)
 		tag = "fill",
 		scrollBarVisibility = "Auto",
 		Size = p1.Size or UDim2.fromScale(1, 1),
-		scrollingFrameRef = var3,
+		scrollingFrameRef = var1,
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			CanvasSize = UDim2.fromScale(0, 0)
 		},
-		onCanvasPositionChanged = var5,
-		onAbsoluteCanvasSizeChanged = var6
+		onCanvasPositionChanged = var3,
+		onAbsoluteCanvasSizeChanged = var4
 	}, if p1.contentPadding then {
 		paddedContent = reactModule.createElement(foundationModule.View, {
 			tag = "auto-y",

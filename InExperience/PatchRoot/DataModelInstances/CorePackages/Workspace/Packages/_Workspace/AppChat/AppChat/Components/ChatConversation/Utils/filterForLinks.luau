@@ -6,12 +6,12 @@ local enumMessageTypesModule = require(appChat.Components.ChatConversation.EnumM
 local formatMessagesModule = require(script.Parent.formatMessages)
 local separateRobloxUrlsFromTextModule = require(script.Parent.RobloxUrlUtils.separateRobloxUrlsFromText)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: argCheckModule (ref), enumMessageTypesModule (ref), cryoModule (ref), formatMessagesModule (ref), separateRobloxUrlsFromTextModule (ref)
-	argCheckModule.isType(p0, "table", "filterForLinks.text")
-	argCheckModule.isType(p1, "table", "filterForLinks.whitelistedDomains")
+	argCheckModule.isType(p1, "table", "filterForLinks.text")
+	argCheckModule.isType(p2, "table", "filterForLinks.whitelistedDomains")
 	
-	return if p0.messageType == enumMessageTypesModule.System then { p0 } elseif p0.messageType == enumMessageTypesModule.Link and (not p0.gameLink or not p0.gameLink.universeId) then {
-		cryoModule.Dictionary.join(p0, { messageType = cryoModule.None })
-	} elseif p0.content and not p0.moderated and (p0.content:lower():match("%/games[^%d]*(%d+)/?") or p0.content:match("%/share%?.*code=([%w%-]+)")) then formatMessagesModule(separateRobloxUrlsFromTextModule(p0.content), p0) else { p0 }
+	return if p1.messageType == enumMessageTypesModule.System then { p1 } elseif p1.messageType == enumMessageTypesModule.Link and (not p1.gameLink or not p1.gameLink.universeId) then {
+		cryoModule.Dictionary.join(p1, { messageType = cryoModule.None })
+	} elseif p1.content and not p1.moderated and (p1.content:lower():match("%/games[^%d]*(%d+)/?") or p1.content:match("%/share%?.*code=([%w%-]+)")) then formatMessagesModule(separateRobloxUrlsFromTextModule(p1.content), p1) else { p1 }
 end

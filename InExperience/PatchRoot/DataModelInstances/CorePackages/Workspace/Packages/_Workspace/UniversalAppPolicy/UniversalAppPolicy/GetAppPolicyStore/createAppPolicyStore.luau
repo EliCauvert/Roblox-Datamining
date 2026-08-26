@@ -5,11 +5,11 @@ local universalAppGetPolicyModule = require(universalAppPolicy.UniversalAppGetPo
 
 return function()
 	-- upvalues: signalsModule (ref), appFeaturePoliciesModule (ref), universalAppGetPolicyModule (ref)
-	local var4, var5 = signalsModule.createSignal(appFeaturePoliciesModule(universalAppGetPolicyModule.read() or {}))
-	universalAppGetPolicyModule.onPolicyChanged(function(p0)
-		-- upvalues: var5 (ref), appFeaturePoliciesModule (copy)
-		var5(appFeaturePoliciesModule(p0 or {}))
+	local var1, var2 = signalsModule.createSignal(appFeaturePoliciesModule(universalAppGetPolicyModule.read() or {}))
+	universalAppGetPolicyModule.onPolicyChanged(function(p1)
+		-- upvalues: var2 (ref), appFeaturePoliciesModule (copy)
+		var2(appFeaturePoliciesModule(p1 or {}))
 	end)
 	
-	return { getAppPolicy = var4 }
+	return { getAppPolicy = var1 }
 end

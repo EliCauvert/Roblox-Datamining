@@ -4,11 +4,11 @@ local createAvatarEditorStoresModule = require(script.Parent.Parent.Stores.creat
 
 return function()
 	-- upvalues: reactModule (ref), avatarEditorStoresModule (ref), createAvatarEditorStoresModule (ref)
-	local var3 = reactModule.useContext(avatarEditorStoresModule)
+	local var1 = reactModule.useContext(avatarEditorStoresModule)
 	
-	if not var3 then
+	if not var1 then
 		warn("useAvatarEditorStores was used without an AvatarEditorStores context provider. Providing a temporary default value instead.")
-		var3 = createAvatarEditorStoresModule()
+		var1 = createAvatarEditorStoresModule()
 	end
-	return var3
+	return var1
 end

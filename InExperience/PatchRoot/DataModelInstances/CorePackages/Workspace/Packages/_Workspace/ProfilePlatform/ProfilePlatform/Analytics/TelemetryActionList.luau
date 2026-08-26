@@ -26,8 +26,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p0)
-						return p0
+					status = function(p1)
+						return p1
 					end
 				}
 			},
@@ -38,11 +38,11 @@ return {
 					return eventNamesModule.ProfileLoadingStage .. "Time" .. p1.status
 				end,
 				dynamicCustomFields = {
-					status = function(p2)
-						return p2
+					status = function(p1)
+						return p1
 					end,
-					isProfilePlatform = function(p3)
-						return p3 or false
+					isProfilePlatform = function(p1)
+						return p1 or false
 					end
 				}
 			}
@@ -55,8 +55,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					reloadCount = function(p4)
-						return if p4 <= 10 then `ReloadCount${p4}` else "ReloadCount5+"
+					reloadCount = function(p1)
+						return if p1 <= 10 then `ReloadCount${p1}` else "ReloadCount5+"
 					end
 				}
 			}
@@ -69,11 +69,11 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = {
-					status = function(p5)
-						return p5
+					status = function(p1)
+						return p1
 					end,
-					isInExperience = function(p6)
-						return p6
+					isInExperience = function(p1)
+						return p1
 					end
 				}
 			}
@@ -86,8 +86,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					friendStatus = function(p7)
-						return p7
+					friendStatus = function(p1)
+						return p1
 					end
 				}
 			}
@@ -100,8 +100,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					presenceType = function(p8)
-						return p8
+					presenceType = function(p1)
+						return p1
 					end
 				}
 			}
@@ -191,8 +191,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariantOverride = function(p9)
-						return p9
+					modalVariantOverride = function(p1)
+						return p1
 					end
 				}
 			}
@@ -394,12 +394,12 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = if fFlagProfilePlatformEnableStore then if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
-					btnContext = function(p11)
-						return p11
+					btnContext = function(p1)
+						return p1
 					end
 				} else {
-					source = function(p10)
-						return p10
+					source = function(p1)
+						return p1
 					end
 				} else nil
 			}
@@ -412,8 +412,8 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					component = function(p12)
-						return p12
+					component = function(p1)
+						return p1
 					end
 				}
 			}
@@ -511,8 +511,8 @@ return {
 					btn = analyticsConstantsModule.Btns.InspectAvatarInsufficientRobux
 				},
 				dynamicCustomFields = {
-					totalPrice = function(p13)
-						return p13
+					totalPrice = function(p1)
+						return p1
 					end
 				}
 			},
@@ -534,8 +534,8 @@ return {
 					btn = analyticsConstantsModule.Btns.InspectAvatarBuyRobux
 				},
 				dynamicCustomFields = {
-					totalPrice = function(p14)
-						return p14
+					totalPrice = function(p1)
+						return p1
 					end
 				}
 			},

@@ -40,49 +40,49 @@ local replaced_6 = string.gsub(replaced, "https://www.", "https://premiumfeature
 local replaced_7 = string.gsub(replaced, "https://www.", "https://economycreatorstats.")
 local replaced_8 = string.gsub(replaced, "https://www", "https://users")
 
-local function request(p0, p1, p2)
+local function request(p1, p2, p3)
 	-- upvalues: debugLogModule (ref), serializeTableModule (ref), httpService (ref)
 	debugLogModule(function()
-		-- upvalues: p0 (ref), serializeTableModule (copy)
-		return "Request " .. p0.Url .. "\n" .. serializeTableModule(p0)
+		-- upvalues: p1 (ref), serializeTableModule (copy)
+		return "Request " .. p0.Url .. "\n" .. serializeTableModule(p1)
 	end)
 	
-	return httpService:RequestInternal(p0):Start(function(p3, p4)
-		-- upvalues: debugLogModule (copy), p0 (ref), serializeTableModule (copy), httpService (copy), p1 (ref), p2 (ref)
+	return httpService:RequestInternal(p1):Start(function(p4, p5)
+		-- upvalues: debugLogModule (copy), p1 (ref), serializeTableModule (copy), httpService (copy), p2 (ref), p3 (ref)
 		debugLogModule(function()
-			-- upvalues: p0 (copy), serializeTableModule (copy), p4 (ref)
-			return "Response " .. p0.Url .. "\n" .. serializeTableModule(p4)
+			-- upvalues: p1 (copy), serializeTableModule (copy), p5 (ref)
+			return "Response " .. p0.Url .. "\n" .. serializeTableModule(p5)
 		end)
 		
-		if not p3 then
-			p2(tostring(p4.StatusMessage))
+		if not p4 then
+			p3(tostring(p5.StatusMessage))
 			
 			return
 		end
 		local _ = nil
-		local ok, status = pcall(httpService.JSONDecode, httpService, p4.Body)
-		local var67 = status
+		local ok, status = pcall(httpService.JSONDecode, httpService, p5.Body)
+		local var1 = status
 		
 		if ok then
-			p1(var67)
+			p2(var1)
 			
 			return
 		end
-		p2("Could not parse JSON.")
+		p3("Could not parse JSON.")
 	end)
 end
 
-local function getABTestGroup(p5, p6)
+local function getABTestGroup(p1, p2)
 	-- upvalues: promiseModule (ref), request (ref), replaced_3 (ref), httpService (ref)
 	local list = {
 		{
 			SubjectType = 1,
-			ExperimentName = p6,
-			SubjectTargetId = p5
+			ExperimentName = p2,
+			SubjectTargetId = p1
 		}
 	}
 	
-	return promiseModule.new(function(p7, p8)
+	return promiseModule.new(function(p3, p4)
 		-- upvalues: request (copy), replaced_3 (copy), httpService (copy), list (ref)
 		return request({
 			Method = "POST",
@@ -92,56 +92,56 @@ local function getABTestGroup(p5, p6)
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}, p7, p8)
+		}, p3, p4)
 	end)
 end
 
-local function getProductInfo(p9, p10)
+local function getProductInfo(p1, p2)
 	-- upvalues: marketplaceService (ref)
-	return marketplaceService:GetProductInfoAsync(p9, p10)
+	return marketplaceService:GetProductInfoAsync(p1, p2)
 end
 
-local function getSubscriptionProductInfo(p11)
+local function getSubscriptionProductInfo(p1)
 	-- upvalues: marketplaceService (ref)
-	return marketplaceService:GetSubscriptionProductInfoAsync(p11)
+	return marketplaceService:GetSubscriptionProductInfoAsync(p1)
 end
 
 local function getPremiumProductInfo()
 	-- upvalues: promiseModule (ref), request (ref), replaced_6 (ref), premiumProductModule (ref), userInputService (ref)
-	return promiseModule.new(function(p12, p13)
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: request (copy), replaced_6 (copy), premiumProductModule (copy), userInputService (copy)
 		request({
 			Method = "GET",
 			Url = replaced_6 .. "v1/products?typeName=Subscription"
-		}, function(p14)
-			-- upvalues: premiumProductModule (copy), userInputService (copy), p12 (ref)
-			local var69 = nil
+		}, function(p3)
+			-- upvalues: premiumProductModule (copy), userInputService (copy), p1 (ref)
+			local var1 = nil
 			
-			for i, v in ipairs(p14.products) do
-				local var70 = premiumProductModule(v)
+			for i, v in ipairs(p3.products) do
+				local var2 = premiumProductModule(v)
 				
-				if var70 ~= nil and (var69 == nil or var70.robuxAmount < var69.robuxAmount) then
-					var69 = var70
+				if var2 ~= nil and (var1 == nil or var2.robuxAmount < var1.robuxAmount) then
+					var1 = var2
 				end
 			end
-			if userInputService:GetPlatform() == Enum.Platform.Android and var69 ~= nil and var69.mobileProductId ~= nil then
-				var69.mobileProductId = var69.mobileProductId:lower()
+			if userInputService:GetPlatform() == Enum.Platform.Android and var1 ~= nil and var1.mobileProductId ~= nil then
+				var1.mobileProductId = var1.mobileProductId:lower()
 			end
-			p12(var69)
-		end, p13)
+			p1(var1)
+		end, p2)
 	end)
 end
 
-local function getPlayerOwns(p15, p16, p17)
+local function getPlayerOwns(p1, p2, p3)
 	-- upvalues: marketplaceService (ref), enablePlayerOwnsBundleApiEngineFeature (ref)
-	return if p17 == Enum.InfoType.Asset then marketplaceService:PlayerOwnsAssetAsync(p15, p16) elseif enablePlayerOwnsBundleApiEngineFeature and p17 == Enum.InfoType.Bundle then marketplaceService:PlayerOwnsBundleAsync(p15, p16) elseif p17 == Enum.InfoType.GamePass then marketplaceService:UserOwnsGamePassAsync(p15.UserId, p16) else p17 == Enum.InfoType.Subscription and marketplaceService:IsPlayerSubscribed(p15, p16)
+	return if p3 == Enum.InfoType.Asset then marketplaceService:PlayerOwnsAssetAsync(p1, p2) elseif enablePlayerOwnsBundleApiEngineFeature and p3 == Enum.InfoType.Bundle then marketplaceService:PlayerOwnsBundleAsync(p1, p2) elseif p3 == Enum.InfoType.GamePass then marketplaceService:UserOwnsGamePassAsync(p1.UserId, p2) else p3 == Enum.InfoType.Subscription and marketplaceService:IsPlayerSubscribed(p1, p2)
 end
 
-local function performPurchase(p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29)
+local function performPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
 	-- upvalues: getFFlagEnablePromptPurchaseRequestedV2Module (ref), getFFlagEnablePromptPurchaseRequestedV2Take2Module (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), marketplaceService (ref), fFlagEnablePurchasePayloadInExperienceShop (ref), isGenericChallengeResponseModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: getFFlagEnablePromptPurchaseRequestedV2Module (copy), getFFlagEnablePromptPurchaseRequestedV2Take2Module (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), marketplaceService (copy), p18 (ref), p19 (ref), p20 (ref), p21 (ref), p22 (ref), p23 (ref), p24 (ref), p25 (ref), p26 (ref), p27 (ref), fFlagEnablePurchasePayloadInExperienceShop (copy), p28 (ref), p29 (ref)
-		return if not (not getFFlagEnablePromptPurchaseRequestedV2Module() and not getFFlagEnablePromptPurchaseRequestedV2Take2Module()) then if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then marketplaceService:PerformPurchase(p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, if fFlagEnablePurchasePayloadInExperienceShop then p28 else nil, p29) elseif fFlagEnablePurchasePayloadInExperienceShop then marketplaceService:PerformPurchase(p18, p19, p20, p21, p22, p23, p24, p25, p26, nil, p28) else marketplaceService:PerformPurchase(p18, p19, p20, p21, p22, p23, p24, p25, p26) else marketplaceService:PerformPurchase(p18, p19, p20, p21, p22, p23, p24, p25)
+		-- upvalues: getFFlagEnablePromptPurchaseRequestedV2Module (copy), getFFlagEnablePromptPurchaseRequestedV2Take2Module (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), marketplaceService (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), p8 (ref), p9 (ref), p10 (ref), fFlagEnablePurchasePayloadInExperienceShop (copy), p11 (ref), p12 (ref)
+		return if not (not getFFlagEnablePromptPurchaseRequestedV2Module() and not getFFlagEnablePromptPurchaseRequestedV2Take2Module()) then if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, if fFlagEnablePurchasePayloadInExperienceShop then p11 else nil, p12) elseif fFlagEnablePurchasePayloadInExperienceShop then marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, nil, p11) else marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9) else marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8)
 	end)
 	
 	if ok then
@@ -152,17 +152,17 @@ local function performPurchase(p18, p19, p20, p21, p22, p23, p24, p25, p26, p27,
 	error(tostring(status))
 end
 
-local function performPurchaseV2(p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40)
+local function performPurchaseV2(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
 	-- upvalues: marketplaceService (ref), isGenericChallengeResponseModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: p35 (ref), p36 (ref), p37 (ref), p38 (ref), p39 (ref), p40 (ref), marketplaceService (copy), p30 (ref), p31 (ref), p32 (ref), p33 (ref), p34 (ref)
-		return marketplaceService:PerformPurchaseV2(p30, p31, p32, p33, p34, {
-			CollectibleItemId = p35,
-			CollectibleProductId = p36,
-			IdempotencyKey = p37,
-			PurchaseAuthToken = p38,
-			CollectibleItemInstanceId = p39,
-			PurchaseOptions = p40
+		-- upvalues: p6 (ref), p7 (ref), p8 (ref), p9 (ref), p10 (ref), p11 (ref), marketplaceService (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref)
+		return marketplaceService:PerformPurchaseV2(p1, p2, p3, p4, p5, {
+			CollectibleItemId = p6,
+			CollectibleProductId = p7,
+			IdempotencyKey = p8,
+			PurchaseAuthToken = p9,
+			CollectibleItemInstanceId = p10,
+			PurchaseOptions = p11
 		})
 	end)
 	
@@ -174,11 +174,11 @@ local function performPurchaseV2(p30, p31, p32, p33, p34, p35, p36, p37, p38, p3
 	error(tostring(status))
 end
 
-local function performCreatorStorePurchase(p41, p42)
+local function performCreatorStorePurchase(p1, p2)
 	-- upvalues: creatorStoreService (ref), isGenericChallengeResponseModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: creatorStoreService (copy), p41 (ref), p42 (ref)
-		return creatorStoreService:performCreatorStorePurchase(p41, p42)
+		-- upvalues: creatorStoreService (copy), p1 (ref), p2 (ref)
+		return creatorStoreService:performCreatorStorePurchase(p1, p2)
 	end)
 	
 	if ok then
@@ -194,9 +194,9 @@ local function getAssetInfo(value)
 	return creatorStoreService:getAssetInfoAsync(value)
 end
 
-local function getCreatorStoreProductInfo(p43, p44)
+local function getCreatorStoreProductInfo(p1, p2)
 	-- upvalues: creatorStoreService (ref)
-	return creatorStoreService:getCreatorStoreProductInfoAsync(p43, p44)
+	return creatorStoreService:getCreatorStoreProductInfoAsync(p1, p2)
 end
 
 local function loadAssetForEquip(value)
@@ -206,129 +206,129 @@ end
 
 local function getAccountInfo()
 	-- upvalues: promiseModule (ref), request (ref), replaced_8 (ref)
-	return promiseModule.new(function(p45, p46)
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: request (copy), replaced_8 (copy)
 		request({
 			Method = "GET",
 			Url = replaced_8 .. "v1/users/authenticated/app-launch-info"
-		}, p45, p46)
+		}, p1, p2)
 	end)
 end
 
 local function getBalanceInfo()
 	-- upvalues: promiseModule (ref), request (ref), replaced_5 (ref)
-	return promiseModule.new(function(p47, p48)
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: request (copy), replaced_5 (copy)
-		request({ Method = "GET", Url = replaced_5 .. "v1/user/currency" }, p47, p48)
+		request({ Method = "GET", Url = replaced_5 .. "v1/user/currency" }, p1, p2)
 	end)
 end
 
-local function getBundleDetails(p49)
+local function getBundleDetails(p1)
 	-- upvalues: replaced_4 (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "GET",
-		Url = replaced_4 .. "v1/bundles/" .. tostring(p49) .. "/details"
+		Url = replaced_4 .. "v1/bundles/" .. tostring(p1) .. "/details"
 	}
 	
-	return promiseModule.new(function(p50, p51)
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p50 (ref), p51 (ref)
-			request(t, p50, p51)
+			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
+			request(t, p2, p3)
 		end)
 	end)
 end
 
-local function getProductPurchasableDetails(p52)
+local function getProductPurchasableDetails(p1)
 	-- upvalues: replaced_5 (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "GET",
-		Url = replaced_5 .. "v1/products/" .. tostring(p52) .. "?showPurchasable=true"
+		Url = replaced_5 .. "v1/products/" .. tostring(p1) .. "?showPurchasable=true"
 	}
 	
-	return promiseModule.new(function(p53, p54)
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p53 (ref), p54 (ref)
-			request(t, p53, p54)
+			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
+			request(t, p2, p3)
 		end)
 	end)
 end
 
-local function getCatalogItemDetails(p55, p56)
+local function getCatalogItemDetails(p1, p2)
 	-- upvalues: replaced_4 (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "GET",
-		Url = string.format("%sv1/catalog/items/%d/details?itemType=%s", replaced_4, p55, p56)
+		Url = string.format("%sv1/catalog/items/%d/details?itemType=%s", replaced_4, p1, p2)
 	}
 	
-	return promiseModule.new(function(p57, p58)
+	return promiseModule.new(function(p3, p4)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p57 (ref), p58 (ref)
-			request(t, p57, p58)
+			-- upvalues: request (copy), t (copy), p3 (ref), p4 (ref)
+			request(t, p3, p4)
 		end)
 	end)
 end
 
-local function getResellers(p59, p60)
+local function getResellers(p1, p2)
 	-- upvalues: replaced_1 (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "GET",
-		Url = string.format("%smarketplace-sales/v1/item/%s/resellers?cursor=&limit=%d", replaced_1, p59, p60 or 10)
+		Url = string.format("%smarketplace-sales/v1/item/%s/resellers?cursor=&limit=%d", replaced_1, p1, p2 or 10)
 	}
 	
-	return promiseModule.new(function(p61, p62)
+	return promiseModule.new(function(p3, p4)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p61 (ref), p62 (ref)
-			request(t, p61, p62)
+			-- upvalues: request (copy), t (copy), p3 (ref), p4 (ref)
+			request(t, p3, p4)
 		end)
 	end)
 end
 
-local function postCartPricing(p63)
+local function postCartPricing(p1)
 	-- upvalues: replaced_1 (ref), httpService (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "POST",
 		Url = replaced_1 .. "marketplace-sales/v1/cart-pricing",
-		Body = httpService:JSONEncode(p63),
+		Body = httpService:JSONEncode(p1),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p64, p65)
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p64 (ref), p65 (ref)
-			request(t, function(p66)
-				-- upvalues: p64 (copy)
-				p64(p66)
-			end, function(p67)
-				-- upvalues: p65 (copy)
-				p65(p67)
+			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
+			request(t, function(p4)
+				-- upvalues: p2 (copy)
+				p2(p4)
+			end, function(p4)
+				-- upvalues: p3 (copy)
+				p3(p4)
 			end)
 		end)
 	end)
 end
 
-local function postInGameItemCartPricing(p68)
+local function postInGameItemCartPricing(p1)
 	-- upvalues: replaced_1 (ref), httpService (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "POST",
 		Url = replaced_1 .. "checkout-api/v1/cart-pricing",
-		Body = httpService:JSONEncode(p68),
+		Body = httpService:JSONEncode(p1),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p69, p70)
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: request (copy), t (ref)
-		request(t, p69, p70)
+		request(t, p2, p3)
 	end)
 end
 
@@ -360,55 +360,55 @@ local function getPremiumUpsellPrecheck()
 		Url = string.format("%sv1/users/%d/premium-upsell-precheck?universeId=%d&placeId=%d", replaced_6, playersService.LocalPlayer.UserId, game.GameId, game.PlaceId)
 	}
 	
-	return promiseModule.new(function(p71, p72)
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: httpService (copy), t (ref)
 		spawn(function()
-			-- upvalues: httpService (copy), t (copy), p71 (ref), p72 (ref)
-			return httpService:RequestInternal(t):Start(function(p73, p74)
-				-- upvalues: p71 (copy), p72 (copy)
-				if p73 and p74.StatusCode == 200 then
-					p71()
+			-- upvalues: httpService (copy), t (copy), p1 (ref), p2 (ref)
+			return httpService:RequestInternal(t):Start(function(p3, p4)
+				-- upvalues: p1 (copy), p2 (copy)
+				if p3 and p4.StatusCode == 200 then
+					p1()
 					
 					return
 				end
-				p72()
+				p2()
 			end)
 		end)
 	end)
 end
 
-local function getSubscriptionPurchaseInfo(p75)
+local function getSubscriptionPurchaseInfo(p1)
 	-- upvalues: marketplaceService (ref)
-	return marketplaceService:GetSubscriptionPurchaseInfoAsync(p75)
+	return marketplaceService:GetSubscriptionPurchaseInfoAsync(p1)
 end
 
-local function performSubscriptionPurchase(p76, p77)
+local function performSubscriptionPurchase(p1, p2)
 	-- upvalues: marketplaceService (ref)
-	return marketplaceService:PerformSubscriptionPurchaseV2(p76, p77)
+	return marketplaceService:PerformSubscriptionPurchaseV2(p1, p2)
 end
 
-local function getPurchaseWarning(p78, p79, p80)
+local function getPurchaseWarning(p1, p2, p3)
 	-- upvalues: urlBuilder (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "GET",
-		Url = urlBuilder.economy.purchaseWarning.getPurchaseWarning(p78, p79, not p80)
+		Url = urlBuilder.economy.purchaseWarning.getPurchaseWarning(p1, p2, not p3)
 	}
 	
-	return promiseModule.new(function(p81, p82)
+	return promiseModule.new(function(p4, p5)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p81 (ref), p82 (ref)
-			request(t, p81, p82)
+			-- upvalues: request (copy), t (copy), p4 (ref), p5 (ref)
+			request(t, p4, p5)
 		end)
 	end)
 end
 
-local function postPurchaseWarningAcknowledge(p83)
+local function postPurchaseWarningAcknowledge(p1)
 	-- upvalues: urlBuilder (ref), httpService (ref), promiseModule (ref)
 	local t = {
 		Method = "POST",
 		Url = urlBuilder.economy.purchaseWarning.ackPurchaseWarning(),
-		Body = httpService:JSONEncode({ acknowledgement = p83 }),
+		Body = httpService:JSONEncode({ acknowledgement = p1 }),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
@@ -436,11 +436,11 @@ local function checkUserPurchaseSettings()
 		}
 	}
 	
-	return promiseModule.new(function(p84, p85)
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p84 (ref), p85 (ref)
-			request(t, p84, p85)
+			-- upvalues: request (copy), t (copy), p1 (ref), p2 (ref)
+			request(t, p1, p2)
 		end)
 	end)
 end
@@ -452,104 +452,104 @@ local function getVngShopUrl()
 		Url = urlBuilder.economy.vngPayments.getVngShopUrl()
 	}
 	
-	return promiseModule.new(function(p86, p87)
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p86 (ref), p87 (ref)
-			request(t, p86, p87)
+			-- upvalues: request (copy), t (copy), p1 (ref), p2 (ref)
+			request(t, p1, p2)
 		end)
 	end)
 end
 
-local function performDevProductEdpPurchase(p88, p89)
+local function performDevProductEdpPurchase(p1, p2)
 	-- upvalues: fFlagEnableRequestLocationTypeForSduiPurchaseModule (ref), replaced_1 (ref), httpService (ref), promiseModule (ref), request (ref)
-	local requestLocationType, var83
+	local requestLocationType, var1
 	local _ = nil
 	
 	if fFlagEnableRequestLocationTypeForSduiPurchaseModule then
-		requestLocationType = p89.requestLocationType
-		var83 = if requestLocationType == nil or requestLocationType == "" then ("%sdeveloper-products/v1/developer-products/%i/purchase"):format(replaced_1, p88) else ("%sdeveloper-products/v1/developer-products/%i/purchase?requestLocationType=%s"):format(replaced_1, p88, requestLocationType)
+		requestLocationType = p2.requestLocationType
+		var1 = if requestLocationType == nil or requestLocationType == "" then ("%sdeveloper-products/v1/developer-products/%i/purchase"):format(replaced_1, p1) else ("%sdeveloper-products/v1/developer-products/%i/purchase?requestLocationType=%s"):format(replaced_1, p1, requestLocationType)
 	else
-		var83 = ("%sdeveloper-products/v1/developer-products/%i/purchase?requestLocationType=ExperienceDetailPage"):format(replaced_1, p88)
+		var1 = ("%sdeveloper-products/v1/developer-products/%i/purchase?requestLocationType=ExperienceDetailPage"):format(replaced_1, p1)
 	end
 	requestLocationType = {
 		Method = "POST",
-		Url = var83,
-		Body = httpService:JSONEncode(p89),
+		Url = var1,
+		Body = httpService:JSONEncode(p2),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p90, p91)
+	return promiseModule.new(function(p3, p4)
 		-- upvalues: request (copy), requestLocationType (ref)
 		spawn(function()
-			-- upvalues: request (copy), requestLocationType (copy), p90 (ref), p91 (ref)
-			request(requestLocationType, p90, p91)
+			-- upvalues: request (copy), requestLocationType (copy), p3 (ref), p4 (ref)
+			request(requestLocationType, p3, p4)
 		end)
 	end)
 end
 
-local function getExperienceProductInfo(p92)
+local function getExperienceProductInfo(p1)
 	-- upvalues: replaced_2 (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "GET",
-		Url = ("%sv1/games/games-product-info?universeIds=%s"):format(replaced_2, p92)
+		Url = ("%sv1/games/games-product-info?universeIds=%s"):format(replaced_2, p1)
 	}
 	
-	return promiseModule.new(function(p93, p94)
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p93 (ref), p94 (ref)
-			request(t, p93, p94)
+			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
+			request(t, p2, p3)
 		end)
 	end)
 end
 
-local function performExperiencePurchase(p95, p96)
+local function performExperiencePurchase(p1, p2)
 	-- upvalues: replaced_5 (ref), httpService (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "POST",
-		Url = ("%sv1/purchases/products/%s"):format(replaced_5, p95),
-		Body = httpService:JSONEncode(p96),
+		Url = ("%sv1/purchases/products/%s"):format(replaced_5, p1),
+		Body = httpService:JSONEncode(p2),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p97, p98)
+	return promiseModule.new(function(p3, p4)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p97 (ref), p98 (ref)
-			request(t, p97, p98)
+			-- upvalues: request (copy), t (copy), p3 (ref), p4 (ref)
+			request(t, p3, p4)
 		end)
 	end)
 end
 
-local function performLookPurchase(p99, p100)
+local function performLookPurchase(p1, p2)
 	-- upvalues: replaced_1 (ref), httpService (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "POST",
-		Url = ("%slook-api/v2/looks/%s/purchase"):format(replaced_1, p99),
-		Body = httpService:JSONEncode(p100),
+		Url = ("%slook-api/v2/looks/%s/purchase"):format(replaced_1, p1),
+		Body = httpService:JSONEncode(p2),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p101, p102)
+	return promiseModule.new(function(p3, p4)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p101 (ref), p102 (ref)
-			request(t, p101, p102)
+			-- upvalues: request (copy), t (copy), p3 (ref), p4 (ref)
+			request(t, p3, p4)
 		end)
 	end)
 end
 
-local function performDeveloperSubscriptionRobuxPurchase(p103, p104)
+local function performDeveloperSubscriptionRobuxPurchase(p1, p2)
 	-- upvalues: enableDevSubscriptionPurchaseWithRobuxEngineFeature (ref), marketplaceService (ref)
 	if not enableDevSubscriptionPurchaseWithRobuxEngineFeature then
 		error("Developer subscription Robux purchase requires engine feature to be enabled")
@@ -557,8 +557,8 @@ local function performDeveloperSubscriptionRobuxPurchase(p103, p104)
 		return
 	end
 	local ok, status = pcall(function()
-		-- upvalues: marketplaceService (copy), p103 (ref), p104 (ref)
-		marketplaceService:PerformSubscriptionPurchaseWithRobuxAsync(p103, p104)
+		-- upvalues: marketplaceService (copy), p1 (ref), p2 (ref)
+		marketplaceService:PerformSubscriptionPurchaseWithRobuxAsync(p1, p2)
 	end)
 	
 	if not ok then
@@ -573,27 +573,27 @@ local function getUnifiedPurchaseFlowUserEligibility()
 		Url = ("%sroblox-subscriptions/v1/metadata"):format(replaced_1)
 	}
 	
-	return promiseModule.new(function(p105, p106)
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p105 (ref), p106 (ref)
-			request(t, p105, p106)
+			-- upvalues: request (copy), t (copy), p1 (ref), p2 (ref)
+			request(t, p1, p2)
 		end)
 	end)
 end
 
-local function GetLookDetailsV2ProductInfo(p107)
+local function GetLookDetailsV2ProductInfo(p1)
 	-- upvalues: replaced_1 (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "GET",
-		Url = string.format("%slook-api/v2/looks/%s", replaced_1, p107)
+		Url = string.format("%slook-api/v2/looks/%s", replaced_1, p1)
 	}
 	
-	return promiseModule.new(function(p108, p109)
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: request (copy), t (ref)
 		spawn(function()
-			-- upvalues: request (copy), t (copy), p108 (ref), p109 (ref)
-			request(t, p108, p109)
+			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
+			request(t, p2, p3)
 		end)
 	end)
 end

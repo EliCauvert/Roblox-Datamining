@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerFriendStatus", function(p0, p1)
-	return { player = p0, userId = p0.UserId, friendStatus = p1 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerFriendStatus", function(p1, p2)
+	return { player = p1, userId = p1.UserId, friendStatus = p2 }
 end)

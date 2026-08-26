@@ -8,9 +8,9 @@ return function()
 	
 	return {
 		getToasts = var2,
-		getToast = signalsModule.createComputed(function(p0)
+		getToast = signalsModule.createComputed(function(p1)
 			-- upvalues: var2 (ref)
-			local var4 = var2(p0)
+			local var4 = var2(p1)
 			
 			return if #var4 == 0 then nil else var4[#var4].data
 		end),
@@ -18,18 +18,18 @@ return function()
 			-- upvalues: var1 (write), var2 (ref), var3 (ref)
 			var1 += 1
 			local t = { id = var1, data = p1 }
-			local var6 = var2(false)
+			local var4 = var2(false)
 			
-			if #var6 >= 4 then
+			if #var4 >= 4 then
 				local t_1 = {}
 				
-				for i = #var6 - 4 + 2, #var6 do
-					table.insert(t_1, var6[i])
+				for i = #var4 - 4 + 2, #var4 do
+					table.insert(t_1, var4[i])
 				end
 				table.insert(t_1, t)
 				var3(t_1)
 			else
-				local cloned = table.clone(var6)
+				local cloned = table.clone(var4)
 				table.insert(cloned, t)
 				var3(cloned)
 			end

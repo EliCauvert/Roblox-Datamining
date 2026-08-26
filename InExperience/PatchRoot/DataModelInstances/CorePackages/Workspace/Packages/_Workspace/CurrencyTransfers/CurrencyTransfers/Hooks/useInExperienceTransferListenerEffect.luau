@@ -10,16 +10,16 @@ local transferDirectionModule = require(currencyTransfers.Enums.TransferDirectio
 local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
 local _ = require(currencyTransfers.Flows.InExperienceTransferFlow)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), marketplaceService (ref), playersService (ref), httpService (ref), loggingProtocolModule (ref), currencyTransferTelemetryModule (ref), transferDirectionModule (ref), transferOriginationModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: marketplaceService (copy), playersService (copy), httpService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferDirectionModule (copy), transferOriginationModule (copy), p0 (ref)
-		local promptRobuxTransferRequestedConnection = marketplaceService.PromptRobuxTransferRequested:Connect(function(p1, p2)
-			-- upvalues: playersService (copy), httpService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferDirectionModule (copy), transferOriginationModule (copy), p0 (copy)
-			if p1 == playersService.LocalPlayer then
+		-- upvalues: marketplaceService (copy), playersService (copy), httpService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferDirectionModule (copy), transferOriginationModule (copy), p1 (ref)
+		local promptRobuxTransferRequestedConnection = marketplaceService.PromptRobuxTransferRequested:Connect(function(p2, p3)
+			-- upvalues: playersService (copy), httpService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferDirectionModule (copy), transferOriginationModule (copy), p1 (copy)
+			if p2 == playersService.LocalPlayer then
 				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p2 (ref)
-					return httpService:JSONDecode(p2)
+					-- upvalues: httpService (copy), p3 (ref)
+					return httpService:JSONDecode(p3)
 				end)
 				
 				if not ok then
@@ -30,7 +30,7 @@ return function(p0)
 						direction = tostring(transferDirectionModule.Send),
 						transferOrigination = tostring(transferOriginationModule.InExperience)
 					})
-					p0(status)
+					p1(status)
 				end
 			end
 		end)
@@ -42,5 +42,5 @@ return function(p0)
 				promptRobuxTransferRequestedConnection = nil
 			end
 		end
-	end, { p0 })
+	end, { p1 })
 end

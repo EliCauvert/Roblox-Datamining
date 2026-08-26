@@ -33,21 +33,21 @@ partialPageModal.defaultProps = {
 	closeButtonIcon = closeButtonIconModule.Close
 }
 
-function partialPageModal.render(p0)
+function partialPageModal.render(p1)
 	-- upvalues: modalWindowModule (ref), roactModule (ref), modalTitleModule (ref), fitFrameVertical (ref), buttonStackModule (ref)
-	local screenSize = p0.props.screenSize
+	local screenSize = p1.props.screenSize
 	
 	return roactModule.createElement(modalWindowModule, {
 		isFullHeight = false,
 		screenSize = screenSize,
-		position = p0.props.position,
-		anchorPoint = p0.props.anchorPoint
+		position = p1.props.position,
+		anchorPoint = p1.props.anchorPoint
 	}, {
 		TitleContainer = roactModule.createElement(modalTitleModule, {
-			title = p0.props.title,
-			titleBackgroundImageProps = p0.props.titleBackgroundImageProps,
-			closeButtonIcon = p0.props.closeButtonIcon,
-			onCloseClicked = p0.props.onCloseClicked
+			title = p1.props.title,
+			titleBackgroundImageProps = p1.props.titleBackgroundImageProps,
+			closeButtonIcon = p1.props.closeButtonIcon,
+			onCloseClicked = p1.props.onCloseClicked
 		}),
 		Content = roactModule.createElement(fitFrameVertical, {
 			BackgroundTransparency = 1,
@@ -58,16 +58,16 @@ function partialPageModal.render(p0)
 				top = 0,
 				left = 0,
 				right = 0,
-				bottom = if not modalWindowModule:isFullWidth(screenSize.X) then 24 else p0.props.bottomPadding or 24
+				bottom = if not modalWindowModule:isFullWidth(screenSize.X) then 24 else p1.props.bottomPadding or 24
 			},
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
-			contentPadding = p0.props.contentPadding
+			contentPadding = p1.props.contentPadding
 		}, {
 			MiddlContent = roactModule.createElement(fitFrameVertical, {
 				BackgroundTransparency = 1,
-				width = UDim.new(1, -2 * p0.props.marginSize)
-			}, p0.props[roactModule.Children]),
-			Buttons = p0.props.buttonStackProps and roactModule.createElement(fitFrameVertical, {
+				width = UDim.new(1, -2 * p1.props.marginSize)
+			}, p1.props[roactModule.Children]),
+			Buttons = p1.props.buttonStackProps and roactModule.createElement(fitFrameVertical, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				width = UDim.new(1, 0)
@@ -76,14 +76,14 @@ function partialPageModal.render(p0)
 					PaddingLeft = UDim.new(0, 24),
 					PaddingRight = UDim.new(0, 24)
 				}),
-				roactModule.createElement(buttonStackModule, p0.props.buttonStackProps)
+				roactModule.createElement(buttonStackModule, p1.props.buttonStackProps)
 			}),
-			BottomFrame = if p0.props.footerContent then roactModule.createElement("Frame", {
+			BottomFrame = if p1.props.footerContent then roactModule.createElement("Frame", {
 				LayoutOrder = 3,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
-			}, { FooterContent = p0.props.footerContent() }) else nil
+			}, { FooterContent = p1.props.footerContent() }) else nil
 		})
 	})
 end

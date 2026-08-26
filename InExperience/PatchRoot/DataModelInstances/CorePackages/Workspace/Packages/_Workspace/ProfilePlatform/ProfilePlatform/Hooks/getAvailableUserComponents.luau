@@ -24,7 +24,7 @@ local t = {
 	[socialCommonModule.Enums.ContextualInfoTypes.Frequents] = enumsModule.ContextualTypes.PlayedTogether
 }
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: fFlagProfilePlatformEnableVRModule (ref), fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), buildUserActionsComponentModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref), enumsModule (ref), cryoModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref), socialCommonModule (ref), fFlagProfilePlatformEnableSendPlayedTogetherContextToProfilePlatformServiceModule (ref), t (ref), fFlagProfilePlatformEnableFavoriteExperiencesModule (ref), fFlagProfilePlatformEnableInventory (ref), fFlagProfilePlatformEnableStore (ref), fFlagExperiencesOnProfile (ref), fFlagEnableProfileCompletion (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), fFlagProfilePlatformEnableMomentsModule (ref)
 	local list
 	local _ = nil
@@ -34,25 +34,25 @@ return function(p0, p1)
 		list = {
 			{
 				component = enumsModule.Components.UserProfileHeader,
-				context = if fFlagProfilePlatformEnableSendPlayedTogetherContextToProfilePlatformServiceModule then t[p0] elseif p0 == socialCommonModule.Enums.ContextualInfoTypes.MutualFriends then enumsModule.ContextualTypes.MutualFriends else nil
+				context = if fFlagProfilePlatformEnableSendPlayedTogetherContextToProfilePlatformServiceModule then t[p1] elseif p1 == socialCommonModule.Enums.ContextualInfoTypes.MutualFriends then enumsModule.ContextualTypes.MutualFriends else nil
 			},
 			{ component = enumsModule.Components.SocialLinks },
 			{ component = enumsModule.Components.About },
 			{ component = enumsModule.Components.CurrentlyWearing },
-			if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then buildUserActionsComponentModule(p0, p1) else {
+			if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then buildUserActionsComponentModule(p1, p2) else {
 				component = enumsModule.Components.Actions,
-				context = if p0 == socialCommonModule.Enums.ContextualInfoTypes.OffNetworkFriendRequest then enumsModule.ContextualTypes.OffNetworkFriendRequest else nil,
-				supportedActions = cryoModule.List.filter(if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User) else cryoModule.Dictionary.values(enumsModule.ProfileActions), function(p2)
-					-- upvalues: enumsModule (copy), p1 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), fFlagProfilePlatformEnableTradeItemsModule (copy)
-					return if p2 == enumsModule.ProfileActions.QrCode then p1 and p1.isProfileQrCodeEnabled elseif p2 == enumsModule.ProfileActions.EditProfile then p1 and p1.areWebViewsSupported elseif fFlagProfilePlatformEnableCurrencyTransfer and p2 == enumsModule.ProfileActions.CurrencyTransfer then p1 and p1.canRenderTransferInProfile elseif fFlagProfilePlatformEnableTradeItemsModule and p2 == enumsModule.ProfileActions.TradeItems then p1 and p1.areWebViewsSupported elseif p2 == enumsModule.ProfileActions.Chat then p1 and p1.canSeeChatTab ~= false else true
+				context = if p1 == socialCommonModule.Enums.ContextualInfoTypes.OffNetworkFriendRequest then enumsModule.ContextualTypes.OffNetworkFriendRequest else nil,
+				supportedActions = cryoModule.List.filter(if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User) else cryoModule.Dictionary.values(enumsModule.ProfileActions), function(p3)
+					-- upvalues: enumsModule (copy), p2 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), fFlagProfilePlatformEnableTradeItemsModule (copy)
+					return if p3 == enumsModule.ProfileActions.QrCode then p2 and p2.isProfileQrCodeEnabled elseif p3 == enumsModule.ProfileActions.EditProfile then p2 and p2.areWebViewsSupported elseif fFlagProfilePlatformEnableCurrencyTransfer and p3 == enumsModule.ProfileActions.CurrencyTransfer then p2 and p2.canRenderTransferInProfile elseif fFlagProfilePlatformEnableTradeItemsModule and p3 == enumsModule.ProfileActions.TradeItems then p2 and p2.areWebViewsSupported elseif p3 == enumsModule.ProfileActions.Chat then p2 and p2.canSeeChatTab ~= false else true
 				end),
-				excludeContextualActions = if fFlagProfilePlatformCTAsRefactorModule and p1 and p1.isSelfView then true else nil,
+				excludeContextualActions = if fFlagProfilePlatformCTAsRefactorModule and p2 and p2.isSelfView then true else nil,
 				isActionsV2Supported = if fFlagProfilePlatformCTAsRefactorModule then true else nil
 			}
 		}
 		table.insert(list, { component = enumsModule.Components.ProfileBackground })
 		
-		if p1 and p1.areWebViewsSupported then
+		if p2 and p2.areWebViewsSupported then
 			table.insert(list, { component = enumsModule.Components.ViewFullProfile })
 		end
 	else
@@ -60,29 +60,29 @@ return function(p0, p1)
 		list = {
 			{
 				component = enumsModule.Components.UserProfileHeader,
-				context = if p0 == socialCommonModule.Enums.ContextualInfoTypes.MutualFriends then enumsModule.ContextualTypes.MutualFriends else nil
+				context = if p1 == socialCommonModule.Enums.ContextualInfoTypes.MutualFriends then enumsModule.ContextualTypes.MutualFriends else nil
 			},
 			{ component = enumsModule.Components.SocialLinks },
 			{ component = enumsModule.Components.About },
 			{ component = enumsModule.Components.CurrentlyWearing },
 			{ component = enumsModule.Components.ViewFullProfile },
-			if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then buildUserActionsComponentModule(p0, p1) else {
+			if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then buildUserActionsComponentModule(p1, p2) else {
 				component = enumsModule.Components.Actions,
-				context = if p0 == socialCommonModule.Enums.ContextualInfoTypes.OffNetworkFriendRequest then enumsModule.ContextualTypes.OffNetworkFriendRequest else nil,
+				context = if p1 == socialCommonModule.Enums.ContextualInfoTypes.OffNetworkFriendRequest then enumsModule.ContextualTypes.OffNetworkFriendRequest else nil,
 				supportedActions = if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User) else nil,
-				excludeContextualActions = if fFlagProfilePlatformCTAsRefactorModule and p1 and p1.isSelfView then true else nil,
+				excludeContextualActions = if fFlagProfilePlatformCTAsRefactorModule and p2 and p2.isSelfView then true else nil,
 				isActionsV2Supported = if fFlagProfilePlatformCTAsRefactorModule then true else nil
 			}
 		}
 		table.insert(list, { component = enumsModule.Components.ProfileBackground })
 	end
-	if fFlagProfilePlatformEnableFavoriteExperiencesModule and (if fFlagProfilePlatformEnableVRModule then p1 and p1.areWebViewsSupported else true) then
+	if fFlagProfilePlatformEnableFavoriteExperiencesModule and (if fFlagProfilePlatformEnableVRModule then p2 and p2.areWebViewsSupported else true) then
 		table.insert(list, { component = enumsModule.Components.FavoriteExperiences })
 	end
-	if fFlagProfilePlatformEnableInventory and (if fFlagProfilePlatformEnableVRModule then p1 and p1.areWebViewsSupported else true) then
+	if fFlagProfilePlatformEnableInventory and (if fFlagProfilePlatformEnableVRModule then p2 and p2.areWebViewsSupported else true) then
 		table.insert(list, { component = enumsModule.Components.Inventory })
 	end
-	if fFlagProfilePlatformEnableStore and (if fFlagProfilePlatformEnableVRModule then p1 and p1.areWebViewsSupported else true) then
+	if fFlagProfilePlatformEnableStore and (if fFlagProfilePlatformEnableVRModule then p2 and p2.areWebViewsSupported else true) then
 		table.insert(list, { component = enumsModule.Components.Store })
 	end
 	if fFlagExperiencesOnProfile then

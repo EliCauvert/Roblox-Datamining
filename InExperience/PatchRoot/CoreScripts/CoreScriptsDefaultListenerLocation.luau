@@ -23,11 +23,11 @@ local _ = function()
 	return if soundService.DefaultListenerLocation == Enum.ListenerLocation.None then false else soundService.DefaultListenerLocation == Enum.ListenerLocation.Camera or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Character or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice)))
 end
 
-local _ = function(p0, p1)
+local _ = function(p1, p2)
 	local wire = Instance.new("Wire")
-	wire.SourceInstance = p0
-	wire.TargetInstance = p1
-	wire.Parent = p0
+	wire.SourceInstance = p1
+	wire.TargetInstance = p2
+	wire.Parent = p1
 	
 	return wire
 end
@@ -44,14 +44,14 @@ local _ = function()
 	return audioDeviceOutput
 end
 
-local function SpawnCharacterListener(p2)
+local function SpawnCharacterListener(p1)
 	-- upvalues: SpawnCharacterListener (ref), soundService (ref), runService (ref)
-	local primaryPart = p2.PrimaryPart
+	local primaryPart = p1.PrimaryPart
 	
 	if not primaryPart then
-		p2:GetPropertyChangedSignal("PrimaryPart"):Once(function()
-			-- upvalues: SpawnCharacterListener (copy), p2 (ref)
-			SpawnCharacterListener(p2)
+		p1:GetPropertyChangedSignal("PrimaryPart"):Once(function()
+			-- upvalues: SpawnCharacterListener (copy), p1 (ref)
+			SpawnCharacterListener(p1)
 		end)
 		
 		return
@@ -103,12 +103,12 @@ local function SpawnCharacterListener(p2)
 	end)
 end
 
-local var4 = false
+local var1 = false
 
 local function Initialize()
-	-- upvalues: soundService (ref), voiceChatService (ref), var4 (write), localPlayer (ref), SpawnCharacterListener (ref)
+	-- upvalues: soundService (ref), voiceChatService (ref), var1 (write), localPlayer (ref), SpawnCharacterListener (ref)
 	if not (if soundService.DefaultListenerLocation == Enum.ListenerLocation.None then false else soundService.DefaultListenerLocation == Enum.ListenerLocation.Camera or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Character or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice)))) then return end
-	if var4 then return end
+	if var1 then return end
 	if soundService.DefaultListenerLocation == Enum.ListenerLocation.Character then
 		local character = localPlayer.Character
 		
@@ -124,12 +124,12 @@ local function Initialize()
 			audioDeviceOutput_1.Parent = soundService
 			audioDeviceOutput = audioDeviceOutput_1
 		end
-		local var22 = audioDeviceOutput
+		local var2 = audioDeviceOutput
 		local audioListener = Instance.new("AudioListener")
 		audioListener.Parent = workspace.CurrentCamera
 		local wire = Instance.new("Wire")
 		wire.SourceInstance = audioListener
-		wire.TargetInstance = var22
+		wire.TargetInstance = var2
 		wire.Parent = audioListener
 	elseif soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice) then
 		local audioListener = Instance.new("AudioListener")
@@ -141,7 +141,7 @@ local function Initialize()
 		wire.SourceInstance = audioListener
 		wire.TargetInstance = audioDeviceOutput
 	end
-	var4 = true
+	var1 = true
 end
 
 Initialize()

@@ -6,45 +6,45 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local useTextSizeOffset = require(parent.UIBlox).Core.Style.useTextSizeOffset
 local getGameTileMetadataFontModule = require(gameTile.Footer.getGameTileMetadataFont)
 
-local _ = function(p0, p1)
-	return p0 * (p1 or 1)
+local _ = function(p1, p2)
+	return p1 * (p2 or 1)
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), getGameTileMetadataFontModule (ref), reactModule (ref)
-	local var3 = useDesignTokens()
-	local var4 = useTextSizeOffset()
-	local var5 = useTokens()
-	local var6 = if p2.isUnifiedGameTile then var5.Size.Size_500 else var3.Size.Size_500
-	local var7 = if p2.isUnifiedGameTile then var5.Color.Content.Default else var3.Color.Content.Default
-	local var8 = getGameTileMetadataFontModule(p2.useLargerFont, var3, var5, if p2.isUnifiedGameTile then true else nil)
+	local var1 = useDesignTokens()
+	local var2 = useTextSizeOffset()
+	local var3 = useTokens()
+	local var4 = if p1.isUnifiedGameTile then var3.Size.Size_500 else var1.Size.Size_500
+	local var5 = if p1.isUnifiedGameTile then var3.Color.Content.Default else var1.Color.Content.Default
+	local var6 = getGameTileMetadataFontModule(p1.useLargerFont, var1, var3, if p1.isUnifiedGameTile then true else nil)
 	
 	return reactModule.createElement("Frame", {
 		ClipsDescendants = false,
 		BackgroundTransparency = 1,
-		LayoutOrder = p2.LayoutOrder,
-		Size = UDim2.new(if p2.shouldSizeToContentWidth then 0 else 1, 0, 0, (var6 + var4) * (p2.linesOfText or 1)),
-		AutomaticSize = if p2.shouldSizeToContentWidth then Enum.AutomaticSize.X else Enum.AutomaticSize.None,
-		Position = p2.Position,
-		AnchorPoint = p2.AnchorPoint
+		LayoutOrder = p1.LayoutOrder,
+		Size = UDim2.new(if p1.shouldSizeToContentWidth then 0 else 1, 0, 0, (var4 + var2) * (p1.linesOfText or 1)),
+		AutomaticSize = if p1.shouldSizeToContentWidth then Enum.AutomaticSize.X else Enum.AutomaticSize.None,
+		Position = p1.Position,
+		AnchorPoint = p1.AnchorPoint
 	}, {
 		Text = reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Text = p2.text,
-			Size = UDim2.new(if p2.shouldSizeToContentWidth then 0 else 1, 0, 0, (var8.FontSize + var4) * (p2.linesOfText or 1)),
-			AutomaticSize = if p2.shouldSizeToContentWidth then Enum.AutomaticSize.X else Enum.AutomaticSize.None,
+			Text = p1.text,
+			Size = UDim2.new(if p1.shouldSizeToContentWidth then 0 else 1, 0, 0, (var6.FontSize + var2) * (p1.linesOfText or 1)),
+			AutomaticSize = if p1.shouldSizeToContentWidth then Enum.AutomaticSize.X else Enum.AutomaticSize.None,
 			Position = UDim2.new(0, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0, 0.5),
-			TextSize = var8.FontSize,
-			Font = var8.Font,
-			TextTransparency = var7.Transparency,
-			TextColor3 = var7.Color3,
-			TextWrapped = p2.TextWrapped or false,
+			TextSize = var6.FontSize,
+			Font = var6.Font,
+			TextTransparency = var5.Transparency,
+			TextColor3 = var5.Color3,
+			TextWrapped = p1.TextWrapped or false,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = p2.TextYAlignment or Enum.TextYAlignment.Center,
-			ClipsDescendants = p2.ClipsDescendants,
-			RichText = p2.RichText
+			TextYAlignment = p1.TextYAlignment or Enum.TextYAlignment.Center,
+			ClipsDescendants = p1.ClipsDescendants,
+			RichText = p1.RichText
 		})
 	})
 end

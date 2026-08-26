@@ -20,19 +20,19 @@ local function getCommandKeys()
 	return t_1
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: getCommandKeys (ref), list (ref), expChatSharedModule (ref), initialCommandsModule (ref), t (ref)
-	list.map(getCommandKeys(), function(p1)
-		-- upvalues: p0 (ref)
-		p0.trie:insert(p1)
+	list.map(getCommandKeys(), function(p2)
+		-- upvalues: p1 (ref)
+		p1.trie:insert(p2)
 	end)
 	
 	for i, v in expChatSharedModule.Commands.getVirtualLocalEnabledCommands() do
 		for i_1, v_1 in v.alias do
-			p0.trie:insert(v_1)
+			p1.trie:insert(v_1)
 		end
 	end
 	initialCommandsModule(t)
 	
-	return p0.trie
+	return p1.trie
 end

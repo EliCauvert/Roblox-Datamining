@@ -11,8 +11,8 @@ local roactRodux = inGameMenuDependenciesModule.RoactRodux
 local t = inGameMenuDependenciesModule.t
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var7 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var8 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local images = UIBlox.App.ImageSet.Images
 local parent = script.Parent.Parent.Parent
@@ -38,7 +38,7 @@ local unblockPlayerModule = require(robloxGui.Modules.PlayerList.Thunks.UnblockP
 local trustAndSafetyModule = require(robloxGui.Modules.TrustAndSafety)
 local onBlockButtonActivatedModule = require(robloxGui.Modules.Settings.onBlockButtonActivated)
 local name = require(corePackagesService.Workspace.Packages.CoreScriptsInitializer).CoreLogger:new(script.Name)
-local var30 = settings():GetFVariable("InGameGlobalGuiInset") + 24
+local var3 = settings():GetFVariable("InGameGlobalGuiInset") + 24
 local playersPage = roact.PureComponent:extend("PlayersPage")
 playersPage.validateProps = t.strictInterface({
 	isMenuOpen = t.boolean,
@@ -56,9 +56,9 @@ playersPage.validateProps = t.strictInterface({
 	isCurrentZoneActive = t.optional(t.boolean)
 })
 
-function playersPage.init(p0)
+function playersPage.init(p1)
 	-- upvalues: playersService (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), roact (ref), fFlagLuaMenuPerfImprovementsModule (ref)
-	p0:setState({
+	p1:setState({
 		selectedPlayer = nil,
 		pageSizeY = 0,
 		voiceChatEnabled = false,
@@ -69,49 +69,49 @@ function playersPage.init(p0)
 		selectedPlayerPosition = Vector2.new(0, 0)
 	})
 	
-	function p0.setSelectedPlayerRef(p1)
-		-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (copy), p0 (ref), roact (copy)
+	function p0.setSelectedPlayerRef(p2)
+		-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (copy), p1 (ref), roact (copy)
 		if getFFlagIGMGamepadSelectionHistoryModule() then
-			p0:setState({ selectedPlayerRef = p1 })
+			p1:setState({ selectedPlayerRef = p2 })
 			
 			return
 		end
-		p0:setState({ selectedPlayerRef = p1, firstPlayerRef = roact.None })
+		p1:setState({ selectedPlayerRef = p2, firstPlayerRef = roact.None })
 	end
 	
 	function p0.setFirstPlayerRef(p2)
-		-- upvalues: p0 (ref)
-		p0:setState({ firstPlayerRef = p2 })
+		-- upvalues: p1 (ref)
+		p1:setState({ firstPlayerRef = p2 })
 	end
 	
 	if fFlagLuaMenuPerfImprovementsModule then
-		function p0.positionChanged(p3)
-			-- upvalues: p0 (ref)
-			p0:setState({ selectedPlayerPosition = p3.AbsolutePosition })
+		function p0.positionChanged(p2)
+			-- upvalues: p1 (ref)
+			p1:setState({ selectedPlayerPosition = p2.AbsolutePosition })
 		end
 		
-		function p0.toggleMoreActions(p4)
-			-- upvalues: playersService (copy), p0 (ref), roact (copy)
-			local var33 = playersService:GetPlayerByUserId(p4)
+		function p0.toggleMoreActions(p2)
+			-- upvalues: playersService (copy), p1 (ref), roact (copy)
+			local var4 = playersService:GetPlayerByUserId(p2)
 			
-			if p0.state.selectedPlayer == var33 then
-				p0:setState({ selectedPlayer = roact.None })
+			if p1.state.selectedPlayer == var4 then
+				p1:setState({ selectedPlayer = roact.None })
 				
 				return
 			end
-			p0:setState({ selectedPlayer = var33 })
+			p1:setState({ selectedPlayer = var4 })
 		end
 	end
 end
 
-local function sortPlayers(p5, p6)
-	return p5.Name:lower() < p6.Name:lower()
+local function sortPlayers(p1, p2)
+	return p1.Name:lower() < p2.Name:lower()
 end
 
-function playersPage.renderListEntries(p7, p8)
+function playersPage.renderListEntries(p1, p2)
 	-- upvalues: cryo (ref), sortPlayers (ref), roact (ref), fFlagLuaMenuPerfImprovementsModule (ref), playersService (ref), playerLabelV2Module (ref), voiceIndicatorModule (ref), dividerModule (ref)
-	local var34 = cryo.List.sort(p8, sortPlayers)
-	local var35 = 0
+	local var4 = cryo.List.sort(p2, sortPlayers)
+	local var5 = 0
 	local t = {
 		ListLayout = roact.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -119,148 +119,148 @@ function playersPage.renderListEntries(p7, p8)
 		})
 	}
 	
-	for i, v in pairs(var34) do
-		local var37 = if fFlagLuaMenuPerfImprovementsModule then v.UserId else i
-		local var38 = if fFlagLuaMenuPerfImprovementsModule then p7.positionChanged else function(p9)
-			-- upvalues: p7 (ref)
-			p7:setState({ selectedPlayerPosition = p9.AbsolutePosition })
+	for i, v in pairs(var4) do
+		local var6 = if fFlagLuaMenuPerfImprovementsModule then v.UserId else i
+		local var7 = if fFlagLuaMenuPerfImprovementsModule then p1.positionChanged else function(p3)
+			-- upvalues: p1 (ref)
+			p1:setState({ selectedPlayerPosition = p3.AbsolutePosition })
 		end
-		local var39 = if fFlagLuaMenuPerfImprovementsModule then p7.toggleMoreActions else function()
-			-- upvalues: p7 (ref), v (ref), roact (copy)
-			if p7.state.selectedPlayer == v then
-				p7:setState({ selectedPlayer = roact.None })
+		local var8 = if fFlagLuaMenuPerfImprovementsModule then p1.toggleMoreActions else function()
+			-- upvalues: p1 (ref), v (ref), roact (copy)
+			if p1.state.selectedPlayer == v then
+				p1:setState({ selectedPlayer = roact.None })
 				
 				return
 			end
-			p7:setState({ selectedPlayer = v })
+			p1:setState({ selectedPlayer = v })
 		end
 		local setSelectedPlayerRef = nil
 		
-		if i == 1 and not p7.state.selectedPlayer then
-			setSelectedPlayerRef = p7.setFirstPlayerRef
-		elseif p7.state.selectedPlayer == v then
-			setSelectedPlayerRef = p7.setSelectedPlayerRef
+		if i == 1 and not p1.state.selectedPlayer then
+			setSelectedPlayerRef = p1.setFirstPlayerRef
+		elseif p1.state.selectedPlayer == v then
+			setSelectedPlayerRef = p1.setSelectedPlayerRef
 		end
 		t["player_" .. var37] = roact.createElement(playerLabelV2Module, {
 			username = v.Name,
 			displayName = v.DisplayName,
 			userId = v.UserId,
 			isOnline = true,
-			isSelected = p7.state.selectedPlayer == v,
-			LayoutOrder = var35,
-			onActivated = var39,
-			[roact.Change.AbsolutePosition] = if p7.state.selectedPlayer == v then var38 else nil,
+			isSelected = p1.state.selectedPlayer == v,
+			LayoutOrder = var5,
+			onActivated = var8,
+			[roact.Change.AbsolutePosition] = if p1.state.selectedPlayer == v then var7 else nil,
 			[roact.Ref] = setSelectedPlayerRef
 		}, {
-			Icon = p7.props.voiceEnabled and (v ~= playersService.LocalPlayer and roact.createElement(voiceIndicatorModule, {
+			Icon = p1.props.voiceEnabled and (v ~= playersService.LocalPlayer and roact.createElement(voiceIndicatorModule, {
 				hideOnError = true,
 				userId = tostring(v.UserId),
 				iconStyle = if v ~= playersService.LocalPlayer then "MicLight" else "SpeakerLight",
-				onClicked = var39
+				onClicked = var8
 			}))
 		})
-		var35 += 1
+		var5 += 1
 		
-		if i < #var34 then
-			t["divider_" .. var37] = roact.createElement(dividerModule, { LayoutOrder = var35, Size = UDim2.new(1, -104, 0, 1) })
-			var35 += 1
+		if i < #var4 then
+			t["divider_" .. var37] = roact.createElement(dividerModule, { LayoutOrder = var5, Size = UDim2.new(1, -104, 0, 1) })
+			var5 += 1
 		end
 	end
 	return t
 end
 
-function playersPage.getMoreActions(p10, p11)
+function playersPage.getMoreActions(p3, p4)
 	-- upvalues: playersService (ref), images (ref), rbxAnalyticsService (ref), sendAnalyticsModule (ref), constantsModule_1 (ref), roact (ref), assetsModule (ref), guiService (ref), trustAndSafetyModule (ref), default (ref), name (ref), constantsModule (ref), blockingUtilityModule (ref), onBlockButtonActivatedModule (ref)
 	local t = {}
 	
-	if p10.state.selectedPlayer ~= nil then
-		local var41
-		if p10.state.selectedPlayer ~= playersService.LocalPlayer then
-			var41 = if p10.props.friends[p10.state.selectedPlayer.UserId] then p10.props.friends[p10.state.selectedPlayer.UserId] else Enum.FriendStatus.Unknown
-			local addFriend = p11.addFriend
+	if p3.state.selectedPlayer ~= nil then
+		local var9
+		if p3.state.selectedPlayer ~= playersService.LocalPlayer then
+			var9 = if p3.props.friends[p3.state.selectedPlayer.UserId] then p3.props.friends[p3.state.selectedPlayer.UserId] else Enum.FriendStatus.Unknown
+			local addFriend = p4.addFriend
 			local friendAdd = images["icons/actions/friends/friendAdd"]
 			
-			if var41 == Enum.FriendStatus.Friend then
-				addFriend = p11.unfriend
+			if var9 == Enum.FriendStatus.Friend then
+				addFriend = p4.unfriend
 				friendAdd = images["icons/actions/friends/friendRemove"]
-			elseif var41 == Enum.FriendStatus.FriendRequestSent then
-				addFriend = p11.cancelFriend
+			elseif var9 == Enum.FriendStatus.FriendRequestSent then
+				addFriend = p4.cancelFriend
 				friendAdd = images["icons/actions/friends/friendRemove"]
-			elseif var41 == Enum.FriendStatus.FriendRequestReceived then
-				addFriend = p11.acceptFriend
+			elseif var9 == Enum.FriendStatus.FriendRequestReceived then
+				addFriend = p4.acceptFriend
 			end
 			table.insert(t, {
 				text = addFriend,
 				icon = friendAdd,
 				onActivated = function()
-					-- upvalues: p10 (ref), var41 (write), playersService (copy), rbxAnalyticsService (copy), sendAnalyticsModule (copy), constantsModule_1 (copy), roact (copy)
-					local selectedPlayer = p10.state.selectedPlayer
+					-- upvalues: p3 (ref), var9 (write), playersService (copy), rbxAnalyticsService (copy), sendAnalyticsModule (copy), constantsModule_1 (copy), roact (copy)
+					local selectedPlayer = p3.state.selectedPlayer
 					
-					if var41 == Enum.FriendStatus.Friend or var41 == Enum.FriendStatus.FriendRequestSent then
+					if var9 == Enum.FriendStatus.Friend or var9 == Enum.FriendStatus.FriendRequestSent then
 						playersService.LocalPlayer:RevokeFriendship(selectedPlayer)
 					else
 						playersService.LocalPlayer:RequestFriendship(selectedPlayer)
 						rbxAnalyticsService:ReportCounter("PlayersMenu-RequestFriendship")
 						sendAnalyticsModule(constantsModule_1.AnalyticsMenuActionName, constantsModule_1.AnalyticsRequestFriendName, {})
 					end
-					p10:setState({ selectedPlayer = roact.None })
+					p3:setState({ selectedPlayer = roact.None })
 				end
 			})
 		end
 		table.insert(t, {
-			text = p11.viewAvatar,
+			text = p4.viewAvatar,
 			icon = assetsModule.Images.ViewAvatar,
 			onActivated = function()
-				-- upvalues: guiService (copy), p10 (ref), roact (copy), sendAnalyticsModule (copy), constantsModule_1 (copy)
-				guiService:InspectPlayerFromUserIdWithCtx(p10.state.selectedPlayer.UserId, "escapeMenu")
-				p10:setState({ selectedPlayer = roact.None })
-				p10.props.closeMenu()
+				-- upvalues: guiService (copy), p3 (ref), roact (copy), sendAnalyticsModule (copy), constantsModule_1 (copy)
+				guiService:InspectPlayerFromUserIdWithCtx(p3.state.selectedPlayer.UserId, "escapeMenu")
+				p3:setState({ selectedPlayer = roact.None })
+				p3.props.closeMenu()
 				sendAnalyticsModule(constantsModule_1.AnalyticsMenuActionName, constantsModule_1.AnalyticsExamineAvatarName, {})
 			end
 		})
 		
-		if p10.state.selectedPlayer ~= playersService.LocalPlayer then
+		if p3.state.selectedPlayer ~= playersService.LocalPlayer then
 			table.insert(t, {
-				text = p11.reportAbuse,
+				text = p4.reportAbuse,
 				icon = images["icons/actions/feedback"],
 				onActivated = function()
-					-- upvalues: p10 (ref), trustAndSafetyModule (copy), constantsModule_1 (copy), roact (copy)
-					trustAndSafetyModule.openReportDialogForPlayer(p10.state.selectedPlayer, constantsModule_1.AnalyticsMenuActionName)
-					p10:setState({ selectedPlayer = roact.None })
+					-- upvalues: p3 (ref), trustAndSafetyModule (copy), constantsModule_1 (copy), roact (copy)
+					trustAndSafetyModule.openReportDialogForPlayer(p3.state.selectedPlayer, constantsModule_1.AnalyticsMenuActionName)
+					p3:setState({ selectedPlayer = roact.None })
 				end
 			})
 			
-			if p10.props.voiceEnabled then
-				var41 = default.participants[tostring(p10.state.selectedPlayer.UserId)]
+			if p3.props.voiceEnabled then
+				var9 = default.participants[tostring(p3.state.selectedPlayer.UserId)]
 				
-				if var41 then
-					local isMutedLocally = var41.isMutedLocally
+				if var9 then
+					local isMutedLocally = var9.isMutedLocally
 					table.insert(t, {
 						text = if isMutedLocally then "Unmute Player" else "Mute Player",
 						icon = default:GetIcon(if isMutedLocally then "Unmute" else "Mute", "Misc"),
 						onActivated = function()
-							-- upvalues: p10 (ref), name (copy), default (copy), constantsModule (copy), roact (copy)
-							local selectedPlayer = p10.state.selectedPlayer
+							-- upvalues: p3 (ref), name (copy), default (copy), constantsModule (copy), roact (copy)
+							local selectedPlayer = p3.state.selectedPlayer
 							name:debug("Muting Player {}", selectedPlayer.UserId)
 							default:ToggleMutePlayer(selectedPlayer.UserId, constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
-							p10:setState({ selectedPlayer = roact.None })
+							p3:setState({ selectedPlayer = roact.None })
 						end
 					})
 				end
 			end
-			var41 = p10.state.selectedPlayer
-			local userId = blockingUtilityModule:IsPlayerBlockedByUserId(var41.UserId)
+			var9 = p3.state.selectedPlayer
+			local userId = blockingUtilityModule:IsPlayerBlockedByUserId(var9.UserId)
 			table.insert(t, {
-				text = if userId then p11.unblockPlayer else p11.blockPlayer,
+				text = if userId then p4.unblockPlayer else p4.blockPlayer,
 				icon = images["icons/actions/block"],
 				onActivated = function()
-					-- upvalues: userId (ref), p10 (ref), var41 (ref), onBlockButtonActivatedModule (copy), roact (copy)
+					-- upvalues: userId (ref), p3 (ref), var9 (ref), onBlockButtonActivatedModule (copy), roact (copy)
 					if userId then
-						p10.props.unblockPlayer(var41)
+						p3.props.unblockPlayer(var9)
 					else
-						onBlockButtonActivatedModule(var41, nil, p10.__componentName)
+						onBlockButtonActivatedModule(var9, nil, p3.__componentName)
 					end
-					p10:setState({ selectedPlayer = roact.None })
+					p3:setState({ selectedPlayer = roact.None })
 				end
 			})
 		end
@@ -268,139 +268,139 @@ function playersPage.getMoreActions(p10, p11)
 	return t
 end
 
-function playersPage.renderFocusHandler(p12, p13)
+function playersPage.renderFocusHandler(p3, p4)
 	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), constantsModule_1 (ref), roact (ref), focusHandlerModule (ref), guiService (ref)
-	local var43 = nil
+	local var9 = nil
 	
 	if getFFlagIGMGamepadSelectionHistoryModule() then
-		var43 = if p12.props.currentPage ~= constantsModule_1.MainPagePageKey then not p12.props.isCurrentZoneActive else true
+		var9 = if p3.props.currentPage ~= constantsModule_1.MainPagePageKey then not p3.props.isCurrentZoneActive else true
 	end
 	local createElement = roact.createElement
 	local t = {}
-	local var45 = p13
+	local var10 = p4
 	
-	if var45 then
-		var45 = false
+	if var10 then
+		var10 = false
 		
-		if p12.props.currentPage == "Players" then
-			var45 = p12.props.isMenuOpen
+		if p3.props.currentPage == "Players" then
+			var10 = p3.props.isMenuOpen
 			
-			if var45 then
-				var45 = not p12.props.isReportDialogOpen
+			if var10 then
+				var10 = not p3.props.isReportDialogOpen
 				
-				if var45 then
-					var45 = not p12.state.selectedPlayer
+				if var10 then
+					var10 = not p3.state.selectedPlayer
 					
-					if var45 then
-						var45 = (p12.state.selectedPlayerRef or p12.state.firstPlayerRef) ~= nil
+					if var10 then
+						var10 = (p3.state.selectedPlayerRef or p3.state.firstPlayerRef) ~= nil
 					end
 				end
 			end
 		end
 	end
-	t.isFocused = var45
-	t.shouldForgetPreviousSelection = var43
-	t.didFocus = if getFFlagIGMGamepadSelectionHistoryModule() then function(p14)
-		-- upvalues: guiService (copy), p12 (ref)
-		guiService.SelectedCoreObject = p14 or p12.state.firstPlayerRef
+	t.isFocused = var10
+	t.shouldForgetPreviousSelection = var9
+	t.didFocus = if getFFlagIGMGamepadSelectionHistoryModule() then function(p5)
+		-- upvalues: guiService (copy), p3 (ref)
+		guiService.SelectedCoreObject = p5 or p3.state.firstPlayerRef
 	end else function()
-		-- upvalues: guiService (copy), p12 (ref)
-		guiService.SelectedCoreObject = p12.state.selectedPlayerRef or p12.state.firstPlayerRef
+		-- upvalues: guiService (copy), p3 (ref)
+		guiService.SelectedCoreObject = p3.state.selectedPlayerRef or p3.state.firstPlayerRef
 	end
 	
 	return createElement(focusHandlerModule, t)
 end
 
-function playersPage.renderWithLocalizedAndSelectionCursor(p15, p16, p17)
-	-- upvalues: var30 (ref), roact (ref), playerContextualMenuModule (ref), pageModule (ref), default (ref), constantsModule (ref), var8 (ref), withFoundationOrUIBloxStyle (ref), barOnTopScrollingFrameModule (ref), pageNavigationWatcherModule (ref), playersService (ref)
-	local var46 = 0
-	local var47 = 0
+function playersPage.renderWithLocalizedAndSelectionCursor(p3, p4, p5)
+	-- upvalues: var3 (ref), roact (ref), playerContextualMenuModule (ref), pageModule (ref), default (ref), constantsModule (ref), var2 (ref), withFoundationOrUIBloxStyle (ref), barOnTopScrollingFrameModule (ref), pageNavigationWatcherModule (ref), playersService (ref)
+	local var9 = 0
+	local var10 = 0
 	local t = {}
 	
-	if p15.state.selectedPlayer ~= nil then
-		t = p15:getMoreActions(p16)
-		local var49 = #t * 56
-		local x = p15.props.screenSize.X
-		local y = p15.props.screenSize.Y
-		var46 = if p15.state.selectedPlayerPosition.Y + var49 + var30 < y then p15.state.selectedPlayerPosition.Y else y - var49 - var30
-		var47 = if p15.state.selectedPlayerPosition.X + 400 + 20 + 352 + 24 <= x then p15.state.selectedPlayerPosition.X + 400 + 20 else x - 352 - 24
+	if p3.state.selectedPlayer ~= nil then
+		t = p3:getMoreActions(p4)
+		local var11 = #t * 56
+		local x = p3.props.screenSize.X
+		local y = p3.props.screenSize.Y
+		var9 = if p3.state.selectedPlayerPosition.Y + var11 + var3 < y then p3.state.selectedPlayerPosition.Y else y - var11 - var3
+		var10 = if p3.state.selectedPlayerPosition.X + 400 + 20 + 352 + 24 <= x then p3.state.selectedPlayerPosition.X + 400 + 20 else x - 352 - 24
 	end
 	local _ = nil
-	local isCurrentZoneActive = p15.props.isGamepadLastInput and (not p15.props.isRespawnDialogOpen and p15.props.isCurrentZoneActive)
-	local var51 = p15.state.selectedPlayer and roact.createElement(playerContextualMenuModule, {
+	local isCurrentZoneActive = p3.props.isGamepadLastInput and (not p3.props.isRespawnDialogOpen and p3.props.isCurrentZoneActive)
+	local var12 = p3.state.selectedPlayer and roact.createElement(playerContextualMenuModule, {
 		actionWidth = 352,
 		moreActions = t,
-		xOffset = var47,
-		yOffset = var46,
+		xOffset = var10,
+		yOffset = var9,
 		canCaptureFocus = isCurrentZoneActive,
 		onClose = function()
-			-- upvalues: p15 (ref), roact (copy)
-			p15:setState({ selectedPlayer = roact.None })
+			-- upvalues: p3 (ref), roact (copy)
+			p3:setState({ selectedPlayer = roact.None })
 		end
 	}) or nil
 	
 	return roact.createElement(pageModule, {
-		pageTitle = p15.props.pageTitle,
-		titleChildren = p15.props.voiceEnabled and roact.createElement("ImageButton", {
+		pageTitle = p3.props.pageTitle,
+		titleChildren = p3.props.voiceEnabled and roact.createElement("ImageButton", {
 			Size = UDim2.fromOffset(36, 36),
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(1, 0.5),
 			BorderSizePixel = 0,
 			Position = UDim2.new(1, 4, 0.5, 0),
-			Image = default:GetIcon(if p15.state.allMuted then "UnmuteAll" else "MuteAll", "Misc"),
+			Image = default:GetIcon(if p3.state.allMuted then "UnmuteAll" else "MuteAll", "Misc"),
 			[roact.Event.Activated] = function()
-				-- upvalues: default (copy), p15 (ref), constantsModule (copy)
-				default:MuteAll(not p15.state.allMuted, constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
-				p15:setState({ allMuted = not p15.state.allMuted })
+				-- upvalues: default (copy), p3 (ref), constantsModule (copy)
+				default:MuteAll(not p3.state.allMuted, constantsModule.VOICE_CONTEXT_TYPE.IN_GAME_MENU)
+				p3:setState({ allMuted = not p3.state.allMuted })
 			end,
-			SelectionImageObject = p17(var8.RoundedRect)
+			SelectionImageObject = p5(var2.RoundedRect)
 		})
 	}, {
 		PlayerListContent = withFoundationOrUIBloxStyle(function(_)
 			return {}
 		end, function(_)
-			-- upvalues: roact (copy), p15 (ref), barOnTopScrollingFrameModule (copy), var51 (write)
+			-- upvalues: roact (copy), p3 (ref), barOnTopScrollingFrameModule (copy), var12 (write)
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
-				[roact.Change.AbsoluteSize] = function(p18)
-					-- upvalues: p15 (copy)
-					p15:setState({ pageSizeY = p18.AbsoluteSize.Y })
+				[roact.Change.AbsoluteSize] = function(p6)
+					-- upvalues: p3 (copy)
+					p3:setState({ pageSizeY = p6.AbsoluteSize.Y })
 				end
 			}, {
 				PlayerList = roact.createElement(barOnTopScrollingFrameModule, {
 					Position = UDim2.new(0, 0, 0, 0),
 					Size = UDim2.new(1, 0, 1, 0),
-					CanvasSize = UDim2.new(1, 0, 0, #p15.state.players * 72),
-					ScrollingEnabled = p15.state.selectedPlayer == nil
-				}, p15:renderListEntries(p15.state.players)),
-				MoreActionsMenu = var51
+					CanvasSize = UDim2.new(1, 0, 0, #p3.state.players * 72),
+					ScrollingEnabled = p3.state.selectedPlayer == nil
+				}, p3:renderListEntries(p3.state.players)),
+				MoreActionsMenu = var12
 			})
 		end),
-		FocusHandler = p15:renderFocusHandler(isCurrentZoneActive),
+		FocusHandler = p3:renderFocusHandler(isCurrentZoneActive),
 		Watcher = roact.createElement(pageNavigationWatcherModule, {
 			desiredPage = "Players",
 			onNavigateTo = function()
-				-- upvalues: p15 (ref), playersService (copy)
-				p15:setState({ players = playersService:GetPlayers() })
+				-- upvalues: p3 (ref), playersService (copy)
+				p3:setState({ players = playersService:GetPlayers() })
 			end,
 			onNavigateAway = function()
-				-- upvalues: p15 (ref), roact (copy)
-				p15:setState({ selectedPlayer = roact.None })
+				-- upvalues: p3 (ref), roact (copy)
+				p3:setState({ selectedPlayer = roact.None })
 			end
 		})
 	})
 end
 
-function playersPage.renderWithLocalized(p19, p20)
-	-- upvalues: var7 (ref)
-	return var7(function(p21)
-		-- upvalues: p19 (ref), p20 (ref)
-		return p19:renderWithLocalizedAndSelectionCursor(p20, p21)
+function playersPage.renderWithLocalized(p3, p4)
+	-- upvalues: var1 (ref)
+	return var1(function(p5)
+		-- upvalues: p3 (ref), p4 (ref)
+		return p3:renderWithLocalizedAndSelectionCursor(p4, p5)
 	end)
 end
 
-function playersPage.render(p22)
+function playersPage.render(p3)
 	-- upvalues: withLocalizationModule (ref)
 	return withLocalizationModule({
 		addFriend = "CoreScripts.InGameMenu.Actions.AddFriend",
@@ -411,53 +411,53 @@ function playersPage.render(p22)
 		reportAbuse = "CoreScripts.InGameMenu.Actions.ReportAbuse",
 		blockPlayer = "CoreScripts.InGameMenu.Actions.BlockPlayer",
 		unblockPlayer = "CoreScripts.InGameMenu.Actions.UnblockPlayer"
-	})(function(p23)
-		-- upvalues: p22 (ref)
-		return p22:renderWithLocalized(p23)
+	})(function(p4)
+		-- upvalues: p3 (ref)
+		return p3:renderWithLocalized(p4)
 	end)
 end
 
-function playersPage.didUpdate(p24, p25, _)
+function playersPage.didUpdate(p3, p4, _)
 	-- upvalues: playersService (ref), roact (ref)
-	if p24.props.isMenuOpen and not p25.isMenuOpen then
-		p24:setState({
+	if p3.props.isMenuOpen and not p4.isMenuOpen then
+		p3:setState({
 			players = playersService:GetPlayers(),
 			selectedPlayer = roact.None
 		})
 	end
-	local selectedPlayerRef = p24.state.selectedPlayerRef
+	local selectedPlayerRef = p3.state.selectedPlayerRef
 	
-	if selectedPlayerRef and p24.state.selectedPlayerPosition ~= selectedPlayerRef.AbsolutePosition then
-		p24:setState({
+	if selectedPlayerRef and p3.state.selectedPlayerPosition ~= selectedPlayerRef.AbsolutePosition then
+		p3:setState({
 			selectedPlayerPosition = selectedPlayerRef.AbsolutePosition
 		})
 	end
 end
 
-return roactRodux.UNSTABLE_connect2(function(p26, _)
+return roactRodux.UNSTABLE_connect2(function(p3, _)
 	-- upvalues: constantsModule_1 (ref)
 	return {
-		isMenuOpen = p26.isMenuOpen,
-		voiceEnabled = p26.voiceState.voiceEnabled,
-		friends = p26.friends,
-		inspectMenuEnabled = p26.displayOptions.inspectMenuEnabled,
-		screenSize = p26.screenSize,
-		currentPage = p26.menuPage,
-		isRespawnDialogOpen = p26.respawn.dialogOpen,
-		isReportDialogOpen = p26.report.dialogOpen or p26.report.reportSentOpen,
-		isGamepadLastInput = p26.displayOptions.inputType == constantsModule_1.InputType.Gamepad,
-		isCurrentZoneActive = p26.currentZone == 1
+		isMenuOpen = p3.isMenuOpen,
+		voiceEnabled = p3.voiceState.voiceEnabled,
+		friends = p3.friends,
+		inspectMenuEnabled = p3.displayOptions.inspectMenuEnabled,
+		screenSize = p3.screenSize,
+		currentPage = p3.menuPage,
+		isRespawnDialogOpen = p3.respawn.dialogOpen,
+		isReportDialogOpen = p3.report.dialogOpen or p3.report.reportSentOpen,
+		isGamepadLastInput = p3.displayOptions.inputType == constantsModule_1.InputType.Gamepad,
+		isCurrentZoneActive = p3.currentZone == 1
 	}
-end, function(p27)
+end, function(p3)
 	-- upvalues: closeMenuModule (ref), unblockPlayerModule (ref)
 	return {
 		closeMenu = function()
-			-- upvalues: p27 (ref), closeMenuModule (copy)
-			p27(closeMenuModule)
+			-- upvalues: p3 (ref), closeMenuModule (copy)
+			p3(closeMenuModule)
 		end,
-		unblockPlayer = function(p28)
-			-- upvalues: p27 (ref), unblockPlayerModule (copy)
-			return p27(unblockPlayerModule(p28))
+		unblockPlayer = function(p4)
+			-- upvalues: p3 (ref), unblockPlayerModule (copy)
+			return p3(unblockPlayerModule(p4))
 		end
 	}
 end)(playersPage)

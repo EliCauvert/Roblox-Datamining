@@ -14,28 +14,28 @@ return {
 		-- upvalues: getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), getFFlagUGCValidateAQEmoteDurationModule (ref)
 		return getEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and getFFlagUGCValidateAQEmoteDurationModule()
 	end,
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: getAQEmotePartDataModule (ref), getFStringUGCValidateCurveAnimationMinLengthModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), errorSourceStringsModule (ref)
-		local var7 = getAQEmotePartDataModule(p1.aqsSummaryData and p1.aqsSummaryData.Measure_Animation_Duration)
+		local var1 = getAQEmotePartDataModule(p2.aqsSummaryData and p2.aqsSummaryData.Measure_Animation_Duration)
 		
-		if not var7 or var7.duration_seconds == nil then
+		if not var1 or var1.duration_seconds == nil then
 			error("Can't find Measure_Animation_Duration.duration_seconds")
 		end
-		local durationSeconds = tonumber(var7.duration_seconds) or 0
-		local var9 = getFStringUGCValidateCurveAnimationMinLengthModule.asNumber()
-		local var10 = getFStringUGCValidationMaxAnimationLengthModule.asNumber()
+		local durationSeconds = tonumber(var1.duration_seconds) or 0
+		local var2 = getFStringUGCValidateCurveAnimationMinLengthModule.asNumber()
+		local var3 = getFStringUGCValidationMaxAnimationLengthModule.asNumber()
 		
-		if durationSeconds <= var9 then
-			p0:fail(errorSourceStringsModule.Keys.AQSFail_AnimationTooShort, {
+		if durationSeconds <= var2 then
+			p1:fail(errorSourceStringsModule.Keys.AQSFail_AnimationTooShort, {
 				duration = tostring(durationSeconds),
-				minLength = tostring(var9)
+				minLength = tostring(var2)
 			})
 			
 			return
-		elseif var10 < durationSeconds then
-			p0:fail(errorSourceStringsModule.Keys.AQSFail_AnimationTooLong, {
+		elseif var3 < durationSeconds then
+			p1:fail(errorSourceStringsModule.Keys.AQSFail_AnimationTooLong, {
 				duration = tostring(durationSeconds),
-				maxLength = tostring(var10)
+				maxLength = tostring(var3)
 			})
 		end
 	end

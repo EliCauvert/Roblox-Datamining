@@ -9,92 +9,92 @@ local loggerModule = require(crossExperience.Logger)
 local _ = require(crossExperience.Types)
 local fFlagFixCrossExperienceVoiceExecutePrint = require(crossExperience.dependencies).SharedFlags.FFlagFixCrossExperienceVoiceExecutePrint
 
-local var7 = function() end
+local var1 = function() end
 
-local var8 = function(p0, p1, p2, p3)
+local var2 = function(p1, p2, p3, p4)
 	-- upvalues: experienceService (ref), fFlagFixCrossExperienceVoiceExecutePrint (ref), loggerModule (ref)
 	local ok, status = pcall(function()
-		-- upvalues: experienceService (copy), p0 (ref), p1 (ref), p2 (ref), fFlagFixCrossExperienceVoiceExecutePrint (copy), loggerModule (copy), p3 (ref)
-		experienceService:ExecuteCrossExperienceCall(p0, p1, function(p4)
-			-- upvalues: p2 (copy)
-			if p2 then
-				p2(p4)
+		-- upvalues: experienceService (copy), p1 (ref), p2 (ref), p3 (ref), fFlagFixCrossExperienceVoiceExecutePrint (copy), loggerModule (copy), p4 (ref)
+		experienceService:ExecuteCrossExperienceCall(p1, p2, function(p5)
+			-- upvalues: p3 (copy)
+			if p3 then
+				p3(p5)
 			end
 		end, function(p5)
-			-- upvalues: fFlagFixCrossExperienceVoiceExecutePrint (copy), loggerModule (copy), p3 (copy)
+			-- upvalues: fFlagFixCrossExperienceVoiceExecutePrint (copy), loggerModule (copy), p4 (copy)
 			if fFlagFixCrossExperienceVoiceExecutePrint then
 				loggerModule:warning("Error executing call: {}", p5)
 			else
 				print("[CrossExperience] Error executing call", p5)
 			end
-			if p3 then
-				p3(p5)
+			if p4 then
+				p4(p5)
 			end
 		end)
 	end)
 	
 	if not ok then
 		if fFlagFixCrossExperienceVoiceExecutePrint then
-			loggerModule:warning("Error executing call pcall: {} {}", p0, status)
+			loggerModule:warning("Error executing call pcall: {} {}", p1, status)
 		else
-			print("[CrossExperience] Error executing call pcall", p0, status)
+			print("[CrossExperience] Error executing call pcall", p1, status)
 		end
-		if p3 then
-			p3("[CrossExperience] Error executing call pcall")
+		if p4 then
+			p4("[CrossExperience] Error executing call pcall")
 		end
 	end
 end
 
-local var9 = function(p6, p7, p8, p9)
-	-- upvalues: getMemStorageKeyModule (ref), constantsModule (ref), logEvent (ref), eventNamesModule (ref), var8 (ref)
+local var3 = function(p1, p2, p3, p4)
+	-- upvalues: getMemStorageKeyModule (ref), constantsModule (ref), logEvent (ref), eventNamesModule (ref), var2 (ref)
 	logEvent(eventNamesModule.NotifyObserver, {
-		eventName = p6.NOTIFY,
+		eventName = p1.NOTIFY,
 		clientTimeStamp = os.time(),
 		cevJoinAttemptId = getMemStorageKeyModule(constantsModule.CEV_JOIN_ATTEMPT_ID_KEY)
 	})
-	var8(p6.NOTIFY, p7, p8, p9)
+	var2(p1.NOTIFY, p2, p3, p4)
 end
 
-local var10 = function(p10, p11)
-	-- upvalues: var9 (ref), var7 (ref)
-	var9(p10, p11, var7, var7)
+local var4 = function(p1, p2)
+	-- upvalues: var3 (ref), var1 (ref)
+	var3(p1, p2, var1, var1)
 end
 
-local var11 = function(p12, p13, p14, _, p15)
-	-- upvalues: httpService (ref), logEvent (ref), eventNamesModule (ref), getMemStorageKeyModule (ref), constantsModule (ref), var8 (ref)
-	local var13 = httpService:GenerateGUID(false)
+local var5 = function(p1, p2, p3, _, p4)
+	-- upvalues: httpService (ref), logEvent (ref), eventNamesModule (ref), getMemStorageKeyModule (ref), constantsModule (ref), var2 (ref)
+	local var6 = httpService:GenerateGUID(false)
 	logEvent(eventNamesModule.AddObserver, {
-		eventName = p13.ADD_OBSERVER,
+		eventName = p2.ADD_OBSERVER,
 		clientTimeStamp = os.time(),
 		cevJoinAttemptId = getMemStorageKeyModule(constantsModule.CEV_JOIN_ATTEMPT_ID_KEY)
 	})
-	var8(p13.ADD_OBSERVER, { observerId = var13, experienceType = p12 }, p14, p15)
+	var2(p2.ADD_OBSERVER, { observerId = var6, experienceType = p1 }, p3, p4)
 	
-	return var13
+	return var6
 end
 
-local var12 = function(p16, p17, p18, p19, p20)
-	-- upvalues: logEvent (ref), eventNamesModule (ref), getMemStorageKeyModule (ref), constantsModule (ref), var8 (ref)
+local var6 = function(p1, p2, p3, p4, p5)
+	-- upvalues: logEvent (ref), eventNamesModule (ref), getMemStorageKeyModule (ref), constantsModule (ref), var2 (ref)
 	logEvent(eventNamesModule.RemoveObserver, {
-		eventName = p17.REMOVE_OBSERVER,
+		eventName = p2.REMOVE_OBSERVER,
 		clientTimeStamp = os.time(),
 		cevJoinAttemptId = getMemStorageKeyModule(constantsModule.CEV_JOIN_ATTEMPT_ID_KEY)
 	})
-	var8(p17.REMOVE_OBSERVER, { observerId = p18, experienceType = p16 }, p19, p20)
+	var2(p2.REMOVE_OBSERVER, { observerId = p3, experienceType = p1 }, p4, p5)
 end
 
 return {
-	execute = var8,
-	notify = var10,
-	notifyWithCallbacks = var9,
-	addObserver = function(p21, p22, p23)
-		-- upvalues: var11 (ref), var7 (ref)
-		return var11(p21, p22, p23, var7, var7)
+	execute = var2,
+	notify = var4,
+	notifyWithCallbacks = var3,
+	addObserver = function(p1, p2, p3)
+		-- upvalues: var5 (ref), var1 (ref)
+		return var5(p1, p2, p3, var1, var1)
 	end,
-	addObserverWithCallbacks = var11,
-	removeObserver = function(p24, p25, p26)
-		-- upvalues: var12 (ref), var7 (ref)
-		return var12(p24, p25, p26, var7, var7)
+	addObserverWithCallbacks = var5,
+	removeObserver = function(p1, p2, p3)
+		-- upvalues: var6 (ref), var1 (ref)
+		return var6(p1, p2, p3, var1, var1)
 	end,
-	removeObserverWithCallbacks = var12
+	removeObserverWithCallbacks = var6
 }

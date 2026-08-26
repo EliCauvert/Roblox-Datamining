@@ -19,24 +19,24 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 local markdownViewer = markdownModule.Components.MarkdownViewer
 
-local function AgentPlanSheet(p0)
+local function AgentPlanSheet(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), foundationModule (ref), reactModule (ref), getMarkdownRendererPropsModule (ref), sheet (ref), text (ref), view (ref), markdownViewer (ref)
-	local var10 = if fFlagBuildLocalization then useLocalization({ overview = localizationStringsModule.AGENT_PLAN_OVERVIEW }) else nil
-	local var11 = foundationModule.Hooks.useTokens()
-	local default = var11.Color.Content.Default
+	local var1 = if fFlagBuildLocalization then useLocalization({ overview = localizationStringsModule.AGENT_PLAN_OVERVIEW }) else nil
+	local var2 = foundationModule.Hooks.useTokens()
+	local default = var2.Color.Content.Default
 	
 	return reactModule.createElement(sheet.Root, {
 		defaultSnapPointIndex = 1,
-		isOpen = p0.isOpen,
-		onClose = p0.onClose,
+		isOpen = p1.isOpen,
+		onClose = p1.onClose,
 		snapPoints = { 0.5, 1 },
-		testId = p0.testId
+		testId = p1.testId
 	}, {
 		Header = reactModule.createElement(sheet.Header, nil, {
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y margin-x-small padding-y-small text-heading-small text-wrap text-align-x-left content-emphasis",
-				Text = p0.title
+				Text = p1.title
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, nil, {
@@ -46,19 +46,19 @@ local function AgentPlanSheet(p0)
 				Overview = reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-default",
-					Text = if fFlagBuildLocalization then var10.overview else localizationStringsModule.AGENT_PLAN_OVERVIEW
+					Text = if fFlagBuildLocalization then var1.overview else localizationStringsModule.AGENT_PLAN_OVERVIEW
 				}),
 				Body = reactModule.createElement(markdownViewer, {
-					Markdown = p0.textContent,
+					Markdown = p1.textContent,
 					WrapperProps = {
 						LayoutOrder = 2,
 						tag = "size-full-0 auto-y text-body-medium content-emphasis",
-						testId = `{p0.testId}-text-content`
+						testId = `{p1.testId}-text-content`
 					},
 					MarkdownRendererProps = reactModule.useMemo(function()
-						-- upvalues: getMarkdownRendererPropsModule (copy), var11 (ref), default (ref)
-						return getMarkdownRendererPropsModule(var11, default)
-					end, { var11, default })
+						-- upvalues: getMarkdownRendererPropsModule (copy), var2 (ref), default (ref)
+						return getMarkdownRendererPropsModule(var2, default)
+					end, { var2, default })
 				})
 			})
 		})
@@ -67,12 +67,12 @@ end
 
 return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), agentCardModule (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), AgentPlanSheet (ref)
-	local var12 = if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		build = localizationStringsModule.AGENT_PLAN_BUILD,
 		view = localizationStringsModule.AGENT_PLAN_VIEW
 	}) else nil
 	local testId = p1.testId or "agent-plan-card"
-	local var14, var15 = reactModule.useState(false)
+	local var2, var3 = reactModule.useState(false)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Card = reactModule.createElement(agentCardModule, {
@@ -84,7 +84,7 @@ return function(p1)
 			Actions = reactModule.createElement(agentCardActionsModule, nil, {
 				Build = reactModule.createElement(button, {
 					LayoutOrder = 1,
-					text = if fFlagBuildLocalization then var12.build else localizationStringsModule.AGENT_PLAN_BUILD,
+					text = if fFlagBuildLocalization then var1.build else localizationStringsModule.AGENT_PLAN_BUILD,
 					size = inputSize.Small,
 					variant = buttonVariant.Emphasis,
 					fillBehavior = fillBehavior.Fill,
@@ -100,13 +100,13 @@ return function(p1)
 				}),
 				View = reactModule.createElement(button, {
 					LayoutOrder = 2,
-					text = if fFlagBuildLocalization then var12.view else localizationStringsModule.AGENT_PLAN_VIEW,
+					text = if fFlagBuildLocalization then var1.view else localizationStringsModule.AGENT_PLAN_VIEW,
 					size = inputSize.Small,
 					variant = buttonVariant.Standard,
 					fillBehavior = fillBehavior.Fill,
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: var15 (ref)
-						var15(true)
+						-- upvalues: var3 (ref)
+						var3(true)
 					end, {}),
 					testId = `{testId}-view-button`
 				})
@@ -115,10 +115,10 @@ return function(p1)
 		Sheet = reactModule.createElement(AgentPlanSheet, {
 			title = p1.title,
 			textContent = p1.textContent,
-			isOpen = var14,
+			isOpen = var2,
 			onClose = reactModule.useCallback(function()
-				-- upvalues: var15 (ref)
-				var15(false)
+				-- upvalues: var3 (ref)
+				var3(false)
 			end, {}),
 			testId = `{testId}-sheet`
 		})

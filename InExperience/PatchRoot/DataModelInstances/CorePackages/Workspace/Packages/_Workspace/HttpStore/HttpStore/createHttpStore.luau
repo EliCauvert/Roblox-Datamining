@@ -7,35 +7,35 @@ local getHttpStore = internalHttpStoreModule.GetHttpStore
 local _ = require(parent.Types)
 local httpSessionTrackerModule = require(parent.HttpSessionTracker)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: getHttpStore (ref), httpSessionTrackerModule (ref), createErrorStatusHandlerModule (ref)
-	local var3 = getHttpStore(p1)
+	local var1 = getHttpStore(p2)
 	local t = {}
 	
 	return {
-		fetch = function(p2, p3)
-			-- upvalues: httpSessionTrackerModule (copy), t (ref), var3 (ref), createErrorStatusHandlerModule (copy), p0 (ref)
-			local var5 = httpSessionTrackerModule.currentSession()
+		fetch = function(p3, p4)
+			-- upvalues: httpSessionTrackerModule (copy), t (ref), var1 (ref), createErrorStatusHandlerModule (copy), p1 (ref)
+			local var2 = httpSessionTrackerModule.currentSession()
 			
-			if t[var5] == nil then
-				t[var5] = {}
+			if t[var2] == nil then
+				t[var2] = {}
 			end
-			local var6, var7 = var3.fetch(p2, p3)
-			local var8 = createErrorStatusHandlerModule(p0)(var6)
-			t[var5][p2] = { getFetchSignal = var8, cancelRequest = var7 }
+			local var3, var4 = var1.fetch(p3, p4)
+			local var5 = createErrorStatusHandlerModule(p1)(var3)
+			t[var2][p3] = { getFetchSignal = var5, cancelRequest = var4 }
 			
-			return var8, var7
+			return var5, var4
 		end,
 		cancelAll = function()
 			-- upvalues: httpSessionTrackerModule (copy), t (ref)
-			local var9 = httpSessionTrackerModule.currentSession()
+			local var2 = httpSessionTrackerModule.currentSession()
 			
-			if t[var9] then
-				for i, v in t[var9] do
+			if t[var2] then
+				for i, v in t[var2] do
 					v.cancelRequest()
 				end
 			end
-			t[var9] = nil
+			t[var2] = nil
 			httpSessionTrackerModule.cancelAll()
 			t[httpSessionTrackerModule.currentSession()] = {}
 		end

@@ -7,24 +7,24 @@ return {
 		flashScrollIndicators = function(_)
 			warn("flashScrollIndicators not implemented")
 		end,
-		scrollTo = function(p0, p1, p2, p3)
-			if p3 then
-				p0._nativeRef.animateScrollTo(p1, p2)
+		scrollTo = function(p1, p2, p3, p4)
+			if p4 then
+				p1._nativeRef.animateScrollTo(p2, p3)
 				
 				return
 			end
-			p0._nativeRef.current.CanvasPosition = Vector2.new(p1, p2)
+			p1._nativeRef.current.CanvasPosition = Vector2.new(p2, p3)
 		end,
-		scrollToEnd = function(p4, p5)
-			local var0 = if p4._nativeRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then 0 else p4._nativeRef.current.AbsoluteCanvasSize.X
-			local var1 = if p4._nativeRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p4._nativeRef.current.AbsoluteCanvasSize.Y else 0
+		scrollToEnd = function(p1, p2)
+			local var1 = if p1._nativeRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then 0 else p1._nativeRef.current.AbsoluteCanvasSize.X
+			local var2 = if p1._nativeRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1._nativeRef.current.AbsoluteCanvasSize.Y else 0
 			
-			if p5 then
-				p4._nativeRef.animateScrollTo(var0, var1)
+			if p2 then
+				p1._nativeRef.animateScrollTo(var1, var2)
 				
 				return
 			end
-			p4._nativeRef.current.CanvasPosition = Vector2.new(var0, var1)
+			p1._nativeRef.current.CanvasPosition = Vector2.new(var1, var2)
 		end,
 		zoomToRect = function(_, _, _)
 			warn("zoomToRect not implemented")

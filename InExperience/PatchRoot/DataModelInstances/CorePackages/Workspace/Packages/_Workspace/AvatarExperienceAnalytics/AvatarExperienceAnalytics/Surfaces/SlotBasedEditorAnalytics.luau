@@ -7,11 +7,11 @@ local fFlagAXExtendUndoRedoTracking = avatarExperienceFlagsModule.FFlagAXExtendU
 local fFlagAXResetAvatarButton = avatarExperienceFlagsModule.FFlagAXResetAvatarButton
 local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScreen
 
-local function trackSlotClick(p0)
+local function trackSlotClick(p1)
 	-- upvalues: impressionEnumsModule (ref), analyticsServiceModule (ref)
 	analyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		actionType = impressionEnumsModule.ActionType.UI_BUTTON_CLICK,
-		subcategory = p0.editorSubcategory,
+		subcategory = p1.editorSubcategory,
 		surface = impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 	})
 end
@@ -70,37 +70,37 @@ local function trackControlBarClick(p1)
 	})
 end
 
-local function trackAdvancedCustomizationControlBarClick(p2)
+local function trackAdvancedCustomizationControlBarClick(p1)
 	-- upvalues: impressionEnumsModule (ref), analyticsServiceModule (ref)
 	analyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		actionType = impressionEnumsModule.ActionType.UI_BUTTON_CLICK,
-		group = `ControlBar_AdvancedCustomization_{p2}`,
+		group = `ControlBar_AdvancedCustomization_{p1}`,
 		surface = impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 	})
 end
 
-local function trackAdvancedCustomizationControlBarClickFromSurface(p3, p4)
+local function trackAdvancedCustomizationControlBarClickFromSurface(p1, p2)
 	-- upvalues: impressionEnumsModule (ref), analyticsServiceModule (ref)
 	analyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		actionType = impressionEnumsModule.ActionType.UI_BUTTON_CLICK,
-		group = `ControlBar_AdvancedCustomization_{p3}`,
-		surface = mapAvatarScreenToSurface(p4)
+		group = `ControlBar_AdvancedCustomization_{p1}`,
+		surface = mapAvatarScreenToSurface(p2)
 	})
 end
 
-function mapAvatarScreenToSurface(p5)
+function mapAvatarScreenToSurface(p1)
 	-- upvalues: impressionEnumsModule (ref), avatarScreen (ref)
 	local HOMEPAGE = impressionEnumsModule.MarketplaceSurfaceType.HOMEPAGE
 	
-	if p5 == avatarScreen.Catalog then
+	if p1 == avatarScreen.Catalog then
 		HOMEPAGE = impressionEnumsModule.MarketplaceSurfaceType.HOMEPAGE
 		
 		return HOMEPAGE
-	elseif p5 == avatarScreen.CatalogSearch then
+	elseif p1 == avatarScreen.CatalogSearch then
 		HOMEPAGE = impressionEnumsModule.MarketplaceSurfaceType.SEARCH
 		
 		return HOMEPAGE
-	elseif p5 == avatarScreen.AvatarEditor then
+	elseif p1 == avatarScreen.AvatarEditor then
 		HOMEPAGE = impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 	end
 	return HOMEPAGE
@@ -114,12 +114,12 @@ return {
 	trackAdvancedCustomizationControlBarClickFromSurface = trackAdvancedCustomizationControlBarClickFromSurface,
 	trackSaveBlockPromptLeaveClick = trackSaveBlockPromptLeaveClick,
 	trackSaveBlockPromptSaveClick = trackSaveBlockPromptSaveClick,
-	trackUndoRedoClick = function(p6, p7)
+	trackUndoRedoClick = function(p1, p2)
 		-- upvalues: fFlagAXExtendUndoRedoTracking (ref), impressionEnumsModule (ref), analyticsServiceModule (ref)
 		analyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			actionType = impressionEnumsModule.ActionType.UI_BUTTON_CLICK,
-			group = `UndoRedo_{if p6 then "Undo" else "Redo"}`,
-			surface = if fFlagAXExtendUndoRedoTracking then if fFlagAXExtendUndoRedoTracking and p7 then mapAvatarScreenToSurface(p7) else impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY else impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
+			group = `UndoRedo_{if p1 then "Undo" else "Redo"}`,
+			surface = if fFlagAXExtendUndoRedoTracking then if fFlagAXExtendUndoRedoTracking and p2 then mapAvatarScreenToSurface(p2) else impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY else impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		})
 	end,
 	trackSlotsCustomizeFtuxPrompt = trackSlotsCustomizeFtuxPrompt,
@@ -148,11 +148,11 @@ return {
 			surface = impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		})
 	end,
-	trackDeleteAvatarAttemptClick = function(p8)
+	trackDeleteAvatarAttemptClick = function(p3)
 		-- upvalues: impressionEnumsModule (ref), analyticsServiceModule (ref)
 		analyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			actionType = impressionEnumsModule.ActionType.UI_BUTTON_CLICK,
-			group = if p8 then "AvatarSwitcher_DeleteAvatar_Attempt_Mass" else "AvatarSwitcher_DeleteAvatar_Attempt_Single",
+			group = if p3 then "AvatarSwitcher_DeleteAvatar_Attempt_Mass" else "AvatarSwitcher_DeleteAvatar_Attempt_Single",
 			surface = impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		})
 	end,
@@ -172,28 +172,28 @@ return {
 			surface = impressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		})
 	end,
-	trackUndoHistoryCount = if fFlagAXExtendUndoRedoTracking then function(p9, p10)
+	trackUndoHistoryCount = if fFlagAXExtendUndoRedoTracking then function(p3, p4)
 		-- upvalues: impressionEnumsModule (ref), analyticsServiceModule (ref)
 		analyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			actionType = impressionEnumsModule.ActionType.UI_BUTTON_CLICK,
-			group = `UndoRedo_history_count_{p10}`,
-			surface = mapAvatarScreenToSurface(p9)
+			group = `UndoRedo_history_count_{p4}`,
+			surface = mapAvatarScreenToSurface(p3)
 		})
 	end else nil,
-	trackAvatarRemoveAllClick = if fFlagAXResetAvatarButton then function(p11)
+	trackAvatarRemoveAllClick = if fFlagAXResetAvatarButton then function(p3)
 		-- upvalues: impressionEnumsModule (ref), analyticsServiceModule (ref)
 		analyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			group = "AvatarRemoveAll",
 			actionType = impressionEnumsModule.ActionType.UI_BUTTON_CLICK,
-			surface = mapAvatarScreenToSurface(p11)
+			surface = mapAvatarScreenToSurface(p3)
 		})
 	end else nil,
-	trackAvatarRestoreClick = if fFlagAXResetAvatarButton then function(p12)
+	trackAvatarRestoreClick = if fFlagAXResetAvatarButton then function(p3)
 		-- upvalues: impressionEnumsModule (ref), analyticsServiceModule (ref)
 		analyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			group = "AvatarRestoreSaved",
 			actionType = impressionEnumsModule.ActionType.UI_BUTTON_CLICK,
-			surface = mapAvatarScreenToSurface(p12)
+			surface = mapAvatarScreenToSurface(p3)
 		})
 	end else nil
 }

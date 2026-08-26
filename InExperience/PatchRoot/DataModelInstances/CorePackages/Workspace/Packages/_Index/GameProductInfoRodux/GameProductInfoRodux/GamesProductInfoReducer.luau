@@ -5,14 +5,14 @@ local _ = require(gameProductInfoRodux.GameProductInfo)
 
 return {
 	key = "GamesProductInfoKey",
-	reducer = function(p0, p1)
+	reducer = function(p1, p2)
 		-- upvalues: setGamesProductInfoModule (ref), immutable (ref)
-		p0 = p0 or {}
-		assert(p0, "")
+		p1 = p1 or {}
+		assert(p1, "")
 		
-		if p1.type == setGamesProductInfoModule.name then
-			p0 = immutable.JoinDictionaries(p0, p1.gamesProductInfo)
+		if p2.type == setGamesProductInfoModule.name then
+			p1 = immutable.JoinDictionaries(p1, p2.gamesProductInfo)
 		end
-		return p0
+		return p1
 	end
 }

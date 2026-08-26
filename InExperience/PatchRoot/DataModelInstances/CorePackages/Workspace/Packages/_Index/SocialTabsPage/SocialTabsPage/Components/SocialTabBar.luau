@@ -7,19 +7,19 @@ local inputSize = foundationModule.Enums.InputSize
 local view = foundationModule.View
 local useNavigation = require(parent.Navigation).useNavigation
 
-return function(p0)
+return function(p1)
 	-- upvalues: useNavigation (ref), reactModule (ref), view (ref), tabs (ref), inputSize (ref), fillBehavior (ref)
-	local var2 = useNavigation()
-	local routeName = var2.state.routes[var2.state.index].routeName
-	local var3, var4 = reactModule.useState(routeName)
-	local var5 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref), var2 (ref)
-		var4(p1)
-		var2.navigate(p1)
-	end, { var2 })
+	local var1 = useNavigation()
+	local routeName = var1.state.routes[var1.state.index].routeName
+	local var2, var3 = reactModule.useState(routeName)
+	local var4 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), var1 (ref)
+		var3(p2)
+		var1.navigate(p2)
+	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), routeName (ref)
-		var4(function(p2)
+		-- upvalues: var3 (ref), routeName (ref)
+		var3(function(p2)
 			-- upvalues: routeName (copy)
 			return if p2 == routeName then p2 else routeName
 		end)
@@ -27,14 +27,14 @@ return function(p0)
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y bg-surface-0",
-		LayoutOrder = p0.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
 		SocialTabs = reactModule.createElement(tabs, {
-			activeTabId = var3,
+			activeTabId = var2,
 			size = inputSize.Medium,
 			fillBehavior = fillBehavior.Fill,
-			onActivated = var5,
-			tabs = p0.tabs
+			onActivated = var4,
+			tabs = p1.tabs
 		})
 	})
 end

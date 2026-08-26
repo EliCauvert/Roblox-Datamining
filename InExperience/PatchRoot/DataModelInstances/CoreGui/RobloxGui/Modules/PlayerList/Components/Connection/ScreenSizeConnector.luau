@@ -5,10 +5,10 @@ local setScreenSizeModule = require(script.Parent.Parent.Parent.Actions.SetScree
 local eventConnectionModule = require(script.Parent.EventConnection)
 local screenSizeConnector = roactModule.PureComponent:extend("ScreenSizeConnector")
 
-function screenSizeConnector.init(p0)
+function screenSizeConnector.init(p1)
 	-- upvalues: roactModule (ref)
-	p0.state = { layerCollector = nil }
-	p0.folderRef = roactModule.createRef()
+	p1.state = { layerCollector = nil }
+	p1.folderRef = roactModule.createRef()
 end
 
 function screenSizeConnector.render(p1)
@@ -29,20 +29,20 @@ function screenSizeConnector.render(p1)
 	return roactModule.createElement("Folder", { [roactModule.Ref] = p1.folderRef })
 end
 
-function screenSizeConnector.watchFolderAncestery(p2)
-	if p2.folderRef.current and p2.ancesteryConnection == nil then
-		local layerCollector = p2.folderRef.current:FindFirstAncestorWhichIsA("LayerCollector")
+function screenSizeConnector.watchFolderAncestery(p1)
+	if p1.folderRef.current and p1.ancesteryConnection == nil then
+		local layerCollector = p1.folderRef.current:FindFirstAncestorWhichIsA("LayerCollector")
 		
 		if layerCollector then
-			p2:setState({ layerCollector = layerCollector })
+			p1:setState({ layerCollector = layerCollector })
 		else
-			p2.ancesteryConnection = p2.folderRef.current.AncestryChanged:Connect(function()
-				-- upvalues: p2 (ref), layerCollector (write)
-				if p2.folderRef.current then
-					layerCollector = p2.folderRef.current:FindFirstAncestorWhichIsA("LayerCollector")
+			p1.ancesteryConnection = p1.folderRef.current.AncestryChanged:Connect(function()
+				-- upvalues: p1 (ref), layerCollector (write)
+				if p1.folderRef.current then
+					layerCollector = p1.folderRef.current:FindFirstAncestorWhichIsA("LayerCollector")
 					
 					if layerCollector then
-						p2:setState({ layerCollector = layerCollector })
+						p1:setState({ layerCollector = layerCollector })
 					end
 				end
 			end)
@@ -50,34 +50,34 @@ function screenSizeConnector.watchFolderAncestery(p2)
 	end
 end
 
-function screenSizeConnector.didMount(p3)
-	p3:watchFolderAncestery()
+function screenSizeConnector.didMount(p1)
+	p1:watchFolderAncestery()
 end
 
-function screenSizeConnector.didUpdate(p4)
-	if not p4.state.layerCollector then
-		p4:watchFolderAncestery()
+function screenSizeConnector.didUpdate(p1)
+	if not p1.state.layerCollector then
+		p1:watchFolderAncestery()
 		
 		return
-	elseif p4.ancesteryConnection then
-		p4.ancesteryConnection:Disconnect()
-		p4.ancesteryConnection = nil
+	elseif p1.ancesteryConnection then
+		p1.ancesteryConnection:Disconnect()
+		p1.ancesteryConnection = nil
 	end
 end
 
-function screenSizeConnector.willUnmount(p5)
-	if p5.ancesteryConnection then
-		p5.ancesteryConnection:Disconnect()
-		p5.ancesteryConnection = nil
+function screenSizeConnector.willUnmount(p1)
+	if p1.ancesteryConnection then
+		p1.ancesteryConnection:Disconnect()
+		p1.ancesteryConnection = nil
 	end
 end
 
-return roactRoduxModule.connect(nil, function(p6)
+return roactRoduxModule.connect(nil, function(p1)
 	-- upvalues: setScreenSizeModule (ref)
 	return {
-		setScreenSize = function(value, p7)
-			-- upvalues: p6 (ref), setScreenSizeModule (copy)
-			return p6(setScreenSizeModule(value, p7))
+		setScreenSize = function(value, p2)
+			-- upvalues: p1 (ref), setScreenSizeModule (copy)
+			return p1(setScreenSizeModule(value, p2))
 		end
 	}
 end)(screenSizeConnector)

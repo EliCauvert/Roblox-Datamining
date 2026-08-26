@@ -1,3 +1,3 @@
-﻿return function(_, p0)
-	return p0.displayName or p0.name
+﻿return function(_, p1)
+	return p1.displayName or p1.name
 end

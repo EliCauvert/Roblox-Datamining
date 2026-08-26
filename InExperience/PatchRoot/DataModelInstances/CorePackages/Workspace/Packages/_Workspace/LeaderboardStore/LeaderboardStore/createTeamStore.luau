@@ -3,9 +3,9 @@ local signalsModule = require(parent.Signals)
 local createSignalMap = require(parent.CoreScriptsRoactCommon).Utilities.createSignalMap
 local _ = require(script.Parent.LeaderboardStoreTypes)
 
-return function(p0, _)
+return function(p1, _)
 	-- upvalues: createSignalMap (ref), signalsModule (ref)
-	local var7, var10, var13
+	local var1, var2, var3
 	local t = {}
 	local _ = nil
 	local _ = nil
@@ -13,140 +13,140 @@ return function(p0, _)
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local var2 = createSignalMap()
-	local var3 = createSignalMap()
+	local var4 = createSignalMap()
+	local var5 = createSignalMap()
 	local t_1 = {}
 	
-	if p0 == "Neutral" then
+	if p1 == "Neutral" then
 		local neutral, neutral_1 = signalsModule.createSignal("Neutral")
-		var7 = neutral
+		var1 = neutral
 		local _ = neutral_1
-		local var8, var9 = signalsModule.createSignal(BrickColor.White().Color)
-		var10 = var8
+		local var6, var7 = signalsModule.createSignal(BrickColor.White().Color)
+		var2 = var6
+		local _ = var7
+		local var8, var9 = signalsModule.createSignal(1000)
+		var3 = var8
 		local _ = var9
-		local var11, var12 = signalsModule.createSignal(1000)
-		var13 = var11
-		local _ = var12
 	else
-		local var14, var15 = signalsModule.createSignal(p0.Name)
-		var7 = var14
-		local var16 = var15
-		local var17, var18 = signalsModule.createSignal(p0.TeamColor.Color)
-		var10 = var17
-		local var19 = var18
-		local var20, var21 = signalsModule.createSignal(p0.ChildOrder)
-		var13 = var20
-		local var22 = var21
-		t.teamPropChanged = p0.Changed:Connect(function(p1)
-			-- upvalues: var16 (write), p0 (ref), var19 (write), var22 (write)
-			if p1 == "Name" then
-				var16(p0.Name)
+		local var10, var11 = signalsModule.createSignal(p1.Name)
+		var1 = var10
+		local var12 = var11
+		local var13, var14 = signalsModule.createSignal(p1.TeamColor.Color)
+		var2 = var13
+		local var15 = var14
+		local var16, var17 = signalsModule.createSignal(p1.ChildOrder)
+		var3 = var16
+		local var18 = var17
+		t.teamPropChanged = p1.Changed:Connect(function(p2)
+			-- upvalues: var12 (write), p1 (ref), var15 (write), var18 (write)
+			if p2 == "Name" then
+				var12(p1.Name)
 				
 				return
-			elseif p1 == "TeamColor" then
-				var19(p0.TeamColor.Color)
+			elseif p2 == "TeamColor" then
+				var15(p1.TeamColor.Color)
 				
 				return
-			elseif p1 == "ChildOrder" then
-				var22(p0.ChildOrder)
+			elseif p2 == "ChildOrder" then
+				var18(p1.ChildOrder)
 			end
 		end)
 	end
 	local function _()
-		-- upvalues: t_1 (write), signalsModule (copy), var3 (ref), var2 (ref)
+		-- upvalues: t_1 (write), signalsModule (copy), var5 (ref), var4 (ref)
 		for i, v in pairs(t_1) do
-			var2.setData(i, signalsModule.createComputed(function(p2)
-				-- upvalues: var3 (copy), v (ref), i (ref)
-				local var23 = nil
-				local allData = var3.getAllData(p2)
+			var4.setData(i, signalsModule.createComputed(function(p2)
+				-- upvalues: var5 (copy), v (ref), i (ref)
+				local var19 = nil
+				local allData = var5.getAllData(p2)
 				
 				if typeof(allData) == "table" then
 					for i_1, v_1 in pairs(allData) do
-						local var25 = v(i_1, i, p2)
+						local var20 = v(i_1, i, p2)
 						
-						if var25 and type(var25) == "number" then
-							var23 = if var23 then var23 + var25 else var25
+						if var20 and type(var20) == "number" then
+							var19 = if var19 then var19 + var20 else var20
 						end
 					end
 				end
-				return var23
+				return var19
 			end), false)
 			t_1[i] = v
 		end
 	end
 	
 	return {
-		getName = var7,
-		getColor = var10,
-		getOrder = var13,
-		getStats = var2,
-		getPlayers = var3,
-		updateStat = function(p3, p4)
-			-- upvalues: signalsModule (copy), var3 (ref), var2 (ref), t_1 (write)
-			var2.setData(p3, signalsModule.createComputed(function(p5)
-				-- upvalues: var3 (copy), p4 (ref), p3 (ref)
-				local var23 = nil
+		getName = var1,
+		getColor = var2,
+		getOrder = var3,
+		getStats = var4,
+		getPlayers = var5,
+		updateStat = function(p2, p3)
+			-- upvalues: signalsModule (copy), var5 (ref), var4 (ref), t_1 (write)
+			var4.setData(p2, signalsModule.createComputed(function(p4)
+				-- upvalues: var5 (copy), p3 (ref), p2 (ref)
+				local var19 = nil
 				
-				if typeof(var3.getAllData(p5)) == "table" then
+				if typeof(var5.getAllData(p4)) == "table" then
 					for i_1, v_1 in pairs(allData) do
-						local var25 = p4(i_1, p3, p5)
+						local var20 = p3(i_1, p2, p4)
 						
-						if var25 and type(var25) == "number" then
-							var23 = if var23 then var23 + var25 else var25
+						if var20 and type(var20) == "number" then
+							var19 = if var19 then var19 + var20 else var20
 						end
 					end
 				end
-				return var23
+				return var19
 			end), false)
-			t_1[p3] = p4
+			t_1[p2] = p3
 		end,
-		removeStat = function(p6)
-			-- upvalues: var2 (ref), t_1 (write)
-			var2.removeData(p6, false)
-			t_1[p6] = nil
+		removeStat = function(p4)
+			-- upvalues: var4 (ref), t_1 (write)
+			var4.removeData(p4, false)
+			t_1[p4] = nil
 		end,
-		addPlayer = function(p7)
-			-- upvalues: var3 (ref), t_1 (write), signalsModule (copy), var2 (ref)
-			var3.setData(p7, p7.UserId, false)
+		addPlayer = function(p4)
+			-- upvalues: var5 (ref), t_1 (write), signalsModule (copy), var4 (ref)
+			var5.setData(p4, p4.UserId, false)
 			
 			for i, v in pairs(t_1) do
-				var2.setData(i, signalsModule.createComputed(function(p8)
-					-- upvalues: var3 (copy), v (ref), i (ref)
-					local var23 = nil
+				var4.setData(i, signalsModule.createComputed(function(p5)
+					-- upvalues: var5 (copy), v (ref), i (ref)
+					local var19 = nil
 					
-					if typeof(var3.getAllData(p8)) == "table" then
+					if typeof(var5.getAllData(p5)) == "table" then
 						for i_1, v_1 in pairs(allData) do
-							local var25 = v(i_1, i, p8)
+							local var20 = v(i_1, i, p5)
 							
-							if var25 and type(var25) == "number" then
-								var23 = if var23 then var23 + var25 else var25
+							if var20 and type(var20) == "number" then
+								var19 = if var19 then var19 + var20 else var20
 							end
 						end
 					end
-					return var23
+					return var19
 				end), false)
 				t_1[i] = v
 			end
 		end,
-		removePlayer = function(p9)
-			-- upvalues: var3 (ref), t_1 (write), signalsModule (copy), var2 (ref)
-			var3.removeData(p9, false)
+		removePlayer = function(p5)
+			-- upvalues: var5 (ref), t_1 (write), signalsModule (copy), var4 (ref)
+			var5.removeData(p5, false)
 			
 			for i, v in pairs(t_1) do
-				var2.setData(i, signalsModule.createComputed(function(p10)
-					-- upvalues: var3 (copy), v (ref), i (ref)
-					local var23 = nil
+				var4.setData(i, signalsModule.createComputed(function(p6)
+					-- upvalues: var5 (copy), v (ref), i (ref)
+					local var19 = nil
 					
-					if typeof(var3.getAllData(p10)) == "table" then
+					if typeof(var5.getAllData(p6)) == "table" then
 						for i_1, v_1 in pairs(allData) do
-							local var25 = v(i_1, i, p10)
+							local var20 = v(i_1, i, p6)
 							
-							if var25 and type(var25) == "number" then
-								var23 = if var23 then var23 + var25 else var25
+							if var20 and type(var20) == "number" then
+								var19 = if var19 then var19 + var20 else var20
 							end
 						end
 					end
-					return var23
+					return var19
 				end), false)
 				t_1[i] = v
 			end

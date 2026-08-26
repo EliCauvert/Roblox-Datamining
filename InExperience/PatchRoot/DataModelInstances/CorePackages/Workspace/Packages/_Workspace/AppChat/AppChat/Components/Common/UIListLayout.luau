@@ -1,11 +1,11 @@
 ﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("UIListLayout", {
-		HorizontalAlignment = p0.HorizontalAlignment,
-		FillDirection = p0.FillDirection,
-		VerticalAlignment = p0.VerticalAlignment,
+		HorizontalAlignment = p1.HorizontalAlignment,
+		FillDirection = p1.FillDirection,
+		VerticalAlignment = p1.VerticalAlignment,
 		SortOrder = Enum.SortOrder.LayoutOrder
 	})
 end

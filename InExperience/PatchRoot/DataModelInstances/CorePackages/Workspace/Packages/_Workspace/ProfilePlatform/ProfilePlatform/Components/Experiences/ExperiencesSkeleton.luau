@@ -11,37 +11,37 @@ local view = foundationModule.View
 local useTextSizeOffset = foundationModule.Hooks.useTextSizeOffset
 local t = { numColumns = 3 }
 
-local function _(p0)
-	return function(p1)
-		-- upvalues: p0 (ref)
-		return p1 + 80 + p0 * 3
+local function _(p1)
+	return function(p2)
+		-- upvalues: p1 (ref)
+		return p2 + 80 + p1 * 3
 	end
 end
 
-return function(p2)
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), useTextSizeOffset (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), squareCollectionGridViewModule (ref), t (ref)
-	local var6 = useLocalization({ experiences = textKeysModule.Experiences })
+	local var1 = useLocalization({ experiences = textKeysModule.Experiences })
 	local _ = nil
 	local _ = nil
-	local var7 = useTextSizeOffset()
+	local var2 = useTextSizeOffset()
 	
 	return reactModule.createElement(squareCollectionGridViewModule, {
-		layoutOrder = p2.layoutOrder,
+		layoutOrder = p1.layoutOrder,
 		items = reactModule.useMemo(function()
-			-- upvalues: p2 (ref)
+			-- upvalues: p1 (ref)
 			local t = {}
 			
-			for i = 1, p2.numSkeletons do
+			for i = 1, p1.numSkeletons do
 				table.insert(t, i)
 			end
 			return t
-		end, { p2.numSkeletons }),
-		renderItem = reactModule.useCallback(function(_, p3, p4)
+		end, { p1.numSkeletons }),
+		renderItem = reactModule.useCallback(function(_, p2, p3)
 			-- upvalues: reactModule (copy), view (copy), skeleton (copy), radius (copy)
 			return reactModule.createElement(view, {
 				tag = "col gap-small radius-medium",
-				LayoutOrder = p3,
-				Size = p4
+				LayoutOrder = p2,
+				Size = p3
 			}, {
 				ThumbnailSkeleton = reactModule.createElement(skeleton, {
 					LayoutOrder = 1,
@@ -61,13 +61,13 @@ return function(p2)
 			}), "Skeleton_" .. p3
 		end, {}),
 		getItemHeight = reactModule.useMemo(function()
-			-- upvalues: var7 (write)
-			return function(p5)
-				-- upvalues: var7 (ref)
-				return p5 + 80 + var7 * 3
+			-- upvalues: var2 (write)
+			return function(p2)
+				-- upvalues: var2 (ref)
+				return p2 + 80 + var2 * 3
 			end
-		end, { var7 }),
-		title = var6.experiences,
+		end, { var2 }),
+		title = var1.experiences,
 		overrides = t
 	})
 end

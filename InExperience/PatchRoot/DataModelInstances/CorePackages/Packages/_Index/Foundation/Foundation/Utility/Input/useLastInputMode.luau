@@ -13,11 +13,11 @@ end
 
 return function()
 	-- upvalues: reactModule (ref), getLastInputMode (ref), useEventConnection (ref), userInputService (ref)
-	local var5, var6 = reactModule.useState(getLastInputMode)
+	local var1, var2 = reactModule.useState(getLastInputMode)
 	useEventConnection(userInputService.LastInputTypeChanged, function()
-		-- upvalues: var6 (ref), getLastInputMode (copy)
-		var6(getLastInputMode())
+		-- upvalues: var2 (ref), getLastInputMode (copy)
+		var2(getLastInputMode())
 	end)
 	
-	return var5
+	return var1
 end

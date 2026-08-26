@@ -13,11 +13,11 @@ contactsInformationModal.validateProps = t.strictInterface({
 	layoutOrder = t.optional(t.number)
 })
 
-function contactsInformationModal.render(p0)
+function contactsInformationModal.render(p1)
 	-- upvalues: withStyle (ref), roact (ref), imageSetLabel (ref), iconSize (ref), styledTextLabel (ref)
-	return withStyle(function(p1)
-		-- upvalues: p0 (ref), roact (copy), imageSetLabel (copy), iconSize (copy), styledTextLabel (copy)
-		local props = p0.props
+	return withStyle(function(p2)
+		-- upvalues: p1 (ref), roact (copy), imageSetLabel (copy), iconSize (copy), styledTextLabel (copy)
+		local props = p1.props
 		
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -44,8 +44,8 @@ function contactsInformationModal.render(p0)
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					ImageColor3 = p1.Theme.IconEmphasis.Color,
-					ImageTransparency = p1.Theme.IconEmphasis.Transparency,
+					ImageColor3 = p2.Theme.IconEmphasis.Color,
+					ImageTransparency = p2.Theme.IconEmphasis.Transparency,
 					Image = props.image,
 					Size = UDim2.fromOffset(iconSize.XLarge, iconSize.XLarge),
 					Position = UDim2.fromScale(0.5, 0.5)
@@ -55,8 +55,8 @@ function contactsInformationModal.render(p0)
 				lineHeight = 1.2,
 				layoutOrder = 2,
 				text = props.text,
-				fontStyle = p1.Font.CaptionBody,
-				colorStyle = p1.Theme.TextEmphasis,
+				fontStyle = p2.Font.CaptionBody,
+				colorStyle = p2.Theme.TextEmphasis,
 				size = UDim2.fromScale(1, 0),
 				automaticSize = Enum.AutomaticSize.Y,
 				textTruncate = Enum.TextTruncate.AtEnd,

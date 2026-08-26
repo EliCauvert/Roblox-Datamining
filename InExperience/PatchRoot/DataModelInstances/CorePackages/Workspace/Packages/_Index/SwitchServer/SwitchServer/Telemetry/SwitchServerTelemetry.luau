@@ -27,7 +27,7 @@ local _ = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.sendSwitchServerButtonActions(p0)
+function t_1.sendSwitchServerButtonActions(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.SwitchServerButtonActions, {
 		standardizedFields = {
@@ -36,7 +36,7 @@ function t_1.sendSwitchServerButtonActions(p0)
 			"addPlaySessionId",
 			"addSessionInfo"
 		},
-		customFields = p0
+		customFields = p1
 	})
 end
 

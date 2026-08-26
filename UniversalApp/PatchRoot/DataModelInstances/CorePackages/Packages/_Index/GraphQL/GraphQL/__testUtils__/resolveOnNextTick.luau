@@ -2,7 +2,7 @@
 
 return function()
 	-- upvalues: promiseModule (ref)
-	return promiseModule.defer(function(p0)
-		p0(nil)
+	return promiseModule.defer(function(p1)
+		p1(nil)
 	end)
 end

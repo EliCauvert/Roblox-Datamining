@@ -9,8 +9,8 @@ local string = luauPolyfillModule.String
 local number = luauPolyfillModule.Number
 local regExpModule = require(parent_1.RegExp)
 
-local function _(p0)
-	return p0
+local function _(p1)
+	return p1
 end
 
 local function encodeURIComponent(p1)
@@ -18,10 +18,10 @@ local function encodeURIComponent(p1)
 	return httpService:UrlEncode(p1)
 end
 
-local function strictUriEncode(p2)
+local function strictUriEncode(p1)
 	-- upvalues: httpService (ref)
-	return httpService:UrlEncode(p2):gsub("[!'%(%)%*]", function(p3)
-		return ("%%%x"):format(p3:byte()):upper()
+	return httpService:UrlEncode(p1):gsub("[!'%(%)%*]", function(p2)
+		return ("%%%x"):format(p2:byte()):upper()
 	end)
 end
 
@@ -31,327 +31,327 @@ local encode = nil
 local decode = nil
 local t = {}
 
-local _ = function(p4)
-	return tonumber(p4) or -9223372036854775808
+local _ = function(p1)
+	return tonumber(p1) or -9223372036854775808
 end
 
-local function encoderForArrayFormat(p5)
+local function encoderForArrayFormat(p1)
 	-- upvalues: array (ref), encode (write)
-	local arrayFormat = p5.arrayFormat
+	local arrayFormat = p1.arrayFormat
 	
-	return if arrayFormat == "index" then function(p15)
-		-- upvalues: p5 (ref), array (copy), encode (copy)
-		return function(p16, p17)
-			-- upvalues: p5 (copy), array (copy), encode (copy), p15 (ref)
-			local p16Count = #p16
+	return if arrayFormat == "index" then function(p2)
+		-- upvalues: p1 (ref), array (copy), encode (copy)
+		return function(p3, p4)
+			-- upvalues: p1 (copy), array (copy), encode (copy), p2 (ref)
+			local p16Count = #p3
 			
-			return if p5.skipNull and p17 == nil then p16 elseif p17 == nil then array.concat(p16, {
-				table.concat({ encode(p15, p5), "[", p16Count, "]" }, "")
-			}) else array.concat(p16, {
+			return if p1.skipNull and p4 == nil then p3 elseif p4 == nil then array.concat(p3, {
+				table.concat({ encode(p2, p1), "[", p16Count, "]" }, "")
+			}) else array.concat(p3, {
 				table.concat({
-					encode(p15, p5),
+					encode(p2, p1),
 					"[",
-					encode(p16Count, p5),
+					encode(p16Count, p1),
 					"]=",
-					encode(p17, p5)
+					encode(p4, p1)
 				}, "")
 			})
 		end
-	end elseif arrayFormat == "bracket" then function(p12)
-		-- upvalues: p5 (ref), array (copy), encode (copy)
-		return function(p13, p14)
-			-- upvalues: p5 (copy), array (copy), encode (copy), p12 (ref)
-			return if p5.skipNull and p14 == nil then p13 elseif p14 == nil then array.concat(p13, { table.concat({ encode(p12, p5), "[]" }, "") }) else array.concat(p13, {
-				table.concat({ encode(p12, p5), "[]=", encode(p14, p5) }, "")
+	end elseif arrayFormat == "bracket" then function(p2)
+		-- upvalues: p1 (ref), array (copy), encode (copy)
+		return function(p3, p4)
+			-- upvalues: p1 (copy), array (copy), encode (copy), p2 (ref)
+			return if p1.skipNull and p4 == nil then p3 elseif p4 == nil then array.concat(p3, { table.concat({ encode(p2, p1), "[]" }, "") }) else array.concat(p3, {
+				table.concat({ encode(p2, p1), "[]=", encode(p4, p1) }, "")
 			})
 		end
-	end elseif arrayFormat == "comma" or arrayFormat == "separator" then function(p9)
-		-- upvalues: encode (copy), p5 (ref)
-		return function(p10, p11)
-			-- upvalues: encode (copy), p9 (ref), p5 (copy)
-			return if p11 == nil or #p11 == 0 then p10 elseif #p10 == 0 then {
-				table.concat({ encode(p9, p5), "=", encode(p9, p5) }, "")
+	end elseif arrayFormat == "comma" or arrayFormat == "separator" then function(p2)
+		-- upvalues: encode (copy), p1 (ref)
+		return function(p3, p4)
+			-- upvalues: encode (copy), p2 (ref), p1 (copy)
+			return if p4 == nil or #p4 == 0 then p3 elseif #p3 == 0 then {
+				table.concat({ encode(p2, p1), "=", encode(p2, p1) }, "")
 			} else {
-				table.concat({ p10, encode(p9, p5) }, p5.arrayFormatSeparator)
+				table.concat({ p3, encode(p2, p1) }, p1.arrayFormatSeparator)
 			}
 		end
-	end else function(p6)
-		-- upvalues: p5 (ref), array (copy), encode (copy)
-		return function(p7, p8)
-			-- upvalues: p5 (copy), array (copy), encode (copy), p6 (ref)
-			return if p5.skipNull and p8 == nil then p7 elseif p8 == nil then array.concat(p7, { encode(p6, p5) }) else array.concat(p7, {
-				table.concat({ encode(p6, p5), "=", encode(p8, p5) }, "")
+	end else function(p2)
+		-- upvalues: p1 (ref), array (copy), encode (copy)
+		return function(p3, p4)
+			-- upvalues: p1 (copy), array (copy), encode (copy), p2 (ref)
+			return if p1.skipNull and p4 == nil then p3 elseif p4 == nil then array.concat(p3, { encode(p2, p1) }) else array.concat(p3, {
+				table.concat({ encode(p2, p1), "=", encode(p4, p1) }, "")
 			})
 		end
 	end
 end
 
-local function parserForArrayFormat(p18)
+local function parserForArrayFormat(p1)
 	-- upvalues: regExpModule (ref), array (ref), decode (write)
-	local var17 = nil
-	local arrayFormat = p18.arrayFormat
+	local var1 = nil
+	local arrayFormat = p1.arrayFormat
 	
-	return if arrayFormat == "index" then function(p29, p30, p31)
-		-- upvalues: var17 (write), regExpModule (copy)
-		var17 = regExpModule("\\[(\\d*)\\]$"):exec(p29)
-		local var20 = p29:gsub("%[%d*%]$", "")
+	return if arrayFormat == "index" then function(p2, p3, p4)
+		-- upvalues: var1 (write), regExpModule (copy)
+		var1 = regExpModule("\\[(\\d*)\\]$"):exec(p2)
+		local var2 = p2:gsub("%[%d*%]$", "")
 		
-		if not var17 then
-			p31[var20] = p30
+		if not var1 then
+			p4[var2] = p3
 			
 			return
-		elseif p31[var20] == nil then
-			p31[var20] = {}
+		elseif p4[var2] == nil then
+			p4[var2] = {}
 		end
-		p31[var20][var17[2]] = p30
-	end elseif arrayFormat == "bracket" then function(p26, p27, p28)
-		-- upvalues: var17 (write), regExpModule (copy), array (copy)
-		var17 = regExpModule("(\\[\\])$"):exec(p26)
-		local var19 = p26:gsub("%[%]$", "")
+		p4[var2][var1[2]] = p3
+	end elseif arrayFormat == "bracket" then function(p2, p3, p4)
+		-- upvalues: var1 (write), regExpModule (copy), array (copy)
+		var1 = regExpModule("(\\[\\])$"):exec(p2)
+		local var2 = p2:gsub("%[%]$", "")
 		
-		if not var17 then
-			p28[var19] = p27
+		if not var1 then
+			p4[var2] = p3
 			
 			return
-		elseif p28[var19] == nil then
-			p28[var19] = { p27 }
+		elseif p4[var2] == nil then
+			p4[var2] = { p3 }
 			
 			return
 		end
-		p28[var19] = array.concat({}, p28[var19], p27)
-	end elseif arrayFormat == "comma" or arrayFormat == "separator" then function(p22, p23, p24)
-		-- upvalues: p18 (ref), array (copy), decode (copy)
-		local var18 = nil
+		p4[var2] = array.concat({}, p4[var2], p3)
+	end elseif arrayFormat == "comma" or arrayFormat == "separator" then function(p2, p3, p4)
+		-- upvalues: p1 (ref), array (copy), decode (copy)
+		local var2 = nil
 		
-		if type(p23) == "string" and string.find(p23, p18.arrayFormatSeparator, 1, true) ~= nil then
-			var18 = array.map(p23:split(p18.arrayFormatSeparator), function(p25)
-				-- upvalues: decode (copy), p18 (copy)
-				return decode(p25, p18)
+		if type(p3) == "string" and string.find(p3, p1.arrayFormatSeparator, 1, true) ~= nil then
+			var2 = array.map(p3:split(p1.arrayFormatSeparator), function(p5)
+				-- upvalues: decode (copy), p1 (copy)
+				return decode(p5, p1)
 			end)
-		elseif p23 ~= nil then
-			var18 = decode(p23, p18)
+		elseif p3 ~= nil then
+			var2 = decode(p3, p1)
 		end
-		p24[p22] = var18
-	end else function(p19, p20, p21)
+		p4[p2] = var2
+	end else function(p2, p3, p4)
 		-- upvalues: array (copy)
-		if p21[p19] == nil then
-			p21[p19] = p20
+		if p4[p2] == nil then
+			p4[p2] = p3
 			
 			return
 		end
-		p21[p19] = array.concat({}, p21[p19], p20)
+		p4[p2] = array.concat({}, p4[p2], p3)
 	end
 end
 
-local _ = function(p32)
-	if type(p32) ~= "string" or #p32 ~= 1 then
+local _ = function(p1)
+	if type(p1) ~= "string" or #p1 ~= 1 then
 		error("arrayFormatSeparator must be single character string")
 	end
 end
 
-encode = function(p33, p34)
+encode = function(p1, p2)
 	-- upvalues: strictUriEncode (ref), encodeURIComponent (ref)
-	return if p34.encode then if p34.strict then strictUriEncode(p33) else encodeURIComponent(p33) else p33
+	return if p2.encode then if p2.strict then strictUriEncode(p1) else encodeURIComponent(p1) else p1
 end
 
-decode = function(p35, p36)
+decode = function(p1, p2)
 	-- upvalues: decodeURIComponentModule (ref)
-	return if p36.decode then decodeURIComponentModule(p35) else p35
+	return if p2.decode then decodeURIComponentModule(p1) else p1
 end
 
-local function keysSorter(p37)
+local function keysSorter(p1)
 	-- upvalues: array (ref), keysSorter (ref), object (ref)
-	return if array.isArray(p37) then array.sort(p37) elseif type(p37) == "table" then array.map(array.sort(keysSorter(object.keys(p37)), function(p38, p39)
-		return (tonumber(p38) or -9223372036854775808) - (tonumber(p39) or -9223372036854775808)
-	end), function(p40)
-		-- upvalues: p37 (ref)
-		return p37[p40]
-	end) else p37
+	return if array.isArray(p1) then array.sort(p1) elseif type(p1) == "table" then array.map(array.sort(keysSorter(object.keys(p1)), function(p2, p3)
+		return (tonumber(p2) or -9223372036854775808) - (tonumber(p3) or -9223372036854775808)
+	end), function(p2)
+		-- upvalues: p1 (ref)
+		return p1[p2]
+	end) else p1
 end
 
-local _ = function(p41)
-	local var21 = p41:find("#")
+local _ = function(p1)
+	local var1 = p1:find("#")
 	
-	if var21 ~= nil then
-		p41 = p41:sub(1, var21 - 1)
+	if var1 ~= nil then
+		p1 = p1:sub(1, var1 - 1)
 	end
-	return p41
+	return p1
 end
 
-local _ = function(p42)
-	local var22 = ""
-	local var23 = p42:find("#")
+local _ = function(p1)
+	local var1 = ""
+	local var2 = p1:find("#")
 	
-	if var23 ~= nil then
-		var22 = p42:sub(var23)
+	if var2 ~= nil then
+		var1 = p1:sub(var2)
 	end
-	return var22
+	return var1
 end
 
-local function extract(p43)
-	local var24 = p43
-	local var25 = var24:find("#")
+local function extract(p1)
+	local var1 = p1
+	local var2 = var1:find("#")
 	
-	if var25 ~= nil then
-		var24 = var24:sub(1, var25 - 1)
+	if var2 ~= nil then
+		var1 = var1:sub(1, var2 - 1)
 	end
-	var24 = var24:find("?", 1, true)
+	var1 = var1:find("?", 1, true)
 	
-	return if var24 == nil then "" else var24:sub(var24 + 1)
+	return if var1 == nil then "" else var1:sub(var1 + 1)
 end
 
-local function parseValue(p44, p45)
+local function parseValue(p1, p2)
 	-- upvalues: number (ref), string (ref)
-	if p45.parseNumbers and not number.isNaN(tonumber(p44) or -9223372036854775808) and (type(p44) == "string" and string.trim(p44) ~= "") then
-		p44 = tonumber(p44) or -9223372036854775808
+	if p2.parseNumbers and not number.isNaN(tonumber(p1) or -9223372036854775808) and (type(p1) == "string" and string.trim(p1) ~= "") then
+		p1 = tonumber(p1) or -9223372036854775808
 		
-		return p44
-	elseif p45.parseBooleans and p44 ~= nil and (string.lower(p44) == "true" or string.lower(p44) == "false") then
-		p44 = string.lower(p44) == "true"
+		return p1
+	elseif p2.parseBooleans and p1 ~= nil and (string.lower(p1) == "true" or string.lower(p1) == "false") then
+		p1 = string.lower(p1) == "true"
 	end
-	return p44
+	return p1
 end
 
-local function parse(p46, p47)
+local function parse(p1, p2)
 	-- upvalues: object (ref), parserForArrayFormat (ref), string (ref), splitOnFirstModule (ref), decode (write), parseValue (ref), array (ref), boolean (ref), keysSorter (ref)
-	local var26 = object.assign({
+	local var1 = object.assign({
 		decode = true,
 		sort = true,
 		arrayFormat = "none",
 		arrayFormatSeparator = ",",
 		parseNumbers = false,
 		parseBooleans = false
-	}, p47)
-	var26 = var26.arrayFormatSeparator
+	}, p2)
+	var1 = var1.arrayFormatSeparator
 	
-	if type(var26) ~= "string" or #var26 ~= 1 then
+	if type(var1) ~= "string" or #var1 ~= 1 then
 		error("arrayFormatSeparator must be single character string")
 	end
-	var26 = parserForArrayFormat(var26)
+	var1 = parserForArrayFormat(var1)
 	local t = {}
 	
-	if type(p46) ~= "string" then
+	if type(p1) ~= "string" then
 		return t
 	end
-	local replaced = string.gsub(string.trim(p46), "^[%?#&]", "")
+	local replaced = string.gsub(string.trim(p1), "^[%?#&]", "")
 	
 	if replaced == "" then
 		return t
 	end
 	for i, v in replaced:split("&") do
-		local var30 = splitOnFirstModule(if var26.decode then string.gsub(v, "%+", " ") else v, "=")
-		local var31 = var30[1]
-		local var32 = var30[2]
+		local var2 = splitOnFirstModule(if var1.decode then string.gsub(v, "%+", " ") else v, "=")
+		local var3 = var2[1]
+		local var4 = var2[2]
 		
-		if var32 ~= nil and var26.arrayFormat ~= "comma" then
-			var32 = decode(var32, var26)
+		if var4 ~= nil and var1.arrayFormat ~= "comma" then
+			var4 = decode(var4, var1)
 		end
-		var26(decode(var31, var26), var32, t)
+		var1(decode(var3, var1), var4, t)
 	end
-	local var29
+	local var5
 	for i_1 in t do
-		var29 = t[i_1]
+		var5 = t[i_1]
 		
-		if type(var29) ~= "table" then
-			t[i_1] = parseValue(var29, var26)
+		if type(var5) ~= "table" then
+			t[i_1] = parseValue(var5, var1)
 			continue
 		end
-		for i_2 in var29 do
-			var29[i_2] = parseValue(var29[i_2], var26)
+		for i_2 in var5 do
+			var5[i_2] = parseValue(var5[i_2], var1)
 		end
 	end
-	return if var26.sort == false then t else array.reduce(if var26.sort == true then array.sort(object.keys(t)) else array.sort(object.keys(t), var26.sort), function(p48, p49)
+	return if var1.sort == false then t else array.reduce(if var1.sort == true then array.sort(object.keys(t)) else array.sort(object.keys(t), var1.sort), function(p3, p4)
 		-- upvalues: t (ref), boolean (copy), array (copy), keysSorter (copy)
-		local var33 = t[p49]
+		local var6 = t[p4]
 		
-		if boolean.toJSBoolean(var33) and type(var33) == "table" and not array.isArray(var33) then
-			p48[p49] = keysSorter(var33)
+		if boolean.toJSBoolean(var6) and type(var6) == "table" and not array.isArray(var6) then
+			p3[p4] = keysSorter(var6)
 			
-			return p48
+			return p3
 		end
-		p48[p49] = var33
+		p3[p4] = var6
 		
-		return p48
+		return p3
 	end, {})
 end
 
 t.extract = extract
 t.parse = parse
 
-function t.stringify(p50, p51)
+function t.stringify(p3, p4)
 	-- upvalues: object (ref), encoderForArrayFormat (ref), array (ref), encode (write)
-	if not p50 then
+	if not p3 then
 		return ""
 	end
-	p51 = object.assign({
+	p4 = object.assign({
 		encode = true,
 		strict = true,
 		arrayFormat = "none",
 		arrayFormatSeparator = ","
-	}, p51)
-	local arrayFormatSeparator = p51.arrayFormatSeparator
+	}, p4)
+	local arrayFormatSeparator = p4.arrayFormatSeparator
 	
 	if type(arrayFormatSeparator) ~= "string" or #arrayFormatSeparator ~= 1 then
 		error("arrayFormatSeparator must be single character string")
 	end
-	arrayFormatSeparator = encoderForArrayFormat(p51)
-	local var34 = object.keys(table.clone(p50))
+	arrayFormatSeparator = encoderForArrayFormat(p4)
+	local var6 = object.keys(table.clone(p3))
 	
-	if p51.sort ~= false then
-		array.sort(var34, p51.sort)
+	if p4.sort ~= false then
+		array.sort(var6, p4.sort)
 	end
-	return table.concat(array.filter(array.map(var34, function(p52)
-		-- upvalues: p50 (ref), encode (copy), p51 (write), array (copy), arrayFormatSeparator (ref)
-		local var35 = p50[p52]
+	return table.concat(array.filter(array.map(var6, function(p5)
+		-- upvalues: p3 (ref), encode (copy), p4 (write), array (copy), arrayFormatSeparator (ref)
+		local var7 = p3[p5]
 		
-		return if var35 == nil then encode(p52, p51) elseif array.isArray(var35) then table.concat(array.reduce(var35, arrayFormatSeparator(p52), {}), "&") else encode(p52, p51) + "=" + encode(var35, p51)
-	end), function(p53)
-		return p53.length > 0
+		return if var7 == nil then encode(p5, p4) elseif array.isArray(var7) then table.concat(array.reduce(var7, arrayFormatSeparator(p5), {}), "&") else encode(p5, p4) + "=" + encode(var7, p4)
+	end), function(p5)
+		return p5.length > 0
 	end), "&")
 end
 
-function t.parseUrl(p54, p55)
+function t.parseUrl(p3, p4)
 	-- upvalues: parse (ref)
 	local t = {}
-	local var37 = p54
-	local var38 = var37:find("#")
+	local var6 = p3
+	local var7 = var6:find("#")
 	
-	if var38 ~= nil then
-		var37 = var37:sub(1, var38 - 1)
+	if var7 ~= nil then
+		var6 = var6:sub(1, var7 - 1)
 	end
-	t.url = var37:split("?")[1] or ""
-	local var39 = p54
-	local var40 = var39:find("#")
+	t.url = var6:split("?")[1] or ""
+	local var8 = p3
+	local var9 = var8:find("#")
 	
-	if var40 ~= nil then
-		var39 = var39:sub(1, var40 - 1)
+	if var9 ~= nil then
+		var8 = var8:sub(1, var9 - 1)
 	end
-	var39 = var39:find("?", 1, true)
-	t.query = parse(if var39 == nil then "" else var39:sub(var39 + 1), p55)
+	var8 = var8:find("?", 1, true)
+	t.query = parse(if var8 == nil then "" else var8:sub(var8 + 1), p4)
 	
 	return t
 end
 
-function t.stringifyUrl(p56, p57)
+function t.stringifyUrl(p3, p4)
 	-- upvalues: t (ref), object (ref)
-	local url = p56.url
-	local var41 = url:find("#")
+	local url = p3.url
+	local var6 = url:find("#")
 	
-	if var41 ~= nil then
-		url = url:sub(1, var41 - 1)
+	if var6 ~= nil then
+		url = url:sub(1, var6 - 1)
 	end
-	local var42 = url:split("?")[1] or ""
-	local var43 = t.parse(t.extract(p56.url))
-	local url_1 = p56.url
-	local var44 = ""
-	local var45 = url_1:find("#")
+	local var7 = url:split("?")[1] or ""
+	local var8 = t.parse(t.extract(p3.url))
+	local url_1 = p3.url
+	local var9 = ""
+	local var10 = url_1:find("#")
 	
-	if var45 ~= nil then
-		var44 = url_1:sub(var45)
+	if var10 ~= nil then
+		var9 = url_1:sub(var10)
 	end
-	local var46 = t.stringify(object.assign(var43, p56.query), p57)
+	local var11 = t.stringify(object.assign(var8, p3.query), p4)
 	
-	return ("%s%s%s"):format(var42, var46 and ("?%s"):format(var46), var44)
+	return ("%s%s%s"):format(var7, var11 and ("?%s"):format(var11), var9)
 end
 
 return t

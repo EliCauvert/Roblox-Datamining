@@ -3,12 +3,12 @@ local _ = require(bulkPurchaseApp.Store.Types)
 local _ = require(script.Parent.Parent.BulkPurchaseRequestOwnedItem)
 local getThumbnailUrlModule = require(bulkPurchaseApp.Utils.getThumbnailUrl)
 
-return function(p0)
+return function(p1)
 	-- upvalues: getThumbnailUrlModule (ref)
 	return {
-		id = p0.id,
-		name = p0.name,
-		image = getThumbnailUrlModule(p0.id, p0.type),
-		ownedCount = p0.ownedCount
+		id = p1.id,
+		name = p1.name,
+		image = getThumbnailUrlModule(p1.id, p1.type),
+		ownedCount = p1.ownedCount
 	}
 end

@@ -1,14 +1,14 @@
 ﻿local captureService = game:GetService("CaptureService")
 local promptDismissedModule = require(script.Parent.Parent.Actions.PromptDismissed)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: promptDismissedModule (ref), captureService (ref)
-	return function(p2)
-		-- upvalues: promptDismissedModule (copy), p0 (ref), captureService (copy), p1 (ref)
-		p2:dispatch(promptDismissedModule(p0))
+	return function(p3)
+		-- upvalues: promptDismissedModule (copy), p1 (ref), captureService (copy), p2 (ref)
+		p3:dispatch(promptDismissedModule(p1))
 		
 		if game:GetEngineFeature("CaptureServiceGalleryPermissionPrompt") then
-			captureService:OnCapturePermissionsPromptFinished(p0, p1)
+			captureService:OnCapturePermissionsPromptFinished(p1, p2)
 		end
 	end
 end

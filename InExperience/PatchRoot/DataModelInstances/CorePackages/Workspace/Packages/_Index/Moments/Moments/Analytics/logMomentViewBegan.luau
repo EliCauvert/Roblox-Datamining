@@ -6,14 +6,14 @@ local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fFlagMomentsRealtimeObservability = momentsCommonModule.Flags.FFlagMomentsRealtimeObservability
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: fFlagMomentsRealtimeObservability (ref), analytics (ref), makeMomentViewBeganFieldsModule (ref), eventNames (ref)
 	if fFlagMomentsRealtimeObservability then
-		analytics.reportMomentsViewBegan(p1)
+		analytics.reportMomentsViewBegan(p2)
 	end
-	local var2 = makeMomentViewBeganFieldsModule(p0, p1)
+	local var1 = makeMomentViewBeganFieldsModule(p1, p2)
 	
-	if var2 ~= nil then
-		analytics.fireAnalyticsEvent(eventNames.MomentViewBegan, var2)
+	if var1 ~= nil then
+		analytics.fireAnalyticsEvent(eventNames.MomentViewBegan, var1)
 	end
 end

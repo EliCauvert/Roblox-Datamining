@@ -3,30 +3,30 @@ local promiseModule = require(parent.Promise)
 local url = require(parent.Http).Url
 local t = {}
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: t (ref), url (ref), promiseModule (ref)
-	if t[p1] then
-		return t[p1]
+	if t[p2] then
+		return t[p2]
 	end
-	t[p1] = p0(string.format("%sv1/games?universeIds=%s", url.GAME_URL, tostring(p1)), "GET"):andThen(function(p2)
+	t[p2] = p1(string.format("%sv1/games?universeIds=%s", url.GAME_URL, tostring(p2)), "GET"):andThen(function(p3)
 		-- upvalues: promiseModule (copy)
-		if not p2.responseBody or not p2.responseBody.data then
+		if not p3.responseBody or not p3.responseBody.data then
 			promiseModule.reject("Unexpected response when fetching game name")
 		end
-		local var2 = p2.responseBody.data[1]
+		local var1 = p3.responseBody.data[1]
 		
-		if not var2 or not var2.name then
+		if not var1 or not var1.name then
 			promiseModule.reject("Unexpected response when fetching game name, no game info")
 		end
 		return promiseModule.resolve({
-			Name = var2.name,
-			Description = var2.description or "",
-			Created = var2.created
+			Name = var1.name,
+			Description = var1.description or "",
+			Created = var1.created
 		})
 	end, function(p3)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.reject(p3)
 	end)
 	
-	return t[p1]
+	return t[p2]
 end

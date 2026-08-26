@@ -45,7 +45,7 @@ local t_3 = {
 		url = tModule.string
 	})
 }
-local var5 = tModule.union(tModule.interface({
+local var1 = tModule.union(tModule.interface({
 	type = tModule.literal("configurableComponentList"),
 	configurableComponentList = tModule.interface({
 		components = if fFlagAddThumbnailSelectorReport then tModule.array(tModule.union(tModule.interface(t), tModule.interface(t_1), tModule.interface(t_2), tModule.interface({
@@ -77,8 +77,8 @@ return {
 			stepId = tModule.number,
 			internalStepName = tModule.string,
 			isCompletionStep = tModule.optional(tModule.boolean),
-			innerContentConfig = tModule.optional(var5),
-			footerContentConfig = tModule.optional(var5)
+			innerContentConfig = tModule.optional(var1),
+			footerContentConfig = tModule.optional(var1)
 		}))
 	},
 	ComponentType = {

@@ -40,71 +40,71 @@ local t = {
 	[snapDirectionModule.Top] = popoverSide.Bottom
 }
 
-return capturesPolicyModule.connect(function(p5)
+return capturesPolicyModule.connect(function(p1)
 	-- upvalues: captureService (ref), debugOverrideCaptureControlsVideoGuacPolicy (ref)
 	return {
-		hasVideoCaptureCapability = p5.hasVideoCaptureCapability() and captureService:CanCaptureVideo() or debugOverrideCaptureControlsVideoGuacPolicy
+		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and captureService:CanCaptureVideo() or debugOverrideCaptureControlsVideoGuacPolicy
 	}
-end)(function(p0)
+end)(function(p1)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useTokens (ref), useTopbarInsetModule (ref), useSelector (ref), constantsModule (ref), useEffect (ref), capturesLayerExposureLoggingEnabled (ref), IXPServiceWrapper (ref), fStringSocialCaptureIXPLayer (ref), usePlayShutterSoundModule (ref), reactModule (ref), useCaptureControlsControllerModule (ref), eventNamesModule (ref), useCallback (ref), socialStopwatchModule (ref), takeCaptureModule (ref), view (ref), foundationModule (ref), videoCaptureControlModule (ref), t (ref), tooltip (ref), popoverAlign (ref), icon (ref), voiceChatIndicatorModule (ref), image (ref)
-	local var20 = useAnalyticsModule()
-	local var21 = useDispatch()
-	local var22 = useLocalization({
+	local var1 = useAnalyticsModule()
+	local var2 = useDispatch()
+	local var3 = useLocalization({
 		captureScreenshot = "Feature.Captures.Title.CaptureScreenshotTooltip"
 	})
-	local var23 = useTokens()
-	local var24 = useTopbarInsetModule()
-	local var25 = useSelector(function(p1)
+	local var4 = useTokens()
+	local var5 = useTopbarInsetModule()
+	local var6 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].IsActive
+		return p2[constantsModule.RoduxKey].IsActive
 	end)
-	local var26 = useSelector(function(p2)
+	local var7 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].IsVideoCaptureActive.status
 	end)
 	useEffect(function()
-		-- upvalues: capturesLayerExposureLoggingEnabled (copy), var25 (ref), IXPServiceWrapper (copy), fStringSocialCaptureIXPLayer (copy)
-		if capturesLayerExposureLoggingEnabled and var25 then
+		-- upvalues: capturesLayerExposureLoggingEnabled (copy), var6 (ref), IXPServiceWrapper (copy), fStringSocialCaptureIXPLayer (copy)
+		if capturesLayerExposureLoggingEnabled and var6 then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(fStringSocialCaptureIXPLayer)
 		end
-	end, { var25 })
-	local var27 = usePlayShutterSoundModule()
-	local var28 = useCaptureControlsControllerModule(var25, reactModule.useMemo(function()
-		-- upvalues: var24 (ref), var23 (ref)
-		return Vector2.new(var24.Min.X - var23.Padding.Small, var24.Height - var23.Padding.XSmall - var23.Padding.XXSmall)
-	end, { var24, var23 }))
-	local dragContainerRef = var28.dragContainerRef
-	local dragDetectorRef = var28.dragDetectorRef
-	local dragItemAnchorPointBinding = var28.dragItemAnchorPointBinding
-	local dragItemPositionBinding = var28.dragItemPositionBinding
-	local dragItemRef = var28.dragItemRef
-	local isItemHorizontal = var28.isItemHorizontal
-	local screenshotButtonRef = var28.screenshotButtonRef
-	local snapDirection = var28.snapDirection
+	end, { var6 })
+	local var8 = usePlayShutterSoundModule()
+	local var9 = useCaptureControlsControllerModule(var6, reactModule.useMemo(function()
+		-- upvalues: var5 (ref), var4 (ref)
+		return Vector2.new(var5.Min.X - var4.Padding.Small, var5.Height - var4.Padding.XSmall - var4.Padding.XXSmall)
+	end, { var5, var4 }))
+	local dragContainerRef = var9.dragContainerRef
+	local dragDetectorRef = var9.dragDetectorRef
+	local dragItemAnchorPointBinding = var9.dragItemAnchorPointBinding
+	local dragItemPositionBinding = var9.dragItemPositionBinding
+	local dragItemRef = var9.dragItemRef
+	local isItemHorizontal = var9.isItemHorizontal
+	local screenshotButtonRef = var9.screenshotButtonRef
+	local snapDirection = var9.snapDirection
 	useEffect(function()
-		-- upvalues: var25 (ref), var20 (ref), eventNamesModule (copy)
-		if var25 then
-			var20.fireEvent(eventNamesModule.CapturesEntrypointViewed)
+		-- upvalues: var6 (ref), var1 (ref), eventNamesModule (copy)
+		if var6 then
+			var1.fireEvent(eventNamesModule.CapturesEntrypointViewed)
 		end
-	end, { var25 })
+	end, { var6 })
 	
 	return reactModule.createElement(view, {
 		tag = "padding-x-large padding-y-medium",
-		Position = UDim2.fromOffset(0, -var24.Height),
-		Size = UDim2.new(1, 0, 1, var24.Height),
+		Position = UDim2.fromOffset(0, -var5.Height),
+		Size = UDim2.new(1, 0, 1, var5.Height),
 		ZIndex = constantsModule.ZIndex.Entrypoint
 	}, {
 		PaddedContainer = reactModule.createElement(view, {
 			tag = "anchor-center-center position-center-center size-full",
 			ref = dragContainerRef
 		}, {
-			CaptureControls = if var25 then reactModule.createElement(view, {
-				AnchorPoint = dragItemAnchorPointBinding:map(function(p3)
-					return Vector2.new(p3.x, p3.y)
+			CaptureControls = if var6 then reactModule.createElement(view, {
+				AnchorPoint = dragItemAnchorPointBinding:map(function(p2)
+					return Vector2.new(p2.x, p2.y)
 				end),
 				onActivated = function() end,
-				Position = dragItemPositionBinding:map(function(p4)
-					return UDim2.fromOffset(p4.xOffset, p4.yOffset)
+				Position = dragItemPositionBinding:map(function(p2)
+					return UDim2.fromOffset(p2.xOffset, p2.yOffset)
 				end),
 				ref = dragItemRef,
 				stateLayer = {
@@ -122,38 +122,38 @@ end)(function(p0)
 					ref = dragDetectorRef,
 					ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomOffset
 				}),
-				VideoCaptureControl = if p0.hasVideoCaptureCapability then reactModule.createElement(videoCaptureControlModule, { layoutOrder = 1, popoverSide = t[snapDirection] }) else nil,
-				ScreenshotCTA = if not var26 then reactModule.createElement(view, {
+				VideoCaptureControl = if p1.hasVideoCaptureCapability then reactModule.createElement(videoCaptureControlModule, { layoutOrder = 1, popoverSide = t[snapDirection] }) else nil,
+				ScreenshotCTA = if not var7 then reactModule.createElement(view, {
 					LayoutOrder = 2,
 					tag = {
 						["size-1200-1200"] = true,
 						["anchor-center-center auto-xy clip position-center-center radius-circle"] = true
 					},
 					onActivated = useCallback(function()
-						-- upvalues: socialStopwatchModule (copy), var20 (ref), eventNamesModule (copy), var27 (ref), var21 (ref), takeCaptureModule (copy)
+						-- upvalues: socialStopwatchModule (copy), var1 (ref), eventNamesModule (copy), var8 (ref), var2 (ref), takeCaptureModule (copy)
 						if not socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CaptureTaken) then
 							socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CaptureTaken)
 						end
-						var20.fireEvent(eventNamesModule.CapturesEntrypointActivated)
-						var27()
-						var21(takeCaptureModule())
-					end, { var27 }),
+						var1.fireEvent(eventNamesModule.CapturesEntrypointActivated)
+						var8()
+						var2(takeCaptureModule())
+					end, { var8 }),
 					ref = screenshotButtonRef
 				}, {
 					ScreenshotIconWithTooltip = reactModule.createElement(tooltip, {
 						align = popoverAlign.Center,
 						side = t[snapDirection],
-						title = var22.captureScreenshot
+						title = var3.captureScreenshot
 					}, reactModule.createElement(view, { tag = "size-1200-1200" }, {
 						reactModule.createElement(icon, {
 							name = "icons/controls/screenCapture",
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
-							style = var23.Color.Content.Emphasis
+							style = var4.Color.Content.Emphasis
 						})
 					}))
 				}) else nil,
-				VoiceChatIndicator = if var26 then reactModule.createElement(voiceChatIndicatorModule, { layoutOrder = 3, popoverSide = t[snapDirection] }) else nil,
+				VoiceChatIndicator = if var7 then reactModule.createElement(voiceChatIndicatorModule, { layoutOrder = 3, popoverSide = t[snapDirection] }) else nil,
 				DragAffordance = reactModule.createElement(view, {
 					LayoutOrder = 4,
 					tag = "anchor-center-center auto-xy padding-xxsmall position-center-center"

@@ -15,7 +15,7 @@ if getJoinDataRemoteFunctionEnabled then
 	getJoinData.Name = "GetJoinData"
 	getJoinData.Parent = robloxReplicatedStorageService
 	
-	function getJoinData.getJoinData(p0)
-		return p0:GetJoinData()
+	function getJoinData.getJoinData(p1)
+		return p1:GetJoinData()
 	end
 end

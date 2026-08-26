@@ -1,8 +1,8 @@
 ﻿local t = {
 	["jest.config"] = script["jest.config"],
 	game = game,
-	waitProxy = function(p0)
-		wait(p0)
+	waitProxy = function(p1)
+		wait(p1)
 	end,
 	settingsProxy = function()
 		return settings()

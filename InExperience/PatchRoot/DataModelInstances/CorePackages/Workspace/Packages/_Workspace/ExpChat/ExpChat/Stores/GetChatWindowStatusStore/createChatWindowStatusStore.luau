@@ -38,12 +38,12 @@ return function()
 		setCurrentChatWindowState = var12,
 		setPreviousChatWindowState = var14,
 		setDurationUpdates = var20,
-		newStateEffect = signalsModule.createEffect(function(p0)
+		newStateEffect = signalsModule.createEffect(function(p1)
 			-- upvalues: var1 (ref), var3 (ref), var5 (ref), var7 (ref), var14 (ref), var11 (ref), var12 (ref), var10 (ref)
-			local var21 = var1(p0)
-			local var22 = var3(p0)
-			local var23 = var5(p0)
-			local var24 = var7(p0)
+			local var21 = var1(p1)
+			local var22 = var3(p1)
+			local var23 = var5(p1)
+			local var24 = var7(p1)
 			var14(var11(false))
 			
 			if var24 < var23 and var22 < var23 and var21 < var23 then
@@ -71,17 +71,17 @@ return function()
 		end),
 		changingWindowStateEffect = signalsModule.createEffect(function(p1)
 			-- upvalues: var13 (ref), var9 (ref), var15 (write), var5 (ref), var16 (write), var7 (ref), var17 (write), var3 (ref), var18 (write), var1 (ref), var20 (ref)
-			local var25 = var13(p1)
-			local var26 = var9(p1)
+			local var21 = var13(p1)
+			local var22 = var9(p1)
 			
-			if var25 == "open" then
-				var15 = var26 - var5(p1)
-			elseif var25 == "closed" then
-				var16 = var26 - var7(p1)
-			elseif var25 == "textIdle" then
-				var17 = var26 - var3(p1)
-			elseif var25 == "backgroundIdle" then
-				var18 = var26 - var1(p1)
+			if var21 == "open" then
+				var15 = var22 - var5(p1)
+			elseif var21 == "closed" then
+				var16 = var22 - var7(p1)
+			elseif var21 == "textIdle" then
+				var17 = var22 - var3(p1)
+			elseif var21 == "backgroundIdle" then
+				var18 = var22 - var1(p1)
 			end
 			var20(function(p2)
 				-- upvalues: var15 (copy), var16 (copy), var17 (copy), var18 (copy)

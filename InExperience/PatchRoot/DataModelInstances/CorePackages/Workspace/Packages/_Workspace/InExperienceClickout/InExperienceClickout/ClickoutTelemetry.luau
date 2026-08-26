@@ -22,15 +22,15 @@ local t_1 = {
 }
 
 return {
-	logWebviewToggled = function(p0, p1, p2)
+	logWebviewToggled = function(p1, p2, p3)
 		-- upvalues: telemetryService (ref), t (ref), list (ref), t_1 (ref), list_1 (ref)
 		telemetryService:LogEvent(t, {
 			standardizedFields = list,
-			customFields = { is_opened = tostring(p0), flow_id = p1, target_url = p2 }
+			customFields = { is_opened = tostring(p1), flow_id = p2, target_url = p3 }
 		})
 		telemetryService:LogCounter(t_1, {
 			standardizedFields = list_1,
-			customFields = { is_opened = tostring(p0) }
+			customFields = { is_opened = tostring(p1) }
 		}, 1)
 	end
 }

@@ -4,29 +4,29 @@ local localizationService = game:GetService("LocalizationService")
 local getActionTelemetryFieldValue = require(script:FindFirstAncestor("SocialServerDrivenUi").Parent.SduiCoreSystem).getActionTelemetryFieldValue
 local sduiPlayerFriendAddThrottlingHundredthsPercent = game:DefineFastInt("SduiPlayerFriendAddThrottlingHundredthsPercent", 10000)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: getActionTelemetryFieldValue (ref), telemetryService (ref), sduiPlayerFriendAddThrottlingHundredthsPercent (ref), httpService (ref), localizationService (ref)
-	local var4 = getActionTelemetryFieldValue(nil, p1, "tilePos") or getActionTelemetryFieldValue(nil, p1, "itemPosition")
-	local var5 = getActionTelemetryFieldValue(nil, p1, "pageContext") or (if p2 then p2.appPage else nil)
-	local var6 = getActionTelemetryFieldValue(nil, p1, "eventContext") or "playerSearch"
-	local var7 = getActionTelemetryFieldValue(nil, p1, "contentType") or "User"
-	local var8 = getActionTelemetryFieldValue(nil, p1, "userSearchSessionId")
-	local var9 = if var8 ~= nil then nil else tostring(var8)
-	local var10 = getActionTelemetryFieldValue(nil, p1, "collectionId")
-	local var11 = getActionTelemetryFieldValue(nil, p1, "collectionPosition")
-	local var12 = if p1 and p1.getCollectionData then p1.getCollectionData() else nil
-	local var13 = if var12 then var12.itemsPerRow else nil
-	local var14 = if var12 then var12.startRowNumber else nil
-	local var15 = nil
-	local var16 = nil
+	local var1 = getActionTelemetryFieldValue(nil, p2, "tilePos") or getActionTelemetryFieldValue(nil, p2, "itemPosition")
+	local var2 = getActionTelemetryFieldValue(nil, p2, "pageContext") or (if p3 then p3.appPage else nil)
+	local var3 = getActionTelemetryFieldValue(nil, p2, "eventContext") or "playerSearch"
+	local var4 = getActionTelemetryFieldValue(nil, p2, "contentType") or "User"
+	local var5 = getActionTelemetryFieldValue(nil, p2, "userSearchSessionId")
+	local var6 = if var5 ~= nil then nil else tostring(var5)
+	local var7 = getActionTelemetryFieldValue(nil, p2, "collectionId")
+	local var8 = getActionTelemetryFieldValue(nil, p2, "collectionPosition")
+	local var9 = if p2 and p2.getCollectionData then p2.getCollectionData() else nil
+	local var10 = if var9 then var9.itemsPerRow else nil
+	local var11 = if var9 then var9.startRowNumber else nil
+	local var12 = nil
+	local var13 = nil
 	local ceiled = nil
 	
-	if typeof(var4) == "number" and var4 > 0 and (typeof(var13) == "number" and var13 > 0) then
-		ceiled = math.ceil(var4 / var13)
-		var16 = (var4 - 1) % var13 + 1
+	if typeof(var1) == "number" and var1 > 0 and (typeof(var10) == "number" and var10 > 0) then
+		ceiled = math.ceil(var1 / var10)
+		var13 = (var1 - 1) % var10 + 1
 		
-		if typeof(var14) == "number" then
-			var15 = var14 + ceiled - 1
+		if typeof(var11) == "number" then
+			var12 = var11 + ceiled - 1
 		end
 	end
 	telemetryService:LogEvent({
@@ -36,21 +36,21 @@ return function(p0, p1, p2)
 		throttlingPercentage = sduiPlayerFriendAddThrottlingHundredthsPercent,
 		lastUpdated = { 26, 7, 17 }
 	}, {
-		eventContext = var6,
+		eventContext = var3,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 		customFields = {
 			actionType = "RequestFriendship",
-			playerId = p0,
-			contentType = var7,
+			playerId = p1,
+			contentType = var4,
 			interactionUuid = httpService:GenerateGUID(false),
-			tilePos = var4,
-			pageContext = var5,
-			userSearchSessionId = var9,
-			feedRowNumber = getActionTelemetryFieldValue(nil, p1, "feedRowNumber") or var15,
-			positionInRow = getActionTelemetryFieldValue(nil, p1, "positionInRow") or var16,
-			rowInSort = getActionTelemetryFieldValue(nil, p1, "rowInSort") or ceiled,
-			sortId = if var10 ~= nil then nil else tostring(var10),
-			sortPosition = var11,
+			tilePos = var1,
+			pageContext = var2,
+			userSearchSessionId = var6,
+			feedRowNumber = getActionTelemetryFieldValue(nil, p2, "feedRowNumber") or var12,
+			positionInRow = getActionTelemetryFieldValue(nil, p2, "positionInRow") or var13,
+			rowInSort = getActionTelemetryFieldValue(nil, p2, "rowInSort") or ceiled,
+			sortId = if var7 ~= nil then nil else tostring(var7),
+			sortPosition = var8,
 			locale = localizationService.RobloxLocaleId
 		}
 	})

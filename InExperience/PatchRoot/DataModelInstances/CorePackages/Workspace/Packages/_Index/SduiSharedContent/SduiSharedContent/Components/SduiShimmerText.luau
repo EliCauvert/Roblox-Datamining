@@ -5,24 +5,24 @@ local _ = require(parent.SduiCompat)
 local sduiTextModule = require(script.Parent.SduiText)
 local useShimmerTextModule = require(script.Parent.useShimmerText)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useShimmerTextModule (ref), reactModule (ref), cryoModule (ref), sduiTextModule (ref)
-	local var4 = useShimmerTextModule({
-		animationSpeed = p0.animationSpeed,
-		children = p0.children,
-		gradientOffset = p0.gradientOffset,
-		isShimmerEnabled = p0.isShimmerEnabled,
-		textStyle = p0.textStyle
+	local var1 = useShimmerTextModule({
+		animationSpeed = p1.animationSpeed,
+		children = p1.children,
+		gradientOffset = p1.gradientOffset,
+		isShimmerEnabled = p1.isShimmerEnabled,
+		textStyle = p1.textStyle
 	})
 	
 	return reactModule.createElement(sduiTextModule, reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p0 (ref), var4 (ref)
-		return cryoModule.Dictionary.join(p0, {
+		-- upvalues: cryoModule (copy), p1 (ref), var1 (ref)
+		return cryoModule.Dictionary.join(p1, {
 			animationSpeed = cryoModule.None,
 			children = cryoModule.None,
 			gradientOffset = cryoModule.None,
 			isShimmerEnabled = cryoModule.None,
-			textStyle = var4.textStyle
+			textStyle = var1.textStyle
 		})
-	end, { p0, var4.textStyle }), var4.children)
+	end, { p1, var1.textStyle }), var1.children)
 end

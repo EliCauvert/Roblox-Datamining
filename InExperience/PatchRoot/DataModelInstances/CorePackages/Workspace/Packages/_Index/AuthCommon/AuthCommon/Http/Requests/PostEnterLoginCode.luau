@@ -1,9 +1,9 @@
 ﻿local httpService = game:GetService("HttpService")
 local urlBuilder = require(script:FindFirstAncestor("AuthCommon").Parent.UrlBuilder).UrlBuilder
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: urlBuilder (ref), httpService (ref)
-	assert(type(p1) == "string", "invalid login code")
+	assert(type(p2) == "string", "invalid login code")
 	
-	return p0(urlBuilder.fromString("apis:auth-token-service/v1/login/entercode")(), "POST", { postBody = httpService:JSONEncode({ code = p1 }) })
+	return p1(urlBuilder.fromString("apis:auth-token-service/v1/login/entercode")(), "POST", { postBody = httpService:JSONEncode({ code = p2 }) })
 end

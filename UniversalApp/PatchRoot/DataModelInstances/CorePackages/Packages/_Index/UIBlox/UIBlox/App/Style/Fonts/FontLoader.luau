@@ -7,9 +7,9 @@ local _ = { BASE_SIZE = 16, FACTOR = 1.26 }
 local t = {}
 t.__index = t
 
-function t.new(p0)
+function t.new(p1)
 	-- upvalues: t (ref)
-	local t_1 = { _tokens = p0 }
+	local t_1 = { _tokens = p1 }
 	setmetatable(t_1, t)
 	
 	return t_1

@@ -21,9 +21,9 @@ local t = {
 	turnOnChatKey = if getFFlagIsSquadEnabled() then if fFlagConnectionsToFriendsRename then "Feature.Chat.Message.EnableParty.FriendsRename" else "Feature.Chat.Message.EnableParty" elseif fFlagConnectionsToFriendsRename then "Feature.Chat.Message.EnableChat.FriendsRename" else "Feature.Chat.Message.EnableChat"
 }
 
-function emptyConversationList.didMount(p0)
-	if p0.props.fireRenderEvent then
-		p0.props.fireRenderEvent()
+function emptyConversationList.didMount(p1)
+	if p1.props.fireRenderEvent then
+		p1.props.fireRenderEvent()
 	end
 end
 
@@ -61,8 +61,8 @@ function emptyConversationList.render(p1)
 	end)
 end
 
-return universalAppPolicy.connect(function(p4)
+return universalAppPolicy.connect(function(p1)
 	return {
-		renameFriendsToConnections = p4.getRenameFriendsToConnections()
+		renameFriendsToConnections = p1.getRenameFriendsToConnections()
 	}
 end)(emptyConversationList)

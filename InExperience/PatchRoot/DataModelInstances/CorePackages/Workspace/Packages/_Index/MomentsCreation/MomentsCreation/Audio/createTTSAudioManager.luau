@@ -41,153 +41,153 @@ local function defaultCreateTtsInstance()
 	return audioTextToSpeech
 end
 
-return function(p0)
+return function(p1)
 	-- upvalues: defaultCreateTtsInstance (ref), createSignal (ref), runService (ref), classifyTTSErrorModule (ref), getFIntMomentsTTSWaveformSamplesPerSecondModule (ref), getFIntMomentsTTSWaveformMinSamplesModule (ref), getFIntMomentsTTSWaveformMaxSamplesModule (ref), normalizeWaveformModule (ref)
-	p0 = p0 or defaultCreateTtsInstance
-	local var16, var17 = createSignal("idle")
-	local var18, var19 = createSignal(nil)
-	local var20, var21 = createSignal(0)
-	local var22, var23 = createSignal(0)
-	local var24, var25 = createSignal(false)
-	local var26, var27 = createSignal("")
-	local var28, var29 = createSignal(0)
-	local var30, var31 = createSignal({})
-	local var32 = nil
-	local var33 = nil
-	local var34 = 0
-	local var35 = nil
-	local var36 = nil
-	local var37 = false
+	p1 = p1 or defaultCreateTtsInstance
+	local var1, var2 = createSignal("idle")
+	local var3, var4 = createSignal(nil)
+	local var5, var6 = createSignal(0)
+	local var7, var8 = createSignal(0)
+	local var9, var10 = createSignal(false)
+	local var11, var12 = createSignal("")
+	local var13, var14 = createSignal(0)
+	local var15, var16 = createSignal({})
+	local var17 = nil
+	local var18 = nil
+	local var19 = 0
+	local var20 = nil
+	local var21 = nil
+	local var22 = false
 	
 	local function _()
-		-- upvalues: var35 (write)
-		if var35 then
-			var35:Disconnect()
-			var35 = nil
+		-- upvalues: var20 (write)
+		if var20 then
+			var20:Disconnect()
+			var20 = nil
 		end
 	end
 	
 	local _ = function()
-		-- upvalues: var35 (write), runService (copy), var32 (write), var23 (ref)
-		if var35 then
-			var35:Disconnect()
-			var35 = nil
+		-- upvalues: var20 (write), runService (copy), var17 (write), var8 (ref)
+		if var20 then
+			var20:Disconnect()
+			var20 = nil
 		end
-		var35 = runService.RenderStepped:Connect(function()
-			-- upvalues: var32 (copy), var23 (copy)
-			if var32 then
-				var23(var32.TimePosition)
+		var20 = runService.RenderStepped:Connect(function()
+			-- upvalues: var17 (copy), var8 (copy)
+			if var17 then
+				var8(var17.TimePosition)
 			end
 		end)
 	end
 	
 	local _ = function()
-		-- upvalues: var32 (write), p0 (ref), var33 (write), var36 (write), var37 (write), var17 (ref), var23 (ref), var35 (write)
-		if var32 ~= nil then
-			return var32
+		-- upvalues: var17 (write), p1 (ref), var18 (write), var21 (write), var22 (write), var2 (ref), var8 (ref), var20 (write)
+		if var17 ~= nil then
+			return var17
 		end
-		local var39 = p0()
+		local var23 = p1()
 		
-		if var39 == nil then
+		if var23 == nil then
 			return nil
 		end
-		var32 = var39
-		var33 = var39.Parent
-		var36 = var39.Ended:Connect(function()
-			-- upvalues: var37 (copy), var17 (copy), var23 (copy), var35 (copy)
-			if var37 then return end
-			var17("ready")
-			var23(0)
+		var17 = var23
+		var18 = var23.Parent
+		var21 = var23.Ended:Connect(function()
+			-- upvalues: var22 (copy), var2 (copy), var8 (copy), var20 (copy)
+			if var22 then return end
+			var2("ready")
+			var8(0)
 			
-			if var35 then
-				var35:Disconnect()
-				var35 = nil
+			if var20 then
+				var20:Disconnect()
+				var20 = nil
 			end
 		end)
 		
-		return var39
+		return var23
 	end
 	
-	local function failGeneration(p1)
-		-- upvalues: var27 (ref), var29 (ref), var25 (ref), var21 (ref), var31 (ref), var19 (ref), var17 (ref)
-		var27("")
-		var29(0)
-		var25(false)
-		var21(0)
-		var31({})
-		var19(p1)
-		var17("error")
+	local function failGeneration(p2)
+		-- upvalues: var12 (ref), var14 (ref), var10 (ref), var6 (ref), var16 (ref), var4 (ref), var2 (ref)
+		var12("")
+		var14(0)
+		var10(false)
+		var6(0)
+		var16({})
+		var4(p2)
+		var2("error")
 	end
 	
 	return {
-		getState = var16,
-		getErrorReason = var18,
-		getTimeLength = var20,
-		getTimePosition = var22,
-		getIsLoaded = var24,
-		getLoadedText = var26,
-		getLoadedVoiceId = var28,
-		getWaveform = var30,
+		getState = var1,
+		getErrorReason = var3,
+		getTimeLength = var5,
+		getTimePosition = var7,
+		getIsLoaded = var9,
+		getLoadedText = var11,
+		getLoadedVoiceId = var13,
+		getWaveform = var15,
 		generate = function(p2, p3)
-			-- upvalues: var37 (write), var26 (ref), var28 (ref), var16 (ref), var32 (write), p0 (ref), var33 (write), var36 (write), var17 (ref), var23 (ref), var35 (write), var19 (ref), var34 (write), var31 (ref), var27 (ref), var29 (ref), failGeneration (ref), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var21 (ref), var25 (ref), normalizeWaveformModule (copy)
-			local var40
-			if var37 then return end
-			if p2 == var26(false) and p3 == var28(false) and var16(false) ~= "error" then return end
-			if var32 == nil then
-				local var41 = p0()
+			-- upvalues: var22 (write), var11 (ref), var13 (ref), var1 (ref), var17 (write), p1 (ref), var18 (write), var21 (write), var2 (ref), var8 (ref), var20 (write), var4 (ref), var19 (write), var16 (ref), var12 (ref), var14 (ref), failGeneration (ref), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var6 (ref), var10 (ref), normalizeWaveformModule (copy)
+			local var23
+			if var22 then return end
+			if p2 == var11(false) and p3 == var13(false) and var1(false) ~= "error" then return end
+			if var17 == nil then
+				local var24 = p1()
 				
-				if var41 == nil then
-					var40 = nil
+				if var24 == nil then
+					var23 = nil
 				else
-					var32 = var41
-					var33 = var41.Parent
-					var36 = var41.Ended:Connect(function()
-						-- upvalues: var37 (copy), var17 (copy), var23 (copy), var35 (copy)
-						if var37 then return end
-						var17("ready")
-						var23(0)
+					var17 = var24
+					var18 = var24.Parent
+					var21 = var24.Ended:Connect(function()
+						-- upvalues: var22 (copy), var2 (copy), var8 (copy), var20 (copy)
+						if var22 then return end
+						var2("ready")
+						var8(0)
 						
-						if var35 then
-							var35:Disconnect()
-							var35 = nil
+						if var20 then
+							var20:Disconnect()
+							var20 = nil
 						end
 					end)
-					var40 = var41
+					var23 = var24
 				end
 			else
-				var40 = var32
+				var23 = var17
 			end
-			if not var40 then
-				var19("failure")
-				var17("error")
+			if not var23 then
+				var4("failure")
+				var2("error")
 				
 				return
 			end
-			var34 += 1
-			local var42 = var34
-			var40:Pause()
+			var19 += 1
+			local var25 = var19
+			var23:Pause()
 			
-			if var35 then
-				var35:Disconnect()
-				var35 = nil
+			if var20 then
+				var20:Disconnect()
+				var20 = nil
 			end
-			var19(nil)
-			var17("loading")
-			var23(0)
-			var31({})
-			var27("")
-			var29(0)
+			var4(nil)
+			var2("loading")
+			var8(0)
+			var16({})
+			var12("")
+			var14(0)
 			task.spawn(function()
-				-- upvalues: var37 (copy), var40 (ref), p2 (ref), p3 (ref), var34 (copy), var42 (ref), failGeneration (copy), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var27 (copy), var29 (copy), var21 (copy), var25 (copy), var23 (copy), var31 (copy), normalizeWaveformModule (copy), var17 (copy)
-				if var37 then return end
-				var40.Text = p2
-				var40.VoiceId = tostring(p3)
+				-- upvalues: var22 (copy), var23 (ref), p2 (ref), p3 (ref), var19 (copy), var25 (ref), failGeneration (copy), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var12 (copy), var14 (copy), var6 (copy), var10 (copy), var8 (copy), var16 (copy), normalizeWaveformModule (copy), var2 (copy)
+				if var22 then return end
+				var23.Text = p2
+				var23.VoiceId = tostring(p3)
 				local ok, status = pcall(function()
-					-- upvalues: var40 (copy)
-					return var40:LoadPlatformAsync()
+					-- upvalues: var23 (copy)
+					return var23:LoadPlatformAsync()
 				end)
 				
-				if var37 or var34 ~= var42 then return end
+				if var22 or var19 ~= var25 then return end
 				if not ok then
 					failGeneration(classifyTTSErrorModule(status))
 					
@@ -197,114 +197,114 @@ return function(p0)
 					
 					return
 				end
-				local clampedValue = math.clamp(math.round(var40.TimeLength * getFIntMomentsTTSWaveformSamplesPerSecondModule()), getFIntMomentsTTSWaveformMinSamplesModule(), getFIntMomentsTTSWaveformMaxSamplesModule())
+				local clampedValue = math.clamp(math.round(var23.TimeLength * getFIntMomentsTTSWaveformSamplesPerSecondModule()), getFIntMomentsTTSWaveformMinSamplesModule(), getFIntMomentsTTSWaveformMaxSamplesModule())
 				local ok_1, status_1 = pcall(function()
-					-- upvalues: var40 (copy), clampedValue (ref)
-					return var40:GetWaveformAsync(NumberRange.new(0, var40.TimeLength), clampedValue)
+					-- upvalues: var23 (copy), clampedValue (ref)
+					return var23:GetWaveformAsync(NumberRange.new(0, var23.TimeLength), clampedValue)
 				end)
 				
-				if var37 or var34 ~= var42 then return end
-				var27(p2)
-				var29(p3)
-				var21(var40.TimeLength)
-				var25(true)
-				var23(0)
+				if var22 or var19 ~= var25 then return end
+				var12(p2)
+				var14(p3)
+				var6(var23.TimeLength)
+				var10(true)
+				var8(0)
 				
 				if ok_1 and type(status_1) == "table" then
-					var31(normalizeWaveformModule(status_1))
+					var16(normalizeWaveformModule(status_1))
 				end
-				var17("ready")
+				var2("ready")
 			end)
 		end,
 		play = function()
-			-- upvalues: var37 (write), var32 (write), var17 (ref), var35 (write), runService (copy), var23 (ref)
-			if var37 then return end
-			if var32 and var32.IsLoaded then
-				var32:Play()
-				var17("playing")
+			-- upvalues: var22 (write), var17 (write), var2 (ref), var20 (write), runService (copy), var8 (ref)
+			if var22 then return end
+			if var17 and var17.IsLoaded then
+				var17:Play()
+				var2("playing")
 				
-				if var35 then
-					var35:Disconnect()
-					var35 = nil
+				if var20 then
+					var20:Disconnect()
+					var20 = nil
 				end
-				var35 = runService.RenderStepped:Connect(function()
-					-- upvalues: var32 (copy), var23 (copy)
-					if var32 then
-						var23(var32.TimePosition)
+				var20 = runService.RenderStepped:Connect(function()
+					-- upvalues: var17 (copy), var8 (copy)
+					if var17 then
+						var8(var17.TimePosition)
 					end
 				end)
 			end
 		end,
 		pause = function()
-			-- upvalues: var37 (write), var32 (write), var35 (write), var16 (ref), var17 (ref)
-			if var37 then return end
-			if var32 then
-				var32:Pause()
+			-- upvalues: var22 (write), var17 (write), var20 (write), var1 (ref), var2 (ref)
+			if var22 then return end
+			if var17 then
+				var17:Pause()
 				
-				if var35 then
-					var35:Disconnect()
-					var35 = nil
+				if var20 then
+					var20:Disconnect()
+					var20 = nil
 				end
-				if var16(false) == "playing" then
-					var17("ready")
+				if var1(false) == "playing" then
+					var2("ready")
 				end
 			end
 		end,
-		seek = function(p4)
-			-- upvalues: var37 (write), var32 (write), var20 (ref), var23 (ref)
-			if var37 then return end
-			if var32 then
-				local clampedValue = math.clamp(p4, 0, var20(false))
-				var32.TimePosition = clampedValue
-				var23(clampedValue)
+		seek = function(p2)
+			-- upvalues: var22 (write), var17 (write), var5 (ref), var8 (ref)
+			if var22 then return end
+			if var17 then
+				local clampedValue = math.clamp(p2, 0, var5(false))
+				var17.TimePosition = clampedValue
+				var8(clampedValue)
 			end
 		end,
 		setVolume = function(value)
-			-- upvalues: var37 (write), var32 (write)
-			if var37 then return end
-			if var32 then
-				var32.Volume = value
+			-- upvalues: var22 (write), var17 (write)
+			if var22 then return end
+			if var17 then
+				var17.Volume = value
 			end
 		end,
 		reset = function()
-			-- upvalues: var37 (write), var34 (write), var32 (write), var35 (write), var19 (ref), var17 (ref), var23 (ref), var21 (ref), var25 (ref), var27 (ref), var29 (ref), var31 (ref)
-			if var37 then return end
-			var34 += 1
+			-- upvalues: var22 (write), var19 (write), var17 (write), var20 (write), var4 (ref), var2 (ref), var8 (ref), var6 (ref), var10 (ref), var12 (ref), var14 (ref), var16 (ref)
+			if var22 then return end
+			var19 += 1
 			
-			if var32 then
-				var32:Pause()
+			if var17 then
+				var17:Pause()
 			end
-			if var35 then
-				var35:Disconnect()
-				var35 = nil
+			if var20 then
+				var20:Disconnect()
+				var20 = nil
 			end
-			var19(nil)
-			var17("idle")
-			var23(0)
-			var21(0)
-			var25(false)
-			var27("")
-			var29(0)
-			var31({})
+			var4(nil)
+			var2("idle")
+			var8(0)
+			var6(0)
+			var10(false)
+			var12("")
+			var14(0)
+			var16({})
 		end,
 		destroy = function()
-			-- upvalues: var37 (write), var35 (write), var36 (write), var33 (write), var32 (write)
-			if var37 then return end
-			var37 = true
+			-- upvalues: var22 (write), var20 (write), var21 (write), var18 (write), var17 (write)
+			if var22 then return end
+			var22 = true
 			
-			if var35 then
-				var35:Disconnect()
-				var35 = nil
+			if var20 then
+				var20:Disconnect()
+				var20 = nil
 			end
-			if var36 then
-				var36:Disconnect()
-				var36 = nil
+			if var21 then
+				var21:Disconnect()
+				var21 = nil
 			end
-			if var33 then
-				var33:Destroy()
-				var33 = nil
+			if var18 then
+				var18:Destroy()
+				var18 = nil
 			end
-			var32 = nil
+			var17 = nil
 		end
 	}
 end

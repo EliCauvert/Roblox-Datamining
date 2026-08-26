@@ -21,14 +21,14 @@ local t_1 = {
 	throttlingPercentage = game:DefineFastInt("DynamicAbuseReportThrottleHundredthsPercent", 0)
 }
 
-local function buildCustomFields(p0)
+local function buildCustomFields(p1)
 	-- upvalues: dashModule (ref), localPlayer (ref), abuseEntrypointModule (ref)
 	return {
-		abuse_vector = p0.context.abuseVector,
+		abuse_vector = p1.context.abuseVector,
 		user_id = if localPlayer then localPlayer.UserId else 0,
-		event_type = p0.eventType,
+		event_type = p1.eventType,
 		entry_point = abuseEntrypointModule.APP,
-		meta = if p0.meta then dashModule.pretty(p0.meta, { depth = 10, multiline = false }) else nil
+		meta = if p1.meta then dashModule.pretty(p1.meta, { depth = 10, multiline = false }) else nil
 	}
 end
 

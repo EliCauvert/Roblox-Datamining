@@ -27,57 +27,57 @@ local _ = require(parent.MomentsTypes)
 local segmentSelectorWidth = constantsModule.AudioWaveform.SegmentSelectorWidth
 local uDim2 = UDim2.new(0, 48, 1, 0)
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), useDeviceInsets (ref), useCreationFlowStringsModule (ref), useToggleState (ref), useMusicInfoModule (ref), reactModule (ref), useEffect (ref), signalsModule (ref), useCallback (ref), useMusicEditorControllerModule (ref), useMemo (ref), useSignalBinding (ref), view (ref), button (ref), foundationModule (ref), gradientBackdrop (ref), uDim2 (ref), segmentSelectorWidth (ref), waveformModule (ref), loading (ref), musicPreviewItemModule (ref)
-	local playback = p0.controller.preview.playback
-	local var13 = useTokens()
-	local var14 = useDeviceInsets()
-	local var15 = useCreationFlowStringsModule()
-	local var16 = useToggleState(false)
-	local var17 = useToggleState(false)
-	local var18 = useMusicInfoModule(p0.musicEdit.assetId)
-	local var19 = if var18 == nil or var18.Duration == nil then 0 else var18.Duration
-	local var20, var21 = reactModule.useState(playback.getDuration(false))
+	local playback = p1.controller.preview.playback
+	local var1 = useTokens()
+	local var2 = useDeviceInsets()
+	local var3 = useCreationFlowStringsModule()
+	local var4 = useToggleState(false)
+	local var5 = useToggleState(false)
+	local var6 = useMusicInfoModule(p1.musicEdit.assetId)
+	local var7 = if var6 == nil or var6.Duration == nil then 0 else var6.Duration
+	local var8, var9 = reactModule.useState(playback.getDuration(false))
 	useEffect(function()
-		-- upvalues: signalsModule (copy), var21 (ref), playback (ref)
-		return signalsModule.createEffect(function(p1)
-			-- upvalues: var21 (copy), playback (copy)
-			var21(playback.getDuration(p1))
+		-- upvalues: signalsModule (copy), var9 (ref), playback (ref)
+		return signalsModule.createEffect(function(p2)
+			-- upvalues: var9 (copy), playback (copy)
+			var9(playback.getDuration(p2))
 		end)
 	end, { playback })
-	local var22 = useCallback(function()
-		-- upvalues: playback (ref), var17 (ref)
+	local var10 = useCallback(function()
+		-- upvalues: playback (ref), var5 (ref)
 		playback.setMuted(true)
 		playback.seek(0)
 		playback.pause()
-		var17.enable()
-	end, { playback, var17.enable })
-	local var23 = useCallback(function()
-		-- upvalues: playback (ref), var17 (ref)
+		var5.enable()
+	end, { playback, var5.enable })
+	local var11 = useCallback(function()
+		-- upvalues: playback (ref), var5 (ref)
 		playback.setMuted(false)
 		playback.play()
-		var17.disable()
-	end, { playback, var17.disable })
-	local var24 = useCallback(function()
-		-- upvalues: playback (ref), var16 (ref)
+		var5.disable()
+	end, { playback, var5.disable })
+	local var12 = useCallback(function()
+		-- upvalues: playback (ref), var4 (ref)
 		playback.setMuted(false)
 		playback.play()
-		var16.enable()
-	end, { playback, var16.enable })
+		var4.enable()
+	end, { playback, var4.enable })
 	useEffect(function()
-		-- upvalues: var16 (ref)
-		var16.disable()
-	end, { p0.musicEdit.assetId, var16.disable })
-	local var25 = useMusicEditorControllerModule(var16.enabled, var23, var22, p0.onStartTimeChanged, p0.musicEdit, var19)
+		-- upvalues: var4 (ref)
+		var4.disable()
+	end, { p1.musicEdit.assetId, var4.disable })
+	local var13 = useMusicEditorControllerModule(var4.enabled, var11, var10, p1.onStartTimeChanged, p1.musicEdit, var7)
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-top gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y radius-medium bg-surface-100",
 		ZIndex = 5,
 		padding = {
-			top = UDim.new(0, var13.Padding.Small),
-			bottom = UDim.new(0, math.max(var14.bottom, var13.Padding.Small)),
-			left = UDim.new(0, math.max(var14.left, var13.Padding.Large)),
-			right = UDim.new(0, math.max(var14.right, var13.Padding.Large))
+			top = UDim.new(0, var1.Padding.Small),
+			bottom = UDim.new(0, math.max(var2.bottom, var1.Padding.Small)),
+			left = UDim.new(0, math.max(var2.left, var1.Padding.Large)),
+			right = UDim.new(0, math.max(var2.right, var1.Padding.Large))
 		}
 	}, {
 		Nav = reactModule.createElement(view, {
@@ -88,18 +88,18 @@ return function(p0)
 				ZIndex = 6,
 				LayoutOrder = 1,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var15.GeneralCtaBack,
+				text = var3.GeneralCtaBack,
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = p0.onBack,
+				onActivated = p1.onBack,
 				size = foundationModule.Enums.InputSize.Medium
 			}),
 			DoneButton = reactModule.createElement(button, {
 				ZIndex = 6,
 				LayoutOrder = 2,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var15.GeneralCtaDone,
+				text = var3.GeneralCtaDone,
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = p0.onDone,
+				onActivated = p1.onDone,
 				size = foundationModule.Enums.InputSize.Medium
 			})
 		}),
@@ -108,14 +108,14 @@ return function(p0)
 				DragDetector = reactModule.createElement("UIDragDetector", {
 					CursorIcon = "",
 					DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
-					ref = var25.waveformRef,
+					ref = var13.waveformRef,
 					ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomOffset
 				}),
 				LeftGradientBackdrop = reactModule.createElement(gradientBackdrop, {
 					rotation = 0,
 					startingTransparency = 0,
 					zIndex = 2,
-					color3 = var13.Color.Surface.Surface_100.Color3,
+					color3 = var1.Color.Surface.Surface_100.Color3,
 					size = uDim2
 				}),
 				RightGradientBackdrop = reactModule.createElement(gradientBackdrop, {
@@ -123,7 +123,7 @@ return function(p0)
 					startingTransparency = 0,
 					zIndex = 2,
 					anchorPoint = Vector2.new(1, 0),
-					color3 = var13.Color.Surface.Surface_100.Color3,
+					color3 = var1.Color.Surface.Surface_100.Color3,
 					position = UDim2.fromScale(1, 0),
 					size = uDim2
 				}),
@@ -133,41 +133,41 @@ return function(p0)
 				}, {
 					WaveformDisplay = reactModule.createElement(waveformModule, {
 						zIndex = 1,
-						audioAssetId = p0.musicEdit.assetId,
-						position = var25.waveformPosition:map(function(p2)
+						audioAssetId = p1.musicEdit.assetId,
+						position = var13.waveformPosition:map(function(p2)
 							return UDim2.fromScale(p2, 0.5)
 						end),
-						onWaveformReady = var24,
-						ref = var25.waveformDisplayRef,
-						videoDuration = var20
+						onWaveformReady = var12,
+						ref = var13.waveformDisplayRef,
+						videoDuration = var8
 					})
 				})
 			}),
 			SegmentOutline = reactModule.createElement(view, {
 				tag = "position-center-center anchor-center-center radius-medium",
 				ZIndex = 2,
-				Size = UDim2.new(0, segmentSelectorWidth, 1, -var13.Size.Size_100),
+				Size = UDim2.new(0, segmentSelectorWidth, 1, -var1.Size.Size_100),
 				stroke = {
-					Color = var13.Color.System.Contrast.Color3,
-					Transparency = var13.Color.System.Contrast.Transparency,
-					Thickness = var13.Stroke.Thick
+					Color = var1.Color.System.Contrast.Color3,
+					Transparency = var1.Color.System.Contrast.Transparency,
+					Thickness = var1.Stroke.Thick
 				}
 			}, {
-				Scrubber = if var16.enabled and not var17.enabled then reactModule.createElement(view, {
+				Scrubber = if var4.enabled and not var5.enabled then reactModule.createElement(view, {
 					tag = "anchor-center-center size-100-1900 radius-circle bg-system-contrast",
 					Position = useSignalBinding(useMemo(function()
 						-- upvalues: signalsModule (copy), playback (ref)
-						return signalsModule.createComputed(function(p4)
+						return signalsModule.createComputed(function(p2)
 							-- upvalues: playback (copy)
-							local duration = playback.getDuration(p4)
+							local duration = playback.getDuration(p2)
 							
-							return if duration <= 0 then 0 else math.clamp(playback.getPosition(p4) / duration, 0, 1)
+							return if duration <= 0 then 0 else math.clamp(playback.getPosition(p2) / duration, 0, 1)
 						end)
-					end, { playback })):map(function(p3)
-						return UDim2.fromScale(p3, 0.5)
+					end, { playback })):map(function(p2)
+						return UDim2.fromScale(p2, 0.5)
 					end)
 				}) else nil,
-				LoadingIndicator = if not var16.enabled then reactModule.createElement(loading, {
+				LoadingIndicator = if not var4.enabled then reactModule.createElement(loading, {
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
 					size = foundationModule.Enums.IconSize.Medium
@@ -178,7 +178,7 @@ return function(p0)
 			MusicPreviewItem = reactModule.createElement(musicPreviewItemModule, {
 				layoutOrder = 1,
 				isPreviewing = false,
-				musicAssetId = p0.musicEdit.assetId
+				musicAssetId = p1.musicEdit.assetId
 			})
 		})
 	})

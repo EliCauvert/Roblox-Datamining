@@ -9,37 +9,37 @@ local _ = require(script.Parent.Parent.core.types)
 local throwServerError = require(script.Parent.Parent.utils).throwServerError
 local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
 
-function t.parseAndCheckHttpResponse(p0)
+function t.parseAndCheckHttpResponse(p1)
 	-- upvalues: httpService (ref), error (ref), throwServerError (ref), array (ref), hasOwnPropertyModule (ref)
-	return function(p1)
-		-- upvalues: httpService (copy), error (copy), throwServerError (copy), array (copy), hasOwnPropertyModule (copy), p0 (ref)
-		return p1:text():andThen(function(p4)
-			-- upvalues: httpService (copy), error (copy), p1 (ref)
+	return function(p2)
+		-- upvalues: httpService (copy), error (copy), throwServerError (copy), array (copy), hasOwnPropertyModule (copy), p1 (ref)
+		return p2:text():andThen(function(p3)
+			-- upvalues: httpService (copy), error (copy), p2 (ref)
 			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), p4 (ref)
-				return httpService:JSONDecode(p4), true
+				-- upvalues: httpService (copy), p3 (ref)
+				return httpService:JSONDecode(p3), true
 			end)
 			
 			if not ok then
 				local serverParseError = error.new(status)
 				serverParseError.name = "ServerParseError"
-				serverParseError.response = p1
-				serverParseError.statusCode = p1.status
-				serverParseError.bodyText = p4
+				serverParseError.response = p2
+				serverParseError.statusCode = p2.status
+				serverParseError.bodyText = p3
 				error(serverParseError)
 			end
 			return status
-		end):andThen(function(p2)
-			-- upvalues: p1 (ref), throwServerError (copy), array (copy), hasOwnPropertyModule (copy), p0 (copy)
-			if p1.status ~= nil and p1.status >= 300 then
-				throwServerError(p1, p2, ("Response not successful: Received status code %s"):format(tostring(p1.status)))
+		end):andThen(function(p3)
+			-- upvalues: p2 (ref), throwServerError (copy), array (copy), hasOwnPropertyModule (copy), p1 (copy)
+			if p2.status ~= nil and p2.status >= 300 then
+				throwServerError(p2, p3, ("Response not successful: Received status code %s"):format(tostring(p2.status)))
 			end
-			if not array.isArray(p2) and not hasOwnPropertyModule(p2, "data") and not hasOwnPropertyModule(p2, "errors") then
-				throwServerError(p1, p2, ("Server response was missing for query '%s'."):format(array.isArray(p0) and array.join(array.map(p0, function(p3)
-					return p3.operationName
-				end), ", ") or p0.operationName))
+			if not array.isArray(p3) and not hasOwnPropertyModule(p3, "data") and not hasOwnPropertyModule(p3, "errors") then
+				throwServerError(p2, p3, ("Server response was missing for query '%s'."):format(array.isArray(p1) and array.join(array.map(p1, function(p4)
+					return p4.operationName
+				end), ", ") or p1.operationName))
 			end
-			return p2
+			return p3
 		end)
 	end
 end

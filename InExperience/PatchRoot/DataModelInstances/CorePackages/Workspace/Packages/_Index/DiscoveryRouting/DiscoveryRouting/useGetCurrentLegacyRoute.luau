@@ -16,10 +16,10 @@ return function()
 	if fFlagSignalsNavP2NavigationPrimitives then
 		return getCurrentLegacyRouteFromSignals
 	end
-	local var3 = useStore()
+	local var1 = useStore()
 	
 	return reactModule.useCallback(function()
-		-- upvalues: selectCurrentLegacyRoute (copy), var3 (ref)
-		return selectCurrentLegacyRoute(var3:getState())
-	end, { var3 })
+		-- upvalues: selectCurrentLegacyRoute (copy), var1 (ref)
+		return selectCurrentLegacyRoute(var1:getState())
+	end, { var1 })
 end

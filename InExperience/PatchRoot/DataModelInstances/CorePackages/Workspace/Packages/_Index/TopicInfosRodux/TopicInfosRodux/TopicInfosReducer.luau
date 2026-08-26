@@ -6,19 +6,19 @@ local _ = require(parent.DiscoveryTypes)
 
 return {
 	key = "TopicInfosKey",
-	reducer = function(p0, p1)
+	reducer = function(p1, p2)
 		-- upvalues: addTopicInfosModule (ref), cryoModule (ref)
-		p0 = p0 or {}
-		assert(p0, "")
+		p1 = p1 or {}
+		assert(p1, "")
 		
-		if p1.type == addTopicInfosModule.name then
+		if p2.type == addTopicInfosModule.name then
 			local t = {}
 			
-			for i, v in p1.topicInfos do
+			for i, v in p2.topicInfos do
 				t[v.uniqueKey] = v
 			end
-			p0 = cryoModule.Dictionary.join(p0, t)
+			p1 = cryoModule.Dictionary.join(p1, t)
 		end
-		return p0
+		return p1
 	end
 }

@@ -32,12 +32,12 @@ return function(p1, p2, p3)
 	local var7, var8 = useState(0)
 	local var9, var10 = useState(0)
 	local var11, var12 = useState(0)
-	local var13 = useCallback(function(p1)
+	local var13 = useCallback(function(p4)
 		-- upvalues: var2 (ref), var1 (ref), var5 (ref)
 		local current = var2.current
 		
 		if current then
-			current.TimePosition = math.clamp(p1 + var1.playbackRegion.Min, 0, var5)
+			current.TimePosition = math.clamp(p4 + var1.playbackRegion.Min, 0, var5)
 		end
 	end, { var5, var1.playbackRegion })
 	local var14 = useCallback(function()

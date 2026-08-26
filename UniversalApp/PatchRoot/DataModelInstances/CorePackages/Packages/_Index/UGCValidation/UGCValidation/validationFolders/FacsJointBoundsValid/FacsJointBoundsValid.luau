@@ -16,27 +16,27 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1)
+	run = function(p1, p2)
 		-- upvalues: getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref), getFIntFacsJointMaximumDistRatioDirectModule (ref), getFIntFacsJointMaximumDistRatioAccumulatedModule (ref)
 		if not getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then return end
-		local head = p1.renderMeshesData.Head
+		local head = p2.renderMeshesData.Head
 		local ok, status = pcall(function()
 			-- upvalues: UGCValidationService (copy), head (ref)
 			return UGCValidationService:GetMaximalJointDistancesWithinFacs(head.editable)
 		end)
 		
 		if not ok then
-			p0:fail(errorSourceStringsModule.Keys.DynHead_JointBoundsCheckFailed)
+			p1:fail(errorSourceStringsModule.Keys.DynHead_JointBoundsCheckFailed)
 			
 			return
 		end
-		local var7, var8, var9, var10 = unpack(status)
+		local var1, var2, var3, var4 = unpack(status)
 		
-		if getFIntFacsJointMaximumDistRatioDirectModule() / 100 < var7 then
-			p0:fail(errorSourceStringsModule.Keys.DynHead_JointDirectExceeded, { actionName = var8 })
+		if getFIntFacsJointMaximumDistRatioDirectModule() / 100 < var1 then
+			p1:fail(errorSourceStringsModule.Keys.DynHead_JointDirectExceeded, { actionName = var2 })
 		end
-		if getFIntFacsJointMaximumDistRatioAccumulatedModule() / 100 < var9 then
-			p0:fail(errorSourceStringsModule.Keys.DynHead_JointAccumulatedExceeded, { jointName = var10 })
+		if getFIntFacsJointMaximumDistRatioAccumulatedModule() / 100 < var3 then
+			p1:fail(errorSourceStringsModule.Keys.DynHead_JointAccumulatedExceeded, { jointName = var4 })
 		end
 	end
 }

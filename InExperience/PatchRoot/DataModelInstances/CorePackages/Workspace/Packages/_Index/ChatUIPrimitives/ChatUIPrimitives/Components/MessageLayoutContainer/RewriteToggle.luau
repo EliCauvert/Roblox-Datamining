@@ -4,20 +4,20 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(chatUIPrimitives.Types)
 
-return reactModule.memo(function(p0)
+return reactModule.memo(function(p1)
 	-- upvalues: foundationModule (ref), reactModule (ref)
 	return reactModule.createElement(foundationModule.View, {
 		tag = "col gap-xsmall auto-y",
 		Size = UDim2.new(1, 0, 0, 0),
 		backgroundStyle = { Transparency = 1, Color3 = Color3.new(0, 0, 0) },
-		LayoutOrder = p0.LayoutOrder
+		LayoutOrder = p1.LayoutOrder
 	}, {
 		toggleRow = reactModule.createElement(foundationModule.View, {
 			tag = "row align-y-center gap-xsmall auto-xy",
 			LayoutOrder = 1,
 			backgroundStyle = { Transparency = 1, Color3 = Color3.new(0, 0, 0) },
-			Visible = p0.messageBinding:map(function(p1)
-				return p1 ~= nil and p1.wasRewritten == true
+			Visible = p1.messageBinding:map(function(p2)
+				return p2 ~= nil and p2.wasRewritten == true
 			end)
 		}, {
 			label = reactModule.createElement(foundationModule.Text, {
@@ -28,10 +28,10 @@ return reactModule.memo(function(p0)
 			caret = reactModule.createElement(foundationModule.IconButton, {
 				isCircular = true,
 				LayoutOrder = 2,
-				icon = if p0.showOriginal then foundationModule.Enums.IconName.ChevronLargeUp else foundationModule.Enums.IconName.ChevronLargeDown,
+				icon = if p1.showOriginal then foundationModule.Enums.IconName.ChevronLargeUp else foundationModule.Enums.IconName.ChevronLargeDown,
 				variant = foundationModule.Enums.ButtonVariant.Utility,
 				size = foundationModule.Enums.InputSize.XSmall,
-				onActivated = p0.onToggle
+				onActivated = p1.onToggle
 			})
 		}),
 		dropdown = reactModule.createElement(foundationModule.View, {
@@ -41,17 +41,17 @@ return reactModule.memo(function(p0)
 				Transparency = 0.7,
 				Color3 = foundationModule.Hooks.useTokens().Color.Common.Scrim.Color3
 			},
-			Visible = p0.messageBinding:map(function(p2)
-				-- upvalues: p0 (ref)
-				return p2 ~= nil and (p2.wasRewritten == true and p0.showOriginal)
+			Visible = p1.messageBinding:map(function(p2)
+				-- upvalues: p1 (ref)
+				return p2 ~= nil and (p2.wasRewritten == true and p1.showOriginal)
 			end)
 		}, {
 			original = reactModule.createElement(foundationModule.Text, {
 				tag = "text-caption-medium text-wrap text-align-x-left content-muted",
 				RichText = true,
 				LayoutOrder = 1,
-				Text = p0.messageBinding:map(function(p3)
-					return if p3 and p3.originalText then `<s>{p3.originalText}</s>` else ""
+				Text = p1.messageBinding:map(function(p2)
+					return if p2 and p2.originalText then `<s>{p2.originalText}</s>` else ""
 				end),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y

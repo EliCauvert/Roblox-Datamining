@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.util.Types)
 
-local function destroyHelper(p0)
-	for i, v in p0 do
+local function destroyHelper(p1)
+	for i, v in p1 do
 		for i_1, v_1 in v do
 			if v_1.created and v_1.instance then
 				v_1.instance:Destroy()
@@ -11,8 +11,8 @@ local function destroyHelper(p0)
 	_ = {}
 end
 
-return function(p1, p2)
+return function(p2, p3)
 	-- upvalues: destroyHelper (ref)
-	destroyHelper(p1)
 	destroyHelper(p2)
+	destroyHelper(p3)
 end

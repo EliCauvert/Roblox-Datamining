@@ -2,19 +2,19 @@
 local _ = require(parent.Types)
 local reduceModule = require(parent.reduce)
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: reduceModule (ref)
-	return reduceModule(p0, function(p2, p3, p4)
-		-- upvalues: p1 (ref)
-		local var1 = if p1 then p1(p3, p4) else p3
+	return reduceModule(p1, function(p3, p4, p5)
+		-- upvalues: p2 (ref)
+		local var1 = if p2 then p2(p4, p5) else p4
 		
-		if p2[var1] == nil then
-			p2[var1] = 1
+		if p3[var1] == nil then
+			p3[var1] = 1
 			
-			return p2
+			return p3
 		end
-		p2[var1] += 1
+		p3[var1] += 1
 		
-		return p2
+		return p3
 	end, {})
 end

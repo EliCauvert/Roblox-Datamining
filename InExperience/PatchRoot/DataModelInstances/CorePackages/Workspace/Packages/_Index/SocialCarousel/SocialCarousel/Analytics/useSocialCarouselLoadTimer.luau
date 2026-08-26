@@ -3,22 +3,22 @@ local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local useLoadingTimers = require(parent.SocialLuaAnalytics).Analytics.Timing.useLoadingTimers
 
-return function(p0)
+return function(p1)
 	-- upvalues: useLoadingTimers (ref), reactModule (ref), cryoModule (ref)
-	local var2 = useLoadingTimers({})
-	local var3 = reactModule.useRef({})
-	local var4 = reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref), cryoModule (copy), var2 (ref), p0 (ref)
-		if var3.current[p1] then
+	local var1 = useLoadingTimers({})
+	local var2 = reactModule.useRef({})
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref), cryoModule (copy), var1 (ref), p1 (ref)
+		if var2.current[p2] then
 			return
 		end
-		var3.current = cryoModule.Dictionary.join(var3.current, { [p1] = true })
-		p0(p1, var2.getTime("carouselLoadingTime"))
+		var2.current = cryoModule.Dictionary.join(var2.current, { [p2] = true })
+		p1(p2, var1.getTime("carouselLoadingTime"))
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		var2.start("carouselLoadingTime")
+		-- upvalues: var1 (ref)
+		var1.start("carouselLoadingTime")
 	end, {})
 	
-	return { onSuccessfulRender = var4 }
+	return { onSuccessfulRender = var3 }
 end

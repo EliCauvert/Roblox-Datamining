@@ -13,24 +13,24 @@ local useBreakpointXOrSmaller = responsiveModule.useBreakpointXOrSmaller
 local videoProgressBarModule = require(script.Parent.VideoProgressBar)
 local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
 
-return function(p0)
+return function(p1)
 	-- upvalues: useTokens (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), reactModule (ref), iconButton (ref), icon (ref), iconVariant (ref), iconSize (ref), videoProgressBarModule (ref), maybeForceDarkTheme (ref)
-	local var5 = useTokens()
-	local var6 = if p0.muteButtonConfig == nil then fFlagLuaAppEdpMediaGalleryFullScreen and (if p0.playButtonConfig == nil then p0.progressBarConfig ~= nil else true) else true
-	local XXLarge = var5.Padding.XXLarge
-	local var7 = if useBreakpointXOrSmaller(responsiveModule.Keys.Small) then 0 else var5.Padding.Medium
-	local medium = var5.Padding.Medium
-	local size1000 = var5.Size.Size_1000
-	local size100 = var5.Size.Size_100
-	local xSmall = var5.Padding.XSmall
-	local var8 = if p0.muteButtonConfig then reactModule.createElement(iconButton, {
+	local var1 = useTokens()
+	local var2 = if p1.muteButtonConfig == nil then fFlagLuaAppEdpMediaGalleryFullScreen and (if p1.playButtonConfig == nil then p1.progressBarConfig ~= nil else true) else true
+	local XXLarge = var1.Padding.XXLarge
+	local var3 = if useBreakpointXOrSmaller(responsiveModule.Keys.Small) then 0 else var1.Padding.Medium
+	local medium = var1.Padding.Medium
+	local size1000 = var1.Size.Size_1000
+	local size100 = var1.Size.Size_100
+	local xSmall = var1.Padding.XSmall
+	local var4 = if p1.muteButtonConfig then reactModule.createElement(iconButton, {
 		Selectable = false,
 		icon = {
-			name = if p0.muteButtonConfig.muted then icon.SpeakerSlash else icon.Speaker,
+			name = if p1.muteButtonConfig.muted then icon.SpeakerSlash else icon.Speaker,
 			variant = iconVariant.Filled
 		},
 		iconSize = iconSize.Medium,
-		onActivated = p0.muteButtonConfig.onMuteButtonActivated or nil,
+		onActivated = p1.muteButtonConfig.onMuteButtonActivated or nil,
 		AnchorPoint = Vector2.new(1, 1),
 		Position = UDim2.fromScale(1, 1)
 	}) else nil
@@ -41,29 +41,29 @@ return function(p0)
 		AnchorPoint = Vector2.new(0, 1),
 		Position = UDim2.fromScale(0, 1),
 		Size = UDim2.new(1, 0, 0, reactModule.useMemo(function()
-			-- upvalues: XXLarge (ref), var7 (ref), p0 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), size1000 (ref), size100 (ref), xSmall (ref)
-			local var9 = XXLarge + var7
+			-- upvalues: XXLarge (ref), var3 (ref), p1 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), size1000 (ref), size100 (ref), xSmall (ref)
+			local var5 = XXLarge + var3
 			
-			if p0.muteButtonConfig or fFlagLuaAppEdpMediaGalleryFullScreen and p0.playButtonConfig then
-				var9 += size1000
+			if p1.muteButtonConfig or fFlagLuaAppEdpMediaGalleryFullScreen and p1.playButtonConfig then
+				var5 += size1000
 			end
-			if fFlagLuaAppEdpMediaGalleryFullScreen and p0.progressBarConfig then
-				var9 += size100 + xSmall
+			if fFlagLuaAppEdpMediaGalleryFullScreen and p1.progressBarConfig then
+				var5 += size100 + xSmall
 			end
-			return var9
+			return var5
 		end, {
-			p0.muteButtonConfig,
-			if fFlagLuaAppEdpMediaGalleryFullScreen then p0.playButtonConfig else nil,
-			if fFlagLuaAppEdpMediaGalleryFullScreen then p0.progressBarConfig else nil,
-			XXLarge, var7, size1000, size100, xSmall
+			p1.muteButtonConfig,
+			if fFlagLuaAppEdpMediaGalleryFullScreen then p1.playButtonConfig else nil,
+			if fFlagLuaAppEdpMediaGalleryFullScreen then p1.progressBarConfig else nil,
+			XXLarge, var3, size1000, size100, xSmall
 		})),
-		ZIndex = p0.ZIndex
+		ZIndex = p1.ZIndex
 	}, {
 		GradientOverlay = reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = var5.Color.Extended.Black.Black_100.Color3
+			BackgroundColor3 = var1.Color.Extended.Black.Black_100.Color3
 		}, {
 			Gradient = reactModule.createElement("UIGradient", {
 				Rotation = 90,
@@ -72,9 +72,9 @@ return function(p0)
 					NumberSequenceKeypoint.new(1, 0.2)
 				})
 			}),
-			UICorner = if p0.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p0.cornerRadius) }) else nil
+			UICorner = if p1.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil
 		}),
-		UserControls = if p0.videoLoaded and var6 then maybeForceDarkTheme(reactModule.createElement("Frame", {
+		UserControls = if p1.videoLoaded and var2 then maybeForceDarkTheme(reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 10,
@@ -87,13 +87,13 @@ return function(p0)
 			}),
 			Padding = reactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, XXLarge),
-				PaddingBottom = UDim.new(0, var7),
+				PaddingBottom = UDim.new(0, var3),
 				PaddingLeft = UDim.new(0, medium),
 				PaddingRight = UDim.new(0, medium)
 			}),
-			ProgressBar = if p0.progressBarConfig then reactModule.createElement(videoProgressBarModule, {
+			ProgressBar = if p1.progressBarConfig then reactModule.createElement(videoProgressBarModule, {
 				LayoutOrder = 1,
-				progressBinding = p0.progressBarConfig.progressBinding,
+				progressBinding = p1.progressBarConfig.progressBinding,
 				Size = UDim2.new(1, 0, 0, size100)
 			}) else nil,
 			ButtonsContainer = reactModule.createElement("Frame", {
@@ -102,27 +102,27 @@ return function(p0)
 				LayoutOrder = 2,
 				Size = UDim2.new(1, 0, 0, size1000)
 			}, {
-				PlayButton = if p0.playButtonConfig then reactModule.createElement(iconButton, {
+				PlayButton = if p1.playButtonConfig then reactModule.createElement(iconButton, {
 					Selectable = false,
 					icon = {
-						name = if p0.playButtonConfig.isVideoPlaying then icon.PauseLarge else icon.PlayLarge,
+						name = if p1.playButtonConfig.isVideoPlaying then icon.PauseLarge else icon.PlayLarge,
 						variant = iconVariant.Filled
 					},
 					iconSize = iconSize.Medium,
-					onActivated = p0.playButtonConfig.onPlayButtonActivated,
+					onActivated = p1.playButtonConfig.onPlayButtonActivated,
 					AnchorPoint = Vector2.new(0, 1),
 					Position = UDim2.fromScale(0, 1)
 				}) else nil,
-				MuteButton = if p0.muteButtonConfig then var8 else nil
+				MuteButton = if p1.muteButtonConfig then var4 else nil
 			})
 		} else nil else {
 			Padding = reactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, XXLarge),
-				PaddingBottom = UDim.new(0, var7),
+				PaddingBottom = UDim.new(0, var3),
 				PaddingLeft = UDim.new(0, medium),
 				PaddingRight = UDim.new(0, medium)
 			}),
-			MuteButton = if p0.muteButtonConfig then var8 else nil
+			MuteButton = if p1.muteButtonConfig then var4 else nil
 		}), true) else nil
 	})
 end

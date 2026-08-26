@@ -9,12 +9,12 @@ local var1 = tModule.strictInterface({
 	actionType = tModule.string
 })
 
-return function(p0, p1)
+return function(p1, p2)
 	-- upvalues: var1 (ref), mutedError (ref)
-	local var2, var3 = var1(p1)
+	local var2, var3 = var1(p2)
 	
 	if not var2 then
 		mutedError(var3)
 	end
-	p0:sendEventDeferred("SocialContextToast", "socialContextToastEvent", p1)
+	p1:sendEventDeferred("SocialContextToast", "socialContextToastEvent", p2)
 end

@@ -8,18 +8,18 @@ local constantsModule = require(parent.Constants)
 local aspectRatioModeModule = require(parent.Enum.AspectRatioMode)
 local getAspectRatioModule = require(parent.getAspectRatio)
 
-return function(p0, p1, p2, p3, p4)
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: cryoModule (ref), constantsModule (ref), setDefaultModule (ref), aspectRatioModeModule (ref), getAspectRatioModule (ref)
-	local var5 = cryoModule.Dictionary.join(constantsModule.getDefaultStyleProps(p0), p4 or {})
-	local var6 = setDefaultModule(p3, constantsModule.DEFAULT_FOOTER_HEIGHT)
-	local var7 = setDefaultModule(p2, constantsModule.DEFAULT_TEXT_LINE_COUNT)
-	local var8 = setDefaultModule(p1, aspectRatioModeModule.Square)
-	local topContentPadding = var5.topContentPadding
-	local bottomContentPadding = var5.bottomContentPadding
-	local contentTitleFont = var5.contentTitleFont
-	local contentTitlePadding = var5.contentTitlePadding
-	local selectionCursorPadding = var5.selectionCursorPadding
-	local var9 = getAspectRatioModule(var8)
+	local var1 = cryoModule.Dictionary.join(constantsModule.getDefaultStyleProps(p1), p5 or {})
+	local var2 = setDefaultModule(p4, constantsModule.DEFAULT_FOOTER_HEIGHT)
+	local var3 = setDefaultModule(p3, constantsModule.DEFAULT_TEXT_LINE_COUNT)
+	local var4 = setDefaultModule(p2, aspectRatioModeModule.Square)
+	local topContentPadding = var1.topContentPadding
+	local bottomContentPadding = var1.bottomContentPadding
+	local contentTitleFont = var1.contentTitleFont
+	local contentTitlePadding = var1.contentTitlePadding
+	local selectionCursorPadding = var1.selectionCursorPadding
+	local var5 = getAspectRatioModule(var4)
 	
-	return UDim.new(var9, -1 * (selectionCursorPadding.Left + selectionCursorPadding.Right + topContentPadding.Left + topContentPadding.Right) * var9 + (math.floor(var7 * contentTitleFont.RelativeSize * p0.Font.BaseSize + contentTitlePadding) + var6) + (topContentPadding.Top + topContentPadding.Bottom + (bottomContentPadding.Top + bottomContentPadding.Bottom) + (selectionCursorPadding.Top + selectionCursorPadding.Bottom)))
+	return UDim.new(var5, -1 * (selectionCursorPadding.Left + selectionCursorPadding.Right + topContentPadding.Left + topContentPadding.Right) * var5 + (math.floor(var3 * contentTitleFont.RelativeSize * p1.Font.BaseSize + contentTitlePadding) + var2) + (topContentPadding.Top + topContentPadding.Bottom + (bottomContentPadding.Top + bottomContentPadding.Bottom) + (selectionCursorPadding.Top + selectionCursorPadding.Bottom)))
 end

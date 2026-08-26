@@ -11,64 +11,64 @@ local shareSheetSnackbarAutoDismissSeconds = game:DefineFastInt("ShareSheetSnack
 local useOverlay = foundationModule.Hooks.useOverlay
 local useTokens = foundationModule.Hooks.useTokens
 
-local function UniversalShareSheetContent(p0)
+local function UniversalShareSheetContent(p1)
 	-- upvalues: useShareSheetViewModelModule (ref), reactModule (ref), shareSheetViewModule (ref)
-	return reactModule.createElement(shareSheetViewModule, useShareSheetViewModelModule(p0))
+	return reactModule.createElement(shareSheetViewModule, useShareSheetViewModelModule(p1))
 end
 
 return reactModule.memo(function()
 	-- upvalues: reactModule (ref), useOverlay (ref), useTokens (ref), useUniversalShareSheetViewModelModule (ref), shareSheetSnackbarAutoDismissSeconds (ref), UniversalShareSheetContent (ref), fFlagShareSheetTelemetryRefactorModule (ref), reactRobloxModule (ref), foundationModule (ref)
-	local var10, var11 = reactModule.useState(nil)
-	local var12 = useOverlay()
-	local var13 = useTokens()
-	local var14 = useUniversalShareSheetViewModelModule()
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref)
-		var11(nil)
+	local var1, var2 = reactModule.useState(nil)
+	local var3 = useOverlay()
+	local var4 = useTokens()
+	local var5 = useUniversalShareSheetViewModelModule()
+	local var6 = reactModule.useCallback(function()
+		-- upvalues: var2 (ref)
+		var2(nil)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), shareSheetSnackbarAutoDismissSeconds (copy), var15 (ref)
-		if var10 == nil then
+		-- upvalues: var1 (ref), shareSheetSnackbarAutoDismissSeconds (copy), var6 (ref)
+		if var1 == nil then
 			return
 		end
-		local delayedThread = task.delay(shareSheetSnackbarAutoDismissSeconds, var15)
+		local delayedThread = task.delay(shareSheetSnackbarAutoDismissSeconds, var6)
 		
 		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
-	end, { var10, var15 })
-	local var16 = if var10 then var10.action else nil
+	end, { var1, var6 })
+	local var7 = if var1 then var1.action else nil
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		ShareSheet = if var14 then reactModule.createElement(UniversalShareSheetContent, {
-			context = var14.context,
-			formatSuccessSnackbarText = var14.formatSuccessSnackbarText,
-			isOpen = var14.isOpen,
-			messagePlaceholder = var14.messagePlaceholder,
-			onClose = var14.onClose,
-			onCloseWithReason = if fFlagShareSheetTelemetryRefactorModule then var14.onCloseWithReason else nil,
-			onShareSendResultSnackbar = var11,
-			telemetryId = if fFlagShareSheetTelemetryRefactorModule then var14.telemetryId else nil,
-			url = var14.url
+		ShareSheet = if var5 then reactModule.createElement(UniversalShareSheetContent, {
+			context = var5.context,
+			formatSuccessSnackbarText = var5.formatSuccessSnackbarText,
+			isOpen = var5.isOpen,
+			messagePlaceholder = var5.messagePlaceholder,
+			onClose = var5.onClose,
+			onCloseWithReason = if fFlagShareSheetTelemetryRefactorModule then var5.onCloseWithReason else nil,
+			onShareSendResultSnackbar = var2,
+			telemetryId = if fFlagShareSheetTelemetryRefactorModule then var5.telemetryId else nil,
+			url = var5.url
 		}) else nil,
-		ShareSendResultSnackbar = if var10 and var12 then reactRobloxModule.createPortal(reactModule.createElement(foundationModule.Snackbar, {
+		ShareSendResultSnackbar = if var1 and var3 then reactRobloxModule.createPortal(reactModule.createElement(foundationModule.Snackbar, {
 			testId = "share-sheet-snackbar",
 			ZIndex = 999,
-			action = if var16 then {
+			action = if var7 then {
 				onActivated = function()
-					-- upvalues: var15 (ref), var16 (ref)
-					var15()
-					var16.onActivated()
+					-- upvalues: var6 (ref), var7 (ref)
+					var6()
+					var7.onActivated()
 					
 					return nil
 				end,
-				text = var16.text
+				text = var7.text
 			} else nil,
 			AnchorPoint = Vector2.new(0.5, 1),
-			onClose = var15,
-			Position = UDim2.new(0.5, 0, 1, -var13.Padding.XLarge),
-			title = var10.title
-		}), var12) else nil
+			onClose = var6,
+			Position = UDim2.new(0.5, 0, 1, -var4.Padding.XLarge),
+			title = var1.title
+		}), var3) else nil
 	})
 end)

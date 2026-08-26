@@ -12,12 +12,12 @@ local t = {}
 t.__index = t
 local text = string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl:lower(), "http:", "https:"), "www", "friends") .. "v1/users/{userId}/friends/count"
 
-function t.GetFriendCountAsync(_, p0)
+function t.GetFriendCountAsync(_, p1)
 	-- upvalues: text (ref), httpRbxApiService (ref), httpService (ref)
 	local count = nil
 	local ok, status = pcall(function()
-		-- upvalues: text (copy), p0 (ref), httpRbxApiService (copy)
-		return httpRbxApiService:GetAsyncFullUrl(string.gsub(text, "{userId}", tostring(p0)))
+		-- upvalues: text (copy), p1 (ref), httpRbxApiService (copy)
+		return httpRbxApiService:GetAsyncFullUrl(string.gsub(text, "{userId}", tostring(p1)))
 	end)
 	
 	if not ok then
@@ -25,10 +25,10 @@ function t.GetFriendCountAsync(_, p0)
 		
 		return nil
 	end
-	local var9 = httpService:JSONDecode(status)
+	local var1 = httpService:JSONDecode(status)
 	
-	if var9.count then
-		count = var9.count
+	if var1.count then
+		count = var1.count
 	end
 	return count
 end

@@ -2,19 +2,19 @@
 local simpleTimerModule = require(script.Parent.SimpleTimer)
 local loggerModule = require(script.Parent.Parent.Logger)
 
-return function(p0)
+return function(p1)
 	-- upvalues: loggerModule (ref), httpService (ref), simpleTimerModule (ref)
 	local t = {}
 	
-	local _ = function(p1)
+	local _ = function(p2)
 		-- upvalues: t (ref), loggerModule (copy)
-		if t[p1] then
-			t[p1].clear()
-			t[p1] = nil
+		if t[p2] then
+			t[p2].clear()
+			t[p2] = nil
 			
 			return
 		end
-		loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p1))
+		loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p2))
 	end
 	
 	local _ = function(p2, p3)
@@ -31,77 +31,77 @@ return function(p0)
 		end else nil
 	end
 	
-	local var4 = function(p4)
-		-- upvalues: httpService (copy), t (ref), simpleTimerModule (copy), p0 (ref), loggerModule (copy)
-		p4 = p4 or httpService:GenerateGUID(false)
+	local var1 = function(p2)
+		-- upvalues: httpService (copy), t (ref), simpleTimerModule (copy), p1 (ref), loggerModule (copy)
+		p2 = p2 or httpService:GenerateGUID(false)
 		
-		if t[p4] then
-			loggerModule:warning("(Start) Timer with this key already exists: " .. tostring(p4))
+		if t[p2] then
+			loggerModule:warning("(Start) Timer with this key already exists: " .. tostring(p2))
 			
-			return p4
+			return p2
 		end
-		local var6 = t
+		local var2 = t
 		local t_1 = {
-			timeoutThreshold = if p0 then p0.timeoutThreshold else nil
+			timeoutThreshold = if p1 then p1.timeoutThreshold else nil
 		}
-		local onReachingThreshold = p0.onReachingThreshold
-		t_1.onReachingThreshold = if p0 then if onReachingThreshold then function()
-			-- upvalues: p4 (ref), t (copy), loggerModule (copy), onReachingThreshold (ref)
-			if t[p4] then
-				t[p4].clear()
-				t[p4] = nil
+		local onReachingThreshold = p1.onReachingThreshold
+		t_1.onReachingThreshold = if p1 then if onReachingThreshold then function()
+			-- upvalues: p2 (ref), t (copy), loggerModule (copy), onReachingThreshold (ref)
+			if t[p2] then
+				t[p2].clear()
+				t[p2] = nil
 			else
-				loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p4))
+				loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p2))
 			end
 			onReachingThreshold()
 		end else nil else nil
-		var6[p4] = simpleTimerModule(t_1)
+		var2[p2] = simpleTimerModule(t_1)
 		
-		return p4
+		return p2
 	end
 	
 	return {
-		start = function(p5, p6)
-			-- upvalues: var4 (ref), t (ref)
-			local var8 = var4(p5)
-			t[var8].start(p6)
+		start = function(p2, p3)
+			-- upvalues: var1 (ref), t (ref)
+			local var2 = var1(p2)
+			t[var2].start(p3)
 			
-			return var8
+			return var2
 		end,
-		stop = function(p7)
+		stop = function(p2)
 			-- upvalues: t (ref), loggerModule (copy)
-			if not t[p7] then
-				loggerModule:warning("(Stop) Timer with this key doesn't exist: " .. tostring(p7))
+			if not t[p2] then
+				loggerModule:warning("(Stop) Timer with this key doesn't exist: " .. tostring(p2))
 				
 				return -1
 			end
-			local var9 = t[p7].stop()
+			local var2 = t[p2].stop()
 			
-			if t[p7] then
-				t[p7].clear()
-				t[p7] = nil
+			if t[p2] then
+				t[p2].clear()
+				t[p2] = nil
 				
-				return var9
+				return var2
 			end
-			loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p7))
+			loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p2))
 			
-			return var9
+			return var2
 		end,
-		getTime = function(p8)
+		getTime = function(p2)
 			-- upvalues: t (ref), loggerModule (copy)
-			if t[p8] then
-				return t[p8].getTime()
+			if t[p2] then
+				return t[p2].getTime()
 			end
-			loggerModule:warning("(getTime) Timer with this key doesn't exist: " .. tostring(p8))
+			loggerModule:warning("(getTime) Timer with this key doesn't exist: " .. tostring(p2))
 			
 			return -1
 		end,
-		getStartTimestamp = function(p9)
+		getStartTimestamp = function(p2)
 			-- upvalues: t (ref), loggerModule (copy)
-			if t[p9] then
-				return t[p9].getStartTimestamp()
+			if t[p2] then
+				return t[p2].getStartTimestamp()
 			end
-			loggerModule:warning("(startTimeStamp) Timer with this key doesn't exist: " .. tostring(p9))
+			loggerModule:warning("(startTimeStamp) Timer with this key doesn't exist: " .. tostring(p2))
 			
 			return nil
 		end

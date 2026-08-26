@@ -35,7 +35,7 @@ local fIntLinkingProtocolFetchRetries = require(parent.SharedFlags).FIntLinkingP
 local fIntLinkingProtocolFetchTimeoutMS = require(parent.SharedFlags).FIntLinkingProtocolFetchTimeoutMS
 local fFlagQRInSearchScanner = require(parent.SharedFlags).FFlagQRInSearchScanner
 local fFlagPermissionAlertContentUpgradeModule = require(socialCommon.Flags.FFlagPermissionAlertContentUpgrade)
-local var10 = if require(parent.SharedFlags).FFlagRegisterQRCodeKeyInEngine then "ProfileQrCodeCameraSettingsModalSeen" else "ScreenshotEventTracking"
+local var1 = if require(parent.SharedFlags).FFlagRegisterQRCodeKeyInEngine then "ProfileQrCodeCameraSettingsModalSeen" else "ScreenshotEventTracking"
 local realtimeMessageId = messageBusService:GetMessageId("Realtime", "appResume")
 local t = {
 	SettingsPermissionInteractiveAlertButtonClick = {
@@ -61,17 +61,17 @@ local t_1 = {
 }
 
 return function(value)
-	-- upvalues: useScreenSize (ref), useDispatch (ref), useStyle (ref), reactModule (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), fFlagQRInSearchScanner (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), fIntLinkingProtocolFetchTimeoutMS (ref), appStorageService (ref), var10 (ref), messageBusService (ref), realtimeMessageId (ref), permissionsProtocol (ref), t_1 (ref), useAppPolicy (ref), fFlagPermissionAlertContentUpgradeModule (ref), useLocalization (ref), settingsRoute (ref), images (ref), buttonType (ref), styledTextLabel (ref), text (ref), buttonVariant (ref), dialog (ref), dialogSize (ref), view (ref), text_1 (ref), orientation (ref), interactiveAlert (ref)
-	local var14 = useScreenSize()
-	local var15 = useDispatch()
-	local var16 = useStyle()
+	-- upvalues: useScreenSize (ref), useDispatch (ref), useStyle (ref), reactModule (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), fFlagQRInSearchScanner (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), fIntLinkingProtocolFetchTimeoutMS (ref), appStorageService (ref), var1 (ref), messageBusService (ref), realtimeMessageId (ref), permissionsProtocol (ref), t_1 (ref), useAppPolicy (ref), fFlagPermissionAlertContentUpgradeModule (ref), useLocalization (ref), settingsRoute (ref), images (ref), buttonType (ref), styledTextLabel (ref), text (ref), buttonVariant (ref), dialog (ref), dialogSize (ref), view (ref), text_1 (ref), orientation (ref), interactiveAlert (ref)
+	local var2 = useScreenSize()
+	local var3 = useDispatch()
+	local var4 = useStyle()
 	local settingsRoute_1 = value.settingsRoute or value.navigation and value.navigation.getParam("settingsRoute")
 	local source = value.source or value.navigation and value.navigation.getParam("source")
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: value (ref), var15 (ref)
-		return if value.closeCentralOverlayThunk then var15(value.closeCentralOverlayThunk()) else value.navigation and value.navigation.pop()
-	end, { var15, value.closeCentralOverlayThunk, value.navigation })
-	local var20 = reactModule.useMemo(function()
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: value (ref), var3 (ref)
+		return if value.closeCentralOverlayThunk then var3(value.closeCentralOverlayThunk()) else value.navigation and value.navigation.pop()
+	end, { var3, value.closeCentralOverlayThunk, value.navigation })
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: analyticsFactory (copy), t (copy), defaultAnalyticsService (copy), fFlagQRInSearchScanner (copy), source (ref)
 		return analyticsFactory.setUpAnalyticsFactory({
 			eventLists = { EventStream = t },
@@ -79,61 +79,61 @@ return function(value)
 			staticInfoForAllEvents = if fFlagQRInSearchScanner then { source = source } else nil
 		})()
 	end)
-	local var21 = false
-	local var22 = nil
-	local var22_1 = nil
+	local var7 = false
+	local var8 = nil
+	local var9 = nil
 	
-	if var22_1 == nil then
+	if var9 == nil then
 		if fFlagEnableRetryForLinkingProtocolFetch then
 			for _ = 0, fIntLinkingProtocolFetchRetries do
 				local thread = task.spawn(function()
-					-- upvalues: var21 (write), var22 (write), default (copy), settingsRoute_1 (ref)
-					local var39, var40 = default:supportsSwitchToSettingsApp(settingsRoute_1):await()
-					var21 = var39
-					var22 = var40
+					-- upvalues: var7 (write), var8 (write), default (copy), settingsRoute_1 (ref)
+					local var10, var11 = default:supportsSwitchToSettingsApp(settingsRoute_1):await()
+					var7 = var10
+					var8 = var11
 				end)
 				task.wait(fIntLinkingProtocolFetchTimeoutMS / 1000)
 				task.cancel(thread)
 				
-				if var22 == nil then
+				if var8 == nil then
 					continue
 				end
 			end
 		else
-			local var25, var26 = default:supportsSwitchToSettingsApp(settingsRoute_1):await()
-			var21 = var25
-			var22 = var26
+			local var10, var11 = default:supportsSwitchToSettingsApp(settingsRoute_1):await()
+			var7 = var10
+			var8 = var11
 		end
-		var22_1 = var21 and var22
+		var9 = var7 and var8
 	end
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), settingsRoute_1 (ref), var22_1 (write), appStorageService (copy), var10 (copy), messageBusService (copy), realtimeMessageId (copy), permissionsProtocol (copy), t_1 (copy), var19 (ref)
-		var20.fireAnalyticsEvent("SettingsPermissionInteractiveAlertImpression", {
+		-- upvalues: var6 (ref), settingsRoute_1 (ref), var9 (write), appStorageService (copy), var1 (copy), messageBusService (copy), realtimeMessageId (copy), permissionsProtocol (copy), t_1 (copy), var5 (ref)
+		var6.fireAnalyticsEvent("SettingsPermissionInteractiveAlertImpression", {
 			settingsRoute = settingsRoute_1,
-			settingsAppAvailable = var22_1
+			settingsAppAvailable = var9
 		})
-		appStorageService:SetItem(var10, "true")
+		appStorageService:SetItem(var1, "true")
 		appStorageService:Flush()
-		local var41 = messageBusService:Subscribe(realtimeMessageId, function()
-			-- upvalues: permissionsProtocol (copy), t_1 (copy), settingsRoute_1 (copy), var19 (copy)
-			permissionsProtocol.default:hasPermissions({ t_1[settingsRoute_1] }):andThen(function(p0)
-				-- upvalues: permissionsProtocol (copy), var19 (copy)
-				if p0 and p0.status == permissionsProtocol.Status.AUTHORIZED then
-					var19()
+		local var12 = messageBusService:Subscribe(realtimeMessageId, function()
+			-- upvalues: permissionsProtocol (copy), t_1 (copy), settingsRoute_1 (copy), var5 (copy)
+			permissionsProtocol.default:hasPermissions({ t_1[settingsRoute_1] }):andThen(function(p1)
+				-- upvalues: permissionsProtocol (copy), var5 (copy)
+				if p1 and p1.status == permissionsProtocol.Status.AUTHORIZED then
+					var5()
 				end
 			end)
 		end, false, true)
 		
 		return function()
-			-- upvalues: var41 (ref)
-			var41:Disconnect()
+			-- upvalues: var12 (ref)
+			var12:Disconnect()
 		end
 	end, {})
-	local var27 = useAppPolicy(function(p1)
+	local var12 = useAppPolicy(function(p1)
 		return p1.getShouldShowSettingsPermissionsAdditionalInstructions()
 	end)
-	local var22_1_1 = fFlagPermissionAlertContentUpgradeModule and var22_1
-	local var29 = useLocalization({
+	local var22_1_1 = fFlagPermissionAlertContentUpgradeModule and var9
+	local var13 = useLocalization({
 		ok = "Feature.SettingsHub.Action.Ok",
 		additionalInstructionsContactsDeeplinkSupported = "Feature.SettingsHub.Description.ContactsPermissionAndroid",
 		additionalInstructionsContactsDeeplinkNotSupported = "Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported",
@@ -151,43 +151,43 @@ return function(value)
 		[settingsRoute.Contacts] = images["icons/menu/contacts_large"]
 	}
 	local t_3 = {
-		[settingsRoute.Camera] = var29.titleCamera,
-		[settingsRoute.Contacts] = var29.titleContacts
+		[settingsRoute.Camera] = var13.titleCamera,
+		[settingsRoute.Contacts] = var13.titleContacts
 	}
 	local t_4 = {
-		[settingsRoute.Camera] = var29.bodyTextCamera,
-		[settingsRoute.Contacts] = var29.bodyTextContacts
+		[settingsRoute.Camera] = var13.bodyTextCamera,
+		[settingsRoute.Contacts] = var13.bodyTextContacts
 	}
 	local t_5 = {
 		[settingsRoute.Contacts] = {
-			deepLinkSupported = var29.additionalInstructionsContactsDeeplinkSupported,
-			deepLinkNotSupported = var29.additionalInstructionsContactsDeeplinkNotSupported
+			deepLinkSupported = var13.additionalInstructionsContactsDeeplinkSupported,
+			deepLinkNotSupported = var13.additionalInstructionsContactsDeeplinkNotSupported
 		},
 		[settingsRoute.Camera] = {
-			deepLinkSupported = var29.additionalInstructionsCameraDeeplinkSupported,
-			deepLinkNotSupported = var29.additionalInstructionsCameraDeeplinkNotSupported
+			deepLinkSupported = var13.additionalInstructionsCameraDeeplinkSupported,
+			deepLinkNotSupported = var13.additionalInstructionsCameraDeeplinkNotSupported
 		}
 	}
-	local text_2 = "<b>" .. t_5[settingsRoute_1][if var22_1 then "deepLinkSupported" else "deepLinkNotSupported"] .. "</b>"
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: var20 (ref), settingsRoute_1 (ref), var19 (ref)
-		var20.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "notNow", settingsRoute = settingsRoute_1 })
+	local text_2 = "<b>" .. t_5[settingsRoute_1][if var9 then "deepLinkSupported" else "deepLinkNotSupported"] .. "</b>"
+	local var14 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), settingsRoute_1 (ref), var5 (ref)
+		var6.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "notNow", settingsRoute = settingsRoute_1 })
 		
-		return var19()
+		return var5()
 	end, { value.navigation })
 	local t_6 = {
 		buttonType = buttonType.Secondary,
-		props = { onActivated = var35, text = var29.notNow }
+		props = { onActivated = var14, text = var13.notNow }
 	}
-	local var37 = reactModule.useCallback(function()
-		-- upvalues: var20 (ref), settingsRoute_1 (ref), var19 (ref)
-		var20.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "ok", settingsRoute = settingsRoute_1 })
+	local var15 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), settingsRoute_1 (ref), var5 (ref)
+		var6.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "ok", settingsRoute = settingsRoute_1 })
 		
-		return var19()
+		return var5()
 	end, { value.navigation })
-	local var38 = reactModule.useCallback(function()
-		-- upvalues: var20 (ref), settingsRoute_1 (ref), default (copy)
-		var20.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "openSettings", settingsRoute = settingsRoute_1 })
+	local var16 = reactModule.useCallback(function()
+		-- upvalues: var6 (ref), settingsRoute_1 (ref), default (copy)
+		var6.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "openSettings", settingsRoute = settingsRoute_1 })
 		
 		return default:switchToSettingsApp(settingsRoute_1)
 	end, { value.navigation })
@@ -201,42 +201,42 @@ return function(value)
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			Body = reactModule.createElement(view, { tag = "col gap-small size-full-0 auto-y" }, {
 				BodyText = reactModule.createElement(dialog.Text, { LayoutOrder = 1, Text = t_4[settingsRoute_1] }),
-				AdditionalInstructions = if var27 then reactModule.createElement(text_1, {
+				AdditionalInstructions = if var12 then reactModule.createElement(text_1, {
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
-					Text = t_5[settingsRoute_1][if var22_1 then "deepLinkSupported" else "deepLinkNotSupported"]
+					Text = t_5[settingsRoute_1][if var9 then "deepLinkSupported" else "deepLinkNotSupported"]
 				}) else nil
 			})
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			orientation = orientation.Vertical,
-			actions = if var22_1 then {
+			actions = if var9 then {
 				{
-					text = var29.openSettings,
+					text = var13.openSettings,
 					variant = buttonVariant.Emphasis,
-					onActivated = var38
+					onActivated = var16
 				},
 				{
-					text = var29.notNow,
+					text = var13.notNow,
 					variant = buttonVariant.Standard,
-					onActivated = var35
+					onActivated = var14
 				}
 			} else {
 				{
-					text = var29.ok,
+					text = var13.ok,
 					variant = buttonVariant.Emphasis,
-					onActivated = var37
+					onActivated = var15
 				}
 			}
 		})
 	}) else reactModule.createElement(interactiveAlert, {
 		richText = true,
-		screenSize = var14,
+		screenSize = var2,
 		title = t_3[settingsRoute_1],
 		titleIcon = t_2[settingsRoute_1],
 		middleContent = reactModule.useCallback(function()
-			-- upvalues: reactModule (copy), styledTextLabel (copy), var16 (ref), t_4 (ref), settingsRoute_1 (ref), var27 (ref), text (copy), text_2 (ref)
+			-- upvalues: reactModule (copy), styledTextLabel (copy), var4 (ref), t_4 (ref), settingsRoute_1 (ref), var12 (ref), text (copy), text_2 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -253,12 +253,12 @@ return function(value)
 					fluidSizing = false,
 					layoutOrder = 1,
 					automaticSize = Enum.AutomaticSize.Y,
-					fontStyle = var16.Font.Body,
-					colorStyle = var16.Theme.TextDefault,
+					fontStyle = var4.Font.Body,
+					colorStyle = var4.Theme.TextDefault,
 					size = UDim2.fromScale(1, 0),
 					text = t_4[settingsRoute_1]
 				}),
-				additionalInstructionsFrame = if var27 then reactModule.createElement("Frame", {
+				additionalInstructionsFrame = if var12 then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					LayoutOrder = 2,
@@ -266,15 +266,15 @@ return function(value)
 					Size = UDim2.new(1, 0, 0, 0)
 				}, {
 					UIPadding = reactModule.createElement("UIPadding", {
-						PaddingTop = UDim.new(0, text.GetTextHeight("", var16.Font.Body.Font, var16.Font.BaseSize * var16.Font.Body.RelativeSize)),
+						PaddingTop = UDim.new(0, text.GetTextHeight("", var4.Font.Body.Font, var4.Font.BaseSize * var4.Font.Body.RelativeSize)),
 						PaddingLeft = UDim.new(0, 5)
 					}),
 					AdditionalInstructions = reactModule.createElement(styledTextLabel, {
 						fluidSizing = false,
 						lineHeight = 1,
 						automaticSize = Enum.AutomaticSize.Y,
-						fontStyle = var16.Font.Body,
-						colorStyle = var16.Theme.TextDefault,
+						fontStyle = var4.Font.Body,
+						colorStyle = var4.Theme.TextDefault,
 						size = UDim2.fromScale(1, 0),
 						text = text_2
 					})
@@ -282,16 +282,16 @@ return function(value)
 			})
 		end, { value.navigation }),
 		buttonStackInfo = {
-			buttons = if var22_1 then {
+			buttons = if var9 then {
 				t_6,
 				{
 					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = var38, text = var29.openSettings }
+					props = { onActivated = var16, text = var13.openSettings }
 				}
 			} else {
 				{
 					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = var37, text = var29.ok }
+					props = { onActivated = var15, text = var13.ok }
 				}
 			}
 		}

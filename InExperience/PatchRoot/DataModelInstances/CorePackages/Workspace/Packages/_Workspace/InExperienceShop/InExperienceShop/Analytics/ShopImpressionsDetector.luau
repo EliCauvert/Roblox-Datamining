@@ -3,89 +3,89 @@ local reactModule = require(inExperienceShop.Parent.React)
 local fIntScanFrequencyInExperienceShopModule = require(inExperienceShop.Flags.FIntScanFrequencyInExperienceShop)
 local isShopInstanceVisibleModule = require(script.Parent.isShopInstanceVisible)
 
-return function(p0)
+return function(p1)
 	-- upvalues: reactModule (ref), fIntScanFrequencyInExperienceShopModule (ref), isShopInstanceVisibleModule (ref)
-	local var4 = reactModule.useRef(true)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(nil)
-	local scanDebounceSeconds = p0.scanDebounceSeconds or fIntScanFrequencyInExperienceShopModule
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: p0 (ref)
-		return if p0.getViewPortBounds then p0.getViewPortBounds() else p0.viewPortBounds
-	end, { p0.getViewPortBounds, p0.viewPortBounds })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), p0 (ref), var8 (ref), isShopInstanceVisibleModule (copy), var5 (ref)
-		if not var4.current then return end
-		if p0.pageFilter and not p0.pageFilter(nil) then return end
-		local var11 = var8()
+	local var1 = reactModule.useRef(true)
+	local var2 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(nil)
+	local scanDebounceSeconds = p1.scanDebounceSeconds or fIntScanFrequencyInExperienceShopModule
+	local var4 = reactModule.useCallback(function()
+		-- upvalues: p1 (ref)
+		return if p1.getViewPortBounds then p1.getViewPortBounds() else p1.viewPortBounds
+	end, { p1.getViewPortBounds, p1.viewPortBounds })
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), p1 (ref), var4 (ref), isShopInstanceVisibleModule (copy), var2 (ref)
+		if not var1.current then return end
+		if p1.pageFilter and not p1.pageFilter(nil) then return end
+		local var6 = var4()
 		
-		if var11 == nil then return end
-		local current = p0.parentRef and p0.parentRef.current
+		if var6 == nil then return end
+		local current = p1.parentRef and p1.parentRef.current
 		
-		if not current or not isShopInstanceVisibleModule(current, var11) then return end
-		var5.current = tick()
+		if not current or not isShopInstanceVisibleModule(current, var6) then return end
+		var2.current = tick()
 		local t = {}
-		local collectObjectsFunc = p0.collectObjectsFunc
+		local collectObjectsFunc = p1.collectObjectsFunc
 		
 		for i, v in if collectObjectsFunc then collectObjectsFunc(current) else current:GetChildren() do
-			if v:IsA("GuiObject") and isShopInstanceVisibleModule(v, var11) and (p0.filterImpressionFunc == nil or p0.filterImpressionFunc(v)) then
+			if v:IsA("GuiObject") and isShopInstanceVisibleModule(v, var6) and (p1.filterImpressionFunc == nil or p1.filterImpressionFunc(v)) then
 				table.insert(t, v)
 			end
 		end
 		if #t > 0 then
-			p0.onImpressionsDetected(t)
+			p1.onImpressionsDetected(t)
 		end
 	end, {
-		p0.parentRef, p0.pageFilter, p0.collectObjectsFunc, p0.filterImpressionFunc,
-		p0.onImpressionsDetected, var8
+		p1.parentRef, p1.pageFilter, p1.collectObjectsFunc, p1.filterImpressionFunc,
+		p1.onImpressionsDetected, var4
 	})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var6 (ref), p0 (ref), var5 (ref), scanDebounceSeconds (ref), var9 (ref)
-		if not var4.current then return end
-		if var6.current ~= nil then return end
-		if not p0.parentRef or not p0.parentRef.current then return end
-		local var14 = 0
-		local current = var5.current
+	local var7 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), var3 (ref), p1 (ref), var2 (ref), scanDebounceSeconds (ref), var5 (ref)
+		if not var1.current then return end
+		if var3.current ~= nil then return end
+		if not p1.parentRef or not p1.parentRef.current then return end
+		local var8 = 0
+		local current = var2.current
 		
 		if current ~= nil then
-			local var15 = current + scanDebounceSeconds
-			var6.current = var15
-			var14 = var15 - tick()
+			local var9 = current + scanDebounceSeconds
+			var3.current = var9
+			var8 = var9 - tick()
 		end
-		if var14 > 0 then
-			task.delay(var14, function()
-				-- upvalues: var4 (copy), var6 (copy), var9 (copy)
-				if not var4.current then return end
-				if var6.current ~= nil and var6.current < tick() then
-					var6.current = nil
-					var9()
+		if var8 > 0 then
+			task.delay(var8, function()
+				-- upvalues: var1 (copy), var3 (copy), var5 (copy)
+				if not var1.current then return end
+				if var3.current ~= nil and var3.current < tick() then
+					var3.current = nil
+					var5()
 				end
 			end)
 			
 			return
 		end
-		var6.current = nil
-		var9()
-	end, { p0.parentRef, scanDebounceSeconds, var9 })
+		var3.current = nil
+		var5()
+	end, { p1.parentRef, scanDebounceSeconds, var5 })
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var10 (ref), p0 (ref)
-		var4.current = true
-		var10()
-		local onRequestImpressionsSignalConnection = p0.onRequestImpressionsSignal:connect(function()
-			-- upvalues: var10 (copy)
-			var10()
+		-- upvalues: var1 (ref), var7 (ref), p1 (ref)
+		var1.current = true
+		var7()
+		local onRequestImpressionsSignalConnection = p1.onRequestImpressionsSignal:connect(function()
+			-- upvalues: var7 (copy)
+			var7()
 		end)
 		
 		return function()
-			-- upvalues: var4 (copy), onRequestImpressionsSignalConnection (ref)
-			var4.current = false
+			-- upvalues: var1 (copy), onRequestImpressionsSignalConnection (ref)
+			var1.current = false
 			onRequestImpressionsSignalConnection:disconnect()
 		end
-	end, { p0.onRequestImpressionsSignal, var10 })
+	end, { p1.onRequestImpressionsSignal, var7 })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref)
-		var10()
-	end, { var8, var10 })
+		-- upvalues: var7 (ref)
+		var7()
+	end, { var4, var7 })
 	
 	return nil
 end

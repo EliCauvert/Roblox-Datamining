@@ -2,19 +2,19 @@
 local squadPromptTypeModule = require(squadsCore.Enums.SquadPromptType)
 local deleteScheduledSquadModule = require(squadsCore.NetworkRequests.deleteScheduledSquad)
 
-return function(p0, p1, p2)
+return function(p1, p2, p3)
 	-- upvalues: squadPromptTypeModule (ref), deleteScheduledSquadModule (ref)
-	return function(p3)
-		-- upvalues: p1 (ref), squadPromptTypeModule (copy), deleteScheduledSquadModule (copy), p0 (ref), p2 (ref)
-		local var3 = function()
-			-- upvalues: p1 (copy), p3 (ref), squadPromptTypeModule (copy)
-			p1(p3, { promptType = squadPromptTypeModule.Error })
+	return function(p4)
+		-- upvalues: p2 (ref), squadPromptTypeModule (copy), deleteScheduledSquadModule (copy), p1 (ref), p3 (ref)
+		local var1 = function()
+			-- upvalues: p2 (copy), p4 (ref), squadPromptTypeModule (copy)
+			p2(p4, { promptType = squadPromptTypeModule.Error })
 		end
 		
-		return p1(p3, {
+		return p2(p4, {
 			onConfirm = function()
-				-- upvalues: deleteScheduledSquadModule (copy), p0 (copy), p2 (copy), var3 (ref)
-				deleteScheduledSquadModule({ scheduledGroupUpId = p0 }, p2, var3)
+				-- upvalues: deleteScheduledSquadModule (copy), p1 (copy), p3 (copy), var1 (ref)
+				deleteScheduledSquadModule({ scheduledGroupUpId = p1 }, p3, var1)
 			end,
 			promptType = squadPromptTypeModule.ConfirmDeleteScheduledSquad
 		})

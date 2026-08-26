@@ -1,6 +1,6 @@
 ﻿local urlBuilder = require(script:FindFirstAncestor("AuthCommon").Parent.UrlBuilder).UrlBuilder
 
-return function(p0)
+return function(p1)
 	-- upvalues: urlBuilder (ref)
-	return p0(urlBuilder.fromString("auth:v1/session/refresh")(), "POST", { postBody = "" })
+	return p1(urlBuilder.fromString("auth:v1/session/refresh")(), "POST", { postBody = "" })
 end

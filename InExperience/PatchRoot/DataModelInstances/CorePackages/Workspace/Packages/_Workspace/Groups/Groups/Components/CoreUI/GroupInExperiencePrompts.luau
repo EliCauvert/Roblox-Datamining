@@ -12,23 +12,23 @@ local _ = require(parent.Common.Types)
 local _ = { PromptJoinGroup = "PromptJoinGroup" }
 local t = { PromptJoinGroup = groupJoinPromptModule }
 
-return function(p0)
+return function(p1)
 	-- upvalues: useState (ref), reactModule (ref), cryoModule (ref), t (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var6, var7 = useState({
+	local var1, var2 = useState({
 		promptType = nil,
 		promptData = nil,
 		data = nil,
 		callbacks = nil,
 		promptQueue = {}
 	})
-	local promptData = var6.promptData
-	local promptType = var6.promptType
-	local data = var6.data
-	local callbacks = var6.callbacks
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: cryoModule (copy), var6 (ref), var7 (ref)
-		if cryoModule.isEmpty(var6.promptQueue) then
-			var7({
+	local promptData = var1.promptData
+	local promptType = var1.promptType
+	local data = var1.data
+	local callbacks = var1.callbacks
+	local var3 = reactModule.useCallback(function()
+		-- upvalues: cryoModule (copy), var1 (ref), var2 (ref)
+		if cryoModule.isEmpty(var1.promptQueue) then
+			var2({
 				promptType = nil,
 				promptData = nil,
 				data = nil,
@@ -38,22 +38,22 @@ return function(p0)
 			
 			return
 		end
-		var7(cryoModule.Dictionary.join(var6, {
-			promptType = var6.promptQueue[1].promptType,
-			promptData = var6.promptQueue[1].promptData,
-			data = var6.promptQueue[1].data,
-			callbacks = var6.promptQueue[1].callbacks,
-			promptQueue = cryoModule.List.removeIndex(var6.promptQueue, 1)
+		var2(cryoModule.Dictionary.join(var1, {
+			promptType = var1.promptQueue[1].promptType,
+			promptData = var1.promptQueue[1].promptData,
+			data = var1.promptQueue[1].data,
+			callbacks = var1.promptQueue[1].callbacks,
+			promptQueue = cryoModule.List.removeIndex(var1.promptQueue, 1)
 		}))
-	end, { var6, var7 })
-	local var9 = nil
+	end, { var1, var2 })
+	local var4 = nil
 	
 	if promptType then
-		local var10 = t[promptType]
+		local var5 = t[promptType]
 		
-		if var10 then
-			var9 = reactModule.createElement(var10, {
-				enableInputDelayed = p0.enableInputDelayed,
+		if var5 then
+			var4 = reactModule.createElement(var5, {
+				enableInputDelayed = p1.enableInputDelayed,
 				groupId = if promptData then promptData.groupId else nil,
 				data = data,
 				onJoin = if callbacks then callbacks.onJoin else nil,
@@ -65,36 +65,36 @@ return function(p0)
 	end
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		PromptConnections = reactModule.createElement(promptConnectionsModule, {
-			openGroupJoinPrompt = reactModule.useCallback(function(p1, p2, p3)
-				-- upvalues: var6 (ref), var7 (ref), cryoModule (copy)
-				if var6.promptType == nil then
-					var7({
+			openGroupJoinPrompt = reactModule.useCallback(function(p2, p3, p4)
+				-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
+				if var1.promptType == nil then
+					var2({
 						promptType = "PromptJoinGroup",
-						promptData = { groupId = p1 },
-						data = p2,
-						callbacks = p3,
+						promptData = { groupId = p2 },
+						data = p3,
+						callbacks = p4,
 						promptQueue = {}
 					})
 					
 					return
 				end
-				var7(cryoModule.Dictionary.join(var6, {
-					promptQueue = cryoModule.List.join(var6.promptQueue, {
+				var2(cryoModule.Dictionary.join(var1, {
+					promptQueue = cryoModule.List.join(var1.promptQueue, {
 						{
 							promptType = "PromptJoinGroup",
-							promptData = { groupId = p1 },
-							data = p2,
-							callbacks = p3
+							promptData = { groupId = p2 },
+							data = p3,
+							callbacks = p4
 						}
 					})
 				}))
-			end, { var6, var7 }),
-			closePrompt = var8
+			end, { var1, var2 }),
+			closePrompt = var3
 		}),
-		FocusNavigationCoreScriptsWrapper = if var9 then reactModule.createElement(focusRoot, {
+		FocusNavigationCoreScriptsWrapper = if var4 then reactModule.createElement(focusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
 			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
-		}, { Prompt = var9 }) else nil
+		}, { Prompt = var4 }) else nil
 	})
 end

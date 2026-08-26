@@ -5,12 +5,12 @@ return function(...)
 	local t = {}
 	
 	for i = 1, select("#", ...) do
-		local var2 = select(i, ...)
+		local var1 = select(i, ...)
 		
-		if not var2 then
+		if not var1 then
 			continue
 		end
-		for i, v in pairs(var2) do
+		for i, v in pairs(var1) do
 			if v == noneModule then
 				t[i] = nil
 			else
